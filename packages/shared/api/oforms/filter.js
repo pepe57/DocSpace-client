@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import { toUrlParams } from "../../utils/common";
@@ -82,6 +81,51 @@ class OformsFilter {
   }
 
   static getDefault(total = DEFAULT_TOTAL, extension = DEFAULT_EXTENSION) {
+    return new OformsFilter(
+      DEFAULT_PAGE,
+      DEFAULT_PAGE_SIZE,
+      DEFAULT_CATEGORIZE_BY,
+      DEFAULT_CATEGORY_ID,
+      DEFAULT_LOCALE,
+      DEFAULT_SEARCH,
+      extension,
+      DEFAULT_SORT_BY,
+      DEFAULT_SORT_ORDER,
+      total,
+    );
+  }
+
+  static getDefaultDocx(total = DEFAULT_TOTAL, extension = "docx") {
+    return new OformsFilter(
+      DEFAULT_PAGE,
+      DEFAULT_PAGE_SIZE,
+      DEFAULT_CATEGORIZE_BY,
+      DEFAULT_CATEGORY_ID,
+      DEFAULT_LOCALE,
+      DEFAULT_SEARCH,
+      extension,
+      DEFAULT_SORT_BY,
+      DEFAULT_SORT_ORDER,
+      total,
+    );
+  }
+
+  static getDefaultSpreadsheet(total = DEFAULT_TOTAL, extension = "xlsx") {
+    return new OformsFilter(
+      DEFAULT_PAGE,
+      DEFAULT_PAGE_SIZE,
+      DEFAULT_CATEGORIZE_BY,
+      DEFAULT_CATEGORY_ID,
+      DEFAULT_LOCALE,
+      DEFAULT_SEARCH,
+      extension,
+      DEFAULT_SORT_BY,
+      DEFAULT_SORT_ORDER,
+      total,
+    );
+  }
+
+  static getDefaultPresentation(total = DEFAULT_TOTAL, extension = "pptx") {
     return new OformsFilter(
       DEFAULT_PAGE,
       DEFAULT_PAGE_SIZE,

@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect } from "vitest";
 import { screen, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { Heading } from ".";
 import { HeadingLevel, HeadingSize } from "./Heading.enums";
@@ -62,11 +62,9 @@ describe("<Heading />", () => {
     );
 
     const heading = screen.getByTestId("heading");
-    expect(heading).toHaveStyle({
-      color: "red",
-      fontSize: "24px",
-      fontWeight: "700",
-    });
+    expect(heading.style.color).toBe("red");
+    expect(heading.style.fontSize).toBe("24px");
+    expect(heading.style.fontWeight).toBe("700");
   });
 
   it("renders with different heading levels", () => {

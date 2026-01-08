@@ -58,35 +58,39 @@ import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 export type UseFilesProps = {
   fetchFiles: FilesStore["fetchFiles"];
   fetchRooms: FilesStore["fetchRooms"];
+  fetchAgents: FilesStore["fetchAgents"];
   getFileInfo: FilesStore["getFileInfo"];
   setIsPreview: FilesStore["setIsPreview"];
   setIsUpdatingRowItem: FilesStore["setIsUpdatingRowItem"];
-  scrollToTop: FilesStore["scrollToTop"];
   wsCreatedPDFForm: FilesStore["wsCreatedPDFForm"];
 
   playlist: MediaViewerDataStore["playlist"];
   setToPreviewFile: MediaViewerDataStore["setToPreviewFile"];
 
   gallerySelected: OformsStore["gallerySelected"];
+  isVisibleInfoPanelTemplateGallery: OformsStore["isVisibleInfoPanelTemplateGallery"];
 
   userId: string;
 
   selectedFolderStore: SelectedFolderStore;
+  currentExtensionGallery: OformsStore["currentExtensionGallery"];
 };
 
 const useFiles = ({
   fetchFiles,
   fetchRooms,
+  fetchAgents,
   getFileInfo,
   setIsPreview,
   setIsUpdatingRowItem,
-  scrollToTop,
   wsCreatedPDFForm,
 
   playlist,
   setToPreviewFile,
 
   gallerySelected,
+  isVisibleInfoPanelTemplateGallery,
+  currentExtensionGallery,
   userId,
 
   selectedFolderStore,
@@ -133,6 +137,16 @@ const useFiles = ({
     navigate(`${url}?${filter.toUrlParams()}`);
   };
 
+  const fetchDefaultAgents = () => {
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents);
+
+    const categoryType = getCategoryType(location) as number;
+
+    const url = getCategoryUrl(categoryType);
+
+    navigate(`${url}?${filter.toUrlParams()}`);
+  };
+
   const getFiles = React.useCallback(async () => {
     if (isPublicRoom()) return;
 
@@ -165,8 +179,17 @@ const useFiles = ({
     }
 
     const isRoomFolder = getObjectByLocation(location)?.folder;
+    const isAIAgents = categoryType === CategoryType.AIAgents;
 
-    if (
+    if (isAIAgents) {
+      filterObj = RoomsFilter.getFilter(window.location);
+
+      if (!filterObj) {
+        fetchDefaultAgents();
+
+        return;
+      }
+    } else if (
       (categoryType == CategoryType.Shared ||
         categoryType == CategoryType.SharedRoom ||
         categoryType == CategoryType.Archive) &&
@@ -242,9 +265,11 @@ const useFiles = ({
     const { filter } = dataObj;
     let newFilter = filter
       ? filter.clone()
-      : isRooms
-        ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
-        : FilesFilter.getDefault({ categoryType });
+      : isAIAgents
+        ? RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents)
+        : isRooms
+          ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
+          : FilesFilter.getDefault({ categoryType });
     const requests = [Promise.resolve(newFilter)];
 
     await axios
@@ -264,6 +289,9 @@ const useFiles = ({
         newFilter = data[0];
 
         if (newFilter) {
+          if (isAIAgents) {
+            return fetchAgents(null, newFilter, false, false);
+          }
           if (isRooms) {
             return fetchRooms(null, newFilter, undefined, undefined, false);
           }
@@ -282,7 +310,7 @@ const useFiles = ({
         return Promise.resolve();
       })
       .then(() => {
-        if (gallerySelected) {
+        if (gallerySelected && !isVisibleInfoPanelTemplateGallery) {
           setIsUpdatingRowItem(false);
 
           const isFormRoom =
@@ -290,7 +318,7 @@ const useFiles = ({
             selectedFolderStore.parentRoomType === FolderType.FormRoom;
 
           const payload = {
-            extension: "pdf",
+            extension: currentExtensionGallery.replace(".", ""),
             id: -1,
             fromTemplate: true,
             title: (
@@ -312,25 +340,23 @@ const useFiles = ({
 
           window.dispatchEvent(event);
         }
-      })
-      .finally(() => {
-        scrollToTop();
       });
   }, [
     location.pathname,
     location.search,
     fetchFiles,
     fetchRooms,
+    fetchAgents,
     getFileInfo,
     setIsPreview,
     setIsUpdatingRowItem,
-    scrollToTop,
     wsCreatedPDFForm,
 
     playlist,
     setToPreviewFile,
 
     gallerySelected,
+    isVisibleInfoPanelTemplateGallery,
     userId,
 
     selectedFolderStore,

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useMemo, useState, useCallback, useEffect } from "react";
-
+import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -38,6 +38,11 @@ import {
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { Guidance } from "@docspace/shared/components/guidance";
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
+import AIAgentsSelector from "@docspace/shared/selectors/AIAgent";
+import FilesFilter from "@docspace/shared/api/files/filter";
+
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { CategoryType } from "@docspace/shared/constants";
 
 import {
   UploadPanel,
@@ -95,6 +100,9 @@ import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialo
 import AssignRoles from "../dialogs/AssignRoles";
 import ShareSelector from "../ShareSelector";
 
+import TemplateGallery from "../TemplateGallery";
+import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
+
 const Panels = (props) => {
   const {
     uploadPanelVisible,
@@ -115,7 +123,10 @@ const Panels = (props) => {
     selectFileFormRoomDialogVisible,
     selectFileFormRoomFilterParam,
     setSelectFileFormRoomDialogVisible,
+    selectFileAiKnowledgeDialogVisible,
+    setSelectFileAiKnowledgeDialogVisible,
     copyFromTemplateForm,
+    copyFileToAiKnowledge,
     hotkeyPanelVisible,
     invitePanelVisible,
     convertPasswordDialogVisible,
@@ -169,7 +180,14 @@ const Panels = (props) => {
     removeUserConfirmation,
     assignRolesDialogVisible,
     socialAuthWelcomeDialogVisible,
+    extsFilesVectorized,
+    aiAgentSelectorDialogProps,
+    setAiAgentSelectorDialogProps,
+    templateGalleryVisible,
+    isVisibleInfoPanelTemplateGallery,
   } = props;
+
+  const navigate = useNavigate();
 
   const [sharePDFForm, setSharePDFForm] = useState({
     visible: false,
@@ -189,6 +207,10 @@ const Panels = (props) => {
 
   const onCloseFileFormRoomDialog = () => {
     setSelectFileFormRoomDialogVisible(false);
+  };
+
+  const onCloseFileFormAiKnowledgeDialog = () => {
+    setSelectFileAiKnowledgeDialogVisible(false);
   };
 
   const descriptionTextFileFormRoomDialog = useMemo(() => {
@@ -272,6 +294,8 @@ const Panels = (props) => {
         isCopy={copyPanelVisible}
         isRestore={restorePanelVisible}
         isRestoreAll={restoreAllPanelVisible}
+        withAIAgentsTreeFolder
+        disableBySecurity="UseChat"
       />
     ),
     connectDialogVisible && <ConnectDialog key="connect-dialog" />,
@@ -301,6 +325,7 @@ const Panels = (props) => {
         onClose={onClose}
         withRecentTreeFolder
         withFavoritesTreeFolder
+        withAIAgentsTreeFolder
       />
     ),
 
@@ -316,6 +341,46 @@ const Panels = (props) => {
         descriptionText={descriptionTextFileFormRoomDialog}
         withRecentTreeFolder
         withFavoritesTreeFolder
+        withAIAgentsTreeFolder
+      />
+    ),
+
+    selectFileAiKnowledgeDialogVisible && (
+      <FilesSelector
+        isFormRoom
+        isPanelVisible
+        key="select-file-ai-knowledge-dialog"
+        onClose={onCloseFileFormAiKnowledgeDialog}
+        openRoot
+        onSelectFile={(files) => copyFileToAiKnowledge(files, t)}
+        filterParam={extsFilesVectorized.join(",")}
+        descriptionText=""
+        isMultiSelect
+        withRecentTreeFolder
+        withFavoritesTreeFolder
+        withAIAgentsTreeFolder
+      />
+    ),
+
+    aiAgentSelectorDialogProps.visible && (
+      <AIAgentsSelector
+        key="ai-agents-selector"
+        onClose={() => setAiAgentSelectorDialogProps(false, null)}
+        withPadding
+        withSearch
+        onSubmit={(items) => {
+          const id = items[0]?.id;
+
+          setAiAgentSelectorDialogProps(false);
+
+          const url = getCategoryUrl(CategoryType.Chat, id);
+
+          const filter = new FilesFilter();
+
+          filter.folder = id;
+
+          navigate(`${url}?${filter.toUrlParams()}`);
+        }}
       />
     ),
 
@@ -400,6 +465,7 @@ const Panels = (props) => {
 
     formFillingTipsVisible ? (
       <Guidance
+        key="form-filling-tips-guidance"
         viewAs={viewAs}
         onClose={onCloseGuidance}
         getRefElement={getRefElement}
@@ -422,6 +488,10 @@ const Panels = (props) => {
       <SocialAuthWelcomeDialog key="joining-space-dialog" />
     ),
     <ShareSelector key="share-selector" />,
+    templateGalleryVisible && <TemplateGallery key="template-gallery" />,
+    isVisibleInfoPanelTemplateGallery && (
+      <InfoPanelTemplateGallery key="template-gallery-info-panel" />
+    ),
   ];
 };
 
@@ -439,6 +509,8 @@ export default inject(
     filesStore,
     userStore,
     guidanceStore,
+    filesSettingsStore,
+    oformsStore,
   }) => {
     const {
       copyPanelVisible,
@@ -466,6 +538,8 @@ export default inject(
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
+      selectFileAiKnowledgeDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
       invitePanelOptions,
       inviteQuotaWarningDialogVisible,
       changeQuotaDialogVisible,
@@ -504,12 +578,17 @@ export default inject(
       removeUserConfirmation,
       assignRolesDialogData,
       socialAuthWelcomeDialogVisible,
+
+      aiAgentSelectorDialogProps,
+      setAiAgentSelectorDialogProps,
     } = dialogsStore;
 
     const { viewAs } = filesStore;
 
+    const { extsFilesVectorized } = filesSettingsStore;
+
     const { preparationPortalDialogVisible } = backup;
-    const { copyFromTemplateForm } = filesActionsStore;
+    const { copyFromTemplateForm, copyFileToAiKnowledge } = filesActionsStore;
 
     const { uploadPanelVisible, conversionVisible } = uploadDataStore;
     const {
@@ -528,6 +607,9 @@ export default inject(
     } = pluginStore;
 
     const { getRefElement, config } = guidanceStore;
+
+    const { templateGalleryVisible, isVisibleInfoPanelTemplateGallery } =
+      oformsStore;
 
     const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
     const resetQuotaItem = () => {
@@ -568,7 +650,10 @@ export default inject(
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
+      selectFileAiKnowledgeDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
       copyFromTemplateForm,
+      copyFileToAiKnowledge,
       hotkeyPanelVisible,
       restoreAllPanelVisible,
       invitePanelVisible: invitePanelOptions.visible,
@@ -619,6 +704,12 @@ export default inject(
       removeUserConfirmation: removeUserConfirmation.visible,
       assignRolesDialogVisible: assignRolesDialogData.visible,
       socialAuthWelcomeDialogVisible,
+      extsFilesVectorized,
+
+      aiAgentSelectorDialogProps,
+      setAiAgentSelectorDialogProps,
+      templateGalleryVisible,
+      isVisibleInfoPanelTemplateGallery,
     };
   },
 )(observer(Panels));

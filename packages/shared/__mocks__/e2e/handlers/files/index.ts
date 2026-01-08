@@ -33,3 +33,25 @@ export * from "./foldersTree";
 export * from "./folder";
 
 export * from "./validatePublicRoomKey";
+
+export * from "./root";
+
+export * from "./thirdPartyCapabilities";
+
+export * from "./thirdParty";
+
+export * from "./docservice";
+
+export * from "./sharedWithMe";
+
+export * from "./share";
+
+export * from "./recent";
+
+export * from "./favorites";
+
+export * from "./documents";
+
+export * from "./agentFolder";
+
+export * from "./resultStorageFolder";

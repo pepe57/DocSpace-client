@@ -35,6 +35,7 @@ import {
   EmployeeStatus,
   EmployeeType,
   Events,
+  FolderType,
   RoomSearchArea,
 } from "@docspace/shared/enums";
 import { getUserType } from "@docspace/shared/utils/common";
@@ -62,6 +63,7 @@ import {
   reassignmentNecessary,
   terminateReassignment,
 } from "@docspace/shared/api/people";
+import type { TGroup } from "@docspace/shared/api/groups/types";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
@@ -69,17 +71,17 @@ import { getPersonalFolderTree } from "@docspace/shared/api/files";
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
-import {
-  getContactsView,
-  getUserChecked,
-  setContactsUsersFilterUrl,
-  TChangeUserTypeDialogData,
-} from "SRC_DIR/helpers/contacts";
 import type {
   TChangeUserStatusDialogData,
   TContactsSelected,
   TContactsTab,
   TPeopleListItem,
+} from "SRC_DIR/helpers/contacts";
+import {
+  getContactsView,
+  getUserChecked,
+  setContactsUsersFilterUrl,
+  TChangeUserTypeDialogData,
 } from "SRC_DIR/helpers/contacts";
 
 import { getInfoPanelOpen } from "SRC_DIR/helpers/info-panel";
@@ -227,6 +229,7 @@ class UsersStore {
       const { setReducedRightsData } = this.dialogsStore;
       const { setSecurity, getSelectedFolder } = this.selectedFolderStore;
       const { fetchFiles, filter } = this.filesStore;
+      const { defaultFolderType, setDefaultFolderType } = this.settingsStore;
 
       const { data, id, admin, hasPersonalFolder } = value;
       const { isAdmin, isRoomAdmin, isVisitor, isCollaborator } = data;
@@ -240,6 +243,10 @@ class UsersStore {
 
       if (isVisitor) {
         setReducedRightsData(true, admin);
+
+        if (defaultFolderType === FolderType.USER) {
+          setDefaultFolderType(FolderType.Rooms);
+        }
       }
 
       if (pathname.includes("rooms/personal")) {
@@ -298,7 +305,7 @@ class UsersStore {
 
     SocketHelper?.on(
       SocketEvents.UpdateGroup,
-      async (value: { id: string; data: any }) => {
+      async (value: { id: string; data: TGroup }) => {
         console.log(
           `[WS] ${SocketEvents.UpdateGroup}: ${value?.id}:${value?.data}`,
         );
@@ -1245,11 +1252,11 @@ class UsersStore {
   }
 
   get hasOnlyOneUserToRemove() {
-    const { canRemoveOnlyOneUser } = this.accessRightsStore;
+    const { canRemoveUser } = this.accessRightsStore;
 
     if (!this.isOneUserSelection) return false;
 
-    const users = this.selection.filter((x) => canRemoveOnlyOneUser(x));
+    const users = this.selection.filter((x) => canRemoveUser(x));
 
     return users.length === 1;
   }

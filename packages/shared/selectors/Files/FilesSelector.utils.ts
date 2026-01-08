@@ -30,6 +30,7 @@ import {
   FilesSelectorFilterTypes,
   FilterType,
 } from "../../enums";
+import { TEMPLATE_GALLERY_FORMATS } from "../../constants";
 
 export const configureFilterByFilterParam = (
   filter: FilesFilter,
@@ -111,10 +112,14 @@ export const configureFilterByFilterParam = (
         .join(",");
       break;
 
-    case "PDFTypes":
-      filter.extension = "pdf";
+    case "TemplateGalleryTypes":
+      filter.extension = TEMPLATE_GALLERY_FORMATS.map((extension) =>
+        extension.slice(1),
+      ).join(",");
       break;
 
     default:
+      filter.extension = filterParam.toString();
+      break;
   }
 };

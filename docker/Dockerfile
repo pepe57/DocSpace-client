@@ -24,14 +24,14 @@
 # content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 # International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-FROM node:22-bookworm-slim
+FROM node:24-bookworm-slim
 
 # Install required dependencies
 RUN apt-get -y update && \
     apt-get install -yq
     
 # Install PNPM
-RUN npm install -g pnpm@10.3.0
+RUN npm install -g pnpm@10.26.0
 
 WORKDIR /app
 

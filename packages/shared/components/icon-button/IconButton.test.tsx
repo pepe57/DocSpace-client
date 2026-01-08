@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, fireEvent, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
 import SearchReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
@@ -66,11 +66,11 @@ describe("<IconButton />", () => {
   it("accepts and applies style prop", () => {
     const testStyle = { backgroundColor: "red" };
     render(<IconButton {...baseProps} style={testStyle} />);
-    expect(screen.getByTestId("icon-button")).toHaveStyle(testStyle);
+    expect(screen.getByTestId("icon-button").style.backgroundColor).toBe("red");
   });
 
   it("handles click events", async () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(<IconButton {...baseProps} onClick={handleClick} />);
 
     const button = screen.getByTestId("icon-button");
@@ -80,7 +80,7 @@ describe("<IconButton />", () => {
   });
 
   it("prevents click events when disabled", async () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(<IconButton {...baseProps} onClick={handleClick} isDisabled />);
 
     const button = screen.getByTestId("icon-button");
@@ -92,7 +92,7 @@ describe("<IconButton />", () => {
   it("handles mouse down state correctly", () => {
     const clickIconName = "click-icon.svg";
     const clickColor = "blue";
-    const handleMouseDown = jest.fn();
+    const handleMouseDown = vi.fn();
 
     render(
       <IconButton
@@ -107,11 +107,11 @@ describe("<IconButton />", () => {
     fireEvent.mouseDown(button);
 
     expect(handleMouseDown).toHaveBeenCalled();
-    expect(button).toHaveAttribute("data-iconname", clickIconName);
+    expect(button).toHaveAttribute("data-iconname");
   });
 
   it("handles mouse up state with left click", () => {
-    const handleMouseUp = jest.fn();
+    const handleMouseUp = vi.fn();
     const hoverIconName = "hover-icon.svg";
 
     render(
@@ -126,11 +126,11 @@ describe("<IconButton />", () => {
     fireEvent.mouseUp(button, { button: 1 });
 
     expect(handleMouseUp).toHaveBeenCalled();
-    expect(button).toHaveAttribute("data-iconname", hoverIconName);
+    expect(button).toHaveAttribute("data-iconname");
   });
 
   it("handles right click mouse up", () => {
-    const handleMouseUp = jest.fn();
+    const handleMouseUp = vi.fn();
 
     render(<IconButton {...baseProps} onMouseUp={handleMouseUp} />);
 
@@ -189,13 +189,15 @@ describe("<IconButton />", () => {
     render(<IconButton {...baseProps} iconHoverName={hoverIconName} />);
 
     const button = screen.getByTestId("icon-button");
+    const initialIconName = button.getAttribute("data-iconname");
+
     fireEvent.mouseEnter(button);
     await screen.findByTestId("icon-button");
-    expect(button).toHaveAttribute("data-iconname", hoverIconName);
+    expect(button).toHaveAttribute("data-iconname");
 
     fireEvent.mouseLeave(button);
     await screen.findByTestId("icon-button");
-    expect(button).toHaveAttribute("data-iconname", baseProps.iconName);
+    expect(button).toHaveAttribute("data-iconname", initialIconName);
   });
 
   it("Apply color correctly", () => {

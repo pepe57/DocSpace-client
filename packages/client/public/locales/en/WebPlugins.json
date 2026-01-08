@@ -8,6 +8,7 @@
   "NeedSettings": "Need enter settings",
   "NoPlugins": "No plugins added",
   "NotNeedSettings": "Not need enter settings",
+  "PluginDeletedSuccessfully": "Plugin deleted successfully",
   "PluginIsNotCompatible": "The plugin SDK version doesn’t match the {{productName}} version. Please update to a compatible version.",
   "PluginLoadedSuccessfully": "Plugin loaded successfully",
   "PluginSamples": "Plugin samples",

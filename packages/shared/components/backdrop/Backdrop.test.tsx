@@ -25,29 +25,29 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
-import { Base } from "../../themes";
+import styles from "./Backdrop.module.scss";
 import * as utils from "../../utils";
 
 import { Backdrop } from ".";
 
-jest.mock("../../utils", () => ({
-  isMobile: jest.fn(),
-  isTablet: jest.fn(),
+vi.mock("../../utils", () => ({
+  isMobile: vi.fn(),
+  isTablet: vi.fn(),
 }));
 
 describe("<Backdrop />", () => {
-  const mockOnClick = jest.fn();
+  const mockOnClick = vi.fn();
 
   beforeEach(() => {
     // Clear all mocks before each test
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     // Reset utils mock implementations
-    (utils.isMobile as jest.Mock).mockReturnValue(false);
-    (utils.isTablet as jest.Mock).mockReturnValue(false);
+    vi.mocked(utils.isMobile).mockReturnValue(false);
+    vi.mocked(utils.isTablet).mockReturnValue(false);
     // Clear any existing backdrops from the DOM
     document.querySelectorAll(".backdrop-active").forEach((el) => el.remove());
   });
@@ -86,7 +86,8 @@ describe("<Backdrop />", () => {
     it("applies custom styles", () => {
       const customStyle = { backgroundColor: "red" };
       render(<Backdrop visible style={customStyle} />);
-      expect(screen.getByTestId("backdrop")).toHaveStyle(customStyle);
+      const backdrop = screen.getByTestId("backdrop");
+      expect(backdrop.style.backgroundColor).toBe("red");
     });
 
     it("applies custom id", () => {
@@ -148,7 +149,7 @@ describe("<Backdrop />", () => {
         });
 
         Object.defineProperty(touchMoveEvent, "preventDefault", {
-          value: jest.fn(),
+          value: vi.fn(),
         });
         fireEvent(backdrop, touchMoveEvent);
         expect(touchMoveEvent.preventDefault).toHaveBeenCalled();
@@ -164,7 +165,7 @@ describe("<Backdrop />", () => {
         });
 
         Object.defineProperty(touchMoveEvent, "preventDefault", {
-          value: jest.fn(),
+          value: vi.fn(),
         });
         fireEvent(backdrop, touchMoveEvent);
         expect(touchMoveEvent.preventDefault).not.toHaveBeenCalled();
@@ -174,26 +175,24 @@ describe("<Backdrop />", () => {
 
   describe("Mobile and Tablet Behavior", () => {
     it("shows background on mobile devices without withoutBlur", () => {
-      (utils.isMobile as jest.Mock).mockReturnValue(true);
+      vi.mocked(utils.isMobile).mockReturnValue(true);
       render(<Backdrop visible />);
       const backdrop = screen.getByTestId("backdrop");
-      expect(backdrop).toHaveStyle({ backgroundColor: expect.any(String) });
+      expect(backdrop).toHaveClass(styles.withBackground);
     });
 
     it("shows background on tablet devices without withoutBlur", () => {
-      (utils.isTablet as jest.Mock).mockReturnValue(true);
+      vi.mocked(utils.isTablet).mockReturnValue(true);
       render(<Backdrop visible />);
       const backdrop = screen.getByTestId("backdrop");
-      expect(backdrop).toHaveStyle({ backgroundColor: expect.any(String) });
+      expect(backdrop).toHaveClass(styles.withBackground);
     });
 
     it("respects withoutBlur on mobile devices", () => {
-      (utils.isMobile as jest.Mock).mockReturnValue(true);
+      vi.mocked(utils.isMobile).mockReturnValue(true);
       render(<Backdrop visible withoutBlur />);
       const backdrop = screen.getByTestId("backdrop");
-      expect(backdrop).toHaveStyle({
-        backgroundColor: Base.backdrop.unsetBackgroundColor,
-      });
+      expect(backdrop).toHaveClass(styles.withoutBlur);
     });
   });
 
@@ -225,7 +224,7 @@ describe("<Backdrop />", () => {
         cancelable: true,
       });
 
-      Object.defineProperty(touchEvent, "preventDefault", { value: jest.fn() });
+      Object.defineProperty(touchEvent, "preventDefault", { value: vi.fn() });
       fireEvent(backdrop, touchEvent);
 
       expect(touchEvent.preventDefault).toHaveBeenCalled();
@@ -241,7 +240,7 @@ describe("<Backdrop />", () => {
         cancelable: true,
       });
 
-      Object.defineProperty(touchEvent, "preventDefault", { value: jest.fn() });
+      Object.defineProperty(touchEvent, "preventDefault", { value: vi.fn() });
       fireEvent(backdrop, touchEvent);
 
       expect(touchEvent.preventDefault).not.toHaveBeenCalled();

@@ -185,6 +185,12 @@ interface TableGroupMenuBased {
   withComboBox?: boolean;
   headerLabel?: string;
 }
+
+export type TGroupMenuProps = Pick<
+  TableGroupMenuBased,
+  "headerMenu" | "isBlocked"
+>;
+
 export type TableGroupMenuProps =
   | (TableGroupMenuBased & {
       isCloseable?: undefined;

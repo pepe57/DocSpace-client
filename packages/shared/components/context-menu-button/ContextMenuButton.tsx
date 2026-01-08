@@ -201,7 +201,7 @@ const ContextMenuButtonPure = ({
 
   return (
     <div
-      className={classNames(styles.outer, className, {
+      className={classNames(styles.outer, className, "context-menu-button", {
         [styles.displayIconBorder]: displayIconBorder,
       })}
       id={id}
@@ -209,6 +209,7 @@ const ContextMenuButtonPure = ({
       data-testid={testId ?? "context-menu-button"}
       onClick={callNewMenu}
       ref={ref}
+      aria-disabled={isDisabled}
     >
       <IconButton
         className={iconClassName}

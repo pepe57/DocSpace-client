@@ -16,12 +16,12 @@
  */
 
 import React from "react";
+import { describe, it, expect } from "vitest";
 import { screen, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { FormWrapper } from "./index";
 
 describe("FormWrapper", () => {
-  test("renders children content correctly", () => {
+  it("renders children content correctly", () => {
     const testContent = "Test Content";
     render(
       <FormWrapper>
@@ -33,7 +33,7 @@ describe("FormWrapper", () => {
     expect(screen.getByText(testContent)).toBeInTheDocument();
   });
 
-  test("applies custom className and style", () => {
+  it("applies custom className and style", () => {
     const customClass = "custom-class";
     const customStyle = { backgroundColor: "red" };
 
@@ -45,10 +45,10 @@ describe("FormWrapper", () => {
 
     const wrapper = screen.getByTestId("form-wrapper");
     expect(wrapper).toHaveClass(customClass);
-    expect(wrapper).toHaveStyle({ backgroundColor: "red" });
+    expect(wrapper.style.backgroundColor).toBe("red");
   });
 
-  test("applies custom id", () => {
+  it("applies custom id", () => {
     const customId = "custom-id";
 
     render(

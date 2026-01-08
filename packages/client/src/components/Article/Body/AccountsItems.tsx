@@ -37,8 +37,7 @@ interface IAccountsItem {
   showText: boolean;
   activeItemId: string;
   onClick: (e: React.MouseEvent, folderId: string) => void;
-  getLinkData: (folderId: string) => { path: string; state: any };
-  hideGuests: boolean;
+  getLinkData: (folderId: string) => { path: string; state: object };
 }
 
 const AccountsItems = ({
@@ -46,7 +45,6 @@ const AccountsItems = ({
   activeItemId,
   onClick,
   getLinkData,
-  hideGuests,
 }: IAccountsItem) => {
   const { t } = useTranslation("Common");
 
@@ -83,32 +81,28 @@ const AccountsItems = ({
         folderId="accounts_catalog-groups"
         withAnimation
       />
-      {hideGuests ? null : (
-        <ArticleItem
-          key="accounts-guests"
-          text={t("Common:Guests")}
-          linkData={getLinkData("guests")}
-          title={t("Common:Guests")}
-          icon={getCatalogIconUrlByType(PageType.guests)}
-          showText={showText}
-          onClick={onClickAction}
-          isActive={activeItemId === "guests"}
-          folderId="accounts_catalog-guests"
-          withAnimation
-          isEndOfBlock
-        />
-      )}
+
+      <ArticleItem
+        key="accounts-guests"
+        text={t("Common:Guests")}
+        linkData={getLinkData("guests")}
+        title={t("Common:Guests")}
+        icon={getCatalogIconUrlByType(PageType.guests)}
+        showText={showText}
+        onClick={onClickAction}
+        isActive={activeItemId === "guests"}
+        folderId="accounts_catalog-guests"
+        withAnimation
+        isEndOfBlock
+      />
     </>
   );
 };
 
 export default inject(({ settingsStore, userStore }: TStore) => {
   const { showText } = settingsStore;
-  const { isVisitor, isCollaborator } = userStore.user!;
-  const hideGuests = isVisitor || isCollaborator;
 
   return {
     showText,
-    hideGuests,
   };
 })(observer(AccountsItems));

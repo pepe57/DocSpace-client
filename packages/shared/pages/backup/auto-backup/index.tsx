@@ -171,6 +171,8 @@ const AutomaticBackup = ({
   setBackupProgressError,
   setDefaultFolderId,
   isBackupPaid,
+  backupProgressWarning,
+  setBackupProgressWarning,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -200,11 +202,15 @@ const AutomaticBackup = ({
       );
       if (!options) return;
 
-      const { error, success } = options;
+      const { error, success, warning } = options;
 
       if (error) {
         toastr.error(error);
         setBackupProgressError(error);
+      }
+
+      if (warning) {
+        setBackupProgressWarning(warning);
       }
       if (success) toastr.success(success);
     };
@@ -395,7 +401,10 @@ const AutomaticBackup = ({
 
   return (
     <div data-testid="auto-backup" className={styles.autoBackup}>
-      <StatusMessage message={errorInformation} />
+      <StatusMessage
+        message={errorInformation || backupProgressWarning}
+        isWarning={!!backupProgressWarning}
+      />
       <div
         className={classNames(
           styles.backupModulesHeaderWrapper,
@@ -406,7 +415,7 @@ const AutomaticBackup = ({
           className={classNames(
             styles.backupModulesDescription,
             styles.settingsUnavailable,
-            "backup_modules-description settings_unavailable",
+            "backup_modules-description",
           )}
         >
           {t("Common:AutoBackupDescription", {
@@ -459,10 +468,7 @@ const AutomaticBackup = ({
               fontWeight={600}
               lineHeight="20px"
               noSelect
-              className={classNames(
-                styles.settingsUnavailable,
-                "settings_unavailable",
-              )}
+              className={styles.settingsUnavailable}
             >
               {t("Common:EnableAutomaticBackup")}
             </Text>
@@ -470,7 +476,7 @@ const AutomaticBackup = ({
           <Text
             className={classNames(
               styles.settingsUnavailable,
-              "backup_toggle-btn-description settings_unavailable",
+              "backup_toggle-btn-description",
             )}
           >
             {t("Common:EnableAutomaticBackupDescription")}

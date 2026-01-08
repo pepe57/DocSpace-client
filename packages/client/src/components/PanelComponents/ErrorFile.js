@@ -26,44 +26,28 @@
 
 import React from "react";
 import { useTheme } from "styled-components";
-import uniqueid from "lodash/uniqueId";
-import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Text } from "@docspace/shared/components/text";
 import { StyledLoadErrorIcon } from "./StyledComponents";
-
-const TooltipContent = ({ content }) => (
-  <Text fontSize="13px" noSelect>
-    {content}
-  </Text>
-);
 
 const ErrorFile = ({
   t,
   item,
-  theme,
   onTextClick,
   showPasswordInput,
   onRetryClick,
 }) => {
   const { interfaceDirection } = useTheme();
   const placeTooltip = interfaceDirection === "rtl" ? "right" : "left";
-  const tooltipId = uniqueid("uploading_tooltip");
 
   return (
-    <div className="upload_panel-icon">
-      <StyledLoadErrorIcon
-        size="medium"
-        data-tooltip-id={tooltipId}
-        data-tooltip-content={item.error || t("UploadingError")}
-      />
-      <Tooltip
-        id={tooltipId}
-        getContent={TooltipContent}
-        place={placeTooltip}
-        maxWidth="320px"
-        color={theme.tooltip.backgroundColor}
-      />
-      {item.error !== t("Files:EmptyFile") && !item.needPassword ? (
+    <div
+      className="upload_panel-icon"
+      data-tooltip-id="system-tooltip"
+      data-tooltip-content={item.error || t("UploadingError")}
+      data-tooltip-place={placeTooltip}
+    >
+      <StyledLoadErrorIcon size="medium" />
+      {!item.needPassword ? (
         <Text
           className="enter-password"
           fontWeight="600"

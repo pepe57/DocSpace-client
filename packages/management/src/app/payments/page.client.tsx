@@ -39,6 +39,7 @@ import { useEndAnimation } from "@/hooks/useEndAnimation";
 import { getIsLicenseDateExpired, getPaymentDate, getDaysLeft } from "@/lib";
 import { TLicenseQuota } from "@docspace/shared/api/portal/types";
 import { TFilesSettings } from "@docspace/shared/api/files/types";
+import styles from "./payments.module.scss";
 
 const PaymentsPage = ({
   isTrial,
@@ -73,6 +74,8 @@ const PaymentsPage = ({
   const [isLicenseCorrect, setIsLicenseCorrect] = useState(false);
 
   const shouldOpenEditorInNewTab = () => {
+    if (typeof window === "undefined") return !filesSettings.openEditorInSameTab;
+
     if (
       window.navigator.userAgent.includes("ZoomWebKit") ||
       window.navigator.userAgent.includes("ZoomApps")
@@ -116,31 +119,34 @@ const PaymentsPage = ({
   };
 
   useEffect(() => {
-    setIsLicenseDateExpired(getIsLicenseDateExpired(dueDate, window.timezone));
-    setPaymentDate(getPaymentDate(dueDate, window.timezone));
+    const timezone = typeof window !== "undefined" ? window.timezone : "UTC";
+    setIsLicenseDateExpired(getIsLicenseDateExpired(dueDate, timezone));
+    setPaymentDate(getPaymentDate(dueDate, timezone));
     setTrialDaysLeft(getDaysLeft(dueDate));
   }, [dueDate]);
 
   return (
-    <LoaderWrapper isLoading={isLoading}>
-      <StandalonePage
-        isTrial={isTrial}
-        setPaymentsLicense={setPaymentsLicense}
-        acceptPaymentsLicense={acceptPaymentsLicense}
-        isLicenseCorrect={isLicenseCorrect}
-        salesEmail={salesEmail}
-        isLicenseDateExpired={isLicenseDateExpired}
-        isDeveloper={isDeveloper}
-        buyUrl={buyUrl}
-        trialDaysLeft={trialDaysLeft}
-        paymentDate={paymentDate}
-        isEnterprise={isEnterprise}
-        logoText={logoText}
-        docspaceFaqUrl={docspaceFaqUrl}
-        licenseQuota={licenseQuota}
-        openOnNewPage={shouldOpenEditorInNewTab()}
-      />
-    </LoaderWrapper>
+    <div className={styles.wrapper}>
+      <LoaderWrapper isLoading={isLoading}>
+        <StandalonePage
+          isTrial={isTrial}
+          setPaymentsLicense={setPaymentsLicense}
+          acceptPaymentsLicense={acceptPaymentsLicense}
+          isLicenseCorrect={isLicenseCorrect}
+          salesEmail={salesEmail}
+          isLicenseDateExpired={isLicenseDateExpired}
+          isDeveloper={isDeveloper}
+          buyUrl={buyUrl}
+          trialDaysLeft={trialDaysLeft}
+          paymentDate={paymentDate}
+          isEnterprise={isEnterprise}
+          logoText={logoText}
+          docspaceFaqUrl={docspaceFaqUrl}
+          licenseQuota={licenseQuota}
+          openOnNewPage={shouldOpenEditorInNewTab()}
+        />
+      </LoaderWrapper>
+    </div>
   );
 };
 

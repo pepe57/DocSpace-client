@@ -30,7 +30,7 @@ import api from "../api";
 import { TUser } from "../api/people/types";
 import { EmployeeActivationStatus, ThemeKeys } from "../enums";
 import { TI18n } from "../types";
-import { getUserType } from "../utils/common";
+import { getUserType, getStringUserType } from "../utils/common";
 
 class UserStore {
   user: TUser | null = null;
@@ -65,7 +65,7 @@ class UserStore {
       const correctCulture = user.cultureName || portalCultureName;
 
       if (i18n && correctCulture && correctCulture !== i18n.language) {
-        i18n.changeLanguage(correctCulture);
+        await i18n.changeLanguage(correctCulture);
       }
     } catch (e) {
       console.error(e);
@@ -174,6 +174,8 @@ class UserStore {
     this.user.quotaLimit = quotaLimit;
   };
 
+  isMe = (userId: string) => this.user?.id === userId;
+
   get withActivationBar() {
     return (
       this.user &&
@@ -198,6 +200,10 @@ class UserStore {
 
   get userType() {
     return getUserType(this.user!);
+  }
+
+  get stringUserType() {
+    return getStringUserType(this.user!);
   }
 }
 

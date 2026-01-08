@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
 import { Badge } from ".";
@@ -38,13 +38,13 @@ describe("<Badge />", () => {
   };
 
   describe("Rendering", () => {
-    test("renders Badge component", () => {
+    it("renders Badge component", () => {
       renderComponent();
       const badgeElement = screen.getByRole("generic");
       expect(badgeElement).toBeInTheDocument();
     });
 
-    test("renders Badge with correct text", () => {
+    it("renders Badge with correct text", () => {
       renderComponent({ label: "Test Badge" });
       const badgeElement = screen.getByText("Test Badge");
       expect(badgeElement).toBeInTheDocument();
@@ -87,16 +87,14 @@ describe("<Badge />", () => {
       renderComponent(customProps);
       const badge = screen.getByTestId("badge");
 
-      expect(badge).toHaveStyle({
-        height: "30px",
-        border: "1px solid black",
-        borderRadius: "5px",
-      });
+      expect(badge.style.height).toBe("30px");
+      expect(badge.style.border).toBe("1px solid black");
+      expect(badge.style.borderRadius).toBe("5px");
     });
   });
 
   describe("Styling", () => {
-    test("renders Badge with custom className", () => {
+    it("renders Badge with custom className", () => {
       const customClass = "custom-badge";
       renderComponent({ className: customClass });
       const badgeElement = screen.getByTestId("badge");
@@ -117,7 +115,7 @@ describe("<Badge />", () => {
 
   describe("Interactions", () => {
     it("handles click events", async () => {
-      const onClick = jest.fn();
+      const onClick = vi.fn();
       renderComponent({ label: "Click", onClick });
 
       const badge = screen.getByTestId("badge");
