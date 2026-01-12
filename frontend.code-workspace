@@ -159,8 +159,8 @@
             "tooltip": "🛠️ Start the \"frontend install packages\" task"
           },
           {
-            "label": "Update dependencies",
-            "task": "Frontend | update dependencies",
+            "label": "Update pnpm-lock.yaml",
+            "task": "Frontend | update pnpm-lock.yaml",
             "tooltip": "🛠️ Start the \"frontend update dependencies\" task"
           },
           {
