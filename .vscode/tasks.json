@@ -376,6 +376,21 @@
       }
     },
     {
+      "label": "Frontend | update deps",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm update --recursive",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | build",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run build",
