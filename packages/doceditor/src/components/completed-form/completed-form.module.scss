@@ -86,7 +86,7 @@
     color: var(--completed-form-link-color);
   }
 
-  &:global(.completed-form__empty) {
+  :global(.completed-form__empty) {
     gap: 20px;
     margin-top: 24px;
   }
@@ -497,7 +497,8 @@
     :active {
       filter: brightness(82%);
     }
-    ::first-letter {
+    
+    &::first-letter {
       text-transform: capitalize;
     }
   }
@@ -511,7 +512,7 @@
       display: inline-block;
       height: auto;
 
-      ::first-letter {
+      &::first-letter {
         text-transform: capitalize;
       }
     }
