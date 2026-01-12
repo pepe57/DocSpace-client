@@ -186,7 +186,7 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
   } as React.CSSProperties;
 
   return (
-    <section className={styles.container} style={bgBlockStyle}>
+    <section className={styles.container} style={bgBlockStyle} data-testid="completed_form_vdr_container">
       <Scrollbar fixedSize>
         <div
           className={classNames(

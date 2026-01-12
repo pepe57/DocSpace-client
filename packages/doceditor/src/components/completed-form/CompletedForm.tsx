@@ -130,7 +130,7 @@ export const CompletedForm = ({
   } as React.CSSProperties;
 
   return (
-    <section className={styles.container} style={bgBlockStyle}>
+    <section className={styles.container} style={bgBlockStyle} data-testid="completed_form_container">
       <Scrollbar fixedSize>
         <div className={styles.completedFormLayout}>
           <picture className="completed-form__logo">

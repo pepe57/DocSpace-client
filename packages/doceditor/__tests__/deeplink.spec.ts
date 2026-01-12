@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,32 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
-import React, { useState } from "react";
-import { useServerInsertedHTML } from "next/navigation";
-import { ServerStyleSheet, StyleSheetManager } from "styled-components";
+import { expect, test } from "./fixtures/base";
 
-export default function StyledComponentsRegistry({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  // Only create stylesheet once with lazy initial state
-  // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
-  const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
+test.describe("DeepLink", () => {
+  test("DeepLink render", async ({ page, mockRequest }, testInfo) => {
+    test.skip(
+      testInfo.project.name === "desktop",
+      "DeepLink unsupported on desktop",
+    );
 
-  useServerInsertedHTML(() => {
-    const styles = styledComponentsStyleSheet.getStyleElement();
-    styledComponentsStyleSheet.instance.clearTag();
-    return styles;
+    await mockRequest.router([endpoints.filesSettings]);
+    await page.goto("/doceditor?fileId=1");
+
+    const form = page.getByTestId("form-wrapper");
+    await expect(form).toBeVisible();
+
+    await expect(page).toHaveScreenshot(["deeplink", "deeplink-render.png"]);
   });
-
-  if (typeof window !== "undefined") return children;
-
-  return (
-    <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
-      {children}
-    </StyleSheetManager>
-  );
-}
+});
