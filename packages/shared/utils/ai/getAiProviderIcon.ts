@@ -28,7 +28,7 @@
 
 import AnthropicSvgUrl from "PUBLIC_DIR/images/ai-providers/anthropic.svg?url";
 import DeepSeekSvgUrl from "PUBLIC_DIR/images/ai-providers/deepseek.svg?url";
-import GoogleSvgUrl from "PUBLIC_DIR/images/ai-providers/google.svg?url";
+import GoogleSvgUrl from "PUBLIC_DIR/images/ai-providers/google_ai.svg?url";
 import OllamaSvgUrl from "PUBLIC_DIR/images/ai-providers/ollama.svg?url";
 import OpenaiSvgUrl from "PUBLIC_DIR/images/ai-providers/openai.svg?url";
 import OpenRouterSvgUrl from "PUBLIC_DIR/images/ai-providers/openrouter.svg?url";
