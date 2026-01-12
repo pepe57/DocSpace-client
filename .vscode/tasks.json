@@ -601,6 +601,36 @@
       }
     },
     {
+      "label": "Test | Jest:dependencies:audit",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm audit --audit-level=moderate",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Jest:licenses:audit",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run licenses-audit",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Jest:unit",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm test",
