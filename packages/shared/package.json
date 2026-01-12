@@ -151,9 +151,9 @@
     "msw": "^2.11.1",
     "msw-storybook-addon": "^2.0.4",
     "open-cli": "^8.0.0",
-    "react": "19.2.0",
+    "react": "19.2.3",
     "react-docgen-typescript-plugin": "1.0.8",
-    "react-dom": "19.2.0",
+    "react-dom": "19.2.3",
     "react-values": "0.3.3",
     "remark-gfm": "4.0.1",
     "sass": "1.79.5",
@@ -167,8 +167,8 @@
     "vitest": "4.0.5"
   },
   "peerDependencies": {
-    "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
   },
   "nx": {
     "targets": {
