@@ -58,7 +58,7 @@
     "cross-env": "^7.0.3",
     "css-minimizer-webpack-plugin": "^7.0.4",
     "sass": "1.79.5",
-    "shx": "0.3.4",
+    "shx": "0.4.0",
     "terser-webpack-plugin": "5.3.10",
     "typescript": "5.9.3"
   },

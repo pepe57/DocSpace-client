@@ -74,7 +74,7 @@
     "local-web-server": "5.4.0",
     "sass": "1.79.5",
     "sass-loader": "16.0.5",
-    "shx": "0.3.4",
+    "shx": "0.4.0",
     "style-loader": "3.3.4",
     "terser-webpack-plugin": "5.3.10",
     "typescript": "5.9.3"

@@ -142,7 +142,7 @@
     "@types/utif": "3.0.5",
     "@types/uuid": "^10.0.0",
     "@vitest/coverage-v8": "4.0.5",
-    "@vitest/ui": "4.0.5",
+    "@vitest/ui": "4.0.17",
     "copy-webpack-plugin": "9.1.0",
     "css-loader": "6.11.0",
     "i18next-http-backend": "2.6.2",
@@ -158,13 +158,13 @@
     "remark-gfm": "4.0.1",
     "sass": "1.79.5",
     "sass-loader": "16.0.5",
-    "serve": "14.2.4",
+    "serve": "14.2.5",
     "storybook": "^8.6.15",
     "storybook-dark-mode": "^4.0.2",
     "style-loader": "3.3.4",
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
-    "vitest": "4.0.5"
+    "vitest": "4.0.17"
   },
   "peerDependencies": {
     "react": "19.2.3",
