@@ -92,6 +92,10 @@ export const HEADER_ENCRYPTION_SETTINGS_ENCRYPTED =
 
 export const HEADER_WITHOUT_CUSTOMIZATION = "x-without-customization";
 
+export const HEADER_OPEN_EDIT_WITH_PASSWORD = "x-open-edit-with-password";
+
+export const HEADER_FORM_YOUR_TURN_FILLING = "x-form-your-turn-filling";
+
 export const buildSseBody = (events: { event: string; data: unknown }[]) =>
   events
     .map((e) => `event: ${e.event}\n` + `data: ${JSON.stringify(e.data)}\n\n`)

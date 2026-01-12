@@ -105,6 +105,8 @@ import {
   PATH_ACTIVE_CONNECTIONS,
   tfaAppCodesHandler,
   PATH_TFA_APP_CODES,
+  deepLinkHandler,
+  PATH_DEEP_LINK,
 } from "./settings";
 import {
   CONTINUE_PATH,
