@@ -68,7 +68,7 @@
     "@types/node": "24.10.7",
     "@types/react": "19.2.8",
     "@types/react-dom": "19.2.3",
-    "cross-env": "^7.0.3",
+    "cross-env": "^10.1.0",
     "css-loader": "6.11.0",
     "css-minimizer-webpack-plugin": "^7.0.4",
     "local-web-server": "5.4.0",

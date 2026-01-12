@@ -60,7 +60,7 @@
     "@types/react": "19.2.8",
     "@types/react-dom": "19.2.3",
     "@types/styled-components": "5.1.34",
-    "cross-env": "^7.0.3",
+    "cross-env": "^10.1.0",
     "css-minimizer-webpack-plugin": "^7.0.4",
     "nconf": "0.12.1",
     "sass": "1.79.5",
