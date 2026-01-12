@@ -1,6 +1,6 @@
 name: Frontend common tests
 
-on:
+'on':
   push:
     branches: [develop, release/v*, hotfix/v*]
     paths:
@@ -56,12 +56,18 @@ jobs:
 
           echo "Comparing against: $BASE_SHA"
 
+          # Ensure BASE_SHA exists locally (PRs from forks and shallow clones can miss it).
+          if [ "$BASE_SHA" != "HEAD~1" ] && ! git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then
+            echo "Base SHA not found locally; fetching $BASE_SHA..."
+            git fetch --no-tags --depth=1 origin "$BASE_SHA"
+          fi
+
           # Get changed files
-          CHANGED_FILES=$(git diff --name-only $BASE_SHA HEAD || echo "")
+          CHANGED_FILES=$(git diff --name-only "$BASE_SHA" HEAD || echo "")
           echo "Changed files: $CHANGED_FILES"
 
           # Check for packages changes
-          if echo "$CHANGED_FILES" | grep -q "^packages/"; then
+          if echo "$CHANGED_FILES" | grep -Eq "^packages/"; then
             echo "packages=true" >> $GITHUB_OUTPUT
             echo "✅ Packages changes detected"
           else
@@ -70,7 +76,7 @@ jobs:
           fi
 
           # Check for common changes
-          if echo "$CHANGED_FILES" | grep -q "^common/"; then
+          if echo "$CHANGED_FILES" | grep -Eq "^common/"; then
             echo "common=true" >> $GITHUB_OUTPUT
             echo "✅ Common changes detected"
           else
@@ -79,7 +85,7 @@ jobs:
           fi
 
           # Check for playwright changes
-          if echo "$CHANGED_FILES" | grep -E "^packages/(client|login|doceditor|management|sdk|shared)/"; then
+          if echo "$CHANGED_FILES" | grep -Eq "^packages/(client|login|doceditor|management|sdk|shared)/"; then
             echo "playwright=true" >> $GITHUB_OUTPUT
             echo "✅ Playwright changes detected"
           else
@@ -88,7 +94,7 @@ jobs:
           fi
 
           # Check for locales changes
-          if echo "$CHANGED_FILES" | grep -E "(public/locales/|common/tests/)"; then
+          if echo "$CHANGED_FILES" | grep -Eq "(public/locales/|common/tests/)"; then
             echo "locales=true" >> $GITHUB_OUTPUT
             echo "✅ Locales changes detected"
           else
@@ -97,7 +103,7 @@ jobs:
           fi
 
           # Check for workflow changes
-          if echo "$CHANGED_FILES" | grep -q "^\.github/workflows/"; then
+          if echo "$CHANGED_FILES" | grep -Eq "^\\.github/workflows/"; then
             echo "workflow=true" >> $GITHUB_OUTPUT
             echo "✅ Workflow changes detected"
           else
@@ -106,7 +112,7 @@ jobs:
           fi
 
           # Set any_changes flag
-          if echo "$CHANGED_FILES" | grep -E "(^packages/|^common/|^\.github/workflows/)"; then
+          if echo "$CHANGED_FILES" | grep -Eq "(^packages/|^common/|^\\.github/workflows/)"; then
             echo "any_changes=true" >> $GITHUB_OUTPUT
             echo "✅ Any relevant changes detected"
           else
