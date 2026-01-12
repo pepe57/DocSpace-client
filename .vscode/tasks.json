@@ -929,6 +929,18 @@
         "focus": true,
         "close": false
       }
+    },
+    {
+      "label": "Utils | Update copyright year",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; node ./scripts/update-copyright-year.js",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
     }
   ]
 }
