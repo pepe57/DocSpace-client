@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,12 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import moment from "moment";
+import type { Nullable } from "../../types";
 
 export type DatePickerProps = {
   /** Allows to change select date text */
   selectDateText?: string;
   /** Selected date */
-  initialDate?: moment.Moment | Date;
+  initialDate?: Nullable<moment.Moment | Date | string>;
   /** Allow you to handle changing events of component */
   onChange: (d: null | moment.Moment) => void;
   /** Allows to set classname */
@@ -48,6 +49,10 @@ export type DatePickerProps = {
   /** Allows to track date outside the component */
   outerDate?: moment.Moment | null;
   /** Allows to set first shown date in calendar */
-  openDate: moment.Moment;
+  openDate: moment.Moment | Date;
   isMobile?: boolean;
+  hideCross?: boolean;
+  /** Automatically positions the calendar based on available space */
+  autoPosition?: boolean;
+  testId?: string;
 };

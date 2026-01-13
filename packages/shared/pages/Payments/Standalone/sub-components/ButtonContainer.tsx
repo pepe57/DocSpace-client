@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "../../../../components/button";
 
-import { StyledButtonComponent } from "../Payments.styled";
+import styles from "../Standalone.module.scss";
 
 export const ButtonContainer = ({ buyUrl }: { buyUrl?: string }) => {
   const { t } = useTranslation("Common");
@@ -37,13 +37,14 @@ export const ButtonContainer = ({ buyUrl }: { buyUrl?: string }) => {
   };
 
   return (
-    <StyledButtonComponent>
+    <div className={styles.buttonComponent}>
       <Button
         label={t("ActivatePurchaseBuyNow")}
         size={ButtonSize.small}
         primary
         onClick={onClickBuy}
+        testId="activate_purchase_button"
       />
-    </StyledButtonComponent>
+    </div>
   );
 };

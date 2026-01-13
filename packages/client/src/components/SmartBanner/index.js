@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -47,7 +47,10 @@ const ReactSmartBanner = (props) => {
     const cookieInstalled = getCookie("smartbanner-installed");
     const path = window.location.pathname.toLowerCase();
     if (
-      (path.includes("rooms") || path.includes("files")) &&
+      (path.includes("rooms") ||
+        path.includes("files") ||
+        path.includes("shared-with-me") ||
+        path.includes("recent")) &&
       !(cookieClosed || cookieInstalled)
     ) {
       setIsBannerVisible(true);
@@ -91,7 +94,7 @@ const ReactSmartBanner = (props) => {
     navigator.msMaxTouchPoints > 0;
 
   return isMobile && isBannerVisible && ready && isTouchDevice ? (
-    <Wrapper>
+    <Wrapper id="smart-banner">
       <SmartBanner
         title={t("SmartBanner:AppName", {
           organizationName: logoText,

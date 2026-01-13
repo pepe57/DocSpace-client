@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -49,7 +49,7 @@ const StyledBody = styled.div`
     min-width: 0;
     .combo-button {
       padding-inline: ${(props) => (props.isLoading ? "16px 0" : "8px 0")};
-      width: auto;
+      width: ${(props) => (props.isLoading ? "60px" : "auto")};
     }
   }
 `;

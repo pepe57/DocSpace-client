@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,7 +38,7 @@ export const test = base.extend<{
       });
     });
     await page.route(
-      "*/**/login/_next/public/images/**/*",
+      "*/**/login/_next/public/images/**",
       async (route, request) => {
         const imagePath = request
           .url()

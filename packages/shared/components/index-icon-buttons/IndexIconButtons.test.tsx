@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
  */
 
 import React from "react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import { IndexIconButtons } from ".";
@@ -73,7 +73,7 @@ describe("<IndexIconButtons />", () => {
   });
 
   it("calls onUpIndexClick when up icon is clicked", () => {
-    const handleUpClick = jest.fn();
+    const handleUpClick = vi.fn();
 
     render(<IndexIconButtons onUpIndexClick={handleUpClick} />);
 
@@ -84,7 +84,7 @@ describe("<IndexIconButtons />", () => {
   });
 
   it("calls onDownIndexClick when down icon is clicked", () => {
-    const handleDownClick = jest.fn();
+    const handleDownClick = vi.fn();
 
     render(<IndexIconButtons onDownIndexClick={handleDownClick} />);
 
@@ -103,7 +103,7 @@ describe("<IndexIconButtons />", () => {
     render(<IndexIconButtons style={style} />);
 
     const root = screen.getByTestId("index-icon-buttons");
-    expect(root).toHaveStyle("background-color: red");
-    expect(root).toHaveStyle("padding: 10px");
+    expect(root.style.backgroundColor).toBe("red");
+    expect(root.style.padding).toBe("10px");
   });
 });

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,3 +33,25 @@ export * from "./foldersTree";
 export * from "./folder";
 
 export * from "./validatePublicRoomKey";
+
+export * from "./root";
+
+export * from "./thirdPartyCapabilities";
+
+export * from "./thirdParty";
+
+export * from "./docservice";
+
+export * from "./sharedWithMe";
+
+export * from "./share";
+
+export * from "./recent";
+
+export * from "./favorites";
+
+export * from "./documents";
+
+export * from "./agentFolder";
+
+export * from "./resultStorageFolder";

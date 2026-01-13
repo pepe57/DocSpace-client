@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,13 +29,15 @@ import { ButtonSize } from "./Button.enums";
 
 type BaseButtonProps = {
   /** Ref to access the DOM element or React component instance */
-  ref?: React.RefObject<HTMLButtonElement>;
+  ref?: React.Ref<HTMLElement>;
   /** Button text */
   label: string;
   /** Optional title attribute */
   title?: string;
   /** Sets the button primary */
   primary?: boolean;
+  filled?: boolean;
+  filledStroke?: boolean;
   /** Size of the button.
    * The normal size equals 36px and 40px in height on the Desktop and Touchscreen devices. */
   size?: ButtonSize;
@@ -62,7 +64,7 @@ type BaseButtonProps = {
   /** Sets the minimal button width */
   minWidth?: string;
   /** Sets the action initiated upon clicking the button */
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   /** HTML button type attribute */
   type?: HTMLButtonElement["type"];
   /** HTML data-testid attribute */
@@ -77,6 +79,8 @@ export type ButtonProps = BaseButtonProps & {
   "aria-disabled"?: "true" | "false";
   /** ARIA busy state */
   "aria-busy"?: "true" | "false";
+  /** Tooltip text */
+  tooltipText?: string;
 };
 
 /** Props for the styled ButtonTheme component */

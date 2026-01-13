@@ -3,7 +3,7 @@
   "content": "Switch to thumbnails view",
   "content_en_sha1_hash": "7319bf6b4edb601de0b266f9131c2c8f253e74c9",
   "created_at": "2025-05-19T21:30:49.233Z",
-  "updated_at": "2025-05-26T07:57:32.931Z",
+  "updated_at": "2025-12-17T07:49:08.164Z",
   "comment": {
     "text": "This translation key is used for the \"Switch to thumbnails view\" text in a view selector component. It appears as an icon label on a button and is displayed when switching between different views. Translators should replace \"Switch to thumbnails view\" with the desired localized equivalent.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/view-selector/index.tsx",
-      "line_number": 86,
-      "context": "key={value}\n data-view={value}\n title={\n value === \"row\"\n ? t(\"Common:SwitchViewToCompact\")\n : t(\"Common:SwitchToThumbnails\")\n }\n data-testid=\"view-selector-icon\"\n >\n {typeof icon === \"string\" ? <ReactSVG src={icon} /> : icon}\n </div>",
+      "line_number": 88,
+      "context": "key={value}\n data-view={value}\n title={\n value === \"row\"\n ? t(\"Common:SwitchViewToCompact\")\n : t(\"Common:SwitchToThumbnails\")\n }\n data-testid=\"view-selector-icon\"\n >\n {typeof icon === \"string\" ? <ReactSVG src={icon} /> : icon}\n </TooltipContainer>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/view-selector/index.tsx",
-      "line_number": 86,
-      "context": "key={value}\n data-view={value}\n title={\n value === \"row\"\n ? t(\"Common:SwitchViewToCompact\")\n : t(\"Common:SwitchToThumbnails\")\n }\n data-testid=\"view-selector-icon\"\n >\n {typeof icon === \"string\" ? <ReactSVG src={icon} /> : icon}\n </div>",
+      "line_number": 88,
+      "context": "key={value}\n data-view={value}\n title={\n value === \"row\"\n ? t(\"Common:SwitchViewToCompact\")\n : t(\"Common:SwitchToThumbnails\")\n }\n data-testid=\"view-selector-icon\"\n >\n {typeof icon === \"string\" ? <ReactSVG src={icon} /> : icon}\n </TooltipContainer>",
       "module": "/packages/shared"
     }
   ],
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Eskiz rejiminə keçin\" doesn't accurately convey the meaning of \"Switch to thumbnails view.\" \"Eskiz\" translates to \"sketch\" or \"draft,\" which isn't what thumbnails represent. A more accurate translation would describe the function of displaying thumbnails.",
-          "suggestion": "Consider something like \"Minilərə keçin\" (Miniatures to) or \"Kiçik görünü görünüşünə keçin\" (Switch to small view)"
+          "description": "The translation 'Eskiz rejiminə keçin' doesn't accurately convey the meaning of 'Switch to thumbnails view'. 'Eskiz rejimi' translates to 'Sketch mode' or 'Draft mode', not thumbnails.",
+          "suggestion": "Consider alternatives such as 'Kiçik görünü görünüşünə keçin' (Switch to small view) or 'Minilükə keçin' (Switch to miniatures/thumbnails)."
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Thumbnails aktivieren' doesn't fully convey the meaning of 'Switch to thumbnails view'. It translates to 'Activate thumbnails' which implies enabling a feature, not changing the view to thumbnails.",
-          "suggestion": "Consider 'Wechsle zur Thumbnail-Ansicht' or 'Thumbnail-Ansicht öffnen'."
+          "description": "The translation 'Thumbnails aktivieren' implies 'enable thumbnails', rather than 'switch to thumbnails view'. It's a functional difference.",
+          "suggestion": "Thumbnails anzeigen"
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"සිඟිති රූ දැක්මට මාරුව\" is not the most natural or accurate translation of \"Switch to thumbnails view\". While it conveys the general idea, it's a bit literal and awkward. \"සිඟිති ආකාරයට මාරුව\" or \"සිඟිති පෙන්වීමට මාරුව\" would be more idiomatic.",
-          "suggestion": "සිඟිති ආකාරයට මාරුව"
+          "description": "The translation \"සිඟිති රූ දැක්මට මාරුව\" while containing correct words, doesn't fully capture the meaning of 'Switch to thumbnails view'. It translates more literally as 'Change to see thumbnails', which is not as direct or natural as a typical UI label.",
+          "suggestion": "A more accurate and natural translation could be \"ගෝන රූ දැක්මක් බැලීමට මාරුව\" or \"చిన్న රූපයන් දැක්මට මාරුව\" (depending on desired level of formality)."
         }
       ],
       "approved_at": null
@@ -204,13 +204,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Prebaci se na prikaz sličica\" doesn't perfectly capture the meaning of 'Switch to thumbnails view'. 'Prebaci se' implies a more complex transition. A more accurate translation would focus on the action of displaying thumbnails.",
-          "suggestion": "Prikazi sličice"
+          "description": "The translation 'Prebaci se na prikaz sličica' while understandable, isn't the most natural way to express 'Switch to thumbnails view'. 'Prebaciti' implies a transfer or shift, which isn't entirely wrong, but could be more direct.",
+          "suggestion": "Prikazuj sličice"
         },
         {
-          "type": "grammar",
-          "description": "While understandable, 'Prikazi sličice' is slightly more direct and sounds more natural than 'Prebaci se na prikaz sličica'. It removes the unnecessary 'switch' implication.",
-          "suggestion": null
+          "type": "spelling",
+          "description": "The word 'prikazuj' is more appropriate for the context.",
+          "suggestion": "Prikazuj"
         }
       ],
       "approved_at": null
@@ -227,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"подання ескізів\" is a somewhat formal and less natural way to say 'thumbnails view' in Ukrainian. A more common and user-friendly translation would be 'перегляду мініатюр'.",
-          "suggestion": "Переключитися на перегляд мініатюр"
+          "description": "The translation 'Переключитися на подання ескізів' is a literal translation and while understandable, it's not the most natural or idiomatic way to express 'Switch to thumbnails view' in Ukrainian. 'Ескізів' (thumbnails) sounds a bit too formal and precise. A more natural phrasing would focus on viewing thumbnails, rather than focusing on the act of creating them.",
+          "suggestion": "Перегляд у вигляді мініатюр"
         }
       ],
       "approved_at": null
@@ -240,6 +240,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

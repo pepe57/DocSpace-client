@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 // import React from "react";
 // import moment from "moment";
 // import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it } from "vitest";
 
 // import { Weekdays, Days, Day } from "./sub-components/";
 // import { Calendar } from "./Calendar";

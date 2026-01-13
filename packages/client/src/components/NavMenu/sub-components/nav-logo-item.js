@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -59,7 +59,7 @@ const NavLogoItem = ({ opened, onClick }) => {
         <img
           alt="logo"
           className="nav-logo-icon"
-          src={getLogoUrl(WhiteLabelLogoType.LightSmall)}
+          src={getLogoUrl(WhiteLabelLogoType.LightSmall, false, "", true)}
         />
       </Link>
     </LogoItem>

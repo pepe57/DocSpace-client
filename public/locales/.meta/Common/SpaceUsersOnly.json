@@ -3,7 +3,7 @@
   "content": "{{productName}} users only",
   "content_en_sha1_hash": "0beea2f05fa9af55a0c63adb5ee8fc835cf3d5e9",
   "created_at": "2025-05-19T21:30:48.990Z",
-  "updated_at": "2025-06-02T10:20:51.579Z",
+  "updated_at": "2025-10-14T04:36:03.583Z",
   "comment": {
     "text": "This translation key is used to display a label indicating that a feature or action is restricted to space users only. It appears in a share component and is triggered by the \"SpaceUsersOnly\" internal property.",
     "is_auto": true,
@@ -12,8 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 70,
-      "context": "label: t(\"Common:AnyoneWithLink\"),\n },\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: t(\"Common:ProductName\"),\n }),\n },\n available?.None && {\n key: \"separator\",",
+      "line_number": 89,
+      "context": "icon: withIcon ? UniverseIcon : undefined,\n },\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: withIcon ? PeopleIcon : undefined,\n },\n ];",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 89,
+      "context": "icon: withIcon ? UniverseIcon : undefined,\n },\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: withIcon ? PeopleIcon : undefined,\n },\n ];",
       "module": "/packages/shared"
     }
   ],
@@ -30,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"خاص بمستخدمي {{productName}} فقط\" while understandable, isn't the most natural or idiomatic way to express \"{{productName}} users only\" in Arabic (Saudi Arabia). A more accurate and common phrasing would be something like \"مخصص لمستخدمي {{productName}} فقط\" or \"لأعضاء {{productName}} فقط\".  \"خاص\" implies exclusivity and ownership, whereas \"مخصص\" (dedicated to) or \"لأعضاء\" (for members) better conveys the intended meaning.",
-          "suggestion": "مخصص لمستخدمي {{productName}} فقط"
+          "description": "The translation \"خاص بمستخدمي {{productName}} فقط\" while understandable, is not the most natural phrasing in Saudi Arabic. A more common and idiomatic translation would emphasize exclusivity.",
+          "suggestion": "حصري لمستخدمي {{productName}} فقط"
         }
       ],
       "approved_at": null
@@ -39,7 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Yalnız {{productName}} istifadəçiləri' is a literal translation that may not convey the intended meaning. A more natural phrasing might emphasize exclusivity or restricted access.",
+          "suggestion": "Consider alternatives like 'Sadece {{productName}} istifadəçiləri üçün' or '{{productName}} istifadəçiləri ilə məhduddur'"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,7 +63,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"{{productName}} users only\" implies exclusivity. While the Czech translation \"Pouze uživatelé {{productName}}\" is literally \"Only users {{productName}}\", it doesn't fully capture the nuanced meaning of 'users only'. A more accurate translation might emphasize the restriction to users.",
+          "suggestion": "Consider using a translation like \"Pouze pro uživatele {{productName}}\" (Only for {{productName}} users) or \"Výhradně pro uživatele {{productName}}\" (Exclusively for {{productName}} users) to better convey the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -60,13 +78,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nur {{productName}}-Benutzer' is technically correct but lacks naturalness. A more idiomatic translation would use a more appropriate preposition or phrasing.",
-          "suggestion": "Nur Benutzer von {{productName}}"
+          "description": "The translation 'Nur {{productName}}-Benutzer' is not the most natural or idiomatic way to express '{{productName}} users only' in German. It lacks a proper article and phrasing.",
+          "suggestion": "Nur {{productName}}-Nutzer"
         },
         {
-          "type": "formatting",
-          "description": "The hyphenated structure '-Benutzer' could be improved for readability in German.",
-          "suggestion": "von {{productName}} Benutzer"
+          "type": "incorrect_translation",
+          "description": "The use of a hyphen in '{{productName}}-Benutzer' is not always appropriate, particularly if 'productName' contains multiple words. Using 'Nutzer' rather than 'Benutzer' is also more common in this context.",
+          "suggestion": "Nur {{productName}} Nutzer"
         }
       ],
       "approved_at": null
@@ -77,7 +95,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Μόνο για χρήστες {{productName}}' is a literal translation of 'users only'. A more natural and idiomatic Greek phrasing would be 'Αποκλειστικά για χρήστες {{productName}}' or 'Διαθέσιμο μόνο για χρήστες {{productName}}'.",
+          "description": "The translation 'Μόνο για χρήστες {{productName}}' is a literal translation of 'users only'. A more natural and idiomatic Greek translation would be something like 'Αποκλειστικά για χρήστες {{productName}}' (Exclusive to {{productName}} users) or 'Διαθέσιμο μόνο για χρήστες {{productName}}' (Available only to {{productName}} users).",
           "suggestion": "Αποκλειστικά για χρήστες {{productName}}"
         }
       ],
@@ -107,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"միայն {{productName}}-ի օգտվողների համար\" is a literal translation of 'for {{productName}} users only'. A more natural and accurate Armenian translation would be something like \"միայն {{productName}}-ի մասնակիցների համար\" (only for participants of {{productName}}) or \"միայն {{productName}} գրանցված օգտվողների համար\" (only for registered users of {{productName}}). The current translation sounds slightly awkward.",
-          "suggestion": "Consider using \"միայն {{productName}}-ի մասնակիցների համար\" or \"միայն {{productName}} գրանցված օգտվողների համար\" for a more idiomatic translation."
+          "description": "The translation \"միայն {{productName}}-ի օգտվողների համար\" literally translates to 'only for the users of {{productName}}'. While not entirely wrong, it's a bit clunky and doesn't fully capture the meaning of 'users only'. A more natural and accurate translation would emphasize exclusivity.",
+          "suggestion": "միայն {{productName}}-ի մասնակիցների համար"
         }
       ],
       "approved_at": null
@@ -164,7 +182,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Somente usuários do {{productName}}' is a bit stiff and less natural-sounding in Brazilian Portuguese. A more fluent translation would use 'apenas'.",
+          "suggestion": "Apenas usuários do {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -173,7 +197,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Doar utilizatorii {{productName}}' is technically correct but could be improved for a more natural and fluent Romanian expression. A more idiomatic translation would be something like 'Numai utilizatorii {{productName}}' or 'Exclusiv utilizatorii {{productName}}'.",
+          "description": "The translation 'Doar utilizatorii {{productName}}' is not the most natural or accurate translation of '{{productName}} users only'. A more idiomatic Romanian translation would be 'Numai utilizatorii {{productName}}' or 'Doar utilizatorii {{productName}}'. While 'Doar' is acceptable, 'Numai' more closely conveys the exclusivity implied by 'only'.",
           "suggestion": "Numai utilizatorii {{productName}}"
         }
       ],
@@ -191,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{productName}} පරිශ්‍රීලකයින් පමණි\" doesn't accurately convey \"{{productName}} users only\". The word \"පරිශ්‍රීලකයින්\" (parishreelakayin) translates to 'personnel' or 'staff', not 'users'.",
-          "suggestion": "{{productName}} යොජනාවේ පරිශීලකයින් පමණි"
+          "description": "The translation \"{{productName}} පරිශ්‍රීලකයින් පමණි\" is not the most natural or accurate translation of \"{{productName}} users only.\"  While \"perishreelikayin\" (පරිශ්‍රීලකයින්) translates to 'users', the phrasing is somewhat formal and less common. A more natural translation would be something along the lines of \"{{productName}} යොදා ගන්නන් පමණි\" or \"{{productName}} ක්‍රියාකරන්නන් පමණි\".",
+          "suggestion": "{{productName}} යොදා ගන්නන් පමණි"
         }
       ],
       "approved_at": null
@@ -215,7 +239,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Само {{productName}} корисници' while understandable, is not the most natural or accurate rendering of '{{productName}} users only'. A more idiomatic translation would be 'Само за кориснике {{productName}}' or 'Само корисници {{productName}}'. The current translation directly translates 'users' as 'корисници', but the preposition 'only' isn't reflected in the sentence structure in a natural way.",
+          "description": "The translation 'Само {{productName}} корисници' literally translates to 'Only {{productName}} users'. A more natural and idiomatic translation in Serbian (Cyrillic) would be 'Само за кориснике {{productName}}' or 'Само за {{productName}} кориснике'.",
           "suggestion": "Само за кориснике {{productName}}"
         }
       ],
@@ -226,9 +250,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Samo {{productName}} korisnici' is a literal translation, but doesn't flow naturally in Serbian. A more appropriate translation would convey exclusivity.",
-          "suggestion": "Ispitivanje je dostupno samo korisnicima {{productName}}."
+          "type": "grammatical",
+          "description": "The Serbian translation uses 'korisnici' (users) in the nominative case, but the English phrase implies exclusivity. A more accurate translation would use the genitive case to indicate possession or belonging.",
+          "suggestion": "Samo za {{productName}} korisnike"
         }
       ],
       "approved_at": null
@@ -251,7 +275,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Chỉ người dùng {{productName}}\" is technically correct but lacks the full meaning of \"{{productName}} users only\". It's more literally \"Only users of {{productName}}\". A better translation might emphasize the exclusivity.",
+          "description": "The translation 'Chỉ người dùng {{productName}}' while understandable, isn't the most natural or idiomatic way to express '{{productName}} users only' in Vietnamese. It's a bit literal.",
+          "suggestion": "Người dùng {{productName}}"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation doesn't convey the 'only' aspect as effectively as the original. While 'Chỉ' can imply exclusivity, it's not as direct.",
           "suggestion": "Chỉ dành cho người dùng {{productName}}"
         }
       ],
@@ -261,6 +290,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vetëm përdoruesit e {{productName}}' is technically correct but sounds slightly unnatural in Albanian. A more natural phrasing would be 'Vetëm përdoruesit {{productName}}' or 'Vetëm {{productName}} përdoret'.",
+          "suggestion": "Vetëm përdoruesit {{productName}}"
+        }
+      ],
       "approved_at": null
     }
   }

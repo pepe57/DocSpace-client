@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,6 +53,9 @@ const generateFileLink = ({
 } = {}): TFileLink => {
   return {
     access,
+    canEditInternal: true,
+    canEditExpirationDate: true,
+    canRevoke: true,
     sharedTo: {
       id,
       title,
@@ -63,8 +66,9 @@ const generateFileLink = ({
       primary,
       internal,
       requestToken: "",
-      expirationDate,
+      expirationDate: expirationDate?.toISOString(),
     },
+    canEditDenyDownload: false,
     isLocked: false,
     isOwner: false,
     canEditAccess: false,

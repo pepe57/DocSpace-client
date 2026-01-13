@@ -3,7 +3,7 @@
   "content": "About",
   "content_en_sha1_hash": "6b21fb791ac05170893860c248401cd24a59b732",
   "created_at": "2025-05-19T21:30:42.789Z",
-  "updated_at": "2025-05-26T07:57:32.194Z",
+  "updated_at": "2025-12-22T14:25:01.129Z",
   "comment": {
     "text": "This translation key is used for the text \"About\" that appears on a navigation menu link in the client-side application. It serves as a label for a header element displaying the link to access information about the app or its features. The text is part of a larger UI component and will be displayed with a style indicating it's a clickable link.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NavMenu/sub-components/header.js",
-      "line_number": 248,
+      "line_number": 255,
       "context": "<StyledLink>\n <LinkWithoutRedirect\n to={combineUrl(window.ClientConfig?.proxy?.url, \"/about\")}\n className=\"nav-menu-header_link\"\n >\n {t(\"Common:About\")}\n </LinkWithoutRedirect>\n </StyledLink>\n </Box>\n </Nav>\n )} */}",
       "module": "/packages/client"
     },
@@ -34,25 +34,25 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2025-12-15T14:19:49.860Z"
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2025-12-15T14:19:50.910Z"
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2025-12-15T14:19:51.736Z"
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2025-12-15T14:19:58.591Z"
     },
     "de": {
       "ai_translated": false,
@@ -64,7 +64,7 @@
           "suggestion": "Consider 'Über' as a possible alternative, or investigate the specific context to determine the most accurate translation.  If it refers to 'About Us' type content, 'Über uns' would be more accurate."
         }
       ],
-      "approved_at": null
+      "approved_at": "2025-12-15T14:19:59.062Z"
     },
     "el-GR": {
       "ai_translated": false,

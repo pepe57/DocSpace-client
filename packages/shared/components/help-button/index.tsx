@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,16 +53,37 @@ const HelpButton = (props: HelpButtonProps) => {
     children,
     isOpen,
     noUserSelect,
+    dataTestId,
+    tooltipStyle,
   } = props;
 
   const currentId = id || uniqueId();
   const ref = React.useRef(null);
+  const componentClass = classNames(className, "help-icon");
+
+  const contentString = React.useMemo(() => {
+    if (getContent) {
+      const content = getContent({ content: null, activeAnchor: null });
+      return typeof content === "string" ? content : null;
+    }
+    return typeof tooltipContent === "string" ? tooltipContent : null;
+  }, [getContent, tooltipContent]);
+
+  const useGlobalTooltip = contentString !== null;
+
+  const globalTooltipProps = useGlobalTooltip
+    ? {
+        "data-tooltip-id": "info-tooltip",
+        "data-tooltip-content": contentString,
+        "data-tooltip-place": place || "top",
+      }
+    : {};
+
   const anchorSelect = children
     ? `div[id='${currentId}']`
     : `div[id='${currentId}'] svg`;
-  const componentClass = classNames(className, "help-icon");
 
-  const tooltipProps = {
+  const localTooltipProps = {
     clickable: true,
     openOnClick,
     place: place || "top",
@@ -73,12 +94,13 @@ const HelpButton = (props: HelpButtonProps) => {
     anchorSelect,
     isOpen,
     noUserSelect,
+    tooltipStyle,
   };
 
   return (
-    <div ref={ref} style={style} data-testid="help-button">
+    <div ref={ref} style={style} data-testid={dataTestId ?? "help-button"}>
       {children ? (
-        <div id={currentId} className={componentClass}>
+        <div id={currentId} className={componentClass} {...globalTooltipProps}>
           {children}
         </div>
       ) : (
@@ -92,13 +114,16 @@ const HelpButton = (props: HelpButtonProps) => {
           color={color}
           data-for={currentId}
           dataTip={dataTip}
+          {...globalTooltipProps}
         />
       )}
 
-      {getContent ? (
-        <Tooltip {...tooltipProps} getContent={getContent} />
-      ) : tooltipContent ? (
-        <Tooltip {...tooltipProps}>{tooltipContent}</Tooltip>
+      {!useGlobalTooltip && (getContent || tooltipContent) ? (
+        getContent ? (
+          <Tooltip {...localTooltipProps} getContent={getContent} />
+        ) : (
+          <Tooltip {...localTooltipProps}>{tooltipContent}</Tooltip>
+        )
       ) : null}
     </div>
   );

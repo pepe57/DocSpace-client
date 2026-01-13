@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 "use client";
 
 import React from "react";
@@ -134,7 +135,10 @@ export const CompletedForm = ({
   });
 
   return (
-    <ContainerCompletedForm bgPattern={bgPattern}>
+    <ContainerCompletedForm
+      bgPattern={bgPattern}
+      data-testid="completed_form_container"
+    >
       <Scrollbar fixedSize>
         <CompletedFormLayout>
           <picture className="completed-form__logo">
@@ -146,7 +150,7 @@ export const CompletedForm = ({
             <Heading level={HeadingLevel.h1}>
               {t("CompletedForm:FormCompletedSuccessfully")}
             </Heading>
-            <Text noSelect>
+            <Text>
               {isAnonym
                 ? t("CompletedForm:DescriptionForAnonymous")
                 : t("CompletedForm:DescriptionForRegisteredUser")}
@@ -166,6 +170,11 @@ export const CompletedForm = ({
                 className="completed-form__download"
                 iconName={isAnonym ? DownloadIconUrl : LinkIconUrl}
                 onClick={isAnonym ? handleDownload : copyLinkFile}
+                dataTestId={
+                  isAnonym
+                    ? "download_form_icon_button"
+                    : "copy_link_icon_button"
+                }
               />
             </Box>
             <FormNumberWrapper>
@@ -173,7 +182,7 @@ export const CompletedForm = ({
               <Box>
                 <Text
                   className={classNames("completed-form__form-number", {
-                    ["form-number--big"]: formNumber > BIG_FORM_NUMBER,
+                    "form-number--big": formNumber > BIG_FORM_NUMBER,
                   })}
                 >
                   {formNumber}
@@ -195,6 +204,7 @@ export const CompletedForm = ({
                 <Link
                   className="manager__mail link"
                   href={`mailto:${manager.email}`}
+                  data-testid="manager_email_link"
                 >
                   <MailIcon />
                   <span>{manager.email}</span>
@@ -202,7 +212,7 @@ export const CompletedForm = ({
               </Box>
             </ManagerWrapper>
           </MainContent>
-          <ButtonWrapper isShareFile={isShareFile && !isRoomMember}>
+          <ButtonWrapper isShareFile={isShareFile ? !isRoomMember : false}>
             <Button
               scale
               primary
@@ -213,20 +223,27 @@ export const CompletedForm = ({
                   : t("CompletedForm:CheckReadyForms")
               }
               onClick={isAnonym ? handleDownload : gotoCompleteFolder}
+              testId={
+                isAnonym
+                  ? "download_form_button"
+                  : "goto_complete_folder_button"
+              }
             />
-            {(!isShareFile || isRoomMember) && !isSDK && (
+            {(!isShareFile || isRoomMember) && !isSDK ? (
               <Button
                 scale
                 size={ButtonSize.medium}
                 label={t("CompletedForm:BackToRoom")}
                 onClick={handleBackToRoom}
+                testId="back_to_room_button"
               />
-            )}
+            ) : null}
           </ButtonWrapper>
           <Link
             className="link"
             href={`/?${fillAgainSearchParams.toString()}`}
             prefetch={false}
+            data-testid="fill_again_link"
           >
             {t("CompletedForm:FillItOutAgain")}
           </Link>

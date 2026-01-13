@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,6 +43,7 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { FileFillingFormStatus } from "../../enums";
 
 import { Text } from "../../components/text";
+import { TooltipContainer } from "../../components/tooltip";
 import { toastr } from "../../components/toast";
 import PublicRoomBar from "../../components/public-room-bar";
 import { Heading, HeadingLevel } from "../../components/heading";
@@ -124,8 +125,8 @@ export const FillingStatusPanel = ({
       <ModalDialog.Body>
         {value ? (
           <PublicRoomBar
-            headerText={t("Common:FillingStatusBarTitle")}
-            bodyText={t("Common:FillingStatusBarDescription")}
+            headerText={t("Common:StartFillingBarHeader")}
+            bodyText={t("Common:StartFillingBarDescription")}
             iconName={InfoSvgUrl}
             onClose={() => setValue(false)}
             className={styles.infoBar}
@@ -137,13 +138,14 @@ export const FillingStatusPanel = ({
             {fileName}
           </Text>
           {fillingStatus ? (
-            <div
+            <TooltipContainer
+              as="div"
               title={fileStatusTitle}
               className={styles.fileStatus}
               style={{ backgroundColor: color }}
             >
               <span>{fileStatusLabel}</span>
-            </div>
+            </TooltipContainer>
           ) : null}
         </div>
         <div className={styles.processContainer}>

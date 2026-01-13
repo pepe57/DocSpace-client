@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -29,4 +29,15 @@
 export type PreparationPortalProgressProps = {
   text: string;
   percent: number;
+
+  // Accessibility attributes
+  role?: string;
+  "aria-valuemin"?: number;
+  "aria-valuemax"?: number;
+  "aria-valuenow"?: number;
+  "aria-label"?: string;
+
+  // Testing attributes
+  "data-testid"?: string;
+  "data-percent"?: number;
 };

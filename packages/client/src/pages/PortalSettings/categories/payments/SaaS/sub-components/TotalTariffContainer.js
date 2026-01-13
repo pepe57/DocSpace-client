@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,6 +34,8 @@ import { mobile } from "@docspace/shared/utils";
 const StyledBody = styled.div`
   max-width: 272px;
   margin: 0 auto;
+  word-break: break-word;
+  text-align: center;
 
   @media ${mobile} {
     max-width: 520px;
@@ -50,30 +52,22 @@ const StyledBody = styled.div`
       font-size: 48px;
     }
 
-    .payment_price_description,
+    ${(props) =>
+      props.isDisabled &&
+      css`
+        color: ${props.theme.client.settings.payment.priceContainer
+          .disableColor};
+      `};
+
     .payment_price_price-text,
     .total-tariff_description {
-      margin-bottom: 0px;
     }
-    .payment_price_description {
-      margin-top: 16px;
-    }
+
     .total-tariff_description {
       margin: auto;
     }
-    .payment_price_month-text {
-      margin: auto 0;
-      margin-bottom: 9px;
-      margin-inline-start: 8px;
-    }
-    .payment_price_month-text,
-    .payment_price_price-text {
-      ${(props) =>
-        props.isDisabled &&
-        css`
-          color: ${props.theme.client.settings.payment.priceContainer
-            .disableColor};
-        `};
+    p {
+      margin-bottom: 0;
     }
   }
 
@@ -89,15 +83,14 @@ const TotalTariffContainer = ({
   theme,
   totalPrice,
   isNeedRequest,
-  currencySymbol,
   isYearTariff,
+  formatPaymentCurrency,
 }) => {
   return (
     <StyledBody isDisabled={isDisabled} theme={theme}>
       <div className="payment_price_total-price">
         {isNeedRequest ? (
           <Text
-            noSelect
             fontSize="14"
             textAlign="center"
             fontWeight={600}
@@ -114,11 +107,10 @@ const TotalTariffContainer = ({
                 t={t}
                 i18nKey="TotalPricePerYear"
                 ns="Payments"
-                values={{ currencySymbol, price: totalPrice }}
+                values={{ price: formatPaymentCurrency(totalPrice) }}
                 components={{
-                  1: <span className="lagerFontSize" />,
-                  2: <span className="lagerFontSize" />,
-                  3: <span />,
+                  2: <span key="large-font-year" className="lagerFontSize" />,
+                  3: <Text fontWeight={600} as="span" key="bold-text-year" />,
                 }}
               />
             ) : (
@@ -126,11 +118,10 @@ const TotalTariffContainer = ({
                 t={t}
                 i18nKey="TotalPricePerMonth"
                 ns="Payments"
-                values={{ currencySymbol, price: totalPrice }}
+                values={{ price: formatPaymentCurrency(totalPrice) }}
                 components={{
-                  1: <span className="lagerFontSize" />,
-                  2: <span className="lagerFontSize" />,
-                  3: <span />,
+                  2: <span key="large-font-month" className="lagerFontSize" />,
+                  3: <Text fontWeight={600} as="span" key="bold-text-month" />,
                 }}
               />
             )}
@@ -141,23 +132,25 @@ const TotalTariffContainer = ({
   );
 };
 
-export default inject(
-  ({ settingsStore, paymentStore, paymentQuotasStore, currentQuotaStore }) => {
-    const { theme } = settingsStore;
-    const { isLoading, totalPrice, isNeedRequest, maxAvailableManagersCount } =
-      paymentStore;
+export default inject(({ settingsStore, paymentStore, currentQuotaStore }) => {
+  const { theme } = settingsStore;
+  const {
+    isLoading,
+    totalPrice,
+    isNeedRequest,
+    maxAvailableManagersCount,
+    formatPaymentCurrency,
+  } = paymentStore;
 
-    const { planCost } = paymentQuotasStore;
-    const { isYearTariff } = currentQuotaStore;
+  const { isYearTariff } = currentQuotaStore;
 
-    return {
-      theme,
-      totalPrice,
-      isLoading,
-      isNeedRequest,
-      maxAvailableManagersCount,
-      currencySymbol: planCost.currencySymbol,
-      isYearTariff,
-    };
-  },
-)(observer(TotalTariffContainer));
+  return {
+    theme,
+    totalPrice,
+    isLoading,
+    isNeedRequest,
+    maxAvailableManagersCount,
+    isYearTariff,
+    formatPaymentCurrency,
+  };
+})(observer(TotalTariffContainer));

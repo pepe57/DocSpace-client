@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -548,7 +548,6 @@ export const ViewerPlayer = ({
       setIsError(true);
       setIsLoading(false);
 
-      // eslint-disable-next-line no-console
       console.error("video error", error);
     },
     [setIsError],
@@ -596,7 +595,6 @@ export const ViewerPlayer = ({
   useLayoutEffect(() => {
     setIsLoading(true);
     resetState();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src]);
 
   useEffect(() => {
@@ -626,7 +624,7 @@ export const ViewerPlayer = ({
     };
   }, [onKeyDown]);
 
-  const posterUrl = thumbnailSrc ? `${thumbnailSrc}&size=1280x720` : undefined;
+  const posterUrl = thumbnailSrc ? `${thumbnailSrc}` : undefined;
 
   return (
     <>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,7 +38,7 @@ export type LinkProps = TextProps & {
   isHovered?: boolean;
   /** Sets the 'opacity' css-property to 0.5. Usually applied for the users with "pending" status */
   isSemitransparent?: boolean;
-  /** Activates or deactivates _text-overflow_ CSS property with ellipsis (' … ') value */
+  /** Activates or deactivates _text-overflow_ CSS property with ellipsis (' ... ') value */
   isTextOverflow?: boolean;
   /** Disables hover effect */
   noHover?: boolean;
@@ -50,6 +50,14 @@ export type LinkProps = TextProps & {
   target?: LinkTarget;
   /** Label */
   label?: string;
+  /** Sets the text decoration style */
+  textDecoration?:
+    | "none"
+    | "underline"
+    | "line-through"
+    | "overline"
+    | "underline dotted"
+    | "underline dashed";
   /** Accessibility label for the link */
   ariaLabel?: string;
   /** Data attribute for testing */
@@ -62,8 +70,6 @@ export type LinkProps = TextProps & {
   tabIndex?: number;
   /** Used as HTML `title` property */
   title?: string;
-  /** CSS text-decoration */
-  textDecoration?: string;
   /** CSS color or accent theme color */
   color?: "accent" | (string & {});
 };

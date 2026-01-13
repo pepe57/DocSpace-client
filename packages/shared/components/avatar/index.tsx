@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,6 +43,7 @@ import { DropDownItem } from "../drop-down-item";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
 import { TGetTooltipContent, Tooltip } from "../tooltip";
+import { AVATAR_ACTION_KEYS } from "../../constants";
 
 import styles from "./Avatar.module.scss";
 
@@ -68,6 +69,9 @@ const AvatarPure = ({
   model,
   hasAvatar,
   noClick = false,
+  isNotIcon = false,
+  imgClassName = "",
+  dataTestId,
 }: AvatarProps) => {
   const { isRTL } = useInterfaceDirection();
   const { isBase } = useTheme();
@@ -95,16 +99,16 @@ const AvatarPure = ({
   else if (source?.includes(".svg")) isIcon = true;
 
   const avatarContent = source ? (
-    isIcon ? (
+    isIcon && !isNotIcon ? (
       <div className={styles.iconWrapper}>
         <IconButton iconName={source} className="icon" isDisabled />
       </div>
     ) : (
       <img
         src={source}
-        className={styles.image}
+        className={`${styles.image}${imgClassName ? ` ${imgClassName}` : ""}`}
         data-is-default={isDefault}
-        alt=""
+        alt="avatar"
         style={
           {
             "--avatar-default-image": `url(${isBase ? AvatarBaseReactSvgUrl : AvatarDarkReactSvgUrl})`,
@@ -118,7 +122,7 @@ const AvatarPure = ({
     <img
       className={styles.image}
       data-is-default="true"
-      alt=""
+      alt="avatar"
       style={
         {
           "--avatar-default-image": `url(${isBase ? AvatarBaseReactSvgUrl : AvatarDarkReactSvgUrl})`,
@@ -179,7 +183,7 @@ const AvatarPure = ({
         const optionOnClickAction = () => {
           setOpenLogoEdit(false);
 
-          if (option.key === "upload") {
+          if (option.key === AVATAR_ACTION_KEYS.PROFILE_AVATAR_UPLOAD) {
             return option.onClick(inputFilesElement);
           }
 
@@ -192,6 +196,7 @@ const AvatarPure = ({
             label={option.label}
             icon={option.icon}
             onClick={optionOnClickAction}
+            testId={option.key}
           />
         );
       })}
@@ -207,7 +212,7 @@ const AvatarPure = ({
         onMouseDown={onMouseDown}
         onClick={onClick || onClickAvatar}
         ref={iconRef}
-        data-testid="avatar"
+        data-testid={dataTestId ?? "avatar"}
       >
         <div
           className={classNames(styles.avatarWrapper, className)}
@@ -226,6 +231,7 @@ const AvatarPure = ({
                   iconName={PencilReactSvgUrl}
                   onClick={onToggleOpenEditLogo}
                   size={16}
+                  dataTestId="edit_avatar_icon_button"
                 />
                 {dropdownElement}{" "}
               </>
@@ -235,6 +241,7 @@ const AvatarPure = ({
                 iconName={PlusSvgUrl}
                 onClick={onUploadClick}
                 size={16}
+                dataTestId="edit_avatar_icon_button"
               />
             )}
           </div>

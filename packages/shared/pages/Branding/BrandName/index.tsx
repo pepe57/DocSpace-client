@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,9 +28,9 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 import classNames from "classnames";
-import { Nullable } from "types";
+import { Nullable } from "../../../types";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "../../../themes";
 
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { Text } from "../../../components/text";
@@ -57,6 +57,8 @@ export const BrandName = ({
   isBrandNameLoaded,
   defaultBrandName,
   brandName,
+  error,
+  onValidate,
 }: IBrandNameProps) => {
   const { t } = useTranslation("Common");
 
@@ -64,15 +66,24 @@ export const BrandName = ({
 
   const [brandNameWhiteLabel, setBrandNameWhiteLabel] =
     useState<Nullable<string>>(null);
+  const [hasError, setHasError] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isBrandNameLoaded || !brandName) return;
     setBrandNameWhiteLabel(brandName);
   }, [brandName, isBrandNameLoaded]);
 
+  useEffect(() => {
+    setHasError(!!error);
+  }, [error]);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setBrandNameWhiteLabel(value);
+
+    if (onValidate) {
+      onValidate(value);
+    }
   };
 
   const onSaveAction = (): void => {
@@ -85,13 +96,39 @@ export const BrandName = ({
 
   const onCancelAction = (): void => {
     setBrandNameWhiteLabel(defaultBrandName);
+    if (onValidate) {
+      onValidate(defaultBrandName);
+    }
   };
 
   const isEqualText = defaultBrandName === (brandNameWhiteLabel ?? "");
   const showReminder = !isEqualText && brandNameWhiteLabel !== null;
 
+  const getErrorText = () => {
+    if (!error) return "";
+
+    switch (error) {
+      case "Empty":
+        return t("Common:EmptyFieldError");
+      case "MinLength":
+        return t("Common:BrandNameLength", {
+          minLength: 2,
+          maxLength: 40,
+        });
+      case "SpecSymbols":
+        return t("Common:BrandNameForbidden");
+      default:
+        return t("Common:Error");
+    }
+  };
+
   return (
-    <div className={styles.brandName}>
+    <div
+      className={classNames(styles.brandName, {
+        ["isEnableBranding"]: !isSettingPaid,
+        ["settings_unavailable"]: !isSettingPaid,
+      })}
+    >
       {showNotAvailable ? <NotAvailable /> : null}
 
       <div className={classNames(styles.headerContainer, "header-container")}>
@@ -115,23 +152,16 @@ export const BrandName = ({
       </div>
 
       <Text
-        className={classNames(
-          styles.wlSubtitle,
-          "wl-subtitle settings_unavailable",
-        )}
+        className={classNames(styles.wlSubtitle, "wl-subtitle")}
         fontSize="13px"
       >
         {t("BrandNameSubtitle", { productName: t("Common:ProductName") })}
       </Text>
 
       <div className="settings-block">
-        <FieldContainer
-          id="fieldContainerBrandName"
-          isVertical
-          className="settings_unavailable"
-        >
+        <FieldContainer id="fieldContainerBrandName" isVertical>
           <TextInput
-            testId="logo-text-input"
+            testId="brand_name_input"
             className="brand-name input"
             value={brandNameWhiteLabel ?? ""}
             onChange={onChange}
@@ -142,7 +172,13 @@ export const BrandName = ({
             maxLength={40}
             type={InputType.text}
             size={InputSize.base}
+            hasError={hasError}
           />
+          {hasError ? (
+            <Text fontSize="12px" className={styles.errorText}>
+              {getErrorText()}
+            </Text>
+          ) : null}
           <SaveCancelButtons
             id="btnBrandName"
             className={classNames(
@@ -153,11 +189,13 @@ export const BrandName = ({
             onCancelClick={onCancelAction}
             saveButtonLabel={t("Common:SaveButton")}
             cancelButtonLabel={t("Common:CancelButton")}
-            reminderText={t("YouHaveUnsavedChanges")}
+            reminderText={t("Common:YouHaveUnsavedChanges")}
             displaySettings
-            saveButtonDisabled={isEqualText}
+            saveButtonDisabled={isEqualText || hasError}
             disableRestoreToDefault={isEqualText}
             showReminder={showReminder}
+            saveButtonDataTestId="brand_name_save_button"
+            cancelButtonDataTestId="brand_name_cancel_button"
           />
         </FieldContainer>
       </div>

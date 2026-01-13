@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -61,8 +61,7 @@ export const getMonthElements = (
       type="button"
       className={classNames(styles.dateItem, "month", {
         [styles.disabled]:
-          moment(month.key, dateFormat).endOf("month") < minDate,
-        [styles.disabled]:
+          moment(month.key, dateFormat).endOf("month") < minDate ||
           moment(month.key, dateFormat).startOf("month") > maxDate,
         [styles.big]: true,
       })}
@@ -82,8 +81,7 @@ export const getMonthElements = (
         type="button"
         className={classNames(styles.dateItem, "month", {
           [styles.disabled]:
-            moment(months[i].key, dateFormat).endOf("month") < minDate,
-          [styles.disabled]:
+            moment(months[i].key, dateFormat).endOf("month") < minDate ||
             moment(months[i].key, dateFormat).startOf("month") > maxDate,
           [styles.big]: true,
           [styles.isSecondary]: true,
@@ -134,8 +132,7 @@ export const getMonthElements = (
           type="button"
           className={classNames(styles.dateItem, "month", {
             [styles.disabled]:
-              moment(month.key, dateFormat).endOf("month") < minDate,
-            [styles.disabled]:
+              moment(month.key, dateFormat).endOf("month") < minDate ||
               moment(month.key, dateFormat).startOf("month") > maxDate,
             [styles.big]: true,
             [styles.focused]: true,

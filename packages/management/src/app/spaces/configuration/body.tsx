@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -47,7 +47,7 @@ import type { TDomainValidator } from "@docspace/shared/api/settings/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 
-import { StyledBody } from "./configuration.styled";
+import styles from "./configuration.module.scss";
 
 type CheckDomainResponse = {
   value: boolean;
@@ -73,7 +73,7 @@ export const Body = ({
       <Text fontSize="13px" fontWeight={600}>
         {t("Common:Domain")}
       </Text>
-      <Text className="domain-description">(example.com)</Text>
+      <Text className={styles.domainDescription}>(example.com)</Text>
     </>
   );
 
@@ -117,7 +117,7 @@ export const Body = ({
         await setDomainName(domain);
         try {
           const result = (await setPortalName(name)) as string;
-          let url = new URL(result);
+          const url = new URL(result);
           url.searchParams.append("referenceUrl", "/management");
           window.location.replace(url);
         } catch (err) {
@@ -134,7 +134,7 @@ export const Body = ({
   ) as string;
 
   return (
-    <StyledBody>
+    <div className={styles.body}>
       <FieldContainer
         isVertical
         labelText={domainFieldLabel}
@@ -154,7 +154,7 @@ export const Body = ({
       </FieldContainer>
       <FieldContainer
         isVertical
-        labelText={t("PortalName")}
+        labelText={t("PortalName", { productName: t("Common:ProductName") })}
         labelVisible
         hasError={!!(portalNameError || checkDomainError)}
         errorMessage={portalNameError || checkDomainError}
@@ -177,12 +177,11 @@ export const Body = ({
         }
         label={t("Common:Connect")}
         onClick={onConnectClick}
-        primary={true}
+        primary
         tabIndex={3}
         isLoading={isLoading}
         // scale={false}
       />
-    </StyledBody>
+    </div>
   );
 };
-

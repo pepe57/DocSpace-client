@@ -54,16 +54,19 @@ const LifetimeDialogComponent = (props) => {
   }, []);
 
   return (
-    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
+    <ModalDialog
+      isLoading={!tReady}
+      visible={visible}
+      onClose={onClose}
+      autoMaxHeight
+    >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledBodyContent className="modal-dialog-content-body">
-          <Text fontWeight={600} fontSize="13px" noSelect>
+          <Text fontWeight={600} fontSize="13px">
             {t("Files:LifetimeDialogDescriptionHeader")}
           </Text>
-          <Text fontSize="13px" noSelect>
-            {t("Files:LifetimeDialogDescription")}
-          </Text>
+          <Text fontSize="13px">{t("Files:LifetimeDialogDescription")}</Text>
         </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>

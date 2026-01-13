@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,8 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import type { TTranslation } from "@docspace/shared/types";
-import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import type { TTranslation } from "../../types";
+import { FilesSelectorFilterTypes } from "../../enums";
 
 export const getHeaderLabel = (
   t: TTranslation,
@@ -67,6 +67,8 @@ export const getIsDisabled = (
   filterParam?: string,
   isFileSelected?: boolean,
   sameId?: boolean,
+  isInsideKnowledge?: boolean,
+  isInsideResultStorage?: boolean,
 ) => {
   if (isFirstLoad) return true;
   if (isSelectedParentFolder) return true;
@@ -74,6 +76,8 @@ export const getIsDisabled = (
   if (isRooms) return true;
   if (isRoot) return true;
   if (filterParam) return !isFileSelected;
+
+  if (isInsideKnowledge || isInsideResultStorage) return true;
 
   return false;
 };

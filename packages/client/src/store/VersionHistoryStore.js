@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -61,7 +61,7 @@ class VersionHistoryStore {
     if (this.versions) {
       // TODO: Files store in not initialized on versionHistory page. Need socket.
 
-      SocketHelper.on(SocketEvents.StartEditFile, (id) => {
+      SocketHelper?.on(SocketEvents.StartEditFile, (id) => {
         // console.log(`VERSION STORE Call s:start-edit-file (id=${id})`);
         const verIndex = this.versions.findIndex((x) => x.id == id);
         if (verIndex == -1) return;
@@ -69,7 +69,7 @@ class VersionHistoryStore {
         runInAction(() => (this.isEditing = true));
       });
 
-      SocketHelper.on(SocketEvents.StopEditFile, (id) => {
+      SocketHelper?.on(SocketEvents.StopEditFile, (id) => {
         // console.log(`VERSION STORE Call s:stop-edit-file (id=${id})`);
         const verIndex = this.files.findIndex((x) => x.id === id);
         if (verIndex == -1) return;

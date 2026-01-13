@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -115,10 +115,9 @@ const DebugInfoDialog = (props) => {
         <StyledBodyContent>
           {/* <Text>{`# Build version: ${BUILD_VERSION}`}</Text> */}
           <Text>
-            # Version:{" "}
-            <span className="version">{VERSION /* eslint-disable-line */}</span>
+            # Version: <span className="version">{VERSION}</span>
           </Text>
-          <Text>{`# Build date: ${BUILD_AT}` /* eslint-disable-line */}</Text>
+          <Text>{`# Build date: ${BUILD_AT}`}</Text>
           {user ? (
             <Text>{`# Current User: ${user?.displayName} (id:${user?.id})`}</Text>
           ) : null}

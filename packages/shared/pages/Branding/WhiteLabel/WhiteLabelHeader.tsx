@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,12 +44,10 @@ import {
 import { Button, ButtonSize } from "../../../components/button";
 import { useTheme } from "../../../hooks/useTheme";
 
-import { NotAvailable } from "./NotAvailable";
 import { IHeaderProps } from "./WhiteLabel.types";
 import styles from "./WhiteLabel.module.scss";
 
 export const WhiteLabelHeader = ({
-  showNotAvailable,
   isSettingPaid,
   standalone,
   onUseTextAsLogo,
@@ -63,7 +61,6 @@ export const WhiteLabelHeader = ({
 
   return (
     <div className={styles.header}>
-      {showNotAvailable ? <NotAvailable /> : null}
       <div className={classNames(styles.headerContainer, "header-container")}>
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}
@@ -90,18 +87,18 @@ export const WhiteLabelHeader = ({
           className={classNames(
             styles.wlSubtitle,
             styles.wlHelperLabel,
-            "wl-helper-label settings_unavailable",
+            "wl-helper-label",
           )}
           fontSize="13px"
         >
           {t("WhiteLabelSubtitle")}
           <HelpButton
             tooltipContent={
-              <Text fontSize="12px">{t("WhiteLabelTooltip")}</Text>
+              <Text fontSize="12px">{t("Common:WhiteLabelTooltip")}</Text>
             }
             place="right"
             offsetRight={0}
-            className="settings_unavailable"
+            dataTestId="white_label_helper_button"
           />
         </Text>
       </div>
@@ -111,7 +108,7 @@ export const WhiteLabelHeader = ({
           id="fieldContainerGenerateLogo"
           labelText={t("GenerateLogoLabel")}
           isVertical
-          className="settings_unavailable field-container"
+          className="field-container"
           labelVisible
         >
           <div
@@ -134,7 +131,11 @@ export const WhiteLabelHeader = ({
               withBorder={false}
             />
 
-            <div className={styles.append} onClick={onClear}>
+            <div
+              className={styles.append}
+              onClick={onClear}
+              data-testid="white_label_input_clear"
+            >
               <CrossIcon />
             </div>
           </div>

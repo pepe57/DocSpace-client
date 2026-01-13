@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -52,6 +52,8 @@ const SaveCancelButtons = ({
   additionalClassSaveButton,
   additionalClassCancelButton,
   saveButtonDisabled,
+  saveButtonDataTestId,
+  cancelButtonDataTestId,
   getTopComponent,
 }: SaveCancelButtonProps) => {
   const onKeydown = React.useCallback(
@@ -128,7 +130,7 @@ const SaveCancelButtons = ({
           tabIndex={tabIndexSaveButton}
           isLoading={isSaving}
           isDisabled={saveButtonDisabled || showReminder === false}
-          testId="save-button"
+          testId={saveButtonDataTestId ?? "save-button"}
           aria-label={`${saveButtonLabel} changes`}
           minWidth={displaySettings ? "auto" : ""}
           scale={isMobile()}
@@ -139,7 +141,7 @@ const SaveCancelButtons = ({
           onClick={onCancelClick}
           tabIndex={tabIndexCancelButton}
           isDisabled={cancelButtonDisabled || isSaving}
-          testId="cancel-button"
+          testId={cancelButtonDataTestId ?? "cancel-button"}
           aria-label={`${cancelButtonLabel} changes`}
           minWidth={displaySettings ? "auto" : ""}
           scale={isMobile()}

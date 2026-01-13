@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 
 import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
 
@@ -34,8 +34,9 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import { MainContainer } from "../StyledSecurity";
 
-const MobileView = ({ withoutExternalLink }) => {
-  const { t } = useTranslation(["Settings", "Common"]);
+const MobileView = (props) => {
+  const { t, withoutExternalLink } = props;
+
   const navigate = useNavigate();
 
   useEffect(() => {

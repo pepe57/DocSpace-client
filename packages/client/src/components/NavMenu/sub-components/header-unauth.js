@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -115,7 +115,13 @@ const HeaderUnAuth = ({
   windowIsOpen,
 }) => {
   const navigate = useNavigate();
-  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+  const logo = getLogoUrl(
+    WhiteLabelLogoType.LightSmall,
+    !theme.isBase,
+    false,
+    "",
+    true,
+  );
 
   const currentCultureName = i18n.language;
 
@@ -185,16 +191,19 @@ export default inject(
     filesActionsStore,
     selectedFolderStore,
   }) => {
-    const { isAuthenticated } = authStore;
     const { enableAdmMess, wizardToken, theme, cultures, isFrame } =
       settingsStore;
-    const { isPublicRoom, onOpenSignInWindow, windowIsOpen } = publicRoomStore;
+    const { isPublicRoom, onOpenSignInWindow, windowIsOpen, validationData } =
+      publicRoomStore;
     const { moveToPublicRoom } = filesActionsStore;
     const { navigationPath, id } = selectedFolderStore;
 
     const rootFolderId = navigationPath.length
       ? navigationPath[navigationPath.length - 1]?.id
       : id;
+
+    const isAuthenticated =
+      validationData?.isAuthenticated || authStore.isAuthenticated;
 
     return {
       enableAdmMess,

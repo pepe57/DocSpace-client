@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -100,22 +100,5 @@ export const WithError: Story = {
   args: {
     ...Default.args,
     hasError: true,
-  },
-};
-
-export const FocusedOnRender: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    focusOnRender: true,
-  },
-};
-
-export const CustomStyle: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    className: "custom-time-picker",
-    classNameInput: "custom-time-input",
   },
 };

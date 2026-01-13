@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,10 +26,9 @@
 
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-
-import { createGetRestoreProgressHandler } from "../../__mocks__/storybook/handlers/portal/getRestoreProgress";
-
 import { PreparationPortal } from ".";
+import { createGetRestoreProgressHandler } from "../../__mocks__/storybook/handlers/portal/restore";
+import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
 
 const meta = {
   title: "Pages/PreparationPortal",
@@ -57,6 +56,7 @@ const meta = {
     },
   },
   decorators: [
+    i18nextStoryDecorator,
     (Story) => (
       <div style={{ height: "800px", width: "100%", overflow: "hidden" }}>
         <Story />

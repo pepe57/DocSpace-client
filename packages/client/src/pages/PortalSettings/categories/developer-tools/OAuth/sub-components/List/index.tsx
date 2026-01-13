@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -49,7 +49,7 @@ interface ListProps {
   currentDeviceType: DeviceType;
   apiOAuthLink: string;
   logoText: string;
-  isLoading: boolean;
+  isLoading?: boolean;
   isError: boolean;
 }
 
@@ -96,6 +96,7 @@ const List = ({
           tag="a"
           style={isError ? undefined : { marginBottom: "20px" }}
           color="accent"
+          dataTestId="oauth_guide_link"
         >
           {t("OAuth:OAuth")} {t("Common:Guide")}
         </Link>

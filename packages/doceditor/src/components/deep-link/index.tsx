@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
+import Image from "next/image";
 
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -39,7 +39,9 @@ import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { DeepLinkType } from "@docspace/shared/enums";
 
-import { getDeepLink } from "./DeepLink.helper";
+import { iconSize32 } from "@docspace/shared/utils/image-helpers";
+import { getDeepLink, redirectToStore } from "./DeepLink.helper";
+
 import {
   StyledDeepLink,
   StyledBodyWrapper,
@@ -51,7 +53,6 @@ import {
   StyledBody,
 } from "./DeepLink.styled";
 import { DeepLinkProps } from "./DeepLink.types";
-import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 
 const DeepLink = ({
   fileInfo,
@@ -64,6 +65,9 @@ const DeepLink = ({
   const theme = useTheme();
 
   const [isRemember, setIsRemember] = useState(false);
+
+  const isOpenInAppOnly = deepLinkSettings === DeepLinkType.App;
+
   const onChangeCheckbox = () => {
     setIsRemember(!isRemember);
   };
@@ -76,13 +80,18 @@ const DeepLink = ({
       fileInfo,
       deepLinkConfig,
       window.location.href,
+      isOpenInAppOnly,
     );
   };
 
   const onStayBrowserClick = () => {
     if (isRemember) localStorage.setItem("defaultOpenDocument", "web");
-    window.location.replace(window.location.search + "&without_redirect=true");
+    window.location.replace(`${window.location.search}&without_redirect=true`);
     setIsShowDeepLink(false);
+  };
+
+  const onDownloadAppClick = () => {
+    redirectToStore(deepLinkConfig);
   };
 
   const getFileIcon = () => {
@@ -101,8 +110,6 @@ const DeepLink = ({
 
   const bgPattern = getBgPattern(theme.currentColorScheme?.id);
 
-  if (deepLinkSettings === DeepLinkType.App) return null;
-
   return (
     <StyledWrapper>
       <BgBlock bgPattern={bgPattern} />
@@ -116,36 +123,55 @@ const DeepLink = ({
               <StyledBodyWrapper>
                 <Text className="title">{t("DeepLink:OpeningDocument")}</Text>
                 <StyledFileTile>
-                  <img src={getFileIcon() ?? ""} alt="portal-logo" />
+                  <Image
+                    src={getFileIcon() ?? ""}
+                    alt="portal-logo"
+                    width={32}
+                    height={32}
+                  />
                   <Text fontSize="14px" fontWeight="600" truncate>
                     {getFileTitle()}
                   </Text>
                 </StyledFileTile>
-                <Text>{t("DeepLink:DeepLinkText")}</Text>
+                <Text>
+                  {isOpenInAppOnly
+                    ? t("DeepLink:DeepLinkOnlyAppText")
+                    : t("DeepLink:DeepLinkText")}
+                </Text>
               </StyledBodyWrapper>
               <StyledActionsWrapper>
-                <Checkbox
-                  label={t("DeepLink:RememberChoice")}
-                  isChecked={isRemember}
-                  onChange={onChangeCheckbox}
-                />
+                {!isOpenInAppOnly ? (
+                  <Checkbox
+                    label={t("DeepLink:RememberChoice")}
+                    isChecked={isRemember}
+                    onChange={onChangeCheckbox}
+                  />
+                ) : null}
                 <Button
                   size={ButtonSize.medium}
                   primary
-                  label={t("DeepLink:OpenInApp")}
-                  onClick={onOpenAppClick}
+                  label={
+                    isOpenInAppOnly
+                      ? t("DeepLink:DownloadApp")
+                      : t("DeepLink:OpenInApp")
+                  }
+                  onClick={
+                    isOpenInAppOnly ? onDownloadAppClick : onOpenAppClick
+                  }
                 />
-                <Link
-                  className="stay-link"
-                  type={LinkType.action}
-                  fontSize="13px"
-                  fontWeight="600"
-                  isHovered
-                  color={theme.currentColorScheme?.main?.accent}
-                  onClick={onStayBrowserClick}
-                >
-                  {t("DeepLink:StayInBrowser")}
-                </Link>
+                {isOpenInAppOnly ? null : (
+                  <Link
+                    className="stay-link"
+                    type={LinkType.action}
+                    fontSize="13px"
+                    fontWeight="600"
+                    isHovered
+                    color={theme.currentColorScheme?.main?.accent}
+                    onClick={onStayBrowserClick}
+                  >
+                    {t("DeepLink:StayInBrowser")}
+                  </Link>
+                )}
               </StyledActionsWrapper>
             </StyledDeepLink>
           </FormWrapper>

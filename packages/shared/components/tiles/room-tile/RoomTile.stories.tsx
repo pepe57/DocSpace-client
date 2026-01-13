@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,9 @@ import { Meta, StoryObj } from "@storybook/react";
 import { ReactSVG } from "react-svg";
 import PublicRoomIconReactSvgUrl from "PUBLIC_DIR/images/icons/32/room/public.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
+
+import { RoomsType } from "../../../enums";
+
 import { Link } from "../../link";
 import { IconButton } from "../../icon-button";
 import { IconSizeType } from "../../../utils";
@@ -126,7 +129,7 @@ export const Default: Story = {
       tags: [
         {
           label: "Collaboration",
-          roomType: "collaboration",
+          roomType: RoomsType.EditingRoom,
         },
       ],
       contextOptions,

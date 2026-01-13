@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -55,6 +55,7 @@ const defaultCompanySettings = {
   site: "www.example.com",
   isDefault: true,
   isLicensor: true,
+  hideAbout: true,
 };
 
 const defaultBuildInfo = {
@@ -65,6 +66,8 @@ const defaultBuildInfo = {
 
 export const Default: Story = {
   args: {
+    displayAbout: false,
+    isBrandingAvailable: true,
     isSettingPaid: true,
     companySettings: defaultCompanySettings,
     onSave: (address, companyName, email, phone, site) =>
@@ -88,6 +91,8 @@ export const Default: Story = {
 
 export const Paid: Story = {
   args: {
+    displayAbout: false,
+    isBrandingAvailable: true,
     isSettingPaid: false,
     companySettings: defaultCompanySettings,
     onSave: (address, companyName, email, phone, site) =>

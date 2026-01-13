@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -139,7 +139,7 @@
 }
 
 .header {
-  &.displayTypeModal {
+  &.displayTypeModal:not(&.withoutHeaderMargin) {
     margin-bottom: 16px;
   }
 }
@@ -152,6 +152,7 @@
   :global(#modal-scroll > .scroll-wrapper > .scroller > .scroll-body) {
     margin-inline-end: 0 !important;
     padding-inline-end: 16px !important;
+    height: 100%;
   }
 
   &.scrollLocked {
@@ -164,7 +165,7 @@
     }
   }
 
-  &.displayTypeModal {
+  &.displayTypeModal:not(&.withoutPadding) {
     padding-bottom: 16px;
 
     &.hasFooter {

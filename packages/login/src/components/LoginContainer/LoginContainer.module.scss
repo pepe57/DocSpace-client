@@ -1,5 +1,5 @@
 /*!
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -110,6 +110,10 @@
       line-height: 28px;
       color: var(--login-header-color);
 
+      &.confirm-email-change {
+        padding-bottom: 8px;
+      }
+
       @include mixins.mobile {
         overflow: hidden;
         display: block;
@@ -117,6 +121,10 @@
 
         padding-top: 32px;
         padding-bottom: 32px;
+
+        .confirm-email-change {
+          padding-bottom: 8px;
+        }
       }
     }
 
@@ -258,7 +266,7 @@
       }
     }
 
-    .logo-wrapper {
+    :global(.logo-wrapper) {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -291,11 +299,7 @@
       color: var(--login-text-colors);
     }
 
-    .input-block-icon {
-      padding-inline-end: 12px;
-    }
-
-    .wrapper {
+    :global(.wrapper) {
       height: 20px;
     }
   }

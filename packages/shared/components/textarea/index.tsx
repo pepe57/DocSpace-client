@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -68,6 +68,9 @@ const Textarea = ({
   hasNumeration = false,
   isFullHeight = false,
   classNameCopyIcon,
+  isChatMode = false,
+  dataTestId,
+  onKeyDown,
 }: TextareaProps) => {
   const { isRTL } = useInterfaceDirection();
 
@@ -104,8 +107,11 @@ const Textarea = ({
   }, [modifiedValue, fontSize, heightTextArea, hasNumeration]);
 
   const handleTextareaClick = useCallback(() => {
-    if (areaRef.current && enableCopy) {
-      areaRef.current.select();
+    if (areaRef.current) {
+      areaRef.current.focus();
+      if (enableCopy) {
+        areaRef.current.select();
+      }
     }
   }, [enableCopy]);
 
@@ -146,6 +152,7 @@ const Textarea = ({
         [styles.defaultHeight]: !heightScale && !isFullHeight,
         [styles.isJSONField]: isJSONField && enableCopy,
         [styles.copy]: enableCopy,
+        [styles.scrollbar]: isChatMode,
       })}
       style={
         {
@@ -165,12 +172,13 @@ const Textarea = ({
       ) : null}
 
       <Scrollbar
-        className={classNames(styles.scrollbar, className, {
+        className={classNames(className, {
           [styles.heightScale]: heightScale,
           [styles.isFullHeight]: isFullHeight,
           [styles.defaultHeight]: !heightScale && !isFullHeight,
           [styles.hasError]: isError || hasError,
           [styles.isDisabled]: isDisabled,
+          [styles.scrollbar]: !isChatMode,
         })}
         style={
           {
@@ -217,9 +225,11 @@ const Textarea = ({
           ref={areaRef}
           dir="auto"
           data-dir={isRTL ? "rtl" : undefined}
-          data-testid="textarea"
+          data-testid={dataTestId ?? "textarea"}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
+          onClick={(e) => e.stopPropagation()}
+          onKeyDown={onKeyDown}
         />
       </Scrollbar>
     </div>

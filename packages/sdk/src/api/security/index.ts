@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -33,13 +33,20 @@ import { logger } from "@/../logger.mjs";
 export async function getCSP(): Promise<TGetCSPSettings | undefined> {
   logger.debug("Start GET /security/csp");
 
-  const [req] = await createRequest([`/security/csp`], [["", ""]], "GET");
+  try {
+    const [req] = await createRequest([`/security/csp`], [["", ""]], "GET");
 
-  const res = await fetch(req, { next: { revalidate: 300 } });
+    const res = await fetch(req, { next: { revalidate: 300 } });
 
-  if (!res.ok) return;
+    if (!res.ok) {
+      logger.error(`GET /security/csp failed: ${res.status}`);
+      return;
+    }
 
-  const csp = await res.json();
+    const csp = await res.json();
 
-  return csp.response;
+    return csp.response;
+  } catch (error) {
+    logger.error(`Error in getCSP: ${error}`);
+  }
 }

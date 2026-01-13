@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -69,6 +69,10 @@ const Tooltip = ({
   opacity = 1,
   imperativeModeOnly,
   noUserSelect,
+  dataTestId,
+  zIndex,
+  tooltipStyle,
+  delayShow,
   ...rest
 }: TooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -83,7 +87,7 @@ const Tooltip = ({
     mouseleave: !openOnClick,
   };
 
-  const tooltipStyle = maxWidth
+  const containerStyle = maxWidth
     ? ({ ...style, "--tooltip-max-width": maxWidth } as React.CSSProperties)
     : style;
 
@@ -96,8 +100,12 @@ const Tooltip = ({
       <div
         ref={tooltipRef}
         className={tooltipClass}
-        style={tooltipStyle}
-        data-testid="tooltip"
+        style={
+          zIndex
+            ? { ...containerStyle, zIndex, position: "relative" }
+            : containerStyle
+        }
+        data-testid={dataTestId ?? "tooltip"}
       >
         <ReactTooltip
           ref={ref}
@@ -119,6 +127,7 @@ const Tooltip = ({
           imperativeModeOnly={imperativeModeOnly}
           className="__react_component_tooltip"
           globalCloseEvents={globalCloseEvents}
+          delayShow={delayShow}
           middlewares={[
             offset(rest.offset ?? DEFAULT_OFFSET),
             flip({
@@ -141,6 +150,7 @@ const Tooltip = ({
             }),
             shift(),
           ]}
+          style={tooltipStyle}
           {...rest}
         >
           {children}
@@ -167,3 +177,5 @@ Tooltip.displayName = "Tooltip";
 export type { TFallbackAxisSideDirection, TTooltipPlace, TGetTooltipContent };
 
 export { Tooltip };
+export { withTooltip } from "./sub-components/withTooltip";
+export { TooltipContainer } from "./sub-components/TooltipContainer";

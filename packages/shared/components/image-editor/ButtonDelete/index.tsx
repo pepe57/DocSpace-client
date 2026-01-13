@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,6 +54,7 @@ import { ReactSVG } from "react-svg";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import classNames from "classnames";
 import { TTranslation } from "../../../types";
+import { TooltipContainer } from "../../tooltip";
 
 import styles from "./ButtonDelete.module.scss";
 
@@ -67,7 +68,8 @@ const ButtonDelete = ({
   className?: string;
 }) => {
   return (
-    <div
+    <TooltipContainer
+      as="div"
       className={classNames(
         "icon_cropper-delete_button",
         styles.buttonDelete,
@@ -75,6 +77,7 @@ const ButtonDelete = ({
       )}
       onClick={onClick}
       title={t("Common:Delete")}
+      data-testid="cropper_delete_button"
     >
       <ReactSVG src={TrashReactSvgUrl} />
       <div
@@ -82,7 +85,7 @@ const ButtonDelete = ({
       >
         {t("Common:Delete")}
       </div>
-    </div>
+    </TooltipContainer>
   );
 };
 

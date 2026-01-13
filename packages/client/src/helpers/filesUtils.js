@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,6 +43,9 @@ export const getRoomTypeName = (room, t) => {
   switch (room) {
     case RoomsType.CustomRoom:
       return t("Common:CustomRooms");
+
+    case RoomsType.AIRoom:
+      return t("Common:AIRoomTitle");
 
     case RoomsType.FillingFormsRoom:
       return t("Common:FillingFormRooms");

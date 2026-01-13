@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@
 "use client";
 
 import React from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { useRouter } from "next/navigation";
@@ -51,46 +50,14 @@ import type { TDomainValidator } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 
 import { useStores } from "@/hooks/useStores";
-
-const StyledModal = styled(ModalDialog)`
-  #modal-dialog {
-    min-height: 326px;
-  }
-
-  .create-portal-input-block {
-    padding: 16px 0;
-  }
-
-  .cancel-btn {
-    display: inline-block;
-    margin-inline-start: 8px;
-  }
-
-  .create-portal-checkbox {
-    margin-bottom: 10px;
-  }
-
-  .create-portal-input {
-    width: 100%;
-  }
-
-  .error-text {
-    color: ${({ theme }) => theme.management.errorColor};
-  }
-
-  .sub-text {
-    color: ${({ theme }) => theme.management.textColor};
-  }
-`;
+import styles from "../dialogs.module.scss";
 
 export const CreatePortalDialog = observer(
   ({
-    tenantAlias,
     baseDomain,
     domainValidator,
     user,
   }: {
-    tenantAlias: string;
     baseDomain: string;
     domainValidator: TDomainValidator;
     user: TUser;
@@ -120,6 +87,10 @@ export const CreatePortalDialog = observer(
       if (registerError) setRegisterError(null);
     };
 
+    const onClose = () => {
+      setCreatePortalDialogVisible(false);
+    };
+
     const onHandleClick = async () => {
       const firstName = user?.firstName;
       const lastName = user?.lastName;
@@ -134,7 +105,6 @@ export const CreatePortalDialog = observer(
       };
 
       const protocol = window?.location?.protocol;
-      const host = `${tenantAlias}.${baseDomain}`;
 
       const isValidPortalName = validatePortalName(
         name,
@@ -146,8 +116,8 @@ export const CreatePortalDialog = observer(
       if (isValidPortalName) {
         setIsLoading(true);
         await createNewPortal(data)
-          .then(async (data) => {
-            const { tenant } = data as TNewPortalResponse;
+          .then(async (d) => {
+            const { tenant } = d as TNewPortalResponse;
             if (visit) {
               const portalUrl = `${protocol}//${tenant?.domain}/`;
 
@@ -167,12 +137,8 @@ export const CreatePortalDialog = observer(
       }
     };
 
-    const onClose = () => {
-      setCreatePortalDialogVisible(false);
-    };
-
     return (
-      <StyledModal
+      <ModalDialog
         isLarge
         visible={visible}
         onClose={onClose}
@@ -182,50 +148,55 @@ export const CreatePortalDialog = observer(
           {t("CreatingPortal", { productName: t("Common:ProductName") })}
         </ModalDialog.Header>
         <ModalDialog.Body>
-          <Text noSelect={true}>
+          <Text>
             {t("CreateSpaceDescription", {
               productName: t("Common:ProductName"),
             })}
           </Text>
-          <div className="create-portal-input-block">
+          <div className={styles.createPortalInputBlock}>
             <Text
               fontSize="13px"
               fontWeight="600"
               style={{ paddingBottom: "5px" }}
             >
-              {t("PortalName")}
+              {t("PortalName", {
+                productName: t("Common:ProductName"),
+              })}
             </Text>
             <TextInput
+              testId="create-portal-input"
               type={InputType.text}
               size={InputSize.base}
               onChange={onHandleName}
               value={name}
               hasError={!!registerError}
               placeholder={t("EnterName")}
-              className="create-portal-input"
               isAutoFocussed
+              scale
             />
             <div>
-              <Text className="error-text" fontSize="12px" fontWeight="400">
+              <Text
+                className={styles.errorText}
+                fontSize="12px"
+                fontWeight="400"
+              >
                 {registerError}
               </Text>
             </div>
             <div style={{ marginTop: "6px", wordWrap: "break-word" }}>
               <Text
-                className="sub-text"
+                className={styles.subText}
                 fontSize="12px"
                 fontWeight="400"
               >{`${name}.${baseDomain}`}</Text>
             </div>
           </div>
-          <div>
+          <div className={styles.createPortalCheckboxes}>
             <Checkbox
-              className="create-portal-checkbox"
               label={t("VisitSpace")}
-              onChange={() => setVisit((visit) => !visit)}
+              onChange={() => setVisit((v) => !v)}
               isChecked={visit}
             />
-
             <Checkbox
               label={t("RestrictAccess")}
               onChange={() => setRestrictAccess((access) => !access)}
@@ -235,6 +206,7 @@ export const CreatePortalDialog = observer(
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button
+            testId="create-portal-button"
             isLoading={isLoading}
             key="CreateButton"
             label={t("Common:Create")}
@@ -251,8 +223,7 @@ export const CreatePortalDialog = observer(
             scale
           />
         </ModalDialog.Footer>
-      </StyledModal>
+      </ModalDialog>
     );
   },
 );
-

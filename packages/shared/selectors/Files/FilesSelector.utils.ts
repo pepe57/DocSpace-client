@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,13 +30,15 @@ import {
   FilesSelectorFilterTypes,
   FilterType,
 } from "../../enums";
+import { TEMPLATE_GALLERY_FORMATS } from "../../constants";
 
 export const configureFilterByFilterParam = (
   filter: FilesFilter,
   filterParam: string | number,
   extsWebEdited: string[],
+  applyFilterOption?: ApplyFilterOption,
 ) => {
-  filter.applyFilterOption = ApplyFilterOption.Files;
+  filter.applyFilterOption = applyFilterOption ?? ApplyFilterOption.Files;
   switch (filterParam) {
     case FilesSelectorFilterTypes.DOCX:
       filter.extension = FilesSelectorFilterTypes.DOCX;
@@ -61,6 +63,10 @@ export const configureFilterByFilterParam = (
 
     case FilterType.DocumentsOnly:
       filter.filterType = FilterType.DocumentsOnly;
+      break;
+
+    case FilterType.DiagramsOnly:
+      filter.filterType = FilterType.DiagramsOnly;
       break;
 
     case FilterType.PDFForm:
@@ -106,6 +112,14 @@ export const configureFilterByFilterParam = (
         .join(",");
       break;
 
+    case "TemplateGalleryTypes":
+      filter.extension = TEMPLATE_GALLERY_FORMATS.map((extension) =>
+        extension.slice(1),
+      ).join(",");
+      break;
+
     default:
+      filter.extension = filterParam.toString();
+      break;
   }
 };

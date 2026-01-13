@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { ReactSVG } from "react-svg";
 import PublicRoomTemplateIconReactSvgUrl from "PUBLIC_DIR/images/icons/32/template/public.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
-import { ContextMenuModel } from "@docspace/shared/components/context-menu";
+import { ContextMenuModel } from "../../context-menu";
 import { Link } from "../../link";
 import { IconSizeType } from "../../../utils";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";

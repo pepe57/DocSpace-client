@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,12 +26,15 @@
 
 "use client";
 
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import type { TPortals } from "@docspace/shared/api/management/types";
+
+import { useEndAnimation } from "@/hooks/useEndAnimation";
 
 import { Header } from "./header";
 import { Spaces } from "./spaces";
 import { DomainSettings } from "./domain-settings";
-import { StyledWrapper } from "./multiple.styled";
+import styles from "./multiple.module.scss";
 
 interface IProps {
   baseDomain: string;
@@ -44,12 +47,15 @@ export const MultipleSpaces = ({
   portals,
   tenantAlias,
 }: IProps) => {
+  const isLoading = useEndAnimation();
+
   return (
-    <StyledWrapper>
-      <Header />
-      <Spaces portals={portals} tenantAlias={tenantAlias} />
-      <DomainSettings baseDomain={baseDomain} />
-    </StyledWrapper>
+    <LoaderWrapper isLoading={isLoading}>
+      <div className={styles.wrapper} data-testid="multiple-spaces-wrapper">
+        <Header />
+        <Spaces portals={portals} tenantAlias={tenantAlias} />
+        <DomainSettings baseDomain={baseDomain} />
+      </div>
+    </LoaderWrapper>
   );
 };
-

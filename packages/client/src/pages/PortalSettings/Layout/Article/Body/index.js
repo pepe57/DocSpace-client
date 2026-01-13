@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -67,6 +67,8 @@ const ArticleBodyContent = (props) => {
   const prevLocation = React.useRef(null);
 
   const location = useLocation();
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
   // React.useEffect(() => {
   //   // prevLocation.current = location;
@@ -143,20 +145,31 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["6-0"]);
       }
 
-      if (location.pathname.includes("developer")) {
+      if (location.pathname.includes("ai-settings")) {
         setSelectedKeys(["7-0"]);
       }
 
-      if (location.pathname.includes("delete-data")) {
+      if (location.pathname.includes("developer")) {
         setSelectedKeys(["8-0"]);
       }
 
-      if (location.pathname.includes("payments")) {
+      if (location.pathname.includes("delete-data")) {
         setSelectedKeys(["9-0"]);
       }
 
-      if (location.pathname.includes("bonus")) {
+      if (location.pathname.includes("payments")) {
         setSelectedKeys(["10-0"]);
+      }
+
+      if (
+        location.pathname.includes("services") &&
+        !location.pathname.includes("third-party-services")
+      ) {
+        setSelectedKeys(["11-0"]);
+      }
+
+      if (location.pathname.includes("bonus")) {
+        setSelectedKeys(["12-0"]);
       }
     }
   }, [
@@ -177,7 +190,7 @@ const ArticleBodyContent = (props) => {
   };
 
   const onSelect = () => {
-    if (currentDeviceType === DeviceType.mobile) {
+    if (isMobileView) {
       toggleArticleOpen();
     }
   };
@@ -230,6 +243,10 @@ const ArticleBodyContent = (props) => {
         return t("DataImport");
       case "StorageManagement":
         return t("StorageManagement");
+      case "Services":
+        return t("Services");
+      case "AISettings":
+        return t("Settings:AISettings");
       default:
         throw new Error("Unexpected translation key");
     }
@@ -252,14 +269,15 @@ const ArticleBodyContent = (props) => {
 
     if (standalone) {
       const deletionTKey = isCommunity
-        ? "Common:PaymentsTitle"
-        : "Common:Bonus";
+        ? ["Common:PaymentsTitle", "Services"]
+        : ["Common:Bonus", "Services"];
 
-      const index = resultTree.findIndex((el) => el.tKey === deletionTKey);
-
-      if (index !== -1) {
-        resultTree.splice(index, 1);
-      }
+      deletionTKey.forEach((key) => {
+        const index = resultTree.findIndex((el) => el.tKey === key);
+        if (index !== -1) {
+          resultTree.splice(index, 1);
+        }
+      });
     } else {
       const index = resultTree.findIndex((n) => n.tKey === "Common:Bonus");
       if (index !== -1) {
@@ -276,15 +294,21 @@ const ArticleBodyContent = (props) => {
 
     if (selectedKeys.length === 0) return null;
 
-    resultTree.forEach((item) => {
+    const resultTreeLength = resultTree.length;
+
+    resultTree.forEach((item, index) => {
       const icon = getCatalogIconUrlByType(item.type, {
         isSettingsCatalog: true,
       });
+
+      const isLastIndex = resultTreeLength - 1 === index;
 
       const patternSearching = selectedKeys[0].split("-");
       const selectedKey = patternSearching[0];
       const title = mapKeys(item.tKey);
       const linkData = getLinkData(item.key);
+
+      const style = { marginTop: `${item.key.includes(9) ? "16px" : "0"}` };
 
       items.push(
         <ArticleItem
@@ -299,10 +323,10 @@ const ArticleBodyContent = (props) => {
           onClick={(e) => onSelect(item.key, e)}
           linkData={linkData}
           folderId={item.id}
-          style={{
-            margin: `${item.key.includes(9) ? "16px 0px" : "0"}`,
-          }}
+          style={style}
           $currentColorScheme={currentColorScheme}
+          withAnimation={!isMobileView}
+          isEndOfBlock={isLastIndex}
         />,
       );
     });
@@ -331,7 +355,7 @@ export default inject(
 
     const { isNotPaidPeriod, isCommunity } = currentTariffStatusStore;
     const { user } = userStore;
-    const { isOwner } = user;
+    const { isOwner } = user || {};
     const {
       standalone,
       showText,

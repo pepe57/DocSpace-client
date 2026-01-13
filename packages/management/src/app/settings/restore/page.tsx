@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,8 +29,6 @@ import {
   getBackupProgress,
   getBackupSchedule,
   getBackupStorage,
-  getFoldersTree,
-  getPortalTariff,
   getQuota,
   getSettingsFiles,
   getSettingsThirdParty,
@@ -38,8 +36,11 @@ import {
 } from "@/lib/actions";
 
 import Restore from "./page.client";
+import { logger } from "../../../../logger.mjs";
 
 async function Page() {
+  logger.info("Restore page");
+
   const [
     account,
     backupSchedule,

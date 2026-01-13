@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -374,7 +374,7 @@
   :global {
     .combo-button {
       background: var(--filter-sort-button-background);
-      padding-inline-end: 4px;
+      padding-inline: 4px !important;
       width: 32px;
       height: 32px;
 
@@ -382,9 +382,9 @@
         cursor: pointer;
       }
 
-      :hover {
+      &:hover {
         border-color: var(--icon-button-hover-color);
-        svg {
+        .optionalBlock .icon-button_svg svg {
           path {
             fill: var(--icon-button-hover-color);
           }
@@ -542,7 +542,9 @@
 }
 
 .viewSelector {
-  @include mixins.tablet-and-below {
-    display: none;
+  &.desktopOnly {
+    @include mixins.tablet-and-below {
+      display: none;
+    }
   }
 }

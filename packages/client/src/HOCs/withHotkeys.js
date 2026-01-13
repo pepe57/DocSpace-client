@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,6 +31,7 @@ import { useNavigate } from "react-router";
 import { Events, FolderType, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { copySelectedText } from "@docspace/shared/utils/copy";
 
 const withHotkeys = (Component) => {
   const WithHotkeys = (props) => {
@@ -74,8 +75,10 @@ const withHotkeys = (Component) => {
       isTrashFolder,
       isArchiveFolder,
       isRoomsFolder,
+      isAIAgentsFolder,
+      isAIRoom,
 
-      selection,
+      getSelection,
       setFavoriteAction,
       filesIsLoading,
 
@@ -93,6 +96,9 @@ const withHotkeys = (Component) => {
       isFormRoom,
       isParentFolderFormRoom,
       isIndexEditingMode,
+      enableSelection,
+      openContextMenu,
+      askAIAction,
     } = props;
 
     const navigate = useNavigate();
@@ -111,8 +117,11 @@ const withHotkeys = (Component) => {
     };
 
     const onKeyDown = (e) => {
+      const contextMenuIsOpen =
+        document.getElementsByClassName("p-contextmenu").length;
+
       const someDialogIsOpen = checkDialogsOpen();
-      setIsEnabled(!someDialogIsOpen);
+      setIsEnabled(!someDialogIsOpen || !contextMenuIsOpen);
 
       if (isIndexEditingMode) return;
 
@@ -126,6 +135,8 @@ const withHotkeys = (Component) => {
       isArchiveFolder ||
       isRoomsFolder ||
       isVisitor ||
+      isAIAgentsFolder ||
+      isAIRoom ||
       !security?.Create;
 
     const onCreate = (extension) => {
@@ -148,6 +159,8 @@ const withHotkeys = (Component) => {
     };
 
     const onRename = () => {
+      const selection = getSelection();
+
       if (selection.length === 1) {
         const item = selection[0];
 
@@ -155,6 +168,7 @@ const withHotkeys = (Component) => {
 
         const event = new Event(Events.RENAME);
         event.item = item;
+
         window.dispatchEvent(event);
       }
     };
@@ -168,6 +182,25 @@ const withHotkeys = (Component) => {
 
         const event = new Event(Events.ROOM_CREATE);
         window.dispatchEvent(event);
+      }
+    };
+
+    const onCreateAIAgent = () => {
+      if (!isVisitor && isAIAgentsFolder && security?.Create) {
+        const event = new Event(Events.AGENT_CREATE);
+        window.dispatchEvent(event);
+      }
+    };
+
+    const onAskAI = () => {
+      const selection = getSelection();
+
+      if (selection.length === 1) {
+        const item = selection[0];
+
+        if (!item.contextOptions.includes("ask-ai")) return;
+
+        askAIAction(item);
       }
     };
 
@@ -195,9 +228,20 @@ const withHotkeys = (Component) => {
     useHotkeys(
       "*",
       (e) => {
+        const contextMenuIsOpen =
+          document.getElementsByClassName("p-contextmenu").length;
         const someDialogIsOpen = checkDialogsOpen();
 
-        if (e.shiftKey || e.ctrlKey || someDialogIsOpen || isIndexEditingMode)
+        if (someDialogIsOpen || contextMenuIsOpen) return e;
+
+        if (
+          (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||
+          ((e.key === "Meta" || e.key === "Control") && e.altKey)
+        ) {
+          return enableSelection(e);
+        }
+
+        if (e.shiftKey || e.ctrlKey || isIndexEditingMode || e.type === "keyup")
           return;
 
         switch (e.key) {
@@ -220,12 +264,15 @@ const withHotkeys = (Component) => {
           case "h": {
             return selectLeft();
           }
+          case "Enter": {
+            return openItem();
+          }
 
           default:
             break;
         }
       },
-      hotkeysFilter,
+      { ...hotkeysFilter, keyup: true, keydown: true },
     );
 
     // //Select bottom element
@@ -253,7 +300,14 @@ const withHotkeys = (Component) => {
     useHotkeys("shift+LEFT", () => multiSelectLeft(), hotkeysFilter);
 
     // Select all files and folders
-    useHotkeys("shift+a, ctrl+a", selectAll, hotkeysFilter);
+    useHotkeys(
+      "ctrl+a, command+a",
+      (e) => {
+        e.preventDefault();
+        selectAll();
+      },
+      hotkeysFilter,
+    );
 
     // Deselect all files and folders
     useHotkeys("shift+n, ESC", deselectAll, hotkeysFilter);
@@ -271,10 +325,17 @@ const withHotkeys = (Component) => {
     useHotkeys("ctrl+RIGHT, command+RIGHT", moveCaretRight, hotkeysFilter);
 
     // Open item
-    useHotkeys("Enter", () => openItem(t), hotkeysFilter);
+    // useHotkeys("Enter", () => openItem(t), hotkeysFilter);
 
     // Back to parent folder
-    useHotkeys("Backspace", onClickBack, hotkeysFilter);
+    useHotkeys(
+      "Backspace",
+      () => {
+        const someDialogIsOpen = checkDialogsOpen();
+        if (!someDialogIsOpen) onClickBack();
+      },
+      hotkeysFilter,
+    );
 
     // Change viewAs
     useHotkeys(
@@ -330,10 +391,25 @@ const withHotkeys = (Component) => {
       ...{ keyup: true },
     });
 
+    useHotkeys("Shift+c", openContextMenu, {
+      ...hotkeysFilter,
+      ...{ keyup: true },
+    });
+
+    // Create AI agent
+    useHotkeys("Shift+a", () => onCreateAIAgent(), {
+      ...hotkeysFilter,
+      ...{ keyup: true },
+    });
+
     // Delete selection
     useHotkeys(
       "delete, shift+3, command+delete, command+Backspace",
       () => {
+        if (isAIAgentsFolder && selection?.length > 1) {
+          return;
+        }
+
         if (isArchiveFolder) {
           isAvailableOption("unarchive") && deleteRooms(t);
           return;
@@ -348,9 +424,8 @@ const withHotkeys = (Component) => {
           if (isRecentFolder) return;
 
           if (isFavoritesFolder) {
-            const items = selection.map((item) => item.id);
-
-            setFavoriteAction("remove", items)
+            const selection = getSelection();
+            setFavoriteAction("remove", selection)
               .then(() => toastr.success(t("RemovedFromFavorites")))
               .catch((err) => toastr.error(err));
 
@@ -405,6 +480,9 @@ const withHotkeys = (Component) => {
 
     useHotkeys("f2", onRename, hotkeysFilter);
 
+    // Ask AI
+    useHotkeys("Ctrl+i, command+i", onAskAI, hotkeysFilter);
+
     // Upload file
     useHotkeys(
       "Shift+u",
@@ -422,6 +500,20 @@ const withHotkeys = (Component) => {
       () => {
         if (folderWithNoAction) return;
         uploadFile(true);
+      },
+
+      hotkeysFilter,
+    );
+
+    // Copy selected items to clipboard
+    useHotkeys(
+      "Ctrl+Shift+c, command+Shift+c",
+      (e) => {
+        const selection = getSelection();
+        if (!selection.length) return e;
+        e.preventDefault();
+
+        copySelectedText(e, viewAs, selection);
       },
 
       hotkeysFilter,
@@ -450,7 +542,7 @@ const withHotkeys = (Component) => {
         viewAs,
         setViewAs,
         enabledHotkeys,
-        selection,
+        getSelection,
         filesIsLoading,
       } = filesStore;
 
@@ -475,6 +567,8 @@ const withHotkeys = (Component) => {
         uploadFile,
         copyToClipboard,
         uploadClipboardFiles,
+        openContextMenu,
+        enableSelection,
       } = hotkeyStore;
 
       const {
@@ -490,6 +584,7 @@ const withHotkeys = (Component) => {
         deleteRooms,
         archiveRooms,
         isGroupMenuBlocked,
+        askAIAction,
       } = filesActionsStore;
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
@@ -503,6 +598,7 @@ const withHotkeys = (Component) => {
         isTrashFolder,
         isArchiveFolder,
         isRoomsFolder,
+        isAIAgentsFolder,
       } = treeFoldersStore;
 
       const { isWarningRoomsDialog } = currentQuotaStore;
@@ -542,6 +638,7 @@ const withHotkeys = (Component) => {
         deselectAll,
         activateHotkeys,
         onClickBack,
+        openContextMenu,
 
         uploadFile,
         enabledHotkeys,
@@ -552,9 +649,11 @@ const withHotkeys = (Component) => {
         isTrashFolder,
         isArchiveFolder,
         isRoomsFolder,
+        isAIAgentsFolder,
+        isAIRoom: selectedFolderStore.isAIRoom,
         isIndexEditingMode: indexingStore.isIndexEditingMode,
 
-        selection,
+        getSelection,
         setFavoriteAction,
         filesIsLoading,
 
@@ -573,6 +672,8 @@ const withHotkeys = (Component) => {
         isGroupMenuBlocked,
         isFormRoom,
         isParentFolderFormRoom,
+        enableSelection,
+        askAIAction,
       };
     },
   )(observer(WithHotkeys));

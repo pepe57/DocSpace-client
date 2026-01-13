@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,8 +30,8 @@ import { Toast } from "@docspace/shared/components/toast";
 import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
 import { LANGUAGE, SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { getDirectionByLanguage } from "@docspace/shared/utils/common";
+import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 
-import StyledComponentsRegistry from "@/utils/registry";
 import { Providers } from "@/providers";
 import {
   getColorTheme,
@@ -41,9 +41,10 @@ import {
 } from "@/utils/actions";
 
 import "../styles/globals.scss";
-import "../../../shared/styles/theme.scss";
+import "@docspace/shared/styles/theme.scss";
 import Scripts from "@/components/Scripts";
 import { TConfirmLinkParams } from "@/types";
+import { logger } from "@/../logger.mjs";
 
 export default async function RootLayout({
   children,
@@ -55,8 +56,8 @@ export default async function RootLayout({
   const searchParams = hdrs.get("x-confirm-query") ?? "";
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    console.log("is health check");
-    return <></>;
+    logger.info("get health check and return empty layout");
+    return null;
   }
 
   const queryParams = Object.fromEntries(
@@ -77,11 +78,20 @@ export default async function RootLayout({
   ]);
 
   if (
+    type === "EmailChange" &&
+    typeof settings !== "string" &&
+    queryParams?.redirected &&
+    !settings?.socketUrl
+  ) {
+    redirectUrl = "/login?emailChange=true";
+  }
+
+  if (
     type === "GuestShareLink" &&
     typeof settings !== "string" &&
     !settings?.socketUrl
   ) {
-    redirectUrl = "login";
+    redirectUrl = "/login";
   }
 
   if (settings === "access-restricted") redirectUrl = `/${settings}`;
@@ -92,7 +102,7 @@ export default async function RootLayout({
     const host = hdrs.get("host");
 
     const url = new URL(
-      config.wrongPortalNameUrl ??
+      config.wrongPortalNameUrl ||
         "https://www.onlyoffice.com/wrongportalname.aspx",
     );
 
@@ -102,21 +112,21 @@ export default async function RootLayout({
   }
 
   if (typeof settings !== "string" && settings?.wizardToken) {
-    redirectUrl = `wizard`;
+    redirectUrl = `/wizard`;
   }
 
   if (
     typeof settings !== "string" &&
     settings?.tenantStatus === TenantStatus.PortalRestore
   ) {
-    redirectUrl = `preparation-portal`;
+    redirectUrl = `/preparation-portal`;
   }
 
   if (
     typeof settings !== "string" &&
     settings?.tenantStatus === TenantStatus.PortalDeactivate
   ) {
-    redirectUrl = `unavailable`;
+    redirectUrl = `/unavailable`;
   }
 
   if (cookieLng && settings && typeof settings !== "string") {
@@ -142,6 +152,8 @@ export default async function RootLayout({
     "--color-scheme-text-buttons": currentColorScheme?.text.buttons,
 
     "--interface-direction": dirClass,
+
+    "--font-family": getFontFamilyDependingOnLanguage(locale),
   } as React.CSSProperties;
 
   return (
@@ -161,22 +173,24 @@ export default async function RootLayout({
         />
         <meta name="google" content="notranslate" />
       </head>
-      <body style={styles} className={`${dirClass} ${themeClass}`}>
-        <StyledComponentsRegistry>
-          <Providers
-            value={{
-              settings: typeof settings === "string" ? undefined : settings,
-              colorTheme,
-              systemTheme: systemTheme?.value as ThemeKeys,
-            }}
-            redirectURL={redirectUrl}
-            user={user}
-            locale={locale}
-          >
-            <Toast isSSR />
-            {children}
-          </Providers>
-        </StyledComponentsRegistry>
+      <body
+        style={styles}
+        className={`${dirClass} ${themeClass}`}
+        suppressHydrationWarning
+      >
+        <Providers
+          value={{
+            settings: typeof settings === "string" ? undefined : settings,
+            colorTheme,
+            systemTheme: systemTheme?.value as ThemeKeys,
+          }}
+          redirectURL={redirectUrl}
+          user={user}
+          locale={locale}
+        >
+          <Toast isSSR />
+          {children}
+        </Providers>
         <Scripts />
       </body>
     </html>

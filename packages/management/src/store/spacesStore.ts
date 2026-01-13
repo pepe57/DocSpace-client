@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,6 +39,7 @@ export class SpacesStore {
   deletePortalDialogVisible = false;
 
   domainDialogVisible = false;
+
   connectDialogVisible = false;
 
   currentPortal: Nullable<TPortals> = null;
@@ -58,7 +59,7 @@ export class SpacesStore {
 
   setDomainName = async (domain: string) => {
     try {
-      const res = await setDomainName(domain);
+      await setDomainName(domain);
     } catch (error) {
       console.log(error);
     }
@@ -80,4 +81,3 @@ export class SpacesStore {
     this.connectDialogVisible = connectDialogVisible;
   };
 }
-

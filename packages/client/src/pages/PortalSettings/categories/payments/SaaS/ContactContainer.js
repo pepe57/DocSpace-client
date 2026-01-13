@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,14 +41,15 @@ const ContactContainer = ({ t, salesEmail }) => {
   return (
     <StyledContactContainer>
       {salesEmail ? (
-        <Text as="span" noSelect fontWeight={600}>
-          {t("ContactUs")}
+        <Text as="span" fontWeight={600}>
+          {t("Common:ContactUs")}
           <Link
             className="sales-email-link"
             tag="a"
             fontWeight="600"
             href={`mailto:${salesEmail}`}
             color="accent"
+            dataTestId="sales_email_link"
           >
             {salesEmail}
           </Link>

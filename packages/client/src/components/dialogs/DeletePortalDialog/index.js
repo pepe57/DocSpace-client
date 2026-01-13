@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -55,7 +55,7 @@ const DeletePortalDialog = (props) => {
       displayType="modal"
     >
       <ModalDialog.Header>
-        {t("DeletePortal", { productName: t("Common:ProductName") })}
+        {t("Common:DeletePortal", { productName: t("Common:ProductName") })}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Trans t={t} i18nKey="DeletePortalInfo" ns="Settings">
@@ -69,6 +69,7 @@ const DeletePortalDialog = (props) => {
             href={stripeUrl}
             target="_blank"
             color="accent"
+            dataTestId="stripe_url_link"
           >
             on your Stripe customer portal.
           </Link>
@@ -83,6 +84,7 @@ const DeletePortalDialog = (props) => {
           scale
           primary
           onClick={onDeleteClick}
+          testId="submit_delete_portal_button"
         />
         <Button
           className="cancel-button"
@@ -91,6 +93,7 @@ const DeletePortalDialog = (props) => {
           size="normal"
           scale
           onClick={onClose}
+          testId="cancel_delete_portal_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

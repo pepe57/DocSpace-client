@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -55,6 +55,7 @@ const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
         disabled={!isLdapEnabled}
+        dataTestId="ldap_settings"
       />
       <MobileCategoryWrapper
         title={t("Ldap:LdapSyncTitle")}
@@ -64,6 +65,7 @@ const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
         disabled={!isLdapEnabled}
+        dataTestId="sync_data"
       />
     </StyledWrapper>
   );

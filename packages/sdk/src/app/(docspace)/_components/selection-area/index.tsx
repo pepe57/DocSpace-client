@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -25,6 +25,7 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
+
 "use client";
 
 import { observer } from "mobx-react";
@@ -48,11 +49,11 @@ const SelectionArea = observer(() => {
   const { filesViewAs } = useSettingsStore();
   const { items } = useFilesListStore();
 
-  let foldersLength = useMemo(
+  const foldersLength = useMemo(
     () => items.filter((item) => item.isFolder).length,
     [items],
   );
-  let filesLength = items.length - foldersLength;
+  const filesLength = items.length - foldersLength;
 
   const getCountOfMissingFilesTiles = (itemsLength: number) => {
     const division = itemsLength % countTilesInRow;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,6 @@ import EmptyTrashDialog from "./EmptyTrashDialog";
 import DeleteDialog from "./DeleteDialog";
 import DownloadDialog from "./DownloadDialog";
 import ConvertDialog from "./ConvertDialog";
-import DeleteThirdPartyDialog from "./DeleteThirdPartyDialog";
 import ConnectDialog from "./ConnectDialog/ConnectDialogWrapper";
 import ConflictResolveDialog from "./ConflictResolveDialog";
 import ChangeEmailDialog from "./ChangeEmailDialog";
@@ -55,7 +54,6 @@ import CreateRoomConfirmDialog from "./CreateRoomConfirmDialog";
 import PortalRenamingDialog from "./PortalRenamingDialog";
 import DataReassignmentDialog from "./DataReassignmentDialog";
 import SubmitToFormGallery from "./SubmitToFormGallery";
-import UnsavedChangesDialog from "./UnsavedChangesDialog";
 import DeleteLinkDialog from "./DeleteLinkDialog";
 import MoveToPublicRoom from "./MoveToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
@@ -68,64 +66,68 @@ import EditGroupMembersDialog from "./EditGroupMembersDialog";
 import DeleteGroupDialog from "./DeleteGroupDialog";
 import RoomLogoCoverDialog from "./RoomLogoCoverDialog";
 import RemoveGuestDialog from "./RemoveGuest";
-import GuestReleaseTipDialog from "./GuestReleaseTip";
 import DeleteVersionDialog from "./DeleteVersionDialog";
 import CancelOperationDialog from "./CancelOperationDialog";
 import FormFillingTipsDialog from "./FormFillingTipsDialog";
 import ReducedRightsDialog from "./ReducedRightsDialog";
 import SocialAuthWelcomeDialog from "./SocialAuthWelcomeDialog";
+import StorageTariffDeactiveted from "./StorageTariffDeactiveted";
+import ConnectAccountDialog from "./ConnectAccountDialog";
+import DisconnectAccountDialog from "./DisconnectAccountDialog";
+import CreateAgentDialog from "./CreateEditAgentDialog/CreateAgentDialog";
 import EditRoomGroupsDialog from "./EditRoomGroupsDialog";
 
 export {
-  EmptyTrashDialog,
-  DeleteDialog,
-  DownloadDialog,
-  ConvertDialog,
-  DeleteThirdPartyDialog,
-  ConnectDialog,
-  ConflictResolveDialog,
-  ChangeEmailDialog,
-  ChangePasswordDialog,
-  ChangePhoneDialog,
-  DeleteProfileEverDialog,
-  DeleteSelfProfileDialog,
-  DeleteOwnerProfileDialog,
-  SendInviteDialog,
-  ChangeUserStatusDialog,
-  ChangeUserTypeDialog,
-  ResetApplicationDialog,
-  BackupCodesDialog,
-  CreateRoomDialog,
-  CreateRoomConfirmDialog,
-  EditRoomDialog,
-  ChangePortalOwnerDialog,
-  ChangeNameDialog,
-  AvatarEditorDialog,
-  DeletePortalDialog,
-  LogoutSessionDialog,
-  InviteQuotaWarningDialog,
-  LogoutAllSessionDialog,
-  PortalRenamingDialog,
-  DataReassignmentDialog,
-  SubmitToFormGallery,
-  UnsavedChangesDialog,
-  DeleteLinkDialog,
-  MoveToPublicRoom,
-  SettingsPluginDialog,
-  CancelUploadDialog,
-  PluginDialog,
-  DeletePluginDialog,
-  ShareFolderDialog,
-  EditGroupMembersDialog,
-  ChangeQuotaDialog,
-  DeleteGroupDialog,
-  RoomLogoCoverDialog,
-  RemoveGuestDialog,
-  GuestReleaseTipDialog,
-  DeleteVersionDialog,
-  CancelOperationDialog,
-  FormFillingTipsDialog,
-  ReducedRightsDialog,
-  SocialAuthWelcomeDialog,
-  EditRoomGroupsDialog,
+	EmptyTrashDialog,
+	DeleteDialog,
+	DownloadDialog,
+	ConvertDialog,
+	ConnectDialog,
+	ConflictResolveDialog,
+	ChangeEmailDialog,
+	ChangePasswordDialog,
+	ChangePhoneDialog,
+	DeleteProfileEverDialog,
+	DeleteSelfProfileDialog,
+	DeleteOwnerProfileDialog,
+	SendInviteDialog,
+	ChangeUserStatusDialog,
+	ChangeUserTypeDialog,
+	ResetApplicationDialog,
+	BackupCodesDialog,
+	CreateRoomDialog,
+	CreateRoomConfirmDialog,
+	EditRoomDialog,
+	ChangePortalOwnerDialog,
+	ChangeNameDialog,
+	AvatarEditorDialog,
+	DeletePortalDialog,
+	LogoutSessionDialog,
+	InviteQuotaWarningDialog,
+	LogoutAllSessionDialog,
+	PortalRenamingDialog,
+	DataReassignmentDialog,
+	SubmitToFormGallery,
+	DeleteLinkDialog,
+	MoveToPublicRoom,
+	SettingsPluginDialog,
+	CancelUploadDialog,
+	PluginDialog,
+	DeletePluginDialog,
+	ShareFolderDialog,
+	EditGroupMembersDialog,
+	ChangeQuotaDialog,
+	DeleteGroupDialog,
+	RoomLogoCoverDialog,
+	RemoveGuestDialog,
+	DeleteVersionDialog,
+	CancelOperationDialog,
+	FormFillingTipsDialog,
+	ReducedRightsDialog,
+	SocialAuthWelcomeDialog,
+	StorageTariffDeactiveted,
+	ConnectAccountDialog,
+	DisconnectAccountDialog,
+	CreateAgentDialog,
+	EditRoomGroupsDialog,
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,14 +56,24 @@
 
 .role {
   display: flex;
-  padding-block: 12px;
-  gap: 8px;
-
   align-items: center;
+  gap: 8px;
 
   height: 32px;
 
+  margin: 0 -16px;
+  padding: 12px 16px;
+
+  width: calc(100%);
+
   @include mixins.no-user-select;
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+      background-color: var(--selector-item-hover-background);
+    }
+  }
 }
 
 .count {

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,7 +43,6 @@ import { TNavigationProps } from "./Navigation.types";
 import Badges from "./sub-components/Badges";
 
 const Navigation = ({
-  showText,
   isRootFolder,
   title,
   canCreate,
@@ -53,9 +52,6 @@ const Navigation = ({
   getContextOptionsFolder,
   onBackToParentFolder,
   isTrashFolder,
-  clearTrash,
-  showFolderInfo,
-  isCurrentFolderInfo,
   toggleInfoPanel,
   isInfoPanelVisible,
   titles,
@@ -63,7 +59,6 @@ const Navigation = ({
   onPlusClick,
   isEmptyPage,
   isDesktop: isDesktopClient,
-  isRoom,
   isFrame,
   hideInfoPanel,
   showRootFolderTitle,
@@ -88,6 +83,10 @@ const Navigation = ({
   guidAnimationVisible,
   setGuidAnimationVisible,
   isContextButtonVisible,
+  isPlusButtonVisible,
+  showBackButton,
+  contextMenuHeader,
+
   ...rest
 }: TNavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -267,6 +266,7 @@ const Navigation = ({
                 isFrame={isFrame}
                 isContextButtonVisible={isContextButtonVisible}
                 isPublicRoom={isPublicRoom}
+                isPlusButtonVisible={isPlusButtonVisible}
               />
             </>
           ) : null}
@@ -274,6 +274,7 @@ const Navigation = ({
             ref={containerRef}
             className={styles.container}
             data-is-root-folder={isRootFolder ? "true" : "false"}
+            data-is-show-back-button={showBackButton ? "true" : "false"}
             data-is-trash-folder={isTrashFolder ? "true" : "false"}
             data-is-desktop={isDesktop ? "true" : "false"}
             data-is-desktop-client={isDesktopClient ? "true" : "false"}
@@ -296,6 +297,7 @@ const Navigation = ({
             ) : null}
             <ArrowButton
               isRootFolder={isRootFolder}
+              showBackButton={showBackButton}
               onBackToParentFolder={onBackToParentFolder}
             />
 
@@ -325,12 +327,16 @@ const Navigation = ({
               isEmptyPage={isEmptyPage}
               onContextOptionsClick={onContextOptionsClick}
               isMobile={currentDeviceType !== DeviceType.desktop}
+              isMobileOnly={currentDeviceType === DeviceType.mobile}
               contextButtonAnimation={contextButtonAnimation}
               guidAnimationVisible={guidAnimationVisible}
               setGuidAnimationVisible={setGuidAnimationVisible}
               isContextButtonVisible={isContextButtonVisible}
+              isPlusButtonVisible={isPlusButtonVisible}
+              contextMenuHeader={contextMenuHeader}
             />
           </div>
+
           {isDesktop && !hideInfoPanel ? (
             <ToggleInfoPanelButton
               id="info-panel-toggle--open"

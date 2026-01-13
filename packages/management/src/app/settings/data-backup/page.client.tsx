@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,23 +23,22 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 "use client";
 
 import { useMemo } from "react";
 import { observer } from "mobx-react";
-import { useTheme } from "styled-components";
-import { useTranslation } from "react-i18next";
 
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
-import ManualBackup from "@docspace/shared/pages/manual-backup";
+import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
 import { TariffState } from "@docspace/shared/enums";
 
 import type {
   SettingsThirdPartyType,
   TFilesSettings,
-  TFolder,
 } from "@docspace/shared/api/files/types";
 import type {
   TBackupProgress,
@@ -57,7 +56,6 @@ import { useBackup } from "@/hooks/useBackup";
 import { useStores } from "@/hooks/useStores";
 import { useFilesSelectorInput } from "@/hooks/useFilesSelectorInput";
 import { getDataBackupUrl } from "@/lib";
-import { useTreeFolders } from "@/hooks/useTreeFolders";
 
 interface DataBackupProps {
   account: SettingsThirdPartyType | undefined;
@@ -66,7 +64,6 @@ interface DataBackupProps {
   newStorageRegions: TStorageRegion[];
   portals: TPortals[];
   filesSettings: TFilesSettings;
-  foldersTree: TFolder[];
   portalTariff: TPortalTariff | undefined;
   backupProgress: TBackupProgress | TError | undefined;
 }
@@ -78,7 +75,6 @@ const DataBackup = ({
   newStorageRegions,
   portals,
   filesSettings,
-  foldersTree,
   portalTariff,
   backupProgress,
 }: DataBackupProps) => {
@@ -87,11 +83,8 @@ const DataBackup = ({
 
   const { currentColorScheme } = useTheme();
 
-  const { t } = useTranslation(["Common"]);
-
   const {
     accounts,
-    defaults,
     selected,
     downloadingProgress,
     temporaryLink,
@@ -103,7 +96,7 @@ const DataBackup = ({
     errorInformation,
     isFormReady,
     clearLocalStorage,
-    setErrorInformation,
+
     setTemporaryLink,
     deleteValueFormSetting,
     setRequiredFormSettings,
@@ -130,6 +123,8 @@ const DataBackup = ({
     backupProgressError,
     setBackupProgressError,
     setIsBackupProgressVisible,
+    backupProgressWarning,
+    setBackupProgressWarning,
   } = useBackup({
     account,
     backupScheduleResponse,
@@ -145,8 +140,6 @@ const DataBackup = ({
     setNewPath,
     toDefaultFileSelector,
   } = useFilesSelectorInput();
-
-  const rootFoldersTitles = useTreeFolders({ foldersTree });
 
   const dataBackupUrl = useMemo(() => getDataBackupUrl(settings), [settings]);
 
@@ -167,7 +160,6 @@ const DataBackup = ({
       isManagement
       isInitialLoading={false}
       isEmptyContentBeforeLoader={false}
-      //
       settingsFileSelector={{
         filesSettings,
       }}
@@ -189,7 +181,6 @@ const DataBackup = ({
       isFormReady={isFormReady}
       isValidForm={isValidForm}
       clearLocalStorage={clearLocalStorage}
-      setErrorInformation={(err: unknown) => setErrorInformation(err, t)}
       setTemporaryLink={setTemporaryLink}
       deleteValueFormSetting={deleteValueFormSetting}
       setRequiredFormSettings={setRequiredFormSettings}
@@ -216,7 +207,6 @@ const DataBackup = ({
       setConnectDialogVisible={spacesStore.setConnectDialogVisible}
       setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
       isNotPaidPeriod={isNotPaidPeriod}
-      rootFoldersTitles={rootFoldersTitles}
       removeItem={selectedThirdPartyAccount as ThirdPartyAccountType}
       providers={backupStore.providers}
       deleteThirdParty={deleteThirdParty}
@@ -225,6 +215,8 @@ const DataBackup = ({
       backupProgressError={backupProgressError}
       setBackupProgressError={setBackupProgressError}
       setIsBackupProgressVisible={setIsBackupProgressVisible}
+      backupProgressWarning={backupProgressWarning}
+      setBackupProgressWarning={setBackupProgressWarning}
     />
   );
 };

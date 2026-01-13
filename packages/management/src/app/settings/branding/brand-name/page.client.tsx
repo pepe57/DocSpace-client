@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -63,7 +63,7 @@ export const BrandNamePage = ({
     redirectUrl: "/settings/branding",
     currentLocation: "brand-name",
     deviceType: currentDeviceType,
-    pathname: pathname,
+    pathname,
   });
 
   const onSave = async (data: IWhiteLabelData) => {
@@ -82,10 +82,9 @@ export const BrandNamePage = ({
       isSettingPaid={isSettingPaid}
       standalone={standalone}
       onSave={onSave}
-      isBrandNameLoaded={true}
+      isBrandNameLoaded
       defaultBrandName={brandName}
       brandName={brandName}
     />
   );
 };
-

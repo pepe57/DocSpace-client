@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,6 +50,7 @@ const DateTimePicker = (props: DateTimePickerProps) => {
     maxDate,
     locale,
     openDate,
+    dataTestId,
   } = props;
 
   const [isTimeFocused, setIsTimeFocused] = useState(false);
@@ -96,7 +97,7 @@ const DateTimePicker = (props: DateTimePickerProps) => {
         [styles.hasError]: hasError,
       })}
       id={id}
-      data-testid="date-time-picker"
+      data-testid={dataTestId ?? "date-time-picker"}
       aria-label={selectDateText}
       aria-invalid={hasError}
     >

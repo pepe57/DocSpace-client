@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -70,6 +70,11 @@ const TemplateAccess = ({
 
   const itemsLength = inviteItems.length;
 
+  const getItemAvatarSource = (item: TSelectorItem | TCreatedBy) =>
+    item?.hasAvatar
+      ? item.avatar
+      : ("avatarSmall" in item && item?.avatarSmall) || "";
+
   const maxAvatarsCount =
     itemsLength >= MAX_AVATARS_COUNT ? MAX_AVATARS_COUNT : itemsLength;
 
@@ -83,9 +88,9 @@ const TemplateAccess = ({
         size={AvatarSize.min}
         role={AvatarRole.none}
         isDefaultSource={roomOwner.hasAvatar}
-        source={item?.avatarSmall ?? item.avatar}
+        source={getItemAvatarSource(item)}
         isGroup={item?.isGroup}
-        userName={item.userName ?? item.name}
+        userName={(("userName" in item && item?.userName) || item.name) ?? ""}
         key={index}
       />,
     );
@@ -149,7 +154,7 @@ const TemplateAccess = ({
                   size={AvatarSize.min}
                   role={AvatarRole.none}
                   isDefaultSource={roomOwner.hasAvatar}
-                  source={roomOwner.avatarSmall}
+                  source={getItemAvatarSource(roomOwner)}
                   userName={userName}
                 />
                 <div className="template-access_display-name">

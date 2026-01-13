@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,6 +43,7 @@ const TimePicker = ({
   onBlur,
   focusOnRender = false,
   forwardedRef,
+  testId,
 }: TimePickerProps) => {
   const hoursInputRef = useRef<HTMLInputElement>(null);
   const minutesInputRef = useRef<HTMLInputElement>(null);
@@ -195,7 +196,7 @@ const TimePicker = ({
         [styles.isFocused]: isInputFocused,
       })}
       ref={forwardedRef}
-      data-testid="time-picker"
+      data-testid={testId ?? "time-picker"}
       role="group"
       aria-label="Time picker"
     >

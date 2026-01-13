@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -67,6 +67,7 @@ const RadioButton = ({
   fontWeight,
   label,
   autoFocus,
+  testId = "radio-button",
 }: RadioButtonProps) => {
   const [isCheckedState, setIsCheckedState] = React.useState(isChecked);
   const labelRef = React.useRef<HTMLLabelElement>(null);
@@ -95,7 +96,7 @@ const RadioButton = ({
         ...style,
         ["--radio-button-spacing" as string]: spacing,
       }}
-      data-testid="radio-button"
+      data-testid={testId}
     >
       <input
         className={classNames(styles.input, classNameInput)}

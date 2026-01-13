@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,7 @@ import PublicRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/public.svg?url";
 import FormRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/form.svg?url";
 import VirtualDataRoomRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/virtual-data.svg?url";
 import TemplateRoomsSvg32Url from "PUBLIC_DIR/images/icons/32/room/template.svg?url";
+import AIRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/ai.svg?url";
 
 import CollaborationTemplateSvg32Url from "PUBLIC_DIR/images/icons/32/template/collaboration.svg?url";
 import CustomTemplateSvg32Url from "PUBLIC_DIR/images/icons/32/template/custom.svg?url";
@@ -85,6 +86,8 @@ const RoomLogoPure = ({
           return VirtualDataTemplateSvg32Url;
         case RoomsType.FormRoom:
           return FormTemplateSvg32Url;
+        case RoomsType.AIRoom:
+          return AIRoomSvg32Url;
         default:
           return "";
       }
@@ -101,6 +104,8 @@ const RoomLogoPure = ({
         return VirtualDataRoomRoomSvg32Url;
       case RoomsType.FormRoom:
         return FormRoomSvg32Url;
+      case RoomsType.AIRoom:
+        return AIRoomSvg32Url;
       default:
         return "";
     }

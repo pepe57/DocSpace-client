@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -48,13 +48,15 @@ import {
   EmployeeStatus,
   EmployeeType,
   RoomsType,
+  ShareAccessRights,
 } from "@docspace/shared/enums";
+import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
-import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import BackupIcon from "PUBLIC_DIR/images/icons/16/backup.svg?url";
+import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import { getUserType } from "@docspace/shared/utils/common";
@@ -74,8 +76,10 @@ import AccessSelector from "../../../AccessSelector";
 import {
   fixAccess,
   getTopFreeRole,
+  getViewerRole,
   isPaidUserRole,
   makeFreeRole,
+  makeViewerRole,
 } from "../utils";
 
 const minSearchValue = 2;
@@ -110,8 +114,6 @@ const InviteInput = ({
   setUsersList,
   allowInvitingGuests,
 }) => {
-  const isPublicRoomType = roomType === RoomsType.PublicRoom;
-
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
 
@@ -261,17 +263,13 @@ const InviteInput = ({
     if (query.length >= minSearchValue) {
       const filter = Filter.getDefault();
 
-      const searchArea = isPublicRoomType
-        ? AccountsSearchArea.People
-        : AccountsSearchArea.Any;
-
       filter.search = query;
       filter.filterSeparator = filterSeparator;
 
       const users =
         roomId === -1
           ? await getUserList(filter)
-          : await getMembersList(searchArea, roomId, filter);
+          : await getMembersList(AccountsSearchArea.Any, roomId, filter);
 
       setUsersList(
         roomId === -1
@@ -318,9 +316,61 @@ const InviteInput = ({
     onChangeInput(value);
   };
 
+  const addUser = (item) => {
+    const {
+      shared,
+      status,
+      roomType,
+      access,
+      isVisitor,
+      isGroup = false,
+    } = item;
+    const isDisabled = status === EmployeeStatus.Disabled;
+
+    if (isDisabled) {
+      toastr.warning(t("UsersCannotBeAdded"));
+    } else if (shared) {
+      toastr.warning(t("UsersAlreadyAdded"));
+    } else {
+      const guestWrongRoleInAgent =
+        isVisitor &&
+        roomType === RoomsType.AIRoom &&
+        access !== ShareAccessRights.ReadOnly;
+
+      if (isGroup && checkIfAccessPaid(access)) {
+        item = fixAccess(item, t, roomType);
+      }
+
+      if (guestWrongRoleInAgent) {
+        item = makeViewerRole(item, t, getViewerRole(t, roomType));
+      }
+
+      if (
+        !guestWrongRoleInAgent &&
+        isPaidUserRole(access) &&
+        (item.isVisitor || item.isCollaborator)
+      ) {
+        const topFreeRole = getTopFreeRole(t, roomType);
+
+        if (access !== topFreeRole.access) {
+          item = makeFreeRole(item, t, topFreeRole);
+
+          if (isUserTariffLimit) {
+            toastr.error(<PaidQuotaLimitError />);
+          }
+        }
+      }
+      const items = removeExist([item, ...inviteItems]);
+      setInviteItems(items);
+    }
+
+    setInputValue("");
+    setUsersList([]);
+    setIsAddEmailPanelBlocked(true);
+  };
+
   const getItemContent = (item) => {
     const {
-      avatar,
       displayName,
       name: groupName,
       email,
@@ -328,49 +378,23 @@ const InviteInput = ({
       shared,
       isGroup = false,
       status,
+      isSystem,
     } = item;
 
     const isDisabled = status === EmployeeStatus.Disabled;
 
     item.access = selectedAccess;
 
-    const addUser = () => {
-      if (isDisabled) {
-        toastr.warning(t("UsersCannotBeAdded"));
-      } else if (shared) {
-        toastr.warning(t("UsersAlreadyAdded"));
-      } else {
-        if (isGroup && checkIfAccessPaid(item.access)) {
-          item = fixAccess(item, t, roomType);
-        }
-
-        if (
-          isPaidUserRole(item.access) &&
-          (item.isVisitor || item.isCollaborator)
-        ) {
-          const topFreeRole = getTopFreeRole(t, roomType);
-
-          if (item.access !== topFreeRole.access) {
-            item = makeFreeRole(item, t, topFreeRole);
-
-            if (isUserTariffLimit) {
-              toastr.error(<PaidQuotaLimitError />);
-            }
-          }
-        }
-        const items = removeExist([item, ...inviteItems]);
-        setInviteItems(items);
-      }
-
-      setInputValue("");
-      setUsersList([]);
-      setIsAddEmailPanelBlocked(true);
-    };
+    const avatar = item.avatar
+      ? item.avatar
+      : isSystem
+        ? EveryoneIconUrl
+        : null;
 
     return (
       <DropDownItem
         key={id}
-        onClick={addUser}
+        onClick={() => addUser(item)}
         height={48}
         heightTablet={48}
         className="list-item"
@@ -381,7 +405,7 @@ const InviteInput = ({
           source={avatar}
           userName={groupName}
           isGroup={isGroup}
-          className={isDisabled ? "avatar-disabled" : ""}
+          className={isDisabled ? "avatar-disabled" : "item-avatar"}
         />
         <div className="list-item_content">
           <div className="list-item_content-box">
@@ -396,7 +420,7 @@ const InviteInput = ({
           <SearchItemText $info>{t("Common:Invited")}</SearchItemText>
         ) : null}
         {isDisabled ? (
-          <SearchItemText disabled>{t("Common:Disabled")}</SearchItemText>
+          <SearchItemText info>{t("Common:Disabled")}</SearchItemText>
         ) : null}
       </DropDownItem>
     );
@@ -404,6 +428,12 @@ const InviteInput = ({
 
   const addEmail = () => {
     if (!inputValue.trim() || searchRequestRunning) return;
+
+    const existUser = usersList.find((u) => u.email === inputValue);
+    if (existUser) {
+      addUser(existUser);
+      return;
+    }
 
     const items = toUserItems(inputValue);
 
@@ -421,6 +451,16 @@ const InviteInput = ({
               ? isPaidUserAccess(item.access)
               : isPaidUserRole(item.access);
 
+          const shouldMakeViewerRole =
+            roomType === RoomsType.AIRoom &&
+            item.isEmailInvite &&
+            item.access !== ShareAccessRights.ReadOnly;
+
+          if (shouldMakeViewerRole) {
+            item = makeViewerRole(item, t, getViewerRole(t, roomType));
+            return item;
+          }
+
           if (isRolePaid && item.isEmailInvite) {
             const topFreeRole =
               roomId === -1 ? EmployeeType.User : getTopFreeRole(t, roomType);
@@ -436,12 +476,16 @@ const InviteInput = ({
         userItem.access = selectedAccess;
         userItem.userType = getUserType(item);
 
-        const isAccessPaid = checkIfAccessPaid(userItem.access);
+        const shouldMakeFreeRole =
+          checkIfAccessPaid(userItem.access) &&
+          (userItem.isGroup || userItem.isVisitor || userItem.isCollaborator);
 
-        if (
-          isAccessPaid &&
-          (userItem.isGroup || userItem.isVisitor || userItem.isCollaborator)
-        ) {
+        const shouldMakeViewerRole =
+          roomType === RoomsType.AIRoom &&
+          userItem.isVisitor &&
+          userItem.access !== ShareAccessRights.ReadOnly;
+
+        if (shouldMakeFreeRole || shouldMakeViewerRole) {
           userItem = fixAccess(userItem, t, roomType);
 
           if (isUserTariffLimit) {
@@ -580,13 +624,13 @@ const InviteInput = ({
             type="action"
             isHovered
             onClick={openUsersPanel}
+            dataTestId="invite_panel_choose_from_list_link"
           >
             {t("Translations:ChooseFromList")}
           </StyledLink>
         ) : null}
       </StyledSubHeader>
       <StyledDescription
-        noSelect
         noAllowInvitingGuests={roomId !== -1 ? !allowInvitingGuests : null}
       >
         {roomId === -1
@@ -603,7 +647,7 @@ const InviteInput = ({
       </StyledDescription>
       {roomId === -1 || allowInvitingGuests ? (
         <StyledInviteLanguage>
-          <Text className="invitation-language" noSelect>
+          <Text className="invitation-language">
             {t("InvitationLanguage")}:
           </Text>
           <div className="language-combo-box-wrapper">
@@ -627,6 +671,7 @@ const InviteInput = ({
               withBackdrop={isMobileView}
               withBackground={isMobileView}
               shouldShowBackdrop={isMobileView}
+              dataTestId="invite_panel_language_combobox"
             />
           </div>
           {isChangeLangMail ? (
@@ -635,6 +680,7 @@ const InviteInput = ({
               iconName={BackupIcon}
               onClick={onResetLangMail}
               size={12}
+              dataTestId="invite_panel_reset_language_button"
             />
           ) : null}
         </StyledInviteLanguage>
@@ -654,10 +700,10 @@ const InviteInput = ({
                   : t("InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
-            isAutoFocussed
             onKeyDown={onKeyDown}
             type="search"
             withBorder={false}
+            testId="invite_panel_search_input"
           />
 
           <div className="append" onClick={() => onChangeInput("")}>
@@ -692,6 +738,7 @@ const InviteInput = ({
           isOwner={isOwner}
           isAdmin={isAdmin}
           isMobileView={isMobileView}
+          dataTestId="invite_panel_access_selector"
           {...(roomId === -1 && {
             isSelectionDisabled: isUserTariffLimit,
             selectionErrorText: <PaidQuotaLimitError />,

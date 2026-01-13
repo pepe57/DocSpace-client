@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -76,6 +76,8 @@
   border-bottom: 1px dashed transparent;
   margin: 0;
   display: inline-block;
+
+  @include mixins.no-user-select;
 
   @include mixins.mobile {
     font-size: 21px;
@@ -182,6 +184,8 @@
   text-align: center;
   padding: 10.7px 0;
 
+  @include mixins.no-user-select;
+
   @include mixins.mobile {
     width: 40px;
     font-size: 16px;
@@ -252,10 +256,18 @@
   align-items: center;
   color: var(--text-color);
 
+  @include mixins.no-user-select;
+
+  &.disabled {
+    background: transparent;
+    color: var(--calendar-disabled-color);
+  }
+
   &:hover {
     &.disabled {
       cursor: default;
       background: transparent;
+      color: var(--calendar-disabled-color);
     }
     cursor: pointer;
     background: var(--calendar-on-hover-background);

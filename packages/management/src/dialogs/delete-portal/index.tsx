@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,6 @@
 import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { observer } from "mobx-react";
-import { useTheme } from "styled-components";
 import { useRouter } from "next/navigation";
 
 import { Text } from "@docspace/shared/components/text";
@@ -106,7 +105,7 @@ export const DeletePortalDialog = observer(() => {
       <ModalDialog.Header>
         {isWizardCompleted
           ? t("SubmitDelete")
-          : t("Settings:DeletePortal", {
+          : t("Common:DeletePortal", {
               productName: t("Common:ProductName"),
             })}
       </ModalDialog.Header>
@@ -142,6 +141,7 @@ export const DeletePortalDialog = observer(() => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
+          testId="delete-space-button"
           isLoading={isLoading}
           key="CreateButton"
           label={t("Common:Delete")}
@@ -161,4 +161,3 @@ export const DeletePortalDialog = observer(() => {
     </ModalDialog>
   );
 });
-

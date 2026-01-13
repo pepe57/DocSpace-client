@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,6 +27,8 @@
 import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 
+import { ReactSVG } from "react-svg";
+import CloseIcon from "PUBLIC_DIR/images/loading.button.react.svg?url";
 import type { LoadingButtonProps } from "./LoadingButton.types";
 import styles from "./LoadingButton.module.scss";
 
@@ -90,7 +92,7 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({
           }
           className={classNames(styles.loadingButton, "loading-button")}
         >
-          {!inConversion ? <>&times;</> : null}
+          {!inConversion ? <ReactSVG src={CloseIcon} /> : null}
         </div>
       </div>
     </div>

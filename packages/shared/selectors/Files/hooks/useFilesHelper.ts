@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,18 +32,18 @@ import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 
 import { getFolder, getFolderInfo } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
-import { FolderType } from "../../../enums";
+import { FolderType, RoomsType } from "../../../enums";
 import { toastr } from "../../../components/toast";
-import { TSelectorItem } from "../../../components/selector";
-import { TData } from "../../../components/toast/Toast.type";
-import { TBreadCrumb } from "../../../components/selector/Selector.types";
+import type { TSelectorItem } from "../../../components/selector";
+import type { TData } from "../../../components/toast/Toast.type";
+import type { TBreadCrumb } from "../../../components/selector/Selector.types";
 
 import useInputItemHelper from "../../utils/hooks/useInputItemHelper";
 import { SettingsContext } from "../../utils/contexts/Settings";
 import { LoadersContext } from "../../utils/contexts/Loaders";
 
 import { PAGE_COUNT } from "../../utils/constants";
-import { UseFilesHelpersProps } from "../FilesSelector.types";
+import type { UseFilesHelpersProps } from "../FilesSelector.types";
 import {
   convertFilesToItems,
   convertFoldersToItems,
@@ -62,6 +62,8 @@ const useFilesHelper = ({
   setIsRoot,
   searchValue,
   disabledItems,
+  disabledFolderType,
+  includedItems,
   setSelectedItemSecurity,
   isThirdParty,
   setSelectedTreeNode,
@@ -83,6 +85,13 @@ const useFilesHelper = ({
   setSelectedItemId,
   setSelectedItemType,
   shareKey,
+
+  applyFilterOption,
+
+  setIsInsideKnowledge,
+  setIsInsideResultStorage,
+
+  disableBySecurity,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -143,7 +152,12 @@ const useFilesHelper = ({
       filter.applyFilterOption = null;
       filter.withSubfolders = false;
       if (filterParam) {
-        configureFilterByFilterParam(filter, filterParam, extsWebEdited);
+        configureFilterByFilterParam(
+          filter,
+          filterParam,
+          extsWebEdited,
+          applyFilterOption,
+        );
       }
 
       const id = selectedItemId ?? (isUserOnly ? "@my" : "");
@@ -198,12 +212,15 @@ const useFilesHelper = ({
           folders,
           disabledItemsRef.current,
           filterParam,
+          disabledFolderType,
         );
 
         const filesList: TSelectorItem[] = convertFilesToItems(
           files,
           getIcon,
           filterParam,
+          includedItems,
+          disableBySecurity,
         );
 
         const itemList = [...foldersList, ...filesList];
@@ -211,6 +228,16 @@ const useFilesHelper = ({
         setHasNextPage(count === PAGE_COUNT);
 
         setSelectedTreeNode?.({ ...current, path: pathParts });
+
+        const isInsideKnowledge = pathParts.some(
+          (x) => x.folderType === FolderType.Knowledge,
+        );
+        const isInsideResultStorage = pathParts.some(
+          (x) => x.folderType === FolderType.ResultStorage,
+        );
+
+        setIsInsideKnowledge(isInsideKnowledge);
+        setIsInsideResultStorage(isInsideResultStorage);
 
         if (initRef.current) {
           let foundParentId = false;
@@ -248,7 +275,12 @@ const useFilesHelper = ({
                 isRoom:
                   roomsFolderId === id ||
                   (index === 0 && typeof nextItem?.roomType !== "undefined"),
+                isAgent:
+                  index === 0 &&
+                  typeof nextItem?.roomType !== "undefined" &&
+                  nextItem.roomType === RoomsType.AIRoom,
                 roomType,
+                rootFolderType: current.rootFolderType,
               };
             },
           );
@@ -269,7 +301,7 @@ const useFilesHelper = ({
         if (firstLoadRef.current || startIndex === 0) {
           const { security } = current;
 
-          if (withCreate && security.Create) {
+          if (withCreate && security?.Create) {
             setTotal(total + 1);
             itemList.unshift({
               isCreateNewItem: true,
@@ -279,7 +311,7 @@ const useFilesHelper = ({
               hotkey: "f",
               onCreateClick: () => addInputItem(t("NewFolder"), FolderSvgUrl),
               onBackClick: () => {
-                let isRooms;
+                let isRooms = false;
                 setBreadCrumbs((val) => {
                   const newVal = [...val];
 
@@ -377,8 +409,14 @@ const useFilesHelper = ({
       addInputItem,
       setSelectedItemType,
       setSelectedItemId,
+      setIsInsideKnowledge,
+      setIsInsideResultStorage,
       rootThirdPartyId,
       shareKey,
+      applyFilterOption,
+      includedItems,
+      disabledFolderType,
+      disableBySecurity,
     ],
   );
 

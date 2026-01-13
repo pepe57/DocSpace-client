@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,11 +29,15 @@ import { ArticleItem as ArticleItemComponent } from "./index";
 import { ArticleItemProps } from "./ArticleItem.types";
 
 export const ArticleItem = (props: ArticleItemProps) => {
-  const { linkData } = props;
+  const { linkData, isDisabled } = props;
 
-  return (
+  return isDisabled ? (
+    <ArticleItemComponent {...props} />
+  ) : (
     <Link
-      style={{ textDecoration: "none" }}
+      style={{
+        textDecoration: "none",
+      }}
       to={linkData?.path}
       state={linkData?.state}
     >

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,6 @@
 
 export { ComboBox } from "./ComboBox";
 export { ComboButton } from "./sub-components/ComboButton";
-export { ComboBoxDisplayType, ComboBoxSize } from "./Combobox.enums";
+export { ComboBoxDisplayType, ComboBoxSize } from "./ComboBox.enums";
 
 export type { TOption, TComboboxProps } from "./ComboBox.types";

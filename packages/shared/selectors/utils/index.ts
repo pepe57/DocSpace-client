@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,16 +23,17 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { TSelectorItem } from "../../components/selector";
-import { TFile, TFolder } from "../../api/files/types";
-import { TRoom } from "../../api/rooms/types";
+import type { TSelectorItem } from "../../components/selector";
+import type { TFile, TFileSecurity, TFolder } from "../../api/files/types";
+import type { TRoom } from "../../api/rooms/types";
 import {
   getIconPathByFolderType,
   getLifetimePeriodTranslation,
 } from "../../utils/common";
 import { iconSize32 } from "../../utils/image-helpers";
 import { getTitleWithoutExtension } from "../../utils";
-import { TTranslation } from "../../types";
+import type { TTranslation } from "../../types";
+import type { FolderType } from "../../enums";
 
 import { DEFAULT_FILE_EXTS } from "./constants";
 
@@ -53,6 +54,7 @@ export const convertRoomsToItems: (
       rootFolderType,
       shared,
       lifetime,
+      quotaLimit,
     } = room;
 
     const icon = logo?.medium || "";
@@ -81,6 +83,9 @@ export const convertRoomsToItems: (
       shared,
       lifetimeTooltip,
       cover,
+      disableMultiSelect: true,
+
+      quotaLimit,
       ...iconProp,
     };
   });
@@ -92,10 +97,14 @@ export const convertFilesToItems: (
   files: TFile[],
   getIcon: (fileExst: string) => string,
   filterParam?: string | number,
+  includedItems?: (number | string)[],
+  disableBySecurity?: string,
 ) => TSelectorItem[] = (
   files: TFile[],
   getIcon: (fileExst: string) => string,
   filterParam?: string | number,
+  includedItems?: (number | string)[],
+  disableBySecurity?: string,
 ) => {
   const items = files.map((file) => {
     const {
@@ -112,6 +121,14 @@ export const convertFilesToItems: (
     const icon = getIcon(fileExst || DEFAULT_FILE_EXTS);
     const label = getTitleWithoutExtension(file, false);
 
+    const isDisabled = includedItems?.length
+      ? !includedItems.includes(id)
+      : false;
+
+    const isDisabledBySecurity = disableBySecurity
+      ? !security[disableBySecurity as keyof TFileSecurity]
+      : false;
+
     return {
       id,
       label,
@@ -120,7 +137,7 @@ export const convertFilesToItems: (
       security,
       parentId: folderId,
       rootFolderType,
-      isDisabled: !filterParam,
+      isDisabled: !filterParam || isDisabled || isDisabledBySecurity,
       fileExst,
       fileType,
       viewUrl,
@@ -141,10 +158,12 @@ export const convertFoldersToItems: (
   folders: TFolder[],
   disabledItems: (number | string)[],
   filterParam?: string | number,
+  disabledFolderType?: FolderType,
 ) => TSelectorItem[] = (
   folders: TFolder[],
   disabledItems: (number | string)[],
   filterParam?: string | number,
+  disabledFolderType?: FolderType,
 ) => {
   const items = folders.map((folder: TFolder) => {
     const {
@@ -161,7 +180,9 @@ export const convertFoldersToItems: (
     const folderIconPath = getIconPathByFolderType(type);
     const icon = iconSize32.get(folderIconPath) as string;
 
-    const isDisabled = isDisableFolder(folder, disabledItems, filterParam);
+    const isDisabled =
+      isDisableFolder(folder, disabledItems, filterParam) ||
+      (disabledFolderType ? type === disabledFolderType : false);
 
     return {
       id,
@@ -175,6 +196,7 @@ export const convertFoldersToItems: (
       rootFolderType,
       isFolder: true,
       isDisabled,
+      disableMultiSelect: true,
     };
   });
 

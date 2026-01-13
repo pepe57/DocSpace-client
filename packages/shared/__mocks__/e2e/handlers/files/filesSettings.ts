@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -1109,6 +1109,7 @@ const getFilesSettings = (): TFilesSettings => {
       ".md",
       ".markdown",
     ],
+    extsDiagram: [".vsdm", ".vsdx", ".vssm", ".vssx", ".vstm", ".vstx"],
     internalFormats: {
       Document: ".docx",
       Spreadsheet: ".xlsx",
@@ -1158,6 +1159,8 @@ const getFilesSettings = (): TFilesSettings => {
     openEditorInSameTab: false,
   };
 };
+
+export const PATH_FILES_SETTINGS = "files/settings";
 
 export const filesSettingsHandler = (): Response => {
   return new Response(JSON.stringify({ response: getFilesSettings() }));

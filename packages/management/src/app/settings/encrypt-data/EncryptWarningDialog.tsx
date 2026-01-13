@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,6 +35,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 import { EncryptionStatus } from "@docspace/shared/enums";
 
@@ -56,6 +57,7 @@ export const EncryptWarningDialog = ({
   const onConfirm = async () => {
     try {
       await startEncryption(isNotifyChecked);
+      SocketHelper?.emit(SocketCommands.StorageEncryption);
       setEncryptWarningDialogVisible(false);
       window.location.href = "/encryption-portal";
     } catch (error) {

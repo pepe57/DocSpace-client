@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,8 +26,11 @@
 
 import React from "react";
 import classNames from "classnames";
+import equal from "fast-deep-equal/react";
+
 import styles from "./Text.module.scss";
 import type { TextProps } from "./Text.types";
+import { withTooltip } from "../tooltip";
 
 const TextPure = ({
   ref,
@@ -51,8 +54,7 @@ const TextPure = ({
   truncate,
   className,
   style,
-  containerWidth,
-  containerMinWidth,
+  dataTestId,
   ...rest
 }: TextProps) => {
   const elementType = !as && tag ? tag : as;
@@ -87,7 +89,7 @@ const TextPure = ({
     <Element
       ref={ref}
       title={title}
-      data-testid="text"
+      data-testid={dataTestId ?? "text"}
       onClick={onClick}
       className={textClassName}
       style={textStyles}
@@ -112,6 +114,8 @@ const TextPure = ({
 
 TextPure.displayName = "TextPure";
 
-const Text = React.memo(TextPure);
+const TextBase = React.memo(TextPure, equal);
+
+const Text = withTooltip(TextBase);
 
 export { Text };

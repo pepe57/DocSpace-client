@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { IconSizeType } from "../../utils";
+import { IconSizeType as IconSize } from "../../utils";
+import { InputSize } from "../text-input";
+export type { IconSize };
 
 export type IconButtonProps = {
   /** Sets component class */
@@ -36,7 +38,7 @@ export type IconButtonProps = {
   /** Icon color on click action */
   clickColor?: "accent" | (string & {});
   /** Button height and width value */
-  size?: number | IconSizeType;
+  size?: number | IconSize | InputSize;
   /** Determines if icon fill is needed */
   isFill?: boolean;
   /** Determines if icon stroke is needed */
@@ -73,4 +75,7 @@ export type IconButtonProps = {
   title?: string;
   /** Id for testing */
   dataTestId?: string;
+
+  tooltipId?: string;
+  tooltipContent?: string;
 };

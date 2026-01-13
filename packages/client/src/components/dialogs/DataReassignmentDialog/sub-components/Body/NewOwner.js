@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -82,10 +82,10 @@ const NewOwner = ({
   return (
     <>
       <StyledPeopleSelectorInfo>
-        <Text className="new-owner" noSelect>
+        <Text className="new-owner">
           {t("DataReassignmentDialog:NewDataOwner")}
         </Text>
-        <Text className="description" noSelect>
+        <Text className="description">
           {t("DataReassignmentDialog:UserToWhomTheDataWillBeTransferred")}
         </Text>
       </StyledPeopleSelectorInfo>

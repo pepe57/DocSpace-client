@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,12 +31,15 @@ import { getRooms } from "@/api/rooms";
 import { PAGE_COUNT } from "@/utils/constants";
 
 import RoomSelector from "./page.client";
+import { logger } from "../../../../logger.mjs";
 
 export default async function Page({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string }>;
 }) {
+  logger.info("Room-selector page");
+
   const baseConfig = Object.fromEntries(
     Object.entries(await searchParams).map(([k, v]) => [
       k,

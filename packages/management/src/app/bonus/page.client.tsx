@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,8 +26,11 @@
 
 "use client";
 
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import { Bonus } from "@docspace/shared/pages/Payments/Bonus";
 import { IBonusProps } from "@docspace/shared/pages/Payments/Bonus/Bonus.types";
+
+import { useEndAnimation } from "@/hooks/useEndAnimation";
 
 const BonusPage = ({
   isEnterprise,
@@ -41,21 +44,26 @@ const BonusPage = ({
   enterpriseInstallScriptUrl,
   enterpriseInstallWindowsUrl,
 }: IBonusProps) => {
+  const isLoading = useEndAnimation();
+
   return (
-    <Bonus
-      isEnterprise={isEnterprise}
-      isTrial={isTrial}
-      isDeveloper={isDeveloper}
-      isCommunity={isCommunity}
-      feedbackAndSupportUrl={feedbackAndSupportUrl}
-      salesEmail={salesEmail}
-      dataBackupUrl={dataBackupUrl}
-      logoText={logoText}
-      enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
-      enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
-    />
+    <LoaderWrapper isLoading={isLoading}>
+      <Bonus
+        isEnterprise={isEnterprise}
+        isTrial={isTrial}
+        isDeveloper={isDeveloper}
+        isCommunity={isCommunity}
+        feedbackAndSupportUrl={feedbackAndSupportUrl}
+        salesEmail={salesEmail}
+        dataBackupUrl={dataBackupUrl}
+        logoText={logoText}
+        enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
+        enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
+        forEnterprisesUrl=""
+        demoOrderUrl=""
+      />
+    </LoaderWrapper>
   );
 };
 
 export default BonusPage;
-

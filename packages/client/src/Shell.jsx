@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,6 +40,7 @@ import SocketHelper, {
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
+import { RootTooltip } from "@docspace/shared/components/tooltip/rootTooltip";
 import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
@@ -48,6 +49,8 @@ import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
+import { handleCopy } from "@docspace/shared/utils/copy";
+
 import "@docspace/shared/styles/theme.scss";
 
 import config from "PACKAGE_FILE";
@@ -89,12 +92,7 @@ const Shell = ({ page = "home", ...rest }) => {
     pagesWithoutNavMenu,
     isFrame,
     barTypeInFrame,
-    setShowGuestReleaseTip,
 
-    isOwner,
-    isAdmin,
-    releaseDate,
-    registrationDate,
     logoText,
     setLogoText,
     standalone,
@@ -140,25 +138,21 @@ const Shell = ({ page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    SocketHelper.emit(SocketCommands.Subscribe, {
-      roomParts: "storage-encryption",
-    });
-
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "restore",
     });
 
     if (standalone) {
-      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "restore",
       });
     }
 
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "quota",
     });
 
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "QUOTA",
       individual: true,
     });
@@ -166,14 +160,18 @@ const Shell = ({ page = "home", ...rest }) => {
 
   useEffect(() => {
     if (standalone) {
-      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "restore",
+      });
+
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "storage-encryption",
       });
     }
   }, [standalone]);
 
   useEffect(() => {
-    SocketHelper.emit(SocketCommands.Subscribe, { roomParts: userId });
+    SocketHelper?.emit(SocketCommands.Subscribe, { roomParts: userId });
   }, [userId]);
 
   useEffect(() => {
@@ -188,37 +186,62 @@ const Shell = ({ page = "home", ...rest }) => {
   }, [userId]);
 
   useEffect(() => {
-    SocketHelper.on(SocketEvents.RestoreBackup, () => {
+    SocketHelper?.on(SocketEvents.RestoreBackup, () => {
       setPreparationPortalDialogVisible(true);
     });
 
     return () => {
-      SocketHelper.off(SocketEvents.RestoreBackup, () => {
+      SocketHelper?.off(SocketEvents.RestoreBackup, () => {
         setPreparationPortalDialogVisible(false);
       });
     };
   }, [setPreparationPortalDialogVisible]);
 
   useEffect(() => {
-    const callback = (loginEventId) => {
-      console.log(`[WS] "logout-session"`, loginEventId, userLoginEventId);
-
-      if (userLoginEventId === loginEventId || loginEventId === 0) {
-        sessionStorage.setItem("referenceUrl", window.location.href);
-        sessionStorage.setItem("loggedOutUserId", userId);
-
-        window.location.replace(
-          combineUrl(window.ClientConfig?.proxy?.url, "/login"),
-        );
-      }
+    const storageEncryptionHandler = () => {
+      window.location.href = "/encryption-portal";
     };
 
-    SocketHelper.on(SocketEvents.LogoutSession, callback);
+    SocketHelper?.on(SocketEvents.StorageEncryption, storageEncryptionHandler);
 
     return () => {
-      SocketHelper.off(SocketEvents.LogoutSession, callback);
+      SocketHelper?.off(
+        SocketEvents.StorageEncryption,
+        storageEncryptionHandler,
+      );
     };
-  }, [userLoginEventId]);
+  }, []);
+
+  useEffect(() => {
+    const callback = ({ loginEventId, redirectUrl }) => {
+      console.log(
+        `[WS] "logout-session"`,
+        loginEventId,
+        userLoginEventId,
+        redirectUrl,
+      );
+
+      if (userLoginEventId !== loginEventId && loginEventId !== 0) return;
+
+      const { pathname, search, origin } = window.location;
+      const redirectDomain = redirectUrl || origin;
+      const loginUrl = redirectUrl || window.ClientConfig?.proxy?.url;
+
+      sessionStorage.setItem(
+        "referenceUrl",
+        `${redirectDomain}${pathname}${search}`,
+      );
+      sessionStorage.setItem("loggedOutUserId", userId);
+
+      window.location.replace(combineUrl(loginUrl, "/login"));
+    };
+
+    SocketHelper?.on(SocketEvents.LogoutSession, callback);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.LogoutSession, callback);
+    };
+  }, [userLoginEventId, userId]);
 
   let snackTimer = null;
   let fbInterval = null;
@@ -430,10 +453,6 @@ const Shell = ({ page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    console.log("Current page ", page);
-  }, [page]);
-
-  useEffect(() => {
     if (userTheme) setTheme(userTheme);
   }, [userTheme]);
 
@@ -476,29 +495,12 @@ const Shell = ({ page = "home", ...rest }) => {
   }, [isLoaded]);
 
   useEffect(() => {
-    if (isFrame) return setShowGuestReleaseTip(false);
+    document.addEventListener("copy", handleCopy);
 
-    if (!releaseDate || !registrationDate) return;
-
-    if (!isAdmin && !isOwner) return setShowGuestReleaseTip(false);
-
-    const closed = localStorage.getItem(`closedGuestReleaseTip-${userId}`);
-
-    if (closed) return setShowGuestReleaseTip(false);
-
-    const regDate = new Date(registrationDate).getTime();
-    const release = new Date(releaseDate).getTime();
-
-    setShowGuestReleaseTip(regDate < release);
-  }, [
-    isFrame,
-    userId,
-    setShowGuestReleaseTip,
-    isAdmin,
-    isOwner,
-    releaseDate,
-    registrationDate,
-  ]);
+    return () => {
+      document.removeEventListener("copy", handleCopy);
+    };
+  }, []);
 
   const rootElement = document.getElementById("root");
 
@@ -520,6 +522,7 @@ const Shell = ({ page = "home", ...rest }) => {
   return (
     <Layout>
       {toast}
+      <RootTooltip />
       {isMobileOnly && !isFrame ? (
         <ReactSmartBanner t={t} ready={ready} />
       ) : null}
@@ -576,8 +579,6 @@ const ShellWrapper = inject(
       frameConfig,
       isPortalDeactivate,
       isPortalRestoring,
-      setShowGuestReleaseTip,
-      buildVersionInfo,
       logoText,
       setLogoText,
       standalone,
@@ -654,8 +655,6 @@ const ShellWrapper = inject(
       pagesWithoutNavMenu,
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
-      setShowGuestReleaseTip,
-      releaseDate: buildVersionInfo.releaseDate,
       logoText,
       setLogoText,
       standalone,

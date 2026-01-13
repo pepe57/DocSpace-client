@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ReactSVG } from "react-svg";
 import File32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
-import ImageReactSvgUrl from "PUBLIC_DIR/images/empty_screen_done.svg?url";
+import ImageReactSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.light.svg?url";
 import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 import { Link } from "../../link";
 import { Badge } from "../../badge";
@@ -87,7 +87,7 @@ const contentElement = (
   <div className="badges">
     <IconButton
       iconName={LockedReact12SvgUrl}
-      className="badge lock-file icons-group"
+      className="badge lock-file icons-group file-locked"
       size={IconSizeType.medium}
       data-id="file-lock"
       data-locked={false}

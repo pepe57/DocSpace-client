@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -31,6 +31,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { useTranslation } from "react-i18next";
 
 import type { TPublicRoomPassword } from "../../../api/rooms/types";
+import { LinkSharingEntityType, ValidationStatus } from "../../../enums";
 
 import { createGetLogoHandler } from "../../../__mocks__/storybook/handlers/logo/getLogo";
 import { createValidatePublicRoomPasswordHandler } from "../../../__mocks__/storybook/handlers/files/validatePublicRoomPassword";
@@ -58,7 +59,20 @@ const meta = {
   },
   argTypes: {
     roomKey: { control: "text" },
-    roomTitle: { control: "text" },
+    validationData: {
+      id: "sample-id",
+      isAuthenticated: false,
+      linkId: "sample-link-id",
+      shared: true,
+      status: ValidationStatus.Ok,
+      tenantId: 1,
+      title: "Sample Public Room",
+      isRoom: true,
+      // type: LinkSharingEntityType.RoomOrFolder,
+      entityId: "sample-entity-id",
+      entityTitle: "Sample Room Title",
+      entityType: LinkSharingEntityType.RoomOrFolder,
+    },
     onSuccessValidationCallback: { action: "onSuccessValidation" },
   },
   decorators: [
@@ -80,7 +94,20 @@ export default meta;
 export const Default: Story = {
   args: {
     roomKey: "sample-room-key",
-    roomTitle: "Sample Public Room",
+    validationData: {
+      id: "sample-id",
+      isAuthenticated: false,
+      linkId: "sample-link-id",
+      shared: true,
+      status: ValidationStatus.Ok,
+      tenantId: 1,
+      title: "Sample Public Room",
+      isRoom: true,
+      type: LinkSharingEntityType.RoomOrFolder,
+      entityId: "sample-entity-id",
+      entityTitle: "Sample Room Title",
+      entityType: LinkSharingEntityType.RoomOrFolder,
+    },
     onSuccessValidationCallback: (res: TPublicRoomPassword) =>
       console.log("Success validation", res),
   },

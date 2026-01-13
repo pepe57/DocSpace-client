@@ -3,7 +3,7 @@
   "content": "Sign in with Apple",
   "content_en_sha1_hash": "a5331c078a904d6fac5ef4352f021b442da8a2d4",
   "created_at": "2025-05-19T21:30:48.744Z",
-  "updated_at": "2025-05-26T07:57:32.977Z",
+  "updated_at": "2025-12-16T07:24:44.179Z",
   "comment": {
     "text": "This translation key represents the text used to describe the \"Sign in with Apple\" option on a sign-up form. It is displayed as a button or link, allowing users to select this authentication method. Translators should provide a clear and concise version of this phrase for different languages.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 386,
-      "context": "return `${t(\"Common:Disconnect\")} ${capitalizeProvider}`;\n }\n \n switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");\n case \"google\":\n return signUp\n ? t(\"Common:SignUpWithGoogle\")\n : t(\"Common:SignInWithGoogle\");\n case \"facebook\":",
+      "file_path": "/packages/shared/utils/common.tsx",
+      "line_number": 449,
+      "context": "return `${t(\"Common:Disconnect\")} ${providerLabel}`;\n }\n \n switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");\n case \"google\":\n return signUp\n ? t(\"Common:SignUpWithGoogle\")\n : t(\"Common:SignInWithGoogle\");\n case \"facebook\":",
       "module": "/packages/shared"
     }
   ],
@@ -30,12 +30,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'تسجيل الدخول Apple' is a literal translation of 'Sign in with Apple' but lacks a proper connective word or phrase to make it flow naturally in Arabic. It simply places 'تسجيل الدخول' (Sign in) and 'Apple' next to each other.",
-          "suggestion": "تسجيل الدخول باستخدام Apple"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation lacks proper spacing and article usage, which can impact readability in Arabic.",
+          "description": "The Arabic translation 'تسجيل الدخول Apple' is a direct transliteration of 'Sign in with Apple' and doesn't convey the intended meaning naturally in Arabic. It lacks the correct verb construction for 'Sign in'.",
           "suggestion": "تسجيل الدخول باستخدام Apple"
         }
       ],
@@ -65,7 +60,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Login über Apple' is not the most natural or accurate translation of 'Sign in with Apple'. 'Sign in' is better conveyed as 'Anmelden' rather than 'Login'.",
+          "description": "The translation 'Login über Apple' is not the most natural or accurate translation of 'Sign in with Apple'. While technically correct, 'Anmelden mit Apple' would be more idiomatic in German. 'Login' is often used but 'Anmelden' is preferred in this context.",
           "suggestion": "Anmelden mit Apple"
         }
       ],
@@ -101,7 +96,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Մուտք գործել Apple-ով' is a literal translation and doesn't sound natural in Armenian. A more idiomatic translation would be preferable.",
+          "description": "The translation 'Մուտք գործել Apple-ով' is a literal translation that doesn't sound natural in Armenian. A more idiomatic translation would convey the intended meaning of 'Sign in with Apple' more effectively.",
           "suggestion": "Մուտքագրվել Apple-ի միջոցով"
         }
       ],
@@ -122,7 +117,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Apple으로 로그인\" is understandable, a more natural and accurate translation of 'Sign in with Apple' would be \"애플로 로그인\" or \"애플 계정으로 로그인\". The particle '으로' is not strictly necessary and can sound slightly awkward in this context.",
+          "suggestion": "애플로 로그인"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -161,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Entrar com Apple' is understandable, a more natural and idiomatic translation of 'Sign in with Apple' in Portuguese (Brazil) would be 'Acessar com Apple' or 'Fazer login com Apple'. 'Entrar' is often used for entering a place, not for signing into an account.",
-          "suggestion": "Acessar com Apple"
+          "description": "The translation 'Entrar com Apple' is a literal translation and doesn't convey the intended meaning as naturally as it could in Brazilian Portuguese. While technically correct, it sounds a bit clunky.",
+          "suggestion": "Iniciar sessão com a Apple"
         }
       ],
       "approved_at": null
@@ -170,13 +171,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Conectare cu Apple\" is understandable, a more accurate and natural translation of \"Sign in with Apple\" in Romanian would be \"Autentificare cu Apple\" or \"Logare cu Apple\". \"Conectare\" implies connecting to a network, rather than authentication.",
-          "suggestion": "Autentificare cu Apple"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -209,13 +204,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Пријави се путем Apple-а\" is not the most natural or accurate rendering of \"Sign in with Apple.\" While understandable, it's a literal translation that sounds slightly awkward in Serbian. A more idiomatic translation would be 'Улазак са Apple' or 'Пријава са Apple'.",
-          "suggestion": "Улазак са Apple"
+          "description": "The translation \"Пријави се путем Apple-а\" is not the most natural or accurate translation of \"Sign in with Apple.\" While technically understandable, it's overly literal.",
+          "suggestion": "Пријава са Apple"
         },
         {
           "type": "formatting",
-          "description": "The use of 'Apple-а' implies a genitive case. While technically correct, it might be more user-friendly to use the locative case, aligning with common usage for platform identifiers.",
-          "suggestion": "Улазак са Apple"
+          "description": "The inclusion of the genitive case ('Apple-а') is grammatically correct but can sound clunky in this context. A more concise and modern phrasing would be preferred.",
+          "suggestion": "Consider removing the genitive case if a more streamlined phrase is desired."
         }
       ],
       "approved_at": null
@@ -226,7 +221,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Prijavi se putem Apple-a' is a literal translation but sounds unnatural in Serbian. A more natural phrasing would be 'Prijava sa Apple-om' or 'Prijava putem Apple-a'.",
+          "description": "The translation 'Prijavi se putem Apple-a' is not the most natural or idiomatic way to say \"Sign in with Apple\" in Serbian. While technically correct, it sounds slightly awkward. A better translation would be 'Prijava sa Apple-om' or 'Prijavite se preko Apple-a'.",
           "suggestion": "Prijava sa Apple-om"
         }
       ],
@@ -254,6 +249,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Identifikohuni me Apple' is a literal translation but doesn't convey the intended meaning of 'Sign in with Apple' as naturally in Albanian. It's slightly formal and doesn't flow well. A more idiomatic translation would be preferable.",
+          "suggestion": "Kyheni me Apple"
+        }
+      ],
       "approved_at": null
     }
   }

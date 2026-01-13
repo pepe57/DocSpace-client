@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -58,7 +58,6 @@ const HotkeysPanel = ({
     fontSize: "13px",
     fontWeight: 600,
     className: "hotkey-key-description",
-    noSelect: true,
   };
   const keyTextStyles = {
     ...textStyles,
@@ -126,6 +125,7 @@ const HotkeysPanel = ({
             textStyles={textStyles}
             keyTextStyles={keyTextStyles}
             CtrlKey={CtrlKey}
+            AltKey={AltKey}
           />
           <Heading className="hotkeys_sub-header">{t("HotkeysMove")}</Heading>
           <MoveBlock

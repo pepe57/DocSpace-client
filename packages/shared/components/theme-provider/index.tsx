@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -55,7 +55,8 @@ export const ThemeProvider = ({
     body.classList.remove("ltr", "rtl");
     body.classList.add(themeStr);
     body.classList.add(dir);
-  }, [theme.isBase, theme.interfaceDirection]);
+    body.style.setProperty("--font-family", theme.fontFamily);
+  }, [theme.isBase, theme.interfaceDirection, theme.fontFamily]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -100,7 +101,10 @@ export const ThemeProvider = ({
 
   return (
     <InterfaceDirectionProvider interfaceDirection={theme.interfaceDirection}>
-      <CustomThemeProvider theme={theme.isBase ? "Base" : "Dark"}>
+      <CustomThemeProvider
+        theme={theme.isBase ? "Base" : "Dark"}
+        currentColorScheme={currentColorScheme}
+      >
         <Provider theme={{ ...theme, currentColorScheme }}>{children}</Provider>
       </CustomThemeProvider>
     </InterfaceDirectionProvider>

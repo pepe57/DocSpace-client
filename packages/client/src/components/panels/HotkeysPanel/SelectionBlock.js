@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import React from "react";
 import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 
-const SelectionBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
+const SelectionBlock = ({ t, textStyles, keyTextStyles, CtrlKey, AltKey }) => {
   return (
     <>
       <Row className="hotkeys_row">
@@ -88,15 +88,27 @@ const SelectionBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("HotkeysSelectAll")}</Text>
-          <Text {...keyTextStyles}>
-            {CtrlKey} + a {t("Common:Or")} Shift + a
-          </Text>
+          <Text {...keyTextStyles}>{CtrlKey} + a</Text>
         </>
       </Row>
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("HotkeysClearAll")}</Text>
           <Text {...keyTextStyles}>Shift + n {t("Common:Or")} Esc</Text>
+        </>
+      </Row>
+      <Row className="hotkeys_row">
+        <>
+          <Text {...textStyles}>{t("HotkeysDisablesSelectionArea")}</Text>
+          <Text {...keyTextStyles}>
+            {CtrlKey} + {AltKey}
+          </Text>
+        </>
+      </Row>
+      <Row className="hotkeys_row">
+        <>
+          <Text {...textStyles}>{t("HotkeysCopySelectedItems")}</Text>
+          <Text {...keyTextStyles}>{CtrlKey} + Shift + c</Text>
         </>
       </Row>
     </>

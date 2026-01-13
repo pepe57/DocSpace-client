@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,6 @@ import { SYSTEM_THEME_KEY, LANGUAGE } from "@docspace/shared/constants";
 
 import { Toast } from "@docspace/shared/components/toast";
 
-import StyledComponentsRegistry from "@/lib/registry";
 import {
   getSettings,
   getUser,
@@ -48,6 +47,7 @@ import { ManagementDialogs } from "@/dialogs";
 
 import "@/styles/globals.scss";
 import "@docspace/shared/styles/theme.scss";
+import { logger } from "../../logger.mjs";
 
 export default async function RootLayout({
   children,
@@ -64,14 +64,23 @@ export default async function RootLayout({
     ],
   );
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  const baseURL = await getBaseUrl();
+
+  if (settings === "access-restricted") {
+    logger.info("Management layout access-restricted");
+
+    redirect(`${baseURL}/${settings}`);
+  }
 
   if (
     (user && !user.isAdmin) ||
     (settings && settings.limitedAccessSpace) ||
     !portalTariff
-  )
-    redirect(`${getBaseUrl()}/error/403`);
+  ) {
+    logger.info("Management layout error/403");
+
+    redirect(`${baseURL}/error/403`);
+  }
 
   const cookieStore = await cookies();
 
@@ -104,25 +113,22 @@ export default async function RootLayout({
       <body
         className={`${systemTheme?.value === ThemeKeys.DarkStr ? "dark" : "light"}`}
       >
-        <StyledComponentsRegistry>
-          <Providers
-            contextData={{
-              user,
-              settings,
-              systemTheme: systemTheme?.value as ThemeKeys,
-              colorTheme,
-            }}
-          >
-            <Toast isSSR />
-            <ManagementDialogs settings={settings!} user={user!} />
-            <LayoutWrapper portals={portals!} isCommunity={openSource}>
-              {children}
-            </LayoutWrapper>
-          </Providers>
-        </StyledComponentsRegistry>
+        <Providers
+          contextData={{
+            user,
+            settings,
+            systemTheme: systemTheme?.value as ThemeKeys,
+            colorTheme,
+          }}
+        >
+          <Toast isSSR />
+          <ManagementDialogs settings={settings!} user={user!} />
+          <LayoutWrapper portals={portals!} isCommunity={openSource}>
+            {children}
+          </LayoutWrapper>
+        </Providers>
         <Scripts />
       </body>
     </html>
   );
 }
-

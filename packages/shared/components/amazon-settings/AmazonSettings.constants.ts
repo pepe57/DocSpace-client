@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,9 +43,11 @@ export const MANAGED_KEYS = [
   {
     key: "0",
     label: defaultManaged,
+    dataTestId: "default_managed_option",
   },
   {
     key: "1",
     label: CUSTOMER_MANAGER,
+    dataTestId: "customer_manager_option",
   },
 ];

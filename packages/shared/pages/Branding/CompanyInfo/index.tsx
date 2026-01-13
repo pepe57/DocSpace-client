@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -131,29 +131,24 @@ export const CompanyInfo = ({
       <div
         className={classNames(styles.companyInfo, {
           [styles.isSettingPaid]: isSettingPaid,
+          ["isEnableBranding"]: !isSettingPaid,
+          ["settings_unavailable"]: !isSettingPaid,
         })}
       >
         <div
           className={classNames(
             styles.sectionDescription,
-            "section-description settings_unavailable",
+            "section-description",
           )}
         >
           {t("BrandingSectionDescription", {
             productName: t("ProductName"),
           })}
         </div>
-        <div
-          className={classNames(styles.header, "header settings_unavailable")}
-        >
+        <div className={classNames(styles.header, "header")}>
           {t("CompanyInfoSettings")}
         </div>
-        <div
-          className={classNames(
-            styles.description,
-            "description settings_unavailable",
-          )}
-        >
+        <div className={classNames(styles.description, "description")}>
           {isSettingPaid ? (
             <Trans
               t={t}
@@ -167,6 +162,7 @@ export const CompanyInfo = ({
                     className={classNames(styles.link, "link")}
                     onClick={showExample}
                     noHover
+                    dataTestId="company_info_settings_link"
                   />
                 ),
               }}
@@ -194,20 +190,20 @@ export const CompanyInfo = ({
               isDisabled={!isBrandingAvailable || !isSettingPaid}
               isChecked={showAbout}
               onChange={onChangeDisplayAbout}
-              data-testid="show-about-window-checkbox"
+              dataTestId="show-about-window-checkbox"
               label={t("Common:ShowAboutWindow")}
             />
           </FieldContainer>
 
           <FieldContainer
             id="fieldContainerCompanyName"
-            className="field-container-width settings_unavailable"
+            className="field-container-width"
             labelText={t("Common:CompanyName")}
             isVertical
           >
             <TextInput
               id="textInputContainerCompanyName"
-              testId="company-name-input"
+              testId="company_info_settings_company_name_input"
               className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
@@ -220,13 +216,13 @@ export const CompanyInfo = ({
           </FieldContainer>
           <FieldContainer
             id="fieldContainerEmail"
-            className="field-container-width settings_unavailable"
+            className="field-container-width"
             labelText={t("Common:Email")}
             isVertical
           >
             <TextInput
               id="textInputContainerEmail"
-              testId="email-input"
+              testId="company_info_settings_email_input"
               className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
@@ -239,13 +235,13 @@ export const CompanyInfo = ({
           </FieldContainer>
           <FieldContainer
             id="fieldContainerPhone"
-            className="field-container-width settings_unavailable"
+            className="field-container-width"
             labelText={t("Common:Phone")}
             isVertical
           >
             <TextInput
               id="textInputContainerPhone"
-              testId="phone-input"
+              testId="company_info_settings_phone_input"
               className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
@@ -258,13 +254,13 @@ export const CompanyInfo = ({
           </FieldContainer>
           <FieldContainer
             id="fieldContainerWebsite"
-            className="field-container-width settings_unavailable"
+            className="field-container-width"
             labelText={t("Common:Website")}
             isVertical
           >
             <TextInput
               id="textInputContainerWebsite"
-              testId="site-input"
+              testId="company_info_settings_site_input"
               className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
@@ -277,13 +273,13 @@ export const CompanyInfo = ({
           </FieldContainer>
           <FieldContainer
             id="fieldContainerAddress"
-            className="field-container-width settings_unavailable"
+            className="field-container-width"
             labelText={t("Common:Address")}
             isVertical
           >
             <TextInput
               id="textInputContainerAddress"
-              testId="address-input"
+              testId="company_info_settings_address_input"
               className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
@@ -304,7 +300,7 @@ export const CompanyInfo = ({
           onCancelClick={onRestoreAction}
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Common:Restore")}
-          reminderText={t("YouHaveUnsavedChanges")}
+          reminderText={t("Common:YouHaveUnsavedChanges")}
           displaySettings
           saveButtonDisabled={isDisabled}
           hasScroll
@@ -313,6 +309,8 @@ export const CompanyInfo = ({
           disableRestoreToDefault={companyInfoSettingsIsDefault || isLoading}
           additionalClassSaveButton="company-info-save"
           additionalClassCancelButton="company-info-cancel"
+          saveButtonDataTestId="company_info_settings_save_button"
+          cancelButtonDataTestId="company_info_settings_cancel_button"
         />
       </div>
     </>

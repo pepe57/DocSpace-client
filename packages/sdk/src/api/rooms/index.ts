@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -71,11 +71,20 @@ export async function getRooms(
   return rooms.response;
 }
 
-export async function validatePublicRoomKey(key: string): Promise<{
+export async function validatePublicRoomKey(
+  key: string,
+  searchParams?: URLSearchParams,
+): Promise<{
   response: TValidateShareRoom;
   anonymousSessionKeyCookie?: string;
 }> {
-  const [req] = await createRequest([`/files/share/${key}`], [["", ""]], "GET");
+  const [req] = await createRequest(
+    [
+      `/files/share/${key}${searchParams && searchParams.size > 0 ? `?${searchParams.toString()}` : ""}`,
+    ],
+    [["", ""]],
+    "GET",
+  );
 
   const res = IS_TEST ? validatePublicRoomKeyHandler() : await fetch(req);
 

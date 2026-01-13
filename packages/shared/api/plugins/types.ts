@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,8 +28,11 @@ import { TCreatedBy } from "../../types";
 
 export type TAPIPlugin = {
   name: string;
+  nameLocale?: { [key: string]: string };
   version: string;
+  minDocSpaceVersion?: string;
   description: string;
+  descriptionLocale?: { [key: string]: string };
   license: string;
   author: string;
   homePage: string;

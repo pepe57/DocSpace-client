@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,10 +32,9 @@ import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
 import { getCountTilesInRow } from "@docspace/shared/utils";
 import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
 
-import styles from "./InfiniteGrid.module.scss";
-
 import type { InfiniteGridProps } from "@/app/(docspace)/(files)/_components/tile-view/TileView.types";
 import classNames from "classnames";
+import styles from "./InfiniteGrid.module.scss";
 
 const HeaderItem = ({
   children,

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -70,7 +70,7 @@ const HeaderNav = ({
   getActions,
   hideProfileMenu,
 }) => {
-  const { t } = useTranslation(["Common", "About"]);
+  const { t } = useTranslation(["Common"]);
   const userActions = useMemo(() => getActions(t), [getActions, t]);
 
   return (

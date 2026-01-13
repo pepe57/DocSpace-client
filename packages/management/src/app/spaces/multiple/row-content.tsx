@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,16 +29,18 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { useTheme } from "styled-components";
+import classnames from "classnames";
 
+import { RowContent as RowContentComponents } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
-
+import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { globalColors } from "@docspace/shared/themes/globalColors";
 import type { TPortals } from "@docspace/shared/api/management/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
-import { StyledRowContent } from "./multiple.styled";
+import styles from "./multiple.module.scss";
 
 export const RowContent = ({
   item,
@@ -49,7 +51,7 @@ export const RowContent = ({
 }) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
   const { currentDeviceType } = useDeviceType();
-  const theme = useTheme();
+  const { isBase } = useTheme();
   const [protocol, setProtocol] = useState("");
 
   const { roomAdminCount, usersCount, roomsCount, usedSize } =
@@ -81,19 +83,25 @@ export const RowContent = ({
   }, []);
 
   return (
-    <StyledRowContent
-      isWizardCompleted={isWizardCompleted}
+    <RowContentComponents
       sectionWidth={620}
-      sideColor={theme?.management?.sideColor}
-      className="spaces_row-content"
+      sideColor={isBase ? globalColors.gray : globalColors.grayDark}
+      className={styles.rowContent}
     >
-      <div className="user-container-wrapper" onClick={onSpaceClick}>
-        <Text fontWeight={600} fontSize="14px" truncate className="domain-text">
+      <div className={styles.userContainerWrapper} onClick={onSpaceClick}>
+        <Text
+          fontWeight={600}
+          fontSize="14px"
+          truncate
+          className={classnames({ [styles.domainText]: !isWizardCompleted })}
+        >
           {`${item.domain}`}
         </Text>
         {currentDeviceType === DeviceType.mobile ? (
-          <ReactSVG src={ArrowIcon} className="arrow-icon" />
-        ) : null}
+          <ReactSVG src={ArrowIcon} className={styles.arrowIcon} />
+        ) : (
+          <div />
+        )}
       </div>
 
       {isCurrentPortal ? (
@@ -101,7 +109,7 @@ export const RowContent = ({
           fontSize="14px"
           fontWeight={600}
           truncate
-          className="spaces_row-current"
+          className={styles.spacesRowCurrent}
         >
           {t("CurrentSpace")}
         </Text>
@@ -110,13 +118,17 @@ export const RowContent = ({
           fontSize="12px"
           fontWeight={600}
           truncate
-          className="complete-setup"
+          className={styles.completeSetup}
         >
           {t("CompleteSetup")}
         </Text>
-      ) : null}
+      ) : (
+        <div />
+      )}
 
-      {isMobileView ? null : isWizardCompleted ? (
+      {isMobileView ? (
+        <div />
+      ) : isWizardCompleted ? (
         <Text fontSize="12px" as="div" fontWeight={600} truncate>
           {`${t("PortalStats", {
             roomCount: roomsCount,
@@ -129,12 +141,11 @@ export const RowContent = ({
           fontSize="12px"
           fontWeight={600}
           truncate
-          className="complete-setup"
+          className={styles.completeSetup}
         >
           {t("CompleteSetup")}
         </Text>
       )}
-    </StyledRowContent>
+    </RowContentComponents>
   );
 };
-

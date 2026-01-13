@@ -1,7 +1,11 @@
 import { IconButtonProps } from "../icon-button/IconButton.types";
-import { TTooltipPlace, TooltipProps } from "../tooltip/Tooltip.types";
+import {
+  TTooltipPlace,
+  TooltipProps,
+  TGetTooltipContent,
+} from "../tooltip/Tooltip.types";
 
-export type HelpButtonProps = IconButtonProps & {
+export type HelpButtonProps = Omit<IconButtonProps, "tooltipContent"> & {
   /** Displays the child elements */
   children?: React.ReactNode;
   /** Sets the unique identifier for the component. */
@@ -9,7 +13,7 @@ export type HelpButtonProps = IconButtonProps & {
   /** Sets the data-tip attribute for the component. */
   dataTip?: string;
   /** Function to retrieve the content of the tooltip. */
-  getContent?: () => React.ReactNode;
+  getContent?: (params: TGetTooltipContent) => React.ReactNode;
   /** Position of the tooltip relative to the target element. */
   place?: TTooltipPlace;
   /** Offset distance for the tooltip from the target element. */
@@ -40,4 +44,7 @@ export type HelpButtonProps = IconButtonProps & {
   offsetLeft?: number;
   isOpen?: boolean;
   noUserSelect?: boolean;
+  /** Sets the data-testid attribute for the component. */
+  dataTestId?: string;
+  tooltipStyle?: React.CSSProperties;
 };

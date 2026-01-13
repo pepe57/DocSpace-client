@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -58,7 +58,7 @@ export default inject<TStore>(
     const { primaryProgressDataStore, secondaryProgressDataStore } =
       uploadDataStore;
 
-    const { email, displayName } = user!;
+    const { email, displayName } = user || {};
 
     const isAdmin = user?.isAdmin;
 
@@ -155,6 +155,8 @@ export default inject<TStore>(
       downloaddesktopUrl,
       officeforandroidUrl,
       officeforiosUrl,
+      hideAppsBlock:
+        !downloaddesktopUrl && !officeforandroidUrl && !officeforiosUrl,
     };
   },
 )(observer(ArticleWrapper));

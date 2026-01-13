@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@
 "use client";
 
 import React from "react";
-import styled from "styled-components";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
@@ -47,26 +46,14 @@ import { toastr } from "@docspace/shared/components/toast";
 import { parseDomain } from "@docspace/shared/utils/common";
 
 import { useStores } from "@/hooks/useStores";
-
-const StyledModal = styled(ModalDialog)`
-  .create-portal-input-block {
-    padding-top: 16px;
-  }
-  .create-portal-input {
-    width: 100%;
-  }
-
-  .error-text {
-    color: ${({ theme }) => theme.management.errorColor};
-  }
-`;
+import styles from "../dialogs.module.scss";
 
 export const ChangeDomainDialog = observer(() => {
   const { t } = useTranslation(["Management", "Common"]);
   const router = useRouter();
   const { spacesStore } = useStores();
   const [domainNameError, setDomainNameError] =
-    React.useState<null | Array<object>>(null);
+    React.useState<null | Array<string>>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const {
     setDomainName,
@@ -103,7 +90,7 @@ export const ChangeDomainDialog = observer(() => {
   };
 
   return (
-    <StyledModal
+    <ModalDialog
       visible={visible}
       isLarge
       onClose={onClose}
@@ -111,10 +98,8 @@ export const ChangeDomainDialog = observer(() => {
     >
       <ModalDialog.Header>{t("DomainSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect={true} fontSize="13px">
-          {t("ChangeDomainDescription")}
-        </Text>
-        <div className="create-portal-input-block">
+        <Text fontSize="13px">{t("ChangeDomainDescription")}</Text>
+        <div className={styles.createPortalInputBlock}>
           <Text
             fontSize="13px"
             fontWeight="600"
@@ -123,48 +108,50 @@ export const ChangeDomainDialog = observer(() => {
             {t("DomainName")}
           </Text>
           <TextInput
+            testId="change-domain-input"
             type={InputType.text}
             size={InputSize.base}
             hasError={!!domainNameError}
             onChange={onHandleDomain}
             value={domain}
             placeholder={t("EnterDomain")}
-            className="create-portal-input"
+            scale
           />
           <div>
-            {domainNameError &&
-              domainNameError.map((err, index) => (
-                <Text
-                  className="error-text"
-                  key={index}
-                  fontSize="12px"
-                  fontWeight="400"
-                >
-                  {err.toString()}
-                </Text>
-              ))}
+            {domainNameError
+              ? domainNameError.map((err) => (
+                  <Text
+                    className={styles.errorText}
+                    key={err.toString()}
+                    fontSize="12px"
+                    fontWeight="400"
+                  >
+                    {err.toString()}
+                  </Text>
+                ))
+              : null}
           </div>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
+          testId="change-domain-button"
           isLoading={isLoading}
           key="CreateButton"
           label={t("Common:ChangeButton")}
           onClick={onClickDomainChange}
           size={ButtonSize.normal}
           primary
-          scale={true}
+          scale
         />
         <Button
           key="CancelButton"
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           onClick={onClose}
-          scale={true}
+          scale
         />
       </ModalDialog.Footer>
-    </StyledModal>
+    </ModalDialog>
   );
 });
-

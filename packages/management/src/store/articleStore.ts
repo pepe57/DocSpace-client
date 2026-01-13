@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,7 @@ import { isTablet } from "react-device-detect";
 
 export class ArticleStore {
   showText = !isTablet;
+
   articleOpen = false;
 
   constructor() {
@@ -43,4 +44,3 @@ export class ArticleStore {
     this.articleOpen = articleOpen;
   };
 }
-

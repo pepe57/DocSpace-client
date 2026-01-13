@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,14 +36,12 @@ const Description = ({ dataReassignmentUrl, noRoomFilesToMove }) => {
 
   return (
     <StyledAvailableList className="list-container">
-      <Text className="list-item" noSelect>
+      <Text className="list-item">
         {noRoomFilesToMove
           ? t("RoomsOnlyReassignment")
           : t("DescriptionDataReassignment")}
       </Text>
-      <Text className="list-item" noSelect>
-        {t("NoteDataReassignment")}
-      </Text>
+      <Text className="list-item">{t("NoteDataReassignment")}</Text>
 
       {dataReassignmentUrl ? (
         <Link

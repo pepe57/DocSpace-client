@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,17 +27,20 @@
 import { headers } from "next/headers";
 
 import ConfirmRoute from "@/components/ConfirmRoute";
-import { StyledBody } from "@/components/Confirm.styled";
-import { TConfirmLinkParams } from "@/types";
+import type { TConfirmLinkParams } from "@/types";
 import { checkConfirmLink, getSettings, getUser } from "@/utils/actions";
 import { ValidationResult } from "@/utils/enums";
 import { redirect } from "next/navigation";
+import { logger } from "logger.mjs";
+import styles from "./confirm.module.scss";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  logger.info("Confirm layout");
+
   const hdrs = await headers();
   const searchParams = hdrs.get("x-confirm-query") ?? "";
   const type = hdrs.get("x-confirm-type") ?? "";
@@ -48,10 +51,10 @@ export default async function Layout({
     new URLSearchParams(searchParams.toString()),
   ) as TConfirmLinkParams;
 
-  const confirmLinkParams: TConfirmLinkParams = Object.assign(
-    { type },
-    queryParams,
-  );
+  const confirmLinkParams: TConfirmLinkParams = {
+    type,
+    ...queryParams,
+  };
 
   const [settings, confirmLinkResult] = await Promise.all([
     getSettings(),
@@ -67,19 +70,27 @@ export default async function Layout({
   const objectSettings = typeof settings === "string" ? undefined : settings;
 
   if (isUserExisted) {
+    const path = confirmLinkResult.isAgent
+      ? `ai-agents/${confirmLinkResult?.roomId}/chat`
+      : `rooms/shared/${confirmLinkResult?.roomId}/filter`;
+
     const finalUrl = confirmLinkResult?.roomId
-      ? `${proto}://${hostName}/rooms/shared/${confirmLinkResult?.roomId}/filter?folder=${confirmLinkResult?.roomId}`
-      : objectSettings?.defaultPage;
+      ? `${proto}://${hostName}/${path}?folder=${confirmLinkResult?.roomId}`
+      : "/";
+
+    logger.info("Confirm layout UserExisted");
 
     redirect(finalUrl ?? "/");
   }
 
   if (isUserExcluded) {
-    redirect(objectSettings?.defaultPage ?? "/");
+    logger.info("Confirm layout UserExcluded");
+
+    redirect("/");
   }
 
   return (
-    <StyledBody id="confirm-body">
+    <div id="confirm-body" className={styles.confirmBody}>
       <ConfirmRoute
         socketUrl={objectSettings?.socketUrl}
         confirmLinkResult={confirmLinkResult}
@@ -88,6 +99,6 @@ export default async function Layout({
       >
         {children}
       </ConfirmRoute>
-    </StyledBody>
+    </div>
   );
 }

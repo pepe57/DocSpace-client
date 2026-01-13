@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,7 +40,7 @@ const MainInfoComponent = (props) => {
 
   return (
     <StyledMainInfo>
-      <Text fontSize="14px" fontWeight={400}>
+      <Text fontSize="14px" fontWeight={400} dataTestId="portal_created_date">
         {t("PortalCreatedDate", { date: creationDate })}
       </Text>
       <Text fontSize="14px" fontWeight={400}>

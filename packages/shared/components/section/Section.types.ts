@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,8 @@ import { DeviceType } from "../../enums";
 import { TViewAs } from "../../types";
 
 import { ContextMenuModel } from "../context-menu";
+import { TFile, TFolder } from "../../api/files/types";
+import { TUser } from "../../api/people/types";
 
 export type SubInfoPanelHeaderProps = {
   children: React.JSX.Element | null;
@@ -48,6 +50,9 @@ export type InfoPanelProps = {
   anotherDialogOpen?: boolean;
   viewAs?: TViewAs;
   currentDeviceType?: DeviceType;
+  asideInfoPanel?: boolean;
+  topInfoPanel?: boolean;
+  onClose?: () => void;
 };
 
 export type SectionBodyContentProps = {
@@ -64,12 +69,16 @@ export type SectionBodyProps = {
   children: React.ReactNode;
   viewAs?: TViewAs;
   settingsStudio: boolean;
-  isFormGallery?: boolean;
+
   isDesktop?: boolean;
   currentDeviceType?: DeviceType;
   getContextModel?: () => ContextMenuModel[];
   pathname?: string;
   isIndexEditingMode?: boolean;
+  withoutFooter?: boolean;
+  onDragLeaveEmpty?: () => void;
+  onDragOverEmpty?: (isDragActive: boolean) => void;
+  fullHeightBody?: boolean;
 };
 
 export type SectionContainerProps = {
@@ -85,7 +94,7 @@ export type SectionContainerProps = {
 export type SectionFilterProps = {
   children: React.ReactNode;
   className?: string;
-  viewAs?: TViewAs;
+  withTabs?: boolean;
 };
 
 export type SectionFooterProps = {
@@ -94,7 +103,6 @@ export type SectionFooterProps = {
 
 export type SectionHeaderProps = {
   className: string;
-  isFormGallery?: boolean;
   children: React.ReactNode;
 };
 
@@ -146,6 +154,25 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     primaryOperationsAlert?: boolean;
     needErrorChecking?: boolean;
     onCancelOperation?: (callback: () => void) => void;
+    chatFiles?: (TFile | TFolder)[];
+    aiChatIsVisible?: boolean;
+    setAiChatIsVisible?: () => void;
+    mainBarVisible?: boolean;
+
+    getIcon?: (size: number, fileExst: string) => string;
+    displayFileExtension?: boolean;
+    aiChatID?: string;
+    aiSelectedFolder?: string | number;
+    aiUserId?: string;
+    vectorizedFiles?: TFile[];
+    user?: TUser;
+    withTabs?: boolean;
+    withoutFooter?: boolean;
+    dragging?: boolean;
+    dropTargetPreview?: string;
+    clearDropPreviewLocation?: () => void;
+    startDropPreview?: () => void;
+    asideInfoPanel?: boolean;
   };
 
 export type SectionContextMenuProps = {

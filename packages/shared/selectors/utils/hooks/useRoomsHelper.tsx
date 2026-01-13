@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -58,7 +58,6 @@ const useRoomsHelper = ({
 
   isInit,
   setIsInit,
-
   withCreate,
   disableThirdParty,
   excludeItems,
@@ -68,6 +67,7 @@ const useRoomsHelper = ({
   setSelectedItemType,
   subscribe,
   setSelectedItemSecurity,
+  setSelectedTreeNode,
 }: UseRoomsHelperProps) => {
   const { t } = useTranslation(["Common"]);
   const {
@@ -144,6 +144,7 @@ const useRoomsHelper = ({
 
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
+      if (searchArea) filter.searchArea = searchArea;
       filter.filterValue = filterValue;
       filter.type = filterType as unknown as string | string[];
       filter.searchArea = searchArea || "";
@@ -178,6 +179,8 @@ const useRoomsHelper = ({
       setHasNextPage(count === PAGE_COUNT);
 
       setSelectedItemSecurity?.(current.security);
+
+      setSelectedTreeNode?.({ ...current, path: roomsFromApi.pathParts });
 
       if (firstLoadRef.current || startIndex === 0) {
         const { security } = current;
@@ -260,6 +263,7 @@ const useRoomsHelper = ({
       searchArea,
       disableThirdParty,
       excludeItems,
+      setSelectedTreeNode,
     ],
   );
 

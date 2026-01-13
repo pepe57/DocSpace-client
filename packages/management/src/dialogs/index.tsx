@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -49,23 +49,21 @@ export const ManagementDialogs = observer(
       connectDialogVisible,
     } = spacesStore;
 
-    const { tenantAlias, baseDomain, domainValidator } = settings;
+    const { baseDomain, domainValidator } = settings;
 
     return (
       <>
-        {domainDialogVisible && <ChangeDomainDialog />}
-        {createPortalDialogVisible && (
+        {domainDialogVisible ? <ChangeDomainDialog /> : null}
+        {createPortalDialogVisible ? (
           <CreatePortalDialog
-            tenantAlias={tenantAlias}
             baseDomain={baseDomain}
             domainValidator={domainValidator}
             user={user}
           />
-        )}
-        {deletePortalDialogVisible && <DeletePortalDialog />}
-        {connectDialogVisible && <ConnectDialog />}
+        ) : null}
+        {deletePortalDialogVisible ? <DeletePortalDialog /> : null}
+        {connectDialogVisible ? <ConnectDialog /> : null}
       </>
     );
   },
 );
-

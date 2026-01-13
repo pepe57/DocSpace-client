@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,8 +43,10 @@ import { HTML_EXST, EBOOK_EXST } from "@docspace/shared/constants";
 import {
   getIconPathByFolderType,
   isPublicPreview,
+  insertEditorPreloadFrame,
 } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
 class FilesSettingsStore {
   thirdPartyStore;
@@ -140,6 +142,8 @@ class FilesSettingsStore {
 
   extsDocument = [];
 
+  extsDiagram = [];
+
   internalFormats = {};
 
   masterFormExtension = "";
@@ -149,6 +153,10 @@ class FilesSettingsStore {
   hideConfirmRoomLifetime = false;
 
   hideConfirmCancelOperation = false;
+
+  extsFilesVectorized = [];
+
+  documentServiceLocation = null;
 
   constructor(
     thirdPartyStore,
@@ -228,8 +236,18 @@ class FilesSettingsStore {
             capabilities.forEach((item) => {
               item.splice(1, 1);
             });
+
             this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
             this.thirdPartyStore.setThirdPartyProviders(providers);
+          });
+      })
+      .then(() => {
+        api.files
+          .getDocumentServiceLocation()
+          .then(({ docServicePreloadUrl }) => {
+            if (docServicePreloadUrl) {
+              insertEditorPreloadFrame(docServicePreloadUrl);
+            }
           });
       })
       .catch(() => this.setIsErrorSettings(true));
@@ -263,8 +281,8 @@ class FilesSettingsStore {
       .catch((e) => toastr.error(e));
   };
 
-  setKeepNewFileName = (data) => {
-    api.files
+  setKeepNewFileName = async (data) => {
+    return api.files
       .changeKeepNewFileName(data)
       .then((res) => this.setFilesSetting("keepNewFileName", res))
       .catch((e) => toastr.error(e));
@@ -308,7 +326,25 @@ class FilesSettingsStore {
   setForceSave = (data) =>
     api.files.forceSave(data).then((res) => this.setForcesave(res));
 
-  getDocumentServiceLocation = () => api.files.getDocumentServiceLocation();
+  getDocumentServiceLocation = async () => {
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    try {
+      return await api.files.getDocumentServiceLocation(
+        null,
+        abortController.signal,
+      );
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+
+      throw error;
+    }
+  };
+
+  setDocumentServiceLocation = (data) => {
+    this.documentServiceLocation = data;
+  };
 
   changeDocumentServiceLocation = (
     docServiceUrl,
@@ -381,6 +417,8 @@ class FilesSettingsStore {
 
   isDocument = (extension) => presentInArray(this.extsDocument, extension);
 
+  isDiagram = (extension) => presentInArray(this.extsDiagram, extension);
+
   isMasterFormExtension = (extension) => this.masterFormExtension === extension;
 
   isPresentation = (extension) =>
@@ -402,7 +440,7 @@ class FilesSettingsStore {
   getIcon = (
     size = 32,
     fileExst = null,
-    providerKey = null, // eslint-disable-line @typescript-eslint/no-unused-vars
+    providerKey = null,
     contentLength = null,
     roomType = null,
     isArchive = null,
@@ -468,6 +506,9 @@ class FilesSettingsStore {
         case RoomsType.CustomRoom:
           path = "customRoom.svg";
           break;
+        case RoomsType.AIRoom:
+          path = "aiRoom.svg";
+          break;
         case RoomsType.EditingRoom:
           path = "editingRoom.svg";
           break;
@@ -493,12 +534,15 @@ class FilesSettingsStore {
   };
 
   getIconUrl = (extension, size) => {
+    const path = `${extension.replace(/^\./, "")}.svg`;
+    return this.getIconBySize(path, size);
+  };
+
+  getPluginFileIconUrl = (extension) => {
     const { enablePlugins } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
 
-    const path = `${extension.replace(/^\./, "")}.svg`;
-
-    if (enablePlugins && fileItemsList) {
+    if (!isAIAgents() && enablePlugins && fileItemsList) {
       const fileItem = fileItemsList.find(
         ({ value }) => value.extension === extension && value.fileIcon,
       );
@@ -506,8 +550,6 @@ class FilesSettingsStore {
         return fileItem.value.fileIcon;
       }
     }
-
-    return this.getIconBySize(path, size);
   };
 
   getFileIcon = (
@@ -520,6 +562,10 @@ class FilesSettingsStore {
     ebook = false,
   ) => {
     let path = "";
+
+    const pluginIconUrl = this.getPluginFileIconUrl(extension);
+
+    if (pluginIconUrl) return pluginIconUrl;
 
     if (archive) path = "archive.svg";
 

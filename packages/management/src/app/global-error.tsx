@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -62,9 +62,9 @@ export default function GlobalError({ error }: { error: Error }) {
       const settingsData = await getSettings();
 
       setSettings(settingsData);
-    } catch (error) {
+    } catch (e) {
       setError(true);
-      console.error(error);
+      console.error(e);
     } finally {
       setIsLoading(false);
     }
@@ -77,9 +77,9 @@ export default function GlobalError({ error }: { error: Error }) {
   if (isError) return;
 
   return (
-    <html>
+    <html lang={i18n.language}>
       <body>
-        {!isLoading && (
+        {!isLoading ? (
           <ThemeProvider theme={theme}>
             <Error520SSR
               i18nProp={i18n}
@@ -90,9 +90,8 @@ export default function GlobalError({ error }: { error: Error }) {
               currentDeviceType={currentDeviceType}
             />
           </ThemeProvider>
-        )}
+        ) : null}
       </body>
     </html>
   );
 }
-

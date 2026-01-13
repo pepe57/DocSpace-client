@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,14 +30,12 @@ import React, { useEffect } from "react";
 
 import SocketHelper from "@docspace/shared/utils/socket";
 
-import { StyledLayout } from "./layout.styled";
+import type { TGetAllPortals } from "@docspace/shared/api/management/types";
+import useAppState from "@/hooks/useAppState";
 import { Article } from "../article";
 import { Section } from "../section";
 import { Header } from "../header";
-
-import type { TGetAllPortals } from "@docspace/shared/api/management/types";
-
-import useAppState from "@/hooks/useAppState";
+import styles from "./layout.module.scss";
 
 export const LayoutWrapper = ({
   children,
@@ -55,14 +53,14 @@ export const LayoutWrapper = ({
   useEffect(() => {
     if (!socketUrl) return;
 
-    SocketHelper.connect(socketUrl, "");
+    SocketHelper?.connect(socketUrl, "");
   }, [socketUrl]);
 
   return (
-    <StyledLayout>
+    <div className={styles.layout}>
       <Header />
       <Article isCommunity={isCommunity} />
       <Section portals={portals}>{children}</Section>
-    </StyledLayout>
+    </div>
   );
 };

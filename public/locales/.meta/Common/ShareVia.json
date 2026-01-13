@@ -3,7 +3,7 @@
   "content": "Share via",
   "content_en_sha1_hash": "4b4d0e313751010e6bea5c8ea7001bb5a482ad30",
   "created_at": "2025-05-19T21:30:48.716Z",
-  "updated_at": "2025-05-26T07:57:32.373Z",
+  "updated_at": "2025-12-19T13:32:32.185Z",
   "comment": {
     "text": "The translation key \"ShareVia\" is used to display a label for buttons or links that allow users to share content via email and/or Twitter. It appears in the UI as part of a dropdown menu or link selection component, where it prompts users to choose how they want to share content from their device.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 258,
+      "line_number": 285,
       "context": "withBackdrop={false}\n isDefaultMode={false}\n fixedDirection\n >\n <DropDownItem\n label={`${t(\"Common:ShareVia\")} e-mail`}\n onClick={() => shareEmail(activeLink[0])}\n />\n <DropDownItem\n label={`${t(\"Common:ShareVia\")} Twitter`}\n onClick={() => shareTwitter(activeLink[0])}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 258,
+      "line_number": 285,
       "context": "withBackdrop={false}\n isDefaultMode={false}\n fixedDirection\n >\n <DropDownItem\n label={`${t(\"Common:ShareVia\")} e-mail`}\n onClick={() => shareEmail(activeLink[0])}\n />\n <DropDownItem\n label={`${t(\"Common:ShareVia\")} Twitter`}\n onClick={() => shareTwitter(activeLink[0])}",
       "module": "/packages/client"
     }
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Share via' translates more accurately to 'Vasitəylə paylaş' or 'Paylaşma vasitəsilə'. 'Paylaş' simply means 'share' and lacks the 'via' element.",
-          "suggestion": "Vasitəylə paylaş"
+          "description": "'Share via' translates to more than just 'Paylaş'. 'Paylaş' means 'Share' but the phrase includes 'via'. A more accurate translation would incorporate that aspect, such as 'Vasitəsilə paylaş' or 'Paylaşım vasitəsilə'.",
+          "suggestion": "Consider 'Vasitəsilə paylaş' or 'Paylaşım vasitəsilə' for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -63,7 +63,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Freigeben über' is technically correct, it's not the most natural or idiomatic translation of 'Share via' in German. 'Teilen über' is generally preferred.",
+          "suggestion": "Teilen über"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -84,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Jaa käyttämällä' is a literal translation of 'Share via' but may not be the most natural or idiomatic Finnish phrasing. 'Share via' often implies sharing through a specific platform or service.",
-          "suggestion": "Consider alternatives like 'Jaa' (Share), 'Jaa sovelluksella' (Share with an app), or 'Jaa palvelun kautta' (Share via a service), depending on the context."
+          "description": "While \"Jaa käyttämällä\" is understandable, a more natural and accurate translation of \"Share via\" in Finnish would be \"Jaa sovelluksen kautta\" or simply \"Jaa\". \"Käyttämällä\" implies using something to share, which isn't the intended meaning of \"Share via\".",
+          "suggestion": "Jaa sovelluksen kautta"
         }
       ],
       "approved_at": null
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Համօգտագործել միջոցով\" doesn't accurately convey the meaning of \"Share via.\" It translates more to \"Use together with\" or \"Utilize through,\" which is not the intended meaning of sharing content through a platform.",
-          "suggestion": "A more accurate translation would be something like \"բաժանելու միջոցով\" (bajanelu mijocov), which means 'share via,' or \"տեղաբաշխելու միջոցով\" (telabashkelu mijocov), which is closer to 'distribute via'."
+          "description": "The Armenian translation \"Համօգտագործել միջոցով\" doesn't accurately convey the meaning of \"Share via.\" It translates to something like \"Use with/through,\" which implies a more complex action than simply sharing.",
+          "suggestion": "A more appropriate translation for \"Share via\" would be something along the lines of \"բաժանել միջոցով\" (bajanel mijocov - share through) or \"հետաքրքրել միջոցով\" (hetakrerkel mijocov - share through) depending on the context.  A simpler option might be just \"բաժանել\" (bajanel - share)."
         }
       ],
       "approved_at": null
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"でシェアする\" is a literal translation of 'Share via' but might not be the most natural or idiomatic way to express it in Japanese. While understandable, it's often better to use a more context-specific phrasing.",
-          "suggestion": "Consider alternatives like: 「共有する」(kyōyū suru - to share), 「送る」(okuru - to send, depending on the sharing context), or a more specific phrase depending on the platform (e.g., 'Twitter で共有' - 'Share on Twitter')"
+          "description": "The translation \"でシェアする\" (de shea suru) is a functional translation but not the most natural or preferred way to say \"Share via\" in Japanese. While understandable, it's a very literal rendering and lacks nuance. \"Share via\" often implies sharing *through* a specific platform, which \"でシェアする\" doesn't always convey.",
+          "suggestion": "Consider alternatives like: \"共有する\" (kyōyū suru - to share), \"～からシェアする\" (~ kara shea suru - share from ~), or a more context-dependent phrasing depending on the intended platform (e.g., 'Twitterで共有する' - share on Twitter)"
         }
       ],
       "approved_at": null
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"공유 방법\" (gong-yu bang-beop) literally translates to \"sharing methods\". While it conveys the general idea of sharing, \"Share via\" implies a specific method or platform. A more accurate translation that captures the nuance of 'via' would be something like \"공유하기\" (gong-yu-ha-gi) which means 'to share' or \"공유 경로\" (gong-yu gyeong-ro) which means 'sharing path/route'.",
-          "suggestion": "Consider \"공유하기\" (gong-yu-ha-gi) or \"공유 경로\" (gong-yu gyeong-ro) for a more precise translation."
+          "description": "The Korean translation \"공유 방법\" (gongyu bangbeop) translates to 'sharing methods' or 'ways to share'. While related to 'Share via', it's not a direct or equivalent translation of 'Share via'. A more accurate translation might be something like '공유하기' (gongyu-hagi) which means 'to share'.",
+          "suggestion": "공유하기 (gongyu-hagi)"
         }
       ],
       "approved_at": null
@@ -150,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Koplietot, izmantojot\" is a literal translation of \"Share via\" but sounds unnatural in Latvian. A more idiomatic and natural translation would be something like \"Dalīties ar\" or \"Kopīgot\".",
-          "suggestion": "Dalīties ar"
+          "description": "The translation \"Koplietot, izmantojot\" is a literal translation and not the most natural phrasing in Latvian. \"Share via\" often implies a specific platform or method. A more accurate and natural translation would depend on the context, but a direct equivalent is difficult.",
+          "suggestion": "Consider alternatives such as \"Dalīties ar\" (Share with) or \"Koplietot caur\" (Share through) depending on the intended meaning and usage within the application."
         }
       ],
       "approved_at": null
@@ -189,13 +195,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Отправить по' is understandable, it doesn't perfectly capture the nuance of 'Share via'. 'Share via' implies a method of sharing, whereas 'Отправить по' more literally means 'send through'. A more accurate translation might be 'Поделиться через' or 'Расшарить через'.",
-          "suggestion": "Поделиться через"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"මෙමගින් බෙදාගන්න\" is a functional equivalent but not the most natural or direct translation of \"Share via\". While it literally means 'Share through this,' a more common and accurate translation would be something along the lines of \"ចែកදීම\" (Kaekdima) or \"බෙදාහරින්න\" (Bedaharinna).",
-          "suggestion": "Consider using \"ចែកදීම\" (Kaekdima) or \"බෙදාහරින්න\" (Bedaharinna) for a more natural and accurate translation."
+          "description": "The Sinhala translation \"මෙමගින් බෙදාගන්න\" (Memagin bedaganna) translates more closely to 'Share through this' or 'Share via this method'. While not entirely wrong, it lacks the simplicity and directness of \"Share via\". A more accurate and natural translation would be something like \"බෙදාගන්න\" (Bedaganna) or \"ចែកගන්න\" (Chekaganna).",
+          "suggestion": "බෙදාගන්න (Bedaganna) or බෙදා හැලන්න (Bedahaelanna) or  චែកගන්න (Chekaganna)"
         }
       ],
       "approved_at": null
@@ -228,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Дели преко\" doesn't fully capture the meaning of \"Share via\". While \"дели\" means 'share', \"преко\" translates to 'over' or 'across,' which isn't the intended meaning of 'via'. A more accurate translation would convey the idea of 'through' or 'by way of'.",
-          "suggestion": "Consider alternatives like \"Дели преко/пут\" or \"Дели путем\" which more accurately reflect 'via'."
+          "description": "While \"Дели преко\" is understandable, it's not the most natural or idiomatic translation of \"Share via.\" It literally translates to \"Share over/across.\" A more accurate and common translation would be something like \"Подели преко\" or \"Дели путем\".",
+          "suggestion": "Подели преко"
         }
       ],
       "approved_at": null
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Deli preko\" doesn't accurately convey the meaning of \"Share via.\" \"Deli\" means \"share\" but \"preko\" translates to \"over\" or \"across.\" It doesn't capture the intended meaning of sharing through a specific platform or method.",
-          "suggestion": "A more accurate translation would be something like \"Podeli preko\" (Podeli = Share) or \"Deljenje preko\" (Sharing via)."
+          "description": "The translation \"Deli preko\" doesn't accurately convey the meaning of \"Share via\". \"Deli\" means 'deliver' or 'distribute', while \"preko\" means 'over' or 'through'. The correct Serbian (Latin) translation should be something like \"Podeli preko\" or \"Deljenje preko\".",
+          "suggestion": "Podeli preko"
         }
       ],
       "approved_at": null
@@ -252,7 +252,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Aracılığıyla paylaş\" is a literal translation of \"Share via\", it's not the most natural or common phrasing in Turkish for this context. It sounds somewhat formal and less user-friendly. A more natural translation would be something like \"Paylaş\" or \"Paylaşım Yap\".",
+          "description": "While \"Aracılığıyla paylaş\" is technically correct, it's a rather formal and less natural way to say \"Share via\" in Turkish. A more common and user-friendly translation would be \"Paylaş\"",
           "suggestion": "Paylaş"
         }
       ],
@@ -276,10 +276,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"共享，通过\" is not a natural or accurate translation of \"Share via\". \"共享\" (shared) doesn't directly convey the meaning of 'via'. The combination feels disjointed.",
-          "suggestion": "Consider alternatives like \"通过分享\" (Through sharing), \"分享至\" (Share to), or simply \"分享\" (Share), depending on the context."
+          "description": "The translation \"共享，通过\" is not a natural or accurate rendering of \"Share via\". \"共享\" (shared) implies a different action than simply sharing *through* a method.  \"通过\" (through) is also somewhat awkward in this context.",
+          "suggestion": "A better translation would be something like \"通过分享\" (Tongguo fenxiang - Share through) or \"分享至\" (Fenxiang zhi - Share to).  The best option depends on the specific context."
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

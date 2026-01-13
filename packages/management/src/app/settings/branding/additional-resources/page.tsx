@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,8 +27,11 @@
 import { getQuota, getAllPortals, getAdditionalResources } from "@/lib/actions";
 
 import { AdditionalResourcesPage } from "./page.client";
+import { logger } from "../../../../../logger.mjs";
 
 async function Page() {
+  logger.info("Branding additional-resources page");
+
   const [quota, portals, additionalResources] = await Promise.all([
     getQuota(),
     getAllPortals(),
@@ -45,4 +48,3 @@ async function Page() {
 }
 
 export default Page;
-

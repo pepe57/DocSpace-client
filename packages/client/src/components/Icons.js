@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,7 @@ import { commonIconsStyles, injectDefaultTheme } from "@docspace/shared/utils";
 import FavoriteIcon from "PUBLIC_DIR/images/favorite.react.svg";
 import FileActionsConvertEditDocIcon from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg";
 import FileActionsLockedIcon from "PUBLIC_DIR/images/file.actions.locked.react.svg";
-import EditFormIcon from "PUBLIC_DIR/images/access.edit.form.react.svg";
+import EditFormIcon from "PUBLIC_DIR/images/form.fill.rect.svg";
 
 import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
 

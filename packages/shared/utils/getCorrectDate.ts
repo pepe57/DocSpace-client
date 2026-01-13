@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import "moment/locale/en-gb";
 
 export default function getCorrectDate(
   locale: string,
-  date: string | Date,
+  date: string | Date | Moment,
   dateFormat = "L",
   timeFormat = "LT",
   tz?: string,

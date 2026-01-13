@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,6 +57,7 @@ const MobileView = ({ isSSOAvailable, logoText }) => {
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
+        dataTestId="sp_settings"
       />
       <MobileCategoryWrapper
         title={t("SpMetadata", {
@@ -70,6 +71,7 @@ const MobileView = ({ isSSOAvailable, logoText }) => {
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
+        dataTestId="sp_metadata"
       />
     </StyledWrapper>
   );

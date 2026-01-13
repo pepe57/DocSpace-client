@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,16 +32,41 @@ export class MockRequest {
   constructor(public readonly page: Page) {}
 
   async router(endpoints: TEndpoint[]) {
-    endpoints.forEach(async (endpoint) => {
-      await this.page.route(endpoint.url, async (route) => {
-        const json = await endpoint.dataHandler().json();
+    await Promise.all(
+      endpoints.map(async (endpoint) => {
+        return this.page.route(endpoint.url, async (route) => {
+          const method = route.request().method();
 
-        await route.fulfill({ json, status: json.statusCode ?? 200 });
-      });
-    });
+          if (endpoint.method && endpoint.method !== method) {
+            await route.fallback();
+            return;
+          }
+
+          const requestHeaders = new Headers(route.request().headers());
+          const response = endpoint.dataHandlerWithHeaders
+            ? endpoint.dataHandlerWithHeaders(requestHeaders)
+            : endpoint.dataHandler();
+
+          if (endpoint.responseType === "text") {
+            const body = await response.text();
+
+            await route.fulfill({
+              body,
+              status: response.status ?? 200,
+            });
+
+            return;
+          }
+
+          const json = await response.json();
+
+          await route.fulfill({ json, status: json.statusCode ?? 200 });
+        });
+      }),
+    );
   }
 
-  async setHeaders(url: string, headers: string[]) {
+  async setHeaders(url: string | RegExp, headers: string[]) {
     await this.page.route(url, async (route, request) => {
       const objHeaders: { [key: string]: "true" } = {};
       headers.forEach((item) => (objHeaders[item] = "true"));

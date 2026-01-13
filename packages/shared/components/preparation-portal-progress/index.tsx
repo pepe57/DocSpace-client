@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -36,9 +36,10 @@ import styles from "./PreparationPortalProgress.module.scss";
 export const PreparationPortalProgress = ({
   text,
   percent,
+  ...rest
 }: PreparationPortalProgressProps) => {
   return (
-    <div data-testid="preparation-portal-progress">
+    <div data-testid="preparation-portal-progress" {...rest}>
       <div className={styles.preparationPortalProgress}>
         <div className={styles.preparationPortalProgressBar}>
           <div

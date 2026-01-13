@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -95,12 +95,13 @@ const useLoadersHelper = ({ withInit }: { withInit?: boolean }) => {
       if (breadCrumbsLoaderTimeout.current) {
         return;
       }
-      breadCrumbsStartLoader.current = new Date();
       breadCrumbsLoaderTimeout.current = setTimeout(() => {
+        breadCrumbsStartLoader.current = new Date();
+
         if (isMount.current) setShowBreadCrumbsLoader(true);
       }, SHOW_LOADER_TIMER);
     } else {
-      if (breadCrumbsLoaderTimeout.current) {
+      if (breadCrumbsLoaderTimeout.current && !breadCrumbsStartLoader.current) {
         clearTimeout(breadCrumbsLoaderTimeout.current);
         breadCrumbsLoaderTimeout.current = null;
         breadCrumbsStartLoader.current = null;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -49,9 +49,14 @@
   justify-content: center;
   cursor: pointer;
   user-select: none;
+  color: #333;
 
   &.selected {
     background-color: #e3f2fd;
     border-color: #2196f3;
   }
+}
+
+:global(.theme-dark) .item {
+  color: #333;
 }

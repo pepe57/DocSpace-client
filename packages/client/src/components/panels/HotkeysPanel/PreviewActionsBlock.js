@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,6 +31,12 @@ import { Text } from "@docspace/shared/components/text";
 const PreviewActionsBlock = ({ t, textStyles, keyTextStyles }) => {
   return (
     <>
+      <Row className="hotkeys_row">
+        <>
+          <Text {...textStyles}>{t("OpenContextMenu")}</Text>
+          <Text {...keyTextStyles}>Shift + c</Text>
+        </>
+      </Row>
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("HotkeysClose")}</Text>

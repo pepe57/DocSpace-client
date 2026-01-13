@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -46,7 +46,7 @@ import { WhiteLabelPage } from "./white-label/page.client";
 import { CompanyInfoPage } from "./company-info/page.client";
 import { AdditionalResourcesPage } from "./additional-resources/page.client";
 
-import { StyledBrandingPage } from "./page.styled";
+import styles from "./branding.module.scss";
 
 const baseUrl = "/settings";
 
@@ -64,6 +64,7 @@ const BrandingPage = ({
   licenseAgreementsUrl,
   isEnterprise,
   logoText,
+  isMobile,
 }: {
   whiteLabelLogos: ILogo[];
   whiteLabelText: string;
@@ -78,10 +79,11 @@ const BrandingPage = ({
   licenseAgreementsUrl: string;
   isEnterprise: boolean;
   logoText: string;
+  isMobile?: boolean;
 }) => {
   const router = useRouter();
   const { currentDeviceType } = useDeviceType();
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isMobileView = isMobile || currentDeviceType === DeviceType.mobile;
 
   const isCustomizationAvailable = getIsCustomizationAvailable(quota);
   const isSettingPaid = getIsSettingsPaid(isCustomizationAvailable, portals);
@@ -97,13 +99,13 @@ const BrandingPage = ({
       <MobileView
         isSettingPaid={isSettingPaid}
         displayAbout={showAbout}
-        displayAdditional={true}
+        displayAdditional
         baseUrl={baseUrl}
         onClickLink={onClickLink}
       />
     );
   return (
-    <StyledBrandingPage>
+    <div className={styles.wrapper}>
       <BrandNamePage
         brandName={whiteLabelText}
         isSettingPaid={isSettingPaid}
@@ -112,7 +114,6 @@ const BrandingPage = ({
       />
       <WhiteLabelPage
         whiteLabelLogos={whiteLabelLogos}
-        whiteLabelText={whiteLabelText}
         showAbout={showAbout}
         isDefaultWhiteLabel={isDefaultWhiteLabel}
         standalone={standalone}
@@ -137,7 +138,7 @@ const BrandingPage = ({
         quota={quota}
         additionalResourcesData={additionalResources}
       />
-    </StyledBrandingPage>
+    </div>
   );
 };
 
