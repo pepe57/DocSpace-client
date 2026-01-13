@@ -26,13 +26,13 @@
 
 import { toastr } from "../../components/toast";
 import { getCookie } from "../../utils";
+import { getAiModelName } from "../../utils/ai";
+import { checkFilterInstance } from "../../utils/common";
 
 import { request } from "../client";
 import type { TFile } from "../files/types";
 import type { KnowledgeType, ToolsPermission, WebSearchType } from "./enums";
 import RoomsFilter from "../rooms/filter";
-import { checkFilterInstance } from "../../utils/common";
-import { getAiModelName } from "../../utils/ai";
 
 import type {
   TCreateAiProvider,
