@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,6 +34,7 @@ import { Text } from "@docspace/shared/components/text";
 
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
+import { DefaultPageSetting } from "./sub-components/DefaultPageSetting";
 import styles from "./FileManagement.module.scss";
 
 type FileManagementProps = {
@@ -107,7 +108,8 @@ const FileManagement = ({
   }, [setOpenEditorInSameTab, openEditorInSameTab]);
 
   return (
-    <div className={styles.styledWrapper}>
+    <div className={styles.styledWrapper} data-testid="profile-file-management">
+      <DefaultPageSetting />
       <div className={styles.settingsSection}>
         <div className={styles.toggleBtnWrapper}>
           <ToggleButton

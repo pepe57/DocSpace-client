@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -404,12 +404,11 @@ const LanguageAndTimeZoneComponent = (props) => {
         window.timezone = state.timezone.key;
       })
       .then(() => toastr.success(t("Common:SuccessfullySaveSettingsMessage")))
-      .then(
-        () =>
-          !user.cultureName &&
-          lng !== state.language.key &&
-          window.location.reload(),
-      )
+      .then(() => {
+        if (!user.cultureName && lng !== state.language.key)
+          window.location.reload();
+        else settingsStore.setCulture(state.language.key);
+      })
       .catch((error) => toastr.error(error))
       .finally(() => setState((val) => ({ ...val, isLoading: false })));
 

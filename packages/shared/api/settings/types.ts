@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -119,7 +119,7 @@ export type TSettings = {
   };
   formGallery: TFormGallery;
   wizardToken?: string;
-  defaultPage?: string;
+  defaultFolderType?: string;
   tagManagerId?: string;
   limitedAccessSpace: boolean;
   enabledJoin?: boolean;
@@ -230,6 +230,10 @@ export type THelpCenterEntries = {
   dataImport: string;
   apikeys: string;
   aisettings: string;
+  aiprovidersettings: string;
+  mcpserverssettings: string;
+  websearchsettings: string;
+  knowledgesettings: string;
   documentService: string;
 };
 

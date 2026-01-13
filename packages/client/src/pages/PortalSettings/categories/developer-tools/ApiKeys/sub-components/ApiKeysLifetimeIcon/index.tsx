@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,14 +57,16 @@ const StyledApiKeysLifetimeIcon = styled.div<{ isExpired: boolean }>`
 export const ApiKeysLifetimeIcon = ({
   t,
   item,
+  expiresAt,
   expiresAtDate,
 }: {
   t: TTranslation;
   item: TApiKey;
+  expiresAt: string;
   expiresAtDate: string;
 }) => {
-  const showLifetimeIcon = expiresAtDate;
-  const isExpired = moment().isAfter(moment(expiresAtDate));
+  const showLifetimeIcon = expiresAt;
+  const isExpired = moment().isAfter(moment(expiresAt));
 
   const getTooltipContent = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>

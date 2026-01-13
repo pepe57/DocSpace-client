@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,6 +28,7 @@ import { useTranslation } from "react-i18next";
 
 import { EmployeeStatus } from "@docspace/shared/enums";
 import { TUser } from "@docspace/shared/api/people/types";
+import { TooltipContainer } from "@docspace/shared/components/tooltip";
 
 import {
   Avatar,
@@ -68,16 +69,25 @@ const GroupMember = ({ groupMember, isManager }: GroupMemberProps) => {
 
       <div className={styles.mainWrapper}>
         <div className={styles.nameWrapper}>
-          <div className={styles.name} title={groupMember.displayName}>
+          <TooltipContainer
+            as="div"
+            className={styles.name}
+            title={groupMember.displayName}
+          >
             {groupMember.displayName}
-          </div>
+          </TooltipContainer>
           {groupMember.status === EmployeeStatus.Pending ? (
             <StyledSendClockIcon />
           ) : null}
         </div>
-        <div className={styles.email} title={groupMember.email}>
+        <TooltipContainer
+          as="div"
+          className={styles.email}
+          title={groupMember.email}
+          tooltipFitToContent
+        >
           {groupMember.email}
-        </div>
+        </TooltipContainer>
       </div>
 
       <div className={styles.contextBtnWrapper}>

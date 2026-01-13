@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -46,6 +46,7 @@ import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Knowledge.module.scss";
 import { ResetKnowledgeDialog } from "./dialogs/reset";
+import { KnowledgeLoader } from "./KnowledgeLoader";
 
 type TKnowledgeProps = {
   knowledgeInitied?: AISettingsStore["knowledgeInitied"];
@@ -54,7 +55,7 @@ type TKnowledgeProps = {
   hasAIProviders?: AISettingsStore["hasAIProviders"];
   getAIConfig?: SettingsStore["getAIConfig"];
   aiConfig?: SettingsStore["aiConfig"];
-  aiSettingsUrl?: string;
+  knowledgeSettingsUrl?: SettingsStore["knowledgeSettingsUrl"];
 };
 
 const FAKE_KEY_VALUE = "0000000000000000";
@@ -66,7 +67,7 @@ const KnowledgeComponent = ({
   hasAIProviders,
   getAIConfig,
   aiConfig,
-  aiSettingsUrl,
+  knowledgeSettingsUrl,
 }: TKnowledgeProps) => {
   const { t } = useTranslation(["Common", "AISettings", "AIRoom", "Settings"]);
 
@@ -197,43 +198,7 @@ const KnowledgeComponent = ({
     });
   }, [knowledgeConfig]);
 
-  if (!knowledgeInitied)
-    return (
-      <div className={generalStyles.search}>
-        <RectangleSkeleton
-          className={generalStyles.description}
-          width="700px"
-          height="36px"
-        />
-        <RectangleSkeleton
-          className={generalStyles.learnMoreLink}
-          width="100px"
-          height="19px"
-        />
-        <div className={styles.knowledgeForm}>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="119px" height="20px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="48px" height="32px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-        </div>
-        <div className={styles.buttonContainer}>
-          <RectangleSkeleton
-            className={styles.addProviderButton}
-            width="128px"
-            height="32px"
-          />
-          <RectangleSkeleton
-            className={styles.learnMoreLink}
-            width="322px"
-            height="32px"
-          />
-        </div>
-      </div>
-    );
+  if (!knowledgeInitied) return <KnowledgeLoader />;
 
   const isSaveDisabled =
     !currentValue || selectedOption === KnowledgeType.None || isKeyHidden;
@@ -249,6 +214,7 @@ const KnowledgeComponent = ({
           !hasAIProviders
             ? t("AISettings:ToUseAddProvider", {
                 value: t("AIRoom:Knowledge"),
+                aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }
@@ -256,22 +222,23 @@ const KnowledgeComponent = ({
         <Text className={generalStyles.description}>
           {t("AISettings:KnowledgeSettingsDescription", {
             modelName: aiConfig?.embeddingModel || "text-embedding-3-small",
+            aiAgents: t("Common:AIAgents"),
           })}
         </Text>
-        {aiSettingsUrl ? (
+        {knowledgeSettingsUrl ? (
           <Link
             className={generalStyles.learnMoreLink}
             target={LinkTarget.blank}
             type={LinkType.page}
             fontWeight={600}
             isHovered
-            href={aiSettingsUrl}
+            href={knowledgeSettingsUrl}
             color="accent"
           >
             {t("Common:LearnMore")}
           </Link>
         ) : null}
-        <div className={styles.knowledgeForm}>
+        <div className={styles.knowledgeForm} data-testid="knowledge-form">
           <FieldContainer
             labelVisible
             isVertical
@@ -290,6 +257,8 @@ const KnowledgeComponent = ({
               }
               displaySelectedOption
               isDisabled={!hasAIProviders || isKeyHidden}
+              dataTestId="knowledge-provider-combobox"
+              dropDownTestId="knowledge-provider-dropdown"
             />
           </FieldContainer>
           <FieldContainer
@@ -299,7 +268,10 @@ const KnowledgeComponent = ({
             removeMargin
           >
             {isKeyHidden ? (
-              <div className={styles.aiBanner}>
+              <div
+                className={styles.aiBanner}
+                data-testid="knowledge-key-hidden-banner"
+              >
                 <Text fontSize="12px" fontWeight={400} lineHeight="16px">
                   {t("AISettings:WebSearchKeyHiddenDescription")}
                 </Text>
@@ -319,6 +291,7 @@ const KnowledgeComponent = ({
                     isKeyHidden || selectedOption === KnowledgeType.None
                   }
                   autoComplete="off"
+                  testId="knowledge-key-input"
                 />
                 <Text className={styles.hiddenKeyDescription}>
                   {t("AISettings:KnowledgeKeyDescription")}
@@ -336,6 +309,7 @@ const KnowledgeComponent = ({
             onClick={onSave}
             isLoading={saveRequestRunning}
             isDisabled={isSaveDisabled}
+            testId="knowledge-save-button"
           />
           <Button
             size={ButtonSize.small}
@@ -348,6 +322,7 @@ const KnowledgeComponent = ({
               saveRequestRunning ||
               knowledgeConfig.needReset
             }
+            testId="knowledge-reset-button"
           />
         </div>
       </div>
@@ -370,7 +345,9 @@ export const Knowledge = inject(
       hasAIProviders: aiSettingsStore.hasAIProviders,
       getAIConfig: settingsStore.getAIConfig,
       aiConfig: settingsStore.aiConfig,
-      aiSettingsUrl: settingsStore.aiSettingsUrl,
+      knowledgeSettingsUrl: settingsStore.knowledgeSettingsUrl,
     };
   },
 )(observer(KnowledgeComponent));
+
+export { KnowledgeLoader };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -534,10 +534,13 @@ class FilesSettingsStore {
   };
 
   getIconUrl = (extension, size) => {
+    const path = `${extension.replace(/^\./, "")}.svg`;
+    return this.getIconBySize(path, size);
+  };
+
+  getPluginFileIconUrl = (extension) => {
     const { enablePlugins } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
-
-    const path = `${extension.replace(/^\./, "")}.svg`;
 
     if (!isAIAgents() && enablePlugins && fileItemsList) {
       const fileItem = fileItemsList.find(
@@ -547,8 +550,6 @@ class FilesSettingsStore {
         return fileItem.value.fileIcon;
       }
     }
-
-    return this.getIconBySize(path, size);
   };
 
   getFileIcon = (
@@ -561,6 +562,10 @@ class FilesSettingsStore {
     ebook = false,
   ) => {
     let path = "";
+
+    const pluginIconUrl = this.getPluginFileIconUrl(extension);
+
+    if (pluginIconUrl) return pluginIconUrl;
 
     if (archive) path = "archive.svg";
 

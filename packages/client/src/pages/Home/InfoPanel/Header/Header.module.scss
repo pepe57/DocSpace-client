@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,6 +56,9 @@
 
     :global(.scroll-body) > div {
       justify-content: center;
+      padding: 0 20px;
+      width: fit-content;
+      min-width: calc(100% - 40px);
     }
   }
 }

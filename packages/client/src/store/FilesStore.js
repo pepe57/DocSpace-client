@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -235,6 +235,8 @@ class FilesStore {
   isErrorRoomNotAvailable = false;
 
   isErrorAIAgentNotAvailable = false;
+
+  isErrorAccountNotAvailable = false;
 
   roomsController = null;
 
@@ -966,6 +968,10 @@ class FilesStore {
 
   setIsErrorAIAgentNotAvailable = (state) => {
     this.isErrorAIAgentNotAvailable = state;
+  };
+
+  setIsErrorAccountNotAvailable = (state) => {
+    this.isErrorAccountNotAvailable = state;
   };
 
   setTempActionFilesIds = (tempActionFilesIds) => {
@@ -3155,6 +3161,7 @@ class FilesStore {
         "separator0",
         "edit-agent",
         "invite-users-to-room",
+        "link-for-room-members",
         "room-info",
         "pin-room",
         "unpin-room",
@@ -3163,7 +3170,7 @@ class FilesStore {
         "separator1",
         "duplicate-room",
         "download",
-        "change-room-owner",
+        "change-agent-owner",
         "leave-room",
         "delete",
       ];
@@ -3181,7 +3188,7 @@ class FilesStore {
       }
 
       if (!canChangeOwner) {
-        agentOptions = removeOptions(agentOptions, ["change-room-owner"]);
+        agentOptions = removeOptions(agentOptions, ["change-agent-owner"]);
       }
 
       if (!canRemoveAgent) {

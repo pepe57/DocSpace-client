@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -348,9 +348,8 @@ class InfoPanelStore {
     const isAccounts =
       this.peopleStore.usersStore.contactsTab !== false ||
       getContactsView(window.location) !== false;
-    const isGallery = window.location.pathname.includes("form-gallery");
 
-    return isRooms || isFiles || isGallery || isAccounts || isAIAgent;
+    return isRooms || isFiles || isAccounts || isAIAgent;
   };
 
   getIsAIAgent = () => {

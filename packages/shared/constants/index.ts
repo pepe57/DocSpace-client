@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -206,8 +206,7 @@ export const SDK_SCRIPT_URL =
 export const ALLOWED_PASSWORD_CHARACTERS =
   "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";
 
-export const ALLOWED_MCP_CHARACTERS =
-  "A-Z, a-z, 0-9, _, -.";
+export const ALLOWED_MCP_CHARACTERS = "A-Z, a-z, 0-9, _, -.";
 
 export const ThirdPartyServicesUrlName = Object.freeze({
   GoogleDrive: "google",
@@ -305,3 +304,5 @@ export const SHARED_WITH_ME_PATH = "shared-with-me";
 export const EMPTY_ARRAY = Object.freeze([]) as [];
 export const EMPTY_OBJECT = Object.freeze({});
 export const FUNCTION_EMPTY = (): void => {};
+
+export const TEMPLATE_GALLERY_FORMATS = [".docx", ".xlsx", ".pptx", ".pdf"];

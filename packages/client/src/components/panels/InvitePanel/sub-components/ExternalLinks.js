@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -231,11 +231,17 @@ const ExternalLinks = ({
     standalone,
   );
 
+  const getAgentAccesses = () => {
+    return filterNotReadOnlyOptions(accesses).filter(
+      (o) => !o.isSeparator && !o.disabled,
+    );
+  };
+
   const filteredAccesses =
     roomType === -1
       ? accesses
       : roomType === RoomsType.AIRoom
-        ? filterNotReadOnlyOptions(accesses)
+        ? getAgentAccesses()
         : filterPaidRoleOptions(accesses);
 
   const description =

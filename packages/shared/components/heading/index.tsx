@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,6 +30,7 @@ import { classNames } from "../../utils";
 import styles from "./Heading.module.scss";
 import { HeadingProps } from "./Heading.types";
 import { HeadingLevel, HeadingSize } from "./Heading.enums";
+import { withTooltip } from "../tooltip";
 
 export const HeadingPure = ({
   id,
@@ -87,4 +88,6 @@ export const HeadingPure = ({
 
 const Heading = React.memo(HeadingPure);
 
-export { Heading, HeadingSize, HeadingLevel };
+const HeadingWithTooltip = withTooltip(Heading);
+
+export { Heading, HeadingSize, HeadingLevel, HeadingWithTooltip };

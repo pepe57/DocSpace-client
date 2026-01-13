@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,8 +33,9 @@ import { Text } from "../text";
 import type { LinkProps } from "./Link.types";
 import { LinkType, LinkTarget } from "./Link.enums";
 import styles from "./Link.module.scss";
+import { withTooltip } from "../tooltip";
 
-const Link: React.FC<LinkProps> = React.memo(
+const LinkBase: React.FC<LinkProps> = React.memo(
   ({
     className,
     children,
@@ -103,5 +104,7 @@ const Link: React.FC<LinkProps> = React.memo(
   },
   equal,
 );
+
+const Link = withTooltip(LinkBase);
 
 export { LinkType, LinkTarget, Link };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -237,6 +237,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 16px;
+    height: 16px;
+
+    @include mixins.tablet-and-below {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   .nodeIcon {

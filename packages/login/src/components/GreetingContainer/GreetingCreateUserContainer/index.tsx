@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,8 +39,8 @@ import {
 } from "@/utils/constants";
 import { GreetingCreateUserContainerProps } from "@/types";
 
-import { GreetingContainer } from "./GreetingCreateUserContainer.styled";
 import { Logo } from "@/components/Logo";
+import styles from "./GreetingCreateUserContainer.module.scss";
 
 export const GreetingCreateUserContainer = ({
   type,
@@ -77,6 +77,7 @@ export const GreetingCreateUserContainer = ({
           values={{
             displayName,
             agentName: roomData.title,
+            aiAgent: t("Common:AIAgent"),
           }}
         />
       );
@@ -115,13 +116,13 @@ export const GreetingCreateUserContainer = ({
   };
 
   return (
-    <GreetingContainer>
+    <div className={styles.greetingContainer}>
       <Logo culture={culture} />
       {type === "LinkInvite" ? (
-        <div className="tooltip">
+        <div className={styles.tooltip}>
           <Text fontSize="16px">{getInviteText()}</Text>
         </div>
       ) : null}
-    </GreetingContainer>
+    </div>
   );
 };

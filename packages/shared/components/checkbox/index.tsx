@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,6 +32,7 @@ import CheckboxCheckedIcon from "PUBLIC_DIR/images/checkbox.checked.react.svg";
 import CheckboxIcon from "PUBLIC_DIR/images/checkbox.react.svg";
 
 import { Text } from "../text";
+import { TooltipContainer } from "../tooltip";
 
 import { CheckboxProps } from "./Checkbox.types";
 import styles from "./Checkbox.module.scss";
@@ -116,7 +117,8 @@ const CheckboxPure = ({
   };
 
   return (
-    <label
+    <TooltipContainer
+      as="label"
       id={id}
       style={style}
       className={classNames(styles.label, className, {
@@ -166,7 +168,7 @@ const CheckboxPure = ({
           </span>
         ) : null}
       </div>
-    </label>
+    </TooltipContainer>
   );
 };
 

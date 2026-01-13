@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -107,9 +107,11 @@ const SimpleFilesTileContent = styled(TileContent)`
 
     font-size: ${(props) =>
       (props.isRooms && "16px") ||
-      (!props.isRooms && props.currentDeviceType === DeviceType.desktop
-        ? "13px"
-        : "14px")};
+      (
+        !props.isRooms && props.currentDeviceType === DeviceType.desktop
+          ? "13px"
+          : "14px"
+      )};
   }
 
   .item-file-exst {
@@ -118,12 +120,14 @@ const SimpleFilesTileContent = styled(TileContent)`
 
   ${({ isRooms, isTemplate }) =>
     isRooms ||
-    (isTemplate &&
-      css`
+    (
+      isTemplate &&
+        css`
         .item-file-name {
           font-size: 16px;
         }
-      `)}
+      `
+    )}
 
   @media ${tablet} {
     display: inline-flex;

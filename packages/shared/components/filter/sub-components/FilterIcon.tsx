@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,6 +30,7 @@ import classNames from "classnames";
 import styles from "../Filter.module.scss";
 
 import { IconButton } from "../../icon-button";
+import { TooltipContainer } from "../../tooltip";
 
 type FilterIconProps = {
   onClick: () => void;
@@ -49,7 +50,8 @@ const FilterIcon = ({
   dataTestId,
 }: FilterIconProps) => {
   return (
-    <div
+    <TooltipContainer
+      as="div"
       id={id}
       onClick={onClick}
       title={title}
@@ -63,7 +65,7 @@ const FilterIcon = ({
       {isShowIndicator ? (
         <div className={styles.indicator} data-testid="filter_icon_indicator" />
       ) : null}
-    </div>
+    </TooltipContainer>
   );
 };
 

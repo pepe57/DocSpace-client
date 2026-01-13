@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,7 @@ import { Avatar, AvatarSize, AvatarRole } from "../avatar";
 
 import styles from "./FillingRoleSelector.module.scss";
 import type { IFillingRoleSelectorProps } from "./FillingRoleSelector.types";
+import { TooltipContainer } from "../tooltip";
 
 const FillingRoleSelector = ({
   roles,
@@ -86,13 +87,18 @@ const FillingRoleSelector = ({
               />
             </>
           ) : (
-            <button title={role.name} type="button" className={styles.button}>
+            <TooltipContainer
+              as="button"
+              title={role.name}
+              type="button"
+              className={styles.button}
+            >
               <span
                 className={styles.plus}
                 style={{ backgroundColor: role.color }}
               />
               <span className={styles.name}>{role.name}</span>
-            </button>
+            </TooltipContainer>
           )}
         </li>
       ))}

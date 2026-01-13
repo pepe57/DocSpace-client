@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -37,6 +37,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import type { TServer } from "@docspace/shared/api/ai/types";
 import { toastr, TData } from "@docspace/shared/components/toast";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -47,6 +48,7 @@ import { DeleteMCPDialog } from "./dialogs/delete";
 import { DisableMCPDialog } from "./dialogs/disable";
 import { EditMCPDialog } from "./dialogs/edit";
 import { MCPTile } from "./mcp-tile";
+import { ServersLoader } from "./ServersLoader";
 
 type MCPListProps = {
   showHeading: boolean;
@@ -56,6 +58,7 @@ type MCPListProps = {
   onSettingsClick: (item: TServer) => void;
   onDeleteClick: (id: TServer["id"]) => void;
   isMCPActionsDisabled?: boolean;
+  dataTestId?: string;
 };
 
 const MCPList = ({
@@ -66,11 +69,12 @@ const MCPList = ({
   onSettingsClick,
   onDeleteClick,
   isMCPActionsDisabled,
+  dataTestId = "mcp-list",
 }: MCPListProps) => {
   if (!mcpServers?.length) return;
 
   return (
-    <div className={styles.mcpListContainer}>
+    <div className={styles.mcpListContainer} data-testid={dataTestId}>
       {showHeading ? (
         <Heading
           className={styles.mcpHeading}
@@ -114,7 +118,7 @@ type MCPServersProps = {
   updateMCPStatus?: AISettingsStore["updateMCPStatus"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
   mcpServersInitied?: AISettingsStore["mcpServersInitied"];
-  aiSettingsUrl?: string;
+  mcpServersSettingsUrl?: SettingsStore["mcpServersSettingsUrl"];
 };
 
 const MCPServersComponent = ({
@@ -124,7 +128,7 @@ const MCPServersComponent = ({
   updateMCPStatus,
   hasAIProviders,
   mcpServersInitied,
-  aiSettingsUrl,
+  mcpServersSettingsUrl,
 }: MCPServersProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setAddDialogVisible] = useState(false);
@@ -217,40 +221,24 @@ const MCPServersComponent = ({
     });
   };
 
-  if (!mcpServersInitied)
-    return (
-      <div className={styles.mcpServers}>
-        <RectangleSkeleton
-          className={styles.description}
-          width="700px"
-          height="54px"
-        />
-        <RectangleSkeleton
-          className={styles.learnMoreLink}
-          width="100px"
-          height="19px"
-        />
-        <RectangleSkeleton
-          className={styles.addProviderButton}
-          width="158px"
-          height="32px"
-        />
-      </div>
-    );
+  if (!mcpServersInitied) return <ServersLoader />;
 
   return (
     <div className={styles.mcpServers}>
       <Text className={styles.description}>
-        {t("AISettings:MCPSettingsDescription")}
+        {t("AISettings:MCPSettingsDescription", {
+          mcpServers: t("Common:MCPSettingTitle"),
+          aiChats: t("Common:AIChats"),
+        })}
       </Text>
-      {aiSettingsUrl ? (
+      {mcpServersSettingsUrl ? (
         <Link
           className={styles.learnMoreLink}
           target={LinkTarget.blank}
           type={LinkType.page}
           fontWeight={600}
           isHovered
-          href={aiSettingsUrl}
+          href={mcpServersSettingsUrl}
           color="accent"
         >
           {t("Common:LearnMore")}
@@ -259,7 +247,9 @@ const MCPServersComponent = ({
       <Button
         primary
         size={ButtonSize.small}
-        label={t("AISettings:AddMCPServer")}
+        label={t("AISettings:AddMCPServer", {
+          mcpServer: t("Common:MCPServer"),
+        })}
         scale={false}
         className={styles.addProviderButton}
         onClick={showAddDialog}
@@ -267,10 +257,12 @@ const MCPServersComponent = ({
         tooltipText={
           isMCPActionsDisabled
             ? t("AISettings:ToUseAddProvider", {
-                value: t("AISettings:MCPServer"),
+                value: t("Common:MCPServer"),
+                aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }
+        testId="add-mcp-button"
       />
 
       <MCPList
@@ -281,6 +273,7 @@ const MCPServersComponent = ({
         onSettingsClick={onUpdateMCP}
         onDeleteClick={onDeleteMCP}
         isMCPActionsDisabled={isMCPActionsDisabled}
+        dataTestId="custom-mcp-list"
       />
 
       <MCPList
@@ -291,6 +284,7 @@ const MCPServersComponent = ({
         onSettingsClick={onUpdateMCP}
         onDeleteClick={onDeleteMCP}
         isMCPActionsDisabled={isMCPActionsDisabled}
+        dataTestId="system-mcp-list"
       />
 
       {addDialogVisible ? <AddMCPDialog onClose={hideAddDialog} /> : null}
@@ -335,7 +329,9 @@ export const MCPServers = inject(
       updateMCPStatus,
       hasAIProviders,
       mcpServersInitied,
-      aiSettingsUrl: settingsStore.aiSettingsUrl,
+      mcpServersSettingsUrl: settingsStore.mcpServersSettingsUrl,
     };
   },
 )(observer(MCPServersComponent));
+
+export { ServersLoader };

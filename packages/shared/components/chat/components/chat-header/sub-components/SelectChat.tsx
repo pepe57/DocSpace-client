@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -51,6 +51,7 @@ import { useChatStore } from "../../../store/chatStore";
 import { useMessageStore } from "../../../store/messageStore";
 import { openFile } from "../../../utils";
 import { SelectChatProps } from "../../../Chat.types";
+import { TooltipContainer } from "../../../../tooltip";
 
 import ExportSelector from "../../export-selector";
 
@@ -296,14 +297,16 @@ const SelectChat = ({
 
   return (
     <>
-      <div
+      <TooltipContainer
+        as="div"
         title={t("Common:ChatHistory")}
         className={classNames(styles.selectChat, { [styles.open]: isOpen })}
         onClick={toggleOpen}
         ref={parentRef}
+        data-testid="select-chat"
       >
         <SelectSessionReactSvg />
-      </div>
+      </TooltipContainer>
       {isOpen ? (
         <DropDown
           open={isOpen}
@@ -316,6 +319,7 @@ const SelectChat = ({
           maxHeight={maxHeight}
           manualWidth={`${CHAT_LIST_WIDTH}px`}
           isNoFixedHeightOptions
+          dataTestId="select-chat-dropdown"
         >
           <ChatList
             chats={chats}

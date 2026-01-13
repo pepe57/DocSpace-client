@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -401,7 +401,7 @@ const ManualBackup = ({
   const isCreateButtonDisabled = mainDisabled && !isDownloadButton;
 
   return (
-    <div className={styles.manualBackup}>
+    <div className={styles.manualBackup} data-testid="manual-backup-wrapper">
       <StatusMessage
         message={errorMessage || errorInformation || backupProgressWarning}
         isWarning={!!backupProgressWarning}
