@@ -44,8 +44,6 @@ import {
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
-import { globalColors } from "@docspace/shared/themes";
-import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 const fillAvailableWidth = css`
   width: 100%;
@@ -259,97 +257,6 @@ const StyledEditInput = styled(TextInput).attrs((props) => ({
   "data-testid": props.dataTestId,
 }))`
   height: 32px;
-`;
-
-const StyledComboBox = styled(ComboBox)`
-  margin-inline-start: auto;
-
-  .combo-button-label,
-  .combo-button-label:hover {
-    text-decoration: none;
-  }
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .combo-buttons_arrow-icon {
-    margin-inline-start: 2px;
-  }
-
-  padding: 0px;
-
-  .combo-button {
-    border-radius: 3px;
-  }
-`;
-
-const StyledInviteInputContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 12px;
-
-  /* .invite-via-link-access {
-    min-width: 93px;
-
-    .combo-button-label {
-      font-size: 14px;
-      font-weight: 600;
-      margin-inline-start: 7px;
-      margin-inline-end: 0;
-      margin-top: -1px;
-    }
-  } */
-
-  .header_aside-panel {
-    max-width: 100% !important;
-
-    .selector_body_tabs {
-      display: flex;
-      justify-content: left;
-      margin-bottom: 16px;
-      padding: 0;
-      width: -webkit-fill-available;
-
-      .sticky-indent {
-        height: 0;
-      }
-
-      .sticky {
-        .scroll-body {
-          overflow-x: hidden;
-        }
-        .scroll-body > div {
-          justify-content: flex-start;
-          padding-inline-start: 16px;
-        }
-      }
-    }
-  }
-
-  .access-selector {
-    margin-inline-end: 0;
-
-    // Add space between access-selector's absolute positioned dropdown and modal footer
-    .dropdown-container {
-      overflow: unset;
-
-      ::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        width: 100%;
-        height: ${ASIDE_PADDING_AFTER_LAST_ITEM};
-      }
-    }
-  }
-
-  .add-manually-dropdown {
-    inset-inline-start: 0;
-    border: ${`1px solid ${globalColors.grayStrong}`};
-  }
 `;
 
 const StyledDropDown = styled(DropDown)`
@@ -577,8 +484,6 @@ export {
   StyledRow,
   StyledSubHeader,
   StyledInviteInput,
-  StyledComboBox,
-  StyledInviteInputContainer,
   StyledDropDown,
   SearchItemText,
   StyledEditInput,

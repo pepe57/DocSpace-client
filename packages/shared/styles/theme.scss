@@ -3165,11 +3165,15 @@
 }
 
 .light {
+  --invite-panel-add-manually-dropdown: 1px solid #{$gray-strong};
+  
   --files-panel-border-bottom: 1px solid #{$gray-light-mid};
   --files-panel-invite-text-color: #{$gray};
 }
 
 .dark {
+  --invite-panel-add-manually-dropdown: 1px solid #{$gray-strong};
+
   --files-panel-border-bottom: 1px solid #{$gray-light-mid};
   --files-panel-invite-text-color: #{$gray};
 }

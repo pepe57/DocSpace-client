@@ -55,7 +55,6 @@ import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
 import {
   StyledSubHeader,
   StyledInviteInput,
-  StyledInviteInputContainer,
   StyledToggleButton,
   StyledDescription,
 } from "../StyledInvitePanel";
@@ -289,7 +288,7 @@ const ExternalLinks = ({
       <StyledDescription>{description}</StyledDescription>
       {externalLinksVisible && roomId !== -1 ? (
         <>
-          <StyledInviteInputContainer key={activeLink.id}>
+          <div className={styles.inviteInputContainer} key={activeLink.id}>
             <StyledInviteInput isShowCross>
               <InputBlock
                 className="input-link"
@@ -319,7 +318,7 @@ const ExternalLinks = ({
               availableAccess={availableAccess}
               dataTestId="invite_panel_external_link_access"
             />
-          </StyledInviteInputContainer>
+          </div>
 
           {showLifetimeBlock || showUsersJoinedBlock ? (
             <div className={styles.inviteViaLinkSettingsContainer}>

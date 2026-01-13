@@ -65,13 +65,15 @@ import {
   StyledSubHeader,
   StyledLink,
   StyledInviteInput,
-  StyledInviteInputContainer,
   StyledDropDown,
   SearchItemText,
   StyledDescription,
   StyledInviteLanguage,
   StyledCrossIcon,
 } from "../StyledInvitePanel";
+
+import styles from "../InvitePanel.module.scss";
+
 import AccessSelector from "../../../AccessSelector";
 import {
   fixAccess,
@@ -686,7 +688,7 @@ const InviteInput = ({
         </StyledInviteLanguage>
       ) : null}
 
-      <StyledInviteInputContainer ref={inputsRef}>
+      <div className={styles.inviteInputContainer} ref={inputsRef}>
         <StyledInviteInput ref={searchRef} isShowCross={!!inputValue}>
           <TextInput
             className="invite-input"
@@ -720,7 +722,7 @@ const InviteInput = ({
             eventTypes="click"
             withBackdrop={false}
             zIndex={399}
-            className="add-manually-dropdown"
+            className={styles.addManuallyDropdown}
             {...dropDownMaxHeight}
             isRequestRunning={searchRequestRunning}
           >
@@ -744,7 +746,7 @@ const InviteInput = ({
             selectionErrorText: <PaidQuotaLimitError />,
           })}
         />
-      </StyledInviteInputContainer>
+      </div>
     </>
   );
 };

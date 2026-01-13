@@ -26,6 +26,62 @@
 
 @use "@docspace/shared/styles/variables";
 
+.inviteInputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 12px;
+
+  :global(.header_aside-panel) {
+    max-width: 100% !important;
+
+    .selector_body_tabs {
+      display: flex;
+      justify-content: left;
+      margin-bottom: 16px;
+      padding: 0;
+      width: -webkit-fill-available;
+
+      .sticky-indent {
+        height: 0;
+      }
+
+      .sticky {
+        .scroll-body {
+          overflow-x: hidden;
+        }
+        .scroll-body > div {
+          justify-content: flex-start;
+          padding-inline-start: 16px;
+        }
+      }
+    }
+  }
+
+  :global(.access-selector) {
+    margin-inline-end: 0;
+
+    // Add space between access-selector's absolute positioned dropdown and modal footer
+    :global(.dropdown-container) {
+      overflow: unset;
+
+      ::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        height: 12px;
+      }
+    }
+  }
+
+  .addManuallyDropdown {
+    inset-inline-start: 0;
+    border: var(--invite-panel-add-manually-dropdown);
+  }
+}
+
 .externalLink {
   border-bottom: var(--files-panel-border-bottom);
 
