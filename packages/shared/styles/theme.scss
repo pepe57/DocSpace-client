@@ -3163,3 +3163,13 @@
 
   --template-gallery-view-button-border: #{$gray-dark-strong};
 }
+
+.light {
+  --files-panel-border-bottom: 1px solid #{$gray-light-mid};
+  --files-panel-invite-text-color: #{$gray};
+}
+
+.dark {
+  --files-panel-border-bottom: 1px solid #{$gray-light-mid};
+  --files-panel-invite-text-color: #{$gray};
+}

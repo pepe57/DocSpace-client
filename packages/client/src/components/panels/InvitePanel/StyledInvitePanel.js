@@ -108,42 +108,6 @@ const ScrollList = styled.div.attrs((props) => ({
   }
 `;
 
-const StyledExternalLink = styled.div`
-  border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-
-  .invite-via-link-settings-container {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 20px;
-
-    .invite-via-link-settings {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-
-      .invite-via-link-settings-icon {
-        margin-top: -1px;
-
-        svg circle {
-          fill: unset;
-        }
-      }
-
-      .invite-via-link-settings-text {
-        color: ${(props) => props.theme.filesPanels.invite.textColor};
-      }
-    }
-  }
-
-  .invite-via-link-settings-warning {
-    margin-top: -2px;
-
-    svg path:nth-child(1) {
-      fill: unset !important;
-    }
-  }
-`;
 const StyledInviteUserBody = styled.div`
   display: flex;
   flex-direction: column;
@@ -630,6 +594,5 @@ export {
   StyledDescription,
   StyledInviteLanguage,
   StyledInviteUserBody,
-  StyledExternalLink,
   ErrorWrapper,
 };

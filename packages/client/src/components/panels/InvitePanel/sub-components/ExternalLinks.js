@@ -58,8 +58,9 @@ import {
   StyledInviteInputContainer,
   StyledToggleButton,
   StyledDescription,
-  StyledExternalLink,
 } from "../StyledInvitePanel";
+
+import styles from "../InvitePanel.module.scss";
 
 import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 import { deleteInviteLink } from "@docspace/shared/api/portal";
@@ -240,7 +241,7 @@ const ExternalLinks = ({
             });
 
   return (
-    <StyledExternalLink noPadding ref={inputsRef}>
+    <div className={styles.externalLink} ref={inputsRef}>
       <StyledSubHeader $inline>
         {t("InviteViaLink")}
 
@@ -321,17 +322,17 @@ const ExternalLinks = ({
           </StyledInviteInputContainer>
 
           {showLifetimeBlock || showUsersJoinedBlock ? (
-            <div className="invite-via-link-settings-container">
+            <div className={styles.inviteViaLinkSettingsContainer}>
               {showLifetimeBlock ? (
-                <div className="invite-via-link-settings">
+                <div className={styles.inviteViaLinkSettings}>
                   <IconButton
-                    className="invite-via-link-settings-icon"
+                    className={styles.inviteViaLinkSettingsIcon}
                     iconName={ClockIconUrl}
                     size={12}
                     isDisabled
                   />
                   <Text
-                    className="invite-via-link-settings-text"
+                    className={styles.inviteViaLinkSettingsText}
                     fontSize="12px"
                     fontWeight={400}
                   >
@@ -365,14 +366,14 @@ const ExternalLinks = ({
               ) : null}
 
               {showUsersJoinedBlock ? (
-                <div className="invite-via-link-settings">
+                <div className={styles.inviteViaLinkSettings}>
                   <IconButton
                     iconName={PersonPlusReactSvgUrl}
                     size={12}
                     isDisabled
                   />
                   <Text
-                    className="invite-via-link-settings-text"
+                    className={styles.inviteViaLinkSettingsText}
                     fontSize="12px"
                     fontWeight={400}
                   >
@@ -397,7 +398,7 @@ const ExternalLinks = ({
                           </Text>
                         </>
                       }
-                      className="invite-via-link-settings-warning"
+                      className={styles.inviteViaLinkSettingsWarning}
                       tooltipMaxWidth="344px"
                       color={warningColor}
                     />
@@ -408,7 +409,7 @@ const ExternalLinks = ({
           ) : null}
         </>
       ) : null}
-    </StyledExternalLink>
+    </div>
   );
 };
 
