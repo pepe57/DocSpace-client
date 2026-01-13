@@ -358,7 +358,7 @@ const ArticleMainButtonContent = (props) => {
 
   const createActionsForFormRoom = React.useCallback(
     (actionList) => {
-      const { formGallery } = actionList;
+      const { formGallery, formActions } = actionList;
 
       const createNewFolder = {
         id: "actions_new-folder",
@@ -369,7 +369,7 @@ const ArticleMainButtonContent = (props) => {
         key: "new-folder",
       };
 
-      const showSelectorFormRoomDocx = {
+      const formFromTemplateAction = {
         id: "actions_form-room_template_from-file",
         className: "main-button_drop-down_sub",
         icon: FormGalleryReactSvgUrl,
@@ -378,15 +378,6 @@ const ArticleMainButtonContent = (props) => {
         disabled: isPrivacy,
         key: "form-file",
       };
-
-      // const templatePDFForm = {
-      //   id: "actions_template-PDF-form",
-      //   className: "main-button_drop-down",
-      //   icon: FormReactSvgUrl,
-      //   label: t("Common:CreatePDFForm"),
-      //   key: "new-form",
-      //   items: [createTemplateBlankDocxf],
-      // };
 
       const uploadFromDocSpace = {
         id: "actions_upload-from-docspace",
@@ -417,56 +408,25 @@ const ArticleMainButtonContent = (props) => {
         items: [uploadFromDocSpace, uploadFormDevice],
       };
 
-      // const moreActions = {
-      //   id: "actions_more-form",
-      //   className: "main-button_drop-down",
-      //   icon: PluginMoreReactSvgUrl,
-      //   label: t("Common:More"),
-      //   disabled: false,
-      //   key: "more-form",
-      //   items: [
-      //     createNewFolder,
-      //     {
-      //       isSeparator: true,
-      //       key: "actions_more-form__separator-1",
-      //     },
-      //     createNewDocumentDocx,
-      //     createNewPresentationPptx,
-      //     createNewSpreadsheetXlsx,
-      //     {
-      //       isSeparator: true,
-      //       key: "actions_more-form__separator-2",
-      //     },
-      //     ...uploadActions,
-      //   ],
-      // };
-
-      // const mobileMoreActions = {
-      //   ...moreActions,
-      //   items: moreActions.items.filter((item) => !item.isSeparator),
-      // };
+      const uploadPDFFromSeparator = {
+        isSeparator: true,
+        key: "separator",
+      };
 
       const mobileMoreActions = null;
+
       const formRoomActions = [
-        // templatePDFForm,
         uploadPDFFrom,
-        showSelectorFormRoomDocx,
-        {
-          isSeparator: true,
-          key: "separator",
-        },
+        uploadPDFFromSeparator,
+        formActions,
+        formFromTemplateAction,
         createNewFolder,
-        // {
-        //   isSeparator: true,
-        //   key: "separator-1",
-        // },
-        // moreActions,
       ];
 
       const mobileFormRoomActions = [
-        // templatePDFForm,
         uploadPDFFrom,
-        showSelectorFormRoomDocx,
+        formActions,
+        formFromTemplateAction,
         createNewFolder,
       ];
 
@@ -476,7 +436,7 @@ const ArticleMainButtonContent = (props) => {
         mobileMoreActions,
       };
     },
-    [onShowFormRoomSelectFileDialog, onUploadPDFFilesClick],
+    [onShowFormRoomSelectFileDialog, onUploadPDFFilesClick, onCreate],
   );
 
   React.useEffect(() => {
@@ -533,7 +493,7 @@ const ArticleMainButtonContent = (props) => {
       });
     }
 
-    const createTemplateBlankDocxf = {
+    const blankPDFFormAction = {
       id: "actions_template_blank",
       className: "main-button_drop-down_sub",
       icon: FormBlankReactSvgUrl,
@@ -614,19 +574,25 @@ const ArticleMainButtonContent = (props) => {
       });
     }
 
-    if (
+    const formActions = {
+      id: "actions_template",
+      className: "main-button_drop-down",
+      icon: FormReactSvgUrl,
+      label: t("Translations:NewForm"),
+      key: "new-form",
+      items: [blankPDFFormAction, showSelectorDocx],
+    };
+
+    const isFormRoomContext =
       currentRoomType === RoomsType.FormRoom ||
-      (parentRoomType === FolderType.FormRoom && isFolder)
-    ) {
+      (parentRoomType === FolderType.FormRoom && isFolder);
+
+    if (isFormRoomContext) {
       const { formRoomActions, mobileFormRoomActions, mobileMoreActions } =
         createActionsForFormRoom({
           formGallery,
+          formActions,
           newUploadActions,
-          // createNewFolder,
-          // createNewDocumentDocx,
-          // createTemplateBlankDocxf,
-          // createNewPresentationPptx,
-          // createNewSpreadsheetXlsx,
         });
 
       // for mobile
@@ -638,22 +604,11 @@ const ArticleMainButtonContent = (props) => {
       return;
     }
 
-    const formActions = [
-      {
-        id: "actions_template",
-        className: "main-button_drop-down",
-        icon: FormReactSvgUrl,
-        label: t("Translations:NewForm"),
-        key: "new-form",
-        items: [createTemplateBlankDocxf, showSelectorDocx],
-      },
-    ];
-
     const newActions = [
       createNewDocumentDocx,
       createNewSpreadsheetXlsx,
       createNewPresentationPptx,
-      ...formActions,
+      formActions,
       createNewFolder,
     ];
 

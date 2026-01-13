@@ -3126,7 +3126,7 @@ class ContextOptionsStore {
     this.dialogsStore.setSelectFileAiKnowledgeDialogVisible(true);
   };
 
-  getContextOptionsPlusFormRoom = (t) => {
+  getContextOptionsPlusFormRoom = (t, { formActions }) => {
     const showSelectorFormRoomDocx = {
       id: "actions_form-room_template_from-file",
       className: "main-button_drop-down_sub",
@@ -3174,47 +3174,15 @@ class ContextOptionsStore {
       key: "new-folder",
     };
 
-    // const showUploadFolder = !(isMobile || isTablet);
-
-    // const moreActions = {
-    //   id: "personal_more-form",
-    //   className: "main-button_drop-down",
-    //   icon: PluginMoreReactSvgUrl,
-    //   label: t("Common:More"),
-    //   disabled: false,
-    //   key: "more-form",
-    //   items: [
-    //     createNewFolder,
-    //     {
-    //       isSeparator: true,
-    //       key: "personal_more-form__separator-1",
-    //     },
-    //     createNewDoc,
-    //     createNewPresentation,
-    //     createNewSpreadsheet,
-    //     {
-    //       isSeparator: true,
-    //       key: "personal_more-form__separator-2",
-    //     },
-    //     uploadFiles,
-    //     showUploadFolder ? uploadFolder : null,
-    //   ],
-    // };
-
     return [
       uploadReadyPDFFrom,
+      ...formActions,
       showSelectorFormRoomDocx,
-      // templatePDFForm,
-      // {
-      //   isSeparator: true,
-      //   key: "separator",
-      // },
       {
         isSeparator: true,
         key: "separator-1",
       },
       createNewFolder,
-      // moreActions,
     ];
   };
 
@@ -3290,14 +3258,14 @@ class ContextOptionsStore {
       disabled: isPrivacyFolder,
     };
 
-    const createTemplateSelectFormFile = {
-      id: "personal_template_new-form-file",
-      key: "new-form-file",
-      label: t("Translations:SubNewFormFile"),
-      icon: FormFileReactSvgUrl,
-      onClick: () => this.onCreateFormFromFile(t),
-      disabled: isPrivacyFolder,
-    };
+    // const createTemplateSelectFormFile = {
+    //   id: "personal_template_new-form-file",
+    //   key: "new-form-file",
+    //   label: t("Translations:SubNewFormFile"),
+    //   icon: FormFileReactSvgUrl,
+    //   onClick: () => this.onCreateFormFromFile(t),
+    //   disabled: isPrivacyFolder,
+    // };
 
     const createNewFolder = {
       id: "personal_new-folder",
@@ -3333,19 +3301,6 @@ class ContextOptionsStore {
         ]
       : [];
 
-    if (isFormRoomType) {
-      return this.getContextOptionsPlusFormRoom(t, {
-        createTemplateForm,
-        createTemplateSelectFormFile,
-        createNewFolder,
-        createNewDoc,
-        createNewPresentation,
-        createNewSpreadsheet,
-        uploadFiles,
-        uploadFolder,
-      });
-    }
-
     const formActions = [
       {
         id: "personal_form-template",
@@ -3355,6 +3310,12 @@ class ContextOptionsStore {
         items: [createTemplateForm, createTemplateNewFormFile],
       },
     ];
+
+    if (isFormRoomType) {
+      return this.getContextOptionsPlusFormRoom(t, {
+        formActions,
+      });
+    }
 
     if (isAIRoom) {
       return [
