@@ -1151,6 +1151,9 @@ importers:
       '@msw/playwright':
         specifier: ^0.3.1
         version: 0.3.1(msw@2.11.1(@types/node@22.7.5)(typescript@5.9.3))
+      '@playwright/test':
+        specifier: 1.57.0
+        version: 1.57.0
       '@storybook/addon-actions':
         specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.15(prettier@3.6.2))
@@ -9392,6 +9395,7 @@ packages:
   whatwg-encoding@2.0.0:
     resolution: {integrity: sha512-p41ogyeMUrw3jWclHWTQg1k05DSVXPLcVxRTYsXUk+ZooOCZLcoYgPZ/HL/D/N+uQPOtcp1me1WhBEaX02mhWg==}
     engines: {node: '>=12'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@3.0.0:
     resolution: {integrity: sha512-nt+N2dzIutVRxARx1nghPKGv1xHikU7HKdfafKkLNLindmPU/ch3U31NOCGGA/dmPcmb1VlofO0vnKAcsm0o/Q==}
