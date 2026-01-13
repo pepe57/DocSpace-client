@@ -463,9 +463,6 @@ importers:
       sass:
         specifier: 1.79.5
         version: 1.79.5
-      styled-components:
-        specifier: 5.3.11
-        version: 5.3.11(@babel/core@7.25.8)(react-dom@19.2.3(react@19.2.3))(react-is@18.3.1)(react@19.2.3)
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
