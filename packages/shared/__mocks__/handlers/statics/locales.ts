@@ -37,12 +37,19 @@ export const localesHandler = () => {
       const hasStatic = url.includes("static");
       const local = url.split("/locales/").at(-1)!.split("?")[0];
 
-      const path = hasStatic
-        ? `../../public/locales/${local}`
-        : `./public/locales/${local}`;
+      const localePath = hasStatic ? 
+      `../../../../../public/locales/${local}` : 
+      `../../../../client/public/locales/${local}`; 
+      const localeFullPath = path.join(__dirname, localePath); 
+      const localeContent = fs.readFileSync(localeFullPath);
       
 
-      return new Response(null, { status: 200 });
+      return new Response(localeContent, { 
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
     } catch (error) {
       console.error("Error reading locale file:", error);
       return new Response("Error loading locale", { status: 500 });

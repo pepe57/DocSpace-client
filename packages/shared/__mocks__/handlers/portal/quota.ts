@@ -206,8 +206,8 @@ export const quotaResolver = () => {
   return new Response(JSON.stringify(quotaSuccess));
 };
 
-export const quotaHandler = () => {
-  return http.get(`http://localhost/${API_PREFIX}/${PATH_QUOTA}`, () => {
+export const quotaHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_QUOTA}`, () => {
     return quotaResolver();
   });
 };

@@ -41,7 +41,7 @@ export const successSelf = {
     userName: "administrator",
     email: "test@gmail.com",
     status: 1,
-    activationStatus: 0,
+    activationStatus: 1,
     department: "",
     workFrom: "2021-03-09T17:52:55.0000000+08:00",
     isAdmin: true,
@@ -74,6 +74,10 @@ export const successSelf = {
 
 export const usersSuccess = { response: [successSelf] };
 
+export const usersSuccessForClient = {
+  response: {...successSelf, activationStatus: 1 },
+};
+
 export const selfError404 = {
   response: {
     data: {
@@ -99,7 +103,9 @@ export const selfError400 = {
 };
 
 export const selfResolver = (
-  errorStatus: 400 | 404 | null = null, isEmailActivated = false,
+  errorStatus: 400 | 404 | null = null, 
+  isEmailActivated = false, 
+  isClient = false
 ): Response => {
   if (errorStatus === 404)
     return new Response(JSON.stringify(selfError404), { status: 404 });
@@ -109,6 +115,10 @@ export const selfResolver = (
 
   if (isEmailActivated) {
     return new Response(JSON.stringify(usersSuccess));
+  }
+
+  if(isClient){
+    return new Response(JSON.stringify(usersSuccessForClient))
   }
 
   return new Response(JSON.stringify({ response: successSelf }));
@@ -157,11 +167,12 @@ export const selfActivationStatusHandler = (
   port: string,
   errorStatus: 400 | 404 | null = null,
   isEmailActivated: boolean = false,
+  isClient: boolean = false,
 ) => {
   return http.put(
     `http://localhost:${port}/${API_PREFIX}/${PATH_ACTIVATION_STATUS}`,
     () => {
-      return selfResolver(errorStatus, isEmailActivated);
+      return selfResolver(errorStatus, isEmailActivated, isClient);
     },
   );
 };

@@ -64,8 +64,8 @@ export const tariffResolver = () => {
   return new Response(JSON.stringify(tariffSuccess));
 };
 
-export const tariffHandler = () => {
-  return http.get(`http://localhost/${API_PREFIX}/${PATH_TARIFF}`, () => {
+export const tariffHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_TARIFF}`, () => {
     return tariffResolver();
   });
 };

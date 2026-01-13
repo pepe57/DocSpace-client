@@ -1475,8 +1475,8 @@ export const recentResolver = (isEmpty: boolean): Response => {
     new Response(JSON.stringify(recentSuccess));
 };
 
-export const recentHandler = (isEmpty: boolean = false) => {
-  return http.get(`http://localhost/${API_PREFIX}/${PATH_RECENT}`, () => {
+export const recentHandler = (port: string, isEmpty: boolean = false) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_RECENT}`, () => {
     return recentResolver(isEmpty);
   });
 };

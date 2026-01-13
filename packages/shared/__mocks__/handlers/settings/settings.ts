@@ -35,6 +35,7 @@ export enum TypeSettings {
   PortalDeactivate = "portalDeactivate",
   NoStandalone = "noStandalone",
   Authenticated = "authenticated",
+  AuthenticatedWithSocket = "authenticatedWithSocket",
   NoAuth = "noAuth",
   EnabledJoin = "enabledJoin",
   EnableAdmMess = "enableAdmMess",
@@ -525,6 +526,8 @@ export const settingsResolver = (
     return new Response(JSON.stringify(settingsNoAuthNoStandalone));
   if (type === TypeSettings.Authenticated)
     return new Response(JSON.stringify(settingsAuth));
+  if (type === TypeSettings.AuthenticatedWithSocket)
+    return new Response(JSON.stringify(settingAuthWithSocket));
   if (type === TypeSettings.EnabledJoin)
     return new Response(JSON.stringify(settingsWithEnabledJoin));
   if (type === TypeSettings.EnableAdmMess)

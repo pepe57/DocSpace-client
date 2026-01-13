@@ -47,7 +47,7 @@ export const portalHandlers = (port: string) => [
   continuePortalHandler(port),
   deletePortalHandler(port),
   restoreProgressHandler(port),
-  tariffHandler(),
-  getPortalHandler(),
-  quotaHandler(),
+  tariffHandler(port),
+  getPortalHandler(port),
+  quotaHandler(port),
 ];

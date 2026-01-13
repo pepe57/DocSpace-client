@@ -82,8 +82,8 @@ export const aiConfigResolver = (
   return new Response(JSON.stringify(success));
 };
 
-export const aiConfigHandler = (isDisabled?: boolean) => {
-  return http.get(`http://localhost/${API_PREFIX}/${PATH_AI_CONFIG}`, () => {
+export const aiConfigHandler = (port: string, isDisabled?: boolean) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_CONFIG}`, () => {
     return aiConfigResolver(isDisabled);
   });
 };

@@ -48,8 +48,8 @@ export const thirdPartyResolver = () => {
   return new Response(JSON.stringify(thirdParty));
 };
 
-export const thirdPartyHandler = () => {
-  return http.get(`${BASE_URL}/${API_PREFIX}/${PATH_THIRD_PARTY}`, () => {
+export const thirdPartyHandler = (port: string) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_THIRD_PARTY}`, () => {
     return thirdPartyResolver();
   });
 };

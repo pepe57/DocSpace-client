@@ -34,6 +34,7 @@ import { filesHandlers } from "./files";
 import { staticsHandlers } from "./statics";
 import { aiHandlers } from "./ai";
 import { roomsHandlers } from "./rooms";
+import { shareHandlers } from "./share";
 
 export * from "./settings";
 export * from "./capabilities";
@@ -45,6 +46,7 @@ export * from "./files";
 export * from "./statics";
 export * from "./ai";
 export * from "./rooms";
+export * from "./share";
 
 export const allHandlers = (port: string) => [
   ...settingsHandlers(port),
@@ -54,7 +56,8 @@ export const allHandlers = (port: string) => [
   ...authenticationHandlers(port),
   ...portalHandlers(port),
   ...filesHandlers(port),
-  ...staticsHandlers(),
-  ...aiHandlers,
-  ...roomsHandlers,
+  ...staticsHandlers(port),
+  ...aiHandlers(port),
+  ...roomsHandlers(port),
+  ...shareHandlers(port),
 ];

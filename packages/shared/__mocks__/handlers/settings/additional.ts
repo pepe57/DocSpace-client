@@ -24,31 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-// export const PATH_SETTINGS_ADDITIONAL = "settings/rebranding/additional";
+export const PATH_SETTINGS_ADDITIONAL = "settings/rebranding/additional";
 
-// const success = {
-//   response: {
-//     feedbackAndSupportEnabled: true,
-//     helpCenterEnabled: true,
-//     isDefault: true,
-//     licenseAgreementsEnabled: true,
-//     startDocsEnabled: true,
-//     userForumEnabled: true,
-//     videoGuidesEnabled: true,
-//   },
-//   count: 1,
-//   links: [
-//     {
-//       href: `${BASE_URL}/${API_PREFIX}/${PATH_SETTINGS_ADDITIONAL}`,
-//       action: "GET",
-//     },
-//   ],
-//   status: 0,
-//   statusCode: 200,
-// };
+const success = {
+  response: {
+    feedbackAndSupportEnabled: true,
+    helpCenterEnabled: true,
+    isDefault: true,
+    licenseAgreementsEnabled: true,
+    startDocsEnabled: true,
+    userForumEnabled: true,
+    videoGuidesEnabled: true,
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_SETTINGS_ADDITIONAL}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
-// export const settingsAdditionalHandler = () => {
-//   return new Response(JSON.stringify(success));
-// };
+export const settingsAdditionalResolver = () => {
+  return new Response(JSON.stringify(success));
+};
+
+export const settingsAdditionalHandler = (port: string) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_SETTINGS_ADDITIONAL}`, () => {
+    return settingsAdditionalResolver();
+  });
+};

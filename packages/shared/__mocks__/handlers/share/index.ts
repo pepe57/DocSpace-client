@@ -24,15 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { linkHandler } from "./link";
+import { ShareAccessRights } from "enums";
+
+import { 
+  linkHandler, 
+  createLinkRouteHandler,
+  createLinksRouteHandler } from "./link";
 import { shareToUserHandler } from "./shareToUser";
 
 export {
   linkHandler,
+  createLinkRouteHandler,
   shareToUserHandler,
+  createLinksRouteHandler,
 };
 
-export const shareHandlers = [
+export const shareHandlers = (port: string) => [
   linkHandler(),
-  shareToUserHandler(),
+  createLinkRouteHandler(port, { access: ShareAccessRights.ReadOnly }),
+  createLinksRouteHandler(port, { access: ShareAccessRights.ReadOnly }),
+  shareToUserHandler(port),
 ];

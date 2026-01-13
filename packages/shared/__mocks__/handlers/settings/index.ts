@@ -39,6 +39,9 @@ import { tfaAppValidateHandler } from "./tfaAppValidate";
 import { ownerHandler } from "./owner";
 import { invitationSettingsHandler } from "./invitationSettings";
 import { companyInfoHandler } from "./companyInfo";
+import { buildHandler } from "./build";
+import { settingsAdditionalHandler } from "./additional";
+import { culturesHandler } from "./cultures";
 
 export {
   ssoHandler,
@@ -57,6 +60,9 @@ export {
   colorThemeHandler,
   licenseHandler,
   TypeSettings,
+  buildHandler,
+  settingsAdditionalHandler,
+  culturesHandler,
 };
 
 export const settingsHandlers = (port: string) => [
@@ -75,4 +81,7 @@ export const settingsHandlers = (port: string) => [
   completeHandler(port),
   licenseHandler(port),
   ownerHandler(port),
+  buildHandler(port),
+  settingsAdditionalHandler(port),
+  culturesHandler(port),
 ];

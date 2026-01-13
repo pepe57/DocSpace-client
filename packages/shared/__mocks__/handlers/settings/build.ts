@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 export const PATH_BUILD = "settings/version/build";
 
@@ -45,6 +46,12 @@ export const buildSuccess = {
   ok: true,
 };
 
-export const buildHandler = () => {
+export const buildResolver = () => {
   return new Response(JSON.stringify(buildSuccess));
+};
+
+export const buildHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_BUILD}`, () => {
+    return buildResolver();
+  });
 };

@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
-import type { TAPIPlugin } from "../../../../api/plugins/types";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
+import type { TAPIPlugin } from "../../../api/plugins/types";
 
 export const PATH_WEB_PLUGINS = "settings/webplugins";
 

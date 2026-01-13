@@ -29,11 +29,18 @@
 import { logoHandler } from "./logo";
 import { imagesHandler } from "./images";
 import { imagesHandlerClient } from "./images";
+import { scriptsHandler } from "./scripts";
+import { fontsHandler } from "./fonts";
+import { localesHandler } from "./locales";
 
-export { logoHandler, imagesHandler, imagesHandlerClient };
 
-export const staticsHandlers = () => [
+export { logoHandler, imagesHandler, imagesHandlerClient, scriptsHandler, fontsHandler, localesHandler };
+
+export const staticsHandlers = (port: string) => [
     logoHandler(), 
     imagesHandler(), 
-    imagesHandlerClient()
+    imagesHandlerClient(),
+    scriptsHandler(),
+    fontsHandler(),
+    localesHandler(),
 ];

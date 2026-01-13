@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 export const PATH_CULTURES = "settings/cultures";
 
@@ -77,6 +78,12 @@ export const culturesSuccess = {
   statusCode: 200,
 };
 
-export const culturesHandler = (): Response => {
+export const culturesResolver = (): Response => {
   return new Response(JSON.stringify(culturesSuccess));
 };
+
+export const culturesHandler = (port: string ) => {
+   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_CULTURES}`, () => {
+    return culturesResolver();
+  });
+}

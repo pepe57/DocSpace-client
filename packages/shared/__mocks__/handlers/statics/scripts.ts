@@ -24,10 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { roomTagsHandler } from "./tags";
+import path from "path";
+import { http } from "msw";
+import fs from "fs";
 
-export { roomTagsHandler };
-
-export const roomsHandlers = (port: string) => [
-  roomTagsHandler(),
-];
+export const scriptsHandler = () => {
+  return http.get("*/**/static/scripts/**", async ({ request }) => {
+    try {
+      const scriptPath = request
+        .url
+        .split("/static/scripts")
+        .at(-1)!
+        .split("?")[0];
+      
+      const scriptFullPath = path.join(__dirname, "../../../../../public/scripts", scriptPath);
+      const scriptContent = fs.readFileSync(scriptFullPath);
+    
+      return new Response(scriptContent, {
+        headers: {
+          "Content-Type": "application/javascript",
+          "Content-Length": scriptContent.length.toString(),
+        },
+      });
+        
+    } catch (error) {
+      console.error("Error processing script request:", error);
+      return new Response("Error loading script", { status: 500 });
+    }
+  });
+};

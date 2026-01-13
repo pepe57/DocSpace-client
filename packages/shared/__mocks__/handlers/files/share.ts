@@ -55,8 +55,8 @@ export const shareResolver = (action?: ActionType) => {
   }
 };
 
-export const shareHandler = (action?: ActionType) => {
-  return http.delete(`${BASE_URL}/${API_PREFIX}/${PATH_SHARE}`, () => {
+export const shareHandler = (port: string, action?: ActionType) => {
+  return http.delete(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_SHARE}`, () => {
     return shareResolver(action);
   });
 };

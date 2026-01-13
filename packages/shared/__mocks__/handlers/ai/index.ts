@@ -40,9 +40,9 @@ export {
   aiServersHandler,
 };
 
-export const aiHandlers = [
+export const aiHandlers = (port: string) => [
   aiAgentsHandler,
-  aiConfigHandler,
+  aiConfigHandler(port),
   aiModelsHandler,
   aiProvidersHandler,
   aiServerHandler,

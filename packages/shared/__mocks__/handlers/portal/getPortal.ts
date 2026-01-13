@@ -75,8 +75,8 @@ export const getPortalResolver = (): Response => {
   return new Response(JSON.stringify(getPortalSuccess));
 };
 
-export const getPortalHandler = () => {
-  return http.get(`${BASE_URL}/${API_PREFIX}/${PATH_PORTAL_GET}`, () => {
+export const getPortalHandler = (port: string) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_PORTAL_GET}`, () => {
     return getPortalResolver();
   });
 };

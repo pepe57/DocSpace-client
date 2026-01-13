@@ -38,11 +38,11 @@ export type LinkTemplateOptions = {
   access: ShareAccessRights;
 };
 
-export const LINK_FILE_PATH = /.*\/api\/2\.0\/files\/file\/\d+\/link.*/;
-export const LINKS_FILE_PATH = /.*\/api\/2\.0\/files\/file\/\d+\/links.*/;
+export const LINK_FILE_PATH = "files/file/:id/link";
+export const LINKS_FILE_PATH = "files/file/:id/links";
 
 const id = "00000000-0000-0000-0000-000000000000";
-const shareLink = `${BASE_URL}/s/linkId`;
+const shareLink = `http://localhost:5110/s/linkId`;
 
 export const linkHandle = {
   response: {
@@ -127,11 +127,7 @@ export const createLinkRoute = (
     ...(withTotal ? { total: count } : {}),
   };
 
-  return {
-    url,
-    dataHandler: () => new Response(JSON.stringify(data)),
-    method,
-  };
+  return data;
 };
 
 export const linkResolver = () => {
@@ -139,5 +135,47 @@ export const linkResolver = () => {
 };
 
 export const linkHandler = () => {
-  return http.post(`${BASE_URL}${API_PREFIX}/${LINK_FILE_PATH}`, linkResolver);
+  return http.post(`http://localhost:5110/${API_PREFIX}/${LINK_FILE_PATH}`, linkResolver);
+};
+
+export const createLinkRouteResolver = (
+  option: LinkTemplateOptions | LinkTemplateOptions[],
+  method?: MethodType,
+  url?: string | RegExp,
+  withTotal?: boolean,
+) => {
+  return new Response(JSON.stringify(createLinkRoute(option, method, url, withTotal)));
+};
+
+export const createLinkRouteHandler = (
+  port: string,
+  option: LinkTemplateOptions | LinkTemplateOptions[],
+  method?: MethodType,
+  url?: string | RegExp,
+  withTotal?: boolean,
+) => {
+  const resolvedUrl = url ?? LINK_FILE_PATH;
+  const fullUrl = typeof resolvedUrl === 'string' 
+    ? `http://localhost:${port}/${API_PREFIX}/${resolvedUrl}`
+    : resolvedUrl;
+
+  const isArray = Array.isArray(option);
+  
+  return http.post(
+    `http://localhost:${port}/${API_PREFIX}/${isArray ? LINKS_FILE_PATH : LINK_FILE_PATH}`, 
+    () => createLinkRouteResolver(option, method, url, withTotal)
+  );
+};
+
+
+export const createLinksRouteHandler = (
+  port: string,
+  option: LinkTemplateOptions | LinkTemplateOptions[],
+  method?: MethodType,
+  withTotal?: boolean,
+) => {
+  return http.get(
+    `http://localhost:${port}/${API_PREFIX}/${LINKS_FILE_PATH}`, 
+    () => createLinkRouteResolver(option, method, "", withTotal)
+  );
 };

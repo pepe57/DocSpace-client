@@ -33,8 +33,7 @@ type ResponseType = "success" | "empty";
 
 export const PATH_SHARED_WITH_ME = "files/:id";
 
-export const success = {
-  response: {
+const getSharedWithMeFolder = () => ({
     files: [
       {
         folderId: 4,
@@ -203,7 +202,6 @@ export const success = {
       parentId: 0,
       filesCount: 1,
       foldersCount: 0,
-      isShareable: true,
       new: 0,
       mute: false,
       pinned: false,
@@ -236,15 +234,10 @@ export const success = {
         Embed: false,
         ChangeOwner: false,
         IndexExport: false,
-        UseChat: false,
       },
-      availableShareRights: {},
       title: "Shared with me",
       access: 0,
       shared: false,
-      sharedForUser: false,
-      parentShared: false,
-      shortWebUrl: "",
       created: "2025-11-16T18:05:50.0000000+05:00",
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -259,7 +252,7 @@ export const success = {
           "/static/images/default_user_photo_size_48-48.png?hash=317791436",
         avatarSmall:
           "/static/images/default_user_photo_size_32-32.png?hash=317791436",
-        profileUrl: `${BASE_URL}/accounts/people/filter?search=test%40gmail.com`,
+        profileUrl: "",
         hasAvatar: false,
         isAnonim: false,
       },
@@ -278,7 +271,7 @@ export const success = {
           "/static/images/default_user_photo_size_48-48.png?hash=317791436",
         avatarSmall:
           "/static/images/default_user_photo_size_32-32.png?hash=317791436",
-        profileUrl: `${BASE_URL}/accounts/people/filter?search=test%40gmail.com`,
+        profileUrl: "",
         hasAvatar: false,
         isAnonim: false,
       },
@@ -287,33 +280,27 @@ export const success = {
       {
         id: 4,
         title: "Shared with me",
-        folderType: 6,
       },
     ],
     startIndex: 0,
     count: 1,
     total: 1,
     new: 0,
-  },
-  count: 1,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/files/4?count=100&sortby=DateAndTime&sortOrder=descending`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
+});
+
+export const success = {
+  response: getSharedWithMeFolder(),
 };
 
+const getEmptySharedWithMeFolder = () => ({
+  ...getSharedWithMeFolder(),
+  files: [],
+  count: 0,
+  total: 0,
+});
+
 export const empty = {
-  ...success,
-  response: {
-    ...success.response,
-    files: [],
-    count: 0,
-    total: 0,
-  },
+  response: getEmptySharedWithMeFolder(),
 };
 
 export const sharedWithMeResolver = (type?: ResponseType) => {
@@ -326,8 +313,8 @@ export const sharedWithMeResolver = (type?: ResponseType) => {
   }
 };
 
-export const sharedWithMeHandler = (type?: ResponseType, port?: string) => {
-    return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_SHARED_WITH_ME}`, () => {
-        return sharedWithMeResolver(type);
-    });
+export const sharedWithMeHandler = (port?: string, type?: ResponseType) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_SHARED_WITH_ME}`, () => {
+    return sharedWithMeResolver(type);
+  });
 }

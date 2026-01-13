@@ -28,8 +28,7 @@ import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 const id = "00000000-0000-0000-0000-000000000000";
-export const PATH_SHARE_TO_USERS_FILE =
-  /.*\/api\/2\.0\/files\/file\/\d+\/share.*/;
+export const PATH_SHARE_TO_USERS_FILE = "files/file/:id/share";
 
 export const success = {
   response: [
@@ -125,7 +124,7 @@ export const shareToUserResolver = () => {
   return new Response(JSON.stringify(success));
 };
 
-export const shareToUserHandler = () => {
-  return http.get(`${BASE_URL}/${API_PREFIX}/${PATH_SHARE_TO_USERS_FILE}`, 
+export const shareToUserHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_SHARE_TO_USERS_FILE}`, 
     () => shareToUserResolver());
 };

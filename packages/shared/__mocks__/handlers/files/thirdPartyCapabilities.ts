@@ -48,8 +48,8 @@ export const thirdPartyCapabilitiesResolver = () => {
   return new Response(JSON.stringify(CAPABILITIES));
 };
 
-export const thirdPartyCapabilitiesHandler = () => {
-  return http.get(`${BASE_URL}/${API_PREFIX}/${PATH_THIRD_PARTY_CAPABILITIES}`, () => {
+export const thirdPartyCapabilitiesHandler = (port: string) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_THIRD_PARTY_CAPABILITIES}`, () => {
     return thirdPartyCapabilitiesResolver();
   });
 };
