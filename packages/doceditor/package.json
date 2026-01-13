@@ -41,7 +41,6 @@
     "react-dom": "19.2.3",
     "react-i18next": "14.0.1",
     "sass": "1.79.5",
-    "styled-components": "5.3.11",
     "ts-pattern": "5.5.0",
     "winston": "3.17.0",
     "winston-cloudwatch": "6.3.0",
