@@ -48,8 +48,8 @@ export const roomTagsResolver = () => {
 	return new Response(JSON.stringify(successEmptyTags));
 };
 
-export const roomTagsHandler = () => {
-  return http.get(`${BASE_URL}/${API_PREFIX}/${PATH_TAGS}`, () => {
+export const roomTagsHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_TAGS}`, () => {
     return roomTagsResolver();
   });
 }

@@ -33,7 +33,10 @@ import {
   selfGetByEmailHandler,
   selfAddGuestHandler,
   createUserHandler,
+  updateUserCultureHandler,
+  selfByTypeHandler,
 } from "./self";
+export type { UserType } from "./self";
 import { thirdPartyProvidersHandler } from "./thirdPartyProviders";
 import { peopleHandler } from "./people";
 import { peopleListHandler, peopleListAccessDeniedHandler } from "./list";
@@ -52,6 +55,8 @@ export {
   peopleHandler,
   peopleListHandler,
   peopleListAccessDeniedHandler,
+  updateUserCultureHandler,
+  selfByTypeHandler,
 };
 
 export const peopleHandlers = (port: string) => [
@@ -64,6 +69,8 @@ export const peopleHandlers = (port: string) => [
   selfUpdateHandler(port),
   thirdPartyProvidersHandler(port),
   createUserHandler(port),
-  peopleListHandler(),
-  peopleListAccessDeniedHandler(),
+  updateUserCultureHandler(port),
+  selfByTypeHandler(port),
+  peopleListHandler(port),
+  peopleListAccessDeniedHandler(port),
 ];

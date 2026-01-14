@@ -27,7 +27,7 @@
 import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_AI_MODELS = "ai/chats/models?*";
+export const PATH_AI_MODELS = "ai/chats/models";
 
 const providerClaude = {
   response: [
@@ -180,7 +180,7 @@ export const aiModelsResolver = (isClaude?: boolean, isOpenAI?: boolean, isToget
   return new Response(JSON.stringify(providerOpenAI));
 };
 
-export const aiModelsHandler = ({
+export const aiModelsHandler = (port: string, {
   isClaude,
   isOpenAI,
   isTogetherAI,
@@ -190,8 +190,8 @@ export const aiModelsHandler = ({
   isOpenAI?: boolean;
   isTogetherAI?: boolean;
   isOpenRouter?: boolean;
-}) => {
-  return http.get(`http://localhost/${API_PREFIX}/${PATH_AI_MODELS}`, () => {
+} = {}) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_MODELS}`, () => {
     return aiModelsResolver(isClaude, isOpenAI, isTogetherAI, isOpenRouter);
   });
 };

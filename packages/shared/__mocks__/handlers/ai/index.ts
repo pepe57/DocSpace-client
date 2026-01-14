@@ -27,7 +27,7 @@
 import { aiAgentsHandler } from "./agents";
 import { aiConfigHandler } from "./config";
 import { aiModelsHandler } from "./models";
-import { aiProvidersHandler } from "./providers";
+import { aiProvidersHandler, aiProvidersAvailableHandler } from "./providers";
 import { aiServerHandler } from "./server";
 import { aiServersHandler } from "./servers";
 
@@ -36,15 +36,17 @@ export {
   aiConfigHandler,
   aiModelsHandler,
   aiProvidersHandler,
+  aiProvidersAvailableHandler,
   aiServerHandler,
   aiServersHandler,
 };
 
 export const aiHandlers = (port: string) => [
-  aiAgentsHandler,
+  aiAgentsHandler(port),
   aiConfigHandler(port),
-  aiModelsHandler,
-  aiProvidersHandler,
-  aiServerHandler,
-  aiServersHandler,
+  aiModelsHandler(port),
+  aiProvidersHandler(port),
+  aiProvidersAvailableHandler(port),
+  aiServersHandler(port),
+  aiServerHandler(port),
 ];

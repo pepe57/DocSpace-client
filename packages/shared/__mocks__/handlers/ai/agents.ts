@@ -28,7 +28,7 @@
 import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_AI_AGENTS = "ai/agents?*";
+export const PATH_AI_AGENTS = "ai/agents";
 
 const successEmpty = {
   response: {
@@ -506,14 +506,17 @@ export const aiAgentsResolver = (withCreate?: boolean, withListCreate?: boolean)
   return new Response(JSON.stringify(successEmpty));
 };
 
-export const aiAgentsHandler = ({
+export const aiAgentsHandler = (
+  port: string,
+  {
   withCreate,
   withListCreate,
 }: {
   withCreate?: boolean;
   withListCreate?: boolean;
-}) => {
-  return http.get(`http://localhost/${API_PREFIX}/${PATH_AI_AGENTS}`, () => {
+} = {},
+) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_AGENTS}`, () => {
     return aiAgentsResolver(withCreate, withListCreate);
   });
 };

@@ -29,5 +29,5 @@ import { roomTagsHandler } from "./tags";
 export { roomTagsHandler };
 
 export const roomsHandlers = (port: string) => [
-  roomTagsHandler(),
+  roomTagsHandler(port),
 ];

@@ -47,7 +47,12 @@ import { rootHandler } from "./root";
 import { recentHandler } from "./recent";
 import { myDocumentsHandler, getFileInfoHandler } from "./documents";
 import { docServiceHandlers } from "./docservice";
-import { favoritesHandler, addFileToFavoritesHandler, getFileHandler } from "./favorites";
+import { 
+  favoritesHandler, 
+  addFileToFavoritesHandler, 
+  getFileHandler, 
+  deleteFavoritesHandler 
+} from "./favorites";
 
 
 export { TypeFolder } from "./folder";
@@ -78,6 +83,7 @@ export {
   favoritesHandler,
   addFileToFavoritesHandler,
   getFileHandler,
+  deleteFavoritesHandler,
 };
 
 export const filesHandlers = (port: string) => [
@@ -93,10 +99,10 @@ export const filesHandlers = (port: string) => [
   thirdPartyHandler(port),
   shareHandler(port),
   recentHandler(port),
-  myDocumentsHandler(),
-  getFileInfoHandler(),
+  getFileInfoHandler(port),
   docServiceHandlers(port),
-  favoritesHandler(),
-  addFileToFavoritesHandler(),
-  getFileHandler(),
+  favoritesHandler(port),
+  addFileToFavoritesHandler(port),
+  getFileHandler(port),
+  deleteFavoritesHandler(port),
 ];

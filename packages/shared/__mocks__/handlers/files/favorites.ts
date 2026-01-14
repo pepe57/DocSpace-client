@@ -1914,8 +1914,8 @@ export const favoritesResolver = (type?: ResponseType) => {
   }
 };
 
-export const favoritesHandler = (type?: ResponseType) => {
-  return http.get(PATH_FAVORITES, () => {
+export const favoritesHandler = (port: string, type?: ResponseType) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_FAVORITES}`, () => {
     return favoritesResolver(type);
   });
 };
@@ -1925,8 +1925,8 @@ export const deleteFavoritesResolver = () => {
   return new Response(JSON.stringify(deleteFavorites));
 };
 
-export const deleteFavoritesHandler = () => {
-  return http.delete(`${BASE_URL}/${API_PREFIX}/${PATH_DELETE_FAVORITES}`, () => {
+export const deleteFavoritesHandler = (port: string) => {
+  return http.delete(`http://localhost:${port}${API_PREFIX}/${PATH_DELETE_FAVORITES}`, () => {
     return deleteFavoritesResolver();
   });
 };
@@ -1936,8 +1936,8 @@ export const addFileToFavoritesResolver = () => {
   return new Response(JSON.stringify(addToFavoritesResponse));
 };
 
-export const addFileToFavoritesHandler = () => {
-  return http.post(`${BASE_URL}/${API_PREFIX}/${PATH_ADD_TO_FAVORITES}`, () => {
+export const addFileToFavoritesHandler = (port: string) => {
+  return http.post(`http://localhost:${port}${API_PREFIX}/${PATH_ADD_TO_FAVORITES}`, () => {
     return addFileToFavoritesResolver();
   });
 };
@@ -1947,8 +1947,8 @@ export const getFileResolver = () => {
   return new Response(JSON.stringify(getFile));
 };
 
-export const getFileHandler = () => {
-  return http.get(PATH_GET_FILE, () => {
+export const getFileHandler = (port: string) => {
+  return http.get(`http://localhost:${port}${API_PREFIX}/${PATH_GET_FILE}`, () => {
     return getFileResolver();
   });
 };

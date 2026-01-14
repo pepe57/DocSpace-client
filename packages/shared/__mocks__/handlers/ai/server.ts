@@ -47,8 +47,8 @@ const success = {
   statusCode: 200,
 };
 
-export const aiServerHandler = () => {
-  return http.get(`http://localhost/${API_PREFIX}/${PATH_AI_SERVER}`, () => {
+export const aiServerHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVER}`, () => {
     return new Response(JSON.stringify(success));
   });
 };

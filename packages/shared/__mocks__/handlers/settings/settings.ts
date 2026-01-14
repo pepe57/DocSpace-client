@@ -36,6 +36,7 @@ export enum TypeSettings {
   NoStandalone = "noStandalone",
   Authenticated = "authenticated",
   AuthenticatedWithSocket = "authenticatedWithSocket",
+  AuthenticatedWithPlugins = "authenticatedWithPlugins",
   NoAuth = "noAuth",
   EnabledJoin = "enabledJoin",
   EnableAdmMess = "enableAdmMess",
@@ -534,6 +535,8 @@ export const settingsResolver = (
     return new Response(JSON.stringify(settingsWithEnableAdmMess));
   if (type === TypeSettings.WithHCaptcha)
     return new Response(JSON.stringify(settingsWithHCaptcha));
+  if (type === TypeSettings.AuthenticatedWithPlugins)
+    return new Response(JSON.stringify(settingsWithPlugins));
 
   return new Response(JSON.stringify(settingsNoAuth));
 };

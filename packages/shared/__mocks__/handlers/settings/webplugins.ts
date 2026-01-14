@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { http } from "msw";
+
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 import type { TAPIPlugin } from "../../../api/plugins/types";
 
@@ -31,7 +33,6 @@ export const PATH_WEB_PLUGINS = "settings/webplugins";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH_WEB_PLUGINS}`;
 
-// Mock plugin data
 export const mockPlugin1: TAPIPlugin = {
   name: "test-plugin-one",
   version: "1.1.0",
@@ -185,8 +186,8 @@ export const webPluginsDeleteResponse = {
   statusCode: 200,
 };
 
-// Handlers
-export const webPluginsHandler = (
+// Resolvers
+export const webPluginsResolver = (
   type: "empty" | "withData" | "withLocale" = "empty",
 ) => {
   let data;
@@ -206,14 +207,39 @@ export const webPluginsHandler = (
   return new Response(JSON.stringify(data));
 };
 
-export const webPluginsAddHandler = () => {
+export const webPluginsAddResolver = () => {
   return new Response(JSON.stringify(webPluginsUploadResponse));
 };
 
-export const webPluginsUpdateHandler = () => {
+export const webPluginsUpdateResolver = () => {
   return new Response(JSON.stringify(webPluginsUpdatedResponse));
 };
 
-export const webPluginsDeleteHandler = () => {
+export const webPluginsDeleteResolver = () => {
   return new Response(JSON.stringify(webPluginsDeleteResponse));
+};
+
+// Handlers
+export const webPluginsHandler = (port: string, type: "empty" | "withData" | "withLocale" = "empty") => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`, () => {
+    return webPluginsResolver(type);
+  });
+};
+
+export const webPluginsAddHandler = (port: string) => {
+  return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`, () => {
+    return webPluginsAddResolver();
+  });
+};
+
+export const webPluginsUpdateHandler = (port: string) => {
+  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}/:pluginName`, () => {
+    return webPluginsUpdateResolver();
+  });
+};
+
+export const webPluginsDeleteHandler = (port: string) => {
+  return http.delete(`http://localhost:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}/:pluginName`, () => {
+    return webPluginsDeleteResolver();
+  });
 };

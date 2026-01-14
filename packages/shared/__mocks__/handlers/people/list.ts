@@ -47,13 +47,11 @@ export const peopleListSuccess = {
 };
 
 export const peopleListAccessDenied = {
-  response: {
-    error: {
-      message: "Access denied",
-    },
-    status: 1,
-    statusCode: 403,
+  error: {
+    message: "Access denied",
   },
+  status: 1,
+  statusCode: 403,
 };
 
 export const peopleListResolver = (isEmpty: boolean): Response => {
@@ -61,18 +59,18 @@ export const peopleListResolver = (isEmpty: boolean): Response => {
 };
 
 export const peopleListAccessDeniedResolver = (): Response => {
-  return new Response(JSON.stringify(peopleListAccessDenied));
+  return new Response(JSON.stringify(peopleListAccessDenied), { status: 403 });
 };
 
 
-export const peopleListHandler = (isEmpty: boolean = false) => {
-  return http.get(`${BASE_URL}/${API_PREFIX}/${PATH_PEOPLE_LIST}`, () => {
+export const peopleListHandler = (port: string, isEmpty: boolean = false) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_PEOPLE_LIST}`, () => {
     return peopleListResolver(isEmpty);
   });
 };
 
-export const peopleListAccessDeniedHandler = () => {
-  return http.get(`${BASE_URL}/${API_PREFIX}/${PATH_PEOPLE_LIST}`, () => {
+export const peopleListAccessDeniedHandler = (port: string) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_PEOPLE_LIST}`, () => {
     return peopleListAccessDeniedResolver();
   });
 };

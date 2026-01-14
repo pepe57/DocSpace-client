@@ -27,7 +27,8 @@
 import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_AI_PROVIDERS = "ai/providers";
+export const PATH_AI_PROVIDERS = "ai/providers/available";
+export const PATH_AI_PROVIDERS_LIST = "ai/providers";
 
 const successList = {
   response: [
@@ -76,8 +77,14 @@ const successList = {
   statusCode: 200,
 };
 
-export const aiProvidersHandler = () => {
-  return http.get(`http://localhost/${API_PREFIX}/${PATH_AI_PROVIDERS}`, () => {
+export const aiProvidersAvailableHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS}`, () => {
+    return new Response(JSON.stringify(successList));
+  });
+};
+
+export const aiProvidersHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_LIST}`, () => {
     return new Response(JSON.stringify(successList));
   });
 };

@@ -28,6 +28,7 @@ import { http } from "msw";
 import { API_PREFIX } from "../../e2e/utils";
 
 export const PATH = "settings/tfaapp/setup";
+export const PATH_TFAAPP = "settings/tfaapp";
 
 export const tfaAppSuccess = {
   response: {
@@ -54,5 +55,21 @@ export const tfaAppResolver = (): Response => {
 export const tfaAppHandler = (port: string) => {
   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
     return tfaAppResolver();
+  });
+};
+
+const tfaAppSettings = {
+  response: [],
+  status: 0,
+  statusCode: 200,
+};
+
+export const tfaAppSettingsResolver = () => {
+  return new Response(JSON.stringify(tfaAppSettings));
+};
+
+export const tfaAppSettingsHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_TFAAPP}`, () => {
+    return tfaAppSettingsResolver();
   });
 };

@@ -27,8 +27,8 @@
 import { http } from "msw";
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-export const PATH_MY_DOCUMENTS = "api/2.0/files/:id";
-export const PATH_GET_FILE_INFO ="api/2.0/files/file/:id";
+export const PATH_MY_DOCUMENTS = "files/:id";
+export const PATH_GET_FILE_INFO = "files/file/:id";
 
 const myDocumentsFiles = {
   response: {
@@ -359,8 +359,8 @@ export const myDocumentsResolver = (): Response => {
   return new Response(JSON.stringify(myDocumentsFiles));
 };
 
-export const myDocumentsHandler = () => {
-  return http.get(`http://localhost/${API_PREFIX}/${PATH_MY_DOCUMENTS}`, () => {
+export const myDocumentsHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_MY_DOCUMENTS}`, () => {
     return myDocumentsResolver();
   });
 };
@@ -370,8 +370,8 @@ export const getFileInfoResolver = (): Response => {
   return new Response(JSON.stringify(fileInfo));
 };
 
-export const getFileInfoHandler = () => {
-  return http.get(`http://localhost/${API_PREFIX}/${PATH_GET_FILE_INFO}`, () => {
+export const getFileInfoHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_GET_FILE_INFO}`, () => {
     return getFileInfoResolver();
   });
 };

@@ -34,7 +34,8 @@ import { portalTimeZoneHandler } from "./portalTimeZones";
 import { settingsHandler, TypeSettings } from "./settings";
 import { completeHandler } from "./complete";
 import { licenseHandler } from "./license";
-import { tfaAppHandler } from "./tfaApp";
+import { tfaAppHandler, tfaAppSettingsHandler } from "./tfaApp";
+import { ldapHandler, ldapDefaultHandler, ldapCronHandler } from "./ldap";
 import { tfaAppValidateHandler } from "./tfaAppValidate";
 import { ownerHandler } from "./owner";
 import { invitationSettingsHandler } from "./invitationSettings";
@@ -42,6 +43,12 @@ import { companyInfoHandler } from "./companyInfo";
 import { buildHandler } from "./build";
 import { settingsAdditionalHandler } from "./additional";
 import { culturesHandler } from "./cultures";
+import { 
+  webPluginsHandler,
+  webPluginsAddHandler,
+  webPluginsUpdateHandler,
+  webPluginsDeleteHandler,
+} from "./webplugins";
 
 export {
   ssoHandler,
@@ -57,12 +64,20 @@ export {
   companyInfoHandler,
   invitationSettingsHandler,
   tfaAppHandler,
+  tfaAppSettingsHandler,
   colorThemeHandler,
   licenseHandler,
   TypeSettings,
   buildHandler,
   settingsAdditionalHandler,
   culturesHandler,
+  webPluginsHandler,
+  webPluginsAddHandler,
+  webPluginsUpdateHandler,
+  webPluginsDeleteHandler,
+  ldapHandler,
+  ldapDefaultHandler,
+  ldapCronHandler,
 };
 
 export const settingsHandlers = (port: string) => [
@@ -70,6 +85,7 @@ export const settingsHandlers = (port: string) => [
   portalPasswordSettingsHandler(port),
   portalTimeZoneHandler(port),
   tfaAppHandler(port),
+  tfaAppSettingsHandler(port),
   tfaAppValidateHandler(port),
   settingsHandler(port),
   colorThemeHandler(port),
@@ -84,4 +100,11 @@ export const settingsHandlers = (port: string) => [
   buildHandler(port),
   settingsAdditionalHandler(port),
   culturesHandler(port),
+  webPluginsHandler(port),
+  webPluginsAddHandler(port),
+  webPluginsUpdateHandler(port),
+  webPluginsDeleteHandler(port),
+  ldapHandler(port),
+  ldapDefaultHandler(port),
+  ldapCronHandler(port),
 ];
