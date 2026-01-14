@@ -25,11 +25,29 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import classNames from "classnames";
+import styled from "styled-components";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 
-import styles from "./create-edit-dialog-params.module.scss";
+import { StyledParam } from "./StyledParam";
+
+const StyledToggleParam = styled(StyledParam)`
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 8px;
+  box-sizing: border-box;
+  max-width: 100%;
+
+  .set_room_params-info-description {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  .set_room_params-toggle {
+    width: 28px;
+    min-width: 28px;
+  }
+`;
 
 type ToggleParamProps = {
   id: string;
@@ -47,21 +65,21 @@ const ToggleParam = ({
   onCheckedChange,
 }: ToggleParamProps) => {
   return (
-    <div className={classNames(styles.param, styles.toggleParam)}>
+    <StyledToggleParam>
       <div className="set_room_params-info">
         <div className="set_room_params-info-title">
           <div className="set_room_params-info-title-text">{title}</div>
         </div>
-        <div className={styles.infoDescription}>{description}</div>
+        <div className="set_room_params-info-description">{description}</div>
       </div>
       <ToggleButton
         id={id}
-        className={styles.toggle}
+        className="set_room_params-toggle"
         isChecked={isChecked}
         onChange={onCheckedChange}
         dataTestId="create_edit_room_toggle"
       />
-    </div>
+    </StyledToggleParam>
   );
 };
 

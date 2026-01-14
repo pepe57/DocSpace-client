@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import classNames from "classnames";
+import styled from "styled-components";
 
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Label } from "@docspace/shared/components/label";
@@ -33,7 +33,23 @@ import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
 
-import styles from "./create-edit-dialog-params.module.scss";
+import { StyledParam } from "./StyledParam";
+
+const StyledInputParam = styled(StyledParam)`
+  flex-direction: column;
+  gap: 4px;
+  max-height: 54px;
+
+  .input-label-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .input-label {
+      cursor: pointer;
+    }
+  }
+`;
 
 type InputParamProps = {
   ref?: React.RefObject<HTMLInputElement | null>;
@@ -77,11 +93,11 @@ const InputParam = ({
   dataTestId,
 }: InputParamProps) => {
   return (
-    <div className={classNames(styles.param, styles.inputParam)}>
-      <div className={styles.inputLabelWrapper}>
+    <StyledInputParam>
+      <div className="input-label-wrapper">
         <Label
           title={title}
-          className={styles.inputLabel}
+          className="input-label"
           display="display"
           htmlFor={id}
           text={title}
@@ -126,7 +142,7 @@ const InputParam = ({
           testId={dataTestId}
         />
       </FieldContainer>
-    </div>
+    </StyledInputParam>
   );
 };
 
