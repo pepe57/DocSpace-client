@@ -3167,3 +3167,17 @@
   --completed-form-box-background-color: #{$dark-gray-light};
   --completed-form-label-color: #{$dark-gray-dark};
 }
+
+.light {
+  --tap-highlight: #{$tap-highlight};
+  --files-drag-tooltip-background: #{$white};
+  --files-drag-tooltip-box-shadow: 0px 5px 20px #{$popup-shadow};
+  --files-drag-tooltip-color: #{$gray};
+}
+
+.dark {
+  --tap-highlight: #{$tap-highlight};
+  --files-drag-tooltip-background: #{$black};
+  --files-drag-tooltip-box-shadow: 0px 5px 20px #{$popup-shadow};
+  --files-drag-tooltip-color: #{$white};
+}
