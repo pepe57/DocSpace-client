@@ -79,7 +79,7 @@
 
   .addManuallyDropdown {
     inset-inline-start: 0;
-    border: var(--invite-panel-add-manually-dropdown);
+    border: var(--invite-panel-dropdown-separator);
   }
 }
 
@@ -215,5 +215,279 @@
 
   @include mixins.mobile {
     margin-inline-end: 16px;
+  }
+}
+
+.toggleButton {
+  inset-inline-end: 8px;
+  margin-top: -5.5px;
+}
+
+.description {
+  color: var(--invite-panel-description-color);
+  margin-bottom: 11px;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+
+  &.noAllowInvitingGuests {
+    margin-bottom: 12px;
+  }
+}
+
+.inviteInput {
+  width: 100%;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: stretch;
+
+  margin-inline-end: 8px;
+
+  .inputLink {
+    height: 30px;
+    border: 0px;
+
+    > input {
+      height: 30px;
+    }
+  }
+
+  display: flex;
+  border: var(--invite-panel-dropdown-separator);
+  border-radius: 3px;
+
+  .copyLinkIcon {
+    padding: 0;
+
+    &:hover {
+      svg path {
+        fill: var(--copy-link-icon-hover-color) !important;
+      }
+    }
+
+    svg path {
+      fill: var(--copy-link-icon-color) !important;
+    }
+  }
+
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .append {
+    display: none;
+
+    &.isShowCross {
+      display: flex;
+    }
+
+    align-items: center;
+    padding-inline-end: 8px;
+    cursor: default;
+  }
+
+  @include mixins.common-input-styles;
+
+  :focus-within {
+    border-color: var(--invite-panel-border-color);
+  }
+}
+
+.subHeader {
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  margin: 20px 0 9px;
+
+  &.inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 17px;
+  }
+}
+
+.scrollList {
+  position: absolute;
+
+  width: 100%;
+
+  &.isAutoHeight {
+    height: auto;
+  }
+
+  &.withOffset {
+    height: calc(100% - var(--offset-top));
+  }
+
+  .rowItem {
+    @include mixins.not-mobile {
+      width: 448px !important;
+    }
+  }
+}
+
+.styledLink {
+  float: inline-end;
+  margin-top: 2px;
+}
+
+.searchItemText {
+  line-height: 16px;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--invite-panel-email-color);
+
+  &.isPrimary {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &.isInfo {
+    font-size: 11px;
+    margin-inline-start: auto;
+    font-weight: 600;
+    color: var(--invite-panel-text-color);
+  }
+
+  &.isPrimary:not(.isDisabled) {
+    color: var(--invite-panel-text-color);
+  }
+}
+
+.inviteLanguage {
+  margin-top: -12px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 28px;
+  color: var(--invite-panel-language-description-color);
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+
+  .linkList {
+    margin-inline-start: 4px;
+    color: var(--invite-panel-language-color);
+  }
+
+  .invitationLanguage {
+    color: var(--invite-panel-language-description-color);
+  }
+
+  .languageComboBox {
+    :global(.combo-button) {
+      padding-inline: 6px;
+    }
+
+    :global(.combo-buttons_arrow-icon) {
+      margin-inline-start: 0;
+    }
+
+    :global(.combo-button_closed):not(:hover) :global(.combo-button-label) {
+      color: var(--invite-panel-drop-down-active);
+    }
+
+    :global(.combo-button_closed):not(:hover) .combo-buttons_arrow-icon {
+      svg {
+        path {
+          fill: var(--invite-panel-drop-down-active);
+        }
+      }
+    }
+  }
+
+  .languageComboBoxWrapper {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+}
+
+.emailDropdown {
+  &.customWidth {
+    width: var(--custom-width);
+  }
+
+  .listItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 53px;
+
+    .itemAvatar {
+      svg path {
+        fill: var(--info-panel-role-color);
+      }
+    }
+
+    .avatarDisabled {
+      opacity: 0.5;
+    }
+
+    .listItemContent {
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      .listItemContentBox {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+
+    .emailListAvatar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    .emailListContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      line-height: 16px;
+
+      .emailListInviteAsGuest {
+        color: var(--accent-main);
+      }
+    }
+
+    .emailListAddButton {
+      display: flex;
+      margin-inline-start: auto;
+      align-items: center;
+      gap: 4px;
+
+      svg {
+        :global([dir="rtl"]) & {
+          transform: scaleX(-1);
+        }
+
+        path {
+          fill: var(--invite-panel-email-list-icon-color);
+
+          &.isRequestRunning {
+            opacity: 0.65;
+          }
+        }
+      }
+    }
+  }
+
+  .noUsersList {
+    height: 23px;
+    padding-left: 8px;
+    padding-top: 2px;
   }
 }

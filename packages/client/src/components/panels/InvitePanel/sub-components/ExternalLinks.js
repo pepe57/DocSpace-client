@@ -32,6 +32,7 @@ import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
+import classNames from "classnames";
 
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
@@ -41,6 +42,8 @@ import { InputBlock } from "@docspace/shared/components/input-block";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Heading } from "@docspace/shared/components/heading";
 // import { DropDown } from "@docspace/shared/components/drop-down";
 // import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
@@ -52,12 +55,6 @@ import api from "@docspace/shared/api";
 import { RoomsType } from "@docspace/shared/enums";
 import AccessSelector from "../../../AccessSelector";
 import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
-import {
-  StyledSubHeader,
-  StyledInviteInput,
-  StyledToggleButton,
-  StyledDescription,
-} from "../StyledInvitePanel";
 
 import styles from "../InvitePanel.module.scss";
 
@@ -241,7 +238,11 @@ const ExternalLinks = ({
 
   return (
     <div className={styles.externalLink} ref={inputsRef}>
-      <StyledSubHeader $inline>
+      <Heading
+        className={classNames(styles.subHeader, {
+          [styles.inline]: true,
+        })}
+      >
         {t("InviteViaLink")}
 
         <IconButton
@@ -277,21 +278,25 @@ const ExternalLinks = ({
             </DropDown>
           </div>
         ) : null} */}
-        <StyledToggleButton
-          className="invite-via-link"
+        <ToggleButton
+          className={classNames("invite-via-link", styles.toggleButton)}
           isChecked={externalLinksVisible}
           onChange={toggleLinks}
           isDisabled={isLinksToggling}
           dataTestId="invite_panel_external_links_toggle"
         />
-      </StyledSubHeader>
-      <StyledDescription>{description}</StyledDescription>
+      </Heading>
+      <Text className={styles.description}>{description}</Text>
       {externalLinksVisible && roomId !== -1 ? (
         <>
           <div className={styles.inviteInputContainer} key={activeLink.id}>
-            <StyledInviteInput isShowCross>
+            <div
+              className={classNames(styles.inviteInput, {
+                [styles.isShowCross]: true,
+              })}
+            >
               <InputBlock
-                className="input-link"
+                className={classNames(styles.copyLinkIcon, styles.inputLink)}
                 iconSize={16}
                 iconButtonClassName="copy-link-icon"
                 scale
@@ -301,7 +306,7 @@ const ExternalLinks = ({
                 onIconClick={onCopyLink}
                 dataTestId="invite_panel_external_link_input"
               />
-            </StyledInviteInput>
+            </div>
             <AccessSelector
               className="invite-via-link-access"
               t={t}

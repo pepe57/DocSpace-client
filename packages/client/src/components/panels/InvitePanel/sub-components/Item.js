@@ -435,7 +435,7 @@ const Item = ({
     <div
       key={item.id}
       style={style}
-      className={classNames("row-item", styles.styledRow, {
+      className={classNames("row-item", styles.rowItem, styles.styledRow, {
         [styles.isEdit]: edit,
         [styles.hasWarning]: !!item.warning,
       })}
