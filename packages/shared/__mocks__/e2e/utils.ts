@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -91,6 +91,10 @@ export const HEADER_ENCRYPTION_SETTINGS_ENCRYPTED =
   "x-encryption-settings-encrypted";
 
 export const HEADER_WITHOUT_CUSTOMIZATION = "x-without-customization";
+
+export const HEADER_OPEN_EDIT_WITH_PASSWORD = "x-open-edit-with-password";
+
+export const HEADER_FORM_YOUR_TURN_FILLING = "x-form-your-turn-filling";
 
 export const buildSseBody = (events: { event: string; data: unknown }[]) =>
   events
