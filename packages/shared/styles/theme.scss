@@ -3169,6 +3169,8 @@
   
   --files-panel-border-bottom: 1px solid #{$gray-light-mid};
   --files-panel-invite-text-color: #{$gray};
+
+  --invite-panel-icon-color: #{$gray};
 }
 
 .dark {
@@ -3176,4 +3178,6 @@
 
   --files-panel-border-bottom: 1px solid #{$gray-light-mid};
   --files-panel-invite-text-color: #{$gray};
+
+  --invite-panel-icon-color: #{$gray-dark};
 }

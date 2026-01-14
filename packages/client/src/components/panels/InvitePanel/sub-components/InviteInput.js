@@ -56,6 +56,7 @@ import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import BackupIcon from "PUBLIC_DIR/images/icons/16/backup.svg?url";
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
@@ -69,7 +70,6 @@ import {
   SearchItemText,
   StyledDescription,
   StyledInviteLanguage,
-  StyledCrossIcon,
 } from "../StyledInvitePanel";
 
 import styles from "../InvitePanel.module.scss";
@@ -709,7 +709,7 @@ const InviteInput = ({
           />
 
           <div className="append" onClick={() => onChangeInput("")}>
-            <StyledCrossIcon />
+            <CrossIcon className={styles.rowIcons} />
           </div>
         </StyledInviteInput>
         {isAddEmailPanelBlocked ? null : (

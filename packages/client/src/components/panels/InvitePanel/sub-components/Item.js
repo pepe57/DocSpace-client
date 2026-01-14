@@ -28,9 +28,13 @@ import debounce from "lodash.debounce";
 import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import InfoRoleSvgUrl from "PUBLIC_DIR/images/info.role.react.svg?url";
+import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
+import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
 import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
+import classNames from "classnames";
 
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
@@ -47,6 +51,9 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Button } from "@docspace/shared/components/button";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
@@ -56,17 +63,9 @@ import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import Filter from "@docspace/shared/api/people/filter";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import AccessSelector from "../../../AccessSelector";
-import {
-  StyledEditInput,
-  StyledEditButton,
-  StyledCheckIcon,
-  StyledCrossIcon,
-  StyledHelpButton,
-  StyledDeleteIcon,
-  StyledInviteUserBody,
-  ErrorWrapper,
-  StyledRow,
-} from "../StyledInvitePanel";
+
+import styles from "../InvitePanel.module.scss";
+
 import {
   getFreeUsersRoleArray,
   getFreeUsersTypeArray,
@@ -318,9 +317,11 @@ const Item = ({
 
   const displayBody = (
     <>
-      <StyledInviteUserBody>
+      <div className={styles.inviteUserBody}>
         <div
-          className={isGroup ? "invite-user-box group-name" : "invite-user-box"}
+          className={classNames(styles.inviteUserBox, {
+            [styles.isGroup]: isGroup,
+          })}
         >
           <Text {...textProps} truncate>
             {inputValue}
@@ -330,7 +331,7 @@ const Item = ({
 
         {!isGroup ? (
           <Text
-            className="label about-label"
+            className={styles.aboutLabel}
             fontWeight={400}
             fontSize="12px"
             truncate
@@ -338,11 +339,12 @@ const Item = ({
             {`${typeLabel} | ${email}`}
           </Text>
         ) : null}
-      </StyledInviteUserBody>
+      </div>
 
       {hasError || hasNotFoundEmail ? (
-        <ErrorWrapper>
-          <StyledHelpButton
+        <div className={styles.errorWrapper}>
+          <HelpButton
+            className={styles.helpButton}
             iconName={InfoEditReactSvgUrl}
             displayType="auto"
             offsetRight={0}
@@ -355,18 +357,21 @@ const Item = ({
             size={16}
             color={theme.infoPanel.errorColor}
           />
-          <StyledDeleteIcon
-            className="delete-icon"
+          <DeleteIcon
+            className={classNames(styles.rowIcons, {
+              [styles.isClicked]: true,
+            })}
             size="medium"
             onClick={removeItem}
-            dataTestId="invite_panel_item_delete_button"
+            data-testid="invite_panel_item_delete_button"
           />
-        </ErrorWrapper>
+        </div>
       ) : (
-        <div className="role-access">
+        <div className={styles.roleAccess}>
           {warning ? (
-            <div className="role-warning">
-              <StyledHelpButton
+            <div className={styles.roleWarning}>
+              <HelpButton
+                className={styles.helpButton}
                 tooltipContent={warning}
                 iconName={InfoRoleSvgUrl}
                 size={16}
@@ -398,39 +403,43 @@ const Item = ({
     </>
   );
 
-  const okIcon = <StyledCheckIcon size="scale" />;
-  const cancelIcon = <StyledCrossIcon size="scale" />;
+  const okIcon = <CheckIcon className={styles.rowIcons} size="scale" />;
+  const cancelIcon = <CrossIcon className={styles.rowIcons} size="scale" />;
 
   const editBody = (
     <>
-      <StyledEditInput
+      <TextInput
+        className={styles.editBodyInputStyles}
         value={inputValue}
         onChange={changeValue}
         scale
-        dataTestId="invite_panel_item_edit_input"
+        testId="invite_panel_item_edit_input"
       />
-      <StyledEditButton
+      <Button
+        className={styles.editButton}
         icon={okIcon}
         onClick={saveEdit}
         isDisabled={searchRequestRunning}
-        dataTestId="invite_panel_item_save_button"
+        testId="invite_panel_item_save_button"
       />
-      <StyledEditButton
+      <Button
+        className={styles.editButton}
         icon={cancelIcon}
         onClick={cancelEdit}
-        dataTestId="invite_panel_item_cancel_button"
+        testId="invite_panel_item_cancel_button"
       />
     </>
   );
 
   return (
-    <StyledRow
+    <div
       key={item.id}
       style={style}
-      className="row-item"
-      hasWarning={!!item.warning}
-      edit={edit}
-      dataTestId={`invite_panel_item_${index}`}
+      className={classNames("row-item", styles.styledRow, {
+        [styles.isEdit]: edit,
+        [styles.hasWarning]: !!item.warning,
+      })}
+      data-testid={`invite_panel_item_${index}`}
     >
       <Avatar
         size="min"
@@ -441,7 +450,7 @@ const Item = ({
         dataTestId={`invite_panel_item_avatar_${index}`}
       />
       {edit ? editBody : displayBody}
-    </StyledRow>
+    </div>
   );
 };
 

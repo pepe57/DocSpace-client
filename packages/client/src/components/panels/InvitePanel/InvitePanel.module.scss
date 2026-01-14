@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @use "@docspace/shared/styles/variables";
+@use "@docspace/shared/styles/mixins";
 
 .inviteInputContainer {
   position: relative;
@@ -63,7 +64,7 @@
     margin-inline-end: 0;
 
     // Add space between access-selector's absolute positioned dropdown and modal footer
-    :global(.dropdown-container) {
+    .dropdown-container {
       overflow: unset;
 
       ::after {
@@ -116,5 +117,103 @@
     svg path:nth-child(1) {
       fill: unset !important;
     }
+  }
+}
+
+.helpButton {
+  margin-inline-start: 8px;
+}
+
+.editBodyInputStyles {
+  height: 32px;
+}
+
+.inviteUserBody {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
+  .inviteUserBox {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &.isGroup {
+      padding-top: 8px;
+    }
+  }
+
+  .aboutLabel {
+    color: var(--files-panel-invite-text-color);
+  }
+}
+
+.editButton {
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0px !important;
+}
+
+.styledRow {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+
+  &.isEdit {
+    grid-template-columns: 32px 1fr 32px 32px;
+  }
+
+  gap: 8px;
+  min-height: 41px;
+  box-sizing: border-box;
+  border-bottom: none;
+
+  a {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  :global(.access-selector) {
+    margin-inline-start: auto;
+    margin-inline-end: 0;
+
+    &.hasWarning {
+      margin-inline-start: 0;
+    }
+  }
+
+  .roleAccess {
+    box-sizing: border-box;
+    display: flex;
+    align-items: right;
+    gap: 8px;
+
+    .roleWarning {
+      padding-top: 4px;
+    }
+  }
+}
+
+.rowIcons {
+  @include mixins.common-icons-style;
+
+  &.isClicked {
+    cursor: pointer;
+  }
+
+  path {
+    fill: var(--invite-panel-icon-color) !important;
+  }
+}
+
+.errorWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+  margin-inline-start: auto;
+
+  @include mixins.mobile {
+    margin-inline-end: 16px;
   }
 }

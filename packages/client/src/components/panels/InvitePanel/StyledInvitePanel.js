@@ -26,12 +26,9 @@
 
 import styled, { css } from "styled-components";
 import { Heading } from "@docspace/shared/components/heading";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
-import { HelpButton } from "@docspace/shared/components/help-button";
 import { Link } from "@docspace/shared/components/link";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import {
@@ -41,9 +38,6 @@ import {
   desktop,
   commonInputStyles,
 } from "@docspace/shared/utils";
-import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
-import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
-import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
 
 const fillAvailableWidth = css`
   width: 100%;
@@ -106,27 +100,6 @@ const ScrollList = styled.div.attrs((props) => ({
   }
 `;
 
-const StyledInviteUserBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-
-  .invite-user-box {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .group-name {
-    padding-top: 8px;
-  }
-
-  .about-label {
-    color: ${(props) => props.theme.filesPanels.invite.textColor};
-  }
-`;
-
 const StyledSubHeader = styled(Heading)`
   font-weight: 700 !important;
   font-size: 16px !important;
@@ -155,48 +128,6 @@ const StyledDescription = styled(Text).attrs(injectDefaultTheme)`
     css`
       margin-bottom: 12px;
     `};
-`;
-
-const StyledRow = styled.div.attrs((props) => ({
-  "data-testid": props.dataTestId,
-}))`
-  display: grid;
-  grid-template-columns: ${(props) =>
-    props.edit ? "32px 1fr 32px 32px" : "32px 1fr auto"};
-  gap: 8px;
-
-  min-height: 41px;
-
-  box-sizing: border-box;
-  border-bottom: none;
-
-  a {
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 16px;
-  }
-
-  .access-selector {
-    margin-inline-start: auto;
-    margin-inline-end: 0;
-
-    ${({ hasWarning }) => hasWarning && `margin-inline-start: 0;`}
-  }
-
-  .warning {
-    margin-inline-start: auto;
-  }
-
-  .role-access {
-    box-sizing: border-box;
-    display: flex;
-    align-items: right;
-    gap: 8px;
-
-    .role-warning {
-      padding-top: 4px;
-    }
-  }
 `;
 
 const StyledInviteInput = styled.div`
@@ -251,12 +182,6 @@ const StyledInviteInput = styled.div`
   :focus-within {
     border-color: ${(props) => props.theme.inputBlock.borderColor};
   }
-`;
-
-const StyledEditInput = styled(TextInput).attrs((props) => ({
-  "data-testid": props.dataTestId,
-}))`
-  height: 32px;
 `;
 
 const StyledDropDown = styled(DropDown)`
@@ -353,45 +278,6 @@ const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
   ${(props) => props.info && `margin-inline-start: auto`}
 `;
 
-const StyledEditButton = styled(Button).attrs((props) => ({
-  "data-testid": props.dataTestId,
-}))`
-  width: 32px !important;
-  height: 32px !important;
-  padding: 0px !important;
-`;
-
-const iconStyles = css`
-  ${commonIconsStyles}
-  path {
-    fill: ${(props) => props.theme.filesEditingWrapper.fill} !important;
-  }
-  :hover {
-    fill: ${(props) => props.theme.filesEditingWrapper.hoverFill} !important;
-  }
-`;
-
-const StyledCheckIcon = styled(CheckIcon).attrs(injectDefaultTheme)`
-  ${iconStyles}
-`;
-
-const StyledCrossIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
-  ${iconStyles}
-`;
-
-const StyledDeleteIcon = styled(DeleteIcon).attrs((props) => ({
-  ...injectDefaultTheme(props),
-  "data-testid": props.dataTestId,
-}))`
-  cursor: pointer;
-
-  ${iconStyles}
-`;
-
-const StyledHelpButton = styled(HelpButton)`
-  margin-inline-start: 8px;
-`;
-
 const StyledButtons = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
   padding: 16px;
@@ -468,36 +354,16 @@ const StyledInviteLanguage = styled.div`
   }
 `;
 
-const ErrorWrapper = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 12px;
-  margin-inline-start: auto;
-
-  @media ${mobile} {
-    margin-inline-end: 16px;
-  }
-`;
-
 export {
   StyledInvitePanel,
-  StyledRow,
   StyledSubHeader,
   StyledInviteInput,
   StyledDropDown,
   SearchItemText,
-  StyledEditInput,
-  StyledEditButton,
-  StyledCheckIcon,
-  StyledCrossIcon,
-  StyledHelpButton,
-  StyledDeleteIcon,
   StyledButtons,
   StyledLink,
   ScrollList,
   StyledToggleButton,
   StyledDescription,
   StyledInviteLanguage,
-  StyledInviteUserBody,
-  ErrorWrapper,
 };
