@@ -24,40 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-
-import { expect, test } from "./fixtures/base";
+import { 
+  favoritesHandler,
+  myDocumentsHandler,
+  rootHandler,
+  settingsHandler,
+  TypeSettings,
+  addFileToFavoritesHandler,
+  deleteFavoritesHandler,
+  getFileHandler,
+  getFileInfoHandler,
+  filesSettingsHandler,
+} from "@docspace/shared/__mocks__/handlers";
+import { expect, test, TEST_PORT } from "./fixtures/base";
 
 test.describe("Favorites", () => {
   test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiConfig,
-      endpoints.settingsWithQuery,
-      endpoints.colorTheme,
-      endpoints.build,
-      endpoints.capabilities,
-      endpoints.selfEmailActivatedClient,
-      endpoints.tariff,
-      endpoints.quota,
-      endpoints.additionalSettings,
-      endpoints.getPortal,
-      endpoints.companyInfo,
-      endpoints.cultures,
-      endpoints.root,
-      endpoints.invitationSettings,
-      endpoints.filesSettings,
-      endpoints.webPlugins,
-
-      endpoints.thirdPartyCapabilities,
-      endpoints.thirdParty,
-      endpoints.docService,
-    ]);
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      filesSettingsHandler(TEST_PORT),
+    );
   });
 
-  test("should navigate to favorites page", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.favorites]);
+  test("should navigate to favorites page", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      favoritesHandler(TEST_PORT),
+    );
 
-    await page.goto("/files/favorite/filter?folder=1");
+    await page.goto(`${baseUrl}/files/favorite/filter?folder=1`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -74,10 +69,16 @@ test.describe("Favorites", () => {
     ]);
   });
 
-  test("should handle empty favorites list", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.favoritesEmpty]);
+  test("should handle empty favorites list", async ({ 
+    page,
+    mockRequest,
+    baseUrl }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      favoritesHandler(TEST_PORT, "empty"),
+    );
 
-    await page.goto("/files/favorite/filter?folder=1");
+    await page.goto(`${baseUrl}/files/favorite/filter?folder=1`);
 
     const emptyView = page.getByTestId("empty-view");
     await expect(emptyView).toBeVisible();
@@ -93,14 +94,16 @@ test.describe("Favorites", () => {
     page,
     mockRequest,
     wsMock,
+    baseUrl
   }) => {
-    await mockRequest.router([
-      endpoints.favorites,
-      endpoints.settingsWithSocket,
-    ]);
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
+      rootHandler(TEST_PORT),
+      favoritesHandler(TEST_PORT),
+    );
     await wsMock.setupWebSocketMock();
 
-    await page.goto("/files/favorite/filter?folder=1");
+    await page.goto(`${baseUrl}/files/favorite/filter?folder=1`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -121,8 +124,10 @@ test.describe("Favorites", () => {
       "favorites-context-menu.png",
     ]);
 
-    await mockRequest.router([endpoints.favoritesDelete]);
-    await mockRequest.router([endpoints.getFile]);
+    mockRequest.use(
+      deleteFavoritesHandler(TEST_PORT),
+      getFileHandler(TEST_PORT),
+    );
 
     await removeFromFavorites.click();
 
@@ -142,10 +147,15 @@ test.describe("Favorites", () => {
   test("should context menu for favorite folder", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([endpoints.favoritesMany]);
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      favoritesHandler(TEST_PORT, "success_many"),
+    );
 
-    await page.goto("/files/favorite/filter?folder=1");
+    await page.goto(`${baseUrl}/files/favorite/filter?folder=1`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -162,10 +172,15 @@ test.describe("Favorites", () => {
   test("should context menu for favorite file via link", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([endpoints.favoritesMany]);
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      favoritesHandler(TEST_PORT, "success_many"),
+    );
 
-    await page.goto("/files/favorite/filter?folder=1");
+    await page.goto(`${baseUrl}/files/favorite/filter?folder=1`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -182,10 +197,15 @@ test.describe("Favorites", () => {
   test("should context menu for favorite file from room", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([endpoints.favoritesMany]);
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      favoritesHandler(TEST_PORT, "success_many"),
+    );
 
-    await page.goto("/files/favorite/filter?folder=1");
+    await page.goto(`${baseUrl}/files/favorite/filter?folder=1`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -202,10 +222,15 @@ test.describe("Favorites", () => {
   test("should context menu for favorite shared file", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([endpoints.favoritesMany]);
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      favoritesHandler(TEST_PORT, "success_many"),
+    );
 
-    await page.goto("/files/favorite/filter?folder=1");
+    await page.goto(`${baseUrl}/files/favorite/filter?folder=1`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -222,10 +247,15 @@ test.describe("Favorites", () => {
   test("should context menu for favorite archive", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([endpoints.favoritesMany]);
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      favoritesHandler(TEST_PORT, "success_many"),
+    );
 
-    await page.goto("/files/favorite/filter?folder=1");
+    await page.goto(`${baseUrl}/files/favorite/filter?folder=1`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -242,10 +272,15 @@ test.describe("Favorites", () => {
   test("should context menu for favorite image", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([endpoints.favoritesMany]);
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      favoritesHandler(TEST_PORT, "success_many"),
+    );
 
-    await page.goto("/files/favorite/filter?folder=1");
+    await page.goto(`${baseUrl}/files/favorite/filter?folder=1`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -262,12 +297,14 @@ test.describe("Favorites", () => {
   test("should add file from my documents to favorites", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([
-      endpoints.myDocuments,
-    ]);
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      myDocumentsHandler(TEST_PORT)
+    );
     
-    await page.goto("/rooms/personal/filter?folder=12764");
+    await page.goto(`${baseUrl}/rooms/personal/filter?folder=12764`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -281,14 +318,14 @@ test.describe("Favorites", () => {
     const markAsFavorite = page.getByTestId("mark-as-favorite");
     await expect(markAsFavorite).toBeVisible();
 
-    await mockRequest.router([
-      endpoints.addToFavorites,
-      endpoints.getFileInfo,
-    ]);
+    mockRequest.use(
+      addFileToFavoritesHandler(TEST_PORT),
+      getFileInfoHandler(TEST_PORT),
+    );
 
     await markAsFavorite.click();
 
     const toast = page.getByTestId("toast-content");
     await expect(toast).toBeVisible();
   });
-});
+ });
