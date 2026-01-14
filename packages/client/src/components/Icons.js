@@ -29,7 +29,8 @@ import classNames from "classnames";
 
 import styles from "./icons.module.scss";
 
-export const StyledSendClockIcon = ({ className }) => {
+export const StyledSendClockIcon = (props) => {
+  const { className } = props;
   return (
     <SendClockIcon className={classNames(styles.sendClockIcon, className)} />
   );
