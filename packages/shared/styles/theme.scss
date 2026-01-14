@@ -3174,6 +3174,8 @@
   --files-drag-tooltip-box-shadow: 0px 5px 20px #{$popup-shadow};
   --files-drag-tooltip-color: #{$gray};
   --create-edit-room-description-color: #{$gray};
+  --menu-container-background: #{$light-gray-hover};
+  --menu-container-color: #{$black};
 }
 
 .dark {
@@ -3182,4 +3184,6 @@
   --files-drag-tooltip-box-shadow: 0px 5px 20px #{$popup-shadow};
   --files-drag-tooltip-color: #{$white};
   --create-edit-room-description-color: #{$gray};
+  --menu-container-background: #{$light-dark-gray-hover};
+  --menu-container-color: #{$white};
 }
