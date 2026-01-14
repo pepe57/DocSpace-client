@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,6 +33,37 @@ export const tariffSuccess = {
   response: {
     openSource: false,
     enterprise: false,
+    developer: true,
+    id: 1,
+    state: 1,
+    dueDate: "2026-06-05T13:03:34.0000000+04:00",
+    delayDueDate: "0001-01-01T00:00:00.0000000Z",
+    licenseDate: "0001-01-01T00:00:00.0000000Z",
+    customerId: "test@gmail.com",
+    quotas: [
+      {
+        id: 1,
+        quantity: 31,
+        wallet: false,
+      },
+    ],
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_TARIFF}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+  ok: true,
+};
+
+export const tariffOpenSourceSuccess = {
+  response: {
+    openSource: true,
+    enterprise: false,
     developer: false,
     id: 1,
     state: 1,
@@ -60,13 +91,13 @@ export const tariffSuccess = {
   ok: true,
 };
 
-export const tariffResolver = () => {
-  return new Response(JSON.stringify(tariffSuccess));
+export const tariffResolver = (openSource: boolean = false) => {
+  return new Response(JSON.stringify(openSource ? tariffOpenSourceSuccess : tariffSuccess));
 };
 
-export const tariffHandler = (port: string) => {
+export const tariffHandler = (port: string, openSource: boolean = false) => {
   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_TARIFF}`, () => {
-    return tariffResolver();
+    return tariffResolver(openSource);
   });
 };
 

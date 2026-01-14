@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -73,12 +73,40 @@ const successDisabled = {
   statusCode: 200,
 };
 
+const successWebSearchDisabled = {
+  response: {
+    webSearchEnabled: false,
+    vectorizationEnabled: true,
+    aiReady: true,
+    portalMcpServerId: "id",
+    embeddingModel: "text-embedding-3-small",
+    knowledgeSearchToolName: "docspace_knowledge_search",
+    webSearchToolName: "docspace_web_search",
+    webCrawlingToolName: "docspace_web_crawling",
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 export const aiConfigResolver = (
   isDisabled?: boolean,
+  isWebSearchDisabled?: boolean,
 ): Response => {
   if (isDisabled) {
     return new Response(JSON.stringify(successDisabled));
   }
+
+  if (isWebSearchDisabled) {
+    return new Response(JSON.stringify(successWebSearchDisabled));
+  }
+
   return new Response(JSON.stringify(success));
 };
 

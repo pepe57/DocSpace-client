@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,7 +30,7 @@ import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_QUOTA = "portal/payment/quota";
 
-export const quotaSuccess = {
+export const quotaSuccess = (withCustomization: boolean = false) => ({
   response: {
     id: -10,
     title: "Business",
@@ -73,7 +73,7 @@ export const quotaSuccess = {
       },
       {
         id: "branding",
-        value: false,
+        value: true,
         type: "flag",
       },
       {
@@ -113,7 +113,7 @@ export const quotaSuccess = {
       {
         id: "customization",
         title: "Branding & customization",
-        value: true,
+        value: withCustomization,
         type: "flag",
       },
       {
@@ -200,14 +200,14 @@ export const quotaSuccess = {
   status: 0,
   statusCode: 200,
   ok: true,
+});
+
+export const quotaResolver = (withCustomization: boolean = false) => {
+  return new Response(JSON.stringify(quotaSuccess(withCustomization)));
 };
 
-export const quotaResolver = () => {
-  return new Response(JSON.stringify(quotaSuccess));
-};
-
-export const quotaHandler = (port: string) => {
+export const quotaHandler = (port: string, withCustomization: boolean = false) => {
   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_QUOTA}`, () => {
-    return quotaResolver();
+    return quotaResolver(withCustomization);
   });
 };

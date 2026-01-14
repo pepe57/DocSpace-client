@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,6 +39,7 @@ const successList = {
       url: "https://api.anthropic.com/v1",
       createdOn: "2025-11-18T11:45:49.0000000+03:00",
       modifiedOn: "2025-11-18T11:46:00.0000000+03:00",
+      needReset: false,
     },
     {
       id: 2,
@@ -47,6 +48,7 @@ const successList = {
       url: "https://api.openai.com/v1",
       createdOn: "2025-11-18T11:51:05.0000000+03:00",
       modifiedOn: "2025-11-18T11:51:05.0000000+03:00",
+      needReset: false,
     },
     {
       id: 3,
@@ -55,6 +57,7 @@ const successList = {
       url: "https://api.together.xyz/v1",
       createdOn: "2025-11-18T11:53:12.0000000+03:00",
       modifiedOn: "2025-11-18T11:53:33.0000000+03:00",
+      needReset: false,
     },
     {
       id: 4,
@@ -63,6 +66,7 @@ const successList = {
       url: "https://openrouter.ai/api/v1",
       createdOn: "2025-11-21T19:02:57.0000000+03:00",
       modifiedOn: "2025-11-21T19:17:12.0000000+03:00",
+      needReset: false,
     },
   ],
   count: 4,
@@ -77,6 +81,133 @@ const successList = {
   statusCode: 200,
 };
 
+const successListNeedReset = {
+  response: [
+    {
+      id: 1,
+      title: "Claude AI",
+      type: 4,
+      url: "https://api.anthropic.com/v1",
+      createdOn: "2025-11-18T11:45:49.0000000+03:00",
+      modifiedOn: "2025-11-18T11:46:00.0000000+03:00",
+      needReset: true,
+    },
+    {
+      id: 2,
+      title: "OpenAI",
+      type: 1,
+      url: "https://api.openai.com/v1",
+      createdOn: "2025-11-18T11:51:05.0000000+03:00",
+      modifiedOn: "2025-11-18T11:51:05.0000000+03:00",
+      needReset: true,
+    },
+    {
+      id: 3,
+      title: "Together AI",
+      type: 2,
+      url: "https://api.together.xyz/v1",
+      createdOn: "2025-11-18T11:53:12.0000000+03:00",
+      modifiedOn: "2025-11-18T11:53:33.0000000+03:00",
+      needReset: true,
+    },
+    {
+      id: 4,
+      title: "OpenRouter",
+      type: 5,
+      url: "https://openrouter.ai/api/v1",
+      createdOn: "2025-11-21T19:02:57.0000000+03:00",
+      modifiedOn: "2025-11-21T19:17:12.0000000+03:00",
+      needReset: true,
+    },
+  ],
+  count: 4,
+  total: 4,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_PROVIDERS}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successEmptyList = {
+  response: [],
+  count: 0,
+  total: 0,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_PROVIDERS}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successCreate = {
+  response: {
+    id: 1,
+    title: "new provider",
+    type: 1,
+    url: "https://api.openai.com/v1",
+    createdOn: "2025-11-18T11:45:49.0000000+03:00",
+    modifiedOn: "2025-11-18T11:46:00.0000000+03:00",
+  },
+  status: 0,
+  statusCode: 200,
+};
+
+const successDelete = {
+  response: null,
+  status: 0,
+  statusCode: 200,
+};
+
+const successUpdate = {
+  response: {
+    id: 1,
+    title: "updated provider",
+    type: 1,
+    url: "https://api.openai.com/v1",
+    createdOn: "2025-11-18T11:45:49.0000000+03:00",
+    modifiedOn: "2025-11-18T11:46:00.0000000+03:00",
+  },
+  status: 0,
+  statusCode: 200,
+};
+
+export const aiProvidersResolver = ({
+  isEmpty,
+  needReset,
+}: {
+  isEmpty?: boolean;
+  needReset?: boolean;
+} = {}) => {
+  if (needReset) {
+    return new Response(JSON.stringify(successListNeedReset));
+  }
+
+  if (isEmpty) {
+    return new Response(JSON.stringify(successEmptyList));
+  }
+
+  return new Response(JSON.stringify(successList));
+};
+
+export const aiProvidersPostHandler = () => {
+  return new Response(JSON.stringify(successCreate));
+};
+
+export const aiProvidersDeleteHandler = () => {
+  return new Response(JSON.stringify(successDelete));
+};
+
+export const aiProvidersPutHandler = () => {
+  return new Response(JSON.stringify(successUpdate));
+};
+
 export const aiProvidersAvailableHandler = (port: string) => {
   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS}`, () => {
     return new Response(JSON.stringify(successList));
@@ -84,7 +215,6 @@ export const aiProvidersAvailableHandler = (port: string) => {
 };
 
 export const aiProvidersHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_LIST}`, () => {
-    return new Response(JSON.stringify(successList));
-  });
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_LIST}`,
+    () => aiProvidersResolver());
 };

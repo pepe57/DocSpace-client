@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -160,7 +160,19 @@ const providerOpenRouter = {
   statusCode: 200,
 };
 
-export const aiModelsResolver = (isClaude?: boolean, isOpenAI?: boolean, isTogetherAI?: boolean, isOpenRouter?: boolean) => {
+const errorRes = {
+  error: {
+    message:
+      "The specified API key is invalid or does not have access rights. Verify that the key is correct and try again",
+    type: "System.ArgumentException",
+    stack: "stack",
+    hresult: -1234567589,
+  },
+  status: 1,
+  statusCode: 400,
+};
+
+export const aiModelsResolver = (isClaude?: boolean, isOpenAI?: boolean, isTogetherAI?: boolean, isOpenRouter?: boolean, isError?: boolean) => {
   if (isClaude) {
     return new Response(JSON.stringify(providerClaude));
   }
@@ -177,6 +189,10 @@ export const aiModelsResolver = (isClaude?: boolean, isOpenAI?: boolean, isToget
     return new Response(JSON.stringify(providerOpenRouter));
   }
 
+  if (isError) {
+    return new Response(JSON.stringify(errorRes));
+  }
+
   return new Response(JSON.stringify(providerOpenAI));
 };
 
@@ -185,13 +201,15 @@ export const aiModelsHandler = (port: string, {
   isOpenAI,
   isTogetherAI,
   isOpenRouter,
+  isError,
 }: {
   isClaude?: boolean;
   isOpenAI?: boolean;
   isTogetherAI?: boolean;
   isOpenRouter?: boolean;
+  isError?: boolean;
 } = {}) => {
   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_MODELS}`, () => {
-    return aiModelsResolver(isClaude, isOpenAI, isTogetherAI, isOpenRouter);
+    return aiModelsResolver(isClaude, isOpenAI, isTogetherAI, isOpenRouter, isError);
   });
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,6 +28,7 @@ import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_AI_SERVER = "ai/servers/*";
+export const PATH_AI_SERVER_STATUS = "ai/servers/*/status";
 
 const success = {
   response: {
@@ -47,8 +48,89 @@ const success = {
   statusCode: 200,
 };
 
+const successUpdate = {
+  response: {
+    id: "7a1f3c6d-1c3b-4704-b8ed-8dc90d0f371f",
+    name: "updatedTitle",
+    description: "updatedDescription",
+    endpoint: "https://updatedenpoint.com",
+    serverType: 0,
+    headers: {
+      updatedHeaderKey: "updatedHeaderValue",
+    },
+    enabled: true,
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVER}`,
+      action: "PUT",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successEnabledStatus = {
+  response: {
+    id: "7a1f3c6d-1c3b-4704-b8ed-8dc90d0f371f",
+    name: "test custom server",
+    description: "asdf",
+    endpoint: "http://custom-mcp.com",
+    serverType: 0,
+    headers: {
+      headerKey: "headerValue",
+    },
+    enabled: true,
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVER_STATUS}`,
+      action: "PUT",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successDisabledStatus = {
+  response: {
+    id: "7a1f3c6d-1c3b-4704-b8ed-8dc90d0f371f",
+    name: "test custom server",
+    description: "asdf",
+    endpoint: "http://custom-mcp.com",
+    serverType: 0,
+    headers: {
+      headerKey: "headerValue",
+    },
+    enabled: false,
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVER_STATUS}`,
+      action: "PUT",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 export const aiServerHandler = (port: string) => {
   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVER}`, () => {
     return new Response(JSON.stringify(success));
   });
+};
+
+export const aiServerPutHandler = () => {
+  return new Response(JSON.stringify(successUpdate));
+};
+
+export const aiServerStatusPutHandler = (type: "enable" | "disable") => {
+  return new Response(
+    JSON.stringify(
+      type === "enable" ? successEnabledStatus : successDisabledStatus,
+    ),
+  );
 };

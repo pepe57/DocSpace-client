@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,6 +54,8 @@ test.describe("Plugins", () => {
 
     await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
 
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
     const emptyView = page.getByTestId("empty-screen-container");
     await expect(emptyView).toBeVisible();
 
@@ -75,6 +77,8 @@ test.describe("Plugins", () => {
     mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
 
     await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
 
     const pluginsList = page.locator('[data-testid^="plugin_test-plugin"]');
     await expect(pluginsList).toHaveCount(2);
@@ -102,6 +106,8 @@ test.describe("Plugins", () => {
     mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
 
     await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
 
     const pluginsListBefore = page.locator(
       '[data-testid^="plugin_test-plugin"]',
@@ -134,6 +140,8 @@ test.describe("Plugins", () => {
 
     await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
 
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
     const plugin1 = page.getByTestId("plugin_test-plugin-one");
     await expect(plugin1).toBeVisible();
 
@@ -158,6 +166,8 @@ test.describe("Plugins", () => {
     mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
 
     await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
 
     const pluginsListBefore = page.locator(
       '[data-testid^="plugin_test-plugin"]',
@@ -198,6 +208,8 @@ test.describe("Plugins", () => {
     mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
 
     await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
 
     const plugin1 = page.getByTestId("plugin_test-plugin-one");
     await expect(plugin1).toBeVisible();
@@ -261,6 +273,8 @@ test.describe("Plugins", () => {
 
     mockRequest.use(webPluginsHandler(TEST_PORT, "withLocale"));
     await page.getByTestId("plugins_tab").click();
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
 
     const pluginAz = page.getByTestId("plugin_archives.zip");
     await expect(pluginAz).toBeVisible();
@@ -329,6 +343,8 @@ test.describe("Plugins", () => {
 
     mockRequest.use(webPluginsHandler(TEST_PORT, "withLocale"));
     await page.getByTestId("plugins_tab").click();
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
 
     const pluginEn = page.getByTestId("plugin_archives.zip");
     await expect(pluginEn).toBeVisible();

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,8 +28,10 @@ import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_AI_SERVERS = "ai/servers/available";
+export const PATH_AI_SERVERS_WITH_FILTER = "ai/servers?*";
+export const PATH_AI_SERVERS_AVAILABLE = "ai/servers/available?*";
 
-const success = {
+const successAvailable = {
   response: [
     {
       id: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
@@ -48,12 +50,161 @@ const success = {
   total: 2,
   links: [
     {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS}`,
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_AVAILABLE}`,
       action: "GET",
     },
   ],
   status: 0,
   statusCode: 200,
+};
+
+const successList = {
+  response: [
+    {
+      id: "7a1f3c6d-1c3b-4704-b8ed-8dc90d0f371f",
+      name: "test custom server",
+      description: "asdf",
+      endpoint: "http://custom-mcp.com",
+      serverType: 0,
+      headers: {
+        headerKey: "headerValue",
+      },
+      enabled: true,
+      needReset: false,
+    },
+    {
+      id: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
+      name: "test system server",
+      endpoint: "http://system-mcp.com",
+      serverType: 1,
+      enabled: true,
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_WITH_FILTER}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successListDisabled = {
+  response: [
+    {
+      id: "7a1f3c6d-1c3b-4704-b8ed-8dc90d0f371f",
+      name: "test custom server",
+      description: "asdf",
+      endpoint: "http://custom-mcp.com",
+      serverType: 0,
+      headers: {
+        headerKey: "headerValue",
+      },
+      enabled: false,
+      needReset: false,
+    },
+    {
+      id: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
+      name: "test system server",
+      endpoint: "http://system-mcp.com",
+      serverType: 1,
+      enabled: false,
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_WITH_FILTER}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successListNeedReset = {
+  response: [
+    {
+      id: "7a1f3c6d-1c3b-4704-b8ed-8dc90d0f371f",
+      name: "test custom server",
+      description: "asdf",
+      endpoint: "http://custom-mcp.com",
+      serverType: 0,
+      headers: {
+        headerKey: "headerValue",
+      },
+      enabled: false,
+      needReset: true,
+    },
+  ],
+  count: 1,
+  total: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_WITH_FILTER}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successCreate = {
+  response: {
+    id: "b4b46038-4c1d-465b-9394-fd5544ca4f32",
+    name: "created_mcp",
+    description: "descr",
+    endpoint: "https://createdmcp.com/",
+    serverType: 0,
+    headers: {
+      headerKey: "headerValue",
+    },
+    enabled: true,
+    needReset: false,
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS}`,
+      action: "POST",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successDelete = {
+  response: null,
+  status: 0,
+  statusCode: 200,
+};
+
+export const aiServersAvailableHandler = () => {
+  return new Response(JSON.stringify(successAvailable));
+};
+
+export const aiServersGetHandler = (
+  type: "enabled" | "disabled" | "needReset" = "enabled",
+) => {
+  if (type === "needReset") {
+    return new Response(JSON.stringify(successListNeedReset));
+  }
+
+  return new Response(
+    JSON.stringify(type === "enabled" ? successList : successListDisabled),
+  );
+};
+
+export const aiServersPostHandler = () => {
+  return new Response(JSON.stringify(successCreate));
+};
+
+export const aiServersDeleteHandler = () => {
+  return new Response(JSON.stringify(successDelete));
 };
 
 export const aiServersHandler = (port: string) => {
