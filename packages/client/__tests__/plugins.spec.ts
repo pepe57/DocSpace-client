@@ -24,44 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-
-import { expect, test } from "./fixtures/base";
+import { 
+  filesSettingsHandler, 
+  selfActivationStatusHandler, 
+  settingsHandler, 
+  TypeSettings, 
+  updateUserCultureHandler, 
+  webPluginsAddHandler, 
+  webPluginsHandler, 
+  webPluginsUpdateHandler
+} from "@docspace/shared/__mocks__/handlers";
+import { expect, test, TEST_PORT} from "./fixtures/base";
 
 test.describe("Plugins", () => {
   test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiConfig,
-      endpoints.settingsWithQuery,
-      endpoints.settingsWithPlugins,
-      endpoints.colorTheme,
-      endpoints.build,
-      endpoints.capabilities,
-      endpoints.selfEmailActivatedClient,
-      endpoints.tariff,
-      endpoints.quota,
-      endpoints.additionalSettings,
-      endpoints.getPortal,
-      endpoints.companyInfo,
-      endpoints.cultures,
-      endpoints.root,
-      endpoints.invitationSettings,
-      endpoints.filesSettings,
-      endpoints.webPlugins,
-
-      endpoints.thirdPartyCapabilities,
-      endpoints.thirdParty,
-      endpoints.docService,
-    ]);
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithPlugins),
+      filesSettingsHandler(TEST_PORT),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+    );
   });
 
   test("should navigate to plugins page and display empty state", async ({
     page,
     mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([endpoints.webPlugins]);
+    mockRequest.use(webPluginsHandler(TEST_PORT));
 
-    await page.goto("/portal-settings/integration/plugins");
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
 
     const emptyView = page.getByTestId("empty-screen-container");
     await expect(emptyView).toBeVisible();
@@ -79,10 +70,11 @@ test.describe("Plugins", () => {
   test("should display plugins list with data", async ({
     page,
     mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([endpoints.webPluginsWithData]);
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
 
-    await page.goto("/portal-settings/integration/plugins");
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
 
     const pluginsList = page.locator('[data-testid^="plugin_test-plugin"]');
     await expect(pluginsList).toHaveCount(2);
@@ -105,10 +97,11 @@ test.describe("Plugins", () => {
   test("should upload .zip plugin when upload is enabled", async ({
     page,
     mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([endpoints.webPluginsWithData]);
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
 
-    await page.goto("/portal-settings/integration/plugins");
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
 
     const pluginsListBefore = page.locator(
       '[data-testid^="plugin_test-plugin"]',
@@ -119,7 +112,7 @@ test.describe("Plugins", () => {
     await expect(dropzone).toBeVisible();
     const dropzoneInput = dropzone.getByTestId("dropzone-input");
 
-    await mockRequest.router([endpoints.webPluginsAdd]);
+    mockRequest.use(webPluginsAddHandler(TEST_PORT));
 
     await dropzoneInput.setInputFiles({
       name: "dummy.zip",
@@ -136,10 +129,10 @@ test.describe("Plugins", () => {
     await expect(plugin2).toBeVisible();
   });
 
-  test("should toggle plugin enabled state", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.webPluginsWithData]);
+  test("should toggle plugin enabled state", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
 
-    await page.goto("/portal-settings/integration/plugins");
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
 
     const plugin1 = page.getByTestId("plugin_test-plugin-one");
     await expect(plugin1).toBeVisible();
@@ -150,7 +143,7 @@ test.describe("Plugins", () => {
     const toggleSwitchInput = toggleSwitch.getByTestId("toggle-button-input");
     await expect(toggleSwitchInput).toBeChecked();
 
-    await mockRequest.router([endpoints.webPluginsUpdate]);
+    mockRequest.use(webPluginsUpdateHandler(TEST_PORT));
 
     await toggleSwitch.click();
 
@@ -161,10 +154,10 @@ test.describe("Plugins", () => {
     await expect(toggleSwitchInput).toBeChecked();
   });
 
-  test("should delete plugin successfully", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.webPluginsWithData]);
+  test("should delete plugin successfully", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
 
-    await page.goto("/portal-settings/integration/plugins");
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
 
     const pluginsListBefore = page.locator(
       '[data-testid^="plugin_test-plugin"]',
@@ -200,10 +193,11 @@ test.describe("Plugins", () => {
   test("should display plugin information correctly", async ({
     page,
     mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([endpoints.webPluginsWithData]);
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
 
-    await page.goto("/portal-settings/integration/plugins");
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
 
     const plugin1 = page.getByTestId("plugin_test-plugin-one");
     await expect(plugin1).toBeVisible();
@@ -222,11 +216,12 @@ test.describe("Plugins", () => {
   test("should display and change plugin localization on az locale", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
     // Load plugin with locale support
-    await mockRequest.router([endpoints.webPluginsWithLocale]);
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withLocale"));
 
-    await page.goto("/portal-settings/integration/plugins");
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
 
     // Check initial plugin display (English by default)
     const plugin = page.getByTestId("plugin_archives.zip");
@@ -253,7 +248,7 @@ test.describe("Plugins", () => {
     ).toBeVisible();
 
     // Navigate to profile to change language
-    await mockRequest.router([endpoints.updateUserCultureAz]);
+    mockRequest.use(updateUserCultureHandler(TEST_PORT, "az"));
     await page.goto("/portal-settings/profile/login");
 
     // Find and click language selector
@@ -264,7 +259,7 @@ test.describe("Plugins", () => {
     await page.getByTestId("drop_down_item_az").first().click();
     await page.locator("#portal-settings_catalog-integration").click();
 
-    await mockRequest.router([endpoints.webPluginsWithLocale]);
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withLocale"));
     await page.getByTestId("plugins_tab").click();
 
     const pluginAz = page.getByTestId("plugin_archives.zip");
@@ -298,7 +293,7 @@ test.describe("Plugins", () => {
     page,
     mockRequest,
   }) => {
-    await mockRequest.router([endpoints.webPluginsWithLocale]);
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withLocale"));
 
     await page.goto("/portal-settings/integration/plugins");
 
@@ -322,7 +317,7 @@ test.describe("Plugins", () => {
       settingsDescription.getByText("Plugin for working with archives"),
     ).toBeVisible();
 
-    await mockRequest.router([endpoints.updateUserCultureLv]);
+    mockRequest.use(updateUserCultureHandler(TEST_PORT, "lv"));
     await page.goto("/portal-settings/profile/login");
 
     const languageSelector = page.getByTestId("language_combo_box").first();
@@ -332,7 +327,7 @@ test.describe("Plugins", () => {
     await page.getByTestId("drop_down_item_lv").first().click();
     await page.locator("#portal-settings_catalog-integration").click();
 
-    await mockRequest.router([endpoints.webPluginsWithLocale]);
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withLocale"));
     await page.getByTestId("plugins_tab").click();
 
     const pluginEn = page.getByTestId("plugin_archives.zip");
@@ -361,4 +356,4 @@ test.describe("Plugins", () => {
       "plugins-fallback-locale-en-settings.png",
     ]);
   });
-});
+ });
