@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_TFA_APP_SETTINGS = "settings/tfaapp";
 
@@ -80,10 +81,14 @@ const tfaAppSettingsEnabledSuccess = {
   statusCode: 200,
 };
 
-export const tfaAppSettingsHandler = (): Response => {
-  return new Response(JSON.stringify(tfaAppSettingsSuccess));
+
+export const tfaAppSettingsResolver = (isEnabled?: boolean): Response => {
+  const response = isEnabled ? tfaAppSettingsEnabledSuccess : tfaAppSettingsSuccess;
+  return new Response(JSON.stringify(response));
 };
 
-export const tfaAppSettingsEnabledHandler = (): Response => {
-  return new Response(JSON.stringify(tfaAppSettingsEnabledSuccess));
+export const tfaAppSettingsHandler = (port: string, isEnabled?: boolean) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_TFA_APP_SETTINGS}`, () => {
+    return tfaAppSettingsResolver(isEnabled);
+  });
 };

@@ -26,7 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 export const PATH_AI_CONFIG_VECTORIZATION = "ai/config/vectorization";
 
@@ -96,8 +97,8 @@ const successSet = {
   statusCode: 200,
 };
 
-export const aiVectorizationGetHandler = (
-  type: "enabled" | "disabled" | "needReset",
+export const aiVectorizationGetResolver = (
+  type?: "enabled" | "disabled" | "needReset",
 ) => {
   if (type === "needReset") {
     return new Response(JSON.stringify(successNeedReset));
@@ -108,6 +109,18 @@ export const aiVectorizationGetHandler = (
   );
 };
 
-export const aiVectorizationPutHandler = () => {
+export const aiVectorizationPutResolver = () => {
   return new Response(JSON.stringify(successSet));
+};
+
+export const aiVectorizationGetHandler = (port: string, type?: "enabled" | "disabled" | "needReset") => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_CONFIG_VECTORIZATION}`, () => {
+    return aiVectorizationGetResolver(type);
+  });
+};
+
+export const aiVectorizationPutHandler = (port: string) => {
+  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_CONFIG_VECTORIZATION}`, () => {
+    return aiVectorizationPutResolver();
+  });
 };

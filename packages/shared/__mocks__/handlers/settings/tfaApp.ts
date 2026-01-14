@@ -58,18 +58,18 @@ export const tfaAppHandler = (port: string) => {
   });
 };
 
-const tfaAppSettings = {
-  response: [],
-  status: 0,
-  statusCode: 200,
-};
+// const tfaAppSettings = {
+//   response: [],
+//   status: 0,
+//   statusCode: 200,
+// };
 
-export const tfaAppSettingsResolver = () => {
-  return new Response(JSON.stringify(tfaAppSettings));
-};
+// export const tfaAppSettingsResolver = () => {
+//   return new Response(JSON.stringify(tfaAppSettings));
+// };
 
-export const tfaAppSettingsHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_TFAAPP}`, () => {
-    return tfaAppSettingsResolver();
-  });
-};
+// export const tfaAppSettingsHandler = (port: string) => {
+//   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_TFAAPP}`, () => {
+//     return tfaAppSettingsResolver();
+//   });
+// };

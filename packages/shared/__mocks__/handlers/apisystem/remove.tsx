@@ -24,10 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export * from "./notification";
+import { http } from "msw";
+import { API_PREFIX } from "../../e2e/utils";
 
-export * from "./channels";
+export const PATH_PORTAL_REMOVE =
+  "apisystem/portal/remove?portalName=second.docspace.site";
 
-export * from "./telegramCheck";
+const removePortalSuccess = {
+  tenant: {
+    created: "2025-12-20T20:24:01",
+    domain: "second.test.com",
+    industry: 0,
+    language: "en-US",
+    name: "Cloud space for your office docs",
+    ownerId: "d03bdcdd-6ac0-4f5a-b46c-de296b6ee154",
+    portalName: "second",
+    status: "RemovePending",
+    tenantId: 2,
+    timeZoneId: "Europe/London",
+    timeZoneName: "(UTC+00:00) United Kingdom Time",
+    customQuota: -1,
+  },
+  removed: true,
+};
 
-export * from "./telegramLink";
+export const removePortalResolver = () => {
+  return new Response(JSON.stringify(removePortalSuccess));
+};
+
+export const removePortalHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_PORTAL_REMOVE}`, () => {
+    return removePortalResolver();
+  });
+};

@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-<<<<<<< HEAD:packages/shared/__mocks__/handlers/index.ts
 import { settingsHandlers } from "./settings";
 import { capabilitiesHandlers } from "./capabilities";
 import { peopleHandlers } from "./people";
@@ -36,13 +35,9 @@ import { staticsHandlers } from "./statics";
 import { aiHandlers } from "./ai";
 import { roomsHandlers } from "./rooms";
 import { shareHandlers } from "./share";
-=======
-export {
-  thirdPartyProvider as thirdPartyProviderHandler,
-  successThirdpartyProviders,
-  PATH as THIRD_PARTY_PROVIDER_PATH,
-} from "./thirdPartyProviders";
->>>>>>> develop:packages/shared/__mocks__/e2e/handlers/people/index.ts
+import { apisystemHandlers } from "./apisystem";
+import { editorHandlers } from "./editor";
+import { notificationHandlers } from "./notification";
 
 export * from "./settings";
 export * from "./capabilities";
@@ -55,8 +50,10 @@ export * from "./statics";
 export * from "./ai";
 export * from "./rooms";
 export * from "./share";
+export * from "./apisystem";
+export * from "./editor";
+export * from "./notification";
 
-<<<<<<< HEAD:packages/shared/__mocks__/handlers/index.ts
 export const allHandlers = (port: string) => [
   ...settingsHandlers(port),
   ...capabilitiesHandlers(port),
@@ -69,26 +66,7 @@ export const allHandlers = (port: string) => [
   ...aiHandlers(port),
   ...roomsHandlers(port),
   ...shareHandlers(port),
+  ...apisystemHandlers(port),
+  ...editorHandlers(port),
+  ...notificationHandlers(port),
 ];
-=======
-export {
-  PATH as SELF_PATH,
-  PATH_CHANGE_AUTH_DATA as SELF_PATH_CHANGE_AUTH_DATA,
-  PATH_ACTIVATION_STATUS as SELF_PATH_ACTIVATION_STATUS,
-  PATH_UPDATE_USER as SELF_PATH_UPDATE_USER,
-  PATH_DELETE_USER as SELF_PATH_DELETE_USER,
-  PATH_USER_BY_EMAIL as SELF_PATH_USER_BY_EMAIL,
-  PATH_ADD_GUEST,
-  PATH_UPDATE_USER_CULTURE as SELF_PATH_UPDATE_USER_CULTURE,
-} from "./self";
-
-export {
-  peopleListHandler,
-  peopleListAccessDeniedHandler,
-  PATH_PEOPLE_LIST,
-  mockUsers,
-  peopleListSuccess,
-} from "./list";
-
-export * from "./theme";
->>>>>>> develop:packages/shared/__mocks__/e2e/handlers/people/index.ts

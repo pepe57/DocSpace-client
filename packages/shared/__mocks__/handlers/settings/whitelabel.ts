@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 const MANAGEMENT_BASE_PATH = "/management";
 
@@ -32,13 +33,13 @@ const getManagementLogoPath = (fileName: string) =>
   `${MANAGEMENT_BASE_PATH}/images/logo/${fileName}`;
 
 export const PATH_WHITELABEL_LOGOS =
-  "/settings/whitelabel/logos?isDefault=true";
+  "/settings/whitelabel/logos";
 
 export const PATH_WHITELABEL_LOGOTEXT =
-  "/settings/whitelabel/logotext?isDefault=true";
+  "/settings/whitelabel/logotext";
 
 export const PATH_WHITELABEL_LOGOS_IS_DEFAULT =
-  "/settings/whitelabel/logos/isdefault?isDefault=true";
+  "/settings/whitelabel/logos/isdefault";
 
 const whiteLabelLogos = {
   response: [
@@ -449,14 +450,32 @@ const whiteLabelLogoText = {
   statusCode: 200,
 };
 
-export const whiteLabelLogosHandler = () => {
+export const whiteLabelLogosResolver = () => {
   return new Response(JSON.stringify(whiteLabelLogos));
 };
 
-export const whiteLabelLogoTextHandler = () => {
+export const whiteLabelLogoTextResolver = () => {
   return new Response(JSON.stringify(whiteLabelLogoText));
 };
 
-export const whiteLabelLogosIsDefaultHandler = () => {
+export const whiteLabelLogosIsDefaultResolver = () => {
   return new Response(JSON.stringify(whiteLabelLogosIsDefault));
+};
+
+export const whiteLabelLogosAddHandler = (port: string) => {
+  return http.post(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_WHITELABEL_LOGOS}`, () => {
+    return whiteLabelLogosResolver();
+  });
+};
+
+export const whiteLabelLogoTextHandler = (port: string) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_WHITELABEL_LOGOTEXT}`, () => {
+    return whiteLabelLogoTextResolver();
+  });
+};
+
+export const whiteLabelLogosIsDefaultHandler = (port: string) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_WHITELABEL_LOGOS_IS_DEFAULT}`, () => {
+    return whiteLabelLogosIsDefaultResolver();
+  });
 };

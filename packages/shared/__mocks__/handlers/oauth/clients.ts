@@ -24,9 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 import { BASE64_LOGO } from "./base64logo";
 
-export const PATH_OAUTH_CLIENTS = /\/api\/2\.0\/clients\/consents(?:\?.*)?$/;
+export const PATH_OAUTH_CLIENTS = `clients/consents`;
 
 const clientsEmptySuccess = {
   data: [],
@@ -70,10 +72,13 @@ export const clientsSuccess = {
   last_modified_on: null,
 };
 
-export const clientsEmptyHandler = (): Response => {
-  return new Response(JSON.stringify(clientsEmptySuccess));
+
+export const clientsResolver = (isEmpty: boolean = false): Response => {
+  return new Response(JSON.stringify(isEmpty ? clientsEmptySuccess : clientsSuccess));
 };
 
-export const clientsHandler = (): Response => {
-  return new Response(JSON.stringify(clientsSuccess));
+export const clientsHandler = (port: string, isEmpty?: boolean) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_OAUTH_CLIENTS}`, () => {
+    return clientsResolver(isEmpty);
+  });
 };

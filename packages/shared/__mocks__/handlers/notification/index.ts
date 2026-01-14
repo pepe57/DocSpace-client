@@ -24,26 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { notificationsHandler } from "./notification";
+import { channelsHandler } from "./channels";
+import { telegramCheckHandler, telegramCheckLinkedHandler } from "./telegramCheck";
+import { telegramLinkHandler } from "./telegramLink";
 
-export const PATH_NOTIFICATIONS = "settings/notification";
+export {
+    notificationsHandler,
+    channelsHandler,
+    telegramCheckHandler,
+    telegramLinkHandler,
+    telegramCheckLinkedHandler,
+}
 
-const notificationsSuccess = (type: number) => ({
-  response: {
-    type: type,
-    isEnabled: true,
-  },
-  count: 1,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_NOTIFICATIONS}/${type}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
-});
-
-export const notificationsHandler = (type: number): Response => {
-  return new Response(JSON.stringify(notificationsSuccess(type)));
-};
+export const notificationHandlers = (port: string) => [
+    notificationsHandler(port),
+    channelsHandler(port),
+    telegramCheckHandler(port),
+    telegramLinkHandler(port),
+    telegramCheckLinkedHandler(port),
+];

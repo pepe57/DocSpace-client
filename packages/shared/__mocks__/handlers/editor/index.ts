@@ -24,8 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export * from "./register";
+import { openEditHandler } from "./openedit";
+import { fileByIdHandler } from "./fileById";
+import { fillingStatusHandler } from "./formFillingStatus";
+import { fillingSessionHandler } from "./fillingSession";
 
-export * from "./remove";
-
-export * from "./setDomain";
+export const editorHandlers = (port: string) => [
+  openEditHandler(port),
+  fileByIdHandler(port),
+  fillingStatusHandler(port),
+  fillingSessionHandler(port),
+];

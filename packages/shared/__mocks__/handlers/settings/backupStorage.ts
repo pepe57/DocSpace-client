@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-export const PATH_BACKUP_STORAGE = "settings/storage/backup?dump=false";
+export const PATH_BACKUP_STORAGE = "settings/storage/backup";
 
 export const backupStorageSuccess = {
   response: [
@@ -121,6 +122,12 @@ export const backupStorageSuccess = {
   statusCode: 200,
 };
 
-export const backupStorageHandler = () => {
+export const backupStorageResolver = () => {
   return new Response(JSON.stringify(backupStorageSuccess));
+};
+
+export const backupStorageHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_BACKUP_STORAGE}`, () => {
+    return backupStorageResolver();
+  });
 };

@@ -26,7 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 export const PATH_AI_CONFIG_WEB_SEARCH = "ai/config/web-search";
 
@@ -98,8 +99,8 @@ const successSet = {
   statusCode: 200,
 };
 
-export const aiWebSearchGetHandler = (
-  type: "enabled" | "disabled" | "needReset",
+export const aiWebSearchGetResolver = (
+  type?: "enabled" | "disabled" | "needReset",
 ) => {
   if (type === "needReset") {
     return new Response(JSON.stringify(successNeedReset));
@@ -110,6 +111,18 @@ export const aiWebSearchGetHandler = (
   );
 };
 
-export const aiWebSearchPutHandler = () => {
+export const aiWebSearchPutResolver = () => {
   return new Response(JSON.stringify(successSet));
+};
+
+export const aiWebSearchGetHandler = (port: string, type?: "enabled" | "disabled" | "needReset") => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_CONFIG_WEB_SEARCH}`, () => {
+    return aiWebSearchGetResolver(type);
+  });
+};
+
+export const aiWebSearchPutHandler = (port: string) => {
+  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_CONFIG_WEB_SEARCH}`, () => {
+    return aiWebSearchPutResolver();
+  });
 };

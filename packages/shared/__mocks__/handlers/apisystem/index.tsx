@@ -24,12 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const PATH_SET_DOMAIN = "apisystem/settings/save";
+import { registerHandler } from "./register";
+import { removePortalHandler } from "./remove";
+import { setDomainHandler } from "./setDomain";
 
-const setDomainSuccess = {
-  settings: "test.com",
-};
+export {
+  registerHandler,
+  removePortalHandler,
+  setDomainHandler,
+}
 
-export const setDomainHandler = () => {
-  return new Response(JSON.stringify(setDomainSuccess));
-};
+export const apisystemHandlers = (port: string) => [
+  registerHandler(port),
+  removePortalHandler(port),
+  setDomainHandler(port),
+];

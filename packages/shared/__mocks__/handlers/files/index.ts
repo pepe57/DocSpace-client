@@ -53,6 +53,14 @@ import {
   getFileHandler, 
   deleteFavoritesHandler 
 } from "./favorites";
+import { 
+  agentFolderChatHandler,
+  agentFolderInfoHandler,
+  agentFolderResultStorageHandler } from "./agentFolder";
+import { 
+  resultStorageFolderHandler,
+  resultStorageFolderInfoHandler 
+} from "./resultStorageFolder";
 
 
 export { TypeFolder } from "./folder";
@@ -84,6 +92,11 @@ export {
   addFileToFavoritesHandler,
   getFileHandler,
   deleteFavoritesHandler,
+  agentFolderChatHandler,
+  agentFolderInfoHandler,
+  agentFolderResultStorageHandler,
+  resultStorageFolderHandler,
+  resultStorageFolderInfoHandler,
 };
 
 export const filesHandlers = (port: string) => [
@@ -105,4 +118,9 @@ export const filesHandlers = (port: string) => [
   addFileToFavoritesHandler(port),
   getFileHandler(port),
   deleteFavoritesHandler(port),
+  agentFolderChatHandler(port),
+  agentFolderInfoHandler(port),
+  agentFolderResultStorageHandler(port),
+  resultStorageFolderHandler(port),
+  resultStorageFolderInfoHandler(port),
 ];

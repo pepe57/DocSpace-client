@@ -26,15 +26,14 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_AGENT_FOLDER_CHAT =
-  /\/api\/2\.0\/files\/\d+\?(?!.*(?:^|&)searchArea=(5|6)(?:&|$)).*/;
+export const PATH_AGENT_FOLDER_CHAT = 'files/:id';
 
-export const PATH_AGENT_FOLDER_RESULT_STORAGE =
-  /\/api\/2\.0\/files\/\d+\?.*(?:^|&)searchArea=6(?:&|$).*/;
+export const PATH_AGENT_FOLDER_RESULT_STORAGE = 'files/:id';
 
-export const PATH_AGENT_FOLDER_INFO = /\/api\/2\.0\/files\/folder\/\d+$/;
+export const PATH_AGENT_FOLDER_INFO = 'files/folder/:id';
 
 const createdUpdatedByMock = {
   id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -438,7 +437,7 @@ const successFolderInfoCanNotUseChat = {
   statusCode: 200,
 };
 
-export const agentFolderChatHandler = (
+export const agentFolderChatResolver = (
   type: "default" | "canNotUseChat" = "default",
 ) => {
   switch (type) {
@@ -449,7 +448,7 @@ export const agentFolderChatHandler = (
   }
 };
 
-export const agentFolderResultStorageHandler = (
+export const agentFolderResultStorageResolver = (
   type: "default" | "canNotUseChat" = "default",
 ) => {
   switch (type) {
@@ -462,7 +461,7 @@ export const agentFolderResultStorageHandler = (
   }
 };
 
-export const agentFolderInfoHandler = (
+export const agentFolderInfoResolver = (
   type: "default" | "canNotUseChat" = "default",
 ) => {
   switch (type) {
@@ -472,3 +471,22 @@ export const agentFolderInfoHandler = (
       return new Response(JSON.stringify(successFolderInfoDefault));
   }
 };
+
+export const agentFolderChatHandler = (port: string, type: "default" | "canNotUseChat" = "default") => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_CHAT}`, () => {
+    return agentFolderChatResolver(type);
+  });
+};
+
+export const agentFolderResultStorageHandler = (port: string, type: "default" | "canNotUseChat" = "default") => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_RESULT_STORAGE}`, () => {
+    return agentFolderResultStorageResolver(type);
+  });
+};
+
+export const agentFolderInfoHandler = (port: string, type: "default" | "canNotUseChat" = "default") => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_INFO}`, () => {
+    return agentFolderInfoResolver(type);
+  });
+};
+

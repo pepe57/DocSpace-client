@@ -29,7 +29,6 @@ import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_AI_SERVERS = "ai/servers/available";
 export const PATH_AI_SERVERS_WITH_FILTER = "ai/servers?*";
-export const PATH_AI_SERVERS_AVAILABLE = "ai/servers/available?*";
 
 const successAvailable = {
   response: [
@@ -50,7 +49,7 @@ const successAvailable = {
   total: 2,
   links: [
     {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_AVAILABLE}`,
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS}`,
       action: "GET",
     },
   ],
@@ -183,11 +182,11 @@ const successDelete = {
   statusCode: 200,
 };
 
-export const aiServersAvailableHandler = () => {
+export const aiServersAvailableResolver = () => {
   return new Response(JSON.stringify(successAvailable));
 };
 
-export const aiServersGetHandler = (
+export const aiServersGetResolver = (
   type: "enabled" | "disabled" | "needReset" = "enabled",
 ) => {
   if (type === "needReset") {
@@ -199,16 +198,35 @@ export const aiServersGetHandler = (
   );
 };
 
-export const aiServersPostHandler = () => {
+export const aiServersPostResolver = () => {
   return new Response(JSON.stringify(successCreate));
 };
 
-export const aiServersDeleteHandler = () => {
+export const aiServersDeleteResolver = () => {
   return new Response(JSON.stringify(successDelete));
 };
 
-export const aiServersHandler = (port: string) => {
+export const aiServersAvailableHandler = (port: string) => {
   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVERS}`, () => {
-    return new Response(JSON.stringify(success));
+    return aiServersAvailableResolver();
   });
 };
+
+export const aiServersGetHandler = (port: string, type?: "enabled" | "disabled" | "needReset") => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVERS}`, () => {
+    return aiServersGetResolver(type);
+  });
+};
+
+export const aiServersPostHandler = (port: string) => {
+  return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVERS}`, () => {
+    return aiServersPostResolver();
+  });
+};
+
+export const aiServersDeleteHandler = (port: string) => {
+  return http.delete(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVERS}`, () => {
+    return aiServersDeleteResolver();
+  });
+};
+

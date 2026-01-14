@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 export const PATH_OAUTH_TOKEN = "security/oauth2/token";
 
@@ -42,6 +43,13 @@ const tokenSuccess = {
   statusCode: 200,
 };
 
-export const tokenHandler = (): Response => {
+export const tokenResolver = (): Response => {
   return new Response(JSON.stringify(tokenSuccess));
 };
+
+export const tokenHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_OAUTH_TOKEN}`, () => {
+    return tokenResolver();
+  });
+};
+

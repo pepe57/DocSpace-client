@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, HEADER_OPEN_EDIT_WITH_PASSWORD } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_OPEN_EDIT = /\/files\/file\/\d+\/openedit(?:\?.*)?$/;
+export const PATH_OPEN_EDIT = "files/file/:id/openedit";
 
 const openEditSuccess = {
   response: {
@@ -265,12 +266,18 @@ const openEditWithPassword = {
   statusCode: 403,
 };
 
-export const openEditHandler = (headers: Headers) => {
-  if (headers?.get(HEADER_OPEN_EDIT_WITH_PASSWORD)) {
+export const openEditResolver = (editWithPassword?: boolean) => {
+  if (editWithPassword) {
     return new Response(JSON.stringify(openEditWithPassword), {
       status: 403,
       headers: { "content-type": "application/json" },
     });
   }
   return new Response(JSON.stringify(openEditSuccess));
+};
+
+export const openEditHandler = (port: string, editWithPassword?: boolean) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_OPEN_EDIT}`, () => {
+    return openEditResolver(editWithPassword);
+  });
 };

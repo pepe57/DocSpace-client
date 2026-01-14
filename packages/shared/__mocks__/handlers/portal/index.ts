@@ -31,6 +31,9 @@ import { restoreProgressHandler } from "./restoreProgress";
 import { tariffHandler } from "./tariff";
 import { getPortalHandler } from "./getPortal";
 import { quotaHandler } from "./quota";
+import { backupProgressHandler } from "./backupprogress";
+import { backupScheduleHandler } from "./backupshedule";
+import { licenseQuotaHandler } from "./licensequota";
 
 export {
   suspendPortalHandler,
@@ -40,6 +43,9 @@ export {
   tariffHandler,
   getPortalHandler,
   quotaHandler,
+  backupProgressHandler,
+  backupScheduleHandler,
+  licenseQuotaHandler,
 };
 
 export const portalHandlers = (port: string) => [
@@ -50,4 +56,7 @@ export const portalHandlers = (port: string) => [
   tariffHandler(port),
   getPortalHandler(port),
   quotaHandler(port),
+  backupProgressHandler(port),
+  backupScheduleHandler(port),
+  licenseQuotaHandler(port),
 ];

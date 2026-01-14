@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_ACTIVE_CONNECTIONS = "security/activeconnections";
 
@@ -58,6 +59,12 @@ const activeConnectionsSuccess = {
   statusCode: 200,
 };
 
-export const activeConnectionsHandler = (): Response => {
+export const activeConnectionsResolver = (): Response => {
   return new Response(JSON.stringify(activeConnectionsSuccess));
+};
+
+export const activeConnectionsHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_ACTIVE_CONNECTIONS}`, () => {
+    return activeConnectionsResolver();
+  });
 };

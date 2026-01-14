@@ -47,34 +47,8 @@ export const machineNameResolver = (): Response => {
   return new Response(JSON.stringify(machineNameSuccess));
 };
 
-<<<<<<< HEAD:packages/shared/__mocks__/handlers/settings/machineName.ts
 export const machineNameHandler = (port: string) => {
   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
     return machineNameResolver();
   });
 };
-=======
-export * from "./validatePublicRoomKey";
-
-export * from "./root";
-
-export * from "./thirdPartyCapabilities";
-
-export * from "./thirdParty";
-
-export * from "./docservice";
-
-export * from "./sharedWithMe";
-
-export * from "./share";
-
-export * from "./recent";
-
-export * from "./favorites";
-
-export * from "./documents";
-
-export * from "./agentFolder";
-
-export * from "./resultStorageFolder";
->>>>>>> develop:packages/shared/__mocks__/e2e/handlers/files/index.ts

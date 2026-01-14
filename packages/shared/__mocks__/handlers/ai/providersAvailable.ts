@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { http } from "msw";
+import { API_PREFIX } from "../../e2e/utils";
+
 export const PATH_AI_PROVIDERS_AVAILABLE = "ai/providers/available";
 
 const successList = {
@@ -50,6 +53,12 @@ const successList = {
   statusCode: 200,
 };
 
-export const aiProvidersAvailableHandler = () => {
+export const aiProvidersAvailableResolver = () => {
   return new Response(JSON.stringify(successList));
+};
+
+export const aiProvidersAvailableHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_AVAILABLE}`, () => {
+    return aiProvidersAvailableResolver();
+  });
 };

@@ -26,7 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_AI_ROOMS_SERVERS = "ai/rooms/*/servers";
 
@@ -43,6 +44,11 @@ const successEmpty = {
   statusCode: 200,
 };
 
-export const aiRoomsServersHandler = (type: "empty" = "empty") => {
+export const aiRoomsServersResolver = () => {
   return new Response(JSON.stringify(successEmpty));
+};
+
+export const aiRoomsServersHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_ROOMS_SERVERS}`,
+    () => aiRoomsServersResolver());
 };

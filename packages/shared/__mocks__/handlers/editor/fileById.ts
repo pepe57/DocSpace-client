@@ -24,11 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { http } from "msw";
 import {
   BASE_URL,
   API_PREFIX,
-  HEADER_FORM_YOUR_TURN_FILLING,
-} from "../../utils";
+} from "../../e2e/utils";
+
+export const PATH = "files/file/20";
 
 const fileByIdSuccess = (formFillingStatus: number) => ({
   response: {
@@ -159,9 +161,15 @@ const fileByIdSuccess = (formFillingStatus: number) => ({
   statusCode: 200,
 });
 
-export const fileByIdHandler = (headers?: Headers) => {
-  if (headers?.get(HEADER_FORM_YOUR_TURN_FILLING)) {
+export const fileByIdResolver = (isYourTurnFilling?: boolean) => {
+  if (isYourTurnFilling) {
     return new Response(JSON.stringify(fileByIdSuccess(2)));
   }
   return new Response(JSON.stringify(fileByIdSuccess(4)));
+};
+
+export const fileByIdHandler = (port: string, isYourTurnFilling?: boolean) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return fileByIdResolver(isYourTurnFilling);
+  });
 };

@@ -24,10 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export * from "./openedit";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-export * from "./fillingSession";
+export const PATH_NOTIFICATIONS = "settings/notification";
 
-export * from "./formFillingStatus";
+const notificationsSuccess = (type: number) => ({
+  response: {
+    type: type,
+    isEnabled: true,
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_NOTIFICATIONS}/${type}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+});
 
-export * from "./fileById";
+export const notificationsResolver = (type: number = 1): Response => {
+  return new Response(JSON.stringify(notificationsSuccess(type)));
+};
+
+export const notificationsHandler = (port: string, type?: number) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_NOTIFICATIONS}/${type}`, () => {
+    return notificationsResolver(type);
+  });
+};

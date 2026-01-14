@@ -26,7 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { API_PREFIX, BASE_URL, buildSseBody } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL, buildSseBody } from "../../e2e/utils";
 
 export const PATH_AI_ROOMS_CHATS = "ai/rooms/*/chats?*";
 export const PATH_AI_ROOMS_CHATS_STREAM = "ai/rooms/*/chats";
@@ -150,7 +151,7 @@ const mcpNeedApproveStreamMessage = buildSseBody([
   // { event: "message_stop", data: { messageId: 1 } },
 ]);
 
-export const aiRoomsChatsHandler = (
+export const aiRoomsChatsResolver = (
   type: "empty" | "with-chats" = "with-chats",
 ) => {
   switch (type) {
@@ -161,7 +162,7 @@ export const aiRoomsChatsHandler = (
   }
 };
 
-export const aiRoomsChatsStreamHandler = (
+export const aiRoomsChatsStreamResolver = (
   type: "default" | "mcpNeedApprove" = "default",
 ) => {
   switch (type) {
@@ -170,4 +171,14 @@ export const aiRoomsChatsStreamHandler = (
     case "default":
       return new Response(defaultStreamMessage);
   }
+};
+
+export const aiRoomsChatsHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS}`,
+    () => aiRoomsChatsResolver());
+};
+
+export const aiRoomsChatsStreamHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_STREAM}`,
+    () => aiRoomsChatsStreamResolver());
 };

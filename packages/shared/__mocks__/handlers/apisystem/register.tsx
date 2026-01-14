@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { http } from "msw";
+import { API_PREFIX } from "../../e2e/utils";
+
 export const PATH_PORTAL_REGISTER = "portal/register";
 
 const registerSuccess = {
@@ -45,6 +48,12 @@ const registerSuccess = {
   },
 };
 
-export const registerHandler = () => {
+export const registerResolver = () => {
   return new Response(JSON.stringify(registerSuccess));
+};
+
+export const registerHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_PORTAL_REGISTER}`, () => {
+    return registerResolver();
+  });
 };

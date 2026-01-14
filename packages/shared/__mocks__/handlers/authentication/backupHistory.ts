@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http } from "msw";
-
 import { API_PREFIX } from "../../e2e/utils";
 
 const getPath = `portal/getbackuphistory`;

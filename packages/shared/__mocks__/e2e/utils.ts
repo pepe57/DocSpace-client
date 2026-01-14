@@ -27,3 +27,8 @@
 export const BASE_URL = "http://localhost";
 
 export const API_PREFIX = "api/2.0";
+
+export const buildSseBody = (events: { event: string; data: unknown }[]) =>
+  events
+    .map((e) => `event: ${e.event}\n` + `data: ${JSON.stringify(e.data)}\n\n`)
+    .join("");

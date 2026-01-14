@@ -24,11 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  API_PREFIX,
-  BASE_URL,
-  HEADER_ENCRYPTION_SETTINGS_ENCRYPTED,
-} from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_ENCRYPTION_SETTINGS = "settings/encryption/settings";
 
@@ -66,9 +63,15 @@ const encryptionEncryptedSettingsSuccess = {
   statusCode: 200,
 };
 
-export const encryptionSettingsHandler = (headers: Headers): Response => {
-  if (headers?.get(HEADER_ENCRYPTION_SETTINGS_ENCRYPTED)) {
+export const encryptionSettingsResolver = (isEncryptedSettings?: boolean): Response => {
+  if (isEncryptedSettings) {
     return new Response(JSON.stringify(encryptionEncryptedSettingsSuccess));
   }
   return new Response(JSON.stringify(encryptionSettingsSuccess));
+};
+
+export const encryptionSettingsHandler = (port: string, isEncryptedSettings?: boolean) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_ENCRYPTION_SETTINGS}`, () => {
+    return encryptionSettingsResolver(isEncryptedSettings);
+  });
 };

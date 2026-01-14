@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_THEME = "people/theme";
 
@@ -44,6 +45,12 @@ export const successTheme = {
   statusCode: 200,
 };
 
-export const themeProvider = () => {
+export const themeProviderResolver = () => {
   return new Response(JSON.stringify(successTheme));
+};
+
+export const themeProviderHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_THEME}`, () => {
+    return themeProviderResolver();
+  });
 };

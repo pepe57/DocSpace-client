@@ -34,7 +34,7 @@ import { portalTimeZoneHandler } from "./portalTimeZones";
 import { settingsHandler, TypeSettings } from "./settings";
 import { completeHandler } from "./complete";
 import { licenseHandler } from "./license";
-import { tfaAppHandler, tfaAppSettingsHandler } from "./tfaApp";
+import { tfaAppHandler } from "./tfaApp";
 import { ldapHandler, ldapDefaultHandler, ldapCronHandler } from "./ldap";
 import { tfaAppValidateHandler } from "./tfaAppValidate";
 import { ownerHandler } from "./owner";
@@ -49,6 +49,21 @@ import {
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,
 } from "./webplugins";
+import { activeConnectionsHandler } from "./activeconnections";
+import { backupStorageHandler } from "./backupStorage";
+import { deepLinkHandler } from "./deepLink";
+import { encryptionSettingsHandler } from "./encryption";
+import { paymentSettingsHandler } from "./paymentSettings";
+import { storageRegionsHandler } from "./storageRegions";
+import { tfaAppCodesHandler } from "./tfaAppCodes";
+import { tfaAppSettingsHandler } from "./tfaAppSettings";
+import { thirdPartyBackupHandler } from "./thirdpartyBackup";
+import { 
+  whiteLabelLogosAddHandler,
+  whiteLabelLogosIsDefaultHandler,
+  whiteLabelLogoTextHandler,
+} from "./whitelabel";
+
 
 export {
   ssoHandler,
@@ -64,7 +79,6 @@ export {
   companyInfoHandler,
   invitationSettingsHandler,
   tfaAppHandler,
-  tfaAppSettingsHandler,
   colorThemeHandler,
   licenseHandler,
   TypeSettings,
@@ -78,6 +92,18 @@ export {
   ldapHandler,
   ldapDefaultHandler,
   ldapCronHandler,
+  activeConnectionsHandler,
+  backupStorageHandler,
+  deepLinkHandler,
+  encryptionSettingsHandler,
+  paymentSettingsHandler,
+  storageRegionsHandler,
+  tfaAppCodesHandler,
+  tfaAppSettingsHandler,
+  thirdPartyBackupHandler,
+  whiteLabelLogosAddHandler,
+  whiteLabelLogosIsDefaultHandler,
+  whiteLabelLogoTextHandler,
 };
 
 export const settingsHandlers = (port: string) => [
@@ -107,4 +133,16 @@ export const settingsHandlers = (port: string) => [
   ldapHandler(port),
   ldapDefaultHandler(port),
   ldapCronHandler(port),
+  activeConnectionsHandler(port),
+  backupStorageHandler(port),
+  deepLinkHandler(port),
+  encryptionSettingsHandler(port),
+  paymentSettingsHandler(port),
+  storageRegionsHandler(port),
+  tfaAppCodesHandler(port),
+  tfaAppSettingsHandler(port),
+  thirdPartyBackupHandler(port),
+  whiteLabelLogosAddHandler(port),
+  whiteLabelLogosIsDefaultHandler(port),
+  whiteLabelLogoTextHandler(port),
 ];

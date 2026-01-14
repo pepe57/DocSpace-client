@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 export const PATH_STORAGE_REGIONS = "settings/storage/s3/regions";
 
@@ -336,6 +337,12 @@ export const storageRegionsSuccess = {
   statusCode: 200,
 };
 
-export const storageRegionsHandler = () => {
+export const storageRegionsResolver = () => {
   return new Response(JSON.stringify(storageRegionsSuccess));
+};
+
+export const storageRegionsHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_STORAGE_REGIONS}`, () => {
+    return storageRegionsResolver();
+  });
 };

@@ -26,7 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_AI_MESSAGES_EXPORT = "ai/messages/*/export";
 
@@ -42,6 +43,12 @@ const successExportMessage = {
   statusCode: 200,
 };
 
-export const aiMessagesExportHandler = () => {
+export const aiMessagesExportResolver = () => {
   return new Response(JSON.stringify(successExportMessage));
+};
+
+export const aiMessagesExportHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_MESSAGES_EXPORT}`, () => {
+    return aiMessagesExportResolver();
+  });
 };

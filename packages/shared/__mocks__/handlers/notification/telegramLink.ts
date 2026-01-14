@@ -24,18 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-export const PATH_TELEGRAM_CHECK = "settings/telegram/check";
+export const PATH_TELEGRAM_LINK = "settings/telegram/link";
 
-const telegramCheckSuccess = {
-  response: {
-    status: "unlinked",
-  },
+const telegramLinkSuccess = {
+  response: "t.me/test?start=kWwp5J4nM6bwc5bw3KINLNJnrjlpGvimWCLDrzK9Ob4",
   count: 1,
   links: [
     {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_TELEGRAM_CHECK}`,
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_TELEGRAM_LINK}`,
       action: "GET",
     },
   ],
@@ -43,26 +42,12 @@ const telegramCheckSuccess = {
   statusCode: 200,
 };
 
-const telegramCheckLinkedSuccess = {
-  response: {
-    status: "linked",
-    username: "test",
-  },
-  count: 1,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_TELEGRAM_CHECK}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
+export const telegramLinkResolver = (): Response => {
+  return new Response(JSON.stringify(telegramLinkSuccess));
 };
 
-export const telegramCheckHandler = (): Response => {
-  return new Response(JSON.stringify(telegramCheckSuccess));
-};
-
-export const telegramCheckLinkedHandler = (): Response => {
-  return new Response(JSON.stringify(telegramCheckLinkedSuccess));
+export const telegramLinkHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_TELEGRAM_LINK}`, () => {
+    return telegramLinkResolver();
+  });
 };

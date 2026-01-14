@@ -26,6 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_AI_CHAT = "ai/chats/*";
@@ -100,10 +101,22 @@ const successUpdate = {
   statusCode: 200,
 };
 
-export const aiChatHandler = () => {
+export const aiChatResolver = () => {
   return new Response(JSON.stringify(successEmpty));
 };
 
-export const aiChatPutHandler = () => {
+export const aiChatPutResolver = () => {
   return new Response(JSON.stringify(successUpdate));
+};
+
+export const aiChatHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_CHAT}`, () => {
+    return aiChatResolver();
+  });
+};
+
+export const aiChatPutHandler = (port: string) => {
+  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_CHAT}`, () => {
+    return aiChatPutResolver();
+  });
 };

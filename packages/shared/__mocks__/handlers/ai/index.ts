@@ -27,18 +27,56 @@
 import { aiAgentsHandler } from "./agents";
 import { aiConfigHandler } from "./config";
 import { aiModelsHandler } from "./models";
-import { aiProvidersHandler, aiProvidersAvailableHandler } from "./providers";
+import { 
+  aiProvidersHandler, 
+  aiProvidersDeleteHandler,
+  aiProvidersPostHandler,
+  aiProvidersPutHandler,
+ } from "./providers";
 import { aiServerHandler } from "./server";
-import { aiServersHandler } from "./servers";
+import {
+  aiServersGetHandler,
+  aiServersPostHandler,
+  aiServersDeleteHandler,
+  aiServersAvailableHandler,
+} from "./servers";
+import { aiChatHandler, aiChatPutHandler } from "./chat";
+import { aiChatMessagesExportHandler, aiChatMessagesHandler } from "./chatMessages";
+import { aiMessagesExportHandler } from "./messages";
+import { aiProvidersAvailableHandler } from "./providersAvailable";
+import { aiRoomsChatsHandler, aiRoomsChatsStreamHandler } from "./roomsChats";
+import { aiRoomsChatsConfigHandler } from "./roomsChatsConfig";
+import { aiRoomsServersHandler } from "./roomsServers";
+import { aiVectorizationGetHandler, aiVectorizationPutHandler } from "./vectorization";
+import { aiWebSearchGetHandler, aiWebSearchPutHandler } from "./webSearch";
 
 export {
   aiAgentsHandler,
   aiConfigHandler,
   aiModelsHandler,
   aiProvidersHandler,
-  aiProvidersAvailableHandler,
+  aiProvidersDeleteHandler,
+  aiProvidersPostHandler,
+  aiProvidersPutHandler,
   aiServerHandler,
-  aiServersHandler,
+  aiServersGetHandler,
+  aiServersPostHandler,
+  aiServersDeleteHandler,
+  aiServersAvailableHandler,
+  aiChatHandler,
+  aiChatPutHandler,
+  aiChatMessagesExportHandler,
+  aiChatMessagesHandler,
+  aiMessagesExportHandler,
+  aiProvidersAvailableHandler,
+  aiRoomsChatsHandler,
+  aiRoomsChatsStreamHandler,
+  aiRoomsChatsConfigHandler,
+  aiRoomsServersHandler,
+  aiVectorizationGetHandler,
+  aiVectorizationPutHandler,
+  aiWebSearchGetHandler,
+  aiWebSearchPutHandler,
 };
 
 export const aiHandlers = (port: string) => [
@@ -46,7 +84,26 @@ export const aiHandlers = (port: string) => [
   aiConfigHandler(port),
   aiModelsHandler(port),
   aiProvidersHandler(port),
-  aiProvidersAvailableHandler(port),
-  aiServersHandler(port),
+  aiProvidersDeleteHandler(port),
+  aiProvidersPostHandler(port),
+  aiProvidersPutHandler(port),
+  aiServersGetHandler(port),
+  aiServersPostHandler(port),
+  aiServersDeleteHandler(port),
+  aiServersAvailableHandler(port),
   aiServerHandler(port),
+  aiChatHandler(port),
+  aiChatPutHandler(port),
+  aiChatMessagesExportHandler(port),
+  aiChatMessagesHandler(port),
+  aiMessagesExportHandler(port),
+  aiProvidersAvailableHandler(port),
+  aiRoomsChatsHandler(port),
+  aiRoomsChatsStreamHandler(port),
+  aiRoomsChatsConfigHandler(port),
+  aiRoomsServersHandler(port),
+  aiVectorizationGetHandler(port),
+  aiVectorizationPutHandler(port),
+  aiWebSearchGetHandler(port),
+  aiWebSearchPutHandler(port),
 ];

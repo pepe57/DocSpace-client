@@ -26,7 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_AI_ROOMS_CHATS_CONFIG = "ai/rooms/*/chats/config";
 
@@ -45,6 +46,11 @@ const successAllEnabled = {
   statusCode: 200,
 };
 
-export const aiRoomsChatsConfigHandler = () => {
+export const aiRoomsChatsConfigResolver = () => {
   return new Response(JSON.stringify(successAllEnabled));
+};
+
+export const aiRoomsChatsConfigHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_CONFIG}`,
+    () => aiRoomsChatsConfigResolver());
 };

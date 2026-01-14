@@ -27,11 +27,21 @@
 import { getClientHandler } from "./client";
 import { oauthSignInHandler } from "./signIn";
 import { scopesHandler } from "./scopes";
+import { clientsHandler } from "./clients";
+import { tokenHandler } from "./token";
 
-export { getClientHandler, oauthSignInHandler, scopesHandler };
+export { 
+  getClientHandler,
+  oauthSignInHandler,
+  scopesHandler,
+  clientsHandler,
+  tokenHandler,
+};
 
 export const oauthHandlers = (port: string) => [
   getClientHandler(port),
   oauthSignInHandler(port),
   scopesHandler(port),
+  clientsHandler(port),
+  tokenHandler(port),
 ];

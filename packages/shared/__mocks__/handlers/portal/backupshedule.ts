@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-export const PATH_BACKUP_SCHEDULE = "portal/getbackupschedule?dump=true";
+export const PATH_BACKUP_SCHEDULE = "portal/getbackupschedule";
 
 export const backupScheduleSuccess = {
   count: 0,
@@ -40,6 +41,12 @@ export const backupScheduleSuccess = {
   statusCode: 200,
 };
 
-export const backupScheduleHandler = () => {
+export const backupScheduleResolver = () => {
   return new Response(JSON.stringify(backupScheduleSuccess));
+};
+
+export const backupScheduleHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_BACKUP_SCHEDULE}`, () => {
+    return backupScheduleResolver();
+  });
 };

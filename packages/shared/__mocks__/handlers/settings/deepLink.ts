@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_DEEP_LINK = "settings/deeplink";
 
@@ -44,6 +45,12 @@ export const getSuccessDeepLink = {
   statusCode: 200,
 };
 
-export const deepLinkHandler = (): Response => {
+export const deepLinkResolver = (): Response => {
   return new Response(JSON.stringify(getSuccessDeepLink));
+};
+
+export const deepLinkHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_DEEP_LINK}`, () => {
+    return deepLinkResolver();
+  });
 };

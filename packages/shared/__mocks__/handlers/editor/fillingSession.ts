@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
+
+export const PATH = "files/file/fillresult";
 
 const fillingSessionSuccess = {
   response: {
@@ -337,6 +340,12 @@ const fillingSessionSuccess = {
   statusCode: 200,
 };
 
-export const fillingSessionHandler = () => {
+export const fillingSessionResolver = () => {
   return new Response(JSON.stringify(fillingSessionSuccess));
+};
+
+export const fillingSessionHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return fillingSessionResolver();
+  });
 };

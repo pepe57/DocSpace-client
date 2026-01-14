@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 export const PATH_NOTIFICATIONS_CHANNELS = "settings/notification/channels";
 
@@ -52,10 +53,12 @@ const channelsSuccess = (isEnabledTelegram?: boolean) => ({
   statusCode: 200,
 });
 
-export const channelsHandler = (): Response => {
-  return new Response(JSON.stringify(channelsSuccess()));
+export const channelsResolver = (withTelegram: boolean = false): Response => {
+  return new Response(JSON.stringify(channelsSuccess(withTelegram)));
 };
 
-export const channelsHandlerWithTelegram = (): Response => {
-  return new Response(JSON.stringify(channelsSuccess(true)));
+export const channelsHandler = (port: string, withTelegram?: boolean) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_NOTIFICATIONS_CHANNELS}`, () => {
+    return channelsResolver(withTelegram);
+  });
 };

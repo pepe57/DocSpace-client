@@ -26,12 +26,12 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_RESULT_STORAGE_FOLDER = /.*\/api\/2\.0\/files\/\d+\?.*/;
+export const PATH_RESULT_STORAGE_FOLDER = 'files/:id';
 
-export const PATH_RESULT_STORAGE_FOLDER_INFO =
-  /\/api\/2\.0\/files\/folder\/\d+$/;
+export const PATH_RESULT_STORAGE_FOLDER_INFO = 'files/folder/:id';
 
 const createdUpdatedByMock = {
   id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -226,10 +226,22 @@ const successFolderInfoDefault = {
   statusCode: 200,
 };
 
-export const resultStorageFolderHandler = () => {
+export const resultStorageFolderResolver = () => {
   return new Response(JSON.stringify(successFolderDefault));
 };
 
-export const resultStorageFolderInfoHandler = () => {
+export const resultStorageFolderInfoResolver = () => {
   return new Response(JSON.stringify(successFolderInfoDefault));
+};
+
+export const resultStorageFolderHandler = (port: string) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_RESULT_STORAGE_FOLDER}`, () => {
+    return resultStorageFolderResolver();
+  });
+};
+
+export const resultStorageFolderInfoHandler = (port: string) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_RESULT_STORAGE_FOLDER_INFO}`, () => {
+    return resultStorageFolderInfoResolver();
+  });
 };

@@ -355,7 +355,7 @@ const fileInfo = {
   statusCode: 200,
 };
 
-export const myDocumentsHandler = () => {
+export const myDocumentsResolver = () => {
   return new Response(JSON.stringify(myDocumentsFiles));
 };
 

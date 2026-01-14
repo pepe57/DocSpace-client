@@ -24,27 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const PATH_PORTAL_REMOVE =
-  "apisystem/portal/remove?portalName=second.docspace.site";
+import { http } from "msw";
+import { API_PREFIX } from "../../e2e/utils";
 
-const removePortalSuccess = {
-  tenant: {
-    created: "2025-12-20T20:24:01",
-    domain: "second.test.com",
-    industry: 0,
-    language: "en-US",
-    name: "Cloud space for your office docs",
-    ownerId: "d03bdcdd-6ac0-4f5a-b46c-de296b6ee154",
-    portalName: "second",
-    status: "RemovePending",
-    tenantId: 2,
-    timeZoneId: "Europe/London",
-    timeZoneName: "(UTC+00:00) United Kingdom Time",
-    customQuota: -1,
-  },
-  removed: true,
+export const PATH_SET_DOMAIN = "apisystem/settings/save";
+
+const setDomainSuccess = {
+  settings: "test.com",
 };
 
-export const removePortalHandler = () => {
-  return new Response(JSON.stringify(removePortalSuccess));
+export const setDomainResolver = () => {
+  return new Response(JSON.stringify(setDomainSuccess));
+};
+
+export const setDomainHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_SET_DOMAIN}`, () => {
+    return setDomainResolver();
+  });
 };

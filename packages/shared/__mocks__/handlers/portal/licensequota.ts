@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const PATH_LICENSE_QUOTA = "portal/licensequota?useCache=false";
+import { http } from "msw";
+import { API_PREFIX } from "../../e2e/utils";
+
+export const PATH_LICENSE_QUOTA = "portal/licensequota";
 
 export const licenseQuotaSuccess = {
   userQuota: {},
@@ -47,6 +50,12 @@ export const licenseQuotaSuccess = {
   licenseTypeByUsers: true,
 };
 
-export const licenseQuotaHandler = () => {
+export const licenseQuotaResolver = () => {
   return new Response(JSON.stringify(licenseQuotaSuccess));
+};
+
+export const licenseQuotaHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_LICENSE_QUOTA}`, () => {
+    return licenseQuotaResolver();
+  });
 };
