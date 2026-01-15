@@ -42,7 +42,7 @@ import {
 } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-import { CoverDialogProps } from "./RoomLogoCoverDialog.types";
+import { CoverDialogProps, ILogo } from "../RoomLogoCoverDialog.types";
 import { SelectIcon } from "./SelectIcon";
 import {
   InputSize,
@@ -127,21 +127,24 @@ const GroupIconDialog = ({
   setArrRoomGroups,
   setIsOpenGroupIcon,
   onCloseEditRoomGroupsDialog,
+  setCreateGroupRooms,
+  getAllRoomGroups,
 }: CoverDialogProps) => {
-  const { t } = useTranslation(["Common", "RoomLogoCover"]);
+  const { t } = useTranslation(["Common", "RoomLogoCover", "GroupingRooms"]);
 
-  const [roomIcon, setRoomIcon] = React.useState({
-    data: '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-7a1 1 0 0 1-.832-.445L7.465 3H3zM.879 1.879A3 3 0 0 1 3 1h5a1 1 0 0 1 .832.445L10.535 4H17a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V4a3 3 0 0 1 .879-2.121z" fill="#657077"/></svg>',
+  const [roomIcon, setRoomIcon] = React.useState<ILogo | string | null>({
+    data: `<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-7a1 1 0 0 1-.832-.445L7.465 3H3zM.879 1.879A3 3 0 0 1 3 1h5a1 1 0 0 1 .832.445L10.535 4H17a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V4a3 3 0 0 1 .879-2.121z" fill="${currentColorScheme?.main?.accent}"/></svg>`,
     id: "folder",
   });
 
-  const [groupName, setGroupName] = React.useState(null);
+  const [groupName, setGroupName] = React.useState<string>("");
 
   React.useEffect(() => {
     getCovers();
   }, [getCovers]);
 
-  const coverId = roomIcon?.id;
+  const coverId =
+    typeof roomIcon === "object" && roomIcon !== null ? roomIcon.id : "";
 
   const onChangeGroupName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -153,21 +156,19 @@ const GroupIconDialog = ({
   };
 
   const handleSubmit = () => {
-    if (!groupName) return;
+    if (!groupName || !arrIdsRooms?.length || !roomIcon) return;
 
     const newGroup = {
-      id: uniqueId(),
-      groupName,
-      icon: roomIcon,
-      arrIdsRooms,
+      name: groupName,
+      icon: typeof roomIcon === "object" ? roomIcon.id : roomIcon,
+      rooms: arrIdsRooms,
     };
 
-    setArrRoomGroups(newGroup);
-    console.log("newGroup", newGroup);
+    setCreateGroupRooms(newGroup);
+    getAllRoomGroups();
+
     onCloseEditRoomGroupsDialog();
   };
-
-  console.log("roomIcon groupName", roomIcon, groupName);
 
   return (
     <ModalDialog
@@ -178,7 +179,7 @@ const GroupIconDialog = ({
       displayType={isMobile() ? ModalDialogType.aside : ModalDialogType.modal}
       onClose={onClose}
     >
-      <ModalDialog.Header>{"Group icon "}</ModalDialog.Header>
+      <ModalDialog.Header>{t("GroupingRooms:GroupIcon")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.name}>
           <Text
@@ -189,16 +190,16 @@ const GroupIconDialog = ({
             truncate
             className={styles.nameText}
           >
-            {"Group name "}
+            {t("GroupingRooms:GroupName")}
           </Text>
           <span className={styles.symbol}>*</span>
           <TextInput
             className={styles.nameInput}
             type={InputType.text}
             size={InputSize.base}
-            value={groupName}
+            value={groupName || ""}
             scale
-            placeholder="Enter name"
+            placeholder={t("Common:EnterName")}
             isAutoFocussed
             onChange={onChangeGroupName}
           />
@@ -208,7 +209,7 @@ const GroupIconDialog = ({
             t={t}
             $currentColorScheme={currentColorScheme}
             coverId={coverId}
-            setIcon={(icon) => setRoomIcon(icon)}
+            setIcon={(icon: ILogo | string | null) => setRoomIcon(icon)}
             covers={covers}
           />
         </RoomLogoCoverContainer>
@@ -220,7 +221,7 @@ const GroupIconDialog = ({
           primary
           tabIndex={0}
           size={ButtonSize.normal}
-          label={"Create"}
+          label={t("Common:Create")}
           onClick={handleSubmit}
         />
         <Button

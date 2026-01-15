@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-
+import { ReactSVG } from "react-svg";
 import styled, { css } from "styled-components";
 import { mobile } from "@docspace/shared/utils";
 import { TColorScheme } from "@docspace/shared/themes";
@@ -115,17 +114,19 @@ export const SelectIcon = ({
       <div className="cover-icon-container">
         {covers
           ? covers?.map((icon) => {
-              function createMarkup() {
-                return { __html: icon.data };
-              }
               return (
                 <StyledIconContainer
                   isSelected={coverId === icon.id}
                   $currentColorScheme={$currentColorScheme}
                   onClick={() => onSelectIcon(icon)}
                   key={icon.id}
-                  dangerouslySetInnerHTML={createMarkup()}
-                />
+                >
+                  <ReactSVG
+                    src={`data:image/svg+xml;utf8,${encodeURIComponent(
+                      icon.data,
+                    )}`}
+                  />
+                </StyledIconContainer>
               );
             })
           : null}

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @use "@docspace/shared/styles/mixins";
+@use "@docspace/shared/styles/variables/colors" as *;
 
 .editRoomGroupsDialog {
   :global {
@@ -40,7 +41,7 @@
 
   .settingRoomGroups {
     padding: 20px 16px;
-    border-bottom: 1px solid #eceef1;
+    border-bottom: 1px solid $gray-light-mid;
   }
 
   .roomGroups {
@@ -59,7 +60,7 @@
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
-    color: #a3a9ae;
+    color: $gray;
   }
 
   .selectorAddButton {
@@ -120,7 +121,7 @@
   }
 
   .symbol {
-    color: #f21c0e;
+    color: $light-error-status;
   }
 
   .nameInput {
