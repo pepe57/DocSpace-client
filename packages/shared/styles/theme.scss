@@ -3177,3 +3177,11 @@
   --template-access-avatar-border: 1px solid #{$black};
   --template-access-me-label-color: #{$gray-dark};
 }
+
+.light { 
+  --embedding-panel-info-block-background: #{$gray-light};
+} 
+
+.dark { 
+  --embedding-panel-info-block-background: #{$dark-gray-dark};
+}
