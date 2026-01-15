@@ -61,7 +61,6 @@ const TagsCell = ({
     return [...thirdPartyTag, ...itemTags];
   }, [item.providerType, item.providerKey, item.thirdPartyIcon, item.tags]);
 
-
   return (
     <div style={styleTagsCell}>
       <Tags

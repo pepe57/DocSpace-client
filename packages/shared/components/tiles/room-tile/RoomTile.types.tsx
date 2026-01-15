@@ -26,7 +26,7 @@
 
 import { TFunction } from "i18next";
 import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
-import { TagType } from "../../tags/Tags.types";
+import type { TagType } from "../../tag";
 import { TileItem } from "../tile-container/TileContainer.types";
 
 export interface RoomItem extends TileItem {

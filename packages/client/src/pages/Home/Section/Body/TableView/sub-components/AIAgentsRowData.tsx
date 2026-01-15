@@ -77,6 +77,8 @@ type AIAgentsRowDataComponentProps = {
   createdDate: string;
   lastOpenedDate: string;
   isRecentFolder: boolean;
+  isHovered: boolean;
+  isActive: boolean;
 };
 
 const AIAgentsRowDataComponent = (props: AIAgentsRowDataComponentProps) => {

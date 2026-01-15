@@ -339,6 +339,7 @@ const FilesTableRow = memo((props) => {
           <AIAgentsRowDataComponent
             element={element}
             dragStyles={dragStyles}
+            isHovered={isHovered}
             {...props}
           />
         ) : isTrashFolder ? (

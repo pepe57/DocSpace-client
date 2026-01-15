@@ -77,10 +77,5 @@ export const TagsWithDropDown: Story = {
     style: { width: "150px" },
     columnCount: 2,
     onSelectTag: () => {},
-    isDefaultMode: false,
-    directionY: "bottom",
-    fixedDirection: true,
-    manualY: "56px",
-    manualX: "100px",
   },
 };

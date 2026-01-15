@@ -29,7 +29,7 @@ import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Tags } from "../../tags";
-import { TagType } from "../../tags/Tags.types";
+import type { TagType } from "../../tag";
 import { BaseTile } from "../base-tile/BaseTile";
 import { TileItem } from "../tile-container/TileContainer.types";
 

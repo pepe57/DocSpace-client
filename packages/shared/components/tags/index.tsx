@@ -75,7 +75,6 @@ const Tags: FC<TagsProps> = ({
       canShowCreate,
     );
 
-
     setRenderedTags(newTags);
   }, [tags, columnCount, canShowCreate]);
 
