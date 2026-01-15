@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "@docspace/shared/styles/mixins";
+
 .tagList {
   margin-top: 12px;
   display: flex;
@@ -97,7 +99,7 @@
       background: var(--create-edit-dropdown-item-hover);
     }
 
-    &-separator {
+    :global(.dropdown-item-separator) {
       height: 7px !important;
       max-height: 7px !important;
     }
