@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "@docspace/shared/styles/variables";
+
 .embeddingPanelBody {
   padding-left: 16px;
 
@@ -40,7 +42,7 @@
     padding: 12px 16px;
     gap: 16px;
     margin: 0px -16px 12px;
-    // background-color: ${(props) => props.theme.infoBlock.background};
+    background-color: var(--embedding-panel-info-block-background);
 
     .embeddingPanelBannerCloseIcon {
       min-width: 12px;
@@ -55,12 +57,6 @@
       align-items: center;
       gap: 4px;
     }
-
-    // .header-icon {
-    //   svg path {
-    //     fill: ${({ theme }) => theme.embeddingPanel.iconColor};
-    //   }
-    // }
   }
 
   .embeddingPanelHeaderText {
@@ -102,7 +98,7 @@
 
   .embeddingPanelCodeContainer {
     margin-top: 16px;
-    // -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+    -webkit-tap-highlight-color: variables.$tap-highlight;
   }
 
   .embeddingPanelText {
