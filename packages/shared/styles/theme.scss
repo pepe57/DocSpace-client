@@ -3176,6 +3176,10 @@
   --create-edit-room-description-color: #{$gray};
   --menu-container-background: #{$light-gray-hover};
   --menu-container-color: #{$black};
+  --new-files-panel-border-color: #{$gray-light-mid};
+  --new-files-panel-box-shadow: 0px 8px 16px 0px #{$box-shadow};
+  --new-files-panel-file-item-border-color: #{$gray-light-mid};
+  --new-files-panel-file-item-file-exst-color: #{$gray};
 }
 
 .dark {
@@ -3186,4 +3190,8 @@
   --create-edit-room-description-color: #{$gray};
   --menu-container-background: #{$light-dark-gray-hover};
   --menu-container-color: #{$white};
+  --new-files-panel-border-color: #{$gray-dark-strong};
+  --new-files-panel-box-shadow: 0px 8px 16px 0px #{$box-shadow};
+  --new-files-panel-file-item-border-color: #{$gray-dark-strong};
+  --new-files-panel-file-item-file-exst-color: #{$gray-dark};
 }
