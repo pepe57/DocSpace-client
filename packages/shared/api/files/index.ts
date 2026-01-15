@@ -711,13 +711,63 @@ export async function startUploadSession(
     createOn,
     CreateNewIfExist,
   };
+
   const res = (await request({
     method: "post",
-    url: `/files/${folderId}/upload/create_session`,
+    url: `/files/${folderId}/session`,
     data,
     skipForbidden: true,
   })) as TUploadOperation;
 
+  return res;
+}
+
+export async function uploadChunkAsync(
+  folderId: string | number,
+  sessionId: string,
+  chunkNumber: number,
+  data: FormData,
+) {
+  const res = await request({
+    method: "post",
+    url: `/files/${folderId}/session/${sessionId}/upload?chunkNumber=${chunkNumber}`,
+    data,
+  });
+  return res;
+}
+
+export async function uploadChunk(
+  folderId: string | number,
+  sessionId: string,
+  data: FormData,
+) {
+  const res = await request({
+    method: "post",
+    url: `/files/${folderId}/session/${sessionId}`,
+    data,
+  });
+  return res;
+}
+
+export async function finalizeUploadSession(
+  folderId: string | number,
+  sessionId: string,
+) {
+  const res = await request({
+    method: "put",
+    url: `/files/${folderId}/session/${sessionId}/finalize`,
+  });
+  return res;
+}
+
+export async function abortUploadSession(
+  folderId: string | number,
+  sessionId: string,
+) {
+  const res = await request({
+    method: "delete",
+    url: `/files/${folderId}/session/${sessionId}`,
+  });
   return res;
 }
 
