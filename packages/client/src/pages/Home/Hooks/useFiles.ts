@@ -54,6 +54,7 @@ import FilesStore from "SRC_DIR/store/FilesStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import OformsStore from "SRC_DIR/store/OformsStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
+import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 export type UseFilesProps = {
   fetchFiles: FilesStore["fetchFiles"];
@@ -74,6 +75,7 @@ export type UseFilesProps = {
 
   selectedFolderStore: SelectedFolderStore;
   currentExtensionGallery: OformsStore["currentExtensionGallery"];
+  getAllRoomGroups: DialogsStore["getAllRoomGroups"];
 };
 
 const useFiles = ({
@@ -94,6 +96,7 @@ const useFiles = ({
   userId,
 
   selectedFolderStore,
+  getAllRoomGroups,
 }: UseFilesProps) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -293,6 +296,7 @@ const useFiles = ({
             return fetchAgents(null, newFilter, false, false);
           }
           if (isRooms) {
+            getAllRoomGroups();
             return fetchRooms(null, newFilter, undefined, undefined, false);
           }
           const folderId = (newFilter as FilesFilter).folder;

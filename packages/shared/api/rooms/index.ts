@@ -665,3 +665,31 @@ export function hideConfirmRoomLifetime(val: boolean) {
 
   return request(options);
 }
+
+export function createGroupRooms(newGroup) {
+  const options = {
+    method: "post",
+    url: "/files/group",
+    data: newGroup,
+  };
+
+  return request(options);
+}
+
+export function getRoomGroups() {
+  const options = {
+    method: "get",
+    url: "/files/group?includeMembers=false",
+  };
+
+  return request(options);
+}
+
+export function getGroupById(groupId) {
+  const options = {
+    method: "get",
+    url: `/files/group/${groupId}?includeMembers=true`,
+  };
+
+  return request(options);
+}
