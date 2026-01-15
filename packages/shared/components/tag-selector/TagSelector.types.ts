@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TagType } from "../tag/Tag.types";
+import type { TagClickEvent, TagType } from "../tag/Tag.types";
 
 export interface TagSelectorProps {
   tags: Array<TagType | string>;
   roomId: string | number;
   onClose: (event: MouseEvent) => void;
-  onSelectTag: (tag?: object) => void;
+  onSelectTag: (tag: TagClickEvent) => void;
   reference: React.RefObject<HTMLElement | null>;
 }
 

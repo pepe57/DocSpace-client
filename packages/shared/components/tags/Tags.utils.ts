@@ -26,11 +26,18 @@
 
 import type { TagType } from "../tag/Tag.types";
 
-import { createTag, paddingSize, thirdPartyTagWidth } from "./tags.constants";
+import {
+  createTag,
+  defaultTagMaxWidth,
+  fixedTagWidth,
+  paddingSize,
+  thirdPartyTagWidth,
+} from "./tags.constants";
 
 export const isTagType = (tag: TagType | string): tag is TagType => {
   return typeof tag === "object";
 };
+
 export const createMaxWidthTag = (
   tag: TagType | string,
   maxWidth: string,
@@ -41,6 +48,15 @@ export const createMaxWidthTag = (
   return { label: tag, maxWidth };
 };
 
+const addTagWithWidth = (
+  tag: TagType | string,
+  percentWidth: string,
+): TagType => {
+  const width =
+    isTagType(tag) && tag?.isThirdParty ? fixedTagWidth : percentWidth;
+  return createMaxWidthTag(tag, width);
+};
+
 export const calculateRenderedTags = (
   tags: (TagType | string)[],
   columnCount: number,
@@ -48,6 +64,20 @@ export const calculateRenderedTags = (
   canShowCreate: boolean = false,
 ) => {
   const newTags: TagType[] = [];
+
+  // Show all tags without collapsing when columnCount is 0
+  if (columnCount === -1) {
+    if (canShowCreate) {
+      newTags.push(createTag);
+    }
+
+    tags.forEach((tag) => {
+      newTags.push(createMaxWidthTag(tag, defaultTagMaxWidth));
+    });
+
+    return newTags;
+  }
+
   const containerWidth = offsetWidth;
   const createTagCount = canShowCreate ? 1 : 0;
 
@@ -79,11 +109,7 @@ export const calculateRenderedTags = (
     );
 
     tags.forEach((tag) => {
-      if (isTagType(tag) && tag?.isThirdParty) {
-        newTags.push(createMaxWidthTag(tag, "44px"));
-      } else {
-        newTags.push(createMaxWidthTag(tag, `${maxWidthPercent}%`));
-      }
+      newTags.push(addTagWithWidth(tag, `${maxWidthPercent}%`));
     });
 
     if (canShowCreate) {
@@ -94,11 +120,7 @@ export const calculateRenderedTags = (
     const tagWithDropdown = {
       label: `+${tags.length - columnCount}`,
       key: "selector",
-      // advancedOptions: tags.slice(
-      //   columnCount,
-      //   tags.length,
-      // ) as React.ReactNode[],
-      maxWidth: "44px",
+      maxWidth: fixedTagWidth,
       isSelectorTrigger: true,
     };
 
@@ -110,12 +132,7 @@ export const calculateRenderedTags = (
     );
 
     for (let i = 0; i < columnCount; i += 1) {
-      const tag = tags[i];
-      if (isTagType(tag) && tag?.isThirdParty) {
-        newTags.push(createMaxWidthTag(tag, "44px"));
-      } else {
-        newTags.push(createMaxWidthTag(tag, `${maxWidthPercent}%`));
-      }
+      newTags.push(addTagWithWidth(tags[i], `${maxWidthPercent}%`));
     }
 
     newTags.push(tagWithDropdown);

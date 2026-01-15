@@ -58,24 +58,21 @@ const TagPure: FC<TagProps> = ({
   onMouseEnter,
   onMouseLeave,
 }) => {
-  const onClickAction = React.useCallback(
-    (e: React.MouseEvent | React.ChangeEvent) => {
-      if (onClick && !isDisabled && !isDeleted) {
-        const target = e.target as HTMLDivElement;
-        onClick({ roomType, label: target.dataset.tag, providerType });
-      }
-    },
-    [onClick, isDisabled, isDeleted, roomType, providerType],
-  );
+  const onClickAction = React.useCallback(() => {
+    if (onClick && !isDisabled && !isDeleted) {
+      onClick({ roomType, label, providerType });
+    }
+  }, [onClick, isDisabled, isDeleted, roomType, providerType, label]);
 
   const onDeleteAction = React.useCallback(() => {
     onDelete?.(tag);
   }, [onDelete, tag]);
 
-
   return (
     <TooltipContainer
       as="div"
+      id={id}
+      ref={ref}
       title={label}
       onClick={onClickAction}
       className={classNames(styles.tag, "tag", className, {
@@ -87,14 +84,11 @@ const TagPure: FC<TagProps> = ({
         [styles.thirdPartyTag]: icon,
       })}
       style={{ ...style, maxWidth: tagMaxWidth }}
-      data-tag={label}
-      id={id}
-      data-testid={dataTestId ?? "tag_item"}
       aria-label={label}
       aria-disabled={isDisabled}
+      data-testid={dataTestId ?? "tag_item"}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      ref={ref}
     >
       {icon ? (
         <ReactSVG className={styles.thirdPartyTag} src={icon} />

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TagType } from "../tag/Tag.types";
+import type { TagClickEvent, TagType } from "../tag/Tag.types";
 
 export type TagsProps = {
   /** Accepts id */
@@ -38,7 +38,7 @@ export type TagsProps = {
   /** Accepts css style */
   style?: React.CSSProperties;
   /** Accepts the function that is called when the tag is selected */
-  onSelectTag: (tag?: object) => void;
+  onSelectTag: (tag: TagClickEvent) => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   showCreateTag?: boolean;

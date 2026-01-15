@@ -24,6 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+export type TagClickEvent = {
+  label?: string;
+  roomType?: number;
+  providerType?: number;
+};
+
 export type TagProps = {
   /** Accepts the ref */
   ref?: React.RefObject<HTMLDivElement | null>;
@@ -44,7 +50,7 @@ export type TagProps = {
   /** Accepts the tag styles as deleted and disables clicking */
   isDeleted?: boolean;
   /** Accepts the function that is called when the tag is clicked */
-  onClick?: (tag?: object) => void;
+  onClick?: (tag: TagClickEvent) => void;
   /** Accepts the function that ist called when the tag delete button is clicked */
   onDelete?: (tag?: string) => void;
   /** Accepts the max width of the tag */

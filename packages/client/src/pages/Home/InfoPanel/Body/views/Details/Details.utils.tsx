@@ -31,10 +31,10 @@ import type { TFunction } from "i18next";
 import { getCorrectDate } from "@docspace/shared/utils";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { Tag } from "@docspace/shared/components/tag";
 import { isRoom } from "@docspace/shared/utils/typeGuards";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
+import { Tags } from "@docspace/shared/components/tags";
 
 import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
@@ -71,18 +71,21 @@ const link = (txt: React.ReactNode, onClick: () => void) => (
 const tagList = (
   tags: string[],
   selectTag: (tag: { label: string }) => void,
+  id: number,
 ) => (
   <div className="property-tag_list" data-testid="info_panel_details_tag_list">
-    {tags.map((tag, index) => (
-      <Tag
-        key={tag}
-        className="property-tag"
-        label={tag}
-        tag={tag}
-        onClick={() => selectTag({ label: tag })}
-        dataTestId={`info_panel_details_tag_${index}`}
-      />
-    ))}
+    <Tags
+      id={id.toString()}
+      className="tags"
+      showCreateTag
+      tags={tags}
+      columnCount={-1}
+      onSelectTag={(tag) => {
+        const label = tag.label;
+        if (!label) return;
+        selectTag({ label });
+      }}
+    />
   </div>
 );
 
@@ -446,7 +449,8 @@ class DetailsHelper {
   };
 
   getItemTags = () => {
-    if ("tags" in this.item) return tagList(this.item.tags, this.selectTag);
+    if ("tags" in this.item)
+      return tagList(this.item.tags, this.selectTag, this.item.id);
   };
 
   getQuotaItem = () => {

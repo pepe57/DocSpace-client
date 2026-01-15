@@ -30,6 +30,10 @@ export const paddingSize = 4;
 
 export const thirdPartyTagWidth = 40;
 
+export const fixedTagWidth = "44px";
+
+export const defaultTagMaxWidth = "195px";
+
 export const createTag = {
   label: "",
   key: "create-tag",
