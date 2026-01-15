@@ -126,6 +126,7 @@ const EditRoomGroupsDialog = ({
         onCloseEditRoomGroupsDialog={onCloseEditRoomGroupsDialog}
         setCreateGroupRooms={setCreateGroupRooms}
         getAllRoomGroups={getAllRoomGroups}
+        arrIdsRooms={arrIdsRooms}
       />
     );
   }
@@ -213,13 +214,11 @@ const EditRoomGroupsDialog = ({
   }
 
   const nodeAddedGroups = () => {
-    return roomGroups.map(
-      (item: {
-        id: string;
-        totalRooms: number;
-        name: string;
-        icon: { data: string };
-      }) => (
+    return roomGroups.map((item) => {
+      const totalRooms = item.rooms?.length || 0;
+      const iconData = typeof item.icon === 'object' && item.icon !== null ? item.icon.data : '';
+
+      return (
         <div className={styles.addedGroups} key={item.id}>
           <div className={styles.group}>
             <div
@@ -228,16 +227,18 @@ const EditRoomGroupsDialog = ({
             >
               <div className={styles.iconGroup} />
 
-              <ReactSVG
-                src={`data:image/svg+xml;utf8,${encodeURIComponent(
-                  item.icon.data,
-                )}`}
-              />
+              {iconData && (
+                <ReactSVG
+                  src={`data:image/svg+xml;utf8,${encodeURIComponent(
+                    iconData,
+                  )}`}
+                />
+              )}
 
               <div className={styles.titleContainer}>
                 <div className={styles.nameGroup}>{item.name}</div>
                 <div className={styles.countRooms}>
-                  {item.totalRooms} {t("Common:Rooms")}
+                  {totalRooms} {t("Common:Rooms")}
                 </div>
               </div>
             </div>
@@ -256,8 +257,8 @@ const EditRoomGroupsDialog = ({
             </div>
           </div>
         </div>
-      ),
-    );
+      );
+    });
   };
 
   return (

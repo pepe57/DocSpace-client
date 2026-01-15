@@ -42,6 +42,7 @@ export interface CoverDialogProps {
   getCovers: () => void;
   covers: ILogo[] | null;
   currentColorScheme: TColorScheme;
+  arrIdsRooms: string[] | null;
   setIsOpenGroupIcon: (visible: boolean) => void;
   onCloseEditRoomGroupsDialog: () => void;
   setCreateGroupRooms: (newGroup: ICreateRoomGroup) => Promise<void>;

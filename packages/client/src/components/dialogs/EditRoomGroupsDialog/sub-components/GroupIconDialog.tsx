@@ -124,7 +124,6 @@ const GroupIconDialog = ({
   covers,
   currentColorScheme,
   arrIdsRooms,
-  setArrRoomGroups,
   setIsOpenGroupIcon,
   onCloseEditRoomGroupsDialog,
   setCreateGroupRooms,

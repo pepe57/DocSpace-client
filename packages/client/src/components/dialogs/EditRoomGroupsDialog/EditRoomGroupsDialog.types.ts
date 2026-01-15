@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TColorScheme } from "@docspace/shared/themes";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 
 export interface ILogo {
   id: string;
@@ -33,9 +34,9 @@ export interface ILogo {
 
 export interface IRoomGroup {
   id: string;
-  groupName: string;
+  name: string;
   icon: ILogo | string | null;
-  arrIdsRooms: string[];
+  rooms: TRoom[];
 }
 
 export interface ICreateRoomGroup {
@@ -51,10 +52,10 @@ export interface EditRoomGroupsDialogProps {
   setArrRoomGroups: (group: IRoomGroup) => void;
   setEditRoomGroupsDialogVisible: (visible: boolean) => void;
   arrRoomGroups: IRoomGroup[];
-  roomGroups: any[];
+  roomGroups: IRoomGroup[];
   setCreateGroupRooms: (newGroup: ICreateRoomGroup) => Promise<void>;
   getAllRoomGroups: () => Promise<void>;
-  getGroupById: (groupId: string) => Promise<any>;
+  getGroupById: (groupId: string) => Promise<IRoomGroup>;
 }
 
 export interface IRoomItem {
