@@ -45,7 +45,7 @@ import { sharedWithMeHandler } from "./sharedWithMe";
 import { shareHandler } from "./share";
 import { rootHandler } from "./root";
 import { recentHandler } from "./recent";
-import { myDocumentsHandler, getFileInfoHandler } from "./documents";
+import { myDocumentsHandler, myHandler, getFileInfoHandler } from "./documents";
 import { docServiceHandlers } from "./docservice";
 import { 
   favoritesHandler, 
@@ -86,6 +86,7 @@ export {
   rootHandler,
   recentHandler,
   myDocumentsHandler,
+  myHandler,
   getFileInfoHandler,
   docServiceHandlers,
   favoritesHandler,
@@ -106,6 +107,12 @@ export const filesHandlers = (port: string) => [
   validatePublicRoomKeyHandler(port),
   roomListHandler(port),
   sharedWithMeHandler(port),
+  // Agent folder handlers must come before folderHandler to take precedence
+  agentFolderChatHandler(port),
+  agentFolderInfoHandler(port),
+  agentFolderResultStorageHandler(port),
+  resultStorageFolderHandler(port),
+  resultStorageFolderInfoHandler(port),
   folderHandler(port),
   validatePublicRoomPasswordHandler(port),
   thirdPartyCapabilitiesHandler(port),
@@ -118,9 +125,4 @@ export const filesHandlers = (port: string) => [
   addFileToFavoritesHandler(port),
   getFileHandler(port),
   deleteFavoritesHandler(port),
-  agentFolderChatHandler(port),
-  agentFolderInfoHandler(port),
-  agentFolderResultStorageHandler(port),
-  resultStorageFolderHandler(port),
-  resultStorageFolderInfoHandler(port),
 ];

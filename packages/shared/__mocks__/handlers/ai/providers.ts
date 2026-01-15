@@ -219,7 +219,7 @@ export const aiProvidersDeleteHandler = (port: string) => {
 };
 
 export const aiProvidersPutHandler = (port: string) => {
-  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_LIST}`,
+  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_LIST}/:id`,
     () => aiProvidersPutResolver());
 };
 

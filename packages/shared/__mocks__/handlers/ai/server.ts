@@ -123,14 +123,26 @@ export const aiServerHandler = (port: string) => {
   });
 };
 
-export const aiServerPutHandler = () => {
+export const aiServerPutResolver = () => {
   return new Response(JSON.stringify(successUpdate));
 };
 
-export const aiServerStatusPutHandler = (type: "enable" | "disable") => {
+export const aiServerStatusPutResolver = (type?: "enable" | "disable") => {
   return new Response(
     JSON.stringify(
       type === "enable" ? successEnabledStatus : successDisabledStatus,
     ),
   );
+};
+
+export const aiServerPutHandler = (port: string) => {
+  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVER}`, () => {
+    return aiServerPutResolver();
+  });
+};
+
+export const aiServerStatusPutHandler = (port: string, type?: "enable" | "disable") => {
+  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVER_STATUS}`, () => {
+    return aiServerStatusPutResolver(type);
+  });
 };

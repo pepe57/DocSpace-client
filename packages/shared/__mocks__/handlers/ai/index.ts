@@ -33,7 +33,11 @@ import {
   aiProvidersPostHandler,
   aiProvidersPutHandler,
  } from "./providers";
-import { aiServerHandler } from "./server";
+import { 
+  aiServerHandler, 
+  aiServerPutHandler, 
+  aiServerStatusPutHandler 
+ } from "./server";
 import {
   aiServersGetHandler,
   aiServersPostHandler,
@@ -77,6 +81,8 @@ export {
   aiVectorizationPutHandler,
   aiWebSearchGetHandler,
   aiWebSearchPutHandler,
+  aiServerPutHandler,
+  aiServerStatusPutHandler,
 };
 
 export const aiHandlers = (port: string) => [
@@ -92,10 +98,10 @@ export const aiHandlers = (port: string) => [
   aiServersDeleteHandler(port),
   aiServersAvailableHandler(port),
   aiServerHandler(port),
-  aiChatHandler(port),
-  aiChatPutHandler(port),
   aiChatMessagesExportHandler(port),
   aiChatMessagesHandler(port),
+  aiChatHandler(port),
+  aiChatPutHandler(port),
   aiMessagesExportHandler(port),
   aiProvidersAvailableHandler(port),
   aiRoomsChatsHandler(port),
@@ -106,4 +112,6 @@ export const aiHandlers = (port: string) => [
   aiVectorizationPutHandler(port),
   aiWebSearchGetHandler(port),
   aiWebSearchPutHandler(port),
+  aiServerStatusPutHandler(port),
+  aiServerPutHandler(port),
 ];

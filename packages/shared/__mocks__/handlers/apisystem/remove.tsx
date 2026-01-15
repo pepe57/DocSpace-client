@@ -27,8 +27,7 @@
 import { http } from "msw";
 import { API_PREFIX } from "../../e2e/utils";
 
-export const PATH_PORTAL_REMOVE =
-  "apisystem/portal/remove?portalName=second.docspace.site";
+export const PATH_PORTAL_REMOVE = "apisystem/portal/remove";
 
 const removePortalSuccess = {
   tenant: {

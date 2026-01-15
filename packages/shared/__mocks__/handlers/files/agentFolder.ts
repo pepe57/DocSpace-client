@@ -29,9 +29,9 @@
 import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_AGENT_FOLDER_CHAT = 'files/:id';
+export const PATH_AGENT_FOLDER_CHAT = 'files/:id([0-9]+)';
 
-export const PATH_AGENT_FOLDER_RESULT_STORAGE = 'files/:id';
+export const PATH_AGENT_FOLDER_RESULT_STORAGE = 'files/:id([0-9]+)';
 
 export const PATH_AGENT_FOLDER_INFO = 'files/folder/:id';
 
@@ -78,7 +78,7 @@ const getFolderInfo = ({ canUseChat }: { canUseChat: boolean }) => {
     fileEntryType: 1,
     chatSettings: {
       providerId: 1,
-      modelId: "gpt-5.1-2025-11-13",
+      modelId: "GPT-5.1",
       prompt: "",
     },
     id: 2,

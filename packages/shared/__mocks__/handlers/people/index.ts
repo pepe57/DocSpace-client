@@ -40,6 +40,7 @@ export type { UserType } from "./self";
 import { thirdPartyProvidersHandler } from "./thirdPartyProviders";
 import { peopleHandler } from "./people";
 import { peopleListHandler, peopleListAccessDeniedHandler } from "./list";
+import { themeProviderHandler } from "./theme";
 
 
 export {
@@ -57,6 +58,7 @@ export {
   peopleListAccessDeniedHandler,
   updateUserCultureHandler,
   selfByTypeHandler,
+  themeProviderHandler
 };
 
 export const peopleHandlers = (port: string) => [
@@ -73,4 +75,5 @@ export const peopleHandlers = (port: string) => [
   selfByTypeHandler(port),
   peopleListHandler(port),
   peopleListAccessDeniedHandler(port),
+  themeProviderHandler(port),
 ];

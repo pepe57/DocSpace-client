@@ -27,7 +27,7 @@
 import { http } from "msw";
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-export const PATH_BACKUP_PROGRESS = "portal/getbackupprogress?dump=true";
+export const PATH_BACKUP_PROGRESS = "portal/getbackupprogress";
 
 export const backupProgressSuccess = {
   count: 0,

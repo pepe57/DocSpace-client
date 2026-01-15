@@ -29,7 +29,7 @@
 import { http } from "msw";
 import { API_PREFIX, BASE_URL, buildSseBody } from "../../e2e/utils";
 
-export const PATH_AI_ROOMS_CHATS = "ai/rooms/*/chats?*";
+export const PATH_AI_ROOMS_CHATS = "ai/rooms/*/chats";
 export const PATH_AI_ROOMS_CHATS_STREAM = "ai/rooms/*/chats";
 
 const createdBy = {
@@ -173,12 +173,12 @@ export const aiRoomsChatsStreamResolver = (
   }
 };
 
-export const aiRoomsChatsHandler = (port: string) => {
+export const aiRoomsChatsHandler = (port: string, type?: "empty" | "with-chats") => {
   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS}`,
-    () => aiRoomsChatsResolver());
+    () => aiRoomsChatsResolver(type));
 };
 
-export const aiRoomsChatsStreamHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_STREAM}`,
-    () => aiRoomsChatsStreamResolver());
+export const aiRoomsChatsStreamHandler = (port: string, type?: "default" | "mcpNeedApprove") => {
+  return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_STREAM}`,
+    () => aiRoomsChatsStreamResolver(type));
 };

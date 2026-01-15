@@ -27,8 +27,8 @@
 import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_AI_SERVERS = "ai/servers/available";
-export const PATH_AI_SERVERS_WITH_FILTER = "ai/servers?*";
+export const PATH_AI_SERVERS = "ai/servers";
+export const PATH_AI_SERVERS_AVAILABLE = "ai/servers/available";
 
 const successAvailable = {
   response: [
@@ -83,7 +83,7 @@ const successList = {
   total: 2,
   links: [
     {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_WITH_FILTER}`,
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS}`,
       action: "GET",
     },
   ],
@@ -117,7 +117,7 @@ const successListDisabled = {
   total: 2,
   links: [
     {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_WITH_FILTER}`,
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS}`,
       action: "GET",
     },
   ],
@@ -144,7 +144,7 @@ const successListNeedReset = {
   total: 1,
   links: [
     {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_WITH_FILTER}`,
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS}`,
       action: "GET",
     },
   ],
@@ -207,7 +207,7 @@ export const aiServersDeleteResolver = () => {
 };
 
 export const aiServersAvailableHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVERS}`, () => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVERS_AVAILABLE}`, () => {
     return aiServersAvailableResolver();
   });
 };
