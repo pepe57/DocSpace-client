@@ -99,6 +99,7 @@ const Body = ({
   hideBackButton,
   withErrorFooter,
   isLimitReached,
+  forceIsMultiSelect,
 }: BodyProps) => {
   const infoBarRef = useRef<HTMLDivElement>(null);
   const injectedElementRef = useRef<HTMLElement>(null);
@@ -439,6 +440,7 @@ const Body = ({
                     setSavedInputValue,
                     listHeight,
                     isLimitReached,
+                    forceIsMultiSelect,
                   }}
                   itemSize={getItemSize}
                   onItemsRendered={onItemsRendered}

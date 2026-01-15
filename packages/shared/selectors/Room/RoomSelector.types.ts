@@ -52,6 +52,7 @@ export type RoomSelectorProps = TSelectorHeader &
     style?: React.CSSProperties;
 
     isMultiSelect: boolean;
+    forceIsMultiSelect?: boolean;
 
     onSubmit: (items: TSelectorItem[]) => void | Promise<void>;
     roomType?: RoomsType | RoomsType[];
@@ -70,4 +71,5 @@ export type RoomSelectorProps = TSelectorHeader &
 
     emptyScreenHeader?: string;
     emptyScreenDescription?: string;
+    disableFirstFetch?: boolean;
   } & TInitValue;

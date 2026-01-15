@@ -93,6 +93,8 @@ const RoomSelectorComponent = ({
   initTotal,
   initHasNextPage,
   initSearchValue,
+  forceIsMultiSelect,
+  disableFirstFetch
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
   const { isBase } = useTheme();
@@ -239,6 +241,7 @@ const RoomSelectorComponent = ({
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
       isMultiSelect={isMultiSelect}
+      forceIsMultiSelect={forceIsMultiSelect}
       emptyScreenImage={
         isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
       }
@@ -269,6 +272,7 @@ const RoomSelectorComponent = ({
         />
       }
       isSSR={withInit}
+      disableFirstFetch={disableFirstFetch}
       dataTestId="room_selector"
     />
   );

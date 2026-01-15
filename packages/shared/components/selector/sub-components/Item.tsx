@@ -85,6 +85,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     setSavedInputValue,
     listHeight,
     isLimitReached,
+    forceIsMultiSelect,
   }: Data = data;
   const { t } = useTranslation(["Common"]);
 
@@ -350,7 +351,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           >
             {disabledText}
           </Text>
-        ) : disableMultiSelect ? null : isMultiSelect ? (
+        ) : disableMultiSelect && !forceIsMultiSelect ? null : isMultiSelect ? (
           <Checkbox
             className={classNames(styles.checkbox, "checkbox")}
             isChecked={isSelected}
