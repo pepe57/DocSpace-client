@@ -142,10 +142,7 @@ const AIAgentsRowDataComponent = (props: AIAgentsRowDataComponentProps) => {
           }
           {...selectionProp}
         >
-          <TagsCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
+          <TagsCell {...props} />
           {lastColumn === "Tags" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (

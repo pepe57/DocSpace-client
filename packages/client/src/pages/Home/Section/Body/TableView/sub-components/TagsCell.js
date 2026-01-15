@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useMemo } from "react";
 
 import { Tags } from "@docspace/shared/components/tags";
 
@@ -44,25 +44,23 @@ const TagsCell = ({
     marginInlineEnd: "8px",
   };
 
-  const tags = [];
+  const tags = useMemo(() => {
+    const thirdPartyTag = item.providerType
+      ? [
+          {
+            isThirdParty: true,
+            label: item.providerKey,
+            icon: item.thirdPartyIcon,
+            providerType: item.providerType,
+          },
+        ]
+      : [];
 
-  if (item.providerType) {
-    tags.push({
-      isThirdParty: true,
-      icon: item.thirdPartyIcon,
-      label: item.providerKey,
-      providerType: item.providerType,
-      // onClick: () =>
-      //   onSelectOption({
-      //     option: "typeProvider",
-      //     value: item.providerType,
-      //   }),
-    });
-  }
+    const itemTags = item?.tags?.length > 0 ? item.tags : [];
 
-  if (item?.tags?.length > 0) {
-    tags.push(...item.tags);
-  }
+    return [...thirdPartyTag, ...itemTags];
+  }, [item.providerType, item.providerKey, item.thirdPartyIcon, item.tags]);
+
 
   return (
     <div style={styleTagsCell}>

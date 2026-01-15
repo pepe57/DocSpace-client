@@ -83,7 +83,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
   const modalRef = useRef<HTMLDivElement>(null);
   const [tags, setTags] = useState<TTag[]>(() => {
     return propsTags.map((tag) => ({
-      name: tag,
+      name: typeof tag === "string" ? tag : tag.label,
       checked: true,
     }));
   });

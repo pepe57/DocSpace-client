@@ -259,6 +259,14 @@ const FilesTableRow = memo((props) => {
     [onChangeIndex],
   );
 
+  const onMouseEnter = useEventCallback(() => {
+    setIsHovered(true);
+  });
+
+  const onMouseLeave = useEventCallback(() => {
+    setIsHovered(false);
+  });
+
   return (
     <StyledDragAndDrop
       id={id}

@@ -24,21 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import isNil from "lodash/isNil";
-import { isMobile as isMobileDevice } from "react-device-detect";
+// import { isMobile as isMobileDevice } from "react-device-detect";
 
 import { classNames } from "../../utils/classNames";
-import { useIsTable } from "../../hooks/useIsTable";
-import { useIsMobile } from "../../hooks/useIsMobile";
+// import { useIsTable } from "../../hooks/useIsTable";
+// import { useIsMobile } from "../../hooks/useIsMobile";
 
-import { Tag, TagProps } from "../tag";
+import { Tag, type TagType } from "../tag";
 import { TagSelector } from "../tag-selector";
 
 import styles from "./Tags.module.scss";
-import { createMaxWidthTag, isTagType } from "./Tags.utils";
-import type { TagType, TagsProps } from "./Tags.types";
-import { createTag, paddingSize, thirdPartyTagWidth } from "./tags.constants";
+import { calculateRenderedTags } from "./Tags.utils";
+import type { TagsProps } from "./Tags.types";
 
 const Tags: FC<TagsProps> = ({
   id,
@@ -47,135 +46,38 @@ const Tags: FC<TagsProps> = ({
   className,
   columnCount,
   onSelectTag,
-  removeTagIcon,
   onMouseEnter,
   onMouseLeave,
   showCreateTag,
-  isDefaultMode = true,
-  directionY,
-  fixedDirection,
-  manualY,
-  manualX,
 }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
   const [renderedTags, setRenderedTags] = React.useState<TagType[]>([]);
-  const [isOpenDropdown, setIsOpenDropdown] = React.useState(false);
+  const [isSelectorOpen, setIsSelectorOpen] = React.useState(false);
 
   const tagsRef = React.useRef<HTMLDivElement>(null);
 
-  const isMobileView = useIsMobile();
-  const isTableView = useIsTable();
+  const canShowCreate = isSelectorOpen || showCreateTag;
 
-  const canShowCreate =
-    isOpenDropdown ||
-    showCreateTag ||
-    isMobileDevice ||
-    isMobileView ||
-    isTableView;
+  const onCloseSelector = useCallback(() => {
+    setIsSelectorOpen(false);
+  }, []);
 
-  const advancedPopup: TagProps["advancedPopup"] = (
-    isOpen,
-    reference,
-    onClose,
-  ) => {
-    if (!isOpen || isNil(id)) return;
+  const onOpenSelector = useCallback(() => {
+    setIsSelectorOpen(true);
+  }, []);
+  React.useLayoutEffect(() => {
+    if (isNil(columnCount) || !tags || !tagsRef.current) return;
 
-    const tempTags = tags.map((tag) =>
-      typeof tag === "string" ? tag : tag.label,
+    const newTags = calculateRenderedTags(
+      tags,
+      columnCount,
+      tagsRef.current.offsetWidth,
+      canShowCreate,
     );
 
-    return (
-      <TagSelector
-        roomId={id}
-        tags={tempTags}
-        onClose={onClose}
-        reference={reference}
-        onSelectTag={onSelectTag}
-      />
-    );
-  };
-
-  const updateRenderedTags = React.useCallback(() => {
-    if (!columnCount || !tags || !tagsRef.current) return;
-
-    const newTags: TagType[] = [];
-    const containerWidth = tagsRef.current?.offsetWidth ?? 0;
-    const createTagCount = canShowCreate ? 1 : 0;
-
-    const isSpecialCase =
-      columnCount >= tags.length ||
-      (tags.length === 2 &&
-        isTagType(tags[0]) &&
-        tags[0]?.isThirdParty &&
-        isTagType(tags[1]) &&
-        tags[1]?.isDefault);
-
-    if (isSpecialCase) {
-      const thirdPartyTagCount = tags.filter(
-        (tag) => isTagType(tag) && tag?.isThirdParty,
-      ).length;
-
-      const simpleTagCount = tags.length - thirdPartyTagCount;
-
-      const totalPaddingWidth = (simpleTagCount + createTagCount) * paddingSize;
-
-      const totalWidthOfThirdPartyTags =
-        (thirdPartyTagCount + createTagCount) * thirdPartyTagWidth +
-        totalPaddingWidth;
-
-      const currentTagMaxWidth =
-        (containerWidth - totalWidthOfThirdPartyTags) / simpleTagCount;
-      const maxWidthPercent = Math.floor(
-        (currentTagMaxWidth / containerWidth) * 100,
-      );
-
-      tags.forEach((tag) => {
-        if (isTagType(tag) && tag?.isThirdParty) {
-          newTags.push(createMaxWidthTag(tag, "44px"));
-        } else {
-          newTags.push(createMaxWidthTag(tag, `${maxWidthPercent}%`));
-        }
-      });
-
-      if (canShowCreate) {
-        newTags.push(createTag);
-      }
-    } else {
-      // Handle case where we need a dropdown
-      const tagWithDropdown = {
-        label: `+${tags.length - columnCount}`,
-        key: "selector",
-        advancedOptions: tags.slice(
-          columnCount,
-          tags.length,
-        ) as React.ReactNode[],
-        maxWidth: "44px",
-      };
-
-      const currentTagMaxWidth =
-        (containerWidth - columnCount * paddingSize - thirdPartyTagWidth) /
-        columnCount;
-      const maxWidthPercent = Math.floor(
-        (currentTagMaxWidth / containerWidth) * 100,
-      );
-
-      for (let i = 0; i < columnCount; i += 1) {
-        const tag = tags[i];
-        if (isTagType(tag) && tag?.isThirdParty) {
-          newTags.push(createMaxWidthTag(tag, "44px"));
-        } else {
-          newTags.push(createMaxWidthTag(tag, `${maxWidthPercent}%`));
-        }
-      }
-
-      newTags.push(tagWithDropdown);
-    }
 
     setRenderedTags(newTags);
   }, [tags, columnCount, canShowCreate]);
-
-  React.useLayoutEffect(() => {
-    updateRenderedTags();
-  }, [updateRenderedTags]);
 
   return (
     <div
@@ -187,34 +89,36 @@ const Tags: FC<TagsProps> = ({
       className={classNames(styles.tags, className)}
     >
       {renderedTags.map((tag, idx) => {
+        const props = tag.isSelectorTrigger
+          ? { onClick: onOpenSelector, ref }
+          : { onClick: onSelectTag };
+
         return (
           <Tag
             key={tag.label}
-            {...tags}
             tag={tag.label}
-            providerType={tag.providerType}
             icon={tag.icon}
-            advancedOptions={tag.advancedOptions}
             tagMaxWidth={tag.maxWidth}
-            isNewTag={false}
-            label={tag.label}
-            onClick={onSelectTag}
+            providerType={tag.providerType}
             isLast={idx === renderedTags.length - 1}
-            removeTagIcon={removeTagIcon}
+            label={tag.label}
             roomType={tag.roomType}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            isDefaultMode={isDefaultMode}
-            directionY={directionY}
-            fixedDirection={fixedDirection}
-            manualY={manualY}
-            manualX={manualX}
-            advancedPopup={tag.advancedOptions ? advancedPopup : undefined}
-            openDropdown={isOpenDropdown}
-            setOpenDropdown={setIsOpenDropdown}
+            {...props}
           />
         );
       })}
+
+      {isSelectorOpen && !isNil(id) ? (
+        <TagSelector
+          roomId={id}
+          tags={tags}
+          reference={ref}
+          onClose={onCloseSelector}
+          onSelectTag={onSelectTag}
+        />
+      ) : null}
     </div>
   );
 };

@@ -24,7 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TagType } from "./Tags.types";
+import type { TagType } from "../tag/Tag.types";
+
+import { createTag, paddingSize, thirdPartyTagWidth } from "./tags.constants";
 
 export const isTagType = (tag: TagType | string): tag is TagType => {
   return typeof tag === "object";
@@ -37,4 +39,87 @@ export const createMaxWidthTag = (
     return { ...tag, maxWidth };
   }
   return { label: tag, maxWidth };
+};
+
+export const calculateRenderedTags = (
+  tags: (TagType | string)[],
+  columnCount: number,
+  offsetWidth: number = 0,
+  canShowCreate: boolean = false,
+) => {
+  const newTags: TagType[] = [];
+  const containerWidth = offsetWidth;
+  const createTagCount = canShowCreate ? 1 : 0;
+
+  const isSpecialCase =
+    columnCount >= tags.length ||
+    (tags.length === 2 &&
+      isTagType(tags[0]) &&
+      tags[0]?.isThirdParty &&
+      isTagType(tags[1]) &&
+      tags[1]?.isDefault);
+
+  if (isSpecialCase) {
+    const thirdPartyTagCount = tags.filter(
+      (tag) => isTagType(tag) && tag?.isThirdParty,
+    ).length;
+
+    const simpleTagCount = tags.length - thirdPartyTagCount;
+
+    const totalPaddingWidth = (simpleTagCount + createTagCount) * paddingSize;
+
+    const totalWidthOfThirdPartyTags =
+      (thirdPartyTagCount + createTagCount) * thirdPartyTagWidth +
+      totalPaddingWidth;
+
+    const currentTagMaxWidth =
+      (containerWidth - totalWidthOfThirdPartyTags) / simpleTagCount;
+    const maxWidthPercent = Math.floor(
+      (currentTagMaxWidth / containerWidth) * 100,
+    );
+
+    tags.forEach((tag) => {
+      if (isTagType(tag) && tag?.isThirdParty) {
+        newTags.push(createMaxWidthTag(tag, "44px"));
+      } else {
+        newTags.push(createMaxWidthTag(tag, `${maxWidthPercent}%`));
+      }
+    });
+
+    if (canShowCreate) {
+      newTags.push(createTag);
+    }
+  } else {
+    // Handle case where we need a dropdown
+    const tagWithDropdown = {
+      label: `+${tags.length - columnCount}`,
+      key: "selector",
+      // advancedOptions: tags.slice(
+      //   columnCount,
+      //   tags.length,
+      // ) as React.ReactNode[],
+      maxWidth: "44px",
+      isSelectorTrigger: true,
+    };
+
+    const currentTagMaxWidth =
+      (containerWidth - columnCount * paddingSize - thirdPartyTagWidth) /
+      columnCount;
+    const maxWidthPercent = Math.floor(
+      (currentTagMaxWidth / containerWidth) * 100,
+    );
+
+    for (let i = 0; i < columnCount; i += 1) {
+      const tag = tags[i];
+      if (isTagType(tag) && tag?.isThirdParty) {
+        newTags.push(createMaxWidthTag(tag, "44px"));
+      } else {
+        newTags.push(createMaxWidthTag(tag, `${maxWidthPercent}%`));
+      }
+    }
+
+    newTags.push(tagWithDropdown);
+  }
+
+  return newTags;
 };

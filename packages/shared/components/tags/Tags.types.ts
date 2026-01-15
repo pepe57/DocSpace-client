@@ -24,31 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TDirectionY } from "../../types";
-
-export type TagType = {
-  /** Accepts a unique key for the tag. */
-  key?: string;
-  /** Indicates if the tag is a default tag. */
-  isDefault?: boolean;
-  /** Indicates if the tag is associated with a third-party provider. */
-  isThirdParty?: boolean;
-  /** Accepts the tag label */
-  label: string;
-  /** Accepts the max width of the tag */
-  maxWidth?: string;
-  /** Accepts the dropdown options */
-  advancedOptions?: React.ReactNode[];
-  /** Accepts the tag styles as disabled and disables clicking */
-  isDisabled?: boolean;
-  /** Indicates the type of room associated with the tag. */
-  roomType?: number;
-  /** Accepts the icon associated with the tag. */
-  icon?: string;
-  /** Indicates the type of provider associated with the tag. */
-  providerType?: number;
-  onClick?: () => void;
-};
+import type { TagType } from "../tag/Tag.types";
 
 export type TagsProps = {
   /** Accepts id */
@@ -63,18 +39,7 @@ export type TagsProps = {
   style?: React.CSSProperties;
   /** Accepts the function that is called when the tag is selected */
   onSelectTag: (tag?: object) => void;
-  removeTagIcon?: boolean;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   showCreateTag?: boolean;
-  /** Controls whether the dropdown uses portal mode or not */
-  isDefaultMode?: boolean;
-  /** Sets the opening direction relative to the parent */
-  directionY?: TDirectionY;
-  /** Disables check position. Used to set the direction explicitly */
-  fixedDirection?: boolean;
-  /** Required for specifying the exact distance from the parent component */
-  manualY?: string;
-  /** Required for specifying the exact distance from the parent component */
-  manualX?: string;
 };

@@ -63,6 +63,9 @@ const TableRow = React.memo((props: TableRowProps) => {
     contextMenuCellStyle,
     dataTestId = "table-row",
     contextMenuTestId,
+
+    onMouseEnter,
+    onMouseLeave,
   } = props;
 
   const cm = useRef<ContextMenuRefType>(null);
@@ -111,6 +114,8 @@ const TableRow = React.memo((props: TableRowProps) => {
       style={style}
       onClick={onClick}
       onDoubleClick={onDoubleClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       data-testid={dataTestId ?? "table-row"}
     >
       {children}

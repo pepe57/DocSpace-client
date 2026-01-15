@@ -34,6 +34,7 @@ export const createTag = {
   label: "",
   key: "create-tag",
   advancedOptions: [],
-  maxWidth: "36px",
+  maxWidth: "32px",
   icon: PlusIcon,
+  isSelectorTrigger: true,
 };
