@@ -26,11 +26,11 @@
 
 import React, { FC, useCallback } from "react";
 import isNil from "lodash/isNil";
-// import { isMobile as isMobileDevice } from "react-device-detect";
+import { isMobile as isMobileDevice } from "react-device-detect";
 
 import { classNames } from "../../utils/classNames";
-// import { useIsTable } from "../../hooks/useIsTable";
-// import { useIsMobile } from "../../hooks/useIsMobile";
+import { useIsTable } from "../../hooks/useIsTable";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 import { Tag, type TagType } from "../tag";
 import { TagSelector } from "../tag-selector";
@@ -56,7 +56,12 @@ const Tags: FC<TagsProps> = ({
 
   const tagsRef = React.useRef<HTMLDivElement>(null);
 
-  const canShowCreate = isSelectorOpen || showCreateTag;
+  const isTableView = useIsTable();
+  const isMobileView = useIsMobile();
+
+  const isMobile = isTableView || isMobileView || isMobileDevice;
+
+  const canShowCreate = isSelectorOpen || showCreateTag || isMobile;
 
   const onCloseSelector = useCallback(() => {
     setIsSelectorOpen(false);

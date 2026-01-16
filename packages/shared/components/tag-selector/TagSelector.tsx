@@ -145,9 +145,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
       { animationFrame: true },
     );
 
-    return () => {
-      cleanup();
-    };
+    return cleanup;
   }, [reference, ref, isMobile]);
 
   const onChangeTitleTag = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -55,6 +55,7 @@ const TagPure: FC<TagProps> = ({
   roomType,
   providerType,
   dataTestId,
+  iconClassName,
   onMouseEnter,
   onMouseLeave,
 }) => {
@@ -91,22 +92,22 @@ const TagPure: FC<TagProps> = ({
       onMouseLeave={onMouseLeave}
     >
       {icon ? (
-        <ReactSVG className={styles.thirdPartyTag} src={icon} />
-      ) : (
-        <>
-          <Text title={label} fontSize="13px" noSelect truncate>
-            {label}
-          </Text>
-          {isNewTag && !!onDelete ? (
-            <IconButton
-              className={styles.tagIcon}
-              iconName={CrossIconReactSvgUrl}
-              size={12}
-              onClick={onDeleteAction}
-            />
-          ) : null}
-        </>
-      )}
+        <ReactSVG
+          className={classNames(styles.thirdPartyTag, iconClassName)}
+          src={icon}
+        />
+      ) : null}
+      <Text title={label} fontSize="13px" noSelect truncate>
+        {label}
+      </Text>
+      {isNewTag && !!onDelete ? (
+        <IconButton
+          className={styles.tagIcon}
+          iconName={CrossIconReactSvgUrl}
+          size={12}
+          onClick={onDeleteAction}
+        />
+      ) : null}
     </TooltipContainer>
   );
 };
