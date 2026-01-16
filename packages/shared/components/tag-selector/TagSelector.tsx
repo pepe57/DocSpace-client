@@ -24,18 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import unionBy from "lodash/unionBy";
 import { createPortal } from "react-dom";
-import classNames from "classnames";
-import React, {
-  useDeferredValue,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-  useEffect,
-} from "react";
-import { useTranslation } from "react-i18next";
+import React, { useLayoutEffect, useRef, Suspense, useMemo } from "react";
 import {
   computePosition,
   autoUpdate,
@@ -44,33 +34,16 @@ import {
   shift,
 } from "@floating-ui/dom";
 
-import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg?url";
-import CheckIconURL from "PUBLIC_DIR/images/check.edit.react.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
-import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
-import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
-
 import { useClickOutside } from "../../utils/useClickOutside";
 import { useIsMobile } from "../../hooks/useIsMobile";
 
-import { getTags, editRoom } from "../../api/rooms";
-
-import { Tag } from "../tag";
-import { Text } from "../text";
-import { Checkbox } from "../checkbox";
-import { Scrollbar } from "../scrollbar";
-import { IconButton } from "../icon-button";
-import { InputSize, InputType, TextInput } from "../text-input";
 import { ModalDialog, ModalDialogType } from "../modal-dialog";
 
+import { TagSelectorProvider, createTagsResource } from "./TagSelectorProvider";
+import { TagSelectorFilter } from "./TagSelectorFilter";
+import { TagSelectorContent } from "./TagSelectorContent";
 import styles from "./TagSelector.module.scss";
-import {
-  ROW_HEIGHT,
-  ICON_SIZE,
-  MAX_BODY_HEIGHT,
-  MARGIN_BOTTOM,
-} from "./TagSelector.constants";
-import type { TagSelectorProps, TTag } from "./TagSelector.types";
+import type { TagSelectorProps } from "./TagSelector.types";
 
 export const TagSelector: React.FC<TagSelectorProps> = ({
   roomId,
@@ -81,40 +54,11 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-  const [tags, setTags] = useState<TTag[]>(() => {
-    return propsTags.map((tag) => ({
-      name: typeof tag === "string" ? tag : tag.label,
-      checked: true,
-    }));
-  });
-  const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const [editValue, setEditValue] = useState("");
-
-  const [newTagValue, setNewTagValue] = useState("");
-
-  const deferredTagValue = useDeferredValue(newTagValue);
 
   const isMobile = useIsMobile();
   useClickOutside(isMobile ? modalRef : ref, onClose);
 
-  const { t } = useTranslation("Common");
-
-  useEffect(() => {
-    getTags()
-      ?.then((res) => {
-        setTags((prev) => {
-          const newTags = unionBy(
-            prev,
-            res.map((tag) => ({ name: tag, checked: false })),
-            "name",
-          );
-          return newTags;
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching tags:", error);
-      });
-  }, []);
+  const tagsResource = useMemo(() => createTagsResource(), []);
 
   useLayoutEffect(() => {
     if (!reference.current || !ref.current || isMobile) return;
@@ -148,92 +92,6 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
     return cleanup;
   }, [reference, ref, isMobile]);
 
-  const onChangeTitleTag = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewTagValue(event.target.value);
-  };
-
-  const toggleChecked = (index: number) => {
-    const newTags = [...tags];
-    newTags[index].checked = !newTags[index].checked;
-    setTags(newTags);
-  };
-
-  const handleEdit = (index: number) => {
-    setEditingIndex(index);
-    setEditValue(tags[index].name);
-  };
-
-  const confirmEdit = () => {
-    if (editingIndex === null) return;
-    const newTags = [...tags];
-    newTags[editingIndex].name = editValue.trim();
-    setTags(newTags);
-    setEditingIndex(null);
-    setEditValue("");
-  };
-
-  const cancelEdit = () => {
-    setEditingIndex(null);
-    setEditValue("");
-  };
-
-  const deleteTag = (index: number) => {
-    const newTags = [...tags];
-    newTags.splice(index, 1);
-    setTags(newTags);
-  };
-
-  const filteredTags = useMemo(() => {
-    const search = deferredTagValue.toLowerCase().trim();
-    return tags.filter((tag) => tag.name.toLowerCase().includes(search));
-  }, [tags, deferredTagValue]);
-
-  const showCreateTag = useMemo(() => {
-    const trimmedTagValue = deferredTagValue.trim();
-
-    return (
-      trimmedTagValue.length > 0 &&
-      filteredTags.every((tag) => tag.name !== trimmedTagValue)
-    );
-  }, [deferredTagValue, filteredTags]);
-
-  const handleCreateTag = async () => {
-    const trimmedTagValue = newTagValue.trim();
-    if (trimmedTagValue.length > 0) {
-      const newTags = [...propsTags, newTagValue];
-
-      await editRoom(roomId, { tags: newTags });
-
-      setNewTagValue("");
-    }
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    switch (event.key) {
-      case "Enter":
-        handleCreateTag();
-        break;
-      case "Escape":
-        setNewTagValue("");
-        break;
-      default:
-        break;
-    }
-  };
-
-  const editTagHandleKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    switch (event.key) {
-      case "Enter":
-        confirmEdit();
-        break;
-      case "Escape":
-        cancelEdit();
-        break;
-      default:
-        break;
-    }
-  };
-
   const element = (
     <div
       onClick={(event) => event.stopPropagation()}
@@ -241,118 +99,16 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
       className={styles.tagSelector}
       ref={ref}
     >
-      <TextInput
-        scale
-        autoFocus
-        withBorder={false}
-        value={newTagValue}
-        type={InputType.text}
-        className={styles.input}
-        onChange={onChangeTitleTag}
-        placeholder={t("Common:AddTag")}
-        onKeyDown={handleKeyDown}
-      />
-      <hr className={styles.divider} />
-      {showCreateTag ? (
-        <Text
-          as="div"
-          className={classNames(styles.text, styles.wrapperCreateTag)}
-          noSelect
-          fontSize="12px"
-          fontWeight={600}
-          lineHeight="16px"
+      <Suspense fallback={<div>Loading tags...</div>}>
+        <TagSelectorProvider
+          initialTags={propsTags}
+          roomId={roomId}
+          tagsResource={tagsResource}
         >
-          <span>{t("Common:CreateTag")}</span>
-          <Tag
-            withIcon
-            icon={PlusIcon}
-            className={styles.createTag}
-            iconClassName={styles.createTagIcon}
-            tag={deferredTagValue}
-            label={deferredTagValue}
-            onClick={handleCreateTag}
-          />
-        </Text>
-      ) : null}
-      <Text className={styles.text} fontSize="12px" lineHeight="16px" noSelect>
-        {showCreateTag
-          ? t("Common:OrSelectFromAvailableMatches")
-          : t("Common:SelectAnOptionOrCreateOne")}
-      </Text>
-      <div
-        className={styles.wrapperList}
-        style={{
-          height: isMobile
-            ? "100%"
-            : Math.min(
-                MAX_BODY_HEIGHT,
-                filteredTags.length * ROW_HEIGHT + MARGIN_BOTTOM,
-              ),
-        }}
-      >
-        <Scrollbar fixedSize className={styles.scrollbar}>
-          {filteredTags.map((tag, index) => {
-            return (
-              <div key={tag.name} className={styles.row}>
-                <Checkbox
-                  className={styles.checkbox}
-                  isChecked={tag.checked}
-                  onChange={() => toggleChecked(index)}
-                />
-                {editingIndex === index ? (
-                  <>
-                    <TextInput
-                      scale
-                      autoFocus
-                      value={editValue}
-                      size={InputSize.base}
-                      type={InputType.text}
-                      onKeyDown={editTagHandleKey}
-                      className={styles.editInput}
-                      onChange={(e) => setEditValue(e.target.value)}
-                    />
-                    <div className={styles.checkCross}>
-                      <IconButton
-                        size={ICON_SIZE}
-                        className={styles.checkIcon}
-                        iconName={CheckIconURL}
-                        onClick={confirmEdit}
-                      />
-                      <IconButton
-                        size={ICON_SIZE}
-                        className={styles.crossIcon}
-                        iconName={CrossIconReactSvgUrl}
-                        onClick={cancelEdit}
-                      />
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <Tag
-                      className={styles.tag}
-                      label={tag.name}
-                      tag={tag.name}
-                      onClick={onSelectTag}
-                    />
-                    <IconButton
-                      size={ICON_SIZE}
-                      className={styles.editIcon}
-                      iconName={AccessEditReactSvgUrl}
-                      onClick={() => handleEdit(index)}
-                    />
-                    <IconButton
-                      size={ICON_SIZE}
-                      iconName={TrashReactSvgUrl}
-                      className={styles.deleteIcon}
-                      onClick={() => deleteTag(index)}
-                    />
-                  </>
-                )}
-              </div>
-            );
-          })}
-        </Scrollbar>
-      </div>
+          <TagSelectorFilter />
+          <TagSelectorContent onSelectTag={onSelectTag} />
+        </TagSelectorProvider>
+      </Suspense>
     </div>
   );
 

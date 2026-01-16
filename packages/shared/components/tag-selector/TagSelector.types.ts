@@ -38,3 +38,32 @@ export type TTag = {
   name: string;
   checked: boolean;
 };
+
+export interface TagSelectorContextValue {
+  tags: TTag[];
+  optimisticTags: TTag[];
+  searchValue: string;
+  deferredSearchValue: string;
+  editingIndex: number | null;
+  editValue: string;
+  filteredTags: TTag[];
+  showCreateTag: boolean;
+  roomId: string | number;
+  setSearchValue: (value: string) => void;
+  setEditingIndex: (index: number | null) => void;
+  setEditValue: (value: string) => void;
+  toggleChecked: (index: number) => void;
+  handleEdit: (index: number) => void;
+  confirmEdit: () => void;
+  cancelEdit: () => void;
+  deleteTag: (index: number) => void;
+  handleCreateTag: () => Promise<void>;
+  addOptimisticTag: (tag: TTag) => void;
+}
+
+export interface TagSelectorProviderProps {
+  children: React.ReactNode;
+  initialTags: Array<TagType | string>;
+  roomId: string | number;
+  tagsResource?: Promise<string[]>;
+}
