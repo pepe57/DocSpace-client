@@ -61,6 +61,7 @@ const EditRoomGroupsDialog = ({
   getAllRoomGroups,
   getGroupById,
   updateGroupIcon,
+  deleteRoomGroup,
 }: EditRoomGroupsDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
 
@@ -121,6 +122,15 @@ const EditRoomGroupsDialog = ({
   const onClickEditIcon = (groupId: string) => {
     setEditingGroupId(groupId);
     setIsOpenGroupIcon(true);
+  };
+
+  const onClickDeleteGroup = async (groupId: string) => {
+    try {
+      await deleteRoomGroup(groupId);
+      await getAllRoomGroups();
+    } catch (error) {
+      console.error("Error deleting group:", error);
+    }
   };
 
   const currentEditingGroup = editingGroupId
@@ -272,6 +282,7 @@ const EditRoomGroupsDialog = ({
                 className="delete_icon"
                 iconName={TrashReactSvgUrl}
                 size={16}
+                onClick={() => onClickDeleteGroup(item.id)}
               />
             </div>
           </div>
@@ -332,7 +343,7 @@ const EditRoomGroupsDialog = ({
 };
 
 export default inject(({ dialogsStore }: TStore) => {
-  const { setCreateGroupRooms, getAllRoomGroups, roomGroups, getGroupById, updateGroupIcon } =
+  const { setCreateGroupRooms, getAllRoomGroups, roomGroups, getGroupById, updateGroupIcon, deleteRoomGroup } =
     dialogsStore;
 
   return {
@@ -341,5 +352,6 @@ export default inject(({ dialogsStore }: TStore) => {
     roomGroups,
     getGroupById,
     updateGroupIcon,
+    deleteRoomGroup,
   };
 })(observer(EditRoomGroupsDialog));

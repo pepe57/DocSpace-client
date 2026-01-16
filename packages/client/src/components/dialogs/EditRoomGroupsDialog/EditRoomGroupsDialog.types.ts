@@ -58,6 +58,7 @@ export interface EditRoomGroupsDialogProps {
   getAllRoomGroups: () => Promise<void>;
   getGroupById: (groupId: string) => Promise<IRoomGroup>;
   updateGroupIcon: (groupId: string, icon: string) => Promise<void>;
+  deleteRoomGroup: (groupId: string) => Promise<void>;
 }
 
 export interface IRoomItem {

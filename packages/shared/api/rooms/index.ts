@@ -703,3 +703,12 @@ export function updateGroupIcon(groupId, icon) {
 
   return request(options);
 }
+
+export function deleteRoomGroup(groupId) {
+  const options = {
+    method: "delete",
+    url: `/files/group/${groupId}`,
+  };
+
+  return request(options);
+}

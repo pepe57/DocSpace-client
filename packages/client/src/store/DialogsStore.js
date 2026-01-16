@@ -45,6 +45,7 @@ import {
   getRoomGroups,
   getGroupById,
   updateGroupIcon,
+  deleteRoomGroup,
 } from "@docspace/shared/api/rooms";
 
 /**
@@ -1141,6 +1142,10 @@ class DialogsStore {
 
   updateGroupIcon = async (groupId, icon) => {
     await updateGroupIcon(groupId, icon);
+  };
+
+  deleteRoomGroup = async (groupId) => {
+    await deleteRoomGroup(groupId);
   };
 }
 
