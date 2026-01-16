@@ -29,7 +29,8 @@ import styled, { css } from "styled-components";
 import { mobile } from "@docspace/shared/utils";
 import { TColorScheme } from "@docspace/shared/themes";
 import hexRgb from "hex-rgb";
-import { ILogo, SelectIconProps } from "../RoomLogoCoverDialog.types";
+import { SelectIconProps } from "../RoomLogoCoverDialog.types";
+import { ILogo } from "../EditRoomGroupsDialog.types";
 
 const StyledIconContainer = styled.div<{
   $currentColorScheme?: TColorScheme;
