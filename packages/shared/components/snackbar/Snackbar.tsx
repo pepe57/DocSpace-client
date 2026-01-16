@@ -121,6 +121,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
     const {
       text,
       headerText,
+      additionalHeaderText,
       btnText,
       showIcon,
       fontSize,
@@ -203,15 +204,27 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
                 </div>
               ) : null}
 
-              <Heading
-                size={HeadingSize.xsmall}
-                isInline
-                className={styles.textHeader}
-                style={headerStyles}
-                data-testid="snackbar-header"
-              >
-                {headerText}
-              </Heading>
+              <div className={styles.headerContainer}>
+                <Heading
+                  size={HeadingSize.xsmall}
+                  isInline
+                  className={styles.textHeader}
+                  style={headerStyles}
+                  data-testid="snackbar-header"
+                >
+                  {headerText}
+                </Heading>
+                {additionalHeaderText ? (
+                  <Text
+                    as="span"
+                    isInline
+                    fontSize="12px"
+                    data-testid="snackbar-additional-info"
+                  >
+                    {additionalHeaderText}
+                  </Text>
+                ) : null}
+              </div>
             </div>
             <div className={styles.textBody}>
               <Text

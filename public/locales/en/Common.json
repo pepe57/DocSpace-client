@@ -670,6 +670,7 @@
   "OKButton": "OK",
   "OnlineEditors": "Online editors",
   "OpenSavedDocument": "Open saved document in new tab",
+  "QuotaLimitWarning": "User quota limit is about to be reached.",
   "Or": "or",
   "orContinueWith": "or continue with",
   "OrganizationName": "ONLYOFFICE",
@@ -1089,5 +1090,6 @@
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "YourFurtherEditsNotSaved": "Your further edits may not be saved."
 }
