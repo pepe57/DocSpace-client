@@ -48,7 +48,6 @@ import DeleteApiKeyDialog from "./sub-components/DeleteApiKeyDialog";
 import ApiKeysView from "./sub-components";
 import { ApiKeysProps } from "./types";
 import styles from "./ApiKeys.module.scss";
-import { StyledApiKeys, StyledMobileButton } from "./StyledApiKeys";
 
 const ApiKeys = (props: ApiKeysProps) => {
   const {
