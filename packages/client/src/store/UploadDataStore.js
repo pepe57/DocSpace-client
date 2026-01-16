@@ -37,8 +37,8 @@ import {
   uploadFile,
   convertFile,
   startUploadSession,
-  uploadChunk,
-  uploadChunkAsync,
+  uploadChunkSequential,
+  uploadChunkParallel,
   finalizeUploadSession,
   getFileConversationProgress,
   copyToFolder,
@@ -1534,7 +1534,7 @@ class UploadDataStore {
           isFinished: false,
           isFinalize: false,
           onUpload: () =>
-            uploadChunkAsync(
+            uploadChunkParallel(
               folderId,
               sessionId,
               index + 1,
@@ -1579,7 +1579,7 @@ class UploadDataStore {
           return Promise.resolve();
         }
 
-        const res = await uploadChunk(
+        const res = await uploadChunkSequential(
           folderId,
           sessionId,
           requestsDataArray[index],

@@ -712,41 +712,37 @@ export async function startUploadSession(
     CreateNewIfExist,
   };
 
-  const res = (await request({
+  return request({
     method: "post",
     url: `/files/${folderId}/session`,
     data,
     skipForbidden: true,
-  })) as TUploadOperation;
-
-  return res;
+  }) as TUploadOperation;
 }
 
-export async function uploadChunkAsync(
+export async function uploadChunkParallel(
   folderId: string | number,
   sessionId: string,
   chunkNumber: number,
   data: FormData,
 ) {
-  const res = await request({
+  return request({
     method: "post",
     url: `/files/${folderId}/session/${sessionId}/upload?chunkNumber=${chunkNumber}`,
     data,
   });
-  return res;
 }
 
-export async function uploadChunk(
+export async function uploadChunkSequential(
   folderId: string | number,
   sessionId: string,
   data: FormData,
 ) {
-  const res = await request({
+  return request({
     method: "post",
     url: `/files/${folderId}/session/${sessionId}`,
     data,
   });
-  return res;
 }
 
 export async function finalizeUploadSession(
