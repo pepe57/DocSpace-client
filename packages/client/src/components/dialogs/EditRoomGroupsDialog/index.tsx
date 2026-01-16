@@ -60,6 +60,7 @@ const EditRoomGroupsDialog = ({
   setCreateGroupRooms,
   getAllRoomGroups,
   getGroupById,
+  updateGroupIcon,
 }: EditRoomGroupsDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
 
@@ -72,6 +73,7 @@ const EditRoomGroupsDialog = ({
     name: string;
     rooms: TRoom[];
   } | null>(null);
+  const [editingGroupId, setEditingGroupId] = useState<string | null>(null);
 
   const onClickCreateNewGroup = () => {
     setIsOpenRoomList(true);
@@ -116,6 +118,15 @@ const EditRoomGroupsDialog = ({
     setSelectedGroup(null);
   };
 
+  const onClickEditIcon = (groupId: string) => {
+    setEditingGroupId(groupId);
+    setIsOpenGroupIcon(true);
+  };
+
+  const currentEditingGroup = editingGroupId
+    ? roomGroups.find((group) => group.id === editingGroupId)
+    : null;
+
   if (isOpenGroupIcon) {
     return (
       <GroupIconDialog
@@ -127,6 +138,10 @@ const EditRoomGroupsDialog = ({
         setCreateGroupRooms={setCreateGroupRooms}
         getAllRoomGroups={getAllRoomGroups}
         arrIdsRooms={arrIdsRooms}
+        editingGroupId={editingGroupId}
+        setEditingGroupId={setEditingGroupId}
+        updateGroupIcon={updateGroupIcon}
+        currentGroupIcon={currentEditingGroup?.icon || null}
       />
     );
   }
@@ -215,8 +230,11 @@ const EditRoomGroupsDialog = ({
 
   const nodeAddedGroups = () => {
     return roomGroups.map((item) => {
-      const totalRooms = item.rooms?.length || 0;
-      const iconData = typeof item.icon === 'object' && item.icon !== null ? item.icon.data : '';
+      const totalRooms = item.totalRooms;
+      const iconData =
+        typeof item.icon === "object" && item.icon !== null
+          ? item.icon.data
+          : "";
 
       return (
         <div className={styles.addedGroups} key={item.id}>
@@ -248,9 +266,10 @@ const EditRoomGroupsDialog = ({
                 className="edit_icon"
                 iconName={PencilReactSvgUrl}
                 size={16}
+                onClick={() => onClickEditIcon(item.id)}
               />
               <IconButton
-                className="edit_icon"
+                className="delete_icon"
                 iconName={TrashReactSvgUrl}
                 size={16}
               />
@@ -313,7 +332,7 @@ const EditRoomGroupsDialog = ({
 };
 
 export default inject(({ dialogsStore }: TStore) => {
-  const { setCreateGroupRooms, getAllRoomGroups, roomGroups, getGroupById } =
+  const { setCreateGroupRooms, getAllRoomGroups, roomGroups, getGroupById, updateGroupIcon } =
     dialogsStore;
 
   return {
@@ -321,5 +340,6 @@ export default inject(({ dialogsStore }: TStore) => {
     getAllRoomGroups,
     roomGroups,
     getGroupById,
+    updateGroupIcon,
   };
 })(observer(EditRoomGroupsDialog));

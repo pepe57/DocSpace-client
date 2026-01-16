@@ -128,6 +128,10 @@ const GroupIconDialog = ({
   onCloseEditRoomGroupsDialog,
   setCreateGroupRooms,
   getAllRoomGroups,
+  editingGroupId,
+  setEditingGroupId,
+  updateGroupIcon,
+  currentGroupIcon,
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common", "RoomLogoCover", "GroupingRooms"]);
 
@@ -142,6 +146,12 @@ const GroupIconDialog = ({
     getCovers();
   }, [getCovers]);
 
+  React.useEffect(() => {
+    if (editingGroupId && currentGroupIcon) {
+      setRoomIcon(currentGroupIcon);
+    }
+  }, [editingGroupId, currentGroupIcon]);
+
   const coverId =
     typeof roomIcon === "object" && roomIcon !== null ? roomIcon.id : "";
 
@@ -152,21 +162,34 @@ const GroupIconDialog = ({
 
   const onClose = () => {
     setIsOpenGroupIcon(false);
+    if (setEditingGroupId) {
+      setEditingGroupId(null);
+    }
   };
 
-  const handleSubmit = () => {
-    if (!groupName || !arrIdsRooms?.length || !roomIcon) return;
+  const handleSubmit = async () => {
+    if (editingGroupId) {
+      if (!roomIcon) return;
 
-    const newGroup = {
-      name: groupName,
-      icon: typeof roomIcon === "object" ? roomIcon.id : roomIcon,
-      rooms: arrIdsRooms,
-    };
+      const iconId = typeof roomIcon === "object" ? roomIcon.id : roomIcon;
+      await updateGroupIcon(editingGroupId, iconId);
+      await getAllRoomGroups();
 
-    setCreateGroupRooms(newGroup);
-    getAllRoomGroups();
+      onClose();
+    } else {
+      if (!groupName || !arrIdsRooms?.length || !roomIcon) return;
 
-    onCloseEditRoomGroupsDialog();
+      const newGroup = {
+        name: groupName,
+        icon: typeof roomIcon === "object" ? roomIcon.id : roomIcon,
+        rooms: arrIdsRooms,
+      };
+
+      await setCreateGroupRooms(newGroup);
+      await getAllRoomGroups();
+
+      onCloseEditRoomGroupsDialog();
+    }
   };
 
   return (

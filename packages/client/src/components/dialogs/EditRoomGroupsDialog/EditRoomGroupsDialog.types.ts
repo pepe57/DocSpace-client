@@ -37,6 +37,7 @@ export interface IRoomGroup {
   name: string;
   icon: ILogo | string | null;
   rooms: TRoom[];
+  totalRooms: number;
 }
 
 export interface ICreateRoomGroup {
@@ -56,6 +57,7 @@ export interface EditRoomGroupsDialogProps {
   setCreateGroupRooms: (newGroup: ICreateRoomGroup) => Promise<void>;
   getAllRoomGroups: () => Promise<void>;
   getGroupById: (groupId: string) => Promise<IRoomGroup>;
+  updateGroupIcon: (groupId: string, icon: string) => Promise<void>;
 }
 
 export interface IRoomItem {

@@ -693,3 +693,13 @@ export function getGroupById(groupId) {
 
   return request(options);
 }
+
+export function updateGroupIcon(groupId, icon) {
+  const options = {
+    method: "post",
+    url: `/files/group/${groupId}/icon`,
+    data: { icon },
+  };
+
+  return request(options);
+}

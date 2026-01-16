@@ -44,6 +44,7 @@ import {
   createGroupRooms,
   getRoomGroups,
   getGroupById,
+  updateGroupIcon,
 } from "@docspace/shared/api/rooms";
 
 /**
@@ -1136,6 +1137,10 @@ class DialogsStore {
   getGroupById = async (groupId) => {
     const response = await getGroupById(groupId);
     return response;
+  };
+
+  updateGroupIcon = async (groupId, icon) => {
+    await updateGroupIcon(groupId, icon);
   };
 }
 

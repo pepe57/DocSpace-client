@@ -47,6 +47,10 @@ export interface CoverDialogProps {
   onCloseEditRoomGroupsDialog: () => void;
   setCreateGroupRooms: (newGroup: ICreateRoomGroup) => Promise<void>;
   getAllRoomGroups: () => Promise<void>;
+  editingGroupId: string | null;
+  setEditingGroupId: (id: string | null) => void;
+  updateGroupIcon: (groupId: string, icon: string) => Promise<void>;
+  currentGroupIcon: ILogo | string | null;
 }
 
 export interface SelectIconProps {
