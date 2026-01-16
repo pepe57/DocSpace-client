@@ -40,7 +40,6 @@ import {
   uploadChunk,
   uploadChunkAsync,
   finalizeUploadSession,
-  abortUploadSession,
   getFileConversationProgress,
   copyToFolder,
   moveToFolder,
@@ -1275,7 +1274,6 @@ class UploadDataStore {
       chunksLength, // length of file chunks
       resolve, // resolve cb
       reject, // reject cb
-      isAsyncUpload = false, // async upload checker
       isFinalize = false, // is finalize chunk
       //  allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
       createNewIfExist,
@@ -1391,6 +1389,7 @@ class UploadDataStore {
     if (currentFile.action === "uploaded") {
       this.refreshFiles(currentFile);
     }
+
     return resolve();
   };
 
@@ -1463,7 +1462,6 @@ class UploadDataStore {
           chunksLength: length,
           resolve,
           reject,
-          isAsyncUpload: true,
           isFinalize: false,
           allChunkUploaded: allIsUploaded === 0,
           createNewIfExist,
@@ -1500,7 +1498,6 @@ class UploadDataStore {
               chunksLength: length,
               resolve,
               reject,
-              isAsyncUpload: true,
               isFinalize: true,
               createNewIfExist,
             });
