@@ -704,6 +704,16 @@ export function updateGroupIcon(groupId, icon) {
   return request(options);
 }
 
+export function updateRoomGroup(groupId, data) {
+  const options = {
+    method: "put",
+    url: `/files/group/${groupId}`,
+    data,
+  };
+
+  return request(options);
+}
+
 export function deleteRoomGroup(groupId) {
   const options = {
     method: "delete",

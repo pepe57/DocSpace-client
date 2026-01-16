@@ -42,7 +42,8 @@ import {
 } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-import { CoverDialogProps, ILogo } from "../RoomLogoCoverDialog.types";
+import { CoverDialogProps } from "../RoomLogoCoverDialog.types";
+import type { IUpdateRoomGroup, ILogo } from "../EditRoomGroupsDialog.types";
 import { SelectIcon } from "./SelectIcon";
 import {
   InputSize,
@@ -131,7 +132,9 @@ const GroupIconDialog = ({
   editingGroupId,
   setEditingGroupId,
   updateGroupIcon,
+  updateRoomGroup,
   currentGroupIcon,
+  currentGroupName,
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common", "RoomLogoCover", "GroupingRooms"]);
 
@@ -151,6 +154,12 @@ const GroupIconDialog = ({
       setRoomIcon(currentGroupIcon);
     }
   }, [editingGroupId, currentGroupIcon]);
+
+  React.useEffect(() => {
+    if (editingGroupId && currentGroupName) {
+      setGroupName(currentGroupName);
+    }
+  }, [editingGroupId, currentGroupName]);
 
   const coverId =
     typeof roomIcon === "object" && roomIcon !== null ? roomIcon.id : "";
@@ -172,7 +181,26 @@ const GroupIconDialog = ({
       if (!roomIcon) return;
 
       const iconId = typeof roomIcon === "object" ? roomIcon.id : roomIcon;
-      await updateGroupIcon(editingGroupId, iconId);
+
+      const updateData: IUpdateRoomGroup = {};
+
+      if (groupName && groupName !== currentGroupName) {
+        updateData.groupName = groupName;
+      }
+
+      if (Object.keys(updateData).length > 0) {
+        await updateRoomGroup(editingGroupId, updateData);
+      }
+
+      if (
+        iconId !==
+        (typeof currentGroupIcon === "object" && currentGroupIcon !== null
+          ? currentGroupIcon.id
+          : currentGroupIcon)
+      ) {
+        await updateGroupIcon(editingGroupId, iconId);
+      }
+
       await getAllRoomGroups();
 
       onClose();

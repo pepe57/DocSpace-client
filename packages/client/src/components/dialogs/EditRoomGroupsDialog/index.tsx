@@ -61,6 +61,7 @@ const EditRoomGroupsDialog = ({
   getAllRoomGroups,
   getGroupById,
   updateGroupIcon,
+  updateRoomGroup,
   deleteRoomGroup,
 }: EditRoomGroupsDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
@@ -151,7 +152,9 @@ const EditRoomGroupsDialog = ({
         editingGroupId={editingGroupId}
         setEditingGroupId={setEditingGroupId}
         updateGroupIcon={updateGroupIcon}
+        updateRoomGroup={updateRoomGroup}
         currentGroupIcon={currentEditingGroup?.icon || null}
+        currentGroupName={currentEditingGroup?.name || null}
       />
     );
   }
@@ -343,8 +346,15 @@ const EditRoomGroupsDialog = ({
 };
 
 export default inject(({ dialogsStore }: TStore) => {
-  const { setCreateGroupRooms, getAllRoomGroups, roomGroups, getGroupById, updateGroupIcon, deleteRoomGroup } =
-    dialogsStore;
+  const {
+    setCreateGroupRooms,
+    getAllRoomGroups,
+    roomGroups,
+    getGroupById,
+    updateGroupIcon,
+    updateRoomGroup,
+    deleteRoomGroup,
+  } = dialogsStore;
 
   return {
     setCreateGroupRooms,
@@ -352,6 +362,7 @@ export default inject(({ dialogsStore }: TStore) => {
     roomGroups,
     getGroupById,
     updateGroupIcon,
+    updateRoomGroup,
     deleteRoomGroup,
   };
 })(observer(EditRoomGroupsDialog));

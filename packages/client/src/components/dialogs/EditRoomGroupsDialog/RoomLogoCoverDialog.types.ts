@@ -27,10 +27,7 @@
 import { TColorScheme } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
 
-export interface ILogo {
-  id: string;
-  data: string;
-}
+import  { ILogo, IUpdateRoomGroup } from "./EditRoomGroupsDialog.types";
 
 export interface ICreateRoomGroup {
   name: string;
@@ -50,7 +47,9 @@ export interface CoverDialogProps {
   editingGroupId: string | null;
   setEditingGroupId: (id: string | null) => void;
   updateGroupIcon: (groupId: string, icon: string) => Promise<void>;
+  updateRoomGroup: (groupId: string, data: IUpdateRoomGroup) => Promise<void>;
   currentGroupIcon: ILogo | string | null;
+  currentGroupName: string | null;
 }
 
 export interface SelectIconProps {

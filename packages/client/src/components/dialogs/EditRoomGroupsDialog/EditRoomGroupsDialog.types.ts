@@ -46,6 +46,10 @@ export interface ICreateRoomGroup {
   rooms: string[] | null;
 }
 
+export interface IUpdateRoomGroup {
+  groupName?: string;
+}
+
 export interface EditRoomGroupsDialogProps {
   currentColorScheme: TColorScheme;
   getCovers: () => void;
@@ -58,6 +62,7 @@ export interface EditRoomGroupsDialogProps {
   getAllRoomGroups: () => Promise<void>;
   getGroupById: (groupId: string) => Promise<IRoomGroup>;
   updateGroupIcon: (groupId: string, icon: string) => Promise<void>;
+  updateRoomGroup: (groupId: string, data: IUpdateRoomGroup) => Promise<void>;
   deleteRoomGroup: (groupId: string) => Promise<void>;
 }
 
