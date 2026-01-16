@@ -57,6 +57,10 @@ import useEditorEvents from "@/hooks/useEditorEvents";
 import useGoBackAndClose from "@/hooks/useGoBackAndClose";
 import { isPDFDocument } from "@/utils";
 
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+
+import Bar from "./Bar";
+
 const Editor = ({
   config,
   successAuth,
@@ -156,8 +160,25 @@ const Editor = ({
     openOnNewPage,
     i18n,
     t,
-    config?.editorConfig?.customization?.goback?.url,
+    config?.editorConfig?.customization?.goback?.url
   );
+
+  const [isStorageQuotaLimit, setIsStorageQuotaLimit] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleQuotaChange = () => {
+      setIsStorageQuotaLimit(true);
+    };
+
+    SocketHelper?.on(SocketEvents.ChangedQuotaUserUsedValue, handleQuotaChange);
+
+    return () => {
+      SocketHelper?.off(
+        SocketEvents.ChangedQuotaUserUsedValue,
+        handleQuotaChange
+      );
+    };
+  }, []);
 
   const newConfig: IConfig = useMemo(() => {
     return config
@@ -248,7 +269,7 @@ const Editor = ({
     typeof window !== "undefined" &&
     newConfig.editorConfig?.user &&
     newConfig.editorConfig.user.image?.includes(
-      "default_user_photo_size_48-48.png",
+      "default_user_photo_size_48-48.png"
     )
   ) {
     newConfig.editorConfig.user.image = isBase
@@ -311,22 +332,35 @@ const Editor = ({
   }
 
   return (
-    <DocumentEditor
+    <div
       id={EDITOR_ID}
-      documentServerUrl={documentServerUrl}
-      config={
-        errorMessage || isSkipError
-          ? {
-              events: {
-                onAppReady: onSDKAppReady,
-              },
-            }
-          : newConfig
-      }
-      height="100%"
-      width="100%"
-      events_onDocumentReady={onDocumentReady}
-    />
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
+      }}
+    >
+      <div style={{ height: documentReady ? "auto" : "0", overflow: "hidden" }}>
+        <Bar isStorageQuotaLimit={isStorageQuotaLimit} />
+      </div>
+      <DocumentEditor
+        id={EDITOR_ID}
+        documentServerUrl={documentServerUrl}
+        config={
+          errorMessage || isSkipError
+            ? {
+                events: {
+                  onAppReady: onSDKAppReady,
+                },
+              }
+            : newConfig
+        }
+        height="100%"
+        width="100%"
+        events_onDocumentReady={onDocumentReady}
+      />
+    </div>
   );
 };
 

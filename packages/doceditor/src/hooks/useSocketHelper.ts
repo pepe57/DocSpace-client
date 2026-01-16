@@ -67,6 +67,14 @@ const useSocketHelper = ({
   }, [standalone]);
 
   React.useEffect(() => {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "quota",
+    });
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "QUOTA",
+      individual: true,
+    });
+
     const callback = async () => {
       try {
         // const message = t("Common:PreparationPortalTitle");
@@ -105,7 +113,7 @@ const useSocketHelper = ({
         `[WS] "logout-session"`,
         loginEventId,
         user?.loginEventId,
-        redirectUrl,
+        redirectUrl
       );
 
       const { pathname, search, origin } = window.location;
@@ -113,7 +121,7 @@ const useSocketHelper = ({
 
       sessionStorage.setItem(
         "referenceUrl",
-        `${redirectUrl || origin}${pathname}${search}`,
+        `${redirectUrl || origin}${pathname}${search}`
       );
       if (user?.id) sessionStorage.setItem("loggedOutUserId", user.id);
 
