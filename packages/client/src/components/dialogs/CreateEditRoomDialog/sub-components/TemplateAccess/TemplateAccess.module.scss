@@ -24,20 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+.templateAccess {
+  .templateAccessDescription {
+    margin-bottom: 8px;
+  }
 
-const StyledFooter = styled.div`
-  width: 100%;
-
-  .create-room-template_buttons {
+  .templateAccessWrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    margin-top: 12px;
 
+    .templateAccessLink {
+      margin-inline-start: auto;
+    }
+  }
+
+  .templateAccessAvatarContainer {
+    display: flex;
+    align-items: center;
     gap: 8px;
 
-    margin-top: 16px;
-  }
-`;
+    .accessAvatarContainer {
+      display: flex;
 
-export { StyledFooter };
+      .templateAccessAvatar:not(:first-child) {
+        margin-inline-start: -8px;
+        z-index: 2;
+      }
+
+      .templateAccessAvatar:last-child {
+        z-index: 1;
+      }
+
+      .templateAccessAvatar {
+        border: var(--template-access-avatar-border);
+        border-radius: 50%;
+        z-index: 3;
+
+        min-width: 32px;
+      }
+    }
+  }
+
+  .templateAccessLabel {
+    margin-bottom: 8px;
+  }
+
+  .templateAccessDisplayName {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .meLabel {
+      color: var(--template-access-me-label-color);
+    }
+  }
+}

@@ -24,62 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { injectDefaultTheme } from "@docspace/shared/utils";
+.lifetimeBodyContainer {
+  display: grid;
+  gap: 18px;
+}
 
-export const TemplateAccess = styled.div.attrs(injectDefaultTheme)`
-  .template-access_description {
-    margin-bottom: 8px;
-  }
+.lifetimeFooterContainer {
+  width: 100%;
 
-  .template-access_wrapper {
+  .lifetimeButtons {
     display: flex;
-    align-items: center;
-    margin-top: 12px;
-
-    .template-access_link {
-      margin-inline-start: auto;
-    }
-  }
-
-  .template-access_avatar-container {
-    display: flex;
-    align-items: center;
+    flex-direction: row;
     gap: 8px;
-
-    .access-avatar-container {
-      display: flex;
-
-      .template-access_avatar:not(:first-child) {
-        margin-inline-start: -8px;
-        z-index: 2;
-      }
-
-      .template-access_avatar:last-child {
-        z-index: 1;
-      }
-
-      .template-access_avatar {
-        border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
-        border-radius: 50%;
-        z-index: 3;
-
-        min-width: 32px;
-      }
-    }
   }
 
-  .template-access_label {
-    margin-bottom: 8px;
+  .lifetimeCheckbox {
+    margin-top: -6px;
+    margin-bottom: 26px;
   }
-
-  .template-access_display-name {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-
-    .me-label {
-      color: ${({ theme }) => theme.text.disableColor};
-    }
-  }
-`;
+}

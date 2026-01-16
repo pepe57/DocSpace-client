@@ -24,45 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Row } from "@docspace/shared/components/rows";
-import { Text } from "@docspace/shared/components/text";
-import styles from "./HotkeysPanel.module.scss";
+.changeRoomOwner {
+  display: contents;
 
-const PreviewActionsBlock = ({ t, textStyles, keyTextStyles }) => {
-  return (
-    <>
-      <Row className={styles.hotkeysRow}>
-        <>
-          <Text {...textStyles}>{t("OpenContextMenu")}</Text>
-          <Text {...keyTextStyles}>Shift + c</Text>
-        </>
-      </Row>
-      <Row className={styles.hotkeysRow}>
-        <>
-          <Text {...textStyles}>{t("HotkeysClose")}</Text>
-          <Text {...keyTextStyles}>Esc</Text>
-        </>
-      </Row>
-      <Row className={styles.hotkeysRow}>
-        <>
-          <Text {...textStyles}>{t("HotkeysPlayPause")}</Text>
-          <Text {...keyTextStyles}>Space</Text>
-        </>
-      </Row>
-      <Row className={styles.hotkeysRow}>
-        <>
-          <Text {...textStyles}>{t("HotkeysZoomIn")}</Text>
-          <Text {...keyTextStyles}>+ {t("Common:Or")} =</Text>
-        </>
-      </Row>
-      <Row className={styles.hotkeysRow}>
-        <>
-          <Text {...textStyles}>{t("HotkeysZoomOut")}</Text>
-          <Text {...keyTextStyles}>-</Text>
-        </>
-      </Row>
-    </>
-  );
-};
+  .changeOwnerPeopleSelector {
+    overflow: visible;
+  }
 
-export default PreviewActionsBlock;
+  &.withFooterCheckbox {
+    :global(.arrow-button) {
+      display: none;
+    }
+
+    :global(.selector_body) {
+      height: calc(((100% - 16px) - 111px) - 54px);
+    }
+
+    :global(.selector_footer) {
+      height: 110px;
+      min-height: 110px;
+      max-height: 110px;
+    }
+
+    :global(.selector_footer-checkbox) {
+      padding: 17px 0 1px 0;
+    }
+  }
+}
