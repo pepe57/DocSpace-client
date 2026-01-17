@@ -23,12 +23,50 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-export { TagSelector } from "./TagSelector";
-export {
-  TagSelectorProvider,
-  useTagSelector,
-  createTagsResource,
-} from "./TagSelectorProvider";
-export { TagSelectorFilter } from "./TagSelectorFilter";
-export { TagSelectorContent } from "./TagSelectorContent";
-export { TagSelectorLoader } from "./TagSelectorLoader";
+
+import React from "react";
+import classNames from "classnames";
+
+import { RectangleSkeleton } from "../../skeletons/rectangle";
+
+import styles from "./TagSelector.module.scss";
+
+export const TagSelectorLoader: React.FC = () => {
+  return (
+    <>
+      <div className={styles.input}>
+        <RectangleSkeleton height="24px" width="100%" />
+      </div>
+      <hr className={styles.divider} />
+      <div className={styles.textLoader}>
+        <RectangleSkeleton height="12px" width="70%" />
+      </div>
+      <div className={styles.loaderWrapper}>
+        {Array.from({ length: 6 }).map((_, index) => (
+          <div key={index} className={classNames(styles.row, styles.rowLoader)}>
+            <RectangleSkeleton
+              className={styles.loaderCheckIcon}
+              height="15px"
+              width="15px"
+            />
+            <RectangleSkeleton
+              className={styles.loaderTag}
+              height="22px"
+              width="100%"
+            />
+            <RectangleSkeleton
+              className={styles.loaderCheckIcon}
+              height="16px"
+              width="16px"
+            />
+            <RectangleSkeleton
+              className={styles.loaderCheckIcon}
+              height="16px"
+              width="16px"
+            />
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};

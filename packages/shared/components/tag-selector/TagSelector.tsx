@@ -42,6 +42,7 @@ import { ModalDialog, ModalDialogType } from "../modal-dialog";
 import { TagSelectorProvider, createTagsResource } from "./TagSelectorProvider";
 import { TagSelectorFilter } from "./TagSelectorFilter";
 import { TagSelectorContent } from "./TagSelectorContent";
+import { TagSelectorLoader } from "./TagSelectorLoader";
 import styles from "./TagSelector.module.scss";
 import type { TagSelectorProps } from "./TagSelector.types";
 
@@ -99,7 +100,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
       className={styles.tagSelector}
       ref={ref}
     >
-      <Suspense fallback={<div>Loading tags...</div>}>
+      <Suspense fallback={<TagSelectorLoader />}>
         <TagSelectorProvider
           initialTags={propsTags}
           roomId={roomId}
