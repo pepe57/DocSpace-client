@@ -50,7 +50,7 @@ export const test = base.extend<
   }
 >({
   port: [
-    async ({}, use) => {
+    async (_, use) => {
       const { port, server } = await createNextTestServer(
         path.resolve(__dirname, "../../"),
       );
@@ -72,7 +72,7 @@ export const test = base.extend<
     },
   ],
   serverRequestInterceptor: [
-    async ({}, use) => {
+    async (_, use) => {
       const requestInterceptor = await createServerRequestInterceptor();
       await use(requestInterceptor);
       requestInterceptor.close();
@@ -104,7 +104,7 @@ export const test = base.extend<
 
       await worker.start();
       await use(worker);
-     // await worker.stop();
+      // await worker.stop();
     },
     {
       auto: true,
