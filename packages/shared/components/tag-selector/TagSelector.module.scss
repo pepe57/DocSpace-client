@@ -77,6 +77,7 @@
   width: 254px;
 
   transition: all 0.5s ease;
+  will-change: left, top;
 
   background-color: var(--selector-background-color);
 
