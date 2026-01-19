@@ -55,8 +55,6 @@ import type {
 
 import { availableActions, REPLACED_URL_PATH } from "./constants";
 
-const IS_TEST = process.env.E2E_TEST;
-
 export async function getFillingSession(
   fillingSessionId: string,
   share?: string,

@@ -238,8 +238,6 @@ export async function getAllPortals() {
   logger.debug("Start GET /portal/get?statistics=true");
 
   try {
-    const hdrs = await headers();
-
     const [getAllPortalssRes] = await createRequest(
       [`/portal/get?statistics=true`],
       [["", ""]],

@@ -50,7 +50,8 @@ export const test = base.extend<
   }
 >({
   port: [
-    async (_, use) => {
+    // biome-ignore lint/correctness/noEmptyPattern: Playwright fixture requires destructuring syntax
+    async ({}, use) => {
       const { port, server } = await createNextTestServer(
         path.resolve(__dirname, "../../"),
       );
@@ -72,7 +73,8 @@ export const test = base.extend<
     },
   ],
   serverRequestInterceptor: [
-    async (_, use) => {
+    // biome-ignore lint/correctness/noEmptyPattern: Playwright fixture requires destructuring syntax
+    async ({}, use) => {
       const requestInterceptor = await createServerRequestInterceptor();
       await use(requestInterceptor);
       requestInterceptor.close();
