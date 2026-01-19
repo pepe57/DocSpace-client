@@ -114,7 +114,7 @@ export const test = base.extend<
   clientRequestInterceptor: [
     async ({ page, port }, use) => {
       const worker = new WorkerFixture({
-        page,
+        page: page as never,
         initialHandlers: allHandlers(port),
       });
 
