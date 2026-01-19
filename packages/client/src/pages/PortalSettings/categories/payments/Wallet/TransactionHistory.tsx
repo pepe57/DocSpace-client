@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -673,13 +673,9 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         <Text isBold fontSize="16px" className={styles.transactionHistoryTitle}>
           {t("TransactionHistory")}
         </Text>
-        {(shouldShowClearButton || isTransactionHistoryExist) && isMobile
-          ? mobileFilter
-          : null}
+        {isMobile ? mobileFilter : null}
       </div>
-      {(shouldShowClearButton || isTransactionHistoryExist) && !isMobile
-        ? filterCombobox
-        : null}
+      {!isMobile ? filterCombobox : null}
 
       {isLoading ? (
         <TableLoader isMobile={isMobile} isTablet={isTablet} />
