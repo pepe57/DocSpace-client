@@ -24,62 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { injectDefaultTheme } from "@docspace/shared/utils";
+@use "@docspace/shared/styles/mixins";
 
-export const TemplateAccess = styled.div.attrs(injectDefaultTheme)`
-  .template-access_description {
-    margin-bottom: 8px;
-  }
+.apiKeys {
+  width: 100%;
 
-  .template-access_wrapper {
-    display: flex;
-    align-items: center;
-    margin-top: 12px;
+  .apiKeysDescription {
+    box-sizing: border-box;
+    max-width: 700px;
+    margin-bottom: 25px;
 
-    .template-access_link {
-      margin-inline-start: auto;
+    &.withEmptyScreen {
+      margin-bottom: 0px;
+    }
+
+    .apiKeysText {
+      color: var(--settings-api-keys-dialog-text);
+    }
+
+    .apiKeysDescriptionText {
+      line-height: 20px;
+      margin-bottom: 20px;
+    }
+
+    .apiKeysUsageText {
+      margin-bottom: 8px;
     }
   }
+}
 
-  .template-access_avatar-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.dialogButtons {
+  position: fixed;
+  z-index: 1;
+  width: calc(100% - 32px);
+  height: 73px;
+  bottom: 0;
+  padding: 0 16px;
 
-    .access-avatar-container {
-      display: flex;
+  inset-inline-start: 0;
+  background-color: var(--background-color);
 
-      .template-access_avatar:not(:first-child) {
-        margin-inline-start: -8px;
-        z-index: 2;
-      }
-
-      .template-access_avatar:last-child {
-        z-index: 1;
-      }
-
-      .template-access_avatar {
-        border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
-        border-radius: 50%;
-        z-index: 3;
-
-        min-width: 32px;
-      }
-    }
-  }
-
-  .template-access_label {
-    margin-bottom: 8px;
-  }
-
-  .template-access_display-name {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-
-    .me-label {
-      color: ${({ theme }) => theme.text.disableColor};
-    }
-  }
-`;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

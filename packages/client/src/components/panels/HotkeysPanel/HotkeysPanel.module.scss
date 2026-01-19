@@ -24,45 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Row } from "@docspace/shared/components/rows";
-import { Text } from "@docspace/shared/components/text";
-import styles from "./HotkeysPanel.module.scss";
+@use "@docspace/shared/styles/mixins";
 
-const PreviewActionsBlock = ({ t, textStyles, keyTextStyles }) => {
-  return (
-    <>
-      <Row className={styles.hotkeysRow}>
-        <>
-          <Text {...textStyles}>{t("OpenContextMenu")}</Text>
-          <Text {...keyTextStyles}>Shift + c</Text>
-        </>
-      </Row>
-      <Row className={styles.hotkeysRow}>
-        <>
-          <Text {...textStyles}>{t("HotkeysClose")}</Text>
-          <Text {...keyTextStyles}>Esc</Text>
-        </>
-      </Row>
-      <Row className={styles.hotkeysRow}>
-        <>
-          <Text {...textStyles}>{t("HotkeysPlayPause")}</Text>
-          <Text {...keyTextStyles}>Space</Text>
-        </>
-      </Row>
-      <Row className={styles.hotkeysRow}>
-        <>
-          <Text {...textStyles}>{t("HotkeysZoomIn")}</Text>
-          <Text {...keyTextStyles}>+ {t("Common:Or")} =</Text>
-        </>
-      </Row>
-      <Row className={styles.hotkeysRow}>
-        <>
-          <Text {...textStyles}>{t("HotkeysZoomOut")}</Text>
-          <Text {...keyTextStyles}>-</Text>
-        </>
-      </Row>
-    </>
-  );
-};
+.hotkeysSubHeader {
+  font-weight: 700;
+  font-size: 16px;
+  margin: 20px 0 6px;
+}
 
-export default PreviewActionsBlock;
+.hotkeysRow {
+  width: 100%;
+  min-height: 41px;
+  box-sizing: border-box;
+  border-bottom: none;
+
+  :global(.row_content) {
+    margin: 12px 0 12px;
+
+    @include mixins.tablet {
+      height: unset;
+    }
+  }
+}
+
+.hotkeyKeyDescription {
+  max-width: 320px;
+  width: 100%;
+
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
+
+  @include mixins.mobile {
+    max-width: 140px;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+}
+
+.hotkeysKey {
+  margin-block: 0;
+  margin-inline: 0 auto;
+
+  @include mixins.mobile {
+    margin-inline: auto 0;
+    width: fit-content;
+  }
+}
