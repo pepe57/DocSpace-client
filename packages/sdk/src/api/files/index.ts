@@ -54,7 +54,10 @@ export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
 
     const res = await fetch(req);
 
-    if (!res.ok) return;
+    if (!res.ok) {
+      logger.error(`GET /files/settings failed: ${res.status}`);
+      return;
+    }
 
     const filesSettings = await res.json();
 
