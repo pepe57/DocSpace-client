@@ -33,6 +33,8 @@ export const PATH_AGENT_FOLDER_CHAT = "files/:id(\\d+)";
 
 export const PATH_AGENT_FOLDER_RESULT_STORAGE = "files/:id(\\d+)";
 
+export const PATH_AGENT_FOLDER_KNOWLEDGE = "files/:id(\\d+)";
+
 export const PATH_AGENT_FOLDER_INFO = "files/folder/:id(\\d+)";
 
 const createdUpdatedByMock = {
@@ -265,6 +267,90 @@ const getAgentFolderChat = ({ canUseChat }: { canUseChat: boolean }) => {
   };
 };
 
+const getAgentFolderKnowledge = ({ isEmpty }: { isEmpty: boolean }) => {
+  return {
+    files: [],
+    folders: [],
+    current: {
+      parentId: 2,
+      filesCount: 0,
+      foldersCount: 0,
+      new: 0,
+      mute: false,
+      pinned: false,
+      private: false,
+      indexing: false,
+      denyDownload: false,
+      type: 32,
+      fileEntryType: 1,
+      id: 3,
+      rootFolderId: 1,
+      canShare: false,
+      security: {
+        Read: true,
+        Create: false,
+        Delete: false,
+        EditRoom: false,
+        Rename: false,
+        CopyTo: false,
+        Copy: false,
+        MoveTo: false,
+        Move: false,
+        Pin: false,
+        Mute: false,
+        EditAccess: false,
+        Duplicate: false,
+        Download: true,
+        CopySharedLink: false,
+        Reconnect: false,
+        CreateRoomFrom: false,
+        CopyLink: false,
+        Embed: false,
+        ChangeOwner: false,
+        IndexExport: false,
+        UseChat: false,
+      },
+      availableShareRights: {
+        ExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
+        PrimaryExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
+      },
+      title: "Knowledge",
+      access: 0,
+      shared: false,
+      sharedForUser: false,
+      parentShared: false,
+      shortWebUrl: "",
+      created: "2026-01-19T16:55:10.0000000+01:00",
+      createdBy: createdUpdatedByMock,
+      updated: "2026-01-19T16:55:10.0000000+01:00",
+      rootFolderType: 34,
+      updatedBy: createdUpdatedByMock,
+    },
+    pathParts: [
+      {
+        id: 224866,
+        title: "AI agents",
+        folderType: 34,
+      },
+      {
+        id: 2,
+        title: "Test agent",
+        roomType: 9,
+        folderType: 31,
+      },
+      {
+        id: 3,
+        title: "Knowledge",
+        folderType: 32,
+      },
+    ],
+    startIndex: 0,
+    count: 0,
+    total: 0,
+    new: 0,
+  };
+};
+
 const getAgentFolderResultStorage = ({
   canUseChat,
   isEmpty,
@@ -385,6 +471,19 @@ const successFolderChatCanNotUseChat = {
   statusCode: 200,
 };
 
+const successFolderKnowledge = {
+  response: getAgentFolderKnowledge({ isEmpty: true }),
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/files/2?count=100&sortby=DateAndTime&sortOrder=descending`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 const successFolderResultStorageDefault = {
   response: getAgentFolderResultStorage({ canUseChat: true, isEmpty: true }),
   count: 1,
@@ -461,6 +560,10 @@ export const agentFolderResultStorageResolver = (
   }
 };
 
+export const agentFolderKnowledgeResolver = () => {
+  return new Response(JSON.stringify(successFolderKnowledge));
+};
+
 export const agentFolderInfoResolver = (
   type: "default" | "canNotUseChat" = "default",
 ) => {
@@ -484,7 +587,7 @@ export const agentFolderChatHandler = (
       const searchArea = url.searchParams.get("searchArea");
 
       const folderId = params.id;
-      if (folderId === "2" && searchArea !== "6") {
+      if (folderId === "2" && searchArea !== "6" && searchArea !== "5") {
         return agentFolderChatResolver(type);
       }
       // Pass through to other handlers for non-agent folders
@@ -507,6 +610,24 @@ export const agentFolderResultStorageHandler = (
         return;
       }
       return agentFolderResultStorageResolver(type);
+    },
+  );
+};
+
+export const agentFolderKnowledgeHandler = (
+  port: string,
+  type: "default" | "canNotUseChat" = "default",
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_KNOWLEDGE}`,
+    ({ request }) => {
+      // Only handle requests with searchArea=5 (Knowledge) to avoid intercepting other folder requests
+      const url = new URL(request.url);
+      const searchArea = url.searchParams.get("searchArea");
+      if (searchArea !== "5") {
+        return;
+      }
+      return agentFolderKnowledgeResolver();
     },
   );
 };
