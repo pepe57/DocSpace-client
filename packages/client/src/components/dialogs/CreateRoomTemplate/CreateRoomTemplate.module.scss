@@ -24,56 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+.createRoomTemplateFooter {
+  width: 100%;
 
-import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
+  .createRoomTemplateButtons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-const StyledHotkeysPanel = styled.div.attrs(injectDefaultTheme)`
-  .hotkeys_sub-header {
-    font-weight: 700;
-    font-size: 16px;
-    margin: 20px 0 6px;
+    gap: 8px;
+
+    margin-top: 16px;
   }
-
-  .hotkeys_row {
-    width: 100%;
-    min-height: 41px;
-    box-sizing: border-box;
-    border-bottom: none;
-
-    .row_content {
-      margin: 12px 0 12px;
-
-      @media ${tablet} {
-        height: unset;
-      }
-    }
-  }
-
-  .hotkey-key-description {
-    max-width: 320px;
-    width: 100%;
-
-    text-overflow: ellipsis;
-    white-space: normal;
-    word-break: break-word;
-
-    @media ${mobile} {
-      max-width: 140px;
-      word-wrap: break-word;
-      white-space: normal;
-    }
-  }
-
-  .hotkeys-key {
-    margin-block: 0;
-    margin-inline: 0 auto;
-
-    @media ${mobile} {
-      margin-inline: auto 0;
-      width: fit-content;
-    }
-  }
-`;
-
-export { StyledHotkeysPanel };
+}
