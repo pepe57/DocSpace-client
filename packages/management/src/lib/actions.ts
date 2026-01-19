@@ -58,31 +58,6 @@ import {
 } from "@docspace/shared/utils/common";
 import { TError } from "@docspace/shared/utils/axiosClient";
 
-// import {
-//   selfHandler,
-//   settingsHandler,
-//   colorThemeHandler,
-//   buildHandler,
-//   tariffHandler,
-//   getPortalHandler,
-//   quotaHandler,
-//   whiteLabelLogosHandler,
-//   whiteLabelLogoTextHandler,
-//   whiteLabelLogosIsDefaultHandler,
-//   companyInfoHandler,
-//   settingsAdditionalHandler,
-//   paymentSettingsHandler,
-//   filesSettingsHandler,
-//   licenseQuotaHandler,
-//   thirdPartyBackupHandler,
-//   backupScheduleHandler,
-//   backupStorageHandler,
-//   storageRegionsHandler,
-//   backupProgressHandler,
-//   foldersTreeHandler,
-//   encryptionSettingsHandler,
-// } from "@docspace/shared/__mocks__/handlers";
-
 import { logger } from "@/../logger.mjs";
 
 const IS_TEST = process.env.E2E_TEST;
