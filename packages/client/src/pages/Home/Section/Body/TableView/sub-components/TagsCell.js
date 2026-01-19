@@ -48,6 +48,7 @@ const TagsCell = ({
     const thirdPartyTag = item.providerType
       ? [
           {
+            isDefault: true,
             isThirdParty: true,
             label: item.providerKey,
             icon: item.thirdPartyIcon,

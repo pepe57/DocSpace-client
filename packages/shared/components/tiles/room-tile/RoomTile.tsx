@@ -94,6 +94,7 @@ export const RoomTile = ({
 
     if (item.providerType) {
       tempTags.push({
+        isDefault: true,
         isThirdParty: true,
         icon: item.thirdPartyIcon,
         label: item.providerKey || item.providerType,

@@ -25,7 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import unionBy from "lodash/unionBy";
+import isString from "lodash/isString";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+
 
 import { TagType } from "../../tag/Tag.types";
 import { getTags, editRoom, updateTagName } from "../../../api/rooms";
@@ -39,10 +41,12 @@ export function useTagsQuery(roomTags: Array<TagType | string>) {
     queryFn: getTags,
     refetchOnMount: true,
     select(data) {
-      const temp = roomTags.map((tag) => ({
-        name: typeof tag === "string" ? tag : tag.label,
-        checked: true,
-      }));
+      const temp = roomTags
+        .filter((tag) => isString(tag) || !tag.isDefault)
+        .map((tag) => ({
+          name: isString(tag) ? tag : tag.label,
+          checked: true,
+        }));
 
       if (!data) return temp;
 
