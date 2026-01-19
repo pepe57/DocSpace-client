@@ -24,13 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { injectDefaultTheme } from "@docspace/shared/utils";
+@use "@docspace/shared/styles/mixins";
 
-const StyledApiKeys = styled.div`
+.apiKeys {
   width: 100%;
 
-  .api-keys_description {
+  .apiKeysDescription {
     box-sizing: border-box;
     max-width: 700px;
     margin-bottom: 25px;
@@ -39,22 +38,22 @@ const StyledApiKeys = styled.div`
       margin-bottom: 0px;
     }
 
-    .api-keys_text {
-      color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    .apiKeysText {
+      color: var(--settings-api-keys-dialog-text);
     }
 
-    .api-keys_description-text {
+    .apiKeysDescriptionText {
       line-height: 20px;
       margin-bottom: 20px;
     }
 
-    .api-keys_usage-text {
+    .apiKeysUsageText {
       margin-bottom: 8px;
     }
   }
-`;
+}
 
-const StyledMobileButton = styled.div.attrs(injectDefaultTheme)`
+.dialogButtons {
   position: fixed;
   z-index: 1;
   width: calc(100% - 32px);
@@ -63,11 +62,9 @@ const StyledMobileButton = styled.div.attrs(injectDefaultTheme)`
   padding: 0 16px;
 
   inset-inline-start: 0;
-  background-color: ${(props) => props.theme.backgroundColor};
+  background-color: var(--background-color);
 
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-export { StyledApiKeys, StyledMobileButton };
+}

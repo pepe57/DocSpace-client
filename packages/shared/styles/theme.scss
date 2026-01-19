@@ -2476,6 +2476,7 @@
   --settings-backup-text-disabled: #{$gray};
   --settings-backup-background: #{$gray-light};
   --settings-backup-note-color: #{$gray};
+  --settings-api-keys-dialog-text: #{$light-gray-dark};
 }
 
 .dark {
@@ -2491,6 +2492,7 @@
   --settings-backup-text-disabled: #{$gray-dark-text};
   --settings-backup-background: #{$dark-gray-light};
   --settings-backup-note-color: #{$gray-dark};
+  --settings-api-keys-dialog-text: #{$gray-dark};
 }
 
 .light {
