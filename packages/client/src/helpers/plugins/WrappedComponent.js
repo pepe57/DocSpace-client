@@ -60,6 +60,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
     updateEventListenerItems,
     updateFileItems,
     updatePlugin,
+    setPluginSelectorVisible,
+    setPluginSelectorProps,
   } = pluginStore;
 
   return {
@@ -75,6 +77,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
     updateEventListenerItems,
     updateFileItems,
     updatePlugin,
+    setPluginSelectorVisible,
+    setPluginSelectorProps,
   };
 })(
   observer(
@@ -96,6 +100,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
       updateEventListenerItems,
       updateFileItems,
       updatePlugin,
+      setPluginSelectorVisible,
+      setPluginSelectorProps,
     }) => {
       const [elementProps, setElementProps] = React.useState(component.props);
 
@@ -156,13 +162,15 @@ export const PluginComponent = inject(({ pluginStore }) => {
 
         switch (componentName) {
           case PluginComponents.box: {
-            const childrenComponents = elementProps?.children?.map((item, index) => (
-              <PluginComponent
-                key={`${pluginName}-box-${item.component}-${index}`}
-                component={item}
-                pluginName={pluginName}
-              />
-            ));
+            const childrenComponents = elementProps?.children?.map(
+              (item, index) => (
+                <PluginComponent
+                  key={`${pluginName}-box-${item.component}-${index}`}
+                  component={item}
+                  pluginName={pluginName}
+                />
+              ),
+            );
 
             return (
               <div
@@ -203,6 +211,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 
@@ -229,6 +239,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 
@@ -255,6 +267,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 
@@ -281,6 +295,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 
@@ -327,12 +343,15 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateEventListenerItems,
                 updateFileItems,
                 updatePlugin,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
 
               setIsRequestRunning && setIsRequestRunning(false);
               setModalRequestRunning && setModalRequestRunning(false);
               if (isSaveButton) {
-                setSettingsModalRequestRunning && setSettingsModalRequestRunning(false);
+                setSettingsModalRequestRunning &&
+                  setSettingsModalRequestRunning(false);
                 onCloseAction && onCloseAction();
               }
             };
@@ -379,6 +398,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 
@@ -414,8 +435,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
       const element = getElement();
 
       return element;
-    }
-  )
+    },
+  ),
 );
 
 const WrappedComponent = ({
@@ -456,7 +477,12 @@ const WrappedComponent = ({
       setModalRequestRunning,
       modalRequestRunning,
     }),
-    [contextProps, isRequestRunning, setModalRequestRunning, modalRequestRunning]
+    [
+      contextProps,
+      isRequestRunning,
+      setModalRequestRunning,
+      modalRequestRunning,
+    ],
   );
 
   return (

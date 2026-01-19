@@ -25,14 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import {
-  EmployeeStatus,
-  EmployeeType,
-  RoomsType,
-  ShareAccessRights,
-  FileType,
-  FolderType,
-} from "../../enums";
+import { EmployeeStatus, EmployeeType, RoomsType, ShareAccessRights, FileType, FolderType } from "../../enums";
 import { MergeTypes, Nullable, WithFlag } from "../../types";
 
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
@@ -45,7 +38,7 @@ import { TTabItem } from "../tabs";
 import { SelectorAccessRightsMode } from "./Selector.enums";
 
 // header
-type THeaderBackButton =
+export type THeaderBackButton =
   | {
       onBackClick: () => void;
       withoutBackButton: false;
@@ -94,15 +87,7 @@ export type TSelectorHeader = WithFlag<
 >;
 
 // bread crumbs
-type TOnBreadCrumbClick = ({
-  e,
-  open,
-  item,
-}: {
-  e: React.MouseEvent;
-  open: boolean;
-  item: TBreadCrumb;
-}) => void;
+type TOnBreadCrumbClick = ({ e, open, item }: { e: React.MouseEvent; open: boolean; item: TBreadCrumb }) => void;
 
 export type TBreadCrumb = {
   id: string | number;
@@ -314,15 +299,9 @@ export type TSelectorWithAside =
   | ({ useAside: true; onClose: VoidFunction } & TAsideCommonProps)
   | ({ useAside?: false; onClose?: VoidFunction } & TAsideCommonProps);
 
-export type TSelectorAccessRights = WithFlag<
-  "withAccessRights",
-  TWithAccessRightsProps
->;
+export type TSelectorAccessRights = WithFlag<"withAccessRights", TWithAccessRightsProps>;
 
-export type AccessSelectorProps = Omit<
-  TWithAccessRightsProps,
-  "withAccessRights"
-> & {
+export type AccessSelectorProps = Omit<TWithAccessRightsProps, "withAccessRights"> & {
   footerRef: React.RefObject<HTMLDivElement | null>;
 };
 
@@ -394,11 +373,7 @@ export type SelectorProps = TSelectorHeader &
     className?: string;
     style?: React.CSSProperties;
 
-    onSelect?: (
-      item: TSelectorItem,
-      isDoubleClick: boolean,
-      doubleClickCallback: () => Promise<void>,
-    ) => void;
+    onSelect?: (item: TSelectorItem, isDoubleClick: boolean, doubleClickCallback: () => Promise<void>) => void;
 
     isMultiSelect: boolean;
     selectedItems?: TSelectorItem[];

@@ -2980,7 +2980,7 @@ packages:
     os: [win32]
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
-    resolution: {integrity: sha512-JeXth+vedv9MuS24J0aEHcb44cKdjtkLfjLO4EGKt5kilPVUYKssbjj5yjOS4iSaJHhG3gYTL0Xfk6zmOYnGHQ==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
+    resolution: {integrity: sha512-B9UGcbfMNzX4ZLKA2e3ZkeGHLWzjHbZFZ24GZhUrLQVtTFb0t7aiS3erKAvQKKOiiOBS42iWFolOJhiKaaSLDQ==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
     version: 2.0.0
     hasBin: true
 
@@ -9376,6 +9376,7 @@ packages:
   whatwg-encoding@2.0.0:
     resolution: {integrity: sha512-p41ogyeMUrw3jWclHWTQg1k05DSVXPLcVxRTYsXUk+ZooOCZLcoYgPZ/HL/D/N+uQPOtcp1me1WhBEaX02mhWg==}
     engines: {node: '>=12'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@3.0.0:
     resolution: {integrity: sha512-nt+N2dzIutVRxARx1nghPKGv1xHikU7HKdfafKkLNLindmPU/ch3U31NOCGGA/dmPcmb1VlofO0vnKAcsm0o/Q==}
