@@ -24,56 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@use "@docspace/shared/styles/mixins";
 
-import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
+.apiKeys {
+  width: 100%;
 
-const StyledHotkeysPanel = styled.div.attrs(injectDefaultTheme)`
-  .hotkeys_sub-header {
-    font-weight: 700;
-    font-size: 16px;
-    margin: 20px 0 6px;
-  }
-
-  .hotkeys_row {
-    width: 100%;
-    min-height: 41px;
+  .apiKeysDescription {
     box-sizing: border-box;
-    border-bottom: none;
+    max-width: 700px;
+    margin-bottom: 25px;
 
-    .row_content {
-      margin: 12px 0 12px;
+    &.withEmptyScreen {
+      margin-bottom: 0px;
+    }
 
-      @media ${tablet} {
-        height: unset;
-      }
+    .apiKeysText {
+      color: var(--settings-api-keys-dialog-text);
+    }
+
+    .apiKeysDescriptionText {
+      line-height: 20px;
+      margin-bottom: 20px;
+    }
+
+    .apiKeysUsageText {
+      margin-bottom: 8px;
     }
   }
+}
 
-  .hotkey-key-description {
-    max-width: 320px;
-    width: 100%;
+.dialogButtons {
+  position: fixed;
+  z-index: 1;
+  width: calc(100% - 32px);
+  height: 73px;
+  bottom: 0;
+  padding: 0 16px;
 
-    text-overflow: ellipsis;
-    white-space: normal;
-    word-break: break-word;
+  inset-inline-start: 0;
+  background-color: var(--background-color);
 
-    @media ${mobile} {
-      max-width: 140px;
-      word-wrap: break-word;
-      white-space: normal;
-    }
-  }
-
-  .hotkeys-key {
-    margin-block: 0;
-    margin-inline: 0 auto;
-
-    @media ${mobile} {
-      margin-inline: auto 0;
-      width: fit-content;
-    }
-  }
-`;
-
-export { StyledHotkeysPanel };
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
