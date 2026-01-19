@@ -76,6 +76,8 @@
   height: auto;
   width: 254px;
 
+  transition: all 0.5s ease;
+
   background-color: var(--selector-background-color);
 
   box-shadow: 0px 8px 16px 0px colors.$box-shadow-color,

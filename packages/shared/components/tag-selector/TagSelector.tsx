@@ -89,11 +89,10 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
           }
         });
       },
-      { animationFrame: true },
     );
 
     return cleanup;
-  }, [reference, ref, isMobile]);
+  }, [reference, reference.current, ref, isMobile]);
 
   const element = (
     <div
