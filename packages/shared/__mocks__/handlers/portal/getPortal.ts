@@ -105,8 +105,24 @@ const completedTenant = {
   },
 };
 
+const secondCompletedTenant = {
+  ...completedTenant,
+  created: "2021-03-10T17:46:59",
+  domain: "second.docspace.site",
+  portalName: "second",
+  tenantId: 2,
+  quotaUsage: {
+    ...completedTenant.quotaUsage,
+    tenantId: 2,
+  },
+  wizardSettings: {
+    completed: true,
+    lastModified: "2021-03-10T17:46:59",
+  },
+};
+
 export const getPortalSuccess = {
-  tenants: [completedTenant],
+  tenants: [completedTenant, secondCompletedTenant],
 };
 
 const getPortalEmptySuccess = {
@@ -132,11 +148,29 @@ export const getPortalResolver = (
   return new Response(JSON.stringify(getPortalSuccess));
 };
 
-export const getPortalHandler = (port: string) => {
+export const getPortalHandler = (
+  port: string,
+  isEmptyPortal?: boolean,
+  isUncompletedTenant?: boolean,
+) => {
   return http.get(
-    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_PORTAL_GET}`,
+    `${BASE_URL}:${port}/${PATH_PORTAL_GET}*`,
     () => {
-      return getPortalResolver();
+      return getPortalResolver(isEmptyPortal, isUncompletedTenant);
+    },
+  );
+};
+
+// Handler for /api/2.0/portal/get endpoint (used by management app)
+export const getPortalApiHandler = (
+  port: string,
+  isEmptyPortal?: boolean,
+  isUncompletedTenant?: boolean,
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/portal/get*`,
+    () => {
+      return getPortalResolver(isEmptyPortal, isUncompletedTenant);
     },
   );
 };

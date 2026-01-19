@@ -41,6 +41,7 @@ export enum TypeSettings {
   EnabledJoin = "enabledJoin",
   EnableAdmMess = "enableAdmMess",
   WithHCaptcha = "withHCaptcha",
+  Connected = "connected",
 }
 
 export const settingsWizzard = {
@@ -655,6 +656,14 @@ export const settingsWithHCaptcha = {
   },
 };
 
+export const settingsConnected = {
+  ...settingsNoAuth,
+  response: {
+    ...settingsNoAuth.response,
+    tenantAlias: "test",
+  },
+};
+
 export const settingsResolver = (
   type: TypeSettings = TypeSettings.NoAuth,
 ): Response => {
@@ -678,6 +687,8 @@ export const settingsResolver = (
     return new Response(JSON.stringify(settingsWithHCaptcha));
   if (type === TypeSettings.AuthenticatedWithPlugins)
     return new Response(JSON.stringify(settingsWithPlugins));
+  if (type === TypeSettings.Connected)
+    return new Response(JSON.stringify(settingsConnected));
 
   return new Response(JSON.stringify(settingsNoAuth));
 };

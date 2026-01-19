@@ -24,24 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { registerHandler } from "./register";
-import { removePortalHandler } from "./remove";
-import { setDomainHandler } from "./setDomain";
-import { portalGetHandler } from "./portalGet";
-import { apisystemLicenseQuotaHandler } from "./licensequota";
+import { http } from "msw";
+import { BASE_URL } from "../../e2e/utils";
 
-export {
-  registerHandler,
-  removePortalHandler,
-  setDomainHandler,
-  portalGetHandler,
-  apisystemLicenseQuotaHandler,
+export const PATH_APISYSTEM_LICENSE_QUOTA = "apisystem/portal/licensequota";
+
+export const apisystemLicenseQuotaSuccess = {
+  userQuota: {},
+  license: {
+    branding: true,
+    customization: true,
+    timeLimited: false,
+    end_date: "2026-12-17T23:59:59Z",
+    trial: false,
+    customer_id: "96c627ced5d24e1385c687afe721de3f",
+    resource_key: "7931dc3f-9959-4fd6-82f6-8312b5be9ebd",
+    users_count: 20,
+    users_expire: 30,
+    connections: 0,
+    docspace_dev: true,
+  },
+  totalUsers: 0,
+  portalUsers: 0,
+  externalUsers: 0,
+  licenseTypeByUsers: true,
 };
 
-export const apisystemHandlers = (port: string) => [
-  registerHandler(port),
-  removePortalHandler(port),
-  setDomainHandler(port),
-  portalGetHandler(port),
-  apisystemLicenseQuotaHandler(port),
-];
+export const apisystemLicenseQuotaResolver = () => {
+  return new Response(JSON.stringify(apisystemLicenseQuotaSuccess));
+};
+
+export const apisystemLicenseQuotaHandler = (port: string) => {
+  return http.get(
+    `${BASE_URL}:${port}/${PATH_APISYSTEM_LICENSE_QUOTA}`,
+    () => {
+      return apisystemLicenseQuotaResolver();
+    },
+  );
+};

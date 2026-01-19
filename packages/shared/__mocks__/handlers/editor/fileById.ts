@@ -27,7 +27,7 @@
 import { http } from "msw";
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-export const PATH = "files/file/20";
+export const PATH = "files/file";
 
 const fileByIdSuccess = (formFillingStatus: number) => ({
   response: {
@@ -166,7 +166,7 @@ export const fileByIdResolver = (isYourTurnFilling?: boolean) => {
 };
 
 export const fileByIdHandler = (port: string, isYourTurnFilling?: boolean) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}/:fileId`, () => {
     return fileByIdResolver(isYourTurnFilling);
   });
 };

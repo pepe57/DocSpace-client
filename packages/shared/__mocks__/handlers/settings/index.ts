@@ -62,6 +62,7 @@ import {
   whiteLabelLogosAddHandler,
   whiteLabelLogosIsDefaultHandler,
   whiteLabelLogoTextHandler,
+  whiteLabelLogosHandler,
 } from "./whitelabel";
 
 export {
@@ -103,6 +104,7 @@ export {
   whiteLabelLogosAddHandler,
   whiteLabelLogosIsDefaultHandler,
   whiteLabelLogoTextHandler,
+  whiteLabelLogosHandler,
 };
 
 export const settingsHandlers = (port: string) => [
@@ -144,4 +146,5 @@ export const settingsHandlers = (port: string) => [
   whiteLabelLogosAddHandler(port),
   whiteLabelLogosIsDefaultHandler(port),
   whiteLabelLogoTextHandler(port),
+  whiteLabelLogosHandler(port),
 ];

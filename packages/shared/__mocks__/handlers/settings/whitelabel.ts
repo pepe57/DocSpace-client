@@ -32,12 +32,12 @@ const MANAGEMENT_BASE_PATH = "/management";
 const getManagementLogoPath = (fileName: string) =>
   `${MANAGEMENT_BASE_PATH}/images/logo/${fileName}`;
 
-export const PATH_WHITELABEL_LOGOS = "/settings/whitelabel/logos";
+export const PATH_WHITELABEL_LOGOS = "settings/whitelabel/logos";
 
-export const PATH_WHITELABEL_LOGOTEXT = "/settings/whitelabel/logotext";
+export const PATH_WHITELABEL_LOGOTEXT = "settings/whitelabel/logotext";
 
 export const PATH_WHITELABEL_LOGOS_IS_DEFAULT =
-  "/settings/whitelabel/logos/isdefault";
+  "settings/whitelabel/logos/isdefault";
 
 const whiteLabelLogos = {
   response: [
@@ -471,16 +471,25 @@ export const whiteLabelLogosAddHandler = (port: string) => {
 
 export const whiteLabelLogoTextHandler = (port: string) => {
   return http.get(
-    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WHITELABEL_LOGOTEXT}`,
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WHITELABEL_LOGOTEXT}*`,
     () => {
       return whiteLabelLogoTextResolver();
     },
   );
 };
 
+export const whiteLabelLogosHandler = (port: string) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WHITELABEL_LOGOS}*`,
+    () => {
+      return whiteLabelLogosResolver();
+    },
+  );
+};
+
 export const whiteLabelLogosIsDefaultHandler = (port: string) => {
   return http.get(
-    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WHITELABEL_LOGOS_IS_DEFAULT}`,
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WHITELABEL_LOGOS_IS_DEFAULT}*`,
     () => {
       return whiteLabelLogosIsDefaultResolver();
     },

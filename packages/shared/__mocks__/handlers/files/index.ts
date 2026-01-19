@@ -27,7 +27,7 @@
 import { filesSettingsHandler } from "./filesSettings";
 import { foldersTreeHandler } from "./foldersTree";
 import { folderHandler, folderInfoHandler } from "./folder";
-import { validatePublicRoomKeyHandler } from "./validatePublicRoomKey";
+import { validatePublicRoomKeyHandler, validatePublicRoomKeyPasswordHandler } from "./validatePublicRoomKey";
 import { validatePublicRoomPasswordHandler } from "./validatePublicRoomPassword";
 import {
   roomListHandler,
@@ -98,6 +98,7 @@ export {
   agentFolderResultStorageHandler,
   resultStorageFolderHandler,
   resultStorageFolderInfoHandler,
+  validatePublicRoomKeyPasswordHandler,
 };
 
 // Note: recentHandler, sharedWithMeHandler, favoritesHandler are NOT included here
@@ -127,4 +128,5 @@ export const filesHandlers = (port: string) => [
   addFileToFavoritesHandler(port),
   getFileHandler(port),
   deleteFavoritesHandler(port),
+  validatePublicRoomKeyPasswordHandler(port),
 ];

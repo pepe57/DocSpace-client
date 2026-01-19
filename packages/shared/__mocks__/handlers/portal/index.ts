@@ -29,7 +29,7 @@ import { continuePortalHandler } from "./continue";
 import { deletePortalHandler } from "./delete";
 import { restoreProgressHandler } from "./restoreProgress";
 import { tariffHandler } from "./tariff";
-import { getPortalHandler } from "./getPortal";
+import { getPortalHandler, getPortalApiHandler } from "./getPortal";
 import { quotaHandler } from "./quota";
 import { backupProgressHandler } from "./backupprogress";
 import { backupScheduleHandler } from "./backupshedule";
@@ -42,6 +42,7 @@ export {
   restoreProgressHandler,
   tariffHandler,
   getPortalHandler,
+  getPortalApiHandler,
   quotaHandler,
   backupProgressHandler,
   backupScheduleHandler,
@@ -55,6 +56,7 @@ export const portalHandlers = (port: string) => [
   restoreProgressHandler(port),
   tariffHandler(port),
   getPortalHandler(port),
+  getPortalApiHandler(port),
   quotaHandler(port),
   backupProgressHandler(port),
   backupScheduleHandler(port),

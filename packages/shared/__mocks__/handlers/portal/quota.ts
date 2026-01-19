@@ -29,7 +29,7 @@ import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_QUOTA = "portal/payment/quota";
 
-export const quotaSuccess = (withCustomization: boolean = false) => ({
+export const quotaSuccess = (withCustomization: boolean = true) => ({
   response: {
     id: -10,
     title: "Business",
@@ -201,13 +201,13 @@ export const quotaSuccess = (withCustomization: boolean = false) => ({
   ok: true,
 });
 
-export const quotaResolver = (withCustomization: boolean = false) => {
+export const quotaResolver = (withCustomization: boolean = true) => {
   return new Response(JSON.stringify(quotaSuccess(withCustomization)));
 };
 
 export const quotaHandler = (
   port: string,
-  withCustomization: boolean = false,
+  withCustomization: boolean = true,
 ) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_QUOTA}`, () => {
     return quotaResolver(withCustomization);

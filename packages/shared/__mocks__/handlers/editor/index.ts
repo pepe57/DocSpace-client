@@ -29,6 +29,13 @@ import { fileByIdHandler } from "./fileById";
 import { fillingStatusHandler } from "./formFillingStatus";
 import { fillingSessionHandler } from "./fillingSession";
 
+export {
+  openEditHandler,
+  fileByIdHandler,
+  fillingStatusHandler,
+  fillingSessionHandler,
+};
+
 export const editorHandlers = (port: string) => [
   openEditHandler(port),
   fileByIdHandler(port),
