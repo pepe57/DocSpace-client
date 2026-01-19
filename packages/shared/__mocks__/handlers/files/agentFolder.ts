@@ -480,8 +480,11 @@ export const agentFolderChatHandler = (
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_CHAT}`,
     ({ request, params }) => {
       // Handle requests for agent folder (id=2) - this is the mock agent folder ID used in tests
+      const url = new URL(request.url);
+      const searchArea = url.searchParams.get("searchArea");
+
       const folderId = params.id;
-      if (folderId === "2") {
+      if (folderId === "2" && searchArea !== "6") {
         return agentFolderChatResolver(type);
       }
       // Pass through to other handlers for non-agent folders

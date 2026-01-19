@@ -48,6 +48,7 @@ import {
   favoritesHandler,
   aiRoomsChatsStreamHandler,
 } from "@docspace/shared/__mocks__/handlers";
+import { SearchArea } from "@docspace/shared/enums";
 
 test.describe("AI chat", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -713,53 +714,53 @@ test.describe("AI chat", () => {
       ]);
     });
 
-    // test("should redirect to result storage url if user can not use chat", async ({
-    //   page,
-    //   mockRequest,
-    //   baseUrl
-    // }) => {
-    //   // await mockRequest.router([
-    //   //   endpoints.aiRoomsChatsConfigAllEnabled,
-    //   //   endpoints.aiRoomsServersEmpty,
-    //   //   endpoints.aiRoomsChatsEmpty,
-    //   //   endpoints.agentFolderChatCanNotUseChat,
-    //   //   endpoints.agentFolderResultStorageCanNotUseChat,
-    //   //   endpoints.agentFolderInfoCanNotUseChat,
-    //   // ]);
-    //   mockRequest.use(
-    //   //  rootHandler(TEST_PORT),
-    //     aiRoomsChatsConfigHandler(TEST_PORT),
-    //     aiRoomsServersHandler(TEST_PORT),
-    //     aiRoomsChatsHandler(TEST_PORT, "empty"),
-    //     agentFolderChatHandler(TEST_PORT, "canNotUseChat"),
-    //     agentFolderResultStorageHandler(TEST_PORT, "canNotUseChat"),
-    //     agentFolderInfoHandler(TEST_PORT, "canNotUseChat"),
-    //   );
+    test("should redirect to result storage url if user can not use chat", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      // await mockRequest.router([
+      //   endpoints.aiRoomsChatsConfigAllEnabled,
+      //   endpoints.aiRoomsServersEmpty,
+      //   endpoints.aiRoomsChatsEmpty,
+      //   endpoints.agentFolderChatCanNotUseChat,
+      //   endpoints.agentFolderResultStorageCanNotUseChat,
+      //   endpoints.agentFolderInfoCanNotUseChat,
+      // ]);
+      mockRequest.use(
+        //  rootHandler(TEST_PORT),
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT, "canNotUseChat"),
+        agentFolderResultStorageHandler(TEST_PORT, "canNotUseChat"),
+        agentFolderInfoHandler(TEST_PORT, "canNotUseChat"),
+      );
 
-    //   await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
-    //   const containerLoader = page.getByTestId("chat-container-loading");
+      const containerLoader = page.getByTestId("chat-container-loading");
 
-    //   await expect(containerLoader).toBeVisible();
-    //   await containerLoader.waitFor({ state: "hidden" });
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
-    //   await expect(page).toHaveURL(
-    //     (url) =>
-    //       url.pathname === "/ai-agents/2/filter" &&
-    //       url.searchParams.get("folder") === "2" &&
-    //       url.searchParams.get("searchArea") ===
-    //         SearchArea.ResultStorage.toString(),
-    //   );
+      await expect(page).toHaveURL(
+        (url) =>
+          url.pathname === "/ai-agents/2/filter" &&
+          url.searchParams.get("folder") === "2" &&
+          url.searchParams.get("searchArea") ===
+            SearchArea.ResultStorage.toString(),
+      );
 
-    //   const warningToast = page.getByTestId("toast-content");
-    //   await expect(warningToast).toBeVisible();
+      const warningToast = page.getByTestId("toast-content");
+      await expect(warningToast).toBeVisible();
 
-    //   await expect(page).toHaveScreenshot([
-    //     "desktop",
-    //     "ai-chat",
-    //     "ai-chat-viewer-redirect-result-storage.png",
-    //   ]);
-    // });
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-viewer-redirect-result-storage.png",
+      ]);
+    });
 
     test("should open chat via chat select", async ({
       page,
@@ -1410,155 +1411,151 @@ test.describe("AI chat", () => {
       ]);
     });
 
-    // test("should save chat input state when switch between agent tabs", async ({
-    //   page,
-    //   mockRequest,
-    //   baseUrl
-    // }) => {
-    //   // await mockRequest.router([
-    //   //   endpoints.aiRoomsChatsConfigAllEnabled,
-    //   //   endpoints.aiRoomsServersEmpty,
-    //   //   endpoints.aiRoomsChats,
-    //   //   endpoints.agentFolderChat,
-    //   //   endpoints.aiChat,
-    //   //   endpoints.agentFolderResultStorage,
-    //   //   endpoints.agentFolderInfo,
-    //   // ]);
-    //   mockRequest.use(
-    //     aiRoomsChatsConfigHandler(TEST_PORT),
-    //     aiRoomsServersHandler(TEST_PORT),
-    //     aiRoomsChatsHandler(TEST_PORT),
-    //     agentFolderChatHandler(TEST_PORT),
-    //     aiChatHandler(TEST_PORT),
-    //     agentFolderResultStorageHandler(TEST_PORT),
-    //     agentFolderInfoHandler(TEST_PORT),
-    //   );
+    test("should save chat input state when switch between agent tabs", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      // await mockRequest.router([
+      //   endpoints.aiRoomsChatsConfigAllEnabled,
+      //   endpoints.aiRoomsServersEmpty,
+      //   endpoints.aiRoomsChats,
+      //   endpoints.agentFolderChat,
+      //   endpoints.aiChat,
+      //   endpoints.agentFolderResultStorage,
+      //   endpoints.agentFolderInfo,
+      // ]);
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+        agentFolderResultStorageHandler(TEST_PORT),
+        agentFolderInfoHandler(TEST_PORT),
+      );
 
-    //   await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
-    //   const containerLoader = page.getByTestId("chat-container-loading");
+      const containerLoader = page.getByTestId("chat-container-loading");
 
-    //   await expect(containerLoader).toBeVisible();
-    //   await containerLoader.waitFor({ state: "hidden" });
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
-    //   const sendButton = page.getByTestId("chat-input-send-button");
-    //   await expect(sendButton).toHaveAttribute("aria-disabled", "true");
+      const sendButton = page.getByTestId("chat-input-send-button");
+      await expect(sendButton).toHaveAttribute("aria-disabled", "true");
 
-    //   const attachButton = page.getByTestId("chat-input-attachment-button");
-    //   await attachButton.click();
+      const attachButton = page.getByTestId("chat-input-attachment-button");
+      await attachButton.click();
 
-    //   const selector = page.getByTestId("aside");
+      const selector = page.getByTestId("aside");
 
-    //   await expect(selector).toBeVisible();
+      await expect(selector).toBeVisible();
 
-    //   //await mockRequest.router([endpoints.favorites]);
-    //   mockRequest.use(
-    //     favoritesHandler(TEST_PORT),
-    //   );
-    //   const favoritesOption = selector.getByTestId(/selector-item/).filter({
-    //     hasText: "Favorites",
-    //   });
-    //   await favoritesOption.click();
+      //await mockRequest.router([endpoints.favorites]);
+      mockRequest.use(favoritesHandler(TEST_PORT));
+      const favoritesOption = selector.getByTestId(/selector-item/).filter({
+        hasText: "Favorites",
+      });
+      await favoritesOption.click();
 
-    //   const firstDocument = selector.getByTestId(/selector-item/).first();
-    //   await firstDocument.click();
+      const firstDocument = selector.getByTestId(/selector-item/).first();
+      await firstDocument.click();
 
-    //   const addButton = selector.getByTestId("selector_submit_button");
-    //   await addButton.click();
+      const addButton = selector.getByTestId("selector_submit_button");
+      await addButton.click();
 
-    //   const chatTextArea = page.getByTestId("chat-input-textarea");
-    //   await chatTextArea.fill("Lorem ipsum dolor sit amet");
+      const chatTextArea = page.getByTestId("chat-input-textarea");
+      await chatTextArea.fill("Lorem ipsum dolor sit amet");
 
-    //  // await page.unroute(endpoints.favorites.url);
+      // await page.unroute(endpoints.favorites.url);
+      mockRequest.use(agentFolderResultStorageHandler(TEST_PORT));
 
-    //   const resultStorageTab = page.getByTestId("result_tab");
-    //   await resultStorageTab.click();
+      const resultStorageTab = page.getByTestId("result_tab");
+      await resultStorageTab.click();
 
-    //   await expect(page.getByTestId("empty-view")).toBeVisible();
+      await expect(page.getByTestId("empty-view")).toBeVisible();
 
-    //   //await mockRequest.router([endpoints.agentFolderChat]);
-    //   mockRequest.use(
-    //     agentFolderChatHandler(TEST_PORT),
-    //   );
-    //   const chatTab = page.getByTestId("chat_tab");
-    //   await chatTab.click();
+      //await mockRequest.router([endpoints.agentFolderChat]);
+      mockRequest.use(agentFolderChatHandler(TEST_PORT));
+      const chatTab = page.getByTestId("chat_tab");
+      await chatTab.click();
 
-    //   await expect(page).toHaveScreenshot([
-    //     "desktop",
-    //     "ai-chat",
-    //     "ai-chat-switch-tab-save-state.png",
-    //   ]);
-    // });
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-switch-tab-save-state.png",
+      ]);
+    });
 
-    // test("should save chat input state when when reload page", async ({
-    //   page,
-    //   mockRequest,
-    //   baseUrl
-    // }) => {
-    //   // await mockRequest.router([
-    //   //   endpoints.aiRoomsChatsConfigAllEnabled,
-    //   //   endpoints.aiRoomsServersEmpty,
-    //   //   endpoints.aiRoomsChats,
-    //   //   endpoints.agentFolderChat,
-    //   //   endpoints.aiChat,
-    //   // ]);
-    //   mockRequest.use(
-    //     aiRoomsChatsConfigHandler(TEST_PORT),
-    //     aiRoomsServersHandler(TEST_PORT),
-    //     aiRoomsChatsHandler(TEST_PORT),
-    //     agentFolderChatHandler(TEST_PORT),
-    //     aiChatHandler(TEST_PORT),
-    //   );
+    test("should save chat input state when reload page", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      // await mockRequest.router([
+      //   endpoints.aiRoomsChatsConfigAllEnabled,
+      //   endpoints.aiRoomsServersEmpty,
+      //   endpoints.aiRoomsChats,
+      //   endpoints.agentFolderChat,
+      //   endpoints.aiChat,
+      // ]);
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+      );
 
-    //   await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
-    //   const containerLoader = page.getByTestId("chat-container-loading");
+      const containerLoader = page.getByTestId("chat-container-loading");
 
-    //   await expect(containerLoader).toBeVisible();
-    //   await containerLoader.waitFor({ state: "hidden" });
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
-    //   const sendButton = page.getByTestId("chat-input-send-button");
-    //   await expect(sendButton).toHaveAttribute("aria-disabled", "true");
+      const sendButton = page.getByTestId("chat-input-send-button");
+      await expect(sendButton).toHaveAttribute("aria-disabled", "true");
 
-    //   const attachButton = page.getByTestId("chat-input-attachment-button");
-    //   await attachButton.click();
+      const attachButton = page.getByTestId("chat-input-attachment-button");
+      await attachButton.click();
 
-    //   const selector = page.getByTestId("aside");
+      const selector = page.getByTestId("aside");
 
-    //   await expect(selector).toBeVisible();
+      await expect(selector).toBeVisible();
 
-    //   //await mockRequest.router([endpoints.favorites]);
-    //   mockRequest.use(
-    //     favoritesHandler(TEST_PORT),
-    //   );
+      //await mockRequest.router([endpoints.favorites]);
+      mockRequest.use(favoritesHandler(TEST_PORT));
 
-    //   const favoritesOption = selector.getByTestId(/selector-item/).filter({
-    //     hasText: "Favorites",
-    //   });
-    //   await favoritesOption.click();
+      const favoritesOption = selector.getByTestId(/selector-item/).filter({
+        hasText: "Favorites",
+      });
+      await favoritesOption.click();
 
-    //   const firstDocument = selector.getByTestId(/selector-item/).first();
-    //   await firstDocument.click();
+      const firstDocument = selector.getByTestId(/selector-item/).first();
+      await firstDocument.click();
 
-    //   const addButton = selector.getByTestId("selector_submit_button");
-    //   await addButton.click();
+      const addButton = selector.getByTestId("selector_submit_button");
+      await addButton.click();
 
-    //   const chatTextArea = page.getByTestId("chat-input-textarea");
-    //   await chatTextArea.fill("Lorem ipsum dolor sit amet");
+      const chatTextArea = page.getByTestId("chat-input-textarea");
+      await chatTextArea.fill("Lorem ipsum dolor sit amet");
 
-    //   //await page.unroute(endpoints.favorites.url);
+      //await page.unroute(endpoints.favorites.url);
+      mockRequest.use(agentFolderChatHandler(TEST_PORT));
 
-    //   await page.reload();
+      await page.reload();
 
-    //   await expect(containerLoader).toBeVisible();
-    //   await containerLoader.waitFor({ state: "hidden" });
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
-    //   await expect(page).toHaveScreenshot([
-    //     "desktop",
-    //     "ai-chat",
-    //     "ai-chat-reload-page-save-state.png",
-    //   ]);
-    // });
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-reload-page-save-state.png",
+      ]);
+    });
   });
 
   // ================================== User ==================================

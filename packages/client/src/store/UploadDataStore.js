@@ -37,6 +37,9 @@ import {
   uploadFile,
   convertFile,
   startUploadSession,
+  uploadChunkSequential,
+  uploadChunkParallel,
+  finalizeUploadSession,
   getFileConversationProgress,
   copyToFolder,
   moveToFolder,
@@ -1271,22 +1274,21 @@ class UploadDataStore {
       chunksLength, // length of file chunks
       resolve, // resolve cb
       reject, // reject cb
-      isAsyncUpload = false, // async upload checker
       isFinalize = false, // is finalize chunk
       //  allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
       createNewIfExist,
     } = chunkUploadObj;
 
-    if (!res.data.data && res.data.message) {
+    if (!res || typeof res !== "object" || res.status === 1) {
       return reject({
-        message: res.data.message,
+        message: res.error?.message,
         chunkIndex: index,
         chunkSize: fileSize,
         isFinalize,
       });
     }
 
-    const { uploaded, id: fileId, file: fileInfo } = res.data.data;
+    const { uploaded, id: fileId, file: fileInfo } = res;
 
     // let uploadedSize;
 
@@ -1387,9 +1389,8 @@ class UploadDataStore {
     if (currentFile.action === "uploaded") {
       this.refreshFiles(currentFile);
     }
-    if (!isAsyncUpload || res.status === 201) {
-      return resolve();
-    }
+
+    return resolve();
   };
 
   asyncUpload = async (t, chunkData, resolve, reject, createNewIfExist) => {
@@ -1427,9 +1428,9 @@ class UploadDataStore {
           ].isFinished = true;
         }
 
-        if (!res.data.data && res.data.message) {
+        if (res.status === 1 || !res || typeof res !== "object") {
           delete this.asyncUploadObj[operationId];
-          return reject(res.data.message);
+          return reject(res.error?.message);
         }
         this.asyncUpload(t, chunkData, resolve, reject, createNewIfExist);
 
@@ -1461,7 +1462,6 @@ class UploadDataStore {
           chunksLength: length,
           resolve,
           reject,
-          isAsyncUpload: true,
           isFinalize: false,
           allChunkUploaded: allIsUploaded === 0,
           createNewIfExist,
@@ -1498,7 +1498,6 @@ class UploadDataStore {
               chunksLength: length,
               resolve,
               reject,
-              isAsyncUpload: true,
               isFinalize: true,
               createNewIfExist,
             });
@@ -1511,7 +1510,8 @@ class UploadDataStore {
   };
 
   uploadFileChunks = async (
-    location,
+    sessionId,
+    folderId,
     requestsDataArray,
     fileSize,
     indexOfFile,
@@ -1534,8 +1534,10 @@ class UploadDataStore {
           isFinished: false,
           isFinalize: false,
           onUpload: () =>
-            uploadFile(
-              `${location}&chunkNumber=${index + 1}&upload=true`,
+            uploadChunkParallel(
+              folderId,
+              sessionId,
+              index + 1,
               requestsDataArray[index],
             ),
         });
@@ -1544,7 +1546,7 @@ class UploadDataStore {
         isActive: false,
         isFinished: false,
         isFinalize: true,
-        onUpload: () => uploadFile(`${location}&finalize=true`),
+        onUpload: () => finalizeUploadSession(folderId, sessionId),
       });
 
       if (!this.asyncUploadObj[operationId]) {
@@ -1577,7 +1579,11 @@ class UploadDataStore {
           return Promise.resolve();
         }
 
-        const res = await uploadFile(location, requestsDataArray[index]);
+        const res = await uploadChunkSequential(
+          folderId,
+          sessionId,
+          requestsDataArray[index],
+        );
         const resolve = (r) => Promise.resolve(r);
         const reject = (err) => Promise.reject(err);
 
@@ -1734,8 +1740,10 @@ class UploadDataStore {
     const fileName = file.name;
     const fileSize = file.size;
 
+    const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
+
     return startUploadSession(
-      isAIRoom ? knowledgeId : toFolderId,
+      actualFolderId,
       fileName,
       fileSize,
       "", // relativePath,
@@ -1744,9 +1752,9 @@ class UploadDataStore {
       createNewIfExist,
     )
       .then((res) => {
-        const location = res.data.location;
-        const path = res.data.path;
-        const operationId = res.data.id;
+        const sessionId = res.id;
+        const path = res.path;
+        const operationId = res.id;
         const requestsDataArray = [];
 
         let chunk = 0;
@@ -1760,13 +1768,14 @@ class UploadDataStore {
         }
 
         return {
-          location,
+          sessionId,
+          folderId: actualFolderId,
           requestsDataArray,
           path,
           operationId,
         };
       })
-      .then(({ location, requestsDataArray, path, operationId }) => {
+      .then(({ sessionId, folderId, requestsDataArray, path, operationId }) => {
         const fileIndex = this.uploadedFilesHistory.findIndex(
           (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
         );
@@ -1774,7 +1783,8 @@ class UploadDataStore {
           this.uploadedFilesHistory[fileIndex].percent = chunks < 2 ? 50 : 0;
 
         return this.uploadFileChunks(
-          location,
+          sessionId,
+          folderId,
           requestsDataArray,
           fileSize,
           indexOfFile,
