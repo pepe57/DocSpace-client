@@ -39,7 +39,7 @@ import { Tag } from "../tag";
 import { Text } from "../text";
 import { InputType, TextInput } from "../text-input";
 
-import { useTagSelector } from "./TagSelectorProvider";
+import { useTagSelector } from "./TagSelector.provider";
 import { useUpdateRoomTagsMutation } from "./hooks/useTagsQuery";
 import type { TTag } from "./TagSelector.types";
 import styles from "./TagSelector.module.scss";

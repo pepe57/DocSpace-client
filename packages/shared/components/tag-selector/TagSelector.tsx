@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { match } from "ts-pattern";
 import { createPortal } from "react-dom";
 import React, { useLayoutEffect, useRef } from "react";
 import {
@@ -39,14 +40,15 @@ import { useIsMobile } from "../../hooks/useIsMobile";
 
 import { ModalDialog, ModalDialogType } from "../modal-dialog";
 
-import { TagSelectorProvider } from "./TagSelectorProvider";
 import { useTagsQuery } from "./hooks/useTagsQuery";
-import { TagSelectorFilter } from "./TagSelectorFilter";
-import { TagSelectorContent } from "./TagSelectorContent";
-import { TagSelectorLoader } from "./TagSelectorLoader";
-import styles from "./TagSelector.module.scss";
+
+import { TagSelectorProvider } from "./TagSelector.provider";
+import { TagSelectorFilter } from "./TagSelector.filter";
+import { TagSelectorContent } from "./TagSelector.content";
+import { TagSelectorLoader } from "./TagSelector.loader";
 import type { TagSelectorProps } from "./TagSelector.types";
-import { match } from "ts-pattern";
+
+import styles from "./TagSelector.module.scss";
 
 export const TagSelector: React.FC<TagSelectorProps> = ({
   roomId,
@@ -66,30 +68,26 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
   useLayoutEffect(() => {
     if (!reference.current || !ref.current || isMobile) return;
 
-    const cleanup = autoUpdate(
-      reference.current,
-      ref.current,
-      () => {
-        if (!reference.current || !ref.current || isMobile) return;
+    const cleanup = autoUpdate(reference.current, ref.current, () => {
+      if (!reference.current || !ref.current || isMobile) return;
 
-        computePosition(reference.current, ref.current, {
-          placement: "bottom-start",
-          strategy: "fixed",
-          middleware: [
-            offset(4),
-            flip({
-              fallbackAxisSideDirection: "end",
-            }),
-            shift(),
-          ],
-        }).then(({ x, y }) => {
-          if (ref.current) {
-            ref.current.style.left = `${x}px`;
-            ref.current.style.top = `${y}px`;
-          }
-        });
-      },
-    );
+      computePosition(reference.current, ref.current, {
+        placement: "bottom-start",
+        strategy: "fixed",
+        middleware: [
+          offset(4),
+          flip({
+            fallbackAxisSideDirection: "end",
+          }),
+          shift(),
+        ],
+      }).then(({ x, y }) => {
+        if (ref.current) {
+          ref.current.style.left = `${x}px`;
+          ref.current.style.top = `${y}px`;
+        }
+      });
+    });
 
     return cleanup;
   }, [reference, reference.current, ref, isMobile]);
@@ -104,7 +102,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
       {match(status)
         .with("pending", () => <TagSelectorLoader />)
         .with("success", () => (
-          <TagSelectorProvider fetchedTags={fetchedTags!}>
+          <TagSelectorProvider fetchedTags={fetchedTags ?? []}>
             <TagSelectorFilter roomId={roomId} />
             <TagSelectorContent onSelectTag={onSelectTag} roomId={roomId} />
           </TagSelectorProvider>

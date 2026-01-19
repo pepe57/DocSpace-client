@@ -39,7 +39,7 @@ import { Scrollbar } from "../scrollbar";
 import { IconButton } from "../icon-button";
 import { InputSize, InputType, TextInput } from "../text-input";
 
-import { useTagSelector } from "./TagSelectorProvider";
+import { useTagSelector } from "./TagSelector.provider";
 import {
   useUpdateRoomTagsMutation,
   useUpdateTagNameMutation,

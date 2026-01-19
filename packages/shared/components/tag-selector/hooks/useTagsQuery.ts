@@ -28,10 +28,10 @@ import unionBy from "lodash/unionBy";
 import isString from "lodash/isString";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-
-import { TagType } from "../../tag/Tag.types";
 import { getTags, editRoom, updateTagName } from "../../../api/rooms";
-import { TTag, UpdateTagNameParams } from "../TagSelector.types";
+
+import type { TagType } from "../../tag/Tag.types";
+import type { TTag, UpdateTagNameParams } from "../TagSelector.types";
 
 export const TAGS_QUERY_KEY = ["tags"];
 
