@@ -42,8 +42,10 @@ import { createLinksRouteHandler } from "@docspace/shared/__mocks__/handlers/sha
 test.describe("Shared with me", () => {
   test.beforeEach(async ({ mockRequest }) => {
     mockRequest.use(
+      rootHandler(TEST_PORT),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
-      selfActivationStatusHandler(TEST_PORT, null, false, true)
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      sharedWithMeHandler(TEST_PORT)
     );
   });
 
@@ -98,7 +100,7 @@ test.describe("Shared with me", () => {
     baseUrl
   }) => {
     mockRequest.use(
-      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket)
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
     );
 
     await wsMock.setupWebSocketMock();
@@ -156,7 +158,7 @@ test.describe("Shared with me", () => {
     baseUrl
   }) => {
     mockRequest.use(
-      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket)
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
     );
 
     await wsMock.setupWebSocketMock();

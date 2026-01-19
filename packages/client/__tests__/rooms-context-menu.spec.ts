@@ -410,7 +410,6 @@ test.describe("Context menu DocAdmin", () => {
 
   test.describe("Not in room", () => {
     test("Custom without share", async ({ page, mockRequest, baseUrl }) => {
-      //await mockRequest.router([endpoints.cmRoomListNotInRoom]);
       mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.None, inRoom: false,}));
 
       await page.goto(`${baseUrl}/rooms/shared/`);
@@ -439,7 +438,7 @@ test.describe("Context menu DocAdmin", () => {
 
     test("Public/Form/Custom(Public)", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListNotInRoom]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.Collaborator, inRoom: false}));
+      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.None, inRoom: false}));
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -510,7 +509,7 @@ test.describe("Context menu DocAdmin", () => {
 
     test("Public third-party", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListNotInRoom]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.Collaborator, inRoom: false}));
+      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.None, inRoom: false}));
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -534,7 +533,7 @@ test.describe("Context menu DocAdmin", () => {
 
     test("Collaboration", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListNotInRoom]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.Collaborator, inRoom: false}));
+      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.None, inRoom: false}));
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -562,7 +561,7 @@ test.describe("Context menu DocAdmin", () => {
 
     test("VDR", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListNotInRoom]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.Collaborator, inRoom: false}));
+      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.None, inRoom: false}));
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 

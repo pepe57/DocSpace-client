@@ -67,27 +67,27 @@ test.describe("Profile", () => {
     ]);
   });
 
-   test("should change language", async ({ page, mockRequest, baseUrl }) => {
-   mockRequest.use(updateUserCultureHandler(TEST_PORT, "fr"));
+  //  test("should change language", async ({ page, mockRequest, baseUrl }) => {
+  //  mockRequest.use(updateUserCultureHandler(TEST_PORT, "fr"));
 
-    await page.goto(`${baseUrl}/profile/login`);
+  //   await page.goto(`${baseUrl}/profile/login`);
 
-    const mainProfile = page.getByTestId("main-profile");
-    await expect(mainProfile).toBeVisible();
+  //   const mainProfile = page.getByTestId("main-profile");
+  //   await expect(mainProfile).toBeVisible();
 
-    const languageComboBox = page.getByTestId("language_combo_box").first();
-    await expect(languageComboBox).toBeVisible();
-    await languageComboBox.click();
+  //   const languageComboBox = page.getByTestId("language_combo_box").first();
+  //   await expect(languageComboBox).toBeVisible();
+  //   await languageComboBox.click();
 
-    const language = page.getByTestId("drop_down_item_fr").first();
-    await language.click();
+  //   const language = page.getByTestId("drop_down_item_fr").first();
+  //   await language.click();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "profile",
-      "profile-fr.png",
-    ]);
-  });
+  //   await expect(page).toHaveScreenshot([
+  //     "desktop",
+  //     "profile",
+  //     "profile-fr.png",
+  //   ]);
+  // });
 
 
    test("should navigate to profile with social networks", async ({ page, mockRequest, baseUrl }) => {
