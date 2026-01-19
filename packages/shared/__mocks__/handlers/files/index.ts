@@ -100,20 +100,21 @@ export {
   resultStorageFolderInfoHandler,
 };
 
+// Note: recentHandler, sharedWithMeHandler, favoritesHandler are NOT included here
+// because they use files/:id pattern which conflicts with folderHandler.
+// They should be added explicitly in tests that need them.
+
 export const filesHandlers = (port: string) => [
   //foldersTreeHandler(port),
-  // agentFolderResultStorageHandler must be first - it only handles searchArea=6 and returns undefined for others
+  // agentFolderResultStorageHandler and agentFolderChatHandler filter by searchArea parameter
   agentFolderResultStorageHandler(port),
+  agentFolderChatHandler(port),
+  resultStorageFolderHandler(port),
   rootHandler(port),
   filesSettingsHandler(port),
   validatePublicRoomKeyHandler(port),
   roomListHandler(port),
-  recentHandler(port),
-  sharedWithMeHandler(port),
-  favoritesHandler(port),
-  agentFolderChatHandler(port),
   agentFolderInfoHandler(port),
-  resultStorageFolderHandler(port),
   resultStorageFolderInfoHandler(port),
   folderHandler(port),
   folderInfoHandler(port),

@@ -30,7 +30,7 @@ import { http } from "msw";
 import { API_PREFIX } from "../../e2e/utils";
 import type { TFile, TFolder, TGetFolder } from "../../../api/files/types";
 
-export const PATH_FOLDER = "files/:id";
+export const PATH_FOLDER = "files/:id(\\d+)";
 export const PATH_FOLDER_INFO = "files/folder/:folderId";
 
 export enum TypeFolder {

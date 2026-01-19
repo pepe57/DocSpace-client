@@ -235,7 +235,13 @@ export const resultStorageFolderInfoResolver = () => {
 };
 
 export const resultStorageFolderHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_RESULT_STORAGE_FOLDER}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_RESULT_STORAGE_FOLDER}`, ({ request }) => {
+    // Only handle requests with searchArea=6 (Result Storage) to avoid intercepting other folder requests
+    const url = new URL(request.url);
+    const searchArea = url.searchParams.get('searchArea');
+    if (searchArea !== '6') {
+      return;
+    }
     return resultStorageFolderResolver();
   });
 };
