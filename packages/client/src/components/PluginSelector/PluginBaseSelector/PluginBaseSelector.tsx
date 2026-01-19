@@ -119,6 +119,7 @@ const PluginBaseSelector = ({
   };
 
   const items = mapDtoToSelectorItems(selectorProps.items);
+  const selectedItems = selectorProps.selectedItems ? mapDtoToSelectorItems(selectorProps.selectedItems) : undefined;
 
   const cancelButtonProps: TSelectorCancelButton = selectorProps.withCancelButton
     ? {
@@ -196,19 +197,21 @@ const PluginBaseSelector = ({
       hasNextPage={!!selectorProps.hasNextPage}
       isNextPageLoading={!!selectorProps.isNextPageLoading}
       loadNextPage={loadNextPage}
-      totalItems={items.length}
+      totalItems={selectorProps.totalItems ?? 0}
       rowLoader={<RowLoader isUser={false} isMultiSelect={false} />}
       isLoading={!!selectorProps.isLoading}
       isMultiSelect={!!selectorProps.isMultiSelect}
+      selectedItems={selectedItems}
+      maxSelectedItems={selectorProps.maxSelectedItems}
       onSelect={onSelect}
       onClose={onCancel}
-      descriptionText=""
+      descriptionText={selectorProps.descriptionText}
       emptyScreenImage={EmptyScreenFilter}
-      emptyScreenHeader=""
-      emptyScreenDescription=""
+      emptyScreenHeader={selectorProps.emptyScreenHeader ?? ""}
+      emptyScreenDescription={selectorProps.emptyScreenDescription ?? ""}
       searchEmptyScreenImage={EmptyScreenFilter}
-      searchEmptyScreenHeader=""
-      searchEmptyScreenDescription=""
+      searchEmptyScreenHeader={selectorProps.searchEmptyScreenHeader ?? ""}
+      searchEmptyScreenDescription={selectorProps.searchEmptyScreenDescription ?? ""}
       {...cancelButtonProps}
       {...submitButtonProps}
       {...breadCrumbsProps}
