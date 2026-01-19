@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 // import "@docspace/shared/utils/wdyr";
-import React from "react";
+import React, { useState } from "react";
 import { I18nextProvider } from "react-i18next";
 import { RouterProvider } from "react-router";
 import { Provider as MobxProvider } from "mobx-react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import store from "SRC_DIR/store";
 
@@ -44,6 +45,8 @@ import router from "./router";
 import i18n from "./i18n";
 
 const App = () => {
+  const [queryClient] = useState(() => new QueryClient());
+
   React.useEffect(() => {
     const regex = /(\/){2,}/g;
     const replaceRegex = /(\/)+/g;
@@ -55,13 +58,15 @@ const App = () => {
 
   return (
     <MobxProvider {...store}>
-      <I18nextProvider i18n={i18n}>
-        <ThemeProvider>
-          <ErrorBoundary>
-            <RouterProvider router={router} />
-          </ErrorBoundary>
-        </ThemeProvider>
-      </I18nextProvider>
+      <QueryClientProvider client={queryClient}>
+        <I18nextProvider i18n={i18n}>
+          <ThemeProvider>
+            <ErrorBoundary>
+              <RouterProvider router={router} />
+            </ErrorBoundary>
+          </ThemeProvider>
+        </I18nextProvider>
+      </QueryClientProvider>
     </MobxProvider>
   );
 };

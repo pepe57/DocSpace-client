@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { createPortal } from "react-dom";
-import React, { useLayoutEffect, useRef, Suspense, useMemo } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import {
   computePosition,
   autoUpdate,
@@ -39,12 +39,14 @@ import { useIsMobile } from "../../hooks/useIsMobile";
 
 import { ModalDialog, ModalDialogType } from "../modal-dialog";
 
-import { TagSelectorProvider, createTagsResource } from "./TagSelectorProvider";
+import { TagSelectorProvider } from "./TagSelectorProvider";
+import { useTagsQuery } from "./hooks/useTagsQuery";
 import { TagSelectorFilter } from "./TagSelectorFilter";
 import { TagSelectorContent } from "./TagSelectorContent";
 import { TagSelectorLoader } from "./TagSelectorLoader";
 import styles from "./TagSelector.module.scss";
 import type { TagSelectorProps } from "./TagSelector.types";
+import { match } from "ts-pattern";
 
 export const TagSelector: React.FC<TagSelectorProps> = ({
   roomId,
@@ -59,7 +61,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
   const isMobile = useIsMobile();
   useClickOutside(isMobile ? modalRef : ref, onClose);
 
-  const tagsResource = useMemo(() => createTagsResource(), []);
+  const { data: fetchedTags, status } = useTagsQuery(propsTags);
 
   useLayoutEffect(() => {
     if (!reference.current || !ref.current || isMobile) return;
@@ -100,16 +102,18 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
       className={styles.tagSelector}
       ref={ref}
     >
-      <Suspense fallback={<TagSelectorLoader />}>
-        <TagSelectorProvider
-          initialTags={propsTags}
-          roomId={roomId}
-          tagsResource={tagsResource}
-        >
-          <TagSelectorFilter />
-          <TagSelectorContent onSelectTag={onSelectTag} />
-        </TagSelectorProvider>
-      </Suspense>
+      {match(status)
+        .with("pending", () => <TagSelectorLoader />)
+        .with("success", () => (
+          <TagSelectorProvider fetchedTags={fetchedTags!}>
+            <TagSelectorFilter roomId={roomId} />
+            <TagSelectorContent onSelectTag={onSelectTag} roomId={roomId} />
+          </TagSelectorProvider>
+        ))
+        .with("error", () => <></>)
+        .otherwise(() => (
+          <></>
+        ))}
     </div>
   );
 

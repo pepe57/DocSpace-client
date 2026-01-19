@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 
 import CheckIconURL from "PUBLIC_DIR/images/check.edit.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
@@ -40,6 +40,10 @@ import { IconButton } from "../icon-button";
 import { InputSize, InputType, TextInput } from "../text-input";
 
 import { useTagSelector } from "./TagSelectorProvider";
+import {
+  useUpdateRoomTagsMutation,
+  useUpdateTagNameMutation,
+} from "./hooks/useTagsQuery";
 import styles from "./TagSelector.module.scss";
 import {
   ROW_HEIGHT,
@@ -51,23 +55,73 @@ import type { TagClickEvent } from "../tag/Tag.types";
 
 interface TagSelectorContentProps {
   onSelectTag: (tag: TagClickEvent) => void;
+  roomId: string | number;
 }
 
 export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
   onSelectTag,
+  roomId,
 }) => {
   const isMobile = useIsMobile();
-  const {
-    filteredTags,
-    editingIndex,
-    editValue,
-    setEditValue,
-    toggleChecked,
-    handleEdit,
-    confirmEdit,
-    cancelEdit,
-    deleteTag,
-  } = useTagSelector();
+  const { filteredTags, tags } = useTagSelector();
+  const updateRoomTags = useUpdateRoomTagsMutation(roomId);
+  const updateTagName = useUpdateTagNameMutation();
+
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [editValue, setEditValue] = useState("");
+
+  const toggleChecked = useCallback(
+    (index: number) => {
+      const updatedTags = [...tags];
+      updatedTags[index].checked = !updatedTags[index].checked;
+
+      const roomTagNames = updatedTags
+        .filter((tag) => tag.checked)
+        .map((tag) => tag.name);
+
+      updateRoomTags.mutate(roomTagNames);
+    },
+    [tags, updateRoomTags],
+  );
+
+  const handleEdit = useCallback(
+    (index: number) => {
+      setEditingIndex(index);
+      setEditValue(tags[index].name);
+    },
+    [tags],
+  );
+
+  const confirmEdit = useCallback(async () => {
+    if (editingIndex === null) return;
+
+    const newName = editValue.trim();
+    const oldName = tags[editingIndex].name;
+
+    setEditingIndex(null);
+    setEditValue("");
+
+    await updateTagName.mutateAsync({ oldName, newName });
+  }, [editingIndex, editValue, tags, updateRoomTags]);
+
+  const cancelEdit = useCallback(() => {
+    setEditingIndex(null);
+    setEditValue("");
+  }, []);
+
+  const deleteTag = useCallback(
+    async (index: number) => {
+      const updatedTags = [...tags];
+      updatedTags.splice(index, 1);
+
+      const roomTagNames = updatedTags
+        .filter((tag) => tag.checked)
+        .map((tag) => tag.name);
+
+      await updateRoomTags.mutateAsync(roomTagNames);
+    },
+    [tags, updateRoomTags],
+  );
 
   const editTagHandleKey = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {

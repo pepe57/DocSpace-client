@@ -24,19 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import unionBy from "lodash/unionBy";
 import React, {
   createContext,
-  useOptimistic,
-  useState,
   useMemo,
+  useState,
   useDeferredValue,
   useCallback,
-  startTransition,
-  use,
 } from "react";
-
-import { getTags, editRoom } from "../../api/rooms";
 
 import type {
   TTag,
@@ -44,176 +38,76 @@ import type {
   TagSelectorProviderProps,
 } from "./TagSelector.types";
 
-export function createTagsResource() {
-  const tagsPromise = getTags();
-  return tagsPromise || Promise.resolve([]);
-}
+type TagSelectorStateContext = {
+  tags: TTag[];
+  searchValue: string;
+  deferredSearchValue: string;
+  filteredTags: TTag[];
+  showCreateTag: boolean;
+  setSearchValue: (value: string) => void;
+  clearSearch: () => void;
+};
 
-const TagSelectorContext = createContext<TagSelectorContextValue | null>(null);
+const TagSelectorStateContext = createContext<TagSelectorStateContext | null>(
+  null,
+);
 
 export const TagSelectorProvider: React.FC<TagSelectorProviderProps> = ({
   children,
-  initialTags,
-  roomId,
-  tagsResource,
+  fetchedTags,
 }) => {
-  const fetchedTags = tagsResource ? use(tagsResource) : [];
-
-  const [tags, setTags] = useState<TTag[]>(() => {
-    const initial = initialTags.map((tag) => ({
-      name: typeof tag === "string" ? tag : tag.label,
-      checked: true,
-    }));
-
-    if (fetchedTags && fetchedTags.length > 0) {
-      return unionBy(
-        initial,
-        fetchedTags.map((tag: string) => ({ name: tag, checked: false })),
-        "name",
-      );
-    }
-
-    return initial;
-  });
-
-  const [optimisticTags, addOptimisticTag] = useOptimistic(
-    tags,
-    (state, newTag: TTag) => [...state, newTag],
-  );
-
   const [searchValue, setSearchValue] = useState("");
-  const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const [editValue, setEditValue] = useState("");
-
   const deferredSearchValue = useDeferredValue(searchValue);
 
   const filteredTags = useMemo(() => {
     const search = deferredSearchValue.toLowerCase().trim();
-    return optimisticTags.filter((tag) =>
-      tag.name.toLowerCase().includes(search),
-    );
-  }, [optimisticTags, deferredSearchValue]);
+    if (!search) return fetchedTags;
+    return fetchedTags.filter((tag) => tag.name.toLowerCase().includes(search));
+  }, [fetchedTags, deferredSearchValue]);
 
   const showCreateTag = useMemo(() => {
     const trimmedValue = deferredSearchValue.trim();
     return (
       trimmedValue.length > 0 &&
-      filteredTags.every((tag) => tag.name !== trimmedValue)
+      filteredTags.every((tag) => tag.name.trim() !== trimmedValue)
     );
   }, [deferredSearchValue, filteredTags]);
 
-  const toggleChecked = useCallback((index: number) => {
-    setTags((prev) => {
-      const newTags = [...prev];
-      newTags[index].checked = !newTags[index].checked;
-      return newTags;
-    });
+  console.log({ filteredTags, showCreateTag, deferredSearchValue });
+
+  const clearSearch = useCallback(() => {
+    setSearchValue("");
   }, []);
 
-  const handleEdit = useCallback(
-    (index: number) => {
-      setEditingIndex(index);
-      setEditValue(tags[index].name);
-    },
-    [tags],
-  );
-
-  const confirmEdit = useCallback(() => {
-    if (editingIndex === null) return;
-    startTransition(() => {
-      setTags((prev) => {
-        const newTags = [...prev];
-        newTags[editingIndex].name = editValue.trim();
-        return newTags;
-      });
-      setEditingIndex(null);
-      setEditValue("");
-    });
-  }, [editingIndex, editValue]);
-
-  const cancelEdit = useCallback(() => {
-    setEditingIndex(null);
-    setEditValue("");
-  }, []);
-
-  const deleteTag = useCallback((index: number) => {
-    startTransition(() => {
-      setTags((prev) => {
-        const newTags = [...prev];
-        newTags.splice(index, 1);
-        return newTags;
-      });
-    });
-  }, []);
-
-  const handleCreateTag = useCallback(async () => {
-    const trimmedValue = searchValue.trim();
-    if (trimmedValue.length === 0) return;
-
-    const newTag: TTag = { name: trimmedValue, checked: true };
-    addOptimisticTag(newTag);
-
-    try {
-      const newTags = [...initialTags, trimmedValue];
-      await editRoom(roomId, { tags: newTags });
-      setTags((prev) => [...prev, newTag]);
-      setSearchValue("");
-    } catch (error) {
-      console.error("Error creating tag:", error);
-    }
-  }, [searchValue, roomId, initialTags, addOptimisticTag]);
-
-  const value = useMemo<TagSelectorContextValue>(
+  const value = useMemo<TagSelectorStateContext>(
     () => ({
-      tags,
-      optimisticTags,
+      tags: fetchedTags,
       searchValue,
       deferredSearchValue,
-      editingIndex,
-      editValue,
       filteredTags,
       showCreateTag,
-      roomId,
       setSearchValue,
-      setEditingIndex,
-      setEditValue,
-      toggleChecked,
-      handleEdit,
-      confirmEdit,
-      cancelEdit,
-      deleteTag,
-      handleCreateTag,
-      addOptimisticTag,
+      clearSearch,
     }),
     [
-      tags,
-      optimisticTags,
+      fetchedTags,
       searchValue,
       deferredSearchValue,
-      editingIndex,
-      editValue,
       filteredTags,
       showCreateTag,
-      roomId,
-      toggleChecked,
-      handleEdit,
-      confirmEdit,
-      cancelEdit,
-      deleteTag,
-      handleCreateTag,
-      addOptimisticTag,
+      clearSearch,
     ],
   );
 
   return (
-    <TagSelectorContext.Provider value={value}>
+    <TagSelectorStateContext.Provider value={value}>
       {children}
-    </TagSelectorContext.Provider>
+    </TagSelectorStateContext.Provider>
   );
 };
 
-export const useTagSelector = () => {
-  const context = React.use(TagSelectorContext);
+export const useTagSelector = (): TagSelectorContextValue => {
+  const context = React.use(TagSelectorStateContext);
   if (!context) {
     throw new Error("useTagSelector must be used within TagSelectorProvider");
   }

@@ -24,11 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 export { TagSelector } from "./TagSelector";
-export {
-  TagSelectorProvider,
-  useTagSelector,
-  createTagsResource,
-} from "./TagSelectorProvider";
+export { TagSelectorProvider, useTagSelector } from "./TagSelectorProvider";
 export { TagSelectorFilter } from "./TagSelectorFilter";
 export { TagSelectorContent } from "./TagSelectorContent";
 export { TagSelectorLoader } from "./TagSelectorLoader";
+export {
+  useTagsQuery,
+  useUpdateRoomTagsMutation,
+  TAGS_QUERY_KEY,
+} from "./hooks/useTagsQuery";

@@ -25,7 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import classNames from "classnames";
-import React, { useCallback } from "react";
+import React, {
+  useCallback,
+  startTransition,
+  useState,
+  useEffect,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg?url";
@@ -35,24 +40,61 @@ import { Text } from "../text";
 import { InputType, TextInput } from "../text-input";
 
 import { useTagSelector } from "./TagSelectorProvider";
+import { useUpdateRoomTagsMutation } from "./hooks/useTagsQuery";
+import type { TTag } from "./TagSelector.types";
 import styles from "./TagSelector.module.scss";
 
-export const TagSelectorFilter: React.FC = () => {
+interface TagSelectorFilterProps {
+  roomId: string | number;
+}
+
+export const TagSelectorFilter: React.FC<TagSelectorFilterProps> = ({
+  roomId,
+}) => {
   const { t } = useTranslation("Common");
   const {
     searchValue,
     deferredSearchValue,
     showCreateTag,
     setSearchValue,
-    handleCreateTag,
+    clearSearch,
+    tags,
   } = useTagSelector();
+  const updateRoomTags = useUpdateRoomTagsMutation(roomId);
+
+  const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => {
+    if (searchValue === "") {
+      setInputValue("");
+    }
+  }, [searchValue]);
 
   const onChangeSearchValue = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchValue(event.target.value);
+      const value = event.target.value;
+      setInputValue(value);
+      startTransition(() => {
+        setSearchValue(value);
+      });
     },
     [setSearchValue],
   );
+
+  const handleCreateTag = useCallback(async () => {
+    const trimmedValue = searchValue.trim();
+    if (trimmedValue.length === 0) return;
+
+    const newTag: TTag = { name: trimmedValue, checked: true };
+    const updatedTags = [newTag, ...tags];
+    clearSearch();
+    setInputValue("");
+    const roomTagNames = updatedTags
+      .filter((tag) => tag.checked)
+      .map((tag) => tag.name);
+
+    await updateRoomTags.mutateAsync(roomTagNames);
+  }, [searchValue, tags, clearSearch, updateRoomTags]);
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -61,13 +103,14 @@ export const TagSelectorFilter: React.FC = () => {
           handleCreateTag();
           break;
         case "Escape":
-          setSearchValue("");
+          setInputValue("");
+          clearSearch();
           break;
         default:
           break;
       }
     },
-    [handleCreateTag, setSearchValue],
+    [handleCreateTag, clearSearch],
   );
 
   return (
@@ -76,7 +119,7 @@ export const TagSelectorFilter: React.FC = () => {
         scale
         autoFocus
         withBorder={false}
-        value={searchValue}
+        value={inputValue}
         type={InputType.text}
         className={styles.input}
         onChange={onChangeSearchValue}

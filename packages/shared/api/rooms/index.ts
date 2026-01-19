@@ -273,6 +273,16 @@ export function createTag(name) {
     return res;
   });
 }
+export function updateTagName(oldName: string, newName: string) {
+  const data = { oldName, newName };
+  const options = {
+    method: "PUT",
+    url: "/files/tags",
+    data,
+  };
+
+  return request(options)!;
+}
 
 export function addTagsToRoom(id, tagArray) {
   const data = { names: tagArray };
