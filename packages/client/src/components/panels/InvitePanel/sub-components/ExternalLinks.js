@@ -48,7 +48,6 @@ import { Heading } from "@docspace/shared/components/heading";
 // import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
-import { globalColors } from "@docspace/shared/themes";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import api from "@docspace/shared/api";
@@ -85,7 +84,6 @@ const ExternalLinks = ({
   editLink,
   isLinksToggling,
   setIsLinksToggling,
-  theme,
   culture,
   setInviteContactsLink,
   hideSelector,
@@ -98,10 +96,6 @@ const ExternalLinks = ({
   const linkIsExpired = moment(new Date()).isAfter(
     moment(activeLink?.expirationDate),
   );
-
-  const warningColor = theme?.isBase
-    ? globalColors.lightErrorStatus
-    : globalColors.darkErrorStatus;
 
   const locale = getCookie(LANGUAGE) ?? culture ?? "en";
 
@@ -345,7 +339,9 @@ const ExternalLinks = ({
                   <Text
                     fontSize="12px"
                     fontWeight={600}
-                    color={linkIsExpired ? warningColor : null}
+                    className={classNames(styles.inviteViaLinkText, {
+                      [styles.isExpired]: linkIsExpired,
+                    })}
                   >
                     {getCorrectDate(locale, activeLink.expirationDate)}
                   </Text>
@@ -362,8 +358,7 @@ const ExternalLinks = ({
                           </Text>
                         </>
                       }
-                      className="invite-via-link-settings-warning"
-                      color={warningColor}
+                      className={styles.inviteViaLinkSettingsWarning}
                     />
                   ) : null}
                 </div>
@@ -386,7 +381,9 @@ const ExternalLinks = ({
                   <Text
                     fontSize="12px"
                     fontWeight={600}
-                    color={showUsersLimitWarning ? warningColor : null}
+                    className={classNames(styles.inviteViaLinkText, {
+                      [styles.isError]: showUsersLimitWarning,
+                    })}
                   >
                     {activeLink.currentUseCount}/{activeLink.maxUseCount}
                   </Text>
@@ -404,7 +401,6 @@ const ExternalLinks = ({
                       }
                       className={styles.inviteViaLinkSettingsWarning}
                       tooltipMaxWidth="344px"
-                      color={warningColor}
                     />
                   ) : null}
                 </div>
@@ -423,10 +419,9 @@ export default inject(
     const { invitePanelOptions, setInvitePanelOptions } = dialogsStore;
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { isUserTariffLimit } = currentQuotaStore;
-    const { theme, standalone, allowInvitingGuests, culture } = settingsStore;
+    const { standalone, allowInvitingGuests, culture } = settingsStore;
 
     return {
-      theme,
       culture,
       roomId,
       hideSelector,

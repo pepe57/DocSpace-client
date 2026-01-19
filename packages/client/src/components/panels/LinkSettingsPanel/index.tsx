@@ -28,7 +28,7 @@ import { useState } from "react";
 import moment from "moment";
 import { Trans, useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-
+import classNames from "classnames";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
 import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 
@@ -46,14 +46,12 @@ import styles from "./LinkSettingsPanel.module.scss";
 import { LinkSettingsPanelProps } from "./LinkSettingsPanel.types";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { TOption } from "@docspace/shared/components/combobox";
-import { globalColors } from "@docspace/shared/themes";
 import { getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 const MAX_USERS_COUNT = 1000;
 
 const LinkSettingsPanel = ({
-  theme,
   culture,
   isVisible,
   filteredAccesses,
@@ -69,10 +67,6 @@ const LinkSettingsPanel = ({
 }: LinkSettingsPanelProps) => {
   const { t, ready } = useTranslation(["Common", "Files"]);
   const locale = getCookie(LANGUAGE) ?? culture ?? "en";
-
-  const warningColor = theme?.isBase
-    ? globalColors.lightErrorStatus
-    : globalColors.darkErrorStatus;
 
   const usersNumber = activeLink.currentUseCount ?? 0;
   const maxUsersNumber = activeLink.maxUseCount ?? 1;
@@ -250,8 +244,9 @@ const LinkSettingsPanel = ({
                 <Text
                   fontSize="12px"
                   fontWeight={400}
-                  className={styles.linkSettingsDescriptionText}
-                  color={showLimitError ? warningColor : undefined}
+                  className={classNames(styles.linkSettingsDescriptionText, {
+                    [styles.isError]: showLimitError,
+                  })}
                 >
                   {showLimitError
                     ? t("Files:LinkSettingsLimitExceeded")
@@ -290,8 +285,9 @@ const LinkSettingsPanel = ({
           <Text
             fontSize="12px"
             fontWeight={400}
-            className={styles.linkSettingsSubDescriptionText}
-            color={showExpiredError ? warningColor : undefined}
+            className={classNames(styles.linkSettingsSubDescriptionText, {
+              [styles.isError]: showExpiredError,
+            })}
           >
             {showExpiredError
               ? t("Common:LinkSettingsExpired")

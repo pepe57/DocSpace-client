@@ -105,8 +105,20 @@
         }
       }
 
+      .inviteViaLinkSettingsWarning {
+        svg g path {
+          fill: var(--warning-color);
+        }
+      }
+
       .inviteViaLinkSettingsText {
         color: var(--files-panel-invite-text-color);
+      }
+
+      .inviteViaLinkText {
+        &.isError {
+          color: var(--warning-color);
+        }
       }
     }
   }
@@ -490,4 +502,30 @@
     padding-left: 8px;
     padding-top: 2px;
   }
+}
+
+.invitePanelHeader {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.tooltipContent {
+  gap: 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tooltipDescription {
+  color: var(--room-type-dropdown-item-description-text) !important;
+
+  strong {
+    color: var(--tooltip-text-color) !important;
+  }
+}
+
+.tooltipLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }

@@ -2844,7 +2844,7 @@
   --combobox-button-focus-open-border-color: var(--accent-main);
 
   --combobox-label-selected-color: #{$black};
-  --combobox-label-disabled-color: #{$gray};  
+  --combobox-label-disabled-color: #{$gray};
   --combobox-label-alternative-color: #{$gray};
 
   --combobox-plus-badge-bg-color: #{$gray};
@@ -3170,15 +3170,15 @@
   --template-gallery-view-button-border: #{$gray-dark-strong};
 }
 
-.light { 
+.light {
   --deep-link-file-tile-background: #{$light-gray-hover};
   --completed-form-link-color: #{$light-blue-main};
   --completed-form-description-color: #{$gray};
   --completed-form-box-background-color: #{$gray-light};
   --completed-form-label-color: #{$gray};
-} 
+}
 
-.dark { 
+.dark {
   --deep-link-file-tile-background: #{$light-dark-gray-hover};
   --completed-form-link-color: #{$white};
   --completed-form-description-color: #{$dark-gray-dark};
@@ -3188,7 +3188,7 @@
 
 .light {
   --invite-panel-dropdown-separator: 1px solid #{$gray-strong};
-  
+
   --files-panel-border-bottom: 1px solid #{$gray-light-mid};
   --files-panel-invite-text-color: #{$gray};
 
@@ -3216,7 +3216,7 @@
 
   --invite-panel-icon-color: #{$gray-dark};
   --invite-panel-description-color: #{$gray};
-  
+
   --copy-link-icon-color: #{$gray-dark};
   --copy-link-icon-hover-color: #{$white};
 
@@ -3228,22 +3228,22 @@
   --invite-panel-drop-down-active: #{$white};
 
   --invite-panel-email-list-icon-color: #{$gray-dark};
-}}
+}
 
-.light { 
+.light {
   --template-access-avatar-border: 1px solid #{$white};
   --template-access-me-label-color: #{$gray};
-} 
+}
 
-.dark { 
+.dark {
   --template-access-avatar-border: 1px solid #{$black};
   --template-access-me-label-color: #{$gray-dark};
 }
 
-.light { 
+.light {
   --embedding-panel-info-block-background: #{$gray-light};
-} 
+}
 
-.dark { 
+.dark {
   --embedding-panel-info-block-background: #{$dark-gray-dark};
 }

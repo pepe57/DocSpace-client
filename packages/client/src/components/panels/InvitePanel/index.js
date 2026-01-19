@@ -65,7 +65,12 @@ import {
   createInviteLink,
   updateInviteLink,
 } from "@docspace/shared/api/portal";
+import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
 import { getDate } from "@docspace/shared/components/share/Share.helpers";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
+import styles from "./InvitePanel.module.scss";
+import { Badge } from "@docspace/shared/components/badge";
 
 const InvitePanel = ({
   folders,
@@ -124,6 +129,8 @@ const InvitePanel = ({
   const inputsRef = useRef();
   const invitePanelBodyRef = useRef();
   const loaderRef = useRef();
+
+  const { isRTL } = useInterfaceDirection();
 
   const onClose = () => {
     setInviteLanguage({ key: "", label: "" });
@@ -515,7 +522,7 @@ const InvitePanel = ({
     const type = getDefaultAccessUser(roomType);
 
     const expiration = defaultLink
-      ? defaultLink?.linkExpirationDate
+      ? defaultLink?.expirationDate
       : moment().add(7, "days");
 
     let link = null;
@@ -891,7 +898,6 @@ const InvitePanel = ({
         <ModalDialog.Container>
           <LinkSettingsPanel
             culture={culture}
-            theme={theme}
             isVisible={linkSettingsPanelVisible}
             onClose={() => {
               onCloseLinkSettingsPanel();
@@ -911,7 +917,46 @@ const InvitePanel = ({
       ) : null}
 
       <ModalDialog.Header>
-        {t("Common:Invite")} {roomId === -1 ? currentAccess?.label : ""}
+        <div className={styles.invitePanelHeader}>
+          {t("Common:Invite")} {roomId === -1 ? currentAccess?.label : ""}
+          {roomId === -1 ? (
+            <HelpButton
+              tooltipMaxWidth="448px"
+              place="bottom-start"
+              tooltipStyle={{
+                transform: isRTL ? "translateX(16px)" : "translateX(-16px)",
+              }}
+              tooltipContent={
+                <div className={styles.tooltipContent}>
+                  <Text
+                    className={styles.tooltipLabel}
+                    fontSize="12px"
+                    fontWeight={600}
+                  >
+                    {currentAccess?.label}
+                    {currentAccess.quota ? (
+                      <Badge
+                        label={currentAccess.quota}
+                        backgroundColor={currentAccess.color}
+                        fontSize="9px"
+                        isPaidBadge
+                        noHover
+                      />
+                    ) : null}
+                  </Text>
+
+                  <Text
+                    fontSize="12px"
+                    fontWeight={400}
+                    className={styles.tooltipDescription}
+                  >
+                    {currentAccess?.description}
+                  </Text>
+                </div>
+              }
+            />
+          ) : null}
+        </div>
       </ModalDialog.Header>
       <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>
       <ModalDialog.Footer>

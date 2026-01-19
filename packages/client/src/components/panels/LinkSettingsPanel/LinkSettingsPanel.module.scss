@@ -93,13 +93,6 @@
         }
       }
     }
-
-    .linkSettingsDescriptionText {
-      color: var(--link-settings-description-text);
-    }
-    .linkSettingsSubDescriptionText {
-      color: var(--link-settings-sub-description-text);
-    }
   }
 
   .userLimitBlock::after {
@@ -125,5 +118,21 @@
       grid-gap: 0;
       top: 1px;
     }
+  }
+}
+
+.linkSettingsDescriptionText {
+  color: var(--link-settings-description-text);
+
+  &.isError {
+    color: var(--warning-color);
+  }
+}
+
+.linkSettingsSubDescriptionText {
+  color: var(--link-settings-sub-description-text);
+
+  &.isError {
+    color: var(--warning-color);
   }
 }
