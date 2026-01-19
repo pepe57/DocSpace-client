@@ -27,7 +27,7 @@
 import { ShareAccessRights } from "@docspace/shared/enums";
 
 import { expect, test, TEST_PORT } from "./fixtures/base";
-import { 
+import {
   rootHandler,
   selfActivationStatusHandler,
   settingsHandler,
@@ -45,14 +45,11 @@ test.describe("Shared with me", () => {
       rootHandler(TEST_PORT),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
-      sharedWithMeHandler(TEST_PORT)
+      sharedWithMeHandler(TEST_PORT),
     );
   });
 
-  test("should navigate to shared with me page", async ({
-    page,
-    baseUrl
-  }) => {
+  test("should navigate to shared with me page", async ({ page, baseUrl }) => {
     // Navigate to shared with me page
     await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
@@ -71,12 +68,12 @@ test.describe("Shared with me", () => {
   test("should handle empty shared files list", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
     // Create empty mock data
     mockRequest.use(
       rootHandler(TEST_PORT),
-      sharedWithMeHandler(TEST_PORT, 'empty')
+      sharedWithMeHandler(TEST_PORT, "empty"),
     );
 
     await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
@@ -97,7 +94,7 @@ test.describe("Shared with me", () => {
     page,
     mockRequest,
     wsMock,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(
       settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
@@ -155,7 +152,7 @@ test.describe("Shared with me", () => {
     page,
     mockRequest,
     wsMock,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(
       settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
@@ -192,7 +189,7 @@ test.describe("Shared with me", () => {
 
     await expect(submitButton).toBeVisible();
 
-   mockRequest.use(shareHandler(TEST_PORT));
+    mockRequest.use(shareHandler(TEST_PORT));
 
     submitButton.click();
 
@@ -217,7 +214,7 @@ test.describe("Shared with me", () => {
 
   test("should display 'Shared By' column in shared with me table header", async ({
     page,
-    baseUrl
+    baseUrl,
   }) => {
     await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
@@ -230,7 +227,7 @@ test.describe("Shared with me", () => {
 
   test("should hide 'Shared By' column when disabled in table settings", async ({
     page,
-    baseUrl
+    baseUrl,
   }) => {
     await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
@@ -258,7 +255,7 @@ test.describe("Shared with me", () => {
 
   test("should display 'Access Level' column in shared with me table header", async ({
     page,
-    baseUrl
+    baseUrl,
   }) => {
     await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
@@ -273,7 +270,7 @@ test.describe("Shared with me", () => {
 
   test("should hide 'Access Level' column when disabled in table settings", async ({
     page,
-    baseUrl
+    baseUrl,
   }) => {
     await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
@@ -303,7 +300,7 @@ test.describe("Shared with me", () => {
     page,
     mockRequest,
     context,
-    baseUrl
+    baseUrl,
   }) => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
 
@@ -356,7 +353,7 @@ test.describe("Shared with me", () => {
     page,
     mockRequest,
     context,
-    baseUrl
+    baseUrl,
   }) => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
 

@@ -203,9 +203,9 @@ export const selfError400 = {
 };
 
 export const selfResolver = (
-  errorStatus: 400 | 404 | null = null, 
-  isEmailActivated = false, 
-  isClient = false
+  errorStatus: 400 | 404 | null = null,
+  isEmailActivated = false,
+  isClient = false,
 ): Response => {
   if (errorStatus === 404)
     return new Response(JSON.stringify(selfError404), { status: 404 });
@@ -217,21 +217,21 @@ export const selfResolver = (
     return new Response(JSON.stringify(usersSuccess));
   }
 
-  if(isClient){
-    return new Response(JSON.stringify(usersSuccessForClient))
+  if (isClient) {
+    return new Response(JSON.stringify(usersSuccessForClient));
   }
 
   return new Response(JSON.stringify({ response: successSelf }));
 };
 
 export const updateUserCultureResolver = (culture: string) => {
-   const data = {
+  const data = {
     ...successSelf,
     cultureName: culture,
   };
 
   return new Response(JSON.stringify({ response: data }));
-}
+};
 
 export const selfHandler = (
   port: string,
@@ -313,10 +313,13 @@ export const createUserHandler = (port: string) => {
   });
 };
 
-export const updateUserCultureHandler = (port: string, culture?: string ) => {
-  return http.put(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_UPDATE_USER_CULTURE}`, () => {
-    return updateUserCultureResolver(culture ?? "en-GB");
-  });
+export const updateUserCultureHandler = (port: string, culture?: string) => {
+  return http.put(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_UPDATE_USER_CULTURE}`,
+    () => {
+      return updateUserCultureResolver(culture ?? "en-GB");
+    },
+  );
 };
 
 export const adminOnlyResolver = (): Response => {
@@ -352,10 +355,16 @@ export const userByTypeResolver = (userType: UserType): Response => {
   }
 };
 
-export const selfByTypeHandler = (port: string, userType: UserType = "owner") => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_DELETE_USER}`, () => {
-    return userByTypeResolver(userType);
-  });
+export const selfByTypeHandler = (
+  port: string,
+  userType: UserType = "owner",
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_DELETE_USER}`,
+    () => {
+      return userByTypeResolver(userType);
+    },
+  );
 };
 
 export const selfHandlerWithCulture = (port: string, culture: string) => {

@@ -63,15 +63,23 @@ const encryptionEncryptedSettingsSuccess = {
   statusCode: 200,
 };
 
-export const encryptionSettingsResolver = (isEncryptedSettings?: boolean): Response => {
+export const encryptionSettingsResolver = (
+  isEncryptedSettings?: boolean,
+): Response => {
   if (isEncryptedSettings) {
     return new Response(JSON.stringify(encryptionEncryptedSettingsSuccess));
   }
   return new Response(JSON.stringify(encryptionSettingsSuccess));
 };
 
-export const encryptionSettingsHandler = (port: string, isEncryptedSettings?: boolean) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_ENCRYPTION_SETTINGS}`, () => {
-    return encryptionSettingsResolver(isEncryptedSettings);
-  });
+export const encryptionSettingsHandler = (
+  port: string,
+  isEncryptedSettings?: boolean,
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_ENCRYPTION_SETTINGS}`,
+    () => {
+      return encryptionSettingsResolver(isEncryptedSettings);
+    },
+  );
 };

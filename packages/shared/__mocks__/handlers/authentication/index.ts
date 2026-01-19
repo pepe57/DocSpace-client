@@ -27,7 +27,10 @@
 import { confirmHandler, ErrorConfirm } from "./confirm";
 import { loginHandler } from "./login";
 import { loginWithTfaCodeHandler } from "./loginWithTfaCode";
-import { createDeleteBackupHistoryHandler, createGetBackupHistoryHandler } from "./backupHistory";
+import {
+  createDeleteBackupHistoryHandler,
+  createGetBackupHistoryHandler,
+} from "./backupHistory";
 import { createDeleteBackupHandler, createStartBackupHandler } from "./backup";
 
 export { confirmHandler, loginHandler, loginWithTfaCodeHandler, ErrorConfirm };

@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { 
-  recentHandler, 
+import {
+  recentHandler,
   rootHandler,
   selfActivationStatusHandler,
   settingsHandler,
   TypeSettings,
-  filesSettingsHandler
+  filesSettingsHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
@@ -40,18 +40,18 @@ test.describe("Recent", () => {
       rootHandler(TEST_PORT),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       filesSettingsHandler(TEST_PORT),
-      recentHandler(TEST_PORT, false)
+      recentHandler(TEST_PORT, false),
     );
   });
 
   test("should handle empty recent files list", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(
       selfActivationStatusHandler(TEST_PORT, null, false, true),
-      recentHandler(TEST_PORT, true)
+      recentHandler(TEST_PORT, true),
     );
 
     await page.goto(`${baseUrl}/recent/filter?folder=28934`);
@@ -65,10 +65,7 @@ test.describe("Recent", () => {
     ]);
   });
 
-  test("should handle recent files list", async ({ 
-    page, 
-    baseUrl
-   }) => {
+  test("should handle recent files list", async ({ page, baseUrl }) => {
     await page.goto(`${baseUrl}/recent/filter?folder=28934`);
 
     const table = page.getByTestId("table-body");
@@ -84,7 +81,7 @@ test.describe("Recent", () => {
 
   test("should context menu for recent file via link", async ({
     page,
-    baseUrl
+    baseUrl,
   }) => {
     await page.goto(`${baseUrl}/recent/filter?folder=28934`);
 
@@ -102,7 +99,7 @@ test.describe("Recent", () => {
 
   test("should context menu for recent file from room", async ({
     page,
-    baseUrl
+    baseUrl,
   }) => {
     await page.goto(`${baseUrl}/recent/filter?folder=28934`);
 
@@ -120,7 +117,7 @@ test.describe("Recent", () => {
 
   test("should context menu for recent file shared with me", async ({
     page,
-    baseUrl
+    baseUrl,
   }) => {
     await page.goto(`${baseUrl}/recent/filter?folder=28934`);
 
@@ -136,10 +133,7 @@ test.describe("Recent", () => {
     ]);
   });
 
-  test("should context menu for recent archive", async ({
-    page,
-    baseUrl
-  }) => {
+  test("should context menu for recent archive", async ({ page, baseUrl }) => {
     await page.goto(`${baseUrl}/recent/filter?folder=28934`);
 
     const table = page.getByTestId("table-body");
@@ -154,10 +148,7 @@ test.describe("Recent", () => {
     ]);
   });
 
-  test("should context menu for recent image", async ({
-    page,
-    baseUrl
-  }) => {
+  test("should context menu for recent image", async ({ page, baseUrl }) => {
     await page.goto(`${baseUrl}/recent/filter?folder=28934`);
 
     const table = page.getByTestId("table-body");
@@ -191,10 +182,10 @@ test.describe("Recent", () => {
     page,
     mockRequest,
     wsMock,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(
-      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket)
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
     );
     await wsMock.setupWebSocketMock();
     await page.goto(`${baseUrl}/recent/filter?folder=28934`);

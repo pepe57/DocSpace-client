@@ -117,7 +117,10 @@ export const getPortalWithUncompletedTenantSuccess = {
   tenants: [completedTenant, uncompletedTenant],
 };
 
-export const getPortalResolver = (isEmptyPortal?: boolean, isUncompletedTenant?: boolean): Response => {
+export const getPortalResolver = (
+  isEmptyPortal?: boolean,
+  isUncompletedTenant?: boolean,
+): Response => {
   if (isEmptyPortal) {
     return new Response(JSON.stringify(getPortalEmptySuccess));
   }
@@ -130,7 +133,10 @@ export const getPortalResolver = (isEmptyPortal?: boolean, isUncompletedTenant?:
 };
 
 export const getPortalHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_PORTAL_GET}`, () => {
-    return getPortalResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_PORTAL_GET}`,
+    () => {
+      return getPortalResolver();
+    },
+  );
 };

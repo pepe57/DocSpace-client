@@ -81,14 +81,18 @@ const tfaAppSettingsEnabledSuccess = {
   statusCode: 200,
 };
 
-
 export const tfaAppSettingsResolver = (isEnabled?: boolean): Response => {
-  const response = isEnabled ? tfaAppSettingsEnabledSuccess : tfaAppSettingsSuccess;
+  const response = isEnabled
+    ? tfaAppSettingsEnabledSuccess
+    : tfaAppSettingsSuccess;
   return new Response(JSON.stringify(response));
 };
 
 export const tfaAppSettingsHandler = (port: string, isEnabled?: boolean) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_TFA_APP_SETTINGS}`, () => {
-    return tfaAppSettingsResolver(isEnabled);
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_TFA_APP_SETTINGS}`,
+    () => {
+      return tfaAppSettingsResolver(isEnabled);
+    },
+  );
 };

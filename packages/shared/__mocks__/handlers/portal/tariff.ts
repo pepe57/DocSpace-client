@@ -92,7 +92,9 @@ export const tariffOpenSourceSuccess = {
 };
 
 export const tariffResolver = (openSource: boolean = false) => {
-  return new Response(JSON.stringify(openSource ? tariffOpenSourceSuccess : tariffSuccess));
+  return new Response(
+    JSON.stringify(openSource ? tariffOpenSourceSuccess : tariffSuccess),
+  );
 };
 
 export const tariffHandler = (port: string, openSource: boolean = false) => {
@@ -100,5 +102,3 @@ export const tariffHandler = (port: string, openSource: boolean = false) => {
     return tariffResolver(openSource);
   });
 };
-
-

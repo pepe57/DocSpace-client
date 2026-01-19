@@ -220,26 +220,41 @@ export const webPluginsDeleteResolver = () => {
 };
 
 // Handlers
-export const webPluginsHandler = (port: string, type: "empty" | "withData" | "withLocale" = "empty") => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`, () => {
-    return webPluginsResolver(type);
-  });
+export const webPluginsHandler = (
+  port: string,
+  type: "empty" | "withData" | "withLocale" = "empty",
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`,
+    () => {
+      return webPluginsResolver(type);
+    },
+  );
 };
 
 export const webPluginsAddHandler = (port: string) => {
-  return http.post(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`, () => {
-    return webPluginsAddResolver();
-  });
+  return http.post(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`,
+    () => {
+      return webPluginsAddResolver();
+    },
+  );
 };
 
 export const webPluginsUpdateHandler = (port: string) => {
-  return http.put(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}/:pluginName`, () => {
-    return webPluginsUpdateResolver();
-  });
+  return http.put(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}/:pluginName`,
+    () => {
+      return webPluginsUpdateResolver();
+    },
+  );
 };
 
 export const webPluginsDeleteHandler = (port: string) => {
-  return http.delete(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}/:pluginName`, () => {
-    return webPluginsDeleteResolver();
-  });
+  return http.delete(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}/:pluginName`,
+    () => {
+      return webPluginsDeleteResolver();
+    },
+  );
 };

@@ -58,7 +58,10 @@ export const channelsResolver = (withTelegram: boolean = false): Response => {
 };
 
 export const channelsHandler = (port: string, withTelegram?: boolean) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_NOTIFICATIONS_CHANNELS}`, () => {
-    return channelsResolver(withTelegram);
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_NOTIFICATIONS_CHANNELS}`,
+    () => {
+      return channelsResolver(withTelegram);
+    },
+  );
 };

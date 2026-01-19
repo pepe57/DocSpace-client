@@ -32,24 +32,24 @@ export const PATH_TAGS = "files/tags";
 const url = `${BASE_URL}/${API_PREFIX}/${PATH_TAGS}`;
 
 const successEmptyTags = {
-	response: [],
-	count: 1,
-	links: [
-		{
-			href: url,
-			action: "GET",
-		},
-	],
-	status: 0,
-	statusCode: 200,
+  response: [],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
 export const roomTagsResolver = () => {
-	return new Response(JSON.stringify(successEmptyTags));
+  return new Response(JSON.stringify(successEmptyTags));
 };
 
 export const roomTagsHandler = (port: string) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_TAGS}`, () => {
     return roomTagsResolver();
   });
-}
+};

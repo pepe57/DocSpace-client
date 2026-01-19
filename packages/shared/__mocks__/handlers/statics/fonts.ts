@@ -31,26 +31,24 @@ import fs from "fs";
 export const fontsHandler = () => {
   return http.get("*/**/static/fonts/**", async ({ request }) => {
     try {
-      const fontPath = request
-        .url
-        .split("/static/fonts")
-        .at(-1)!
-        .split("?")[0];
-      
-      const fontFullPath = path.join(__dirname, "../../../../../public/fonts", fontPath);
+      const fontPath = request.url.split("/static/fonts").at(-1)!.split("?")[0];
+
+      const fontFullPath = path.join(
+        __dirname,
+        "../../../../../public/fonts",
+        fontPath,
+      );
       const fontContent = fs.readFileSync(fontFullPath);
-      
+
       return new Response(fontContent, {
         headers: {
           "Content-Type": "font/woff2",
           "Content-Length": fontContent.length.toString(),
         },
       });
-        
     } catch (error) {
       console.error("Error processing font request:", error);
       return new Response("Error loading font", { status: 500 });
     }
   });
 };
-

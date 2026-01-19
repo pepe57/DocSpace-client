@@ -26,10 +26,11 @@
 
 import { ShareAccessRights } from "enums";
 
-import { 
-  linkHandler, 
+import {
+  linkHandler,
   createLinkRouteHandler,
-  createLinksRouteHandler } from "./link";
+  createLinksRouteHandler,
+} from "./link";
 import { shareToUserHandler } from "./shareToUser";
 
 export {

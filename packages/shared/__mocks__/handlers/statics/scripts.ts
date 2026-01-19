@@ -31,22 +31,24 @@ import fs from "fs";
 export const scriptsHandler = () => {
   return http.get("*/**/static/scripts/**", async ({ request }) => {
     try {
-      const scriptPath = request
-        .url
+      const scriptPath = request.url
         .split("/static/scripts")
         .at(-1)!
         .split("?")[0];
-      
-      const scriptFullPath = path.join(__dirname, "../../../../../public/scripts", scriptPath);
+
+      const scriptFullPath = path.join(
+        __dirname,
+        "../../../../../public/scripts",
+        scriptPath,
+      );
       const scriptContent = fs.readFileSync(scriptFullPath);
-    
+
       return new Response(scriptContent, {
         headers: {
           "Content-Type": "application/javascript",
           "Content-Length": scriptContent.length.toString(),
         },
       });
-        
     } catch (error) {
       console.error("Error processing script request:", error);
       return new Response("Error loading script", { status: 500 });

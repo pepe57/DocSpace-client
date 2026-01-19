@@ -50,7 +50,10 @@ export const notificationsResolver = (type: number = 1): Response => {
 };
 
 export const notificationsHandler = (port: string, type?: number) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_NOTIFICATIONS}/${type}`, () => {
-    return notificationsResolver(type);
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_NOTIFICATIONS}/${type}`,
+    () => {
+      return notificationsResolver(type);
+    },
+  );
 };

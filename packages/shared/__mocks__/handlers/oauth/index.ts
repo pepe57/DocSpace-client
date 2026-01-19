@@ -30,7 +30,7 @@ import { scopesHandler } from "./scopes";
 import { clientsHandler } from "./clients";
 import { tokenHandler } from "./token";
 
-export { 
+export {
   getClientHandler,
   oauthSignInHandler,
   scopesHandler,

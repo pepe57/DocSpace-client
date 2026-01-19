@@ -55,22 +55,29 @@ export const peopleListAccessDenied = {
 };
 
 export const peopleListResolver = (isEmpty: boolean): Response => {
-  return new Response(JSON.stringify(isEmpty ? peopleListEmpty : peopleListSuccess));
+  return new Response(
+    JSON.stringify(isEmpty ? peopleListEmpty : peopleListSuccess),
+  );
 };
 
 export const peopleListAccessDeniedResolver = (): Response => {
   return new Response(JSON.stringify(peopleListAccessDenied), { status: 403 });
 };
 
-
 export const peopleListHandler = (port: string, isEmpty: boolean = false) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_PEOPLE_LIST}`, () => {
-    return peopleListResolver(isEmpty);
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_PEOPLE_LIST}`,
+    () => {
+      return peopleListResolver(isEmpty);
+    },
+  );
 };
 
 export const peopleListAccessDeniedHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_PEOPLE_LIST}`, () => {
-    return peopleListAccessDeniedResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_PEOPLE_LIST}`,
+    () => {
+      return peopleListAccessDeniedResolver();
+    },
+  );
 };

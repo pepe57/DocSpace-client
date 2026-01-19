@@ -53,7 +53,10 @@ export const registerResolver = () => {
 };
 
 export const registerHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_PORTAL_REGISTER}`, () => {
-    return registerResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_PORTAL_REGISTER}`,
+    () => {
+      return registerResolver();
+    },
+  );
 };

@@ -115,14 +115,23 @@ export const aiWebSearchPutResolver = () => {
   return new Response(JSON.stringify(successSet));
 };
 
-export const aiWebSearchGetHandler = (port: string, type?: "enabled" | "disabled" | "needReset") => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CONFIG_WEB_SEARCH}`, () => {
-    return aiWebSearchGetResolver(type);
-  });
+export const aiWebSearchGetHandler = (
+  port: string,
+  type?: "enabled" | "disabled" | "needReset",
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CONFIG_WEB_SEARCH}`,
+    () => {
+      return aiWebSearchGetResolver(type);
+    },
+  );
 };
 
 export const aiWebSearchPutHandler = (port: string) => {
-  return http.put(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CONFIG_WEB_SEARCH}`, () => {
-    return aiWebSearchPutResolver();
-  });
+  return http.put(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CONFIG_WEB_SEARCH}`,
+    () => {
+      return aiWebSearchPutResolver();
+    },
+  );
 };

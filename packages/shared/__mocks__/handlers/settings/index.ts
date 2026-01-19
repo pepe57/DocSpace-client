@@ -43,7 +43,7 @@ import { companyInfoHandler } from "./companyInfo";
 import { buildHandler } from "./build";
 import { settingsAdditionalHandler } from "./additional";
 import { culturesHandler } from "./cultures";
-import { 
+import {
   webPluginsHandler,
   webPluginsAddHandler,
   webPluginsUpdateHandler,
@@ -58,12 +58,11 @@ import { storageRegionsHandler } from "./storageRegions";
 import { tfaAppCodesHandler } from "./tfaAppCodes";
 import { tfaAppSettingsHandler } from "./tfaAppSettings";
 import { thirdPartyBackupHandler } from "./thirdpartyBackup";
-import { 
+import {
   whiteLabelLogosAddHandler,
   whiteLabelLogosIsDefaultHandler,
   whiteLabelLogoTextHandler,
 } from "./whitelabel";
-
 
 export {
   ssoHandler,

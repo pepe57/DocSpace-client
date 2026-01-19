@@ -141,8 +141,14 @@ export const aiServerPutHandler = (port: string) => {
   });
 };
 
-export const aiServerStatusPutHandler = (port: string, type?: "enable" | "disable") => {
-  return http.put(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_SERVER_STATUS}`, () => {
-    return aiServerStatusPutResolver(type);
-  });
+export const aiServerStatusPutHandler = (
+  port: string,
+  type?: "enable" | "disable",
+) => {
+  return http.put(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_SERVER_STATUS}`,
+    () => {
+      return aiServerStatusPutResolver(type);
+    },
+  );
 };

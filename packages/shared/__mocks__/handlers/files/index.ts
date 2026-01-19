@@ -47,21 +47,21 @@ import { rootHandler } from "./root";
 import { recentHandler } from "./recent";
 import { myDocumentsHandler, myHandler, getFileInfoHandler } from "./documents";
 import { docServiceHandlers } from "./docservice";
-import { 
-  favoritesHandler, 
-  addFileToFavoritesHandler, 
-  getFileHandler, 
-  deleteFavoritesHandler 
+import {
+  favoritesHandler,
+  addFileToFavoritesHandler,
+  getFileHandler,
+  deleteFavoritesHandler,
 } from "./favorites";
-import { 
+import {
   agentFolderChatHandler,
   agentFolderInfoHandler,
-  agentFolderResultStorageHandler } from "./agentFolder";
-import { 
+  agentFolderResultStorageHandler,
+} from "./agentFolder";
+import {
   resultStorageFolderHandler,
-  resultStorageFolderInfoHandler 
+  resultStorageFolderInfoHandler,
 } from "./resultStorageFolder";
-
 
 export { TypeFolder } from "./folder";
 export { TypeRoomList } from "./roomList";

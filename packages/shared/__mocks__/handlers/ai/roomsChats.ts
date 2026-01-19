@@ -173,12 +173,22 @@ export const aiRoomsChatsStreamResolver = (
   }
 };
 
-export const aiRoomsChatsHandler = (port: string, type?: "empty" | "with-chats") => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS}`,
-    () => aiRoomsChatsResolver(type));
+export const aiRoomsChatsHandler = (
+  port: string,
+  type?: "empty" | "with-chats",
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS}`,
+    () => aiRoomsChatsResolver(type),
+  );
 };
 
-export const aiRoomsChatsStreamHandler = (port: string, type?: "default" | "mcpNeedApprove") => {
-  return http.post(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_STREAM}`,
-    () => aiRoomsChatsStreamResolver(type));
+export const aiRoomsChatsStreamHandler = (
+  port: string,
+  type?: "default" | "mcpNeedApprove",
+) => {
+  return http.post(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_STREAM}`,
+    () => aiRoomsChatsStreamResolver(type),
+  );
 };

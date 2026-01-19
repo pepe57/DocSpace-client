@@ -26,21 +26,24 @@
 
 import { notificationsHandler } from "./notification";
 import { channelsHandler } from "./channels";
-import { telegramCheckHandler, telegramCheckLinkedHandler } from "./telegramCheck";
+import {
+  telegramCheckHandler,
+  telegramCheckLinkedHandler,
+} from "./telegramCheck";
 import { telegramLinkHandler } from "./telegramLink";
 
 export {
-    notificationsHandler,
-    channelsHandler,
-    telegramCheckHandler,
-    telegramLinkHandler,
-    telegramCheckLinkedHandler,
-}
+  notificationsHandler,
+  channelsHandler,
+  telegramCheckHandler,
+  telegramLinkHandler,
+  telegramCheckLinkedHandler,
+};
 
 export const notificationHandlers = (port: string) => [
-    notificationsHandler(port),
-    channelsHandler(port),
-    telegramCheckHandler(port),
-    telegramLinkHandler(port),
-    telegramCheckLinkedHandler(port),
+  notificationsHandler(port),
+  channelsHandler(port),
+  telegramCheckHandler(port),
+  telegramLinkHandler(port),
+  telegramCheckLinkedHandler(port),
 ];

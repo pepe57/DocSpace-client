@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { 
+import {
   settingsHandler,
-  TypeSettings, 
-  selfActivationStatusHandler, 
-  myDocumentsHandler, 
-  myHandler, 
-  rootHandler, 
-  filesSettingsHandler
+  TypeSettings,
+  selfActivationStatusHandler,
+  myDocumentsHandler,
+  myHandler,
+  rootHandler,
+  filesSettingsHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
@@ -48,7 +48,6 @@ test.describe("My documents context menu", () => {
   });
 
   test("Folder menu", async ({ page, baseUrl }) => {
-
     await page.goto(`${baseUrl}/rooms/personal/filter?folder=12764`);
 
     const table = page.getByTestId("table-body");

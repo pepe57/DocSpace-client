@@ -2597,11 +2597,14 @@ const getContextMenuRoomList = ({
   };
 };
 
-export const roomListResolver = (roomListType?: TypeRoomList, params?: {
-  access?: ShareAccessRights;
-  inRoom?: boolean;
-  isDocAdmin?: boolean;
-}) => {
+export const roomListResolver = (
+  roomListType?: TypeRoomList,
+  params?: {
+    access?: ShareAccessRights;
+    inRoom?: boolean;
+    isDocAdmin?: boolean;
+  },
+) => {
   if (roomListType === TypeRoomList.IsFiltered) {
     return new Response(JSON.stringify({ response: getRoomList(true) }));
   }
@@ -2619,19 +2622,21 @@ export const roomListResolver = (roomListType?: TypeRoomList, params?: {
   return new Response(JSON.stringify({ response: getEmptyRoomList() }));
 };
 
-export const roomListHandler = (port: string, roomListType?: TypeRoomList, params?: {
-  access?: ShareAccessRights;
-  inRoom?: boolean;
-  isDocAdmin?: boolean;
-}) => {
+export const roomListHandler = (
+  port: string,
+  roomListType?: TypeRoomList,
+  params?: {
+    access?: ShareAccessRights;
+    inRoom?: boolean;
+    isDocAdmin?: boolean;
+  },
+) => {
   let baseUrl;
   if (port) {
     baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
-      typeof window !== "undefined"
-        ? window.location.origin
-        : "${BASE_URL}";
+      typeof window !== "undefined" ? window.location.origin : "${BASE_URL}";
   }
 
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_ROOMS_LIST}`, () => {
@@ -2645,9 +2650,7 @@ export const createRoomHandler = (port?: string) => {
     baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
-      typeof window !== "undefined"
-        ? window.location.origin
-        : "${BASE_URL}";
+      typeof window !== "undefined" ? window.location.origin : "${BASE_URL}";
   }
 
   http.post<{}, { title: string }>(

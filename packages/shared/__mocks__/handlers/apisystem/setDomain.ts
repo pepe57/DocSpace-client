@@ -38,7 +38,10 @@ export const setDomainResolver = () => {
 };
 
 export const setDomainHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_SET_DOMAIN}`, () => {
-    return setDomainResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_SET_DOMAIN}`,
+    () => {
+      return setDomainResolver();
+    },
+  );
 };

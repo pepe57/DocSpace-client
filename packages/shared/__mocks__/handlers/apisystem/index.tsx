@@ -34,7 +34,7 @@ export {
   removePortalHandler,
   setDomainHandler,
   portalGetHandler,
-}
+};
 
 export const apisystemHandlers = (port: string) => [
   registerHandler(port),

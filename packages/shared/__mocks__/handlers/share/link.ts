@@ -135,7 +135,10 @@ export const linkResolver = () => {
 };
 
 export const linkHandler = () => {
-  return http.post(`${BASE_URL}:5110/${API_PREFIX}/${LINK_FILE_PATH}`, linkResolver);
+  return http.post(
+    `${BASE_URL}:5110/${API_PREFIX}/${LINK_FILE_PATH}`,
+    linkResolver,
+  );
 };
 
 export const createLinkRouteResolver = (
@@ -144,7 +147,9 @@ export const createLinkRouteResolver = (
   url?: string | RegExp,
   withTotal?: boolean,
 ) => {
-  return new Response(JSON.stringify(createLinkRoute(option, method, url, withTotal)));
+  return new Response(
+    JSON.stringify(createLinkRoute(option, method, url, withTotal)),
+  );
 };
 
 export const createLinkRouteHandler = (
@@ -154,19 +159,13 @@ export const createLinkRouteHandler = (
   url?: string | RegExp,
   withTotal?: boolean,
 ) => {
-  const resolvedUrl = url ?? LINK_FILE_PATH;
-  const fullUrl = typeof resolvedUrl === 'string' 
-    ? `${BASE_URL}:${port}/${API_PREFIX}/${resolvedUrl}`
-    : resolvedUrl;
-
   const isArray = Array.isArray(option);
-  
+
   return http.post(
-    `${BASE_URL}:${port}/${API_PREFIX}/${isArray ? LINKS_FILE_PATH : LINK_FILE_PATH}`, 
-    () => createLinkRouteResolver(option, method, url, withTotal)
+    `${BASE_URL}:${port}/${API_PREFIX}/${isArray ? LINKS_FILE_PATH : LINK_FILE_PATH}`,
+    () => createLinkRouteResolver(option, method, url, withTotal),
   );
 };
-
 
 export const createLinksRouteHandler = (
   port: string,
@@ -174,8 +173,7 @@ export const createLinksRouteHandler = (
   method?: MethodType,
   withTotal?: boolean,
 ) => {
-  return http.get(
-    `${BASE_URL}:${port}/${API_PREFIX}/${LINKS_FILE_PATH}`, 
-    () => createLinkRouteResolver(option, method, "", withTotal)
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${LINKS_FILE_PATH}`, () =>
+    createLinkRouteResolver(option, method, "", withTotal),
   );
 };

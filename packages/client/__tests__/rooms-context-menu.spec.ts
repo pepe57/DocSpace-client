@@ -25,27 +25,31 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { expect, test, TEST_PORT } from "./fixtures/base";
-import { 
+import {
   settingsHandler,
   TypeSettings,
   selfActivationStatusHandler,
   selfByTypeHandler,
   roomListHandler,
   TypeRoomList,
- } from "@docspace/shared/__mocks__/handlers";
+} from "@docspace/shared/__mocks__/handlers";
 import { ShareAccessRights } from "@docspace/shared/enums";
 
 test.describe("Context menu DocAdmin", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
-      selfActivationStatusHandler(TEST_PORT, null, false, true)
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
     );
   });
 
   test.describe("Room manager", () => {
     test("Custom without share", async ({ page, mockRequest, baseUrl }) => {
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.RoomManager}));
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.RoomManager,
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -71,9 +75,17 @@ test.describe("Context menu DocAdmin", () => {
       ]);
     });
 
-    test("Public/Form/Custom(Public)", async ({ page, mockRequest, baseUrl }) => {
-     // await mockRequest.router([endpoints.cmRoomListDocAdminManager]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.RoomManager}));
+    test("Public/Form/Custom(Public)", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      // await mockRequest.router([endpoints.cmRoomListDocAdminManager]);
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.RoomManager,
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -144,7 +156,11 @@ test.describe("Context menu DocAdmin", () => {
 
     test("Public third-party", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListDocAdminManager]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.RoomManager}));
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.RoomManager,
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -172,7 +188,11 @@ test.describe("Context menu DocAdmin", () => {
 
     test("Collaboration", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListDocAdminManager]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.RoomManager}));
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.RoomManager,
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -200,7 +220,11 @@ test.describe("Context menu DocAdmin", () => {
 
     test("VDR", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListDocAdminManager]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.RoomManager}));
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.RoomManager,
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -230,7 +254,11 @@ test.describe("Context menu DocAdmin", () => {
   test.describe("Content creator", () => {
     test("Custom without share", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListContentCreator]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.Collaborator}));
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.Collaborator,
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -256,9 +284,17 @@ test.describe("Context menu DocAdmin", () => {
       ]);
     });
 
-    test("Public/Form/Custom(Public)", async ({ page, mockRequest, baseUrl }) => {
+    test("Public/Form/Custom(Public)", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
       //await mockRequest.router([endpoints.cmRoomListContentCreator]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.Collaborator}));
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.Collaborator,
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -329,7 +365,11 @@ test.describe("Context menu DocAdmin", () => {
 
     test("Public third-party", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListContentCreator]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.Collaborator}));
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.Collaborator,
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -353,7 +393,11 @@ test.describe("Context menu DocAdmin", () => {
 
     test("Collaboration", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListContentCreator]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.Collaborator}));
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.Collaborator,
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -410,7 +454,12 @@ test.describe("Context menu DocAdmin", () => {
 
   test.describe("Not in room", () => {
     test("Custom without share", async ({ page, mockRequest, baseUrl }) => {
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.None, inRoom: false,}));
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.None,
+          inRoom: false,
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -436,9 +485,18 @@ test.describe("Context menu DocAdmin", () => {
       ]);
     });
 
-    test("Public/Form/Custom(Public)", async ({ page, mockRequest, baseUrl }) => {
+    test("Public/Form/Custom(Public)", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
       //await mockRequest.router([endpoints.cmRoomListNotInRoom]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.None, inRoom: false}));
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.None,
+          inRoom: false,
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -509,7 +567,12 @@ test.describe("Context menu DocAdmin", () => {
 
     test("Public third-party", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListNotInRoom]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.None, inRoom: false}));
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.None,
+          inRoom: false,
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -533,7 +596,12 @@ test.describe("Context menu DocAdmin", () => {
 
     test("Collaboration", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListNotInRoom]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.None, inRoom: false}));
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.None,
+          inRoom: false,
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -561,7 +629,12 @@ test.describe("Context menu DocAdmin", () => {
 
     test("VDR", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListNotInRoom]);
-      mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {access: ShareAccessRights.None, inRoom: false}));
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.None,
+          inRoom: false,
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -591,21 +664,21 @@ test.describe("Context menu DocAdmin", () => {
 
 test.describe("Context menu Room admin", () => {
   test.beforeEach(async ({ mockRequest }) => {
-     mockRequest.use(
-       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
-       selfActivationStatusHandler(TEST_PORT, null, false, true),
-       selfByTypeHandler(TEST_PORT, "roomAdmin"),
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      selfByTypeHandler(TEST_PORT, "roomAdmin"),
     );
   });
 
   test.describe("Room owner", () => {
     test("Custom without share", async ({ page, mockRequest, baseUrl }) => {
-      mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.None,
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.None,
           isDocAdmin: false,
-        }));
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -631,14 +704,18 @@ test.describe("Context menu Room admin", () => {
       ]);
     });
 
-    test("Public/Form/Custom(Public)", async ({ page, mockRequest, baseUrl }) => {
-     // await mockRequest.router([endpoints.cmRoomListRoomOwner]);
-      mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.None,
+    test("Public/Form/Custom(Public)", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      // await mockRequest.router([endpoints.cmRoomListRoomOwner]);
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.None,
           isDocAdmin: false,
-        }));
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -709,12 +786,12 @@ test.describe("Context menu Room admin", () => {
 
     test("Public third-party", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListRoomOwner]);
-       mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.None,
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.None,
           isDocAdmin: false,
-        }));
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -742,12 +819,12 @@ test.describe("Context menu Room admin", () => {
 
     test("Collaboration", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListRoomOwner]);
-      mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.None,
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.None,
           isDocAdmin: false,
-        }));
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -775,12 +852,12 @@ test.describe("Context menu Room admin", () => {
 
     test("VDR", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListRoomOwner]);
-       mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.None,
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.None,
           isDocAdmin: false,
-        }));
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -810,12 +887,12 @@ test.describe("Context menu Room admin", () => {
   test.describe("Room manager", () => {
     test("Custom without share", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListRoomAdminManager]);
-       mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.RoomManager,
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.RoomManager,
           isDocAdmin: false,
-        }));
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -841,14 +918,18 @@ test.describe("Context menu Room admin", () => {
       ]);
     });
 
-    test("Public/Form/Custom(Public)", async ({ page, mockRequest, baseUrl }) => {
+    test("Public/Form/Custom(Public)", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
       //await mockRequest.router([endpoints.cmRoomListRoomAdminManager]);
-       mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.RoomManager,
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.RoomManager,
           isDocAdmin: false,
-        }));
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -919,12 +1000,12 @@ test.describe("Context menu Room admin", () => {
 
     test("Public third-party", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListRoomAdminManager]);
-      mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.RoomManager,
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.RoomManager,
           isDocAdmin: false,
-        }));
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -952,12 +1033,12 @@ test.describe("Context menu Room admin", () => {
 
     test("Collaboration", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListRoomAdminManager]);
-       mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.RoomManager,
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.RoomManager,
           isDocAdmin: false,
-        }));
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -985,12 +1066,12 @@ test.describe("Context menu Room admin", () => {
 
     test("VDR", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListRoomAdminManager]);
-       mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.RoomManager,
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.RoomManager,
           isDocAdmin: false,
-        }));
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -1019,13 +1100,13 @@ test.describe("Context menu Room admin", () => {
 
   test.describe("Content creator", () => {
     test("Custom without share", async ({ page, mockRequest, baseUrl }) => {
-     // await mockRequest.router([endpoints.cmRoomListRoomAdminCreator]);
-       mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.Collaborator,
+      // await mockRequest.router([endpoints.cmRoomListRoomAdminCreator]);
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.Collaborator,
           isDocAdmin: false,
-        }));
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -1047,14 +1128,18 @@ test.describe("Context menu Room admin", () => {
       ]);
     });
 
-    test("Public/Form/Custom(Public)", async ({ page, mockRequest, baseUrl }) => {
+    test("Public/Form/Custom(Public)", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
       //await mockRequest.router([endpoints.cmRoomListRoomAdminCreator]);
-       mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.Collaborator,
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.Collaborator,
           isDocAdmin: false,
-        }));
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -1113,12 +1198,12 @@ test.describe("Context menu Room admin", () => {
 
     test("Public third-party", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListRoomAdminCreator]);
-      mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.Collaborator,
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.Collaborator,
           isDocAdmin: false,
-        }));
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -1142,12 +1227,12 @@ test.describe("Context menu Room admin", () => {
 
     test("Collaboration", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.use([endpoints.cmRoomListRoomAdminCreator]);
-      mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.Collaborator,
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.Collaborator,
           isDocAdmin: false,
-        }));
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 
@@ -1171,13 +1256,12 @@ test.describe("Context menu Room admin", () => {
 
     test("VDR", async ({ page, mockRequest, baseUrl }) => {
       //await mockRequest.router([endpoints.cmRoomListRoomAdminCreator]);
-      mockRequest.use(roomListHandler(
-        TEST_PORT,
-        TypeRoomList.ContextMenu,
-        { access: ShareAccessRights.Collaborator,
+      mockRequest.use(
+        roomListHandler(TEST_PORT, TypeRoomList.ContextMenu, {
+          access: ShareAccessRights.Collaborator,
           isDocAdmin: false,
-        }));
-
+        }),
+      );
 
       await page.goto(`${baseUrl}/rooms/shared/`);
 

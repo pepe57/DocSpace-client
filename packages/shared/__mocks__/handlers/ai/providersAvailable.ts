@@ -58,7 +58,10 @@ export const aiProvidersAvailableResolver = () => {
 };
 
 export const aiProvidersAvailableHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_AVAILABLE}`, () => {
-    return aiProvidersAvailableResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_AVAILABLE}`,
+    () => {
+      return aiProvidersAvailableResolver();
+    },
+  );
 };

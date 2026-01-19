@@ -32,19 +32,19 @@ import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 export const PATH_AI_CHAT_MESSAGES = "ai/chats/*/messages";
 export const PATH_AI_CHAT_MESSAGES_EXPORT = "ai/chats/*/messages/export";
 
-export type AiChatMessagesType = 
-  "default" | 
-  "baseElements" | 
-  "codeBlock" | 
-  "table" | 
-  "many" | 
-  "webSearch" |
-  "webSearchError" | 
-  "webCrawling" |
-  "webCrawlingError" |
-  "knowledgeSearch" |
-  "knowledgeSearchError" |
-  "mcpTool";
+export type AiChatMessagesType =
+  | "default"
+  | "baseElements"
+  | "codeBlock"
+  | "table"
+  | "many"
+  | "webSearch"
+  | "webSearchError"
+  | "webCrawling"
+  | "webCrawlingError"
+  | "knowledgeSearch"
+  | "knowledgeSearchError"
+  | "mcpTool";
 
 const defaultTextContent =
   "## Hi\n\nI’m here and ready to help inside DocSpace.\n\n## What you can do next\n- Ask about **rooms, folders, files, users, and permissions**\n- Describe a collaboration task (e.g., “set up a room for project X with view-only access for guests”), and I’ll guide you step by step";
@@ -805,15 +805,23 @@ export const aiChatMessagesExportResolver = () => {
   return new Response(JSON.stringify(successExportMessage));
 };
 
-
-export const aiChatMessagesHandler = (port: string, type?: AiChatMessagesType) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`, () => {
-    return aiChatMessagesResolver(type);
-  });
+export const aiChatMessagesHandler = (
+  port: string,
+  type?: AiChatMessagesType,
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+    () => {
+      return aiChatMessagesResolver(type);
+    },
+  );
 };
 
 export const aiChatMessagesExportHandler = (port: string) => {
-  return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES_EXPORT}`, () => {
-    return aiChatMessagesExportResolver();
-  });
+  return http.post(
+    `http://localhost:${port}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES_EXPORT}`,
+    () => {
+      return aiChatMessagesExportResolver();
+    },
+  );
 };

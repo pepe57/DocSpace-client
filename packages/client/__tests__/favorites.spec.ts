@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { 
+import {
   favoritesHandler,
   myDocumentsHandler,
   rootHandler,
@@ -46,11 +46,12 @@ test.describe("Favorites", () => {
     );
   });
 
-  test("should navigate to favorites page", async ({ page, mockRequest, baseUrl }) => {
-    mockRequest.use(
-      rootHandler(TEST_PORT),
-      favoritesHandler(TEST_PORT),
-    );
+  test("should navigate to favorites page", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(rootHandler(TEST_PORT), favoritesHandler(TEST_PORT));
 
     await page.goto(`${baseUrl}/files/favorite/filter?folder=1`);
 
@@ -69,10 +70,11 @@ test.describe("Favorites", () => {
     ]);
   });
 
-  test("should handle empty favorites list", async ({ 
+  test("should handle empty favorites list", async ({
     page,
     mockRequest,
-    baseUrl }) => {
+    baseUrl,
+  }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
       favoritesHandler(TEST_PORT, "empty"),
@@ -94,7 +96,7 @@ test.describe("Favorites", () => {
     page,
     mockRequest,
     wsMock,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(
       settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
@@ -147,7 +149,7 @@ test.describe("Favorites", () => {
   test("should context menu for favorite folder", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
@@ -172,7 +174,7 @@ test.describe("Favorites", () => {
   test("should context menu for favorite file via link", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
@@ -197,7 +199,7 @@ test.describe("Favorites", () => {
   test("should context menu for favorite file from room", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
@@ -222,7 +224,7 @@ test.describe("Favorites", () => {
   test("should context menu for favorite shared file", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
@@ -247,7 +249,7 @@ test.describe("Favorites", () => {
   test("should context menu for favorite archive", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
@@ -272,7 +274,7 @@ test.describe("Favorites", () => {
   test("should context menu for favorite image", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
@@ -297,13 +299,10 @@ test.describe("Favorites", () => {
   test("should add file from my documents to favorites", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
-    mockRequest.use(
-      rootHandler(TEST_PORT),
-      myDocumentsHandler(TEST_PORT)
-    );
-    
+    mockRequest.use(rootHandler(TEST_PORT), myDocumentsHandler(TEST_PORT));
+
     await page.goto(`${baseUrl}/rooms/personal/filter?folder=12764`);
 
     const table = page.getByTestId("table-body");
@@ -328,4 +327,4 @@ test.describe("Favorites", () => {
     const toast = page.getByTestId("toast-content");
     await expect(toast).toBeVisible();
   });
- });
+});

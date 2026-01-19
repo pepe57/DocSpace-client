@@ -51,6 +51,8 @@ export const aiRoomsChatsConfigResolver = () => {
 };
 
 export const aiRoomsChatsConfigHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_CONFIG}`,
-    () => aiRoomsChatsConfigResolver());
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_CONFIG}`,
+    () => aiRoomsChatsConfigResolver(),
+  );
 };

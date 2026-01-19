@@ -29,9 +29,9 @@
 import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_RESULT_STORAGE_FOLDER = 'files/:id(\\d+)';
+export const PATH_RESULT_STORAGE_FOLDER = "files/:id(\\d+)";
 
-export const PATH_RESULT_STORAGE_FOLDER_INFO = 'files/folder/:id';
+export const PATH_RESULT_STORAGE_FOLDER_INFO = "files/folder/:id";
 
 const createdUpdatedByMock = {
   id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -235,19 +235,25 @@ export const resultStorageFolderInfoResolver = () => {
 };
 
 export const resultStorageFolderHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_RESULT_STORAGE_FOLDER}`, ({ request }) => {
-    // Only handle requests with searchArea=6 (Result Storage) to avoid intercepting other folder requests
-    const url = new URL(request.url);
-    const searchArea = url.searchParams.get('searchArea');
-    if (searchArea !== '6') {
-      return;
-    }
-    return resultStorageFolderResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_RESULT_STORAGE_FOLDER}`,
+    ({ request }) => {
+      // Only handle requests with searchArea=6 (Result Storage) to avoid intercepting other folder requests
+      const url = new URL(request.url);
+      const searchArea = url.searchParams.get("searchArea");
+      if (searchArea !== "6") {
+        return;
+      }
+      return resultStorageFolderResolver();
+    },
+  );
 };
 
 export const resultStorageFolderInfoHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_RESULT_STORAGE_FOLDER_INFO}`, () => {
-    return resultStorageFolderInfoResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_RESULT_STORAGE_FOLDER_INFO}`,
+    () => {
+      return resultStorageFolderInfoResolver();
+    },
+  );
 };

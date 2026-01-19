@@ -110,9 +110,12 @@ export const aiChatPutResolver = () => {
 };
 
 export const aiChatHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_CHAT}`, () => {
-    return aiChatResolver();
-  });
+  return http.get(
+    `http://localhost:${port}/${API_PREFIX}/${PATH_AI_CHAT}`,
+    () => {
+      return aiChatResolver();
+    },
+  );
 };
 
 export const aiChatPutHandler = (port: string) => {

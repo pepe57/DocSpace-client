@@ -1329,9 +1329,12 @@ export const myDocumentsResolver = (isList?: boolean) => {
 };
 
 export const myDocumentsHandler = (port: string, isList?: boolean) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_MY_DOCUMENTS}`, () => {
-    return myDocumentsResolver(isList);
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_MY_DOCUMENTS}`,
+    () => {
+      return myDocumentsResolver(isList);
+    },
+  );
 };
 
 export const myHandler = (port: string, isList?: boolean) => {
@@ -1345,7 +1348,10 @@ export const getFileInfoResolver = (): Response => {
 };
 
 export const getFileInfoHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_GET_FILE_INFO}`, () => {
-    return getFileInfoResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_GET_FILE_INFO}`,
+    () => {
+      return getFileInfoResolver();
+    },
+  );
 };

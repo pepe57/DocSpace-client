@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-
 import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 import { ShareAccessRights } from "../../../enums";
@@ -933,20 +932,26 @@ export const aiAgentsResolver = ({
 export const aiAgentsHandler = (
   port: string,
   {
-  withCreate,
-  withListCreate,
-  aiAccess,
-  inRoom,
-  isDocAdmin,
-}: {
-  withCreate?: boolean;
-  withListCreate?: boolean;
-  aiAccess?: ShareAccessRights;
-  inRoom?: boolean;
-  isDocAdmin?: boolean;
-} = {},
+    withCreate,
+    withListCreate,
+    aiAccess,
+    inRoom,
+    isDocAdmin,
+  }: {
+    withCreate?: boolean;
+    withListCreate?: boolean;
+    aiAccess?: ShareAccessRights;
+    inRoom?: boolean;
+    isDocAdmin?: boolean;
+  } = {},
 ) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_AGENTS}`, () => {
-    return aiAgentsResolver({withCreate, withListCreate, aiAccess, inRoom, isDocAdmin});
+    return aiAgentsResolver({
+      withCreate,
+      withListCreate,
+      aiAccess,
+      inRoom,
+      isDocAdmin,
+    });
   });
 };

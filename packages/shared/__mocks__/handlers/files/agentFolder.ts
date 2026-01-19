@@ -29,11 +29,11 @@
 import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_AGENT_FOLDER_CHAT = 'files/:id(\\d+)';
+export const PATH_AGENT_FOLDER_CHAT = "files/:id(\\d+)";
 
-export const PATH_AGENT_FOLDER_RESULT_STORAGE = 'files/:id(\\d+)';
+export const PATH_AGENT_FOLDER_RESULT_STORAGE = "files/:id(\\d+)";
 
-export const PATH_AGENT_FOLDER_INFO = 'files/folder/:id(\\d+)';
+export const PATH_AGENT_FOLDER_INFO = "files/folder/:id(\\d+)";
 
 const createdUpdatedByMock = {
   id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -472,33 +472,50 @@ export const agentFolderInfoResolver = (
   }
 };
 
-export const agentFolderChatHandler = (port: string, type: "default" | "canNotUseChat" = "default") => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_CHAT}`, ({ request, params }) => {
-    // Handle requests for agent folder (id=2) - this is the mock agent folder ID used in tests
-    const folderId = params.id;
-    if (folderId === '2') {
-      return agentFolderChatResolver(type);
-    }
-    // Pass through to other handlers for non-agent folders
-    return;
-  });
-};
-
-export const agentFolderResultStorageHandler = (port: string, type: "default" | "canNotUseChat" = "default") => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_RESULT_STORAGE}`, ({ request }) => {
-    // Only handle requests with searchArea=6 (Result Storage) to avoid intercepting other folder requests
-    const url = new URL(request.url);
-    const searchArea = url.searchParams.get('searchArea');
-    if (searchArea !== '6') {
+export const agentFolderChatHandler = (
+  port: string,
+  type: "default" | "canNotUseChat" = "default",
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_CHAT}`,
+    ({ request, params }) => {
+      // Handle requests for agent folder (id=2) - this is the mock agent folder ID used in tests
+      const folderId = params.id;
+      if (folderId === "2") {
+        return agentFolderChatResolver(type);
+      }
+      // Pass through to other handlers for non-agent folders
       return;
-    }
-    return agentFolderResultStorageResolver(type);
-  });
+    },
+  );
 };
 
-export const agentFolderInfoHandler = (port: string, type: "default" | "canNotUseChat" = "default") => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_INFO}`, () => {
-    return agentFolderInfoResolver(type);
-  });
+export const agentFolderResultStorageHandler = (
+  port: string,
+  type: "default" | "canNotUseChat" = "default",
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_RESULT_STORAGE}`,
+    ({ request }) => {
+      // Only handle requests with searchArea=6 (Result Storage) to avoid intercepting other folder requests
+      const url = new URL(request.url);
+      const searchArea = url.searchParams.get("searchArea");
+      if (searchArea !== "6") {
+        return;
+      }
+      return agentFolderResultStorageResolver(type);
+    },
+  );
 };
 
+export const agentFolderInfoHandler = (
+  port: string,
+  type: "default" | "canNotUseChat" = "default",
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_INFO}`,
+    () => {
+      return agentFolderInfoResolver(type);
+    },
+  );
+};

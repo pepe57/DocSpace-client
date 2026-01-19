@@ -32,17 +32,20 @@ import {
 } from "@docspace/shared/__mocks__/e2e";
 import { allHandlers } from "@docspace/shared/__mocks__/handlers";
 
-export const TEST_PORT = process.env.PORT || '5110';
+export const TEST_PORT = process.env.PORT || "5110";
 
-export const test = base.extend<{
-  page: Page;
-  mockRequest: WorkerFixture;
-  wsMock: PlaywrightWebSocketMock;
-}, {
-  baseUrl: string;
-} >({
+export const test = base.extend<
+  {
+    page: Page;
+    mockRequest: WorkerFixture;
+    wsMock: PlaywrightWebSocketMock;
+  },
+  {
+    baseUrl: string;
+  }
+>({
   baseUrl: [
-    async ({ }, use) => {
+    async ({}, use) => {
       await use(`${BASE_URL}:${TEST_PORT}`);
     },
     {
@@ -52,28 +55,9 @@ export const test = base.extend<{
   ],
   mockRequest: [
     async ({ page }, use) => {
-      await page.addInitScript(() => {
-        const originalFetch = window.fetch;
-
-        (window.fetch as any) = async (...args: [string | Request | URL, RequestInit?]) => {
-        const res = await originalFetch(...args);
-
-        const contentType = res.headers.get('content-type');
-        if (contentType?.includes('text/html')) {
-          console.error(
-            '[FETCH HTML RESPONSE]',
-            typeof args[0] === 'string' ? args[0] : (args[0] as Request).url,
-          );
-        }
-
-        return res;
-        };
-      });
-
       const worker = new WorkerFixture({
         page,
         initialHandlers: allHandlers(TEST_PORT),
-
       });
 
       await worker.start();

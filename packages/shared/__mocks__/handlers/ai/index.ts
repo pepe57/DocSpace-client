@@ -27,17 +27,17 @@
 import { aiAgentsHandler } from "./agents";
 import { aiConfigHandler } from "./config";
 import { aiModelsHandler } from "./models";
-import { 
-  aiProvidersHandler, 
+import {
+  aiProvidersHandler,
   aiProvidersDeleteHandler,
   aiProvidersPostHandler,
   aiProvidersPutHandler,
- } from "./providers";
-import { 
-  aiServerHandler, 
-  aiServerPutHandler, 
-  aiServerStatusPutHandler 
- } from "./server";
+} from "./providers";
+import {
+  aiServerHandler,
+  aiServerPutHandler,
+  aiServerStatusPutHandler,
+} from "./server";
 import {
   aiServersGetHandler,
   aiServersPostHandler,
@@ -45,13 +45,19 @@ import {
   aiServersAvailableHandler,
 } from "./servers";
 import { aiChatHandler, aiChatPutHandler } from "./chat";
-import { aiChatMessagesExportHandler, aiChatMessagesHandler } from "./chatMessages";
+import {
+  aiChatMessagesExportHandler,
+  aiChatMessagesHandler,
+} from "./chatMessages";
 import { aiMessagesExportHandler } from "./messages";
 import { aiProvidersAvailableHandler } from "./providersAvailable";
 import { aiRoomsChatsHandler, aiRoomsChatsStreamHandler } from "./roomsChats";
 import { aiRoomsChatsConfigHandler } from "./roomsChatsConfig";
 import { aiRoomsServersHandler } from "./roomsServers";
-import { aiVectorizationGetHandler, aiVectorizationPutHandler } from "./vectorization";
+import {
+  aiVectorizationGetHandler,
+  aiVectorizationPutHandler,
+} from "./vectorization";
 import { aiWebSearchGetHandler, aiWebSearchPutHandler } from "./webSearch";
 
 export {

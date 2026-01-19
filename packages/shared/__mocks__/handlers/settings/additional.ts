@@ -55,7 +55,10 @@ export const settingsAdditionalResolver = () => {
 };
 
 export const settingsAdditionalHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_SETTINGS_ADDITIONAL}`, () => {
-    return settingsAdditionalResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_SETTINGS_ADDITIONAL}`,
+    () => {
+      return settingsAdditionalResolver();
+    },
+  );
 };

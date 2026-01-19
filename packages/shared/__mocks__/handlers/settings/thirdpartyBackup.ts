@@ -46,7 +46,10 @@ export const thirdPartyBackupResolver = (): Response => {
 };
 
 export const thirdPartyBackupHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_THIRDPARTY_BACKUP}`, () => {
-    return thirdPartyBackupResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_THIRDPARTY_BACKUP}`,
+    () => {
+      return thirdPartyBackupResolver();
+    },
+  );
 };

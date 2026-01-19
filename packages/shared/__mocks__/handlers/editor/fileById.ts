@@ -25,10 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http } from "msw";
-import {
-  BASE_URL,
-  API_PREFIX,
-} from "../../e2e/utils";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 export const PATH = "files/file/20";
 

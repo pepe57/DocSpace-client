@@ -82,8 +82,8 @@ export const culturesResolver = (): Response => {
   return new Response(JSON.stringify(culturesSuccess));
 };
 
-export const culturesHandler = (port: string ) => {
-   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_CULTURES}`, () => {
+export const culturesHandler = (port: string) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_CULTURES}`, () => {
     return culturesResolver();
   });
-}
+};

@@ -116,9 +116,12 @@ export const ldapHandler = (port: string) => {
 };
 
 export const ldapDefaultHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_LDAP_DEFAULT}`, () => {
-    return ldapDefaultResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_LDAP_DEFAULT}`,
+    () => {
+      return ldapDefaultResolver();
+    },
+  );
 };
 
 export const ldapCronHandler = (port: string) => {

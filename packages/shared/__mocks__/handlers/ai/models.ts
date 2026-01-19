@@ -172,7 +172,13 @@ const errorRes = {
   statusCode: 400,
 };
 
-export const aiModelsResolver = (isClaude?: boolean, isOpenAI?: boolean, isTogetherAI?: boolean, isOpenRouter?: boolean, isError?: boolean) => {
+export const aiModelsResolver = (
+  isClaude?: boolean,
+  isOpenAI?: boolean,
+  isTogetherAI?: boolean,
+  isOpenRouter?: boolean,
+  isError?: boolean,
+) => {
   if (isClaude) {
     return new Response(JSON.stringify(providerClaude));
   }
@@ -196,20 +202,29 @@ export const aiModelsResolver = (isClaude?: boolean, isOpenAI?: boolean, isToget
   return new Response(JSON.stringify(providerOpenAI));
 };
 
-export const aiModelsHandler = (port: string, {
-  isClaude,
-  isOpenAI,
-  isTogetherAI,
-  isOpenRouter,
-  isError,
-}: {
-  isClaude?: boolean;
-  isOpenAI?: boolean;
-  isTogetherAI?: boolean;
-  isOpenRouter?: boolean;
-  isError?: boolean;
-} = {}) => {
+export const aiModelsHandler = (
+  port: string,
+  {
+    isClaude,
+    isOpenAI,
+    isTogetherAI,
+    isOpenRouter,
+    isError,
+  }: {
+    isClaude?: boolean;
+    isOpenAI?: boolean;
+    isTogetherAI?: boolean;
+    isOpenRouter?: boolean;
+    isError?: boolean;
+  } = {},
+) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_MODELS}`, () => {
-    return aiModelsResolver(isClaude, isOpenAI, isTogetherAI, isOpenRouter, isError);
+    return aiModelsResolver(
+      isClaude,
+      isOpenAI,
+      isTogetherAI,
+      isOpenRouter,
+      isError,
+    );
   });
 };

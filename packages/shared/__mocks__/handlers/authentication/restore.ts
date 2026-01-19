@@ -50,4 +50,3 @@ export const createStartRestoreHandler = () =>
   http.post(startRestorePath, () => {
     return new Response(JSON.stringify({}));
   });
-

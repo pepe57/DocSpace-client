@@ -24,18 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { 
-  filesSettingsHandler, 
-  selfActivationStatusHandler, 
+import {
+  filesSettingsHandler,
+  selfActivationStatusHandler,
   selfHandlerWithCulture,
-  settingsHandler, 
-  TypeSettings, 
-  updateUserCultureHandler, 
-  webPluginsAddHandler, 
-  webPluginsHandler, 
-  webPluginsUpdateHandler
+  settingsHandler,
+  TypeSettings,
+  updateUserCultureHandler,
+  webPluginsAddHandler,
+  webPluginsHandler,
+  webPluginsUpdateHandler,
 } from "@docspace/shared/__mocks__/handlers";
-import { expect, test, TEST_PORT} from "./fixtures/base";
+import { expect, test, TEST_PORT } from "./fixtures/base";
 
 test.describe("Plugins", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -136,7 +136,11 @@ test.describe("Plugins", () => {
     await expect(plugin2).toBeVisible();
   });
 
-  test("should toggle plugin enabled state", async ({ page, mockRequest, baseUrl }) => {
+  test("should toggle plugin enabled state", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
     mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
 
     await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
@@ -163,7 +167,11 @@ test.describe("Plugins", () => {
     await expect(toggleSwitchInput).toBeChecked();
   });
 
-  test("should delete plugin successfully", async ({ page, mockRequest, baseUrl }) => {
+  test("should delete plugin successfully", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
     mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
 
     await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
@@ -296,7 +304,7 @@ test.describe("Plugins", () => {
   //   }]);
 
   //   mockRequest.use(webPluginsHandler(TEST_PORT, "withLocale"));
-    
+
   //   await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
 
   //   await expect(page.locator(".settings-section_header")).toBeVisible();
@@ -331,7 +339,7 @@ test.describe("Plugins", () => {
   test("should display en as fallback locale", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(webPluginsHandler(TEST_PORT, "withLocale"));
 
@@ -371,15 +379,17 @@ test.describe("Plugins", () => {
     await page.getByTestId("drop_down_item_lv").first().click();
 
     // Set LANGUAGE cookie to lv for plugin localization (should fallback to en)
-    await page.context().addCookies([{
-      name: "language",
-      value: "lv",
-      domain: "localhost",
-      path: "/",
-    }]);
+    await page.context().addCookies([
+      {
+        name: "language",
+        value: "lv",
+        domain: "localhost",
+        path: "/",
+      },
+    ]);
 
     mockRequest.use(webPluginsHandler(TEST_PORT, "withLocale"));
-    
+
     await page.goto("/portal-settings/integration/plugins");
 
     await expect(page.locator(".settings-section_header")).toBeVisible();
@@ -410,4 +420,4 @@ test.describe("Plugins", () => {
       "plugins-fallback-locale-en-settings.png",
     ]);
   });
- });
+});

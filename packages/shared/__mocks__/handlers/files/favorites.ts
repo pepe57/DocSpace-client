@@ -1899,7 +1899,7 @@ export const getFile = {
   statusCode: 200,
 };
 
-// get favorites 
+// get favorites
 export const favoritesResolver = (type?: ResponseType) => {
   switch (type) {
     case "empty":
@@ -1926,9 +1926,12 @@ export const deleteFavoritesResolver = () => {
 };
 
 export const deleteFavoritesHandler = (port: string) => {
-  return http.delete(`${BASE_URL}:${port}${API_PREFIX}/${PATH_DELETE_FAVORITES}`, () => {
-    return deleteFavoritesResolver();
-  });
+  return http.delete(
+    `${BASE_URL}:${port}${API_PREFIX}/${PATH_DELETE_FAVORITES}`,
+    () => {
+      return deleteFavoritesResolver();
+    },
+  );
 };
 
 // add file to favorites
@@ -1937,9 +1940,12 @@ export const addFileToFavoritesResolver = () => {
 };
 
 export const addFileToFavoritesHandler = (port: string) => {
-  return http.post(`${BASE_URL}:${port}${API_PREFIX}/${PATH_ADD_TO_FAVORITES}`, () => {
-    return addFileToFavoritesResolver();
-  });
+  return http.post(
+    `${BASE_URL}:${port}${API_PREFIX}/${PATH_ADD_TO_FAVORITES}`,
+    () => {
+      return addFileToFavoritesResolver();
+    },
+  );
 };
 
 // get file

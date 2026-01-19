@@ -57,7 +57,10 @@ export const docServiceResolver = (): Response => {
 };
 
 export const docServiceHandlers = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_DOC_SERVICE}`, () => {
-    return docServiceResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_DOC_SERVICE}`,
+    () => {
+      return docServiceResolver();
+    },
+  );
 };

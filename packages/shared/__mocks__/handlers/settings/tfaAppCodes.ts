@@ -68,7 +68,10 @@ export const tfaAppCodesResolver = (): Response => {
 };
 
 export const tfaAppCodesHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_TFA_APP_CODES}`, () => {
-    return tfaAppCodesResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_TFA_APP_CODES}`,
+    () => {
+      return tfaAppCodesResolver();
+    },
+  );
 };

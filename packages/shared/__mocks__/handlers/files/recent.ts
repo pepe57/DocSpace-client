@@ -1470,9 +1470,9 @@ const recentSuccess = {
 };
 
 export const recentResolver = (isEmpty: boolean): Response => {
-  return isEmpty ? 
-    new Response(JSON.stringify(recentEmptySuccess)) :
-    new Response(JSON.stringify(recentSuccess));
+  return isEmpty
+    ? new Response(JSON.stringify(recentEmptySuccess))
+    : new Response(JSON.stringify(recentSuccess));
 };
 
 export const recentHandler = (port: string, isEmpty: boolean = false) => {

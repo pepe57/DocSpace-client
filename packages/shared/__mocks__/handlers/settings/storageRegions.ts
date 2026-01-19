@@ -342,7 +342,10 @@ export const storageRegionsResolver = () => {
 };
 
 export const storageRegionsHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_STORAGE_REGIONS}`, () => {
-    return storageRegionsResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_STORAGE_REGIONS}`,
+    () => {
+      return storageRegionsResolver();
+    },
+  );
 };

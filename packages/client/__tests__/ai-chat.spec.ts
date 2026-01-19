@@ -25,12 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { expect, test, TEST_PORT } from "./fixtures/base";
-import { SearchArea } from "@docspace/shared/enums";
 import { TFile } from "@docspace/shared/api/files/types";
-import { 
-  settingsHandler, 
-  TypeSettings, 
-  selfActivationStatusHandler, 
+import {
+  settingsHandler,
+  TypeSettings,
+  selfActivationStatusHandler,
   selfByTypeHandler,
   aiRoomsChatsConfigHandler,
   aiRoomsServersHandler,
@@ -65,15 +64,13 @@ test.describe("AI chat", () => {
 
   test.describe("Portal admin", () => {
     test.beforeEach(async ({ mockRequest }) => {
-       mockRequest.use(
-        selfActivationStatusHandler(TEST_PORT, null, true, true),
-      );
+      mockRequest.use(selfActivationStatusHandler(TEST_PORT, null, true, true));
     });
 
     test("should render default empty ai chat", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -107,7 +104,7 @@ test.describe("AI chat", () => {
     test("should render full size empty screen if ai not ready and there are no chats (admin)", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // mockRequest.use([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -330,7 +327,7 @@ test.describe("AI chat", () => {
     test("should render ai message with code block", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -367,7 +364,7 @@ test.describe("AI chat", () => {
     test("should render ai message with table", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -404,7 +401,7 @@ test.describe("AI chat", () => {
     test("should render ai message with web search tool", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -444,7 +441,7 @@ test.describe("AI chat", () => {
     test("should render ai message with failed web search tool", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -484,7 +481,7 @@ test.describe("AI chat", () => {
     test("should render ai message with web crawling tool", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -522,7 +519,7 @@ test.describe("AI chat", () => {
     test("should render ai message with failed web crawling tool", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -562,7 +559,7 @@ test.describe("AI chat", () => {
     test("should render ai message with knowledge search tool", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -602,7 +599,7 @@ test.describe("AI chat", () => {
     test("should render ai message with failed knowledge search tool", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -642,7 +639,7 @@ test.describe("AI chat", () => {
     test("should render ai message with mcp tool", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -682,7 +679,7 @@ test.describe("AI chat", () => {
     test("should scroll to last message after opening chat", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -764,7 +761,11 @@ test.describe("AI chat", () => {
     //   ]);
     // });
 
-    test("should open chat via chat select", async ({ page, mockRequest, baseUrl }) => {
+    test("should open chat via chat select", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
       //   endpoints.aiRoomsServersEmpty,
@@ -965,7 +966,12 @@ test.describe("AI chat", () => {
       ]);
     });
 
-    test("should save chat to file", async ({ page, mockRequest, wsMock, baseUrl }) => {
+    test("should save chat to file", async ({
+      page,
+      mockRequest,
+      wsMock,
+      baseUrl,
+    }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
       //   endpoints.aiRoomsServersEmpty,
@@ -983,7 +989,7 @@ test.describe("AI chat", () => {
         aiChatMessagesExportHandler(TEST_PORT),
         aiChatMessagesHandler(TEST_PORT),
         aiChatHandler(TEST_PORT),
-        settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket)
+        settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
       );
 
       await wsMock.setupWebSocketMock();
@@ -995,7 +1001,7 @@ test.describe("AI chat", () => {
       await expect(containerLoader).toBeVisible();
       await containerLoader.waitFor({ state: "hidden" });
 
-     // await page.unroute(endpoints.agentFolderChat.url);
+      // await page.unroute(endpoints.agentFolderChat.url);
 
       // await mockRequest.router([
       //   endpoints.resultStorageFolder,
@@ -1073,8 +1079,8 @@ test.describe("AI chat", () => {
       //   endpoints.settingsWithSocket,
       //   endpoints.aiChatMessages,
       // ]);
-       mockRequest.use(
-        settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),  
+      mockRequest.use(
+        settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
         aiRoomsChatsHandler(TEST_PORT),
@@ -1134,7 +1140,7 @@ test.describe("AI chat", () => {
     test("should toggle web search if web search available", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -1173,7 +1179,7 @@ test.describe("AI chat", () => {
     test("should render disabled web search and go to settings via tooltip if web search unavailable (admin)", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       //await page.unroute(endpoints.aiConfig.url);
 
@@ -1222,7 +1228,11 @@ test.describe("AI chat", () => {
       await expect(page).toHaveURL("/portal-settings/ai-settings/search");
     });
 
-    test("should attach and remove files", async ({ page, mockRequest, baseUrl }) => {
+    test("should attach and remove files", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
       //   endpoints.aiRoomsServersEmpty,
@@ -1252,9 +1262,7 @@ test.describe("AI chat", () => {
       await expect(selector).toBeVisible();
 
       //await mockRequest.router([endpoints.favorites]);
-      mockRequest.use(
-        favoritesHandler(TEST_PORT),
-      );
+      mockRequest.use(favoritesHandler(TEST_PORT));
 
       const favoritesOption = selector.getByTestId(/selector-item/).filter({
         hasText: "Favorites",
@@ -1285,7 +1293,7 @@ test.describe("AI chat", () => {
     test("should send message with text and file and receive response", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -1322,9 +1330,7 @@ test.describe("AI chat", () => {
       await expect(selector).toBeVisible();
 
       //await mockRequest.router([endpoints.favorites]);
-       mockRequest.use(
-        favoritesHandler(TEST_PORT),
-      );
+      mockRequest.use(favoritesHandler(TEST_PORT));
 
       const favoritesOption = selector.getByTestId(/selector-item/).filter({
         hasText: "Favorites",
@@ -1355,7 +1361,7 @@ test.describe("AI chat", () => {
     test("should render tool call confirm dialog", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -1524,7 +1530,7 @@ test.describe("AI chat", () => {
     //   //await mockRequest.router([endpoints.favorites]);
     //   mockRequest.use(
     //     favoritesHandler(TEST_PORT),
-    //   );  
+    //   );
 
     //   const favoritesOption = selector.getByTestId(/selector-item/).filter({
     //     hasText: "Favorites",
@@ -1558,14 +1564,14 @@ test.describe("AI chat", () => {
   // ================================== User ==================================
 
   test.describe("User", () => {
-    test.beforeEach( ({ mockRequest }) => {
+    test.beforeEach(({ mockRequest }) => {
       mockRequest.use(selfByTypeHandler(TEST_PORT, "regular"));
     });
 
     test("should render full size empty screen without go to settings button if ai not ready and there are no chats (user)", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -1603,7 +1609,7 @@ test.describe("AI chat", () => {
     test("should render chat header with empty screen if ai not ready and there are chats (user)", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // mockRequest.use([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -1643,7 +1649,7 @@ test.describe("AI chat", () => {
     test("should render chat with info block, disabled chat input and new chat button if ai not ready (user)", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       // await mockRequest.router([
       //   endpoints.aiRoomsChatsConfigAllEnabled,
@@ -1654,12 +1660,12 @@ test.describe("AI chat", () => {
       //   endpoints.aiChatMessages,
       //   endpoints.aiConfigDisabled,
       // ]);
-       mockRequest.use(
+      mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
         aiRoomsChatsHandler(TEST_PORT),
         agentFolderChatHandler(TEST_PORT),
-         aiChatMessagesHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT),
         aiChatHandler(TEST_PORT),
         aiConfigHandler(TEST_PORT, true),
       );
@@ -1700,7 +1706,7 @@ test.describe("AI chat", () => {
     test("should render disabled web search with tooltip if web search unavailable (user)", async ({
       page,
       mockRequest,
-      baseUrl
+      baseUrl,
     }) => {
       //await page.unroute(endpoints.aiConfig.url);
 
@@ -1720,7 +1726,7 @@ test.describe("AI chat", () => {
         aiChatHandler(TEST_PORT),
         aiConfigHandler(TEST_PORT, false, true),
       );
-      
+
       await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");

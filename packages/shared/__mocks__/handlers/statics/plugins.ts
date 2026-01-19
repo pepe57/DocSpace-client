@@ -63,23 +63,31 @@ export const pluginCssHandler = () => {
 };
 
 // Path to test plugins directory
-const PLUGINS_DIR = path.resolve(__dirname, "../../../../client/__tests__/plugins");
+const PLUGINS_DIR = path.resolve(
+  __dirname,
+  "../../../../client/__tests__/plugins",
+);
 
 export const pluginAssetsHandler = () => {
   return http.get("*/plugins/:pluginName/assets/:assetName", ({ params }) => {
     const { pluginName, assetName } = params;
-    const assetPath = path.join(PLUGINS_DIR, String(pluginName), "assets", String(assetName).split("?")[0]);
-    
+    const assetPath = path.join(
+      PLUGINS_DIR,
+      String(pluginName),
+      "assets",
+      String(assetName).split("?")[0],
+    );
+
     try {
       const fileBuffer = fs.readFileSync(assetPath);
       const ext = path.extname(assetPath).toLowerCase();
-      
+
       let contentType = "application/octet-stream";
       if (ext === ".png") contentType = "image/png";
       else if (ext === ".jpg" || ext === ".jpeg") contentType = "image/jpeg";
       else if (ext === ".svg") contentType = "image/svg+xml";
       else if (ext === ".gif") contentType = "image/gif";
-      
+
       return new Response(new Uint8Array(fileBuffer), {
         headers: {
           "Content-Type": contentType,

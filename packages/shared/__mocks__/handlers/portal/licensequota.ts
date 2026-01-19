@@ -55,7 +55,10 @@ export const licenseQuotaResolver = () => {
 };
 
 export const licenseQuotaHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_LICENSE_QUOTA}`, () => {
-    return licenseQuotaResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_LICENSE_QUOTA}`,
+    () => {
+      return licenseQuotaResolver();
+    },
+  );
 };

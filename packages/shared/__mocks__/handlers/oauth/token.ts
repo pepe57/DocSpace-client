@@ -48,8 +48,10 @@ export const tokenResolver = (): Response => {
 };
 
 export const tokenHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_OAUTH_TOKEN}`, () => {
-    return tokenResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_OAUTH_TOKEN}`,
+    () => {
+      return tokenResolver();
+    },
+  );
 };
-

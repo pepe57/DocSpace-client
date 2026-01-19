@@ -113,14 +113,23 @@ export const aiVectorizationPutResolver = () => {
   return new Response(JSON.stringify(successSet));
 };
 
-export const aiVectorizationGetHandler = (port: string, type?: "enabled" | "disabled" | "needReset") => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CONFIG_VECTORIZATION}`, () => {
-    return aiVectorizationGetResolver(type);
-  });
+export const aiVectorizationGetHandler = (
+  port: string,
+  type?: "enabled" | "disabled" | "needReset",
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CONFIG_VECTORIZATION}`,
+    () => {
+      return aiVectorizationGetResolver(type);
+    },
+  );
 };
 
 export const aiVectorizationPutHandler = (port: string) => {
-  return http.put(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CONFIG_VECTORIZATION}`, () => {
-    return aiVectorizationPutResolver();
-  });
+  return http.put(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CONFIG_VECTORIZATION}`,
+    () => {
+      return aiVectorizationPutResolver();
+    },
+  );
 };

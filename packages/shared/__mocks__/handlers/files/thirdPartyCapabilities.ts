@@ -49,7 +49,10 @@ export const thirdPartyCapabilitiesResolver = () => {
 };
 
 export const thirdPartyCapabilitiesHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_THIRD_PARTY_CAPABILITIES}`, () => {
-    return thirdPartyCapabilitiesResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_THIRD_PARTY_CAPABILITIES}`,
+    () => {
+      return thirdPartyCapabilitiesResolver();
+    },
+  );
 };

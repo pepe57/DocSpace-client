@@ -205,7 +205,10 @@ export const quotaResolver = (withCustomization: boolean = false) => {
   return new Response(JSON.stringify(quotaSuccess(withCustomization)));
 };
 
-export const quotaHandler = (port: string, withCustomization: boolean = false) => {
+export const quotaHandler = (
+  port: string,
+  withCustomization: boolean = false,
+) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_QUOTA}`, () => {
     return quotaResolver(withCustomization);
   });

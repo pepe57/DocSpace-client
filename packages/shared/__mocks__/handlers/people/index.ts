@@ -43,7 +43,6 @@ import { peopleHandler } from "./people";
 import { peopleListHandler, peopleListAccessDeniedHandler } from "./list";
 import { themeProviderHandler } from "./theme";
 
-
 export {
   selfHandler,
   selfUpdateHandler,
@@ -60,7 +59,7 @@ export {
   updateUserCultureHandler,
   selfByTypeHandler,
   selfHandlerWithCulture,
-  themeProviderHandler
+  themeProviderHandler,
 };
 
 export const peopleHandlers = (port: string) => [

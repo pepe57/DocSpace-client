@@ -40,7 +40,7 @@ export enum TypeSettings {
   NoAuth = "noAuth",
   EnabledJoin = "enabledJoin",
   EnableAdmMess = "enableAdmMess",
-  WithHCaptcha = "withHCaptcha"
+  WithHCaptcha = "withHCaptcha",
 }
 
 export const settingsWizzard = {

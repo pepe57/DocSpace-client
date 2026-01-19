@@ -209,21 +209,33 @@ export const aiProvidersPutResolver = () => {
 };
 
 export const aiProvidersPostHandler = (port: string) => {
-  return http.post(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_LIST}`,
-    () => aiProvidersPostResolver());
+  return http.post(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_LIST}`,
+    () => aiProvidersPostResolver(),
+  );
 };
 
 export const aiProvidersDeleteHandler = (port: string) => {
-  return http.delete(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_LIST}`,
-    () => aiProvidersDeleteResolver());
+  return http.delete(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_LIST}`,
+    () => aiProvidersDeleteResolver(),
+  );
 };
 
 export const aiProvidersPutHandler = (port: string) => {
-  return http.put(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_LIST}/:id`,
-    () => aiProvidersPutResolver());
+  return http.put(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_LIST}/:id`,
+    () => aiProvidersPutResolver(),
+  );
 };
 
-export const aiProvidersHandler = (port: string, needReset?: boolean, isEmpty?: boolean) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_LIST}`,
-    () => aiProvidersResolver({ needReset, isEmpty }));
+export const aiProvidersHandler = (
+  port: string,
+  needReset?: boolean,
+  isEmpty?: boolean,
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_LIST}`,
+    () => aiProvidersResolver({ needReset, isEmpty }),
+  );
 };

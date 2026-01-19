@@ -64,7 +64,10 @@ export const activeConnectionsResolver = (): Response => {
 };
 
 export const activeConnectionsHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_ACTIVE_CONNECTIONS}`, () => {
-    return activeConnectionsResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_ACTIVE_CONNECTIONS}`,
+    () => {
+      return activeConnectionsResolver();
+    },
+  );
 };

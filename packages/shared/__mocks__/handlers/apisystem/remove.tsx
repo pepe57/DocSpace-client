@@ -52,7 +52,10 @@ export const removePortalResolver = () => {
 };
 
 export const removePortalHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_PORTAL_REMOVE}`, () => {
-    return removePortalResolver();
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_PORTAL_REMOVE}`,
+    () => {
+      return removePortalResolver();
+    },
+  );
 };

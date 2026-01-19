@@ -72,13 +72,17 @@ export const clientsSuccess = {
   last_modified_on: null,
 };
 
-
 export const clientsResolver = (isEmpty: boolean = false): Response => {
-  return new Response(JSON.stringify(isEmpty ? clientsEmptySuccess : clientsSuccess));
+  return new Response(
+    JSON.stringify(isEmpty ? clientsEmptySuccess : clientsSuccess),
+  );
 };
 
 export const clientsHandler = (port: string, isEmpty?: boolean) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_OAUTH_CLIENTS}`, () => {
-    return clientsResolver(isEmpty);
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_OAUTH_CLIENTS}`,
+    () => {
+      return clientsResolver(isEmpty);
+    },
+  );
 };

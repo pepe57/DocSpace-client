@@ -32,21 +32,36 @@ import { imagesHandlerClient } from "./images";
 import { scriptsHandler } from "./scripts";
 import { fontsHandler } from "./fonts";
 import { localesHandler } from "./locales";
-import { pluginJsHandler, pluginCssHandler, pluginAssetsHandler } from "./plugins";
+import {
+  pluginJsHandler,
+  pluginCssHandler,
+  pluginAssetsHandler,
+} from "./plugins";
 import { campaignsHandler, campaignsConfigsHandler } from "./campaigns";
 
-
-export { logoHandler, imagesHandler, imagesHandlerClient, scriptsHandler, fontsHandler, localesHandler, pluginJsHandler, pluginCssHandler, pluginAssetsHandler, campaignsHandler, campaignsConfigsHandler };
+export {
+  logoHandler,
+  imagesHandler,
+  imagesHandlerClient,
+  scriptsHandler,
+  fontsHandler,
+  localesHandler,
+  pluginJsHandler,
+  pluginCssHandler,
+  pluginAssetsHandler,
+  campaignsHandler,
+  campaignsConfigsHandler,
+};
 
 export const staticsHandlers = () => [
-    logoHandler(), 
-    imagesHandler(), 
-    imagesHandlerClient(),
-    scriptsHandler(),
-    fontsHandler(),
-    localesHandler(),
-    pluginJsHandler(),
-    pluginCssHandler(),
-    pluginAssetsHandler(),
-    ...campaignsHandler(),
+  logoHandler(),
+  imagesHandler(),
+  imagesHandlerClient(),
+  scriptsHandler(),
+  fontsHandler(),
+  localesHandler(),
+  pluginJsHandler(),
+  pluginCssHandler(),
+  pluginAssetsHandler(),
+  ...campaignsHandler(),
 ];

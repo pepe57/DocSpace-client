@@ -125,6 +125,8 @@ export const shareToUserResolver = () => {
 };
 
 export const shareToUserHandler = (port: string) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_SHARE_TO_USERS_FILE}`, 
-    () => shareToUserResolver());
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_SHARE_TO_USERS_FILE}`,
+    () => shareToUserResolver(),
+  );
 };

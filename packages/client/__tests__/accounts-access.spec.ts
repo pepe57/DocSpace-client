@@ -25,14 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { expect, test, TEST_PORT } from "./fixtures/base";
-import { rootHandler,
+import {
+  rootHandler,
   settingsHandler,
   TypeSettings,
   filesSettingsHandler,
-  peopleListHandler, 
+  peopleListHandler,
   selfActivationStatusHandler,
   selfByTypeHandler,
-  peopleListAccessDeniedHandler} from "@docspace/shared/__mocks__/handlers";
+  peopleListAccessDeniedHandler,
+} from "@docspace/shared/__mocks__/handlers";
 
 test.describe("Accounts Access Control", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -47,7 +49,7 @@ test.describe("Accounts Access Control", () => {
   test("should allow owner to access accounts page and see content", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(selfActivationStatusHandler(TEST_PORT, null, false, true));
 
@@ -61,9 +63,9 @@ test.describe("Accounts Access Control", () => {
   test("should allow admin to access accounts page and see content", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
-    mockRequest.use(selfByTypeHandler(TEST_PORT,  "admin"));
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
     //await mockRequest.router([endpoints.selfAdminOnly, endpoints.peopleList]);
 
     await page.goto(`${baseUrl}/accounts/people/filter`);
@@ -76,7 +78,7 @@ test.describe("Accounts Access Control", () => {
   test("should allow room admin to access accounts page and see content", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "roomAdmin"));
 
@@ -90,12 +92,12 @@ test.describe("Accounts Access Control", () => {
   test("should show NoAccessContainer for visitor", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(
       peopleListAccessDeniedHandler(TEST_PORT), // Return 403 for people list
       selfByTypeHandler(TEST_PORT, "visitor"),
-    ); 
+    );
 
     await page.goto(`${baseUrl}/accounts/people/filter`);
 
@@ -107,11 +109,12 @@ test.describe("Accounts Access Control", () => {
   test("should show NoAccessContainer for regular user", async ({
     page,
     mockRequest,
-    baseUrl
+    baseUrl,
   }) => {
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "regular"),
-      peopleListAccessDeniedHandler(TEST_PORT)); // Return 403 for people list
+      peopleListAccessDeniedHandler(TEST_PORT),
+    ); // Return 403 for people list
 
     await page.goto(`${baseUrl}/accounts/people/filter`);
 
