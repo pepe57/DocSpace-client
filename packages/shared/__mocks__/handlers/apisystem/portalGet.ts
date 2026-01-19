@@ -24,21 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { registerHandler } from "./register";
-import { removePortalHandler } from "./remove";
-import { setDomainHandler } from "./setDomain";
-import { portalGetHandler } from "./portalGet";
+import { http } from "msw";
 
-export {
-  registerHandler,
-  removePortalHandler,
-  setDomainHandler,
-  portalGetHandler,
-}
+export const PATH_PORTAL_GET = "apisystem/portal/get";
 
-export const apisystemHandlers = (port: string) => [
-  registerHandler(port),
-  removePortalHandler(port),
-  setDomainHandler(port),
-  portalGetHandler(port),
-];
+export const portalGetResponse = {
+  tenantId: 1,
+  tenantAlias: "localhost",
+  tenantDomain: "localhost",
+  hostedRegion: null,
+  name: "Web Office",
+  language: "en-US",
+  timeZoneName: "UTC",
+  ownerId: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+  trustedDomainsType: 0,
+  trustedDomains: [],
+  status: 0,
+  createdDateTime: "2021-03-09T09:52:55.0000000Z",
+  spam: false,
+  calls: false,
+};
+
+export const portalGetResolver = () => {
+  return new Response(JSON.stringify(portalGetResponse));
+};
+
+export const portalGetHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${PATH_PORTAL_GET}`, () => {
+    return portalGetResolver();
+  });
+};

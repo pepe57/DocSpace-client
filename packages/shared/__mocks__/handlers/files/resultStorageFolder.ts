@@ -29,7 +29,7 @@
 import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_RESULT_STORAGE_FOLDER = 'files/:id';
+export const PATH_RESULT_STORAGE_FOLDER = 'files/:id(\\d+)';
 
 export const PATH_RESULT_STORAGE_FOLDER_INFO = 'files/folder/:id';
 

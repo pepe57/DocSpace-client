@@ -62,7 +62,7 @@ export const allHandlers = (port: string) => [
   ...authenticationHandlers(port),
   ...portalHandlers(port),
   ...filesHandlers(port),
-  ...staticsHandlers(port),
+  ...staticsHandlers(),
   ...aiHandlers(port),
   ...roomsHandlers(port),
   ...shareHandlers(port),

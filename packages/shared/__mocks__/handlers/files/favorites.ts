@@ -29,7 +29,7 @@ import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 type ResponseType = "mark" | "delete" | "success" | "success_many" | "empty";
 
-export const PATH_FAVORITES = "files/:id";
+export const PATH_FAVORITES = "files/:id(\\d+)";
 export const PATH_DELETE_FAVORITES = "files/favorites";
 export const PATH_ADD_TO_FAVORITES = "files/favorites";
 export const PATH_GET_FILE = "files/:id";
@@ -1915,7 +1915,15 @@ export const favoritesResolver = (type?: ResponseType) => {
 };
 
 export const favoritesHandler = (port: string, type?: ResponseType) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_FAVORITES}`, () => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_FAVORITES}`, ({ request }) => {
+
+    // Skip if searchArea is ResultStorage (6) or Knowledge (9) - let agent folder handlers handle those
+    const url = new URL(request.url);
+    const searchArea = url.searchParams.get('searchArea');
+    console.log('url', request.url);
+    if(searchArea === '6' || searchArea === '9' || request.url.includes('chat')) {
+      return;
+    }
     return favoritesResolver(type);
   });
 };

@@ -227,7 +227,7 @@ export const selfResolver = (
 export const updateUserCultureResolver = (culture: string) => {
    const data = {
     ...successSelf,
-    culture,
+    cultureName: culture,
   };
 
   return new Response(JSON.stringify({ response: data }));
@@ -355,5 +355,15 @@ export const userByTypeResolver = (userType: UserType): Response => {
 export const selfByTypeHandler = (port: string, userType: UserType = "owner") => {
   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_DELETE_USER}`, () => {
     return userByTypeResolver(userType);
+  });
+};
+
+export const selfHandlerWithCulture = (port: string, culture: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    const data = {
+      ...successSelf,
+      cultureName: culture,
+    };
+    return new Response(JSON.stringify({ response: data }));
   });
 };

@@ -29,11 +29,11 @@
 import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_AGENT_FOLDER_CHAT = 'files/:id([0-9]+)';
+export const PATH_AGENT_FOLDER_CHAT = 'files/:id(\\d+)';
 
-export const PATH_AGENT_FOLDER_RESULT_STORAGE = 'files/:id([0-9]+)';
+export const PATH_AGENT_FOLDER_RESULT_STORAGE = 'files/:id(\\d+)';
 
-export const PATH_AGENT_FOLDER_INFO = 'files/folder/:id';
+export const PATH_AGENT_FOLDER_INFO = 'files/folder/:id(\\d+)';
 
 const createdUpdatedByMock = {
   id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",

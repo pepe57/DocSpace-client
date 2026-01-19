@@ -34,6 +34,12 @@ export const localesHandler = () => {
   return http.get("*/**/locales/**", async ({ request }) => {
     try {
       const url = request.url;
+      
+      // Skip campaign locales - they are handled by campaignsHandler
+      if (url.includes("/campaigns/locales/")) {
+        return;
+      }
+      
       const hasStatic = url.includes("static");
       const local = url.split("/locales/").at(-1)!.split("?")[0];
 
@@ -41,8 +47,35 @@ export const localesHandler = () => {
       `../../../../../public/locales/${local}` : 
       `../../../../client/public/locales/${local}`; 
       const localeFullPath = path.join(__dirname, localePath); 
-      const localeContent = fs.readFileSync(localeFullPath);
       
+      // Check if file exists, fallback to en if not
+      if (!fs.existsSync(localeFullPath)) {
+        const enLocal = local.replace(/^[a-z]{2}(-[A-Z]{2})?\//, 'en/');
+        const enLocalePath = hasStatic ? 
+          `../../../../../public/locales/${enLocal}` : 
+          `../../../../client/public/locales/${enLocal}`;
+        const enLocaleFullPath = path.join(__dirname, enLocalePath);
+        
+        if (fs.existsSync(enLocaleFullPath)) {
+          const localeContent = fs.readFileSync(enLocaleFullPath, 'utf-8');
+          return new Response(localeContent, { 
+            status: 200,
+            headers: {
+              "Content-Type": "application/json",
+            }
+          });
+        }
+        
+        // Return empty object if no locale found
+        return new Response("{}", { 
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+          }
+        });
+      }
+      
+      const localeContent = fs.readFileSync(localeFullPath, 'utf-8');
 
       return new Response(localeContent, { 
         status: 200,
@@ -52,7 +85,13 @@ export const localesHandler = () => {
       });
     } catch (error) {
       console.error("Error reading locale file:", error);
-      return new Response("Error loading locale", { status: 500 });
+      // Return empty object instead of error to prevent JSON parse errors
+      return new Response("{}", { 
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
     }
   });
 };

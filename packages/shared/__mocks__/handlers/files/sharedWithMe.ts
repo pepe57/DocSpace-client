@@ -31,7 +31,7 @@ import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 type ResponseType = "success" | "empty";
 
-export const PATH_SHARED_WITH_ME = "files/:id";
+export const PATH_SHARED_WITH_ME = "files/:id(\\d+)";
 
 const getSharedWithMeFolder = () => ({
     files: [

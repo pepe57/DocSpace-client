@@ -27,7 +27,7 @@
 import { http } from "msw";
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-export const PATH_RECENT = "files/:id";
+export const PATH_RECENT = "files/:id(\\d+)";
 
 const recentEmptySuccess = {
   response: {

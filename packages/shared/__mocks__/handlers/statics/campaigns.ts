@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -26,27 +26,47 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { logoHandler } from "./logo";
-import { imagesHandler } from "./images";
-import { imagesHandlerClient } from "./images";
-import { scriptsHandler } from "./scripts";
-import { fontsHandler } from "./fonts";
-import { localesHandler } from "./locales";
-import { pluginJsHandler, pluginCssHandler, pluginAssetsHandler } from "./plugins";
-import { campaignsHandler, campaignsConfigsHandler } from "./campaigns";
+import { http, HttpResponse } from "msw";
 
+const campaignConfig = {
+  borderColor: "#FF6F3D",
+  title: {
+    color: "#FF6F3D",
+    fontSize: "12px",
+    fontWeight: "600",
+  },
+  body: {
+    fontSize: "13px",
+    fontWeight: "600",
+  },
+  action: {
+    isButton: false,
+    color: "#FF6F3D",
+    fontSize: "12px",
+    fontWeight: "600",
+    type: "open-url",
+  },
+  hideFor: [],
+};
 
-export { logoHandler, imagesHandler, imagesHandlerClient, scriptsHandler, fontsHandler, localesHandler, pluginJsHandler, pluginCssHandler, pluginAssetsHandler, campaignsHandler, campaignsConfigsHandler };
+const campaignLocale = {
+  ButtonLabel: "Book now",
+  Header: "Use ONLYOFFICE like a pro",
+  Link: "mailto:training@onlyoffice.com",
+  SubHeader: "Book a team training course with our top specialists.",
+};
 
-export const staticsHandlers = () => [
-    logoHandler(), 
-    imagesHandler(), 
-    imagesHandlerClient(),
-    scriptsHandler(),
-    fontsHandler(),
-    localesHandler(),
-    pluginJsHandler(),
-    pluginCssHandler(),
-    pluginAssetsHandler(),
-    ...campaignsHandler(),
-];
+export const campaignsConfigsHandler = () => {
+  return http.get("*/static/campaigns/configs/*", () => {
+    return HttpResponse.json(campaignConfig);
+  });
+};
+
+export const campaignsHandler = () => {
+  return [
+    campaignsConfigsHandler(),
+    http.get("*/static/campaigns/locales/*/*", () => {
+      return HttpResponse.json(campaignLocale);
+    }),
+  ];
+};

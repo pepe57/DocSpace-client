@@ -35,6 +35,7 @@ import {
   createUserHandler,
   updateUserCultureHandler,
   selfByTypeHandler,
+  selfHandlerWithCulture,
 } from "./self";
 export type { UserType } from "./self";
 import { thirdPartyProvidersHandler } from "./thirdPartyProviders";
@@ -58,6 +59,7 @@ export {
   peopleListAccessDeniedHandler,
   updateUserCultureHandler,
   selfByTypeHandler,
+  selfHandlerWithCulture,
   themeProviderHandler
 };
 

@@ -813,7 +813,7 @@ export const aiChatMessagesHandler = (port: string, type?: AiChatMessagesType) =
 };
 
 export const aiChatMessagesExportHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES_EXPORT}`, () => {
+  return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES_EXPORT}`, () => {
     return aiChatMessagesExportResolver();
   });
 };
