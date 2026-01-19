@@ -277,7 +277,7 @@ export const openEditResolver = (editWithPassword?: boolean) => {
 };
 
 export const openEditHandler = (port: string, editWithPassword?: boolean) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_OPEN_EDIT}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_OPEN_EDIT}`, () => {
     return openEditResolver(editWithPassword);
   });
 };

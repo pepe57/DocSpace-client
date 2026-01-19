@@ -50,7 +50,7 @@ export const themeProviderResolver = () => {
 };
 
 export const themeProviderHandler = (port: string) => {
-  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH_THEME}`, () => {
+  return http.put(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_THEME}`, () => {
     return themeProviderResolver();
   });
 };

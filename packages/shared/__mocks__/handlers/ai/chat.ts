@@ -116,7 +116,7 @@ export const aiChatHandler = (port: string) => {
 };
 
 export const aiChatPutHandler = (port: string) => {
-  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_CHAT}`, () => {
+  return http.put(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CHAT}`, () => {
     return aiChatPutResolver();
   });
 };

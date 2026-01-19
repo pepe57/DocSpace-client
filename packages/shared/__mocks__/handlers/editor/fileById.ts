@@ -169,7 +169,7 @@ export const fileByIdResolver = (isYourTurnFilling?: boolean) => {
 };
 
 export const fileByIdHandler = (port: string, isYourTurnFilling?: boolean) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
     return fileByIdResolver(isYourTurnFilling);
   });
 };

@@ -237,14 +237,14 @@ export const selfHandler = (
   port: string,
   errorStatus: 400 | 404 | null = null,
 ) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
     return selfResolver(errorStatus);
   });
 };
 
 export const selfUpdateHandler = (port: string) => {
   return http.put(
-    `http://localhost:${port}/${API_PREFIX}/${PATH_UPDATE_USER}`,
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_UPDATE_USER}`,
     () => {
       return selfResolver();
     },
@@ -253,7 +253,7 @@ export const selfUpdateHandler = (port: string) => {
 
 export const selfDeleteHandler = (port: string) => {
   return http.delete(
-    `http://localhost:${port}/${API_PREFIX}/${PATH_DELETE_USER}`,
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_DELETE_USER}`,
     () => {
       return selfResolver();
     },
@@ -265,7 +265,7 @@ export const selfChangeAuthDataHandler = (
   errorStatus: 400 | 404 | null = null,
 ) => {
   return http.put(
-    `http://localhost:${port}/${API_PREFIX}/${PATH_CHANGE_AUTH_DATA}`,
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_CHANGE_AUTH_DATA}`,
     () => {
       return selfResolver(errorStatus);
     },
@@ -279,7 +279,7 @@ export const selfActivationStatusHandler = (
   isClient: boolean = false,
 ) => {
   return http.put(
-    `http://localhost:${port}/${API_PREFIX}/${PATH_ACTIVATION_STATUS}`,
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_ACTIVATION_STATUS}`,
     () => {
       return selfResolver(errorStatus, isEmailActivated, isClient);
     },
@@ -291,7 +291,7 @@ export const selfGetByEmailHandler = (
   errorStatus: 400 | 404 | null = null,
 ) => {
   return http.get(
-    `http://localhost:${port}/${API_PREFIX}/${PATH_USER_BY_EMAIL}`,
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_USER_BY_EMAIL}`,
     () => {
       return selfResolver(errorStatus);
     },
@@ -300,7 +300,7 @@ export const selfGetByEmailHandler = (
 
 export const selfAddGuestHandler = (port: string) => {
   return http.post(
-    `http://localhost:${port}/${API_PREFIX}/${PATH_ADD_GUEST}`,
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_ADD_GUEST}`,
     () => {
       return selfResolver();
     },
@@ -308,13 +308,13 @@ export const selfAddGuestHandler = (port: string) => {
 };
 
 export const createUserHandler = (port: string) => {
-  return http.post(`http://localhost:${port}/${API_PREFIX}/people`, () => {
+  return http.post(`${BASE_URL}:${port}/${API_PREFIX}/people`, () => {
     return selfResolver();
   });
 };
 
 export const updateUserCultureHandler = (port: string, culture?: string ) => {
-  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH_UPDATE_USER_CULTURE}`, () => {
+  return http.put(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_UPDATE_USER_CULTURE}`, () => {
     return updateUserCultureResolver(culture ?? "en-GB");
   });
 };
@@ -353,13 +353,13 @@ export const userByTypeResolver = (userType: UserType): Response => {
 };
 
 export const selfByTypeHandler = (port: string, userType: UserType = "owner") => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_DELETE_USER}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_DELETE_USER}`, () => {
     return userByTypeResolver(userType);
   });
 };
 
 export const selfHandlerWithCulture = (port: string, culture: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
     const data = {
       ...successSelf,
       cultureName: culture,

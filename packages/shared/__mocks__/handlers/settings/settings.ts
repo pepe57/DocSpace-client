@@ -686,7 +686,7 @@ export const settingsHandler = (
   port: string,
   type: TypeSettings = TypeSettings.NoAuth,
 ) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
     return settingsResolver(type);
   });
 };

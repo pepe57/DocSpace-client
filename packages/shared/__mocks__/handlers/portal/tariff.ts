@@ -96,7 +96,7 @@ export const tariffResolver = (openSource: boolean = false) => {
 };
 
 export const tariffHandler = (port: string, openSource: boolean = false) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_TARIFF}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_TARIFF}`, () => {
     return tariffResolver(openSource);
   });
 };

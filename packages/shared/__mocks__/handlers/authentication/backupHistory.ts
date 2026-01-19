@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http } from "msw";
-import { API_PREFIX } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 const getPath = `portal/getbackuphistory`;
 const deletePath = `portal/deletebackuphistory`;
@@ -48,11 +48,11 @@ const backupList = [
 ];
 
 export const createGetBackupHistoryHandler = (port: string) =>
-  http.get(`http://localhost:${port}/${API_PREFIX}/${getPath}`, () => {
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/${getPath}`, () => {
     return new Response(JSON.stringify({ response: backupList }));
   });
 
 export const createDeleteBackupHistoryHandler = (port: string) =>
-  http.delete(`http://localhost:${port}/${API_PREFIX}/${deletePath}`, () => {
+  http.delete(`${BASE_URL}:${port}/${API_PREFIX}/${deletePath}`, () => {
     return new Response(JSON.stringify({}));
   });

@@ -27,7 +27,7 @@
  */
 
 import { http } from "msw";
-import { API_PREFIX } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 import type { TFile, TFolder, TGetFolder } from "../../../api/files/types";
 
 export const PATH_FOLDER = "files/:id(\\d+)";
@@ -4004,12 +4004,12 @@ export const folderResolver = (type?: TypeFolder) => {
 export const folderHandler = (port: string, type?: TypeFolder) => {
   let baseUrl;
   if (port) {
-    baseUrl = `http://localhost:${port}`;
+    baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
       typeof window !== "undefined"
         ? window.location.origin
-        : "http://localhost";
+        : "${BASE_URL}";
   }
 
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_FOLDER}`, () => {
@@ -4020,12 +4020,12 @@ export const folderHandler = (port: string, type?: TypeFolder) => {
 export const folderInfoHandler = (port?: string) => {
   let baseUrl;
   if (port) {
-    baseUrl = `http://localhost:${port}`;
+    baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
       typeof window !== "undefined"
         ? window.location.origin
-        : "http://localhost";
+        : "${BASE_URL}";
   }
 
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_FOLDER_INFO}`, () => {

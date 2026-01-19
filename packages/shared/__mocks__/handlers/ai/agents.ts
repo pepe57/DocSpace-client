@@ -946,7 +946,7 @@ export const aiAgentsHandler = (
   isDocAdmin?: boolean;
 } = {},
 ) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_AGENTS}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_AGENTS}`, () => {
     return aiAgentsResolver({withCreate, withListCreate, aiAccess, inRoom, isDocAdmin});
   });
 };

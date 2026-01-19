@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http } from "msw";
+import { BASE_URL } from "../../e2e/utils";
 
 export const PATH_PORTAL_GET = "apisystem/portal/get";
 
@@ -50,7 +51,7 @@ export const portalGetResolver = () => {
 };
 
 export const portalGetHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${PATH_PORTAL_GET}`, () => {
+  return http.get(`${BASE_URL}:${port}/${PATH_PORTAL_GET}`, () => {
     return portalGetResolver();
   });
 };

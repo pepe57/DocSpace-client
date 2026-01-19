@@ -27,7 +27,7 @@
  */
 
 import { http } from "msw";
-import { API_PREFIX } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_VALIDATE_PUBLIC_ROOM_KEY = "files/share/:key";
 
@@ -69,7 +69,7 @@ export const validatePublicRoomKeyResolver = (): Response => {
 
 export const validatePublicRoomKeyHandler = (port: string) => {
   return http.get(
-    `http://localhost:${port}/${API_PREFIX}/${PATH_VALIDATE_PUBLIC_ROOM_KEY}`,
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_VALIDATE_PUBLIC_ROOM_KEY}`,
     () => {
       return validatePublicRoomKeyResolver();
     },
@@ -82,7 +82,7 @@ export const validatePublicRoomKeyPasswordResolver = (): Response => {
 
 export const validatePublicRoomKeyPasswordHandler = (port: string) => {
   return http.get(
-    `http://localhost:${port}/${API_PREFIX}/${PATH_VALIDATE_PUBLIC_ROOM_KEY}`,
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_VALIDATE_PUBLIC_ROOM_KEY}`,
     () => {
       return validatePublicRoomKeyPasswordResolver();
     },

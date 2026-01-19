@@ -28,7 +28,7 @@
 
 import { http } from "msw";
 import { TFilesSettings } from "../../../api/files/types";
-import { API_PREFIX } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH = "files/settings";
 
@@ -1169,7 +1169,7 @@ export const filesSettingsResolver = (): Response => {
 };
 
 export const filesSettingsHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
     return filesSettingsResolver();
   });
 };

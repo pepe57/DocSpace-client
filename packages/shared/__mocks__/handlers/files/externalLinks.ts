@@ -29,7 +29,7 @@ import { v4 as uuidv4 } from "uuid";
 import moment from "moment/moment";
 
 import { TFileLink } from "../../../api/files/types";
-import { API_PREFIX } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_LINK = "files/file/:fileId/link";
 export const PATH_LINKS = "files/file/:fileId/links";
@@ -89,12 +89,12 @@ function generateFileLinks(count = 3): TFileLink[] {
 export const externalLinksHandler = (port?: string) => {
   let baseUrl;
   if (port) {
-    baseUrl = `http://localhost:${port}`;
+    baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
       typeof window !== "undefined"
         ? window.location.origin
-        : "http://localhost";
+        : "${BASE_URL}";
   }
 
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_LINKS}`, () => {
@@ -107,12 +107,12 @@ export const externalLinksHandler = (port?: string) => {
 export const primaryLinkHandler = (port?: string) => {
   let baseUrl;
   if (port) {
-    baseUrl = `http://localhost:${port}`;
+    baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
       typeof window !== "undefined"
         ? window.location.origin
-        : "http://localhost";
+        : "${BASE_URL}";
   }
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_LINK}`, () => {
     const response = generateFileLink({
@@ -127,7 +127,7 @@ export const primaryLinkHandler = (port?: string) => {
 export const editExternalLinkHandler = (port?: string) => {
   let baseUrl;
   if (port) {
-    baseUrl = `http://localhost:${port}`;
+    baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl = window.location.origin;
   }

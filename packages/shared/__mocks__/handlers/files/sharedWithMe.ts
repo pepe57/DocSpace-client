@@ -314,7 +314,7 @@ export const sharedWithMeResolver = (type?: ResponseType) => {
 };
 
 export const sharedWithMeHandler = (port?: string, type?: ResponseType) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_SHARED_WITH_ME}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_SHARED_WITH_ME}`, () => {
     return sharedWithMeResolver(type);
   });
 }

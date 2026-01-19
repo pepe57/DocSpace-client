@@ -50,7 +50,7 @@ export const deepLinkResolver = (): Response => {
 };
 
 export const deepLinkHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_DEEP_LINK}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_DEEP_LINK}`, () => {
     return deepLinkResolver();
   });
 };

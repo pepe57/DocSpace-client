@@ -47,7 +47,7 @@ export const telegramLinkResolver = (): Response => {
 };
 
 export const telegramLinkHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_TELEGRAM_LINK}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_TELEGRAM_LINK}`, () => {
     return telegramLinkResolver();
   });
 };

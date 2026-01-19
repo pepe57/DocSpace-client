@@ -206,7 +206,7 @@ export const quotaResolver = (withCustomization: boolean = false) => {
 };
 
 export const quotaHandler = (port: string, withCustomization: boolean = false) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_QUOTA}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_QUOTA}`, () => {
     return quotaResolver(withCustomization);
   });
 };

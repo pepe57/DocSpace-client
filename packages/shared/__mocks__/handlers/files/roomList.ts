@@ -28,7 +28,7 @@ import { http } from "msw";
 import { v4 as uuidv4 } from "uuid";
 import { ShareAccessRights } from "../../../enums";
 import { TGetRooms, TRoom } from "../../../api/rooms/types";
-import { API_PREFIX } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_ROOMS_LIST = "files/rooms*";
 
@@ -2626,12 +2626,12 @@ export const roomListHandler = (port: string, roomListType?: TypeRoomList, param
 }) => {
   let baseUrl;
   if (port) {
-    baseUrl = `http://localhost:${port}`;
+    baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
       typeof window !== "undefined"
         ? window.location.origin
-        : "http://localhost";
+        : "${BASE_URL}";
   }
 
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_ROOMS_LIST}`, () => {
@@ -2642,12 +2642,12 @@ export const roomListHandler = (port: string, roomListType?: TypeRoomList, param
 export const createRoomHandler = (port?: string) => {
   let baseUrl;
   if (port) {
-    baseUrl = `http://localhost:${port}`;
+    baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
       typeof window !== "undefined"
         ? window.location.origin
-        : "http://localhost";
+        : "${BASE_URL}";
   }
 
   http.post<{}, { title: string }>(

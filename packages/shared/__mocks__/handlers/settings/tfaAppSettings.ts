@@ -88,7 +88,7 @@ export const tfaAppSettingsResolver = (isEnabled?: boolean): Response => {
 };
 
 export const tfaAppSettingsHandler = (port: string, isEnabled?: boolean) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_TFA_APP_SETTINGS}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_TFA_APP_SETTINGS}`, () => {
     return tfaAppSettingsResolver(isEnabled);
   });
 };

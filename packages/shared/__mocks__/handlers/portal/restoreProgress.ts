@@ -27,7 +27,7 @@
  */
 
 import { http, HttpResponse } from "msw";
-import { API_PREFIX } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_RESTORE_PROGRESS = "portal/getrestoreprogress";
 
@@ -51,7 +51,7 @@ export const restoreProgressHandler = (
 ) => {
   let baseUrl;
   if (port) {
-    baseUrl = `http://localhost:${port}`;
+    baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl = window.location.origin;
   }

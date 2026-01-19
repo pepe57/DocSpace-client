@@ -69,13 +69,13 @@ export const telegramCheckLinkedResolver = (): Response => {
 };
 
 export const telegramCheckHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_TELEGRAM_CHECK}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_TELEGRAM_CHECK}`, () => {
     return telegramCheckResolver();
   });
 };
 
 export const telegramCheckLinkedHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_TELEGRAM_CHECK}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_TELEGRAM_CHECK}`, () => {
     return telegramCheckLinkedResolver();
   });
 };

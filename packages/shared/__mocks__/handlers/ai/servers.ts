@@ -207,25 +207,25 @@ export const aiServersDeleteResolver = () => {
 };
 
 export const aiServersAvailableHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVERS_AVAILABLE}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_SERVERS_AVAILABLE}`, () => {
     return aiServersAvailableResolver();
   });
 };
 
 export const aiServersGetHandler = (port: string, type?: "enabled" | "disabled" | "needReset") => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVERS}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_SERVERS}`, () => {
     return aiServersGetResolver(type);
   });
 };
 
 export const aiServersPostHandler = (port: string) => {
-  return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVERS}`, () => {
+  return http.post(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_SERVERS}`, () => {
     return aiServersPostResolver();
   });
 };
 
 export const aiServersDeleteHandler = (port: string) => {
-  return http.delete(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVERS}`, () => {
+  return http.delete(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_SERVERS}`, () => {
     return aiServersDeleteResolver();
   });
 };

@@ -71,7 +71,7 @@ export const encryptionSettingsResolver = (isEncryptedSettings?: boolean): Respo
 };
 
 export const encryptionSettingsHandler = (port: string, isEncryptedSettings?: boolean) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_ENCRYPTION_SETTINGS}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_ENCRYPTION_SETTINGS}`, () => {
     return encryptionSettingsResolver(isEncryptedSettings);
   });
 };

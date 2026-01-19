@@ -27,7 +27,7 @@
  */
 
 import { http, HttpResponse } from "msw";
-import { API_PREFIX } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 import { ValidationStatus } from "../../../enums";
 
 export const PATH_VALIDATE_PUBLIC_ROOM_PASSWORD = "files/share/*";
@@ -62,12 +62,12 @@ export const validatePublicRoomPasswordHandler = (
 ) => {
   let baseUrl;
   if (port) {
-    baseUrl = `http://localhost:${port}`;
+    baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
       typeof window !== "undefined"
         ? window.location.origin
-        : "http://localhost";
+        : "${BASE_URL}";
   }
 
   return http.post(

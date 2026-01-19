@@ -49,6 +49,6 @@ export const aiRoomsServersResolver = () => {
 };
 
 export const aiRoomsServersHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_ROOMS_SERVERS}`,
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_ROOMS_SERVERS}`,
     () => aiRoomsServersResolver());
 };

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http } from "msw";
-import { API_PREFIX } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_LDAP = "settings/ldap";
 export const PATH_LDAP_DEFAULT = "settings/ldap/default";
@@ -110,19 +110,19 @@ export const ldapCronResolver = () => {
 };
 
 export const ldapHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_LDAP}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_LDAP}`, () => {
     return ldapResolver();
   });
 };
 
 export const ldapDefaultHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_LDAP_DEFAULT}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_LDAP_DEFAULT}`, () => {
     return ldapDefaultResolver();
   });
 };
 
 export const ldapCronHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_LDAP_CRON}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_LDAP_CRON}`, () => {
     return ldapCronResolver();
   });
 };

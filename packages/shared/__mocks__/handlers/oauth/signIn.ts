@@ -60,7 +60,7 @@ export const oauthSignInResolver = () => {
 };
 
 export const oauthSignInHandler = (port: string) => {
-  return http.post(`http://localhost:${port}/${OAUTH_SIGN_IN_PATH}`, () => {
+  return http.post(`${BASE_URL}:${port}/${OAUTH_SIGN_IN_PATH}`, () => {
     return oauthSignInResolver();
   });
 };

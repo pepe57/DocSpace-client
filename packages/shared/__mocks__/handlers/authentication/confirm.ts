@@ -86,7 +86,7 @@ export const confirmHandler = (
   errorType?: ErrorConfirm,
   withEmail?: boolean,
 ) => {
-  return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+  return http.post(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
     return confirmResolver(errorType, withEmail);
   });
 };

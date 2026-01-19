@@ -679,12 +679,12 @@ export const foldersTreeResolver = () => {
 export const foldersTreeHandler = (port: string) => {
   let baseUrl;
   if (port) {
-    baseUrl = `http://localhost:${port}`;
+    baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
       typeof window !== "undefined"
         ? window.location.origin
-        : "http://localhost";
+        : "${BASE_URL}";
   }
 
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH}`, () => {

@@ -209,7 +209,7 @@ export const aiModelsHandler = (port: string, {
   isOpenRouter?: boolean;
   isError?: boolean;
 } = {}) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_MODELS}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_MODELS}`, () => {
     return aiModelsResolver(isClaude, isOpenAI, isTogetherAI, isOpenRouter, isError);
   });
 };

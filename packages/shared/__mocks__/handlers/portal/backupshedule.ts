@@ -46,7 +46,7 @@ export const backupScheduleResolver = () => {
 };
 
 export const backupScheduleHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_BACKUP_SCHEDULE}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_BACKUP_SCHEDULE}`, () => {
     return backupScheduleResolver();
   });
 };

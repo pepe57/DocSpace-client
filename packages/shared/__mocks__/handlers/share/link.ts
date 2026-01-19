@@ -42,7 +42,7 @@ export const LINK_FILE_PATH = "files/file/:id/link";
 export const LINKS_FILE_PATH = "files/file/:id/links";
 
 const id = "00000000-0000-0000-0000-000000000000";
-const shareLink = `http://localhost:5110/s/linkId`;
+const shareLink = `${BASE_URL}:5110/s/linkId`;
 
 export const linkHandle = {
   response: {
@@ -135,7 +135,7 @@ export const linkResolver = () => {
 };
 
 export const linkHandler = () => {
-  return http.post(`http://localhost:5110/${API_PREFIX}/${LINK_FILE_PATH}`, linkResolver);
+  return http.post(`${BASE_URL}:5110/${API_PREFIX}/${LINK_FILE_PATH}`, linkResolver);
 };
 
 export const createLinkRouteResolver = (
@@ -156,13 +156,13 @@ export const createLinkRouteHandler = (
 ) => {
   const resolvedUrl = url ?? LINK_FILE_PATH;
   const fullUrl = typeof resolvedUrl === 'string' 
-    ? `http://localhost:${port}/${API_PREFIX}/${resolvedUrl}`
+    ? `${BASE_URL}:${port}/${API_PREFIX}/${resolvedUrl}`
     : resolvedUrl;
 
   const isArray = Array.isArray(option);
   
   return http.post(
-    `http://localhost:${port}/${API_PREFIX}/${isArray ? LINKS_FILE_PATH : LINK_FILE_PATH}`, 
+    `${BASE_URL}:${port}/${API_PREFIX}/${isArray ? LINKS_FILE_PATH : LINK_FILE_PATH}`, 
     () => createLinkRouteResolver(option, method, url, withTotal)
   );
 };
@@ -175,7 +175,7 @@ export const createLinksRouteHandler = (
   withTotal?: boolean,
 ) => {
   return http.get(
-    `http://localhost:${port}/${API_PREFIX}/${LINKS_FILE_PATH}`, 
+    `${BASE_URL}:${port}/${API_PREFIX}/${LINKS_FILE_PATH}`, 
     () => createLinkRouteResolver(option, method, "", withTotal)
   );
 };

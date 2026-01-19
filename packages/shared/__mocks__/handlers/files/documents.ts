@@ -1329,13 +1329,13 @@ export const myDocumentsResolver = (isList?: boolean) => {
 };
 
 export const myDocumentsHandler = (port: string, isList?: boolean) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_MY_DOCUMENTS}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_MY_DOCUMENTS}`, () => {
     return myDocumentsResolver(isList);
   });
 };
 
 export const myHandler = (port: string, isList?: boolean) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_MY}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_MY}`, () => {
     return myDocumentsResolver(isList);
   });
 };
@@ -1345,7 +1345,7 @@ export const getFileInfoResolver = (): Response => {
 };
 
 export const getFileInfoHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_GET_FILE_INFO}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_GET_FILE_INFO}`, () => {
     return getFileInfoResolver();
   });
 };

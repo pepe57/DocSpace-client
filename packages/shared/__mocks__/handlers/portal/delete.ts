@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http } from "msw";
-import { API_PREFIX } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH = "portal/delete";
 
@@ -48,7 +48,7 @@ export const deletePortalResolver = (): Response => {
 };
 
 export const deletePortalHandler = (port: string) => {
-  return http.delete(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+  return http.delete(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
     return deletePortalResolver();
   });
 };

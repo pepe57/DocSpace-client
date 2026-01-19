@@ -56,7 +56,7 @@ export const paymentSettingsResolver = () => {
 };
 
 export const paymentSettingsHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_PAYMENT_SETTINGS}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_PAYMENT_SETTINGS}`, () => {
     return paymentSettingsResolver();
   });
 };

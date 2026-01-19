@@ -51,7 +51,7 @@ export const buildResolver = () => {
 };
 
 export const buildHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_BUILD}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_BUILD}`, () => {
     return buildResolver();
   });
 };

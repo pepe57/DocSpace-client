@@ -118,7 +118,7 @@ const successDisabledStatus = {
 };
 
 export const aiServerHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVER}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_SERVER}`, () => {
     return new Response(JSON.stringify(success));
   });
 };
@@ -136,13 +136,13 @@ export const aiServerStatusPutResolver = (type?: "enable" | "disable") => {
 };
 
 export const aiServerPutHandler = (port: string) => {
-  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVER}`, () => {
+  return http.put(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_SERVER}`, () => {
     return aiServerPutResolver();
   });
 };
 
 export const aiServerStatusPutHandler = (port: string, type?: "enable" | "disable") => {
-  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_SERVER_STATUS}`, () => {
+  return http.put(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_SERVER_STATUS}`, () => {
     return aiServerStatusPutResolver(type);
   });
 };

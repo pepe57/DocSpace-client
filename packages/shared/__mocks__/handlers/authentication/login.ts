@@ -56,7 +56,7 @@ const successLoginWithTfa = (port: string) => ({
     expires: "0001-01-01T00:00:00",
     sms: false,
     tfa: true,
-    confirmUrl: `http://localhost:${port}/login/confirm/TfaAuth?type=TfaAuth&uid=d513b1f4`,
+    confirmUrl: `${BASE_URL}:${port}/login/confirm/TfaAuth?type=TfaAuth&uid=d513b1f4`,
   },
   links: [
     {
@@ -128,7 +128,7 @@ export const loginHandler = (
   errorStatus: 404 | 401 | 403 | null = null,
   withTfa?: boolean,
 ) => {
-  return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+  return http.post(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
     return loginResolver(errorStatus, withTfa, port);
   });
 };

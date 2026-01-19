@@ -115,7 +115,7 @@ export const aiConfigHandler = (
   isDisabled?: boolean,
   isWebSearchDisabled?: boolean,
 ) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_CONFIG}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CONFIG}`, () => {
     return aiConfigResolver(isDisabled, isWebSearchDisabled);
   });
 };

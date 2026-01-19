@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http } from "msw";
-import { API_PREFIX } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_PORTAL_REGISTER = "portal/register";
 
@@ -53,7 +53,7 @@ export const registerResolver = () => {
 };
 
 export const registerHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_PORTAL_REGISTER}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_PORTAL_REGISTER}`, () => {
     return registerResolver();
   });
 };

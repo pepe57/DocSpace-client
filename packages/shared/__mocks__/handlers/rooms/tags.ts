@@ -49,7 +49,7 @@ export const roomTagsResolver = () => {
 };
 
 export const roomTagsHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_TAGS}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_TAGS}`, () => {
     return roomTagsResolver();
   });
 }

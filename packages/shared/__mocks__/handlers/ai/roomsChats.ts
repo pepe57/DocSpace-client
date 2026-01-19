@@ -174,11 +174,11 @@ export const aiRoomsChatsStreamResolver = (
 };
 
 export const aiRoomsChatsHandler = (port: string, type?: "empty" | "with-chats") => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS}`,
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS}`,
     () => aiRoomsChatsResolver(type));
 };
 
 export const aiRoomsChatsStreamHandler = (port: string, type?: "default" | "mcpNeedApprove") => {
-  return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_STREAM}`,
+  return http.post(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_STREAM}`,
     () => aiRoomsChatsStreamResolver(type));
 };

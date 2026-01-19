@@ -127,7 +127,7 @@ export const backupStorageResolver = () => {
 };
 
 export const backupStorageHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH_BACKUP_STORAGE}`, () => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_BACKUP_STORAGE}`, () => {
     return backupStorageResolver();
   });
 };

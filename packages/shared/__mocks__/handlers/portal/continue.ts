@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http } from "msw";
-import { API_PREFIX } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH = "portal/continue";
 
@@ -47,7 +47,7 @@ export const continuePortalResolver = (): Response => {
 };
 
 export const continuePortalHandler = (port: string) => {
-  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+  return http.put(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
     return continuePortalResolver();
   });
 };

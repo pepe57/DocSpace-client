@@ -55,7 +55,7 @@ export const loginWithTfaCodeResolver = () => {
 
 export const loginWithTfaCodeHandler = (port: string) => {
   return http.post(
-    `http://localhost:${port}/${API_PREFIX}/${PATH_WITH_PARAMS}`,
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WITH_PARAMS}`,
     () => {
       return loginWithTfaCodeResolver();
     },

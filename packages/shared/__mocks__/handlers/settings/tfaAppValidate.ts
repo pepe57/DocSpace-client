@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http } from "msw";
-import { API_PREFIX } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH = "settings/tfaapp/validate";
 
@@ -66,7 +66,7 @@ export const tfaAppValidateHandler = (
   port: string,
   errorStatus: 400 | null = null,
 ) => {
-  return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+  return http.post(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
     return tfaAppValidateResolver(errorStatus);
   });
 };
