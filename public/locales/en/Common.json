@@ -1094,5 +1094,6 @@
   "PM": "PM",
   "LinkSettingsExpired": "Registration via this link is no longer available since its lifetime has expired.",
   "LinkNoLongerAvailable": "Link no longer available",
-  "LinkLifetimeExpired": "Access via this link is no longer available since its lifetime has expired."
+  "LinkLifetimeExpired": "Access via this link is no longer available since its lifetime has expired.",
+  "ExternalLink": "External link"
 }

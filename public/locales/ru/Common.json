@@ -1050,5 +1050,6 @@
   "YouHaveUnsavedChanges": "Имеются несохраненные изменения",
   "YourCurrentDomain": "Ваш текущий домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша очередь"
+  "YourTurn": "Ваша очередь",
+  "ExternalLink": "Внешняя ссылка"
 }
