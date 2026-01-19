@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 import ClockIconUrl from "PUBLIC_DIR/images/clock.react.svg?url";
@@ -36,7 +35,6 @@ import classNames from "classnames";
 
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
-// import { objectToGetParams } from "@docspace/shared/utils/common";
 
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -44,8 +42,6 @@ import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Heading } from "@docspace/shared/components/heading";
-// import { DropDown } from "@docspace/shared/components/drop-down";
-// import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
@@ -146,47 +142,6 @@ const ExternalLinks = ({
 
   const onCopyLink = () => copyLink(activeLink);
 
-  // const toggleActionLinks = () => {
-  //   setActionLinksVisible(!actionLinksVisible);
-  // };
-
-  // const closeActionLinks = () => {
-  //   setActionLinksVisible(false);
-  // };
-
-  // const shareEmail = useCallback(
-  //   (link) => {
-  //     const { title, shareLink } = link;
-  //     const subject = t("SharingPanel:ShareEmailSubject", { itemName: title });
-  //     const body = t("SharingPanel:ShareEmailBody", { itemName: title, shareLink });
-
-  //     const mailtoLink = `mailto:${objectToGetParams({
-  //       subject,
-  //       body,
-  //     })}`;
-
-  //     window.open(mailtoLink, "_self");
-
-  //     closeActionLinks();
-  //   },
-  //   [closeActionLinks, t],
-  // );
-
-  // const shareTwitter = useCallback(
-  //   (link) => {
-  //     const { shareLink } = link;
-
-  //     const twitterLink = `https://twitter.com/intent/tweet${objectToGetParams({
-  //       text: shareLink,
-  //     })}`;
-
-  //     window.open(twitterLink, "", "width=1000,height=670");
-
-  //     closeActionLinks();
-  //   },
-  //   [closeActionLinks],
-  // );
-
   const availableAccess =
     roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
 
@@ -245,33 +200,6 @@ const ExternalLinks = ({
           onClick={() => setLinkSettingsPanelVisible(true)}
         />
 
-        {/* {false ? (
-          <div style={{ position: "relative" }}>
-            <IconButton
-              size={16}
-              iconName={MediaDownloadReactSvgUrl}
-              hoverColor={globalColors.black}
-              iconColor={globalColors.gray}
-              onClick={toggleActionLinks}
-            />
-            <DropDown
-              open={actionLinksVisible}
-              clickOutsideAction={closeActionLinks}
-              withBackdrop={false}
-              isDefaultMode={false}
-              fixedDirection
-            >
-              <DropDownItem
-                label={`${t("Common:ShareVia")} e-mail`}
-                onClick={() => shareEmail(activeLink[0])}
-              />
-              <DropDownItem
-                label={`${t("Common:ShareVia")} Twitter`}
-                onClick={() => shareTwitter(activeLink[0])}
-              />
-            </DropDown>
-          </div>
-        ) : null} */}
         <ToggleButton
           className={classNames("invite-via-link", styles.toggleButton)}
           isChecked={externalLinksVisible}
