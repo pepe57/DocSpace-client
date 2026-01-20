@@ -99,6 +99,114 @@ test.describe("AI knowledge base", () => {
         "ai-knowledge-empty.png",
       ]);
     });
+
+    test("should render knowledge files with completed vectorization", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        agentFolderKnowledgeHandler(TEST_PORT),
+        aiConfigHandler(TEST_PORT),
+      );
+
+      await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=5`);
+
+      const tableRows = page.getByTestId(/table-row-/);
+
+      await expect(tableRows).toHaveCount(3);
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-knowledge",
+        "ai-knowledge-vectorization-completed.png",
+      ]);
+    });
+
+    test("should render knowledge files with vectorization in progress", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        agentFolderKnowledgeHandler(TEST_PORT, "vectorizationInProgress"),
+        aiConfigHandler(TEST_PORT),
+      );
+
+      await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=5`);
+
+      const tableRows = page.getByTestId(/table-row-/);
+
+      await expect(tableRows).toHaveCount(3);
+
+      const preparingForAIBadge = page.getByTestId("preparing-for-ai-badge");
+
+      await preparingForAIBadge.last().hover();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-knowledge",
+        "ai-knowledge-vectorization-in-progress.png",
+      ]);
+    });
+
+    test("should render knowledge files with failed vectorization and retry vectorization button", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        agentFolderKnowledgeHandler(TEST_PORT, "vectorizationFailed"),
+        aiConfigHandler(TEST_PORT),
+      );
+
+      await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=5`);
+
+      const tableRows = page.getByTestId(/table-row-/);
+
+      await expect(tableRows).toHaveCount(3);
+
+      const failedVectorizationBadge = page.getByTestId(
+        "failed-vectorization-badge",
+      );
+
+      await failedVectorizationBadge.last().hover();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-knowledge",
+        "ai-knowledge-vectorization-failed-can-retry.png",
+      ]);
+    });
+
+    test("should render knowledge files with failed vectorization and without vectorization button", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        agentFolderKnowledgeHandler(TEST_PORT, "vectorizationFailedNoRetry"),
+        aiConfigHandler(TEST_PORT),
+      );
+
+      await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=5`);
+
+      const tableRows = page.getByTestId(/table-row-/);
+
+      await expect(tableRows).toHaveCount(3);
+
+      const failedVectorizationBadge = page.getByTestId(
+        "failed-vectorization-badge",
+      );
+
+      await failedVectorizationBadge.last().hover();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-knowledge",
+        "ai-knowledge-vectorization-failed-no-retry.png",
+      ]);
+    });
   });
 
   // ================================== User ==================================
