@@ -4007,7 +4007,7 @@ export const folderHandler = (port: string, type?: TypeFolder) => {
     baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
-      typeof window !== "undefined" ? window.location.origin : "${BASE_URL}";
+      typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
   }
 
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_FOLDER}`, () => {
@@ -4021,7 +4021,7 @@ export const folderInfoHandler = (port?: string) => {
     baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
-      typeof window !== "undefined" ? window.location.origin : "${BASE_URL}";
+      typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
   }
 
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_FOLDER_INFO}`, () => {

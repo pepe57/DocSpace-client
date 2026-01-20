@@ -32,8 +32,19 @@ import {
   createGetBackupHistoryHandler,
 } from "./backupHistory";
 import { createDeleteBackupHandler, createStartBackupHandler } from "./backup";
+import { createStartRestoreHandler } from "./restore";
 
-export { confirmHandler, loginHandler, loginWithTfaCodeHandler, ErrorConfirm };
+export {
+  confirmHandler,
+  loginHandler,
+  loginWithTfaCodeHandler,
+  ErrorConfirm,
+  createDeleteBackupHandler,
+  createStartBackupHandler,
+  createGetBackupHistoryHandler,
+  createDeleteBackupHistoryHandler,
+  createStartRestoreHandler,
+};
 
 export const authenticationHandlers = (port: string) => [
   loginHandler(port),
