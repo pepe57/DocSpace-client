@@ -267,7 +267,13 @@ const getAgentFolderChat = ({ canUseChat }: { canUseChat: boolean }) => {
   };
 };
 
-const getAgentFolderKnowledge = ({ isEmpty }: { isEmpty: boolean }) => {
+const getAgentFolderKnowledge = ({
+  isEmpty,
+  canUploadFiles,
+}: {
+  isEmpty: boolean;
+  canUploadFiles: boolean;
+}) => {
   return {
     files: [],
     folders: [],
@@ -288,13 +294,13 @@ const getAgentFolderKnowledge = ({ isEmpty }: { isEmpty: boolean }) => {
       canShare: false,
       security: {
         Read: true,
-        Create: false,
+        Create: canUploadFiles,
         Delete: false,
         EditRoom: false,
         Rename: false,
-        CopyTo: false,
+        CopyTo: canUploadFiles,
         Copy: false,
-        MoveTo: false,
+        MoveTo: canUploadFiles,
         Move: false,
         Pin: false,
         Mute: false,
@@ -471,8 +477,21 @@ const successFolderChatCanNotUseChat = {
   statusCode: 200,
 };
 
-const successFolderKnowledge = {
-  response: getAgentFolderKnowledge({ isEmpty: true }),
+const successFolderKnowledgeVectorizationDisabled = {
+  response: getAgentFolderKnowledge({ isEmpty: true, canUploadFiles: false }),
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/files/2?count=100&sortby=DateAndTime&sortOrder=descending`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successFolderKnowledgeEmpty = {
+  response: getAgentFolderKnowledge({ isEmpty: true, canUploadFiles: true }),
   count: 1,
   links: [
     {
@@ -560,8 +579,21 @@ export const agentFolderResultStorageResolver = (
   }
 };
 
-export const agentFolderKnowledgeResolver = () => {
-  return new Response(JSON.stringify(successFolderKnowledge));
+export const agentFolderKnowledgeResolver = (
+  type: "default" | "empty" | "vectorizationDisabled",
+) => {
+  switch (type) {
+    case "vectorizationDisabled":
+      return new Response(
+        JSON.stringify(successFolderKnowledgeVectorizationDisabled),
+      );
+    case "empty":
+      return new Response(JSON.stringify(successFolderKnowledgeEmpty));
+    case "default":
+      return new Response(
+        JSON.stringify(successFolderKnowledgeVectorizationDisabled),
+      );
+  }
 };
 
 export const agentFolderInfoResolver = (
@@ -616,7 +648,7 @@ export const agentFolderResultStorageHandler = (
 
 export const agentFolderKnowledgeHandler = (
   port: string,
-  type: "default" | "canNotUseChat" = "default",
+  type: "default" | "empty" | "vectorizationDisabled" = "default",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_KNOWLEDGE}`,
@@ -624,10 +656,12 @@ export const agentFolderKnowledgeHandler = (
       // Only handle requests with searchArea=5 (Knowledge) to avoid intercepting other folder requests
       const url = new URL(request.url);
       const searchArea = url.searchParams.get("searchArea");
+
       if (searchArea !== "5") {
         return;
       }
-      return agentFolderKnowledgeResolver();
+
+      return agentFolderKnowledgeResolver(type);
     },
   );
 };

@@ -60,7 +60,7 @@ test.describe("AI knowledge base", () => {
       baseUrl,
     }) => {
       mockRequest.use(
-        agentFolderKnowledgeHandler(TEST_PORT),
+        agentFolderKnowledgeHandler(TEST_PORT, "vectorizationDisabled"),
         aiConfigHandler(TEST_PORT, false, false, true),
       );
 
@@ -75,11 +75,29 @@ test.describe("AI knowledge base", () => {
         "ai-knowledge",
         "ai-knowledge-vectorization-disabled-empty-admin.png",
       ]);
+    });
 
-      const goToSettingsBtn = emptyView.getByRole("button");
-      await goToSettingsBtn.click();
+    test("should render knowledge page with empty screen", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        agentFolderKnowledgeHandler(TEST_PORT, "empty"),
+        aiConfigHandler(TEST_PORT),
+      );
 
-      await expect(page).toHaveURL("/portal-settings/ai-settings/knowledge");
+      await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=5`);
+
+      const emptyView = await page.getByTestId("empty-view");
+
+      await expect(emptyView).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-knowledge",
+        "ai-knowledge-empty.png",
+      ]);
     });
   });
 
@@ -96,7 +114,7 @@ test.describe("AI knowledge base", () => {
       baseUrl,
     }) => {
       mockRequest.use(
-        agentFolderKnowledgeHandler(TEST_PORT),
+        agentFolderKnowledgeHandler(TEST_PORT, "vectorizationDisabled"),
         aiConfigHandler(TEST_PORT, false, false, true),
       );
 
