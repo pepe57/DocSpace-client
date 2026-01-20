@@ -1,7 +1,10 @@
 import { useEffect, useEffectEvent } from "react";
-import { useTranslation } from "react-i18next";
 
-import { HeaderProps, THeaderBackButton, TSelectorHeader } from "@docspace/shared/components/selector/Selector.types";
+import {
+  HeaderProps,
+  THeaderBackButton,
+  TSelectorHeader,
+} from "@docspace/shared/components/selector/Selector.types";
 
 import PluginStore from "SRC_DIR/store/PluginStore";
 
@@ -15,7 +18,11 @@ type Props = {
   pluginName: string;
 };
 
-const PluginGroupsSelector = ({ pluginSelectorProps: selectorProps, dispatchMessage, pluginName }: Props) => {
+const PluginGroupsSelector = ({
+  pluginSelectorProps: selectorProps,
+  dispatchMessage,
+  pluginName,
+}: Props) => {
   const onLoadEvent = useEffectEvent(async () => {
     if (!selectorProps.onLoad) return;
     const message = await selectorProps.onLoad();
@@ -29,9 +36,15 @@ const PluginGroupsSelector = ({ pluginSelectorProps: selectorProps, dispatchMess
     isFooterCheckboxChecked,
   ) => {
     if (!selectorProps.onSubmit) return;
-    const selectedIds = selectedItems.filter((item) => item.id).map((item) => item.id!);
+    const selectedIds = selectedItems
+      .filter((item) => item.id)
+      .map((item) => item.id!);
 
-    const message = await selectorProps.onSubmit({ selectedIds, fileName, isFooterCheckboxChecked });
+    const message = await selectorProps.onSubmit({
+      selectedIds,
+      fileName,
+      isFooterCheckboxChecked,
+    });
     dispatchMessage({ message, pluginName });
   };
 
@@ -45,7 +58,8 @@ const PluginGroupsSelector = ({ pluginSelectorProps: selectorProps, dispatchMess
     dispatchMessage({ message, pluginName });
   };
 
-  const headerBackButtonProps: THeaderBackButton = selectorProps.headerProps?.withBackButton
+  const headerBackButtonProps: THeaderBackButton = selectorProps.headerProps
+    ?.withBackButton
     ? {
         withoutBackButton: false,
         onBackClick,
@@ -56,6 +70,12 @@ const PluginGroupsSelector = ({ pluginSelectorProps: selectorProps, dispatchMess
   const onCloseClick: HeaderProps["onCloseClick"] = async () => {
     if (!selectorProps.headerProps?.onCloseClick) return;
     const message = await selectorProps.headerProps.onCloseClick();
+    dispatchMessage({ message, pluginName });
+  };
+
+  const onClose: GroupsSelectorProps["onClose"] = async () => {
+    if (!selectorProps.onClose) return;
+    const message = await selectorProps.onClose();
     dispatchMessage({ message, pluginName });
   };
 
@@ -71,7 +91,14 @@ const PluginGroupsSelector = ({ pluginSelectorProps: selectorProps, dispatchMess
       }
     : {};
 
-  return <GroupsSelector onSubmit={onSubmit} {...headerProps} />;
+  return (
+    <GroupsSelector
+      {...headerProps}
+      onSubmit={onSubmit}
+      onClose={onClose}
+      useAside
+    />
+  );
 };
 
 export default PluginGroupsSelector;

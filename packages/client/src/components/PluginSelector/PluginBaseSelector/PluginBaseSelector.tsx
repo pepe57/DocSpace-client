@@ -113,8 +113,13 @@ const PluginBaseSelector = ({
 
   const onCancel: SelectorProps["onCancel"] = async () => {
     if (!selectorProps.onCancel) return;
-
     const message = await selectorProps.onCancel();
+    dispatchMessage({ message, pluginName });
+  };
+
+  const onClose: SelectorProps["onClose"] = async () => {
+    if (!selectorProps.onClose) return;
+    const message = await selectorProps.onClose();
     dispatchMessage({ message, pluginName });
   };
 
@@ -204,7 +209,7 @@ const PluginBaseSelector = ({
       selectedItems={selectedItems}
       maxSelectedItems={selectorProps.maxSelectedItems}
       onSelect={onSelect}
-      onClose={onCancel}
+      onClose={onClose}
       descriptionText={selectorProps.descriptionText}
       emptyScreenImage={EmptyScreenFilter}
       emptyScreenHeader={selectorProps.emptyScreenHeader ?? ""}

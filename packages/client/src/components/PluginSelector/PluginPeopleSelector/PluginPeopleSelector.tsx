@@ -112,6 +112,12 @@ const PluginPeopleSelector = ({
     dispatchMessage({ message, pluginName });
   };
 
+  const onClose = async () => {
+    if (!selectorProps.onClose) return;
+    const message = await selectorProps.onClose();
+    dispatchMessage({ message, pluginName });
+  };
+
   const headerProps: TSelectorHeader = withHeader
     ? {
         withHeader: true,
@@ -163,6 +169,8 @@ const PluginPeopleSelector = ({
       targetEntityType={targetEntityType}
       emptyScreenDescription={emptyScreenDescription}
       emptyScreenHeader={emptyScreenHeader}
+      useAside
+      onClose={onClose}
       {...headerProps}
       {...cancelButtonProps}
       {...groupsProps}

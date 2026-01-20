@@ -80,6 +80,12 @@ const PluginRoomSelector = ({
     dispatchMessage({ message, pluginName });
   };
 
+  const onClose = async () => {
+    if (!selectorProps.onClose) return;
+    const message = await selectorProps.onClose();
+    dispatchMessage({ message, pluginName });
+  };
+
   const onBackClick: THeaderBackButton["onBackClick"] = async () => {
     if (!selectorProps.headerProps?.onBackClick) return;
     const message = await selectorProps.headerProps.onBackClick();
@@ -134,9 +140,13 @@ const PluginRoomSelector = ({
       searchArea={searchArea}
       roomType={convertPluginRoomType(roomType)}
       createDefineRoomLabel={createDefineRoomLabel}
-      createDefineRoomType={convertPluginRoomType(createDefineRoomType) as RoomsType | undefined}
+      createDefineRoomType={
+        convertPluginRoomType(createDefineRoomType) as RoomsType | undefined
+      }
       withCreate={withCreate}
       withSearch={withSearch}
+      useAside
+      onClose={onClose}
       {...headerProps}
       {...cancelButtonProps}
     />
