@@ -209,7 +209,7 @@ const ExternalLinks = ({
         />
       </Heading>
       <Text className={styles.description}>{description}</Text>
-      {externalLinksVisible && roomId !== -1 ? (
+      {externalLinksVisible ? (
         <>
           <div className={styles.inviteInputContainer} key={activeLink.id}>
             <div
@@ -229,22 +229,24 @@ const ExternalLinks = ({
                 dataTestId="invite_panel_external_link_input"
               />
             </div>
-            <AccessSelector
-              className="invite-via-link-access"
-              t={t}
-              roomType={roomType}
-              defaultAccess={activeLink.access}
-              onSelectAccess={onSelectAccess}
-              containerRef={inputsRef}
-              isOwner={isOwner}
-              isAdmin={isAdmin}
-              isMobileView={isMobileView}
-              isSelectionDisabled={isUserTariffLimit}
-              selectionErrorText={<PaidQuotaLimitError />}
-              filteredAccesses={filteredAccesses}
-              availableAccess={availableAccess}
-              dataTestId="invite_panel_external_link_access"
-            />
+            {roomId !== -1 ? (
+              <AccessSelector
+                className="invite-via-link-access"
+                t={t}
+                roomType={roomType}
+                defaultAccess={activeLink.access}
+                onSelectAccess={onSelectAccess}
+                containerRef={inputsRef}
+                isOwner={isOwner}
+                isAdmin={isAdmin}
+                isMobileView={isMobileView}
+                isSelectionDisabled={isUserTariffLimit}
+                selectionErrorText={<PaidQuotaLimitError />}
+                filteredAccesses={filteredAccesses}
+                availableAccess={availableAccess}
+                dataTestId="invite_panel_external_link_access"
+              />
+            ) : null}
           </div>
 
           {showLifetimeBlock || showUsersJoinedBlock ? (
