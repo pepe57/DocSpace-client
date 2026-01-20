@@ -33,10 +33,10 @@ import EmptyScreenGroupSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.groups
 import api from "../../api";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Selector, TSelectorItem } from "../../components/selector";
+import { TSelectorWithAside } from "../../components/selector/Selector.types";
 import { useTheme } from "../../hooks/useTheme";
 
 import { GroupsSelectorProps } from "./GroupsSelector.types";
-import { TSelectorWithAside } from "components/selector/Selector.types";
 
 const GroupsSelector = (props: GroupsSelectorProps) => {
   const {
