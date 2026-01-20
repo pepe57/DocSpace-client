@@ -138,7 +138,12 @@ export type TRoom = {
   isTemplate?: boolean;
   isAvailable?: boolean;
   isRoom?: boolean;
-  chatSettings?: { prompt: string; providerId: number; modelId: string };
+  chatSettings?: {
+    prompt: string;
+    providerId: number;
+    modelId: string;
+    internal: boolean;
+  };
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;
   path?: TPathParts[];
