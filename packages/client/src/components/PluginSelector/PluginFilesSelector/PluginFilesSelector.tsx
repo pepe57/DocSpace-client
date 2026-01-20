@@ -1,6 +1,11 @@
 import { inject, observer } from "mobx-react";
 import { useEffect, useEffectEvent } from "react";
 import { useTranslation } from "react-i18next";
+import {
+  FilesSecurity,
+  Security,
+  TFilesSelector,
+} from "@onlyoffice/docspace-plugin-sdk";
 
 import FilesSelector from "@docspace/shared/selectors/Files";
 import { TSelectorHeader } from "@docspace/shared/components/selector/Selector.types";
@@ -11,11 +16,6 @@ import { DeviceType, FolderType } from "@docspace/shared/enums";
 import PluginStore from "SRC_DIR/store/PluginStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
-import {
-  FilesSecurity,
-  Security,
-  TFilesSelector,
-} from "@onlyoffice/docspace-plugin-sdk";
 
 type Props = {
   pluginSelectorProps: TFilesSelector;

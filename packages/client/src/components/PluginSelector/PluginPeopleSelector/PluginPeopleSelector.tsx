@@ -1,5 +1,6 @@
 import { useEffect, useEffectEvent } from "react";
 import { useTranslation } from "react-i18next";
+import { TPeopleSelector } from "@onlyoffice/docspace-plugin-sdk";
 
 import {
   HeaderProps,
@@ -8,11 +9,10 @@ import {
   TSelectorHeader,
 } from "@docspace/shared/components/selector/Selector.types";
 
-import PluginStore from "SRC_DIR/store/PluginStore";
-
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { PeopleSelectorProps } from "@docspace/shared/selectors/People/PeopleSelector.types";
-import { TPeopleSelector } from "@onlyoffice/docspace-plugin-sdk";
+
+import PluginStore from "SRC_DIR/store/PluginStore";
 
 type Props = {
   pluginSelectorProps: TPeopleSelector;

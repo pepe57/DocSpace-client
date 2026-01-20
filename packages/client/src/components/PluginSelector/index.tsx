@@ -1,9 +1,12 @@
 import { inject, observer } from "mobx-react";
-import PluginBaseSelector from "./PluginBaseSelector/PluginBaseSelector";
-import { TSelectorProps } from "./types";
-import PluginFilesSelector from "./PluginFilesSelector/PluginFilesSelector";
-import PluginStore from "SRC_DIR/store/PluginStore";
 import { SelectorType } from "@onlyoffice/docspace-plugin-sdk";
+
+import PluginStore from "SRC_DIR/store/PluginStore";
+
+import { TSelectorProps } from "./types";
+
+import PluginBaseSelector from "./PluginBaseSelector/PluginBaseSelector";
+import PluginFilesSelector from "./PluginFilesSelector/PluginFilesSelector";
 import PluginGroupsSelector from "./PluginGroupsSelector/PluginGroupsSelector";
 import PluginPeopleSelector from "./PluginPeopleSelector/PluginPeopleSelector";
 import PluginRoomSelector from "./PluginRoomSelector/PluginRoomSelector";
@@ -66,7 +69,7 @@ const PluginSelector = ({
   }
 };
 
-export default inject<TStore>(({ pluginStore, filesSettingsStore }) => {
+export default inject<TStore>(({ pluginStore }) => {
   const { pluginSelectorProps, dispatchMessage, getPluginIconUrl } =
     pluginStore;
 

@@ -1,4 +1,5 @@
 import { useEffect, useEffectEvent } from "react";
+import { TGroupsSelector } from "@onlyoffice/docspace-plugin-sdk";
 
 import {
   HeaderProps,
@@ -6,11 +7,10 @@ import {
   TSelectorHeader,
 } from "@docspace/shared/components/selector/Selector.types";
 
-import PluginStore from "SRC_DIR/store/PluginStore";
-
-import { TGroupsSelector } from "@onlyoffice/docspace-plugin-sdk";
 import GroupsSelector from "@docspace/shared/selectors/Groups";
 import { GroupsSelectorProps } from "@docspace/shared/selectors/Groups/GroupsSelector.types";
+
+import PluginStore from "SRC_DIR/store/PluginStore";
 
 type Props = {
   pluginSelectorProps: TGroupsSelector;

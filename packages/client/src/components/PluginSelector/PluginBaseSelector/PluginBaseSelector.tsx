@@ -1,8 +1,19 @@
 import { useEffect, useEffectEvent } from "react";
+import {
+  TBaseSelector,
+  TSelectorItem as TPluginSelectorItem,
+} from "@onlyoffice/docspace-plugin-sdk";
 
-import { Selector, TSelectorItem, type SelectorProps } from "@docspace/shared/components/selector";
+import {
+  Selector,
+  TSelectorItem,
+  type SelectorProps,
+} from "@docspace/shared/components/selector";
 
-import { BreadCrumbsLoader, RowLoader } from "@docspace/shared/skeletons/selector";
+import {
+  BreadCrumbsLoader,
+  RowLoader,
+} from "@docspace/shared/skeletons/selector";
 
 import {
   HeaderProps,
@@ -16,7 +27,6 @@ import {
 
 import EmptyScreenFilter from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg?url";
 import PluginStore from "SRC_DIR/store/PluginStore";
-import { TBaseSelector, TSelectorItem as TPluginSelectorItem } from "@onlyoffice/docspace-plugin-sdk";
 
 type Props = {
   pluginSelectorProps: TBaseSelector;
@@ -41,10 +51,17 @@ const PluginBaseSelector = ({
     onLoadEvent();
   }, []);
 
-  const onSubmit: TOnSubmit = async (selectedItems, access, fileName, isFooterCheckboxChecked) => {
+  const onSubmit: TOnSubmit = async (
+    selectedItems,
+    access,
+    fileName,
+    isFooterCheckboxChecked,
+  ) => {
     if (!selectorProps.onSubmit) return;
 
-    const selectedIds = selectedItems.filter((item) => item.id).map((item) => item.id!);
+    const selectedIds = selectedItems
+      .filter((item) => item.id)
+      .map((item) => item.id!);
 
     const message = await selectorProps.onSubmit({
       selectedIds,
@@ -54,7 +71,10 @@ const PluginBaseSelector = ({
     dispatchMessage({ message, pluginName });
   };
 
-  const onSelect: SelectorProps["onSelect"] = async (selectedItem, isDoubleClick) => {
+  const onSelect: SelectorProps["onSelect"] = async (
+    selectedItem,
+    isDoubleClick,
+  ) => {
     if (!selectorProps.onSelect) return;
 
     const message = await selectorProps.onSelect({
@@ -64,7 +84,9 @@ const PluginBaseSelector = ({
     dispatchMessage({ message, pluginName });
   };
 
-  const mapDtoToSelectorItems = (items: TPluginSelectorItem[]): TSelectorItem[] => {
+  const mapDtoToSelectorItems = (
+    items: TPluginSelectorItem[],
+  ): TSelectorItem[] => {
     return items.map((item) => {
       const onAcceptInput = async (value: string) => {
         if (!item?.onAcceptInput) return;
@@ -124,15 +146,18 @@ const PluginBaseSelector = ({
   };
 
   const items = mapDtoToSelectorItems(selectorProps.items);
-  const selectedItems = selectorProps.selectedItems ? mapDtoToSelectorItems(selectorProps.selectedItems) : undefined;
+  const selectedItems = selectorProps.selectedItems
+    ? mapDtoToSelectorItems(selectorProps.selectedItems)
+    : undefined;
 
-  const cancelButtonProps: TSelectorCancelButton = selectorProps.withCancelButton
-    ? {
-        withCancelButton: true,
-        cancelButtonLabel: selectorProps.cancelButtonLabel ?? "",
-        onCancel,
-      }
-    : {};
+  const cancelButtonProps: TSelectorCancelButton =
+    selectorProps.withCancelButton
+      ? {
+          withCancelButton: true,
+          cancelButtonLabel: selectorProps.cancelButtonLabel ?? "",
+          onCancel,
+        }
+      : {};
 
   const submitButtonProps: TSelectorSubmitButton = {
     onSubmit,
@@ -146,7 +171,8 @@ const PluginBaseSelector = ({
     dispatchMessage({ message, pluginName });
   };
 
-  const headerBackButtonProps: THeaderBackButton = selectorProps.headerProps?.withBackButton
+  const headerBackButtonProps: THeaderBackButton = selectorProps.headerProps
+    ?.withBackButton
     ? {
         withoutBackButton: false,
         onBackClick,
@@ -172,7 +198,9 @@ const PluginBaseSelector = ({
       }
     : {};
 
-  const onSelectBreadCrumb: SelectorProps["onSelectBreadCrumb"] = async (item) => {
+  const onSelectBreadCrumb: SelectorProps["onSelectBreadCrumb"] = async (
+    item,
+  ) => {
     if (!selectorProps.onSelectBreadCrumb) return;
     const message = await selectorProps.onSelectBreadCrumb(item.id);
     dispatchMessage({ message, pluginName });
@@ -216,7 +244,9 @@ const PluginBaseSelector = ({
       emptyScreenDescription={selectorProps.emptyScreenDescription ?? ""}
       searchEmptyScreenImage={EmptyScreenFilter}
       searchEmptyScreenHeader={selectorProps.searchEmptyScreenHeader ?? ""}
-      searchEmptyScreenDescription={selectorProps.searchEmptyScreenDescription ?? ""}
+      searchEmptyScreenDescription={
+        selectorProps.searchEmptyScreenDescription ?? ""
+      }
       {...cancelButtonProps}
       {...submitButtonProps}
       {...breadCrumbsProps}

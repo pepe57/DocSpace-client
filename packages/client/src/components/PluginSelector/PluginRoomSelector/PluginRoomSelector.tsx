@@ -1,20 +1,20 @@
 import { useEffect, useEffectEvent } from "react";
 import { useTranslation } from "react-i18next";
+import { TRoomSelector } from "@onlyoffice/docspace-plugin-sdk";
 
+import RoomSelector from "@docspace/shared/selectors/Room";
+import { RoomSelectorProps } from "@docspace/shared/selectors/Room/RoomSelector.types";
 import {
   HeaderProps,
   THeaderBackButton,
   TSelectorCancelButton,
   TSelectorHeader,
 } from "@docspace/shared/components/selector/Selector.types";
+import { RoomsType } from "@docspace/shared/enums";
 
 import PluginStore from "SRC_DIR/store/PluginStore";
 
-import { TRoomSelector } from "@onlyoffice/docspace-plugin-sdk";
-import RoomSelector from "@docspace/shared/selectors/Room";
-import { RoomSelectorProps } from "@docspace/shared/selectors/Room/RoomSelector.types";
 import { convertPluginRoomType } from "./utils";
-import { RoomsType } from "@docspace/shared/enums";
 
 type Props = {
   pluginSelectorProps: TRoomSelector;
