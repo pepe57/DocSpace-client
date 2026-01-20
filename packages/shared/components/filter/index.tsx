@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { DeviceType, FilterGroups } from "../../enums";
-
+import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import { TViewSelectorOption, ViewSelector } from "../view-selector";
 import { Link, LinkType } from "../link";
 import { SelectedItem } from "../selected-item";
@@ -320,6 +320,7 @@ const FilterInput = React.memo(
             onClick={() => onFilterByGroup?.(null)}
             onClose={() => {}}
             hideCross
+            clickable
           />
 
           {roomGroups?.map((group) => (
@@ -327,20 +328,22 @@ const FilterInput = React.memo(
               key={group.id}
               propKey={group.id}
               label={group.name}
-              icon={
-                typeof group.icon === "object" ? group.icon?.data : group.icon
-              }
+              icon={`data:image/svg+xml;utf8,${encodeURIComponent(group.icon.data)}`}
               onClick={() => onFilterByGroup?.(group.id)}
               onClose={() => {}}
               hideCross
+              clickable
             />
           ))}
 
           <SelectedItem
             propKey="create-group"
             label={t("PeopleTranslations:CreateGroup")}
+            icon={PlusIcon}
             onClose={() => {}}
             onClick={onCreateGroup}
+            hideCross
+            clickable
           />
         </div>
       </div>

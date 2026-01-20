@@ -49,6 +49,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     title,
     dataTestId,
     icon,
+    clickable,
   } = props;
   if (!label) return null;
 
@@ -89,13 +90,9 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
       ref={forwardedRef}
       data-testid={dataTestId ?? "selected-item"}
       title={title}
+      clickable={clickable}
     >
-      {icon ? (
-        <ReactSVG
-          className={styles.icon}
-          src={`data:image/svg+xml;utf8,${encodeURIComponent(icon)}`}
-        />
-      ) : null}
+      {icon ? <ReactSVG className={styles.icon} src={icon} /> : null}
       <div className={labelClassNames}>{label}</div>
       {!hideCross ? (
         <IconButton
