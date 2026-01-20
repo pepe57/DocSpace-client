@@ -60,7 +60,7 @@ const PluginSelector = ({
           dispatchMessage={dispatchMessage}
           pluginName={pluginSelectorProps.pluginName}
         />
-      )
+      );
     default:
       return null;
   }
@@ -69,8 +69,6 @@ const PluginSelector = ({
 export default inject<TStore>(({ pluginStore, filesSettingsStore }) => {
   const { pluginSelectorProps, dispatchMessage, getPluginIconUrl } =
     pluginStore;
-
-  const { getIcon } = filesSettingsStore;
 
   const getPluginIcon = (icon: string) => {
     if (!pluginSelectorProps?.pluginName) return;
@@ -82,6 +80,5 @@ export default inject<TStore>(({ pluginStore, filesSettingsStore }) => {
     pluginSelectorProps,
     dispatchMessage,
     getPluginIcon,
-    getIcon,
   };
 })(observer(PluginSelector));
