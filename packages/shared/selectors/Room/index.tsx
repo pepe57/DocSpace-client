@@ -63,6 +63,8 @@ const RoomSelectorComponent = ({
 
   isMultiSelect,
 
+  selectedItems,
+
   submitButtonLabel,
   onSubmit,
 
@@ -94,7 +96,7 @@ const RoomSelectorComponent = ({
   initHasNextPage,
   initSearchValue,
   forceIsMultiSelect,
-  disableFirstFetch
+  disableFirstFetch,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
   const { isBase } = useTheme();
@@ -238,6 +240,7 @@ const RoomSelectorComponent = ({
       withPadding={withPadding}
       onSelect={onSelect}
       items={items}
+      selectedItems={selectedItems}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
       isMultiSelect={isMultiSelect}

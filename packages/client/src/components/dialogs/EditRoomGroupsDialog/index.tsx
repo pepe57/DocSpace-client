@@ -50,6 +50,7 @@ import GroupIconDialog from "./sub-components/GroupIconDialog";
 import { EditRoomGroupsDialogProps } from "./EditRoomGroupsDialog.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TSelectorItem } from "@docspace/shared/components/selector/Selector.types";
+import { convertToItems } from "@docspace/shared/selectors/Room/RoomSelector.utils";
 
 const EditRoomGroupsDialog = ({
   currentColorScheme,
@@ -188,14 +189,16 @@ const EditRoomGroupsDialog = ({
             }}
             withSearch={false}
             isMultiSelect
+            selectedItems={convertToItems(selectedGroup.rooms || [])}
             withCancelButton
             cancelButtonLabel={t("Common:CancelButton")}
             onCancel={onCloseGroupRoomList}
-            withInit
-            initItems={selectedGroup.rooms}
-            initTotal={selectedGroup.rooms.length}
-            initHasNextPage={false}
-            disableFirstFetch
+            forceIsMultiSelect
+            // withInit
+            // initItems={selectedGroup.rooms}
+            // initTotal={selectedGroup.rooms.length}
+            // initHasNextPage={false}
+            // disableFirstFetch
           />
         </Aside>
       </div>
