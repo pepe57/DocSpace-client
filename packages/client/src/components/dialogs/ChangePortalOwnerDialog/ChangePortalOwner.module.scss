@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "@docspace/shared/styles/mixins";
+
 .ownerInfo {
   display: flex;
   align-items: center;
@@ -191,4 +193,14 @@
       }
     }
   }    
+}
+
+.spamIcon {
+  @include mixins.common-icons-style;
+
+  path {
+    fill: var(--icon-error-color);
+  }
+  padding-inline-start: 8px;
+  
 }

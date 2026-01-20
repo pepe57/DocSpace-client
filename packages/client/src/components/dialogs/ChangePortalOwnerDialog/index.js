@@ -43,7 +43,7 @@ import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
-import styles from "./ChangePortaOwner.module.scss";
+import styles from "./ChangePortalOwner.module.scss";
 
 const ChangePortalOwnerDialog = ({
   t,
