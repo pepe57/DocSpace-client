@@ -33,6 +33,7 @@
   align-items: center;
   width: 100%;
   margin-bottom: 12px;
+  gap: 8px;
 
   :global(.header_aside-panel) {
     max-width: 100% !important;
@@ -253,8 +254,6 @@
   width: -moz-available;
   width: -webkit-fill-available;
   width: stretch;
-
-  margin-inline-end: 8px;
 
   .inputLink {
     height: 30px;
