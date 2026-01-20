@@ -61,7 +61,6 @@ const logoHandlerBrowser = () => {
     const reqUrl = new URL(request.url);
     const dark = reqUrl.searchParams.get("dark") === "true";
 
-    // Используем перенаправление на файл SVG
     const logoPath = dark ? DARK_LOGO_PATH : LOGO_PATH;
     const baseUrl = new URL(request.url).origin;
     const logoUrl = `${baseUrl}${logoPath}`;
