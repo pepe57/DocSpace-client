@@ -114,6 +114,7 @@ const baseProps = {
   selectorLabel: "Select",
   onFilter: vi.fn(),
   onSortButtonClick: vi.fn(() => Promise.resolve([])),
+  setEditRoomGroupsDialogVisible: vi.fn(),
 };
 
 describe("Filter Component", () => {

@@ -75,7 +75,6 @@ export type UseFilesProps = {
 
   selectedFolderStore: SelectedFolderStore;
   currentExtensionGallery: OformsStore["currentExtensionGallery"];
-  getAllRoomGroups: DialogsStore["getAllRoomGroups"];
 };
 
 const useFiles = ({
@@ -96,7 +95,6 @@ const useFiles = ({
   userId,
 
   selectedFolderStore,
-  getAllRoomGroups,
 }: UseFilesProps) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -296,7 +294,6 @@ const useFiles = ({
             return fetchAgents(null, newFilter, false, false);
           }
           if (isRooms) {
-            getAllRoomGroups();
             return fetchRooms(null, newFilter, undefined, undefined, false);
           }
           const folderId = (newFilter as FilesFilter).folder;

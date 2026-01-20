@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { ReactSVG } from "react-svg";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import { IconButton } from "../icon-button";
 import { SelectedItemProps } from "./SelectedItem.types";
@@ -47,6 +48,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     hideCross,
     title,
     dataTestId,
+    icon,
   } = props;
   if (!label) return null;
 
@@ -88,6 +90,12 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
       data-testid={dataTestId ?? "selected-item"}
       title={title}
     >
+      {icon ? (
+        <ReactSVG
+          className={styles.icon}
+          src={`data:image/svg+xml;utf8,${encodeURIComponent(icon)}`}
+        />
+      ) : null}
       <div className={labelClassNames}>{label}</div>
       {!hideCross ? (
         <IconButton

@@ -97,6 +97,9 @@ const FilterInput = React.memo(
     initSearchValue,
     initSelectedFilterData,
     setEditRoomGroupsDialogVisible,
+    getAllRoomGroups,
+    roomGroups,
+    onFilterByGroup,
   }: FilterProps) => {
     const { searchComponent } = useSearch({
       onSearch,
@@ -128,7 +131,15 @@ const FilterInput = React.memo(
       initSelectedFilterData || null,
     );
 
-    const { t } = useTranslation(["Common"]);
+    const { t } = useTranslation([
+      "Common",
+      "GroupingRooms",
+      "PeopleTranslations",
+    ]);
+
+    React.useEffect(() => {
+      if (getAllRoomGroups) getAllRoomGroups();
+    }, [getAllRoomGroups]);
 
     const mountRef = React.useRef(true);
 
@@ -304,20 +315,31 @@ const FilterInput = React.memo(
 
         <div className="filter-input_selected-row-grouping-rooms">
           <SelectedItem
-            // key={`${item.key}_${item.group}`}
-            // propKey={Array.isArray(item.key) ? item.key[0] : item.key}
-            label="All rooms"
-            // group={item.group}
-            // onClose={removeSelectedItemAction}
-            // onClick={removeSelectedItemAction}
+            propKey="all-rooms"
+            label={t("GroupingRooms:AllRooms")}
+            onClick={() => onFilterByGroup?.(null)}
+            onClose={() => {}}
+            hideCross
           />
 
+          {roomGroups?.map((group) => (
+            <SelectedItem
+              key={group.id}
+              propKey={group.id}
+              label={group.name}
+              icon={
+                typeof group.icon === "object" ? group.icon?.data : group.icon
+              }
+              onClick={() => onFilterByGroup?.(group.id)}
+              onClose={() => {}}
+              hideCross
+            />
+          ))}
+
           <SelectedItem
-            // key={`${item.key}_${item.group}`}
-            // propKey={Array.isArray(item.key) ? item.key[0] : item.key}
-            label="Create group"
-            // group={item.group}
-            // onClose={removeSelectedItemAction}
+            propKey="create-group"
+            label={t("PeopleTranslations:CreateGroup")}
+            onClose={() => {}}
             onClick={onCreateGroup}
           />
         </div>

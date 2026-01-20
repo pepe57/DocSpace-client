@@ -213,6 +213,14 @@ export type SearchInputProps = {
   initSearchValue?: string;
 };
 
+export type TRoomGroup = {
+  id: string;
+  name: string;
+  icon: { id: string; data: string } | string | null;
+  rooms: string[];
+  totalRooms: number;
+};
+
 export type FilterProps = SearchInputProps &
   Omit<SortButtonProps, "id" | "title" | "viewSettings"> &
   Omit<FilterButtonProps, "id" | "title" | "selectedFilterValue"> & {
@@ -237,5 +245,8 @@ export type FilterProps = SearchInputProps &
 
     currentDeviceType: DeviceType;
     initSelectedFilterData?: TItem[];
-    setEditRoomGroupsDialogVisible: (visible: boolean) => void;
+    setEditRoomGroupsDialogVisible?: (visible: boolean) => void;
+    getAllRoomGroups?: () => Promise<TRoomGroup[]>;
+    roomGroups?: TRoomGroup[];
+    onFilterByGroup?: (groupId: string | null) => void;
   };

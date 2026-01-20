@@ -65,4 +65,6 @@ export interface SelectedItemProps {
   hideCross?: boolean;
   title?: string;
   dataTestId?: string;
+  /** Icon data as SVG string */
+  icon?: string;
 }
