@@ -36,6 +36,7 @@ import { Selector, TSelectorItem } from "../../components/selector";
 import { useTheme } from "../../hooks/useTheme";
 
 import { GroupsSelectorProps } from "./GroupsSelector.types";
+import { TSelectorWithAside } from "components/selector/Selector.types";
 
 const GroupsSelector = (props: GroupsSelectorProps) => {
   const {
@@ -43,6 +44,11 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
     className,
 
     headerProps,
+
+    useAside,
+    onClose,
+    withoutBackground,
+    withBlur,
 
     onSubmit,
   } = props;
@@ -143,11 +149,16 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
     [searchValue],
   );
 
+  const withAside: TSelectorWithAside = useAside
+    ? { useAside, onClose, withBlur, withoutBackground }
+    : {};
+
   return (
     <Selector
       id={id}
       className={className}
       withHeader
+      {...withAside}
       headerProps={{
         ...headerProps,
         onCloseClick: () => {},
