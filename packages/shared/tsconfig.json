@@ -116,5 +116,6 @@
       "module": "CommonJS"
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "types/**/*.d.ts"]
+  "include": ["**/*.ts", "**/*.tsx", "types/**/*.d.ts"],
+  "exclude": ["node_modules", "vitest.config.ts"]
 }
