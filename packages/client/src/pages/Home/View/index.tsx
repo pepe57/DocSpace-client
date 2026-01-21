@@ -535,7 +535,11 @@ const View = ({
   }, [isLoading, currentView, scrollToTop]);
 
   React.useEffect(() => {
-    if (isResultTab && !canUseChat && !showBodyLoader) {
+    if (
+      selectedFolderStore.isInsideResultStorage &&
+      !canUseChat &&
+      !showBodyLoader
+    ) {
       toastr.info(
         <Trans
           t={t}
@@ -548,7 +552,12 @@ const View = ({
         />,
       );
     }
-  }, [isResultTab, canUseChat, showBodyLoader, t]);
+  }, [
+    selectedFolderStore.isInsideResultStorage,
+    canUseChat,
+    showBodyLoader,
+    t,
+  ]);
 
   const attachmentFile = React.useMemo(
     () => aiAgentSelectorDialogProps?.file,
