@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { Link } from "@docspace/shared/components/link";
 import { InputBlock } from "@docspace/shared/components/input-block";
-import { Label } from "@docspace/shared/components/label";
+import { Label } from "@docspace/ui-kit/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { PasswordInput } from "@docspace/shared/components/password-input";

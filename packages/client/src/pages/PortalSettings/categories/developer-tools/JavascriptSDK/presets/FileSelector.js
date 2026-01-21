@@ -33,7 +33,7 @@ import SDK from "@onlyoffice/docspace-sdk-js";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Label } from "@docspace/shared/components/label";
+import { Label } from "@docspace/ui-kit/components/label";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { Text } from "@docspace/shared/components/text";
 import { FilterType, FilesSelectorFilterTypes } from "@docspace/shared/enums";

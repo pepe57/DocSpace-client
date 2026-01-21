@@ -26,7 +26,7 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { Label } from "@docspace/shared/components/label";
+import { Label } from "@docspace/ui-kit/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import RoomsSelectorInput from "SRC_DIR/components/RoomsSelectorInput";

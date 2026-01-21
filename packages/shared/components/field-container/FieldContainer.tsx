@@ -27,7 +27,8 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Label } from "../label";
+import { Label } from "@docspace/ui-kit/components/label";
+
 import { HelpButton } from "../help-button";
 import { Text } from "../text";
 

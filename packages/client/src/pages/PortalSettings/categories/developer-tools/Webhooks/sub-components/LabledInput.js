@@ -29,7 +29,7 @@ import styled from "styled-components";
 
 import { TextInput } from "@docspace/shared/components/text-input";
 
-import { Label } from "@docspace/shared/components/label";
+import { Label } from "@docspace/ui-kit/components/label";
 
 const StyledLabel = styled(Label)`
   display: block;

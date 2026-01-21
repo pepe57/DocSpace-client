@@ -32,7 +32,7 @@ import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { Label } from "@docspace/shared/components/label";
+import { Label } from "@docspace/ui-kit/components/label";
 import { RoomsType } from "@docspace/shared/enums";
 import { getSdkScriptUrl, loadScript } from "@docspace/shared/utils/common";
 

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useCallback } from "react";
-import { Label } from "@docspace/shared/components/label";
+import { Label } from "@docspace/ui-kit/components/label";
 import { TextInput } from "@docspace/shared/components/text-input";
 import debounce from "lodash.debounce";
 

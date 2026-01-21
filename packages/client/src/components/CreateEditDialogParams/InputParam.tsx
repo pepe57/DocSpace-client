@@ -28,7 +28,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { Label } from "@docspace/shared/components/label";
+import { Label } from "@docspace/ui-kit/components/label";
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";

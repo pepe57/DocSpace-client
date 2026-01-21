@@ -33,7 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { TextInput } from "@docspace/shared/components/text-input";
-import { Label } from "@docspace/shared/components/label";
+import { Label } from "@docspace/ui-kit/components/label";
 import { Button } from "@docspace/shared/components/button";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { ComboBox } from "@docspace/shared/components/combobox";
@@ -156,13 +156,15 @@ export const PluginComponent = inject(({ pluginStore }) => {
 
         switch (componentName) {
           case PluginComponents.box: {
-            const childrenComponents = elementProps?.children?.map((item, index) => (
-              <PluginComponent
-                key={`${pluginName}-box-${item.component}-${index}`}
-                component={item}
-                pluginName={pluginName}
-              />
-            ));
+            const childrenComponents = elementProps?.children?.map(
+              (item, index) => (
+                <PluginComponent
+                  key={`${pluginName}-box-${item.component}-${index}`}
+                  component={item}
+                  pluginName={pluginName}
+                />
+              ),
+            );
 
             return (
               <div
@@ -332,7 +334,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
               setIsRequestRunning && setIsRequestRunning(false);
               setModalRequestRunning && setModalRequestRunning(false);
               if (isSaveButton) {
-                setSettingsModalRequestRunning && setSettingsModalRequestRunning(false);
+                setSettingsModalRequestRunning &&
+                  setSettingsModalRequestRunning(false);
                 onCloseAction && onCloseAction();
               }
             };
@@ -414,8 +417,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
       const element = getElement();
 
       return element;
-    }
-  )
+    },
+  ),
 );
 
 const WrappedComponent = ({
@@ -456,7 +459,12 @@ const WrappedComponent = ({
       setModalRequestRunning,
       modalRequestRunning,
     }),
-    [contextProps, isRequestRunning, setModalRequestRunning, modalRequestRunning]
+    [
+      contextProps,
+      isRequestRunning,
+      setModalRequestRunning,
+      modalRequestRunning,
+    ],
   );
 
   return (

@@ -27,7 +27,7 @@
 import { useState, useCallback } from "react";
 import debounce from "lodash.debounce";
 
-import { Label } from "@docspace/shared/components/label";
+import { Label } from "@docspace/ui-kit/components/label";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
