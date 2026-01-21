@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@docspace/shared": "workspace:*",
+    "@docspace/ui-kit": "workspace:*",
     "classnames": "2.5.1",
     "date-and-time": "3.6.0",
     "framer-motion": "^12.26.0",

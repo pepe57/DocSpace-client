@@ -25,6 +25,7 @@
   "dependencies": {
     "@aws-sdk/client-cloudwatch-logs": "3.816.0",
     "@docspace/shared": "workspace:*",
+    "@docspace/ui-kit": "workspace:*",
     "@onlyoffice/document-editor-react": "2.1.1",
     "classnames": "2.5.1",
     "crypto-js": "4.2.0",

@@ -22,6 +22,7 @@
     "tsc": "tsc"
   },
   "dependencies": {
+    "@docspace/ui-kit": "workspace:*",
     "@babel/runtime": "7.28.3",
     "@floating-ui/dom": "1.6.13",
     "@hcaptcha/react-hcaptcha": "1.11.0",

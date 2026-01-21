@@ -1,6 +1,6 @@
-@use "../../../styles/variables";
-@use "../../../styles/variables/colors";
-@use "../../../styles/mixins";
+@use "@docspace/ui-kit/styles/variables";
+@use "@docspace/ui-kit/styles/variables/colors";
+@use "@docspace/ui-kit/styles/mixins";
 
 .common {
   margin: var(--row-content-margin);

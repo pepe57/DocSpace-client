@@ -32,9 +32,10 @@ $font-family-base:
   sans-serif,
   Arial;
 
-@use "./variables/colors";
 @use "../../../public/css/fonts.css";
-@use "./mixins";
+
+@use "@docspace/ui-kit/styles/variables/colors";
+@use "@docspace/ui-kit/styles/mixins";
 
 html,
 body {
