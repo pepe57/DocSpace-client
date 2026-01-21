@@ -1934,7 +1934,7 @@ export async function shareFileToUsers(
 export async function getDefaultTemplates() {
   const res = await request({
     method: "get",
-    url: "/files/defaulttemplate",
+    url: "/files/settings/defaulttemplate",
   });
 
   return res.items as TDefaultTemplate[];
@@ -1946,7 +1946,7 @@ export async function setDefaultTemplates(
 ) {
   const res = await request({
     method: "put",
-    url: "/files/defaulttemplate",
+    url: "/files/settings/defaulttemplate",
     data: {
       selectedFile,
       fileExtension,

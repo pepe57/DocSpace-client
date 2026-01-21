@@ -583,5 +583,6 @@ export type TShareToUser = {
 export type TDefaultTemplate = {
   selectedFile?: number;
   fileExtension: string;
-  modified?: string;
+  lastModified?: string;
+  fileTitle?: string;
 };
