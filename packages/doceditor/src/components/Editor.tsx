@@ -167,8 +167,8 @@ const Editor = ({
   const [isStorageQuotaLimit, setIsStorageQuotaLimit] = React.useState(false);
 
   React.useEffect(() => {
-    const handleQuotaChange = (opt: any) => {
-      console.log("SOCKET optopt", opt);
+    const handleQuotaChange = () => {
+      console.log("SOCKET quota exceeded");
       setIsStorageQuotaLimit(true);
     };
 
