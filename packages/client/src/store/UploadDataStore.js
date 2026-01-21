@@ -1267,26 +1267,17 @@ class UploadDataStore {
     const {
       t,
       res, // file response data
-      fileSize, // file size
+      //    fileSize, // file size
       index, // chunk index
       indexOfFile, // file index in the list
       path, // file path
       chunksLength, // length of file chunks
       resolve, // resolve cb
-      reject, // reject cb
-      isFinalize = false, // is finalize chunk
+      //  reject, // reject cb
+      //   isFinalize = false, // is finalize chunk
       //  allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
       createNewIfExist,
     } = chunkUploadObj;
-
-    if (!res || typeof res !== "object" || res.status === 1) {
-      return reject({
-        message: res.error?.message,
-        chunkIndex: index,
-        chunkSize: fileSize,
-        isFinalize,
-      });
-    }
 
     const { uploaded, id: fileId, file: fileInfo } = res;
 
@@ -1394,8 +1385,7 @@ class UploadDataStore {
   };
 
   asyncUpload = async (t, chunkData, resolve, reject, createNewIfExist) => {
-    const { operationId, file, fileSize, indexOfFile, path, length } =
-      chunkData;
+    const { operationId, file, indexOfFile, path, length } = chunkData;
 
     if (
       this.uploaded ||
@@ -1428,10 +1418,6 @@ class UploadDataStore {
           ].isFinished = true;
         }
 
-        if (res.status === 1 || !res || typeof res !== "object") {
-          delete this.asyncUploadObj[operationId];
-          return reject(res.error?.message);
-        }
         this.asyncUpload(t, chunkData, resolve, reject, createNewIfExist);
 
         const activeLength = this.asyncUploadObj[operationId]
@@ -1440,30 +1426,30 @@ class UploadDataStore {
             ).length - 1
           : 0;
 
-        let allIsUploaded;
-        if (this.asyncUploadObj[operationId]) {
-          const finished = this.asyncUploadObj[operationId].chunksArray.filter(
-            (x) => x.isFinished,
-          );
+        // let _allIsUploaded;
+        // if (this.asyncUploadObj[operationId]) {
+        //   const finished = this.asyncUploadObj[operationId].chunksArray.filter(
+        //     (x) => x.isFinished,
+        //   );
 
-          allIsUploaded =
-            this.asyncUploadObj[operationId].chunksArray.length -
-            finished.length -
-            1; // 1 last
-        }
+        //   _allIsUploaded =
+        //     this.asyncUploadObj[operationId].chunksArray.length -
+        //     finished.length -
+        //     1; // 1 last
+        // }
 
         this.checkChunkUpload({
           t,
           res,
-          fileSize,
+          //  fileSize,
           index: activeLength,
           indexOfFile,
           path,
           chunksLength: length,
           resolve,
-          reject,
-          isFinalize: false,
-          allChunkUploaded: allIsUploaded === 0,
+          //  reject,
+          //  isFinalize: false,
+          //  allChunkUploaded: allIsUploaded === 0,
           createNewIfExist,
         });
 
@@ -1491,14 +1477,14 @@ class UploadDataStore {
             this.checkChunkUpload({
               t,
               res: finalizeRes,
-              fileSize,
+              //     fileSize,
               index: finalizeIndex,
               indexOfFile,
               path,
               chunksLength: length,
               resolve,
-              reject,
-              isFinalize: true,
+              // reject,
+              //   isFinalize: true,
               createNewIfExist,
             });
           }
@@ -1585,18 +1571,18 @@ class UploadDataStore {
           requestsDataArray[index],
         );
         const resolve = (r) => Promise.resolve(r);
-        const reject = (err) => Promise.reject(err);
+        // const reject = (err) => Promise.reject(err);
 
         this.checkChunkUpload({
           t,
           res,
-          fileSize,
+          //    fileSize,
           index,
           indexOfFile,
           path,
           chunksLength: length,
           resolve,
-          reject,
+          //    reject,
           createNewIfExist,
         });
 
