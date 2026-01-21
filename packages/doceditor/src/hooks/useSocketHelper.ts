@@ -33,7 +33,7 @@ import SocketHelper, {
   SocketEvents,
 } from "@docspace/shared/utils/socket";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-
+import { FolderType } from "@docspace/shared/enums";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
 import { UseSocketHelperProps } from "@/types";
@@ -43,6 +43,8 @@ const useSocketHelper = ({
   user,
   shareKey,
   standalone,
+  folderId,
+  folderType,
 }: UseSocketHelperProps) => {
   React.useEffect(() => {
     SocketHelper?.connect(socketUrl, shareKey ?? "");
@@ -56,7 +58,20 @@ const useSocketHelper = ({
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: user?.id || "",
     });
+
+    if (user?.id)
+      SocketHelper?.emit(SocketCommands.Subscribe, {
+        roomParts: `user:${user.id}-quota}`,
+      });
   }, [user?.id]);
+
+  React.useEffect(() => {
+    if (folderId && folderType === FolderType.Rooms) {
+      SocketHelper?.emit(SocketCommands.Subscribe, {
+        roomParts: `room:${folderId}-quota`,
+      });
+    }
+  }, [folderId]);
 
   React.useEffect(() => {
     if (standalone) {
@@ -68,11 +83,7 @@ const useSocketHelper = ({
 
   React.useEffect(() => {
     SocketHelper?.emit(SocketCommands.Subscribe, {
-      roomParts: "quota",
-    });
-    SocketHelper?.emit(SocketCommands.Subscribe, {
-      roomParts: "QUOTA",
-      individual: true,
+      roomParts: "tenant-quota",
     });
 
     const callback = async () => {
@@ -113,7 +124,7 @@ const useSocketHelper = ({
         `[WS] "logout-session"`,
         loginEventId,
         user?.loginEventId,
-        redirectUrl
+        redirectUrl,
       );
 
       const { pathname, search, origin } = window.location;
@@ -121,7 +132,7 @@ const useSocketHelper = ({
 
       sessionStorage.setItem(
         "referenceUrl",
-        `${redirectUrl || origin}${pathname}${search}`
+        `${redirectUrl || origin}${pathname}${search}`,
       );
       if (user?.id) sessionStorage.setItem("loggedOutUserId", user.id);
 

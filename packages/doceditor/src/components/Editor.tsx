@@ -91,6 +91,7 @@ const Editor = ({
   openShareFormDialog,
   onStartFilling,
 }: EditorProps) => {
+  console.log("config", config);
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
   const { isBase } = useTheme();
 
@@ -160,23 +161,21 @@ const Editor = ({
     openOnNewPage,
     i18n,
     t,
-    config?.editorConfig?.customization?.goback?.url
+    config?.editorConfig?.customization?.goback?.url,
   );
 
   const [isStorageQuotaLimit, setIsStorageQuotaLimit] = React.useState(false);
 
   React.useEffect(() => {
-    const handleQuotaChange = () => {
+    const handleQuotaChange = (opt: any) => {
+      console.log("SOCKET optopt", opt);
       setIsStorageQuotaLimit(true);
     };
 
-    SocketHelper?.on(SocketEvents.ChangedQuotaUserUsedValue, handleQuotaChange);
+    SocketHelper?.on(SocketEvents.QuotaExceeded, handleQuotaChange);
 
     return () => {
-      SocketHelper?.off(
-        SocketEvents.ChangedQuotaUserUsedValue,
-        handleQuotaChange
-      );
+      SocketHelper?.off(SocketEvents.QuotaExceeded, handleQuotaChange);
     };
   }, []);
 
@@ -269,7 +268,7 @@ const Editor = ({
     typeof window !== "undefined" &&
     newConfig.editorConfig?.user &&
     newConfig.editorConfig.user.image?.includes(
-      "default_user_photo_size_48-48.png"
+      "default_user_photo_size_48-48.png",
     )
   ) {
     newConfig.editorConfig.user.image = isBase
@@ -333,7 +332,7 @@ const Editor = ({
 
   return (
     <div
-      id={EDITOR_ID}
+      // id={EDITOR_ID}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -341,7 +340,7 @@ const Editor = ({
         width: "100%",
       }}
     >
-      <div style={{ height: documentReady ? "auto" : "0", overflow: "hidden" }}>
+      <div style={{ height: "auto", overflow: "visible" }}>
         <Bar isStorageQuotaLimit={isStorageQuotaLimit} />
       </div>
       <DocumentEditor

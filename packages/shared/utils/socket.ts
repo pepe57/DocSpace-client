@@ -78,6 +78,7 @@ export const enum SocketEvents {
   SelfRestrictionFolder = "s:self-restriction-folder",
   ChaneFolderAccessRights = "s:change-access-rights-folder",
   ExportChat = "s:export-chat",
+  QuotaExceeded = "s:quota_exceeded",
 }
 
 /**

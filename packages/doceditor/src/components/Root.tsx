@@ -117,6 +117,7 @@ const Root = ({
   deepLinkSettings,
   baseSdkConfig,
 }: TResponse) => {
+  console.log("settings", settings);
   const editorRef = React.useRef<null | HTMLElement>(null);
 
   const documentServerUrl = config?.editorUrl ?? error?.editorUrl;
@@ -162,6 +163,8 @@ const Root = ({
     user,
     shareKey,
     standalone: settings?.standalone,
+    folderId: config?.file?.folderId,
+    folderType: config?.file?.rootFolderType,
   });
 
   const {
