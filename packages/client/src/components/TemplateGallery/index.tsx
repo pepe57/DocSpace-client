@@ -29,7 +29,7 @@ import { useState, useEffect, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 import type { Key } from "react";
 import classNames from "classnames";
-import { Portal } from "@docspace/shared/components/portal";
+import { Portal } from "@docspace/ui-kit/components/portal";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { IconButton } from "@docspace/shared/components/icon-button";

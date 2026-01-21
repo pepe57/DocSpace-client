@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Portal } from "@docspace/shared/components/portal";
+import { Portal } from "@docspace/ui-kit/components/portal";
 import { TUser } from "@docspace/shared/api/people/types";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";

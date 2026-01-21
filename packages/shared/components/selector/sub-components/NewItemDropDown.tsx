@@ -25,8 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import { classNames, isMobile as isMobileUtils } from "../../../utils";
-import { Portal } from "../../portal";
 import { Backdrop } from "../../backdrop";
 
 import { Scrollbar } from "../../scrollbar";

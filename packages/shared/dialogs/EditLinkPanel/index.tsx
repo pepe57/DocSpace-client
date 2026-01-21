@@ -36,11 +36,12 @@ import React, {
   useDeferredValue,
 } from "react";
 
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import FillFormsReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
 import { Button, ButtonSize } from "../../components/button";
 import { toastr } from "../../components/toast";
-import { Portal } from "../../components/portal";
 import { useEventListener } from "../../hooks/useEventListener";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import {

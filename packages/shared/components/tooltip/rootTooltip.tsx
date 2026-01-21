@@ -28,7 +28,8 @@ import React, { useRef } from "react";
 import { flip, shift, offset } from "@floating-ui/dom";
 import { Tooltip as ReactTooltip, TooltipRefProps } from "react-tooltip";
 
-import { Portal } from "../portal";
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import { checkIsSSR } from "../../utils/device";
 
 import { DEFAULT_OFFSET } from "./Tooltip.constants";

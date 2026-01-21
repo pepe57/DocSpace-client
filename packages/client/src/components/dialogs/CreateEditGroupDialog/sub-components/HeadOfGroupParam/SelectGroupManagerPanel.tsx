@@ -27,8 +27,7 @@
 import { TUser } from "@docspace/shared/api/people/types";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { TSelectorItem } from "@docspace/shared/components/selector";
-import { Portal } from "@docspace/shared/components/portal";
-
+import { Portal } from "@docspace/ui-kit/components/portal";
 interface SelectGroupManagerPanelProps {
   onClose: () => void;
   onParentPanelClose: () => void;

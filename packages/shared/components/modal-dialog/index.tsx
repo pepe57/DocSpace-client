@@ -28,7 +28,8 @@ import React, { useEffect, useState } from "react";
 import { isSafari, isTablet } from "react-device-detect";
 import throttle from "lodash/throttle";
 
-import { Portal } from "../portal";
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import { Modal } from "./sub-components/Modal";
 
 import {

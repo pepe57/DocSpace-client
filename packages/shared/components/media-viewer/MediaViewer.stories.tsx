@@ -28,12 +28,13 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useTranslation } from "react-i18next";
 
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import { DeviceType } from "../../enums";
 import type { TFile } from "../../api/files/types";
 import { iconSize32, iconSize96 } from "../../utils/image-helpers";
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
 
-import { Portal } from "../portal";
 import { Button } from "../button";
 
 import MediaViewer from "./MediaViewer";

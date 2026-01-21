@@ -30,6 +30,8 @@ import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useNavigate } from "react-router";
 
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import McpToolReactSvgUrl from "PUBLIC_DIR/images/mcp.tool.svg?url";
 import WebSearchIconUrl from "PUBLIC_DIR/images/web.search.svg?url";
 import ManageConnectionsReactSvgUrl from "PUBLIC_DIR/images/manage.connection.react.svg?url";
@@ -53,7 +55,6 @@ import { IconButton } from "../../../icon-button";
 import { Aside } from "../../../aside";
 import { Button, ButtonSize } from "../../../button";
 import { Backdrop } from "../../../backdrop";
-import { Portal } from "../../../portal";
 import { TooltipContainer } from "../../../tooltip";
 
 import { useChatStore } from "../../store/chatStore";

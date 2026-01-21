@@ -27,7 +27,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Portal } from "../portal";
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import { Guid } from "./sub-components/Guid";
 import {
   GuidanceStep,

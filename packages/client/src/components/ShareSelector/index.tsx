@@ -35,7 +35,7 @@ import {
 } from "@docspace/shared/components/share/Share.constants";
 
 import type { Nullable } from "@docspace/shared/types";
-import { Portal } from "@docspace/shared/components/portal";
+import { Portal } from "@docspace/ui-kit/components/portal";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { RoomMember } from "@docspace/shared/api/rooms/types";
 

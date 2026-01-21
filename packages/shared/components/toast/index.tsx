@@ -30,9 +30,9 @@ import React, { useEffect } from "react";
 import { cssTransition, ToastContainer } from "react-toastify";
 import classNames from "classnames";
 
-import { useIsServer } from "../../hooks/useIsServer";
+import { Portal } from "@docspace/ui-kit/components/portal";
 
-import { Portal } from "../portal";
+import { useIsServer } from "../../hooks/useIsServer";
 
 import type { ToastProps, TData } from "./Toast.type";
 import { toastr } from "./sub-components/Toastr";

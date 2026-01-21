@@ -29,8 +29,7 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Portal } from "@docspace/shared/components/portal";
-
+import { Portal } from "@docspace/ui-kit/components/portal";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import { messageActions } from "SRC_DIR/helpers/plugins/utils";

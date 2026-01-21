@@ -36,8 +36,7 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
-import { Portal } from "@docspace/shared/components/portal";
-
+import { Portal } from "@docspace/ui-kit/components/portal";
 const StyledWrapper = styled.div``;
 
 const StyledDropDown = styled(DropDown)`

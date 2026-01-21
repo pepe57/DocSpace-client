@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
 import type { TNewFiles } from "@docspace/shared/api/rooms/types";
-import { Portal } from "@docspace/shared/components/portal";
+import { Portal } from "@docspace/ui-kit/components/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   ModalDialog,

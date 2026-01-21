@@ -28,11 +28,12 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import { DeviceType, FolderType } from "../../enums";
 import FilesSelector from "../../selectors/Files";
 import { InputSize } from "../text-input";
 import { FileInput } from "../file-input";
-import { Portal } from "../portal";
 import { Aside } from "../aside";
 import { Backdrop } from "../backdrop";
 import { useUnmount } from "../../hooks/useUnmount";

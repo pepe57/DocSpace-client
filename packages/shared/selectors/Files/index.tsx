@@ -29,6 +29,8 @@
 import React, { use } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import { createFile, deleteFile } from "../../api/files";
 
 import { FolderType, RoomsType, DeviceType, RoomSearchArea } from "../../enums";
@@ -36,7 +38,6 @@ import { FolderType, RoomsType, DeviceType, RoomSearchArea } from "../../enums";
 import type { TSelectorItem } from "../../components/selector";
 import { Aside } from "../../components/aside";
 import { Backdrop } from "../../components/backdrop";
-import { Portal } from "../../components/portal";
 import { toastr } from "../../components/toast";
 import type { TBreadCrumb } from "../../components/selector/Selector.types";
 

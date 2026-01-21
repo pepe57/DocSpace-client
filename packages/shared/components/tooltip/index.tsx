@@ -29,7 +29,7 @@ import { flip, shift, offset } from "@floating-ui/dom";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import classNames from "classnames";
 
-import { Portal } from "../portal";
+import { Portal } from "@docspace/ui-kit/components/portal";
 
 import { DEFAULT_OFFSET } from "./Tooltip.constants";
 import styles from "./Tooltip.module.scss";

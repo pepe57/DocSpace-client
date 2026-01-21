@@ -37,7 +37,7 @@ import SocketHelper, {
   SocketEvents,
   SocketCommands,
 } from "@docspace/shared/utils/socket";
-import { Portal } from "@docspace/shared/components/portal";
+import { Portal } from "@docspace/ui-kit/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
 import { RootTooltip } from "@docspace/shared/components/tooltip/rootTooltip";

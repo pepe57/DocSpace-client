@@ -27,10 +27,11 @@
 import React from "react";
 import { isMobile, isMobileOnly, isIOS } from "react-device-detect";
 
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import { DeviceType } from "../../enums";
 import { ArticleProfileLoader } from "../../skeletons/article";
 
-import { Portal } from "../portal";
 import { Backdrop } from "../backdrop";
 import { Scrollbar } from "../scrollbar";
 

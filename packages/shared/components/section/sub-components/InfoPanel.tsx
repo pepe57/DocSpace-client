@@ -27,8 +27,9 @@
 import { useEffect, useRef } from "react";
 import classNames from "classnames";
 
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import { DeviceType } from "../../../enums";
-import { Portal } from "../../portal";
 
 import { Aside } from "../../aside";
 import { Backdrop } from "../../backdrop";

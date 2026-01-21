@@ -28,6 +28,8 @@
 import React from "react";
 import { CSSTransition } from "react-transition-group";
 
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
 
 import {
@@ -38,7 +40,6 @@ import {
 } from "../../utils";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
-import { Portal } from "../portal";
 import { Backdrop } from "../backdrop";
 import { Text } from "../text";
 import { Avatar, AvatarRole, AvatarSize } from "../avatar";

@@ -28,9 +28,10 @@ import React from "react";
 import classNames from "classnames";
 import { isIOS, isMobile } from "react-device-detect";
 
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
-import { Portal } from "../portal";
 import { DomHelpers } from "../../utils";
 
 import { VirtualList } from "./sub-components/VirtualList";
@@ -247,17 +248,20 @@ const DropDown = ({
     }));
   }, [fixedDirection, isRTL, forwardedRef, directionX, directionY, manualY]);
 
-  const setDropDownRef = React.useCallback((node: HTMLDivElement | null) => {
-    dropDownRef.current = node;
-    
-    if (node && open) {
-      if (isDefaultMode) {
-        checkPositionPortal();
-      } else {
-        checkPosition();
+  const setDropDownRef = React.useCallback(
+    (node: HTMLDivElement | null) => {
+      dropDownRef.current = node;
+
+      if (node && open) {
+        if (isDefaultMode) {
+          checkPositionPortal();
+        } else {
+          checkPosition();
+        }
       }
-    }
-  }, [open, isDefaultMode, checkPositionPortal, checkPosition]);
+    },
+    [open, isDefaultMode, checkPositionPortal, checkPosition],
+  );
 
   const renderDropDown = () => {
     const directionXStylesDisabled =
