@@ -61,7 +61,7 @@ const useSocketHelper = ({
 
     if (user?.id)
       SocketHelper?.emit(SocketCommands.Subscribe, {
-        roomParts: `user:${user.id}-quota}`,
+        roomParts: `user:${user.id}-quota`,
       });
   }, [user?.id]);
 
