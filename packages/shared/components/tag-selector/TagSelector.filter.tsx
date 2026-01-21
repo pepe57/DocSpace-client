@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import classNames from "classnames";
 import React, {
   useCallback,
   startTransition,
@@ -38,6 +37,7 @@ import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import { Tag } from "../tag";
 import { Text } from "../text";
 import { InputType, TextInput } from "../text-input";
+import { toastr } from "../toast";
 
 import { useTagSelector } from "./TagSelector.provider";
 import { useUpdateRoomTagsMutation } from "./hooks/useTagsQuery";
@@ -59,6 +59,8 @@ export const TagSelectorFilter: React.FC<TagSelectorFilterProps> = ({
     setSearchValue,
     clearSearch,
     tags,
+    setTags,
+    filteredTags,
   } = useTagSelector();
   const updateRoomTags = useUpdateRoomTagsMutation(roomId);
 
@@ -85,16 +87,22 @@ export const TagSelectorFilter: React.FC<TagSelectorFilterProps> = ({
     const trimmedValue = searchValue.trim();
     if (trimmedValue.length === 0) return;
 
-    const newTag: TTag = { name: trimmedValue, checked: true };
+    const newTag: TTag = { label: trimmedValue, checked: true };
     const updatedTags = [newTag, ...tags];
     clearSearch();
     setInputValue("");
-    const roomTagNames = updatedTags
-      .filter((tag) => tag.checked)
-      .map((tag) => tag.name);
 
-    await updateRoomTags.mutateAsync(roomTagNames);
-  }, [searchValue, tags, clearSearch, updateRoomTags]);
+    updateRoomTags.mutate(updatedTags, {
+      onSuccess: () => {
+        setTags(updatedTags);
+      },
+      onError: (error) => {
+        console.error("Failed to create tag:", error);
+        toastr.error(error);
+      },
+    });
+    setTags(updatedTags);
+  }, [searchValue, tags, clearSearch, updateRoomTags, setTags]);
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -148,11 +156,18 @@ export const TagSelectorFilter: React.FC<TagSelectorFilterProps> = ({
           />
         </Text>
       ) : null}
-      <Text className={styles.text} fontSize="12px" lineHeight="16px" noSelect>
-        {showCreateTag
-          ? t("Common:OrSelectFromAvailableMatches")
-          : t("Common:SelectAnOptionOrCreateOne")}
-      </Text>
+      {filteredTags.length > 0 ? (
+        <Text
+          className={styles.text}
+          fontSize="12px"
+          lineHeight="16px"
+          noSelect
+        >
+          {showCreateTag
+            ? t("Common:OrSelectFromAvailableMatches")
+            : t("Common:SelectAnOptionOrCreateOne")}
+        </Text>
+      ) : null}
     </>
   );
 };

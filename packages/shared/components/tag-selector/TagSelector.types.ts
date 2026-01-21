@@ -35,12 +35,13 @@ export interface TagSelectorProps {
 }
 
 export type TTag = {
-  name: string;
+  label: string;
   checked: boolean;
 };
 
 export interface TagSelectorContextValue {
   tags: TTag[];
+  setTags: React.Dispatch<React.SetStateAction<TTag[]>>;
   searchValue: string;
   deferredSearchValue: string;
   filteredTags: TTag[];
@@ -51,10 +52,27 @@ export interface TagSelectorContextValue {
 
 export interface TagSelectorProviderProps {
   children: React.ReactNode;
-  fetchedTags: TTag[];
+  fetchedTags: string[];
+  roomTags: Array<TagType | string>;
 }
 
 export interface UpdateTagNameParams {
-  oldName: string;
-  newName: string;
+  oldLabel: string;
+  newLabel: string;
+}
+
+export interface TagSelectorContentProps {
+  onSelectTag: (tag: TagClickEvent) => void;
+  roomId: string | number;
+}
+
+export interface ITagSelectorStateContext {
+  tags: TTag[];
+  setTags: React.Dispatch<React.SetStateAction<TTag[]>>;
+  searchValue: string;
+  deferredSearchValue: string;
+  filteredTags: TTag[];
+  showCreateTag: boolean;
+  setSearchValue: (value: string) => void;
+  clearSearch: () => void;
 }

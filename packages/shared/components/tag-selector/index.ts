@@ -31,5 +31,4 @@ export { TagSelectorLoader } from "./TagSelector.loader";
 export {
   useTagsQuery,
   useUpdateRoomTagsMutation,
-  TAGS_QUERY_KEY,
 } from "./hooks/useTagsQuery";

@@ -55,15 +55,17 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
   onClose,
   reference,
   onSelectTag,
-  tags: propsTags,
+  tags: roomTags,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
+  // const [roomTags] = useState(propsTags);
+
   const isMobile = useIsMobile();
   useClickOutside(isMobile ? modalRef : ref, onClose);
 
-  const { data: fetchedTags, status } = useTagsQuery(propsTags);
+  const { data: fetchedTags, status } = useTagsQuery();
 
   useLayoutEffect(() => {
     if (!reference.current || !ref.current || isMobile) return;
@@ -102,7 +104,10 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
       {match(status)
         .with("pending", () => <TagSelectorLoader />)
         .with("success", () => (
-          <TagSelectorProvider fetchedTags={fetchedTags ?? []}>
+          <TagSelectorProvider
+            fetchedTags={fetchedTags ?? []}
+            roomTags={roomTags}
+          >
             <TagSelectorFilter roomId={roomId} />
             <TagSelectorContent onSelectTag={onSelectTag} roomId={roomId} />
           </TagSelectorProvider>

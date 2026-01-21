@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import CheckIconURL from "PUBLIC_DIR/images/check.edit.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
@@ -34,6 +34,7 @@ import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url
 import { useIsMobile } from "../../hooks/useIsMobile";
 
 import { Tag } from "../tag";
+import { toastr } from "../toast";
 import { Checkbox } from "../checkbox";
 import { Scrollbar } from "../scrollbar";
 import { IconButton } from "../icon-button";
@@ -51,19 +52,14 @@ import {
   MAX_BODY_HEIGHT,
   MARGIN_BOTTOM,
 } from "./TagSelector.constants";
-import type { TagClickEvent } from "../tag/Tag.types";
-
-interface TagSelectorContentProps {
-  onSelectTag: (tag: TagClickEvent) => void;
-  roomId: string | number;
-}
+import type { TagSelectorContentProps } from "./TagSelector.types";
 
 export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
   onSelectTag,
   roomId,
 }) => {
   const isMobile = useIsMobile();
-  const { filteredTags, tags } = useTagSelector();
+  const { filteredTags, tags, setTags } = useTagSelector();
   const updateRoomTags = useUpdateRoomTagsMutation(roomId);
   const updateTagName = useUpdateTagNameMutation();
 
@@ -71,15 +67,23 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
   const [editValue, setEditValue] = useState("");
 
   const toggleChecked = useCallback(
-    (index: number) => {
+    (index: string) => {
       const updatedTags = [...tags];
-      updatedTags[index].checked = !updatedTags[index].checked;
+      const tagIndex = updatedTags.findIndex((tag) => tag.label === index);
 
-      const roomTagNames = updatedTags
-        .filter((tag) => tag.checked)
-        .map((tag) => tag.name);
+      if (tagIndex === -1) return;
 
-      updateRoomTags.mutate(roomTagNames);
+      updatedTags[tagIndex].checked = !updatedTags[tagIndex].checked;
+
+      updateRoomTags.mutate(updatedTags, {
+        onSuccess: () => {
+          setTags(updatedTags);
+        },
+        onError: (error) => {
+          toastr.error(error);
+          console.error("Failed to update room tags:", error);
+        },
+      });
     },
     [tags, updateRoomTags],
   );
@@ -87,7 +91,7 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
   const handleEdit = useCallback(
     (index: number) => {
       setEditingIndex(index);
-      setEditValue(tags[index].name);
+      setEditValue(tags[index].label);
     },
     [tags],
   );
@@ -95,13 +99,28 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
   const confirmEdit = useCallback(async () => {
     if (editingIndex === null) return;
 
-    const newName = editValue.trim();
-    const oldName = tags[editingIndex].name;
+    const newLabel = editValue.trim();
+    const oldLabel = tags[editingIndex].label;
 
     setEditingIndex(null);
     setEditValue("");
 
-    await updateTagName.mutateAsync({ oldName, newName });
+    updateTagName.mutate(
+      { oldLabel, newLabel },
+      {
+        onSuccess: () => {
+          setTags((prev) =>
+            prev.map((tag) =>
+              tag.label === oldLabel ? { ...tag, label: newLabel } : tag,
+            ),
+          );
+        },
+        onError: (error) => {
+          console.error("Failed to update tag name:", error);
+          toastr.error(error);
+        },
+      },
+    );
   }, [editingIndex, editValue, tags, updateRoomTags]);
 
   const cancelEdit = useCallback(() => {
@@ -110,15 +129,23 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
   }, []);
 
   const deleteTag = useCallback(
-    async (index: number) => {
+    async (tag: string) => {
       const updatedTags = [...tags];
-      updatedTags.splice(index, 1);
+      const tagIndex = updatedTags.findIndex((t) => t.label === tag);
 
-      const roomTagNames = updatedTags
-        .filter((tag) => tag.checked)
-        .map((tag) => tag.name);
+      if (tagIndex === -1) return;
 
-      await updateRoomTags.mutateAsync(roomTagNames);
+      updatedTags.splice(tagIndex, 1);
+
+      updateRoomTags.mutate(updatedTags, {
+        onSuccess: () => {
+          setTags(updatedTags);
+        },
+        onError: (error) => {
+          toastr.error(error);
+          console.error("Failed to remove room tag:", error);
+        },
+      });
     },
     [tags, updateRoomTags],
   );
@@ -146,26 +173,29 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
     [setEditValue],
   );
 
+  const style = useMemo(() => {
+    return {
+      height: isMobile
+        ? "100%"
+        : Math.min(
+            MAX_BODY_HEIGHT,
+            filteredTags.length * ROW_HEIGHT + MARGIN_BOTTOM,
+          ),
+    };
+  }, [isMobile, filteredTags.length]);
+
+  console.log({ style, filteredTagsLength: filteredTags.length });
+
   return (
-    <div
-      className={styles.wrapperList}
-      style={{
-        height: isMobile
-          ? "100%"
-          : Math.min(
-              MAX_BODY_HEIGHT,
-              filteredTags.length * ROW_HEIGHT + MARGIN_BOTTOM,
-            ),
-      }}
-    >
+    <div className={styles.wrapperList} style={style}>
       <Scrollbar fixedSize className={styles.scrollbar}>
         {filteredTags.map((tag, index) => {
           return (
-            <div key={tag.name} className={styles.row}>
+            <div key={tag.label} className={styles.row}>
               <Checkbox
                 className={styles.checkbox}
                 isChecked={tag.checked}
-                onChange={() => toggleChecked(index)}
+                onChange={() => toggleChecked(tag.label)}
               />
               {editingIndex === index ? (
                 <>
@@ -198,8 +228,8 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
                 <>
                   <Tag
                     className={styles.tag}
-                    label={tag.name}
-                    tag={tag.name}
+                    label={tag.label}
+                    tag={tag.label}
                     onClick={onSelectTag}
                   />
                   <IconButton
@@ -212,7 +242,7 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
                     size={ICON_SIZE}
                     iconName={TrashReactSvgUrl}
                     className={styles.deleteIcon}
-                    onClick={() => deleteTag(index)}
+                    onClick={() => deleteTag(tag.label)}
                   />
                 </>
               )}

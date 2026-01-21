@@ -30,46 +30,44 @@ import React, {
   useState,
   useDeferredValue,
   useCallback,
+  useEffect,
 } from "react";
 
 import type {
   TTag,
   TagSelectorContextValue,
   TagSelectorProviderProps,
+  ITagSelectorStateContext,
 } from "./TagSelector.types";
+import { unionTagsData } from "./TagSelector.utils";
 
-type TagSelectorStateContext = {
-  tags: TTag[];
-  searchValue: string;
-  deferredSearchValue: string;
-  filteredTags: TTag[];
-  showCreateTag: boolean;
-  setSearchValue: (value: string) => void;
-  clearSearch: () => void;
-};
-
-const TagSelectorStateContext = createContext<TagSelectorStateContext | null>(
+const TagSelectorStateContext = createContext<ITagSelectorStateContext | null>(
   null,
 );
 
 export const TagSelectorProvider: React.FC<TagSelectorProviderProps> = ({
   children,
+  roomTags,
   fetchedTags,
 }) => {
   const [searchValue, setSearchValue] = useState("");
   const deferredSearchValue = useDeferredValue(searchValue);
 
+  const [tags, setTags] = useState<TTag[]>(() => {
+    return unionTagsData(roomTags, fetchedTags);
+  });
+
   const filteredTags = useMemo(() => {
     const search = deferredSearchValue.toLowerCase().trim();
-    if (!search) return fetchedTags;
-    return fetchedTags.filter((tag) => tag.name.toLowerCase().includes(search));
-  }, [fetchedTags, deferredSearchValue]);
+    if (!search) return tags;
+    return tags.filter((tag) => tag.label.toLowerCase().includes(search));
+  }, [tags, deferredSearchValue]);
 
   const showCreateTag = useMemo(() => {
     const trimmedValue = deferredSearchValue.trim();
     return (
       trimmedValue.length > 0 &&
-      filteredTags.every((tag) => tag.name.trim() !== trimmedValue)
+      filteredTags.every((tag) => tag.label.trim() !== trimmedValue)
     );
   }, [deferredSearchValue, filteredTags]);
 
@@ -79,9 +77,10 @@ export const TagSelectorProvider: React.FC<TagSelectorProviderProps> = ({
     setSearchValue("");
   }, []);
 
-  const value = useMemo<TagSelectorStateContext>(
+  const value = useMemo<ITagSelectorStateContext>(
     () => ({
-      tags: fetchedTags,
+      tags,
+      setTags,
       searchValue,
       deferredSearchValue,
       filteredTags,

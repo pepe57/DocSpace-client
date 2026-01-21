@@ -24,38 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import unionBy from "lodash/unionBy";
-import isString from "lodash/isString";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { getTags, editRoom, updateTagName } from "../../../api/rooms";
 
-import type { TagType } from "../../tag/Tag.types";
 import type { TTag, UpdateTagNameParams } from "../TagSelector.types";
+import { TAGS_QUERY_KEY } from "../TagSelector.constants";
 
-export const TAGS_QUERY_KEY = ["tags"];
-
-export function useTagsQuery(roomTags: Array<TagType | string>) {
+export function useTagsQuery() {
   return useQuery({
     queryKey: TAGS_QUERY_KEY,
-    queryFn: getTags,
+    queryFn: () => getTags() ?? Promise.resolve([]),
     refetchOnMount: true,
-    select(data) {
-      const temp = roomTags
-        .filter((tag) => isString(tag) || !tag.isDefault)
-        .map((tag) => ({
-          name: isString(tag) ? tag : tag.label,
-          checked: true,
-        }));
-
-      if (!data) return temp;
-
-      return unionBy(
-        temp,
-        data.map((tag) => ({ name: tag, checked: false })),
-        "name",
-      );
-    },
   });
 }
 
@@ -63,9 +43,27 @@ export function useUpdateRoomTagsMutation(roomId: string | number) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (tags: string[]) => editRoom(roomId, { tags }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: TAGS_QUERY_KEY });
+    mutationFn: (tags: TTag[]) =>
+      editRoom(roomId, {
+        tags: tags.filter((tag) => tag.checked).map((tag) => tag.label),
+      }),
+    // onSuccess: () => {
+    //   queryClient.invalidateQueries({ queryKey: TAGS_QUERY_KEY });
+    // },
+    onMutate: async (newTags: TTag[]) => {
+      await queryClient.cancelQueries({ queryKey: TAGS_QUERY_KEY });
+
+      const previousData: string[] | undefined =
+        queryClient.getQueryData(TAGS_QUERY_KEY);
+
+      console.log({ previousData });
+
+      queryClient.setQueryData(TAGS_QUERY_KEY, newTags);
+
+      return { previousData };
+    },
+    onError: (_, __, context) => {
+      queryClient.setQueryData(TAGS_QUERY_KEY, context?.previousData);
     },
   });
 }
@@ -74,21 +72,18 @@ export function useUpdateTagNameMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ oldName, newName }: UpdateTagNameParams) =>
-      updateTagName(oldName, newName),
+    mutationFn: ({ oldLabel, newLabel }: UpdateTagNameParams) =>
+      updateTagName(oldLabel, newLabel),
 
-    onMutate: async ({ oldName, newName }: UpdateTagNameParams) => {
-      console.log({ oldName, newName });
+    onMutate: async ({ oldLabel, newLabel }: UpdateTagNameParams) => {
       await queryClient.cancelQueries({ queryKey: TAGS_QUERY_KEY });
 
-      const previousData: TTag[] | undefined =
+      const previousData: string[] | undefined =
         queryClient.getQueryData(TAGS_QUERY_KEY);
 
       const optimisticTags = previousData?.map((tag) =>
-        tag.name === oldName ? { ...tag, name: newName } : tag,
+        tag === oldLabel ? newLabel : tag,
       );
-
-      console.log({ previousData, optimisticTags });
 
       queryClient.setQueryData(TAGS_QUERY_KEY, optimisticTags);
 

@@ -23,10 +23,42 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import unionBy from "lodash/unionBy";
+import isString from "lodash/isString";
 
-export const ROW_HEIGHT = 30;
-export const MARGIN_BOTTOM = 10;
-export const MAX_BODY_HEIGHT = 220;
-export const ICON_SIZE = 16;
+import type { TagType } from "../tag/Tag.types";
+import type { TTag } from "./TagSelector.types";
 
-export const TAGS_QUERY_KEY = ["tags"];
+export function transformTagsData(
+  roomTags: Array<TagType | string | TTag>,
+  checked: boolean = false,
+): TTag[] {
+  return roomTags.map((tag) => ({
+    label: isString(tag) ? tag : tag.label,
+    checked,
+  }));
+}
+
+export function unionTagsData(
+  roomTags: Array<TagType | string>,
+  data: string[] | undefined,
+): TTag[] {
+  const temp: TTag[] = transformTagsData(
+    roomTags.filter(
+      (tag) => isString(tag) || !("isDefault" in tag) || !tag.isDefault,
+    ),
+    true,
+  );
+
+  if (!data) return temp;
+
+  return unionBy(temp, transformTagsData(data, false), "label");
+}
+// export function unionTagsDataWithDefaults(
+//   roomTags: Array<TTag>,
+//   data: string[] | undefined,
+// ): TTag[] {
+//   if (!data) return roomTags;
+
+//   return unionBy(roomTags, transformTagsData(data, false), "label");
+// }
