@@ -56,12 +56,13 @@ const DefaultTemplates = ({
   }, []);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid="default-templates">
       <Text className={styles.description}>
         {t("DefaultTemplatesDescription")}
       </Text>
       {templates?.map((item, index) => (
         <TemplatesRow
+          index={index}
           key={`default-template-row-${index}`}
           item={item}
           getFilterParam={getFilterParam}

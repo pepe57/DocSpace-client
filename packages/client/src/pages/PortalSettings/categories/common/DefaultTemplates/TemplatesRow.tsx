@@ -51,6 +51,7 @@ type Props = {
   setTemplate?: TStore["defaultTemplatesStore"]["setTemplate"];
   resetTemplate?: TStore["defaultTemplatesStore"]["resetTemplate"];
   getFilterParam?: TStore["defaultTemplatesStore"]["getFilterParam"];
+  index?: number;
 };
 
 const TemplatesRow = ({
@@ -59,6 +60,7 @@ const TemplatesRow = ({
   getFilterParam,
   setTemplate,
   resetTemplate,
+  index,
 }: Props) => {
   const { t } = useTranslation(["Settings", "Common"]);
   const [isSelectorVisible, setIsSelectorVisible] = useState(false);
@@ -124,7 +126,10 @@ const TemplatesRow = ({
     : t("Settings:NotModified");
 
   return (
-    <div className={styles.templateRow}>
+    <div
+      className={styles.templateRow}
+      data-testid={`default-template-row-${index}`}
+    >
       <ResetTemplateDialog
         isVisible={isDialogVisible}
         onReset={() => onResetFile()}

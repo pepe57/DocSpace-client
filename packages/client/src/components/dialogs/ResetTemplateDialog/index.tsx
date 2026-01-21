@@ -58,6 +58,7 @@ const ResetTemplateDialog = ({
 
       <ModalDialog.Footer>
         <Button
+          testId="reset-button"
           id="reset-button"
           label={t("OAuth:Reset")}
           onClick={onReset}
