@@ -100,7 +100,6 @@ type ViewProps = UseContactsProps &
     setHotkeyCaret: FilesStore["setHotkeyCaret"];
     setIsErrorAccountNotAvailable: FilesStore["setIsErrorAccountNotAvailable"];
     currentExtensionGallery: OformsStore["currentExtensionGallery"];
-    getAllRoomGroups: DialogsStore["getAllRoomGroups"];
   };
 
 const View = ({
@@ -177,7 +176,6 @@ const View = ({
   aiConfig,
   isResultTab,
   resultId,
-  getAllRoomGroups,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation(["Files", "Common", "AIRoom"]);
@@ -255,7 +253,6 @@ const View = ({
     selectedFolderStore,
     wsCreatedPDFForm,
     currentExtensionGallery,
-    getAllRoomGroups,
   });
 
   const { getProfileInitialValue } = useProfileBody({
@@ -724,11 +721,8 @@ export const ViewComponent = inject(
 
     const { checkTg } = telegramStore;
 
-    const {
-      aiAgentSelectorDialogProps,
-      setAiAgentSelectorDialogProps,
-      getAllRoomGroups,
-    } = dialogsStore;
+    const { aiAgentSelectorDialogProps, setAiAgentSelectorDialogProps } =
+      dialogsStore;
 
     return {
       setContactsTab,
@@ -801,7 +795,6 @@ export const ViewComponent = inject(
       aiConfig,
       isResultTab,
       resultId,
-      getAllRoomGroups,
     };
   },
 )(observer(View));

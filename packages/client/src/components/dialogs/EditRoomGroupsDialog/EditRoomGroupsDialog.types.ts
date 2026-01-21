@@ -48,6 +48,8 @@ export interface ICreateRoomGroup {
 
 export interface IUpdateRoomGroup {
   groupName?: string;
+  roomsToAdd?: (string | number)[];
+  roomsToRemove?: (string | number)[];
 }
 
 export interface EditRoomGroupsDialogProps {

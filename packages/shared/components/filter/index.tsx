@@ -100,6 +100,7 @@ const FilterInput = React.memo(
     getAllRoomGroups,
     roomGroups,
     onFilterByGroup,
+    isRoomsFolder,
   }: FilterProps) => {
     const { searchComponent } = useSearch({
       onSearch,
@@ -199,11 +200,7 @@ const FilterInput = React.memo(
     );
 
     const onCreateGroup = () => {
-      console.log(
-        "setEditRoomGroupsDialogVisible",
-        setEditRoomGroupsDialogVisible,
-      );
-      setEditRoomGroupsDialogVisible(true);
+      setEditRoomGroupsDialogVisible?.(true);
     };
 
     React.useEffect(() => {
@@ -313,39 +310,43 @@ const FilterInput = React.memo(
           </div>
         ) : null}
 
-        <div className="filter-input_selected-row-grouping-rooms">
-          <SelectedItem
-            propKey="all-rooms"
-            label={t("GroupingRooms:AllRooms")}
-            onClick={() => onFilterByGroup?.(null)}
-            onClose={() => {}}
-            hideCross
-            clickable
-          />
-
-          {roomGroups?.map((group) => (
+        {isRoomsFolder && (
+          <div className="filter-input_selected-row-grouping-rooms">
             <SelectedItem
-              key={group.id}
-              propKey={group.id}
-              label={group.name}
-              icon={`data:image/svg+xml;utf8,${encodeURIComponent(group.icon.data)}`}
-              onClick={() => onFilterByGroup?.(group.id)}
+              propKey="all-rooms"
+              label={t("GroupingRooms:AllRooms")}
+              onClick={() => onFilterByGroup?.(null)}
               onClose={() => {}}
               hideCross
               clickable
             />
-          ))}
 
-          <SelectedItem
-            propKey="create-group"
-            label={t("PeopleTranslations:CreateGroup")}
-            icon={PlusIcon}
-            onClose={() => {}}
-            onClick={onCreateGroup}
-            hideCross
-            clickable
-          />
-        </div>
+            {roomGroups?.map((group) =>
+              typeof group.icon === "object" && group.icon !== null ? (
+                <SelectedItem
+                  key={group.id}
+                  propKey={group.id}
+                  label={group.name}
+                  icon={`data:image/svg+xml;utf8,${encodeURIComponent(group.icon.data)}`}
+                  onClick={() => onFilterByGroup?.(group.id)}
+                  onClose={() => {}}
+                  hideCross
+                  clickable
+                />
+              ) : null,
+            )}
+
+            <SelectedItem
+              propKey="create-group"
+              label={t("PeopleTranslations:CreateGroup")}
+              icon={PlusIcon}
+              onClose={() => {}}
+              onClick={onCreateGroup}
+              hideCross
+              clickable
+            />
+          </div>
+        )}
       </div>
     );
   },

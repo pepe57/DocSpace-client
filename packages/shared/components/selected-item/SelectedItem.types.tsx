@@ -67,4 +67,5 @@ export interface SelectedItemProps {
   dataTestId?: string;
   /** Icon data as SVG string */
   icon?: string;
+  clickable?: boolean;
 }

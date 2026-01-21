@@ -90,7 +90,51 @@ const EditRoomGroupsDialog = ({
     setEditRoomGroupsDialogVisible(false);
   };
 
-  const onSubmitRoom = (items: TSelectorItem[]) => {
+  const onSubmitRoom = async (items: TSelectorItem[]) => {
+    if (selectedGroup) {
+      const toIdKey = (id: string | number) => String(id);
+      const initialRoomIds = (selectedGroup.rooms || []).map((room) => room.id);
+      const initialRoomIdByKey = new Map<string, number>(
+        initialRoomIds.map((id) => [toIdKey(id), id] as const),
+      ); const initialRoomIdKeys = new Set<string>(
+        initialRoomIds.map((id) => toIdKey(id)),
+      );
+
+      const selectedRoomIds = items
+        .map((item) => item.id)
+        .filter((id): id is string | number => id !== undefined);
+
+      const selectedRoomIdKeys = selectedRoomIds.map(toIdKey);
+      const selectedRoomIdsSet = new Set<string>(selectedRoomIdKeys);
+
+      const roomsToAdd = selectedRoomIds.filter(
+        (id) => !initialRoomIdKeys.has(toIdKey(id)),
+      );
+      const roomsToRemove = Array.from(initialRoomIdKeys)
+        .filter((idKey) => !selectedRoomIdsSet.has(idKey))
+        .map((idKey) => initialRoomIdByKey.get(idKey))
+        .filter((id): id is number => id !== undefined);
+
+      try {
+        const hasChanges = roomsToAdd.length > 0 || roomsToRemove.length > 0;
+
+        if (hasChanges) {
+          await updateRoomGroup(selectedGroup.id, {
+            ...(roomsToAdd.length > 0 ? { roomsToAdd } : {}),
+            ...(roomsToRemove.length > 0 ? { roomsToRemove } : {}),
+          });
+
+          await getAllRoomGroups();
+        }
+      } catch (error) {
+        console.error("Error updating group rooms:", error);
+      }
+
+      onCloseGroupRoomList();
+
+      return;
+    }
+
     const arrIds: string[] = [];
     items.forEach((item) => {
       if (item.id) arrIds.push(String(item.id));

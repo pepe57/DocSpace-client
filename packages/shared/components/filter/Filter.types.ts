@@ -249,4 +249,5 @@ export type FilterProps = SearchInputProps &
     getAllRoomGroups?: () => Promise<TRoomGroup[]>;
     roomGroups?: TRoomGroup[];
     onFilterByGroup?: (groupId: string | null) => void;
+    isRoomsFolder?: boolean;
   };

@@ -146,6 +146,7 @@ const SectionFilterContent = ({
   setEditRoomGroupsDialogVisible,
   getAllRoomGroups,
   roomGroups,
+  isRoomsFolder,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -1803,6 +1804,7 @@ const SectionFilterContent = ({
       getAllRoomGroups={getAllRoomGroups}
       roomGroups={roomGroups}
       onFilterByGroup={onFilterByGroup}
+      isRoomsFolder={isRoomsFolder}
     />
   );
 };
@@ -1955,6 +1957,7 @@ export default inject(
       setEditRoomGroupsDialogVisible,
       getAllRoomGroups,
       roomGroups,
+      isRoomsFolder,
     };
   },
 )(
