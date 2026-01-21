@@ -56,8 +56,9 @@ export const test = base.extend<
   ],
   mockRequest: [
     async ({ page }, use) => {
-      const localePassthrough = http.get(/\/locales\/.*\.json$/, () =>
-        passthrough(),
+      const localePassthrough = http.get(
+        /(\/client)?\/locales\/.*\.json(\?.*)?$/,
+        () => passthrough(),
       );
 
       const worker = new WorkerFixture({
