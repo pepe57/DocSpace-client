@@ -95,7 +95,6 @@ type ViewProps = UseContactsProps &
     canUseChat: AccessRightsStore["canUseChat"];
 
     aiConfig: SettingsStore["aiConfig"];
-    isResultTab: AiRoomStore["isResultTab"];
     resultId: AiRoomStore["resultId"];
     setHotkeyCaret: FilesStore["setHotkeyCaret"];
     setIsErrorAccountNotAvailable: FilesStore["setIsErrorAccountNotAvailable"];
@@ -174,7 +173,6 @@ const View = ({
 
   canUseChat,
   aiConfig,
-  isResultTab,
   resultId,
 }: ViewProps) => {
   const location = useLocation();
@@ -654,7 +652,7 @@ export const ViewComponent = inject(
     settingsStore,
     aiRoomStore,
   }: TStore) => {
-    const { isResultTab, resultId } = aiRoomStore;
+    const { resultId } = aiRoomStore;
     const { aiConfig } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
@@ -802,7 +800,6 @@ export const ViewComponent = inject(
 
       canUseChat,
       aiConfig,
-      isResultTab,
       resultId,
     };
   },
