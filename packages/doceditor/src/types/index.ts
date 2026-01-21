@@ -44,6 +44,7 @@ import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelecto
 import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
+  FolderType,
   RoomsType,
   StartFillingMode,
 } from "@docspace/shared/enums";
@@ -382,6 +383,8 @@ export interface UseSocketHelperProps {
   user?: TUser;
   shareKey?: string;
   standalone?: boolean;
+  folderId?: string | number;
+  folderType?: FolderType;
 }
 
 export interface UseEventsProps {
