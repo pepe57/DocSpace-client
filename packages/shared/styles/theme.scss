@@ -2484,6 +2484,7 @@
   --settings-backup-text-disabled: #{$gray};
   --settings-backup-background: #{$gray-light};
   --settings-backup-note-color: #{$gray};
+  --settings-api-keys-dialog-text: #{$light-gray-dark};
 }
 
 .dark {
@@ -2499,6 +2500,7 @@
   --settings-backup-text-disabled: #{$gray-dark-text};
   --settings-backup-background: #{$dark-gray-light};
   --settings-backup-note-color: #{$gray-dark};
+  --settings-api-keys-dialog-text: #{$gray-dark};
 }
 
 .light {
@@ -3176,6 +3178,34 @@
   --completed-form-label-color: #{$dark-gray-dark};
 }
 
+.light {
+  --tap-highlight: #{$tap-highlight};
+  --files-drag-tooltip-background: #{$white};
+  --files-drag-tooltip-box-shadow: 0px 5px 20px #{$popup-shadow};
+  --files-drag-tooltip-color: #{$gray};
+  --create-edit-room-description-color: #{$gray};
+  --menu-container-background: #{$light-gray-hover};
+  --menu-container-color: #{$black};
+  --new-files-panel-border-color: #{$gray-light-mid};
+  --new-files-panel-box-shadow: 0px 8px 16px 0px #{$box-shadow-color};
+  --new-files-panel-file-item-border-color: #{$gray-light-mid};
+  --new-files-panel-file-item-file-exst-color: #{$gray};
+}
+
+.dark {
+  --tap-highlight: #{$tap-highlight};
+  --files-drag-tooltip-background: #{$black};
+  --files-drag-tooltip-box-shadow: 0px 5px 20px #{$popup-shadow};
+  --files-drag-tooltip-color: #{$white};
+  --create-edit-room-description-color: #{$gray};
+  --menu-container-background: #{$light-dark-gray-hover};
+  --menu-container-color: #{$white};
+  --new-files-panel-border-color: #{$gray-dark-strong};
+  --new-files-panel-box-shadow: 0px 8px 16px 0px #{$box-shadow-dark-color};
+  --new-files-panel-file-item-border-color: #{$gray-dark-strong};
+  --new-files-panel-file-item-file-exst-color: #{$gray-dark};
+}
+
 .light { 
   --template-access-avatar-border: 1px solid #{$white};
   --template-access-me-label-color: #{$gray};
@@ -3192,4 +3222,14 @@
 
 .dark { 
   --embedding-panel-info-block-background: #{$dark-gray-dark};
+}
+
+.light {
+  --tfa-text-color: #{$gray};
+  --icon-error-color: #{$light-error-status};
+}
+
+.dark {
+  --tfa-text-color: #{$gray-dark};
+  --icon-error-color: #{$dark-error-status};
 }
