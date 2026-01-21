@@ -27,7 +27,10 @@
 import { filesSettingsHandler } from "./filesSettings";
 import { foldersTreeHandler } from "./foldersTree";
 import { folderHandler, folderInfoHandler } from "./folder";
-import { validatePublicRoomKeyHandler, validatePublicRoomKeyPasswordHandler } from "./validatePublicRoomKey";
+import {
+  validatePublicRoomKeyHandler,
+  validatePublicRoomKeyPasswordHandler,
+} from "./validatePublicRoomKey";
 import { validatePublicRoomPasswordHandler } from "./validatePublicRoomPassword";
 import {
   roomListHandler,
@@ -62,6 +65,10 @@ import {
   resultStorageFolderHandler,
   resultStorageFolderInfoHandler,
 } from "./resultStorageFolder";
+import {
+  defaultTemplatesHandler,
+  defaultTemplatesSetHandler,
+} from "./defaultTemplates";
 
 export { TypeFolder } from "./folder";
 export { TypeRoomList } from "./roomList";
@@ -99,6 +106,8 @@ export {
   resultStorageFolderHandler,
   resultStorageFolderInfoHandler,
   validatePublicRoomKeyPasswordHandler,
+  defaultTemplatesHandler,
+  defaultTemplatesSetHandler,
 };
 
 // Note: recentHandler, sharedWithMeHandler, favoritesHandler are NOT included here
@@ -129,4 +138,6 @@ export const filesHandlers = (port: string) => [
   getFileHandler(port),
   deleteFavoritesHandler(port),
   validatePublicRoomKeyPasswordHandler(port),
+  defaultTemplatesHandler(port),
+  defaultTemplatesSetHandler(port),
 ];
