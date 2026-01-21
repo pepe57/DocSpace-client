@@ -60,6 +60,7 @@ import {
   agentFolderChatHandler,
   agentFolderInfoHandler,
   agentFolderResultStorageHandler,
+  agentFolderKnowledgeHandler,
 } from "./agentFolder";
 import {
   resultStorageFolderHandler,
@@ -103,6 +104,7 @@ export {
   agentFolderChatHandler,
   agentFolderInfoHandler,
   agentFolderResultStorageHandler,
+  agentFolderKnowledgeHandler,
   resultStorageFolderHandler,
   resultStorageFolderInfoHandler,
   validatePublicRoomKeyPasswordHandler,
@@ -116,8 +118,9 @@ export {
 
 export const filesHandlers = (port: string) => [
   //foldersTreeHandler(port),
-  // agentFolderResultStorageHandler and agentFolderChatHandler filter by searchArea parameter
+  // agentFolderResultStorageHandler, agentFolderKnowledgeHandler and agentFolderChatHandler filter by searchArea parameter
   agentFolderResultStorageHandler(port),
+  agentFolderKnowledgeHandler(port),
   agentFolderChatHandler(port),
   resultStorageFolderHandler(port),
   rootHandler(port),
