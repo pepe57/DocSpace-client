@@ -130,13 +130,13 @@ export const TagSelectorFilter: React.FC<TagSelectorFilterProps> = ({
       {showCreateTag ? (
         <Text
           as="div"
-          className={classNames(styles.text, styles.wrapperCreateTag)}
+          className={styles.wrapperCreateTag}
           noSelect
           fontSize="12px"
           fontWeight={600}
           lineHeight="16px"
         >
-          <span>{t("Common:CreateTag")}</span>
+          <span className={styles.createTagText}>{t("Common:CreateTag")}</span>
           <Tag
             withIcon
             icon={PlusIcon}

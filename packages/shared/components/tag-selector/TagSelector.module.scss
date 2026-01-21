@@ -31,7 +31,8 @@
     .tagSelector {
       --selector-background-color: #{colors.$white};
     }
-    .text {
+    .text,
+    .createTagText {
       --text-color: #{colors.$gray};
     }
 
@@ -46,7 +47,8 @@
     .tagSelector {
       --selector-background-color: #{colors.$dark-gray-light};
     }
-    .text {
+    .text,
+    .createTagText {
       --text-color: #{colors.$gray-dark};
     }
 
@@ -116,6 +118,13 @@
   height: 30px;
   box-sizing: border-box;
 
+  padding-block: 4px 8px;
+
+  .createTagText {
+    flex-shrink: 0;
+    color: var(--text-color);
+  }
+
   .createTag {
     display: flex;
     gap: 8px;
@@ -128,7 +137,7 @@
     white-space: nowrap;
   }
 
-  .createTagIcon {
+  .createTagIcon.createTagIcon.createTagIcon {
     width: 12px;
     height: 12px;
 
