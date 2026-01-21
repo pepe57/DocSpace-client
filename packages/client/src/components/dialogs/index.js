@@ -75,6 +75,7 @@ import StorageTariffDeactiveted from "./StorageTariffDeactiveted";
 import ConnectAccountDialog from "./ConnectAccountDialog";
 import DisconnectAccountDialog from "./DisconnectAccountDialog";
 import CreateAgentDialog from "./CreateEditAgentDialog/CreateAgentDialog";
+import ResetTemplateDialog from "./ResetTemplateDialog";
 
 export {
   EmptyTrashDialog,
@@ -128,4 +129,5 @@ export {
   ConnectAccountDialog,
   DisconnectAccountDialog,
   CreateAgentDialog,
+  ResetTemplateDialog,
 };
