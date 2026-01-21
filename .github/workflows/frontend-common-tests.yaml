@@ -426,105 +426,137 @@ jobs:
             echo "✅ All tests passed."
           fi
 
-  # Unified Playwright E2E tests - builds once, runs selected tests sequentially
-  playwright-e2e:
-    name: "E2E Tests"
+  # Playwright Client tests
+  playwright-client:
+    name: "Client e2e tests"
     runs-on: ubuntu-latest
     needs: [changes, static-analysis-and-tests]
-    if: needs.changes.outputs.playwright == 'true' || needs.changes.outputs.workflow == 'true'
-    timeout-minutes: 30
-    outputs:
-      client_result: ${{ steps.e2e.outputs.client_result }}
-      login_result: ${{ steps.e2e.outputs.login_result }}
-      doceditor_result: ${{ steps.e2e.outputs.doceditor_result }}
-      sdk_result: ${{ steps.e2e.outputs.sdk_result }}
-      management_result: ${{ steps.e2e.outputs.management_result }}
+    if: needs.changes.outputs.playwright_client == 'true' || needs.changes.outputs.workflow == 'true'
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-
       - name: Cleanup existing containers
-        run: docker ps -a --filter name=docspace-e2e -q | xargs -r docker rm -f
-
-      - name: Build E2E Docker image
-        run: docker compose -f docker/e2e/compose.yaml build e2e-tests
-
-      - name: Create artifact directories
-        run: |
-          mkdir -p playwright-report
-          mkdir -p test-results
-
-      - name: Run E2E tests
-        id: e2e
-        continue-on-error: true
-        run: |
-          # Determine which tests to run based on changes
-          RUN_CLIENT="${{ needs.changes.outputs.playwright_client == 'true' || needs.changes.outputs.workflow == 'true' }}"
-          RUN_LOGIN="${{ needs.changes.outputs.playwright_login == 'true' || needs.changes.outputs.workflow == 'true' }}"
-          RUN_DOCEDITOR="${{ needs.changes.outputs.playwright_doceditor == 'true' || needs.changes.outputs.workflow == 'true' }}"
-          RUN_SDK="${{ needs.changes.outputs.playwright_sdk == 'true' || needs.changes.outputs.workflow == 'true' }}"
-          RUN_MANAGEMENT="${{ needs.changes.outputs.playwright_management == 'true' || needs.changes.outputs.workflow == 'true' }}"
-
-          echo "🎭 E2E Test Configuration:"
-          echo "  Client: $RUN_CLIENT"
-          echo "  Login: $RUN_LOGIN"
-          echo "  Doceditor: $RUN_DOCEDITOR"
-          echo "  SDK: $RUN_SDK"
-          echo "  Management: $RUN_MANAGEMENT"
-
-          # Run the unified e2e tests container
-          docker compose -f docker/e2e/compose.yaml run --rm \
-            -e CI=true \
-            -e RUN_CLIENT="$RUN_CLIENT" \
-            -e RUN_LOGIN="$RUN_LOGIN" \
-            -e RUN_DOCEDITOR="$RUN_DOCEDITOR" \
-            -e RUN_SDK="$RUN_SDK" \
-            -e RUN_MANAGEMENT="$RUN_MANAGEMENT" \
-            -e GITHUB_WORKFLOW="${{ github.workflow }}" \
-            -e GITHUB_RUN_ID="${{ github.run_id }}" \
-            -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
-            e2e-tests
-
-          # Set outputs based on what was run
-          echo "client_result=$([[ "$RUN_CLIENT" == "true" ]] && echo 'success' || echo 'skipped')" >> $GITHUB_OUTPUT
-          echo "login_result=$([[ "$RUN_LOGIN" == "true" ]] && echo 'success' || echo 'skipped')" >> $GITHUB_OUTPUT
-          echo "doceditor_result=$([[ "$RUN_DOCEDITOR" == "true" ]] && echo 'success' || echo 'skipped')" >> $GITHUB_OUTPUT
-          echo "sdk_result=$([[ "$RUN_SDK" == "true" ]] && echo 'success' || echo 'skipped')" >> $GITHUB_OUTPUT
-          echo "management_result=$([[ "$RUN_MANAGEMENT" == "true" ]] && echo 'success' || echo 'skipped')" >> $GITHUB_OUTPUT
-
-      - name: Upload Playwright Report
-        uses: actions/upload-artifact@v4
-        if: always()
+        run: docker ps -a --filter name=client-tests-ci -q | xargs -r docker rm -f
+      - uses: adambirds/docker-compose-action@v1.5.0
         with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 7
-          if-no-files-found: ignore
+          compose-file: packages/client/compose.yaml
+          up-flags: --build --force-recreate --remove-orphans
+          down-flags: --volumes --remove-orphans
+          services: tests-ci
+          test-container: tests-ci
+          test-command: pnpm exec playwright test
+          environment: |
+            CI=true
+            GITHUB_WORKFLOW=${{ github.workflow }}
+            GITHUB_RUN_ID=${{ github.run_id }}
+            GITHUB_RUN_NUMBER=${{ github.run_number }}
 
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v4
-        if: failure() || steps.e2e.outcome == 'failure'
+  # Playwright Login tests
+  playwright-login:
+    name: "Login e2e tests"
+    runs-on: ubuntu-latest
+    needs: [changes, static-analysis-and-tests, playwright-client]
+    if: always() && (needs.changes.outputs.playwright_login == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cleanup existing containers
+        run: docker ps -a --filter name=login-tests-ci -q | xargs -r docker rm -f
+      - uses: adambirds/docker-compose-action@v1.5.0
         with:
-          name: e2e-test-results
-          path: test-results/
-          retention-days: 7
-          if-no-files-found: ignore
+          compose-file: packages/login/compose.yaml
+          up-flags: --build --force-recreate --remove-orphans
+          down-flags: --volumes --remove-orphans
+          services: tests-ci
+          test-container: tests-ci
+          test-command: pnpm exec playwright test
+          environment: |
+            CI=true
+            GITHUB_WORKFLOW=${{ github.workflow }}
+            GITHUB_RUN_ID=${{ github.run_id }}
+            GITHUB_RUN_NUMBER=${{ github.run_number }}
 
-      - name: Cleanup
-        if: always()
-        run: docker compose -f docker/e2e/compose.yaml down --volumes --remove-orphans
+  # Playwright Doceditor tests
+  playwright-doceditor:
+    name: "Doceditor e2e tests"
+    runs-on: ubuntu-latest
+    needs: [changes, static-analysis-and-tests, playwright-login]
+    if: always() && (needs.changes.outputs.playwright_doceditor == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cleanup existing containers
+        run: docker ps -a --filter name=doceditor-tests-ci -q | xargs -r docker rm -f
+      - uses: adambirds/docker-compose-action@v1.5.0
+        with:
+          compose-file: packages/doceditor/compose.yaml
+          up-flags: --build --force-recreate --remove-orphans
+          down-flags: --volumes --remove-orphans
+          services: tests-ci
+          test-container: tests-ci
+          test-command: pnpm exec playwright test
+          environment: |
+            CI=true
+            GITHUB_WORKFLOW=${{ github.workflow }}
+            GITHUB_RUN_ID=${{ github.run_id }}
+            GITHUB_RUN_NUMBER=${{ github.run_number }}
 
-      - name: Check E2E test result
-        if: steps.e2e.outcome == 'failure'
-        run: |
-          echo "❌ E2E tests failed"
-          exit 1
+  # Playwright SDK tests
+  playwright-sdk:
+    name: "SDK e2e tests"
+    runs-on: ubuntu-latest
+    needs: [changes, static-analysis-and-tests, playwright-doceditor]
+    if: always() && (needs.changes.outputs.playwright_sdk == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cleanup existing containers
+        run: docker ps -a --filter name=sdk-tests-ci -q | xargs -r docker rm -f
+      - uses: adambirds/docker-compose-action@v1.5.0
+        with:
+          compose-file: packages/sdk/compose.yaml
+          up-flags: --build --force-recreate --remove-orphans
+          down-flags: --volumes --remove-orphans
+          services: tests-ci
+          test-container: tests-ci
+          test-command: pnpm exec playwright test
+          environment: |
+            CI=true
+            GITHUB_WORKFLOW=${{ github.workflow }}
+            GITHUB_RUN_ID=${{ github.run_id }}
+            GITHUB_RUN_NUMBER=${{ github.run_number }}
+
+  # Playwright Management tests
+  playwright-management:
+    name: "Management e2e tests"
+    runs-on: ubuntu-latest
+    needs: [changes, static-analysis-and-tests, playwright-sdk]
+    if: always() && (needs.changes.outputs.playwright_management == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cleanup existing containers
+        run: docker ps -a --filter name=management-tests-ci -q | xargs -r docker rm -f
+      - uses: adambirds/docker-compose-action@v1.5.0
+        with:
+          compose-file: packages/management/compose.yaml
+          up-flags: --build --force-recreate --remove-orphans
+          down-flags: --volumes --remove-orphans
+          services: tests-ci
+          test-container: tests-ci
+          test-command: pnpm exec playwright test
+          environment: |
+            CI=true
+            GITHUB_WORKFLOW=${{ github.workflow }}
+            GITHUB_RUN_ID=${{ github.run_id }}
+            GITHUB_RUN_NUMBER=${{ github.run_number }}
 
   # Summary job to report overall status
   test-summary:
     name: "Test Summary"
     runs-on: ubuntu-latest
     needs:
-      [changes, static-analysis-and-tests, playwright-e2e]
+      [changes, static-analysis-and-tests, playwright-client, playwright-login, playwright-sdk, playwright-management, playwright-doceditor]
     if: always()
     timeout-minutes: 2
     steps:
@@ -537,12 +569,11 @@ jobs:
           echo "=== DEBUG: Job Results ==="
           echo "changes.result: '${{ needs.changes.result }}'"
           echo "static-analysis-and-tests.result: '${{ needs.static-analysis-and-tests.result }}'"
-          echo "playwright-e2e.result: '${{ needs.playwright-e2e.result }}'"
-          echo "playwright-e2e client: '${{ needs.playwright-e2e.outputs.client_result }}'"
-          echo "playwright-e2e login: '${{ needs.playwright-e2e.outputs.login_result }}'"
-          echo "playwright-e2e doceditor: '${{ needs.playwright-e2e.outputs.doceditor_result }}'"
-          echo "playwright-e2e sdk: '${{ needs.playwright-e2e.outputs.sdk_result }}'"
-          echo "playwright-e2e management: '${{ needs.playwright-e2e.outputs.management_result }}'"
+          echo "playwright-client.result: '${{ needs.playwright-client.result }}'"
+          echo "playwright-login.result: '${{ needs.playwright-login.result }}'"
+          echo "playwright-sdk.result: '${{ needs.playwright-sdk.result }}'"
+          echo "playwright-management.result: '${{ needs.playwright-management.result }}'"
+          echo "playwright-doceditor.result: '${{ needs.playwright-doceditor.result }}'"
           echo "=========================="
 
           # Generate the report content line-by-line to avoid YAML parsing issues
@@ -595,12 +626,11 @@ jobs:
           echo "| **Static Analysis** | 🌐 Locales | ${{ needs.static-analysis-and-tests.outputs.locales_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.locales_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo "| **Static Analysis** | 🔒 Dependencies | ${{ needs.static-analysis-and-tests.outputs.dependencies_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.dependencies_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo "| **Static Analysis** | 📜 Licenses | ${{ needs.static-analysis-and-tests.outputs.licenses_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.licenses_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
-          echo "| **E2E Testing** | 🎭 Playwright E2E | ${{ needs.playwright-e2e.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-e2e.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
-          echo "| **E2E Testing** | 🎭 Client | ${{ needs.playwright-e2e.outputs.client_result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-e2e.outputs.client_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |" >> "$REPORT_FILE"
-          echo "| **E2E Testing** | 🎭 Login | ${{ needs.playwright-e2e.outputs.login_result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-e2e.outputs.login_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |" >> "$REPORT_FILE"
-          echo "| **E2E Testing** | 🎭 Doceditor | ${{ needs.playwright-e2e.outputs.doceditor_result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-e2e.outputs.doceditor_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |" >> "$REPORT_FILE"
-          echo "| **E2E Testing** | 🎭 SDK | ${{ needs.playwright-e2e.outputs.sdk_result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-e2e.outputs.sdk_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |" >> "$REPORT_FILE"
-          echo "| **E2E Testing** | 🎭 Management | ${{ needs.playwright-e2e.outputs.management_result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-e2e.outputs.management_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |" >> "$REPORT_FILE"
+          echo "| **E2E Testing** | 🎭 Playwright Login | ${{ needs.playwright-login.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-login.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **E2E Testing** | 🎭 Playwright Client | ${{ needs.playwright-client.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-client.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **E2E Testing** | 🎭 Playwright SDK | ${{ needs.playwright-sdk.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-sdk.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **E2E Testing** | 🎭 Playwright Management | ${{ needs.playwright-management.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-management.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **E2E Testing** | 🎭 Playwright Doceditor | ${{ needs.playwright-doceditor.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-doceditor.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo '' >> "$REPORT_FILE"
           echo '## ✅ All Tests Completed!' >> "$REPORT_FILE"
           echo '' >> "$REPORT_FILE"
