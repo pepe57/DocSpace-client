@@ -53,7 +53,7 @@ test.describe("AI result storage", () => {
     mockRequest,
     baseUrl,
   }) => {
-    mockRequest.use(agentFolderResultStorageHandler(TEST_PORT));
+    mockRequest.use(agentFolderResultStorageHandler(TEST_PORT, "empty"));
 
     await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=6`);
 
@@ -73,7 +73,7 @@ test.describe("AI result storage", () => {
     mockRequest,
     baseUrl,
   }) => {
-    mockRequest.use(agentFolderResultStorageHandler(TEST_PORT));
+    mockRequest.use(agentFolderResultStorageHandler(TEST_PORT, "empty"));
 
     await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=6`);
 
@@ -93,7 +93,7 @@ test.describe("AI result storage", () => {
     baseUrl,
   }) => {
     mockRequest.use(
-      agentFolderResultStorageHandler(TEST_PORT),
+      agentFolderResultStorageHandler(TEST_PORT, "empty"),
       agentFolderInfoHandler(TEST_PORT, "canNotUseChat"),
     );
 
@@ -112,6 +112,49 @@ test.describe("AI result storage", () => {
       "desktop",
       "ai-result-storage",
       "ai-result-storage-empty-cannot-use-chat.png",
+    ]);
+  });
+
+  test("should render result storage with files", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(agentFolderResultStorageHandler(TEST_PORT));
+
+    await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=6`);
+
+    const tableRows = page.getByTestId(/table-row-/);
+
+    await expect(tableRows).toHaveCount(3);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "ai-result-storage",
+      "ai-result-storage-with-files.png",
+    ]);
+  });
+
+  test("should render result storage with files for user that cannot use chat", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      agentFolderResultStorageHandler(TEST_PORT),
+      agentFolderInfoHandler(TEST_PORT, "canNotUseChat"),
+    );
+
+    await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=6`);
+
+    const tableRows = page.getByTestId(/table-row-/);
+
+    await expect(tableRows).toHaveCount(3);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "ai-result-storage",
+      "ai-result-storage-with-files-cannot-use-chat.png",
     ]);
   });
 });
