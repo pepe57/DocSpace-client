@@ -150,7 +150,7 @@ test.describe("AI knowledge base", () => {
       ]);
     });
 
-    test("should render knowledge files with failed vectorization and retry vectorization button", async ({
+    test("should render knowledge files with failed vectorization and ability to retry vectorization", async ({
       page,
       mockRequest,
       baseUrl,
@@ -177,9 +177,19 @@ test.describe("AI knowledge base", () => {
         "ai-knowledge",
         "ai-knowledge-vectorization-failed-can-retry.png",
       ]);
+
+      const contextBtn = tableRows.first().getByTestId("context-menu-button");
+
+      await contextBtn.click();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-knowledge",
+        "ai-knowledge-vectorization-failed-context-menu-can-retry.png",
+      ]);
     });
 
-    test("should render knowledge files with failed vectorization and without vectorization button", async ({
+    test("should render knowledge files with failed vectorization and without ability to retry vectorization", async ({
       page,
       mockRequest,
       baseUrl,
@@ -205,6 +215,16 @@ test.describe("AI knowledge base", () => {
         "desktop",
         "ai-knowledge",
         "ai-knowledge-vectorization-failed-no-retry.png",
+      ]);
+
+      const contextBtn = tableRows.first().getByTestId("context-menu-button");
+
+      await contextBtn.click();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-knowledge",
+        "ai-knowledge-vectorization-failed-context-menu-no-retry.png",
       ]);
     });
   });
