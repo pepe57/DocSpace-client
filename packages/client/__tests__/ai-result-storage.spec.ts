@@ -48,7 +48,7 @@ test.describe("AI result storage", () => {
     );
   });
 
-  test("should render default empty result storage", async ({
+  test("should render empty result storage", async ({
     page,
     mockRequest,
     baseUrl,
@@ -68,7 +68,26 @@ test.describe("AI result storage", () => {
     ]);
   });
 
-  test("should render default empty result storage (can not use chat)", async ({
+  test("should navigate to chat from empty result storage", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(agentFolderResultStorageHandler(TEST_PORT));
+
+    await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=6`);
+
+    const emptyView = await page.getByTestId("empty-view");
+
+    await expect(emptyView).toBeVisible();
+
+    const createChatBtn = emptyView.getByLabel("Create chat");
+    await createChatBtn.click();
+
+    await expect(page).toHaveURL((url) => url.pathname === "/ai-agents/2/chat");
+  });
+
+  test("should render empty result storage for user that can not use chat", async ({
     page,
     mockRequest,
     baseUrl,
