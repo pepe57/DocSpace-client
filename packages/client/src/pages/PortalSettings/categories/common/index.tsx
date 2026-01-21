@@ -40,6 +40,7 @@ import config from "PACKAGE_FILE";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import BrandingStore from "SRC_DIR/store/portal-settings/BrandingStore";
 import CommonStore from "SRC_DIR/store/CommonStore";
+import DefaultTemplatesStore from "SRC_DIR/store/portal-settings/DefaultTemplatesStore";
 
 import Customization from "./customization";
 import Branding from "./branding";
@@ -63,6 +64,7 @@ type TabsCommonProps = {
   brandingStore: BrandingStore;
   settingsStore: SettingsStore;
   common: CommonStore;
+  defaultTemplatesStore: DefaultTemplatesStore;
   clearAbortControllerArr: SettingsStore["clearAbortControllerArr"];
 };
 
@@ -79,6 +81,7 @@ const TabsCommon = (props: TabsCommonProps) => {
     brandingStore,
     settingsStore,
     common,
+    defaultTemplatesStore,
     clearAbortControllerArr,
   } = props;
   const location = useLocation();
@@ -92,9 +95,10 @@ const TabsCommon = (props: TabsCommonProps) => {
     settingsStore,
     brandingStore,
     common,
+    defaultTemplatesStore,
   });
 
-  const { getCustomizationData, getBrandingData } = useCommon(
+  const { getCustomizationData, getBrandingData, getTemplatesData } = useCommon(
     defaultProps.common,
   );
 
@@ -118,6 +122,10 @@ const TabsCommon = (props: TabsCommonProps) => {
       id: "default-templates",
       name: t("DefaultTemplates"),
       content: <DefaultTemplates />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getTemplatesData();
+      },
     },
   ];
 
@@ -178,6 +186,7 @@ export const Component = inject(
     common,
     currentTariffStatusStore,
     brandingStore,
+    defaultTemplatesStore,
   }: TStore) => {
     const { setIsLoadedSubmenu, initSettings, isLoadedSubmenu } = common;
     const { clearAbortControllerArr } = settingsStore;
@@ -199,6 +208,7 @@ export const Component = inject(
       settingsStore,
       common,
       clearAbortControllerArr,
+      defaultTemplatesStore,
     };
   },
 )(withLoading(withTranslation("Settings")(observer(TabsCommon))));

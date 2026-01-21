@@ -93,9 +93,11 @@ import BrandingStore from "./portal-settings/BrandingStore";
 import AISettingsStore from "./portal-settings/AISettingsStore";
 import CreateEditAgentStore from "./CreateEditAgentStore";
 
-const aiRoomStore = new AiRoomStore();
+import DefaultTemplatesStore from "./portal-settings/DefaultTemplatesStore";
 
 import TelegramStore from "./TelegramStore";
+
+const aiRoomStore = new AiRoomStore();
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
@@ -382,6 +384,9 @@ const editGroupStore = new EditGroupStore(peopleStore);
 const brandingStore = new BrandingStore(settingsStore);
 
 const aiSettingsStore = new AISettingsStore();
+
+const defaultTemplatesStore = new DefaultTemplatesStore();
+
 const telegramStore = new TelegramStore();
 
 const store = {
@@ -452,6 +457,7 @@ const store = {
   aiSettingsStore,
   telegramStore,
   createEditAgentStore,
+  defaultTemplatesStore,
 };
 
 export default store;

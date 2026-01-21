@@ -32,25 +32,37 @@ import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
+import moment from "moment";
 
 import { Badge } from "@docspace/shared/components/badge";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Text } from "@docspace/shared/components/text";
-import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import { TDefaultTemplateItem } from "@docspace/shared/types";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";
+import { ResetTemplateDialog } from "SRC_DIR/components/dialogs";
 
-import { TItem } from "./TemplatesRow.types";
+import { TFile } from "./TemplatesRow.types";
 import styles from "./DefaultTemplates.module.scss";
 
 type Props = {
-  item: TItem;
+  item: TDefaultTemplateItem;
   getFileIcon?: TStore["filesSettingsStore"]["getFileIcon"];
+  setTemplate?: TStore["defaultTemplatesStore"]["setTemplate"];
+  resetTemplate?: TStore["defaultTemplatesStore"]["resetTemplate"];
+  getFilterParam?: TStore["defaultTemplatesStore"]["getFilterParam"];
 };
 
-const TemplatesRow = ({ item, getFileIcon }: Props) => {
+const TemplatesRow = ({
+  item,
+  getFileIcon,
+  getFilterParam,
+  setTemplate,
+  resetTemplate,
+}: Props) => {
   const { t } = useTranslation(["Settings", "Common"]);
   const [isSelectorVisible, setIsSelectorVisible] = useState(false);
+  const [isDialogVisible, setIsDialogVisible] = useState(false);
 
   const getOptions = () => {
     const selectOption = [
@@ -69,7 +81,8 @@ const TemplatesRow = ({ item, getFileIcon }: Props) => {
         {
           key: "preview",
           label: t("Preview"),
-          onClick: () => console.log("Preview"),
+          onClick: () =>
+            window.open(`/doceditor?fileId=${item.id}&action=view`, "_blank"),
           disabled: false,
           icon: EyeIcon,
         },
@@ -80,7 +93,7 @@ const TemplatesRow = ({ item, getFileIcon }: Props) => {
         {
           key: "reset",
           label: t("Settings:ResetToDefault"),
-          onClick: () => console.log("Reset to default"),
+          onClick: () => setIsDialogVisible(true),
           disabled: false,
           icon: ResetIcon,
         },
@@ -89,14 +102,34 @@ const TemplatesRow = ({ item, getFileIcon }: Props) => {
     return selectOption;
   };
 
+  const onSelectFile = (file: TFile) => {
+    setTemplate?.(file.id, file.fileExst);
+  };
+
+  const onResetFile = () => {
+    resetTemplate?.(item.extension);
+    setIsDialogVisible(false);
+  };
+
   const icon = getFileIcon?.(item.extension);
 
   const badgeBackgroundColor = item.isModified
     ? "var(--modified-badge-active-background-color)"
     : "var(--modified-badge-background-color)";
 
+  const filterParam = getFilterParam?.(item.extension);
+
+  const lastModified = item.lastModified
+    ? moment(item.lastModified).format("MM/DD/YYYY hh:mm A")
+    : t("Settings:NotModified");
+
   return (
     <div className={styles.templateRow}>
+      <ResetTemplateDialog
+        isVisible={isDialogVisible}
+        onReset={() => onResetFile()}
+        onClose={() => setIsDialogVisible(false)}
+      />
       <ReactSVG src={icon} className={styles.icon} />
       <div className={styles.rowContent}>
         <div className={styles.titleWrapper}>
@@ -120,7 +153,7 @@ const TemplatesRow = ({ item, getFileIcon }: Props) => {
           fontWeight={600}
           truncate
         >
-          {item.modified}
+          {lastModified}
         </Text>
       </div>
       <ContextMenuButton
@@ -131,11 +164,13 @@ const TemplatesRow = ({ item, getFileIcon }: Props) => {
       {/* @ts-expect-error need pass all props */}
       <FilesSelector
         key="select-default-template-dialog"
-        filterParam={FilesSelectorFilterTypes.ALL}
+        filterParam={filterParam}
         isPanelVisible={isSelectorVisible}
-        onSelectFile={() => {}}
+        // @ts-expect-error its always be good
+        onSelectFile={(file) => onSelectFile(file)}
         onClose={() => setIsSelectorVisible(false)}
         acceptButtonLabel={t("Common:SelectAction")}
+        isMultiSelect={false}
       />
     </div>
   );

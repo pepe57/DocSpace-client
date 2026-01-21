@@ -26,46 +26,30 @@
 
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 
+import withLoading from "SRC_DIR/HOCs/withLoading";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import TemplatesRow from "./TemplatesRow";
-
-import { TItem } from "./TemplatesRow.types";
 import styles from "./DefaultTemplates.module.scss";
 
-const DefaultTemplates = () => {
-  const { t } = useTranslation("Settings");
+type Props = {
+  templates?: TStore["defaultTemplatesStore"]["templates"];
+  setTemplate?: TStore["defaultTemplatesStore"]["setTemplate"];
+  resetTemplate?: TStore["defaultTemplatesStore"]["resetTemplate"];
+  getFilterParam?: TStore["defaultTemplatesStore"]["getFilterParam"];
+};
 
-  const templates = [
-    {
-      id: "1",
-      title: "Blank Spreadsheet",
-      modified: "Not modified",
-      extension: ".xlsx",
-    },
-    {
-      id: "2",
-      title: "Blank Document",
-      isModified: true,
-      modified: "10/20/2024 12:08 PM",
-      extension: ".docx",
-    },
-    {
-      id: "3",
-      title: "Blank Form template",
-      modified: "Not modified",
-      extension: ".pdf",
-    },
-    {
-      id: "4",
-      title: "Blank Presentation",
-      modified: "Not modified",
-      extension: ".pptx",
-    },
-  ] as TItem[];
+const DefaultTemplates = ({
+  templates,
+  setTemplate,
+  resetTemplate,
+  getFilterParam,
+}: Props) => {
+  const { t } = useTranslation("Settings");
 
   useEffect(() => {
     setDocumentTitle(t("DefaultTemplates"));
@@ -76,11 +60,27 @@ const DefaultTemplates = () => {
       <Text className={styles.description}>
         {t("DefaultTemplatesDescription")}
       </Text>
-      {templates.map((item) => (
-        <TemplatesRow key={item.id} item={item} />
+      {templates?.map((item, index) => (
+        <TemplatesRow
+          key={`default-template-row-${index}`}
+          item={item}
+          getFilterParam={getFilterParam}
+          setTemplate={setTemplate}
+          resetTemplate={resetTemplate}
+        />
       ))}
     </div>
   );
 };
 
-export default DefaultTemplates;
+export default inject(({ defaultTemplatesStore }: TStore) => {
+  const { templates, setTemplate, getFilterParam, resetTemplate } =
+    defaultTemplatesStore;
+
+  return {
+    templates,
+    setTemplate,
+    getFilterParam,
+    resetTemplate,
+  };
+})(withLoading(observer(DefaultTemplates)));

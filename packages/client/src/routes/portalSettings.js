@@ -59,10 +59,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "customization/default-templates",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/common"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "customization/branding/brand-name",
