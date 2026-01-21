@@ -2636,7 +2636,7 @@ export const roomListHandler = (
     baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
-      typeof window !== "undefined" ? window.location.origin : "${BASE_URL}";
+      typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
   }
 
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_ROOMS_LIST}`, () => {
@@ -2650,7 +2650,7 @@ export const createRoomHandler = (port?: string) => {
     baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
-      typeof window !== "undefined" ? window.location.origin : "${BASE_URL}";
+      typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
   }
 
   http.post<{}, { title: string }>(

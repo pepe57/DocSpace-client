@@ -92,7 +92,7 @@ export const externalLinksHandler = (port?: string) => {
     baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
-      typeof window !== "undefined" ? window.location.origin : "${BASE_URL}";
+      typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
   }
 
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_LINKS}`, () => {
@@ -108,7 +108,7 @@ export const primaryLinkHandler = (port?: string) => {
     baseUrl = `${BASE_URL}:${port}`;
   } else {
     baseUrl =
-      typeof window !== "undefined" ? window.location.origin : "${BASE_URL}";
+      typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
   }
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_LINK}`, () => {
     const response = generateFileLink({

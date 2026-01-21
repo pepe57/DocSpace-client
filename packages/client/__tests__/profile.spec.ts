@@ -108,7 +108,6 @@ test.describe("Profile", () => {
     mockRequest,
     baseUrl,
   }) => {
-    // await mockRequest.router([endpoints.tfaAppSettingsEnabled, endpoints.tfaAppCodes]);
     mockRequest.use(
       tfaAppSettingsHandler(TEST_PORT, true),
       tfaAppCodesHandler(TEST_PORT),

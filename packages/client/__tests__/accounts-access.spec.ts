@@ -113,8 +113,8 @@ test.describe("Accounts Access Control", () => {
   }) => {
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "regular"),
-      peopleListAccessDeniedHandler(TEST_PORT),
-    ); // Return 403 for people list
+      peopleListAccessDeniedHandler(TEST_PORT), // Return 403 for people list
+    );
 
     await page.goto(`${baseUrl}/accounts/people/filter`);
 

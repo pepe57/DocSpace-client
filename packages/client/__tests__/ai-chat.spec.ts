@@ -73,12 +73,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChat,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -107,15 +101,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // mockRequest.use([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChat,
-
-      //   endpoints.aiConfigDisabled,
-      //   endpoints.aiProvidersEmptyList,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -152,14 +137,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiConfigDisabled,
-      //   endpoints.aiProvidersEmptyList,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -198,15 +175,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessages,
-      //   endpoints.aiConfigDisabled,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -255,14 +223,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessages,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -293,14 +253,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   agentFolderChatHandler(TEST_PORT),
-      //   aiChatHandler(TEST_PORT),
-      //   aiChatMessagesHandler(TEST_PORT, "baseElements"),
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -330,14 +282,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessagesCodeBlock,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -367,14 +311,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessagesTable,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -404,14 +340,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessagesWebSearch,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -444,14 +372,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessagesWebSearchError,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -484,14 +404,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessagesWebCrawling,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -522,14 +434,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessagesWebCrawlingError,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -562,14 +466,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessagesKnowledgeSearch,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -602,14 +498,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessagesKnowledgeSearchError,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -642,14 +530,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessagesMcpTool,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -682,14 +562,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessagesMany,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -719,16 +591,7 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChatCanNotUseChat,
-      //   endpoints.agentFolderResultStorageCanNotUseChat,
-      //   endpoints.agentFolderInfoCanNotUseChat,
-      // ]);
       mockRequest.use(
-        //  rootHandler(TEST_PORT),
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
         aiRoomsChatsHandler(TEST_PORT, "empty"),
@@ -767,14 +630,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessages,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -829,14 +684,6 @@ test.describe("AI chat", () => {
     });
 
     test("should delete chat", async ({ page, mockRequest, baseUrl }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessages,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -897,14 +744,6 @@ test.describe("AI chat", () => {
     });
 
     test("should rename chat", async ({ page, mockRequest, baseUrl }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.updateAiChat,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -973,15 +812,6 @@ test.describe("AI chat", () => {
       wsMock,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.exportAiChatToFile,
-      //   endpoints.settingsWithSocket,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -1001,13 +831,6 @@ test.describe("AI chat", () => {
 
       await expect(containerLoader).toBeVisible();
       await containerLoader.waitFor({ state: "hidden" });
-
-      // await page.unroute(endpoints.agentFolderChat.url);
-
-      // await mockRequest.router([
-      //   endpoints.resultStorageFolder,
-      //   endpoints.resultStorageFolderInfo,
-      // ]);
 
       mockRequest.use(
         agentFolderResultStorageHandler(TEST_PORT),
@@ -1070,16 +893,6 @@ test.describe("AI chat", () => {
       mockRequest,
       wsMock,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.exportAiMessageToFile,
-      //   endpoints.settingsWithSocket,
-      //   endpoints.aiChatMessages,
-      // ]);
       mockRequest.use(
         settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
         aiRoomsChatsConfigHandler(TEST_PORT),
@@ -1099,13 +912,6 @@ test.describe("AI chat", () => {
 
       await expect(containerLoader).toBeVisible();
       await containerLoader.waitFor({ state: "hidden" });
-
-      //await page.unroute(endpoints.agentFolderChat.url);
-
-      // await mockRequest.router([
-      //   endpoints.resultStorageFolder,
-      //   endpoints.resultStorageFolderInfo,
-      // ]);
 
       mockRequest.use(
         agentFolderResultStorageHandler(TEST_PORT),
@@ -1143,13 +949,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -1182,16 +981,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      //await page.unroute(endpoints.aiConfig.url);
-
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiConfigWebSearchDisabled,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -1234,13 +1023,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -1262,7 +1044,6 @@ test.describe("AI chat", () => {
 
       await expect(selector).toBeVisible();
 
-      //await mockRequest.router([endpoints.favorites]);
       mockRequest.use(favoritesHandler(TEST_PORT));
 
       const favoritesOption = selector.getByTestId(/selector-item/).filter({
@@ -1296,14 +1077,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiRoomsChatsStream,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -1364,14 +1137,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiRoomsChatsStreamMcpNeedApprove,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -1416,15 +1181,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.agentFolderResultStorage,
-      //   endpoints.agentFolderInfo,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -1493,13 +1249,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -1570,14 +1319,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChatsEmpty,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiConfigDisabled,
-      //   endpoints.aiProvidersEmptyList,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -1608,14 +1349,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // mockRequest.use([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiConfigDisabled,
-      //   endpoints.aiProvidersEmptyList,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -1648,15 +1381,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiChatMessages,
-      //   endpoints.aiConfigDisabled,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
@@ -1705,16 +1429,6 @@ test.describe("AI chat", () => {
       mockRequest,
       baseUrl,
     }) => {
-      //await page.unroute(endpoints.aiConfig.url);
-
-      // await mockRequest.router([
-      //   endpoints.aiRoomsChatsConfigAllEnabled,
-      //   endpoints.aiRoomsServersEmpty,
-      //   endpoints.aiRoomsChats,
-      //   endpoints.agentFolderChat,
-      //   endpoints.aiChat,
-      //   endpoints.aiConfigWebSearchDisabled,
-      // ]);
       mockRequest.use(
         aiRoomsChatsConfigHandler(TEST_PORT),
         aiRoomsServersHandler(TEST_PORT),
