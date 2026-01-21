@@ -84,6 +84,11 @@ test.describe("AI result storage", () => {
 
     await expect(emptyView).toBeVisible();
 
+    const infoToast = await page.getByTestId("toast-content");
+
+    await expect(infoToast).toBeVisible();
+    await expect(infoToast).toContainText("Info");
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "ai-result-storage",
