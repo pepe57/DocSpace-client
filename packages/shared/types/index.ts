@@ -341,3 +341,11 @@ declare global {
   export type SeparatorType =
     import("../components/context-menu/ContextMenu.types").SeparatorType;
 }
+
+export type TDefaultTemplateItem = {
+  id: number | null;
+  title?: string;
+  isModified?: boolean;
+  lastModified?: string;
+  extension: string;
+};
