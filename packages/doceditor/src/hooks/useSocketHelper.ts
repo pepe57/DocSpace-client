@@ -85,7 +85,10 @@ const useSocketHelper = ({
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "tenant-quota",
     });
-
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "QUOTA",
+      individual: true,
+    });
     const callback = async () => {
       try {
         // const message = t("Common:PreparationPortalTitle");

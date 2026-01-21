@@ -174,6 +174,10 @@ const Editor = ({
 
     SocketHelper?.on(SocketEvents.QuotaExceeded, handleQuotaChange);
 
+    SocketHelper?.on(SocketEvents.ChangedQuotaUserUsedValue, (options) => {
+      console.log(`[WS] change-user-quota-used-value`, options);
+    });
+
     return () => {
       SocketHelper?.off(SocketEvents.QuotaExceeded, handleQuotaChange);
     };
