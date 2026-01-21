@@ -30,7 +30,7 @@ import { useId } from "react";
 import classNames from "classnames";
 
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
-import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import LoadErrorIcon from "PUBLIC_DIR/images/load.error.react.svg";
 

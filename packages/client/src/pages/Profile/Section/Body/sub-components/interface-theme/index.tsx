@@ -28,7 +28,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { toastr } from "@docspace/shared/components/toast";
@@ -112,7 +112,10 @@ const InterfaceTheme = (props: InterfaceThemeProps) => {
     : t("Profile:SystemThemeDescription");
 
   return (
-    <div className={styles.interfaceTheme} data-testid="profile-interface-theme">
+    <div
+      className={styles.interfaceTheme}
+      data-testid="profile-interface-theme"
+    >
       <div>
         <Checkbox
           className={styles.systemThemeCheckbox}

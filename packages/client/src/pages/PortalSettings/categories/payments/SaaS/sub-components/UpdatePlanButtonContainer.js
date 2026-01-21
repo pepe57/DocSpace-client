@@ -37,7 +37,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { updatePayment } from "@docspace/shared/api/portal";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
 import ChangePricingPlanDialog from "../../../../../../components/dialogs/ChangePricingPlanDialog";

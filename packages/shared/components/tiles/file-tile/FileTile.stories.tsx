@@ -30,7 +30,7 @@ import { ReactSVG } from "react-svg";
 import File32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
 import ImageReactSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.light.svg?url";
 import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
-import { Link } from "../../link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { Badge } from "../../badge";
 import { IconSizeType } from "../../../utils";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";

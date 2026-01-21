@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { TextProps } from "../text/Text.types";
+import type { TextProps } from "@docspace/ui-kit/components/text";
 
 export type BadgeProps = TextProps & {
   /** Ref to access the DOM element or React component instance */

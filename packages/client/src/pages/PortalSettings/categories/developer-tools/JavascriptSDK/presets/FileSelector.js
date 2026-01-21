@@ -35,7 +35,7 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Label } from "@docspace/ui-kit/components/label";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { FilterType, FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { getSdkScriptUrl, loadScript } from "@docspace/shared/utils/common";
 

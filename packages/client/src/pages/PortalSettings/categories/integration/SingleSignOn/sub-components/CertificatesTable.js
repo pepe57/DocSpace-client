@@ -33,7 +33,7 @@ import { useTranslation } from "react-i18next";
 import moment from "moment-timezone";
 import { ReactSVG } from "react-svg";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 
 import StyledCertificatesTable from "../styled-containers/StyledCertificatesTable";

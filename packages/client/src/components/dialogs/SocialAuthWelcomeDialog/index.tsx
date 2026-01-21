@@ -10,8 +10,8 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Badge } from "@docspace/shared/components/badge";
 import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkType } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/shared/themes";
 import WelcomeAuthSocial from "PUBLIC_DIR/images/welcome-social_auth.svg?url";

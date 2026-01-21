@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 import moment from "moment";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { calcalateWalletPayment } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";

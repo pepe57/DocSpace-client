@@ -29,8 +29,8 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { inject, observer } from "mobx-react";
 
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";

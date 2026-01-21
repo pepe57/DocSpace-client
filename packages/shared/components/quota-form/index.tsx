@@ -42,7 +42,7 @@ import {
 import { TextInput, InputType } from "../text-input";
 import { ComboBox, ComboBoxSize, TOption } from "../combobox";
 import { SaveCancelButtons } from "../save-cancel-buttons";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "../checkbox";
 import { TTranslation } from "../../types";
 

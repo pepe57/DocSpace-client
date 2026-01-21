@@ -46,7 +46,7 @@ import { GENERAL_LINK_HEADER_KEY } from "../../../constants";
 import { useEventListener } from "../../../hooks/useEventListener";
 import type { TUser } from "../../../api/people/types";
 
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import ScrollbarContext from "../../scrollbar/custom-scrollbar/ScrollbarContext";
 
 import styles from "../Share.module.scss";

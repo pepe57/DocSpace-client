@@ -29,7 +29,7 @@ import React from "react";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
 
 import { AccessRightSelect } from "../../../components/access-right-select";
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { isMobile } from "../../../utils";
 import { DeviceType } from "../../../enums";
 import type { TOption } from "../../../components/combobox";

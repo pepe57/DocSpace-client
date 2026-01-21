@@ -33,7 +33,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { EmailInput, TValidate } from "@docspace/shared/components/email-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { InputSize } from "@docspace/shared/components/text-input";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 type EmailInputFormProps = {
   ref: Ref<HTMLInputElement>;

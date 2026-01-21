@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { RadioButton } from "@docspace/shared/components/radio-button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 const ConnectionType = Object.freeze({
   Unencrypted: 1,

@@ -31,7 +31,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getSaasBar, getEnterpriseBar, checkBar } from "./helpers";
 
 const StyledWrapper = styled.div`

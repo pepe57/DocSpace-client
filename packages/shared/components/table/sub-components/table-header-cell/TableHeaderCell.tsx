@@ -30,7 +30,7 @@ import classNames from "classnames";
 import SortDescReactSvgUrl from "PUBLIC_DIR/images/sort.desc.react.svg?url";
 
 import { Checkbox } from "../../../checkbox";
-import { Text } from "../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../../../icon-button";
 import { globalColors } from "../../../../themes";
 

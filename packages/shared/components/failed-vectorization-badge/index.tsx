@@ -32,9 +32,9 @@ import { useTranslation } from "react-i18next";
 
 import { IconButton } from "../icon-button";
 import { classNames } from "../../utils";
-import { Tooltip } from "../tooltip";
-import { Link, LinkType } from "../link";
-import { Text } from "../text";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 import ButtonAlertIconSvgUrl from "PUBLIC_DIR/images/button.alert.react.svg?url";
 import LoadErrorIconSvgUrl from "PUBLIC_DIR/images/load.error.react.svg?url";
 

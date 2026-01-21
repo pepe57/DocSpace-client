@@ -30,7 +30,7 @@ import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import classNames from "classnames";
 
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../icon-button";
 
 import styles from "./PublicRoomBar.module.scss";

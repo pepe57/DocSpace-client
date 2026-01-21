@@ -34,7 +34,7 @@ import {
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { EmailInput } from "@docspace/shared/components/email-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 const DialogBodyWrapper = styled.div`
   display: flex;

@@ -30,7 +30,7 @@ import VerticalDotsReactSvg from "PUBLIC_DIR/images/icons/17/vertical-dots.react
 
 import { IconButton } from "../../icon-button";
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
-import { TooltipContainer } from "../../tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import { TContextButtonProps } from "../Navigation.types";
 

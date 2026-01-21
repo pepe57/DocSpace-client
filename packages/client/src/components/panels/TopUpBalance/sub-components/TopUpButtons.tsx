@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { saveDeposite } from "@docspace/shared/api/portal";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { useAmountValue } from "../../../../pages/PortalSettings/categories/payments/Wallet/context";
 import styles from "../styles/TopUpModal.module.scss";

@@ -32,7 +32,7 @@ import { TFunction } from "i18next";
 import classNames from "classnames";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { PasswordInput } from "../../../components/password-input";
 import { Button, ButtonSize } from "../../../components/button";
 import { FieldContainer } from "../../../components/field-container";

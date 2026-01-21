@@ -33,7 +33,7 @@ import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
 import { SocialButton } from "@docspace/shared/components/social-button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { globalColors } from "@docspace/shared/themes";

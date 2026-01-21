@@ -38,13 +38,13 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { getCorrectDate } from "@docspace/shared/utils";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 

@@ -64,7 +64,7 @@ import { ButtonKeys } from "@docspace/shared/enums";
 import { TValidate } from "@docspace/shared/components/email-input";
 import { TCreateUserData, TError } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { login, thirdPartyLogin } from "@docspace/shared/api/user";
 import {
   createUser,

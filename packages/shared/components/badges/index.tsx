@@ -48,9 +48,9 @@ import { isMobile as isMobileDevice } from "react-device-detect";
 
 import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 
-import { Tooltip } from "../tooltip";
-import { Text } from "../text";
-import { Link, LinkTarget, LinkType } from "../link";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { Badge } from "../badge";
 
 import { RoomsType, ShareAccessRights, VectorizationStatus } from "../../enums";

@@ -39,7 +39,7 @@ import { useTheme } from "styled-components";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { Scrollbar as CustomScrollbar } from "@docspace/shared/components/scrollbar/custom-scrollbar";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
-import { Link, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import type OformsFilter from "@docspace/shared/api/oforms/filter";
 import type { Category } from "../Filter/CategoryFilter/CategoryFilter.types";

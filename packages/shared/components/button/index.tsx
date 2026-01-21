@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Button as ButtonBase } from "./Button";
-import { withTooltip } from "../tooltip";
+import { withTooltip } from "@docspace/ui-kit/components/tooltip";
 export type { ButtonProps } from "./Button.types";
 export { ButtonSize } from "./Button.enums";
 

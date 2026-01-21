@@ -38,7 +38,7 @@ import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url
 import { IconSizeType } from "../../../utils/common-icons-style";
 import { getCookie } from "../../../utils/cookie";
 
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../../icon-button";
 
 import { ToastType } from "../Toast.enums";

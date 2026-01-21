@@ -34,8 +34,8 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { type TData, toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";

@@ -30,7 +30,7 @@ import { withTranslation } from "react-i18next";
 import { useMemo, useState, useCallback, useEffect, useRef } from "react";
 
 import { Avatar } from "@docspace/shared/components/avatar";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { toastr } from "@docspace/shared/components/toast";

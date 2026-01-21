@@ -28,7 +28,7 @@ import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 
-import { Link, LinkType } from "../../link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { RowContent } from ".";
 import { globalColors } from "../../../themes";
 import styles from "./RowContent.module.scss";

@@ -33,8 +33,8 @@ import { RoomsType } from "../../enums";
 
 import { RoomLogo } from "../room-logo";
 import { IconButton } from "../icon-button";
-import { Text } from "../text";
-import { TooltipContainer } from "../tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import {
   getRoomTypeDescriptionTranslation,

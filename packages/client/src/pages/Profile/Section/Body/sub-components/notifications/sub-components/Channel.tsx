@@ -33,8 +33,8 @@ import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkType, LinkTarget } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkType, LinkTarget } from "@docspace/ui-kit/components/link";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
 

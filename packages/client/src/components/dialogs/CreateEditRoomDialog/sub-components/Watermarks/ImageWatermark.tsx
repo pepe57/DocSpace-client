@@ -53,7 +53,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { FileInput } from "@docspace/shared/components/file-input";

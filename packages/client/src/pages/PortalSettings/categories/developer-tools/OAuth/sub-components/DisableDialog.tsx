@@ -33,7 +33,7 @@ import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalD
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 

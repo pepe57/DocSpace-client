@@ -26,7 +26,7 @@
 
 import React from "react";
 import { useTheme } from "styled-components";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { StyledLoadErrorIcon } from "./StyledComponents";
 
 const ErrorFile = ({

@@ -31,7 +31,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "../checkbox";
 import { ComboBox, TOption } from "../combobox";
 import { InputSize, InputType, TextInput } from "../text-input";

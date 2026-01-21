@@ -32,7 +32,7 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
 import { RectangleSkeleton } from "../../skeletons/rectangle";
 import { IconButton } from "../icon-button";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Heading, HeadingSize } from "../heading";
 
 import { AsideHeaderProps } from "./AsideHeader.types";

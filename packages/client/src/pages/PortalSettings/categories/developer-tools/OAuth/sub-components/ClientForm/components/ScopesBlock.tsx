@@ -38,7 +38,7 @@ import {
 } from "@docspace/shared/utils/oauth";
 import { ScopeGroup, ScopeType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { globalColors } from "@docspace/shared/themes";
 

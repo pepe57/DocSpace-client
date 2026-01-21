@@ -30,7 +30,7 @@ import React, { startTransition, useOptimistic } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import { EmployeeType, FolderType } from "@docspace/shared/enums";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";

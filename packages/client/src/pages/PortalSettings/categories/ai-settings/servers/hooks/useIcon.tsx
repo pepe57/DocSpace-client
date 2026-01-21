@@ -33,7 +33,7 @@ import { SelectorAddButton } from "@docspace/shared/components/selector-add-butt
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import { ONE_MEGABYTE } from "@docspace/shared/constants";
-import { Link, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 import styles from "../styles/AddEditDialog.module.scss";
 

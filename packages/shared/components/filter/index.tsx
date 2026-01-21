@@ -31,7 +31,7 @@ import classNames from "classnames";
 import { DeviceType, FilterGroups } from "../../enums";
 
 import { TViewSelectorOption, ViewSelector } from "../view-selector";
-import { Link, LinkType } from "../link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { SelectedItem } from "../selected-item";
 
 import FilterButton from "./sub-components/FilterButton";

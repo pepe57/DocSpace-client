@@ -30,7 +30,7 @@ import classNames from "classnames";
 import styles from "../Filter.module.scss";
 
 import { IconButton } from "../../icon-button";
-import { TooltipContainer } from "../../tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 type FilterIconProps = {
   onClick: () => void;

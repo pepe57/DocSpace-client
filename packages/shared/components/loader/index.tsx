@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { Oval } from "./sub-components/Oval";
 import { DualRing } from "./sub-components/DualRing";

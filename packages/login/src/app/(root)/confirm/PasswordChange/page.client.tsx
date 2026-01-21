@@ -32,7 +32,7 @@ import { useTranslation } from "react-i18next";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { PasswordInput } from "@docspace/shared/components/password-input";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { createPasswordHash } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";

@@ -37,9 +37,9 @@ import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
 import { isIconSizeType } from "../../utils";
-import { isDesktop } from "../../utils/device";
+import { isDesktop } from "@docspace/ui-kit/utils/device";
 
-import { Tooltip, TooltipContainer } from "../tooltip";
+import { Tooltip, TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "./IconButton.module.scss";
 import { IconButtonProps } from "./IconButton.types";

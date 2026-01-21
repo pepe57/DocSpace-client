@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 import hexRgb from "hex-rgb";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getTextColor } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 import { CustomLogoProps, ICover } from "../RoomLogoCoverDialog.types";

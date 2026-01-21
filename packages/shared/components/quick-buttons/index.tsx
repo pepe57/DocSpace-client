@@ -49,8 +49,8 @@ import {
   ShareAccessRights,
   VectorizationStatus,
 } from "../../enums";
-import { Tooltip } from "../tooltip";
-import { Text } from "../text";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getDate, isExpired } from "../share/Share.helpers";
 import { IconButton } from "../icon-button";
 import { isRoom } from "../../utils/typeGuards";

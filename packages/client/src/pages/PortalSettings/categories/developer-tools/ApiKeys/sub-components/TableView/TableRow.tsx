@@ -31,7 +31,7 @@ import {
   TableRow as TableRowComponent,
   TableCell,
 } from "@docspace/shared/components/table";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import {
   Avatar,

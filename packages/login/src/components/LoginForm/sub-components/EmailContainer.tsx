@@ -29,8 +29,8 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { EmailInput } from "@docspace/shared/components/email-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkType } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import {
   InputSize,

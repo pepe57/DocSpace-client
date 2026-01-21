@@ -36,9 +36,9 @@ import { classNames } from "../../../utils";
 import { RoomsType } from "../../../enums";
 
 import { Heading } from "../../heading";
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../../icon-button";
-import { Link, LinkType } from "../../link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 import useCreateDropDown from "../hooks/useCreateDropDown";
 import { EmptyScreenContext } from "../contexts/EmptyScreen";

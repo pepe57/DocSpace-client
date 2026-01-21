@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 

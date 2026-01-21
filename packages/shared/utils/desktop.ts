@@ -33,7 +33,7 @@ import { TUser } from "../api/people/types";
 import { ThemeKeys } from "../enums";
 
 import { desktopConstants, getEditorTheme } from "./common";
-import { checkIsSSR } from "./device";
+import { checkIsSSR } from "@docspace/ui-kit/utils/device";
 
 const isSSR = checkIsSSR();
 

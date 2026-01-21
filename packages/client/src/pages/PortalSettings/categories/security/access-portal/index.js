@@ -33,7 +33,7 @@ import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettings
 import { inject, observer } from "mobx-react";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
-import { isDesktop } from "@docspace/shared/utils/device";
+import { isDesktop } from "@docspace/ui-kit/utils/device";
 import { MainContainer } from "../StyledSecurity";
 import { TfaSection } from "./tfa";
 import { PasswordStrengthSection } from "./passwordStrength";

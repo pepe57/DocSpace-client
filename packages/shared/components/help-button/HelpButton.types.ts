@@ -3,7 +3,7 @@ import {
   TTooltipPlace,
   TooltipProps,
   TGetTooltipContent,
-} from "../tooltip/Tooltip.types";
+} from "@docspace/ui-kit/components/tooltip";
 
 export type HelpButtonProps = Omit<IconButtonProps, "tooltipContent"> & {
   /** Displays the child elements */

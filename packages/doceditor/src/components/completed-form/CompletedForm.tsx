@@ -37,7 +37,7 @@ import LinkIconUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import MailIcon from "PUBLIC_DIR/images/icons/12/mail.svg";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
@@ -130,7 +130,11 @@ export const CompletedForm = ({
   } as React.CSSProperties;
 
   return (
-    <section className={styles.container} style={bgBlockStyle} data-testid="completed_form_container">
+    <section
+      className={styles.container}
+      style={bgBlockStyle}
+      data-testid="completed_form_container"
+    >
       <Scrollbar fixedSize>
         <div className={styles.completedFormLayout}>
           <picture className="completed-form__logo">

@@ -28,7 +28,7 @@ import React from "react";
 import classNames from "classnames";
 
 import { isTablet } from "../../utils";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "./EmptyScreenContainer.module.scss";
 

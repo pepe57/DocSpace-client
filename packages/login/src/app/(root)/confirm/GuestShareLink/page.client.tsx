@@ -30,7 +30,7 @@ import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 

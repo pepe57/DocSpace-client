@@ -33,7 +33,7 @@ import { Nullable } from "../../../types";
 import { globalColors } from "../../../themes";
 
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Badge } from "../../../components/badge";
 import { FieldContainer } from "../../../components/field-container";
 import {

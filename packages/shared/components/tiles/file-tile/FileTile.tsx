@@ -34,7 +34,7 @@ import {
 } from "../../context-menu-button";
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import { HeaderType } from "../../context-menu/ContextMenu.types";
-import { Link, LinkType } from "../../link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Loader, LoaderTypes } from "../../loader";
 import { hasOwnProperty } from "../../../utils/object";
 import { isMobile, classNames, isTablet } from "../../../utils";

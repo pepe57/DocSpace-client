@@ -29,8 +29,8 @@
 import { useContext, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";

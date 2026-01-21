@@ -36,7 +36,7 @@ import {
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { toastr } from "@docspace/shared/components/toast";
-import { LinkType } from "@docspace/shared/components/link";
+import { LinkType } from "@docspace/ui-kit/components/link";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList } from "@docspace/shared/api/people";

@@ -28,9 +28,9 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { TableCell } from "@docspace/shared/components/table";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   Avatar,
   AvatarRole,

@@ -97,7 +97,7 @@ import TopLoaderService from "../components/top-loading-indicator";
 import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "./cookie";
-import { checkIsSSR } from "./device";
+import { checkIsSSR } from "@docspace/ui-kit/utils/device";
 
 import { hasOwnProperty } from "./object";
 import { TFrameConfig } from "../types/Frame";

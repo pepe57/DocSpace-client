@@ -28,7 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   AI_TOOLS,
   BACKUP_SERVICE,
@@ -38,7 +38,7 @@ import {
   calculateTotalPrice,
   getConvertedSize,
 } from "@docspace/shared/utils/common";
-import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { DeviceType } from "@docspace/shared/enums";
 
 import CheckIcon from "PUBLIC_DIR/images/icons/16/check.round.react.svg";

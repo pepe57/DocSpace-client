@@ -32,7 +32,7 @@ import { RoomsType } from "../../../enums";
 import { Nullable } from "../../../types";
 import styles from "../Selector.module.scss";
 import { Scrollbar } from "../../scrollbar";
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { SearchContext, SearchValueContext } from "../contexts/Search";
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";

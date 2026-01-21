@@ -30,12 +30,12 @@ import { useTranslation, Trans } from "react-i18next";
 
 import classNames from "classnames";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { TColorScheme } from "@docspace/shared/themes";
 
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";

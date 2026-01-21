@@ -33,7 +33,7 @@ import LifetimeLicenseReactSvgUrl from "PUBLIC_DIR/images/lifetime_license.react
 import TechSupportReactSvgUrl from "PUBLIC_DIR/images/tech_support.react.svg?url";
 import MobileEditingReactSvgUrl from "PUBLIC_DIR/images/mobile_editing.react.svg?url";
 import ScalabilityReactSvgUrl from "PUBLIC_DIR/images/scalability.react.svg?url";
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "./BenefitsContainer.module.scss";
 import type { TBenefitsContainerProps } from "./BenefitsContainer.types";

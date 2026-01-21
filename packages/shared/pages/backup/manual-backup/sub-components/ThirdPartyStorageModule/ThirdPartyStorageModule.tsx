@@ -32,7 +32,7 @@ import classNames from "classnames";
 
 import LockedReactSvg from "PUBLIC_DIR/images/icons/16/locked.react.svg";
 
-import { Text } from "../../../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { ComboBox } from "../../../../../components/combobox";
 import { DropDownItem } from "../../../../../components/drop-down-item";
 import { BackupStorageType, ThirdPartyStorages } from "../../../../../enums";

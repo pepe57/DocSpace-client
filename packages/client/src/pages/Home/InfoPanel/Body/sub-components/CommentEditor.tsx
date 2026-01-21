@@ -33,7 +33,7 @@ import { TFile } from "@docspace/shared/api/files/types";
 import { toastr } from "@docspace/shared/components/toast";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";

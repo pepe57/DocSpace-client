@@ -32,7 +32,7 @@ import { ReactSVG } from "react-svg";
 import classnames from "classnames";
 
 import { RowContent as RowContentComponents } from "@docspace/shared/components/rows";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
 import { useTheme } from "@docspace/shared/hooks/useTheme";

@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 import ArticleHideMenuReactSvgUrl from "PUBLIC_DIR/images/article-hide-menu.react.svg?url";
 import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.react.svg?url";
 
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "../Article.module.scss";
 import { ArticleHideMenuButtonProps } from "../Article.types";

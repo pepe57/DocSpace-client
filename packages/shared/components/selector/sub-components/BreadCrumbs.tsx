@@ -42,7 +42,7 @@ import {
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 import { SearchDispatchContext } from "../contexts/Search";
 import styles from "../Selector.module.scss";
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
 const calculateDisplayedItems = (

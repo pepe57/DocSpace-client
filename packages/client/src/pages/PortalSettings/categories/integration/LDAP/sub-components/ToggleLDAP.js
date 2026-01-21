@@ -28,7 +28,7 @@ import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";

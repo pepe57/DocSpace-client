@@ -47,7 +47,7 @@ import type { TData } from "@docspace/shared/components/toast/Toast.type";
 
 import { saveAs } from "@/utils";
 import type { ConflictStateType } from "@/types";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 
 type SuccessResponse = `${string}form:${string}`;
 type FailedResponseType = string;

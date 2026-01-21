@@ -28,7 +28,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import moment from "moment-timezone";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { useTranslation } from "react-i18next";
 import { DatePicker } from "@docspace/shared/components/date-picker";
 import { Calendar } from "@docspace/shared/components/calendar";

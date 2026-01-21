@@ -35,7 +35,7 @@ import AvatarDarkReactSvgUrl from "PUBLIC_DIR/images/avatar.dark.react.svg?url";
 
 import RoleHistories from "../role-histories/RoleHistories";
 import { useTheme } from "../../../../hooks/useTheme";
-import { TooltipContainer } from "../../../../components/tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "./RoleStep.module.scss";
 import type { RoleStepProps } from "./RoleStep.types";

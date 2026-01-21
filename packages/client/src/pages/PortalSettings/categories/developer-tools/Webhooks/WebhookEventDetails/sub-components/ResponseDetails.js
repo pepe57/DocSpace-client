@@ -32,7 +32,7 @@ import json_beautifier from "csvjson-json_beautifier";
 
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { isMobile } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
@@ -74,12 +74,14 @@ const LargePayloadStub = styled.div`
   border: ${(props) => props.theme.client.settings.webhooks.border};
   border-radius: 3px;
 
-  ${isMobile() &&
-  css`
+  ${
+    isMobile() &&
+    css`
     justify-content: flex-start;
     flex-wrap: wrap;
     row-gap: 16px;
-  `}
+  `
+  }
 `;
 
 const ResponseDetails = ({ eventDetails }) => {

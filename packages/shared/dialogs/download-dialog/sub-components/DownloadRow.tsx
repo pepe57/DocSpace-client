@@ -27,7 +27,7 @@
  */
 
 import { LinkWithDropdown } from "../../../components/link-with-dropdown";
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "../../../components/checkbox";
 import { isMobile } from "../../../utils";
 

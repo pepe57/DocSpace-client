@@ -32,7 +32,7 @@ import classNames from "classnames";
 import CrossIconSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
 import { Button, ButtonSize } from "../button";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../icon-button";
 import { globalColors } from "../../themes";
 

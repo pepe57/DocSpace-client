@@ -28,7 +28,7 @@ import { useState, useCallback, ReactNode, useEffect } from "react";
 import { Label } from "@docspace/ui-kit/components/label";
 import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { ControlsGroup, LabelGroup } from "../presets/StyledPresets";
 

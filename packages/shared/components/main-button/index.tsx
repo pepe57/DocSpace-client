@@ -29,12 +29,12 @@ import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
 import { GuidanceRefKey } from "../guidance/sub-components/Guid.types";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { ContextMenu } from "../context-menu";
 import { MainButtonProps } from "./MainButton.types";
 import styles from "./MainButton.module.scss";
 import { ContextMenuRefType } from "../context-menu/ContextMenu.types";
-import { TooltipContainer } from "../tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 const MainButton = (props: MainButtonProps) => {
   const {

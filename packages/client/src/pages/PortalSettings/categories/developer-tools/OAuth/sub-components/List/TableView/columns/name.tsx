@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { TableCell } from "@docspace/shared/components/table";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";

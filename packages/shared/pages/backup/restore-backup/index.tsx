@@ -36,7 +36,7 @@ import SocketHelper, {
   TSocketListener,
 } from "../../../utils/socket";
 
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "../../../components/checkbox";
 import { BackupStorageType, FilesSelectorFilterTypes } from "../../../enums";
 import RestoreBackupLoader from "../../../skeletons/backup/RestoreBackup";

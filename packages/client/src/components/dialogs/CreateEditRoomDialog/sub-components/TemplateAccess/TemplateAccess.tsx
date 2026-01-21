@@ -31,8 +31,8 @@ import {
   AvatarSize,
 } from "@docspace/shared/components/avatar";
 import { TCreatedBy, TTranslation } from "@docspace/shared/types";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkType } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";

@@ -33,7 +33,7 @@ import { validateTfaCode } from "@docspace/shared/api/settings";
 import { checkConfirmLink } from "@docspace/shared/api/user";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
   InputSize,

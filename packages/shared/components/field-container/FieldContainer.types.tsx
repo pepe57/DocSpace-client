@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ReactNode, CSSProperties } from "react";
-import { TTooltipPlace } from "../tooltip";
+import { TTooltipPlace } from "@docspace/ui-kit/components/tooltip";
 
 export type FieldContainerProps = {
   /** Vertical or horizontal alignment */

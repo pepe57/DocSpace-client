@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { TooltipContainer } from "../../tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 import styles from "../Navigation.module.scss";
 
 const WarningComponent = ({ title }: { title?: React.ReactNode }) => {

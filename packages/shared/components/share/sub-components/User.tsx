@@ -47,10 +47,10 @@ import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { ComboBoxSize, type TOption } from "../../combobox";
 import { AccessRightSelect } from "../../access-right-select";
 
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../../icon-button";
-import { Link, LinkType } from "../../link";
-import { TooltipContainer } from "../../tooltip";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "../Share.module.scss";
 import type { UserProps } from "../Share.types";

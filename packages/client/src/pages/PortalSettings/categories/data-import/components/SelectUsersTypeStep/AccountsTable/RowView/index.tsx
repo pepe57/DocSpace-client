@@ -30,18 +30,18 @@ import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 
 import { inject, observer } from "mobx-react";
-import { tablet } from "@docspace/shared/utils/device";
+import { tablet } from "@docspace/ui-kit/utils/device";
 import styled, { useTheme } from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Link, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import {
   TableGroupMenu,
   TGroupMenuItem,
 } from "@docspace/shared/components/table";
 import { RowContainer, Row } from "@docspace/shared/components/rows";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { globalColors } from "@docspace/shared/themes";
 
 import UsersRow from "./UsersRow";

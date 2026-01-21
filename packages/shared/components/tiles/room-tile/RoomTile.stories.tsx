@@ -32,7 +32,7 @@ import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 
 import { RoomsType } from "../../../enums";
 
-import { Link } from "../../link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { IconButton } from "../../icon-button";
 import { IconSizeType } from "../../../utils";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";

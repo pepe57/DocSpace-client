@@ -32,8 +32,8 @@ import { useRouter } from "next/navigation";
 
 import { ScopeList } from "@docspace/shared/utils/oauth/scope-list";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import {
   Avatar,
   AvatarRole,

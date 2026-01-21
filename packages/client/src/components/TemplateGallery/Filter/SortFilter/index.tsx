@@ -30,7 +30,7 @@ import { withTranslation } from "react-i18next";
 import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";

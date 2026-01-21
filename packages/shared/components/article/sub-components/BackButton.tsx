@@ -29,7 +29,7 @@ import ArrowTabletIcon from "PUBLIC_DIR/images/arrow-left.long.react.svg?url";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { IconButton } from "../../icon-button";
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { DeviceType } from "../../../enums";
 
 import { ArticleHeaderLoader } from "../../../skeletons/article";

@@ -26,7 +26,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { inject, observer } from "mobx-react";
 

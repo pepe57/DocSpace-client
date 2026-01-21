@@ -32,7 +32,7 @@ import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/shared/components/button";
-import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { Text } from "@docspace/shared/components/text";
 import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";

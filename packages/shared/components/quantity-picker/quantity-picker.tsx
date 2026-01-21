@@ -30,7 +30,7 @@ import classNames from "classnames";
 import PlusIcon from "PUBLIC_DIR/images/payment.plus.react.svg";
 import MinusIcon from "PUBLIC_DIR/images/minus.react.svg";
 
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Slider } from "../slider";
 import { TextInput } from "../text-input";
 import { InputType } from "../text-input/TextInput.enums";

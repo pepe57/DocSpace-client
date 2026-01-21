@@ -29,7 +29,7 @@ import classNames from "classnames";
 
 import { SectionFilterProps } from "../Section.types";
 import styles from "../Section.module.scss";
-import { isDesktop, isMobile } from "../../../utils/device";
+import { isDesktop, isMobile } from "@docspace/ui-kit/utils/device";
 
 const SectionFilter = React.memo(
   ({ className, children, withTabs }: SectionFilterProps) => {

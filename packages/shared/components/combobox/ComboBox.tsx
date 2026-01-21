@@ -33,7 +33,7 @@ import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
 
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
-import { TooltipContainer } from "../tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import { ComboButton } from "./sub-components/ComboButton";
 import { ComboBoxSize, ComboBoxDisplayType } from "./ComboBox.enums";

@@ -31,7 +31,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import IndexingStore from "SRC_DIR/store/IndexingStore";
 import FilesActionsStore from "SRC_DIR/store/FilesActionsStore";

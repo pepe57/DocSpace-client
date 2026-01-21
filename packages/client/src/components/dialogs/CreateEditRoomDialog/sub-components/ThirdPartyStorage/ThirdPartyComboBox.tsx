@@ -32,8 +32,8 @@ import { TFunction } from "i18next";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Text } from "@docspace/shared/components/text";
-import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { toastr } from "@docspace/shared/components/toast";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { TConnectingStorage } from "@docspace/shared/api/files/types";

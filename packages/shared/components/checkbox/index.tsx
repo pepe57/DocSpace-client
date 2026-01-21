@@ -31,8 +31,8 @@ import CheckboxIndeterminateIcon from "PUBLIC_DIR/images/checkbox.indeterminate.
 import CheckboxCheckedIcon from "PUBLIC_DIR/images/checkbox.checked.react.svg";
 import CheckboxIcon from "PUBLIC_DIR/images/checkbox.react.svg";
 
-import { Text } from "../text";
-import { TooltipContainer } from "../tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import { CheckboxProps } from "./Checkbox.types";
 import styles from "./Checkbox.module.scss";

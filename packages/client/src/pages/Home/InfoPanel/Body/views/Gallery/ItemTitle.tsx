@@ -31,7 +31,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 import classNames from "classnames";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   ContextMenu,
   ContextMenuRefType,

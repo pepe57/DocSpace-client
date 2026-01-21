@@ -31,7 +31,7 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Label } from "@docspace/ui-kit/components/label";
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { StyledParam } from "./StyledParam";
 

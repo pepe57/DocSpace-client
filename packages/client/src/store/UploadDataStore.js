@@ -56,7 +56,7 @@ import {
 } from "SRC_DIR/helpers/utils";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 const removeDuplicate = (items) => {
   const obj = {};

@@ -34,9 +34,9 @@ import {
   InputType,
   TextInput,
 } from "@docspace/shared/components/text-input";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import { Link, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 import addEditStyles from "../styles/AddEditDialog.module.scss";
 import baseParamsStyles from "./useBaseParams.module.scss";

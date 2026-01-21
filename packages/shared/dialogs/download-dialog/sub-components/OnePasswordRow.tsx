@@ -37,7 +37,7 @@ import { toastr } from "../../../components/toast";
 import { ContextMenuButton } from "../../../components/context-menu-button";
 import { ModalDialog, ModalDialogType } from "../../../components/modal-dialog";
 import { Button, ButtonSize } from "../../../components/button";
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { SimulatePassword } from "../../../components/simulate-password";
 import { isMobile } from "../../../utils";
 

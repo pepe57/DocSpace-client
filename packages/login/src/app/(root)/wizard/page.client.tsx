@@ -38,7 +38,7 @@ import {
   setLanguageForUnauthorized,
   setTimezoneForUnauthorized,
 } from "@docspace/shared/utils/common";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { EmailInput, TValidate } from "@docspace/shared/components/email-input";
 import {
@@ -53,7 +53,7 @@ import {
 } from "@docspace/shared/components/password-input";
 import { FileInput } from "@docspace/shared/components/file-input";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { setLicense } from "@docspace/shared/api/settings";
 import {
   ComboBox,

@@ -31,7 +31,7 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 import { ColorInput } from "@docspace/shared/components/color-input";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Label } from "@docspace/ui-kit/components/label";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import { globalColors } from "@docspace/shared/themes";

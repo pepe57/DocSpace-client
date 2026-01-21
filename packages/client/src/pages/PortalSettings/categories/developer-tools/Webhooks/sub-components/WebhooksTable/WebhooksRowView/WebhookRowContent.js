@@ -27,7 +27,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { RowContent } from "@docspace/shared/components/rows";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 

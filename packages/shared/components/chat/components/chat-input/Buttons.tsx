@@ -33,7 +33,7 @@ import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
 import AttachmentReactSvgUrl from "PUBLIC_DIR/images/attachment.react.svg?url";
 
 import { IconButton } from "../../../icon-button";
-import { TooltipContainer } from "../../../tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import { useMessageStore } from "../../store/messageStore";
 

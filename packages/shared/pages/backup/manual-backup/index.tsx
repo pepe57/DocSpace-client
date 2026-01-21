@@ -31,9 +31,9 @@ import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TFunction } from "i18next";
 
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "../../../components/button";
-import { Link, LinkTarget } from "../../../components/link";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { startBackup } from "../../../api/portal";
 import { RadioButton } from "../../../components/radio-button";
 import { toastr } from "../../../components/toast";

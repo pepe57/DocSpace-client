@@ -31,7 +31,7 @@ import DownloadingDarkReactSvg from "PUBLIC_DIR/images/downloading.dark.react.sv
 import { useTheme } from "../../hooks/useTheme";
 
 import { OperationContainerProps } from "./OperationContainer.types";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import PortalLogo from "../portal-logo/PortalLogo";
 
 import styles from "./OperationContainer.module.scss";

@@ -31,7 +31,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";

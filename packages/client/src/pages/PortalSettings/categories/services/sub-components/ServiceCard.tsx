@@ -27,7 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import styles from "../styles/AdditionalStorage.module.scss";
 
 interface ServiceCardProps {

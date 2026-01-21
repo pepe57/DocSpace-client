@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import { Button } from "@docspace/shared/components/button";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import PropTypes from "prop-types";
 import AddIdpCertificateModal from "./sub-components/AddIdpCertificateModal";

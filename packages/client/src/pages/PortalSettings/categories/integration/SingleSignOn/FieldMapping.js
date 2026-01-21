@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { SSO_GIVEN_NAME, SSO_SN, SSO_EMAIL } from "SRC_DIR/helpers/constants";
 import SsoFormField from "./sub-components/SsoFormField";

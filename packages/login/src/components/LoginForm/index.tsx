@@ -39,7 +39,7 @@ import { isSafari } from "react-device-detect";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Id } from "react-toastify";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
   createPasswordHash,

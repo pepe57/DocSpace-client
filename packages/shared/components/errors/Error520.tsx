@@ -30,7 +30,7 @@ import { I18nextProvider, useTranslation } from "react-i18next";
 
 import { getCrashReport } from "../../utils/crashReport";
 
-import { Link, LinkType } from "../link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import ReportDialog from "../report-dialog";
 import ErrorContainer from "../error-container/ErrorContainer";
 import { zendeskAPI } from "../zendesk/Zendesk.utils";

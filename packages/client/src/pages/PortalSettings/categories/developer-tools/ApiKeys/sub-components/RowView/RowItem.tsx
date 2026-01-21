@@ -27,7 +27,7 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Row, RowContent } from "@docspace/shared/components/rows";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { isMobile, tablet } from "@docspace/shared/utils";
 

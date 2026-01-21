@@ -50,11 +50,11 @@ import {
 import { Badge } from "../../badge";
 import { globalColors } from "../../../themes";
 import { useTheme } from "../../../hooks/useTheme";
-import { isTouchDevice } from "../../../utils/device";
+import { isTouchDevice } from "@docspace/ui-kit/utils/device";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 import { MCPIcon, MCPIconSize } from "../../mcp-icon";
 
-import { Tooltip } from "../../tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "../ContextMenu.module.scss";
 

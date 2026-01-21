@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Button } from "@docspace/shared/components/button";
 import { TextInput } from "@docspace/shared/components/text-input";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 import {
   ModalDialog,

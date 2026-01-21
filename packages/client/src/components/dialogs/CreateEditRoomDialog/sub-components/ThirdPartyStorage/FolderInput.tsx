@@ -31,7 +31,7 @@ import { TFunction } from "i18next";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { TooltipContainer } from "@docspace/shared/components/tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 import { TFolder } from "@docspace/shared/api/files/types";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 

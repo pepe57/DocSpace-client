@@ -19,9 +19,9 @@ import { getExternalFolderLinks, getExternalLinks } from "../../../api/files";
 
 import { TOption } from "../../combobox";
 import { TData, toastr } from "../../toast";
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../../icon-button";
-import { Tooltip } from "../../tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import LinkRow from "../sub-components/LinkRow";
 import ShareHeader from "../sub-components/ShareHeader";

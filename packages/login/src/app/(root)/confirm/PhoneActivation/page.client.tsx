@@ -34,7 +34,7 @@ import {
   InputType,
   TextInput,
 } from "@docspace/shared/components/text-input";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 const currentNumber = "+00000000000";
 

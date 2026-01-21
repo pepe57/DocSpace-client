@@ -29,7 +29,7 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import { IconButton } from "../icon-button";
 import { SelectedItemProps } from "./SelectedItem.types";
 import styles from "./SelectedItem.module.scss";
-import { TooltipContainer } from "../tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 export const SelectedItemPure = (props: SelectedItemProps) => {
   const {

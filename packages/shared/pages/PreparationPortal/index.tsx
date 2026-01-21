@@ -28,7 +28,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import ErrorContainer from "../../components/error-container/ErrorContainer";
-import { Text } from "../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import SocketHelper, { SocketEvents } from "../../utils/socket";
 import { getRestoreProgress } from "../../api/portal";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
@@ -57,7 +57,8 @@ export const PreparationPortal = (props: IPreparationPortal) => {
       if (typeof error === "string") {
         errorText = error;
       } else if (error && typeof error === "object" && "message" in error) {
-        errorText = (error as { message?: string }).message ?? errorInternalServer;
+        errorText =
+          (error as { message?: string }).message ?? errorInternalServer;
       }
 
       setErrorMessage(errorText);

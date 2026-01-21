@@ -39,9 +39,9 @@ import EyeReactSvg from "PUBLIC_DIR/images/eye.react.svg";
 import EyeOffReactSvg from "PUBLIC_DIR/images/eye.off.react.svg";
 
 import { InputBlock } from "../input-block";
-import { Link, LinkType } from "../link";
-import { Text } from "../text";
-import { Tooltip } from "../tooltip";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { InputSize, InputType } from "../text-input";
 
 import { PasswordInputProps, TPasswordSettings } from "./PasswordInput.types";

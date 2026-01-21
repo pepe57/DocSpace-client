@@ -32,7 +32,7 @@ import { IconButton } from "../../icon-button";
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import { TPlusButtonProps } from "../Navigation.types";
 import { isMobile } from "../../../utils";
-import { TooltipContainer } from "../../tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 const PlusButton = ({
   className,

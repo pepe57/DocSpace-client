@@ -27,7 +27,7 @@
 import { useTranslation } from "react-i18next";
 import moment from "moment";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { classNames, getCookie } from "@docspace/shared/utils";
 import {
   TFeedAction,

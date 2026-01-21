@@ -30,14 +30,14 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import { WebSearchType } from "@docspace/shared/api/ai/enums";
 import { PasswordInput } from "@docspace/shared/components/password-input";
-import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { toastr } from "@docspace/shared/components/toast";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 

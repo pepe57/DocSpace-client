@@ -34,9 +34,9 @@ import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import Image from "next/image";
 
-import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
@@ -85,7 +85,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
   useEffect(() => {
     proxyBaseUrl.current = combineUrl(
       window.ClientConfig?.proxy?.url,
-      "/profile"
+      "/profile",
     );
   }, []);
 

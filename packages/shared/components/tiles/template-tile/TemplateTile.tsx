@@ -26,8 +26,8 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Text } from "../../text";
-import { Link } from "../../link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 import { TemplateTileProps, TemplateItem } from "./TemplateTile.types";
 import { TileItem } from "../tile-container/TileContainer.types";
 import { BaseTile } from "../base-tile/BaseTile";

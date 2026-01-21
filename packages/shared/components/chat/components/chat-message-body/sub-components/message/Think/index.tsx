@@ -34,7 +34,7 @@ import TriangleDownIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import { IconSizeType } from "../../../../../../../utils";
 
 import { Loader, LoaderTypes } from "../../../../../../loader";
-import { Text } from "../../../../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "./Think.module.scss";
 

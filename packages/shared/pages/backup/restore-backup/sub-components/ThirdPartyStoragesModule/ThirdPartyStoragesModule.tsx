@@ -29,7 +29,7 @@ import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?u
 import React, { useMemo, useState } from "react";
 import classNames from "classnames";
 
-import { Text } from "../../../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { ThirdPartyStorages } from "../../../../../enums";
 import {
   ComboBox,

@@ -33,7 +33,7 @@ import RootTabletIcon from "PUBLIC_DIR/images/root.tablet.react.svg";
 
 import { DeviceType } from "../../../enums";
 
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "../Navigation.module.scss";
 import { TNavigationItemProps } from "../Navigation.types";

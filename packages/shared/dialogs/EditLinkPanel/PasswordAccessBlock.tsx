@@ -29,7 +29,7 @@ import copy from "copy-to-clipboard";
 
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
-import { Link, LinkType } from "../../components/link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { toastr } from "../../components/toast";
 import { IconButton } from "../../components/icon-button";
 import { ALLOWED_PASSWORD_CHARACTERS } from "../../constants";

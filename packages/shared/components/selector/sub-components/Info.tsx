@@ -26,7 +26,7 @@
 
 import { ReactSVG } from "react-svg";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { TSelectorInfo } from "../Selector.types";
 import styles from "../Selector.module.scss";

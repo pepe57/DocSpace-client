@@ -28,7 +28,7 @@ import { getAiModelName } from "../../../../../utils/ai";
 
 import { RectangleSkeleton } from "../../../../../skeletons/rectangle";
 
-import { Text } from "../../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import type { SelectModelProps } from "../../../Chat.types";
 

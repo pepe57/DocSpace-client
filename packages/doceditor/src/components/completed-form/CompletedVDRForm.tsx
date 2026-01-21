@@ -50,7 +50,7 @@ import {
   mobileMore,
 } from "@docspace/shared/utils";
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { InputBlock } from "@docspace/shared/components/input-block";
@@ -186,7 +186,11 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
   } as React.CSSProperties;
 
   return (
-    <section className={styles.container} style={bgBlockStyle} data-testid="completed_form_vdr_container">
+    <section
+      className={styles.container}
+      style={bgBlockStyle}
+      data-testid="completed_form_vdr_container"
+    >
       <Scrollbar fixedSize>
         <div
           className={classNames(

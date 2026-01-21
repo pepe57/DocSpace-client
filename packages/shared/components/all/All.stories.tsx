@@ -51,14 +51,14 @@ import { Textarea } from "../textarea";
 // import DatePicker from "../date-picker";
 import { FieldContainer } from "../field-container";
 import { Heading, HeadingSize } from "../heading";
-import { Link, LinkType } from "../link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Loader, LoaderTypes } from "../loader";
 import { Row, RowProps } from "../rows";
 import { Scrollbar } from "../scrollbar";
 import { Tabs, TabsTypes } from "../tabs";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Toast, toastr } from "../toast";
-import { Tooltip } from "../tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { globalColors } from "../../themes";
 
 const arrayItems = [

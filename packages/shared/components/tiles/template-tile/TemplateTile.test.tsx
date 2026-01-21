@@ -45,7 +45,7 @@ vi.mock("./TemplateTile.module.scss", () => ({
 }));
 
 // Mock Link component
-vi.mock("@docspace/shared/components/link", () => ({
+vi.mock("@docspace/ui-kit/components/link", () => ({
   Link: ({
     children,
     onClick,
@@ -60,7 +60,7 @@ vi.mock("@docspace/shared/components/link", () => ({
 }));
 
 // Mock Text component
-vi.mock("@docspace/shared/components/text", () => ({
+vi.mock("@docspace/ui-kit/components/text", () => ({
   Text: ({
     children,
     className,

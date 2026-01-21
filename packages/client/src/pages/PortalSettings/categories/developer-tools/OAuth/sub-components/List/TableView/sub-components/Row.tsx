@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import { TableCell } from "@docspace/shared/components/table";
 import { Tags } from "@docspace/shared/components/tags";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { getCookie } from "@docspace/shared/utils/cookie";

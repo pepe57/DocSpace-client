@@ -28,7 +28,7 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { SocialButton } from "@docspace/shared/components/social-button";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -163,7 +163,10 @@ const SocialNetworks = (props: SocialNetworksProps) => {
   if (providers?.length === 0) return null;
 
   return (
-    <div className={styles.socialNetworksWrapper} data-testid="profile-social-networks">
+    <div
+      className={styles.socialNetworksWrapper}
+      data-testid="profile-social-networks"
+    >
       <Text fontSize="16px" fontWeight={700} lineHeight="22px">
         {t("ConnectSocialNetworks")}
       </Text>

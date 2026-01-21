@@ -31,7 +31,7 @@ import TickIcon from "PUBLIC_DIR/images/icons/12/tick.react.svg";
 import RightArrowIcon from "PUBLIC_DIR/images/icons/12/right-arrow.react.svg";
 
 import { classNames } from "../../utils";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../icon-button";
 import { globalColors } from "../../themes";
 import styles from "./OperationsProgressButton.module.scss";

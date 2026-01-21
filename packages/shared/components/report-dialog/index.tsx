@@ -37,7 +37,7 @@ import {
 } from "../../utils/crashReport";
 import { DeviceType } from "../../enums";
 
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "../toast";
 import { Button, ButtonSize } from "../button";
 import { Textarea } from "../textarea";

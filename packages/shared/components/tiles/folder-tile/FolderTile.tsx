@@ -35,7 +35,7 @@ import {
   ContextMenuButtonDisplayType,
 } from "../../context-menu-button";
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
-import { Link, LinkType } from "../../link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { FolderChildProps, FolderTileProps } from "./FolderTile.types";
 import { hasOwnProperty } from "../../../utils/object";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";

@@ -42,7 +42,7 @@ import socket, {
 import { TBreadCrumb } from "../../../../../selector/Selector.types";
 
 import { toastr } from "../../../../../toast";
-import { Link, LinkTarget, LinkType } from "../../../../../link";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 
 import { useMessageStore } from "../../../../store/messageStore";
 import { useChatStore } from "../../../../store/chatStore";

@@ -31,7 +31,7 @@ import { inject, observer } from "mobx-react";
 import { recalculateQuota } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/shared/components/button";
 
 const RecalculateButton = (props) => {

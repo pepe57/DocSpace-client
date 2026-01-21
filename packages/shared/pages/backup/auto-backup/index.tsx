@@ -50,9 +50,9 @@ import { useStateCallback } from "../../../hooks/useStateCallback";
 import type { Nullable, Option } from "../../../types";
 import OperationsProgressButton from "../../../components/operations-progress-button";
 import { toastr } from "../../../components/toast";
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { RadioButton } from "../../../components/radio-button";
-import { Link, LinkTarget } from "../../../components/link";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 
 import { ThirdPartyModule } from "./sub-components/ThirdPartyModule";

@@ -26,7 +26,7 @@
 
 import { useEffect, useState } from "react";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 

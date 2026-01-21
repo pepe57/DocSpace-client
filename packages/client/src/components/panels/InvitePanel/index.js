@@ -47,7 +47,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";

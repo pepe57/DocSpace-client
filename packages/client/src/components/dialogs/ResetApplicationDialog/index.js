@@ -28,7 +28,7 @@ import PropTypes from "prop-types";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { withTranslation } from "react-i18next";
 
 const ResetApplicationDialogComponent = (props) => {

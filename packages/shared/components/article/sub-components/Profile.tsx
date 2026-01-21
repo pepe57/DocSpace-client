@@ -35,7 +35,7 @@ import { Nullable } from "../../../types";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../../icon-button";
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 

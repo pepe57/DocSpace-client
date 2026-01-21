@@ -27,7 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 import { Loader, LoaderTypes } from "../loader";
-import { Tooltip } from "../tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { ButtonProps } from "./Button.types";
 import { ButtonSize } from "./Button.enums";
 import styles from "./Button.module.scss";

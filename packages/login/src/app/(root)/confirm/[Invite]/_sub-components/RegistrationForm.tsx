@@ -39,8 +39,8 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";

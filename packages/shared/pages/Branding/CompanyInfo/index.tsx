@@ -28,7 +28,7 @@ import React, { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Link } from "../../../components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { FieldContainer } from "../../../components/field-container";
 import {
   TextInput,

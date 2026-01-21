@@ -26,7 +26,7 @@
 
 import React from "react";
 import classNames from "classnames";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "../button";
 import { Heading } from "../heading";
 import PortalLogo from "../portal-logo/PortalLogo";

@@ -45,13 +45,13 @@ import socket, {
 import { DropDown } from "../../../../drop-down";
 import { TBreadCrumb } from "../../../../selector/Selector.types";
 import { toastr } from "../../../../toast";
-import { Link, LinkType } from "../../../../link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 import { useChatStore } from "../../../store/chatStore";
 import { useMessageStore } from "../../../store/messageStore";
 import { openFile } from "../../../utils";
 import { SelectChatProps } from "../../../Chat.types";
-import { TooltipContainer } from "../../../../tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import ExportSelector from "../../export-selector";
 

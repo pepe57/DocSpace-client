@@ -30,11 +30,11 @@ import { ReactSVG } from "react-svg";
 import PublicRoomTemplateIconReactSvgUrl from "PUBLIC_DIR/images/icons/32/template/public.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import { ContextMenuModel } from "../../context-menu";
-import { Link } from "../../link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { IconSizeType } from "../../../utils";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
 import { ComboBox, ComboBoxSize } from "../../combobox";
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { TemplateTile } from "./TemplateTile";
 import { TemplateTileProps, TemplateItem } from "./TemplateTile.types";

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import styles from "./EmptyView.module.scss";
 import EmptyViewOption from "./sub-components/EmptyView.option";
 import type { EmptyViewProps } from "./EmptyView.types";

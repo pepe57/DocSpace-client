@@ -30,9 +30,9 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Badge } from "../badge";
-import { Link } from "../link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import { useTheme } from "../../hooks/useTheme";
 

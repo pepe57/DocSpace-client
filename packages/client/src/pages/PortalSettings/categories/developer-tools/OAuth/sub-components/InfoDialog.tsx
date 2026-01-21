@@ -34,7 +34,7 @@ import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { getCookie } from "@docspace/shared/utils/cookie";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
@@ -44,7 +44,7 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { TTranslation } from "@docspace/shared/types";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
 import { Tag } from "@docspace/shared/components/tag";

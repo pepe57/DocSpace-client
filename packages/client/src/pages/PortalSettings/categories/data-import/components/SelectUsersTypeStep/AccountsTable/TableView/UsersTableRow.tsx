@@ -30,7 +30,7 @@ import styled from "styled-components";
 
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import {
   ComboBox,

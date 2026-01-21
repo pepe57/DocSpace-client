@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { EmailInput } from "@docspace/shared/components/email-input";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   ModalDialog,
   ModalDialogType,

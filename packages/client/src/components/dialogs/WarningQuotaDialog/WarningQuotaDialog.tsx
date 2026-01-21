@@ -31,7 +31,7 @@ import {
 
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { WarningQuotaDialogProps } from "./WarningQuotaDialog.types";
 
 export const WarningQuotaDialog = ({

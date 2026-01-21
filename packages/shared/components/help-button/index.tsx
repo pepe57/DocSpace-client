@@ -29,7 +29,7 @@ import uniqueId from "lodash/uniqueId";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg";
 import { classNames } from "../../utils";
 import { IconButton } from "../icon-button";
-import { Tooltip } from "../tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { HelpButtonProps } from "./HelpButton.types";
 
 const HelpButton = (props: HelpButtonProps) => {

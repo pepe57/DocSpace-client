@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Consumer } from "@docspace/shared/utils/context";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";

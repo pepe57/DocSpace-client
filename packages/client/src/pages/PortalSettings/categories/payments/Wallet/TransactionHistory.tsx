@@ -31,7 +31,7 @@ import moment from "moment";
 import classNames from "classnames";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   ComboBox,
   ComboBoxSize,
@@ -64,7 +64,7 @@ import FilterPanel from "./sub-components/FilterPanel";
 import TransactionBody from "./sub-components/TransactionBody";
 import styles from "./styles/TransactionHistory.module.scss";
 import TableLoader from "./sub-components/TableLoader";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 type TransactionHistoryReportResponse = {
   error?: string;

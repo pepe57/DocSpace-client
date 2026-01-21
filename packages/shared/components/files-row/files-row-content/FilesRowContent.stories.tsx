@@ -29,7 +29,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 
-import { Link } from "../../link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import { FilesRowContent } from ".";
 import { IconSizeType } from "../../../utils";

@@ -36,7 +36,7 @@ import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import ProtectedReactSvgUrl from "PUBLIC_DIR/images/icons/16/protected.react.svg?url";
 
 import type { ContextMenuModel } from "../../../components/context-menu";
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "../../../components/button";
 import { IconButton } from "../../../components/icon-button";
 import { ContextMenuButton } from "../../../components/context-menu-button";

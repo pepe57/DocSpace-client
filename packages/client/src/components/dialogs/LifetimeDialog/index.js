@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import styles from "./LifetimeDialog.module.scss";
 
 const LifetimeDialogComponent = (props) => {

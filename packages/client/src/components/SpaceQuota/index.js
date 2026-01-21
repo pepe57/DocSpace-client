@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { getConvertedQuota } from "@docspace/shared/utils/common";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { toastr } from "@docspace/shared/components/toast";
 import api from "@docspace/shared/api";

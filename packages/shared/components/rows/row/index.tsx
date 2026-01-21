@@ -32,7 +32,7 @@ import React, { useRef } from "react";
 import { isMobile } from "react-device-detect"; // TODO: isDesktop=true for IOS(Firefox & Safari)
 
 import { VDRIndexingAction } from "../../../enums";
-import { isMobile as isMobileUtils } from "../../../utils/device";
+import { isMobile as isMobileUtils } from "@docspace/ui-kit/utils/device";
 
 import { Checkbox } from "../../checkbox";
 import {

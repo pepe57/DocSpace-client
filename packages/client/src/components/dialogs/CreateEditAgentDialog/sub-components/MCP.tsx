@@ -29,7 +29,7 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { MCPIcon, MCPIconSize } from "@docspace/shared/components/mcp-icon";

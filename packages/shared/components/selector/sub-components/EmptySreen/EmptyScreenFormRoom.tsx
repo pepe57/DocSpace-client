@@ -34,7 +34,7 @@ import Plus16SvgUrl from "PUBLIC_DIR/images/icons/16/plus.svg?url";
 import { RoomsType } from "../../../../enums";
 import { useTheme } from "../../../../hooks/useTheme";
 
-import { Text } from "../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Heading } from "../../../heading";
 import { SelectorAddButton } from "../../../selector-add-button";
 import styles from "../../Selector.module.scss";

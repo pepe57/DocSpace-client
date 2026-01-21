@@ -39,7 +39,7 @@ import {
   calculateTotalPrice,
   getConvertedSize,
 } from "@docspace/shared/utils/common";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { useServicesActions } from "../../hooks/useServicesActions";
 import { PaymentProvider } from "../../context/PaymentContext";

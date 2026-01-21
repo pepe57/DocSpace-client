@@ -27,7 +27,7 @@
 "use client";
 
 import Image from "next/image";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
 import ArrowRightSvrUrl from "PUBLIC_DIR/images/arrow.right.react.svg?url";

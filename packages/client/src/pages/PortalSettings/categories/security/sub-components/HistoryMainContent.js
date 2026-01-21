@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 // import { TextInput } from "@docspace/shared/components/text-input";
 // import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import styled, { useTheme } from "styled-components";

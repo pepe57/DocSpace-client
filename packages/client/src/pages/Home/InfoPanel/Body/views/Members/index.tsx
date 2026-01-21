@@ -35,11 +35,11 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import { isDesktop } from "@docspace/shared/utils";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkType } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { copyShareLink } from "@docspace/shared/utils/copy";
-import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";

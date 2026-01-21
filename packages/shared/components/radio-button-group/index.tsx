@@ -28,7 +28,7 @@ import React, { useEffect, useLayoutEffect } from "react";
 import classNames from "classnames";
 
 import { RadioButton } from "../radio-button";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "./RadioButtonGroup.module.scss";
 import {

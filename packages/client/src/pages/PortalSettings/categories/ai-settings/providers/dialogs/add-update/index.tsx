@@ -53,10 +53,10 @@ import type {
   TUpdateAiProvider,
 } from "@docspace/shared/api/ai/types";
 import { type TData, toastr } from "@docspace/shared/components/toast";
-import { Link, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 

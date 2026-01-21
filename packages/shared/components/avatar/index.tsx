@@ -41,8 +41,11 @@ import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 
 import { IconButton } from "../icon-button";
-import { Text } from "../text";
-import { TGetTooltipContent, Tooltip } from "../tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import {
+  TGetTooltipContent,
+  Tooltip,
+} from "@docspace/ui-kit/components/tooltip";
 import { AVATAR_ACTION_KEYS } from "../../constants";
 
 import styles from "./Avatar.module.scss";

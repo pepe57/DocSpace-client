@@ -26,7 +26,10 @@
 
 import { useState, useEffect } from "react";
 
-import { MAX_INFINITE_LOADER_SHIFT, isMobile } from "../../utils/device";
+import {
+  MAX_INFINITE_LOADER_SHIFT,
+  isMobile,
+} from "@docspace/ui-kit/utils/device";
 
 import ListComponent from "./sub-components/List";
 import GridComponent from "./sub-components/Grid";

@@ -31,7 +31,7 @@ import { useNavigate } from "react-router";
 
 import { TABLE_ROOMS_COLUMNS } from "SRC_DIR/helpers/constants";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/shared/components/button";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 

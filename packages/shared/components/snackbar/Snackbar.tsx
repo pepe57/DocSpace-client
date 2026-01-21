@@ -33,7 +33,7 @@ import Countdown, { zeroPad } from "react-countdown";
 import classNames from "classnames";
 
 import { Heading, HeadingSize } from "../heading";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { BarConfig, SnackbarProps } from "./Snackbar.types";
 import { globalColors } from "../../themes";

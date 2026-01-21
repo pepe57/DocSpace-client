@@ -27,7 +27,7 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import { getModels, getProviders } from "@docspace/shared/api/ai";

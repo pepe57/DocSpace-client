@@ -35,7 +35,7 @@ import { SelectorAddButton } from "../../selector-add-button";
 import { Heading, HeadingLevel, HeadingSize } from "../../heading";
 import { ComboBox } from "../../combobox";
 import { Checkbox } from "../../checkbox";
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "../../toggle-button";
 
 import styles from "../Filter.module.scss";

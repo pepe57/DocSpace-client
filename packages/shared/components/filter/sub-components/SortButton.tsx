@@ -35,8 +35,8 @@ import { ComboBox, ComboBoxSize } from "../../combobox";
 import { DropDownItem } from "../../drop-down-item";
 import { IconButton } from "../../icon-button";
 import { ViewSelector } from "../../view-selector";
-import { Text } from "../../text";
-import { TooltipContainer } from "../../tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import { SortButtonProps, TSortDataItem } from "../Filter.types";
 import styles from "../Filter.module.scss";

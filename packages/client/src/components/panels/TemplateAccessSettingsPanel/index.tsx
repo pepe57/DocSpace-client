@@ -38,7 +38,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { TSelectorItem } from "@docspace/shared/components/selector";

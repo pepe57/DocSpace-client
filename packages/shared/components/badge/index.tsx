@@ -28,8 +28,8 @@ import React from "react";
 
 import { BadgeProps } from "./Badge.types";
 import styles from "./Badge.module.scss";
-import { Text } from "../text";
-import { TooltipContainer } from "../tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 const Badge = (props: BadgeProps) => {
   const {

@@ -37,7 +37,7 @@ import AvatarEditor from "react-avatar-editor";
 import { Slider } from "@docspace/shared/components/slider";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { injectDefaultTheme } from "@docspace/shared/utils";
-import { TooltipContainer } from "@docspace/shared/components/tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 const StyledAvatarCropper = styled.div.attrs(injectDefaultTheme)`
   max-width: 216px;

@@ -26,7 +26,7 @@
 
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from ".";
 
 const meta = {

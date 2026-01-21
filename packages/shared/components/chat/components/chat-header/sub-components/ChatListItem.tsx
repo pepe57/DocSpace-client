@@ -35,7 +35,7 @@ import type { TChat } from "../../../../../api/ai/types";
 import { ContextMenu, ContextMenuRefType } from "../../../../context-menu";
 import { isDesktop } from "../../../../../utils";
 import { DropDownItem } from "../../../../drop-down-item";
-import { Text } from "../../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../../../../icon-button";
 import styles from "../ChatHeader.module.scss";
 

@@ -29,7 +29,7 @@
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { MCPIconSize } from "./MCPIcon.enum";
 import styles from "./MCPIcon.module.scss";

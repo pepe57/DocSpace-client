@@ -36,7 +36,7 @@ import { Avatar, AvatarSize, AvatarRole } from "../avatar";
 
 import styles from "./FillingRoleSelector.module.scss";
 import type { IFillingRoleSelectorProps } from "./FillingRoleSelector.types";
-import { TooltipContainer } from "../tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 const FillingRoleSelector = ({
   roles,

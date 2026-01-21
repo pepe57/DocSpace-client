@@ -33,7 +33,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import type { TServer } from "@docspace/shared/api/ai/types";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";

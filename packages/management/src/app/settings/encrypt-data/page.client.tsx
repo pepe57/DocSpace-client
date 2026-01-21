@@ -30,9 +30,9 @@ import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
@@ -73,7 +73,12 @@ const EncryptDataPage = ({
           status={status}
         />
       ) : null}
-      <div className={classNames(styles.wrapper, { [styles.disabled]: isDisabled })} data-testid="encrypt-data-page">
+      <div
+        className={classNames(styles.wrapper, {
+          [styles.disabled]: isDisabled,
+        })}
+        data-testid="encrypt-data-page"
+      >
         <div className={styles.header}>
           <Text fontSize="16px" fontWeight={700}>
             {t("EncryptData")}

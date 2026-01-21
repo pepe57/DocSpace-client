@@ -33,8 +33,8 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { useTheme } from "@docspace/shared/hooks/useTheme";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 import { FilesRowContent } from "@docspace/shared/components/files-row";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";

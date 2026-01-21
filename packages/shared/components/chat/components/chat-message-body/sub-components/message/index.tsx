@@ -35,9 +35,9 @@ import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import { ContentType, RoleType } from "../../../../../../api/ai/enums";
 
-import { Link, LinkTarget } from "../../../../../link";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { Avatar, AvatarRole, AvatarSize } from "../../../../../avatar";
-import { Text } from "../../../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import type { MessageProps } from "../../../../Chat.types";
 import { useChatStore } from "../../../../store/chatStore";

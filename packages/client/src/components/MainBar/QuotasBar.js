@@ -29,7 +29,7 @@ import { withTranslation, Trans } from "react-i18next";
 
 import { SnackBar } from "@docspace/shared/components/snackbar";
 
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 
 const QuotasBar = ({

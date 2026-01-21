@@ -33,7 +33,7 @@ import { useTranslation } from "react-i18next";
 
 import { Button } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { FileInput } from "@docspace/shared/components/file-input";
 import { injectDefaultTheme, mobile } from "@docspace/shared/utils";

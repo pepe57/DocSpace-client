@@ -31,7 +31,7 @@ import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 
 import { Badge } from "../badge";
 import { IconButton } from "../icon-button";
-import { Tooltip } from "../tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "./InfoBadge.module.scss";
 import type InfoBadgeProps from "./InfoBadge.types";

@@ -35,7 +35,7 @@ import styled, { useTheme } from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Link, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import {
   TableGroupMenu,
   TableBody,

@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { ReactSVG } from "react-svg";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { TooltipContainer } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 import { inject, observer } from "mobx-react";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import { useTranslation } from "react-i18next";

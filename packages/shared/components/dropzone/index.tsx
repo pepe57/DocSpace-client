@@ -32,7 +32,7 @@ import { Loader, LoaderTypes } from "../loader";
 
 import { DropzoneProps } from "./Dropzone.types";
 import styles from "./Dropzone.module.scss";
-import { Link } from "../link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 const Dropzone = ({
   isLoading,

@@ -35,7 +35,7 @@ import styles from "../Selector.module.scss";
 
 import { FooterProps } from "../Selector.types";
 import AccessSelector from "./AccessSelector";
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 const Footer = React.memo(
   ({

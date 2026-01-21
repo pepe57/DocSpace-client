@@ -27,7 +27,7 @@
 import { Trans } from "react-i18next";
 import { TFunction } from "i18next";
 
-import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 import { TFolder } from "@docspace/shared/api/files/types";

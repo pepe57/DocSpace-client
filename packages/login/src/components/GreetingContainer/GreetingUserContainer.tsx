@@ -29,10 +29,10 @@
 import { useTranslation, Trans } from "react-i18next";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 const DEFAULT_CREATION_TEXT =
   "A {{productName}} account will be created for {{email}}. Please, complete your registration:";

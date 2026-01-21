@@ -31,7 +31,7 @@ import CatalogFolderReactSvg from "PUBLIC_DIR/images/icons/16/catalog.folder.rea
 import CheckReactSvgUrl from "PUBLIC_DIR/images/check.react.svg?url";
 import { IconSizeType } from "../../../utils";
 
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 

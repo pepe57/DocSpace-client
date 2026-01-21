@@ -33,7 +33,7 @@ import type { TToolCallContent } from "../../../../../../../../api/ai/types";
 import { useTheme } from "../../../../../../../../hooks/useTheme";
 import { getServerIcon } from "../../../../../../../../utils";
 import { ServerType } from "../../../../../../../../api/ai/enums";
-import { Text } from "../../../../../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import styles from "../../../../ChatMessageBody.module.scss";
 import { MCPIcon, MCPIconSize } from "../../../../../../../mcp-icon";
 

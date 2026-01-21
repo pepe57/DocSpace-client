@@ -32,7 +32,7 @@ import type {
   TSettings,
 } from "@docspace/shared/api/settings/types";
 import type { ThemeKeys } from "@docspace/shared/enums";
-import { RootTooltip } from "@docspace/shared/components/tooltip/rootTooltip";
+import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 
 import ThemeProvider from "./ThemeProvider";
 import TranslationProvider from "./TranslationProvider";

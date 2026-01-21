@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import toLower from "lodash/toLower";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
   TextInput,

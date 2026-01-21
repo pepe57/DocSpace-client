@@ -31,7 +31,7 @@ import classNames from "classnames";
 
 import { TViewSelectorOption, ViewSelectorProps } from "./ViewSelector.types";
 import styles from "./ViewSelector.module.scss";
-import { TooltipContainer } from "../tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 const ViewSelector = ({
   isDisabled,

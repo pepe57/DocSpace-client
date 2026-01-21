@@ -29,9 +29,9 @@ import classNames from "classnames";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 
 import { useTheme } from "../../hooks/useTheme";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../icon-button";
-import { TooltipContainer } from "../tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 import styles from "./SelectorAddButton.module.scss";
 import { SelectorAddButtonProps } from "./SelectorAddButton.types";
 import { Loader, LoaderTypes } from "../loader";

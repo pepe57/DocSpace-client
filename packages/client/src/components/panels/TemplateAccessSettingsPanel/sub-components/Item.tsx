@@ -32,7 +32,7 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import cloneDeep from "lodash/cloneDeep";
 import { TTranslation } from "@docspace/shared/types";
 import { TSelectorItem } from "@docspace/shared/components/selector";

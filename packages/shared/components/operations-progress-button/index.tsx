@@ -44,7 +44,7 @@ import { OperationsProgressProps } from "./OperationsProgressButton.types";
 import { OPERATIONS_NAME } from "../../constants/index";
 import { HelpButton } from "../help-button";
 import { Backdrop } from "../backdrop";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import PreviewButton from "./PreviewButton";
 
 import type { ValueOf } from "../../types";

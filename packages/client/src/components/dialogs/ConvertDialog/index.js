@@ -28,7 +28,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 

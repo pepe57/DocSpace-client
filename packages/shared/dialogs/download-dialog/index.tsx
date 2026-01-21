@@ -31,7 +31,7 @@ import { ReactSVG } from "react-svg";
 import { Trans, useTranslation } from "react-i18next";
 
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
-import { Text } from "../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "../../components/button";
 import { toastr } from "../../components/toast";
 import type { TContextMenuValueTypeOnClick } from "../../components/context-menu/ContextMenu.types";

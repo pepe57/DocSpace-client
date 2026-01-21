@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 

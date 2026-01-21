@@ -33,8 +33,8 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkType } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TCreatedBy } from "@docspace/shared/types";
 

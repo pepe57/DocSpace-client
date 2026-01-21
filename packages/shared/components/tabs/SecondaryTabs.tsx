@@ -33,7 +33,7 @@ import ArrowReactUrl from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 import { type TTabItem, type TabsProps } from "./Tabs.types";
 import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";
 import { Scrollbar } from "../scrollbar";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../icon-button";
 import {
   MAX_TAB_WIDTH,

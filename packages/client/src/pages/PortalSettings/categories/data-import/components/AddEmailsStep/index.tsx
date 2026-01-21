@@ -30,7 +30,7 @@ import { TFunction } from "i18next";
 
 import { SearchInput } from "@docspace/shared/components/search-input";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import { searchMigrationUsers } from "SRC_DIR/pages/PortalSettings/utils/importUtils";

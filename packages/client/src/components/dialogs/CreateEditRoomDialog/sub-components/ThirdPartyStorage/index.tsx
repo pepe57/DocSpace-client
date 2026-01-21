@@ -29,9 +29,9 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { TFunction } from "i18next";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/shared/components/toast";
-import { Link, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";

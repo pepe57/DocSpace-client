@@ -28,7 +28,7 @@ import DangerToastReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
 
 import { IconSizeType } from "../../utils/common-icons-style";
 import styles from "./StatusMessage.module.scss";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 interface StatusMessageProps {
   message: string | React.ReactNode;

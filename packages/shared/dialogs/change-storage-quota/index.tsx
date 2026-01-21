@@ -29,7 +29,7 @@ import { useState, useEffect, useCallback } from "react";
 
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import { Button, ButtonSize } from "../../components/button";
-import { Text } from "../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "../../components/toast";
 import { QuotaForm } from "../../components/quota-form";
 import { setTenantQuotaSettings } from "../../api/settings";

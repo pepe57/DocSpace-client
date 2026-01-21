@@ -36,7 +36,7 @@ import classNames from "classnames";
 import TrashIcon from "PUBLIC_DIR/images/delete.react.svg";
 import FileArchive32SvgUrl from "PUBLIC_DIR/images/icons/32/archive.svg?url";
 
-import { Text } from "../../../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   CustomScrollbarsVirtualList,
   type CustomScrollbarsVirtualListProps,

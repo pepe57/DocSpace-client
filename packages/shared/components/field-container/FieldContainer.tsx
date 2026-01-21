@@ -30,7 +30,7 @@ import classNames from "classnames";
 import { Label } from "@docspace/ui-kit/components/label";
 
 import { HelpButton } from "../help-button";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { FieldContainerProps } from "./FieldContainer.types";
 import styles from "./FieldContainer.module.scss";

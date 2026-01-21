@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { isMobile } from "@docspace/shared/utils";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { FileType, FolderType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { Button, ButtonSize } from "@docspace/shared/components/button";

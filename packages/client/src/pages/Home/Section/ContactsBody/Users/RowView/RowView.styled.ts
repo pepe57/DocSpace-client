@@ -32,7 +32,7 @@ import {
   Row,
   RowContent,
 } from "@docspace/shared/components/rows";
-import { mobile, tablet } from "@docspace/shared/utils/device";
+import { mobile, tablet } from "@docspace/ui-kit/utils/device";
 import { globalColors } from "@docspace/shared/themes";
 
 const marginStyles = css`

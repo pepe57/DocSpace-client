@@ -28,7 +28,7 @@
 
 import classNames from "classnames";
 
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { PreparationPortalProgressProps } from "./PreparationPortalProgress.types";
 import styles from "./PreparationPortalProgress.module.scss";

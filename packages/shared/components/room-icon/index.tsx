@@ -43,13 +43,13 @@ import { globalColors } from "../../themes/globalColors";
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../icon-button";
 
 import { encodeToBase64, getRoomTitle } from "./RoomIcon.utils";
 import styles from "./RoomIcon.module.scss";
 import type { RoomIconProps } from "./RoomIcon.types";
-import { Tooltip } from "../tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 const RoomIcon = ({
   title,

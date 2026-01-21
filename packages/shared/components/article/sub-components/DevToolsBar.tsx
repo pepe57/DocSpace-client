@@ -36,7 +36,7 @@ import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 import { DeviceType } from "../../../enums";
 import { openingNewTab } from "../../../utils/openingNewTab";
 
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "../Article.module.scss";
 import { ArticleDevToolsBarProps } from "../Article.types";

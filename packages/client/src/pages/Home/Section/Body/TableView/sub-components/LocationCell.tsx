@@ -27,10 +27,10 @@ import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { TFile } from "@docspace/shared/api/files/types";
-import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 import { globalColors } from "@docspace/shared/themes";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getFolderPath } from "@docspace/shared/api/files";
 
 import { StyledText } from "./CellStyles";

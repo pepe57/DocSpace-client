@@ -35,10 +35,10 @@ import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?ur
 import { SettingsContext } from "../../../selectors/utils/contexts/Settings";
 import { getUserTypeTranslation } from "../../../utils/common";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "../../checkbox";
 import { RoomIcon } from "../../room-icon";
-import { Tooltip } from "../../tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { MCPIcon, MCPIconSize } from "../../mcp-icon";
 
 import { Data, ItemProps, TSelectorItem } from "../Selector.types";

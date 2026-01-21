@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { TextInput, InputType } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";

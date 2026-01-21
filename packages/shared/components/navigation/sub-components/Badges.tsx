@@ -27,8 +27,8 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 
-import { Text } from "../../text";
-import { Tooltip } from "../../tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { TBadgesProps } from "../Navigation.types";
 
 const Badges = ({

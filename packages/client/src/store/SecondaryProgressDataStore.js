@@ -26,7 +26,7 @@
 
 import { toastr } from "@docspace/shared/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import { makeAutoObservable } from "mobx";
 import { Trans } from "react-i18next";

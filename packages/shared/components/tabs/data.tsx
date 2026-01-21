@@ -27,7 +27,7 @@
 import { TTabItem } from "./Tabs.types";
 import { FileInput } from "../file-input";
 import { Row } from "../rows";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { InputSize } from "../text-input";
 
 export const data: TTabItem[] = [

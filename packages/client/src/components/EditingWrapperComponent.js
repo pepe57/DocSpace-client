@@ -27,7 +27,7 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { TextInput } from "@docspace/shared/components/text-input";
 
 import {

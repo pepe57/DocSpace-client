@@ -36,14 +36,14 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import {
   getUserType,
   convertLanguage,
@@ -360,7 +360,11 @@ const MainProfile = (props: MainProfileProps) => {
   const isBetaLanguage = selectedLanguage?.isBeta;
 
   return (
-    <div className={styles.profileContainer} ref={profileContainerRef} data-testid="main-profile">
+    <div
+      className={styles.profileContainer}
+      ref={profileContainerRef}
+      data-testid="main-profile"
+    >
       <div className={styles.profileWrapper} ref={styleContainerRef}>
         <div className={styles.avatarWrapper}>
           <Avatar

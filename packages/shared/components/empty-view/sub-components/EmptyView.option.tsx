@@ -27,7 +27,7 @@ import React from "react";
 import { Link as LinkRouter } from "react-router";
 
 import { classNames } from "../../../utils";
-import { Link, LinkType } from "../../link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "../../button";
 
 import { EmptyViewItem } from "./EmptyView.item";

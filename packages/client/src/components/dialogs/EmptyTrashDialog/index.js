@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect } from "react";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";

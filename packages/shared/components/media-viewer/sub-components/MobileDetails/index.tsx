@@ -30,7 +30,7 @@ import classNames from "classnames";
 
 import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 import BackArrow from "PUBLIC_DIR/images/viewer.media.back.react.svg";
-import { Text } from "../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { ContextMenu } from "../../../context-menu";
 

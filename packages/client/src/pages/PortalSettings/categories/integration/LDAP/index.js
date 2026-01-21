@@ -32,7 +32,7 @@ import { useNavigate } from "react-router";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
-import { isMobile } from "@docspace/shared/utils/device";
+import { isMobile } from "@docspace/ui-kit/utils/device";
 
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";

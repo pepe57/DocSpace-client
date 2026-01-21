@@ -42,7 +42,7 @@ import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
 import { DropDown } from "@docspace/shared/components/drop-down";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";

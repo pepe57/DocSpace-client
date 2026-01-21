@@ -38,7 +38,7 @@ import { useDidMount } from "../../../../../hooks/useDidMount";
 import { useUnmount } from "../../../../../hooks/useUnmount";
 import { DropDownItem } from "../../../../../components/drop-down-item";
 import { IconButton } from "../../../../../components/icon-button";
-import { Text } from "../../../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { THIRD_PARTY_SERVICES_URL } from "../../../../../constants";
 
 import { GoogleCloudStorage } from "../storages/GoogleCloudStorage";

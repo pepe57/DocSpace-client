@@ -34,7 +34,7 @@ import LinuxReactSvgUrl from "PUBLIC_DIR/images/linux.react.svg?url";
 import AndroidReactSvgUrl from "PUBLIC_DIR/images/android.react.svg?url";
 import IOSReactSvgUrl from "PUBLIC_DIR/images/iOS.react.svg?url";
 
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../../icon-button";
 
 import styles from "../Article.module.scss";

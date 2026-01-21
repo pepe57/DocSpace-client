@@ -31,7 +31,7 @@ import { Trans } from "react-i18next";
 import QuantityPicker from "@docspace/shared/components/quantity-picker";
 import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
 import { getConvertedSize } from "@docspace/shared/utils/common";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { useServicesActions } from "../../hooks/useServicesActions";
 import styles from "../../styles/index.module.scss";

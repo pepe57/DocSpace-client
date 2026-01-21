@@ -27,7 +27,7 @@
 import { useEffect, useState } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 

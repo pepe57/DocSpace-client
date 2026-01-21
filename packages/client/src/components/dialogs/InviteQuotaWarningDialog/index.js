@@ -31,7 +31,7 @@ import { useNavigate, useLocation } from "react-router";
 import moment from "moment-timezone";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
 
 import RoomsContent from "./sub-components/RoomsContent";

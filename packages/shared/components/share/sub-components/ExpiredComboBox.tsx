@@ -29,8 +29,8 @@ import { useTranslation, Trans } from "react-i18next";
 
 import moment from "moment";
 
-import { Text } from "../../text";
-import { Link, LinkType } from "../../link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { globalColors } from "../../../themes";
 import { LinkWithDropdown } from "../../link-with-dropdown";
 

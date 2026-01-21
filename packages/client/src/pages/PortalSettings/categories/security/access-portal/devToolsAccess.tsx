@@ -31,8 +31,8 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 

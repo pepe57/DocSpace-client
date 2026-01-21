@@ -47,7 +47,7 @@ import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { Label } from "@docspace/ui-kit/components/label";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";

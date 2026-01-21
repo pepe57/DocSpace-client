@@ -41,7 +41,7 @@ import {
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
 import { Backdrop } from "../backdrop";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Avatar, AvatarRole, AvatarSize } from "../avatar";
 import { IconButton } from "../icon-button";
 import { RoomIcon } from "../room-icon";

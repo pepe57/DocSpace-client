@@ -34,7 +34,7 @@ import { ToolsPermission } from "../../../../../../../api/ai/enums";
 import type { TToolCallContent } from "../../../../../../../api/ai/types";
 import { updateToolsPermission } from "../../../../../../../api/ai";
 
-import { Text } from "../../../../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "../../../../../../button";
 import { Checkbox } from "../../../../../../checkbox";
 

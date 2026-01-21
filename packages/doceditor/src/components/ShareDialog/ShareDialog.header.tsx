@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { useItemIcon } from "@docspace/shared/hooks/useItemIcon";
 import { IconButton } from "@docspace/shared/components/icon-button";

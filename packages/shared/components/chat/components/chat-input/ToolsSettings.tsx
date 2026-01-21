@@ -49,13 +49,13 @@ import { getOAuthToken } from "../../../../utils/common";
 import { getServerIcon, isMobile } from "../../../../utils";
 import { useTheme } from "../../../../hooks/useTheme";
 
-import { Text } from "../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { ContextMenu, type ContextMenuRefType } from "../../../context-menu";
 import { IconButton } from "../../../icon-button";
 import { Aside } from "../../../aside";
 import { Button, ButtonSize } from "../../../button";
 import { Backdrop } from "../../../backdrop";
-import { TooltipContainer } from "../../../tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import { useChatStore } from "../../store/chatStore";
 import { useMessageStore } from "../../store/messageStore";
@@ -63,7 +63,7 @@ import { useMessageStore } from "../../store/messageStore";
 import type useToolsSettings from "../../hooks/useToolsSettings";
 
 import styles from "./ChatInput.module.scss";
-import { Link, LinkType } from "../../../link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 const ToolsSettings = ({
   servers,

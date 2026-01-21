@@ -30,7 +30,7 @@ import { isMobileOnly } from "react-device-detect";
 
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 interface ILDAPContainer {
   isLdapLoginChecked: boolean;

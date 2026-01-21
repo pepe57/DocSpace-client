@@ -34,7 +34,7 @@ import { FileTile } from "../file-tile/FileTile";
 import { TileContainerProps } from "./TileContainer.types";
 import { TileContainer } from ".";
 import { TileContent } from "../tile-content/TileContent";
-import { Link } from "../../link";
+import { Link } from "@docspace/ui-kit/components/link";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
 import { FileType } from "../../../enums";
 

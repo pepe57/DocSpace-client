@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { mobile } from "@docspace/shared/utils/device";
+import { mobile } from "@docspace/ui-kit/utils/device";
 import { globalColors } from "@docspace/shared/themes";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 

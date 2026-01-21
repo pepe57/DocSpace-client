@@ -31,7 +31,7 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg";
 import EmptyScreenFilterPng from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg?url";
 
 import { IconSizeType } from "../../utils";
-import { Link, LinkType } from "../link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { EmptyScreenContainer } from ".";
 
 import styles from "./EmptyScreenContainer.stories.module.scss";

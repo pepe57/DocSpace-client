@@ -29,8 +29,11 @@ import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import React from "react";
 import { ReactSVG } from "react-svg";
 
-import { Text as TextComponent } from "../text";
-import { Link as LinkComponent, LinkType } from "../link";
+import { Text as TextComponent } from "@docspace/ui-kit/components/text";
+import {
+  Link as LinkComponent,
+  LinkType,
+} from "@docspace/ui-kit/components/link";
 import { IconButton } from "../icon-button";
 
 import styles from "./CampaignsBanner.module.scss";

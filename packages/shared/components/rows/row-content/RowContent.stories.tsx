@@ -30,7 +30,7 @@ import SendClockReactSvg from "PUBLIC_DIR/images/send.clock.react.svg";
 import CatalogSpamReactSvg from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
 
 import { IconSizeType } from "../../../utils";
-import { Link, LinkType } from "../../link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Checkbox } from "../../checkbox";
 
 import { RowContent } from ".";

@@ -28,7 +28,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
 
 const DeletePortalDialog = (props) => {

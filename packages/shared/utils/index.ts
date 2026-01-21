@@ -62,7 +62,7 @@ import {
   checkIsSSR,
   INFO_PANEL_WIDTH,
   isMobileDevice,
-} from "./device";
+} from "@docspace/ui-kit/utils/device";
 import { getCookie } from "./cookie";
 import { Context, Provider, Consumer } from "./context";
 import commonIconsStyles, {

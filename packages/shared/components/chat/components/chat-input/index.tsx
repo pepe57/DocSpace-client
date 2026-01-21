@@ -33,7 +33,7 @@ import type { TFile } from "../../../../api/files/types";
 import { RectangleSkeleton } from "../../../../skeletons";
 
 import { Textarea } from "../../../textarea";
-import { Text } from "../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { useMessageStore } from "../../store/messageStore";
 import { useChatStore } from "../../store/chatStore";

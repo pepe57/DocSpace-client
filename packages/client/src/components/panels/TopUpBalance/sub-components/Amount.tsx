@@ -30,8 +30,8 @@ import { isMobile } from "react-device-detect";
 
 import { TabItem } from "@docspace/shared/components/tab-item";
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
-import { Text } from "@docspace/shared/components/text";
-import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "../styles/Amount.module.scss";
 import { useAmountValue } from "../../../../pages/PortalSettings/categories/payments/Wallet/context";

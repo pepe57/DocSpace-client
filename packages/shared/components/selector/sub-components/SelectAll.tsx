@@ -27,7 +27,7 @@
 import React, { use } from "react";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "../../checkbox";
 
 import { SelectAllContext } from "../contexts/SelectAll";

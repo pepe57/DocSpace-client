@@ -34,9 +34,9 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "../../../../../components/modal-dialog";
-import { Text } from "../../../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "../../../../../components/button";
-import { Link } from "../../../../../components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 import {
   deleteBackup,
   deleteBackupHistory,

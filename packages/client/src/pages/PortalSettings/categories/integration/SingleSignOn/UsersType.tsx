@@ -28,7 +28,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { isMobile } from "@docspace/shared/utils";
 
 import AccessSelector from "SRC_DIR/components/AccessSelector";

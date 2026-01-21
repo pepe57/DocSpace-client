@@ -28,7 +28,7 @@ import React from "react";
 import classNames from "classnames";
 import { motion, useAnimation } from "framer-motion";
 
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import type { ToggleButtonProps, ToggleIconProps } from "./ToggleButton.types";
 import styles from "./ToggleButton.module.scss";

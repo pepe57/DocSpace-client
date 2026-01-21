@@ -33,7 +33,7 @@ import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 
 import { Avatar } from "@docspace/shared/components/avatar";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { parseAddresses } from "@docspace/shared/utils";
 import {
   getUserType,

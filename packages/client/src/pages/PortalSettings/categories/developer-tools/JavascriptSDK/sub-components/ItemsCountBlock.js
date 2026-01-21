@@ -29,7 +29,7 @@ import debounce from "lodash.debounce";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Label } from "@docspace/ui-kit/components/label";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { LabelGroup, ControlsGroup } from "../presets/StyledPresets";
 

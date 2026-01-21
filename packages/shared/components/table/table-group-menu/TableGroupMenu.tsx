@@ -35,7 +35,7 @@ import CrossIconSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
 import { EMPTY_ARRAY, EMPTY_OBJECT, FUNCTION_EMPTY } from "../../../constants";
 
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "../../checkbox";
 import { ComboBox, TOption } from "../../combobox";
 import { IconButton } from "../../icon-button";

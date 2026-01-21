@@ -30,7 +30,7 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { globalColors } from "@docspace/shared/themes";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 
