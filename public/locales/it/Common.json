@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "Il collegamento al file con il <strong>Filtro personalizzato</strong> abilitato è stato copiato correttamente negli appunti.",
   "LinkDoesNotExist": "Il link che stai cercando di aprire non esiste.",
   "LinkExpirationDate": "Il file condiviso tramite link scadrà il <1>{{date}}</1>",
-  "LinkExpireAfter": "Il link scadrà dopo il <1>{{date}}</1>",
   "LinkExpired": "Il link è scaduto.",
   "LinkHasExpired": "Il link che hai seguito è scaduto.",
-  "LinkHasExpiredAndHasBeenDisabled": "Il link è scaduto ed è stato disattivato",
   "LinkIsValid": "Il link è valido per <1>{{date}}</1>",
   "LinkName": "Nome del link",
   "LinkNoExpiration": "Il link non ha <1>data di scadenza</1>",
@@ -756,7 +754,6 @@
   "Remove": "Rimuovi",
   "RemovedFromList": "Rimosso dalla lista",
   "RemoveFromList": "Rimuovere dalla lista",
-  "RemoveLink": "Rimuovi il link",
   "Rename": "Rinomina",
   "RenewSubscription": "Desideri rinnovare l'abbonamento?",
   "RepeatInvitation": "Ripeti l’invito",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "Condividi il modulo originale per la compilazione.",
   "ShareTheRoom": "la stanza",
   "ShareToFillOut": "Condividi per compilare",
-  "ShareVia": "Condividi via",
   "ShareWithPortalUsers": "Condivisione con utenti {{productName}}",
   "ShareWithPortalUsersDescription": "Seleziona utenti specifici da {{productName}} e invitali a compilare il modulo originale.",
   "ShowAboutWindow": "Mostra la finestra Informazioni",
@@ -1054,5 +1050,6 @@
   "YouHaveUnsavedChanges": "Hai delle modifiche non salvate",
   "YourCurrentDomain": "Il tuo dominio attuale",
   "YourLogo": "Il tuo logo",
-  "YourTurn": "Il tuo turno"
+  "YourTurn": "Il tuo turno",
+  "ExternalLink": "Collegamento esterno"
 }
