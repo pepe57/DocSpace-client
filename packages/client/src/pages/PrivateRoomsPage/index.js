@@ -28,10 +28,10 @@ import DarkGeneralPngUrl from "PUBLIC_DIR/images/dark_general.png";
 import { useState } from "react";
 import { observer, inject } from "mobx-react";
 import styled from "styled-components";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 import { Button } from "@docspace/shared/components/button";
-import { Loader } from "@docspace/shared/components/loader";
+import { Loader } from "@docspace/ui-kit/components/loader";
 import Section from "@docspace/shared/components/section";
 import SectionWrapper from "SRC_DIR/components/Section";
 import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
@@ -122,142 +122,142 @@ const StyledPrivacyPage = styled.div.attrs(injectDefaultTheme)`
 `;
 
 const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
-  const [isDisabled, setIsDisabled] = useState(false);
+	const [isDisabled, setIsDisabled] = useState(false);
 
-  const location = useLocation();
+	const location = useLocation();
 
-  const onOpenEditorsPopup = async () => {
-    setIsDisabled(true);
-    checkProtocol(location.search.split("=")[1])
-      .then(() => setIsDisabled(false))
-      .catch(() => {
-        setIsDisabled(false);
-        toastr.info(
-          t("PrivacyEditors", {
-            organizationName: logoText,
-          }),
-        );
-      });
-  };
+	const onOpenEditorsPopup = async () => {
+		setIsDisabled(true);
+		checkProtocol(location.search.split("=")[1])
+			.then(() => setIsDisabled(false))
+			.catch(() => {
+				setIsDisabled(false);
+				toastr.info(
+					t("PrivacyEditors", {
+						organizationName: logoText,
+					}),
+				);
+			});
+	};
 
-  return !tReady ? (
-    <Loader className="pageLoader" type="rombs" size="40px" />
-  ) : (
-    <StyledPrivacyPage>
-      <div className="privacy-rooms-avatar">
-        <Link href="/">
-          <img
-            className="privacy-rooms-logo"
-            src={DarkGeneralPngUrl}
-            width="320"
-            height="181"
-            alt="Logo"
-          />
-        </Link>
-      </div>
+	return !tReady ? (
+		<Loader className="pageLoader" type="rombs" size="40px" />
+	) : (
+		<StyledPrivacyPage>
+			<div className="privacy-rooms-avatar">
+				<Link href="/">
+					<img
+						className="privacy-rooms-logo"
+						src={DarkGeneralPngUrl}
+						width="320"
+						height="181"
+						alt="Logo"
+					/>
+				</Link>
+			</div>
 
-      <div className="privacy-rooms-body">
-        <Text
-          textAlign="center"
-          className="privacy-rooms-text-header"
-          fontSize="38px"
-        >
-          {t("PrivacyHeader")}
-        </Text>
+			<div className="privacy-rooms-body">
+				<Text
+					textAlign="center"
+					className="privacy-rooms-text-header"
+					fontSize="38px"
+				>
+					{t("PrivacyHeader")}
+				</Text>
 
-        <Text as="div" textAlign="center" fontSize="20px" fontWeight={300}>
-          <Trans
-            t={t}
-            i18nKey="PrivacyClick"
-            ns="PrivacyPage"
-            values={{
-              organizationName: logoText,
-            }}
-            components={{
-              1: <strong />,
-            }}
-          />
-        </Text>
+				<Text as="div" textAlign="center" fontSize="20px" fontWeight={300}>
+					<Trans
+						t={t}
+						i18nKey="PrivacyClick"
+						ns="PrivacyPage"
+						values={{
+							organizationName: logoText,
+						}}
+						components={{
+							1: <strong />,
+						}}
+					/>
+				</Text>
 
-        <Text
-          textAlign="center"
-          className="privacy-rooms-text-dialog"
-          fontSize="20px"
-          fontWeight={300}
-        >
-          {t("PrivacyDialog")}.
-        </Text>
-        <Button
-          onClick={onOpenEditorsPopup}
-          size="medium"
-          primary
-          isDisabled={isDisabled}
-          label={t("PrivacyButton", {
-            organizationName: logoText,
-          })}
-        />
+				<Text
+					textAlign="center"
+					className="privacy-rooms-text-dialog"
+					fontSize="20px"
+					fontWeight={300}
+				>
+					{t("PrivacyDialog")}.
+				</Text>
+				<Button
+					onClick={onOpenEditorsPopup}
+					size="medium"
+					primary
+					isDisabled={isDisabled}
+					label={t("PrivacyButton", {
+						organizationName: logoText,
+					})}
+				/>
 
-        <label className="privacy-rooms-text-separator" />
+				<label className="privacy-rooms-text-separator" />
 
-        <div className="privacy-rooms-install">
-          <Text
-            className="privacy-rooms-install-text"
-            fontSize="16px"
-            fontWeight={300}
-          >
-            {t("PrivacyEditors", {
-              organizationName: logoText,
-            })}
-            ?
-          </Text>
-          <Link
-            className="privacy-rooms-link privacy-rooms-install-text"
-            fontSize="16px"
-            isHovered
-            href={desktopUrl}
-          >
-            {t("PrivacyInstall")}
-          </Link>
-        </div>
+				<div className="privacy-rooms-install">
+					<Text
+						className="privacy-rooms-install-text"
+						fontSize="16px"
+						fontWeight={300}
+					>
+						{t("PrivacyEditors", {
+							organizationName: logoText,
+						})}
+						?
+					</Text>
+					<Link
+						className="privacy-rooms-link privacy-rooms-install-text"
+						fontSize="16px"
+						isHovered
+						href={desktopUrl}
+					>
+						{t("PrivacyInstall")}
+					</Link>
+				</div>
 
-        <Text
-          as="div"
-          fontSize="12px"
-          textAlign="center"
-          className="privacy-rooms-text-description"
-        >
-          <p>
-            {t("PrivacyDescriptionEditors", {
-              organizationName: logoText,
-            })}
-            .
-          </p>
-          <p>{t("PrivacyDescriptionConnect")}.</p>
-        </Text>
-      </div>
-    </StyledPrivacyPage>
-  );
+				<Text
+					as="div"
+					fontSize="12px"
+					textAlign="center"
+					className="privacy-rooms-text-description"
+				>
+					<p>
+						{t("PrivacyDescriptionEditors", {
+							organizationName: logoText,
+						})}
+						.
+					</p>
+					<p>{t("PrivacyDescriptionConnect")}.</p>
+				</Text>
+			</div>
+		</StyledPrivacyPage>
+	);
 };
 
 const PrivacyPageWrapper = withTranslation(["PrivacyPage"])(
-  PrivacyPageComponent,
+	PrivacyPageComponent,
 );
 
 const PrivacyPage = (props) => {
-  return (
-    <SectionWrapper>
-      <Section.SectionBody>
-        <PrivacyPageWrapper {...props} />
-      </Section.SectionBody>
-    </SectionWrapper>
-  );
+	return (
+		<SectionWrapper>
+			<Section.SectionBody>
+				<PrivacyPageWrapper {...props} />
+			</Section.SectionBody>
+		</SectionWrapper>
+	);
 };
 
 export default inject(({ settingsStore }) => {
-  const { logoText, desktopUrl } = settingsStore;
+	const { logoText, desktopUrl } = settingsStore;
 
-  return {
-    logoText,
-    desktopUrl,
-  };
+	return {
+		logoText,
+		desktopUrl,
+	};
 })(observer(PrivacyPage));

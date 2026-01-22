@@ -32,7 +32,7 @@ import remarkGfm from "remark-gfm";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { Loader } from "@docspace/shared/components/loader";
+import { Loader } from "@docspace/ui-kit/components/loader";
 import styled from "styled-components";
 import { Link } from "@docspace/ui-kit/components/link";
 

@@ -33,7 +33,7 @@ import moment from "moment";
 import { Text } from "@docspace/ui-kit/components/text";
 import { calcalateWalletPayment } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
-import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
@@ -48,173 +48,173 @@ let timeout: NodeJS.Timeout | null;
 let controller: AbortController;
 
 type PlanUpgradePreviewProps = {
-  amount: number;
-  currentStoragePlanSize?: number;
-  daysUntilStorageExpiry?: number;
-  setPartialUpgradeFee?: (amount: number) => void;
-  partialUpgradeFee?: number;
-  storageExpiryDate?: string;
-  formatWalletCurrency?: (amount: number, decimalPlaces?: number) => string;
+	amount: number;
+	currentStoragePlanSize?: number;
+	daysUntilStorageExpiry?: number;
+	setPartialUpgradeFee?: (amount: number) => void;
+	partialUpgradeFee?: number;
+	storageExpiryDate?: string;
+	formatWalletCurrency?: (amount: number, decimalPlaces?: number) => string;
 };
 
 const getDirectionalText = (isRTL: boolean) => {
-  return isRTL ? `>1` : `<1`;
+	return isRTL ? `>1` : `<1`;
 };
 
 const PlanUpgradePreview: React.FC<PlanUpgradePreviewProps> = (props) => {
-  const {
-    currentStoragePlanSize,
-    amount,
-    daysUntilStorageExpiry,
-    setPartialUpgradeFee,
-    partialUpgradeFee,
-    storageExpiryDate,
-    formatWalletCurrency,
-  } = props;
-  const { isRTL } = useInterfaceDirection();
+	const {
+		currentStoragePlanSize,
+		amount,
+		daysUntilStorageExpiry,
+		setPartialUpgradeFee,
+		partialUpgradeFee,
+		storageExpiryDate,
+		formatWalletCurrency,
+	} = props;
+	const { isRTL } = useInterfaceDirection();
 
-  const { setIsWaitingCalculation } = usePaymentContext();
-  const { t } = useTranslation(["Payments", "Common"]);
-  const [isLoading, setIsLoading] = useState(false);
+	const { setIsWaitingCalculation } = usePaymentContext();
+	const { t } = useTranslation(["Payments", "Common"]);
+	const [isLoading, setIsLoading] = useState(false);
 
-  const { calculateDifferenceBetweenPlan } = useServicesActions();
+	const { calculateDifferenceBetweenPlan } = useServicesActions();
 
-  const tooltipText = () => {
-    return (
-      <>
-        <Text as="span">
-          {daysUntilStorageExpiry === 0
-            ? t("PartialPaymentNoDate", { storageUnit: t("Common:Gigabyte") })
-            : t("PartialPaymentWithDate", {
-                startDate: moment().tz(window.timezone).format("LL"),
-                endDate: storageExpiryDate,
-                storageUnit: t("Common:Gigabyte"),
-              })}
-        </Text>{" "}
-        <Text as="span">{t("PartialPaymentDescription")}</Text>
-      </>
-    );
-  };
+	const tooltipText = () => {
+		return (
+			<>
+				<Text as="span">
+					{daysUntilStorageExpiry === 0
+						? t("PartialPaymentNoDate", { storageUnit: t("Common:Gigabyte") })
+						: t("PartialPaymentWithDate", {
+								startDate: moment().tz(window.timezone).format("LL"),
+								endDate: storageExpiryDate,
+								storageUnit: t("Common:Gigabyte"),
+							})}
+				</Text>{" "}
+				<Text as="span">{t("PartialPaymentDescription")}</Text>
+			</>
+		);
+	};
 
-  useEffect(() => {
-    const calcalatePayment = () => {
-      setIsLoading(true);
-      setIsWaitingCalculation(true);
+	useEffect(() => {
+		const calcalatePayment = () => {
+			setIsLoading(true);
+			setIsWaitingCalculation(true);
 
-      if (timeout) clearTimeout(timeout);
-      timeout = setTimeout(async () => {
-        if (controller) controller.abort();
+			if (timeout) clearTimeout(timeout);
+			timeout = setTimeout(async () => {
+				if (controller) controller.abort();
 
-        controller = new AbortController();
+				controller = new AbortController();
 
-        const quantity = calculateDifferenceBetweenPlan(amount);
-        try {
-          const currentWriteOff = await calcalateWalletPayment(
-            quantity,
-            1,
-            controller.signal,
-          );
+				const quantity = calculateDifferenceBetweenPlan(amount);
+				try {
+					const currentWriteOff = await calcalateWalletPayment(
+						quantity,
+						1,
+						controller.signal,
+					);
 
-          if (!currentWriteOff) {
-            toastr.error(t("Common:UnexpectedError"));
-            return;
-          }
+					if (!currentWriteOff) {
+						toastr.error(t("Common:UnexpectedError"));
+						return;
+					}
 
-          const paymentAmount = currentWriteOff.amount;
-          setPartialUpgradeFee!(paymentAmount);
-          setIsLoading(false);
-          setIsWaitingCalculation(false);
-        } catch (e) {
-          toastr.error(e as unknown as string);
-        }
-      }, 1000);
-    };
+					const paymentAmount = currentWriteOff.amount;
+					setPartialUpgradeFee!(paymentAmount);
+					setIsLoading(false);
+					setIsWaitingCalculation(false);
+				} catch (e) {
+					toastr.error(e as unknown as string);
+				}
+			}, 1000);
+		};
 
-    calcalatePayment();
-  }, [amount]);
+		calcalatePayment();
+	}, [amount]);
 
-  useEffect(() => {
-    return () => {
-      if (timeout) clearTimeout(timeout);
-      setIsWaitingCalculation(false);
-      timeout = null;
-    };
-  }, []);
+	useEffect(() => {
+		return () => {
+			if (timeout) clearTimeout(timeout);
+			setIsWaitingCalculation(false);
+			timeout = null;
+		};
+	}, []);
 
-  const days = daysUntilStorageExpiry || getDirectionalText(isRTL);
+	const days = daysUntilStorageExpiry || getDirectionalText(isRTL);
 
-  return (
-    <>
-      <div className={styles.planInfoHeader}>
-        <Text fontWeight={700} fontSize="16px">
-          {t("DueToday")}
-        </Text>
-        <HelpButton
-          size={12}
-          offsetRight={0}
-          place={isRTL ? "left" : "right"}
-          tooltipContent={tooltipText()}
-          dataTestId="partial_payment_help_button"
-        />
-      </div>
-      <div className={classNames(styles.planInfoContainer, styles.withBottom)}>
-        <div className={styles.planInfoIcon}>
-          <UpgradeWalletIcon />
-        </div>
-        <div className={styles.planInfoBody}>
-          <Text fontWeight={600}>
-            {t("AdditionalStorage", {
-              amount: `${calculateDifference(amount, currentStoragePlanSize!)} ${t("Common:Gigabyte")}`,
-            })}
-          </Text>
-          <Text
-            fontWeight="600"
-            fontSize="11px"
-            className={styles.priceForEach}
-          >
-            {t("RemainingDays", { count: Number(days) })}
-          </Text>
-        </div>
+	return (
+		<>
+			<div className={styles.planInfoHeader}>
+				<Text fontWeight={700} fontSize="16px">
+					{t("DueToday")}
+				</Text>
+				<HelpButton
+					size={12}
+					offsetRight={0}
+					place={isRTL ? "left" : "right"}
+					tooltipContent={tooltipText()}
+					dataTestId="partial_payment_help_button"
+				/>
+			</div>
+			<div className={classNames(styles.planInfoContainer, styles.withBottom)}>
+				<div className={styles.planInfoIcon}>
+					<UpgradeWalletIcon />
+				</div>
+				<div className={styles.planInfoBody}>
+					<Text fontWeight={600}>
+						{t("AdditionalStorage", {
+							amount: `${calculateDifference(amount, currentStoragePlanSize!)} ${t("Common:Gigabyte")}`,
+						})}
+					</Text>
+					<Text
+						fontWeight="600"
+						fontSize="11px"
+						className={styles.priceForEach}
+					>
+						{t("RemainingDays", { count: Number(days) })}
+					</Text>
+				</div>
 
-        <div className={styles.planInfoPrice}>
-          {isLoading ? (
-            <Loader color="" size="20px" type={LoaderTypes.track} />
-          ) : (
-            <>
-              <Text fontWeight="600" fontSize="14px">
-                {formatWalletCurrency!(partialUpgradeFee!)}
-              </Text>
-              <Text
-                fontWeight="600"
-                fontSize="11px"
-                className={styles.priceForEach}
-              >
-                {t("ForDays", { count: Number(days) })}
-              </Text>
-            </>
-          )}
-        </div>
-      </div>
-    </>
-  );
+				<div className={styles.planInfoPrice}>
+					{isLoading ? (
+						<Loader color="" size="20px" type={LoaderTypes.track} />
+					) : (
+						<>
+							<Text fontWeight="600" fontSize="14px">
+								{formatWalletCurrency!(partialUpgradeFee!)}
+							</Text>
+							<Text
+								fontWeight="600"
+								fontSize="11px"
+								className={styles.priceForEach}
+							>
+								{t("ForDays", { count: Number(days) })}
+							</Text>
+						</>
+					)}
+				</div>
+			</div>
+		</>
+	);
 };
 
 export default inject(
-  ({ currentTariffStatusStore, servicesStore, paymentStore }: TStore) => {
-    const {
-      currentStoragePlanSize,
-      daysUntilStorageExpiry,
-      storageExpiryDate,
-    } = currentTariffStatusStore;
-    const { setPartialUpgradeFee, partialUpgradeFee } = servicesStore;
-    const { formatWalletCurrency } = paymentStore;
-    return {
-      currentStoragePlanSize,
-      daysUntilStorageExpiry,
-      setPartialUpgradeFee,
-      partialUpgradeFee,
-      storageExpiryDate,
-      formatWalletCurrency,
-    };
-  },
+	({ currentTariffStatusStore, servicesStore, paymentStore }: TStore) => {
+		const {
+			currentStoragePlanSize,
+			daysUntilStorageExpiry,
+			storageExpiryDate,
+		} = currentTariffStatusStore;
+		const { setPartialUpgradeFee, partialUpgradeFee } = servicesStore;
+		const { formatWalletCurrency } = paymentStore;
+		return {
+			currentStoragePlanSize,
+			daysUntilStorageExpiry,
+			setPartialUpgradeFee,
+			partialUpgradeFee,
+			storageExpiryDate,
+			formatWalletCurrency,
+		};
+	},
 )(observer(PlanUpgradePreview));

@@ -28,33 +28,33 @@ import type { FC } from "react";
 import LockedReactSvg from "PUBLIC_DIR/images/icons/12/locked.react.svg";
 
 import styles from "../Share.module.scss";
-import { Loader, LoaderTypes } from "../../loader";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Avatar, AvatarSize, AvatarRole } from "../../avatar";
 
 export interface AccessTypeIconProps {
-  isLoaded: boolean;
-  avatar: string;
-  isLocked: boolean;
+	isLoaded: boolean;
+	avatar: string;
+	isLocked: boolean;
 }
 
 export const AccessTypeIcon: FC<AccessTypeIconProps> = ({
-  isLoaded,
-  avatar,
-  isLocked,
+	isLoaded,
+	avatar,
+	isLocked,
 }) => {
-  if (isLoaded) {
-    return (
-      <Loader className={styles.loader} size="20px" type={LoaderTypes.track} />
-    );
-  }
+	if (isLoaded) {
+		return (
+			<Loader className={styles.loader} size="20px" type={LoaderTypes.track} />
+		);
+	}
 
-  return (
-    <Avatar
-      size={AvatarSize.min}
-      role={AvatarRole.user}
-      source={avatar}
-      roleIcon={isLocked ? <LockedReactSvg /> : undefined}
-      noClick
-    />
-  );
+	return (
+		<Avatar
+			size={AvatarSize.min}
+			role={AvatarRole.user}
+			source={avatar}
+			roleIcon={isLocked ? <LockedReactSvg /> : undefined}
+			noClick
+		/>
+	);
 };

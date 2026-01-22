@@ -29,7 +29,7 @@ import { observer, inject } from "mobx-react";
 import { useNavigate, useLocation, useSearchParams } from "react-router";
 
 import Section from "@docspace/shared/components/section";
-import { Loader } from "@docspace/shared/components/loader";
+import { Loader } from "@docspace/ui-kit/components/loader";
 import { ValidationStatus } from "@docspace/shared/enums";
 import SectionWrapper from "SRC_DIR/components/Section";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -40,131 +40,131 @@ import PublicRoomPage from "./PublicRoomPage";
 import RoomPassword from "./sub-components/RoomPassword";
 
 const PublicRoom = (props) => {
-  const {
-    isLoaded,
-    isLoading,
-    roomStatus,
-    roomId,
-    validatePublicRoomKey,
-    getFilesSettings,
-    setPublicRoomKey,
-    setIsArticleLoading,
-    setClientError,
-  } = props;
+	const {
+		isLoaded,
+		isLoading,
+		roomStatus,
+		roomId,
+		validatePublicRoomKey,
+		getFilesSettings,
+		setPublicRoomKey,
+		setIsArticleLoading,
+		setClientError,
+	} = props;
 
-  const navigate = useNavigate();
-  const location = useLocation();
+	const navigate = useNavigate();
+	const location = useLocation();
 
-  const [searchParams] = useSearchParams();
-  const key = searchParams.get("key");
+	const [searchParams] = useSearchParams();
+	const key = searchParams.get("key");
 
-  useEffect(() => {
-    validatePublicRoomKey(key);
-  }, [validatePublicRoomKey]);
+	useEffect(() => {
+		validatePublicRoomKey(key);
+	}, [validatePublicRoomKey]);
 
-  const fetchRoomFiles = async () => {
-    setPublicRoomKey(key);
-    await getFilesSettings();
-    setIsArticleLoading(false);
+	const fetchRoomFiles = async () => {
+		setPublicRoomKey(key);
+		await getFilesSettings();
+		setIsArticleLoading(false);
 
-    const filterObj = FilesFilter.getFilter(window.location);
+		const filterObj = FilesFilter.getFilter(window.location);
 
-    if (filterObj?.folder && filterObj?.folder !== "@my") {
-      const url = `${location.pathname}?${filterObj.toUrlParams()}`;
+		if (filterObj?.folder && filterObj?.folder !== "@my") {
+			const url = `${location.pathname}?${filterObj.toUrlParams()}`;
 
-      navigate(url);
-    } else {
-      const newFilter = FilesFilter.getDefault();
-      newFilter.folder = roomId;
-      newFilter.key = key;
+			navigate(url);
+		} else {
+			const newFilter = FilesFilter.getDefault();
+			newFilter.folder = roomId;
+			newFilter.key = key;
 
-      const url = `${location.pathname}?${newFilter.toUrlParams()}`;
+			const url = `${location.pathname}?${newFilter.toUrlParams()}`;
 
-      navigate(url);
-    }
-  };
+			navigate(url);
+		}
+	};
 
-  useEffect(() => {
-    if (isLoaded) fetchRoomFiles();
-  }, [isLoaded]);
+	useEffect(() => {
+		if (isLoaded) fetchRoomFiles();
+	}, [isLoaded]);
 
-  const renderLoader = () => {
-    return (
-      <SectionWrapper>
-        <Section.SectionBody>
-          <Loader className="pageLoader" type="rombs" size="40px" />
-        </Section.SectionBody>
-      </SectionWrapper>
-    );
-  };
+	const renderLoader = () => {
+		return (
+			<SectionWrapper>
+				<Section.SectionBody>
+					<Loader className="pageLoader" type="rombs" size="40px" />
+				</Section.SectionBody>
+			</SectionWrapper>
+		);
+	};
 
-  useEffect(() => {
-    if (
-      roomStatus === ValidationStatus.Invalid ||
-      roomStatus === ValidationStatus.Expired
-    ) {
-      setClientError(true);
-    }
-  }, [roomStatus, setClientError]);
+	useEffect(() => {
+		if (
+			roomStatus === ValidationStatus.Invalid ||
+			roomStatus === ValidationStatus.Expired
+		) {
+			setClientError(true);
+		}
+	}, [roomStatus, setClientError]);
 
-  const renderPage = () => {
-    switch (roomStatus) {
-      case ValidationStatus.Ok:
-        return <PublicRoomPage />;
-      case ValidationStatus.Invalid:
-        return <PublicRoomError isInvalid />;
-      case ValidationStatus.Expired:
-        return <PublicRoomError />;
-      case ValidationStatus.Password:
-        return <RoomPassword roomKey={key} />;
-      case ValidationStatus.ExternalAccessDenied:
-        sessionStorage.setItem("referenceUrl", window.location.href);
-        window.open(
-          combineUrl(window.ClientConfig?.proxy?.url, "/login"),
-          "_self",
-        );
-        return;
-      default:
-        return renderLoader();
-    }
-  };
+	const renderPage = () => {
+		switch (roomStatus) {
+			case ValidationStatus.Ok:
+				return <PublicRoomPage />;
+			case ValidationStatus.Invalid:
+				return <PublicRoomError isInvalid />;
+			case ValidationStatus.Expired:
+				return <PublicRoomError />;
+			case ValidationStatus.Password:
+				return <RoomPassword roomKey={key} />;
+			case ValidationStatus.ExternalAccessDenied:
+				sessionStorage.setItem("referenceUrl", window.location.href);
+				window.open(
+					combineUrl(window.ClientConfig?.proxy?.url, "/login"),
+					"_self",
+				);
+				return;
+			default:
+				return renderLoader();
+		}
+	};
 
-  return isLoading ? (
-    renderLoader()
-  ) : isLoaded ? (
-    <PublicRoomPage />
-  ) : (
-    renderPage()
-  );
+	return isLoading ? (
+		renderLoader()
+	) : isLoaded ? (
+		<PublicRoomPage />
+	) : (
+		renderPage()
+	);
 };
 
 export const WrappedComponent = inject(
-  ({
-    settingsStore,
-    publicRoomStore,
-    filesSettingsStore,
-    clientLoadingStore,
-    authStore,
-  }) => {
-    const { validatePublicRoomKey, isLoaded, isLoading, roomStatus, roomId } =
-      publicRoomStore;
+	({
+		settingsStore,
+		publicRoomStore,
+		filesSettingsStore,
+		clientLoadingStore,
+		authStore,
+	}) => {
+		const { validatePublicRoomKey, isLoaded, isLoading, roomStatus, roomId } =
+			publicRoomStore;
 
-    const { getFilesSettings } = filesSettingsStore;
-    const { setPublicRoomKey } = settingsStore;
-    const { setIsArticleLoading } = clientLoadingStore;
-    const { setClientError } = authStore;
-    return {
-      roomId,
-      isLoaded,
-      isLoading,
-      roomStatus,
+		const { getFilesSettings } = filesSettingsStore;
+		const { setPublicRoomKey } = settingsStore;
+		const { setIsArticleLoading } = clientLoadingStore;
+		const { setClientError } = authStore;
+		return {
+			roomId,
+			isLoaded,
+			isLoading,
+			roomStatus,
 
-      getFilesSettings,
+			getFilesSettings,
 
-      validatePublicRoomKey,
-      setPublicRoomKey,
-      setIsArticleLoading,
-      setClientError,
-    };
-  },
+			validatePublicRoomKey,
+			setPublicRoomKey,
+			setIsArticleLoading,
+			setClientError,
+		};
+	},
 )(observer(PublicRoom));

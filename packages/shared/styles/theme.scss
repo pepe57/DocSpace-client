@@ -653,18 +653,6 @@
 }
 
 .light {
-  --loader-color: #{$loader-light};
-  --button-loader-track-primary: #{$white};
-  --button-loader-track-base: var(--color-scheme-main-buttons);
-}
-
-.dark {
-  --loader-color: #{$loader-dark};
-  --button-loader-track-primary: #{$white};
-  --button-loader-track-base: #{$white};
-}
-
-.light {
   --main-button-background-color: var(--accent-main, #{$light-blue-main});
   --main-button-padding: 5px 14px 5px 12px;
   --main-button-border-radius: 3px;
@@ -2323,49 +2311,6 @@
   --settings-backup-background: #{$dark-gray-light};
   --settings-backup-note-color: #{$gray-dark};
   --settings-api-keys-dialog-text: #{$gray-dark};
-}
-
-.light {
-  --rombs-bg: #{$rombs-loader-red-bg};
-
-  --rombs-loader-blue: #{$blue-romb};
-  --rombs-loader-green: #{$green-romb};
-  --rombs-loader-red: #{$red-romb};
-
-  --rombs-loader-blue-colorStep_1: #{$rombs-loader-apricot-colorStep};
-  --rombs-loader-blue-colorStep_2: #{$white};
-  --rombs-loader-blue-colorStep_3: #{$rombs-loader-gray-colorStep};
-  --rombs-loader-blue-colorStep_4: #{$rombs-loader-dark-gray-colorStep};
-
-  --rombs-loader-red-colorStep_1: #{$rombs-loader-blue-colorStep};
-  --rombs-loader-red-colorStep_2: #{$white};
-  --rombs-loader-red-colorStep_3: #{$rombs-loader-light-gray-colorStep};
-
-  --rombs-loader-green-colorStep_1: #{$rombs-loader-green-colorStep};
-  --rombs-loader-green-colorStep_2: #{$white};
-  --rombs-loader-green-colorStep_3: #{$rombs-loader-light-gray-colorStep};
-  --rombs-loader-green-colorStep_4: #{$rombs-loader-gray-colorStep};
-}
-
-.dark {
-  --rombs-bg: #{$rombs-loader-red-bg};
-
-  --rombs-loader-blue: #{$blue-romb};
-  --rombs-loader-green: #{$green-romb};
-  --rombs-loader-red: #{$red-romb};
-
-  --rombs-loader-blue-colorStep_1: #{$black};
-  --rombs-loader-blue-colorStep_2: #{$black};
-  --rombs-loader-blue-colorStep_3: #{$dark-romb};
-  --rombs-loader-blue-colorStep_4: #{$dark-romb};
-
-  --rombs-loader-red-colorStep_1: #{$black};
-  --rombs-loader-red-colorStep_2: #{$black};
-  --rombs-loader-red-colorStep_3: #{$dark-romb};
-
-  --rombs-loader-green-colorStep_1: #{$black};
-  --rombs-loader-green-colorStep_2: #{$black};
-  --rombs-loader-green-colorStep_3: #{$dark-romb};
 }
 
 .light {

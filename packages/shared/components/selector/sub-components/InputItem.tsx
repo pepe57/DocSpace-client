@@ -38,7 +38,7 @@ import {
 import { IconButton } from "../../icon-button";
 import { RoomIcon } from "../../room-icon";
 import { RoomLogo } from "../../room-logo";
-import { Loader, LoaderTypes } from "../../loader";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import styles from "../Selector.module.scss";
 import { InputItemProps } from "../Selector.types";

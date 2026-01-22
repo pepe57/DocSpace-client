@@ -56,7 +56,7 @@ import { Textarea } from "../textarea";
 import { FieldContainer } from "../field-container";
 import { Heading, HeadingSize } from "../heading";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Loader, LoaderTypes } from "../loader";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Row, RowProps } from "../rows";
 import { Scrollbar } from "../scrollbar";
 import { Tabs, TabsTypes } from "../tabs";

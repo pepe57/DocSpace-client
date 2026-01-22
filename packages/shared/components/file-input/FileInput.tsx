@@ -40,7 +40,7 @@ import {
 	InputType,
 	TextInput,
 } from "@docspace/ui-kit/components/text-input";
-import { Loader, LoaderTypes } from "../loader";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { toastr } from "../toast";
 
 import styles from "./FileInput.module.scss";

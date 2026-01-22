@@ -33,52 +33,52 @@ import TriangleDownIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 
 import { IconSizeType } from "../../../../../../../utils";
 
-import { Loader, LoaderTypes } from "../../../../../../loader";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "./Think.module.scss";
 
 const Think = ({
-  children,
-  isFirst,
-  isFinished,
+	children,
+	isFirst,
+	isFinished,
 }: {
-  children: React.ReactNode;
-  isFirst?: boolean;
-  isFinished?: boolean;
+	children: React.ReactNode;
+	isFirst?: boolean;
+	isFinished?: boolean;
 }) => {
-  const { t } = useTranslation(["Common"]);
-  const [isOpen, setIsOpen] = useState(false);
+	const { t } = useTranslation(["Common"]);
+	const [isOpen, setIsOpen] = useState(false);
 
-  const onToggle = () => {
-    setIsOpen((val) => !val);
-  };
+	const onToggle = () => {
+		setIsOpen((val) => !val);
+	};
 
-  return (
-    <div className={cn(styles.think, { [styles.withMarginTop]: !isFirst })}>
-      <div
-        onClick={onToggle}
-        className={cn(styles.thinkTitle, { [styles.thinkTitleOpened]: isOpen })}
-      >
-        {isFinished ? (
-          <ReactSVG src={ToolFinish} className={styles.toolFinishIcon} />
-        ) : (
-          <Loader type={LoaderTypes.track} size="12px" />
-        )}
+	return (
+		<div className={cn(styles.think, { [styles.withMarginTop]: !isFirst })}>
+			<div
+				onClick={onToggle}
+				className={cn(styles.thinkTitle, { [styles.thinkTitleOpened]: isOpen })}
+			>
+				{isFinished ? (
+					<ReactSVG src={ToolFinish} className={styles.toolFinishIcon} />
+				) : (
+					<Loader type={LoaderTypes.track} size="12px" />
+				)}
 
-        <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
-          {t("Thinking")}
-        </Text>
+				<Text fontSize="13px" lineHeight="15px" fontWeight={600}>
+					{t("Thinking")}
+				</Text>
 
-        <TriangleDownIcon
-          data-size={IconSizeType.scale}
-          className={cn(styles.icon, { [styles.iconOpened]: isOpen })}
-        />
-      </div>
+				<TriangleDownIcon
+					data-size={IconSizeType.scale}
+					className={cn(styles.icon, { [styles.iconOpened]: isOpen })}
+				/>
+			</div>
 
-      {isOpen ? <div className={styles.thinkBlock}>{children}</div> : null}
-    </div>
-  );
+			{isOpen ? <div className={styles.thinkBlock}>{children}</div> : null}
+		</div>
+	);
 };
 
 export default Think;
