@@ -38,8 +38,8 @@ import FileArchive32SvgUrl from "PUBLIC_DIR/images/icons/32/archive.svg?url";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import {
-  CustomScrollbarsVirtualList,
-  type CustomScrollbarsVirtualListProps,
+  type ScrollbarProps,
+  Scrollbar,
 } from "../../../../../components/scrollbar";
 import { RadioButton } from "../../../../../components/radio-button";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../../../constants";
@@ -47,11 +47,8 @@ import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../../../constants";
 import type { BackupListBodyProps } from "./BackupList.types";
 import styles from "../../RestoreBackup.module.scss";
 
-const VirtualScroll = (props: CustomScrollbarsVirtualListProps) => (
-  <CustomScrollbarsVirtualList
-    {...props}
-    paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
-  />
+const VirtualScroll = (props: ScrollbarProps) => (
+  <Scrollbar {...props} paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM} />
 );
 
 VirtualScroll.displayName = "VirtualScroll";

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useCallback, useRef } from "react";
-import { CustomScrollbarsVirtualListWithAutoFocus } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { VariableSizeList as List } from "react-window";
 import { inject, observer } from "mobx-react";
@@ -36,9 +36,10 @@ const rowHeight = 52;
 const rowIncreasedHeight = 88;
 
 const VirtualScroll = (props) => (
-  <CustomScrollbarsVirtualListWithAutoFocus
+  <Scrollbar
     {...props}
     paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+    autoFocus
   />
 );
 
