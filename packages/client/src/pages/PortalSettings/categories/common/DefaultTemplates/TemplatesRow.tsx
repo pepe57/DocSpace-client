@@ -137,29 +137,32 @@ const TemplatesRow = ({
       />
       <ReactSVG src={icon} className={styles.icon} />
       <div className={styles.rowContent}>
-        <div className={styles.titleWrapper}>
+        <div className={styles.mainContent}>
           <Text fontWeight={600} fontSize="13px">
             {item.title}
           </Text>
-          <Badge
-            backgroundColor={badgeBackgroundColor}
-            label={
-              item.isModified ? t("Common:Customized") : t("Common:Default")
-            }
-            noHover
-            fontSize="9px"
-          />
+          <Text
+            className={styles.modifiedText}
+            containerMinWidth="120px"
+            fontSize="12px"
+            lineHeight="16px"
+            fontWeight={600}
+            truncate
+          >
+            {lastModified}
+          </Text>
         </div>
-        <Text
-          className={styles.modifiedText}
-          containerMinWidth="120px"
-          fontSize="12px"
-          lineHeight="16px"
-          fontWeight={600}
-          truncate
-        >
-          {lastModified}
-        </Text>
+
+        <Badge
+          className={styles.badge}
+          backgroundColor={badgeBackgroundColor}
+          label={item.isModified ? t("Common:Customized") : t("Common:Default")}
+          noHover
+          fontSize="9px"
+          fontWeight={700}
+          lineHeight="100%"
+          padding="2px 5px"
+        />
       </div>
       <ContextMenuButton
         className={styles.contextMenuButton}
@@ -176,6 +179,7 @@ const TemplatesRow = ({
         onClose={() => setIsSelectorVisible(false)}
         acceptButtonLabel={t("Common:SelectAction")}
         isMultiSelect={false}
+        openRoot
       />
     </div>
   );

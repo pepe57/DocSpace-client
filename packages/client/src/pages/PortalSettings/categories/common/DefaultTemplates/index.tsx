@@ -60,16 +60,18 @@ const DefaultTemplates = ({
       <Text className={styles.description}>
         {t("DefaultTemplatesDescription")}
       </Text>
-      {templates?.map((item, index) => (
-        <TemplatesRow
-          index={index}
-          key={`default-template-row-${index}`}
-          item={item}
-          getFilterParam={getFilterParam}
-          setTemplate={setTemplate}
-          resetTemplate={resetTemplate}
-        />
-      ))}
+      <div className={styles.rowContainer}>
+        {templates?.map((item, index) => (
+          <TemplatesRow
+            index={index}
+            key={`default-template-row-${index}`}
+            item={item}
+            getFilterParam={getFilterParam}
+            setTemplate={setTemplate}
+            resetTemplate={resetTemplate}
+          />
+        ))}
+      </div>
     </div>
   );
 };
