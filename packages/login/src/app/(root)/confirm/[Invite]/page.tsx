@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -68,7 +68,10 @@ async function Page(props: LinkInviteProps) {
   const confirmKey = getStringFromSearchParams(searchParams);
 
   const headersList = await headers();
-  const hostName = headersList.get("x-forwarded-host") ?? "";
+  const hostName =
+    headersList.get("x-forwarded-host-test") ??
+    headersList.get("x-forwarded-host") ??
+    "";
 
   const [
     user,
@@ -121,6 +124,7 @@ async function Page(props: LinkInviteProps) {
           isStandalone={settings.standalone}
           logoText={settings.logoText}
           invitationSettings={invitationSettings}
+          hostName={hostName}
         />
       </FormWrapper>
     </>

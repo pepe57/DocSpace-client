@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,6 +33,7 @@ import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
 import AttachmentReactSvgUrl from "PUBLIC_DIR/images/attachment.react.svg?url";
 
 import { IconButton } from "../../../icon-button";
+import { TooltipContainer } from "../../../tooltip";
 
 import { useMessageStore } from "../../store/messageStore";
 
@@ -78,9 +79,11 @@ const Buttons = ({
   };
 
   return (
-    <div className={styles.chatInputButtons}>
-      <div className={styles.chatInputButtonsTools} title={t("AddFiles")}>
-        <div
+    <div className={styles.chatInputButtons} data-testid="chat-input-buttons">
+      <div className={styles.chatInputButtonsTools}>
+        <TooltipContainer
+          as="div"
+          title={t("AddFiles")}
           className={classNames(styles.chatInputButton, {
             [styles.activeChatInputButton]: isFilesSelectorVisible,
             [styles.disabled]: !aiReady,
@@ -93,8 +96,9 @@ const Buttons = ({
             isFill={false}
             isDisabled={!aiReady}
             className={classNames({ [styles.disabled]: !aiReady })}
+            data-testid="chat-input-attachment-button"
           />
-        </div>
+        </TooltipContainer>
         <ToolsSettings {...toolsSettings} isAdmin={isAdmin} aiReady={aiReady} />
       </div>
       <IconButton
@@ -105,6 +109,7 @@ const Buttons = ({
           [styles.disabled]: isSendButtonDisabled,
         })}
         {...sendIconProps}
+        data-testid="chat-input-send-button"
       />
     </div>
   );

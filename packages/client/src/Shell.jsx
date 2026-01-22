@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,6 +40,7 @@ import SocketHelper, {
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
+import { RootTooltip } from "@docspace/shared/components/tooltip/rootTooltip";
 import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
@@ -521,6 +522,7 @@ const Shell = ({ page = "home", ...rest }) => {
   return (
     <Layout>
       {toast}
+      <RootTooltip />
       {isMobileOnly && !isFrame ? (
         <ReactSmartBanner t={t} ready={ready} />
       ) : null}

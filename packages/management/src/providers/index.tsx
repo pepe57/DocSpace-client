@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,6 +32,7 @@ import type {
   TSettings,
 } from "@docspace/shared/api/settings/types";
 import type { ThemeKeys } from "@docspace/shared/enums";
+import { RootTooltip } from "@docspace/shared/components/tooltip/rootTooltip";
 
 import ThemeProvider from "./ThemeProvider";
 import TranslationProvider from "./TranslationProvider";
@@ -55,7 +56,10 @@ const Providers = ({ children, contextData }: TProviders) => {
     <TranslationProvider {...contextData}>
       <ThemeProvider {...contextData}>
         <AppStateProvider {...contextData}>
-          <StoreProvider>{children}</StoreProvider>
+          <StoreProvider>
+            <RootTooltip />
+            {children}
+          </StoreProvider>
         </AppStateProvider>
       </ThemeProvider>
     </TranslationProvider>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,11 +28,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 
 import { Button, ButtonSize } from "../button";
-import { createGetLogoHandler } from "../../__mocks__/storybook/handlers/logo/getLogo";
 
 import { IDialogProps } from "./About.types";
 import { AboutDialog } from "./index";
 import { mockBuildInfo, mockCompanyInfo } from "./mockData";
+import { logoHandler } from "../../__mocks__/handlers";
 
 interface AboutDialogStoryProps
   extends Omit<IDialogProps, "visible" | "onClose"> {
@@ -118,7 +118,7 @@ export const Default: Story = {
   },
   parameters: {
     msw: {
-      handlers: [createGetLogoHandler()],
+      handlers: [logoHandler()],
     },
   },
 };

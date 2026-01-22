@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,6 +54,7 @@ import { Aside } from "../../../aside";
 import { Button, ButtonSize } from "../../../button";
 import { Backdrop } from "../../../backdrop";
 import { Portal } from "../../../portal";
+import { TooltipContainer } from "../../../tooltip";
 
 import { useChatStore } from "../../store/chatStore";
 import { useMessageStore } from "../../store/messageStore";
@@ -329,6 +330,7 @@ const ToolsSettings = ({
           <>
             <Text>
               {t("ConnectWebSearch", {
+                webSearch: t("Common:WebSearchAI"),
                 productName: t("Common:ProductName"),
               })}
             </Text>
@@ -338,6 +340,7 @@ const ToolsSettings = ({
                 isHovered
                 fontWeight={600}
                 onClick={onGoToWebSearchPage}
+                dataTestId="go-to-settings-link"
               >
                 {t("Common:GoToSettings")}
               </Link>
@@ -362,7 +365,13 @@ const ToolsSettings = ({
               },
               icon: ManageConnectionsReactSvgUrl,
               disabled: !showManageConnectionItem,
-              getTooltipContent: () => <Text>{t("ConnectMCPServers")}</Text>,
+              getTooltipContent: () => (
+                <Text>
+                  {t("ConnectMCPServers", {
+                    mcpServers: t("Common:MCPSettingTitle"),
+                  })}
+                </Text>
+              ),
             },
           ]
         : []),
@@ -384,7 +393,8 @@ const ToolsSettings = ({
 
   return (
     <>
-      <div
+      <TooltipContainer
+        as="div"
         title={t("AIToolsHint")}
         className={classNames(
           styles.chatInputButton,
@@ -395,6 +405,8 @@ const ToolsSettings = ({
           },
         )}
         onClick={showMcpTools}
+        data-testid="chat-input-tools-button"
+        aria-disabled={!aiReady}
       >
         <IconButton iconName={McpToolReactSvgUrl} size={16} isFill={false} />
         <Text lineHeight="16px" fontSize="13px" fontWeight={600} noSelect>
@@ -410,8 +422,9 @@ const ToolsSettings = ({
           //ignoreChangeView
           headerOnlyMobile
           withoutBackHeaderButton
+          dataTestId="chat-input-tools-context-menu"
         />
-      </div>
+      </TooltipContainer>
       {showManageConnections ? (
         <Portal
           visible

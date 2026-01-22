@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -158,7 +158,6 @@ const LinkRow = ({
           <LinkTypeSelector
             isLoaded={isLoaded}
             canEditInternal={canEditInternal}
-            isExpiredLink={isExpiredLink}
             onSelect={(item) => changeShareOption(item, link)}
             selectedOption={shareOption}
             options={shareOptions}
@@ -168,7 +167,6 @@ const LinkRow = ({
             isFolder={isFolder}
             isLoaded={isLoaded}
             isRoomsLink={isRoomsLink}
-            isExpiredLink={isExpiredLink}
             accessOptions={accessOptions}
             selectedAccessOption={selectedAccessOption}
             isArchiveFolder={isArchiveFolder}
@@ -184,7 +182,7 @@ const LinkRow = ({
               onClick={onOpenContextMenu}
               onClose={onCloseContextMenu}
               title={t("Files:ShowLinkActions")}
-              isDisabled={isExpiredLink || isLoaded}
+              isDisabled={isLoaded}
             />
           ) : null}
         </div>

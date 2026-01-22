@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import { useState } from "react";
 import moment from "moment";
 import { Trans, useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-
+import classNames from "classnames";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
 import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 
@@ -46,14 +46,12 @@ import styles from "./LinkSettingsPanel.module.scss";
 import { LinkSettingsPanelProps } from "./LinkSettingsPanel.types";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { TOption } from "@docspace/shared/components/combobox";
-import { globalColors } from "@docspace/shared/themes";
 import { getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 const MAX_USERS_COUNT = 1000;
 
 const LinkSettingsPanel = ({
-  theme,
   culture,
   isVisible,
   filteredAccesses,
@@ -65,27 +63,24 @@ const LinkSettingsPanel = ({
   activeLink,
   defaultAccess,
   showUsersLimitWarning,
+  isContacts,
 }: LinkSettingsPanelProps) => {
   const { t, ready } = useTranslation(["Common", "Files"]);
   const locale = getCookie(LANGUAGE) ?? culture ?? "en";
-
-  const warningColor = theme?.isBase
-    ? globalColors.lightErrorStatus
-    : globalColors.darkErrorStatus;
 
   const usersNumber = activeLink.currentUseCount ?? 0;
   const maxUsersNumber = activeLink.maxUseCount ?? 1;
   const limitIsChecked = !activeLink.maxUseCount ? false : true;
 
+  const isEdit = Object.keys(activeLink).length === 0 ? false : true;
   const date = activeLink.expirationDate
     ? moment(activeLink.expirationDate)
-    : moment().add(7, "days");
+    : isEdit
+      ? null
+      : moment().add(7, "days");
 
   const [userLimitIsChecked, setUserLimitIsChecked] = useState(limitIsChecked);
-  const [lifetimeIsChecked, setLifetimeIsChecked] = useState(
-    !!activeLink.expirationDate,
-  );
-  const [limitDate, setLimitDate] = useState<moment.Moment>(date);
+  const [limitDate, setLimitDate] = useState<moment.Moment | null>(date);
   const [maxNumber, setMaxNumber] = useState(String(maxUsersNumber));
   const [hasError, setHasError] = useState(false);
 
@@ -93,9 +88,7 @@ const LinkSettingsPanel = ({
     ? Number(maxNumber) <= usersNumber
     : false;
 
-  const showExpiredError = lifetimeIsChecked
-    ? moment(new Date()).isAfter(limitDate)
-    : false;
+  const showExpiredError = moment(new Date()).isAfter(limitDate);
 
   const currentAccess = filteredAccesses.find(
     (a) =>
@@ -107,10 +100,13 @@ const LinkSettingsPanel = ({
   maxDate.setFullYear(maxDate.getFullYear() + 1);
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.value || !/^\d+$/.test(e.target.value)) {
+      return;
+    }
+
     setHasError(false);
 
     if (
-      !e.target.value ||
       Number(e.target.value) <= 0 ||
       +e.target.value < +usersNumber ||
       Number(e.target.value) >= MAX_USERS_COUNT
@@ -128,9 +124,7 @@ const LinkSettingsPanel = ({
     if (defaultLink) {
       const linkToSubmit = {
         ...defaultLink,
-        expirationDate: lifetimeIsChecked
-          ? moment(limitDate).toISOString()
-          : null,
+        expirationDate: limitDate ? moment(limitDate).toISOString() : null,
         maxUseCount: userLimitIsChecked ? Number(maxNumber) : null,
         currentUseCount: usersNumber,
       } as TOption & {
@@ -161,20 +155,23 @@ const LinkSettingsPanel = ({
       <ModalDialog.Body>
         <div className={styles.linkSettingsBody}>
           <div className={styles.userLimitBlock}>
-            <Text
-              fontSize="16px"
-              fontWeight={700}
-              className={styles.linkSettingsText}
-            >
-              {t("Common:RoleForLink")}
-            </Text>
-
-            <LinkRolesDropdown
-              currentAccess={currentAccess}
-              accesses={filteredAccesses}
-              linkSelectedAccess={linkSelectedAccess}
-              setLinkSelectedAccess={setLinkSelectedAccess}
-            />
+            {!isContacts ? (
+              <>
+                <Text
+                  fontSize="16px"
+                  fontWeight={700}
+                  className={styles.linkSettingsText}
+                >
+                  {t("Common:RoleForLink")}
+                </Text>
+                <LinkRolesDropdown
+                  currentAccess={currentAccess}
+                  accesses={filteredAccesses}
+                  linkSelectedAccess={linkSelectedAccess}
+                  setLinkSelectedAccess={setLinkSelectedAccess}
+                />
+              </>
+            ) : null}
 
             <div className={styles.linkSettingsUserLimit}>
               <Text
@@ -248,8 +245,9 @@ const LinkSettingsPanel = ({
                 <Text
                   fontSize="12px"
                   fontWeight={400}
-                  className={styles.linkSettingsDescriptionText}
-                  color={showLimitError ? warningColor : undefined}
+                  className={classNames(styles.linkSettingsDescriptionText, {
+                    [styles.isError]: showLimitError,
+                  })}
                 >
                   {showLimitError
                     ? t("Files:LinkSettingsLimitExceeded")
@@ -277,47 +275,38 @@ const LinkSettingsPanel = ({
             ) : null}
           </div>
 
-          <div className={styles.linkSettingsUserLimit}>
-            <Text
-              fontSize="16px"
-              fontWeight={700}
-              className={styles.linkSettingsText}
-            >
-              {t("Common:LimitByTimePeriod")}
-            </Text>
-            <ToggleButton
-              className={styles.linkSettingsToggle}
-              isChecked={lifetimeIsChecked}
-              onChange={() => setLifetimeIsChecked(!lifetimeIsChecked)}
-            />
-          </div>
-          {lifetimeIsChecked ? (
-            <>
-              <Text
-                fontSize="12px"
-                fontWeight={400}
-                className={styles.linkSettingsSubDescriptionText}
-                color={showExpiredError ? warningColor : undefined}
-              >
-                {showExpiredError
-                  ? t("Common:LinkSettingsExpired")
-                  : t("Common:LinkValidUntil")}
-              </Text>
-              <DateTimePicker
-                id="link-settings_date-time-picker"
-                locale={locale}
-                hasError={false}
-                onChange={(date) => date && setLimitDate(date)}
-                openDate={new Date()}
-                className={styles.linkSettingsDatePicker}
-                selectDateText={t("Common:SelectDate")}
-                initialDate={limitDate}
-                minDate={moment().subtract(1, "days")}
-                maxDate={maxDate}
-                hideCross
-              />
-            </>
-          ) : null}
+          <Text
+            fontSize="16px"
+            fontWeight={700}
+            className={styles.linkSettingsText}
+          >
+            {t("Common:LimitByTimePeriod")}
+          </Text>
+
+          <Text
+            fontSize="12px"
+            fontWeight={400}
+            className={classNames(styles.linkSettingsSubDescriptionText, {
+              [styles.isError]: showExpiredError,
+            })}
+          >
+            {showExpiredError
+              ? t("Common:LinkSettingsExpired")
+              : t("Common:LinkValidUntil")}
+          </Text>
+          <DateTimePicker
+            id="link-settings_date-time-picker"
+            locale={locale}
+            hasError={false}
+            onChange={(date) => setLimitDate(date)}
+            openDate={new Date()}
+            className={styles.linkSettingsDatePicker}
+            selectDateText={t("Common:SelectDate")}
+            initialDate={limitDate}
+            minDate={moment().subtract(1, "days")}
+            maxDate={maxDate}
+            useMaxTime={!activeLink.expirationDate}
+          />
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>

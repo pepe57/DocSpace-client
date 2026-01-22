@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -102,9 +102,10 @@ const SettingsPluginDialog = ({
       displayType={ModalDialogType.aside}
       onClose={onCloseAction}
       withBodyScroll
+      dataTestId="settings-plugin-dialog"
     >
       <ModalDialog.Header>
-        <Header t={t} name={plugin.name} />
+        <Header t={t} name={plugin.nameLocale} />
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div style={{ marginTop: "16px" }}>

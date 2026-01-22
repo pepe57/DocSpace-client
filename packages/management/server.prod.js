@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,10 +44,15 @@ if (argv("app.port")) {
   process.env.PORT = argv("app.port");
 }
 
+// Set hostname from command line arguments if provided
+if (argv("app.hostname")) {
+  process.env.HOSTNAME = argv("app.hostname");
+}
+
 console.log(
-  `Starting server with environment: NODE_ENV=${process.env.NODE_ENV}, PORT=${process.env.PORT}`,
+  `Starting server with environment: NODE_ENV=${process.env.NODE_ENV}, PORT=${process.env.PORT}` +
+    (process.env.HOSTNAME ? `, HOSTNAME=${process.env.HOSTNAME}` : ""),
 );
 
 // Now require server.js which will use the environment variables we just set
 require("./packages/management/server.js");
-

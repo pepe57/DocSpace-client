@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,14 +27,14 @@
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import FormBlankReactSvgUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
-import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
+import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
-
+import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
 // import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
 // import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
 // import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
@@ -47,16 +47,15 @@ import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router";
-import styled, { css } from "styled-components";
+import { useLocation } from "react-router";
+import classNames from "classnames";
 
 import { MainButton } from "@docspace/shared/components/main-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
-
+import { isDesktop } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
-import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import {
   Events,
@@ -72,62 +71,7 @@ import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import MobileView from "./MobileView";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 
-const StyledButton = styled(Button)`
-  && {
-    font-weight: 700 !important;
-    font-size: 16px !important;
-    padding: 0;
-    opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
-    background-color: ${({ $currentColorScheme }) =>
-      $currentColorScheme.main?.accent} !important;
-    background: ${({ $currentColorScheme }) =>
-      $currentColorScheme.main?.accent};
-    border-color: ${({ $currentColorScheme }) =>
-      $currentColorScheme.main?.accent};
-
-    ${(props) =>
-      !props.isDisabled &&
-      css`
-        :hover {
-          background-color: ${({ $currentColorScheme }) =>
-            $currentColorScheme.main?.accent};
-          opacity: 0.85;
-          background: ${({ $currentColorScheme }) =>
-            $currentColorScheme.main?.accent};
-          border-color: ${({ $currentColorScheme }) =>
-            $currentColorScheme.main?.accent};
-        }
-
-        :active {
-          background-color: ${({ $currentColorScheme }) =>
-            $currentColorScheme.main?.accent};
-          background: ${({ $currentColorScheme }) =>
-            $currentColorScheme.main?.accent};
-          border-color: ${({ $currentColorScheme }) =>
-            $currentColorScheme.main?.accent} !important;
-          opacity: 1;
-          filter: brightness(90%);
-          cursor: pointer;
-        }
-      `}
-
-    .button-content {
-      color: ${({ $currentColorScheme }) => $currentColorScheme.text?.accent};
-      position: relative;
-      display: flex;
-      justify-content: space-between;
-      vertical-align: middle;
-      box-sizing: border-box;
-      padding-block: 5px;
-      padding-inline: 12px 14px;
-      line-height: 22px;
-      border-radius: 3px;
-
-      user-select: none;
-      -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-    }
-  }
-`;
+import styles from "./main-button.module.scss";
 
 const ArticleMainButtonContent = (props) => {
   const {
@@ -158,7 +102,6 @@ const ArticleMainButtonContent = (props) => {
     isArchiveFolder,
 
     setOformFromFolderId,
-    oformsFilter,
 
     enablePlugins,
     mainButtonItemsList,
@@ -189,7 +132,8 @@ const ArticleMainButtonContent = (props) => {
     getContactsModel,
     contactsCanCreate,
     setRefMap,
-    defaultOformLocale,
+    setTemplateGalleryVisible,
+    templateGalleryAvailable,
 
     isChatTab,
     isResultTab,
@@ -201,7 +145,6 @@ const ArticleMainButtonContent = (props) => {
     aiConfig,
   } = props;
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const isAccountsPage = location.pathname.includes("/accounts");
@@ -331,20 +274,9 @@ const ArticleMainButtonContent = (props) => {
 
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
 
-  const onShowGallery = () => {
-    if (isMobile) {
-      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
-      return;
-    }
-
-    const initOformFilter = oformsFilter || oformsFilter.getDefault();
-    if (!initOformFilter.locale) initOformFilter.locale = defaultOformLocale;
-
+  const onShowTemplateGallery = () => {
+    setTemplateGalleryVisible(true);
     setOformFromFolderId(currentFolderId);
-
-    navigate(
-      `/form-gallery/${currentFolderId}/filter?${initOformFilter.toUrlParams()}`,
-    );
   };
 
   React.useEffect(() => {
@@ -370,16 +302,7 @@ const ArticleMainButtonContent = (props) => {
 
   const createActionsForFormRoom = React.useCallback(
     (actionList) => {
-      const {
-        formGallery,
-        // uploadActions,
-        // createNewFolder,
-        // showSelectorFormRoomDocx,
-        // createNewDocumentDocx,
-        // createTemplateBlankDocxf,
-        // createNewPresentationPptx,
-        // createNewSpreadsheetXlsx,
-      } = actionList;
+      const { formGallery } = actionList;
 
       const createNewFolder = {
         id: "actions_new-folder",
@@ -406,7 +329,7 @@ const ArticleMainButtonContent = (props) => {
       //   icon: FormReactSvgUrl,
       //   label: t("Common:CreatePDFForm"),
       //   key: "new-form",
-      //   items: [createTemplateBlankDocxf, showSelectorFormRoomDocx],
+      //   items: [createTemplateBlankDocxf],
       // };
 
       const uploadFromDocSpace = {
@@ -470,7 +393,6 @@ const ArticleMainButtonContent = (props) => {
       const mobileMoreActions = null;
       const formRoomActions = [
         // templatePDFForm,
-        // formGallery,
         uploadPDFFrom,
         showSelectorFormRoomDocx,
         {
@@ -487,7 +409,6 @@ const ArticleMainButtonContent = (props) => {
 
       const mobileFormRoomActions = [
         // templatePDFForm,
-        // formGallery,
         uploadPDFFrom,
         showSelectorFormRoomDocx,
         createNewFolder,
@@ -566,26 +487,6 @@ const ArticleMainButtonContent = (props) => {
       key: "pdf",
     };
 
-    const showSelectorDocx = {
-      id: "actions_template_from-file",
-      className: "main-button_drop-down_sub",
-      icon: FormFileReactSvgUrl,
-      label: t("Translations:SubNewFormFile"),
-      onClick: onShowSelectFileDialog,
-      disabled: isPrivacy,
-      key: "form-file",
-    };
-
-    const formGallery = {
-      id: "actions_template_oforms-gallery",
-      className: "main-button_drop-down_sub",
-      icon: FormGalleryReactSvgUrl,
-      label: t("Common:OFORMsGallery"),
-      onClick: onShowGallery,
-      disabled: isPrivacy,
-      key: "form-gallery",
-    };
-
     const createNewDocumentDocx = {
       id: "actions_new-document",
       className: "main-button_drop-down",
@@ -606,6 +507,16 @@ const ArticleMainButtonContent = (props) => {
       key: "xlsx",
     };
 
+    const showSelectorDocx = {
+      id: "actions_template_from-file",
+      className: "main-button_drop-down_sub",
+      icon: FormFileReactSvgUrl,
+      label: t("Translations:SubNewFormFile"),
+      onClick: onShowSelectFileDialog,
+      disabled: isPrivacy,
+      key: "form-file",
+    };
+
     const createNewFolder = {
       id: "actions_new-folder",
       className: "main-button_drop-down",
@@ -613,6 +524,16 @@ const ArticleMainButtonContent = (props) => {
       label: t("Common:Folder"),
       onClick: onCreate,
       key: "new-folder",
+    };
+
+    const formGallery = {
+      id: "actions_template_oforms-gallery",
+      className: "main-button_drop-down_sub",
+      icon: FormGalleryReactSvgUrl,
+      label: t("Common:TemplateGallery"),
+      onClick: onShowTemplateGallery,
+      disabled: isPrivacy,
+      key: "form-gallery",
     };
 
     const createNewPresentationPptx = {
@@ -646,7 +567,6 @@ const ArticleMainButtonContent = (props) => {
           formGallery,
           newUploadActions,
           // createNewFolder,
-          // showSelectorFormRoomDocx,
           // createNewDocumentDocx,
           // createTemplateBlankDocxf,
           // createNewPresentationPptx,
@@ -669,7 +589,7 @@ const ArticleMainButtonContent = (props) => {
         icon: FormReactSvgUrl,
         label: t("Translations:NewForm"),
         key: "new-form",
-        items: [createTemplateBlankDocxf, showSelectorDocx, formGallery],
+        items: [createTemplateBlankDocxf, showSelectorDocx],
       },
     ];
 
@@ -700,6 +620,24 @@ const ArticleMainButtonContent = (props) => {
         disabled: false,
         key: "more-plugins",
         items: pluginItems,
+      });
+    }
+
+    if (templateGalleryAvailable) {
+      if (isDesktop()) {
+        newActions.push({
+          isSeparator: true,
+          key: "separator",
+        });
+      }
+
+      newActions.push({
+        id: "actions_open-template-gallery",
+        className: "main-button_drop-down",
+        icon: TemplateGalleryReactSvgUrl,
+        label: t("Common:TemplateGallery"),
+        onClick: onShowTemplateGallery,
+        key: "template-gallery",
       });
     }
 
@@ -838,8 +776,8 @@ const ArticleMainButtonContent = (props) => {
           onMainButtonClick={onMainButtonClick}
         />
       ) : isRoomsFolder ? (
-        <StyledButton
-          className="create-room-button"
+        <Button
+          className={classNames(styles.mainButton, "create-room-button")}
           id="rooms-shared_create-room-button"
           label={t("Common:NewRoom")}
           onClick={onCreateRoom}
@@ -852,8 +790,8 @@ const ArticleMainButtonContent = (props) => {
           testId="create_new_room_button"
         />
       ) : isAIAgentsFolder ? (
-        <StyledButton
-          className="create-agent-button"
+        <Button
+          className={classNames(styles.mainButton, "create-agent-button")}
           id="rooms-shared_create-agent-button"
           label={t("Common:NewAgent")}
           onClick={onCreateAgent}
@@ -972,6 +910,7 @@ export default inject(
       currentDeviceType,
       allowInvitingMembers,
       aiConfig,
+      templateGalleryAvailable,
     } = settingsStore;
 
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
@@ -989,7 +928,7 @@ export default inject(
 
     const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
-    const { setOformFromFolderId, oformsFilter, defaultOformLocale } =
+    const { setOformFromFolderId, oformsFilter, setTemplateGalleryVisible } =
       oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
@@ -1061,7 +1000,8 @@ export default inject(
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
       setRefMap,
-      defaultOformLocale,
+      setTemplateGalleryVisible,
+      templateGalleryAvailable,
 
       isChatTab,
       isResultTab,

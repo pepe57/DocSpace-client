@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,6 +56,7 @@
     padding: 8px 12px;
     max-width: min(100vw, var(--tooltip-max-width));
     color: var(--tooltip-text-color);
+    font-size: 12px;
     z-index: 999;
     box-sizing: border-box;
 
@@ -113,5 +114,12 @@
         background: none !important;
       }
     }
+  }
+
+  :global(#system-tooltip) {
+    max-width: min(100vw, 800px) !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
   }
 }

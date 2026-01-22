@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,10 +27,10 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import {
-  createGetExternalLinksHandler,
-  createGetPrimaryLinkHandler,
-  createEditExternalLinkHandler,
-} from "../../__mocks__/storybook/handlers/files/externalLinks";
+  externalLinksHandler,
+  primaryLinkHandler,
+  editExternalLinkHandler,
+} from "../../__mocks__/handlers";
 
 import { ShareRights } from "../../enums";
 
@@ -173,9 +173,9 @@ export const Default: Story = {
   parameters: {
     msw: {
       handlers: [
-        createGetExternalLinksHandler(),
-        createGetPrimaryLinkHandler(),
-        createEditExternalLinkHandler(),
+        externalLinksHandler(),
+        primaryLinkHandler(),
+        editExternalLinkHandler(),
       ],
     },
   },

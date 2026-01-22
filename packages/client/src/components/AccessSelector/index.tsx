@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,8 +33,6 @@ import { TOption } from "@docspace/shared/components/combobox";
 import { TTranslation } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
-
-import StyledAccessSelector from "./AccessSelector.styled";
 
 interface AccessSelectorProps {
   t: TTranslation;
@@ -133,7 +131,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   return (
-    <StyledAccessSelector className="access-selector">
+    <div className="access-selector" style={{ marginInlineEnd: "16px" }}>
       {!(isMobile() && !isMobileHorizontalOrientation) ? (
         <AccessRightSelect
           className={className}
@@ -188,7 +186,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           showDisabledItems={true}
         />
       ) : null}
-    </StyledAccessSelector>
+    </div>
   );
 };
 

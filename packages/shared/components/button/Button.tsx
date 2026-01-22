@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -86,7 +86,7 @@ export const Button = (props: React.PropsWithChildren<ButtonProps>) => {
       <button
         {...rest}
         id={id}
-        ref={ref}
+        ref={ref as React.Ref<HTMLButtonElement>}
         type={type === "submit" ? "submit" : "button"}
         className={buttonClasses}
         disabled={isDisabled || isLoading}

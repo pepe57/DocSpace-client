@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -47,7 +47,13 @@ export type TWeekdaysLabel = Pick<Option, "key" | "label">;
 export type TDirectionX = "left" | "right";
 export type TDirectionY = "bottom" | "top" | "both";
 
-export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
+export type TViewAs =
+  | "tile"
+  | "table"
+  | "row"
+  | "settings"
+  | "profile"
+  | "tileDynamicHeight";
 
 export type ProviderType = {
   provider_id: unknown;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -62,10 +62,15 @@ import { copyShareLink } from "@docspace/shared/utils/copy";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import {
   getInviteLink,
-  setInviteLink,
+  createInviteLink,
   updateInviteLink,
 } from "@docspace/shared/api/portal";
+import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
 import { getDate } from "@docspace/shared/components/share/Share.helpers";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
+import styles from "./InvitePanel.module.scss";
+import { Badge } from "@docspace/shared/components/badge";
 
 const InvitePanel = ({
   folders,
@@ -124,6 +129,8 @@ const InvitePanel = ({
   const inputsRef = useRef();
   const invitePanelBodyRef = useRef();
   const loaderRef = useRef();
+
+  const { isRTL } = useInterfaceDirection();
 
   const onClose = () => {
     setInviteLanguage({ key: "", label: "" });
@@ -472,33 +479,51 @@ const InvitePanel = ({
     setLinkSettingsPanelVisible(false);
   };
 
-  const copyLink = (link) => {
+  const copyLink = (link, showToast = true) => {
     if (!link.shareLink && !link.url) return;
 
     const expirationDate = link?.expirationDate ?? link.expiration;
     const isExpired = moment(new Date()).isAfter(moment(expirationDate));
     const isLimit = link?.currentUseCount >= link?.maxUseCount;
-    if (isExpired) return toastr.error(t("Common:LinkExpired"));
-    if (isLimit) return toastr.error(t("Common:LinkNoLongerAvailable"));
+
+    if (isExpired) {
+      if (!showToast) return;
+      return toastr.error(t("Common:LinkExpired"));
+    }
+    if (isLimit) {
+      if (!showToast) return;
+      return toastr.error(t("Common:LinkNoLongerAvailable"));
+    }
 
     const date = getDate(expirationDate);
 
-    toastr.success(
+    const toastTranslation = date ? (
       <Trans
         t={t}
         ns="Common"
         values={{ date }}
         i18nKey="LinkExpireAfter"
         components={{ 1: <strong key="strong-expire-after" /> }}
-      />,
-      t("Common:LinkCopiedToClipboard"),
+      />
+    ) : (
+      <Trans
+        t={t}
+        ns="Common"
+        i18nKey="LinkNoExpiration"
+        components={{ 1: <strong key="strong-link-valid" /> }}
+      />
     );
 
+    toastr.success(toastTranslation, t("Common:LinkCopiedToClipboard"));
     copyShareLink(link.shareLink ?? link.url);
   };
 
   const editLink = async (linkAccess = null, defaultLink) => {
     const type = getDefaultAccessUser(roomType);
+
+    const expiration = defaultLink
+      ? defaultLink?.expirationDate
+      : moment().add(7, "days");
 
     let link = null;
 
@@ -509,7 +534,7 @@ const InvitePanel = ({
         "Invite",
         type,
         undefined,
-        defaultLink?.linkExpirationDate,
+        expiration,
         defaultLink?.maxUseCount,
       );
       onChangeExternalLinksVisible(true);
@@ -560,7 +585,7 @@ const InvitePanel = ({
         };
 
         setActiveLink(linkDataObj);
-        copyLink(linkDataObj);
+        copyLink(linkDataObj, false);
         setExternalLinksVisible(true);
         return;
       } catch (error) {
@@ -619,7 +644,7 @@ const InvitePanel = ({
         setActiveLink(newActiveLink);
 
         setLinkSelectedAccess(access);
-        copyLink(link);
+        copyLink(link, false);
       } catch (error) {
         toastr.error(error);
       }
@@ -638,11 +663,13 @@ const InvitePanel = ({
         id: activeLink?.id,
         employeeType: defaultLink?.access ?? defaultAccess,
         maxUseCount: defaultLink?.maxUseCount,
-        expiration: defaultLink?.expirationDate,
+        expiration: defaultLink
+          ? defaultLink.expirationDate
+          : moment().add(7, "days"),
       };
 
       const link = createNewLink
-        ? await setInviteLink(requestData)
+        ? await createInviteLink(requestData)
         : await updateInviteLink(requestData);
 
       const linkData = {
@@ -809,6 +836,8 @@ const InvitePanel = ({
     onChangeExternalLinksVisible(true);
   };
 
+  const currentAccess = accessOptions.find((a) => a.access === defaultAccess);
+
   return (
     <ModalDialog
       visible={isVisible}
@@ -816,8 +845,8 @@ const InvitePanel = ({
       onBackClick={onBackClick}
       displayType={ModalDialogType.aside}
       containerVisible={
-        linkSettingsPanelVisible ??
-        (!hideSelector ? addUsersPanelVisible : false)
+        linkSettingsPanelVisible ||
+        (!hideSelector ? addUsersPanelVisible : null)
       }
       isLoading={invitePanelIsLoding}
       withBodyScroll
@@ -869,7 +898,6 @@ const InvitePanel = ({
         <ModalDialog.Container>
           <LinkSettingsPanel
             culture={culture}
-            theme={theme}
             isVisible={linkSettingsPanelVisible}
             onClose={() => {
               onCloseLinkSettingsPanel();
@@ -883,11 +911,53 @@ const InvitePanel = ({
             linkSelectedAccess={linkSelectedAccess}
             setLinkSelectedAccess={setLinkSelectedAccess}
             defaultAccess={defaultAccess ?? ShareAccessRights.ReadOnly}
+            isContacts={roomId === -1}
           />
         </ModalDialog.Container>
       ) : null}
 
-      <ModalDialog.Header>{t("Common:Invite")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        <div className={styles.invitePanelHeader}>
+          {t("Common:Invite")} {roomId === -1 ? currentAccess?.label : ""}
+          {roomId === -1 ? (
+            <HelpButton
+              tooltipMaxWidth="448px"
+              place="bottom-start"
+              tooltipStyle={{
+                transform: isRTL ? "translateX(16px)" : "translateX(-16px)",
+              }}
+              tooltipContent={
+                <div className={styles.tooltipContent}>
+                  <Text
+                    className={styles.tooltipLabel}
+                    fontSize="12px"
+                    fontWeight={600}
+                  >
+                    {currentAccess?.label}
+                    {currentAccess.quota ? (
+                      <Badge
+                        label={currentAccess.quota}
+                        backgroundColor={currentAccess.color}
+                        fontSize="9px"
+                        isPaidBadge
+                        noHover
+                      />
+                    ) : null}
+                  </Text>
+
+                  <Text
+                    fontSize="12px"
+                    fontWeight={400}
+                    className={styles.tooltipDescription}
+                  >
+                    {currentAccess?.description}
+                  </Text>
+                </div>
+              }
+            />
+          ) : null}
+        </div>
+      </ModalDialog.Header>
       <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

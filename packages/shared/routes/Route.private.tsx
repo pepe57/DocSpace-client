@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -90,6 +90,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       sessionStorage.removeItem("referenceUrl");
       sessionStorage.removeItem("loggedOutUserId");
     }
+
+    const isAccountsPage = location.pathname.includes("/accounts");
 
     const isPortalUrl =
       location.pathname === "/preparation-portal" ||
@@ -300,6 +302,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (isDeveloperToolsPage) {
       if (user?.isVisitor || (limitedAccessDevToolsForUsers && !user?.isAdmin))
         return <Navigate replace to="/error/403" />;
+    }
+
+    if (isAccountsPage) {
+      return children;
     }
 
     if (

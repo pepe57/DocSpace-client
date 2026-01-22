@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,16 +34,20 @@ import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Secti
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 
 import { DeviceType } from "@docspace/shared/enums";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 
-import { AIProvider } from "./providers";
-import { MCPServers } from "./servers";
-import { Search } from "./search";
-import { Knowledge } from "./knowledge";
+import { AIProvider, ProvidersLoader } from "./providers";
+import { MCPServers, ServersLoader } from "./servers";
+import { Search, SearchLoader } from "./search";
+import { Knowledge, KnowledgeLoader } from "./knowledge";
 
 import useAiSettings from "./useAiSettings";
+
+import styles from "./AISettings.module.scss";
 
 const detectCurrentTabId = (standalone: boolean) => {
   const path = window.location.pathname;
@@ -61,6 +65,13 @@ const detectCurrentTabId = (standalone: boolean) => {
   return "";
 };
 
+const loaders: Record<string, React.ReactNode> = {
+  providers: <ProvidersLoader />,
+  servers: <ServersLoader />,
+  search: <SearchLoader />,
+  knowledge: <KnowledgeLoader />,
+};
+
 type TAiSettingsProps = {
   currentDeviceType?: DeviceType;
   standalone?: boolean;
@@ -69,6 +80,8 @@ type TAiSettingsProps = {
   fetchAIProviders?: AISettingsStore["fetchAIProviders"];
   fetchMCPServers?: AISettingsStore["fetchMCPServers"];
   fetchWebSearch?: AISettingsStore["fetchWebSearch"];
+
+  showPortalSettingsLoader?: ClientLoadingStore["showPortalSettingsLoader"];
 };
 
 // TODO: add standalone flag from store for hide ai providers
@@ -79,8 +92,9 @@ const AiSettings = ({
   fetchAIProviders,
   fetchMCPServers,
   fetchWebSearch,
+  showPortalSettingsLoader,
 }: TAiSettingsProps) => {
-  const { t } = useTranslation(["Common", "AISettings", "AIRoom"]);
+  const { t, ready } = useTranslation(["Common", "AISettings", "AIRoom"]);
 
   const { initAIProviders, initMCPServers, initWebSearch, initKnowledge } =
     useAiSettings({
@@ -111,19 +125,19 @@ const AiSettings = ({
   React.useEffect(() => {
     const titleKey =
       currentTabId === "providers"
-        ? "AISettings:AIProvider"
+        ? "Common:AIProvider"
         : currentTabId === "search"
-          ? "AISettings:Search"
+          ? "Common:WebSearchAI"
           : currentTabId === "knowledge"
             ? "AIRoom:Knowledge"
-            : "AISettings:MCPSettingTitle";
+            : "Common:MCPSettingTitle";
     setDocumentTitle(t(titleKey));
   }, [t, currentTabId]);
 
   const serversData = [
     {
       id: "servers",
-      name: t("AISettings:MCPSettingTitle"),
+      name: t("Common:MCPSettingTitle"),
       content: <MCPServers standalone={standalone} />,
       onClick: initMCPServers,
     },
@@ -133,14 +147,14 @@ const AiSettings = ({
     ? [
         {
           id: "providers",
-          name: t("AISettings:AIProvider"),
+          name: t("Common:AIProvider"),
           content: <AIProvider />,
           onClick: initAIProviders,
         },
         ...serversData,
         {
           id: "search",
-          name: t("AISettings:Search"),
+          name: t("Common:WebSearchAI"),
           content: <Search />,
           onClick: initWebSearch,
         },
@@ -152,6 +166,15 @@ const AiSettings = ({
         },
       ]
     : serversData;
+
+  if (showPortalSettingsLoader || !ready) {
+    return (
+      <>
+        <RectangleSkeleton className={styles.tabsLoader} />
+        {loaders[currentTabId]}
+      </>
+    );
+  }
 
   return (
     <Tabs
@@ -165,7 +188,7 @@ const AiSettings = ({
 };
 
 export const Component = inject(
-  ({ settingsStore, aiSettingsStore }: TStore) => {
+  ({ settingsStore, aiSettingsStore, clientLoadingStore }: TStore) => {
     const { currentDeviceType } = settingsStore;
 
     const {
@@ -175,12 +198,15 @@ export const Component = inject(
       fetchKnowledge,
     } = aiSettingsStore;
 
+    const { showPortalSettingsLoader } = clientLoadingStore;
+
     return {
       currentDeviceType,
       fetchAIProviders,
       fetchMCPServers,
       fetchWebSearch,
       fetchKnowledge,
+      showPortalSettingsLoader,
     };
   },
 )(observer(AiSettings));

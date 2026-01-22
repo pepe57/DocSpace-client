@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,19 +54,14 @@ const DateTimePicker = (props: DateTimePickerProps) => {
     openDate,
     dataTestId,
     hideCross,
+    useMaxTime,
   } = props;
 
   const { t } = useTranslation("Common");
 
   const options = [
-    {
-      key: "AM",
-      label: t("AM"),
-    },
-    {
-      key: "PM",
-      label: t("PM"),
-    },
+    { key: "AM", label: t("AM") },
+    { key: "PM", label: t("PM") },
   ];
 
   const [isTimeFocused, setIsTimeFocused] = useState(false);
@@ -74,13 +69,21 @@ const DateTimePicker = (props: DateTimePickerProps) => {
   const [date, setDate] = useState(initialDate ? moment(initialDate) : null);
   const [isTwelveHourFormat, setIsTwelveHourFormat] = useState(true);
   const [selectedFormat, setSelectedFormat] = useState<TOption>(
-    initialDate && moment(initialDate).hour() >= 12 ? options[1] : options[0],
+    initialDate && moment(initialDate ?? undefined).hour() >= 12
+      ? options[1]
+      : options[0],
   );
 
   const showTimePicker = () => setIsTimeFocused(true);
   const hideTimePicker = () => setIsTimeFocused(false);
 
   const handleChange = (d: moment.Moment | null) => {
+    if (isTwelveHourFormat) {
+      setSelectedFormat(
+        moment(d ?? undefined).hour() >= 12 ? options[1] : options[0],
+      );
+    }
+
     onChange?.(d);
     setDate(d);
   };
@@ -164,6 +167,7 @@ const DateTimePicker = (props: DateTimePickerProps) => {
         openDate={openDate}
         outerDate={date}
         hideCross={hideCross}
+        useMaxTime={useMaxTime}
       />
       <span
         className={styles.timeSelector}

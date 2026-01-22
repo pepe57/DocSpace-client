@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -36,7 +36,6 @@ import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import { WebSearchType } from "@docspace/shared/api/ai/enums";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { toastr } from "@docspace/shared/components/toast";
@@ -48,6 +47,7 @@ import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Search.module.scss";
 import { ResetWebSearchDialog } from "./dialogs/reset";
+import { SearchLoader } from "./SearchLoader";
 
 type TSearchProps = {
   webSearchInitied?: AISettingsStore["webSearchInitied"];
@@ -55,7 +55,7 @@ type TSearchProps = {
   restoreWebSearch?: AISettingsStore["restoreWebSearch"];
   updateWebSearch?: AISettingsStore["updateWebSearch"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
-  aiSettingsUrl?: string;
+  webSearchSettingsUrl?: SettingsStore["webSearchSettingsUrl"];
   getAIConfig?: SettingsStore["getAIConfig"];
 };
 
@@ -66,7 +66,7 @@ const SearchComponent = ({
   webSearchConfig,
   updateWebSearch,
   hasAIProviders,
-  aiSettingsUrl,
+  webSearchSettingsUrl,
   getAIConfig,
 }: TSearchProps) => {
   const { t } = useTranslation(["Common", "AISettings", "Settings"]);
@@ -112,7 +112,11 @@ const SearchComponent = ({
     try {
       await updateWebSearch?.(true, selectedOption, value);
 
-      toastr.success(t("AISettings:WebSearchEnabledSuccess"));
+      toastr.success(
+        t("AISettings:WebSearchEnabledSuccess", {
+          webSearch: t("Common:WebSearchAI"),
+        }),
+      );
     } catch (e) {
       console.error(e);
       toastr.error(e as string);
@@ -147,43 +151,7 @@ const SearchComponent = ({
     });
   }, [webSearchConfig]);
 
-  if (!webSearchInitied)
-    return (
-      <div className={generalStyles.search}>
-        <RectangleSkeleton
-          className={generalStyles.description}
-          width="700px"
-          height="36px"
-        />
-        <RectangleSkeleton
-          className={generalStyles.learnMoreLink}
-          width="100px"
-          height="19px"
-        />
-        <div className={styles.searchForm}>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="119px" height="20px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="48px" height="32px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-        </div>
-        <div className={styles.buttonContainer}>
-          <RectangleSkeleton
-            className={styles.addProviderButton}
-            width="128px"
-            height="32px"
-          />
-          <RectangleSkeleton
-            className={styles.learnMoreLink}
-            width="322px"
-            height="32px"
-          />
-        </div>
-      </div>
-    );
+  if (!webSearchInitied) return <SearchLoader />;
 
   const isSaveDisabled =
     !value || selectedOption === WebSearchType.None || isKeyHidden;
@@ -198,34 +166,39 @@ const SearchComponent = ({
         data-tooltip-content={
           !hasAIProviders
             ? t("AISettings:ToUseAddProvider", {
-                value: t("AISettings:Search"),
+                value: t("Common:WebSearchAI"),
+                aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }
       >
         <Text className={generalStyles.description}>
           {t("AISettings:SearchDescription", {
+            webSearch: t("Common:WebSearchAI"),
             productName: t("Common:ProductName"),
+            aiChats: t("Common:AIChats"),
           })}
         </Text>
-        {aiSettingsUrl ? (
+        {webSearchSettingsUrl ? (
           <Link
             className={generalStyles.learnMoreLink}
             target={LinkTarget.blank}
             type={LinkType.page}
             fontWeight={600}
             isHovered
-            href={aiSettingsUrl}
+            href={webSearchSettingsUrl}
             color="accent"
           >
             {t("Common:LearnMore")}
           </Link>
         ) : null}
-        <div className={styles.searchForm}>
+        <div className={styles.searchForm} data-testid="web-search-form">
           <FieldContainer
             labelVisible
             isVertical
-            labelText={t("AISettings:SearchEngine")}
+            labelText={t("AISettings:SearchEngine", {
+              webSearch: t("Common:WebSearchAI"),
+            })}
             removeMargin
           >
             <ComboBox
@@ -240,6 +213,8 @@ const SearchComponent = ({
               }
               displaySelectedOption
               isDisabled={!hasAIProviders || isKeyHidden}
+              dataTestId="web-search-engine-combobox"
+              dropDownTestId="web-search-engine-dropdown"
             />
           </FieldContainer>
           <FieldContainer
@@ -249,7 +224,10 @@ const SearchComponent = ({
             removeMargin
           >
             {isKeyHidden ? (
-              <div className={styles.aiBanner}>
+              <div
+                className={styles.aiBanner}
+                data-testid="web-search-key-hidden-banner"
+              >
                 <Text fontSize="12px" fontWeight={400} lineHeight="16px">
                   {t("AISettings:WebSearchKeyHiddenDescription")}
                 </Text>
@@ -269,9 +247,12 @@ const SearchComponent = ({
                     isKeyHidden || selectedOption === WebSearchType.None
                   }
                   autoComplete="off"
+                  testId="web-search-key-input"
                 />
                 <Text className={styles.hiddenKeyDescription}>
-                  {t("AISettings:WebSearchKeyDescription")}
+                  {t("AISettings:WebSearchKeyDescription", {
+                    webSearch: t("Common:WebSearchAI"),
+                  })}
                 </Text>
               </>
             )}
@@ -286,6 +267,7 @@ const SearchComponent = ({
             onClick={onSave}
             isLoading={saveRequestRunning}
             isDisabled={isSaveDisabled}
+            testId="web-search-save-button"
           />
           <Button
             size={ButtonSize.small}
@@ -298,6 +280,7 @@ const SearchComponent = ({
               saveRequestRunning ||
               webSearchConfig.needReset
             }
+            testId="web-search-reset-button"
           />
         </div>
       </div>
@@ -317,7 +300,9 @@ export const Search = inject(({ aiSettingsStore, settingsStore }: TStore) => {
     webSearchConfig: aiSettingsStore.webSearchConfig,
     updateWebSearch: aiSettingsStore.updateWebSearch,
     hasAIProviders: aiSettingsStore.hasAIProviders,
-    aiSettingsUrl: settingsStore.aiSettingsUrl,
+    webSearchSettingsUrl: settingsStore.webSearchSettingsUrl,
     getAIConfig: settingsStore.getAIConfig,
   };
 })(observer(SearchComponent));
+
+export { SearchLoader };

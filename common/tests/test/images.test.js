@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -129,7 +129,7 @@ describe("Image Tests", () => {
     const usedImagesSet = new Set(usedImages);
 
     const uselessImages = allImgs.filter((img) => {
-      if (img.fileName.includes("default_user_photo_size_48-48")) return false;
+      if (img.fileName.includes("default_user_photo_size_48-48") || img.fileName.includes("default_user_photo_size_360-360")) return false;
 
       return !usedImagesSet.has(img.fileName);
     });

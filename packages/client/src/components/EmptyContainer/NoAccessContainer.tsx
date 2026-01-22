@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -47,6 +47,7 @@ import { EmptyViewProps } from "@docspace/shared/components/empty-view/EmptyView
 export enum NoAccessContainerType {
   Room,
   Agent,
+  Account,
 }
 
 type Props = {
@@ -74,6 +75,7 @@ const NoAccessContainer = (props: Props) => {
 
     switch (type) {
       case NoAccessContainerType.Room:
+      case NoAccessContainerType.Account:
         {
           const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
           filterParamsStr = filter.toUrlParams();
@@ -104,8 +106,12 @@ const NoAccessContainer = (props: Props) => {
 
   switch (type) {
     case NoAccessContainerType.Room:
+    case NoAccessContainerType.Account:
       emptyViewProps = {
-        title: t("NoAccessRoomTitle"),
+        title:
+          type === NoAccessContainerType.Account
+            ? t("NoAccessSectionTitle")
+            : t("NoAccessRoomTitle"),
         description: t("RoomAccessRedirectNote", {
           sectionName: t("Common:Rooms"),
         }),
@@ -130,7 +136,9 @@ const NoAccessContainer = (props: Props) => {
     // TODO: for AI agents
     case NoAccessContainerType.Agent:
       emptyViewProps = {
-        title: t("AIRoom:NoAccessAIAgentTitle"),
+        title: t("AIRoom:NoAccessAIAgentTitle", {
+          aiAgent: t("Common:AIAgent"),
+        }),
         description: t("AIRoom:AIAgentAccessRedirectNote", {
           sectionName: t("Common:AIAgents"),
         }),

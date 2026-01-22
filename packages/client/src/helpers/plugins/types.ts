@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -139,9 +139,13 @@ export interface IframeWindow extends Window {
 
 export type TPlugin = {
   name: string;
+  nameLocaleMap?: { [key: string]: string };
   version: string;
   minDocSpaceVersion?: string;
   description: string;
+  descriptionLocaleMap?: { [key: string]: string };
+  nameLocale: string;
+  descriptionLocale: string;
   compatible: boolean;
   license: string;
   author: string;
@@ -156,6 +160,8 @@ export type TPlugin = {
   url: string;
   settings: string;
   iconUrl: string;
+  setLanguage?: (locale: string) => void;
+  getLanguage?: () => string;
 } & IPlugin &
   Partial<IApiPlugin> &
   Partial<IContextMenuPlugin> &
