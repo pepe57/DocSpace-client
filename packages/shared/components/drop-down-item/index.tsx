@@ -114,6 +114,7 @@ const DropDownItem = ({
   badgeLabel,
   testId,
   tooltip,
+  truncateText,
   ...rest
 }: DropDownItemProps) => {
   const { t } = useTranslation(["Common"]);
@@ -196,7 +197,12 @@ const DropDownItem = ({
       {isSeparator ? (
         "\u00A0"
       ) : label ? (
-        <span dir="auto">{label}</span>
+        <span
+          dir="auto"
+          className={truncateText ? styles.truncateText : undefined}
+        >
+          {label}
+        </span>
       ) : (
         children
       )}

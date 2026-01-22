@@ -358,14 +358,14 @@ const FilterInput = React.memo(
             key={g.id}
             className="option-item"
             icon={buildGroupIconDataUrl(g.icon)}
+            truncateText
             onClick={() => {
               onFilterByGroup?.(g.id);
               setIsOverflowOpen(false);
             }}
             testId={`room_group_overflow_${g.id}`}
-          >
-            {g.name}
-          </DropDownItem>
+            label={g.name}
+          />
         ))}
       </>
     );
