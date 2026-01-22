@@ -61,7 +61,7 @@ import {
 	TOption,
 } from "@docspace/shared/components/combobox";
 import { BetaBadge } from "@docspace/shared/components/beta-badge";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import api from "@docspace/shared/api";
 import { setCookie, deleteCookie } from "@docspace/shared/utils/cookie";

@@ -27,7 +27,7 @@
 import React, { useRef, useState } from "react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
-import { Checkbox } from "../../checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
 	ContextMenuButton,
 	ContextMenuButtonDisplayType,

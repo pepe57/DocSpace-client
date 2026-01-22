@@ -36,7 +36,7 @@ import {
 	InputSize,
 } from "@docspace/ui-kit/components/text-input";
 
-import { Checkbox } from "../../../components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { AboutDialog } from "../../../components/about-dialog";

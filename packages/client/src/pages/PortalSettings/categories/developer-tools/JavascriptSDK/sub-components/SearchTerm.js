@@ -29,7 +29,7 @@ import debounce from "lodash.debounce";
 
 import { Label } from "@docspace/ui-kit/components/label";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { ColumnContainer } from "../presets/StyledPresets";
 

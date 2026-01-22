@@ -31,7 +31,7 @@ import { useTranslation, Trans } from "react-i18next";
 import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
@@ -43,108 +43,108 @@ import { EncryptWarningDialog } from "./EncryptWarningDialog";
 import styles from "./encrypt-data.module.scss";
 
 type EncryptDataPageProps = {
-  portals: TPortals[];
-  encryptionBlockHelpUrl: string;
-  isNotify: boolean;
-  status: number;
+	portals: TPortals[];
+	encryptionBlockHelpUrl: string;
+	isNotify: boolean;
+	status: number;
 };
 
 const EncryptDataPage = ({
-  portals,
-  encryptionBlockHelpUrl,
-  isNotify,
-  status,
+	portals,
+	encryptionBlockHelpUrl,
+	isNotify,
+	status,
 }: EncryptDataPageProps) => {
-  const { t } = useTranslation(["Management", "Common"]);
-  const { currentColorScheme } = useTheme();
-  const [encryptWarningDialogVisible, setEncryptWarningDialogVisible] =
-    useState(false);
-  const [isNotifyChecked, setIsNotifyChecked] = useState(isNotify);
+	const { t } = useTranslation(["Management", "Common"]);
+	const { currentColorScheme } = useTheme();
+	const [encryptWarningDialogVisible, setEncryptWarningDialogVisible] =
+		useState(false);
+	const [isNotifyChecked, setIsNotifyChecked] = useState(isNotify);
 
-  const isDisabled = portals.length <= 1;
+	const isDisabled = portals.length <= 1;
 
-  return (
-    <>
-      {encryptWarningDialogVisible ? (
-        <EncryptWarningDialog
-          encryptWarningDialogVisible={encryptWarningDialogVisible}
-          setEncryptWarningDialogVisible={setEncryptWarningDialogVisible}
-          isNotifyChecked={isNotifyChecked}
-          status={status}
-        />
-      ) : null}
-      <div
-        className={classNames(styles.wrapper, {
-          [styles.disabled]: isDisabled,
-        })}
-        data-testid="encrypt-data-page"
-      >
-        <div className={styles.header}>
-          <Text fontSize="16px" fontWeight={700}>
-            {t("EncryptData")}
-          </Text>
-          {status === EncryptionStatus.Encrypted ? (
-            <div className={styles.badge}>
-              <Text fontSize="14px" fontWeight={600}>
-                {t("StorageEncrypted")}
-              </Text>
-            </div>
-          ) : null}
-        </div>
-        <Text>
-          {t("EncryptDataDescription", {
-            organizationName: t("Common:OrganizationName"),
-          })}
-        </Text>
-        <div className={styles.wrapperBlock}>
-          <Text fontSize="16px" fontWeight={700}>
-            {t("Common:Warning")}!
-          </Text>
-          <Text className={styles.description}>
-            {t("EncryptDataWarningDescription")}
-          </Text>
-          {encryptionBlockHelpUrl ? (
-            <Text>
-              <Trans
-                t={t}
-                i18nKey="MoreDetails"
-                ns="Management"
-                values={{ link: t("Common:HelpCenter") }}
-                components={{
-                  1: (
-                    <Link
-                      key="more-details-link"
-                      className="link"
-                      color={currentColorScheme?.main?.accent}
-                      href={encryptionBlockHelpUrl}
-                    />
-                  ),
-                }}
-              />
-            </Text>
-          ) : null}
-          <Checkbox
-            className={styles.checkbox}
-            label={t("NotifyUsers")}
-            onChange={() => setIsNotifyChecked(!isNotifyChecked)}
-            isChecked={isNotifyChecked}
-            isDisabled={isDisabled}
-          />
-          <Button
-            primary
-            label={
-              status === EncryptionStatus.Encrypted
-                ? t("DecryptStorage")
-                : t("EncryptStorage")
-            }
-            size={ButtonSize.normal}
-            onClick={() => setEncryptWarningDialogVisible(true)}
-            isDisabled={isDisabled}
-          />
-        </div>
-      </div>
-    </>
-  );
+	return (
+		<>
+			{encryptWarningDialogVisible ? (
+				<EncryptWarningDialog
+					encryptWarningDialogVisible={encryptWarningDialogVisible}
+					setEncryptWarningDialogVisible={setEncryptWarningDialogVisible}
+					isNotifyChecked={isNotifyChecked}
+					status={status}
+				/>
+			) : null}
+			<div
+				className={classNames(styles.wrapper, {
+					[styles.disabled]: isDisabled,
+				})}
+				data-testid="encrypt-data-page"
+			>
+				<div className={styles.header}>
+					<Text fontSize="16px" fontWeight={700}>
+						{t("EncryptData")}
+					</Text>
+					{status === EncryptionStatus.Encrypted ? (
+						<div className={styles.badge}>
+							<Text fontSize="14px" fontWeight={600}>
+								{t("StorageEncrypted")}
+							</Text>
+						</div>
+					) : null}
+				</div>
+				<Text>
+					{t("EncryptDataDescription", {
+						organizationName: t("Common:OrganizationName"),
+					})}
+				</Text>
+				<div className={styles.wrapperBlock}>
+					<Text fontSize="16px" fontWeight={700}>
+						{t("Common:Warning")}!
+					</Text>
+					<Text className={styles.description}>
+						{t("EncryptDataWarningDescription")}
+					</Text>
+					{encryptionBlockHelpUrl ? (
+						<Text>
+							<Trans
+								t={t}
+								i18nKey="MoreDetails"
+								ns="Management"
+								values={{ link: t("Common:HelpCenter") }}
+								components={{
+									1: (
+										<Link
+											key="more-details-link"
+											className="link"
+											color={currentColorScheme?.main?.accent}
+											href={encryptionBlockHelpUrl}
+										/>
+									),
+								}}
+							/>
+						</Text>
+					) : null}
+					<Checkbox
+						className={styles.checkbox}
+						label={t("NotifyUsers")}
+						onChange={() => setIsNotifyChecked(!isNotifyChecked)}
+						isChecked={isNotifyChecked}
+						isDisabled={isDisabled}
+					/>
+					<Button
+						primary
+						label={
+							status === EncryptionStatus.Encrypted
+								? t("DecryptStorage")
+								: t("EncryptStorage")
+						}
+						size={ButtonSize.normal}
+						onClick={() => setEncryptWarningDialogVisible(true)}
+						isDisabled={isDisabled}
+					/>
+				</div>
+			</div>
+		</>
+	);
 };
 
 export default EncryptDataPage;

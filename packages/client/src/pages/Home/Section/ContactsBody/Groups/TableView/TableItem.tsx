@@ -29,12 +29,12 @@ import { useTheme } from "styled-components";
 
 import { TableCell } from "@docspace/shared/components/table";
 import { Link } from "@docspace/ui-kit/components/link";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Text } from "@docspace/ui-kit/components/text";
 import {
-  Avatar,
-  AvatarRole,
-  AvatarSize,
+	Avatar,
+	AvatarRole,
+	AvatarSize,
 } from "@docspace/shared/components/avatar";
 import { globalColors } from "@docspace/shared/themes";
 import { TGroup } from "@docspace/shared/api/groups/types";
@@ -47,193 +47,193 @@ import Badges from "../../Badges";
 import { GroupsRowWrapper, GroupsRow } from "./TableView.styled";
 
 type GroupsTableItemProps = {
-  item: TGroup;
-  itemIndex: number;
-  isChecked: boolean;
-  peopleGroupsColumnIsEnabled: boolean;
-  managerGroupsColumnIsEnabled: boolean;
+	item: TGroup;
+	itemIndex: number;
+	isChecked: boolean;
+	peopleGroupsColumnIsEnabled: boolean;
+	managerGroupsColumnIsEnabled: boolean;
 
-  bufferSelection?: GroupsStore["bufferSelection"];
-  getGroupContextOptions?: GroupsStore["getGroupContextOptions"];
-  getModel?: GroupsStore["getModel"];
-  openGroupAction?: GroupsStore["openGroupAction"];
-  selectRow?: GroupsStore["selectRow"];
-  changeGroupSelection?: GroupsStore["changeGroupSelection"];
-  changeGroupContextSelection?: GroupsStore["changeGroupContextSelection"];
-  withContentSelection?: ContactsHotkeysStore["withContentSelection"];
+	bufferSelection?: GroupsStore["bufferSelection"];
+	getGroupContextOptions?: GroupsStore["getGroupContextOptions"];
+	getModel?: GroupsStore["getModel"];
+	openGroupAction?: GroupsStore["openGroupAction"];
+	selectRow?: GroupsStore["selectRow"];
+	changeGroupSelection?: GroupsStore["changeGroupSelection"];
+	changeGroupContextSelection?: GroupsStore["changeGroupContextSelection"];
+	withContentSelection?: ContactsHotkeysStore["withContentSelection"];
 };
 
 const GroupsTableItem = ({
-  item,
-  itemIndex,
-  bufferSelection,
-  getGroupContextOptions,
-  getModel,
-  openGroupAction,
-  peopleGroupsColumnIsEnabled,
-  managerGroupsColumnIsEnabled,
+	item,
+	itemIndex,
+	bufferSelection,
+	getGroupContextOptions,
+	getModel,
+	openGroupAction,
+	peopleGroupsColumnIsEnabled,
+	managerGroupsColumnIsEnabled,
 
-  changeGroupSelection,
-  changeGroupContextSelection,
-  selectRow,
-  isChecked,
-  withContentSelection,
+	changeGroupSelection,
+	changeGroupContextSelection,
+	selectRow,
+	isChecked,
+	withContentSelection,
 }: GroupsTableItemProps) => {
-  const { t } = useTranslation(["People", "Common", "PeopleTranslations"]);
-  const theme = useTheme();
-  const isActive = bufferSelection?.id === item.id;
+	const { t } = useTranslation(["People", "Common", "PeopleTranslations"]);
+	const theme = useTheme();
+	const isActive = bufferSelection?.id === item.id;
 
-  const onChange = () => {
-    changeGroupSelection!(item, isChecked);
-  };
+	const onChange = () => {
+		changeGroupSelection!(item, isChecked);
+	};
 
-  const onRowContextClick = (rightMouseButtonClick?: boolean) => {
-    changeGroupContextSelection!(item, !rightMouseButtonClick);
-  };
+	const onRowContextClick = (rightMouseButtonClick?: boolean) => {
+		changeGroupContextSelection!(item, !rightMouseButtonClick);
+	};
 
-  const onOpenGroup = (e: React.MouseEvent) => {
-    openGroupAction!(item.id, true, item.name, e);
-  };
+	const onOpenGroup = (e: React.MouseEvent) => {
+		openGroupAction!(item.id, true, item.name, e);
+	};
 
-  const onRowClick = (e: React.MouseEvent<Element>) => {
-    if (withContentSelection) return;
-    const target = e.target as Element;
-    if (
-      target?.tagName === "SPAN" ||
-      target?.tagName === "A" ||
-      target.closest(".checkbox") ||
-      target.closest(".table-container_row-checkbox") ||
-      e.detail === 0
-    )
-      return;
+	const onRowClick = (e: React.MouseEvent<Element>) => {
+		if (withContentSelection) return;
+		const target = e.target as Element;
+		if (
+			target?.tagName === "SPAN" ||
+			target?.tagName === "A" ||
+			target.closest(".checkbox") ||
+			target.closest(".table-container_row-checkbox") ||
+			e.detail === 0
+		)
+			return;
 
-    selectRow!(item);
-  };
+		selectRow!(item);
+	};
 
-  const getContextModel: () => ContextMenuModel[] = () => getModel!(t, item);
+	const getContextModel: () => ContextMenuModel[] = () => getModel!(t, item);
 
-  const value = `folder_${item.id}_false_index_${itemIndex}`;
+	const value = `folder_${item.id}_false_index_${itemIndex}`;
 
-  return (
-    <GroupsRowWrapper
-      id={item.id}
-      className={`group-item ${
-        (isChecked || isActive) && "table-row-selected"
-      } ${item.id}`}
-      value={value}
-      data-testid={`contacts_table_groups_row_${itemIndex}`}
-    >
-      <GroupsRow
-        key={item.id}
-        className="table-row"
-        checked={isChecked}
-        isActive={isActive}
-        onClick={onRowClick}
-        fileContextClick={onRowContextClick}
-        contextOptions={
-          getGroupContextOptions!(t, item) as unknown as ContextMenuModel[]
-        }
-        getContextModel={getContextModel!}
-        badgeUrl=""
-        isIndexEditingMode={false}
-        dataTestId={`contacts_groups_row_${itemIndex}`}
-      >
-        <TableCell
-          className="table-container_group-title-cell"
-          dataTestId={`contacts_table_groups_title_cell_${itemIndex}`}
-        >
-          <TableCell
-            hasAccess
-            className="table-container_row-checkbox-wrapper"
-            checked={isChecked}
-          >
-            <div className="table-container_element">
-              <Avatar
-                className="avatar"
-                size={AvatarSize.min}
-                userName={item.name}
-                isGroup
-                role={AvatarRole.user}
-                source=""
-                dataTestId={`contacts_table_groups_avatar_${itemIndex}`}
-              />
-            </div>
-            <Checkbox
-              className="table-container_row-checkbox"
-              onChange={onChange}
-              isChecked={isChecked}
-              dataTestId={`contacts_table_groups_checkbox_${itemIndex}`}
-            />
-          </TableCell>
+	return (
+		<GroupsRowWrapper
+			id={item.id}
+			className={`group-item ${
+				(isChecked || isActive) && "table-row-selected"
+			} ${item.id}`}
+			value={value}
+			data-testid={`contacts_table_groups_row_${itemIndex}`}
+		>
+			<GroupsRow
+				key={item.id}
+				className="table-row"
+				checked={isChecked}
+				isActive={isActive}
+				onClick={onRowClick}
+				fileContextClick={onRowContextClick}
+				contextOptions={
+					getGroupContextOptions!(t, item) as unknown as ContextMenuModel[]
+				}
+				getContextModel={getContextModel!}
+				badgeUrl=""
+				isIndexEditingMode={false}
+				dataTestId={`contacts_groups_row_${itemIndex}`}
+			>
+				<TableCell
+					className="table-container_group-title-cell"
+					dataTestId={`contacts_table_groups_title_cell_${itemIndex}`}
+				>
+					<TableCell
+						hasAccess
+						className="table-container_row-checkbox-wrapper"
+						checked={isChecked}
+					>
+						<div className="table-container_element">
+							<Avatar
+								className="avatar"
+								size={AvatarSize.min}
+								userName={item.name}
+								isGroup
+								role={AvatarRole.user}
+								source=""
+								dataTestId={`contacts_table_groups_avatar_${itemIndex}`}
+							/>
+						</div>
+						<Checkbox
+							className="table-container_row-checkbox"
+							onChange={onChange}
+							isChecked={isChecked}
+							dataTestId={`contacts_table_groups_checkbox_${itemIndex}`}
+						/>
+					</TableCell>
 
-          <Link
-            onClick={onOpenGroup}
-            title={item.name}
-            fontWeight="600"
-            fontSize="13px"
-            isTextOverflow
-            className="table-cell_group-manager"
-            truncate
-            dataTestId={`contacts_table_groups_name_link_${itemIndex}`}
-          >
-            {item.name}
-          </Link>
+					<Link
+						onClick={onOpenGroup}
+						title={item.name}
+						fontWeight="600"
+						fontSize="13px"
+						isTextOverflow
+						className="table-cell_group-manager"
+						truncate
+						dataTestId={`contacts_table_groups_name_link_${itemIndex}`}
+					>
+						{item.name}
+					</Link>
 
-          <Badges isLDAP={item.isLDAP} />
-        </TableCell>
+					<Badges isLDAP={item.isLDAP} />
+				</TableCell>
 
-        {peopleGroupsColumnIsEnabled ? (
-          <TableCell
-            className="table-container_group-people"
-            dataTestId={`contacts_table_groups_members_count_cell_${itemIndex}`}
-          >
-            <Text
-              title={item.membersCount.toString()}
-              fontWeight="600"
-              fontSize="13px"
-              className="table-cell_group-people"
-              color={theme.filesSection.tableView.row.sideColor}
-            >
-              {item.membersCount}
-            </Text>
-          </TableCell>
-        ) : (
-          <div />
-        )}
+				{peopleGroupsColumnIsEnabled ? (
+					<TableCell
+						className="table-container_group-people"
+						dataTestId={`contacts_table_groups_members_count_cell_${itemIndex}`}
+					>
+						<Text
+							title={item.membersCount.toString()}
+							fontWeight="600"
+							fontSize="13px"
+							className="table-cell_group-people"
+							color={theme.filesSection.tableView.row.sideColor}
+						>
+							{item.membersCount}
+						</Text>
+					</TableCell>
+				) : (
+					<div />
+				)}
 
-        {managerGroupsColumnIsEnabled ? (
-          <TableCell
-            className="table-container_group-manager"
-            dataTestId={`contacts_table_groups_manager_cell_${itemIndex}`}
-          >
-            <Text
-              title={item.manager?.displayName}
-              fontWeight="600"
-              fontSize="13px"
-              className="table-cell_group-manager"
-              color={globalColors.gray}
-              dir="auto"
-              truncate
-            >
-              {item.manager?.displayName}
-            </Text>
-          </TableCell>
-        ) : (
-          <div />
-        )}
-      </GroupsRow>
-    </GroupsRowWrapper>
-  );
+				{managerGroupsColumnIsEnabled ? (
+					<TableCell
+						className="table-container_group-manager"
+						dataTestId={`contacts_table_groups_manager_cell_${itemIndex}`}
+					>
+						<Text
+							title={item.manager?.displayName}
+							fontWeight="600"
+							fontSize="13px"
+							className="table-cell_group-manager"
+							color={globalColors.gray}
+							dir="auto"
+							truncate
+						>
+							{item.manager?.displayName}
+						</Text>
+					</TableCell>
+				) : (
+					<div />
+				)}
+			</GroupsRow>
+		</GroupsRowWrapper>
+	);
 };
 
 export default inject(({ peopleStore }: TStore) => ({
-  bufferSelection: peopleStore.groupsStore!.bufferSelection,
-  getGroupContextOptions: peopleStore.groupsStore!.getGroupContextOptions,
-  getModel: peopleStore.groupsStore!.getModel,
-  openGroupAction: peopleStore.groupsStore!.openGroupAction,
-  changeGroupSelection: peopleStore.groupsStore!.changeGroupSelection,
-  changeGroupContextSelection:
-    peopleStore.groupsStore!.changeGroupContextSelection,
-  selectRow: peopleStore.groupsStore!.selectRow,
-  withContentSelection: peopleStore.contactsHotkeysStore!.withContentSelection,
+	bufferSelection: peopleStore.groupsStore!.bufferSelection,
+	getGroupContextOptions: peopleStore.groupsStore!.getGroupContextOptions,
+	getModel: peopleStore.groupsStore!.getModel,
+	openGroupAction: peopleStore.groupsStore!.openGroupAction,
+	changeGroupSelection: peopleStore.groupsStore!.changeGroupSelection,
+	changeGroupContextSelection:
+		peopleStore.groupsStore!.changeGroupContextSelection,
+	selectRow: peopleStore.groupsStore!.selectRow,
+	withContentSelection: peopleStore.contactsHotkeysStore!.withContentSelection,
 }))(observer(GroupsTableItem));

@@ -29,7 +29,7 @@ import classNames from "classnames";
 
 import SortDescReactSvgUrl from "PUBLIC_DIR/images/sort.desc.react.svg?url";
 
-import { Checkbox } from "../../../checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../../../icon-button";
 import { globalColors } from "../../../../themes";
@@ -38,106 +38,106 @@ import { TableHeaderCellProps } from "../../Table.types";
 import styles from "./TableHeaderCell.module.scss";
 
 const TableHeaderCell = ({
-  column,
-  index,
-  onMouseDown,
-  resizable,
-  sortBy,
-  sorted,
-  defaultSize,
-  sortingVisible,
-  tagRef,
-  testId = "table-header-cell",
+	column,
+	index,
+	onMouseDown,
+	resizable,
+	sortBy,
+	sorted,
+	defaultSize,
+	sortingVisible,
+	tagRef,
+	testId = "table-header-cell",
 }: TableHeaderCellProps) => {
-  const {
-    title,
-    enable,
-    active,
-    minWidth,
-    withTagRef,
-    default: isDefault,
-    checkbox,
-    isShort,
-  } = column;
+	const {
+		title,
+		enable,
+		active,
+		minWidth,
+		withTagRef,
+		default: isDefault,
+		checkbox,
+		isShort,
+	} = column;
 
-  const isActive = (sortBy && column.sortBy === sortBy) || active;
+	const isActive = (sortBy && column.sortBy === sortBy) || active;
 
-  const onClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
+	const onClick = (e: React.MouseEvent) => {
+		e.stopPropagation();
 
-    if (!sortingVisible) return;
-    column.onClick?.(column.sortBy || "", e);
-  };
+		if (!sortingVisible) return;
+		column.onClick?.(column.sortBy || "", e);
+	};
 
-  const onIconClick = (e: React.MouseEvent) => {
-    if (!sortingVisible) return;
-    column.onIconClick?.();
-    e.stopPropagation();
-  };
+	const onIconClick = (e: React.MouseEvent) => {
+		if (!sortingVisible) return;
+		column.onIconClick?.();
+		e.stopPropagation();
+	};
 
-  const classes = classNames(
-    styles.tableHeaderCell,
-    "table-container_header-cell",
-    {
-      [styles.isActive]: isActive,
-      [styles.sorted]: sorted,
-      [styles.isShort]: isShort,
-      [styles.showIcon]: !!column.onClick,
-      [styles.sortingVisible]: sortingVisible,
-    },
-  );
+	const classes = classNames(
+		styles.tableHeaderCell,
+		"table-container_header-cell",
+		{
+			[styles.isActive]: isActive,
+			[styles.sorted]: sorted,
+			[styles.isShort]: isShort,
+			[styles.showIcon]: !!column.onClick,
+			[styles.sortingVisible]: sortingVisible,
+		},
+	);
 
-  return (
-    <div
-      className={classes}
-      id={`column_${index}`}
-      data-enable={enable}
-      data-default={isDefault}
-      data-short-colum={isShort}
-      data-min-width={minWidth}
-      data-default-size={defaultSize}
-      ref={withTagRef ? tagRef : null}
-      data-testid={testId}
-    >
-      <div className={styles.tableHeaderItem}>
-        <div className={styles.textWrapper} onClick={onClick}>
-          {checkbox && (checkbox.isIndeterminate || checkbox.value) ? (
-            <Checkbox
-              onChange={checkbox.onChange}
-              isChecked={checkbox.value}
-              isIndeterminate={checkbox.isIndeterminate}
-            />
-          ) : null}
+	return (
+		<div
+			className={classes}
+			id={`column_${index}`}
+			data-enable={enable}
+			data-default={isDefault}
+			data-short-colum={isShort}
+			data-min-width={minWidth}
+			data-default-size={defaultSize}
+			ref={withTagRef ? tagRef : null}
+			data-testid={testId}
+		>
+			<div className={styles.tableHeaderItem}>
+				<div className={styles.textWrapper} onClick={onClick}>
+					{checkbox && (checkbox.isIndeterminate || checkbox.value) ? (
+						<Checkbox
+							onChange={checkbox.onChange}
+							isChecked={checkbox.value}
+							isIndeterminate={checkbox.isIndeterminate}
+						/>
+					) : null}
 
-          <Text
-            fontWeight={600}
-            className={classNames(styles.text, "header-container-text")}
-          >
-            {enable ? title : ""}
-          </Text>
+					<Text
+						fontWeight={600}
+						className={classNames(styles.text, "header-container-text")}
+					>
+						{enable ? title : ""}
+					</Text>
 
-          {sortingVisible ? (
-            <IconButton
-              onClick={column.onIconClick ? onIconClick : onClick}
-              iconName={SortDescReactSvgUrl}
-              className={styles.sortIcon}
-              size={12}
-              color={globalColors.gray}
-              dataTestId="sort-icon"
-            />
-          ) : null}
-        </div>
-        {resizable ? (
-          <div
-            data-column={`${index}`}
-            className={classNames(styles.resizeHandle, "not-selectable")}
-            onMouseDown={onMouseDown}
-            data-testid="resize-handle"
-          />
-        ) : null}
-      </div>
-    </div>
-  );
+					{sortingVisible ? (
+						<IconButton
+							onClick={column.onIconClick ? onIconClick : onClick}
+							iconName={SortDescReactSvgUrl}
+							className={styles.sortIcon}
+							size={12}
+							color={globalColors.gray}
+							dataTestId="sort-icon"
+						/>
+					) : null}
+				</div>
+				{resizable ? (
+					<div
+						data-column={`${index}`}
+						className={classNames(styles.resizeHandle, "not-selectable")}
+						onMouseDown={onMouseDown}
+						data-testid="resize-handle"
+					/>
+				) : null}
+			</div>
+		</div>
+	);
 };
 
 export { TableHeaderCell };

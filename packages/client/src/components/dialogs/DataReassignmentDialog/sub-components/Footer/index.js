@@ -24,82 +24,82 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Button } from "@docspace/shared/components/button";
 import { StyledFooterWrapper } from "../../../ChangePortalOwnerDialog/StyledDialog";
 
 const Footer = ({
-  t,
-  showProgress,
-  isDeleteProfile,
-  onToggleDeleteProfile,
-  targetUser,
-  onReassign,
-  percent,
-  isAbortTransfer,
-  onClose,
-  onTerminate,
-  onStartAgain,
-  showDeleteProfileCheckbox,
+	t,
+	showProgress,
+	isDeleteProfile,
+	onToggleDeleteProfile,
+	targetUser,
+	onReassign,
+	percent,
+	isAbortTransfer,
+	onClose,
+	onTerminate,
+	onStartAgain,
+	showDeleteProfileCheckbox,
 }) => {
-  if (showProgress) {
-    return (
-      <StyledFooterWrapper>
-        <div className="button-wrapper">
-          <Button
-            label={
-              isAbortTransfer && percent !== 100
-                ? t("DataReassignmentDialog:StartTransferAgain")
-                : percent === 100
-                  ? t("Common:OKButton")
-                  : t("DataReassignmentDialog:AbortTransfer")
-            }
-            size="normal"
-            scale
-            onClick={
-              isAbortTransfer && percent !== 100
-                ? onStartAgain
-                : percent === 100
-                  ? onClose
-                  : onTerminate
-            }
-          />
-        </div>
-      </StyledFooterWrapper>
-    );
-  }
+	if (showProgress) {
+		return (
+			<StyledFooterWrapper>
+				<div className="button-wrapper">
+					<Button
+						label={
+							isAbortTransfer && percent !== 100
+								? t("DataReassignmentDialog:StartTransferAgain")
+								: percent === 100
+									? t("Common:OKButton")
+									: t("DataReassignmentDialog:AbortTransfer")
+						}
+						size="normal"
+						scale
+						onClick={
+							isAbortTransfer && percent !== 100
+								? onStartAgain
+								: percent === 100
+									? onClose
+									: onTerminate
+						}
+					/>
+				</div>
+			</StyledFooterWrapper>
+		);
+	}
 
-  return (
-    <StyledFooterWrapper>
-      {showDeleteProfileCheckbox ? (
-        <div className="delete-profile-container">
-          <Checkbox
-            label={t("DataReassignmentDialog:DeleteProfileIsFinished")}
-            className="delete-profile-checkbox"
-            isChecked={isDeleteProfile}
-            onClick={onToggleDeleteProfile}
-          />
-        </div>
-      ) : null}
-      <div className="button-wrapper">
-        <Button
-          label={t("DataReassignmentDialog:Reassign")}
-          size="normal"
-          primary
-          scale
-          isDisabled={!targetUser}
-          onClick={onReassign}
-        />
+	return (
+		<StyledFooterWrapper>
+			{showDeleteProfileCheckbox ? (
+				<div className="delete-profile-container">
+					<Checkbox
+						label={t("DataReassignmentDialog:DeleteProfileIsFinished")}
+						className="delete-profile-checkbox"
+						isChecked={isDeleteProfile}
+						onClick={onToggleDeleteProfile}
+					/>
+				</div>
+			) : null}
+			<div className="button-wrapper">
+				<Button
+					label={t("DataReassignmentDialog:Reassign")}
+					size="normal"
+					primary
+					scale
+					isDisabled={!targetUser}
+					onClick={onReassign}
+				/>
 
-        <Button
-          label={t("Common:CancelButton")}
-          size="normal"
-          scale
-          onClick={onClose}
-        />
-      </div>
-    </StyledFooterWrapper>
-  );
+				<Button
+					label={t("Common:CancelButton")}
+					size="normal"
+					scale
+					onClick={onClose}
+				/>
+			</div>
+		</StyledFooterWrapper>
+	);
 };
 
 export default Footer;

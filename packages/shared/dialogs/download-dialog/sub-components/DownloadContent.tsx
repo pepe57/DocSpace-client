@@ -32,193 +32,193 @@ import classNames from "classnames";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "../../../components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { LinkWithDropdown } from "../../../components/link-with-dropdown";
 import { isMobile } from "../../../utils";
 
 import styles from "../DownloadDialog.module.scss";
 import {
-  type DownloadContentProps,
-  isFile,
-  type TDownloadedFile,
+	type DownloadContentProps,
+	isFile,
+	type TDownloadedFile,
 } from "../DownloadDialog.types";
 import { DownloadRow } from "./DownloadRow";
 
 export const DownloadContent = (props: DownloadContentProps) => {
-  const {
-    t,
-    items,
-    onSelectFormat,
-    onRowSelect,
-    titleFormat,
-    type,
-    extsConvertible,
-    title,
-    isChecked,
-    isIndeterminate,
-    getItemIcon,
-    dataTestId,
-  } = props;
+	const {
+		t,
+		items,
+		onSelectFormat,
+		onRowSelect,
+		titleFormat,
+		type,
+		extsConvertible,
+		title,
+		isChecked,
+		isIndeterminate,
+		getItemIcon,
+		dataTestId,
+	} = props;
 
-  const getTitleExtensions = () => {
-    let arr: string[] = [];
-    items.forEach((item) => {
-      const exst = isFile(item) ? item.fileExst : undefined;
+	const getTitleExtensions = () => {
+		let arr: string[] = [];
+		items.forEach((item) => {
+			const exst = isFile(item) ? item.fileExst : undefined;
 
-      if (exst) {
-        arr = [...arr, ...extsConvertible[exst]];
-      }
-    });
+			if (exst) {
+				arr = [...arr, ...extsConvertible[exst]];
+			}
+		});
 
-    arr = arr.filter((x, pos) => arr.indexOf(x) !== pos);
-    arr = arr.filter((x, pos) => arr.indexOf(x) === pos);
+		arr = arr.filter((x, pos) => arr.indexOf(x) !== pos);
+		arr = arr.filter((x, pos) => arr.indexOf(x) === pos);
 
-    const formats = [
-      {
-        key: "original",
-        label: t("Common:OriginalFormat"),
-        onClick: onSelectFormat,
-        "data-format": t("Common:OriginalFormat"),
-        "data-type": type,
-      },
-    ];
+		const formats = [
+			{
+				key: "original",
+				label: t("Common:OriginalFormat"),
+				onClick: onSelectFormat,
+				"data-format": t("Common:OriginalFormat"),
+				"data-type": type,
+			},
+		];
 
-    arr.forEach((f) => {
-      formats.push({
-        key: f,
-        label: f,
-        onClick: onSelectFormat,
-        "data-format": f,
-        "data-type": type,
-      });
-    });
+		arr.forEach((f) => {
+			formats.push({
+				key: f,
+				label: f,
+				onClick: onSelectFormat,
+				"data-format": f,
+				"data-type": type,
+			});
+		});
 
-    return formats;
-  };
+		return formats;
+	};
 
-  const getFormats = (item: TDownloadedFile) => {
-    const arrayFormats =
-      item && isFile(item) ? extsConvertible[item.fileExst] : [];
-    const formats = [
-      {
-        key: "original",
-        label: t("Common:OriginalFormat"),
-        onClick: onSelectFormat,
-        "data-format": t("Common:OriginalFormat"),
-        "data-type": type,
-        "data-file-id": item.id,
-      },
-    ];
-    arrayFormats.forEach((f) => {
-      formats.push({
-        key: f,
-        label: f,
-        onClick: onSelectFormat,
-        "data-format": f,
-        "data-type": type,
-        "data-file-id": item.id,
-      });
-    });
+	const getFormats = (item: TDownloadedFile) => {
+		const arrayFormats =
+			item && isFile(item) ? extsConvertible[item.fileExst] : [];
+		const formats = [
+			{
+				key: "original",
+				label: t("Common:OriginalFormat"),
+				onClick: onSelectFormat,
+				"data-format": t("Common:OriginalFormat"),
+				"data-type": type,
+				"data-file-id": item.id,
+			},
+		];
+		arrayFormats.forEach((f) => {
+			formats.push({
+				key: f,
+				label: f,
+				onClick: onSelectFormat,
+				"data-format": f,
+				"data-type": type,
+				"data-file-id": item.id,
+			});
+		});
 
-    return type === "other" ? [] : formats;
-  };
+		return type === "other" ? [] : formats;
+	};
 
-  const isOther = type === "other";
+	const isOther = type === "other";
 
-  const titleData = !isOther ? getTitleExtensions() : undefined;
+	const titleData = !isOther ? getTitleExtensions() : undefined;
 
-  const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 
-  const onOpen = () => {
-    setIsOpen(!isOpen);
-  };
+	const onOpen = () => {
+		setIsOpen(!isOpen);
+	};
 
-  const showHeader = items.length > 1;
+	const showHeader = items.length > 1;
 
-  return (
-    <div
-      className={classNames(styles.downloadContent, {
-        [styles.isOpen]: showHeader ? isOpen : true,
-      })}
-      data-testid={dataTestId || "download-dialog-content"}
-    >
-      {showHeader ? (
-        <div
-          className={classNames(
-            styles.downloadDialogContentWrapper,
-            styles.downloadDialogRow,
-          )}
-        >
-          <div className={styles.downloadDialogMainContent}>
-            <Checkbox
-              data-item-id="All"
-              data-type={type}
-              isChecked={isChecked}
-              isIndeterminate={isIndeterminate}
-              onChange={onRowSelect}
-              className={styles.downloadDialogCheckbox}
-              dataTestId={`${dataTestId}_checkbox`}
-            />
-            <div
-              onClick={onOpen}
-              className={classNames(
-                styles.downloadDialogHeading,
-                styles.downloadDialogTitle,
-              )}
-            >
-              <Text noSelect fontSize="16px" fontWeight={600}>
-                {title}
-              </Text>
-              <ArrowIcon className={styles.downloadDialogIcon} />
-            </div>
-          </div>
-          <div className={styles.downloadDialogActions}>
-            {(isChecked || isIndeterminate) && !isOther ? (
-              <LinkWithDropdown
-                className={styles.downloadDialogLink}
-                dropDownClassName="download-dialog-dropDown"
-                data={titleData}
-                directionY="bottom"
-                dropdownType="alwaysDashed"
-                fontSize="13px"
-                fontWeight={600}
-                withExpander
-                directionX="left"
-                isAside
-                withoutBackground
-                hasScroll={isMobile()}
-                manualWidth={isMobile() ? "148px" : undefined}
-              >
-                {titleFormat}
-              </LinkWithDropdown>
-            ) : null}
-          </div>
-        </div>
-      ) : null}
-      <div className={styles.downloadDialogHiddenItems}>
-        {items.map((file, index) => {
-          const dropdownItems = !isOther
-            ? getFormats(file).filter(
-                (x) => isFile(file) && x.label !== file.fileExst,
-              )
-            : undefined;
+	return (
+		<div
+			className={classNames(styles.downloadContent, {
+				[styles.isOpen]: showHeader ? isOpen : true,
+			})}
+			data-testid={dataTestId || "download-dialog-content"}
+		>
+			{showHeader ? (
+				<div
+					className={classNames(
+						styles.downloadDialogContentWrapper,
+						styles.downloadDialogRow,
+					)}
+				>
+					<div className={styles.downloadDialogMainContent}>
+						<Checkbox
+							data-item-id="All"
+							data-type={type}
+							isChecked={isChecked}
+							isIndeterminate={isIndeterminate}
+							onChange={onRowSelect}
+							className={styles.downloadDialogCheckbox}
+							dataTestId={`${dataTestId}_checkbox`}
+						/>
+						<div
+							onClick={onOpen}
+							className={classNames(
+								styles.downloadDialogHeading,
+								styles.downloadDialogTitle,
+							)}
+						>
+							<Text noSelect fontSize="16px" fontWeight={600}>
+								{title}
+							</Text>
+							<ArrowIcon className={styles.downloadDialogIcon} />
+						</div>
+					</div>
+					<div className={styles.downloadDialogActions}>
+						{(isChecked || isIndeterminate) && !isOther ? (
+							<LinkWithDropdown
+								className={styles.downloadDialogLink}
+								dropDownClassName="download-dialog-dropDown"
+								data={titleData}
+								directionY="bottom"
+								dropdownType="alwaysDashed"
+								fontSize="13px"
+								fontWeight={600}
+								withExpander
+								directionX="left"
+								isAside
+								withoutBackground
+								hasScroll={isMobile()}
+								manualWidth={isMobile() ? "148px" : undefined}
+							>
+								{titleFormat}
+							</LinkWithDropdown>
+						) : null}
+					</div>
+				</div>
+			) : null}
+			<div className={styles.downloadDialogHiddenItems}>
+				{items.map((file, index) => {
+					const dropdownItems = !isOther
+						? getFormats(file).filter(
+								(x) => isFile(file) && x.label !== file.fileExst,
+							)
+						: undefined;
 
-          return (
-            <DownloadRow
-              t={t}
-              key={file.id}
-              file={file}
-              isChecked={file.checked}
-              onRowSelect={onRowSelect}
-              type={type}
-              isOther={isOther}
-              dropdownItems={dropdownItems}
-              getItemIcon={getItemIcon}
-              dataTestId={`${dataTestId}_row_${index}`}
-            />
-          );
-        })}
-      </div>
-    </div>
-  );
+					return (
+						<DownloadRow
+							t={t}
+							key={file.id}
+							file={file}
+							isChecked={file.checked}
+							onRowSelect={onRowSelect}
+							type={type}
+							isOther={isOther}
+							dropdownItems={dropdownItems}
+							getItemIcon={getItemIcon}
+							dataTestId={`${dataTestId}_row_${index}`}
+						/>
+					);
+				})}
+			</div>
+		</div>
+	);
 };

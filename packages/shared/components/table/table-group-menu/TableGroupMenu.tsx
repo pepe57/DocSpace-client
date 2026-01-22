@@ -36,7 +36,7 @@ import CrossIconSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 import { EMPTY_ARRAY, EMPTY_OBJECT, FUNCTION_EMPTY } from "../../../constants";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "../../checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { ComboBox, TOption } from "../../combobox";
 import { IconButton } from "../../icon-button";
 import { Scrollbar } from "../../scrollbar";
@@ -47,159 +47,159 @@ import type { TableGroupMenuProps, TGroupMenuProps } from "../Table.types";
 import styles from "./TableGroupMenu.module.scss";
 
 const GroupMenu: FC<TGroupMenuProps> = memo(({ headerMenu, isBlocked }) => {
-  return (
-    <Scrollbar className={styles.scrollBar}>
-      {headerMenu.map((item) => (
-        <GroupMenuItem
-          key={item.id || item.label}
-          item={item}
-          isBlocked={isBlocked}
-          dataTestId={`table_group_menu_item_${item.id}`}
-        />
-      ))}
-    </Scrollbar>
-  );
+	return (
+		<Scrollbar className={styles.scrollBar}>
+			{headerMenu.map((item) => (
+				<GroupMenuItem
+					key={item.id || item.label}
+					item={item}
+					isBlocked={isBlocked}
+					dataTestId={`table_group_menu_item_${item.id}`}
+				/>
+			))}
+		</Scrollbar>
+	);
 }, equal);
 
 const TableGroupMenu = memo((props: TableGroupMenuProps) => {
-  const {
-    isChecked,
-    isIndeterminate,
-    headerMenu,
-    onChange,
-    checkboxOptions,
-    checkboxMargin,
-    isInfoPanelVisible,
-    toggleInfoPanel,
-    withoutInfoPanelToggler,
-    isMobileView,
-    isBlocked,
-    withComboBox = true,
-    headerLabel,
-    isCloseable,
-    onCloseClick,
-    onClick,
-  } = props;
+	const {
+		isChecked,
+		isIndeterminate,
+		headerMenu,
+		onChange,
+		checkboxOptions,
+		checkboxMargin,
+		isInfoPanelVisible,
+		toggleInfoPanel,
+		withoutInfoPanelToggler,
+		isMobileView,
+		isBlocked,
+		withComboBox = true,
+		headerLabel,
+		isCloseable,
+		onCloseClick,
+		onClick,
+	} = props;
 
-  const onCheckboxChange = useCallback(() => {
-    onChange?.(!isChecked);
-  }, [isChecked, onChange]);
+	const onCheckboxChange = useCallback(() => {
+		onChange?.(!isChecked);
+	}, [isChecked, onChange]);
 
-  const { t } = useTranslation("Common");
+	const { t } = useTranslation("Common");
 
-  const toggleIconColor = isInfoPanelVisible ? "accent" : undefined;
+	const toggleIconColor = isInfoPanelVisible ? "accent" : undefined;
 
-  return (
-    <div
-      className={classNames(
-        styles.tableGroupMenu,
-        "table-container_group-menu",
-      )}
-      style={
-        {
-          "--table-group-menu-checkbox-margin": checkboxMargin,
-        } as React.CSSProperties
-      }
-      onClick={onClick}
-      data-testid="table-group-menu"
-    >
-      {headerLabel ? (
-        <Text
-          fontSize="14px"
-          lineHeight="16px"
-          fontWeight={600}
-          className={styles.labelElement}
-        >
-          {headerLabel}
-        </Text>
-      ) : (
-        <Checkbox
-          id="menu-checkbox_selected-all-file"
-          dataTestId="table_group_menu_checkbox"
-          className={classNames(
-            styles.checkbox,
-            "table-container_group-menu-checkbox",
-          )}
-          onChange={onCheckboxChange}
-          isChecked={isChecked}
-          isIndeterminate={isIndeterminate}
-          title={t("Common:MainHeaderSelectAll")}
-        />
-      )}
+	return (
+		<div
+			className={classNames(
+				styles.tableGroupMenu,
+				"table-container_group-menu",
+			)}
+			style={
+				{
+					"--table-group-menu-checkbox-margin": checkboxMargin,
+				} as React.CSSProperties
+			}
+			onClick={onClick}
+			data-testid="table-group-menu"
+		>
+			{headerLabel ? (
+				<Text
+					fontSize="14px"
+					lineHeight="16px"
+					fontWeight={600}
+					className={styles.labelElement}
+				>
+					{headerLabel}
+				</Text>
+			) : (
+				<Checkbox
+					id="menu-checkbox_selected-all-file"
+					dataTestId="table_group_menu_checkbox"
+					className={classNames(
+						styles.checkbox,
+						"table-container_group-menu-checkbox",
+					)}
+					onChange={onCheckboxChange}
+					isChecked={isChecked}
+					isIndeterminate={isIndeterminate}
+					title={t("Common:MainHeaderSelectAll")}
+				/>
+			)}
 
-      {withComboBox ? (
-        <ComboBox
-          id="menu-combobox"
-          comboIcon={TriangleNavigationDownReactSvgUrl}
-          noBorder
-          advancedOptions={checkboxOptions}
-          className={classNames(styles.combobox, "not-selectable")}
-          options={EMPTY_ARRAY}
-          selectedOption={EMPTY_OBJECT as TOption}
-          manualY="42px"
-          manualX="-32px"
-          title={t("Common:TitleSelectFile")}
-          isMobileView={isMobileView}
-          onSelect={FUNCTION_EMPTY}
-          dataTestId="table_group_menu_combobox"
-          withBackground={isMobileView}
-        />
-      ) : null}
-      <div
-        className={classNames(
-          styles.separator,
-          "table-container_group-menu-separator",
-        )}
-      />
-      <GroupMenu headerMenu={headerMenu} isBlocked={isBlocked} />
-      {isCloseable ? (
-        <div className={styles.tableHeaderIcon}>
-          <IconButton
-            className={styles.tableHeaderIconButton}
-            size={16}
-            onClick={onCloseClick}
-            iconName={CrossIconSvgUrl}
-            isFill
-            dataTestId="close-button"
-          />
-        </div>
-      ) : null}
-      {!withoutInfoPanelToggler ? (
-        <div
-          className={classNames(
-            styles.infoPanelToggleWrapper,
-            styles.tableHeaderIcon,
-            {
-              [styles.isInfoPanelVisible]: isInfoPanelVisible,
-            },
-          )}
-        >
-          <div
-            className={classNames(
-              styles.infoPanelToggleBg,
-              "info-panel-toggle-bg",
-            )}
-          >
-            <IconButton
-              id="info-panel-toggle--open"
-              className={classNames(
-                styles.infoPanelToggle,
-                styles.tableHeaderIconButton,
-                "info-panel-toggle",
-              )}
-              iconName={PanelReactSvgUrl}
-              size={16}
-              isFill
-              onClick={toggleInfoPanel}
-              color={toggleIconColor}
-              hoverColor={toggleIconColor}
-              dataTestId="info-panel-toggle-button"
-            />
-          </div>
-        </div>
-      ) : null}
-    </div>
-  );
+			{withComboBox ? (
+				<ComboBox
+					id="menu-combobox"
+					comboIcon={TriangleNavigationDownReactSvgUrl}
+					noBorder
+					advancedOptions={checkboxOptions}
+					className={classNames(styles.combobox, "not-selectable")}
+					options={EMPTY_ARRAY}
+					selectedOption={EMPTY_OBJECT as TOption}
+					manualY="42px"
+					manualX="-32px"
+					title={t("Common:TitleSelectFile")}
+					isMobileView={isMobileView}
+					onSelect={FUNCTION_EMPTY}
+					dataTestId="table_group_menu_combobox"
+					withBackground={isMobileView}
+				/>
+			) : null}
+			<div
+				className={classNames(
+					styles.separator,
+					"table-container_group-menu-separator",
+				)}
+			/>
+			<GroupMenu headerMenu={headerMenu} isBlocked={isBlocked} />
+			{isCloseable ? (
+				<div className={styles.tableHeaderIcon}>
+					<IconButton
+						className={styles.tableHeaderIconButton}
+						size={16}
+						onClick={onCloseClick}
+						iconName={CrossIconSvgUrl}
+						isFill
+						dataTestId="close-button"
+					/>
+				</div>
+			) : null}
+			{!withoutInfoPanelToggler ? (
+				<div
+					className={classNames(
+						styles.infoPanelToggleWrapper,
+						styles.tableHeaderIcon,
+						{
+							[styles.isInfoPanelVisible]: isInfoPanelVisible,
+						},
+					)}
+				>
+					<div
+						className={classNames(
+							styles.infoPanelToggleBg,
+							"info-panel-toggle-bg",
+						)}
+					>
+						<IconButton
+							id="info-panel-toggle--open"
+							className={classNames(
+								styles.infoPanelToggle,
+								styles.tableHeaderIconButton,
+								"info-panel-toggle",
+							)}
+							iconName={PanelReactSvgUrl}
+							size={16}
+							isFill
+							onClick={toggleInfoPanel}
+							color={toggleIconColor}
+							hoverColor={toggleIconColor}
+							dataTestId="info-panel-toggle-button"
+						/>
+					</div>
+				</div>
+			) : null}
+		</div>
+	);
 }, equal);
 
 export { TableGroupMenu };

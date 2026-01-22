@@ -41,7 +41,7 @@ import { Button, ButtonSize } from "../button";
 // import IconButton from "../icon-button";
 import { ToggleButton } from "../toggle-button";
 import { Calendar } from "../calendar";
-import { Checkbox } from "../checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { ComboBox, ComboBoxSize } from "../combobox";
 import { InputBlock } from "../input-block";
 import { RadioButtonGroup } from "../radio-button-group";

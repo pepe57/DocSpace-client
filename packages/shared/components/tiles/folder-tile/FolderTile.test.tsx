@@ -33,212 +33,212 @@ import { FolderTileProps } from "./FolderTile.types";
 
 // Mock translations
 vi.mock("react-i18next", () => ({
-  useTranslation: () => ({ t: (key: string) => key }),
+	useTranslation: () => ({ t: (key: string) => key }),
 }));
 
 // Mock styles - return default export for CSS Modules
 vi.mock("./FolderTile.module.scss", () => ({
-  default: {
-    folderTile: "folderTile",
-    showHotkeyBorder: "showHotkeyBorder",
-    isDragging: "isDragging",
-    isActive: "isActive",
-    isEdit: "isEdit",
-    iconContainer: "iconContainer",
-    inProgress: "inProgress",
-    icon: "icon",
-    checked: "checked",
-    loader: "loader",
-    content: "content",
-    optionButton: "optionButton",
-    expandButton: "expandButton",
-  },
+	default: {
+		folderTile: "folderTile",
+		showHotkeyBorder: "showHotkeyBorder",
+		isDragging: "isDragging",
+		isActive: "isActive",
+		isEdit: "isEdit",
+		iconContainer: "iconContainer",
+		inProgress: "inProgress",
+		icon: "icon",
+		checked: "checked",
+		loader: "loader",
+		content: "content",
+		optionButton: "optionButton",
+		expandButton: "expandButton",
+	},
 }));
 
 // Mock context menu components
 vi.mock("@docspace/shared/components/context-menu-button", () => ({
-  ContextMenuButton: ({
-    title,
-    onClick,
-  }: {
-    title: string;
-    onClick: (e: React.MouseEvent) => void;
-  }) => (
-    <button
-      type="button"
-      data-testid="context-menu-button"
-      title={title}
-      onClick={onClick}
-    >
-      Actions
-    </button>
-  ),
-  ContextMenuButtonDisplayType: {
-    toggle: "toggle",
-  },
+	ContextMenuButton: ({
+		title,
+		onClick,
+	}: {
+		title: string;
+		onClick: (e: React.MouseEvent) => void;
+	}) => (
+		<button
+			type="button"
+			data-testid="context-menu-button"
+			title={title}
+			onClick={onClick}
+		>
+			Actions
+		</button>
+	),
+	ContextMenuButtonDisplayType: {
+		toggle: "toggle",
+	},
 }));
 
 vi.mock("@docspace/shared/components/context-menu", () => {
-  const ContextMenuComponent = ({
-    ref,
-    model,
-  }: {
-    model?: Array<{ key: string; label: string }>;
-  } & {
-    ref: React.RefObject<ContextMenuRefType>;
-  }) => {
-    React.useImperativeHandle(ref, () => ({
-      show: vi.fn(),
-      hide: vi.fn(),
-      toggle: vi.fn(),
-      menuRef: { current: null },
-    }));
+	const ContextMenuComponent = ({
+		ref,
+		model,
+	}: {
+		model?: Array<{ key: string; label: string }>;
+	} & {
+		ref: React.RefObject<ContextMenuRefType>;
+	}) => {
+		React.useImperativeHandle(ref, () => ({
+			show: vi.fn(),
+			hide: vi.fn(),
+			toggle: vi.fn(),
+			menuRef: { current: null },
+		}));
 
-    return (
-      <div data-testid="context-menu">
-        {model?.map((item) => (
-          <div key={item.key}>{item.label}</div>
-        ))}
-      </div>
-    );
-  };
-  ContextMenuComponent.displayName = "ContextMenu";
-  return { ContextMenu: ContextMenuComponent };
+		return (
+			<div data-testid="context-menu">
+				{model?.map((item) => (
+					<div key={item.key}>{item.label}</div>
+				))}
+			</div>
+		);
+	};
+	ContextMenuComponent.displayName = "ContextMenu";
+	return { ContextMenu: ContextMenuComponent };
 });
 
 // Mock Checkbox component
-vi.mock("@docspace/shared/components/checkbox", () => ({
-  Checkbox: ({
-    isChecked,
-    onChange,
-    isIndeterminate,
-  }: {
-    isChecked?: boolean;
-    isIndeterminate?: boolean;
-    onChange?: (e: { target: { checked: boolean } }) => void;
-  }) => {
-    const inputRef = React.useRef<HTMLInputElement | null>(null);
+vi.mock("@docspace/ui-kit/components/checkbox", () => ({
+	Checkbox: ({
+		isChecked,
+		onChange,
+		isIndeterminate,
+	}: {
+		isChecked?: boolean;
+		isIndeterminate?: boolean;
+		onChange?: (e: { target: { checked: boolean } }) => void;
+	}) => {
+		const inputRef = React.useRef<HTMLInputElement | null>(null);
 
-    React.useEffect(() => {
-      if (inputRef.current) {
-        inputRef.current.indeterminate = Boolean(isIndeterminate);
-      }
-    }, [isIndeterminate]);
+		React.useEffect(() => {
+			if (inputRef.current) {
+				inputRef.current.indeterminate = Boolean(isIndeterminate);
+			}
+		}, [isIndeterminate]);
 
-    return (
-      <input
-        ref={inputRef}
-        type="checkbox"
-        checked={isChecked}
-        aria-checked={isIndeterminate ? "mixed" : isChecked ? "true" : "false"}
-        onChange={() => onChange?.({ target: { checked: !isChecked } })}
-      />
-    );
-  },
+		return (
+			<input
+				ref={inputRef}
+				type="checkbox"
+				checked={isChecked}
+				aria-checked={isIndeterminate ? "mixed" : isChecked ? "true" : "false"}
+				onChange={() => onChange?.({ target: { checked: !isChecked } })}
+			/>
+		);
+	},
 }));
 
 describe("FolderTile", () => {
-  const mockItem = {
-    id: "1",
-    title: "Test Folder",
-  };
+	const mockItem = {
+		id: "1",
+		title: "Test Folder",
+	};
 
-  const mockContextOptions = [
-    { key: "edit", label: "Edit" },
-    { key: "delete", label: "Delete" },
-  ];
+	const mockContextOptions = [
+		{ key: "edit", label: "Edit" },
+		{ key: "delete", label: "Delete" },
+	];
 
-  const FolderContent = () => (
-    <div data-testid="folder-content" className="item-file-name">
-      {mockItem.title}
-    </div>
-  );
+	const FolderContent = () => (
+		<div data-testid="folder-content" className="item-file-name">
+			{mockItem.title}
+		</div>
+	);
 
-  const renderFolderTile = (props: Partial<FolderTileProps> = {}) => {
-    const defaultProps: FolderTileProps = {
-      item: mockItem,
-      contextOptions: mockContextOptions,
-      element: <div data-testid="folder-icon">Folder Icon</div>,
-      children: <FolderContent />,
-      onSelect: vi.fn(),
-      setSelection: vi.fn(),
-      withCtrlSelect: vi.fn(),
-      withShiftSelect: vi.fn(),
-      tileContextClick: vi.fn(),
-      hideContextMenu: vi.fn(),
-      getContextModel: vi.fn(),
-      ...props,
-    };
+	const renderFolderTile = (props: Partial<FolderTileProps> = {}) => {
+		const defaultProps: FolderTileProps = {
+			item: mockItem,
+			contextOptions: mockContextOptions,
+			element: <div data-testid="folder-icon">Folder Icon</div>,
+			children: <FolderContent />,
+			onSelect: vi.fn(),
+			setSelection: vi.fn(),
+			withCtrlSelect: vi.fn(),
+			withShiftSelect: vi.fn(),
+			tileContextClick: vi.fn(),
+			hideContextMenu: vi.fn(),
+			getContextModel: vi.fn(),
+			...props,
+		};
 
-    return render(<FolderTile {...defaultProps} />);
-  };
+		return render(<FolderTile {...defaultProps} />);
+	};
 
-  it("renders folder title correctly", () => {
-    renderFolderTile();
-    expect(screen.getByTestId("folder-content")).toBeTruthy();
-    expect(screen.getByTestId("folder-content").textContent).toBe(
-      "Test Folder",
-    );
-  });
+	it("renders folder title correctly", () => {
+		renderFolderTile();
+		expect(screen.getByTestId("folder-content")).toBeTruthy();
+		expect(screen.getByTestId("folder-content").textContent).toBe(
+			"Test Folder",
+		);
+	});
 
-  it("shows checkbox with correct state", () => {
-    renderFolderTile({ checked: true });
-    const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
-    expect(checkbox).toBeTruthy();
-    expect(checkbox.checked).toBe(true);
-  });
+	it("shows checkbox with correct state", () => {
+		renderFolderTile({ checked: true });
+		const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
+		expect(checkbox).toBeTruthy();
+		expect(checkbox.checked).toBe(true);
+	});
 
-  it("shows indeterminate checkbox state", () => {
-    renderFolderTile({ indeterminate: true });
-    const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
-    expect(checkbox).toBeTruthy();
-    expect(checkbox.indeterminate).toBe(true);
-  });
+	it("shows indeterminate checkbox state", () => {
+		renderFolderTile({ indeterminate: true });
+		const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
+		expect(checkbox).toBeTruthy();
+		expect(checkbox.indeterminate).toBe(true);
+	});
 
-  it("calls onSelect when checkbox is clicked", () => {
-    const onSelect = vi.fn();
-    renderFolderTile({ onSelect });
+	it("calls onSelect when checkbox is clicked", () => {
+		const onSelect = vi.fn();
+		renderFolderTile({ onSelect });
 
-    const checkbox = screen.getByRole("checkbox");
-    fireEvent.click(checkbox);
+		const checkbox = screen.getByRole("checkbox");
+		fireEvent.click(checkbox);
 
-    expect(onSelect).toHaveBeenCalledWith(true, mockItem);
-  });
+		expect(onSelect).toHaveBeenCalledWith(true, mockItem);
+	});
 
-  it("shows loader when inProgress is true", () => {
-    renderFolderTile({ inProgress: true });
-    const loader = screen.getByTestId("loader");
-    expect(loader).toBeTruthy();
-  });
+	it("shows loader when inProgress is true", () => {
+		renderFolderTile({ inProgress: true });
+		const loader = screen.getByTestId("loader");
+		expect(loader).toBeTruthy();
+	});
 
-  it("calls withCtrlSelect when Ctrl+Click", () => {
-    const withCtrlSelect = vi.fn();
-    renderFolderTile({ withCtrlSelect });
+	it("calls withCtrlSelect when Ctrl+Click", () => {
+		const withCtrlSelect = vi.fn();
+		renderFolderTile({ withCtrlSelect });
 
-    const folderTile = screen.getByTestId("folder-content");
-    fireEvent.click(folderTile, { ctrlKey: true });
+		const folderTile = screen.getByTestId("folder-content");
+		fireEvent.click(folderTile, { ctrlKey: true });
 
-    expect(withCtrlSelect).toHaveBeenCalledWith(mockItem);
-  });
+		expect(withCtrlSelect).toHaveBeenCalledWith(mockItem);
+	});
 
-  it("calls withShiftSelect when Shift+Click", () => {
-    const withShiftSelect = vi.fn();
-    renderFolderTile({ withShiftSelect });
+	it("calls withShiftSelect when Shift+Click", () => {
+		const withShiftSelect = vi.fn();
+		renderFolderTile({ withShiftSelect });
 
-    const folderTile = screen.getByTestId("folder-content");
-    fireEvent.click(folderTile, { shiftKey: true });
+		const folderTile = screen.getByTestId("folder-content");
+		fireEvent.click(folderTile, { shiftKey: true });
 
-    expect(withShiftSelect).toHaveBeenCalledWith(mockItem);
-  });
+		expect(withShiftSelect).toHaveBeenCalledWith(mockItem);
+	});
 
-  it("renders badges when provided", () => {
-    const badges = <div data-testid="test-badge">Badge</div>;
-    renderFolderTile({ badges });
-    expect(screen.getByTestId("test-badge")).toBeTruthy();
-  });
+	it("renders badges when provided", () => {
+		const badges = <div data-testid="test-badge">Badge</div>;
+		renderFolderTile({ badges });
+		expect(screen.getByTestId("test-badge")).toBeTruthy();
+	});
 
-  it("shows hotkey border when showHotkeyBorder is true", () => {
-    const { container } = renderFolderTile({ showHotkeyBorder: true });
-    expect(container.querySelector(".showHotkeyBorder")).toBeTruthy();
-  });
+	it("shows hotkey border when showHotkeyBorder is true", () => {
+		const { container } = renderFolderTile({ showHotkeyBorder: true });
+		expect(container.querySelector(".showHotkeyBorder")).toBeTruthy();
+	});
 });

@@ -32,7 +32,7 @@ import resizeImage from "resize-image";
 import { TTranslation } from "@docspace/shared/types";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 import { toastr } from "@docspace/shared/components/toast";
 import { ONE_MEGABYTE } from "@docspace/shared/constants";
@@ -48,177 +48,177 @@ import TextAreaGroup from "./TextAreaGroup";
 import SelectGroup from "./SelectGroup";
 
 interface BasicBlockProps {
-  t: TTranslation;
+	t: TTranslation;
 
-  nameValue: string;
-  websiteUrlValue: string;
-  logoValue: string;
-  descriptionValue: string;
-  allowPkce: boolean;
-  // isPublic: boolean;
+	nameValue: string;
+	websiteUrlValue: string;
+	logoValue: string;
+	descriptionValue: string;
+	allowPkce: boolean;
+	// isPublic: boolean;
 
-  changeValue: (
-    name: keyof IClientReqDTO,
-    value: string | boolean,
-    remove?: boolean,
-  ) => void;
+	changeValue: (
+		name: keyof IClientReqDTO,
+		value: string | boolean,
+		remove?: boolean,
+	) => void;
 
-  isEdit: boolean;
-  errorFields: string[];
-  requiredErrorFields: string[];
-  onBlur: (name: string) => void;
+	isEdit: boolean;
+	errorFields: string[];
+	requiredErrorFields: string[];
+	onBlur: (name: string) => void;
 }
 
 const BasicBlock = ({
-  t,
-  nameValue,
-  websiteUrlValue,
-  logoValue,
-  descriptionValue,
-  allowPkce,
-  changeValue,
+	t,
+	nameValue,
+	websiteUrlValue,
+	logoValue,
+	descriptionValue,
+	allowPkce,
+	changeValue,
 
-  isEdit,
-  errorFields,
-  requiredErrorFields,
-  onBlur,
+	isEdit,
+	errorFields,
+	requiredErrorFields,
+	onBlur,
 }: BasicBlockProps) => {
-  const onChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const target = e.target;
+	const onChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => {
+		const target = e.target;
 
-    changeValue(target.name as keyof IClientReqDTO, target.value);
-  };
+		changeValue(target.name as keyof IClientReqDTO, target.value);
+	};
 
-  const onSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file =
-      e.target.files && e.target.files?.length > 0 && e.target.files[0];
+	const onSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		const file =
+			e.target.files && e.target.files?.length > 0 && e.target.files[0];
 
-    if (file && file.type === "image/svg+xml") {
-      if (file.size > ONE_MEGABYTE)
-        return toastr.error(t("Common:SizeImageLarge"));
+		if (file && file.type === "image/svg+xml") {
+			if (file.size > ONE_MEGABYTE)
+				return toastr.error(t("Common:SizeImageLarge"));
 
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (reader.result && typeof reader.result === "string")
-          changeValue("logo", reader.result);
-      };
-      reader.readAsDataURL(file);
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				if (reader.result && typeof reader.result === "string")
+					changeValue("logo", reader.result);
+			};
+			reader.readAsDataURL(file);
 
-      return;
-    }
+			return;
+		}
 
-    if (file) {
-      const widthProp = 64;
-      const heightProp = 64;
+		if (file) {
+			const widthProp = 64;
+			const heightProp = 64;
 
-      const img = new Image();
-      img.onload = () => {
-        const data = resizeImage.resize(img, widthProp, heightProp, "png");
-        changeValue("logo", data);
-      };
-      img.src = URL.createObjectURL(file);
-    }
-  };
+			const img = new Image();
+			img.onload = () => {
+				const data = resizeImage.resize(img, widthProp, heightProp, "png");
+				changeValue("logo", data);
+			};
+			img.src = URL.createObjectURL(file);
+		}
+	};
 
-  const pkceHelpButtonText = (
-    <Trans t={t as TFunction} i18nKey="AllowPKCEHelpButton" ns="OAuth" />
-  );
+	const pkceHelpButtonText = (
+		<Trans t={t as TFunction} i18nKey="AllowPKCEHelpButton" ns="OAuth" />
+	);
 
-  const isNameRequiredError = requiredErrorFields.includes("name");
-  const isWebsiteRequiredError = requiredErrorFields.includes("website_url");
-  const isNameError = errorFields.includes("name");
-  const isWebsiteError = errorFields.includes("website_url");
-  const isLogoRequiredError = requiredErrorFields.includes("logo");
+	const isNameRequiredError = requiredErrorFields.includes("name");
+	const isWebsiteRequiredError = requiredErrorFields.includes("website_url");
+	const isNameError = errorFields.includes("name");
+	const isWebsiteError = errorFields.includes("website_url");
+	const isLogoRequiredError = requiredErrorFields.includes("logo");
 
-  return (
-    <StyledBlock>
-      <BlockHeader header={t("BasicInfo")} />
-      <StyledInputBlock>
-        <InputGroup
-          label={t("OAuth:AppName")}
-          name="name"
-          placeholder={t("Common:EnterName")}
-          value={nameValue}
-          error={isNameError ? `${t("ErrorName")} 3` : t("ThisRequiredField")}
-          onChange={onChange}
-          isRequired
-          isError={isNameRequiredError || isNameError}
-          onBlur={onBlur}
-          dataTestId="app_name_input_group"
-        />
-        <InputGroup
-          label={t("WebsiteUrl")}
-          name="website_url"
-          placeholder={t("EnterURL")}
-          value={websiteUrlValue}
-          error={
-            isWebsiteError
-              ? `${t("ErrorWrongURL")}: ${window.location.origin}`
-              : t("ThisRequiredField")
-          }
-          onChange={onChange}
-          disabled={isEdit}
-          isRequired
-          isError={isWebsiteRequiredError || isWebsiteError}
-          onBlur={onBlur}
-          dataTestId="app_website_url_input_group"
-        />
-        <FieldContainer
-          isVertical
-          labelVisible={false}
-          errorMessage={t("ThisRequiredField")}
-          hasError={isLogoRequiredError}
-          className="icon-field"
-          dataTestId="app_icon_field"
-        >
-          <SelectGroup
-            label={t("AppIcon")}
-            value={logoValue}
-            selectLabel={t("SelectNewImage")}
-            description={t("IconDescription")}
-            onSelect={onSelect}
-            dataTestId="select_new_image_container"
-          />
-        </FieldContainer>
+	return (
+		<StyledBlock>
+			<BlockHeader header={t("BasicInfo")} />
+			<StyledInputBlock>
+				<InputGroup
+					label={t("OAuth:AppName")}
+					name="name"
+					placeholder={t("Common:EnterName")}
+					value={nameValue}
+					error={isNameError ? `${t("ErrorName")} 3` : t("ThisRequiredField")}
+					onChange={onChange}
+					isRequired
+					isError={isNameRequiredError || isNameError}
+					onBlur={onBlur}
+					dataTestId="app_name_input_group"
+				/>
+				<InputGroup
+					label={t("WebsiteUrl")}
+					name="website_url"
+					placeholder={t("EnterURL")}
+					value={websiteUrlValue}
+					error={
+						isWebsiteError
+							? `${t("ErrorWrongURL")}: ${window.location.origin}`
+							: t("ThisRequiredField")
+					}
+					onChange={onChange}
+					disabled={isEdit}
+					isRequired
+					isError={isWebsiteRequiredError || isWebsiteError}
+					onBlur={onBlur}
+					dataTestId="app_website_url_input_group"
+				/>
+				<FieldContainer
+					isVertical
+					labelVisible={false}
+					errorMessage={t("ThisRequiredField")}
+					hasError={isLogoRequiredError}
+					className="icon-field"
+					dataTestId="app_icon_field"
+				>
+					<SelectGroup
+						label={t("AppIcon")}
+						value={logoValue}
+						selectLabel={t("SelectNewImage")}
+						description={t("IconDescription")}
+						onSelect={onSelect}
+						dataTestId="select_new_image_container"
+					/>
+				</FieldContainer>
 
-        <TextAreaGroup
-          label={t("Common:Description")}
-          name="description"
-          placeholder={t("EnterDescription")}
-          value={descriptionValue}
-          onChange={onChange}
-          increaseHeight={isLogoRequiredError}
-          dataTestId="description_textarea_group"
-        />
-        <InputGroup
-          label={t("AuthenticationMethod")}
-          name="auth_method"
-          placeholder={t("EnterURL")}
-          value={websiteUrlValue}
-          error=""
-          onChange={() => {}}
-          dataTestId="auth_method_input_group"
-        >
-          <div className="pkce">
-            <Checkbox
-              label={t("AllowPKCE")}
-              isChecked={allowPkce}
-              onChange={() => {
-                changeValue("allow_pkce", !allowPkce);
-              }}
-              dataTestId="allow_pkce_checkbox"
-            />
-            <HelpButton
-              dataTestId="allow_pkce_help_button"
-              tooltipContent={pkceHelpButtonText}
-            />
-          </div>
-        </InputGroup>
-      </StyledInputBlock>
-    </StyledBlock>
-  );
+				<TextAreaGroup
+					label={t("Common:Description")}
+					name="description"
+					placeholder={t("EnterDescription")}
+					value={descriptionValue}
+					onChange={onChange}
+					increaseHeight={isLogoRequiredError}
+					dataTestId="description_textarea_group"
+				/>
+				<InputGroup
+					label={t("AuthenticationMethod")}
+					name="auth_method"
+					placeholder={t("EnterURL")}
+					value={websiteUrlValue}
+					error=""
+					onChange={() => {}}
+					dataTestId="auth_method_input_group"
+				>
+					<div className="pkce">
+						<Checkbox
+							label={t("AllowPKCE")}
+							isChecked={allowPkce}
+							onChange={() => {
+								changeValue("allow_pkce", !allowPkce);
+							}}
+							dataTestId="allow_pkce_checkbox"
+						/>
+						<HelpButton
+							dataTestId="allow_pkce_help_button"
+							tooltipContent={pkceHelpButtonText}
+						/>
+					</div>
+				</InputGroup>
+			</StyledInputBlock>
+		</StyledBlock>
+	);
 };
 
 export default BasicBlock;

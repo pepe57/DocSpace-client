@@ -37,7 +37,7 @@ import SocketHelper, {
 } from "../../../utils/socket";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "../../../components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { BackupStorageType, FilesSelectorFilterTypes } from "../../../enums";
 import RestoreBackupLoader from "../../../skeletons/backup/RestoreBackup";
 import { RadioButtonGroup } from "../../../components/radio-button-group";

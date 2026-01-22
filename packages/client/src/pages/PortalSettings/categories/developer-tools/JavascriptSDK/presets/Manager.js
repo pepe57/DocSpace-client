@@ -48,7 +48,7 @@ import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { Label } from "@docspace/ui-kit/components/label";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
@@ -72,684 +72,684 @@ import Integration from "../sub-components/Integration";
 import { TooltipContent } from "../sub-components/TooltipContent";
 
 import {
-  dimensionsModel,
-  defaultSize,
-  defaultDimension,
-  sdkSource,
-  sdkVersion,
+	dimensionsModel,
+	defaultSize,
+	defaultDimension,
+	sdkSource,
+	sdkVersion,
 } from "../constants";
 
 import {
-  Controls,
-  CategorySubHeader,
-  ControlsGroup,
-  LabelGroup,
-  ControlsSection,
-  Frame,
-  Container,
-  ColumnContainer,
-  FilesSelectorInputWrapper,
-  SelectedItemsContainer,
-  CheckboxGroup,
+	Controls,
+	CategorySubHeader,
+	ControlsGroup,
+	LabelGroup,
+	ControlsSection,
+	Frame,
+	Container,
+	ColumnContainer,
+	FilesSelectorInputWrapper,
+	SelectedItemsContainer,
+	CheckboxGroup,
 } from "./StyledPresets";
 
 const Manager = (props) => {
-  const { t, fetchExternalLinks, theme, currentColorScheme } = props;
-  const navigate = useNavigate();
+	const { t, fetchExternalLinks, theme, currentColorScheme } = props;
+	const navigate = useNavigate();
 
-  setDocumentTitle(t("JavascriptSdk"));
+	setDocumentTitle(t("JavascriptSdk"));
 
-  const dataSortBy = [
-    { key: "DateAndTime", label: t("Common:LastModifiedDate"), default: true },
-    { key: "AZ", label: t("Common:Title") },
-    { key: "Type", label: t("Common:Type") },
-    { key: "Size", label: t("Common:Size") },
-    { key: "DateAndTimeCreation", label: t("Files:ByCreation") },
-    { key: "Author", label: t("Files:ByAuthor") },
-  ];
+	const dataSortBy = [
+		{ key: "DateAndTime", label: t("Common:LastModifiedDate"), default: true },
+		{ key: "AZ", label: t("Common:Title") },
+		{ key: "Type", label: t("Common:Type") },
+		{ key: "Size", label: t("Common:Size") },
+		{ key: "DateAndTimeCreation", label: t("Files:ByCreation") },
+		{ key: "Author", label: t("Files:ByAuthor") },
+	];
 
-  const dataSortOrder = [
-    { key: "descending", label: t("Descending"), default: true },
-    { key: "ascending", label: t("Ascending") },
-  ];
+	const dataSortOrder = [
+		{ key: "descending", label: t("Descending"), default: true },
+		{ key: "ascending", label: t("Ascending") },
+	];
 
-  const columnDisplayOptions = [
-    {
-      value: "default",
-      label: t("DefaultColumnsOption"),
-      dataTestId: "default_radio_button",
-    },
-    { value: "custom", label: t("SetItUp"), dataTestId: "custom_radio_button" },
-  ];
+	const columnDisplayOptions = [
+		{
+			value: "default",
+			label: t("DefaultColumnsOption"),
+			dataTestId: "default_radio_button",
+		},
+		{ value: "custom", label: t("SetItUp"), dataTestId: "custom_radio_button" },
+	];
 
-  const [columnsOptions, setColumnsOptions] = useState([
-    { key: "Owner", label: t("Common:Owner") },
-    { key: "Activity", label: t("Files:LastActivity") },
-  ]);
+	const [columnsOptions, setColumnsOptions] = useState([
+		{ key: "Owner", label: t("Common:Owner") },
+		{ key: "Activity", label: t("Files:LastActivity") },
+	]);
 
-  const [version, onSetVersion] = useState(sdkVersion[210]);
+	const [version, onSetVersion] = useState(sdkVersion[210]);
 
-  const [source, onSetSource] = useState(sdkSource.Package);
+	const [source, onSetSource] = useState(sdkSource.Package);
 
-  const [sortBy, setSortBy] = useState(dataSortBy[0]);
-  const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);
-  const [sharedLinks, setSharedLinks] = useState(null);
-  const [columnDisplay, setColumnDisplay] = useState(
-    columnDisplayOptions[0].value,
-  );
-  const [selectedColumns, setSelectedColumns] = useState([
-    { key: "Index", label: t("Files:Index") },
-    { key: "Name", label: t("Common:Label") },
-    { key: "Size", label: t("Common:Size") },
-    { key: "Type", label: t("Common:Type") },
-    { key: "Tags", label: t("Common:Tags") },
-  ]);
+	const [sortBy, setSortBy] = useState(dataSortBy[0]);
+	const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);
+	const [sharedLinks, setSharedLinks] = useState(null);
+	const [columnDisplay, setColumnDisplay] = useState(
+		columnDisplayOptions[0].value,
+	);
+	const [selectedColumns, setSelectedColumns] = useState([
+		{ key: "Index", label: t("Files:Index") },
+		{ key: "Name", label: t("Common:Label") },
+		{ key: "Size", label: t("Common:Size") },
+		{ key: "Type", label: t("Common:Type") },
+		{ key: "Tags", label: t("Common:Tags") },
+	]);
 
-  const [selectedLink, setSelectedLink] = useState(null);
+	const [selectedLink, setSelectedLink] = useState(null);
 
-  const [config, setConfig] = useState({
-    src: window.location.origin,
-    mode: "manager",
-    width: `${defaultSize.width}${defaultDimension.label}`,
-    height: `${defaultSize.height}${defaultDimension.label}`,
-    frameId: "ds-frame",
-    showHeader: true,
-    showTitle: true,
-    showMenu: true,
-    showFilter: true,
-    disableActionButton: false,
-    init: true,
-    viewTableColumns: selectedColumns.map((column) => column.key).join(","),
-    filter: {
-      count: 100,
-      page: 1,
-      sortorder: "descending",
-      sortby: "DateAndTime",
-      search: "",
-      withSubfolders: false,
-    },
-  });
+	const [config, setConfig] = useState({
+		src: window.location.origin,
+		mode: "manager",
+		width: `${defaultSize.width}${defaultDimension.label}`,
+		height: `${defaultSize.height}${defaultDimension.label}`,
+		frameId: "ds-frame",
+		showHeader: true,
+		showTitle: true,
+		showMenu: true,
+		showFilter: true,
+		disableActionButton: false,
+		init: true,
+		viewTableColumns: selectedColumns.map((column) => column.key).join(","),
+		filter: {
+			count: 100,
+			page: 1,
+			sortorder: "descending",
+			sortby: "DateAndTime",
+			search: "",
+			withSubfolders: false,
+		},
+	});
 
-  const fromPackage = source === sdkSource.Package;
+	const fromPackage = source === sdkSource.Package;
 
-  const sdkScriptUrl = getSdkScriptUrl(version);
+	const sdkScriptUrl = getSdkScriptUrl(version);
 
-  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
+	const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
 
-  const destroyFrame = () => {
-    sdk?.frames[config.frameId]?.destroyFrame();
-  };
+	const destroyFrame = () => {
+		sdk?.frames[config.frameId]?.destroyFrame();
+	};
 
-  const initFrame = () => {
-    setTimeout(() => sdk?.init(config), 0);
-  };
+	const initFrame = () => {
+		setTimeout(() => sdk?.init(config), 0);
+	};
 
-  useEffect(() => {
-    const script = document.getElementById("sdk-script");
+	useEffect(() => {
+		const script = document.getElementById("sdk-script");
 
-    if (script) {
-      script.remove();
-      destroyFrame();
-    }
+		if (script) {
+			script.remove();
+			destroyFrame();
+		}
 
-    if (!fromPackage) {
-      loadScript(sdkScriptUrl, "sdk-script");
-    }
+		if (!fromPackage) {
+			loadScript(sdkScriptUrl, "sdk-script");
+		}
 
-    return () => {
-      destroyFrame();
-      setTimeout(() => script?.remove(), 10);
-    };
-  }, [source, version]);
+		return () => {
+			destroyFrame();
+			setTimeout(() => script?.remove(), 10);
+		};
+	}, [source, version]);
 
-  useEffect(() => {
-    initFrame();
+	useEffect(() => {
+		initFrame();
 
-    return () => {
-      destroyFrame();
-    };
-  });
+		return () => {
+			destroyFrame();
+		};
+	});
 
-  useEffect(() => {
-    const scroll = document.getElementsByClassName("section-scroll")[0];
-    if (scroll) {
-      scroll.scrollTop = 0;
-    }
-  }, []);
+	useEffect(() => {
+		const scroll = document.getElementsByClassName("section-scroll")[0];
+		if (scroll) {
+			scroll.scrollTop = 0;
+		}
+	}, []);
 
-  const onChangeFolderId = async (id, publicInPath) => {
-    const newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
+	const onChangeFolderId = async (id, publicInPath) => {
+		const newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
 
-    if (publicInPath) {
-      const links = await fetchExternalLinks(publicInPath.id);
+		if (publicInPath) {
+			const links = await fetchExternalLinks(publicInPath.id);
 
-      if (links.length > 1) {
-        const linksOptions = links.map((link) => {
-          const { title, requestToken } = link.sharedTo;
-          const linkSettings = [];
+			if (links.length > 1) {
+				const linksOptions = links.map((link) => {
+					const { title, requestToken } = link.sharedTo;
+					const linkSettings = [];
 
-          if ("password" in link.sharedTo) {
-            linkSettings.push("password");
-          }
-          if ("expirationDate" in link.sharedTo) {
-            linkSettings.push("expirationDate");
-          }
-          if (link.sharedTo.denyDownload) {
-            linkSettings.push("denyDownload");
-          }
+					if ("password" in link.sharedTo) {
+						linkSettings.push("password");
+					}
+					if ("expirationDate" in link.sharedTo) {
+						linkSettings.push("expirationDate");
+					}
+					if (link.sharedTo.denyDownload) {
+						linkSettings.push("denyDownload");
+					}
 
-          return {
-            key: link.sharedTo.id,
-            label: title,
-            requestToken,
-            settings: linkSettings,
-          };
-        });
+					return {
+						key: link.sharedTo.id,
+						label: title,
+						requestToken,
+						settings: linkSettings,
+					};
+				});
 
-        setSelectedLink(linksOptions[0]);
-        setSharedLinks(linksOptions);
-      }
+				setSelectedLink(linksOptions[0]);
+				setSharedLinks(linksOptions);
+			}
 
-      newConfig.requestToken = links[0].sharedTo?.requestToken;
-      newConfig.rootPath = "/rooms/share";
-      newConfig.mode = "public-room";
-    } else {
-      setSelectedLink(null);
-      setSharedLinks(null);
-    }
+			newConfig.requestToken = links[0].sharedTo?.requestToken;
+			newConfig.rootPath = "/rooms/share";
+			newConfig.mode = "public-room";
+		} else {
+			setSelectedLink(null);
+			setSharedLinks(null);
+		}
 
-    setConfig((oldConfig) => {
-      return { ...oldConfig, ...newConfig };
-    });
-  };
+		setConfig((oldConfig) => {
+			return { ...oldConfig, ...newConfig };
+		});
+	};
 
-  const onChangeSharedLink = (link) => {
-    setSelectedLink(link);
-    setConfig((oldConfig) => {
-      return { ...oldConfig, requestToken: link.requestToken };
-    });
-  };
+	const onChangeSharedLink = (link) => {
+		setSelectedLink(link);
+		setConfig((oldConfig) => {
+			return { ...oldConfig, requestToken: link.requestToken };
+		});
+	};
 
-  const onChangeSortBy = (item) => {
-    setConfig((oldConfig) => {
-      return {
-        ...oldConfig,
-        filter: { ...oldConfig.filter, sortby: item.key },
-      };
-    });
+	const onChangeSortBy = (item) => {
+		setConfig((oldConfig) => {
+			return {
+				...oldConfig,
+				filter: { ...oldConfig.filter, sortby: item.key },
+			};
+		});
 
-    setSortBy(item);
-  };
+		setSortBy(item);
+	};
 
-  const onChangeSortOrder = (item) => {
-    setConfig((oldConfig) => {
-      return {
-        ...oldConfig,
-        filter: { ...oldConfig.filter, sortorder: item.key },
-      };
-    });
+	const onChangeSortOrder = (item) => {
+		setConfig((oldConfig) => {
+			return {
+				...oldConfig,
+				filter: { ...oldConfig.filter, sortorder: item.key },
+			};
+		});
 
-    setSortOrder(item);
-  };
+		setSortOrder(item);
+	};
 
-  const onChangeShowHeader = () => {
-    setConfig((oldConfig) => {
-      return { ...oldConfig, showHeader: !config.showHeader };
-    });
-  };
+	const onChangeShowHeader = () => {
+		setConfig((oldConfig) => {
+			return { ...oldConfig, showHeader: !config.showHeader };
+		});
+	};
 
-  const onChangeShowTitle = () => {
-    setConfig((oldConfig) => {
-      return { ...oldConfig, showTitle: !config.showTitle };
-    });
-  };
+	const onChangeShowTitle = () => {
+		setConfig((oldConfig) => {
+			return { ...oldConfig, showTitle: !config.showTitle };
+		});
+	};
 
-  const toggleShowSettings = () => {
-    setConfig((oldConfig) => {
-      return { ...oldConfig, showSettings: !config.showSettings };
-    });
-  };
+	const toggleShowSettings = () => {
+		setConfig((oldConfig) => {
+			return { ...oldConfig, showSettings: !config.showSettings };
+		});
+	};
 
-  const toggleActionButton = () => {
-    setConfig((oldConfig) => {
-      return { ...oldConfig, disableActionButton: !config.disableActionButton };
-    });
-  };
+	const toggleActionButton = () => {
+		setConfig((oldConfig) => {
+			return { ...oldConfig, disableActionButton: !config.disableActionButton };
+		});
+	};
 
-  const onChangeShowMenu = () => {
-    setConfig((oldConfig) => {
-      return { ...oldConfig, showMenu: !config.showMenu };
-    });
-  };
+	const onChangeShowMenu = () => {
+		setConfig((oldConfig) => {
+			return { ...oldConfig, showMenu: !config.showMenu };
+		});
+	};
 
-  const onChangeShowFilter = () => {
-    setConfig((oldConfig) => {
-      return { ...oldConfig, showFilter: !config.showFilter };
-    });
-  };
+	const onChangeShowFilter = () => {
+		setConfig((oldConfig) => {
+			return { ...oldConfig, showFilter: !config.showFilter };
+		});
+	};
 
-  const changeColumnsOption = (e) => {
-    if (e.target.value === "default") {
-      setConfig((oldConfig) => ({
-        ...oldConfig,
-        viewTableColumns: "Index,Name,Type,Tags",
-      }));
-    } else if (e.target.value === "custom") {
-      setConfig((oldConfig) => ({
-        ...oldConfig,
-        viewTableColumns: selectedColumns.map((column) => column.key).join(","),
-      }));
-    }
-    setColumnDisplay(e.target.value);
-  };
+	const changeColumnsOption = (e) => {
+		if (e.target.value === "default") {
+			setConfig((oldConfig) => ({
+				...oldConfig,
+				viewTableColumns: "Index,Name,Type,Tags",
+			}));
+		} else if (e.target.value === "custom") {
+			setConfig((oldConfig) => ({
+				...oldConfig,
+				viewTableColumns: selectedColumns.map((column) => column.key).join(","),
+			}));
+		}
+		setColumnDisplay(e.target.value);
+	};
 
-  const onColumnSelect = (option) => {
-    setColumnsOptions((prevColumnsOptions) =>
-      prevColumnsOptions.filter((column) => column.key !== option.key),
-    );
-    if (!selectedColumns.find((column) => column.key === option.key)) {
-      setConfig((oldConfig) => ({
-        ...oldConfig,
-        viewTableColumns: [...selectedColumns, option]
-          .map((column) => column.key)
-          .join(","),
-      }));
-      setSelectedColumns((prevSelectedColumns) => [
-        ...prevSelectedColumns,
-        option,
-      ]);
-    }
-  };
+	const onColumnSelect = (option) => {
+		setColumnsOptions((prevColumnsOptions) =>
+			prevColumnsOptions.filter((column) => column.key !== option.key),
+		);
+		if (!selectedColumns.find((column) => column.key === option.key)) {
+			setConfig((oldConfig) => ({
+				...oldConfig,
+				viewTableColumns: [...selectedColumns, option]
+					.map((column) => column.key)
+					.join(","),
+			}));
+			setSelectedColumns((prevSelectedColumns) => [
+				...prevSelectedColumns,
+				option,
+			]);
+		}
+	};
 
-  const deleteSelectedColumn = (option) => {
-    setColumnsOptions((prevColumnsOptions) => [option, ...prevColumnsOptions]);
-    const filteredColumns = selectedColumns.filter(
-      (column) => column.key !== option.key,
-    );
-    setConfig((oldConfig) => ({
-      ...oldConfig,
-      viewTableColumns: filteredColumns.map((column) => column.key).join(","),
-    }));
-    setSelectedColumns(filteredColumns);
-  };
+	const deleteSelectedColumn = (option) => {
+		setColumnsOptions((prevColumnsOptions) => [option, ...prevColumnsOptions]);
+		const filteredColumns = selectedColumns.filter(
+			(column) => column.key !== option.key,
+		);
+		setConfig((oldConfig) => ({
+			...oldConfig,
+			viewTableColumns: filteredColumns.map((column) => column.key).join(","),
+		}));
+		setSelectedColumns(filteredColumns);
+	};
 
-  const navigateRoom = (id) => {
-    const filter = FilesFilter.getDefault();
-    filter.folder = id;
-    navigate(`/rooms/shared/${id}/filter?${filter.toUrlParams()}`);
-  };
+	const navigateRoom = (id) => {
+		const filter = FilesFilter.getDefault();
+		filter.folder = id;
+		navigate(`/rooms/shared/${id}/filter?${filter.toUrlParams()}`);
+	};
 
-  const redirectToSelectedRoom = () => navigateRoom(config.id);
+	const redirectToSelectedRoom = () => navigateRoom(config.id);
 
-  const preview = (
-    <Frame
-      width={config.width.includes("px") ? config.width : undefined}
-      height={config.height.includes("px") ? config.height : undefined}
-      targetId={config.frameId}
-    >
-      <div id={config.frameId} />
-    </Frame>
-  );
+	const preview = (
+		<Frame
+			width={config.width.includes("px") ? config.width : undefined}
+			height={config.height.includes("px") ? config.height : undefined}
+			targetId={config.frameId}
+		>
+			<div id={config.frameId} />
+		</Frame>
+	);
 
-  return (
-    <PresetWrapper
-      description={t("CustomDescription", {
-        productName: t("Common:ProductName"),
-      })}
-      header={t("CreateSamplePortal", { productName: t("Common:ProductName") })}
-    >
-      <Container>
-        <PreviewBlock
-          loadCurrentFrame={initFrame}
-          preview={preview}
-          theme={theme}
-          frameId={config.frameId}
-          scriptUrl={sdkScriptUrl}
-          config={config}
-        />
-        <Controls>
-          <VersionSelector
-            t={t}
-            onSetSource={onSetSource}
-            onSetVersion={onSetVersion}
-          />
-          <ControlsSection>
-            <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-            <WidthSetter
-              t={t}
-              setConfig={setConfig}
-              dataDimensions={dimensionsModel}
-              defaultDimension={defaultDimension}
-              defaultWidth={defaultSize.width}
-            />
-            <HeightSetter
-              t={t}
-              setConfig={setConfig}
-              dataDimensions={dimensionsModel}
-              defaultDimension={defaultDimension}
-              defaultHeight={defaultSize.height}
-            />
-            <FrameIdSetter
-              t={t}
-              defaultFrameId={config.frameId}
-              setConfig={setConfig}
-            />
-          </ControlsSection>
+	return (
+		<PresetWrapper
+			description={t("CustomDescription", {
+				productName: t("Common:ProductName"),
+			})}
+			header={t("CreateSamplePortal", { productName: t("Common:ProductName") })}
+		>
+			<Container>
+				<PreviewBlock
+					loadCurrentFrame={initFrame}
+					preview={preview}
+					theme={theme}
+					frameId={config.frameId}
+					scriptUrl={sdkScriptUrl}
+					config={config}
+				/>
+				<Controls>
+					<VersionSelector
+						t={t}
+						onSetSource={onSetSource}
+						onSetVersion={onSetVersion}
+					/>
+					<ControlsSection>
+						<CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
+						<WidthSetter
+							t={t}
+							setConfig={setConfig}
+							dataDimensions={dimensionsModel}
+							defaultDimension={defaultDimension}
+							defaultWidth={defaultSize.width}
+						/>
+						<HeightSetter
+							t={t}
+							setConfig={setConfig}
+							dataDimensions={dimensionsModel}
+							defaultDimension={defaultDimension}
+							defaultHeight={defaultSize.height}
+						/>
+						<FrameIdSetter
+							t={t}
+							defaultFrameId={config.frameId}
+							setConfig={setConfig}
+						/>
+					</ControlsSection>
 
-          <ControlsSection>
-            <CategorySubHeader>{t("InterfaceElements")}</CategorySubHeader>
+					<ControlsSection>
+						<CategorySubHeader>{t("InterfaceElements")}</CategorySubHeader>
 
-            <CheckboxGroup>
-              <LabelGroup>
-                <Checkbox
-                  className="checkbox"
-                  label={t("Menu")}
-                  onChange={onChangeShowMenu}
-                  isChecked={config.showMenu}
-                  dataTestId="show_menu_checkbox"
-                />
-                <HelpButton
-                  place="right"
-                  offsetRight={4}
-                  size={12}
-                  tooltipContent={
-                    <TooltipContent
-                      title={t("Menu")}
-                      description={t("MenuDescription")}
-                      img={theme.isBase ? LeftMenuUrl : LeftMenuDarkUrl}
-                    />
-                  }
-                  dataTestId="show_menu_help_button"
-                />
-              </LabelGroup>
+						<CheckboxGroup>
+							<LabelGroup>
+								<Checkbox
+									className="checkbox"
+									label={t("Menu")}
+									onChange={onChangeShowMenu}
+									isChecked={config.showMenu}
+									dataTestId="show_menu_checkbox"
+								/>
+								<HelpButton
+									place="right"
+									offsetRight={4}
+									size={12}
+									tooltipContent={
+										<TooltipContent
+											title={t("Menu")}
+											description={t("MenuDescription")}
+											img={theme.isBase ? LeftMenuUrl : LeftMenuDarkUrl}
+										/>
+									}
+									dataTestId="show_menu_help_button"
+								/>
+							</LabelGroup>
 
-              <LabelGroup>
-                <Checkbox
-                  className="checkbox"
-                  label={t("Common:Title")}
-                  onChange={onChangeShowTitle}
-                  isChecked={config.showTitle}
-                  dataTestId="show_title_checkbox"
-                />
-                <HelpButton
-                  place="right"
-                  offsetRight={4}
-                  size={12}
-                  tooltipContent={
-                    <TooltipContent
-                      title={t("Common:Title")}
-                      description={t("ManagerTitleDescription")}
-                      img={theme.isBase ? TitleUrl : TitleDarkUrl}
-                    />
-                  }
-                  dataTestId="show_title_help_button"
-                />
-              </LabelGroup>
-              <LabelGroup>
-                <Checkbox
-                  className="checkbox"
-                  label={t("SettingUpColumns")}
-                  onChange={toggleShowSettings}
-                  isChecked={config.showSettings}
-                  dataTestId="show_settings_checkbox"
-                />
-                <HelpButton
-                  place="right"
-                  offsetRight={4}
-                  size={12}
-                  tooltipContent={
-                    <TooltipContent
-                      title={t("SettingUpColumns")}
-                      description={t("SettingUpColumnsDescription")}
-                      img={theme.isBase ? ColumnsUrl : ColumnsDarkUrl}
-                    />
-                  }
-                  dataTestId="show_settings_help_button"
-                />
-              </LabelGroup>
-              <LabelGroup>
-                <Checkbox
-                  className="checkbox"
-                  label={t("ActionButton")}
-                  onChange={toggleActionButton}
-                  isChecked={!config.disableActionButton}
-                  dataTestId="action_button_checkbox"
-                />
-                <HelpButton
-                  place="right"
-                  offsetRight={4}
-                  size={12}
-                  tooltipContent={
-                    <TooltipContent
-                      title={t("ActionButton")}
-                      description={t("ActionButtonDescription")}
-                      img={theme.isBase ? ActionButtonUrl : ActionButtonDarkUrl}
-                    />
-                  }
-                  dataTestId="action_button_help_button"
-                />
-              </LabelGroup>
-              <LabelGroup>
-                <Checkbox
-                  className="checkbox"
-                  label={t("SearchFilterAndSort")}
-                  onChange={onChangeShowFilter}
-                  isChecked={config.showFilter}
-                  dataTestId="show_filter_checkbox"
-                />
-                <HelpButton
-                  place="right"
-                  offsetRight={4}
-                  size={12}
-                  tooltipContent={
-                    <TooltipContent
-                      title={t("SearchBlock")}
-                      description={t("ManagerSearchBlockDescription")}
-                      img={theme.isBase ? SearchUrl : SearchDarkUrl}
-                    />
-                  }
-                  dataTestId="show_filter_help_button"
-                />
-              </LabelGroup>
-              <LabelGroup>
-                <Checkbox
-                  className="checkbox"
-                  label={t("Header")}
-                  onChange={onChangeShowHeader}
-                  isChecked={config.showHeader}
-                  dataTestId="show_header_checkbox"
-                />
-                <Text color="gray">{`(${t("MobileOnly")})`}</Text>
-                <HelpButton
-                  place="right"
-                  offsetRight={4}
-                  size={12}
-                  tooltipContent={
-                    <TooltipContent
-                      title={t("Header")}
-                      description={t("HeaderDescription", {
-                        productName: t("Common:ProductName"),
-                      })}
-                      img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
-                    />
-                  }
-                  dataTestId="show_header_help_button"
-                />
-              </LabelGroup>
-            </CheckboxGroup>
-          </ControlsSection>
-          <ControlsSection>
-            <CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
-            <ControlsGroup>
-              <LabelGroup>
-                <Label className="label" text={t("RoomOrFolder")} />
-                <HelpButton
-                  offsetRight={0}
-                  size={12}
-                  tooltipContent={
-                    <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
-                  }
-                  dataTestId="room_or_folder_help_button"
-                />
-              </LabelGroup>
-              <FilesSelectorInputWrapper>
-                <FilesSelectorInput
-                  onSelectFolder={onChangeFolderId}
-                  isSelect
-                />
-              </FilesSelectorInputWrapper>
-            </ControlsGroup>
-            {sharedLinks ? (
-              <ControlsGroup>
-                <LabelGroup>
-                  <Label
-                    className="label"
-                    text={t("SharingPanel:ExternalLink")}
-                  />
-                  <HelpButton
-                    offsetRight={0}
-                    size={12}
-                    tooltipContent={
-                      <Text fontSize="12px">{t("Common:PublicRoomInfo")}</Text>
-                    }
-                  />
-                </LabelGroup>
-                <ComboBox
-                  scaled
-                  onSelect={onChangeSharedLink}
-                  options={sharedLinks}
-                  selectedOption={selectedLink}
-                  displaySelectedOption
-                  directionY="bottom"
-                  dataTestId="shared_link_combobox"
-                  dropDownTestId="shared_link_dropdown"
-                />
+							<LabelGroup>
+								<Checkbox
+									className="checkbox"
+									label={t("Common:Title")}
+									onChange={onChangeShowTitle}
+									isChecked={config.showTitle}
+									dataTestId="show_title_checkbox"
+								/>
+								<HelpButton
+									place="right"
+									offsetRight={4}
+									size={12}
+									tooltipContent={
+										<TooltipContent
+											title={t("Common:Title")}
+											description={t("ManagerTitleDescription")}
+											img={theme.isBase ? TitleUrl : TitleDarkUrl}
+										/>
+									}
+									dataTestId="show_title_help_button"
+								/>
+							</LabelGroup>
+							<LabelGroup>
+								<Checkbox
+									className="checkbox"
+									label={t("SettingUpColumns")}
+									onChange={toggleShowSettings}
+									isChecked={config.showSettings}
+									dataTestId="show_settings_checkbox"
+								/>
+								<HelpButton
+									place="right"
+									offsetRight={4}
+									size={12}
+									tooltipContent={
+										<TooltipContent
+											title={t("SettingUpColumns")}
+											description={t("SettingUpColumnsDescription")}
+											img={theme.isBase ? ColumnsUrl : ColumnsDarkUrl}
+										/>
+									}
+									dataTestId="show_settings_help_button"
+								/>
+							</LabelGroup>
+							<LabelGroup>
+								<Checkbox
+									className="checkbox"
+									label={t("ActionButton")}
+									onChange={toggleActionButton}
+									isChecked={!config.disableActionButton}
+									dataTestId="action_button_checkbox"
+								/>
+								<HelpButton
+									place="right"
+									offsetRight={4}
+									size={12}
+									tooltipContent={
+										<TooltipContent
+											title={t("ActionButton")}
+											description={t("ActionButtonDescription")}
+											img={theme.isBase ? ActionButtonUrl : ActionButtonDarkUrl}
+										/>
+									}
+									dataTestId="action_button_help_button"
+								/>
+							</LabelGroup>
+							<LabelGroup>
+								<Checkbox
+									className="checkbox"
+									label={t("SearchFilterAndSort")}
+									onChange={onChangeShowFilter}
+									isChecked={config.showFilter}
+									dataTestId="show_filter_checkbox"
+								/>
+								<HelpButton
+									place="right"
+									offsetRight={4}
+									size={12}
+									tooltipContent={
+										<TooltipContent
+											title={t("SearchBlock")}
+											description={t("ManagerSearchBlockDescription")}
+											img={theme.isBase ? SearchUrl : SearchDarkUrl}
+										/>
+									}
+									dataTestId="show_filter_help_button"
+								/>
+							</LabelGroup>
+							<LabelGroup>
+								<Checkbox
+									className="checkbox"
+									label={t("Header")}
+									onChange={onChangeShowHeader}
+									isChecked={config.showHeader}
+									dataTestId="show_header_checkbox"
+								/>
+								<Text color="gray">{`(${t("MobileOnly")})`}</Text>
+								<HelpButton
+									place="right"
+									offsetRight={4}
+									size={12}
+									tooltipContent={
+										<TooltipContent
+											title={t("Header")}
+											description={t("HeaderDescription", {
+												productName: t("Common:ProductName"),
+											})}
+											img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
+										/>
+									}
+									dataTestId="show_header_help_button"
+								/>
+							</LabelGroup>
+						</CheckboxGroup>
+					</ControlsSection>
+					<ControlsSection>
+						<CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
+						<ControlsGroup>
+							<LabelGroup>
+								<Label className="label" text={t("RoomOrFolder")} />
+								<HelpButton
+									offsetRight={0}
+									size={12}
+									tooltipContent={
+										<Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
+									}
+									dataTestId="room_or_folder_help_button"
+								/>
+							</LabelGroup>
+							<FilesSelectorInputWrapper>
+								<FilesSelectorInput
+									onSelectFolder={onChangeFolderId}
+									isSelect
+								/>
+							</FilesSelectorInputWrapper>
+						</ControlsGroup>
+						{sharedLinks ? (
+							<ControlsGroup>
+								<LabelGroup>
+									<Label
+										className="label"
+										text={t("SharingPanel:ExternalLink")}
+									/>
+									<HelpButton
+										offsetRight={0}
+										size={12}
+										tooltipContent={
+											<Text fontSize="12px">{t("Common:PublicRoomInfo")}</Text>
+										}
+									/>
+								</LabelGroup>
+								<ComboBox
+									scaled
+									onSelect={onChangeSharedLink}
+									options={sharedLinks}
+									selectedOption={selectedLink}
+									displaySelectedOption
+									directionY="bottom"
+									dataTestId="shared_link_combobox"
+									dropDownTestId="shared_link_dropdown"
+								/>
 
-                {selectedLink ? (
-                  <SharedLinkHint
-                    t={t}
-                    linkSettings={selectedLink.settings}
-                    redirectToSelectedRoom={redirectToSelectedRoom}
-                    currentColorScheme={currentColorScheme}
-                  />
-                ) : null}
-              </ControlsGroup>
-            ) : null}
-          </ControlsSection>
-          <ControlsSection>
-            <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
-            <ColumnContainer>
-              <FilterBlock t={t} config={config} setConfig={setConfig} />
-            </ColumnContainer>
-            <ControlsGroup>
-              <SearchTerm t={t} config={config} setConfig={setConfig} />
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("Common:SortBy")} />
-              <ComboBox
-                onSelect={onChangeSortBy}
-                options={dataSortBy}
-                scaled
-                selectedOption={sortBy}
-                displaySelectedOption
-                directionY="top"
-                dataTestId="sort_by_combobox"
-                dropDownTestId="sort_by_dropdown"
-              />
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("SortOrder")} />
-              <ComboBox
-                onSelect={onChangeSortOrder}
-                options={dataSortOrder}
-                scaled
-                selectedOption={sortOrder}
-                displaySelectedOption
-                directionY="top"
-                dataTestId="sort_order_combobox"
-                dropDownTestId="sort_order_dropdown"
-              />
-            </ControlsGroup>
-            <ItemsCountBlock
-              t={t}
-              count={config.filter.count}
-              setConfig={setConfig}
-            />
-            <DisplayPageBlock t={t} config={config} setConfig={setConfig} />
-            <Label className="label" text={t("DisplayColumns")} />
-            <RadioButtonGroup
-              orientation="vertical"
-              options={columnDisplayOptions}
-              name="columnsDisplayOptions"
-              selected={columnDisplay}
-              onClick={changeColumnsOption}
-              spacing="8px"
-              dataTestId="columns_display_radiobutton_group"
-            />
-            {columnDisplay === "custom" ? (
-              <ControlsGroup>
-                <ComboBox
-                  onSelect={onColumnSelect}
-                  options={
-                    columnsOptions || {
-                      key: "Select",
-                      label: t("Common:SelectAction"),
-                    }
-                  }
-                  scaled
-                  directionY="top"
-                  selectedOption={{
-                    key: "Select",
-                    label: t("Common:SelectAction"),
-                  }}
-                  dataTestId="columns_combobox"
-                  dropDownTestId="columns_dropdown"
-                />
+								{selectedLink ? (
+									<SharedLinkHint
+										t={t}
+										linkSettings={selectedLink.settings}
+										redirectToSelectedRoom={redirectToSelectedRoom}
+										currentColorScheme={currentColorScheme}
+									/>
+								) : null}
+							</ControlsGroup>
+						) : null}
+					</ControlsSection>
+					<ControlsSection>
+						<CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
+						<ColumnContainer>
+							<FilterBlock t={t} config={config} setConfig={setConfig} />
+						</ColumnContainer>
+						<ControlsGroup>
+							<SearchTerm t={t} config={config} setConfig={setConfig} />
+						</ControlsGroup>
+						<ControlsGroup>
+							<Label className="label" text={t("Common:SortBy")} />
+							<ComboBox
+								onSelect={onChangeSortBy}
+								options={dataSortBy}
+								scaled
+								selectedOption={sortBy}
+								displaySelectedOption
+								directionY="top"
+								dataTestId="sort_by_combobox"
+								dropDownTestId="sort_by_dropdown"
+							/>
+						</ControlsGroup>
+						<ControlsGroup>
+							<Label className="label" text={t("SortOrder")} />
+							<ComboBox
+								onSelect={onChangeSortOrder}
+								options={dataSortOrder}
+								scaled
+								selectedOption={sortOrder}
+								displaySelectedOption
+								directionY="top"
+								dataTestId="sort_order_combobox"
+								dropDownTestId="sort_order_dropdown"
+							/>
+						</ControlsGroup>
+						<ItemsCountBlock
+							t={t}
+							count={config.filter.count}
+							setConfig={setConfig}
+						/>
+						<DisplayPageBlock t={t} config={config} setConfig={setConfig} />
+						<Label className="label" text={t("DisplayColumns")} />
+						<RadioButtonGroup
+							orientation="vertical"
+							options={columnDisplayOptions}
+							name="columnsDisplayOptions"
+							selected={columnDisplay}
+							onClick={changeColumnsOption}
+							spacing="8px"
+							dataTestId="columns_display_radiobutton_group"
+						/>
+						{columnDisplay === "custom" ? (
+							<ControlsGroup>
+								<ComboBox
+									onSelect={onColumnSelect}
+									options={
+										columnsOptions || {
+											key: "Select",
+											label: t("Common:SelectAction"),
+										}
+									}
+									scaled
+									directionY="top"
+									selectedOption={{
+										key: "Select",
+										label: t("Common:SelectAction"),
+									}}
+									dataTestId="columns_combobox"
+									dropDownTestId="columns_dropdown"
+								/>
 
-                <SelectedItemsContainer>
-                  {selectedColumns.map((column) => (
-                    <SelectedItem
-                      key={column.key}
-                      isDisabled={
-                        column.key === "Name" || column.key === "Index"
-                      }
-                      onClick={() => deleteSelectedColumn(column)}
-                      onClose={() => {}}
-                      label={column.label}
-                    />
-                  ))}
-                </SelectedItemsContainer>
-              </ControlsGroup>
-            ) : null}
-          </ControlsSection>
+								<SelectedItemsContainer>
+									{selectedColumns.map((column) => (
+										<SelectedItem
+											key={column.key}
+											isDisabled={
+												column.key === "Name" || column.key === "Index"
+											}
+											onClick={() => deleteSelectedColumn(column)}
+											onClose={() => {}}
+											label={column.label}
+										/>
+									))}
+								</SelectedItemsContainer>
+							</ControlsGroup>
+						) : null}
+					</ControlsSection>
 
-          <Integration className="integration-examples" />
-        </Controls>
-      </Container>
+					<Integration className="integration-examples" />
+				</Controls>
+			</Container>
 
-      <Integration className="integration-examples integration-examples-bottom" />
-    </PresetWrapper>
-  );
+			<Integration className="integration-examples integration-examples-bottom" />
+		</PresetWrapper>
+	);
 };
 
 export const Component = inject(({ settingsStore, publicRoomStore }) => {
-  const { theme, currentColorScheme } = settingsStore;
-  const { fetchExternalLinks } = publicRoomStore;
+	const { theme, currentColorScheme } = settingsStore;
+	const { fetchExternalLinks } = publicRoomStore;
 
-  return {
-    theme,
+	return {
+		theme,
 
-    fetchExternalLinks,
-    currentColorScheme,
-  };
+		fetchExternalLinks,
+		currentColorScheme,
+	};
 })(
-  withTranslation([
-    "JavascriptSdk",
-    "Files",
-    "EmbeddingPanel",
-    "Common",
-    "Files",
-    "Translations",
-    "SharingPanel",
-  ])(observer(Manager)),
+	withTranslation([
+		"JavascriptSdk",
+		"Files",
+		"EmbeddingPanel",
+		"Common",
+		"Files",
+		"Translations",
+		"SharingPanel",
+	])(observer(Manager)),
 );

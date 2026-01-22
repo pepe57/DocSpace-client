@@ -34,7 +34,7 @@ import {
 	InputSize,
 	InputType,
 } from "@docspace/ui-kit/components/text-input";
-import { Checkbox } from "../../checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import styles from "../Selector.module.scss";
 
 import { FooterProps } from "../Selector.types";

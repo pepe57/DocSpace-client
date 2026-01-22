@@ -29,7 +29,7 @@ import { isMobile } from "../../../utils";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import { Checkbox } from "../../checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
 	ContextMenuButton,
 	ContextMenuButtonDisplayType,

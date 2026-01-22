@@ -34,7 +34,7 @@ import { isMobile } from "react-device-detect"; // TODO: isDesktop=true for IOS(
 import { VDRIndexingAction } from "../../../enums";
 import { isMobile as isMobileUtils } from "@docspace/ui-kit/utils/device";
 
-import { Checkbox } from "../../checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
 	ContextMenuButton,
 	ContextMenuButtonDisplayType,

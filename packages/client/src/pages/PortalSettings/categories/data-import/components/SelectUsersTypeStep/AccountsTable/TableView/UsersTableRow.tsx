@@ -31,15 +31,15 @@ import styled from "styled-components";
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
-  ComboBox,
-  ComboBoxSize,
-  TOption,
+	ComboBox,
+	ComboBoxSize,
+	TOption,
 } from "@docspace/shared/components/combobox";
 import {
-  InjectedTypeSelectTableRowProps,
-  TypeSelectTableRowProps,
+	InjectedTypeSelectTableRowProps,
+	TypeSelectTableRowProps,
 } from "../../../../types";
 
 const StyledTableRow = styled(TableRow)`
@@ -62,7 +62,7 @@ const StyledTableRow = styled(TableRow)`
     font-size: 13px;
     font-weight: 600;
     color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
+			props.theme.client.settings.migration.tableRowTextColor};
 
     white-space: nowrap;
     overflow: hidden;
@@ -79,7 +79,7 @@ const StyledTableRow = styled(TableRow)`
 
     .combo-button-label {
       color: ${(props) =>
-        props.theme.client.settings.migration.comboBoxLabelColor};
+				props.theme.client.settings.migration.comboBoxLabelColor};
     }
 
     .combo-buttons_arrow-icon {
@@ -90,106 +90,106 @@ const StyledTableRow = styled(TableRow)`
     svg {
       path {
         fill: ${(props) =>
-          props.theme.client.settings.migration.comboBoxLabelColor};
+					props.theme.client.settings.migration.comboBoxLabelColor};
       }
     }
   }
 `;
 
 const UsersTableRow = (props: TypeSelectTableRowProps) => {
-  const {
-    id,
-    displayName,
-    email,
-    typeOptions,
-    isChecked,
-    toggleAccount,
-    type,
-    changeUserType,
-  } = props as InjectedTypeSelectTableRowProps;
-  const userTypeRef = useRef<HTMLDivElement>(null);
+	const {
+		id,
+		displayName,
+		email,
+		typeOptions,
+		isChecked,
+		toggleAccount,
+		type,
+		changeUserType,
+	} = props as InjectedTypeSelectTableRowProps;
+	const userTypeRef = useRef<HTMLDivElement>(null);
 
-  const onSelectUser = (option: TOption) => {
-    changeUserType(id, String(option.key));
-  };
+	const onSelectUser = (option: TOption) => {
+		changeUserType(id, String(option.key));
+	};
 
-  const selectedOption: TOption = typeOptions.find(
-    (option) => option.key === type,
-  ) || { key: "", label: "" };
+	const selectedOption: TOption = typeOptions.find(
+		(option) => option.key === type,
+	) || { key: "", label: "" };
 
-  const checkIsClickOnUserTypeSelect = (
-    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    if (
-      (e.target as HTMLElement).closest(".dropdown-container") ||
-      userTypeRef.current?.contains(e.target as HTMLElement)
-    ) {
-      return true;
-    }
-    return false;
-  };
+	const checkIsClickOnUserTypeSelect = (
+		e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+	) => {
+		if (
+			(e.target as HTMLElement).closest(".dropdown-container") ||
+			userTypeRef.current?.contains(e.target as HTMLElement)
+		) {
+			return true;
+		}
+		return false;
+	};
 
-  const checkIsClickOnUserSelect = (
-    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    if ((e.target as HTMLElement).closest(".user-select")) {
-      return true;
-    }
-    return false;
-  };
+	const checkIsClickOnUserSelect = (
+		e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+	) => {
+		if ((e.target as HTMLElement).closest(".user-select")) {
+			return true;
+		}
+		return false;
+	};
 
-  const onRowClick = (
-    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const isClickOnUserTypeSelect = checkIsClickOnUserTypeSelect(e);
-    const isClickOnUserSelect = checkIsClickOnUserSelect(e);
+	const onRowClick = (
+		e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+	) => {
+		const isClickOnUserTypeSelect = checkIsClickOnUserTypeSelect(e);
+		const isClickOnUserSelect = checkIsClickOnUserSelect(e);
 
-    if (!isClickOnUserTypeSelect && !isClickOnUserSelect) {
-      toggleAccount();
-    }
-  };
+		if (!isClickOnUserTypeSelect && !isClickOnUserSelect) {
+			toggleAccount();
+		}
+	};
 
-  return (
-    <StyledTableRow onClick={onRowClick}>
-      <TableCell className="checkboxWrapper">
-        <Checkbox
-          onChange={() => toggleAccount()}
-          isChecked={isChecked}
-          label={displayName}
-          truncate
-          className="user-select"
-        />
-      </TableCell>
+	return (
+		<StyledTableRow onClick={onRowClick}>
+			<TableCell className="checkboxWrapper">
+				<Checkbox
+					onChange={() => toggleAccount()}
+					isChecked={isChecked}
+					label={displayName}
+					truncate
+					className="user-select"
+				/>
+			</TableCell>
 
-      <TableCell>
-        <div ref={userTypeRef}>
-          <ComboBox
-            className="user-type"
-            selectedOption={selectedOption}
-            options={typeOptions}
-            onSelect={onSelectUser}
-            scaled
-            size={ComboBoxSize.content}
-            displaySelectedOption
-            modernView
-            directionY="both"
-            manualWidth="auto"
-            dataTestId="user_type_combobox"
-          />
-        </div>
-      </TableCell>
+			<TableCell>
+				<div ref={userTypeRef}>
+					<ComboBox
+						className="user-type"
+						selectedOption={selectedOption}
+						options={typeOptions}
+						onSelect={onSelectUser}
+						scaled
+						size={ComboBoxSize.content}
+						displaySelectedOption
+						modernView
+						directionY="both"
+						manualWidth="auto"
+						dataTestId="user_type_combobox"
+					/>
+				</div>
+			</TableCell>
 
-      <TableCell>
-        <Text className="user-email">{email}</Text>
-      </TableCell>
-    </StyledTableRow>
-  );
+			<TableCell>
+				<Text className="user-email">{email}</Text>
+			</TableCell>
+		</StyledTableRow>
+	);
 };
 
 export default inject<TStore>(({ importAccountsStore }) => {
-  const { changeUserType } = importAccountsStore;
+	const { changeUserType } = importAccountsStore;
 
-  return {
-    changeUserType,
-  };
+	return {
+		changeUserType,
+	};
 })(observer(UsersTableRow));

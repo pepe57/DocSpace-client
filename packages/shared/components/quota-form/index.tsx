@@ -43,7 +43,7 @@ import { TextInput, InputType } from "@docspace/ui-kit/components/text-input";
 import { ComboBox, ComboBoxSize, TOption } from "../combobox";
 import { SaveCancelButtons } from "../save-cancel-buttons";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "../checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { TTranslation } from "../../types";
 
 import { QuotaFormProps } from "./QuotaForm.types";

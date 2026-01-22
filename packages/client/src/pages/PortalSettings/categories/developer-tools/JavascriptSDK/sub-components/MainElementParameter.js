@@ -32,7 +32,7 @@ import { ColorInput } from "@docspace/shared/components/color-input";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Label } from "@docspace/ui-kit/components/label";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { globalColors } from "@docspace/shared/themes";
 import {

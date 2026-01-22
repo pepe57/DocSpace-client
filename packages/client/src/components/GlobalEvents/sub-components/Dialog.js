@@ -32,7 +32,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Button } from "@docspace/shared/components/button";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 
 import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";

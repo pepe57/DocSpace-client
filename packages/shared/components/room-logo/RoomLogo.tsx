@@ -46,103 +46,103 @@ import VirtualDataTemplateSvg32Url from "PUBLIC_DIR/images/icons/32/template/vir
 
 import { RoomsType } from "../../enums";
 
-import { Checkbox } from "../checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { RoomLogoProps } from "./RoomLogo.types";
 import styles from "./RoomLogo.module.scss";
 
 const RoomLogoPure = ({
-  id,
-  className,
-  style,
-  type,
+	id,
+	className,
+	style,
+	type,
 
-  isArchive = false,
-  isTemplate = false,
-  withCheckbox = false,
-  isChecked = false,
-  isIndeterminate = false,
-  isTemplateRoom = false,
-  onChange,
+	isArchive = false,
+	isTemplate = false,
+	withCheckbox = false,
+	isChecked = false,
+	isIndeterminate = false,
+	isTemplateRoom = false,
+	onChange,
 }: RoomLogoProps) => {
-  const getIcon = () => {
-    if (isArchive) {
-      return ArchiveSvg32Url;
-    }
+	const getIcon = () => {
+		if (isArchive) {
+			return ArchiveSvg32Url;
+		}
 
-    if (isTemplate) {
-      return TemplateRoomsSvg32Url;
-    }
+		if (isTemplate) {
+			return TemplateRoomsSvg32Url;
+		}
 
-    if (isTemplateRoom) {
-      switch (type) {
-        case RoomsType.EditingRoom:
-          return CollaborationTemplateSvg32Url;
-        case RoomsType.CustomRoom:
-          return CustomTemplateSvg32Url;
-        case RoomsType.PublicRoom:
-          return PublicTemplateSvg32Url;
-        case RoomsType.VirtualDataRoom:
-          return VirtualDataTemplateSvg32Url;
-        case RoomsType.FormRoom:
-          return FormTemplateSvg32Url;
-        case RoomsType.AIRoom:
-          return AIRoomSvg32Url;
-        default:
-          return "";
-      }
-    }
+		if (isTemplateRoom) {
+			switch (type) {
+				case RoomsType.EditingRoom:
+					return CollaborationTemplateSvg32Url;
+				case RoomsType.CustomRoom:
+					return CustomTemplateSvg32Url;
+				case RoomsType.PublicRoom:
+					return PublicTemplateSvg32Url;
+				case RoomsType.VirtualDataRoom:
+					return VirtualDataTemplateSvg32Url;
+				case RoomsType.FormRoom:
+					return FormTemplateSvg32Url;
+				case RoomsType.AIRoom:
+					return AIRoomSvg32Url;
+				default:
+					return "";
+			}
+		}
 
-    switch (type) {
-      case RoomsType.EditingRoom:
-        return EditingSvg32Url;
-      case RoomsType.CustomRoom:
-        return CustomSvg32Url;
-      case RoomsType.PublicRoom:
-        return PublicRoomSvg32Url;
-      case RoomsType.VirtualDataRoom:
-        return VirtualDataRoomRoomSvg32Url;
-      case RoomsType.FormRoom:
-        return FormRoomSvg32Url;
-      case RoomsType.AIRoom:
-        return AIRoomSvg32Url;
-      default:
-        return "";
-    }
-  };
+		switch (type) {
+			case RoomsType.EditingRoom:
+				return EditingSvg32Url;
+			case RoomsType.CustomRoom:
+				return CustomSvg32Url;
+			case RoomsType.PublicRoom:
+				return PublicRoomSvg32Url;
+			case RoomsType.VirtualDataRoom:
+				return VirtualDataRoomRoomSvg32Url;
+			case RoomsType.FormRoom:
+				return FormRoomSvg32Url;
+			case RoomsType.AIRoom:
+				return AIRoomSvg32Url;
+			default:
+				return "";
+		}
+	};
 
-  const onSelect = () => {
-    if (!isMobile) return;
+	const onSelect = () => {
+		if (!isMobile) return;
 
-    onChange?.();
-  };
+		onChange?.();
+	};
 
-  const icon = getIcon();
+	const icon = getIcon();
 
-  return (
-    <div
-      id={id}
-      className={classNames(className, styles.container)}
-      style={style}
-      data-testid="room-logo"
-    >
-      <div
-        className={classNames("room-logo_icon-container", styles.container)}
-        onClick={onSelect}
-      >
-        <img className="room-logo_icon" alt="room-logo" src={icon} />
-      </div>
+	return (
+		<div
+			id={id}
+			className={classNames(className, styles.container)}
+			style={style}
+			data-testid="room-logo"
+		>
+			<div
+				className={classNames("room-logo_icon-container", styles.container)}
+				onClick={onSelect}
+			>
+				<img className="room-logo_icon" alt="room-logo" src={icon} />
+			</div>
 
-      {withCheckbox ? (
-        <Checkbox
-          className="room-logo_checkbox checkbox"
-          isChecked={isChecked}
-          isIndeterminate={isIndeterminate}
-          onChange={onChange}
-        />
-      ) : null}
-    </div>
-  );
+			{withCheckbox ? (
+				<Checkbox
+					className="room-logo_checkbox checkbox"
+					isChecked={isChecked}
+					isIndeterminate={isIndeterminate}
+					onChange={onChange}
+				/>
+			) : null}
+		</div>
+	);
 };
 
 export { RoomLogoPure };

@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { isMobile } from "../../../utils";
 import { ReactSVG } from "react-svg";
-import { Checkbox } from "../../checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
 	ContextMenuButton,
 	ContextMenuButtonDisplayType,

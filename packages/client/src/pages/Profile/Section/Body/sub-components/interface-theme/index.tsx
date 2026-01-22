@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { toastr } from "@docspace/shared/components/toast";
 import { ThemeKeys } from "@docspace/shared/enums";
@@ -41,159 +41,159 @@ import ThemePreview from "./ThemePreview";
 import styles from "./interface-theme.module.scss";
 
 type InterfaceThemeProps = {
-  theme?: ThemeKeys;
-  changeTheme?: (theme: ThemeKeys) => Promise<void>;
-  currentColorScheme?: TColorScheme;
-  selectedThemeId?: string;
-  isDesktopClient?: boolean;
+	theme?: ThemeKeys;
+	changeTheme?: (theme: ThemeKeys) => Promise<void>;
+	currentColorScheme?: TColorScheme;
+	selectedThemeId?: string;
+	isDesktopClient?: boolean;
 };
 
 const InterfaceTheme = (props: InterfaceThemeProps) => {
-  const { t } = useTranslation(["Common", "Profile"]);
+	const { t } = useTranslation(["Common", "Profile"]);
 
-  const {
-    theme,
-    changeTheme,
-    currentColorScheme,
-    selectedThemeId,
-    isDesktopClient,
-  } = props;
+	const {
+		theme,
+		changeTheme,
+		currentColorScheme,
+		selectedThemeId,
+		isDesktopClient,
+	} = props;
 
-  const [currentTheme, setCurrentTheme] = useState(theme);
+	const [currentTheme, setCurrentTheme] = useState(theme);
 
-  const themeChange = async (newTheme: ThemeKeys) => {
-    showLoader();
+	const themeChange = async (newTheme: ThemeKeys) => {
+		showLoader();
 
-    try {
-      setCurrentTheme(newTheme);
+		try {
+			setCurrentTheme(newTheme);
 
-      if (isDesktopClient && newTheme !== ThemeKeys.SystemStr) {
-        const editorTheme = getEditorTheme(newTheme);
-        window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
-      }
+			if (isDesktopClient && newTheme !== ThemeKeys.SystemStr) {
+				const editorTheme = getEditorTheme(newTheme);
+				window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
+			}
 
-      await changeTheme?.(newTheme);
-    } catch (error) {
-      console.error(error);
-      toastr.error(error as string);
-    } finally {
-      hideLoader();
-    }
-  };
+			await changeTheme?.(newTheme);
+		} catch (error) {
+			console.error(error);
+			toastr.error(error as string);
+		} finally {
+			hideLoader();
+		}
+	};
 
-  const onChangeTheme = (
-    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>,
-  ) => {
-    const target = e.currentTarget;
+	const onChangeTheme = (
+		e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>,
+	) => {
+		const target = e.currentTarget;
 
-    themeChange(target.value as ThemeKeys);
-  };
+		themeChange(target.value as ThemeKeys);
+	};
 
-  const onChangeSystemTheme = (
-    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>,
-  ) => {
-    const isChecked = (e.currentTarget || e.target).checked;
+	const onChangeSystemTheme = (
+		e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>,
+	) => {
+		const isChecked = (e.currentTarget || e.target).checked;
 
-    if (!isChecked) {
-      themeChange(ThemeKeys.BaseStr);
-    } else {
-      themeChange(ThemeKeys.SystemStr);
-    }
-  };
+		if (!isChecked) {
+			themeChange(ThemeKeys.BaseStr);
+		} else {
+			themeChange(ThemeKeys.SystemStr);
+		}
+	};
 
-  const isSystemTheme = currentTheme === ThemeKeys.SystemStr;
-  const systemThemeValue = getSystemTheme();
+	const isSystemTheme = currentTheme === ThemeKeys.SystemStr;
+	const systemThemeValue = getSystemTheme();
 
-  const systemThemeLabel = isDesktopClient
-    ? t("Profile:DesktopTheme")
-    : t("Profile:SystemTheme");
-  const systemThemeDescriptionLabel = isDesktopClient
-    ? t("Profile:DesktopThemeDescription")
-    : t("Profile:SystemThemeDescription");
+	const systemThemeLabel = isDesktopClient
+		? t("Profile:DesktopTheme")
+		: t("Profile:SystemTheme");
+	const systemThemeDescriptionLabel = isDesktopClient
+		? t("Profile:DesktopThemeDescription")
+		: t("Profile:SystemThemeDescription");
 
-  return (
-    <div
-      className={styles.interfaceTheme}
-      data-testid="profile-interface-theme"
-    >
-      <div>
-        <Checkbox
-          className={styles.systemThemeCheckbox}
-          value={ThemeKeys.SystemStr}
-          label={systemThemeLabel}
-          isChecked={isSystemTheme}
-          onChange={onChangeSystemTheme}
-          dataTestId="system_theme_checkbox"
-        />
-        <Text as="div" className={styles.systemThemeDescription}>
-          {systemThemeDescriptionLabel}
-        </Text>
-      </div>
-      <div className={styles.themesContainer}>
-        <ThemePreview
-          label={t("LightTheme")}
-          theme="Light"
-          accentColor={currentColorScheme!.main?.accent}
-          themeId={selectedThemeId!}
-          value={ThemeKeys.BaseStr}
-          isChecked={
-            currentTheme === ThemeKeys.BaseStr ||
-            (isSystemTheme && systemThemeValue === ThemeKeys.BaseStr)
-          }
-          onChangeTheme={onChangeTheme}
-          isDisabled={false}
-        />
-        <ThemePreview
-          label={t("DarkTheme")}
-          theme="Dark"
-          accentColor={currentColorScheme!.main?.accent}
-          themeId={selectedThemeId!}
-          value={ThemeKeys.DarkStr}
-          isChecked={
-            currentTheme === ThemeKeys.DarkStr ||
-            (isSystemTheme && systemThemeValue === ThemeKeys.DarkStr)
-          }
-          onChangeTheme={onChangeTheme}
-          isDisabled={false}
-        />
-      </div>
+	return (
+		<div
+			className={styles.interfaceTheme}
+			data-testid="profile-interface-theme"
+		>
+			<div>
+				<Checkbox
+					className={styles.systemThemeCheckbox}
+					value={ThemeKeys.SystemStr}
+					label={systemThemeLabel}
+					isChecked={isSystemTheme}
+					onChange={onChangeSystemTheme}
+					dataTestId="system_theme_checkbox"
+				/>
+				<Text as="div" className={styles.systemThemeDescription}>
+					{systemThemeDescriptionLabel}
+				</Text>
+			</div>
+			<div className={styles.themesContainer}>
+				<ThemePreview
+					label={t("LightTheme")}
+					theme="Light"
+					accentColor={currentColorScheme!.main?.accent}
+					themeId={selectedThemeId!}
+					value={ThemeKeys.BaseStr}
+					isChecked={
+						currentTheme === ThemeKeys.BaseStr ||
+						(isSystemTheme && systemThemeValue === ThemeKeys.BaseStr)
+					}
+					onChangeTheme={onChangeTheme}
+					isDisabled={false}
+				/>
+				<ThemePreview
+					label={t("DarkTheme")}
+					theme="Dark"
+					accentColor={currentColorScheme!.main?.accent}
+					themeId={selectedThemeId!}
+					value={ThemeKeys.DarkStr}
+					isChecked={
+						currentTheme === ThemeKeys.DarkStr ||
+						(isSystemTheme && systemThemeValue === ThemeKeys.DarkStr)
+					}
+					onChangeTheme={onChangeTheme}
+					isDisabled={false}
+				/>
+			</div>
 
-      <div className={styles.mobileThemesContainer}>
-        <RadioButtonGroup
-          orientation="vertical"
-          name="interface-theme"
-          options={[
-            {
-              value: ThemeKeys.BaseStr,
-              label: t("LightTheme"),
-              dataTestId: "light_theme_radio_button",
-            },
-            {
-              value: ThemeKeys.DarkStr,
-              label: t("DarkTheme"),
-              dataTestId: "dark_theme_radio_button",
-            },
-          ]}
-          onClick={onChangeTheme}
-          selected={theme}
-          spacing="12px"
-          isDisabled={false}
-        />
-      </div>
-    </div>
-  );
+			<div className={styles.mobileThemesContainer}>
+				<RadioButtonGroup
+					orientation="vertical"
+					name="interface-theme"
+					options={[
+						{
+							value: ThemeKeys.BaseStr,
+							label: t("LightTheme"),
+							dataTestId: "light_theme_radio_button",
+						},
+						{
+							value: ThemeKeys.DarkStr,
+							label: t("DarkTheme"),
+							dataTestId: "dark_theme_radio_button",
+						},
+					]}
+					onClick={onChangeTheme}
+					selected={theme}
+					spacing="12px"
+					isDisabled={false}
+				/>
+			</div>
+		</div>
+	);
 };
 
 export default inject(({ settingsStore, userStore }: TStore) => {
-  const { changeTheme, user } = userStore;
-  const { currentColorScheme, selectedThemeId, isDesktopClient } =
-    settingsStore;
+	const { changeTheme, user } = userStore;
+	const { currentColorScheme, selectedThemeId, isDesktopClient } =
+		settingsStore;
 
-  return {
-    changeTheme,
-    theme: user?.theme || "System",
-    currentColorScheme,
-    selectedThemeId,
-    isDesktopClient,
-  };
+	return {
+		changeTheme,
+		theme: user?.theme || "System",
+		currentColorScheme,
+		selectedThemeId,
+		isDesktopClient,
+	};
 })(observer(InterfaceTheme));

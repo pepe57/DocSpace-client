@@ -32,8 +32,8 @@ import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";

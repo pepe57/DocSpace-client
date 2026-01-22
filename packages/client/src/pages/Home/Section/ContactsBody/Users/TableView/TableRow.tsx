@@ -32,7 +32,7 @@ import { useTranslation } from "react-i18next";
 import { TableCell } from "@docspace/shared/components/table";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { EmployeeType } from "@docspace/shared/enums";
 import {
 	ComboBox,

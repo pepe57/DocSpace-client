@@ -30,8 +30,8 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import { Badge } from "@docspace/shared/components/badge";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   commonIconsStyles,
   injectDefaultTheme,

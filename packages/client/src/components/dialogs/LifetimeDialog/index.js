@@ -3,122 +3,122 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Text } from "@docspace/ui-kit/components/text";
 import styles from "./LifetimeDialog.module.scss";
 
 const LifetimeDialogComponent = (props) => {
-  const {
-    t,
-    setLifetimeDialogVisible,
-    visible,
-    tReady,
-    lifetimeDialogCB,
-    hideConfirmRoomLifetimeSetting,
-  } = props;
+	const {
+		t,
+		setLifetimeDialogVisible,
+		visible,
+		tReady,
+		lifetimeDialogCB,
+		hideConfirmRoomLifetimeSetting,
+	} = props;
 
-  const [isChecked, setIsChecked] = useState(false);
+	const [isChecked, setIsChecked] = useState(false);
 
-  const onChange = () => {
-    setIsChecked(!isChecked);
-  };
+	const onChange = () => {
+		setIsChecked(!isChecked);
+	};
 
-  const onClose = () => {
-    setLifetimeDialogVisible(false);
-  };
+	const onClose = () => {
+		setLifetimeDialogVisible(false);
+	};
 
-  const onAcceptClick = () => {
-    if (isChecked) {
-      hideConfirmRoomLifetimeSetting(isChecked);
-    }
+	const onAcceptClick = () => {
+		if (isChecked) {
+			hideConfirmRoomLifetimeSetting(isChecked);
+		}
 
-    lifetimeDialogCB();
-    onClose();
-  };
+		lifetimeDialogCB();
+		onClose();
+	};
 
-  const onDeleteAction = () => {
-    onAcceptClick();
-  };
+	const onDeleteAction = () => {
+		onAcceptClick();
+	};
 
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
-  };
+	const onKeyUp = (e) => {
+		if (e.keyCode === 27) onClose();
+		if (e.keyCode === 13 || e.which === 13) onDeleteAction();
+	};
 
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
+	useEffect(() => {
+		document.addEventListener("keyup", onKeyUp, false);
 
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
+		return () => {
+			document.removeEventListener("keyup", onKeyUp, false);
+		};
+	}, []);
 
-  return (
-    <ModalDialog
-      isLoading={!tReady}
-      visible={visible}
-      onClose={onClose}
-      autoMaxHeight
-    >
-      <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <div className={styles.lifetimeBodyContainer}>
-          <Text fontWeight={600} fontSize="13px">
-            {t("Files:LifetimeDialogDescriptionHeader")}
-          </Text>
-          <Text fontSize="13px">{t("Files:LifetimeDialogDescription")}</Text>
-        </div>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <div className={styles.lifetimeFooterContainer}>
-          <Checkbox
-            className={styles.lifetimeCheckbox}
-            label={t("ConvertDialog:HideMessage")}
-            isChecked={isChecked}
-            onChange={onChange}
-          />
-          <div className={styles.lifetimeButtons}>
-            <Button
-              id="delete-file-modal_submit"
-              key="OKButton"
-              label={t("Common:OKButton")}
-              size="normal"
-              primary
-              scale
-              onClick={onAcceptClick}
-            />
-            <Button
-              id="delete-file-modal_cancel"
-              key="CancelButton"
-              label={t("Common:CancelButton")}
-              size="normal"
-              scale
-              onClick={onClose}
-            />
-          </div>
-        </div>
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+	return (
+		<ModalDialog
+			isLoading={!tReady}
+			visible={visible}
+			onClose={onClose}
+			autoMaxHeight
+		>
+			<ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
+			<ModalDialog.Body>
+				<div className={styles.lifetimeBodyContainer}>
+					<Text fontWeight={600} fontSize="13px">
+						{t("Files:LifetimeDialogDescriptionHeader")}
+					</Text>
+					<Text fontSize="13px">{t("Files:LifetimeDialogDescription")}</Text>
+				</div>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<div className={styles.lifetimeFooterContainer}>
+					<Checkbox
+						className={styles.lifetimeCheckbox}
+						label={t("ConvertDialog:HideMessage")}
+						isChecked={isChecked}
+						onChange={onChange}
+					/>
+					<div className={styles.lifetimeButtons}>
+						<Button
+							id="delete-file-modal_submit"
+							key="OKButton"
+							label={t("Common:OKButton")}
+							size="normal"
+							primary
+							scale
+							onClick={onAcceptClick}
+						/>
+						<Button
+							id="delete-file-modal_cancel"
+							key="CancelButton"
+							label={t("Common:CancelButton")}
+							size="normal"
+							scale
+							onClick={onClose}
+						/>
+					</div>
+				</div>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 const LifetimeDialog = withTranslation(["Common", "Files", "ConvertDialog"])(
-  LifetimeDialogComponent,
+	LifetimeDialogComponent,
 );
 
 export default inject(({ dialogsStore, filesSettingsStore }) => {
-  const {
-    lifetimeDialogVisible: visible,
-    setLifetimeDialogVisible,
-    lifetimeDialogCB,
-  } = dialogsStore;
+	const {
+		lifetimeDialogVisible: visible,
+		setLifetimeDialogVisible,
+		lifetimeDialogCB,
+	} = dialogsStore;
 
-  const { hideConfirmRoomLifetimeSetting } = filesSettingsStore;
+	const { hideConfirmRoomLifetimeSetting } = filesSettingsStore;
 
-  return {
-    visible,
-    setLifetimeDialogVisible,
-    lifetimeDialogCB,
-    hideConfirmRoomLifetimeSetting,
-  };
+	return {
+		visible,
+		setLifetimeDialogVisible,
+		lifetimeDialogCB,
+		hideConfirmRoomLifetimeSetting,
+	};
 })(observer(LifetimeDialog));

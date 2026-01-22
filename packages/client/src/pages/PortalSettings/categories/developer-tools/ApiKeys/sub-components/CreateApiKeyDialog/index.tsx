@@ -43,7 +43,7 @@ import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Tabs, TabsTypes, TTabItem } from "@docspace/shared/components/tabs";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { toastr } from "@docspace/shared/components/toast";
 import { globalColors } from "@docspace/shared/themes";

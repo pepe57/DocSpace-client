@@ -34,7 +34,7 @@ import { inject, observer } from "mobx-react";
 import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { useNavigate } from "react-router";
 import { getPrimaryLink } from "@docspace/shared/api/rooms";
@@ -61,397 +61,397 @@ import Integration from "../sub-components/Integration";
 import { VersionSelector } from "../sub-components/VersionSelector";
 
 import {
-  dimensionsModel,
-  defaultSize,
-  defaultDimension,
-  sdkVersion,
-  sdkSource,
+	dimensionsModel,
+	defaultSize,
+	defaultDimension,
+	sdkVersion,
+	sdkSource,
 } from "../constants";
 
 import {
-  Controls,
-  CategorySubHeader,
-  ControlsGroup,
-  LabelGroup,
-  Frame,
-  Container,
-  FilesSelectorInputWrapper,
-  ControlsSection,
-  CheckboxGroup,
+	Controls,
+	CategorySubHeader,
+	ControlsGroup,
+	LabelGroup,
+	Frame,
+	Container,
+	FilesSelectorInputWrapper,
+	ControlsSection,
+	CheckboxGroup,
 } from "./StyledPresets";
 
 const SimpleRoom = (props) => {
-  const { t, fetchExternalLinks, currentColorScheme, theme } = props;
-  const navigate = useNavigate();
+	const { t, fetchExternalLinks, currentColorScheme, theme } = props;
+	const navigate = useNavigate();
 
-  setDocumentTitle(t("JavascriptSdk"));
+	setDocumentTitle(t("JavascriptSdk"));
 
-  const [version, onSetVersion] = useState(sdkVersion[210]);
+	const [version, onSetVersion] = useState(sdkVersion[210]);
 
-  const [source, onSetSource] = useState(sdkSource.Package);
+	const [source, onSetSource] = useState(sdkSource.Package);
 
-  const [sharedLinks, setSharedLinks] = useState(null);
+	const [sharedLinks, setSharedLinks] = useState(null);
 
-  const [selectedLink, setSelectedLink] = useState(null);
+	const [selectedLink, setSelectedLink] = useState(null);
 
-  const [config, setConfig] = useState({
-    src: window.location.origin,
-    mode: "public-room",
-    width: `${defaultSize.width}${defaultDimension.label}`,
-    height: `${defaultSize.height}${defaultDimension.label}`,
-    frameId: "ds-frame",
-    showHeader: true,
-    showTitle: true,
-    showMenu: false,
-    showFilter: true,
-    disableActionButton: false,
-    infoPanelVisible: false,
-    init: false,
-    filter: {
-      count: 100,
-      page: 1,
-      sortorder: "descending",
-      sortby: "DateAndTime",
-      search: "",
-      withSubfolders: false,
-    },
-  });
+	const [config, setConfig] = useState({
+		src: window.location.origin,
+		mode: "public-room",
+		width: `${defaultSize.width}${defaultDimension.label}`,
+		height: `${defaultSize.height}${defaultDimension.label}`,
+		frameId: "ds-frame",
+		showHeader: true,
+		showTitle: true,
+		showMenu: false,
+		showFilter: true,
+		disableActionButton: false,
+		infoPanelVisible: false,
+		init: false,
+		filter: {
+			count: 100,
+			page: 1,
+			sortorder: "descending",
+			sortby: "DateAndTime",
+			search: "",
+			withSubfolders: false,
+		},
+	});
 
-  const fromPackage = source === sdkSource.Package;
+	const fromPackage = source === sdkSource.Package;
 
-  const sdkScriptUrl = getSdkScriptUrl(version);
+	const sdkScriptUrl = getSdkScriptUrl(version);
 
-  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
+	const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
 
-  const destroyFrame = () => {
-    sdk?.frames[config.frameId]?.destroyFrame();
-  };
+	const destroyFrame = () => {
+		sdk?.frames[config.frameId]?.destroyFrame();
+	};
 
-  const initFrame = () => {
-    setTimeout(() => sdk?.init(config), 0);
-  };
+	const initFrame = () => {
+		setTimeout(() => sdk?.init(config), 0);
+	};
 
-  useEffect(() => {
-    const script = document.getElementById("sdk-script");
+	useEffect(() => {
+		const script = document.getElementById("sdk-script");
 
-    if (script) {
-      script.remove();
-      destroyFrame();
-    }
+		if (script) {
+			script.remove();
+			destroyFrame();
+		}
 
-    if (!fromPackage) {
-      loadScript(sdkScriptUrl, "sdk-script");
-    }
+		if (!fromPackage) {
+			loadScript(sdkScriptUrl, "sdk-script");
+		}
 
-    return () => {
-      destroyFrame();
-      setTimeout(() => script?.remove(), 10);
-    };
-  }, [source, version]);
+		return () => {
+			destroyFrame();
+			setTimeout(() => script?.remove(), 10);
+		};
+	}, [source, version]);
 
-  useEffect(() => {
-    initFrame();
+	useEffect(() => {
+		initFrame();
 
-    return () => {
-      destroyFrame();
-    };
-  });
+		return () => {
+			destroyFrame();
+		};
+	});
 
-  useEffect(() => {
-    const scroll = document.getElementsByClassName("section-scroll")[0];
-    if (scroll) {
-      scroll.scrollTop = 0;
-    }
-  }, []);
+	useEffect(() => {
+		const scroll = document.getElementsByClassName("section-scroll")[0];
+		if (scroll) {
+			scroll.scrollTop = 0;
+		}
+	}, []);
 
-  const onChangeFolderId = async (rooms) => {
-    const publicRoom = rooms[0];
+	const onChangeFolderId = async (rooms) => {
+		const publicRoom = rooms[0];
 
-    const newConfig = {
-      id: publicRoom.id,
-      requestToken: null,
-      rootPath: "/rooms/shared/",
-    };
+		const newConfig = {
+			id: publicRoom.id,
+			requestToken: null,
+			rootPath: "/rooms/shared/",
+		};
 
-    let links = await fetchExternalLinks(publicRoom.id);
+		let links = await fetchExternalLinks(publicRoom.id);
 
-    if (links.length === 0) {
-      const primaryLink = await getPrimaryLink(publicRoom.id);
-      links = [primaryLink];
-    }
+		if (links.length === 0) {
+			const primaryLink = await getPrimaryLink(publicRoom.id);
+			links = [primaryLink];
+		}
 
-    if (links.length > 1) {
-      const linksOptions = links.map((link) => {
-        const { id, title, requestToken } = link.sharedTo;
-        const linkSettings = [];
+		if (links.length > 1) {
+			const linksOptions = links.map((link) => {
+				const { id, title, requestToken } = link.sharedTo;
+				const linkSettings = [];
 
-        if ("password" in link.sharedTo) {
-          linkSettings.push("password");
-        }
-        if ("expirationDate" in link.sharedTo) {
-          linkSettings.push("expirationDate");
-        }
-        if (link.sharedTo.denyDownload) {
-          linkSettings.push("denyDownload");
-        }
+				if ("password" in link.sharedTo) {
+					linkSettings.push("password");
+				}
+				if ("expirationDate" in link.sharedTo) {
+					linkSettings.push("expirationDate");
+				}
+				if (link.sharedTo.denyDownload) {
+					linkSettings.push("denyDownload");
+				}
 
-        return {
-          key: id,
-          label: title,
-          requestToken,
-          settings: linkSettings,
-        };
-      });
+				return {
+					key: id,
+					label: title,
+					requestToken,
+					settings: linkSettings,
+				};
+			});
 
-      setSelectedLink(linksOptions[0]);
-      setSharedLinks(linksOptions);
-    }
+			setSelectedLink(linksOptions[0]);
+			setSharedLinks(linksOptions);
+		}
 
-    newConfig.requestToken = links[0]?.sharedTo?.requestToken;
-    newConfig.rootPath = "/rooms/share";
-    newConfig.mode = version === sdkVersion[210] ? "public-room" : "manager";
+		newConfig.requestToken = links[0]?.sharedTo?.requestToken;
+		newConfig.rootPath = "/rooms/share";
+		newConfig.mode = version === sdkVersion[210] ? "public-room" : "manager";
 
-    setConfig((oldConfig) => {
-      return { ...oldConfig, ...newConfig, init: true };
-    });
-  };
+		setConfig((oldConfig) => {
+			return { ...oldConfig, ...newConfig, init: true };
+		});
+	};
 
-  const onChangeSharedLink = (link) => {
-    setSelectedLink(link);
-    setConfig((oldConfig) => {
-      return { ...oldConfig, requestToken: link.requestToken };
-    });
-  };
+	const onChangeSharedLink = (link) => {
+		setSelectedLink(link);
+		setConfig((oldConfig) => {
+			return { ...oldConfig, requestToken: link.requestToken };
+		});
+	};
 
-  const onChangeShowTitle = () => {
-    setConfig((oldConfig) => {
-      return { ...oldConfig, showTitle: !config.showTitle };
-    });
-  };
+	const onChangeShowTitle = () => {
+		setConfig((oldConfig) => {
+			return { ...oldConfig, showTitle: !config.showTitle };
+		});
+	};
 
-  const onChangeShowFilter = () => {
-    setConfig((oldConfig) => {
-      return { ...oldConfig, showFilter: !config.showFilter };
-    });
-  };
+	const onChangeShowFilter = () => {
+		setConfig((oldConfig) => {
+			return { ...oldConfig, showFilter: !config.showFilter };
+		});
+	};
 
-  const navigateRoom = (id) => {
-    const filter = FilesFilter.getDefault();
-    filter.folder = id;
-    navigate(`/rooms/shared/${id}/filter?${filter.toUrlParams()}`);
-  };
+	const navigateRoom = (id) => {
+		const filter = FilesFilter.getDefault();
+		filter.folder = id;
+		navigate(`/rooms/shared/${id}/filter?${filter.toUrlParams()}`);
+	};
 
-  const redirectToSelectedRoom = () => navigateRoom(config.id);
+	const redirectToSelectedRoom = () => navigateRoom(config.id);
 
-  const preview = (
-    <Frame
-      width={
-        config.id !== undefined && config.width.includes("px")
-          ? config.width
-          : undefined
-      }
-      height={
-        config.id !== undefined && config.height.includes("px")
-          ? config.height
-          : undefined
-      }
-      targetId={config.frameId}
-    >
-      {config.id !== undefined ? (
-        <div id={config.frameId} />
-      ) : (
-        <EmptyIframeContainer
-          text={t("RoomPreview")}
-          width="100%"
-          height="100%"
-        />
-      )}
-    </Frame>
-  );
+	const preview = (
+		<Frame
+			width={
+				config.id !== undefined && config.width.includes("px")
+					? config.width
+					: undefined
+			}
+			height={
+				config.id !== undefined && config.height.includes("px")
+					? config.height
+					: undefined
+			}
+			targetId={config.frameId}
+		>
+			{config.id !== undefined ? (
+				<div id={config.frameId} />
+			) : (
+				<EmptyIframeContainer
+					text={t("RoomPreview")}
+					width="100%"
+					height="100%"
+				/>
+			)}
+		</Frame>
+	);
 
-  return (
-    <PresetWrapper
-      description={t("JavascriptSdk:PublicRoomPresetInfo")}
-      header={t("CreateSamplePublicRoom")}
-    >
-      <Container>
-        <PreviewBlock
-          loadCurrentFrame={initFrame}
-          preview={preview}
-          theme={theme}
-          frameId={config.frameId}
-          scriptUrl={sdkScriptUrl}
-          config={config}
-          isDisabled={config?.id === undefined}
-        />
-        <Controls>
-          <VersionSelector
-            t={t}
-            onSetSource={onSetSource}
-            onSetVersion={onSetVersion}
-          />
-          <ControlsSection>
-            <CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
-            <ControlsGroup>
-              <LabelGroup>
-                <Label className="label" text={t("Common:Room")} />
-                <HelpButton
-                  offsetRight={0}
-                  size={12}
-                  tooltipContent={
-                    <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
-                  }
-                  dataTestId="room_selector_help_button"
-                />
-              </LabelGroup>
-              <FilesSelectorInputWrapper>
-                <RoomsSelectorInput
-                  roomType={RoomsType.PublicRoom}
-                  withSearch
-                  withCancelButton
-                  onSubmit={onChangeFolderId}
-                  withHeader
-                  headerProps={{ headerLabel: t("Common:SelectAction") }}
-                  dataTestId="room_selector_input"
-                />
-              </FilesSelectorInputWrapper>
-            </ControlsGroup>
-            {sharedLinks ? (
-              <ControlsGroup>
-                <LabelGroup>
-                  <Label
-                    className="label"
-                    text={t("SharingPanel:ExternalLink")}
-                  />
-                  <HelpButton
-                    offsetRight={0}
-                    size={12}
-                    tooltipContent={
-                      <Text fontSize="12px">{t("Common:PublicRoomInfo")}</Text>
-                    }
-                  />
-                </LabelGroup>
-                <ComboBox
-                  scaled
-                  onSelect={onChangeSharedLink}
-                  options={sharedLinks}
-                  selectedOption={selectedLink}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-                {selectedLink ? (
-                  <SharedLinkHint
-                    t={t}
-                    linkSettings={selectedLink.settings}
-                    redirectToSelectedRoom={redirectToSelectedRoom}
-                    currentColorScheme={currentColorScheme}
-                  />
-                ) : null}
-              </ControlsGroup>
-            ) : null}
-          </ControlsSection>
+	return (
+		<PresetWrapper
+			description={t("JavascriptSdk:PublicRoomPresetInfo")}
+			header={t("CreateSamplePublicRoom")}
+		>
+			<Container>
+				<PreviewBlock
+					loadCurrentFrame={initFrame}
+					preview={preview}
+					theme={theme}
+					frameId={config.frameId}
+					scriptUrl={sdkScriptUrl}
+					config={config}
+					isDisabled={config?.id === undefined}
+				/>
+				<Controls>
+					<VersionSelector
+						t={t}
+						onSetSource={onSetSource}
+						onSetVersion={onSetVersion}
+					/>
+					<ControlsSection>
+						<CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
+						<ControlsGroup>
+							<LabelGroup>
+								<Label className="label" text={t("Common:Room")} />
+								<HelpButton
+									offsetRight={0}
+									size={12}
+									tooltipContent={
+										<Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
+									}
+									dataTestId="room_selector_help_button"
+								/>
+							</LabelGroup>
+							<FilesSelectorInputWrapper>
+								<RoomsSelectorInput
+									roomType={RoomsType.PublicRoom}
+									withSearch
+									withCancelButton
+									onSubmit={onChangeFolderId}
+									withHeader
+									headerProps={{ headerLabel: t("Common:SelectAction") }}
+									dataTestId="room_selector_input"
+								/>
+							</FilesSelectorInputWrapper>
+						</ControlsGroup>
+						{sharedLinks ? (
+							<ControlsGroup>
+								<LabelGroup>
+									<Label
+										className="label"
+										text={t("SharingPanel:ExternalLink")}
+									/>
+									<HelpButton
+										offsetRight={0}
+										size={12}
+										tooltipContent={
+											<Text fontSize="12px">{t("Common:PublicRoomInfo")}</Text>
+										}
+									/>
+								</LabelGroup>
+								<ComboBox
+									scaled
+									onSelect={onChangeSharedLink}
+									options={sharedLinks}
+									selectedOption={selectedLink}
+									displaySelectedOption
+									directionY="bottom"
+								/>
+								{selectedLink ? (
+									<SharedLinkHint
+										t={t}
+										linkSettings={selectedLink.settings}
+										redirectToSelectedRoom={redirectToSelectedRoom}
+										currentColorScheme={currentColorScheme}
+									/>
+								) : null}
+							</ControlsGroup>
+						) : null}
+					</ControlsSection>
 
-          <ControlsSection>
-            <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-            <WidthSetter
-              t={t}
-              setConfig={setConfig}
-              dataDimensions={dimensionsModel}
-              defaultDimension={defaultDimension}
-              defaultWidth={defaultSize.width}
-            />
-            <HeightSetter
-              t={t}
-              setConfig={setConfig}
-              dataDimensions={dimensionsModel}
-              defaultDimension={defaultDimension}
-              defaultHeight={defaultSize.height}
-            />
-            <FrameIdSetter
-              t={t}
-              defaultFrameId={config.frameId}
-              setConfig={setConfig}
-            />
-          </ControlsSection>
+					<ControlsSection>
+						<CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
+						<WidthSetter
+							t={t}
+							setConfig={setConfig}
+							dataDimensions={dimensionsModel}
+							defaultDimension={defaultDimension}
+							defaultWidth={defaultSize.width}
+						/>
+						<HeightSetter
+							t={t}
+							setConfig={setConfig}
+							dataDimensions={dimensionsModel}
+							defaultDimension={defaultDimension}
+							defaultHeight={defaultSize.height}
+						/>
+						<FrameIdSetter
+							t={t}
+							defaultFrameId={config.frameId}
+							setConfig={setConfig}
+						/>
+					</ControlsSection>
 
-          <ControlsSection>
-            <CategorySubHeader>{t("InterfaceElements")}</CategorySubHeader>
+					<ControlsSection>
+						<CategorySubHeader>{t("InterfaceElements")}</CategorySubHeader>
 
-            <CheckboxGroup>
-              <LabelGroup>
-                <Checkbox
-                  className="checkbox"
-                  label={t("Common:Title")}
-                  onChange={onChangeShowTitle}
-                  isChecked={config.showTitle}
-                  dataTestId="title_checkbox"
-                />
-                <HelpButton
-                  place="right"
-                  offsetRight={4}
-                  size={12}
-                  dataTestId="title_help_button"
-                  tooltipContent={
-                    <TooltipContent
-                      title={t("Common:Title")}
-                      description={t("ManagerTitleDescription")}
-                      img={theme.isBase ? TitleUrl : TitleDarkUrl}
-                    />
-                  }
-                />
-              </LabelGroup>
-              <LabelGroup>
-                <Checkbox
-                  className="checkbox"
-                  label={t("SearchFilterAndSort")}
-                  onChange={onChangeShowFilter}
-                  isChecked={config.showFilter}
-                  dataTestId="filter_checkbox"
-                />
-                <HelpButton
-                  place="right"
-                  offsetRight={4}
-                  size={12}
-                  dataTestId="filter_help_button"
-                  tooltipContent={
-                    <TooltipContent
-                      title={t("SearchBlock")}
-                      description={t("ManagerSearchBlockDescription")}
-                      img={theme.isBase ? SearchUrl : SearchDarkUrl}
-                    />
-                  }
-                />
-              </LabelGroup>
-            </CheckboxGroup>
-          </ControlsSection>
+						<CheckboxGroup>
+							<LabelGroup>
+								<Checkbox
+									className="checkbox"
+									label={t("Common:Title")}
+									onChange={onChangeShowTitle}
+									isChecked={config.showTitle}
+									dataTestId="title_checkbox"
+								/>
+								<HelpButton
+									place="right"
+									offsetRight={4}
+									size={12}
+									dataTestId="title_help_button"
+									tooltipContent={
+										<TooltipContent
+											title={t("Common:Title")}
+											description={t("ManagerTitleDescription")}
+											img={theme.isBase ? TitleUrl : TitleDarkUrl}
+										/>
+									}
+								/>
+							</LabelGroup>
+							<LabelGroup>
+								<Checkbox
+									className="checkbox"
+									label={t("SearchFilterAndSort")}
+									onChange={onChangeShowFilter}
+									isChecked={config.showFilter}
+									dataTestId="filter_checkbox"
+								/>
+								<HelpButton
+									place="right"
+									offsetRight={4}
+									size={12}
+									dataTestId="filter_help_button"
+									tooltipContent={
+										<TooltipContent
+											title={t("SearchBlock")}
+											description={t("ManagerSearchBlockDescription")}
+											img={theme.isBase ? SearchUrl : SearchDarkUrl}
+										/>
+									}
+								/>
+							</LabelGroup>
+						</CheckboxGroup>
+					</ControlsSection>
 
-          <Integration className="integration-examples" />
-        </Controls>
-      </Container>
+					<Integration className="integration-examples" />
+				</Controls>
+			</Container>
 
-      <Integration className="integration-examples integration-examples-bottom" />
-    </PresetWrapper>
-  );
+			<Integration className="integration-examples integration-examples-bottom" />
+		</PresetWrapper>
+	);
 };
 
 export const Component = inject(({ settingsStore, publicRoomStore }) => {
-  const { theme, currentColorScheme } = settingsStore;
-  const { fetchExternalLinks } = publicRoomStore;
+	const { theme, currentColorScheme } = settingsStore;
+	const { fetchExternalLinks } = publicRoomStore;
 
-  return {
-    theme,
+	return {
+		theme,
 
-    fetchExternalLinks,
-    currentColorScheme,
-  };
+		fetchExternalLinks,
+		currentColorScheme,
+	};
 })(
-  withTranslation([
-    "JavascriptSdk",
-    "Files",
-    "EmbeddingPanel",
-    "Common",
-    "Files",
-    "Translations",
-    "SharingPanel",
-  ])(observer(SimpleRoom)),
+	withTranslation([
+		"JavascriptSdk",
+		"Files",
+		"EmbeddingPanel",
+		"Common",
+		"Files",
+		"Translations",
+		"SharingPanel",
+	])(observer(SimpleRoom)),
 );

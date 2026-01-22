@@ -43,7 +43,7 @@ import {
 	InputType,
 	InputSize,
 } from "@docspace/ui-kit/components/text-input";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { validatePortalName } from "@docspace/shared/utils/common";
 
 import type { TDomainValidator } from "@docspace/shared/api/settings/types";

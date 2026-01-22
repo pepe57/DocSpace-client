@@ -32,7 +32,7 @@ import { Link } from "@docspace/ui-kit/components/link";
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { Label } from "@docspace/ui-kit/components/label";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { toastr } from "@docspace/shared/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";

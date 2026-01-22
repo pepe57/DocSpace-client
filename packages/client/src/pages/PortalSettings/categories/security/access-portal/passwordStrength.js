@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Slider } from "@docspace/shared/components/slider";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobileDevice, size } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
