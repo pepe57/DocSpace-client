@@ -39,7 +39,7 @@ import { ProgressBar } from "@docspace/shared/components/progress-bar";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-import { InputSize } from "@docspace/shared/components/text-input";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { InjectedSelectFileStepProps, SelectFileStepProps } from "../types";
 import { TMigrationStatusResult } from "@docspace/shared/api/settings/types";
 
@@ -61,7 +61,7 @@ const Wrapper = styled.div`
       svg {
         path {
           fill: ${(props) =>
-            props.theme.client.settings.migration.fileInputIconColor};
+						props.theme.client.settings.migration.fileInputIconColor};
         }
       }
     }
@@ -103,7 +103,7 @@ const FileUploadContainer = styled.div`
       bottom: 0px;
       padding: 16px;
       background: ${(props) =>
-        props.theme.client.settings.migration.workspaceBackground};
+				props.theme.client.settings.migration.workspaceBackground};
       gap: 0;
     }
   }
@@ -136,474 +136,474 @@ const ErrorBlock = styled.div`
 const FAIL_TRIES = 2;
 
 const SelectFileStep = (props: SelectFileStepProps) => {
-  const {
-    t,
-    isMultipleUpload,
-    migratorName,
-    acceptedExtensions,
-    incrementStep,
-    setWorkspace,
-    cancelUploadDialogVisible,
-    setCancelUploadDialogVisible,
-    initMigrations,
-    getMigrationStatus,
-    setUsers,
-    cancelMigration,
-    fileLoadingStatus,
-    setLoadingStatus,
-    files,
-    setFiles,
-    migratingWorkspace,
-    setMigratingWorkspace,
-    uploadFiles,
-    defaultUsersQuota = 0,
-    defaultRoomsQuota = 0,
-    tenantCustomQuota = 0,
-    isDefaultUsersQuotaSet,
-    isDefaultRoomsQuotaSet,
-    isTenantCustomQuotaSet,
-    warningQuotaDialogVisible,
-    setWarningQuotaDialogVisible,
-  } = props as InjectedSelectFileStepProps;
+	const {
+		t,
+		isMultipleUpload,
+		migratorName,
+		acceptedExtensions,
+		incrementStep,
+		setWorkspace,
+		cancelUploadDialogVisible,
+		setCancelUploadDialogVisible,
+		initMigrations,
+		getMigrationStatus,
+		setUsers,
+		cancelMigration,
+		fileLoadingStatus,
+		setLoadingStatus,
+		files,
+		setFiles,
+		migratingWorkspace,
+		setMigratingWorkspace,
+		uploadFiles,
+		defaultUsersQuota = 0,
+		defaultRoomsQuota = 0,
+		tenantCustomQuota = 0,
+		isDefaultUsersQuotaSet,
+		isDefaultRoomsQuotaSet,
+		isTenantCustomQuotaSet,
+		warningQuotaDialogVisible,
+		setWarningQuotaDialogVisible,
+	} = props as InjectedSelectFileStepProps;
 
-  const [isSaveDisabled, setIsSaveDisabled] = useState(
-    migratorName === migratingWorkspace,
-  );
-  const [progress, setProgress] = useState(0);
-  const [isInfiniteProgress, setIsInfiniteProgress] = useState(true);
-  const [isNetworkError, setIsNetworkError] = useState(false);
-  const [isFileError, setIsFileError] = useState(false);
-  const [isBackupEmpty, setIsBackupEmpty] = useState(false);
-  const [error, setError] = useState<string>("");
-  const isAbort = useRef(false);
+	const [isSaveDisabled, setIsSaveDisabled] = useState(
+		migratorName === migratingWorkspace,
+	);
+	const [progress, setProgress] = useState(0);
+	const [isInfiniteProgress, setIsInfiniteProgress] = useState(true);
+	const [isNetworkError, setIsNetworkError] = useState(false);
+	const [isFileError, setIsFileError] = useState(false);
+	const [isBackupEmpty, setIsBackupEmpty] = useState(false);
+	const [error, setError] = useState<string>("");
+	const isAbort = useRef(false);
 
-  const [uploadFile, setFile] = useState<File | File[]>();
-  const [startChunk, setChunk] = useState(0);
-  const [chunkSize, setChunkSize] = useState(0);
+	const [uploadFile, setFile] = useState<File | File[]>();
+	const [startChunk, setChunk] = useState(0);
+	const [chunkSize, setChunkSize] = useState(0);
 
-  const [failTries, setFailTries] = useState(FAIL_TRIES);
-  const uploadInterval = useRef<number>(undefined);
-  const navigate = useNavigate();
+	const [failTries, setFailTries] = useState(FAIL_TRIES);
+	const uploadInterval = useRef<number>(undefined);
+	const navigate = useNavigate();
 
-  useEffect(() => {
-    const isQuotaWarningVisible =
-      isDefaultUsersQuotaSet ||
-      isDefaultRoomsQuotaSet ||
-      isTenantCustomQuotaSet;
-    setWarningQuotaDialogVisible(isQuotaWarningVisible);
-  }, [isDefaultUsersQuotaSet, isDefaultRoomsQuotaSet, isTenantCustomQuotaSet]);
+	useEffect(() => {
+		const isQuotaWarningVisible =
+			isDefaultUsersQuotaSet ||
+			isDefaultRoomsQuotaSet ||
+			isTenantCustomQuotaSet;
+		setWarningQuotaDialogVisible(isQuotaWarningVisible);
+	}, [isDefaultUsersQuotaSet, isDefaultRoomsQuotaSet, isTenantCustomQuotaSet]);
 
-  const onClickRedirect = () => {
-    navigate("/portal-settings/management/disk-space");
-  };
+	const onClickRedirect = () => {
+		navigate("/portal-settings/management/disk-space");
+	};
 
-  const handleError = useCallback(
-    (message?: string, result?: TMigrationStatusResult) => {
-      if (result) {
-        if (message && result.failedArchives.length === 0) {
-          setError(message);
-        }
+	const handleError = useCallback(
+		(message?: string, result?: TMigrationStatusResult) => {
+			if (result) {
+				if (message && result.failedArchives.length === 0) {
+					setError(message);
+				}
 
-        if (result.failedArchives.length > 0) {
-          setIsFileError(true);
-        }
-      }
+				if (result.failedArchives.length > 0) {
+					setIsFileError(true);
+				}
+			}
 
-      toastr.error(message || t("Common:SomethingWentWrong"));
-      setLoadingStatus("none");
-      clearInterval(uploadInterval.current);
-    },
-    [t, setLoadingStatus],
-  );
+			toastr.error(message || t("Common:SomethingWentWrong"));
+			setLoadingStatus("none");
+			clearInterval(uploadInterval.current);
+		},
+		[t, setLoadingStatus],
+	);
 
-  const poolStatus = useCallback(async () => {
-    try {
-      const res = await getMigrationStatus();
+	const poolStatus = useCallback(async () => {
+		try {
+			const res = await getMigrationStatus();
 
-      if (!res && failTries) {
-        setFailTries((prevTries) => prevTries - 1);
-        return;
-      }
+			if (!res && failTries) {
+				setFailTries((prevTries) => prevTries - 1);
+				return;
+			}
 
-      if (!res) {
-        handleError();
-        return;
-      }
+			if (!res) {
+				handleError();
+				return;
+			}
 
-      if (res.error) {
-        handleError(res.error, res.parseResult);
-        return;
-      }
+			if (res.error) {
+				handleError(res.error, res.parseResult);
+				return;
+			}
 
-      if (res.isCompleted || res.progress === 100) {
-        clearInterval(uploadInterval.current);
+			if (res.isCompleted || res.progress === 100) {
+				clearInterval(uploadInterval.current);
 
-        const totalUsers =
-          res.parseResult.users.length +
-          res.parseResult.existUsers.length +
-          res.parseResult.withoutEmailUsers.length;
+				const totalUsers =
+					res.parseResult.users.length +
+					res.parseResult.existUsers.length +
+					res.parseResult.withoutEmailUsers.length;
 
-        if (totalUsers > 0) {
-          setIsBackupEmpty(false);
-          setLoadingStatus("done");
-          setUsers(res.parseResult);
-          setIsSaveDisabled(false);
-        } else {
-          setLoadingStatus("none");
-          setIsBackupEmpty(true);
-        }
+				if (totalUsers > 0) {
+					setIsBackupEmpty(false);
+					setLoadingStatus("done");
+					setUsers(res.parseResult);
+					setIsSaveDisabled(false);
+				} else {
+					setLoadingStatus("none");
+					setIsBackupEmpty(true);
+				}
 
-        setIsInfiniteProgress(false);
-      }
+				setIsInfiniteProgress(false);
+			}
 
-      setProgress(res.progress);
+			setProgress(res.progress);
 
-      if (isInfiniteProgress && res.progress > 10) {
-        setIsInfiniteProgress(false);
-      }
-    } catch (error) {
-      handleError(error as string);
-      setIsNetworkError(true);
-    }
-  }, [
-    failTries,
-    getMigrationStatus,
-    isInfiniteProgress,
-    setLoadingStatus,
-    setUsers,
-    handleError,
-  ]);
+			if (isInfiniteProgress && res.progress > 10) {
+				setIsInfiniteProgress(false);
+			}
+		} catch (error) {
+			handleError(error as string);
+			setIsNetworkError(true);
+		}
+	}, [
+		failTries,
+		getMigrationStatus,
+		isInfiniteProgress,
+		setLoadingStatus,
+		setUsers,
+		handleError,
+	]);
 
-  const onUploadFile = async (file: File | File[]) => {
-    try {
-      const filesData = Array.isArray(file) ? file : [file];
-      setFiles(filesData.map((item) => item.name));
+	const onUploadFile = async (file: File | File[]) => {
+		try {
+			const filesData = Array.isArray(file) ? file : [file];
+			setFiles(filesData.map((item) => item.name));
 
-      await uploadFiles(
-        filesData,
-        setProgress,
-        isAbort,
-        setChunk,
-        startChunk,
-        setChunkSize,
-        chunkSize,
-      );
+			await uploadFiles(
+				filesData,
+				setProgress,
+				isAbort,
+				setChunk,
+				startChunk,
+				setChunkSize,
+				chunkSize,
+			);
 
-      if (isAbort.current) return;
+			if (isAbort.current) return;
 
-      await initMigrations(migratorName);
-      setLoadingStatus("proceed");
-    } catch (error) {
-      handleError(error as string);
-      setIsNetworkError(true);
-    } finally {
-      isAbort.current = false;
-    }
-  };
+			await initMigrations(migratorName);
+			setLoadingStatus("proceed");
+		} catch (error) {
+			handleError(error as string);
+			setIsNetworkError(true);
+		} finally {
+			isAbort.current = false;
+		}
+	};
 
-  const onSelectFile = (file: File | File[]) => {
-    if (!isMultipleUpload && file instanceof Array) {
-      toastr.error(t("Common:SomethingWentWrong"));
-      return;
-    }
+	const onSelectFile = (file: File | File[]) => {
+		if (!isMultipleUpload && file instanceof Array) {
+			toastr.error(t("Common:SomethingWentWrong"));
+			return;
+		}
 
-    setProgress(0);
-    setIsFileError(false);
-    setError("");
-    setIsBackupEmpty(false);
-    setIsSaveDisabled(true);
-    setLoadingStatus("upload");
-    setFailTries(FAIL_TRIES);
-    setIsInfiniteProgress(true);
-    setMigratingWorkspace(migratorName);
-    setFile(file);
-    setChunkSize(0);
-    setChunk(0);
-    isAbort.current = false;
+		setProgress(0);
+		setIsFileError(false);
+		setError("");
+		setIsBackupEmpty(false);
+		setIsSaveDisabled(true);
+		setLoadingStatus("upload");
+		setFailTries(FAIL_TRIES);
+		setIsInfiniteProgress(true);
+		setMigratingWorkspace(migratorName);
+		setFile(file);
+		setChunkSize(0);
+		setChunk(0);
+		isAbort.current = false;
 
-    onUploadFile(file);
-  };
+		onUploadFile(file);
+	};
 
-  const onUploadToServer = () => {
-    if (!(uploadFile instanceof File) && !(uploadFile instanceof Array)) return;
+	const onUploadToServer = () => {
+		if (!(uploadFile instanceof File) && !(uploadFile instanceof Array)) return;
 
-    const size =
-      uploadFile instanceof Array
-        ? Math.ceil(
-            uploadFile.reduce((acc, curr) => acc + curr.size, 0) / chunkSize,
-          )
-        : Math.ceil(uploadFile.size / chunkSize);
+		const size =
+			uploadFile instanceof Array
+				? Math.ceil(
+						uploadFile.reduce((acc, curr) => acc + curr.size, 0) / chunkSize,
+					)
+				: Math.ceil(uploadFile.size / chunkSize);
 
-    if (size > startChunk) {
-      setProgress(0);
-      setIsNetworkError(false);
-      setIsFileError(false);
-      setIsSaveDisabled(true);
-      setLoadingStatus("upload");
-      setFailTries(FAIL_TRIES);
-      setIsInfiniteProgress(true);
-      setMigratingWorkspace(migratorName);
-      onUploadFile(uploadFile);
-    } else {
-      setLoadingStatus("proceed");
-    }
-  };
+		if (size > startChunk) {
+			setProgress(0);
+			setIsNetworkError(false);
+			setIsFileError(false);
+			setIsSaveDisabled(true);
+			setLoadingStatus("upload");
+			setFailTries(FAIL_TRIES);
+			setIsInfiniteProgress(true);
+			setMigratingWorkspace(migratorName);
+			onUploadFile(uploadFile);
+		} else {
+			setLoadingStatus("proceed");
+		}
+	};
 
-  const onDownloadArchives = async () => {
-    try {
-      const res = await getMigrationStatus();
+	const onDownloadArchives = async () => {
+		try {
+			const res = await getMigrationStatus();
 
-      if (!res) {
-        throw new Error();
-      }
+			if (!res) {
+				throw new Error();
+			}
 
-      const blob = new Blob(res.parseResult.failedArchives, {
-        type: "text/csv;charset=utf-8",
-      });
-      const a = document.createElement("a");
-      const url = window.URL.createObjectURL(blob);
-      a.href = url;
-      a.download = "unsupported_files";
-      a.click();
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      toastr.error(error || t("Common:SomethingWentWrong"));
-    }
-  };
+			const blob = new Blob(res.parseResult.failedArchives, {
+				type: "text/csv;charset=utf-8",
+			});
+			const a = document.createElement("a");
+			const url = window.URL.createObjectURL(blob);
+			a.href = url;
+			a.download = "unsupported_files";
+			a.click();
+			window.URL.revokeObjectURL(url);
+		} catch (error) {
+			toastr.error(error || t("Common:SomethingWentWrong"));
+		}
+	};
 
-  const onCancel = () => {
-    setCancelUploadDialogVisible(true);
-  };
+	const onCancel = () => {
+		setCancelUploadDialogVisible(true);
+	};
 
-  const handleCancelMigration = () => {
-    isAbort.current = true;
-    setProgress(0);
-    setLoadingStatus("none");
-    clearInterval(uploadInterval.current);
-    setMigratingWorkspace("");
-    cancelMigration();
-  };
+	const handleCancelMigration = () => {
+		isAbort.current = true;
+		setProgress(0);
+		setLoadingStatus("none");
+		clearInterval(uploadInterval.current);
+		setMigratingWorkspace("");
+		cancelMigration();
+	};
 
-  const hideCancelDialog = () => setCancelUploadDialogVisible(false);
-  const returnToProviders = () => setWorkspace("");
+	const hideCancelDialog = () => setCancelUploadDialogVisible(false);
+	const returnToProviders = () => setWorkspace("");
 
-  useEffect(() => {
-    if (fileLoadingStatus === "proceed") {
-      uploadInterval.current = window.setInterval(() => poolStatus(), 1000);
-    } else if (fileLoadingStatus === "done") {
-      setIsSaveDisabled(false);
-    }
+	useEffect(() => {
+		if (fileLoadingStatus === "proceed") {
+			uploadInterval.current = window.setInterval(() => poolStatus(), 1000);
+		} else if (fileLoadingStatus === "done") {
+			setIsSaveDisabled(false);
+		}
 
-    return () => clearInterval(uploadInterval.current);
-  }, [fileLoadingStatus, poolStatus]);
+		return () => clearInterval(uploadInterval.current);
+	}, [fileLoadingStatus, poolStatus]);
 
-  return (
-    <Wrapper>
-      <FileUploadContainer>
-        <Text className="choose-backup-file">
-          {t("Settings:ChooseBackupFile")}
-        </Text>
-        <FileInput
-          scale
-          onInput={onSelectFile}
-          className="upload-backup-input"
-          placeholder={
-            (migratingWorkspace === migratorName && files && files.join(",")) ||
-            t("Settings:BackupFile")
-          }
-          isDisabled={
-            fileLoadingStatus === "upload" || fileLoadingStatus === "proceed"
-          }
-          accept={acceptedExtensions}
-          size={InputSize.base}
-          isMultiple={migratorName === "GoogleWorkspace"}
-          data-test-id="upload_backup_file_input"
-        />
-      </FileUploadContainer>
-      {fileLoadingStatus === "upload" || fileLoadingStatus === "proceed" ? (
-        <FileUploadContainer>
-          <ProgressBar
-            percent={progress}
-            isInfiniteProgress={isInfiniteProgress}
-            className="select-file-progress-bar"
-            label={t("Settings:BackupFileUploading")}
-          />
-          <div className="cancelUploadButton">
-            <Button
-              size={isTablet() ? ButtonSize.medium : ButtonSize.small}
-              className="cancel-btn"
-              label={t("Common:CancelButton")}
-              onClick={onCancel}
-              scale={isMobile()}
-              data-test-id="cancel_upload_backup_button"
-            />
-          </div>
-        </FileUploadContainer>
-      ) : (
-        <ErrorBlock>
-          {isFileError ? (
-            <div>
-              <ProgressBar
-                percent={100}
-                className="complete-progress-bar"
-                label={t("Common:LoadingIsComplete")}
-              />
-              <Text className="error-text">
-                {t("Settings:UnsupportedFilesDescription")}
-              </Text>
-              <Link
-                type={LinkType.action}
-                isHovered
-                fontWeight={600}
-                onClick={onDownloadArchives}
-                dataTestId="check_unsupported_files_link"
-              >
-                {t("Settings:CheckUnsupportedFiles")}
-              </Link>
-            </div>
-          ) : null}
+	return (
+		<Wrapper>
+			<FileUploadContainer>
+				<Text className="choose-backup-file">
+					{t("Settings:ChooseBackupFile")}
+				</Text>
+				<FileInput
+					scale
+					onInput={onSelectFile}
+					className="upload-backup-input"
+					placeholder={
+						(migratingWorkspace === migratorName && files && files.join(",")) ||
+						t("Settings:BackupFile")
+					}
+					isDisabled={
+						fileLoadingStatus === "upload" || fileLoadingStatus === "proceed"
+					}
+					accept={acceptedExtensions}
+					size={InputSize.base}
+					isMultiple={migratorName === "GoogleWorkspace"}
+					data-test-id="upload_backup_file_input"
+				/>
+			</FileUploadContainer>
+			{fileLoadingStatus === "upload" || fileLoadingStatus === "proceed" ? (
+				<FileUploadContainer>
+					<ProgressBar
+						percent={progress}
+						isInfiniteProgress={isInfiniteProgress}
+						className="select-file-progress-bar"
+						label={t("Settings:BackupFileUploading")}
+					/>
+					<div className="cancelUploadButton">
+						<Button
+							size={isTablet() ? ButtonSize.medium : ButtonSize.small}
+							className="cancel-btn"
+							label={t("Common:CancelButton")}
+							onClick={onCancel}
+							scale={isMobile()}
+							data-test-id="cancel_upload_backup_button"
+						/>
+					</div>
+				</FileUploadContainer>
+			) : (
+				<ErrorBlock>
+					{isFileError ? (
+						<div>
+							<ProgressBar
+								percent={100}
+								className="complete-progress-bar"
+								label={t("Common:LoadingIsComplete")}
+							/>
+							<Text className="error-text">
+								{t("Settings:UnsupportedFilesDescription")}
+							</Text>
+							<Link
+								type={LinkType.action}
+								isHovered
+								fontWeight={600}
+								onClick={onDownloadArchives}
+								dataTestId="check_unsupported_files_link"
+							>
+								{t("Settings:CheckUnsupportedFiles")}
+							</Link>
+						</div>
+					) : null}
 
-          {error ? (
-            <div>
-              <ProgressBar
-                percent={100}
-                className="complete-progress-bar"
-                label={t("Common:LoadingIsComplete")}
-              />
-              <Text className="error-text">{error}</Text>
-            </div>
-          ) : null}
+					{error ? (
+						<div>
+							<ProgressBar
+								percent={100}
+								className="complete-progress-bar"
+								label={t("Common:LoadingIsComplete")}
+							/>
+							<Text className="error-text">{error}</Text>
+						</div>
+					) : null}
 
-          {isBackupEmpty ? (
-            <div>
-              <ProgressBar
-                percent={100}
-                className="complete-progress-bar"
-                label={t("Common:LoadingIsComplete")}
-              />
-              <Text className="error-text">
-                {t("Settings:NoUsersInBackup")}
-              </Text>
-            </div>
-          ) : null}
+					{isBackupEmpty ? (
+						<div>
+							<ProgressBar
+								percent={100}
+								className="complete-progress-bar"
+								label={t("Common:LoadingIsComplete")}
+							/>
+							<Text className="error-text">
+								{t("Settings:NoUsersInBackup")}
+							</Text>
+						</div>
+					) : null}
 
-          {isNetworkError ? (
-            <SaveCancelButtons
-              className="save-cancel-buttons"
-              onSaveClick={onUploadToServer}
-              onCancelClick={returnToProviders}
-              saveButtonLabel={t("Settings:UploadToServer")}
-              cancelButtonLabel={t("Common:Back")}
-              displaySettings
-              showReminder
-              saveButtonDataTestId="upload_to_server_button"
-              cancelButtonDataTestId="back_to_providers_button"
-            />
-          ) : (
-            <SaveCancelButtons
-              className="save-cancel-buttons"
-              onSaveClick={incrementStep}
-              onCancelClick={returnToProviders}
-              saveButtonLabel={t("Settings:NextStep")}
-              cancelButtonLabel={t("Common:Back")}
-              displaySettings
-              saveButtonDisabled={
-                migratingWorkspace !== migratorName || isSaveDisabled
-              }
-              showReminder
-              saveButtonDataTestId="next_step_button"
-              cancelButtonDataTestId="back_to_providers_button"
-            />
-          )}
-        </ErrorBlock>
-      )}
+					{isNetworkError ? (
+						<SaveCancelButtons
+							className="save-cancel-buttons"
+							onSaveClick={onUploadToServer}
+							onCancelClick={returnToProviders}
+							saveButtonLabel={t("Settings:UploadToServer")}
+							cancelButtonLabel={t("Common:Back")}
+							displaySettings
+							showReminder
+							saveButtonDataTestId="upload_to_server_button"
+							cancelButtonDataTestId="back_to_providers_button"
+						/>
+					) : (
+						<SaveCancelButtons
+							className="save-cancel-buttons"
+							onSaveClick={incrementStep}
+							onCancelClick={returnToProviders}
+							saveButtonLabel={t("Settings:NextStep")}
+							cancelButtonLabel={t("Common:Back")}
+							displaySettings
+							saveButtonDisabled={
+								migratingWorkspace !== migratorName || isSaveDisabled
+							}
+							showReminder
+							saveButtonDataTestId="next_step_button"
+							cancelButtonDataTestId="back_to_providers_button"
+						/>
+					)}
+				</ErrorBlock>
+			)}
 
-      {cancelUploadDialogVisible ? (
-        <CancelUploadDialog
-          visible={cancelUploadDialogVisible}
-          onClose={hideCancelDialog}
-          cancelMigration={handleCancelMigration}
-          loading={false}
-          isFifthStep={false}
-          isSixthStep={false}
-        />
-      ) : null}
+			{cancelUploadDialogVisible ? (
+				<CancelUploadDialog
+					visible={cancelUploadDialogVisible}
+					onClose={hideCancelDialog}
+					cancelMigration={handleCancelMigration}
+					loading={false}
+					isFifthStep={false}
+					isSixthStep={false}
+				/>
+			) : null}
 
-      {warningQuotaDialogVisible ? (
-        <WarningQuotaDialog
-          t={t}
-          visible={warningQuotaDialogVisible}
-          onCloseDialog={() => setWarningQuotaDialogVisible(false)}
-          onClickRedirect={onClickRedirect}
-          defaultRoomsQuota={defaultRoomsQuota}
-          defaultUsersQuota={defaultUsersQuota}
-          tenantCustomQuota={tenantCustomQuota}
-          isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
-          isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
-          isTenantCustomQuotaSet={isTenantCustomQuotaSet}
-        />
-      ) : null}
-    </Wrapper>
-  );
+			{warningQuotaDialogVisible ? (
+				<WarningQuotaDialog
+					t={t}
+					visible={warningQuotaDialogVisible}
+					onCloseDialog={() => setWarningQuotaDialogVisible(false)}
+					onClickRedirect={onClickRedirect}
+					defaultRoomsQuota={defaultRoomsQuota}
+					defaultUsersQuota={defaultUsersQuota}
+					tenantCustomQuota={tenantCustomQuota}
+					isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
+					isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
+					isTenantCustomQuotaSet={isTenantCustomQuotaSet}
+				/>
+			) : null}
+		</Wrapper>
+	);
 };
 
 export default inject<TStore>(
-  ({ dialogsStore, importAccountsStore, currentQuotaStore }) => {
-    const {
-      initMigrations,
-      getMigrationStatus,
-      setUsers,
-      fileLoadingStatus,
-      setLoadingStatus,
-      cancelMigration,
-      setWorkspace,
-      incrementStep,
-      files,
-      setFiles,
-      migratingWorkspace,
-      setMigratingWorkspace,
-      uploadFiles,
-    } = importAccountsStore;
-    const {
-      cancelUploadDialogVisible,
-      setCancelUploadDialogVisible,
-      warningQuotaDialogVisible,
-      setWarningQuotaDialogVisible,
-    } = dialogsStore;
+	({ dialogsStore, importAccountsStore, currentQuotaStore }) => {
+		const {
+			initMigrations,
+			getMigrationStatus,
+			setUsers,
+			fileLoadingStatus,
+			setLoadingStatus,
+			cancelMigration,
+			setWorkspace,
+			incrementStep,
+			files,
+			setFiles,
+			migratingWorkspace,
+			setMigratingWorkspace,
+			uploadFiles,
+		} = importAccountsStore;
+		const {
+			cancelUploadDialogVisible,
+			setCancelUploadDialogVisible,
+			warningQuotaDialogVisible,
+			setWarningQuotaDialogVisible,
+		} = dialogsStore;
 
-    const {
-      isDefaultRoomsQuotaSet,
-      isDefaultUsersQuotaSet,
-      isTenantCustomQuotaSet,
-      defaultUsersQuota,
-      defaultRoomsQuota,
-      tenantCustomQuota,
-    } = currentQuotaStore;
+		const {
+			isDefaultRoomsQuotaSet,
+			isDefaultUsersQuotaSet,
+			isTenantCustomQuotaSet,
+			defaultUsersQuota,
+			defaultRoomsQuota,
+			tenantCustomQuota,
+		} = currentQuotaStore;
 
-    return {
-      initMigrations,
-      getMigrationStatus,
-      setUsers,
-      fileLoadingStatus,
-      setLoadingStatus,
-      cancelMigration,
-      cancelUploadDialogVisible,
-      setCancelUploadDialogVisible,
-      setWorkspace,
-      incrementStep,
-      files,
-      setFiles,
-      migratingWorkspace,
-      setMigratingWorkspace,
-      uploadFiles,
-      defaultUsersQuota,
-      defaultRoomsQuota,
-      tenantCustomQuota,
-      isDefaultRoomsQuotaSet,
-      isDefaultUsersQuotaSet,
-      isTenantCustomQuotaSet,
-      warningQuotaDialogVisible,
-      setWarningQuotaDialogVisible,
-    };
-  },
+		return {
+			initMigrations,
+			getMigrationStatus,
+			setUsers,
+			fileLoadingStatus,
+			setLoadingStatus,
+			cancelMigration,
+			cancelUploadDialogVisible,
+			setCancelUploadDialogVisible,
+			setWorkspace,
+			incrementStep,
+			files,
+			setFiles,
+			migratingWorkspace,
+			setMigratingWorkspace,
+			uploadFiles,
+			defaultUsersQuota,
+			defaultRoomsQuota,
+			tenantCustomQuota,
+			isDefaultRoomsQuotaSet,
+			isDefaultUsersQuotaSet,
+			isTenantCustomQuotaSet,
+			warningQuotaDialogVisible,
+			setWarningQuotaDialogVisible,
+		};
+	},
 )(observer(SelectFileStep));

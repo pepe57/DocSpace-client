@@ -30,228 +30,228 @@ import { InputBlock } from "@docspace/shared/components/input-block";
 import { Text } from "@docspace/ui-kit/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 import { TTranslation } from "@docspace/shared/types";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 
 import {
-  StyledChipsContainer,
-  StyledInputAddBlock,
-  StyledInputGroup,
-  StyledInputRow,
+	StyledChipsContainer,
+	StyledInputAddBlock,
+	StyledInputGroup,
+	StyledInputRow,
 } from "../ClientForm.styled";
 import { isValidUrl } from "../ClientForm.utils";
 
 import InputGroup from "./InputGroup";
 
 interface MultiInputGroupProps {
-  t: TTranslation;
-  label: string;
+	t: TTranslation;
+	label: string;
 
-  name: string;
-  placeholder: string;
-  currentValue: string[];
-  hasError?: boolean;
-  onAdd: (name: keyof IClientReqDTO, value: string, remove?: boolean) => void;
+	name: string;
+	placeholder: string;
+	currentValue: string[];
+	hasError?: boolean;
+	onAdd: (name: keyof IClientReqDTO, value: string, remove?: boolean) => void;
 
-  helpButtonText?: string;
+	helpButtonText?: string;
 
-  isDisabled?: boolean;
+	isDisabled?: boolean;
 
-  dataTestId?: string;
+	dataTestId?: string;
 }
 
 const MultiInputGroup = ({
-  t,
-  label,
-  name,
-  placeholder,
-  currentValue,
-  onAdd,
-  hasError,
-  helpButtonText,
-  isDisabled,
-  dataTestId,
+	t,
+	label,
+	name,
+	placeholder,
+	currentValue,
+	onAdd,
+	hasError,
+	helpButtonText,
+	isDisabled,
+	dataTestId,
 }: MultiInputGroupProps) => {
-  const [value, setValue] = React.useState("");
+	const [value, setValue] = React.useState("");
 
-  const [isFocus, setIsFocus] = React.useState(false);
-  const [isAddVisible, setIsAddVisible] = React.useState(false);
-  const [isError, setIsError] = React.useState(false);
+	const [isFocus, setIsFocus] = React.useState(false);
+	const [isAddVisible, setIsAddVisible] = React.useState(false);
+	const [isError, setIsError] = React.useState(false);
 
-  const addRef = React.useRef<null | HTMLDivElement>(null);
-  // const withoutSearch = name === "redirect_uris";
-  const withoutSearch = true;
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const v = e.target.value;
+	const addRef = React.useRef<null | HTMLDivElement>(null);
+	// const withoutSearch = name === "redirect_uris";
+	const withoutSearch = true;
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const v = e.target.value;
 
-    setValue(v);
+		setValue(v);
 
-    if (isValidUrl(v, withoutSearch)) {
-      setIsAddVisible(true);
-    } else {
-      setIsAddVisible(false);
-    }
-  };
+		if (isValidUrl(v, withoutSearch)) {
+			setIsAddVisible(true);
+		} else {
+			setIsAddVisible(false);
+		}
+	};
 
-  const onFocus = () => {
-    setIsFocus(true);
-    if (isValidUrl(value, withoutSearch)) setIsAddVisible(true);
-  };
+	const onFocus = () => {
+		setIsFocus(true);
+		if (isValidUrl(value, withoutSearch)) setIsAddVisible(true);
+	};
 
-  const onBlur = () => {
-    setIsFocus(false);
+	const onBlur = () => {
+		setIsFocus(false);
 
-    if (value) {
-      if (isValidUrl(value, withoutSearch)) {
-        setIsError(false);
-      } else {
-        setIsError(true);
-      }
-    } else {
-      setIsError(false);
-    }
-  };
+		if (value) {
+			if (isValidUrl(value, withoutSearch)) {
+				setIsError(false);
+			} else {
+				setIsError(true);
+			}
+		} else {
+			setIsError(false);
+		}
+	};
 
-  const onAddAction = React.useCallback(() => {
-    if (isDisabled || isError) return;
+	const onAddAction = React.useCallback(() => {
+		if (isDisabled || isError) return;
 
-    onAdd(name as keyof IClientReqDTO, value);
-    setIsAddVisible(false);
-    setIsError(false);
-    setValue("");
-  }, [isDisabled, isError, name, onAdd, value]);
+		onAdd(name as keyof IClientReqDTO, value);
+		setIsAddVisible(false);
+		setIsError(false);
+		setValue("");
+	}, [isDisabled, isError, name, onAdd, value]);
 
-  React.useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && isAddVisible) {
-        onAddAction();
-      }
-    };
+	React.useEffect(() => {
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key === "Enter" && isAddVisible) {
+				onAddAction();
+			}
+		};
 
-    if (isFocus) {
-      window.addEventListener("keydown", onKeyDown);
-    } else {
-      window.removeEventListener("keydown", onKeyDown);
-    }
+		if (isFocus) {
+			window.addEventListener("keydown", onKeyDown);
+		} else {
+			window.removeEventListener("keydown", onKeyDown);
+		}
 
-    return () => {
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [isAddVisible, isFocus, onAddAction]);
+		return () => {
+			window.removeEventListener("keydown", onKeyDown);
+		};
+	}, [isAddVisible, isFocus, onAddAction]);
 
-  React.useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      const target = e.target as Element;
+	React.useEffect(() => {
+		const onClick = (e: MouseEvent) => {
+			const target = e.target as Element;
 
-      if (target.closest(`.multi-input-group-${label}`) || isFocus) return;
+			if (target.closest(`.multi-input-group-${label}`) || isFocus) return;
 
-      setIsAddVisible(false);
-    };
+			setIsAddVisible(false);
+		};
 
-    if (isAddVisible) {
-      window.addEventListener("click", onClick);
-    }
+		if (isAddVisible) {
+			window.addEventListener("click", onClick);
+		}
 
-    return () => {
-      window.removeEventListener("click", onClick);
-    };
-  }, [isAddVisible, isFocus, label]);
+		return () => {
+			window.removeEventListener("click", onClick);
+		};
+	}, [isAddVisible, isFocus, label]);
 
-  React.useEffect(() => {
-    if (!addRef.current) return;
-    if (isAddVisible) {
-      addRef.current.style.display = "flex";
-    } else {
-      addRef.current.style.display = "none";
-    }
-  }, [isAddVisible]);
+	React.useEffect(() => {
+		if (!addRef.current) return;
+		if (isAddVisible) {
+			addRef.current.style.display = "flex";
+		} else {
+			addRef.current.style.display = "none";
+		}
+	}, [isAddVisible]);
 
-  return (
-    <StyledInputGroup className={`multi-input-group-${label}`}>
-      <InputGroup
-        label={label}
-        helpButtonText={helpButtonText}
-        name={name}
-        value={value}
-        placeholder={placeholder}
-        onChange={onChange}
-        error={
-          isError
-            ? `${t("ErrorWrongURL")}: ${window.location.origin}`
-            : t("ThisRequiredField")
-        }
-        isRequired
-        isError={isError || hasError}
-        dataTestId={dataTestId ? `${dataTestId}_input_group` : undefined}
-      >
-        <StyledInputRow>
-          <InputBlock
-            name={name}
-            value={value}
-            placeholder={placeholder}
-            onChange={onChange}
-            scale
-            tabIndex={0}
-            maxLength={255}
-            isDisabled={isDisabled}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            hasError={isError || hasError}
-            size={InputSize.base}
-            type={InputType.text}
-            noIcon
-            testId={`${dataTestId}_input`}
-          />
-          <StyledInputAddBlock ref={addRef} onClick={onAddAction}>
-            <Text fontSize="13px" fontWeight={600} lineHeight="20px" truncate>
-              {value}
-            </Text>
-            <div className="add-block">
-              <Text
-                dataTestId={dataTestId ? `${dataTestId}_add_button` : undefined}
-                fontSize="13px"
-                fontWeight={400}
-                lineHeight="20px"
-                truncate
-              >
-                {t("Common:AddButton")}
-              </Text>
-              <ArrowIcon />
-            </div>
-          </StyledInputAddBlock>
-          <SelectorAddButton
-            onClick={onAddAction}
-            isDisabled={isDisabled || isError}
-            testId={
-              dataTestId ? `${dataTestId}_selector_add_button` : undefined
-            }
-          />
-        </StyledInputRow>
-      </InputGroup>
+	return (
+		<StyledInputGroup className={`multi-input-group-${label}`}>
+			<InputGroup
+				label={label}
+				helpButtonText={helpButtonText}
+				name={name}
+				value={value}
+				placeholder={placeholder}
+				onChange={onChange}
+				error={
+					isError
+						? `${t("ErrorWrongURL")}: ${window.location.origin}`
+						: t("ThisRequiredField")
+				}
+				isRequired
+				isError={isError || hasError}
+				dataTestId={dataTestId ? `${dataTestId}_input_group` : undefined}
+			>
+				<StyledInputRow>
+					<InputBlock
+						name={name}
+						value={value}
+						placeholder={placeholder}
+						onChange={onChange}
+						scale
+						tabIndex={0}
+						maxLength={255}
+						isDisabled={isDisabled}
+						onFocus={onFocus}
+						onBlur={onBlur}
+						hasError={isError || hasError}
+						size={InputSize.base}
+						type={InputType.text}
+						noIcon
+						testId={`${dataTestId}_input`}
+					/>
+					<StyledInputAddBlock ref={addRef} onClick={onAddAction}>
+						<Text fontSize="13px" fontWeight={600} lineHeight="20px" truncate>
+							{value}
+						</Text>
+						<div className="add-block">
+							<Text
+								dataTestId={dataTestId ? `${dataTestId}_add_button` : undefined}
+								fontSize="13px"
+								fontWeight={400}
+								lineHeight="20px"
+								truncate
+							>
+								{t("Common:AddButton")}
+							</Text>
+							<ArrowIcon />
+						</div>
+					</StyledInputAddBlock>
+					<SelectorAddButton
+						onClick={onAddAction}
+						isDisabled={isDisabled || isError}
+						testId={
+							dataTestId ? `${dataTestId}_selector_add_button` : undefined
+						}
+					/>
+				</StyledInputRow>
+			</InputGroup>
 
-      <StyledChipsContainer>
-        {currentValue.map((v, i) => (
-          <SelectedItem
-            key={`${v}`}
-            propKey={v}
-            isInline
-            label={v}
-            isDisabled={isDisabled}
-            hideCross={isDisabled}
-            onClose={() => {
-              if (!isDisabled) onAdd(name as keyof IClientReqDTO, v, true);
-            }}
-            dataTestId={
-              dataTestId ? `${dataTestId}_selected_item_${i}` : undefined
-            }
-          />
-        ))}
-      </StyledChipsContainer>
-    </StyledInputGroup>
-  );
+			<StyledChipsContainer>
+				{currentValue.map((v, i) => (
+					<SelectedItem
+						key={`${v}`}
+						propKey={v}
+						isInline
+						label={v}
+						isDisabled={isDisabled}
+						hideCross={isDisabled}
+						onClose={() => {
+							if (!isDisabled) onAdd(name as keyof IClientReqDTO, v, true);
+						}}
+						dataTestId={
+							dataTestId ? `${dataTestId}_selected_item_${i}` : undefined
+						}
+					/>
+				))}
+			</StyledChipsContainer>
+		</StyledInputGroup>
+	);
 };
 
 export default MultiInputGroup;

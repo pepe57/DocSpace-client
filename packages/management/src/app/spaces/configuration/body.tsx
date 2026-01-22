@@ -32,16 +32,16 @@ import { DeviceType } from "@docspace/shared/enums";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
-  TextInput,
-  InputType,
-  InputSize,
-} from "@docspace/shared/components/text-input";
+	TextInput,
+	InputType,
+	InputSize,
+} from "@docspace/ui-kit/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { parseDomain, validatePortalName } from "@docspace/shared/utils/common";
 import {
-  setDomainName,
-  setPortalName,
-  checkDomain,
+	setDomainName,
+	setPortalName,
+	checkDomain,
 } from "@docspace/shared/api/management";
 import type { TDomainValidator } from "@docspace/shared/api/settings/types";
 
@@ -50,138 +50,138 @@ import useDeviceType from "@/hooks/useDeviceType";
 import styles from "./configuration.module.scss";
 
 type CheckDomainResponse = {
-  value: boolean;
+	value: boolean;
 };
 
 export const Body = ({
-  domainValidator,
+	domainValidator,
 }: {
-  domainValidator: TDomainValidator;
+	domainValidator: TDomainValidator;
 }) => {
-  const { t } = useTranslation(["Management", "Common"]);
-  const { currentDeviceType } = useDeviceType();
+	const { t } = useTranslation(["Management", "Common"]);
+	const { currentDeviceType } = useDeviceType();
 
-  const [domain, setDomain] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [portalNameError, setPortalNameError] = useState<string | null>("");
-  const [checkDomainError, setCheckDomainError] = useState<string>("");
-  const [domainNameError, setDomainNameError] = useState<string[] | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [domain, setDomain] = useState<string>("");
+	const [name, setName] = useState<string>("");
+	const [portalNameError, setPortalNameError] = useState<string | null>("");
+	const [checkDomainError, setCheckDomainError] = useState<string>("");
+	const [domainNameError, setDomainNameError] = useState<string[] | null>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const domainFieldLabel = (
-    <>
-      <Text fontSize="13px" fontWeight={600}>
-        {t("Common:Domain")}
-      </Text>
-      <Text className={styles.domainDescription}>(example.com)</Text>
-    </>
-  );
+	const domainFieldLabel = (
+		<>
+			<Text fontSize="13px" fontWeight={600}>
+				{t("Common:Domain")}
+			</Text>
+			<Text className={styles.domainDescription}>(example.com)</Text>
+		</>
+	);
 
-  const onChangeDomain = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (checkDomainError) setCheckDomainError("");
-    if (domainNameError) setDomainNameError(null);
-    setDomain(toLower(e.target.value));
-  };
+	const onChangeDomain = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (checkDomainError) setCheckDomainError("");
+		if (domainNameError) setDomainNameError(null);
+		setDomain(toLower(e.target.value));
+	};
 
-  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (checkDomainError) setCheckDomainError("");
-    if (portalNameError) setPortalNameError("");
-    setName(toLower(e.target.value));
-  };
+	const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (checkDomainError) setCheckDomainError("");
+		if (portalNameError) setPortalNameError("");
+		setName(toLower(e.target.value));
+	};
 
-  const onConnectClick = async () => {
-    if (window?.DocSpaceConfig?.management?.checkDomain) {
-      setIsLoading(true);
-      const checkDomainResult = (await checkDomain(`${name}.${domain}`).finally(
-        () => setIsLoading(false),
-      )) as CheckDomainResponse;
+	const onConnectClick = async () => {
+		if (window?.DocSpaceConfig?.management?.checkDomain) {
+			setIsLoading(true);
+			const checkDomainResult = (await checkDomain(`${name}.${domain}`).finally(
+				() => setIsLoading(false),
+			)) as CheckDomainResponse;
 
-      const isValidDomain = checkDomainResult.value;
+			const isValidDomain = checkDomainResult.value;
 
-      if (!isValidDomain) {
-        return setCheckDomainError(t("DomainNotFound"));
-      }
-    }
+			if (!isValidDomain) {
+				return setCheckDomainError(t("DomainNotFound"));
+			}
+		}
 
-    const isValidDomain = parseDomain(domain, setDomainNameError, t);
-    const isValidPortalName = validatePortalName(
-      name,
-      domainValidator,
-      setPortalNameError,
-      t,
-    );
+		const isValidDomain = parseDomain(domain, setDomainNameError, t);
+		const isValidPortalName = validatePortalName(
+			name,
+			domainValidator,
+			setPortalNameError,
+			t,
+		);
 
-    if (isValidDomain && isValidPortalName) {
-      try {
-        setIsLoading(true);
-        await setDomainName(domain);
-        try {
-          const result = (await setPortalName(name)) as string;
-          const url = new URL(result);
-          url.searchParams.append("referenceUrl", "/management");
-          window.location.replace(url);
-        } catch (err) {
-          console.error(err);
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    }
-  };
+		if (isValidDomain && isValidPortalName) {
+			try {
+				setIsLoading(true);
+				await setDomainName(domain);
+				try {
+					const result = (await setPortalName(name)) as string;
+					const url = new URL(result);
+					url.searchParams.append("referenceUrl", "/management");
+					window.location.replace(url);
+				} catch (err) {
+					console.error(err);
+				}
+			} finally {
+				setIsLoading(false);
+			}
+		}
+	};
 
-  const domainErrorMessage = (
-    domainNameError ? domainNameError[0] : ""
-  ) as string;
+	const domainErrorMessage = (
+		domainNameError ? domainNameError[0] : ""
+	) as string;
 
-  return (
-    <div className={styles.body}>
-      <FieldContainer
-        isVertical
-        labelText={domainFieldLabel}
-        labelVisible
-        hasError={!!(domainNameError || checkDomainError)}
-        errorMessage={domainErrorMessage}
-      >
-        <TextInput
-          type={InputType.text}
-          size={InputSize.base}
-          placeholder={t("EnterDomain")}
-          value={domain}
-          onChange={onChangeDomain}
-          tabIndex={1}
-          scale
-        />
-      </FieldContainer>
-      <FieldContainer
-        isVertical
-        labelText={t("PortalName", { productName: t("Common:ProductName") })}
-        labelVisible
-        hasError={!!(portalNameError || checkDomainError)}
-        errorMessage={portalNameError || checkDomainError}
-      >
-        <TextInput
-          type={InputType.text}
-          size={InputSize.base}
-          placeholder={t("EnterName")}
-          value={name}
-          onChange={onChangeName}
-          tabIndex={2}
-          scale
-        />
-      </FieldContainer>
-      <Button
-        size={
-          currentDeviceType === DeviceType.desktop
-            ? ButtonSize.small
-            : ButtonSize.normal
-        }
-        label={t("Common:Connect")}
-        onClick={onConnectClick}
-        primary
-        tabIndex={3}
-        isLoading={isLoading}
-        // scale={false}
-      />
-    </div>
-  );
+	return (
+		<div className={styles.body}>
+			<FieldContainer
+				isVertical
+				labelText={domainFieldLabel}
+				labelVisible
+				hasError={!!(domainNameError || checkDomainError)}
+				errorMessage={domainErrorMessage}
+			>
+				<TextInput
+					type={InputType.text}
+					size={InputSize.base}
+					placeholder={t("EnterDomain")}
+					value={domain}
+					onChange={onChangeDomain}
+					tabIndex={1}
+					scale
+				/>
+			</FieldContainer>
+			<FieldContainer
+				isVertical
+				labelText={t("PortalName", { productName: t("Common:ProductName") })}
+				labelVisible
+				hasError={!!(portalNameError || checkDomainError)}
+				errorMessage={portalNameError || checkDomainError}
+			>
+				<TextInput
+					type={InputType.text}
+					size={InputSize.base}
+					placeholder={t("EnterName")}
+					value={name}
+					onChange={onChangeName}
+					tabIndex={2}
+					scale
+				/>
+			</FieldContainer>
+			<Button
+				size={
+					currentDeviceType === DeviceType.desktop
+						? ButtonSize.small
+						: ButtonSize.normal
+				}
+				label={t("Common:Connect")}
+				onClick={onConnectClick}
+				primary
+				tabIndex={3}
+				isLoading={isLoading}
+				// scale={false}
+			/>
+		</div>
+	);
 };

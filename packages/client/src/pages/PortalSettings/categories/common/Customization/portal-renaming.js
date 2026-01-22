@@ -30,7 +30,7 @@ import { withTranslation, Trans } from "react-i18next";
 import { Badge } from "@docspace/shared/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";

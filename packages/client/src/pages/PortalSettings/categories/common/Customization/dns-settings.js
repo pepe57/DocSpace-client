@@ -28,7 +28,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useTheme } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Button } from "@docspace/shared/components/button";
 import { inject, observer } from "mobx-react";
 

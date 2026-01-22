@@ -40,10 +40,10 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
-  InputSize,
-  InputType,
-  TextInput,
-} from "@docspace/shared/components/text-input";
+	InputSize,
+	InputType,
+	TextInput,
+} from "@docspace/ui-kit/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -54,246 +54,246 @@ import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import {
-  TFA_ANDROID_APP_URL,
-  TFA_IOS_APP_URL,
-  TFA_WIN_APP_URL,
+	TFA_ANDROID_APP_URL,
+	TFA_IOS_APP_URL,
+	TFA_WIN_APP_URL,
 } from "@/utils/constants";
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { useSearchParams } from "next/navigation";
 
 type TfaActivationFormProps = {
-  secretKey: string;
-  qrCode: string;
+	secretKey: string;
+	qrCode: string;
 };
 
 const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
-  const { linkData } = useContext(ConfirmRouteContext);
-  const { t } = useTranslation(["Confirm", "Common"]);
+	const { linkData } = useContext(ConfirmRouteContext);
+	const { t } = useTranslation(["Confirm", "Common"]);
 
-  const searchParams = useSearchParams();
+	const searchParams = useSearchParams();
 
-  const [code, setCode] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+	const [code, setCode] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState("");
 
-  const { confirmHeader = null } = linkData;
+	const { confirmHeader = null } = linkData;
 
-  const linkUrlData = searchParams?.get("linkData");
+	const linkUrlData = searchParams?.get("linkData");
 
-  const proxyBaseUrl = useRef("");
-  useEffect(() => {
-    proxyBaseUrl.current = combineUrl(
-      window.ClientConfig?.proxy?.url,
-      "/profile",
-    );
-  }, []);
+	const proxyBaseUrl = useRef("");
+	useEffect(() => {
+		proxyBaseUrl.current = combineUrl(
+			window.ClientConfig?.proxy?.url,
+			"/profile",
+		);
+	}, []);
 
-  const onSubmit = async () => {
-    try {
-      setIsLoading(true);
+	const onSubmit = async () => {
+		try {
+			setIsLoading(true);
 
-      await validateTfaCode(code, confirmHeader);
+			await validateTfaCode(code, confirmHeader);
 
-      let confirmData = "";
-      try {
-        if (linkUrlData) confirmData = JSON.parse(atob(linkUrlData));
-      } catch (e) {
-        console.error("parse error", e);
-      }
+			let confirmData = "";
+			try {
+				if (linkUrlData) confirmData = JSON.parse(atob(linkUrlData));
+			} catch (e) {
+				console.error("parse error", e);
+			}
 
-      try {
-        if (confirmData) await checkConfirmLink(confirmData);
-      } catch (e) {
-        console.error(e);
-      }
+			try {
+				if (confirmData) await checkConfirmLink(confirmData);
+			} catch (e) {
+				console.error(e);
+			}
 
-      sessionStorage.setItem(OPEN_BACKUP_CODES_DIALOG, "true");
-      window.location.href = proxyBaseUrl.current;
-    } catch (e) {
-      const knownError = e as TError;
-      let errorMessage: string;
+			sessionStorage.setItem(OPEN_BACKUP_CODES_DIALOG, "true");
+			window.location.href = proxyBaseUrl.current;
+		} catch (e) {
+			const knownError = e as TError;
+			let errorMessage: string;
 
-      if (typeof knownError === "object") {
-        errorMessage =
-          knownError?.response?.data?.error?.message ||
-          knownError?.statusText ||
-          knownError?.message ||
-          "";
-      } else {
-        errorMessage = knownError;
-      }
+			if (typeof knownError === "object") {
+				errorMessage =
+					knownError?.response?.data?.error?.message ||
+					knownError?.statusText ||
+					knownError?.message ||
+					"";
+			} else {
+				errorMessage = knownError;
+			}
 
-      setError(errorMessage);
-      toastr.error(errorMessage);
-      setIsLoading(false);
-    }
-  };
+			setError(errorMessage);
+			toastr.error(errorMessage);
+			setIsLoading(false);
+		}
+	};
 
-  const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
-    setCode(event.target.value);
-    setError("");
-  };
+	const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+		setCode(event.target.value);
+		setError("");
+	};
 
-  const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (
-      event.code === ButtonKeys.enter ||
-      event.code === ButtonKeys.numpadEnter
-    )
-      onSubmit();
-  };
+	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (
+			event.code === ButtonKeys.enter ||
+			event.code === ButtonKeys.numpadEnter
+		)
+			onSubmit();
+	};
 
-  return (
-    <>
-      <div className="set-app-description">
-        <Text isBold fontSize="18px" className="set-app-title">
-          {t("TfaTitle")}
-        </Text>
-        <Text className="set-app-subtitle">
-          {t("TfaSubTitle", { productName: t("Common:ProductName") })}
-        </Text>
+	return (
+		<>
+			<div className="set-app-description">
+				<Text isBold fontSize="18px" className="set-app-title">
+					{t("TfaTitle")}
+				</Text>
+				<Text className="set-app-subtitle">
+					{t("TfaSubTitle", { productName: t("Common:ProductName") })}
+				</Text>
 
-        <div className="description">
-          <div className="description-item">
-            <div className="icon-container">
-              <IconButton
-                color="accent"
-                iconName={DownloadSvgUrl}
-                size={16}
-                isDisabled
-                isFill
-              />
-            </div>
-            <div className="description-text">
-              <Text fontWeight={600}>{t("GetSuitableApp")}</Text>
-              <Trans
-                t={t}
-                i18nKey="GetSuitableAppDescription"
-                ns="Confirm"
-                components={{
-                  1: (
-                    <Link
-                      key="android-link"
-                      color="accent"
-                      href={TFA_ANDROID_APP_URL}
-                      target={LinkTarget.blank}
-                      dataTestId="android_app_link"
-                    />
-                  ),
-                  4: (
-                    <Link
-                      key="ios-link"
-                      color="accent"
-                      href={TFA_IOS_APP_URL}
-                      target={LinkTarget.blank}
-                      dataTestId="ios_app_link"
-                    />
-                  ),
-                  8: (
-                    <Link
-                      key="windows-link"
-                      color="accent"
-                      href={TFA_WIN_APP_URL}
-                      target={LinkTarget.blank}
-                      dataTestId="win_app_link"
-                    />
-                  ),
-                }}
-              />
-            </div>
-          </div>
-          <div className="description-item">
-            <div className="icon-container">
-              <IconButton
-                color="accent"
-                iconName={ScanSvgUrl}
-                size={16}
-                isDisabled
-                isFill
-              />
-            </div>
-            <div className="description-text">
-              <Text fontWeight={600}>{t("ConnectApp")}</Text>
-              <Trans
-                t={t}
-                i18nKey="ConnectAppDescription"
-                ns="Confirm"
-                values={{
-                  secretKey,
-                }}
-                components={{
-                  1: <strong key="secret-key-strong" />,
-                }}
-              />
-            </div>
-          </div>
-          <div className="description-item">
-            <div className="icon-container">
-              <IconButton
-                color="accent"
-                iconName={CheckSvgUrl}
-                size={16}
-                isDisabled
-                isFill
-              />
-            </div>
-            <div className="description-text">
-              <Text fontWeight={600}>{t("VerifyConnection")}</Text>
-              <Text>{t("VerifyConnectionDescription")}</Text>
-            </div>
-          </div>
-        </div>
-      </div>
-      <FormWrapper id="tfa-activation-form">
-        <div className="app-code-wrapper">
-          <div className="qrcode-wrapper">
-            <Image src={qrCode} height={180} width={180} alt="QR-code" />
-          </div>
-          <div className="app-code-input">
-            <FieldContainer
-              labelVisible={false}
-              hasError={!!error}
-              errorMessage={error}
-              dataTestId="app_code_field"
-            >
-              <TextInput
-                id="code"
-                name="code"
-                type={InputType.text}
-                size={InputSize.large}
-                scale
-                isAutoFocussed
-                tabIndex={1}
-                placeholder={t("EnterCodePlaceholder")}
-                isDisabled={isLoading}
-                maxLength={6}
-                onChange={onChangeInput}
-                value={code}
-                hasError={!!error}
-                onKeyDown={onKeyPress}
-                testId="app_code_input"
-              />
-            </FieldContainer>
-          </div>
-          <div>
-            <Button
-              scale
-              primary
-              size={ButtonSize.medium}
-              tabIndex={3}
-              label={
-                isLoading ? t("Common:LoadingProcessing") : t("SetAppButton")
-              }
-              isDisabled={!code.length || isLoading}
-              isLoading={isLoading}
-              onClick={onSubmit}
-              testId="app_connect_button"
-            />
-          </div>
-        </div>
-      </FormWrapper>
-    </>
-  );
+				<div className="description">
+					<div className="description-item">
+						<div className="icon-container">
+							<IconButton
+								color="accent"
+								iconName={DownloadSvgUrl}
+								size={16}
+								isDisabled
+								isFill
+							/>
+						</div>
+						<div className="description-text">
+							<Text fontWeight={600}>{t("GetSuitableApp")}</Text>
+							<Trans
+								t={t}
+								i18nKey="GetSuitableAppDescription"
+								ns="Confirm"
+								components={{
+									1: (
+										<Link
+											key="android-link"
+											color="accent"
+											href={TFA_ANDROID_APP_URL}
+											target={LinkTarget.blank}
+											dataTestId="android_app_link"
+										/>
+									),
+									4: (
+										<Link
+											key="ios-link"
+											color="accent"
+											href={TFA_IOS_APP_URL}
+											target={LinkTarget.blank}
+											dataTestId="ios_app_link"
+										/>
+									),
+									8: (
+										<Link
+											key="windows-link"
+											color="accent"
+											href={TFA_WIN_APP_URL}
+											target={LinkTarget.blank}
+											dataTestId="win_app_link"
+										/>
+									),
+								}}
+							/>
+						</div>
+					</div>
+					<div className="description-item">
+						<div className="icon-container">
+							<IconButton
+								color="accent"
+								iconName={ScanSvgUrl}
+								size={16}
+								isDisabled
+								isFill
+							/>
+						</div>
+						<div className="description-text">
+							<Text fontWeight={600}>{t("ConnectApp")}</Text>
+							<Trans
+								t={t}
+								i18nKey="ConnectAppDescription"
+								ns="Confirm"
+								values={{
+									secretKey,
+								}}
+								components={{
+									1: <strong key="secret-key-strong" />,
+								}}
+							/>
+						</div>
+					</div>
+					<div className="description-item">
+						<div className="icon-container">
+							<IconButton
+								color="accent"
+								iconName={CheckSvgUrl}
+								size={16}
+								isDisabled
+								isFill
+							/>
+						</div>
+						<div className="description-text">
+							<Text fontWeight={600}>{t("VerifyConnection")}</Text>
+							<Text>{t("VerifyConnectionDescription")}</Text>
+						</div>
+					</div>
+				</div>
+			</div>
+			<FormWrapper id="tfa-activation-form">
+				<div className="app-code-wrapper">
+					<div className="qrcode-wrapper">
+						<Image src={qrCode} height={180} width={180} alt="QR-code" />
+					</div>
+					<div className="app-code-input">
+						<FieldContainer
+							labelVisible={false}
+							hasError={!!error}
+							errorMessage={error}
+							dataTestId="app_code_field"
+						>
+							<TextInput
+								id="code"
+								name="code"
+								type={InputType.text}
+								size={InputSize.large}
+								scale
+								isAutoFocussed
+								tabIndex={1}
+								placeholder={t("EnterCodePlaceholder")}
+								isDisabled={isLoading}
+								maxLength={6}
+								onChange={onChangeInput}
+								value={code}
+								hasError={!!error}
+								onKeyDown={onKeyPress}
+								testId="app_code_input"
+							/>
+						</FieldContainer>
+					</div>
+					<div>
+						<Button
+							scale
+							primary
+							size={ButtonSize.medium}
+							tabIndex={3}
+							label={
+								isLoading ? t("Common:LoadingProcessing") : t("SetAppButton")
+							}
+							isDisabled={!code.length || isLoading}
+							isLoading={isLoading}
+							onClick={onSubmit}
+							testId="app_connect_button"
+						/>
+					</div>
+				</div>
+			</FormWrapper>
+		</>
+	);
 };
 
 export default TfaActivationForm;

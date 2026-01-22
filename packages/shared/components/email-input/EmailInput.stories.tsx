@@ -27,142 +27,142 @@
 import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { EmailSettings } from "../../utils";
-import { InputSize } from "../text-input";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { EmailInput } from ".";
 import type { EmailInputProps, TValidate } from "./EmailInput.types";
 
 const meta = {
-  title: "Form Controls/EmailInput",
-  component: EmailInput,
-  parameters: {
-    docs: {
-      description: {
-        component: "Email input field with validation",
-      },
-    },
-  },
-  tags: ["autodocs"],
-  argTypes: {
-    size: {
-      control: "select",
-      options: Object.values(InputSize),
-    },
-    isDisabled: { control: "boolean" },
-    isReadOnly: { control: "boolean" },
-    hasError: { control: "boolean" },
-    scale: { control: "boolean" },
-  },
+	title: "Form Controls/EmailInput",
+	component: EmailInput,
+	parameters: {
+		docs: {
+			description: {
+				component: "Email input field with validation",
+			},
+		},
+	},
+	tags: ["autodocs"],
+	argTypes: {
+		size: {
+			control: "select",
+			options: Object.values(InputSize),
+		},
+		isDisabled: { control: "boolean" },
+		isReadOnly: { control: "boolean" },
+		hasError: { control: "boolean" },
+		scale: { control: "boolean" },
+	},
 } satisfies Meta<typeof EmailInput>;
 
 export default meta;
 type Story = StoryObj<typeof EmailInput>;
 
 const Template = ({
-  value: initialValue,
-  size,
-  isDisabled,
-  isReadOnly,
-  hasError,
-  scale,
-  placeholder,
+	value: initialValue,
+	size,
+	isDisabled,
+	isReadOnly,
+	hasError,
+	scale,
+	placeholder,
 }: EmailInputProps) => {
-  const [value, setValue] = useState(initialValue || "");
-  const [validationState, setValidationState] = useState<TValidate>();
+	const [value, setValue] = useState(initialValue || "");
+	const [validationState, setValidationState] = useState<TValidate>();
 
-  const settings = EmailSettings.parse({
-    allowDomainPunycode: false,
-    allowLocalPartPunycode: false,
-    allowDomainIp: false,
-    allowStrictLocalPart: true,
-    allowSpaces: false,
-    allowName: false,
-    allowLocalDomainName: false,
-  });
+	const settings = EmailSettings.parse({
+		allowDomainPunycode: false,
+		allowLocalPartPunycode: false,
+		allowDomainIp: false,
+		allowStrictLocalPart: true,
+		allowSpaces: false,
+		allowName: false,
+		allowLocalDomainName: false,
+	});
 
-  return (
-    <div style={{ width: "320px" }}>
-      <EmailInput
-        placeholder={placeholder || "Enter email address"}
-        value={value}
-        emailSettings={settings}
-        onChange={(e) => setValue(e.target.value)}
-        onValidateInput={(data) => setValidationState(data)}
-        size={size}
-        isDisabled={isDisabled}
-        isReadOnly={isReadOnly}
-        hasError={hasError}
-        scale={scale}
-      />
-      {validationState ? (
-        <div style={{ marginTop: "8px", fontSize: "12px" }}>
-          <div>Valid: {validationState.isValid ? "Yes" : "No"}</div>
-          {(validationState.errors ?? []).length > 0 ? (
-            <div>Errors: {validationState.errors?.join(", ")}</div>
-          ) : null}
-        </div>
-      ) : null}
-    </div>
-  );
+	return (
+		<div style={{ width: "320px" }}>
+			<EmailInput
+				placeholder={placeholder || "Enter email address"}
+				value={value}
+				emailSettings={settings}
+				onChange={(e) => setValue(e.target.value)}
+				onValidateInput={(data) => setValidationState(data)}
+				size={size}
+				isDisabled={isDisabled}
+				isReadOnly={isReadOnly}
+				hasError={hasError}
+				scale={scale}
+			/>
+			{validationState ? (
+				<div style={{ marginTop: "8px", fontSize: "12px" }}>
+					<div>Valid: {validationState.isValid ? "Yes" : "No"}</div>
+					{(validationState.errors ?? []).length > 0 ? (
+						<div>Errors: {validationState.errors?.join(", ")}</div>
+					) : null}
+				</div>
+			) : null}
+		</div>
+	);
 };
 
 export const Default: Story = {
-  render: Template,
-  args: {
-    placeholder: "Enter email address",
-    size: InputSize.base,
-    isDisabled: false,
-    isReadOnly: false,
-    hasError: false,
-    scale: false,
-    value: "",
-  },
+	render: Template,
+	args: {
+		placeholder: "Enter email address",
+		size: InputSize.base,
+		isDisabled: false,
+		isReadOnly: false,
+		hasError: false,
+		scale: false,
+		value: "",
+	},
 };
 
 export const WithInitialValue: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    value: "test@example.com",
-  },
+	render: Template,
+	args: {
+		...Default.args,
+		value: "test@example.com",
+	},
 };
 
 export const WithCustomValidation: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    scale: true,
-    placeholder: "Enter @custom-domain.com email",
-    customValidate: (value) => ({
-      value,
-      isValid: value.endsWith("@custom-domain.com"),
-      errors: value ? ["Must be @custom-domain.com email"] : [],
-    }),
-  },
+	render: Template,
+	args: {
+		...Default.args,
+		scale: true,
+		placeholder: "Enter @custom-domain.com email",
+		customValidate: (value) => ({
+			value,
+			isValid: value.endsWith("@custom-domain.com"),
+			errors: value ? ["Must be @custom-domain.com email"] : [],
+		}),
+	},
 };
 
 export const Disabled: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    isDisabled: true,
-    value: "disabled@example.com",
-  },
+	render: Template,
+	args: {
+		...Default.args,
+		isDisabled: true,
+		value: "disabled@example.com",
+	},
 };
 
 export const ReadOnly: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    isReadOnly: true,
-    value: "readonly@example.com",
-  },
+	render: Template,
+	args: {
+		...Default.args,
+		isReadOnly: true,
+		value: "readonly@example.com",
+	},
 };
 
 export const WithError: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    hasError: true,
-    value: "invalid-email",
-  },
+	render: Template,
+	args: {
+		...Default.args,
+		hasError: true,
+		value: "invalid-email",
+	},
 };

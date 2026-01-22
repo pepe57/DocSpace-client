@@ -29,7 +29,11 @@ import { useTranslation } from "react-i18next";
 import { classNames } from "../../../utils";
 
 import { Button, ButtonSize } from "../../button";
-import { TextInput, InputSize, InputType } from "../../text-input";
+import {
+	TextInput,
+	InputSize,
+	InputType,
+} from "@docspace/ui-kit/components/text-input";
 import { Checkbox } from "../../checkbox";
 import styles from "../Selector.module.scss";
 
@@ -38,158 +42,158 @@ import AccessSelector from "./AccessSelector";
 import { Text } from "@docspace/ui-kit/components/text";
 
 const Footer = React.memo(
-  ({
-    isMultiSelect,
-    submitButtonLabel,
-    selectedItemsCount,
-    withCancelButton,
-    cancelButtonLabel,
-    withAccessRights,
-    accessRights,
-    selectedAccessRight,
-    onSubmit,
-    disableSubmitButton,
-    onCancel,
-    onAccessRightsChange,
-    accessRightsMode,
+	({
+		isMultiSelect,
+		submitButtonLabel,
+		selectedItemsCount,
+		withCancelButton,
+		cancelButtonLabel,
+		withAccessRights,
+		accessRights,
+		selectedAccessRight,
+		onSubmit,
+		disableSubmitButton,
+		onCancel,
+		onAccessRightsChange,
+		accessRightsMode,
 
-    withFooterCheckbox,
-    withFooterInput,
-    footerInputHeader,
-    footerCheckboxLabel,
-    currentFooterInputValue,
-    setNewFooterInputValue,
-    isChecked,
-    setIsFooterCheckboxChecked,
-    submitButtonId,
-    cancelButtonId,
+		withFooterCheckbox,
+		withFooterInput,
+		footerInputHeader,
+		footerCheckboxLabel,
+		currentFooterInputValue,
+		setNewFooterInputValue,
+		isChecked,
+		setIsFooterCheckboxChecked,
+		submitButtonId,
+		cancelButtonId,
 
-    requestRunning,
-    withErrorFooter,
-  }: FooterProps) => {
-    const ref = useRef<HTMLDivElement>(null);
-    const { t } = useTranslation(["Common"]);
-    const label =
-      selectedItemsCount && isMultiSelect
-        ? `${submitButtonLabel} (${selectedItemsCount})`
-        : submitButtonLabel;
+		requestRunning,
+		withErrorFooter,
+	}: FooterProps) => {
+		const ref = useRef<HTMLDivElement>(null);
+		const { t } = useTranslation(["Common"]);
+		const label =
+			selectedItemsCount && isMultiSelect
+				? `${submitButtonLabel} (${selectedItemsCount})`
+				: submitButtonLabel;
 
-    const onChangeFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
-      setNewFooterInputValue?.(value);
-    };
+		const onChangeFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
+			const { value } = e.target;
+			setNewFooterInputValue?.(value);
+		};
 
-    const onChangeCheckbox = () => {
-      setIsFooterCheckboxChecked?.((value: boolean) => !value);
-    };
+		const onChangeCheckbox = () => {
+			setIsFooterCheckboxChecked?.((value: boolean) => !value);
+		};
 
-    return (
-      <div
-        ref={ref}
-        className={classNames(styles.footer, "selector-footer", {
-          [styles.withFooterCheckbox]: withFooterCheckbox && !withFooterInput,
-          [styles.withFooterInput]: !withFooterCheckbox && withFooterInput,
-          [styles.defaultHeight]: !withFooterCheckbox && !withFooterInput,
-          [styles.withErrorFooter]: withErrorFooter,
-        })}
-      >
-        {withFooterInput ? (
-          <div className={styles.newNameContainer}>
-            <Text
-              className={styles.newNameHeader}
-              lineHeight="20px"
-              fontWeight={600}
-              fontSize="13px"
-            >
-              {footerInputHeader}
-            </Text>
-            <div className={styles.newFileInputContainer}>
-              <TextInput
-                type={InputType.text}
-                size={InputSize.base}
-                className={styles.newFileInput}
-                value={currentFooterInputValue || ""}
-                scale
-                onChange={onChangeFileName}
-                testId="selector_footer_input"
-                hasError={withErrorFooter}
-              />
+		return (
+			<div
+				ref={ref}
+				className={classNames(styles.footer, "selector-footer", {
+					[styles.withFooterCheckbox]: withFooterCheckbox && !withFooterInput,
+					[styles.withFooterInput]: !withFooterCheckbox && withFooterInput,
+					[styles.defaultHeight]: !withFooterCheckbox && !withFooterInput,
+					[styles.withErrorFooter]: withErrorFooter,
+				})}
+			>
+				{withFooterInput ? (
+					<div className={styles.newNameContainer}>
+						<Text
+							className={styles.newNameHeader}
+							lineHeight="20px"
+							fontWeight={600}
+							fontSize="13px"
+						>
+							{footerInputHeader}
+						</Text>
+						<div className={styles.newFileInputContainer}>
+							<TextInput
+								type={InputType.text}
+								size={InputSize.base}
+								className={styles.newFileInput}
+								value={currentFooterInputValue || ""}
+								scale
+								onChange={onChangeFileName}
+								testId="selector_footer_input"
+								hasError={withErrorFooter}
+							/>
 
-              {withErrorFooter ? (
-                <Text
-                  className={styles.errorText}
-                  fontSize="12px"
-                  lineHeight="16px"
-                >
-                  {t("Common:ContainsSpecCharacter")}
-                </Text>
-              ) : null}
-            </div>
+							{withErrorFooter ? (
+								<Text
+									className={styles.errorText}
+									fontSize="12px"
+									lineHeight="16px"
+								>
+									{t("Common:ContainsSpecCharacter")}
+								</Text>
+							) : null}
+						</div>
 
-            {withFooterCheckbox ? (
-              <Checkbox
-                label={footerCheckboxLabel}
-                isChecked={isChecked}
-                onChange={onChangeCheckbox}
-              />
-            ) : null}
-          </div>
-        ) : null}
+						{withFooterCheckbox ? (
+							<Checkbox
+								label={footerCheckboxLabel}
+								isChecked={isChecked}
+								onChange={onChangeCheckbox}
+							/>
+						) : null}
+					</div>
+				) : null}
 
-        {withFooterCheckbox && !withFooterInput ? (
-          <Checkbox
-            label={footerCheckboxLabel}
-            isChecked={isChecked}
-            onChange={onChangeCheckbox}
-            className="selector_footer-checkbox"
-            dataTestId="selector_footer_checkbox"
-          />
-        ) : null}
+				{withFooterCheckbox && !withFooterInput ? (
+					<Checkbox
+						label={footerCheckboxLabel}
+						isChecked={isChecked}
+						onChange={onChangeCheckbox}
+						className="selector_footer-checkbox"
+						dataTestId="selector_footer_checkbox"
+					/>
+				) : null}
 
-        <div className={styles.buttonContainer}>
-          <Button
-            id={submitButtonId}
-            className={styles.button}
-            label={label}
-            primary
-            scale
-            size={ButtonSize.normal}
-            isLoading={requestRunning}
-            isDisabled={
-              !withFooterInput
-                ? disableSubmitButton
-                : disableSubmitButton || !currentFooterInputValue.trim()
-            }
-            onClick={onSubmit}
-            testId="selector_submit_button"
-          />
+				<div className={styles.buttonContainer}>
+					<Button
+						id={submitButtonId}
+						className={styles.button}
+						label={label}
+						primary
+						scale
+						size={ButtonSize.normal}
+						isLoading={requestRunning}
+						isDisabled={
+							!withFooterInput
+								? disableSubmitButton
+								: disableSubmitButton || !currentFooterInputValue.trim()
+						}
+						onClick={onSubmit}
+						testId="selector_submit_button"
+					/>
 
-          {withAccessRights ? (
-            <AccessSelector
-              accessRights={accessRights}
-              selectedAccessRight={selectedAccessRight}
-              onAccessRightsChange={onAccessRightsChange}
-              footerRef={ref}
-              accessRightsMode={accessRightsMode}
-            />
-          ) : null}
+					{withAccessRights ? (
+						<AccessSelector
+							accessRights={accessRights}
+							selectedAccessRight={selectedAccessRight}
+							onAccessRightsChange={onAccessRightsChange}
+							footerRef={ref}
+							accessRightsMode={accessRightsMode}
+						/>
+					) : null}
 
-          {withCancelButton ? (
-            <Button
-              className={styles.button}
-              id={cancelButtonId}
-              label={cancelButtonLabel || ""}
-              scale
-              size={ButtonSize.normal}
-              onClick={onCancel}
-              isDisabled={requestRunning}
-              testId="selector_cancel_button"
-            />
-          ) : null}
-        </div>
-      </div>
-    );
-  },
+					{withCancelButton ? (
+						<Button
+							className={styles.button}
+							id={cancelButtonId}
+							label={cancelButtonLabel || ""}
+							scale
+							size={ButtonSize.normal}
+							onClick={onCancel}
+							isDisabled={requestRunning}
+							testId="selector_cancel_button"
+						/>
+					) : null}
+				</div>
+			</div>
+		);
+	},
 );
 
 Footer.displayName = "Footer";

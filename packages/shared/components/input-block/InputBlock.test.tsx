@@ -29,174 +29,174 @@ import { describe, it, expect, afterEach, vi } from "vitest";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 
 import SearchReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
-import { InputSize, InputType } from "../text-input";
+import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 import { InputBlock } from ".";
 
 describe("<InputBlock />", () => {
-  const defaultProps = {
-    value: "",
-    iconName: SearchReactSvgUrl,
-    onIconClick: vi.fn(),
-    onChange: vi.fn(),
-    size: InputSize.base,
-    type: InputType.text,
-  };
+	const defaultProps = {
+		value: "",
+		iconName: SearchReactSvgUrl,
+		onIconClick: vi.fn(),
+		onChange: vi.fn(),
+		size: InputSize.base,
+		type: InputType.text,
+	};
 
-  afterEach(() => {
-    cleanup();
-    vi.clearAllMocks();
-  });
+	afterEach(() => {
+		cleanup();
+		vi.clearAllMocks();
+	});
 
-  it("handles input interactions correctly", () => {
-    const onChange = vi.fn();
-    const onBlur = vi.fn();
-    const onFocus = vi.fn();
+	it("handles input interactions correctly", () => {
+		const onChange = vi.fn();
+		const onBlur = vi.fn();
+		const onFocus = vi.fn();
 
-    const { container } = render(
-      <InputBlock
-        {...defaultProps}
-        onChange={onChange}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        data-testid="test-input"
-      />,
-    );
+		const { container } = render(
+			<InputBlock
+				{...defaultProps}
+				onChange={onChange}
+				onBlur={onBlur}
+				onFocus={onFocus}
+				data-testid="test-input"
+			/>,
+		);
 
-    const input = container.querySelector('input[type="text"]');
-    expect(input).toBeInTheDocument();
+		const input = container.querySelector('input[type="text"]');
+		expect(input).toBeInTheDocument();
 
-    if (input) {
-      fireEvent.change(input, { target: { value: "test" } });
-      expect(onChange).toHaveBeenCalled();
+		if (input) {
+			fireEvent.change(input, { target: { value: "test" } });
+			expect(onChange).toHaveBeenCalled();
 
-      fireEvent.focus(input);
-      expect(onFocus).toHaveBeenCalled();
+			fireEvent.focus(input);
+			expect(onFocus).toHaveBeenCalled();
 
-      fireEvent.blur(input);
-      expect(onBlur).toHaveBeenCalled();
-    }
-  });
+			fireEvent.blur(input);
+			expect(onBlur).toHaveBeenCalled();
+		}
+	});
 
-  it("handles icon interactions correctly", () => {
-    const onIconClick = vi.fn();
+	it("handles icon interactions correctly", () => {
+		const onIconClick = vi.fn();
 
-    render(
-      <InputBlock
-        {...defaultProps}
-        onIconClick={onIconClick}
-        iconColor="blue"
-        hoverColor="red"
-      />,
-    );
+		render(
+			<InputBlock
+				{...defaultProps}
+				onIconClick={onIconClick}
+				iconColor="blue"
+				hoverColor="red"
+			/>,
+		);
 
-    const iconButton = screen.getByTestId("icon-button-svg").closest("div");
-    expect(iconButton).toBeInTheDocument();
+		const iconButton = screen.getByTestId("icon-button-svg").closest("div");
+		expect(iconButton).toBeInTheDocument();
 
-    if (iconButton) fireEvent.click(iconButton);
-    expect(onIconClick).toHaveBeenCalled();
-  });
+		if (iconButton) fireEvent.click(iconButton);
+		expect(onIconClick).toHaveBeenCalled();
+	});
 
-  it("handles disabled state correctly", () => {
-    const { container } = render(<InputBlock {...defaultProps} isDisabled />);
+	it("handles disabled state correctly", () => {
+		const { container } = render(<InputBlock {...defaultProps} isDisabled />);
 
-    const input = container.querySelector('input[type="text"]');
-    expect(input).toBeDisabled();
-    expect(screen.queryByTestId("icon-button-svg")).not.toBeInTheDocument();
-  });
+		const input = container.querySelector('input[type="text"]');
+		expect(input).toBeDisabled();
+		expect(screen.queryByTestId("icon-button-svg")).not.toBeInTheDocument();
+	});
 
-  it("handles error and warning states correctly", () => {
-    render(<InputBlock {...defaultProps} hasError hasWarning />);
+	it("handles error and warning states correctly", () => {
+		render(<InputBlock {...defaultProps} hasError hasWarning />);
 
-    const inputBlock = screen.getByTestId("text-input");
-    expect(inputBlock).toHaveAttribute("data-error", "true");
-    expect(inputBlock).toHaveAttribute("data-warning", "true");
-  });
+		const inputBlock = screen.getByTestId("text-input");
+		expect(inputBlock).toHaveAttribute("data-error", "true");
+		expect(inputBlock).toHaveAttribute("data-warning", "true");
+	});
 
-  it("handles different sizes correctly", () => {
-    const sizes = [InputSize.base, InputSize.middle, InputSize.large];
+	it("handles different sizes correctly", () => {
+		const sizes = [InputSize.base, InputSize.middle, InputSize.large];
 
-    sizes.forEach((size) => {
-      const { container, unmount } = render(
-        <InputBlock {...defaultProps} size={size} />,
-      );
+		sizes.forEach((size) => {
+			const { container, unmount } = render(
+				<InputBlock {...defaultProps} size={size} />,
+			);
 
-      const input = container.querySelector('input[type="text"]');
-      expect(input).toBeInTheDocument();
-      unmount();
-    });
-  });
+			const input = container.querySelector('input[type="text"]');
+			expect(input).toBeInTheDocument();
+			unmount();
+		});
+	});
 
-  it("handles password type correctly", () => {
-    const { container } = render(
-      <InputBlock {...defaultProps} type={InputType.password} />,
-    );
+	it("handles password type correctly", () => {
+		const { container } = render(
+			<InputBlock {...defaultProps} type={InputType.password} />,
+		);
 
-    const input = container.querySelector('input[type="password"]');
-    expect(input).toBeInTheDocument();
-  });
+		const input = container.querySelector('input[type="password"]');
+		expect(input).toBeInTheDocument();
+	});
 
-  it("handles read-only state correctly", () => {
-    const { container } = render(<InputBlock {...defaultProps} isReadOnly />);
+	it("handles read-only state correctly", () => {
+		const { container } = render(<InputBlock {...defaultProps} isReadOnly />);
 
-    const input = container.querySelector('input[type="text"]');
-    expect(input).toHaveAttribute("readonly");
-  });
+		const input = container.querySelector('input[type="text"]');
+		expect(input).toHaveAttribute("readonly");
+	});
 
-  it("handles auto-focus correctly", () => {
-    const { container } = render(
-      <InputBlock {...defaultProps} isAutoFocussed />,
-    );
+	it("handles auto-focus correctly", () => {
+		const { container } = render(
+			<InputBlock {...defaultProps} isAutoFocussed />,
+		);
 
-    const input = container.querySelector('input[type="text"]');
-    expect(input).toHaveFocus();
-  });
+		const input = container.querySelector('input[type="text"]');
+		expect(input).toHaveFocus();
+	});
 
-  it("handles keyboard events correctly", () => {
-    const onKeyDown = vi.fn();
-    const { container } = render(
-      <InputBlock {...defaultProps} onKeyDown={onKeyDown} />,
-    );
+	it("handles keyboard events correctly", () => {
+		const onKeyDown = vi.fn();
+		const { container } = render(
+			<InputBlock {...defaultProps} onKeyDown={onKeyDown} />,
+		);
 
-    const input = container.querySelector('input[type="text"]');
-    if (input) {
-      fireEvent.keyDown(input, { key: "Enter", code: "Enter" });
-      expect(onKeyDown).toHaveBeenCalled();
-    }
-  });
+		const input = container.querySelector('input[type="text"]');
+		if (input) {
+			fireEvent.keyDown(input, { key: "Enter", code: "Enter" });
+			expect(onKeyDown).toHaveBeenCalled();
+		}
+	});
 
-  it("handles placeholder text correctly", () => {
-    const placeholder = "Enter text here";
-    const { container } = render(
-      <InputBlock {...defaultProps} placeholder={placeholder} />,
-    );
+	it("handles placeholder text correctly", () => {
+		const placeholder = "Enter text here";
+		const { container } = render(
+			<InputBlock {...defaultProps} placeholder={placeholder} />,
+		);
 
-    const input = container.querySelector('input[type="text"]');
-    expect(input).toHaveAttribute("placeholder", placeholder);
-  });
+		const input = container.querySelector('input[type="text"]');
+		expect(input).toHaveAttribute("placeholder", placeholder);
+	});
 
-  it("handles maxLength correctly", () => {
-    const maxLength = 10;
-    const { container } = render(
-      <InputBlock {...defaultProps} maxLength={maxLength} />,
-    );
+	it("handles maxLength correctly", () => {
+		const maxLength = 10;
+		const { container } = render(
+			<InputBlock {...defaultProps} maxLength={maxLength} />,
+		);
 
-    const input = container.querySelector('input[type="text"]');
-    expect(input).toHaveAttribute("maxLength", maxLength.toString());
-  });
+		const input = container.querySelector('input[type="text"]');
+		expect(input).toHaveAttribute("maxLength", maxLength.toString());
+	});
 
-  it("handles custom className correctly", () => {
-    const customClass = "custom-input-block";
-    render(<InputBlock {...defaultProps} className={customClass} />);
+	it("handles custom className correctly", () => {
+		const customClass = "custom-input-block";
+		render(<InputBlock {...defaultProps} className={customClass} />);
 
-    const inputBlock = screen.getByTestId("input-block");
-    expect(inputBlock).toHaveClass(customClass);
-  });
+		const inputBlock = screen.getByTestId("input-block");
+		expect(inputBlock).toHaveClass(customClass);
+	});
 
-  it("handles custom styles correctly", () => {
-    const customStyle = { width: "300px", margin: "10px" };
-    render(<InputBlock {...defaultProps} style={customStyle} />);
+	it("handles custom styles correctly", () => {
+		const customStyle = { width: "300px", margin: "10px" };
+		render(<InputBlock {...defaultProps} style={customStyle} />);
 
-    const inputBlock = screen.getByTestId("input-block");
-    expect(inputBlock).toHaveStyle(customStyle);
-  });
+		const inputBlock = screen.getByTestId("input-block");
+		expect(inputBlock).toHaveStyle(customStyle);
+	});
 });

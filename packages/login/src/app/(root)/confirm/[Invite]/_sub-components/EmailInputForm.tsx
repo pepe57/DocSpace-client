@@ -32,93 +32,93 @@ import { useTranslation } from "react-i18next";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { EmailInput, TValidate } from "@docspace/shared/components/email-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { InputSize } from "@docspace/shared/components/text-input";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { Text } from "@docspace/ui-kit/components/text";
 
 type EmailInputFormProps = {
-  ref: Ref<HTMLInputElement>;
-  isLoading: boolean;
-  email: string;
-  isEmailErrorShow: boolean;
-  emailValid: boolean;
-  emailFromLink: string;
-  emailErrorText?: string;
-  onContinue(): Promise<void>;
-  onChange(e: ChangeEvent<HTMLInputElement>): void;
-  onValidate(result: TValidate): undefined;
-  onBlur(): void;
-  onKeyPress(e: KeyboardEvent<HTMLInputElement>): void;
+	ref: Ref<HTMLInputElement>;
+	isLoading: boolean;
+	email: string;
+	isEmailErrorShow: boolean;
+	emailValid: boolean;
+	emailFromLink: string;
+	emailErrorText?: string;
+	onContinue(): Promise<void>;
+	onChange(e: ChangeEvent<HTMLInputElement>): void;
+	onValidate(result: TValidate): undefined;
+	onBlur(): void;
+	onKeyPress(e: KeyboardEvent<HTMLInputElement>): void;
 };
 
 const EmailInputForm = ({
-  ref,
-  isLoading,
-  email,
-  isEmailErrorShow,
-  emailValid,
-  emailErrorText,
-  emailFromLink,
+	ref,
+	isLoading,
+	email,
+	isEmailErrorShow,
+	emailValid,
+	emailErrorText,
+	emailFromLink,
 
-  onContinue,
-  onChange,
-  onValidate,
-  onBlur,
-  onKeyPress,
+	onContinue,
+	onChange,
+	onValidate,
+	onBlur,
+	onKeyPress,
 }: EmailInputFormProps) => {
-  const { t } = useTranslation(["Confirm", "Common"]);
+	const { t } = useTranslation(["Confirm", "Common"]);
 
-  return (
-    <div className="email-container">
-      <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
-        {t("EnterEmailHeader")}
-      </Text>
-      <FieldContainer
-        className="form-field"
-        isVertical
-        labelVisible={false}
-        hasError={isEmailErrorShow ? !emailValid : undefined}
-        errorMessage={
-          emailErrorText
-            ? t(`Common:${emailErrorText}`)
-            : t("Common:RequiredField")
-        }
-        dataTestId="email_field_container"
-      >
-        <EmailInput
-          id="login"
-          name="login"
-          size={InputSize.large}
-          hasError={isEmailErrorShow ? !emailValid : undefined}
-          value={email}
-          placeholder={t("Common:Email")}
-          scale
-          isAutoFocussed
-          tabIndex={1}
-          isDisabled={isLoading || !!emailFromLink}
-          autoComplete="username"
-          onChange={onChange}
-          onBlur={onBlur}
-          onValidateInput={onValidate}
-          forwardedRef={ref}
-          onKeyDown={onKeyPress}
-          dataTestId="email-input-invite"
-        />
-      </FieldContainer>
-      <Button
-        id="email-continue"
-        className="login-continue-button"
-        primary
-        size={ButtonSize.medium}
-        scale
-        label={t("Common:ContinueButton")}
-        tabIndex={1}
-        isDisabled={isLoading}
-        isLoading={isLoading}
-        onClick={onContinue}
-        testId="email_continue_button"
-      />
-    </div>
-  );
+	return (
+		<div className="email-container">
+			<Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
+				{t("EnterEmailHeader")}
+			</Text>
+			<FieldContainer
+				className="form-field"
+				isVertical
+				labelVisible={false}
+				hasError={isEmailErrorShow ? !emailValid : undefined}
+				errorMessage={
+					emailErrorText
+						? t(`Common:${emailErrorText}`)
+						: t("Common:RequiredField")
+				}
+				dataTestId="email_field_container"
+			>
+				<EmailInput
+					id="login"
+					name="login"
+					size={InputSize.large}
+					hasError={isEmailErrorShow ? !emailValid : undefined}
+					value={email}
+					placeholder={t("Common:Email")}
+					scale
+					isAutoFocussed
+					tabIndex={1}
+					isDisabled={isLoading || !!emailFromLink}
+					autoComplete="username"
+					onChange={onChange}
+					onBlur={onBlur}
+					onValidateInput={onValidate}
+					forwardedRef={ref}
+					onKeyDown={onKeyPress}
+					dataTestId="email-input-invite"
+				/>
+			</FieldContainer>
+			<Button
+				id="email-continue"
+				className="login-continue-button"
+				primary
+				size={ButtonSize.medium}
+				scale
+				label={t("Common:ContinueButton")}
+				tabIndex={1}
+				isDisabled={isLoading}
+				isLoading={isLoading}
+				onClick={onContinue}
+				testId="email_continue_button"
+			/>
+		</div>
+	);
 };
 
 export default EmailInputForm;

@@ -28,7 +28,11 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { ModalDialog, ModalDialogType } from "../../../../modal-dialog";
-import { InputSize, InputType, TextInput } from "../../../../text-input";
+import {
+	InputSize,
+	InputType,
+	TextInput,
+} from "@docspace/ui-kit/components/text-input";
 import { Button, ButtonSize } from "../../../../button";
 
 import { useChatStore } from "../../../store/chatStore";
@@ -36,92 +40,92 @@ import { useChatStore } from "../../../store/chatStore";
 import { RenameChatProps } from "../../../Chat.types";
 
 const RenameChat = ({ chatId, prevTitle, onRenameToggle }: RenameChatProps) => {
-  const { t } = useTranslation(["Common"]);
+	const { t } = useTranslation(["Common"]);
 
-  const [isLoading, setIsLoading] = React.useState(false);
+	const [isLoading, setIsLoading] = React.useState(false);
 
-  const { renameChat } = useChatStore();
+	const { renameChat } = useChatStore();
 
-  const [newName, setNewName] = React.useState("");
+	const [newName, setNewName] = React.useState("");
 
-  const handleRename = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setNewName(e.target.value);
-    },
-    [],
-  );
+	const handleRename = React.useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			setNewName(e.target.value);
+		},
+		[],
+	);
 
-  const onRenameClose = React.useCallback(() => {
-    if (isLoading) return;
-    onRenameToggle();
-  }, [onRenameToggle, isLoading]);
+	const onRenameClose = React.useCallback(() => {
+		if (isLoading) return;
+		onRenameToggle();
+	}, [onRenameToggle, isLoading]);
 
-  const onRenameAction = React.useCallback(async () => {
-    if (isLoading) return;
-    setIsLoading(true);
-    await renameChat(chatId, newName);
-    onRenameToggle();
-    setIsLoading(false);
-  }, [chatId, newName, onRenameToggle, renameChat, isLoading]);
+	const onRenameAction = React.useCallback(async () => {
+		if (isLoading) return;
+		setIsLoading(true);
+		await renameChat(chatId, newName);
+		onRenameToggle();
+		setIsLoading(false);
+	}, [chatId, newName, onRenameToggle, renameChat, isLoading]);
 
-  React.useEffect(() => {
-    const onKeydown = (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
-        onRenameAction();
-      }
-      if (e.key === "Escape") {
-        onRenameClose();
-      }
-    };
+	React.useEffect(() => {
+		const onKeydown = (e: KeyboardEvent) => {
+			if (e.key === "Enter") {
+				onRenameAction();
+			}
+			if (e.key === "Escape") {
+				onRenameClose();
+			}
+		};
 
-    window.addEventListener("keydown", onKeydown);
+		window.addEventListener("keydown", onKeydown);
 
-    return () => {
-      window.removeEventListener("keydown", onKeydown);
-    };
-  }, [onRenameAction, onRenameClose]);
+		return () => {
+			window.removeEventListener("keydown", onKeydown);
+		};
+	}, [onRenameAction, onRenameClose]);
 
-  return (
-    <ModalDialog
-      visible
-      onClose={onRenameClose}
-      displayType={ModalDialogType.modal}
-    >
-      <ModalDialog.Header>{t("Common:Rename")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <TextInput
-          value={newName}
-          onChange={handleRename}
-          size={InputSize.base}
-          type={InputType.text}
-          maxLength={255}
-          placeholder={prevTitle}
-          scale
-          autoFocus
-        />
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          size={ButtonSize.normal}
-          label={t("Common:SaveButton")}
-          onClick={onRenameAction}
-          scale
-          primary
-          isLoading={isLoading}
-          isDisabled={!newName || prevTitle === newName}
-          testId="confirm-button"
-        />
-        <Button
-          size={ButtonSize.normal}
-          label={t("Common:CancelButton")}
-          onClick={onRenameToggle}
-          scale
-          isDisabled={isLoading}
-          testId="cancel-button"
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+	return (
+		<ModalDialog
+			visible
+			onClose={onRenameClose}
+			displayType={ModalDialogType.modal}
+		>
+			<ModalDialog.Header>{t("Common:Rename")}</ModalDialog.Header>
+			<ModalDialog.Body>
+				<TextInput
+					value={newName}
+					onChange={handleRename}
+					size={InputSize.base}
+					type={InputType.text}
+					maxLength={255}
+					placeholder={prevTitle}
+					scale
+					autoFocus
+				/>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					size={ButtonSize.normal}
+					label={t("Common:SaveButton")}
+					onClick={onRenameAction}
+					scale
+					primary
+					isLoading={isLoading}
+					isDisabled={!newName || prevTitle === newName}
+					testId="confirm-button"
+				/>
+				<Button
+					size={ButtonSize.normal}
+					label={t("Common:CancelButton")}
+					onClick={onRenameToggle}
+					scale
+					isDisabled={isLoading}
+					testId="cancel-button"
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 export default RenameChat;

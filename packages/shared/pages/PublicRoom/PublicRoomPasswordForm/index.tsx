@@ -44,209 +44,209 @@ import { ValidationStatus } from "../../../enums";
 
 import { validatePublicRoomPassword } from "../../../api/rooms";
 import {
-  getLogo,
-  getPasswordDescription,
+	getLogo,
+	getPasswordDescription,
 } from "./PublicRoomPasswordForm.helper";
-import { InputSize } from "../../../components/text-input";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { RoomIcon } from "../../../components/room-icon";
 import type {
-  TPublicRoomPassword,
-  TValidateShareRoom,
+	TPublicRoomPassword,
+	TValidateShareRoom,
 } from "../../../api/rooms/types";
 
 import styles from "./PublicRoomPasswordForm.module.scss";
 
 export type PublicRoomPasswordProps = {
-  t: TFunction;
-  roomKey: string;
-  validationData: TValidateShareRoom;
-  onSuccessValidationCallback: (res: TPublicRoomPassword) => void;
-  getIcon?: (fileExst: string) => string;
+	t: TFunction;
+	roomKey: string;
+	validationData: TValidateShareRoom;
+	onSuccessValidationCallback: (res: TPublicRoomPassword) => void;
+	getIcon?: (fileExst: string) => string;
 };
 
 const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
-  const { t, roomKey, validationData, onSuccessValidationCallback, getIcon } =
-    props;
+	const { t, roomKey, validationData, onSuccessValidationCallback, getIcon } =
+		props;
 
-  const [password, setPassword] = useState("");
-  const [passwordValid, setPasswordValid] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+	const [password, setPassword] = useState("");
+	const [passwordValid, setPasswordValid] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
 
-  const inputRef = useRef<HTMLInputElement>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => frameCallCommand("setIsLoaded"), []);
+	useEffect(() => frameCallCommand("setIsLoaded"), []);
 
-  useEffect(() => {
-    if (inputRef && inputRef.current) {
-      inputRef.current.focus();
-    }
-  });
+	useEffect(() => {
+		if (inputRef && inputRef.current) {
+			inputRef.current.focus();
+		}
+	});
 
-  const description = useMemo(
-    () => getPasswordDescription(t, validationData),
-    [t, validationData],
-  );
+	const description = useMemo(
+		() => getPasswordDescription(t, validationData),
+		[t, validationData],
+	);
 
-  const logo = useMemo(
-    () => getLogo(validationData, getIcon),
-    [validationData, getIcon],
-  );
+	const logo = useMemo(
+		() => getLogo(validationData, getIcon),
+		[validationData, getIcon],
+	);
 
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-    if (!passwordValid) {
-      setPasswordValid(true);
-    }
-  };
+	const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setPassword(e.target.value);
+		if (!passwordValid) {
+			setPasswordValid(true);
+		}
+	};
 
-  const onSubmitAction = async () => {
-    if (!password.trim()) {
-      setPasswordValid(false);
-      setErrorMessage(t("Common:RequiredField"));
-    }
+	const onSubmitAction = async () => {
+		if (!password.trim()) {
+			setPasswordValid(false);
+			setErrorMessage(t("Common:RequiredField"));
+		}
 
-    if (!passwordValid || !password.trim()) {
-      setIsLoading(false);
-      return;
-    }
+		if (!passwordValid || !password.trim()) {
+			setIsLoading(false);
+			return;
+		}
 
-    setIsLoading(true);
-    try {
-      const res = await validatePublicRoomPassword(roomKey, password);
+		setIsLoading(true);
+		try {
+			const res = await validatePublicRoomPassword(roomKey, password);
 
-      switch (res?.status) {
-        case ValidationStatus.Ok:
-          onSuccessValidationCallback(res);
-          return;
+			switch (res?.status) {
+				case ValidationStatus.Ok:
+					onSuccessValidationCallback(res);
+					return;
 
-        // case ValidationStatus.Invalid: {
-        //   setErrorMessage(""); // Invalid
-        //   return;
-        // }
-        // case ValidationStatus.Expired: {
-        //   setErrorMessage(""); // Expired
-        //   return;
-        // }
-        case ValidationStatus.InvalidPassword:
-          setErrorMessage(t("Common:IncorrectPassword"));
-          break;
+				// case ValidationStatus.Invalid: {
+				//   setErrorMessage(""); // Invalid
+				//   return;
+				// }
+				// case ValidationStatus.Expired: {
+				//   setErrorMessage(""); // Expired
+				//   return;
+				// }
+				case ValidationStatus.InvalidPassword:
+					setErrorMessage(t("Common:IncorrectPassword"));
+					break;
 
-        default:
-          break;
-      }
+				default:
+					break;
+			}
 
-      setIsLoading(false);
-    } catch (error) {
-      toastr.error(error as string);
-      setIsLoading(false);
-    }
-  };
+			setIsLoading(false);
+		} catch (error) {
+			toastr.error(error as string);
+			setIsLoading(false);
+		}
+	};
 
-  const onKeyPress = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter") {
-      onSubmitAction();
-    }
-  };
+	const onKeyPress = (event: React.KeyboardEvent) => {
+		if (event.key === "Enter") {
+			onSubmitAction();
+		}
+	};
 
-  return (
-    <div className={styles.page} id="public-password-page">
-      <div className={styles.publicRoomPage}>
-        <div
-          className={classNames(
-            styles.content,
-            styles.publicRoomContent,
-            "public-room-content",
-          )}
-        >
-          <div className={styles.body}>
-            <PortalLogo
-              className={classNames(styles.portalLogo, "portal-logo")}
-            />
+	return (
+		<div className={styles.page} id="public-password-page">
+			<div className={styles.publicRoomPage}>
+				<div
+					className={classNames(
+						styles.content,
+						styles.publicRoomContent,
+						"public-room-content",
+					)}
+				>
+					<div className={styles.body}>
+						<PortalLogo
+							className={classNames(styles.portalLogo, "portal-logo")}
+						/>
 
-            <FormWrapper>
-              <div className={classNames(styles.passwordForm, "password-form")}>
-                <Text fontSize="16px" fontWeight="600">
-                  {/* {t("Common:EnterPassword")} */}
-                  {t("Common:PasswordRequired")}
-                </Text>
+						<FormWrapper>
+							<div className={classNames(styles.passwordForm, "password-form")}>
+								<Text fontSize="16px" fontWeight="600">
+									{/* {t("Common:EnterPassword")} */}
+									{t("Common:PasswordRequired")}
+								</Text>
 
-                <Text
-                  fontSize="13px"
-                  fontWeight="400"
-                  className={classNames(
-                    styles.publicRoomText,
-                    "public-room-text",
-                  )}
-                >
-                  {description}:
-                </Text>
-                <div
-                  className={classNames(
-                    styles.publicRoomName,
-                    "public-room-name",
-                  )}
-                >
-                  <RoomIcon
-                    logo={logo}
-                    showDefault={false}
-                    title={validationData.title}
-                  />
-                  <Text
-                    className={classNames(
-                      styles.publicRoomText,
-                      "public-room-text",
-                    )}
-                    fontSize="15px"
-                    fontWeight="600"
-                  >
-                    {validationData.title}
-                  </Text>
-                </div>
+								<Text
+									fontSize="13px"
+									fontWeight="400"
+									className={classNames(
+										styles.publicRoomText,
+										"public-room-text",
+									)}
+								>
+									{description}:
+								</Text>
+								<div
+									className={classNames(
+										styles.publicRoomName,
+										"public-room-name",
+									)}
+								>
+									<RoomIcon
+										logo={logo}
+										showDefault={false}
+										title={validationData.title}
+									/>
+									<Text
+										className={classNames(
+											styles.publicRoomText,
+											"public-room-text",
+										)}
+										fontSize="15px"
+										fontWeight="600"
+									>
+										{validationData.title}
+									</Text>
+								</div>
 
-                <FieldContainer
-                  isVertical
-                  labelVisible={false}
-                  hasError={!!errorMessage}
-                  errorMessage={errorMessage}
-                >
-                  <PasswordInput
-                    simpleView
-                    id="password"
-                    inputName="password"
-                    placeholder={t("Common:Password")}
-                    inputValue={password}
-                    hasError={!!errorMessage}
-                    size={InputSize.large}
-                    scale
-                    tabIndex={1}
-                    autoComplete="current-password"
-                    onChange={onChangePassword}
-                    onKeyDown={onKeyPress}
-                    isDisabled={isLoading}
-                    isDisableTooltip
-                    forwardedRef={inputRef}
-                    isAutoFocussed
-                  />
-                </FieldContainer>
-              </div>
+								<FieldContainer
+									isVertical
+									labelVisible={false}
+									hasError={!!errorMessage}
+									errorMessage={errorMessage}
+								>
+									<PasswordInput
+										simpleView
+										id="password"
+										inputName="password"
+										placeholder={t("Common:Password")}
+										inputValue={password}
+										hasError={!!errorMessage}
+										size={InputSize.large}
+										scale
+										tabIndex={1}
+										autoComplete="current-password"
+										onChange={onChangePassword}
+										onKeyDown={onKeyPress}
+										isDisabled={isLoading}
+										isDisableTooltip
+										forwardedRef={inputRef}
+										isAutoFocussed
+									/>
+								</FieldContainer>
+							</div>
 
-              <Button
-                primary
-                size={ButtonSize.medium}
-                scale
-                label={t("Common:ContinueButton")}
-                tabIndex={5}
-                isLoading={isLoading}
-                isDisabled={isLoading}
-                onClick={onSubmitAction}
-              />
-            </FormWrapper>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+							<Button
+								primary
+								size={ButtonSize.medium}
+								scale
+								label={t("Common:ContinueButton")}
+								tabIndex={5}
+								isLoading={isLoading}
+								isDisabled={isLoading}
+								onClick={onSubmitAction}
+							/>
+						</FormWrapper>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default PublicRoomPassword;

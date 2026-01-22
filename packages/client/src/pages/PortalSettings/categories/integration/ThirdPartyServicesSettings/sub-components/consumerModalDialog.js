@@ -32,7 +32,7 @@ import { format } from "react-string-format";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/shared/components/button";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Link } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";

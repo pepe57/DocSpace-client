@@ -28,12 +28,12 @@ import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 
 import {
-  commonIconsStyles,
-  injectDefaultTheme,
-  tablet,
+	commonIconsStyles,
+	injectDefaultTheme,
+	tablet,
 } from "@docspace/shared/utils";
 
 import CheckIcon from "PUBLIC_DIR/images/check.react.svg";
@@ -61,7 +61,7 @@ const StyledCrossIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
 
 export const okIcon = <StyledCheckIcon className="edit-ok-icon" size="scale" />;
 export const cancelIcon = (
-  <StyledCrossIcon className="edit-cancel-icon" size="scale" />
+	<StyledCrossIcon className="edit-cancel-icon" size="scale" />
 );
 
 const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
@@ -70,8 +70,8 @@ const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
   align-items: center;
 
   ${(props) =>
-    props.viewAs === "table" &&
-    css`
+		props.viewAs === "table" &&
+		css`
       grid-column-start: 1;
       grid-column-end: -1;
 
@@ -81,15 +81,15 @@ const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
     `}
 
   ${(props) =>
-    props.viewAs === "tile" &&
-    css`
+		props.viewAs === "tile" &&
+		css`
       position: absolute;
       width: calc(100% - 18px);
       z-index: 1;
       gap: 4px;
 
       background-color: ${({ theme }) =>
-        theme.filesEditingWrapper.tile.background};
+				theme.filesEditingWrapper.tile.background};
 
       border: ${({ theme }) => theme.filesEditingWrapper.border};
       border-radius: ${({ isFolder }) => (isFolder ? "6px" : "0 0 6px 6px")};
@@ -108,11 +108,11 @@ const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
   .edit-text {
     height: 32px;
     font-size: ${(props) =>
-      props.viewAs === "table"
-        ? "13px"
-        : props.viewAs === "tile"
-          ? "14px"
-          : "15px"};
+			props.viewAs === "table"
+				? "13px"
+				: props.viewAs === "tile"
+					? "14px"
+					: "15px"};
     outline: 0 !important;
     font-weight: 600;
     margin: 0;
@@ -120,19 +120,19 @@ const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
     text-align: start;
     color: ${(props) => props.theme.filesEditingWrapper.color};
     background: ${(props) =>
-      props.theme.filesEditingWrapper.row.itemBackground} !important;
+			props.theme.filesEditingWrapper.row.itemBackground} !important;
 
     ${(props) =>
-      props.viewAs === "tile" &&
-      css`
+			props.viewAs === "tile" &&
+			css`
         margin-inline-end: 2px;
         border: none;
         background: none;
       `};
 
     ${(props) =>
-      props.isUpdatingRowItem &&
-      css`
+			props.isUpdatingRowItem &&
+			css`
         margin-inline-start: 0;
         display: flex;
         align-items: center;
@@ -142,23 +142,23 @@ const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
     ${(props) => props.viewAs === "table" && `padding-inline-start: 12px`}
 
     ${(props) =>
-      props.viewAs === "tile" &&
-      !props.isUpdatingRowItem &&
-      css`
+			props.viewAs === "tile" &&
+			!props.isUpdatingRowItem &&
+			css`
         background: ${({ theme }) =>
-          theme.filesEditingWrapper.tile.itemBackground};
+					theme.filesEditingWrapper.tile.itemBackground};
         border: ${({ theme }) =>
-          `1px solid ${theme.filesEditingWrapper.tile.itemBorder}`};
+					`1px solid ${theme.filesEditingWrapper.tile.itemBorder}`};
 
         &:focus {
           border: ${({ theme }) =>
-            `1px solid ${theme.filesEditingWrapper.tile.itemActiveBorder}`};
+						`1px solid ${theme.filesEditingWrapper.tile.itemActiveBorder}`};
         }
       `};
 
     ${({ isDisabled }) =>
-      isDisabled &&
-      `background-color: ${({ theme }) => theme.filesEditingWrapper.disabledBackground}`}
+			isDisabled &&
+			`background-color: ${({ theme }) => theme.filesEditingWrapper.disabledBackground}`}
   }
 
   .edit-button {
@@ -167,23 +167,23 @@ const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
     padding: 0px 7px;
 
     ${(props) =>
-      props.viewAs === "tile" &&
-      css`
+			props.viewAs === "tile" &&
+			css`
         margin-inline-start: 0;
         background: ${({ theme }) =>
-          theme.filesEditingWrapper.tile.itemBackground};
+					theme.filesEditingWrapper.tile.itemBackground};
         border: ${({ theme }) =>
-          `1px solid ${theme.filesEditingWrapper.tile.itemBorder}`};
+					`1px solid ${theme.filesEditingWrapper.tile.itemBorder}`};
 
         &:hover {
           border: ${({ theme }) =>
-            `1px solid ${theme.filesEditingWrapper.tile.itemActiveBorder}`};
+						`1px solid ${theme.filesEditingWrapper.tile.itemActiveBorder}`};
         }
       `};
 
     ${(props) =>
-      props.viewAs === "table" &&
-      css`
+			props.viewAs === "table" &&
+			css`
         width: 24px;
         height: 24px;
         border: 1px transparent;
@@ -211,130 +211,130 @@ const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
 `;
 
 const EditingWrapperComponent = (props) => {
-  const {
-    itemTitle,
-    itemId,
-    renameTitle,
-    onClickUpdateItem,
-    cancelUpdateItem,
-    // isLoading,
-    viewAs,
-    elementIcon,
-    isUpdatingRowItem,
-    passwordEntryProcess,
-    isFolder,
-  } = props;
+	const {
+		itemTitle,
+		itemId,
+		renameTitle,
+		onClickUpdateItem,
+		cancelUpdateItem,
+		// isLoading,
+		viewAs,
+		elementIcon,
+		isUpdatingRowItem,
+		passwordEntryProcess,
+		isFolder,
+	} = props;
 
-  const isTable = viewAs === "table";
+	const isTable = viewAs === "table";
 
-  const [OkIconIsHovered, setIsHoveredOk] = useState(false);
-  const [CancelIconIsHovered, setIsHoveredCancel] = useState(false);
-  const [isTouchOK, setIsTouchOK] = useState(false);
-  const [isTouchCancel, setIsTouchCancel] = useState(false);
+	const [OkIconIsHovered, setIsHoveredOk] = useState(false);
+	const [CancelIconIsHovered, setIsHoveredCancel] = useState(false);
+	const [isTouchOK, setIsTouchOK] = useState(false);
+	const [isTouchCancel, setIsTouchCancel] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
-  const inputRef = React.useRef(null);
+	const inputRef = React.useRef(null);
 
-  const onKeyUpUpdateItem = (e) => {
-    if (isLoading) return;
+	const onKeyUpUpdateItem = (e) => {
+		if (isLoading) return;
 
-    const code = e.keyCode || e.which;
-    if (code === 13) {
-      if (!isLoading) setIsLoading(true);
-      return onClickUpdateItem(e);
-    }
-  };
-  const onEscapeKeyPress = (e) => {
-    if (e.keyCode === 27) return cancelUpdateItem(e);
-  };
+		const code = e.keyCode || e.which;
+		if (code === 13) {
+			if (!isLoading) setIsLoading(true);
+			return onClickUpdateItem(e);
+		}
+	};
+	const onEscapeKeyPress = (e) => {
+		if (e.keyCode === 27) return cancelUpdateItem(e);
+	};
 
-  const setIsHoveredOkHandler = () => {
-    setIsHoveredOk(!OkIconIsHovered);
-  };
+	const setIsHoveredOkHandler = () => {
+		setIsHoveredOk(!OkIconIsHovered);
+	};
 
-  const setIsHoveredCancelHandler = () => {
-    setIsHoveredCancel(!CancelIconIsHovered);
-  };
+	const setIsHoveredCancelHandler = () => {
+		setIsHoveredCancel(!CancelIconIsHovered);
+	};
 
-  const onFocus = (e) => e.target.select();
-  const onBlur = (e) => {
-    if (
-      (e.relatedTarget && e.relatedTarget.classList.contains("edit-button")) ||
-      OkIconIsHovered ||
-      CancelIconIsHovered ||
-      isTouchOK ||
-      isTouchCancel
-    )
-      return false;
+	const onFocus = (e) => e.target.select();
+	const onBlur = (e) => {
+		if (
+			(e.relatedTarget && e.relatedTarget.classList.contains("edit-button")) ||
+			OkIconIsHovered ||
+			CancelIconIsHovered ||
+			isTouchOK ||
+			isTouchCancel
+		)
+			return false;
 
-    if (!document.hasFocus() && inputRef.current === e.target) return false;
+		if (!document.hasFocus() && inputRef.current === e.target) return false;
 
-    !passwordEntryProcess && onClickUpdateItem(e, false);
-  };
+		!passwordEntryProcess && onClickUpdateItem(e, false);
+	};
 
-  return (
-    <EditingWrapper
-      viewAs={viewAs}
-      isUpdatingRowItem={isUpdatingRowItem ? !isTable : null}
-      isFolder={isFolder}
-      isDisabled={isLoading}
-    >
-      {isTable ? elementIcon : null}
-      {isUpdatingRowItem && !isTable ? (
-        <Text className="edit-text">{itemTitle}</Text>
-      ) : (
-        <TextInput
-          className="edit-text"
-          name="title"
-          scale
-          value={itemTitle}
-          tabIndex={1}
-          isAutoFocussed
-          onChange={renameTitle}
-          onKeyPress={onKeyUpUpdateItem}
-          onKeyDown={onEscapeKeyPress}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          isDisabled={isLoading}
-          data-itemid={itemId}
-          withBorder={!isTable}
-          forwardedRef={inputRef}
-        />
-      )}
-      {!isUpdatingRowItem ? (
-        <>
-          <Button
-            className="edit-button not-selectable"
-            size="small"
-            isDisabled={isLoading}
-            onClick={onClickUpdateItem}
-            icon={okIcon}
-            data-itemid={itemId}
-            onMouseEnter={setIsHoveredOkHandler}
-            onMouseLeave={setIsHoveredOkHandler}
-            onTouchStart={() => setIsTouchOK(true)}
-            isHovered={OkIconIsHovered}
-            title=""
-          />
-          <Button
-            className="edit-button not-selectable"
-            size="medium"
-            isDisabled={isLoading}
-            onClick={cancelUpdateItem}
-            icon={cancelIcon}
-            data-itemid={itemId}
-            data-action="cancel"
-            onMouseEnter={setIsHoveredCancelHandler}
-            onMouseLeave={setIsHoveredCancelHandler}
-            onTouchStart={() => setIsTouchCancel(true)}
-            isHovered={CancelIconIsHovered}
-            title=""
-          />
-        </>
-      ) : null}
-    </EditingWrapper>
-  );
+	return (
+		<EditingWrapper
+			viewAs={viewAs}
+			isUpdatingRowItem={isUpdatingRowItem ? !isTable : null}
+			isFolder={isFolder}
+			isDisabled={isLoading}
+		>
+			{isTable ? elementIcon : null}
+			{isUpdatingRowItem && !isTable ? (
+				<Text className="edit-text">{itemTitle}</Text>
+			) : (
+				<TextInput
+					className="edit-text"
+					name="title"
+					scale
+					value={itemTitle}
+					tabIndex={1}
+					isAutoFocussed
+					onChange={renameTitle}
+					onKeyPress={onKeyUpUpdateItem}
+					onKeyDown={onEscapeKeyPress}
+					onFocus={onFocus}
+					onBlur={onBlur}
+					isDisabled={isLoading}
+					data-itemid={itemId}
+					withBorder={!isTable}
+					forwardedRef={inputRef}
+				/>
+			)}
+			{!isUpdatingRowItem ? (
+				<>
+					<Button
+						className="edit-button not-selectable"
+						size="small"
+						isDisabled={isLoading}
+						onClick={onClickUpdateItem}
+						icon={okIcon}
+						data-itemid={itemId}
+						onMouseEnter={setIsHoveredOkHandler}
+						onMouseLeave={setIsHoveredOkHandler}
+						onTouchStart={() => setIsTouchOK(true)}
+						isHovered={OkIconIsHovered}
+						title=""
+					/>
+					<Button
+						className="edit-button not-selectable"
+						size="medium"
+						isDisabled={isLoading}
+						onClick={cancelUpdateItem}
+						icon={cancelIcon}
+						data-itemid={itemId}
+						data-action="cancel"
+						onMouseEnter={setIsHoveredCancelHandler}
+						onMouseLeave={setIsHoveredCancelHandler}
+						onTouchStart={() => setIsTouchCancel(true)}
+						isHovered={CancelIconIsHovered}
+						title=""
+					/>
+				</>
+			) : null}
+		</EditingWrapper>
+	);
 };
 
 export default EditingWrapperComponent;

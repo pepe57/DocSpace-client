@@ -26,60 +26,60 @@
 
 import { ChangeEvent } from "react";
 import { Label } from "@docspace/ui-kit/components/label";
-import { InputType, TextInput } from "@docspace/shared/components/text-input";
+import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./index.styled";
 
 interface GroupNameParamProps {
-  groupName: string;
-  onChangeGroupName: (e: ChangeEvent<HTMLInputElement>) => void;
+	groupName: string;
+	onChangeGroupName: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const GroupNameParam = ({
-  groupName,
-  onChangeGroupName,
+	groupName,
+	onChangeGroupName,
 }: GroupNameParamProps) => {
-  const { t } = useTranslation(["Common"]);
+	const { t } = useTranslation(["Common"]);
 
-  return (
-    <Styled.GroupNameParam>
-      <Label
-        title={t("Common:Label")}
-        className="input-label"
-        display="display"
-        htmlFor="create-group-name"
-        text={t("Common:Label")}
-      />
+	return (
+		<Styled.GroupNameParam>
+			<Label
+				title={t("Common:Label")}
+				className="input-label"
+				display="display"
+				htmlFor="create-group-name"
+				text={t("Common:Label")}
+			/>
 
-      <FieldContainer
-        isVertical
-        labelVisible={false}
-        // hasError={!isValidTitle || isWrongTitle}
-        // errorMessage={errorMessage}
-        errorMessageWidth="100%"
-      >
-        <TextInput
-          id="create-group-name"
-          type={InputType.text}
-          value={groupName}
-          onChange={onChangeGroupName}
-          // onFocus={onFocus}
-          // onBlur={onBlur}
-          scale
-          placeholder={t("Common:EnterName")}
-          tabIndex={2}
-          // isDisabled={isDisabled}
-          // hasError={!isValidTitle}
-          isAutoFocussed
-          // onKeyUp={onKeyUp}
-          // onKeyDown={onKeyDown}
-          maxLength={128}
-          testId="create_edit_group_name"
-        />
-      </FieldContainer>
-    </Styled.GroupNameParam>
-  );
+			<FieldContainer
+				isVertical
+				labelVisible={false}
+				// hasError={!isValidTitle || isWrongTitle}
+				// errorMessage={errorMessage}
+				errorMessageWidth="100%"
+			>
+				<TextInput
+					id="create-group-name"
+					type={InputType.text}
+					value={groupName}
+					onChange={onChangeGroupName}
+					// onFocus={onFocus}
+					// onBlur={onBlur}
+					scale
+					placeholder={t("Common:EnterName")}
+					tabIndex={2}
+					// isDisabled={isDisabled}
+					// hasError={!isValidTitle}
+					isAutoFocussed
+					// onKeyUp={onKeyUp}
+					// onKeyDown={onKeyDown}
+					maxLength={128}
+					testId="create_edit_group_name"
+				/>
+			</FieldContainer>
+		</Styled.GroupNameParam>
+	);
 };
 
 export default GroupNameParam;

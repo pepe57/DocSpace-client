@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { Heading } from "@docspace/shared/components/heading";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { Text } from "@docspace/ui-kit/components/text";

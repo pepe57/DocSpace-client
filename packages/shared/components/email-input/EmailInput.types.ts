@@ -24,26 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TextInputProps } from "../text-input";
+import { TextInputProps } from "@docspace/ui-kit/components/text-input";
 import { EmailSettings } from "../../utils";
 
 export type TValidate = {
-  value: string;
-  isValid: boolean;
-  errors?: string[];
+	value: string;
+	isValid: boolean;
+	errors?: string[];
 };
 
 export type EmailInputProps = Omit<
-  TextInputProps,
-  "type" | "onAnimationStart" | "testId"
+	TextInputProps,
+	"type" | "onAnimationStart" | "testId"
 > & {
-  /** Email validation specific props */
-  customValidate?: (value: string) => TValidate;
-  emailSettings?: EmailSettings;
-  /** Validation callback */
-  onValidateInput?: (data: TValidate) => void;
-  /** Animation handler */
-  handleAnimationStart?: (e: React.AnimationEvent<HTMLInputElement>) => void;
-  /** Test id */
-  dataTestId?: string;
+	/** Email validation specific props */
+	customValidate?: (value: string) => TValidate;
+	emailSettings?: EmailSettings;
+	/** Validation callback */
+	onValidateInput?: (data: TValidate) => void;
+	/** Animation handler */
+	handleAnimationStart?: (e: React.AnimationEvent<HTMLInputElement>) => void;
+	/** Test id */
+	dataTestId?: string;
 };

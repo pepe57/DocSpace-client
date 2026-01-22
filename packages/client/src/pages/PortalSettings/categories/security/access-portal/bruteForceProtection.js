@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Text } from "@docspace/ui-kit/components/text";
 import { useNavigate, useLocation } from "react-router";

@@ -26,65 +26,65 @@
 
 import { useState, useCallback } from "react";
 import debounce from "lodash.debounce";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Label } from "@docspace/ui-kit/components/label";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
 import { ControlsGroup, RowContainer } from "../presets/StyledPresets";
 
 export const WidthSetter = (props) => {
-  const { t, setConfig, dataDimensions, defaultDimension, defaultWidth } =
-    props;
+	const { t, setConfig, dataDimensions, defaultDimension, defaultWidth } =
+		props;
 
-  const [widthDimension, setWidthDimension] = useState(defaultDimension);
-  const [width, setWidth] = useState(defaultWidth);
+	const [widthDimension, setWidthDimension] = useState(defaultDimension);
+	const [width, setWidth] = useState(defaultWidth);
 
-  const debouncedSetConfig = useCallback(
-    debounce((value, dimension) => {
-      setConfig((config) => {
-        return { ...config, width: `${value}${dimension}` };
-      });
-    }, 500),
-    [setConfig],
-  );
+	const debouncedSetConfig = useCallback(
+		debounce((value, dimension) => {
+			setConfig((config) => {
+				return { ...config, width: `${value}${dimension}` };
+			});
+		}, 500),
+		[setConfig],
+	);
 
-  const onChangeWidth = (e) => {
-    setWidth(e.target.value);
-    debouncedSetConfig(e.target.value, widthDimension.label);
-  };
+	const onChangeWidth = (e) => {
+		setWidth(e.target.value);
+		debouncedSetConfig(e.target.value, widthDimension.label);
+	};
 
-  const onChangeWidthDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, width: `${width}${item.label}` };
-    });
+	const onChangeWidthDimension = (item) => {
+		setConfig((config) => {
+			return { ...config, width: `${width}${item.label}` };
+		});
 
-    setWidthDimension(item);
-  };
+		setWidthDimension(item);
+	};
 
-  return (
-    <ControlsGroup>
-      <Label className="label" text={t("EmbeddingPanel:Width")} />
-      <RowContainer combo>
-        <TextInput
-          onChange={onChangeWidth}
-          placeholder={t("EnterWidth")}
-          value={width}
-          tabIndex={2}
-          testId="width_dimension_input"
-        />
-        <ComboBox
-          size="content"
-          scaled={false}
-          scaledOptions
-          onSelect={onChangeWidthDimension}
-          options={dataDimensions}
-          selectedOption={widthDimension}
-          displaySelectedOption
-          directionY="bottom"
-          dataTestId="width_dimension_combobox"
-          dropDownTestId="width_dimension_dropdown"
-        />
-      </RowContainer>
-    </ControlsGroup>
-  );
+	return (
+		<ControlsGroup>
+			<Label className="label" text={t("EmbeddingPanel:Width")} />
+			<RowContainer combo>
+				<TextInput
+					onChange={onChangeWidth}
+					placeholder={t("EnterWidth")}
+					value={width}
+					tabIndex={2}
+					testId="width_dimension_input"
+				/>
+				<ComboBox
+					size="content"
+					scaled={false}
+					scaledOptions
+					onSelect={onChangeWidthDimension}
+					options={dataDimensions}
+					selectedOption={widthDimension}
+					displaySelectedOption
+					directionY="bottom"
+					dataTestId="width_dimension_combobox"
+					dropDownTestId="width_dimension_dropdown"
+				/>
+			</RowContainer>
+		</ControlsGroup>
+	);
 };

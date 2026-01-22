@@ -29,128 +29,128 @@ import debounce from "lodash.debounce";
 
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { ColorInput } from "@docspace/shared/components/color-input";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Label } from "@docspace/ui-kit/components/label";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import { globalColors } from "@docspace/shared/themes";
 import {
-  CategorySubHeader,
-  ControlsGroup,
-  ControlsSection,
-  RowContainer,
+	CategorySubHeader,
+	ControlsGroup,
+	ControlsSection,
+	RowContainer,
 } from "../presets/StyledPresets";
 
 export const MainElementParameter = ({
-  t,
-  config,
-  setConfig,
-  isButtonMode = false,
+	t,
+	config,
+	setConfig,
+	isButtonMode = false,
 }) => {
-  const elementDisplayOptions = [
-    {
-      value: "element",
-      label: t("ElementItself"),
-      dataTestId: "element_radio_button",
-    },
-    {
-      value: "button",
-      label: (
-        <RowContainer>
-          {t("Common:Button")}
-          <Text color="gray">{`(${t("ElementCalledAfterClicking")})`}</Text>
-        </RowContainer>
-      ),
-      dataTestId: "button_radio_button",
-    },
-  ];
+	const elementDisplayOptions = [
+		{
+			value: "element",
+			label: t("ElementItself"),
+			dataTestId: "element_radio_button",
+		},
+		{
+			value: "button",
+			label: (
+				<RowContainer>
+					{t("Common:Button")}
+					<Text color="gray">{`(${t("ElementCalledAfterClicking")})`}</Text>
+				</RowContainer>
+			),
+			dataTestId: "button_radio_button",
+		},
+	];
 
-  const [selectedElementType, setSelectedElementType] = useState(
-    elementDisplayOptions[Number(isButtonMode)].value,
-  );
-  const [buttonValue, setButtonValue] = useState(config.buttonText);
+	const [selectedElementType, setSelectedElementType] = useState(
+		elementDisplayOptions[Number(isButtonMode)].value,
+	);
+	const [buttonValue, setButtonValue] = useState(config.buttonText);
 
-  const debouncedSetConfig = useCallback(
-    debounce((key, value) => {
-      setConfig((oldConfig) => {
-        return { ...oldConfig, [key]: value };
-      });
-    }, 500),
-    [setConfig],
-  );
+	const debouncedSetConfig = useCallback(
+		debounce((key, value) => {
+			setConfig((oldConfig) => {
+				return { ...oldConfig, [key]: value };
+			});
+		}, 500),
+		[setConfig],
+	);
 
-  const toggleButtonMode = (e) => {
-    setSelectedElementType(e.target.value);
-    setConfig((oldConfig) => ({
-      ...oldConfig,
-      isButtonMode: e.target.value === "button",
-    }));
-  };
+	const toggleButtonMode = (e) => {
+		setSelectedElementType(e.target.value);
+		setConfig((oldConfig) => ({
+			...oldConfig,
+			isButtonMode: e.target.value === "button",
+		}));
+	};
 
-  const setButtonColor = (color) => {
-    debouncedSetConfig("buttonColor", color);
-  };
+	const setButtonColor = (color) => {
+		debouncedSetConfig("buttonColor", color);
+	};
 
-  const setButtonText = (e) => {
-    setButtonValue(e.target.value);
-    debouncedSetConfig("buttonText", e.target.value);
-  };
+	const setButtonText = (e) => {
+		setButtonValue(e.target.value);
+		debouncedSetConfig("buttonText", e.target.value);
+	};
 
-  const toggleWithLogo = () => {
-    setConfig((oldConfig) => ({
-      ...oldConfig,
-      buttonWithLogo: !config.buttonWithLogo,
-    }));
-  };
+	const toggleWithLogo = () => {
+		setConfig((oldConfig) => ({
+			...oldConfig,
+			buttonWithLogo: !config.buttonWithLogo,
+		}));
+	};
 
-  return (
-    <ControlsSection>
-      <CategorySubHeader>{t("MainElementParameter")}</CategorySubHeader>
-      <RadioButtonGroup
-        orientation="vertical"
-        options={elementDisplayOptions}
-        name="elementDisplayInput"
-        selected={selectedElementType}
-        onClick={toggleButtonMode}
-        spacing="8px"
-        isDisabled
-        dataTestId="element_display_radio_button_group"
-      />
-      {config.isButtonMode ? (
-        <>
-          <CategorySubHeader>{t("ButtonCustomization")}</CategorySubHeader>
-          <ControlsGroup>
-            <Label className="label" text={t("ButtonColor")} />
-            <ColorInput
-              scale
-              handleChange={setButtonColor}
-              defaultColor={globalColors.lightSecondMain}
-              dataTestId="button_mode_color_input"
-            />
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("ButtonText")} />
-            <TextInput
-              scale
-              onChange={setButtonText}
-              placeholder={t("SelectToPortal", {
-                productName: t("Common:ProductName"),
-              })}
-              value={buttonValue}
-              tabIndex={3}
-              testId="button_mode_text_input"
-            />
-            <Checkbox
-              className="checkbox"
-              label={t("Logo")}
-              onChange={toggleWithLogo}
-              isChecked={config.buttonWithLogo}
-              dataTestId="button_mode_logo_checkbox"
-            />
-          </ControlsGroup>
-        </>
-      ) : null}
-    </ControlsSection>
-  );
+	return (
+		<ControlsSection>
+			<CategorySubHeader>{t("MainElementParameter")}</CategorySubHeader>
+			<RadioButtonGroup
+				orientation="vertical"
+				options={elementDisplayOptions}
+				name="elementDisplayInput"
+				selected={selectedElementType}
+				onClick={toggleButtonMode}
+				spacing="8px"
+				isDisabled
+				dataTestId="element_display_radio_button_group"
+			/>
+			{config.isButtonMode ? (
+				<>
+					<CategorySubHeader>{t("ButtonCustomization")}</CategorySubHeader>
+					<ControlsGroup>
+						<Label className="label" text={t("ButtonColor")} />
+						<ColorInput
+							scale
+							handleChange={setButtonColor}
+							defaultColor={globalColors.lightSecondMain}
+							dataTestId="button_mode_color_input"
+						/>
+					</ControlsGroup>
+					<ControlsGroup>
+						<Label className="label" text={t("ButtonText")} />
+						<TextInput
+							scale
+							onChange={setButtonText}
+							placeholder={t("SelectToPortal", {
+								productName: t("Common:ProductName"),
+							})}
+							value={buttonValue}
+							tabIndex={3}
+							testId="button_mode_text_input"
+						/>
+						<Checkbox
+							className="checkbox"
+							label={t("Logo")}
+							onChange={toggleWithLogo}
+							isChecked={config.buttonWithLogo}
+							dataTestId="button_mode_logo_checkbox"
+						/>
+					</ControlsGroup>
+				</>
+			) : null}
+		</ControlsSection>
+	);
 };

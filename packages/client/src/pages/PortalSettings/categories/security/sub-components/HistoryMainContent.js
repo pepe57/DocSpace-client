@@ -26,7 +26,7 @@
 
 import { useEffect, useState } from "react";
 import { Text } from "@docspace/ui-kit/components/text";
-// import { TextInput } from "@docspace/shared/components/text-input";
+// import { TextInput } from "@docspace/ui-kit/components/text-input";
 // import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import styled, { useTheme } from "styled-components";
 import { Button } from "@docspace/shared/components/button";
@@ -79,7 +79,7 @@ const MainContainer = styled.div`
   .login-subheader {
     font-size: 13px;
     color: ${(props) =>
-      props.theme.client.settings.security.loginHistory.subheaderColor};
+			props.theme.client.settings.security.loginHistory.subheaderColor};
   }
 
   .latest-text {
@@ -154,8 +154,8 @@ const DownLoadWrapper = styled.div`
 
     margin: 0;
     color: ${(props) =>
-      props.theme.client.settings.security.auditTrail
-        .downloadReportDescriptionColor};
+			props.theme.client.settings.security.auditTrail
+				.downloadReportDescriptionColor};
   }
 
   @media ${mobile} {
@@ -164,90 +164,90 @@ const DownLoadWrapper = styled.div`
 `;
 
 const HistoryMainContent = (props) => {
-  const {
-    t,
-    lifetime,
-    subHeader,
-    content,
-    downloadReport,
-    downloadReportDescription,
-    getReport,
-    isSettingNotPaid,
-    isLoadingDownloadReport,
-    tfaEnabled,
-    withCampaign,
-    currentColorScheme,
-    loginHistory,
-  } = props;
+	const {
+		t,
+		lifetime,
+		subHeader,
+		content,
+		downloadReport,
+		downloadReportDescription,
+		getReport,
+		isSettingNotPaid,
+		isLoadingDownloadReport,
+		tfaEnabled,
+		withCampaign,
+		currentColorScheme,
+		loginHistory,
+	} = props;
 
-  const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
-  const [auditLifeTime, setAuditLifeTime] = useState(String(lifetime) || "180");
+	const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
+	const [auditLifeTime, setAuditLifeTime] = useState(String(lifetime) || "180");
 
-  const theme = useTheme();
+	const theme = useTheme();
 
-  const getSettings = () => {
-    const storagePeriodSettings = getFromSessionStorage("storagePeriod");
-    const defaultData = {
-      loginHistoryLifeTime: String(lifetime),
-      auditTrailLifeTime: String(lifetime),
-    };
+	const getSettings = () => {
+		const storagePeriodSettings = getFromSessionStorage("storagePeriod");
+		const defaultData = {
+			loginHistoryLifeTime: String(lifetime),
+			auditTrailLifeTime: String(lifetime),
+		};
 
-    saveToSessionStorage("defaultStoragePeriod", defaultData);
-    if (storagePeriodSettings) {
-      setLoginLifeTime(storagePeriodSettings.loginHistoryLifeTime);
-      setAuditLifeTime(storagePeriodSettings.auditTrailLifeTime);
-    } else {
-      setLoginLifeTime(String(lifetime));
-      setAuditLifeTime(String(lifetime));
-    }
-  };
+		saveToSessionStorage("defaultStoragePeriod", defaultData);
+		if (storagePeriodSettings) {
+			setLoginLifeTime(storagePeriodSettings.loginHistoryLifeTime);
+			setAuditLifeTime(storagePeriodSettings.auditTrailLifeTime);
+		} else {
+			setLoginLifeTime(String(lifetime));
+			setAuditLifeTime(String(lifetime));
+		}
+	};
 
-  useEffect(() => {
-    getSettings();
-  }, []);
+	useEffect(() => {
+		getSettings();
+	}, []);
 
-  useEffect(() => {
-    const newSettings = {
-      loginHistoryLifeTime: loginLifeTime,
-      auditTrailLifeTime: auditLifeTime,
-    };
-    saveToSessionStorage("storagePeriod", newSettings);
-  }, [loginLifeTime, auditLifeTime]);
+	useEffect(() => {
+		const newSettings = {
+			loginHistoryLifeTime: loginLifeTime,
+			auditTrailLifeTime: auditLifeTime,
+		};
+		saveToSessionStorage("storagePeriod", newSettings);
+	}, [loginLifeTime, auditLifeTime]);
 
-  const handleMouseDown = (e) => {
-    if (e.button === 0 || e.button === 1) {
-      getReport();
-      e.preventDefault();
-    }
-  };
+	const handleMouseDown = (e) => {
+		if (e.button === 0 || e.button === 1) {
+			getReport();
+			e.preventDefault();
+		}
+	};
 
-  return (
-    <MainContainer isSettingNotPaid={isSettingNotPaid}>
-      <TwoFactorCampaignBanner
-        tfaEnabled={tfaEnabled}
-        currentColorScheme={currentColorScheme}
-        withCampaign={withCampaign}
-        style={{ marginBottom: "20px" }}
-      />
-      {isSettingNotPaid ? (
-        <Badge
-          className="paid-badge"
-          fontWeight="700"
-          backgroundColor={
-            theme.isBase
-              ? globalColors.favoritesStatus
-              : globalColors.favoriteStatusDark
-          }
-          label={t("Common:Paid")}
-          isPaidBadge
-        />
-      ) : null}
-      <div className="main-wrapper">
-        <Text fontSize="13px" className="login-history-description">
-          {subHeader}
-        </Text>
+	return (
+		<MainContainer isSettingNotPaid={isSettingNotPaid}>
+			<TwoFactorCampaignBanner
+				tfaEnabled={tfaEnabled}
+				currentColorScheme={currentColorScheme}
+				withCampaign={withCampaign}
+				style={{ marginBottom: "20px" }}
+			/>
+			{isSettingNotPaid ? (
+				<Badge
+					className="paid-badge"
+					fontWeight="700"
+					backgroundColor={
+						theme.isBase
+							? globalColors.favoritesStatus
+							: globalColors.favoriteStatusDark
+					}
+					label={t("Common:Paid")}
+					isPaidBadge
+				/>
+			) : null}
+			<div className="main-wrapper">
+				<Text fontSize="13px" className="login-history-description">
+					{subHeader}
+				</Text>
 
-        {/*  
+				{/*  
         // This part is commented out because it is not used in the current version of the application
         <Text className="latest-text settings_unavailable">{latestText} </Text>
 
@@ -304,30 +304,30 @@ const HistoryMainContent = (props) => {
             />
           </>
         )} */}
-      </div>
-      {content}
-      <DownLoadWrapper>
-        <Button
-          className="download-report_button"
-          dataTestId={
-            loginHistory
-              ? "login_history_download_report_button"
-              : "audit_trail_download_report_button"
-          }
-          primary
-          label={downloadReport}
-          size="normal"
-          minWidth="auto"
-          onMouseDown={handleMouseDown}
-          isDisabled={isSettingNotPaid}
-          isLoading={isLoadingDownloadReport}
-        />
-        <span className="download-report_description">
-          {downloadReportDescription}
-        </span>
-      </DownLoadWrapper>
-    </MainContainer>
-  );
+			</div>
+			{content}
+			<DownLoadWrapper>
+				<Button
+					className="download-report_button"
+					dataTestId={
+						loginHistory
+							? "login_history_download_report_button"
+							: "audit_trail_download_report_button"
+					}
+					primary
+					label={downloadReport}
+					size="normal"
+					minWidth="auto"
+					onMouseDown={handleMouseDown}
+					isDisabled={isSettingNotPaid}
+					isLoading={isLoadingDownloadReport}
+				/>
+				<span className="download-report_description">
+					{downloadReportDescription}
+				</span>
+			</DownLoadWrapper>
+		</MainContainer>
+	);
 };
 
 export default HistoryMainContent;

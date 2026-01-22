@@ -34,10 +34,10 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import {
-  InputSize,
-  InputType,
-  TextInput,
-} from "@docspace/shared/components/text-input";
+	InputSize,
+	InputType,
+	TextInput,
+} from "@docspace/ui-kit/components/text-input";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -47,257 +47,257 @@ import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { GreetingUserContainer } from "@/components/GreetingContainer";
 
 type RegistrationFormProps = {
-  isLoading: boolean;
-  email: string;
-  emailFromLink: string;
-  errorText: string;
+	isLoading: boolean;
+	email: string;
+	emailFromLink: string;
+	errorText: string;
 
-  fnameValid: boolean;
-  fname: string;
-  onChangeFname(e: ChangeEvent<HTMLInputElement>): void;
+	fnameValid: boolean;
+	fname: string;
+	onChangeFname(e: ChangeEvent<HTMLInputElement>): void;
 
-  sname: string;
-  snameValid: boolean;
-  onChangeSname(e: ChangeEvent<HTMLInputElement>): void;
+	sname: string;
+	snameValid: boolean;
+	onChangeSname(e: ChangeEvent<HTMLInputElement>): void;
 
-  isPasswordErrorShow: boolean;
-  passwordValid: boolean;
-  password: string;
-  passwordSettings?: TPasswordSettings;
-  onChangePassword(e: ChangeEvent<HTMLInputElement>): void;
-  onBlurPassword(): void;
-  onKeyPress(e: KeyboardEvent<HTMLInputElement>): void;
-  onValidatePassword(progressScore: boolean): void;
+	isPasswordErrorShow: boolean;
+	passwordValid: boolean;
+	password: string;
+	passwordSettings?: TPasswordSettings;
+	onChangePassword(e: ChangeEvent<HTMLInputElement>): void;
+	onBlurPassword(): void;
+	onKeyPress(e: KeyboardEvent<HTMLInputElement>): void;
+	onValidatePassword(progressScore: boolean): void;
 
-  isChecked: boolean;
-  onChangeCheckbox(): void;
+	isChecked: boolean;
+	onChangeCheckbox(): void;
 
-  onClickBack(): void;
-  onSubmit(): void;
+	onClickBack(): void;
+	onSubmit(): void;
 
-  licenseUrl: string;
-  legalTerms: string;
+	licenseUrl: string;
+	legalTerms: string;
 
-  isStandalone: boolean;
-  organizationName: string;
+	isStandalone: boolean;
+	organizationName: string;
 };
 
 const RegistrationForm = ({
-  isLoading,
-  email,
-  emailFromLink,
-  errorText,
+	isLoading,
+	email,
+	emailFromLink,
+	errorText,
 
-  fnameValid,
-  fname,
-  onChangeFname,
+	fnameValid,
+	fname,
+	onChangeFname,
 
-  sname,
-  snameValid,
-  onChangeSname,
+	sname,
+	snameValid,
+	onChangeSname,
 
-  isPasswordErrorShow,
-  passwordValid,
-  passwordSettings,
-  password,
-  onChangePassword,
-  onBlurPassword,
-  onKeyPress,
-  onValidatePassword,
+	isPasswordErrorShow,
+	passwordValid,
+	passwordSettings,
+	password,
+	onChangePassword,
+	onBlurPassword,
+	onKeyPress,
+	onValidatePassword,
 
-  isChecked,
-  onChangeCheckbox,
+	isChecked,
+	onChangeCheckbox,
 
-  onClickBack,
-  onSubmit,
+	onClickBack,
+	onSubmit,
 
-  licenseUrl,
-  legalTerms,
-  isStandalone,
-  organizationName,
+	licenseUrl,
+	legalTerms,
+	isStandalone,
+	organizationName,
 }: RegistrationFormProps) => {
-  const { t } = useTranslation(["Confirm", "Common"]);
+	const { t } = useTranslation(["Confirm", "Common"]);
 
-  const { linkData } = useContext(ConfirmRouteContext);
+	const { linkData } = useContext(ConfirmRouteContext);
 
-  const newsletter = t("Newsletter", {
-    organizationName,
-  });
+	const newsletter = t("Newsletter", {
+		organizationName,
+	});
 
-  const termsConditionsComponent = (
-    <div className="terms-conditions">
-      <Text fontSize="13px" textAlign="center" lineHeight="20px">
-        <Trans
-          t={t}
-          ns="Confirm"
-          i18nKey="TermsAndConditions"
-          components={{
-            1: (
-              <Link
-                key="component_key"
-                tag="a"
-                href={licenseUrl}
-                target={LinkTarget.blank}
-                fontSize="13px"
-                color="accent"
-                dataTestId="license_url"
-              />
-            ),
-            2: (
-              <Link
-                key="second_component_key"
-                tag="a"
-                href={legalTerms}
-                target={LinkTarget.blank}
-                fontSize="13px"
-                color="accent"
-                dataTestId="legal_terms_url"
-              />
-            ),
-          }}
-        />
-      </Text>
-    </div>
-  );
+	const termsConditionsComponent = (
+		<div className="terms-conditions">
+			<Text fontSize="13px" textAlign="center" lineHeight="20px">
+				<Trans
+					t={t}
+					ns="Confirm"
+					i18nKey="TermsAndConditions"
+					components={{
+						1: (
+							<Link
+								key="component_key"
+								tag="a"
+								href={licenseUrl}
+								target={LinkTarget.blank}
+								fontSize="13px"
+								color="accent"
+								dataTestId="license_url"
+							/>
+						),
+						2: (
+							<Link
+								key="second_component_key"
+								tag="a"
+								href={legalTerms}
+								target={LinkTarget.blank}
+								fontSize="13px"
+								color="accent"
+								dataTestId="legal_terms_url"
+							/>
+						),
+					}}
+				/>
+			</Text>
+		</div>
+	);
 
-  return (
-    <div>
-      <GreetingUserContainer
-        email={email}
-        onClickBack={onClickBack}
-        type={linkData.type ?? ""}
-        emailFromLink={emailFromLink}
-      />
-      <FieldContainer
-        className="form-field"
-        isVertical
-        labelVisible={false}
-        hasError={!fnameValid}
-        errorMessage={
-          errorText ||
-          (fname.trim().length === 0
-            ? t("Common:RequiredField")
-            : t("Common:IncorrectFirstName"))
-        }
-        dataTestId="first_name_field_container"
-      >
-        <TextInput
-          id="first-name"
-          name="first-name"
-          type={InputType.text}
-          size={InputSize.large}
-          hasError={!fnameValid}
-          value={fname}
-          placeholder={t("Common:FirstName")}
-          scale
-          tabIndex={1}
-          isDisabled={isLoading}
-          onChange={onChangeFname}
-          onKeyDown={onKeyPress}
-          isAutoFocussed
-          testId="first_name_input"
-        />
-      </FieldContainer>
-      <FieldContainer
-        className="form-field"
-        isVertical
-        labelVisible={false}
-        hasError={!snameValid}
-        errorMessage={
-          errorText ||
-          (sname.trim().length === 0
-            ? t("Common:RequiredField")
-            : t("Common:IncorrectLastName"))
-        }
-        dataTestId="last_name_field_container"
-      >
-        <TextInput
-          id="last-name"
-          name="last-name"
-          type={InputType.text}
-          size={InputSize.large}
-          hasError={!snameValid}
-          value={sname}
-          placeholder={t("Common:LastName")}
-          scale
-          tabIndex={1}
-          isDisabled={isLoading}
-          onChange={onChangeSname}
-          onKeyDown={onKeyPress}
-          testId="last_name_input"
-        />
-      </FieldContainer>
-      <FieldContainer
-        className="form-field password-field"
-        isVertical
-        labelVisible={false}
-        hasError={isPasswordErrorShow ? !passwordValid : undefined}
-        errorMessage={
-          password ? t("Common:IncorrectPassword") : t("Common:RequiredField")
-        }
-        dataTestId="password_field_container"
-      >
-        <PasswordInput
-          simpleView={false}
-          passwordSettings={passwordSettings}
-          id="password"
-          inputName="password"
-          placeholder={t("Common:Password")}
-          inputType={InputType.password}
-          size={InputSize.large}
-          hasError={isPasswordErrorShow ? !passwordValid : undefined}
-          inputValue={password}
-          scale
-          tabIndex={1}
-          isDisabled={isLoading}
-          autoComplete="current-password"
-          onChange={onChangePassword}
-          onBlur={onBlurPassword}
-          onKeyDown={onKeyPress}
-          onValidateInput={onValidatePassword}
-          tooltipPasswordTitle={`${t("Common:PasswordLimitMessage")}:`}
-          tooltipPasswordLength={`${t(
-            "Common:PasswordMinimumLength",
-          )}: ${passwordSettings ? passwordSettings.minLength : 8}`}
-          tooltipPasswordDigits={`${t("Common:PasswordLimitDigits")}`}
-          tooltipPasswordCapital={`${t("Common:PasswordLimitUpperCase")}`}
-          tooltipPasswordSpecial={`${t("Common:PasswordLimitSpecialSymbols")}`}
-          generatePasswordTitle={t("Common:GeneratePassword")}
-          tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
-        />
-      </FieldContainer>
+	return (
+		<div>
+			<GreetingUserContainer
+				email={email}
+				onClickBack={onClickBack}
+				type={linkData.type ?? ""}
+				emailFromLink={emailFromLink}
+			/>
+			<FieldContainer
+				className="form-field"
+				isVertical
+				labelVisible={false}
+				hasError={!fnameValid}
+				errorMessage={
+					errorText ||
+					(fname.trim().length === 0
+						? t("Common:RequiredField")
+						: t("Common:IncorrectFirstName"))
+				}
+				dataTestId="first_name_field_container"
+			>
+				<TextInput
+					id="first-name"
+					name="first-name"
+					type={InputType.text}
+					size={InputSize.large}
+					hasError={!fnameValid}
+					value={fname}
+					placeholder={t("Common:FirstName")}
+					scale
+					tabIndex={1}
+					isDisabled={isLoading}
+					onChange={onChangeFname}
+					onKeyDown={onKeyPress}
+					isAutoFocussed
+					testId="first_name_input"
+				/>
+			</FieldContainer>
+			<FieldContainer
+				className="form-field"
+				isVertical
+				labelVisible={false}
+				hasError={!snameValid}
+				errorMessage={
+					errorText ||
+					(sname.trim().length === 0
+						? t("Common:RequiredField")
+						: t("Common:IncorrectLastName"))
+				}
+				dataTestId="last_name_field_container"
+			>
+				<TextInput
+					id="last-name"
+					name="last-name"
+					type={InputType.text}
+					size={InputSize.large}
+					hasError={!snameValid}
+					value={sname}
+					placeholder={t("Common:LastName")}
+					scale
+					tabIndex={1}
+					isDisabled={isLoading}
+					onChange={onChangeSname}
+					onKeyDown={onKeyPress}
+					testId="last_name_input"
+				/>
+			</FieldContainer>
+			<FieldContainer
+				className="form-field password-field"
+				isVertical
+				labelVisible={false}
+				hasError={isPasswordErrorShow ? !passwordValid : undefined}
+				errorMessage={
+					password ? t("Common:IncorrectPassword") : t("Common:RequiredField")
+				}
+				dataTestId="password_field_container"
+			>
+				<PasswordInput
+					simpleView={false}
+					passwordSettings={passwordSettings}
+					id="password"
+					inputName="password"
+					placeholder={t("Common:Password")}
+					inputType={InputType.password}
+					size={InputSize.large}
+					hasError={isPasswordErrorShow ? !passwordValid : undefined}
+					inputValue={password}
+					scale
+					tabIndex={1}
+					isDisabled={isLoading}
+					autoComplete="current-password"
+					onChange={onChangePassword}
+					onBlur={onBlurPassword}
+					onKeyDown={onKeyPress}
+					onValidateInput={onValidatePassword}
+					tooltipPasswordTitle={`${t("Common:PasswordLimitMessage")}:`}
+					tooltipPasswordLength={`${t(
+						"Common:PasswordMinimumLength",
+					)}: ${passwordSettings ? passwordSettings.minLength : 8}`}
+					tooltipPasswordDigits={`${t("Common:PasswordLimitDigits")}`}
+					tooltipPasswordCapital={`${t("Common:PasswordLimitUpperCase")}`}
+					tooltipPasswordSpecial={`${t("Common:PasswordLimitSpecialSymbols")}`}
+					generatePasswordTitle={t("Common:GeneratePassword")}
+					tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
+				/>
+			</FieldContainer>
 
-      {!isStandalone ? (
-        <div className="news-subscription">
-          <Checkbox
-            className="checkbox-news"
-            onChange={onChangeCheckbox}
-            isChecked={isChecked}
-            isDisabled={isLoading}
-            label={newsletter}
-            truncate={false}
-            dataTestId="news_checkbox"
-          />
-        </div>
-      ) : null}
+			{!isStandalone ? (
+				<div className="news-subscription">
+					<Checkbox
+						className="checkbox-news"
+						onChange={onChangeCheckbox}
+						isChecked={isChecked}
+						isDisabled={isLoading}
+						label={newsletter}
+						truncate={false}
+						dataTestId="news_checkbox"
+					/>
+				</div>
+			) : null}
 
-      {termsConditionsComponent}
+			{termsConditionsComponent}
 
-      <Button
-        id="register-singup"
-        className="login-button"
-        primary
-        size={ButtonSize.medium}
-        scale
-        label={isLoading ? t("Common:LoadingProcessing") : t("SignUp")}
-        tabIndex={1}
-        isDisabled={isLoading}
-        isLoading={isLoading}
-        onClick={onSubmit}
-        testId="signup_button"
-      />
-    </div>
-  );
+			<Button
+				id="register-singup"
+				className="login-button"
+				primary
+				size={ButtonSize.medium}
+				scale
+				label={isLoading ? t("Common:LoadingProcessing") : t("SignUp")}
+				tabIndex={1}
+				isDisabled={isLoading}
+				isLoading={isLoading}
+				onClick={onSubmit}
+				testId="signup_button"
+			/>
+		</div>
+	);
 };
 
 export default RegistrationForm;

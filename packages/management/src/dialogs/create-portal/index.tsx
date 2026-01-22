@@ -35,14 +35,14 @@ import toLower from "lodash/toLower";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
-  ModalDialog,
-  ModalDialogType,
+	ModalDialog,
+	ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import {
-  TextInput,
-  InputType,
-  InputSize,
-} from "@docspace/shared/components/text-input";
+	TextInput,
+	InputType,
+	InputSize,
+} from "@docspace/ui-kit/components/text-input";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { validatePortalName } from "@docspace/shared/utils/common";
 
@@ -53,177 +53,177 @@ import { useStores } from "@/hooks/useStores";
 import styles from "../dialogs.module.scss";
 
 export const CreatePortalDialog = observer(
-  ({
-    baseDomain,
-    domainValidator,
-    user,
-  }: {
-    baseDomain: string;
-    domainValidator: TDomainValidator;
-    user: TUser;
-  }) => {
-    const [visit, setVisit] = React.useState<boolean>(false);
-    const [restrictAccess, setRestrictAccess] = React.useState<boolean>(false);
-    const [registerError, setRegisterError] = React.useState<null | string>(
-      null,
-    );
-    const [isLoading, setIsLoading] = React.useState<boolean>(false);
+	({
+		baseDomain,
+		domainValidator,
+		user,
+	}: {
+		baseDomain: string;
+		domainValidator: TDomainValidator;
+		user: TUser;
+	}) => {
+		const [visit, setVisit] = React.useState<boolean>(false);
+		const [restrictAccess, setRestrictAccess] = React.useState<boolean>(false);
+		const [registerError, setRegisterError] = React.useState<null | string>(
+			null,
+		);
+		const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-    const { spacesStore } = useStores();
-    const router = useRouter();
+		const { spacesStore } = useStores();
+		const router = useRouter();
 
-    const {
-      createPortalDialogVisible: visible,
-      setCreatePortalDialogVisible,
-      createNewPortal,
-    } = spacesStore;
+		const {
+			createPortalDialogVisible: visible,
+			setCreatePortalDialogVisible,
+			createNewPortal,
+		} = spacesStore;
 
-    const { t } = useTranslation(["Management", "Common"]);
+		const { t } = useTranslation(["Management", "Common"]);
 
-    const [name, setName] = React.useState<string>("");
+		const [name, setName] = React.useState<string>("");
 
-    const onHandleName = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setName(toLower(e.target.value));
-      if (registerError) setRegisterError(null);
-    };
+		const onHandleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+			setName(toLower(e.target.value));
+			if (registerError) setRegisterError(null);
+		};
 
-    const onClose = () => {
-      setCreatePortalDialogVisible(false);
-    };
+		const onClose = () => {
+			setCreatePortalDialogVisible(false);
+		};
 
-    const onHandleClick = async () => {
-      const firstName = user?.firstName;
-      const lastName = user?.lastName;
-      const email = user?.email;
+		const onHandleClick = async () => {
+			const firstName = user?.firstName;
+			const lastName = user?.lastName;
+			const email = user?.email;
 
-      const data = {
-        firstName,
-        lastName,
-        email,
-        portalName: name,
-        limitedAccessSpace: restrictAccess,
-      };
+			const data = {
+				firstName,
+				lastName,
+				email,
+				portalName: name,
+				limitedAccessSpace: restrictAccess,
+			};
 
-      const protocol = window?.location?.protocol;
+			const protocol = window?.location?.protocol;
 
-      const isValidPortalName = validatePortalName(
-        name,
-        domainValidator,
-        setRegisterError,
-        t,
-      );
+			const isValidPortalName = validatePortalName(
+				name,
+				domainValidator,
+				setRegisterError,
+				t,
+			);
 
-      if (isValidPortalName) {
-        setIsLoading(true);
-        await createNewPortal(data)
-          .then(async (d) => {
-            const { tenant } = d as TNewPortalResponse;
-            if (visit) {
-              const portalUrl = `${protocol}//${tenant?.domain}/`;
+			if (isValidPortalName) {
+				setIsLoading(true);
+				await createNewPortal(data)
+					.then(async (d) => {
+						const { tenant } = d as TNewPortalResponse;
+						if (visit) {
+							const portalUrl = `${protocol}//${tenant?.domain}/`;
 
-              return window.open(portalUrl, "_self");
-            }
+							return window.open(portalUrl, "_self");
+						}
 
-            // await settingsStore.getAllPortals();
-            onClose();
-            router.refresh();
-          })
-          .catch((error) => {
-            setRegisterError(error?.response?.data?.message);
-          })
-          .finally(() => {
-            setIsLoading(false);
-          });
-      }
-    };
+						// await settingsStore.getAllPortals();
+						onClose();
+						router.refresh();
+					})
+					.catch((error) => {
+						setRegisterError(error?.response?.data?.message);
+					})
+					.finally(() => {
+						setIsLoading(false);
+					});
+			}
+		};
 
-    return (
-      <ModalDialog
-        isLarge
-        visible={visible}
-        onClose={onClose}
-        displayType={ModalDialogType.modal}
-      >
-        <ModalDialog.Header>
-          {t("CreatingPortal", { productName: t("Common:ProductName") })}
-        </ModalDialog.Header>
-        <ModalDialog.Body>
-          <Text>
-            {t("CreateSpaceDescription", {
-              productName: t("Common:ProductName"),
-            })}
-          </Text>
-          <div className={styles.createPortalInputBlock}>
-            <Text
-              fontSize="13px"
-              fontWeight="600"
-              style={{ paddingBottom: "5px" }}
-            >
-              {t("PortalName", {
-                productName: t("Common:ProductName"),
-              })}
-            </Text>
-            <TextInput
-              testId="create-portal-input"
-              type={InputType.text}
-              size={InputSize.base}
-              onChange={onHandleName}
-              value={name}
-              hasError={!!registerError}
-              placeholder={t("EnterName")}
-              isAutoFocussed
-              scale
-            />
-            <div>
-              <Text
-                className={styles.errorText}
-                fontSize="12px"
-                fontWeight="400"
-              >
-                {registerError}
-              </Text>
-            </div>
-            <div style={{ marginTop: "6px", wordWrap: "break-word" }}>
-              <Text
-                className={styles.subText}
-                fontSize="12px"
-                fontWeight="400"
-              >{`${name}.${baseDomain}`}</Text>
-            </div>
-          </div>
-          <div className={styles.createPortalCheckboxes}>
-            <Checkbox
-              label={t("VisitSpace")}
-              onChange={() => setVisit((v) => !v)}
-              isChecked={visit}
-            />
-            <Checkbox
-              label={t("RestrictAccess")}
-              onChange={() => setRestrictAccess((access) => !access)}
-              isChecked={restrictAccess}
-            />
-          </div>
-        </ModalDialog.Body>
-        <ModalDialog.Footer>
-          <Button
-            testId="create-portal-button"
-            isLoading={isLoading}
-            key="CreateButton"
-            label={t("Common:Create")}
-            size={ButtonSize.normal}
-            scale
-            primary
-            onClick={onHandleClick}
-          />
-          <Button
-            key="CancelButton"
-            label={t("Common:CancelButton")}
-            size={ButtonSize.normal}
-            onClick={onClose}
-            scale
-          />
-        </ModalDialog.Footer>
-      </ModalDialog>
-    );
-  },
+		return (
+			<ModalDialog
+				isLarge
+				visible={visible}
+				onClose={onClose}
+				displayType={ModalDialogType.modal}
+			>
+				<ModalDialog.Header>
+					{t("CreatingPortal", { productName: t("Common:ProductName") })}
+				</ModalDialog.Header>
+				<ModalDialog.Body>
+					<Text>
+						{t("CreateSpaceDescription", {
+							productName: t("Common:ProductName"),
+						})}
+					</Text>
+					<div className={styles.createPortalInputBlock}>
+						<Text
+							fontSize="13px"
+							fontWeight="600"
+							style={{ paddingBottom: "5px" }}
+						>
+							{t("PortalName", {
+								productName: t("Common:ProductName"),
+							})}
+						</Text>
+						<TextInput
+							testId="create-portal-input"
+							type={InputType.text}
+							size={InputSize.base}
+							onChange={onHandleName}
+							value={name}
+							hasError={!!registerError}
+							placeholder={t("EnterName")}
+							isAutoFocussed
+							scale
+						/>
+						<div>
+							<Text
+								className={styles.errorText}
+								fontSize="12px"
+								fontWeight="400"
+							>
+								{registerError}
+							</Text>
+						</div>
+						<div style={{ marginTop: "6px", wordWrap: "break-word" }}>
+							<Text
+								className={styles.subText}
+								fontSize="12px"
+								fontWeight="400"
+							>{`${name}.${baseDomain}`}</Text>
+						</div>
+					</div>
+					<div className={styles.createPortalCheckboxes}>
+						<Checkbox
+							label={t("VisitSpace")}
+							onChange={() => setVisit((v) => !v)}
+							isChecked={visit}
+						/>
+						<Checkbox
+							label={t("RestrictAccess")}
+							onChange={() => setRestrictAccess((access) => !access)}
+							isChecked={restrictAccess}
+						/>
+					</div>
+				</ModalDialog.Body>
+				<ModalDialog.Footer>
+					<Button
+						testId="create-portal-button"
+						isLoading={isLoading}
+						key="CreateButton"
+						label={t("Common:Create")}
+						size={ButtonSize.normal}
+						scale
+						primary
+						onClick={onHandleClick}
+					/>
+					<Button
+						key="CancelButton"
+						label={t("Common:CancelButton")}
+						size={ButtonSize.normal}
+						onClick={onClose}
+						scale
+					/>
+				</ModalDialog.Footer>
+			</ModalDialog>
+		);
+	},
 );
