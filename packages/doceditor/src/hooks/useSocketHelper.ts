@@ -61,14 +61,14 @@ const useSocketHelper = ({
 
     if (user?.id)
       SocketHelper?.emit(SocketCommands.Subscribe, {
-        roomParts: `user:${user.id}-quota`,
+        roomParts: `user-${user.id}-quota`,
       });
   }, [user?.id]);
 
   React.useEffect(() => {
     if (folderId && folderType === FolderType.Rooms) {
       SocketHelper?.emit(SocketCommands.Subscribe, {
-        roomParts: `room:${folderId}-quota`,
+        roomParts: `room-${folderId}-quota`,
       });
     }
   }, [folderId]);
@@ -85,10 +85,10 @@ const useSocketHelper = ({
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "tenant-quota",
     });
-    SocketHelper?.emit(SocketCommands.Subscribe, {
-      roomParts: "QUOTA",
-      individual: true,
-    });
+    // SocketHelper?.emit(SocketCommands.Subscribe, {
+    //   roomParts: "QUOTA",
+    //   individual: true,
+    // });
     const callback = async () => {
       try {
         // const message = t("Common:PreparationPortalTitle");

@@ -27,19 +27,33 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SnackBar } from "@docspace/shared/components/snackbar";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
-interface BarProps {
-  isStorageQuotaLimit?: boolean;
-}
+const Bar: React.FC = () => {
+  const { t } = useTranslation("Common");
 
-const Bar: React.FC<BarProps> = (props) => {
-  const { t } = useTranslation("Editor");
-  const { isStorageQuotaLimit } = props;
+  const [isStorageQuotaLimit, setIsStorageQuotaLimit] = React.useState(false);
 
   const quotaInfo = {
     header: t("QuotaLimitWarning"),
     description: t("YourFurtherEditsNotSaved"),
   };
+
+  const onAction = () => {
+    setIsStorageQuotaLimit(false);
+  };
+
+  React.useEffect(() => {
+    const handleQuotaChange = () => {
+      setIsStorageQuotaLimit(true);
+    };
+
+    SocketHelper?.on(SocketEvents.QuotaExceeded, handleQuotaChange);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.QuotaExceeded, handleQuotaChange);
+    };
+  }, []);
 
   return isStorageQuotaLimit ? (
     <SnackBar
@@ -50,6 +64,7 @@ const Bar: React.FC<BarProps> = (props) => {
       sectionWidth={0}
       showIcon
       additionalHeaderText={quotaInfo.description}
+      onAction={onAction}
     />
   ) : null;
 };

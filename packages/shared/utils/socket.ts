@@ -318,6 +318,11 @@ export type TListenEventCallbackMap = {
     data: string;
   }) => void;
   [SocketEvents.ExportChat]: (data: ExportChatEventData) => void;
+  [SocketEvents.QuotaExceeded]: (data: {
+    id: string;
+    room: string;
+    scope: string;
+  }) => void;
 };
 
 /**

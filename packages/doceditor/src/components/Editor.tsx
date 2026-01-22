@@ -57,8 +57,6 @@ import useEditorEvents from "@/hooks/useEditorEvents";
 import useGoBackAndClose from "@/hooks/useGoBackAndClose";
 import { isPDFDocument } from "@/utils";
 
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
-
 import Bar from "./Bar";
 
 const Editor = ({
@@ -163,25 +161,6 @@ const Editor = ({
     t,
     config?.editorConfig?.customization?.goback?.url,
   );
-
-  const [isStorageQuotaLimit, setIsStorageQuotaLimit] = React.useState(false);
-
-  React.useEffect(() => {
-    const handleQuotaChange = () => {
-      console.log("SOCKET quota exceeded");
-      setIsStorageQuotaLimit(true);
-    };
-
-    SocketHelper?.on(SocketEvents.QuotaExceeded, handleQuotaChange);
-
-    SocketHelper?.on(SocketEvents.ChangedQuotaUserUsedValue, (options) => {
-      console.log(`[WS] change-user-quota-used-value`, options);
-    });
-
-    return () => {
-      SocketHelper?.off(SocketEvents.QuotaExceeded, handleQuotaChange);
-    };
-  }, []);
 
   const newConfig: IConfig = useMemo(() => {
     return config
@@ -336,7 +315,6 @@ const Editor = ({
 
   return (
     <div
-      // id={EDITOR_ID}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -345,7 +323,7 @@ const Editor = ({
       }}
     >
       <div style={{ height: "auto", overflow: "visible" }}>
-        <Bar isStorageQuotaLimit={isStorageQuotaLimit} />
+        <Bar />
       </div>
       <DocumentEditor
         id={EDITOR_ID}
