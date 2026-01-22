@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ReactNode } from "react";
+import type { DropEvent } from "react-dropzone";
 
 type BaseDropzoneProps = {
   /** Shows loading state of the dropzone */
@@ -48,6 +49,10 @@ type FileDropHandler<T extends File = File> = (acceptedFiles: T[]) => void;
 export type DropzoneProps = BaseDropzoneProps & {
   /** Accepted file types (string[]) */
   accept: string | string[];
+  /** Custom function to get files from drop event */
+  getFilesFromEvent?: (
+    event: DropEvent,
+  ) => Promise<(File | DataTransferItem)[]> | (File | DataTransferItem)[];
   /** Callback when files are dropped */
   onDrop?: FileDropHandler;
   /** Data test id */

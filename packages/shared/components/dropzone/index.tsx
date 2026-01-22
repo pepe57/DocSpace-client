@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useDropzone } from "react-dropzone";
+import { useDropzone, DropEvent } from "react-dropzone";
 import classNames from "classnames";
 
 import { Loader, LoaderTypes } from "../loader";
@@ -40,18 +40,27 @@ const Dropzone = ({
   onDrop,
   accept,
   maxFiles = 0,
+  getFilesFromEvent,
   linkMainText,
   linkSecondaryText,
   exstsText,
   dataTestId,
 }: DropzoneProps) => {
-  const { getRootProps, getInputProps } = useDropzone({
+  const dropzoneOptions = {
     maxFiles,
     noClick: isDisabled,
     noKeyboard: isDisabled,
     accept,
     onDrop,
-  });
+    ...(getFilesFromEvent
+      ? {
+          getFilesFromEvent: (event: DropEvent) =>
+            Promise.resolve(getFilesFromEvent(event)),
+        }
+      : {}),
+  } as Parameters<typeof useDropzone>[0];
+
+  const { getRootProps, getInputProps } = useDropzone(dropzoneOptions);
 
   return (
     <div
