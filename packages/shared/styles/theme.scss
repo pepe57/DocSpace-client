@@ -2844,7 +2844,7 @@
   --combobox-button-focus-open-border-color: var(--accent-main);
 
   --combobox-label-selected-color: #{$black};
-  --combobox-label-disabled-color: #{$gray};  
+  --combobox-label-disabled-color: #{$gray};
   --combobox-label-alternative-color: #{$gray};
 
   --combobox-plus-badge-bg-color: #{$gray};
@@ -2964,6 +2964,22 @@
   --ai-provider-key-hint-color: #{$dark-gray-dark};
 
   --web-search-hidden-key-description-color: #{$gray-dark};
+}
+
+.light {
+  --link-settings-description-text: #{$gray};
+  --link-settings-sub-description-text: #{$gray-text};
+  --link-settings-joined-users-cell-background: #{$gray-light-mid};
+  --link-settings-joined-users-cell-icon: #{$light-gray-dark};
+  --link-settings-dropdown-border: 1px solid #{$gray-strong};
+}
+
+.dark {
+  --link-settings-description-text: #{$gray};
+  --link-settings-sub-description-text: #{$dark-gray-dark};
+  --link-settings-joined-users-cell-background: #{$gray-dark-mid};
+  --link-settings-joined-users-cell-icon: #{$dark-gray-dark};
+  --link-settings-dropdown-border: 1px solid #{$gray-dark-strong};
 }
 
 .light {
@@ -3154,20 +3170,64 @@
   --template-gallery-view-button-border: #{$gray-dark-strong};
 }
 
-.light { 
+.light {
   --deep-link-file-tile-background: #{$light-gray-hover};
   --completed-form-link-color: #{$light-blue-main};
   --completed-form-description-color: #{$gray};
   --completed-form-box-background-color: #{$gray-light};
   --completed-form-label-color: #{$gray};
-} 
+}
 
-.dark { 
+.dark {
   --deep-link-file-tile-background: #{$light-dark-gray-hover};
   --completed-form-link-color: #{$white};
   --completed-form-description-color: #{$dark-gray-dark};
   --completed-form-box-background-color: #{$dark-gray-light};
   --completed-form-label-color: #{$dark-gray-dark};
+}
+
+.light {
+  --invite-panel-dropdown-separator: 1px solid #{$gray-strong};
+
+  --files-panel-border-bottom: 1px solid #{$gray-light-mid};
+  --files-panel-invite-text-color: #{$gray};
+
+  --invite-panel-icon-color: #{$gray};
+  --invite-panel-description-color: #{$gray};
+
+  --copy-link-icon-color: #{$gray};
+  --copy-link-icon-hover-color: #{$light-gray-dark};
+
+  --invite-panel-border-color: #{$light-second-main};
+  --invite-panel-email-color: #{$gray};
+  --invite-panel-text-color: #{$black};
+  --invite-panel-language-description-color: #{$gray};
+  --invite-panel-language-color: #{$light-gray-dark};
+  --invite-panel-drop-down-active: #{$black};
+
+  --invite-panel-email-list-icon-color: #{$gray};
+}
+
+.dark {
+  --invite-panel-dropdown-separator: 1px solid #{$gray-dark-strong};
+
+  --files-panel-border-bottom: 1px solid #{$gray-light-mid};
+  --files-panel-invite-text-color: #{$gray-dark};
+
+  --invite-panel-icon-color: #{$gray-dark};
+  --invite-panel-description-color: #{$gray};
+
+  --copy-link-icon-color: #{$gray-dark};
+  --copy-link-icon-hover-color: #{$white};
+
+  --invite-panel-border-color: #{$white};
+  --invite-panel-email-color: #{$gray};
+  --invite-panel-text-color: #{$white};
+  --invite-panel-language-description-color: #{$gray};
+  --invite-panel-language-color: #{$gray-dark};
+  --invite-panel-drop-down-active: #{$white};
+
+  --invite-panel-email-list-icon-color: #{$gray-dark};
 }
 
 .light {
@@ -3198,21 +3258,21 @@
   --new-files-panel-file-item-file-exst-color: #{$gray-dark};
 }
 
-.light { 
+.light {
   --template-access-avatar-border: 1px solid #{$white};
   --template-access-me-label-color: #{$gray};
-} 
+}
 
-.dark { 
+.dark {
   --template-access-avatar-border: 1px solid #{$black};
   --template-access-me-label-color: #{$gray-dark};
 }
 
-.light { 
+.light {
   --embedding-panel-info-block-background: #{$gray-light};
-} 
+}
 
-.dark { 
+.dark {
   --embedding-panel-info-block-background: #{$dark-gray-dark};
 }
 
