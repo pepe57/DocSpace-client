@@ -68,10 +68,13 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
   noSelect,
   imageIcon,
   imageAlt = "",
+  withoutArrow,
 }) => {
   const defaultOption = selectedOption?.default;
   // const isSelected = selectedOption?.key !== 0;
-  const displayArrow = withOptions || withAdvancedOptions || displayArrowProp;
+  const displayArrow = withoutArrow
+    ? !withoutArrow
+    : withOptions || withAdvancedOptions || displayArrowProp;
 
   const comboButtonClasses = classNames(
     styles.comboButton,

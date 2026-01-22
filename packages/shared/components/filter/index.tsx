@@ -29,10 +29,15 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { DeviceType, FilterGroups } from "../../enums";
-import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
+import GroupManagementIcon from "PUBLIC_DIR/images/group.management.svg?url";
+
 import { TViewSelectorOption, ViewSelector } from "../view-selector";
 import { Link, LinkType } from "../link";
 import { SelectedItem } from "../selected-item";
+import { IconButton } from "../icon-button";
+import { TooltipContainer } from "../tooltip";
+import { ComboBox, ComboBoxSize } from "../combobox";
+import { DropDownItem } from "../drop-down-item";
 
 import FilterButton from "./sub-components/FilterButton";
 import SortButton from "./sub-components/SortButton";
@@ -40,12 +45,27 @@ import SortButton from "./sub-components/SortButton";
 import useSearch from "./hooks/useSearch";
 
 import styles from "./Filter.module.scss";
-import { FilterProps, TItem } from "./Filter.types";
+import { FilterProps, TItem, TRoomGroup } from "./Filter.types";
 import {
   convertFilterDataToSelectedFilterValues,
   convertFilterDataToSelectedItems,
   replaceEqualFilterValuesWithPrev,
 } from "./Filter.utils";
+
+const getElementFullWidth = (element: HTMLElement | null): number => {
+  if (!element) return 0;
+  const style = window.getComputedStyle(element);
+  const marginLeft = Number.parseFloat(style.marginLeft) || 0;
+  const marginRight = Number.parseFloat(style.marginRight) || 0;
+  return element.offsetWidth + marginLeft + marginRight;
+};
+
+const buildGroupIconDataUrl = (
+  icon: TRoomGroup["icon"],
+): string | undefined => {
+  if (typeof icon !== "object" || icon === null) return undefined;
+  return `data:image/svg+xml;utf8,${encodeURIComponent(icon.data)}`;
+};
 
 const FilterInput = React.memo(
   ({
@@ -224,6 +244,132 @@ const FilterInput = React.memo(
       !isFlowsPage &&
       (isRecentFolder || currentDeviceType === DeviceType.desktop);
 
+    // Overflow detection for room group tags
+    const roomGroupsWithIcons = React.useMemo(
+      () =>
+        (roomGroups || []).filter(
+          (g) => typeof g.icon === "object" && g.icon !== null,
+        ) as TRoomGroup[],
+      [roomGroups],
+    );
+
+    const groupTagsRef = React.useRef<HTMLDivElement | null>(null);
+    const allRoomsMeasureRef = React.useRef<HTMLDivElement | null>(null);
+    const ellipsisMeasureRef = React.useRef<HTMLDivElement | null>(null);
+    const groupMeasureRefs = React.useRef(
+      new Map<string, React.RefObject<HTMLDivElement | null>>(),
+    );
+
+    const [visibleGroupIds, setVisibleGroupIds] = React.useState<string[]>(() =>
+      roomGroupsWithIcons.map((g) => g.id),
+    );
+    const [overflowGroups, setOverflowGroups] = React.useState<TRoomGroup[]>(
+      [],
+    );
+
+    React.useEffect(() => {
+      setVisibleGroupIds(roomGroupsWithIcons.map((g) => g.id));
+      setOverflowGroups([]);
+    }, [roomGroupsWithIcons]);
+
+    const getGroupMeasureRef = React.useCallback((id: string) => {
+      let ref = groupMeasureRefs.current.get(id);
+      if (!ref) {
+        ref = React.createRef<HTMLDivElement | null>();
+        groupMeasureRefs.current.set(id, ref);
+      }
+      return ref;
+    }, []);
+
+    const calculateOverflow = React.useCallback(() => {
+      const container = groupTagsRef.current;
+      if (!container) return;
+
+      const containerWidth = container.clientWidth;
+      if (containerWidth <= 0) return;
+
+      const allRoomsW = getElementFullWidth(allRoomsMeasureRef.current);
+      const ellipsisW = getElementFullWidth(ellipsisMeasureRef.current);
+
+      const groupWidths = roomGroupsWithIcons.map((g) => ({
+        id: g.id,
+        width: getElementFullWidth(
+          groupMeasureRefs.current.get(g.id)?.current ?? null,
+        ),
+      }));
+
+      const totalW = allRoomsW + groupWidths.reduce((s, g) => s + g.width, 0);
+
+      if (totalW <= containerWidth) {
+        setVisibleGroupIds(roomGroupsWithIcons.map((g) => g.id));
+        setOverflowGroups([]);
+        return;
+      }
+
+      const availableW = Math.max(containerWidth - allRoomsW - ellipsisW, 0);
+
+      // Start with all groups visible, then remove from the end until they fit
+      const visible: string[] = roomGroupsWithIcons.map((g) => g.id);
+      const overflow: TRoomGroup[] = [];
+
+      const getVisibleWidth = () =>
+        visible.reduce(
+          (sum, id) => sum + (groupWidths.find((x) => x.id === id)?.width ?? 0),
+          0,
+        );
+
+      while (visible.length > 0 && getVisibleWidth() > availableW) {
+        const removedId = visible.pop()!;
+        const removedGroup = roomGroupsWithIcons.find(
+          (g) => g.id === removedId,
+        );
+        if (removedGroup) {
+          overflow.unshift(removedGroup);
+        }
+      }
+
+      setVisibleGroupIds(visible);
+      setOverflowGroups(overflow);
+    }, [roomGroupsWithIcons]);
+
+    React.useLayoutEffect(() => {
+      calculateOverflow();
+    }, [calculateOverflow]);
+
+    React.useEffect(() => {
+      const container = groupTagsRef.current;
+      if (!container || typeof ResizeObserver === "undefined") return;
+
+      const ro = new ResizeObserver(() => calculateOverflow());
+      ro.observe(container);
+      return () => ro.disconnect();
+    }, [calculateOverflow]);
+
+    const [isOverflowOpen, setIsOverflowOpen] = React.useState(false);
+    const toggleOverflow = React.useCallback(
+      () => setIsOverflowOpen((v) => !v),
+      [],
+    );
+
+    const overflowDropdownList = (
+      <>
+        {overflowGroups.map((g) => (
+          <DropDownItem
+            key={g.id}
+            className="option-item"
+            icon={buildGroupIconDataUrl(g.icon)}
+            onClick={() => {
+              onFilterByGroup?.(g.id);
+              setIsOverflowOpen(false);
+            }}
+            testId={`room_group_overflow_${g.id}`}
+          >
+            {g.name}
+          </DropDownItem>
+        ))}
+      </>
+    );
+
     return (
       <div className={styles.filterInput} data-testid="filter_container">
         <div className="filter-input_filter-row">
@@ -311,40 +457,113 @@ const FilterInput = React.memo(
         ) : null}
 
         {isRoomsFolder && (
-          <div className="filter-input_selected-row-grouping-rooms">
-            <SelectedItem
-              propKey="all-rooms"
-              label={t("GroupingRooms:AllRooms")}
-              onClick={() => onFilterByGroup?.(null)}
-              onClose={() => {}}
-              hideCross
-              clickable
-            />
+          <div className={styles.rowGroupingRooms}>
+            <div className="group-tags" ref={groupTagsRef}>
+              <SelectedItem
+                propKey="all-rooms"
+                label={t("GroupingRooms:AllRooms")}
+                onClick={() => onFilterByGroup?.(null)}
+                onClose={() => {}}
+                hideCross
+                clickable
+              />
+              {roomGroupsWithIcons.map((group) =>
+                visibleGroupIds.includes(group.id) ? (
+                  <SelectedItem
+                    key={group.id}
+                    propKey={group.id}
+                    label={group.name}
+                    icon={buildGroupIconDataUrl(group.icon)}
+                    onClick={() => onFilterByGroup?.(group.id)}
+                    onClose={() => {}}
+                    hideCross
+                    clickable
+                  />
+                ) : null,
+              )}
+              {overflowGroups.length > 0 && (
+                <TooltipContainer
+                  as="div"
+                  className={styles.ellipsisButton}
+                  onClick={toggleOverflow}
+                  title={t("Common:More")}
+                  data-testid="rooms_groups_overflow_trigger"
+                >
+                  <ComboBox
+                    opened={isOverflowOpen}
+                    onToggle={toggleOverflow}
+                    className={styles.ellipsisComboBox}
+                    options={[]}
+                    selectedOption={{ key: "", label: "" }}
+                    directionX="left"
+                    directionY="both"
+                    size={ComboBoxSize.content}
+                    advancedOptions={overflowDropdownList}
+                    disableIconClick={false}
+                    disableItemClick
+                    isDefaultMode={false}
+                    advancedOptionsCount={overflowGroups.length}
+                    onSelect={() => {}}
+                    withBlur={false}
+                    withBackdrop
+                    onBackdropClick={toggleOverflow}
+                    type="onlyIcon"
+                    dataTestId="rooms_groups_overflow_combobox"
+                    withoutPadding
+                    noBorder
+                    withoutArrow
+                    displayArrow={false}
+                  >
+                    <span className={styles.ellipsisIcon}>...</span>
+                  </ComboBox>
+                </TooltipContainer>
+              )}
+            </div>
 
-            {roomGroups?.map((group) =>
-              typeof group.icon === "object" && group.icon !== null ? (
+            {/* Hidden measurement container */}
+            <div className={styles.groupTagsMeasure} aria-hidden>
+              <SelectedItem
+                propKey="m-all"
+                label={t("GroupingRooms:AllRooms")}
+                onClick={() => {}}
+                onClose={() => {}}
+                hideCross
+                clickable
+                forwardedRef={allRoomsMeasureRef}
+              />
+              {roomGroupsWithIcons.map((g) => (
                 <SelectedItem
-                  key={group.id}
-                  propKey={group.id}
-                  label={group.name}
-                  icon={`data:image/svg+xml;utf8,${encodeURIComponent(group.icon.data)}`}
-                  onClick={() => onFilterByGroup?.(group.id)}
+                  key={`m-${g.id}`}
+                  propKey={`m-${g.id}`}
+                  label={g.name}
+                  icon={buildGroupIconDataUrl(g.icon)}
+                  onClick={() => {}}
                   onClose={() => {}}
                   hideCross
                   clickable
+                  forwardedRef={getGroupMeasureRef(g.id)}
                 />
-              ) : null,
-            )}
+              ))}
+              <div
+                ref={ellipsisMeasureRef}
+                className={styles.ellipsisButtonMeasure}
+              >
+                ...
+              </div>
+            </div>
 
-            <SelectedItem
-              propKey="create-group"
-              label={t("PeopleTranslations:CreateGroup")}
-              icon={PlusIcon}
-              onClose={() => {}}
+            <TooltipContainer
+              as="div"
+              className={styles.groupManagementButton}
               onClick={onCreateGroup}
-              hideCross
-              clickable
-            />
+            >
+              <IconButton
+                size={16}
+                iconName={GroupManagementIcon}
+                isFill
+                isClickable
+              />
+            </TooltipContainer>
           </div>
         )}
       </div>

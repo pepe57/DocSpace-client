@@ -207,6 +207,8 @@ export type TComboboxProps = {
   noSelect?: boolean;
   /** Optional flag to use an image icon. */
   useImageIcon?: boolean;
+  /** Hides the arrow completely */
+  withoutArrow?: boolean;
 };
 
 export type TComboButtonProps = {
@@ -256,6 +258,8 @@ export type TComboButtonProps = {
   imageIcon?: string | React.ElementType | React.ReactElement;
   /** Image alt */
   imageAlt?: string;
+  /** Hides the arrow completely */
+  withoutArrow?: boolean;
 };
 
 export interface TComboButtonThemeProps {
