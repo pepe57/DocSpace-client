@@ -33,8 +33,8 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 import { Badge } from "@docspace/shared/components/badge";
 
 import { Button } from "@docspace/shared/components/button";
@@ -78,7 +78,7 @@ const RootContainer = styled.div`
   .consumer-item-wrapper {
     box-sizing: border-box;
     border: ${(props) =>
-      props.theme.client.settings.integration.separatorBorder};
+			props.theme.client.settings.integration.separatorBorder};
 
     border-radius: 6px;
     min-height: 116px;
@@ -117,251 +117,251 @@ const RootContainer = styled.div`
 `;
 
 class ThirdPartyServices extends React.Component {
-  constructor(props) {
-    super(props);
-    const { t, tReady } = props;
+	constructor(props) {
+		super(props);
+		const { t, tReady } = props;
 
-    if (tReady) setDocumentTitle(`${t("ThirdPartyAuthorization")}`);
+		if (tReady) setDocumentTitle(`${t("ThirdPartyAuthorization")}`);
 
-    this.state = {
-      dialogVisible: false,
-      isLoading: false,
-    };
-  }
+		this.state = {
+			dialogVisible: false,
+			isLoading: false,
+		};
+	}
 
-  componentDidUpdate(prevProps) {
-    const { t, tReady, openThirdPartyModal } = this.props;
-    if (prevProps.tReady !== tReady && tReady)
-      setDocumentTitle(t("ThirdPartyAuthorization"));
+	componentDidUpdate(prevProps) {
+		const { t, tReady, openThirdPartyModal } = this.props;
+		if (prevProps.tReady !== tReady && tReady)
+			setDocumentTitle(t("ThirdPartyAuthorization"));
 
-    if (
-      openThirdPartyModal !== prevProps.openThirdPartyModal &&
-      openThirdPartyModal
-    ) {
-      this.onModalOpen();
-    }
-  }
+		if (
+			openThirdPartyModal !== prevProps.openThirdPartyModal &&
+			openThirdPartyModal
+		) {
+			this.onModalOpen();
+		}
+	}
 
-  onChangeLoading = (status) => {
-    this.setState({
-      isLoading: status,
-    });
-  };
+	onChangeLoading = (status) => {
+		this.setState({
+			isLoading: status,
+		});
+	};
 
-  onModalOpen = () => {
-    this.setState({
-      dialogVisible: true,
-    });
-  };
+	onModalOpen = () => {
+		this.setState({
+			dialogVisible: true,
+		});
+	};
 
-  onModalClose = () => {
-    const { setSelectedConsumer } = this.props;
-    this.setState({
-      dialogVisible: false,
-    });
-    setSelectedConsumer();
-  };
+	onModalClose = () => {
+		const { setSelectedConsumer } = this.props;
+		this.setState({
+			dialogVisible: false,
+		});
+		setSelectedConsumer();
+	};
 
-  setConsumer = (e) => {
-    const { setSelectedConsumer } = this.props;
-    setSelectedConsumer(e.currentTarget.dataset.consumer);
-  };
+	setConsumer = (e) => {
+		const { setSelectedConsumer } = this.props;
+		setSelectedConsumer(e.currentTarget.dataset.consumer);
+	};
 
-  render() {
-    const {
-      t,
-      i18n,
-      consumers,
-      updateConsumerProps,
-      integrationSettingsUrl,
-      theme,
-      currentColorScheme,
-      isThirdPartyAvailable,
-      supportEmail,
-      logoText,
-      tReady,
-      standalone,
-    } = this.props;
-    const { dialogVisible, isLoading } = this.state;
-    const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
+	render() {
+		const {
+			t,
+			i18n,
+			consumers,
+			updateConsumerProps,
+			integrationSettingsUrl,
+			theme,
+			currentColorScheme,
+			isThirdPartyAvailable,
+			supportEmail,
+			logoText,
+			tReady,
+			standalone,
+		} = this.props;
+		const { dialogVisible, isLoading } = this.state;
+		const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
 
-    const paidConsumers = consumers.filter(
-      (consumer) => consumer.paid === true,
-    );
+		const paidConsumers = consumers.filter(
+			(consumer) => consumer.paid === true,
+		);
 
-    const freeConsumers = consumers.filter(
-      (consumer) => !paidConsumers.includes(consumer),
-    );
+		const freeConsumers = consumers.filter(
+			(consumer) => !paidConsumers.includes(consumer),
+		);
 
-    const imgSrc = theme.isBase ? IntegrationSvgUrl : IntegrationDarkSvgUrl;
+		const imgSrc = theme.isBase ? IntegrationSvgUrl : IntegrationDarkSvgUrl;
 
-    const submitRequest = () => (window.location = `mailto:${supportEmail}`);
+		const submitRequest = () => (window.location = `mailto:${supportEmail}`);
 
-    return (
-      <>
-        {!consumers.length || !tReady ? (
-          <ThirdPartyLoader />
-        ) : (
-          <RootContainer className="RootContainer">
-            <Text className="third-party-description">
-              {t("AuthorizationKeysInfo")}
-            </Text>
-            <div className="third-party-box">
-              {integrationSettingsUrl ? (
-                <Link
-                  className="third-party-link"
-                  color={currentColorScheme.main?.accent}
-                  isHovered
-                  target="_blank"
-                  href={integrationSettingsUrl}
-                  dataTestId="integration_settings_link"
-                >
-                  {t("Common:LearnMore")}
-                </Link>
-              ) : null}
-            </div>
-            <div className="consumer-item-wrapper request-block">
-              <img
-                className="integration-image"
-                src={imgSrc}
-                alt="integration_icon"
-              />
-              <Text>
-                {t("IntegrationRequest", {
-                  productName: t("Common:ProductName"),
-                  organizationName: logoText,
-                })}
-              </Text>
-              <Button
-                label={t("Submit")}
-                primary
-                size="normal"
-                minWidth="138px"
-                onClick={submitRequest}
-                scale={isMobile()}
-                testId="submit_request_team_button"
-              />
-            </div>
-            <div className="consumers-list-container">
-              {freeConsumers.map((consumer) => (
-                <div
-                  className="consumer-item-wrapper"
-                  key={consumer.name}
-                  data-testid={`${consumer.name}_item`}
-                >
-                  <ConsumerItem
-                    consumer={consumer}
-                    dialogVisible={dialogVisible}
-                    isLoading={isLoading}
-                    onChangeLoading={onChangeLoading}
-                    onModalClose={onModalClose}
-                    onModalOpen={onModalOpen}
-                    setConsumer={setConsumer}
-                    updateConsumerProps={updateConsumerProps}
-                    t={t}
-                    isThirdPartyAvailable={isThirdPartyAvailable}
-                    standalone={standalone}
-                  />
-                </div>
-              ))}
-              {!isThirdPartyAvailable ? (
-                <div className="business-plan">
-                  <Text fontSize="16px" fontWeight={700}>
-                    {t("IncludedInBusiness")}
-                  </Text>
-                  <Badge
-                    className="paid-badge"
-                    backgroundColor={
-                      theme.isBase
-                        ? globalColors.favoritesStatus
-                        : globalColors.favoriteStatusDark
-                    }
-                    fontWeight="700"
-                    label={t("Common:Paid")}
-                    isPaidBadge
-                  />
-                </div>
-              ) : null}
-              {paidConsumers.map((consumer) => (
-                <div
-                  className="consumer-item-wrapper"
-                  key={consumer.name}
-                  data-testid={`consumer_${consumer.name}_item`}
-                >
-                  <ConsumerItem
-                    consumer={consumer}
-                    dialogVisible={dialogVisible}
-                    isLoading={isLoading}
-                    onChangeLoading={onChangeLoading}
-                    onModalClose={onModalClose}
-                    onModalOpen={onModalOpen}
-                    setConsumer={setConsumer}
-                    updateConsumerProps={updateConsumerProps}
-                    t={t}
-                    isThirdPartyAvailable={isThirdPartyAvailable}
-                    standalone={standalone}
-                  />
-                </div>
-              ))}
-            </div>
-          </RootContainer>
-        )}
-        {dialogVisible ? (
-          <ConsumerModalDialog
-            t={t}
-            i18n={i18n}
-            dialogVisible={dialogVisible}
-            isLoading={isLoading}
-            onModalClose={onModalClose}
-            onChangeLoading={onChangeLoading}
-            updateConsumerProps={updateConsumerProps}
-          />
-        ) : null}
-      </>
-    );
-  }
+		return (
+			<>
+				{!consumers.length || !tReady ? (
+					<ThirdPartyLoader />
+				) : (
+					<RootContainer className="RootContainer">
+						<Text className="third-party-description">
+							{t("AuthorizationKeysInfo")}
+						</Text>
+						<div className="third-party-box">
+							{integrationSettingsUrl ? (
+								<Link
+									className="third-party-link"
+									color={currentColorScheme.main?.accent}
+									isHovered
+									target="_blank"
+									href={integrationSettingsUrl}
+									dataTestId="integration_settings_link"
+								>
+									{t("Common:LearnMore")}
+								</Link>
+							) : null}
+						</div>
+						<div className="consumer-item-wrapper request-block">
+							<img
+								className="integration-image"
+								src={imgSrc}
+								alt="integration_icon"
+							/>
+							<Text>
+								{t("IntegrationRequest", {
+									productName: t("Common:ProductName"),
+									organizationName: logoText,
+								})}
+							</Text>
+							<Button
+								label={t("Submit")}
+								primary
+								size="normal"
+								minWidth="138px"
+								onClick={submitRequest}
+								scale={isMobile()}
+								testId="submit_request_team_button"
+							/>
+						</div>
+						<div className="consumers-list-container">
+							{freeConsumers.map((consumer) => (
+								<div
+									className="consumer-item-wrapper"
+									key={consumer.name}
+									data-testid={`${consumer.name}_item`}
+								>
+									<ConsumerItem
+										consumer={consumer}
+										dialogVisible={dialogVisible}
+										isLoading={isLoading}
+										onChangeLoading={onChangeLoading}
+										onModalClose={onModalClose}
+										onModalOpen={onModalOpen}
+										setConsumer={setConsumer}
+										updateConsumerProps={updateConsumerProps}
+										t={t}
+										isThirdPartyAvailable={isThirdPartyAvailable}
+										standalone={standalone}
+									/>
+								</div>
+							))}
+							{!isThirdPartyAvailable ? (
+								<div className="business-plan">
+									<Text fontSize="16px" fontWeight={700}>
+										{t("IncludedInBusiness")}
+									</Text>
+									<Badge
+										className="paid-badge"
+										backgroundColor={
+											theme.isBase
+												? globalColors.favoritesStatus
+												: globalColors.favoriteStatusDark
+										}
+										fontWeight="700"
+										label={t("Common:Paid")}
+										isPaidBadge
+									/>
+								</div>
+							) : null}
+							{paidConsumers.map((consumer) => (
+								<div
+									className="consumer-item-wrapper"
+									key={consumer.name}
+									data-testid={`consumer_${consumer.name}_item`}
+								>
+									<ConsumerItem
+										consumer={consumer}
+										dialogVisible={dialogVisible}
+										isLoading={isLoading}
+										onChangeLoading={onChangeLoading}
+										onModalClose={onModalClose}
+										onModalOpen={onModalOpen}
+										setConsumer={setConsumer}
+										updateConsumerProps={updateConsumerProps}
+										t={t}
+										isThirdPartyAvailable={isThirdPartyAvailable}
+										standalone={standalone}
+									/>
+								</div>
+							))}
+						</div>
+					</RootContainer>
+				)}
+				{dialogVisible ? (
+					<ConsumerModalDialog
+						t={t}
+						i18n={i18n}
+						dialogVisible={dialogVisible}
+						isLoading={isLoading}
+						onModalClose={onModalClose}
+						onChangeLoading={onChangeLoading}
+						updateConsumerProps={updateConsumerProps}
+					/>
+				) : null}
+			</>
+		);
+	}
 }
 
 ThirdPartyServices.propTypes = {
-  t: PropTypes.func.isRequired,
-  i18n: PropTypes.object.isRequired,
-  consumers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  integrationSettingsUrl: PropTypes.string,
-  updateConsumerProps: PropTypes.func.isRequired,
-  setSelectedConsumer: PropTypes.func.isRequired,
+	t: PropTypes.func.isRequired,
+	i18n: PropTypes.object.isRequired,
+	consumers: PropTypes.arrayOf(PropTypes.object).isRequired,
+	integrationSettingsUrl: PropTypes.string,
+	updateConsumerProps: PropTypes.func.isRequired,
+	setSelectedConsumer: PropTypes.func.isRequired,
 };
 
 export default inject(({ setup, settingsStore, currentQuotaStore }) => {
-  const {
-    integrationSettingsUrl,
-    theme,
-    currentColorScheme,
-    companyInfoSettingsData,
-    logoText,
-    standalone,
-  } = settingsStore;
-  const {
-    integration,
-    updateConsumerProps,
-    setSelectedConsumer,
-    fetchAndSetConsumers,
-    openThirdPartyModal,
-  } = setup;
-  const { consumers } = integration;
-  const { isThirdPartyAvailable } = currentQuotaStore;
+	const {
+		integrationSettingsUrl,
+		theme,
+		currentColorScheme,
+		companyInfoSettingsData,
+		logoText,
+		standalone,
+	} = settingsStore;
+	const {
+		integration,
+		updateConsumerProps,
+		setSelectedConsumer,
+		fetchAndSetConsumers,
+		openThirdPartyModal,
+	} = setup;
+	const { consumers } = integration;
+	const { isThirdPartyAvailable } = currentQuotaStore;
 
-  return {
-    theme,
-    consumers,
-    integrationSettingsUrl,
-    updateConsumerProps,
-    setSelectedConsumer,
-    fetchAndSetConsumers,
-    currentColorScheme,
-    isThirdPartyAvailable,
-    supportEmail: companyInfoSettingsData?.email,
-    logoText,
-    openThirdPartyModal,
-    standalone,
-  };
+	return {
+		theme,
+		consumers,
+		integrationSettingsUrl,
+		updateConsumerProps,
+		setSelectedConsumer,
+		fetchAndSetConsumers,
+		currentColorScheme,
+		isThirdPartyAvailable,
+		supportEmail: companyInfoSettingsData?.email,
+		logoText,
+		openThirdPartyModal,
+		standalone,
+	};
 })(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

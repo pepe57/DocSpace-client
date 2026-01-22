@@ -25,79 +25,79 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
-  StyledPeopleSelectorInfo,
-  StyledPeopleSelector,
-  StyledSelectedOwnerContainer,
-  StyledSelectedOwner,
+	StyledPeopleSelectorInfo,
+	StyledPeopleSelector,
+	StyledSelectedOwnerContainer,
+	StyledSelectedOwner,
 } from "../../../ChangePortalOwnerDialog/StyledDialog";
 
 const ChoiceNewOwner = ({
-  t,
-  targetUser,
-  currentColorScheme,
-  onTogglePeopleSelector,
+	t,
+	targetUser,
+	currentColorScheme,
+	onTogglePeopleSelector,
 }) => {
-  if (targetUser)
-    return (
-      <StyledSelectedOwnerContainer>
-        <StyledSelectedOwner currentColorScheme={currentColorScheme}>
-          <Text className="text">
-            {targetUser.displayName ? targetUser.displayName : targetUser.label}
-          </Text>
-        </StyledSelectedOwner>
+	if (targetUser)
+		return (
+			<StyledSelectedOwnerContainer>
+				<StyledSelectedOwner currentColorScheme={currentColorScheme}>
+					<Text className="text">
+						{targetUser.displayName ? targetUser.displayName : targetUser.label}
+					</Text>
+				</StyledSelectedOwner>
 
-        <Link
-          type="action"
-          isHovered
-          fontWeight={600}
-          onClick={onTogglePeopleSelector}
-        >
-          {t("ChangePortalOwner:ChangeUser")}
-        </Link>
-      </StyledSelectedOwnerContainer>
-    );
+				<Link
+					type="action"
+					isHovered
+					fontWeight={600}
+					onClick={onTogglePeopleSelector}
+				>
+					{t("ChangePortalOwner:ChangeUser")}
+				</Link>
+			</StyledSelectedOwnerContainer>
+		);
 
-  return (
-    <StyledPeopleSelector>
-      <SelectorAddButton
-        className="selector-add-button"
-        onClick={onTogglePeopleSelector}
-        label={t("Translations:ChooseFromList")}
-        titleText={t("Translations:ChooseFromList")}
-        noSelect
-      />
-    </StyledPeopleSelector>
-  );
+	return (
+		<StyledPeopleSelector>
+			<SelectorAddButton
+				className="selector-add-button"
+				onClick={onTogglePeopleSelector}
+				label={t("Translations:ChooseFromList")}
+				titleText={t("Translations:ChooseFromList")}
+				noSelect
+			/>
+		</StyledPeopleSelector>
+	);
 };
 
 const NewOwner = ({
-  t,
-  targetUser,
-  currentColorScheme,
-  onTogglePeopleSelector,
+	t,
+	targetUser,
+	currentColorScheme,
+	onTogglePeopleSelector,
 }) => {
-  return (
-    <>
-      <StyledPeopleSelectorInfo>
-        <Text className="new-owner">
-          {t("DataReassignmentDialog:NewDataOwner")}
-        </Text>
-        <Text className="description">
-          {t("DataReassignmentDialog:UserToWhomTheDataWillBeTransferred")}
-        </Text>
-      </StyledPeopleSelectorInfo>
+	return (
+		<>
+			<StyledPeopleSelectorInfo>
+				<Text className="new-owner">
+					{t("DataReassignmentDialog:NewDataOwner")}
+				</Text>
+				<Text className="description">
+					{t("DataReassignmentDialog:UserToWhomTheDataWillBeTransferred")}
+				</Text>
+			</StyledPeopleSelectorInfo>
 
-      <ChoiceNewOwner
-        t={t}
-        targetUser={targetUser}
-        currentColorScheme={currentColorScheme}
-        onTogglePeopleSelector={onTogglePeopleSelector}
-      />
-    </>
-  );
+			<ChoiceNewOwner
+				t={t}
+				targetUser={targetUser}
+				currentColorScheme={currentColorScheme}
+				onTogglePeopleSelector={onTogglePeopleSelector}
+			/>
+		</>
+	);
 };
 
 export default NewOwner;

@@ -29,8 +29,8 @@ import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -59,329 +59,328 @@ const MainContainer = styled.div`
 `;
 
 const TrustedMail = (props) => {
-  const {
-    t,
-    tReady,
-    trustedDomainsType,
-    trustedDomains,
-    setMailDomainSettings,
-    currentColorScheme,
-    trustedMailDomainSettingsUrl,
-    currentDeviceType,
-    onSettingsSkeletonNotShown,
-    isInit,
-  } = props;
+	const {
+		t,
+		tReady,
+		trustedDomainsType,
+		trustedDomains,
+		setMailDomainSettings,
+		currentColorScheme,
+		trustedMailDomainSettingsUrl,
+		currentDeviceType,
+		onSettingsSkeletonNotShown,
+		isInit,
+	} = props;
 
-  const navigate = useNavigate();
-  const location = useLocation();
+	const navigate = useNavigate();
+	const location = useLocation();
 
-  const [type, setType] = useState("0");
-  const [domains, setDomains] = useState([]);
-  const [showReminder, setShowReminder] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessages, setErrorMessages] = useState([]);
+	const [type, setType] = useState("0");
+	const [domains, setDomains] = useState([]);
+	const [showReminder, setShowReminder] = useState(false);
+	const [isSaving, setIsSaving] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const [errorMessages, setErrorMessages] = useState([]);
 
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("trusted-mail") &&
-      navigate("/portal-settings/security/access-portal");
-  };
+	const checkWidth = () => {
+		window.innerWidth > size.mobile &&
+			location.pathname.includes("trusted-mail") &&
+			navigate("/portal-settings/security/access-portal");
+	};
 
-  const getSettingsFromDefault = () => {
-    const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
-    if (defaultSettings) {
-      setType(defaultSettings.type);
-      setDomains(defaultSettings.domains);
-    }
-  };
+	const getSettingsFromDefault = () => {
+		const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
+		if (defaultSettings) {
+			setType(defaultSettings.type);
+			setDomains(defaultSettings.domains);
+		}
+	};
 
-  const getSettings = () => {
-    const currentSettings = getFromSessionStorage("currentTrustedMailSettings");
+	const getSettings = () => {
+		const currentSettings = getFromSessionStorage("currentTrustedMailSettings");
 
-    const defaultData = {
-      type: String(trustedDomainsType),
-      domains: trustedDomains,
-    };
-    saveToSessionStorage("defaultTrustedMailSettings", defaultData);
+		const defaultData = {
+			type: String(trustedDomainsType),
+			domains: trustedDomains,
+		};
+		saveToSessionStorage("defaultTrustedMailSettings", defaultData);
 
-    if (currentSettings) {
-      setType(currentSettings.type);
-      setDomains(currentSettings.domains);
-    } else {
-      setType(String(trustedDomainsType));
-      setDomains(trustedDomains);
-    }
-    setIsLoading(true);
-  };
+		if (currentSettings) {
+			setType(currentSettings.type);
+			setDomains(currentSettings.domains);
+		} else {
+			setType(String(trustedDomainsType));
+			setDomains(trustedDomains);
+		}
+		setIsLoading(true);
+	};
 
-  useEffect(() => {
-    if (!onSettingsSkeletonNotShown) return;
-    if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
-      onSettingsSkeletonNotShown("TrustedMail");
-  }, [currentDeviceType, isLoading]);
+	useEffect(() => {
+		if (!onSettingsSkeletonNotShown) return;
+		if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
+			onSettingsSkeletonNotShown("TrustedMail");
+	}, [currentDeviceType, isLoading]);
 
-  useEffect(() => {
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
+	useEffect(() => {
+		checkWidth();
+		window.addEventListener("resize", checkWidth);
 
-    return () => window.removeEventListener("resize", checkWidth);
-  }, []);
+		return () => window.removeEventListener("resize", checkWidth);
+	}, []);
 
-  useEffect(() => {
-    const currentSettings = getFromSessionStorage("currentTrustedMailSettings");
-    const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
+	useEffect(() => {
+		const currentSettings = getFromSessionStorage("currentTrustedMailSettings");
+		const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
 
-    if (isEqual(currentSettings, defaultSettings)) {
-      getSettings();
-    } else {
-      getSettingsFromDefault();
-    }
-  }, [isLoading]);
+		if (isEqual(currentSettings, defaultSettings)) {
+			getSettings();
+		} else {
+			getSettingsFromDefault();
+		}
+	}, [isLoading]);
 
-  useEffect(() => {
-    if (isInit) {
-      setIsLoading(true);
-    }
-  }, [isInit]);
+	useEffect(() => {
+		if (isInit) {
+			setIsLoading(true);
+		}
+	}, [isInit]);
 
-  useEffect(() => {
-    if (!isLoading) return;
-    const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
-    const newSettings = {
-      type,
-      domains,
-    };
-    saveToSessionStorage("currentTrustedMailSettings", newSettings);
+	useEffect(() => {
+		if (!isLoading) return;
+		const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
+		const newSettings = {
+			type,
+			domains,
+		};
+		saveToSessionStorage("currentTrustedMailSettings", newSettings);
 
-    if (isEqual(defaultSettings, newSettings)) {
-      setShowReminder(false);
-    } else {
-      setShowReminder(true);
-    }
-  }, [type, domains]);
+		if (isEqual(defaultSettings, newSettings)) {
+			setShowReminder(false);
+		} else {
+			setShowReminder(true);
+		}
+	}, [type, domains]);
 
-  const onSelectDomainType = (e) => {
-    if (type === e.target.value) return;
-    setType(e.target.value);
-    if (e.target.value === "1" && domains.length === 0) {
-      setDomains([...domains]);
-      setShowReminder(true);
-    }
-  };
+	const onSelectDomainType = (e) => {
+		if (type === e.target.value) return;
+		setType(e.target.value);
+		if (e.target.value === "1" && domains.length === 0) {
+			setDomains([...domains]);
+			setShowReminder(true);
+		}
+	};
 
-  const onClickAdd = () => {
-    setDomains([...domains, ""]);
-    setErrorMessages((prev) => [...prev, null]);
-  };
+	const onClickAdd = () => {
+		setDomains([...domains, ""]);
+		setErrorMessages((prev) => [...prev, null]);
+	};
 
-  const checkDuplicate = (domains,input, index) => {
-    const firstIndex = domains.findIndex((d) => d === input && d !== "");
-    return firstIndex !== -1 && firstIndex !== index;
-  };
+	const checkDuplicate = (domains, input, index) => {
+		const firstIndex = domains.findIndex((d) => d === input && d !== "");
+		return firstIndex !== -1 && firstIndex !== index;
+	};
 
-  const onChangeInput = (e, index) => {
-    const newInputs = Array.from(domains);
-    newInputs[index] = e.target.value;
-    setDomains(newInputs);
-  };
+	const onChangeInput = (e, index) => {
+		const newInputs = Array.from(domains);
+		newInputs[index] = e.target.value;
+		setDomains(newInputs);
+	};
 
-  const getErrorMessage = (domain, index, domainsArray = domains) => {
-    
-    const isDuplicate = checkDuplicate(domainsArray, domain, index);
-    const isValidFormat = isValidDomainName(domain) && domain !== "";
-    
-    if (isDuplicate) return t("Common:DomainAlreadyAdded");
-    if (!isValidFormat) return t("Common:IncorrectDomain");
-    return null;
-  };
+	const getErrorMessage = (domain, index, domainsArray = domains) => {
+		const isDuplicate = checkDuplicate(domainsArray, domain, index);
+		const isValidFormat = isValidDomainName(domain) && domain !== "";
 
-  const validateAllDomains = (domainsArray) => {
-    return domainsArray.map((domain, index) => 
-      getErrorMessage(domain, index, domainsArray)
-    );
-  };
+		if (isDuplicate) return t("Common:DomainAlreadyAdded");
+		if (!isValidFormat) return t("Common:IncorrectDomain");
+		return null;
+	};
 
-  const onDeleteInput = (index) => {
-    const newInputs = Array.from(domains);
-    newInputs.splice(index, 1);
-    setDomains(newInputs);
-    
-    setErrorMessages(validateAllDomains(newInputs));
-  };
+	const validateAllDomains = (domainsArray) => {
+		return domainsArray.map((domain, index) =>
+			getErrorMessage(domain, index, domainsArray),
+		);
+	};
 
-  const onCheckValid = (domain, index) => {
-    const errorMessage = getErrorMessage(domain, index);
-    
-    setErrorMessages((prev) => {
-      const newErrors = [...prev];
-      newErrors[index] = errorMessage;
-      return newErrors;
-    });
+	const onDeleteInput = (index) => {
+		const newInputs = Array.from(domains);
+		newInputs.splice(index, 1);
+		setDomains(newInputs);
 
-    return !errorMessage;
-  };
+		setErrorMessages(validateAllDomains(newInputs));
+	};
 
-  const onSaveClick = async () => {
-    setIsSaving(true);
+	const onCheckValid = (domain, index) => {
+		const errorMessage = getErrorMessage(domain, index);
 
-    const valid = domains.map((domain, index) => {
-      return onCheckValid(domain, index);
-    });
+		setErrorMessages((prev) => {
+			const newErrors = [...prev];
+			newErrors[index] = errorMessage;
+			return newErrors;
+		});
 
-    if (type === "1" && valid.includes(false)) {
-      setIsSaving(false);
-      return;
-    }
+		return !errorMessage;
+	};
 
-    try {
-      const data = {
-        type: Number(type),
-        domains,
-        inviteUsersAsVisitors: true,
-      };
-      await setMailDomainSettings(data);
-      saveToSessionStorage("currentTrustedMailSettings", {
-        type,
-        domains,
-      });
-      saveToSessionStorage("defaultTrustedMailSettings", {
-        type,
-        domains,
-      });
-      setShowReminder(false);
-      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
-    } catch (error) {
-      toastr.error(error);
-    }
+	const onSaveClick = async () => {
+		setIsSaving(true);
 
-    setIsSaving(false);
-  };
+		const valid = domains.map((domain, index) => {
+			return onCheckValid(domain, index);
+		});
 
-  const onCancelClick = () => {
-    const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
-    saveToSessionStorage("currentTrustedMailSettings", defaultSettings);
-    setType(defaultSettings?.type || "0");
-    setDomains(defaultSettings?.domains || []);
-    setShowReminder(false);
-    setErrorMessages([]);
-  };
+		if (type === "1" && valid.includes(false)) {
+			setIsSaving(false);
+			return;
+		}
 
-  if ((currentDeviceType !== DeviceType.desktop && !isLoading) || !tReady) {
-    return <TrustedMailLoader />;
-  }
+		try {
+			const data = {
+				type: Number(type),
+				domains,
+				inviteUsersAsVisitors: true,
+			};
+			await setMailDomainSettings(data);
+			saveToSessionStorage("currentTrustedMailSettings", {
+				type,
+				domains,
+			});
+			saveToSessionStorage("defaultTrustedMailSettings", {
+				type,
+				domains,
+			});
+			setShowReminder(false);
+			toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+		} catch (error) {
+			toastr.error(error);
+		}
 
-  return (
-    <MainContainer>
-      <LearnMoreWrapper withoutExternalLink={!trustedMailDomainSettingsUrl}>
-        <Text fontSize="13px" fontWeight="400">
-          {t("TrustedMailSettingDescription")}
-        </Text>
-        <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
-          <Trans t={t} i18nKey="SaveToApply" />
-        </Text>
-        {trustedMailDomainSettingsUrl ? (
-          <Link
-            className="link-learn-more"
-            dataTestId="trusted_mail_component_learn_more"
-            color={currentColorScheme.main?.accent}
-            target="_blank"
-            isHovered
-            href={trustedMailDomainSettingsUrl}
-          >
-            {t("Common:LearnMore")}
-          </Link>
-        ) : null}
-      </LearnMoreWrapper>
+		setIsSaving(false);
+	};
 
-      <RadioButtonGroup
-        className="box"
-        fontSize="13px"
-        fontWeight="400"
-        name="group"
-        orientation="vertical"
-        spacing="8px"
-        options={[
-          {
-            id: "trusted-mail-disabled",
-            label: t("Common:Disabled"),
-            value: "0",
-            dataTestId: "trusted_mail_disabled",
-          },
-          {
-            id: "any-domains",
-            label: t("AllDomains"),
-            value: "2",
-            dataTestId: "trusted_mail_any_domains",
-          },
-          {
-            id: "custom-domains",
-            label: t("CustomDomains"),
-            value: "1",
-            dataTestId: "trusted_mail_custom_domains",
-          },
-        ]}
-        selected={type}
-        onClick={onSelectDomainType}
-      />
+	const onCancelClick = () => {
+		const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
+		saveToSessionStorage("currentTrustedMailSettings", defaultSettings);
+		setType(defaultSettings?.type || "0");
+		setDomains(defaultSettings?.domains || []);
+		setShowReminder(false);
+		setErrorMessages([]);
+	};
 
-      {type === "1" ? (
-        <UserFields
-          inputs={domains}
-          buttonLabel={t("AddTrustedDomain")}
-          onChangeInput={onChangeInput}
-          onDeleteInput={onDeleteInput}
-          onBlurAction={(index) => onCheckValid(domains[index], index)}
-          onClickAdd={onClickAdd}
-          validateFunc={isValidDomainName}
-          classNameAdditional="add-trusted-domain"
-          inputDataTestId="trusted_mail_domain_input"
-          deleteIconDataTestId="trusted_mail_delete_domain_icon"
-          addButtonDataTestId="trusted_mail_add_domain_button"
-          hideDeleteIcon={domains.length === 1}
-          errorMessages={errorMessages}
-        />
-      ) : null}
+	if ((currentDeviceType !== DeviceType.desktop && !isLoading) || !tReady) {
+		return <TrustedMailLoader />;
+	}
 
-      <SaveCancelButtons
-        className="save-cancel-buttons"
-        onSaveClick={onSaveClick}
-        onCancelClick={onCancelClick}
-        showReminder={showReminder}
-        reminderText={t("Common:YouHaveUnsavedChanges")}
-        saveButtonLabel={t("Common:SaveButton")}
-        cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings
-        hasScroll={false}
-        isSaving={isSaving}
-        additionalClassSaveButton="trusted-mail-save"
-        additionalClassCancelButton="trusted-mail-cancel"
-        cancelButtonDataTestId="trusted_mail_cancel_button"
-        saveButtonDataTestId="trusted_mail_save_button"
-      />
-    </MainContainer>
-  );
+	return (
+		<MainContainer>
+			<LearnMoreWrapper withoutExternalLink={!trustedMailDomainSettingsUrl}>
+				<Text fontSize="13px" fontWeight="400">
+					{t("TrustedMailSettingDescription")}
+				</Text>
+				<Text fontSize="13px" fontWeight="400" className="learn-subtitle">
+					<Trans t={t} i18nKey="SaveToApply" />
+				</Text>
+				{trustedMailDomainSettingsUrl ? (
+					<Link
+						className="link-learn-more"
+						dataTestId="trusted_mail_component_learn_more"
+						color={currentColorScheme.main?.accent}
+						target="_blank"
+						isHovered
+						href={trustedMailDomainSettingsUrl}
+					>
+						{t("Common:LearnMore")}
+					</Link>
+				) : null}
+			</LearnMoreWrapper>
+
+			<RadioButtonGroup
+				className="box"
+				fontSize="13px"
+				fontWeight="400"
+				name="group"
+				orientation="vertical"
+				spacing="8px"
+				options={[
+					{
+						id: "trusted-mail-disabled",
+						label: t("Common:Disabled"),
+						value: "0",
+						dataTestId: "trusted_mail_disabled",
+					},
+					{
+						id: "any-domains",
+						label: t("AllDomains"),
+						value: "2",
+						dataTestId: "trusted_mail_any_domains",
+					},
+					{
+						id: "custom-domains",
+						label: t("CustomDomains"),
+						value: "1",
+						dataTestId: "trusted_mail_custom_domains",
+					},
+				]}
+				selected={type}
+				onClick={onSelectDomainType}
+			/>
+
+			{type === "1" ? (
+				<UserFields
+					inputs={domains}
+					buttonLabel={t("AddTrustedDomain")}
+					onChangeInput={onChangeInput}
+					onDeleteInput={onDeleteInput}
+					onBlurAction={(index) => onCheckValid(domains[index], index)}
+					onClickAdd={onClickAdd}
+					validateFunc={isValidDomainName}
+					classNameAdditional="add-trusted-domain"
+					inputDataTestId="trusted_mail_domain_input"
+					deleteIconDataTestId="trusted_mail_delete_domain_icon"
+					addButtonDataTestId="trusted_mail_add_domain_button"
+					hideDeleteIcon={domains.length === 1}
+					errorMessages={errorMessages}
+				/>
+			) : null}
+
+			<SaveCancelButtons
+				className="save-cancel-buttons"
+				onSaveClick={onSaveClick}
+				onCancelClick={onCancelClick}
+				showReminder={showReminder}
+				reminderText={t("Common:YouHaveUnsavedChanges")}
+				saveButtonLabel={t("Common:SaveButton")}
+				cancelButtonLabel={t("Common:CancelButton")}
+				displaySettings
+				hasScroll={false}
+				isSaving={isSaving}
+				additionalClassSaveButton="trusted-mail-save"
+				additionalClassCancelButton="trusted-mail-cancel"
+				cancelButtonDataTestId="trusted_mail_cancel_button"
+				saveButtonDataTestId="trusted_mail_save_button"
+			/>
+		</MainContainer>
+	);
 };
 
 export const TrustedMailSection = inject(({ settingsStore, setup }) => {
-  const {
-    trustedDomainsType,
-    trustedDomains,
-    setMailDomainSettings,
-    currentColorScheme,
-    trustedMailDomainSettingsUrl,
-    currentDeviceType,
-  } = settingsStore;
+	const {
+		trustedDomainsType,
+		trustedDomains,
+		setMailDomainSettings,
+		currentColorScheme,
+		trustedMailDomainSettingsUrl,
+		currentDeviceType,
+	} = settingsStore;
 
-  const { isInit } = setup;
+	const { isInit } = setup;
 
-  return {
-    trustedDomainsType,
-    trustedDomains,
-    setMailDomainSettings,
-    currentColorScheme,
-    trustedMailDomainSettingsUrl,
-    currentDeviceType,
-    isInit,
-  };
+	return {
+		trustedDomainsType,
+		trustedDomains,
+		setMailDomainSettings,
+		currentColorScheme,
+		trustedMailDomainSettingsUrl,
+		currentDeviceType,
+		isInit,
+	};
 })(withTranslation(["Settings", "Common"])(observer(TrustedMail)));

@@ -32,8 +32,8 @@ import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { size } from "@docspace/shared/utils";
@@ -56,194 +56,194 @@ const MainContainer = styled.div`
 `;
 
 const AdminMessage = (props) => {
-  const {
-    t,
-    tReady,
+	const {
+		t,
+		tReady,
 
-    enableAdmMess,
-    setMessageSettings,
-    currentColorScheme,
-    administratorMessageSettingsUrl,
-  } = props;
-  const [type, setType] = useState("");
-  const [showReminder, setShowReminder] = useState(false);
+		enableAdmMess,
+		setMessageSettings,
+		currentColorScheme,
+		administratorMessageSettingsUrl,
+	} = props;
+	const [type, setType] = useState("");
+	const [showReminder, setShowReminder] = useState(false);
 
-  const navigate = useNavigate();
-  const location = useLocation();
+	const navigate = useNavigate();
+	const location = useLocation();
 
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("admin-message") &&
-      navigate("/portal-settings/security/access-portal");
-  };
+	const checkWidth = () => {
+		window.innerWidth > size.mobile &&
+			location.pathname.includes("admin-message") &&
+			navigate("/portal-settings/security/access-portal");
+	};
 
-  const getSettingsFromDefault = () => {
-    const defaultSettings = getFromSessionStorage(
-      "defaultAdminMessageSettings",
-    );
-    if (defaultSettings) {
-      setType(defaultSettings);
-    }
-  };
+	const getSettingsFromDefault = () => {
+		const defaultSettings = getFromSessionStorage(
+			"defaultAdminMessageSettings",
+		);
+		if (defaultSettings) {
+			setType(defaultSettings);
+		}
+	};
 
-  const getSettings = () => {
-    const currentSettings = getFromSessionStorage(
-      "currentAdminMessageSettings",
-    );
+	const getSettings = () => {
+		const currentSettings = getFromSessionStorage(
+			"currentAdminMessageSettings",
+		);
 
-    const enable = enableAdmMess ? "enable" : "disabled";
+		const enable = enableAdmMess ? "enable" : "disabled";
 
-    saveToSessionStorage("defaultAdminMessageSettings", enable);
+		saveToSessionStorage("defaultAdminMessageSettings", enable);
 
-    if (currentSettings) {
-      setType(currentSettings);
-    } else {
-      setType(enable);
-    }
-  };
+		if (currentSettings) {
+			setType(currentSettings);
+		} else {
+			setType(enable);
+		}
+	};
 
-  useEffect(() => {
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
-  }, []);
+	useEffect(() => {
+		checkWidth();
+		window.addEventListener("resize", checkWidth);
+		return () => window.removeEventListener("resize", checkWidth);
+	}, []);
 
-  useEffect(() => {
-    const currentSettings = getFromSessionStorage(
-      "currentAdminMessageSettings",
-    );
-    const defaultSettings = getFromSessionStorage(
-      "defaultAdminMessageSettings",
-    );
+	useEffect(() => {
+		const currentSettings = getFromSessionStorage(
+			"currentAdminMessageSettings",
+		);
+		const defaultSettings = getFromSessionStorage(
+			"defaultAdminMessageSettings",
+		);
 
-    if (isEqual(currentSettings, defaultSettings)) {
-      getSettings();
-    } else {
-      getSettingsFromDefault();
-    }
-  }, []);
+		if (isEqual(currentSettings, defaultSettings)) {
+			getSettings();
+		} else {
+			getSettingsFromDefault();
+		}
+	}, []);
 
-  useEffect(() => {
-    const defaultSettings = getFromSessionStorage(
-      "defaultAdminMessageSettings",
-    );
-    saveToSessionStorage("currentAdminMessageSettings", type);
+	useEffect(() => {
+		const defaultSettings = getFromSessionStorage(
+			"defaultAdminMessageSettings",
+		);
+		saveToSessionStorage("currentAdminMessageSettings", type);
 
-    if (isEqual(defaultSettings, type)) {
-      setShowReminder(false);
-    } else {
-      setShowReminder(true);
-    }
-  }, [type]);
+		if (isEqual(defaultSettings, type)) {
+			setShowReminder(false);
+		} else {
+			setShowReminder(true);
+		}
+	}, [type]);
 
-  const onSelectType = (e) => {
-    if (type !== e.target.value) {
-      setType(e.target.value);
-    }
-  };
+	const onSelectType = (e) => {
+		if (type !== e.target.value) {
+			setType(e.target.value);
+		}
+	};
 
-  const onSaveClick = () => {
-    const turnOn = type === "enable";
-    setMessageSettings(turnOn);
-    toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
-    saveToSessionStorage("currentAdminMessageSettings", type);
-    saveToSessionStorage("defaultAdminMessageSettings", type);
-    setShowReminder(false);
-  };
+	const onSaveClick = () => {
+		const turnOn = type === "enable";
+		setMessageSettings(turnOn);
+		toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+		saveToSessionStorage("currentAdminMessageSettings", type);
+		saveToSessionStorage("defaultAdminMessageSettings", type);
+		setShowReminder(false);
+	};
 
-  const onCancelClick = () => {
-    const defaultSettings = getFromSessionStorage(
-      "defaultAdminMessageSettings",
-    );
-    setType(defaultSettings || "disabled");
-    setShowReminder(false);
-  };
+	const onCancelClick = () => {
+		const defaultSettings = getFromSessionStorage(
+			"defaultAdminMessageSettings",
+		);
+		setType(defaultSettings || "disabled");
+		setShowReminder(false);
+	};
 
-  if (!tReady) return null;
+	if (!tReady) return null;
 
-  return (
-    <MainContainer>
-      <LearnMoreWrapper withoutExternalLink={!administratorMessageSettingsUrl}>
-        <Text>
-          {t("AdminsMessageSettingDescription", {
-            productName: t("Common:ProductName"),
-          })}
-        </Text>
-        <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
-          <Trans t={t} i18nKey="SaveToApply" />
-        </Text>
+	return (
+		<MainContainer>
+			<LearnMoreWrapper withoutExternalLink={!administratorMessageSettingsUrl}>
+				<Text>
+					{t("AdminsMessageSettingDescription", {
+						productName: t("Common:ProductName"),
+					})}
+				</Text>
+				<Text fontSize="13px" fontWeight="400" className="learn-subtitle">
+					<Trans t={t} i18nKey="SaveToApply" />
+				</Text>
 
-        {administratorMessageSettingsUrl ? (
-          <Link
-            className="link-learn-more"
-            dataTestId="administrator_message_component_learn_more"
-            color={currentColorScheme.main?.accent}
-            target="_blank"
-            isHovered
-            href={administratorMessageSettingsUrl}
-          >
-            {t("Common:LearnMore")}
-          </Link>
-        ) : null}
-      </LearnMoreWrapper>
+				{administratorMessageSettingsUrl ? (
+					<Link
+						className="link-learn-more"
+						dataTestId="administrator_message_component_learn_more"
+						color={currentColorScheme.main?.accent}
+						target="_blank"
+						isHovered
+						href={administratorMessageSettingsUrl}
+					>
+						{t("Common:LearnMore")}
+					</Link>
+				) : null}
+			</LearnMoreWrapper>
 
-      <RadioButtonGroup
-        className="box"
-        fontSize="13px"
-        fontWeight="400"
-        name="group"
-        orientation="vertical"
-        spacing="8px"
-        dataTestId="administrator_message_radio_button_group"
-        options={[
-          {
-            id: "admin-message-disabled",
-            label: t("Common:Disabled"),
-            value: "disabled",
-            dataTestId: "administrator_message_disabled",
-          },
-          {
-            id: "admin-message-enable",
-            label: t("Common:Enable"),
-            value: "enable",
-            dataTestId: "administrator_message_enabled",
-          },
-        ]}
-        selected={type}
-        onClick={onSelectType}
-      />
+			<RadioButtonGroup
+				className="box"
+				fontSize="13px"
+				fontWeight="400"
+				name="group"
+				orientation="vertical"
+				spacing="8px"
+				dataTestId="administrator_message_radio_button_group"
+				options={[
+					{
+						id: "admin-message-disabled",
+						label: t("Common:Disabled"),
+						value: "disabled",
+						dataTestId: "administrator_message_disabled",
+					},
+					{
+						id: "admin-message-enable",
+						label: t("Common:Enable"),
+						value: "enable",
+						dataTestId: "administrator_message_enabled",
+					},
+				]}
+				selected={type}
+				onClick={onSelectType}
+			/>
 
-      <SaveCancelButtons
-        className="save-cancel-buttons"
-        onSaveClick={onSaveClick}
-        onCancelClick={onCancelClick}
-        showReminder={showReminder}
-        reminderText={t("Common:YouHaveUnsavedChanges")}
-        saveButtonLabel={t("Common:SaveButton")}
-        cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings
-        hasScroll={false}
-        additionalClassSaveButton="admin-message-save"
-        additionalClassCancelButton="admin-message-cancel"
-        saveButtonDataTestId="administrator_message_save_button"
-        cancelButtonDataTestId="administrator_message_cancel_button"
-      />
-    </MainContainer>
-  );
+			<SaveCancelButtons
+				className="save-cancel-buttons"
+				onSaveClick={onSaveClick}
+				onCancelClick={onCancelClick}
+				showReminder={showReminder}
+				reminderText={t("Common:YouHaveUnsavedChanges")}
+				saveButtonLabel={t("Common:SaveButton")}
+				cancelButtonLabel={t("Common:CancelButton")}
+				displaySettings
+				hasScroll={false}
+				additionalClassSaveButton="admin-message-save"
+				additionalClassCancelButton="admin-message-cancel"
+				saveButtonDataTestId="administrator_message_save_button"
+				cancelButtonDataTestId="administrator_message_cancel_button"
+			/>
+		</MainContainer>
+	);
 };
 
 export const AdminMessageSection = inject(({ settingsStore }) => {
-  const {
-    enableAdmMess,
-    setMessageSettings,
-    currentColorScheme,
-    administratorMessageSettingsUrl,
-  } = settingsStore;
+	const {
+		enableAdmMess,
+		setMessageSettings,
+		currentColorScheme,
+		administratorMessageSettingsUrl,
+	} = settingsStore;
 
-  return {
-    enableAdmMess,
-    setMessageSettings,
-    currentColorScheme,
-    administratorMessageSettingsUrl,
-  };
+	return {
+		enableAdmMess,
+		setMessageSettings,
+		currentColorScheme,
+		administratorMessageSettingsUrl,
+	};
 })(withTranslation(["Settings", "Common"])(observer(AdminMessage)));

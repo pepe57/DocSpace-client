@@ -26,36 +26,36 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import { StyledAvailableList } from "../../../ChangePortalOwnerDialog/StyledDialog";
 
 const Description = ({ dataReassignmentUrl, noRoomFilesToMove }) => {
-  const { t } = useTranslation("DataReassignmentDialog");
+	const { t } = useTranslation("DataReassignmentDialog");
 
-  return (
-    <StyledAvailableList className="list-container">
-      <Text className="list-item">
-        {noRoomFilesToMove
-          ? t("RoomsOnlyReassignment")
-          : t("DescriptionDataReassignment")}
-      </Text>
-      <Text className="list-item">{t("NoteDataReassignment")}</Text>
+	return (
+		<StyledAvailableList className="list-container">
+			<Text className="list-item">
+				{noRoomFilesToMove
+					? t("RoomsOnlyReassignment")
+					: t("DescriptionDataReassignment")}
+			</Text>
+			<Text className="list-item">{t("NoteDataReassignment")}</Text>
 
-      {dataReassignmentUrl ? (
-        <Link
-          target="_blank"
-          isHovered
-          fontWeight={600}
-          style={{ textDecoration: "underline" }}
-          href={dataReassignmentUrl}
-        >
-          {t("MoreAboutDataTransfer")}
-        </Link>
-      ) : null}
-    </StyledAvailableList>
-  );
+			{dataReassignmentUrl ? (
+				<Link
+					target="_blank"
+					isHovered
+					fontWeight={600}
+					style={{ textDecoration: "underline" }}
+					href={dataReassignmentUrl}
+				>
+					{t("MoreAboutDataTransfer")}
+				</Link>
+			) : null}
+		</StyledAvailableList>
+	);
 };
 
 export default Description;

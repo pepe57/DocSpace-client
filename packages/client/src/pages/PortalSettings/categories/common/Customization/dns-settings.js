@@ -39,8 +39,8 @@ import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 import { parseDomain } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
@@ -51,341 +51,341 @@ import useCommon from "../useCommon";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const toggleStyle = {
-  position: "static",
+	position: "static",
 };
 
 const textInputProps = {
-  id: "textInputContainerDNSSettings",
-  testId: "customization_dns_settings_text_input",
-  className: "dns-textarea",
-  scale: true,
-  tabIndex: 8,
+	id: "textInputContainerDNSSettings",
+	testId: "customization_dns_settings_text_input",
+	className: "dns-textarea",
+	scale: true,
+	tabIndex: 8,
 };
 
 const buttonProps = {
-  tabIndex: 9,
-  className: "save-cancel-buttons send-request-button",
-  testId: "customization_dns_settings_button",
-  primary: true,
+	tabIndex: 9,
+	className: "save-cancel-buttons send-request-button",
+	testId: "customization_dns_settings_button",
+	primary: true,
 };
 let timerId = null;
 const DNSSettingsComponent = (props) => {
-  const {
-    t,
-    tReady,
-    isLoaded,
-    setIsLoadedDNSSettings,
-    isLoadedPage,
-    isSettingPaid,
-    currentColorScheme,
-    standalone,
-    setIsEnableDNS,
-    setDNSName,
-    saveDNSSettings,
-    dnsName,
-    enable,
-    isDefaultDNS,
-    dnsSettingsUrl,
-    currentDeviceType,
-    requestSupportUrl,
-    loadBaseInfo,
-    deviceType,
-    settingsStore,
-    common,
-  } = props;
+	const {
+		t,
+		tReady,
+		isLoaded,
+		setIsLoadedDNSSettings,
+		isLoadedPage,
+		isSettingPaid,
+		currentColorScheme,
+		standalone,
+		setIsEnableDNS,
+		setDNSName,
+		saveDNSSettings,
+		dnsName,
+		enable,
+		isDefaultDNS,
+		dnsSettingsUrl,
+		currentDeviceType,
+		requestSupportUrl,
+		loadBaseInfo,
+		deviceType,
+		settingsStore,
+		common,
+	} = props;
 
-  const [hasScroll, setHasScroll] = useState(false);
-  const isLoadedSetting = isLoaded && tReady;
-  const [isCustomizationView, setIsCustomizationView] = useState(false);
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState();
-  const [isError, setIsError] = useState(false);
-  const [errorText, setErrorText] = useState("");
+	const [hasScroll, setHasScroll] = useState(false);
+	const isLoadedSetting = isLoaded && tReady;
+	const [isCustomizationView, setIsCustomizationView] = useState(false);
+	const navigate = useNavigate();
+	const [isLoading, setIsLoading] = useState();
+	const [isError, setIsError] = useState(false);
+	const [errorText, setErrorText] = useState("");
 
-  const isMobileView = deviceType === DeviceType.mobile;
+	const isMobileView = deviceType === DeviceType.mobile;
 
-  const defaultProps = createDefaultHookSettingsProps({
-    loadBaseInfo,
-    isMobileView,
-    settingsStore,
-    common,
-  });
+	const defaultProps = createDefaultHookSettingsProps({
+		loadBaseInfo,
+		isMobileView,
+		settingsStore,
+		common,
+	});
 
-  const { getCommonInitialValue } = useCommon(defaultProps.common);
+	const { getCommonInitialValue } = useCommon(defaultProps.common);
 
-  const theme = useTheme();
+	const theme = useTheme();
 
-  const checkInnerWidth = useCallback(() => {
-    if (!isMobileDevice()) {
-      setIsCustomizationView(true);
+	const checkInnerWidth = useCallback(() => {
+		if (!isMobileDevice()) {
+			setIsCustomizationView(true);
 
-      if (location.pathname.includes("dns-settings")) {
-        navigate("/portal-settings/customization/general");
-      }
-    } else {
-      setIsCustomizationView(false);
-    }
-  }, [isMobileDevice, setIsCustomizationView]);
+			if (location.pathname.includes("dns-settings")) {
+				navigate("/portal-settings/customization/general");
+			}
+		} else {
+			setIsCustomizationView(false);
+		}
+	}, [isMobileDevice, setIsCustomizationView]);
 
-  useEffect(() => {
-    setDocumentTitle(t("DNSSettings"));
+	useEffect(() => {
+		setDocumentTitle(t("DNSSettings"));
 
-    const checkScroll = checkScrollSettingsBlock();
-    checkInnerWidth();
-    window.addEventListener("resize", checkInnerWidth);
+		const checkScroll = checkScrollSettingsBlock();
+		checkInnerWidth();
+		window.addEventListener("resize", checkInnerWidth);
 
-    const scrollPortalName = checkScroll();
+		const scrollPortalName = checkScroll();
 
-    if (scrollPortalName !== hasScroll) {
-      setHasScroll(scrollPortalName);
-    }
+		if (scrollPortalName !== hasScroll) {
+			setHasScroll(scrollPortalName);
+		}
 
-    return () => window.removeEventListener("resize", checkInnerWidth);
-  }, []);
+		return () => window.removeEventListener("resize", checkInnerWidth);
+	}, []);
 
-  useEffect(() => {
-    if (isMobileView) getCommonInitialValue();
-  }, [isMobileView]);
+	useEffect(() => {
+		if (isMobileView) getCommonInitialValue();
+	}, [isMobileView]);
 
-  useEffect(() => {
-    if (isLoadedSetting) setIsLoadedDNSSettings(isLoadedSetting);
-  }, [isLoadedSetting]);
+	useEffect(() => {
+		if (isLoadedSetting) setIsLoadedDNSSettings(isLoadedSetting);
+	}, [isLoadedSetting]);
 
-  const onSendRequest = () => {
-    window.open(requestSupportUrl);
-  };
+	const onSendRequest = () => {
+		window.open(requestSupportUrl);
+	};
 
-  const onSaveSettings = async () => {
-    try {
-      if (!dnsName?.trim()) {
-        setIsError(true);
-      }
+	const onSaveSettings = async () => {
+		try {
+			if (!dnsName?.trim()) {
+				setIsError(true);
+			}
 
-      timerId = setTimeout(() => {
-        setIsLoading(true);
-      }, [200]);
+			timerId = setTimeout(() => {
+				setIsLoading(true);
+			}, [200]);
 
-      await saveDNSSettings();
-      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
-    } catch (e) {
-      setIsError(true);
-      toastr.error(e);
-    }
+			await saveDNSSettings();
+			toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+		} catch (e) {
+			setIsError(true);
+			toastr.error(e);
+		}
 
-    clearTimeout(timerId);
-    timerId = null;
-    setIsLoading(false);
+		clearTimeout(timerId);
+		timerId = null;
+		setIsLoading(false);
 
-    setIsError(false);
-  };
-  const onClickToggle = (e) => {
-    const checked = e.currentTarget.checked;
-    setIsEnableDNS(checked);
-  };
+		setIsError(false);
+	};
+	const onClickToggle = (e) => {
+		const checked = e.currentTarget.checked;
+		setIsEnableDNS(checked);
+	};
 
-  const onChangeTextInput = (e) => {
-    isError && setIsError(false);
-    setErrorText("");
+	const onChangeTextInput = (e) => {
+		isError && setIsError(false);
+		setErrorText("");
 
-    const value = e.target.value.trim();
+		const value = e.target.value.trim();
 
-    const isValidDomain = parseDomain(value || "", setErrorText, t);
+		const isValidDomain = parseDomain(value || "", setErrorText, t);
 
-    if (!isValidDomain) {
-      setIsError(true);
-    }
-    setDNSName(value);
-  };
+		if (!isValidDomain) {
+			setIsError(true);
+		}
+		setDNSName(value);
+	};
 
-  const domainExampleText = " ourcompany.com";
+	const domainExampleText = " ourcompany.com";
 
-  const settingsBlock = (
-    <div className="settings-block">
-      {standalone ? (
-        <>
-          <ToggleButton
-            className="settings-dns_toggle-button"
-            dataTestId="customization_dns_settings_toggle_button"
-            label={t("CustomDomainName")}
-            onChange={onClickToggle}
-            isChecked={enable ?? false}
-            style={toggleStyle}
-            isDisabled={isLoading}
-          />
-          <TextInput
-            {...textInputProps}
-            isDisabled={isLoading || !enable}
-            value={dnsName}
-            onChange={onChangeTextInput}
-            hasError={isError}
-          />
-          <div style={{ marginTop: "5px" }}>
-            {errorText
-              ? errorText.map((err) => (
-                  <Text
-                    className="dns-error-text"
-                    key={err}
-                    fontSize="12px"
-                    fontWeight="400"
-                  >
-                    {err}
-                  </Text>
-                ))
-              : null}
-          </div>
-          <div style={{ marginTop: "3px" }}>
-            <Text
-              key="dns-hint"
-              fontSize="12px"
-              fontWeight="400"
-              color={globalColors.gray}
-            >
-              {`${t("Settings:DNSSettingsHint")}${domainExampleText}`}
-            </Text>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="settings-block-description">
-            {t("DNSSettingsMobile")}
-          </div>
-          <FieldContainer
-            id="fieldContainerDNSSettings"
-            className="field-container-width settings_unavailable"
-            labelText={`${t("Common:YourCurrentDomain")}`}
-            isVertical
-          >
-            <TextInput
-              {...textInputProps}
-              isDisabled
-              value={window.location.hostname?.trim()}
-            />
-          </FieldContainer>
-        </>
-      )}
-    </div>
-  );
+	const settingsBlock = (
+		<div className="settings-block">
+			{standalone ? (
+				<>
+					<ToggleButton
+						className="settings-dns_toggle-button"
+						dataTestId="customization_dns_settings_toggle_button"
+						label={t("CustomDomainName")}
+						onChange={onClickToggle}
+						isChecked={enable ?? false}
+						style={toggleStyle}
+						isDisabled={isLoading}
+					/>
+					<TextInput
+						{...textInputProps}
+						isDisabled={isLoading || !enable}
+						value={dnsName}
+						onChange={onChangeTextInput}
+						hasError={isError}
+					/>
+					<div style={{ marginTop: "5px" }}>
+						{errorText
+							? errorText.map((err) => (
+									<Text
+										className="dns-error-text"
+										key={err}
+										fontSize="12px"
+										fontWeight="400"
+									>
+										{err}
+									</Text>
+								))
+							: null}
+					</div>
+					<div style={{ marginTop: "3px" }}>
+						<Text
+							key="dns-hint"
+							fontSize="12px"
+							fontWeight="400"
+							color={globalColors.gray}
+						>
+							{`${t("Settings:DNSSettingsHint")}${domainExampleText}`}
+						</Text>
+					</div>
+				</>
+			) : (
+				<>
+					<div className="settings-block-description">
+						{t("DNSSettingsMobile")}
+					</div>
+					<FieldContainer
+						id="fieldContainerDNSSettings"
+						className="field-container-width settings_unavailable"
+						labelText={`${t("Common:YourCurrentDomain")}`}
+						isVertical
+					>
+						<TextInput
+							{...textInputProps}
+							isDisabled
+							value={window.location.hostname?.trim()}
+						/>
+					</FieldContainer>
+				</>
+			)}
+		</div>
+	);
 
-  const buttonContainer = standalone ? (
-    <Button
-      {...buttonProps}
-      size={currentDeviceType === DeviceType.desktop ? "small" : "normal"}
-      label={t("Common:SaveButton")}
-      onClick={onSaveSettings}
-      isDisabled={isLoading || isDefaultDNS || isError || !dnsName}
-      isLoading={isLoading}
-    />
-  ) : (
-    <Button
-      {...buttonProps}
-      size={currentDeviceType === DeviceType.desktop ? "small" : "normal"}
-      label={t("Common:SendRequest")}
-      onClick={onSendRequest}
-      isDisabled={!isSettingPaid || isError}
-    />
-  );
+	const buttonContainer = standalone ? (
+		<Button
+			{...buttonProps}
+			size={currentDeviceType === DeviceType.desktop ? "small" : "normal"}
+			label={t("Common:SaveButton")}
+			onClick={onSaveSettings}
+			isDisabled={isLoading || isDefaultDNS || isError || !dnsName}
+			isLoading={isLoading}
+		/>
+	) : (
+		<Button
+			{...buttonProps}
+			size={currentDeviceType === DeviceType.desktop ? "small" : "normal"}
+			label={t("Common:SendRequest")}
+			onClick={onSendRequest}
+			isDisabled={!isSettingPaid || isError}
+		/>
+	);
 
-  return !isLoadedPage ? (
-    <LoaderCustomization dnsSettings />
-  ) : (
-    <StyledSettingsComponent
-      hasScroll={hasScroll}
-      className="category-item-wrapper"
-      isSettingPaid={isSettingPaid}
-      standalone={standalone}
-      withoutExternalLink={!dnsSettingsUrl}
-    >
-      {isCustomizationView && !isMobileView ? (
-        <div className="category-item-heading">
-          <div className="category-item-title">{t("DNSSettings")}</div>
-          {!isSettingPaid && !standalone ? (
-            <Badge
-              className="paid-badge"
-              fontWeight="700"
-              backgroundColor={
-                theme.isBase
-                  ? globalColors.favoritesStatus
-                  : globalColors.favoriteStatusDark
-              }
-              label={t("Common:Paid")}
-              isPaidBadge
-            />
-          ) : null}
-        </div>
-      ) : null}
-      <div className="category-item-description">
-        <Text fontSize="13px" fontWeight={400}>
-          {t("DNSSettingsDescription")}
-        </Text>
-        {dnsSettingsUrl ? (
-          <Link
-            className="link-learn-more"
-            color={currentColorScheme.main?.accent}
-            dataTestId="customization_dns_settings_learn_more"
-            target="_blank"
-            isHovered
-            href={dnsSettingsUrl}
-          >
-            {t("Common:LearnMore")}
-          </Link>
-        ) : null}
-      </div>
-      {settingsBlock}
-      <div className="send-request-container">{buttonContainer}</div>
-    </StyledSettingsComponent>
-  );
+	return !isLoadedPage ? (
+		<LoaderCustomization dnsSettings />
+	) : (
+		<StyledSettingsComponent
+			hasScroll={hasScroll}
+			className="category-item-wrapper"
+			isSettingPaid={isSettingPaid}
+			standalone={standalone}
+			withoutExternalLink={!dnsSettingsUrl}
+		>
+			{isCustomizationView && !isMobileView ? (
+				<div className="category-item-heading">
+					<div className="category-item-title">{t("DNSSettings")}</div>
+					{!isSettingPaid && !standalone ? (
+						<Badge
+							className="paid-badge"
+							fontWeight="700"
+							backgroundColor={
+								theme.isBase
+									? globalColors.favoritesStatus
+									: globalColors.favoriteStatusDark
+							}
+							label={t("Common:Paid")}
+							isPaidBadge
+						/>
+					) : null}
+				</div>
+			) : null}
+			<div className="category-item-description">
+				<Text fontSize="13px" fontWeight={400}>
+					{t("DNSSettingsDescription")}
+				</Text>
+				{dnsSettingsUrl ? (
+					<Link
+						className="link-learn-more"
+						color={currentColorScheme.main?.accent}
+						dataTestId="customization_dns_settings_learn_more"
+						target="_blank"
+						isHovered
+						href={dnsSettingsUrl}
+					>
+						{t("Common:LearnMore")}
+					</Link>
+				) : null}
+			</div>
+			{settingsBlock}
+			<div className="send-request-container">{buttonContainer}</div>
+		</StyledSettingsComponent>
+	);
 };
 
 export const DNSSettings = inject(
-  ({ settingsStore, common, currentQuotaStore }) => {
-    const {
-      currentColorScheme,
-      standalone,
-      dnsSettingsUrl,
-      currentDeviceType,
-      requestSupportUrl,
-    } = settingsStore;
-    const {
-      isLoaded,
-      setIsLoadedDNSSettings,
-      setIsLoaded,
-      dnsSettings,
-      setIsEnableDNS,
-      setDNSName,
-      saveDNSSettings,
-      isDefaultDNS,
-      initSettings,
-    } = common;
+	({ settingsStore, common, currentQuotaStore }) => {
+		const {
+			currentColorScheme,
+			standalone,
+			dnsSettingsUrl,
+			currentDeviceType,
+			requestSupportUrl,
+		} = settingsStore;
+		const {
+			isLoaded,
+			setIsLoadedDNSSettings,
+			setIsLoaded,
+			dnsSettings,
+			setIsEnableDNS,
+			setDNSName,
+			saveDNSSettings,
+			isDefaultDNS,
+			initSettings,
+		} = common;
 
-    const { isCustomizationAvailable } = currentQuotaStore;
-    const { customObj } = dnsSettings;
-    const { dnsName, enable } = customObj;
+		const { isCustomizationAvailable } = currentQuotaStore;
+		const { customObj } = dnsSettings;
+		const { dnsName, enable } = customObj;
 
-    return {
-      isDefaultDNS,
-      dnsName: dnsName || "",
-      enable,
-      setDNSName,
-      isLoaded,
-      setIsLoadedDNSSettings,
-      setIsLoaded,
-      isSettingPaid: isCustomizationAvailable,
-      currentColorScheme,
-      standalone,
-      setIsEnableDNS,
-      saveDNSSettings,
-      dnsSettingsUrl,
-      currentDeviceType,
-      requestSupportUrl,
-      loadBaseInfo: async (page) => {
-        await initSettings(page);
-      },
-      settingsStore,
-      common,
-    };
-  },
+		return {
+			isDefaultDNS,
+			dnsName: dnsName || "",
+			enable,
+			setDNSName,
+			isLoaded,
+			setIsLoadedDNSSettings,
+			setIsLoaded,
+			isSettingPaid: isCustomizationAvailable,
+			currentColorScheme,
+			standalone,
+			setIsEnableDNS,
+			saveDNSSettings,
+			dnsSettingsUrl,
+			currentDeviceType,
+			requestSupportUrl,
+			loadBaseInfo: async (page) => {
+				await initSettings(page);
+			},
+			settingsStore,
+			common,
+		};
+	},
 )(
-  withLoading(
-    withTranslation(["Settings", "Common"])(observer(DNSSettingsComponent)),
-  ),
+	withLoading(
+		withTranslation(["Settings", "Common"])(observer(DNSSettingsComponent)),
+	),
 );

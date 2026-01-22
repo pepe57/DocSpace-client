@@ -29,17 +29,17 @@ import { Heading } from "@docspace/shared/components/heading";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDown } from "@docspace/shared/components/drop-down";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import {
-  mobile,
-  commonIconsStyles,
-  injectDefaultTheme,
-  desktop,
-  commonInputStyles,
+	mobile,
+	commonIconsStyles,
+	injectDefaultTheme,
+	desktop,
+	commonInputStyles,
 } from "@docspace/shared/utils";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
@@ -91,15 +91,15 @@ const StyledInvitePanel = styled.div`
 `;
 
 const ScrollList = styled.div.attrs((props) => ({
-  "data-testid": props.dataTestId,
+	"data-testid": props.dataTestId,
 }))`
   position: absolute;
 
   width: 100%;
   height: ${(props) =>
-    props.scrollAllPanelContent && props.isTotalListHeight
-      ? "auto"
-      : props.offsetTop && `calc(100% - ${props.offsetTop}px)`};
+		props.scrollAllPanelContent && props.isTotalListHeight
+			? "auto"
+			: props.offsetTop && `calc(100% - ${props.offsetTop}px)`};
 
   .row-item {
     @media not ${mobile} {
@@ -138,8 +138,8 @@ const StyledSubHeader = styled(Heading)`
   margin: 16px 0 8px;
 
   ${(props) =>
-    props.$inline &&
-    css`
+		props.$inline &&
+		css`
       display: inline-flex;
       align-items: center;
       gap: 16px;
@@ -148,7 +148,7 @@ const StyledSubHeader = styled(Heading)`
 
 const StyledDescription = styled(Text).attrs(injectDefaultTheme)`
   color: ${(props) =>
-    props.theme.createEditRoomDialog.commonParam.descriptionColor};
+		props.theme.createEditRoomDialog.commonParam.descriptionColor};
   margin-bottom: 16px;
 
   font-weight: 400;
@@ -156,18 +156,18 @@ const StyledDescription = styled(Text).attrs(injectDefaultTheme)`
   line-height: 16px;
 
   ${(props) =>
-    props.noAllowInvitingGuests &&
-    css`
+		props.noAllowInvitingGuests &&
+		css`
       margin-bottom: 12px;
     `};
 `;
 
 const StyledRow = styled.div.attrs((props) => ({
-  "data-testid": props.dataTestId,
+	"data-testid": props.dataTestId,
 }))`
   display: grid;
   grid-template-columns: ${(props) =>
-    props.edit ? "32px 1fr 32px 32px" : "32px 1fr auto"};
+		props.edit ? "32px 1fr 32px 32px" : "32px 1fr auto"};
   gap: 8px;
 
   min-height: 41px;
@@ -259,7 +259,7 @@ const StyledInviteInput = styled.div`
 `;
 
 const StyledEditInput = styled(TextInput).attrs((props) => ({
-  "data-testid": props.dataTestId,
+	"data-testid": props.dataTestId,
 }))`
   height: 32px;
 `;
@@ -400,13 +400,13 @@ const StyledDropDown = styled(DropDown)`
 
       svg {
         ${({ theme }) =>
-          theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
+					theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
 
         path {
           fill: ${(props) => props.theme.inputBlock.iconColor};
           ${(props) =>
-            props.isRequestRunning &&
-            css`
+						props.isRequestRunning &&
+						css`
               opacity: 0.65;
             `}
         }
@@ -427,18 +427,18 @@ const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: ${(props) =>
-    props.$primary ? "14px" : props.$info ? "11px" : "12px"};
+		props.$primary ? "14px" : props.$info ? "11px" : "12px"};
   font-weight: ${(props) => (props.$primary || props.$info ? "600" : "400")};
 
   color: ${(props) =>
-    (props.$primary && !props.disabled) || props.$info
-      ? props.theme.text.color
-      : props.theme.text.emailColor};
+		(props.$primary && !props.disabled) || props.$info
+			? props.theme.text.color
+			: props.theme.text.emailColor};
   ${(props) => props.info && `margin-inline-start: auto`}
 `;
 
 const StyledEditButton = styled(Button).attrs((props) => ({
-  "data-testid": props.dataTestId,
+	"data-testid": props.dataTestId,
 }))`
   width: 32px !important;
   height: 32px !important;
@@ -464,8 +464,8 @@ const StyledCrossIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
 `;
 
 const StyledDeleteIcon = styled(DeleteIcon).attrs((props) => ({
-  ...injectDefaultTheme(props),
-  "data-testid": props.dataTestId,
+	...injectDefaultTheme(props),
+	"data-testid": props.dataTestId,
 }))`
   cursor: pointer;
 
@@ -491,7 +491,7 @@ const StyledButtons = styled.div.attrs(injectDefaultTheme)`
 `;
 
 const StyledLink = styled(Link).attrs((props) => ({
-  "data-testid": props.dataTestId,
+	"data-testid": props.dataTestId,
 }))`
   float: inline-end;
 `;
@@ -508,7 +508,7 @@ const StyledInviteLanguage = styled.div`
   justify-content: start;
   height: 28px;
   color: ${(props) =>
-    props.theme.createEditRoomDialog.commonParam.descriptionColor};
+		props.theme.createEditRoomDialog.commonParam.descriptionColor};
   margin-bottom: 4px;
   font-size: 13px;
   font-style: normal;
@@ -521,7 +521,7 @@ const StyledInviteLanguage = styled.div`
 
   .invitation-language {
     color: ${(props) =>
-      props.theme.createEditRoomDialog.commonParam.descriptionColor};
+			props.theme.createEditRoomDialog.commonParam.descriptionColor};
   }
   .language-combo-box {
     .combo-button {
@@ -563,27 +563,27 @@ const ErrorWrapper = styled.div`
 `;
 
 export {
-  StyledInvitePanel,
-  StyledRow,
-  StyledSubHeader,
-  StyledInviteInput,
-  StyledComboBox,
-  StyledInviteInputContainer,
-  StyledDropDown,
-  SearchItemText,
-  StyledEditInput,
-  StyledEditButton,
-  StyledCheckIcon,
-  StyledCrossIcon,
-  StyledHelpButton,
-  StyledDeleteIcon,
-  StyledButtons,
-  StyledLink,
-  ScrollList,
-  StyledToggleButton,
-  StyledDescription,
-  StyledInviteLanguage,
-  StyledInviteUserBody,
-  StyledExternalLink,
-  ErrorWrapper,
+	StyledInvitePanel,
+	StyledRow,
+	StyledSubHeader,
+	StyledInviteInput,
+	StyledComboBox,
+	StyledInviteInputContainer,
+	StyledDropDown,
+	SearchItemText,
+	StyledEditInput,
+	StyledEditButton,
+	StyledCheckIcon,
+	StyledCrossIcon,
+	StyledHelpButton,
+	StyledDeleteIcon,
+	StyledButtons,
+	StyledLink,
+	ScrollList,
+	StyledToggleButton,
+	StyledDescription,
+	StyledInviteLanguage,
+	StyledInviteUserBody,
+	StyledExternalLink,
+	ErrorWrapper,
 };

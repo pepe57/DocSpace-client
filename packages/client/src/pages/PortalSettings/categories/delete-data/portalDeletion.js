@@ -27,9 +27,9 @@
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject } from "mobx-react";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/shared/components/button";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DeletePortalDialog } from "SRC_DIR/components/dialogs";
 import { toastr } from "@docspace/shared/components/toast";
@@ -40,108 +40,108 @@ import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
 
 const PortalDeletion = (props) => {
-  const {
-    t,
-    tReady,
-    owner,
-    currentColorScheme,
-    sendActivationLink,
-    stripeUrl,
-  } = props;
-  const [isDialogVisible, setIsDialogVisible] = useState(false);
+	const {
+		t,
+		tReady,
+		owner,
+		currentColorScheme,
+		sendActivationLink,
+		stripeUrl,
+	} = props;
+	const [isDialogVisible, setIsDialogVisible] = useState(false);
 
-  const [isDesktopView, setIsDesktopView] = useState(false);
+	const [isDesktopView, setIsDesktopView] = useState(false);
 
-  const onCheckView = () => {
-    if (isDesktop()) setIsDesktopView(true);
-    else setIsDesktopView(false);
-  };
+	const onCheckView = () => {
+		if (isDesktop()) setIsDesktopView(true);
+		else setIsDesktopView(false);
+	};
 
-  useEffect(() => {
-    setDocumentTitle(
-      t("Common:DeletePortal", { productName: t("Common:ProductName") }),
-    );
-    onCheckView();
-    window.addEventListener("resize", onCheckView);
-    return () => window.removeEventListener("resize", onCheckView);
-  }, []);
+	useEffect(() => {
+		setDocumentTitle(
+			t("Common:DeletePortal", { productName: t("Common:ProductName") }),
+		);
+		onCheckView();
+		window.addEventListener("resize", onCheckView);
+		return () => window.removeEventListener("resize", onCheckView);
+	}, []);
 
-  const onDeleteClick = async () => {
-    if (stripeUrl) {
-      setIsDialogVisible(true);
-    } else {
-      try {
-        await sendDeletePortalEmail();
-        toastr.success(
-          t("PortalDeletionEmailSended", { ownerEmail: owner.email }),
-        );
-      } catch (error) {
-        toastr.error(error);
-      }
-    }
-  };
+	const onDeleteClick = async () => {
+		if (stripeUrl) {
+			setIsDialogVisible(true);
+		} else {
+			try {
+				await sendDeletePortalEmail();
+				toastr.success(
+					t("PortalDeletionEmailSended", { ownerEmail: owner.email }),
+				);
+			} catch (error) {
+				toastr.error(error);
+			}
+		}
+	};
 
-  const requestAgain = () => {
-    sendActivationLink && sendActivationLink().then(showEmailActivationToast);
-  };
+	const requestAgain = () => {
+		sendActivationLink && sendActivationLink().then(showEmailActivationToast);
+	};
 
-  const notActivatedEmail =
-    owner?.activationStatus === EmployeeActivationStatus.NotActivated;
+	const notActivatedEmail =
+		owner?.activationStatus === EmployeeActivationStatus.NotActivated;
 
-  return (
-    <MainContainer>
-      <Text fontSize="13px" className="description">
-        {t("PortalDeletionDescription")}
-      </Text>
-      <Text className="helper">{t("PortalDeletionHelper")}</Text>
-      <ButtonWrapper>
-        <Button
-          className="delete-button button"
-          label={t("Common:Delete")}
-          primary
-          size={isDesktopView ? "small" : "normal"}
-          onClick={onDeleteClick}
-          isDisabled={notActivatedEmail}
-          testId="delete_portal_button"
-        />
-        {notActivatedEmail && tReady ? (
-          <Text fontSize="12px" fontWeight="600">
-            {t("MainBar:ConfirmEmailHeader", {
-              email: owner.email,
-              productName: t("Common:ProductName"),
-            })}
-            <Link
-              className="request-again-link"
-              color={currentColorScheme?.main?.accent}
-              fontSize="12px"
-              fontWeight="400"
-              onClick={requestAgain}
-              testId="request_delete_portal_link"
-            >
-              {t("MainBar:RequestActivation")}
-            </Link>
-          </Text>
-        ) : null}
-      </ButtonWrapper>
-      <DeletePortalDialog
-        visible={isDialogVisible}
-        onClose={() => setIsDialogVisible(false)}
-        owner={owner}
-        stripeUrl={stripeUrl}
-      />
-    </MainContainer>
-  );
+	return (
+		<MainContainer>
+			<Text fontSize="13px" className="description">
+				{t("PortalDeletionDescription")}
+			</Text>
+			<Text className="helper">{t("PortalDeletionHelper")}</Text>
+			<ButtonWrapper>
+				<Button
+					className="delete-button button"
+					label={t("Common:Delete")}
+					primary
+					size={isDesktopView ? "small" : "normal"}
+					onClick={onDeleteClick}
+					isDisabled={notActivatedEmail}
+					testId="delete_portal_button"
+				/>
+				{notActivatedEmail && tReady ? (
+					<Text fontSize="12px" fontWeight="600">
+						{t("MainBar:ConfirmEmailHeader", {
+							email: owner.email,
+							productName: t("Common:ProductName"),
+						})}
+						<Link
+							className="request-again-link"
+							color={currentColorScheme?.main?.accent}
+							fontSize="12px"
+							fontWeight="400"
+							onClick={requestAgain}
+							testId="request_delete_portal_link"
+						>
+							{t("MainBar:RequestActivation")}
+						</Link>
+					</Text>
+				) : null}
+			</ButtonWrapper>
+			<DeletePortalDialog
+				visible={isDialogVisible}
+				onClose={() => setIsDialogVisible(false)}
+				owner={owner}
+				stripeUrl={stripeUrl}
+			/>
+		</MainContainer>
+	);
 };
 
 export default inject(({ settingsStore, userStore }) => {
-  const { owner, currentColorScheme } = settingsStore;
-  const { sendActivationLink } = userStore;
+	const { owner, currentColorScheme } = settingsStore;
+	const { sendActivationLink } = userStore;
 
-  return {
-    owner,
-    currentColorScheme,
-    sendActivationLink,
-  };
+	return {
+		owner,
+		currentColorScheme,
+		sendActivationLink,
+	};
 })(
-  withTranslation(["Settings", "MainBar", "People", "Common"])(PortalDeletion),
+	withTranslation(["Settings", "MainBar", "People", "Common"])(PortalDeletion),
 );

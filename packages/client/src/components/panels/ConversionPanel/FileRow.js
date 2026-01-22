@@ -30,202 +30,202 @@ import { useTranslation } from "react-i18next";
 
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 import {
-  StyledFileRow,
-  ErrorFile,
-  FileActions,
+	StyledFileRow,
+	ErrorFile,
+	FileActions,
 } from "SRC_DIR/components/PanelComponents";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 import { Button } from "@docspace/shared/components/button";
 import { SimulatePassword } from "@docspace/shared/components/simulate-password";
 
 const FileRow = observer(
-  ({
-    item,
-    fileIcon,
-    ext,
-    name,
-    downloadInCurrentTab,
-    updateRowsHeight,
-    index,
-    theme,
-    convertFileFromFiles,
-    retryConvertFiles,
-  }) => {
-    const [showPasswordInput, setShowPasswordInput] = useState(false);
-    const [password, setPassword] = useState("");
-    const [passwordValid, setPasswordValid] = useState(true);
-    const inputRef = useRef(null);
-    const { t } = useTranslation("UploadPanel");
+	({
+		item,
+		fileIcon,
+		ext,
+		name,
+		downloadInCurrentTab,
+		updateRowsHeight,
+		index,
+		theme,
+		convertFileFromFiles,
+		retryConvertFiles,
+	}) => {
+		const [showPasswordInput, setShowPasswordInput] = useState(false);
+		const [password, setPassword] = useState("");
+		const [passwordValid, setPasswordValid] = useState(true);
+		const inputRef = useRef(null);
+		const { t } = useTranslation("UploadPanel");
 
-    const onRetryClick = () => {
-      const { fileId } = item;
+		const onRetryClick = () => {
+			const { fileId } = item;
 
-      retryConvertFiles(t, fileId);
-    };
+			retryConvertFiles(t, fileId);
+		};
 
-    const onTextClick = useCallback(() => {
-      const newState = !showPasswordInput;
-      setShowPasswordInput(newState);
-      updateRowsHeight && updateRowsHeight(index, newState);
-    }, [showPasswordInput, updateRowsHeight, index]);
+		const onTextClick = useCallback(() => {
+			const newState = !showPasswordInput;
+			setShowPasswordInput(newState);
+			updateRowsHeight && updateRowsHeight(index, newState);
+		}, [showPasswordInput, updateRowsHeight, index]);
 
-    const onChangePassword = useCallback(
-      (newPassword) => {
-        setPassword(newPassword);
-        !passwordValid && setPasswordValid(true);
-      },
-      [passwordValid],
-    );
+		const onChangePassword = useCallback(
+			(newPassword) => {
+				setPassword(newPassword);
+				!passwordValid && setPasswordValid(true);
+			},
+			[passwordValid],
+		);
 
-    const hasError = useCallback(() => {
-      const pass = password.trim();
-      if (!pass) {
-        setPasswordValid(false);
-        return true;
-      }
-      return false;
-    }, [password]);
+		const hasError = useCallback(() => {
+			const pass = password.trim();
+			if (!pass) {
+				setPasswordValid(false);
+				return true;
+			}
+			return false;
+		}, [password]);
 
-    const onButtonClick = useCallback(() => {
-      if (hasError()) return;
+		const onButtonClick = useCallback(() => {
+			if (hasError()) return;
 
-      const { fileId, toFolderId, fileInfo } = item;
-      const newItem = {
-        fileId,
-        toFolderId,
-        action: "convert",
-        fileInfo,
-        password,
-        index,
-      };
+			const { fileId, toFolderId, fileInfo } = item;
+			const newItem = {
+				fileId,
+				toFolderId,
+				action: "convert",
+				fileInfo,
+				password,
+				index,
+			};
 
-      onTextClick();
-      convertFileFromFiles(newItem);
-    }, [item, password, index, hasError, onTextClick, convertFileFromFiles]);
+			onTextClick();
+			convertFileFromFiles(newItem);
+		}, [item, password, index, hasError, onTextClick, convertFileFromFiles]);
 
-    const onKeyDown = useCallback(
-      (e) => {
-        if (e.key === "Enter") {
-          onButtonClick();
-        }
-      },
-      [onButtonClick],
-    );
+		const onKeyDown = useCallback(
+			(e) => {
+				if (e.key === "Enter") {
+					onButtonClick();
+				}
+			},
+			[onButtonClick],
+		);
 
-    const fileExtension = ext ? (
-      <Text as="span" fontWeight="600" className="file-exst">
-        {ext}
-      </Text>
-    ) : null;
+		const fileExtension = ext ? (
+			<Text as="span" fontWeight="600" className="file-exst">
+				{ext}
+			</Text>
+		) : null;
 
-    const onFileClick = (url) => {
-      if (!url) return;
-      window.open(url, downloadInCurrentTab ? "_self" : "_blank");
-    };
+		const onFileClick = (url) => {
+			if (!url) return;
+			window.open(url, downloadInCurrentTab ? "_self" : "_blank");
+		};
 
-    console.log("item", item, item.error, !item.error);
+		console.log("item", item, item.error, !item.error);
 
-    return (
-      <StyledFileRow
-        className="upload-row"
-        key={item.uniqueId}
-        checkbox={false}
-        element={
-          <img
-            className={item.error ? "img_error" : null}
-            src={fileIcon}
-            alt=""
-          />
-        }
-        showPasswordInput={showPasswordInput}
-        withoutBorder
-        isError={item.error}
-      >
-        <>
-          <div className="upload-panel_file-name">
-            <Link
-              className="upload-panel-file-error_text"
-              onClick={() =>
-                onFileClick(item.fileInfo ? item.fileInfo.webUrl : "")
-              }
-              fontWeight="600"
-              truncate
-            >
-              {name}
-              {fileExtension}
-            </Link>
-          </div>
+		return (
+			<StyledFileRow
+				className="upload-row"
+				key={item.uniqueId}
+				checkbox={false}
+				element={
+					<img
+						className={item.error ? "img_error" : null}
+						src={fileIcon}
+						alt=""
+					/>
+				}
+				showPasswordInput={showPasswordInput}
+				withoutBorder
+				isError={item.error}
+			>
+				<>
+					<div className="upload-panel_file-name">
+						<Link
+							className="upload-panel-file-error_text"
+							onClick={() =>
+								onFileClick(item.fileInfo ? item.fileInfo.webUrl : "")
+							}
+							fontWeight="600"
+							truncate
+						>
+							{name}
+							{fileExtension}
+						</Link>
+					</div>
 
-          {item.fileId && !item.error && item.action === "convert" ? (
-            <FileActions item={item} />
-          ) : item.error ? (
-            <ErrorFile
-              t={t}
-              item={item}
-              onTextClick={onTextClick}
-              showPasswordInput={showPasswordInput}
-              theme={theme}
-              onRetryClick={onRetryClick}
-            />
-          ) : (
-            <div className="actions-wrapper">
-              <CheckReactSvg className="upload-panel_check-button" />
-            </div>
-          )}
+					{item.fileId && !item.error && item.action === "convert" ? (
+						<FileActions item={item} />
+					) : item.error ? (
+						<ErrorFile
+							t={t}
+							item={item}
+							onTextClick={onTextClick}
+							showPasswordInput={showPasswordInput}
+							theme={theme}
+							onRetryClick={onRetryClick}
+						/>
+					) : (
+						<div className="actions-wrapper">
+							<CheckReactSvg className="upload-panel_check-button" />
+						</div>
+					)}
 
-          {showPasswordInput ? (
-            <div className="password-input">
-              <SimulatePassword
-                onChange={onChangePassword}
-                onKeyDown={onKeyDown}
-                hasError={!passwordValid}
-                forwardedRef={inputRef}
-              />
-              <Button
-                className="conversion-button"
-                size="small"
-                scale
-                primary
-                label={t("Ready")}
-                onClick={onButtonClick}
-                isDisabled={!password}
-              />
-            </div>
-          ) : null}
-        </>
-      </StyledFileRow>
-    );
-  },
+					{showPasswordInput ? (
+						<div className="password-input">
+							<SimulatePassword
+								onChange={onChangePassword}
+								onKeyDown={onKeyDown}
+								hasError={!passwordValid}
+								forwardedRef={inputRef}
+							/>
+							<Button
+								className="conversion-button"
+								size="small"
+								scale
+								primary
+								label={t("Ready")}
+								onClick={onButtonClick}
+								isDisabled={!password}
+							/>
+						</div>
+					) : null}
+				</>
+			</StyledFileRow>
+		);
+	},
 );
 
 export default inject(
-  ({ uploadDataStore, filesSettingsStore, settingsStore }, { item }) => {
-    const { theme } = settingsStore;
-    const { canViewedDocs, getIconSrc, isArchive, openOnNewPage } =
-      filesSettingsStore;
-    const { uploaded, convertFileFromFiles, retryConvertFiles } =
-      uploadDataStore;
+	({ uploadDataStore, filesSettingsStore, settingsStore }, { item }) => {
+		const { theme } = settingsStore;
+		const { canViewedDocs, getIconSrc, isArchive, openOnNewPage } =
+			filesSettingsStore;
+		const { uploaded, convertFileFromFiles, retryConvertFiles } =
+			uploadDataStore;
 
-    const ext = item.fileInfo.fileExst;
+		const ext = item.fileInfo.fileExst;
 
-    const title = item.fileInfo.title.split(".").slice(0, -1).join(".");
+		const title = item.fileInfo.title.split(".").slice(0, -1).join(".");
 
-    const fileIcon = getIconSrc(ext, 32);
+		const fileIcon = getIconSrc(ext, 32);
 
-    const downloadInCurrentTab =
-      !openOnNewPage || isArchive(ext) || !canViewedDocs(ext);
+		const downloadInCurrentTab =
+			!openOnNewPage || isArchive(ext) || !canViewedDocs(ext);
 
-    return {
-      theme,
-      uploaded,
-      fileIcon,
-      ext,
-      name: title,
-      downloadInCurrentTab,
-      convertFileFromFiles,
-      retryConvertFiles,
-    };
-  },
+		return {
+			theme,
+			uploaded,
+			fileIcon,
+			ext,
+			name: title,
+			downloadInCurrentTab,
+			convertFileFromFiles,
+			retryConvertFiles,
+		};
+	},
 )(FileRow);

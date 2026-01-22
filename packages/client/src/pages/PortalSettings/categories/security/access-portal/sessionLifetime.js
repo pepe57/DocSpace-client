@@ -30,8 +30,8 @@ import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { toastr } from "@docspace/shared/components/toast";
 import { size, isMobileDevice } from "@docspace/shared/utils";
@@ -65,305 +65,305 @@ const MainContainer = styled.div`
 `;
 
 const SessionLifetime = (props) => {
-  const {
-    t,
-    tReady,
-    lifetime,
-    enabled,
-    setSessionLifetimeSettings,
-    lifetimeSettingsUrl,
-    currentColorScheme,
-    currentDeviceType,
-    isInit,
+	const {
+		t,
+		tReady,
+		lifetime,
+		enabled,
+		setSessionLifetimeSettings,
+		lifetimeSettingsUrl,
+		currentColorScheme,
+		currentDeviceType,
+		isInit,
 
-    settingsStore,
-    tfaStore,
-    setup,
-  } = props;
+		settingsStore,
+		tfaStore,
+		setup,
+	} = props;
 
-  const [type, setType] = useState(false);
-  const [sessionLifetime, setSessionLifetime] = useState("1440");
-  const [showReminder, setShowReminder] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+	const [type, setType] = useState(false);
+	const [sessionLifetime, setSessionLifetime] = useState("1440");
+	const [showReminder, setShowReminder] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState(false);
 
-  const navigate = useNavigate();
-  const location = useLocation();
+	const navigate = useNavigate();
+	const location = useLocation();
 
-  const defaultProps = createDefaultHookSettingsProps({
-    settingsStore,
-    tfaStore,
-    setup,
-  });
+	const defaultProps = createDefaultHookSettingsProps({
+		settingsStore,
+		tfaStore,
+		setup,
+	});
 
-  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
+	const { getSecurityInitialValue } = useSecurity(defaultProps.security);
 
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("lifetime") &&
-      navigate("/portal-settings/security/access-portal");
-  };
+	const checkWidth = () => {
+		window.innerWidth > size.mobile &&
+			location.pathname.includes("lifetime") &&
+			navigate("/portal-settings/security/access-portal");
+	};
 
-  const getSettingsFromDefault = () => {
-    const defaultSettings = getFromSessionStorage(
-      "defaultSessionLifetimeSettings",
-    );
-    if (defaultSettings) {
-      setType(defaultSettings.type);
-      setSessionLifetime(defaultSettings.lifetime);
-    }
-  };
+	const getSettingsFromDefault = () => {
+		const defaultSettings = getFromSessionStorage(
+			"defaultSessionLifetimeSettings",
+		);
+		if (defaultSettings) {
+			setType(defaultSettings.type);
+			setSessionLifetime(defaultSettings.lifetime);
+		}
+	};
 
-  const getSettings = () => {
-    const currentSettings = getFromSessionStorage(
-      "currentSessionLifetimeSettings",
-    );
+	const getSettings = () => {
+		const currentSettings = getFromSessionStorage(
+			"currentSessionLifetimeSettings",
+		);
 
-    const defaultData = {
-      lifetime: lifetime?.toString(),
-      type: enabled,
-    };
-    saveToSessionStorage("defaultSessionLifetimeSettings", defaultData);
+		const defaultData = {
+			lifetime: lifetime?.toString(),
+			type: enabled,
+		};
+		saveToSessionStorage("defaultSessionLifetimeSettings", defaultData);
 
-    if (currentSettings) {
-      setType(currentSettings.type);
-      setSessionLifetime(currentSettings.lifetime);
-    } else {
-      setSessionLifetime(lifetime?.toString());
-      setType(enabled);
-    }
-    setIsLoading(true);
-  };
+		if (currentSettings) {
+			setType(currentSettings.type);
+			setSessionLifetime(currentSettings.lifetime);
+		} else {
+			setSessionLifetime(lifetime?.toString());
+			setType(enabled);
+		}
+		setIsLoading(true);
+	};
 
-  useEffect(() => {
-    if (isMobileDevice()) {
-      getSecurityInitialValue();
-      setIsLoading(true);
-    }
-  }, [isMobileDevice]);
+	useEffect(() => {
+		if (isMobileDevice()) {
+			getSecurityInitialValue();
+			setIsLoading(true);
+		}
+	}, [isMobileDevice]);
 
-  useEffect(() => {
-    if (isInit) {
-      setIsLoading(true);
-    }
-  }, []);
+	useEffect(() => {
+		if (isInit) {
+			setIsLoading(true);
+		}
+	}, []);
 
-  useEffect(() => {
-    checkWidth();
+	useEffect(() => {
+		checkWidth();
 
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
-  }, []);
+		window.addEventListener("resize", checkWidth);
+		return () => window.removeEventListener("resize", checkWidth);
+	}, []);
 
-  useEffect(() => {
-    if (!isLoading) return;
-    const currentSettings = getFromSessionStorage(
-      "currentSessionLifetimeSettings",
-    );
-    const defaultSettings = getFromSessionStorage(
-      "defaultSessionLifetimeSettings",
-    );
+	useEffect(() => {
+		if (!isLoading) return;
+		const currentSettings = getFromSessionStorage(
+			"currentSessionLifetimeSettings",
+		);
+		const defaultSettings = getFromSessionStorage(
+			"defaultSessionLifetimeSettings",
+		);
 
-    if (isEqual(currentSettings, defaultSettings)) {
-      getSettings();
-    } else {
-      getSettingsFromDefault();
-    }
-  }, [isLoading]);
+		if (isEqual(currentSettings, defaultSettings)) {
+			getSettings();
+		} else {
+			getSettingsFromDefault();
+		}
+	}, [isLoading]);
 
-  useEffect(() => {
-    if (!isLoading) return;
+	useEffect(() => {
+		if (!isLoading) return;
 
-    const defaultSettings = getFromSessionStorage(
-      "defaultSessionLifetimeSettings",
-    );
-    const newSettings = {
-      lifetime: sessionLifetime?.toString(),
-      type,
-    };
+		const defaultSettings = getFromSessionStorage(
+			"defaultSessionLifetimeSettings",
+		);
+		const newSettings = {
+			lifetime: sessionLifetime?.toString(),
+			type,
+		};
 
-    saveToSessionStorage("currentSessionLifetimeSettings", newSettings);
+		saveToSessionStorage("currentSessionLifetimeSettings", newSettings);
 
-    if (isEqual(defaultSettings, newSettings)) {
-      setShowReminder(false);
-    } else {
-      setShowReminder(true);
-    }
-  }, [type, sessionLifetime]);
+		if (isEqual(defaultSettings, newSettings)) {
+			setShowReminder(false);
+		} else {
+			setShowReminder(true);
+		}
+	}, [type, sessionLifetime]);
 
-  const onSelectType = (e) => {
-    setType(e.target.value === "enable");
-  };
+	const onSelectType = (e) => {
+		setType(e.target.value === "enable");
+	};
 
-  const onChangeInput = (e) => {
-    const inputValue = e.target.value.trim();
+	const onChangeInput = (e) => {
+		const inputValue = e.target.value.trim();
 
-    if (
-      (Math.sign(inputValue) !== 1 && inputValue !== "") ||
-      inputValue.indexOf(".") !== -1
-    )
-      return;
+		if (
+			(Math.sign(inputValue) !== 1 && inputValue !== "") ||
+			inputValue.indexOf(".") !== -1
+		)
+			return;
 
-    setSessionLifetime(inputValue);
-  };
+		setSessionLifetime(inputValue);
+	};
 
-  const onBlurInput = () => {
-    const hasErrorInput = Math.sign(sessionLifetime) !== 1;
+	const onBlurInput = () => {
+		const hasErrorInput = Math.sign(sessionLifetime) !== 1;
 
-    setError(hasErrorInput);
-  };
+		setError(hasErrorInput);
+	};
 
-  const onFocusInput = () => {
-    setError(false);
-  };
+	const onFocusInput = () => {
+		setError(false);
+	};
 
-  const onSaveClick = async () => {
-    if (error && type) return;
-    let sessionValue = sessionLifetime;
+	const onSaveClick = async () => {
+		if (error && type) return;
+		let sessionValue = sessionLifetime;
 
-    if (!type) {
-      sessionValue = lifetime;
+		if (!type) {
+			sessionValue = lifetime;
 
-      saveToSessionStorage("currentSessionLifetimeSettings", {
-        lifetime: sessionValue?.toString(),
-        type,
-      });
-    }
+			saveToSessionStorage("currentSessionLifetimeSettings", {
+				lifetime: sessionValue?.toString(),
+				type,
+			});
+		}
 
-    setSessionLifetimeSettings(sessionValue, type)
-      .then(() => {
-        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
-        saveToSessionStorage("defaultSessionLifetimeSettings", {
-          lifetime: sessionValue?.toString(),
-          type,
-        });
-        setShowReminder(false);
-      })
-      .catch((err) => toastr.error(err));
-  };
+		setSessionLifetimeSettings(sessionValue, type)
+			.then(() => {
+				toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+				saveToSessionStorage("defaultSessionLifetimeSettings", {
+					lifetime: sessionValue?.toString(),
+					type,
+				});
+				setShowReminder(false);
+			})
+			.catch((err) => toastr.error(err));
+	};
 
-  const onCancelClick = () => {
-    const defaultSettings = getFromSessionStorage(
-      "defaultSessionLifetimeSettings",
-    );
-    setType(defaultSettings?.type);
-    setSessionLifetime(defaultSettings?.lifetime || "1440");
-    setShowReminder(false);
-  };
+	const onCancelClick = () => {
+		const defaultSettings = getFromSessionStorage(
+			"defaultSessionLifetimeSettings",
+		);
+		setType(defaultSettings?.type);
+		setSessionLifetime(defaultSettings?.lifetime || "1440");
+		setShowReminder(false);
+	};
 
-  if ((currentDeviceType === DeviceType.mobile && !isLoading) || !tReady) {
-    return <SessionLifetimeLoader />;
-  }
+	if ((currentDeviceType === DeviceType.mobile && !isLoading) || !tReady) {
+		return <SessionLifetimeLoader />;
+	}
 
-  return (
-    <MainContainer>
-      <LearnMoreWrapper withoutExternalLink={!lifetimeSettingsUrl}>
-        <Text className="learn-subtitle">
-          {t("SessionLifetimeSettingDescription")}
-        </Text>
-        {lifetimeSettingsUrl ? (
-          <Link
-            className="link-learn-more"
-            dataTestId="session_lifetime_component_learn_more"
-            color={currentColorScheme.main?.accent}
-            target="_blank"
-            isHovered
-            href={lifetimeSettingsUrl}
-          >
-            {t("Common:LearnMore")}
-          </Link>
-        ) : null}
-      </LearnMoreWrapper>
+	return (
+		<MainContainer>
+			<LearnMoreWrapper withoutExternalLink={!lifetimeSettingsUrl}>
+				<Text className="learn-subtitle">
+					{t("SessionLifetimeSettingDescription")}
+				</Text>
+				{lifetimeSettingsUrl ? (
+					<Link
+						className="link-learn-more"
+						dataTestId="session_lifetime_component_learn_more"
+						color={currentColorScheme.main?.accent}
+						target="_blank"
+						isHovered
+						href={lifetimeSettingsUrl}
+					>
+						{t("Common:LearnMore")}
+					</Link>
+				) : null}
+			</LearnMoreWrapper>
 
-      <RadioButtonGroup
-        className="box"
-        fontSize="13px"
-        fontWeight="400"
-        name="group"
-        orientation="vertical"
-        spacing="8px"
-        dataTestId="session_lifetime_radio_button_group"
-        options={[
-          {
-            id: "session-lifetime-disabled",
-            label: t("Common:Disabled"),
-            value: "disabled",
-            dataTestId: "session_lifetime_disabled",
-          },
-          {
-            id: "session-lifetime-enable",
-            label: t("Common:Enable"),
-            value: "enable",
-            dataTestId: "session_lifetime_enabled",
-          },
-        ]}
-        selected={type ? "enable" : "disabled"}
-        onClick={onSelectType}
-      />
+			<RadioButtonGroup
+				className="box"
+				fontSize="13px"
+				fontWeight="400"
+				name="group"
+				orientation="vertical"
+				spacing="8px"
+				dataTestId="session_lifetime_radio_button_group"
+				options={[
+					{
+						id: "session-lifetime-disabled",
+						label: t("Common:Disabled"),
+						value: "disabled",
+						dataTestId: "session_lifetime_disabled",
+					},
+					{
+						id: "session-lifetime-enable",
+						label: t("Common:Enable"),
+						value: "enable",
+						dataTestId: "session_lifetime_enabled",
+					},
+				]}
+				selected={type ? "enable" : "disabled"}
+				onClick={onSelectType}
+			/>
 
-      {type ? (
-        <>
-          <Text className="lifetime" fontSize="15px" fontWeight="600">
-            {t("Lifetime")}
-          </Text>
-          <TextInput
-            className="lifetime-input"
-            testId="session_lifetime_input"
-            maxLength={4}
-            isAutoFocussed={false}
-            value={sessionLifetime}
-            onChange={onChangeInput}
-            onBlur={onBlurInput}
-            onFocus={onFocusInput}
-            hasError={error}
-          />
-        </>
-      ) : null}
+			{type ? (
+				<>
+					<Text className="lifetime" fontSize="15px" fontWeight="600">
+						{t("Lifetime")}
+					</Text>
+					<TextInput
+						className="lifetime-input"
+						testId="session_lifetime_input"
+						maxLength={4}
+						isAutoFocussed={false}
+						value={sessionLifetime}
+						onChange={onChangeInput}
+						onBlur={onBlurInput}
+						onFocus={onFocusInput}
+						hasError={error}
+					/>
+				</>
+			) : null}
 
-      <SaveCancelButtons
-        className="save-cancel-buttons"
-        onSaveClick={onSaveClick}
-        onCancelClick={onCancelClick}
-        showReminder={showReminder}
-        reminderText={t("Common:YouHaveUnsavedChanges")}
-        saveButtonLabel={t("Common:SaveButton")}
-        cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings
-        hasScroll={false}
-        additionalClassSaveButton="session-lifetime-save"
-        additionalClassCancelButton="session-lifetime-cancel"
-        saveButtonDataTestId="session_lifetime_save_button"
-        cancelButtonDataTestId="session_lifetime_cancel_button"
-      />
-    </MainContainer>
-  );
+			<SaveCancelButtons
+				className="save-cancel-buttons"
+				onSaveClick={onSaveClick}
+				onCancelClick={onCancelClick}
+				showReminder={showReminder}
+				reminderText={t("Common:YouHaveUnsavedChanges")}
+				saveButtonLabel={t("Common:SaveButton")}
+				cancelButtonLabel={t("Common:CancelButton")}
+				displaySettings
+				hasScroll={false}
+				additionalClassSaveButton="session-lifetime-save"
+				additionalClassCancelButton="session-lifetime-cancel"
+				saveButtonDataTestId="session_lifetime_save_button"
+				cancelButtonDataTestId="session_lifetime_cancel_button"
+			/>
+		</MainContainer>
+	);
 };
 
 export const SessionLifetimeSection = inject(
-  ({ settingsStore, tfaStore, setup }) => {
-    const {
-      sessionLifetime,
-      enabledSessionLifetime,
-      setSessionLifetimeSettings,
-      lifetimeSettingsUrl,
-      currentColorScheme,
-      currentDeviceType,
-    } = settingsStore;
+	({ settingsStore, tfaStore, setup }) => {
+		const {
+			sessionLifetime,
+			enabledSessionLifetime,
+			setSessionLifetimeSettings,
+			lifetimeSettingsUrl,
+			currentColorScheme,
+			currentDeviceType,
+		} = settingsStore;
 
-    const { isInit } = setup;
+		const { isInit } = setup;
 
-    return {
-      enabled: enabledSessionLifetime,
-      lifetime: sessionLifetime,
-      setSessionLifetimeSettings,
-      lifetimeSettingsUrl,
-      currentColorScheme,
-      currentDeviceType,
-      isInit,
+		return {
+			enabled: enabledSessionLifetime,
+			lifetime: sessionLifetime,
+			setSessionLifetimeSettings,
+			lifetimeSettingsUrl,
+			currentColorScheme,
+			currentDeviceType,
+			isInit,
 
-      settingsStore,
-      tfaStore,
-      setup,
-    };
-  },
+			settingsStore,
+			tfaStore,
+			setup,
+		};
+	},
 )(withTranslation(["Settings", "Common"])(observer(SessionLifetime)));

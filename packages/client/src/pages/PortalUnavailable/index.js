@@ -26,14 +26,14 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { Button } from "@docspace/shared/components/button";
 import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 const StyledBodyContent = styled.div`
   max-width: 480px;
@@ -61,69 +61,69 @@ const StyledBody = styled.div`
 `;
 
 const PortalUnavailable = ({ onLogoutClick }) => {
-  const { t } = useTranslation(["Errors", "PortalUnavailable", "Common"]);
-  const [isVisible, setIsVisible] = useState();
+	const { t } = useTranslation(["Errors", "PortalUnavailable", "Common"]);
+	const [isVisible, setIsVisible] = useState();
 
-  const onClick = () => {
-    onLogoutClick(t);
-  };
-  const onClickToContact = () => {
-    setIsVisible(true);
-  };
-  const onCloseDialog = () => {
-    setIsVisible(false);
-  };
-  return (
-    <StyledBody>
-      <RecoverAccessModalDialog
-        visible={isVisible}
-        t={t}
-        emailPlaceholderText={t("Common:RegistrationEmail")}
-        textBody={t("PortalUnavailable:AccessingProblem", {
-          productName: t("Common:ProductName"),
-        })}
-        onClose={onCloseDialog}
-      />
-      <ErrorContainer
-        className="portal-unavailable_container"
-        headerText={t("ErrorUnavailableText", {
-          productName: t("Common:ProductName"),
-        })}
-      >
-        <StyledBodyContent>
-          <Text textAlign="center" className="portal-unavailable_text">
-            {t("PortalUnavailable:AccessingProblem", {
-              productName: t("Common:ProductName"),
-            })}
-          </Text>
-          {!window.navigator.userAgent.includes("ZoomWebKit") &&
-          !window.navigator.userAgent.includes("ZoomApps") ? (
-            <Button
-              scale
-              label={t("Common:LogoutButton")}
-              size="medium"
-              onClick={onClick}
-            />
-          ) : null}
+	const onClick = () => {
+		onLogoutClick(t);
+	};
+	const onClickToContact = () => {
+		setIsVisible(true);
+	};
+	const onCloseDialog = () => {
+		setIsVisible(false);
+	};
+	return (
+		<StyledBody>
+			<RecoverAccessModalDialog
+				visible={isVisible}
+				t={t}
+				emailPlaceholderText={t("Common:RegistrationEmail")}
+				textBody={t("PortalUnavailable:AccessingProblem", {
+					productName: t("Common:ProductName"),
+				})}
+				onClose={onCloseDialog}
+			/>
+			<ErrorContainer
+				className="portal-unavailable_container"
+				headerText={t("ErrorUnavailableText", {
+					productName: t("Common:ProductName"),
+				})}
+			>
+				<StyledBodyContent>
+					<Text textAlign="center" className="portal-unavailable_text">
+						{t("PortalUnavailable:AccessingProblem", {
+							productName: t("Common:ProductName"),
+						})}
+					</Text>
+					{!window.navigator.userAgent.includes("ZoomWebKit") &&
+					!window.navigator.userAgent.includes("ZoomApps") ? (
+						<Button
+							scale
+							label={t("Common:LogoutButton")}
+							size="medium"
+							onClick={onClick}
+						/>
+					) : null}
 
-          <Link
-            textAlign="center"
-            className="portal-unavailable_contact-text"
-            onClick={onClickToContact}
-            color="accent"
-          >
-            {t("PortalUnavailable:ContactAdministrator", {
-              productName: t("Common:ProductName"),
-            })}
-          </Link>
-        </StyledBodyContent>
-      </ErrorContainer>
-    </StyledBody>
-  );
+					<Link
+						textAlign="center"
+						className="portal-unavailable_contact-text"
+						onClick={onClickToContact}
+						color="accent"
+					>
+						{t("PortalUnavailable:ContactAdministrator", {
+							productName: t("Common:ProductName"),
+						})}
+					</Link>
+				</StyledBodyContent>
+			</ErrorContainer>
+		</StyledBody>
+	);
 };
 
 export const Component = inject(({ profileActionsStore }) => {
-  const { onLogoutClick } = profileActionsStore;
+	const { onLogoutClick } = profileActionsStore;
 
-  return { onLogoutClick };
+	return { onLogoutClick };
 })(observer(PortalUnavailable));
