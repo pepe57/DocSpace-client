@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
+  confirmHandler,
+  ErrorConfirm,
   settingsHandler,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
@@ -353,30 +355,34 @@ test("link invite registration error no standalone", async ({
   );
 });
 
-// test("link invite quota failed", async ({ page, mockRequest }) => {
-//   await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-//     HEADER_QUOTA_FAILED,
-//   ]);
+test("link invite quota failed", async ({
+  page,
+  port,
+  serverRequestInterceptor,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.QuotaFailed));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-//   await page.goto(URL_WITH_PARAMS);
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "link-invite",
+    "link-invite-quota-failed.png",
+  ]);
+});
 
-//   await expect(page).toHaveScreenshot([
-//     "desktop",
-//     "link-invite",
-//     "link-invite-quota-failed.png",
-//   ]);
-// });
+test("link invite expired", async ({
+  page,
+  port,
+  serverRequestInterceptor,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.Expired));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-// test("link invite expired", async ({ page, mockRequest }) => {
-//   await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-//     HEADER_LINK_EXPIRED,
-//   ]);
-
-//   await page.goto(URL_WITH_PARAMS);
-
-//   await expect(page).toHaveScreenshot([
-//     "desktop",
-//     "link-invite",
-//     "link-invite-expired.png",
-//   ]);
-// });
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "link-invite",
+    "link-invite-expired.png",
+  ]);
+});
