@@ -24,24 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type TError = {
-  message?: "unauthorized" | "restore-backup" | string;
-  status?: "not-found" | "access-denied" | number | string;
-  type?: string;
-};
+export type TFileWithParentFolderId = File & { parentFolderId?: number };
 
-export type TIconContainer = {
-  has(key: string): boolean;
-  get(key: string): string | undefined;
-};
-
-export type TApiErrorShape = {
-  message?: unknown;
-  response?: {
-    data?: {
-      error?: {
-        message?: unknown;
-      };
-    };
-  };
+export type TFileWithOptionalPath = File & { path?: string };
+export type TFileWithOptionalEmptyDir = File & { isEmptyDirectory?: boolean };
+export type TFileWithOptionalLastModifiedDate = File & {
+  lastModifiedDate?: unknown;
 };
