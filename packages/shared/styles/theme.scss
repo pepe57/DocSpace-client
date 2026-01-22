@@ -3238,9 +3238,11 @@
 .light {
   --tfa-text-color: #{$gray};
   --icon-error-color: #{$light-error-status};
+  --default-templates-border-color: #{$gray-light-mid};
 }
 
 .dark {
   --tfa-text-color: #{$gray-dark};
   --icon-error-color: #{$dark-error-status};
+  --default-templates-border-color: #{$gray-dark-mid};
 }
