@@ -28,7 +28,7 @@
 
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { globalColors } from "@docspace/shared/themes";
 
 import type { TileContentProps } from "../TileView.types";

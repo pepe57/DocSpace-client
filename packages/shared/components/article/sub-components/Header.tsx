@@ -30,7 +30,7 @@ import { useNavigate, Link } from "react-router";
 import { getLogoUrl } from "../../../utils";
 import { DeviceType, WhiteLabelLogoType } from "../../../enums";
 import { ArticleHeaderLoader } from "../../../skeletons/article";
-import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { AsideHeader } from "../../aside-header";
 import BackButton from "./BackButton";

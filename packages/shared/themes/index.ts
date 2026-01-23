@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import Base, { TTheme, TColorScheme } from "./base";
-import { TInterfaceDirection } from "./commonTheme";
+import type { TColorScheme } from "@docspace/ui-kit/context/ThemeContext";
+
+import Base, { TTheme } from "./base";
+import type { TInterfaceDirection } from "./commonTheme";
 
 import Dark from "./dark";
 

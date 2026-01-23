@@ -28,7 +28,7 @@ import React from "react";
 import classNames from "classnames";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../icon-button";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
@@ -37,107 +37,107 @@ import { SelectorAddButtonProps } from "./SelectorAddButton.types";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 const SelectorAddButton = (props: SelectorAddButtonProps) => {
-	const {
-		isDisabled = false,
-		isAction,
-		title,
-		className,
-		id,
-		style,
-		iconName = ActionsHeaderTouchReactSvgUrl,
-		onClick,
-		iconSize = 12,
-		size,
+  const {
+    isDisabled = false,
+    isAction,
+    title,
+    className,
+    id,
+    style,
+    iconName = ActionsHeaderTouchReactSvgUrl,
+    onClick,
+    iconSize = 12,
+    size,
 
-		label,
-		titleText,
-		fontSize = "13px",
-		lineHeight = "20px",
-		noSelect,
-		dir,
-		truncate,
+    label,
+    titleText,
+    fontSize = "13px",
+    lineHeight = "20px",
+    noSelect,
+    dir,
+    truncate,
 
-		testId = "selector-add-button",
-		isLoading = false,
-		...rest
-	} = props;
+    testId = "selector-add-button",
+    isLoading = false,
+    ...rest
+  } = props;
 
-	const { currentColorScheme } = useTheme();
-	const mainAccentColor = currentColorScheme?.main?.accent;
+  const { currentColorScheme } = useTheme();
+  const mainAccentColor = currentColorScheme?.main?.accent;
 
-	const onClickAction = (e: React.MouseEvent) => {
-		if (!isDisabled && !isLoading) onClick?.(e);
-	};
+  const onClickAction = (e: React.MouseEvent) => {
+    if (!isDisabled && !isLoading) onClick?.(e);
+  };
 
-	const buttonClassName = classNames(styles.selectorButton, {
-		[styles.isAction]: isAction,
-		[styles.isDisabled]: isDisabled,
-		[styles.isLoading]: isLoading,
-		// [styles.isSize]: !!size,
-	});
+  const buttonClassName = classNames(styles.selectorButton, {
+    [styles.isAction]: isAction,
+    [styles.isDisabled]: isDisabled,
+    [styles.isLoading]: isLoading,
+    // [styles.isSize]: !!size,
+  });
 
-	const containerClassName = classNames(
-		styles.container,
-		{
-			[styles.isDisabled]: isDisabled,
-			[styles.truncate]: truncate,
-		},
-		className,
-	);
+  const containerClassName = classNames(
+    styles.container,
+    {
+      [styles.isDisabled]: isDisabled,
+      [styles.truncate]: truncate,
+    },
+    className,
+  );
 
-	const buttonStyle = mainAccentColor
-		? ({
-				...style,
-				"--main-accent-button": `${mainAccentColor}1A`,
-				"--selector-add-button-size": size,
-			} as React.CSSProperties)
-		: style;
+  const buttonStyle = mainAccentColor
+    ? ({
+        ...style,
+        "--main-accent-button": `${mainAccentColor}1A`,
+        "--selector-add-button-size": size,
+      } as React.CSSProperties)
+    : style;
 
-	return (
-		<div
-			data-testid="selector-add-button-container"
-			className={containerClassName}
-		>
-			<TooltipContainer
-				as="div"
-				{...rest}
-				id={id}
-				style={buttonStyle}
-				title={title}
-				className={buttonClassName}
-				onClick={onClickAction}
-				data-testid={testId}
-			>
-				{isLoading ? (
-					<Loader color="" size="20px" type={LoaderTypes.track} />
-				) : (
-					<IconButton
-						size={iconSize}
-						iconName={iconName}
-						isFill
-						isDisabled={isDisabled}
-						isClickable={!isDisabled}
-					/>
-				)}
-			</TooltipContainer>
+  return (
+    <div
+      data-testid="selector-add-button-container"
+      className={containerClassName}
+    >
+      <TooltipContainer
+        as="div"
+        {...rest}
+        id={id}
+        style={buttonStyle}
+        title={title}
+        className={buttonClassName}
+        onClick={onClickAction}
+        data-testid={testId}
+      >
+        {isLoading ? (
+          <Loader color="" size="20px" type={LoaderTypes.track} />
+        ) : (
+          <IconButton
+            size={iconSize}
+            iconName={iconName}
+            isFill
+            isDisabled={isDisabled}
+            isClickable={!isDisabled}
+          />
+        )}
+      </TooltipContainer>
 
-			{label ? (
-				<Text
-					className={styles.selectorText}
-					fontWeight={600}
-					lineHeight={lineHeight}
-					onClick={onClickAction}
-					title={titleText}
-					fontSize={fontSize}
-					noSelect={noSelect}
-					dir={dir}
-					truncate={truncate}
-				>
-					{label}
-				</Text>
-			) : null}
-		</div>
-	);
+      {label ? (
+        <Text
+          className={styles.selectorText}
+          fontWeight={600}
+          lineHeight={lineHeight}
+          onClick={onClickAction}
+          title={titleText}
+          fontSize={fontSize}
+          noSelect={noSelect}
+          dir={dir}
+          truncate={truncate}
+        >
+          {label}
+        </Text>
+      ) : null}
+    </div>
+  );
 };
 
 export { SelectorAddButton };

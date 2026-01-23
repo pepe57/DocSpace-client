@@ -31,7 +31,7 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import {
   FilesRow,
   FilesRowWrapper,

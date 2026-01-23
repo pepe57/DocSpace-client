@@ -32,7 +32,7 @@ import FormRoomEmptyLightImageUrl from "PUBLIC_DIR/images/emptyview/selector.for
 import Plus16SvgUrl from "PUBLIC_DIR/images/icons/16/plus.svg?url";
 
 import { RoomsType } from "../../../../enums";
-import { useTheme } from "../../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Heading } from "../../../heading";

@@ -27,8 +27,8 @@
 import React, { PropsWithChildren, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { ThemeProvider } from "@docspace/shared/components/theme-provider";
-import type { ThemeProviderProps } from "@docspace/shared/components/theme-provider/ThemeProvider.types";
+import { ThemeProvider } from "@docspace/ui-kit/components/theme-provider";
+import type { ThemeProviderProps } from "@docspace/ui-kit/components/theme-provider";
 import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 
 const ThemeProviderWrapper = ({

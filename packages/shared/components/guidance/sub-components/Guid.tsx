@@ -38,7 +38,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { isMobile, classNames } from "../../../utils";
 import { AsideHeader } from "../../aside-header";
-import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import styles from "./Guid.module.scss";
 import modalStyles from "../../modal-dialog/ModalDialog.module.scss";

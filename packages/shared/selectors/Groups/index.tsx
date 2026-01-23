@@ -33,7 +33,7 @@ import EmptyScreenGroupSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.groups
 import api from "../../api";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Selector, TSelectorItem } from "../../components/selector";
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { GroupsSelectorProps } from "./GroupsSelector.types";
 

@@ -35,7 +35,7 @@ import { RowContent as RowContentComponents } from "@docspace/shared/components/
 import { Text } from "@docspace/ui-kit/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { globalColors } from "@docspace/shared/themes/globalColors";
 import type { TPortals } from "@docspace/shared/api/management/types";
 

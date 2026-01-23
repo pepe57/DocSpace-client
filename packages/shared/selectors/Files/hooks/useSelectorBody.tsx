@@ -49,7 +49,7 @@ import {
   RowLoader,
   SearchLoader,
 } from "../../../skeletons/selector";
-import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { FilesSelectorProps } from "../FilesSelector.types";
 import { LoadersContext } from "../../utils/contexts/Loaders";

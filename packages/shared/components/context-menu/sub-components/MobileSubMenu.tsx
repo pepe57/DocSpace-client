@@ -13,7 +13,7 @@ import type {
   TOnMobileItemClick,
 } from "../ContextMenu.types";
 import { globalColors } from "../../../themes";
-import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { ToggleButton } from "../../toggle-button";
 import styles from "../ContextMenu.module.scss";
 

@@ -39,7 +39,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
 
 import { globalColors } from "@docspace/shared/themes";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import styles from "../Notifications.module.scss";
 

@@ -61,7 +61,7 @@ import {
   HeadingLevel,
   HeadingSize,
 } from "@docspace/shared/components/heading";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { isFile, isFolder } from "@docspace/shared/utils/typeGuards";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";

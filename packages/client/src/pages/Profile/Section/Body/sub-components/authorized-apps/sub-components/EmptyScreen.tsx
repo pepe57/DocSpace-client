@@ -3,7 +3,7 @@ import EmptyScreenOauthDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.oauth.
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { TTranslation } from "@docspace/shared/types";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 const EmptyScreen = ({ t }: { t: TTranslation }) => {
   const { isBase } = useTheme();

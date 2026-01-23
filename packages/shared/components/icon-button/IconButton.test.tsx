@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { screen, fireEvent, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -33,9 +32,9 @@ import SearchReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 
 import { Base } from "../../themes";
 
-import { IconButtonProps } from "./IconButton.types";
+import type { IconButtonProps } from "./IconButton.types";
 import { IconButton } from ".";
-import { ThemeProvider } from "../theme-provider";
+import { ThemeProvider } from "@docspace/ui-kit/components/theme-provider";
 
 const baseProps: IconButtonProps = {
   size: 25,

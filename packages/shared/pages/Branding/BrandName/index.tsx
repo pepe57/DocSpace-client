@@ -37,11 +37,11 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Badge } from "../../../components/badge";
 import { FieldContainer } from "../../../components/field-container";
 import {
-	TextInput,
-	InputType,
-	InputSize,
+  TextInput,
+  InputType,
+  InputSize,
 } from "@docspace/ui-kit/components/text-input";
-import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { NotAvailable } from "../WhiteLabel/NotAvailable";
 import { IWhiteLabelData } from "../WhiteLabel/WhiteLabel.types";
@@ -50,155 +50,155 @@ import { IBrandNameProps } from "./BrandName.types";
 import styles from "./BrandName.module.scss";
 
 export const BrandName = ({
-	showNotAvailable,
-	isSettingPaid,
-	standalone,
-	onSave,
-	isBrandNameLoaded,
-	defaultBrandName,
-	brandName,
-	error,
-	onValidate,
+  showNotAvailable,
+  isSettingPaid,
+  standalone,
+  onSave,
+  isBrandNameLoaded,
+  defaultBrandName,
+  brandName,
+  error,
+  onValidate,
 }: IBrandNameProps) => {
-	const { t } = useTranslation("Common");
+  const { t } = useTranslation("Common");
 
-	const { isBase } = useTheme();
+  const { isBase } = useTheme();
 
-	const [brandNameWhiteLabel, setBrandNameWhiteLabel] =
-		useState<Nullable<string>>(null);
-	const [hasError, setHasError] = useState<boolean>(false);
+  const [brandNameWhiteLabel, setBrandNameWhiteLabel] =
+    useState<Nullable<string>>(null);
+  const [hasError, setHasError] = useState<boolean>(false);
 
-	useEffect(() => {
-		if (!isBrandNameLoaded || !brandName) return;
-		setBrandNameWhiteLabel(brandName);
-	}, [brandName, isBrandNameLoaded]);
+  useEffect(() => {
+    if (!isBrandNameLoaded || !brandName) return;
+    setBrandNameWhiteLabel(brandName);
+  }, [brandName, isBrandNameLoaded]);
 
-	useEffect(() => {
-		setHasError(!!error);
-	}, [error]);
+  useEffect(() => {
+    setHasError(!!error);
+  }, [error]);
 
-	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { value } = e.target;
-		setBrandNameWhiteLabel(value);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setBrandNameWhiteLabel(value);
 
-		if (onValidate) {
-			onValidate(value);
-		}
-	};
+    if (onValidate) {
+      onValidate(value);
+    }
+  };
 
-	const onSaveAction = (): void => {
-		const data: IWhiteLabelData = {
-			logoText: brandNameWhiteLabel ?? "",
-			logo: [],
-		};
-		onSave(data);
-	};
+  const onSaveAction = (): void => {
+    const data: IWhiteLabelData = {
+      logoText: brandNameWhiteLabel ?? "",
+      logo: [],
+    };
+    onSave(data);
+  };
 
-	const onCancelAction = (): void => {
-		setBrandNameWhiteLabel(defaultBrandName);
-		if (onValidate) {
-			onValidate(defaultBrandName);
-		}
-	};
+  const onCancelAction = (): void => {
+    setBrandNameWhiteLabel(defaultBrandName);
+    if (onValidate) {
+      onValidate(defaultBrandName);
+    }
+  };
 
-	const isEqualText = defaultBrandName === (brandNameWhiteLabel ?? "");
-	const showReminder = !isEqualText && brandNameWhiteLabel !== null;
+  const isEqualText = defaultBrandName === (brandNameWhiteLabel ?? "");
+  const showReminder = !isEqualText && brandNameWhiteLabel !== null;
 
-	const getErrorText = () => {
-		if (!error) return "";
+  const getErrorText = () => {
+    if (!error) return "";
 
-		switch (error) {
-			case "Empty":
-				return t("Common:EmptyFieldError");
-			case "MinLength":
-				return t("Common:BrandNameLength", {
-					minLength: 2,
-					maxLength: 40,
-				});
-			case "SpecSymbols":
-				return t("Common:BrandNameForbidden");
-			default:
-				return t("Common:Error");
-		}
-	};
+    switch (error) {
+      case "Empty":
+        return t("Common:EmptyFieldError");
+      case "MinLength":
+        return t("Common:BrandNameLength", {
+          minLength: 2,
+          maxLength: 40,
+        });
+      case "SpecSymbols":
+        return t("Common:BrandNameForbidden");
+      default:
+        return t("Common:Error");
+    }
+  };
 
-	return (
-		<div
-			className={classNames(styles.brandName, {
-				["isEnableBranding"]: !isSettingPaid,
-				["settings_unavailable"]: !isSettingPaid,
-			})}
-		>
-			{showNotAvailable ? <NotAvailable /> : null}
+  return (
+    <div
+      className={classNames(styles.brandName, {
+        ["isEnableBranding"]: !isSettingPaid,
+        ["settings_unavailable"]: !isSettingPaid,
+      })}
+    >
+      {showNotAvailable ? <NotAvailable /> : null}
 
-			<div className={classNames(styles.headerContainer, "header-container")}>
-				<Text fontSize="16px" fontWeight="700">
-					{t("BrandName")}
-				</Text>
+      <div className={classNames(styles.headerContainer, "header-container")}>
+        <Text fontSize="16px" fontWeight="700">
+          {t("BrandName")}
+        </Text>
 
-				{!isSettingPaid && !standalone ? (
-					<Badge
-						className={classNames(styles.paidBadge, "paid-badge")}
-						fontWeight="700"
-						label={t("Common:Paid")}
-						isPaidBadge
-						backgroundColor={
-							isBase
-								? globalColors.favoritesStatus
-								: globalColors.favoriteStatusDark
-						}
-					/>
-				) : null}
-			</div>
+        {!isSettingPaid && !standalone ? (
+          <Badge
+            className={classNames(styles.paidBadge, "paid-badge")}
+            fontWeight="700"
+            label={t("Common:Paid")}
+            isPaidBadge
+            backgroundColor={
+              isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
+          />
+        ) : null}
+      </div>
 
-			<Text
-				className={classNames(styles.wlSubtitle, "wl-subtitle")}
-				fontSize="13px"
-			>
-				{t("BrandNameSubtitle", { productName: t("Common:ProductName") })}
-			</Text>
+      <Text
+        className={classNames(styles.wlSubtitle, "wl-subtitle")}
+        fontSize="13px"
+      >
+        {t("BrandNameSubtitle", { productName: t("Common:ProductName") })}
+      </Text>
 
-			<div className="settings-block">
-				<FieldContainer id="fieldContainerBrandName" isVertical>
-					<TextInput
-						testId="brand_name_input"
-						className="brand-name input"
-						value={brandNameWhiteLabel ?? ""}
-						onChange={onChange}
-						isDisabled={!isSettingPaid}
-						isReadOnly={!isSettingPaid}
-						scale
-						isAutoFocussed={!isMobile}
-						maxLength={40}
-						type={InputType.text}
-						size={InputSize.base}
-						hasError={hasError}
-					/>
-					{hasError ? (
-						<Text fontSize="12px" className={styles.errorText}>
-							{getErrorText()}
-						</Text>
-					) : null}
-					<SaveCancelButtons
-						id="btnBrandName"
-						className={classNames(
-							styles.brandNameButtons,
-							"brand-name-buttons",
-						)}
-						onSaveClick={onSaveAction}
-						onCancelClick={onCancelAction}
-						saveButtonLabel={t("Common:SaveButton")}
-						cancelButtonLabel={t("Common:CancelButton")}
-						reminderText={t("Common:YouHaveUnsavedChanges")}
-						displaySettings
-						saveButtonDisabled={isEqualText || hasError}
-						disableRestoreToDefault={isEqualText}
-						showReminder={showReminder}
-						saveButtonDataTestId="brand_name_save_button"
-						cancelButtonDataTestId="brand_name_cancel_button"
-					/>
-				</FieldContainer>
-			</div>
-		</div>
-	);
+      <div className="settings-block">
+        <FieldContainer id="fieldContainerBrandName" isVertical>
+          <TextInput
+            testId="brand_name_input"
+            className="brand-name input"
+            value={brandNameWhiteLabel ?? ""}
+            onChange={onChange}
+            isDisabled={!isSettingPaid}
+            isReadOnly={!isSettingPaid}
+            scale
+            isAutoFocussed={!isMobile}
+            maxLength={40}
+            type={InputType.text}
+            size={InputSize.base}
+            hasError={hasError}
+          />
+          {hasError ? (
+            <Text fontSize="12px" className={styles.errorText}>
+              {getErrorText()}
+            </Text>
+          ) : null}
+          <SaveCancelButtons
+            id="btnBrandName"
+            className={classNames(
+              styles.brandNameButtons,
+              "brand-name-buttons",
+            )}
+            onSaveClick={onSaveAction}
+            onCancelClick={onCancelAction}
+            saveButtonLabel={t("Common:SaveButton")}
+            cancelButtonLabel={t("Common:CancelButton")}
+            reminderText={t("Common:YouHaveUnsavedChanges")}
+            displaySettings
+            saveButtonDisabled={isEqualText || hasError}
+            disableRestoreToDefault={isEqualText}
+            showReminder={showReminder}
+            saveButtonDataTestId="brand_name_save_button"
+            cancelButtonDataTestId="brand_name_cancel_button"
+          />
+        </FieldContainer>
+      </div>
+    </div>
+  );
 };

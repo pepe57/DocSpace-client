@@ -39,7 +39,7 @@ import { TableGroupMenu } from "@docspace/shared/components/table";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useNavigationStore } from "../../_store/NavigationStore";
