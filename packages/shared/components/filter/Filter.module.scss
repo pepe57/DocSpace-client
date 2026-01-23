@@ -628,6 +628,10 @@
   max-width: 32px;
 }
 
+:global(.overflow-dropdown-scroll-body) {
+  padding-inline-end: 0 !important;
+}
+
 .ellipsisIcon {
   color: var(--text-primary);
 

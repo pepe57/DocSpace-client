@@ -38,10 +38,13 @@ import { IconButton } from "../icon-button";
 import { TooltipContainer } from "../tooltip";
 import { ComboBox, ComboBoxSize } from "../combobox";
 import { DropDownItem } from "../drop-down-item";
+import { Scrollbar } from "../scrollbar";
+import { ContextMenu, ContextMenuRefType } from "../context-menu";
+import { ContextMenuModel } from "../context-menu/ContextMenu.types";
 
 import FilterButton from "./sub-components/FilterButton";
 import SortButton from "./sub-components/SortButton";
-
+import { isDesktop, isMobile } from "../../utils";
 import useSearch from "./hooks/useSearch";
 
 import styles from "./Filter.module.scss";
@@ -351,8 +354,44 @@ const FilterInput = React.memo(
       [],
     );
 
+    const contextMenuRef = React.useRef<ContextMenuRefType>(null);
+
+    const isMobileView = isMobile();
+    const maxVisibleItems = 5;
+    const itemHeight = isDesktop() ? 32 : 36;
+    const listHeight =
+      Math.min(overflowGroups.length, maxVisibleItems) * itemHeight;
+
+    const overflowContextMenuModel: ContextMenuModel[] = React.useMemo(
+      () =>
+        overflowGroups.map((g) => ({
+          key: g.id,
+          label: g.name,
+          icon: buildGroupIconDataUrl(g.icon),
+          onClick: () => {
+            onFilterByGroup?.(g.id);
+          },
+        })),
+      [overflowGroups, onFilterByGroup],
+    );
+
+    const overflowContextMenuHeader = React.useMemo(
+      () => ({
+        title: t("GroupingRooms:RoomGroups"),
+        icon: "",
+      }),
+      [t],
+    );
+
+    const onOverflowContextMenu = React.useCallback((e: React.MouseEvent) => {
+      contextMenuRef.current?.show(e);
+    }, []);
+
     const overflowDropdownList = (
-      <>
+      <Scrollbar
+        style={{ height: listHeight }}
+        scrollBodyClassName="overflow-dropdown-scroll-body"
+      >
         {overflowGroups.map((g) => (
           <DropDownItem
             key={g.id}
@@ -367,7 +406,7 @@ const FilterInput = React.memo(
             label={g.name}
           />
         ))}
-      </>
+      </Scrollbar>
     );
 
     return (
@@ -482,41 +521,55 @@ const FilterInput = React.memo(
                 ) : null,
               )}
               {overflowGroups.length > 0 && (
-                <TooltipContainer
-                  as="div"
-                  className={styles.ellipsisButton}
-                  onClick={toggleOverflow}
-                  title={t("Common:More")}
-                  data-testid="rooms_groups_overflow_trigger"
-                >
-                  <ComboBox
-                    opened={isOverflowOpen}
-                    onToggle={toggleOverflow}
-                    className={styles.ellipsisComboBox}
-                    options={[]}
-                    selectedOption={{ key: "", label: "" }}
-                    directionX="left"
-                    directionY="both"
-                    size={ComboBoxSize.content}
-                    advancedOptions={overflowDropdownList}
-                    disableIconClick={false}
-                    disableItemClick
-                    isDefaultMode={false}
-                    advancedOptionsCount={overflowGroups.length}
-                    onSelect={() => {}}
-                    withBlur={false}
-                    withBackdrop
-                    onBackdropClick={toggleOverflow}
-                    type="onlyIcon"
-                    dataTestId="rooms_groups_overflow_combobox"
-                    withoutPadding
-                    noBorder
-                    withoutArrow
-                    displayArrow={false}
+                <>
+                  <TooltipContainer
+                    as="div"
+                    className={styles.ellipsisButton}
+                    onClick={
+                      isMobileView ? onOverflowContextMenu : toggleOverflow
+                    }
+                    title={t("Common:More")}
+                    data-testid="rooms_groups_overflow_trigger"
                   >
-                    <span className={styles.ellipsisIcon}>...</span>
-                  </ComboBox>
-                </TooltipContainer>
+                    <ComboBox
+                      opened={isMobileView ? false : isOverflowOpen}
+                      onToggle={isMobileView ? undefined : toggleOverflow}
+                      className={styles.ellipsisComboBox}
+                      options={[]}
+                      selectedOption={{ key: "", label: "" }}
+                      directionX="left"
+                      directionY="both"
+                      size={ComboBoxSize.content}
+                      advancedOptions={isMobileView ? undefined : overflowDropdownList}
+                      disableIconClick={isMobileView}
+                      disableItemClick
+                      isDefaultMode={false}
+                      advancedOptionsCount={overflowGroups.length}
+                      onSelect={() => {}}
+                      withBlur={false}
+                      withBackdrop={!isMobileView}
+                      onBackdropClick={toggleOverflow}
+                      type="onlyIcon"
+                      dataTestId="rooms_groups_overflow_combobox"
+                      withoutPadding
+                      noBorder
+                      withoutArrow
+                      displayArrow={false}
+                    >
+                      <span className={styles.ellipsisIcon}>...</span>
+                    </ComboBox>
+                  </TooltipContainer>
+                  {isMobileView && (
+                    <ContextMenu
+                      ref={contextMenuRef}
+                      model={overflowContextMenuModel}
+                      header={overflowContextMenuHeader}
+                      withBackdrop
+                      headerOnlyMobile
+                      ignoreChangeView
+                    />
+                  )}
+                </>
               )}
             </div>
 
