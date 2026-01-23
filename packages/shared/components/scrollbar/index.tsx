@@ -27,19 +27,8 @@
 "use client";
 
 import { Scrollbar } from "./Scrollbar";
-import type {
-  ScrollbarProps,
-  CustomScrollbarsVirtualListProps,
-} from "./Scrollbar.types";
-import {
-  CustomScrollbarsVirtualList,
-  CustomScrollbarsVirtualListWithAutoFocus,
-} from "./sub-components";
+import type { ScrollbarProps } from "./Scrollbar.types";
 
-export type { CustomScrollbarsVirtualListProps, ScrollbarProps };
+export type { ScrollbarProps };
 
-export {
-  Scrollbar,
-  CustomScrollbarsVirtualList,
-  CustomScrollbarsVirtualListWithAutoFocus,
-};
+export { Scrollbar };

@@ -45,6 +45,7 @@ import type { ScrollbarProps } from "./Scrollbar.types";
 const Scrollbar = (props: ScrollbarProps) => {
   const {
     ref,
+    contentRef,
     onScroll,
     autoHide = true,
     scrollClass,
@@ -111,6 +112,10 @@ const Scrollbar = (props: ScrollbarProps) => {
       ref.current = elementRef;
     }
     scrollRef.current = elementRef;
+
+    if (contentRef) {
+      contentRef.current = elementRef?.contentElement;
+    }
   };
 
   const autoHideContainerProps = autoHide ? { onScroll: showTracks } : {};

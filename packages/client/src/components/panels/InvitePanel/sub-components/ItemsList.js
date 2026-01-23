@@ -27,7 +27,7 @@
 import React, { useState, useEffect, useRef, memo, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { FixedSizeList as List } from "react-window";
-import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
 import { useTheme } from "styled-components";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
@@ -38,7 +38,7 @@ import { ScrollList } from "../StyledInvitePanel";
 const USER_ITEM_HEIGHT = 48;
 
 const VirtualScroll = ({ ref, ...props }) => (
-  <CustomScrollbarsVirtualList
+  <Scrollbar
     {...props}
     ref={ref}
     paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
@@ -170,7 +170,7 @@ const ItemsList = ({
     isOpenItemAccess,
   ]);
 
-  const overflowStyle = scrollAllPanelContent ? "hidden" : "scroll";
+  const overflowStyle = scrollAllPanelContent ? "hidden" : "unset";
 
   const willChangeStyle =
     isMobileView && isOpenItemAccess ? "auto" : "transform";

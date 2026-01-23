@@ -29,7 +29,7 @@ import { VariableSizeList } from "react-window";
 
 import { DeviceType } from "../../../enums";
 
-import { CustomScrollbarsVirtualList } from "../../scrollbar";
+import { Scrollbar } from "../../scrollbar";
 
 import styles from "../Navigation.module.scss";
 import { TDropBoxProps } from "../Navigation.types";
@@ -192,7 +192,7 @@ const DropBox = ({
           onClickAvailable,
           { withLogo: !!withLogo, currentDeviceType },
         ]}
-        outerElementType={CustomScrollbarsVirtualList}
+        outerElementType={Scrollbar}
       >
         {Row}
       </VariableSizeList>

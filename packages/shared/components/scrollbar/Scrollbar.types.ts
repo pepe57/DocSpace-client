@@ -46,6 +46,8 @@ type PickedScrollbarLibraryProps = Pick<
 export type ScrollbarProps = PickedScrollbarLibraryProps & {
   /** Ref to access the DOM element or React component instance */
   ref?: React.Ref<CustomScrollbar | null>;
+  /** Ref to access the DOM element of Scroll content element */
+  contentRef?: React.RefObject<HTMLDivElement | null>;
   /** This class will be placed on scroller element */
   scrollClass?: string;
   /** This class will be placed on scroller body element */
@@ -66,18 +68,4 @@ export type ScrollbarProps = PickedScrollbarLibraryProps & {
   onScroll?: React.UIEventHandler<HTMLDivElement>;
   /** Add children */
   children?: React.ReactNode;
-};
-
-export type CustomScrollbarsVirtualListProps = Pick<
-  ScrollbarProps,
-  | "style"
-  | "onScroll"
-  | "children"
-  | "className"
-  | "autoFocus"
-  | "scrollClass"
-  | "paddingAfterLastItem"
-> & {
-  forwardedRef?: React.ForwardedRef<unknown>;
-  contentRef?: React.RefObject<HTMLDivElement | null>;
 };

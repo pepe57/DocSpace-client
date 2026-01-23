@@ -26,7 +26,7 @@
 
 import { useState, useEffect, useRef, memo, useCallback } from "react";
 import { FixedSizeList as List } from "react-window";
-import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
 import { useTheme } from "styled-components";
 import { TTranslation } from "@docspace/shared/types";
@@ -137,7 +137,7 @@ const ItemsList = ({
     onBodyResize();
   }, [height, listItems.length, scrollAllPanelContent, onBodyResize]);
 
-  const overflowStyle = scrollAllPanelContent ? "hidden" : "scroll";
+  const overflowStyle = scrollAllPanelContent ? "hidden" : "unset";
 
   return (
     <ScrollList
@@ -161,9 +161,7 @@ const ItemsList = ({
           isDisabled,
           listItems,
         }}
-        outerElementType={
-          !scrollAllPanelContent ? CustomScrollbarsVirtualList : undefined
-        }
+        outerElementType={!scrollAllPanelContent ? Scrollbar : undefined}
         data-testid="template_access_settings_list"
       >
         {Row}
