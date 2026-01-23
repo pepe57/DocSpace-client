@@ -97,7 +97,7 @@ export type BadgesProps = {
   onClickFavorite?: () => void;
   isPublicRoom?: boolean;
   themeIsBase?: boolean;
-  editingUsersTooltip?: string;
+  editorsTooltip?: React.ReactElement;
 };
 
 export type BadgeWrapperProps = {
