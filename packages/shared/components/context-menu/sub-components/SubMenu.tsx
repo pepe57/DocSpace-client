@@ -77,6 +77,7 @@ type SubMenuProps = {
 
   isLowerSubmenu?: boolean;
   maxHeightLowerSubmenu?: number;
+  maxHeight?: number;
 
   mouseMoveHandler?: (
     index: number,
@@ -109,6 +110,7 @@ const SubMenu = (props: SubMenuProps) => {
     withHeader,
     isLowerSubmenu,
     maxHeightLowerSubmenu,
+    maxHeight,
     mouseMoveHandler,
     currentIndex,
     activeLevel,
@@ -703,6 +705,10 @@ const SubMenu = (props: SubMenuProps) => {
 
     if (isLowerSubmenu && maxHeightLowerSubmenu) {
       listHeight = Math.min(listHeight, maxHeightLowerSubmenu);
+    }
+
+    if (root && maxHeight) {
+      listHeight = Math.min(listHeight, maxHeight);
     }
 
     return (

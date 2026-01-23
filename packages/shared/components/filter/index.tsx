@@ -540,7 +540,9 @@ const FilterInput = React.memo(
                       directionX="left"
                       directionY="both"
                       size={ComboBoxSize.content}
-                      advancedOptions={isMobileView ? undefined : overflowDropdownList}
+                      advancedOptions={
+                        isMobileView ? undefined : overflowDropdownList
+                      }
                       disableIconClick={isMobileView}
                       disableItemClick
                       isDefaultMode={false}
@@ -567,6 +569,7 @@ const FilterInput = React.memo(
                       withBackdrop
                       headerOnlyMobile
                       ignoreChangeView
+                      maxHeight={6 * 36}
                     />
                   )}
                 </>

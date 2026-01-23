@@ -117,6 +117,7 @@ const ContextMenu = (props: ContextMenuProps) => {
     showDisabledItems,
     withHotkeys = true,
     withoutBackHeaderButton,
+    maxHeight,
   } = props;
 
   const onMenuClick = () => {
@@ -741,6 +742,7 @@ const ContextMenu = (props: ContextMenuProps) => {
                 changeView={changeView}
                 withHeader={withHeader}
                 maxHeightLowerSubmenu={maxHeightLowerSubmenu}
+                maxHeight={maxHeight}
                 mouseMoveHandler={onMouseMove}
                 currentIndex={currentIndex}
                 activeLevel={activeLevel}

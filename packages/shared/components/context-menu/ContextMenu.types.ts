@@ -188,6 +188,8 @@ export interface ContextMenuProps {
   showDisabledItems?: boolean;
   withHotkeys?: boolean;
   withoutBackHeaderButton?: boolean;
+  /** Maximum height for the context menu content area */
+  maxHeight?: number;
 }
 
 export type TContextMenuRef = {
