@@ -96,9 +96,8 @@ const PluginFilesSelector = ({
   };
 
   const onSelectItem: FilesSelectorProps["onSelectItem"] = async (item) => {
-    if (!selectorProps.onSelectItem) return;
-    console.log(item);
-    const message = await selectorProps.onSelectItem(item.id);
+    if (!selectorProps.onSelect) return;
+    const message = await selectorProps.onSelect(item.id);
     dispatchMessage({ message, pluginName });
   };
 
