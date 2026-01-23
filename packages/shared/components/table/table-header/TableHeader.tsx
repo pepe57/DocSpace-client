@@ -42,7 +42,7 @@ import {
 } from "../Table.constants";
 import { checkingForUnfixedSize, getSubstring } from "../Table.utils";
 import { isDesktop } from "../../../utils";
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { useTableHeaderPosition } from "./useTableHeaderPosition";
 
 type TPrevHeaderData = Nullable<

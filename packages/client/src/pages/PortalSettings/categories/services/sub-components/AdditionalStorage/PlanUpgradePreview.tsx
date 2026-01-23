@@ -34,7 +34,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { calcalateWalletPayment } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 import UpgradeWalletIcon from "PUBLIC_DIR/images/icons/16/upgrade.react.svg";

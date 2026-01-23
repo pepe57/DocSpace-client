@@ -51,7 +51,7 @@ import { Badge } from "../../badge";
 import { globalColors } from "../../../themes";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { isTouchDevice } from "@docspace/ui-kit/utils/device";
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { MCPIcon, MCPIconSize } from "../../mcp-icon";
 
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";

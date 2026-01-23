@@ -46,7 +46,7 @@ import {
 import styles from "./Tabs.module.scss";
 import useTabsHotkeys from "./hooks/useTabsHotkeys";
 import { useViewTab } from "./hooks/useViewTab";
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 
 const SecondaryTabs = (props: TabsProps) => {
   const {

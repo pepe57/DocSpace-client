@@ -34,7 +34,7 @@ import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 
 import { IconSizeType } from "../../utils";
 import { useClickOutside } from "../../utils/useClickOutside";
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { DropDown } from "../drop-down";

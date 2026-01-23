@@ -30,7 +30,7 @@ import styles from "./SelectionArea.module.scss";
 import { frames } from "./SelectionArea.utils";
 import { SelectionAreaProps, TArrayTypes } from "./SelectionArea.types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "../../utils";
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 
 const SelectionArea = ({
   onMove,

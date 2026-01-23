@@ -55,7 +55,7 @@ import {
 } from "./hooks";
 
 import styles from "./PasswordInput.module.scss";
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 
 export type { PasswordInputHandle } from "./PasswordInput.types";
 

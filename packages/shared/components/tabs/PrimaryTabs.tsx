@@ -28,7 +28,7 @@ import React, { useCallback, useEffect, useRef } from "react";
 import classNames from "classnames";
 
 import { useAnimation, AnimationEvents } from "../../hooks/useAnimation";
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { useEventListener } from "../../hooks/useEventListener";
 
 import {

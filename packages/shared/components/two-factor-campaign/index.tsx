@@ -27,7 +27,7 @@
 import React from "react";
 import { useTheme } from "styled-components";
 import NextStepReactSvg from "PUBLIC_DIR/images/arrow.right.react.svg?url";
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { useTwoFactorCampaignBanner } from "../../hooks/useTwoFactorCampaignBanner";
 import { CampaignsBanner } from "../campaigns-banner";
 import { TColorScheme } from "../../themes";

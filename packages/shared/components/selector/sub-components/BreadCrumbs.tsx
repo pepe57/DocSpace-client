@@ -43,7 +43,7 @@ import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 import { SearchDispatchContext } from "../contexts/Search";
 import styles from "../Selector.module.scss";
 import { Text } from "@docspace/ui-kit/components/text";
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 
 const calculateDisplayedItems = (
   items: TBreadCrumb[],
