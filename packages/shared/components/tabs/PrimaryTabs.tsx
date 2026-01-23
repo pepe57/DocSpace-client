@@ -31,8 +31,10 @@ import { useAnimation, AnimationEvents } from "../../hooks/useAnimation";
 import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 import { useEventListener } from "../../hooks/useEventListener";
 
-import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";
-import { Scrollbar } from "../scrollbar";
+import {
+  Scrollbar,
+  ScrollbarType,
+} from "@docspace/ui-kit/components/scrollbar";
 import { LoaderWrapper } from "../loader-wrapper";
 
 import { useViewTab } from "./hooks/useViewTab";

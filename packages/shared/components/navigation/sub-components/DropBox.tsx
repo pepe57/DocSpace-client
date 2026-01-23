@@ -29,7 +29,7 @@ import { VariableSizeList } from "react-window";
 
 import { DeviceType } from "../../../enums";
 
-import { Scrollbar } from "../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import styles from "../Navigation.module.scss";
 import { TDropBoxProps } from "../Navigation.types";

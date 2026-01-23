@@ -27,7 +27,7 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import classNames from "classnames";
-import { Scrollbar } from "../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Days, Months, Years } from "./sub-components";
 
 import { getValidDates } from "./utils";

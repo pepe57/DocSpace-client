@@ -32,7 +32,7 @@ import React, {
   useState,
 } from "react";
 import { VariableSizeList } from "react-window";
-import { Scrollbar } from "../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { VirtualListProps } from "../DropDown.types";
 
 const VirtualList = ({

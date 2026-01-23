@@ -37,7 +37,7 @@ import { isJSON } from "../../utils/json";
 import { toastr } from "../toast";
 
 import { IconButton } from "../icon-button";
-import { Scrollbar } from "../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { jsonify } from "./Textarea.utils";
 import { TextareaProps } from "./Textarea.types";
 import styles from "./Textarea.module.scss";

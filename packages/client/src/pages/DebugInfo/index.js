@@ -31,7 +31,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Loader } from "@docspace/ui-kit/components/loader";
 import styled from "styled-components";
 import { Link } from "@docspace/ui-kit/components/link";

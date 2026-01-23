@@ -31,7 +31,7 @@ import classNames from "classnames";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../constants";
 import { DialogSkeleton, DialogAsideSkeleton } from "../../../skeletons";
 
-import { Scrollbar } from "../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { AsideHeader } from "../../aside-header";
 import styles from "../ModalDialog.module.scss";
 import { ModalBackdrop } from "./ModalBackdrop";

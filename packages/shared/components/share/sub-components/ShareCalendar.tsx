@@ -30,7 +30,7 @@ import { useIsMobile } from "../../../hooks/useIsMobile";
 
 import { Calendar } from "../../calendar";
 import { DropDown } from "../../drop-down";
-import { Scrollbar } from "../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import type { ShareCalendarProps } from "../Share.types";
 import styles from "../Share.module.scss";

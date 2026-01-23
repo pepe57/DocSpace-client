@@ -32,7 +32,7 @@ import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import { LinkRolesDropdownItem } from "./LinkRolesDropdownItem";
 import { TOption } from "@docspace/shared/components/combobox";

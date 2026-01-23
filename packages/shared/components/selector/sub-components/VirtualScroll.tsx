@@ -26,7 +26,10 @@
 
 import React, { useEffect, useRef } from "react";
 
-import { Scrollbar, ScrollbarProps } from "../../scrollbar";
+import {
+  Scrollbar,
+  ScrollbarProps,
+} from "@docspace/ui-kit/components/scrollbar";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../constants";
 
 export const VirtualScroll = (props: ScrollbarProps) => {

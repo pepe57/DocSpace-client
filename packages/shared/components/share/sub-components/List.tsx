@@ -47,7 +47,7 @@ import { useEventListener } from "../../../hooks/useEventListener";
 import type { TUser } from "../../../api/people/types";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import ScrollbarContext from "../../scrollbar/custom-scrollbar/ScrollbarContext";
+import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
 
 import styles from "../Share.module.scss";
 import { ListProps } from "../Share.types";

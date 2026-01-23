@@ -38,7 +38,7 @@ import { useTheme } from "../../../../../../hooks/useTheme";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../../../../../icon-button";
-import { Scrollbar } from "../../../../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { toastr } from "../../../../../toast";
 
 import styles from "../../ChatMessageBody.module.scss";

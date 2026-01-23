@@ -31,7 +31,7 @@ import RoomType from "@docspace/shared/components/room-type";
 import { globalColors } from "@docspace/shared/themes";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { injectDefaultTheme } from "@docspace/shared/utils";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { RoomsType } from "@docspace/shared/enums";
 
 const StyledDropdownDesktop = styled.div.attrs(injectDefaultTheme)<{

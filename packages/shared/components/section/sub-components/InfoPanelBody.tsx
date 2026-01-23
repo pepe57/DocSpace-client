@@ -26,8 +26,10 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { Scrollbar } from "../../scrollbar";
-import { Scrollbar as CustomScrollbar } from "../../scrollbar/custom-scrollbar";
+import {
+  Scrollbar,
+  ScrollbarType,
+} from "@docspace/ui-kit/components/scrollbar";
 import { SubInfoPanelBodyProps } from "../Section.types";
 import styles from "../Section.module.scss";
 
@@ -35,7 +37,7 @@ const SubInfoPanelBody = ({
   children,
   isInfoPanelScrollLocked,
 }: SubInfoPanelBodyProps) => {
-  const scrollRef = useRef<CustomScrollbar>(null);
+  const scrollRef = useRef<ScrollbarType>(null);
   const [scrollYPossible, setScrollYPossible] = useState(false);
   const [scrollLocked, setScrollLocked] = useState(
     scrollYPossible && isInfoPanelScrollLocked,

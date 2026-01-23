@@ -26,7 +26,7 @@
 
 import { useEffect, useState, useRef, RefObject } from "react";
 
-import { Scrollbar as ScrollbarType } from "../../scrollbar/custom-scrollbar";
+import { ScrollbarType } from "@docspace/ui-kit/components/scrollbar";
 
 export const useViewTab = (
   containerRef: RefObject<ScrollbarType | null>,

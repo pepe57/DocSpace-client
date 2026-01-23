@@ -380,10 +380,6 @@
   --selector-add-button-width: 32px;
   --selector-add-button-padding: 10px;
 
-  --scrollbar-padding-inline-end: 17px;
-  --scrollbar-padding-inline-end-mobile: 8px;
-  --scrollbar-padding-after-last-item: unset;
-
   --app-loader-background-color: #{$black};
 
   --files-article-body-download-app-list-text-color: #{$gray-dark};
@@ -589,18 +585,6 @@
 
 .dark {
   --heading-color: #{$white};
-}
-
-.light {
-  --scrollbar-bg-color: #{$light-scroll};
-  --scrollbar-hover-bg-color: #{$light-scroll-hover};
-  --scrollbar-press-bg-color: #{$light-scroll-active};
-}
-
-.dark {
-  --scrollbar-bg-color: #{$dark-scroll};
-  --scrollbar-hover-bg-color: #{$dark-scroll-hover};
-  --scrollbar-press-bg-color: #{$dark-scroll-active};
 }
 
 .light {
@@ -987,22 +971,6 @@
   --row-content-main-wrapper-width: 95%;
 
   --row-content-icons-height: 16px;
-}
-
-.light {
-  --scrollbar-bg-color: #{$light-scroll};
-  --scrollbar-hover-bg-color: #{$light-scroll-hover};
-  --scrollbar-press-bg-color: #{$light-scroll-active};
-
-  --scrollbar-padding-inline-end: 17px;
-  --scrollbar-padding-inline-end-mobile: 8px;
-  --scrollbar-padding-after-last-item: unset;
-}
-
-.dark {
-  --scrollbar-bg-color: #{$dark-scroll};
-  --scrollbar-hover-bg-color: #{$dark-scroll-hover};
-  --scrollbar-press-bg-color: #{$dark-scroll-active};
 }
 
 .light {

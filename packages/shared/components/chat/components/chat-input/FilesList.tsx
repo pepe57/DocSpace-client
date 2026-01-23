@@ -32,7 +32,7 @@ import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "../../../icon-button";
-import { Scrollbar } from "../../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import type { FilesListProps } from "../../Chat.types";
 
