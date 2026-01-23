@@ -35,7 +35,6 @@
     "@use-gesture/react": "10.3.1",
     "axios": "1.13.2",
     "classnames": "2.5.1",
-    "cnbuilder": "3.1.0",
     "copy-to-clipboard": "3.3.3",
     "cross-fetch": "3.1.8",
     "crypto-js": "4.2.0",
@@ -67,7 +66,6 @@
     "react-countdown": "2.3.6",
     "react-device-detect": "2.2.3",
     "react-dom": "19.2.3",
-    "react-draggable": "4.4.6",
     "react-dropzone": "11.7.1",
     "react-hotkeys-hook": "3.4.7",
     "react-i18next": "14.0.1",
@@ -91,8 +89,7 @@
     "ts-pattern": "5.5.0",
     "utif": "3.1.0",
     "windows-iana": "5.1.0",
-    "workbox-window": "6.6.0",
-    "zoom-level": "2.5.0"
+    "workbox-window": "6.6.0"
   },
   "devDependencies": {
     "@babel/core": "7.25.8",
