@@ -1,0 +1,43 @@
+
+.tooltipContainer {
+  max-height: 152px;
+  height: 152px;
+}
+
+.editorsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.editorItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+}
+
+.editorAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.editorName {
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 16px;
+}
+
+.tooltipHeader {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--editors-tooltip-header-color) !important;
+  margin-bottom: 12px;
+  white-space: nowrap;
+}
