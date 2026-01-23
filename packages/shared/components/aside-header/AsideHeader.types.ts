@@ -29,7 +29,11 @@ type PickedDivProps = Pick<
   "className" | "id" | "style"
 >;
 
-type HeaderIcon = { key: string; url: string; onClick: () => void };
+type HeaderIcon = {
+  key: string;
+  url: string;
+  onClick: () => void;
+};
 
 export type AsideHeaderProps = PickedDivProps & {
   /** Header content - can be a string or a ReactNode */

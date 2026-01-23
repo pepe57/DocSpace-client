@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "<strong>사용자 지정 필터</strong>가 활성화된 파일 링크가 클립보드에 성공적으로 복사되었습니다.",
   "LinkDoesNotExist": "열려고 하는 링크가 존재하지 않습니다.",
   "LinkExpirationDate": "링크로 공유된 파일은 <1>{{date}}</1>에 만료됩니다.",
-  "LinkExpireAfter": "링크가 <1>{{date}}</1> 후에 만료됩니다",
   "LinkExpired": "링크가 만료되었습니다.",
   "LinkHasExpired": "팔로우한 링크가 만료되었습니다.",
-  "LinkHasExpiredAndHasBeenDisabled": "링크가 만료되어 비활성화되었습니다",
   "LinkIsValid": "링크는 <1>{{date}}</1> 동안 유효합니다",
   "LinkName": "링크 이름",
   "LinkNoExpiration": "링크에는 <1>만료일이 없습니다</1>",
@@ -756,7 +754,6 @@
   "Remove": "삭제",
   "RemovedFromList": "목록에서 제거되었습니다",
   "RemoveFromList": "목록에서 제거",
-  "RemoveLink": "링크 삭제",
   "Rename": "이름 변경",
   "RenewSubscription": "구독을 갱신하시겠습니까?",
   "RepeatInvitation": "초대 반복",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "작성을 위해 원본 양식을 공유하세요.",
   "ShareTheRoom": "방",
   "ShareToFillOut": "작성을 위해 공유",
-  "ShareVia": "공유 방법",
   "ShareWithPortalUsers": "{{productName}} 사용자와 공유",
   "ShareWithPortalUsersDescription": "{{productName}}에서 특정 사용자들을 선택하여 원본 양식 작성을 초대합니다.",
   "ShowAboutWindow": "약 정보 창 표시",
@@ -1054,5 +1050,6 @@
   "YouHaveUnsavedChanges": "저장하지 않은 변경 사항이 있습니다",
   "YourCurrentDomain": "내 현재 도메인",
   "YourLogo": "로고",
-  "YourTurn": "고객님의 차례입니다"
+  "YourTurn": "고객님의 차례입니다",
+  "ExternalLink": "외부 링크"
 }
