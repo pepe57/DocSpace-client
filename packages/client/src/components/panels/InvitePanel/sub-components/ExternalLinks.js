@@ -271,7 +271,7 @@ const ExternalLinks = ({
                     fontSize="12px"
                     fontWeight={600}
                     className={classNames(styles.inviteViaLinkText, {
-                      [styles.isExpired]: linkIsExpired,
+                      [styles.isError]: linkIsExpired,
                     })}
                   >
                     {getCorrectDate(locale, activeLink.expirationDate)}
