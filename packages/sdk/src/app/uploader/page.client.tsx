@@ -26,16 +26,17 @@
 
 "use client";
 
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
+import { useItemIcon } from "@docspace/shared/hooks/useItemIcon";
 import DropzoneComponent from "@docspace/shared/components/dropzone";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   finalizeUploadSession,
-  getSettingsFiles,
   startUploadSession,
   uploadChunkParallel,
 } from "@docspace/shared/api/files";
@@ -52,6 +53,7 @@ import {
   runWithConcurrency,
   createChunks,
 } from "./_utils";
+import FilesList, { type FilesListFile } from "./_components/FilesList";
 
 const TARGET_FOLDER_ID = 9;
 const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;
@@ -67,6 +69,7 @@ export default function UploaderClient({ filesSettings }: UploaderClientProps) {
   useDocumentTitle("Uploader");
   //TODO: remove article namespace
   const { t } = useTranslation(["Article", "Common"]);
+  const { getIcon } = useItemIcon({ filesSettings });
 
   const chunkUploadSize =
     filesSettings?.chunkUploadSize || DEFAULT_CHUNK_UPLOAD_SIZE;
@@ -87,9 +90,11 @@ export default function UploaderClient({ filesSettings }: UploaderClientProps) {
     [],
   );
 
-  const [isDisabled] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [percent, setPercent] = React.useState(0);
+  const [isDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [percent, setPercent] = useState(0);
+  const [pendingFiles, setPendingFiles] = useState<FilesListFile[]>([]);
+  
   const uploadedBytesRef = useRef(0);
   const totalBytesRef = useRef(0);
 
@@ -143,33 +148,61 @@ export default function UploaderClient({ filesSettings }: UploaderClientProps) {
     setPercent(100);
   }, []);
 
+  const getFileExtension = useCallback((fileName: string) => {
+    const lastDot = fileName.lastIndexOf(".");
+    return lastDot !== -1 ? fileName.slice(lastDot) : "";
+  }, []);
+
   const onDrop = useCallback(
-    async (acceptedFiles: File[]) => {
+    (acceptedFiles: File[]) => {
       if (!acceptedFiles.length) return;
 
-      setIsLoading(true);
+      const newFiles: FilesListFile[] = acceptedFiles.map((file) => ({
+        id: `${file.name}-${file.size}-${file.lastModified}`,
+        name: file.name,
+        extension: getFileExtension(file.name),
+        file,
+      }));
 
-      try {
-        await uploadFiles(acceptedFiles);
-        toastr.success(
-          t("Common:ItemsSuccessfullyUploaded", {
-            count: acceptedFiles.length,
-          }),
-        );
-      } catch (err) {
-        const message = getErrorMessage(err) || t("Common:UnexpectedError");
-        toastr.error(message);
-      } finally {
-        setIsLoading(false);
-      }
+      setPendingFiles((prev) => {
+        const existingIds = new Set(prev.map((f) => f.id));
+        const uniqueNewFiles = newFiles.filter((f) => !existingIds.has(f.id));
+        return [...prev, ...uniqueNewFiles];
+      });
     },
-    [t, uploadFiles],
+    [getFileExtension],
   );
+
+  const onRemoveFile = useCallback((file: FilesListFile) => {
+    setPendingFiles((prev) => prev.filter((f) => f.id !== file.id));
+  }, []);
+
+  const onUploadClick = useCallback(async () => {
+    if (!pendingFiles.length) return;
+
+    setIsLoading(true);
+
+    try {
+      const filesToUpload = pendingFiles.map((f) => f.file);
+      await uploadFiles(filesToUpload);
+      toastr.success(
+        t("Common:ItemsSuccessfullyUploaded", {
+          count: pendingFiles.length,
+        }),
+      );
+      setPendingFiles([]);
+    } catch (err) {
+      const message = getErrorMessage(err) || t("Common:UnexpectedError");
+      toastr.error(message);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [pendingFiles, t, uploadFiles]);
 
   return (
     <div>
       <DropzoneComponent
-        isDisabled={isDisabled}
+        isDisabled={isDisabled || isLoading}
         isLoading={isLoading}
         onDrop={onDrop}
         accept={accept}
@@ -179,11 +212,25 @@ export default function UploaderClient({ filesSettings }: UploaderClientProps) {
         exstsText="(DOC, DOCX, DOCXF, XLSX, PPTX)"
         dataTestId="sdk-uploader"
       />
-      {isLoading ? (
-        <div style={{ marginTop: 12, fontSize: 13, textAlign: "center" }}>
-          {`${Math.floor(percent)}%`}
+
+      <FilesList
+        files={pendingFiles}
+        getIcon={getIcon}
+        onRemove={isLoading ? undefined : onRemoveFile}
+      />
+
+      {pendingFiles.length > 0 && (
+        <div style={{ marginTop: 16 }}>
+          <Button
+            label={isLoading ? `${Math.floor(percent)}%` : t("Article:Upload")}
+            primary
+            size={ButtonSize.normal}
+            isDisabled={isLoading}
+            isLoading={isLoading}
+            onClick={onUploadClick}
+          />
         </div>
-      ) : null}
+      )}
     </div>
   );
 }

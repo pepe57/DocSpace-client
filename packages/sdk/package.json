@@ -38,6 +38,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-i18next": "14.0.1",
+    "react-svg": "16.1.34",
     "react-virtualized": "^9.22.6",
     "sass": "1.79.5",
     "ts-pattern": "5.5.0",
