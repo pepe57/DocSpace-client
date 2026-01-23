@@ -38,7 +38,7 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Heading } from "@docspace/shared/components/heading";

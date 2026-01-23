@@ -32,7 +32,7 @@ import classNames from "classnames";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
 import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   ModalDialog,
   ModalDialogType,
@@ -40,7 +40,7 @@ import {
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { DateTimePicker } from "@docspace/shared/components/date-time-picker";
-import { InputType, TextInput } from "@docspace/shared/components/text-input";
+import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import LinkRolesDropdown from "./sub-components/LinkRolesDropdown";
 import styles from "./LinkSettingsPanel.module.scss";
 import { LinkSettingsPanelProps } from "./LinkSettingsPanel.types";

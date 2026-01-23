@@ -116,6 +116,7 @@
   ],
   "exclude": [
     "**/*.stories.tsx",
-    "**/*.stories.ts"
+    "**/*.stories.ts",
+    "vitest.config.ts"
   ]
 }

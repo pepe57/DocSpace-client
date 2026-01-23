@@ -52,7 +52,7 @@ import {
 } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Button } from "@docspace/shared/components/button";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
