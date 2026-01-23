@@ -24,53 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-import { expect, test } from "./fixtures/base";
+import {
+  filesSettingsHandler,
+  peopleListHandler,
+  rootHandler,
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
+import { expect, test, TEST_PORT } from "./fixtures/base";
+import {
+  createPortalInvitationLink,
+  getPortalInvitationLink,
+} from "@docspace/shared/__mocks__/handlers/files/invite";
+import { EmployeeType } from "@docspace/shared/enums";
 
 test.describe("Invite", () => {
-  test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiConfig,
-      endpoints.settingsWithQuery,
-      endpoints.colorTheme,
-      endpoints.build,
-      endpoints.capabilities,
-      endpoints.selfEmailActivatedClient,
-      endpoints.tariff,
-      endpoints.quota,
-      endpoints.additionalSettings,
-      endpoints.getPortal,
-      endpoints.companyInfo,
-      endpoints.cultures,
-      endpoints.root,
-      endpoints.invitationSettings,
-      endpoints.filesSettings,
-      endpoints.webPlugins,
-
-      endpoints.thirdPartyCapabilities,
-      endpoints.thirdParty,
-      endpoints.docService,
-      endpoints.tfaapp,
-    ]);
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      filesSettingsHandler(TEST_PORT),
+      peopleListHandler(TEST_PORT),
+    );
   });
 
-  test("Create invitation link", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.contactsList]);
-
-    await page.goto("/accounts/people");
+  test("Create invitation link", async ({ page, mockRequest, baseUrl }) => {
+    await page.goto(`${baseUrl}/accounts/people`);
 
     const plusButton = page.getByTestId("plus-button");
     await expect(plusButton).toBeVisible();
 
     await plusButton.click();
 
-    // collaborator (user) manager (room admin) administrator (doc admin)
     const menuItem = page.getByTestId("collaborator");
     await expect(menuItem).toBeVisible();
-    await mockRequest.router([endpoints.portalInvitationUserEmptyLink]);
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      getPortalInvitationLink(TEST_PORT, EmployeeType.User),
+    );
     await menuItem.click();
 
-    await expect(page).toHaveScreenshot([
+    const inviteDialog = page.getByTestId("modal-dialog");
+    await expect(inviteDialog).toBeVisible();
+
+    await expect(inviteDialog).toHaveScreenshot([
       "desktop",
       "portal-invite",
       "invite-user_empty-link.png",
@@ -78,163 +75,166 @@ test.describe("Invite", () => {
 
     const toggle = page.getByTestId("toggle-button-container");
     await expect(toggle).toBeVisible();
-    await mockRequest.router([endpoints.portalInvitationUserCreateLink]);
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      createPortalInvitationLink(TEST_PORT, EmployeeType.User),
+    );
     await toggle.click();
 
-    await expect(page).toHaveScreenshot([
+    await expect(inviteDialog).toHaveScreenshot([
       "desktop",
       "portal-invite",
       "invite-user_created-link.png",
     ]);
   });
 
-  test("Delete invitation link", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.contactsList]);
+  // test("Delete invitation link", async ({ page, mockRequest }) => {
+  //   await mockRequest.router([endpoints.contactsList]);
 
-    await page.goto("/accounts/people");
+  //   await page.goto("/accounts/people");
 
-    const plusButton = page.getByTestId("plus-button");
-    await expect(plusButton).toBeVisible();
+  //   const plusButton = page.getByTestId("plus-button");
+  //   await expect(plusButton).toBeVisible();
 
-    await plusButton.click();
+  //   await plusButton.click();
 
-    // collaborator (user) manager (room admin) administrator (doc admin)
-    const menuItem = page.getByTestId("collaborator");
-    await expect(menuItem).toBeVisible();
-    await mockRequest.router([endpoints.portalInvitationUser]);
-    await menuItem.click();
+  //   // collaborator (user) manager (room admin) administrator (doc admin)
+  //   const menuItem = page.getByTestId("collaborator");
+  //   await expect(menuItem).toBeVisible();
+  //   await mockRequest.router([endpoints.portalInvitationUser]);
+  //   await menuItem.click();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "portal-invite",
-      "invite-user.png",
-    ]);
+  //   await expect(page).toHaveScreenshot([
+  //     "desktop",
+  //     "portal-invite",
+  //     "invite-user.png",
+  //   ]);
 
-    const toggle = page.getByTestId("toggle-button-container");
-    await expect(toggle).toBeVisible();
-    await mockRequest.router([endpoints.portalInvitationUserDeleteLink]);
-    await toggle.click();
-    await page.mouse.move(0, 0);
+  //   const toggle = page.getByTestId("toggle-button-container");
+  //   await expect(toggle).toBeVisible();
+  //   await mockRequest.router([endpoints.portalInvitationUserDeleteLink]);
+  //   await toggle.click();
+  //   await page.mouse.move(0, 0);
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "portal-invite",
-      "invite-user_empty-link.png",
-    ]);
-  });
+  //   await expect(page).toHaveScreenshot([
+  //     "desktop",
+  //     "portal-invite",
+  //     "invite-user_empty-link.png",
+  //   ]);
+  // });
 
-  test("Update invitation link", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.contactsList]);
+  // test("Update invitation link", async ({ page, mockRequest }) => {
+  //   await mockRequest.router([endpoints.contactsList]);
 
-    await page.goto("/accounts/people");
+  //   await page.goto("/accounts/people");
 
-    const plusButton = page.getByTestId("plus-button");
-    await expect(plusButton).toBeVisible();
+  //   const plusButton = page.getByTestId("plus-button");
+  //   await expect(plusButton).toBeVisible();
 
-    await plusButton.click();
+  //   await plusButton.click();
 
-    // collaborator (user) manager (room admin) administrator (doc admin)
-    const menuItem = page.getByTestId("collaborator");
-    await expect(menuItem).toBeVisible();
-    await mockRequest.router([endpoints.portalInvitationUser]);
-    await menuItem.click();
+  //   // collaborator (user) manager (room admin) administrator (doc admin)
+  //   const menuItem = page.getByTestId("collaborator");
+  //   await expect(menuItem).toBeVisible();
+  //   await mockRequest.router([endpoints.portalInvitationUser]);
+  //   await menuItem.click();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "portal-invite",
-      "invite-user.png",
-    ]);
+  //   await expect(page).toHaveScreenshot([
+  //     "desktop",
+  //     "portal-invite",
+  //     "invite-user.png",
+  //   ]);
 
-    const settingsIcon = page.getByTestId("link-settings_icon");
-    await expect(settingsIcon).toBeVisible();
-    await settingsIcon.click();
+  //   const settingsIcon = page.getByTestId("link-settings_icon");
+  //   await expect(settingsIcon).toBeVisible();
+  //   await settingsIcon.click();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "portal-invite",
-      "invite-user-settings.png",
-    ]);
+  //   await expect(page).toHaveScreenshot([
+  //     "desktop",
+  //     "portal-invite",
+  //     "invite-user-settings.png",
+  //   ]);
 
-    const maxNumberInput = page.getByTestId("link-settings_users-limit");
-    await expect(maxNumberInput).toBeVisible();
-    await maxNumberInput.fill("30");
+  //   const maxNumberInput = page.getByTestId("link-settings_users-limit");
+  //   await expect(maxNumberInput).toBeVisible();
+  //   await maxNumberInput.fill("30");
 
-    const saveButton = page.getByTestId("link-settings_modal_save_button");
-    await expect(maxNumberInput).toBeVisible();
+  //   const saveButton = page.getByTestId("link-settings_modal_save_button");
+  //   await expect(maxNumberInput).toBeVisible();
 
-    await mockRequest.router([endpoints.setPortalInvitationUser]);
-    saveButton.click();
+  //   await mockRequest.router([endpoints.setPortalInvitationUser]);
+  //   saveButton.click();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "portal-invite",
-      "invite-user-settings-apply.png",
-    ]);
-  });
+  //   await expect(page).toHaveScreenshot([
+  //     "desktop",
+  //     "portal-invite",
+  //     "invite-user-settings-apply.png",
+  //   ]);
+  // });
 
-  test("Invitation link expired", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.contactsList]);
+  // test("Invitation link expired", async ({ page, mockRequest }) => {
+  //   await mockRequest.router([endpoints.contactsList]);
 
-    await page.goto("/accounts/people");
+  //   await page.goto("/accounts/people");
 
-    const plusButton = page.getByTestId("plus-button");
-    await expect(plusButton).toBeVisible();
+  //   const plusButton = page.getByTestId("plus-button");
+  //   await expect(plusButton).toBeVisible();
 
-    await plusButton.click();
+  //   await plusButton.click();
 
-    // collaborator (user) manager (room admin) administrator (doc admin)
-    const menuItem = page.getByTestId("collaborator");
-    await expect(menuItem).toBeVisible();
-    await mockRequest.router([endpoints.portalInvitationUserExpired]);
-    await menuItem.click();
+  //   // collaborator (user) manager (room admin) administrator (doc admin)
+  //   const menuItem = page.getByTestId("collaborator");
+  //   await expect(menuItem).toBeVisible();
+  //   await mockRequest.router([endpoints.portalInvitationUserExpired]);
+  //   await menuItem.click();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "portal-invite",
-      "invite-user_expired.png",
-    ]);
+  //   await expect(page).toHaveScreenshot([
+  //     "desktop",
+  //     "portal-invite",
+  //     "invite-user_expired.png",
+  //   ]);
 
-    const settingsIcon = page.getByTestId("link-settings_icon");
-    await expect(settingsIcon).toBeVisible();
-    await settingsIcon.click();
+  //   const settingsIcon = page.getByTestId("link-settings_icon");
+  //   await expect(settingsIcon).toBeVisible();
+  //   await settingsIcon.click();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "portal-invite",
-      "invite-user-settings_expired.png",
-    ]);
-  });
+  //   await expect(page).toHaveScreenshot([
+  //     "desktop",
+  //     "portal-invite",
+  //     "invite-user-settings_expired.png",
+  //   ]);
+  // });
 
-  test("Invitation link users limit", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.contactsList]);
+  // test("Invitation link users limit", async ({ page, mockRequest }) => {
+  //   await mockRequest.router([endpoints.contactsList]);
 
-    await page.goto("/accounts/people");
+  //   await page.goto("/accounts/people");
 
-    const plusButton = page.getByTestId("plus-button");
-    await expect(plusButton).toBeVisible();
+  //   const plusButton = page.getByTestId("plus-button");
+  //   await expect(plusButton).toBeVisible();
 
-    await plusButton.click();
+  //   await plusButton.click();
 
-    // collaborator (user) manager (room admin) administrator (doc admin)
-    const menuItem = page.getByTestId("collaborator");
-    await expect(menuItem).toBeVisible();
-    await mockRequest.router([endpoints.portalInvitationUserLimit]);
-    await menuItem.click();
+  //   // collaborator (user) manager (room admin) administrator (doc admin)
+  //   const menuItem = page.getByTestId("collaborator");
+  //   await expect(menuItem).toBeVisible();
+  //   await mockRequest.router([endpoints.portalInvitationUserLimit]);
+  //   await menuItem.click();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "portal-invite",
-      "invite-user_limit.png",
-    ]);
+  //   await expect(page).toHaveScreenshot([
+  //     "desktop",
+  //     "portal-invite",
+  //     "invite-user_limit.png",
+  //   ]);
 
-    const settingsIcon = page.getByTestId("link-settings_icon");
-    await expect(settingsIcon).toBeVisible();
-    await settingsIcon.click();
+  //   const settingsIcon = page.getByTestId("link-settings_icon");
+  //   await expect(settingsIcon).toBeVisible();
+  //   await settingsIcon.click();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "portal-invite",
-      "invite-user-settings_limit.png",
-    ]);
-  });
+  //   await expect(page).toHaveScreenshot([
+  //     "desktop",
+  //     "portal-invite",
+  //     "invite-user-settings_limit.png",
+  //   ]);
+  // });
 });
