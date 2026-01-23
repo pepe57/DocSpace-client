@@ -31,7 +31,7 @@ import TextareaAutosize from "react-autosize-textarea";
 
 import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
-import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 import { isJSON } from "../../utils/json";
 
 import { toastr } from "../toast";

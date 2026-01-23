@@ -32,7 +32,7 @@ import { FixedSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 
 import type { TChat } from "../../../../../api/ai/types";
-import { useInterfaceDirection } from "../../../../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 import { Scrollbar } from "../../../../scrollbar";
 import { CHAT_LIST_WIDTH } from "../constants";
 import { getSelectChatRowHeight } from "../utils";

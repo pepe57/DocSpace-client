@@ -33,7 +33,7 @@ import RightArrowReactSvgUrl from "PUBLIC_DIR/images/right.arrow.react.svg?url";
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
 
 import { globalColors } from "../../themes";
-import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 import { useTheme } from "../../hooks/useTheme";
 import { isTouchDevice } from "@docspace/ui-kit/utils/device";
 

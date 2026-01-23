@@ -32,7 +32,7 @@ import DefaultUserPhotoPngUrl from "PUBLIC_DIR/images/default_user_photo_size_82
 
 import { DeviceType } from "../../../enums";
 import { Nullable } from "../../../types";
-import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "@docspace/ui-kit/components/text";

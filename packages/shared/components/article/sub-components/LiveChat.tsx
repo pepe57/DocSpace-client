@@ -28,7 +28,7 @@ import React, { useCallback, useEffect } from "react";
 
 import { useTranslation } from "react-i18next";
 
-import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 import { useTheme } from "../../../hooks/useTheme";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "../../../constants";
 import { Zendesk } from "../../zendesk";

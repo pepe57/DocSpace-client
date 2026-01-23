@@ -38,7 +38,7 @@ import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { FolderChildProps, FolderTileProps } from "./FolderTile.types";
 import { hasOwnProperty } from "../../../utils/object";
-import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 import { HeaderType } from "../../context-menu/ContextMenu.types";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 

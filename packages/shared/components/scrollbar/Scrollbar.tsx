@@ -36,7 +36,7 @@ import React, {
 import throttle from "lodash/throttle";
 
 import { classNames, isTouchDevice } from "../../utils";
-import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 
 import { Scrollbar as CustomScrollbar } from "./custom-scrollbar";
 import styles from "./Scrollbar.module.scss";

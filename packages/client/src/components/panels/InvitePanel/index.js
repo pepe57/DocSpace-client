@@ -65,7 +65,7 @@ import {
   createInviteLink,
   updateInviteLink,
 } from "@docspace/shared/api/portal";
-import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 import { getDate } from "@docspace/shared/components/share/Share.helpers";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/ui-kit/components/text";

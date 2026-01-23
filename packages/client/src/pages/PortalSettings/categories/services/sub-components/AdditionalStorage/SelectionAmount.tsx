@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { Trans } from "react-i18next";
 
 import QuantityPicker from "@docspace/shared/components/quantity-picker";
-import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/ui-kit/components/text";
 

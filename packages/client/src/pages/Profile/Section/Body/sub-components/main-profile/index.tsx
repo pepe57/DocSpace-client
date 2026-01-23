@@ -58,7 +58,7 @@ import { UserStore } from "@docspace/shared/store/UserStore";
 import { TAvatarModel } from "@docspace/shared/components/avatar/Avatar.types";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
-import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import SendClockReactSvgUrl from "PUBLIC_DIR/images/send.clock.react.svg?url";

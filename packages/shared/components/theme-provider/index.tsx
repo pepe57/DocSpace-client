@@ -29,7 +29,7 @@
 import React, { useEffect } from "react";
 import { ThemeProvider as Provider } from "styled-components";
 
-import { InterfaceDirectionProvider } from "../../context/InterfaceDirectionContext";
+import { InterfaceDirectionProvider } from "@docspace/ui-kit/context";
 import { ThemeProvider as CustomThemeProvider } from "../../context/ThemeContext";
 
 import type { ThemeProviderProps } from "./ThemeProvider.types";

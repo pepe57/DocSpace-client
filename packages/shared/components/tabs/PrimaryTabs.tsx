@@ -28,7 +28,7 @@ import React, { useCallback, useEffect, useRef } from "react";
 import classNames from "classnames";
 
 import { useAnimation, AnimationEvents } from "../../hooks/useAnimation";
-import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 import { useEventListener } from "../../hooks/useEventListener";
 
 import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";

@@ -26,7 +26,7 @@
 
 import React from "react";
 import classNames from "classnames";
-import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 import styles from "./RowContent.module.scss";
 import { RowContentProps } from "./RowContent.types";
 import { getSideInfo } from "./RowContent.utils";

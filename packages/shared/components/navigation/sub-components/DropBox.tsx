@@ -33,7 +33,7 @@ import { Scrollbar } from "../../scrollbar";
 
 import styles from "../Navigation.module.scss";
 import { TDropBoxProps } from "../Navigation.types";
-import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 
 import NavigationLogo from "./LogoBlock";
 import ArrowButton from "./ArrowBtn";

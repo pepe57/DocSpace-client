@@ -33,7 +33,7 @@ import { Bookmarks } from "../Bookmarks";
 import styles from "../../PDFViewer.module.scss";
 import SidebarProps from "./Sidebar.props";
 
-import { useInterfaceDirection } from "../../../../../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 
 export const Sidebar = ({
   bookmarks,

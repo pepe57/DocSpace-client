@@ -38,7 +38,7 @@ import {
   trimSeparator,
   isMobile as isMobileUtils,
 } from "../../utils";
-import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 
 import { Backdrop } from "../backdrop";
 import { Text } from "@docspace/ui-kit/components/text";
