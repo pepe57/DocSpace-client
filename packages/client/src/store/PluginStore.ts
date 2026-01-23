@@ -76,6 +76,7 @@ import {
 
 import type SelectedFolderStore from "./SelectedFolderStore";
 import { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
+import type { IFloatingOperationsButton } from "@onlyoffice/docspace-plugin-sdk";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -126,6 +127,10 @@ class PluginStore {
   pluginDialogVisible = false;
 
   pluginSelectorVisible = false;
+
+  pluginFloatingOperationsButtonVisible = false;
+
+  pluginFloatingOperationsButtonProps: null | IFloatingOperationsButton = null;
 
   pluginDialogProps: null | ModalDialogProps = null;
 
@@ -178,6 +183,10 @@ class PluginStore {
       updatePlugin: this.updatePlugin,
       setPluginSelectorVisible: this.setPluginSelectorVisible,
       setPluginSelectorProps: this.setPluginSelectorProps,
+      setPluginFloatingOperationsButtonProps:
+        this.setPluginFloatingOperationsButtonProps,
+      setPluginFloatingOperationsButtonVisible:
+        this.setPluginFloatingOperationsButtonVisible,
     });
   };
 
@@ -221,6 +230,16 @@ class PluginStore {
 
   setDeletePluginDialogProps = (value: null | { pluginName: string }) => {
     this.deletePluginDialogProps = value;
+  };
+
+  setPluginFloatingOperationsButtonVisible = (value: boolean) => {
+    this.pluginFloatingOperationsButtonVisible = value;
+  };
+
+  setPluginFloatingOperationsButtonProps = (
+    value: null | IFloatingOperationsButton,
+  ) => {
+    this.pluginFloatingOperationsButtonProps = value;
   };
 
   updatePluginStatus = (name: string) => {

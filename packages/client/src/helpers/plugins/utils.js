@@ -46,6 +46,8 @@ export const messageActions = ({
   setPluginDialogProps,
   setPluginSelectorVisible,
   setPluginSelectorProps,
+  setPluginFloatingOperationsButtonProps,
+  setPluginFloatingOperationsButtonVisible,
   updateContextMenuItems,
   updateInfoPanelItems,
   updateMainButtonItems,
@@ -123,6 +125,39 @@ export const messageActions = ({
           setPluginSelectorProps &&
             setPluginSelectorProps({
               ...message.selectorProps,
+              pluginName,
+            });
+        }
+        break;
+
+      case PluginActions.showFloatingOperationsButton:
+        {
+          if (!message.floatingOperationsButtonProps) return;
+
+          setPluginFloatingOperationsButtonVisible &&
+            setPluginFloatingOperationsButtonVisible(true);
+          setPluginFloatingOperationsButtonProps &&
+            setPluginFloatingOperationsButtonProps({
+              ...message.floatingOperationsButtonProps,
+              pluginName,
+            });
+        }
+        break;
+
+      case PluginActions.closeFloatingOperationsButton:
+        setPluginFloatingOperationsButtonVisible &&
+          setPluginFloatingOperationsButtonVisible(false);
+        setPluginFloatingOperationsButtonProps &&
+          setPluginFloatingOperationsButtonProps(null);
+        break;
+
+      case PluginActions.updateFloatingOperationsButton:
+        {
+          if (!message.floatingOperationsButtonProps) return;
+
+          setPluginFloatingOperationsButtonProps &&
+            setPluginFloatingOperationsButtonProps({
+              ...message.floatingOperationsButtonProps,
               pluginName,
             });
         }

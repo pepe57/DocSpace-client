@@ -65,6 +65,7 @@ import MediaViewer from "./MediaViewer";
 
 import { useSDK, useOperations } from "./Hooks";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
+import PluginFloatingOperationsButton from "SRC_DIR/components/PluginFloatingOperationsButton";
 
 const PureHome = (props) => {
   const {
@@ -167,6 +168,7 @@ const PureHome = (props) => {
     aiConfig,
     currentTab,
     setIsAboutDialogVisible,
+    pluginFloatingButtonVisible,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
@@ -453,6 +455,7 @@ const PureHome = (props) => {
         </Section.InfoPanelBody>
       </SectionWrapper>
       <InfoPanelActions />
+      {pluginFloatingButtonVisible ? <PluginFloatingOperationsButton /> : null}
     </>
   );
 };
@@ -478,6 +481,7 @@ export const Component = inject(
     filesSettingsStore,
     aiRoomStore,
     profileActionsStore,
+    pluginStore,
   }) => {
     const {
       setSelectedFolder,
@@ -507,6 +511,8 @@ export const Component = inject(
       isChangePageRequestRunning,
       currentClientView,
     } = clientLoadingStore;
+
+    const { pluginFloatingOperationsButtonVisible } = pluginStore;
 
     const { getFolderModel } = contextOptionsStore;
 
@@ -759,6 +765,7 @@ export const Component = inject(
       aiConfig: settingsStore.aiConfig,
 
       setIsAboutDialogVisible: profileActionsStore.setIsAboutDialogVisible,
+      pluginFloatingButtonVisible: pluginFloatingOperationsButtonVisible,
     };
   },
 )(observer(Home));
