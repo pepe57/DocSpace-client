@@ -49,7 +49,7 @@ import {
 } from "../ContextMenu.types";
 import { Badge } from "../../badge";
 import { globalColors } from "../../../themes";
-import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { isTouchDevice } from "@docspace/ui-kit/utils/device";
 import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
 import { MCPIcon, MCPIconSize } from "../../mcp-icon";

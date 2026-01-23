@@ -34,7 +34,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Badge } from "../badge";
 import { Link } from "@docspace/ui-kit/components/link";
 
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { isManagement } from "../../utils/common";
 import { globalColors } from "../../themes";

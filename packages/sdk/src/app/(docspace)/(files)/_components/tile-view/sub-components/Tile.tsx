@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { FileTile, FolderTile } from "@docspace/shared/components/tiles";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import Badges from "@docspace/shared/components/badges";

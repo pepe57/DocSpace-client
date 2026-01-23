@@ -28,7 +28,7 @@
 
 import React from "react";
 
-import { ThemeProvider as ComponentThemeProvider } from "@docspace/shared/components/theme-provider";
+import { ThemeProvider as ComponentThemeProvider } from "@docspace/ui-kit/components/theme-provider";
 import { TUser } from "@docspace/shared/api/people/types";
 import type {
   TGetColorTheme,

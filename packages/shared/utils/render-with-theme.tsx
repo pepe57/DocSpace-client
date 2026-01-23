@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { ThemeProvider } from "../components/theme-provider";
+import { ThemeProvider } from "@docspace/ui-kit/components/theme-provider";
 import { Base, TTheme } from "../themes";
 
 const defaultTheme: TTheme = {

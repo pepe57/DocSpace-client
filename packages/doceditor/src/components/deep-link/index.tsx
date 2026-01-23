@@ -37,7 +37,7 @@ import { getBgPattern } from "@docspace/shared/utils/common";
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { DeepLinkType } from "@docspace/shared/enums";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 import { getDeepLink, redirectToStore } from "./DeepLink.helper";

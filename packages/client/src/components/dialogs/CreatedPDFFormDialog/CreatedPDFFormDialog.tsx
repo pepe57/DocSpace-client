@@ -42,7 +42,7 @@ import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { toastr } from "@docspace/shared/components/toast";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { getFileInfo } from "@docspace/shared/api/files";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import type {
   CreatedPDFFormDialogProps,

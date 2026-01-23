@@ -47,7 +47,7 @@ import {
 import { ServerType } from "../../../../api/ai/enums";
 import { getOAuthToken } from "../../../../utils/common";
 import { getServerIcon, isMobile } from "../../../../utils";
-import { useTheme } from "../../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { ContextMenu, type ContextMenuRefType } from "../../../context-menu";

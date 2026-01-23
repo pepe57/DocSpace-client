@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ThemeProvider } from "../../components/theme-provider";
+import { ThemeProvider } from "../@docspace/ui-kit/components/theme-provider";
 import { globalColors } from "../../themes";
 
 const ThemeWrapper = ({ theme, children }) => {

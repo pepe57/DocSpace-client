@@ -28,7 +28,7 @@ import { useMemo, useCallback } from "react";
 import { useNavigate, LinkProps } from "react-router";
 import { isMobile } from "react-device-detect";
 
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   Events,

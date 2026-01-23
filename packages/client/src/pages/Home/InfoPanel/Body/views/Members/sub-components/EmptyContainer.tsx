@@ -29,7 +29,7 @@ import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.fil
 
 import { useTranslation } from "react-i18next";
 
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 
 import styles from "../Members.module.scss";

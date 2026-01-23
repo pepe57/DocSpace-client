@@ -34,7 +34,7 @@ import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
 
 import { globalColors } from "../../themes";
 import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { isTouchDevice } from "@docspace/ui-kit/utils/device";
 
 import { ToggleButton } from "../toggle-button";

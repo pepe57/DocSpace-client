@@ -27,7 +27,7 @@
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import EmptyScreenRecentUrl from "PUBLIC_DIR/images/emptyview/empty.history.light.svg?url";

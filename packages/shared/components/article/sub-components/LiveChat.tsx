@@ -29,7 +29,7 @@ import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
-import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "../../../constants";
 import { Zendesk } from "../../zendesk";
 import { zendeskAPI } from "../../zendesk/Zendesk.utils";

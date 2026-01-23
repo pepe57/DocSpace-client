@@ -28,7 +28,7 @@
 
 import { useCallback, useState, useLayoutEffect, useMemo } from "react";
 
-import { ThemeProvider } from "@docspace/shared/components/theme-provider";
+import { ThemeProvider } from "@docspace/ui-kit/components/theme-provider";
 import { Error520SSR } from "@docspace/shared/components/errors/Error520";
 import { getUser } from "@docspace/shared/api/people";
 import { getSettings } from "@docspace/shared/api/settings";

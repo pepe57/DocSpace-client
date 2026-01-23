@@ -36,7 +36,7 @@ import TemplateRoomIcon from "PUBLIC_DIR/images/template-room-icon.react.svg?url
 import { useClickOutside } from "../../utils/useClickOutside";
 import { getTextColor } from "../../utils";
 import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { ROOM_ACTION_KEYS } from "../../constants";
 import { globalColors } from "../../themes/globalColors";
 

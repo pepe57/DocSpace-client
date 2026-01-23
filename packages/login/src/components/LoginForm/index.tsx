@@ -54,7 +54,7 @@ import { TValidate } from "@docspace/shared/components/email-input/EmailInput.ty
 import { ButtonKeys } from "@docspace/shared/enums";
 import { getCookie } from "@docspace/shared/utils";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { LoginFormProps } from "@/types";
 import {

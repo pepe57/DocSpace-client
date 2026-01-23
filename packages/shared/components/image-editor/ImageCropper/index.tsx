@@ -37,7 +37,7 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url
 import { Slider } from "../../slider";
 import { IconButton } from "../../icon-button";
 
-import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { ImageCropperProps } from "../ImageEditor.types";
 

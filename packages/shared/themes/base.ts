@@ -26,22 +26,11 @@
 
 import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 
+import type { TColorScheme } from "@docspace/ui-kit/context";
+
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 import { DEFAULT_FONT_FAMILY } from "../constants";
-
-export type TColorScheme = {
-  id: number;
-  main: {
-    accent: string;
-    buttons: string;
-  };
-  name: string;
-  text: {
-    accent: string;
-    buttons: string;
-  };
-};
 
 const {
   white,

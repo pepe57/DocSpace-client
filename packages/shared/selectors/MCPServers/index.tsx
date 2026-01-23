@@ -37,7 +37,7 @@ import { ServerType } from "../../api/ai/enums";
 import { Selector, type TSelectorItem } from "../../components/selector";
 import { getServerIcon } from "../../utils";
 import { RowLoader } from "../../skeletons/selector";
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 type MCPServersSelectorProps = {
   onSubmit: (servers: TSelectorItem[]) => void;

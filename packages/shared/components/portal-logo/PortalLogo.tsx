@@ -32,7 +32,7 @@ import lightSmall from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
 
 import { classNames, getLogoUrl, size as deviceSize } from "../../utils";
 import { WhiteLabelLogoType } from "../../enums";
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import type { PortalLogoProps } from "./PortalLogo.types";
 import styles from "./PortalLogo.module.scss";
 
