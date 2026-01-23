@@ -3187,3 +3187,11 @@
 .dark { 
   --embedding-panel-info-block-background: #{$dark-gray-dark};
 }
+
+.light { 
+--editors-tooltip-header-color: #{$gray-text};
+}
+
+.dark { 
+  --editors-tooltip-header-color: #{$gray-text};
+}
