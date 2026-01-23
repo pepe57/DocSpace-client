@@ -35,6 +35,7 @@ import Badges from "@docspace/shared/components/badges";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
+import EditorsTooltip from "SRC_DIR/components/EditorsTooltip";
 
 export default function withBadges(WrappedComponent) {
   class WithBadges extends React.Component {
@@ -238,6 +239,7 @@ export default function withBadges(WrappedComponent) {
         isExtsCustomFilter,
         docspaceManagingRoomsHelpUrl,
         isRecentFolder,
+        currentUserId,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -293,7 +295,9 @@ export default function withBadges(WrappedComponent) {
           isRecentFolder={isRecentFolder}
           isPublicRoom={isPublicRoom}
           onClickFavorite={this.onClickFavorite}
-          editingUsersTooltip={this.getEditingUsersTooltip()}
+          editorsTooltip={
+            <EditorsTooltip item={item} currentUserId={currentUserId} />
+          }
         />
       );
 

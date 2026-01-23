@@ -132,7 +132,7 @@ const Badges = ({
   onClickLock,
   onClickFavorite,
   isPublicRoom,
-  editingUsersTooltip,
+  editorsTooltip,
 }: BadgesProps) => {
   const {
     id,
@@ -367,23 +367,19 @@ const Badges = ({
       ) : null}
 
       {isEditing ? (
-        <div
-          data-tooltip-id={editingUsersTooltip ? "info-tooltip" : undefined}
-          data-tooltip-content={editingUsersTooltip}
-          data-tooltip-place="bottom"
-        >
+        <>
+          {editorsTooltip}
           <IconButton
+            data-tooltip-id="editors-tooltip"
             iconNode={iconEdit}
             className={classNames(
               styles.iconBadge,
               "badge icons-group is-editing tablet-badge tablet-edit",
             )}
-            onClick={onFilesClick}
             color="accent"
             hoverColor="accent"
-            title={editingUsersTooltip || t("Common:EditButton")}
           />
-        </div>
+        </>
       ) : null}
 
       {locked && !isTile ? (
