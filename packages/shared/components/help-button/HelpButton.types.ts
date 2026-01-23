@@ -47,4 +47,6 @@ export type HelpButtonProps = Omit<IconButtonProps, "tooltipContent"> & {
   /** Sets the data-testid attribute for the component. */
   dataTestId?: string;
   tooltipStyle?: React.CSSProperties;
+  /** Icon node */
+  iconNode?: React.ReactNode;
 };

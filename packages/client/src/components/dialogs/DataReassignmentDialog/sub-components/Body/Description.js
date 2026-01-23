@@ -25,37 +25,38 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 
-import { StyledAvailableList } from "../../../ChangePortalOwnerDialog/StyledDialog";
+import styles from "SRC_DIR/components/dialogs/ChangePortalOwnerDialog/ChangePortalOwner.module.scss";
 
 const Description = ({ dataReassignmentUrl, noRoomFilesToMove }) => {
-	const { t } = useTranslation("DataReassignmentDialog");
+  const { t } = useTranslation("DataReassignmentDialog");
 
-	return (
-		<StyledAvailableList className="list-container">
-			<Text className="list-item">
-				{noRoomFilesToMove
-					? t("RoomsOnlyReassignment")
-					: t("DescriptionDataReassignment")}
-			</Text>
-			<Text className="list-item">{t("NoteDataReassignment")}</Text>
+  return (
+    <div className={classNames(styles.availableList, "list-container")}>
+      <Text className={styles.listItem}>
+        {noRoomFilesToMove
+          ? t("RoomsOnlyReassignment")
+          : t("DescriptionDataReassignment")}
+      </Text>
+      <Text className={styles.listItem}>{t("NoteDataReassignment")}</Text>
 
-			{dataReassignmentUrl ? (
-				<Link
-					target="_blank"
-					isHovered
-					fontWeight={600}
-					style={{ textDecoration: "underline" }}
-					href={dataReassignmentUrl}
-				>
-					{t("MoreAboutDataTransfer")}
-				</Link>
-			) : null}
-		</StyledAvailableList>
-	);
+      {dataReassignmentUrl ? (
+        <Link
+          target="_blank"
+          isHovered
+          fontWeight={600}
+          style={{ textDecoration: "underline" }}
+          href={dataReassignmentUrl}
+        >
+          {t("MoreAboutDataTransfer")}
+        </Link>
+      ) : null}
+    </div>
+  );
 };
 
 export default Description;

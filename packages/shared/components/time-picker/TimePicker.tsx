@@ -29,218 +29,235 @@ import moment from "moment";
 import classNames from "classnames";
 
 import {
-	InputSize,
-	InputType,
-	TextInput,
+  InputSize,
+  InputType,
+  TextInput,
 } from "@docspace/ui-kit/components/text-input";
 
 import { TimePickerProps } from "./TimePicker.types";
 import styles from "./TimePicker.module.scss";
 
 const TimePicker = ({
-	initialTime,
-	onChange = () => {},
-	className = "",
-	hasError = false,
-	tabIndex,
-	classNameInput,
-	onBlur,
-	focusOnRender = false,
-	forwardedRef,
-	testId,
+  initialTime,
+  onChange = () => {},
+  className = "",
+  hasError = false,
+  tabIndex,
+  classNameInput,
+  onBlur,
+  focusOnRender = false,
+  forwardedRef,
+  testId,
+  isTwelveHourFormat,
+  meridiem,
 }: TimePickerProps) => {
-	const hoursInputRef = useRef<HTMLInputElement>(null);
-	const minutesInputRef = useRef<HTMLInputElement>(null);
+  const hoursInputRef = useRef<HTMLInputElement>(null);
+  const minutesInputRef = useRef<HTMLInputElement>(null);
 
-	const [date, setDate] = useState(
-		initialTime ? moment(initialTime) : moment().startOf("day"),
-	);
+  const [date, setDate] = useState(
+    initialTime ? moment(initialTime) : moment().startOf("day"),
+  );
 
-	const [isInputFocused, setIsInputFocused] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
-	const [hours, setHours] = useState(moment(date, "HH:mm").format("HH"));
+  const hoursFormat = isTwelveHourFormat ? "hh" : "HH";
+  const [hours, setHours] = useState(moment(date, "HH:mm").format(hoursFormat));
 
-	const [minutes, setMinutes] = useState(moment(date, "HH:mm").format("mm"));
+  const [minutes, setMinutes] = useState(moment(date, "HH:mm").format("mm"));
 
-	const mountRef = useRef(false);
+  const mountRef = useRef(false);
 
-	const focusHoursInput = (e: React.MouseEvent<HTMLDivElement>) => {
-		const target = e.target as HTMLDivElement;
-		if (!minutesInputRef.current?.contains(target))
-			hoursInputRef.current?.select();
-	};
+  const focusHoursInput = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLDivElement;
+    if (!minutesInputRef.current?.contains(target))
+      hoursInputRef.current?.select();
+  };
 
-	const focusMinutesInput = () => {
-		minutesInputRef.current?.select();
-	};
+  const focusMinutesInput = () => {
+    minutesInputRef.current?.select();
+  };
 
-	const blurMinutesInput = () => {
-		onBlur?.();
-		minutesInputRef.current?.blur();
-	};
+  const blurMinutesInput = () => {
+    onBlur?.();
+    minutesInputRef.current?.blur();
+  };
 
-	const changeHours = (time: string) => {
-		setHours(time);
-		setDate(
-			moment(
-				`${date.format("YYYY-MM-DD")} ${time}:${minutes}`,
-				"YYYY-MM-DD HH:mm",
-			),
-		);
-		onChange(
-			moment(
-				`${date.format("YYYY-MM-DD")} ${time}:${minutes}`,
-				"YYYY-MM-DD HH:mm",
-			),
-		);
-	};
+  const changeHours = (time: string) => {
+    setHours(time);
+    setDate(
+      moment(
+        `${date.format("YYYY-MM-DD")} ${time}:${minutes}`,
+        "YYYY-MM-DD HH:mm",
+      ),
+    );
 
-	const onHoursBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-		if (e.target.value.length === 1) changeHours(`0${e.target.value}`);
-		setIsInputFocused(false);
-	};
-	const onMinutesBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-		if (e.target.value.length === 1) changeHours(`0${e.target.value}`);
-		setIsInputFocused(false);
-	};
+    const dateFormat = isTwelveHourFormat
+      ? "YYYY-MM-DD HH:mm A"
+      : "YYYY-MM-DD HH:mm";
 
-	const focusInput = () => setIsInputFocused(true);
+    onChange(
+      moment(
+        `${date.format("YYYY-MM-DD")} ${time}:${minutes} ${meridiem}`,
+        dateFormat,
+      ),
+    );
+  };
 
-	useEffect(() => {
-		if (focusOnRender && hoursInputRef.current) hoursInputRef.current.select();
-		mountRef.current = true;
-	}, [focusOnRender]);
+  const onHoursBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 1) changeHours(`0${e.target.value}`);
+    setIsInputFocused(false);
+  };
+  const onMinutesBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 1) changeHours(`0${e.target.value}`);
+    setIsInputFocused(false);
+  };
 
-	const changeMinutes = (time: string) => {
-		setMinutes(time);
-		setDate(
-			moment(
-				`${date.format("YYYY-MM-DD")} ${hours}:${time}`,
-				"YYYY-MM-DD HH:mm",
-			),
-		);
-		onChange(
-			moment(
-				`${date.format("YYYY-MM-DD")} ${hours}:${time}`,
-				"YYYY-MM-DD HH:mm",
-			),
-		);
-	};
+  const focusInput = () => setIsInputFocused(true);
 
-	const handleChangeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const h = e.target.value;
+  useEffect(() => {
+    if (focusOnRender && hoursInputRef.current) hoursInputRef.current.select();
+    mountRef.current = true;
+  }, [focusOnRender]);
 
-		if (h.length > 2) {
-			focusMinutesInput();
-			return;
-		}
+  const changeMinutes = (time: string) => {
+    setMinutes(time);
+    setDate(
+      moment(
+        `${date.format("YYYY-MM-DD")} ${hours}:${time}`,
+        "YYYY-MM-DD HH:mm",
+      ),
+    );
 
-		if (h === "") {
-			changeHours("00");
-			return;
-		}
-		if (!/^\d+$/.test(h)) return;
+    const dateFormat = isTwelveHourFormat
+      ? "YYYY-MM-DD HH:mm A"
+      : "YYYY-MM-DD HH:mm";
 
-		if (+h > 23) {
-			focusMinutesInput();
-			if (h.length === 2) changeHours(`0${h[0]}`);
-			return;
-		}
+    onChange(
+      moment(
+        `${date.format("YYYY-MM-DD")} ${hours}:${time} ${meridiem}`,
+        dateFormat,
+      ),
+    );
+  };
 
-		if (h.length === 1 && +h > 2) {
-			changeHours(`0${h}`);
-			focusMinutesInput();
-			return;
-		}
+  const handleChangeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const h = e.target.value;
 
-		if (h.length === 2) focusMinutesInput();
+    if (h.length > 2) {
+      focusMinutesInput();
+      return;
+    }
 
-		changeHours(h);
-	};
+    if (h === "") {
+      changeHours("00");
+      return;
+    }
+    if (!/^\d+$/.test(h)) return;
 
-	const handleChangeMinutes = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const m = e.target.value;
+    const maxHours = isTwelveHourFormat ? 12 : 23;
 
-		if (m.length > 2) {
-			blurMinutesInput();
-			return;
-		}
+    if (+h > maxHours) {
+      focusMinutesInput();
+      if (h.length === 2) changeHours(`0${h[0]}`);
+      return;
+    }
 
-		if (m === "") {
-			changeMinutes("00");
-			return;
-		}
-		if (!/^\d+$/.test(m)) return;
+    const maxHoursDigit = isTwelveHourFormat ? 1 : 2;
 
-		if (+m > 59) {
-			onBlur?.();
-			return;
-		}
+    if (h.length === 1 && +h > maxHoursDigit) {
+      changeHours(`0${h}`);
+      focusMinutesInput();
+      return;
+    }
 
-		if (m.length === 1 && +m > 5) {
-			changeMinutes(`0${m}`);
-			blurMinutesInput();
-			return;
-		}
-		if (m.length === 2) {
-			blurMinutesInput();
-		}
+    if (h.length === 2) focusMinutesInput();
 
-		changeMinutes(m);
-	};
+    changeHours(h);
+  };
 
-	const preventDefaultContext = (e: React.MouseEvent<HTMLInputElement>) =>
-		e.preventDefault();
+  const handleChangeMinutes = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const m = e.target.value;
 
-	return (
-		<div
-			onClick={focusHoursInput}
-			className={classNames(styles.timeInput, className, {
-				[styles.hasError]: hasError,
-				[styles.isFocused]: isInputFocused,
-			})}
-			ref={forwardedRef}
-			data-testid={testId ?? "time-picker"}
-			role="group"
-			aria-label="Time picker"
-		>
-			<TextInput
-				className={`${classNameInput}-hours-input`}
-				withBorder={false}
-				forwardedRef={hoursInputRef}
-				value={hours}
-				onChange={handleChangeHours}
-				onBlur={onHoursBlur}
-				tabIndex={tabIndex}
-				onFocus={focusInput}
-				type={InputType.search}
-				onContextMenu={preventDefaultContext}
-				autoComplete="off"
-				inputMode="numeric"
-				size={InputSize.base}
-				data-test-id="hours-input"
-				aria-label="Hours"
-			/>
-			:
-			<TextInput
-				className={`${classNameInput}-minutes-input`}
-				withBorder={false}
-				forwardedRef={minutesInputRef}
-				value={minutes}
-				onChange={handleChangeMinutes}
-				onClick={focusMinutesInput}
-				onBlur={onMinutesBlur}
-				onFocus={focusInput}
-				type={InputType.search}
-				onContextMenu={preventDefaultContext}
-				autoComplete="off"
-				inputMode="numeric"
-				size={InputSize.base}
-				data-test-id="minutes-input"
-				aria-label="Minutes"
-			/>
-		</div>
-	);
+    if (m.length > 2) {
+      blurMinutesInput();
+      return;
+    }
+
+    if (m === "") {
+      changeMinutes("00");
+      return;
+    }
+    if (!/^\d+$/.test(m)) return;
+
+    if (+m > 59) {
+      onBlur?.();
+      return;
+    }
+
+    if (m.length === 1 && +m > 5) {
+      changeMinutes(`0${m}`);
+      blurMinutesInput();
+      return;
+    }
+    if (m.length === 2) {
+      blurMinutesInput();
+    }
+
+    changeMinutes(m);
+  };
+
+  const preventDefaultContext = (e: React.MouseEvent<HTMLInputElement>) =>
+    e.preventDefault();
+
+  return (
+    <div
+      onClick={focusHoursInput}
+      className={classNames(styles.timeInput, className, {
+        [styles.hasError]: hasError,
+        [styles.isFocused]: isInputFocused,
+      })}
+      ref={forwardedRef}
+      data-testid={testId ?? "time-picker"}
+      role="group"
+      aria-label="Time picker"
+    >
+      <TextInput
+        className={`${classNameInput}-hours-input`}
+        withBorder={false}
+        forwardedRef={hoursInputRef}
+        value={hours}
+        onChange={handleChangeHours}
+        onBlur={onHoursBlur}
+        tabIndex={tabIndex}
+        onFocus={focusInput}
+        type={InputType.search}
+        onContextMenu={preventDefaultContext}
+        autoComplete="off"
+        inputMode="numeric"
+        size={InputSize.base}
+        data-test-id="hours-input"
+        aria-label="Hours"
+      />
+      :
+      <TextInput
+        className={`${classNameInput}-minutes-input`}
+        withBorder={false}
+        forwardedRef={minutesInputRef}
+        value={minutes}
+        onChange={handleChangeMinutes}
+        onClick={focusMinutesInput}
+        onBlur={onMinutesBlur}
+        onFocus={focusInput}
+        type={InputType.search}
+        onContextMenu={preventDefaultContext}
+        autoComplete="off"
+        inputMode="numeric"
+        size={InputSize.base}
+        data-test-id="minutes-input"
+        aria-label="Minutes"
+      />
+    </div>
+  );
 };
 
 export { TimePicker };

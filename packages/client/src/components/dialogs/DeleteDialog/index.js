@@ -27,7 +27,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -35,383 +34,374 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { getDialogContent } from "./DeleteDialog.helper";
-
-const StyledModalWrapper = styled(ModalDialog)`
-  strong {
-    display: inline-block;
-    max-width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: top;
-  }
-`;
+import styles from "./DeleteDialog.module.scss";
 
 const DeleteDialogComponent = (props) => {
-	const {
-		t,
-		deleteAction,
-		setBufferSelection,
-		setSelected,
-		setRemoveMediaItem,
-		setDeleteDialogVisible,
-		visible,
-		tReady,
-		isLoading,
-		unsubscribe,
-		isPrivacyFolder,
-		isRecycleBinFolder,
-		isRoomDelete,
-		isAIAgentChatDelete,
+  const {
+    t,
+    deleteAction,
+    setBufferSelection,
+    setSelected,
+    setRemoveMediaItem,
+    setDeleteDialogVisible,
+    visible,
+    tReady,
+    isLoading,
+    unsubscribe,
+    isPrivacyFolder,
+    isRecycleBinFolder,
+    isRoomDelete,
+    isAIAgentChatDelete,
 
-		setIsRoomDelete,
-		setIsAIAgentChatDelete,
-		deleteRoomsAction,
-		isPersonalRoom,
-		isSharedWithMeFolderRoot,
-		isRoom,
-		isTemplatesFolder,
-		selection: selectionProps,
-		onRemoveSharedFilesOrFolder,
-		setUnsubscribe,
-		isAIAgentsFolderRoot,
-	} = props;
+    setIsRoomDelete,
+    setIsAIAgentChatDelete,
+    deleteRoomsAction,
+    isPersonalRoom,
+    isSharedWithMeFolderRoot,
+    isRoom,
+    isTemplatesFolder,
+    selection: selectionProps,
+    onRemoveSharedFilesOrFolder,
+    setUnsubscribe,
+    isAIAgentsFolderRoot,
+  } = props;
 
-	const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
-	const selection = useMemo(
-		() =>
-			unsubscribe
-				? selectionProps
-				: selectionProps.filter((item) => !item?.isEditing),
-		[selectionProps, unsubscribe],
-	);
+  const selection = useMemo(
+    () =>
+      unsubscribe
+        ? selectionProps
+        : selectionProps.filter((item) => !item?.isEditing),
+    [selectionProps, unsubscribe],
+  );
 
-	const isTemplate = selection[0]?.isTemplate;
-	const isAIAgent = selection[0]?.isAIAgent;
+  const isTemplate = selection[0]?.isTemplate;
+  const isAIAgent = selection[0]?.isAIAgent;
 
-	const onClose = () => {
-		if (
-			selection.length === 1 &&
-			selection[0]?.isArchive &&
-			selection[0]?.isRootFolder === false
-		) {
-			setSelected("none");
-		}
-		setBufferSelection(null);
-		setRemoveMediaItem(null);
-		setIsRoomDelete(false);
-		setIsAIAgentChatDelete({
-			visible: false,
-			itemName: "",
-			onDeleteAction: null,
-		});
-		setDeleteDialogVisible(false);
-		setUnsubscribe(false);
-	};
+  const onClose = () => {
+    if (
+      selection.length === 1 &&
+      selection[0]?.isArchive &&
+      selection[0]?.isRootFolder === false
+    ) {
+      setSelected("none");
+    }
+    setBufferSelection(null);
+    setRemoveMediaItem(null);
+    setIsRoomDelete(false);
+    setIsAIAgentChatDelete({
+      visible: false,
+      itemName: "",
+      onDeleteAction: null,
+    });
+    setDeleteDialogVisible(false);
+    setUnsubscribe(false);
+  };
 
-	const onDelete = () => {
-		setSelected("none");
-		onClose();
+  const onDelete = () => {
+    setSelected("none");
+    onClose();
 
-		const translations = {
-			deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
-				sectionName: t("Common:TrashSection"),
-			}),
-		};
+    const translations = {
+      deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+        sectionName: t("Common:TrashSection"),
+      }),
+    };
 
-		if (!selection.length) return;
+    if (!selection.length) return;
 
-		deleteAction(translations, selection);
-	};
+    deleteAction(translations, selection);
+  };
 
-	const onUnsubscribe = () => {
-		setSelected("none");
-		onClose();
+  const onUnsubscribe = () => {
+    setSelected("none");
+    onClose();
 
-		if (!selection.length) return;
+    if (!selection.length) return;
 
-		onRemoveSharedFilesOrFolder(selection);
-	};
+    onRemoveSharedFilesOrFolder(selection);
+  };
 
-	const onDeleteRoom = async () => {
-		const translations = {
-			successRemoveRoom: isAIAgent
-				? t("Files:AgentRemoved")
-				: t("Files:RoomRemoved"),
-			successRemoveRooms: isAIAgent
-				? t("Files:AgentsRemoved")
-				: t("Files:RoomsRemoved"),
-		};
+  const onDeleteRoom = async () => {
+    const translations = {
+      successRemoveRoom: isAIAgent
+        ? t("Files:AgentRemoved")
+        : t("Files:RoomRemoved"),
+      successRemoveRooms: isAIAgent
+        ? t("Files:AgentsRemoved")
+        : t("Files:RoomsRemoved"),
+    };
 
-		if (isTemplate) {
-			translations.successRemoveTemplate = t("Files:TemplateRemoved");
-		}
+    if (isTemplate) {
+      translations.successRemoveTemplate = t("Files:TemplateRemoved");
+    }
 
-		setSelected("none");
-		onClose();
+    setSelected("none");
+    onClose();
 
-		const itemsIdDeleteHaveRights = selection
-			.filter((select) => select.security.Delete === true)
-			.map((select) => select.id);
+    const itemsIdDeleteHaveRights = selection
+      .filter((select) => select.security.Delete === true)
+      .map((select) => select.id);
 
-		await deleteRoomsAction(itemsIdDeleteHaveRights, translations);
-	};
+    await deleteRoomsAction(itemsIdDeleteHaveRights, translations);
+  };
 
-	const onDeleteAIAgentChat = () => {
-		isAIAgentChatDelete.onDeleteAction();
-		onClose();
-	};
+  const onDeleteAIAgentChat = () => {
+    isAIAgentChatDelete.onDeleteAction();
+    onClose();
+  };
 
-	const onDeleteAction = useCallback(() => {
-		if (isAIAgentChatDelete.visible) {
-			onDeleteAIAgentChat();
-			return;
-		}
+  const onDeleteAction = useCallback(() => {
+    if (isAIAgentChatDelete.visible) {
+      onDeleteAIAgentChat();
+      return;
+    }
 
-		if (isRoomDelete || isTemplate || isAIAgent) {
-			if (!isChecked) return;
-			onDeleteRoom();
-			return;
-		}
+    if (isRoomDelete || isTemplate || isAIAgent) {
+      if (!isChecked) return;
+      onDeleteRoom();
+      return;
+    }
 
-		if (unsubscribe) {
-			onUnsubscribe();
-			return;
-		}
+    if (unsubscribe) {
+      onUnsubscribe();
+      return;
+    }
 
-		onDelete();
-	}, [
-		isRoomDelete,
-		isAIAgent,
-		isTemplate,
-		isChecked,
-		onDeleteRoom,
-		unsubscribe,
-		onUnsubscribe,
-		onDelete,
-	]);
+    onDelete();
+  }, [
+    isRoomDelete,
+    isAIAgent,
+    isTemplate,
+    isChecked,
+    onDeleteRoom,
+    unsubscribe,
+    onUnsubscribe,
+    onDelete,
+  ]);
 
-	const onKeyUp = useCallback(
-		(e) => {
-			if (e.keyCode === 27) onClose();
-			if (e.keyCode === 13 || e.which === 13) onDeleteAction();
-		},
-		[onClose, onDeleteAction],
-	);
+  const onKeyUp = useCallback(
+    (e) => {
+      if (e.keyCode === 27) onClose();
+      if (e.keyCode === 13 || e.which === 13) onDeleteAction();
+    },
+    [onClose, onDeleteAction],
+  );
 
-	useEffect(() => {
-		document.addEventListener("keyup", onKeyUp, false);
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
 
-		return () => {
-			document.removeEventListener("keyup", onKeyUp, false);
-		};
-	}, [onKeyUp]);
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, [onKeyUp]);
 
-	const getAccessButtonLabel = () => {
-		if (isTemplate) {
-			return t("Common:Delete");
-		}
+  const getAccessButtonLabel = () => {
+    if (isTemplate) {
+      return t("Common:Delete");
+    }
 
-		if (isRoomDelete || isAIAgent) {
-			return t("Common:DeletePermanently");
-		}
+    if (isRoomDelete || isAIAgent) {
+      return t("Common:DeletePermanently");
+    }
 
-		if (isRecycleBinFolder || isAIAgentChatDelete.visible)
-			return t("EmptyTrashDialog:DeleteForeverButton");
+    if (isRecycleBinFolder || isAIAgentChatDelete.visible)
+      return t("EmptyTrashDialog:DeleteForeverButton");
 
-		if (isPrivacyFolder || selection[0]?.providerKey)
-			return t("Common:OKButton");
+    if (isPrivacyFolder || selection[0]?.providerKey)
+      return t("Common:OKButton");
 
-		if (unsubscribe) return t("Common:Remove");
+    if (unsubscribe) return t("Common:Remove");
 
-		return t("Common:MoveTo");
-	};
+    return t("Common:MoveTo");
+  };
 
-	const getDialogTitle = () => {
-		if (isAIAgentChatDelete.visible) {
-			return t("DeleteDialog:DeleteAIAgentChatTitle");
-		}
+  const getDialogTitle = () => {
+    if (isAIAgentChatDelete.visible) {
+      return t("DeleteDialog:DeleteAIAgentChatTitle");
+    }
 
-		if (isAIAgent) {
-			return t("DeleteDialog:DeleteAIAgentTitle");
-		}
+    if (isAIAgent) {
+      return t("DeleteDialog:DeleteAIAgentTitle");
+    }
 
-		if (isTemplate) {
-			return `${t("Files:DeleteTemplate")}?`;
-		}
+    if (isTemplate) {
+      return `${t("Files:DeleteTemplate")}?`;
+    }
 
-		if (isRoomDelete) {
-			return t("DeleteRoomTitle");
-		}
+    if (isRoomDelete) {
+      return t("DeleteRoomTitle");
+    }
 
-		if (isRecycleBinFolder) return t("EmptyTrashDialog:DeleteForeverTitle");
+    if (isRecycleBinFolder) return t("EmptyTrashDialog:DeleteForeverTitle");
 
-		if (isPrivacyFolder || selection[0]?.providerKey)
-			return t("Common:Confirmation");
+    if (isPrivacyFolder || selection[0]?.providerKey)
+      return t("Common:Confirmation");
 
-		if (unsubscribe) return t("Common:RemoveFromList");
+    if (unsubscribe) return t("Common:RemoveFromList");
 
-		return t("Common:SectionMoveConfirmation", {
-			sectionName: t("Common:TrashSection"),
-		});
-	};
+    return t("Common:SectionMoveConfirmation", {
+      sectionName: t("Common:TrashSection"),
+    });
+  };
 
-	const noteText = getDialogContent(
-		t,
-		selection,
-		isTemplate,
-		isRoomDelete,
-		isRecycleBinFolder,
-		isPersonalRoom,
-		isRoom,
-		isTemplatesFolder,
-		isSharedWithMeFolderRoot,
-		isAIAgent,
-		isAIAgentsFolderRoot,
-		unsubscribe,
-		isAIAgentChatDelete,
-	);
+  const noteText = getDialogContent(
+    t,
+    selection,
+    isTemplate,
+    isRoomDelete,
+    isRecycleBinFolder,
+    isPersonalRoom,
+    isRoom,
+    isTemplatesFolder,
+    isSharedWithMeFolderRoot,
+    isAIAgent,
+    isAIAgentsFolderRoot,
+    unsubscribe,
+    isAIAgentChatDelete,
+  );
 
-	const title = getDialogTitle();
-	const accessButtonLabel = getAccessButtonLabel();
+  const title = getDialogTitle();
+  const accessButtonLabel = getAccessButtonLabel();
 
-	const isDisabledAccessButton =
-		isRoomDelete || isTemplate || isAIAgent ? !isChecked : !selection.length;
+  const isDisabledAccessButton =
+    isRoomDelete || isTemplate || isAIAgent ? !isChecked : !selection.length;
 
-	return (
-		<StyledModalWrapper
-			isLoading={!tReady}
-			visible={visible}
-			onClose={onClose}
-			dataTestId="delete-dialog"
-		>
-			<ModalDialog.Header>{title}</ModalDialog.Header>
-			<ModalDialog.Body>
-				<Text>{noteText}</Text>
-				{isRoomDelete || isTemplate || isAIAgent ? (
-					<Checkbox
-						style={{ marginTop: "16px" }}
-						label={
-							isAIAgent
-								? t("DeleteAIAgentWarning")
-								: isTemplate
-									? t("DeleteTemplateWarning")
-									: t("DeleteRoomWarning")
-						}
-						isChecked={isChecked}
-						onChange={() => setIsChecked(!isChecked)}
-					/>
-				) : null}
-			</ModalDialog.Body>
-			<ModalDialog.Footer>
-				<Button
-					id="delete-file-modal_submit"
-					key="OKButton"
-					label={accessButtonLabel}
-					size="normal"
-					primary
-					scale
-					onClick={onDeleteAction}
-					isLoading={isLoading}
-					isDisabled={isDisabledAccessButton}
-					testId="delete_dialog_modal_submit"
-				/>
-				<Button
-					id="delete-file-modal_cancel"
-					key="CancelButton"
-					label={t("Common:CancelButton")}
-					size="normal"
-					scale
-					onClick={onClose}
-					isLoading={isLoading}
-					testId="delete_dialog_modal_cancel"
-				/>
-			</ModalDialog.Footer>
-		</StyledModalWrapper>
-	);
+  return (
+    <ModalDialog
+      className={styles.modalWrapper}
+      isLoading={!tReady}
+      visible={visible}
+      onClose={onClose}
+      dataTestId="delete-dialog"
+    >
+      <ModalDialog.Header>{title}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <Text>{noteText}</Text>
+        {isRoomDelete || isTemplate || isAIAgent ? (
+          <Checkbox
+            style={{ marginTop: "16px" }}
+            label={
+              isAIAgent
+                ? t("DeleteAIAgentWarning")
+                : isTemplate
+                  ? t("DeleteTemplateWarning")
+                  : t("DeleteRoomWarning")
+            }
+            isChecked={isChecked}
+            onChange={() => setIsChecked(!isChecked)}
+          />
+        ) : null}
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          id="delete-file-modal_submit"
+          key="OKButton"
+          label={accessButtonLabel}
+          size="normal"
+          primary
+          scale
+          onClick={onDeleteAction}
+          isLoading={isLoading}
+          isDisabled={isDisabledAccessButton}
+          testId="delete_dialog_modal_submit"
+        />
+        <Button
+          id="delete-file-modal_cancel"
+          key="CancelButton"
+          label={t("Common:CancelButton")}
+          size="normal"
+          scale
+          onClick={onClose}
+          isLoading={isLoading}
+          testId="delete_dialog_modal_cancel"
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
 };
 
 const DeleteDialog = withTranslation([
-	"DeleteDialog",
-	"Common",
-	"Translations",
-	"Files",
-	"EmptyTrashDialog",
+  "DeleteDialog",
+  "Common",
+  "Translations",
+  "Files",
+  "EmptyTrashDialog",
 ])(DeleteDialogComponent);
 
 export default inject(
-	({
-		filesStore,
-		dialogsStore,
-		filesActionsStore,
-		treeFoldersStore,
-		contextOptionsStore,
-	}) => {
-		const {
-			selection,
-			isLoading,
-			bufferSelection,
-			setBufferSelection,
-			setSelected,
-		} = filesStore;
-		const { deleteAction, deleteRoomsAction } = filesActionsStore;
-		const {
-			isPrivacyFolder,
-			isRecycleBinFolder,
-			isPersonalRoom,
-			isRoom,
-			isTemplatesFolderRoot,
-			isSharedWithMeFolderRoot,
-			isAIAgentsFolderRoot,
-		} = treeFoldersStore;
+  ({
+    filesStore,
+    dialogsStore,
+    filesActionsStore,
+    treeFoldersStore,
+    contextOptionsStore,
+  }) => {
+    const {
+      selection,
+      isLoading,
+      bufferSelection,
+      setBufferSelection,
+      setSelected,
+    } = filesStore;
+    const { deleteAction, deleteRoomsAction } = filesActionsStore;
+    const {
+      isPrivacyFolder,
+      isRecycleBinFolder,
+      isPersonalRoom,
+      isRoom,
+      isTemplatesFolderRoot,
+      isSharedWithMeFolderRoot,
+      isAIAgentsFolderRoot,
+    } = treeFoldersStore;
 
-		const {
-			deleteDialogVisible: visible,
-			setDeleteDialogVisible,
-			removeMediaItem,
-			setRemoveMediaItem,
-			unsubscribe,
-			isRoomDelete,
-			setIsRoomDelete,
-			setUnsubscribe,
-			isAIAgentChatDelete,
-			setIsAIAgentChatDelete,
-		} = dialogsStore;
+    const {
+      deleteDialogVisible: visible,
+      setDeleteDialogVisible,
+      removeMediaItem,
+      setRemoveMediaItem,
+      unsubscribe,
+      isRoomDelete,
+      setIsRoomDelete,
+      setUnsubscribe,
+      isAIAgentChatDelete,
+      setIsAIAgentChatDelete,
+    } = dialogsStore;
 
-		const { onRemoveSharedFilesOrFolder } = contextOptionsStore;
+    const { onRemoveSharedFilesOrFolder } = contextOptionsStore;
 
-		return {
-			selection: removeMediaItem
-				? [removeMediaItem]
-				: selection.length
-					? selection
-					: [bufferSelection],
-			isLoading,
-			visible,
-			isPrivacyFolder,
-			isRecycleBinFolder,
-			isSharedWithMeFolderRoot,
+    return {
+      selection: removeMediaItem
+        ? [removeMediaItem]
+        : selection.length
+          ? selection
+          : [bufferSelection],
+      isLoading,
+      visible,
+      isPrivacyFolder,
+      isRecycleBinFolder,
+      isSharedWithMeFolderRoot,
 
-			setDeleteDialogVisible,
-			deleteAction,
-			unsubscribe,
+      setDeleteDialogVisible,
+      deleteAction,
+      unsubscribe,
 
-			setRemoveMediaItem,
-			setBufferSelection,
-			setSelected,
+      setRemoveMediaItem,
+      setBufferSelection,
+      setSelected,
 
-			isRoomDelete,
-			setIsRoomDelete,
-			deleteRoomsAction,
-			isPersonalRoom,
-			isRoom,
-			isTemplatesFolder: isTemplatesFolderRoot,
-			onRemoveSharedFilesOrFolder,
-			setUnsubscribe,
-			isAIAgentsFolderRoot,
-			isAIAgentChatDelete,
-			setIsAIAgentChatDelete,
-		};
-	},
+      isRoomDelete,
+      setIsRoomDelete,
+      deleteRoomsAction,
+      isPersonalRoom,
+      isRoom,
+      isTemplatesFolder: isTemplatesFolderRoot,
+      onRemoveSharedFilesOrFolder,
+      setUnsubscribe,
+      isAIAgentsFolderRoot,
+      isAIAgentChatDelete,
+      setIsAIAgentChatDelete,
+    };
+  },
 )(observer(DeleteDialog));

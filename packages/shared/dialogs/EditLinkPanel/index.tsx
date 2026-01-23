@@ -408,7 +408,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     }
 
     if (isExpired) {
-      return t("Common:LinkHasExpiredAndHasBeenDisabled");
+      return t("Common:LinkLifetimeExpired");
     }
 
     return expirationDate

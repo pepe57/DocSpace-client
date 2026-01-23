@@ -28,22 +28,23 @@ import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import className from "classnames";
+import moment from "moment";
 
 import {
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
+	FolderType,
+	RoomsType,
+	ShareAccessRights,
 } from "@docspace/shared/enums";
-import { isDesktop } from "@docspace/shared/utils";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { getCookie, isDesktop } from "@docspace/shared/utils";
+import { Text } from "@docspace/shared/components/text";
+import { Link, LinkType } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
+import { GENERAL_LINK_HEADER_KEY, LANGUAGE } from "@docspace/shared/constants";
 import { createExternalLink } from "@docspace/shared/api/rooms";
 import MembersList from "@docspace/shared/components/share/sub-components/List";
 
@@ -60,429 +61,431 @@ import { MembersProps } from "./Members.types";
 import styles from "./Members.module.scss";
 
 const TooltipContent = ({ content }: { content: React.ReactNode }) => (
-  <Text fontSize="12px">{content}</Text>
+	<Text fontSize="12px">{content}</Text>
 );
 
 const Members = ({
-  members,
-  total,
-  searchValue,
-  isFirstLoading,
+	members,
+	total,
+	searchValue,
+	isFirstLoading,
 
-  fetchMoreMembers,
-  changeUserRole,
-  scrollToTop,
+	fetchMoreMembers,
+	changeUserRole,
+	scrollToTop,
 
-  infoPanelSelection,
-  selfId,
-  isPublicRoomType,
-  isFormRoom,
-  isArchiveFolder,
-  isPublicRoom,
-  isCustomRoom,
+	infoPanelSelection,
+	selfId,
+	isPublicRoomType,
+	isFormRoom,
+	isArchiveFolder,
+	isPublicRoom,
+	isCustomRoom,
 
-  primaryLink,
+	primaryLink,
 
-  additionalLinks,
-  getPrimaryLink,
-  setExternalLink,
+	additionalLinks,
+	getPrimaryLink,
+	setExternalLink,
 
-  isMembersPanelUpdating,
-  setAccessSettingsIsVisible,
-  templateAvailable,
+	isMembersPanelUpdating,
+	setAccessSettingsIsVisible,
+	templateAvailable,
 }: MembersProps) => {
-  const { t } = useTranslation([
-    "InfoPanel",
-    "Common",
-    "Translations",
-    "People",
-    "PeopleTranslations",
-    "Settings",
-    "CreateEditRoomDialog",
-  ]);
+	moment.locale(getCookie(LANGUAGE));
 
-  const { showLoading } = useLoader({
-    isFirstLoading,
-  });
+	const { t } = useTranslation([
+		"InfoPanel",
+		"Common",
+		"Translations",
+		"People",
+		"PeopleTranslations",
+		"Settings",
+		"CreateEditRoomDialog",
+	]);
 
-  useEffect(() => {
-    if (isMembersPanelUpdating) return;
-    scrollToTop();
-  }, [isMembersPanelUpdating, scrollToTop]);
+	const { showLoading } = useLoader({
+		isFirstLoading,
+	});
 
-  const onAddNewLink = async () => {
-    if (isPublicRoom || primaryLink) {
-      const roomId = infoPanelSelection!.id;
+	useEffect(() => {
+		if (isMembersPanelUpdating) return;
+		scrollToTop();
+	}, [isMembersPanelUpdating, scrollToTop]);
 
-      try {
-        const link = await createExternalLink(roomId);
+	const onAddNewLink = async () => {
+		if (isPublicRoom || primaryLink) {
+			const roomId = infoPanelSelection!.id;
 
-        setExternalLink!(link);
-      } catch (error) {
-        toastr.error(error as Error);
-        console.error(error);
-      }
-    } else {
-      getPrimaryLink!(infoPanelSelection!.id).then((link) => {
-        setExternalLink!(link);
+			try {
+				const link = await createExternalLink(roomId);
 
-        const typeLink = link as {
-          sharedTo: { shareLink: string; requestToken: string };
-        };
+				setExternalLink!(link);
+			} catch (error) {
+				toastr.error(error as Error);
+				console.error(error);
+			}
+		} else {
+			getPrimaryLink!(infoPanelSelection!.id).then((link) => {
+				setExternalLink!(link);
 
-        const shareLink = typeLink.sharedTo.shareLink;
+				const typeLink = link as {
+					sharedTo: { shareLink: string; requestToken: string };
+				};
 
-        copyShareLink(shareLink);
+				const shareLink = typeLink.sharedTo.shareLink;
 
-        toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
-      });
-    }
-  };
+				copyShareLink(shareLink);
 
-  const onOpenAccessSettings = () => {
-    setAccessSettingsIsVisible!(true);
-  };
+				toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+			});
+		}
+	};
 
-  const isTemplate =
-    infoPanelSelection?.rootFolderType === FolderType.RoomTemplates;
+	const onOpenAccessSettings = () => {
+		setAccessSettingsIsVisible!(true);
+	};
 
-  const getPublicRoomItems = () => {
-    const publicRoomItems = [];
+	const isTemplate =
+		infoPanelSelection?.rootFolderType === FolderType.RoomTemplates;
 
-    const countCanCreateLink = Math.max(
-      0,
-      (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) +
-        (infoPanelSelection?.shareSettings?.PrimaryExternalLink ?? 0) -
-        1,
-    );
+	const getPublicRoomItems = () => {
+		const publicRoomItems = [];
 
-    const canAddLink =
-      (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
+		const countCanCreateLink = Math.max(
+			0,
+			(infoPanelSelection?.shareSettings?.ExternalLink ?? 0) +
+				(infoPanelSelection?.shareSettings?.PrimaryExternalLink ?? 0) -
+				1,
+		);
 
-    if (
-      isPublicRoomType &&
-      infoPanelSelection?.security.EditAccess &&
-      !searchValue &&
-      !isTemplate
-    ) {
-      if (!isArchiveFolder || primaryLink) {
-        publicRoomItems.push(
-          <div
-            className={styles.linksBlock}
-            key={GENERAL_LINK_HEADER_KEY}
-            data-testid="info_panel_members_links_block"
-          >
-            <Text fontSize="14px" fontWeight={600} lineHeight="16px">
-              {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
-            </Text>
+		const canAddLink =
+			(infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
 
-            {!isArchiveFolder && canAddLink ? (
-              <div
-                data-tooltip-id="emailTooltip"
-                data-tooltip-content={t(
-                  "Common:MaximumNumberOfExternalLinksCreated",
-                )}
-              >
-                <IconButton
-                  className="link-to-viewing-icon"
-                  iconName={LinksToViewingIconUrl}
-                  onClick={onAddNewLink}
-                  size={16}
-                  isDisabled={
-                    additionalLinks
-                      ? additionalLinks.length >= countCanCreateLink
-                      : false
-                  }
-                  title={t("Files:AddNewLink")}
-                  dataTestId="info_panel_members_add_new_link_button"
-                />
+		if (
+			isPublicRoomType &&
+			infoPanelSelection?.security.EditAccess &&
+			!searchValue &&
+			!isTemplate
+		) {
+			if (!isArchiveFolder || primaryLink) {
+				publicRoomItems.push(
+					<div
+						className={styles.linksBlock}
+						key={GENERAL_LINK_HEADER_KEY}
+						data-testid="info_panel_members_links_block"
+					>
+						<Text fontSize="14px" fontWeight={600} lineHeight="16px">
+							{isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
+						</Text>
 
-                {additionalLinks &&
-                additionalLinks.length >= countCanCreateLink ? (
-                  <Tooltip
-                    float={isDesktop()}
-                    id="emailTooltip"
-                    getContent={TooltipContent}
-                    place="bottom"
-                  />
-                ) : null}
-              </div>
-            ) : null}
-          </div>,
-        );
-      }
+						{!isArchiveFolder && canAddLink ? (
+							<div
+								data-tooltip-id="emailTooltip"
+								data-tooltip-content={t(
+									"Common:MaximumNumberOfExternalLinksCreated",
+								)}
+							>
+								<IconButton
+									className="link-to-viewing-icon"
+									iconName={LinksToViewingIconUrl}
+									onClick={onAddNewLink}
+									size={16}
+									isDisabled={
+										additionalLinks
+											? additionalLinks.length >= countCanCreateLink
+											: false
+									}
+									title={t("Files:AddNewLink")}
+									dataTestId="info_panel_members_add_new_link_button"
+								/>
 
-      if (primaryLink && !searchValue) {
-        publicRoomItems.push(
-          <LinkRow
-            key="general-link"
-            link={primaryLink}
-            isShareLink
-            roomId={infoPanelSelection!.id}
-            isPublicRoomType={isPublicRoom!}
-            isFormRoom={isFormRoom!}
-            isCustomRoom={isCustomRoom!}
-            item={infoPanelSelection}
-          />,
-        );
-      }
+								{additionalLinks &&
+								additionalLinks.length >= countCanCreateLink ? (
+									<Tooltip
+										float={isDesktop()}
+										id="emailTooltip"
+										getContent={TooltipContent}
+										place="bottom"
+									/>
+								) : null}
+							</div>
+						) : null}
+					</div>,
+				);
+			}
 
-      if (additionalLinks && additionalLinks.length && !searchValue) {
-        additionalLinks.forEach((link) => {
-          publicRoomItems.push(
-            <LinkRow
-              link={link}
-              key={link?.sharedTo?.id}
-              isShareLink
-              roomId={infoPanelSelection!.id}
-              isPublicRoomType={isPublicRoom!}
-              isFormRoom={isFormRoom!}
-              isCustomRoom={isCustomRoom!}
-              item={infoPanelSelection}
-            />,
-          );
-        });
-      } else if (!isArchiveFolder && !primaryLink && !searchValue) {
-        publicRoomItems.push(
-          <div
-            key="create-additional-link"
-            className={className("additional-link", styles.linkRow)}
-            onClick={onAddNewLink}
-            data-share
-            data-testid="info_panel_members_create_additional_link"
-          >
-            <div className="create-link-icon">
-              <IconButton size={12} iconName={PlusIcon} isDisabled />
-            </div>
+			if (primaryLink && !searchValue) {
+				publicRoomItems.push(
+					<LinkRow
+						key="general-link"
+						link={primaryLink}
+						isShareLink
+						roomId={infoPanelSelection!.id}
+						isPublicRoomType={isPublicRoom!}
+						isFormRoom={isFormRoom!}
+						isCustomRoom={isCustomRoom!}
+						item={infoPanelSelection}
+					/>,
+				);
+			}
 
-            <Link
-              noHover
-              type={LinkType.action}
-              fontSize="14px"
-              fontWeight={600}
-              className="external-row-link"
-              dataTestId="info_panel_members_create_new_link_text"
-            >
-              {t("Files:CreateNewLink")}
-            </Link>
-          </div>,
-        );
-      }
-    }
+			if (additionalLinks && additionalLinks.length && !searchValue) {
+				additionalLinks.forEach((link) => {
+					publicRoomItems.push(
+						<LinkRow
+							link={link}
+							key={link?.sharedTo?.id}
+							isShareLink
+							roomId={infoPanelSelection!.id}
+							isPublicRoomType={isPublicRoom!}
+							isFormRoom={isFormRoom!}
+							isCustomRoom={isCustomRoom!}
+							item={infoPanelSelection}
+						/>,
+					);
+				});
+			} else if (!isArchiveFolder && !primaryLink && !searchValue) {
+				publicRoomItems.push(
+					<div
+						key="create-additional-link"
+						className={className("additional-link", styles.linkRow)}
+						onClick={onAddNewLink}
+						data-share
+						data-testid="info_panel_members_create_additional_link"
+					>
+						<div className="create-link-icon">
+							<IconButton size={12} iconName={PlusIcon} isDisabled />
+						</div>
 
-    return publicRoomItems;
-  };
+						<Link
+							noHover
+							type={LinkType.action}
+							fontSize="14px"
+							fontWeight={600}
+							className="external-row-link"
+							dataTestId="info_panel_members_create_new_link_text"
+						>
+							{t("Files:CreateNewLink")}
+						</Link>
+					</div>,
+				);
+			}
+		}
 
-  const getContent = () => {
-    if (showLoading) return <InfoPanelViewLoader view="members" />;
+		return publicRoomItems;
+	};
 
-    if (!members || !infoPanelSelection) return null;
+	const getContent = () => {
+		if (showLoading) return <InfoPanelViewLoader view="members" />;
 
-    const [currentMember] = members.administrators.filter(
-      (member) => member.id === selfId,
-    );
+		if (!members || !infoPanelSelection) return null;
 
-    const { administrators, users, expected, groups, guests } = members;
+		const [currentMember] = members.administrators.filter(
+			(member) => member.id === selfId,
+		);
 
-    const membersList = [
-      ...administrators,
-      ...groups,
-      ...users,
-      ...guests,
-      ...expected,
-    ];
+		const { administrators, users, expected, groups, guests } = members;
 
-    const adminsTitleCount = administrators.length ? 1 : 0;
-    const usersTitleCount = users.length ? 1 : 0;
-    const expectedTitleCount = expected.length ? 1 : 0;
-    const groupsTitleCount = groups.length ? 1 : 0;
-    const guestsTitleCount = guests.length ? 1 : 0;
+		const membersList = [
+			...administrators,
+			...groups,
+			...users,
+			...guests,
+			...expected,
+		];
 
-    const headersCount = searchValue
-      ? 0
-      : adminsTitleCount +
-        usersTitleCount +
-        expectedTitleCount +
-        groupsTitleCount +
-        guestsTitleCount;
+		const adminsTitleCount = administrators.length ? 1 : 0;
+		const usersTitleCount = users.length ? 1 : 0;
+		const expectedTitleCount = expected.length ? 1 : 0;
+		const groupsTitleCount = groups.length ? 1 : 0;
+		const guestsTitleCount = guests.length ? 1 : 0;
 
-    const publicRoomItems = getPublicRoomItems();
+		const headersCount = searchValue
+			? 0
+			: adminsTitleCount +
+				usersTitleCount +
+				expectedTitleCount +
+				groupsTitleCount +
+				guestsTitleCount;
 
-    const showPublicRoomBar =
-      ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
-      infoPanelSelection?.security?.EditAccess &&
-      !searchValue &&
-      !isTemplate;
+		const publicRoomItems = getPublicRoomItems();
 
-    const publicRoomItemsLength = publicRoomItems.length;
+		const showPublicRoomBar =
+			((primaryLink && !isArchiveFolder) || isPublicRoom) &&
+			infoPanelSelection?.security?.EditAccess &&
+			!searchValue &&
+			!isTemplate;
 
-    const isTemplateOwner =
-      infoPanelSelection?.access === ShareAccessRights.None ||
-      infoPanelSelection?.access === ShareAccessRights.FullAccess;
+		const publicRoomItemsLength = publicRoomItems.length;
 
-    if (isTemplate && templateAvailable) {
-      return (
-        <PublicRoomBar
-          headerText={t("Files:TemplateAvailable")}
-          bodyText={
-            <>
-              <div className="template-access_description">
-                {t("Files:TemplateAvailableDescription", {
-                  productName: t("Common:ProductName"),
-                })}
-              </div>
-              {isTemplateOwner ? (
-                <Link
-                  className="template-access_link"
-                  isHovered
-                  type={LinkType.action}
-                  fontWeight={600}
-                  fontSize="13px"
-                  onClick={onOpenAccessSettings}
-                  dataTestId="info_panel_members_template_access_settings_link"
-                >
-                  {t("Files:AccessSettings")}
-                </Link>
-              ) : null}
-            </>
-          }
-        />
-      );
-    }
+		const isTemplateOwner =
+			infoPanelSelection?.access === ShareAccessRights.None ||
+			infoPanelSelection?.access === ShareAccessRights.FullAccess;
 
-    if (!membersList.length) {
-      return <EmptyContainer />;
-    }
+		if (isTemplate && templateAvailable) {
+			return (
+				<PublicRoomBar
+					headerText={t("Files:TemplateAvailable")}
+					bodyText={
+						<>
+							<div className="template-access_description">
+								{t("Files:TemplateAvailableDescription", {
+									productName: t("Common:ProductName"),
+								})}
+							</div>
+							{isTemplateOwner ? (
+								<Link
+									className="template-access_link"
+									isHovered
+									type={LinkType.action}
+									fontWeight={600}
+									fontSize="13px"
+									onClick={onOpenAccessSettings}
+									dataTestId="info_panel_members_template_access_settings_link"
+								>
+									{t("Files:AccessSettings")}
+								</Link>
+							) : null}
+						</>
+					}
+				/>
+			);
+		}
 
-    return (
-      <>
-        {showPublicRoomBar ? (
-          <div
-            className={styles.publicRoomBarContainer}
-            data-testid="info_panel_members_public_room_bar_container"
-          >
-            <PublicRoomBar
-              headerText={
-                isFormRoom
-                  ? t("Files:RoomAvailableViaSharedLink")
-                  : t("Files:RoomAvailableViaExternalLink")
-              }
-              bodyText={
-                isFormRoom
-                  ? t("CreateEditRoomDialog:FormRoomBarDescription")
-                  : t("CreateEditRoomDialog:PublicRoomBarDescription")
-              }
-            />
-          </div>
-        ) : null}
+		if (!membersList.length) {
+			return <EmptyContainer />;
+		}
 
-        <MembersList
-          loadNextPage={fetchMoreMembers}
-          hasNextPage={
-            !isMembersPanelUpdating
-              ? membersList.length - headersCount < total
-              : false
-          }
-          itemCount={total + headersCount + publicRoomItemsLength}
-          linksBlockLength={publicRoomItemsLength}
-          withoutTitlesAndLinks={!!searchValue}
-        >
-          {publicRoomItems}
-          {membersList.map((user, index) => {
-            return (
-              <User
-                user={user}
-                key={
-                  user.id ||
-                  ("email" in user && user.email) ||
-                  ("name" in user && user.name) ||
-                  ""
-                }
-                currentUser={currentMember}
-                hasNextPage={
-                  !isMembersPanelUpdating
-                    ? membersList.length - headersCount < total
-                    : false
-                }
-                searchValue={searchValue}
-                room={infoPanelSelection}
-                changeUserRole={changeUserRole}
-                index={index + publicRoomItemsLength}
-              />
-            );
-          })}
-        </MembersList>
-      </>
-    );
-  };
+		return (
+			<>
+				{showPublicRoomBar ? (
+					<div
+						className={styles.publicRoomBarContainer}
+						data-testid="info_panel_members_public_room_bar_container"
+					>
+						<PublicRoomBar
+							headerText={
+								isFormRoom
+									? t("Files:RoomAvailableViaSharedLink")
+									: t("Files:RoomAvailableViaExternalLink")
+							}
+							bodyText={
+								isFormRoom
+									? t("CreateEditRoomDialog:FormRoomBarDescription")
+									: t("CreateEditRoomDialog:PublicRoomBarDescription")
+							}
+						/>
+					</div>
+				) : null}
 
-  if (!infoPanelSelection) return null;
+				<MembersList
+					loadNextPage={fetchMoreMembers}
+					hasNextPage={
+						!isMembersPanelUpdating
+							? membersList.length - headersCount < total
+							: false
+					}
+					itemCount={total + headersCount + publicRoomItemsLength}
+					linksBlockLength={publicRoomItemsLength}
+					withoutTitlesAndLinks={!!searchValue}
+				>
+					{publicRoomItems}
+					{membersList.map((user, index) => {
+						return (
+							<User
+								user={user}
+								key={
+									user.id ||
+									("email" in user && user.email) ||
+									("name" in user && user.name) ||
+									""
+								}
+								currentUser={currentMember}
+								hasNextPage={
+									!isMembersPanelUpdating
+										? membersList.length - headersCount < total
+										: false
+								}
+								searchValue={searchValue}
+								room={infoPanelSelection}
+								changeUserRole={changeUserRole}
+								index={index + publicRoomItemsLength}
+							/>
+						);
+					})}
+				</MembersList>
+			</>
+		);
+	};
 
-  return getContent();
+	if (!infoPanelSelection) return null;
+
+	return getContent();
 };
 
 export default inject(
-  ({
-    userStore,
-    filesStore,
-    selectedFolderStore,
-    publicRoomStore,
-    treeFoldersStore,
-    dialogsStore,
-    infoPanelStore,
-  }: TStore) => {
-    const {
-      infoPanelRoomSelection,
+	({
+		userStore,
+		filesStore,
+		selectedFolderStore,
+		publicRoomStore,
+		treeFoldersStore,
+		dialogsStore,
+		infoPanelStore,
+	}: TStore) => {
+		const {
+			infoPanelRoomSelection,
 
-      templateAvailableToEveryone,
+			templateAvailableToEveryone,
 
-      isMembersPanelUpdating,
-      setIsMembersPanelUpdating,
-      updateInfoPanelMembers,
-    } = infoPanelStore;
+			isMembersPanelUpdating,
+			setIsMembersPanelUpdating,
+			updateInfoPanelMembers,
+		} = infoPanelStore;
 
-    const { id: selfId } = userStore.user!;
+		const { id: selfId } = userStore.user!;
 
-    const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
+		const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
 
-    const { isArchiveFolderRoot } = treeFoldersStore;
-    const { setTemplateAccessSettingsVisible: setAccessSettingsIsVisible } =
-      dialogsStore;
+		const { isArchiveFolderRoot } = treeFoldersStore;
+		const { setTemplateAccessSettingsVisible: setAccessSettingsIsVisible } =
+			dialogsStore;
 
-    const { id } = selectedFolderStore;
+		const { id } = selectedFolderStore;
 
-    const roomType = infoPanelRoomSelection?.roomType;
+		const roomType = infoPanelRoomSelection?.roomType;
 
-    const isFormRoom = roomType === RoomsType.FormRoom;
-    const isPublicRoom = roomType === RoomsType.PublicRoom;
-    const isCustomRoom = roomType === RoomsType.CustomRoom;
+		const isFormRoom = roomType === RoomsType.FormRoom;
+		const isPublicRoom = roomType === RoomsType.PublicRoom;
+		const isCustomRoom = roomType === RoomsType.CustomRoom;
 
-    const isPublicRoomType = isPublicRoom || isCustomRoom || isFormRoom;
+		const isPublicRoomType = isPublicRoom || isCustomRoom || isFormRoom;
 
-    const { isRootFolder } = selectedFolderStore;
+		const { isRootFolder } = selectedFolderStore;
 
-    return {
-      infoPanelSelection: { ...infoPanelRoomSelection, isRoom: true },
-      selfId,
-      isPublicRoomType,
-      isFormRoom,
-      isCustomRoom,
+		return {
+			infoPanelSelection: { ...infoPanelRoomSelection, isRoom: true },
+			selfId,
+			isPublicRoomType,
+			isFormRoom,
+			isCustomRoom,
 
-      updateInfoPanelMembers,
-      roomType,
-      primaryLink,
-      isArchiveFolder: isArchiveFolderRoot,
-      isPublicRoom,
-      additionalLinks,
-      getPrimaryLink: filesStore.getPrimaryLink,
-      setExternalLink,
+			updateInfoPanelMembers,
+			roomType,
+			primaryLink,
+			isArchiveFolder: isArchiveFolderRoot,
+			isPublicRoom,
+			additionalLinks,
+			getPrimaryLink: filesStore.getPrimaryLink,
+			setExternalLink,
 
-      isMembersPanelUpdating,
-      setIsMembersPanelUpdating,
-      currentId: id,
-      setAccessSettingsIsVisible,
-      templateAvailable: templateAvailableToEveryone,
-      isRootFolder,
-    };
-  },
+			isMembersPanelUpdating,
+			setIsMembersPanelUpdating,
+			currentId: id,
+			setAccessSettingsIsVisible,
+			templateAvailable: templateAvailableToEveryone,
+			isRootFolder,
+		};
+	},
 )(observer(Members));

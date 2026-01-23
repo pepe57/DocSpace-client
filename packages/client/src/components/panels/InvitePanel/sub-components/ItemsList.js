@@ -24,16 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useRef, memo, useCallback } from "react";
+import { useState, useEffect, useRef, memo, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { FixedSizeList as List } from "react-window";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
 import { useTheme } from "styled-components";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
+import classNames from "classnames";
 import Item from "./Item";
-
-import { ScrollList } from "../StyledInvitePanel";
+import styles from "../InvitePanel.module.scss";
 
 const USER_ITEM_HEIGHT = 48;
 
@@ -176,12 +176,15 @@ const ItemsList = ({
     isMobileView && isOpenItemAccess ? "auto" : "transform";
 
   return (
-    <ScrollList
+    <div
+      className={classNames(styles.scrollList, {
+        [styles.isAutoHeight]: scrollAllPanelContent && isTotalListHeight,
+        [styles.withOffset]: !!offsetTop,
+      })}
       offsetTop={offsetTop}
       ref={bodyRef}
-      scrollAllPanelContent={scrollAllPanelContent}
-      isTotalListHeight={isTotalListHeight}
-      dataTestId="invite_panel_items_scroll_list"
+      data-testid="invite_panel_items_scroll_list"
+      style={{ "--offset-top": `${offsetTop}px` }}
     >
       <List
         style={{ overflow: overflowStyle, willChange: willChangeStyle }}
@@ -210,7 +213,7 @@ const ItemsList = ({
       >
         {Row}
       </List>
-    </ScrollList>
+    </div>
   );
 };
 

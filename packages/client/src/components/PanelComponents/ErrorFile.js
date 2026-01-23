@@ -25,44 +25,46 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
+
 import { Text } from "@docspace/ui-kit/components/text";
+import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+
 import { StyledLoadErrorIcon } from "./StyledComponents";
 
 const ErrorFile = ({
-  t,
-  item,
-  onTextClick,
-  showPasswordInput,
-  onRetryClick,
+	t,
+	item,
+	onTextClick,
+	showPasswordInput,
+	onRetryClick,
 }) => {
-  const { interfaceDirection } = useTheme();
-  const placeTooltip = interfaceDirection === "rtl" ? "right" : "left";
+	const { isRTL } = useInterfaceDirection();
+	const placeTooltip = isRTL ? "right" : "left";
 
-  return (
-    <div
-      className="upload_panel-icon"
-      data-tooltip-id="system-tooltip"
-      data-tooltip-content={item.error || t("UploadingError")}
-      data-tooltip-place={placeTooltip}
-    >
-      <StyledLoadErrorIcon size="medium" />
-      {!item.needPassword ? (
-        <Text
-          className="enter-password"
-          fontWeight="600"
-          onClick={onRetryClick}
-        >
-          {t("Retry")}
-        </Text>
-      ) : null}
-      {item.needPassword ? (
-        <Text className="enter-password" fontWeight="600" onClick={onTextClick}>
-          {showPasswordInput ? t("HideInput") : t("Common:EnterPassword")}
-        </Text>
-      ) : null}
-    </div>
-  );
+	return (
+		<div
+			className="upload_panel-icon"
+			data-tooltip-id="system-tooltip"
+			data-tooltip-content={item.error || t("UploadingError")}
+			data-tooltip-place={placeTooltip}
+		>
+			<StyledLoadErrorIcon size="medium" />
+			{!item.needPassword ? (
+				<Text
+					className="enter-password"
+					fontWeight="600"
+					onClick={onRetryClick}
+				>
+					{t("Retry")}
+				</Text>
+			) : null}
+			{item.needPassword ? (
+				<Text className="enter-password" fontWeight="600" onClick={onTextClick}>
+					{showPasswordInput ? t("HideInput") : t("Common:EnterPassword")}
+				</Text>
+			) : null}
+		</div>
+	);
 };
 
 export default ErrorFile;

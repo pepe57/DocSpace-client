@@ -25,141 +25,125 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect } from "react";
-import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { Text } from "@docspace/ui-kit/components/text";
+import { Text } from "@docspace/shared/components/text";
+
 import { getSaasBar, getEnterpriseBar, checkBar } from "./helpers";
-
-const StyledWrapper = styled.div`
-  display: grid;
-  cursor: pointer;
-
-  #tariff-bar-text:hover {
-    opacity: 0.85;
-  }
-
-  #tariff-bar-text:active {
-    filter: brightness(0.9);
-  }
-
-  .hidden {
-    display: none;
-  }
-`;
+import styles from "./tariff-bar.module.scss";
 
 const PROXY_BASE_URL = combineUrl(
-  window.ClientConfig?.proxy?.url,
-  "/portal-settings",
+	window.ClientConfig?.proxy?.url,
+	"/portal-settings",
 );
 
 const TariffBar = ({
-  isEnterprise,
-  isNonProfit,
-  isGracePeriod,
-  isFreeTariff,
-  isPaymentPageAvailable,
-  isLicenseExpiring,
-  isLicenseDateExpired,
-  isTrial,
-  standalone,
-  paymentDate,
-  trialDaysLeft,
-  title,
+	isEnterprise,
+	isNonProfit,
+	isGracePeriod,
+	isFreeTariff,
+	isPaymentPageAvailable,
+	isLicenseExpiring,
+	isLicenseDateExpired,
+	isTrial,
+	standalone,
+	paymentDate,
+	trialDaysLeft,
+	title,
 }) => {
-  const navigate = useNavigate();
-  const { t } = useTranslation("Common");
+	const navigate = useNavigate();
+	const { t } = useTranslation("Common");
 
-  const onClick = () => {
-    const paymentPageUrl = combineUrl(
-      PROXY_BASE_URL,
-      "/payments/portal-payments",
-    );
-    navigate(paymentPageUrl);
-  };
+	const onClick = () => {
+		const paymentPageUrl = combineUrl(
+			PROXY_BASE_URL,
+			"/payments/portal-payments",
+		);
+		navigate(paymentPageUrl);
+	};
 
-  useEffect(() => {
-    checkBar();
-  }, []);
+	useEffect(() => {
+		checkBar();
+	}, []);
 
-  useEffect(() => {
-    checkBar();
-  }, [title]);
+	useEffect(() => {
+		checkBar();
+	}, [title]);
 
-  const tariffBar = !standalone
-    ? getSaasBar(
-        t,
-        isPaymentPageAvailable,
-        isNonProfit,
-        isFreeTariff,
-        isGracePeriod,
-      )
-    : getEnterpriseBar(
-        t,
-        isPaymentPageAvailable,
-        isEnterprise,
-        isTrial,
-        isLicenseExpiring,
-        isLicenseDateExpired,
-        trialDaysLeft,
-        paymentDate,
-      );
+	const tariffBar = !standalone
+		? getSaasBar(
+				t,
+				isPaymentPageAvailable,
+				isNonProfit,
+				isFreeTariff,
+				isGracePeriod,
+			)
+		: getEnterpriseBar(
+				t,
+				isPaymentPageAvailable,
+				isEnterprise,
+				isTrial,
+				isLicenseExpiring,
+				isLicenseDateExpired,
+				trialDaysLeft,
+				paymentDate,
+			);
 
-  if (!tariffBar) return null;
-  return (
-    <StyledWrapper>
-      <Text
-        id="tariff-bar-text"
-        as="div"
-        fontSize="12px"
-        fontWeight={600}
-        lineHeight="16px"
-        color={tariffBar.color}
-        onClick={onClick}
-        truncate
-        dataTestId="tariff_bar_text"
-        noSelect
-      >
-        {tariffBar.label}
-      </Text>
-    </StyledWrapper>
-  );
+	if (!tariffBar) return null;
+	return (
+		<div className={styles.tariffBar}>
+			<Text
+				id="tariff-bar-text"
+				as="div"
+				fontSize="12px"
+				fontWeight={600}
+				lineHeight="16px"
+				color={tariffBar.color}
+				onClick={onClick}
+				truncate
+				dataTestId="tariff_bar_text"
+				noSelect
+			>
+				{tariffBar.label}
+			</Text>
+		</div>
+	);
 };
 
 export default inject(
-  ({
-    authStore,
-    settingsStore,
-    currentQuotaStore,
-    currentTariffStatusStore,
-  }) => {
-    const { isPaymentPageAvailable } = authStore;
-    const { isFreeTariff, isNonProfit, isTrial } = currentQuotaStore;
-    const {
-      isGracePeriod,
-      isLicenseExpiring,
-      isLicenseDateExpired,
-      paymentDate,
-      trialDaysLeft,
-      isEnterprise,
-    } = currentTariffStatusStore;
-    const { standalone } = settingsStore;
+	({
+		authStore,
+		settingsStore,
+		currentQuotaStore,
+		currentTariffStatusStore,
+	}) => {
+		const { isPaymentPageAvailable } = authStore;
+		const { isFreeTariff, isNonProfit, isTrial } = currentQuotaStore;
+		const {
+			isGracePeriod,
+			isLicenseExpiring,
+			isLicenseDateExpired,
+			paymentDate,
+			trialDaysLeft,
+			isEnterprise,
+		} = currentTariffStatusStore;
+		const { standalone } = settingsStore;
 
-    return {
-      isEnterprise,
-      isNonProfit,
-      isGracePeriod,
-      isFreeTariff,
-      isPaymentPageAvailable,
-      isLicenseExpiring,
-      isLicenseDateExpired,
-      isTrial,
-      standalone,
-      paymentDate,
-      trialDaysLeft,
-    };
-  },
+		return {
+			isEnterprise,
+			isNonProfit,
+			isGracePeriod,
+			isFreeTariff,
+			isPaymentPageAvailable,
+			isLicenseExpiring,
+			isLicenseDateExpired,
+			isTrial,
+			standalone,
+			paymentDate,
+			trialDaysLeft,
+		};
+	},
 )(observer(TariffBar));

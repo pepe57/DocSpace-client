@@ -602,10 +602,7 @@ const Manager = (props) => {
 						{sharedLinks ? (
 							<ControlsGroup>
 								<LabelGroup>
-									<Label
-										className="label"
-										text={t("SharingPanel:ExternalLink")}
-									/>
+									<Label className="label" text={t("Common:ExternalLink")} />
 									<HelpButton
 										offsetRight={0}
 										size={12}
@@ -750,6 +747,5 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
 		"Common",
 		"Files",
 		"Translations",
-		"SharingPanel",
 	])(observer(Manager)),
 );

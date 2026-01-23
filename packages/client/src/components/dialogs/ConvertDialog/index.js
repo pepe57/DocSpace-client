@@ -25,281 +25,264 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import styled from "styled-components";
+import { withTranslation, Trans } from "react-i18next";
+import { inject, observer } from "mobx-react";
+import classNames from "classnames";
+
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 
-import { withTranslation, Trans } from "react-i18next";
-import { inject, observer } from "mobx-react";
-
-const StyledFooterContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
-
-  .convert_dialog_checkboxes {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .convert_dialog_buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-  }
-`;
+import styles from "./ConvertDialog.module.scss";
 
 const ConvertDialogComponent = (props) => {
-	const {
-		t,
-		tReady,
-		visible,
-		folderId,
-		convertFileFromFiles,
-		convertItem,
-		setStoreOriginal,
-		hideConfirmConvert,
-		storeOriginalFiles,
-		convertUploadedFiles,
-		setConvertDialogVisible,
-		rootFoldersTitles,
-		isRecentFolder,
-		isFavoritesFolder,
-		isSharedWithMeFolder,
+  const {
+    t,
+    tReady,
+    visible,
+    folderId,
+    convertFileFromFiles,
+    convertItem,
+    setStoreOriginal,
+    hideConfirmConvert,
+    storeOriginalFiles,
+    convertUploadedFiles,
+    setConvertDialogVisible,
+    rootFoldersTitles,
+    isRecentFolder,
+    isFavoritesFolder,
+    isSharedWithMeFolder,
 
-		createNewIfExist,
-		isUploadAction,
-		cancelUploadAction,
-		conversionFiles,
-	} = props;
+    createNewIfExist,
+    isUploadAction,
+    cancelUploadAction,
+    conversionFiles,
+  } = props;
 
-	const options = [
-		{
-			label: t("Document"),
-			value: ".docx",
-		},
-		{
-			label: t("Spreadsheet"),
-			value: ".xlsx",
-		},
-	];
+  const options = [
+    {
+      label: t("Document"),
+      value: ".docx",
+    },
+    {
+      label: t("Spreadsheet"),
+      value: ".xlsx",
+    },
+  ];
 
-	const isXML = convertItem?.fileExst?.includes(".xml");
+  const isXML = convertItem?.fileExst?.includes(".xml");
 
-	let rootFolderTitle = "";
-	const convertSingleFile = !!convertItem;
-	const sortedFolder =
-		isRecentFolder || isFavoritesFolder || isSharedWithMeFolder;
+  let rootFolderTitle = "";
+  const convertSingleFile = !!convertItem;
+  const sortedFolder =
+    isRecentFolder || isFavoritesFolder || isSharedWithMeFolder;
 
-	if (convertSingleFile && sortedFolder) {
-		rootFolderTitle = isSharedWithMeFolder
-			? t("Common:MyDocuments")
-			: rootFoldersTitles[convertItem.rootFolderType]?.title;
-	}
+  if (convertSingleFile && sortedFolder) {
+    rootFolderTitle = isSharedWithMeFolder
+      ? t("Common:MyDocuments")
+      : rootFoldersTitles[convertItem.rootFolderType]?.title;
+  }
 
-	const [hideMessage, setHideMessage] = useState(false);
-	const [selectedOptionType, setSelectedOptionType] = useState(
-		options[0].value,
-	);
+  const [hideMessage, setHideMessage] = useState(false);
+  const [selectedOptionType, setSelectedOptionType] = useState(
+    options[0].value,
+  );
 
-	const onChangeRadioButton = (e) => {
-		setSelectedOptionType(e.target.value);
-	};
+  const onChangeRadioButton = (e) => {
+    setSelectedOptionType(e.target.value);
+  };
 
-	const onChangeFormat = () =>
-		setStoreOriginal(!storeOriginalFiles, "storeOriginalFiles");
-	const onChangeMessageVisible = () => setHideMessage(!hideMessage);
+  const onChangeFormat = () =>
+    setStoreOriginal(!storeOriginalFiles, "storeOriginalFiles");
+  const onChangeMessageVisible = () => setHideMessage(!hideMessage);
 
-	const onClose = () => {
-		setConvertDialogVisible(false);
-	};
+  const onClose = () => {
+    setConvertDialogVisible(false);
+  };
 
-	const onCloseDialog = () => {
-		if (isUploadAction && conversionFiles?.length) {
-			cancelUploadAction(conversionFiles);
-		}
+  const onCloseDialog = () => {
+    if (isUploadAction && conversionFiles?.length) {
+      cancelUploadAction(conversionFiles);
+    }
 
-		onClose();
-	};
+    onClose();
+  };
 
-	const onConvert = () => {
-		onClose();
+  const onConvert = () => {
+    onClose();
 
-		if (convertSingleFile) {
-			const item = {
-				fileId: convertItem.id,
-				toFolderId: folderId,
-				action: "convert",
-			};
+    if (convertSingleFile) {
+      const item = {
+        fileId: convertItem.id,
+        toFolderId: folderId,
+        action: "convert",
+      };
 
-			if (isXML) {
-				item.format = selectedOptionType;
-			} else {
-				item.format = null;
-			}
+      if (isXML) {
+        item.format = selectedOptionType;
+      } else {
+        item.format = null;
+      }
 
-			item.fileInfo = convertItem;
-			convertFileFromFiles(item, t, convertItem.isOpen, true);
-		} else {
-			hideMessage && hideConfirmConvert();
-			convertUploadedFiles(t, createNewIfExist);
-		}
-	};
+      item.fileInfo = convertItem;
+      convertFileFromFiles(item, t, convertItem.isOpen, true);
+    } else {
+      hideMessage && hideConfirmConvert();
+      convertUploadedFiles(t, createNewIfExist);
+    }
+  };
 
-	return (
-		<ModalDialog
-			isLoading={!tReady}
-			visible={visible}
-			onClose={onCloseDialog}
-			withFooterCheckboxes
-			autoMaxHeight
-		>
-			<ModalDialog.Header>
-				{convertSingleFile
-					? t("DocumentConversionTitle")
-					: t("FileUploadTitle")}
-			</ModalDialog.Header>
-			<ModalDialog.Body style={{ paddingBottom: "0px" }}>
-				<Text>
-					{convertSingleFile
-						? isXML
-							? t("ConversionXmlMessage")
-							: t("OpenFileMessage")
-						: t("ConversionMessage")}
-				</Text>
+  return (
+    <ModalDialog
+      isLoading={!tReady}
+      visible={visible}
+      onClose={onCloseDialog}
+      withFooterCheckboxes
+      autoMaxHeight
+    >
+      <ModalDialog.Header>
+        {convertSingleFile
+          ? t("DocumentConversionTitle")
+          : t("FileUploadTitle")}
+      </ModalDialog.Header>
+      <ModalDialog.Body style={{ paddingBottom: "0px" }}>
+        <Text>
+          {convertSingleFile
+            ? isXML
+              ? t("ConversionXmlMessage")
+              : t("OpenFileMessage")
+            : t("ConversionMessage")}
+        </Text>
 
-				{isXML ? (
-					<div style={{ boxSizing: "border-box", padding: "16px 0 0" }}>
-						<Text>{t("SelectFileType")}</Text>
-						<RadioButtonGroup
-							orientation="vertical"
-							options={options}
-							name="convert-file-type"
-							selected={selectedOptionType}
-							onClick={onChangeRadioButton}
-							spacing="12px"
-							style={{ marginTop: "12px" }}
-						/>
-					</div>
-				) : null}
-			</ModalDialog.Body>
-			<ModalDialog.Footer>
-				<StyledFooterContent className="convert_dialog_footer">
-					<div className="convert_dialog_checkboxes">
-						<Checkbox
-							className="convert_dialog_checkbox"
-							label={t("SaveOriginalFormatMessage")}
-							isChecked={storeOriginalFiles}
-							onChange={onChangeFormat}
-						/>
-						{convertSingleFile && sortedFolder ? (
-							<div
-								className={`convert_dialog_file-destination ${
-									storeOriginalFiles ? "file-destination_visible" : ""
-								}`}
-							>
-								<Trans
-									t={t}
-									i18nKey="ConvertedFileDestination"
-									ns="ConvertDialog"
-								>
-									The file copy will be created in the
-									{{ folderTitle: rootFolderTitle }} folder
-								</Trans>
-							</div>
-						) : null}
-						{!convertSingleFile ? (
-							<Checkbox
-								className="convert_dialog_checkbox"
-								label={t("HideMessage")}
-								isChecked={hideMessage}
-								onChange={onChangeMessageVisible}
-							/>
-						) : null}
-					</div>
-					<div className="convert_dialog_buttons">
-						<Button
-							key="ContinueButton"
-							label={t("Common:ContinueButton")}
-							size="normal"
-							primary
-							scale
-							onClick={onConvert}
-						/>
-						<Button
-							key="CloseButton"
-							label={t("Common:CloseButton")}
-							size="normal"
-							scale
-							onClick={onCloseDialog}
-						/>
-					</div>
-				</StyledFooterContent>
-			</ModalDialog.Footer>
-		</ModalDialog>
-	);
+        {isXML ? (
+          <div style={{ boxSizing: "border-box", padding: "16px 0 0" }}>
+            <Text>{t("SelectFileType")}</Text>
+            <RadioButtonGroup
+              orientation="vertical"
+              options={options}
+              name="convert-file-type"
+              selected={selectedOptionType}
+              onClick={onChangeRadioButton}
+              spacing="12px"
+              style={{ marginTop: "12px" }}
+            />
+          </div>
+        ) : null}
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <div className={classNames(styles.footer, "convert_dialog_footer")}>
+          <div className={styles.convertDialogCheckboxes}>
+            <Checkbox
+              className="convert_dialog_checkbox"
+              label={t("SaveOriginalFormatMessage")}
+              isChecked={storeOriginalFiles}
+              onChange={onChangeFormat}
+            />
+            {convertSingleFile && sortedFolder ? (
+              <div
+                className={`convert_dialog_file-destination ${
+                  storeOriginalFiles ? "file-destination_visible" : ""
+                }`}
+              >
+                <Trans
+                  t={t}
+                  i18nKey="ConvertedFileDestination"
+                  ns="ConvertDialog"
+                >
+                  The file copy will be created in the
+                  {{ folderTitle: rootFolderTitle }} folder
+                </Trans>
+              </div>
+            ) : null}
+            {!convertSingleFile ? (
+              <Checkbox
+                className="convert_dialog_checkbox"
+                label={t("HideMessage")}
+                isChecked={hideMessage}
+                onChange={onChangeMessageVisible}
+              />
+            ) : null}
+          </div>
+          <div className={styles.convertDialogButtons}>
+            <Button
+              key="ContinueButton"
+              label={t("Common:ContinueButton")}
+              size="normal"
+              primary
+              scale
+              onClick={onConvert}
+            />
+            <Button
+              key="CloseButton"
+              label={t("Common:CloseButton")}
+              size="normal"
+              scale
+              onClick={onCloseDialog}
+            />
+          </div>
+        </div>
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
 };
 
 const ConvertDialog = withTranslation(["ConvertDialog", "Common", "Files"])(
-	ConvertDialogComponent,
+  ConvertDialogComponent,
 );
 
 export default inject(
-	({
-		uploadDataStore,
-		treeFoldersStore,
-		dialogsStore,
-		filesSettingsStore,
-		selectedFolderStore,
-	}) => {
-		const {
-			rootFoldersTitles,
-			isRecentFolder,
-			isFavoritesFolder,
-			isSharedWithMeFolder,
-		} = treeFoldersStore;
-		const {
-			convertUploadedFiles,
-			convertFileFromFiles,
+  ({
+    uploadDataStore,
+    treeFoldersStore,
+    dialogsStore,
+    filesSettingsStore,
+    selectedFolderStore,
+  }) => {
+    const {
+      rootFoldersTitles,
+      isRecentFolder,
+      isFavoritesFolder,
+      isSharedWithMeFolder,
+    } = treeFoldersStore;
+    const {
+      convertUploadedFiles,
+      convertFileFromFiles,
 
-			cancelUploadAction,
-		} = uploadDataStore;
-		const { storeOriginalFiles, setStoreOriginal, hideConfirmConvert } =
-			filesSettingsStore;
-		const { id: folderId } = selectedFolderStore;
-		const {
-			convertDialogVisible: visible,
-			convertDialogData,
-			setConvertDialogVisible,
-			convertItem,
-		} = dialogsStore;
+      cancelUploadAction,
+    } = uploadDataStore;
+    const { storeOriginalFiles, setStoreOriginal, hideConfirmConvert } =
+      filesSettingsStore;
+    const { id: folderId } = selectedFolderStore;
+    const {
+      convertDialogVisible: visible,
+      convertDialogData,
+      setConvertDialogVisible,
+      convertItem,
+    } = dialogsStore;
 
-		const createNewIfExist = convertDialogData.createNewIfExist ?? true;
-		const isUploadAction = convertDialogData.isUploadAction ?? false;
+    const createNewIfExist = convertDialogData.createNewIfExist ?? true;
+    const isUploadAction = convertDialogData.isUploadAction ?? false;
 
-		return {
-			visible,
-			folderId,
-			convertFileFromFiles,
-			convertItem,
-			setStoreOriginal,
-			hideConfirmConvert,
-			storeOriginalFiles,
-			convertUploadedFiles,
-			setConvertDialogVisible,
-			rootFoldersTitles,
-			isRecentFolder,
-			isFavoritesFolder,
-			isSharedWithMeFolder,
-			createNewIfExist,
-			isUploadAction,
-			cancelUploadAction,
-			conversionFiles: convertDialogData.files,
-		};
-	},
+    return {
+      visible,
+      folderId,
+      convertFileFromFiles,
+      convertItem,
+      setStoreOriginal,
+      hideConfirmConvert,
+      storeOriginalFiles,
+      convertUploadedFiles,
+      setConvertDialogVisible,
+      rootFoldersTitles,
+      isRecentFolder,
+      isFavoritesFolder,
+      isSharedWithMeFolder,
+      createNewIfExist,
+      isUploadAction,
+      cancelUploadAction,
+      conversionFiles: convertDialogData.files,
+    };
+  },
 )(observer(ConvertDialog));

@@ -27,77 +27,62 @@
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
-import {
-	StyledPeopleSelectorInfo,
-	StyledPeopleSelector,
-	StyledSelectedOwnerContainer,
-	StyledSelectedOwner,
-} from "../../../ChangePortalOwnerDialog/StyledDialog";
 
-const ChoiceNewOwner = ({
-	t,
-	targetUser,
-	currentColorScheme,
-	onTogglePeopleSelector,
-}) => {
-	if (targetUser)
-		return (
-			<StyledSelectedOwnerContainer>
-				<StyledSelectedOwner currentColorScheme={currentColorScheme}>
-					<Text className="text">
-						{targetUser.displayName ? targetUser.displayName : targetUser.label}
-					</Text>
-				</StyledSelectedOwner>
+import styles from "SRC_DIR/components/dialogs/ChangePortalOwnerDialog/ChangePortalOwner.module.scss";
 
-				<Link
-					type="action"
-					isHovered
-					fontWeight={600}
-					onClick={onTogglePeopleSelector}
-				>
-					{t("ChangePortalOwner:ChangeUser")}
-				</Link>
-			</StyledSelectedOwnerContainer>
-		);
+const ChoiceNewOwner = ({ t, targetUser, onTogglePeopleSelector }) => {
+  if (targetUser)
+    return (
+      <div className={styles.selectedOwnerContainer}>
+        <div className={styles.selectedOwner}>
+          <Text className="text">
+            {targetUser.displayName ? targetUser.displayName : targetUser.label}
+          </Text>
+        </div>
 
-	return (
-		<StyledPeopleSelector>
-			<SelectorAddButton
-				className="selector-add-button"
-				onClick={onTogglePeopleSelector}
-				label={t("Translations:ChooseFromList")}
-				titleText={t("Translations:ChooseFromList")}
-				noSelect
-			/>
-		</StyledPeopleSelector>
-	);
+        <Link
+          type="action"
+          isHovered
+          fontWeight={600}
+          onClick={onTogglePeopleSelector}
+        >
+          {t("ChangePortalOwner:ChangeUser")}
+        </Link>
+      </div>
+    );
+
+  return (
+    <div className={styles.peopleSelector}>
+      <SelectorAddButton
+        className="selector-add-button"
+        onClick={onTogglePeopleSelector}
+        label={t("Translations:ChooseFromList")}
+        titleText={t("Translations:ChooseFromList")}
+        noSelect
+      />
+    </div>
+  );
 };
 
-const NewOwner = ({
-	t,
-	targetUser,
-	currentColorScheme,
-	onTogglePeopleSelector,
-}) => {
-	return (
-		<>
-			<StyledPeopleSelectorInfo>
-				<Text className="new-owner">
-					{t("DataReassignmentDialog:NewDataOwner")}
-				</Text>
-				<Text className="description">
-					{t("DataReassignmentDialog:UserToWhomTheDataWillBeTransferred")}
-				</Text>
-			</StyledPeopleSelectorInfo>
+const NewOwner = ({ t, targetUser, onTogglePeopleSelector }) => {
+  return (
+    <>
+      <div className={styles.peopleSelectorInfo}>
+        <Text className={styles.newOwner}>
+          {t("DataReassignmentDialog:NewDataOwner")}
+        </Text>
+        <Text className={styles.description}>
+          {t("DataReassignmentDialog:UserToWhomTheDataWillBeTransferred")}
+        </Text>
+      </div>
 
-			<ChoiceNewOwner
-				t={t}
-				targetUser={targetUser}
-				currentColorScheme={currentColorScheme}
-				onTogglePeopleSelector={onTogglePeopleSelector}
-			/>
-		</>
-	);
+      <ChoiceNewOwner
+        t={t}
+        targetUser={targetUser}
+        onTogglePeopleSelector={onTogglePeopleSelector}
+      />
+    </>
+  );
 };
 
 export default NewOwner;
