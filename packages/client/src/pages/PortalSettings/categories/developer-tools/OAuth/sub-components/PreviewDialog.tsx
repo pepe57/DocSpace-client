@@ -35,7 +35,7 @@ import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalD
 import { SocialButton } from "@docspace/shared/components/social-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { globalColors } from "@docspace/shared/themes";
 import { generatePKCEPair } from "@docspace/shared/utils/oauth";
 import { AuthenticationMethod } from "@docspace/shared/enums";

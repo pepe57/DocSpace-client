@@ -38,7 +38,7 @@ import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 import { RestoreBackup } from "@docspace/shared/pages/backup/restore-backup";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-import { ButtonSize } from "@docspace/shared/components/button";
+import { ButtonSize } from "@docspace/ui-kit/components/button";
 import { uploadBackup } from "@docspace/shared/api/files";
 
 import type {

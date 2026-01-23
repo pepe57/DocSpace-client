@@ -28,7 +28,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 

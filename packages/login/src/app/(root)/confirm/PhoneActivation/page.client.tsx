@@ -28,59 +28,59 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
-	InputSize,
-	InputType,
-	TextInput,
+  InputSize,
+  InputType,
+  TextInput,
 } from "@docspace/ui-kit/components/text-input";
 import { Text } from "@docspace/ui-kit/components/text";
 
 const currentNumber = "+00000000000";
 
 const ChangePhoneForm = () => {
-	const { t } = useTranslation(["Confirm", "Common"]);
+  const { t } = useTranslation(["Confirm", "Common"]);
 
-	return (
-		<>
-			<div className="subtitle">
-				<Text fontSize="16px" fontWeight="600" className="phone-title">
-					{t("EnterPhone")}
-				</Text>
-				<Text>
-					{t("CurrentNumber")}: {currentNumber}
-				</Text>
-				<Text>
-					{t("PhoneSubtitle", { productName: t("Common:ProductName") })}
-				</Text>
-			</div>
+  return (
+    <>
+      <div className="subtitle">
+        <Text fontSize="16px" fontWeight="600" className="phone-title">
+          {t("EnterPhone")}
+        </Text>
+        <Text>
+          {t("CurrentNumber")}: {currentNumber}
+        </Text>
+        <Text>
+          {t("PhoneSubtitle", { productName: t("Common:ProductName") })}
+        </Text>
+      </div>
 
-			<TextInput
-				className="phone-input"
-				id="phone"
-				name="phone"
-				type={InputType.tel}
-				size={InputSize.large}
-				scale
-				isAutoFocussed
-				tabIndex={1}
-				hasError={false}
-				guide={false}
-				value=""
-				testId="phone_input"
-			/>
+      <TextInput
+        className="phone-input"
+        id="phone"
+        name="phone"
+        type={InputType.tel}
+        size={InputSize.large}
+        scale
+        isAutoFocussed
+        tabIndex={1}
+        hasError={false}
+        guide={false}
+        value=""
+        testId="phone_input"
+      />
 
-			<Button
-				primary
-				scale
-				size={ButtonSize.medium}
-				label={t("GetCode")}
-				tabIndex={2}
-				isDisabled={false}
-				testId="get_code_button"
-			/>
-		</>
-	);
+      <Button
+        primary
+        scale
+        size={ButtonSize.medium}
+        label={t("GetCode")}
+        tabIndex={2}
+        isDisabled={false}
+        testId="get_code_button"
+      />
+    </>
+  );
 };
 
 export default ChangePhoneForm;

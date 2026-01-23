@@ -34,7 +34,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   calculateTotalPrice,
   getConvertedSize,

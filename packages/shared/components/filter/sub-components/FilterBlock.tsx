@@ -36,7 +36,7 @@ import RoomSelector from "../../../selectors/Room";
 import { FilterGroups, FilterSelectorTypes } from "../../../enums";
 import { FilterBlockLoader } from "../../../skeletons/filter";
 
-import { Button, ButtonSize } from "../../button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { TSelectorItem } from "../../selector";
 import { ModalDialog, ModalDialogType } from "../../modal-dialog";
 import { IconButton } from "../../icon-button";

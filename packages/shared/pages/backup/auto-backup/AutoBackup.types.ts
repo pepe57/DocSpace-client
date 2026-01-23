@@ -35,7 +35,7 @@ import type {
   TWeekdaysLabel,
 } from "../../../types";
 import type { TOption } from "../../../components/combobox";
-import type { ButtonSize } from "../../../components/button";
+import type { ButtonSize } from "@docspace/ui-kit/components/button";
 import type { TColorScheme } from "../../../themes";
 import type { FilesSelectorSettings } from "../../../components/files-selector-input";
 import type { TBreadCrumb } from "../../../components/selector/Selector.types";

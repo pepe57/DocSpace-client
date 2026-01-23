@@ -53,7 +53,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { ContextMenu, type ContextMenuRefType } from "../../../context-menu";
 import { IconButton } from "../../../icon-button";
 import { Aside } from "../../../aside";
-import { Button, ButtonSize } from "../../../button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Backdrop } from "../../../backdrop";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 

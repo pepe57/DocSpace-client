@@ -33,7 +33,7 @@ import { Portal } from "@docspace/ui-kit/components/portal";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import { TTranslation } from "@docspace/shared/types";
 import { useEventListener } from "@docspace/shared/hooks/useEventListener";

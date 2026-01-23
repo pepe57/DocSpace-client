@@ -35,7 +35,7 @@ import type { TFile } from "../../api/files/types";
 import { iconSize32, iconSize96 } from "../../utils/image-helpers";
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
 
-import { Button } from "../button";
+import { Button } from "@docspace/ui-kit/components/button";
 
 import MediaViewer from "./MediaViewer";
 import type { MediaViewerProps, PlaylistType } from "./MediaViewer.types";

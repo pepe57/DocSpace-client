@@ -28,7 +28,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { manageFormFilling } from "../../api/files";
-import { Button, ButtonSize } from "../../components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import { FormFillingManageAction } from "../../enums";
 

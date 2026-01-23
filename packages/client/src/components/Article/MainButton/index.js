@@ -52,7 +52,7 @@ import classNames from "classnames";
 
 import { MainButton } from "@docspace/shared/components/main-button";
 import { toastr } from "@docspace/shared/components/toast";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { isDesktop } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";

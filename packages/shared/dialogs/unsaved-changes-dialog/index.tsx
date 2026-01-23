@@ -28,7 +28,7 @@ import { useTranslation } from "react-i18next";
 import { type FC } from "react";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "../../components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { useEventListener } from "../../hooks/useEventListener";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 

@@ -32,7 +32,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Events, RoomsType } from "@docspace/shared/enums";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import type {
   EventWithPayload,

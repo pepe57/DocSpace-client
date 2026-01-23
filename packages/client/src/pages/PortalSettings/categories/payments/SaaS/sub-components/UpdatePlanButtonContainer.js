@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import api from "@docspace/shared/api";
 import {

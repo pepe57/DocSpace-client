@@ -41,7 +41,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { classNames, mobile, mobileMore } from "@docspace/shared/utils";
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";

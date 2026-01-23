@@ -27,7 +27,7 @@
 import React, { useEffect, useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { Button, ButtonSize } from "../button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import { ModalDialog } from ".";
 import { ModalDialogType } from "./ModalDialog.enums";

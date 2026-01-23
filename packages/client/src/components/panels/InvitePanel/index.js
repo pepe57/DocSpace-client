@@ -37,7 +37,7 @@ import {
 } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";

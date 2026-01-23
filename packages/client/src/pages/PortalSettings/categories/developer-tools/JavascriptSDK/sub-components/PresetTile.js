@@ -28,7 +28,7 @@ import styled, { css } from "styled-components";
 import { ReactSVG } from "react-svg";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow-left.react.svg";
 import { injectDefaultTheme } from "@docspace/shared/utils";

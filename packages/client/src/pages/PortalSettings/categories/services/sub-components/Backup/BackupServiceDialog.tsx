@@ -32,7 +32,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { BACKUP_SERVICE } from "@docspace/shared/constants";
 
 import ServiceToggleSection from "../ServiceToggleSection";

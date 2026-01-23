@@ -30,7 +30,7 @@ import classNames from "classnames";
 
 import { BackupStorageType, ProvidersType } from "../../../../../enums";
 import { isNullOrUndefined } from "../../../../../utils/typeGuards";
-import { Button, type ButtonSize } from "../../../../../components/button";
+import { Button, type ButtonSize } from "@docspace/ui-kit/components/button";
 import { getFromLocalStorage } from "../../../../../utils";
 import { DirectThirdPartyConnection } from "../../../../../components/direct-third-party-connection";
 

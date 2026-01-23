@@ -39,7 +39,7 @@ import { DeviceType } from "../../enums";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "../toast";
-import { Button, ButtonSize } from "../button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Textarea } from "../textarea";
 import { IconButton } from "../icon-button";
 import { ModalDialogType, ModalDialog } from "../modal-dialog";

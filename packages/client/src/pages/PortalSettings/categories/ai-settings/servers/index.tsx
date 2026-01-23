@@ -33,7 +33,7 @@ import { inject, observer } from "mobx-react";
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import type { TServer } from "@docspace/shared/api/ai/types";
 import { toastr, TData } from "@docspace/shared/components/toast";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";

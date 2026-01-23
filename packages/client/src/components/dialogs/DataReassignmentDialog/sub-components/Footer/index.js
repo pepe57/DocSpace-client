@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 
 import styles from "SRC_DIR/components/dialogs/ChangePortalOwnerDialog/ChangePortalOwner.module.scss";
 

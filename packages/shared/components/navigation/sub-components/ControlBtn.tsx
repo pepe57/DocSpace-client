@@ -27,7 +27,7 @@
 import React from "react";
 
 import { isTablet } from "../../../utils";
-import { Button, ButtonSize } from "../../button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import styles from "../Navigation.module.scss";
 

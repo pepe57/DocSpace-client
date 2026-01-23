@@ -32,7 +32,7 @@ import { TTranslation } from "@docspace/shared/types";
 import { EmployeeType, ShareAccessRights } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   ModalDialog,

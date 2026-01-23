@@ -37,7 +37,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import type { Nullable } from "@docspace/shared/types";
 import { isDesktop, isMobile } from "@docspace/shared/utils";

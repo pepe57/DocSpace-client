@@ -30,7 +30,7 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { mobile } from "@docspace/shared/utils";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import ConfirmWrapper from "SRC_DIR/components/ConfirmWrapper";
 

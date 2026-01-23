@@ -28,7 +28,7 @@ import React, { useState } from "react";
 import classNames from "classnames";
 
 import SocketHelper, { SocketCommands } from "../../../../../utils/socket";
-import { Button } from "../../../../../components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import OperationsProgressButton from "../../../../../components/operations-progress-button";
 import { OPERATIONS_NAME } from "../../../../../constants";
 import { TenantStatus } from "../../../../../enums";

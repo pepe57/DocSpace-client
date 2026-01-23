@@ -31,7 +31,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { createGroup } from "@docspace/shared/api/groups";
 import { TUser } from "@docspace/shared/api/people/types";

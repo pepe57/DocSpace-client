@@ -1,6 +1,6 @@
 @use "@docspace/ui-kit/styles/variables/colors" as *;
 
-
+/* NEXT COLORS MUST BE REWRITE, BECAUSE IT iS USING INSIDE COMPONENTS AND DUPLICATE */
 .light {
   // Input colors
   --input-bg: #{$white};
@@ -31,6 +31,18 @@
   --text-disable-color: #{$gray};
 
   --link-color: #{$black};
+
+  --button-color-base: #{$black};
+  --button-color-base-hover: #{$black};
+  --button-color-base-active: #{$black};
+  --button-color-base-disabled: #{$gray-strong};
+
+  --button-background-base: #{$white};
+  --button-background-base-hover: #{$white};
+
+  --filled-button-background-color: #{$gray-light-mid};
+
+  --combobox-background: #{$light-gray-selected};
 }
 
 .dark {
@@ -60,7 +72,18 @@
   --text-disable-color: #{$gray-dark-text};
 
   --link-color: #{$white};
+
+  --button-color-base: #{$white};
+  --button-color-base-hover: #{$white};
+  --button-color-base-active: #{$white};
+  --button-color-base-disabled: #{$gray-dark-strong};
+
+  --button-background-base: #{$black};
+  --button-background-base-hover: #{$black};
+
+  --filled-button-background-color: #{$gray-dark-mid};
 }
+/* ========================== */
 
 .light {
   --row-side-color: #{$gray};
@@ -159,50 +182,6 @@
   --badge-color: #{$white};
   --badge-background-color: var(--accent-main, #{$light-status-warning});
   --badge-disable-background-color: #{$gray};
-
-  --button-color-base: #{$black};
-  --button-color-base-hover: #{$black};
-  --button-color-base-active: #{$black};
-  --button-color-base-disabled: #{$gray-strong};
-
-  --button-brightness: brightness(90%);
-
-  --button-color-primary: #{$white};
-  --button-color-primary-hover: #{$white};
-  --button-color-primary-active: #{$white};
-  --button-color-primary-disabled: #{$white};
-
-  --button-background-base: #{$white};
-  --button-background-base-hover: #{$white};
-  --button-background-base-active: #{$gray-light-mid};
-  --button-background-base-disabled: #{$gray-light};
-
-  --button-background-primary: var(--accent-button, #{$light-second-main});
-  --button-background-primary-hover: var(
-    --accent-button,
-    #{$light-second-main-hover}
-  );
-  --button-background-primary-active:
-    linear-gradient(0deg, #{$light-second-main}, #{$light-second-main}),
-    linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
-  --button-background-primary-disabled: var(
-    --accent-button,
-    #{$light-second-main-disabled}
-  );
-
-  --button-border-base: 1px solid #{$gray-strong};
-  --button-border-base-hover: 1px solid
-    var(--accent-button, #{$light-second-main});
-  --button-border-base-active: 1px solid #{$gray-strong};
-  --button-border-base-disabled: 1px solid #{$gray-light-mid};
-
-  --button-border-primary: 1px solid var(--accent-button, #{$light-second-main});
-  --button-border-primary-active: var(--accent-button, #{$light-second-main});
-  --button-border-primary-disabled: 1px solid
-    var(--accent-button, #{$light-second-main-disabled});
-
-  --button-loader-base: var(--accent-button, #{$light-second-main});
-  --button-loader-primary: #{$white};
 
   --sub-menu-item-background-color: #{$white};
   --sub-menu-item-hover-background-color: #{$gray-light};
@@ -478,51 +457,6 @@
 
   --badge-background-color: var(--accent-main, #{$dark-status-warning});
   --badge-disable-background-color: #{$gray-dark-strong};
-
-  --button-color-base: #{$white};
-  --button-color-base-hover: #{$white};
-  --button-color-base-active: #{$white};
-  --button-color-base-disabled: #{$gray-dark-strong};
-
-  --button-brightness: brightness(82%);
-
-  --button-color-primary: #{$white};
-  --button-color-primary-hover: #{$white};
-  --button-color-primary-active: #{$white};
-  --button-color-primary-disabled: #{$white};
-
-  --button-background-base: #{$black};
-  --button-background-base-hover: #{$black};
-  --button-background-base-active: #{$dark-gray-light};
-  --button-background-base-disabled: #{$dark-gray-light};
-
-  --button-background-primary: var(--accent-button, #{$light-second-main});
-  --button-background-primary-hover: var(
-    --accent-button,
-    #{$light-second-main-hover}
-  );
-  --button-background-primary-active:
-    linear-gradient(0deg, #{$light-second-main}, #{$light-second-main}),
-    linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
-  --button-background-primary-disabled: var(
-    --accent-button,
-    #{$light-second-main-disabled}
-  );
-
-  --button-border-base: 1px solid #{$gray-dark-strong};
-  --button-border-base-hover: 1px solid #{$gray-dark};
-  --button-border-base-active: 1px solid #{$gray-dark-strong};
-  --button-border-base-disabled: 1px solid #{$gray-dark-strong};
-
-  --button-border-primary: 1px solid var(--accent-button, #{$light-second-main});
-  --button-border-primary-active:
-    linear-gradient(0deg, #{$light-second-main}, #{$light-second-main}),
-    linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
-  --button-border-primary-disabled: 1px solid
-    var(--accent-button, #{$light-second-main-disabled});
-
-  --button-loader-base: #{$white};
-  --button-loader-primary: #{$white};
 
   --sub-menu-item-background-color: #{$black};
   --sub-menu-item-hover-background-color: #{$light-dark-gray-hover};
@@ -2600,31 +2534,6 @@
   --table-group-menu-border-right: 1px solid #{$gray-dark-strong};
   --table-group-menu-box-shadow:
     0px 8px 16px #{$badge-shadow}, 0px 0px 4px #{$menu-shadow-dark};
-}
-
-.light {
-  --filled-button-background-color: #{$gray-light-mid};
-  --filled-button-hover-background-color: #{$light-gray-selected};
-  --filled-button-active-background-color: #{$gray-strong};
-
-  --filled-button-icon-color: #{$light-gray-dark};
-  --filled-button-text-color: #{$gray-text};
-
-  --filled-button-icon-color-hover: #{$light-gray-dark};
-  --filled-button-text-color-hover: #{$gray-text};
-}
-
-.dark {
-  --filled-button-background-color: #{$gray-dark-mid};
-  --filled-button-hover-background-color: #{$gray-dark-strong};
-  --filled-button-active-background-color: #{$gray-dark-mid};
-
-  --filled-button-icon-color: #{$dark-gray-dark};
-  --filled-button-text-color: #{$dark-gray-dark};
-
-  --filled-button-icon-color-hover: #{$white};
-  --filled-button-text-color-hover: #{$white};
-  --combobox-background: #{$light-gray-selected};
 }
 
 .light {

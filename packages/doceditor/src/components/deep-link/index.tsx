@@ -30,7 +30,7 @@ import Image from "next/image";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { getBgPattern } from "@docspace/shared/utils/common";
@@ -46,136 +46,136 @@ import { DeepLinkProps } from "./DeepLink.types";
 import styles from "./deeplink.module.scss";
 
 const DeepLink = ({
-	fileInfo,
-	userEmail,
-	setIsShowDeepLink,
-	deepLinkConfig,
-	deepLinkSettings,
+  fileInfo,
+  userEmail,
+  setIsShowDeepLink,
+  deepLinkConfig,
+  deepLinkSettings,
 }: DeepLinkProps) => {
-	const { t } = useTranslation(["DeepLink", "Common"]);
-	const { currentColorScheme } = useTheme();
+  const { t } = useTranslation(["DeepLink", "Common"]);
+  const { currentColorScheme } = useTheme();
 
-	const [isRemember, setIsRemember] = useState(false);
+  const [isRemember, setIsRemember] = useState(false);
 
-	const isOpenInAppOnly = deepLinkSettings === DeepLinkType.App;
+  const isOpenInAppOnly = deepLinkSettings === DeepLinkType.App;
 
-	const onChangeCheckbox = () => {
-		setIsRemember(!isRemember);
-	};
+  const onChangeCheckbox = () => {
+    setIsRemember(!isRemember);
+  };
 
-	const onOpenAppClick = () => {
-		if (isRemember) localStorage.setItem("defaultOpenDocument", "app");
-		getDeepLink(
-			window.location.origin,
-			userEmail ?? "",
-			fileInfo,
-			deepLinkConfig,
-			window.location.href,
-			isOpenInAppOnly,
-		);
-	};
+  const onOpenAppClick = () => {
+    if (isRemember) localStorage.setItem("defaultOpenDocument", "app");
+    getDeepLink(
+      window.location.origin,
+      userEmail ?? "",
+      fileInfo,
+      deepLinkConfig,
+      window.location.href,
+      isOpenInAppOnly,
+    );
+  };
 
-	const onStayBrowserClick = () => {
-		if (isRemember) localStorage.setItem("defaultOpenDocument", "web");
-		window.location.replace(`${window.location.search}&without_redirect=true`);
-		setIsShowDeepLink(false);
-	};
+  const onStayBrowserClick = () => {
+    if (isRemember) localStorage.setItem("defaultOpenDocument", "web");
+    window.location.replace(`${window.location.search}&without_redirect=true`);
+    setIsShowDeepLink(false);
+  };
 
-	const onDownloadAppClick = () => {
-		redirectToStore(deepLinkConfig);
-	};
+  const onDownloadAppClick = () => {
+    redirectToStore(deepLinkConfig);
+  };
 
-	const getFileIcon = () => {
-		const fileExst = `${fileInfo?.fileExst.slice(1)}.svg`;
-		const icon = iconSize32.has(fileExst)
-			? iconSize32.get(fileExst)
-			: iconSize32.get("file.svg");
-		return icon;
-	};
+  const getFileIcon = () => {
+    const fileExst = `${fileInfo?.fileExst.slice(1)}.svg`;
+    const icon = iconSize32.has(fileExst)
+      ? iconSize32.get(fileExst)
+      : iconSize32.get("file.svg");
+    return icon;
+  };
 
-	const getFileTitle = () => {
-		return fileInfo?.fileExst
-			? fileInfo.title.split(".").slice(0, -1).join(".")
-			: fileInfo?.title || "";
-	};
+  const getFileTitle = () => {
+    return fileInfo?.fileExst
+      ? fileInfo.title.split(".").slice(0, -1).join(".")
+      : fileInfo?.title || "";
+  };
 
-	const bgPattern = getBgPattern(currentColorScheme?.id);
+  const bgPattern = getBgPattern(currentColorScheme?.id);
 
-	const bgBlockStyle = {
-		"--bg-pattern": bgPattern,
-	} as React.CSSProperties;
+  const bgBlockStyle = {
+    "--bg-pattern": bgPattern,
+  } as React.CSSProperties;
 
-	return (
-		<div className={styles.wrapper}>
-			<div className={styles.bgBlock} style={bgBlockStyle} />
-			<Scrollbar>
-				<div className={styles.body}>
-					<div className={styles.logoWrapper}>
-						<PortalLogo className="portal-logo" isResizable />
-					</div>
-					<FormWrapper>
-						<div className={styles.deepLink}>
-							<div className={styles.bodyWrapper}>
-								<Text className={styles.title}>
-									{t("DeepLink:OpeningDocument")}
-								</Text>
-								<div className={styles.fileTile}>
-									<Image
-										src={getFileIcon() ?? ""}
-										alt="portal-logo"
-										width={32}
-										height={32}
-									/>
-									<Text fontSize="14px" fontWeight="600" truncate>
-										{getFileTitle()}
-									</Text>
-								</div>
-								<Text>
-									{isOpenInAppOnly
-										? t("DeepLink:DeepLinkOnlyAppText")
-										: t("DeepLink:DeepLinkText")}
-								</Text>
-							</div>
-							<div className={styles.actionsWrapper}>
-								{!isOpenInAppOnly ? (
-									<Checkbox
-										label={t("DeepLink:RememberChoice")}
-										isChecked={isRemember}
-										onChange={onChangeCheckbox}
-									/>
-								) : null}
-								<Button
-									size={ButtonSize.medium}
-									primary
-									label={
-										isOpenInAppOnly
-											? t("DeepLink:DownloadApp")
-											: t("DeepLink:OpenInApp")
-									}
-									onClick={
-										isOpenInAppOnly ? onDownloadAppClick : onOpenAppClick
-									}
-								/>
-								{isOpenInAppOnly ? null : (
-									<Link
-										className={styles.stayLink}
-										type={LinkType.action}
-										fontSize="13px"
-										fontWeight="600"
-										isHovered
-										color={currentColorScheme?.main?.accent}
-										onClick={onStayBrowserClick}
-									>
-										{t("DeepLink:StayInBrowser")}
-									</Link>
-								)}
-							</div>
-						</div>
-					</FormWrapper>
-				</div>
-			</Scrollbar>
-		</div>
-	);
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.bgBlock} style={bgBlockStyle} />
+      <Scrollbar>
+        <div className={styles.body}>
+          <div className={styles.logoWrapper}>
+            <PortalLogo className="portal-logo" isResizable />
+          </div>
+          <FormWrapper>
+            <div className={styles.deepLink}>
+              <div className={styles.bodyWrapper}>
+                <Text className={styles.title}>
+                  {t("DeepLink:OpeningDocument")}
+                </Text>
+                <div className={styles.fileTile}>
+                  <Image
+                    src={getFileIcon() ?? ""}
+                    alt="portal-logo"
+                    width={32}
+                    height={32}
+                  />
+                  <Text fontSize="14px" fontWeight="600" truncate>
+                    {getFileTitle()}
+                  </Text>
+                </div>
+                <Text>
+                  {isOpenInAppOnly
+                    ? t("DeepLink:DeepLinkOnlyAppText")
+                    : t("DeepLink:DeepLinkText")}
+                </Text>
+              </div>
+              <div className={styles.actionsWrapper}>
+                {!isOpenInAppOnly ? (
+                  <Checkbox
+                    label={t("DeepLink:RememberChoice")}
+                    isChecked={isRemember}
+                    onChange={onChangeCheckbox}
+                  />
+                ) : null}
+                <Button
+                  size={ButtonSize.medium}
+                  primary
+                  label={
+                    isOpenInAppOnly
+                      ? t("DeepLink:DownloadApp")
+                      : t("DeepLink:OpenInApp")
+                  }
+                  onClick={
+                    isOpenInAppOnly ? onDownloadAppClick : onOpenAppClick
+                  }
+                />
+                {isOpenInAppOnly ? null : (
+                  <Link
+                    className={styles.stayLink}
+                    type={LinkType.action}
+                    fontSize="13px"
+                    fontWeight="600"
+                    isHovered
+                    color={currentColorScheme?.main?.accent}
+                    onClick={onStayBrowserClick}
+                  >
+                    {t("DeepLink:StayInBrowser")}
+                  </Link>
+                )}
+              </div>
+            </div>
+          </FormWrapper>
+        </div>
+      </Scrollbar>
+    </div>
+  );
 };
 
 export default DeepLink;

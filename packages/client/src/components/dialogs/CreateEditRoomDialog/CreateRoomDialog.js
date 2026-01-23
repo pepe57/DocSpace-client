@@ -31,7 +31,7 @@ import {
   getRoomCreationAdditionalParams,
   getStartRoomParams,
 } from "@docspace/shared/utils/rooms";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import RoomSelector from "@docspace/shared/selectors/Room";
 import { FolderType } from "@docspace/shared/enums";
@@ -96,8 +96,9 @@ const CreateRoomDialog = ({
     ...startRoomParams,
   });
   const [isValidTitle, setIsValidTitle] = useState(true);
-  const [isTemplateSelected, setIsTemplateSelected] =
-    useState(!!fetchedRoomParams);
+  const [isTemplateSelected, setIsTemplateSelected] = useState(
+    !!fetchedRoomParams,
+  );
   const [templateItem, setTemplateItem] = useState(null);
 
   const setRoomTags = (newTags) =>

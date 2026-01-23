@@ -26,7 +26,7 @@
 
 import React from "react";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import ErrorImageSvgUrl from "PUBLIC_DIR/images/errors/error500.svg?url";
 import { isMobile as isMobileUtils } from "@docspace/shared/utils";
 import { withTranslation } from "react-i18next";

@@ -30,7 +30,7 @@ import type {
   ConnectedThirdPartyAccountType,
   TTranslation,
 } from "../../types";
-import type { ButtonSize } from "../button";
+import type { ButtonSize } from "@docspace/ui-kit/components/button";
 import type {
   FileInfoType,
   FilesSelectorSettings,

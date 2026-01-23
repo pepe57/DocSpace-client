@@ -28,7 +28,7 @@ import React from "react";
 import copy from "copy-to-clipboard";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Textarea } from "@docspace/shared/components/textarea";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import styled from "styled-components";
 

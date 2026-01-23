@@ -9,7 +9,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Badge } from "@docspace/shared/components/badge";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { DeviceType } from "@docspace/shared/enums";

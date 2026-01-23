@@ -26,7 +26,7 @@
 
 import { Link } from "@docspace/ui-kit/components/link";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { useState, useRef, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";

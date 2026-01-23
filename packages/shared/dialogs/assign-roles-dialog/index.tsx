@@ -26,7 +26,7 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "../../components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 
 interface AssignRolesDialogProps {

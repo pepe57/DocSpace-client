@@ -199,6 +199,9 @@ importers:
       vite:
         specifier: ^6.1.0
         version: 6.4.1(@types/node@24.10.7)(sass@1.79.5)(terser@5.44.1)(yaml@2.8.2)
+      vite-plugin-svgr:
+        specifier: ^4.5.0
+        version: 4.5.0(rollup@4.55.1)(typescript@5.9.3)(vite@6.4.1(@types/node@24.10.7)(sass@1.79.5)(terser@5.44.1)(yaml@2.8.2))
       vitest:
         specifier: ^4.0.17
         version: 4.0.17(@types/node@24.10.7)(@vitest/ui@4.0.17)(jsdom@27.4.0)(msw@2.12.7(@types/node@24.10.7)(typescript@5.9.3))(sass@1.79.5)(terser@5.44.1)(yaml@2.8.2)
@@ -20359,6 +20362,17 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
+
+  vite-plugin-svgr@4.5.0(rollup@4.55.1)(typescript@5.9.3)(vite@6.4.1(@types/node@24.10.7)(sass@1.79.5)(terser@5.44.1)(yaml@2.8.2)):
+    dependencies:
+      '@rollup/pluginutils': 5.3.0(rollup@4.55.1)
+      '@svgr/core': 8.1.0(typescript@5.9.3)
+      '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0(typescript@5.9.3))
+      vite: 6.4.1(@types/node@24.10.7)(sass@1.79.5)(terser@5.44.1)(yaml@2.8.2)
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+      - typescript
 
   vite-plugin-svgr@4.5.0(rollup@4.55.1)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.7)(sass@1.79.5)(terser@5.44.1)(yaml@2.8.2)):
     dependencies:

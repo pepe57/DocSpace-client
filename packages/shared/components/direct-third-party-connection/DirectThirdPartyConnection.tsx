@@ -37,7 +37,7 @@ import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?u
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "../toast";
-import { Button } from "../button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { buildDataTestId, getOAuthToken } from "../../utils/common";
 import { ComboBox } from "../combobox";
 import { saveSettingsThirdParty } from "../../api/files";

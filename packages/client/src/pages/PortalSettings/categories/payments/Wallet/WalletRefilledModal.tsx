@@ -33,7 +33,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 
 import AutomaticPaymentsBlock from "../../../../../components/panels/TopUpBalance/sub-components/AutoPayments";

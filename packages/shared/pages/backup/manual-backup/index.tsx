@@ -32,7 +32,7 @@ import classNames from "classnames";
 import { TFunction } from "i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "../../../components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { startBackup } from "../../../api/portal";
 import { RadioButton } from "../../../components/radio-button";

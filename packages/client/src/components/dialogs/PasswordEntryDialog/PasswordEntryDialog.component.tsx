@@ -37,7 +37,7 @@ import { ValidationStatus } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { validatePublicRoomPassword } from "@docspace/shared/api/rooms";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 

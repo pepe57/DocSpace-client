@@ -29,7 +29,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { DropDownItem } from "../drop-down-item";
 import { DropDown } from ".";
 import type { DropDownProps } from "./DropDown.types";
-import { Button } from "../button";
+import { Button } from "@docspace/ui-kit/components/button";
 
 const meta = {
   title: "Drop down components/DropDown",

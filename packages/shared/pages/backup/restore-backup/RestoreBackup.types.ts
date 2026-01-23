@@ -34,7 +34,7 @@ import type {
   ThirdPartyAccountType,
   TTranslation,
 } from "../../../types";
-import type { ButtonSize } from "../../../components/button";
+import type { ButtonSize } from "@docspace/ui-kit/components/button";
 import type { TenantStatus } from "../../../enums";
 import type { FilesSelectorSettings } from "../../../components/files-selector-input";
 import type { TBreadCrumb } from "../../../components/selector/Selector.types";

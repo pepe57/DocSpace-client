@@ -28,7 +28,7 @@
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import { KnowledgeType } from "@docspace/shared/api/ai/enums";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";

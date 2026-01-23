@@ -39,7 +39,7 @@ import {
   TApiKeyParamsRequest,
 } from "@docspace/shared/api/api-keys/types";
 import { isMobile } from "@docspace/shared/utils";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/shared/components/toast";

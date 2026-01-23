@@ -26,7 +26,7 @@
 
 import { useTranslation } from "react-i18next";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
-import { Button, ButtonSize } from "../../components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 import { TUserStatisticsDialogProps } from "./UserStatisticsDialog.types";

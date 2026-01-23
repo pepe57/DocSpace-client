@@ -33,24 +33,24 @@ import equal from "fast-deep-equal/react";
 import classNames from "classnames";
 
 import {
-	ModalDialog,
-	ModalDialogType,
+  ModalDialog,
+  ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import {
-	InputSize,
-	InputType,
-	TextInput,
+  InputSize,
+  InputType,
+  TextInput,
 } from "@docspace/ui-kit/components/text-input";
 import { ProviderType } from "@docspace/shared/api/ai/enums";
 import { getAiProviderLabel } from "@docspace/shared/utils";
 import type {
-	TAiProvider,
-	TCreateAiProvider,
-	TProviderTypeWithUrl,
-	TUpdateAiProvider,
+  TAiProvider,
+  TCreateAiProvider,
+  TProviderTypeWithUrl,
+  TUpdateAiProvider,
 } from "@docspace/shared/api/ai/types";
 import { type TData, toastr } from "@docspace/shared/components/toast";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
@@ -63,391 +63,391 @@ import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore"
 import styles from "./AddUpdateDialog.module.scss";
 
 type AddEditDialogProps = {
-	variant: "add" | "update";
-	onClose: () => void;
-	aiProviderTypesWithUrls: TProviderTypeWithUrl[];
-	providerData?: TAiProvider;
-	addAIProvider?: AISettingsStore["addAIProvider"];
-	updateAIProvider?: AISettingsStore["updateAIProvider"];
-	getAIConfig?: SettingsStore["getAIConfig"];
+  variant: "add" | "update";
+  onClose: () => void;
+  aiProviderTypesWithUrls: TProviderTypeWithUrl[];
+  providerData?: TAiProvider;
+  addAIProvider?: AISettingsStore["addAIProvider"];
+  updateAIProvider?: AISettingsStore["updateAIProvider"];
+  getAIConfig?: SettingsStore["getAIConfig"];
 };
 
 const providerTypes: TOption[] = [
-	{
-		key: ProviderType.OpenAi,
-		label: getAiProviderLabel(ProviderType.OpenAi),
-	},
-	{
-		key: ProviderType.Anthropic,
-		label: getAiProviderLabel(ProviderType.Anthropic),
-	},
-	{
-		key: ProviderType.TogetherAi,
-		label: getAiProviderLabel(ProviderType.TogetherAi),
-	},
-	{
-		key: ProviderType.OpenAiCompatible,
-		label: getAiProviderLabel(ProviderType.OpenAiCompatible),
-	},
-	{
-		key: ProviderType.OpenRouter,
-		label: getAiProviderLabel(ProviderType.OpenRouter),
-	},
-	{
-		key: ProviderType.DeepSeek,
-		label: getAiProviderLabel(ProviderType.DeepSeek),
-	},
-	{
-		key: ProviderType.XAi,
-		label: getAiProviderLabel(ProviderType.XAi),
-	},
-	{
-		key: ProviderType.Google,
-		label: getAiProviderLabel(ProviderType.Google),
-	},
+  {
+    key: ProviderType.OpenAi,
+    label: getAiProviderLabel(ProviderType.OpenAi),
+  },
+  {
+    key: ProviderType.Anthropic,
+    label: getAiProviderLabel(ProviderType.Anthropic),
+  },
+  {
+    key: ProviderType.TogetherAi,
+    label: getAiProviderLabel(ProviderType.TogetherAi),
+  },
+  {
+    key: ProviderType.OpenAiCompatible,
+    label: getAiProviderLabel(ProviderType.OpenAiCompatible),
+  },
+  {
+    key: ProviderType.OpenRouter,
+    label: getAiProviderLabel(ProviderType.OpenRouter),
+  },
+  {
+    key: ProviderType.DeepSeek,
+    label: getAiProviderLabel(ProviderType.DeepSeek),
+  },
+  {
+    key: ProviderType.XAi,
+    label: getAiProviderLabel(ProviderType.XAi),
+  },
+  {
+    key: ProviderType.Google,
+    label: getAiProviderLabel(ProviderType.Google),
+  },
 ];
 
 const getSelectedOptionByProviderType = (type?: ProviderType) => {
-	return providerTypes.find((item) => item.key === type) || providerTypes[0];
+  return providerTypes.find((item) => item.key === type) || providerTypes[0];
 };
 
 const getURLByProviderType = (
-	type: ProviderType,
-	aiProviderTypesWithUrls: TProviderTypeWithUrl[],
+  type: ProviderType,
+  aiProviderTypesWithUrls: TProviderTypeWithUrl[],
 ) => {
-	return aiProviderTypesWithUrls.find((item) => item.type === type)?.url || "";
+  return aiProviderTypesWithUrls.find((item) => item.type === type)?.url || "";
 };
 
 const AddUpdateDialogComponent = ({
-	variant,
-	onClose,
-	aiProviderTypesWithUrls,
-	addAIProvider,
-	updateAIProvider,
-	providerData,
-	getAIConfig,
+  variant,
+  onClose,
+  aiProviderTypesWithUrls,
+  addAIProvider,
+  updateAIProvider,
+  providerData,
+  getAIConfig,
 }: AddEditDialogProps) => {
-	const { t } = useTranslation(["Common", "AISettings", "OAuth", "Webhooks"]);
-	const submitButtonRef = useRef<HTMLButtonElement>(null);
+  const { t } = useTranslation(["Common", "AISettings", "OAuth", "Webhooks"]);
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
 
-	const [selectedOption, setSelectedOption] = useState(
-		getSelectedOptionByProviderType(providerData?.type),
-	);
-	const [providerTitle, setProviderTitle] = useState(providerData?.title || "");
-	const [providerKey, setProviderKey] = useState("");
-	const [providerUrl, setProviderUrl] = useState(
-		providerData?.url ||
-			getURLByProviderType(
-				selectedOption.key as ProviderType,
-				aiProviderTypesWithUrls,
-			),
-	);
-	const [isKeyInputHidden, setIsKeyInputHidden] = useState(
-		variant === "update" && !providerData?.needReset,
-	);
-	const [isRequestRunning, setIsRequestRunning] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(
+    getSelectedOptionByProviderType(providerData?.type),
+  );
+  const [providerTitle, setProviderTitle] = useState(providerData?.title || "");
+  const [providerKey, setProviderKey] = useState("");
+  const [providerUrl, setProviderUrl] = useState(
+    providerData?.url ||
+      getURLByProviderType(
+        selectedOption.key as ProviderType,
+        aiProviderTypesWithUrls,
+      ),
+  );
+  const [isKeyInputHidden, setIsKeyInputHidden] = useState(
+    variant === "update" && !providerData?.needReset,
+  );
+  const [isRequestRunning, setIsRequestRunning] = useState(false);
 
-	const valuesByProvider = useRef<
-		Record<ProviderType, { title: string; url: string; key: string }>
-	>({
-		[ProviderType.OpenAi]: { title: "", url: "", key: "" },
-		[ProviderType.Anthropic]: { title: "", url: "", key: "" },
-		[ProviderType.TogetherAi]: { title: "", url: "", key: "" },
-		[ProviderType.OpenAiCompatible]: { title: "", url: "", key: "" },
-		[ProviderType.OpenRouter]: { title: "", url: "", key: "" },
-		[ProviderType.DeepSeek]: { title: "", url: "", key: "" },
-		[ProviderType.XAi]: { title: "", url: "", key: "" },
-		[ProviderType.Google]: { title: "", url: "", key: "" },
-	});
+  const valuesByProvider = useRef<
+    Record<ProviderType, { title: string; url: string; key: string }>
+  >({
+    [ProviderType.OpenAi]: { title: "", url: "", key: "" },
+    [ProviderType.Anthropic]: { title: "", url: "", key: "" },
+    [ProviderType.TogetherAi]: { title: "", url: "", key: "" },
+    [ProviderType.OpenAiCompatible]: { title: "", url: "", key: "" },
+    [ProviderType.OpenRouter]: { title: "", url: "", key: "" },
+    [ProviderType.DeepSeek]: { title: "", url: "", key: "" },
+    [ProviderType.XAi]: { title: "", url: "", key: "" },
+    [ProviderType.Google]: { title: "", url: "", key: "" },
+  });
 
-	const initFormData = useRef({
-		selectedOption,
-		providerTitle,
-		providerUrl,
-		providerKey,
-	});
+  const initFormData = useRef({
+    selectedOption,
+    providerTitle,
+    providerUrl,
+    providerKey,
+  });
 
-	const requiredFieldsFilled =
-		providerTitle.trim().length > 0 && providerUrl.trim().length > 0;
-	const hasChanges = !equal(initFormData.current, {
-		selectedOption,
-		providerTitle,
-		providerUrl,
-		providerKey,
-	});
+  const requiredFieldsFilled =
+    providerTitle.trim().length > 0 && providerUrl.trim().length > 0;
+  const hasChanges = !equal(initFormData.current, {
+    selectedOption,
+    providerTitle,
+    providerUrl,
+    providerKey,
+  });
 
-	const canSubmit = requiredFieldsFilled && hasChanges;
+  const canSubmit = requiredFieldsFilled && hasChanges;
 
-	const onSelectProvider = (option: TOption) => {
-		const currentProviderType = selectedOption.key as ProviderType;
-		const newProviderType = option.key as ProviderType;
+  const onSelectProvider = (option: TOption) => {
+    const currentProviderType = selectedOption.key as ProviderType;
+    const newProviderType = option.key as ProviderType;
 
-		valuesByProvider.current[currentProviderType] = {
-			title: providerTitle,
-			url: providerUrl,
-			key: providerKey,
-		};
+    valuesByProvider.current[currentProviderType] = {
+      title: providerTitle,
+      url: providerUrl,
+      key: providerKey,
+    };
 
-		setSelectedOption(option);
+    setSelectedOption(option);
 
-		const savedValues = valuesByProvider.current[newProviderType];
-		if (savedValues.title || savedValues.url || savedValues.key) {
-			setProviderTitle(savedValues.title);
-			setProviderUrl(savedValues.url);
-			setProviderKey(savedValues.key);
-		} else {
-			setProviderTitle("");
-			setProviderUrl(
-				getURLByProviderType(newProviderType, aiProviderTypesWithUrls),
-			);
-			setProviderKey("");
-		}
-	};
+    const savedValues = valuesByProvider.current[newProviderType];
+    if (savedValues.title || savedValues.url || savedValues.key) {
+      setProviderTitle(savedValues.title);
+      setProviderUrl(savedValues.url);
+      setProviderKey(savedValues.key);
+    } else {
+      setProviderTitle("");
+      setProviderUrl(
+        getURLByProviderType(newProviderType, aiProviderTypesWithUrls),
+      );
+      setProviderKey("");
+    }
+  };
 
-	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		if (!canSubmit) return;
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!canSubmit) return;
 
-		setIsRequestRunning(true);
+    setIsRequestRunning(true);
 
-		try {
-			if (variant === "add") {
-				const data: TCreateAiProvider = {
-					key: providerKey,
-					title: providerTitle,
-					type: selectedOption.key as ProviderType,
-					url: providerUrl,
-				};
+    try {
+      if (variant === "add") {
+        const data: TCreateAiProvider = {
+          key: providerKey,
+          title: providerTitle,
+          type: selectedOption.key as ProviderType,
+          url: providerUrl,
+        };
 
-				await addAIProvider?.(data);
-				toastr.success(
-					t("AISettings:ProviderAddedSuccess", {
-						aiProvider: t("Common:AIProvider"),
-					}),
-				);
-			}
+        await addAIProvider?.(data);
+        toastr.success(
+          t("AISettings:ProviderAddedSuccess", {
+            aiProvider: t("Common:AIProvider"),
+          }),
+        );
+      }
 
-			if (variant === "update" && providerData?.id) {
-				const data: TUpdateAiProvider = {};
+      if (variant === "update" && providerData?.id) {
+        const data: TUpdateAiProvider = {};
 
-				if (providerData.title !== providerTitle) {
-					data.title = providerTitle;
-				}
+        if (providerData.title !== providerTitle) {
+          data.title = providerTitle;
+        }
 
-				if (providerData.url !== providerUrl) {
-					data.url = providerUrl;
-				}
+        if (providerData.url !== providerUrl) {
+          data.url = providerUrl;
+        }
 
-				if (!isKeyInputHidden && providerKey.length > 0) {
-					data.key = providerKey;
-				}
+        if (!isKeyInputHidden && providerKey.length > 0) {
+          data.key = providerKey;
+        }
 
-				await updateAIProvider?.(providerData.id, data);
-				toastr.success(
-					t("AISettings:ProviderUpdatedSuccess", {
-						aiProvider: t("Common:AIProvider"),
-					}),
-				);
-			}
+        await updateAIProvider?.(providerData.id, data);
+        toastr.success(
+          t("AISettings:ProviderUpdatedSuccess", {
+            aiProvider: t("Common:AIProvider"),
+          }),
+        );
+      }
 
-			getAIConfig?.();
+      getAIConfig?.();
 
-			onClose();
-		} catch (e) {
-			toastr.error(e as TData);
-		} finally {
-			setIsRequestRunning(false);
-		}
-	};
+      onClose();
+    } catch (e) {
+      toastr.error(e as TData);
+    } finally {
+      setIsRequestRunning(false);
+    }
+  };
 
-	const handleSubmitClick = () => {
-		if (canSubmit) submitButtonRef.current?.click();
-	};
+  const handleSubmitClick = () => {
+    if (canSubmit) submitButtonRef.current?.click();
+  };
 
-	const onResetKey = () => setIsKeyInputHidden(false);
+  const onResetKey = () => setIsKeyInputHidden(false);
 
-	const filteredProviderTypes = useMemo(() => {
-		return providerTypes.filter((item) =>
-			aiProviderTypesWithUrls.find((p) => p.type === item.key),
-		);
-	}, [aiProviderTypesWithUrls]);
+  const filteredProviderTypes = useMemo(() => {
+    return providerTypes.filter((item) =>
+      aiProviderTypesWithUrls.find((p) => p.type === item.key),
+    );
+  }, [aiProviderTypesWithUrls]);
 
-	useEffect(() => {
-		if (providerData?.type) {
-			valuesByProvider.current[providerData.type] = {
-				title: providerData.title || "",
-				url: providerData.url || "",
-				key: "",
-			};
-		}
-	}, [providerData]);
+  useEffect(() => {
+    if (providerData?.type) {
+      valuesByProvider.current[providerData.type] = {
+        title: providerData.title || "",
+        url: providerData.url || "",
+        key: "",
+      };
+    }
+  }, [providerData]);
 
-	return (
-		<ModalDialog
-			visible
-			displayType={ModalDialogType.aside}
-			onClose={onClose}
-			withBodyScroll
-		>
-			<ModalDialog.Header>{t("Common:AIProvider")}</ModalDialog.Header>
+  return (
+    <ModalDialog
+      visible
+      displayType={ModalDialogType.aside}
+      onClose={onClose}
+      withBodyScroll
+    >
+      <ModalDialog.Header>{t("Common:AIProvider")}</ModalDialog.Header>
 
-			<ModalDialog.Body>
-				<form
-					className={styles.modalBody}
-					onSubmit={onSubmit}
-					data-testid={
-						variant === "add" ? "add-provider-form" : "update-provider-form"
-					}
-				>
-					<FieldContainer
-						labelText={t("AISettings:Provider")}
-						labelVisible
-						isVertical
-						removeMargin
-					>
-						<ComboBox
-							options={filteredProviderTypes}
-							selectedOption={selectedOption}
-							onSelect={onSelectProvider}
-							scaled
-							scaledOptions
-							isDisabled={variant === "update" || isRequestRunning}
-							dataTestId="provider-type-combobox"
-						/>
-					</FieldContainer>
-					<FieldContainer
-						labelText={t("Common:Label")}
-						labelVisible
-						isVertical
-						removeMargin
-						isRequired
-					>
-						<TextInput
-							size={InputSize.base}
-							type={InputType.text}
-							value={providerTitle}
-							onChange={(e) => setProviderTitle(e.target.value)}
-							scale
-							placeholder={t("AISettings:EnterLabel")}
-							isDisabled={isRequestRunning}
-							testId="provider-title-input"
-						/>
-						<Text className={styles.fieldHint}>
-							{t("AISettings:ProviderNameInputHint")}
-						</Text>
-					</FieldContainer>
+      <ModalDialog.Body>
+        <form
+          className={styles.modalBody}
+          onSubmit={onSubmit}
+          data-testid={
+            variant === "add" ? "add-provider-form" : "update-provider-form"
+          }
+        >
+          <FieldContainer
+            labelText={t("AISettings:Provider")}
+            labelVisible
+            isVertical
+            removeMargin
+          >
+            <ComboBox
+              options={filteredProviderTypes}
+              selectedOption={selectedOption}
+              onSelect={onSelectProvider}
+              scaled
+              scaledOptions
+              isDisabled={variant === "update" || isRequestRunning}
+              dataTestId="provider-type-combobox"
+            />
+          </FieldContainer>
+          <FieldContainer
+            labelText={t("Common:Label")}
+            labelVisible
+            isVertical
+            removeMargin
+            isRequired
+          >
+            <TextInput
+              size={InputSize.base}
+              type={InputType.text}
+              value={providerTitle}
+              onChange={(e) => setProviderTitle(e.target.value)}
+              scale
+              placeholder={t("AISettings:EnterLabel")}
+              isDisabled={isRequestRunning}
+              testId="provider-title-input"
+            />
+            <Text className={styles.fieldHint}>
+              {t("AISettings:ProviderNameInputHint")}
+            </Text>
+          </FieldContainer>
 
-					<FieldContainer
-						labelText={t("AISettings:ProviderURL")}
-						labelVisible
-						isVertical
-						removeMargin
-						isRequired
-					>
-						<TextInput
-							size={InputSize.base}
-							type={InputType.text}
-							value={providerUrl}
-							onChange={(e) => setProviderUrl(e.target.value)}
-							scale
-							placeholder={t("OAuth:EnterURL")}
-							isDisabled={
-								isRequestRunning ||
-								selectedOption.key !== ProviderType.OpenAiCompatible
-							}
-							testId="provider-url-input"
-						/>
-						<Text className={styles.fieldHint}>
-							{t("AISettings:ProviderURLInputHint")}
-						</Text>
-					</FieldContainer>
-					<FieldContainer
-						labelText={t("AISettings:ProviderKey")}
-						labelVisible
-						isVertical
-						removeMargin
-					>
-						{isKeyInputHidden ? (
-							<div className={styles.resetKeyBlock}>
-								<div className={styles.resetKeyHint}>
-									{t("AISettings:ResetProviderKeyDescription")}
-								</div>
-								<Link
-									type={LinkType.action}
-									fontWeight={600}
-									lineHeight="20px"
-									isHovered
-									onClick={onResetKey}
-									dataTestId="provider-reset-key-link"
-								>
-									{t("Webhooks:ResetKey")}
-								</Link>
-							</div>
-						) : (
-							<>
-								<PasswordInput
-									size={InputSize.base}
-									inputValue={providerKey}
-									onChange={(_, value) => setProviderKey(value ?? "")}
-									isFullWidth
-									isDisableTooltip
-									placeholder={t("AISettings:EnterKey")}
-									isDisabled={isRequestRunning}
-									isSimulateType
-									autoComplete="off"
-									hasError={providerData?.needReset}
-									testId="provider-key-input"
-								/>
-								<Text
-									className={classNames(styles.fieldHint, {
-										[styles.fieldHintError]: providerData?.needReset,
-									})}
-								>
-									{t("AISettings:ProviderKeyInputHint", {
-										aiProvider: t("Common:AIProvider"),
-									})}
-								</Text>
-							</>
-						)}
-					</FieldContainer>
-					<button
-						type="submit"
-						ref={submitButtonRef}
-						hidden
-						aria-label="submit"
-					/>
-				</form>
-			</ModalDialog.Body>
+          <FieldContainer
+            labelText={t("AISettings:ProviderURL")}
+            labelVisible
+            isVertical
+            removeMargin
+            isRequired
+          >
+            <TextInput
+              size={InputSize.base}
+              type={InputType.text}
+              value={providerUrl}
+              onChange={(e) => setProviderUrl(e.target.value)}
+              scale
+              placeholder={t("OAuth:EnterURL")}
+              isDisabled={
+                isRequestRunning ||
+                selectedOption.key !== ProviderType.OpenAiCompatible
+              }
+              testId="provider-url-input"
+            />
+            <Text className={styles.fieldHint}>
+              {t("AISettings:ProviderURLInputHint")}
+            </Text>
+          </FieldContainer>
+          <FieldContainer
+            labelText={t("AISettings:ProviderKey")}
+            labelVisible
+            isVertical
+            removeMargin
+          >
+            {isKeyInputHidden ? (
+              <div className={styles.resetKeyBlock}>
+                <div className={styles.resetKeyHint}>
+                  {t("AISettings:ResetProviderKeyDescription")}
+                </div>
+                <Link
+                  type={LinkType.action}
+                  fontWeight={600}
+                  lineHeight="20px"
+                  isHovered
+                  onClick={onResetKey}
+                  dataTestId="provider-reset-key-link"
+                >
+                  {t("Webhooks:ResetKey")}
+                </Link>
+              </div>
+            ) : (
+              <>
+                <PasswordInput
+                  size={InputSize.base}
+                  inputValue={providerKey}
+                  onChange={(_, value) => setProviderKey(value ?? "")}
+                  isFullWidth
+                  isDisableTooltip
+                  placeholder={t("AISettings:EnterKey")}
+                  isDisabled={isRequestRunning}
+                  isSimulateType
+                  autoComplete="off"
+                  hasError={providerData?.needReset}
+                  testId="provider-key-input"
+                />
+                <Text
+                  className={classNames(styles.fieldHint, {
+                    [styles.fieldHintError]: providerData?.needReset,
+                  })}
+                >
+                  {t("AISettings:ProviderKeyInputHint", {
+                    aiProvider: t("Common:AIProvider"),
+                  })}
+                </Text>
+              </>
+            )}
+          </FieldContainer>
+          <button
+            type="submit"
+            ref={submitButtonRef}
+            hidden
+            aria-label="submit"
+          />
+        </form>
+      </ModalDialog.Body>
 
-			<ModalDialog.Footer>
-				<Button
-					primary
-					size={ButtonSize.normal}
-					label={t("Common:SaveButton")}
-					scale
-					onClick={handleSubmitClick}
-					isLoading={isRequestRunning}
-					isDisabled={!canSubmit}
-					testId="provider-save-button"
-				/>
-				<Button
-					size={ButtonSize.normal}
-					label={t("Common:CancelButton")}
-					scale
-					onClick={onClose}
-					isDisabled={isRequestRunning}
-					testId="provider-cancel-button"
-				/>
-			</ModalDialog.Footer>
-		</ModalDialog>
-	);
+      <ModalDialog.Footer>
+        <Button
+          primary
+          size={ButtonSize.normal}
+          label={t("Common:SaveButton")}
+          scale
+          onClick={handleSubmitClick}
+          isLoading={isRequestRunning}
+          isDisabled={!canSubmit}
+          testId="provider-save-button"
+        />
+        <Button
+          size={ButtonSize.normal}
+          label={t("Common:CancelButton")}
+          scale
+          onClick={onClose}
+          isDisabled={isRequestRunning}
+          testId="provider-cancel-button"
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
 };
 
 export const AddUpdateProviderDialog = inject(
-	({ aiSettingsStore, settingsStore }: TStore) => {
-		const { addAIProvider, updateAIProvider } = aiSettingsStore;
-		const { getAIConfig } = settingsStore;
+  ({ aiSettingsStore, settingsStore }: TStore) => {
+    const { addAIProvider, updateAIProvider } = aiSettingsStore;
+    const { getAIConfig } = settingsStore;
 
-		return { addAIProvider, updateAIProvider, getAIConfig };
-	},
+    return { addAIProvider, updateAIProvider, getAIConfig };
+  },
 )(observer(AddUpdateDialogComponent));

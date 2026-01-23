@@ -26,7 +26,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import PropTypes from "prop-types";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/ui-kit/components/text";

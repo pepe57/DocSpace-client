@@ -27,81 +27,81 @@
 import { useState } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 
 const LogoutAllSessionDialog = ({
-	t,
-	visible,
-	onClose,
-	isLoading,
-	onRemoveAllSessions,
-	onRemoveAllExceptThis,
+  t,
+  visible,
+  onClose,
+  isLoading,
+  onRemoveAllSessions,
+  onRemoveAllExceptThis,
 }) => {
-	const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
-	const onChangeCheckbox = () => {
-		setIsChecked((prev) => !prev);
-	};
+  const onChangeCheckbox = () => {
+    setIsChecked((prev) => !prev);
+  };
 
-	const onClickLogout = () => {
-		isChecked ? onRemoveAllSessions() : onRemoveAllExceptThis();
-	};
+  const onClickLogout = () => {
+    isChecked ? onRemoveAllSessions() : onRemoveAllExceptThis();
+  };
 
-	return (
-		<ModalDialog
-			visible={visible}
-			onClose={onClose}
-			displayType="modal"
-			autoMaxHeight
-		>
-			<ModalDialog.Header>{t("Common:LogoutButton")}</ModalDialog.Header>
-			<ModalDialog.Body>
-				<Text>{t("Profile:LogoutDescription")}</Text>
-				<Text style={{ margin: "15px 0" }}>
-					{t("Profile:DescriptionForSecurity")}
-				</Text>
-				<div
-					style={{
-						boxSizing: "border-box",
-						display: "flex",
-						alignItems: "center",
-					}}
-				>
-					<Checkbox
-						className="change-password"
-						isChecked={isChecked}
-						onChange={onChangeCheckbox}
-						label={t("Profile:ChangePasswordAfterLoggingOut")}
-						testId="dialog_change_password_checkbox"
-					/>
-				</div>
-			</ModalDialog.Body>
-			<ModalDialog.Footer>
-				<Button
-					className="logout"
-					key="LogoutBtn"
-					label={t("Profile:LogoutBtn")}
-					size="normal"
-					scale
-					primary
-					onClick={onClickLogout}
-					isLoading={isLoading}
-					testId="dialog_logout_button"
-				/>
-				<Button
-					className="cancel-button"
-					key="CloseBtn"
-					label={t("Common:CancelButton")}
-					size="normal"
-					scale
-					onClick={onClose}
-					isDisabled={isLoading}
-					testId="dialog_cancel_button"
-				/>
-			</ModalDialog.Footer>
-		</ModalDialog>
-	);
+  return (
+    <ModalDialog
+      visible={visible}
+      onClose={onClose}
+      displayType="modal"
+      autoMaxHeight
+    >
+      <ModalDialog.Header>{t("Common:LogoutButton")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <Text>{t("Profile:LogoutDescription")}</Text>
+        <Text style={{ margin: "15px 0" }}>
+          {t("Profile:DescriptionForSecurity")}
+        </Text>
+        <div
+          style={{
+            boxSizing: "border-box",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Checkbox
+            className="change-password"
+            isChecked={isChecked}
+            onChange={onChangeCheckbox}
+            label={t("Profile:ChangePasswordAfterLoggingOut")}
+            testId="dialog_change_password_checkbox"
+          />
+        </div>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          className="logout"
+          key="LogoutBtn"
+          label={t("Profile:LogoutBtn")}
+          size="normal"
+          scale
+          primary
+          onClick={onClickLogout}
+          isLoading={isLoading}
+          testId="dialog_logout_button"
+        />
+        <Button
+          className="cancel-button"
+          key="CloseBtn"
+          label={t("Common:CancelButton")}
+          size="normal"
+          scale
+          onClick={onClose}
+          isDisabled={isLoading}
+          testId="dialog_cancel_button"
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
 };
 
 export default LogoutAllSessionDialog;

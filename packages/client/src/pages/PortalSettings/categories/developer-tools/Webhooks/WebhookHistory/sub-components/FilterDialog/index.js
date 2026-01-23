@@ -31,7 +31,7 @@ import moment from "moment-timezone";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import styled from "styled-components";
 
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { useParams, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";

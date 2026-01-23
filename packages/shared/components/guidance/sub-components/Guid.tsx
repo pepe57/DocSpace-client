@@ -34,7 +34,7 @@ import React, {
 
 import { isIOS } from "react-device-detect";
 
-import { Button, ButtonSize } from "../../button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { isMobile, classNames } from "../../../utils";
 import { AsideHeader } from "../../aside-header";

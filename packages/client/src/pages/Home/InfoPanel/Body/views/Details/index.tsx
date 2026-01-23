@@ -33,7 +33,7 @@ import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FileType, FolderType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";

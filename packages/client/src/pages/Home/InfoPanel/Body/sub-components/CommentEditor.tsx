@@ -32,7 +32,7 @@ import { useTranslation } from "react-i18next";
 import { TFile } from "@docspace/shared/api/files/types";
 import { toastr } from "@docspace/shared/components/toast";
 import { Textarea } from "@docspace/shared/components/textarea";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
 

@@ -28,7 +28,7 @@ import { useTranslation } from "react-i18next";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "../../../../../components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { getFromLocalStorage } from "../../../../../utils";
 import { BackupStorageType, DeviceType } from "../../../../../enums";
 import { FilesSelectorInput } from "../../../../../components/files-selector-input";

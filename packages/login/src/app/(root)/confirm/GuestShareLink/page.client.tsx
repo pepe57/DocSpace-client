@@ -32,7 +32,7 @@ import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import {

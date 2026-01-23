@@ -28,7 +28,7 @@ import { Link as LinkRouter } from "react-router";
 
 import { classNames } from "../../../utils";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Button, ButtonSize } from "../../button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import { EmptyViewItem } from "./EmptyView.item";
 import { isEmptyButtonOption, isEmptyLinkOptions } from "../EmptyView.utils";

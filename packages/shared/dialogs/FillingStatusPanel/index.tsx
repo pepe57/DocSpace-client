@@ -49,7 +49,7 @@ import PublicRoomBar from "../../components/public-room-bar";
 import { Heading, HeadingLevel } from "../../components/heading";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import { FillingRoleProcess } from "../../components/filling-role-process";
-import { Button, ButtonSize } from "../../components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { getFormFillingStatus as getFormFillingStatusApi } from "../../api/files";
 import type { TFileFillingFormStatus } from "../../api/files/types";
 import { createLoader } from "../../utils/createLoader";

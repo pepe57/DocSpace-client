@@ -41,7 +41,7 @@ import { getFromLocalStorage } from "../../../../../utils";
 import { IconButton } from "../../../../../components/icon-button";
 import { toastr } from "../../../../../components/toast";
 import { THIRD_PARTY_SERVICES_URL } from "../../../../../constants";
-import type { ButtonSize } from "../../../../../components/button";
+import type { ButtonSize } from "@docspace/ui-kit/components/button";
 import type {
   SelectedStorageType,
   StorageRegionsType,

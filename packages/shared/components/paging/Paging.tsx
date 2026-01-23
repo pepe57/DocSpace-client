@@ -27,7 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import { ButtonSize, Button } from "../button";
+import { ButtonSize, Button } from "@docspace/ui-kit/components/button";
 import { ComboBox, TOption } from "../combobox";
 
 import { PagingProps } from "./Paging.types";

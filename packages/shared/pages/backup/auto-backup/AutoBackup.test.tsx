@@ -4,7 +4,7 @@ import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { BackupStorageType, FolderType } from "../../../enums";
-import { ButtonSize } from "../../../components/button";
+import { ButtonSize } from "@docspace/ui-kit/components/button";
 import * as portalApi from "../../../api/portal";
 
 import AutomaticBackup from "./index";

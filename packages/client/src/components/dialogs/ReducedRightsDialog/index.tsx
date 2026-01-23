@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 

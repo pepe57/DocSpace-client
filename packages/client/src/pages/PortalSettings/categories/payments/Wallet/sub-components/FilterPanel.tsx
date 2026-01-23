@@ -28,7 +28,7 @@ import { useTranslation } from "react-i18next";
 
 import ClearReactSvgUrl from "PUBLIC_DIR/images/icons/17/clear.react.svg?url";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,

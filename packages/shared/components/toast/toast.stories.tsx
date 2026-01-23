@@ -29,7 +29,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Toast } from ".";
 import { toastr } from "./sub-components/Toastr";
-import { Button, ButtonSize } from "../button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { ToastProps } from "./Toast.type";
 import { ToastType } from "./Toast.enums";

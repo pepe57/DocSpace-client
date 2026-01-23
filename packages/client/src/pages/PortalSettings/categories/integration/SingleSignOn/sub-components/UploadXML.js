@@ -31,7 +31,7 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Text } from "@docspace/ui-kit/components/text";
 

@@ -40,7 +40,7 @@ import { Textarea } from "@docspace/shared/components/textarea";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import type { TFileLink } from "@docspace/shared/api/files/types";

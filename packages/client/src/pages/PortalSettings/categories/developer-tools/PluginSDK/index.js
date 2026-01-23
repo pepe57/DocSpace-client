@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import GithubLight from "PUBLIC_DIR/images/thirdparties/github.light.react.svg";

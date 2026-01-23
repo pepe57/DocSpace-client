@@ -27,7 +27,7 @@
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { RoomsType } from "@docspace/shared/enums";
 
 const CreateRoomConfirmDialog = ({

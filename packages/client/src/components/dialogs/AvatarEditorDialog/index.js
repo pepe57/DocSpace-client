@@ -32,7 +32,7 @@ import { mobile } from "@docspace/ui-kit/utils/device";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { ImageEditor } from "@docspace/shared/components/image-editor";
 

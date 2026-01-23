@@ -28,7 +28,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import type { TAddNewServer } from "@docspace/shared/api/ai/types";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,

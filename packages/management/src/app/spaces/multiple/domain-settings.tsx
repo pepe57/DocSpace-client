@@ -30,11 +30,11 @@ import { DeviceType } from "@docspace/shared/enums";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
-	TextInput,
-	InputType,
-	InputSize,
+  TextInput,
+  InputType,
+  InputSize,
 } from "@docspace/ui-kit/components/text-input";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useStores } from "@/hooks/useStores";
@@ -42,50 +42,50 @@ import { useStores } from "@/hooks/useStores";
 import styles from "./multiple.module.scss";
 
 interface IProps {
-	baseDomain: string;
+  baseDomain: string;
 }
 
 export const DomainSettings = observer(({ baseDomain }: IProps) => {
-	const { t } = useTranslation(["Management", "Common"]);
-	const { currentDeviceType } = useDeviceType();
-	const { spacesStore } = useStores();
-	const { setChangeDomainDialogVisible } = spacesStore;
+  const { t } = useTranslation(["Management", "Common"]);
+  const { currentDeviceType } = useDeviceType();
+  const { spacesStore } = useStores();
+  const { setChangeDomainDialogVisible } = spacesStore;
 
-	const onEditButtonClick = () => {
-		setChangeDomainDialogVisible(true);
-	};
+  const onEditButtonClick = () => {
+    setChangeDomainDialogVisible(true);
+  };
 
-	return (
-		<div className={styles.domainSettings}>
-			<Text fontSize="16px" fontWeight={700}>
-				{t("DomainSettings")}
-			</Text>
-			<FieldContainer
-				className={styles.fieldContainer}
-				isVertical
-				labelText={t("Common:YourCurrentDomain")}
-				labelVisible
-			>
-				<TextInput
-					type={InputType.text}
-					size={InputSize.base}
-					value={baseDomain}
-					isDisabled
-					scale
-				/>
-			</FieldContainer>
-			<Button
-				testId="edit-domain-button"
-				size={
-					currentDeviceType === DeviceType.desktop
-						? ButtonSize.small
-						: ButtonSize.normal
-				}
-				label={t("Common:EditButton")}
-				primary
-				onClick={onEditButtonClick}
-				scale={false}
-			/>
-		</div>
-	);
+  return (
+    <div className={styles.domainSettings}>
+      <Text fontSize="16px" fontWeight={700}>
+        {t("DomainSettings")}
+      </Text>
+      <FieldContainer
+        className={styles.fieldContainer}
+        isVertical
+        labelText={t("Common:YourCurrentDomain")}
+        labelVisible
+      >
+        <TextInput
+          type={InputType.text}
+          size={InputSize.base}
+          value={baseDomain}
+          isDisabled
+          scale
+        />
+      </FieldContainer>
+      <Button
+        testId="edit-domain-button"
+        size={
+          currentDeviceType === DeviceType.desktop
+            ? ButtonSize.small
+            : ButtonSize.normal
+        }
+        label={t("Common:EditButton")}
+        primary
+        onClick={onEditButtonClick}
+        scale={false}
+      />
+    </div>
+  );
 });

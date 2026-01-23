@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import moment from "moment";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import {
   ComboBox,

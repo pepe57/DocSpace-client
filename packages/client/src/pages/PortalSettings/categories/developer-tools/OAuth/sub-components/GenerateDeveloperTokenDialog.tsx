@@ -34,10 +34,10 @@ import copy from "copy-to-clipboard";
 import api from "@docspace/shared/api";
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import {
-	ModalDialog,
-	ModalDialogType,
+  ModalDialog,
+  ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
@@ -54,248 +54,248 @@ import OAuthStore from "SRC_DIR/store/OAuthStore";
 import { StyledGenerateDevelopTokenContainer } from "../OAuth.styled";
 
 type GenerateDeveloperTokenDialogProps = {
-	client?: IClientProps;
+  client?: IClientProps;
 
-	email?: string;
+  email?: string;
 
-	setGenerateDeveloperTokenDialogVisible?: (value: boolean) => void;
-	setJwtToken?: () => Promise<void>;
+  setGenerateDeveloperTokenDialogVisible?: (value: boolean) => void;
+  setJwtToken?: () => Promise<void>;
 };
 
 const getDate = (date: Date, i18nArg: i18n) => {
-	return getCorrectDate(i18nArg.language, date);
+  return getCorrectDate(i18nArg.language, date);
 };
 
 const GenerateDeveloperTokenDialog = ({
-	client,
-	email,
-	setGenerateDeveloperTokenDialogVisible,
-	setJwtToken,
+  client,
+  email,
+  setGenerateDeveloperTokenDialogVisible,
+  setJwtToken,
 }: GenerateDeveloperTokenDialogProps) => {
-	const { i18n: i18nParam, t } = useTranslation([
-		"OAuth",
-		"Common",
-		"Webhooks",
-		"Files",
-	]);
-	const theme = useTheme();
+  const { i18n: i18nParam, t } = useTranslation([
+    "OAuth",
+    "Common",
+    "Webhooks",
+    "Files",
+  ]);
+  const theme = useTheme();
 
-	const [token, setToken] = React.useState("");
-	const [dates, setDates] = React.useState({
-		created: getDate(new Date(), i18nParam),
-		expires: getDate(new Date(), i18nParam),
-	});
-	const [requestRunning, setRequestRunning] = React.useState(false);
-	const [secret, setSecret] = React.useState("");
+  const [token, setToken] = React.useState("");
+  const [dates, setDates] = React.useState({
+    created: getDate(new Date(), i18nParam),
+    expires: getDate(new Date(), i18nParam),
+  });
+  const [requestRunning, setRequestRunning] = React.useState(false);
+  const [secret, setSecret] = React.useState("");
 
-	const onCopyClick = React.useCallback(async () => {
-		copy(token);
-		toastr.success(t("DeveloperTokenCopied"));
-	}, [t, token]);
+  const onCopyClick = React.useCallback(async () => {
+    copy(token);
+    toastr.success(t("DeveloperTokenCopied"));
+  }, [t, token]);
 
-	const onClose = async () => {
-		if (requestRunning) return;
+  const onClose = async () => {
+    if (requestRunning) return;
 
-		setGenerateDeveloperTokenDialogVisible?.(false);
-	};
+    setGenerateDeveloperTokenDialogVisible?.(false);
+  };
 
-	const onRevoke = async () => {
-		if (requestRunning || !token) return;
+  const onRevoke = async () => {
+    if (requestRunning || !token) return;
 
-		setRequestRunning(true);
+    setRequestRunning(true);
 
-		await setJwtToken?.();
+    await setJwtToken?.();
 
-		await api.oauth.revokeDeveloperToken(token, client!.clientId, secret);
+    await api.oauth.revokeDeveloperToken(token, client!.clientId, secret);
 
-		setRequestRunning(false);
+    setRequestRunning(false);
 
-		toastr.success(t("TokenRevokedSuccessfully"));
+    toastr.success(t("TokenRevokedSuccessfully"));
 
-		setToken("");
+    setToken("");
 
-		onClose();
-	};
+    onClose();
+  };
 
-	const onGenerate = async () => {
-		if (!client || requestRunning) return;
+  const onGenerate = async () => {
+    if (!client || requestRunning) return;
 
-		if (token) {
-			onCopyClick();
-			onClose();
+    if (token) {
+      onCopyClick();
+      onClose();
 
-			return;
-		}
+      return;
+    }
 
-		setRequestRunning(true);
+    setRequestRunning(true);
 
-		await setJwtToken?.();
+    await setJwtToken?.();
 
-		const { clientSecret } = await api.oauth.getClient(client.clientId);
+    const { clientSecret } = await api.oauth.getClient(client.clientId);
 
-		api.oauth
-			.generateDevelopToken(client.clientId, clientSecret, client.scopes)
-			?.then((data) => {
-				setRequestRunning(false);
+    api.oauth
+      .generateDevelopToken(client.clientId, clientSecret, client.scopes)
+      ?.then((data) => {
+        setRequestRunning(false);
 
-				if (!data) return;
+        if (!data) return;
 
-				const { access_token: accessToken, expires_in: expiresIn } = data;
+        const { access_token: accessToken, expires_in: expiresIn } = data;
 
-				copyShareLink(accessToken);
-				toastr.success(t("DeveloperTokenCopied"));
+        copyShareLink(accessToken);
+        toastr.success(t("DeveloperTokenCopied"));
 
-				const created = new Date();
-				// convert sec to ms
-				const expires = new Date(created.getTime() + expiresIn * 1000);
+        const created = new Date();
+        // convert sec to ms
+        const expires = new Date(created.getTime() + expiresIn * 1000);
 
-				if (accessToken) {
-					setToken(accessToken);
-					setDates({
-						created: getDate(created, i18nParam),
-						expires: getDate(expires, i18nParam),
-					});
-				}
-			})
-			.catch((e) => {
-				toastr.error(e as TData);
-			});
-	};
+        if (accessToken) {
+          setToken(accessToken);
+          setDates({
+            created: getDate(created, i18nParam),
+            expires: getDate(expires, i18nParam),
+          });
+        }
+      })
+      .catch((e) => {
+        toastr.error(e as TData);
+      });
+  };
 
-	React.useEffect(() => {
-		const fecthClient = async () => {
-			await setJwtToken?.();
+  React.useEffect(() => {
+    const fecthClient = async () => {
+      await setJwtToken?.();
 
-			const { clientSecret } = await api.oauth.getClient(client!.clientId);
+      const { clientSecret } = await api.oauth.getClient(client!.clientId);
 
-			setSecret(clientSecret);
-		};
+      setSecret(clientSecret);
+    };
 
-		fecthClient();
-	}, [client?.clientId]);
+    fecthClient();
+  }, [client?.clientId]);
 
-	return (
-		<ModalDialog
-			visible
-			onClose={onClose}
-			displayType={ModalDialogType.modal}
-			autoMaxHeight
-		>
-			<ModalDialog.Header>
-				{token ? t("Token") : t("GenerateToken")}
-			</ModalDialog.Header>
-			<ModalDialog.Body>
-				<StyledGenerateDevelopTokenContainer>
-					{!token ? (
-						<>
-							<Text style={{ marginBottom: "16px" }}>
-								{t("OAuth:GenerateTokenDescription")}
-							</Text>
-							<Text style={{ marginBottom: "16px" }}>
-								{t("OAuth:GenerateTokenScope")}
-							</Text>{" "}
-							<Text>
-								<Trans t={t} i18nKey="GenerateTokenNote" ns="OAuth" />
-							</Text>
-						</>
-					) : (
-						<>
-							<Text style={{ marginBottom: "16px" }}>
-								<Trans
-									t={t}
-									ns="OAuth"
-									i18nKey="GenerateTokenWarning"
-									values={{
-										supportEmail: email,
-									}}
-									components={{
-										1: (
-											<Link
-												href={`mailto:${email}`}
-												color={theme?.currentColorScheme?.main?.accent}
-												dataTestId="generate_token_email_link"
-											/>
-										),
-									}}
-								>
-									{`This token can be used to access your account (<1>{{supportEmail}}</1>) via API calls. Don't share it with anyone. Make sure you copy this token now as you won't see it again.`}
-								</Trans>
-							</Text>
-							<Text style={{ marginBottom: "16px" }}>
-								<Trans t={t} i18nKey="GenerateTokenNote" ns="OAuth" />
-							</Text>
-							<InputBlock
-								value={token}
-								scale
-								isReadOnly
-								size={InputSize.base}
-								iconName={CopyReactSvgUrl}
-								onIconClick={onCopyClick}
-								type={InputType.text}
-								maxLength={10000}
-								testId="generate_token_input"
-							/>
-							<Text dataTestId="generate_token_dates" className="dates">
-								<strong>{t("Files:ByCreation")}</strong>: {dates.created}
-								<br />
-								<strong>{t("Expires")}</strong>: {dates.expires}
-							</Text>
-						</>
-					)}
-				</StyledGenerateDevelopTokenContainer>
-			</ModalDialog.Body>
-			<ModalDialog.Footer>
-				<Button
-					label={
-						token
-							? `${t("Common:Copy")} & ${t("Common:CloseButton")}`
-							: t("Webhooks:Generate")
-					}
-					primary
-					scale
-					onClick={onGenerate}
-					isLoading={requestRunning}
-					size={ButtonSize.normal}
-					testId={
-						token ? "copy_generate_token_button" : "generate_token_button"
-					}
-				/>
-				<Button
-					label={token ? t("Revoke") : t("Common:CancelButton")}
-					scale
-					onClick={token ? onRevoke : onClose}
-					size={ButtonSize.normal}
-					isDisabled={requestRunning || !secret}
-					testId={
-						token ? "revoke_token_button" : "generate_token_cancel_button"
-					}
-				/>
-			</ModalDialog.Footer>
-		</ModalDialog>
-	);
+  return (
+    <ModalDialog
+      visible
+      onClose={onClose}
+      displayType={ModalDialogType.modal}
+      autoMaxHeight
+    >
+      <ModalDialog.Header>
+        {token ? t("Token") : t("GenerateToken")}
+      </ModalDialog.Header>
+      <ModalDialog.Body>
+        <StyledGenerateDevelopTokenContainer>
+          {!token ? (
+            <>
+              <Text style={{ marginBottom: "16px" }}>
+                {t("OAuth:GenerateTokenDescription")}
+              </Text>
+              <Text style={{ marginBottom: "16px" }}>
+                {t("OAuth:GenerateTokenScope")}
+              </Text>{" "}
+              <Text>
+                <Trans t={t} i18nKey="GenerateTokenNote" ns="OAuth" />
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text style={{ marginBottom: "16px" }}>
+                <Trans
+                  t={t}
+                  ns="OAuth"
+                  i18nKey="GenerateTokenWarning"
+                  values={{
+                    supportEmail: email,
+                  }}
+                  components={{
+                    1: (
+                      <Link
+                        href={`mailto:${email}`}
+                        color={theme?.currentColorScheme?.main?.accent}
+                        dataTestId="generate_token_email_link"
+                      />
+                    ),
+                  }}
+                >
+                  {`This token can be used to access your account (<1>{{supportEmail}}</1>) via API calls. Don't share it with anyone. Make sure you copy this token now as you won't see it again.`}
+                </Trans>
+              </Text>
+              <Text style={{ marginBottom: "16px" }}>
+                <Trans t={t} i18nKey="GenerateTokenNote" ns="OAuth" />
+              </Text>
+              <InputBlock
+                value={token}
+                scale
+                isReadOnly
+                size={InputSize.base}
+                iconName={CopyReactSvgUrl}
+                onIconClick={onCopyClick}
+                type={InputType.text}
+                maxLength={10000}
+                testId="generate_token_input"
+              />
+              <Text dataTestId="generate_token_dates" className="dates">
+                <strong>{t("Files:ByCreation")}</strong>: {dates.created}
+                <br />
+                <strong>{t("Expires")}</strong>: {dates.expires}
+              </Text>
+            </>
+          )}
+        </StyledGenerateDevelopTokenContainer>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          label={
+            token
+              ? `${t("Common:Copy")} & ${t("Common:CloseButton")}`
+              : t("Webhooks:Generate")
+          }
+          primary
+          scale
+          onClick={onGenerate}
+          isLoading={requestRunning}
+          size={ButtonSize.normal}
+          testId={
+            token ? "copy_generate_token_button" : "generate_token_button"
+          }
+        />
+        <Button
+          label={token ? t("Revoke") : t("Common:CancelButton")}
+          scale
+          onClick={token ? onRevoke : onClose}
+          size={ButtonSize.normal}
+          isDisabled={requestRunning || !secret}
+          testId={
+            token ? "revoke_token_button" : "generate_token_cancel_button"
+          }
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
 };
 
 export default inject(
-	({
-		oauthStore,
-		userStore,
-	}: {
-		oauthStore: OAuthStore;
-		userStore: UserStore;
-	}) => {
-		const {
-			setGenerateDeveloperTokenDialogVisible,
-			setJwtToken,
-			bufferSelection,
-		} = oauthStore;
+  ({
+    oauthStore,
+    userStore,
+  }: {
+    oauthStore: OAuthStore;
+    userStore: UserStore;
+  }) => {
+    const {
+      setGenerateDeveloperTokenDialogVisible,
+      setJwtToken,
+      bufferSelection,
+    } = oauthStore;
 
-		const { user } = userStore;
+    const { user } = userStore;
 
-		return {
-			setGenerateDeveloperTokenDialogVisible,
-			client: bufferSelection,
-			email: user?.email,
-			setJwtToken,
-		};
-	},
+    return {
+      setGenerateDeveloperTokenDialogVisible,
+      client: bufferSelection,
+      email: user?.email,
+      setJwtToken,
+    };
+  },
 )(observer(GenerateDeveloperTokenDialog));

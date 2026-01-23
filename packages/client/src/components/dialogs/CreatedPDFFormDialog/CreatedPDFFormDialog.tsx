@@ -36,7 +36,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { copyShareLink as clipboardCopy } from "@docspace/shared/utils/copy";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { toastr } from "@docspace/shared/components/toast";

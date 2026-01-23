@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { TData, toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { TTranslation } from "@docspace/shared/types";
 
 type Props = {

@@ -32,7 +32,7 @@ import { recalculateQuota } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 
 const RecalculateButton = (props) => {
   const { t } = useTranslation("Settings");

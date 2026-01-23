@@ -27,7 +27,7 @@
 import { useEffect } from "react";
 
 import { withTranslation } from "react-i18next";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,

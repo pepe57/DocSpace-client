@@ -32,7 +32,7 @@ import { useContext, useState } from "react";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 import { deletePortal } from "@docspace/shared/api/portal";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { TError } from "@/types";

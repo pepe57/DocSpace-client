@@ -34,7 +34,7 @@ import classNames from "classnames";
 
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import { ButtonSize, Button } from "../../components/button";
+import { ButtonSize, Button } from "@docspace/ui-kit/components/button";
 import PublicRoomBar from "../../components/public-room-bar";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import {

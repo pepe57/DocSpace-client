@@ -31,7 +31,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { useRouter } from "next/navigation";
 
 import { ScopeList } from "@docspace/shared/utils/oauth/scope-list";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import {

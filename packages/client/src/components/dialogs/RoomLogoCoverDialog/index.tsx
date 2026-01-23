@@ -40,7 +40,7 @@ import {
   isTablet,
   size,
 } from "@docspace/shared/utils";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import RoomLogoCover from "./sub-components/RoomLogoCover";
 import { CoverDialogProps, ILogoCover } from "./RoomLogoCoverDialog.types";
 

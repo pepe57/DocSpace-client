@@ -28,7 +28,7 @@ import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject } from "mobx-react";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Link } from "@docspace/ui-kit/components/link";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -39,91 +39,91 @@ import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
 
 const PortalDeactivation = (props) => {
-	const { t, tReady, owner, currentColorScheme, sendActivationLink } = props;
-	const [isDesktopView, setIsDesktopView] = useState(false);
+  const { t, tReady, owner, currentColorScheme, sendActivationLink } = props;
+  const [isDesktopView, setIsDesktopView] = useState(false);
 
-	const onCheckView = () => {
-		if (isDesktop()) setIsDesktopView(true);
-		else setIsDesktopView(false);
-	};
+  const onCheckView = () => {
+    if (isDesktop()) setIsDesktopView(true);
+    else setIsDesktopView(false);
+  };
 
-	useEffect(() => {
-		setDocumentTitle(
-			t("PortalDeactivation", { productName: t("Common:ProductName") }),
-		);
-		onCheckView();
-		window.addEventListener("resize", onCheckView);
-		return () => window.removeEventListener("resize", onCheckView);
-	}, []);
+  useEffect(() => {
+    setDocumentTitle(
+      t("PortalDeactivation", { productName: t("Common:ProductName") }),
+    );
+    onCheckView();
+    window.addEventListener("resize", onCheckView);
+    return () => window.removeEventListener("resize", onCheckView);
+  }, []);
 
-	const onDeactivateClick = async () => {
-		try {
-			await sendSuspendPortalEmail();
-			toastr.success(
-				t("PortalDeletionEmailSended", { ownerEmail: owner.email }),
-			);
-		} catch (error) {
-			toastr.error(error);
-		}
-	};
+  const onDeactivateClick = async () => {
+    try {
+      await sendSuspendPortalEmail();
+      toastr.success(
+        t("PortalDeletionEmailSended", { ownerEmail: owner.email }),
+      );
+    } catch (error) {
+      toastr.error(error);
+    }
+  };
 
-	const requestAgain = () => {
-		sendActivationLink && sendActivationLink().then(showEmailActivationToast);
-	};
+  const requestAgain = () => {
+    sendActivationLink && sendActivationLink().then(showEmailActivationToast);
+  };
 
-	const notActivatedEmail =
-		owner?.activationStatus === EmployeeActivationStatus.NotActivated;
+  const notActivatedEmail =
+    owner?.activationStatus === EmployeeActivationStatus.NotActivated;
 
-	return (
-		<MainContainer>
-			<Text fontSize="13px" className="description">
-				{t("PortalDeactivationDescription")}
-			</Text>
-			<Text className="helper">
-				{t("PortalDeactivationHelper", {
-					productName: t("Common:ProductName"),
-				})}
-			</Text>
-			<ButtonWrapper>
-				<Button
-					className="deactivate-button button"
-					label={t("Common:Deactivate")}
-					primary
-					size={isDesktopView ? "small" : "normal"}
-					onClick={onDeactivateClick}
-					isDisabled={notActivatedEmail}
-					testId="request_deactivate_portal_button"
-				/>
-				{notActivatedEmail && tReady ? (
-					<Text fontSize="12px" fontWeight="600">
-						{t("MainBar:ConfirmEmailHeader", {
-							email: owner.email,
-							productName: t("Common:ProductName"),
-						})}
-						<Link
-							className="request-again-link"
-							color={currentColorScheme?.main?.accent}
-							fontSize="12px"
-							fontWeight="400"
-							onClick={requestAgain}
-							testId="request_deactivate_portal_link"
-						>
-							{t("MainBar:RequestActivation")}
-						</Link>
-					</Text>
-				) : null}
-			</ButtonWrapper>
-		</MainContainer>
-	);
+  return (
+    <MainContainer>
+      <Text fontSize="13px" className="description">
+        {t("PortalDeactivationDescription")}
+      </Text>
+      <Text className="helper">
+        {t("PortalDeactivationHelper", {
+          productName: t("Common:ProductName"),
+        })}
+      </Text>
+      <ButtonWrapper>
+        <Button
+          className="deactivate-button button"
+          label={t("Common:Deactivate")}
+          primary
+          size={isDesktopView ? "small" : "normal"}
+          onClick={onDeactivateClick}
+          isDisabled={notActivatedEmail}
+          testId="request_deactivate_portal_button"
+        />
+        {notActivatedEmail && tReady ? (
+          <Text fontSize="12px" fontWeight="600">
+            {t("MainBar:ConfirmEmailHeader", {
+              email: owner.email,
+              productName: t("Common:ProductName"),
+            })}
+            <Link
+              className="request-again-link"
+              color={currentColorScheme?.main?.accent}
+              fontSize="12px"
+              fontWeight="400"
+              onClick={requestAgain}
+              testId="request_deactivate_portal_link"
+            >
+              {t("MainBar:RequestActivation")}
+            </Link>
+          </Text>
+        ) : null}
+      </ButtonWrapper>
+    </MainContainer>
+  );
 };
 
 export default inject(({ settingsStore, userStore }) => {
-	const { owner, currentColorScheme } = settingsStore;
-	const { sendActivationLink } = userStore;
+  const { owner, currentColorScheme } = settingsStore;
+  const { sendActivationLink } = userStore;
 
-	return {
-		owner,
-		currentColorScheme,
-		sendActivationLink,
-	};
+  return {
+    owner,
+    currentColorScheme,
+    sendActivationLink,
+  };
 })(withTranslation(["Settings", "MainBar", "People"])(PortalDeactivation));

@@ -31,7 +31,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { LDAPCertificateProblem } from "@docspace/shared/enums";

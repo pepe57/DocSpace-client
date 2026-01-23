@@ -32,7 +32,7 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Link } from "@docspace/ui-kit/components/link";
 import api from "@docspace/shared/api";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import {
   getUserAvatarRoleByType,
   getUserType,

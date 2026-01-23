@@ -53,7 +53,7 @@ import {
 import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";

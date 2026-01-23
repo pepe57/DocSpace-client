@@ -27,7 +27,7 @@
 import { useEffect, useState } from "react";
 import { Meta, StoryFn } from "@storybook/react";
 
-import { Button } from "../../components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
 
 import type { DownloadDialogProps } from "./DownloadDialog.types";

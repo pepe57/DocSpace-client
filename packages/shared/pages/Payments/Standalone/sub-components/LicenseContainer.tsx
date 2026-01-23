@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FileInput } from "../../../../components/file-input";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
-import { Button, ButtonSize } from "../../../../components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import { ILicenseProps } from "../Standalone.types";
 import styles from "../Standalone.module.scss";
@@ -38,94 +38,94 @@ import styles from "../Standalone.module.scss";
 let timerId: ReturnType<typeof setTimeout> | null = null;
 
 export const LicenseContainer = ({
-	setPaymentsLicense,
-	acceptPaymentsLicense,
-	isLicenseCorrect,
-	isTrial,
+  setPaymentsLicense,
+  acceptPaymentsLicense,
+  isLicenseCorrect,
+  isTrial,
 }: ILicenseProps) => {
-	const { t } = useTranslation("Common");
-	const [isLicenseUploading, setIsLicenseUploading] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation("Common");
+  const [isLicenseUploading, setIsLicenseUploading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-	useEffect(() => {
-		return () => {
-			if (timerId) {
-				clearTimeout(timerId);
-				timerId = null;
-			}
-		};
-	}, []);
+  useEffect(() => {
+    return () => {
+      if (timerId) {
+        clearTimeout(timerId);
+        timerId = null;
+      }
+    };
+  }, []);
 
-	const onLicenseFileHandler = async (file: File | File[]) => {
-		timerId = setTimeout(() => {
-			setIsLicenseUploading(true);
-		}, 100);
+  const onLicenseFileHandler = async (file: File | File[]) => {
+    timerId = setTimeout(() => {
+      setIsLicenseUploading(true);
+    }, 100);
 
-		const fd = new FormData();
-		if (Array.isArray(file)) {
-			fd.append("files", file[0]);
-		} else {
-			fd.append("files", file);
-		}
+    const fd = new FormData();
+    if (Array.isArray(file)) {
+      fd.append("files", file[0]);
+    } else {
+      fd.append("files", file);
+    }
 
-		await setPaymentsLicense(null, fd);
+    await setPaymentsLicense(null, fd);
 
-		if (timerId) {
-			clearTimeout(timerId);
-			timerId = null;
-		}
-		setIsLicenseUploading(false);
-	};
+    if (timerId) {
+      clearTimeout(timerId);
+      timerId = null;
+    }
+    setIsLicenseUploading(false);
+  };
 
-	const onClickUpload = async () => {
-		timerId = setTimeout(() => {
-			setIsLoading(true);
-		}, 200);
+  const onClickUpload = async () => {
+    timerId = setTimeout(() => {
+      setIsLoading(true);
+    }, 200);
 
-		await acceptPaymentsLicense(t);
+    await acceptPaymentsLicense(t);
 
-		if (timerId) {
-			clearTimeout(timerId);
-			timerId = null;
-		}
-		setIsLoading(false);
-	};
+    if (timerId) {
+      clearTimeout(timerId);
+      timerId = null;
+    }
+    setIsLoading(false);
+  };
 
-	return (
-		<div className="payments_license">
-			<Text fontWeight={700} fontSize="16px">
-				{t("ActivateLicense")}
-			</Text>
+  return (
+    <div className="payments_license">
+      <Text fontWeight={700} fontSize="16px">
+        {t("ActivateLicense")}
+      </Text>
 
-			<Text
-				fontWeight={400}
-				fontSize="14px"
-				className={styles.paymentsLicenseDescription}
-			>
-				{!isTrial ? t("ActivateRenewalDescr") : t("ActivateUploadDescr")}
-			</Text>
-			<FileInput
-				className={styles.paymentsFileInput}
-				scale
-				size={InputSize.base}
-				accept={[".lic"]}
-				placeholder={t("UploadLicenseFile")}
-				onInput={onLicenseFileHandler}
-				isDisabled={isLicenseUploading || isLoading}
-				isLoading={isLicenseUploading}
-				data-test-id="upload_license_file_input"
-			/>
-			<div className={styles.buttonComponent}>
-				<Button
-					primary
-					label={t("Common:Activate")}
-					size={ButtonSize.small}
-					onClick={onClickUpload}
-					isLoading={isLoading}
-					isDisabled={!isLicenseCorrect}
-					testId="activate_license_button"
-				/>
-			</div>
-		</div>
-	);
+      <Text
+        fontWeight={400}
+        fontSize="14px"
+        className={styles.paymentsLicenseDescription}
+      >
+        {!isTrial ? t("ActivateRenewalDescr") : t("ActivateUploadDescr")}
+      </Text>
+      <FileInput
+        className={styles.paymentsFileInput}
+        scale
+        size={InputSize.base}
+        accept={[".lic"]}
+        placeholder={t("UploadLicenseFile")}
+        onInput={onLicenseFileHandler}
+        isDisabled={isLicenseUploading || isLoading}
+        isLoading={isLicenseUploading}
+        data-test-id="upload_license_file_input"
+      />
+      <div className={styles.buttonComponent}>
+        <Button
+          primary
+          label={t("Common:Activate")}
+          size={ButtonSize.small}
+          onClick={onClickUpload}
+          isLoading={isLoading}
+          isDisabled={!isLicenseCorrect}
+          testId="activate_license_button"
+        />
+      </div>
+    </div>
+  );
 };

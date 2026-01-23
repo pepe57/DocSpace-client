@@ -31,53 +31,53 @@ import { ChangeEvent, MouseEvent, useRef, useState, useMemo } from "react";
 import classNames from "classnames";
 
 import {
-	createPasswordHash,
-	getSelectZone,
-	mapCulturesToArray,
-	mapTimezonesToArray,
-	setLanguageForUnauthorized,
-	setTimezoneForUnauthorized,
+  createPasswordHash,
+  getSelectZone,
+  mapCulturesToArray,
+  mapTimezonesToArray,
+  setLanguageForUnauthorized,
+  setTimezoneForUnauthorized,
 } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { EmailInput, TValidate } from "@docspace/shared/components/email-input";
 import {
-	COOKIE_EXPIRATION_YEAR,
-	LANGUAGE,
-	TIMEZONE,
+  COOKIE_EXPIRATION_YEAR,
+  LANGUAGE,
+  TIMEZONE,
 } from "@docspace/shared/constants";
 import { EmailSettings } from "@docspace/shared/utils";
 import {
-	PasswordInput,
-	PasswordInputHandle,
+  PasswordInput,
+  PasswordInputHandle,
 } from "@docspace/shared/components/password-input";
 import { FileInput } from "@docspace/shared/components/file-input";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { setLicense } from "@docspace/shared/api/settings";
 import {
-	ComboBox,
-	ComboBoxSize,
-	TOption,
+  ComboBox,
+  ComboBoxSize,
+  TOption,
 } from "@docspace/shared/components/combobox";
 import { BetaBadge } from "@docspace/shared/components/beta-badge";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import api from "@docspace/shared/api";
 import { setCookie, deleteCookie } from "@docspace/shared/utils/cookie";
 import {
-	InputSize,
-	InputType,
-	TextInput,
+  InputSize,
+  InputType,
+  TextInput,
 } from "@docspace/ui-kit/components/text-input";
 import useDeviceType from "@/hooks/useDeviceType";
 import { DeviceType } from "@docspace/shared/enums";
 import { Nullable } from "@docspace/shared/types";
 import {
-	TPasswordHash,
-	TPasswordSettings,
-	TPortalCultures,
-	TTimeZone,
+  TPasswordHash,
+  TPasswordSettings,
+  TPortalCultures,
+  TTimeZone,
 } from "@docspace/shared/api/settings/types";
 
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
@@ -87,477 +87,477 @@ import { toastr } from "@docspace/shared/components/toast";
 import styles from "./wizard.module.scss";
 
 type WizardFormProps = {
-	passwordSettings?: TPasswordSettings;
-	machineName?: string;
-	isRequiredLicense?: boolean;
-	portalTimeZones?: TTimeZone[];
-	portalCultures?: TPortalCultures;
+  passwordSettings?: TPasswordSettings;
+  machineName?: string;
+  isRequiredLicense?: boolean;
+  portalTimeZones?: TTimeZone[];
+  portalCultures?: TPortalCultures;
 
-	forumLinkUrl?: string;
-	documentationEmail?: string;
-	wizardToken?: string;
-	passwordHash?: TPasswordHash;
-	licenseUrl?: string;
-	isAmi?: boolean;
-	userTimeZone: string;
+  forumLinkUrl?: string;
+  documentationEmail?: string;
+  wizardToken?: string;
+  passwordHash?: TPasswordHash;
+  licenseUrl?: string;
+  isAmi?: boolean;
+  userTimeZone: string;
 };
 
 const emailSettings = new EmailSettings();
 emailSettings.allowDomainPunycode = true;
 
 function WizardForm(props: WizardFormProps) {
-	const {
-		licenseUrl,
-		passwordSettings,
-		machineName,
-		isRequiredLicense,
-		portalTimeZones,
-		portalCultures,
-		wizardToken,
-		passwordHash,
-		forumLinkUrl,
-		documentationEmail,
-		isAmi,
-		userTimeZone,
-	} = props;
+  const {
+    licenseUrl,
+    passwordSettings,
+    machineName,
+    isRequiredLicense,
+    portalTimeZones,
+    portalCultures,
+    wizardToken,
+    passwordHash,
+    forumLinkUrl,
+    documentationEmail,
+    isAmi,
+    userTimeZone,
+  } = props;
 
-	const [selectedTimezone, setSelectedTimezone] = useState<TTimeZoneOption>();
+  const [selectedTimezone, setSelectedTimezone] = useState<TTimeZoneOption>();
 
-	const [email, setEmail] = useState("");
-	const [hasErrorEmail, setHasErrorEmail] = useState(false);
+  const [email, setEmail] = useState("");
+  const [hasErrorEmail, setHasErrorEmail] = useState(false);
 
-	const [password, setPassword] = useState("");
-	const [hasErrorPass, setHasErrorPass] = useState(false);
+  const [password, setPassword] = useState("");
+  const [hasErrorPass, setHasErrorPass] = useState(false);
 
-	const [instanceId, setInstanceId] = useState("");
-	const [hasErrorInstanceId, setHasErrorInstanceId] = useState(false);
+  const [instanceId, setInstanceId] = useState("");
+  const [hasErrorInstanceId, setHasErrorInstanceId] = useState(false);
 
-	const [hasErrorLicense, setHasErrorLicense] = useState(false);
-	const [invalidLicense, setInvalidLicense] = useState(false);
-	const [licenseUpload, setLicenseUpload] = useState<Nullable<string>>(null);
+  const [hasErrorLicense, setHasErrorLicense] = useState(false);
+  const [invalidLicense, setInvalidLicense] = useState(false);
+  const [licenseUpload, setLicenseUpload] = useState<Nullable<string>>(null);
 
-	const [agreeTerms, setAgreeTerms] = useState(false);
-	const [hasErrorAgree, setHasErrorAgree] = useState(false);
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [hasErrorAgree, setHasErrorAgree] = useState(false);
 
-	const [isCreated, setIsCreated] = useState(false);
+  const [isCreated, setIsCreated] = useState(false);
 
-	const { t, i18n } = useTranslation(["Wizard", "Common"]);
+  const { t, i18n } = useTranslation(["Wizard", "Common"]);
 
-	const { currentDeviceType } = useDeviceType();
+  const { currentDeviceType } = useDeviceType();
 
-	const refPassInput = useRef<Nullable<PasswordInputHandle>>(null);
+  const refPassInput = useRef<Nullable<PasswordInputHandle>>(null);
 
-	const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
-	const currCulture = i18n.language;
+  const currCulture = i18n.language;
 
-	const cultureNames = useMemo(() => {
-		if (portalCultures) return mapCulturesToArray(portalCultures, true, i18n);
-		return [];
-	}, [portalCultures, i18n]);
-	const currentCulture = cultureNames?.find((item) => item.key === currCulture);
+  const cultureNames = useMemo(() => {
+    if (portalCultures) return mapCulturesToArray(portalCultures, true, i18n);
+    return [];
+  }, [portalCultures, i18n]);
+  const currentCulture = cultureNames?.find((item) => item.key === currCulture);
 
-	const zones = useMemo(() => {
-		if (portalTimeZones) return mapTimezonesToArray(portalTimeZones);
-		return [];
-	}, [portalTimeZones]);
-	const currentZone = getSelectZone(zones ?? [], userTimeZone)[0];
+  const zones = useMemo(() => {
+    if (portalTimeZones) return mapTimezonesToArray(portalTimeZones);
+    return [];
+  }, [portalTimeZones]);
+  const currentZone = getSelectZone(zones ?? [], userTimeZone)[0];
 
-	const onEmailChangeHandler = (result: TValidate): undefined => {
-		setHasErrorEmail(!result.isValid);
-	};
+  const onEmailChangeHandler = (result: TValidate): undefined => {
+    setHasErrorEmail(!result.isValid);
+  };
 
-	const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-		setEmail(e.target.value);
-	};
+  const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
 
-	const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-		setPassword(e.target.value);
-	};
+  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
 
-	const isValidPassHandler = (progressScore: boolean) => {
-		setHasErrorPass(!progressScore);
-	};
+  const isValidPassHandler = (progressScore: boolean) => {
+    setHasErrorPass(!progressScore);
+  };
 
-	const generatePassword = (e: MouseEvent) => {
-		if (isCreated) return;
-		if (refPassInput.current === null) return;
+  const generatePassword = (e: MouseEvent) => {
+    if (isCreated) return;
+    if (refPassInput.current === null) return;
 
-		refPassInput.current.onGeneratePassword(e);
-	};
+    refPassInput.current.onGeneratePassword(e);
+  };
 
-	const onChangeInstanceId = (e: ChangeEvent<HTMLInputElement>) => {
-		setInstanceId(e.target.value);
-		setHasErrorInstanceId(e.target.value.trim() === "");
-	};
+  const onChangeInstanceId = (e: ChangeEvent<HTMLInputElement>) => {
+    setInstanceId(e.target.value);
+    setHasErrorInstanceId(e.target.value.trim() === "");
+  };
 
-	const onLanguageSelect = (lang: TOption) => {
-		setLanguageForUnauthorized(lang.key.toString(), false);
-		i18n.changeLanguage(lang.key.toString());
-	};
+  const onLanguageSelect = (lang: TOption) => {
+    setLanguageForUnauthorized(lang.key.toString(), false);
+    i18n.changeLanguage(lang.key.toString());
+  };
 
-	const onTimezoneSelect = (timezone: TOption) => {
-		setSelectedTimezone({
-			key: timezone.key,
-			label: timezone.label ?? "",
-		});
-		setTimezoneForUnauthorized(timezone.key.toString());
-	};
+  const onTimezoneSelect = (timezone: TOption) => {
+    setSelectedTimezone({
+      key: timezone.key,
+      label: timezone.label ?? "",
+    });
+    setTimezoneForUnauthorized(timezone.key.toString());
+  };
 
-	const onLicenseFileHandler = async (file: File | File[]) => {
-		if (licenseUpload) setLicenseUpload(null);
-		setHasErrorLicense(false);
-		setInvalidLicense(false);
+  const onLicenseFileHandler = async (file: File | File[]) => {
+    if (licenseUpload) setLicenseUpload(null);
+    setHasErrorLicense(false);
+    setInvalidLicense(false);
 
-		const fd = new FormData();
-		fd.append("files", file as Blob);
+    const fd = new FormData();
+    fd.append("files", file as Blob);
 
-		if (!wizardToken) return;
+    if (!wizardToken) return;
 
-		try {
-			const res = await setLicense(wizardToken, fd);
-			setLicenseUpload(res);
-		} catch (error) {
-			const knownError = error as TError;
-			let errorMessage: string = "";
+    try {
+      const res = await setLicense(wizardToken, fd);
+      setLicenseUpload(res);
+    } catch (error) {
+      const knownError = error as TError;
+      let errorMessage: string = "";
 
-			if (typeof knownError === "object") {
-				errorMessage =
-					knownError?.response?.data?.error?.message ||
-					knownError?.statusText ||
-					knownError?.message ||
-					"";
-			} else {
-				errorMessage = knownError;
-			}
+      if (typeof knownError === "object") {
+        errorMessage =
+          knownError?.response?.data?.error?.message ||
+          knownError?.statusText ||
+          knownError?.message ||
+          "";
+      } else {
+        errorMessage = knownError;
+      }
 
-			toastr.error(errorMessage);
-			setHasErrorLicense(true);
-			setInvalidLicense(true);
-		}
-	};
+      toastr.error(errorMessage);
+      setHasErrorLicense(true);
+      setInvalidLicense(true);
+    }
+  };
 
-	const onAgreeTermsChange = () => {
-		if (hasErrorAgree && !agreeTerms) setHasErrorAgree(false);
-		setAgreeTerms(!agreeTerms);
-	};
+  const onAgreeTermsChange = () => {
+    if (hasErrorAgree && !agreeTerms) setHasErrorAgree(false);
+    setAgreeTerms(!agreeTerms);
+  };
 
-	const validateFields = () => {
-		let anyError = false;
-		const emptyEmail = email.trim() === "";
-		const emptyPassword = password.trim() === "";
-		const emptyInstanceId = instanceId.trim() === "";
+  const validateFields = () => {
+    let anyError = false;
+    const emptyEmail = email.trim() === "";
+    const emptyPassword = password.trim() === "";
+    const emptyInstanceId = instanceId.trim() === "";
 
-		if (emptyEmail || emptyPassword) {
-			if (emptyEmail) setHasErrorEmail(true);
-			if (emptyPassword) setHasErrorPass(true);
-			anyError = true;
-		}
+    if (emptyEmail || emptyPassword) {
+      if (emptyEmail) setHasErrorEmail(true);
+      if (emptyPassword) setHasErrorPass(true);
+      anyError = true;
+    }
 
-		if (isAmi && emptyInstanceId) {
-			if (emptyInstanceId) setHasErrorInstanceId(true);
-			anyError = true;
-		}
+    if (isAmi && emptyInstanceId) {
+      if (emptyInstanceId) setHasErrorInstanceId(true);
+      anyError = true;
+    }
 
-		if (!agreeTerms) {
-			setHasErrorAgree(true);
-			anyError = true;
-		}
+    if (!agreeTerms) {
+      setHasErrorAgree(true);
+      anyError = true;
+    }
 
-		if (isRequiredLicense && licenseUpload === null) {
-			setHasErrorLicense(true);
-			anyError = true;
-		}
+    if (isRequiredLicense && licenseUpload === null) {
+      setHasErrorLicense(true);
+      anyError = true;
+    }
 
-		if (anyError || hasErrorEmail || hasErrorPass) return false;
+    if (anyError || hasErrorEmail || hasErrorPass) return false;
 
-		return true;
-	};
+    return true;
+  };
 
-	const onContinueClick = async () => {
-		if (!validateFields()) return;
+  const onContinueClick = async () => {
+    if (!validateFields()) return;
 
-		setIsCreated(true);
+    setIsCreated(true);
 
-		const emailTrim = email.trim();
-		const analytics = true;
-		const hash = createPasswordHash(password, passwordHash);
-		const amiId = instanceId.trim();
+    const emailTrim = email.trim();
+    const analytics = true;
+    const hash = createPasswordHash(password, passwordHash);
+    const amiId = instanceId.trim();
 
-		try {
-			await api.settings.setPortalOwner(
-				emailTrim,
-				hash,
-				currentCulture?.key || "en",
-				selectedTimezone?.key || currentZone?.key,
-				wizardToken,
-				analytics,
-				isAmi && amiId ? amiId : null,
-			);
+    try {
+      await api.settings.setPortalOwner(
+        emailTrim,
+        hash,
+        currentCulture?.key || "en",
+        selectedTimezone?.key || currentZone?.key,
+        wizardToken,
+        analytics,
+        isAmi && amiId ? amiId : null,
+      );
 
-			setCookie(LANGUAGE, currentCulture?.key || "en", {
-				"max-age": COOKIE_EXPIRATION_YEAR,
-			});
-			deleteCookie(TIMEZONE);
+      setCookie(LANGUAGE, currentCulture?.key || "en", {
+        "max-age": COOKIE_EXPIRATION_YEAR,
+      });
+      deleteCookie(TIMEZONE);
 
-			window.location.replace("/");
-		} catch (error) {
-			const knownError = error as TError;
-			let errorMessage: string;
+      window.location.replace("/");
+    } catch (error) {
+      const knownError = error as TError;
+      let errorMessage: string;
 
-			if (typeof knownError === "object") {
-				errorMessage =
-					knownError?.response?.data?.error?.message ||
-					knownError?.statusText ||
-					knownError?.message ||
-					"";
-			} else {
-				errorMessage = knownError;
-			}
+      if (typeof knownError === "object") {
+        errorMessage =
+          knownError?.response?.data?.error?.message ||
+          knownError?.statusText ||
+          knownError?.message ||
+          "";
+      } else {
+        errorMessage = knownError;
+      }
 
-			toastr.error(errorMessage);
-			console.error(errorMessage);
-			setIsCreated(false);
-		}
-	};
+      toastr.error(errorMessage);
+      console.error(errorMessage);
+      setIsCreated(false);
+    }
+  };
 
-	return (
-		<div className={styles.wizardContainer}>
-			<Text fontWeight={600} fontSize="16px" className={styles.formHeader}>
-				{t("Wizard:Desc", { productName: t("Common:ProductName") })}
-			</Text>
-			<FieldContainer
-				className={styles.wizardField}
-				isVertical
-				labelVisible={false}
-				hasError={hasErrorEmail}
-				errorMessage={t("ErrorEmail")}
-				dataTestId="email_field_container"
-			>
-				<EmailInput
-					name="wizard-email"
-					tabIndex={1}
-					size={InputSize.large}
-					scale
-					value={email}
-					placeholder={t("Common:Email")}
-					emailSettings={emailSettings}
-					hasError={hasErrorEmail}
-					onValidateInput={onEmailChangeHandler}
-					isAutoFocussed
-					onChange={onChangeEmail}
-					isDisabled={isCreated}
-				/>
-			</FieldContainer>
+  return (
+    <div className={styles.wizardContainer}>
+      <Text fontWeight={600} fontSize="16px" className={styles.formHeader}>
+        {t("Wizard:Desc", { productName: t("Common:ProductName") })}
+      </Text>
+      <FieldContainer
+        className={styles.wizardField}
+        isVertical
+        labelVisible={false}
+        hasError={hasErrorEmail}
+        errorMessage={t("ErrorEmail")}
+        dataTestId="email_field_container"
+      >
+        <EmailInput
+          name="wizard-email"
+          tabIndex={1}
+          size={InputSize.large}
+          scale
+          value={email}
+          placeholder={t("Common:Email")}
+          emailSettings={emailSettings}
+          hasError={hasErrorEmail}
+          onValidateInput={onEmailChangeHandler}
+          isAutoFocussed
+          onChange={onChangeEmail}
+          isDisabled={isCreated}
+        />
+      </FieldContainer>
 
-			<FieldContainer
-				className={classNames(styles.wizardField, styles.passwordField)}
-				isVertical
-				labelVisible={false}
-				hasError={hasErrorPass}
-				errorMessage={t("ErrorPassword")}
-				dataTestId="password_field_container"
-			>
-				<PasswordInput
-					ref={refPassInput}
-					tabIndex={2}
-					size={InputSize.large}
-					scale
-					inputValue={password}
-					inputType={InputType.password}
-					passwordSettings={passwordSettings}
-					isDisabled={isCreated}
-					placeholder={t("Common:Password")}
-					isDisableTooltip
-					hasError={hasErrorPass}
-					onChange={onChangePassword}
-					autoComplete="current-password"
-					onValidateInput={isValidPassHandler}
-				/>
-			</FieldContainer>
+      <FieldContainer
+        className={classNames(styles.wizardField, styles.passwordField)}
+        isVertical
+        labelVisible={false}
+        hasError={hasErrorPass}
+        errorMessage={t("ErrorPassword")}
+        dataTestId="password_field_container"
+      >
+        <PasswordInput
+          ref={refPassInput}
+          tabIndex={2}
+          size={InputSize.large}
+          scale
+          inputValue={password}
+          inputType={InputType.password}
+          passwordSettings={passwordSettings}
+          isDisabled={isCreated}
+          placeholder={t("Common:Password")}
+          isDisableTooltip
+          hasError={hasErrorPass}
+          onChange={onChangePassword}
+          autoComplete="current-password"
+          onValidateInput={isValidPassHandler}
+        />
+      </FieldContainer>
 
-			<div className={styles.linkWrapper}>
-				<IconButton
-					size={12}
-					iconNode={<RefreshReactSvgUrl />}
-					onClick={generatePassword}
-					dataTestId="generate_password_icon_button"
-				/>
-				<Link
-					className={styles.generatePasswordLink}
-					type={LinkType.action}
-					fontWeight={600}
-					isHovered
-					onClick={generatePassword}
-					dataTestId="generate_password_link"
-				>
-					{t("Common:GeneratePassword")}
-				</Link>
-			</div>
+      <div className={styles.linkWrapper}>
+        <IconButton
+          size={12}
+          iconNode={<RefreshReactSvgUrl />}
+          onClick={generatePassword}
+          dataTestId="generate_password_icon_button"
+        />
+        <Link
+          className={styles.generatePasswordLink}
+          type={LinkType.action}
+          fontWeight={600}
+          isHovered
+          onClick={generatePassword}
+          dataTestId="generate_password_link"
+        >
+          {t("Common:GeneratePassword")}
+        </Link>
+      </div>
 
-			{isAmi ? (
-				<FieldContainer
-					className={classNames(styles.wizardField, "instance-id-field")}
-					isVertical
-					labelVisible={false}
-					hasError={hasErrorInstanceId}
-					errorMessage={t("ErrorInstanceId")}
-					dataTestId="instance_id_field_container"
-				>
-					<TextInput
-						id="instance-id"
-						name="instance-id"
-						type={InputType.text}
-						size={InputSize.large}
-						hasError={hasErrorInstanceId}
-						value={instanceId}
-						placeholder={t("Common:InstanceId")}
-						scale
-						tabIndex={3}
-						isDisabled={isCreated}
-						onChange={onChangeInstanceId}
-						testId="instance_id_input"
-					/>
-				</FieldContainer>
-			) : null}
+      {isAmi ? (
+        <FieldContainer
+          className={classNames(styles.wizardField, "instance-id-field")}
+          isVertical
+          labelVisible={false}
+          hasError={hasErrorInstanceId}
+          errorMessage={t("ErrorInstanceId")}
+          dataTestId="instance_id_field_container"
+        >
+          <TextInput
+            id="instance-id"
+            name="instance-id"
+            type={InputType.text}
+            size={InputSize.large}
+            hasError={hasErrorInstanceId}
+            value={instanceId}
+            placeholder={t("Common:InstanceId")}
+            scale
+            tabIndex={3}
+            isDisabled={isCreated}
+            onChange={onChangeInstanceId}
+            testId="instance_id_input"
+          />
+        </FieldContainer>
+      ) : null}
 
-			{isRequiredLicense ? (
-				<FieldContainer
-					className={styles.licenseField}
-					isVertical
-					labelVisible={false}
-					hasError={hasErrorLicense}
-					errorMessage={
-						invalidLicense ? t("ErrorLicenseBody") : t("ErrorUploadLicenseFile")
-					}
-					dataTestId="license_field_container"
-				>
-					<FileInput
-						scale
-						size={InputSize.large}
-						accept={[".lic"]}
-						placeholder={t("PlaceholderLicense")}
-						onInput={onLicenseFileHandler}
-						hasError={hasErrorLicense}
-						isDisabled={isCreated}
-						data-test-id="license_file_input"
-					/>
-				</FieldContainer>
-			) : null}
+      {isRequiredLicense ? (
+        <FieldContainer
+          className={styles.licenseField}
+          isVertical
+          labelVisible={false}
+          hasError={hasErrorLicense}
+          errorMessage={
+            invalidLicense ? t("ErrorLicenseBody") : t("ErrorUploadLicenseFile")
+          }
+          dataTestId="license_field_container"
+        >
+          <FileInput
+            scale
+            size={InputSize.large}
+            accept={[".lic"]}
+            placeholder={t("PlaceholderLicense")}
+            onInput={onLicenseFileHandler}
+            hasError={hasErrorLicense}
+            isDisabled={isCreated}
+            data-test-id="license_file_input"
+          />
+        </FieldContainer>
+      ) : null}
 
-			<div className={styles.infoWrapper}>
-				<Text className={styles.text} fontWeight={400}>
-					{t("Common:Domain")}
-				</Text>
-				<Text fontWeight={600} className={styles.machineName}>
-					{machineName}
-				</Text>
-			</div>
+      <div className={styles.infoWrapper}>
+        <Text className={styles.text} fontWeight={400}>
+          {t("Common:Domain")}
+        </Text>
+        <Text fontWeight={600} className={styles.machineName}>
+          {machineName}
+        </Text>
+      </div>
 
-			<div className={styles.infoWrapper}>
-				<Text className={styles.text} fontWeight={400}>
-					{t("Common:Language")}
-				</Text>
-				<div className={styles.wrapperLanguageSelector}>
-					<ComboBox
-						withoutPadding
-						directionY="both"
-						options={cultureNames ?? []}
-						selectedOption={currentCulture as TOption}
-						onSelect={onLanguageSelect}
-						isDisabled={isCreated}
-						scaled={isMobileView}
-						scaledOptions={false}
-						size={ComboBoxSize.content}
-						showDisabledItems
-						dropDownMaxHeight={364}
-						manualWidth="250px"
-						isDefaultMode={!isMobileView}
-						withBlur={isMobileView}
-						fillIcon={false}
-						modernView
-						dataTestId="wizard_language_combobox"
-						dropDownTestId="wizard_language_dropdown"
-					/>
-					{currentCulture &&
-					"isBeta" in currentCulture &&
-					currentCulture.isBeta ? (
-						<BetaBadge
-							withOutFeedbackLink
-							place="bottom"
-							forumLinkUrl={forumLinkUrl}
-							currentDeviceType={currentDeviceType}
-							documentationEmail={documentationEmail}
-						/>
-					) : null}
-				</div>
-			</div>
+      <div className={styles.infoWrapper}>
+        <Text className={styles.text} fontWeight={400}>
+          {t("Common:Language")}
+        </Text>
+        <div className={styles.wrapperLanguageSelector}>
+          <ComboBox
+            withoutPadding
+            directionY="both"
+            options={cultureNames ?? []}
+            selectedOption={currentCulture as TOption}
+            onSelect={onLanguageSelect}
+            isDisabled={isCreated}
+            scaled={isMobileView}
+            scaledOptions={false}
+            size={ComboBoxSize.content}
+            showDisabledItems
+            dropDownMaxHeight={364}
+            manualWidth="250px"
+            isDefaultMode={!isMobileView}
+            withBlur={isMobileView}
+            fillIcon={false}
+            modernView
+            dataTestId="wizard_language_combobox"
+            dropDownTestId="wizard_language_dropdown"
+          />
+          {currentCulture &&
+          "isBeta" in currentCulture &&
+          currentCulture.isBeta ? (
+            <BetaBadge
+              withOutFeedbackLink
+              place="bottom"
+              forumLinkUrl={forumLinkUrl}
+              currentDeviceType={currentDeviceType}
+              documentationEmail={documentationEmail}
+            />
+          ) : null}
+        </div>
+      </div>
 
-			<div className={styles.infoWrapper}>
-				<Text className={styles.text} fontWeight={400}>
-					{t("Timezone")}
-				</Text>
-				<ComboBox
-					textOverflow
-					withoutPadding
-					directionY="both"
-					options={zones ?? []}
-					selectedOption={selectedTimezone ?? currentZone}
-					onSelect={onTimezoneSelect}
-					isDisabled={isCreated}
-					scaled={isMobileView}
-					scaledOptions={false}
-					size={ComboBoxSize.content}
-					showDisabledItems
-					dropDownMaxHeight={364}
-					manualWidth="350px"
-					isDefaultMode={!isMobileView}
-					withBlur={isMobileView}
-					fillIcon={false}
-					modernView
-					dataTestId="timezone_combobox"
-					dropDownTestId="timezone_dropdown"
-				/>
-			</div>
+      <div className={styles.infoWrapper}>
+        <Text className={styles.text} fontWeight={400}>
+          {t("Timezone")}
+        </Text>
+        <ComboBox
+          textOverflow
+          withoutPadding
+          directionY="both"
+          options={zones ?? []}
+          selectedOption={selectedTimezone ?? currentZone}
+          onSelect={onTimezoneSelect}
+          isDisabled={isCreated}
+          scaled={isMobileView}
+          scaledOptions={false}
+          size={ComboBoxSize.content}
+          showDisabledItems
+          dropDownMaxHeight={364}
+          manualWidth="350px"
+          isDefaultMode={!isMobileView}
+          withBlur={isMobileView}
+          fillIcon={false}
+          modernView
+          dataTestId="timezone_combobox"
+          dropDownTestId="timezone_dropdown"
+        />
+      </div>
 
-			<div className={styles.acceptTerms}>
-				<Checkbox
-					className={styles.wizardCheckbox}
-					id="license"
-					name="confirm"
-					label={t("License")}
-					isChecked={agreeTerms}
-					onChange={onAgreeTermsChange}
-					isDisabled={isCreated}
-					hasError={hasErrorAgree}
-					truncate={false}
-					dataTestId="agree_terms_checkbox"
-				/>
-				<Link
-					className={classNames(styles.licenseLink, {
-						[styles.hasErrorAgree]: hasErrorAgree,
-					})}
-					type={LinkType.page}
-					fontSize="13px"
-					target={LinkTarget.blank}
-					href={licenseUrl}
-					dataTestId="license_agreements_link"
-				>
-					{t("LicenseLink")}
-				</Link>
-			</div>
+      <div className={styles.acceptTerms}>
+        <Checkbox
+          className={styles.wizardCheckbox}
+          id="license"
+          name="confirm"
+          label={t("License")}
+          isChecked={agreeTerms}
+          onChange={onAgreeTermsChange}
+          isDisabled={isCreated}
+          hasError={hasErrorAgree}
+          truncate={false}
+          dataTestId="agree_terms_checkbox"
+        />
+        <Link
+          className={classNames(styles.licenseLink, {
+            [styles.hasErrorAgree]: hasErrorAgree,
+          })}
+          type={LinkType.page}
+          fontSize="13px"
+          target={LinkTarget.blank}
+          href={licenseUrl}
+          dataTestId="license_agreements_link"
+        >
+          {t("LicenseLink")}
+        </Link>
+      </div>
 
-			<Button
-				size={ButtonSize.medium}
-				scale
-				primary
-				label={t("Common:ContinueButton")}
-				isLoading={isCreated}
-				onClick={onContinueClick}
-				testId="wizard_continue_button"
-			/>
-		</div>
-	);
+      <Button
+        size={ButtonSize.medium}
+        scale
+        primary
+        label={t("Common:ContinueButton")}
+        isLoading={isCreated}
+        onClick={onContinueClick}
+        testId="wizard_continue_button"
+      />
+    </div>
+  );
 }
 
 export default WizardForm;

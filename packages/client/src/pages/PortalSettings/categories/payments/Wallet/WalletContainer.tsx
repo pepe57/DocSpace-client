@@ -31,7 +31,7 @@ import { useTranslation, Trans } from "react-i18next";
 import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { DeviceType } from "@docspace/shared/enums";

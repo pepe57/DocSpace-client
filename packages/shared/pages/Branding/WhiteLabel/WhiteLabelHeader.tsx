@@ -37,119 +37,119 @@ import { Badge } from "../../../components/badge";
 import { HelpButton } from "../../../components/help-button";
 import { FieldContainer } from "../../../components/field-container";
 import {
-	TextInput,
-	InputType,
-	InputSize,
+  TextInput,
+  InputType,
+  InputSize,
 } from "@docspace/ui-kit/components/text-input";
-import { Button, ButtonSize } from "../../../components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { useTheme } from "../../../hooks/useTheme";
 
 import { IHeaderProps } from "./WhiteLabel.types";
 import styles from "./WhiteLabel.module.scss";
 
 export const WhiteLabelHeader = ({
-	isSettingPaid,
-	standalone,
-	onUseTextAsLogo,
-	isEmpty,
-	logoTextWhiteLabel,
-	onChange,
-	onClear,
+  isSettingPaid,
+  standalone,
+  onUseTextAsLogo,
+  isEmpty,
+  logoTextWhiteLabel,
+  onChange,
+  onClear,
 }: IHeaderProps) => {
-	const { t } = useTranslation("Common");
-	const { isBase } = useTheme();
+  const { t } = useTranslation("Common");
+  const { isBase } = useTheme();
 
-	return (
-		<div className={styles.header}>
-			<div className={classNames(styles.headerContainer, "header-container")}>
-				<Text fontSize="16px" fontWeight="700">
-					{t("WhiteLabel")}
-				</Text>
+  return (
+    <div className={styles.header}>
+      <div className={classNames(styles.headerContainer, "header-container")}>
+        <Text fontSize="16px" fontWeight="700">
+          {t("WhiteLabel")}
+        </Text>
 
-				{!isSettingPaid && !standalone ? (
-					<Badge
-						className={classNames(styles.paidBadge, "paid-badge")}
-						fontWeight="700"
-						label={t("Common:Paid")}
-						isPaidBadge
-						backgroundColor={
-							isBase
-								? globalColors.favoritesStatus
-								: globalColors.favoriteStatusDark
-						}
-					/>
-				) : null}
-			</div>
+        {!isSettingPaid && !standalone ? (
+          <Badge
+            className={classNames(styles.paidBadge, "paid-badge")}
+            fontWeight="700"
+            label={t("Common:Paid")}
+            isPaidBadge
+            backgroundColor={
+              isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
+          />
+        ) : null}
+      </div>
 
-			<div className={classNames(styles.wlHelper, "wl-helper")}>
-				<Text
-					as="div"
-					className={classNames(
-						styles.wlSubtitle,
-						styles.wlHelperLabel,
-						"wl-helper-label",
-					)}
-					fontSize="13px"
-				>
-					{t("WhiteLabelSubtitle")}
-					<HelpButton
-						tooltipContent={
-							<Text fontSize="12px">{t("Common:WhiteLabelTooltip")}</Text>
-						}
-						place="right"
-						offsetRight={0}
-						dataTestId="white_label_helper_button"
-					/>
-				</Text>
-			</div>
+      <div className={classNames(styles.wlHelper, "wl-helper")}>
+        <Text
+          as="div"
+          className={classNames(
+            styles.wlSubtitle,
+            styles.wlHelperLabel,
+            "wl-helper-label",
+          )}
+          fontSize="13px"
+        >
+          {t("WhiteLabelSubtitle")}
+          <HelpButton
+            tooltipContent={
+              <Text fontSize="12px">{t("Common:WhiteLabelTooltip")}</Text>
+            }
+            place="right"
+            offsetRight={0}
+            dataTestId="white_label_helper_button"
+          />
+        </Text>
+      </div>
 
-			<div className="settings-block">
-				<FieldContainer
-					id="fieldContainerGenerateLogo"
-					labelText={t("GenerateLogoLabel")}
-					isVertical
-					className="field-container"
-					labelVisible
-				>
-					<div
-						className={classNames(styles.whiteLabelInput, {
-							[styles.showCross]: !!logoTextWhiteLabel,
-						})}
-					>
-						<TextInput
-							testId="logo-text-input"
-							className={classNames(styles.input, "input")}
-							placeholder={t("YourLogo")}
-							value={logoTextWhiteLabel}
-							onChange={onChange}
-							isDisabled={!isSettingPaid}
-							isReadOnly={!isSettingPaid}
-							scale
-							maxLength={10}
-							type={InputType.text}
-							size={InputSize.base}
-							withBorder={false}
-						/>
+      <div className="settings-block">
+        <FieldContainer
+          id="fieldContainerGenerateLogo"
+          labelText={t("GenerateLogoLabel")}
+          isVertical
+          className="field-container"
+          labelVisible
+        >
+          <div
+            className={classNames(styles.whiteLabelInput, {
+              [styles.showCross]: !!logoTextWhiteLabel,
+            })}
+          >
+            <TextInput
+              testId="logo-text-input"
+              className={classNames(styles.input, "input")}
+              placeholder={t("YourLogo")}
+              value={logoTextWhiteLabel}
+              onChange={onChange}
+              isDisabled={!isSettingPaid}
+              isReadOnly={!isSettingPaid}
+              scale
+              maxLength={10}
+              type={InputType.text}
+              size={InputSize.base}
+              withBorder={false}
+            />
 
-						<div
-							className={styles.append}
-							onClick={onClear}
-							data-testid="white_label_input_clear"
-						>
-							<CrossIcon />
-						</div>
-					</div>
-					<Button
-						testId="generate-logo-button"
-						id="btnGenerateLogo"
-						className={styles.generateLogo}
-						size={ButtonSize.small}
-						label={t("GenerateLogoButton")}
-						onClick={onUseTextAsLogo}
-						isDisabled={!isSettingPaid || isEmpty}
-					/>
-				</FieldContainer>
-			</div>
-		</div>
-	);
+            <div
+              className={styles.append}
+              onClick={onClear}
+              data-testid="white_label_input_clear"
+            >
+              <CrossIcon />
+            </div>
+          </div>
+          <Button
+            testId="generate-logo-button"
+            id="btnGenerateLogo"
+            className={styles.generateLogo}
+            size={ButtonSize.small}
+            label={t("GenerateLogoButton")}
+            onClick={onUseTextAsLogo}
+            isDisabled={!isSettingPaid || isEmpty}
+          />
+        </FieldContainer>
+      </div>
+    </div>
+  );
 };
