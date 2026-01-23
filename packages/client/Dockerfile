@@ -40,6 +40,7 @@ COPY common/tests/package.json ./common/tests/package.json
 COPY packages/client/package.json ./packages/client/package.json
 COPY packages/client/onlyoffice-docspace-plugin-sdk-*.tgz ./packages/client/
 COPY packages/shared/package.json ./packages/shared/package.json
+COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
 
 # Install dependencies with recursive installation
 RUN pnpm install --frozen-lockfile
@@ -54,6 +55,7 @@ RUN cd /app/packages/client && pnpm exec playwright install chromium --with-deps
 COPY common/ ./common/
 COPY packages/client/ ./packages/client/
 COPY packages/shared/ ./packages/shared/
+COPY libs/ui-kit ./libs/ui-kit
 COPY public/ ./public/
 
 # Run before-build script (packages/runtime.json)

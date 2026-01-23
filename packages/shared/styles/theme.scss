@@ -1,5 +1,67 @@
 @use "@docspace/ui-kit/styles/variables/colors" as *;
 
+
+.light {
+  // Input colors
+  --input-bg: #{$white};
+  --input-color: #{$black};
+  --input-border-focus: #{$light-second-main};
+
+  // Disabled state
+  --input-disabled-bg: #{$gray-light};
+
+  // Error state
+  --input-error-border: #{$light-error-status};
+  --input-error-color: #{$light-error-status};
+
+
+  // Dimensions
+  --input-border-radius: 3px;
+
+  // Line heights
+  --text-input-line-height-base: 20px;
+  --text-input-line-height-middle: 20px;
+  --text-input-line-height-large: 22px;
+
+  --checkbox-fill-color: #{$white};
+  --checkbox-border-color: #{$gray-strong};
+  --checkbox-arrow-color: #{$black};
+
+  --text-color: #{$black};
+  --text-disable-color: #{$gray};
+
+  --link-color: #{$black};
+}
+
+.dark {
+  --input-bg: #{$dark-gray-light};
+  --input-color: #{$white};
+  --input-border-focus: #{$white};
+
+  --input-disabled-bg: #{$gray-dark-strong};
+
+  --input-error-border: #{$dark-error-status};
+  --input-error-color: #{$dark-error-status};
+
+  // Dimensions
+  --input-border-radius: 3px;
+
+  // Sizes
+  --input-width-base: 173px;
+  --input-width-middle: 300px;
+  --input-width-large: 550px;
+
+  // Line heights
+  --text-input-line-height-base: 20px;
+  --text-input-line-height-middle: 20px;
+  --text-input-line-height-large: 22px;
+
+  --text-color: #{$white};
+  --text-disable-color: #{$gray-dark-text};
+
+  --link-color: #{$white};
+}
+
 .light {
   --row-side-color: #{$gray};
 

@@ -34,7 +34,7 @@ import store from "SRC_DIR/store";
 
 import "@docspace/shared/polyfills/broadcastchannel";
 
-import "@docspace/ui-kit/styles/custom.scss";
+import "./custom.scss";
 
 import ThemeProvider from "./components/ThemeProviderWrapper";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
@@ -44,26 +44,26 @@ import router from "./router";
 import i18n from "./i18n";
 
 const App = () => {
-	React.useEffect(() => {
-		const regex = /(\/){2,}/g;
-		const replaceRegex = /(\/)+/g;
-		const pathname = window.location.pathname;
+  React.useEffect(() => {
+    const regex = /(\/){2,}/g;
+    const replaceRegex = /(\/)+/g;
+    const pathname = window.location.pathname;
 
-		if (regex.test(pathname))
-			window.location.replace(pathname.replace(replaceRegex, "$1"));
-	}, []);
+    if (regex.test(pathname))
+      window.location.replace(pathname.replace(replaceRegex, "$1"));
+  }, []);
 
-	return (
-		<MobxProvider {...store}>
-			<I18nextProvider i18n={i18n}>
-				<ThemeProvider>
-					<ErrorBoundary>
-						<RouterProvider router={router} />
-					</ErrorBoundary>
-				</ThemeProvider>
-			</I18nextProvider>
-		</MobxProvider>
-	);
+  return (
+    <MobxProvider {...store}>
+      <I18nextProvider i18n={i18n}>
+        <ThemeProvider>
+          <ErrorBoundary>
+            <RouterProvider router={router} />
+          </ErrorBoundary>
+        </ThemeProvider>
+      </I18nextProvider>
+    </MobxProvider>
+  );
 };
 
 export default App;

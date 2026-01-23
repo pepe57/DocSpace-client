@@ -17,6 +17,7 @@ COPY common/ ./common/
 COPY packages/management/ ./packages/management/
 COPY packages/shared/ ./packages/shared/
 COPY public/ ./public/
+COPY libs/ui-kit/ ./libs/ui-kit/
 
 RUN pnpm install --frozen-lockfile
 

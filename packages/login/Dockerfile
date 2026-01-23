@@ -23,6 +23,8 @@ COPY common/ ./common/
 COPY packages/login/ ./packages/login/
 COPY packages/shared/ ./packages/shared/
 COPY public/ ./public/
+COPY libs/ui-kit ./libs/ui-kit
+
 
 # ENV NODE_OPTIONS="--max-old-space-size=8192"
 
