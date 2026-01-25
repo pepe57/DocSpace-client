@@ -256,7 +256,7 @@ const FilterInput = React.memo(
       [roomGroups],
     );
 
-    const groupTagsRef = React.useRef<HTMLDivElement | null>(null);
+    const rowRef = React.useRef<HTMLDivElement | null>(null);
     const allRoomsMeasureRef = React.useRef<HTMLDivElement | null>(null);
     const ellipsisMeasureRef = React.useRef<HTMLDivElement | null>(null);
     const groupMeasureRefs = React.useRef(
@@ -285,14 +285,23 @@ const FilterInput = React.memo(
     }, []);
 
     const calculateOverflow = React.useCallback(() => {
-      const container = groupTagsRef.current;
-      if (!container) return;
+      const row = rowRef.current;
+      if (!row) return;
 
-      const containerWidth = container.clientWidth;
-      if (containerWidth <= 0) return;
+      const rowWidth = row.clientWidth;
+      if (rowWidth <= 0) return;
+
+      const MANAGEMENT_BTN_W = 32;
+      const ROW_GAP = 16;
+      const TAG_GAP = 4;
 
       const allRoomsW = getElementFullWidth(allRoomsMeasureRef.current);
       const ellipsisW = getElementFullWidth(ellipsisMeasureRef.current);
+
+      // Wait for All Rooms measurement to be ready
+      if (allRoomsW <= 0) return;
+
+      const containerWidth = rowWidth - MANAGEMENT_BTN_W - ROW_GAP;
 
       const groupWidths = roomGroupsWithIcons.map((g) => ({
         id: g.id,
@@ -301,25 +310,47 @@ const FilterInput = React.memo(
         ),
       }));
 
-      const totalW = allRoomsW + groupWidths.reduce((s, g) => s + g.width, 0);
+      // Wait for all group measurements to be ready
+      if (
+        roomGroupsWithIcons.length > 0 &&
+        groupWidths.some((g) => g.width <= 0)
+      ) {
+        return;
+      }
+
+      // Total width includes gaps between tags: (1 + N) items = N gaps
+      const numGroups = groupWidths.length;
+      const totalGaps = numGroups > 0 ? numGroups * TAG_GAP : 0;
+      const totalW =
+        allRoomsW + groupWidths.reduce((s, g) => s + g.width, 0) + totalGaps;
 
       if (totalW <= containerWidth) {
         setVisibleGroupIds(roomGroupsWithIcons.map((g) => g.id));
         setOverflowGroups([]);
+
         return;
       }
 
-      const availableW = Math.max(containerWidth - allRoomsW - ellipsisW, 0);
+      // Available width for groups (after All Rooms, ellipsis, and their gaps)
+      // All Rooms + gap + ellipsis + gap before first visible group
+      const availableW = Math.max(
+        containerWidth - allRoomsW - ellipsisW - TAG_GAP * 2,
+        0,
+      );
 
       // Start with all groups visible, then remove from the end until they fit
       const visible: string[] = roomGroupsWithIcons.map((g) => g.id);
       const overflow: TRoomGroup[] = [];
 
-      const getVisibleWidth = () =>
-        visible.reduce(
+      const getVisibleWidth = () => {
+        const widthSum = visible.reduce(
           (sum, id) => sum + (groupWidths.find((x) => x.id === id)?.width ?? 0),
           0,
         );
+        // Add gaps between visible groups
+        const gaps = visible.length > 0 ? (visible.length - 1) * TAG_GAP : 0;
+        return widthSum + gaps;
+      };
 
       while (visible.length > 0 && getVisibleWidth() > availableW) {
         const removedId = visible.pop()!;
@@ -340,11 +371,11 @@ const FilterInput = React.memo(
     }, [calculateOverflow]);
 
     React.useEffect(() => {
-      const container = groupTagsRef.current;
-      if (!container || typeof ResizeObserver === "undefined") return;
+      const row = rowRef.current;
+      if (!row || typeof ResizeObserver === "undefined") return;
 
       const ro = new ResizeObserver(() => calculateOverflow());
-      ro.observe(container);
+      ro.observe(row);
       return () => ro.disconnect();
     }, [calculateOverflow]);
 
@@ -496,8 +527,8 @@ const FilterInput = React.memo(
         ) : null}
 
         {isRoomsFolder && (
-          <div className={styles.rowGroupingRooms}>
-            <div className="group-tags" ref={groupTagsRef}>
+          <div className={styles.rowGroupingRooms} ref={rowRef}>
+            <div className="group-tags">
               <SelectedItem
                 propKey="all-rooms"
                 label={t("GroupingRooms:AllRooms")}
