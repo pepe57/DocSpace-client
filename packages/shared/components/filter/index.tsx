@@ -161,8 +161,16 @@ const FilterInput = React.memo(
       "PeopleTranslations",
     ]);
 
+    const [isRoomGroupsLoaded, setIsRoomGroupsLoaded] = React.useState(false);
+
     React.useEffect(() => {
-      if (getAllRoomGroups) getAllRoomGroups();
+      if (getAllRoomGroups) {
+        getAllRoomGroups().finally(() => {
+          setIsRoomGroupsLoaded(true);
+        });
+      } else {
+        setIsRoomGroupsLoaded(true);
+      }
     }, [getAllRoomGroups]);
 
     const mountRef = React.useRef(true);
@@ -269,10 +277,12 @@ const FilterInput = React.memo(
     const [overflowGroups, setOverflowGroups] = React.useState<TRoomGroup[]>(
       [],
     );
+    const [isRowReady, setIsRowReady] = React.useState(false);
 
     React.useEffect(() => {
       setVisibleGroupIds(roomGroupsWithIcons.map((g) => g.id));
       setOverflowGroups([]);
+      setIsRowReady(false);
     }, [roomGroupsWithIcons]);
 
     const getGroupMeasureRef = React.useCallback((id: string) => {
@@ -284,6 +294,20 @@ const FilterInput = React.memo(
       return ref;
     }, []);
 
+    // Check if all group icons have been rendered by ReactSVG
+    const areIconsReady = React.useCallback(() => {
+      if (roomGroupsWithIcons.length === 0) return true;
+
+      for (const group of roomGroupsWithIcons) {
+        const ref = groupMeasureRefs.current.get(group.id);
+        if (!ref?.current) return false;
+        // ReactSVG injects an svg element when loaded
+        const svg = ref.current.querySelector("svg");
+        if (!svg) return false;
+      }
+      return true;
+    }, [roomGroupsWithIcons]);
+
     const calculateOverflow = React.useCallback(() => {
       const row = rowRef.current;
       if (!row) return;
@@ -291,7 +315,10 @@ const FilterInput = React.memo(
       const rowWidth = row.clientWidth;
       if (rowWidth <= 0) return;
 
-      const MANAGEMENT_BTN_W = 32;
+      // Wait for icons to be rendered before measuring
+      if (!areIconsReady()) return;
+
+      const MANAGEMENT_BTN_W = 40;
       const ROW_GAP = 16;
       const TAG_GAP = 4;
 
@@ -327,7 +354,7 @@ const FilterInput = React.memo(
       if (totalW <= containerWidth) {
         setVisibleGroupIds(roomGroupsWithIcons.map((g) => g.id));
         setOverflowGroups([]);
-
+        setIsRowReady(true);
         return;
       }
 
@@ -364,11 +391,26 @@ const FilterInput = React.memo(
 
       setVisibleGroupIds(visible);
       setOverflowGroups(overflow);
-    }, [roomGroupsWithIcons]);
+      setIsRowReady(true);
+    }, [roomGroupsWithIcons, areIconsReady]);
 
     React.useLayoutEffect(() => {
       calculateOverflow();
     }, [calculateOverflow]);
+
+    // Poll for icon loading completion
+    React.useEffect(() => {
+      if (isRowReady || roomGroupsWithIcons.length === 0) return;
+
+      const checkIcons = () => {
+        if (areIconsReady()) {
+          calculateOverflow();
+        }
+      };
+
+      const interval = setInterval(checkIcons, 50);
+      return () => clearInterval(interval);
+    }, [isRowReady, roomGroupsWithIcons, areIconsReady, calculateOverflow]);
 
     React.useEffect(() => {
       const row = rowRef.current;
@@ -526,86 +568,88 @@ const FilterInput = React.memo(
           </div>
         ) : null}
 
-        {isRoomsFolder && (
+        {isRoomsFolder && isRoomGroupsLoaded && (
           <div className={styles.rowGroupingRooms} ref={rowRef}>
-            <div className="group-tags">
-              <SelectedItem
-                propKey="all-rooms"
-                label={t("GroupingRooms:AllRooms")}
-                onClick={() => onFilterByGroup?.(null)}
-                onClose={() => {}}
-                hideCross
-                clickable
-              />
-              {roomGroupsWithIcons.map((group) =>
-                visibleGroupIds.includes(group.id) ? (
-                  <SelectedItem
-                    key={group.id}
-                    propKey={group.id}
-                    label={group.name}
-                    icon={buildGroupIconDataUrl(group.icon)}
-                    onClick={() => onFilterByGroup?.(group.id)}
-                    onClose={() => {}}
-                    hideCross
-                    clickable
-                  />
-                ) : null,
-              )}
-              {overflowGroups.length > 0 && (
-                <>
-                  <TooltipContainer
-                    as="div"
-                    className={styles.ellipsisButton}
-                    onClick={
-                      isMobileView ? onOverflowContextMenu : toggleOverflow
-                    }
-                    title={t("Common:More")}
-                    data-testid="rooms_groups_overflow_trigger"
-                  >
-                    <ComboBox
-                      opened={isMobileView ? false : isOverflowOpen}
-                      onToggle={isMobileView ? undefined : toggleOverflow}
-                      className={styles.ellipsisComboBox}
-                      options={[]}
-                      selectedOption={{ key: "", label: "" }}
-                      directionX="left"
-                      directionY="both"
-                      size={ComboBoxSize.content}
-                      advancedOptions={
-                        isMobileView ? undefined : overflowDropdownList
-                      }
-                      disableIconClick={isMobileView}
-                      disableItemClick
-                      isDefaultMode={false}
-                      advancedOptionsCount={overflowGroups.length}
-                      onSelect={() => {}}
-                      withBlur={false}
-                      withBackdrop={!isMobileView}
-                      onBackdropClick={toggleOverflow}
-                      type="onlyIcon"
-                      dataTestId="rooms_groups_overflow_combobox"
-                      withoutPadding
-                      noBorder
-                      withoutArrow
-                      displayArrow={false}
-                    >
-                      <span className={styles.ellipsisIcon}>...</span>
-                    </ComboBox>
-                  </TooltipContainer>
-                  {isMobileView && (
-                    <ContextMenu
-                      ref={contextMenuRef}
-                      model={overflowContextMenuModel}
-                      header={overflowContextMenuHeader}
-                      withBackdrop
-                      headerOnlyMobile
-                      ignoreChangeView
-                      maxHeight={6 * 36}
+            {isRowReady && (
+              <div className="group-tags">
+                <SelectedItem
+                  propKey="all-rooms"
+                  label={t("GroupingRooms:AllRooms")}
+                  onClick={() => onFilterByGroup?.(null)}
+                  onClose={() => {}}
+                  hideCross
+                  clickable
+                />
+                {roomGroupsWithIcons.map((group) =>
+                  visibleGroupIds.includes(group.id) ? (
+                    <SelectedItem
+                      key={group.id}
+                      propKey={group.id}
+                      label={group.name}
+                      icon={buildGroupIconDataUrl(group.icon)}
+                      onClick={() => onFilterByGroup?.(group.id)}
+                      onClose={() => {}}
+                      hideCross
+                      clickable
                     />
-                  )}
-                </>
-              )}
-            </div>
+                  ) : null,
+                )}
+                {overflowGroups.length > 0 && (
+                  <>
+                    <TooltipContainer
+                      as="div"
+                      className={styles.ellipsisButton}
+                      onClick={
+                        isMobileView ? onOverflowContextMenu : toggleOverflow
+                      }
+                      title={t("Common:More")}
+                      data-testid="rooms_groups_overflow_trigger"
+                    >
+                      <ComboBox
+                        opened={isMobileView ? false : isOverflowOpen}
+                        onToggle={isMobileView ? undefined : toggleOverflow}
+                        className={styles.ellipsisComboBox}
+                        options={[]}
+                        selectedOption={{ key: "", label: "" }}
+                        directionX="left"
+                        directionY="both"
+                        size={ComboBoxSize.content}
+                        advancedOptions={
+                          isMobileView ? undefined : overflowDropdownList
+                        }
+                        disableIconClick={isMobileView}
+                        disableItemClick
+                        isDefaultMode={false}
+                        advancedOptionsCount={overflowGroups.length}
+                        onSelect={() => {}}
+                        withBlur={false}
+                        withBackdrop={!isMobileView}
+                        onBackdropClick={toggleOverflow}
+                        type="onlyIcon"
+                        dataTestId="rooms_groups_overflow_combobox"
+                        withoutPadding
+                        noBorder
+                        withoutArrow
+                        displayArrow={false}
+                      >
+                        <span className={styles.ellipsisIcon}>...</span>
+                      </ComboBox>
+                    </TooltipContainer>
+                    {isMobileView && (
+                      <ContextMenu
+                        ref={contextMenuRef}
+                        model={overflowContextMenuModel}
+                        header={overflowContextMenuHeader}
+                        withBackdrop
+                        headerOnlyMobile
+                        ignoreChangeView
+                        maxHeight={6 * 36}
+                      />
+                    )}
+                  </>
+                )}
+              </div>
+            )}
 
             {/* Hidden measurement container */}
             <div className={styles.groupTagsMeasure} aria-hidden>
@@ -639,18 +683,20 @@ const FilterInput = React.memo(
               </div>
             </div>
 
-            <TooltipContainer
-              as="div"
-              className={styles.groupManagementButton}
-              onClick={onCreateGroup}
-            >
-              <IconButton
-                size={16}
-                iconName={GroupManagementIcon}
-                isFill
-                isClickable
-              />
-            </TooltipContainer>
+            {isRowReady && (
+              <TooltipContainer
+                as="div"
+                className={styles.groupManagementButton}
+                onClick={onCreateGroup}
+              >
+                <IconButton
+                  size={16}
+                  iconName={GroupManagementIcon}
+                  isFill
+                  isClickable
+                />
+              </TooltipContainer>
+            )}
           </div>
         )}
       </div>
