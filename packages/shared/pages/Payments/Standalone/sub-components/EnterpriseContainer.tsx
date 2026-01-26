@@ -49,18 +49,25 @@ export const EnterpriseContainer = ({
   logoText,
   docspaceFaqUrl,
   licenseQuota,
+  isLifetimeLicense,
+  isGracePeriod,
   openOnNewPage,
+  isNotPaidPeriod,
+  gracePeriodEndDate,
+  delayDaysCount,
 }: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
 
   return (
     <div className={styles.enterpriseComponent}>
       <Text fontWeight={700} fontSize="16px">
-        {t("ActivateRenewSubscriptionHeader", {
-          license: isDeveloper
-            ? t("Common:DeveloperLicense")
-            : t("Common:EnterpriseLicense"),
-        })}
+        {!isLifetimeLicense
+          ? t("RenewTheLicense")
+          : t("ActivateRenewSubscriptionHeader", {
+              license: isDeveloper
+                ? t("Common:DeveloperLicense")
+                : t("Common:EnterpriseLicense"),
+            })}
       </Text>
 
       <TariffTitleContainer
@@ -73,6 +80,11 @@ export const EnterpriseContainer = ({
         docspaceFaqUrl={docspaceFaqUrl}
         licenseQuota={licenseQuota}
         openOnNewPage={openOnNewPage}
+        isLifetimeLicense={isLifetimeLicense}
+        isGracePeriod={isGracePeriod}
+        isNotPaidPeriod={isNotPaidPeriod}
+        gracePeriodEndDate={gracePeriodEndDate}
+        delayDaysCount={delayDaysCount}
       />
 
       {isLicenseDateExpired ? (
@@ -83,7 +95,7 @@ export const EnterpriseContainer = ({
         />
       ) : null}
 
-      {isLicenseDateExpired ? <BenefitsContainer /> : null}
+      {/* {isLicenseDateExpired ? <BenefitsContainer /> : null} */}
       <Text fontSize="14px" className={styles.paymentsRenewSubscription}>
         {isLicenseDateExpired
           ? t("ActivatePurchaseBuyLicense")

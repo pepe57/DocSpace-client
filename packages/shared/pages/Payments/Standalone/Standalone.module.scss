@@ -29,6 +29,7 @@
 @use "@docspace/shared/styles/mixins";
 
 .pageWrapper {
+  max-width: 660px;
   .paymentsFileInput {
     max-width: 350px;
     margin: 16px 0;
@@ -67,13 +68,17 @@
   }
 }
 
+.gracePeriodInfo {
+  margin-top: 12px;
+}
+
 .titleComponent {
   .paymentsSubscription {
     max-width: 660px;
     margin-top: 8px;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 20px;
     align-items: baseline;
 
     .title {
@@ -83,18 +88,15 @@
 
   .paymentsSubscriptionExpired {
     max-width: fit-content;
-    border: 1px solid var(--settings-payment-color);
-    border-radius: 3px;
     color: var(--settings-payment-color);
-    padding: 2px 8px;
     height: fit-content;
   }
 
-  &.limitedWidth {
-    .paymentsSubscription .title {
-      max-width: 376px;
-    }
-  }
+  // &.limitedWidth {
+  //   .paymentsSubscription .title {
+  //     max-width: 376px;
+  //   }
+  // }
 
   &.isLicenseDateExpired {
     .paymentsSubscription .title span:first-child {
@@ -102,7 +104,6 @@
     }
 
     .paymentsSubscriptionExpired {
-      border: 1px solid var(--settings-payment-warning-color);
       color: var(--settings-payment-warning-color);
     }
   }
