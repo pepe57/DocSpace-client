@@ -68,4 +68,6 @@ export interface SelectedItemProps {
   /** Icon data as SVG string */
   icon?: string;
   clickable?: boolean;
+  /** Sets the item as active/selected state */
+  isActive?: boolean;
 }

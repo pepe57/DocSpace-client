@@ -49,6 +49,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     title,
     dataTestId,
     icon,
+    isActive,
   } = props;
   if (!label) return null;
 
@@ -67,6 +68,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     styles.selectedItem,
     isInline && styles.isInline,
     isDisabled && styles.disabled,
+    isActive && styles.isActive,
     className,
   ]
     .filter(Boolean)

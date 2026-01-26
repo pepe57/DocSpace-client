@@ -39,6 +39,22 @@
   &:not(.disabled):hover {
     background: var(--filter-input-selected-items-hover-background);
   }
+
+  &.isActive {
+    background: var(--filter-block-item-tag-active-background);
+
+    .label {
+      color: var(--filter-block-item-tag-active-color);
+    }
+
+    .icon svg path {
+      fill: var(--filter-block-item-tag-active-color);
+    }
+  }
+
+  &.isActive:not(.disabled):hover {
+    background: var(--filter-block-item-tag-active-background);
+  }
 }
 
 .icon {

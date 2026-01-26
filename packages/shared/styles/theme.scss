@@ -232,6 +232,8 @@
   );
   --filter-block-item-separator-background: #{$gray-light-mid};
   --filter-block-item-tag-border: 1px solid #{$gray-light-mid};
+  --filter-block-item-tag-active-background: #{$light-blue-main-active};
+  --filter-block-item-tag-active-color: var(--accent-main, #{$light-blue-main});
 
   --filter-sort-button-background: #{$white};
   --filter-sort-button-selected-icon: #{$light-gray-selected};
@@ -558,6 +560,8 @@
   --filter-block-selected-item-color: #{$black};
   --filter-block-item-separator-background: #{$gray-dark-strong};
   --filter-block-item-tag-border: 1px solid #{$gray-dark-strong};
+  --filter-block-item-tag-active-background: #{$light-blue-main-active};
+  --filter-block-item-tag-active-color: #{$light-blue-main};
 
   --filter-sort-button-background: #{$black};
   --filter-sort-button-selected-icon: #{$light-gray-selected};

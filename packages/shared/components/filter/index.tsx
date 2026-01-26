@@ -278,6 +278,9 @@ const FilterInput = React.memo(
       [],
     );
     const [isRowReady, setIsRowReady] = React.useState(false);
+    const [activeGroupId, setActiveGroupId] = React.useState<string | null>(
+      null,
+    );
 
     React.useEffect(() => {
       setVisibleGroupIds(roomGroupsWithIcons.map((g) => g.id));
@@ -427,6 +430,14 @@ const FilterInput = React.memo(
       [],
     );
 
+    const handleFilterByGroup = React.useCallback(
+      (groupId: string | null) => {
+        setActiveGroupId(groupId);
+        onFilterByGroup?.(groupId);
+      },
+      [onFilterByGroup],
+    );
+
     const contextMenuRef = React.useRef<ContextMenuRefType>(null);
 
     const isMobileView = isMobile();
@@ -442,10 +453,10 @@ const FilterInput = React.memo(
           label: g.name,
           icon: buildGroupIconDataUrl(g.icon),
           onClick: () => {
-            onFilterByGroup?.(g.id);
+            handleFilterByGroup(g.id);
           },
         })),
-      [overflowGroups, onFilterByGroup],
+      [overflowGroups, handleFilterByGroup],
     );
 
     const overflowContextMenuHeader = React.useMemo(
@@ -472,7 +483,7 @@ const FilterInput = React.memo(
             icon={buildGroupIconDataUrl(g.icon)}
             truncateText
             onClick={() => {
-              onFilterByGroup?.(g.id);
+              handleFilterByGroup(g.id);
               setIsOverflowOpen(false);
             }}
             testId={`room_group_overflow_${g.id}`}
@@ -575,10 +586,11 @@ const FilterInput = React.memo(
                 <SelectedItem
                   propKey="all-rooms"
                   label={t("GroupingRooms:AllRooms")}
-                  onClick={() => onFilterByGroup?.(null)}
+                  onClick={() => handleFilterByGroup(null)}
                   onClose={() => {}}
                   hideCross
                   clickable
+                  isActive={activeGroupId === null}
                 />
                 {roomGroupsWithIcons.map((group) =>
                   visibleGroupIds.includes(group.id) ? (
@@ -587,10 +599,11 @@ const FilterInput = React.memo(
                       propKey={group.id}
                       label={group.name}
                       icon={buildGroupIconDataUrl(group.icon)}
-                      onClick={() => onFilterByGroup?.(group.id)}
+                      onClick={() => handleFilterByGroup(group.id)}
                       onClose={() => {}}
                       hideCross
                       clickable
+                      isActive={activeGroupId === group.id}
                     />
                   ) : null,
                 )}
