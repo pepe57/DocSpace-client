@@ -46,12 +46,11 @@ const EditorsTooltip = ({ item, currentUserId }: EditorsTooltipProps) => {
   const { editingBy, activeEditors } = item;
   const isMobile = isMobileUtils();
 
-  const { editors, isOpen, openTooltip, closeTooltip, setIsOpen } =
-    useEditorsData({
-      activeEditors,
-      editingBy,
-      currentUserId,
-    });
+  const { editors, isOpen, openTooltip, closeTooltip } = useEditorsData({
+    activeEditors,
+    editingBy,
+    currentUserId,
+  });
 
   const tooltipDimensions = useMemo(
     () => calculateTooltipDimensions(editors),
