@@ -27,7 +27,7 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 

@@ -38,7 +38,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { DeviceType } from "@docspace/shared/enums";

@@ -28,7 +28,7 @@ import { useTranslation } from "react-i18next";
 
 import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Text } from "@docspace/ui-kit/components/text";
 import { globalColors } from "@docspace/shared/themes";

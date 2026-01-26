@@ -34,7 +34,7 @@ import {
 } from "@docspace/ui-kit/components/text-input";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 

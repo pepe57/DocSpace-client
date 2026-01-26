@@ -1247,28 +1247,6 @@
 }
 
 .light {
-  --toggle-button-fill-color-default: #{$light-blue-main};
-  --toggle-button-fill-color-off: #{$gray-strong};
-  --toggle-button-hover-fill-color-off: #{$gray};
-  --toggle-button-fill-circle-color: #{$white};
-  --toggle-button-fill-circle-color-off: #{$white};
-
-  --toggle-button-text-color: #{$black};
-  --toggle-button-text-disable-color: #{$gray};
-}
-
-.dark {
-  --toggle-button-fill-color-default: #{$light-blue-main};
-  --toggle-button-fill-color-off: #{$gray-dark-mid};
-  --toggle-button-hover-fill-color-off: #{$light-dark-gray-hover};
-  --toggle-button-fill-circle-color: #{$white};
-  --toggle-button-fill-circle-color-off: #{$white};
-
-  --toggle-button-text-color: #{$white};
-  --toggle-button-text-disable-color: #{$gray-dark-text};
-}
-
-.light {
   --view-selector-fill-color: #{$white};
   --view-selector-checked-fill-color: #{$gray};
   --view-selector-fill-disabled-color: #{$gray-light};

@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { TextInput, InputType } from "@docspace/ui-kit/components/text-input";

@@ -14,7 +14,7 @@ import type {
 } from "../ContextMenu.types";
 import { globalColors } from "../../../themes";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { ToggleButton } from "../../toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import styles from "../ContextMenu.module.scss";
 
 interface MobileSubMenuProps {

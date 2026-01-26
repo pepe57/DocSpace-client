@@ -41,7 +41,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import { InputBlock } from "@docspace/shared/components/input-block";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Tabs, TabsTypes, TTabItem } from "@docspace/shared/components/tabs";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
