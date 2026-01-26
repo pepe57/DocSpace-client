@@ -52,6 +52,11 @@ const PaymentsPage = ({
   docspaceFaqUrl,
   licenseQuota,
   filesSettings,
+  isLifetimeLicense,
+  isGracePeriod,
+  isNotPaidPeriod,
+  gracePeriodEndDate,
+  delayDaysCount,
 }: {
   isTrial: boolean;
   salesEmail: string;
@@ -63,6 +68,11 @@ const PaymentsPage = ({
   docspaceFaqUrl: string;
   licenseQuota: TLicenseQuota;
   filesSettings: TFilesSettings;
+  isLifetimeLicense: boolean;
+  isGracePeriod: boolean;
+  isNotPaidPeriod: boolean;
+  gracePeriodEndDate: string;
+  delayDaysCount: string;
 }) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
@@ -74,7 +84,8 @@ const PaymentsPage = ({
   const [isLicenseCorrect, setIsLicenseCorrect] = useState(false);
 
   const shouldOpenEditorInNewTab = () => {
-    if (typeof window === "undefined") return !filesSettings.openEditorInSameTab;
+    if (typeof window === "undefined")
+      return !filesSettings.openEditorInSameTab;
 
     if (
       window.navigator.userAgent.includes("ZoomWebKit") ||
@@ -144,6 +155,11 @@ const PaymentsPage = ({
           docspaceFaqUrl={docspaceFaqUrl}
           licenseQuota={licenseQuota}
           openOnNewPage={shouldOpenEditorInNewTab()}
+          isLifetimeLicense={isLifetimeLicense}
+          isGracePeriod={isGracePeriod}
+          isNotPaidPeriod={isNotPaidPeriod}
+          gracePeriodEndDate={gracePeriodEndDate}
+          delayDaysCount={delayDaysCount}
         />
       </LoaderWrapper>
     </div>
