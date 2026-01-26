@@ -81,12 +81,24 @@ importers:
       cnbuilder:
         specifier: 3.1.0
         version: 3.1.0
+      copy-to-clipboard:
+        specifier: 3.3.3
+        version: 3.3.3
+      csvjson-json_beautifier:
+        specifier: 5.0.4
+        version: 5.0.4
       fast-deep-equal:
         specifier: 3.1.3
         version: 3.1.3
       lodash:
         specifier: 4.17.23
         version: 4.17.23
+      react-autosize-textarea:
+        specifier: 7.1.0
+        version: 7.1.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react-device-detect:
+        specifier: 2.2.3
+        version: 2.2.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react-draggable:
         specifier: 4.4.6
         version: 4.4.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -96,6 +108,9 @@ importers:
       react-text-mask:
         specifier: 5.5.0
         version: 5.5.0(react@19.2.3)
+      react-toastify:
+        specifier: 10.0.6
+        version: 10.0.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react-tooltip:
         specifier: 5.28.0
         version: 5.28.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
