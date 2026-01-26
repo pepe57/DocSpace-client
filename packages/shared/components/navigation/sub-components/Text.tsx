@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Badge } from "../../badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 
 import styles from "../Navigation.module.scss";
 import { TTextProps } from "../Navigation.types";

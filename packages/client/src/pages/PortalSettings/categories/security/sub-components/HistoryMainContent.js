@@ -33,7 +33,7 @@ import { Button } from "@docspace/ui-kit/components/button";
 import { TwoFactorCampaignBanner } from "@docspace/shared/components/two-factor-campaign";
 // import { toastr } from "@docspace/shared/components/toast";
 import { mobile, tablet } from "@docspace/shared/utils";
-import { Badge } from "@docspace/shared/components/badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";

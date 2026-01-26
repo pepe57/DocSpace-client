@@ -176,12 +176,6 @@
   --backdrop-background-color: #{$blur-light};
 
   --badge-border: 1px solid transparent;
-  --badge-padding: 1px;
-  --badge-line-height: 0.8;
-  --badge-overflow: hidden;
-  --badge-color: #{$white};
-  --badge-background-color: var(--accent-main, #{$light-status-warning});
-  --badge-disable-background-color: #{$gray};
 
   --sub-menu-item-background-color: #{$white};
   --sub-menu-item-hover-background-color: #{$gray-light};
@@ -335,10 +329,6 @@
   --aside-content-padding-bottom: unset;
   --aside-header-custom-height: 53px;
   --badge-border: 1px solid transparent;
-  --badge-padding: 1px;
-  --badge-color: #{$white};
-  --badge-line-height: 0.8;
-  --badge-overflow: hidden;
   --context-menu-header-text-margin: 0 0 0 8px;
   --context-menu-submenu-list-margin: 4px;
   --main-button-mobile-dropdown-position: fixed;
@@ -450,9 +440,6 @@
   --avatar-owner-color: #{$white};
 
   --backdrop-background-color: #{$blur-dark};
-
-  --badge-background-color: var(--accent-main, #{$dark-status-warning});
-  --badge-disable-background-color: #{$gray-dark-strong};
 
   --sub-menu-item-background-color: #{$black};
   --sub-menu-item-hover-background-color: #{$light-dark-gray-hover};

@@ -30,7 +30,7 @@ import { useTheme } from "styled-components";
 
 import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Badge } from "@docspace/shared/components/badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 import { Link } from "@docspace/ui-kit/components/link";
 
@@ -41,71 +41,71 @@ import MobileQuotasComponent from "./sub-components/MobileQuotas";
 import { QuotaPerAIAgentComponentSection } from "./sub-components/QuotaPerAIAgent";
 
 const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
-	if (isMobile())
-		return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;
+  if (isMobile())
+    return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;
 
-	return (
-		<>
-			<QuotaPerRoomComponentSection />
-			<QuotaPerUserComponentSection />
-			<QuotaPerAIAgentComponentSection />
-		</>
-	);
+  return (
+    <>
+      <QuotaPerRoomComponentSection />
+      <QuotaPerUserComponentSection />
+      <QuotaPerAIAgentComponentSection />
+    </>
+  );
 };
 
 const QuotasComponent = (props) => {
-	const { t } = useTranslation("Settings");
-	const theme = useTheme();
+  const { t } = useTranslation("Settings");
+  const theme = useTheme();
 
-	const { isStatisticsAvailable, storageManagementUrl } = props;
+  const { isStatisticsAvailable, storageManagementUrl } = props;
 
-	return (
-		<StyledBaseQuotaComponent>
-			<div className="title-container">
-				<StyledMainTitle fontSize="16px" fontWeight={700}>
-					{t("Quotas")}
-				</StyledMainTitle>
+  return (
+    <StyledBaseQuotaComponent>
+      <div className="title-container">
+        <StyledMainTitle fontSize="16px" fontWeight={700}>
+          {t("Quotas")}
+        </StyledMainTitle>
 
-				{!isStatisticsAvailable ? (
-					<Badge
-						backgroundColor={
-							theme.isBase
-								? globalColors.favoritesStatus
-								: globalColors.favoriteStatusDark
-						}
-						label={t("Common:Paid")}
-						className="paid-badge"
-						isPaidBadge
-					/>
-				) : null}
-			</div>
-			<Text className="quotas_description">
-				{t("Settings:QuotasDescription")}{" "}
-				{storageManagementUrl ? (
-					<Link
-						tag="a"
-						isHovered={false}
-						target="_blank"
-						href={storageManagementUrl}
-						color="accent"
-						dataTestId="help_center_link"
-					>
-						{t("Common:HelpCenter")}
-					</Link>
-				) : null}
-			</Text>
+        {!isStatisticsAvailable ? (
+          <Badge
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
+            label={t("Common:Paid")}
+            className="paid-badge"
+            isPaidBadge
+          />
+        ) : null}
+      </div>
+      <Text className="quotas_description">
+        {t("Settings:QuotasDescription")}{" "}
+        {storageManagementUrl ? (
+          <Link
+            tag="a"
+            isHovered={false}
+            target="_blank"
+            href={storageManagementUrl}
+            color="accent"
+            dataTestId="help_center_link"
+          >
+            {t("Common:HelpCenter")}
+          </Link>
+        ) : null}
+      </Text>
 
-			<QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />
-		</StyledBaseQuotaComponent>
-	);
+      <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />
+    </StyledBaseQuotaComponent>
+  );
 };
 
 export default inject(({ currentQuotaStore, settingsStore }) => {
-	const { isStatisticsAvailable } = currentQuotaStore;
-	const { storageManagementUrl } = settingsStore;
+  const { isStatisticsAvailable } = currentQuotaStore;
+  const { storageManagementUrl } = settingsStore;
 
-	return {
-		isStatisticsAvailable,
-		storageManagementUrl,
-	};
+  return {
+    isStatisticsAvailable,
+    storageManagementUrl,
+  };
 })(observer(QuotasComponent));

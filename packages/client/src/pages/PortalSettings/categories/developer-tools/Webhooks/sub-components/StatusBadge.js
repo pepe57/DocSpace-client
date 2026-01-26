@@ -29,7 +29,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Badge } from "@docspace/shared/components/badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 
 const StyledBadge = styled(Badge)`

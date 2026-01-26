@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { Badge } from "@docspace/shared/components/badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 import type { Nullable } from "@docspace/shared/types";
 import { isMobile } from "@docspace/shared/utils";

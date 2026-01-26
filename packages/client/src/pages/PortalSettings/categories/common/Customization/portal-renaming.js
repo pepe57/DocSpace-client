@@ -27,7 +27,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useTheme } from "styled-components";
 import { withTranslation, Trans } from "react-i18next";
-import { Badge } from "@docspace/shared/components/badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
@@ -48,387 +48,387 @@ import { StyledSettingsComponent } from "./StyledSettings";
 import checkScrollSettingsBlock from "../utils";
 
 const PortalRenamingComponent = (props) => {
-	const {
-		t,
-		setPortalRename,
-		isMobileView,
-		tReady,
-		isLoaded,
-		setIsLoadedPortalRenaming,
-		isLoadedPage,
-		tenantAlias,
-		domain,
-		isSettingPaid,
-		standalone,
-		currentColorScheme,
-		renamingSettingsUrl,
-		domainValidator,
-		setPortalName,
-		portalName,
-	} = props;
+  const {
+    t,
+    setPortalRename,
+    isMobileView,
+    tReady,
+    isLoaded,
+    setIsLoadedPortalRenaming,
+    isLoadedPage,
+    tenantAlias,
+    domain,
+    isSettingPaid,
+    standalone,
+    currentColorScheme,
+    renamingSettingsUrl,
+    domainValidator,
+    setPortalName,
+    portalName,
+  } = props;
 
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	let portalNameFromSessionStorage = getFromSessionStorage("portalName");
+  let portalNameFromSessionStorage = getFromSessionStorage("portalName");
 
-	const portalNameDefaultFromSessionStorage =
-		getFromSessionStorage("portalNameDefault");
+  const portalNameDefaultFromSessionStorage =
+    getFromSessionStorage("portalNameDefault");
 
-	const portalNameInitially =
-		portalNameFromSessionStorage === null ||
-		portalNameFromSessionStorage === "none"
-			? tenantAlias
-			: portalNameFromSessionStorage;
+  const portalNameInitially =
+    portalNameFromSessionStorage === null ||
+    portalNameFromSessionStorage === "none"
+      ? tenantAlias
+      : portalNameFromSessionStorage;
 
-	const portalNameDefaultInitially =
-		portalNameDefaultFromSessionStorage === null ||
-		portalNameDefaultFromSessionStorage === "none"
-			? tenantAlias
-			: portalNameDefaultFromSessionStorage;
+  const portalNameDefaultInitially =
+    portalNameDefaultFromSessionStorage === null ||
+    portalNameDefaultFromSessionStorage === "none"
+      ? tenantAlias
+      : portalNameDefaultFromSessionStorage;
 
-	const [portalNameDefault, setPortalNameDefault] = useState(
-		portalNameDefaultInitially,
-	);
+  const [portalNameDefault, setPortalNameDefault] = useState(
+    portalNameDefaultInitially,
+  );
 
-	const [isLoadingPortalNameSave, setIsLoadingPortalNameSave] = useState(false);
+  const [isLoadingPortalNameSave, setIsLoadingPortalNameSave] = useState(false);
 
-	const [showReminder, setShowReminder] = useState(false);
+  const [showReminder, setShowReminder] = useState(false);
 
-	const [hasScroll, setHasScroll] = useState(false);
+  const [hasScroll, setHasScroll] = useState(false);
 
-	const errorValueFromSessionStorage = getFromSessionStorage("errorValue");
+  const errorValueFromSessionStorage = getFromSessionStorage("errorValue");
 
-	const [errorValue, setErrorValue] = useState(errorValueFromSessionStorage);
+  const [errorValue, setErrorValue] = useState(errorValueFromSessionStorage);
 
-	const isLoadedSetting = isLoaded && tReady;
+  const isLoadedSetting = isLoaded && tReady;
 
-	const [isCustomizationView, setIsCustomizationView] = useState(false);
+  const [isCustomizationView, setIsCustomizationView] = useState(false);
 
-	const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowModal, setIsShowModal] = useState(false);
 
-	const theme = useTheme();
+  const theme = useTheme();
 
-	const checkInnerWidth = useCallback(() => {
-		if (!isMobileDevice()) {
-			setIsCustomizationView(true);
+  const checkInnerWidth = useCallback(() => {
+    if (!isMobileDevice()) {
+      setIsCustomizationView(true);
 
-			if (location.pathname.includes("portal-renaming")) {
-				navigate("/portal-settings/customization/general");
-			}
-		} else {
-			setIsCustomizationView(false);
-		}
-	}, [isMobileDevice, setIsCustomizationView]);
+      if (location.pathname.includes("portal-renaming")) {
+        navigate("/portal-settings/customization/general");
+      }
+    } else {
+      setIsCustomizationView(false);
+    }
+  }, [isMobileDevice, setIsCustomizationView]);
 
-	useEffect(() => {
-		setDocumentTitle(
-			t("PortalRenaming", { productName: t("Common:ProductName") }),
-		);
-		setPortalName(portalNameInitially);
+  useEffect(() => {
+    setDocumentTitle(
+      t("PortalRenaming", { productName: t("Common:ProductName") }),
+    );
+    setPortalName(portalNameInitially);
 
-		const checkScroll = checkScrollSettingsBlock();
-		checkInnerWidth();
+    const checkScroll = checkScrollSettingsBlock();
+    checkInnerWidth();
 
-		window.addEventListener("resize", checkInnerWidth);
+    window.addEventListener("resize", checkInnerWidth);
 
-		const scrollPortalName = checkScroll();
+    const scrollPortalName = checkScroll();
 
-		if (scrollPortalName !== hasScroll) {
-			setHasScroll(scrollPortalName);
-		}
+    if (scrollPortalName !== hasScroll) {
+      setHasScroll(scrollPortalName);
+    }
 
-		return () => window.removeEventListener("resize", checkInnerWidth);
-	}, []);
+    return () => window.removeEventListener("resize", checkInnerWidth);
+  }, []);
 
-	const settingIsEqualInitialValue = (value) => {
-		const defaultValue = JSON.stringify(portalNameDefault);
-		const currentValue = JSON.stringify(value);
-		return defaultValue === currentValue;
-	};
+  const settingIsEqualInitialValue = (value) => {
+    const defaultValue = JSON.stringify(portalNameDefault);
+    const currentValue = JSON.stringify(value);
+    return defaultValue === currentValue;
+  };
 
-	const checkChanges = () => {
-		let hasChanged = false;
+  const checkChanges = () => {
+    let hasChanged = false;
 
-		const valueFromSessionStorage = getFromSessionStorage("portalName");
-		if (
-			valueFromSessionStorage !== "none" &&
-			valueFromSessionStorage !== null &&
-			!settingIsEqualInitialValue(valueFromSessionStorage)
-		) {
-			hasChanged = true;
-		}
+    const valueFromSessionStorage = getFromSessionStorage("portalName");
+    if (
+      valueFromSessionStorage !== "none" &&
+      valueFromSessionStorage !== null &&
+      !settingIsEqualInitialValue(valueFromSessionStorage)
+    ) {
+      hasChanged = true;
+    }
 
-		if (hasChanged !== showReminder) {
-			setShowReminder(hasChanged);
-		}
-	};
+    if (hasChanged !== showReminder) {
+      setShowReminder(hasChanged);
+    }
+  };
 
-	useEffect(() => {
-		if (isLoadedSetting) setIsLoadedPortalRenaming(isLoadedSetting);
+  useEffect(() => {
+    if (isLoadedSetting) setIsLoadedPortalRenaming(isLoadedSetting);
 
-		if (portalNameDefault || portalName) {
-			checkChanges();
-		}
-	}, [isLoadedSetting, portalNameDefault, portalName]);
+    if (portalNameDefault || portalName) {
+      checkChanges();
+    }
+  }, [isLoadedSetting, portalNameDefault, portalName]);
 
-	const onCloseModal = () => {
-		setIsShowModal(false);
-	};
+  const onCloseModal = () => {
+    setIsShowModal(false);
+  };
 
-	const onSavePortalRename = () => {
-		if (errorValue) return;
+  const onSavePortalRename = () => {
+    if (errorValue) return;
 
-		setIsLoadingPortalNameSave(true);
+    setIsLoadingPortalNameSave(true);
 
-		setPortalRename(portalName)
-			.then((confirmUrl) => {
-				onCloseModal();
-				toastr.success(t("SuccessfullySavePortalNameMessage"));
+    setPortalRename(portalName)
+      .then((confirmUrl) => {
+        onCloseModal();
+        toastr.success(t("SuccessfullySavePortalNameMessage"));
 
-				setPortalName(portalName);
-				setPortalNameDefault(portalName);
-				sessionStorage.clear();
+        setPortalName(portalName);
+        setPortalNameDefault(portalName);
+        sessionStorage.clear();
 
-				window.location.replace(confirmUrl);
-			})
-			.catch((error) => {
-				let errorMessage = "";
-				if (typeof error === "object") {
-					errorMessage =
-						error?.response?.data?.error?.message ||
-						error?.statusText ||
-						error?.message ||
-						"";
-				} else {
-					errorMessage = error;
-				}
+        window.location.replace(confirmUrl);
+      })
+      .catch((error) => {
+        let errorMessage = "";
+        if (typeof error === "object") {
+          errorMessage =
+            error?.response?.data?.error?.message ||
+            error?.statusText ||
+            error?.message ||
+            "";
+        } else {
+          errorMessage = error;
+        }
 
-				toastr.error(errorMessage);
-				setIsShowModal(false);
-				setErrorValue(errorMessage);
-				saveToSessionStorage("errorValue", errorMessage);
-			})
-			.finally(() => {
-				setIsLoadingPortalNameSave(false);
-			});
+        toastr.error(errorMessage);
+        setIsShowModal(false);
+        setErrorValue(errorMessage);
+        saveToSessionStorage("errorValue", errorMessage);
+      })
+      .finally(() => {
+        setIsLoadingPortalNameSave(false);
+      });
 
-		saveToSessionStorage("portalName", portalName);
-		saveToSessionStorage("portalNameDefault", portalName);
-	};
+    saveToSessionStorage("portalName", portalName);
+    saveToSessionStorage("portalNameDefault", portalName);
+  };
 
-	const onCancelPortalName = () => {
-		portalNameFromSessionStorage = getFromSessionStorage("portalName");
+  const onCancelPortalName = () => {
+    portalNameFromSessionStorage = getFromSessionStorage("portalName");
 
-		saveToSessionStorage("errorValue", null);
+    saveToSessionStorage("errorValue", null);
 
-		setErrorValue(null);
+    setErrorValue(null);
 
-		if (
-			portalNameFromSessionStorage !== "none" &&
-			portalNameFromSessionStorage !== null &&
-			!settingIsEqualInitialValue(portalNameFromSessionStorage)
-		) {
-			setPortalName(portalNameDefault);
-			saveToSessionStorage("portalName", "none");
-			setShowReminder(false);
-		}
-	};
+    if (
+      portalNameFromSessionStorage !== "none" &&
+      portalNameFromSessionStorage !== null &&
+      !settingIsEqualInitialValue(portalNameFromSessionStorage)
+    ) {
+      setPortalName(portalNameDefault);
+      saveToSessionStorage("portalName", "none");
+      setShowReminder(false);
+    }
+  };
 
-	const onValidateInput = (value) => {
-		const validDomain = new RegExp(domainValidator.regex);
+  const onValidateInput = (value) => {
+    const validDomain = new RegExp(domainValidator.regex);
 
-		switch (true) {
-			case value === "":
-				setErrorValue(t("PortalNameEmpty"));
-				saveToSessionStorage("errorValue", t("PortalNameEmpty"));
-				break;
-			case value.length < domainValidator.minLength ||
-				value.length > domainValidator.maxLength:
-				setErrorValue(
-					t("PortalNameLength", {
-						minLength: domainValidator.minLength,
-						maxLength: domainValidator.maxLength,
-					}),
-				);
-				saveToSessionStorage(
-					"errorValue",
-					t("PortalNameLength", {
-						minLength: domainValidator.minLength,
-						maxLength: domainValidator.maxLength,
-					}),
-				);
-				break;
-			case !validDomain.test(value):
-				setErrorValue(t("PortalNameIncorrect"));
-				saveToSessionStorage("errorValue", t("PortalNameIncorrect"));
-				break;
-			default:
-				saveToSessionStorage("errorValue", null);
-				setErrorValue(null);
-		}
-	};
+    switch (true) {
+      case value === "":
+        setErrorValue(t("PortalNameEmpty"));
+        saveToSessionStorage("errorValue", t("PortalNameEmpty"));
+        break;
+      case value.length < domainValidator.minLength ||
+        value.length > domainValidator.maxLength:
+        setErrorValue(
+          t("PortalNameLength", {
+            minLength: domainValidator.minLength,
+            maxLength: domainValidator.maxLength,
+          }),
+        );
+        saveToSessionStorage(
+          "errorValue",
+          t("PortalNameLength", {
+            minLength: domainValidator.minLength,
+            maxLength: domainValidator.maxLength,
+          }),
+        );
+        break;
+      case !validDomain.test(value):
+        setErrorValue(t("PortalNameIncorrect"));
+        saveToSessionStorage("errorValue", t("PortalNameIncorrect"));
+        break;
+      default:
+        saveToSessionStorage("errorValue", null);
+        setErrorValue(null);
+    }
+  };
 
-	const onChangePortalName = (e) => {
-		const value = e.target.value;
+  const onChangePortalName = (e) => {
+    const value = e.target.value;
 
-		onValidateInput(value);
+    onValidateInput(value);
 
-		setPortalName(value);
+    setPortalName(value);
 
-		if (settingIsEqualInitialValue(value)) {
-			saveToSessionStorage("portalName", "none");
-			saveToSessionStorage("portalNameDefault", "none");
-		} else {
-			saveToSessionStorage("portalName", value);
-		}
+    if (settingIsEqualInitialValue(value)) {
+      saveToSessionStorage("portalName", "none");
+      saveToSessionStorage("portalNameDefault", "none");
+    } else {
+      saveToSessionStorage("portalName", value);
+    }
 
-		checkChanges();
-	};
+    checkChanges();
+  };
 
-	const onOpenModal = () => {
-		setIsShowModal(true);
-	};
+  const onOpenModal = () => {
+    setIsShowModal(true);
+  };
 
-	const hasError = errorValue !== null;
+  const hasError = errorValue !== null;
 
-	const settingsBlock = (
-		<div className="settings-block">
-			<FieldContainer
-				id="fieldContainerPortalRenaming"
-				className="field-container-width"
-				labelText={`${t("PortalRenamingLabelText")}`}
-				isVertical
-			>
-				<TextInput
-					tabIndex={10}
-					id="textInputContainerPortalRenaming"
-					scale
-					value={portalName}
-					testId="customization_portal_renaming_text_input"
-					onChange={onChangePortalName}
-					isDisabled={
-						(!isSettingPaid && !standalone) || isLoadingPortalNameSave
-					}
-					hasError={hasError}
-					placeholder={`${t("Common:EnterName")}`}
-				/>
-				<div className="errorText">{errorValue}</div>
-			</FieldContainer>
-		</div>
-	);
+  const settingsBlock = (
+    <div className="settings-block">
+      <FieldContainer
+        id="fieldContainerPortalRenaming"
+        className="field-container-width"
+        labelText={`${t("PortalRenamingLabelText")}`}
+        isVertical
+      >
+        <TextInput
+          tabIndex={10}
+          id="textInputContainerPortalRenaming"
+          scale
+          value={portalName}
+          testId="customization_portal_renaming_text_input"
+          onChange={onChangePortalName}
+          isDisabled={
+            (!isSettingPaid && !standalone) || isLoadingPortalNameSave
+          }
+          hasError={hasError}
+          placeholder={`${t("Common:EnterName")}`}
+        />
+        <div className="errorText">{errorValue}</div>
+      </FieldContainer>
+    </div>
+  );
 
-	return !isLoadedPage ? (
-		<LoaderCustomization portalRenaming />
-	) : (
-		<StyledSettingsComponent
-			hasScroll={hasScroll}
-			className="category-item-wrapper"
-			isSettingPaid={isSettingPaid}
-			standalone={standalone}
-			withoutExternalLink={!renamingSettingsUrl}
-		>
-			{isCustomizationView && !isMobileView ? (
-				<div className="category-item-heading">
-					<div className="category-item-title">
-						{t("PortalRenaming", { productName: t("Common:ProductName") })}
-					</div>
-					{!isSettingPaid && !standalone ? (
-						<Badge
-							className="paid-badge"
-							fontWeight="700"
-							backgroundColor={
-								theme.isBase
-									? globalColors.favoritesStatus
-									: globalColors.favoriteStatusDark
-							}
-							label={t("Common:Paid")}
-							isPaidBadge
-						/>
-					) : null}
-				</div>
-			) : null}
+  return !isLoadedPage ? (
+    <LoaderCustomization portalRenaming />
+  ) : (
+    <StyledSettingsComponent
+      hasScroll={hasScroll}
+      className="category-item-wrapper"
+      isSettingPaid={isSettingPaid}
+      standalone={standalone}
+      withoutExternalLink={!renamingSettingsUrl}
+    >
+      {isCustomizationView && !isMobileView ? (
+        <div className="category-item-heading">
+          <div className="category-item-title">
+            {t("PortalRenaming", { productName: t("Common:ProductName") })}
+          </div>
+          {!isSettingPaid && !standalone ? (
+            <Badge
+              className="paid-badge"
+              fontWeight="700"
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.favoritesStatus
+                  : globalColors.favoriteStatusDark
+              }
+              label={t("Common:Paid")}
+              isPaidBadge
+            />
+          ) : null}
+        </div>
+      ) : null}
 
-			<div className="category-item-description">
-				<Text fontSize="13px" fontWeight={400}>
-					{t("PortalRenamingDescriptionText", { domain })}
-				</Text>
-				<Text fontSize="13px" fontWeight={400}>
-					<Trans t={t} i18nKey="PortalRenamingNote" />
-				</Text>
-				{renamingSettingsUrl ? (
-					<Link
-						className="link-learn-more"
-						color={currentColorScheme.main?.accent}
-						target="_blank"
-						isHovered
-						href={renamingSettingsUrl}
-						dataTestId="portal_renaming_learn_more"
-					>
-						{t("Common:LearnMore")}
-					</Link>
-				) : null}
-			</div>
-			{settingsBlock}
-			<SaveCancelButtons
-				tabIndex={11}
-				id="buttonsPortalRenaming"
-				className="save-cancel-buttons"
-				onSaveClick={onOpenModal}
-				onCancelClick={onCancelPortalName}
-				saveButtonLabel={t("Common:SaveButton")}
-				cancelButtonLabel={t("Common:CancelButton")}
-				showReminder={showReminder}
-				reminderText={t("Common:YouHaveUnsavedChanges")}
-				displaySettings
-				hasScroll={hasScroll}
-				saveButtonDisabled={!!errorValue}
-				additionalClassSaveButton="portal-renaming-save"
-				additionalClassCancelButton="portal-renaming-cancel"
-				saveButtonDataTestId="customization_portal_renaming_save_button"
-				cancelButtonDataTestId="customization_portal_renaming_cancel_button"
-			/>
-			<PortalRenamingDialog
-				visible={isShowModal}
-				onClose={onCloseModal}
-				onSave={onSavePortalRename}
-				isSaving={isLoadingPortalNameSave}
-			/>
-		</StyledSettingsComponent>
-	);
+      <div className="category-item-description">
+        <Text fontSize="13px" fontWeight={400}>
+          {t("PortalRenamingDescriptionText", { domain })}
+        </Text>
+        <Text fontSize="13px" fontWeight={400}>
+          <Trans t={t} i18nKey="PortalRenamingNote" />
+        </Text>
+        {renamingSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={renamingSettingsUrl}
+            dataTestId="portal_renaming_learn_more"
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </div>
+      {settingsBlock}
+      <SaveCancelButtons
+        tabIndex={11}
+        id="buttonsPortalRenaming"
+        className="save-cancel-buttons"
+        onSaveClick={onOpenModal}
+        onCancelClick={onCancelPortalName}
+        saveButtonLabel={t("Common:SaveButton")}
+        cancelButtonLabel={t("Common:CancelButton")}
+        showReminder={showReminder}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
+        displaySettings
+        hasScroll={hasScroll}
+        saveButtonDisabled={!!errorValue}
+        additionalClassSaveButton="portal-renaming-save"
+        additionalClassCancelButton="portal-renaming-cancel"
+        saveButtonDataTestId="customization_portal_renaming_save_button"
+        cancelButtonDataTestId="customization_portal_renaming_cancel_button"
+      />
+      <PortalRenamingDialog
+        visible={isShowModal}
+        onClose={onCloseModal}
+        onSave={onSavePortalRename}
+        isSaving={isLoadingPortalNameSave}
+      />
+    </StyledSettingsComponent>
+  );
 };
 
 export const PortalRenaming = inject(
-	({ settingsStore, setup, common, currentQuotaStore }) => {
-		const {
-			tenantAlias,
-			baseDomain,
-			currentColorScheme,
-			standalone,
-			renamingSettingsUrl,
-			domainValidator,
-		} = settingsStore;
-		const { setPortalRename } = setup;
-		const { isLoaded, setIsLoadedPortalRenaming, setPortalName, portalName } =
-			common;
-		const { isCustomizationAvailable } = currentQuotaStore;
+  ({ settingsStore, setup, common, currentQuotaStore }) => {
+    const {
+      tenantAlias,
+      baseDomain,
+      currentColorScheme,
+      standalone,
+      renamingSettingsUrl,
+      domainValidator,
+    } = settingsStore;
+    const { setPortalRename } = setup;
+    const { isLoaded, setIsLoadedPortalRenaming, setPortalName, portalName } =
+      common;
+    const { isCustomizationAvailable } = currentQuotaStore;
 
-		return {
-			setPortalRename,
-			isLoaded,
-			setIsLoadedPortalRenaming,
-			tenantAlias,
-			domain: baseDomain,
-			currentColorScheme,
-			renamingSettingsUrl,
-			domainValidator,
-			portalName,
-			setPortalName,
-			isSettingPaid: isCustomizationAvailable,
-			standalone,
-		};
-	},
+    return {
+      setPortalRename,
+      isLoaded,
+      setIsLoadedPortalRenaming,
+      tenantAlias,
+      domain: baseDomain,
+      currentColorScheme,
+      renamingSettingsUrl,
+      domainValidator,
+      portalName,
+      setPortalName,
+      isSettingPaid: isCustomizationAvailable,
+      standalone,
+    };
+  },
 )(
-	withLoading(
-		withTranslation(["Settings", "Common"])(observer(PortalRenamingComponent)),
-	),
+  withLoading(
+    withTranslation(["Settings", "Common"])(observer(PortalRenamingComponent)),
+  ),
 );

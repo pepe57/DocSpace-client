@@ -40,7 +40,7 @@ import {
 } from "@docspace/shared/components/context-menu";
 import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
-import { Badge } from "@docspace/shared/components/badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
 import { UserStore } from "@docspace/shared/store/UserStore";
