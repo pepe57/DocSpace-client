@@ -30,6 +30,7 @@ import classNames from "classnames";
 
 import { DeviceType, FilterGroups } from "../../enums";
 import GroupManagementIcon from "PUBLIC_DIR/images/group.management.svg?url";
+import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 
 import { TViewSelectorOption, ViewSelector } from "../view-selector";
 import { Link, LinkType } from "../link";
@@ -281,6 +282,34 @@ const FilterInput = React.memo(
     const [activeGroupId, setActiveGroupId] = React.useState<string | null>(
       null,
     );
+    const [hasGroupEverBeenCreated, setHasGroupEverBeenCreated] = React.useState(
+      () => {
+        try {
+          return localStorage.getItem("roomGroupEverCreated") === "true";
+        } catch {
+          return false;
+        }
+      },
+    );
+
+    // Track when the first group is created
+    React.useEffect(() => {
+      if (roomGroupsWithIcons.length > 0 && !hasGroupEverBeenCreated) {
+        setHasGroupEverBeenCreated(true);
+        try {
+          localStorage.setItem("roomGroupEverCreated", "true");
+        } catch {
+          // Ignore localStorage errors
+        }
+      }
+    }, [roomGroupsWithIcons.length, hasGroupEverBeenCreated]);
+
+    const handleCreateGroupClick = React.useCallback(() => {
+      setEditRoomGroupsDialogVisible?.(true);
+    }, [setEditRoomGroupsDialogVisible]);
+
+    const showCreateGroupButton =
+      roomGroupsWithIcons.length === 0 && !hasGroupEverBeenCreated;
 
     React.useEffect(() => {
       setVisibleGroupIds(roomGroupsWithIcons.map((g) => g.id));
@@ -618,6 +647,17 @@ const FilterInput = React.memo(
                   clickable
                   isActive={activeGroupId === null}
                 />
+                {showCreateGroupButton && (
+                  <SelectedItem
+                    propKey="create-group"
+                    label={t("PeopleTranslations:CreateGroup")}
+                    icon={PlusIcon}
+                    onClick={handleCreateGroupClick}
+                    onClose={() => {}}
+                    hideCross
+                    clickable
+                  />
+                )}
                 {visibleGroupIds.map((groupId) => {
                   const group = roomGroupsWithIcons.find(
                     (g) => g.id === groupId,
