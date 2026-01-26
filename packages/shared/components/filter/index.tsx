@@ -392,10 +392,36 @@ const FilterInput = React.memo(
         }
       }
 
+      // If the active group ended up in overflow, move it to position 0 (after AllRooms)
+      if (activeGroupId) {
+        const activeGroupInOverflow = overflow.findIndex(
+          (g) => g.id === activeGroupId,
+        );
+        if (activeGroupInOverflow !== -1) {
+          overflow.splice(activeGroupInOverflow, 1);
+          visible.unshift(activeGroupId);
+
+          // Recalculate overflow to make room for the active group at position 0
+          while (visible.length > 1 && getVisibleWidth() > availableW) {
+            const removedId = visible.pop()!;
+            if (removedId === activeGroupId) {
+              visible.push(removedId);
+              break;
+            }
+            const removedGroup = roomGroupsWithIcons.find(
+              (g) => g.id === removedId,
+            );
+            if (removedGroup) {
+              overflow.unshift(removedGroup);
+            }
+          }
+        }
+      }
+
       setVisibleGroupIds(visible);
       setOverflowGroups(overflow);
       setIsRowReady(true);
-    }, [roomGroupsWithIcons, areIconsReady]);
+    }, [roomGroupsWithIcons, areIconsReady, activeGroupId]);
 
     React.useLayoutEffect(() => {
       calculateOverflow();
@@ -592,8 +618,12 @@ const FilterInput = React.memo(
                   clickable
                   isActive={activeGroupId === null}
                 />
-                {roomGroupsWithIcons.map((group) =>
-                  visibleGroupIds.includes(group.id) ? (
+                {visibleGroupIds.map((groupId) => {
+                  const group = roomGroupsWithIcons.find(
+                    (g) => g.id === groupId,
+                  );
+                  if (!group) return null;
+                  return (
                     <SelectedItem
                       key={group.id}
                       propKey={group.id}
@@ -605,8 +635,8 @@ const FilterInput = React.memo(
                       clickable
                       isActive={activeGroupId === group.id}
                     />
-                  ) : null,
-                )}
+                  );
+                })}
                 {overflowGroups.length > 0 && (
                   <>
                     <TooltipContainer
