@@ -183,7 +183,7 @@ export const TariffTitleContainer = ({
   };
 
   const getSubDescription = () => {
-    if (!isLifetimeLicense && isGracePeriod)
+    if (!isLifetimeLicense && isGracePeriod) {
       return (
         <Text className={styles.gracePeriodInfo} fontSize="14px">
           <Trans
@@ -202,6 +202,7 @@ export const TariffTitleContainer = ({
           />
         </Text>
       );
+    }
 
     return null;
   };
