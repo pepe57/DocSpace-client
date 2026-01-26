@@ -27,7 +27,7 @@ import { useEffect, useRef } from "react";
 
 import type { RefObject } from "react";
 
-import { useIsomorphicLayoutEffect } from "./useIsomorphicLayoutEffect";
+import { useIsomorphicLayoutEffect } from "@docspace/ui-kit/hooks/useIsomorphicLayoutEffect";
 
 function useEventListener<K extends keyof MediaQueryListEventMap>(
   eventName: K,
