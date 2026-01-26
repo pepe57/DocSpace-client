@@ -195,10 +195,7 @@ export const createPortalInvitationLink = (
   );
 };
 
-export const deletePortalInvitationLink = (
-  port: string,
-  userType: EmployeeType,
-) => {
+export const deletePortalInvitationLink = (port: string) => {
   return http.delete(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_PORTAL_INVITATION_LINK}`,
     () => {

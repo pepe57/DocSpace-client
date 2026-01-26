@@ -34,6 +34,7 @@ import {
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import {
   createPortalInvitationLink,
+  deletePortalInvitationLink,
   getEmptyPortalInvitationLink,
   getPortalInvitationLink,
   updatePortalInvitationLink,
@@ -107,7 +108,7 @@ test.describe("Invite", () => {
 
     const toggle = page.getByTestId("toggle-button-container");
     await expect(toggle).toBeVisible();
-    mockRequest.use(getEmptyPortalInvitationLink(TEST_PORT, EmployeeType.User));
+    mockRequest.use(deletePortalInvitationLink(TEST_PORT));
     await toggle.click();
     await page.mouse.move(0, 0);
 
