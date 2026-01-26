@@ -30,7 +30,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Heading } from "../heading";
 import PortalLogo from "../portal-logo/PortalLogo";
-import { Scrollbar } from "../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import type { ErrorContainerProps } from "./ErrorContainer.types";
 import styles from "./ErrorContainer.module.scss";

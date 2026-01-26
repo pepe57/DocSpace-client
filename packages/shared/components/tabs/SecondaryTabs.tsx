@@ -31,8 +31,10 @@ import { motion } from "framer-motion";
 import { isMobile } from "react-device-detect";
 import ArrowReactUrl from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 import { type TTabItem, type TabsProps } from "./Tabs.types";
-import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";
-import { Scrollbar } from "../scrollbar";
+import {
+  Scrollbar,
+  ScrollbarType,
+} from "@docspace/ui-kit/components/scrollbar";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import {
@@ -44,7 +46,7 @@ import {
 import styles from "./Tabs.module.scss";
 import useTabsHotkeys from "./hooks/useTabsHotkeys";
 import { useViewTab } from "./hooks/useViewTab";
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 
 const SecondaryTabs = (props: TabsProps) => {
 	const {

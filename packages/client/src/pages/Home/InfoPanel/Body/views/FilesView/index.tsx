@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
-import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
+import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
 import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import ShareLoader from "@docspace/shared/skeletons/share";

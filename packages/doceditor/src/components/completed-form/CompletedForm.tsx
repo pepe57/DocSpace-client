@@ -47,7 +47,7 @@ import { classNames, mobile, mobileMore } from "@docspace/shared/utils";
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { copyShareLink } from "@docspace/shared/utils/copy";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import {
 	Avatar,

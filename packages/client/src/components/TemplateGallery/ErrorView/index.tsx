@@ -30,7 +30,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import ErrorImageSvgUrl from "PUBLIC_DIR/images/errors/error500.svg?url";
 import { isMobile as isMobileUtils } from "@docspace/shared/utils";
 import { withTranslation } from "react-i18next";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import styles from "./ErrorView.module.scss";
 import type { ErrorViewProps } from "./ErrorView.types";
 

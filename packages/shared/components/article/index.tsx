@@ -33,7 +33,7 @@ import { DeviceType } from "../../enums";
 import { ArticleProfileLoader } from "../../skeletons/article";
 
 import { Backdrop } from "../backdrop";
-import { Scrollbar } from "../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import SubArticleHeader from "./sub-components/Header";
 import ArticleProfile from "./sub-components/Profile";

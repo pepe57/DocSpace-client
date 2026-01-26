@@ -28,11 +28,13 @@ import React, { useCallback, useEffect, useRef } from "react";
 import classNames from "classnames";
 
 import { useAnimation, AnimationEvents } from "../../hooks/useAnimation";
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { useEventListener } from "../../hooks/useEventListener";
 
-import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";
-import { Scrollbar } from "../scrollbar";
+import {
+  Scrollbar,
+  ScrollbarType,
+} from "@docspace/ui-kit/components/scrollbar";
 import { LoaderWrapper } from "../loader-wrapper";
 
 import { useViewTab } from "./hooks/useViewTab";

@@ -34,7 +34,7 @@ import { classNames } from "../../utils";
 
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
-import { Scrollbar } from "../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import styles from "./LinkWithDropdown.module.scss";
 import { Text } from "@docspace/ui-kit/components/text";

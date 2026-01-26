@@ -31,7 +31,7 @@ import { render } from "@testing-library/react";
 import { Bookmarks } from ".";
 
 // Mock the Scrollbar component
-vi.mock("../../../../../scrollbar", () => ({
+vi.mock("@docspace/ui-kit/components/scrollbar", () => ({
   Scrollbar: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="scrollbar">{children}</div>
   ),

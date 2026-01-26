@@ -39,7 +39,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { ComboBox, TOption } from "../../combobox";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Scrollbar } from "../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import { GroupMenuItem } from "../sub-components/group-menu-item";
 import type { TableGroupMenuProps, TGroupMenuProps } from "../Table.types";

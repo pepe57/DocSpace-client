@@ -35,7 +35,7 @@ import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 
 import styles from "../../../ChatMessageBody.module.scss";
 import CodeBlock from "../CodeBlock";
-import { Scrollbar } from "../../../../../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 export const Code = ({
   className,

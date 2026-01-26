@@ -27,7 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Scrollbar } from "../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { AsideProps } from "./Aside.types";
 import { AsideHeader } from "../aside-header";
 import styles from "./Aside.module.scss";

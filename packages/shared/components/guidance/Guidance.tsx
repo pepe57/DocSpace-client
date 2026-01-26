@@ -37,7 +37,7 @@ import {
   ClippedPosition,
 } from "./sub-components/Guid.types";
 import { getGuidPosition } from "./sub-components/Guid.utils";
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 
 const Guidance = ({
   viewAs,

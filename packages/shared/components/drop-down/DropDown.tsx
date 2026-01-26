@@ -30,7 +30,7 @@ import { isIOS, isMobile } from "react-device-detect";
 
 import { Portal } from "@docspace/ui-kit/components/portal";
 
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 
 import { DomHelpers } from "../../utils";
 

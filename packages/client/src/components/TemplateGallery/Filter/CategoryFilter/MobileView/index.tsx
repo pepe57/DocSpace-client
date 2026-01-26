@@ -29,7 +29,7 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { ComboButton } from "@docspace/shared/components/combobox/sub-components/ComboButton";
 import classNames from "classnames";
 import styles from "./MobileView.module.scss";
@@ -39,7 +39,7 @@ import type {
   Category,
   InjectedProps,
 } from "../CategoryFilter.types";
-import { Scrollbar as CustomScrollbar } from "@docspace/shared/components/scrollbar/custom-scrollbar";
+import { ScrollbarType } from "@docspace/ui-kit/components/scrollbar";
 
 const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
   t,
@@ -50,7 +50,7 @@ const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
   setOformsCurrentCategory,
   isLanguageFilterChange,
 }) => {
-  const scrollRef = useRef<CustomScrollbar>(null);
+  const scrollRef = useRef<ScrollbarType>(null);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [openedMenuItem, setOpenedMenuItem] = useState<MenuItem | null>(null);

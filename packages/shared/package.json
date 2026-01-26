@@ -22,15 +22,14 @@
     "tsc": "tsc"
   },
   "dependencies": {
-    "@docspace/ui-kit": "workspace:*",
     "@babel/runtime": "7.28.3",
+    "@docspace/ui-kit": "workspace:*",
     "@hcaptcha/react-hcaptcha": "1.11.0",
     "@react-spring/web": "9.7.5",
     "@socket.io/component-emitter": "3.1.2",
     "@use-gesture/react": "10.3.1",
     "axios": "1.13.2",
     "classnames": "2.5.1",
-    "cnbuilder": "3.1.0",
     "copy-to-clipboard": "3.3.3",
     "cross-fetch": "3.1.8",
     "crypto-js": "4.2.0",
@@ -61,7 +60,6 @@
     "react-content-loader": "7.0.2",
     "react-countdown": "2.3.6",
     "react-device-detect": "2.2.3",
-    "react-draggable": "4.4.6",
     "react-dropzone": "11.7.1",
     "react-google-recaptcha": "3.1.0",
     "react-hotkeys-hook": "3.4.7",
@@ -86,8 +84,7 @@
     "utif": "3.1.0",
     "vite-plugin-svgr": "^4.5.0",
     "windows-iana": "5.1.0",
-    "workbox-window": "6.6.0",
-    "zoom-level": "2.5.0"
+    "workbox-window": "6.6.0"
   },
   "devDependencies": {
     "@babel/core": "7.25.8",
@@ -100,8 +97,8 @@
     "@babel/preset-react": "7.25.7",
     "@babel/preset-typescript": "7.25.7",
     "@biomejs/biome": "2.3.11",
-    "@playwright/test": "1.57.0",
     "@msw/playwright": "^0.3.1",
+    "@playwright/test": "1.57.0",
     "@storybook/addon-actions": "^8.6.15",
     "@storybook/addon-controls": "^8.6.15",
     "@storybook/addon-designs": "^8.2.1",

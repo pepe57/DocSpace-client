@@ -31,7 +31,7 @@ import { uuid as uuidv4 } from "../../../utils/";
 import { TableBody } from "./TableBody";
 import { TableRow } from "../table-row";
 import { TableCell } from "../sub-components/table-cell";
-import { Scrollbar } from "../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { TableContainer } from "../table-container";
 
 const COLUMN_STORAGE_NAME = "storybook-table-body-column-storage";

@@ -5,7 +5,7 @@ import { CSSTransition } from "react-transition-group";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import { DomHelpers, classNames } from "../../../utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
-import { Scrollbar } from "../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Badge } from "../../badge";
 import type {
   ContextMenuModel,

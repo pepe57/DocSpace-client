@@ -31,7 +31,7 @@ import moment from "moment";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
+import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
 import HistoryItemLoader from "@docspace/shared/skeletons/info-panel/body/views/HistoryItemLoader";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { TTranslation } from "@docspace/shared/types";

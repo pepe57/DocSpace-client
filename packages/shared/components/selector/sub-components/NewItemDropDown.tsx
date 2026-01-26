@@ -31,7 +31,7 @@ import { Portal } from "@docspace/ui-kit/components/portal";
 import { classNames, isMobile as isMobileUtils } from "../../../utils";
 import { Backdrop } from "../../backdrop";
 
-import { Scrollbar } from "../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import styles from "../Selector.module.scss";
 import { NewItemDropDownProps } from "../Selector.types";

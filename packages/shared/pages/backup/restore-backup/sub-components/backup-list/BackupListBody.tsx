@@ -40,7 +40,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import {
   type ScrollbarProps,
   Scrollbar,
-} from "../../../../../components/scrollbar";
+} from "@docspace/ui-kit/components/scrollbar";
 import { RadioButton } from "../../../../../components/radio-button";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../../../constants";
 

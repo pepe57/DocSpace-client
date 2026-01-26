@@ -31,7 +31,7 @@ import { classNames } from "../../../utils";
 import { RoomsType } from "../../../enums";
 import { Nullable } from "../../../types";
 import styles from "../Selector.module.scss";
-import { Scrollbar } from "../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { SearchContext, SearchValueContext } from "../contexts/Search";

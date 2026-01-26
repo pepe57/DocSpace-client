@@ -37,7 +37,7 @@ import ButtonAlertReactSvg from "PUBLIC_DIR/images/button.alert.react.svg";
 
 import { IconSizeType, classNames } from "../../utils";
 
-import { Scrollbar } from "../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Backdrop } from "../backdrop";
 import { FloatingButton, FloatingButtonIcons } from "../floating-button";
 import { DropDown } from "../drop-down";

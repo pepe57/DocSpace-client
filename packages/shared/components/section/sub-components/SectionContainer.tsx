@@ -26,7 +26,7 @@
 
 import classNames from "classnames";
 
-import { Scrollbar } from "../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { DeviceType } from "../../../enums";
 
 import { SectionContainerProps } from "../Section.types";

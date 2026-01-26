@@ -29,7 +29,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { uuid as uuidv4 } from "../../../utils/";
 
 import { TableContainer } from "./TableContainer";
-import { Scrollbar } from "../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { TableRow } from "../table-row";
 import { TableCell } from "../sub-components/table-cell";
 import { TableHeader } from "../table-header";

@@ -44,7 +44,7 @@ import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
 import { getTextColor } from "./getTextColor";
 import { getFormFillingTipsStorageName } from "./getFormFillingTipsStorageName";
-import { uuid } from "./uuid";
+import { uuid } from "@docspace/ui-kit/utils";
 
 import DomHelpers from "./domHelpers";
 import ObjectUtils from "./objectUtils";

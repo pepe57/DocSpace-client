@@ -31,13 +31,13 @@ import TextareaAutosize from "react-autosize-textarea";
 
 import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
-import { useInterfaceDirection } from "@docspace/ui-kit/hooks";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { isJSON } from "../../utils/json";
 
 import { toastr } from "../toast";
 
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Scrollbar } from "../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { jsonify } from "./Textarea.utils";
 import { TextareaProps } from "./Textarea.types";
 import styles from "./Textarea.module.scss";
