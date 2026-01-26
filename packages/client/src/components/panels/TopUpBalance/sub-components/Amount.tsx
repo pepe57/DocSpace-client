@@ -28,7 +28,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
-import { TabItem } from "@docspace/shared/components/tab-item";
+import { TabItem } from "@docspace/ui-kit/components/tab-item";
 import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";

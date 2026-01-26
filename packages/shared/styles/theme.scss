@@ -2360,18 +2360,6 @@
 }
 
 .light {
-  --tab-item-selected-background-color: var(--accent-main, #{$light-blue-main});
-  --tab-item-selected-item-color: #{$white};
-  --tab-item-tag-border: 1px solid #{$gray-light-mid};
-}
-
-.dark {
-  --tab-item-selected-background-color: #{$white};
-  --tab-item-selected-item-color: #{$black};
-  --tab-item-tag-border: 1px solid #{$gray-dark-strong};
-}
-
-.light {
   --accounts-badges-pending-color: #{$gray};
 }
 

@@ -32,7 +32,7 @@ import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { WatermarkAdditions } from "@docspace/shared/enums";
-import { TabItem } from "@docspace/shared/components/tab-item";
+import { TabItem } from "@docspace/ui-kit/components/tab-item";
 import { TWatermark } from "@docspace/shared/api/rooms/types";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 
