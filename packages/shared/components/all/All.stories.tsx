@@ -39,7 +39,7 @@ import { Avatar, AvatarRole, AvatarSize } from "../avatar";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 // import HelpButton from "../help-button";
 // import IconButton from "@docspace/ui-kit/components/icon-button";
-import { ToggleButton } from "../toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Calendar } from "../calendar";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { ComboBox, ComboBoxSize } from "../combobox";

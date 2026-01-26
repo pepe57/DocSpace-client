@@ -29,7 +29,7 @@ import { Heading } from "@docspace/shared/components/heading";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import {
   commonIconsStyles,
   mobile,

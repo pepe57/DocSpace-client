@@ -3,7 +3,7 @@ import { Trans } from "react-i18next";
 import styled from "styled-components";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 
 import FileLifetime from "./FileLifetime";
 import Watermarks from "./Watermarks";

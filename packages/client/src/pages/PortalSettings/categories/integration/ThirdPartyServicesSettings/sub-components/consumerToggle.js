@@ -27,7 +27,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { toastr } from "@docspace/shared/components/toast";
 
 const StyledToggle = styled(ToggleButton)`

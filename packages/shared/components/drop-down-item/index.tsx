@@ -37,7 +37,7 @@ import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirecti
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { isTouchDevice } from "@docspace/ui-kit/utils/device";
 
-import { ToggleButton } from "../toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Badge } from "../badge";
 
 import { DropDownItemProps } from "./DropDownItem.types";

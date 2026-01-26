@@ -33,7 +33,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Link } from "@docspace/ui-kit/components/link";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import {
   mobile,
   commonIconsStyles,
