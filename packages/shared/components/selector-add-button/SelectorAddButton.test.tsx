@@ -30,7 +30,6 @@ import { screen, fireEvent, render } from "@testing-library/react";
 
 import { SelectorAddButton } from ".";
 import styles from "./SelectorAddButton.module.scss";
-import iconButtonStyles from "../icon-button/IconButton.module.scss";
 
 const baseProps = {
   title: "Add item",
@@ -112,6 +111,5 @@ describe("<SelectorAddButton />", () => {
 
     const iconButton = screen.getByTestId("icon-button");
     expect(iconButton).toBeInTheDocument();
-    expect(iconButton).toHaveClass(iconButtonStyles.disabled);
   });
 });

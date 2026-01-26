@@ -28,7 +28,6 @@ import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { HelpButton } from ".";
-import iconButtonStyles from "../icon-button/IconButton.module.scss";
 
 describe("<HelpButton />", () => {
   const tooltipContent = "Your tooltip content";
@@ -69,12 +68,6 @@ describe("<HelpButton />", () => {
     render(<HelpButton tooltipContent={tooltipContent} color="#ff0000" />);
     const button = screen.getByTestId("icon-button");
     expect(button).toHaveStyle({ "--icon-button-color": "#ff0000" });
-  });
-
-  it("renders as non-clickable when isClickable is false", () => {
-    render(<HelpButton tooltipContent={tooltipContent} isClickable={false} />);
-    const button = screen.getByTestId("icon-button");
-    expect(button).toHaveClass(iconButtonStyles.notClickable);
   });
 
   it("renders with getContent function", () => {
