@@ -24,59 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { AvatarSize } from "@docspace/shared/components/avatar";
-export interface UserPhoto {
-  original: string;
-  retina: string;
-  max: string;
-  big: string;
-  medium: string;
-  small: string;
-}
+import React from "react";
+import { Portal } from "@docspace/shared/components/portal";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { AvatarSize } from "@docspace/shared/components/avatar";
 
-export interface EditorUser {
-  id: string;
-  name: string;
-  photo: UserPhoto | null;
-}
+import { EditorsList } from "./EditorsList";
+import type { EditorsTooltipMobileProps } from "../EditorsTooltip.types";
+import styles from "../EditorsTooltip.module.scss";
 
-export interface EditorsTooltipItem {
-  editingBy?: Record<string, string>;
-  activeEditors?: Record<string, string>;
-}
+const EditorsTooltipMobile = ({
+  visible,
+  editors,
+  onClose,
+}: EditorsTooltipMobileProps) => {
+  if (!visible || editors.length === 0) return null;
 
-export interface EditorsTooltipProps {
-  item: EditorsTooltipItem;
-  currentUserId?: string;
-}
+  const content = (
+    <>
+      <Backdrop
+        visible={visible}
+        onClick={onClose}
+        withBackground
+        zIndex={310}
+      />
+      <div className={styles.mobileContainer}>
+        <div className={styles.mobileHeader}>File is currently edited by:</div>
+        <EditorsList
+          editors={editors}
+          avatarSize={AvatarSize.min}
+          isMobile={true}
+        />
+      </div>
+    </>
+  );
 
-export interface EditorsListProps {
-  editors: EditorUser[];
-  avatarSize: AvatarSize;
-  isMobile?: boolean;
-}
+  return (
+    <>
+      <Portal element={content} visible={visible} />
+    </>
+  );
+};
 
-export interface EditorsTooltipMobileProps {
-  visible: boolean;
-  editors: EditorUser[];
-  onClose: () => void;
-}
-
-export interface UseEditorsDataProps {
-  activeEditors: Record<string, string> | undefined;
-  editingBy: Record<string, string> | undefined;
-  currentUserId?: string;
-}
-
-export interface UseEditorsDataReturn {
-  editors: EditorUser[];
-  isOpen: boolean;
-  openTooltip: () => void;
-  closeTooltip: () => void;
-  setIsOpen: (value: boolean) => void;
-}
-
-export interface TooltipDimensions {
-  width: number;
-  height: number;
-}
+export default EditorsTooltipMobile;

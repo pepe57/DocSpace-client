@@ -24,59 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { AvatarSize } from "@docspace/shared/components/avatar";
-export interface UserPhoto {
-  original: string;
-  retina: string;
-  max: string;
-  big: string;
-  medium: string;
-  small: string;
-}
+import React from "react";
+import { Avatar, AvatarRole } from "@docspace/shared/components/avatar";
+import { classNames } from "@docspace/shared/utils";
+import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
-export interface EditorUser {
-  id: string;
-  name: string;
-  photo: UserPhoto | null;
-}
+import type { EditorsListProps } from "../EditorsTooltip.types";
+import styles from "../EditorsTooltip.module.scss";
 
-export interface EditorsTooltipItem {
-  editingBy?: Record<string, string>;
-  activeEditors?: Record<string, string>;
-}
+export const EditorsList = ({
+  editors,
+  avatarSize,
+  isMobile = false,
+}: EditorsListProps) => {
+  if (editors.length === 0) return null;
 
-export interface EditorsTooltipProps {
-  item: EditorsTooltipItem;
-  currentUserId?: string;
-}
+  const getClassName = (baseClassName: string) =>
+    classNames(baseClassName, { [styles.mobile]: isMobile });
 
-export interface EditorsListProps {
-  editors: EditorUser[];
-  avatarSize: AvatarSize;
-  isMobile?: boolean;
-}
-
-export interface EditorsTooltipMobileProps {
-  visible: boolean;
-  editors: EditorUser[];
-  onClose: () => void;
-}
-
-export interface UseEditorsDataProps {
-  activeEditors: Record<string, string> | undefined;
-  editingBy: Record<string, string> | undefined;
-  currentUserId?: string;
-}
-
-export interface UseEditorsDataReturn {
-  editors: EditorUser[];
-  isOpen: boolean;
-  openTooltip: () => void;
-  closeTooltip: () => void;
-  setIsOpen: (value: boolean) => void;
-}
-
-export interface TooltipDimensions {
-  width: number;
-  height: number;
-}
+  return (
+    <div className={styles.editorsList}>
+      {editors.map((editor) => (
+        <div key={editor.id} className={getClassName(styles.editorItem)}>
+          <Avatar
+            size={avatarSize}
+            userName={editor.name}
+            source={editor.photo?.big || DefaultUserAvatarSmall}
+            className={getClassName(styles.editorAvatar)}
+            role={AvatarRole.user}
+          />
+          <span className={styles.editorName}>{editor.name}</span>
+        </div>
+      ))}
+    </div>
+  );
+};

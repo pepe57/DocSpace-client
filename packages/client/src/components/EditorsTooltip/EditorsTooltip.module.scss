@@ -1,9 +1,3 @@
-
-.tooltipContainer {
-  max-height: 152px;
-  height: 152px;
-}
-
 .editorsList {
   display: flex;
   flex-direction: column;
@@ -15,23 +9,33 @@
   align-items: center;
   gap: 8px;
   height: 24px;
+  
+  &.mobile {
+    height: 32px;
+  }
 }
 
 .editorAvatar {
-  width: 24px;
-  height: 24px;
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
+  
+  width: 24px;
+  height: 24px;
+  
+  &.mobile {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .editorName {
-  font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 16px;
+  font-size: 12px;
 }
 
 .tooltipHeader {
@@ -40,4 +44,31 @@
   color: var(--editors-tooltip-header-color) !important;
   margin-bottom: 12px;
   white-space: nowrap;
+}
+
+.mobileContainer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 310;
+  
+  box-sizing: border-box;
+  width: 100%;
+  
+  background: var(--context-menu-background);
+  border: var(--context-menu-border);
+  border-radius: 6px 6px 0 0;
+  box-shadow: var(--context-menu-box-shadow);
+  
+  padding: 16px;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+}
+
+.mobileHeader {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--context-menu-header-text-color);
+  margin-bottom: 16px;
 }
