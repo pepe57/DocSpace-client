@@ -38,7 +38,7 @@ import { isFolder, isRoom } from "@docspace/shared/utils/typeGuards";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { FolderType } from "@docspace/shared/enums";
-import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
+import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
 import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 import { INFO_PANEL_LOADER_EVENT } from "@docspace/shared/constants";
 
