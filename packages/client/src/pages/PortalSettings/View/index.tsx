@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import { DeviceType } from "@docspace/shared/enums";
-import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
 import { Component as Customization } from "../categories/common";
 import { Component as Security } from "../categories/security";

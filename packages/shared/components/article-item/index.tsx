@@ -29,7 +29,7 @@ import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 import { isMobile } from "react-device-detect";
 
-import { useAnimation } from "../../hooks/useAnimation";
+import { useAnimation } from "@docspace/ui-kit/hooks/useAnimation";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Badge } from "../badge";

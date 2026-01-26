@@ -39,7 +39,7 @@ import { Consumer } from "@docspace/shared/utils";
 import type { Nullable } from "@docspace/shared/types";
 import type { TError } from "@docspace/shared/utils/axiosClient";
 
-import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
