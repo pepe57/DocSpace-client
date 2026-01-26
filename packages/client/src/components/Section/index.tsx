@@ -30,93 +30,93 @@ import { useLocation } from "react-router";
 import Section, { SectionProps } from "@docspace/shared/components/section";
 
 const SectionWrapper = ({
-  children,
-  viewAs,
+	children,
+	viewAs,
 
-  ...rest
+	...rest
 }: SectionProps) => {
-  const location = useLocation();
-  const isInfoPanelAvailable = viewAs !== "settings";
+	const location = useLocation();
+	const isInfoPanelAvailable = viewAs !== "settings";
 
-  return (
-    <Section
-      {...rest}
-      pathname={location.pathname}
-      isInfoPanelAvailable={isInfoPanelAvailable}
-    >
-      {children}
-    </Section>
-  );
+	return (
+		<Section
+			{...rest}
+			pathname={location.pathname}
+			isInfoPanelAvailable={isInfoPanelAvailable}
+		>
+			{children}
+		</Section>
+	);
 };
 
 export default inject(
-  ({
-    settingsStore,
-    dialogsStore,
-    infoPanelStore,
-    indexingStore,
-    filesSettingsStore,
-    selectedFolderStore,
-    userStore,
-  }: {
-    settingsStore: TStore["settingsStore"];
-    dialogsStore: TStore["dialogsStore"];
-    infoPanelStore: TStore["infoPanelStore"];
-    indexingStore: TStore["indexingStore"];
-    filesSettingsStore: TStore["filesSettingsStore"];
-    selectedFolderStore: TStore["selectedFolderStore"];
-    userStore: TStore["userStore"];
-  }) => {
-    const {
-      isDesktopClient: isDesktop,
-      currentDeviceType,
-      isHeaderVisible,
-      isTabletView,
-      maintenanceExist,
-      snackbarExist,
-      showText,
-    } = settingsStore;
+	({
+		settingsStore,
+		dialogsStore,
+		infoPanelStore,
+		indexingStore,
+		filesSettingsStore,
+		selectedFolderStore,
+		userStore,
+	}: {
+		settingsStore: TStore["settingsStore"];
+		dialogsStore: TStore["dialogsStore"];
+		infoPanelStore: TStore["infoPanelStore"];
+		indexingStore: TStore["indexingStore"];
+		filesSettingsStore: TStore["filesSettingsStore"];
+		selectedFolderStore: TStore["selectedFolderStore"];
+		userStore: TStore["userStore"];
+	}) => {
+		const {
+			isDesktopClient: isDesktop,
+			currentDeviceType,
+			isHeaderVisible,
+			isTabletView,
+			maintenanceExist,
+			snackbarExist,
+			showText,
+		} = settingsStore;
 
-    const { isVisible, isMobileHidden, setIsVisible, getCanDisplay } =
-      infoPanelStore;
+		const { isVisible, isMobileHidden, setIsVisible, getCanDisplay } =
+			infoPanelStore;
 
-    const { isIndexEditingMode } = indexingStore;
+		const { isIndexEditingMode } = indexingStore;
 
-    const { createRoomDialogVisible, invitePanelOptions } = dialogsStore;
+		const { createRoomDialogVisible, invitePanelOptions } = dialogsStore;
 
-    const canDisplay = getCanDisplay();
+		const canDisplay = getCanDisplay();
 
-    const anotherDialogOpen =
-      createRoomDialogVisible || invitePanelOptions.visible;
+		const anotherDialogOpen =
+			createRoomDialogVisible || invitePanelOptions.visible;
 
-    const { isScrollLocked: isInfoPanelScrollLocked } = infoPanelStore;
+		const { isScrollLocked: isInfoPanelScrollLocked } = infoPanelStore;
 
-    const { getIcon, displayFileExtension } = filesSettingsStore;
+		const { getIcon, displayFileExtension } = filesSettingsStore;
 
-    const { id } = selectedFolderStore;
+		const { id } = selectedFolderStore;
 
-    const { user } = userStore;
+		const { user } = userStore;
 
-    return {
-      isDesktop,
-      currentDeviceType,
-      isInfoPanelVisible: isVisible && !isIndexEditingMode,
-      isMobileHidden,
-      setIsInfoPanelVisible: setIsVisible,
-      canDisplay,
-      anotherDialogOpen,
-      isHeaderVisible,
-      isTabletView,
-      maintenanceExist,
-      snackbarExist,
-      showText,
-      isInfoPanelScrollLocked,
+		return {
+			isDesktop,
+			currentDeviceType,
+			isInfoPanelVisible: isVisible && !isIndexEditingMode,
+			isMobileHidden,
+			setIsInfoPanelVisible: setIsVisible,
+			canDisplay,
+			anotherDialogOpen,
+			isHeaderVisible,
+			isTabletView,
+			maintenanceExist,
+			snackbarExist,
+			showText,
+			isInfoPanelScrollLocked,
 
-      getIcon,
-      displayFileExtension,
-      aiSelectedFolder: id,
+			getIcon,
+			displayFileExtension,
+			aiSelectedFolder: id,
 
-      user,
-    };
-  },
+			user,
+		};
+	},
 )(observer(SectionWrapper));

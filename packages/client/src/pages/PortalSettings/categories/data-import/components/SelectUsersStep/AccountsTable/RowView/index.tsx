@@ -33,7 +33,7 @@ import { tablet } from "@docspace/ui-kit/utils/device";
 import styled, { useTheme } from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { RowContainer, Row } from "@docspace/shared/components/rows";

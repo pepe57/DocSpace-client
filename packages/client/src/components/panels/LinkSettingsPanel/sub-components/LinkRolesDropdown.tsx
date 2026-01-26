@@ -30,7 +30,7 @@ import { isMobile } from "@docspace/shared/utils";
 
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
@@ -42,152 +42,152 @@ import { Portal } from "@docspace/ui-kit/components/portal";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 
 const LinkRolesDropdown = ({
-  currentAccess,
-  accesses,
-  linkSelectedAccess,
-  setLinkSelectedAccess,
+	currentAccess,
+	accesses,
+	linkSelectedAccess,
+	setLinkSelectedAccess,
 }: LinkRolesDropdownProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [heightList, setHeightList] = useState<number | null>(null);
+	const [isOpen, setIsOpen] = useState(false);
+	const [heightList, setHeightList] = useState<number | null>(null);
 
-  const dropdownRef = useRef<HTMLDivElement>(null);
+	const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const roomTypes = accesses.map((access: TOption) => (
-    <LinkRolesDropdownItem
-      key={access.key}
-      item={access}
-      currentItem={linkSelectedAccess}
-      setCurrentItem={(access) => {
-        setLinkSelectedAccess(access);
-        setIsOpen(false);
-      }}
-    />
-  ));
+	const roomTypes = accesses.map((access: TOption) => (
+		<LinkRolesDropdownItem
+			key={access.key}
+			item={access}
+			currentItem={linkSelectedAccess}
+			setCurrentItem={(access) => {
+				setLinkSelectedAccess(access);
+				setIsOpen(false);
+			}}
+		/>
+	));
 
-  const onHeightCalculation = () => {
-    if (!dropdownRef.current) return;
+	const onHeightCalculation = () => {
+		if (!dropdownRef.current) return;
 
-    const screenHeight = document.documentElement.clientHeight;
-    const elementHeight = dropdownRef.current.getBoundingClientRect().bottom;
-    const elementShadowHeight = 12;
-    const buttonHeight = 73;
-    const padding = 12;
-    const showElementFullHeight =
-      screenHeight -
-        elementHeight -
-        padding / 2 -
-        elementShadowHeight -
-        buttonHeight >=
-      0;
+		const screenHeight = document.documentElement.clientHeight;
+		const elementHeight = dropdownRef.current.getBoundingClientRect().bottom;
+		const elementShadowHeight = 12;
+		const buttonHeight = 73;
+		const padding = 12;
+		const showElementFullHeight =
+			screenHeight -
+				elementHeight -
+				padding / 2 -
+				elementShadowHeight -
+				buttonHeight >=
+			0;
 
-    if (!showElementFullHeight) {
-      const newHeightList =
-        screenHeight -
-        dropdownRef.current.getBoundingClientRect().y -
-        elementShadowHeight -
-        buttonHeight -
-        padding;
+		if (!showElementFullHeight) {
+			const newHeightList =
+				screenHeight -
+				dropdownRef.current.getBoundingClientRect().y -
+				elementShadowHeight -
+				buttonHeight -
+				padding;
 
-      setHeightList(newHeightList);
-    } else setHeightList(0);
-  };
+			setHeightList(newHeightList);
+		} else setHeightList(0);
+	};
 
-  useEffect(() => {
-    if (isOpen) {
-      onHeightCalculation();
-      window.addEventListener("resize", onHeightCalculation);
-    } else if (typeof heightList === "number") setHeightList(null);
+	useEffect(() => {
+		if (isOpen) {
+			onHeightCalculation();
+			window.addEventListener("resize", onHeightCalculation);
+		} else if (typeof heightList === "number") setHeightList(null);
 
-    return () => {
-      window.removeEventListener("resize", onHeightCalculation);
-    };
-  }, [isOpen, heightList]);
+		return () => {
+			window.removeEventListener("resize", onHeightCalculation);
+		};
+	}, [isOpen, heightList]);
 
-  return (
-    <div className={styles.linkRolesDropdown}>
-      <div
-        title={currentAccess?.label}
-        onClick={() => setIsOpen(!isOpen)}
-        className={classNames(styles.linkRoles, styles.dropDownButton, {
-          [styles.isOpen]: isOpen,
-        })}
-      >
-        <div className="choose_access-info_wrapper">
-          <div className="choose_access-title">
-            <Text className="choose_access-title-text">
-              {currentAccess?.label}
-            </Text>
-          </div>
-          <Text className="choose_access-description">
-            {currentAccess?.description}
-          </Text>
-        </div>
+	return (
+		<div className={styles.linkRolesDropdown}>
+			<div
+				title={currentAccess?.label}
+				onClick={() => setIsOpen(!isOpen)}
+				className={classNames(styles.linkRoles, styles.dropDownButton, {
+					[styles.isOpen]: isOpen,
+				})}
+			>
+				<div className="choose_access-info_wrapper">
+					<div className="choose_access-title">
+						<Text className="choose_access-title-text">
+							{currentAccess?.label}
+						</Text>
+					</div>
+					<Text className="choose_access-description">
+						{currentAccess?.description}
+					</Text>
+				</div>
 
-        <IconButton
-          className={classNames(styles.chooseAccessButton, {
-            [styles.isOpen]: isOpen,
-          })}
-          iconName={ArrowReactSvgUrl}
-          size={16}
-        />
-      </div>
-      {isMobile() ? (
-        <Portal
-          visible
-          element={
-            <>
-              <Backdrop
-                visible={isOpen}
-                onClick={() => setIsOpen(false)}
-                withBackground
-                withoutBlur={false}
-                isAside
-                zIndex={450}
-              />
-              <div
-                className={classNames(
-                  styles.linkRolesDropdownMobileContainer,
-                  "dropdown-mobile-content-wrapper",
-                  {
-                    [styles.isOpen]: isOpen,
-                  },
-                )}
-              >
-                {roomTypes}
-              </div>
-            </>
-          }
-        />
-      ) : (
-        <div
-          className={classNames(
-            styles.linkRolesDropdownContainer,
-            "dropdown-content-wrapper",
-            {
-              [styles.isOpen]: isOpen,
-            },
-          )}
-        >
-          <div
-            className={classNames("dropdown-content", styles.dropdownContent)}
-            ref={dropdownRef}
-          >
-            {heightList ? (
-              <Scrollbar
-                paddingInlineEnd="0"
-                paddingAfterLastItem="0"
-                style={{ height: heightList, width: "100%" }}
-              >
-                {roomTypes}
-              </Scrollbar>
-            ) : (
-              roomTypes
-            )}
-          </div>
-        </div>
-      )}
-    </div>
-  );
+				<IconButton
+					className={classNames(styles.chooseAccessButton, {
+						[styles.isOpen]: isOpen,
+					})}
+					iconName={ArrowReactSvgUrl}
+					size={16}
+				/>
+			</div>
+			{isMobile() ? (
+				<Portal
+					visible
+					element={
+						<>
+							<Backdrop
+								visible={isOpen}
+								onClick={() => setIsOpen(false)}
+								withBackground
+								withoutBlur={false}
+								isAside
+								zIndex={450}
+							/>
+							<div
+								className={classNames(
+									styles.linkRolesDropdownMobileContainer,
+									"dropdown-mobile-content-wrapper",
+									{
+										[styles.isOpen]: isOpen,
+									},
+								)}
+							>
+								{roomTypes}
+							</div>
+						</>
+					}
+				/>
+			) : (
+				<div
+					className={classNames(
+						styles.linkRolesDropdownContainer,
+						"dropdown-content-wrapper",
+						{
+							[styles.isOpen]: isOpen,
+						},
+					)}
+				>
+					<div
+						className={classNames("dropdown-content", styles.dropdownContent)}
+						ref={dropdownRef}
+					>
+						{heightList ? (
+							<Scrollbar
+								paddingInlineEnd="0"
+								paddingAfterLastItem="0"
+								style={{ height: heightList, width: "100%" }}
+							>
+								{roomTypes}
+							</Scrollbar>
+						) : (
+							roomTypes
+						)}
+					</div>
+				</div>
+			)}
+		</div>
+	);
 };
 
 export default LinkRolesDropdown;

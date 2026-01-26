@@ -83,8 +83,9 @@ const indexHoverStyles = css`
 
 const StyledTableRow = styled(TableRow)`
   .table-container_cell:not(.table-container_element-wrapper) {
-    border-top: ${(props) =>
-      `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+    border-top: ${(props) => {
+      return `1px solid ${props.theme.filesSection.tableView.row.borderColor}`;
+    }};
     margin-top: -1px;
     border-inline: 0; //for Safari
   }
@@ -148,8 +149,8 @@ const StyledTableRow = styled(TableRow)`
     `}
 
     ${(props) =>
-    props.isIndexUpdated &&
-    css`
+      props.isIndexUpdated &&
+      css`
       .table-container_cell {
         cursor: pointer;
         background: ${({ theme, isIndexEditingMode }) =>

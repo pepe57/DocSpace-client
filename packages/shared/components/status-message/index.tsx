@@ -26,102 +26,102 @@
 import React from "react";
 import DangerToastReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
 
-import { IconSizeType } from "../../utils/common-icons-style";
+import { IconSizeType } from "@docspace/ui-kit/utils/common-icons-style";
 import styles from "./StatusMessage.module.scss";
 import { Text } from "@docspace/ui-kit/components/text";
 
 interface StatusMessageProps {
-  message: string | React.ReactNode;
-  isWarning?: boolean;
+	message: string | React.ReactNode;
+	isWarning?: boolean;
 }
 
 const StatusMessage: React.FC<StatusMessageProps> = ({
-  message,
-  isWarning,
+	message,
+	isWarning,
 }) => {
-  const [isVisible, setIsVisible] = React.useState(true);
+	const [isVisible, setIsVisible] = React.useState(true);
 
-  const [isShowComponent, setIsShowComponent] = React.useState(!!message);
-  const messageRef = React.useRef<HTMLDivElement>(null);
-  const prevMessageRef = React.useRef<string | React.ReactNode | undefined>(
-    message,
-  );
-  const shouldShowAfterAnimationRef = React.useRef(false);
+	const [isShowComponent, setIsShowComponent] = React.useState(!!message);
+	const messageRef = React.useRef<HTMLDivElement>(null);
+	const prevMessageRef = React.useRef<string | React.ReactNode | undefined>(
+		message,
+	);
+	const shouldShowAfterAnimationRef = React.useRef(false);
 
-  React.useEffect(() => {
-    if (prevMessageRef.current) {
-      if (!message || prevMessageRef.current !== message) {
-        setIsVisible(false);
-        shouldShowAfterAnimationRef.current = true;
-        return;
-      }
+	React.useEffect(() => {
+		if (prevMessageRef.current) {
+			if (!message || prevMessageRef.current !== message) {
+				setIsVisible(false);
+				shouldShowAfterAnimationRef.current = true;
+				return;
+			}
 
-      if (!shouldShowAfterAnimationRef.current) {
-        setIsVisible(true);
-        prevMessageRef.current = message;
-      }
+			if (!shouldShowAfterAnimationRef.current) {
+				setIsVisible(true);
+				prevMessageRef.current = message;
+			}
 
-      return;
-    }
+			return;
+		}
 
-    prevMessageRef.current = message;
-    if (!message) return;
+		prevMessageRef.current = message;
+		if (!message) return;
 
-    setIsShowComponent(true);
-    setIsVisible(true);
-  }, [message]);
+		setIsShowComponent(true);
+		setIsVisible(true);
+	}, [message]);
 
-  React.useEffect(() => {
-    const element = messageRef.current;
-    if (!element) return;
+	React.useEffect(() => {
+		const element = messageRef.current;
+		if (!element) return;
 
-    const handleEnd = () => {
-      const resetStates = () => {
-        shouldShowAfterAnimationRef.current = false;
-        prevMessageRef.current = message;
-      };
+		const handleEnd = () => {
+			const resetStates = () => {
+				shouldShowAfterAnimationRef.current = false;
+				prevMessageRef.current = message;
+			};
 
-      if (!message) {
-        setIsShowComponent(false);
-        resetStates();
-        return;
-      }
+			if (!message) {
+				setIsShowComponent(false);
+				resetStates();
+				return;
+			}
 
-      if (shouldShowAfterAnimationRef.current && prevMessageRef.current) {
-        setIsShowComponent(true);
-        setIsVisible(true);
-        resetStates();
-        return;
-      }
+			if (shouldShowAfterAnimationRef.current && prevMessageRef.current) {
+				setIsShowComponent(true);
+				setIsVisible(true);
+				resetStates();
+				return;
+			}
 
-      if (!prevMessageRef.current) {
-        setIsShowComponent(false);
-      }
-    };
+			if (!prevMessageRef.current) {
+				setIsShowComponent(false);
+			}
+		};
 
-    element.addEventListener("animationend", handleEnd);
-    element.addEventListener("transitionend", handleEnd);
+		element.addEventListener("animationend", handleEnd);
+		element.addEventListener("transitionend", handleEnd);
 
-    return () => {
-      element.removeEventListener("animationend", handleEnd);
-      element.removeEventListener("transitionend", handleEnd);
-    };
-  }, [message]);
+		return () => {
+			element.removeEventListener("animationend", handleEnd);
+			element.removeEventListener("transitionend", handleEnd);
+		};
+	}, [message]);
 
-  if (!isShowComponent) return null;
+	if (!isShowComponent) return null;
 
-  return (
-    <div
-      ref={messageRef}
-      className={`${styles.body} ${!isVisible ? styles.hide : ""} ${isWarning ? styles.warning : ""}`}
-    >
-      <DangerToastReactSvg
-        className={styles.dangerToastIcon}
-        data-size={IconSizeType.medium}
-      />
-      <Text>{prevMessageRef.current}</Text>
-    </div>
-  );
+	return (
+		<div
+			ref={messageRef}
+			className={`${styles.body} ${!isVisible ? styles.hide : ""} ${isWarning ? styles.warning : ""}`}
+		>
+			<DangerToastReactSvg
+				className={styles.dangerToastIcon}
+				data-size={IconSizeType.medium}
+			/>
+			<Text>{prevMessageRef.current}</Text>
+		</div>
+	);
 };
 
 export default StatusMessage;

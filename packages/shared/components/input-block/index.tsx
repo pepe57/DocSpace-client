@@ -28,7 +28,7 @@ import React, { useCallback, useState } from "react";
 import classNames from "classnames";
 
 import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { IconButton } from "../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import { InputBlockProps } from "./InputBlock.types";
 import styles from "./InputBlock.module.scss";

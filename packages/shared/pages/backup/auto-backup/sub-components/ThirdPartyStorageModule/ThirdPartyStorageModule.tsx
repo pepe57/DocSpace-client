@@ -37,7 +37,7 @@ import { getOptions } from "../../../../../utils/getThirdPartyStoragesOptions";
 import { useDidMount } from "../../../../../hooks/useDidMount";
 import { useUnmount } from "../../../../../hooks/useUnmount";
 import { DropDownItem } from "../../../../../components/drop-down-item";
-import { IconButton } from "../../../../../components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { THIRD_PARTY_SERVICES_URL } from "../../../../../constants";
 
@@ -51,206 +51,206 @@ import type { ThirdPartyStorageModuleProps } from "./ThirdPartyStorageModule.typ
 import NoteComponent from "../../../sub-components/NoteComponent";
 
 const ThirdPartyStorageModule = ({
-  thirdPartyStorage,
-  defaultStorageId,
-  setStorageId,
-  isLoadingData,
-  setCompletedFormFields,
-  isNeedFilePath,
-  errorsFieldsBeforeSafe,
-  formSettings,
-  addValueInFormSettings,
-  setRequiredFormSettings,
-  setIsThirdStorageChanged,
-  selectedPeriodLabel,
-  selectedWeekdayLabel,
+	thirdPartyStorage,
+	defaultStorageId,
+	setStorageId,
+	isLoadingData,
+	setCompletedFormFields,
+	isNeedFilePath,
+	errorsFieldsBeforeSafe,
+	formSettings,
+	addValueInFormSettings,
+	setRequiredFormSettings,
+	setIsThirdStorageChanged,
+	selectedPeriodLabel,
+	selectedWeekdayLabel,
 
-  selectedHour,
-  selectedMaxCopiesNumber,
-  selectedMonthDay,
-  selectedPeriodNumber,
-  setMaxCopies,
-  setMonthNumber,
-  setPeriod,
-  setTime,
-  setWeekday,
-  hoursArray,
-  maxNumberCopiesArray,
-  monthNumbersArray,
-  periodsObject,
-  weekdaysLabelArray,
+	selectedHour,
+	selectedMaxCopiesNumber,
+	selectedMonthDay,
+	selectedPeriodNumber,
+	setMaxCopies,
+	setMonthNumber,
+	setPeriod,
+	setTime,
+	setWeekday,
+	hoursArray,
+	maxNumberCopiesArray,
+	monthNumbersArray,
+	periodsObject,
+	weekdaysLabelArray,
 
-  storageRegions,
-  defaultRegion,
-  deleteValueFormSetting,
-  selectedStorageId,
-  isBackupPaid,
-  isFreeBackupsLimitReached,
+	storageRegions,
+	defaultRegion,
+	deleteValueFormSetting,
+	selectedStorageId,
+	isBackupPaid,
+	isFreeBackupsLimitReached,
 }: ThirdPartyStorageModuleProps) => {
-  const {
-    comboBoxOptions,
-    storagesInfo,
-    selectedStorageId: defaultSelectedStorageId,
-  } = useMemo(() => getOptions(thirdPartyStorage), [thirdPartyStorage]);
+	const {
+		comboBoxOptions,
+		storagesInfo,
+		selectedStorageId: defaultSelectedStorageId,
+	} = useMemo(() => getOptions(thirdPartyStorage), [thirdPartyStorage]);
 
-  useDidMount(() => {
-    if (!defaultStorageId) setStorageId(defaultSelectedStorageId);
-  });
+	useDidMount(() => {
+		if (!defaultStorageId) setStorageId(defaultSelectedStorageId);
+	});
 
-  useUnmount(() => {
-    if (!defaultStorageId) setStorageId(null);
-  });
+	useUnmount(() => {
+		if (!defaultStorageId) setStorageId(null);
+	});
 
-  const onSelect = useCallback(
-    (key: string) => {
-      const storage = storagesInfo[key];
+	const onSelect = useCallback(
+		(key: string) => {
+			const storage = storagesInfo[key];
 
-      if (!storage.isSet) {
-        return window.open(`${THIRD_PARTY_SERVICES_URL}${key}`, "_blank");
-      }
+			if (!storage.isSet) {
+				return window.open(`${THIRD_PARTY_SERVICES_URL}${key}`, "_blank");
+			}
 
-      setStorageId(storage.id);
-    },
-    [storagesInfo, setStorageId],
-  );
+			setStorageId(storage.id);
+		},
+		[storagesInfo, setStorageId],
+	);
 
-  const commonProps = {
-    selectedStorage:
-      storagesInfo[selectedStorageId ?? defaultSelectedStorageId],
-    selectedId: selectedStorageId,
-    isLoadingData,
-    setCompletedFormFields,
-    isNeedFilePath,
-    errorsFieldsBeforeSafe,
-    formSettings,
-    addValueInFormSettings,
-    setRequiredFormSettings,
-    setIsThirdStorageChanged,
-    selectedPeriodLabel,
-    selectedWeekdayLabel,
-    selectedHour,
-    selectedMonthDay,
-    selectedMaxCopiesNumber,
-    selectedPeriodNumber,
+	const commonProps = {
+		selectedStorage:
+			storagesInfo[selectedStorageId ?? defaultSelectedStorageId],
+		selectedId: selectedStorageId,
+		isLoadingData,
+		setCompletedFormFields,
+		isNeedFilePath,
+		errorsFieldsBeforeSafe,
+		formSettings,
+		addValueInFormSettings,
+		setRequiredFormSettings,
+		setIsThirdStorageChanged,
+		selectedPeriodLabel,
+		selectedWeekdayLabel,
+		selectedHour,
+		selectedMonthDay,
+		selectedMaxCopiesNumber,
+		selectedPeriodNumber,
 
-    setMaxCopies,
-    setMonthNumber,
-    setPeriod,
-    setWeekday,
-    setTime,
+		setMaxCopies,
+		setMonthNumber,
+		setPeriod,
+		setWeekday,
+		setTime,
 
-    periodsObject,
-    weekdaysLabelArray,
-    monthNumbersArray,
-    hoursArray,
-    maxNumberCopiesArray,
-  };
+		periodsObject,
+		weekdaysLabelArray,
+		monthNumbersArray,
+		hoursArray,
+		maxNumberCopiesArray,
+	};
 
-  const storageTitle =
-    storagesInfo[selectedStorageId ?? defaultSelectedStorageId]?.title;
+	const storageTitle =
+		storagesInfo[selectedStorageId ?? defaultSelectedStorageId]?.title;
 
-  const advancedOptions = useMemo(
-    () => (
-      <div style={{ display: "contents" }}>
-        {comboBoxOptions?.map((item) => {
-          return (
-            <div
-              className={classNames(styles.comboboxItem, {
-                [styles.isDisabled]: item.disabled,
-              })}
-              key={item.key}
-            >
-              <DropDownItem
-                onClick={() => onSelect(item.key)}
-                disabled={item.disabled}
-              >
-                <Text
-                  className={classNames(
-                    styles.dropDownItemText,
-                    "drop-down-item_text",
-                  )}
-                  fontWeight={600}
-                >
-                  {item.label}
-                </Text>
+	const advancedOptions = useMemo(
+		() => (
+			<div style={{ display: "contents" }}>
+				{comboBoxOptions?.map((item) => {
+					return (
+						<div
+							className={classNames(styles.comboboxItem, {
+								[styles.isDisabled]: item.disabled,
+							})}
+							key={item.key}
+						>
+							<DropDownItem
+								onClick={() => onSelect(item.key)}
+								disabled={item.disabled}
+							>
+								<Text
+									className={classNames(
+										styles.dropDownItemText,
+										"drop-down-item_text",
+									)}
+									fontWeight={600}
+								>
+									{item.label}
+								</Text>
 
-                {!item.disabled && !item.connected ? (
-                  <IconButton
-                    className={classNames(
-                      styles.dropDownItemIcon,
-                      "drop-down-item_icon",
-                    )}
-                    size={16}
-                    onClick={() => onSelect(item.key)}
-                    iconName={ExternalLinkReactSvgUrl}
-                    isFill
-                  />
-                ) : null}
-              </DropDownItem>
-            </div>
-          );
-        })}
-      </div>
-    ),
-    [comboBoxOptions, onSelect],
-  );
+								{!item.disabled && !item.connected ? (
+									<IconButton
+										className={classNames(
+											styles.dropDownItemIcon,
+											"drop-down-item_icon",
+										)}
+										size={16}
+										onClick={() => onSelect(item.key)}
+										iconName={ExternalLinkReactSvgUrl}
+										isFill
+									/>
+								) : null}
+							</DropDownItem>
+						</div>
+					);
+				})}
+			</div>
+		),
+		[comboBoxOptions, onSelect],
+	);
 
-  return (
-    <>
-      <div
-        className={classNames(
-          styles.autoBackupStoragesModule,
-          "auto-backup_storages-module",
-        )}
-      >
-        <ComboBox
-          options={[]}
-          advancedOptions={advancedOptions}
-          selectedOption={{
-            key: 0,
-            label: storageTitle,
-          }}
-          isDisabled={isLoadingData}
-          manualWidth="400px"
-          directionY="both"
-          displaySelectedOption
-          noBorder={false}
-          isDefaultMode
-          hideMobileView={false}
-          forceCloseClickOutside
-          scaledOptions
-          showDisabledItems
-          displayArrow
-          className={classNames(styles.backupCombo, "backup_combo")}
-          dataTestId="auto_backup_storage_combobox"
-        />
+	return (
+		<>
+			<div
+				className={classNames(
+					styles.autoBackupStoragesModule,
+					"auto-backup_storages-module",
+				)}
+			>
+				<ComboBox
+					options={[]}
+					advancedOptions={advancedOptions}
+					selectedOption={{
+						key: 0,
+						label: storageTitle,
+					}}
+					isDisabled={isLoadingData}
+					manualWidth="400px"
+					directionY="both"
+					displaySelectedOption
+					noBorder={false}
+					isDefaultMode
+					hideMobileView={false}
+					forceCloseClickOutside
+					scaledOptions
+					showDisabledItems
+					displayArrow
+					className={classNames(styles.backupCombo, "backup_combo")}
+					dataTestId="auto_backup_storage_combobox"
+				/>
 
-        {selectedStorageId === ThirdPartyStorages.GoogleId ? (
-          <GoogleCloudStorage {...commonProps} />
-        ) : null}
+				{selectedStorageId === ThirdPartyStorages.GoogleId ? (
+					<GoogleCloudStorage {...commonProps} />
+				) : null}
 
-        {selectedStorageId === ThirdPartyStorages.RackspaceId ? (
-          <RackspaceStorage {...commonProps} />
-        ) : null}
+				{selectedStorageId === ThirdPartyStorages.RackspaceId ? (
+					<RackspaceStorage {...commonProps} />
+				) : null}
 
-        {selectedStorageId === ThirdPartyStorages.SelectelId ? (
-          <SelectelStorage {...commonProps} />
-        ) : null}
+				{selectedStorageId === ThirdPartyStorages.SelectelId ? (
+					<SelectelStorage {...commonProps} />
+				) : null}
 
-        {selectedStorageId === ThirdPartyStorages.AmazonId ? (
-          <AmazonStorage
-            storageRegions={storageRegions}
-            defaultRegion={defaultRegion}
-            deleteValueFormSetting={deleteValueFormSetting}
-            {...commonProps}
-          />
-        ) : null}
-      </div>
-      <NoteComponent
-        isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
-      />
-    </>
-  );
+				{selectedStorageId === ThirdPartyStorages.AmazonId ? (
+					<AmazonStorage
+						storageRegions={storageRegions}
+						defaultRegion={defaultRegion}
+						deleteValueFormSetting={deleteValueFormSetting}
+						{...commonProps}
+					/>
+				) : null}
+			</div>
+			<NoteComponent
+				isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
+			/>
+		</>
+	);
 };
 
 export default ThirdPartyStorageModule;

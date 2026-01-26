@@ -32,7 +32,7 @@ import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
 import { Link } from "@docspace/ui-kit/components/link";
@@ -49,326 +49,326 @@ import AutoPaymentInfo from "./sub-components/AutoPaymentInfo";
 import styles from "./styles/Wallet.module.scss";
 
 const RefreshIconButton = ({
-  isRefreshing,
-  onClick,
+	isRefreshing,
+	onClick,
 }: {
-  isRefreshing: boolean;
-  onClick: () => void;
+	isRefreshing: boolean;
+	onClick: () => void;
 }) => {
-  return (
-    <IconButton
-      iconName={RefreshReactSvgUrl}
-      size={16}
-      onClick={onClick}
-      className={classNames(styles.refreshIcon, {
-        [styles.spinning]: isRefreshing,
-      })}
-    />
-  );
+	return (
+		<IconButton
+			iconName={RefreshReactSvgUrl}
+			size={16}
+			onClick={onClick}
+			className={classNames(styles.refreshIcon, {
+				[styles.spinning]: isRefreshing,
+			})}
+		/>
+	);
 };
 
 type WalletProps = {
-  walletBalance: number;
-  language: string;
-  walletCodeCurrency: string;
-  isVisibleWalletSettings: boolean;
-  wasChangeBalance?: boolean;
-  isCardLinkedToPortal?: boolean;
-  fetchBalance?: () => Promise<void>;
-  fetchTransactionHistory?: () => Promise<void>;
-  canUpdateTariff: VoidFunction;
-  isNotPaidPeriod?: boolean;
-  isMobile?: boolean;
-  walletCustomerStatusNotActive?: boolean;
-  cardLinked?: string;
-  isPayer?: boolean;
-  payerEmail?: string;
-  walletHelpUrl?: string;
-  currentColorScheme?: TColorScheme;
-  reccomendedAmount?: string;
+	walletBalance: number;
+	language: string;
+	walletCodeCurrency: string;
+	isVisibleWalletSettings: boolean;
+	wasChangeBalance?: boolean;
+	isCardLinkedToPortal?: boolean;
+	fetchBalance?: () => Promise<void>;
+	fetchTransactionHistory?: () => Promise<void>;
+	canUpdateTariff: VoidFunction;
+	isNotPaidPeriod?: boolean;
+	isMobile?: boolean;
+	walletCustomerStatusNotActive?: boolean;
+	cardLinked?: string;
+	isPayer?: boolean;
+	payerEmail?: string;
+	walletHelpUrl?: string;
+	currentColorScheme?: TColorScheme;
+	reccomendedAmount?: string;
 };
 
 const typeClassMap: Record<string, string> = {
-  integer: "integer",
-  group: "group",
-  decimal: "decimal",
-  fraction: "fraction",
-  currency: "currency",
-  literal: "literal",
+	integer: "integer",
+	group: "group",
+	decimal: "decimal",
+	fraction: "fraction",
+	currency: "currency",
+	literal: "literal",
 };
 
 const Wallet = (props: WalletProps) => {
-  const {
-    walletBalance,
-    language,
-    walletCodeCurrency,
-    isCardLinkedToPortal,
-    isVisibleWalletSettings,
-    wasChangeBalance,
-    fetchBalance,
-    fetchTransactionHistory,
-    canUpdateTariff,
-    isNotPaidPeriod,
-    isMobile,
-    walletCustomerStatusNotActive,
-    cardLinked,
-    isPayer,
-    payerEmail,
-    walletHelpUrl,
-    currentColorScheme,
-    reccomendedAmount,
-  } = props;
+	const {
+		walletBalance,
+		language,
+		walletCodeCurrency,
+		isCardLinkedToPortal,
+		isVisibleWalletSettings,
+		wasChangeBalance,
+		fetchBalance,
+		fetchTransactionHistory,
+		canUpdateTariff,
+		isNotPaidPeriod,
+		isMobile,
+		walletCustomerStatusNotActive,
+		cardLinked,
+		isPayer,
+		payerEmail,
+		walletHelpUrl,
+		currentColorScheme,
+		reccomendedAmount,
+	} = props;
 
-  const { t } = useTranslation(["Payments", "Common"]);
+	const { t } = useTranslation(["Payments", "Common"]);
 
-  const [visible, setVisible] = useState(isVisibleWalletSettings);
-  const [isEditAutoPayment, setIsEditAutoPayment] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
+	const [visible, setVisible] = useState(isVisibleWalletSettings);
+	const [isEditAutoPayment, setIsEditAutoPayment] = useState(false);
+	const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const tokens = formattedBalanceTokens(
-    language,
-    walletBalance,
-    walletCodeCurrency || "",
-    3,
-  );
+	const tokens = formattedBalanceTokens(
+		language,
+		walletBalance,
+		walletCodeCurrency || "",
+		3,
+	);
 
-  const onClose = () => {
-    setVisible(false);
-  };
+	const onClose = () => {
+		setVisible(false);
+	};
 
-  const onOpen = () => {
-    setVisible(true);
-    setIsEditAutoPayment(false);
-  };
+	const onOpen = () => {
+		setVisible(true);
+		setIsEditAutoPayment(false);
+	};
 
-  const onOpenLink = () => {
-    setVisible(true);
-    setIsEditAutoPayment(true);
-  };
+	const onOpenLink = () => {
+		setVisible(true);
+		setIsEditAutoPayment(true);
+	};
 
-  const onClick = async () => {
-    if (isRefreshing) return;
+	const onClick = async () => {
+		if (isRefreshing) return;
 
-    setIsRefreshing(true);
+		setIsRefreshing(true);
 
-    const startTime = Date.now();
+		const startTime = Date.now();
 
-    try {
-      await Promise.all([fetchBalance!(), fetchTransactionHistory!()]);
-    } catch (e) {
-      toastr.error(e as Error);
-    } finally {
-      const elapsedTime = Date.now() - startTime;
-      const animationCycleTime = 1000;
+		try {
+			await Promise.all([fetchBalance!(), fetchTransactionHistory!()]);
+		} catch (e) {
+			toastr.error(e as Error);
+		} finally {
+			const elapsedTime = Date.now() - startTime;
+			const animationCycleTime = 1000;
 
-      if (elapsedTime < animationCycleTime) {
-        const delay = animationCycleTime - elapsedTime;
+			if (elapsedTime < animationCycleTime) {
+				const delay = animationCycleTime - elapsedTime;
 
-        setTimeout(() => {
-          setIsRefreshing(false);
-        }, delay);
-      } else {
-        const totalNeededTime =
-          Math.ceil(elapsedTime / animationCycleTime) * animationCycleTime;
-        const remainingTime = totalNeededTime - elapsedTime;
+				setTimeout(() => {
+					setIsRefreshing(false);
+				}, delay);
+			} else {
+				const totalNeededTime =
+					Math.ceil(elapsedTime / animationCycleTime) * animationCycleTime;
+				const remainingTime = totalNeededTime - elapsedTime;
 
-        if (remainingTime > 0) {
-          setTimeout(() => {
-            setIsRefreshing(false);
-          }, remainingTime);
-        } else {
-          setIsRefreshing(false);
-        }
-      }
-    }
-  };
+				if (remainingTime > 0) {
+					setTimeout(() => {
+						setIsRefreshing(false);
+					}, remainingTime);
+				} else {
+					setIsRefreshing(false);
+				}
+			}
+		}
+	};
 
-  const goLinkCard = () => {
-    cardLinked
-      ? window.open(cardLinked, "_self")
-      : toastr.error(t("Common:UnexpectedError"));
-  };
+	const goLinkCard = () => {
+		cardLinked
+			? window.open(cardLinked, "_self")
+			: toastr.error(t("Common:UnexpectedError"));
+	};
 
-  return (
-    <div className={styles.walletContainer}>
-      <Text className={styles.walletDescription}>
-        {t("WalletDescription", { productName: t("Common:ProductName") })}
-      </Text>
+	return (
+		<div className={styles.walletContainer}>
+			<Text className={styles.walletDescription}>
+				{t("WalletDescription", { productName: t("Common:ProductName") })}
+			</Text>
 
-      {walletHelpUrl ? (
-        <Link
-          textDecoration="underline"
-          fontWeight={600}
-          href={walletHelpUrl}
-          color={currentColorScheme?.main?.accent}
-          dataTestId="wallet_learn_more_link"
-        >
-          {t("Common:LearnMore")}
-        </Link>
-      ) : null}
+			{walletHelpUrl ? (
+				<Link
+					textDecoration="underline"
+					fontWeight={600}
+					href={walletHelpUrl}
+					color={currentColorScheme?.main?.accent}
+					dataTestId="wallet_learn_more_link"
+				>
+					{t("Common:LearnMore")}
+				</Link>
+			) : null}
 
-      {isCardLinkedToPortal ? (
-        <PayerInformation
-          theme={undefined}
-          user={undefined}
-          accountLink={undefined}
-          payerInfo={undefined}
-          email={undefined}
-          isNotPaidPeriod={undefined}
-          isStripePortalAvailable={undefined}
-          style={{
-            marginTop: "18px",
-          }}
-        />
-      ) : null}
-      <div className={styles.balanceWrapper}>
-        <div className={styles.headerContainer}>
-          <Text isBold fontSize="18px" className={styles.balanceTitle}>
-            {t("BalanceText")}
-          </Text>
+			{isCardLinkedToPortal ? (
+				<PayerInformation
+					theme={undefined}
+					user={undefined}
+					accountLink={undefined}
+					payerInfo={undefined}
+					email={undefined}
+					isNotPaidPeriod={undefined}
+					isStripePortalAvailable={undefined}
+					style={{
+						marginTop: "18px",
+					}}
+				/>
+			) : null}
+			<div className={styles.balanceWrapper}>
+				<div className={styles.headerContainer}>
+					<Text isBold fontSize="18px" className={styles.balanceTitle}>
+						{t("BalanceText")}
+					</Text>
 
-          {!isNotPaidPeriod && isCardLinkedToPortal ? (
-            <RefreshIconButton isRefreshing={isRefreshing} onClick={onClick} />
-          ) : null}
-        </div>
+					{!isNotPaidPeriod && isCardLinkedToPortal ? (
+						<RefreshIconButton isRefreshing={isRefreshing} onClick={onClick} />
+					) : null}
+				</div>
 
-        <div className={styles.balanceAmountContainer}>
-          {tokens.map((token) => (
-            <Text
-              key={`${token.type}-${token.value}`}
-              className={styles[typeClassMap[token.type]] || ""}
-            >
-              {token.value}
-            </Text>
-          ))}
-        </div>
+				<div className={styles.balanceAmountContainer}>
+					{tokens.map((token) => (
+						<Text
+							key={`${token.type}-${token.value}`}
+							className={styles[typeClassMap[token.type]] || ""}
+						>
+							{token.value}
+						</Text>
+					))}
+				</div>
 
-        <Button
-          size={isMobile ? ButtonSize.normal : ButtonSize.small}
-          primary
-          label={t("TopUpBalance")}
-          onClick={onOpen}
-          isDisabled={!canUpdateTariff || isNotPaidPeriod}
-          scale={isMobile}
-          className={classNames(styles.topUpButton, {
-            [styles.isMobileButton]: isMobile,
-          })}
-          testId="top_up_balance_button"
-        />
-      </div>
+				<Button
+					size={isMobile ? ButtonSize.normal : ButtonSize.small}
+					primary
+					label={t("TopUpBalance")}
+					onClick={onOpen}
+					isDisabled={!canUpdateTariff || isNotPaidPeriod}
+					scale={isMobile}
+					className={classNames(styles.topUpButton, {
+						[styles.isMobileButton]: isMobile,
+					})}
+					testId="top_up_balance_button"
+				/>
+			</div>
 
-      {walletCustomerStatusNotActive ? (
-        <div className={styles.walletCustomerStatusNotActive}>
-          <Text fontWeight={600} className={styles.warningColor}>
-            {t("CardUnlinked")}
-          </Text>
-          <Text as="span" className={styles.warningColor}>
-            {isPayer ? (
-              t("LinkNewCard")
-            ) : (
-              <Trans
-                t={t}
-                i18nKey="LinkNewCardEmail"
-                values={{
-                  email: payerEmail,
-                }}
-                components={{
-                  1: (
-                    <Link
-                      textDecoration="underline"
-                      fontWeight="600"
-                      className="error_description_link"
-                      href={`mailto:${payerEmail}`}
-                    />
-                  ),
-                }}
-              />
-            )}
-          </Text>{" "}
-          {isPayer ? (
-            <Link
-              as="span"
-              onClick={goLinkCard}
-              fontWeight={600}
-              textDecoration="underline"
-            >
-              {t("AddPaymentMethod")}
-            </Link>
-          ) : null}
-        </div>
-      ) : (
-        <AutoPaymentInfo onOpen={onOpenLink} />
-      )}
+			{walletCustomerStatusNotActive ? (
+				<div className={styles.walletCustomerStatusNotActive}>
+					<Text fontWeight={600} className={styles.warningColor}>
+						{t("CardUnlinked")}
+					</Text>
+					<Text as="span" className={styles.warningColor}>
+						{isPayer ? (
+							t("LinkNewCard")
+						) : (
+							<Trans
+								t={t}
+								i18nKey="LinkNewCardEmail"
+								values={{
+									email: payerEmail,
+								}}
+								components={{
+									1: (
+										<Link
+											textDecoration="underline"
+											fontWeight="600"
+											className="error_description_link"
+											href={`mailto:${payerEmail}`}
+										/>
+									),
+								}}
+							/>
+						)}
+					</Text>{" "}
+					{isPayer ? (
+						<Link
+							as="span"
+							onClick={goLinkCard}
+							fontWeight={600}
+							textDecoration="underline"
+						>
+							{t("AddPaymentMethod")}
+						</Link>
+					) : null}
+				</div>
+			) : (
+				<AutoPaymentInfo onOpen={onOpenLink} />
+			)}
 
-      {visible ? (
-        <TopUpModal
-          visible={visible}
-          onClose={onClose}
-          isEditAutoPayment={isEditAutoPayment}
-          reccomendedAmount={reccomendedAmount}
-        />
-      ) : null}
+			{visible ? (
+				<TopUpModal
+					visible={visible}
+					onClose={onClose}
+					isEditAutoPayment={isEditAutoPayment}
+					reccomendedAmount={reccomendedAmount}
+				/>
+			) : null}
 
-      {wasChangeBalance ? (
-        <WalletRefilledModal visible={wasChangeBalance} />
-      ) : null}
-      <TransactionHistory />
-    </div>
-  );
+			{wasChangeBalance ? (
+				<WalletRefilledModal visible={wasChangeBalance} />
+			) : null}
+			<TransactionHistory />
+		</div>
+	);
 };
 
 export default inject(
-  ({
-    paymentStore,
-    authStore,
-    currentQuotaStore,
-    currentTariffStatusStore,
-    settingsStore,
-  }: TStore) => {
-    const { language } = authStore;
-    const {
-      walletBalance,
-      cardLinked,
-      walletCodeCurrency,
-      isPayer,
-      isVisibleWalletSettings,
-      wasChangeBalance,
-      fetchBalance,
-      fetchTransactionHistory,
-      canUpdateTariff,
-      isCardLinkedToPortal,
-      reccomendedAmount,
-    } = paymentStore;
-    const { isFreeTariff } = currentQuotaStore;
-    const {
-      isNotPaidPeriod,
-      walletCustomerStatusNotActive,
-      walletCustomerEmail,
-    } = currentTariffStatusStore;
-    const { currentDeviceType, walletHelpUrl, currentColorScheme } =
-      settingsStore;
+	({
+		paymentStore,
+		authStore,
+		currentQuotaStore,
+		currentTariffStatusStore,
+		settingsStore,
+	}: TStore) => {
+		const { language } = authStore;
+		const {
+			walletBalance,
+			cardLinked,
+			walletCodeCurrency,
+			isPayer,
+			isVisibleWalletSettings,
+			wasChangeBalance,
+			fetchBalance,
+			fetchTransactionHistory,
+			canUpdateTariff,
+			isCardLinkedToPortal,
+			reccomendedAmount,
+		} = paymentStore;
+		const { isFreeTariff } = currentQuotaStore;
+		const {
+			isNotPaidPeriod,
+			walletCustomerStatusNotActive,
+			walletCustomerEmail,
+		} = currentTariffStatusStore;
+		const { currentDeviceType, walletHelpUrl, currentColorScheme } =
+			settingsStore;
 
-    const isMobile = currentDeviceType === DeviceType.mobile;
-    return {
-      walletBalance,
-      walletCodeCurrency,
-      language,
-      cardLinked,
-      isPayer,
-      isFreeTariff,
-      isVisibleWalletSettings,
-      wasChangeBalance,
-      fetchBalance,
-      fetchTransactionHistory,
-      canUpdateTariff,
-      isCardLinkedToPortal,
-      isNotPaidPeriod,
-      isMobile,
-      walletCustomerStatusNotActive,
-      payerEmail: walletCustomerEmail,
-      walletHelpUrl,
-      currentColorScheme,
-      reccomendedAmount,
-    };
-  },
+		const isMobile = currentDeviceType === DeviceType.mobile;
+		return {
+			walletBalance,
+			walletCodeCurrency,
+			language,
+			cardLinked,
+			isPayer,
+			isFreeTariff,
+			isVisibleWalletSettings,
+			wasChangeBalance,
+			fetchBalance,
+			fetchTransactionHistory,
+			canUpdateTariff,
+			isCardLinkedToPortal,
+			isNotPaidPeriod,
+			isMobile,
+			walletCustomerStatusNotActive,
+			payerEmail: walletCustomerEmail,
+			walletHelpUrl,
+			currentColorScheme,
+			reccomendedAmount,
+		};
+	},
 )(observer(Wallet));

@@ -38,7 +38,7 @@ import { EMPTY_ARRAY, EMPTY_OBJECT, FUNCTION_EMPTY } from "../../../constants";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { ComboBox, TOption } from "../../combobox";
-import { IconButton } from "../../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Scrollbar } from "../../scrollbar";
 
 import { GroupMenuItem } from "../sub-components/group-menu-item";

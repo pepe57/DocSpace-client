@@ -30,10 +30,10 @@ import { isMobile } from "@docspace/shared/utils";
 import { useClickOutside } from "@docspace/shared/utils/useClickOutside";
 
 import {
-  ModalDialog,
-  ModalDialogType,
+	ModalDialog,
+	ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 import PencilSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
@@ -43,164 +43,164 @@ import { ColorPicker } from "@docspace/shared/components/color-picker";
 import { SelectColorProps } from "../../RoomLogoCoverDialog.types";
 
 import {
-  StyledModalDialog,
-  StyledColorItem,
-  SelectedColorItem,
-  CustomSelectedColor,
+	StyledModalDialog,
+	StyledColorItem,
+	SelectedColorItem,
+	CustomSelectedColor,
 } from "./SelectColor.styled";
 
 export const SelectColor = ({
-  logoColors,
-  selectedColor,
-  t,
-  onChangeColor,
-  roomColor,
-  openColorPicker,
-  setOpenColorPicker,
+	logoColors,
+	selectedColor,
+	t,
+	onChangeColor,
+	roomColor,
+	openColorPicker,
+	setOpenColorPicker,
 }: SelectColorProps) => {
-  const isDefaultColor = logoColors.includes(roomColor!);
-  const [pickerColor, setPickerColor] = useState<string | null>(
-    isDefaultColor ? "" : roomColor || "",
-  );
+	const isDefaultColor = logoColors.includes(roomColor!);
+	const [pickerColor, setPickerColor] = useState<string | null>(
+		isDefaultColor ? "" : roomColor || "",
+	);
 
-  React.useEffect(() => {
-    setPickerColor(roomColor);
-  }, [roomColor]);
+	React.useEffect(() => {
+		setPickerColor(roomColor);
+	}, [roomColor]);
 
-  const iconRef = useRef(null);
+	const iconRef = useRef(null);
 
-  const pickerRef = useRef(null);
+	const pickerRef = useRef(null);
 
-  useClickOutside(pickerRef, () => {
-    setOpenColorPicker(false);
-  });
+	useClickOutside(pickerRef, () => {
+		setOpenColorPicker(false);
+	});
 
-  const onApply = (color: string) => {
-    setPickerColor(color);
-    onChangeColor(color);
-  };
+	const onApply = (color: string) => {
+		setPickerColor(color);
+		onChangeColor(color);
+	};
 
-  const onOpenColorPicker = () => {
-    if (pickerColor && pickerColor !== selectedColor) {
-      return onChangeColor(pickerColor);
-    }
-    setOpenColorPicker(true);
-  };
+	const onOpenColorPicker = () => {
+		if (pickerColor && pickerColor !== selectedColor) {
+			return onChangeColor(pickerColor);
+		}
+		setOpenColorPicker(true);
+	};
 
-  const isSelectedColorPicker = pickerColor === selectedColor;
+	const isSelectedColorPicker = pickerColor === selectedColor;
 
-  return (
-    <div className="select-color-container">
-      <div className="color-name">{t("Common:Color")}</div>
-      <div className="colors-container">
-        {logoColors.map((color, index) =>
-          color === selectedColor ? (
-            <SelectedColorItem
-              key={color}
-              color={color}
-              data-testid={`color_item_selected_${index}`}
-            >
-              <div className="circle" color={color} />
-            </SelectedColorItem>
-          ) : (
-            <StyledColorItem
-              key={color}
-              color={color}
-              onClick={() => onChangeColor(color)}
-              data-testid={`color_item_${index}`}
-            />
-          ),
-        )}
-        {roomColor ? (
-          <CustomSelectedColor
-            isSelected={isSelectedColorPicker}
-            color={pickerColor!}
-            ref={iconRef}
-            data-testid="color_item_custom_selected"
-          >
-            {isSelectedColorPicker ? (
-              <div className="color-picker-circle">
-                <IconButton
-                  className="select-color-plus-icon"
-                  size={12}
-                  iconName={PencilSvgUrl}
-                  onClick={onOpenColorPicker}
-                  isFill
-                />
-              </div>
-            ) : (
-              <IconButton
-                className="select-color-plus-icon"
-                size={12}
-                iconName={PencilSvgUrl}
-                onClick={onOpenColorPicker}
-                isFill
-              />
-            )}
-          </CustomSelectedColor>
-        ) : (
-          <StyledColorItem
-            isEmptyColor
-            isSelected={openColorPicker}
-            ref={iconRef}
-            data-testid="color_item_add_custom"
-          >
-            <IconButton
-              className="select-color-plus-icon"
-              size={16}
-              iconName={PlusSvgUrl}
-              onClick={onOpenColorPicker}
-              isFill
-            />
-          </StyledColorItem>
-        )}
-        {isMobile() ? (
-          <StyledModalDialog
-            displayType={ModalDialogType.modal}
-            visible={openColorPicker}
-            onClose={() => setOpenColorPicker(false)}
-            blur={8}
-          >
-            <ModalDialog.Body>
-              <ColorPicker
-                id="buttons-hex"
-                onClose={() => setOpenColorPicker(false)}
-                onApply={onApply}
-                isPickerOnly
-                handleChange={onApply}
-                appliedColor={selectedColor!}
-                applyButtonLabel={t("Common:ApplyButton")}
-                cancelButtonLabel={t("Common:CancelButton")}
-              />
-            </ModalDialog.Body>
-          </StyledModalDialog>
-        ) : (
-          <DropDown
-            directionY="both"
-            topSpace={16}
-            forwardedRef={iconRef}
-            withBackdrop={false}
-            isDefaultMode
-            open={openColorPicker}
-            clickOutsideAction={() => setOpenColorPicker(false)}
-          >
-            <div ref={pickerRef}>
-              <DropDownItem className="drop-down-item-hex" noHover noActive>
-                <ColorPicker
-                  id="accent-hex"
-                  onClose={() => setOpenColorPicker(false)}
-                  onApply={onApply}
-                  isPickerOnly
-                  handleChange={onApply}
-                  appliedColor={selectedColor!}
-                  applyButtonLabel={t("Common:ApplyButton")}
-                  cancelButtonLabel={t("Common:CancelButton")}
-                />
-              </DropDownItem>
-            </div>
-          </DropDown>
-        )}
-      </div>
-    </div>
-  );
+	return (
+		<div className="select-color-container">
+			<div className="color-name">{t("Common:Color")}</div>
+			<div className="colors-container">
+				{logoColors.map((color, index) =>
+					color === selectedColor ? (
+						<SelectedColorItem
+							key={color}
+							color={color}
+							data-testid={`color_item_selected_${index}`}
+						>
+							<div className="circle" color={color} />
+						</SelectedColorItem>
+					) : (
+						<StyledColorItem
+							key={color}
+							color={color}
+							onClick={() => onChangeColor(color)}
+							data-testid={`color_item_${index}`}
+						/>
+					),
+				)}
+				{roomColor ? (
+					<CustomSelectedColor
+						isSelected={isSelectedColorPicker}
+						color={pickerColor!}
+						ref={iconRef}
+						data-testid="color_item_custom_selected"
+					>
+						{isSelectedColorPicker ? (
+							<div className="color-picker-circle">
+								<IconButton
+									className="select-color-plus-icon"
+									size={12}
+									iconName={PencilSvgUrl}
+									onClick={onOpenColorPicker}
+									isFill
+								/>
+							</div>
+						) : (
+							<IconButton
+								className="select-color-plus-icon"
+								size={12}
+								iconName={PencilSvgUrl}
+								onClick={onOpenColorPicker}
+								isFill
+							/>
+						)}
+					</CustomSelectedColor>
+				) : (
+					<StyledColorItem
+						isEmptyColor
+						isSelected={openColorPicker}
+						ref={iconRef}
+						data-testid="color_item_add_custom"
+					>
+						<IconButton
+							className="select-color-plus-icon"
+							size={16}
+							iconName={PlusSvgUrl}
+							onClick={onOpenColorPicker}
+							isFill
+						/>
+					</StyledColorItem>
+				)}
+				{isMobile() ? (
+					<StyledModalDialog
+						displayType={ModalDialogType.modal}
+						visible={openColorPicker}
+						onClose={() => setOpenColorPicker(false)}
+						blur={8}
+					>
+						<ModalDialog.Body>
+							<ColorPicker
+								id="buttons-hex"
+								onClose={() => setOpenColorPicker(false)}
+								onApply={onApply}
+								isPickerOnly
+								handleChange={onApply}
+								appliedColor={selectedColor!}
+								applyButtonLabel={t("Common:ApplyButton")}
+								cancelButtonLabel={t("Common:CancelButton")}
+							/>
+						</ModalDialog.Body>
+					</StyledModalDialog>
+				) : (
+					<DropDown
+						directionY="both"
+						topSpace={16}
+						forwardedRef={iconRef}
+						withBackdrop={false}
+						isDefaultMode
+						open={openColorPicker}
+						clickOutsideAction={() => setOpenColorPicker(false)}
+					>
+						<div ref={pickerRef}>
+							<DropDownItem className="drop-down-item-hex" noHover noActive>
+								<ColorPicker
+									id="accent-hex"
+									onClose={() => setOpenColorPicker(false)}
+									onApply={onApply}
+									isPickerOnly
+									handleChange={onApply}
+									appliedColor={selectedColor!}
+									applyButtonLabel={t("Common:ApplyButton")}
+									cancelButtonLabel={t("Common:CancelButton")}
+								/>
+							</DropDownItem>
+						</div>
+					</DropDown>
+				)}
+			</div>
+		</div>
+	);
 };

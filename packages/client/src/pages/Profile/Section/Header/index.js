@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Heading } from "@docspace/shared/components/heading";
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
@@ -40,127 +40,127 @@ import useProfileHeader from "./useProfileHeader";
 import styles from "./header.module.scss";
 
 const Header = (props) => {
-  const {
-    isAdmin,
+	const {
+		isAdmin,
 
-    profile,
-    setChangeEmailVisible,
-    setChangePasswordVisible,
-    setChangeAvatarVisible,
-    setChangeNameVisible,
+		profile,
+		setChangeEmailVisible,
+		setChangePasswordVisible,
+		setChangeAvatarVisible,
+		setChangeNameVisible,
 
-    setDialogData,
+		setDialogData,
 
-    profileClicked,
+		profileClicked,
 
-    showProfileLoader,
-    setIsLoading,
+		showProfileLoader,
+		setIsLoading,
 
-    enabledHotkeys,
-  } = props;
+		enabledHotkeys,
+	} = props;
 
-  const { t, profileDialogs, onClickBack, getUserContextOptions } =
-    useProfileHeader({
-      profile,
-      profileClicked,
-      enabledHotkeys,
-      setDialogData,
-      setChangeEmailVisible,
-      setChangePasswordVisible,
-      setChangeAvatarVisible,
-      setChangeNameVisible,
-      setIsLoading,
-    });
+	const { t, profileDialogs, onClickBack, getUserContextOptions } =
+		useProfileHeader({
+			profile,
+			profileClicked,
+			enabledHotkeys,
+			setDialogData,
+			setChangeEmailVisible,
+			setChangePasswordVisible,
+			setChangeAvatarVisible,
+			setChangeNameVisible,
+			setIsLoading,
+		});
 
-  if (showProfileLoader) return <SectionHeaderSkeleton />;
+	if (showProfileLoader) return <SectionHeaderSkeleton />;
 
-  return (
-    <div className={styles.header}>
-      <IconButton
-        iconName={ArrowPathReactSvgUrl}
-        size="17"
-        isFill
-        onClick={onClickBack}
-        className={styles.arrowButton}
-        dataTestId="header_arrow_back_icon_button"
-      />
+	return (
+		<div className={styles.header}>
+			<IconButton
+				iconName={ArrowPathReactSvgUrl}
+				size="17"
+				isFill
+				onClick={onClickBack}
+				className={styles.arrowButton}
+				dataTestId="header_arrow_back_icon_button"
+			/>
 
-      <div>
-        <Heading className={styles.headerHeadline} type="content">
-          {t("Profile:MyProfile")}
-        </Heading>
-      </div>
-      <div className={styles.actionButton}>
-        {(isAdmin && !profile?.isOwner) ||
-        (!profile?.isLDAP && !profile?.isSSO) ? (
-          <ContextMenuButton
-            directionX="right"
-            title={t("Common:Actions")}
-            iconName={VerticalDotsReactSvgUrl}
-            size={17}
-            getData={getUserContextOptions}
-            isDisabled={false}
-            usePortal
-            testId="user_context_menu_button"
-          />
-        ) : null}
+			<div>
+				<Heading className={styles.headerHeadline} type="content">
+					{t("Profile:MyProfile")}
+				</Heading>
+			</div>
+			<div className={styles.actionButton}>
+				{(isAdmin && !profile?.isOwner) ||
+				(!profile?.isLDAP && !profile?.isSSO) ? (
+					<ContextMenuButton
+						directionX="right"
+						title={t("Common:Actions")}
+						iconName={VerticalDotsReactSvgUrl}
+						size={17}
+						getData={getUserContextOptions}
+						isDisabled={false}
+						usePortal
+						testId="user_context_menu_button"
+					/>
+				) : null}
 
-        <div className={styles.tariffBar}>
-          <TariffBar />
-        </div>
-      </div>
-      {profileDialogs}
-    </div>
-  );
+				<div className={styles.tariffBar}>
+					<TariffBar />
+				</div>
+			</div>
+			{profileDialogs}
+		</div>
+	);
 };
 
 export default inject(
-  ({
-    authStore,
-    userStore,
-    peopleStore,
-    clientLoadingStore,
-    profileActionsStore,
-    filesStore,
-    mediaViewerDataStore,
-  }) => {
-    const { isAdmin } = authStore;
+	({
+		authStore,
+		userStore,
+		peopleStore,
+		clientLoadingStore,
+		profileActionsStore,
+		filesStore,
+		mediaViewerDataStore,
+	}) => {
+		const { isAdmin } = authStore;
 
-    const { isVisitor, isCollaborator } = userStore.user;
+		const { isVisitor, isCollaborator } = userStore.user;
 
-    const { targetUserStore, dialogStore } = peopleStore;
+		const { targetUserStore, dialogStore } = peopleStore;
 
-    const { showProfileLoader } = clientLoadingStore;
+		const { showProfileLoader } = clientLoadingStore;
 
-    const { profileClicked } = profileActionsStore;
+		const { profileClicked } = profileActionsStore;
 
-    const { enabledHotkeys } = filesStore;
-    const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
+		const { enabledHotkeys } = filesStore;
+		const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
 
-    const {
-      setChangePasswordVisible,
-      setChangeAvatarVisible,
-      setChangeNameVisible,
-    } = targetUserStore;
+		const {
+			setChangePasswordVisible,
+			setChangeAvatarVisible,
+			setChangeNameVisible,
+		} = targetUserStore;
 
-    const { setDialogData, setChangeEmailVisible } = dialogStore;
+		const { setDialogData, setChangeEmailVisible } = dialogStore;
 
-    return {
-      isAdmin,
-      isVisitor,
-      isCollaborator,
+		return {
+			isAdmin,
+			isVisitor,
+			isCollaborator,
 
-      setChangeEmailVisible,
-      setChangePasswordVisible,
-      setChangeAvatarVisible,
-      setChangeNameVisible,
+			setChangeEmailVisible,
+			setChangePasswordVisible,
+			setChangeAvatarVisible,
+			setChangeNameVisible,
 
-      setDialogData,
+			setDialogData,
 
-      showProfileLoader,
-      profileClicked,
-      enabledHotkeys:
-        enabledHotkeys && !mediaViewerIsVisible && !showProfileLoader,
-    };
-  },
+			showProfileLoader,
+			profileClicked,
+			enabledHotkeys:
+				enabledHotkeys && !mediaViewerIsVisible && !showProfileLoader,
+		};
+	},
 )(observer(Header));

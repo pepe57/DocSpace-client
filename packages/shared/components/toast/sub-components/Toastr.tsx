@@ -35,11 +35,11 @@ import DangerToastReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
 import InfoToastReactSvg from "PUBLIC_DIR/images/info.toast.react.svg";
 import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
-import { IconSizeType } from "../../../utils/common-icons-style";
+import { IconSizeType } from "@docspace/ui-kit/utils/common-icons-style";
 import { getCookie } from "../../../utils/cookie";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "../../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import { ToastType } from "../Toast.enums";
 import { TData } from "../Toast.type";
@@ -49,196 +49,196 @@ const DEFAULT_TIMEOUT = 5000;
 const MIN_TIMEOUT_THRESHOLD = 750;
 
 interface NotifyConfig {
-  type: ToastType;
-  defaultTitleKey: "Done" | "Warning" | "Alert" | "Info";
+	type: ToastType;
+	defaultTitleKey: "Done" | "Warning" | "Alert" | "Info";
 }
 
 const TOAST_CONFIGS: Record<ToastType, NotifyConfig> = {
-  [ToastType.success]: { type: ToastType.success, defaultTitleKey: "Done" }, // t("Common:Done")
-  [ToastType.error]: { type: ToastType.error, defaultTitleKey: "Warning" }, // t("Common:Warning")
-  [ToastType.warning]: { type: ToastType.warning, defaultTitleKey: "Alert" }, // t("Common:Alert")
-  [ToastType.info]: { type: ToastType.info, defaultTitleKey: "Info" }, // t("Common:Info")
+	[ToastType.success]: { type: ToastType.success, defaultTitleKey: "Done" }, // t("Common:Done")
+	[ToastType.error]: { type: ToastType.error, defaultTitleKey: "Warning" }, // t("Common:Warning")
+	[ToastType.warning]: { type: ToastType.warning, defaultTitleKey: "Alert" }, // t("Common:Alert")
+	[ToastType.info]: { type: ToastType.info, defaultTitleKey: "Info" }, // t("Common:Info")
 };
 
 const getTitle = (type: "Done" | "Warning" | "Alert" | "Info") => {
-  const cookieLang = getCookie("asc_language");
-  const lang =
-    cookieLang === "en-US" || cookieLang === "en-GB" ? "en" : cookieLang;
+	const cookieLang = getCookie("asc_language");
+	const lang =
+		cookieLang === "en-US" || cookieLang === "en-GB" ? "en" : cookieLang;
 
-  const commonKeys =
-    (window.i18n &&
-      Object.getOwnPropertyNames(window.i18n.loaded).filter(
-        (k) => k.indexOf(`${lang}/Common.json`) > -1,
-      )) ||
-    [];
+	const commonKeys =
+		(window.i18n &&
+			Object.getOwnPropertyNames(window.i18n.loaded).filter(
+				(k) => k.indexOf(`${lang}/Common.json`) > -1,
+			)) ||
+		[];
 
-  if (commonKeys.length === 0) return undefined;
+	if (commonKeys.length === 0) return undefined;
 
-  const key = commonKeys.length === 1 ? commonKeys[0] : commonKeys[1];
+	const key = commonKeys.length === 1 ? commonKeys[0] : commonKeys[1];
 
-  const title = window.i18n.loaded[key].data[type];
+	const title = window.i18n.loaded[key].data[type];
 
-  return title;
+	return title;
 };
 
 const Icon = ({ type, size }: { type: ToastType; size: IconSizeType }) => {
-  const iconMap = {
-    [ToastType.success]: (
-      <CheckToastReactSvg
-        data-size={size}
-        className="toastr_icon toastr_success"
-      />
-    ),
-    [ToastType.error]: (
-      <DangerToastReactSvg
-        data-size={size}
-        className={classNames(styles.toastrIcon, "toastr_icon toastr_error")}
-      />
-    ),
-    [ToastType.warning]: (
-      <DangerToastReactSvg
-        data-size={size}
-        className={classNames(styles.toastrIcon, "toastr_icon toastr_warning")}
-      />
-    ),
-    [ToastType.info]: (
-      <InfoToastReactSvg
-        data-size={size}
-        className={classNames(styles.toastrIcon, "toastr_icon toastr_info")}
-      />
-    ),
-  };
+	const iconMap = {
+		[ToastType.success]: (
+			<CheckToastReactSvg
+				data-size={size}
+				className="toastr_icon toastr_success"
+			/>
+		),
+		[ToastType.error]: (
+			<DangerToastReactSvg
+				data-size={size}
+				className={classNames(styles.toastrIcon, "toastr_icon toastr_error")}
+			/>
+		),
+		[ToastType.warning]: (
+			<DangerToastReactSvg
+				data-size={size}
+				className={classNames(styles.toastrIcon, "toastr_icon toastr_warning")}
+			/>
+		),
+		[ToastType.info]: (
+			<InfoToastReactSvg
+				data-size={size}
+				className={classNames(styles.toastrIcon, "toastr_icon toastr_info")}
+			/>
+		),
+	};
 
-  return iconMap[type] || iconMap[ToastType.info];
+	return iconMap[type] || iconMap[ToastType.info];
 };
 
 const CloseButton = ({ closeToast }: { closeToast?: () => void }) => (
-  <IconButton
-    className={`${styles.iconButton} closeButton`}
-    onClick={closeToast}
-    iconName={CrossIconReactSvgUrl}
-    size={12}
-  />
+	<IconButton
+		className={`${styles.iconButton} closeButton`}
+		onClick={closeToast}
+		iconName={CrossIconReactSvgUrl}
+		size={12}
+	/>
 );
 
 const createToastContent = (
-  type: ToastType,
-  data: string | React.ReactNode,
-  title: string,
+	type: ToastType,
+	data: string | React.ReactNode,
+	title: string,
 ) => (
-  <div
-    data-testId="toast-content"
-    className={styles.toastContent}
-    data-type={type}
-  >
-    <div className="icon-wrapper">
-      <Icon size={IconSizeType.medium} type={type} />
-    </div>
-    <div className="toast-text-container">
-      {title ? <Text className="toast-title">{title}</Text> : null}
-      {typeof data === "string"
-        ? data && <Text className="toast-text">{data}</Text>
-        : data}
-    </div>
-  </div>
+	<div
+		data-testId="toast-content"
+		className={styles.toastContent}
+		data-type={type}
+	>
+		<div className="icon-wrapper">
+			<Icon size={IconSizeType.medium} type={type} />
+		</div>
+		<div className="toast-text-container">
+			{title ? <Text className="toast-title">{title}</Text> : null}
+			{typeof data === "string"
+				? data && <Text className="toast-text">{data}</Text>
+				: data}
+		</div>
+	</div>
 );
 
 const getToastOptions = (
-  type: ToastType,
-  data: string | React.ReactNode,
-  timeout: number,
-  withCross: boolean,
-  centerPosition: boolean,
+	type: ToastType,
+	data: string | React.ReactNode,
+	timeout: number,
+	withCross: boolean,
+	centerPosition: boolean,
 ) => ({
-  data,
-  type,
-  closeOnClick: !withCross,
-  closeButton: withCross && <CloseButton />,
-  autoClose: (timeout === 0
-    ? false
-    : timeout < MIN_TIMEOUT_THRESHOLD
-      ? DEFAULT_TIMEOUT
-      : timeout || 5000) as number | false,
-  position: centerPosition ? ("top-center" as ToastPosition) : undefined,
-  containerId: "toast-container",
+	data,
+	type,
+	closeOnClick: !withCross,
+	closeButton: withCross && <CloseButton />,
+	autoClose: (timeout === 0
+		? false
+		: timeout < MIN_TIMEOUT_THRESHOLD
+			? DEFAULT_TIMEOUT
+			: timeout || 5000) as number | false,
+	position: centerPosition ? ("top-center" as ToastPosition) : undefined,
+	containerId: "toast-container",
 });
 
 const notify = (
-  type: ToastType,
-  data: string | React.ReactNode,
-  title: string,
-  timeout = DEFAULT_TIMEOUT,
-  withCross = false,
-  centerPosition = false,
+	type: ToastType,
+	data: string | React.ReactNode,
+	title: string,
+	timeout = DEFAULT_TIMEOUT,
+	withCross = false,
+	centerPosition = false,
 ) => {
-  const content = createToastContent(type, data, title);
-  const options = getToastOptions(
-    type,
-    data,
-    timeout,
-    withCross,
-    centerPosition,
-  );
-  return toast(content, options);
+	const content = createToastContent(type, data, title);
+	const options = getToastOptions(
+		type,
+		data,
+		timeout,
+		withCross,
+		centerPosition,
+	);
+	return toast(content, options);
 };
 
 const processErrorData = (
-  data: string | TData | React.ReactNode,
+	data: string | TData | React.ReactNode,
 ): string | React.ReactNode => {
-  if (
-    typeof data === "string" ||
-    React.isValidElement(data) ||
-    Array.isArray(data)
-  ) {
-    return data;
-  }
+	if (
+		typeof data === "string" ||
+		React.isValidElement(data) ||
+		Array.isArray(data)
+	) {
+		return data;
+	}
 
-  if (
-    data &&
-    typeof data === "object" &&
-    ("response" in data || "statusText" in data || "message" in data)
-  ) {
-    return (
-      data?.response?.data?.error?.message ||
-      data?.statusText ||
-      data?.message ||
-      ""
-    );
-  }
+	if (
+		data &&
+		typeof data === "object" &&
+		("response" in data || "statusText" in data || "message" in data)
+	) {
+		return (
+			data?.response?.data?.error?.message ||
+			data?.statusText ||
+			data?.message ||
+			""
+		);
+	}
 
-  return "";
+	return "";
 };
 
 const createToastMethod =
-  (type: ToastType) =>
-  (
-    data: string | TData | React.ReactNode,
-    title?: string,
-    timeout?: number,
-    withCross?: boolean,
-    centerPosition?: boolean,
-  ) => {
-    const config = TOAST_CONFIGS[type];
-    const finalTitle = title || getTitle(config.defaultTitleKey) || "";
-    const message = processErrorData(data);
+	(type: ToastType) =>
+	(
+		data: string | TData | React.ReactNode,
+		title?: string,
+		timeout?: number,
+		withCross?: boolean,
+		centerPosition?: boolean,
+	) => {
+		const config = TOAST_CONFIGS[type];
+		const finalTitle = title || getTitle(config.defaultTitleKey) || "";
+		const message = processErrorData(data);
 
-    return notify(
-      type,
-      message,
-      finalTitle,
-      timeout ?? DEFAULT_TIMEOUT,
-      withCross,
-      centerPosition,
-    );
-  };
+		return notify(
+			type,
+			message,
+			finalTitle,
+			timeout ?? DEFAULT_TIMEOUT,
+			withCross,
+			centerPosition,
+		);
+	};
 
 const toastr = {
-  success: createToastMethod(ToastType.success),
-  error: createToastMethod(ToastType.error),
-  warning: createToastMethod(ToastType.warning),
-  info: createToastMethod(ToastType.info),
-  clear: () => toast.dismiss(),
-  isActive: (id: Id) => toast.isActive(id),
+	success: createToastMethod(ToastType.success),
+	error: createToastMethod(ToastType.error),
+	warning: createToastMethod(ToastType.warning),
+	info: createToastMethod(ToastType.info),
+	clear: () => toast.dismiss(),
+	isActive: (id: Id) => toast.isActive(id),
 } as const;
 
 export { toastr };

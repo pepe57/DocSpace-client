@@ -30,51 +30,51 @@ import classNames from "classnames";
 
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
 
-import { IconButton } from "../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { IconSizeType } from "../../utils";
 
 import styles from "./IndexIconButtons.module.scss";
 import type { IndexIconButtonsProps } from "./IndexIconButtons.types";
 
 export const IndexIconButtons = ({
-  onUpIndexClick,
-  onDownIndexClick,
-  containerClassName,
-  upIconClassName,
-  downIconClassName,
-  commonIconClassName,
-  style,
+	onUpIndexClick,
+	onDownIndexClick,
+	containerClassName,
+	upIconClassName,
+	downIconClassName,
+	commonIconClassName,
+	style,
 }: IndexIconButtonsProps) => {
-  return (
-    <div
-      className={classNames(styles.container, containerClassName)}
-      style={style}
-      data-testid="index-icon-buttons"
-    >
-      <div className={styles.iconWrapper} onClick={onUpIndexClick}>
-        <IconButton
-          dataTestId="index-up-icon"
-          className={classNames(
-            styles.indexUpIcon,
-            upIconClassName,
-            commonIconClassName,
-          )}
-          iconName={ArrowReactSvgUrl}
-          size={IconSizeType.small}
-        />
-      </div>
-      <div className={styles.iconWrapper} onClick={onDownIndexClick}>
-        <IconButton
-          dataTestId="index-down-icon"
-          className={classNames(
-            styles.indexDownIcon,
-            downIconClassName,
-            commonIconClassName,
-          )}
-          iconName={ArrowReactSvgUrl}
-          size={IconSizeType.small}
-        />
-      </div>
-    </div>
-  );
+	return (
+		<div
+			className={classNames(styles.container, containerClassName)}
+			style={style}
+			data-testid="index-icon-buttons"
+		>
+			<div className={styles.iconWrapper} onClick={onUpIndexClick}>
+				<IconButton
+					dataTestId="index-up-icon"
+					className={classNames(
+						styles.indexUpIcon,
+						upIconClassName,
+						commonIconClassName,
+					)}
+					iconName={ArrowReactSvgUrl}
+					size={IconSizeType.small}
+				/>
+			</div>
+			<div className={styles.iconWrapper} onClick={onDownIndexClick}>
+				<IconButton
+					dataTestId="index-down-icon"
+					className={classNames(
+						styles.indexDownIcon,
+						downIconClassName,
+						commonIconClassName,
+					)}
+					iconName={ArrowReactSvgUrl}
+					size={IconSizeType.small}
+				/>
+			</div>
+		</div>
+	);
 };

@@ -26,81 +26,81 @@
 
 import React from "react";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
-import { IconButton } from "../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { SelectedItemProps } from "./SelectedItem.types";
 import styles from "./SelectedItem.module.scss";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 export const SelectedItemPure = (props: SelectedItemProps) => {
-  const {
-    label,
-    onClose,
-    isDisabled = false,
-    onClick,
-    isInline = true,
-    className,
-    id,
-    propKey,
-    group,
-    forwardedRef,
-    classNameCloseButton,
-    hideCross,
-    title,
-    dataTestId,
-  } = props;
-  if (!label) return null;
+	const {
+		label,
+		onClose,
+		isDisabled = false,
+		onClick,
+		isInline = true,
+		className,
+		id,
+		propKey,
+		group,
+		forwardedRef,
+		classNameCloseButton,
+		hideCross,
+		title,
+		dataTestId,
+	} = props;
+	if (!label) return null;
 
-  const onCloseClick = (e: React.MouseEvent) => {
-    if (!isDisabled) onClose(propKey, label, group || "", e);
-  };
+	const onCloseClick = (e: React.MouseEvent) => {
+		if (!isDisabled) onClose(propKey, label, group || "", e);
+	};
 
-  const handleOnClick = (e: React.MouseEvent<HTMLElement>) => {
-    const target = e.target as HTMLElement;
+	const handleOnClick = (e: React.MouseEvent<HTMLElement>) => {
+		const target = e.target as HTMLElement;
 
-    if (!isDisabled && !target.classList.contains("selected-tag-removed"))
-      onClick?.(propKey, label, group, e);
-  };
+		if (!isDisabled && !target.classList.contains("selected-tag-removed"))
+			onClick?.(propKey, label, group, e);
+	};
 
-  const selectedItemClassNames = [
-    styles.selectedItem,
-    isInline && styles.isInline,
-    isDisabled && styles.disabled,
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+	const selectedItemClassNames = [
+		styles.selectedItem,
+		isInline && styles.isInline,
+		isDisabled && styles.disabled,
+		className,
+	]
+		.filter(Boolean)
+		.join(" ");
 
-  const labelClassNames = [
-    styles.label,
-    "selected-item_label",
-    isDisabled && styles.disabled,
-  ]
-    .filter(Boolean)
-    .join(" ");
+	const labelClassNames = [
+		styles.label,
+		"selected-item_label",
+		isDisabled && styles.disabled,
+	]
+		.filter(Boolean)
+		.join(" ");
 
-  return (
-    <TooltipContainer
-      as="div"
-      onClick={handleOnClick}
-      className={selectedItemClassNames}
-      id={id}
-      ref={forwardedRef}
-      data-testid={dataTestId ?? "selected-item"}
-      title={title}
-    >
-      <div className={labelClassNames}>{label}</div>
-      {!hideCross ? (
-        <IconButton
-          className={`selected-tag-removed ${classNameCloseButton}`}
-          iconName={CrossReactSvgUrl}
-          size={12}
-          onClick={onCloseClick}
-          isFill
-          isDisabled={isDisabled}
-        />
-      ) : null}
-    </TooltipContainer>
-  );
+	return (
+		<TooltipContainer
+			as="div"
+			onClick={handleOnClick}
+			className={selectedItemClassNames}
+			id={id}
+			ref={forwardedRef}
+			data-testid={dataTestId ?? "selected-item"}
+			title={title}
+		>
+			<div className={labelClassNames}>{label}</div>
+			{!hideCross ? (
+				<IconButton
+					className={`selected-tag-removed ${classNameCloseButton}`}
+					iconName={CrossReactSvgUrl}
+					size={12}
+					onClick={onCloseClick}
+					isFill
+					isDisabled={isDisabled}
+				/>
+			) : null}
+		</TooltipContainer>
+	);
 };
 
 const SelectedItem = React.memo(SelectedItemPure);

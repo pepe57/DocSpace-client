@@ -34,7 +34,7 @@ import { useTranslation } from "react-i18next";
 
 import { Heading } from "@docspace/shared/components/heading";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import type { TGetAllPortals } from "@docspace/shared/api/management/types";
 
@@ -43,50 +43,50 @@ import { Bar } from "@/components/bar";
 import styles from "./section.module.scss";
 
 export const Section = ({
-  children,
-  portals,
+	children,
+	portals,
 }: {
-  children: React.ReactNode;
-  portals: TGetAllPortals;
+	children: React.ReactNode;
+	portals: TGetAllPortals;
 }) => {
-  const pathname = usePathname();
-  const router = useRouter();
-  const { t } = useTranslation(["Management", "Common"]);
-  const { tenants } = portals;
-  const showBar = pathname.includes("settings");
-  const barTitle =
-    tenants?.length > 1 ? t("SettingsForAll") : t("SettingsDisabled");
+	const pathname = usePathname();
+	const router = useRouter();
+	const { t } = useTranslation(["Management", "Common"]);
+	const { tenants } = portals;
+	const showBar = pathname.includes("settings");
+	const barTitle =
+		tenants?.length > 1 ? t("SettingsForAll") : t("SettingsDisabled");
 
-  const onBack = () => {
-    router.back();
-  };
+	const onBack = () => {
+		router.back();
+	};
 
-  const { key, isSubPage } = getHeaderByPathname(pathname, t);
+	const { key, isSubPage } = getHeaderByPathname(pathname, t);
 
-  useDocumentTitle(t("Common:SpaceManagement"));
+	useDocumentTitle(t("Common:SpaceManagement"));
 
-  return (
-    <section className={styles.section}>
-      <div className={styles.sectionHeader}>
-        <div className={styles.heading}>
-          {isSubPage ? (
-            <IconButton
-              iconName={ArrowPathReactSvgUrl}
-              size={17}
-              isFill
-              onClick={onBack}
-              className="arrow-button"
-            />
-          ) : null}
-          <Heading className={styles.headline} type="content" truncate>
-            {key}
-          </Heading>
-        </div>
-        {showBar ? <Bar title={barTitle} /> : null}
-      </div>
-      <Scrollbar id="sectionScroll" scrollClass="section-scroll" fixedSize>
-        {children}
-      </Scrollbar>
-    </section>
-  );
+	return (
+		<section className={styles.section}>
+			<div className={styles.sectionHeader}>
+				<div className={styles.heading}>
+					{isSubPage ? (
+						<IconButton
+							iconName={ArrowPathReactSvgUrl}
+							size={17}
+							isFill
+							onClick={onBack}
+							className="arrow-button"
+						/>
+					) : null}
+					<Heading className={styles.headline} type="content" truncate>
+						{key}
+					</Heading>
+				</div>
+				{showBar ? <Bar title={barTitle} /> : null}
+			</div>
+			<Scrollbar id="sectionScroll" scrollClass="section-scroll" fixedSize>
+				{children}
+			</Scrollbar>
+		</section>
+	);
 };

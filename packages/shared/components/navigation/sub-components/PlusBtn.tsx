@@ -28,78 +28,78 @@ import React, { useState, useRef } from "react";
 
 import PlusReactSvgUrl from "PUBLIC_DIR/images/icons/17/plus.svg?url";
 
-import { IconButton } from "../../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import { TPlusButtonProps } from "../Navigation.types";
 import { isMobile } from "../../../utils";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 const PlusButton = ({
-  className,
-  getData,
-  withMenu = true,
-  onPlusClick,
-  isFrame,
-  id,
-  onCloseDropBox,
-  forwardedRef,
-  title,
-  ...rest
+	className,
+	getData,
+	withMenu = true,
+	onPlusClick,
+	isFrame,
+	id,
+	onCloseDropBox,
+	forwardedRef,
+	title,
+	...rest
 }: TPlusButtonProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef<ContextMenuRefType>(null);
+	const [isOpen, setIsOpen] = useState(false);
+	const menuRef = useRef<ContextMenuRefType>(null);
 
-  const toggle = (e: React.MouseEvent<HTMLDivElement>, open: boolean) => {
-    if (open) {
-      menuRef.current?.show(e);
-    } else {
-      menuRef.current?.hide(e);
-    }
+	const toggle = (e: React.MouseEvent<HTMLDivElement>, open: boolean) => {
+		if (open) {
+			menuRef.current?.show(e);
+		} else {
+			menuRef.current?.hide(e);
+		}
 
-    setIsOpen(open);
-  };
+		setIsOpen(open);
+	};
 
-  const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (withMenu) toggle(e, !isOpen);
-    else onPlusClick?.();
-  };
+	const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
+		if (withMenu) toggle(e, !isOpen);
+		else onPlusClick?.();
+	};
 
-  const onHide = () => {
-    setIsOpen(false);
-    onCloseDropBox?.();
-  };
+	const onHide = () => {
+		setIsOpen(false);
+		onCloseDropBox?.();
+	};
 
-  const model = getData();
+	const model = getData();
 
-  return (
-    <TooltipContainer
-      as="div"
-      ref={forwardedRef}
-      className={className}
-      title={title}
-      {...rest}
-      data-testid="plus-button"
-    >
-      <IconButton
-        onClick={onClick}
-        iconName={PlusReactSvgUrl}
-        id={id}
-        size={17}
-        isFill
-      />
-      <ContextMenu
-        model={model}
-        containerRef={forwardedRef}
-        ref={menuRef}
-        onHide={onHide}
-        scaled={false}
-        leftOffset={isFrame ? 190 : 150}
-        headerOnlyMobile
-        ignoreChangeView
-        withBackdrop={isMobile()}
-      />
-    </TooltipContainer>
-  );
+	return (
+		<TooltipContainer
+			as="div"
+			ref={forwardedRef}
+			className={className}
+			title={title}
+			{...rest}
+			data-testid="plus-button"
+		>
+			<IconButton
+				onClick={onClick}
+				iconName={PlusReactSvgUrl}
+				id={id}
+				size={17}
+				isFill
+			/>
+			<ContextMenu
+				model={model}
+				containerRef={forwardedRef}
+				ref={menuRef}
+				onHide={onHide}
+				scaled={false}
+				leftOffset={isFrame ? 190 : 150}
+				headerOnlyMobile
+				ignoreChangeView
+				withBackdrop={isMobile()}
+			/>
+		</TooltipContainer>
+	);
 };
 
 export default PlusButton;

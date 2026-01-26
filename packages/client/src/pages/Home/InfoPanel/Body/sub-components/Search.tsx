@@ -33,7 +33,7 @@ import {
 	InputType,
 	TextInput,
 } from "@docspace/ui-kit/components/text-input";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import commonStyles from "../helpers/Common.module.scss";
 

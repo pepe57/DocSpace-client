@@ -36,80 +36,80 @@ import { ContextMenu, ContextMenuRefType } from "../../../../context-menu";
 import { isDesktop } from "../../../../../utils";
 import { DropDownItem } from "../../../../drop-down-item";
 import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "../../../../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import styles from "../ChatHeader.module.scss";
 
 type ChatListItemProps = {
-  chat: TChat;
-  onClick: (id: TChat["id"]) => void;
-  contextModel: ContextMenuModel[];
-  hoveredChatId?: TChat["id"];
-  setHoveredChatId: (id: TChat["id"]) => void;
-  activeChatId?: TChat["id"];
+	chat: TChat;
+	onClick: (id: TChat["id"]) => void;
+	contextModel: ContextMenuModel[];
+	hoveredChatId?: TChat["id"];
+	setHoveredChatId: (id: TChat["id"]) => void;
+	activeChatId?: TChat["id"];
 };
 
 export const ChatListItem = ({
-  chat,
-  onClick,
-  hoveredChatId,
-  setHoveredChatId,
-  contextModel,
-  activeChatId,
+	chat,
+	onClick,
+	hoveredChatId,
+	setHoveredChatId,
+	contextModel,
+	activeChatId,
 }: ChatListItemProps) => {
-  const contextMenuRef = React.useRef<ContextMenuRefType>(null);
+	const contextMenuRef = React.useRef<ContextMenuRefType>(null);
 
-  const onShowContextMenu = (e: React.MouseEvent<HTMLElement>) => {
-    contextMenuRef.current?.show(e);
-  };
+	const onShowContextMenu = (e: React.MouseEvent<HTMLElement>) => {
+		contextMenuRef.current?.show(e);
+	};
 
-  const desktop = isDesktop();
+	const desktop = isDesktop();
 
-  return (
-    <DropDownItem
-      key={chat.id}
-      onClick={(e) => {
-        e.stopPropagation();
+	return (
+		<DropDownItem
+			key={chat.id}
+			onClick={(e) => {
+				e.stopPropagation();
 
-        const target = e.target as HTMLElement;
-        const iconButtonWrapper = target.closest(
-          `.${styles.iconButtonWrapper}`,
-        );
+				const target = e.target as HTMLElement;
+				const iconButtonWrapper = target.closest(
+					`.${styles.iconButtonWrapper}`,
+				);
 
-        if (iconButtonWrapper) {
-          return;
-        }
+				if (iconButtonWrapper) {
+					return;
+				}
 
-        onClick(chat.id);
-      }}
-      className={classNames("drop-down-item")}
-      isActive={activeChatId === chat.id}
-      data-id={chat.id}
-    >
-      <div
-        className={styles.dropdowItemWrapper}
-        onMouseEnter={() => setHoveredChatId(chat.id)}
-      >
-        <Text className={styles.chatListItemTitle} truncate title={chat.title}>
-          {chat.title}
-        </Text>
-        {hoveredChatId === chat.id || !desktop ? (
-          <div className={styles.iconButtonWrapper} onClick={onShowContextMenu}>
-            <IconButton
-              iconName={VerticalDotsReactSvgUrl}
-              size={16}
-              isClickable
-              isFill
-              onClick={() => {}}
-              dataTestId="chat-list-item-context-menu-button"
-            />
-            <ContextMenu
-              ref={contextMenuRef}
-              model={contextModel}
-              dataTestId="chat-list-item-context-menu"
-            />
-          </div>
-        ) : null}
-      </div>
-    </DropDownItem>
-  );
+				onClick(chat.id);
+			}}
+			className={classNames("drop-down-item")}
+			isActive={activeChatId === chat.id}
+			data-id={chat.id}
+		>
+			<div
+				className={styles.dropdowItemWrapper}
+				onMouseEnter={() => setHoveredChatId(chat.id)}
+			>
+				<Text className={styles.chatListItemTitle} truncate title={chat.title}>
+					{chat.title}
+				</Text>
+				{hoveredChatId === chat.id || !desktop ? (
+					<div className={styles.iconButtonWrapper} onClick={onShowContextMenu}>
+						<IconButton
+							iconName={VerticalDotsReactSvgUrl}
+							size={16}
+							isClickable
+							isFill
+							onClick={() => {}}
+							dataTestId="chat-list-item-context-menu-button"
+						/>
+						<ContextMenu
+							ref={contextMenuRef}
+							model={contextModel}
+							dataTestId="chat-list-item-context-menu"
+						/>
+					</div>
+				) : null}
+			</div>
+		</DropDownItem>
+	);
 };

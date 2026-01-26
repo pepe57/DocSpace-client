@@ -47,377 +47,377 @@ import { ContextMenuButton } from "../context-menu-button";
 import { DeleteThirdPartyDialog } from "../../dialogs/delete-third-party";
 import { FilesSelectorInput } from "../files-selector-input";
 import { isNullOrUndefined } from "../../utils/typeGuards";
-import { IconButton } from "../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { useDidMount } from "../../hooks/useDidMount";
 import { useUnmount } from "../../hooks/useUnmount";
 import type { ConnectedThirdPartyAccountType } from "../../types";
 
 import { initialState } from "./DirectThirdPartyConnection.constants";
 import {
-  DirectThirdPartyConnectionState,
-  DirectThirdPartyConnectionProps,
+	DirectThirdPartyConnectionState,
+	DirectThirdPartyConnectionProps,
 } from "./DirectThirdPartyConnection.types";
 import styles from "./DirectThirdPartyConnection.module.scss";
 
 const reducer: Reducer<
-  DirectThirdPartyConnectionState,
-  Partial<DirectThirdPartyConnectionState>
+	DirectThirdPartyConnectionState,
+	Partial<DirectThirdPartyConnectionState>
 > = (prevState, newState) => ({ ...prevState, ...newState });
 
 const DirectThirdPartyConnection = ({
-  className,
-  openConnectWindow,
-  onSelectFolder,
-  isDisabled,
-  isError,
-  id,
-  withoutInitPath,
-  connectDialogVisible,
-  setConnectDialogVisible,
-  setDeleteThirdPartyDialogVisible,
-  deleteThirdPartyDialogVisible,
-  clearLocalStorage,
-  setSelectedThirdPartyAccount,
-  connectedThirdPartyAccount,
-  selectedThirdPartyAccount,
-  buttonSize,
-  isTheSameThirdPartyAccount,
-  onSelectFile,
-  filterParam,
-  descriptionText,
-  isMobileScale,
-  accounts,
-  setThirdPartyAccountsInfo,
-  isSelect,
-  isSelectFolder,
-  setDefaultFolderId,
-  // DeleteThirdPartyDialog
-  deleteThirdParty,
-  setConnectedThirdPartyAccount,
-  setThirdPartyProviders,
-  providers,
-  removeItem,
+	className,
+	openConnectWindow,
+	onSelectFolder,
+	isDisabled,
+	isError,
+	id,
+	withoutInitPath,
+	connectDialogVisible,
+	setConnectDialogVisible,
+	setDeleteThirdPartyDialogVisible,
+	deleteThirdPartyDialogVisible,
+	clearLocalStorage,
+	setSelectedThirdPartyAccount,
+	connectedThirdPartyAccount,
+	selectedThirdPartyAccount,
+	buttonSize,
+	isTheSameThirdPartyAccount,
+	onSelectFile,
+	filterParam,
+	descriptionText,
+	isMobileScale,
+	accounts,
+	setThirdPartyAccountsInfo,
+	isSelect,
+	isSelectFolder,
+	setDefaultFolderId,
+	// DeleteThirdPartyDialog
+	deleteThirdParty,
+	setConnectedThirdPartyAccount,
+	setThirdPartyProviders,
+	providers,
+	removeItem,
 
-  // FilesSelectorInput
-  filesSelectorSettings,
-  basePath,
-  isErrorPath,
-  newPath,
-  setBasePath,
-  setNewPath,
-  toDefault,
-  checkCreating = false,
-  dataTestId,
+	// FilesSelectorInput
+	filesSelectorSettings,
+	basePath,
+	isErrorPath,
+	newPath,
+	setBasePath,
+	setNewPath,
+	toDefault,
+	checkCreating = false,
+	dataTestId,
 }: DirectThirdPartyConnectionProps) => {
-  const [state, setState] = useReducer(reducer, initialState);
+	const [state, setState] = useReducer(reducer, initialState);
 
-  const { t } = useTranslation(["Common"]);
+	const { t } = useTranslation(["Common"]);
 
-  const onSetSettings = async () => {
-    try {
-      setState({
-        isLoading: true,
-      });
+	const onSetSettings = async () => {
+		try {
+			setState({
+				isLoading: true,
+			});
 
-      await setThirdPartyAccountsInfo(t);
-    } catch (e) {
-      if (!e) return;
-      toastr.error(e);
-    } finally {
-      setState({
-        isLoading: false,
-        isUpdatingInfo: false,
-        isInitialLoading: false,
-      });
-    }
-  };
+			await setThirdPartyAccountsInfo(t);
+		} catch (e) {
+			if (!e) return;
+			toastr.error(e);
+		} finally {
+			setState({
+				isLoading: false,
+				isUpdatingInfo: false,
+				isInitialLoading: false,
+			});
+		}
+	};
 
-  useDidMount(() => {
-    onSetSettings();
-  });
+	useDidMount(() => {
+		onSetSettings();
+	});
 
-  useUnmount(() => {
-    setSelectedThirdPartyAccount(null);
-  });
+	useUnmount(() => {
+		setSelectedThirdPartyAccount(null);
+	});
 
-  const saveSettings = async (
-    token = "",
-    urlValue = "",
-    loginValue = "",
-    passwordValue = "",
-  ) => {
-    if (isNullOrUndefined(selectedThirdPartyAccount)) return;
+	const saveSettings = async (
+		token = "",
+		urlValue = "",
+		loginValue = "",
+		passwordValue = "",
+	) => {
+		if (isNullOrUndefined(selectedThirdPartyAccount)) return;
 
-    const { label, key, provider_id } = selectedThirdPartyAccount;
+		const { label, key, provider_id } = selectedThirdPartyAccount;
 
-    setState({ isLoading: true, isUpdatingInfo: true });
-    if (connectDialogVisible) setConnectDialogVisible(false);
-    onSelectFolder?.("");
+		setState({ isLoading: true, isUpdatingInfo: true });
+		if (connectDialogVisible) setConnectDialogVisible(false);
+		onSelectFolder?.("");
 
-    try {
-      await saveSettingsThirdParty(
-        urlValue,
-        loginValue,
-        passwordValue,
-        token,
-        false,
-        label,
-        key,
-        provider_id ?? "",
-      );
+		try {
+			await saveSettingsThirdParty(
+				urlValue,
+				loginValue,
+				passwordValue,
+				token,
+				false,
+				label,
+				key,
+				provider_id ?? "",
+			);
 
-      await setThirdPartyAccountsInfo(t);
-    } catch (e) {
-      toastr.error(e as Error);
-    } finally {
-      setState({ isLoading: false, isUpdatingInfo: false });
-    }
-  };
+			await setThirdPartyAccountsInfo(t);
+		} catch (e) {
+			toastr.error(e as Error);
+		} finally {
+			setState({ isLoading: false, isUpdatingInfo: false });
+		}
+	};
 
-  const onConnect = () => {
-    clearLocalStorage();
-    onSelectFolder?.("");
+	const onConnect = () => {
+		clearLocalStorage();
+		onSelectFolder?.("");
 
-    if (isNullOrUndefined(selectedThirdPartyAccount)) return;
+		if (isNullOrUndefined(selectedThirdPartyAccount)) return;
 
-    const { key, provider_link: directConnection } = selectedThirdPartyAccount;
+		const { key, provider_link: directConnection } = selectedThirdPartyAccount;
 
-    if (directConnection) {
-      const authModal = window.open(
-        "",
-        t("Common:Authorization"),
-        "height=600, width=1020",
-      );
+		if (directConnection) {
+			const authModal = window.open(
+				"",
+				t("Common:Authorization"),
+				"height=600, width=1020",
+			);
 
-      openConnectWindow(key, authModal)
-        .then((modal) => getOAuthToken(modal))
-        .then((token) => {
-          authModal?.close();
-          saveSettings(token);
-        })
-        .catch((e) => {
-          if (!e) return;
-          toastr.error(e);
-          console.error(e);
-        });
-    } else {
-      setConnectDialogVisible(true);
-    }
-  };
+			openConnectWindow(key, authModal)
+				.then((modal) => getOAuthToken(modal))
+				.then((token) => {
+					authModal?.close();
+					saveSettings(token);
+				})
+				.catch((e) => {
+					if (!e) return;
+					toastr.error(e);
+					console.error(e);
+				});
+		} else {
+			setConnectDialogVisible(true);
+		}
+	};
 
-  const onSelectAccount = (name: string) => {
-    const account = accounts.find((acc) => acc.name === name);
+	const onSelectAccount = (name: string) => {
+		const account = accounts.find((acc) => acc.name === name);
 
-    if (!account?.connected) {
-      // setSelectedThirdPartyAccount({
-      //   key: "0",
-      //   label: selectedThirdPartyAccount?.label,
-      // });
+		if (!account?.connected) {
+			// setSelectedThirdPartyAccount({
+			//   key: "0",
+			//   label: selectedThirdPartyAccount?.label,
+			// });
 
-      return window.open(`${THIRD_PARTY_SERVICES_URL}${name}`, "_blank");
-    }
+			return window.open(`${THIRD_PARTY_SERVICES_URL}${name}`, "_blank");
+		}
 
-    setSelectedThirdPartyAccount(account);
-  };
+		setSelectedThirdPartyAccount(account);
+	};
 
-  const onDisconnect = () => {
-    clearLocalStorage();
-    setDeleteThirdPartyDialogVisible(true);
-  };
-  const getContextOptions = () => {
-    return [
-      {
-        key: "connection-settings",
-        label: t("Common:Reconnect"),
-        onClick: onConnect,
-        disabled: false,
-        icon: RefreshReactSvgUrl,
-        dataTestId: "connection_settings_option",
-      },
-      {
-        key: "Disconnect-settings",
-        label: t("Common:Disconnect"),
-        onClick: onDisconnect,
-        disabled: false,
-        icon: AccessNoneReactSvgUrl,
-        dataTestId: "disconnect_settings_option",
-      },
-    ];
-  };
+	const onDisconnect = () => {
+		clearLocalStorage();
+		setDeleteThirdPartyDialogVisible(true);
+	};
+	const getContextOptions = () => {
+		return [
+			{
+				key: "connection-settings",
+				label: t("Common:Reconnect"),
+				onClick: onConnect,
+				disabled: false,
+				icon: RefreshReactSvgUrl,
+				dataTestId: "connection_settings_option",
+			},
+			{
+				key: "Disconnect-settings",
+				label: t("Common:Disconnect"),
+				onClick: onDisconnect,
+				disabled: false,
+				icon: AccessNoneReactSvgUrl,
+				dataTestId: "disconnect_settings_option",
+			},
+		];
+	};
 
-  const { isLoading, isInitialLoading } = state;
+	const { isLoading, isInitialLoading } = state;
 
-  const isDisabledComponent =
-    isDisabled || isInitialLoading || isLoading || accounts.length === 0;
+	const isDisabledComponent =
+		isDisabled || isInitialLoading || isLoading || accounts.length === 0;
 
-  const isDisabledSelector = isLoading || isDisabled;
+	const isDisabledSelector = isLoading || isDisabled;
 
-  const folderList: Partial<ConnectedThirdPartyAccountType> =
-    connectedThirdPartyAccount ?? {};
+	const folderList: Partial<ConnectedThirdPartyAccountType> =
+		connectedThirdPartyAccount ?? {};
 
-  const advancedOptions = (
-    <div style={{ display: "contents" }}>
-      {accounts?.map((item) => {
-        return (
-          <div
-            key={`${item.key}_${item.name}`}
-            className={classNames(styles.comboboxItem, {
-              [styles.isDisabled]: item.disabled,
-            })}
-          >
-            <DropDownItem
-              onClick={() => onSelectAccount(item.name)}
-              className={item.className}
-              data-third-party-key={item.key}
-              disabled={item.disabled}
-              testId={buildDataTestId(
-                dataTestId,
-                `${item.key}_${item.name}_option`,
-              )}
-            >
-              <Text
-                className={classNames(
-                  styles.dropDownItemText,
-                  "drop-down-item_text",
-                )}
-                fontWeight={600}
-              >
-                {item.title}
-              </Text>
+	const advancedOptions = (
+		<div style={{ display: "contents" }}>
+			{accounts?.map((item) => {
+				return (
+					<div
+						key={`${item.key}_${item.name}`}
+						className={classNames(styles.comboboxItem, {
+							[styles.isDisabled]: item.disabled,
+						})}
+					>
+						<DropDownItem
+							onClick={() => onSelectAccount(item.name)}
+							className={item.className}
+							data-third-party-key={item.key}
+							disabled={item.disabled}
+							testId={buildDataTestId(
+								dataTestId,
+								`${item.key}_${item.name}_option`,
+							)}
+						>
+							<Text
+								className={classNames(
+									styles.dropDownItemText,
+									"drop-down-item_text",
+								)}
+								fontWeight={600}
+							>
+								{item.title}
+							</Text>
 
-              {!item.disabled && !item.connected ? (
-                <IconButton
-                  className={classNames(
-                    styles.dropDownItemIcon,
-                    "drop-down-item_icon",
-                  )}
-                  size={16}
-                  onClick={() => onSelectAccount(item.name)}
-                  iconName={ExternalLinkReactSvgUrl}
-                  isFill
-                />
-              ) : null}
-            </DropDownItem>
-          </div>
-        );
-      })}
-    </div>
-  );
+							{!item.disabled && !item.connected ? (
+								<IconButton
+									className={classNames(
+										styles.dropDownItemIcon,
+										"drop-down-item_icon",
+									)}
+									size={16}
+									onClick={() => onSelectAccount(item.name)}
+									iconName={ExternalLinkReactSvgUrl}
+									isFill
+								/>
+							) : null}
+						</DropDownItem>
+					</div>
+				);
+			})}
+		</div>
+	);
 
-  const isConnectedAccount =
-    Boolean(connectedThirdPartyAccount) && isTheSameThirdPartyAccount;
+	const isConnectedAccount =
+		Boolean(connectedThirdPartyAccount) && isTheSameThirdPartyAccount;
 
-  return (
-    <div
-      className={classNames(styles.directThirdPartyConnection, className, {
-        [styles.isConnectedAccount]: isConnectedAccount,
-        [styles.isMobileScale]: isMobileScale,
-      })}
-    >
-      <div className={classNames(styles.backupConnection, "backup_connection")}>
-        <ComboBox
-          scaled
-          options={[]}
-          displayArrow
-          scaledOptions
-          isDefaultMode
-          noBorder={false}
-          showDisabledItems
-          directionY="both"
-          manualWidth="auto"
-          onSelect={() => {}}
-          displaySelectedOption
-          hideMobileView={false}
-          forceCloseClickOutside
-          className="thirdparty-combobox"
-          advancedOptions={advancedOptions}
-          isDisabled={isLoading}
-          selectedOption={{
-            key: 0,
-            label: selectedThirdPartyAccount?.label ?? "",
-          }}
-          dataTestId={buildDataTestId(dataTestId, "accounts_combobox")}
-          dropDownTestId={buildDataTestId(dataTestId, "accounts_dropdown")}
-        />
+	return (
+		<div
+			className={classNames(styles.directThirdPartyConnection, className, {
+				[styles.isConnectedAccount]: isConnectedAccount,
+				[styles.isMobileScale]: isMobileScale,
+			})}
+		>
+			<div className={classNames(styles.backupConnection, "backup_connection")}>
+				<ComboBox
+					scaled
+					options={[]}
+					displayArrow
+					scaledOptions
+					isDefaultMode
+					noBorder={false}
+					showDisabledItems
+					directionY="both"
+					manualWidth="auto"
+					onSelect={() => {}}
+					displaySelectedOption
+					hideMobileView={false}
+					forceCloseClickOutside
+					className="thirdparty-combobox"
+					advancedOptions={advancedOptions}
+					isDisabled={isLoading}
+					selectedOption={{
+						key: 0,
+						label: selectedThirdPartyAccount?.label ?? "",
+					}}
+					dataTestId={buildDataTestId(dataTestId, "accounts_combobox")}
+					dropDownTestId={buildDataTestId(dataTestId, "accounts_dropdown")}
+				/>
 
-        {connectedThirdPartyAccount?.id &&
-        selectedThirdPartyAccount &&
-        isTheSameThirdPartyAccount ? (
-          <ContextMenuButton
-            zIndex={402}
-            className={classNames(
-              styles.backupThirdPartyContext,
-              "backup_third-party-context",
-            )}
-            iconName={VerticalDotsReactSvgUrl}
-            size={15}
-            getData={getContextOptions}
-            isDisabled={isDisabledComponent}
-            displayIconBorder
-            testId={buildDataTestId(dataTestId, "accounts_context_button")}
-          />
-        ) : null}
-      </div>
+				{connectedThirdPartyAccount?.id &&
+				selectedThirdPartyAccount &&
+				isTheSameThirdPartyAccount ? (
+					<ContextMenuButton
+						zIndex={402}
+						className={classNames(
+							styles.backupThirdPartyContext,
+							"backup_third-party-context",
+						)}
+						iconName={VerticalDotsReactSvgUrl}
+						size={15}
+						getData={getContextOptions}
+						isDisabled={isDisabledComponent}
+						displayIconBorder
+						testId={buildDataTestId(dataTestId, "accounts_context_button")}
+					/>
+				) : null}
+			</div>
 
-      {!connectedThirdPartyAccount?.id || !isTheSameThirdPartyAccount ? (
-        <Button
-          id="connect-button"
-          primary
-          label={t("Common:Connect")}
-          onClick={onConnect}
-          size={buttonSize}
-          isDisabled={isDisabledComponent || !selectedThirdPartyAccount}
-          testId={
-            buildDataTestId(dataTestId, "connect_account_button") ??
-            "connect-button"
-          }
-        />
-      ) : (
-        folderList.id &&
-        selectedThirdPartyAccount && (
-          <FilesSelectorInput
-            className="restore-backup_input"
-            descriptionText={descriptionText}
-            filterParam={filterParam}
-            rootThirdPartyId={selectedThirdPartyAccount.id}
-            onSelectFolder={onSelectFolder}
-            onSelectFile={onSelectFile}
-            id={id ?? folderList.id}
-            withoutInitPath={withoutInitPath}
-            isError={isError}
-            isDisabled={isDisabledSelector}
-            isThirdParty
-            isSelectFolder={isSelectFolder}
-            isSelect={isSelect}
-            checkCreating={checkCreating}
-            filesSelectorSettings={filesSelectorSettings}
-            newPath={newPath}
-            basePath={basePath}
-            isErrorPath={isErrorPath}
-            setBasePath={setBasePath}
-            toDefault={toDefault}
-            setNewPath={setNewPath}
-            dataTestId={buildDataTestId(dataTestId, "files_selector")}
-          />
-        )
-      )}
-      {deleteThirdPartyDialogVisible ? (
-        <DeleteThirdPartyDialog
-          updateInfo={() => setThirdPartyAccountsInfo(t)}
-          key="thirdparty-delete-dialog"
-          isConnectionViaBackupModule
-          visible={deleteThirdPartyDialogVisible}
-          deleteThirdParty={deleteThirdParty}
-          setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
-          {...(setDefaultFolderId && { setDefaultFolderId })}
-          setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
-          setThirdPartyProviders={setThirdPartyProviders}
-          providers={providers}
-          removeItem={removeItem}
-        />
-      ) : null}
-    </div>
-  );
+			{!connectedThirdPartyAccount?.id || !isTheSameThirdPartyAccount ? (
+				<Button
+					id="connect-button"
+					primary
+					label={t("Common:Connect")}
+					onClick={onConnect}
+					size={buttonSize}
+					isDisabled={isDisabledComponent || !selectedThirdPartyAccount}
+					testId={
+						buildDataTestId(dataTestId, "connect_account_button") ??
+						"connect-button"
+					}
+				/>
+			) : (
+				folderList.id &&
+				selectedThirdPartyAccount && (
+					<FilesSelectorInput
+						className="restore-backup_input"
+						descriptionText={descriptionText}
+						filterParam={filterParam}
+						rootThirdPartyId={selectedThirdPartyAccount.id}
+						onSelectFolder={onSelectFolder}
+						onSelectFile={onSelectFile}
+						id={id ?? folderList.id}
+						withoutInitPath={withoutInitPath}
+						isError={isError}
+						isDisabled={isDisabledSelector}
+						isThirdParty
+						isSelectFolder={isSelectFolder}
+						isSelect={isSelect}
+						checkCreating={checkCreating}
+						filesSelectorSettings={filesSelectorSettings}
+						newPath={newPath}
+						basePath={basePath}
+						isErrorPath={isErrorPath}
+						setBasePath={setBasePath}
+						toDefault={toDefault}
+						setNewPath={setNewPath}
+						dataTestId={buildDataTestId(dataTestId, "files_selector")}
+					/>
+				)
+			)}
+			{deleteThirdPartyDialogVisible ? (
+				<DeleteThirdPartyDialog
+					updateInfo={() => setThirdPartyAccountsInfo(t)}
+					key="thirdparty-delete-dialog"
+					isConnectionViaBackupModule
+					visible={deleteThirdPartyDialogVisible}
+					deleteThirdParty={deleteThirdParty}
+					setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
+					{...(setDefaultFolderId && { setDefaultFolderId })}
+					setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
+					setThirdPartyProviders={setThirdPartyProviders}
+					providers={providers}
+					removeItem={removeItem}
+				/>
+			) : null}
+		</div>
+	);
 };
 
 export default DirectThirdPartyConnection;

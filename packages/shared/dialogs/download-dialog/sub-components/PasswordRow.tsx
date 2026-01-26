@@ -38,7 +38,7 @@ import ProtectedReactSvgUrl from "PUBLIC_DIR/images/icons/16/protected.react.svg
 import type { ContextMenuModel } from "../../../components/context-menu";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { IconButton } from "../../../components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ContextMenuButton } from "../../../components/context-menu-button";
 import { SimulatePassword } from "../../../components/simulate-password";
 
@@ -46,160 +46,160 @@ import { isFile, type PasswordRowProps } from "../DownloadDialog.types";
 import styles from "../DownloadDialog.module.scss";
 
 export const PasswordRow = ({
-  item,
-  resetDownloadedFileFormat,
-  discardDownloadedFile,
-  updateDownloadedFilePassword,
-  getItemIcon,
-  type,
+	item,
+	resetDownloadedFileFormat,
+	discardDownloadedFile,
+	updateDownloadedFilePassword,
+	getItemIcon,
+	type,
 }: PasswordRowProps) => {
-  const [showPasswordInput, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
+	const [showPasswordInput, setShowPassword] = useState(false);
+	const [password, setPassword] = useState("");
 
-  const { t } = useTranslation(["Common"]);
-  const inputRef = useRef(null);
+	const { t } = useTranslation(["Common"]);
+	const inputRef = useRef(null);
 
-  const onInputClick = useCallback(() => {
-    const newState = !showPasswordInput;
+	const onInputClick = useCallback(() => {
+		const newState = !showPasswordInput;
 
-    setShowPassword(newState);
-  }, [showPasswordInput]);
+		setShowPassword(newState);
+	}, [showPasswordInput]);
 
-  const onButtonClick = useCallback(() => {
-    onInputClick();
-    updateDownloadedFilePassword(item.id, password, type);
-  }, [item.id, onInputClick, password, type, updateDownloadedFilePassword]);
+	const onButtonClick = useCallback(() => {
+		onInputClick();
+		updateDownloadedFilePassword(item.id, password, type);
+	}, [item.id, onInputClick, password, type, updateDownloadedFilePassword]);
 
-  const onChangePassword = useCallback((pwd: string) => {
-    setPassword(pwd);
-  }, []);
+	const onChangePassword = useCallback((pwd: string) => {
+		setPassword(pwd);
+	}, []);
 
-  const onChangeInOriginal = () => {
-    if (!isFile(item)) return;
+	const onChangeInOriginal = () => {
+		if (!isFile(item)) return;
 
-    resetDownloadedFileFormat(item.id, item.fileExst, type);
-  };
+		resetDownloadedFileFormat(item.id, item.fileExst, type);
+	};
 
-  const removeFromList = () => {
-    discardDownloadedFile(item.id, type);
-  };
+	const removeFromList = () => {
+		discardDownloadedFile(item.id, type);
+	};
 
-  const onKeyUp = useCallback(
-    (event: KeyboardEvent) => {
-      if ((!showPasswordInput && type === "password") || !password) return;
+	const onKeyUp = useCallback(
+		(event: KeyboardEvent) => {
+			if ((!showPasswordInput && type === "password") || !password) return;
 
-      event.stopPropagation();
-      event.preventDefault();
+			event.stopPropagation();
+			event.preventDefault();
 
-      if (event.key === "Enter") {
-        onButtonClick();
-      }
-    },
-    [onButtonClick, password, showPasswordInput, type],
-  );
+			if (event.key === "Enter") {
+				onButtonClick();
+			}
+		},
+		[onButtonClick, password, showPasswordInput, type],
+	);
 
-  useEffect(() => {
-    window.addEventListener("keyup", onKeyUp, true);
+	useEffect(() => {
+		window.addEventListener("keyup", onKeyUp, true);
 
-    return () => {
-      window.removeEventListener("keyup", onKeyUp, true);
-    };
-  }, [onKeyUp]);
+		return () => {
+			window.removeEventListener("keyup", onKeyUp, true);
+		};
+	}, [onKeyUp]);
 
-  const getOptions = () => {
-    const options: ContextMenuModel[] = [];
+	const getOptions = () => {
+		const options: ContextMenuModel[] = [];
 
-    if (type !== "original") {
-      options.push({
-        key: "original-format",
-        label: t("Common:OriginalFormat"),
-        onClick: onChangeInOriginal,
-        disabled: false,
-        icon: DownloadAsReactSvgUrl,
-      });
-    }
+		if (type !== "original") {
+			options.push({
+				key: "original-format",
+				label: t("Common:OriginalFormat"),
+				onClick: onChangeInOriginal,
+				disabled: false,
+				icon: DownloadAsReactSvgUrl,
+			});
+		}
 
-    options.push({
-      key: "enter-password",
-      label: t("Common:EnterPassword"),
-      onClick: onInputClick,
-      disabled: false,
-      icon: ProtectedReactSvgUrl,
-    });
+		options.push({
+			key: "enter-password",
+			label: t("Common:EnterPassword"),
+			onClick: onInputClick,
+			disabled: false,
+			icon: ProtectedReactSvgUrl,
+		});
 
-    if (type !== "remove") {
-      options.push({
-        key: "remove",
-        label: t("Common:RemoveFromList"),
-        onClick: removeFromList,
-        disabled: false,
-        icon: RemoveIcon,
-      });
-    }
+		if (type !== "remove") {
+			options.push({
+				key: "remove",
+				label: t("Common:RemoveFromList"),
+				onClick: removeFromList,
+				disabled: false,
+				icon: RemoveIcon,
+			});
+		}
 
-    return options;
-  };
+		return options;
+	};
 
-  const element = getItemIcon(item);
+	const element = getItemIcon(item);
 
-  return (
-    <div className={styles.downloadContent}>
-      <div className={styles.downloadDialogRow}>
-        <div
-          className={classNames(
-            styles.downloadDialogMainContent,
-            styles.passwordContent,
-          )}
-          onClick={onInputClick}
-        >
-          <IconButton
-            className={styles.removeIcon}
-            size={16}
-            iconName={ProtectedReactSvgUrl}
-            onClick={onInputClick}
-            color={showPasswordInput ? "accent" : undefined}
-          />
-          <div>{element}</div>
-          <Text
-            fontWeight="600"
-            fontSize="14px"
-            className={styles.passwordTitle}
-            dir="auto"
-            truncate
-          >
-            {item.title}
-          </Text>
-        </div>
-        <div className={styles.downloadDialogActions}>
-          <ContextMenuButton
-            className="expandButton"
-            directionX="left"
-            getData={getOptions}
-            title={t("Common:Actions")}
-            isDisabled={false}
-            usePortal
-            iconName={VerticalDotsReactSvgUrl}
-          />
-        </div>
-      </div>
-      {showPasswordInput ? (
-        <div className={styles.passwordInput}>
-          <SimulatePassword
-            onChange={onChangePassword}
-            forwardedRef={inputRef}
-            inputValue={password}
-          />
-          <Button
-            id="conversion-button"
-            size={ButtonSize.small}
-            scale
-            primary
-            label={t("Common:SaveButton")}
-            onClick={onButtonClick}
-            isDisabled={!password}
-          />
-        </div>
-      ) : null}
-    </div>
-  );
+	return (
+		<div className={styles.downloadContent}>
+			<div className={styles.downloadDialogRow}>
+				<div
+					className={classNames(
+						styles.downloadDialogMainContent,
+						styles.passwordContent,
+					)}
+					onClick={onInputClick}
+				>
+					<IconButton
+						className={styles.removeIcon}
+						size={16}
+						iconName={ProtectedReactSvgUrl}
+						onClick={onInputClick}
+						color={showPasswordInput ? "accent" : undefined}
+					/>
+					<div>{element}</div>
+					<Text
+						fontWeight="600"
+						fontSize="14px"
+						className={styles.passwordTitle}
+						dir="auto"
+						truncate
+					>
+						{item.title}
+					</Text>
+				</div>
+				<div className={styles.downloadDialogActions}>
+					<ContextMenuButton
+						className="expandButton"
+						directionX="left"
+						getData={getOptions}
+						title={t("Common:Actions")}
+						isDisabled={false}
+						usePortal
+						iconName={VerticalDotsReactSvgUrl}
+					/>
+				</div>
+			</div>
+			{showPasswordInput ? (
+				<div className={styles.passwordInput}>
+					<SimulatePassword
+						onChange={onChangePassword}
+						forwardedRef={inputRef}
+						inputValue={password}
+					/>
+					<Button
+						id="conversion-button"
+						size={ButtonSize.small}
+						scale
+						primary
+						label={t("Common:SaveButton")}
+						onClick={onButtonClick}
+						isDisabled={!password}
+					/>
+				</div>
+			) : null}
+		</div>
+	);
 };

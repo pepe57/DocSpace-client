@@ -68,7 +68,7 @@ import { Context, Provider, Consumer } from "./context";
 import commonIconsStyles, {
   IconSizeType,
   isIconSizeType,
-} from "./common-icons-style";
+} from "@docspace/ui-kit/utils/common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
 import { NoUserSelect } from "./commonStyles";

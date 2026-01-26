@@ -28,7 +28,7 @@ import { inject, observer } from "mobx-react";
 
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
@@ -36,103 +36,103 @@ import { globalColors } from "@docspace/shared/themes";
 import styles from "../../active-sessions.module.scss";
 
 const SessionsTableRow = (props) => {
-  const {
-    item,
-    hideColumns,
-    currentSession,
-    setPlatformModalData,
-    setLogoutDialogVisible,
-    locale,
-  } = props;
+	const {
+		item,
+		hideColumns,
+		currentSession,
+		setPlatformModalData,
+		setLogoutDialogVisible,
+		locale,
+	} = props;
 
-  const { platform, browser, date, country, city, ip } = item;
+	const { platform, browser, date, country, city, ip } = item;
 
-  const showRemoveIcon = currentSession !== item.id;
-  const showTickIcon = currentSession === item.id;
+	const showRemoveIcon = currentSession !== item.id;
+	const showTickIcon = currentSession === item.id;
 
-  const onRemoveClick = () => {
-    setLogoutDialogVisible(true);
-    setPlatformModalData({
-      id: item?.id,
-      platform: item?.platform,
-      browser: item?.browser,
-    });
-  };
+	const onRemoveClick = () => {
+		setLogoutDialogVisible(true);
+		setPlatformModalData({
+			id: item?.id,
+			platform: item?.platform,
+			browser: item?.browser,
+		});
+	};
 
-  return (
-    <TableRow
-      key={item.id}
-      hideColumns={hideColumns}
-      dataTestId={`session_row_${item.id}`}
-    >
-      <TableCell>
-        <Text className={styles.sessionPlatform} dataTestId="session_platform">
-          {platform}
-        </Text>
-        <Text
-          className={styles.sessionInfo}
-          dataTestId="session_browser"
-        >{`(${browser})`}</Text>
-        {showTickIcon ? (
-          <IconButton
-            size={12}
-            className={styles.tickIcon}
-            color={globalColors.tickColor}
-            iconName={TickSvgUrl}
-          />
-        ) : null}
-      </TableCell>
+	return (
+		<TableRow
+			key={item.id}
+			hideColumns={hideColumns}
+			dataTestId={`session_row_${item.id}`}
+		>
+			<TableCell>
+				<Text className={styles.sessionPlatform} dataTestId="session_platform">
+					{platform}
+				</Text>
+				<Text
+					className={styles.sessionInfo}
+					dataTestId="session_browser"
+				>{`(${browser})`}</Text>
+				{showTickIcon ? (
+					<IconButton
+						size={12}
+						className={styles.tickIcon}
+						color={globalColors.tickColor}
+						iconName={TickSvgUrl}
+					/>
+				) : null}
+			</TableCell>
 
-      <TableCell>
-        <Text className={styles.sessionInfo} truncate dataTestId="session_date">
-          {getCorrectDate(locale, date)}
-        </Text>
-      </TableCell>
+			<TableCell>
+				<Text className={styles.sessionInfo} truncate dataTestId="session_date">
+					{getCorrectDate(locale, date)}
+				</Text>
+			</TableCell>
 
-      <TableCell>
-        <Text
-          className={styles.sessionInfo}
-          truncate
-          dataTestId="session_location"
-        >
-          {country || city ? (
-            <>
-              {country}
-              {country && city ? ", " : null}
-              {city}
-              <span className="divider" />
-            </>
-          ) : null}
-          {ip}
-        </Text>
-      </TableCell>
+			<TableCell>
+				<Text
+					className={styles.sessionInfo}
+					truncate
+					dataTestId="session_location"
+				>
+					{country || city ? (
+						<>
+							{country}
+							{country && city ? ", " : null}
+							{city}
+							<span className="divider" />
+						</>
+					) : null}
+					{ip}
+				</Text>
+			</TableCell>
 
-      {showRemoveIcon ? (
-        <TableCell className={styles.removeCell}>
-          <IconButton
-            size={20}
-            iconName={RemoveSessionSvgUrl}
-            isClickable
-            onClick={onRemoveClick}
-            dataTestId="session_remove_icon_button"
-          />
-        </TableCell>
-      ) : null}
-    </TableRow>
-  );
+			{showRemoveIcon ? (
+				<TableCell className={styles.removeCell}>
+					<IconButton
+						size={20}
+						iconName={RemoveSessionSvgUrl}
+						isClickable
+						onClick={onRemoveClick}
+						dataTestId="session_remove_icon_button"
+					/>
+				</TableCell>
+			) : null}
+		</TableRow>
+	);
 };
 
 export default inject(({ setup, settingsStore, userStore }) => {
-  const { currentSession, setLogoutDialogVisible, setPlatformModalData } =
-    setup;
-  const { culture } = settingsStore;
-  const { user } = userStore;
-  const locale = (user && user.cultureName) || culture || "en";
+	const { currentSession, setLogoutDialogVisible, setPlatformModalData } =
+		setup;
+	const { culture } = settingsStore;
+	const { user } = userStore;
+	const locale = (user && user.cultureName) || culture || "en";
 
-  return {
-    locale,
-    currentSession,
-    setLogoutDialogVisible,
-    setPlatformModalData,
-  };
+	return {
+		locale,
+		currentSession,
+		setLogoutDialogVisible,
+		setPlatformModalData,
+	};
 })(observer(SessionsTableRow));

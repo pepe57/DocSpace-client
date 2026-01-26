@@ -31,70 +31,70 @@ import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import styles from "./PublicRoomBar.module.scss";
 import { PublicRoomBarProps } from "./PublicRoomBar.types";
 
 const PublicRoomBar = (props: PublicRoomBarProps) => {
-  const {
-    ref,
-    headerText,
-    bodyText,
-    iconName,
-    onClose,
-    barIsVisible,
-    className,
-    dataTestId,
-    ...rest
-  } = props;
+	const {
+		ref,
+		headerText,
+		bodyText,
+		iconName,
+		onClose,
+		barIsVisible,
+		className,
+		dataTestId,
+		...rest
+	} = props;
 
-  const headerAs = typeof headerText !== "string" ? "div" : undefined;
-  const bodyAs = typeof bodyText !== "string" ? "div" : undefined;
+	const headerAs = typeof headerText !== "string" ? "div" : undefined;
+	const bodyAs = typeof bodyText !== "string" ? "div" : undefined;
 
-  return (
-    <div
-      className={classNames(
-        "public-room-bar",
-        styles.container,
-        {
-          [styles.barVisible]: barIsVisible,
-        },
-        className,
-      )}
-      {...rest}
-      ref={ref}
-      data-testid={dataTestId ?? "public_room_bar"}
-    >
-      <div className={styles.textContainer}>
-        <div className={styles.headerBody}>
-          <div className={styles.headerIcon}>
-            <ReactSVG src={iconName || PeopleIcon} />
-          </div>
-          <Text className={styles.header} fontWeight={600} as={headerAs}>
-            {headerText}
-          </Text>
-        </div>
-        <Text
-          className={styles.body}
-          fontSize="12px"
-          fontWeight={400}
-          as={bodyAs}
-        >
-          {bodyText}
-        </Text>
-      </div>
+	return (
+		<div
+			className={classNames(
+				"public-room-bar",
+				styles.container,
+				{
+					[styles.barVisible]: barIsVisible,
+				},
+				className,
+			)}
+			{...rest}
+			ref={ref}
+			data-testid={dataTestId ?? "public_room_bar"}
+		>
+			<div className={styles.textContainer}>
+				<div className={styles.headerBody}>
+					<div className={styles.headerIcon}>
+						<ReactSVG src={iconName || PeopleIcon} />
+					</div>
+					<Text className={styles.header} fontWeight={600} as={headerAs}>
+						{headerText}
+					</Text>
+				</div>
+				<Text
+					className={styles.body}
+					fontSize="12px"
+					fontWeight={400}
+					as={bodyAs}
+				>
+					{bodyText}
+				</Text>
+			</div>
 
-      {onClose ? (
-        <IconButton
-          className={styles.closeIcon}
-          size={12}
-          iconName={CrossReactSvg}
-          onClick={onClose}
-        />
-      ) : null}
-    </div>
-  );
+			{onClose ? (
+				<IconButton
+					className={styles.closeIcon}
+					size={12}
+					iconName={CrossReactSvg}
+					onClick={onClose}
+				/>
+			) : null}
+		</div>
+	);
 };
 PublicRoomBar.displayName = "PublicRoomBar";
 

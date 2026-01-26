@@ -32,54 +32,54 @@ import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import { Text } from "@docspace/ui-kit/components/text";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { useItemIcon } from "@docspace/shared/hooks/useItemIcon";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import styles from "./ShareDialog.module.scss";
 import type { ShareDialogHeaderProps } from "./ShareDialog.types";
 
 const ShareDialogHeader: FC<ShareDialogHeaderProps> = ({
-  file,
-  disabledIcon = true,
-  filesSettings,
-  onClickAddUser,
+	file,
+	disabledIcon = true,
+	filesSettings,
+	onClickAddUser,
 }) => {
-  const { t } = useTranslation(["Common"]);
+	const { t } = useTranslation(["Common"]);
 
-  const { getIcon } = useItemIcon({ filesSettings });
+	const { getIcon } = useItemIcon({ filesSettings });
 
-  const icon = useMemo(() => getIcon(file.fileExst, 32), [file.fileExst]);
+	const icon = useMemo(() => getIcon(file.fileExst, 32), [file.fileExst]);
 
-  const title = useMemo(
-    () => file.title.replace(/\.[^/.]+$/, ""),
-    [file.title],
-  );
+	const title = useMemo(
+		() => file.title.replace(/\.[^/.]+$/, ""),
+		[file.title],
+	);
 
-  return (
-    <div className={styles.header}>
-      <RoomIcon logo={icon} title={title} showDefault={false} />
-      <Text
-        truncate
-        dir="auto"
-        fontSize="16px"
-        fontWeight={700}
-        title={title}
-        className={styles.title}
-      >
-        {title}
-      </Text>
-      {disabledIcon ? null : (
-        <IconButton
-          size={16}
-          isFill
-          id="share-panel_add-user"
-          className={styles.icon}
-          title={t("Common:AddUsers")}
-          iconName={PersonPlusReactSvgUrl}
-          onClick={onClickAddUser}
-        />
-      )}
-    </div>
-  );
+	return (
+		<div className={styles.header}>
+			<RoomIcon logo={icon} title={title} showDefault={false} />
+			<Text
+				truncate
+				dir="auto"
+				fontSize="16px"
+				fontWeight={700}
+				title={title}
+				className={styles.title}
+			>
+				{title}
+			</Text>
+			{disabledIcon ? null : (
+				<IconButton
+					size={16}
+					isFill
+					id="share-panel_add-user"
+					className={styles.icon}
+					title={t("Common:AddUsers")}
+					iconName={PersonPlusReactSvgUrl}
+					onClick={onClickAddUser}
+				/>
+			)}
+		</div>
+	);
 };
 
 export default ShareDialogHeader;

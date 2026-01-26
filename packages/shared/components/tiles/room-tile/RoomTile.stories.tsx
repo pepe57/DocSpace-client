@@ -33,7 +33,7 @@ import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import { RoomsType } from "../../../enums";
 
 import { Link } from "@docspace/ui-kit/components/link";
-import { IconButton } from "../../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { IconSizeType } from "../../../utils";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
 
@@ -42,59 +42,59 @@ import { RoomTileProps } from "./RoomTile.types";
 import { TileContent } from "../tile-content/TileContent";
 
 const element = (
-  <ReactSVG
-    className="room-icon-empty"
-    src={PublicRoomIconReactSvgUrl}
-    data-testid="empty-icon"
-  />
+	<ReactSVG
+		className="room-icon-empty"
+		src={PublicRoomIconReactSvgUrl}
+		data-testid="empty-icon"
+	/>
 );
 
 const badges = (
-  <div className="badges">
-    <IconButton
-      onClick={() => {}}
-      className="badge icons-group is-pinned tablet-badge tablet-pinned"
-      iconName={UnpinReactSvgUrl}
-      size={IconSizeType.medium}
-    />
-  </div>
+	<div className="badges">
+		<IconButton
+			onClick={() => {}}
+			className="badge icons-group is-pinned tablet-badge tablet-pinned"
+			iconName={UnpinReactSvgUrl}
+			size={IconSizeType.medium}
+		/>
+	</div>
 );
 
 const contextOptions = [
-  {
-    id: "option_edit",
-    key: "edit",
-    label: "Edit",
-    onClick: () => {},
-    disabled: false,
-  },
-  {
-    id: "option_delete",
-    key: "delete",
-    label: "Delete",
-    onClick: () => {},
-    disabled: false,
-  },
+	{
+		id: "option_edit",
+		key: "edit",
+		label: "Edit",
+		onClick: () => {},
+		disabled: false,
+	},
+	{
+		id: "option_delete",
+		key: "delete",
+		label: "Delete",
+		onClick: () => {},
+		disabled: false,
+	},
 ];
 
 const meta = {
-  title: "Components/RoomTile",
-  component: RoomTile,
-  parameters: {
-    docs: {
-      description: {
-        component:
-          "Room tile component for displaying room information in a tile format",
-      },
-    },
-  },
-  argTypes: {
-    checked: { control: "boolean" },
-    isActive: { control: "boolean" },
-    isBlockingOperation: { control: "boolean" },
-    indeterminate: { control: "boolean" },
-  },
-  decorators: [i18nextStoryDecorator],
+	title: "Components/RoomTile",
+	component: RoomTile,
+	parameters: {
+		docs: {
+			description: {
+				component:
+					"Room tile component for displaying room information in a tile format",
+			},
+		},
+	},
+	argTypes: {
+		checked: { control: "boolean" },
+		isActive: { control: "boolean" },
+		isBlockingOperation: { control: "boolean" },
+		indeterminate: { control: "boolean" },
+	},
+	decorators: [i18nextStoryDecorator],
 } satisfies Meta<typeof RoomTile>;
 
 type Story = StoryObj<typeof meta>;
@@ -102,98 +102,98 @@ type Story = StoryObj<typeof meta>;
 export default meta;
 
 const Template = ({ checked: initialChecked, ...args }: RoomTileProps) => {
-  const [checked, setChecked] = useState(initialChecked);
+	const [checked, setChecked] = useState(initialChecked);
 
-  const onSelect = (isSelected: boolean) => {
-    setChecked(isSelected);
-  };
+	const onSelect = (isSelected: boolean) => {
+		setChecked(isSelected);
+	};
 
-  return (
-    <div style={{ maxWidth: "300px", margin: "30px" }}>
-      <RoomTile {...args} checked={checked} onSelect={onSelect}>
-        <TileContent>
-          <Link>Room Content</Link>
-        </TileContent>
-      </RoomTile>
-    </div>
-  );
+	return (
+		<div style={{ maxWidth: "300px", margin: "30px" }}>
+			<RoomTile {...args} checked={checked} onSelect={onSelect}>
+				<TileContent>
+					<Link>Room Content</Link>
+				</TileContent>
+			</RoomTile>
+		</div>
+	);
 };
 
 export const Default: Story = {
-  render: Template,
-  args: {
-    item: {
-      id: "room-1",
-      title: "Sample Room",
-      roomType: "collaboration",
-      tags: [
-        {
-          label: "Collaboration",
-          roomType: RoomsType.EditingRoom,
-        },
-      ],
-      contextOptions,
-    },
-    element,
-    contextOptions,
-    badges,
-    thumbnailClick: () => {},
-    getContextModel: () => contextOptions,
-    selectTag: () => {},
-    selectOption: () => {},
-    getRoomTypeName: (type: string) => type,
-    columnCount: 1,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Basic room tile with selection functionality",
-      },
-    },
-  },
+	render: Template,
+	args: {
+		item: {
+			id: "room-1",
+			title: "Sample Room",
+			roomType: "collaboration",
+			tags: [
+				{
+					label: "Collaboration",
+					roomType: RoomsType.EditingRoom,
+				},
+			],
+			contextOptions,
+		},
+		element,
+		contextOptions,
+		badges,
+		thumbnailClick: () => {},
+		getContextModel: () => contextOptions,
+		selectTag: () => {},
+		selectOption: () => {},
+		getRoomTypeName: (type: string) => type,
+		columnCount: 1,
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: "Basic room tile with selection functionality",
+			},
+		},
+	},
 };
 
 export const Checked: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    checked: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Room tile in checked state",
-      },
-    },
-  },
+	render: Template,
+	args: {
+		...Default.args,
+		checked: true,
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: "Room tile in checked state",
+			},
+		},
+	},
 };
 
 export const InProgress: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    inProgress: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "File tile showing progress state",
-      },
-    },
-  },
+	render: Template,
+	args: {
+		...Default.args,
+		inProgress: true,
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: "File tile showing progress state",
+			},
+		},
+	},
 };
 
 export const BlockingOperation: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    isBlockingOperation: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Room tile showing blocking operation state",
-      },
-    },
-  },
+	render: Template,
+	args: {
+		...Default.args,
+		isBlockingOperation: true,
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: "Room tile showing blocking operation state",
+			},
+		},
+	},
 };

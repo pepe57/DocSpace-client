@@ -37,7 +37,7 @@ import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "../../../../../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Scrollbar } from "../../../../../scrollbar";
 import { toastr } from "../../../../../toast";
 
@@ -46,45 +46,45 @@ import styles from "../../ChatMessageBody.module.scss";
 import { MessageCodeBlockProps } from "../../../../Chat.types";
 
 const CodeBlock = ({
-  language,
-  content,
-  successCopyMessage,
+	language,
+	content,
+	successCopyMessage,
 }: MessageCodeBlockProps) => {
-  const { isBase } = useTheme();
-  const { t } = useTranslation(["Common"]);
+	const { isBase } = useTheme();
+	const { t } = useTranslation(["Common"]);
 
-  const onCopy = () => {
-    copy(content);
-    toastr.success(successCopyMessage ?? t("Common:CopiedToClipboard"));
-  };
+	const onCopy = () => {
+		copy(content);
+		toastr.success(successCopyMessage ?? t("Common:CopiedToClipboard"));
+	};
 
-  return (
-    <div className={styles.codeContainer}>
-      <div className={styles.codeHeader}>
-        {language ? <Text>{language}</Text> : null}
-        <IconButton
-          iconName={CopyIconUrl}
-          size={16}
-          isClickable
-          onClick={onCopy}
-        />
-      </div>
-      <Scrollbar
-        className={styles.codeBlockScroll}
-        translateContentSizeYToHolder
-        rtl={false}
-      >
-        <SyntaxHighlighter
-          language={language}
-          style={isBase ? a11yLight : a11yDark}
-          className={styles.codeBody}
-          customStyle={isBase ? {} : { background: "none" }}
-        >
-          {content}
-        </SyntaxHighlighter>
-      </Scrollbar>
-    </div>
-  );
+	return (
+		<div className={styles.codeContainer}>
+			<div className={styles.codeHeader}>
+				{language ? <Text>{language}</Text> : null}
+				<IconButton
+					iconName={CopyIconUrl}
+					size={16}
+					isClickable
+					onClick={onCopy}
+				/>
+			</div>
+			<Scrollbar
+				className={styles.codeBlockScroll}
+				translateContentSizeYToHolder
+				rtl={false}
+			>
+				<SyntaxHighlighter
+					language={language}
+					style={isBase ? a11yLight : a11yDark}
+					className={styles.codeBody}
+					customStyle={isBase ? {} : { background: "none" }}
+				>
+					{content}
+				</SyntaxHighlighter>
+			</Scrollbar>
+		</div>
+	);
 };
 
 export default CodeBlock;

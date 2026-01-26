@@ -32,137 +32,137 @@ import RightArrowIcon from "PUBLIC_DIR/images/icons/12/right-arrow.react.svg";
 
 import { classNames } from "../../utils";
 import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { globalColors } from "../../themes";
 import styles from "./OperationsProgressButton.module.scss";
 import { ProgressBarMobileProps } from "./OperationsProgressButton.types";
 import { LoadingButton } from "../loading-button";
 
 const ProgressBar = ({
-  label,
-  alert,
-  percent,
-  open,
-  onCancel,
-  withoutProgress,
-  iconUrl,
-  completed,
-  onClearProgress,
-  operationId,
-  operation,
-  onOpenPanel,
-  withoutStatus,
+	label,
+	alert,
+	percent,
+	open,
+	onCancel,
+	withoutProgress,
+	iconUrl,
+	completed,
+	onClearProgress,
+	operationId,
+	operation,
+	onOpenPanel,
+	withoutStatus,
 }: ProgressBarMobileProps) => {
-  const [isVisible, setIsVisible] = useState(true);
-  const closeTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const clearTimerRef = useRef<NodeJS.Timeout | null>(null);
+	const [isVisible, setIsVisible] = useState(true);
+	const closeTimerRef = useRef<NodeJS.Timeout | null>(null);
+	const clearTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const clearTimers = () => {
-    if (clearTimerRef.current) {
-      clearTimeout(clearTimerRef.current);
-      clearTimerRef.current = null;
-    }
-    if (closeTimerRef.current) {
-      clearTimeout(closeTimerRef.current);
-      closeTimerRef.current = null;
-    }
-  };
+	const clearTimers = () => {
+		if (clearTimerRef.current) {
+			clearTimeout(clearTimerRef.current);
+			clearTimerRef.current = null;
+		}
+		if (closeTimerRef.current) {
+			clearTimeout(closeTimerRef.current);
+			closeTimerRef.current = null;
+		}
+	};
 
-  const onCloseClick = () => {
-    if (onClearProgress && operation) {
-      setIsVisible(false);
-      closeTimerRef.current = setTimeout(() => {
-        onClearProgress(operationId ?? null, operation);
-      }, 300);
-    }
-  };
+	const onCloseClick = () => {
+		if (onClearProgress && operation) {
+			setIsVisible(false);
+			closeTimerRef.current = setTimeout(() => {
+				onClearProgress(operationId ?? null, operation);
+			}, 300);
+		}
+	};
 
-  const onClearClick = () => {
-    if (!onClearProgress || !operation) return;
-    setIsVisible(false);
-    clearTimerRef.current = setTimeout(() => {
-      onClearProgress(operationId ?? null, operation);
-    }, 300);
-  };
+	const onClearClick = () => {
+		if (!onClearProgress || !operation) return;
+		setIsVisible(false);
+		clearTimerRef.current = setTimeout(() => {
+			onClearProgress(operationId ?? null, operation);
+		}, 300);
+	};
 
-  useEffect(() => {
-    return () => {
-      clearTimers();
-    };
-  }, []);
+	useEffect(() => {
+		return () => {
+			clearTimers();
+		};
+	}, []);
 
-  return (
-    <div
-      className={classNames(styles.progressBarWrapper, {
-        [styles.isUploading]: open,
-        [styles.fadeOut]: !isVisible,
-      })}
-    >
-      <div className={styles.progressWrapper}>
-        <div
-          className={classNames(styles.progressMainContainer, {
-            [styles.withClick]: onOpenPanel,
-          })}
-          {...(onOpenPanel && { onClick: onOpenPanel })}
-        >
-          <div>
-            <IconButton
-              {...(onOpenPanel && { onClick: onOpenPanel })}
-              iconName={iconUrl}
-              size={16}
-              color="white"
-            />
-            {!withoutStatus && (alert || completed) ? (
-              <div
-                className={classNames(styles.infoIcon, {
-                  [styles.alert]: alert,
-                  [styles.complete]: !alert && completed,
-                })}
-              >
-                {alert ? <AlertIcon /> : <TickIcon />}
-              </div>
-            ) : null}
-          </div>
-          <div className={styles.labelWrapper}>
-            <Text
-              className={classNames(
-                (styles.progressHeader,
-                {
-                  [styles.withClick]: onOpenPanel,
-                }),
-              )}
-              fontSize="14px"
-              fontWeight={600}
-              truncate
-              color="white"
-            >
-              {label}
-            </Text>
-            {onOpenPanel ? <RightArrowIcon /> : null}
-          </div>
-        </div>
+	return (
+		<div
+			className={classNames(styles.progressBarWrapper, {
+				[styles.isUploading]: open,
+				[styles.fadeOut]: !isVisible,
+			})}
+		>
+			<div className={styles.progressWrapper}>
+				<div
+					className={classNames(styles.progressMainContainer, {
+						[styles.withClick]: onOpenPanel,
+					})}
+					{...(onOpenPanel && { onClick: onOpenPanel })}
+				>
+					<div>
+						<IconButton
+							{...(onOpenPanel && { onClick: onOpenPanel })}
+							iconName={iconUrl}
+							size={16}
+							color="white"
+						/>
+						{!withoutStatus && (alert || completed) ? (
+							<div
+								className={classNames(styles.infoIcon, {
+									[styles.alert]: alert,
+									[styles.complete]: !alert && completed,
+								})}
+							>
+								{alert ? <AlertIcon /> : <TickIcon />}
+							</div>
+						) : null}
+					</div>
+					<div className={styles.labelWrapper}>
+						<Text
+							className={classNames(
+								(styles.progressHeader,
+								{
+									[styles.withClick]: onOpenPanel,
+								}),
+							)}
+							fontSize="14px"
+							fontWeight={600}
+							truncate
+							color="white"
+						>
+							{label}
+						</Text>
+						{onOpenPanel ? <RightArrowIcon /> : null}
+					</div>
+				</div>
 
-        <div className={styles.progressInfoWrapper}>
-          {withoutProgress ? (
-            completed ? (
-              <ClearIcon onClick={onCloseClick} />
-            ) : (
-              <div className={styles.progressLoader} />
-            )
-          ) : completed ? (
-            <ClearIcon onClick={onClearClick} />
-          ) : (
-            <LoadingButton
-              percent={percent}
-              onClick={onCancel}
-              backgroundColor={globalColors.grayText}
-              loaderColor={globalColors.white}
-            />
-          )}
-        </div>
-      </div>
-    </div>
-  );
+				<div className={styles.progressInfoWrapper}>
+					{withoutProgress ? (
+						completed ? (
+							<ClearIcon onClick={onCloseClick} />
+						) : (
+							<div className={styles.progressLoader} />
+						)
+					) : completed ? (
+						<ClearIcon onClick={onClearClick} />
+					) : (
+						<LoadingButton
+							percent={percent}
+							onClick={onCancel}
+							backgroundColor={globalColors.grayText}
+							loaderColor={globalColors.white}
+						/>
+					)}
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export { ProgressBar };

@@ -31,7 +31,7 @@ import SortDescReactSvgUrl from "PUBLIC_DIR/images/sort.desc.react.svg?url";
 
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "../../../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { globalColors } from "../../../../themes";
 
 import { TableHeaderCellProps } from "../../Table.types";

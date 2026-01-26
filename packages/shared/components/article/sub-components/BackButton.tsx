@@ -28,7 +28,7 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow-left.react.svg?url";
 import ArrowTabletIcon from "PUBLIC_DIR/images/arrow-left.long.react.svg?url";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { IconButton } from "../../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { DeviceType } from "../../../enums";
 
@@ -37,52 +37,52 @@ import { ArticleHeaderLoader } from "../../../skeletons/article";
 import styles from "../Article.module.scss";
 
 const BackButton = ({
-  showText,
-  currentDeviceType,
-  onLogoClickAction,
-  isLoading,
-  toggleArticleOpen,
+	showText,
+	currentDeviceType,
+	onLogoClickAction,
+	isLoading,
+	toggleArticleOpen,
 }: {
-  showText: boolean;
-  currentDeviceType: DeviceType;
-  onLogoClickAction?: () => void;
-  isLoading?: boolean;
-  toggleArticleOpen?: () => void;
+	showText: boolean;
+	currentDeviceType: DeviceType;
+	onLogoClickAction?: () => void;
+	isLoading?: boolean;
+	toggleArticleOpen?: () => void;
 }) => {
-  const { t } = useTranslation("Common");
-  const navigate = useNavigate();
+	const { t } = useTranslation("Common");
+	const navigate = useNavigate();
 
-  const onClickBack = () => {
-    onLogoClickAction?.();
+	const onClickBack = () => {
+		onLogoClickAction?.();
 
-    if (toggleArticleOpen && currentDeviceType === DeviceType.mobile)
-      toggleArticleOpen();
+		if (toggleArticleOpen && currentDeviceType === DeviceType.mobile)
+			toggleArticleOpen();
 
-    navigate("/");
-  };
+		navigate("/");
+	};
 
-  const icon =
-    currentDeviceType === DeviceType.desktop ? ArrowIcon : ArrowTabletIcon;
+	const icon =
+		currentDeviceType === DeviceType.desktop ? ArrowIcon : ArrowTabletIcon;
 
-  if (isLoading)
-    return (
-      <ArticleHeaderLoader
-        height="18px"
-        width="211px"
-        showText={showText}
-        className={styles.backButton}
-      />
-    );
-  return (
-    <div
-      className={styles.backButton}
-      data-show-article={showText ? "true" : "false"}
-      onClick={onClickBack}
-    >
-      <IconButton className={styles.arrowIcon} iconName={icon} isClickable />
-      {showText ? <Text truncate>{t("Common:Back")}</Text> : null}
-    </div>
-  );
+	if (isLoading)
+		return (
+			<ArticleHeaderLoader
+				height="18px"
+				width="211px"
+				showText={showText}
+				className={styles.backButton}
+			/>
+		);
+	return (
+		<div
+			className={styles.backButton}
+			data-show-article={showText ? "true" : "false"}
+			onClick={onClickBack}
+		>
+			<IconButton className={styles.arrowIcon} iconName={icon} isClickable />
+			{showText ? <Text truncate>{t("Common:Back")}</Text> : null}
+		</div>
+	);
 };
 
 export default BackButton;

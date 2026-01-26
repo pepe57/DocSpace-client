@@ -28,41 +28,41 @@ import React from "react";
 
 import ArrowPathReactSvg from "PUBLIC_DIR/images/arrow.path.react.svg";
 
-import { IconButton } from "../../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import { TArrowButtonProps } from "../Navigation.types";
 
 const ArrowButton = ({
-  isRootFolder,
-  showBackButton,
-  onBackToParentFolder,
+	isRootFolder,
+	showBackButton,
+	onBackToParentFolder,
 }: TArrowButtonProps) => {
-  if (showBackButton) {
-    return (
-      <div className="navigation-arrow-container">
-        <IconButton
-          iconNode={<ArrowPathReactSvg />}
-          size={17}
-          isFill
-          onClick={onBackToParentFolder}
-          className="arrow-button"
-        />
-      </div>
-    );
-  }
+	if (showBackButton) {
+		return (
+			<div className="navigation-arrow-container">
+				<IconButton
+					iconNode={<ArrowPathReactSvg />}
+					size={17}
+					isFill
+					onClick={onBackToParentFolder}
+					className="arrow-button"
+				/>
+			</div>
+		);
+	}
 
-  return !isRootFolder ? (
-    <div className="navigation-arrow-container">
-      <IconButton
-        iconNode={<ArrowPathReactSvg />}
-        size={17}
-        isFill
-        onClick={onBackToParentFolder}
-        className="arrow-button"
-      />
-      <div className="navigation-header-separator" />
-    </div>
-  ) : null;
+	return !isRootFolder ? (
+		<div className="navigation-arrow-container">
+			<IconButton
+				iconNode={<ArrowPathReactSvg />}
+				size={17}
+				isFill
+				onClick={onBackToParentFolder}
+				className="arrow-button"
+			/>
+			<div className="navigation-header-separator" />
+		</div>
+	) : null;
 };
 
 export default React.memo(ArrowButton);

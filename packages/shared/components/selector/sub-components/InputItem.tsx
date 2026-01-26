@@ -35,7 +35,7 @@ import {
 	InputType,
 	TextInput,
 } from "@docspace/ui-kit/components/text-input";
-import { IconButton } from "../../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { RoomIcon } from "../../room-icon";
 import { RoomLogo } from "../../room-logo";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";

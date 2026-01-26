@@ -29,7 +29,7 @@ import classNames from "classnames";
 
 import SettingsDeskReactSvgUrl from "PUBLIC_DIR/images/settings.desc.react.svg?url";
 
-import { IconButton } from "../../../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { DropDown } from "../../../drop-down";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 

@@ -37,7 +37,7 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { Heading } from "@docspace/shared/components/heading";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import { tablet, mobile } from "@docspace/shared/utils";
 import { useTranslation } from "react-i18next";
@@ -81,7 +81,7 @@ const HeaderContainer = styled.div`
 
     svg {
       ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+				theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
   }
 
@@ -100,48 +100,48 @@ const HeaderContainer = styled.div`
 `;
 
 const DetailsNavigationHeader = () => {
-  const { id, eventId } = useParams();
+	const { id, eventId } = useParams();
 
-  const { t } = useTranslation(["Webhooks", "Common"]);
-  const navigate = useNavigate();
-  const location = useLocation();
+	const { t } = useTranslation(["Webhooks", "Common"]);
+	const navigate = useNavigate();
+	const location = useLocation();
 
-  const onBack = () => {
-    const path = location.pathname.includes("/portal-settings")
-      ? "/portal-settings"
-      : "";
-    navigate(`${path}/developer-tools/webhooks/${id}`);
-  };
+	const onBack = () => {
+		const path = location.pathname.includes("/portal-settings")
+			? "/portal-settings"
+			: "";
+		navigate(`${path}/developer-tools/webhooks/${id}`);
+	};
 
-  const handleRetryEvent = async () => {
-    await retryWebhook(eventId);
-    toastr.success(t("WebhookRedilivered"), <b>{t("Common:Done")}</b>);
-  };
+	const handleRetryEvent = async () => {
+		await retryWebhook(eventId);
+		toastr.success(t("WebhookRedilivered"), <b>{t("Common:Done")}</b>);
+	};
 
-  return (
-    <HeaderContainer>
-      <div className="headerNavigation">
-        <IconButton
-          iconName={ArrowPathReactSvgUrl}
-          size="17"
-          isFill
-          onClick={onBack}
-          className="arrow-button"
-        />
-        <Heading type="content" truncate className="headline">
-          {t("WebhookDetails")}
-        </Heading>
-      </div>
+	return (
+		<HeaderContainer>
+			<div className="headerNavigation">
+				<IconButton
+					iconName={ArrowPathReactSvgUrl}
+					size="17"
+					isFill
+					onClick={onBack}
+					className="arrow-button"
+				/>
+				<Heading type="content" truncate className="headline">
+					{t("WebhookDetails")}
+				</Heading>
+			</div>
 
-      <IconButton
-        className="retry"
-        iconName={RetryIcon}
-        size="17"
-        isFill
-        onClick={handleRetryEvent}
-      />
-    </HeaderContainer>
-  );
+			<IconButton
+				className="retry"
+				iconName={RetryIcon}
+				size="17"
+				isFill
+				onClick={handleRetryEvent}
+			/>
+		</HeaderContainer>
+	);
 };
 
 export default observer(DetailsNavigationHeader);

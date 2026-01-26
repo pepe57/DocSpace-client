@@ -33,7 +33,7 @@ import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { TableBody } from "@docspace/shared/components/table";
 
@@ -50,143 +50,143 @@ const INFO_PANEL_COLUMNS_SIZE = `infoPanelNextcloudThirdColumnsSize_ver-${TABLE_
 const checkedAccountType = "withoutEmail";
 
 const TableView = (props: TableViewProps) => {
-  const {
-    t,
-    sectionWidth,
-    accountsData,
-    userId,
-    checkedUsers,
-    toggleAccount,
-    toggleAllAccounts,
-    isAccountChecked,
-    users,
-    setSearchValue,
-  } = props as AddEmailTableProps;
-  const theme = useTheme();
-  const [openedEmailKey, setOpenedEmailKey] = useState<string>("");
-  const tableRef = useRef<HTMLDivElement | null>(null);
+	const {
+		t,
+		sectionWidth,
+		accountsData,
+		userId,
+		checkedUsers,
+		toggleAccount,
+		toggleAllAccounts,
+		isAccountChecked,
+		users,
+		setSearchValue,
+	} = props as AddEmailTableProps;
+	const theme = useTheme();
+	const [openedEmailKey, setOpenedEmailKey] = useState<string>("");
+	const tableRef = useRef<HTMLDivElement | null>(null);
 
-  const usersWithFilledEmails = users.withoutEmail.filter(
-    (user) => user.email && user.email.length > 0,
-  );
+	const usersWithFilledEmails = users.withoutEmail.filter(
+		(user) => user.email && user.email.length > 0,
+	);
 
-  const toggleAll = (e?: React.ChangeEvent<HTMLInputElement>) =>
-    toggleAllAccounts(
-      e?.target.checked ?? false,
-      usersWithFilledEmails,
-      checkedAccountType,
-    );
+	const toggleAll = (e?: React.ChangeEvent<HTMLInputElement>) =>
+		toggleAllAccounts(
+			e?.target.checked ?? false,
+			usersWithFilledEmails,
+			checkedAccountType,
+		);
 
-  const onClearFilter = () => {
-    setSearchValue("");
-  };
+	const onClearFilter = () => {
+		setSearchValue("");
+	};
 
-  const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
-  const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
+	const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
+	const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  const isIndeterminate =
-    checkedUsers.withoutEmail.length > 0 &&
-    checkedUsers.withoutEmail.length !== usersWithFilledEmails.length;
+	const isIndeterminate =
+		checkedUsers.withoutEmail.length > 0 &&
+		checkedUsers.withoutEmail.length !== usersWithFilledEmails.length;
 
-  return (
-    <StyledTableContainer
-      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
-      useReactWindow
-    >
-      {accountsData.length > 0 ? (
-        <>
-          <UsersTableHeader
-            t={t}
-            sectionWidth={sectionWidth}
-            tableRef={tableRef}
-            columnStorageName={columnStorageName}
-            columnInfoPanelStorageName={columnInfoPanelStorageName}
-            isIndeterminate={isIndeterminate}
-            isChecked={
-              usersWithFilledEmails.length > 0
-                ? checkedUsers.withoutEmail.length ===
-                  usersWithFilledEmails.length
-                : false
-            }
-            toggleAll={toggleAll}
-          />
-          <TableBody
-            itemHeight={49}
-            useReactWindow
-            infoPanelVisible={false}
-            columnStorageName={columnStorageName}
-            columnInfoPanelStorageName={columnInfoPanelStorageName}
-            filesLength={accountsData.length}
-            hasMoreFiles={false}
-            itemCount={accountsData.length}
-            fetchMoreFiles={async () => {}}
-          >
-            {accountsData.map((data) => (
-              <UsersTableRow
-                t={t}
-                key={data.key}
-                id={data.key}
-                email={data.email || ""}
-                displayName={data.displayName}
-                isChecked={isAccountChecked(data.key, checkedAccountType)}
-                toggleAccount={() => toggleAccount(data, checkedAccountType)}
-                isEmailOpen={openedEmailKey === data.key}
-                setOpenedEmailKey={setOpenedEmailKey}
-              />
-            ))}
-          </TableBody>
-        </>
-      ) : (
-        <EmptyScreenContainer
-          imageSrc={
-            theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl
-          }
-          imageAlt={t("Common:NotFoundUsers")}
-          headerText={t("Common:NotFoundUsers")}
-          descriptionText={t("Common:NotFoundUsersDescription")}
-          buttons={
-            <div className="buttons-box">
-              <IconButton
-                className="clear-icon"
-                isFill
-                size={12}
-                onClick={onClearFilter}
-                iconName={ClearEmptyFilterSvgUrl}
-              />
-              <Link
-                type={LinkType.action}
-                isHovered
-                fontWeight="600"
-                onClick={onClearFilter}
-              >
-                {t("Common:ClearFilter")}
-              </Link>
-            </div>
-          }
-        />
-      )}
-    </StyledTableContainer>
-  );
+	return (
+		<StyledTableContainer
+			forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
+			useReactWindow
+		>
+			{accountsData.length > 0 ? (
+				<>
+					<UsersTableHeader
+						t={t}
+						sectionWidth={sectionWidth}
+						tableRef={tableRef}
+						columnStorageName={columnStorageName}
+						columnInfoPanelStorageName={columnInfoPanelStorageName}
+						isIndeterminate={isIndeterminate}
+						isChecked={
+							usersWithFilledEmails.length > 0
+								? checkedUsers.withoutEmail.length ===
+									usersWithFilledEmails.length
+								: false
+						}
+						toggleAll={toggleAll}
+					/>
+					<TableBody
+						itemHeight={49}
+						useReactWindow
+						infoPanelVisible={false}
+						columnStorageName={columnStorageName}
+						columnInfoPanelStorageName={columnInfoPanelStorageName}
+						filesLength={accountsData.length}
+						hasMoreFiles={false}
+						itemCount={accountsData.length}
+						fetchMoreFiles={async () => {}}
+					>
+						{accountsData.map((data) => (
+							<UsersTableRow
+								t={t}
+								key={data.key}
+								id={data.key}
+								email={data.email || ""}
+								displayName={data.displayName}
+								isChecked={isAccountChecked(data.key, checkedAccountType)}
+								toggleAccount={() => toggleAccount(data, checkedAccountType)}
+								isEmailOpen={openedEmailKey === data.key}
+								setOpenedEmailKey={setOpenedEmailKey}
+							/>
+						))}
+					</TableBody>
+				</>
+			) : (
+				<EmptyScreenContainer
+					imageSrc={
+						theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl
+					}
+					imageAlt={t("Common:NotFoundUsers")}
+					headerText={t("Common:NotFoundUsers")}
+					descriptionText={t("Common:NotFoundUsersDescription")}
+					buttons={
+						<div className="buttons-box">
+							<IconButton
+								className="clear-icon"
+								isFill
+								size={12}
+								onClick={onClearFilter}
+								iconName={ClearEmptyFilterSvgUrl}
+							/>
+							<Link
+								type={LinkType.action}
+								isHovered
+								fontWeight="600"
+								onClick={onClearFilter}
+							>
+								{t("Common:ClearFilter")}
+							</Link>
+						</div>
+					}
+				/>
+			)}
+		</StyledTableContainer>
+	);
 };
 
 export default inject<TStore>(({ userStore, importAccountsStore }) => {
-  const userId = userStore.user?.id;
-  const {
-    users,
-    checkedUsers,
-    toggleAccount,
-    toggleAllAccounts,
-    isAccountChecked,
-    setSearchValue,
-  } = importAccountsStore;
+	const userId = userStore.user?.id;
+	const {
+		users,
+		checkedUsers,
+		toggleAccount,
+		toggleAllAccounts,
+		isAccountChecked,
+		setSearchValue,
+	} = importAccountsStore;
 
-  return {
-    userId,
-    users,
-    checkedUsers,
-    toggleAccount,
-    toggleAllAccounts,
-    isAccountChecked,
-    setSearchValue,
-  };
+	return {
+		userId,
+		users,
+		checkedUsers,
+		toggleAccount,
+		toggleAllAccounts,
+		isAccountChecked,
+		setSearchValue,
+	};
 })(observer(TableView));

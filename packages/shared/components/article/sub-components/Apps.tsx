@@ -35,110 +35,110 @@ import AndroidReactSvgUrl from "PUBLIC_DIR/images/android.react.svg?url";
 import IOSReactSvgUrl from "PUBLIC_DIR/images/iOS.react.svg?url";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { IconButton } from "../../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import styles from "../Article.module.scss";
 import { ArticleAppsProps } from "../Article.types";
 
 const ArticleApps = React.memo(
-  ({
-    showText,
-    withDevTools,
-    logoText,
-    downloaddesktopUrl,
-    officeforandroidUrl,
-    officeforiosUrl,
-  }: ArticleAppsProps) => {
-    const { t } = useTranslation(["Translations", "Common"]);
+	({
+		showText,
+		withDevTools,
+		logoText,
+		downloaddesktopUrl,
+		officeforandroidUrl,
+		officeforiosUrl,
+	}: ArticleAppsProps) => {
+		const { t } = useTranslation(["Translations", "Common"]);
 
-    if (!showText) return null;
+		if (!showText) return null;
 
-    return (
-      <div
-        data-show-text={showText ? "true" : "false"}
-        data-with-dev-tools={withDevTools ? "true" : "false"}
-        className={classNames(styles.apps, {
-          [styles.withDevTools]: withDevTools,
-        })}
-      >
-        <Text
-          className="download-app-text"
-          fontSize="11px"
-          noSelect
-          lineHeight="12px"
-          fontWeight={600}
-        >
-          {t("Common:DownloadApps")}
-        </Text>
-        <div className="download-app-list">
-          {downloaddesktopUrl ? (
-            <IconButton
-              className={styles.windowsIcon}
-              onClick={() => window.open(downloaddesktopUrl)}
-              iconName={WindowsReactSvgUrl}
-              size={32}
-              isFill
-              title={t("Common:MobileWin", {
-                organizationName: logoText,
-              })}
-            />
-          ) : null}
+		return (
+			<div
+				data-show-text={showText ? "true" : "false"}
+				data-with-dev-tools={withDevTools ? "true" : "false"}
+				className={classNames(styles.apps, {
+					[styles.withDevTools]: withDevTools,
+				})}
+			>
+				<Text
+					className="download-app-text"
+					fontSize="11px"
+					noSelect
+					lineHeight="12px"
+					fontWeight={600}
+				>
+					{t("Common:DownloadApps")}
+				</Text>
+				<div className="download-app-list">
+					{downloaddesktopUrl ? (
+						<IconButton
+							className={styles.windowsIcon}
+							onClick={() => window.open(downloaddesktopUrl)}
+							iconName={WindowsReactSvgUrl}
+							size={32}
+							isFill
+							title={t("Common:MobileWin", {
+								organizationName: logoText,
+							})}
+						/>
+					) : null}
 
-          {downloaddesktopUrl ? (
-            <IconButton
-              className={styles.macOsIcon}
-              onClick={() => window.open(downloaddesktopUrl)}
-              iconName={MacOSReactSvgUrl}
-              size={32}
-              isFill
-              title={t("Common:MobileMac", {
-                organizationName: logoText,
-              })}
-            />
-          ) : null}
+					{downloaddesktopUrl ? (
+						<IconButton
+							className={styles.macOsIcon}
+							onClick={() => window.open(downloaddesktopUrl)}
+							iconName={MacOSReactSvgUrl}
+							size={32}
+							isFill
+							title={t("Common:MobileMac", {
+								organizationName: logoText,
+							})}
+						/>
+					) : null}
 
-          {downloaddesktopUrl ? (
-            <IconButton
-              className={styles.linuxIcon}
-              onClick={() => window.open(downloaddesktopUrl)}
-              iconName={LinuxReactSvgUrl}
-              size={32}
-              isFill
-              title={t("Common:MobileLinux", {
-                organizationName: logoText,
-              })}
-            />
-          ) : null}
+					{downloaddesktopUrl ? (
+						<IconButton
+							className={styles.linuxIcon}
+							onClick={() => window.open(downloaddesktopUrl)}
+							iconName={LinuxReactSvgUrl}
+							size={32}
+							isFill
+							title={t("Common:MobileLinux", {
+								organizationName: logoText,
+							})}
+						/>
+					) : null}
 
-          {officeforandroidUrl ? (
-            <IconButton
-              className={styles.androidIcon}
-              onClick={() => window.open(officeforandroidUrl)}
-              iconName={AndroidReactSvgUrl}
-              size={32}
-              isFill
-              title={t("Common:MobileAndroid", {
-                organizationName: logoText,
-              })}
-            />
-          ) : null}
+					{officeforandroidUrl ? (
+						<IconButton
+							className={styles.androidIcon}
+							onClick={() => window.open(officeforandroidUrl)}
+							iconName={AndroidReactSvgUrl}
+							size={32}
+							isFill
+							title={t("Common:MobileAndroid", {
+								organizationName: logoText,
+							})}
+						/>
+					) : null}
 
-          {officeforiosUrl ? (
-            <IconButton
-              className={styles.iosIcon}
-              onClick={() => window.open(officeforiosUrl)}
-              iconName={IOSReactSvgUrl}
-              size={32}
-              isFill
-              title={t("Common:MobileIos", {
-                organizationName: logoText,
-              })}
-            />
-          ) : null}
-        </div>
-      </div>
-    );
-  },
+					{officeforiosUrl ? (
+						<IconButton
+							className={styles.iosIcon}
+							onClick={() => window.open(officeforiosUrl)}
+							iconName={IOSReactSvgUrl}
+							size={32}
+							isFill
+							title={t("Common:MobileIos", {
+								organizationName: logoText,
+							})}
+						/>
+					) : null}
+				</div>
+			</div>
+		);
+	},
 );
 
 ArticleApps.displayName = "ArticleApps";
