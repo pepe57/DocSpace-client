@@ -36,7 +36,7 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Button } from "@docspace/ui-kit/components/button";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import { TTranslation } from "@docspace/shared/types";
-import { useEventListener } from "@docspace/shared/hooks/useEventListener";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 import TilesContainer from "./TilesContainer";
 import ErrorView from "./ErrorView";
 import { useMobileDetection } from "./hooks/useMobileDetection";

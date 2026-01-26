@@ -40,7 +40,7 @@ import { useUnmount } from "../../../hooks/useUnmount";
 import { useDidMount } from "../../../hooks/useDidMount";
 import { SHARED_MEMBERS_COUNT } from "../../../constants";
 import { ShareLinkService } from "../../../services/share-link.service";
-import { useEventListener } from "../../../hooks/useEventListener";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 import type { RoomMember } from "../../../api/rooms/types";
 import SocketHelper, { SocketEvents } from "../../../utils/socket";
 
@@ -48,10 +48,10 @@ import type { TOption } from "../../combobox";
 import { TData, toastr } from "../../toast";
 
 import type {
-	Filter,
-	TShare,
-	TShareMember,
-	UseMembersProps,
+  Filter,
+  TShare,
+  TShareMember,
+  UseMembersProps,
 } from "../Share.types";
 
 import { getShareAccessRightOptions } from "../Share.helpers";
@@ -63,286 +63,286 @@ import ShareHeader from "../sub-components/ShareHeader";
 import { CreateButton } from "../sub-components/CreateButton";
 
 export const useMembers = (props: UseMembersProps) => {
-	const {
-		selfId,
-		shareMembersTotal,
-		infoPanelSelection,
-		linksCount,
-		onClickGroup,
-	} = props;
+  const {
+    selfId,
+    shareMembersTotal,
+    infoPanelSelection,
+    linksCount,
+    onClickGroup,
+  } = props;
 
-	const abortController = useRef(new AbortController());
+  const abortController = useRef(new AbortController());
 
-	const [isLoading, setIsLoading] = useState(
-		() => !props.members && !props.disabledSharedUser,
-	);
-	const { t } = useTranslation("Common");
+  const [isLoading, setIsLoading] = useState(
+    () => !props.members && !props.disabledSharedUser,
+  );
+  const { t } = useTranslation("Common");
 
-	const filterRef = useRef<Filter>({
-		startIndex: 0,
-		count: SHARED_MEMBERS_COUNT,
-	});
+  const filterRef = useRef<Filter>({
+    startIndex: 0,
+    count: SHARED_MEMBERS_COUNT,
+  });
 
-	const [total, setTotal] = useState(() => shareMembersTotal);
-	const [members, setMembers] = useState(() => props.members ?? []);
+  const [total, setTotal] = useState(() => shareMembersTotal);
+  const [members, setMembers] = useState(() => props.members ?? []);
 
-	useUnmount(() => {
-		abortController.current.abort();
-	});
+  useUnmount(() => {
+    abortController.current.abort();
+  });
 
-	const updateAccess = useCallback((res: string) => {
-		try {
-			const data: Record<string, ShareAccessRights> = JSON.parse(res);
-			const [memberId] = Object.keys(data);
+  const updateAccess = useCallback((res: string) => {
+    try {
+      const data: Record<string, ShareAccessRights> = JSON.parse(res);
+      const [memberId] = Object.keys(data);
 
-			if (!memberId) return;
+      if (!memberId) return;
 
-			const access = data[memberId];
+      const access = data[memberId];
 
-			setMembers((prevMembers) =>
-				prevMembers.map((member) => {
-					if (member.sharedTo.id === memberId) {
-						return {
-							...member,
-							access,
-						};
-					}
+      setMembers((prevMembers) =>
+        prevMembers.map((member) => {
+          if (member.sharedTo.id === memberId) {
+            return {
+              ...member,
+              access,
+            };
+          }
 
-					return member;
-				}),
-			);
-		} catch (error) {
-			console.error(error);
-		}
-	}, []);
+          return member;
+        }),
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
 
-	useEffect(() => {
-		SocketHelper?.on(SocketEvents.SelfRestrictionFile, (res) => {
-			if (!isFile(infoPanelSelection) || res.id !== infoPanelSelection.id)
-				return;
+  useEffect(() => {
+    SocketHelper?.on(SocketEvents.SelfRestrictionFile, (res) => {
+      if (!isFile(infoPanelSelection) || res.id !== infoPanelSelection.id)
+        return;
 
-			updateAccess(res.data);
-		});
-		SocketHelper?.on(SocketEvents.SelfRestrictionFolder, (res) => {
-			if (!isFolder(infoPanelSelection) || res.id !== infoPanelSelection.id)
-				return;
-			updateAccess(res.data);
-		});
+      updateAccess(res.data);
+    });
+    SocketHelper?.on(SocketEvents.SelfRestrictionFolder, (res) => {
+      if (!isFolder(infoPanelSelection) || res.id !== infoPanelSelection.id)
+        return;
+      updateAccess(res.data);
+    });
 
-		return () => {
-			SocketHelper?.off(SocketEvents.SelfRestrictionFile);
-			SocketHelper?.off(SocketEvents.SelfRestrictionFolder);
-		};
-	}, [infoPanelSelection, updateAccess]);
+    return () => {
+      SocketHelper?.off(SocketEvents.SelfRestrictionFile);
+      SocketHelper?.off(SocketEvents.SelfRestrictionFolder);
+    };
+  }, [infoPanelSelection, updateAccess]);
 
-	useEventListener(
-		ShareUpdateListEventName,
-		(event: CustomEvent<RoomMember[]>) => {
-			setMembers((prev) =>
-				uniqBy([...prev, ...event.detail], (item) => item.sharedTo.id),
-			);
-		},
-	);
+  useEventListener(
+    ShareUpdateListEventName,
+    (event: CustomEvent<RoomMember[]>) => {
+      setMembers((prev) =>
+        uniqBy([...prev, ...event.detail], (item) => item.sharedTo.id),
+      );
+    },
+  );
 
-	const fetchShareMembers = useCallback(async (filter: Filter) => {
-		try {
-			setIsLoading(true);
+  const fetchShareMembers = useCallback(async (filter: Filter) => {
+    try {
+      setIsLoading(true);
 
-			abortController.current.abort();
-			abortController.current = new AbortController();
+      abortController.current.abort();
+      abortController.current = new AbortController();
 
-			const data = await ShareLinkService.getShare(
-				infoPanelSelection,
-				filter,
-				abortController.current.signal,
-			);
-			setTotal(data.total);
+      const data = await ShareLinkService.getShare(
+        infoPanelSelection,
+        filter,
+        abortController.current.signal,
+      );
+      setTotal(data.total);
 
-			setMembers((prev) =>
-				uniqBy([...prev, ...data.items], (item) => item.sharedTo.id),
-			);
-		} catch (error) {
-			if (axios.isCancel(error)) return;
+      setMembers((prev) =>
+        uniqBy([...prev, ...data.items], (item) => item.sharedTo.id),
+      );
+    } catch (error) {
+      if (axios.isCancel(error)) return;
 
-			console.error(error);
-			toastr.error(error as TData);
-		} finally {
-			setIsLoading(false);
-		}
-	}, []);
+      console.error(error);
+      toastr.error(error as TData);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
-	const fetchMoreShareMembers = useCallback(async (range: IndexRange) => {
-		console.log(range);
+  const fetchMoreShareMembers = useCallback(async (range: IndexRange) => {
+    console.log(range);
 
-		filterRef.current.startIndex += SHARED_MEMBERS_COUNT;
+    filterRef.current.startIndex += SHARED_MEMBERS_COUNT;
 
-		return fetchShareMembers(filterRef.current);
-	}, []);
+    return fetchShareMembers(filterRef.current);
+  }, []);
 
-	useDidMount(() => {
-		if (props.members || props.disabledSharedUser) return;
+  useDidMount(() => {
+    if (props.members || props.disabledSharedUser) return;
 
-		const filter = {
-			startIndex: 0,
-			count: SHARED_MEMBERS_COUNT,
-		};
+    const filter = {
+      startIndex: 0,
+      count: SHARED_MEMBERS_COUNT,
+    };
 
-		fetchShareMembers(filter);
-	});
+    fetchShareMembers(filter);
+  });
 
-	useEffect(() => {
-		if (props.members) {
-			return setMembers(props.members);
-		}
-	}, [props.members]);
+  useEffect(() => {
+    if (props.members) {
+      return setMembers(props.members);
+    }
+  }, [props.members]);
 
-	useEffect(() => {
-		setTotal(shareMembersTotal);
-	}, [shareMembersTotal]);
+  useEffect(() => {
+    setTotal(shareMembersTotal);
+  }, [shareMembersTotal]);
 
-	const onAdded = useCallback(() => {
-		props.onAddUser?.(infoPanelSelection);
-	}, [props.onAddUser, infoPanelSelection]);
+  const onAdded = useCallback(() => {
+    props.onAddUser?.(infoPanelSelection);
+  }, [props.onAddUser, infoPanelSelection]);
 
-	const onSelectOption = useCallback(
-		async (option: TOption, member: TShare) => {
-			if (isNil(option.access)) return;
+  const onSelectOption = useCallback(
+    async (option: TOption, member: TShare) => {
+      if (isNil(option.access)) return;
 
-			try {
-				const newShareItems = await ShareLinkService.shareItemToUser(
-					[{ shareTo: member.id, access: option.access }],
-					infoPanelSelection,
-				);
+      try {
+        const newShareItems = await ShareLinkService.shareItemToUser(
+          [{ shareTo: member.id, access: option.access }],
+          infoPanelSelection,
+        );
 
-				if (option.access === ShareAccessRights.None) {
-					setTotal((prev) => prev - 1);
-					return setMembers((prev) =>
-						prev.filter((item) => item.sharedTo.id !== member.id),
-					);
-				}
+        if (option.access === ShareAccessRights.None) {
+          setTotal((prev) => prev - 1);
+          return setMembers((prev) =>
+            prev.filter((item) => item.sharedTo.id !== member.id),
+          );
+        }
 
-				const newMember = newShareItems.find(
-					(item) => item.sharedTo.id === member.id,
-				);
+        const newMember = newShareItems.find(
+          (item) => item.sharedTo.id === member.id,
+        );
 
-				if (newMember) {
-					toastr.success(t("Common:AccessRightsChanged"));
-					setMembers((prev) =>
-						prev.map((item) =>
-							item.sharedTo.id === member.id ? newMember : item,
-						),
-					);
-				}
-			} catch (error) {
-				console.error(error);
-				toastr.error(error as TData);
-			}
-		},
-		[infoPanelSelection, t],
-	);
+        if (newMember) {
+          toastr.success(t("Common:AccessRightsChanged"));
+          setMembers((prev) =>
+            prev.map((item) =>
+              item.sharedTo.id === member.id ? newMember : item,
+            ),
+          );
+        }
+      } catch (error) {
+        console.error(error);
+        toastr.error(error as TData);
+      }
+    },
+    [infoPanelSelection, t],
+  );
 
-	const getUsers = useCallback(() => {
-		if (props.disabledSharedUser) return { content: [], headersCount: 0 };
+  const getUsers = useCallback(() => {
+    if (props.disabledSharedUser) return { content: [], headersCount: 0 };
 
-		const membersList = members.map((member) => {
-			return {
-				...member.sharedTo,
-				access: member.access,
-				canEditAccess: member.canEditAccess,
-				isGroup: member.subjectType === MembersSubjectType.Group,
-				isOwner: member.isOwner,
-			};
-		});
+    const membersList = members.map((member) => {
+      return {
+        ...member.sharedTo,
+        access: member.access,
+        canEditAccess: member.canEditAccess,
+        isGroup: member.subjectType === MembersSubjectType.Group,
+        isOwner: member.isOwner,
+      };
+    });
 
-		const currentMember = membersList.find((member) => member.id === selfId);
+    const currentMember = membersList.find((member) => member.id === selfId);
 
-		if (membersList.length === 0) {
-			return {
-				content: [
-					<ShareHeader key="header-users" title={t("Common:ShareForUsers")} />,
-					<CreateButton
-						key="create-block"
-						onClick={onAdded}
-						title={t("Common:AddUsersOrGroups")}
-					/>,
-				],
-				headersCount: 2,
-			};
-		}
+    if (membersList.length === 0) {
+      return {
+        content: [
+          <ShareHeader key="header-users" title={t("Common:ShareForUsers")} />,
+          <CreateButton
+            key="create-block"
+            onClick={onAdded}
+            title={t("Common:AddUsersOrGroups")}
+          />,
+        ],
+        headersCount: 2,
+      };
+    }
 
-		const options = (
-			<IconButton
-				size={16}
-				key="add-share-user"
-				onClick={onAdded}
-				iconName={PersonPlusReactSvgUrl}
-				className={styles.linkToViewingIcon}
-				dataTestId="info_panel_share_add_share_user_button"
-			/>
-		);
+    const options = (
+      <IconButton
+        size={16}
+        key="add-share-user"
+        onClick={onAdded}
+        iconName={PersonPlusReactSvgUrl}
+        className={styles.linkToViewingIcon}
+        dataTestId="info_panel_share_add_share_user_button"
+      />
+    );
 
-		const header = (
-			<ShareHeader
-				key="share-header-users"
-				title={t("Common:WhoHasAccess")}
-				options={options}
-				isShareTitle
-			/>
-		);
+    const header = (
+      <ShareHeader
+        key="share-header-users"
+        title={t("Common:WhoHasAccess")}
+        options={options}
+        isShareTitle
+      />
+    );
 
-		return {
-			content: [
-				header,
-				...membersList.map((member, index) => {
-					const isGroup = "isGroup" in member && member.isGroup;
+    return {
+      content: [
+        header,
+        ...membersList.map((member, index) => {
+          const isGroup = "isGroup" in member && member.isGroup;
 
-					const options = getShareAccessRightOptions(
-						t,
-						infoPanelSelection,
-						true,
-						isGroup,
-						member.isOwner,
-					);
-					const selectedOption = options.find(
-						(option) => "access" in member && option.access === member.access,
-					);
+          const options = getShareAccessRightOptions(
+            t,
+            infoPanelSelection,
+            true,
+            isGroup,
+            member.isOwner,
+          );
+          const selectedOption = options.find(
+            (option) => "access" in member && option.access === member.access,
+          );
 
-					return (
-						<User
-							user={member}
-							key={
-								member.id ||
-								("email" in member && member.email) ||
-								("name" in member && member.name) ||
-								""
-							}
-							options={options}
-							currentUser={currentMember as TShareMember}
-							selectedOption={selectedOption}
-							onSelectOption={(option) => onSelectOption(option, member)}
-							index={index + linksCount}
-							onClickGroup={onClickGroup}
-						/>
-					);
-				}),
-			],
-			headersCount: 1,
-		};
-	}, [
-		t,
-		selfId,
-		members,
-		onAdded,
-		linksCount,
-		onSelectOption,
-		infoPanelSelection,
-		props.disabledSharedUser,
-	]);
+          return (
+            <User
+              user={member}
+              key={
+                member.id ||
+                ("email" in member && member.email) ||
+                ("name" in member && member.name) ||
+                ""
+              }
+              options={options}
+              currentUser={currentMember as TShareMember}
+              selectedOption={selectedOption}
+              onSelectOption={(option) => onSelectOption(option, member)}
+              index={index + linksCount}
+              onClickGroup={onClickGroup}
+            />
+          );
+        }),
+      ],
+      headersCount: 1,
+    };
+  }, [
+    t,
+    selfId,
+    members,
+    onAdded,
+    linksCount,
+    onSelectOption,
+    infoPanelSelection,
+    props.disabledSharedUser,
+  ]);
 
-	return {
-		getUsers,
-		total,
-		fetchMoreShareMembers,
-		isLoading,
-	};
+  return {
+    getUsers,
+    total,
+    fetchMoreShareMembers,
+    isLoading,
+  };
 };
