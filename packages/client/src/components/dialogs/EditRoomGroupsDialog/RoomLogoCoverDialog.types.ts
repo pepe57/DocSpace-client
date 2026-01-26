@@ -27,7 +27,7 @@
 import { TColorScheme } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
 
-import  { ILogo, IUpdateRoomGroup } from "./EditRoomGroupsDialog.types";
+import { ILogo, IUpdateRoomGroup } from "./EditRoomGroupsDialog.types";
 
 export interface ICreateRoomGroup {
   name: string;

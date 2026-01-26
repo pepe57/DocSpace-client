@@ -113,24 +113,22 @@ export const SelectIcon = ({
       <div className="color-name">{t("CreateEditRoomDialog:Icon")}</div>
 
       <div className="cover-icon-container">
-        {covers
-          ? covers?.map((icon) => {
-              return (
-                <StyledIconContainer
-                  isSelected={coverId === icon.id}
-                  $currentColorScheme={$currentColorScheme}
-                  onClick={() => onSelectIcon(icon)}
-                  key={icon.id}
-                >
-                  <ReactSVG
-                    src={`data:image/svg+xml;utf8,${encodeURIComponent(
-                      icon.data,
-                    )}`}
-                  />
-                </StyledIconContainer>
-              );
-            })
-          : null}
+        {covers?.map((icon) => {
+          return (
+            <StyledIconContainer
+              isSelected={coverId === icon.id}
+              $currentColorScheme={$currentColorScheme}
+              onClick={() => onSelectIcon(icon)}
+              key={icon.id}
+            >
+              <ReactSVG
+                src={`data:image/svg+xml;utf8,${encodeURIComponent(
+                  icon.data,
+                )}`}
+              />
+            </StyledIconContainer>
+          );
+        })}
       </div>
     </div>
   );

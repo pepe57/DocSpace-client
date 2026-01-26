@@ -146,8 +146,8 @@ const GroupIconDialog = ({
   const [groupName, setGroupName] = React.useState<string>("");
 
   React.useEffect(() => {
-    getCovers();
-  }, [getCovers]);
+    if (!covers) getCovers();
+  }, [getCovers, covers]);
 
   React.useEffect(() => {
     if (editingGroupId && currentGroupIcon) {
@@ -219,6 +219,8 @@ const GroupIconDialog = ({
       onCloseEditRoomGroupsDialog();
     }
   };
+
+  if (!covers) return null;
 
   return (
     <ModalDialog
