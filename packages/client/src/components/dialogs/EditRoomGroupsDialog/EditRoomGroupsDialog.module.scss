@@ -78,11 +78,41 @@
   .group {
     display: flex;
     justify-content: space-between;
+    padding: 17px 20px;
+  }
+
+  .nameGroup {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .countRooms {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(163, 169, 174, 1);
+  }
+
+  .titleContainer {
+    overflow: hidden;
+    min-width: 0;
   }
 
   .groupData {
     display: flex;
-    gap: 8px;
+    align-items: center;
+    overflow: hidden;
+    min-width: 0;
+    flex: 1;
+    cursor: pointer;
+  }
+
+  .iconGroup {
+    padding-inline-end: 8px;
   }
 }
 
@@ -132,4 +162,6 @@
 .editGroup {
   display: flex;
   gap: 18px;
+  flex-shrink: 0;
+  margin-inline-start: 8px;
 }

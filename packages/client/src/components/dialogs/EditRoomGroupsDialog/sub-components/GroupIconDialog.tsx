@@ -273,6 +273,7 @@ const GroupIconDialog = ({
           size={ButtonSize.normal}
           label={t("Common:Create")}
           onClick={handleSubmit}
+          isDisabled={!groupName.trim()}
         />
         <Button
           scale

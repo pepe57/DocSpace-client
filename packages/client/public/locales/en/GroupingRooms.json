@@ -5,5 +5,5 @@
     "GroupIcon": "Group icon",
     "GroupName": "Group name",
     "RoomGroups": "Room groups",
-    "RoomGroupsDescription": "Organize your rooms into groups for easier navigation and management."
+    "RoomGroupsDescription": "You can group rooms into folders and easily switch between them. By disabling grouping, you can re-enable it in the profile settings."
 }

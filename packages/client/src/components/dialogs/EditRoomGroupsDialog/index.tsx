@@ -96,7 +96,8 @@ const EditRoomGroupsDialog = ({
       const initialRoomIds = (selectedGroup.rooms || []).map((room) => room.id);
       const initialRoomIdByKey = new Map<string, number>(
         initialRoomIds.map((id) => [toIdKey(id), id] as const),
-      ); const initialRoomIdKeys = new Set<string>(
+      );
+      const initialRoomIdKeys = new Set<string>(
         initialRoomIds.map((id) => toIdKey(id)),
       );
 
@@ -303,16 +304,15 @@ const EditRoomGroupsDialog = ({
               className={styles.groupData}
               onClick={() => onClickGroup(item.id)}
             >
-              <div className={styles.iconGroup} />
-
-              {iconData && (
-                <ReactSVG
-                  src={`data:image/svg+xml;utf8,${encodeURIComponent(
-                    iconData,
-                  )}`}
-                />
-              )}
-
+              <div className={styles.iconGroup}>
+                {iconData && (
+                  <ReactSVG
+                    src={`data:image/svg+xml;utf8,${encodeURIComponent(
+                      iconData,
+                    )}`}
+                  />
+                )}
+              </div>
               <div className={styles.titleContainer}>
                 <div className={styles.nameGroup}>{item.name}</div>
                 <div className={styles.countRooms}>
@@ -356,7 +356,7 @@ const EditRoomGroupsDialog = ({
       <ModalDialog.Body>
         <div className={styles.settingRoomGroups}>
           <div className={styles.roomGroups}>
-            <div className={styles.title}>{t("GroupingRooms:RoomGroups")}</div>
+            <div className={styles.title}>Enable room grouping</div>
             <ToggleButton className={styles.roomGroupsToggle} />
           </div>
 
@@ -371,23 +371,6 @@ const EditRoomGroupsDialog = ({
         />
         <div className={styles.addedGroups}>{nodeAddedGroups()}</div>
       </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          id="shared_create-room-modal_submit"
-          tabIndex={5}
-          label={t("Common:SaveButton")}
-          size={ButtonSize.normal}
-          primary
-          scale
-        />
-        <Button
-          id="shared_create-room-modal_cancel"
-          tabIndex={5}
-          label={t("Common:CancelButton")}
-          size={ButtonSize.normal}
-          scale
-        />
-      </ModalDialog.Footer>
     </ModalDialog>
   );
 };
