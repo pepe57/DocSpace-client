@@ -55,8 +55,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { StartFillingMode } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { toastr, type TData } from "@docspace/shared/components/toast";
 import { Nullable } from "@docspace/shared/types";
 
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";

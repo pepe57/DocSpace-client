@@ -36,7 +36,7 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Text } from "@docspace/ui-kit/components/text";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { size, isMobileDevice } from "@docspace/shared/utils";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { type TData } from "@docspace/shared/components/toast";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { DeviceType } from "@docspace/shared/enums";

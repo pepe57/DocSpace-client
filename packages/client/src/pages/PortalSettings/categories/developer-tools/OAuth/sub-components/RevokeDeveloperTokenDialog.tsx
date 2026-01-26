@@ -38,8 +38,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/shared/components/toast";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { toastr, type TData } from "@docspace/shared/components/toast";
 
 import {
   InputSize,

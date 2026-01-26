@@ -54,7 +54,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TTranslation } from "@docspace/shared/types";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { type TData } from "@docspace/shared/components/toast";
 import {
   TBalance,
   TAutoTopUpSettings,

@@ -34,8 +34,7 @@ import {
   IClientReqDTO,
 } from "@docspace/shared/utils/oauth/types";
 import { AuthenticationMethod } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { toastr, type TData } from "@docspace/shared/components/toast";
 import { addClient, getClient, updateClient } from "@docspace/shared/api/oauth";
 
 import ResetDialog from "../ResetDialog";
