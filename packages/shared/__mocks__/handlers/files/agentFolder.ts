@@ -268,7 +268,7 @@ const getAgentFolderChat = ({ canUseChat }: { canUseChat: boolean }) => {
   };
 };
 
-const getMockKnowledgeFiles = (
+const getMockFiles = (
   vectorizationStatus: VectorizationStatus = VectorizationStatus.Completed,
   canRetryVectorization: boolean = true,
 ) => {
@@ -472,7 +472,7 @@ const getAgentFolderKnowledge = (
 
   const files = isEmpty
     ? []
-    : getMockKnowledgeFiles(vectorizationStatus, canRetryVectorization);
+    : getMockFiles(vectorizationStatus, canRetryVectorization);
 
   return {
     files,
@@ -564,8 +564,10 @@ const getAgentFolderResultStorage = ({
   canUseChat: boolean;
   isEmpty: boolean;
 }) => {
+  const files = isEmpty ? [] : getMockFiles();
+
   return {
-    files: [],
+    files: files,
     folders: [],
     current: {
       parentId: 2,
@@ -763,6 +765,19 @@ const successFolderKnowledgeVectorizationFailedNoRetry = {
 };
 
 const successFolderResultStorageDefault = {
+  response: getAgentFolderResultStorage({ canUseChat: true, isEmpty: false }),
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/files/2?count=100&sortby=DateAndTime&sortOrder=descending`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successFolderResultStorageEmpty = {
   response: getAgentFolderResultStorage({ canUseChat: true, isEmpty: true }),
   count: 1,
   links: [
@@ -826,13 +841,15 @@ export const agentFolderChatResolver = (
 };
 
 export const agentFolderResultStorageResolver = (
-  type: "default" | "canNotUseChat" = "default",
+  type: "default" | "empty" | "canNotUseChat" = "default",
 ) => {
   switch (type) {
     case "canNotUseChat":
       return new Response(
         JSON.stringify(successFolderResultStorageCanNotUseChat),
       );
+    case "empty":
+      return new Response(JSON.stringify(successFolderResultStorageEmpty));
     case "default":
       return new Response(JSON.stringify(successFolderResultStorageDefault));
   }
@@ -908,7 +925,7 @@ export const agentFolderChatHandler = (
 
 export const agentFolderResultStorageHandler = (
   port: string,
-  type: "default" | "canNotUseChat" = "default",
+  type: "default" | "canNotUseChat" | "empty" = "default",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_RESULT_STORAGE}`,
