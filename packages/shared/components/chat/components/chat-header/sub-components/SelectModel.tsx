@@ -26,7 +26,7 @@
 
 import { getAiModelName } from "../../../../../utils/ai";
 
-import { RectangleSkeleton } from "../../../../../skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import { Text } from "@docspace/ui-kit/components/text";
 
@@ -35,29 +35,29 @@ import type { SelectModelProps } from "../../../Chat.types";
 import styles from "../ChatHeader.module.scss";
 
 const SelectModel = ({ selectedModel, isLoading }: SelectModelProps) => {
-  if (isLoading) {
-    return (
-      <RectangleSkeleton
-        width="96px"
-        height="32px"
-        borderRadius="3px"
-        style={{ minWidth: "32px" }}
-      />
-    );
-  }
+	if (isLoading) {
+		return (
+			<RectangleSkeleton
+				width="96px"
+				height="32px"
+				borderRadius="3px"
+				style={{ minWidth: "32px" }}
+			/>
+		);
+	}
 
-  const name = getAiModelName(selectedModel);
+	const name = getAiModelName(selectedModel);
 
-  return (
-    <Text
-      fontSize="13px"
-      fontWeight={600}
-      lineHeight="20px"
-      className={styles.selectModel}
-    >
-      {name}
-    </Text>
-  );
+	return (
+		<Text
+			fontSize="13px"
+			fontWeight={600}
+			lineHeight="20px"
+			className={styles.selectModel}
+		>
+			{name}
+		</Text>
+	);
 };
 
 export default SelectModel;
