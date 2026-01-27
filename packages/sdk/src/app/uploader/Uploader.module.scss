@@ -24,31 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getFilesSettings } from "@/api/files";
-import { logger } from "../../../logger.mjs";
+.uploadButtonWrapper {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+}
 
-import UploaderClient from "./page.client";
+.dropzoneWrapper {
+  //height: 220px !important;
+  min-height: 220px !important;
+}
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string }>;
-}) {
-  logger.info("Uploader page");
+.dropzoneCentered {
+  justify-content: center;
+}
 
-  const baseConfig = Object.fromEntries(
-    Object.entries(await searchParams).map(([k, v]) => {
-      if (v === "true") return [k, true];
-      if (v === "false") return [k, false];
-      if (k === "filter") return [k, Number.isNaN(+v) ? v : +v];
+.dropzoneChildren {
+  display: flex;
+  align-content: space-between;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-      return [k, v];
-    }),
-  );
-
-  const filesSettings = await getFilesSettings();
-
-  return (
-    <UploaderClient filesSettings={filesSettings} baseConfig={baseConfig} />
-  );
+.dropzoneLoader {
+  position: static;
+  transform: none;
+  margin: auto;
 }

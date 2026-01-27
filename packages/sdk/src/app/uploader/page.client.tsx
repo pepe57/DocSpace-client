@@ -32,6 +32,7 @@ import { useTranslation } from "react-i18next";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { useItemIcon } from "@docspace/shared/hooks/useItemIcon";
 import DropzoneComponent from "@docspace/shared/components/dropzone";
+import UploadSvgUrl from "PUBLIC_DIR/images/upload.svg?url";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
@@ -40,7 +41,6 @@ import {
   startUploadSession,
   uploadChunkParallel,
 } from "@docspace/shared/api/files";
-import { FileExtensions } from "@docspace/shared/enums";
 import { TFilesSettings } from "@docspace/shared/api/files/types";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
@@ -52,24 +52,35 @@ import {
   attachParentFolderId,
   runWithConcurrency,
   createChunks,
+  getAcceptExtensions,
+  parseAcceptCategories,
 } from "./_utils";
-import FilesList, { type FilesListFile } from "./_components/FilesList";
+import FilesList, { type TFile } from "./_components/FilesList";
+import styles from "./Uploader.module.scss";
 
-const TARGET_FOLDER_ID = 9;
 const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;
 const DEFAULT_MAX_UPLOAD_THREAD_COUNT = 3;
 const DEFAULT_MAX_UPLOAD_FILES_COUNT = 2;
 
 export type UploaderClientProps = {
-  filesSettings: TFilesSettings;
+  filesSettings?: TFilesSettings;
+  baseConfig?: {
+    targetId?: string;
+    acceptCategories?: string;
+  };
 };
 
-export default function UploaderClient({ filesSettings }: UploaderClientProps) {
+export default function UploaderClient({
+  filesSettings,
+  baseConfig,
+}: UploaderClientProps) {
   useSDKConfig();
   useDocumentTitle("Uploader");
   //TODO: remove article namespace
   const { t } = useTranslation(["Article", "Common"]);
   const { getIcon } = useItemIcon({ filesSettings });
+
+  const folderTargetId = +(baseConfig?.targetId ?? 0);
 
   const chunkUploadSize =
     filesSettings?.chunkUploadSize || DEFAULT_CHUNK_UPLOAD_SIZE;
@@ -78,28 +89,26 @@ export default function UploaderClient({ filesSettings }: UploaderClientProps) {
   const maxUploadFilesCount =
     filesSettings?.maxUploadFilesCount || DEFAULT_MAX_UPLOAD_FILES_COUNT;
 
-  const accept = useMemo(
-    () =>
-      [
-        `.${FileExtensions.DOC}`,
-        `.${FileExtensions.DOCX}`,
-        `.${FileExtensions.DOCXF}`,
-        `.${FileExtensions.XLSX}`,
-        `.${FileExtensions.PPTX}`,
-      ].join(","),
-    [],
-  );
+  const accept = useMemo(() => {
+    const categories = parseAcceptCategories(baseConfig?.acceptCategories);
+
+    if (categories.length === 0) {
+      return filesSettings?.extsUploadable?.join(",") ?? "";
+    }
+
+    return getAcceptExtensions(filesSettings, categories);
+  }, [filesSettings, baseConfig?.acceptCategories]);
 
   const [isDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [percent, setPercent] = useState(0);
-  const [pendingFiles, setPendingFiles] = useState<FilesListFile[]>([]);
-  
+  const [pendingFiles, setPendingFiles] = useState<TFile[]>([]);
+
   const uploadedBytesRef = useRef(0);
   const totalBytesRef = useRef(0);
 
   const uploadFiles = useCallback(async (rawFiles: File[]) => {
-    const prepared = await attachParentFolderId(rawFiles, TARGET_FOLDER_ID);
+    const prepared = await attachParentFolderId(rawFiles, folderTargetId);
 
     const onlyFiles = prepared.filter((f) => !isEmptyDirectoryFile(f));
 
@@ -108,10 +117,9 @@ export default function UploaderClient({ filesSettings }: UploaderClientProps) {
     setPercent(0);
 
     await runWithConcurrency(onlyFiles, maxUploadFilesCount, async (file) => {
-      const folderId = file.parentFolderId ?? TARGET_FOLDER_ID;
 
       const session = await startUploadSession(
-        folderId,
+        folderTargetId,
         file.name,
         file.size,
         "",
@@ -125,7 +133,7 @@ export default function UploaderClient({ filesSettings }: UploaderClientProps) {
 
       await runWithConcurrency(chunks, maxUploadThreadCount, async (chunk) => {
         await uploadChunkParallel(
-          folderId,
+          folderTargetId,
           session.id,
           chunk.index,
           chunk.data,
@@ -142,7 +150,7 @@ export default function UploaderClient({ filesSettings }: UploaderClientProps) {
         }
       });
 
-      await finalizeUploadSession(folderId, session.id);
+      await finalizeUploadSession(folderTargetId, session.id);
     });
 
     setPercent(100);
@@ -157,7 +165,7 @@ export default function UploaderClient({ filesSettings }: UploaderClientProps) {
     (acceptedFiles: File[]) => {
       if (!acceptedFiles.length) return;
 
-      const newFiles: FilesListFile[] = acceptedFiles.map((file) => ({
+      const newFiles: TFile[] = acceptedFiles.map((file) => ({
         id: `${file.name}-${file.size}-${file.lastModified}`,
         name: file.name,
         extension: getFileExtension(file.name),
@@ -173,7 +181,7 @@ export default function UploaderClient({ filesSettings }: UploaderClientProps) {
     [getFileExtension],
   );
 
-  const onRemoveFile = useCallback((file: FilesListFile) => {
+  const onRemoveFile = useCallback((file: TFile) => {
     setPendingFiles((prev) => prev.filter((f) => f.id !== file.id));
   }, []);
 
@@ -200,37 +208,42 @@ export default function UploaderClient({ filesSettings }: UploaderClientProps) {
   }, [pendingFiles, t, uploadFiles]);
 
   return (
-    <div>
-      <DropzoneComponent
-        isDisabled={isDisabled || isLoading}
-        isLoading={isLoading}
-        onDrop={onDrop}
-        accept={accept}
-        getFilesFromEvent={getFilesFromEvent}
-        linkMainText={t("Article:Upload")}
-        linkSecondaryText={t("Common:DropzoneTitleSecondary")}
-        exstsText="(DOC, DOCX, DOCXF, XLSX, PPTX)"
-        dataTestId="sdk-uploader"
-      />
-
-      <FilesList
-        files={pendingFiles}
-        getIcon={getIcon}
-        onRemove={isLoading ? undefined : onRemoveFile}
-      />
-
+    <DropzoneComponent
+      isDisabled={isDisabled || isLoading}
+      isLoading={isLoading}
+      onDrop={onDrop}
+      accept={accept}
+      getFilesFromEvent={getFilesFromEvent}
+      linkMainText={t("Article:Upload")}
+      linkSecondaryText={t("Common:DropzoneTitleSecondary")}
+      exstsText="(DOC, DOCX, DOCXF, XLSX, PPTX)"
+      dataTestId="sdk-uploader"
+      icon={pendingFiles.length === 0 ? UploadSvgUrl : undefined}
+      className={`${styles.dropzoneWrapper} ${pendingFiles.length === 0 ? styles.dropzoneCentered : ""}`}
+      childrenClassName={styles.dropzoneChildren}
+      loaderClassName={styles.dropzoneLoader}
+    >
       {pendingFiles.length > 0 && (
-        <div style={{ marginTop: 16 }}>
-          <Button
-            label={isLoading ? `${Math.floor(percent)}%` : t("Article:Upload")}
-            primary
-            size={ButtonSize.normal}
-            isDisabled={isLoading}
-            isLoading={isLoading}
-            onClick={onUploadClick}
+        <>
+          <FilesList
+            files={pendingFiles}
+            getIcon={getIcon}
+            onRemove={isLoading ? undefined : onRemoveFile}
           />
-        </div>
+          <div className={styles.uploadButtonWrapper}>
+            <Button
+              label={
+                isLoading ? `${Math.floor(percent)}%` : t("Article:Upload")
+              }
+              primary
+              size={ButtonSize.normal}
+              isDisabled={isLoading}
+              isLoading={isLoading}
+              onClick={onUploadClick}
+            />
+          </div>
+        </>
       )}
-    </div>
+    </DropzoneComponent>
   );
 }

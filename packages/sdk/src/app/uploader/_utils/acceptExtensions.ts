@@ -24,68 +24,71 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.filesList {
-  width: 100%;
+import type { TFilesSettings } from "@docspace/shared/api/files/types";
 
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+export type ExtensionCategory =
+  | "archive"
+  | "audio"
+  | "document"
+  | "diagram"
+  | "image"
+  | "presentation"
+  | "spreadsheet"
+  | "video"
+  | "pdf";
 
-.filesListWrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+const CATEGORY_TO_SETTINGS_KEY: Record<
+  ExtensionCategory,
+  keyof TFilesSettings
+> = {
+  archive: "extsArchive",
+  audio: "extsAudio",
+  document: "extsDocument",
+  diagram: "extsDiagram",
+  image: "extsImage",
+  presentation: "extsPresentation",
+  spreadsheet: "extsSpreadsheet",
+  video: "extsVideo",
+  pdf: "extsWebRestrictedEditing",
+};
 
-.filesListItem {
-  width: 100%;
-  height: 40px;
-
-  padding-inline-end: 8px;
-
-  display: flex;
-  align-items: center;
-
-  border: 1px solid var(--chat-input-file-border-color, #d0d5dd);
-  background-color: var(--chat-input-file-background-color, #fff);
-
-  border-radius: 6px;
-
-  box-sizing: border-box;
-}
-
-.filesListItemIcon {
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-
-  div {
-    width: 40px;
-    height: 40px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+export const getAcceptExtensions = (
+  filesSettings: TFilesSettings | undefined,
+  categories: ExtensionCategory[],
+): string => {
+  if (!filesSettings || categories.length === 0) {
+    return "";
   }
-}
 
-.filesListItemInfo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  overflow: hidden;
-  flex: 1;
-}
+  const extensions = new Set<string>();
 
-.filesListItemInfoText {
-  display: flex;
-  flex-direction: row;
-  overflow: hidden;
-  flex: 1;
+  for (const category of categories) {
+    const settingsKey = CATEGORY_TO_SETTINGS_KEY[category];
+    const exts = filesSettings[settingsKey];
 
-  span {
-    color: var(--chat-file-item-exst-color, #a3a9ae);
+    if (Array.isArray(exts)) {
+      for (const ext of exts) {
+        extensions.add(ext);
+      }
+    }
   }
-}
+
+  return Array.from(extensions).join(",");
+};
+
+export const parseAcceptCategories = (
+  categoriesString: string | undefined,
+): ExtensionCategory[] => {
+  if (!categoriesString) {
+    return [];
+  }
+
+  const validCategories = Object.keys(
+    CATEGORY_TO_SETTINGS_KEY,
+  ) as ExtensionCategory[];
+
+  return categoriesString
+    .split(",")
+    .map((c) => c.trim().toLowerCase() as ExtensionCategory)
+    .filter((c) => validCategories.includes(c));
+};

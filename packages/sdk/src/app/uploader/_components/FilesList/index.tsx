@@ -31,11 +31,12 @@ import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import type { TItemIconSizes } from "@docspace/shared/hooks/useItemIcon";
 
 import styles from "./FilesList.module.scss";
 
-export type FilesListFile = {
+export type TFile = {
   id: string;
   name: string;
   extension: string;
@@ -43,10 +44,14 @@ export type FilesListFile = {
 };
 
 export type FilesListProps = {
-  files: FilesListFile[];
+  files: TFile[];
   getIcon: (extension: string, size?: TItemIconSizes) => string;
-  onRemove?: (file: FilesListFile) => void;
+  onRemove?: (file: TFile) => void;
 };
+
+const MAX_VISIBLE_FILES = 2;
+const ITEM_HEIGHT = 40;
+const GAP = 4;
 
 const FilesList = ({ files, getIcon, onRemove }: FilesListProps) => {
   if (!files.length) return null;
@@ -55,53 +60,53 @@ const FilesList = ({ files, getIcon, onRemove }: FilesListProps) => {
     return name.replace(new RegExp(`${extension}$`, "i"), "");
   };
 
+  const needsScroll = files.length > MAX_VISIBLE_FILES;
+  const scrollHeight =
+    MAX_VISIBLE_FILES * ITEM_HEIGHT + (MAX_VISIBLE_FILES - 1) * GAP;
+
+  const fileItems = files.map((file) => (
+    <div
+      className={styles.filesListItem}
+      key={file.id}
+      data-testid="uploader-files-list-item"
+    >
+      <ReactSVG
+        src={getIcon(file.extension, 32)}
+        className={styles.filesListItemIcon}
+      />
+
+      <div className={styles.filesListItemInfo}>
+        <div className={styles.filesListItemInfoText}>
+          <Text fontSize="12px" lineHeight="16px" fontWeight={600} truncate>
+            {getNameWithoutExtension(file.name, file.extension)}
+          </Text>
+          <Text fontSize="12px" lineHeight="16px" fontWeight={600} as="span">
+            {file.extension}
+          </Text>
+        </div>
+
+        {onRemove ? (
+          <IconButton
+            iconName={CloseCircleReactSvgUrl}
+            size={16}
+            isClickable
+            onClick={() => onRemove(file)}
+            dataTestId="uploader-remove-file-button"
+          />
+        ) : null}
+      </div>
+    </div>
+  ));
+
   return (
     <div className={styles.filesList} data-testid="uploader-files-list">
-      <div className={styles.filesListWrapper}>
-        {files.map((file) => (
-          <div
-            className={styles.filesListItem}
-            key={file.id}
-            data-testid="uploader-files-list-item"
-          >
-            <ReactSVG
-              src={getIcon(file.extension, 24)}
-              className={styles.filesListItemIcon}
-            />
-
-            <div className={styles.filesListItemInfo}>
-              <div className={styles.filesListItemInfoText}>
-                <Text
-                  fontSize="12px"
-                  lineHeight="16px"
-                  fontWeight={600}
-                  truncate
-                >
-                  {getNameWithoutExtension(file.name, file.extension)}
-                </Text>
-                <Text
-                  fontSize="12px"
-                  lineHeight="16px"
-                  fontWeight={600}
-                  as="span"
-                >
-                  {file.extension}
-                </Text>
-              </div>
-
-              {onRemove ? (
-                <IconButton
-                  iconName={CloseCircleReactSvgUrl}
-                  size={16}
-                  isClickable
-                  onClick={() => onRemove(file)}
-                  dataTestId="uploader-remove-file-button"
-                />
-              ) : null}
-            </div>
-          </div>
-        ))}
-      </div>
+      {needsScroll ? (
+        <Scrollbar style={{ height: scrollHeight }} autoHide={false}>
+          <div className={styles.filesListWrapper}>{fileItems}</div>
+        </Scrollbar>
+      ) : (
+        <div className={styles.filesListWrapper}>{fileItems}</div>
+      )}
     </div>
   );
 };
