@@ -50,7 +50,7 @@ import { BreadCrumbs } from "./BreadCrumbs";
 import { Item } from "./Item";
 import { Info } from "./Info";
 import { VirtualScroll } from "./VirtualScroll";
-import { Tabs } from "../../tabs";
+import { Tabs } from "@docspace/ui-kit/components/tabs";
 import InputItem from "./InputItem";
 
 const CONTAINER_PADDING = 16;

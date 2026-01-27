@@ -33,7 +33,7 @@ import { Trans, withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import FilesSelector from "SRC_DIR/components/FilesSelector";
 import { toastr } from "@docspace/shared/components/toast";
-import { useEventListener } from "@docspace/shared/hooks/useEventListener";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 

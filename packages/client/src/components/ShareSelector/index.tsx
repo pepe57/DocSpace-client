@@ -27,7 +27,7 @@ import { FC, useState } from "react";
 
 import { ShareSelector as ShareSelectorComponent } from "@docspace/shared/components/share/selector";
 
-import { useEventListener } from "@docspace/shared/hooks/useEventListener";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 
 import {
   ShareEventName,

@@ -43,7 +43,7 @@ import classNames from "classnames";
 
 import { RowLoader } from "../../../skeletons/selector";
 import { GENERAL_LINK_HEADER_KEY } from "../../../constants";
-import { useEventListener } from "../../../hooks/useEventListener";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 import type { TUser } from "../../../api/people/types";
 
 import { Text } from "@docspace/ui-kit/components/text";

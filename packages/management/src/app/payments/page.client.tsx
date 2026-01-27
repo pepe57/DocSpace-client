@@ -30,7 +30,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 
-import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
+import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
 import { StandalonePage } from "@docspace/shared/pages/Payments/Standalone";
 import { toastr } from "@docspace/shared/components/toast";
 import { setLicense, acceptLicense } from "@docspace/shared/api/settings";

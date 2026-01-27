@@ -31,7 +31,7 @@ import { TFunction } from "i18next";
 import { useEffect } from "react";
 
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
-import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
+import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
