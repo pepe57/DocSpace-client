@@ -92,6 +92,7 @@ export const EnterpriseContainer = ({
           isTrial={isTrial}
           isEnterprise={isEnterprise}
           isDeveloper={isDeveloper}
+          isLifetimeLicense={isLifetimeLicense}
         />
       ) : null}
 

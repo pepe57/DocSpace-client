@@ -90,13 +90,23 @@
     max-width: fit-content;
     color: var(--settings-payment-color);
     height: fit-content;
+
+    &.isTrial {
+      border: 1px solid var(--settings-payment-color);
+      border-radius: 3px;
+      padding: 4px 8px;
+    }
+
+    &.isLicenseDateExpired {
+      border: 1px solid var(--settings-payment-warning-color);
+    }
   }
 
-  // &.limitedWidth {
-  //   .paymentsSubscription .title {
-  //     max-width: 376px;
-  //   }
-  // }
+  &.limitedWidth {
+    .paymentsSubscription .title {
+      max-width: 376px;
+    }
+  }
 
   &.isLicenseDateExpired {
     .paymentsSubscription .title span:first-child {

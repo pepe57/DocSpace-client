@@ -67,7 +67,10 @@ export const TariffTitleContainer = ({
     if (isTrial) {
       return isLicenseDateExpired ? (
         <Text
-          className={styles.paymentsSubscriptionExpired}
+          className={classNames(styles.paymentsSubscriptionExpired, {
+            [styles.isTrial]: isTrial,
+            [styles.isLicenseDateExpired]: isLicenseDateExpired,
+          })}
           fontWeight={600}
           fontSize="14px"
         >
@@ -75,7 +78,9 @@ export const TariffTitleContainer = ({
         </Text>
       ) : (
         <Text
-          className={styles.paymentsSubscriptionExpired}
+          className={classNames(styles.paymentsSubscriptionExpired, {
+            [styles.isTrial]: isTrial,
+          })}
           fontWeight={600}
           fontSize="14px"
         >
@@ -206,15 +211,19 @@ export const TariffTitleContainer = ({
 
     return null;
   };
+
   return (
     <div
       className={classNames(styles.titleComponent, {
-        // [styles.limitedWidth]: isTrial ? true : isLicenseDateExpired,
+        [styles.limitedWidth]: isTrial,
         [styles.isLicenseDateExpired]: isLicenseDateExpired,
       })}
     >
       <div className={styles.paymentsSubscription}>
-        {isLifetimeLicense || isGracePeriod || !isLicenseDateExpired ? (
+        {isLifetimeLicense ||
+        isGracePeriod ||
+        isTrial ||
+        !isLicenseDateExpired ? (
           <div className={styles.title}>
             {getDescription()}
 
