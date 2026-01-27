@@ -53,6 +53,7 @@ const TariffBar = ({
   paymentDate,
   trialDaysLeft,
   title,
+  isLifetimeLicense,
 }) => {
   const navigate = useNavigate();
   const { t } = useTranslation("Common");
@@ -90,6 +91,8 @@ const TariffBar = ({
         isLicenseDateExpired,
         trialDaysLeft,
         paymentDate,
+        isGracePeriod,
+        isLifetimeLicense,
       );
 
   if (!tariffBar) return null;
@@ -121,7 +124,8 @@ export default inject(
     currentTariffStatusStore,
   }) => {
     const { isPaymentPageAvailable } = authStore;
-    const { isFreeTariff, isNonProfit, isTrial } = currentQuotaStore;
+    const { isFreeTariff, isNonProfit, isTrial, isLifetimeLicense } =
+      currentQuotaStore;
     const {
       isGracePeriod,
       isLicenseExpiring,
@@ -144,6 +148,7 @@ export default inject(
       standalone,
       paymentDate,
       trialDaysLeft,
+      isLifetimeLicense,
     };
   },
 )(observer(TariffBar));
