@@ -59,7 +59,7 @@ import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Row, RowProps } from "../rows";
 import { Scrollbar } from "../scrollbar";
-import { Tabs, TabsTypes } from "../tabs";
+import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Toast, toastr } from "../toast";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";

@@ -27,7 +27,7 @@
 import { useState } from "react";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
+import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
 import CodeBlock from "./CodeBlock";
 
 import { CategorySubHeader, CodeWrapper } from "../presets/StyledPresets";

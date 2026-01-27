@@ -34,7 +34,7 @@ import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/ui-kit/components/button";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
+import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@docspace/shared/components/drop-down";

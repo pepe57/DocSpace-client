@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 
-import { Tabs } from "@docspace/shared/components/tabs";
+import { Tabs } from "@docspace/ui-kit/components/tabs";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { DeviceType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

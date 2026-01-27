@@ -29,7 +29,7 @@ import classNames from "classnames";
 
 import { FolderType } from "@docspace/shared/enums";
 import { AsideHeader } from "@docspace/shared/components/aside-header";
-import { Tabs } from "@docspace/shared/components/tabs";
+import { Tabs } from "@docspace/ui-kit/components/tabs";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";

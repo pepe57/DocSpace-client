@@ -31,7 +31,7 @@ import type { Key } from "react";
 import classNames from "classnames";
 import { Portal } from "@docspace/ui-kit/components/portal";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
+import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Button } from "@docspace/ui-kit/components/button";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";

@@ -40,7 +40,7 @@ import { TRoomSecurity, ICover } from "../../api/rooms/types";
 import { TUserGroup } from "../../api/people/types";
 
 import { AvatarRole } from "../avatar";
-import { TTabItem } from "../tabs";
+import { TTabItem } from "@docspace/ui-kit/components/tabs";
 
 import { SelectorAccessRightsMode } from "./Selector.enums";
 
