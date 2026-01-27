@@ -96,7 +96,6 @@ export const EnterpriseContainer = ({
         />
       ) : null}
 
-      {/* {isLicenseDateExpired ? <BenefitsContainer /> : null} */}
       <Text fontSize="14px" className={styles.paymentsRenewSubscription}>
         {isLicenseDateExpired
           ? t("ActivatePurchaseBuyLicense")
