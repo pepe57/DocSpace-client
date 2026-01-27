@@ -218,5 +218,15 @@
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
   "YouLeftTheAgent": "You have left the agent",
   "YouLeftTheRoom": "You have left the room",
-  "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>.",
+  "UserLimitDescription": "Define the number of users who can join via this invite link.",
+  "MaxNumber": "Max. number <1>(up to {{usersCount}} users)</1>",
+  "LinkSettingsLimitDescription": "Once this limit is reached, registration via the link will become unavailable",
+  "LinkSettingsLimitExceeded": "Registration via the link is no longer available since the limit has been exceeded.",
+  "LinkSettingsJoinedUsers": "Users have joined via this link",
+  "ValidUntil": "Valid until:",
+  "UsersJoined": "Users joined:",
+  "LinkSettingsUsersLimitToast": "Registration via the link is no longer available since the limit has been exceeded.",
+  "LinkSettingsUsersLimitToastDescription": "Adjust the limit in settings or create a new link to enable new user registrations.",
+  "LinkSettingsExpiredToastDescription": "Extend the validity period in the settings or create a new link to enable new user registrations."
 }
