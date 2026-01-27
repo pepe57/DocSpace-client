@@ -205,11 +205,7 @@
 
   --drop-down-item-hover-color: #{$gray-light};
   --drop-down-item-icon-color: #{$black};
-  --drop-down-item-icon-color-disabled: #{$black};
-  --dropdown-item-separator-border: #{$gray-light-mid};
 
-  --dropdown-item-disabled-color: #{$gray};
-  --dropdown-item-selected-color: #{$light-gray-hover};
 
   --input-text-align: left;
 
@@ -464,12 +460,7 @@
 
   --drop-down-item-hover-color: #{$light-dark-gray-hover};
   --drop-down-item-icon-color: #{$white};
-  --drop-down-item-icon-color-disabled: #{$white};
-  --dropdown-item-separator-border: #{$gray-dark-strong};
-
-  --dropdown-item-disabled-color: #{$gray};
-  --dropdown-item-selected-color: #{$dark-gray-light};
-
+  
   --empty-content-header-color: #{$white};
   --empty-content-description-color: #{$dark-gray-dark};
   --empty-content-button-color-link: #{$dark-link};
