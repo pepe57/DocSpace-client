@@ -82,7 +82,7 @@ test.describe("Default templates", () => {
     const contextMenuBtn = row.getByTestId("context-menu-button");
     await contextMenuBtn.click();
 
-    const selectOption = page.getByTestId("select_item");
+    const selectOption = page.getByTestId("upload-from-docspace_item");
     await expect(selectOption).toBeVisible();
 
     await expect(page).toHaveScreenshot([
@@ -96,15 +96,21 @@ test.describe("Default templates", () => {
     const selector = page.getByTestId("aside").first();
     await expect(selector).toBeVisible();
 
-    const roomRow = page.getByText("New room").first();
+    const roomsRow = selector.getByText("Rooms").first();
+    await expect(roomsRow).toBeVisible();
+    await roomsRow.click();
+
+    const roomRow = selector.getByText("New room").first();
     await expect(roomRow).toBeVisible();
     await roomRow.click();
 
-    const documentRow = page.getByText("ONLYOFFICE Sample Document").first();
+    const documentRow = selector
+      .getByText("ONLYOFFICE Sample Document")
+      .first();
     await expect(documentRow).toBeVisible();
     await documentRow.click();
 
-    const selectBtn = page.getByTestId("selector_submit_button").first();
+    const selectBtn = selector.getByTestId("selector_submit_button").first();
     await expect(selectBtn).toBeVisible();
     await selectBtn.click();
 
