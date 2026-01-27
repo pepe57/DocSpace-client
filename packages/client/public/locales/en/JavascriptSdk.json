@@ -47,6 +47,7 @@
   "FileContentCopy": "File content copy restriction",
   "FileFilter": "File Filter",
   "FileId": "File ID",
+  "FolderId": "Folder ID",
   "FilePreview": "File preview",
   "FileSelectorDescription": "Embed a file selector to allow users to access any file from the list of the available ones.",
   "FilesSearchDescription": "File search within the opened folder/room.",
@@ -116,5 +117,7 @@
   "Subtitle": "Subtitle",
   "SubtitleDescription": "Subtitle with additional comments or descriptions for the current directory.",
   "TabPlugins": "Tab Plugins",
-  "ViewerDescription": "Embed a viewer to allow users to open a file for viewing from the corresponding room."
+  "ViewerDescription": "Embed a viewer to allow users to open a file for viewing from the corresponding room.",
+  "CreateSampleUploader": "Create sample Uploader embed",
+  "UploaderDescription": "Embed an uploader to allow users to upload files to the selected folder."
 }
