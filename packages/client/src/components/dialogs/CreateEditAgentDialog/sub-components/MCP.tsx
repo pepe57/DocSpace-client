@@ -32,7 +32,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { MCPIcon, MCPIconSize } from "@docspace/shared/components/mcp-icon";
+import { MCPIcon, MCPIconSize } from "@docspace/ui-kit/components/mcp-icon";
 
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 import type { TSelectorItem } from "@docspace/shared/components/selector";

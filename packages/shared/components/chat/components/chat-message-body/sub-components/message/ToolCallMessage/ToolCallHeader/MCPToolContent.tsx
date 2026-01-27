@@ -35,7 +35,7 @@ import { getServerIcon } from "../../../../../../../../utils";
 import { ServerType } from "../../../../../../../../api/ai/enums";
 import { Text } from "@docspace/ui-kit/components/text";
 import styles from "../../../../ChatMessageBody.module.scss";
-import { MCPIcon, MCPIconSize } from "../../../../../../../mcp-icon";
+import { MCPIcon, MCPIconSize } from "@docspace/ui-kit/components/mcp-icon";
 
 export const MCPToolContent = ({ content }: { content: TToolCallContent }) => {
   const { t } = useTranslation(["Common"]);

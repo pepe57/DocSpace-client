@@ -43,7 +43,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { RoomIcon } from "../../room-icon";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { MCPIcon, MCPIconSize } from "../../mcp-icon";
+import { MCPIcon, MCPIconSize } from "@docspace/ui-kit/components/mcp-icon";
 
 import { Data, ItemProps, TSelectorItem } from "../Selector.types";
 import { EmployeeType, RoomsType } from "../../../enums";
