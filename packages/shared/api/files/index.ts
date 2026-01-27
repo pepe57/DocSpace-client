@@ -1955,3 +1955,20 @@ export async function setDefaultTemplates(
 
   return res.items as TDefaultTemplate[];
 }
+
+export async function uploadTemplateFromDevice(
+  file: File,
+  fileExtension: string,
+) {
+  const formData = new FormData();
+  formData.append("File", file);
+  const res = await request({
+    method: "post",
+    url: `/files/settings/defaulttemplate/upload?FileExtension=${encodeURIComponent(fileExtension)}`,
+    data: formData,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.items as TDefaultTemplate[];
+}

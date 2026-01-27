@@ -348,4 +348,5 @@ export type TDefaultTemplateItem = {
   isModified?: boolean;
   lastModified?: string;
   extension: string;
+  viewUrl: string;
 };
