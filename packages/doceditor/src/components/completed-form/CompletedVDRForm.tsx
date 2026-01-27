@@ -53,7 +53,7 @@ import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { InputBlock } from "@docspace/shared/components/input-block";
+import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 import {
   RoleStep,

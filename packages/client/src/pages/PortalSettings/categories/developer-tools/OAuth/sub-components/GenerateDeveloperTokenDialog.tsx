@@ -40,7 +40,7 @@ import {
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr, type TData } from "@docspace/shared/components/toast";
-import { InputBlock } from "@docspace/shared/components/input-block";
+import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Link } from "@docspace/ui-kit/components/link";

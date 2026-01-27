@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import { InputBlock } from "@docspace/shared/components/input-block";
+import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";

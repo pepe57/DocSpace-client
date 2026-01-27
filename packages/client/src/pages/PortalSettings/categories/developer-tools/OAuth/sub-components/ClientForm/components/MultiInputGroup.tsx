@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import { InputBlock } from "@docspace/shared/components/input-block";
+import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { Text } from "@docspace/ui-kit/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { SelectedItem } from "@docspace/shared/components/selected-item";

@@ -36,7 +36,7 @@ import classNames from "classnames";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { InputBlock } from "@docspace/shared/components/input-block";
+import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
