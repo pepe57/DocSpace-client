@@ -82,6 +82,7 @@ const PortalIntegration = (props) => {
   const navigateToFileSelector = () => navigate("file-selector");
   const navigateToEditor = () => navigate("editor");
   const navigateToViewer = () => navigate("viewer");
+  const navigateToUploader = () => navigate("uploader");
 
   const presetsData = [
     {
@@ -129,6 +130,12 @@ const PortalIntegration = (props) => {
       }),
       image: theme.isBase ? CustomImg : CustomImgDark,
       handleOnClick: navigateToCustom,
+    },
+    {
+      title: t("Common:Uploader"),
+      description: t("UploaderDescription"),
+      image: theme.isBase ? CustomImg : CustomImgDark,
+      handleOnClick: navigateToUploader,
     },
   ];
 
