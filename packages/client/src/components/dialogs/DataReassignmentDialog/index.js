@@ -30,7 +30,7 @@ import { withTranslation } from "react-i18next";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 
 import api from "@docspace/shared/api";
 import { EmployeeActivationStatus, EmployeeType } from "@docspace/shared/enums";

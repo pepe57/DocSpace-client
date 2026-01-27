@@ -27,7 +27,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
+import { Avatar, AvatarSize } from "@docspace/ui-kit/components/avatar";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Link } from "@docspace/ui-kit/components/link";
 import api from "@docspace/shared/api";

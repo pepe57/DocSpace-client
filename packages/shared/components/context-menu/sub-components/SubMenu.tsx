@@ -295,7 +295,7 @@ const SubMenu = (props: SubMenuProps) => {
 
       const notEnoughWidthRight =
         containerOffsetLeft + itemOuterWidth + subListWidth >
-        viewport.width - DomHelpers.calculateScrollbarWidth();
+        viewport.width - (DomHelpers.calculateScrollbarWidth() ?? 0);
 
       if (!isRTL) {
         if (notEnoughWidthRight && freeSpaceLeft > freeSpaceRight) {

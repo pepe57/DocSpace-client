@@ -26,7 +26,7 @@
 
 import React, { useState, useRef } from "react";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { DropDown } from "@docspace/shared/components/drop-down";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";

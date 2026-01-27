@@ -36,7 +36,7 @@ import EmptyScreenFilter from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.
 import { RoomsTypeValues } from "../../utils";
 
 import RoomType from "../room-type";
-import { AvatarRole } from "../avatar";
+import { AvatarRole } from "@docspace/ui-kit/components/avatar";
 import {
   BreadCrumbsLoader,
   RowLoader,

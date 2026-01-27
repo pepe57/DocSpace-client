@@ -50,10 +50,10 @@ import { copyShareLink } from "@docspace/shared/utils/copy";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import {
-	Avatar,
-	AvatarRole,
-	AvatarSize,
-} from "@docspace/shared/components/avatar";
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/ui-kit/components/avatar";
 
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 
@@ -66,194 +66,194 @@ import styles from "./completed-form.module.scss";
 const BIG_FORM_NUMBER = 9_999_999;
 
 export const CompletedForm = ({
-	session,
-	share,
-	isShareFile,
-	isSDK,
+  session,
+  share,
+  isShareFile,
+  isSDK,
 }: CompletedFormProps) => {
-	const { isBase, currentColorScheme } = useTheme();
-	const { t } = useTranslation(["CompletedForm", "Common"]);
+  const { isBase, currentColorScheme } = useTheme();
+  const { t } = useTranslation(["CompletedForm", "Common"]);
 
-	useUpdateSearchParamId(session?.response.originalForm.id.toString());
+  useUpdateSearchParamId(session?.response.originalForm.id.toString());
 
-	const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !isBase);
-	const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !isBase);
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !isBase);
+  const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !isBase);
 
-	const bgPattern = getBgPattern(currentColorScheme?.id);
+  const bgPattern = getBgPattern(currentColorScheme?.id);
 
-	if (!session) return <CompletedFormEmpty />;
+  if (!session) return <CompletedFormEmpty />;
 
-	const {
-		response: {
-			completedForm,
-			formNumber,
-			manager,
-			originalForm,
-			roomId,
-			isRoomMember,
-		},
-	} = session;
+  const {
+    response: {
+      completedForm,
+      formNumber,
+      manager,
+      originalForm,
+      roomId,
+      isRoomMember,
+    },
+  } = session;
 
-	const isAnonym = Boolean(share) && !isRoomMember;
+  const isAnonym = Boolean(share) && !isRoomMember;
 
-	const copyLinkFile = async () => {
-		const origin = window.location.origin;
+  const copyLinkFile = async () => {
+    const origin = window.location.origin;
 
-		const url = `${origin}/doceditor?fileId=${completedForm.id}`;
+    const url = `${origin}/doceditor?fileId=${completedForm.id}`;
 
-		await copyShareLink(url);
-		toastr.success(t("Common:LinkCopySuccess"));
-	};
+    await copyShareLink(url);
+    toastr.success(t("Common:LinkCopySuccess"));
+  };
 
-	const handleDownload = () => {
-		window.open(completedForm.viewUrl, "_self");
-	};
+  const handleDownload = () => {
+    window.open(completedForm.viewUrl, "_self");
+  };
 
-	const gotoCompleteFolder = () => {
-		const url = getFolderUrl(completedForm.folderId, false);
-		window.location.assign(url);
-	};
+  const gotoCompleteFolder = () => {
+    const url = getFolderUrl(completedForm.folderId, false);
+    window.location.assign(url);
+  };
 
-	const handleBackToRoom = () => {
-		const url = getFolderUrl(roomId, isAnonym, share);
-		window.location.assign(url);
-	};
+  const handleBackToRoom = () => {
+    const url = getFolderUrl(roomId, isAnonym, share);
+    window.location.assign(url);
+  };
 
-	const fillAgainSearchParams = new URLSearchParams({
-		fileId: originalForm.id.toString(),
-		...(share ? { share } : {}),
-		...(isShareFile ? { is_file: "true" } : {}),
-	});
+  const fillAgainSearchParams = new URLSearchParams({
+    fileId: originalForm.id.toString(),
+    ...(share ? { share } : {}),
+    ...(isShareFile ? { is_file: "true" } : {}),
+  });
 
-	const bgBlockStyle = {
-		"--bg-pattern": bgPattern,
-	} as React.CSSProperties;
+  const bgBlockStyle = {
+    "--bg-pattern": bgPattern,
+  } as React.CSSProperties;
 
-	return (
-		<section
-			className={styles.container}
-			style={bgBlockStyle}
-			data-testid="completed_form_container"
-		>
-			<Scrollbar fixedSize>
-				<div className={styles.completedFormLayout}>
-					<picture className="completed-form__logo">
-						<source media={mobile} srcSet={smallLogoUrl} />
-						<source media={mobileMore} srcSet={logoUrl} />
-						<img src={logoUrl} alt="logo" />
-					</picture>
-					<section className={styles.textWrapper}>
-						<Heading level={HeadingLevel.h1}>
-							{t("CompletedForm:FormCompletedSuccessfully")}
-						</Heading>
-						<Text>
-							{isAnonym
-								? t("CompletedForm:DescriptionForAnonymous")
-								: t("CompletedForm:DescriptionForRegisteredUser")}
-						</Text>
-					</section>
-					<main className={styles.mainContent}>
-						<div
-							className={classNames(
-								styles.completedFormBox,
-								"completed-form__file",
-							)}
-						>
-							<PDFIcon />
-							<Heading
-								className="completed-form__filename"
-								level={HeadingLevel.h5}
-							>
-								{completedForm.title}
-							</Heading>
-							<IconButton
-								size={16}
-								className="completed-form__download"
-								iconName={isAnonym ? DownloadIconUrl : LinkIconUrl}
-								onClick={isAnonym ? handleDownload : copyLinkFile}
-								dataTestId={
-									isAnonym
-										? "download_form_icon_button"
-										: "copy_link_icon_button"
-								}
-							/>
-						</div>
-						<div className={styles.formNumberWrapper}>
-							<span className="label">{t("CompletedForm:FormNumber")}</span>
-							<div className={styles.completedFormBox}>
-								<Text
-									className={classNames("completed-form__form-number", {
-										"form-number--big": formNumber > BIG_FORM_NUMBER,
-									})}
-								>
-									{formNumber}
-								</Text>
-							</div>
-						</div>
-						<div className={styles.managerWrapper}>
-							<span className="label">{t("CompletedForm:FormOwner")}</span>
-							<div className={styles.completedFormBox}>
-								<Avatar
-									className="manager__avatar"
-									size={AvatarSize.medium}
-									role={AvatarRole.manager}
-									source={manager.avatar}
-								/>
-								<Heading level={HeadingLevel.h3} className="manager__user-name">
-									{decode(manager.displayName)}
-								</Heading>
-								<Link
-									className="manager__mail link"
-									href={`mailto:${manager.email}`}
-									data-testid="manager_email_link"
-								>
-									<MailIcon />
-									<span>{manager.email}</span>
-								</Link>
-							</div>
-						</div>
-					</main>
-					<footer
-						className={classNames(styles.buttonWrapper, {
-							[styles.shareFile]: isShareFile ? !isRoomMember : false,
-						})}
-					>
-						<Button
-							scale
-							primary
-							size={ButtonSize.medium}
-							label={
-								isAnonym
-									? t("Common:Download")
-									: t("CompletedForm:CheckReadyForms")
-							}
-							onClick={isAnonym ? handleDownload : gotoCompleteFolder}
-							testId={
-								isAnonym
-									? "download_form_button"
-									: "goto_complete_folder_button"
-							}
-						/>
-						{(!isShareFile || isRoomMember) && !isSDK ? (
-							<Button
-								scale
-								size={ButtonSize.medium}
-								label={t("CompletedForm:BackToRoom")}
-								onClick={handleBackToRoom}
-								testId="back_to_room_button"
-							/>
-						) : null}
-					</footer>
-					<Link
-						className="link"
-						href={`/?${fillAgainSearchParams.toString()}`}
-						prefetch={false}
-						data-testid="fill_again_link"
-					>
-						{t("CompletedForm:FillItOutAgain")}
-					</Link>
-				</div>
-			</Scrollbar>
-		</section>
-	);
+  return (
+    <section
+      className={styles.container}
+      style={bgBlockStyle}
+      data-testid="completed_form_container"
+    >
+      <Scrollbar fixedSize>
+        <div className={styles.completedFormLayout}>
+          <picture className="completed-form__logo">
+            <source media={mobile} srcSet={smallLogoUrl} />
+            <source media={mobileMore} srcSet={logoUrl} />
+            <img src={logoUrl} alt="logo" />
+          </picture>
+          <section className={styles.textWrapper}>
+            <Heading level={HeadingLevel.h1}>
+              {t("CompletedForm:FormCompletedSuccessfully")}
+            </Heading>
+            <Text>
+              {isAnonym
+                ? t("CompletedForm:DescriptionForAnonymous")
+                : t("CompletedForm:DescriptionForRegisteredUser")}
+            </Text>
+          </section>
+          <main className={styles.mainContent}>
+            <div
+              className={classNames(
+                styles.completedFormBox,
+                "completed-form__file",
+              )}
+            >
+              <PDFIcon />
+              <Heading
+                className="completed-form__filename"
+                level={HeadingLevel.h5}
+              >
+                {completedForm.title}
+              </Heading>
+              <IconButton
+                size={16}
+                className="completed-form__download"
+                iconName={isAnonym ? DownloadIconUrl : LinkIconUrl}
+                onClick={isAnonym ? handleDownload : copyLinkFile}
+                dataTestId={
+                  isAnonym
+                    ? "download_form_icon_button"
+                    : "copy_link_icon_button"
+                }
+              />
+            </div>
+            <div className={styles.formNumberWrapper}>
+              <span className="label">{t("CompletedForm:FormNumber")}</span>
+              <div className={styles.completedFormBox}>
+                <Text
+                  className={classNames("completed-form__form-number", {
+                    "form-number--big": formNumber > BIG_FORM_NUMBER,
+                  })}
+                >
+                  {formNumber}
+                </Text>
+              </div>
+            </div>
+            <div className={styles.managerWrapper}>
+              <span className="label">{t("CompletedForm:FormOwner")}</span>
+              <div className={styles.completedFormBox}>
+                <Avatar
+                  className="manager__avatar"
+                  size={AvatarSize.medium}
+                  role={AvatarRole.manager}
+                  source={manager.avatar}
+                />
+                <Heading level={HeadingLevel.h3} className="manager__user-name">
+                  {decode(manager.displayName)}
+                </Heading>
+                <Link
+                  className="manager__mail link"
+                  href={`mailto:${manager.email}`}
+                  data-testid="manager_email_link"
+                >
+                  <MailIcon />
+                  <span>{manager.email}</span>
+                </Link>
+              </div>
+            </div>
+          </main>
+          <footer
+            className={classNames(styles.buttonWrapper, {
+              [styles.shareFile]: isShareFile ? !isRoomMember : false,
+            })}
+          >
+            <Button
+              scale
+              primary
+              size={ButtonSize.medium}
+              label={
+                isAnonym
+                  ? t("Common:Download")
+                  : t("CompletedForm:CheckReadyForms")
+              }
+              onClick={isAnonym ? handleDownload : gotoCompleteFolder}
+              testId={
+                isAnonym
+                  ? "download_form_button"
+                  : "goto_complete_folder_button"
+              }
+            />
+            {(!isShareFile || isRoomMember) && !isSDK ? (
+              <Button
+                scale
+                size={ButtonSize.medium}
+                label={t("CompletedForm:BackToRoom")}
+                onClick={handleBackToRoom}
+                testId="back_to_room_button"
+              />
+            ) : null}
+          </footer>
+          <Link
+            className="link"
+            href={`/?${fillAgainSearchParams.toString()}`}
+            prefetch={false}
+            data-testid="fill_again_link"
+          >
+            {t("CompletedForm:FillItOutAgain")}
+          </Link>
+        </div>
+      </Scrollbar>
+    </section>
+  );
 };

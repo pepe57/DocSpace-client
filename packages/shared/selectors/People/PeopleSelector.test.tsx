@@ -39,7 +39,7 @@ vi.mock("../../api/people", () => ({
 }));
 
 // Mock the Avatar component
-vi.mock("../../components/avatar", () => ({
+vi.mock("@docspace/ui-kit/components/avatar", () => ({
   Avatar: ({ size, userName }: { size: string; userName: string }) => (
     <div data-testid="avatar" data-size={size} data-user-name={userName}>
       Avatar

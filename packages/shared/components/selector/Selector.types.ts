@@ -39,7 +39,7 @@ import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
 import { TRoomSecurity, ICover } from "../../api/rooms/types";
 import { TUserGroup } from "../../api/people/types";
 
-import { AvatarRole } from "../avatar";
+import { AvatarRole } from "@docspace/ui-kit/components/avatar";
 import { TTabItem } from "../tabs";
 
 import { SelectorAccessRightsMode } from "./Selector.enums";

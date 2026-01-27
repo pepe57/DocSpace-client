@@ -32,7 +32,11 @@ import CheckReactSvgUrl from "PUBLIC_DIR/images/check.react.svg?url";
 import { IconSizeType } from "../../../utils";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/ui-kit/components/avatar";
 import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 
 import { Row } from ".";

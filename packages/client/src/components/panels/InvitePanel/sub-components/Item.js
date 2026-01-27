@@ -36,7 +36,7 @@ import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { Avatar } from "@docspace/shared/components/avatar";
+import { Avatar } from "@docspace/ui-kit/components/avatar";
 import { Text } from "@docspace/ui-kit/components/text";
 import { parseAddresses } from "@docspace/shared/utils";
 import {

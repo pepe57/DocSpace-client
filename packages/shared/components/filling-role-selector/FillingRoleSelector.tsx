@@ -32,7 +32,11 @@ import { useTranslation } from "react-i18next";
 
 import CrossIcon from "PUBLIC_DIR/images/icons/16/circle.cross.svg";
 
-import { Avatar, AvatarSize, AvatarRole } from "../avatar";
+import {
+  Avatar,
+  AvatarSize,
+  AvatarRole,
+} from "@docspace/ui-kit/components/avatar";
 
 import styles from "./FillingRoleSelector.module.scss";
 import type { IFillingRoleSelectorProps } from "./FillingRoleSelector.types";

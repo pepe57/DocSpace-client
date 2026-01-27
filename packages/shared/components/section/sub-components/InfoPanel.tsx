@@ -32,7 +32,7 @@ import { Portal } from "@docspace/ui-kit/components/portal";
 import { DeviceType } from "../../../enums";
 
 import { Aside } from "../../aside";
-import { Backdrop } from "../../backdrop";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 
 import { InfoPanelProps } from "../Section.types";
 import styles from "../Section.module.scss";

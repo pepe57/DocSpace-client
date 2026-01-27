@@ -30,7 +30,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Avatar } from "@docspace/shared/components/avatar";
+import { Avatar } from "@docspace/ui-kit/components/avatar";
 import { toastr } from "@docspace/shared/components/toast";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { Link } from "@docspace/ui-kit/components/link";
@@ -81,196 +81,196 @@ const StyledContainer = styled.div`
 `;
 
 const PayerInformation = ({
-	style,
-	theme,
-	user,
-	accountLink,
-	payerInfo,
-	email,
-	isNotPaidPeriod,
+  style,
+  theme,
+  user,
+  accountLink,
+  payerInfo,
+  email,
+  isNotPaidPeriod,
 
-	isStripePortalAvailable,
+  isStripePortalAvailable,
 }) => {
-	const { t } = useTranslation(["Payments", "Common"]);
+  const { t } = useTranslation(["Payments", "Common"]);
 
-	const goToStripePortal = () => {
-		accountLink
-			? window.open(accountLink, "_blank")
-			: toastr.error(t("Common:UnexpectedError"));
-	};
+  const goToStripePortal = () => {
+    accountLink
+      ? window.open(accountLink, "_blank")
+      : toastr.error(t("Common:UnexpectedError"));
+  };
 
-	const renderTooltip = (
-		<HelpButton
-			className="payer-tooltip"
-			iconName={HelpReactSvgUrl}
-			style={{ height: "15px", margin: "0" }}
-			tooltipContent={
-				<>
-					<Text isBold>{t("Payer")}</Text>
-					<Text>
-						{t("PayerDescription", { productName: t("Common:ProductName") })}
-					</Text>
-				</>
-			}
-			dataTestId="payer_info_help_button"
-		/>
-	);
+  const renderTooltip = (
+    <HelpButton
+      className="payer-tooltip"
+      iconName={HelpReactSvgUrl}
+      style={{ height: "15px", margin: "0" }}
+      tooltipContent={
+        <>
+          <Text isBold>{t("Payer")}</Text>
+          <Text>
+            {t("PayerDescription", { productName: t("Common:ProductName") })}
+          </Text>
+        </>
+      }
+      dataTestId="payer_info_help_button"
+    />
+  );
 
-	const unknownPayerDescription = () => {
-		const userNotFound = `${t("UserNotFoundMatchingEmail")} `;
+  const unknownPayerDescription = () => {
+    const userNotFound = `${t("UserNotFoundMatchingEmail")} `;
 
-		let invalidEmailDescription = user.isOwner
-			? t("InvalidEmailWithActiveSubscription", {
-					productName: t("Common:ProductName"),
-				})
-			: t("InvalidEmailWithActiveSubscriptionForAdmin", {
-					productName: t("Common:ProductName"),
-				});
+    let invalidEmailDescription = user.isOwner
+      ? t("InvalidEmailWithActiveSubscription", {
+          productName: t("Common:ProductName"),
+        })
+      : t("InvalidEmailWithActiveSubscriptionForAdmin", {
+          productName: t("Common:ProductName"),
+        });
 
-		if (isNotPaidPeriod) {
-			invalidEmailDescription = user.isOwner
-				? t("InvalidEmailWithoutActiveSubscription", {
-						productName: t("Common:ProductName"),
-					})
-				: t("InvalidEmailWithoutActiveSubscriptionByAdmin", {
-						productName: t("Common:ProductName"),
-					});
+    if (isNotPaidPeriod) {
+      invalidEmailDescription = user.isOwner
+        ? t("InvalidEmailWithoutActiveSubscription", {
+            productName: t("Common:ProductName"),
+          })
+        : t("InvalidEmailWithoutActiveSubscriptionByAdmin", {
+            productName: t("Common:ProductName"),
+          });
 
-			return userNotFound + invalidEmailDescription;
-		}
+      return userNotFound + invalidEmailDescription;
+    }
 
-		return userNotFound + invalidEmailDescription;
-	};
+    return userNotFound + invalidEmailDescription;
+  };
 
-	const unknownPayerInformation = (
-		<div>
-			<Text as="span" fontSize="13px">
-				{unknownPayerDescription()}
-			</Text>
-			<div>
-				{isStripePortalAvailable ? (
-					<Link
-						noSelect
-						fontWeight={600}
-						tag="a"
-						target="_blank"
-						className="payer-info_account-link"
-						color="accent"
-						onClick={goToStripePortal}
-						dataTestId="stripe_customer_portal_link"
-					>
-						{t("ChooseNewPayer")}
-					</Link>
-				) : null}
-			</div>
-		</div>
-	);
+  const unknownPayerInformation = (
+    <div>
+      <Text as="span" fontSize="13px">
+        {unknownPayerDescription()}
+      </Text>
+      <div>
+        {isStripePortalAvailable ? (
+          <Link
+            noSelect
+            fontWeight={600}
+            tag="a"
+            target="_blank"
+            className="payer-info_account-link"
+            color="accent"
+            onClick={goToStripePortal}
+            dataTestId="stripe_customer_portal_link"
+          >
+            {t("ChooseNewPayer")}
+          </Link>
+        ) : null}
+      </div>
+    </div>
+  );
 
-	const payerInformation = isStripePortalAvailable ? (
-		<Link
-			noSelect
-			fontWeight={600}
-			className="payer-info_account-link"
-			tag="a"
-			target="_blank"
-			color="accent"
-			onClick={goToStripePortal}
-			dataTestId="stripe_customer_portal_link"
-		>
-			{t("StripeCustomerPortal")}
-		</Link>
-	) : (
-		<Link
-			fontWeight={600}
-			href={`mailto:${email}`}
-			tag="a"
-			color="accent"
-			dataTestId="payer_email_link"
-		>
-			{email}
-		</Link>
-	);
+  const payerInformation = isStripePortalAvailable ? (
+    <Link
+      noSelect
+      fontWeight={600}
+      className="payer-info_account-link"
+      tag="a"
+      target="_blank"
+      color="accent"
+      onClick={goToStripePortal}
+      dataTestId="stripe_customer_portal_link"
+    >
+      {t("StripeCustomerPortal")}
+    </Link>
+  ) : (
+    <Link
+      fontWeight={600}
+      href={`mailto:${email}`}
+      tag="a"
+      color="accent"
+      dataTestId="payer_email_link"
+    >
+      {email}
+    </Link>
+  );
 
-	const payerName = () => {
-		let emailUnfoundedUser = "";
+  const payerName = () => {
+    let emailUnfoundedUser = "";
 
-		if (email) emailUnfoundedUser = `"${email}"`;
+    if (email) emailUnfoundedUser = `"${email}"`;
 
-		return (
-			<Text as="span" fontWeight={600} fontSize="14px">
-				{payerInfo ? (
-					payerInfo.displayName
-				) : (
-					<Trans t={t} i18nKey="UserNotFound" ns="Payments">
-						User
-						<Text
-							as="span"
-							color={theme.client.settings.payment.warningColor}
-							fontWeight={600}
-							fontSize="14px"
-						>
-							{{ email: emailUnfoundedUser }}
-						</Text>
-						is not found
-					</Trans>
-				)}
-			</Text>
-		);
-	};
+    return (
+      <Text as="span" fontWeight={600} fontSize="14px">
+        {payerInfo ? (
+          payerInfo.displayName
+        ) : (
+          <Trans t={t} i18nKey="UserNotFound" ns="Payments">
+            User
+            <Text
+              as="span"
+              color={theme.client.settings.payment.warningColor}
+              fontWeight={600}
+              fontSize="14px"
+            >
+              {{ email: emailUnfoundedUser }}
+            </Text>
+            is not found
+          </Trans>
+        )}
+      </Text>
+    );
+  };
 
-	const avatarUrl = payerInfo
-		? { source: payerInfo.hasAvatar ? payerInfo.avatar : DefaultUserPhoto }
-		: {};
+  const avatarUrl = payerInfo
+    ? { source: payerInfo.hasAvatar ? payerInfo.avatar : DefaultUserPhoto }
+    : {};
 
-	return (
-		<StyledContainer style={style}>
-			<div className="payer-info_avatar">
-				<Avatar
-					size="base"
-					{...avatarUrl}
-					isDefaultSource
-					userName={payerInfo?.displayName}
-				/>
-			</div>
+  return (
+    <StyledContainer style={style}>
+      <div className="payer-info_avatar">
+        <Avatar
+          size="base"
+          {...avatarUrl}
+          isDefaultSource
+          userName={payerInfo?.displayName}
+        />
+      </div>
 
-			<div className="payer-info_wrapper">
-				<div className="payer-info_description">
-					{payerName()}
+      <div className="payer-info_wrapper">
+        <div className="payer-info_description">
+          {payerName()}
 
-					<Text as="span" className="payer-info">
-						{` (${t("Payer")}) `}
-					</Text>
+          <Text as="span" className="payer-info">
+            {` (${t("Payer")}) `}
+          </Text>
 
-					{renderTooltip}
-				</div>
+          {renderTooltip}
+        </div>
 
-				{!payerInfo ? unknownPayerInformation : payerInformation}
-			</div>
-		</StyledContainer>
-	);
+        {!payerInfo ? unknownPayerInformation : payerInformation}
+      </div>
+    </StyledContainer>
+  );
 };
 
 export default inject(
-	({ settingsStore, paymentStore, userStore, currentTariffStatusStore }) => {
-		const { accountLink, isStripePortalAvailable } = paymentStore;
-		const { theme } = settingsStore;
-		const {
-			isGracePeriod,
-			isNotPaidPeriod,
-			walletCustomerEmail,
-			walletCustomerInfo,
-		} = currentTariffStatusStore;
-		const { user } = userStore;
+  ({ settingsStore, paymentStore, userStore, currentTariffStatusStore }) => {
+    const { accountLink, isStripePortalAvailable } = paymentStore;
+    const { theme } = settingsStore;
+    const {
+      isGracePeriod,
+      isNotPaidPeriod,
+      walletCustomerEmail,
+      walletCustomerInfo,
+    } = currentTariffStatusStore;
+    const { user } = userStore;
 
-		return {
-			isStripePortalAvailable,
-			theme,
-			user,
-			accountLink,
-			isGracePeriod,
-			isNotPaidPeriod,
-			email: walletCustomerEmail,
-			payerInfo: walletCustomerInfo,
-		};
-	},
+    return {
+      isStripePortalAvailable,
+      theme,
+      user,
+      accountLink,
+      isGracePeriod,
+      isNotPaidPeriod,
+      email: walletCustomerEmail,
+      payerInfo: walletCustomerInfo,
+    };
+  },
 )(observer(PayerInformation));

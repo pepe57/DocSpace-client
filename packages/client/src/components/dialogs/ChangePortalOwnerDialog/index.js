@@ -35,7 +35,7 @@ import PeopleSelector from "@docspace/shared/selectors/People";
 import Filter from "@docspace/shared/api/people/filter";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Avatar } from "@docspace/shared/components/avatar";
+import { Avatar } from "@docspace/ui-kit/components/avatar";
 import { Text } from "@docspace/ui-kit/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { Button } from "@docspace/ui-kit/components/button";

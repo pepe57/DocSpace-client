@@ -39,7 +39,7 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
+} from "@docspace/ui-kit/components/avatar";
 import { useGuestShareLink } from "@/hooks/useGuestShareLink";
 import styles from "../confirm.module.scss";
 

@@ -34,7 +34,7 @@ import type { ToolbarItemType } from "./ViewerToolbar.props";
 const DotsIcon = () => <div data-testid="dots-icon">Dots</div>;
 
 // Mock useClickOutside hook
-vi.mock("../../../../utils/useClickOutside", () => ({
+vi.mock("../../../../utils", () => ({
   useClickOutside: (ref: HTMLElement, callback: () => void) => {
     // Mock implementation that just stores the callback
 

@@ -30,7 +30,7 @@ import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { DropDown } from "../../../drop-down";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { DropDownItem } from "../../../drop-down-item";
 import { TGroupMenuItem } from "../../Table.types";
 import styles from "./GroupMenuItem.module.scss";

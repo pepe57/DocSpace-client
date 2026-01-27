@@ -27,109 +27,113 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { TableCell } from "./TableCell";
-import { Avatar, AvatarRole, AvatarSize } from "../../../avatar";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/ui-kit/components/avatar";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 const meta: Meta<typeof TableCell> = {
-	title: "Components/Table/TableCell",
-	component: TableCell,
-	parameters: {
-		docs: {
-			description: {
-				component: "TableCell component used in table structures",
-			},
-		},
-	},
-	argTypes: {
-		forwardedRef: {
-			control: false,
-			table: {
-				disable: true,
-			},
-		},
-	},
+  title: "Components/Table/TableCell",
+  component: TableCell,
+  parameters: {
+    docs: {
+      description: {
+        component: "TableCell component used in table structures",
+      },
+    },
+  },
+  argTypes: {
+    forwardedRef: {
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof TableCell>;
 
 export const Simple: Story = {
-	args: {
-		className: "custom-cell",
-		children: "Cell Content",
-		hasAccess: false,
-		checked: false,
-	},
+  args: {
+    className: "custom-cell",
+    children: "Cell Content",
+    hasAccess: false,
+    checked: false,
+  },
 };
 
 export const WithElement: Story = {
-	render: (args) => (
-		<TableCell {...args}>
-			<div className="table-container_element">
-				<Avatar
-					role={AvatarRole.none}
-					size={AvatarSize.min}
-					source=""
-					noClick={!args.hasAccess}
-				/>
-			</div>
-			<Checkbox
-				className="table-container_row-checkbox"
-				isChecked={args.checked}
-			/>
-		</TableCell>
-	),
-	args: {
-		className: "custom-cell",
-		hasAccess: true,
-		checked: false,
-	},
+  render: (args) => (
+    <TableCell {...args}>
+      <div className="table-container_element">
+        <Avatar
+          role={AvatarRole.none}
+          size={AvatarSize.min}
+          source=""
+          noClick={!args.hasAccess}
+        />
+      </div>
+      <Checkbox
+        className="table-container_row-checkbox"
+        isChecked={args.checked}
+      />
+    </TableCell>
+  ),
+  args: {
+    className: "custom-cell",
+    hasAccess: true,
+    checked: false,
+  },
 };
 
 export const WithElementChecked: Story = {
-	render: (args) => (
-		<TableCell {...args}>
-			<div className="table-container_element">
-				<Avatar
-					role={AvatarRole.none}
-					size={AvatarSize.min}
-					source=""
-					noClick={!args.hasAccess}
-				/>
-			</div>
-			<Checkbox
-				className="table-container_row-checkbox"
-				isChecked={args.checked}
-			/>
-		</TableCell>
-	),
-	args: {
-		className: "custom-cell",
-		hasAccess: true,
-		checked: true,
-	},
+  render: (args) => (
+    <TableCell {...args}>
+      <div className="table-container_element">
+        <Avatar
+          role={AvatarRole.none}
+          size={AvatarSize.min}
+          source=""
+          noClick={!args.hasAccess}
+        />
+      </div>
+      <Checkbox
+        className="table-container_row-checkbox"
+        isChecked={args.checked}
+      />
+    </TableCell>
+  ),
+  args: {
+    className: "custom-cell",
+    hasAccess: true,
+    checked: true,
+  },
 };
 
 export const WithElementNoAccess: Story = {
-	render: (args) => (
-		<TableCell {...args}>
-			<div className="table-container_element">
-				<Avatar
-					role={AvatarRole.none}
-					size={AvatarSize.min}
-					source=""
-					noClick={!args.hasAccess}
-				/>
-			</div>
-			<Checkbox
-				className="table-container_row-checkbox"
-				isChecked={args.checked}
-			/>
-		</TableCell>
-	),
-	args: {
-		className: "custom-cell",
-		hasAccess: false,
-		checked: false,
-	},
+  render: (args) => (
+    <TableCell {...args}>
+      <div className="table-container_element">
+        <Avatar
+          role={AvatarRole.none}
+          size={AvatarSize.min}
+          source=""
+          noClick={!args.hasAccess}
+        />
+      </div>
+      <Checkbox
+        className="table-container_row-checkbox"
+        isChecked={args.checked}
+      />
+    </TableCell>
+  ),
+  args: {
+    className: "custom-cell",
+    hasAccess: false,
+    checked: false,
+  },
 };

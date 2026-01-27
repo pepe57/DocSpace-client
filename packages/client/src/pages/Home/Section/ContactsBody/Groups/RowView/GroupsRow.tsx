@@ -33,7 +33,7 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
+} from "@docspace/ui-kit/components/avatar";
 import { TGroup } from "@docspace/shared/api/groups/types";
 
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";

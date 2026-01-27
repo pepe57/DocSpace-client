@@ -33,7 +33,7 @@ import { FileInput } from "@docspace/shared/components/file-input";
 import RoomSelector from "@docspace/shared/selectors/Room";
 
 import { Aside } from "@docspace/shared/components/aside";
-import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 
 const RoomsSelectorInput = (props) => {
   const {

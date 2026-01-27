@@ -33,7 +33,11 @@ import { IconSizeType } from "../../../utils";
 
 import { Row } from "../row";
 import { RowContent } from "../row-content";
-import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/ui-kit/components/avatar";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 import { RowContainer } from ".";

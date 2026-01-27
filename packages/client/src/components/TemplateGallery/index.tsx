@@ -30,7 +30,7 @@ import { withTranslation } from "react-i18next";
 import type { Key } from "react";
 import classNames from "classnames";
 import { Portal } from "@docspace/ui-kit/components/portal";
-import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Button } from "@docspace/ui-kit/components/button";
@@ -46,365 +46,365 @@ import { getExtensionFromTabId } from "./utils/tabUtils";
 import styles from "./TemplateGallery.module.scss";
 
 const TemplateGalleryTabsContent = ({
-	t,
-	isShowInitSkeleton,
-	currentTabId,
-	onSelect,
-	resetFilters,
+  t,
+  isShowInitSkeleton,
+  currentTabId,
+  onSelect,
+  resetFilters,
 }: {
-	t: TTranslation;
-	isShowInitSkeleton: boolean;
-	currentTabId: TabId;
-	onSelect: (element: TTabItem) => void;
-	resetFilters: (ext: string) => Promise<void>;
+  t: TTranslation;
+  isShowInitSkeleton: boolean;
+  currentTabId: TabId;
+  onSelect: (element: TTabItem) => void;
+  resetFilters: (ext: string) => Promise<void>;
 }) => {
-	const tabs: TTabItem[] = [
-		{
-			id: TAB_IDS.DOCUMENTS,
-			name: t("Common:Documents"),
-			content: (
-				<TilesContainer
-					ext={FILE_EXTENSIONS.DOCX}
-					isShowInitSkeleton={isShowInitSkeleton}
-				/>
-			),
-			onClick: async () => await resetFilters(FILE_EXTENSIONS.DOCX),
-		},
-		{
-			id: TAB_IDS.SPREADSHEET,
-			name: t("Common:Spreadsheets"),
-			content: (
-				<TilesContainer ext={FILE_EXTENSIONS.XLSX} isShowInitSkeleton={false} />
-			),
-			onClick: async () => await resetFilters(FILE_EXTENSIONS.XLSX),
-		},
-		{
-			id: TAB_IDS.PRESENTATION,
-			name: t("Common:Presentations"),
-			content: (
-				<TilesContainer ext={FILE_EXTENSIONS.PPTX} isShowInitSkeleton={false} />
-			),
-			onClick: async () => await resetFilters(FILE_EXTENSIONS.PPTX),
-		},
-		{
-			id: TAB_IDS.FORMS,
-			name: t("Common:PDFs"),
-			content: (
-				<TilesContainer ext={FILE_EXTENSIONS.PDF} isShowInitSkeleton={false} />
-			),
-			onClick: async () => await resetFilters(FILE_EXTENSIONS.PDF),
-		},
-	];
+  const tabs: TTabItem[] = [
+    {
+      id: TAB_IDS.DOCUMENTS,
+      name: t("Common:Documents"),
+      content: (
+        <TilesContainer
+          ext={FILE_EXTENSIONS.DOCX}
+          isShowInitSkeleton={isShowInitSkeleton}
+        />
+      ),
+      onClick: async () => await resetFilters(FILE_EXTENSIONS.DOCX),
+    },
+    {
+      id: TAB_IDS.SPREADSHEET,
+      name: t("Common:Spreadsheets"),
+      content: (
+        <TilesContainer ext={FILE_EXTENSIONS.XLSX} isShowInitSkeleton={false} />
+      ),
+      onClick: async () => await resetFilters(FILE_EXTENSIONS.XLSX),
+    },
+    {
+      id: TAB_IDS.PRESENTATION,
+      name: t("Common:Presentations"),
+      content: (
+        <TilesContainer ext={FILE_EXTENSIONS.PPTX} isShowInitSkeleton={false} />
+      ),
+      onClick: async () => await resetFilters(FILE_EXTENSIONS.PPTX),
+    },
+    {
+      id: TAB_IDS.FORMS,
+      name: t("Common:PDFs"),
+      content: (
+        <TilesContainer ext={FILE_EXTENSIONS.PDF} isShowInitSkeleton={false} />
+      ),
+      onClick: async () => await resetFilters(FILE_EXTENSIONS.PDF),
+    },
+  ];
 
-	return (
-		<div className={styles.templateGalleryWrapper}>
-			<Tabs
-				items={tabs}
-				selectedItemId={currentTabId}
-				onSelect={onSelect}
-				withAnimation
-			/>
-		</div>
-	);
+  return (
+    <div className={styles.templateGalleryWrapper}>
+      <Tabs
+        items={tabs}
+        selectedItemId={currentTabId}
+        onSelect={onSelect}
+        withAnimation
+      />
+    </div>
+  );
 };
 
 const TemplateGalleryFormsOnlyContent = ({
-	isShowInitSkeleton,
+  isShowInitSkeleton,
 }: {
-	isShowInitSkeleton: boolean;
+  isShowInitSkeleton: boolean;
 }) => {
-	return (
-		<div
-			className={classNames(styles.templateGalleryWrapper, {
-				[styles.withoutTabs]: true,
-			})}
-		>
-			<TilesContainer
-				ext={FILE_EXTENSIONS.PDF}
-				isShowInitSkeleton={isShowInitSkeleton}
-			/>
-		</div>
-	);
+  return (
+    <div
+      className={classNames(styles.templateGalleryWrapper, {
+        [styles.withoutTabs]: true,
+      })}
+    >
+      <TilesContainer
+        ext={FILE_EXTENSIONS.PDF}
+        isShowInitSkeleton={isShowInitSkeleton}
+      />
+    </div>
+  );
 };
 
 type TemplateGalleryProps = {
-	templateGalleryVisible: boolean;
-	setTemplateGalleryVisible: (isVisible: boolean) => void;
-	setCurrentExtensionGallery: (extension: string) => void;
-	resetFilters: (ext: string) => Promise<void>;
-	initTemplateGallery: () => Promise<void>;
-	oformsLoadError: boolean;
-	oformsNetworkError: boolean;
-	setSubmitToGalleryDialogVisible: (isVisible: boolean) => void;
-	t: TTranslation;
-	filterOformsByLocaleIsLoading: boolean;
-	categoryFilterLoaded: boolean;
-	languageFilterLoaded: boolean;
-	setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
-	setGallerySelected: (item: { id: Key | null | undefined } | null) => void;
-	isFormRoomRoot: boolean;
+  templateGalleryVisible: boolean;
+  setTemplateGalleryVisible: (isVisible: boolean) => void;
+  setCurrentExtensionGallery: (extension: string) => void;
+  resetFilters: (ext: string) => Promise<void>;
+  initTemplateGallery: () => Promise<void>;
+  oformsLoadError: boolean;
+  oformsNetworkError: boolean;
+  setSubmitToGalleryDialogVisible: (isVisible: boolean) => void;
+  t: TTranslation;
+  filterOformsByLocaleIsLoading: boolean;
+  categoryFilterLoaded: boolean;
+  languageFilterLoaded: boolean;
+  setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
+  setGallerySelected: (item: { id: Key | null | undefined } | null) => void;
+  isFormRoomRoot: boolean;
 };
 
 const useTemplateGalleryScrollLocks = (templateGalleryVisible: boolean) => {
-	useEffect(() => {
-		if (!templateGalleryVisible) return;
+  useEffect(() => {
+    if (!templateGalleryVisible) return;
 
-		const originalBodyOverflow = document.body.style.overflow;
-		document.body.style.overflow = "hidden";
+    const originalBodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
-		const sectionScroll = document.querySelector(
-			".section-scroll",
-		) as HTMLElement | null;
-		const originalSectionOverflow = sectionScroll?.style.overflow;
-		if (sectionScroll) {
-			sectionScroll.style.overflow = "hidden";
-		}
+    const sectionScroll = document.querySelector(
+      ".section-scroll",
+    ) as HTMLElement | null;
+    const originalSectionOverflow = sectionScroll?.style.overflow;
+    if (sectionScroll) {
+      sectionScroll.style.overflow = "hidden";
+    }
 
-		const mobileScroll = document.querySelector(
-			"#customScrollBar > .scroll-wrapper > .scroller",
-		) as HTMLElement | null;
-		const originalMobileOverflow = mobileScroll?.style.overflow;
-		if (mobileScroll) {
-			mobileScroll.style.overflow = "hidden";
-		}
+    const mobileScroll = document.querySelector(
+      "#customScrollBar > .scroll-wrapper > .scroller",
+    ) as HTMLElement | null;
+    const originalMobileOverflow = mobileScroll?.style.overflow;
+    if (mobileScroll) {
+      mobileScroll.style.overflow = "hidden";
+    }
 
-		return () => {
-			document.body.style.overflow = originalBodyOverflow;
-			if (sectionScroll) {
-				sectionScroll.style.overflow = originalSectionOverflow || "";
-			}
-			if (mobileScroll) {
-				mobileScroll.style.overflow = originalMobileOverflow || "";
-			}
-		};
-	}, [templateGalleryVisible]);
+    return () => {
+      document.body.style.overflow = originalBodyOverflow;
+      if (sectionScroll) {
+        sectionScroll.style.overflow = originalSectionOverflow || "";
+      }
+      if (mobileScroll) {
+        mobileScroll.style.overflow = originalMobileOverflow || "";
+      }
+    };
+  }, [templateGalleryVisible]);
 };
 
 const TemplateGallery = (props: TemplateGalleryProps) => {
-	const {
-		templateGalleryVisible,
-		setTemplateGalleryVisible,
-		setCurrentExtensionGallery,
-		resetFilters,
-		initTemplateGallery,
-		oformsLoadError,
-		oformsNetworkError,
-		setSubmitToGalleryDialogVisible,
-		t,
-		filterOformsByLocaleIsLoading,
-		categoryFilterLoaded,
-		languageFilterLoaded,
-		setIsVisibleInfoPanelTemplateGallery,
-		setGallerySelected,
-		isFormRoomRoot,
-	} = props;
+  const {
+    templateGalleryVisible,
+    setTemplateGalleryVisible,
+    setCurrentExtensionGallery,
+    resetFilters,
+    initTemplateGallery,
+    oformsLoadError,
+    oformsNetworkError,
+    setSubmitToGalleryDialogVisible,
+    t,
+    filterOformsByLocaleIsLoading,
+    categoryFilterLoaded,
+    languageFilterLoaded,
+    setIsVisibleInfoPanelTemplateGallery,
+    setGallerySelected,
+    isFormRoomRoot,
+  } = props;
 
-	const isMobileView = useMobileDetection();
-	const [currentTabId, setCurrentTabId] = useState<TabId>(() =>
-		isFormRoomRoot ? TAB_IDS.FORMS : TAB_IDS.DOCUMENTS,
-	);
-	const [isInitLoading, setIsInitLoading] = useState(true);
-	const [isShowInitSkeleton, setShowInitSkeleton] = useState(true);
+  const isMobileView = useMobileDetection();
+  const [currentTabId, setCurrentTabId] = useState<TabId>(() =>
+    isFormRoomRoot ? TAB_IDS.FORMS : TAB_IDS.DOCUMENTS,
+  );
+  const [isInitLoading, setIsInitLoading] = useState(true);
+  const [isShowInitSkeleton, setShowInitSkeleton] = useState(true);
 
-	useEffect(() => {
-		initTemplateGallery().then(() => setIsInitLoading(false));
-		setCurrentExtensionGallery(
-			isFormRoomRoot ? FILE_EXTENSIONS.PDF : FILE_EXTENSIONS.DOCX,
-		);
-	}, [initTemplateGallery, isFormRoomRoot, setCurrentExtensionGallery]);
+  useEffect(() => {
+    initTemplateGallery().then(() => setIsInitLoading(false));
+    setCurrentExtensionGallery(
+      isFormRoomRoot ? FILE_EXTENSIONS.PDF : FILE_EXTENSIONS.DOCX,
+    );
+  }, [initTemplateGallery, isFormRoomRoot, setCurrentExtensionGallery]);
 
-	useTemplateGalleryScrollLocks(templateGalleryVisible);
+  useTemplateGalleryScrollLocks(templateGalleryVisible);
 
-	useEffect(() => {
-		if (
-			!isInitLoading &&
-			!filterOformsByLocaleIsLoading &&
-			categoryFilterLoaded &&
-			languageFilterLoaded
-		)
-			setShowInitSkeleton(false);
-	}, [
-		isInitLoading,
-		filterOformsByLocaleIsLoading,
-		categoryFilterLoaded,
-		languageFilterLoaded,
-	]);
+  useEffect(() => {
+    if (
+      !isInitLoading &&
+      !filterOformsByLocaleIsLoading &&
+      categoryFilterLoaded &&
+      languageFilterLoaded
+    )
+      setShowInitSkeleton(false);
+  }, [
+    isInitLoading,
+    filterOformsByLocaleIsLoading,
+    categoryFilterLoaded,
+    languageFilterLoaded,
+  ]);
 
-	const onCloseClick = () => {
-		setIsVisibleInfoPanelTemplateGallery(false);
-		setGallerySelected(null);
-		setTemplateGalleryVisible(false);
-	};
+  const onCloseClick = () => {
+    setIsVisibleInfoPanelTemplateGallery(false);
+    setGallerySelected(null);
+    setTemplateGalleryVisible(false);
+  };
 
-	useEventListener("keydown", (e: KeyboardEvent) => {
-		if (e.key === "Escape") onCloseClick();
-	});
+  useEventListener("keydown", (e: KeyboardEvent) => {
+    if (e.key === "Escape") onCloseClick();
+  });
 
-	const onSelect = (element: TTabItem) => {
-		if (isFormRoomRoot) return;
-		const tabId = element.id as TabId;
-		setCurrentTabId(tabId);
-		const fileExtension = getExtensionFromTabId(tabId);
-		setCurrentExtensionGallery(fileExtension);
-	};
+  const onSelect = (element: TTabItem) => {
+    if (isFormRoomRoot) return;
+    const tabId = element.id as TabId;
+    setCurrentTabId(tabId);
+    const fileExtension = getExtensionFromTabId(tabId);
+    setCurrentExtensionGallery(fileExtension);
+  };
 
-	const onOpenSubmitToGalleryDialog = () =>
-		setSubmitToGalleryDialogVisible(true);
+  const onOpenSubmitToGalleryDialog = () =>
+    setSubmitToGalleryDialogVisible(true);
 
-	const renderHeader = useMemo(
-		() => (
-			<div className={styles.header}>
-				<div className={styles.headerContent}>
-					<div className={styles.headerText}>{t("Common:TemplateGallery")}</div>
-					{!oformsLoadError && !oformsNetworkError ? (
-						<Button
-							className={styles.headerButton}
-							onClick={onOpenSubmitToGalleryDialog}
-							label={t("Common:SubmitToTemplateGallery")}
-						/>
-					) : null}
-				</div>
-				<IconButton
-					size={17}
-					className={styles.closeButton}
-					iconName={CrossReactSvgUrl}
-					onClick={onCloseClick}
-					isClickable
-					isStroke
-				/>
-			</div>
-		),
-		[
-			t,
-			oformsLoadError,
-			oformsNetworkError,
-			onOpenSubmitToGalleryDialog,
-			onCloseClick,
-		],
-	);
+  const renderHeader = useMemo(
+    () => (
+      <div className={styles.header}>
+        <div className={styles.headerContent}>
+          <div className={styles.headerText}>{t("Common:TemplateGallery")}</div>
+          {!oformsLoadError && !oformsNetworkError ? (
+            <Button
+              className={styles.headerButton}
+              onClick={onOpenSubmitToGalleryDialog}
+              label={t("Common:SubmitToTemplateGallery")}
+            />
+          ) : null}
+        </div>
+        <IconButton
+          size={17}
+          className={styles.closeButton}
+          iconName={CrossReactSvgUrl}
+          onClick={onCloseClick}
+          isClickable
+          isStroke
+        />
+      </div>
+    ),
+    [
+      t,
+      oformsLoadError,
+      oformsNetworkError,
+      onOpenSubmitToGalleryDialog,
+      onCloseClick,
+    ],
+  );
 
-	const renderContent = useMemo(() => {
-		if (oformsLoadError || oformsNetworkError) {
-			const descriptionText = oformsNetworkError
-				? t("FormGallery:ErrorViewDescriptionNetworkError")
-				: t("FormGallery:ErrorViewDescription");
+  const renderContent = useMemo(() => {
+    if (oformsLoadError || oformsNetworkError) {
+      const descriptionText = oformsNetworkError
+        ? t("FormGallery:ErrorViewDescriptionNetworkError")
+        : t("FormGallery:ErrorViewDescription");
 
-			return (
-				<ErrorView
-					onCloseClick={onCloseClick}
-					descriptionText={descriptionText}
-				/>
-			);
-		}
+      return (
+        <ErrorView
+          onCloseClick={onCloseClick}
+          descriptionText={descriptionText}
+        />
+      );
+    }
 
-		if (isFormRoomRoot)
-			return (
-				<TemplateGalleryFormsOnlyContent
-					isShowInitSkeleton={isShowInitSkeleton}
-				/>
-			);
+    if (isFormRoomRoot)
+      return (
+        <TemplateGalleryFormsOnlyContent
+          isShowInitSkeleton={isShowInitSkeleton}
+        />
+      );
 
-		return (
-			<TemplateGalleryTabsContent
-				t={t}
-				isShowInitSkeleton={isShowInitSkeleton}
-				currentTabId={currentTabId}
-				onSelect={onSelect}
-				resetFilters={resetFilters}
-			/>
-		);
-	}, [
-		oformsLoadError,
-		oformsNetworkError,
-		onCloseClick,
-		isFormRoomRoot,
-		currentTabId,
-		isShowInitSkeleton,
-		resetFilters,
-		t,
-	]);
+    return (
+      <TemplateGalleryTabsContent
+        t={t}
+        isShowInitSkeleton={isShowInitSkeleton}
+        currentTabId={currentTabId}
+        onSelect={onSelect}
+        resetFilters={resetFilters}
+      />
+    );
+  }, [
+    oformsLoadError,
+    oformsNetworkError,
+    onCloseClick,
+    isFormRoomRoot,
+    currentTabId,
+    isShowInitSkeleton,
+    resetFilters,
+    t,
+  ]);
 
-	const templateGalleryNode = useMemo(() => {
-		const containerClass = isMobileView
-			? styles.containerMobile
-			: styles.container;
-		const galleryClass = isMobileView
-			? styles.templateGalleryMobile
-			: styles.templateGallery;
-		const backdropZIndex = isMobileView ? 203 : 309;
+  const templateGalleryNode = useMemo(() => {
+    const containerClass = isMobileView
+      ? styles.containerMobile
+      : styles.container;
+    const galleryClass = isMobileView
+      ? styles.templateGalleryMobile
+      : styles.templateGallery;
+    const backdropZIndex = isMobileView ? 203 : 309;
 
-		const mobileHeader = (
-			<div className={styles.header}>
-				<div className={styles.headerText}>{t("Common:TemplateGallery")}</div>
-				<IconButton
-					size={17}
-					className={styles.closeButton}
-					iconName={CrossReactSvgUrl}
-					onClick={onCloseClick}
-					isClickable
-					isStroke
-				/>
-			</div>
-		);
+    const mobileHeader = (
+      <div className={styles.header}>
+        <div className={styles.headerText}>{t("Common:TemplateGallery")}</div>
+        <IconButton
+          size={17}
+          className={styles.closeButton}
+          iconName={CrossReactSvgUrl}
+          onClick={onCloseClick}
+          isClickable
+          isStroke
+        />
+      </div>
+    );
 
-		return (
-			<>
-				<Backdrop
-					visible
-					withBackground
-					zIndex={backdropZIndex}
-					onClick={onCloseClick}
-				/>
-				<div className={containerClass}>
-					<div className={galleryClass}>
-						{isMobileView ? mobileHeader : renderHeader}
-						{renderContent}
-					</div>
-				</div>
-			</>
-		);
-	}, [isMobileView, renderHeader, renderContent, t, onCloseClick]);
+    return (
+      <>
+        <Backdrop
+          visible
+          withBackground
+          zIndex={backdropZIndex}
+          onClick={onCloseClick}
+        />
+        <div className={containerClass}>
+          <div className={galleryClass}>
+            {isMobileView ? mobileHeader : renderHeader}
+            {renderContent}
+          </div>
+        </div>
+      </>
+    );
+  }, [isMobileView, renderHeader, renderContent, t, onCloseClick]);
 
-	return (
-		<Portal visible={templateGalleryVisible} element={templateGalleryNode} />
-	);
+  return (
+    <Portal visible={templateGalleryVisible} element={templateGalleryNode} />
+  );
 };
 
 export default inject<TStore>(
-	({ oformsStore, dialogsStore, treeFoldersStore }) => {
-		const {
-			templateGalleryVisible,
-			setTemplateGalleryVisible,
-			setCurrentExtensionGallery,
-			resetFilters,
-			initTemplateGallery,
-			oformsLoadError,
-			filterOformsByLocaleIsLoading,
-			categoryFilterLoaded,
-			languageFilterLoaded,
-			oformsNetworkError,
-			setIsVisibleInfoPanelTemplateGallery,
-			setGallerySelected,
-		} = oformsStore;
+  ({ oformsStore, dialogsStore, treeFoldersStore }) => {
+    const {
+      templateGalleryVisible,
+      setTemplateGalleryVisible,
+      setCurrentExtensionGallery,
+      resetFilters,
+      initTemplateGallery,
+      oformsLoadError,
+      filterOformsByLocaleIsLoading,
+      categoryFilterLoaded,
+      languageFilterLoaded,
+      oformsNetworkError,
+      setIsVisibleInfoPanelTemplateGallery,
+      setGallerySelected,
+    } = oformsStore;
 
-		const { setSubmitToGalleryDialogVisible } = dialogsStore;
-		const { isFormRoomRoot } = treeFoldersStore;
+    const { setSubmitToGalleryDialogVisible } = dialogsStore;
+    const { isFormRoomRoot } = treeFoldersStore;
 
-		return {
-			templateGalleryVisible,
-			setTemplateGalleryVisible,
-			setCurrentExtensionGallery,
-			resetFilters,
-			initTemplateGallery,
-			oformsLoadError,
-			setSubmitToGalleryDialogVisible,
-			filterOformsByLocaleIsLoading,
-			categoryFilterLoaded,
-			languageFilterLoaded,
-			oformsNetworkError,
-			setIsVisibleInfoPanelTemplateGallery,
-			setGallerySelected,
-			isFormRoomRoot,
-		};
-	},
+    return {
+      templateGalleryVisible,
+      setTemplateGalleryVisible,
+      setCurrentExtensionGallery,
+      resetFilters,
+      initTemplateGallery,
+      oformsLoadError,
+      setSubmitToGalleryDialogVisible,
+      filterOformsByLocaleIsLoading,
+      categoryFilterLoaded,
+      languageFilterLoaded,
+      oformsNetworkError,
+      setIsVisibleInfoPanelTemplateGallery,
+      setGallerySelected,
+      isFormRoomRoot,
+    };
+  },
 )(withTranslation("Common")(observer(TemplateGallery)));

@@ -27,7 +27,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import { EmployeeStatus, EmployeeType, ShareAccessRights } from "../../enums";
-import { AvatarRole } from "../../components/avatar";
+import { AvatarRole } from "@docspace/ui-kit/components/avatar";
 import { SelectorAccessRightsMode } from "../../components/selector";
 import { TSelectorItem } from "../../components/selector/Selector.types";
 

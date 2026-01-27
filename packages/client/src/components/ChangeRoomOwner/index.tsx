@@ -32,7 +32,7 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
+} from "@docspace/ui-kit/components/avatar";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";

@@ -57,7 +57,7 @@ const mockItemWithDropDown = {
   ],
 };
 
-vi.mock("../../../drop-down", () => ({
+vi.mock("@docspace/ui-kit/components/drop-down", () => ({
   __esModule: true,
   DropDown: () => <div data-testid="dropdown" />,
 }));

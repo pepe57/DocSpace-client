@@ -29,7 +29,7 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
+} from "@docspace/ui-kit/components/avatar";
 import { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";

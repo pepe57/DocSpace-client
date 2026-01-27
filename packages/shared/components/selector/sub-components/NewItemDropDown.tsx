@@ -29,7 +29,7 @@ import React from "react";
 import { Portal } from "@docspace/ui-kit/components/portal";
 
 import { classNames, isMobile as isMobileUtils } from "../../../utils";
-import { Backdrop } from "../../backdrop";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 

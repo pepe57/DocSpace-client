@@ -36,6 +36,8 @@ import type { TTheme, TColorScheme } from "../themes";
 import type FirebaseHelper from "../utils/firebase";
 import type { TRoom } from "../api/rooms/types";
 
+export type { TDirectionX, TDirectionY } from "@docspace/ui-kit/types";
+
 export type Option = {
   key: string;
   value: string;
@@ -43,9 +45,6 @@ export type Option = {
 };
 
 export type TWeekdaysLabel = Pick<Option, "key" | "label">;
-
-export type TDirectionX = "left" | "right";
-export type TDirectionY = "bottom" | "top" | "both";
 
 export type TViewAs =
   | "tile"
