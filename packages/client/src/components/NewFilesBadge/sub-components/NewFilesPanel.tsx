@@ -43,7 +43,7 @@ import type { Nullable } from "@docspace/shared/types";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import { ButtonKeys } from "@docspace/shared/enums";
 
-import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import type {
   NewFilesPanelInjectStore,
   NewFilesPanelProps,

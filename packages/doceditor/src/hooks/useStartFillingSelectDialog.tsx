@@ -43,7 +43,7 @@ import type {
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
-import type { TData } from "@docspace/shared/components/toast/Toast.type";
+import type { TData } from "@docspace/shared/components/toast";
 
 import { saveAs } from "@/utils";
 import type { ConflictStateType } from "@/types";

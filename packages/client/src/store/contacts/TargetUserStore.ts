@@ -33,11 +33,8 @@ import {
   EmployeeActivationStatus,
 } from "@docspace/shared/enums";
 import { setCookie } from "@docspace/shared/utils/cookie";
-import {
-  LANGUAGE,
-  COOKIE_EXPIRATION_YEAR,
-  AVATAR_ACTION_KEYS,
-} from "@docspace/shared/constants";
+import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
+import { AvatarActionKeys } from "@docspace/ui-kit/components/avatar";
 import {
   changeNotificationSubscription,
   getNotificationSubscription,
@@ -152,13 +149,13 @@ class TargetUserStore {
       {
         label: t("RoomLogoCover:UploadPicture"),
         icon: UploadSvgUrl,
-        key: AVATAR_ACTION_KEYS.PROFILE_AVATAR_UPLOAD,
+        key: AvatarActionKeys.PROFILE_AVATAR_UPLOAD,
         onClick: (ref: React.RefObject<HTMLDivElement>) => ref.current?.click(),
       },
       {
         label: t("Common:Delete"),
         icon: TrashIconSvgUrl,
-        key: AVATAR_ACTION_KEYS.PROFILE_AVATAR_DELETE,
+        key: AvatarActionKeys.PROFILE_AVATAR_DELETE,
         onClick: () => this.deleteProfileAvatar(),
       },
     ];

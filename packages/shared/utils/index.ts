@@ -38,7 +38,7 @@ import {
   getCorrectBorderRadius,
   getCorrectFourValuesStyle,
 } from "./rtlUtils";
-import * as useClickOutside from "./useClickOutside";
+import { useClickOutside } from "@docspace/ui-kit/utils";
 import { trimSeparator } from "./trimSeparator";
 import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
@@ -46,7 +46,7 @@ import { getTextColor } from "./getTextColor";
 import { getFormFillingTipsStorageName } from "./getFormFillingTipsStorageName";
 import { uuid } from "@docspace/ui-kit/utils";
 
-import DomHelpers from "./domHelpers";
+import { DomHelpers } from "@docspace/ui-kit/utils";
 import ObjectUtils from "./objectUtils";
 import {
   size,

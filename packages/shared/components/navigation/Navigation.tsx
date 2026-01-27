@@ -27,7 +27,7 @@
 import React, { useCallback } from "react";
 
 import { Consumer, DomHelpers } from "../../utils";
-import { Backdrop } from "../backdrop";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 
 import ArrowButton from "./sub-components/ArrowBtn";
 import ControlButtons from "./sub-components/ControlBtn";

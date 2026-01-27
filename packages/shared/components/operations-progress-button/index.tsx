@@ -37,13 +37,13 @@ import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 import { FloatingButton } from "../floating-button";
 import { FloatingButtonIcons } from "../floating-button/FloatingButton.enums";
-import { DropDown } from "../drop-down";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import ProgressList from "./ProgressList";
 import styles from "./OperationsProgressButton.module.scss";
 import { OperationsProgressProps } from "./OperationsProgressButton.types";
 import { OPERATIONS_NAME } from "../../constants/index";
 import { HelpButton } from "../help-button";
-import { Backdrop } from "../backdrop";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { Text } from "@docspace/ui-kit/components/text";
 import PreviewButton from "./PreviewButton";
 

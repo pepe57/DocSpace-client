@@ -34,7 +34,7 @@ import { globalColors } from "../../../themes";
 
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Badge } from "../../../components/badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { FieldContainer } from "../../../components/field-container";
 import {
   TextInput,

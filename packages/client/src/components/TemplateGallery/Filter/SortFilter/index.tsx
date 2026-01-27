@@ -31,7 +31,7 @@ import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
@@ -39,117 +39,117 @@ import styles from "./SortFilter.module.scss";
 import { SortFilterProps, SortData } from "./SortFilter.types";
 
 const SortFilter: FC<SortFilterProps> = ({
-	t,
-	oformsFilter,
-	sortOforms,
-	filterOformsByLocaleIsLoading,
-	categoryFilterLoaded,
-	languageFilterLoaded,
-	isShowInitSkeleton,
-	isLanguageFilterChange,
+  t,
+  oformsFilter,
+  sortOforms,
+  filterOformsByLocaleIsLoading,
+  categoryFilterLoaded,
+  languageFilterLoaded,
+  isShowInitSkeleton,
+  isLanguageFilterChange,
 }) => {
-	const [isOpen, setIsOpen] = useState(false);
-	const onToggleCombobox = () => setIsOpen(!isOpen);
+  const [isOpen, setIsOpen] = useState(false);
+  const onToggleCombobox = () => setIsOpen(!isOpen);
 
-	const sortData: SortData[] = [
-		{
-			id: "sort-by_name",
-			key: "name_form",
-			label: t("Common:Label"),
-			default: false,
-			isSelected: false,
-		},
-		{
-			id: "sort-by_updatedAt",
-			key: "updatedAt",
-			label: t("Common:LastModifiedDate"),
-			default: false,
-			isSelected: false,
-		},
-	];
+  const sortData: SortData[] = [
+    {
+      id: "sort-by_name",
+      key: "name_form",
+      label: t("Common:Label"),
+      default: false,
+      isSelected: false,
+    },
+    {
+      id: "sort-by_updatedAt",
+      key: "updatedAt",
+      label: t("Common:LastModifiedDate"),
+      default: false,
+      isSelected: false,
+    },
+  ];
 
-	const onSort = (newSortBy: string) => {
-		if (oformsFilter.sortBy === newSortBy) {
-			sortOforms(newSortBy, oformsFilter.sortOrder === "asc" ? "desc" : "asc");
-		} else sortOforms(newSortBy, "desc");
+  const onSort = (newSortBy: string) => {
+    if (oformsFilter.sortBy === newSortBy) {
+      sortOforms(newSortBy, oformsFilter.sortOrder === "asc" ? "desc" : "asc");
+    } else sortOforms(newSortBy, "desc");
 
-		setIsOpen(false);
-	};
+    setIsOpen(false);
+  };
 
-	if (
-		(isShowInitSkeleton ||
-			filterOformsByLocaleIsLoading ||
-			!(categoryFilterLoaded && languageFilterLoaded)) &&
-		!isLanguageFilterChange
-	)
-		return <RectangleSkeleton height="32px" width="32px" />;
+  if (
+    (isShowInitSkeleton ||
+      filterOformsByLocaleIsLoading ||
+      !(categoryFilterLoaded && languageFilterLoaded)) &&
+    !isLanguageFilterChange
+  )
+    return <RectangleSkeleton height="32px" width="32px" />;
 
-	return (
-		<>
-			<Backdrop
-				visible={isOpen}
-				onClick={onToggleCombobox}
-				withBackground={false}
-				withoutBlur
-			/>
+  return (
+    <>
+      <Backdrop
+        visible={isOpen}
+        onClick={onToggleCombobox}
+        withBackground={false}
+        withoutBlur
+      />
 
-			<div
-				className={styles.sortButton}
-				title={t("Common:SortBy")}
-				onClick={onToggleCombobox}
-			>
-				<ComboBox
-					id="comboBoxSort"
-					tabIndex={1}
-					opened={isOpen}
-					onToggle={onToggleCombobox}
-					className="sort-combo-box"
-					scaled
-					isDisabled={isLanguageFilterChange}
-					disableIconClick={isLanguageFilterChange}
-					disableItemClick={isLanguageFilterChange}
-					isDefaultMode={false}
-					manualY="102%"
-					directionX="left"
-					advancedOptionsCount={sortData.length}
-					fillIcon={false}
-					options={[]}
-					selectedOption={{ key: "", label: "" }}
-					manualWidth="auto"
-					advancedOptions={
-						<div>
-							{sortData?.map((item) => {
-								const isSelected = oformsFilter.sortBy === item.key;
-								const isDescending = oformsFilter.sortOrder === "desc";
-								const itemClasses = [
-									styles.sortDropdownItem,
-									isSelected ? styles.selected : "",
-									!isDescending ? styles.ascending : "",
-								]
-									.filter(Boolean)
-									.join(" ");
+      <div
+        className={styles.sortButton}
+        title={t("Common:SortBy")}
+        onClick={onToggleCombobox}
+      >
+        <ComboBox
+          id="comboBoxSort"
+          tabIndex={1}
+          opened={isOpen}
+          onToggle={onToggleCombobox}
+          className="sort-combo-box"
+          scaled
+          isDisabled={isLanguageFilterChange}
+          disableIconClick={isLanguageFilterChange}
+          disableItemClick={isLanguageFilterChange}
+          isDefaultMode={false}
+          manualY="102%"
+          directionX="left"
+          advancedOptionsCount={sortData.length}
+          fillIcon={false}
+          options={[]}
+          selectedOption={{ key: "", label: "" }}
+          manualWidth="auto"
+          advancedOptions={
+            <div>
+              {sortData?.map((item) => {
+                const isSelected = oformsFilter.sortBy === item.key;
+                const isDescending = oformsFilter.sortOrder === "desc";
+                const itemClasses = [
+                  styles.sortDropdownItem,
+                  isSelected ? styles.selected : "",
+                  !isDescending ? styles.ascending : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ");
 
-								return (
-									<DropDownItem
-										id={item.id}
-										onClick={() => onSort(item.key)}
-										key={item.key}
-										data-value={item.key}
-										className={itemClasses}
-									>
-										<Text fontWeight={600}>{item.label}</Text>
-										<SortDesc className="sortorder-arrow" />
-									</DropDownItem>
-								);
-							})}
-						</div>
-					}
-				>
-					<IconButton iconName={SortReactSvgUrl} size={16} />
-				</ComboBox>
-			</div>
-		</>
-	);
+                return (
+                  <DropDownItem
+                    id={item.id}
+                    onClick={() => onSort(item.key)}
+                    key={item.key}
+                    data-value={item.key}
+                    className={itemClasses}
+                  >
+                    <Text fontWeight={600}>{item.label}</Text>
+                    <SortDesc className="sortorder-arrow" />
+                  </DropDownItem>
+                );
+              })}
+            </div>
+          }
+        >
+          <IconButton iconName={SortReactSvgUrl} size={16} />
+        </ComboBox>
+      </div>
+    </>
+  );
 };
 
 export default observer(withTranslation(["Common"])(SortFilter));

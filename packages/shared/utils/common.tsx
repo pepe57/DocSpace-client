@@ -58,7 +58,7 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
-import { AvatarRole } from "../components/avatar/Avatar.enums";
+import { AvatarRole } from "@docspace/ui-kit/components/avatar";
 
 import { flagsIcons } from "./image-flags";
 

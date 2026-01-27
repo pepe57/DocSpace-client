@@ -40,7 +40,7 @@ import { ReactSVG } from "react-svg";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { ArticleItemNext as ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapperNext";
-import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { Portal } from "@docspace/ui-kit/components/portal";
 import { useStores } from "@/hooks/useStores";
 import useDeviceType from "@/hooks/useDeviceType";

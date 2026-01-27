@@ -42,7 +42,7 @@ const mockColumns = [
   },
 ];
 
-vi.mock("../../../drop-down", () => ({
+vi.mock("@docspace/ui-kit/components/drop-down", () => ({
   __esModule: true,
   DropDown: ({ open }: { open?: boolean }) => (
     <div data-testid="drop-down" data-open={open}>

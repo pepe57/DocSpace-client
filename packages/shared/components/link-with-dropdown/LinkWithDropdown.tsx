@@ -32,7 +32,7 @@ import ExpanderDownReactSvgUrl from "PUBLIC_DIR/images/expander-down.react.svg?u
 
 import { classNames } from "../../utils";
 
-import { DropDown } from "../drop-down";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 

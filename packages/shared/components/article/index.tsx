@@ -32,7 +32,7 @@ import { Portal } from "@docspace/ui-kit/components/portal";
 import { DeviceType } from "../../enums";
 import { ArticleProfileLoader } from "../../skeletons/article";
 
-import { Backdrop } from "../backdrop";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import SubArticleHeader from "./sub-components/Header";

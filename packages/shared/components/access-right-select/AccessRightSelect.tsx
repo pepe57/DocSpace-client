@@ -29,7 +29,7 @@ import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 
 import { DropDownItem } from "../drop-down-item";
-import { Badge } from "../badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { ComboBox, TOption } from "../combobox";
 import { toastr } from "../toast";
 

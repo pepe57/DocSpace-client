@@ -35,8 +35,7 @@ import {
   iconSize96,
 } from "../../../utils/image-helpers";
 import { HTML_EXST, EBOOK_EXST } from "../../../constants";
-import { toastr } from "../../../components/toast";
-import { TData } from "../../../components/toast/Toast.type";
+import { toastr, type TData } from "../../../components/toast";
 
 import { TGetIcon } from "../types";
 

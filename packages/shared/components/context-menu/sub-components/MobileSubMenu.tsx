@@ -3,10 +3,11 @@ import { ReactSVG } from "react-svg";
 import { CSSTransition } from "react-transition-group";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
-import { DomHelpers, classNames } from "../../../utils";
+import { classNames } from "../../../utils";
+import { DomHelpers } from "@docspace/ui-kit/utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { Badge } from "../../badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import type {
   ContextMenuModel,
   ContextMenuType,
@@ -194,7 +195,7 @@ export const MobileSubMenu = ({
     subMenuRef.current.style.top = "0px";
     if (
       parseInt(`${containerOffset.left}`, 10) + itemOuterWidth + subListWidth >
-      viewport.width - DomHelpers.calculateScrollbarWidth()
+      viewport.width - (DomHelpers.calculateScrollbarWidth() ?? 0)
     ) {
       subMenuRef.current.style.left = `${-1 * subListWidth}px`;
     } else {

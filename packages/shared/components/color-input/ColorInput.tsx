@@ -29,7 +29,7 @@ import { HexColorInput } from "react-colorful";
 import classNames from "classnames";
 
 import { DropDownItem } from "../drop-down-item";
-import { DropDown } from "../drop-down";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
 
 import { ColorInputProps } from "./ColorInput.types";
 import { ColorPicker } from "../color-picker";

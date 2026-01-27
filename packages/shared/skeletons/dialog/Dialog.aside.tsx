@@ -27,7 +27,7 @@
 import React from "react";
 import { RectangleSkeleton } from "../rectangle";
 import { Aside } from "../../components/aside";
-import { Backdrop } from "../../components/backdrop";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import styles from "./Dialog.module.scss";
 
 import { DialogAsideSkeletonProps } from "./Dialog.types";

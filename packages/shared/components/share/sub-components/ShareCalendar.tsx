@@ -29,7 +29,7 @@ import moment from "moment";
 import { useIsMobile } from "../../../hooks/useIsMobile";
 
 import { Calendar } from "../../calendar";
-import { DropDown } from "../../drop-down";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import type { ShareCalendarProps } from "../Share.types";

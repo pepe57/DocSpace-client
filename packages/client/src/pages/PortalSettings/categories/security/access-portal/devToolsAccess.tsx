@@ -40,8 +40,7 @@ import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorag
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { size } from "@docspace/shared/utils";
 import type { TColorScheme } from "@docspace/shared/themes";
-
-import type { TData } from "@docspace/shared/components/toast/Toast.type";
+import type { TData } from "@docspace/shared/components/toast";
 
 import { LearnMoreWrapper } from "../StyledSecurity";
 

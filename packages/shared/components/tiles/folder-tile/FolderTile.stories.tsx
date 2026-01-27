@@ -30,7 +30,7 @@ import { ReactSVG } from "react-svg";
 import Folder32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 import ImageReactSvgUrl from "PUBLIC_DIR/images/icons/96/folder.svg?url";
 import { Link } from "@docspace/ui-kit/components/link";
-import { Badge } from "../../badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
 
 import { FolderTile } from "./FolderTile";

@@ -31,7 +31,7 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
+} from "@docspace/ui-kit/components/avatar";
 import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
 
 const StyledAvatar = styled(Avatar)`

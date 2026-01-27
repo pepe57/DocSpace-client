@@ -31,7 +31,7 @@ import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Badge } from "../badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { Link } from "@docspace/ui-kit/components/link";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";

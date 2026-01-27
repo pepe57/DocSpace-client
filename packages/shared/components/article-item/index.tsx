@@ -32,7 +32,7 @@ import { isMobile } from "react-device-detect";
 import { useAnimation } from "@docspace/ui-kit/hooks/useAnimation";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Badge } from "../badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 

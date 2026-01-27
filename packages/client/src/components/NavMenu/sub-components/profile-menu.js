@@ -31,95 +31,95 @@ import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { Avatar } from "@docspace/shared/components/avatar";
-import { DropDown } from "@docspace/shared/components/drop-down";
+import { Avatar } from "@docspace/ui-kit/components/avatar";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Portal } from "@docspace/ui-kit/components/portal";
 
 import styles from "../nav.module.scss";
 
 class ProfileMenu extends React.Component {
-	renderDropDown = () => {
-		const {
-			avatarRole,
-			avatarSource,
-			children,
-			className,
-			displayName,
-			clickOutsideAction,
-			open,
-			forwardedRef,
-			isBannerVisible,
-		} = this.props;
-		// console.log("Current theme: ", this.props.theme);
+  renderDropDown = () => {
+    const {
+      avatarRole,
+      avatarSource,
+      children,
+      className,
+      displayName,
+      clickOutsideAction,
+      open,
+      forwardedRef,
+      isBannerVisible,
+    } = this.props;
+    // console.log("Current theme: ", this.props.theme);
 
-		return (
-			<DropDown
-				className={classNames(styles.profileMenuDropDown, className, {
-					[styles.withBanner]: isBannerVisible,
-				})}
-				directionX="right"
-				open={open}
-				clickOutsideAction={clickOutsideAction}
-				forwardedRef={forwardedRef}
-				isDefaultMode={false}
-				withBlur
-				isBannerVisible={isBannerVisible}
-				withPortal
-			>
-				<DropDownItem className={styles.profileMenu}>
-					<div className={styles.menuContainer}>
-						<Avatar
-							className="avatar"
-							size="medium"
-							role={avatarRole}
-							source={avatarSource}
-							userName={displayName}
-							hideRoleIcon
-						/>
-						<div>
-							<div className={styles.mainLabelContainer}>{displayName}</div>
-							<div
-								className={styles.controlContainer}
-								onClick={clickOutsideAction}
-							>
-								<CrossIcon className={styles.crossIcon} />
-							</div>
-						</div>
-					</div>
-				</DropDownItem>
-				{children}
-			</DropDown>
-		);
-	};
+    return (
+      <DropDown
+        className={classNames(styles.profileMenuDropDown, className, {
+          [styles.withBanner]: isBannerVisible,
+        })}
+        directionX="right"
+        open={open}
+        clickOutsideAction={clickOutsideAction}
+        forwardedRef={forwardedRef}
+        isDefaultMode={false}
+        withBlur
+        isBannerVisible={isBannerVisible}
+        withPortal
+      >
+        <DropDownItem className={styles.profileMenu}>
+          <div className={styles.menuContainer}>
+            <Avatar
+              className="avatar"
+              size="medium"
+              role={avatarRole}
+              source={avatarSource}
+              userName={displayName}
+              hideRoleIcon
+            />
+            <div>
+              <div className={styles.mainLabelContainer}>{displayName}</div>
+              <div
+                className={styles.controlContainer}
+                onClick={clickOutsideAction}
+              >
+                <CrossIcon className={styles.crossIcon} />
+              </div>
+            </div>
+          </div>
+        </DropDownItem>
+        {children}
+      </DropDown>
+    );
+  };
 
-	render() {
-		const { open } = this.props;
+  render() {
+    const { open } = this.props;
 
-		const element = this.renderDropDown();
+    const element = this.renderDropDown();
 
-		const root = document.getElementById("root");
+    const root = document.getElementById("root");
 
-		const wrapper = <div>{element}</div>;
+    const wrapper = <div>{element}</div>;
 
-		return <Portal element={wrapper} appendTo={root} visible={open} />;
-	}
+    return <Portal element={wrapper} appendTo={root} visible={open} />;
+  }
 }
 
 ProfileMenu.displayName = "ProfileMenu";
 
 ProfileMenu.propTypes = {
-	avatarRole: PropTypes.oneOf(["owner", "admin", "guest", "user"]),
-	avatarSource: PropTypes.string,
-	children: PropTypes.any,
-	className: PropTypes.string,
-	displayName: PropTypes.string,
-	open: PropTypes.bool,
-	clickOutsideAction: PropTypes.func,
+  avatarRole: PropTypes.oneOf(["owner", "admin", "guest", "user"]),
+  avatarSource: PropTypes.string,
+  children: PropTypes.any,
+  className: PropTypes.string,
+  displayName: PropTypes.string,
+  open: PropTypes.bool,
+  clickOutsideAction: PropTypes.func,
 };
 
 export default inject(({ settingsStore }) => {
-	const { isBannerVisible } = settingsStore;
+  const { isBannerVisible } = settingsStore;
 
-	return { isBannerVisible };
+  return { isBannerVisible };
 })(observer(ProfileMenu));

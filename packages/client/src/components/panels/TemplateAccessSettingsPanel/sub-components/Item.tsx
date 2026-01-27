@@ -31,7 +31,7 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
+} from "@docspace/ui-kit/components/avatar";
 import { Text } from "@docspace/ui-kit/components/text";
 import cloneDeep from "lodash/cloneDeep";
 import { TTranslation } from "@docspace/shared/types";

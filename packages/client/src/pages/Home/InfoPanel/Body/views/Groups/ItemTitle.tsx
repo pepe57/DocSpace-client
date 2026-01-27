@@ -35,8 +35,8 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
-import { Badge } from "@docspace/shared/components/badge";
+} from "@docspace/ui-kit/components/avatar";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 import { TGroup } from "@docspace/shared/api/groups/types";
 

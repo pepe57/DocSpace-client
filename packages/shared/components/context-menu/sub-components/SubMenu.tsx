@@ -47,7 +47,7 @@ import {
   SeparatorType,
   TOnMobileItemClick,
 } from "../ContextMenu.types";
-import { Badge } from "../../badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "../../../themes";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { isTouchDevice } from "@docspace/ui-kit/utils/device";
@@ -295,7 +295,7 @@ const SubMenu = (props: SubMenuProps) => {
 
       const notEnoughWidthRight =
         containerOffsetLeft + itemOuterWidth + subListWidth >
-        viewport.width - DomHelpers.calculateScrollbarWidth();
+        viewport.width - (DomHelpers.calculateScrollbarWidth() ?? 0);
 
       if (!isRTL) {
         if (notEnoughWidthRight && freeSpaceLeft > freeSpaceRight) {

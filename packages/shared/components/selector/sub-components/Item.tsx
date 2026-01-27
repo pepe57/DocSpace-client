@@ -34,7 +34,11 @@ import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?ur
 
 import { SettingsContext } from "../../../selectors/utils/contexts/Settings";
 import { getUserTypeTranslation } from "../../../utils/common";
-import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/ui-kit/components/avatar";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { RoomIcon } from "../../room-icon";

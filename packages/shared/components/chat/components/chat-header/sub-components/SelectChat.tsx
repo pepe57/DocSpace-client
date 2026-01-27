@@ -42,7 +42,7 @@ import socket, {
   SocketEvents,
 } from "../../../../../utils/socket";
 
-import { DropDown } from "../../../../drop-down";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { TBreadCrumb } from "../../../../selector/Selector.types";
 import { toastr } from "../../../../toast";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";

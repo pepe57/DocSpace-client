@@ -31,7 +31,7 @@ import classNames from "classnames";
 
 import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
 
-import { DropDown } from "../drop-down";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 

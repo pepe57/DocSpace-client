@@ -33,8 +33,7 @@ import {
   setDefaultAIAgentQuota,
 } from "../api/settings";
 
-import { toastr } from "../components/toast";
-import { TData } from "../components/toast/Toast.type";
+import { toastr, type TData } from "../components/toast";
 import { EmployeeType, PortalFeaturesLimitations } from "../enums";
 import api from "../api";
 import {

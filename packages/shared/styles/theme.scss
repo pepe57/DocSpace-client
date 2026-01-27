@@ -176,12 +176,6 @@
   --backdrop-background-color: #{$blur-light};
 
   --badge-border: 1px solid transparent;
-  --badge-padding: 1px;
-  --badge-line-height: 0.8;
-  --badge-overflow: hidden;
-  --badge-color: #{$white};
-  --badge-background-color: var(--accent-main, #{$light-status-warning});
-  --badge-disable-background-color: #{$gray};
 
   --sub-menu-item-background-color: #{$white};
   --sub-menu-item-hover-background-color: #{$gray-light};
@@ -211,11 +205,7 @@
 
   --drop-down-item-hover-color: #{$gray-light};
   --drop-down-item-icon-color: #{$black};
-  --drop-down-item-icon-color-disabled: #{$black};
-  --dropdown-item-separator-border: #{$gray-light-mid};
 
-  --dropdown-item-disabled-color: #{$gray};
-  --dropdown-item-selected-color: #{$light-gray-hover};
 
   --input-text-align: left;
 
@@ -335,10 +325,6 @@
   --aside-content-padding-bottom: unset;
   --aside-header-custom-height: 53px;
   --badge-border: 1px solid transparent;
-  --badge-padding: 1px;
-  --badge-color: #{$white};
-  --badge-line-height: 0.8;
-  --badge-overflow: hidden;
   --context-menu-header-text-margin: 0 0 0 8px;
   --context-menu-submenu-list-margin: 4px;
   --main-button-mobile-dropdown-position: fixed;
@@ -451,9 +437,6 @@
 
   --backdrop-background-color: #{$blur-dark};
 
-  --badge-background-color: var(--accent-main, #{$dark-status-warning});
-  --badge-disable-background-color: #{$gray-dark-strong};
-
   --sub-menu-item-background-color: #{$black};
   --sub-menu-item-hover-background-color: #{$light-dark-gray-hover};
   --sub-menu-item-disabled-color: #{$gray};
@@ -477,12 +460,7 @@
 
   --drop-down-item-hover-color: #{$light-dark-gray-hover};
   --drop-down-item-icon-color: #{$white};
-  --drop-down-item-icon-color-disabled: #{$white};
-  --dropdown-item-separator-border: #{$gray-dark-strong};
-
-  --dropdown-item-disabled-color: #{$gray};
-  --dropdown-item-selected-color: #{$dark-gray-light};
-
+  
   --empty-content-header-color: #{$white};
   --empty-content-description-color: #{$dark-gray-dark};
   --empty-content-button-color-link: #{$dark-link};
@@ -1109,12 +1087,6 @@
   --tag-text-line-height: 20px;
   --tag-dropdown-text-line-height: 30px;
   --tag-font-size: 13px;
-
-  --toast-tap-highlight: #{$tap-highlight};
-  --toast-text-color-comp: #{$white};
-  --toast-close-button-color: #{$white};
-  --toast-transform: translate3d(150%, 0, 0);
-  --toast-top-offset: 16px;
 
   --view-selector-items-count: unset;
 }
