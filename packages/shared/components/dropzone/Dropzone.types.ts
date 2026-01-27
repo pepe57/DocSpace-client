@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import type { DropEvent } from "react-dropzone";
 
 type BaseDropzoneProps = {
@@ -42,6 +42,18 @@ type BaseDropzoneProps = {
   maxFiles?: number;
   /** Optional children elements */
   children?: ReactNode;
+  /** Optional icon URL to display */
+  icon?: string;
+  /** Optional className for the icon */
+  iconClassName?: string;
+  /** Optional inline styles for the icon */
+  iconStyle?: CSSProperties;
+  /** Optional className for the dropzone container */
+  className?: string;
+  /** Optional className for the children container */
+  childrenClassName?: string;
+  /** Optional className for the loader */
+  loaderClassName?: string;
 };
 
 type FileDropHandler<T extends File = File> = (acceptedFiles: T[]) => void;

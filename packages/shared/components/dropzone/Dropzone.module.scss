@@ -30,13 +30,15 @@
 
 .dropzoneWrapper {
   cursor: pointer;
-  box-sizing: border-box;
   width: 100%;
   height: 150px;
   border: var(--dropzone-border);
   border-radius: 6px;
+  display: flex;
 
-  position: relative;
+  &.hasChildren {
+    height: auto;
+  }
 }
 
 .dropzoneLoader {
@@ -49,7 +51,7 @@
 }
 
 .dropzone {
-  height: 100%;
+  flex: 1;
   width: 100%;
   visibility: visible;
   display: flex;
@@ -91,9 +93,27 @@
   }
 }
 
-.dropzoneExst {
+.dropzoneIcon {
+  width: 50px;
+  height: 50px;
+}
+
+.dropzoneExsts {
   font-weight: 600;
   font-size: 12px;
   line-height: 16px;
   color: var(--dropzone-exsts-color);
+}
+
+.dropzoneChildren {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.dropzone.hasChildren {
+  justify-content: flex-end;
+  padding: 16px;
+  box-sizing: border-box;
 }
