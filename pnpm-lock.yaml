@@ -99,6 +99,9 @@ importers:
       react-autosize-textarea:
         specifier: 7.1.0
         version: 7.1.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react-content-loader:
+        specifier: 7.0.2
+        version: 7.0.2(react@19.2.3)
       react-device-detect:
         specifier: 2.2.3
         version: 2.2.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -370,9 +373,6 @@ importers:
       react-colorful:
         specifier: 5.6.1
         version: 5.6.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      react-content-loader:
-        specifier: 7.0.2
-        version: 7.0.2(react@19.2.3)
       react-countdown:
         specifier: 2.3.6
         version: 2.3.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -1194,9 +1194,6 @@ importers:
       react-colorful:
         specifier: 5.6.1
         version: 5.6.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      react-content-loader:
-        specifier: 7.0.2
-        version: 7.0.2(react@19.2.3)
       react-countdown:
         specifier: 2.3.6
         version: 2.3.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)

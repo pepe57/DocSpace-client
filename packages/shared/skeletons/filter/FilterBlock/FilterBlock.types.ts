@@ -24,15 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeletonProps } from "../../rectangle";
+import { RectangleSkeletonProps } from "@docspace/ui-kit/components/rectangle";
 
 export type FilterBlockProps = RectangleSkeletonProps & {
-  id?: string;
-  className?: string;
-  isRooms?: boolean;
-  isContactsPage?: boolean;
-  isContactsPeoplePage?: boolean;
-  isContactsGroupsPage?: boolean;
-  isContactsInsideGroupPage?: boolean;
-  isContactsGuestsPage?: boolean;
+	id?: string;
+	className?: string;
+	isRooms?: boolean;
+	isContactsPage?: boolean;
+	isContactsPeoplePage?: boolean;
+	isContactsGroupsPage?: boolean;
+	isContactsInsideGroupPage?: boolean;
+	isContactsGuestsPage?: boolean;
 };

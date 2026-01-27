@@ -26,27 +26,27 @@
 
 import React from "react";
 
-import { RectangleSkeletonProps } from "../rectangle";
+import { RectangleSkeletonProps } from "@docspace/ui-kit/components/rectangle";
 
 import RowSkeleton from "./sub-components/Row";
 
 const RowsSkeleton = ({
-  count = 25,
-  ...props
+	count = 25,
+	...props
 }: {
-  count?: number;
-  style?: React.CSSProperties;
+	count?: number;
+	style?: React.CSSProperties;
 } & RectangleSkeletonProps) => {
-  const items = [];
+	const items = [];
 
-  for (let i = 0; i < count; i += 1) {
-    items.push(<RowSkeleton key={`row_loader_${i}`} {...props} />);
-  }
-  return (
-    <div key="row-skeleton-container" data-testid="rows-skeleton">
-      {items}
-    </div>
-  );
+	for (let i = 0; i < count; i += 1) {
+		items.push(<RowSkeleton key={`row_loader_${i}`} {...props} />);
+	}
+	return (
+		<div key="row-skeleton-container" data-testid="rows-skeleton">
+			{items}
+		</div>
+	);
 };
 
 export { RowsSkeleton };

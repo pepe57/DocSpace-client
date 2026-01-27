@@ -26,54 +26,54 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "../../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import { FilterLoaderProps } from "./Filter.types";
 import styles from "../Filter.module.scss";
 
 const FilterLoader = ({ id, className, style, ...rest }: FilterLoaderProps) => {
-  const {
-    title,
-    height,
-    borderRadius,
-    backgroundColor,
-    foregroundColor,
-    backgroundOpacity,
-    foregroundOpacity,
-    speed,
-    animate,
-  } = rest;
+	const {
+		title,
+		height,
+		borderRadius,
+		backgroundColor,
+		foregroundColor,
+		backgroundOpacity,
+		foregroundOpacity,
+		speed,
+		animate,
+	} = rest;
 
-  return (
-    <div
-      id={id}
-      className={`${styles.filterLoader} ${className || ""}`}
-      style={style}
-      data-testid="filter-loader"
-    >
-      <RectangleSkeleton
-        title={title}
-        height={height}
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-        backgroundOpacity={backgroundOpacity}
-        foregroundOpacity={foregroundOpacity}
-        speed={speed}
-        animate={animate}
-      />
-      <RectangleSkeleton
-        title={title}
-        height={height}
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-        backgroundOpacity={backgroundOpacity}
-        foregroundOpacity={foregroundOpacity}
-        speed={speed}
-        animate={animate}
-      />
-    </div>
-  );
+	return (
+		<div
+			id={id}
+			className={`${styles.filterLoader} ${className || ""}`}
+			style={style}
+			data-testid="filter-loader"
+		>
+			<RectangleSkeleton
+				title={title}
+				height={height}
+				borderRadius={borderRadius}
+				backgroundColor={backgroundColor}
+				foregroundColor={foregroundColor}
+				backgroundOpacity={backgroundOpacity}
+				foregroundOpacity={foregroundOpacity}
+				speed={speed}
+				animate={animate}
+			/>
+			<RectangleSkeleton
+				title={title}
+				height={height}
+				borderRadius={borderRadius}
+				backgroundColor={backgroundColor}
+				foregroundColor={foregroundColor}
+				backgroundOpacity={backgroundOpacity}
+				foregroundOpacity={foregroundOpacity}
+				speed={speed}
+				animate={animate}
+			/>
+		</div>
+	);
 };
 
 export default FilterLoader;

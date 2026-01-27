@@ -30,7 +30,7 @@ import classNames from "classnames";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
-import { RectangleSkeleton } from "../../skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Heading, HeadingSize } from "@docspace/ui-kit/components/heading";
