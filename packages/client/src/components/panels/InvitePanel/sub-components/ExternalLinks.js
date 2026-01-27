@@ -40,7 +40,7 @@ import { InputBlock } from "@docspace/shared/components/input-block";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Heading } from "@docspace/shared/components/heading";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 

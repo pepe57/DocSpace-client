@@ -26,7 +26,7 @@
 
 import React from "react";
 import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 
 import styles from "../styles/ServiceComponents.module.scss";
 

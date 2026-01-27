@@ -176,12 +176,6 @@
   --backdrop-background-color: #{$blur-light};
 
   --badge-border: 1px solid transparent;
-  --badge-padding: 1px;
-  --badge-line-height: 0.8;
-  --badge-overflow: hidden;
-  --badge-color: #{$white};
-  --badge-background-color: var(--accent-main, #{$light-status-warning});
-  --badge-disable-background-color: #{$gray};
 
   --sub-menu-item-background-color: #{$white};
   --sub-menu-item-hover-background-color: #{$gray-light};
@@ -335,10 +329,6 @@
   --aside-content-padding-bottom: unset;
   --aside-header-custom-height: 53px;
   --badge-border: 1px solid transparent;
-  --badge-padding: 1px;
-  --badge-color: #{$white};
-  --badge-line-height: 0.8;
-  --badge-overflow: hidden;
   --context-menu-header-text-margin: 0 0 0 8px;
   --context-menu-submenu-list-margin: 4px;
   --main-button-mobile-dropdown-position: fixed;
@@ -450,9 +440,6 @@
   --avatar-owner-color: #{$white};
 
   --backdrop-background-color: #{$blur-dark};
-
-  --badge-background-color: var(--accent-main, #{$dark-status-warning});
-  --badge-disable-background-color: #{$gray-dark-strong};
 
   --sub-menu-item-background-color: #{$black};
   --sub-menu-item-hover-background-color: #{$light-dark-gray-hover};
@@ -1166,25 +1153,78 @@
 }
 
 .light {
-  --toggle-button-fill-color-default: #{$light-blue-main};
-  --toggle-button-fill-color-off: #{$gray-strong};
-  --toggle-button-hover-fill-color-off: #{$gray};
-  --toggle-button-fill-circle-color: #{$white};
-  --toggle-button-fill-circle-color-off: #{$white};
+  --toastr-close-button-color: #{$black};
+  --toastr-text-color: #{$black};
+  --toast-text-color: #{$dark-black};
 
-  --toggle-button-text-color: #{$black};
-  --toggle-button-text-disable-color: #{$gray};
+  --toastr-title-success-color: #{$dark-black};
+  --toastr-title-error-color: #{$dark-black};
+  --toastr-title-warning-color: #{$dark-black};
+  --toastr-title-info-color: #{$dark-black};
+
+  --toastr-svg-success-color: #{$black};
+  --toastr-svg-error-color: #{$black};
+  --toastr-svg-warning-color: #{$black};
+  --toastr-svg-info-color: #{$black};
+
+  --toast-box-shadow: 0px 10px 16px -12px #{$popup-shadow};
+
+  --toast-success-bg: #{$light-toast-done};
+  --toast-error-bg: #{$light-toast-warning};
+  --toast-warning-bg: #{$light-toast-alert};
+  --toast-info-bg: #{$light-toast-info};
+
+  --toast-success-hover-bg: #{$light-toast-done};
+  --toast-error-hover-bg: #{$light-toast-warning};
+  --toast-warning-hover-bg: #{$light-toast-alert};
+  --toast-info-hover-bg: #{$light-toast-info};
+
+  --toast-success-border: none;
+  --toast-error-border: none;
+  --toast-warning-border: none;
+  --toast-info-border: none;
+
+  --toast-tap-highlight: #{$tap-highlight};
+  --toast-text-color-comp: #{$white};
+
+  --toast-close-button-color: #{$white};
+
+  --toast-transform: translate3d(150%, 0, 0);
+
+  --toast-top-offset: 16px;
 }
 
 .dark {
-  --toggle-button-fill-color-default: #{$light-blue-main};
-  --toggle-button-fill-color-off: #{$gray-dark-mid};
-  --toggle-button-hover-fill-color-off: #{$light-dark-gray-hover};
-  --toggle-button-fill-circle-color: #{$white};
-  --toggle-button-fill-circle-color-off: #{$white};
+  --toastr-close-button-color: #{$dark-gray-dark};
+  --toastr-text-color: #{$dark-gray-dark};
+  --toast-text-color: #{$dark-gray-dark};
 
-  --toggle-button-text-color: #{$white};
-  --toggle-button-text-disable-color: #{$gray-dark-text};
+  --toastr-title-success-color: #{$dark-toast-done};
+  --toastr-title-error-color: #{$dark-toast-warning};
+  --toastr-title-warning-color: #{$dark-toast-alert};
+  --toastr-title-info-color: #{$dark-toast-info};
+
+  --toastr-svg-success-color: #{$dark-toast-done};
+  --toastr-svg-error-color: #{$dark-toast-warning};
+  --toastr-svg-warning-color: #{$dark-toast-alert};
+  --toastr-svg-info-color: #{$dark-toast-info};
+
+  --toast-box-shadow: 0px 16px 16px #{$popup-shadow};
+
+  --toast-success-bg: #{$black};
+  --toast-error-bg: #{$black};
+  --toast-warning-bg: #{$black};
+  --toast-info-bg: #{$black};
+
+  --toast-success-hover-bg: #{$black};
+  --toast-error-hover-bg: #{$black};
+  --toast-warning-hover-bg: #{$black};
+  --toast-info-hover-bg: #{$black};
+
+  --toast-success-border: 2px solid #{$dark-toast-done};
+  --toast-error-border: 2px solid #{$dark-toast-warning};
+  --toast-warning-border: 2px solid #{$dark-toast-alert};
+  --toast-info-border: 2px solid #{$dark-toast-info};
 }
 
 .light {
@@ -2298,18 +2338,6 @@
   --channel-type-color: #{$gray-dark};
   --channel-icon-email-color: #{$dark-gray-dark};
   --channel-error-color: #{$dark-error-status};
-}
-
-.light {
-  --tab-item-selected-background-color: var(--accent-main, #{$light-blue-main});
-  --tab-item-selected-item-color: #{$white};
-  --tab-item-tag-border: 1px solid #{$gray-light-mid};
-}
-
-.dark {
-  --tab-item-selected-background-color: #{$white};
-  --tab-item-selected-item-color: #{$black};
-  --tab-item-tag-border: 1px solid #{$gray-dark-strong};
 }
 
 .light {

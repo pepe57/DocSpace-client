@@ -6,7 +6,7 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import { DomHelpers, classNames } from "../../../utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { Badge } from "../../badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import type {
   ContextMenuModel,
   ContextMenuType,
@@ -14,7 +14,7 @@ import type {
 } from "../ContextMenu.types";
 import { globalColors } from "../../../themes";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { ToggleButton } from "../../toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import styles from "../ContextMenu.module.scss";
 
 interface MobileSubMenuProps {

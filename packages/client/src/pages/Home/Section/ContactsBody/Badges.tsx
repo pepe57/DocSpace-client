@@ -32,7 +32,7 @@ import { useNavigate, useLocation } from "react-router";
 import Filter from "@docspace/shared/api/people/filter";
 import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/shared/themes";
-import { Badge } from "@docspace/shared/components/badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { commonIconsStyles, IconSizeType } from "@docspace/shared/utils";
 
 import CatalogSpamIcon from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";

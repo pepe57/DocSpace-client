@@ -28,8 +28,8 @@ import { useTranslation } from "react-i18next";
 
 import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Badge } from "@docspace/shared/components/badge";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { Text } from "@docspace/ui-kit/components/text";
 import { globalColors } from "@docspace/shared/themes";
 
@@ -42,112 +42,112 @@ import { StyledPluginItem, StyledPluginHeader } from "../Plugins.styled";
 import { PluginItemProps } from "../Plugins.types";
 
 const PluginItem = ({
-	name,
-	nameLocale,
-	version,
-	compatible,
-	description,
-	descriptionLocale,
+  name,
+  nameLocale,
+  version,
+  compatible,
+  description,
+  descriptionLocale,
 
-	enabled,
-	updatePlugin,
+  enabled,
+  updatePlugin,
 
-	openSettingsDialog,
+  openSettingsDialog,
 
-	image,
-	url,
-	dataTestId,
-	theme,
+  image,
+  url,
+  dataTestId,
+  theme,
 }: PluginItemProps) => {
-	const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common"]);
 
-	const imgSrc = image
-		? getPluginUrl(url, `/assets/${image}?hash=${version}`)
-		: null;
+  const imgSrc = image
+    ? getPluginUrl(url, `/assets/${image}?hash=${version}`)
+    : null;
 
-	const onChangeStatus = () => {
-		updatePlugin?.(name, !enabled, undefined, t);
-	};
+  const onChangeStatus = () => {
+    updatePlugin?.(name, !enabled, undefined, t);
+  };
 
-	const onOpenSettingsDialog = () => {
-		openSettingsDialog?.(name);
-	};
+  const onOpenSettingsDialog = () => {
+    openSettingsDialog?.(name);
+  };
 
-	const incompatibleTooltip = t("WebPlugins:PluginIsNotCompatible", {
-		productName: t("ProductName"),
-	});
+  const incompatibleTooltip = t("WebPlugins:PluginIsNotCompatible", {
+    productName: t("ProductName"),
+  });
 
-	const badgeId = `plugin_version_${name}_badge`;
+  const badgeId = `plugin_version_${name}_badge`;
 
-	const badge = (
-		<Badge
-			label={version}
-			fontSize="12px"
-			fontWeight={700}
-			noHover={compatible}
-			backgroundColor={
-				compatible
-					? globalColors.mainGreen
-					: theme.isBase
-						? globalColors.lightErrorStatus
-						: globalColors.darkErrorStatus
-			}
-			dataTestId={badgeId}
-		/>
-	);
+  const badge = (
+    <Badge
+      label={version}
+      fontSize="12px"
+      fontWeight={700}
+      noHover={compatible}
+      backgroundColor={
+        compatible
+          ? globalColors.mainGreen
+          : theme.isBase
+            ? globalColors.lightErrorStatus
+            : globalColors.darkErrorStatus
+      }
+      dataTestId={badgeId}
+    />
+  );
 
-	return (
-		<StyledPluginItem description={description} data-testid={dataTestId}>
-			<img
-				className="plugin-logo"
-				src={imgSrc || PluginDefaultLogoUrl}
-				alt="Plugin logo"
-				data-testid="plugin_logo"
-			/>
-			<div className="plugin-info">
-				<StyledPluginHeader>
-					<Heading className="plugin-name">{nameLocale}</Heading>
-					<div className="plugin-controls">
-						<IconButton
-							iconName={PluginSettingsIconUrl}
-							size={16}
-							onClick={onOpenSettingsDialog}
-							data-testid="open_settings_icon_button"
-						/>
-						<ToggleButton
-							className="plugin-toggle-button"
-							onChange={onChangeStatus}
-							isChecked={enabled}
-							dataTestId="enable_plugin_toggle_button"
-						/>
-					</div>
-				</StyledPluginHeader>
+  return (
+    <StyledPluginItem description={description} data-testid={dataTestId}>
+      <img
+        className="plugin-logo"
+        src={imgSrc || PluginDefaultLogoUrl}
+        alt="Plugin logo"
+        data-testid="plugin_logo"
+      />
+      <div className="plugin-info">
+        <StyledPluginHeader>
+          <Heading className="plugin-name">{nameLocale}</Heading>
+          <div className="plugin-controls">
+            <IconButton
+              iconName={PluginSettingsIconUrl}
+              size={16}
+              onClick={onOpenSettingsDialog}
+              data-testid="open_settings_icon_button"
+            />
+            <ToggleButton
+              className="plugin-toggle-button"
+              onChange={onChangeStatus}
+              isChecked={enabled}
+              dataTestId="enable_plugin_toggle_button"
+            />
+          </div>
+        </StyledPluginHeader>
 
-				{!compatible ? (
-					<div
-						data-tooltip-id="system-tooltip"
-						data-tooltip-content={incompatibleTooltip}
-						data-tooltip-place="bottom"
-					>
-						{badge}
-					</div>
-				) : (
-					badge
-				)}
+        {!compatible ? (
+          <div
+            data-tooltip-id="system-tooltip"
+            data-tooltip-content={incompatibleTooltip}
+            data-tooltip-place="bottom"
+          >
+            {badge}
+          </div>
+        ) : (
+          badge
+        )}
 
-				{descriptionLocale ? (
-					<Text
-						className="plugin-description"
-						fontWeight={400}
-						lineHeight="20px"
-						title={descriptionLocale}
-					>
-						{descriptionLocale}
-					</Text>
-				) : null}
-			</div>
-		</StyledPluginItem>
-	);
+        {descriptionLocale ? (
+          <Text
+            className="plugin-description"
+            fontWeight={400}
+            lineHeight="20px"
+            title={descriptionLocale}
+          >
+            {descriptionLocale}
+          </Text>
+        ) : null}
+      </div>
+    </StyledPluginItem>
+  );
 };
 
 export default PluginItem;

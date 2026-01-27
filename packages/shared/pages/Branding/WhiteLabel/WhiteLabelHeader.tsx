@@ -33,7 +33,7 @@ import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import { globalColors } from "../../../themes";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Badge } from "../../../components/badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { HelpButton } from "../../../components/help-button";
 import { FieldContainer } from "../../../components/field-container";
 import {

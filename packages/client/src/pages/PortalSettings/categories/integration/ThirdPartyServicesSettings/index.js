@@ -35,7 +35,7 @@ import styled from "styled-components";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
-import { Badge } from "@docspace/shared/components/badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 
 import { Button } from "@docspace/ui-kit/components/button";
 import { isMobile, NoUserSelect } from "@docspace/shared/utils";

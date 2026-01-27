@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Badge } from "@docspace/shared/components/badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 
 import ItemIcon from "SRC_DIR/components/ItemIcon";

@@ -31,7 +31,7 @@ import File32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
 import ImageReactSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.light.svg?url";
 import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 import { Link } from "@docspace/ui-kit/components/link";
-import { Badge } from "../../badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { IconSizeType } from "../../../utils";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
 import { FileType } from "../../../enums";
@@ -42,81 +42,81 @@ import { TileContent } from "../tile-content/TileContent";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 const element = (
-	<ReactSVG
-		className="icon-empty"
-		src={File32ReactSvgUrl}
-		data-testid="empty-icon"
-	/>
+  <ReactSVG
+    className="icon-empty"
+    src={File32ReactSvgUrl}
+    data-testid="empty-icon"
+  />
 );
 
 const contextOptions = [
-	{
-		id: "option_copy-to",
-		key: "copy-to",
-		label: "Copy",
-		onClick: () => {},
-		disabled: false,
-	},
-	{
-		id: "option_move-to",
-		key: "move-to",
-		label: "Move to",
-		onClick: () => {},
-		disabled: false,
-	},
+  {
+    id: "option_copy-to",
+    key: "copy-to",
+    label: "Copy",
+    onClick: () => {},
+    disabled: false,
+  },
+  {
+    id: "option_move-to",
+    key: "move-to",
+    label: "Move to",
+    onClick: () => {},
+    disabled: false,
+  },
 ];
 
 const badges = (
-	<div className="badges">
-		<Badge
-			noHover
-			isVersionBadge
-			className="badge badge-version badge-version-current tablet-badge icons-group"
-			backgroundColor="#A3A9AE"
-			label="New"
-			title="my badge"
-			style={{
-				width: "max-content",
-			}}
-			onClick={() => {}}
-		/>
-	</div>
+  <div className="badges">
+    <Badge
+      noHover
+      isVersionBadge
+      className="badge badge-version badge-version-current tablet-badge icons-group"
+      backgroundColor="#A3A9AE"
+      label="New"
+      title="my badge"
+      style={{
+        width: "max-content",
+      }}
+      onClick={() => {}}
+    />
+  </div>
 );
 
 const contentElement = (
-	<div className="badges">
-		<IconButton
-			iconName={LockedReact12SvgUrl}
-			className="badge lock-file icons-group file-locked"
-			size={IconSizeType.medium}
-			data-id="file-lock"
-			data-locked={false}
-			onClick={() => {}}
-			color="#A3A9AE"
-			isDisabled={false}
-			hoverColor="accent"
-			title="Lock file"
-		/>
-	</div>
+  <div className="badges">
+    <IconButton
+      iconName={LockedReact12SvgUrl}
+      className="badge lock-file icons-group file-locked"
+      size={IconSizeType.medium}
+      data-id="file-lock"
+      data-locked={false}
+      onClick={() => {}}
+      color="#A3A9AE"
+      isDisabled={false}
+      hoverColor="accent"
+      title="Lock file"
+    />
+  </div>
 );
 
 const meta = {
-	title: "Components/FileTile",
-	component: FileTile,
-	parameters: {
-		docs: {
-			description: {
-				component:
-					"File tile component for displaying file information in a tile format",
-			},
-		},
-	},
-	argTypes: {
-		checked: { control: "boolean" },
-		isDragging: { control: "boolean" },
-		inProgress: { control: "boolean" },
-	},
-	decorators: [i18nextStoryDecorator],
+  title: "Components/FileTile",
+  component: FileTile,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "File tile component for displaying file information in a tile format",
+      },
+    },
+  },
+  argTypes: {
+    checked: { control: "boolean" },
+    isDragging: { control: "boolean" },
+    inProgress: { control: "boolean" },
+  },
+  decorators: [i18nextStoryDecorator],
 } satisfies Meta<typeof FileTile>;
 
 type Story = StoryObj<typeof meta>;
@@ -124,80 +124,80 @@ type Story = StoryObj<typeof meta>;
 export default meta;
 
 const Template = ({ checked: initialChecked, ...args }: FileTileProps) => {
-	const [checked, setChecked] = useState(initialChecked);
+  const [checked, setChecked] = useState(initialChecked);
 
-	const onSelect = (isSelected: boolean) => {
-		setChecked(isSelected);
-	};
+  const onSelect = (isSelected: boolean) => {
+    setChecked(isSelected);
+  };
 
-	return (
-		<div style={{ maxWidth: "300px", margin: "30px" }}>
-			<FileTile {...args} checked={checked} onSelect={onSelect}>
-				<TileContent>
-					<Link>File Content</Link>
-				</TileContent>
-			</FileTile>
-		</div>
-	);
+  return (
+    <div style={{ maxWidth: "300px", margin: "30px" }}>
+      <FileTile {...args} checked={checked} onSelect={onSelect}>
+        <TileContent>
+          <Link>File Content</Link>
+        </TileContent>
+      </FileTile>
+    </div>
+  );
 };
 
 export const Default: Story = {
-	render: Template,
-	args: {
-		item: {
-			id: "file-1",
-			title: "Document.docx",
-			fileExst: ".docx",
-			fileType: FileType.Document,
-			contextOptions: ["copy-to", "move-to"],
-		},
-		element,
-		contextOptions,
-		contentElement,
-		badges,
-		temporaryIcon: ImageReactSvgUrl,
-		onSelect: () => {},
-		thumbnailClick: () => {},
-		setSelection: () => {},
-		withCtrlSelect: () => {},
-		withShiftSelect: () => {},
-		getContextModel: () => contextOptions,
-	},
-	parameters: {
-		docs: {
-			description: {
-				story: "Basic file tile with selection functionality",
-			},
-		},
-	},
+  render: Template,
+  args: {
+    item: {
+      id: "file-1",
+      title: "Document.docx",
+      fileExst: ".docx",
+      fileType: FileType.Document,
+      contextOptions: ["copy-to", "move-to"],
+    },
+    element,
+    contextOptions,
+    contentElement,
+    badges,
+    temporaryIcon: ImageReactSvgUrl,
+    onSelect: () => {},
+    thumbnailClick: () => {},
+    setSelection: () => {},
+    withCtrlSelect: () => {},
+    withShiftSelect: () => {},
+    getContextModel: () => contextOptions,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Basic file tile with selection functionality",
+      },
+    },
+  },
 };
 
 export const Checked: Story = {
-	render: Template,
-	args: {
-		...Default.args,
-		checked: true,
-	},
-	parameters: {
-		docs: {
-			description: {
-				story: "File tile in checked state",
-			},
-		},
-	},
+  render: Template,
+  args: {
+    ...Default.args,
+    checked: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "File tile in checked state",
+      },
+    },
+  },
 };
 
 export const InProgress: Story = {
-	render: Template,
-	args: {
-		...Default.args,
-		inProgress: true,
-	},
-	parameters: {
-		docs: {
-			description: {
-				story: "File tile showing progress state",
-			},
-		},
-	},
+  render: Template,
+  args: {
+    ...Default.args,
+    inProgress: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "File tile showing progress state",
+      },
+    },
+  },
 };

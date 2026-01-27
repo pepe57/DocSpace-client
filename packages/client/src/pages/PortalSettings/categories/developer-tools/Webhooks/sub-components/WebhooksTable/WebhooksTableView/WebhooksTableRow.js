@@ -38,7 +38,7 @@ import { inject, observer } from "mobx-react";
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Avatar } from "@docspace/shared/components/avatar";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { globalColors } from "@docspace/shared/themes";
 import { Encoder } from "@docspace/shared/utils/encoder";
 

@@ -37,7 +37,7 @@ import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 import { toastr } from "@docspace/shared/components/toast";
 import { ONE_MEGABYTE } from "@docspace/shared/constants";
 
-// import { ToggleButton } from "@docspace/shared/components/toggle-button";
+// import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 // import { Text } from "@docspace/ui-kit/components/text";
 
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";

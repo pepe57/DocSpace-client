@@ -34,7 +34,7 @@ import Filter from "@docspace/shared/api/people/filter";
 import { getUserList } from "@docspace/shared/api/people";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Avatar } from "@docspace/shared/components/avatar";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Label } from "@docspace/ui-kit/components/label";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";

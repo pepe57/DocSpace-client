@@ -28,7 +28,7 @@ import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { ImportItemProps, ImportSectionProps } from "../types";
 import { tablet } from "@docspace/shared/utils";
