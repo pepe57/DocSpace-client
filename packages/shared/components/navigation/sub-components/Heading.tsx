@@ -1,5 +1,5 @@
 import React from "react";
-import { HeadingWithTooltip as BaseHeading } from "../../heading";
+import { HeadingWithTooltip as BaseHeading } from "@docspace/ui-kit/components/heading";
 import styles from "../Navigation.module.scss";
 
 type HeadingProps = {

@@ -35,7 +35,7 @@ import { classNames } from "../../../utils";
 
 import { RoomsType } from "../../../enums";
 
-import { Heading } from "../../heading";
+import { Heading } from "@docspace/ui-kit/components/heading";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
@@ -52,139 +52,139 @@ import styles from "../Selector.module.scss";
 import { EmptyScreenProps } from "../Selector.types";
 
 const linkStyles = {
-	noHover: true,
-	isHovered: false,
-	type: LinkType.action,
-	fontWeight: "600",
-	className: "empty-folder_link",
-	display: "flex",
+  noHover: true,
+  isHovered: false,
+  type: LinkType.action,
+  fontWeight: "600",
+  className: "empty-folder_link",
+  display: "flex",
 };
 
 const EmptyScreen = ({
-	withSearch,
-	items,
-	inputItemVisible,
-	hideBackButton,
+  withSearch,
+  items,
+  inputItemVisible,
+  hideBackButton,
 }: EmptyScreenProps) => {
-	const {
-		emptyScreenImage,
-		emptyScreenHeader,
-		emptyScreenDescription,
-		searchEmptyScreenImage,
-		searchEmptyScreenHeader,
-		searchEmptyScreenDescription,
-	} = use(EmptyScreenContext);
-	const { withBreadCrumbs, breadCrumbs, onSelectBreadCrumb } =
-		React.use(BreadCrumbsContext);
+  const {
+    emptyScreenImage,
+    emptyScreenHeader,
+    emptyScreenDescription,
+    searchEmptyScreenImage,
+    searchEmptyScreenHeader,
+    searchEmptyScreenDescription,
+  } = use(EmptyScreenContext);
+  const { withBreadCrumbs, breadCrumbs, onSelectBreadCrumb } =
+    React.use(BreadCrumbsContext);
 
-	const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common"]);
 
-	const { onClearSearch } = use(SearchContext);
-	const setIsSearch = use(SearchDispatchContext);
-	const { isOpenDropDown, setIsOpenDropDown, onCloseDropDown } =
-		useCreateDropDown();
+  const { onClearSearch } = use(SearchContext);
+  const setIsSearch = use(SearchDispatchContext);
+  const { isOpenDropDown, setIsOpenDropDown, onCloseDropDown } =
+    useCreateDropDown();
 
-	const currentImage = withSearch ? searchEmptyScreenImage : emptyScreenImage;
-	const currentHeader = withSearch
-		? searchEmptyScreenHeader
-		: emptyScreenHeader;
-	const currentDescription = withSearch
-		? searchEmptyScreenDescription
-		: emptyScreenDescription;
+  const currentImage = withSearch ? searchEmptyScreenImage : emptyScreenImage;
+  const currentHeader = withSearch
+    ? searchEmptyScreenHeader
+    : emptyScreenHeader;
+  const currentDescription = withSearch
+    ? searchEmptyScreenDescription
+    : emptyScreenDescription;
 
-	const createItem = items.length > 0 ? items[0] : null;
+  const createItem = items.length > 0 ? items[0] : null;
 
-	const onCreateClickAction = () => {
-		if (
-			!createItem ||
-			(!createItem.onCreateClick && !createItem.dropDownItems) ||
-			isOpenDropDown ||
-			inputItemVisible
-		)
-			return;
+  const onCreateClickAction = () => {
+    if (
+      !createItem ||
+      (!createItem.onCreateClick && !createItem.dropDownItems) ||
+      isOpenDropDown ||
+      inputItemVisible
+    )
+      return;
 
-		if (createItem.dropDownItems) return setIsOpenDropDown(true);
+    if (createItem.dropDownItems) return setIsOpenDropDown(true);
 
-		createItem.onCreateClick?.();
-	};
+    createItem.onCreateClick?.();
+  };
 
-	const onBackClick = () => {
-		onSelectBreadCrumb?.(breadCrumbs?.[breadCrumbs.length - 2]);
-	};
+  const onBackClick = () => {
+    onSelectBreadCrumb?.(breadCrumbs?.[breadCrumbs.length - 2]);
+  };
 
-	if (
-		!withSearch &&
-		createItem?.isRoomsOnly &&
-		(createItem.createDefineRoomType === RoomsType.FormRoom ||
-			createItem.createDefineRoomType === RoomsType.VirtualDataRoom)
-	)
-		return (
-			<EmptyScreenFormRoom
-				onCreateClickAction={onCreateClickAction}
-				createDefineRoomType={createItem.createDefineRoomType}
-			/>
-		);
+  if (
+    !withSearch &&
+    createItem?.isRoomsOnly &&
+    (createItem.createDefineRoomType === RoomsType.FormRoom ||
+      createItem.createDefineRoomType === RoomsType.VirtualDataRoom)
+  )
+    return (
+      <EmptyScreenFormRoom
+        onCreateClickAction={onCreateClickAction}
+        createDefineRoomType={createItem.createDefineRoomType}
+      />
+    );
 
-	return (
-		<div
-			className={classNames(styles.emptyScreen, {
-				[styles.withSearch]: withSearch,
-			})}
-		>
-			<img className="empty-image" src={currentImage} alt="empty-screen" />
+  return (
+    <div
+      className={classNames(styles.emptyScreen, {
+        [styles.withSearch]: withSearch,
+      })}
+    >
+      <img className="empty-image" src={currentImage} alt="empty-screen" />
 
-			<Heading level={3} className="empty-header">
-				{currentHeader}
-			</Heading>
+      <Heading level={3} className="empty-header">
+        {currentHeader}
+      </Heading>
 
-			<Text className="empty-description">{currentDescription}</Text>
-			<div className="buttons">
-				{createItem ? (
-					<div
-						className="empty-folder_container-links"
-						onClick={onCreateClickAction}
-					>
-						<IconButton
-							className="empty-folder_container-icon"
-							size={12}
-							iconName={PlusSvgUrl}
-							isFill
-						/>
-						<Link {...linkStyles}>{items[0].label}</Link>
-						{isOpenDropDown && createItem && createItem.dropDownItems ? (
-							<NewItemDropDown
-								dropDownItems={createItem.dropDownItems}
-								isEmpty
-								onCloseDropDown={onCloseDropDown}
-							/>
-						) : null}
-					</div>
-				) : null}
+      <Text className="empty-description">{currentDescription}</Text>
+      <div className="buttons">
+        {createItem ? (
+          <div
+            className="empty-folder_container-links"
+            onClick={onCreateClickAction}
+          >
+            <IconButton
+              className="empty-folder_container-icon"
+              size={12}
+              iconName={PlusSvgUrl}
+              isFill
+            />
+            <Link {...linkStyles}>{items[0].label}</Link>
+            {isOpenDropDown && createItem && createItem.dropDownItems ? (
+              <NewItemDropDown
+                dropDownItems={createItem.dropDownItems}
+                isEmpty
+                onCloseDropDown={onCloseDropDown}
+              />
+            ) : null}
+          </div>
+        ) : null}
 
-				{(withBreadCrumbs || createItem) && (!hideBackButton || withSearch) ? (
-					<div
-						className="empty-folder_container-links"
-						onClick={
-							withSearch
-								? () => onClearSearch?.(() => setIsSearch(false))
-								: onBackClick
-						}
-					>
-						<IconButton
-							className="empty-folder_container-icon"
-							size={12}
-							iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
-							isFill
-						/>
+        {(withBreadCrumbs || createItem) && (!hideBackButton || withSearch) ? (
+          <div
+            className="empty-folder_container-links"
+            onClick={
+              withSearch
+                ? () => onClearSearch?.(() => setIsSearch(false))
+                : onBackClick
+            }
+          >
+            <IconButton
+              className="empty-folder_container-icon"
+              size={12}
+              iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
+              isFill
+            />
 
-						<Link {...linkStyles}>
-							{withSearch ? t("Common:ClearFilter") : t("Common:Back")}
-						</Link>
-					</div>
-				) : null}
-			</div>
-		</div>
-	);
+            <Link {...linkStyles}>
+              {withSearch ? t("Common:ClearFilter") : t("Common:Back")}
+            </Link>
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
 };
 
 export { EmptyScreen };

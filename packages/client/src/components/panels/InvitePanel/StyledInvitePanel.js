@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Heading } from "@docspace/shared/components/heading";
+import { Heading } from "@docspace/ui-kit/components/heading";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDown } from "@docspace/ui-kit/components/drop-down";

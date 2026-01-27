@@ -30,7 +30,7 @@ import { PropsWithChildren } from "react";
 import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Heading, HeadingLevel } from "../../../../../../heading";
+import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 
 import styles from "../../../ChatMessageBody.module.scss";

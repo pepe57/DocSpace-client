@@ -27,7 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 import { TileContainerProps, TileItemProps } from "./TileContainer.types";
-import { Heading, HeadingSize } from "../../heading";
+import { Heading, HeadingSize } from "@docspace/ui-kit/components/heading";
 
 import styles from "./TileContainer.module.scss";
 

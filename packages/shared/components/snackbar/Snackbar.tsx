@@ -32,7 +32,7 @@ import ReactDOM from "react-dom/client";
 import Countdown, { zeroPad } from "react-countdown";
 import classNames from "classnames";
 
-import { Heading, HeadingSize } from "../heading";
+import { Heading, HeadingSize } from "@docspace/ui-kit/components/heading";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { BarConfig, SnackbarProps } from "./Snackbar.types";

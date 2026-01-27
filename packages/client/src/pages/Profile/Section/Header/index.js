@@ -28,7 +28,7 @@ import { inject, observer } from "mobx-react";
 
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import { Heading } from "@docspace/shared/components/heading";
+import { Heading } from "@docspace/ui-kit/components/heading";
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";

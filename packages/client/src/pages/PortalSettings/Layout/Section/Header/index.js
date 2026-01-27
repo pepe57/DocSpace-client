@@ -33,7 +33,7 @@ import { inject, observer } from "mobx-react";
 import styled, { useTheme } from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
-import { Heading } from "@docspace/shared/components/heading";
+import { Heading } from "@docspace/ui-kit/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";

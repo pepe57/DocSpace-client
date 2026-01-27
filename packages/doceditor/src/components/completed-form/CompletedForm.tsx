@@ -44,7 +44,7 @@ import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { classNames, mobile, mobileMore } from "@docspace/shared/utils";
-import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
+import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";

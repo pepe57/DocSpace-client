@@ -28,7 +28,7 @@ import { useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { isMacOs } from "react-device-detect";
-import { Heading } from "@docspace/shared/components/heading";
+import { Heading } from "@docspace/ui-kit/components/heading";
 import {
   ModalDialog,
   ModalDialogType,

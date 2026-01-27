@@ -58,7 +58,7 @@ import { Textarea } from "../textarea";
 // import ContextMenuButton from "../context-menu-button";
 // import DatePicker from "../date-picker";
 import { FieldContainer } from "../field-container";
-import { Heading, HeadingSize } from "../heading";
+import { Heading, HeadingSize } from "@docspace/ui-kit/components/heading";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Row, RowProps } from "../rows";

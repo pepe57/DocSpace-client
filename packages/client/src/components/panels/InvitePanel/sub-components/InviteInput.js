@@ -35,7 +35,7 @@ import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Heading } from "@docspace/shared/components/heading";
+import { Heading } from "@docspace/ui-kit/components/heading";
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { toastr } from "@docspace/shared/components/toast";
 import {

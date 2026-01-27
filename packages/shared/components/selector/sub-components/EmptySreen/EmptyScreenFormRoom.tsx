@@ -35,7 +35,7 @@ import { RoomsType } from "../../../../enums";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Heading } from "../../../heading";
+import { Heading } from "@docspace/ui-kit/components/heading";
 import { SelectorAddButton } from "../../../selector-add-button";
 import styles from "../../Selector.module.scss";
 import { EmptyScreenFormRoomProps } from "../../Selector.types";

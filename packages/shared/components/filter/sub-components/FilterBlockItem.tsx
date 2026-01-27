@@ -32,7 +32,11 @@ import XIcon from "PUBLIC_DIR/images/x.react.svg";
 import { FilterGroups, FilterKeys, FilterSelectorTypes } from "../../../enums";
 
 import { SelectorAddButton } from "../../selector-add-button";
-import { Heading, HeadingLevel, HeadingSize } from "../../heading";
+import {
+  Heading,
+  HeadingLevel,
+  HeadingSize,
+} from "@docspace/ui-kit/components/heading";
 import { ComboBox } from "../../combobox";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Text } from "@docspace/ui-kit/components/text";

@@ -552,20 +552,6 @@
 }
 
 .light {
-  --heading-font-weight: 600;
-  --heading-color: #{$black};
-  --heading-font-size-xlarge: 27px;
-  --heading-font-size-large: 23px;
-  --heading-font-size-medium: 21px;
-  --heading-font-size-small: 19px;
-  --heading-font-size-xsmall: 15px;
-}
-
-.dark {
-  --heading-color: #{$white};
-}
-
-.light {
   --beta-badge-tooltip-box-shadow-color: #00000029;
   --tooltip-text-color: #{$dark-black};
 }
@@ -696,13 +682,6 @@
   --modal-dialog-link-underline-color: #{$dark-gray-dark};
 
   --modal-dialog-content-transform-x: 100%;
-
-  --heading-font-weight: 600;
-  --heading-font-size-xlarge: 27px;
-  --heading-font-size-large: 23px;
-  --heading-font-size-medium: 21px;
-  --heading-font-size-small: 19px;
-  --heading-font-size-xsmall: 15px;
 
   --beta-badge-tooltip-box-shadow-color: #00000029;
 }

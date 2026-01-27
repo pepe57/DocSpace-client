@@ -49,7 +49,7 @@ import {
   mobile,
   mobileMore,
 } from "@docspace/shared/utils";
-import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
+import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";

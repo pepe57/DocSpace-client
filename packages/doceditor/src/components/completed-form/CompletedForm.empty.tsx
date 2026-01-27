@@ -37,7 +37,7 @@ import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
 import { mobile, mobileMore } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
+import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "./completed-form.module.scss";
