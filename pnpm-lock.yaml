@@ -90,6 +90,9 @@ importers:
       fast-deep-equal:
         specifier: 3.1.3
         version: 3.1.3
+      framer-motion:
+        specifier: ^12.29.0
+        version: 12.29.2(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       lodash:
         specifier: 4.17.23
         version: 4.17.23
@@ -355,9 +358,6 @@ importers:
       react:
         specifier: 19.2.3
         version: 19.2.3
-      react-autosize-textarea:
-        specifier: 7.1.0
-        version: 7.1.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react-avatar-editor:
         specifier: 14.0.0-beta.6
         version: 14.0.0-beta.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -729,9 +729,6 @@ importers:
       crypto-js:
         specifier: 4.2.0
         version: 4.2.0
-      csvjson-json_beautifier:
-        specifier: 5.0.4
-        version: 5.0.4
       date-and-time:
         specifier: 3.6.0
         version: 3.6.0
@@ -844,9 +841,6 @@ importers:
       classnames:
         specifier: 2.5.1
         version: 2.5.1
-      csvjson-json_beautifier:
-        specifier: 5.0.4
-        version: 5.0.4
       date-and-time:
         specifier: 3.6.0
         version: 3.6.0
@@ -1137,9 +1131,6 @@ importers:
       crypto-js:
         specifier: 4.2.0
         version: 4.2.0
-      csvjson-json_beautifier:
-        specifier: 5.0.4
-        version: 5.0.4
       email-addresses:
         specifier: 3.1.0
         version: 3.1.0
@@ -1200,9 +1191,6 @@ importers:
       query-string:
         specifier: 7.1.3
         version: 7.1.3
-      react-autosize-textarea:
-        specifier: 7.1.0
-        version: 7.1.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react-avatar-editor:
         specifier: 14.0.0-beta.6
         version: 14.0.0-beta.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -1242,9 +1230,6 @@ importers:
       react-syntax-highlighter:
         specifier: ^16.1.0
         version: 16.1.0(react@19.2.3)
-      react-toastify:
-        specifier: 10.0.6
-        version: 10.0.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react-tooltip:
         specifier: 5.28.0
         version: 5.28.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -6499,6 +6484,20 @@ packages:
       react-dom:
         optional: true
 
+  framer-motion@12.29.2:
+    resolution: {integrity: sha512-lSNRzBJk4wuIy0emYQ/nfZ7eWhqud2umPKw2QAQki6uKhZPKm2hRQHeQoHTG9MIvfobb+A/LbEWPJU794ZUKrg==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
   fresh@0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
     engines: {node: '>= 0.6'}
@@ -7868,8 +7867,14 @@ packages:
   motion-dom@12.24.11:
     resolution: {integrity: sha512-DlWOmsXMJrV8lzZyd+LKjG2CXULUs++bkq8GZ2Sr0R0RRhs30K2wtY+LKiTjhmJU3W61HK+rB0GLz6XmPvTA1A==}
 
+  motion-dom@12.29.2:
+    resolution: {integrity: sha512-/k+NuycVV8pykxyiTCoFzIVLA95Nb1BFIVvfSu9L50/6K6qNeAYtkxXILy/LRutt7AzaYDc2myj0wkCVVYAPPA==}
+
   motion-utils@12.24.10:
     resolution: {integrity: sha512-x5TFgkCIP4pPsRLpKoI86jv/q8t8FQOiM/0E8QKBzfMozWHfkKap2gA1hOki+B5g3IsBNpxbUnfOum1+dgvYww==}
+
+  motion-utils@12.29.2:
+    resolution: {integrity: sha512-G3kc34H2cX2gI63RqU+cZq+zWRRPSsNIOjpdl9TN4AQwC4sgwYPl/Q/Obf/d53nOm569T0fYK+tcoSV50BWx8A==}
 
   mrmime@2.0.1:
     resolution: {integrity: sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==}
@@ -16294,6 +16299,16 @@ snapshots:
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
 
+  framer-motion@12.29.2(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
+    dependencies:
+      motion-dom: 12.29.2
+      motion-utils: 12.29.2
+      tslib: 2.8.1
+    optionalDependencies:
+      '@emotion/is-prop-valid': 1.4.0
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
+
   fresh@0.5.2: {}
 
   fresh@2.0.0: {}
@@ -17962,7 +17977,13 @@ snapshots:
     dependencies:
       motion-utils: 12.24.10
 
+  motion-dom@12.29.2:
+    dependencies:
+      motion-utils: 12.29.2
+
   motion-utils@12.24.10: {}
+
+  motion-utils@12.29.2: {}
 
   mrmime@2.0.1: {}
 
