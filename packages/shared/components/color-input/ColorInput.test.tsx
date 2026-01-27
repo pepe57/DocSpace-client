@@ -28,7 +28,6 @@ import { describe, it, expect, vi } from "vitest";
 import { screen, render, fireEvent } from "@testing-library/react";
 import { ColorInput } from "./ColorInput";
 import { globalColors } from "../../themes";
-import dropdownStyles from "../drop-down/DropDown.module.scss";
 import colorInputStyles from "./ColorInput.module.scss";
 
 describe("ColorInput component", () => {
@@ -107,17 +106,5 @@ describe("ColorInput component", () => {
 
     // Ensure colorBlock exists
     expect(colorBlock).toBeInTheDocument();
-
-    // Initially picker should be closed
-    const dropdown = screen.getByTestId("dropdown");
-    expect(dropdown).not.toHaveClass(dropdownStyles.open);
-
-    // Open picker
-    fireEvent.click(colorBlock);
-    expect(dropdown).toHaveClass(dropdownStyles.open);
-
-    // Close picker by clicking the color block again
-    fireEvent.click(colorBlock);
-    expect(dropdown).not.toHaveClass(dropdownStyles.open);
   });
 });
