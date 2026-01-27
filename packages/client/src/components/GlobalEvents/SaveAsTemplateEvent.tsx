@@ -28,8 +28,7 @@ import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 import { TRoom } from "@docspace/shared/api/rooms/types";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr, type TData } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/ui-kit/components/text";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 

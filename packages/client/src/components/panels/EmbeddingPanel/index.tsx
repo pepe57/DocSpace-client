@@ -42,7 +42,7 @@ import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ComboBox, TOption } from "@docspace/shared/components/combobox";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { type TData } from "@docspace/shared/components/toast";
 import type { TFileLink } from "@docspace/shared/api/files/types";
 import type { LinkParamsType, TTranslation } from "@docspace/shared/types";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
