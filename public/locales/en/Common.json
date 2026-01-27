@@ -876,6 +876,7 @@
   "SelectorInfoBarTitle": "Send to room for filling",
   "SelectorVDREmptyScreenDescription": "To share your form and assign roles to the room participants for filling it out, please create a Virtual Data Room.",
   "SelectPDFFormat": "Select .PDF file",
+  "SelectResource": "Select a resource",
   "SelectRoom": "Select room",
   "SelectTypeFiles": "Select {{type}}",
   "SendButton": "Send",
