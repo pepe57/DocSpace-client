@@ -24,11 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import FolderIcon from "PUBLIC_DIR/images/folder.react.svg?url";
+import UploadIcon from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import EyeIcon from "PUBLIC_DIR/images/eye.react.svg?url";
-import ResetIcon from "PUBLIC_DIR/images/restore.auth.react.svg?url";
+import ResetIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import DownloadIcon from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
@@ -38,6 +39,7 @@ import { Badge } from "@docspace/shared/components/badge";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Text } from "@docspace/shared/components/text";
 import { TDefaultTemplateItem } from "@docspace/shared/types";
+import { UrlActionType } from "@docspace/shared/enums";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";
 import { ResetTemplateDialog } from "SRC_DIR/components/dialogs";
@@ -51,6 +53,8 @@ type Props = {
   setTemplate?: TStore["defaultTemplatesStore"]["setTemplate"];
   resetTemplate?: TStore["defaultTemplatesStore"]["resetTemplate"];
   getFilterParam?: TStore["defaultTemplatesStore"]["getFilterParam"];
+  openUrl?: TStore["settingsStore"]["openUrl"];
+  uploadTemplate?: TStore["defaultTemplatesStore"]["uploadTemplate"];
   index?: number;
 };
 
@@ -60,20 +64,36 @@ const TemplatesRow = ({
   getFilterParam,
   setTemplate,
   resetTemplate,
+  openUrl,
+  uploadTemplate,
   index,
 }: Props) => {
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Settings", "EmptyView", "Common"]);
   const [isSelectorVisible, setIsSelectorVisible] = useState(false);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const getOptions = () => {
     const selectOption = [
       {
-        key: "select",
-        label: t("Common:SelectAction"),
+        key: "upload-from-docspace",
+        label: t("EmptyView:UploadFromPortalTitle", {
+          productName: t("Common:ProductName"),
+        }),
         onClick: () => setIsSelectorVisible(true),
         disabled: false,
-        icon: FolderIcon,
+        icon: UploadIcon,
+      },
+      {
+        key: "upload-from-device",
+        label: t("EmptyView:UploadDevicePDFFormOptionTitle"),
+        onClick: () => {
+          setTimeout(() => {
+            fileInputRef.current?.click();
+          }, 100);
+        },
+        disabled: false,
+        icon: UploadIcon,
       },
     ];
 
@@ -81,16 +101,23 @@ const TemplatesRow = ({
       return [
         ...selectOption,
         {
+          key: "separator",
+          isSeparator: true,
+        },
+        {
           key: "preview",
-          label: t("Preview"),
+          label: t("Common:Preview"),
           onClick: () =>
             window.open(`/doceditor?fileId=${item.id}&action=view`, "_blank"),
           disabled: false,
           icon: EyeIcon,
         },
         {
-          key: "separator",
-          isSeparator: true,
+          key: "download",
+          label: t("Common:Download"),
+          onClick: () => openUrl?.(item.viewUrl, UrlActionType.Download),
+          disabled: false,
+          icon: DownloadIcon,
         },
         {
           key: "reset",
@@ -130,6 +157,13 @@ const TemplatesRow = ({
       className={styles.templateRow}
       data-testid={`default-template-row-${index}`}
     >
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept={item.extension}
+        style={{ display: "none" }}
+        onChange={(event) => uploadTemplate?.(event, item.extension)}
+      />
       <ResetTemplateDialog
         isVisible={isDialogVisible}
         onReset={() => onResetFile()}
@@ -138,7 +172,7 @@ const TemplatesRow = ({
       <ReactSVG src={icon} className={styles.icon} />
       <div className={styles.rowContent}>
         <div className={styles.mainContent}>
-          <Text fontWeight={600} fontSize="13px">
+          <Text fontWeight={600} fontSize="13px" truncate>
             {item.title}
           </Text>
           <Text

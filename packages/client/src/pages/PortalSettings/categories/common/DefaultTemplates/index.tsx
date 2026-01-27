@@ -41,6 +41,8 @@ type Props = {
   setTemplate?: TStore["defaultTemplatesStore"]["setTemplate"];
   resetTemplate?: TStore["defaultTemplatesStore"]["resetTemplate"];
   getFilterParam?: TStore["defaultTemplatesStore"]["getFilterParam"];
+  openUrl?: TStore["settingsStore"]["openUrl"];
+  uploadTemplate?: TStore["defaultTemplatesStore"]["uploadTemplate"];
 };
 
 const DefaultTemplates = ({
@@ -48,6 +50,8 @@ const DefaultTemplates = ({
   setTemplate,
   resetTemplate,
   getFilterParam,
+  openUrl,
+  uploadTemplate,
 }: Props) => {
   const { t } = useTranslation("Settings");
 
@@ -69,6 +73,8 @@ const DefaultTemplates = ({
             getFilterParam={getFilterParam}
             setTemplate={setTemplate}
             resetTemplate={resetTemplate}
+            uploadTemplate={uploadTemplate}
+            openUrl={openUrl}
           />
         ))}
       </div>
@@ -76,14 +82,23 @@ const DefaultTemplates = ({
   );
 };
 
-export default inject(({ defaultTemplatesStore }: TStore) => {
-  const { templates, setTemplate, getFilterParam, resetTemplate } =
-    defaultTemplatesStore;
+export default inject(({ defaultTemplatesStore, settingsStore }: TStore) => {
+  const {
+    templates,
+    setTemplate,
+    getFilterParam,
+    resetTemplate,
+    uploadTemplate,
+  } = defaultTemplatesStore;
+
+  const { openUrl } = settingsStore;
 
   return {
     templates,
     setTemplate,
     getFilterParam,
     resetTemplate,
+    openUrl,
+    uploadTemplate,
   };
 })(withLoading(observer(DefaultTemplates)));

@@ -1,3 +1,4 @@
+import { editGroup } from "SRC_DIR/helpers/contacts";
 // (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
@@ -29,6 +30,7 @@ import { makeAutoObservable } from "mobx";
 import {
   getDefaultTemplates,
   setDefaultTemplates,
+  uploadTemplateFromDevice,
 } from "@docspace/shared/api/files";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
@@ -80,6 +82,7 @@ class DefaultTemplatesStore {
       isModified: !!item?.selectedFile,
       title: item?.fileTitle || this.getTitleByExt(item.fileExtension),
       lastModified: item?.lastModified,
+      viewUrl: item?.viewUrl || "",
     }));
     this.templates = templatesArr;
   };
@@ -110,6 +113,23 @@ class DefaultTemplatesStore {
       toastr.success(i18n.t("Settings:DefaultTemplateRestored"));
     } catch (e) {
       toastr.error((e as TData) ?? i18n.t("Common:Error"));
+    }
+  };
+
+  uploadTemplate = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+    extension: string,
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    try {
+      const res = await uploadTemplateFromDevice(file, extension);
+      this.formTemplatesArray(res);
+      toastr.success(i18n.t("Settings:DefaultTemplateApplied"));
+    } catch (e) {
+      toastr.error((e as TData) ?? i18n.t("Common:Error"));
+    } finally {
+      event.target.value = "";
     }
   };
 }
