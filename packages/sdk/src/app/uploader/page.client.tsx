@@ -47,16 +47,17 @@ import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 import type { TFileWithOptionalLastModifiedDate } from "./_types";
 import {
-  getErrorMessage,
   isEmptyDirectoryFile,
   attachParentFolderId,
   runWithConcurrency,
   createChunks,
   getAcceptExtensions,
   parseAcceptCategories,
+  getExtsDisplayText,
 } from "./_utils";
 import FilesList, { type TFile } from "./_components/FilesList";
 import styles from "./Uploader.module.scss";
+import { getErrorMessage } from "@/utils";
 
 const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;
 const DEFAULT_MAX_UPLOAD_THREAD_COUNT = 3;
@@ -89,6 +90,14 @@ export default function UploaderClient({
   const maxUploadFilesCount =
     filesSettings?.maxUploadFilesCount || DEFAULT_MAX_UPLOAD_FILES_COUNT;
 
+  const [isDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [percent, setPercent] = useState(0);
+  const [pendingFiles, setPendingFiles] = useState<TFile[]>([]);
+
+  const uploadedBytesRef = useRef(0);
+  const totalBytesRef = useRef(0);
+
   const accept = useMemo(() => {
     const categories = parseAcceptCategories(baseConfig?.acceptCategories);
 
@@ -99,13 +108,10 @@ export default function UploaderClient({
     return getAcceptExtensions(filesSettings, categories);
   }, [filesSettings, baseConfig?.acceptCategories]);
 
-  const [isDisabled] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [percent, setPercent] = useState(0);
-  const [pendingFiles, setPendingFiles] = useState<TFile[]>([]);
-
-  const uploadedBytesRef = useRef(0);
-  const totalBytesRef = useRef(0);
+  const exstsText = useMemo(
+    () => getExtsDisplayText(accept),
+    [accept],
+  );
 
   const uploadFiles = useCallback(async (rawFiles: File[]) => {
     const prepared = await attachParentFolderId(rawFiles, folderTargetId);
@@ -216,7 +222,7 @@ export default function UploaderClient({
       getFilesFromEvent={getFilesFromEvent}
       linkMainText={t("Article:Upload")}
       linkSecondaryText={t("Common:DropzoneTitleSecondary")}
-      exstsText="(DOC, DOCX, DOCXF, XLSX, PPTX)"
+      exstsText={exstsText}
       dataTestId="sdk-uploader"
       icon={pendingFiles.length === 0 ? UploadSvgUrl : undefined}
       className={`${styles.dropzoneWrapper} ${pendingFiles.length === 0 ? styles.dropzoneCentered : ""}`}

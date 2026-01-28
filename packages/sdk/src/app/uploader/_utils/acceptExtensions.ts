@@ -68,7 +68,9 @@ export const getAcceptExtensions = (
 
     if (Array.isArray(exts)) {
       for (const ext of exts) {
-        extensions.add(ext);
+        if (typeof ext === "string") {
+          extensions.add(ext);
+        }
       }
     }
   }
@@ -91,4 +93,51 @@ export const parseAcceptCategories = (
     .split(",")
     .map((c) => c.trim().toLowerCase() as ExtensionCategory)
     .filter((c) => validCategories.includes(c));
+};
+
+const POPULAR_EXTENSIONS: Record<ExtensionCategory, string[]> = {
+  document: ["DOCX", "DOC", "PDF", "TXT"],
+  spreadsheet: ["XLSX", "XLS", "CSV"],
+  presentation: ["PPTX", "PPT"],
+  image: ["JPG", "PNG", "GIF"],
+  video: ["MP4", "AVI", "MOV"],
+  audio: ["MP3", "WAV", "OGG"],
+  archive: ["ZIP", "RAR"],
+  diagram: ["VSDX"],
+  pdf: ["PDF"],
+};
+
+export const getExtsDisplayText = (
+  accept: string,
+  maxCount: number = 5,
+): string => {
+  if (!accept) return "";
+
+  const extensions = accept
+    .split(",")
+    .map((ext) => ext.replace(".", "").toUpperCase())
+    .filter(Boolean);
+
+  if (extensions.length === 0) return "";
+
+  const popular = Object.values(POPULAR_EXTENSIONS).flat();
+  const sorted = [...extensions].sort((a, b) => {
+    const aIndex = popular.indexOf(a);
+    const bIndex = popular.indexOf(b);
+    if (aIndex === -1 && bIndex === -1) return 0;
+    if (aIndex === -1) return 1;
+    if (bIndex === -1) return -1;
+    return aIndex - bIndex;
+  });
+
+  const displayed = sorted.slice(0, maxCount);
+  const remaining = extensions.length - displayed.length;
+
+  const text = displayed.join(", ");
+
+  if (remaining > 0) {
+    return `(${text}, +${remaining})`;
+  }
+
+  return `(${text})`;
 };
