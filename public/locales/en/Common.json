@@ -669,9 +669,6 @@
   "OKButton": "OK",
   "OnlineEditors": "Online editors",
   "OpenSavedDocument": "Open saved document in new tab",
-  "UserQuotaLimitWarning": "User quota limit is about to be reached.",
-  "RoomQuotaLimitWarning": "Room quota limit is about to be reached.",
-  "PortalQuotaLimitWarning": "{{portalName}} quota limit is about to be reached.",
   "Or": "or",
   "orContinueWith": "or continue with",
   "OrganizationName": "ONLYOFFICE",
@@ -1102,5 +1099,5 @@
   "LinkSettingsExpired": "Registration via this link is no longer available since its lifetime has expired.",
   "LinkNoLongerAvailable": "Link no longer available",
   "LinkLifetimeExpired": "Access via this link is no longer available since its lifetime has expired.",
-  "ExternalLink": "External link",
+  "ExternalLink": "External link"
 }
