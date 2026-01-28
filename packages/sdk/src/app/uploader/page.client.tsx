@@ -77,8 +77,8 @@ export default function UploaderClient({
 }: UploaderClientProps) {
   useSDKConfig();
   useDocumentTitle("Uploader");
-  //TODO: remove article namespace
-  const { t } = useTranslation(["Article", "Common"]);
+
+  const { t } = useTranslation(["Common"]);
   const { getIcon } = useItemIcon({ filesSettings });
 
   const folderTargetId = +(baseConfig?.targetId ?? 0);
@@ -220,7 +220,7 @@ export default function UploaderClient({
       onDrop={onDrop}
       accept={accept}
       getFilesFromEvent={getFilesFromEvent}
-      linkMainText={t("Article:Upload")}
+      linkMainText={t("Common:Upload")}
       linkSecondaryText={t("Common:DropzoneTitleSecondary")}
       exstsText={exstsText}
       dataTestId="sdk-uploader"
@@ -239,7 +239,7 @@ export default function UploaderClient({
           <div className={styles.uploadButtonWrapper}>
             <Button
               label={
-                isLoading ? `${Math.floor(percent)}%` : t("Article:Upload")
+                isLoading ? `${Math.floor(percent)}%` : t("Common:Upload")
               }
               primary
               size={ButtonSize.normal}
