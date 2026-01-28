@@ -29,23 +29,57 @@ import { useTranslation } from "react-i18next";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
+interface QuotaInfo {
+  header: string;
+  description: string;
+}
+
 const Bar: React.FC = () => {
   const { t } = useTranslation("Common");
 
-  const [isStorageQuotaLimit, setIsStorageQuotaLimit] = React.useState(false);
+  const [quotaInfo, setQuotaInfo] = React.useState<QuotaInfo | null>(null);
 
-  const quotaInfo = {
-    header: t("QuotaLimitWarning"),
-    description: t("YourFurtherEditsNotSaved"),
+  const getQuotaInfo = (type: "room" | "user" | "tenant"): QuotaInfo => {
+    switch (type) {
+      case "room":
+        return {
+          header: t("YourFurtherEditsNotSaved"),
+          description: t("RoomQuotaLimitWarning"),
+        };
+      case "user":
+        return {
+          header: t("YourFurtherEditsNotSaved"),
+          description: t("UserQuotaLimitWarning"),
+        };
+      case "tenant":
+        return {
+          header: t("YourFurtherEditsNotSaved"),
+          description: t("PortalQuotaLimitWarning"),
+        };
+    }
   };
 
   const onAction = () => {
-    setIsStorageQuotaLimit(false);
+    setQuotaInfo(null);
   };
 
   React.useEffect(() => {
-    const handleQuotaChange = () => {
-      setIsStorageQuotaLimit(true);
+    const handleQuotaChange = (eventData: {
+      data: {
+        id: string;
+        room: string;
+        scope: "room" | "user" | "tenant";
+      };
+    }) => {
+      const payload = eventData.data;
+
+      if (!payload || !payload.scope) {
+        console.log("No scope found, returning");
+        return;
+      }
+
+      const info = getQuotaInfo(payload.scope);
+      setQuotaInfo(info);
     };
 
     SocketHelper?.on(SocketEvents.QuotaExceeded, handleQuotaChange);
@@ -55,7 +89,7 @@ const Bar: React.FC = () => {
     };
   }, []);
 
-  return isStorageQuotaLimit ? (
+  return quotaInfo ? (
     <SnackBar
       headerText={quotaInfo.header}
       isCampaigns={false}
