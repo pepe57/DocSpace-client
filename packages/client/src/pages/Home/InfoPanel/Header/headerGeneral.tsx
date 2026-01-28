@@ -28,7 +28,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { FolderType } from "@docspace/shared/enums";
-import { AsideHeader } from "@docspace/shared/components/aside-header";
+import { AsideHeader } from "@docspace/ui-kit/components/aside";
 import { Tabs } from "@docspace/ui-kit/components/tabs";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
 import type { TRoom } from "@docspace/shared/api/rooms/types";

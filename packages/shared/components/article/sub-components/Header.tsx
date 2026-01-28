@@ -32,7 +32,7 @@ import { DeviceType, WhiteLabelLogoType } from "../../../enums";
 import { ArticleHeaderLoader } from "../../../skeletons/article";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
-import { AsideHeader } from "../../aside-header";
+import { AsideHeader } from "@docspace/ui-kit/components/aside";
 import BackButton from "./BackButton";
 
 import styles from "../Article.module.scss";

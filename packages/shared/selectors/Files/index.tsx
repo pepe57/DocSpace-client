@@ -36,7 +36,7 @@ import { createFile, deleteFile } from "../../api/files";
 import { FolderType, RoomsType, DeviceType, RoomSearchArea } from "../../enums";
 
 import type { TSelectorItem } from "../../components/selector";
-import { Aside } from "../../components/aside";
+import { Aside } from "@docspace/ui-kit/components/aside";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { toastr } from "../../components/toast";
 import type { TBreadCrumb } from "../../components/selector/Selector.types";

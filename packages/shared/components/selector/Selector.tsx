@@ -32,7 +32,7 @@ import { classNames } from "../../utils";
 
 import { ButtonKeys } from "../../enums";
 
-import { Aside } from "../aside";
+import { Aside } from "@docspace/ui-kit/components/aside";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 
 import { Header } from "./sub-components/Header";

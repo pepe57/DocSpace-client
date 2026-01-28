@@ -142,7 +142,8 @@
         "noPositiveTabindex": "off",
         "useKeyWithClickEvents": "off",
         "useKeyWithMouseEvents": "off",
-        "useValidAnchor": "off"
+        "useValidAnchor": "off",
+        "noStaticElementInteractions": "off"
       }
     }
   }

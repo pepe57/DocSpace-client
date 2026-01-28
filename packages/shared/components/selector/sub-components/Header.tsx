@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import { AsideHeader } from "../../aside-header";
+import { AsideHeader } from "@docspace/ui-kit/components/aside";
 import { HeaderProps } from "../Selector.types";
 
 const Header = React.memo(
