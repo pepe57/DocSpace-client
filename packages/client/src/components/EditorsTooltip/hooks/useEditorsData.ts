@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
+import { useQueries } from "@tanstack/react-query";
 import { getUserPhoto } from "@docspace/shared/api/people";
 import type {
   EditorUser,
@@ -49,76 +50,44 @@ const createEditorsArray = (
   }));
 };
 
-const loadEditorsPhotos = async (
-  editors: EditorUser[],
-): Promise<EditorUser[]> => {
-  if (editors.length === 0) return editors;
-
-  const editorsNeedingPhotos = editors.filter(
-    (editor) => editor.photo === null,
-  );
-
-  if (editorsNeedingPhotos.length === 0) return editors;
-
-  try {
-    const photoResults = await Promise.allSettled(
-      editorsNeedingPhotos.map((editor) => getUserPhoto(editor.id)),
-    );
-
-    const photoMap = new Map<string, UserPhoto>();
-    editorsNeedingPhotos.forEach((editor, index) => {
-      const result = photoResults[index];
-      if (result.status === "fulfilled") {
-        photoMap.set(editor.id, result.value as UserPhoto);
-      }
-    });
-
-    const editorsWithPhotos = editors.map((editor) => {
-      if (editor.photo !== null) return editor;
-
-      return {
-        ...editor,
-        photo: photoMap.get(editor.id) || null,
-      };
-    });
-
-    return editorsWithPhotos;
-  } catch (e) {
-    console.error("Failed to load editors photos:", e);
-    return editors;
-  }
-};
-
 export const useEditorsData = ({
   activeEditors,
   editingBy,
   currentUserId,
 }: UseEditorsDataProps): UseEditorsDataReturn => {
   const [isOpen, setIsOpen] = useState(false);
-  const [editors, setEditors] = useState<EditorUser[]>(() =>
-    createEditorsArray(activeEditors, editingBy, currentUserId),
+
+  const editors = useMemo(
+    () => createEditorsArray(activeEditors, editingBy, currentUserId),
+    [activeEditors, editingBy, currentUserId],
   );
-  const photosLoadedRef = useRef(false);
+  const editorIds = useMemo(
+    () => editors.map((editor) => editor.id),
+    [editors],
+  );
 
-  // Update editors array when source data changes
-  useEffect(() => {
-    setEditors(createEditorsArray(activeEditors, editingBy, currentUserId));
-    photosLoadedRef.current = false;
-  }, [editingBy, activeEditors, currentUserId]);
+  const photoQueries = useQueries({
+    queries: editorIds.map((editorId) => ({
+      queryKey: ["userPhoto", editorId],
+      queryFn: () => getUserPhoto(editorId),
+      enabled: isOpen && editorIds.length > 0,
+      staleTime: 5 * 60 * 1000,
+      gcTime: 10 * 60 * 1000,
+      retry: 1,
+    })),
+  });
 
-  // Load photos when tooltip opens
-  useEffect(() => {
-    if (isOpen && editors.length > 0 && !photosLoadedRef.current) {
-      photosLoadedRef.current = true;
-      loadEditorsPhotos(editors).then((editorsWithLoadedPhotos) => {
-        setEditors(editorsWithLoadedPhotos);
-      });
-    }
+  const editorsWithPhotos = useMemo(() => {
+    return editors.map((editor, index) => {
+      const photoQuery = photoQueries[index];
+      const photo = photoQuery?.data as UserPhoto | undefined;
 
-    if (!isOpen) {
-      photosLoadedRef.current = false;
-    }
-  }, [isOpen, editors]);
+      return {
+        ...editor,
+        photo: photo || null,
+      };
+    });
+  }, [editors, photoQueries]);
 
   const openTooltip = useCallback(() => {
     setIsOpen(true);
@@ -129,7 +98,7 @@ export const useEditorsData = ({
   }, []);
 
   return {
-    editors,
+    editors: editorsWithPhotos,
     isOpen,
     openTooltip,
     closeTooltip,

@@ -37,6 +37,7 @@ const EditorsTooltipMobile = ({
   visible,
   editors,
   onClose,
+  t,
 }: EditorsTooltipMobileProps) => {
   if (!visible || editors.length === 0) return null;
 
@@ -49,7 +50,7 @@ const EditorsTooltipMobile = ({
         zIndex={310}
       />
       <div className={styles.mobileContainer}>
-        <div className={styles.mobileHeader}>File is currently edited by:</div>
+        <div className={styles.mobileHeader}>{t("FileCurrentlyEditedBy")}</div>
         <EditorsList
           editors={editors}
           avatarSize={AvatarSize.min}

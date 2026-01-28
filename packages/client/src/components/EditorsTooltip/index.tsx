@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useMemo } from "react";
+import React, { useMemo, useId } from "react";
+import { useTranslation } from "react-i18next";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -45,6 +46,10 @@ import type { EditorsTooltipProps } from "./EditorsTooltip.types";
 const EditorsTooltip = ({ item, currentUserId }: EditorsTooltipProps) => {
   const { editingBy, activeEditors } = item;
   const isMobile = isMobileUtils();
+  const { t } = useTranslation("Common");
+
+  const uniqueId = useId();
+  const tooltipId = `editors-tooltip-${uniqueId}`;
 
   const { editors, isOpen, openTooltip, closeTooltip } = useEditorsData({
     activeEditors,
@@ -78,7 +83,7 @@ const EditorsTooltip = ({ item, currentUserId }: EditorsTooltipProps) => {
       >
         <Scrollbar>
           <div className={styles.tooltipHeader}>
-            File is currently edited by:
+            {t("FileCurrentlyEditedBy")}
           </div>
           <EditorsList editors={editors} avatarSize={AvatarSize.extraSmall} />
         </Scrollbar>
@@ -89,7 +94,7 @@ const EditorsTooltip = ({ item, currentUserId }: EditorsTooltipProps) => {
   return (
     <>
       <IconButton
-        data-tooltip-id="editors-tooltip"
+        data-tooltip-id={tooltipId}
         iconNode={iconEdit}
         className={classNames(
           badgesStyles.iconBadge,
@@ -104,25 +109,24 @@ const EditorsTooltip = ({ item, currentUserId }: EditorsTooltipProps) => {
           editors={editors}
           visible={isOpen}
           onClose={closeTooltip}
+          t={t}
         />
       ) : (
-        <div data-tooltip-id="editors-tooltip">
-          <Tooltip
-            tooltipStyle={{
-              padding: "12px",
-              paddingRight: "0px",
-              maxWidth: "fit-content",
-            }}
-            id="editors-tooltip"
-            getContent={renderTooltipContent}
-            place="bottom-start"
-            offset={10}
-            clickable={true}
-            openOnClick={true}
-            afterShow={openTooltip}
-            afterHide={closeTooltip}
-          />
-        </div>
+        <Tooltip
+          tooltipStyle={{
+            padding: "12px",
+            paddingRight: "0px",
+            maxWidth: "fit-content",
+          }}
+          id={tooltipId}
+          getContent={renderTooltipContent}
+          place="bottom-start"
+          offset={10}
+          clickable={true}
+          openOnClick={true}
+          afterShow={openTooltip}
+          afterHide={closeTooltip}
+        />
       )}
     </>
   );

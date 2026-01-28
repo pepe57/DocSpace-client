@@ -60,6 +60,7 @@ export interface EditorsTooltipMobileProps {
   visible: boolean;
   editors: EditorUser[];
   onClose: () => void;
+  t: (key: string) => string;
 }
 
 export interface UseEditorsDataProps {
