@@ -29,14 +29,13 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { Label } from "@docspace/shared/components/label";
-import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 
 import SDK from "@onlyoffice/docspace-sdk-js";
 
-import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
@@ -51,6 +50,7 @@ import {
   defaultDimension,
   sdkSource,
   sdkVersion,
+  FILE_TYPE_CATEGORIES,
 } from "../constants";
 
 import {
@@ -62,6 +62,7 @@ import {
   Frame,
   Container,
   FilesSelectorInputWrapper,
+  CheckboxGroup,
 } from "./StyledPresets";
 
 const Uploader = (props) => {
@@ -80,9 +81,8 @@ const Uploader = (props) => {
     height: `${defaultSize.height}${defaultDimension.label}`,
     frameId: "ds-frame",
     init: true,
+    acceptCategories: "document",
   });
-
-  console.log("config", config);
 
   const fromPackage = source === sdkSource.Package;
 
@@ -142,6 +142,28 @@ const Uploader = (props) => {
     });
   };
 
+  const getSelectedCategories = () => {
+    return config.acceptCategories ? config.acceptCategories.split(",") : [];
+  };
+
+  const onChangeCategoryCheckbox = (category) => {
+    const selectedCategories = getSelectedCategories();
+    const isSelected = selectedCategories.includes(category);
+
+    let newCategories;
+    if (isSelected) {
+      newCategories = selectedCategories.filter((c) => c !== category);
+    } else {
+      newCategories = [...selectedCategories, category];
+    }
+
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      acceptCategories: newCategories.join(","),
+      init: true,
+    }));
+  };
+
   const preview = (
     <Frame
       width={config.width.includes("px") ? config.width : undefined}
@@ -186,6 +208,22 @@ const Uploader = (props) => {
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
+          </ControlsSection>
+
+          <ControlsSection>
+            <CategorySubHeader>{t("FileTypes")}</CategorySubHeader>
+            <CheckboxGroup>
+              {FILE_TYPE_CATEGORIES.map((category) => (
+                <Checkbox
+                  key={category.key}
+                  className="checkbox"
+                  label={t(category.labelKey)}
+                  onChange={() => onChangeCategoryCheckbox(category.key)}
+                  isChecked={getSelectedCategories().includes(category.key)}
+                  dataTestId={`${category.key}_checkbox`}
+                />
+              ))}
+            </CheckboxGroup>
           </ControlsSection>
 
           <ControlsSection>

@@ -48,3 +48,14 @@ export const sdkSource = {
 } as const;
 
 export const defaultDimension = dimensionsModel[0];
+
+export const FILE_TYPE_CATEGORIES = [
+  { key: "document", labelKey: "Common:Documents" },
+  { key: "spreadsheet", labelKey: "Common:Spreadsheets" },
+  { key: "presentation", labelKey: "Common:Presentations" },
+  { key: "image", labelKey: "Common:Images" },
+  { key: "video", labelKey: "Common:Video" },
+  { key: "audio", labelKey: "Common:Audio" },
+  { key: "archive", labelKey: "Common:Archives" },
+  { key: "pdf", labelKey: "PDF" },
+];
