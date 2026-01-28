@@ -3005,6 +3005,24 @@
 }
 
 .light {
+  --modified-text-color: #{$gray};
+  --modified-badge-background-color: #{$gray};
+  --modified-badge-active-background-color: var(
+    --color-scheme-main-accent,
+    #{$light-blue-main}
+  );
+}
+
+.dark {
+  --modified-text-color: #{$gray-dark};
+  --modified-badge-background-color: #{$gray-dark};
+  --modified-badge-active-background-color: var(
+    --color-scheme-main-accent,
+    #{$light-blue-main}
+  );
+}
+
+.light {
   --mcp-icon-bg-opacity: 1;
 }
 
@@ -3101,6 +3119,7 @@
 .dark {
   --oauth-info-separator-color: #{$gray-dark-strong};
 }
+
 .light {
   --template-gallery-header-border: #{$gray-light-mid};
 
@@ -3279,9 +3298,11 @@
 .light {
   --tfa-text-color: #{$gray};
   --icon-error-color: #{$light-error-status};
+  --default-templates-border-color: #{$gray-light-mid};
 }
 
 .dark {
   --tfa-text-color: #{$gray-dark};
   --icon-error-color: #{$dark-error-status};
+  --default-templates-border-color: #{$gray-dark-mid};
 }

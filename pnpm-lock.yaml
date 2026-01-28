@@ -156,6 +156,9 @@ importers:
       moment-timezone:
         specifier: 0.6.0
         version: 0.6.0
+      msw:
+        specifier: ^2.12.7
+        version: 2.12.7(@types/node@24.10.7)(typescript@5.9.3)
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
