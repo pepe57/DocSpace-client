@@ -47,6 +47,7 @@
   "FileContentCopy": "File content copy restriction",
   "FileFilter": "File Filter",
   "FileId": "File ID",
+  "FileTypes": "File types",
   "FolderId": "Folder ID",
   "FilePreview": "File preview",
   "FileSelectorDescription": "Embed a file selector to allow users to access any file from the list of the available ones.",
