@@ -28,7 +28,11 @@ import { type FC } from "react";
 
 import type { TFileLink } from "../../../api/files/types";
 
-import { ComboBox, ComboBoxSize, type TOption } from "../../combobox";
+import {
+  ComboBox,
+  ComboBoxSize,
+  type TOption,
+} from "@docspace/ui-kit/components/combobox";
 import { AccessRightSelect } from "../../access-right-select";
 
 import { IconDisplay } from "./IconDisplay";

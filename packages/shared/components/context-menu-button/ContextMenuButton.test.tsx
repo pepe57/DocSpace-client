@@ -33,7 +33,7 @@ import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.re
 import { ContextMenuButton } from "./ContextMenuButton";
 import { ContextMenuButtonDisplayType } from "./ContextMenuButton.enums";
 import { globalColors } from "../../themes";
-import type { ContextMenuModel } from "../context-menu";
+import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 const baseData = (): ContextMenuModel[] => [
   {

@@ -37,7 +37,7 @@ import { DatePicker } from "../date-picker";
 
 import { DateTimePickerProps } from "./DateTimerPicker.types";
 import styles from "./DateTimePicker.module.scss";
-import { ComboBox, TOption } from "../combobox";
+import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
 import { useTranslation } from "react-i18next";
 
 const DateTimePicker = (props: DateTimePickerProps) => {

@@ -28,7 +28,7 @@ import { DeviceType, FilterGroups } from "../../enums";
 import { TSortBy, TViewAs } from "../../types";
 
 import { TViewSelectorOption } from "../view-selector";
-import { TOption } from "../combobox";
+import { TOption } from "@docspace/ui-kit/components/combobox";
 
 export type TSortDataItem = {
   id: string;

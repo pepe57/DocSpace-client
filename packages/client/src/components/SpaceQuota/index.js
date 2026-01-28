@@ -31,7 +31,7 @@ import classNames from "classnames";
 
 import { getConvertedQuota } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/ui-kit/components/text";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { toastr } from "@docspace/shared/components/toast";
 import api from "@docspace/shared/api";
 

@@ -33,7 +33,7 @@ import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/shared/components/combobox";
+} from "@docspace/ui-kit/components/combobox";
 import {
   TypeSelectRowContentProps,
   InjectedTypeSelectRowContentProps,

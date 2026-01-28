@@ -36,7 +36,7 @@ import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Label } from "@docspace/ui-kit/components/label";
 import { Button } from "@docspace/ui-kit/components/button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 
 import { PluginComponents } from "./enums";
 

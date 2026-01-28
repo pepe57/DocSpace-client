@@ -27,7 +27,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ContextMenuModel } from "../../context-menu";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import { TableCell } from "../sub-components/table-cell";
 import { TableRow } from "./TableRow";
 

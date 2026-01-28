@@ -36,7 +36,7 @@ import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/shared/components/combobox";
+} from "@docspace/ui-kit/components/combobox";
 import { DatePicker } from "@docspace/shared/components/date-picker";
 import { toastr } from "@docspace/shared/components/toast";
 import {

@@ -26,7 +26,11 @@
 
 import React, { useEffect, useState } from "react";
 
-import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TOption,
+} from "@docspace/ui-kit/components/combobox";
 import { AccessSelectorProps, TAccessRight } from "../Selector.types";
 import { isMobile } from "../../../utils";
 import { AccessRightSelect } from "../../access-right-select";

@@ -32,7 +32,7 @@
 // import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 // import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 
-import { TOption } from "../combobox";
+import { TOption } from "@docspace/ui-kit/components/combobox";
 import { globalColors } from "../../themes";
 
 export const data: TOption[] = [

@@ -28,7 +28,11 @@ import moment from "moment";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TOption,
+} from "@docspace/ui-kit/components/combobox";
 
 import { fixFormatValue } from "../Cron.utils";
 

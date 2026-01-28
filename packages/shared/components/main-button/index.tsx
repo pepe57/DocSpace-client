@@ -30,10 +30,10 @@ import classNames from "classnames";
 import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
 import { GuidanceRefKey } from "../guidance/sub-components/Guid.types";
 import { Text } from "@docspace/ui-kit/components/text";
-import { ContextMenu } from "../context-menu";
+import { ContextMenu } from "@docspace/ui-kit/components/context-menu";
 import { MainButtonProps } from "./MainButton.types";
 import styles from "./MainButton.module.scss";
-import { ContextMenuRefType } from "../context-menu/ContextMenu.types";
+import { ContextMenuRefType } from "@docspace/ui-kit/components/context-menu";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 const MainButton = (props: MainButtonProps) => {

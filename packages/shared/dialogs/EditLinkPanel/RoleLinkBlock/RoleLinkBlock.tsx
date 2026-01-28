@@ -32,7 +32,7 @@ import { AccessRightSelect } from "../../../components/access-right-select";
 import { Text } from "@docspace/ui-kit/components/text";
 import { isMobile } from "../../../utils";
 import { DeviceType } from "../../../enums";
-import type { TOption } from "../../../components/combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 
 import { RoleLinkBlockWrapper } from "./RoleLinkBlock.styled";
 import type { RoleLinkBlockProps } from "./RoleLinkBlock.types";

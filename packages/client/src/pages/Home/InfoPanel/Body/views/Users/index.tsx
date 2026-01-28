@@ -37,8 +37,8 @@ import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/shared/components/combobox";
-import { TContextMenuValueTypeOnClick } from "@docspace/shared/components/context-menu/ContextMenu.types";
+} from "@docspace/ui-kit/components/combobox";
+import { TContextMenuValueTypeOnClick } from "@docspace/ui-kit";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";

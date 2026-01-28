@@ -26,7 +26,7 @@
 
 import { RefObject } from "react";
 import { GuidanceRefKey } from "../guidance/sub-components/Guid.types";
-import { ContextMenuModel } from "../context-menu";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 export type MainButtonProps = {
   /** Button text */

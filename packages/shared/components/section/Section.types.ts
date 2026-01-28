@@ -28,7 +28,7 @@ import { Operation } from "../operations-progress-button/OperationsProgressButto
 import { DeviceType } from "../../enums";
 import { TViewAs } from "../../types";
 
-import { ContextMenuModel } from "../context-menu";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import { TFile, TFolder } from "../../api/files/types";
 import { TUser } from "../../api/people/types";
 

@@ -35,7 +35,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import {
   ContextMenu,
   ContextMenuRefType,
-} from "@docspace/shared/components/context-menu";
+} from "@docspace/ui-kit/components/context-menu";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,

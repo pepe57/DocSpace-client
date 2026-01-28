@@ -38,7 +38,7 @@ import { DropDownItem } from "../drop-down-item";
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
-import type { ContextMenuModel } from "../context-menu";
+import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 import styles from "./ContextMenuButton.module.scss";
 import { ContextMenuButtonProps } from "./ContextMenuButton.types";

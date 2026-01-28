@@ -48,7 +48,10 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/ui-kit/components/avatar";
-import { ComboBoxSize, type TOption } from "../../combobox";
+import {
+  ComboBoxSize,
+  type TOption,
+} from "@docspace/ui-kit/components/combobox";
 import { AccessRightSelect } from "../../access-right-select";
 
 import { Text } from "@docspace/ui-kit/components/text";

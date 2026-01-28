@@ -30,9 +30,8 @@ import styled, { css } from "styled-components";
 
 import { mobile, tablet, isMobile } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { ICover, TRoom } from "@docspace/shared/api/rooms/types";
-
-import { getRoomTitle } from "@docspace/shared/components/room-icon/RoomIcon.utils";
+import { TRoom } from "@docspace/shared/api/rooms/types";
+import { ICover, getRoomTitle } from "@docspace/ui-kit";
 import { globalColors } from "@docspace/shared/themes";
 
 import { CustomLogo } from "./CustomLogo";

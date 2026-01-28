@@ -31,12 +31,12 @@ import AcceptIconSvgUrl from "PUBLIC_DIR/images/selector.input.accept.svg?url";
 import CancelIconSvgUrl from "PUBLIC_DIR/images/selector.input.cancel.svg?url";
 
 import {
-	InputSize,
-	InputType,
-	TextInput,
+  InputSize,
+  InputType,
+  TextInput,
 } from "@docspace/ui-kit/components/text-input";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { RoomIcon } from "../../room-icon";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { RoomLogo } from "../../room-logo";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
@@ -44,162 +44,162 @@ import styles from "../Selector.module.scss";
 import { InputItemProps } from "../Selector.types";
 
 const InputItem = ({
-	defaultInputValue,
-	onAcceptInput,
-	onCancelInput,
-	style,
+  defaultInputValue,
+  onAcceptInput,
+  onCancelInput,
+  style,
 
-	color,
-	icon,
-	cover,
-	roomType,
+  color,
+  icon,
+  cover,
+  roomType,
 
-	placeholder,
+  placeholder,
 
-	setInputItemVisible,
-	setSavedInputValue,
+  setInputItemVisible,
+  setSavedInputValue,
 }: InputItemProps) => {
-	const [value, setValue] = React.useState(defaultInputValue);
-	const [isLoading, setIsLoading] = React.useState(false);
+  const [value, setValue] = React.useState(defaultInputValue);
+  const [isLoading, setIsLoading] = React.useState(false);
 
-	const requestRunning = React.useRef<boolean>(false);
-	const canceled = React.useRef<boolean>(false);
-	const inputRef = React.useRef<HTMLInputElement | null>(null);
+  const requestRunning = React.useRef<boolean>(false);
+  const canceled = React.useRef<boolean>(false);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
 
-	const onAcceptInputAction = React.useCallback(async () => {
-		if (requestRunning.current || !value) return;
-		setSavedInputValue(null);
-		setIsLoading(true);
-		requestRunning.current = true;
+  const onAcceptInputAction = React.useCallback(async () => {
+    if (requestRunning.current || !value) return;
+    setSavedInputValue(null);
+    setIsLoading(true);
+    requestRunning.current = true;
 
-		await onAcceptInput(value);
+    await onAcceptInput(value);
 
-		canceled.current = true;
-		requestRunning.current = false;
-		setIsLoading(false);
-	}, [onAcceptInput, setSavedInputValue, value]);
+    canceled.current = true;
+    requestRunning.current = false;
+    setIsLoading(false);
+  }, [onAcceptInput, setSavedInputValue, value]);
 
-	const onCancelInputAction = React.useCallback(() => {
-		canceled.current = true;
-		setSavedInputValue(null);
-		onCancelInput();
-	}, [onCancelInput, setSavedInputValue]);
+  const onCancelInputAction = React.useCallback(() => {
+    canceled.current = true;
+    setSavedInputValue(null);
+    onCancelInput();
+  }, [onCancelInput, setSavedInputValue]);
 
-	React.useEffect(() => {
-		setInputItemVisible(true);
+  React.useEffect(() => {
+    setInputItemVisible(true);
 
-		return () => {
-			setInputItemVisible(false);
-		};
-	}, [setInputItemVisible]);
+    return () => {
+      setInputItemVisible(false);
+    };
+  }, [setInputItemVisible]);
 
-	React.useEffect(() => {
-		return () => {
-			if (!canceled.current) setSavedInputValue(value);
-		};
-	}, [setSavedInputValue, value]);
+  React.useEffect(() => {
+    return () => {
+      if (!canceled.current) setSavedInputValue(value);
+    };
+  }, [setSavedInputValue, value]);
 
-	React.useEffect(() => {
-		const onKeyDown = (e: KeyboardEvent) => {
-			if (e.key === "Enter") onAcceptInputAction();
-			else if (e.key === "Escape") onCancelInputAction();
-		};
+  React.useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Enter") onAcceptInputAction();
+      else if (e.key === "Escape") onCancelInputAction();
+    };
 
-		window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keydown", onKeyDown);
 
-		return () => {
-			window.removeEventListener("keydown", onKeyDown);
-		};
-	}, [onAcceptInputAction, onCancelInputAction]);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [onAcceptInputAction, onCancelInputAction]);
 
-	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const newVal = e.target.value;
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVal = e.target.value;
 
-		setValue(newVal);
-	};
+    setValue(newVal);
+  };
 
-	React.useEffect(() => {
-		if (inputRef.current) {
-			inputRef.current.focus();
-			inputRef.current.select();
-		}
-	}, []);
+  React.useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.select();
+    }
+  }, []);
 
-	return (
-		<div
-			key="input-item"
-			className={classNames(styles.selectorItem, {
-				[styles.withIcon]: icon || color || roomType || cover,
-			})}
-			style={style}
-		>
-			{cover ? (
-				<RoomIcon
-					color={color}
-					title={value}
-					logo={{ cover, large: "", original: "", small: "", medium: "" }}
-					showDefault={false}
-					className={styles.itemLogo}
-				/>
-			) : color ? (
-				<RoomIcon
-					color={color}
-					title={value}
-					showDefault
-					className={styles.itemLogo}
-				/>
-			) : roomType ? (
-				<RoomLogo className={styles.roomLogoContainer} type={roomType} />
-			) : icon ? (
-				<RoomIcon
-					title={value}
-					className={styles.itemLogo}
-					imgClassName={styles.roomlogo}
-					logo={icon}
-					showDefault={false}
-				/>
-			) : null}
-			<TextInput
-				value={value}
-				size={InputSize.base}
-				type={InputType.text}
-				onChange={onChange}
-				forwardedRef={inputRef}
-				placeholder={placeholder}
-				isDisabled={isLoading}
-				testId="selector_input_item"
-			/>
-			<div
-				className={classNames(styles.inputWrapper, {
-					[styles.loading]: isLoading,
-				})}
-				onClick={onAcceptInputAction}
-			>
-				{isLoading ? (
-					<Loader type={LoaderTypes.track} size="16px" />
-				) : (
-					<IconButton
-						iconName={AcceptIconSvgUrl}
-						size={16}
-						dataTestId="selector_new_item_accept"
-					/>
-				)}
-			</div>
-			<div
-				className={classNames(styles.inputWrapper, {
-					[styles.loading]: isLoading,
-				})}
-				onClick={onCancelInputAction}
-			>
-				<IconButton
-					iconName={CancelIconSvgUrl}
-					size={16}
-					isDisabled={isLoading}
-					dataTestId="selector_new_item_cancel"
-				/>
-			</div>
-		</div>
-	);
+  return (
+    <div
+      key="input-item"
+      className={classNames(styles.selectorItem, {
+        [styles.withIcon]: icon || color || roomType || cover,
+      })}
+      style={style}
+    >
+      {cover ? (
+        <RoomIcon
+          color={color}
+          title={value}
+          logo={{ cover, large: "", original: "", small: "", medium: "" }}
+          showDefault={false}
+          className={styles.itemLogo}
+        />
+      ) : color ? (
+        <RoomIcon
+          color={color}
+          title={value}
+          showDefault
+          className={styles.itemLogo}
+        />
+      ) : roomType ? (
+        <RoomLogo className={styles.roomLogoContainer} type={roomType} />
+      ) : icon ? (
+        <RoomIcon
+          title={value}
+          className={styles.itemLogo}
+          imgClassName={styles.roomlogo}
+          logo={icon}
+          showDefault={false}
+        />
+      ) : null}
+      <TextInput
+        value={value}
+        size={InputSize.base}
+        type={InputType.text}
+        onChange={onChange}
+        forwardedRef={inputRef}
+        placeholder={placeholder}
+        isDisabled={isLoading}
+        testId="selector_input_item"
+      />
+      <div
+        className={classNames(styles.inputWrapper, {
+          [styles.loading]: isLoading,
+        })}
+        onClick={onAcceptInputAction}
+      >
+        {isLoading ? (
+          <Loader type={LoaderTypes.track} size="16px" />
+        ) : (
+          <IconButton
+            iconName={AcceptIconSvgUrl}
+            size={16}
+            dataTestId="selector_new_item_accept"
+          />
+        )}
+      </div>
+      <div
+        className={classNames(styles.inputWrapper, {
+          [styles.loading]: isLoading,
+        })}
+        onClick={onCancelInputAction}
+      >
+        <IconButton
+          iconName={CancelIconSvgUrl}
+          size={16}
+          isDisabled={isLoading}
+          dataTestId="selector_new_item_cancel"
+        />
+      </div>
+    </div>
+  );
 };
 
 export default InputItem;

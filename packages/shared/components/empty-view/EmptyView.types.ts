@@ -1,7 +1,7 @@
 import type { To } from "react-router";
 
 import type { Nullable } from "../../types";
-import type { ContextMenuModel } from "../context-menu";
+import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 export type EmptyViewButtonType = {
   /** Unique identifier for the button */

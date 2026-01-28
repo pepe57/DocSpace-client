@@ -27,7 +27,7 @@
 import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, fireEvent, screen, within } from "@testing-library/react";
-import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import { RoomTile } from "./RoomTile";
 import { RoomTileProps } from "./RoomTile.types";
 

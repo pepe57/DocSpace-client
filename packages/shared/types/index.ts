@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+export * from "@docspace/ui-kit/types";
+
 import type { TFile, TFileLink, TFolder } from "../api/files/types";
 import type { TBreadCrumb } from "../components/selector/Selector.types";
 import type {
@@ -335,8 +337,8 @@ declare global {
   }
 
   export type ContextMenuModel =
-    import("../components/context-menu/ContextMenu.types").ContextMenuModel;
+    import("@docspace/ui-kit/components/context-menu").ContextMenuModel;
 
   export type SeparatorType =
-    import("../components/context-menu/ContextMenu.types").SeparatorType;
+    import("@docspace/ui-kit/components/context-menu").SeparatorType;
 }

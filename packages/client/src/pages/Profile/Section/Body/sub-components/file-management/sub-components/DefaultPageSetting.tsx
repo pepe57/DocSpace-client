@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
+import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { EmployeeType, FolderType } from "@docspace/shared/enums";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";

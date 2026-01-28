@@ -17,7 +17,7 @@ import type { TFileLink } from "../../../api/files/types";
 import { ShareLinkService } from "../../../services/share-link.service";
 import { getExternalFolderLinks, getExternalLinks } from "../../../api/files";
 
-import { TOption } from "../../combobox";
+import { TOption } from "@docspace/ui-kit/components/combobox";
 import { TData, toastr } from "../../toast";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
@@ -32,470 +32,470 @@ import { copyShareLink, evenPrimaryLink } from "../Share.helpers";
 import type { AccessItem, TLink, UseShareProps } from "../Share.types";
 
 export const useShare = ({
-	setView,
-	setIsLoading,
-	fileLinkProps,
-	onlyOneLink,
-	shareChanged,
-	infoPanelSelection,
-	onOpenPanel,
-	setLinkParams,
-	setShareChanged,
-	setIsScrollLocked,
-	setEditLinkPanelIsVisible,
-	setEmbeddingPanelData,
+  setView,
+  setIsLoading,
+  fileLinkProps,
+  onlyOneLink,
+  shareChanged,
+  infoPanelSelection,
+  onOpenPanel,
+  setLinkParams,
+  setShareChanged,
+  setIsScrollLocked,
+  setEditLinkPanelIsVisible,
+  setEmbeddingPanelData,
 }: UseShareProps) => {
-	const isFolder = infoPanelSelection.isFolder;
-
-	const { t } = useTranslation(["Common"]);
-	const [fileLinks, setFileLinks] = useState<TLink[]>(fileLinkProps ?? []);
+  const isFolder = infoPanelSelection.isFolder;
+
+  const { t } = useTranslation(["Common"]);
+  const [fileLinks, setFileLinks] = useState<TLink[]>(fileLinkProps ?? []);
 
-	const [loadingLinks, setLoadingLinks] = useState<(string | number)[]>([]);
-
-	const mountedRef = useRef(true);
+  const [loadingLinks, setLoadingLinks] = useState<(string | number)[]>([]);
+
+  const mountedRef = useRef(true);
 
-	const requestRunning = useRef(false);
-	const isInit = useRef(!!fileLinkProps);
+  const requestRunning = useRef(false);
+  const isInit = useRef(!!fileLinkProps);
 
-	const [isLoadedAddLinks, setIsLoadedAddLinks] = useState(true);
-	const hideSharePanel = !infoPanelSelection?.canShare;
+  const [isLoadedAddLinks, setIsLoadedAddLinks] = useState(true);
+  const hideSharePanel = !infoPanelSelection?.canShare;
 
-	useEffect(() => {
-		mountedRef.current = true;
-		return () => {
-			mountedRef.current = false;
-		};
-	}, []);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
 
-	const fetchLinks = useCallback(async () => {
-		if (requestRunning.current || hideSharePanel) return;
+  const fetchLinks = useCallback(async () => {
+    if (requestRunning.current || hideSharePanel) return;
 
-		requestRunning.current = true;
+    requestRunning.current = true;
 
-		const getExternalLinksMethod = isFolder
-			? getExternalFolderLinks
-			: getExternalLinks;
+    const getExternalLinksMethod = isFolder
+      ? getExternalFolderLinks
+      : getExternalLinks;
 
-		const res = await getExternalLinksMethod(infoPanelSelection.id);
+    const res = await getExternalLinksMethod(infoPanelSelection.id);
 
-		setFileLinks(res.items);
-		setIsLoading(false);
-		isInit.current = false;
-		requestRunning.current = false;
-	}, [infoPanelSelection?.id, hideSharePanel, isFolder, setIsLoading]);
+    setFileLinks(res.items);
+    setIsLoading(false);
+    isInit.current = false;
+    requestRunning.current = false;
+  }, [infoPanelSelection?.id, hideSharePanel, isFolder, setIsLoading]);
 
-	useEffect(() => {
-		if (hideSharePanel) {
-			setView?.("info_details");
+  useEffect(() => {
+    if (hideSharePanel) {
+      setView?.("info_details");
 
-			return;
-		}
+      return;
+    }
 
-		if (!fileLinkProps) fetchLinks();
-	}, [fetchLinks, hideSharePanel, fileLinkProps, setView]);
+    if (!fileLinkProps) fetchLinks();
+  }, [fetchLinks, hideSharePanel, fileLinkProps, setView]);
 
-	useEffect(() => {
-		if (shareChanged) {
-			fetchLinks();
-			setShareChanged?.(false);
-		}
-	}, [fetchLinks, setShareChanged, shareChanged]);
-
-	useEffect(() => {
-		if (fileLinkProps) setFileLinks(fileLinkProps);
-	}, [fileLinkProps]);
-
-	const addLoaderLink = () => {
-		const link = { key: "loader", isLoaded: true };
-		setFileLinks([...fileLinks, ...[link]]);
-	};
-
-	const addGeneralLink = async () => {
-		try {
-			addLoaderLink();
-
-			const link = await ShareLinkService.getPrimaryLink(infoPanelSelection);
-
-			if (link) {
-				setFileLinks((links) => {
-					const newLinks: TLink[] = [...links];
-
-					const idx = newLinks.findIndex((l) => "isLoaded" in l && l.isLoaded);
-
-					if (idx !== -1) newLinks[idx] = { ...link };
-
-					return newLinks;
-				});
-				copyShareLink(infoPanelSelection, link, t);
-			} else {
-				setFileLinks([]);
-			}
-		} catch (error) {
-			console.error(error);
-			setFileLinks([]);
-			if (axios.isAxiosError(error)) {
-				const errorData = error as AxiosError<{ error: { message: string } }>;
-
-				if (errorData?.response?.data?.error?.message) {
-					toastr.error(errorData?.response?.data?.error?.message);
-					return;
-				}
-			}
-
-			const message = (error as { message: string }).message
-				? ((error as { message: string }).message as TData)
-				: (error as string);
-			toastr.error(message);
-		}
-	};
-
-	const addAdditionalLinks = async () => {
-		if (!isLoadedAddLinks) return;
-
-		setIsLoadedAddLinks(false);
-
-		addLoaderLink();
-
-		try {
-			const newLink =
-				await ShareLinkService.addExternalLink(infoPanelSelection);
-
-			setFileLinks((links) => {
-				const newLinks: TLink[] = [...links];
-
-				const idx = newLinks.findIndex((l) => "isLoaded" in l && l.isLoaded);
-
-				if (idx !== -1) newLinks[idx] = { ...newLink };
-
-				return newLinks;
-			});
-		} catch (error) {
-			console.error(error);
-			setFileLinks((links) => {
-				return links.filter((link) => !("isLoaded" in link && link.isLoaded));
-			});
-
-			if (axios.isAxiosError(error)) {
-				const errorData = error as AxiosError<{ error: { message: string } }>;
-
-				if (errorData?.response?.data?.error?.message) {
-					return toastr.error(errorData?.response?.data?.error?.message);
-				}
-			}
-
-			const message = (error as { message: string }).message
-				? ((error as { message: string }).message as TData)
-				: (error as string);
-
-			toastr.error(message);
-		} finally {
-			setIsLoadedAddLinks(true);
-		}
-	};
-
-	const updateLink = (oldLink: TFileLink, newLink: TFileLink) => {
-		const newArr = fileLinks.map((item) => {
-			if ("sharedTo" in item && item.sharedTo.id === newLink.sharedTo.id) {
-				return newLink || null;
-			}
-			return item;
-		});
-		setFileLinks(newArr);
-
-		const newLoadingLinks = loadingLinks.filter(
-			(item) => item !== oldLink.sharedTo.id,
-		);
-		setLoadingLinks(newLoadingLinks);
-	};
-
-	const deleteLink = (id: string | number) => {
-		const newArr = fileLinks.filter(
-			(item) => "sharedTo" in item && item.sharedTo.id !== id,
-		);
-		setFileLinks(newArr);
-	};
-
-	const changeShareOption = async (item: TOption, link: TFileLink) => {
-		if (link.sharedTo.isExpired) {
-			link.sharedTo.expirationDate = moment().add(7, "days").toISOString();
-		}
-
-		try {
-			setLoadingLinks((val) => [...val, link.sharedTo.id]);
-
-			const res = await ShareLinkService.editLink(infoPanelSelection, {
-				...link,
-				sharedTo: {
-					...link.sharedTo,
-					internal: item.internal || false,
-				},
-			});
-
-			updateLink(link, res);
-			copyShareLink(infoPanelSelection, res, t);
-		} catch (e) {
-			toastr.error(e as TData);
-		}
-	};
-
-	const changeAccessOption = async (item: AccessItem, link: TFileLink) => {
-		const updateAccessLink = async () => {
-			setLoadingLinks([...loadingLinks, link.sharedTo.id]);
-
-			if (link.sharedTo.isExpired) {
-				link.sharedTo.expirationDate = moment().add(7, "days").toISOString();
-			}
-
-			try {
-				const res = await ShareLinkService.editLink(infoPanelSelection, {
-					...link,
-					access: item.access!,
-				});
-
-				if (item.access === ShareAccessRights.None) {
-					deleteLink(link.sharedTo.id);
-					toastr.success(t("Common:LinkRemoved"));
-				} else {
-					updateLink(link, res);
-					if (item.access === ShareAccessRights.DenyAccess) {
-						toastr.success(t("Common:LinkAccessDenied"));
-					} else {
-						copyShareLink(infoPanelSelection, res, t);
-					}
-				}
-			} catch (e) {
-				toastr.error(e as TData);
-			}
-		};
-
-		if (item.access === ShareAccessRights.FormFilling && onOpenPanel) {
-			onOpenPanel({
-				visible: true,
-				updateAccessLink,
-				fileId: infoPanelSelection.id,
-			});
-			return;
-		}
-
-		updateAccessLink();
-	};
-
-	const removeLink = async (link: TFileLink, isReactivate: boolean = false) => {
-		try {
-			setLoadingLinks((val) => [...val, link.sharedTo.id]);
-
-			const newLink = await ShareLinkService.editLink(infoPanelSelection, {
-				...link,
-				access: isReactivate ? link.access : ShareAccessRights.None,
-				sharedTo: {
-					...link.sharedTo,
-					expirationDate: moment().add(7, "days").toISOString(),
-				},
-			});
-
-			if (link.canRevoke || isReactivate) {
-				setLoadingLinks((prev) => prev.filter((l) => l !== link.sharedTo.id));
-
-				if (newLink)
-					setFileLinks((links) =>
-						links.map((l) =>
-							"sharedTo" in l && l.sharedTo.id === link.sharedTo.id
-								? newLink
-								: l,
-						),
-					);
-				if (!isReactivate)
-					toastr.success(t("Common:GeneralLinkRevokedAndCreatedSuccessfully"));
-			} else {
-				deleteLink(link.sharedTo.id);
-				toastr.success(t("Common:LinkRemoved"));
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	const onCloseContextMenu = () => {
-		setIsScrollLocked?.(false);
-	};
-
-	const onOpenContextMenu = () => {
-		setIsScrollLocked?.(true);
-	};
-
-	const onEditLink = (link: TFileLink) => {
-		setEditLinkPanelIsVisible(true);
-		setLinkParams({
-			link,
-			item: infoPanelSelection,
-			updateLink: (newLink: TFileLink) => {
-				if (!mountedRef.current) return;
-				updateLink(link, newLink);
-			},
-		});
-		onCloseContextMenu();
-	};
-
-	const onEmbeddingClick = (link: TFileLink) => {
-		setLinkParams({ link, item: infoPanelSelection });
-		setEmbeddingPanelData?.({ visible: true, item: infoPanelSelection });
-	};
-
-	const changeExpirationOption = async (
-		link: TFileLink,
-		expirationDate: moment.Moment | null,
-	) => {
-		try {
-			setLoadingLinks([...loadingLinks, link.sharedTo.id]);
-
-			const expDate = moment(expirationDate);
-
-			const res = await ShareLinkService.editLink(infoPanelSelection, {
-				...link,
-				sharedTo: {
-					...link.sharedTo,
-					expirationDate: expirationDate ? expDate.toISOString() : null,
-				},
-			});
-
-			updateLink(link, res);
-			copyShareLink(infoPanelSelection, res, t);
-		} catch (e) {
-			toastr.error(e as TData);
-		}
-	};
-
-	const onCopyLink = (link: TFileLink) => {
-		if (link.sharedTo?.isExpired) return;
-
-		copyShareLink(infoPanelSelection, link, t);
-	};
-
-	const getData = (link: TFileLink): ContextMenuModel[] => {
-		return [
-			{
-				key: "edit-link-key",
-				label: t("Common:LinkSettings"),
-				icon: SettingsReactSvgUrl,
-				onClick: () => onEditLink(link),
-			},
-			{
-				key: "copy-link-settings-key",
-				label: t("Common:CopySharedLink"),
-				icon: CopyToReactSvgUrl,
-				onClick: () => copyShareLink(infoPanelSelection, link, t),
-			},
-			{
-				key: "embedding-settings-key",
-				label: t("Common:Embed"),
-				icon: CodeReactSvgUrl,
-				onClick: () => onEmbeddingClick(link),
-				disabled: !infoPanelSelection.security.Embed,
-			},
-			{
-				key: "delete-link-separator",
-				isSeparator: true,
-			},
-			{
-				key: "delete-link-key",
-				label: link.canRevoke ? t("Common:RevokeLink") : t("Common:Delete"),
-				icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,
-				onClick: () => removeLink(link),
-			},
-		];
-	};
-
-	const isEvenPrimaryLink = useMemo(
-		() => evenPrimaryLink(fileLinks as TFileLink[]),
-		[fileLinks],
-	);
-
-	const availableShareRights = infoPanelSelection?.availableShareRights;
-
-	const countCanCreateLink = Math.max(
-		0,
-		(infoPanelSelection?.shareSettings?.ExternalLink ?? 0) +
-			(infoPanelSelection?.shareSettings?.PrimaryExternalLink ?? 0) -
-			1,
-	);
-
-	const canAddLink = (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
-
-	const getTextTooltip = () => {
-		return (
-			<Text fontSize="12px" noSelect>
-				{t("Common:MaximumNumberOfExternalLinksCreated")}
-			</Text>
-		);
-	};
-
-	const getLinkElements = () => {
-		const options =
-			fileLinks.length > 0 && !onlyOneLink && canAddLink ? (
-				<div data-tooltip-id="file-links-tooltip" data-tip="tooltip">
-					<IconButton
-						className={styles.linkToViewingIcon}
-						iconName={LinksToViewingIconUrl}
-						onClick={isEvenPrimaryLink ? addAdditionalLinks : addGeneralLink}
-						size={16}
-						isDisabled={fileLinks.length > countCanCreateLink}
-						dataTestId="info_panel_share_add_link_button"
-					/>
-					{fileLinks.length > countCanCreateLink ? (
-						<Tooltip
-							float={isDesktop()}
-							id="file-links-tooltip"
-							getContent={getTextTooltip}
-							place="bottom"
-						/>
-					) : null}
-				</div>
-			) : null;
-
-		const header = (
-			<ShareHeader
-				key="share-header"
-				title={t("Common:SharedLinks")}
-				options={options}
-				isShareTitle
-			/>
-		);
-
-		if (fileLinks.length === 0) {
-			if (!canAddLink) return [];
-
-			return [
-				header,
-				<CreateButton
-					key="share-create-link"
-					onClick={addGeneralLink}
-					title={t("Common:CreateAndCopy")}
-				/>,
-			];
-		}
-		return [
-			header,
-			...fileLinks.map((link) => (
-				<LinkRow
-					key={"key" in link ? link.key : link.sharedTo?.id?.toString()}
-					isShareLink
-					links={[link]}
-					getData={getData}
-					isFolder={isFolder}
-					onCopyLink={onCopyLink}
-					onAddClick={addGeneralLink}
-					loadingLinks={loadingLinks}
-					removedExpiredLink={removeLink}
-					changeShareOption={changeShareOption}
-					onOpenContextMenu={onOpenContextMenu}
-					changeAccessOption={changeAccessOption}
-					onCloseContextMenu={onCloseContextMenu}
-					changeExpirationOption={changeExpirationOption}
-					availableShareRights={availableShareRights}
-				/>
-			)),
-		];
-	};
-
-	return { getLinkElements };
+  useEffect(() => {
+    if (shareChanged) {
+      fetchLinks();
+      setShareChanged?.(false);
+    }
+  }, [fetchLinks, setShareChanged, shareChanged]);
+
+  useEffect(() => {
+    if (fileLinkProps) setFileLinks(fileLinkProps);
+  }, [fileLinkProps]);
+
+  const addLoaderLink = () => {
+    const link = { key: "loader", isLoaded: true };
+    setFileLinks([...fileLinks, ...[link]]);
+  };
+
+  const addGeneralLink = async () => {
+    try {
+      addLoaderLink();
+
+      const link = await ShareLinkService.getPrimaryLink(infoPanelSelection);
+
+      if (link) {
+        setFileLinks((links) => {
+          const newLinks: TLink[] = [...links];
+
+          const idx = newLinks.findIndex((l) => "isLoaded" in l && l.isLoaded);
+
+          if (idx !== -1) newLinks[idx] = { ...link };
+
+          return newLinks;
+        });
+        copyShareLink(infoPanelSelection, link, t);
+      } else {
+        setFileLinks([]);
+      }
+    } catch (error) {
+      console.error(error);
+      setFileLinks([]);
+      if (axios.isAxiosError(error)) {
+        const errorData = error as AxiosError<{ error: { message: string } }>;
+
+        if (errorData?.response?.data?.error?.message) {
+          toastr.error(errorData?.response?.data?.error?.message);
+          return;
+        }
+      }
+
+      const message = (error as { message: string }).message
+        ? ((error as { message: string }).message as TData)
+        : (error as string);
+      toastr.error(message);
+    }
+  };
+
+  const addAdditionalLinks = async () => {
+    if (!isLoadedAddLinks) return;
+
+    setIsLoadedAddLinks(false);
+
+    addLoaderLink();
+
+    try {
+      const newLink =
+        await ShareLinkService.addExternalLink(infoPanelSelection);
+
+      setFileLinks((links) => {
+        const newLinks: TLink[] = [...links];
+
+        const idx = newLinks.findIndex((l) => "isLoaded" in l && l.isLoaded);
+
+        if (idx !== -1) newLinks[idx] = { ...newLink };
+
+        return newLinks;
+      });
+    } catch (error) {
+      console.error(error);
+      setFileLinks((links) => {
+        return links.filter((link) => !("isLoaded" in link && link.isLoaded));
+      });
+
+      if (axios.isAxiosError(error)) {
+        const errorData = error as AxiosError<{ error: { message: string } }>;
+
+        if (errorData?.response?.data?.error?.message) {
+          return toastr.error(errorData?.response?.data?.error?.message);
+        }
+      }
+
+      const message = (error as { message: string }).message
+        ? ((error as { message: string }).message as TData)
+        : (error as string);
+
+      toastr.error(message);
+    } finally {
+      setIsLoadedAddLinks(true);
+    }
+  };
+
+  const updateLink = (oldLink: TFileLink, newLink: TFileLink) => {
+    const newArr = fileLinks.map((item) => {
+      if ("sharedTo" in item && item.sharedTo.id === newLink.sharedTo.id) {
+        return newLink || null;
+      }
+      return item;
+    });
+    setFileLinks(newArr);
+
+    const newLoadingLinks = loadingLinks.filter(
+      (item) => item !== oldLink.sharedTo.id,
+    );
+    setLoadingLinks(newLoadingLinks);
+  };
+
+  const deleteLink = (id: string | number) => {
+    const newArr = fileLinks.filter(
+      (item) => "sharedTo" in item && item.sharedTo.id !== id,
+    );
+    setFileLinks(newArr);
+  };
+
+  const changeShareOption = async (item: TOption, link: TFileLink) => {
+    if (link.sharedTo.isExpired) {
+      link.sharedTo.expirationDate = moment().add(7, "days").toISOString();
+    }
+
+    try {
+      setLoadingLinks((val) => [...val, link.sharedTo.id]);
+
+      const res = await ShareLinkService.editLink(infoPanelSelection, {
+        ...link,
+        sharedTo: {
+          ...link.sharedTo,
+          internal: item.internal || false,
+        },
+      });
+
+      updateLink(link, res);
+      copyShareLink(infoPanelSelection, res, t);
+    } catch (e) {
+      toastr.error(e as TData);
+    }
+  };
+
+  const changeAccessOption = async (item: AccessItem, link: TFileLink) => {
+    const updateAccessLink = async () => {
+      setLoadingLinks([...loadingLinks, link.sharedTo.id]);
+
+      if (link.sharedTo.isExpired) {
+        link.sharedTo.expirationDate = moment().add(7, "days").toISOString();
+      }
+
+      try {
+        const res = await ShareLinkService.editLink(infoPanelSelection, {
+          ...link,
+          access: item.access!,
+        });
+
+        if (item.access === ShareAccessRights.None) {
+          deleteLink(link.sharedTo.id);
+          toastr.success(t("Common:LinkRemoved"));
+        } else {
+          updateLink(link, res);
+          if (item.access === ShareAccessRights.DenyAccess) {
+            toastr.success(t("Common:LinkAccessDenied"));
+          } else {
+            copyShareLink(infoPanelSelection, res, t);
+          }
+        }
+      } catch (e) {
+        toastr.error(e as TData);
+      }
+    };
+
+    if (item.access === ShareAccessRights.FormFilling && onOpenPanel) {
+      onOpenPanel({
+        visible: true,
+        updateAccessLink,
+        fileId: infoPanelSelection.id,
+      });
+      return;
+    }
+
+    updateAccessLink();
+  };
+
+  const removeLink = async (link: TFileLink, isReactivate: boolean = false) => {
+    try {
+      setLoadingLinks((val) => [...val, link.sharedTo.id]);
+
+      const newLink = await ShareLinkService.editLink(infoPanelSelection, {
+        ...link,
+        access: isReactivate ? link.access : ShareAccessRights.None,
+        sharedTo: {
+          ...link.sharedTo,
+          expirationDate: moment().add(7, "days").toISOString(),
+        },
+      });
+
+      if (link.canRevoke || isReactivate) {
+        setLoadingLinks((prev) => prev.filter((l) => l !== link.sharedTo.id));
+
+        if (newLink)
+          setFileLinks((links) =>
+            links.map((l) =>
+              "sharedTo" in l && l.sharedTo.id === link.sharedTo.id
+                ? newLink
+                : l,
+            ),
+          );
+        if (!isReactivate)
+          toastr.success(t("Common:GeneralLinkRevokedAndCreatedSuccessfully"));
+      } else {
+        deleteLink(link.sharedTo.id);
+        toastr.success(t("Common:LinkRemoved"));
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onCloseContextMenu = () => {
+    setIsScrollLocked?.(false);
+  };
+
+  const onOpenContextMenu = () => {
+    setIsScrollLocked?.(true);
+  };
+
+  const onEditLink = (link: TFileLink) => {
+    setEditLinkPanelIsVisible(true);
+    setLinkParams({
+      link,
+      item: infoPanelSelection,
+      updateLink: (newLink: TFileLink) => {
+        if (!mountedRef.current) return;
+        updateLink(link, newLink);
+      },
+    });
+    onCloseContextMenu();
+  };
+
+  const onEmbeddingClick = (link: TFileLink) => {
+    setLinkParams({ link, item: infoPanelSelection });
+    setEmbeddingPanelData?.({ visible: true, item: infoPanelSelection });
+  };
+
+  const changeExpirationOption = async (
+    link: TFileLink,
+    expirationDate: moment.Moment | null,
+  ) => {
+    try {
+      setLoadingLinks([...loadingLinks, link.sharedTo.id]);
+
+      const expDate = moment(expirationDate);
+
+      const res = await ShareLinkService.editLink(infoPanelSelection, {
+        ...link,
+        sharedTo: {
+          ...link.sharedTo,
+          expirationDate: expirationDate ? expDate.toISOString() : null,
+        },
+      });
+
+      updateLink(link, res);
+      copyShareLink(infoPanelSelection, res, t);
+    } catch (e) {
+      toastr.error(e as TData);
+    }
+  };
+
+  const onCopyLink = (link: TFileLink) => {
+    if (link.sharedTo?.isExpired) return;
+
+    copyShareLink(infoPanelSelection, link, t);
+  };
+
+  const getData = (link: TFileLink): ContextMenuModel[] => {
+    return [
+      {
+        key: "edit-link-key",
+        label: t("Common:LinkSettings"),
+        icon: SettingsReactSvgUrl,
+        onClick: () => onEditLink(link),
+      },
+      {
+        key: "copy-link-settings-key",
+        label: t("Common:CopySharedLink"),
+        icon: CopyToReactSvgUrl,
+        onClick: () => copyShareLink(infoPanelSelection, link, t),
+      },
+      {
+        key: "embedding-settings-key",
+        label: t("Common:Embed"),
+        icon: CodeReactSvgUrl,
+        onClick: () => onEmbeddingClick(link),
+        disabled: !infoPanelSelection.security.Embed,
+      },
+      {
+        key: "delete-link-separator",
+        isSeparator: true,
+      },
+      {
+        key: "delete-link-key",
+        label: link.canRevoke ? t("Common:RevokeLink") : t("Common:Delete"),
+        icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,
+        onClick: () => removeLink(link),
+      },
+    ];
+  };
+
+  const isEvenPrimaryLink = useMemo(
+    () => evenPrimaryLink(fileLinks as TFileLink[]),
+    [fileLinks],
+  );
+
+  const availableShareRights = infoPanelSelection?.availableShareRights;
+
+  const countCanCreateLink = Math.max(
+    0,
+    (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) +
+      (infoPanelSelection?.shareSettings?.PrimaryExternalLink ?? 0) -
+      1,
+  );
+
+  const canAddLink = (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
+
+  const getTextTooltip = () => {
+    return (
+      <Text fontSize="12px" noSelect>
+        {t("Common:MaximumNumberOfExternalLinksCreated")}
+      </Text>
+    );
+  };
+
+  const getLinkElements = () => {
+    const options =
+      fileLinks.length > 0 && !onlyOneLink && canAddLink ? (
+        <div data-tooltip-id="file-links-tooltip" data-tip="tooltip">
+          <IconButton
+            className={styles.linkToViewingIcon}
+            iconName={LinksToViewingIconUrl}
+            onClick={isEvenPrimaryLink ? addAdditionalLinks : addGeneralLink}
+            size={16}
+            isDisabled={fileLinks.length > countCanCreateLink}
+            dataTestId="info_panel_share_add_link_button"
+          />
+          {fileLinks.length > countCanCreateLink ? (
+            <Tooltip
+              float={isDesktop()}
+              id="file-links-tooltip"
+              getContent={getTextTooltip}
+              place="bottom"
+            />
+          ) : null}
+        </div>
+      ) : null;
+
+    const header = (
+      <ShareHeader
+        key="share-header"
+        title={t("Common:SharedLinks")}
+        options={options}
+        isShareTitle
+      />
+    );
+
+    if (fileLinks.length === 0) {
+      if (!canAddLink) return [];
+
+      return [
+        header,
+        <CreateButton
+          key="share-create-link"
+          onClick={addGeneralLink}
+          title={t("Common:CreateAndCopy")}
+        />,
+      ];
+    }
+    return [
+      header,
+      ...fileLinks.map((link) => (
+        <LinkRow
+          key={"key" in link ? link.key : link.sharedTo?.id?.toString()}
+          isShareLink
+          links={[link]}
+          getData={getData}
+          isFolder={isFolder}
+          onCopyLink={onCopyLink}
+          onAddClick={addGeneralLink}
+          loadingLinks={loadingLinks}
+          removedExpiredLink={removeLink}
+          changeShareOption={changeShareOption}
+          onOpenContextMenu={onOpenContextMenu}
+          changeAccessOption={changeAccessOption}
+          onCloseContextMenu={onCloseContextMenu}
+          changeExpirationOption={changeExpirationOption}
+          availableShareRights={availableShareRights}
+        />
+      )),
+    ];
+  };
+
+  return { getLinkElements };
 };

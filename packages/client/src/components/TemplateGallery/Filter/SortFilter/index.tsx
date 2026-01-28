@@ -32,7 +32,7 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import styles from "./SortFilter.module.scss";

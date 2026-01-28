@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 
 import { isMobile } from "@docspace/shared/utils";
 import { AccessRightSelect } from "@docspace/shared/components/access-right-select";
-import { TOption } from "@docspace/shared/components/combobox";
+import { TOption } from "@docspace/ui-kit/components/combobox";
 import { TTranslation } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";

@@ -36,7 +36,10 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "../../../../components/toast";
 import { HelpButton } from "../../../../components/help-button";
 import { Avatar, AvatarSize } from "@docspace/ui-kit/components/avatar";
-import { ComboBoxSize, type TOption } from "../../../../components/combobox";
+import {
+  ComboBoxSize,
+  type TOption,
+} from "@docspace/ui-kit/components/combobox";
 import { AccessRightSelect } from "../../../../components/access-right-select";
 import { getShareAccessRightOptions } from "../../../../components/share/Share.helpers";
 

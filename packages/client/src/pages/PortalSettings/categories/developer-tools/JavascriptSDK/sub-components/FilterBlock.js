@@ -39,7 +39,7 @@ import { Label } from "@docspace/ui-kit/components/label";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { Text } from "@docspace/ui-kit/components/text";

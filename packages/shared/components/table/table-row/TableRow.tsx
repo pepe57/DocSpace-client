@@ -28,7 +28,10 @@ import React, { useCallback, useRef } from "react";
 import classNames from "classnames";
 import equal from "fast-deep-equal";
 
-import { ContextMenu, ContextMenuRefType } from "../../context-menu";
+import {
+  ContextMenu,
+  ContextMenuRefType,
+} from "@docspace/ui-kit/components/context-menu";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,

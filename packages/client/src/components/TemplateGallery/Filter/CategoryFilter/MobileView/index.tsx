@@ -30,7 +30,7 @@ import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { ComboButton } from "@docspace/shared/components/combobox/sub-components/ComboButton";
+import { ComboButton } from "@docspace/ui-kit";
 import classNames from "classnames";
 import styles from "./MobileView.module.scss";
 import type {

@@ -30,7 +30,7 @@ import { TFunction } from "i18next";
 
 import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import { Text } from "@docspace/ui-kit/components/text";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
+import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
 import { WatermarkAdditions } from "@docspace/shared/enums";
 import { TabItem } from "@docspace/ui-kit/components/tab-item";
 import { TWatermark } from "@docspace/shared/api/rooms/types";
@@ -39,283 +39,283 @@ import { TRoomParams } from "@docspace/shared/utils/rooms";
 import { StyledWatermark } from "./StyledComponent";
 
 const tabsOptions = (t: TFunction) => [
-	{
-		id: "UserName",
-		name: t("UserName"),
-		index: 0,
-		content: null,
-	},
-	{
-		id: "UserEmail",
-		name: t("UserEmail"),
-		index: 1,
-		content: null,
-	},
-	{
-		id: "UserIpAdress",
-		name: t("UserIPAddress"),
-		index: 2,
-		content: null,
-	},
-	{
-		id: "CurrentDate",
-		name: t("Common:CurrentDate"),
-		index: 3,
-		content: null,
-	},
-	{
-		id: "RoomName",
-		name: t("Common:RoomName"),
-		index: 4,
-		content: null,
-	},
+  {
+    id: "UserName",
+    name: t("UserName"),
+    index: 0,
+    content: null,
+  },
+  {
+    id: "UserEmail",
+    name: t("UserEmail"),
+    index: 1,
+    content: null,
+  },
+  {
+    id: "UserIpAdress",
+    name: t("UserIPAddress"),
+    index: 2,
+    content: null,
+  },
+  {
+    id: "CurrentDate",
+    name: t("Common:CurrentDate"),
+    index: 3,
+    content: null,
+  },
+  {
+    id: "RoomName",
+    name: t("Common:RoomName"),
+    index: 4,
+    content: null,
+  },
 ];
 
 const getInitialState = (initialTab: { id: string }[]) => {
-	const state = {
-		UserName: false,
-		UserEmail: false,
-		UserIpAdress: false,
-		CurrentDate: false,
-		RoomName: false,
-	};
+  const state = {
+    UserName: false,
+    UserEmail: false,
+    UserIpAdress: false,
+    CurrentDate: false,
+    RoomName: false,
+  };
 
-	initialTab.forEach((item) => {
-		state[item.id as keyof typeof state] = true;
-	});
+  initialTab.forEach((item) => {
+    state[item.id as keyof typeof state] = true;
+  });
 
-	return state;
+  return state;
 };
 
 const getInitialText = (text: string, isEdit: boolean) => {
-	return isEdit && text ? text : "";
+  return isEdit && text ? text : "";
 };
 
 const getTabsInfo = (
-	additions: number,
-	t: TFunction,
-	tabs?: { id: string; index: number }[],
+  additions: number,
+  t: TFunction,
+  tabs?: { id: string; index: number }[],
 ) => {
-	const dataTabs = tabs ?? tabsOptions(t);
+  const dataTabs = tabs ?? tabsOptions(t);
 
-	return dataTabs.filter(
-		(item) =>
-			additions &
-			WatermarkAdditions[item.id as keyof typeof WatermarkAdditions],
-	);
+  return dataTabs.filter(
+    (item) =>
+      additions &
+      WatermarkAdditions[item.id as keyof typeof WatermarkAdditions],
+  );
 };
 
 const getInitialTabs = (additions: number, isEdit: boolean, t: TFunction) => {
-	const dataTabs = tabsOptions(t);
+  const dataTabs = tabsOptions(t);
 
-	if (!isEdit || !additions) return [dataTabs[0]];
+  if (!isEdit || !additions) return [dataTabs[0]];
 
-	return getTabsInfo(additions, t, dataTabs);
+  return getTabsInfo(additions, t, dataTabs);
 };
 
 const rotateOptions = (t: TFunction) => [
-	{
-		key: -45,
-		label: t("Diagonal"),
-		dataTestId: "virtual_data_room_watermark_position_diagonal",
-	},
-	{
-		key: 0,
-		label: t("Horizontal"),
-		dataTestId: "virtual_data_room_watermark_position_horizontal",
-	},
+  {
+    key: -45,
+    label: t("Diagonal"),
+    dataTestId: "virtual_data_room_watermark_position_diagonal",
+  },
+  {
+    key: 0,
+    label: t("Horizontal"),
+    dataTestId: "virtual_data_room_watermark_position_horizontal",
+  },
 ];
 
 const getInitialRotate = (
-	rotate: number,
-	isEdit: boolean,
-	isImage: boolean,
-	t: TFunction,
+  rotate: number,
+  isEdit: boolean,
+  isImage: boolean,
+  t: TFunction,
 ) => {
-	const dataRotate = rotateOptions(t);
+  const dataRotate = rotateOptions(t);
 
-	if (!isEdit || (isEdit && isImage)) return dataRotate[0];
+  if (!isEdit || (isEdit && isImage)) return dataRotate[0];
 
-	const item = dataRotate.find((elm) => {
-		return elm.key === rotate;
-	});
+  const item = dataRotate.find((elm) => {
+    return elm.key === rotate;
+  });
 
-	return !item ? dataRotate[0] : item;
+  return !item ? dataRotate[0] : item;
 };
 
 type ViewerInfoWatermarkProps = {
-	isEdit: boolean;
-	setRoomParams: (params: TRoomParams) => void;
-	roomParams: TRoomParams;
-	isImage: boolean;
-	initialSettings: TWatermark;
+  isEdit: boolean;
+  setRoomParams: (params: TRoomParams) => void;
+  roomParams: TRoomParams;
+  isImage: boolean;
+  initialSettings: TWatermark;
 };
 
 const ViewerInfoWatermark = ({
-	isEdit,
+  isEdit,
 
-	setRoomParams,
-	roomParams,
-	isImage,
-	initialSettings,
+  setRoomParams,
+  roomParams,
+  isImage,
+  initialSettings,
 }: ViewerInfoWatermarkProps) => {
-	const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
+  const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
-	const elements = useRef<ReturnType<typeof getInitialState> | null>(null);
-	const initialInfo = useRef<{
-		dataRotate: { key: number; label: string }[];
-		dataTabs: { id: string; name: string; index: number; content: null }[];
-		tabs: { id: string; index: number }[];
-		rotate: { key: number; label: string };
-		text: string;
-	} | null>(null);
-	let watermark = roomParams.watermark;
+  const elements = useRef<ReturnType<typeof getInitialState> | null>(null);
+  const initialInfo = useRef<{
+    dataRotate: { key: number; label: string }[];
+    dataTabs: { id: string; name: string; index: number; content: null }[];
+    tabs: { id: string; index: number }[];
+    rotate: { key: number; label: string };
+    text: string;
+  } | null>(null);
+  let watermark = roomParams.watermark;
 
-	if (initialInfo.current === null) {
-		initialInfo.current = {
-			dataRotate: rotateOptions(t),
-			dataTabs: tabsOptions(t),
-			tabs: getInitialTabs(initialSettings?.additions, isEdit, t),
-			rotate: getInitialRotate(initialSettings?.rotate, isEdit, isImage, t),
-			text: getInitialText(initialSettings?.text!, isEdit),
-		};
+  if (initialInfo.current === null) {
+    initialInfo.current = {
+      dataRotate: rotateOptions(t),
+      dataTabs: tabsOptions(t),
+      tabs: getInitialTabs(initialSettings?.additions, isEdit, t),
+      rotate: getInitialRotate(initialSettings?.rotate, isEdit, isImage, t),
+      text: getInitialText(initialSettings?.text!, isEdit),
+    };
 
-		elements.current = getInitialState(initialInfo.current.tabs);
+    elements.current = getInitialState(initialInfo.current.tabs);
 
-		if (!isImage && initialSettings) watermark = initialSettings;
-		else
-			watermark = {
-				rotate: initialInfo.current.rotate.key,
-				additions:
-					roomParams.watermark?.additions || WatermarkAdditions.UserName,
-				// image: "",
-				imageWidth: 0,
-				imageHeight: 0,
-				imageScale: 0,
-				...(initialInfo.current.text && {
-					text: initialInfo.current.text,
-				}),
-			};
-	}
+    if (!isImage && initialSettings) watermark = initialSettings;
+    else
+      watermark = {
+        rotate: initialInfo.current.rotate.key,
+        additions:
+          roomParams.watermark?.additions || WatermarkAdditions.UserName,
+        // image: "",
+        imageWidth: 0,
+        imageHeight: 0,
+        imageScale: 0,
+        ...(initialInfo.current.text && {
+          text: initialInfo.current.text,
+        }),
+      };
+  }
 
-	const initialInfoRef = initialInfo.current;
-	const [selectedPosition, setSelectedPosition] = useState(
-		initialInfoRef.rotate,
-	);
-	const [textValue, setTextValue] = useState(initialInfoRef.text);
+  const initialInfoRef = initialInfo.current;
+  const [selectedPosition, setSelectedPosition] = useState(
+    initialInfoRef.rotate,
+  );
+  const [textValue, setTextValue] = useState(initialInfoRef.text);
 
-	useEffect(() => {
-		setRoomParams({
-			...roomParams,
-			watermark,
-		});
-	}, []);
+  useEffect(() => {
+    setRoomParams({
+      ...roomParams,
+      watermark,
+    });
+  }, []);
 
-	const onSelect = (e: React.MouseEvent<HTMLDivElement>) => {
-		const itemKey = e.currentTarget.dataset.key;
-		const elementsData = elements.current;
-		if (!itemKey || !elementsData) return;
+  const onSelect = (e: React.MouseEvent<HTMLDivElement>) => {
+    const itemKey = e.currentTarget.dataset.key;
+    const elementsData = elements.current;
+    if (!itemKey || !elementsData) return;
 
-		elementsData[itemKey as keyof typeof elementsData] =
-			!elementsData[itemKey as keyof typeof elementsData];
+    elementsData[itemKey as keyof typeof elementsData] =
+      !elementsData[itemKey as keyof typeof elementsData];
 
-		let flagsCount = 0;
+    let flagsCount = 0;
 
-		Object.keys(elementsData).forEach((k) => {
-			const value = elementsData[k as keyof typeof elementsData];
+    Object.keys(elementsData).forEach((k) => {
+      const value = elementsData[k as keyof typeof elementsData];
 
-			if (value) {
-				flagsCount += WatermarkAdditions[k as keyof typeof WatermarkAdditions];
-			}
-		});
+      if (value) {
+        flagsCount += WatermarkAdditions[k as keyof typeof WatermarkAdditions];
+      }
+    });
 
-		setRoomParams({
-			...roomParams,
-			watermark: { ...watermark!, additions: flagsCount },
-		});
+    setRoomParams({
+      ...roomParams,
+      watermark: { ...watermark!, additions: flagsCount },
+    });
 
-		const tabs = getTabsInfo(flagsCount, t);
-		elements.current = getInitialState(tabs);
-	};
+    const tabs = getTabsInfo(flagsCount, t);
+    elements.current = getInitialState(tabs);
+  };
 
-	const onPositionChange = (item: TOption) => {
-		setSelectedPosition(item as { key: number; label: string });
+  const onPositionChange = (item: TOption) => {
+    setSelectedPosition(item as { key: number; label: string });
 
-		setRoomParams({
-			...roomParams,
-			watermark: { ...watermark!, rotate: item.key as number },
-		});
-	};
+    setRoomParams({
+      ...roomParams,
+      watermark: { ...watermark!, rotate: item.key as number },
+    });
+  };
 
-	const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { value } = e.target;
-		setTextValue(value);
+  const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setTextValue(value);
 
-		setRoomParams({
-			...roomParams,
-			watermark: { ...watermark!, text: value },
-		});
-	};
+    setRoomParams({
+      ...roomParams,
+      watermark: { ...watermark!, text: value },
+    });
+  };
 
-	const lockLastSelection =
-		Object.values(elements.current ?? {}).filter((v) => v === true).length ===
-		1;
+  const lockLastSelection =
+    Object.values(elements.current ?? {}).filter((v) => v === true).length ===
+    1;
 
-	return (
-		<StyledWatermark>
-			<Text className="watermark-title" fontWeight={600} lineHeight="20px">
-				{t("AddWatermarkElements")}
-			</Text>
+  return (
+    <StyledWatermark>
+      <Text className="watermark-title" fontWeight={600} lineHeight="20px">
+        {t("AddWatermarkElements")}
+      </Text>
 
-			<div className="watermark-tab_items">
-				{initialInfoRef.dataTabs.map((item) => {
-					const isActive =
-						initialInfoRef.tabs.findIndex((i) => i.index === item.index) > -1;
+      <div className="watermark-tab_items">
+        {initialInfoRef.dataTabs.map((item) => {
+          const isActive =
+            initialInfoRef.tabs.findIndex((i) => i.index === item.index) > -1;
 
-					return (
-						<TabItem
-							key={item.id}
-							data-key={item.id}
-							label={item.name}
-							isActive={isActive}
-							lockLastSelection={lockLastSelection}
-							onSelect={onSelect}
-							withMultiSelect
-							dataTestId={`virtual_data_room_watermark_tab_${item.id.toLowerCase()}`}
-						/>
-					);
-				})}
-			</div>
+          return (
+            <TabItem
+              key={item.id}
+              data-key={item.id}
+              label={item.name}
+              isActive={isActive}
+              lockLastSelection={lockLastSelection}
+              onSelect={onSelect}
+              withMultiSelect
+              dataTestId={`virtual_data_room_watermark_tab_${item.id.toLowerCase()}`}
+            />
+          );
+        })}
+      </div>
 
-			<Text
-				className="watermark-title title-without-top"
-				fontWeight={600}
-				lineHeight="20px"
-			>
-				{t("AddStaticText")}
-			</Text>
-			<TextInput
-				scale
-				value={textValue}
-				tabIndex={1}
-				onChange={onTextChange}
-				type={InputType.text}
-				testId="virtual_data_room_watermark_text_input"
-			/>
+      <Text
+        className="watermark-title title-without-top"
+        fontWeight={600}
+        lineHeight="20px"
+      >
+        {t("AddStaticText")}
+      </Text>
+      <TextInput
+        scale
+        value={textValue}
+        tabIndex={1}
+        onChange={onTextChange}
+        type={InputType.text}
+        testId="virtual_data_room_watermark_text_input"
+      />
 
-			<Text className="watermark-title" fontWeight={600} lineHeight="20px">
-				{t("Position")}
-			</Text>
-			<ComboBox
-				selectedOption={selectedPosition}
-				options={initialInfoRef?.dataRotate as TOption[]}
-				onSelect={onPositionChange}
-				scaled
-				scaledOptions
-				dataTestId="virtual_data_room_watermark_position_combobox"
-			/>
-		</StyledWatermark>
-	);
+      <Text className="watermark-title" fontWeight={600} lineHeight="20px">
+        {t("Position")}
+      </Text>
+      <ComboBox
+        selectedOption={selectedPosition}
+        options={initialInfoRef?.dataRotate as TOption[]}
+        onSelect={onPositionChange}
+        scaled
+        scaledOptions
+        dataTestId="virtual_data_room_watermark_position_combobox"
+      />
+    </StyledWatermark>
+  );
 };
 
 export default ViewerInfoWatermark;

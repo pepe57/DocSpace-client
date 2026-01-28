@@ -46,7 +46,7 @@ import LinkRowComponent from "@docspace/shared/components/share/sub-components/L
 
 import type { TFileLink } from "@docspace/shared/api/files/types";
 
-import type { TOption } from "@docspace/shared/components/combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 
 import { LinkRowProps } from "../Members.types";
 

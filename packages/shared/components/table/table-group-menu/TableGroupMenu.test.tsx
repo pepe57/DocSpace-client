@@ -68,7 +68,7 @@ const defaultProps = {
   withComboBox: true,
 };
 
-vi.mock("../../combobox", () => ({
+vi.mock("@docspace/ui-kit/components/combobox", () => ({
   ComboBox: ({ title }: { title: string }) => (
     <div data-testid="combobox" title={title}>
       Mocked ComboBox

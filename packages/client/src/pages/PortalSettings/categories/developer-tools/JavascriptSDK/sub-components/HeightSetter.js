@@ -28,63 +28,63 @@ import { useState, useCallback } from "react";
 import debounce from "lodash.debounce";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Label } from "@docspace/ui-kit/components/label";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 
 import { ControlsGroup, RowContainer } from "../presets/StyledPresets";
 
 export const HeightSetter = (props) => {
-	const { t, setConfig, dataDimensions, defaultDimension, defaultHeight } =
-		props;
+  const { t, setConfig, dataDimensions, defaultDimension, defaultHeight } =
+    props;
 
-	const [heightDimension, setHeightDimension] = useState(defaultDimension);
-	const [height, setHeight] = useState(defaultHeight);
+  const [heightDimension, setHeightDimension] = useState(defaultDimension);
+  const [height, setHeight] = useState(defaultHeight);
 
-	const debouncedSetConfig = useCallback(
-		debounce((value, dimension) => {
-			setConfig((config) => {
-				return { ...config, height: `${value}${dimension}` };
-			});
-		}, 500),
-		[setConfig],
-	);
+  const debouncedSetConfig = useCallback(
+    debounce((value, dimension) => {
+      setConfig((config) => {
+        return { ...config, height: `${value}${dimension}` };
+      });
+    }, 500),
+    [setConfig],
+  );
 
-	const onChangeHeight = (e) => {
-		setHeight(e.target.value);
-		debouncedSetConfig(e.target.value, heightDimension.label);
-	};
+  const onChangeHeight = (e) => {
+    setHeight(e.target.value);
+    debouncedSetConfig(e.target.value, heightDimension.label);
+  };
 
-	const onChangeHeightDimension = (item) => {
-		setConfig((config) => {
-			return { ...config, height: `${height}${item.label}` };
-		});
+  const onChangeHeightDimension = (item) => {
+    setConfig((config) => {
+      return { ...config, height: `${height}${item.label}` };
+    });
 
-		setHeightDimension(item);
-	};
+    setHeightDimension(item);
+  };
 
-	return (
-		<ControlsGroup>
-			<Label className="label" text={t("EmbeddingPanel:Height")} />
-			<RowContainer combo>
-				<TextInput
-					onChange={onChangeHeight}
-					placeholder={t("EnterHeight")}
-					value={height}
-					tabIndex={3}
-					testId="height_dimension_input"
-				/>
-				<ComboBox
-					size="content"
-					scaled={false}
-					scaledOptions
-					onSelect={onChangeHeightDimension}
-					options={dataDimensions}
-					selectedOption={heightDimension}
-					displaySelectedOption
-					directionY="bottom"
-					dataTestId="height_dimension_combobox"
-					dropDownTestId="height_dimension_dropdown"
-				/>
-			</RowContainer>
-		</ControlsGroup>
-	);
+  return (
+    <ControlsGroup>
+      <Label className="label" text={t("EmbeddingPanel:Height")} />
+      <RowContainer combo>
+        <TextInput
+          onChange={onChangeHeight}
+          placeholder={t("EnterHeight")}
+          value={height}
+          tabIndex={3}
+          testId="height_dimension_input"
+        />
+        <ComboBox
+          size="content"
+          scaled={false}
+          scaledOptions
+          onSelect={onChangeHeightDimension}
+          options={dataDimensions}
+          selectedOption={heightDimension}
+          displaySelectedOption
+          directionY="bottom"
+          dataTestId="height_dimension_combobox"
+          dropDownTestId="height_dimension_dropdown"
+        />
+      </RowContainer>
+    </ControlsGroup>
+  );
 };

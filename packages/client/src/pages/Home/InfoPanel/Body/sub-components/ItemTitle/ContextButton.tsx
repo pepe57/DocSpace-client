@@ -35,8 +35,8 @@ import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import {
   ContextMenu,
   ContextMenuRefType,
-} from "@docspace/shared/components/context-menu";
-import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
+  HeaderType,
+} from "@docspace/ui-kit";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,

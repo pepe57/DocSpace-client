@@ -43,7 +43,7 @@ import {
   getParts,
   isBetaLanguage,
 } from "@docspace/shared/utils";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";

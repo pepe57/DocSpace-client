@@ -34,7 +34,7 @@ import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "../../components/toast";
-import type { TContextMenuValueTypeOnClick } from "../../components/context-menu/ContextMenu.types";
+import type { TContextMenuValueTypeOnClick } from "@docspace/ui-kit/components/context-menu";
 
 import { DownloadContent } from "./sub-components/DownloadContent";
 import { PasswordContent } from "./sub-components/PasswordContent";

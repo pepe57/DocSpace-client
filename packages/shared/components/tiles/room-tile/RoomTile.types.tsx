@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TFunction } from "i18next";
-import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import { TagType } from "../../tags/Tags.types";
 import { TileItem } from "../tile-container/TileContainer.types";
 

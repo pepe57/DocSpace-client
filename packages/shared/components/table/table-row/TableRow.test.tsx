@@ -46,7 +46,7 @@ const contextOptions = [
 
 const mockFileContextClick = vi.fn();
 
-vi.mock("../../context-menu", () => ({
+vi.mock("@docspace/ui-kit/components/context-menu", () => ({
   __esModule: true,
   ContextMenu: () => <div />,
 }));

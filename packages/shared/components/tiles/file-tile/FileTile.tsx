@@ -29,11 +29,14 @@ import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
-	ContextMenuButton,
-	ContextMenuButtonDisplayType,
+  ContextMenuButton,
+  ContextMenuButtonDisplayType,
 } from "../../context-menu-button";
-import { ContextMenu, ContextMenuRefType } from "../../context-menu";
-import { HeaderType } from "../../context-menu/ContextMenu.types";
+import {
+  ContextMenu,
+  ContextMenuRefType,
+} from "@docspace/ui-kit/components/context-menu";
+import { HeaderType } from "@docspace/ui-kit/components/context-menu";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { hasOwnProperty } from "../../../utils/object";
@@ -46,341 +49,341 @@ import styles from "./FileTile.module.scss";
 const svgLoader = () => <div style={{ width: "96px" }} />;
 
 const FileTile = ({
-	checked,
-	children,
-	contextOptions,
-	contentElement,
-	inProgress,
-	item,
-	element,
-	onSelect,
-	setSelection,
-	temporaryIcon,
-	thumbnail,
-	thumbSize,
-	isHighlight,
-	isBlockingOperation,
-	showHotkeyBorder,
-	isDragging,
-	isActive,
-	thumbnailClick,
-	withCtrlSelect,
-	withShiftSelect,
-	tileContextClick,
-	getContextModel,
-	hideContextMenu,
-	badges,
-	isEdit,
-	forwardRef,
-	dataTestId,
-	...rest
+  checked,
+  children,
+  contextOptions,
+  contentElement,
+  inProgress,
+  item,
+  element,
+  onSelect,
+  setSelection,
+  temporaryIcon,
+  thumbnail,
+  thumbSize,
+  isHighlight,
+  isBlockingOperation,
+  showHotkeyBorder,
+  isDragging,
+  isActive,
+  thumbnailClick,
+  withCtrlSelect,
+  withShiftSelect,
+  tileContextClick,
+  getContextModel,
+  hideContextMenu,
+  badges,
+  isEdit,
+  forwardRef,
+  dataTestId,
+  ...rest
 }: FileTileProps) => {
-	const childrenArray = React.Children.toArray(children);
-	const [FilesTileContent] = childrenArray;
+  const childrenArray = React.Children.toArray(children);
+  const [FilesTileContent] = childrenArray;
 
-	const { t } = useTranslation(["Translations"]);
+  const { t } = useTranslation(["Translations"]);
 
-	const [errorLoadSrc, setErrorLoadSrc] = useState(false);
-	const [isHovered, setIsHovered] = useState(false);
+  const [errorLoadSrc, setErrorLoadSrc] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-	const cm = useRef<ContextMenuRefType>(null);
+  const cm = useRef<ContextMenuRefType>(null);
 
-	const onHover = () => {
-		setIsHovered(true);
-	};
+  const onHover = () => {
+    setIsHovered(true);
+  };
 
-	const onLeave = () => {
-		setIsHovered(false);
-	};
+  const onLeave = () => {
+    setIsHovered(false);
+  };
 
-	const renderContext =
-		hasOwnProperty(item, "contextOptions") &&
-		contextOptions &&
-		contextOptions.length > 0;
+  const renderContext =
+    hasOwnProperty(item, "contextOptions") &&
+    contextOptions &&
+    contextOptions.length > 0;
 
-	const firstChild = childrenArray[0] as React.ReactElement<FileChildProps>;
-	const contextMenuHeader: HeaderType | undefined =
-		React.isValidElement(firstChild) && firstChild.props?.item
-			? {
-					title: firstChild.props.item.title || "",
-					icon: firstChild.props.item.icon,
-					original: firstChild.props.item.logo?.original || "",
-					large: firstChild.props.item.logo?.large || "",
-					medium: firstChild.props.item.logo?.medium || "",
-					small: firstChild.props.item.logo?.small || "",
-					color: firstChild.props.item.logo?.color,
-					cover: firstChild.props.item.logo?.cover
-						? typeof firstChild.props.item.logo.cover === "string"
-							? {
-									data: firstChild.props.item.logo.cover,
-									id: "",
-								}
-							: firstChild.props.item.logo.cover
-						: undefined,
-				}
-			: undefined;
+  const firstChild = childrenArray[0] as React.ReactElement<FileChildProps>;
+  const contextMenuHeader: HeaderType | undefined =
+    React.isValidElement(firstChild) && firstChild.props?.item
+      ? {
+          title: firstChild.props.item.title || "",
+          icon: firstChild.props.item.icon,
+          original: firstChild.props.item.logo?.original || "",
+          large: firstChild.props.item.logo?.large || "",
+          medium: firstChild.props.item.logo?.medium || "",
+          small: firstChild.props.item.logo?.small || "",
+          color: firstChild.props.item.logo?.color,
+          cover: firstChild.props.item.logo?.cover
+            ? typeof firstChild.props.item.logo.cover === "string"
+              ? {
+                  data: firstChild.props.item.logo.cover,
+                  id: "",
+                }
+              : firstChild.props.item.logo.cover
+            : undefined,
+        }
+      : undefined;
 
-	const getOptions = () => {
-		if (tileContextClick) {
-			tileContextClick();
-		}
-		return contextOptions;
-	};
+  const getOptions = () => {
+    if (tileContextClick) {
+      tileContextClick();
+    }
+    return contextOptions;
+  };
 
-	const onContextMenu = (e: React.MouseEvent) => {
-		e.stopPropagation();
+  const onContextMenu = (e: React.MouseEvent) => {
+    e.stopPropagation();
 
-		if (tileContextClick) {
-			tileContextClick(e.button === 2);
-		}
+    if (tileContextClick) {
+      tileContextClick(e.button === 2);
+    }
 
-		if (!cm.current?.menuRef.current && forwardRef?.current) {
-			forwardRef.current.click();
-		}
+    if (!cm.current?.menuRef.current && forwardRef?.current) {
+      forwardRef.current.click();
+    }
 
-		if (getContextModel && cm.current) {
-			cm.current.show(e);
-		}
-	};
+    if (getContextModel && cm.current) {
+      cm.current.show(e);
+    }
+  };
 
-	const onError = () => {
-		setErrorLoadSrc(true);
-	};
+  const onError = () => {
+    setErrorLoadSrc(true);
+  };
 
-	const getIconFile = () => {
-		const icon = item.isPlugin
-			? item.fileTileIcon
-			: thumbnail && !errorLoadSrc
-				? thumbnail
-				: temporaryIcon;
+  const getIconFile = () => {
+    const icon = item.isPlugin
+      ? item.fileTileIcon
+      : thumbnail && !errorLoadSrc
+        ? thumbnail
+        : temporaryIcon;
 
-		return (
-			<Link type={LinkType.page}>
-				{thumbnail && !errorLoadSrc ? (
-					thumbSize !== null ? (
-						<img
-							src={thumbnail}
-							className={styles.thumbnailImage}
-							alt="Thumbnail-img"
-							onError={onError}
-							data-testid="file-thumbnail"
-						/>
-					) : (
-						<ReactSVG
-							className={styles.temporaryIcon}
-							src=""
-							loading={svgLoader}
-							data-testid="file-thumbnail"
-						/>
-					)
-				) : (
-					<ReactSVG
-						className={styles.temporaryIcon}
-						src={icon ?? ""}
-						loading={svgLoader}
-						data-testid="file-thumbnail"
-					/>
-				)}
-			</Link>
-		);
-	};
+    return (
+      <Link type={LinkType.page}>
+        {thumbnail && !errorLoadSrc ? (
+          thumbSize !== null ? (
+            <img
+              src={thumbnail}
+              className={styles.thumbnailImage}
+              alt="Thumbnail-img"
+              onError={onError}
+              data-testid="file-thumbnail"
+            />
+          ) : (
+            <ReactSVG
+              className={styles.temporaryIcon}
+              src=""
+              loading={svgLoader}
+              data-testid="file-thumbnail"
+            />
+          )
+        ) : (
+          <ReactSVG
+            className={styles.temporaryIcon}
+            src={icon ?? ""}
+            loading={svgLoader}
+            data-testid="file-thumbnail"
+          />
+        )}
+      </Link>
+    );
+  };
 
-	const icon = getIconFile();
+  const icon = getIconFile();
 
-	const onFileClick = (e: React.MouseEvent) => {
-		if (e.ctrlKey || e.metaKey) {
-			if (withCtrlSelect) {
-				withCtrlSelect(item);
-			}
-			e.preventDefault();
-			return;
-		}
+  const onFileClick = (e: React.MouseEvent) => {
+    if (e.ctrlKey || e.metaKey) {
+      if (withCtrlSelect) {
+        withCtrlSelect(item);
+      }
+      e.preventDefault();
+      return;
+    }
 
-		if (e.shiftKey) {
-			if (withShiftSelect) {
-				withShiftSelect(item);
-			}
-			e.preventDefault();
-			return;
-		}
+    if (e.shiftKey) {
+      if (withShiftSelect) {
+        withShiftSelect(item);
+      }
+      e.preventDefault();
+      return;
+    }
 
-		if (
-			e.detail === 1 &&
-			!(e.target as HTMLElement).closest(".badges") &&
-			!(e.target as HTMLElement).closest(".item-file-name") &&
-			!(e.target as HTMLElement).closest(".tag") &&
-			!(e.target as HTMLElement).closest(`.${styles.checkbox}`) &&
-			!(e.target as HTMLElement).closest(".not-selectable") &&
-			!(e.target as HTMLElement).closest(".expandButton") &&
-			!(e.target as HTMLElement).closest(".p-contextmenu")
-		) {
-			if (
-				(e.target as HTMLElement).nodeName !== "IMG" &&
-				(e.target as HTMLElement).nodeName !== "INPUT" &&
-				(e.target as HTMLElement).nodeName !== "rect" &&
-				(e.target as HTMLElement).nodeName !== "path" &&
-				(e.target as HTMLElement).nodeName !== "svg"
-			) {
-				if (setSelection) {
-					setSelection([]);
-				}
-			}
+    if (
+      e.detail === 1 &&
+      !(e.target as HTMLElement).closest(".badges") &&
+      !(e.target as HTMLElement).closest(".item-file-name") &&
+      !(e.target as HTMLElement).closest(".tag") &&
+      !(e.target as HTMLElement).closest(`.${styles.checkbox}`) &&
+      !(e.target as HTMLElement).closest(".not-selectable") &&
+      !(e.target as HTMLElement).closest(".expandButton") &&
+      !(e.target as HTMLElement).closest(".p-contextmenu")
+    ) {
+      if (
+        (e.target as HTMLElement).nodeName !== "IMG" &&
+        (e.target as HTMLElement).nodeName !== "INPUT" &&
+        (e.target as HTMLElement).nodeName !== "rect" &&
+        (e.target as HTMLElement).nodeName !== "path" &&
+        (e.target as HTMLElement).nodeName !== "svg"
+      ) {
+        if (setSelection) {
+          setSelection([]);
+        }
+      }
 
-			if (onSelect) {
-				onSelect(!checked, item);
-			}
-		}
-	};
+      if (onSelect) {
+        onSelect(!checked, item);
+      }
+    }
+  };
 
-	const onFileIconClick = () => {
-		if (!isMobile()) return;
+  const onFileIconClick = () => {
+    if (!isMobile()) return;
 
-		if (onSelect) {
-			onSelect(true, item);
-		}
-	};
+    if (onSelect) {
+      onSelect(true, item);
+    }
+  };
 
-	const onCheckboxClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (onSelect) {
-			onSelect(e.target.checked, item);
-		}
-	};
+  const onCheckboxClick = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onSelect) {
+      onSelect(e.target.checked, item);
+    }
+  };
 
-	const isImageOrMedia =
-		item?.viewAccessibility?.ImageView || item?.viewAccessibility?.MediaView;
+  const isImageOrMedia =
+    item?.viewAccessibility?.ImageView || item?.viewAccessibility?.MediaView;
 
-	const isTouchDevice =
-		"ontouchstart" in window || navigator.maxTouchPoints > 0;
+  const isTouchDevice =
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-	const fileTileClassNames = classNames(styles.fileTile, {
-		[styles.isBlocked]: isBlockingOperation,
-		[styles.showHotkeyBorder]: showHotkeyBorder,
-		[styles.isDragging]: isDragging,
-		[styles.isActive]: isActive,
-		[styles.checked]: checked,
-		[styles.isEdit]: isEdit,
-		[styles.isTouchDevice]: isTouchDevice || isMobile() || isTablet(),
-	});
+  const fileTileClassNames = classNames(styles.fileTile, {
+    [styles.isBlocked]: isBlockingOperation,
+    [styles.showHotkeyBorder]: showHotkeyBorder,
+    [styles.isDragging]: isDragging,
+    [styles.isActive]: isActive,
+    [styles.checked]: checked,
+    [styles.isEdit]: isEdit,
+    [styles.isTouchDevice]: isTouchDevice || isMobile() || isTablet(),
+  });
 
-	const iconClassNames = classNames(styles.icon, {
-		[styles.checked]: checked,
-	});
+  const iconClassNames = classNames(styles.icon, {
+    [styles.checked]: checked,
+  });
 
-	const iconContainerClassNames = classNames(styles.iconContainer, {
-		[styles.isDragging]: isDragging,
-		[styles.inProgress]: inProgress,
-		[styles.checked]: checked,
-	});
+  const iconContainerClassNames = classNames(styles.iconContainer, {
+    [styles.isDragging]: isDragging,
+    [styles.inProgress]: inProgress,
+    [styles.checked]: checked,
+  });
 
-	const checkboxClassNames = classNames(styles.checkbox, {
-		[styles.checked]: checked,
-	});
+  const checkboxClassNames = classNames(styles.checkbox, {
+    [styles.checked]: checked,
+  });
 
-	const fileTileTopClassNames = classNames(styles.fileTileTop, {
-		[styles.isImageOrMedia]: isImageOrMedia,
-	});
+  const fileTileTopClassNames = classNames(styles.fileTileTop, {
+    [styles.isImageOrMedia]: isImageOrMedia,
+  });
 
-	const fileTileBottomClassNames = classNames(styles.fileTileBottom, {
-		[styles.isHighlight]: isHighlight,
-	});
+  const fileTileBottomClassNames = classNames(styles.fileTileBottom, {
+    [styles.isHighlight]: isHighlight,
+  });
 
-	const contentClassNames = classNames(styles.content, "content", {
-		[styles.isHovered]: isHovered,
-	});
+  const contentClassNames = classNames(styles.content, "content", {
+    [styles.isHovered]: isHovered,
+  });
 
-	return (
-		<div
-			{...rest}
-			ref={forwardRef}
-			className={fileTileClassNames}
-			onContextMenu={onContextMenu}
-			onClick={onFileClick}
-			data-testid={dataTestId ?? "tile"}
-		>
-			<div className={fileTileTopClassNames} onClick={thumbnailClick}>
-				{icon}
-			</div>
+  return (
+    <div
+      {...rest}
+      ref={forwardRef}
+      className={fileTileClassNames}
+      onContextMenu={onContextMenu}
+      onClick={onFileClick}
+      data-testid={dataTestId ?? "tile"}
+    >
+      <div className={fileTileTopClassNames} onClick={thumbnailClick}>
+        {icon}
+      </div>
 
-			{contentElement ? (
-				<div
-					className={classNames(styles.icons, styles.isQuickButtons)}
-					onMouseEnter={onHover}
-					onMouseLeave={onLeave}
-				>
-					{contentElement}
-				</div>
-			) : null}
-			<div
-				className={classNames(styles.icons, styles.isBadges)}
-				onMouseEnter={onHover}
-				onMouseLeave={onLeave}
-			>
-				{badges}
-			</div>
+      {contentElement ? (
+        <div
+          className={classNames(styles.icons, styles.isQuickButtons)}
+          onMouseEnter={onHover}
+          onMouseLeave={onLeave}
+        >
+          {contentElement}
+        </div>
+      ) : null}
+      <div
+        className={classNames(styles.icons, styles.isBadges)}
+        onMouseEnter={onHover}
+        onMouseLeave={onLeave}
+      >
+        {badges}
+      </div>
 
-			<div className={fileTileBottomClassNames}>
-				{element && !isEdit ? (
-					!inProgress ? (
-						<div
-							className={iconContainerClassNames}
-							onMouseEnter={onHover}
-							onMouseLeave={onLeave}
-						>
-							<div className={iconClassNames} onClick={onFileIconClick}>
-								{element}
-							</div>
-							<Checkbox
-								isChecked={checked}
-								onChange={onCheckboxClick}
-								className={checkboxClassNames}
-							/>
-						</div>
-					) : (
-						<Loader
-							className={styles.loader}
-							color=""
-							size="20px"
-							type={LoaderTypes.track}
-							data-testid="loader"
-						/>
-					)
-				) : null}
+      <div className={fileTileBottomClassNames}>
+        {element && !isEdit ? (
+          !inProgress ? (
+            <div
+              className={iconContainerClassNames}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              <div className={iconClassNames} onClick={onFileIconClick}>
+                {element}
+              </div>
+              <Checkbox
+                isChecked={checked}
+                onChange={onCheckboxClick}
+                className={checkboxClassNames}
+              />
+            </div>
+          ) : (
+            <Loader
+              className={styles.loader}
+              color=""
+              size="20px"
+              type={LoaderTypes.track}
+              data-testid="loader"
+            />
+          )
+        ) : null}
 
-				<div className={contentClassNames}>{FilesTileContent}</div>
+        <div className={contentClassNames}>{FilesTileContent}</div>
 
-				<div
-					className={styles.optionButton}
-					onMouseEnter={onHover}
-					onMouseLeave={onLeave}
-				>
-					{renderContext ? (
-						<ContextMenuButton
-							isFill
-							className={classNames(styles.expandButton, "expandButton")}
-							directionX="left"
-							getData={getOptions}
-							displayType={ContextMenuButtonDisplayType.toggle}
-							onClick={(e) => {
-								e.stopPropagation();
-								onContextMenu(e);
-							}}
-							title={t("Translations:TitleShowActions")}
-						/>
-					) : (
-						<div className="expandButton" />
-					)}
-					<ContextMenu
-						model={contextOptions}
-						onHide={hideContextMenu}
-						getContextModel={getContextModel}
-						ref={cm}
-						header={contextMenuHeader}
-						withBackdrop={isMobile()}
-					/>
-				</div>
-			</div>
-		</div>
-	);
+        <div
+          className={styles.optionButton}
+          onMouseEnter={onHover}
+          onMouseLeave={onLeave}
+        >
+          {renderContext ? (
+            <ContextMenuButton
+              isFill
+              className={classNames(styles.expandButton, "expandButton")}
+              directionX="left"
+              getData={getOptions}
+              displayType={ContextMenuButtonDisplayType.toggle}
+              onClick={(e) => {
+                e.stopPropagation();
+                onContextMenu(e);
+              }}
+              title={t("Translations:TitleShowActions")}
+            />
+          ) : (
+            <div className="expandButton" />
+          )}
+          <ContextMenu
+            model={contextOptions}
+            onHide={hideContextMenu}
+            getContextModel={getContextModel}
+            ref={cm}
+            header={contextMenuHeader}
+            withBackdrop={isMobile()}
+          />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export { FileTile };

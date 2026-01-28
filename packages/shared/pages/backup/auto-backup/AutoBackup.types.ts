@@ -34,7 +34,7 @@ import type {
   Option,
   TWeekdaysLabel,
 } from "../../../types";
-import type { TOption } from "../../../components/combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 import type { ButtonSize } from "@docspace/ui-kit/components/button";
 import type { TColorScheme } from "../../../themes";
 import type { FilesSelectorSettings } from "../../../components/files-selector-input";

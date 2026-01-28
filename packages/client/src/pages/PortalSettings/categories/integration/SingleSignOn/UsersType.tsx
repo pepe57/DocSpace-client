@@ -32,7 +32,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { isMobile } from "@docspace/shared/utils";
 
 import AccessSelector from "SRC_DIR/components/AccessSelector";
-import type { TOption } from "@docspace/shared/components/combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 import StyledInputWrapper from "./styled-containers/StyledInputWrapper";
 
 interface UsersTypeProps {

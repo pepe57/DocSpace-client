@@ -30,7 +30,7 @@ import { ReactSVG } from "react-svg";
 
 import { DropDownItem } from "../drop-down-item";
 import { Badge } from "@docspace/ui-kit/components/badge";
-import { ComboBox, TOption } from "../combobox";
+import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
 import { toastr } from "../toast";
 
 import styles from "./AccessRightSelect.module.scss";

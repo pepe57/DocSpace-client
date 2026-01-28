@@ -39,6 +39,7 @@ COPY packages/doceditor/package.json ./packages/doceditor/package.json
 COPY packages/sdk/package.json ./packages/sdk/package.json
 COPY packages/management/package.json ./packages/management/package.json
 COPY packages/shared/package.json ./packages/shared/package.json
+COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
 
 # Install dependencies and clean cache in same layer
 RUN pnpm install --frozen-lockfile && \
@@ -61,6 +62,8 @@ COPY packages/sdk/ ./packages/sdk/
 COPY packages/management/ ./packages/management/
 COPY packages/shared/ ./packages/shared/
 COPY public/ ./public/
+COPY libs/ui-kit/ ./libs/ui-kit/
+
 
 # Run before-build script (packages/runtime.json)
 RUN pnpm run before-build

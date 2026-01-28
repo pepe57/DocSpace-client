@@ -8,7 +8,7 @@ import {
 } from "../../enums";
 import Article from ".";
 import { ArticleProps } from "./Article.types";
-import { ContextMenuModel } from "../context-menu";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 export default {
   title: "Layout Components/Article",

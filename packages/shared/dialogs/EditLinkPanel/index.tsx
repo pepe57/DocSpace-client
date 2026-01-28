@@ -61,7 +61,7 @@ import {
 import { ShareLinkService } from "../../services/share-link.service";
 import type { TFileLink } from "../../api/files/types";
 import type { TError } from "../../utils/axiosClient";
-import type { TOption } from "../../components/combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
 

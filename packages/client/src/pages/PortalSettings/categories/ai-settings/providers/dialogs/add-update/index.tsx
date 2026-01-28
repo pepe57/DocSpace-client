@@ -38,7 +38,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
+import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import {
   InputSize,
   InputType,

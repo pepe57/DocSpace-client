@@ -31,7 +31,7 @@ import { isMobile, isIOS } from "react-device-detect";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Button } from "@docspace/ui-kit/components/button";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 

@@ -33,7 +33,7 @@ import classNames from "classnames";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { FileTile, FolderTile } from "@docspace/shared/components/tiles";
-import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 

@@ -37,7 +37,7 @@ import {
   HeadingLevel,
   HeadingSize,
 } from "@docspace/ui-kit/components/heading";
-import { ComboBox } from "../../combobox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";

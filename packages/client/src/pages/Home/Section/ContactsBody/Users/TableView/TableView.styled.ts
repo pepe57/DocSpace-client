@@ -26,7 +26,7 @@
 import styled, { css } from "styled-components";
 
 import { TableContainer, TableRow } from "@docspace/shared/components/table";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 
 const userNameCss = css`
   margin-inline-start: -24px;

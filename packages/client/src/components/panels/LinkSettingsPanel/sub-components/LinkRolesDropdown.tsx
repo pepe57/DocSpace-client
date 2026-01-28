@@ -35,7 +35,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import { LinkRolesDropdownItem } from "./LinkRolesDropdownItem";
-import { TOption } from "@docspace/shared/components/combobox";
+import { TOption } from "@docspace/ui-kit/components/combobox";
 import styles from "./LinkRolesDropdown.module.scss";
 import { LinkRolesDropdownProps } from "../LinkSettingsPanel.types";
 import { Portal } from "@docspace/ui-kit/components/portal";

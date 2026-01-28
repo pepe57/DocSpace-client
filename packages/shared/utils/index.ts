@@ -27,7 +27,7 @@
 "use client";
 
 import moment from "moment-timezone";
-import { TTranslation } from "../types";
+import type { TTranslation } from "../types";
 
 import { isArrayEqual } from "./array";
 import * as email from "./email";
@@ -39,15 +39,12 @@ import {
   getCorrectFourValuesStyle,
 } from "./rtlUtils";
 import { useClickOutside } from "@docspace/ui-kit/utils";
-import { trimSeparator } from "./trimSeparator";
 import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
-import { getTextColor } from "./getTextColor";
 import { getFormFillingTipsStorageName } from "./getFormFillingTipsStorageName";
-import { uuid } from "@docspace/ui-kit/utils";
+import { uuid, getTextColor, trimSeparator } from "@docspace/ui-kit/utils";
 
 import { DomHelpers } from "@docspace/ui-kit/utils";
-import ObjectUtils from "./objectUtils";
 import {
   size,
   mobile,
@@ -145,17 +142,14 @@ export {
   email,
   useId,
   useClickOutside,
-  trimSeparator,
   getCorrectDate,
   handleAnyClick,
   DomHelpers,
-  ObjectUtils,
   getLogoUrl,
   isMobileDevice,
   onEdgeScrolling,
   clearEdgeScrollingTimer,
   injectDefaultTheme,
-  getTextColor,
   getFromSessionStorage,
   saveToSessionStorage,
   getFromLocalStorage,
@@ -169,6 +163,8 @@ export {
   getServerIcon,
   getAiProviderLabel,
   uuid,
+  getTextColor,
+  trimSeparator,
 };
 
 export const getModalType = () => {

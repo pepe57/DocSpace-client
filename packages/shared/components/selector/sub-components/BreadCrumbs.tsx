@@ -33,7 +33,7 @@ import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "../../context-menu-button";
-import { ContextMenuModel } from "../../context-menu";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import {
   TBreadCrumb,
   TDisplayedItem,

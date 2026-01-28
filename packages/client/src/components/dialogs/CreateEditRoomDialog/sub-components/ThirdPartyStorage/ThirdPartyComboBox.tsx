@@ -35,7 +35,7 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { toastr } from "@docspace/shared/components/toast";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { TConnectingStorage } from "@docspace/shared/api/files/types";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 

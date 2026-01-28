@@ -28,7 +28,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { Paging } from "@docspace/shared/components/paging";
-import type { TOption } from "@docspace/shared/components/combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 
 import { AccountsPagingProps } from "../types";
 

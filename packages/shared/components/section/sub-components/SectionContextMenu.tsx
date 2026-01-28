@@ -27,7 +27,10 @@
 import React from "react";
 import isEqual from "lodash/isEqual";
 
-import { ContextMenu, ContextMenuRefType } from "../../context-menu";
+import {
+  ContextMenu,
+  ContextMenuRefType,
+} from "@docspace/ui-kit/components/context-menu";
 import { SectionContextMenuProps } from "../Section.types";
 
 const areEqual = (

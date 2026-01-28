@@ -27,7 +27,7 @@
 import React from "react";
 import { IndexRange } from "react-virtualized";
 
-import { ContextMenuModel } from "../context-menu";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 export interface TableContainerProps {
   forwardedRef: React.Ref<HTMLDivElement>;

@@ -37,7 +37,11 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/ui-kit/components/avatar";
-import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TOption,
+} from "@docspace/ui-kit/components/combobox";
 
 import { Row } from ".";
 import { RowProps } from "./Row.types";

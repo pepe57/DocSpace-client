@@ -28,7 +28,7 @@ import { DeviceType } from "../../enums";
 import { TUser } from "../../api/people/types";
 import { TTranslation } from "../../types";
 
-import { ContextMenuModel } from "../context-menu";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 export type TToggleArticleOpen = () => void;
 

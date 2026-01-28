@@ -41,7 +41,7 @@ import {
 } from "@docspace/ui-kit/components/avatar";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { RoomIcon } from "../../room-icon";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { MCPIcon, MCPIconSize } from "@docspace/ui-kit/components/mcp-icon";
 

@@ -46,7 +46,7 @@ import {
 } from "@docspace/ui-kit/components/avatar";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { TTranslation } from "@docspace/shared/types";
-import { ContextMenuModel } from "@docspace/shared/components/context-menu";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import { Tag } from "@docspace/shared/components/tag";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";

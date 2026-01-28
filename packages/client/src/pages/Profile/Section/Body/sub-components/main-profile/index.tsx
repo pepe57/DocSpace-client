@@ -38,7 +38,7 @@ import {
 } from "@docspace/ui-kit/components/avatar";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
+import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { toastr } from "@docspace/shared/components/toast";

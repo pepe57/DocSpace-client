@@ -36,7 +36,7 @@ import {
 } from "@docspace/shared/enums";
 import { User as ShareUser } from "@docspace/shared/components/share/sub-components/User";
 
-import type { TOption } from "@docspace/shared/components/combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 import type { TGroup } from "@docspace/shared/api/groups/types";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";

@@ -32,7 +32,7 @@ import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { AutoBackupPeriod } from "../../../../../enums";
-import { ComboBox } from "../../../../../components/combobox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { HelpButton } from "../../../../../components/help-button";
 
 import type { ScheduleComponentProps } from "./ScheduleComponent.types";

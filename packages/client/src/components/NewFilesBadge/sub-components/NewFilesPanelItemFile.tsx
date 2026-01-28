@@ -30,7 +30,7 @@ import classNames from "classnames";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
-import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
@@ -38,102 +38,102 @@ import FolderLocationIconSvgUrl from "PUBLIC_DIR/images/folder.location.react.sv
 import config from "PACKAGE_FILE";
 
 import {
-	NewFilesPanelItemFileInjectStore,
-	NewFilesPanelItemFileProps,
+  NewFilesPanelItemFileInjectStore,
+  NewFilesPanelItemFileProps,
 } from "../NewFilesBadge.types";
 
 import styles from "../new-files-panel.module.scss";
 
 const NewFilesPanelItemFileComponent = ({
-	item,
-	isRooms,
-	onClose,
+  item,
+  isRooms,
+  onClose,
 
-	getIcon,
-	checkAndOpenLocationAction,
-	markAsRead,
-	openItemAction,
+  getIcon,
+  checkAndOpenLocationAction,
+  markAsRead,
+  openItemAction,
 
-	displayFileExtension,
+  displayFileExtension,
 }: NewFilesPanelItemFileProps) => {
-	const icon = getIcon?.(24, item.fileExst);
+  const icon = getIcon?.(24, item.fileExst);
 
-	const onOpenFileLocation = () => {
-		checkAndOpenLocationAction!(item);
-		onClose();
-	};
+  const onOpenFileLocation = () => {
+    checkAndOpenLocationAction!(item);
+    onClose();
+  };
 
-	const onClick = async () => {
-		const isMedia =
-			item.viewAccessibility.ImageView || item.viewAccessibility.MediaView;
+  const onClick = async () => {
+    const isMedia =
+      item.viewAccessibility.ImageView || item.viewAccessibility.MediaView;
 
-		if (isMedia) {
-			return window.open(
-				combineUrl(
-					window.ClientConfig?.proxy?.url,
-					config.homepage,
-					MEDIA_VIEW_URL,
-					item.id,
-				),
-			);
-		}
+    if (isMedia) {
+      return window.open(
+        combineUrl(
+          window.ClientConfig?.proxy?.url,
+          config.homepage,
+          MEDIA_VIEW_URL,
+          item.id,
+        ),
+      );
+    }
 
-		openItemAction!({ ...item });
-		markAsRead!([], [item.id]);
+    openItemAction!({ ...item });
+    markAsRead!([], [item.id]);
 
-		onClose();
-	};
+    onClose();
+  };
 
-	return (
-		<div className={classNames(styles.fileItem, { [styles.isRooms]: isRooms })}>
-			<div className="info-container" onClick={onClick}>
-				<RoomIcon
-					className="file-icon"
-					logo={icon!}
-					showDefault={false}
-					title={item.title}
-				/>
-				<Text
-					noSelect
-					truncate
-					fontSize="12px"
-					fontWeight={600}
-					lineHeight="16px"
-				>
-					{item.title.replace(item.fileExst, "")}
-					{displayFileExtension ? (
-						<span className="file-exst">{item.fileExst}</span>
-					) : null}
-				</Text>
-			</div>
-			<IconButton
-				className="open-location-button"
-				iconName={FolderLocationIconSvgUrl}
-				size={16}
-				onClick={onOpenFileLocation}
-			/>
-		</div>
-	);
+  return (
+    <div className={classNames(styles.fileItem, { [styles.isRooms]: isRooms })}>
+      <div className="info-container" onClick={onClick}>
+        <RoomIcon
+          className="file-icon"
+          logo={icon!}
+          showDefault={false}
+          title={item.title}
+        />
+        <Text
+          noSelect
+          truncate
+          fontSize="12px"
+          fontWeight={600}
+          lineHeight="16px"
+        >
+          {item.title.replace(item.fileExst, "")}
+          {displayFileExtension ? (
+            <span className="file-exst">{item.fileExst}</span>
+          ) : null}
+        </Text>
+      </div>
+      <IconButton
+        className="open-location-button"
+        iconName={FolderLocationIconSvgUrl}
+        size={16}
+        onClick={onOpenFileLocation}
+      />
+    </div>
+  );
 };
 
 export const NewFilesPanelItemFile = inject(
-	({
-		filesSettingsStore,
-		filesActionsStore,
-		filesStore,
-	}: NewFilesPanelItemFileInjectStore) => {
-		const { displayFileExtension, getIcon } = filesSettingsStore;
-		const { checkAndOpenLocationAction, markAsRead, openItemAction } =
-			filesActionsStore;
-		const { openDocEditor } = filesStore;
+  ({
+    filesSettingsStore,
+    filesActionsStore,
+    filesStore,
+  }: NewFilesPanelItemFileInjectStore) => {
+    const { displayFileExtension, getIcon } = filesSettingsStore;
+    const { checkAndOpenLocationAction, markAsRead, openItemAction } =
+      filesActionsStore;
+    const { openDocEditor } = filesStore;
 
-		return {
-			displayFileExtension,
-			getIcon,
-			checkAndOpenLocationAction,
-			markAsRead,
-			openDocEditor,
-			openItemAction,
-		};
-	},
+    return {
+      displayFileExtension,
+      getIcon,
+      checkAndOpenLocationAction,
+      markAsRead,
+      openDocEditor,
+      openItemAction,
+    };
+  },
 )(observer(NewFilesPanelItemFileComponent));

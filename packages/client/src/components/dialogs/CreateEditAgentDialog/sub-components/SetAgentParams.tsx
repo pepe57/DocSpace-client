@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import { globalColors } from "@docspace/shared/themes";
 import { isMobile, mobile } from "@docspace/shared/utils";
 
-import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 
 import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
 import TagHandler from "SRC_DIR/helpers/TagHandler";
@@ -55,7 +55,7 @@ import { TAgent } from "@docspace/shared/api/ai/types";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
-import { TLogo } from "@docspace/shared/api/rooms/types";
+import { TLogo } from "@docspace/ui-kit";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
 import RoomQuota from "SRC_DIR/components/RoomQuota";

@@ -37,7 +37,7 @@ import {
   FilesRowWrapper,
 } from "@docspace/shared/components/files-row";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
-import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import Badges from "@docspace/shared/components/badges";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";

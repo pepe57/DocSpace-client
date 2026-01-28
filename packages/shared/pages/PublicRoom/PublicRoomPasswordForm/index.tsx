@@ -48,7 +48,7 @@ import {
   getPasswordDescription,
 } from "./PublicRoomPasswordForm.helper";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
-import { RoomIcon } from "../../../components/room-icon";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import type {
   TPublicRoomPassword,
   TValidateShareRoom,

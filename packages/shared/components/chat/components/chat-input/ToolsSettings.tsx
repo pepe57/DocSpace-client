@@ -50,7 +50,10 @@ import { getServerIcon, isMobile } from "../../../../utils";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { ContextMenu, type ContextMenuRefType } from "../../../context-menu";
+import {
+  ContextMenu,
+  type ContextMenuRefType,
+} from "@docspace/ui-kit/components/context-menu";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Aside } from "@docspace/ui-kit/components/aside";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";

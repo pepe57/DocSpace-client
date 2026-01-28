@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TileItem } from "../tile-container/TileContainer.types";
-import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 export type BaseTileProps = {
   /** Indicates if the room is selected */

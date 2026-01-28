@@ -26,8 +26,8 @@
 
 import { RefObject } from "react";
 import { DeviceType } from "../../enums";
-import { TGetContextMenuModel } from "../context-menu";
-import type { HeaderType } from "../context-menu/ContextMenu.types";
+import { TGetContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import type { HeaderType } from "@docspace/ui-kit/components/context-menu";
 
 export type TOnBackToParenFolder = () => void;
 

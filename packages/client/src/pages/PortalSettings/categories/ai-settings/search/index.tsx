@@ -34,7 +34,7 @@ import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
+import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { WebSearchType } from "@docspace/shared/api/ai/enums";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";

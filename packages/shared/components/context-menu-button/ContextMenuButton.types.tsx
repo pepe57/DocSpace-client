@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TDirectionX, TDirectionY } from "../../types";
-import { ContextMenuModel } from "../context-menu";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import { ContextMenuButtonDisplayType } from "./ContextMenuButton.enums";
 
 export interface ContextMenuButtonProps {

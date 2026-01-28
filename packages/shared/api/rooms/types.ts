@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TLogo } from "@docspace/ui-kit/types";
+
 import type { TFile, TFolder, TShareSettings } from "../files/types";
 import type {
   ExportRoomIndexTaskStatus,
@@ -40,20 +42,6 @@ import type {
 } from "../../types";
 import type { TUser } from "../people/types";
 import type { TGroup } from "../groups/types";
-
-export type ICover = {
-  data: string;
-  id: string;
-};
-
-export type TLogo = {
-  cover?: ICover;
-  original: string;
-  large: string;
-  medium: string;
-  small: string;
-  color?: string;
-};
 
 export type TRoomSecurity = {
   ChangeOwner: boolean;

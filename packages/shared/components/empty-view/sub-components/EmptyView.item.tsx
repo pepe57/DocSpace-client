@@ -2,7 +2,10 @@ import React from "react";
 import ArrowIcon from "PUBLIC_DIR/images/icons/12/arrow.right.svg";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { ContextMenu, ContextMenuRefType } from "../../context-menu";
+import {
+  ContextMenu,
+  ContextMenuRefType,
+} from "@docspace/ui-kit/components/context-menu";
 
 import styles from "../EmptyView.module.scss";
 import type { EmptyViewItemProps } from "../EmptyView.types";

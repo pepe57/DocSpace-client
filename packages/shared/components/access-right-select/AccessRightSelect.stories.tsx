@@ -27,7 +27,7 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { ComboBoxSize } from "../combobox";
+import { ComboBoxSize } from "@docspace/ui-kit/components/combobox";
 
 import { AccessRightSelect } from "./AccessRightSelect";
 

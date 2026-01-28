@@ -26,7 +26,7 @@
 
 import { ReactElement } from "react";
 
-import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 import type { FileType } from "../../../enums";
 

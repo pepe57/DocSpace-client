@@ -45,7 +45,7 @@ import LinkRolesDropdown from "./sub-components/LinkRolesDropdown";
 import styles from "./LinkSettingsPanel.module.scss";
 import { LinkSettingsPanelProps } from "./LinkSettingsPanel.types";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { TOption } from "@docspace/shared/components/combobox";
+import { TOption } from "@docspace/ui-kit/components/combobox";
 import { getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 

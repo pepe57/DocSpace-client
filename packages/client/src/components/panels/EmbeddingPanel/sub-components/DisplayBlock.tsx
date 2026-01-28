@@ -26,65 +26,65 @@
 
 import { Text } from "@docspace/ui-kit/components/text";
 import {
-	ComboBox,
-	ComboBoxSize,
-	TOption,
-} from "@docspace/shared/components/combobox";
+  ComboBox,
+  ComboBoxSize,
+  TOption,
+} from "@docspace/ui-kit/components/combobox";
 import {
-	InputSize,
-	InputType,
-	TextInput,
+  InputSize,
+  InputType,
+  TextInput,
 } from "@docspace/ui-kit/components/text-input";
 import { dimensionsModel } from "../../../../pages/PortalSettings/categories/developer-tools/JavascriptSDK/constants";
 import styles from "../EmbeddingPanel.module.scss";
 
 type DisplayBlockProps = {
-	label: string;
-	inputValue: string;
-	onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	selectedOption: TOption;
-	onSelectDimension: (option: TOption) => void;
+  label: string;
+  inputValue: string;
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  selectedOption: TOption;
+  onSelectDimension: (option: TOption) => void;
 };
 
 const DisplayBlock = ({
-	label,
-	inputValue,
-	onInputChange,
-	selectedOption,
-	onSelectDimension,
+  label,
+  inputValue,
+  onInputChange,
+  selectedOption,
+  onSelectDimension,
 }: DisplayBlockProps) => {
-	return (
-		<div className={styles.embeddingPanelBlock}>
-			<Text
-				fontSize="13px"
-				fontWeight={600}
-				className={styles.embeddingPanelText}
-			>
-				{label}
-			</Text>
-			<div className={styles.embeddingPanelSizeBlock}>
-				<TextInput
-					type={InputType.text}
-					size={InputSize.base}
-					className={styles.embeddingPanelInput}
-					value={inputValue}
-					onChange={onInputChange}
-					testId="embedding_panel_size_input"
-				/>
-				<ComboBox
-					size={ComboBoxSize.content}
-					scaled={false}
-					scaledOptions
-					onSelect={onSelectDimension}
-					options={dimensionsModel}
-					selectedOption={selectedOption}
-					displaySelectedOption
-					directionY="bottom"
-					dataTestId="embedding_panel_size_combobox"
-				/>
-			</div>
-		</div>
-	);
+  return (
+    <div className={styles.embeddingPanelBlock}>
+      <Text
+        fontSize="13px"
+        fontWeight={600}
+        className={styles.embeddingPanelText}
+      >
+        {label}
+      </Text>
+      <div className={styles.embeddingPanelSizeBlock}>
+        <TextInput
+          type={InputType.text}
+          size={InputSize.base}
+          className={styles.embeddingPanelInput}
+          value={inputValue}
+          onChange={onInputChange}
+          testId="embedding_panel_size_input"
+        />
+        <ComboBox
+          size={ComboBoxSize.content}
+          scaled={false}
+          scaledOptions
+          onSelect={onSelectDimension}
+          options={dimensionsModel}
+          selectedOption={selectedOption}
+          displaySelectedOption
+          directionY="bottom"
+          dataTestId="embedding_panel_size_combobox"
+        />
+      </div>
+    </div>
+  );
 };
 
 export { DisplayBlock };

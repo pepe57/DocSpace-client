@@ -28,7 +28,7 @@ import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 
-import type { TOption } from "../combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 
 import { Paging } from "./Paging";
 

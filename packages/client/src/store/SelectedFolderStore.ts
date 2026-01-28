@@ -48,11 +48,11 @@ import {
   TShareSettings,
 } from "@docspace/shared/api/files/types";
 import {
-  TLogo,
   TRoomLifetime,
   TRoomSecurity,
   TWatermark,
 } from "@docspace/shared/api/rooms/types";
+import type { TLogo } from "@docspace/ui-kit";
 
 import { setDocumentTitle } from "../helpers/utils";
 

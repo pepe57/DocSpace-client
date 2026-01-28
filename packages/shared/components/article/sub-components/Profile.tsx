@@ -41,7 +41,10 @@ import {
 } from "@docspace/ui-kit/components/avatar";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { ContextMenu, ContextMenuRefType } from "../../context-menu";
+import {
+  ContextMenu,
+  ContextMenuRefType,
+} from "@docspace/ui-kit/components/context-menu";
 
 import styles from "../Article.module.scss";
 import { ArticleProfileProps } from "../Article.types";

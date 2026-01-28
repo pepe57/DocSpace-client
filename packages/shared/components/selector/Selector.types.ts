@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import type { ICover } from "@docspace/ui-kit/types";
 import {
   EmployeeStatus,
   EmployeeType,
@@ -36,7 +37,7 @@ import {
 import { MergeTypes, Nullable, WithFlag } from "../../types";
 
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
-import { TRoomSecurity, ICover } from "../../api/rooms/types";
+import { TRoomSecurity } from "../../api/rooms/types";
 import { TUserGroup } from "../../api/people/types";
 
 import { AvatarRole } from "@docspace/ui-kit/components/avatar";

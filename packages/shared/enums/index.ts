@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+export * from "@docspace/ui-kit/enums";
+
 export const enum ScopeType {
   read = "read",
   write = "write",
@@ -286,21 +288,6 @@ export const enum FolderType {
   Knowledge = 32,
   ResultStorage = 33,
   AIAgents = 34,
-}
-
-export const enum ShareAccessRights {
-  None = 0,
-  FullAccess = 1,
-  ReadOnly = 2,
-  DenyAccess = 3,
-  Varies = 4,
-  Review = 5,
-  Comment = 6,
-  FormFilling = 7,
-  CustomFilter = 8,
-  RoomManager = 9,
-  Editing = 10,
-  Collaborator = 11,
 }
 
 export const enum ShareRights {
