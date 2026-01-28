@@ -48,8 +48,8 @@
   display: flex;
   align-items: center;
 
-  border: 1px solid var(--chat-input-file-border-color, #d0d5dd);
-  background-color: var(--chat-input-file-background-color, #fff);
+  border: 1px solid var(--chat-input-file-border-color);
+  background-color: var(--chat-input-file-background-color);
 
   border-radius: 6px;
 
@@ -86,6 +86,6 @@
   flex: 1;
 
   span {
-    color: var(--chat-file-item-exst-color, #a3a9ae);
+    color: var(--chat-input-file-exst-color);
   }
 }
