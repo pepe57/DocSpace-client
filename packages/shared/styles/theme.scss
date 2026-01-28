@@ -14,7 +14,6 @@
   --input-error-border: #{$light-error-status};
   --input-error-color: #{$light-error-status};
 
-
   // Dimensions
   --input-border-radius: 3px;
 
@@ -197,7 +196,6 @@
 
   --drop-down-item-hover-color: #{$gray-light};
   --drop-down-item-icon-color: #{$black};
-
 
   --input-text-align: left;
 
@@ -452,7 +450,7 @@
 
   --drop-down-item-hover-color: #{$light-dark-gray-hover};
   --drop-down-item-icon-color: #{$white};
-  
+
   --empty-content-header-color: #{$white};
   --empty-content-description-color: #{$dark-gray-dark};
   --empty-content-button-color-link: #{$dark-link};
@@ -1251,32 +1249,6 @@
   --color-picker-border: 1px solid #{$gray-dark-strong};
   --color-picker-background: #{$dark-gray-light};
   --color-picker-color: #{$gray-dark-text};
-}
-
-.light {
-  --calendar-title-color: #{$gray-text};
-  --calendar-outline-color: #{$gray-light-mid};
-  --calendar-arrow-color: #{$gray-text};
-  --calendar-disabled-arrow-color: #{$gray};
-  --calendar-box-shadow: 0px 12px 40px #{$popup-shadow};
-  --calendar-border-color: #{$white};
-  --calendar-weekday-color: #{$gray};
-  --calendar-on-hover-background: #{$light-gray-hover};
-  --calendar-past-color: #{$gray};
-  --calendar-disabled-color: #{$light-gray-selected};
-}
-
-.dark {
-  --calendar-title-color: #{$dark-gray-dark};
-  --calendar-outline-color: #{$gray-dark-strong};
-  --calendar-arrow-color: #{$gray-dark-text};
-  --calendar-disabled-arrow-color: #{$gray-dark-strong};
-  --calendar-box-shadow: 0px 12px 40px 0px #{$popup-shadow};
-  --calendar-border-color: #{$gray-dark-strong};
-  --calendar-weekday-color: #{$gray-dark};
-  --calendar-on-hover-background: #{$light-dark-gray-hover};
-  --calendar-past-color: #{$gray-dark};
-  --calendar-disabled-color: #{$gray-dark-strong};
 }
 
 .light {
