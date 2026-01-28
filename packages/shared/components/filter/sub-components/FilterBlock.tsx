@@ -38,7 +38,7 @@ import { FilterBlockLoader } from "../../../skeletons/filter";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { TSelectorItem } from "../../selector";
-import { ModalDialog, ModalDialogType } from "../../modal-dialog";
+import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import styles from "../Filter.module.scss";

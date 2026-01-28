@@ -37,7 +37,7 @@ import { Textarea } from "@docspace/shared/components/textarea";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { EmailInput } from "@docspace/shared/components/email-input";
 import { ErrorKeys } from "@docspace/shared/enums";
 

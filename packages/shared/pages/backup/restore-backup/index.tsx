@@ -40,7 +40,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { BackupStorageType, FilesSelectorFilterTypes } from "../../../enums";
 import RestoreBackupLoader from "../../../skeletons/backup/RestoreBackup";
-import { RadioButtonGroup } from "../../../components/radio-button-group";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { FileInput } from "../../../components/file-input";
 import { FilesSelectorInput } from "../../../components/files-selector-input";

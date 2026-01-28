@@ -33,7 +33,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import api from "@docspace/shared/api";
 import { ButtonKeys } from "@docspace/shared/enums";
 

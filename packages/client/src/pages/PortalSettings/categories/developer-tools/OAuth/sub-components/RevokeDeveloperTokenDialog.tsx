@@ -35,7 +35,7 @@ import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr, type TData } from "@docspace/shared/components/toast";

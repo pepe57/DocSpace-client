@@ -33,7 +33,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 

@@ -41,7 +41,7 @@ import {
   type ScrollbarProps,
   Scrollbar,
 } from "@docspace/ui-kit/components/scrollbar";
-import { RadioButton } from "../../../../../components/radio-button";
+import { RadioButton } from "@docspace/ui-kit/components/radio-button";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../../../constants";
 
 import type { BackupListBodyProps } from "./BackupList.types";

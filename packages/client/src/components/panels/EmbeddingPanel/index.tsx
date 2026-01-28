@@ -49,7 +49,7 @@ import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { getExternalLinks } from "@docspace/shared/api/files";
 

@@ -32,7 +32,7 @@ import { Heading } from "@docspace/ui-kit/components/heading";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import Base from "@docspace/shared/themes/base";
 import styles from "./HotkeysPanel.module.scss";
 import SelectionBlock from "./SelectionBlock";

@@ -36,7 +36,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { DateTimePicker } from "@docspace/shared/components/date-time-picker";

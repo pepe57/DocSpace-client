@@ -29,7 +29,7 @@ import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Loader } from "@docspace/ui-kit/components/loader";

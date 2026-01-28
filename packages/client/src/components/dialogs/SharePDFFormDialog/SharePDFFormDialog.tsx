@@ -30,7 +30,7 @@ import { observer, inject } from "mobx-react";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { Events, RoomsType } from "@docspace/shared/enums";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 

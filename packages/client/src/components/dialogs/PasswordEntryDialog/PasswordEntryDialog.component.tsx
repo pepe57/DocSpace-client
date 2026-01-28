@@ -32,7 +32,7 @@ import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { ValidationStatus } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { InputSize } from "@docspace/ui-kit/components/text-input";

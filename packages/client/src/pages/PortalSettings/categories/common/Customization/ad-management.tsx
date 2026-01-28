@@ -32,7 +32,7 @@ import { useNavigate, useLocation } from "react-router";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { toastr } from "@docspace/shared/components/toast";
 import { DeviceType } from "@docspace/shared/enums";

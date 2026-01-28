@@ -28,7 +28,7 @@ import styled from "styled-components";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/ui-kit/components/text";
 

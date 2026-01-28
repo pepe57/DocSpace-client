@@ -38,7 +38,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";

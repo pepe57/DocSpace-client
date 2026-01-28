@@ -26,8 +26,11 @@
 
 import React, { useState } from "react";
 
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
-import { RadioButtonGroup } from "../../components/radio-button-group";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ConflictResolveType } from "../../enums";

@@ -25,17 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ContextMenuSkeleton } from "./context-menu";
-import { DialogSkeleton, DialogAsideSkeleton } from "./dialog";
 import { RowsSkeleton } from "./rows";
 import { TableSkeleton } from "./table";
 
 export * from "@docspace/ui-kit/components/rectangle";
 export * from "@docspace/ui-kit/components/circle";
 
-export {
-	ContextMenuSkeleton,
-	DialogSkeleton,
-	DialogAsideSkeleton,
-	RowsSkeleton,
-	TableSkeleton,
-};
+export { ContextMenuSkeleton, RowsSkeleton, TableSkeleton };

@@ -51,7 +51,7 @@ import type { Nullable, Option } from "../../../types";
 import OperationsProgressButton from "../../../components/operations-progress-button";
 import { toastr } from "../../../components/toast";
 import { Text } from "@docspace/ui-kit/components/text";
-import { RadioButton } from "../../../components/radio-button";
+import { RadioButton } from "@docspace/ui-kit/components/radio-button";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 

@@ -27,7 +27,7 @@
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";

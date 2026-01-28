@@ -27,7 +27,7 @@
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { WebhookTriggers } from "@docspace/shared/enums";

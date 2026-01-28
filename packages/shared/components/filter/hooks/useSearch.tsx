@@ -28,7 +28,7 @@ import React from "react";
 import { isTablet, isIOS } from "react-device-detect";
 
 import { InputSize } from "@docspace/ui-kit/components/text-input";
-import { SearchInput } from "../../search-input";
+import { SearchInput } from "@docspace/ui-kit/components/search-input";
 
 import { SearchInputProps } from "../Filter.types";
 

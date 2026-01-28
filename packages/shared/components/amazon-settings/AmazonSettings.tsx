@@ -33,6 +33,7 @@ import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { RadioButton } from "@docspace/ui-kit/components/radio-button";
 import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
 import {
   InputSize,
@@ -40,7 +41,6 @@ import {
   TextInput,
 } from "@docspace/ui-kit/components/text-input";
 import { HelpButton } from "../help-button";
-import { RadioButton } from "../radio-button";
 import { useDidMount } from "../../hooks/useDidMount";
 
 import {

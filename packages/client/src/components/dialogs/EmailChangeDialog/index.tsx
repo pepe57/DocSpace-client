@@ -28,7 +28,7 @@ import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { EmailInput } from "@docspace/shared/components/email-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";

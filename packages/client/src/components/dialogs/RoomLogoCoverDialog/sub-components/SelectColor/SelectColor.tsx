@@ -32,7 +32,7 @@ import { useClickOutside } from "@docspace/shared/utils";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";

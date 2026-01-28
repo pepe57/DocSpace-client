@@ -40,7 +40,7 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import styles from "../../../ChatMessageBody.module.scss";
 import { ToolCall } from "./ToolCall";
-import { ModalDialog, ModalDialogType } from "../../../../../../modal-dialog";
+import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
 import { isMobile } from "../../../../../../../utils";
 import { ToolCallPlacement, ToolCallStatus } from "./ToolCall.enum";
 import { useMessageStore } from "../../../../../store/messageStore";

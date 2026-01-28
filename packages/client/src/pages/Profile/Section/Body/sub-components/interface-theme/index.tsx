@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { toastr } from "@docspace/shared/components/toast";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getSystemTheme, getEditorTheme } from "@docspace/shared/utils";

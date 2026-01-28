@@ -26,7 +26,7 @@
 import styled, { css } from "styled-components";
 
 import { tablet } from "@docspace/shared/utils";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { globalColors } from "@docspace/shared/themes";
 import type { ColorItemProps } from "./SelecColor.types";
 

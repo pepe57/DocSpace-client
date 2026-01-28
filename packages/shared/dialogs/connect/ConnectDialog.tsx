@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import { toastr } from "../../components/toast";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
 import {
   InputSize,
   InputType,

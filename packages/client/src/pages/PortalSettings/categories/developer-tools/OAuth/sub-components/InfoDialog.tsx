@@ -32,8 +32,8 @@ import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { ScopeList } from "@docspace/shared/utils/oauth/scope-list";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { getCookie } from "@docspace/shared/utils/cookie";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
 import { Text } from "@docspace/ui-kit/components/text";
 import {
   ContextMenuButton,
