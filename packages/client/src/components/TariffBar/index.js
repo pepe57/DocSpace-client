@@ -41,7 +41,6 @@ const PROXY_BASE_URL = combineUrl(
 );
 
 const TariffBar = ({
-  isEnterprise,
   isNonProfit,
   isGracePeriod,
   isFreeTariff,
@@ -54,6 +53,7 @@ const TariffBar = ({
   trialDaysLeft,
   title,
   isLifetimeLicense,
+  isCommunity,
 }) => {
   const navigate = useNavigate();
   const { t } = useTranslation("Common");
@@ -85,7 +85,6 @@ const TariffBar = ({
     : getEnterpriseBar(
         t,
         isPaymentPageAvailable,
-        isEnterprise,
         isTrial,
         isLicenseExpiring,
         isLicenseDateExpired,
@@ -93,6 +92,7 @@ const TariffBar = ({
         paymentDate,
         isGracePeriod,
         isLifetimeLicense,
+        isCommunity,
       );
 
   if (!tariffBar) return null;
@@ -132,12 +132,12 @@ export default inject(
       isLicenseDateExpired,
       paymentDate,
       trialDaysLeft,
-      isEnterprise,
+
+      isCommunity,
     } = currentTariffStatusStore;
     const { standalone } = settingsStore;
 
     return {
-      isEnterprise,
       isNonProfit,
       isGracePeriod,
       isFreeTariff,
@@ -149,6 +149,7 @@ export default inject(
       paymentDate,
       trialDaysLeft,
       isLifetimeLicense,
+      isCommunity,
     };
   },
 )(observer(TariffBar));

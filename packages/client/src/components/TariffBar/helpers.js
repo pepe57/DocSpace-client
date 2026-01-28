@@ -46,7 +46,6 @@ export const getSaasBar = (
 export const getEnterpriseBar = (
   t,
   isPaymentPageAvailable,
-  isEnterprise,
   isTrial,
   isLicenseExpiring,
   isLicenseDateExpired,
@@ -54,10 +53,11 @@ export const getEnterpriseBar = (
   paymentDate,
   isGracePeriod,
   isLifetimeLicense,
+  isCommunity,
 ) => {
   if (
     isPaymentPageAvailable &&
-    isEnterprise &&
+    !isCommunity &&
     (isTrial || isLicenseExpiring || isLicenseDateExpired)
   ) {
     if (isTrial) {
