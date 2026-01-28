@@ -30,7 +30,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { MCPIcon, MCPIconSize } from "@docspace/ui-kit/components/mcp-icon";
 
@@ -40,77 +40,77 @@ import type { TSelectorItem } from "@docspace/shared/components/selector";
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 
 interface MCPSettingsProps {
-	agentParams: TAgentParams;
-	setAgentParams: (value: Partial<TAgentParams>) => void;
-	portalMcpServerId?: string;
-	onClickAction?: () => void;
-	selectedServers?: TSelectorItem[];
-	setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
+  agentParams: TAgentParams;
+  setAgentParams: (value: Partial<TAgentParams>) => void;
+  portalMcpServerId?: string;
+  onClickAction?: () => void;
+  selectedServers?: TSelectorItem[];
+  setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
 }
 
 const MCPSettings = ({
-	agentParams,
-	setAgentParams,
-	portalMcpServerId,
-	onClickAction,
-	selectedServers,
-	setSelectedServers,
+  agentParams,
+  setAgentParams,
+  portalMcpServerId,
+  onClickAction,
+  selectedServers,
+  setSelectedServers,
 }: MCPSettingsProps) => {
-	const { t } = useTranslation(["AIRoom", "Common"]);
+  const { t } = useTranslation(["AIRoom", "Common"]);
 
-	return (
-		<StyledParam increaseGap>
-			<div className=" set_room_params-info">
-				<div>
-					<Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-						{t("MCP")}
-					</Text>
-					<Text
-						fontSize="12px"
-						lineHeight="16px"
-						fontWeight={400}
-						className="set_room_params-info-description"
-						noSelect
-					>
-						{t("MCPDescriptionServers", {
-							mcpServers: t("Common:MCPSettingTitle"),
-						})}
-					</Text>
-				</div>
-				<div className="ai-mcp-group">
-					<SelectorAddButton onClick={onClickAction} />
+  return (
+    <StyledParam increaseGap>
+      <div className=" set_room_params-info">
+        <div>
+          <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
+            {t("MCP")}
+          </Text>
+          <Text
+            fontSize="12px"
+            lineHeight="16px"
+            fontWeight={400}
+            className="set_room_params-info-description"
+            noSelect
+          >
+            {t("MCPDescriptionServers", {
+              mcpServers: t("Common:MCPSettingTitle"),
+            })}
+          </Text>
+        </div>
+        <div className="ai-mcp-group">
+          <AddButton onClick={onClickAction} />
 
-					{selectedServers?.map((server) => (
-						<div className="ai-mcp-item" key={server.id}>
-							<MCPIcon
-								title={server.label}
-								imgSrc={server.icon}
-								size={MCPIconSize.Small}
-							/>
-							<Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect>
-								{server.label}
-							</Text>
+          {selectedServers?.map((server) => (
+            <div className="ai-mcp-item" key={server.id}>
+              <MCPIcon
+                title={server.label}
+                imgSrc={server.icon}
+                size={MCPIconSize.Small}
+              />
+              <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect>
+                {server.label}
+              </Text>
 
-							<IconButton
-								iconName={CrossReactSvgUrl}
-								size={12}
-								onClick={() => {
-									setSelectedServers?.((prev) =>
-										prev.filter((item) => item.id !== server.id),
-									);
-									if (portalMcpServerId && server.id === portalMcpServerId) {
-										setAgentParams({
-											attachDefaultTools: false,
-										});
-									}
-								}}
-							/>
-						</div>
-					))}
-				</div>
-			</div>
-		</StyledParam>
-	);
+              <IconButton
+                iconName={CrossReactSvgUrl}
+                size={12}
+                onClick={() => {
+                  setSelectedServers?.((prev) =>
+                    prev.filter((item) => item.id !== server.id),
+                  );
+                  if (portalMcpServerId && server.id === portalMcpServerId) {
+                    setAgentParams({
+                      attachDefaultTools: false,
+                    });
+                  }
+                }}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </StyledParam>
+  );
 };
 
 export default MCPSettings;

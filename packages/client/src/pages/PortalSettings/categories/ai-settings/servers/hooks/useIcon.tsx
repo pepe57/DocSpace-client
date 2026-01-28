@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import resizeImage from "resize-image";
 import equal from "fast-deep-equal/react";
 
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import { ONE_MEGABYTE } from "@docspace/shared/constants";
@@ -123,10 +123,7 @@ export const useIcon = (initialValue?: string) => {
             </Link>
           </>
         ) : (
-          <SelectorAddButton
-            label={t("OAuth:SelectNewImage")}
-            onClick={onClick}
-          />
+          <AddButton label={t("OAuth:SelectNewImage")} onClick={onClick} />
         )}
       </div>
       <input

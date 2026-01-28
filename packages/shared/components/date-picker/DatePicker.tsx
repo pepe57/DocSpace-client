@@ -32,7 +32,7 @@ import CalendarIconUrl from "PUBLIC_DIR/images/calendar.react.svg?url";
 import CalendarIcon from "PUBLIC_DIR/images/calendar.react.svg";
 
 import { Calendar } from "../calendar";
-import { SelectorAddButton } from "../selector-add-button";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItem } from "../selected-item";
 import { DatePickerProps } from "./DatePicker.types";
 import styles from "./DatePicker.module.scss";
@@ -161,7 +161,7 @@ const DatePicker = (props: DatePickerProps) => {
           aria-expanded={isCalendarOpen}
           tabIndex={0}
         >
-          <SelectorAddButton
+          <AddButton
             title={selectDateText}
             className="add-delivery-date-button"
             iconName={CalendarIconUrl}

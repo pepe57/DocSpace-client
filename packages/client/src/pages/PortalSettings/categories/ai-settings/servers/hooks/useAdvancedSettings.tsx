@@ -30,168 +30,168 @@ import equal from "fast-deep-equal/react";
 
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
-	InputSize,
-	InputType,
-	TextInput,
+  InputSize,
+  InputType,
+  TextInput,
 } from "@docspace/ui-kit/components/text-input";
 import { Text } from "@docspace/ui-kit/components/text";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 import addEditStyles from "../styles/AddEditDialog.module.scss";
 import baseParamsStyles from "./useBaseParams.module.scss";
 
 export const useAdvancedSettings = (
-	initialValues?: Record<string, string>,
-	needReset?: boolean,
+  initialValues?: Record<string, string>,
+  needReset?: boolean,
 ) => {
-	const { t } = useTranslation(["Common", "AISettings", "SingleSignOn"]);
-	const [showAdvancedSettings, setShowAdvancedSettings] = useState(
-		!!initialValues || needReset,
-	);
+  const { t } = useTranslation(["Common", "AISettings", "SingleSignOn"]);
+  const [showAdvancedSettings, setShowAdvancedSettings] = useState(
+    !!initialValues || needReset,
+  );
 
-	const [headerCounts, setHeaderCounts] = React.useState(
-		initialValues ? Object.keys(initialValues).length : 1,
-	);
-	const [headerNames, setHeaderNames] = React.useState<Record<string, string>>(
-		() => {
-			if (needReset) return { "": "" };
+  const [headerCounts, setHeaderCounts] = React.useState(
+    initialValues ? Object.keys(initialValues).length : 1,
+  );
+  const [headerNames, setHeaderNames] = React.useState<Record<string, string>>(
+    () => {
+      if (needReset) return { "": "" };
 
-			if (!initialValues) return {};
+      if (!initialValues) return {};
 
-			const names: Record<string, string> = {};
-			Object.keys(initialValues).map((key, index) => (names[index] = key));
-			return names;
-		},
-	);
-	const [headerValues, setHeaderValues] = React.useState<
-		Record<string, string>
-	>(() => {
-		if (needReset) return { "": "" };
-		if (!initialValues) return {};
+      const names: Record<string, string> = {};
+      Object.keys(initialValues).map((key, index) => (names[index] = key));
+      return names;
+    },
+  );
+  const [headerValues, setHeaderValues] = React.useState<
+    Record<string, string>
+  >(() => {
+    if (needReset) return { "": "" };
+    if (!initialValues) return {};
 
-		const values: Record<string, string> = {};
-		Object.values(initialValues).map((value, index) => (values[index] = value));
-		return values;
-	});
+    const values: Record<string, string> = {};
+    Object.values(initialValues).map((value, index) => (values[index] = value));
+    return values;
+  });
 
-	const initFormData = React.useRef({
-		headerNames,
-		headerValues,
-	});
+  const initFormData = React.useRef({
+    headerNames,
+    headerValues,
+  });
 
-	const hasChanges = !equal(initFormData.current, {
-		headerNames,
-		headerValues,
-	});
+  const hasChanges = !equal(initFormData.current, {
+    headerNames,
+    headerValues,
+  });
 
-	const onChangeHeaderName = (index: number, value: string) => {
-		setHeaderNames((val) => ({ ...val, [index]: value }));
-	};
+  const onChangeHeaderName = (index: number, value: string) => {
+    setHeaderNames((val) => ({ ...val, [index]: value }));
+  };
 
-	const onChangeHeaderValue = (index: number, value: string) => {
-		setHeaderValues((val) => ({ ...val, [index]: value }));
-	};
+  const onChangeHeaderValue = (index: number, value: string) => {
+    setHeaderValues((val) => ({ ...val, [index]: value }));
+  };
 
-	const onAddNewHeader = () => {
-		setHeaderCounts((val) => val + 1);
-	};
+  const onAddNewHeader = () => {
+    setHeaderCounts((val) => val + 1);
+  };
 
-	const getAPIHeaders = () => {
-		const headers: Record<string, string> = {};
+  const getAPIHeaders = () => {
+    const headers: Record<string, string> = {};
 
-		Object.entries(headerNames).forEach(([index, name]) => {
-			if (!name) return;
-			headers[name] = headerValues[index];
-		});
+    Object.entries(headerNames).forEach(([index, name]) => {
+      if (!name) return;
+      headers[name] = headerValues[index];
+    });
 
-		return headers;
-	};
+    return headers;
+  };
 
-	const headersComponent = (
-		<>
-			<div>
-				<div className={addEditStyles.advancedSettings}>
-					<Text fontSize="16px" lineHeight="22px" fontWeight={700}>
-						{t("SingleSignOn:AdvancedSettings")}
-					</Text>
-					<Link
-						onClick={() => setShowAdvancedSettings(!showAdvancedSettings)}
-						type={LinkType.action}
-						isHovered
-						data-testid="mcp-headers-block-toggle"
-					>
-						{t(
-							showAdvancedSettings ? "SingleSignOn:Hide" : "SingleSignOn:Show",
-						)}
-					</Link>
-				</div>
-				{showAdvancedSettings ? (
-					<Text className={baseParamsStyles.fieldHint}>
-						{t("AISettings:MCPServerAdvancedSettingsHint")}
-					</Text>
-				) : null}
-			</div>
-			{showAdvancedSettings ? (
-				<div>
-					<div className={addEditStyles.headersContainer}>
-						{Array.from({ length: headerCounts }).map((_, index) => (
-							<React.Fragment key={`header-${index * 2}`}>
-								<FieldContainer
-									labelText={t("AISettings:HeaderName")}
-									isVertical
-									removeMargin
-									labelVisible
-								>
-									<TextInput
-										type={InputType.text}
-										size={InputSize.base}
-										value={headerNames[index]}
-										onChange={(e) => onChangeHeaderName(index, e.target.value)}
-										placeholder={t("AISettings:EnterLabel")}
-										scale
-										hasError={needReset && !headerNames[index] && index === 0}
-										testId="mcp-header-name-input"
-									/>
-								</FieldContainer>
-								<FieldContainer
-									labelText={t("AISettings:HeaderValue")}
-									isVertical
-									removeMargin
-									labelVisible
-								>
-									<TextInput
-										type={InputType.text}
-										size={InputSize.base}
-										value={headerValues[index]}
-										onChange={(e) => onChangeHeaderValue(index, e.target.value)}
-										placeholder={t("AISettings:EnterValue")}
-										scale
-										hasError={needReset && !headerValues[index] && index === 0}
-										testId="mcp-header-value-input"
-									/>
-								</FieldContainer>
-							</React.Fragment>
-						))}
-					</div>
-					<SelectorAddButton
-						label={t("AISettings:AddMoreHeaders")}
-						onClick={onAddNewHeader}
-					/>
-				</div>
-			) : null}
-		</>
-	);
+  const headersComponent = (
+    <>
+      <div>
+        <div className={addEditStyles.advancedSettings}>
+          <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
+            {t("SingleSignOn:AdvancedSettings")}
+          </Text>
+          <Link
+            onClick={() => setShowAdvancedSettings(!showAdvancedSettings)}
+            type={LinkType.action}
+            isHovered
+            data-testid="mcp-headers-block-toggle"
+          >
+            {t(
+              showAdvancedSettings ? "SingleSignOn:Hide" : "SingleSignOn:Show",
+            )}
+          </Link>
+        </div>
+        {showAdvancedSettings ? (
+          <Text className={baseParamsStyles.fieldHint}>
+            {t("AISettings:MCPServerAdvancedSettingsHint")}
+          </Text>
+        ) : null}
+      </div>
+      {showAdvancedSettings ? (
+        <div>
+          <div className={addEditStyles.headersContainer}>
+            {Array.from({ length: headerCounts }).map((_, index) => (
+              <React.Fragment key={`header-${index * 2}`}>
+                <FieldContainer
+                  labelText={t("AISettings:HeaderName")}
+                  isVertical
+                  removeMargin
+                  labelVisible
+                >
+                  <TextInput
+                    type={InputType.text}
+                    size={InputSize.base}
+                    value={headerNames[index]}
+                    onChange={(e) => onChangeHeaderName(index, e.target.value)}
+                    placeholder={t("AISettings:EnterLabel")}
+                    scale
+                    hasError={needReset && !headerNames[index] && index === 0}
+                    testId="mcp-header-name-input"
+                  />
+                </FieldContainer>
+                <FieldContainer
+                  labelText={t("AISettings:HeaderValue")}
+                  isVertical
+                  removeMargin
+                  labelVisible
+                >
+                  <TextInput
+                    type={InputType.text}
+                    size={InputSize.base}
+                    value={headerValues[index]}
+                    onChange={(e) => onChangeHeaderValue(index, e.target.value)}
+                    placeholder={t("AISettings:EnterValue")}
+                    scale
+                    hasError={needReset && !headerValues[index] && index === 0}
+                    testId="mcp-header-value-input"
+                  />
+                </FieldContainer>
+              </React.Fragment>
+            ))}
+          </div>
+          <AddButton
+            label={t("AISettings:AddMoreHeaders")}
+            onClick={onAddNewHeader}
+          />
+        </div>
+      ) : null}
+    </>
+  );
 
-	return {
-		headerCounts,
-		headerNames,
-		headerValues,
-		headersComponent,
-		onChangeHeaderName,
-		onChangeHeaderValue,
-		onAddNewHeader,
-		getAPIHeaders,
-		advancedSettingsChanged: hasChanges,
-	};
+  return {
+    headerCounts,
+    headerNames,
+    headerValues,
+    headersComponent,
+    onChangeHeaderName,
+    onChangeHeaderValue,
+    onAddNewHeader,
+    getAPIHeaders,
+    advancedSettingsChanged: hasChanges,
+  };
 };

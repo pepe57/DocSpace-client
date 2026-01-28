@@ -32,7 +32,7 @@ import userEvent from "@testing-library/user-event";
 import { DatePicker } from "./DatePicker";
 
 // Mock selector-add-button
-vi.mock("../selector-add-button", () => ({
+vi.mock("@docspace/ui-kit/components/add-button", () => ({
   SelectorAddButton: ({
     children,
     // ...props

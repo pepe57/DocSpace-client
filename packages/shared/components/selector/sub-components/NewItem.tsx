@@ -27,7 +27,7 @@
 import React from "react";
 
 import { classNames } from "../../../utils";
-import { SelectorAddButton } from "../../selector-add-button";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
 
 import NewItemDropDown from "./NewItemDropDown";
 import useCreateDropDown from "../hooks/useCreateDropDown";
@@ -90,7 +90,7 @@ const NewItem = ({
       className={classNames(styles.selectorItem, styles.hoverable)}
       onClick={onCreateClickAction}
     >
-      <SelectorAddButton
+      <AddButton
         isAction
         label={label}
         titleText={label}

@@ -35,7 +35,7 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossReactSvg from "PUBLIC_DIR/images/icons/16/cross.react.svg";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
 
 import styles from "../styles/PaymentMethod.module.scss";
 
@@ -149,7 +149,7 @@ const PaymentMethod = (props: PaymentMethodProps) => {
         </div>
       ) : (
         <div className={styles.addPaymentMethodContainer}>
-          <SelectorAddButton
+          <AddButton
             testId="payment_method_add_button"
             isLoading={isLoading}
             isDisabled={isLoading}

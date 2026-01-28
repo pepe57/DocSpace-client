@@ -33,7 +33,7 @@ import { useTranslation } from "react-i18next";
 import { DatePicker } from "@docspace/shared/components/date-picker";
 import { Calendar } from "@docspace/shared/components/calendar";
 import { TimePicker } from "@docspace/shared/components/time-picker";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
 
 import { isMobile } from "@docspace/shared/utils";
@@ -308,7 +308,7 @@ const DeliveryDatePicker = ({
             </TimePickerCell>
           ) : (
             <TimePickerCell>
-              <SelectorAddButton
+              <AddButton
                 title={t("Common:AddButton")}
                 onClick={showTimePicker}
                 className="mr-8 add-delivery-time-button"

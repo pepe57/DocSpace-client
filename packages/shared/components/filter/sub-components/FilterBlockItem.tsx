@@ -31,7 +31,7 @@ import XIcon from "PUBLIC_DIR/images/x.react.svg";
 
 import { FilterGroups, FilterKeys, FilterSelectorTypes } from "../../../enums";
 
-import { SelectorAddButton } from "../../selector-add-button";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
 import {
   Heading,
   HeadingLevel,
@@ -126,7 +126,7 @@ const FilterBlockItem = ({
         data-testid={`filter_selector_${item.key}`}
       >
         {item?.displaySelectorType === "button" ? (
-          <SelectorAddButton
+          <AddButton
             id="filter_add-author"
             label={item.label}
             lineHeight="15px"

@@ -53,7 +53,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import FilterIcon from "@docspace/shared/components/filter/sub-components/FilterIcon";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItemPure } from "@docspace/shared/components/selected-item/SelectedItem";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -583,10 +583,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     : selectedContact;
 
   const contactSelector = !currentContact ? (
-    <SelectorAddButton
-      label={t("SelectContact")}
-      onClick={onSelectorAddButtonClick}
-    />
+    <AddButton label={t("SelectContact")} onClick={onSelectorAddButtonClick} />
   ) : (
     <SelectedItemPure
       key={`${currentContact}`}

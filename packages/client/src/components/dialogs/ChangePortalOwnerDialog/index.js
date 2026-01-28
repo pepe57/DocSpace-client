@@ -37,7 +37,7 @@ import Filter from "@docspace/shared/api/people/filter";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Avatar } from "@docspace/ui-kit/components/avatar";
 import { Text } from "@docspace/ui-kit/components/text";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { Button } from "@docspace/ui-kit/components/button";
 import { Link } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/shared/components/toast";
@@ -212,7 +212,7 @@ const ChangePortalOwnerDialog = ({
           </div>
         ) : (
           <div className={styles.peopleSelector}>
-            <SelectorAddButton
+            <AddButton
               className="selector-add-button"
               onClick={onTogglePeopleSelector}
               label={t("Translations:ChooseFromList")}

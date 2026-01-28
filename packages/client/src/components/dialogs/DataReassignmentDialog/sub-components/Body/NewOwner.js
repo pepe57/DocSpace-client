@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 
@@ -53,7 +53,7 @@ const ChoiceNewOwner = ({ t, targetUser, onTogglePeopleSelector }) => {
 
   return (
     <div className={styles.peopleSelector}>
-      <SelectorAddButton
+      <AddButton
         className="selector-add-button"
         onClick={onTogglePeopleSelector}
         label={t("Translations:ChooseFromList")}
