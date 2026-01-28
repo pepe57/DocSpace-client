@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "<strong>Özel Filtre</strong> etkin dosyanın bağlantısı panoya kopyalandı.",
   "LinkDoesNotExist": "Açmaya çalıştığınız bağlantı mevcut değil.",
   "LinkExpirationDate": "Bağlantıyla paylaşılan dosya <1>{{date}}</1> tarihinde sona erecektir.",
-  "LinkExpireAfter": "Bağlantı <1>{{date}}</1> tarihinden sonra sona erecektir",
   "LinkExpired": "Bağlantının süresi doldu.",
   "LinkHasExpired": "Takip ettiğiniz bağlantının süresi doldu.",
-  "LinkHasExpiredAndHasBeenDisabled": "Bağlantının süresi doldu ve devre dışı bırakıldı",
   "LinkIsValid": "Bağlantı <1>{{date}}</1> tarihi için geçerlidir",
   "LinkName": "Bağlantı adı",
   "LinkNoExpiration": "Bağlantının <1>süre sonu tarihi yok</1>",
@@ -756,7 +754,6 @@
   "Remove": "Kaldır",
   "RemovedFromList": "Listeden kaldırıldı",
   "RemoveFromList": "Listeden kaldır",
-  "RemoveLink": "Bağlantıyı kaldır",
   "Rename": "Yeniden adlandır",
   "RenewSubscription": "Aboneliği yenile?",
   "RepeatInvitation": "Daveti tekrarla",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "Formun orijinalini doldurulması için paylaşın.",
   "ShareTheRoom": "oda",
   "ShareToFillOut": "Doldurmak için paylaşın",
-  "ShareVia": "Aracılığıyla paylaş",
   "ShareWithPortalUsers": "{{productName}} kullanıcıları ile paylaşma",
   "ShareWithPortalUsersDescription": "{{productName}}'den belirli kullanıcıları seçin ve onlara orijinal formu doldurmak üzere davetiye gönderin.",
   "ShowAboutWindow": "Hakkında penceresini göster",
@@ -1054,5 +1050,6 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "ExternalLink": "Harici bağlantı"
 }

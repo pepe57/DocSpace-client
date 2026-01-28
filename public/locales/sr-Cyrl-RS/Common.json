@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "Веза до датотеке са омогућеним <strong>Прилагођеним филтером</strong> је успешно копирана у привремену меморију.",
   "LinkDoesNotExist": "Линк који покушавате да отворите не постоји.",
   "LinkExpirationDate": "Фајл подељен путем линка истећи ће за <1>{{date}}</1>",
-  "LinkExpireAfter": "Линк ће да истекне после <1>{{date}}</1>",
   "LinkExpired": "Линк је истекао.",
   "LinkHasExpired": "Линк који сте пратили је истекао.",
-  "LinkHasExpiredAndHasBeenDisabled": "Линк је истекао и онемогућен је",
   "LinkIsValid": "Линк је валидан до <1>{{date}}</1>",
   "LinkName": "Име линка",
   "LinkNoExpiration": "Линк нема <1>датум истека</1>",
@@ -756,7 +754,6 @@
   "Remove": "Уклони",
   "RemovedFromList": "Уклоњено са листе",
   "RemoveFromList": "Уклони са листе",
-  "RemoveLink": "Уклони линк",
   "Rename": "Преименуј",
   "RenewSubscription": "Обнови претплату?",
   "RepeatInvitation": "Понови позивницу",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "Поделите оригинални образац за попуњавање.",
   "ShareTheRoom": "соба",
   "ShareToFillOut": "Подели за попуњавање",
-  "ShareVia": "Дели преко",
   "ShareWithPortalUsers": "Дељење са {{productName}} корисницима",
   "ShareWithPortalUsersDescription": "Изабери одређене кориснике из {{productName}} и позови их да попуне оригиналну форму.",
   "ShowAboutWindow": "Прикажи О прозору",
@@ -1054,5 +1050,6 @@
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "ExternalLink": "Екстерни линк"
 }
