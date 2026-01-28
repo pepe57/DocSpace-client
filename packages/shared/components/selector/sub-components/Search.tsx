@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { use, useCallback } from "react";
-import { SearchInput } from "../../search-input";
+import { SearchInput } from "@docspace/ui-kit/components/search-input";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 
 import { SearchContext, SearchDispatchContext } from "../contexts/Search";
@@ -33,52 +33,51 @@ import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 import { SearchProps } from "../Selector.types";
 
 const Search = React.memo(({ isSearch }: SearchProps) => {
-	const {
-		searchPlaceholder,
-		searchValue,
-		isSearchLoading,
-		searchLoader,
-		withSearch,
-		onClearSearch,
-		onSearch,
-	} = use(SearchContext);
-	const setIsSearch = use(SearchDispatchContext);
+  const {
+    searchPlaceholder,
+    searchValue,
+    isSearchLoading,
+    searchLoader,
+    withSearch,
+    onClearSearch,
+    onSearch,
+  } = use(SearchContext);
+  const setIsSearch = use(SearchDispatchContext);
 
-	const { isBreadCrumbsLoading, bodyIsLoading } = use(BreadCrumbsContext);
+  const { isBreadCrumbsLoading, bodyIsLoading } = use(BreadCrumbsContext);
 
-	const onClearSearchAction = useCallback(() => {
-		onClearSearch?.(() => setIsSearch(false));
-	}, [onClearSearch, setIsSearch]);
+  const onClearSearchAction = useCallback(() => {
+    onClearSearch?.(() => setIsSearch(false));
+  }, [onClearSearch, setIsSearch]);
 
-	const onSearchAction = useCallback(
-		(data: string) => {
-			const v = data.trim();
+  const onSearchAction = useCallback(
+    (data: string) => {
+      const v = data.trim();
 
-			if (v === "") return onClearSearchAction();
+      if (v === "") return onClearSearchAction();
 
-			onSearch?.(v, () => setIsSearch(true));
-		},
-		[onClearSearchAction, onSearch, setIsSearch],
-	);
+      onSearch?.(v, () => setIsSearch(true));
+    },
+    [onClearSearchAction, onSearch, setIsSearch],
+  );
 
-	if (isBreadCrumbsLoading || isSearchLoading || (!isSearch && bodyIsLoading))
-		return searchLoader;
+  if (isBreadCrumbsLoading || isSearchLoading || (!isSearch && bodyIsLoading))
+    return searchLoader;
 
-	if (!withSearch || !isSearch) return null;
+  if (!withSearch || !isSearch) return null;
 
-	return (
-		<SearchInput
-			className="search-input selector-search-input"
-			placeholder={searchPlaceholder}
-			value={searchValue ?? ""}
-			onChange={onSearchAction}
-			onClearSearch={onClearSearchAction}
-			size={InputSize.base}
-			resetOnBlur
-			dataTestId="selector_search_input"
-			tabIndex={1}
-		/>
-	);
+  return (
+    <SearchInput
+      className="search-input selector-search-input"
+      placeholder={searchPlaceholder}
+      value={searchValue ?? ""}
+      onChange={onSearchAction}
+      onClearSearch={onClearSearchAction}
+      size={InputSize.base}
+      dataTestId="selector_search_input"
+      tabIndex={1}
+    />
+  );
 });
 
 Search.displayName = "Search";

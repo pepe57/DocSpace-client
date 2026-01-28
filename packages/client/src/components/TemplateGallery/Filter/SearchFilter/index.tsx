@@ -28,7 +28,7 @@ import { observer } from "mobx-react";
 import { useState, useRef, useEffect, FC } from "react";
 import { withTranslation } from "react-i18next";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
-import { SearchInput } from "@docspace/shared/components/search-input";
+import { SearchInput } from "@docspace/ui-kit/components/search-input";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { SearchFilterProps } from "./SearchFilter.types";
 
