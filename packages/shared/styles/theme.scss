@@ -656,25 +656,7 @@
   --main-button-mobile-progress-bar-color: #{$light-blue-main};
 }
 
-.light {
-  --modal-dialog-bg-color: #{$white};
-  --modal-dialog-text-color: #{$black};
-  --modal-dialog-backdrop-bg-color: #{$blur-light};
-  --modal-dialog-header-border-color: #{$gray-light-mid};
-  --modal-dialog-link-underline-color: #{$light-gray-dark};
-
-  --modal-dialog-content-transform-x: 100%;
-}
-
 .dark {
-  --modal-dialog-bg-color: #{$black};
-  --modal-dialog-text-color: #{$white};
-  --modal-dialog-backdrop-bg-color: #{$blur-dark};
-  --modal-dialog-header-border-color: #{$gray-dark-strong};
-  --modal-dialog-link-underline-color: #{$dark-gray-dark};
-
-  --modal-dialog-content-transform-x: 100%;
-
   --beta-badge-tooltip-box-shadow-color: #00000029;
 }
 
@@ -1177,14 +1159,6 @@
 .dark {
   --catalog-profile-background: #{$light-dark-gray-hover};
   --catalog-profile-border-top: 1px solid #{$gray-dark-strong};
-}
-
-.light {
-  --modal-dialog-header-border-color: #{$gray-light-mid};
-}
-
-.dark {
-  --modal-dialog-header-border-color: #{$gray-dark-strong};
 }
 
 .light {
