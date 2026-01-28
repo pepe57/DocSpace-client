@@ -492,24 +492,21 @@ class PluginStore {
   };
 
   installPluginCss = async (plugin: TPlugin) => {
-    const cssUrl = getPluginUrl(
-      plugin.url,
-      `plugin.css?hash=${plugin.version}`,
-    );
+    if (!plugin.cssUrl) return;
 
     const linkId = `plugin-styles-${plugin.pluginName}`;
     const existingLink = document.getElementById(linkId) as HTMLLinkElement;
 
     if (existingLink) {
       // update existing link
-      existingLink.href = cssUrl;
+      existingLink.href = plugin.cssUrl;
       return;
     }
 
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.type = "text/css";
-    link.href = cssUrl;
+    link.href = plugin.cssUrl;
     link.id = linkId;
     document.head.appendChild(link);
   };

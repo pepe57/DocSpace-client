@@ -258,6 +258,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           size={InputSize.base}
           onInput={onLocalFileInputClick}
           accept={[".tar", ".gz"]}
+          placeholder={t("Common:SelectAction")}
           className={classNames(
             styles.restoreBackupInput,
             "restore-backup_input",
