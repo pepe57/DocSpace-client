@@ -33,7 +33,7 @@ import { DatePicker } from "./DatePicker";
 
 // Mock selector-add-button
 vi.mock("@docspace/ui-kit/components/add-button", () => ({
-  SelectorAddButton: ({
+  AddButton: ({
     children,
     // ...props
   }: {
