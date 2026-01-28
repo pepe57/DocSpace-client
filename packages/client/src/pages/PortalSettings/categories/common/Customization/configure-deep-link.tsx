@@ -34,7 +34,7 @@ import isEqual from "lodash/isEqual";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/shared/components/toast";

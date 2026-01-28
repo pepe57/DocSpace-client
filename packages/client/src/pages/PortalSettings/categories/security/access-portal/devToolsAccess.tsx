@@ -30,7 +30,7 @@ import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/shared/components/toast";

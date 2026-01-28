@@ -31,7 +31,7 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { toastr } from "@docspace/shared/components/toast";
 import { size, isMobileDevice } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";

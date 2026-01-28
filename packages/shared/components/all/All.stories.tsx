@@ -48,7 +48,7 @@ import { Calendar } from "../calendar";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { ComboBox, ComboBoxSize } from "../combobox";
 import { InputBlock } from "@docspace/ui-kit/components/input-block";
-import { RadioButtonGroup } from "../radio-button-group";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import {
   InputSize,
   InputType,
