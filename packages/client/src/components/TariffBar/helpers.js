@@ -68,10 +68,17 @@ export const getEnterpriseBar = (
         color: ORANGE,
       };
     }
-    if (!isLifetimeLicense && isGracePeriod)
+
+    if (!isLifetimeLicense && isLicenseExpiring)
       return {
         label: t("Common:LicenseExpiresOn", { date: paymentDate }),
         color: ORANGE,
+      };
+
+    if (!isLifetimeLicense && isGracePeriod)
+      return {
+        label: t("Common:LicenseExpired", { date: paymentDate }),
+        color: RED,
       };
 
     if (isLicenseDateExpired)
@@ -79,6 +86,7 @@ export const getEnterpriseBar = (
         label: t("Common:SubscriptionExpiredTitle"),
         color: RED,
       };
+
     return {
       label: t("Common:SubscriptionIsExpiring", { date: paymentDate }),
       color: ORANGE,
