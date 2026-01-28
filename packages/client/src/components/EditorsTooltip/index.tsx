@@ -124,15 +124,14 @@ const EditorsTooltip = ({ item, currentUserId }: EditorsTooltipProps) => {
         <Tooltip
           tooltipStyle={{
             padding: "12px",
-            paddingRight: "0px",
+            paddingInlineEnd: "0px",
             maxWidth: "fit-content",
           }}
           id={tooltipId}
           getContent={renderTooltipContent}
           place="bottom-start"
           offset={10}
-          clickable={true}
-          openOnClick={true}
+          clickable
           afterShow={openTooltip}
           afterHide={closeTooltip}
         />

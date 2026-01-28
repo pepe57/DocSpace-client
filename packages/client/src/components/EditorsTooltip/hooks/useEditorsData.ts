@@ -70,7 +70,7 @@ export const useEditorsData = ({
     queries: editorIds.map((editorId) => ({
       queryKey: ["userPhoto", editorId],
       queryFn: () => getUserPhoto(editorId),
-      enabled: isOpen && editorIds.length > 0,
+      enabled: isOpen && editorIds.length > 0 && !editorId.startsWith("uid-"),
       staleTime: 5 * 60 * 1000,
       gcTime: 10 * 60 * 1000,
       retry: 1,

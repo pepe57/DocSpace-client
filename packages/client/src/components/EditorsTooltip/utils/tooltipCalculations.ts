@@ -28,7 +28,6 @@ import type { EditorUser, TooltipDimensions } from "../EditorsTooltip.types";
 
 const AVATAR_SIZE = 24;
 const GAP_SIZE = 8;
-const PADDING_LEFT = 12;
 const DESKTOP_ITEM_HEIGHT = 24;
 const MIN_WIDTH = 200;
 const MAX_WIDTH = 400;
@@ -67,7 +66,7 @@ export const calculateTooltipWidth = (editors: EditorUser[]): number => {
   const textWidth = calculateTextWidth(longestName, font);
   // avatar + gap + text + padding
   const calculatedWidth = Math.ceil(
-    AVATAR_SIZE + GAP_SIZE + textWidth + PADDING_LEFT,
+    AVATAR_SIZE + GAP_SIZE + textWidth + PADDING * 2,
   );
 
   return Math.max(MIN_WIDTH, Math.min(calculatedWidth, MAX_WIDTH));
