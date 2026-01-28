@@ -34,7 +34,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Textarea } from "../../components/textarea";
 import { EmailInput } from "../../components/email-input";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
 import { FieldContainer } from "../../components/field-container";
 import { TValidate } from "../../components/email-input/EmailInput.types";
 

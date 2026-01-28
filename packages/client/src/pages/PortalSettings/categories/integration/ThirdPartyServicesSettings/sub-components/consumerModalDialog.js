@@ -29,7 +29,7 @@ import PropTypes from "prop-types";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { format } from "react-string-format";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
 import { TextInput } from "@docspace/ui-kit/components/text-input";

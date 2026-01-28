@@ -7,7 +7,7 @@ import DialogsStore from "SRC_DIR/store/DialogsStore";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";

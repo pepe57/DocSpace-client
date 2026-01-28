@@ -28,7 +28,7 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import moment from "moment-timezone";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import styled from "styled-components";
 
 import { Button } from "@docspace/ui-kit/components/button";

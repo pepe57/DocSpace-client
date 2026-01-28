@@ -42,7 +42,7 @@ import { toastr } from "../toast";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Textarea } from "../textarea";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { ModalDialogType, ModalDialog } from "../modal-dialog";
+import { ModalDialogType, ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 
 import styles from "./ReportDialog.module.scss";
 import type { ReportDialogProps } from "./ReportDialog.types";

@@ -47,7 +47,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { Link } from "@docspace/ui-kit/components/link";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import PeopleSelector from "@docspace/shared/selectors/People";

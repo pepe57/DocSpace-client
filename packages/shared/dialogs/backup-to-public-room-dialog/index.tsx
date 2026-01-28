@@ -28,7 +28,7 @@ import { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { ModalDialog } from "../../components/modal-dialog";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import type { BackupToPublicRoomProps } from "./BackupToPublicRoomDialog";
 

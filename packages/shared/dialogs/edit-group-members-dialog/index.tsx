@@ -34,7 +34,7 @@ import {
 } from "../../api/groups";
 import { SearchInput } from "@docspace/ui-kit/components/search-input";
 import { MIN_LOADER_TIMER } from "../../selectors/utils/constants";
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
 import { isFile } from "../../utils/typeGuards";
 
 import type { TGroupMemberInvitedInRoom } from "../../api/groups/types";

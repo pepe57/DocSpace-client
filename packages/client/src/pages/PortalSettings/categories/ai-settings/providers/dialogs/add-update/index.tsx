@@ -35,7 +35,7 @@ import classNames from "classnames";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";

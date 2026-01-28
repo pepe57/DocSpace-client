@@ -33,7 +33,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   calculateTotalPrice,

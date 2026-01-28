@@ -34,7 +34,7 @@ import HeaderDarkIcon from "PUBLIC_DIR/images/ready.pdf.form.modal.dark.svg";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { copyShareLink as clipboardCopy } from "@docspace/shared/utils/copy";

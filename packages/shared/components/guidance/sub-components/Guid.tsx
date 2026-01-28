@@ -41,7 +41,7 @@ import { AsideHeader } from "@docspace/ui-kit/components/aside";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import styles from "./Guid.module.scss";
-import modalStyles from "../../modal-dialog/ModalDialog.module.scss";
+import modalStyles from "@docspace/ui-kit/components/modal-dialog/ModalDialog.module.scss";
 import { getDynamicPlacement } from "./Guid.utils";
 import {
   GuidProps,

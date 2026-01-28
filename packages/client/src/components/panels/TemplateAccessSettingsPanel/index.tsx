@@ -37,7 +37,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";

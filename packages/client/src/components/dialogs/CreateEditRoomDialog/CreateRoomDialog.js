@@ -32,7 +32,7 @@ import {
   getStartRoomParams,
 } from "@docspace/shared/utils/rooms";
 import { Button } from "@docspace/ui-kit/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import RoomSelector from "@docspace/shared/selectors/Room";
 import { FolderType } from "@docspace/shared/enums";
 

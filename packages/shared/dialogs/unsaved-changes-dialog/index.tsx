@@ -30,7 +30,7 @@ import { type FC } from "react";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
 
 import type { UnsavedChangesDialogProps } from "./UnsavedChangesDialog.types";
 

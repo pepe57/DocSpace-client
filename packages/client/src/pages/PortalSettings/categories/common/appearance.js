@@ -46,7 +46,7 @@ import api from "@docspace/shared/api";
 import { ReactSVG } from "react-svg";
 import { isMobile, getTextColor } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { ColorPicker } from "@docspace/shared/components/color-picker";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 

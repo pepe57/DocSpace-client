@@ -34,8 +34,8 @@ import { inject, observer } from "mobx-react";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
+  DialogAsideSkeleton
+} from "@docspace/ui-kit/components/modal-dialog";
 import { LoadingButton } from "@docspace/shared/components/loading-button";
 
 import { StyledUploadBody } from "../StyledPanels";

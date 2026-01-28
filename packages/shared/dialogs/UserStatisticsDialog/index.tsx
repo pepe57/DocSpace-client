@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";

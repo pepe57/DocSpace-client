@@ -30,8 +30,8 @@ import { useTheme } from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
 import { SocialButton } from "@docspace/shared/components/social-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";

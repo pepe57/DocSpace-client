@@ -51,7 +51,7 @@ import {
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import FilterIcon from "@docspace/shared/components/filter/sub-components/FilterIcon";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItemPure } from "@docspace/shared/components/selected-item/SelectedItem";

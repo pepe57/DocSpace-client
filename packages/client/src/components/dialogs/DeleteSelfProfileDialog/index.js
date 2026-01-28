@@ -31,7 +31,7 @@ import PropTypes from "prop-types";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { sendInstructionsToDelete } from "@docspace/shared/api/people";
 import { Link } from "@docspace/ui-kit/components/link";

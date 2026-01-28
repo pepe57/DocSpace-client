@@ -32,7 +32,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";

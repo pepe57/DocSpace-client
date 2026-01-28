@@ -35,7 +35,7 @@ import api from "@docspace/shared/api";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { updatePayment } from "@docspace/shared/api/portal";
 import { Text } from "@docspace/ui-kit/components/text";
 

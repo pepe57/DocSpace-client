@@ -36,7 +36,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import type { Nullable } from "@docspace/shared/types";

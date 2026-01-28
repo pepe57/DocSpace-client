@@ -33,7 +33,7 @@ import "moment/min/locales.min";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import Share from "@docspace/shared/components/share";
 import { getPortalPasswordSettings } from "@docspace/shared/api/settings";
 import EditLinkPanel, {
