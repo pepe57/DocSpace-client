@@ -719,6 +719,7 @@
   "PortalNameIncorrect": "Incorrect account name",
   "PortalNameLength": "The account name must be between {{minLength}} and {{maxLength}} characters long",
   "PortalOwner": "{{productName}} owner",
+  "PortalQuotaLimitWarning": "{{productName}} quota limit is about to be reached.",
   "PortalRestoring": "{{productName}} restoring",
   "PortalRestriction": "Your IP address is not included in the list of allowed IP addresses to access this {{productName}}. Turn off a VPN if it's enabled and reload the page, or use another IP address to log in.",
   "PreparationForAIFailed": "Preparation failed",
@@ -837,6 +838,7 @@
   "RoomManager": "Room manager",
   "RoomName": "Room Name",
   "RoomNotAvailable": "Room not available",
+  "RoomQuotaLimitWarning": "Room quota limit is about to be reached.",
   "Rooms": "Rooms",
   "RoomSelector": "Room selector",
   "RoomShareLinkPassword": "Password access enabled.",
@@ -1057,6 +1059,7 @@
   "User": "User",
   "UserAgreement": "I confirm and want to proceed",
   "UserEmptyDescription": "Files and folders uploaded by admins will appeared here.",
+  "UserQuotaLimitWarning": "User quota limit is about to be reached.",
   "UsersInvited": "Users invited",
   "UTC": "UTC",
   "Version": "Version",
@@ -1090,6 +1093,7 @@
   "YouDontHaveEnoughPermission": "You don't have enough permission",
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
+  "YourFurtherEditsNotSaved": "Your further edits may not be saved.",
   "YourLogo": "Your logo",
   "YourTurn": "Your turn",
   "UserLimit": "User limit",
@@ -1099,5 +1103,4 @@
   "LinkNoLongerAvailable": "Link no longer available",
   "LinkLifetimeExpired": "Access via this link is no longer available since its lifetime has expired.",
   "ExternalLink": "External link",
-  "YourFurtherEditsNotSaved": "Your further edits may not be saved."
 }

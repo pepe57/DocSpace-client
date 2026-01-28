@@ -54,7 +54,9 @@ const Bar: React.FC = () => {
       case "tenant":
         return {
           header: t("YourFurtherEditsNotSaved"),
-          description: t("PortalQuotaLimitWarning"),
+          description: t("PortalQuotaLimitWarning", {
+            productName: t("ProductName"),
+          }),
         };
     }
   };
