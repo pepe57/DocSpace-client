@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "Veza do datoteke sa omogućenim <strong>Prilagođenim filterom </strong> je uspešno kopirana u privremenu memoriju.",
   "LinkDoesNotExist": "Link koji pokušavate da otvorite ne postoji.",
   "LinkExpirationDate": "Fajl podeljen putem linka isteći će za <1>{{date}}</1>",
-  "LinkExpireAfter": "Link će da istekne posle <1>{{date}}</1>",
   "LinkExpired": "Link je istekao.",
   "LinkHasExpired": "Link koji ste pratili je istekao.",
-  "LinkHasExpiredAndHasBeenDisabled": "Link je istekao i onemogućen je",
   "LinkIsValid": "Link je validan do <1>{{date}}</1>",
   "LinkName": "Ime linka",
   "LinkNoExpiration": "Link nema <1>datum isteka</1>",
@@ -756,7 +754,6 @@
   "Remove": "Ukloni",
   "RemovedFromList": "Uklonjeno sa liste",
   "RemoveFromList": "Ukloni sa liste",
-  "RemoveLink": "Ukloni link",
   "Rename": "Preimenuj",
   "RenewSubscription": "Obnovi pretplatu?",
   "RepeatInvitation": "Ponovi pozivnicu",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "Podelite originalni obrazac za popunjavanje.",
   "ShareTheRoom": "soba",
   "ShareToFillOut": "Podeli za popunjavanje",
-  "ShareVia": "Deli preko",
   "ShareWithPortalUsers": "Deljenje sa {{productName}} korisnicima",
   "ShareWithPortalUsersDescription": "Izaberi određene korisnike iz {{productName}} i pozovi ih da popune originalnu formu.",
   "ShowAboutWindow": "Prikaži O prozoru",
@@ -1055,5 +1051,6 @@
   "YourCurrentDomain": "Vaš trenutni domen",
   "YourLogo": "Vaš logo",
   "YourTurn": "Vaš red",
+  "ExternalLink": "Eksterni link",
   "Upload": "Otpremi"
 }

@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": " Միացված <strong>Հատուկ ֆիլտրով</strong> ֆայլի հղումը հաջողությամբ պատճենվել է սեղմատախտակում:",
   "LinkDoesNotExist": "Հղումը, որը փորձում եք բացել, գոյություն չունի:",
   "LinkExpirationDate": "Հղումով համօգտագործվող ֆայլը կսպառվի <1>{{date}}</1>-ից",
-  "LinkExpireAfter": "Հղման ժամկետը կսպառվի <1>{{date}}</1>-ից հետո",
   "LinkExpired": "Հղման ժամկետը սպառվել է",
   "LinkHasExpired": "Ձեր հետևած հղումը ժամկետանց է:",
-  "LinkHasExpiredAndHasBeenDisabled": "Այս հղումն ուժի մեջ ",
   "LinkIsValid": "Հղումը վավեր է <1>{{date}}</1>",
   "LinkName": "Հղման անվանում",
   "LinkNoExpiration": "Հղումը չունի <1>ժամկետի սահմանափակում</1>",
@@ -756,7 +754,6 @@
   "Remove": "Հեռացնել",
   "RemovedFromList": "Հեռացվել է ցանկից",
   "RemoveFromList": "Հեռացնել ցանկից",
-  "RemoveLink": "Հեռացնել հղումը",
   "Rename": "Վերանվանել",
   "RenewSubscription": "Թարմացնե՞լ բաժանորդագրությունը:",
   "RepeatInvitation": "Կրկնել հրավերը",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "Կիսվել բնօրինակի ձևը",
   "ShareTheRoom": "սենյակը",
   "ShareToFillOut": "Կիսվել լրացնելու համար",
-  "ShareVia": "Համօգտագործել միջոցով",
   "ShareWithPortalUsers": "Կիսվել {{productName}} օգտատերերի հետ",
   "ShareWithPortalUsersDescription": "Ընտրեք կոնկրետ օգտատերեր {{productName}}-ից և հրավիրեք նրանց լրացնելու սկզբնական ձևը։",
   "ShowAboutWindow": "Ցույց տալ «Մասին» պատուհանը",
@@ -1055,5 +1051,6 @@
   "YourCurrentDomain": "Ձեր ընթացիկ տիրույթը",
   "YourLogo": "Ձեր լոգոն",
   "YourTurn": "Ձեր հերթն է",
+  "ExternalLink": "Արտաքին հղում",
   "Upload": "Վերբեռնել"
 }

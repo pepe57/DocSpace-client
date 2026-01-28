@@ -75,6 +75,7 @@ import {
   TFormRoleMappingRequest,
   TFileFillingFormStatus,
   TShareToUser,
+  TDefaultTemplate,
 } from "./types";
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
 
@@ -1928,4 +1929,46 @@ export async function shareFileToUsers(
   })) as RoomMember[];
 
   return res;
+}
+
+export async function getDefaultTemplates() {
+  const res = await request({
+    method: "get",
+    url: "/files/settings/defaulttemplate",
+  });
+
+  return res.items as TDefaultTemplate[];
+}
+
+export async function setDefaultTemplates(
+  selectedFile: number | null,
+  fileExtension: string,
+) {
+  const res = await request({
+    method: "put",
+    url: "/files/settings/defaulttemplate",
+    data: {
+      selectedFile,
+      fileExtension,
+    },
+  });
+
+  return res.items as TDefaultTemplate[];
+}
+
+export async function uploadTemplateFromDevice(
+  file: File,
+  fileExtension: string,
+) {
+  const formData = new FormData();
+  formData.append("File", file);
+  const res = await request({
+    method: "post",
+    url: `/files/settings/defaulttemplate?FileExtension=${encodeURIComponent(fileExtension)}`,
+    data: formData,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.items as TDefaultTemplate[];
 }

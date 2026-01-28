@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "تم نسخ رابط الملف مع تفعيل <strong>الفِلتر المخصص</strong> بنجاح إلى الحافظة.",
   "LinkDoesNotExist": "الرابط الذي تحاول فتحه غير موجود",
   "LinkExpirationDate": "ستنتهي صلاحية الملف المشترك عبر الرابط في <1>{{date}}</1>",
-  "LinkExpireAfter": "ستنتهي صلاحية الرابط  بعد <1>{{date}}</1>",
   "LinkExpired": "انتهت صلاحية الرابط.",
   "LinkHasExpired": "انتهت صلاحية الرابط الذي تحاول فتحه",
-  "LinkHasExpiredAndHasBeenDisabled": "تم انتهاء صلاحية الرابط وتم تعطيله",
   "LinkIsValid": "الرابط صالح لمدة <1>{{date}}</1>",
   "LinkName": "اسم الرابط",
   "LinkNoExpiration": "الرابط <1>ليس له تاريخ انتهاء صلاحية</1> ",
@@ -756,7 +754,6 @@
   "Remove": "إزالة",
   "RemovedFromList": "تمت الإزالة من القائمة.",
   "RemoveFromList": "قم بإزالته من القائمة",
-  "RemoveLink": "إزالة الرابط",
   "Rename": "إعادة التسمية",
   "RenewSubscription": "تجديد الاشتراك؟",
   "RepeatInvitation": "تكرار الدعوة",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "شاركوا النموذج الأصلي لأغراض التعبئة.",
   "ShareTheRoom": "الغرفة",
   "ShareToFillOut": "مشاركة للتعبئة ",
-  "ShareVia": "شارك عبر",
   "ShareWithPortalUsers": "المشاركة مع مستخدمي {{productName}} ",
   "ShareWithPortalUsersDescription": "اختاروا مستخدمين محددين من {{productName}} وادعوهم لملء النموذج الأصلي. ",
   "ShowAboutWindow": "إظهار نافذة \"حول\" ",
@@ -1055,5 +1051,6 @@
   "YourCurrentDomain": "النطاق الحالي الخاص بك",
   "YourLogo": "شعاركم",
   "YourTurn": "دوركم الآن",
+  "ExternalLink": "رابط خارجي",
   "Upload": "رفع"
 }

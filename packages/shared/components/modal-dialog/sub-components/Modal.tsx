@@ -74,6 +74,7 @@ const Modal = ({
   withBorder = false,
   dataTestId,
   scrollbarCreateContext,
+  backdropVisible = true,
   closeOnBackdropClick = true,
   ...rest
 }: ModalSubComponentsProps) => {
@@ -199,6 +200,7 @@ const Modal = ({
       <ModalBackdrop
         className={classNames({
           [styles.modalBackdropActive]: visible,
+          [styles.hideBackdrop]: visible && !backdropVisible,
           "backdrop-active": visible,
         })}
         zIndex={zIndex}

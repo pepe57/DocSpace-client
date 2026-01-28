@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "Ο σύνδεσμος προς το αρχείο με το ενεργοποιημένο <strong>προσαρμοσμένο φίλτρο</strong> αντιγράφηκε με επιτυχία στο πρόχειρο.",
   "LinkDoesNotExist": "Ο σύνδεσμος που προσπαθείτε να ανοίξετε δεν υπάρχει.",
   "LinkExpirationDate": "Το αρχείο που μοιράστηκε με σύνδεσμο θα λήξει σε <1>{{date}}</1>",
-  "LinkExpireAfter": "Ο σύνδεσμος θα λήξει μετά τις <1>{{date}}</1>",
   "LinkExpired": "Ο σύνδεσμος έχει λήξει.",
   "LinkHasExpired": "Ο σύνδεσμος που ακολουθήσατε έχει λήξει.",
-  "LinkHasExpiredAndHasBeenDisabled": "Ο σύνδεσμος έχει λήξει και έχει απενεργοποιηθεί",
   "LinkIsValid": "Ο σύνδεσμος ισχύει για <1>{{date}}</1>",
   "LinkName": "Όνομα συνδέσμου",
   "LinkNoExpiration": "Ο σύνδεσμος έχει <1>χωρίς ημερομηνία λήξης</1>",
@@ -756,7 +754,6 @@
   "Remove": "Κατάργηση",
   "RemovedFromList": "Αφαιρέθηκε από τη λίστα",
   "RemoveFromList": "Κατάργηση από τη λίστα",
-  "RemoveLink": "Κατάργηση συνδέσμου",
   "Rename": "Μετονομασία",
   "RenewSubscription": "Ανανέωση συνδρομής;",
   "RepeatInvitation": "Επανάληψη πρόσκλησης",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "Μοιραστείτε την αρχική φόρμα για συμπλήρωση.",
   "ShareTheRoom": "το δωμάτιο",
   "ShareToFillOut": "Κοινοποιήστε για συμπλήρωση",
-  "ShareVia": "Κοινοποίηση μέσω",
   "ShareWithPortalUsers": "Κοινή χρήση με χρήστες του {{productName}}",
   "ShareWithPortalUsersDescription": "Επιλέξτε συγκεκριμένους χρήστες από το {{productName}} και προσκαλέστε τους να συμπληρώσουν την αρχική φόρμα.",
   "ShowAboutWindow": "Εμφάνιση του παραθύρου \"Σχετικά με\"",
@@ -1055,5 +1051,6 @@
   "YourCurrentDomain": "Το τρέχον όνομα τομέα σας",
   "YourLogo": "Το λογότυπό σας",
   "YourTurn": "Η σειρά σας",
+  "ExternalLink": "Εξωτερικός σύνδεσμος",
   "Upload": "Μεταφόρτωση"
 }

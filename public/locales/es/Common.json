@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "El enlace al archivo con el <strong>Filtro personalizado</strong> habilitado se ha copiado correctamente al portapapeles.",
   "LinkDoesNotExist": "El enlace que usted intenta abrir no existe.",
   "LinkExpirationDate": "El archivo compartido por enlace expirará en <1>{{date}}</1>",
-  "LinkExpireAfter": "El enlace caducará después del <1>{{date}}</1>",
   "LinkExpired": "El enlace ha caducado.",
   "LinkHasExpired": "El enlace que usted ha seguido ha expirado.",
-  "LinkHasExpiredAndHasBeenDisabled": "El enlace ha expirado y se ha desactivado",
   "LinkIsValid": "El enlace es válido durante <1>{{date}}</1>",
   "LinkName": "Nombre del enlace",
   "LinkNoExpiration": "El enlace no tiene <1>fecha de expiración</1>",
@@ -756,7 +754,6 @@
   "Remove": "Eliminar",
   "RemovedFromList": "Eliminado de la lista",
   "RemoveFromList": "Quitar de la lista",
-  "RemoveLink": "Eliminar enlace",
   "Rename": "Renombrar",
   "RenewSubscription": "¿Renovar la suscripción?",
   "RepeatInvitation": "Repetir invitación",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "Comparta el formulario original para su rellenado.",
   "ShareTheRoom": "la sala",
   "ShareToFillOut": "Compartir para rellenar",
-  "ShareVia": "Compartir vía",
   "ShareWithPortalUsers": "Compartiendo con usuarios de {{productName}}",
   "ShareWithPortalUsersDescription": "Seleccione usuarios específicos de {{productName}} e invítelos a rellenar el formulario original.",
   "ShowAboutWindow": "Mostrar la ventana Acerca de",
@@ -1055,5 +1051,6 @@
   "YourCurrentDomain": "Su dominio actual",
   "YourLogo": "Su logotipo",
   "YourTurn": "Su turno",
+  "ExternalLink": "Enlace externo",
   "Upload": "Cargar"
 }

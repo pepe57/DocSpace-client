@@ -1187,7 +1187,7 @@ test.describe("AI chat", () => {
         aiRoomsChatsHandler(TEST_PORT),
         agentFolderChatHandler(TEST_PORT),
         aiChatHandler(TEST_PORT),
-        agentFolderResultStorageHandler(TEST_PORT),
+        agentFolderResultStorageHandler(TEST_PORT, "empty"),
         agentFolderInfoHandler(TEST_PORT),
       );
 
@@ -1208,7 +1208,6 @@ test.describe("AI chat", () => {
 
       await expect(selector).toBeVisible();
 
-      //await mockRequest.router([endpoints.favorites]);
       mockRequest.use(favoritesHandler(TEST_PORT));
       const favoritesOption = selector.getByTestId(/selector-item/).filter({
         hasText: "Favorites",
@@ -1224,15 +1223,13 @@ test.describe("AI chat", () => {
       const chatTextArea = page.getByTestId("chat-input-textarea");
       await chatTextArea.fill("Lorem ipsum dolor sit amet");
 
-      // await page.unroute(endpoints.favorites.url);
-      mockRequest.use(agentFolderResultStorageHandler(TEST_PORT));
+      mockRequest.use(agentFolderResultStorageHandler(TEST_PORT, "empty"));
 
       const resultStorageTab = page.getByTestId("result_tab");
       await resultStorageTab.click();
 
       await expect(page.getByTestId("empty-view")).toBeVisible();
 
-      //await mockRequest.router([endpoints.agentFolderChat]);
       mockRequest.use(agentFolderChatHandler(TEST_PORT));
       const chatTab = page.getByTestId("chat_tab");
       await chatTab.click();

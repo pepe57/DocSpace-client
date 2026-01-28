@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "Връзката към файла с активиран <strong>Персонализиран филтър</strong> беше успешно копирана в клипборда.",
   "LinkDoesNotExist": "Линкът, който се опитвате да отворите, не съществува.",
   "LinkExpirationDate": "Файлът, споделен чрез линк, ще изтече на <1>{{date}}</1>",
-  "LinkExpireAfter": "Линкът ще изтече след <1>{{date}}</1>",
   "LinkExpired": "Линкът изтече",
   "LinkHasExpired": "Линкът, който сте последвали, е изтекъл.",
-  "LinkHasExpiredAndHasBeenDisabled": "Линкът изтече и беше деактивиран",
   "LinkIsValid": "Линкът е валиден до <1>{{date}}</1>",
   "LinkName": "Име на линка",
   "LinkNoExpiration": "Линкът няма <1>срок на валидност</1>",
@@ -756,7 +754,6 @@
   "Remove": "Премахване",
   "RemovedFromList": "Премахнат от списък",
   "RemoveFromList": "Премахни от списък",
-  "RemoveLink": "Премахнете линк",
   "Rename": "Преименувай",
   "RenewSubscription": "Подновяване на абонамента?",
   "RepeatInvitation": "Повторете поканата",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "Сподели оригиналния формуляр за попълване.",
   "ShareTheRoom": "стаята",
   "ShareToFillOut": "Сподели за попълване",
-  "ShareVia": "Сподели чрез",
   "ShareWithPortalUsers": "Споделяне с потребители на {{productName}}",
   "ShareWithPortalUsersDescription": "Изберете конкретни потребители от {{productName}} и ги поканете да попълнят оригиналния формуляр.",
   "ShowAboutWindow": "Покажи прозореца За нас",
@@ -1055,5 +1051,6 @@
   "YourCurrentDomain": "Вашият текущ домейн",
   "YourLogo": "Вашето лого",
   "YourTurn": "Ваш ред",
+  "ExternalLink": "Външна връзка",
   "Upload": "Качи"
 }

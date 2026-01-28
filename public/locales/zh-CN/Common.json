@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "启用<strong>自定义过滤器</strong>的文件链接已成功复制到剪贴板。",
   "LinkDoesNotExist": "链接不存在。",
   "LinkExpirationDate": "通过链接共享的文件将于<1>{{date}}</1>到期。",
-  "LinkExpireAfter": "链接将在 <1>{{date}}</1>后过期",
   "LinkExpired": "链接已过期",
   "LinkHasExpired": "您关注的链接已过期。",
-  "LinkHasExpiredAndHasBeenDisabled": "此链接过期，已被禁用",
   "LinkIsValid": "链接在 <1>{{date}}</1>前有效",
   "LinkName": "链接名称",
   "LinkNoExpiration": "此链接<1>永久有效</1>",
@@ -756,7 +754,6 @@
   "Remove": "移除",
   "RemovedFromList": "已从列表移除",
   "RemoveFromList": "从列表中移除",
-  "RemoveLink": "移除链接",
   "Rename": "重命名",
   "RenewSubscription": "是否续订？",
   "RepeatInvitation": "重复邀请",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "共享原始表单以供填写。",
   "ShareTheRoom": "房间",
   "ShareToFillOut": "共享以填写",
-  "ShareVia": "共享，通过",
   "ShareWithPortalUsers": "与{{productName}}用户共享",
   "ShareWithPortalUsersDescription": "从{{productName}}中选择指定用户，并邀请他们填写原始表单。",
   "ShowAboutWindow": "显示“关于”窗口",
@@ -1055,5 +1051,6 @@
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
   "YourTurn": "轮到您了",
+  "ExternalLink": "外部链接",
   "Upload": "上传"
 }

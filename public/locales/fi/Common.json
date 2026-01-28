@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "Linkki tiedostoon, jossa <strong>mukautettu suodatin</strong> on käytössä, kopioitiin leikepöydälle.",
   "LinkDoesNotExist": "Linkki, jota yrität avata ei ole olemassa.",
   "LinkExpirationDate": "Tiedosto, joka on jaettu linkin kautta, vanhenee <1>{{date}}</1>",
-  "LinkExpireAfter": "Linkki vanhenee <1>{{date}}</1> jälkeen",
   "LinkExpired": "Linkki on vanhentunut.",
   "LinkHasExpired": "Linkki, jota seurasit on vanhentunut.",
-  "LinkHasExpiredAndHasBeenDisabled": "Linkki on vanhentunut ja se on poistettu käytöstä",
   "LinkIsValid": "Linkki on voimassa <1>{{date}}</1> saakka",
   "LinkName": "Linkin nimi",
   "LinkNoExpiration": "Linkillä ei ole <1>voimassaoloaikaa</1>",
@@ -756,7 +754,6 @@
   "Remove": "Tiedostot poistettu",
   "RemovedFromList": "Poistettu listalta",
   "RemoveFromList": "Poista listalta",
-  "RemoveLink": "Poista linkki",
   "Rename": "Nimeä uudelleen",
   "RenewSubscription": "Uudista tilaus?",
   "RepeatInvitation": "Toista kutsu",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "Jaa alkuperäinen lomake täytettäväksi",
   "ShareTheRoom": "huone",
   "ShareToFillOut": "Jaa täytettäväksi",
-  "ShareVia": "Jaa käyttämällä",
   "ShareWithPortalUsers": "Jakaminen {{productName}}-käyttäjien kanssa",
   "ShareWithPortalUsersDescription": "Valitse {{productName}} -tuotteesta tietyt käyttäjät ja kutsu heitä täyttämään alkuperäinen lomake.",
   "ShowAboutWindow": "Näytä Tietoja-ikkuna",
@@ -1055,5 +1051,6 @@
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
   "YourTurn": "Sinun vuorosi",
+  "ExternalLink": "Ulkoinen linkki",
   "Upload": "Lataa"
 }

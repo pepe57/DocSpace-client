@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "Посилання на файл із увімкненим <strong>спеціальним фільтром</strong> успішно скопійовано до буфера обміну.",
   "LinkDoesNotExist": "Посилання, яке ви намагаєтеся відкрити, не існує.",
   "LinkExpirationDate": "Файл, посилання на який надано, закінчить термін дії <1>{{date}}</1>",
-  "LinkExpireAfter": "Посилання буде недійсним після <1>{{date}}</1>",
   "LinkExpired": "Термін дії посилання закінчився.",
   "LinkHasExpired": "Термін дії посилання, за яким ви перейшли, закінчився.",
-  "LinkHasExpiredAndHasBeenDisabled": "Термін дії посилання закінчився, і його було вимкнено",
   "LinkIsValid": "Посилання діє до <1>{{date}}</1>",
   "LinkName": "Назва посилання",
   "LinkNoExpiration": "Посилання не має <1>терміну дії</1>",
@@ -756,7 +754,6 @@
   "Remove": "Видалити",
   "RemovedFromList": "Видалено зі списку",
   "RemoveFromList": "Видалити зі списку",
-  "RemoveLink": "Видалити посилання",
   "Rename": "Перейменувати",
   "RenewSubscription": "Поновити підписку?",
   "RepeatInvitation": "Повторити запрошення",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "Поділіться оригінальною формою для заповнення.",
   "ShareTheRoom": "кімната",
   "ShareToFillOut": "Почати заповнення",
-  "ShareVia": "Поділитися через",
   "ShareWithPortalUsers": "Поширення серед користувачів {{productName}}",
   "ShareWithPortalUsersDescription": "Виберіть конкретних користувачів із {{productName}} та запросіть їх заповнити оригінальну форму.",
   "ShowAboutWindow": "Показати вікно “Про програму”",
@@ -1055,5 +1051,6 @@
   "YourCurrentDomain": "Ваш поточний домен",
   "YourLogo": "Ваш логотип",
   "YourTurn": "Ваша черга",
+  "ExternalLink": "Зовнішнє посилання",
   "Upload": "Завантажити"
 }

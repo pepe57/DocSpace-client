@@ -91,6 +91,7 @@ const ModalDialog = ({
   withoutHeaderMargin = false,
   hideContent = false,
   dataTestId,
+  backdropVisible,
 
   ...rest
 }: ModalDialogProps) => {
@@ -210,6 +211,7 @@ const ModalDialog = ({
           withoutHeaderMargin={withoutHeaderMargin}
           hideContent={hideContent}
           dataTestId={dataTestId}
+          backdropVisible={backdropVisible}
           {...rest}
         />
       }
