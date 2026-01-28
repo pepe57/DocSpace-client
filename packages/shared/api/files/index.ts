@@ -1964,7 +1964,7 @@ export async function uploadTemplateFromDevice(
   formData.append("File", file);
   const res = await request({
     method: "post",
-    url: `/files/settings/defaulttemplate/upload?FileExtension=${encodeURIComponent(fileExtension)}`,
+    url: `/files/settings/defaulttemplate?FileExtension=${encodeURIComponent(fileExtension)}`,
     data: formData,
     headers: {
       "Content-Type": "multipart/form-data",
