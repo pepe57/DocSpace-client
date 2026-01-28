@@ -61,6 +61,7 @@ export interface EditorsTooltipMobileProps {
   editors: EditorUser[];
   onClose: () => void;
   t: (key: string) => string;
+  height: number;
 }
 
 export interface UseEditorsDataProps {

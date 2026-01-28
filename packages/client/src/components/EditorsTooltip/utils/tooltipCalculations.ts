@@ -29,12 +29,15 @@ import type { EditorUser, TooltipDimensions } from "../EditorsTooltip.types";
 const AVATAR_SIZE = 24;
 const GAP_SIZE = 8;
 const PADDING_LEFT = 12;
-const HEADER_HEIGHT = 24;
-const HEADER_MARGIN_BOTTOM = 12;
-const ITEM_HEIGHT = 24;
+const DESKTOP_ITEM_HEIGHT = 24;
 const MIN_WIDTH = 200;
 const MAX_WIDTH = 400;
-const MAX_HEIGHT = 176;
+const DESKTOP_MAX_HEIGHT = 176;
+const PADDING = 12;
+const HEADER_HEIGHT = 25;
+
+const MOBILE_ITEM_HEIGHT = 32;
+const MOBILE_SCREEN_OFFSET = 107; // window height - 107px
 
 /**
  * Calculates the width of text using canvas measureText
@@ -48,14 +51,10 @@ export const calculateTextWidth = (text: string, font: string): number => {
 };
 
 /**
- * Calculates optimal dimensions for the tooltip based on editors list
+ * Calculates tooltip width based on editors list (desktop only)
  */
-export const calculateTooltipDimensions = (
-  editors: EditorUser[],
-): TooltipDimensions => {
-  if (editors.length === 0) {
-    return { width: MIN_WIDTH, height: 0 };
-  }
+export const calculateTooltipWidth = (editors: EditorUser[]): number => {
+  if (editors.length === 0) return MIN_WIDTH;
 
   // Calculate width based on longest name
   const font = "600 12px sans-serif"; // font-weight: 600, font-size: 12px
@@ -70,14 +69,60 @@ export const calculateTooltipDimensions = (
   const calculatedWidth = Math.ceil(
     AVATAR_SIZE + GAP_SIZE + textWidth + PADDING_LEFT,
   );
-  const width = Math.max(MIN_WIDTH, Math.min(calculatedWidth, MAX_WIDTH));
 
-  // Calculate height based on number of editors
-  const headerTotalHeight = HEADER_HEIGHT + HEADER_MARGIN_BOTTOM;
+  return Math.max(MIN_WIDTH, Math.min(calculatedWidth, MAX_WIDTH));
+};
+
+/**
+ * Calculates tooltip height based on editors count and item height
+ */
+export const calculateTooltipHeight = (
+  editorsCount: number,
+  itemHeight: number,
+  maxHeight?: number,
+): number => {
+  if (editorsCount === 0) return 0;
+
   const itemsHeight =
-    editors.length * ITEM_HEIGHT + Math.max(0, editors.length - 1) * GAP_SIZE;
-  const calculatedHeight = headerTotalHeight + itemsHeight;
-  const height = Math.min(calculatedHeight, MAX_HEIGHT);
+    editorsCount * itemHeight + Math.max(0, editorsCount - 1) * GAP_SIZE;
+  const calculatedHeight = HEADER_HEIGHT + itemsHeight;
+
+  if (maxHeight !== undefined) {
+    return Math.min(calculatedHeight, maxHeight);
+  }
+
+  return calculatedHeight;
+};
+
+/**
+ * Calculates optimal dimensions for desktop tooltip
+ */
+export const calculateTooltipDimensions = (
+  editors: EditorUser[],
+): TooltipDimensions => {
+  const width = calculateTooltipWidth(editors);
+
+  const contentHeight = calculateTooltipHeight(
+    editors.length,
+    DESKTOP_ITEM_HEIGHT,
+  );
+
+  const maxContentHeight = DESKTOP_MAX_HEIGHT - PADDING * 2;
+  const height = Math.min(contentHeight, maxContentHeight);
 
   return { width, height };
+};
+
+/**
+ * Calculates height for mobile tooltip with screen height constraint
+ */
+export const calculateMobileTooltipHeight = (editors: EditorUser[]): number => {
+  const maxContentHeight =
+    window.innerHeight - MOBILE_SCREEN_OFFSET - PADDING * 2;
+
+  return calculateTooltipHeight(
+    editors.length,
+    MOBILE_ITEM_HEIGHT,
+    maxContentHeight,
+  );
 };

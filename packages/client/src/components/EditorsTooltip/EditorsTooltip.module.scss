@@ -42,8 +42,10 @@
   font-size: 12px;
   font-weight: 400;
   color: var(--editors-tooltip-header-color) !important;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mobileContainer {
@@ -53,22 +55,13 @@
   bottom: 0;
   z-index: 310;
   
-  box-sizing: border-box;
-  width: 100%;
+  width: calc(100% - 12px);
   
   background: var(--context-menu-background);
   border: var(--context-menu-border);
   border-radius: 6px 6px 0 0;
   box-shadow: var(--context-menu-box-shadow);
   
-  padding: 16px;
-  max-height: calc(100vh - 64px);
-  overflow-y: auto;
-}
-
-.mobileHeader {
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--context-menu-header-text-color);
-  margin-bottom: 16px;
+  padding: 12px;
+  padding-right: 0px;
 }

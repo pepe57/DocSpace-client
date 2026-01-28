@@ -35,7 +35,10 @@ import { classNames, isMobile as isMobileUtils } from "@docspace/shared/utils";
 import FileActionsConvertEditDocReactSvg from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg";
 
 import { useEditorsData } from "./hooks/useEditorsData";
-import { calculateTooltipDimensions } from "./utils/tooltipCalculations";
+import {
+  calculateTooltipDimensions,
+  calculateMobileTooltipHeight,
+} from "./utils/tooltipCalculations";
 import { EditorsList } from "./sub-components/EditorsList";
 import EditorsTooltipMobile from "./sub-components/EditorsTooltipMobile";
 
@@ -59,6 +62,11 @@ const EditorsTooltip = ({ item, currentUserId }: EditorsTooltipProps) => {
 
   const tooltipDimensions = useMemo(
     () => calculateTooltipDimensions(editors),
+    [editors],
+  );
+
+  const mobileTooltipHeight = useMemo(
+    () => calculateMobileTooltipHeight(editors),
     [editors],
   );
 
@@ -110,6 +118,7 @@ const EditorsTooltip = ({ item, currentUserId }: EditorsTooltipProps) => {
           visible={isOpen}
           onClose={closeTooltip}
           t={t}
+          height={mobileTooltipHeight}
         />
       ) : (
         <Tooltip

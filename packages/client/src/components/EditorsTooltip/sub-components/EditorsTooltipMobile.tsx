@@ -28,6 +28,7 @@ import React from "react";
 import { Portal } from "@docspace/shared/components/portal";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { AvatarSize } from "@docspace/shared/components/avatar";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import { EditorsList } from "./EditorsList";
 import type { EditorsTooltipMobileProps } from "../EditorsTooltip.types";
@@ -38,6 +39,7 @@ const EditorsTooltipMobile = ({
   editors,
   onClose,
   t,
+  height,
 }: EditorsTooltipMobileProps) => {
   if (!visible || editors.length === 0) return null;
 
@@ -49,13 +51,17 @@ const EditorsTooltipMobile = ({
         withBackground
         zIndex={310}
       />
-      <div className={styles.mobileContainer}>
-        <div className={styles.mobileHeader}>{t("FileCurrentlyEditedBy")}</div>
-        <EditorsList
-          editors={editors}
-          avatarSize={AvatarSize.min}
-          isMobile={true}
-        />
+      <div className={styles.mobileContainer} style={{ height: `${height}px` }}>
+        <Scrollbar>
+          <div className={styles.tooltipHeader}>
+            {t("FileCurrentlyEditedBy")}
+          </div>
+          <EditorsList
+            editors={editors}
+            avatarSize={AvatarSize.min}
+            isMobile={true}
+          />
+        </Scrollbar>
       </div>
     </>
   );
