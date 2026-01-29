@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TEditorConnector, TEditorAIEvent } from "@/types";
 import { getCookie } from "@docspace/shared/utils";
+import type { TEditorAIEvent, TEditorConnector } from "@/types";
 
 const requests: Record<string, { controller: AbortController }> = {};
 
@@ -49,6 +49,8 @@ const externalAIFetch = async (
 
   const abortController = new AbortController();
   requests[id] = { controller: abortController };
+
+  let reader: ReadableStreamDefaultReader<Uint8Array> | null = null;
 
   try {
     const url = e.url.replace(
@@ -79,20 +81,27 @@ const externalAIFetch = async (
 
       if (!result.body) throw new Error("Response body is null");
 
-      const reader = result.body.getReader();
+      reader = result.body.getReader();
       const decoder = new TextDecoder();
-
       let done = false;
+
       while (!done) {
         const { value, done: readDone } = await reader.read();
         done = readDone;
+
         if (value) {
           sendEvent(connector, {
             type: "chunk",
             id,
-            chunk: decoder.decode(value),
+            chunk: decoder.decode(value, { stream: true }),
           });
         }
+      }
+
+      const remaining = decoder.decode();
+
+      if (remaining) {
+        sendEvent(connector, { type: "chunk", id, chunk: remaining });
       }
 
       sendEvent(connector, { type: "end", id });
@@ -106,10 +115,21 @@ const externalAIFetch = async (
       });
     }
   } catch (err) {
-    sendEvent(connector, { type: "error", id, error: String(err) });
+    if (err instanceof DOMException && err.name === "AbortError") {
+      sendEvent(connector, { type: "aborted", id });
+    } else {
+      sendEvent(connector, { type: "error", id, error: String(err) });
+    }
   } finally {
+    if (reader) {
+      try {
+        reader.releaseLock();
+      } catch {}
+    }
+
     delete requests[id];
   }
 };
 
 export default externalAIFetch;
+
