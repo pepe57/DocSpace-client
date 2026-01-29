@@ -27,8 +27,8 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Tags } from "../../tags";
-import { Tag } from "../../tag";
+import { Tags } from "@docspace/ui-kit/components/tags";
+import { Tag } from "@docspace/ui-kit/components/tag";
 
 import styles from "./PreviewTile.module.scss";
 
