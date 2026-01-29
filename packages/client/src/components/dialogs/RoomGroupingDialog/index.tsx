@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
@@ -35,8 +35,9 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { SearchInput } from "@docspace/shared/components/search-input";
+import { InputSize } from "@docspace/shared/components/text-input";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { isMobile, isTablet, isDesktop } from "@docspace/shared/utils";
+import { isDesktop } from "@docspace/shared/utils";
 import MailIconUrl from "PUBLIC_DIR/images/mail.svg?url";
 import MailIconTabletUrl from "PUBLIC_DIR/images/mail.tablet.svg?url";
 import AlertIconUrl from "PUBLIC_DIR/images/bell.svg?url";
@@ -44,11 +45,13 @@ import AlertTabletIconUrl from "PUBLIC_DIR/images/bell.tablet.svg?url";
 import styles from "./RoomGroupingDialog.module.scss";
 
 type RoomGroupingDialogProps = {
-  setIsGroupingEnabled: () => void;
-  setRoomGroupingDialogVisible: () => void;
+  visible?: boolean;
+  setIsGroupingEnabled: (enabled: boolean) => void;
+  setRoomGroupingDialogVisible: (visible: boolean) => void;
 };
 
 const RoomGroupingDialog = ({
+  visible = false,
   setIsGroupingEnabled,
   setRoomGroupingDialogVisible,
 }: RoomGroupingDialogProps) => {
@@ -78,7 +81,7 @@ const RoomGroupingDialog = ({
 
   return (
     <ModalDialog
-      visible
+      visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
       autoMaxHeight
@@ -91,7 +94,12 @@ const RoomGroupingDialog = ({
               [styles.searchBarContainerTablet]: !isDesktopView,
             })}
           >
-            <SearchInput placeholder={t("Common:Search")} value="" scale />
+            <SearchInput
+              placeholder={t("Common:Search")}
+              value=""
+              scale
+              size={InputSize.base}
+            />
           </div>
 
           <div
@@ -360,9 +368,14 @@ const RoomGroupingDialog = ({
 };
 
 export default inject(({ dialogsStore }: TStore) => {
-  const { setRoomGroupingDialogVisible, setIsGroupingEnabled } = dialogsStore;
+  const {
+    roomGroupingDialogVisible,
+    setRoomGroupingDialogVisible,
+    setIsGroupingEnabled,
+  } = dialogsStore;
 
   return {
+    visible: roomGroupingDialogVisible,
     setRoomGroupingDialogVisible,
     setIsGroupingEnabled,
   };
