@@ -33,6 +33,7 @@ export interface Operation {
   withoutStatus?: boolean;
   showPanel?: (open: boolean) => void;
   withoutProgress?: boolean;
+  iconUrl?: string;
   items?: Array<{
     operationId: string;
     percent: number;

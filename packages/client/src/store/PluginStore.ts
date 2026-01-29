@@ -47,6 +47,7 @@ import { getCookie } from "@docspace/shared/utils";
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import type {
+  IFloatingOperationsButtonClient,
   IContextMenuItem,
   IContextMenuItemClient,
   IContextMenuItemValidation,
@@ -130,7 +131,8 @@ class PluginStore {
 
   pluginFloatingOperationsButtonVisible = false;
 
-  pluginFloatingOperationsButtonProps: null | IFloatingOperationsButton = null;
+  pluginFloatingOperationsButtonProps: null | IFloatingOperationsButtonClient =
+    null;
 
   pluginDialogProps: null | ModalDialogProps = null;
 
@@ -237,9 +239,17 @@ class PluginStore {
   };
 
   setPluginFloatingOperationsButtonProps = (
-    value: null | IFloatingOperationsButton,
+    value: null | IFloatingOperationsButtonClient,
   ) => {
-    this.pluginFloatingOperationsButtonProps = value;
+    if (value === null) {
+      this.pluginFloatingOperationsButtonProps = null;
+      return;
+    }
+
+    this.pluginFloatingOperationsButtonProps = {
+      ...(this.pluginFloatingOperationsButtonProps || {}),
+      ...value,
+    };
   };
 
   updatePluginStatus = (name: string) => {

@@ -24,49 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { observer, inject } from "mobx-react";
-import { PluginFloatingOperationsButtonProps } from "./types";
-import { PluginFabContainer } from "./components/PluginFabContainer";
+import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
+import { PluginFabContainerProps } from "../types";
+import { usePluginFabContainer } from "../hooks/usePluginFabContainer";
 
-const PluginFloatingOperationsButton = ({
+export const PluginFabContainer = ({
   floatingOperationsButtonProps,
-  isVisible,
   dispatchMessage,
   mainButtonVisible,
   infoPanelVisible,
   getPluginIconUrl,
-}: PluginFloatingOperationsButtonProps) => {
-  if (!isVisible) return null;
+}: PluginFabContainerProps) => {
+  const { operationsCompleted, operationsAlert, showCancelButton } =
+    floatingOperationsButtonProps;
+
+  const { transformedOperations, handleCancel, handleCancelOperationFromList } =
+    usePluginFabContainer({
+      floatingOperationsButtonProps,
+      dispatchMessage,
+      getPluginIconUrl,
+    });
 
   return (
-    <div key={floatingOperationsButtonProps.id}>
-      <PluginFabContainer
-        floatingOperationsButtonProps={floatingOperationsButtonProps}
-        dispatchMessage={dispatchMessage}
-        mainButtonVisible={mainButtonVisible}
-        infoPanelVisible={infoPanelVisible}
-        getPluginIconUrl={getPluginIconUrl}
-      />
-    </div>
+    <OperationsProgressButton
+      operations={transformedOperations}
+      operationsCompleted={operationsCompleted}
+      operationsAlert={operationsAlert}
+      showCancelButton={showCancelButton}
+      cancelUpload={handleCancel}
+      mainButtonVisible={mainButtonVisible}
+      isInfoPanelVisible={infoPanelVisible}
+      clearOperationsData={handleCancelOperationFromList}
+    />
   );
 };
-
-export default inject<TStore>(({ pluginStore, filesStore, infoPanelStore }) => {
-  const {
-    pluginFloatingOperationsButtonProps,
-    pluginFloatingOperationsButtonVisible,
-    dispatchMessage,
-    getPluginIconUrl,
-  } = pluginStore;
-  const { mainButtonVisible } = filesStore;
-  const { isVisible: infoPanelVisible } = infoPanelStore;
-
-  return {
-    floatingOperationsButtonProps: pluginFloatingOperationsButtonProps,
-    isVisible: pluginFloatingOperationsButtonVisible,
-    dispatchMessage,
-    mainButtonVisible,
-    infoPanelVisible,
-    getPluginIconUrl,
-  };
-})(observer(PluginFloatingOperationsButton));

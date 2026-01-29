@@ -43,6 +43,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import PluginFloatingOperationsButton from "SRC_DIR/components/PluginFloatingOperationsButton";
 
 import {
   SectionFilterContent,
@@ -65,7 +66,6 @@ import MediaViewer from "./MediaViewer";
 
 import { useSDK, useOperations } from "./Hooks";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
-import PluginFloatingOperationsButton from "SRC_DIR/components/PluginFloatingOperationsButton";
 
 const PureHome = (props) => {
   const {
@@ -168,7 +168,6 @@ const PureHome = (props) => {
     aiConfig,
     currentTab,
     setIsAboutDialogVisible,
-    pluginFloatingButtonVisible,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
@@ -455,7 +454,7 @@ const PureHome = (props) => {
         </Section.InfoPanelBody>
       </SectionWrapper>
       <InfoPanelActions />
-      {pluginFloatingButtonVisible ? <PluginFloatingOperationsButton /> : null}
+      <PluginFloatingOperationsButton />
     </>
   );
 };
@@ -481,7 +480,6 @@ export const Component = inject(
     filesSettingsStore,
     aiRoomStore,
     profileActionsStore,
-    pluginStore,
   }) => {
     const {
       setSelectedFolder,
@@ -511,8 +509,6 @@ export const Component = inject(
       isChangePageRequestRunning,
       currentClientView,
     } = clientLoadingStore;
-
-    const { pluginFloatingOperationsButtonVisible } = pluginStore;
 
     const { getFolderModel } = contextOptionsStore;
 
@@ -765,7 +761,6 @@ export const Component = inject(
       aiConfig: settingsStore.aiConfig,
 
       setIsAboutDialogVisible: profileActionsStore.setIsAboutDialogVisible,
-      pluginFloatingButtonVisible: pluginFloatingOperationsButtonVisible,
     };
   },
 )(observer(Home));

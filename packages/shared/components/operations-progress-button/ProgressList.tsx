@@ -107,7 +107,7 @@ const ProgressList = ({
             label={item.label}
             alert={item.alert}
             open
-            iconUrl={getIcon(item.operation)}
+            iconUrl={item.iconUrl || getIcon(item.operation)}
             onClickAction={() => {}}
             withoutProgress
             onClearProgress={clearOperationsData}
@@ -126,7 +126,7 @@ const ProgressList = ({
             alert={item.alert}
             percent={item.percent}
             open
-            iconUrl={getIcon(item.operation)}
+            iconUrl={item.iconUrl || getIcon(item.operation)}
             onClickAction={() => {}}
             onClearProgress={clearPanelOperationsData}
             operation={item.operation}

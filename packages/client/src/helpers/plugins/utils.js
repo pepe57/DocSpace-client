@@ -33,6 +33,7 @@ import config from "PACKAGE_FILE";
 import { PluginActions, PluginToastType } from "./enums";
 import { CategoryType } from "@docspace/shared/constants";
 import { getCategoryType } from "@docspace/shared/utils/common";
+import { uuid } from "@docspace/shared/utils";
 
 export const messageActions = ({
   message,
@@ -139,6 +140,7 @@ export const messageActions = ({
           setPluginFloatingOperationsButtonProps &&
             setPluginFloatingOperationsButtonProps({
               ...message.floatingOperationsButtonProps,
+              id: uuid(),
               pluginName,
             });
         }
@@ -156,10 +158,9 @@ export const messageActions = ({
           if (!message.floatingOperationsButtonProps) return;
 
           setPluginFloatingOperationsButtonProps &&
-            setPluginFloatingOperationsButtonProps({
-              ...message.floatingOperationsButtonProps,
-              pluginName,
-            });
+            setPluginFloatingOperationsButtonProps(
+              message.floatingOperationsButtonProps,
+            );
         }
         break;
 
