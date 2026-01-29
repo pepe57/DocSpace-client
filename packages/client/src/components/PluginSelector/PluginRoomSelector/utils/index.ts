@@ -24,52 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { WithFlag } from "../../types";
-import { TRoom } from "../../api/rooms/types";
-import {
-  TSelectorCancelButton,
-  TSelectorHeader,
-  TSelectorItem,
-  TSelectorWithAside,
-} from "../../components/selector/Selector.types";
+import { RoomsType } from '@docspace/shared/enums';
+import { RoomsType as PluginRoomsType } from '@onlyoffice/docspace-plugin-sdk';
 
-import { RoomSearchArea, RoomsType } from "../../enums";
+export const convertPluginRoomType = (type?: PluginRoomsType | PluginRoomsType[]): RoomsType | RoomsType[] | undefined => {
+    if (!type) return;
 
-export type TInitValue = WithFlag<
-  "withInit",
-  {
-    withInit: true;
-    initItems: TRoom[];
-    initTotal: number;
-    initHasNextPage: boolean;
-    initSearchValue?: string;
-  }
->;
+    const roomsTypeMap = {
+        [PluginRoomsType.CustomRoom]: RoomsType.CustomRoom,
+        [PluginRoomsType.EditingRoom]: RoomsType.EditingRoom,
+        [PluginRoomsType.FormRoom]: RoomsType.FormRoom,
+        [PluginRoomsType.PublicRoom]: RoomsType.PublicRoom,
+        [PluginRoomsType.VirtualDataRoom]: RoomsType.VirtualDataRoom,
+    }
 
-export type RoomSelectorProps = TSelectorHeader &
-  TSelectorCancelButton &
-  TSelectorWithAside & {
-    id?: string;
-    className?: string;
-    style?: React.CSSProperties;
+    if (Array.isArray(type)) {
+        return type.map((t) => roomsTypeMap[t]);
+    }
 
-    isMultiSelect: boolean;
-
-    onSubmit: (items: TSelectorItem[]) => void | Promise<void>;
-    roomType?: RoomsType | RoomsType[];
-    searchArea?: RoomSearchArea | string;
-    excludeItems?: (number | string | undefined)[];
-    setIsDataReady?: (value: boolean) => void;
-    submitButtonLabel?: string;
-
-    disableThirdParty?: boolean;
-
-    withPadding?: boolean;
-    withSearch?: boolean;
-    withCreate?: boolean;
-    createDefineRoomLabel?: string;
-    createDefineRoomType?: RoomsType;
-
-    emptyScreenHeader?: string;
-    emptyScreenDescription?: string;
-  } & TInitValue;
+    return roomsTypeMap[type];
+};
