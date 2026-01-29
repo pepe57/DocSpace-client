@@ -83,6 +83,7 @@ const EditorsTooltip = ({ item, currentUserId }: EditorsTooltipProps) => {
 
     return (
       <div
+        data-testid="editors-tooltip"
         style={{
           width: `${tooltipDimensions.width}px`,
           height: `${tooltipDimensions.height}px`,

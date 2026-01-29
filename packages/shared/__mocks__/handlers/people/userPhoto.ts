@@ -24,57 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { Portal } from "@docspace/shared/components/portal";
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { AvatarSize } from "@docspace/shared/components/avatar";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { http, HttpResponse } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-import { EditorsList } from "./EditorsList";
-import type { EditorsTooltipMobileProps } from "../EditorsTooltip.types";
-import styles from "../EditorsTooltip.module.scss";
+export const PATH_USER_PHOTO = "people/:userId/photo";
 
-const EditorsTooltipMobile = ({
-  visible,
-  editors,
-  onClose,
-  t,
-  height,
-}: EditorsTooltipMobileProps) => {
-  if (!visible || editors.length === 0) return null;
-
-  const content = (
-    <>
-      <Backdrop
-        visible={visible}
-        onClick={onClose}
-        withBackground
-        zIndex={310}
-      />
-      <div
-        className={styles.mobileContainer}
-        style={{ height: `${height}px` }}
-        data-testid="editors-tooltip-mobile"
-      >
-        <Scrollbar autoHide={false}>
-          <div className={styles.tooltipHeader}>
-            {t("FileCurrentlyEditedBy")}
-          </div>
-          <EditorsList
-            editors={editors}
-            avatarSize={AvatarSize.min}
-            isMobile={true}
-          />
-        </Scrollbar>
-      </div>
-    </>
-  );
-
-  return (
-    <>
-      <Portal element={content} visible={visible} />
-    </>
-  );
+export const successUserPhoto = {
+  original: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  retina: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  max: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  big: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  medium: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  small: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
 };
 
-export default EditorsTooltipMobile;
+export const userPhotoResolver = (userId: string): Response => {
+  // Don't return photos for anonymous users
+  if (userId.startsWith("uid-")) {
+    return new HttpResponse(null, { status: 404 });
+  }
+
+  return new Response(JSON.stringify({ response: successUserPhoto }));
+};
+
+export const userPhotoHandler = (port?: string) => {
+  let baseUrl;
+  if (port) {
+    baseUrl = `${BASE_URL}:${port}`;
+  } else {
+    baseUrl =
+      typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
+  }
+
+  return http.get(
+    `${baseUrl}/${API_PREFIX}/${PATH_USER_PHOTO}`,
+    ({ params }) => {
+      const { userId } = params;
+      return userPhotoResolver(userId as string);
+    },
+  );
+};
