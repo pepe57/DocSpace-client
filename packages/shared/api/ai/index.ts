@@ -56,7 +56,7 @@ import type {
   TEditAgentData,
   TGetAgents,
   TDefaultProvider,
-  TSetDefaultProviderData,
+  TUpdateDefaultProviderData,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -680,10 +680,10 @@ export const getDefaultProvider = async () => {
   return res as TDefaultProvider;
 };
 
-export const setDefaultProvider = async ({
+export const updateDefaultProvider = async ({
   providerId,
   defaultModel,
-}: TSetDefaultProviderData) => {
+}: TUpdateDefaultProviderData) => {
   const options = {
     method: "put",
     url: `${baseUrl}/providers/default`,

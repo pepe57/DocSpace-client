@@ -256,7 +256,7 @@ export type TDefaultProvider = {
   defaultModel: TModel["modelId"];
 };
 
-export type TSetDefaultProviderData = {
+export type TUpdateDefaultProviderData = {
   providerId: TAiProvider["id"];
   defaultModel: TModel["modelId"];
 };

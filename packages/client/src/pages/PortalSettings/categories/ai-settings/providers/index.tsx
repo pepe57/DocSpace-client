@@ -38,7 +38,6 @@ import type {
   TProviderTypeWithUrl,
 } from "@docspace/shared/api/ai/types";
 import { getAvailableProviderUrls } from "@docspace/shared/api/ai";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
@@ -50,6 +49,7 @@ import { DeleteAIProviderDialog } from "./dialogs/delete";
 
 import { AiProviderTile } from "./Tile";
 import { ProvidersLoader } from "./ProvidersLoader";
+import { DefaultProvider } from "./DefaultProvider";
 
 type TDeleteDialogData =
   | {
@@ -192,6 +192,10 @@ const AIProviderComponent = ({
           />
         ))}
       </div>
+
+      {aiProviders?.length ? (
+        <DefaultProvider aiProviders={aiProviders} />
+      ) : null}
 
       {addDialogVisible ? (
         <AddUpdateProviderDialog
