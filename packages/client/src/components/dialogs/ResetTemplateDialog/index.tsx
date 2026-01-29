@@ -24,59 +24,58 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { http, passthrough } from "msw";
-import { test as base, Page } from "@playwright/test";
+import { useTranslation } from "react-i18next";
+
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
-  PlaywrightWebSocketMock,
-  WorkerFixture,
-  BASE_URL,
-} from "@docspace/shared/__mocks__/e2e";
-import { allHandlers } from "@docspace/shared/__mocks__/handlers";
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
 
-export const TEST_PORT = process.env.PORT || "5110";
+const ResetTemplateDialog = ({
+  isVisible,
+  onReset,
+  onClose,
+}: {
+  isVisible: boolean;
+  onReset: () => void;
+  onClose: () => void;
+}) => {
+  const { t } = useTranslation(["Settings", "OAuth", "Common"]);
 
-export const test = base.extend<
-  {
-    page: Page;
-    mockRequest: WorkerFixture;
-    wsMock: PlaywrightWebSocketMock;
-  },
-  {
-    baseUrl: string;
-  }
->({
-  baseUrl: [
-    async ({}, use) => {
-      await use(`${BASE_URL}:${TEST_PORT}`);
-    },
-    {
-      scope: "worker",
-      auto: true,
-    },
-  ],
-  mockRequest: [
-    async ({ page }, use) => {
-      const localePassthrough = http.get(
-        /(\/client)?\/locales\/.*\.json(\?.*)?$/,
-        () => passthrough(),
-      );
+  return (
+    <ModalDialog
+      displayType={ModalDialogType.modal}
+      onClose={onClose}
+      visible={isVisible}
+    >
+      <ModalDialog.Header>{t("Settings:ResetTemplate")}?</ModalDialog.Header>
 
-      const worker = new WorkerFixture({
-        page,
-        initialHandlers: [...allHandlers(TEST_PORT), localePassthrough],
-      });
+      <ModalDialog.Body>
+        <Text>{t("Settings:ResetTemplateDescription")}</Text>
+      </ModalDialog.Body>
 
-      await worker.start();
-      await use(worker);
-    },
-    {
-      auto: true,
-    },
-  ],
-  wsMock: async ({ page }, use) => {
-    const wsMock = new PlaywrightWebSocketMock(page);
-    await use(wsMock);
-  },
-});
+      <ModalDialog.Footer>
+        <Button
+          testId="reset-button"
+          id="reset-button"
+          label={t("OAuth:Reset")}
+          onClick={onReset}
+          primary
+          scale
+          size={ButtonSize.normal}
+        />
+        <Button
+          id="cancel-button"
+          label={t("Common:CancelButton")}
+          onClick={onClose}
+          scale
+          size={ButtonSize.normal}
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
+};
 
-export { expect } from "@playwright/test";
+export default ResetTemplateDialog;
