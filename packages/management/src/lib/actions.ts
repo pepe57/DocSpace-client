@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -59,6 +59,8 @@ import {
 import { TError } from "@docspace/shared/utils/axiosClient";
 
 import { logger } from "@/../logger.mjs";
+
+const IS_TEST = process.env.E2E_TEST;
 
 export async function getUser() {
   logger.debug(`Start GET /people/@self`);
@@ -127,6 +129,10 @@ export async function getSettings(share?: string) {
     }
 
     const settings = await settingsRes.json();
+
+    if (IS_TEST && settings?.response?.tenantAlias === "localhost") {
+      settings.response.tenantAlias = "test";
+    }
 
     return settings.response as TSettings;
   } catch (error) {

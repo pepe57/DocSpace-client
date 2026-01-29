@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -93,6 +93,7 @@ export type CreateUserFormProps = {
   isStandalone: boolean;
   logoText: string;
   invitationSettings?: TInvitationSettings;
+  hostName: string;
 };
 
 const CreateUserForm = (props: CreateUserFormProps) => {
@@ -108,6 +109,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     isStandalone,
     logoText,
     invitationSettings,
+    hostName,
   } = props;
 
   const { linkData, roomData, confirmLinkResult } =
@@ -281,7 +283,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           email,
           roomName,
           displayName,
-          spaceAddress: window.location.host,
+          spaceAddress: hostName,
         },
         true,
       );

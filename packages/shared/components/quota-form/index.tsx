@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -247,7 +247,7 @@ export const QuotaForm = forwardRef<{ focus: () => void }, QuotaFormProps>(
             isDisabled={isDisable}
             onKeyDown={onKeyDownInput}
             hasError={isError || hasError}
-            pattern="^\d+(?:\.\d{0,2})?"
+            pattern="^(?!^0(?:\.\d{0,2})?$)\d+(?:\.\d{0,2})?$"
             scale
             withBorder
             tabIndex={tabIndex}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,11 +30,12 @@ import type { TBreadCrumb } from "../selector/Selector.types";
 
 import { FilesSelectorInput } from "./index";
 import {
-  createCreateRoomsHandler,
-  createGetRoomsHandler,
-} from "../../__mocks__/storybook/handlers/files/rooms";
-import { createGetFolderHandler } from "../../__mocks__/storybook/handlers/files/folders";
-import { createGetFolderTreeHandler } from "../../__mocks__/storybook/handlers/files/foldersTree";
+  roomListHandler,
+  createRoomHandler,
+  foldersTreeHandler,
+  folderHandler,
+  TypeRoomList,
+} from "../../__mocks__/handlers";
 
 const meta = {
   title: "Components/FilesSelectorInput",
@@ -48,10 +49,10 @@ const meta = {
     },
     msw: {
       handlers: [
-        createGetFolderTreeHandler(),
-        createGetRoomsHandler(),
-        createGetFolderHandler(),
-        createCreateRoomsHandler(),
+        roomListHandler("", TypeRoomList.IsDefault),
+        createRoomHandler(),
+        foldersTreeHandler(""),
+        folderHandler(""),
       ],
     },
   },

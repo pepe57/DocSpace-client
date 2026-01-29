@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,13 +28,14 @@ import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import className from "classnames";
+import moment from "moment";
 
 import {
   FolderType,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
-import { isDesktop } from "@docspace/shared/utils";
+import { getCookie, isDesktop } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
@@ -43,7 +44,7 @@ import { Tooltip } from "@docspace/shared/components/tooltip";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
+import { GENERAL_LINK_HEADER_KEY, LANGUAGE } from "@docspace/shared/constants";
 import { createExternalLink } from "@docspace/shared/api/rooms";
 import MembersList from "@docspace/shared/components/share/sub-components/List";
 
@@ -91,6 +92,8 @@ const Members = ({
   setAccessSettingsIsVisible,
   templateAvailable,
 }: MembersProps) => {
+  moment.locale(getCookie(LANGUAGE));
+
   const { t } = useTranslation([
     "InfoPanel",
     "Common",

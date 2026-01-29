@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -93,6 +93,18 @@ const providerTypes: TOption[] = [
     key: ProviderType.OpenRouter,
     label: getAiProviderLabel(ProviderType.OpenRouter),
   },
+  {
+    key: ProviderType.DeepSeek,
+    label: getAiProviderLabel(ProviderType.DeepSeek),
+  },
+  {
+    key: ProviderType.XAi,
+    label: getAiProviderLabel(ProviderType.XAi),
+  },
+  {
+    key: ProviderType.Google,
+    label: getAiProviderLabel(ProviderType.Google),
+  },
 ];
 
 const getSelectedOptionByProviderType = (type?: ProviderType) => {
@@ -143,6 +155,9 @@ const AddUpdateDialogComponent = ({
     [ProviderType.TogetherAi]: { title: "", url: "", key: "" },
     [ProviderType.OpenAiCompatible]: { title: "", url: "", key: "" },
     [ProviderType.OpenRouter]: { title: "", url: "", key: "" },
+    [ProviderType.DeepSeek]: { title: "", url: "", key: "" },
+    [ProviderType.XAi]: { title: "", url: "", key: "" },
+    [ProviderType.Google]: { title: "", url: "", key: "" },
   });
 
   const initFormData = useRef({
@@ -205,7 +220,11 @@ const AddUpdateDialogComponent = ({
         };
 
         await addAIProvider?.(data);
-        toastr.success(t("AISettings:ProviderAddedSuccess"));
+        toastr.success(
+          t("AISettings:ProviderAddedSuccess", {
+            aiProvider: t("Common:AIProvider"),
+          }),
+        );
       }
 
       if (variant === "update" && providerData?.id) {
@@ -224,7 +243,11 @@ const AddUpdateDialogComponent = ({
         }
 
         await updateAIProvider?.(providerData.id, data);
-        toastr.success(t("AISettings:ProviderUpdatedSuccess"));
+        toastr.success(
+          t("AISettings:ProviderUpdatedSuccess", {
+            aiProvider: t("Common:AIProvider"),
+          }),
+        );
       }
 
       getAIConfig?.();
@@ -266,10 +289,16 @@ const AddUpdateDialogComponent = ({
       onClose={onClose}
       withBodyScroll
     >
-      <ModalDialog.Header>{t("AISettings:AIProvider")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:AIProvider")}</ModalDialog.Header>
 
       <ModalDialog.Body>
-        <form className={styles.modalBody} onSubmit={onSubmit}>
+        <form
+          className={styles.modalBody}
+          onSubmit={onSubmit}
+          data-testid={
+            variant === "add" ? "add-provider-form" : "update-provider-form"
+          }
+        >
           <FieldContainer
             labelText={t("AISettings:Provider")}
             labelVisible
@@ -283,6 +312,7 @@ const AddUpdateDialogComponent = ({
               scaled
               scaledOptions
               isDisabled={variant === "update" || isRequestRunning}
+              dataTestId="provider-type-combobox"
             />
           </FieldContainer>
           <FieldContainer
@@ -300,6 +330,7 @@ const AddUpdateDialogComponent = ({
               scale
               placeholder={t("AISettings:EnterLabel")}
               isDisabled={isRequestRunning}
+              testId="provider-title-input"
             />
             <Text className={styles.fieldHint}>
               {t("AISettings:ProviderNameInputHint")}
@@ -324,6 +355,7 @@ const AddUpdateDialogComponent = ({
                 isRequestRunning ||
                 selectedOption.key !== ProviderType.OpenAiCompatible
               }
+              testId="provider-url-input"
             />
             <Text className={styles.fieldHint}>
               {t("AISettings:ProviderURLInputHint")}
@@ -346,6 +378,7 @@ const AddUpdateDialogComponent = ({
                   lineHeight="20px"
                   isHovered
                   onClick={onResetKey}
+                  dataTestId="provider-reset-key-link"
                 >
                   {t("Webhooks:ResetKey")}
                 </Link>
@@ -363,13 +396,16 @@ const AddUpdateDialogComponent = ({
                   isSimulateType
                   autoComplete="off"
                   hasError={providerData?.needReset}
+                  testId="provider-key-input"
                 />
                 <Text
                   className={classNames(styles.fieldHint, {
                     [styles.fieldHintError]: providerData?.needReset,
                   })}
                 >
-                  {t("AISettings:ProviderKeyInputHint")}
+                  {t("AISettings:ProviderKeyInputHint", {
+                    aiProvider: t("Common:AIProvider"),
+                  })}
                 </Text>
               </>
             )}
@@ -392,6 +428,7 @@ const AddUpdateDialogComponent = ({
           onClick={handleSubmitClick}
           isLoading={isRequestRunning}
           isDisabled={!canSubmit}
+          testId="provider-save-button"
         />
         <Button
           size={ButtonSize.normal}
@@ -399,6 +436,7 @@ const AddUpdateDialogComponent = ({
           scale
           onClick={onClose}
           isDisabled={isRequestRunning}
+          testId="provider-cancel-button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

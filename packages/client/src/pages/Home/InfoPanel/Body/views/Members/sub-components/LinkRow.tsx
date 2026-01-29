@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -172,6 +172,10 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const editExternalLinkAction = async (newLink: TFileLink) => {
+    if (link.sharedTo.isExpired) {
+      newLink.sharedTo.expirationDate = moment().add(7, "days").toISOString();
+    }
+
     setLoadingLinks([newLink.sharedTo.id]);
 
     const startLoaderTime = new Date();
@@ -204,18 +208,26 @@ const LinkRow = (props: LinkRowProps) => {
       }
     }
   };
-  const removedExpiredLink = async (removeLink: TFileLink) => {
-    setLoadingLinks([removeLink.sharedTo.id]);
+  const removedExpiredLink = async (
+    link: TFileLink,
+    isReactivate: boolean = false,
+  ) => {
+    setLoadingLinks([link.sharedTo.id]);
 
     try {
       await ShareLinkService.editLink(item, {
-        ...removeLink,
-        access: ShareAccessRights.None,
+        ...link,
+        access: isReactivate ? link.access : ShareAccessRights.None,
+        sharedTo: {
+          ...link.sharedTo,
+          expirationDate: moment().add(7, "days").toISOString(),
+        },
       });
 
-      deleteExternalLink!(null, removeLink.sharedTo.id);
-
-      toastr.success(t("Files:LinkDeletedSuccessfully"));
+      if (!isReactivate) {
+        deleteExternalLink!(null, link.sharedTo.id);
+        toastr.success(t("Files:LinkDeletedSuccessfully"));
+      }
     } catch (err: unknown) {
       console.log(err);
       toastr.error((err as Error)?.message);

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,11 +28,10 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { useTheme } from "styled-components";
 import hexRgb from "hex-rgb";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 import { globalColors } from "@docspace/shared/themes";
-
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 import classNames from "classnames";
 import styles from "./SubmitToGalleryTile.module.scss";
 import type { FC } from "react";
@@ -48,6 +47,7 @@ const SubmitToGalleryTile: FC<SubmitToGalleryTileProps> = ({
   isSubmitTile,
   submitToGalleryTileIsVisible,
   viewMobile,
+  isKeyboardFocused,
 }) => {
   const { isBase } = useTheme();
 
@@ -112,6 +112,7 @@ const SubmitToGalleryTile: FC<SubmitToGalleryTileProps> = ({
           onClick={onSubmitToGallery}
           size={ButtonSize.small}
           label={t("FormGallery:UploadGallery")}
+          isHovered={isKeyboardFocused}
           scale
         />
       </div>

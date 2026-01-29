@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,6 +54,7 @@ const DatePicker = (props: DatePickerProps) => {
     hideCross,
     autoPosition,
     testId,
+    useMaxTime,
   } = props;
 
   const calendarRef = useRef<HTMLDivElement | null>(null);
@@ -213,6 +214,7 @@ const DatePicker = (props: DatePickerProps) => {
           maxDate={maxDate}
           locale={locale}
           initialDate={openDate}
+          useMaxTime={!date ? useMaxTime : false}
           aria-label="Date picker calendar"
         />
       ) : null}

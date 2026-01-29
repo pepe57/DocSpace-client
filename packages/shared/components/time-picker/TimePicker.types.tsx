@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -47,4 +47,8 @@ export type TimePickerProps = {
   forwardedRef?: React.RefObject<HTMLDivElement | null>;
   /** Test id */
   testId?: string;
+  /** Whether to use 12-hour time format (with AM/PM) instead of 24-hour format */
+  isTwelveHourFormat?: boolean;
+  /** The meridiem indicator (AM/PM) for 12-hour format */
+  meridiem?: string;
 };

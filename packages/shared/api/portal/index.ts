@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -643,5 +643,45 @@ export async function getLicenseQuota() {
     },
   };
   const res = (await request(options)) as TLicenseQuota;
+  return res;
+}
+
+export async function getInviteLink(employeeType) {
+  const options = {
+    method: "get",
+    url: `/portal/users/invitationlink/${employeeType}`,
+  };
+  const res = await request(options);
+  return res;
+}
+
+export async function createInviteLink(data) {
+  const options = {
+    method: "post",
+    url: `/portal/users/invitationlink`,
+    data,
+  };
+  const res = await request(options);
+  return res;
+}
+
+export async function deleteInviteLink(id) {
+  const data = { id };
+  const options = {
+    method: "delete",
+    url: "/portal/users/invitationlink",
+    data,
+  };
+  const res = await request(options);
+  return res;
+}
+
+export async function updateInviteLink(data) {
+  const options = {
+    method: "PUT",
+    url: "/portal/users/invitationlink",
+    data,
+  };
+  const res = await request(options);
   return res;
 }

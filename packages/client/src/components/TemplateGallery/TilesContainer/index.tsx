@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,8 +34,7 @@ import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url
 import { IconSizeType } from "@docspace/shared/utils";
 import { TTranslation } from "@docspace/shared/types";
 
-import { useTheme } from "styled-components";
-
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { Scrollbar as CustomScrollbar } from "@docspace/shared/components/scrollbar/custom-scrollbar";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
@@ -76,6 +75,7 @@ interface TilesContainerInjectedProps extends FilterProps {
   hasGalleryFiles: boolean;
   resetFilters: (ext: string) => Promise<void>;
   t: TTranslation;
+  isFormRoomRoot: boolean;
 }
 
 interface TilesContainerProps
@@ -89,6 +89,7 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
     hasGalleryFiles,
     resetFilters,
     t,
+    isFormRoomRoot,
     ...filterProps
   } = props;
 
@@ -140,8 +141,10 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
       id="scroll-template-gallery"
       ref={scrollRef}
       paddingInlineEnd="16px"
+      tabIndex={null}
     >
       <Tiles
+        hotkeysResetKey={ext}
         isShowOneTile={showOneTile}
         smallPreview={
           ext === FILE_EXTENSIONS.PPTX || ext === FILE_EXTENSIONS.XLSX
@@ -157,9 +160,16 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
       return renderEmptyState();
     }
 
-    const scrollHeight = isMobileView
-      ? SCROLL_HEIGHTS.MOBILE
+    const mobileHeight = isFormRoomRoot
+      ? SCROLL_HEIGHTS.MOBILE_FORMS_ONLY
+      : SCROLL_HEIGHTS.MOBILE;
+
+    const desktopHeight = isFormRoomRoot
+      ? SCROLL_HEIGHTS.DESKTOP_FORMS_ONLY
       : SCROLL_HEIGHTS.DESKTOP;
+
+    const scrollHeight = isMobileView ? mobileHeight : desktopHeight;
+
     const showOneTile = isMobileView ? isShowOneTile : false;
 
     return renderTilesWithScrollbar(scrollHeight, showOneTile);
@@ -179,7 +189,7 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
   );
 };
 
-export default inject<TStore>(({ oformsStore }) => {
+export default inject<TStore>(({ oformsStore, treeFoldersStore }) => {
   const {
     hasGalleryFiles,
     resetFilters,
@@ -197,6 +207,7 @@ export default inject<TStore>(({ oformsStore }) => {
     sortOforms,
   } = oformsStore;
 
+  const { isFormRoomRoot } = treeFoldersStore;
   const oformLocales = oformsStore.oformLocales as string[] | null;
 
   return {
@@ -217,6 +228,7 @@ export default inject<TStore>(({ oformsStore }) => {
     setLanguageFilterLoaded,
     filterOformsBySearch,
     sortOforms,
+    isFormRoomRoot,
   };
 })(
   withTranslation("Common")(observer(TilesContainer)),

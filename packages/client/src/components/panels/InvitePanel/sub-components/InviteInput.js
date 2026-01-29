@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,11 +28,15 @@ import debounce from "lodash.debounce";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useMemo, useState, useCallback, useEffect, useRef } from "react";
+import classNames from "classnames";
 
 import { Avatar } from "@docspace/shared/components/avatar";
+import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { Heading } from "@docspace/shared/components/heading";
+import { DropDown } from "@docspace/shared/components/drop-down";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   parseAddresses,
@@ -56,22 +60,15 @@ import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import BackupIcon from "PUBLIC_DIR/images/icons/16/backup.svg?url";
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import { getUserType } from "@docspace/shared/utils/common";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import {
-  StyledSubHeader,
-  StyledLink,
-  StyledInviteInput,
-  StyledInviteInputContainer,
-  StyledDropDown,
-  SearchItemText,
-  StyledDescription,
-  StyledInviteLanguage,
-  StyledCrossIcon,
-} from "../StyledInvitePanel";
+
+import styles from "../InvitePanel.module.scss";
+
 import AccessSelector from "../../../AccessSelector";
 import {
   fixAccess,
@@ -316,6 +313,59 @@ const InviteInput = ({
     onChangeInput(value);
   };
 
+  const addUser = (item) => {
+    const {
+      shared,
+      status,
+      roomType,
+      access,
+      isVisitor,
+      isGroup = false,
+    } = item;
+    const isDisabled = status === EmployeeStatus.Disabled;
+
+    if (isDisabled) {
+      toastr.warning(t("UsersCannotBeAdded"));
+    } else if (shared) {
+      toastr.warning(t("UsersAlreadyAdded"));
+    } else {
+      const guestWrongRoleInAgent =
+        isVisitor &&
+        roomType === RoomsType.AIRoom &&
+        access !== ShareAccessRights.ReadOnly;
+
+      if (isGroup && checkIfAccessPaid(access)) {
+        item = fixAccess(item, t, roomType);
+      }
+
+      if (guestWrongRoleInAgent) {
+        item = makeViewerRole(item, t, getViewerRole(t, roomType));
+      }
+
+      if (
+        !guestWrongRoleInAgent &&
+        isPaidUserRole(access) &&
+        (item.isVisitor || item.isCollaborator)
+      ) {
+        const topFreeRole = getTopFreeRole(t, roomType);
+
+        if (access !== topFreeRole.access) {
+          item = makeFreeRole(item, t, topFreeRole);
+
+          if (isUserTariffLimit) {
+            toastr.error(<PaidQuotaLimitError />);
+          }
+        }
+      }
+      const items = removeExist([item, ...inviteItems]);
+      setInviteItems(items);
+    }
+
+    setInputValue("");
+    setUsersList([]);
+    setIsAddEmailPanelBlocked(true);
+  };
+
   const getItemContent = (item) => {
     const {
       displayName,
@@ -326,7 +376,6 @@ const InviteInput = ({
       isGroup = false,
       status,
       isSystem,
-      isVisitor,
     } = item;
 
     const isDisabled = status === EmployeeStatus.Disabled;
@@ -339,53 +388,10 @@ const InviteInput = ({
         ? EveryoneIconUrl
         : null;
 
-    const addUser = () => {
-      if (isDisabled) {
-        toastr.warning(t("UsersCannotBeAdded"));
-      } else if (shared) {
-        toastr.warning(t("UsersAlreadyAdded"));
-      } else {
-        const guestWrongRoleInAgent =
-          isVisitor &&
-          roomType === RoomsType.AIRoom &&
-          item.access !== ShareAccessRights.ReadOnly;
-
-        if (isGroup && checkIfAccessPaid(item.access)) {
-          item = fixAccess(item, t, roomType);
-        }
-
-        if (guestWrongRoleInAgent) {
-          item = makeViewerRole(item, t, getViewerRole(t, roomType));
-        }
-
-        if (
-          !guestWrongRoleInAgent &&
-          isPaidUserRole(item.access) &&
-          (item.isVisitor || item.isCollaborator)
-        ) {
-          const topFreeRole = getTopFreeRole(t, roomType);
-
-          if (item.access !== topFreeRole.access) {
-            item = makeFreeRole(item, t, topFreeRole);
-
-            if (isUserTariffLimit) {
-              toastr.error(<PaidQuotaLimitError />);
-            }
-          }
-        }
-        const items = removeExist([item, ...inviteItems]);
-        setInviteItems(items);
-      }
-
-      setInputValue("");
-      setUsersList([]);
-      setIsAddEmailPanelBlocked(true);
-    };
-
     return (
       <DropDownItem
         key={id}
-        onClick={addUser}
+        onClick={() => addUser(item)}
         height={48}
         heightTablet={48}
         className="list-item"
@@ -396,22 +402,39 @@ const InviteInput = ({
           source={avatar}
           userName={groupName}
           isGroup={isGroup}
-          className={isDisabled ? "avatar-disabled" : "item-avatar"}
+          className={isDisabled ? styles.avatarDisabled : styles.itemAvatar}
         />
-        <div className="list-item_content">
-          <div className="list-item_content-box">
-            <SearchItemText $primary disabled={shared || isDisabled}>
+        <div className={styles.listItemContent}>
+          <div className={styles.listItemContentBox}>
+            <Text
+              className={classNames(styles.searchItemText, {
+                [styles.isPrimary]: true,
+                [styles.isDisabled]: shared || isDisabled,
+              })}
+            >
               {displayName || groupName}
-            </SearchItemText>
+            </Text>
             {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
           </div>
-          <SearchItemText>{email}</SearchItemText>
+          <Text>{email}</Text>
         </div>
         {shared ? (
-          <SearchItemText $info>{t("Common:Invited")}</SearchItemText>
+          <Text
+            className={classNames(styles.searchItemText, {
+              [styles.isInfo]: true,
+            })}
+          >
+            {t("Common:Invited")}
+          </Text>
         ) : null}
         {isDisabled ? (
-          <SearchItemText info>{t("Common:Disabled")}</SearchItemText>
+          <Text
+            className={classNames(styles.searchItemText, {
+              [styles.isInfo]: true,
+            })}
+          >
+            {t("Common:Disabled")}
+          </Text>
         ) : null}
       </DropDownItem>
     );
@@ -419,6 +442,12 @@ const InviteInput = ({
 
   const addEmail = () => {
     if (!inputValue.trim() || searchRequestRunning) return;
+
+    const existUser = usersList.find((u) => u.email === inputValue);
+    if (existUser) {
+      addUser(existUser);
+      return;
+    }
 
     const items = toUserItems(inputValue);
 
@@ -524,7 +553,7 @@ const InviteInput = ({
       );
     } else if (roomId !== -1 && !allowInvitingGuests)
       prevDropDownContent.current = (
-        <DropDownItem disabled className="no-users-list">
+        <DropDownItem disabled className={styles.noUsersList}>
           <Text truncate fontSize="13px" fontWeight={400} lineHeight="20px">
             {t("Common:NotFoundUsers")}
           </Text>
@@ -533,7 +562,7 @@ const InviteInput = ({
     else {
       prevDropDownContent.current = (
         <DropDownItem
-          className="list-item"
+          className={styles.listItem}
           style={{
             width: "inherit",
           }}
@@ -541,14 +570,14 @@ const InviteInput = ({
           onClick={addEmail}
           height={53}
         >
-          <div className="email-list_avatar">
+          <div className={styles.emailListAvatar}>
             <Avatar size="min" role="user" source={AtReactSvgUrl} />
             {roomId == -1 ? (
               <Text truncate fontSize="14px" fontWeight={600}>
                 {inputValue}
               </Text>
             ) : (
-              <div className="email-list_email-container">
+              <div className={styles.emailListContainer}>
                 <Text truncate fontSize="14px" fontWeight={600}>
                   {inputValue}
                 </Text>
@@ -556,14 +585,14 @@ const InviteInput = ({
                   truncate
                   fontSize="12px"
                   fontWeight={400}
-                  className="email-list_invite-as-guest"
+                  className={styles.emailListInviteAsGuest}
                 >
                   {t("Common:InviteAsGuest")}
                 </Text>
               </div>
             )}
           </div>{" "}
-          <div className="email-list_add-button">
+          <div className={styles.emailListAddButton}>
             <ArrowIcon />
           </div>
         </DropDownItem>
@@ -600,11 +629,11 @@ const InviteInput = ({
 
   return (
     <>
-      <StyledSubHeader>
+      <Heading className={styles.subHeader}>
         {t("AddManually")}
         {!hideSelector ? (
-          <StyledLink
-            className="link-list"
+          <Link
+            className={classNames(styles.styledLink, "link-list")}
             fontWeight="600"
             type="action"
             isHovered
@@ -612,11 +641,14 @@ const InviteInput = ({
             dataTestId="invite_panel_choose_from_list_link"
           >
             {t("Translations:ChooseFromList")}
-          </StyledLink>
+          </Link>
         ) : null}
-      </StyledSubHeader>
-      <StyledDescription
-        noAllowInvitingGuests={roomId !== -1 ? !allowInvitingGuests : null}
+      </Heading>
+      <Text
+        className={classNames(styles.description, {
+          [styles.noAllowInvitingGuests]:
+            roomId !== -1 ? !allowInvitingGuests : null,
+        })}
       >
         {roomId === -1
           ? t("InviteMembersManuallyDescription", {
@@ -629,15 +661,15 @@ const InviteInput = ({
             : t("InviteToRoomManuallyInfoGuest", {
                 productName: t("Common:ProductName"),
               })}
-      </StyledDescription>
+      </Text>
       {roomId === -1 || allowInvitingGuests ? (
-        <StyledInviteLanguage>
-          <Text className="invitation-language">
+        <div className={styles.inviteLanguage}>
+          <Text className={styles.invitationLanguage}>
             {t("InvitationLanguage")}:
           </Text>
-          <div className="language-combo-box-wrapper">
+          <div className={styles.languageComboBoxWrapper}>
             <ComboBox
-              className="language-combo-box"
+              className={styles.languageComboBox}
               directionY="both"
               options={cultureNamesNew}
               selectedOption={culture}
@@ -661,18 +693,23 @@ const InviteInput = ({
           </div>
           {isChangeLangMail ? (
             <IconButton
-              className="list-link"
+              className={styles.linkList}
               iconName={BackupIcon}
               onClick={onResetLangMail}
               size={12}
               dataTestId="invite_panel_reset_language_button"
             />
           ) : null}
-        </StyledInviteLanguage>
+        </div>
       ) : null}
 
-      <StyledInviteInputContainer ref={inputsRef}>
-        <StyledInviteInput ref={searchRef} isShowCross={!!inputValue}>
+      <div className={styles.inviteInputContainer} ref={inputsRef}>
+        <div
+          className={classNames(styles.inviteInput, {
+            [styles.isShowCross]: !!inputValue,
+          })}
+          ref={searchRef}
+        >
           <TextInput
             className="invite-input"
             scale
@@ -691,13 +728,12 @@ const InviteInput = ({
             testId="invite_panel_search_input"
           />
 
-          <div className="append" onClick={() => onChangeInput("")}>
-            <StyledCrossIcon />
+          <div className={styles.append} onClick={() => onChangeInput("")}>
+            <CrossIcon className={styles.rowIcons} />
           </div>
-        </StyledInviteInput>
+        </div>
         {isAddEmailPanelBlocked ? null : (
-          <StyledDropDown
-            width={dropDownWidth}
+          <DropDown
             isDefaultMode={false}
             open
             manualX="16px"
@@ -705,12 +741,19 @@ const InviteInput = ({
             eventTypes="click"
             withBackdrop={false}
             zIndex={399}
-            className="add-manually-dropdown"
+            style={{ "--custom-width": `${dropDownWidth}px` }}
+            className={classNames(
+              styles.addManuallyDropdown,
+              styles.emailDropdown,
+              {
+                [styles.isRequestRunning]: searchRequestRunning,
+                [styles.customWidth]: !!dropDownWidth,
+              },
+            )}
             {...dropDownMaxHeight}
-            isRequestRunning={searchRequestRunning}
           >
             {dropDownContent}
-          </StyledDropDown>
+          </DropDown>
         )}
 
         <AccessSelector
@@ -729,7 +772,7 @@ const InviteInput = ({
             selectionErrorText: <PaidQuotaLimitError />,
           })}
         />
-      </StyledInviteInputContainer>
+      </div>
     </>
   );
 };

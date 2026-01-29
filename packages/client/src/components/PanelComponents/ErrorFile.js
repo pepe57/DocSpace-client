@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,8 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
+
 import { Text } from "@docspace/shared/components/text";
+import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+
 import { StyledLoadErrorIcon } from "./StyledComponents";
 
 const ErrorFile = ({
@@ -36,8 +38,8 @@ const ErrorFile = ({
   showPasswordInput,
   onRetryClick,
 }) => {
-  const { interfaceDirection } = useTheme();
-  const placeTooltip = interfaceDirection === "rtl" ? "right" : "left";
+  const { isRTL } = useInterfaceDirection();
+  const placeTooltip = isRTL ? "right" : "left";
 
   return (
     <div

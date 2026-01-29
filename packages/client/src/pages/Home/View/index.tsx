@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -95,7 +95,6 @@ type ViewProps = UseContactsProps &
     canUseChat: AccessRightsStore["canUseChat"];
 
     aiConfig: SettingsStore["aiConfig"];
-    isResultTab: AiRoomStore["isResultTab"];
     resultId: AiRoomStore["resultId"];
     setHotkeyCaret: FilesStore["setHotkeyCaret"];
     setIsErrorAccountNotAvailable: FilesStore["setIsErrorAccountNotAvailable"];
@@ -174,7 +173,6 @@ const View = ({
 
   canUseChat,
   aiConfig,
-  isResultTab,
   resultId,
 }: ViewProps) => {
   const location = useLocation();
@@ -535,7 +533,11 @@ const View = ({
   }, [isLoading, currentView, scrollToTop]);
 
   React.useEffect(() => {
-    if (isResultTab && !canUseChat && !showBodyLoader) {
+    if (
+      selectedFolderStore.isInsideResultStorage &&
+      !canUseChat &&
+      !showBodyLoader
+    ) {
       toastr.info(
         <Trans
           t={t}
@@ -544,10 +546,16 @@ const View = ({
           components={{
             strong: <strong />,
           }}
+          values={{ aiAgent: t("Common:AIAgent"), aiChat: t("AIRoom:AIChat") }}
         />,
       );
     }
-  }, [isResultTab, canUseChat, showBodyLoader, t]);
+  }, [
+    selectedFolderStore.isInsideResultStorage,
+    canUseChat,
+    showBodyLoader,
+    t,
+  ]);
 
   const attachmentFile = React.useMemo(
     () => aiAgentSelectorDialogProps?.file,
@@ -644,7 +652,7 @@ export const ViewComponent = inject(
     settingsStore,
     aiRoomStore,
   }: TStore) => {
-    const { isResultTab, resultId } = aiRoomStore;
+    const { resultId } = aiRoomStore;
     const { aiConfig } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
@@ -792,7 +800,6 @@ export const ViewComponent = inject(
 
       canUseChat,
       aiConfig,
-      isResultTab,
       resultId,
     };
   },

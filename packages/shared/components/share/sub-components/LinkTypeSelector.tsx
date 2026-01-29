@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,7 +34,6 @@ import styles from "../Share.module.scss";
 export interface AccessOptionProps {
   isLoaded: boolean;
   canEditInternal: boolean;
-  isExpiredLink: boolean;
 
   options: TOption[];
   selectedOption: TOption;
@@ -45,7 +44,6 @@ export const LinkTypeSelector: FC<AccessOptionProps> = ({
   options,
   isLoaded,
   onSelect,
-  isExpiredLink,
   selectedOption,
   canEditInternal,
 }) => {
@@ -69,7 +67,7 @@ export const LinkTypeSelector: FC<AccessOptionProps> = ({
       selectedOption={selectedOption}
       onSelect={onSelect}
       showDisabledItems
-      isDisabled={isLoaded || isExpiredLink}
+      isDisabled={isLoaded}
       useImageIcon
     />
   );

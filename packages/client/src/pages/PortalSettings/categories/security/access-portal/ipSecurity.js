@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -241,7 +241,7 @@ const IpSecurity = (props) => {
   const onSaveClick = async () => {
     setIsSaving(true);
 
-    const valid = newIps.map((ip) => isValidIp(ip));
+    const valid = ips.map((ip) => isValidIp(ip));
 
     if (valid.includes(false)) {
       setIsSaving(false);

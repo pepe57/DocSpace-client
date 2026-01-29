@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,319 +23,319 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
-import { expect, test } from "./fixtures/base";
+import {
+  aiAgentsHandler,
+  aiConfigHandler,
+  aiModelsHandler,
+  aiProvidersHandler,
+  aiServerHandler,
+  aiServersAvailableHandler,
+  roomTagsHandler,
+  selfActivationStatusHandler,
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
+import { expect, test, TEST_PORT } from "./fixtures/base";
 
 test.describe("AI agents", () => {
-	test.beforeEach(async ({ mockRequest }) => {
-		await mockRequest.router([
-			endpoints.settingsWithQuery,
-			endpoints.colorTheme,
-			endpoints.build,
-			endpoints.capabilities,
-			endpoints.selfEmailActivatedClient,
-			endpoints.tariff,
-			endpoints.quota,
-			endpoints.aiConfig,
-			endpoints.additionalSettings,
-			endpoints.getPortal,
-			endpoints.companyInfo,
-			endpoints.cultures,
-			endpoints.root,
-			endpoints.invitationSettings,
-			endpoints.filesSettings,
-			endpoints.webPlugins,
-			endpoints.thirdPartyCapabilities,
-			endpoints.thirdParty,
-			endpoints.docService,
-			endpoints.aiProvidersList,
-		]);
-	});
-
-	test("should render AI agents not available", async ({
-		page,
-		mockRequest,
-	}) => {
-		await mockRequest.router([
-			endpoints.aiAgentsEmpty,
-			endpoints.aiConfigDisabled,
-		]);
+  test.beforeEach(async ({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      aiProvidersHandler(TEST_PORT),
+    );
+  });
 
-		await page.goto("/ai-agents/filter");
+  test("should render AI agents not available", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      aiAgentsHandler(TEST_PORT),
+      aiConfigHandler(TEST_PORT, true),
+    );
 
-		const emptyView = page.getByTestId("empty-view");
-		await expect(emptyView).toBeVisible();
+    await page.goto(`${baseUrl}/ai-agents/filter`);
 
-		const title = emptyView.locator("h3").first();
+    const emptyView = page.getByTestId("empty-view");
+    await expect(emptyView).toBeVisible();
 
-		await expect(title).toBeVisible();
-		await expect(title).toHaveText("AI provider is not available yet");
+    const title = emptyView.locator("h3").first();
 
-		const description = emptyView.locator("p").first();
+    await expect(title).toBeVisible();
+    await expect(title).toHaveText("AI provider is not available yet");
 
-		await expect(description).toBeVisible();
-		await expect(description).toHaveText(
-			"Connect your own AI service to unlock advanced features in DocSpace. Once added, it will be accessible to all users in AI chats.",
-		);
+    const description = emptyView.locator("p").first();
 
-		const btn = emptyView.locator("button").first();
+    await expect(description).toBeVisible();
+    await expect(description).toHaveText(
+      "Connect your own AI service to unlock advanced features in DocSpace. Once added, it will be accessible to all users in AI chats.",
+    );
 
-		await expect(btn).toBeVisible();
-		await expect(btn).toHaveText("Go to Settings");
+    const btn = emptyView.locator("button").first();
 
-		await btn.click();
+    await expect(btn).toBeVisible();
+    await expect(btn).toHaveText("Go to Settings");
 
-		await page.waitForURL("/portal-settings/ai-settings/providers");
+    await btn.click();
 
-		const portalSettingsHeader = page.locator(".header");
+    await page.waitForURL("/portal-settings/ai-settings/providers");
 
-		await expect(portalSettingsHeader).toBeVisible();
-		await expect(portalSettingsHeader).toHaveText("AI settings");
-	});
+    const portalSettingsHeader = page.locator(".header");
 
-	test("should render AI agents empty view", async ({ page, mockRequest }) => {
-		await mockRequest.router([
-			endpoints.aiAgentsEmptyCreate,
-			endpoints.emptyTags,
-		]);
+    await expect(portalSettingsHeader).toBeVisible();
+    await expect(portalSettingsHeader).toHaveText("AI settings");
+  });
 
-		await page.goto("/ai-agents/filter");
+  test("should render AI agents empty view", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      aiAgentsHandler(TEST_PORT, { withCreate: true }),
+      roomTagsHandler(TEST_PORT),
+    );
 
-		const emptyView = page.getByTestId("empty-view");
-		await expect(emptyView).toBeVisible();
+    await page.goto(`${baseUrl}/ai-agents/filter`);
 
-		const title = emptyView.locator("h3").first();
+    const emptyView = page.getByTestId("empty-view");
+    await expect(emptyView).toBeVisible();
 
-		await expect(title).toBeVisible();
-		await expect(title).toHaveText("Create your AI agent");
+    const title = emptyView.locator("h3").first();
 
-		const description = emptyView.locator("p").first();
+    await expect(title).toBeVisible();
+    await expect(title).toHaveText("Create your AI agent");
 
-		await expect(description).toBeVisible();
-		await expect(description).toHaveText(
-			"Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an MCP server. Invite your colleagues to collaborate and make the most of the agent’s chat capabilities.",
-		);
+    const description = emptyView.locator("p").first();
 
-		const btn = emptyView.getByLabel("Create a new agent").first();
+    await expect(description).toBeVisible();
+    await expect(description).toHaveText(
+      "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an MCP server. Invite your colleagues to collaborate and make the most of the agent’s chat capabilities.",
+    );
 
-		await expect(btn).toBeVisible();
+    const btn = emptyView.getByLabel("Create a new agent").first();
 
-		const btnHeader = btn.locator("h4").first();
-		const btnDescription = btn.locator("p").first();
+    await expect(btn).toBeVisible();
 
-		await expect(btnHeader).toBeVisible();
-		await expect(btnHeader).toHaveText("Create a new agent");
+    const btnHeader = btn.locator("h4").first();
+    const btnDescription = btn.locator("p").first();
 
-		await expect(btnDescription).toBeVisible();
-		await expect(btnDescription).toHaveText(
-			"Start building your first AI agent",
-		);
+    await expect(btnHeader).toBeVisible();
+    await expect(btnHeader).toHaveText("Create a new agent");
 
-		await btn.click();
+    await expect(btnDescription).toBeVisible();
+    await expect(btnDescription).toHaveText(
+      "Start building your first AI agent",
+    );
 
-		const asideHeader = page.getByTestId("aside-header");
+    await btn.click();
 
-		await expect(asideHeader).toBeVisible();
-	});
+    const asideHeader = page.getByTestId("aside-header");
 
-	test("should render AI agents create dialog and create AI agent", async ({
-		page,
-		mockRequest,
-	}) => {
-		await mockRequest.router([
-			endpoints.aiAgentsEmptyCreate,
-			endpoints.emptyTags,
-			endpoints.aiModelsClaude,
-			endpoints.aiServer,
-			endpoints.aiServers,
-		]);
+    await expect(asideHeader).toBeVisible();
+  });
 
-		await page.goto("/ai-agents/filter");
+  test("should render AI agents create dialog and create AI agent", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      aiAgentsHandler(TEST_PORT, { withCreate: true }),
+      roomTagsHandler(TEST_PORT),
+      aiModelsHandler(TEST_PORT, { isClaude: true }),
+      aiServersAvailableHandler(TEST_PORT),
+      aiServerHandler(TEST_PORT),
+    );
 
-		const mainBtn = page.getByTestId("create_new_agent_button");
+    await page.goto(`${baseUrl}/ai-agents/filter`);
 
-		await expect(mainBtn).toBeVisible();
+    const mainBtn = page.getByTestId("create_new_agent_button");
 
-		await mainBtn.click();
+    await expect(mainBtn).toBeVisible();
 
-		const asideHeader = page.getByTestId("aside-header");
+    await mainBtn.click();
 
-		await expect(asideHeader).toBeVisible();
-		await expect(page.getByText("Claude AI").first()).toBeVisible();
-		await expect(page.getByText("Claude Opus 4.5").first()).toBeVisible();
-		await expect(page.getByText("ONLYOFFICE DocSpace").first()).toBeVisible();
+    const asideHeader = page.getByTestId("aside-header");
 
-		const providerCombobox = page.getByTestId("combobox").first();
-		const modelsCombobox = page.getByTestId("combobox").nth(1);
+    await expect(asideHeader).toBeVisible();
+    await expect(page.getByText("Claude AI").first()).toBeVisible();
+    await expect(page.getByText("Claude Opus 4.5").first()).toBeVisible();
+    await expect(page.getByText("ONLYOFFICE DocSpace").first()).toBeVisible();
 
-		await expect(providerCombobox).toBeVisible();
-		await expect(modelsCombobox).toBeVisible();
+    const providerCombobox = page.getByTestId("combobox").first();
+    const modelsCombobox = page.getByTestId("combobox").nth(1);
 
-		const providerButton = providerCombobox.getByRole("button");
-		const modelsButton = modelsCombobox.getByRole("button");
+    await expect(providerCombobox).toBeVisible();
+    await expect(modelsCombobox).toBeVisible();
 
-		await expect(providerButton).toBeVisible();
-		await expect(modelsButton).toBeVisible();
+    const providerButton = providerCombobox.getByRole("button");
+    const modelsButton = modelsCombobox.getByRole("button");
 
-		await modelsButton.click();
+    await expect(providerButton).toBeVisible();
+    await expect(modelsButton).toBeVisible();
 
-		await expect(page.getByText("Claude Opus 4.5").nth(1)).toBeVisible();
-		await expect(page.getByText("Claude Haiku 4.5").nth(0)).toBeVisible();
-		await expect(page.getByText("Claude Sonnet 4.5").nth(0)).toBeVisible();
+    await modelsButton.click();
 
-		await page.getByText("Claude Opus 4.5").nth(1).click();
+    await expect(page.getByText("Claude Opus 4.5").nth(1)).toBeVisible();
+    await expect(page.getByText("Claude Haiku 4.5").nth(0)).toBeVisible();
+    await expect(page.getByText("Claude Sonnet 4.5").nth(0)).toBeVisible();
 
-		await providerButton.click();
+    await page.getByText("Claude Opus 4.5").nth(1).click();
 
-		await expect(page.getByText("Claude AI").nth(1)).toBeVisible();
-		await expect(page.getByText("OpenAI").first()).toBeVisible();
-		await expect(page.getByText("Together AI").first()).toBeVisible();
-		await expect(page.getByText("OpenRouter").first()).toBeVisible();
+    await providerButton.click();
 
-		await mockRequest.router([endpoints.aiModelsOpenAI]);
+    await expect(page.getByText("Claude AI").nth(1)).toBeVisible();
+    await expect(page.getByText("OpenAI").first()).toBeVisible();
+    await expect(page.getByText("Together AI").first()).toBeVisible();
+    await expect(page.getByText("OpenRouter").first()).toBeVisible();
 
-		await page.getByText("OpenAI").first().click();
+    mockRequest.use(aiModelsHandler(TEST_PORT, { isOpenAI: true }));
 
-		await expect(page.getByText("OpenAI").first()).toBeVisible();
-		await expect(page.getByText("GPT-5.1").first()).toBeVisible();
+    await page.getByText("OpenAI").first().click();
 
-		await modelsButton.click();
+    await expect(page.getByText("OpenAI").first()).toBeVisible();
+    await expect(page.getByText("GPT-5.1").first()).toBeVisible();
 
-		await expect(page.getByText("GPT-5.1").nth(1)).toBeVisible();
-		await expect(page.getByText("GPT-5").nth(2)).toBeVisible();
-		await expect(page.getByText("GPT-4.1").first()).toBeVisible();
+    await modelsButton.click();
 
-		await page.getByText("GPT-4.1").first().click();
+    await expect(page.getByText("GPT-5.1").nth(1)).toBeVisible();
+    await expect(page.getByText("GPT-5").nth(2)).toBeVisible();
+    await expect(page.getByText("GPT-4.1").first()).toBeVisible();
 
-		await expect(page.getByText("GPT-4.1").first()).toBeVisible();
+    await page.getByText("GPT-4.1").first().click();
 
-		const nameInput = page.getByTestId("create_edit_agent_input");
+    await expect(page.getByText("GPT-4.1").first()).toBeVisible();
 
-		const inputName = "First AI agent";
+    const nameInput = page.getByTestId("create_edit_agent_input");
 
-		await nameInput.fill(inputName);
+    const inputName = "First AI agent";
 
-		const inputValue = await nameInput.inputValue();
+    await nameInput.fill(inputName);
 
-		expect(inputValue).toBe(inputName);
+    const inputValue = await nameInput.inputValue();
 
-		const instructionInput = page.getByTestId("textarea");
+    expect(inputValue).toBe(inputName);
 
-		const instructionValue = "Instruction for AI agent";
+    const instructionInput = page.getByTestId("textarea");
 
-		await instructionInput.fill(instructionValue);
+    const instructionValue = "Instruction for AI agent";
 
-		const instructionValueInput = await instructionInput.inputValue();
+    await instructionInput.fill(instructionValue);
 
-		expect(instructionValueInput).toBe(instructionValue);
+    const instructionValueInput = await instructionInput.inputValue();
 
-		const removeDocSpaceServer = page.locator(
-			".ai-mcp-item > .IconButton-module__iconButton--aPwf0 > .IconButton-module__notSelectable--faLNW > div > .injected-svg > path",
-		);
+    expect(instructionValueInput).toBe(instructionValue);
 
-		await removeDocSpaceServer.click();
+    const removeDocSpaceServer = page.locator(
+      ".ai-mcp-item > .IconButton-module__iconButton--aPwf0 > .IconButton-module__notSelectable--faLNW > div > .injected-svg > path",
+    );
 
-		await expect(
-			page.getByText("ONLYOFFICE DocSpace").first(),
-		).not.toBeVisible();
+    await removeDocSpaceServer.click();
 
-		const addServersBtn = page.getByTestId("selector-add-button");
+    await expect(
+      page.getByText("ONLYOFFICE DocSpace").first(),
+    ).not.toBeVisible();
 
-		await addServersBtn.click();
+    const addServersBtn = page.getByTestId("selector-add-button");
 
-		await expect(page.getByText("ONLYOFFICE DocSpace").first()).toBeVisible();
-		await expect(page.getByText("custom").first()).toBeVisible();
+    await addServersBtn.click();
 
-		const firstCheckBox = page
-			.locator(".Checkbox-module__checkbox--oU4gW")
-			.first();
+    await expect(page.getByText("ONLYOFFICE DocSpace").first()).toBeVisible();
+    await expect(page.getByText("custom").first()).toBeVisible();
 
-		const secondCheckBox = page
-			.locator(".Checkbox-module__checkbox--oU4gW")
-			.nth(1);
+    const firstCheckBox = page
+      .locator(".Checkbox-module__checkbox--oU4gW")
+      .first();
 
-		await firstCheckBox.click();
-		await secondCheckBox.click();
+    const secondCheckBox = page
+      .locator(".Checkbox-module__checkbox--oU4gW")
+      .nth(1);
 
-		const addButton = page.getByTestId("selector_submit_button").first();
+    await firstCheckBox.click();
+    await secondCheckBox.click();
 
-		await addButton.click();
+    const addButton = page.getByTestId("selector_submit_button").first();
 
-		await expect(page.getByText("ONLYOFFICE DocSpace").first()).toBeVisible();
-		await expect(
-			page.getByText("custom", { exact: true }).first(),
-		).toBeVisible();
+    await addButton.click();
 
-		const createButton = page.getByTestId("create_agent_dialog_save").first();
+    await expect(page.getByText("ONLYOFFICE DocSpace").first()).toBeVisible();
+    await expect(
+      page.getByText("custom", { exact: true }).first(),
+    ).toBeVisible();
 
-		await expect(createButton).toBeVisible();
+    const createButton = page.getByTestId("create_agent_dialog_save").first();
 
-		let createAgentPayload: string | null = null;
+    await expect(createButton).toBeVisible();
 
-		await page.route("**/api/2.0/ai/agents", async (route, request) => {
-			if (request.method() === "POST") {
-				createAgentPayload = request.postData();
-			}
+    let createAgentPayload: string | null = null;
 
-			await route.fulfill({
-				status: 200,
-				body: JSON.stringify({}),
-			});
-		});
+    await page.route("**/api/2.0/ai/agents", async (route, request) => {
+      if (request.method() === "POST") {
+        createAgentPayload = request.postData();
+      }
 
-		await createButton.click();
+      await route.fulfill({
+        status: 200,
+        body: JSON.stringify({}),
+      });
+    });
 
-		expect(createAgentPayload).toBeDefined();
+    await createButton.click();
 
-		const parsedPayload = JSON.parse(createAgentPayload ?? "");
+    expect(createAgentPayload).toBeDefined();
 
-		expect(parsedPayload.title).toBe(inputName);
-		expect(parsedPayload.chatSettings.prompt).toBe(instructionValue);
-		expect(parsedPayload.chatSettings.modelId).toBe("gpt-4.1");
-		expect(parsedPayload.chatSettings.providerId).toBe(2);
-	});
+    const parsedPayload = JSON.parse(createAgentPayload ?? "");
 
-	test("should render AI agents list", async ({ page, mockRequest }) => {
-		await mockRequest.router([endpoints.aiAgentsListCreate]);
+    expect(parsedPayload.title).toBe(inputName);
+    expect(parsedPayload.chatSettings.prompt).toBe(instructionValue);
+    expect(parsedPayload.chatSettings.modelId).toBe("gpt-4.1");
+    expect(parsedPayload.chatSettings.providerId).toBe(2);
+  });
 
-		await page.goto("/ai-agents/filter");
+  test("should render AI agents list", async ({ page, mockRequest }) => {
+    mockRequest.use(aiAgentsHandler(TEST_PORT, { withListCreate: true }));
 
-		await expect(page.getByText("Plugin SDK")).toBeVisible();
-	});
+    await page.goto("/ai-agents/filter");
 
-	test("should render AI agent context menu", async ({ page, mockRequest }) => {
-		await mockRequest.router([endpoints.aiAgentsListCreate]);
+    await expect(page.getByText("Plugin SDK")).toBeVisible();
+  });
 
-		await page.goto("/ai-agents/filter");
+  test("should render AI agent context menu", async ({ page, mockRequest }) => {
+    mockRequest.use(aiAgentsHandler(TEST_PORT, { withListCreate: true }));
 
-		await expect(page.getByText("Plugin SDK")).toBeVisible();
+    await page.goto("/ai-agents/filter");
 
-		await page
-			.getByRole("button", { name: "PS Plugin SDK, 10/12/2025 09:" })
-			.click();
+    await expect(page.getByText("Plugin SDK")).toBeVisible();
 
-		await expect(page.getByText("Pin").first()).toBeVisible();
-		await expect(page.getByText("Delete").first()).toBeVisible();
+    await page
+      .getByRole("button", { name: "PS Plugin SDK, 10/12/2025 09:" })
+      .click();
 
-		await page.locator(".Checkbox-module__checkbox--oU4gW ").first().click();
+    await expect(page.getByText("Pin").first()).toBeVisible();
+    await expect(page.getByText("Delete").first()).toBeVisible();
 
-		await expect(page.getByText("Pin").first()).not.toBeVisible();
-		await expect(page.getByText("Delete").first()).not.toBeVisible();
+    await page.locator(".Checkbox-module__checkbox--oU4gW ").first().click();
 
-		const contextMenuButton = page.getByTestId("context-menu-button");
+    await expect(page.getByText("Pin").first()).not.toBeVisible();
+    await expect(page.getByText("Delete").first()).not.toBeVisible();
 
-		await contextMenuButton.click();
+    const contextMenuButton = page.getByTestId("context-menu-button");
 
-		await expect(page.getByTestId("select").first()).toBeVisible();
-		await expect(page.getByTestId("open").first()).toBeVisible();
-		await expect(page.getByTestId("pin-room").first()).toBeVisible();
-		await expect(page.getByTestId("mute-room").first()).toBeVisible();
-		// await expect(page.getByTestId("manage").first()).toBeVisible();
-		await expect(
-			page.getByTestId("invite-users-to-room").first(),
-		).toBeVisible();
-		// await expect(page.getByTestId("room-info").first()).toBeVisible();
-		await expect(page.getByTestId("delete").first()).toBeVisible();
-	});
+    await contextMenuButton.click();
+
+    await expect(page.getByTestId("select").first()).toBeVisible();
+    await expect(page.getByTestId("open").first()).toBeVisible();
+    await expect(page.getByTestId("pin-room").first()).toBeVisible();
+    await expect(page.getByTestId("mute-room").first()).toBeVisible();
+    // await expect(page.getByTestId("manage").first()).toBeVisible();
+    await expect(
+      page.getByTestId("invite-users-to-room").first(),
+    ).toBeVisible();
+    // await expect(page.getByTestId("room-info").first()).toBeVisible();
+    await expect(page.getByTestId("delete").first()).toBeVisible();
+  });
 });
