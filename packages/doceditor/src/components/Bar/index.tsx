@@ -43,18 +43,18 @@ const Bar: React.FC = () => {
     switch (type) {
       case "room":
         return {
-          header: t("YourFurtherEditsNotSaved"),
-          description: t("RoomQuotaLimitWarning"),
+          description: t("YourFurtherEditsNotSaved"),
+          header: t("RoomQuotaLimitWarning"),
         };
       case "user":
         return {
-          header: t("YourFurtherEditsNotSaved"),
-          description: t("UserQuotaLimitWarning"),
+          description: t("YourFurtherEditsNotSaved"),
+          header: t("UserQuotaLimitWarning"),
         };
       case "tenant":
         return {
-          header: t("YourFurtherEditsNotSaved"),
-          description: t("PortalQuotaLimitWarning", {
+          description: t("YourFurtherEditsNotSaved"),
+          header: t("PortalQuotaLimitWarning", {
             productName: t("ProductName"),
           }),
         };
