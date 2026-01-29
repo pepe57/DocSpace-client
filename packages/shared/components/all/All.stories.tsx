@@ -44,7 +44,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 // import HelpButton from "../help-button";
 // import IconButton from "@docspace/ui-kit/components/icon-button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { Calendar } from "../calendar";
+import { Calendar } from "@docspace/ui-kit/components/calendar";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { ComboBox, ComboBoxSize } from "@docspace/ui-kit/components/combobox";
 import { InputBlock } from "@docspace/ui-kit/components/input-block";

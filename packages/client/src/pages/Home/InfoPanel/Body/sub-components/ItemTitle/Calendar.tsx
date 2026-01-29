@@ -2,7 +2,7 @@ import IconCalendar from "PUBLIC_DIR/images/calendar.info.panel.react.svg?url";
 import { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import moment from "moment";
-import { Calendar } from "@docspace/shared/components/calendar";
+import { Calendar } from "@docspace/ui-kit/components/calendar";
 import { isMobile } from "@docspace/shared/utils";
 import { ReactSVG } from "react-svg";
 

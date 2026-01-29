@@ -935,18 +935,6 @@
 }
 
 .light {
-  --disabled-selected-item-color: #{$gray};
-  --filter-input-selected-items-background: #{$gray-light-mid};
-  --filter-input-selected-items-hover-background: #{$light-gray-hover};
-}
-
-.dark {
-  --disabled-selected-item-color: #{$gray-dark-text};
-  --filter-input-selected-items-background: #{$gray-dark-strong};
-  --filter-input-selected-items-hover-background: #{$dark-gray-light};
-}
-
-.light {
   --selector-add-button-background: #{$gray-light-mid};
   --selector-add-button-hover-background: #{$light-gray-selected};
   --selector-add-button-active-background: #{$gray-strong};
@@ -1252,19 +1240,13 @@
 }
 
 .light {
-  --date-picker-background: #{$white};
-  --date-picker-border: 1px solid #{$gray-strong};
   --date-picker-cell-background: #{$gray-light-mid};
   --date-picker-icon-color: #{$light-gray-dark};
-  --data-picker-calendar-icon: #{$light-gray-dark};
 }
 
 .dark {
-  --date-picker-background: #{$black};
-  --date-picker-border: 1px solid #{$gray-dark-strong};
   --date-picker-cell-background: #{$gray-dark-mid};
   --date-picker-icon-color: #{$dark-gray-dark};
-  --data-picker-calendar-icon: #{$dark-gray-dark};
 }
 
 .light {

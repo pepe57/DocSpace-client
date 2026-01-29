@@ -36,7 +36,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
-import { SelectedItem } from "@docspace/shared/components/selected-item";
+import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
 import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 

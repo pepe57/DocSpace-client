@@ -33,7 +33,7 @@ import ClockIcon from "PUBLIC_DIR/images/clock.react.svg";
 import { ButtonKeys } from "../../enums";
 
 import { TimePicker } from "../time-picker";
-import { DatePicker } from "../date-picker";
+import { DatePicker } from "@docspace/ui-kit/components/date-picker";
 
 import { DateTimePickerProps } from "./DateTimerPicker.types";
 import styles from "./DateTimePicker.module.scss";

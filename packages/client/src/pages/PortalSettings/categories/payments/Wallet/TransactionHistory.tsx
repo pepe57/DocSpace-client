@@ -37,7 +37,7 @@ import {
   ComboBoxSize,
   TOption,
 } from "@docspace/ui-kit/components/combobox";
-import { DatePicker } from "@docspace/shared/components/date-picker";
+import { DatePicker } from "@docspace/ui-kit/components/date-picker";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   checkTransactionHistoryReport,
@@ -54,7 +54,7 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 import FilterIcon from "@docspace/shared/components/filter/sub-components/FilterIcon";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
-import { SelectedItemPure } from "@docspace/shared/components/selected-item/SelectedItem";
+import { SelectedItemPure } from "@docspace/ui-kit/components/selected-item";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import { TUser } from "@docspace/shared/api/people/types";
 import PeopleSelector from "@docspace/shared/selectors/People";

@@ -32,7 +32,7 @@ import { DeviceType, FilterGroups } from "../../enums";
 
 import { TViewSelectorOption, ViewSelector } from "../view-selector";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { SelectedItem } from "../selected-item";
+import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
 
 import FilterButton from "./sub-components/FilterButton";
 import SortButton from "./sub-components/SortButton";
