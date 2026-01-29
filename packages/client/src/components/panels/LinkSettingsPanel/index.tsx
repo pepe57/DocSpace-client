@@ -39,7 +39,7 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { DateTimePicker } from "@docspace/shared/components/date-time-picker";
+import { DateTimePicker } from "@docspace/ui-kit/components/date-time-picker";
 import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import LinkRolesDropdown from "./sub-components/LinkRolesDropdown";
 import styles from "./LinkSettingsPanel.module.scss";
@@ -305,6 +305,7 @@ const LinkSettingsPanel = ({
             minDate={moment().subtract(1, "days")}
             maxDate={maxDate}
             useMaxTime={!activeLink.expirationDate}
+            translations={{ AM: t("Common:AM"), PM: t("Common:PM") }}
           />
         </div>
       </ModalDialog.Body>

@@ -1240,16 +1240,6 @@
 }
 
 .light {
-  --date-picker-cell-background: #{$gray-light-mid};
-  --date-picker-icon-color: #{$light-gray-dark};
-}
-
-.dark {
-  --date-picker-cell-background: #{$gray-dark-mid};
-  --date-picker-icon-color: #{$dark-gray-dark};
-}
-
-.light {
   --dropzone-border: 2px dashed #{$gray-light-mid};
   --dropzone-secondary-link: #${black};
   --dropzone-exsts-color: #{$gray};

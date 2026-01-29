@@ -32,7 +32,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { useTranslation } from "react-i18next";
 import { DatePicker } from "@docspace/ui-kit/components/date-picker";
 import { Calendar } from "@docspace/ui-kit/components/calendar";
-import { TimePicker } from "@docspace/shared/components/time-picker";
+import { TimePicker } from "@docspace/ui-kit/components/time-picker";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
 
