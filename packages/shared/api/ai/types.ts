@@ -249,3 +249,14 @@ export type TGetAgents = {
 };
 
 export type TEditAgentData = Partial<TCreateAgentData>;
+
+export type TDefaultProvider = {
+  providerId: TAiProvider["id"];
+  providerTitle: TAiProvider["title"];
+  defaultModel: TModel["modelId"];
+};
+
+export type TSetDefaultProviderData = {
+  providerId: TAiProvider["id"];
+  defaultModel: TModel["modelId"];
+};

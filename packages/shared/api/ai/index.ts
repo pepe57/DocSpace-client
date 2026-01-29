@@ -55,6 +55,8 @@ import type {
   TCreateAgentData,
   TEditAgentData,
   TGetAgents,
+  TDefaultProvider,
+  TSetDefaultProviderData,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -665,4 +667,30 @@ export const getMCPServerById = async (id: string) => {
   const res = await request(options);
 
   return res as TServer;
+};
+
+export const getDefaultProvider = async () => {
+  const options = {
+    method: "get",
+    url: `${baseUrl}/providers/default`,
+  };
+
+  const res = await request(options);
+
+  return res as TDefaultProvider;
+};
+
+export const setDefaultProvider = async ({
+  providerId,
+  defaultModel,
+}: TSetDefaultProviderData) => {
+  const options = {
+    method: "put",
+    url: `${baseUrl}/providers/default`,
+    data: { providerId, defaultModel },
+  };
+
+  const res = await request(options);
+
+  return res as TDefaultProvider;
 };
