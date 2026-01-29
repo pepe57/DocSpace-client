@@ -26,7 +26,7 @@
 
 import { TFunction } from "i18next";
 import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import { TagType } from "../../tags/Tags.types";
+import { TagType } from "@docspace/ui-kit/components/tags";
 import { TileItem } from "../tile-container/TileContainer.types";
 
 export interface RoomItem extends TileItem {
