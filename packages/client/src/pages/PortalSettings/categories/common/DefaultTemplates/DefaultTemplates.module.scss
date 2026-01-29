@@ -24,59 +24,69 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { http, passthrough } from "msw";
-import { test as base, Page } from "@playwright/test";
-import {
-  PlaywrightWebSocketMock,
-  WorkerFixture,
-  BASE_URL,
-} from "@docspace/shared/__mocks__/e2e";
-import { allHandlers } from "@docspace/shared/__mocks__/handlers";
+@use "@docspace/shared/styles/mixins";
 
-export const TEST_PORT = process.env.PORT || "5110";
+.wrapper {
+  width: 100%;
+  max-width: 700px;
+}
 
-export const test = base.extend<
-  {
-    page: Page;
-    mockRequest: WorkerFixture;
-    wsMock: PlaywrightWebSocketMock;
-  },
-  {
-    baseUrl: string;
+.description {
+  margin-bottom: 20px;
+}
+
+.rowContainer {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--default-templates-border-color);
+  border-radius: 6px;
+  padding: 0 16px;
+}
+
+.templateRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--default-templates-border-color);
+
+  &:last-child {
+    border-bottom: none;
   }
->({
-  baseUrl: [
-    async ({}, use) => {
-      await use(`${BASE_URL}:${TEST_PORT}`);
-    },
-    {
-      scope: "worker",
-      auto: true,
-    },
-  ],
-  mockRequest: [
-    async ({ page }, use) => {
-      const localePassthrough = http.get(
-        /(\/client)?\/locales\/.*\.json(\?.*)?$/,
-        () => passthrough(),
-      );
+}
 
-      const worker = new WorkerFixture({
-        page,
-        initialHandlers: [...allHandlers(TEST_PORT), localePassthrough],
-      });
+.rowContent {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  padding: 12px 0;
+}
 
-      await worker.start();
-      await use(worker);
-    },
-    {
-      auto: true,
-    },
-  ],
-  wsMock: async ({ page }, use) => {
-    const wsMock = new PlaywrightWebSocketMock(page);
-    await use(wsMock);
-  },
-});
+.mainContent {
+  display: flex;
+  flex-direction: column;
 
-export { expect } from "@playwright/test";
+  @include mixins.mobile {
+    max-width: 120px;
+  }
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  margin-inline-end: 12px;
+}
+
+.badge {
+  margin-inline-start: auto;
+  margin-inline-end: 24px;
+}
+
+.contextMenuButton {
+  margin-inline-start: auto;
+}
+
+.modifiedText {
+  color: var(--modified-text-color);
+}
+
