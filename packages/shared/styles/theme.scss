@@ -3151,3 +3151,17 @@
 
   --template-gallery-view-button-border: #{$gray-dark-strong};
 }
+
+.light {
+  --room-grouping-dialog-tag-text: #{$light-gray-dark};
+  --room-grouping-dialog-tag-icon: #{$light-gray-dark};
+  --room-grouping-dialog-tag-active: #{$light-blue-main};
+  --room-grouping-dialog-fade: #{$white};
+}
+
+.dark {
+  --room-grouping-dialog-tag-text: #{$dark-gray-dark};
+  --room-grouping-dialog-tag-icon: #{$dark-gray-dark};
+  --room-grouping-dialog-tag-active: #{$light-blue-main};
+  --room-grouping-dialog-fade: #{$black};
+}

@@ -2,8 +2,11 @@
     "AllRooms": "All rooms",
     "CreateNewGroup": "Create a new group",
     "EditRoomGroups": "Edit room groups",
+    "EnableNow": "Enable now",
     "GroupIcon": "Group icon",
     "GroupName": "Group name",
+    "RoomGrouping": "Room grouping",
+    "RoomGroupingDescription": "Easily navigate your DocSpace with the new room grouping option. Organize rooms by specific features to quickly find what you need. You can enable room grouping now or anytime later in your profile settings.",
     "RoomGroups": "Room groups",
     "RoomGroupsDescription": "You can group rooms into folders and easily switch between them. By disabling grouping, you can re-enable it in the profile settings."
 }
