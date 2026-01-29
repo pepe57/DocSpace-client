@@ -52,7 +52,7 @@ const EditorsTooltipMobile = ({
         zIndex={310}
       />
       <div className={styles.mobileContainer} style={{ height: `${height}px` }}>
-        <Scrollbar>
+        <Scrollbar autoHide={false}>
           <div className={styles.tooltipHeader}>
             {t("FileCurrentlyEditedBy")}
           </div>

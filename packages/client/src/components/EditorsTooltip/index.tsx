@@ -89,7 +89,7 @@ const EditorsTooltip = ({ item, currentUserId }: EditorsTooltipProps) => {
           minWidth: "200px",
         }}
       >
-        <Scrollbar>
+        <Scrollbar autoHide={false}>
           <div className={styles.tooltipHeader}>
             {t("FileCurrentlyEditedBy")}
           </div>
