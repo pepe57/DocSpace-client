@@ -33,6 +33,7 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
 
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
+import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 import { DefaultPageSetting } from "./sub-components/DefaultPageSetting";
 import styles from "./FileManagement.module.scss";
@@ -57,6 +58,9 @@ type FileManagementProps = {
 
   hideConfirmCancelOperation?: boolean;
   setHideConfirmCancelOperation?: FilesSettingsStore["setHideConfirmCancelOperation"];
+
+  isGroupingEnabled?: boolean;
+  setIsGroupingEnabled?: DialogsStore["setIsGroupingEnabled"];
 };
 
 const FileManagement = ({
@@ -79,6 +83,9 @@ const FileManagement = ({
 
   hideConfirmCancelOperation,
   setHideConfirmCancelOperation,
+
+  isGroupingEnabled,
+  setIsGroupingEnabled,
 }: FileManagementProps) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
 
@@ -102,6 +109,11 @@ const FileManagement = ({
   const onChangeCancellationNotification = React.useCallback(() => {
     setHideConfirmCancelOperation?.(!hideConfirmCancelOperation);
   }, [hideConfirmCancelOperation, setHideConfirmCancelOperation]);
+
+  const onChangeRoomGrouping = React.useCallback(() => {
+    setIsGroupingEnabled?.(!isGroupingEnabled);
+    localStorage.setItem("roomGroupingEnabled", String(!isGroupingEnabled));
+  }, [isGroupingEnabled, setIsGroupingEnabled]);
 
   const onChangeOpenEditorInSameTab = React.useCallback(() => {
     setOpenEditorInSameTab?.(!openEditorInSameTab);
@@ -180,13 +192,27 @@ const FileManagement = ({
           />
           <Text>{t("CancellaionNotification")}</Text>
         </div>
+        <div className={styles.toggleBtnWrapper}>
+          <ToggleButton
+            className={classNames("room-grouping", styles.toggleBtn)}
+            onChange={onChangeRoomGrouping}
+            isChecked={isGroupingEnabled}
+            dataTestId="room_grouping_toggle_button"
+          />
+          <Text>{t("GroupByRooms")}</Text>
+        </div>
       </div>
     </div>
   );
 };
 
 export default inject(
-  ({ filesSettingsStore, treeFoldersStore, settingsStore }: TStore) => {
+  ({
+    filesSettingsStore,
+    treeFoldersStore,
+    settingsStore,
+    dialogsStore,
+  }: TStore) => {
     const {
       storeOriginalFiles,
       confirmDelete,
@@ -209,6 +235,7 @@ export default inject(
       hideConfirmCancelOperation,
       setHideConfirmCancelOperation,
     } = filesSettingsStore;
+    const { isGroupingEnabled, setIsGroupingEnabled } = dialogsStore;
     const { logoText } = settingsStore;
 
     const { myFolderId, commonFolderId } = treeFoldersStore;
@@ -238,6 +265,8 @@ export default inject(
       logoText,
       hideConfirmCancelOperation,
       setHideConfirmCancelOperation,
+      isGroupingEnabled,
+      setIsGroupingEnabled,
     };
   },
 )(observer(FileManagement));
