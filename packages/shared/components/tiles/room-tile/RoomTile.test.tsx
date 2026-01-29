@@ -54,7 +54,7 @@ interface TagProps {
 }
 
 // Mock Tags component to mimic key behaviour
-vi.mock("../../tags", () => ({
+vi.mock("@docspace/ui-kit/components/tags", () => ({
   Tags: ({
     tags,
     onSelectTag,
