@@ -272,6 +272,8 @@ class FilesStore {
 
   aiRoomStore = null;
 
+  dialogsStore = null;
+
   arrRoomGroups = [];
 
   constructor(
@@ -2375,6 +2377,20 @@ class FilesStore {
             }
 
             this.setCreatedItem(null);
+          }
+
+          // Show room grouping dialog if >= 10 rooms and not shown before
+          const isRoomsFolderByType =
+            data.current.rootFolderType === FolderType.Rooms &&
+            !data.current.parentId;
+          if (
+            isRoomsFolderByType &&
+            data.total >= 10 &&
+            this.dialogsStore?.setRoomGroupingDialogVisible
+          ) {
+            const dialogShown = localStorage.getItem("roomGroupingDialogShown");
+            if (!dialogShown)
+              this.dialogsStore.setRoomGroupingDialogVisible(true);
           }
 
           runInAction(() => {

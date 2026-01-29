@@ -44,15 +44,13 @@ import AlertTabletIconUrl from "PUBLIC_DIR/images/bell.tablet.svg?url";
 import styles from "./RoomGroupingDialog.module.scss";
 
 type RoomGroupingDialogProps = {
-  visible?: boolean;
-  onClose?: () => void;
-  onEnableNow?: () => void;
+  setIsGroupingEnabled: () => void;
+  setRoomGroupingDialogVisible: () => void;
 };
 
 const RoomGroupingDialog = ({
-  visible = false,
-  onClose = () => {},
-  onEnableNow = () => {},
+  setIsGroupingEnabled,
+  setRoomGroupingDialogVisible,
 }: RoomGroupingDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
   const [isDesktopView, setIsDesktopView] = useState(isDesktop());
@@ -67,13 +65,20 @@ const RoomGroupingDialog = ({
   }, []);
 
   const handleEnableNow = () => {
-    onEnableNow();
-    onClose();
+    setIsGroupingEnabled(true);
+    localStorage.setItem("roomGroupingEnabled", "true");
+    localStorage.setItem("roomGroupingDialogShown", "true");
+    setRoomGroupingDialogVisible(false);
+  };
+
+  const onClose = () => {
+    localStorage.setItem("roomGroupingDialogShown", "true");
+    setRoomGroupingDialogVisible(false);
   };
 
   return (
     <ModalDialog
-      visible={visible}
+      visible
       onClose={onClose}
       displayType={ModalDialogType.modal}
       autoMaxHeight
@@ -128,7 +133,7 @@ const RoomGroupingDialog = ({
                   [styles.tagNameTablet]: !isDesktopView,
                 })}
               >
-                Mail rooms
+                {t("GroupingRooms:MailRooms")}
               </div>
             </div>
             <div
@@ -148,7 +153,7 @@ const RoomGroupingDialog = ({
                   [styles.tagNameTablet]: !isDesktopView,
                 })}
               >
-                Events rooms
+                {t("GroupingRooms:EventsRooms")}
               </div>
             </div>
           </div>
@@ -355,19 +360,10 @@ const RoomGroupingDialog = ({
 };
 
 export default inject(({ dialogsStore }: TStore) => {
-  const {
-    roomGroupingDialogVisible,
-    setRoomGroupingDialogVisible,
-    setIsGroupingEnabled,
-  } = dialogsStore;
+  const { setRoomGroupingDialogVisible, setIsGroupingEnabled } = dialogsStore;
 
   return {
-    visible: roomGroupingDialogVisible,
-    onClose: () => setRoomGroupingDialogVisible(false),
-    onEnableNow: () => {
-      setIsGroupingEnabled?.(true);
-      localStorage.setItem("roomGroupingEnabled", "true");
-      localStorage.setItem("roomGroupingDialogShown", "true");
-    },
+    setRoomGroupingDialogVisible,
+    setIsGroupingEnabled,
   };
 })(observer(RoomGroupingDialog));

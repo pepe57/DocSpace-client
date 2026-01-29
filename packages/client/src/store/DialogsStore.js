@@ -343,7 +343,12 @@ class DialogsStore {
 
   editRoomGroupsDialogVisible = false;
 
+  roomGroupingDialogVisible = false;
+
   roomGroups = [];
+
+  // Flag indicating whether room grouping feature is enabled (will be set by backend in the future)
+  isGroupingEnabled = true;
 
   constructor(
     authStore,
@@ -1121,6 +1126,14 @@ class DialogsStore {
 
   setEditRoomGroupsDialogVisible = (visible) => {
     this.editRoomGroupsDialogVisible = visible;
+  };
+
+  setRoomGroupingDialogVisible = (visible) => {
+    this.roomGroupingDialogVisible = visible;
+  };
+
+  setIsGroupingEnabled = (enabled) => {
+    this.isGroupingEnabled = enabled;
   };
 
   setCreateGroupRooms = async (newGroup) => {
