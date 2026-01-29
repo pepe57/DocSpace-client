@@ -346,7 +346,9 @@ const RoomGroupingDialog = ({
         </div>
 
         <div className={styles.description}>
-          {t("GroupingRooms:RoomGroupingDescription")}
+          {t("GroupingRooms:RoomGroupingDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
