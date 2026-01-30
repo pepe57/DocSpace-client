@@ -30,7 +30,7 @@ import { size, isMobileDevice } from "@docspace/shared/utils";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";

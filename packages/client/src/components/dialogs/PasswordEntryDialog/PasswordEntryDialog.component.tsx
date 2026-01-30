@@ -39,7 +39,7 @@ import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { validatePublicRoomPassword } from "@docspace/shared/api/rooms";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { PasswordInput } from "@docspace/shared/components/password-input";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
 import type { PasswordEntryDialogProps } from "./PasswordEntryDialog.types";
 import styles from "./PasswordEntry.module.scss";

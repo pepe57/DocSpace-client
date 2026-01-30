@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import equal from "fast-deep-equal/react";
 import classNames from "classnames";
 import { ALLOWED_MCP_CHARACTERS } from "@docspace/shared/constants";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
 	TextInput,
 	InputType,

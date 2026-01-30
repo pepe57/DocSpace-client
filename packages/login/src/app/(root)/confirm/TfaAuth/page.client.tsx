@@ -34,7 +34,7 @@ import { checkConfirmLink } from "@docspace/shared/api/user";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Text } from "@docspace/ui-kit/components/text";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
   InputSize,
   InputType,

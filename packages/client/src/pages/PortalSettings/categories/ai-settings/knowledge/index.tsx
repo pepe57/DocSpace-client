@@ -30,7 +30,7 @@ import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore"
 import { KnowledgeType } from "@docspace/shared/api/ai/enums";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Text } from "@docspace/ui-kit/components/text";

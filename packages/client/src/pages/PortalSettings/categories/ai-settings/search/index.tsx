@@ -33,7 +33,7 @@ import { inject, observer } from "mobx-react";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { WebSearchType } from "@docspace/shared/api/ai/enums";
 import { PasswordInput } from "@docspace/shared/components/password-input";

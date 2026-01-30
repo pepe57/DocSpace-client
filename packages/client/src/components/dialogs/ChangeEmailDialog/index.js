@@ -30,7 +30,7 @@ import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { EmailInput } from "@docspace/shared/components/email-input";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { withTranslation } from "react-i18next";

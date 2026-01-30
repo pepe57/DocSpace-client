@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
 import LdapFieldComponent from "./LdapFieldComponent";
 

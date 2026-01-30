@@ -35,7 +35,7 @@ import { globalColors } from "../../../themes";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { FieldContainer } from "../../../components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
   TextInput,
   InputType,

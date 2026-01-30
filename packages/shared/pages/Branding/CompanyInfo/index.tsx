@@ -29,7 +29,7 @@ import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { Link } from "@docspace/ui-kit/components/link";
-import { FieldContainer } from "../../../components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
 	TextInput,
 	InputType,
