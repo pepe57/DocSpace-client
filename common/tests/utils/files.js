@@ -30,49 +30,50 @@ const fs = require("fs");
 const BASE_DIR = process.env.BASE_DIR || path.resolve(__dirname, "../../../");
 
 const moduleWorkspaces = [
-  path.join("packages", "client"),
-  path.join("packages", "doceditor"),
-  path.join("packages", "login"),
-  path.join("packages", "shared"),
-  path.join("packages", "management"),
-  path.join("packages", "sdk"),
-  path.join("public", "locales"), // common
+	path.join("packages", "client"),
+	path.join("packages", "doceditor"),
+	path.join("packages", "login"),
+	path.join("packages", "shared"),
+	path.join("packages", "management"),
+	path.join("packages", "sdk"),
+	path.join("libs", "ui-kit"),
+	path.join("public", "locales"), // common
 ];
 
 const getWorkSpaces = () => {
-  const workspaces = moduleWorkspaces.map((ws) => path.resolve(BASE_DIR, ws));
+	const workspaces = moduleWorkspaces.map((ws) => path.resolve(BASE_DIR, ws));
 
-  return workspaces;
+	return workspaces;
 };
 
 const getAllFiles = (dir, excludeDirs = []) => {
-  const files = fs.readdirSync(dir);
-  return files.flatMap((file) => {
-    const filePath = path.join(dir, file);
-    const isDirectory = fs.statSync(filePath).isDirectory();
-    if (isDirectory) {
-      if (
-        excludeDirs.includes(filePath) ||
-        excludeDirs.some((ex) => filePath.includes(ex))
-      ) {
-        return null;
-      }
+	const files = fs.readdirSync(dir);
+	return files.flatMap((file) => {
+		const filePath = path.join(dir, file);
+		const isDirectory = fs.statSync(filePath).isDirectory();
+		if (isDirectory) {
+			if (
+				excludeDirs.includes(filePath) ||
+				excludeDirs.some((ex) => filePath.includes(ex))
+			) {
+				return null;
+			}
 
-      return getAllFiles(filePath, excludeDirs);
-    } else {
-      return filePath;
-    }
-  });
+			return getAllFiles(filePath, excludeDirs);
+		} else {
+			return filePath;
+		}
+	});
 };
 
 const convertPathToOS = (filePath) => {
-  return path.normalize(filePath);
+	return path.normalize(filePath);
 };
 
 module.exports = {
-  BASE_DIR,
-  moduleWorkspaces,
-  getWorkSpaces,
-  getAllFiles,
-  convertPathToOS,
+	BASE_DIR,
+	moduleWorkspaces,
+	getWorkSpaces,
+	getAllFiles,
+	convertPathToOS,
 };
