@@ -31,7 +31,7 @@ import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
-import { Slider } from "@docspace/shared/components/slider";
+import { Slider } from "@docspace/ui-kit/components/slider";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobileDevice, size } from "@docspace/shared/utils";
