@@ -55,15 +55,7 @@ const sortEditors = (editors: EditorUser[]): EditorUser[] => {
     const aIsAnonymous = a.id.startsWith("uid-");
     const bIsAnonymous = b.id.startsWith("uid-");
 
-    if (aIsAnonymous && !bIsAnonymous) return 1;
-    if (!aIsAnonymous && bIsAnonymous) return -1;
-
-    // Both are anonymous - sort by number in name (e.g., "Anonymous 1", "Anonymous 2")
-    if (aIsAnonymous && bIsAnonymous) {
-      const aNumber = parseInt(a.name.match(/\d+/)?.[0] || "0", 10);
-      const bNumber = parseInt(b.name.match(/\d+/)?.[0] || "0", 10);
-      return aNumber - bNumber;
-    }
+    if (aIsAnonymous !== bIsAnonymous) return aIsAnonymous ? 1 : -1;
 
     return a.name.localeCompare(b.name);
   });
