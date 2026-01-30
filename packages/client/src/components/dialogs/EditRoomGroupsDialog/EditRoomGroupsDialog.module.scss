@@ -165,3 +165,9 @@
   flex-shrink: 0;
   margin-inline-start: 8px;
 }
+
+.deleteGroupDialog {
+  :global(#modal-dialog) {
+    width: 363px;
+  }
+}

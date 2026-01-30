@@ -45,8 +45,8 @@ import { Aside } from "@docspace/shared/components/aside";
 import styles from "./EditRoomGroupsDialog.module.scss";
 import RoomSelector from "@docspace/shared/selectors/Room";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { ButtonSize } from "@docspace/shared/components/button";
 import GroupIconDialog from "./sub-components/GroupIconDialog";
+import DeleteGroupDialog from "./sub-components/DeleteGroupDialog";
 import { EditRoomGroupsDialogProps } from "./EditRoomGroupsDialog.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TSelectorItem } from "@docspace/shared/components/selector/Selector.types";
@@ -77,6 +77,8 @@ const EditRoomGroupsDialog = ({
     rooms: TRoom[];
   } | null>(null);
   const [editingGroupId, setEditingGroupId] = useState<string | null>(null);
+  const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
+  const [groupIdToDelete, setGroupIdToDelete] = useState<string | null>(null);
 
   const onClickCreateNewGroup = () => {
     setIsOpenRoomList(true);
@@ -171,18 +173,31 @@ const EditRoomGroupsDialog = ({
     setIsOpenGroupIcon(true);
   };
 
-  const onClickDeleteGroup = async (groupId: string) => {
-    try {
-      await deleteRoomGroup(groupId);
-      await getAllRoomGroups();
-    } catch (error) {
-      console.error("Error deleting group:", error);
-    }
+  const onClickDeleteGroup = (groupId: string) => {
+    setGroupIdToDelete(groupId);
+    setDeleteConfirmVisible(true);
+  };
+
+  const onCloseDeleteConfirm = () => {
+    setDeleteConfirmVisible(false);
+    setGroupIdToDelete(null);
   };
 
   const currentEditingGroup = editingGroupId
     ? roomGroups.find((group) => group.id === editingGroupId)
     : null;
+
+  if (deleteConfirmVisible) {
+    return (
+      <DeleteGroupDialog
+        visible={deleteConfirmVisible}
+        groupId={groupIdToDelete}
+        onClose={onCloseDeleteConfirm}
+        deleteRoomGroup={deleteRoomGroup}
+        getAllRoomGroups={getAllRoomGroups}
+      />
+    );
+  }
 
   if (isOpenGroupIcon) {
     return (
