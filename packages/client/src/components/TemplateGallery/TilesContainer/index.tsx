@@ -39,7 +39,7 @@ import {
   Scrollbar,
   ScrollbarType,
 } from "@docspace/ui-kit/components/scrollbar";
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import type OformsFilter from "@docspace/shared/api/oforms/filter";

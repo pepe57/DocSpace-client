@@ -38,7 +38,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
+} from "@docspace/ui-kit/components/context-menu-button";
 import {
   Avatar,
   AvatarRole,

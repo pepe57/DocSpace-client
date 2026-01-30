@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import ErrorImageSvgUrl from "PUBLIC_DIR/images/errors/error500.svg?url";
 import { isMobile as isMobileUtils } from "@docspace/shared/utils";

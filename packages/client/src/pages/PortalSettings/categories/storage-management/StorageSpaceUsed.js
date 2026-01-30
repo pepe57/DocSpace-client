@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
 import { ContextMenu } from "@docspace/ui-kit/components/context-menu";
 import { ChangeStorageQuotaDialog } from "@docspace/shared/dialogs/change-storage-quota";
 import { Link } from "@docspace/ui-kit/components/link";

@@ -43,7 +43,7 @@ import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { saveSettingsThirdParty } from "../../api/files";
 import { THIRD_PARTY_SERVICES_URL } from "../../constants";
 import { DropDownItem } from "../drop-down-item";
-import { ContextMenuButton } from "../context-menu-button";
+import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
 import { DeleteThirdPartyDialog } from "../../dialogs/delete-third-party";
 import { FilesSelectorInput } from "../files-selector-input";
 import { isNullOrUndefined } from "../../utils/typeGuards";

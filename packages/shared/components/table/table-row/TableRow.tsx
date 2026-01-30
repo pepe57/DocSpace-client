@@ -35,7 +35,7 @@ import {
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "../../context-menu-button";
+} from "@docspace/ui-kit/components/context-menu-button";
 import { hasOwnProperty } from "../../../utils/object";
 import { EMPTY_ARRAY } from "../../../constants";
 

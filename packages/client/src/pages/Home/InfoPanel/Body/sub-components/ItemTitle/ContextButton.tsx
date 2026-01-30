@@ -32,15 +32,11 @@ import { TRoom } from "@docspace/shared/api/rooms/types";
 import { isMobile } from "@docspace/shared/utils";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
-import {
-  ContextMenu,
-  ContextMenuRefType,
-  HeaderType,
-} from "@docspace/ui-kit";
+import { ContextMenu, ContextMenuRefType, HeaderType } from "@docspace/ui-kit";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
+} from "@docspace/ui-kit/components/context-menu-button";
 
 import ContextOptionsStore from "SRC_DIR/store/ContextOptionsStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";

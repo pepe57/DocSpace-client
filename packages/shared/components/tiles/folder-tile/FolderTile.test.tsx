@@ -56,7 +56,7 @@ vi.mock("./FolderTile.module.scss", () => ({
 }));
 
 // Mock context menu components
-vi.mock("@docspace/shared/components/context-menu-button", () => ({
+vi.mock("@docspace/ui-kit/components/context-menu-button", () => ({
   ContextMenuButton: ({
     title,
     onClick,

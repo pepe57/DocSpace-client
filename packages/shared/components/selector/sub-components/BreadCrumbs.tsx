@@ -32,7 +32,7 @@ import { classNames } from "../../../utils";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "../../context-menu-button";
+} from "@docspace/ui-kit/components/context-menu-button";
 import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import {
   TBreadCrumb,

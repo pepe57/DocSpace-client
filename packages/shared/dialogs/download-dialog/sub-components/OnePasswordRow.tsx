@@ -34,8 +34,11 @@ import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.re
 import RemoveIcon from "PUBLIC_DIR/images/remove.react.svg?url";
 
 import { toastr } from "../../../components/toast";
-import { ContextMenuButton } from "../../../components/context-menu-button";
-import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
+import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { SimulatePassword } from "../../../components/simulate-password";
