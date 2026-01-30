@@ -73,7 +73,7 @@ beforeAll(() => {
 
 	workspaces = [
 		...getWorkSpaces(),
-		path.resolve(BASE_DIR, path.resolve("libs", "ui-kit")),
+		path.resolve(BASE_DIR, path.join("libs", "ui-kit")),
 	];
 
 	const excludeDirs = [
