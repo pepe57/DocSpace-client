@@ -34,7 +34,7 @@ import { globalColors } from "../../../themes";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Badge } from "@docspace/ui-kit/components/badge";
-import { HelpButton } from "../../../components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { FieldContainer } from "../../../components/field-container";
 import {
   TextInput,
