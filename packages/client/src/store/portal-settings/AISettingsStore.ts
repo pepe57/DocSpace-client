@@ -186,6 +186,10 @@ class AISettingsStore {
     this.aiProviders = this.aiProviders.filter(
       (provider) => provider.id !== id,
     );
+
+    if (this.aiProviders.length === 0) {
+      this.clearDefaultProviderData();
+    }
   };
 
   fetchAIProviders = async () => {
@@ -405,6 +409,12 @@ class AISettingsStore {
       console.error(e);
     }
   };
+
+  clearDefaultProviderData = () => {
+    this.setDefaultProvider(null);
+    this.setDefaultProviderModels(null);
+    this.setDefaultProviderInitied(false);
+  }
 
   get systemMCPServers() {
     return this.mcpServers.filter(
