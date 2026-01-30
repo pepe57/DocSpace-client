@@ -47,7 +47,7 @@ import { inject, observer } from "mobx-react";
 import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
 type DefaultProviderProps = {
-  aiProviders: TAiProvider[];
+  aiProviders?: AISettingsStore["aiProviders"];
   defaultProviderModels?: AISettingsStore["defaultProviderModels"];
   defaultProvider?: AISettingsStore["defaultProvider"];
   setDefaultProvider?: AISettingsStore["setDefaultProvider"];
@@ -102,10 +102,12 @@ const DefaultProviderComponent = ({
   const isModelChanged = selectedModel?.key !== defaultProvider?.defaultModel;
 
   const getProviderOptions = () => {
-    return aiProviders.map((p) => ({
-      key: p.id,
-      label: p.title,
-    }));
+    return (
+      aiProviders?.map((p) => ({
+        key: p.id,
+        label: p.title,
+      })) || []
+    );
   };
 
   const getModelOptions = () => {

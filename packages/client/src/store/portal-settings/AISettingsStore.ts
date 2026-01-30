@@ -157,6 +157,10 @@ class AISettingsStore {
     const newProvider = await createProvider(provider);
 
     this.aiProviders.push(newProvider);
+
+    if (this.aiProviders.length === 1) {
+      await this.initDefaultProvider();
+    }
   };
 
   updateAIProvider = async (id: TAiProvider["id"], data: TUpdateAiProvider) => {
@@ -416,6 +420,15 @@ class AISettingsStore {
 
   get hasAIProviders() {
     return this.aiProviders.length > 0;
+  }
+
+  get isDefaultProviderSettingsAvailable() {
+    return (
+      this.aiProviders.length > 0 &&
+      this.defaultProvider &&
+      this.defaultProviderModels &&
+      this.defaultProviderInitied
+    );
   }
 }
 
