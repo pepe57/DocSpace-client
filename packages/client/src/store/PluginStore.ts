@@ -75,6 +75,7 @@ import {
 } from "../helpers/plugins/enums";
 
 import type SelectedFolderStore from "./SelectedFolderStore";
+import { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -84,6 +85,14 @@ const origin =
   window.ClientConfig?.api?.origin || apiOrigin || window.location.origin;
 const proxy = window.ClientConfig?.proxy?.url || proxyURL;
 const prefix = window.ClientConfig?.api?.prefix || apiPrefix;
+
+type TDispatchMessage = {
+  message: IMessage | void;
+  pluginName: string;
+  setElementProps?: React.Dispatch<unknown>;
+  updateCreateDialogProps?: React.Dispatch<unknown>;
+  updatePropsContext?: (props: unknown) => void;
+};
 
 class PluginStore {
   private settingsStore: SettingsStore = {} as SettingsStore;
@@ -116,7 +125,11 @@ class PluginStore {
 
   pluginDialogVisible = false;
 
+  pluginSelectorVisible = false;
+
   pluginDialogProps: null | ModalDialogProps = null;
+
+  pluginSelectorProps: null | TSelectorProps = null;
 
   deletePluginDialogVisible = false;
 
@@ -138,18 +151,21 @@ class PluginStore {
     makeAutoObservable(this);
   }
 
-  private dispatchMessage = (
-    message: Promise<IMessage> | Promise<void> | IMessage | void,
-    pluginName: string,
-  ) => {
+  dispatchMessage = ({
+    message,
+    pluginName,
+    setElementProps,
+    updateCreateDialogProps,
+    updatePropsContext,
+  }: TDispatchMessage) => {
     messageActions({
       message,
       pluginName,
-      setElementProps: null,
+      setElementProps,
       setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
       setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
       updatePluginStatus: this.updatePluginStatus,
-      updatePropsContext: null,
+      updatePropsContext: updatePropsContext,
       setPluginDialogVisible: this.setPluginDialogVisible,
       setPluginDialogProps: this.setPluginDialogProps,
       updateContextMenuItems: this.updateContextMenuItems,
@@ -158,8 +174,10 @@ class PluginStore {
       updateProfileMenuItems: this.updateProfileMenuItems,
       updateEventListenerItems: this.updateEventListenerItems,
       updateFileItems: this.updateFileItems,
-      updateCreateDialogProps: null,
-      updatePlugin: null,
+      updateCreateDialogProps: updateCreateDialogProps,
+      updatePlugin: this.updatePlugin,
+      setPluginSelectorVisible: this.setPluginSelectorVisible,
+      setPluginSelectorProps: this.setPluginSelectorProps,
     });
   };
 
@@ -181,6 +199,16 @@ class PluginStore {
 
   setPluginDialogVisible = (value: boolean) => {
     this.pluginDialogVisible = value;
+  };
+
+  setPluginSelectorVisible = (value: boolean) => {
+    this.pluginSelectorVisible = value;
+  };
+
+  setPluginSelectorProps = (
+    value: null | (TSelectorProps & { pluginName: string }),
+  ) => {
+    this.pluginSelectorProps = value;
   };
 
   setPluginDialogProps = (value: null | ModalDialogProps) => {
@@ -445,24 +473,21 @@ class PluginStore {
   };
 
   installPluginCss = async (plugin: TPlugin) => {
-    const cssUrl = getPluginUrl(
-      plugin.url,
-      `plugin.css?hash=${plugin.version}`,
-    );
+    if (!plugin.cssUrl) return;
 
     const linkId = `plugin-styles-${plugin.pluginName}`;
     const existingLink = document.getElementById(linkId) as HTMLLinkElement;
 
     if (existingLink) {
       // update existing link
-      existingLink.href = cssUrl;
+      existingLink.href = plugin.cssUrl;
       return;
     }
 
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.type = "text/css";
-    link.href = cssUrl;
+    link.href = plugin.cssUrl;
     link.id = linkId;
     document.head.appendChild(link);
   };
@@ -790,6 +815,14 @@ class PluginStore {
     return keys;
   };
 
+  getPluginIconUrl = (pluginName: string, icon: string) => {
+    const plugin = this.plugins.find((p) => p.name === pluginName);
+
+    if (!plugin) return;
+
+    return `${plugin.iconUrl}/assets/${icon}?hash=${plugin.version}`;
+  };
+
   updateContextMenuItems = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
@@ -812,7 +845,7 @@ class PluginStore {
 
         const message = await value.onClick(fileId);
 
-        this.dispatchMessage(message, plugin.name);
+        this.dispatchMessage({ message, pluginName: plugin.name });
       };
 
       const onGroupClick = async (filesId: number[]) => {
@@ -820,7 +853,7 @@ class PluginStore {
 
         const message = await value.onGroupClick(filesId);
 
-        this.dispatchMessage(message, plugin.name);
+        this.dispatchMessage({ message, pluginName: plugin.name });
       };
 
       const { items, ...rest } = value;
@@ -895,7 +928,7 @@ class PluginStore {
 
         const message = await value.subMenu.onClick(id);
 
-        this.dispatchMessage(message, plugin.name);
+        this.dispatchMessage({ message, pluginName: plugin.name });
 
         return message;
       };
@@ -957,7 +990,7 @@ class PluginStore {
             const onClick = async () => {
               const message = await i.onClick?.(storeIdNum);
 
-              this.dispatchMessage(message, plugin.name);
+              this.dispatchMessage({ message, pluginName: plugin.name });
             };
 
             const { items: _, ...rest } = i;
@@ -983,7 +1016,7 @@ class PluginStore {
 
         const message = await value.onClick(currStoreIdNum);
 
-        this.dispatchMessage(message, plugin.name);
+        this.dispatchMessage({ message, pluginName: plugin.name });
       };
 
       this.mainButtonItems.set(key, {
@@ -1038,7 +1071,7 @@ class PluginStore {
 
         const message = await value.onClick();
 
-        this.dispatchMessage(message, plugin.name);
+        this.dispatchMessage({ message, pluginName: plugin.name });
       };
 
       this.profileMenuItems.set(key, {
@@ -1091,7 +1124,7 @@ class PluginStore {
 
         const message = await value.eventHandler();
 
-        this.dispatchMessage(message, plugin.name);
+        this.dispatchMessage({ message, pluginName: plugin.name });
       };
 
       this.eventListenerItems.set(key, {
@@ -1167,7 +1200,7 @@ class PluginStore {
 
         const message = await value.onClick(item);
 
-        this.dispatchMessage(message, plugin.name);
+        this.dispatchMessage({ message, pluginName: plugin.name });
       };
 
       this.fileItems.set(key, {
