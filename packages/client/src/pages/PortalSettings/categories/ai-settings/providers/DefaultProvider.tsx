@@ -147,11 +147,13 @@ const DefaultProviderComponent = ({
     }
   };
 
-  const onSelectProvider = (option: TOption) => {
+  const onSelectProvider = async (option: TOption) => {
     if (option.key === selectedProvider?.key) return;
 
     setSelectedProvider(option);
-    fetchDefaultProviderModels?.(option.key as number);
+
+    const models = await fetchDefaultProviderModels?.(option.key as number);
+    setSelectedModel(getSelectedModel(models, defaultProvider));
   };
 
   const onSelectModel = (option: TOption) => {

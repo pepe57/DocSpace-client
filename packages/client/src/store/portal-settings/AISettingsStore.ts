@@ -350,16 +350,20 @@ class AISettingsStore {
   };
 
   fetchDefaultProviderModels = async (providerId: TAiProvider["id"]) => {
+    let models = null;
+
     try {
       this.setIsDefaultProviderModelsLoading(true);
 
-      const models = await getModels(providerId);
+      models = await getModels(providerId);
       this.setDefaultProviderModels(models);
     } catch (e) {
       console.error(e);
     } finally {
       this.setIsDefaultProviderModelsLoading(false);
     }
+
+    return models;
   };
 
   initDefaultProvider = async () => {
