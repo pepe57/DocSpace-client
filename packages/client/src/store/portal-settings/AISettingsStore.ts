@@ -381,6 +381,17 @@ class AISettingsStore {
   }) => {
     try {
       const newDefaultProvider = await updateDefaultProvider(data);
+
+      this.aiProviders.forEach((p) => {
+        if (p.isDefault) {
+          p.isDefault = false;
+        }
+
+        if (p.id === newDefaultProvider.providerId) {
+          p.isDefault = true;
+        }
+      });
+
       this.setDefaultProvider(newDefaultProvider);
     } catch (e) {
       console.error(e);
