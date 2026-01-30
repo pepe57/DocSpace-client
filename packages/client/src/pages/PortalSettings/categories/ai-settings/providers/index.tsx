@@ -117,9 +117,12 @@ const AIProviderComponent = ({
   const onDeleteAIProvider = async (id: TAiProvider["id"]) => {
     const provider = aiProviders?.find((p) => p.id === id);
 
+    // Todo: Add translation when design are ready
+    const defaultProviderWarning = "This provider is currently your default. To delete it, please set a different provider as the default first."
+
     if (aiProviders && aiProviders.length > 1 && provider?.isDefault) {
       toastr.info(
-        "This provider is currently your default. To delete it, please set a different provider as the default first.",
+        defaultProviderWarning,
       );
       return;
     }
