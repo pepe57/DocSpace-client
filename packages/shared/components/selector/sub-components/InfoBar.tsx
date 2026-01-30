@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React, { use } from "react";
 
-import PublicRoomBar from "../../public-room-bar";
+import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
 
 import { InfoBarContext } from "../contexts/InfoBar";
 import { InfoBarProps } from "../Selector.types";

@@ -35,8 +35,11 @@ import classNames from "classnames";
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { ButtonSize, Button } from "@docspace/ui-kit/components/button";
-import PublicRoomBar from "../../components/public-room-bar";
-import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
+import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
 import {
   FillingRoleSelector,
   type IRole,
