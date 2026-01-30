@@ -50,6 +50,7 @@ export type TAiProvider = {
   url: string;
   createdOn: string;
   modifiedOn: string;
+  isDefault: boolean;
   needReset?: boolean;
 };
 
