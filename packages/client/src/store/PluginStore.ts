@@ -32,7 +32,7 @@ import api from "@docspace/shared/api";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import { TData, toastr } from "@docspace/shared/components/toast";
+import { TData, toastr } from "@docspace/ui-kit/components/toast";
 import type {
   TFile,
   TFileSecurity,

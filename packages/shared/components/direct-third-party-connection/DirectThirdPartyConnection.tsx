@@ -36,7 +36,7 @@ import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "../toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Button } from "@docspace/ui-kit/components/button";
 import { buildDataTestId, getOAuthToken } from "../../utils/common";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";

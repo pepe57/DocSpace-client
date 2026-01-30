@@ -35,7 +35,7 @@ import {
 	InputType,
 	InputSize,
 } from "@docspace/ui-kit/components/text-input";
-import { Textarea } from "@docspace/shared/components/textarea";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "./useBaseParams.module.scss";

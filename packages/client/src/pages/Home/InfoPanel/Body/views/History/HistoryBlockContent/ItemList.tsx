@@ -37,7 +37,7 @@ import {
 	TFeedData,
 	TRoom,
 } from "@docspace/shared/api/rooms/types";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { getFileExtension } from "@docspace/shared/utils/common";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";

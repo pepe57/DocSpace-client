@@ -52,7 +52,7 @@ import type {
   TProviderTypeWithUrl,
   TUpdateAiProvider,
 } from "@docspace/shared/api/ai/types";
-import { type TData, toastr } from "@docspace/shared/components/toast";
+import { type TData, toastr } from "@docspace/ui-kit/components/toast";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";

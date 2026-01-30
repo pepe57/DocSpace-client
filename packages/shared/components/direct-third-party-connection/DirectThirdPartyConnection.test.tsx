@@ -55,7 +55,7 @@ vi.mock("../../utils/common", async () => {
   };
 });
 
-vi.mock("../toast", () => ({
+vi.mock("@docspace/ui-kit/components/toast", () => ({
   toastr: {
     error: vi.fn(),
     success: vi.fn(),

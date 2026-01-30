@@ -59,7 +59,7 @@ import {
   WebSearchType,
   KnowledgeType,
 } from "@docspace/shared/api/ai/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 class AISettingsStore {
   isInit = false;

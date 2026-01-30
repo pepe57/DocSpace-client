@@ -38,7 +38,7 @@ import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";

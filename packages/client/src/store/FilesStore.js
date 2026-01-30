@@ -66,7 +66,7 @@ import {
   getCategoryType,
 } from "@docspace/shared/utils/common";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import config from "PACKAGE_FILE";
 import {
   LOADER_TIMEOUT,

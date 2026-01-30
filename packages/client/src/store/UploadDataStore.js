@@ -46,7 +46,7 @@ import {
   fileCopyAs,
   checkIsFileExist,
 } from "@docspace/shared/api/files";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
 import { getUnexpectedErrorText } from "SRC_DIR/helpers/filesUtils";

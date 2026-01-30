@@ -42,7 +42,7 @@ import { isMobile } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import CreateApiKeyDialog from "./sub-components/CreateApiKeyDialog";
 import DeleteApiKeyDialog from "./sub-components/DeleteApiKeyDialog";
 import ApiKeysView from "./sub-components";

@@ -30,7 +30,7 @@ import { Trans } from "react-i18next";
 import styled from "styled-components";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import api from "@docspace/shared/api";
 import {
   ModalDialog,

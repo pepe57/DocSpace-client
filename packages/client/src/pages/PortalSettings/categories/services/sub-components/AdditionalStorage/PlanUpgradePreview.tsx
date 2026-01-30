@@ -32,7 +32,7 @@ import moment from "moment";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { calcalateWalletPayment } from "@docspace/shared/api/portal";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { HelpButton } from "@docspace/shared/components/help-button";

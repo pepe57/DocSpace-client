@@ -32,7 +32,7 @@ import { useRouter } from "next/navigation";
 
 import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
 import { StandalonePage } from "@docspace/shared/pages/Payments/Standalone";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { setLicense, acceptLicense } from "@docspace/shared/api/settings";
 
 import { useEndAnimation } from "@/hooks/useEndAnimation";
@@ -74,7 +74,8 @@ const PaymentsPage = ({
   const [isLicenseCorrect, setIsLicenseCorrect] = useState(false);
 
   const shouldOpenEditorInNewTab = () => {
-    if (typeof window === "undefined") return !filesSettings.openEditorInSameTab;
+    if (typeof window === "undefined")
+      return !filesSettings.openEditorInSameTab;
 
     if (
       window.navigator.userAgent.includes("ZoomWebKit") ||

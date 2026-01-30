@@ -34,7 +34,7 @@ import { BackupStorageType, DeviceType } from "../../../../../enums";
 import { FilesSelectorInput } from "../../../../../components/files-selector-input";
 import { isNullOrUndefined } from "../../../../../utils/typeGuards";
 import BackupToPublicRoom from "../../../../../dialogs/backup-to-public-room-dialog";
-import { toastr } from "../../../../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import type { TBreadCrumb } from "../../../../../components/selector/Selector.types";
 import type { FilesSelectorSettings } from "../../../../../components/files-selector-input";

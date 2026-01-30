@@ -34,7 +34,7 @@ import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/ui-kit/components/text";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
 import { setAdManagement } from "@docspace/shared/api/settings";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";

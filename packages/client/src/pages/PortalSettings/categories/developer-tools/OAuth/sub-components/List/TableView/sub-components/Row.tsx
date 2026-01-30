@@ -33,7 +33,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { getCookie } from "@docspace/shared/utils/cookie";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import NameCell from "../columns/name";
 import CreatorCell from "../columns/creator";

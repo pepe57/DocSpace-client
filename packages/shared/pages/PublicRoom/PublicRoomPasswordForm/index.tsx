@@ -37,7 +37,7 @@ import { PasswordInput } from "../../../components/password-input";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { FieldContainer } from "../../../components/field-container";
 import { frameCallCommand } from "../../../utils/common";
-import { toastr } from "../../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { FormWrapper } from "../../../components/form-wrapper";
 import PortalLogo from "../../../components/portal-logo/PortalLogo";
 import { ValidationStatus } from "../../../enums";

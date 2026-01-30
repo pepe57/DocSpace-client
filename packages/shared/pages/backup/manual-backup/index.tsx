@@ -36,7 +36,7 @@ import { Button } from "@docspace/ui-kit/components/button";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { RadioButton } from "@docspace/ui-kit/components/radio-button";
 import { startBackup } from "../../../api/portal";
-import { toastr } from "../../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { BackupStorageLocalKey, BackupStorageType } from "../../../enums";
 import StatusMessage from "../../../components/status-message";
 import SocketHelper, {

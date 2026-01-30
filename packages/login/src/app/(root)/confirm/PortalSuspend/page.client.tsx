@@ -32,7 +32,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { suspendPortal } from "@docspace/shared/api/portal";
 
 import { TError } from "@/types";

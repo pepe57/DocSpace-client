@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Events } from "@docspace/shared/enums";
 
 import config from "PACKAGE_FILE";

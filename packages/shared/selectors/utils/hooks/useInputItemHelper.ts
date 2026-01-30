@@ -31,7 +31,7 @@ import { createRoom } from "../../../api/rooms";
 import { createAIAgent } from "../../../api/ai";
 import { RoomsType } from "../../../enums";
 import { TSelectorItem } from "../../../components/selector/Selector.types";
-import { toastr } from "../../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { TUseInputItemHelper } from "../types";
 

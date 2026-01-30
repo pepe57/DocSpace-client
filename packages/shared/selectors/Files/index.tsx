@@ -38,7 +38,7 @@ import { FolderType, RoomsType, DeviceType, RoomSearchArea } from "../../enums";
 import type { TSelectorItem } from "../../components/selector";
 import { Aside } from "@docspace/ui-kit/components/aside";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import { toastr } from "../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import type { TBreadCrumb } from "../../components/selector/Selector.types";
 
 import useRoomsHelper from "../utils/hooks/useRoomsHelper";

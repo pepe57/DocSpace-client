@@ -38,16 +38,16 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 // import { Hint } from "../../styled-components";
 
 import {
-	tablet,
-	mobile,
-	isMobile,
-	injectDefaultTheme,
+  tablet,
+  mobile,
+  isMobile,
+  injectDefaultTheme,
 } from "@docspace/shared/utils";
 
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useTranslation } from "react-i18next";
 
 import { FloatingButton } from "@docspace/shared/components/floating-button";
@@ -88,7 +88,7 @@ const HeaderContainer = styled.div.attrs(injectDefaultTheme)`
 
     svg {
       ${({ theme }) =>
-				theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
   }
 
@@ -119,7 +119,7 @@ const HeaderContainer = styled.div.attrs(injectDefaultTheme)`
       svg {
         path {
           fill: ${(props) =>
-						props.isDisabled ? globalColors.grayStrong : props.theme.color};
+            props.isDisabled ? globalColors.grayStrong : props.theme.color};
         }
       }
     }
@@ -143,205 +143,205 @@ const HeaderContainer = styled.div.attrs(injectDefaultTheme)`
 `;
 
 const NavigationHeader = ({ t, onBack }) => (
-	<>
-		<IconButton
-			iconName={ArrowPathReactSvgUrl}
-			size="17"
-			isFill
-			onClick={onBack}
-			className="arrow-button"
-		/>
-		<Heading type="content" truncate className="headline">
-			{t("InfoPanel:SubmenuHistory")}
-		</Heading>
-	</>
+  <>
+    <IconButton
+      iconName={ArrowPathReactSvgUrl}
+      size="17"
+      isFill
+      onClick={onBack}
+      className="arrow-button"
+    />
+    <Heading type="content" truncate className="headline">
+      {t("InfoPanel:SubmenuHistory")}
+    </Heading>
+  </>
 );
 
 const GroupMenu = ({
-	menuItems,
-	handleGroupSelection,
-	headerMenu,
-	areAllIdsChecked,
-	isIndeterminate,
-	isRetryPending,
+  menuItems,
+  handleGroupSelection,
+  headerMenu,
+  areAllIdsChecked,
+  isIndeterminate,
+  isRetryPending,
 }) => (
-	<TableGroupMenu
-		checkboxOptions={menuItems}
-		onChange={handleGroupSelection}
-		headerMenu={headerMenu}
-		isChecked={areAllIdsChecked}
-		isIndeterminate={isIndeterminate}
-		withoutInfoPanelToggler
-		isBlocked={isRetryPending}
-		withComboBox
-	/>
+  <TableGroupMenu
+    checkboxOptions={menuItems}
+    onChange={handleGroupSelection}
+    headerMenu={headerMenu}
+    isChecked={areAllIdsChecked}
+    isIndeterminate={isIndeterminate}
+    withoutInfoPanelToggler
+    isBlocked={isRetryPending}
+    withComboBox
+  />
 );
 
 const HistoryHeader = (props) => {
-	const {
-		isGroupMenuVisible,
-		checkedEventIds,
-		checkAllIds,
-		emptyCheckedIds,
-		isIndeterminate,
-		areAllIdsChecked,
-		fetchHistoryItems,
-		historyFilters,
-		isRetryPending,
-		setRetryPendingFalse,
-		setRetryPendingTrue,
-	} = props;
-	const navigate = useNavigate();
-	const location = useLocation();
+  const {
+    isGroupMenuVisible,
+    checkedEventIds,
+    checkAllIds,
+    emptyCheckedIds,
+    isIndeterminate,
+    areAllIdsChecked,
+    fetchHistoryItems,
+    historyFilters,
+    isRetryPending,
+    setRetryPendingFalse,
+    setRetryPendingTrue,
+  } = props;
+  const navigate = useNavigate();
+  const location = useLocation();
 
-	const onBack = () => {
-		const path = location.pathname.includes("/portal-settings")
-			? "/portal-settings"
-			: "";
-		navigate(`${path}/developer-tools/webhooks`);
-	};
-	const { t } = useTranslation(["Webhooks", "Common", "InfoPanel"]);
-	const { id } = useParams();
+  const onBack = () => {
+    const path = location.pathname.includes("/portal-settings")
+      ? "/portal-settings"
+      : "";
+    navigate(`${path}/developer-tools/webhooks`);
+  };
+  const { t } = useTranslation(["Webhooks", "Common", "InfoPanel"]);
+  const { id } = useParams();
 
-	const [isPendingVisible, setIsPendingVisible] = useState(false);
+  const [isPendingVisible, setIsPendingVisible] = useState(false);
 
-	const handleGroupSelection = (isChecked) => {
-		isChecked ? checkAllIds() : emptyCheckedIds();
-	};
+  const handleGroupSelection = (isChecked) => {
+    isChecked ? checkAllIds() : emptyCheckedIds();
+  };
 
-	const handleRetryAll = async () => {
-		try {
-			setRetryPendingTrue();
-			const timeout = setTimeout(() => {
-				setIsPendingVisible(true);
-			}, 300);
-			await retryWebhooks(checkedEventIds);
-			await emptyCheckedIds();
-			clearTimeout(timeout);
-			setRetryPendingFalse();
-			setIsPendingVisible(false);
-			await fetchHistoryItems({
-				...(historyFilters ? formatFilters(historyFilters) : {}),
-				configId: id,
-			});
-			toastr.success(
-				`${t("WebhookRedilivered")}: ${checkedEventIds.length}`,
-				<b>{t("Common:Done")}</b>,
-			);
-		} catch (error) {
-			console.error(error);
-			toastr.error(error);
-		} finally {
-			setRetryPendingFalse();
-			setIsPendingVisible(false);
-		}
-	};
+  const handleRetryAll = async () => {
+    try {
+      setRetryPendingTrue();
+      const timeout = setTimeout(() => {
+        setIsPendingVisible(true);
+      }, 300);
+      await retryWebhooks(checkedEventIds);
+      await emptyCheckedIds();
+      clearTimeout(timeout);
+      setRetryPendingFalse();
+      setIsPendingVisible(false);
+      await fetchHistoryItems({
+        ...(historyFilters ? formatFilters(historyFilters) : {}),
+        configId: id,
+      });
+      toastr.success(
+        `${t("WebhookRedilivered")}: ${checkedEventIds.length}`,
+        <b>{t("Common:Done")}</b>,
+      );
+    } catch (error) {
+      console.error(error);
+      toastr.error(error);
+    } finally {
+      setRetryPendingFalse();
+      setIsPendingVisible(false);
+    }
+  };
 
-	const headerMenu = [
-		{
-			id: "retry-event-option",
-			label: t("Retry"),
-			onClick: handleRetryAll,
-			iconUrl: RetryIcon,
-		},
-	];
+  const headerMenu = [
+    {
+      id: "retry-event-option",
+      label: t("Retry"),
+      onClick: handleRetryAll,
+      iconUrl: RetryIcon,
+    },
+  ];
 
-	const onKeyPress = (e) =>
-		(e.key === "Esc" || e.key === "Escape") && emptyCheckedIds();
+  const onKeyPress = (e) =>
+    (e.key === "Esc" || e.key === "Escape") && emptyCheckedIds();
 
-	useEffect(() => {
-		window.addEventListener("keyup", onKeyPress);
-		return () => window.removeEventListener("keyup", onKeyPress);
-	}, []);
+  useEffect(() => {
+    window.addEventListener("keyup", onKeyPress);
+    return () => window.removeEventListener("keyup", onKeyPress);
+  }, []);
 
-	const menuItems = (
-		<>
-			<DropDownItem
-				id="select-all"
-				key="select-all-event-ids"
-				label={t("Common:SelectAll")}
-				data-index={0}
-				onClick={checkAllIds}
-			/>
-			<DropDownItem
-				id="unselect-all"
-				key="unselect-all-event-ids"
-				label={t("UnselectAll")}
-				data-index={1}
-				onClick={emptyCheckedIds}
-			/>
-		</>
-	);
+  const menuItems = (
+    <>
+      <DropDownItem
+        id="select-all"
+        key="select-all-event-ids"
+        label={t("Common:SelectAll")}
+        data-index={0}
+        onClick={checkAllIds}
+      />
+      <DropDownItem
+        id="unselect-all"
+        key="unselect-all-event-ids"
+        label={t("UnselectAll")}
+        data-index={1}
+        onClick={emptyCheckedIds}
+      />
+    </>
+  );
 
-	useEffect(() => {
-		return emptyCheckedIds;
-	}, []);
+  useEffect(() => {
+    return emptyCheckedIds;
+  }, []);
 
-	return (
-		<HeaderContainer isDisabled={isRetryPending}>
-			{isMobile() ? (
-				<>
-					{isGroupMenuVisible ? (
-						<GroupMenu
-							menuItems={menuItems}
-							handleGroupSelection={handleGroupSelection}
-							headerMenu={headerMenu}
-							areAllIdsChecked={areAllIdsChecked}
-							isIndeterminate={isIndeterminate}
-							isRetryPending={isRetryPending}
-						/>
-					) : null}
-					<NavigationHeader t={t} onBack={onBack} />
-				</>
-			) : isGroupMenuVisible ? (
-				<GroupMenu
-					menuItems={menuItems}
-					handleGroupSelection={handleGroupSelection}
-					headerMenu={headerMenu}
-					areAllIdsChecked={areAllIdsChecked}
-					isIndeterminate={isIndeterminate}
-					isRetryPending={isRetryPending}
-				/>
-			) : (
-				<NavigationHeader t={t} onBack={onBack} />
-			)}
+  return (
+    <HeaderContainer isDisabled={isRetryPending}>
+      {isMobile() ? (
+        <>
+          {isGroupMenuVisible ? (
+            <GroupMenu
+              menuItems={menuItems}
+              handleGroupSelection={handleGroupSelection}
+              headerMenu={headerMenu}
+              areAllIdsChecked={areAllIdsChecked}
+              isIndeterminate={isIndeterminate}
+              isRetryPending={isRetryPending}
+            />
+          ) : null}
+          <NavigationHeader t={t} onBack={onBack} />
+        </>
+      ) : isGroupMenuVisible ? (
+        <GroupMenu
+          menuItems={menuItems}
+          handleGroupSelection={handleGroupSelection}
+          headerMenu={headerMenu}
+          areAllIdsChecked={areAllIdsChecked}
+          isIndeterminate={isIndeterminate}
+          isRetryPending={isRetryPending}
+        />
+      ) : (
+        <NavigationHeader t={t} onBack={onBack} />
+      )}
 
-			{isPendingVisible
-				? createPortal(<FloatingButton icon="refresh" />, document.body)
-				: null}
-		</HeaderContainer>
-	);
+      {isPendingVisible
+        ? createPortal(<FloatingButton icon="refresh" />, document.body)
+        : null}
+    </HeaderContainer>
+  );
 };
 
 export default inject(({ webhooksStore, settingsStore }) => {
-	const {
-		isGroupMenuVisible,
-		checkAllIds,
-		emptyCheckedIds,
-		checkedEventIds,
-		isIndeterminate,
-		areAllIdsChecked,
-		fetchHistoryItems,
-		historyFilters,
-		isRetryPending,
-		setRetryPendingFalse,
-		setRetryPendingTrue,
-	} = webhooksStore;
+  const {
+    isGroupMenuVisible,
+    checkAllIds,
+    emptyCheckedIds,
+    checkedEventIds,
+    isIndeterminate,
+    areAllIdsChecked,
+    fetchHistoryItems,
+    historyFilters,
+    isRetryPending,
+    setRetryPendingFalse,
+    setRetryPendingTrue,
+  } = webhooksStore;
 
-	const { theme } = settingsStore;
+  const { theme } = settingsStore;
 
-	return {
-		isGroupMenuVisible,
-		checkAllIds,
-		emptyCheckedIds,
-		checkedEventIds,
-		isIndeterminate,
-		areAllIdsChecked,
-		fetchHistoryItems,
-		theme,
-		historyFilters,
-		isRetryPending,
-		setRetryPendingFalse,
-		setRetryPendingTrue,
-	};
+  return {
+    isGroupMenuVisible,
+    checkAllIds,
+    emptyCheckedIds,
+    checkedEventIds,
+    isIndeterminate,
+    areAllIdsChecked,
+    fetchHistoryItems,
+    theme,
+    historyFilters,
+    isRetryPending,
+    setRetryPendingFalse,
+    setRetryPendingTrue,
+  };
 })(observer(HistoryHeader));

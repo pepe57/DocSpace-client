@@ -26,7 +26,7 @@
 
 import { cookies, headers } from "next/headers";
 
-import { Toast } from "@docspace/shared/components/toast";
+import { Toast } from "@docspace/ui-kit/components/toast";
 import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
 import { LANGUAGE, SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { getDirectionByLanguage } from "@docspace/shared/utils/common";

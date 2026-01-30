@@ -33,7 +33,7 @@ import Article from "@docspace/shared/components/article";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { regDesktop } from "@docspace/shared/utils/desktop";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
 
 import FilesPanels from "./components/FilesPanels";

@@ -50,7 +50,7 @@ import {
   LIVE_CHAT_LOCAL_STORAGE_KEY,
   CategoryType,
 } from "@docspace/shared/constants";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import AccountsFilter from "@docspace/shared/api/people/filter";

@@ -33,7 +33,7 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { TServer, type TUpdateServer } from "@docspace/shared/api/ai/types";
-import { type TData, toastr } from "@docspace/shared/components/toast";
+import { type TData, toastr } from "@docspace/ui-kit/components/toast";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";

@@ -38,7 +38,7 @@ import {
 import { getCookie, isDesktop } from "@docspace/shared/utils";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";

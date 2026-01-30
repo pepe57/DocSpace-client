@@ -43,7 +43,7 @@ import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { TOAST_FOLDER_PUBLIC_KEY } from "@docspace/shared/constants";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";

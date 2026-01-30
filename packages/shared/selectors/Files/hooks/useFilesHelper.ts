@@ -33,7 +33,7 @@ import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 import { getFolder, getFolderInfo } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
 import { FolderType, RoomsType } from "../../../enums";
-import { toastr, type TData } from "../../../components/toast";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 import type { TSelectorItem } from "../../../components/selector";
 import type { TBreadCrumb } from "../../../components/selector/Selector.types";
 

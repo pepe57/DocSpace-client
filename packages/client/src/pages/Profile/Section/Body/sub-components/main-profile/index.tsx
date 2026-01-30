@@ -41,7 +41,7 @@ import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Badge } from "@docspace/ui-kit/components/badge";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import {

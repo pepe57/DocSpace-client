@@ -28,7 +28,7 @@ import React from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";

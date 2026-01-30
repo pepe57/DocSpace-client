@@ -24,7 +24,7 @@ vi.mock("@docspace/shared/utils/socket", () => ({
   },
 }));
 
-vi.mock("../../../components/toast", () => ({
+vi.mock("@docspace/ui-kit/components/toast", () => ({
   toastr: {
     error: vi.fn(),
     success: vi.fn(),

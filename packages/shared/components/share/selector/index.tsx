@@ -38,7 +38,7 @@ import Filter from "../../../api/people/filter";
 import type { TAccessRight, TOnSubmit } from "../../selector/Selector.types";
 
 import { getShareAccessRightOptions } from "../Share.helpers";
-import { toastr, TData } from "../../toast";
+import { toastr, TData } from "@docspace/ui-kit/components/toast";
 
 import type { ShareSelectorProps } from "./Selector.types";
 

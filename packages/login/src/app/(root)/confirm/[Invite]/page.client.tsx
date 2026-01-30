@@ -47,7 +47,7 @@ import {
   TThirdPartyProvider,
   TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,

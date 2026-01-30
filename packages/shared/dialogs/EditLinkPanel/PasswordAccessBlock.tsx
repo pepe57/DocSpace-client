@@ -30,7 +30,7 @@ import copy from "copy-to-clipboard";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { toastr } from "../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ALLOWED_PASSWORD_CHARACTERS } from "../../constants";
 import { PasswordInput } from "../../components/password-input";
@@ -41,150 +41,150 @@ import ToggleBlock from "./ToggleBlock";
 import type { PasswordAccessBlockProps } from "./EditLinkPanel.types";
 
 const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
-	t,
-	bodyText,
-	onChange,
-	isLoading,
-	isChecked,
-	headerText,
-	passwordValue,
-	setPasswordValue,
-	isPasswordValid,
-	setIsPasswordValid,
-	passwordSettings,
-	isPasswordErrorShow,
-	setIsPasswordErrorShow,
+  t,
+  bodyText,
+  onChange,
+  isLoading,
+  isChecked,
+  headerText,
+  passwordValue,
+  setPasswordValue,
+  isPasswordValid,
+  setIsPasswordValid,
+  passwordSettings,
+  isPasswordErrorShow,
+  setIsPasswordErrorShow,
 }) => {
-	const passwordInputRef = useRef<PasswordInputHandle>(null);
+  const passwordInputRef = useRef<PasswordInputHandle>(null);
 
-	const onGeneratePasswordClick = (event: React.MouseEvent<HTMLDivElement>) => {
-		passwordInputRef.current?.onGeneratePassword(event);
-	};
+  const onGeneratePasswordClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    passwordInputRef.current?.onGeneratePassword(event);
+  };
 
-	const onCleanClick = (event: React.MouseEvent<Element>) => {
-		event.stopPropagation();
-		setPasswordValue("");
-		setIsPasswordValid(false);
-	};
+  const onCleanClick = (event: React.MouseEvent<Element>) => {
+    event.stopPropagation();
+    setPasswordValue("");
+    setIsPasswordValid(false);
+  };
 
-	const onCopyClick = () => {
-		const isValid = !!passwordValue.trim();
-		if (isValid) {
-			copy(passwordValue);
-			toastr.success(t("Common:PasswordSuccessfullyCopied"));
-		}
-	};
+  const onCopyClick = () => {
+    const isValid = !!passwordValue.trim();
+    if (isValid) {
+      copy(passwordValue);
+      toastr.success(t("Common:PasswordSuccessfullyCopied"));
+    }
+  };
 
-	const onChangePassword = (
-		_: React.ChangeEvent<HTMLInputElement>,
-		value?: string,
-	) => {
-		setPasswordValue(value ?? "");
-		setIsPasswordValid(true);
-		setIsPasswordErrorShow(false);
-	};
+  const onChangePassword = (
+    _: React.ChangeEvent<HTMLInputElement>,
+    value?: string,
+  ) => {
+    setPasswordValue(value ?? "");
+    setIsPasswordValid(true);
+    setIsPasswordErrorShow(false);
+  };
 
-	// const onBlurPassword = () => {
-	//   setIsPasswordErrorShow(true);
-	// };
+  // const onBlurPassword = () => {
+  //   setIsPasswordErrorShow(true);
+  // };
 
-	const onValidatePassword = (isValidate: boolean) => {
-		setIsPasswordValid(isValidate);
-	};
+  const onValidatePassword = (isValidate: boolean) => {
+    setIsPasswordValid(isValidate);
+  };
 
-	const errorMessage = !passwordValue
-		? t("Common:RequiredField")
-		: t("Common:IncorrectPassword");
+  const errorMessage = !passwordValue
+    ? t("Common:RequiredField")
+    : t("Common:IncorrectPassword");
 
-	const hasError = isPasswordErrorShow && !isPasswordValid;
+  const hasError = isPasswordErrorShow && !isPasswordValid;
 
-	const tooltipData = {
-		tooltipPasswordTitle: `${t("Common:PasswordLimitMessage")}:`,
-		tooltipPasswordLength: `${t("Common:PasswordMinimumLength")}: ${
-			passwordSettings ? passwordSettings.minLength : 8
-		}`,
-		tooltipPasswordDigits: `${t("Common:PasswordLimitDigits")}`,
-		tooltipPasswordCapital: `${t("Common:PasswordLimitUpperCase")}`,
-		tooltipPasswordSpecial: `${t("Common:PasswordLimitSpecialSymbols")}`,
-		generatePasswordTitle: t("Common:GeneratePassword"),
-		tooltipAllowedCharacters: `${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`,
-	};
+  const tooltipData = {
+    tooltipPasswordTitle: `${t("Common:PasswordLimitMessage")}:`,
+    tooltipPasswordLength: `${t("Common:PasswordMinimumLength")}: ${
+      passwordSettings ? passwordSettings.minLength : 8
+    }`,
+    tooltipPasswordDigits: `${t("Common:PasswordLimitDigits")}`,
+    tooltipPasswordCapital: `${t("Common:PasswordLimitUpperCase")}`,
+    tooltipPasswordSpecial: `${t("Common:PasswordLimitSpecialSymbols")}`,
+    generatePasswordTitle: t("Common:GeneratePassword"),
+    tooltipAllowedCharacters: `${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`,
+  };
 
-	return (
-		<ToggleBlock
-			bodyText={bodyText}
-			isLoading={isLoading}
-			isChecked={isChecked}
-			headerText={headerText}
-			onChange={onChange}
-			dataTestId="edit_link_panel_password_toggle"
-		>
-			{isChecked ? (
-				<div>
-					<div className="edit-link_password-block">
-						<FieldContainer
-							isVertical
-							hasError={hasError}
-							errorMessage={errorMessage}
-							className="edit-link_password-block"
-						>
-							<PasswordInput
-								id="conversion-password"
-								className="edit-link_password-input"
-								ref={passwordInputRef}
-								isDisabled={isLoading}
-								inputValue={passwordValue}
-								onChange={onChangePassword}
-								passwordSettings={passwordSettings}
-								simpleView={false}
-								placeholder={t("Common:Password")}
-								hasError={!isPasswordValid}
-								isAutoFocussed
-								// onBlur={onBlurPassword}
-								onValidateInput={onValidatePassword}
-								isSimulateType
-								simulateSymbol="•"
-								autoComplete="off"
-								testId="edit_link_panel_password_input"
-								{...tooltipData}
-							/>
-						</FieldContainer>
+  return (
+    <ToggleBlock
+      bodyText={bodyText}
+      isLoading={isLoading}
+      isChecked={isChecked}
+      headerText={headerText}
+      onChange={onChange}
+      dataTestId="edit_link_panel_password_toggle"
+    >
+      {isChecked ? (
+        <div>
+          <div className="edit-link_password-block">
+            <FieldContainer
+              isVertical
+              hasError={hasError}
+              errorMessage={errorMessage}
+              className="edit-link_password-block"
+            >
+              <PasswordInput
+                id="conversion-password"
+                className="edit-link_password-input"
+                ref={passwordInputRef}
+                isDisabled={isLoading}
+                inputValue={passwordValue}
+                onChange={onChangePassword}
+                passwordSettings={passwordSettings}
+                simpleView={false}
+                placeholder={t("Common:Password")}
+                hasError={!isPasswordValid}
+                isAutoFocussed
+                // onBlur={onBlurPassword}
+                onValidateInput={onValidatePassword}
+                isSimulateType
+                simulateSymbol="•"
+                autoComplete="off"
+                testId="edit_link_panel_password_input"
+                {...tooltipData}
+              />
+            </FieldContainer>
 
-						<IconButton
-							size={16}
-							isDisabled={isLoading}
-							iconName={RefreshReactSvgUrl}
-							onClick={onGeneratePasswordClick}
-							className="edit-link_generate-icon"
-							dataTestId="edit_link_panel_generate_password_button"
-						/>
-					</div>
-					<div className="edit-link_password-links">
-						<Link
-							isHovered
-							fontSize="13px"
-							fontWeight={600}
-							type={LinkType.action}
-							onClick={onCleanClick}
-							dataTestId="edit_link_panel_clean_password_link"
-						>
-							{t("Common:Clean")}
-						</Link>
-						<Link
-							isHovered
-							fontSize="13px"
-							fontWeight={600}
-							onClick={onCopyClick}
-							type={LinkType.action}
-							dataTestId="edit_link_panel_copy_password_link"
-						>
-							{t("Common:CopyPassword")}
-						</Link>
-					</div>
-				</div>
-			) : null}
-		</ToggleBlock>
-	);
+            <IconButton
+              size={16}
+              isDisabled={isLoading}
+              iconName={RefreshReactSvgUrl}
+              onClick={onGeneratePasswordClick}
+              className="edit-link_generate-icon"
+              dataTestId="edit_link_panel_generate_password_button"
+            />
+          </div>
+          <div className="edit-link_password-links">
+            <Link
+              isHovered
+              fontSize="13px"
+              fontWeight={600}
+              type={LinkType.action}
+              onClick={onCleanClick}
+              dataTestId="edit_link_panel_clean_password_link"
+            >
+              {t("Common:Clean")}
+            </Link>
+            <Link
+              isHovered
+              fontSize="13px"
+              fontWeight={600}
+              onClick={onCopyClick}
+              type={LinkType.action}
+              dataTestId="edit_link_panel_copy_password_link"
+            >
+              {t("Common:CopyPassword")}
+            </Link>
+          </div>
+        </div>
+      ) : null}
+    </ToggleBlock>
+  );
 };
 
 export default PasswordAccessBlock;

@@ -35,7 +35,7 @@ import { injectDefaultTheme, isMobile } from "@docspace/shared/utils";
 
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 import { DeleteWebhookDialog } from "./sub-components/DeleteWebhookDialog";

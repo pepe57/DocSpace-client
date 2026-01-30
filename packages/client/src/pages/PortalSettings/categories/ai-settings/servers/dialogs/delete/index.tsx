@@ -32,7 +32,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Text } from "@docspace/ui-kit/components/text";
 import type { TServer } from "@docspace/shared/api/ai/types";
 

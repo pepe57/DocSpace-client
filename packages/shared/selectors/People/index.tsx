@@ -55,7 +55,7 @@ import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Text } from "@docspace/ui-kit/components/text";
 import { globalColors } from "../../themes";
 import { isNextImage } from "../../utils/typeGuards";
-import { toastr } from "../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";

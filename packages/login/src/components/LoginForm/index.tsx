@@ -47,7 +47,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { checkPwd } from "@docspace/shared/utils/desktop";
 import { login } from "@docspace/shared/utils/loginUtils";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";

@@ -38,7 +38,7 @@ import { retryWebhook } from "@docspace/shared/api/settings";
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { getCorrectDate } from "@docspace/shared/utils";
 
@@ -66,11 +66,11 @@ const StyledTableRow = styled(TableRow)`
   }
 
   ${(props) =>
-		props.isHighlight &&
-		css`
+    props.isHighlight &&
+    css`
       .table-container_cell {
         background-color: ${({ theme }) =>
-					theme.client.settings.webhooks.tableCellBackground};
+          theme.client.settings.webhooks.tableCellBackground};
       }
     `}
 `;
@@ -80,127 +80,127 @@ const StyledWrapper = styled.div`
 `;
 
 const HistoryTableRow = (props) => {
-	const {
-		item,
-		toggleEventId,
-		isIdChecked,
-		hideColumns,
-		fetchHistoryItems,
-		historyFilters,
-		isRetryPending,
-	} = props;
-	const { t, i18n } = useTranslation(["Webhooks", "Files", "Common"]);
-	const navigate = useNavigate();
-	const { id } = useParams();
+  const {
+    item,
+    toggleEventId,
+    isIdChecked,
+    hideColumns,
+    fetchHistoryItems,
+    historyFilters,
+    isRetryPending,
+  } = props;
+  const { t, i18n } = useTranslation(["Webhooks", "Files", "Common"]);
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-	const redirectToDetails = () =>
-		navigate(`${window.location.pathname}/${item.id}`);
-	const handleRetryEvent = async () => {
-		if (isRetryPending) {
-			return;
-		}
-		await retryWebhook(item.id);
-		await fetchHistoryItems({
-			...(historyFilters ? formatFilters(historyFilters) : {}),
-			configId: id,
-		});
-		toastr.success(t("WebhookRedilivered"), <b>{t("Common:Done")}</b>);
-	};
+  const redirectToDetails = () =>
+    navigate(`${window.location.pathname}/${item.id}`);
+  const handleRetryEvent = async () => {
+    if (isRetryPending) {
+      return;
+    }
+    await retryWebhook(item.id);
+    await fetchHistoryItems({
+      ...(historyFilters ? formatFilters(historyFilters) : {}),
+      configId: id,
+    });
+    toastr.success(t("WebhookRedilivered"), <b>{t("Common:Done")}</b>);
+  };
 
-	const contextOptions = [
-		{
-			id: "webhook-details",
-			key: "Webhook details dropdownItem",
-			label: t("WebhookDetails"),
-			icon: InfoIcon,
-			onClick: redirectToDetails,
-		},
-		{
-			id: "retry",
-			key: "Retry dropdownItem",
-			label: t("Retry"),
-			icon: RetryIcon,
-			onClick: handleRetryEvent,
-			disabled: isRetryPending,
-		},
-	];
+  const contextOptions = [
+    {
+      id: "webhook-details",
+      key: "Webhook details dropdownItem",
+      label: t("WebhookDetails"),
+      icon: InfoIcon,
+      onClick: redirectToDetails,
+    },
+    {
+      id: "retry",
+      key: "Retry dropdownItem",
+      label: t("Retry"),
+      icon: RetryIcon,
+      onClick: handleRetryEvent,
+      disabled: isRetryPending,
+    },
+  ];
 
-	const formattedDelivery = getCorrectDate(i18n.language, item.delivery);
+  const formattedDelivery = getCorrectDate(i18n.language, item.delivery);
 
-	const onRowClick = (e) => {
-		if (
-			e.target.closest(".checkbox") ||
-			e.target.closest(".table-container_row-checkbox") ||
-			e.target.closest(".type-combobox") ||
-			e.target.closest(".table-container_row-context-menu-wrapper") ||
-			e.detail === 0
-		) {
-			return;
-		}
-		redirectToDetails();
-	};
+  const onRowClick = (e) => {
+    if (
+      e.target.closest(".checkbox") ||
+      e.target.closest(".table-container_row-checkbox") ||
+      e.target.closest(".type-combobox") ||
+      e.target.closest(".table-container_row-context-menu-wrapper") ||
+      e.detail === 0
+    ) {
+      return;
+    }
+    redirectToDetails();
+  };
 
-	const onCheckboxClick = () => {
-		toggleEventId(item.id);
-	};
+  const onCheckboxClick = () => {
+    toggleEventId(item.id);
+  };
 
-	const isChecked = isIdChecked(item.id);
+  const isChecked = isIdChecked(item.id);
 
-	const webhookTrigger = getTriggerTranslate(item.trigger, t);
+  const webhookTrigger = getTriggerTranslate(item.trigger, t);
 
-	return (
-		<StyledWrapper
-			className={isChecked ? "selected-table-row" : ""}
-			onClick={onRowClick}
-		>
-			<StyledTableRow
-				contextOptions={contextOptions}
-				checked={isChecked}
-				hideColumns={hideColumns}
-			>
-				<TableCell>
-					<TableCell checked={isChecked} className="checkboxWrapper">
-						<Checkbox
-							className="checkbox"
-							onChange={onCheckboxClick}
-							isChecked={isChecked}
-						/>
-					</TableCell>
+  return (
+    <StyledWrapper
+      className={isChecked ? "selected-table-row" : ""}
+      onClick={onRowClick}
+    >
+      <StyledTableRow
+        contextOptions={contextOptions}
+        checked={isChecked}
+        hideColumns={hideColumns}
+      >
+        <TableCell>
+          <TableCell checked={isChecked} className="checkboxWrapper">
+            <Checkbox
+              className="checkbox"
+              onChange={onCheckboxClick}
+              isChecked={isChecked}
+            />
+          </TableCell>
 
-					<Text fontWeight={600}>{item.id}</Text>
-				</TableCell>
-				<TableCell>
-					<StatusBadge status={item.status} />
-				</TableCell>
-				<TableCell>
-					<Text fontWeight={600} fontSize="11px" className="textOverflow">
-						{webhookTrigger}
-					</Text>
-				</TableCell>
-				<TableCell>
-					<Text fontWeight={600} fontSize="11px" className="textOverflow">
-						{formattedDelivery}
-					</Text>
-				</TableCell>
-			</StyledTableRow>
-		</StyledWrapper>
-	);
+          <Text fontWeight={600}>{item.id}</Text>
+        </TableCell>
+        <TableCell>
+          <StatusBadge status={item.status} />
+        </TableCell>
+        <TableCell>
+          <Text fontWeight={600} fontSize="11px" className="textOverflow">
+            {webhookTrigger}
+          </Text>
+        </TableCell>
+        <TableCell>
+          <Text fontWeight={600} fontSize="11px" className="textOverflow">
+            {formattedDelivery}
+          </Text>
+        </TableCell>
+      </StyledTableRow>
+    </StyledWrapper>
+  );
 };
 
 export default inject(({ webhooksStore }) => {
-	const {
-		toggleEventId,
-		isIdChecked,
-		fetchHistoryItems,
-		historyFilters,
-		isRetryPending,
-	} = webhooksStore;
+  const {
+    toggleEventId,
+    isIdChecked,
+    fetchHistoryItems,
+    historyFilters,
+    isRetryPending,
+  } = webhooksStore;
 
-	return {
-		toggleEventId,
-		isIdChecked,
-		fetchHistoryItems,
-		historyFilters,
-		isRetryPending,
-	};
+  return {
+    toggleEventId,
+    isIdChecked,
+    fetchHistoryItems,
+    historyFilters,
+    isRetryPending,
+  };
 })(observer(HistoryTableRow));

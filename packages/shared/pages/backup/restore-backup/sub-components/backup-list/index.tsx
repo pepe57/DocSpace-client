@@ -43,7 +43,7 @@ import {
   getBackupHistory,
   startRestore,
 } from "../../../../../api/portal";
-import { toastr } from "../../../../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import ListLoader from "../../../../../skeletons/list";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { HelpButton } from "../../../../../components/help-button";

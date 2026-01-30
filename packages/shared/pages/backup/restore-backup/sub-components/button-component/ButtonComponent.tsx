@@ -33,7 +33,7 @@ import OperationsProgressButton from "../../../../../components/operations-progr
 import { OPERATIONS_NAME } from "../../../../../constants";
 import { TenantStatus } from "../../../../../enums";
 import { startRestore } from "../../../../../api/portal";
-import { toastr } from "../../../../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { isManagement } from "../../../../../utils/common";
 
 import type { ButtonContainerProps } from "./ButtonContainer.types";

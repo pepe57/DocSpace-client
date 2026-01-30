@@ -35,7 +35,7 @@ import {
   InputType,
   TextInput,
 } from "@docspace/ui-kit/components/text-input";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { ButtonKeys, EmployeeActivationStatus } from "@docspace/shared/enums";
 import {
   TPasswordHash,

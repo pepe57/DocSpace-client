@@ -38,7 +38,7 @@ import {
   TOption,
 } from "@docspace/ui-kit/components/combobox";
 import { DatePicker } from "@docspace/ui-kit/components/date-picker";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   checkTransactionHistoryReport,
   startTransactionHistoryReport,

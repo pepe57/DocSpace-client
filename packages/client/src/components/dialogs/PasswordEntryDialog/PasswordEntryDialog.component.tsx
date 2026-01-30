@@ -30,11 +30,11 @@ import { useState, useRef, useEffect } from "react";
 import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
 
 import {
-  ModalDialog,
-  ModalDialogType,
+	ModalDialog,
+	ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { ValidationStatus } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { validatePublicRoomPassword } from "@docspace/shared/api/rooms";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
@@ -45,151 +45,151 @@ import type { PasswordEntryDialogProps } from "./PasswordEntryDialog.types";
 import styles from "./PasswordEntry.module.scss";
 
 const PasswordEntryDialog = ({
-  onClose,
-  openItemAction,
-  item,
-  isDownload,
-  onClickDownload,
+	onClose,
+	openItemAction,
+	item,
+	isDownload,
+	onClickDownload,
 }: PasswordEntryDialogProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const abortControllerRef = useRef<AbortController>(undefined);
+	const inputRef = useRef<HTMLInputElement>(null);
+	const abortControllerRef = useRef<AbortController>(undefined);
 
-  const { t } = useTranslation(["UploadPanel", "Common"]);
+	const { t } = useTranslation(["UploadPanel", "Common"]);
 
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(false);
+	const [password, setPassword] = useState("");
+	const [errorMessage, setErrorMessage] = useState<string>("");
+	const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (inputRef && inputRef.current) {
-      inputRef.current.focus();
-    }
-  });
+	useEffect(() => {
+		if (inputRef && inputRef.current) {
+			inputRef.current.focus();
+		}
+	});
 
-  const handleClose = () => {
-    onClose();
-    abortControllerRef.current?.abort();
-  };
+	const handleClose = () => {
+		onClose();
+		abortControllerRef.current?.abort();
+	};
 
-  const handleSubmit = async () => {
-    if (!item.requestToken) return;
+	const handleSubmit = async () => {
+		if (!item.requestToken) return;
 
-    if (password.trim().length === 0) {
-      return setErrorMessage(t("Common:RequiredField"));
-    }
+		if (password.trim().length === 0) {
+			return setErrorMessage(t("Common:RequiredField"));
+		}
 
-    setIsLoading(true);
-    try {
-      abortControllerRef.current?.abort();
-      abortControllerRef.current = new AbortController();
+		setIsLoading(true);
+		try {
+			abortControllerRef.current?.abort();
+			abortControllerRef.current = new AbortController();
 
-      const response = await validatePublicRoomPassword(
-        item.requestToken,
-        password,
-        abortControllerRef.current.signal,
-      );
+			const response = await validatePublicRoomPassword(
+				item.requestToken,
+				password,
+				abortControllerRef.current.signal,
+			);
 
-      switch (response?.status) {
-        case ValidationStatus.Ok: {
-          if (isDownload) {
-            onClickDownload(item, t);
-          } else {
-            openItemAction(item, t);
-          }
+			switch (response?.status) {
+				case ValidationStatus.Ok: {
+					if (isDownload) {
+						onClickDownload(item, t);
+					} else {
+						openItemAction(item, t);
+					}
 
-          onClose();
-          break;
-        }
+					onClose();
+					break;
+				}
 
-        case ValidationStatus.InvalidPassword: {
-          setErrorMessage(t("Common:IncorrectPassword"));
-          break;
-        }
-        default: {
-          break;
-        }
-      }
-    } catch (error) {
-      if (axios.isCancel(error)) return;
+				case ValidationStatus.InvalidPassword: {
+					setErrorMessage(t("Common:IncorrectPassword"));
+					break;
+				}
+				default: {
+					break;
+				}
+			}
+		} catch (error) {
+			if (axios.isCancel(error)) return;
 
-      toastr.error(error as Error);
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+			toastr.error(error as Error);
+			console.error(error);
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-    if (errorMessage) setErrorMessage("");
-  };
+	const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setPassword(e.target.value);
+		if (errorMessage) setErrorMessage("");
+	};
 
-  const title = item.title;
+	const title = item.title;
 
-  return (
-    <ModalDialog
-      visible
-      withForm
-      autoMaxHeight
-      onClose={handleClose}
-      displayType={ModalDialogType.modal}
-    >
-      <ModalDialog.Header>{t("Common:EnterPassword")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <section className={styles.content}>
-          <span>{t("Common:NeedPassword")}:</span>
-          <div className={styles.roomIconWrapper}>
-            <PublicRoomIcon />
-            <h4 className={styles.roomTitle}>{title}</h4>
-          </div>
-          <FieldContainer
-            isVertical
-            labelVisible={false}
-            hasError={!!errorMessage}
-            errorMessage={errorMessage}
-            className={styles.passwordField}
-          >
-            <PasswordInput
-              scale
-              simpleView
-              tabIndex={0}
-              id="password"
-              isAutoFocussed
-              isDisableTooltip
-              inputName="password"
-              inputValue={password}
-              size={InputSize.middle}
-              isDisabled={isLoading}
-              forwardedRef={inputRef}
-              hasError={!!errorMessage}
-              onChange={onChangePassword}
-              autoComplete="current-password"
-              placeholder={t("Common:Password")}
-            />
-          </FieldContainer>
-        </section>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          scale
-          primary
-          tabIndex={0}
-          type="submit"
-          isLoading={isLoading}
-          size={ButtonSize.normal}
-          onClick={handleSubmit}
-          label={t("Common:ContinueButton")}
-        />
-        <Button
-          scale
-          tabIndex={0}
-          onClick={handleClose}
-          size={ButtonSize.normal}
-          label={t("Common:CancelButton")}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+	return (
+		<ModalDialog
+			visible
+			withForm
+			autoMaxHeight
+			onClose={handleClose}
+			displayType={ModalDialogType.modal}
+		>
+			<ModalDialog.Header>{t("Common:EnterPassword")}</ModalDialog.Header>
+			<ModalDialog.Body>
+				<section className={styles.content}>
+					<span>{t("Common:NeedPassword")}:</span>
+					<div className={styles.roomIconWrapper}>
+						<PublicRoomIcon />
+						<h4 className={styles.roomTitle}>{title}</h4>
+					</div>
+					<FieldContainer
+						isVertical
+						labelVisible={false}
+						hasError={!!errorMessage}
+						errorMessage={errorMessage}
+						className={styles.passwordField}
+					>
+						<PasswordInput
+							scale
+							simpleView
+							tabIndex={0}
+							id="password"
+							isAutoFocussed
+							isDisableTooltip
+							inputName="password"
+							inputValue={password}
+							size={InputSize.middle}
+							isDisabled={isLoading}
+							forwardedRef={inputRef}
+							hasError={!!errorMessage}
+							onChange={onChangePassword}
+							autoComplete="current-password"
+							placeholder={t("Common:Password")}
+						/>
+					</FieldContainer>
+				</section>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					scale
+					primary
+					tabIndex={0}
+					type="submit"
+					isLoading={isLoading}
+					size={ButtonSize.normal}
+					onClick={handleSubmit}
+					label={t("Common:ContinueButton")}
+				/>
+				<Button
+					scale
+					tabIndex={0}
+					onClick={handleClose}
+					size={ButtonSize.normal}
+					label={t("Common:CancelButton")}
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 export default PasswordEntryDialog;

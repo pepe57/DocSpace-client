@@ -66,7 +66,7 @@ import type {
 import type { TFile, TFileLink, TFolder } from "../../api/files/types";
 
 import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "../toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   TCopyShareLinkOptions,
   TShare,

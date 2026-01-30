@@ -29,7 +29,7 @@ import LightSvgUrl from "PUBLIC_DIR/images/icons/16/light.svg?url";
 import DarkSvgUrl from "PUBLIC_DIR/images/icons/16/dark.svg?url";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { withTranslation } from "react-i18next";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/ui-kit/components/button";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";

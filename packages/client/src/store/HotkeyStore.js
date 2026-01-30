@@ -30,7 +30,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { RoomsType } from "@docspace/shared/enums";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { isMobile, getCountTilesInRow } from "@docspace/shared/utils";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { clearTextSelection } from "@docspace/shared/utils/copy";

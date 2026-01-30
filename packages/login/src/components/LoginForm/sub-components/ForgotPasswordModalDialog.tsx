@@ -35,7 +35,7 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { sendInstructionsToChangePassword } from "@docspace/shared/api/people";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { InputSize } from "@docspace/ui-kit/components/text-input";

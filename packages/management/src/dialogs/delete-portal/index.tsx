@@ -37,7 +37,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { deletePortal } from "@docspace/shared/api/management";
 

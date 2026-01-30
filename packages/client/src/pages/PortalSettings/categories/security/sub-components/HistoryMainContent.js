@@ -31,7 +31,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import styled, { useTheme } from "styled-components";
 import { Button } from "@docspace/ui-kit/components/button";
 import { TwoFactorCampaignBanner } from "@docspace/shared/components/two-factor-campaign";
-// import { toastr } from "@docspace/shared/components/toast";
+// import { toastr } from "@docspace/ui-kit/components/toast";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/shared/themes";

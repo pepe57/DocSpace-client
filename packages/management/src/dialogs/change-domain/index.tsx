@@ -42,7 +42,7 @@ import {
   InputSize,
   InputType,
 } from "@docspace/ui-kit/components/text-input";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { parseDomain } from "@docspace/shared/utils/common";
 
 import { useStores } from "@/hooks/useStores";

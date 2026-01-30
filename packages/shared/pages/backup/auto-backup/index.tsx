@@ -49,7 +49,7 @@ import { getBackupProgressInfo } from "../../../utils/common";
 import { useStateCallback } from "../../../hooks/useStateCallback";
 import type { Nullable, Option } from "../../../types";
 import OperationsProgressButton from "../../../components/operations-progress-button";
-import { toastr } from "../../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Text } from "@docspace/ui-kit/components/text";
 import { RadioButton } from "@docspace/ui-kit/components/radio-button";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";

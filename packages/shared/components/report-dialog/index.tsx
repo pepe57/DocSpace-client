@@ -38,11 +38,14 @@ import {
 import { DeviceType } from "../../enums";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "../toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Textarea } from "../textarea";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { ModalDialogType, ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import {
+	ModalDialogType,
+	ModalDialog,
+} from "@docspace/ui-kit/components/modal-dialog";
 
 import styles from "./ReportDialog.module.scss";
 import type { ReportDialogProps } from "./ReportDialog.types";

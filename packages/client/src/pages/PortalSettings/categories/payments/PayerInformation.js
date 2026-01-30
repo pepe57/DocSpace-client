@@ -31,7 +31,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Avatar } from "@docspace/ui-kit/components/avatar";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { Link } from "@docspace/ui-kit/components/link";
 

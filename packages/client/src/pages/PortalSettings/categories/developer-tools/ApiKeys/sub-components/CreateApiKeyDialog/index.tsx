@@ -45,7 +45,7 @@ import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Tabs, TabsTypes, TTabItem } from "@docspace/ui-kit/components/tabs";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { globalColors } from "@docspace/shared/themes";
 import { CreateApiKeyDialogProps, TPermissionsList } from "../../types";
 import {

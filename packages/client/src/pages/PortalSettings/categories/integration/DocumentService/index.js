@@ -34,424 +34,424 @@ import { Label } from "@docspace/ui-kit/components/label";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { PasswordInput } from "@docspace/shared/components/password-input";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import * as Styled from "./index.styled";
 
 const URL_REGEX =
-	/^(?:https?:\/\/(?:[^\/]+\/)?|^\/)[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
+  /^(?:https?:\/\/(?:[^\/]+\/)?|^\/)[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
 const EDITOR_URL_PLACEHOLDER = `${window.location.protocol}//<editors-dns-name>/`;
 
 const DocumentService = ({
-	changeDocumentServiceLocation,
-	currentColorScheme,
-	documentServiceSettingsUrl,
-	initialDocumentServiceData,
-	showPortalSettingsLoader,
+  changeDocumentServiceLocation,
+  currentColorScheme,
+  documentServiceSettingsUrl,
+  initialDocumentServiceData,
+  showPortalSettingsLoader,
 }) => {
-	const { t, ready } = useTranslation(["Settings", "Common"]);
+  const { t, ready } = useTranslation(["Settings", "Common"]);
 
-	const [isSaveLoading, setSaveIsLoading] = useState(false);
-	const [isResetLoading, setResetIsLoading] = useState(false);
+  const [isSaveLoading, setSaveIsLoading] = useState(false);
+  const [isResetLoading, setResetIsLoading] = useState(false);
 
-	const [docServiceUrl, setDocServiceUrl] = useState("");
-	const [docServiceUrlIsValid, setDocServiceUrlIsValid] = useState(true);
+  const [docServiceUrl, setDocServiceUrl] = useState("");
+  const [docServiceUrlIsValid, setDocServiceUrlIsValid] = useState(true);
 
-	const [isDisabledCertificat, setIsDisabledCertificat] = useState(false);
+  const [isDisabledCertificat, setIsDisabledCertificat] = useState(false);
 
-	const [secretKey, setSecretKey] = useState("");
-	const [authHeader, setAuthHeader] = useState("");
+  const [secretKey, setSecretKey] = useState("");
+  const [authHeader, setAuthHeader] = useState("");
 
-	const [portalUrl, setPortalUrl] = useState("");
-	const [portalUrlIsValid, setPortalUrlIsValid] = useState(true);
-	const [internalUrl, setInternalUrl] = useState("");
-	const [internalUrlIsValid, setInternalUrlIsValid] = useState(true);
+  const [portalUrl, setPortalUrl] = useState("");
+  const [portalUrlIsValid, setPortalUrlIsValid] = useState(true);
+  const [internalUrl, setInternalUrl] = useState("");
+  const [internalUrlIsValid, setInternalUrlIsValid] = useState(true);
 
-	const [isDefaultSettings, setIsDefaultSettings] = useState(false);
-	const [isShowAdvancedSettings, setIsShowAdvancedSettings] = useState(false);
+  const [isDefaultSettings, setIsDefaultSettings] = useState(false);
+  const [isShowAdvancedSettings, setIsShowAdvancedSettings] = useState(false);
 
-	const [initPortalUrl, setInitPortalUrl] = useState("");
-	const [initSecretKey, setInitSecretKey] = useState("");
-	const [initAuthHeader, setInitAuthHeader] = useState("");
-	const [initDocServiceUrl, setInitDocServiceUrl] = useState("");
-	const [initInternalUrl, setInitInternalUrl] = useState("");
-	const [initIsDisabledCertificat, setInitIsDisabledCertificat] =
-		useState(false);
+  const [initPortalUrl, setInitPortalUrl] = useState("");
+  const [initSecretKey, setInitSecretKey] = useState("");
+  const [initAuthHeader, setInitAuthHeader] = useState("");
+  const [initDocServiceUrl, setInitDocServiceUrl] = useState("");
+  const [initInternalUrl, setInitInternalUrl] = useState("");
+  const [initIsDisabledCertificat, setInitIsDisabledCertificat] =
+    useState(false);
 
-	useEffect(() => {
-		setDocumentTitle(t("DocumentService"));
-	}, [t]);
+  useEffect(() => {
+    setDocumentTitle(t("DocumentService"));
+  }, [t]);
 
-	useEffect(() => {
-		if (initialDocumentServiceData) {
-			const result = initialDocumentServiceData;
-			setIsDefaultSettings(result?.isDefault || false);
-			setPortalUrl(result?.docServicePortalUrl);
-			setSecretKey(result?.docServiceSignatureSecret);
-			setAuthHeader(result?.docServiceSignatureHeader);
-			setInternalUrl(result?.docServiceUrlInternal);
-			setDocServiceUrl(result?.docServiceUrl);
-			setIsDisabledCertificat(!result?.docServiceSslVerification || false);
+  useEffect(() => {
+    if (initialDocumentServiceData) {
+      const result = initialDocumentServiceData;
+      setIsDefaultSettings(result?.isDefault || false);
+      setPortalUrl(result?.docServicePortalUrl);
+      setSecretKey(result?.docServiceSignatureSecret);
+      setAuthHeader(result?.docServiceSignatureHeader);
+      setInternalUrl(result?.docServiceUrlInternal);
+      setDocServiceUrl(result?.docServiceUrl);
+      setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
-			setInitPortalUrl(result?.docServicePortalUrl);
-			setInitSecretKey(result?.docServiceSignatureSecret);
-			setInitAuthHeader(result?.docServiceSignatureHeader);
-			setInitDocServiceUrl(result?.docServiceUrl);
-			setInitInternalUrl(result?.docServiceUrlInternal);
-			setInitIsDisabledCertificat(!result?.docServiceSslVerification || false);
-		}
-	}, [initialDocumentServiceData]);
+      setInitPortalUrl(result?.docServicePortalUrl);
+      setInitSecretKey(result?.docServiceSignatureSecret);
+      setInitAuthHeader(result?.docServiceSignatureHeader);
+      setInitDocServiceUrl(result?.docServiceUrl);
+      setInitInternalUrl(result?.docServiceUrlInternal);
+      setInitIsDisabledCertificat(!result?.docServiceSslVerification || false);
+    }
+  }, [initialDocumentServiceData]);
 
-	const onChangeDocServiceUrl = (e) => {
-		setDocServiceUrl(e.target.value);
-		if (!e.target.value) setDocServiceUrlIsValid(true);
-		else setDocServiceUrlIsValid(URL_REGEX.test(e.target.value));
-	};
+  const onChangeDocServiceUrl = (e) => {
+    setDocServiceUrl(e.target.value);
+    if (!e.target.value) setDocServiceUrlIsValid(true);
+    else setDocServiceUrlIsValid(URL_REGEX.test(e.target.value));
+  };
 
-	const onChangeIsDisabledCertificat = () => {
-		setIsDisabledCertificat((prevState) => !prevState);
-	};
+  const onChangeIsDisabledCertificat = () => {
+    setIsDisabledCertificat((prevState) => !prevState);
+  };
 
-	const onChangeAuthHeader = (e) => {
-		setAuthHeader(e.target.value);
-	};
+  const onChangeAuthHeader = (e) => {
+    setAuthHeader(e.target.value);
+  };
 
-	const onChangeSecretKey = (e) => {
-		setSecretKey(e.target.value);
-	};
+  const onChangeSecretKey = (e) => {
+    setSecretKey(e.target.value);
+  };
 
-	const onChangeIsShowAdvancedSettings = () => {
-		setIsShowAdvancedSettings((prevState) => !prevState);
-	};
+  const onChangeIsShowAdvancedSettings = () => {
+    setIsShowAdvancedSettings((prevState) => !prevState);
+  };
 
-	const onChangeInternalUrl = (e) => {
-		setInternalUrl(e.target.value);
-		if (!e.target.value) setInternalUrlIsValid(true);
-		else setInternalUrlIsValid(URL_REGEX.test(e.target.value));
-	};
+  const onChangeInternalUrl = (e) => {
+    setInternalUrl(e.target.value);
+    if (!e.target.value) setInternalUrlIsValid(true);
+    else setInternalUrlIsValid(URL_REGEX.test(e.target.value));
+  };
 
-	const onChangePortalUrl = (e) => {
-		setPortalUrl(e.target.value);
-		if (!e.target.value) setPortalUrlIsValid(true);
-		else setPortalUrlIsValid(URL_REGEX.test(e.target.value));
-	};
+  const onChangePortalUrl = (e) => {
+    setPortalUrl(e.target.value);
+    if (!e.target.value) setPortalUrlIsValid(true);
+    else setPortalUrlIsValid(URL_REGEX.test(e.target.value));
+  };
 
-	const onSubmit = (e) => {
-		e.preventDefault();
-		setSaveIsLoading(true);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setSaveIsLoading(true);
 
-		changeDocumentServiceLocation(
-			docServiceUrl,
-			secretKey,
-			authHeader ?? initAuthHeader,
-			internalUrl,
-			portalUrl,
-			!isDisabledCertificat,
-		)
-			.then((result) => {
-				toastr.success(t("Common:ChangesSavedSuccessfully"));
+    changeDocumentServiceLocation(
+      docServiceUrl,
+      secretKey,
+      authHeader ?? initAuthHeader,
+      internalUrl,
+      portalUrl,
+      !isDisabledCertificat,
+    )
+      .then((result) => {
+        toastr.success(t("Common:ChangesSavedSuccessfully"));
 
-				setIsDefaultSettings(result?.isDefault || false);
-				setPortalUrl(result?.docServicePortalUrl);
-				setAuthHeader(result?.docServiceSignatureHeader);
-				setSecretKey(result?.docServiceSignatureSecret);
-				setInternalUrl(result?.docServiceUrlInternal);
-				setDocServiceUrl(result?.docServiceUrl);
-				setIsDisabledCertificat(!result?.docServiceSslVerification || false);
+        setIsDefaultSettings(result?.isDefault || false);
+        setPortalUrl(result?.docServicePortalUrl);
+        setAuthHeader(result?.docServiceSignatureHeader);
+        setSecretKey(result?.docServiceSignatureSecret);
+        setInternalUrl(result?.docServiceUrlInternal);
+        setDocServiceUrl(result?.docServiceUrl);
+        setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
-				setInitPortalUrl(result?.docServicePortalUrl);
-				setInitSecretKey(result?.docServiceSignatureSecret);
-				setInitAuthHeader(result?.docServiceSignatureHeader);
-				setInitDocServiceUrl(result?.docServiceUrl);
-				setInitInternalUrl(result?.docServiceUrlInternal);
-				setInitIsDisabledCertificat(
-					!result?.docServiceSslVerification || false,
-				);
-			})
-			.catch((err) => toastr.error(err))
-			.finally(() => setSaveIsLoading(false));
-	};
+        setInitPortalUrl(result?.docServicePortalUrl);
+        setInitSecretKey(result?.docServiceSignatureSecret);
+        setInitAuthHeader(result?.docServiceSignatureHeader);
+        setInitDocServiceUrl(result?.docServiceUrl);
+        setInitInternalUrl(result?.docServiceUrlInternal);
+        setInitIsDisabledCertificat(
+          !result?.docServiceSslVerification || false,
+        );
+      })
+      .catch((err) => toastr.error(err))
+      .finally(() => setSaveIsLoading(false));
+  };
 
-	const onReset = () => {
-		setDocServiceUrlIsValid(true);
-		setInternalUrlIsValid(true);
-		setPortalUrlIsValid(true);
+  const onReset = () => {
+    setDocServiceUrlIsValid(true);
+    setInternalUrlIsValid(true);
+    setPortalUrlIsValid(true);
 
-		setResetIsLoading(true);
-		changeDocumentServiceLocation(null, null, null, null, null, true)
-			.then((result) => {
-				toastr.success(t("Common:ChangesSavedSuccessfully"));
+    setResetIsLoading(true);
+    changeDocumentServiceLocation(null, null, null, null, null, true)
+      .then((result) => {
+        toastr.success(t("Common:ChangesSavedSuccessfully"));
 
-				setIsDefaultSettings(result?.isDefault || false);
-				setPortalUrl(result?.docServicePortalUrl);
-				setAuthHeader(result?.docServiceSignatureHeader);
-				setSecretKey(result?.docServiceSignatureSecret || "");
-				setInternalUrl(result?.docServiceUrlInternal);
-				setDocServiceUrl(result?.docServiceUrl);
-				setIsDisabledCertificat(!result?.docServiceSslVerification || false);
+        setIsDefaultSettings(result?.isDefault || false);
+        setPortalUrl(result?.docServicePortalUrl);
+        setAuthHeader(result?.docServiceSignatureHeader);
+        setSecretKey(result?.docServiceSignatureSecret || "");
+        setInternalUrl(result?.docServiceUrlInternal);
+        setDocServiceUrl(result?.docServiceUrl);
+        setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
-				setInitPortalUrl(result?.docServicePortalUrl);
-				setInitSecretKey(result?.docServiceSignatureSecret || "");
-				setInitAuthHeader(result?.docServiceSignatureHeader);
-				setInitDocServiceUrl(result?.docServiceUrl);
-				setInitInternalUrl(result?.docServiceUrlInternal);
-				setInitIsDisabledCertificat(
-					!result?.docServiceSslVerification || false,
-				);
+        setInitPortalUrl(result?.docServicePortalUrl);
+        setInitSecretKey(result?.docServiceSignatureSecret || "");
+        setInitAuthHeader(result?.docServiceSignatureHeader);
+        setInitDocServiceUrl(result?.docServiceUrl);
+        setInitInternalUrl(result?.docServiceUrlInternal);
+        setInitIsDisabledCertificat(
+          !result?.docServiceSslVerification || false,
+        );
 
-				setIsShowAdvancedSettings(false);
-			})
-			.catch((e) => toastr.error(e))
-			.finally(() => setResetIsLoading(false));
-	};
+        setIsShowAdvancedSettings(false);
+      })
+      .catch((e) => toastr.error(e))
+      .finally(() => setResetIsLoading(false));
+  };
 
-	const isFormEmpty =
-		!docServiceUrl && !internalUrl && !portalUrl && !authHeader && !secretKey;
-	const allInputsValid =
-		docServiceUrlIsValid && internalUrlIsValid && portalUrlIsValid;
+  const isFormEmpty =
+    !docServiceUrl && !internalUrl && !portalUrl && !authHeader && !secretKey;
+  const allInputsValid =
+    docServiceUrlIsValid && internalUrlIsValid && portalUrlIsValid;
 
-	const isValuesInit =
-		docServiceUrl == initDocServiceUrl &&
-		secretKey == initSecretKey &&
-		authHeader == initAuthHeader &&
-		internalUrl == initInternalUrl &&
-		portalUrl == initPortalUrl &&
-		isDisabledCertificat == initIsDisabledCertificat;
+  const isValuesInit =
+    docServiceUrl == initDocServiceUrl &&
+    secretKey == initSecretKey &&
+    authHeader == initAuthHeader &&
+    internalUrl == initInternalUrl &&
+    portalUrl == initPortalUrl &&
+    isDisabledCertificat == initIsDisabledCertificat;
 
-	const saveButtonDisabled =
-		isFormEmpty ||
-		isValuesInit ||
-		!allInputsValid ||
-		isSaveLoading ||
-		isResetLoading;
+  const saveButtonDisabled =
+    isFormEmpty ||
+    isValuesInit ||
+    !allInputsValid ||
+    isSaveLoading ||
+    isResetLoading;
 
-	if (showPortalSettingsLoader || !ready) return <SettingsDSConnectSkeleton />;
+  if (showPortalSettingsLoader || !ready) return <SettingsDSConnectSkeleton />;
 
-	return (
-		<Styled.Location>
-			<Styled.LocationHeader>
-				<div className="main">
-					{t("Settings:DocumentServiceLocationHeaderHelp")}
-				</div>
-				{documentServiceSettingsUrl ? (
-					<Link
-						className="third-party-link"
-						color={currentColorScheme.main?.accent}
-						isHovered
-						target="_blank"
-						href={documentServiceSettingsUrl}
-						dataTestId="integration_settings_link"
-					>
-						{t("Common:LearnMore")}
-					</Link>
-				) : null}
-			</Styled.LocationHeader>
+  return (
+    <Styled.Location>
+      <Styled.LocationHeader>
+        <div className="main">
+          {t("Settings:DocumentServiceLocationHeaderHelp")}
+        </div>
+        {documentServiceSettingsUrl ? (
+          <Link
+            className="third-party-link"
+            color={currentColorScheme.main?.accent}
+            isHovered
+            target="_blank"
+            href={documentServiceSettingsUrl}
+            dataTestId="integration_settings_link"
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </Styled.LocationHeader>
 
-			<Styled.LocationForm onSubmit={onSubmit}>
-				<div className="form-inputs">
-					<div className="input-wrapper">
-						<Label
-							htmlFor="docServiceAdress"
-							text={t("Settings:DocumentServiceLocationUrlApi")}
-						/>
-						<InputBlock
-							id="docServiceAdress"
-							type="text"
-							autoComplete="off"
-							tabIndex={1}
-							scale
-							iconButtonClassName="icon-button"
-							value={docServiceUrl}
-							onChange={onChangeDocServiceUrl}
-							placeholder={EDITOR_URL_PLACEHOLDER}
-							hasError={!docServiceUrlIsValid}
-							isDisabled={isSaveLoading || isResetLoading}
-							dataTestId="editor_url_input_block"
-						/>
-						<Text className="subtitle">
-							{t("Common:Example", {
-								example: EDITOR_URL_PLACEHOLDER,
-							})}
-						</Text>
-						<Checkbox
-							id="isDisabledCertificat"
-							label={t("Settings:DocumentServiceDisableCertificat")}
-							className="checkbox"
-							isChecked={isDisabledCertificat}
-							onChange={onChangeIsDisabledCertificat}
-							isDisabled={isSaveLoading || isResetLoading}
-							dataTestId="disable_certificat_checkbox"
-						/>
-					</div>
-					<div className="input-wrapper">
-						<div className="group-label">
-							<Label
-								htmlFor="secretKey"
-								text={t("Settings:DocumentServiceSecretKey")}
-							/>
-							<Text className="label-subtitle">
-								{`(${t("Settings:DocumentServiceSecretKeySubtitle")})`}
-							</Text>
-						</div>
-						<PasswordInput
-							id="secretKey"
-							type="password"
-							simpleView
-							tabIndex={2}
-							scale
-							inputValue={secretKey}
-							onChange={onChangeSecretKey}
-							isDisabled={isSaveLoading || isResetLoading}
-							className="password-input"
-							testId="secret_key_input"
-						/>
-						<Text className="subtitle">
-							{t("Settings:DocumentServiceSecretKeySubtitle")}
-						</Text>
-					</div>
-				</div>
+      <Styled.LocationForm onSubmit={onSubmit}>
+        <div className="form-inputs">
+          <div className="input-wrapper">
+            <Label
+              htmlFor="docServiceAdress"
+              text={t("Settings:DocumentServiceLocationUrlApi")}
+            />
+            <InputBlock
+              id="docServiceAdress"
+              type="text"
+              autoComplete="off"
+              tabIndex={1}
+              scale
+              iconButtonClassName="icon-button"
+              value={docServiceUrl}
+              onChange={onChangeDocServiceUrl}
+              placeholder={EDITOR_URL_PLACEHOLDER}
+              hasError={!docServiceUrlIsValid}
+              isDisabled={isSaveLoading || isResetLoading}
+              dataTestId="editor_url_input_block"
+            />
+            <Text className="subtitle">
+              {t("Common:Example", {
+                example: EDITOR_URL_PLACEHOLDER,
+              })}
+            </Text>
+            <Checkbox
+              id="isDisabledCertificat"
+              label={t("Settings:DocumentServiceDisableCertificat")}
+              className="checkbox"
+              isChecked={isDisabledCertificat}
+              onChange={onChangeIsDisabledCertificat}
+              isDisabled={isSaveLoading || isResetLoading}
+              dataTestId="disable_certificat_checkbox"
+            />
+          </div>
+          <div className="input-wrapper">
+            <div className="group-label">
+              <Label
+                htmlFor="secretKey"
+                text={t("Settings:DocumentServiceSecretKey")}
+              />
+              <Text className="label-subtitle">
+                {`(${t("Settings:DocumentServiceSecretKeySubtitle")})`}
+              </Text>
+            </div>
+            <PasswordInput
+              id="secretKey"
+              type="password"
+              simpleView
+              tabIndex={2}
+              scale
+              inputValue={secretKey}
+              onChange={onChangeSecretKey}
+              isDisabled={isSaveLoading || isResetLoading}
+              className="password-input"
+              testId="secret_key_input"
+            />
+            <Text className="subtitle">
+              {t("Settings:DocumentServiceSecretKeySubtitle")}
+            </Text>
+          </div>
+        </div>
 
-				<div className="form-inputs">
-					<Styled.LocationSubheader>
-						{t("Settings:DocumentServiceAdvancedSettings")}
-						<Link
-							className="advanced-link"
-							type="action"
-							isHovered
-							onClick={onChangeIsShowAdvancedSettings}
-							dataTestId="show_hide_advanced_settings_link"
-						>
-							{!isShowAdvancedSettings
-								? t("Settings:DocumentServiceShow")
-								: t("Settings:DocumentServiceHide")}
-						</Link>
-					</Styled.LocationSubheader>
+        <div className="form-inputs">
+          <Styled.LocationSubheader>
+            {t("Settings:DocumentServiceAdvancedSettings")}
+            <Link
+              className="advanced-link"
+              type="action"
+              isHovered
+              onClick={onChangeIsShowAdvancedSettings}
+              dataTestId="show_hide_advanced_settings_link"
+            >
+              {!isShowAdvancedSettings
+                ? t("Settings:DocumentServiceShow")
+                : t("Settings:DocumentServiceHide")}
+            </Link>
+          </Styled.LocationSubheader>
 
-					{isShowAdvancedSettings ? (
-						<>
-							<div className="input-wrapper">
-								<Label
-									htmlFor="authHeader"
-									text={t("Settings:DocumentServiceAuthHeader")}
-								/>
-								<InputBlock
-									id="authHeader"
-									type="text"
-									autoComplete="off"
-									tabIndex={3}
-									scale
-									iconButtonClassName="icon-button"
-									value={authHeader}
-									onChange={onChangeAuthHeader}
-									isDisabled={isSaveLoading || isResetLoading}
-									dataTestId="auth_header_input_block"
-								/>
-								<Text className="subtitle">
-									{t("Settings:DocumentServiceAuthHeaderSubtitle")}
-								</Text>
-							</div>
-							<div className="input-wrapper">
-								<Label
-									htmlFor="internalAdress"
-									text={t("Settings:DocumentServiceLocationUrlInternal", {
-										productName: t("Common:ProductName"),
-									})}
-								/>
-								<InputBlock
-									id="internalAdress"
-									type="text"
-									autoComplete="off"
-									tabIndex={4}
-									scale
-									iconButtonClassName="icon-button"
-									value={internalUrl}
-									onChange={onChangeInternalUrl}
-									placeholder={EDITOR_URL_PLACEHOLDER}
-									hasError={!internalUrlIsValid}
-									isDisabled={isSaveLoading || isResetLoading}
-									dataTestId="editor_url_input_block"
-								/>
-								<Text className="subtitle">
-									{t("Common:Example", {
-										example: EDITOR_URL_PLACEHOLDER,
-									})}
-								</Text>
-							</div>
-							<div className="input-wrapper">
-								<Label
-									htmlFor="portalAdress"
-									text={t("Settings:DocumentServiceLocationUrlPortal", {
-										productName: t("Common:ProductName"),
-									})}
-								/>
-								<InputBlock
-									id="portalAdress"
-									type="text"
-									autoComplete="off"
-									tabIndex={5}
-									scale
-									iconButtonClassName="icon-button"
-									value={portalUrl}
-									onChange={onChangePortalUrl}
-									placeholder={DNS_PLACEHOLDER}
-									hasError={!portalUrlIsValid}
-									isDisabled={isSaveLoading || isResetLoading}
-									dataTestId="dns_input_block"
-								/>
-								<Text className="subtitle">
-									{t("Common:Example", {
-										example: `${window.location.origin}`,
-									})}
-								</Text>
-							</div>
-						</>
-					) : null}
-				</div>
+          {isShowAdvancedSettings ? (
+            <>
+              <div className="input-wrapper">
+                <Label
+                  htmlFor="authHeader"
+                  text={t("Settings:DocumentServiceAuthHeader")}
+                />
+                <InputBlock
+                  id="authHeader"
+                  type="text"
+                  autoComplete="off"
+                  tabIndex={3}
+                  scale
+                  iconButtonClassName="icon-button"
+                  value={authHeader}
+                  onChange={onChangeAuthHeader}
+                  isDisabled={isSaveLoading || isResetLoading}
+                  dataTestId="auth_header_input_block"
+                />
+                <Text className="subtitle">
+                  {t("Settings:DocumentServiceAuthHeaderSubtitle")}
+                </Text>
+              </div>
+              <div className="input-wrapper">
+                <Label
+                  htmlFor="internalAdress"
+                  text={t("Settings:DocumentServiceLocationUrlInternal", {
+                    productName: t("Common:ProductName"),
+                  })}
+                />
+                <InputBlock
+                  id="internalAdress"
+                  type="text"
+                  autoComplete="off"
+                  tabIndex={4}
+                  scale
+                  iconButtonClassName="icon-button"
+                  value={internalUrl}
+                  onChange={onChangeInternalUrl}
+                  placeholder={EDITOR_URL_PLACEHOLDER}
+                  hasError={!internalUrlIsValid}
+                  isDisabled={isSaveLoading || isResetLoading}
+                  dataTestId="editor_url_input_block"
+                />
+                <Text className="subtitle">
+                  {t("Common:Example", {
+                    example: EDITOR_URL_PLACEHOLDER,
+                  })}
+                </Text>
+              </div>
+              <div className="input-wrapper">
+                <Label
+                  htmlFor="portalAdress"
+                  text={t("Settings:DocumentServiceLocationUrlPortal", {
+                    productName: t("Common:ProductName"),
+                  })}
+                />
+                <InputBlock
+                  id="portalAdress"
+                  type="text"
+                  autoComplete="off"
+                  tabIndex={5}
+                  scale
+                  iconButtonClassName="icon-button"
+                  value={portalUrl}
+                  onChange={onChangePortalUrl}
+                  placeholder={DNS_PLACEHOLDER}
+                  hasError={!portalUrlIsValid}
+                  isDisabled={isSaveLoading || isResetLoading}
+                  dataTestId="dns_input_block"
+                />
+                <Text className="subtitle">
+                  {t("Common:Example", {
+                    example: `${window.location.origin}`,
+                  })}
+                </Text>
+              </div>
+            </>
+          ) : null}
+        </div>
 
-				<SaveCancelButtons
-					onSaveClick={onSubmit}
-					onCancelClick={onReset}
-					saveButtonLabel={t("Common:SaveButton")}
-					cancelButtonLabel={t("Settings:DefaultSettings")}
-					reminderText={t("Common:YouHaveUnsavedChanges")}
-					saveButtonDisabled={saveButtonDisabled}
-					disableRestoreToDefault={
-						isDefaultSettings || isSaveLoading || isResetLoading
-					}
-					displaySettings
-					isSaving={isSaveLoading || isResetLoading}
-					showReminder={!saveButtonDisabled}
-					saveButtonDataTestId="settings_save_button"
-					cancelButtonDataTestId="default_settings_button"
-				/>
-			</Styled.LocationForm>
-		</Styled.Location>
-	);
+        <SaveCancelButtons
+          onSaveClick={onSubmit}
+          onCancelClick={onReset}
+          saveButtonLabel={t("Common:SaveButton")}
+          cancelButtonLabel={t("Settings:DefaultSettings")}
+          reminderText={t("Common:YouHaveUnsavedChanges")}
+          saveButtonDisabled={saveButtonDisabled}
+          disableRestoreToDefault={
+            isDefaultSettings || isSaveLoading || isResetLoading
+          }
+          displaySettings
+          isSaving={isSaveLoading || isResetLoading}
+          showReminder={!saveButtonDisabled}
+          saveButtonDataTestId="settings_save_button"
+          cancelButtonDataTestId="default_settings_button"
+        />
+      </Styled.LocationForm>
+    </Styled.Location>
+  );
 };
 
 export default inject(
-	({ settingsStore, filesSettingsStore, clientLoadingStore }) => {
-		const {
-			currentColorScheme,
-			documentServiceSettingsUrl,
-			currentDeviceType,
-		} = settingsStore;
-		const {
-			changeDocumentServiceLocation,
-			documentServiceLocation: initialDocumentServiceData,
-		} = filesSettingsStore;
-		const { showPortalSettingsLoader } = clientLoadingStore;
+  ({ settingsStore, filesSettingsStore, clientLoadingStore }) => {
+    const {
+      currentColorScheme,
+      documentServiceSettingsUrl,
+      currentDeviceType,
+    } = settingsStore;
+    const {
+      changeDocumentServiceLocation,
+      documentServiceLocation: initialDocumentServiceData,
+    } = filesSettingsStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
-		return {
-			changeDocumentServiceLocation,
-			currentColorScheme,
-			documentServiceSettingsUrl,
-			currentDeviceType,
-			showPortalSettingsLoader,
-			initialDocumentServiceData,
-		};
-	},
+    return {
+      changeDocumentServiceLocation,
+      currentColorScheme,
+      documentServiceSettingsUrl,
+      currentDeviceType,
+      showPortalSettingsLoader,
+      initialDocumentServiceData,
+    };
+  },
 )(observer(DocumentService));

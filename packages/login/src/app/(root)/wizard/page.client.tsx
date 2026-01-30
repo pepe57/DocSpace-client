@@ -83,7 +83,7 @@ import {
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 
 import { TError, TTimeZoneOption } from "@/types";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import styles from "./wizard.module.scss";
 
 type WizardFormProps = {

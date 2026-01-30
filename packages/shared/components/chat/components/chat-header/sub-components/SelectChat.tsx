@@ -44,7 +44,7 @@ import socket, {
 
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { TBreadCrumb } from "../../../../selector/Selector.types";
-import { toastr } from "../../../../toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 import { useChatStore } from "../../../store/chatStore";

@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Cron, getNextSynchronization } from "@docspace/shared/components/cron";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";

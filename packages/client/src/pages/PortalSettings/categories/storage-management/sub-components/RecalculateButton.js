@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { recalculateQuota } from "@docspace/shared/api/settings";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";

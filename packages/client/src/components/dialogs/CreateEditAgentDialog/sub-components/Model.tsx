@@ -31,7 +31,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { getModels, getProviders } from "@docspace/shared/api/ai";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
@@ -39,295 +39,295 @@ import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 import { modelCache } from "./modelCache";
 
 type ModelSettingsProps = {
-  agentParams: TAgentParams;
-  setAgentParams: (value: Partial<TAgentParams>) => void;
+	agentParams: TAgentParams;
+	setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
 const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
-  const { t } = useTranslation(["AIRoom", "Common"]);
+	const { t } = useTranslation(["AIRoom", "Common"]);
 
-  const [providers, setProviders] = React.useState<TAiProvider[]>([]);
-  const [models, setModels] = React.useState<TModel[]>([]);
+	const [providers, setProviders] = React.useState<TAiProvider[]>([]);
+	const [models, setModels] = React.useState<TModel[]>([]);
 
-  const [selectedProvider, setSelectedProvider] = React.useState<TAiProvider>({
-    id: agentParams.providerId || -2,
-  } as TAiProvider);
-  const [selectedModel, setSelectedModel] = React.useState<TModel | null>({
-    modelId: agentParams.modelId ?? "",
-  } as TModel);
+	const [selectedProvider, setSelectedProvider] = React.useState<TAiProvider>({
+		id: agentParams.providerId || -2,
+	} as TAiProvider);
+	const [selectedModel, setSelectedModel] = React.useState<TModel | null>({
+		modelId: agentParams.modelId ?? "",
+	} as TModel);
 
-  const [isProvidersLoading, setIsProvidersLoading] = React.useState(false);
-  const [isProvidersFetched, setIsProvidersFetched] = React.useState(false);
+	const [isProvidersLoading, setIsProvidersLoading] = React.useState(false);
+	const [isProvidersFetched, setIsProvidersFetched] = React.useState(false);
 
-  const prevSelectedModel = React.useRef<TModel | null>(null);
+	const prevSelectedModel = React.useRef<TModel | null>(null);
 
-  React.useEffect(() => {
-    const cachedProviders = modelCache.getProviders();
-    if (cachedProviders) {
-      setProviders(cachedProviders);
-      setIsProvidersFetched(true);
+	React.useEffect(() => {
+		const cachedProviders = modelCache.getProviders();
+		if (cachedProviders) {
+			setProviders(cachedProviders);
+			setIsProvidersFetched(true);
 
-      if (selectedProvider.id === -2) {
-        setSelectedProvider(cachedProviders[0]);
-      } else {
-        const provider = cachedProviders.find(
-          (pr) => pr.id === selectedProvider.id,
-        );
-        if (provider) {
-          setSelectedProvider(provider);
-        }
-      }
-    }
-  }, []);
+			if (selectedProvider.id === -2) {
+				setSelectedProvider(cachedProviders[0]);
+			} else {
+				const provider = cachedProviders.find(
+					(pr) => pr.id === selectedProvider.id,
+				);
+				if (provider) {
+					setSelectedProvider(provider);
+				}
+			}
+		}
+	}, []);
 
-  React.useEffect(() => {
-    const fetchProviders = async () => {
-      try {
-        setIsProvidersLoading(true);
+	React.useEffect(() => {
+		const fetchProviders = async () => {
+			try {
+				setIsProvidersLoading(true);
 
-        const p = await getProviders();
-        const enabledProviders = p.filter((pr) => !pr.needReset);
-        setProviders(enabledProviders);
-        modelCache.setProviders(p);
+				const p = await getProviders();
+				const enabledProviders = p.filter((pr) => !pr.needReset);
+				setProviders(enabledProviders);
+				modelCache.setProviders(p);
 
-        setIsProvidersFetched(true);
+				setIsProvidersFetched(true);
 
-        if (selectedProvider.id === -2) {
-          setSelectedProvider(enabledProviders[0]);
-        } else {
-          const provider = enabledProviders.find(
-            (pr) => pr.id === selectedProvider.id,
-          );
+				if (selectedProvider.id === -2) {
+					setSelectedProvider(enabledProviders[0]);
+				} else {
+					const provider = enabledProviders.find(
+						(pr) => pr.id === selectedProvider.id,
+					);
 
-          if (!provider) {
-            setSelectedProvider(enabledProviders[0]);
-            return;
-          }
+					if (!provider) {
+						setSelectedProvider(enabledProviders[0]);
+						return;
+					}
 
-          setSelectedProvider(provider);
-        }
-      } catch (e) {
-        toastr.error(e as string);
-      } finally {
-        setIsProvidersLoading(false);
-      }
-    };
+					setSelectedProvider(provider);
+				}
+			} catch (e) {
+				toastr.error(e as string);
+			} finally {
+				setIsProvidersLoading(false);
+			}
+		};
 
-    if (modelCache.getProviders()) return;
+		if (modelCache.getProviders()) return;
 
-    if (providers.length || isProvidersLoading || isProvidersFetched) return;
+		if (providers.length || isProvidersLoading || isProvidersFetched) return;
 
-    fetchProviders();
-  }, [
-    selectedProvider?.id,
-    providers.length,
-    isProvidersLoading,
-    isProvidersFetched,
-  ]);
+		fetchProviders();
+	}, [
+		selectedProvider?.id,
+		providers.length,
+		isProvidersLoading,
+		isProvidersFetched,
+	]);
 
-  React.useEffect(() => {
-    const fetchModels = async () => {
-      try {
-        const m = await getModels(selectedProvider?.id);
-        setModels(m);
-        modelCache.setModels(selectedProvider.id, m);
+	React.useEffect(() => {
+		const fetchModels = async () => {
+			try {
+				const m = await getModels(selectedProvider?.id);
+				setModels(m);
+				modelCache.setModels(selectedProvider.id, m);
 
-        if (selectedModel?.modelId) {
-          const model = m.find((mo) => mo.modelId === selectedModel.modelId);
+				if (selectedModel?.modelId) {
+					const model = m.find((mo) => mo.modelId === selectedModel.modelId);
 
-          if (!model) {
-            setSelectedModel(m[0]);
+					if (!model) {
+						setSelectedModel(m[0]);
 
-            return;
-          }
+						return;
+					}
 
-          setSelectedModel(model);
-        } else {
-          setSelectedModel(m[0]);
-        }
-      } catch (e) {
-        toastr.error(e as string);
-      }
-    };
+					setSelectedModel(model);
+				} else {
+					setSelectedModel(m[0]);
+				}
+			} catch (e) {
+				toastr.error(e as string);
+			}
+		};
 
-    if (typeof selectedProvider?.id !== "number" || selectedProvider.id === -2)
-      return;
+		if (typeof selectedProvider?.id !== "number" || selectedProvider.id === -2)
+			return;
 
-    const cachedModels = modelCache.getModels(selectedProvider.id);
-    if (cachedModels) {
-      setModels(cachedModels);
+		const cachedModels = modelCache.getModels(selectedProvider.id);
+		if (cachedModels) {
+			setModels(cachedModels);
 
-      if (selectedModel?.modelId) {
-        const model = cachedModels.find(
-          (mo) => mo.modelId === selectedModel.modelId,
-        );
-        if (model) {
-          setSelectedModel(model);
-        } else {
-          setSelectedModel(cachedModels[0]);
-        }
-      } else {
-        setSelectedModel(cachedModels[0]);
-      }
-      return;
-    }
+			if (selectedModel?.modelId) {
+				const model = cachedModels.find(
+					(mo) => mo.modelId === selectedModel.modelId,
+				);
+				if (model) {
+					setSelectedModel(model);
+				} else {
+					setSelectedModel(cachedModels[0]);
+				}
+			} else {
+				setSelectedModel(cachedModels[0]);
+			}
+			return;
+		}
 
-    setSelectedModel(null);
-    fetchModels();
-  }, [selectedProvider?.id]);
+		setSelectedModel(null);
+		fetchModels();
+	}, [selectedProvider?.id]);
 
-  const providerOptions = React.useMemo(() => {
-    return providers.map((provider) => ({
-      key: provider.id,
-      value: provider.id,
-      label: provider.title,
-    }));
-  }, [providers]);
+	const providerOptions = React.useMemo(() => {
+		return providers.map((provider) => ({
+			key: provider.id,
+			value: provider.id,
+			label: provider.title,
+		}));
+	}, [providers]);
 
-  const providerSelectedOption = React.useMemo(() => {
-    return selectedProvider
-      ? {
-          key: selectedProvider.id,
-          value: selectedProvider.id,
-          label: selectedProvider.title,
-        }
-      : {
-          key: "empty-selected-option",
-          label: "",
-        };
-  }, [selectedProvider]);
+	const providerSelectedOption = React.useMemo(() => {
+		return selectedProvider
+			? {
+					key: selectedProvider.id,
+					value: selectedProvider.id,
+					label: selectedProvider.title,
+				}
+			: {
+					key: "empty-selected-option",
+					label: "",
+				};
+	}, [selectedProvider]);
 
-  const onSelectProvider = React.useCallback(
-    (option: TOption) => {
-      const provider = providers.find((p) => p.id === option.key);
+	const onSelectProvider = React.useCallback(
+		(option: TOption) => {
+			const provider = providers.find((p) => p.id === option.key);
 
-      if (!provider || provider.id === selectedProvider.id) return;
+			if (!provider || provider.id === selectedProvider.id) return;
 
-      setSelectedProvider(provider);
-      setSelectedModel(null);
-    },
-    [providers, selectedProvider.id],
-  );
+			setSelectedProvider(provider);
+			setSelectedModel(null);
+		},
+		[providers, selectedProvider.id],
+	);
 
-  const modelOptions = React.useMemo(() => {
-    return models.map((model) => ({
-      key: model.modelId,
-      value: model.modelId,
-      label: model.name ?? model.modelId,
-    }));
-  }, [models]);
+	const modelOptions = React.useMemo(() => {
+		return models.map((model) => ({
+			key: model.modelId,
+			value: model.modelId,
+			label: model.name ?? model.modelId,
+		}));
+	}, [models]);
 
-  const modelSelectedOptions = React.useMemo(() => {
-    return selectedModel
-      ? {
-          key: selectedModel.modelId,
-          value: selectedModel.modelId,
-          label: selectedModel.name ?? selectedModel.modelId,
-        }
-      : {
-          key: "empty-selected-option",
-          label: "",
-        };
-  }, [selectedModel]);
+	const modelSelectedOptions = React.useMemo(() => {
+		return selectedModel
+			? {
+					key: selectedModel.modelId,
+					value: selectedModel.modelId,
+					label: selectedModel.name ?? selectedModel.modelId,
+				}
+			: {
+					key: "empty-selected-option",
+					label: "",
+				};
+	}, [selectedModel]);
 
-  const onSelectModel = React.useCallback(
-    (option: TOption) => {
-      const model = models.find((m) => m.modelId === option.key);
+	const onSelectModel = React.useCallback(
+		(option: TOption) => {
+			const model = models.find((m) => m.modelId === option.key);
 
-      if (!model) return;
+			if (!model) return;
 
-      setSelectedModel(model);
-    },
-    [models],
-  );
+			setSelectedModel(model);
+		},
+		[models],
+	);
 
-  React.useEffect(() => {
-    if (!selectedModel) return;
+	React.useEffect(() => {
+		if (!selectedModel) return;
 
-    const hasChanges =
-      prevSelectedModel.current?.modelId !== selectedModel?.modelId ||
-      prevSelectedModel.current?.providerId !== selectedModel?.providerId;
+		const hasChanges =
+			prevSelectedModel.current?.modelId !== selectedModel?.modelId ||
+			prevSelectedModel.current?.providerId !== selectedModel?.providerId;
 
-    if (!hasChanges || typeof selectedModel.providerId !== "number") return;
+		if (!hasChanges || typeof selectedModel.providerId !== "number") return;
 
-    setAgentParams({
-      modelId: selectedModel?.modelId,
-      providerId: selectedModel?.providerId,
-    });
+		setAgentParams({
+			modelId: selectedModel?.modelId,
+			providerId: selectedModel?.providerId,
+		});
 
-    prevSelectedModel.current = selectedModel;
-  }, [selectedModel?.modelId, selectedModel?.providerId, setAgentParams]);
+		prevSelectedModel.current = selectedModel;
+	}, [selectedModel?.modelId, selectedModel?.providerId, setAgentParams]);
 
-  return (
-    <StyledParam increaseGap>
-      <div className=" set_room_params-info">
-        <div>
-          <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("Model", {
-              aiProvider: t("Common:AIProvider"),
-            })}
-          </Text>
-          <Text
-            fontSize="12px"
-            lineHeight="16px"
-            fontWeight={400}
-            className="set_room_params-info-description"
-            noSelect
-          >
-            {t("ModelDescription", {
-              aiProvider: t("Common:AIProvider"),
-            })}
-          </Text>
-          <Text
-            fontSize="12px"
-            lineHeight="16px"
-            fontWeight={400}
-            className="set_room_params-info-description"
-            noSelect
-          >
-            <Trans
-              t={t}
-              i18nKey="ResponseQualityNode"
-              ns="AIRoom"
-              components={{
-                1: <span style={{ fontWeight: 600 }} />,
-              }}
-            />
-          </Text>
-        </div>
-        {isProvidersLoading ? (
-          <RectangleSkeleton width="100%" height="32px" />
-        ) : (
-          <ComboBox
-            options={providerOptions}
-            selectedOption={providerSelectedOption}
-            onSelect={onSelectProvider}
-            scaled
-            scaledOptions
-            noBorder={false}
-            className="ai-combobox"
-            displaySelectedOption
-          />
-        )}
-        {!selectedModel ? (
-          <RectangleSkeleton width="100%" height="32px" />
-        ) : (
-          <ComboBox
-            options={modelOptions}
-            selectedOption={modelSelectedOptions}
-            onSelect={onSelectModel}
-            scaled
-            scaledOptions
-            dropDownMaxHeight={modelOptions.length > 7 ? 300 : undefined}
-            isDefaultMode
-            className="ai-combobox"
-            displaySelectedOption
-            dropDownClassName="not-selectable"
-          />
-        )}
-      </div>
-    </StyledParam>
-  );
+	return (
+		<StyledParam increaseGap>
+			<div className=" set_room_params-info">
+				<div>
+					<Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
+						{t("Model", {
+							aiProvider: t("Common:AIProvider"),
+						})}
+					</Text>
+					<Text
+						fontSize="12px"
+						lineHeight="16px"
+						fontWeight={400}
+						className="set_room_params-info-description"
+						noSelect
+					>
+						{t("ModelDescription", {
+							aiProvider: t("Common:AIProvider"),
+						})}
+					</Text>
+					<Text
+						fontSize="12px"
+						lineHeight="16px"
+						fontWeight={400}
+						className="set_room_params-info-description"
+						noSelect
+					>
+						<Trans
+							t={t}
+							i18nKey="ResponseQualityNode"
+							ns="AIRoom"
+							components={{
+								1: <span style={{ fontWeight: 600 }} />,
+							}}
+						/>
+					</Text>
+				</div>
+				{isProvidersLoading ? (
+					<RectangleSkeleton width="100%" height="32px" />
+				) : (
+					<ComboBox
+						options={providerOptions}
+						selectedOption={providerSelectedOption}
+						onSelect={onSelectProvider}
+						scaled
+						scaledOptions
+						noBorder={false}
+						className="ai-combobox"
+						displaySelectedOption
+					/>
+				)}
+				{!selectedModel ? (
+					<RectangleSkeleton width="100%" height="32px" />
+				) : (
+					<ComboBox
+						options={modelOptions}
+						selectedOption={modelSelectedOptions}
+						onSelect={onSelectModel}
+						scaled
+						scaledOptions
+						dropDownMaxHeight={modelOptions.length > 7 ? 300 : undefined}
+						isDefaultMode
+						className="ai-combobox"
+						displaySelectedOption
+						dropDownClassName="not-selectable"
+					/>
+				)}
+			</div>
+		</StyledParam>
+	);
 };
 
 export default ModelSettings;
