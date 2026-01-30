@@ -102,6 +102,7 @@ import ShareSelector from "../ShareSelector";
 
 import TemplateGallery from "../TemplateGallery";
 import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
+import PluginSelector from "../PluginSelector";
 
 const Panels = (props) => {
   const {
@@ -146,6 +147,7 @@ const Panels = (props) => {
     moveToPublicRoomVisible,
     settingsPluginDialogVisible,
     pluginDialogVisible,
+    pluginSelectorVisible,
     leaveRoomDialogVisible,
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
@@ -282,6 +284,7 @@ const Panels = (props) => {
     pluginDialogVisible && (
       <PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
     ),
+    pluginSelectorVisible && <PluginSelector key="plugin-selector" />,
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
     conversionVisible && <ConversionPanel key="conversion-panel" />,
     (moveToPanelVisible ||
@@ -604,6 +607,7 @@ export default inject(
       settingsPluginDialogVisible,
       deletePluginDialogVisible,
       pluginDialogVisible,
+      pluginSelectorVisible,
     } = pluginStore;
 
     const { getRefElement, config } = guidanceStore;
@@ -670,6 +674,7 @@ export default inject(
       moveToPublicRoomVisible,
       settingsPluginDialogVisible,
       pluginDialogVisible,
+      pluginSelectorVisible,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,

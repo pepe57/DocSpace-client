@@ -3092,7 +3092,7 @@ packages:
     os: [win32]
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
-    resolution: {integrity: sha512-JeXth+vedv9MuS24J0aEHcb44cKdjtkLfjLO4EGKt5kilPVUYKssbjj5yjOS4iSaJHhG3gYTL0Xfk6zmOYnGHQ==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
+    resolution: {integrity: sha512-GYq2GkmydSTzs4BxS5/tScm7AymcdSYznNRYvbgOzYIvmOcXi2eNFV0oEOzo7FRel+hJxSqKRIQYRklYNS8L2A==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
     version: 2.0.0
     hasBin: true
 
