@@ -37,7 +37,7 @@ import {
 } from "@docspace/ui-kit/components/text-input";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { RoomLogo } from "../../room-logo";
+import { RoomLogo } from "@docspace/ui-kit/components/room-logo";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import styles from "../Selector.module.scss";

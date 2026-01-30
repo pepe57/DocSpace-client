@@ -568,18 +568,6 @@ export const enum ErrorKeys {
   EmptyEmail = "EmptyEmail",
 }
 
-export enum RoomsType {
-  AIRoom = 9, // TODO: Restore when certs will be done
-  PublicRoom = 6,
-  FormRoom = 1,
-  // FillingFormsRoom= 1, //TODO: Restore when certs will be done
-  EditingRoom = 2,
-  // ReviewRoom: 3, //TODO: Restore when certs will be done
-  // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
-  VirtualDataRoom = 8,
-  CustomRoom = 5,
-}
-
 export const enum RecaptchaType {
   Default = 0,
   AndroidV2 = 1,
