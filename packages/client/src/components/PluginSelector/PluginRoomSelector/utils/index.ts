@@ -24,59 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { http, passthrough } from "msw";
-import { test as base, Page } from "@playwright/test";
-import {
-  PlaywrightWebSocketMock,
-  WorkerFixture,
-  BASE_URL,
-} from "@docspace/shared/__mocks__/e2e";
-import { allHandlers } from "@docspace/shared/__mocks__/handlers";
+import { RoomsType } from '@docspace/shared/enums';
+import { RoomsType as PluginRoomsType } from '@onlyoffice/docspace-plugin-sdk';
 
-export const TEST_PORT = process.env.PORT || "5110";
+export const convertPluginRoomType = (type?: PluginRoomsType | PluginRoomsType[]): RoomsType | RoomsType[] | undefined => {
+    if (!type) return;
 
-export const test = base.extend<
-  {
-    page: Page;
-    mockRequest: WorkerFixture;
-    wsMock: PlaywrightWebSocketMock;
-  },
-  {
-    baseUrl: string;
-  }
->({
-  baseUrl: [
-    async ({}, use) => {
-      await use(`${BASE_URL}:${TEST_PORT}`);
-    },
-    {
-      scope: "worker",
-      auto: true,
-    },
-  ],
-  mockRequest: [
-    async ({ page }, use) => {
-      const localePassthrough = http.get(
-        /(\/client)?\/locales\/.*\.json(\?.*)?$/,
-        () => passthrough(),
-      );
+    const roomsTypeMap = {
+        [PluginRoomsType.CustomRoom]: RoomsType.CustomRoom,
+        [PluginRoomsType.EditingRoom]: RoomsType.EditingRoom,
+        [PluginRoomsType.FormRoom]: RoomsType.FormRoom,
+        [PluginRoomsType.PublicRoom]: RoomsType.PublicRoom,
+        [PluginRoomsType.VirtualDataRoom]: RoomsType.VirtualDataRoom,
+    }
 
-      const worker = new WorkerFixture({
-        page,
-        initialHandlers: [...allHandlers(TEST_PORT), localePassthrough],
-      });
+    if (Array.isArray(type)) {
+        return type.map((t) => roomsTypeMap[t]);
+    }
 
-      await worker.start();
-      await use(worker);
-    },
-    {
-      auto: true,
-    },
-  ],
-  wsMock: async ({ page }, use) => {
-    const wsMock = new PlaywrightWebSocketMock(page);
-    await use(wsMock);
-  },
-});
-
-export { expect } from "@playwright/test";
+    return roomsTypeMap[type];
+};

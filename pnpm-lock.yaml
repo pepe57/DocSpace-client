@@ -156,6 +156,9 @@ importers:
       moment-timezone:
         specifier: 0.6.0
         version: 0.6.0
+      msw:
+        specifier: ^2.12.7
+        version: 2.12.7(@types/node@24.10.7)(typescript@5.9.3)
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
@@ -3086,7 +3089,7 @@ packages:
     os: [win32]
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
-    resolution: {integrity: sha512-JeXth+vedv9MuS24J0aEHcb44cKdjtkLfjLO4EGKt5kilPVUYKssbjj5yjOS4iSaJHhG3gYTL0Xfk6zmOYnGHQ==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
+    resolution: {integrity: sha512-GYq2GkmydSTzs4BxS5/tScm7AymcdSYznNRYvbgOzYIvmOcXi2eNFV0oEOzo7FRel+hJxSqKRIQYRklYNS8L2A==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
     version: 2.0.0
     hasBin: true
 
