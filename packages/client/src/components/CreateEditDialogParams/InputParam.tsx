@@ -30,7 +30,7 @@ import styled from "styled-components";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Label } from "@docspace/ui-kit/components/label";
 import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { StyledParam } from "./StyledParam";

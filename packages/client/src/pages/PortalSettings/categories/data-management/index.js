@@ -35,7 +35,7 @@ import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import { Tabs } from "@docspace/ui-kit/components/tabs";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

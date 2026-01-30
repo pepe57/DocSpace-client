@@ -38,7 +38,7 @@ import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Link } from "@docspace/ui-kit/components/link";
 
 import api from "@docspace/shared/api";

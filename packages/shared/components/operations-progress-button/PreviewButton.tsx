@@ -29,7 +29,7 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "../help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { FloatingButton, FloatingButtonIcons } from "../floating-button";
 
 import styles from "./OperationsProgressButton.module.scss";

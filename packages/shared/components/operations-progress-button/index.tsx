@@ -42,7 +42,7 @@ import ProgressList from "./ProgressList";
 import styles from "./OperationsProgressButton.module.scss";
 import { OperationsProgressProps } from "./OperationsProgressButton.types";
 import { OPERATIONS_NAME } from "../../constants/index";
-import { HelpButton } from "../help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { Text } from "@docspace/ui-kit/components/text";
 import PreviewButton from "./PreviewButton";

@@ -51,7 +51,7 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Button } from "@docspace/ui-kit/components/button";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";

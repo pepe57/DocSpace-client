@@ -29,7 +29,7 @@ import classNames from "classnames";
 
 import { Label } from "@docspace/ui-kit/components/label";
 
-import { HelpButton } from "../help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { FieldContainerProps } from "./FieldContainer.types";

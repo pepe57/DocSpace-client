@@ -67,7 +67,7 @@ import {
 } from "@docspace/shared/api/portal";
 import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { getDate } from "@docspace/shared/components/share/Share.helpers";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import styles from "./InvitePanel.module.scss";
 import { Badge } from "@docspace/ui-kit/components/badge";

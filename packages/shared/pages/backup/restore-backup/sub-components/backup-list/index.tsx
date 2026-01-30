@@ -46,7 +46,7 @@ import {
 import { toastr } from "@docspace/ui-kit/components/toast";
 import ListLoader from "../../../../../skeletons/list";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { HelpButton } from "../../../../../components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { isManagement } from "../../../../../utils/common";
 
 import { TenantStatus } from "../../../../../enums";

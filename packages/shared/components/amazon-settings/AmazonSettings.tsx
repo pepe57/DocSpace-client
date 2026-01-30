@@ -40,7 +40,7 @@ import {
   InputType,
   TextInput,
 } from "@docspace/ui-kit/components/text-input";
-import { HelpButton } from "../help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { useDidMount } from "../../hooks/useDidMount";
 
 import {

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { AdminsInfoBlockProps } from "../types";
 import { StyledInfoBlock } from "../StyledDataImport";
 
