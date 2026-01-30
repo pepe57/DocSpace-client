@@ -37,6 +37,8 @@ import {
   type TServer,
   type TUpdateAiProvider,
   type TUpdateServer,
+  TDefaultProvider,
+  TModel,
 } from "@docspace/shared/api/ai/types";
 import {
   addNewServer,
@@ -53,6 +55,9 @@ import {
   updateKnowledgeConfig,
   getKnowledgeConfig,
   getProviderAvailabilityStatus,
+  getDefaultProvider,
+  getModels,
+  updateDefaultProvider,
 } from "@docspace/shared/api/ai";
 import {
   ServerType,
@@ -84,6 +89,14 @@ class AISettingsStore {
 
   checkProvidersAbortController: AbortController | null = null;
 
+  defaultProvider: TDefaultProvider | null = null;
+
+  defaultProviderModels: TModel[] | null = null;
+
+  isDefaultProviderModelsLoading = false;
+
+  defaultProviderInitied = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -106,6 +119,22 @@ class AISettingsStore {
 
   setWebSearchInitied = (value: boolean) => {
     this.webSearchInitied = value;
+  };
+
+  setDefaultProvider = (provider: TDefaultProvider | null) => {
+    this.defaultProvider = provider;
+  };
+
+  setDefaultProviderModels = (models: TModel[] | null) => {
+    this.defaultProviderModels = models;
+  };
+
+  setIsDefaultProviderModelsLoading = (value: boolean) => {
+    this.isDefaultProviderModelsLoading = value;
+  };
+
+  setDefaultProviderInitied = (value: boolean) => {
+    this.defaultProviderInitied = value;
   };
 
   setAIProviders = (providers: TAiProvider[]) => {
@@ -318,6 +347,44 @@ class AISettingsStore {
 
   isProviderAvailable = (id: number) => {
     return !this.unavailableProvidersIdsSet.has(id);
+  };
+
+  fetchDefaultProviderModels = async (providerId: TAiProvider["id"]) => {
+    try {
+      this.setIsDefaultProviderModelsLoading(true);
+
+      const models = await getModels(providerId);
+      this.setDefaultProviderModels(models);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.setIsDefaultProviderModelsLoading(false);
+    }
+  };
+
+  initDefaultProvider = async () => {
+    try {
+      const defaultProvider = await getDefaultProvider();
+      this.setDefaultProvider(defaultProvider);
+
+      await this.fetchDefaultProviderModels(defaultProvider.providerId);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.setDefaultProviderInitied(true);
+    }
+  };
+
+  changeDefaultProvider = async (data: {
+    providerId: number;
+    defaultModel: string;
+  }) => {
+    try {
+      const newDefaultProvider = await updateDefaultProvider(data);
+      this.setDefaultProvider(newDefaultProvider);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   get systemMCPServers() {

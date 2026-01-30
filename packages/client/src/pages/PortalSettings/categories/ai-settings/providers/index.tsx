@@ -79,6 +79,7 @@ type AIProviderProps = {
   isProviderAvailable?: AISettingsStore["isProviderAvailable"];
   cancelAvailabilityCheck?: AISettingsStore["cancelAvailabilityCheck"];
   aiProviderSettingsUrl?: SettingsStore["aiProviderSettingsUrl"];
+  defaultProviderInitied?: AISettingsStore["defaultProviderInitied"];
 };
 
 const AIProviderComponent = ({
@@ -88,6 +89,7 @@ const AIProviderComponent = ({
   isProviderAvailable,
   cancelAvailabilityCheck,
   aiProviderSettingsUrl,
+  defaultProviderInitied,
 }: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setaddDialogVisible] = useState(false);
@@ -203,7 +205,7 @@ const AIProviderComponent = ({
         ))}
       </div>
 
-      {aiProviders?.length ? (
+      {aiProviders?.length && defaultProviderInitied ? (
         <DefaultProvider aiProviders={aiProviders} />
       ) : null}
 
@@ -243,6 +245,7 @@ export const AIProvider = inject(
       isProviderAvailable: aiSettingsStore.isProviderAvailable,
       cancelAvailabilityCheck: aiSettingsStore.cancelAvailabilityCheck,
       aiProviderSettingsUrl: settingsStore.aiProviderSettingsUrl,
+      defaultProviderInitied: aiSettingsStore.defaultProviderInitied,
     };
   },
 )(observer(AIProviderComponent));
