@@ -50,6 +50,7 @@ import { DeleteAIProviderDialog } from "./dialogs/delete";
 import { AiProviderTile } from "./Tile";
 import { ProvidersLoader } from "./ProvidersLoader";
 import { DefaultProvider } from "./DefaultProvider";
+import { toastr } from "@docspace/shared/components/toast";
 
 type TDeleteDialogData =
   | {
@@ -112,6 +113,15 @@ const AIProviderComponent = ({
     setDeleteDialogData({ visible: false, providerId: null });
 
   const onDeleteAIProvider = async (id: TAiProvider["id"]) => {
+    const provider = aiProviders?.find((p) => p.id === id);
+
+    if (aiProviders && aiProviders.length > 1 && provider?.isDefault) {
+      toastr.info(
+        "This provider is currently your default. To delete it, please set a different provider as the default first.",
+      );
+      return;
+    }
+
     setDeleteDialogData({ visible: true, providerId: id });
   };
 
