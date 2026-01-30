@@ -27,7 +27,7 @@
 import { Trans } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 
 import type { TFunction } from "i18next";
 import SelectFileStep from "../../components/SelectFileStep";

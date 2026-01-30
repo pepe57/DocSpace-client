@@ -31,7 +31,7 @@ import styled from "styled-components";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { toastr } from "@docspace/shared/components/toast";
 import {
 	ImportCompleteStepProps,

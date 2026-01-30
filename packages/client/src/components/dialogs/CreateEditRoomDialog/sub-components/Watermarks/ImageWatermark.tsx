@@ -59,7 +59,7 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { FileInput } from "@docspace/shared/components/file-input";
 import { imageProcessing } from "@docspace/shared/utils/common";
 import { ButtonDelete } from "@docspace/shared/components/image-editor";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 import { TWatermark } from "@docspace/shared/api/rooms/types";

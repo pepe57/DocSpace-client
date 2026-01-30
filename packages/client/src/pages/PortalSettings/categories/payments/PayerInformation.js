@@ -29,7 +29,7 @@ import styled from "styled-components";
 import { Text } from "@docspace/ui-kit/components/text";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Avatar } from "@docspace/ui-kit/components/avatar";
 import { toastr } from "@docspace/shared/components/toast";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";

@@ -32,7 +32,7 @@ import styled from "styled-components";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { TextInput } from "@docspace/ui-kit/components/text-input";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { AddButton } from "@docspace/ui-kit/components/add-button";

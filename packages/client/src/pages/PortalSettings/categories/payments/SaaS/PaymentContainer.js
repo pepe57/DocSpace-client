@@ -33,7 +33,7 @@ import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/ui-kit/components/text";
 import { size, desktop, mobile, Consumer } from "@docspace/shared/utils";
 
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 
 import CurrentTariffContainer from "./CurrentTariffContainer";
 import PriceCalculation from "./PriceCalculation";

@@ -39,7 +39,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Heading } from "@docspace/ui-kit/components/heading";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";

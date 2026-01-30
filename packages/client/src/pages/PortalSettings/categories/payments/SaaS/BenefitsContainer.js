@@ -30,7 +30,7 @@ import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Link } from "@docspace/ui-kit/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { FREE_BACKUP } from "@docspace/shared/constants";

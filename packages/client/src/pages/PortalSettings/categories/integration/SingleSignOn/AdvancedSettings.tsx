@@ -31,7 +31,7 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 
 interface InjectedProps {
 	hideAuthPage: boolean;

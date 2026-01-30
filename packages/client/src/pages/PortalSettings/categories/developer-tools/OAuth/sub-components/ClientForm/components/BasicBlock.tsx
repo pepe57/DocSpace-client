@@ -30,7 +30,7 @@ import { Trans } from "react-i18next";
 import resizeImage from "resize-image";
 
 import { TTranslation } from "@docspace/shared/types";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
