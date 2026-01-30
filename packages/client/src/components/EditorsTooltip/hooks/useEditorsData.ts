@@ -50,6 +50,25 @@ const createEditorsArray = (
   }));
 };
 
+const sortEditors = (editors: EditorUser[]): EditorUser[] => {
+  return [...editors].sort((a, b) => {
+    const aIsAnonymous = a.id.startsWith("uid-");
+    const bIsAnonymous = b.id.startsWith("uid-");
+
+    if (aIsAnonymous && !bIsAnonymous) return 1;
+    if (!aIsAnonymous && bIsAnonymous) return -1;
+
+    // Both are anonymous - sort by number in name (e.g., "Anonymous 1", "Anonymous 2")
+    if (aIsAnonymous && bIsAnonymous) {
+      const aNumber = parseInt(a.name.match(/\d+/)?.[0] || "0", 10);
+      const bNumber = parseInt(b.name.match(/\d+/)?.[0] || "0", 10);
+      return aNumber - bNumber;
+    }
+
+    return a.name.localeCompare(b.name);
+  });
+};
+
 export const useEditorsData = ({
   activeEditors,
   editingBy,
@@ -58,7 +77,8 @@ export const useEditorsData = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const editors = useMemo(
-    () => createEditorsArray(activeEditors, editingBy, currentUserId),
+    () =>
+      sortEditors(createEditorsArray(activeEditors, editingBy, currentUserId)),
     [activeEditors, editingBy, currentUserId],
   );
   const editorIds = useMemo(
