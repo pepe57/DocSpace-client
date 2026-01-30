@@ -36,7 +36,6 @@ const moduleWorkspaces = [
 	path.join("packages", "shared"),
 	path.join("packages", "management"),
 	path.join("packages", "sdk"),
-	path.join("libs", "ui-kit"),
 	path.join("public", "locales"), // common
 ];
 
