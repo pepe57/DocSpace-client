@@ -45,12 +45,9 @@ const Dropzone = ({
   linkSecondaryText,
   exstsText,
   dataTestId,
-  children,
   icon,
   iconClassName,
-  iconStyle,
   className,
-  childrenClassName,
   loaderClassName,
 }: DropzoneProps) => {
   const dropzoneOptions = {
@@ -73,7 +70,6 @@ const Dropzone = ({
     <div
       className={classNames(styles.dropzoneWrapper, className, {
         [styles.isLoading]: isLoading,
-        [styles.hasChildren]: !!children,
       })}
       data-testid={dataTestId ?? "dropzone"}
       aria-busy={isLoading}
@@ -88,9 +84,7 @@ const Dropzone = ({
       ) : (
         <div
           {...getRootProps({
-            className: classNames(styles.dropzone, {
-              [styles.hasChildren]: !!children,
-            }),
+            className: classNames(styles.dropzone),
             "aria-label": "File upload area",
             "data-testid": "dropzone-input-area",
           })}
@@ -102,20 +96,11 @@ const Dropzone = ({
               "data-testid": "dropzone-input",
             })}
           />
-          {children && (
-            <div
-              className={classNames(styles.dropzoneChildren, childrenClassName)}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {children}
-            </div>
-          )}
           {icon && (
             <img
               src={icon}
               alt="Upload"
               className={classNames(styles.dropzoneIcon, iconClassName)}
-              style={iconStyle}
               data-testid="dropzone-icon"
             />
           )}

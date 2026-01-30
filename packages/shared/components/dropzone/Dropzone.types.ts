@@ -40,18 +40,12 @@ type BaseDropzoneProps = {
   exstsText: string;
   /** Maximum number of files allowed (0 for unlimited) */
   maxFiles?: number;
-  /** Optional children elements */
-  children?: ReactNode;
   /** Optional icon URL to display */
   icon?: string;
   /** Optional className for the icon */
   iconClassName?: string;
-  /** Optional inline styles for the icon */
-  iconStyle?: CSSProperties;
   /** Optional className for the dropzone container */
   className?: string;
-  /** Optional className for the children container */
-  childrenClassName?: string;
   /** Optional className for the loader */
   loaderClassName?: string;
 };
