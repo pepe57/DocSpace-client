@@ -64,6 +64,7 @@ import {
 import styles from "./ManualBackup.module.scss";
 import { combineUrl } from "../../../utils/combineUrl";
 import NoteComponent from "../sub-components/NoteComponent";
+import { cancelBackup } from "../../../api/backup";
 
 const getPaymentError = (
   t: TFunction,
@@ -195,6 +196,7 @@ const ManualBackup = ({
     "",
   );
 
+  const [isCancelOperation, setIsCancelOperation] = useState(false);
   const isCheckedTemporaryStorage = storageType === TEMPORARY_STORAGE;
   const isCheckedDocuments = storageType === DOCUMENTS;
   const isCheckedThirdParty = storageType === THIRD_PARTY_RESOURCE;
@@ -387,6 +389,11 @@ const ManualBackup = ({
     isMaxProgress,
     onMakeCopy,
     buttonSize,
+  };
+
+  const onCancelOperation = async () => {
+    await cancelBackup();
+    setIsCancelOperation(true);
   };
 
   if (isEmptyContentBeforeLoader && !isInitialLoading) return null;
@@ -647,8 +654,8 @@ const ManualBackup = ({
 
       {isBackupProgressVisible ? (
         <OperationsProgressButton
-          operationsAlert={Boolean(backupProgressError)}
-          operationsCompleted={downloadingProgress === 100}
+          operationsAlert={!isCancelOperation && Boolean(backupProgressError)}
+          operationsCompleted={isCancelOperation || downloadingProgress === 100}
           operations={[
             {
               label:
@@ -665,6 +672,8 @@ const ManualBackup = ({
               completed: false,
             },
           ]}
+          cancelUpload={onCancelOperation}
+          showCancelButton
           clearOperationsData={() => setIsBackupProgressVisible(false)}
         />
       ) : null}
