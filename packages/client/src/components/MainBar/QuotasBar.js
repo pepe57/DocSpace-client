@@ -27,7 +27,7 @@
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
 
-import { SnackBar } from "@docspace/shared/components/snackbar";
+import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 
 import { Link } from "@docspace/ui-kit/components/link";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";

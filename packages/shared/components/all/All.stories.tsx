@@ -62,7 +62,7 @@ import { Heading, HeadingSize } from "@docspace/ui-kit/components/heading";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Row, RowProps } from "../rows";
-import { Scrollbar } from "../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Toast, toastr } from "@docspace/ui-kit/components/toast";
