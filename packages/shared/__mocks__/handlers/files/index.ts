@@ -27,7 +27,10 @@
 import { filesSettingsHandler } from "./filesSettings";
 import { foldersTreeHandler } from "./foldersTree";
 import { folderHandler, folderInfoHandler } from "./folder";
-import { validatePublicRoomKeyHandler, validatePublicRoomKeyPasswordHandler } from "./validatePublicRoomKey";
+import {
+  validatePublicRoomKeyHandler,
+  validatePublicRoomKeyPasswordHandler,
+} from "./validatePublicRoomKey";
 import { validatePublicRoomPasswordHandler } from "./validatePublicRoomPassword";
 import {
   roomListHandler,
@@ -57,11 +60,16 @@ import {
   agentFolderChatHandler,
   agentFolderInfoHandler,
   agentFolderResultStorageHandler,
+  agentFolderKnowledgeHandler,
 } from "./agentFolder";
 import {
   resultStorageFolderHandler,
   resultStorageFolderInfoHandler,
 } from "./resultStorageFolder";
+import {
+  defaultTemplatesHandler,
+  defaultTemplatesSetHandler,
+} from "./defaultTemplates";
 
 export { TypeFolder } from "./folder";
 export { TypeRoomList } from "./roomList";
@@ -96,9 +104,12 @@ export {
   agentFolderChatHandler,
   agentFolderInfoHandler,
   agentFolderResultStorageHandler,
+  agentFolderKnowledgeHandler,
   resultStorageFolderHandler,
   resultStorageFolderInfoHandler,
   validatePublicRoomKeyPasswordHandler,
+  defaultTemplatesHandler,
+  defaultTemplatesSetHandler,
 };
 
 // Note: recentHandler, sharedWithMeHandler, favoritesHandler are NOT included here
@@ -107,8 +118,9 @@ export {
 
 export const filesHandlers = (port: string) => [
   //foldersTreeHandler(port),
-  // agentFolderResultStorageHandler and agentFolderChatHandler filter by searchArea parameter
+  // agentFolderResultStorageHandler, agentFolderKnowledgeHandler and agentFolderChatHandler filter by searchArea parameter
   agentFolderResultStorageHandler(port),
+  agentFolderKnowledgeHandler(port),
   agentFolderChatHandler(port),
   resultStorageFolderHandler(port),
   rootHandler(port),
@@ -129,4 +141,6 @@ export const filesHandlers = (port: string) => [
   getFileHandler(port),
   deleteFavoritesHandler(port),
   validatePublicRoomKeyPasswordHandler(port),
+  defaultTemplatesHandler(port),
+  defaultTemplatesSetHandler(port),
 ];

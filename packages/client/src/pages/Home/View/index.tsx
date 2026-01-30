@@ -95,7 +95,6 @@ type ViewProps = UseContactsProps &
     canUseChat: AccessRightsStore["canUseChat"];
 
     aiConfig: SettingsStore["aiConfig"];
-    isResultTab: AiRoomStore["isResultTab"];
     resultId: AiRoomStore["resultId"];
     setHotkeyCaret: FilesStore["setHotkeyCaret"];
     setIsErrorAccountNotAvailable: FilesStore["setIsErrorAccountNotAvailable"];
@@ -174,7 +173,6 @@ const View = ({
 
   canUseChat,
   aiConfig,
-  isResultTab,
   resultId,
 }: ViewProps) => {
   const location = useLocation();
@@ -536,7 +534,11 @@ const View = ({
   }, [isLoading, currentView, scrollToTop]);
 
   React.useEffect(() => {
-    if (isResultTab && !canUseChat && !showBodyLoader) {
+    if (
+      selectedFolderStore.isInsideResultStorage &&
+      !canUseChat &&
+      !showBodyLoader
+    ) {
       toastr.info(
         <Trans
           t={t}
@@ -549,7 +551,12 @@ const View = ({
         />,
       );
     }
-  }, [isResultTab, canUseChat, showBodyLoader, t]);
+  }, [
+    selectedFolderStore.isInsideResultStorage,
+    canUseChat,
+    showBodyLoader,
+    t,
+  ]);
 
   const attachmentFile = React.useMemo(
     () => aiAgentSelectorDialogProps?.file,
@@ -646,7 +653,7 @@ export const ViewComponent = inject(
     settingsStore,
     aiRoomStore,
   }: TStore) => {
-    const { isResultTab, resultId } = aiRoomStore;
+    const { resultId } = aiRoomStore;
     const { aiConfig } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
@@ -794,7 +801,6 @@ export const ViewComponent = inject(
 
       canUseChat,
       aiConfig,
-      isResultTab,
       resultId,
     };
   },
