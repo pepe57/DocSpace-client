@@ -34,7 +34,7 @@ import { ReactSVG } from "react-svg";
 import throttle from "lodash/throttle";
 import AvatarEditor from "react-avatar-editor";
 
-import { Slider } from "@docspace/shared/components/slider";
+import { Slider } from "@docspace/ui-kit/components/slider";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";

@@ -31,7 +31,7 @@ import PlusIcon from "PUBLIC_DIR/images/payment.plus.react.svg";
 import MinusIcon from "PUBLIC_DIR/images/minus.react.svg";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Slider } from "../slider";
+import { Slider } from "@docspace/ui-kit/components/slider";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { InputType } from "@docspace/ui-kit/components/text-input";
 import { TabItem } from "@docspace/ui-kit/components/tab-item";

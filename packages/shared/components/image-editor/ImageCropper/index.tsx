@@ -34,7 +34,7 @@ import ZoomMinusReactSvgUrl from "PUBLIC_DIR/images/zoom-minus.react.svg?url";
 import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
-import { Slider } from "../../slider";
+import { Slider } from "@docspace/ui-kit/components/slider";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
