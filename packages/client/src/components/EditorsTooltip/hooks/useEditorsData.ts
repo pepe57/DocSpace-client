@@ -33,6 +33,7 @@ import type {
   UseEditorsDataProps,
   UseEditorsDataReturn,
 } from "../EditorsTooltip.types";
+import { GUID_EMPTY } from "SRC_DIR/helpers/constants";
 
 const createEditorsArray = (
   activeEditors: Record<string, string> | undefined,
@@ -52,8 +53,8 @@ const createEditorsArray = (
 
 const sortEditors = (editors: EditorUser[]): EditorUser[] => {
   return [...editors].sort((a, b) => {
-    const aIsAnonymous = a.id.startsWith("uid-");
-    const bIsAnonymous = b.id.startsWith("uid-");
+    const aIsAnonymous = a.id.startsWith(GUID_EMPTY);
+    const bIsAnonymous = b.id.startsWith(GUID_EMPTY);
 
     if (aIsAnonymous !== bIsAnonymous) return aIsAnonymous ? 1 : -1;
 
@@ -82,7 +83,8 @@ export const useEditorsData = ({
     queries: editorIds.map((editorId) => ({
       queryKey: ["userPhoto", editorId],
       queryFn: () => getUserPhoto(editorId),
-      enabled: isOpen && editorIds.length > 0 && !editorId.startsWith("uid-"),
+      enabled:
+        isOpen && editorIds.length > 0 && !editorId.startsWith(GUID_EMPTY),
       staleTime: 5 * 60 * 1000,
       gcTime: 10 * 60 * 1000,
       retry: 1,

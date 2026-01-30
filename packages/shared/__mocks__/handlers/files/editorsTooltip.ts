@@ -41,12 +41,12 @@ const getSharedWithMeFolderWithEditors = () => {
       editingBy: {
         "user-1": "John Doe",
         "user-2": "Jane Smith",
-        "uid-123": "Anonymous",
+        "00000000-0000-0000-0000-000000000000": "Anonymous",
       },
       activeEditors: {
         "user-1": "John Doe",
         "user-2": "Jane Smith",
-        "uid-123": "Anonymous",
+        "00000000-0000-0000-0000-000000000000": "Anonymous",
       },
     })),
   };

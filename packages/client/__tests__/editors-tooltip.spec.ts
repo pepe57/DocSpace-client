@@ -117,10 +117,13 @@ test.describe("EditorsTooltip - Desktop", () => {
   }) => {
     let photoRequestsForAnonymous = 0;
 
-    await page.route("**/api/2.0/people/uid-*/photo", (route) => {
-      photoRequestsForAnonymous++;
-      route.abort();
-    });
+    await page.route(
+      "**/api/2.0/people/00000000-0000-0000-0000-000000000000/photo",
+      (route) => {
+        photoRequestsForAnonymous++;
+        route.abort();
+      },
+    );
 
     await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
