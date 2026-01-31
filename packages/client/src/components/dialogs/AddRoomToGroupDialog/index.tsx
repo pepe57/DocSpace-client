@@ -134,6 +134,15 @@ const AddRoomToGroupDialog = ({
       label: room.title,
       icon: room.logo?.small || "",
       isFolder: true,
+      roomType: room.roomType,
+      shared: room.shared,
+      parentId: room.parentId,
+      rootFolderType: room.rootFolderType,
+      filesCount: room.filesCount,
+      foldersCount: room.foldersCount,
+      security: room.security,
+      color: room.logo?.color,
+      tags: room.tags,
     }));
   };
 

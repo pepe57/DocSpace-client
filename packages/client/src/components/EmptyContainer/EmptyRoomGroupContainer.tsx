@@ -64,7 +64,7 @@ const EmptyRoomGroupContainer = ({
     },
     {
       key: "separator",
-      text: t("GroupingRooms:Or"),
+      text: t("Common:Or"),
       type: "separator",
     },
     {
@@ -88,4 +88,3 @@ const EmptyRoomGroupContainer = ({
 };
 
 export default EmptyRoomGroupContainer;
-
