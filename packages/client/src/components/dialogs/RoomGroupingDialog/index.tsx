@@ -46,13 +46,13 @@ import styles from "./RoomGroupingDialog.module.scss";
 
 type RoomGroupingDialogProps = {
   visible?: boolean;
-  setIsGroupingEnabled: (enabled: boolean) => void;
+  setOrganizeRoomsGrouping: (enabled: boolean) => Promise<boolean>;
   setRoomGroupingDialogVisible: (visible: boolean) => void;
 };
 
 const RoomGroupingDialog = ({
   visible = false,
-  setIsGroupingEnabled,
+  setOrganizeRoomsGrouping,
   setRoomGroupingDialogVisible,
 }: RoomGroupingDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
@@ -67,9 +67,8 @@ const RoomGroupingDialog = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleEnableNow = () => {
-    setIsGroupingEnabled(true);
-    localStorage.setItem("roomGroupingEnabled", "true");
+  const handleEnableNow = async () => {
+    await setOrganizeRoomsGrouping(true);
     localStorage.setItem("roomGroupingDialogShown", "true");
     setRoomGroupingDialogVisible(false);
   };
@@ -369,16 +368,14 @@ const RoomGroupingDialog = ({
   );
 };
 
-export default inject(({ dialogsStore }: TStore) => {
-  const {
-    roomGroupingDialogVisible,
-    setRoomGroupingDialogVisible,
-    setIsGroupingEnabled,
-  } = dialogsStore;
+export default inject(({ dialogsStore, filesSettingsStore }: TStore) => {
+  const { roomGroupingDialogVisible, setRoomGroupingDialogVisible } =
+    dialogsStore;
+  const { setOrganizeRoomsGrouping } = filesSettingsStore;
 
   return {
     visible: roomGroupingDialogVisible,
     setRoomGroupingDialogVisible,
-    setIsGroupingEnabled,
+    setOrganizeRoomsGrouping,
   };
 })(observer(RoomGroupingDialog));

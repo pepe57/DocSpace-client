@@ -1894,3 +1894,13 @@ export async function shareFileToUsers(
 
   return res;
 }
+
+export async function setOrganizeGrouping(set: boolean) {
+  const res = await request({
+    method: "put",
+    url: "/files/settings/organizegrouping",
+    data: { set },
+  });
+
+  return res as boolean;
+}

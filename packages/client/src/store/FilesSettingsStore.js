@@ -28,6 +28,7 @@ import api from "@docspace/shared/api";
 import {
   setFavoritesSetting,
   setRecentSetting,
+  setOrganizeGrouping,
 } from "@docspace/shared/api/files";
 import { RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
@@ -153,6 +154,8 @@ class FilesSettingsStore {
   hideConfirmRoomLifetime = false;
 
   hideConfirmCancelOperation = false;
+
+  organizeRoomsGrouping = false;
 
   extsFilesVectorized = [];
 
@@ -300,6 +303,17 @@ class FilesSettingsStore {
       .changeOpenEditorInSameTab(data)
       .then((res) => this.setFilesSetting("openEditorInSameTab", res))
       .catch((e) => toastr.error(e));
+  };
+
+  setOrganizeRoomsGrouping = async (data) => {
+    try {
+      const res = await setOrganizeGrouping(data);
+      this.setFilesSetting("organizeRoomsGrouping", res);
+      return res;
+    } catch (e) {
+      toastr.error(e);
+      throw e;
+    }
   };
 
   setEnableThirdParty = async (data, setting) => {

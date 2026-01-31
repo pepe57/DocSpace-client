@@ -385,6 +385,7 @@ export type TFilesSettings = {
   updateIfExist?: boolean;
   openEditorInSameTab: boolean;
   displayFileExtension: boolean;
+  organizeRoomsGrouping: boolean;
 };
 
 export type TPresignedUri = {

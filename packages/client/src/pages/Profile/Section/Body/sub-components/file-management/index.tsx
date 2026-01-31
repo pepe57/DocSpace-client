@@ -33,7 +33,6 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
 
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
-import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 import { DefaultPageSetting } from "./sub-components/DefaultPageSetting";
 import styles from "./FileManagement.module.scss";
@@ -59,8 +58,8 @@ type FileManagementProps = {
   hideConfirmCancelOperation?: boolean;
   setHideConfirmCancelOperation?: FilesSettingsStore["setHideConfirmCancelOperation"];
 
-  isGroupingEnabled?: boolean;
-  setIsGroupingEnabled?: DialogsStore["setIsGroupingEnabled"];
+  organizeRoomsGrouping?: boolean;
+  setOrganizeRoomsGrouping?: FilesSettingsStore["setOrganizeRoomsGrouping"];
 };
 
 const FileManagement = ({
@@ -84,8 +83,8 @@ const FileManagement = ({
   hideConfirmCancelOperation,
   setHideConfirmCancelOperation,
 
-  isGroupingEnabled,
-  setIsGroupingEnabled,
+  organizeRoomsGrouping,
+  setOrganizeRoomsGrouping,
 }: FileManagementProps) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
 
@@ -110,10 +109,9 @@ const FileManagement = ({
     setHideConfirmCancelOperation?.(!hideConfirmCancelOperation);
   }, [hideConfirmCancelOperation, setHideConfirmCancelOperation]);
 
-  const onChangeRoomGrouping = React.useCallback(() => {
-    setIsGroupingEnabled?.(!isGroupingEnabled);
-    localStorage.setItem("roomGroupingEnabled", String(!isGroupingEnabled));
-  }, [isGroupingEnabled, setIsGroupingEnabled]);
+  const onChangeRoomGrouping = React.useCallback(async () => {
+    await setOrganizeRoomsGrouping?.(!organizeRoomsGrouping);
+  }, [organizeRoomsGrouping, setOrganizeRoomsGrouping]);
 
   const onChangeOpenEditorInSameTab = React.useCallback(() => {
     setOpenEditorInSameTab?.(!openEditorInSameTab);
@@ -196,7 +194,7 @@ const FileManagement = ({
           <ToggleButton
             className={classNames("room-grouping", styles.toggleBtn)}
             onChange={onChangeRoomGrouping}
-            isChecked={isGroupingEnabled}
+            isChecked={organizeRoomsGrouping}
             dataTestId="room_grouping_toggle_button"
           />
           <Text>{t("GroupByRooms")}</Text>
@@ -211,7 +209,6 @@ export default inject(
     filesSettingsStore,
     treeFoldersStore,
     settingsStore,
-    dialogsStore,
   }: TStore) => {
     const {
       storeOriginalFiles,
@@ -234,8 +231,9 @@ export default inject(
       setDisplayFileExtension,
       hideConfirmCancelOperation,
       setHideConfirmCancelOperation,
+      organizeRoomsGrouping,
+      setOrganizeRoomsGrouping,
     } = filesSettingsStore;
-    const { isGroupingEnabled, setIsGroupingEnabled } = dialogsStore;
     const { logoText } = settingsStore;
 
     const { myFolderId, commonFolderId } = treeFoldersStore;
@@ -265,8 +263,8 @@ export default inject(
       logoText,
       hideConfirmCancelOperation,
       setHideConfirmCancelOperation,
-      isGroupingEnabled,
-      setIsGroupingEnabled,
+      organizeRoomsGrouping,
+      setOrganizeRoomsGrouping,
     };
   },
 )(observer(FileManagement));

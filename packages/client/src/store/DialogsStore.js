@@ -49,6 +49,7 @@ import {
   deleteRoomGroup,
 } from "@docspace/shared/api/rooms";
 
+
 /**
  * @typedef {import("@docspace/shared/components/files-selector-input/FilesSelectorInput.types").BackupToPublicRoomOptionType } BackupToPublicRoomOptionType
  */
@@ -350,9 +351,6 @@ class DialogsStore {
   addRoomToGroupId = null;
 
   roomGroups = [];
-
-  // Flag indicating whether room grouping feature is enabled (will be set by backend in the future)
-  isGroupingEnabled = true;
 
   constructor(
     authStore,
@@ -1139,10 +1137,6 @@ class DialogsStore {
   setAddRoomToGroupDialogVisible = (visible, groupId = null) => {
     this.addRoomToGroupDialogVisible = visible;
     this.addRoomToGroupId = groupId;
-  };
-
-  setIsGroupingEnabled = (enabled) => {
-    this.isGroupingEnabled = enabled;
   };
 
   setCreateGroupRooms = async (newGroup) => {
