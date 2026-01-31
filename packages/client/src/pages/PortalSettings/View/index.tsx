@@ -102,6 +102,8 @@ const View = ({
   paymentStore,
   servicesStore,
   currentTariffStatusStore,
+  defaultTemplatesStore,
+
   clearAbortControllerArr,
 
   fetchAIProviders,
@@ -144,6 +146,7 @@ const View = ({
     paymentStore,
     servicesStore,
     currentTariffStatusStore,
+    defaultTemplatesStore,
   });
 
   const { getCommonInitialValue } = useCommon(defaultProps.common);
@@ -350,6 +353,7 @@ export const ViewComponent = inject(
     servicesStore,
     currentTariffStatusStore,
     aiSettingsStore,
+    defaultTemplatesStore,
   }: TStore) => {
     const { initSettings: initSettingsCommon } = common;
 
@@ -390,6 +394,7 @@ export const ViewComponent = inject(
       servicesStore,
       currentTariffStatusStore,
       ssoFormStore: ssoStore,
+      defaultTemplatesStore,
 
       // Direct values needed in safeProps
       isMobileView,

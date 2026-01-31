@@ -580,3 +580,11 @@ export type TShareToUser = {
   shareTo: string;
   access: ShareAccessRights;
 };
+
+export type TDefaultTemplate = {
+  selectedFile?: number;
+  fileExtension: string;
+  lastModified?: string;
+  fileTitle?: string;
+  viewUrl?: string;
+};

@@ -37,6 +37,7 @@ import {
   TSelectorCancelButton,
   TSelectorHeader,
   TSelectorSearch,
+  TSelectorWithAside,
 } from "../../components/selector/Selector.types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 
@@ -88,6 +89,11 @@ const RoomSelectorComponent = ({
 
   createDefineRoomLabel,
   createDefineRoomType,
+
+  useAside,
+  onClose,
+  withBlur,
+  withoutBackground,
 
   withInit,
   withCreate,
@@ -229,6 +235,10 @@ const RoomSelectorComponent = ({
       }
     : {};
 
+  const withAside: TSelectorWithAside = useAside
+    ? { useAside, onClose, withBlur, withoutBackground }
+    : {};
+
   return (
     <Selector
       id={id}
@@ -237,6 +247,7 @@ const RoomSelectorComponent = ({
       {...headerSelectorProps}
       {...cancelButtonSelectorProps}
       {...searchSelectorProps}
+      {...withAside}
       withPadding={withPadding}
       onSelect={onSelect}
       items={items}

@@ -158,6 +158,7 @@ export type TPlugin = {
   enabled: boolean;
   system: boolean;
   url: string;
+  cssUrl?: string;
   settings: string;
   iconUrl: string;
   setLanguage?: (locale: string) => void;
