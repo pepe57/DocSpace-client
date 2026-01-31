@@ -36,6 +36,8 @@ import EmptyRoomGroupsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.room.grou
 import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg";
 import CrossIcon from "PUBLIC_DIR/images/icons/12/cross.react.svg";
 
+import styles from "./EmptyRoomGroupContainer.module.scss";
+
 type EmptyRoomGroupContainerProps = {
   onAddRoom?: () => void;
   onDeleteGroup?: () => void;
@@ -83,6 +85,8 @@ const EmptyRoomGroupContainer = ({
       title={t("GroupingRooms:GroupIsEmpty")}
       description={t("GroupingRooms:EmptyGroupDescription")}
       options={options}
+      className={styles.wrapper}
+      bodyClassName={styles.body}
     />
   );
 };

@@ -29,9 +29,19 @@ import styles from "./EmptyView.module.scss";
 import EmptyViewOption from "./sub-components/EmptyView.option";
 import type { EmptyViewProps } from "./EmptyView.types";
 
-const EmptyView = ({ description, icon, options, title }: EmptyViewProps) => {
+const EmptyView = ({
+  description,
+  icon,
+  options,
+  title,
+  className,
+  bodyClassName,
+}: EmptyViewProps) => {
   return (
-    <div className={styles.wrapper} data-testid="empty-view">
+    <div
+      className={`${styles.wrapper}${className ? ` ${className}` : ""}`}
+      data-testid="empty-view"
+    >
       <div className={styles.header}>
         {icon}
         <Text
@@ -47,7 +57,10 @@ const EmptyView = ({ description, icon, options, title }: EmptyViewProps) => {
         </Text>
       </div>
       {options ? (
-        <div className={styles.body} data-testid="empty-view-body">
+        <div
+          className={`${styles.body}${bodyClassName ? ` ${bodyClassName}` : ""}`}
+          data-testid="empty-view-body"
+        >
           {options.map((option) => (
             <EmptyViewOption key={option.key} option={option} />
           ))}

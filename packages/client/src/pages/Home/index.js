@@ -114,6 +114,7 @@ const PureHome = (props) => {
     showFilter,
     frameConfig,
     isEmptyPage,
+    roomsFilterGroupId,
 
     contactsViewAs,
 
@@ -377,7 +378,8 @@ const PureHome = (props) => {
     !isEmptyPage ||
     welcomeFormFillingTipsVisible ||
     formFillingTipsVisible ||
-    showFilterLoader;
+    showFilterLoader ||
+    roomsFilterGroupId;
 
   const isValidMainContent = hasVisibleContent && !isErrorRoomNotAvailable;
   const isValidContactsContent = !isContactsEmptyView && isContactsPage;
@@ -534,6 +536,7 @@ export const Component = inject(
       refreshFiles,
       setViewAs,
       isEmptyPage,
+      roomsFilter,
 
       disableDrag,
       isErrorRoomNotAvailable,
@@ -695,6 +698,7 @@ export const Component = inject(
       refreshFiles,
       setViewAs,
       isEmptyPage,
+      roomsFilterGroupId: roomsFilter?.groupId,
 
       setSelectedNode,
       onClickBack,

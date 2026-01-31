@@ -100,4 +100,8 @@ export type EmptyViewProps = Omit<
 > & {
   /** Array of options to display, can be null */
   options: Nullable<EmptyViewOptionsType>;
+  /** Optional CSS class name for wrapper styling */
+  className?: string;
+  /** Optional CSS class name for body styling */
+  bodyClassName?: string;
 };
