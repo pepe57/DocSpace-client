@@ -213,11 +213,19 @@ export type SearchInputProps = {
   initSearchValue?: string;
 };
 
+export type TRoomGroupIcon = {
+  id: string;
+  data: {
+    small: string;
+    default: string;
+  };
+};
+
 export type TRoomGroup = {
   id: string;
   name: string;
-  icon: { id: string; data: string } | string | null;
-  rooms: string[];
+  icon: TRoomGroupIcon | string | null;
+  userId: string;
   totalRooms: number;
 };
 

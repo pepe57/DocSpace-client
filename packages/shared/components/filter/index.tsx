@@ -68,7 +68,7 @@ const buildGroupIconDataUrl = (
   icon: TRoomGroup["icon"],
 ): string | undefined => {
   if (typeof icon !== "object" || icon === null) return undefined;
-  return `data:image/svg+xml;utf8,${encodeURIComponent(icon.data)}`;
+  return `data:image/svg+xml;utf8,${encodeURIComponent(icon.data.small)}`;
 };
 
 const FilterInput = React.memo(
@@ -282,15 +282,14 @@ const FilterInput = React.memo(
     const [activeGroupId, setActiveGroupId] = React.useState<string | null>(
       null,
     );
-    const [hasGroupEverBeenCreated, setHasGroupEverBeenCreated] = React.useState(
-      () => {
+    const [hasGroupEverBeenCreated, setHasGroupEverBeenCreated] =
+      React.useState(() => {
         try {
           return localStorage.getItem("roomGroupEverCreated") === "true";
         } catch {
           return false;
         }
-      },
-    );
+      });
 
     // Track when the first group is created
     React.useEffect(() => {
