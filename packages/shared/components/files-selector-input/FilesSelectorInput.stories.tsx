@@ -205,6 +205,7 @@ const mockFilesSelectorSettings = {
     templatesSection: true,
     openEditorInSameTab: true,
     displayFileExtension: true,
+    organizeRoomsGrouping: false,
   },
 };
 

@@ -1157,6 +1157,7 @@ const getFilesSettings = (): TFilesSettings => {
     maxUploadThreadCount: 15,
     chunkUploadSize: 10485760,
     openEditorInSameTab: false,
+    organizeRoomsGrouping: false,
   };
 };
 
