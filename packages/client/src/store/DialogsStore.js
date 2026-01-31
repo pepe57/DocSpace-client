@@ -345,6 +345,10 @@ class DialogsStore {
 
   roomGroupingDialogVisible = false;
 
+  addRoomToGroupDialogVisible = false;
+
+  addRoomToGroupId = null;
+
   roomGroups = [];
 
   // Flag indicating whether room grouping feature is enabled (will be set by backend in the future)
@@ -1130,6 +1134,11 @@ class DialogsStore {
 
   setRoomGroupingDialogVisible = (visible) => {
     this.roomGroupingDialogVisible = visible;
+  };
+
+  setAddRoomToGroupDialogVisible = (visible, groupId = null) => {
+    this.addRoomToGroupDialogVisible = visible;
+    this.addRoomToGroupId = groupId;
   };
 
   setIsGroupingEnabled = (enabled) => {

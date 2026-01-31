@@ -80,6 +80,7 @@ import {
   SocialAuthWelcomeDialog,
   EditRoomGroupsDialog,
   RoomGroupingDialog,
+  AddRoomToGroupDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -195,6 +196,7 @@ const Panels = (props) => {
     setEditRoomGroupsDialogVisible,
     arrRoomGroups,
     roomGroupingDialogVisible,
+    addRoomToGroupDialogVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -516,6 +518,9 @@ const Panels = (props) => {
     roomGroupingDialogVisible && (
       <RoomGroupingDialog key="room-grouping-dialog" />
     ),
+    addRoomToGroupDialogVisible && (
+      <AddRoomToGroupDialog key="add-room-to-group-dialog" />
+    ),
   ];
 };
 
@@ -610,6 +615,7 @@ export default inject(
       covers,
       setEditRoomGroupsDialogVisible,
       roomGroupingDialogVisible,
+      addRoomToGroupDialogVisible,
     } = dialogsStore;
 
     const { viewAs, setArrRoomGroups, arrRoomGroups } = filesStore;
@@ -749,6 +755,7 @@ export default inject(
       setEditRoomGroupsDialogVisible,
       arrRoomGroups,
       roomGroupingDialogVisible,
+      addRoomToGroupDialogVisible,
     };
   },
 )(observer(Panels));

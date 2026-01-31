@@ -212,6 +212,8 @@
   /* Empty content variables */
   --empty-view-header-color: #{$black};
   --empty-view-description-color: #{$gray-text};
+  --empty-view-separator-color: #{$gray};
+  --empty-view-action-secondary-color: #{$gray};
 
   --error-container-background: #{$white};
   --error-container-body-text: #{$gray};
@@ -543,6 +545,8 @@
 
   --empty-view-header-color: #{$white};
   --empty-view-description-color: #{$dark-gray-dark};
+  --empty-view-separator-color: #{$gray};
+  --empty-view-action-secondary-color: #{$gray-dark};
 
   --error-container-background: #{$black};
   --error-container-body-text: #{$gray-dark};

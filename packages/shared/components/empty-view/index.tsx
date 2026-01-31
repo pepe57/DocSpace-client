@@ -62,4 +62,5 @@ export type {
   EmptyViewItemType,
   EmptyViewLinkType,
   EmptyViewOptionsType,
+  EmptyViewSeparatorType,
 } from "./EmptyView.types";

@@ -77,6 +77,7 @@ import DisconnectAccountDialog from "./DisconnectAccountDialog";
 import CreateAgentDialog from "./CreateEditAgentDialog/CreateAgentDialog";
 import EditRoomGroupsDialog from "./EditRoomGroupsDialog";
 import RoomGroupingDialog from "./RoomGroupingDialog";
+import AddRoomToGroupDialog from "./AddRoomToGroupDialog";
 
 export {
   EmptyTrashDialog,
@@ -132,4 +133,5 @@ export {
   CreateAgentDialog,
   EditRoomGroupsDialog,
   RoomGroupingDialog,
+  AddRoomToGroupDialog,
 };

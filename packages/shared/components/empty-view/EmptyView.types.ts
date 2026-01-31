@@ -16,6 +16,30 @@ export type EmptyViewButtonType = {
   type: "button";
 };
 
+export type EmptyViewSeparatorType = {
+  /** Unique identifier for the separator */
+  key: React.Key;
+  /** Text to display as separator */
+  text: string;
+  /** type of option */
+  type: "separator";
+};
+
+export type EmptyViewActionType = {
+  /** Unique identifier for the action */
+  key: React.Key;
+  /** Title text to display */
+  title: string;
+  /** Icon component to display */
+  icon?: React.ReactElement;
+  /** Optional click handler for the action */
+  onClick?: React.MouseEventHandler<HTMLElement> | (() => void);
+  /** Optional CSS class name for styling */
+  className?: string;
+  /** type of option */
+  type: "action";
+};
+
 export type EmptyViewLinkType = {
   /** Unique identifier for the link */
   key: React.Key;
@@ -56,6 +80,8 @@ export type EmptyViewOptionsType = (
   | EmptyViewItemType
   | EmptyViewLinkType
   | EmptyViewButtonType
+  | EmptyViewSeparatorType
+  | EmptyViewActionType
 )[];
 
 export type EmptyViewItemProps = Omit<EmptyViewItemType, "key"> & {

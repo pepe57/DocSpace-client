@@ -115,6 +115,38 @@
   max-width: fit-content;
 }
 
+.separator {
+  align-self: center;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--empty-view-separator-color);
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: center;
+  cursor: pointer;
+  color: var(--accent-main);
+
+  svg {
+    path {
+      fill: currentColor;
+    }
+  }
+
+  span {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 15px;
+  }
+
+  &.secondary {
+    color: var(--empty-view-action-secondary-color);
+  }
+}
+
 .itemWrapper {
   display: flex;
   align-items: center;

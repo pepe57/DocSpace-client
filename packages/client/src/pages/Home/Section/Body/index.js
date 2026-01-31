@@ -47,6 +47,7 @@ import FilesTileContainer from "./TilesView/FilesTileContainer";
 import { NoAccessContainerType } from "../../../../components/EmptyContainer/NoAccessContainer";
 import KnowledgeDisabledContainer from "../../../../components/EmptyContainer/KnowledgeDisabledContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
+import EmptyRoomGroupContainer from "../../../../components/EmptyContainer/EmptyRoomGroupContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
@@ -106,6 +107,10 @@ const SectionBodyContent = (props) => {
     aiConfig,
     isInsideKnowledge,
     isErrorAIAgentNotAvailable,
+    roomsFilterGroupId,
+    setAddRoomToGroupDialogVisible,
+    deleteRoomGroup,
+    getAllRoomGroups,
   } = props;
 
   useEffect(() => {
@@ -480,8 +485,32 @@ const SectionBodyContent = (props) => {
     isEmptyFilesList &&
     !welcomeFormFillingTipsVisible &&
     !formFillingTipsVisible
-  )
+  ) {
+    if (roomsFilterGroupId) {
+      const onAddRoom = () => {
+        setAddRoomToGroupDialogVisible?.(true, roomsFilterGroupId);
+      };
+
+      const onDeleteGroup = async () => {
+        try {
+          await deleteRoomGroup(roomsFilterGroupId);
+          await getAllRoomGroups();
+          // Navigate back to rooms list after deleting the group
+          window.DocSpace.navigate("/rooms/shared/filter");
+        } catch (error) {
+          console.error("Error deleting group:", error);
+        }
+      };
+
+      return (
+        <EmptyRoomGroupContainer
+          onAddRoom={onAddRoom}
+          onDeleteGroup={onDeleteGroup}
+        />
+      );
+    }
     return <EmptyContainer isEmptyPage={isEmptyPage} />;
+  }
 
   const FileViewComponent = fileViews[viewAs] ?? FilesRowContainer;
 
@@ -523,8 +552,15 @@ export default inject(
       isErrorAIAgentNotAvailable,
     } = filesStore;
 
-    const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
-      dialogsStore;
+    const {
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
+      setAddRoomToGroupDialogVisible,
+      deleteRoomGroup,
+      getAllRoomGroups,
+    } = dialogsStore;
+
+    const { roomsFilter } = filesStore;
 
     const { onEnableFormFillingGuid } = contextOptionsStore;
     const { primaryProgressDataStore, uploaded } = uploadDataStore;
@@ -569,6 +605,10 @@ export default inject(
       userId: userStore?.user?.id,
       onEnableFormFillingGuid,
       setDropTargetPreview,
+      roomsFilterGroupId: roomsFilter?.groupId,
+      setAddRoomToGroupDialogVisible,
+      deleteRoomGroup,
+      getAllRoomGroups,
     };
   },
 )(
