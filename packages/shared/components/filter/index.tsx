@@ -125,6 +125,7 @@ const FilterInput = React.memo(
     roomGroups,
     onFilterByGroup,
     isRoomsFolder,
+    organizeRoomsGrouping,
   }: FilterProps) => {
     const { searchComponent } = useSearch({
       onSearch,
@@ -633,7 +634,7 @@ const FilterInput = React.memo(
           </div>
         ) : null}
 
-        {isRoomsFolder && isRoomGroupsLoaded && (
+        {isRoomsFolder && isRoomGroupsLoaded && organizeRoomsGrouping && (
           <div className={styles.rowGroupingRooms} ref={rowRef}>
             {isRowReady && (
               <div className="group-tags">

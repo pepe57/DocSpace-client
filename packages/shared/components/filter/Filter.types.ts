@@ -258,4 +258,5 @@ export type FilterProps = SearchInputProps &
     roomGroups?: TRoomGroup[];
     onFilterByGroup?: (groupId: string | null) => void;
     isRoomsFolder?: boolean;
+    organizeRoomsGrouping?: boolean;
   };

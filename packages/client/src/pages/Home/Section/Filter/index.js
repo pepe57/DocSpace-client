@@ -147,6 +147,7 @@ const SectionFilterContent = ({
   getAllRoomGroups,
   roomGroups,
   isRoomsFolder,
+  organizeRoomsGrouping,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -1805,6 +1806,7 @@ const SectionFilterContent = ({
       roomGroups={roomGroups}
       onFilterByGroup={onFilterByGroup}
       isRoomsFolder={isRoomsFolder}
+      organizeRoomsGrouping={organizeRoomsGrouping}
     />
   );
 };
@@ -1813,6 +1815,7 @@ export default inject(
   ({
     authStore,
     filesStore,
+    filesSettingsStore,
     treeFoldersStore,
     clientLoadingStore,
     tagsStore,
@@ -1889,6 +1892,8 @@ export default inject(
     const { setEditRoomGroupsDialogVisible, getAllRoomGroups, roomGroups } =
       dialogsStore;
 
+    const { organizeRoomsGrouping } = filesSettingsStore;
+
     return {
       isRoomAdmin,
       showStorageInfo,
@@ -1958,6 +1963,7 @@ export default inject(
       getAllRoomGroups,
       roomGroups,
       isRoomsFolder,
+      organizeRoomsGrouping,
     };
   },
 )(
