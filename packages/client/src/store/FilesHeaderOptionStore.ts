@@ -70,7 +70,7 @@ export default class FilesHeaderOptionStore {
   constructor(
     private filesActionsStore: FilesActionsStore,
     private filesStore: FilesStore,
-    private dialogsStore: DialogsStore,
+    private dialogsStore: DialogsStoreWithRoomGroups,
     private currentQuotaStore: CurrentQuotasStore,
   ) {
     makeAutoObservable(this);
@@ -271,9 +271,7 @@ export default class FilesHeaderOptionStore {
           iconUrl: AddToGroupReactSvgUrl,
           withDropDown: true,
           fixedDropdownStyles: true,
-          options: (
-            this.dialogsStore as DialogsStoreWithRoomGroups
-          ).roomGroups?.map((group) => {
+          options: this.dialogsStore.roomGroups?.map((group) => {
             let groupIcon: string = CreateGroupReactSvgUrl;
             if (typeof group.icon === "string" && group.icon) {
               groupIcon = group.icon;
