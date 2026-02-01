@@ -1193,17 +1193,26 @@ class ContextOptionsStore {
         roomsToAdd: roomIds,
       });
       await this.dialogsStore.getAllRoomGroups();
-      toastr.success(
-        React.createElement(Trans, {
-          i18nKey:
-            roomIds.length === 1
-              ? "GroupingRooms:RoomAddedToGroup"
-              : "GroupingRooms:RoomsAddedToGroup",
-          t,
-          values: { groupName },
-          components: { 1: React.createElement("strong") },
-        }),
-      );
+      const transProps = {
+        t,
+        values: { groupName },
+        components: { 1: React.createElement("strong") },
+      };
+      if (roomIds.length === 1) {
+        toastr.success(
+          React.createElement(Trans, {
+            i18nKey: "GroupingRooms:RoomAddedToGroup",
+            ...transProps,
+          }),
+        );
+      } else {
+        toastr.success(
+          React.createElement(Trans, {
+            i18nKey: "GroupingRooms:RoomsAddedToGroup",
+            ...transProps,
+          }),
+        );
+      }
     } catch (error) {
       console.error("Error adding rooms to group:", error);
       toastr.error(t("Common:Error"));
@@ -1228,17 +1237,26 @@ class ContextOptionsStore {
       // Remove the rooms from the current view
       this.filesStore.removeFiles(null, roomIds);
 
-      toastr.success(
-        React.createElement(Trans, {
-          i18nKey:
-            roomIds.length === 1
-              ? "GroupingRooms:RoomRemovedFromGroup"
-              : "GroupingRooms:RoomsRemovedFromGroup",
-          t,
-          values: { groupName },
-          components: { 1: React.createElement("strong") },
-        }),
-      );
+      const transProps = {
+        t,
+        values: { groupName },
+        components: { 1: React.createElement("strong") },
+      };
+      if (roomIds.length === 1) {
+        toastr.success(
+          React.createElement(Trans, {
+            i18nKey: "GroupingRooms:RoomRemovedFromGroup",
+            ...transProps,
+          }),
+        );
+      } else {
+        toastr.success(
+          React.createElement(Trans, {
+            i18nKey: "GroupingRooms:RoomsRemovedFromGroup",
+            ...transProps,
+          }),
+        );
+      }
     } catch (error) {
       console.error("Error removing rooms from group:", error);
       toastr.error(t("Common:Error"));
