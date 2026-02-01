@@ -24,7 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import type { TFunction } from "i18next";
+import { Trans } from "react-i18next";
 import { makeAutoObservable } from "mobx";
 
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
@@ -133,11 +135,17 @@ export default class FilesHeaderOptionStore {
     try {
       await this.dialogsStore.updateRoomGroup(groupId, { roomsToAdd: roomIds });
       await this.dialogsStore.getAllRoomGroups();
-      const message =
-        roomIds.length === 1
-          ? this.t("GroupingRooms:RoomAddedToGroup", { groupName })
-          : this.t("GroupingRooms:RoomsAddedToGroup", { groupName });
-      toastr.success(message);
+      toastr.success(
+        React.createElement(Trans, {
+          i18nKey:
+            roomIds.length === 1
+              ? "GroupingRooms:RoomAddedToGroup"
+              : "GroupingRooms:RoomsAddedToGroup",
+          t: this.t,
+          values: { groupName },
+          components: { 1: React.createElement("strong") },
+        }),
+      );
     } catch (error) {
       console.error("Error adding rooms to group:", error);
       toastr.error(this.t("Common:Error"));
@@ -163,11 +171,17 @@ export default class FilesHeaderOptionStore {
       // Remove the rooms from the current view
       this.filesStore.removeFiles(null, roomIds);
 
-      const message =
-        roomIds.length === 1
-          ? this.t("GroupingRooms:RoomRemovedFromGroup", { groupName })
-          : this.t("GroupingRooms:RoomsRemovedFromGroup", { groupName });
-      toastr.success(message);
+      toastr.success(
+        React.createElement(Trans, {
+          i18nKey:
+            roomIds.length === 1
+              ? "GroupingRooms:RoomRemovedFromGroup"
+              : "GroupingRooms:RoomsRemovedFromGroup",
+          t: this.t,
+          values: { groupName },
+          components: { 1: React.createElement("strong") },
+        }),
+      );
     } catch (error) {
       console.error("Error removing rooms from group:", error);
       toastr.error(this.t("Common:Error"));
