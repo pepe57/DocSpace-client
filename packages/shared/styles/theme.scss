@@ -1124,12 +1124,18 @@
   --disabled-selected-item-color: #{$gray};
   --filter-input-selected-items-background: #{$gray-light-mid};
   --filter-input-selected-items-hover-background: #{$light-gray-hover};
+  --room-group-tag-inactive-color: #{$light-gray-dark};
+  --room-group-tag-background: #{$gray-light};
+  --room-group-tag-hover-background: #{$light-gray-hover};
 }
 
 .dark {
   --disabled-selected-item-color: #{$gray-dark-text};
   --filter-input-selected-items-background: #{$gray-dark-strong};
   --filter-input-selected-items-hover-background: #{$dark-gray-light};
+  --room-group-tag-inactive-color: #{$dark-gray-dark};
+  --room-group-tag-background: #{$dark-gray-light};
+  --room-group-tag-hover-background: #{$light-dark-gray-hover};
 }
 
 .light {

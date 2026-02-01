@@ -30,7 +30,7 @@ import classNames from "classnames";
 
 import { DeviceType, FilterGroups } from "../../enums";
 import GroupManagementIcon from "PUBLIC_DIR/images/group.management.svg?url";
-import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
+import PlusIcon from "PUBLIC_DIR/images/icons/16/plus.svg?url";
 
 import { TViewSelectorOption, ViewSelector } from "../view-selector";
 import { Link, LinkType } from "../link";
@@ -685,7 +685,6 @@ const FilterInput = React.memo(
                       onClick={
                         isMobileView ? onOverflowContextMenu : toggleOverflow
                       }
-                      title={t("Common:More")}
                       data-testid="rooms_groups_overflow_trigger"
                     >
                       <ComboBox
