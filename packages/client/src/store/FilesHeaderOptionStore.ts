@@ -140,21 +140,18 @@ export default class FilesHeaderOptionStore {
         values: { groupName },
         components: { 1: React.createElement("strong") },
       };
-      if (roomIds.length === 1) {
-        toastr.success(
-          React.createElement(Trans, {
-            i18nKey: "GroupingRooms:RoomAddedToGroup",
-            ...transProps,
-          }),
-        );
-      } else {
-        toastr.success(
-          React.createElement(Trans, {
-            i18nKey: "GroupingRooms:RoomsAddedToGroup",
-            ...transProps,
-          }),
-        );
-      }
+      const keys = {
+        single: { tKey: "GroupingRooms:RoomAddedToGroup" },
+        multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
+      };
+      const i18nKey =
+        roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
+      toastr.success(
+        React.createElement(Trans, {
+          i18nKey,
+          ...transProps,
+        }),
+      );
     } catch (error) {
       console.error("Error adding rooms to group:", error);
       toastr.error(this.t("Common:Error"));
@@ -185,21 +182,18 @@ export default class FilesHeaderOptionStore {
         values: { groupName },
         components: { 1: React.createElement("strong") },
       };
-      if (roomIds.length === 1) {
-        toastr.success(
-          React.createElement(Trans, {
-            i18nKey: "GroupingRooms:RoomRemovedFromGroup",
-            ...transProps,
-          }),
-        );
-      } else {
-        toastr.success(
-          React.createElement(Trans, {
-            i18nKey: "GroupingRooms:RoomsRemovedFromGroup",
-            ...transProps,
-          }),
-        );
-      }
+      const keys = {
+        single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
+        multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
+      };
+      const i18nKey =
+        roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
+      toastr.success(
+        React.createElement(Trans, {
+          i18nKey,
+          ...transProps,
+        }),
+      );
     } catch (error) {
       console.error("Error removing rooms from group:", error);
       toastr.error(this.t("Common:Error"));
