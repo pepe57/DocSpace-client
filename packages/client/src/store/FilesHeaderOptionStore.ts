@@ -48,12 +48,21 @@ import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?u
 import { isDesktop } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import type { TRoomGroup } from "@docspace/shared/components/filter/Filter.types";
 
 import { showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import type FilesActionsStore from "./FilesActionsStore";
 import type FilesStore from "./FilesStore";
 import type DialogsStore from "./DialogsStore";
+
+type DialogsStoreWithRoomGroups = DialogsStore & {
+  roomGroups?: TRoomGroup[];
+  setEditRoomGroupsDialogVisible: (
+    visible: boolean,
+    roomIds?: number[] | null,
+  ) => void;
+};
 
 export default class FilesHeaderOptionStore {
   private t!: TFunction;
@@ -262,30 +271,26 @@ export default class FilesHeaderOptionStore {
           iconUrl: AddToGroupReactSvgUrl,
           withDropDown: true,
           fixedDropdownStyles: true,
-          options: (this.dialogsStore as any).roomGroups?.map(
-            (group: {
-              id: string;
-              name: string;
-              icon?: { data?: { small?: string } } | string | null;
-            }) => {
-              let groupIcon: string = CreateGroupReactSvgUrl;
-              if (typeof group.icon === "string" && group.icon) {
-                groupIcon = group.icon;
-              } else if (
-                typeof group.icon === "object" &&
-                group.icon?.data?.small
-              ) {
-                groupIcon = `data:image/svg+xml;utf8,${encodeURIComponent(group.icon.data.small)}`;
-              }
-              return {
-                id: `menu-add-to-group-${group.id}`,
-                key: `add-to-group-${group.id}`,
-                label: group.name,
-                icon: groupIcon,
-                onClick: () => this.addToGroupHandle(group.id, group.name),
-              };
-            },
-          ),
+          options: (
+            this.dialogsStore as DialogsStoreWithRoomGroups
+          ).roomGroups?.map((group) => {
+            let groupIcon: string = CreateGroupReactSvgUrl;
+            if (typeof group.icon === "string" && group.icon) {
+              groupIcon = group.icon;
+            } else if (
+              typeof group.icon === "object" &&
+              group.icon?.data?.small
+            ) {
+              groupIcon = `data:image/svg+xml;utf8,${encodeURIComponent(group.icon.data.small)}`;
+            }
+            return {
+              id: `menu-add-to-group-${group.id}`,
+              key: `add-to-group-${group.id}`,
+              label: group.name,
+              icon: groupIcon,
+              onClick: () => this.addToGroupHandle(group.id, group.name),
+            };
+          }),
           disabled: false,
         };
       case "archive":
