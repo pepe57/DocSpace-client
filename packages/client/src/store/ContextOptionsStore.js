@@ -1203,6 +1203,35 @@ class ContextOptionsStore {
     }
   };
 
+  onRemoveRoomsFromGroup = async (roomIds, t) => {
+    const currentGroupId = this.filesStore.roomsFilter?.groupId;
+    if (!currentGroupId) return;
+
+    const currentGroup = this.dialogsStore.roomGroups?.find(
+      (g) => String(g.id) === String(currentGroupId),
+    );
+    const groupName = currentGroup?.name || "";
+
+    try {
+      await this.dialogsStore.updateRoomGroup(currentGroupId, {
+        roomsToRemove: roomIds,
+      });
+      await this.dialogsStore.getAllRoomGroups();
+
+      // Remove the rooms from the current view
+      this.filesStore.removeFiles(null, roomIds);
+
+      const message =
+        roomIds.length === 1
+          ? t("GroupingRooms:RoomRemovedFromGroup", { groupName })
+          : t("GroupingRooms:RoomsRemovedFromGroup", { groupName });
+      toastr.success(message);
+    } catch (error) {
+      console.error("Error removing rooms from group:", error);
+      toastr.error(t("Common:Error"));
+    }
+  };
+
   onChangeRoomOwner = () => this.dialogsStore.setChangeRoomOwnerIsVisible(true);
 
   onLeaveRoom = () => {
@@ -2297,6 +2326,14 @@ class ContextOptionsStore {
         onClick: this.onChangeRoomOwner,
         disabled: isAIAgent,
       },
+      {
+        id: "option_remove-from-group",
+        key: "remove-from-group",
+        label: t("GroupingRooms:RemoveFromGroup"),
+        icon: RemoveOutlineSvgUrl,
+        onClick: () => this.onRemoveRoomsFromGroup([item.id], t),
+        disabled: false,
+      },
       ...versionActions,
       {
         id: "option_custom-filter",
@@ -2957,6 +2994,17 @@ class ContextOptionsStore {
             }),
             disabled: false,
           });
+
+          const currentGroupId = this.filesStore.roomsFilter?.groupId;
+          if (currentGroupId) {
+            options.push({
+              key: "remove-from-group",
+              label: t("GroupingRooms:RemoveFromGroup"),
+              icon: RemoveOutlineSvgUrl,
+              onClick: () => this.onRemoveRoomsFromGroup(roomIds, t),
+              disabled: false,
+            });
+          }
         }
       }
 

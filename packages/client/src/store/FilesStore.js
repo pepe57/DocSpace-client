@@ -3280,6 +3280,7 @@ class FilesStore {
         "room-info",
         "create-group",
         "add-to-group",
+        "remove-from-group",
         "pin-room",
         "unpin-room",
         "mute-room",
@@ -3383,6 +3384,7 @@ class FilesStore {
 
       const { organizeRoomsGrouping } = this.filesSettingsStore;
       const { roomGroups } = this.dialogsStore;
+      const currentGroupId = this.roomsFilter?.groupId;
       if (
         !organizeRoomsGrouping ||
         isArchiveFolder ||
@@ -3392,9 +3394,15 @@ class FilesStore {
         roomOptions = removeOptions(roomOptions, [
           "create-group",
           "add-to-group",
+          "remove-from-group",
         ]);
       } else if (!roomGroups || roomGroups.length === 0) {
-        roomOptions = removeOptions(roomOptions, ["add-to-group"]);
+        roomOptions = removeOptions(roomOptions, [
+          "add-to-group",
+          "remove-from-group",
+        ]);
+      } else if (!currentGroupId) {
+        roomOptions = removeOptions(roomOptions, ["remove-from-group"]);
       }
 
       if (isArchiveFolder || item.rootFolderType === FolderType.Archive) {

@@ -144,6 +144,36 @@ export default class FilesHeaderOptionStore {
     }
   };
 
+  private removeFromGroupHandle = async () => {
+    const roomIds = this.filesStore.selection.map((room) => room.id);
+    const currentGroupId = this.filesStore.roomsFilter?.groupId;
+    if (!currentGroupId) return;
+
+    const currentGroup = this.dialogsStore.roomGroups?.find(
+      (g) => String(g.id) === String(currentGroupId),
+    );
+    const groupName = currentGroup?.name || "";
+
+    try {
+      await this.dialogsStore.updateRoomGroup(currentGroupId, {
+        roomsToRemove: roomIds,
+      });
+      await this.dialogsStore.getAllRoomGroups();
+
+      // Remove the rooms from the current view
+      this.filesStore.removeFiles(null, roomIds);
+
+      const message =
+        roomIds.length === 1
+          ? this.t("GroupingRooms:RoomRemovedFromGroup", { groupName })
+          : this.t("GroupingRooms:RoomsRemovedFromGroup", { groupName });
+      toastr.success(message);
+    } catch (error) {
+      console.error("Error removing rooms from group:", error);
+      toastr.error(this.t("Common:Error"));
+    }
+  };
+
   private deleteRooms = () => this.filesActionsStore.deleteRooms(this.t);
 
   private deleteAgents = () => this.filesActionsStore.deleteRooms(this.t);
@@ -289,6 +319,16 @@ export default class FilesHeaderOptionStore {
               onClick: () => this.addToGroupHandle(group.id, group.name),
             };
           }),
+          disabled: false,
+        };
+      case "remove-from-group":
+        if (!this.isAvailableOption("remove-from-group")) return null;
+        return {
+          id: "menu-remove-from-group",
+          key: "remove-from-group",
+          label: t("GroupingRooms:RemoveFromGroup"),
+          iconUrl: RemoveOutlineSvgUrl,
+          onClick: this.removeFromGroupHandle,
           disabled: false,
         };
       case "archive":
