@@ -89,6 +89,7 @@ import DotsHorizontalUrl from "PUBLIC_DIR/images/icons/16/dots-horizontal.react.
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
+import CreateGroupReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 
 import { makeAutoObservable, runInAction } from "mobx";
 import copy from "copy-to-clipboard";
@@ -2167,6 +2168,15 @@ class ContextOptionsStore {
         disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),
       },
       {
+        id: "option_create-group",
+        key: "create-group",
+        label: t("GroupingRooms:CreateAGroup"),
+        icon: CreateGroupReactSvgUrl,
+        onClick: () =>
+          this.dialogsStore.setEditRoomGroupsDialogVisible(true, [item.id]),
+        disabled: false,
+      },
+      {
         id: "option_export-room-index",
         key: "export-room-index",
         label: t("Files:ExportRoomIndex"),
@@ -2856,6 +2866,20 @@ class ContextOptionsStore {
 
       if (!isArchiveFolder) {
         options.push(pinOption);
+      }
+
+      const { organizeRoomsGrouping } = this.filesSettingsStore;
+      const { setEditRoomGroupsDialogVisible } = this.dialogsStore;
+
+      if (organizeRoomsGrouping && !isArchiveFolder && !isAIAgentsFolder) {
+        const roomIds = selection.map((room) => room.id);
+        options.push({
+          key: "create-group",
+          label: t("GroupingRooms:CreateAGroup"),
+          icon: CreateGroupReactSvgUrl,
+          onClick: () => setEditRoomGroupsDialogVisible(true, roomIds),
+          disabled: false,
+        });
       }
 
       if ((canArchiveRoom || canDelete) && !isArchiveFolder) {

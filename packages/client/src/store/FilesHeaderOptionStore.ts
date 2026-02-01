@@ -42,6 +42,7 @@ import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?u
 import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import CreateGroupReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 
 import { isDesktop } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
@@ -111,6 +112,11 @@ export default class FilesHeaderOptionStore {
     this.filesActionsStore.isAvailableOption(option);
 
   private onClickCreateRoom = () => this.filesActionsStore.onClickCreateRoom();
+
+  private createGroupHandle = () => {
+    const roomIds = this.filesStore.selection.map((room) => room.id as number);
+    this.dialogsStore.setEditRoomGroupsDialogVisible(true, roomIds);
+  };
 
   private deleteRooms = () => this.filesActionsStore.deleteRooms(this.t);
 
@@ -218,6 +224,16 @@ export default class FilesHeaderOptionStore {
           label: t("Unpin"),
           iconUrl: UnpinReactSvgUrl,
           onClick: this.unpinHandle,
+          disabled: false,
+        };
+      case "create-group":
+        if (!this.isAvailableOption("create-group")) return null;
+        return {
+          id: "menu-create-group",
+          key: "create-group",
+          label: t("GroupingRooms:CreateAGroup"),
+          iconUrl: CreateGroupReactSvgUrl,
+          onClick: this.createGroupHandle,
           disabled: false,
         };
       case "archive":

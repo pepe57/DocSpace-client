@@ -49,7 +49,6 @@ import {
   deleteRoomGroup,
 } from "@docspace/shared/api/rooms";
 
-
 /**
  * @typedef {import("@docspace/shared/components/files-selector-input/FilesSelectorInput.types").BackupToPublicRoomOptionType } BackupToPublicRoomOptionType
  */
@@ -343,6 +342,8 @@ class DialogsStore {
   disconnectAccountDialogVisible = false;
 
   editRoomGroupsDialogVisible = false;
+
+  createGroupFromRoomIds = null;
 
   roomGroupingDialogVisible = false;
 
@@ -1126,8 +1127,9 @@ class DialogsStore {
     this.disconnectAccountDialogVisible = visible;
   };
 
-  setEditRoomGroupsDialogVisible = (visible) => {
+  setEditRoomGroupsDialogVisible = (visible, roomIds = null) => {
     this.editRoomGroupsDialogVisible = visible;
+    this.createGroupFromRoomIds = roomIds;
   };
 
   setRoomGroupingDialogVisible = (visible) => {

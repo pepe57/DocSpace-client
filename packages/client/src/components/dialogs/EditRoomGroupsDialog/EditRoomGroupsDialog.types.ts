@@ -57,7 +57,10 @@ export interface EditRoomGroupsDialogProps {
   getCovers: () => void;
   covers: ILogo[] | null;
   setArrRoomGroups: (group: IRoomGroup) => void;
-  setEditRoomGroupsDialogVisible: (visible: boolean) => void;
+  setEditRoomGroupsDialogVisible: (
+    visible: boolean,
+    roomIds?: number[] | null,
+  ) => void;
   arrRoomGroups: IRoomGroup[];
   roomGroups: IRoomGroup[];
   setCreateGroupRooms: (newGroup: ICreateRoomGroup) => Promise<void>;
@@ -66,6 +69,7 @@ export interface EditRoomGroupsDialogProps {
   updateGroupIcon: (groupId: string, icon: string) => Promise<void>;
   updateRoomGroup: (groupId: string, data: IUpdateRoomGroup) => Promise<void>;
   deleteRoomGroup: (groupId: string) => Promise<void>;
+  createGroupFromRoomIds?: number[] | null;
 }
 
 export interface IRoomItem {

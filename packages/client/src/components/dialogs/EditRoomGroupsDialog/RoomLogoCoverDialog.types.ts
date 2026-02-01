@@ -50,6 +50,7 @@ export interface CoverDialogProps {
   updateRoomGroup: (groupId: string, data: IUpdateRoomGroup) => Promise<void>;
   currentGroupIcon: ILogo | string | null;
   currentGroupName: string | null;
+  isOpenedFromContextMenu?: boolean;
 }
 
 export interface SelectIconProps {

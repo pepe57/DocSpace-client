@@ -3278,6 +3278,7 @@ class FilesStore {
         "external-link",
         "embedding-settings",
         "room-info",
+        "create-group",
         "pin-room",
         "unpin-room",
         "mute-room",
@@ -3377,6 +3378,16 @@ class FilesStore {
 
       if (!canViewRoomInfo) {
         roomOptions = removeOptions(roomOptions, ["room-info"]);
+      }
+
+      const { organizeRoomsGrouping } = this.filesSettingsStore;
+      if (
+        !organizeRoomsGrouping ||
+        isArchiveFolder ||
+        item.rootFolderType === FolderType.Archive ||
+        this.treeFoldersStore.isAIAgentsFolder
+      ) {
+        roomOptions = removeOptions(roomOptions, ["create-group"]);
       }
 
       if (isArchiveFolder || item.rootFolderType === FolderType.Archive) {

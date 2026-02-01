@@ -64,13 +64,20 @@ const EditRoomGroupsDialog = ({
   updateGroupIcon,
   updateRoomGroup,
   deleteRoomGroup,
+  createGroupFromRoomIds,
 }: EditRoomGroupsDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
 
   const [isOpenRoomList, setIsOpenRoomList] = useState(false);
-  const [isOpenGroupIcon, setIsOpenGroupIcon] = useState(false);
+  const [isOpenGroupIcon, setIsOpenGroupIcon] = useState(
+    () => !!createGroupFromRoomIds && createGroupFromRoomIds.length > 0,
+  );
 
-  const [arrIdsRooms, setArrIdsRooms] = useState<string[] | null>(null);
+  const [arrIdsRooms, setArrIdsRooms] = useState<string[] | null>(() =>
+    createGroupFromRoomIds
+      ? createGroupFromRoomIds.map((id) => String(id))
+      : null,
+  );
   const [selectedGroup, setSelectedGroup] = useState<{
     id: string;
     name: string;
@@ -199,6 +206,9 @@ const EditRoomGroupsDialog = ({
     );
   }
 
+  const isOpenedFromContextMenu =
+    !!createGroupFromRoomIds && createGroupFromRoomIds.length > 0;
+
   if (isOpenGroupIcon) {
     return (
       <GroupIconDialog
@@ -216,6 +226,7 @@ const EditRoomGroupsDialog = ({
         updateRoomGroup={updateRoomGroup}
         currentGroupIcon={currentEditingGroup?.icon || null}
         currentGroupName={currentEditingGroup?.name || null}
+        isOpenedFromContextMenu={isOpenedFromContextMenu && !editingGroupId}
       />
     );
   }
@@ -399,6 +410,7 @@ export default inject(({ dialogsStore }: TStore) => {
     updateGroupIcon,
     updateRoomGroup,
     deleteRoomGroup,
+    createGroupFromRoomIds,
   } = dialogsStore;
 
   return {
@@ -409,5 +421,6 @@ export default inject(({ dialogsStore }: TStore) => {
     updateGroupIcon,
     updateRoomGroup,
     deleteRoomGroup,
+    createGroupFromRoomIds,
   };
 })(observer(EditRoomGroupsDialog));

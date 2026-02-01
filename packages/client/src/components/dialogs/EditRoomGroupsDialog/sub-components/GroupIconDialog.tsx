@@ -135,6 +135,7 @@ const GroupIconDialog = ({
   updateRoomGroup,
   currentGroupIcon,
   currentGroupName,
+  isOpenedFromContextMenu,
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common", "RoomLogoCover", "GroupingRooms"]);
 
@@ -170,6 +171,10 @@ const GroupIconDialog = ({
   };
 
   const onClose = () => {
+    if (isOpenedFromContextMenu) {
+      onCloseEditRoomGroupsDialog();
+      return;
+    }
     setIsOpenGroupIcon(false);
     if (setEditingGroupId) {
       setEditingGroupId(null);

@@ -2042,6 +2042,11 @@ class FilesActionStore {
         const canCreateRoom = selection.some((s) => s.security?.CreateRoomFrom);
         return canCreateRoom;
       }
+      case "create-group": {
+        const { organizeRoomsGrouping } = this.filesSettingsStore;
+        const { isRoomsFolder } = this.treeFoldersStore;
+        return organizeRoomsGrouping && isRoomsFolder && hasSelection;
+      }
       case "change-quota":
         return hasRoomsToChangeQuota;
       case "change-agent-quota":
@@ -2306,14 +2311,16 @@ class FilesActionStore {
     });
 
     const pin = this.getOption(pinName, t);
+    const createGroup = this.getOption("create-group", t);
     const archive = this.getOption("archive", t);
     const changeQuota = this.getOption("change-quota", t);
     const disableQuota = this.getOption("disable-quota", t);
     const defaultQuota = this.getOption("default-quota", t);
     const deleteOption = this.getOption("delete-room", t);
 
+    itemsCollection.set(pinName, pin).set("create-group", createGroup);
+
     itemsCollection
-      .set(pinName, pin)
       .set("archive", archive)
       .set("change-quota", changeQuota)
       .set("default-quota", defaultQuota)
