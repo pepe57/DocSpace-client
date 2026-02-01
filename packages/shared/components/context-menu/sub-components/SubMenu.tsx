@@ -414,23 +414,9 @@ const SubMenu = (props: SubMenuProps) => {
 
       if (!item.icon) return null;
 
-      // Handle data URI SVGs - decode and inject for CSS styling
+      // Handle data URI SVGs
       if (item.icon.startsWith("data:image/svg+xml")) {
-        try {
-          const svgContent = decodeURIComponent(
-            item.icon.replace("data:image/svg+xml;utf8,", ""),
-          );
-          return (
-            <span
-              className={iconClassName || ""}
-              dangerouslySetInnerHTML={{ __html: svgContent }}
-            />
-          );
-        } catch {
-          return (
-            <img src={item.icon} alt="icon" className={iconClassName || ""} />
-          );
-        }
+        return <ReactSVG className={iconClassName || ""} src={item.icon} />;
       }
 
       // Handle regular images
