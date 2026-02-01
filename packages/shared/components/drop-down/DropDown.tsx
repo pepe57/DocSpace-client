@@ -57,6 +57,7 @@ const DropDown = ({
   showDisabledItems,
   isMobileView,
   isNoFixedHeightOptions,
+  disableScrollbarPadding,
   enableKeyboardEvents,
   appendTo,
   eventTypes,
@@ -247,17 +248,20 @@ const DropDown = ({
     }));
   }, [fixedDirection, isRTL, forwardedRef, directionX, directionY, manualY]);
 
-  const setDropDownRef = React.useCallback((node: HTMLDivElement | null) => {
-    dropDownRef.current = node;
-    
-    if (node && open) {
-      if (isDefaultMode) {
-        checkPositionPortal();
-      } else {
-        checkPosition();
+  const setDropDownRef = React.useCallback(
+    (node: HTMLDivElement | null) => {
+      dropDownRef.current = node;
+
+      if (node && open) {
+        if (isDefaultMode) {
+          checkPositionPortal();
+        } else {
+          checkPosition();
+        }
       }
-    }
-  }, [open, isDefaultMode, checkPositionPortal, checkPosition]);
+    },
+    [open, isDefaultMode, checkPositionPortal, checkPosition],
+  );
 
   const renderDropDown = () => {
     const directionXStylesDisabled =
@@ -340,6 +344,7 @@ const DropDown = ({
             cleanChildren={cleanChildren}
             calculatedHeight={calculatedHeight || 0}
             isNoFixedHeightOptions={isNoFixedHeightOptions ?? false}
+            disableScrollbarPadding={disableScrollbarPadding}
             getItemSize={getItemSize}
             isOpen={open ?? false}
             enableKeyboardEvents={enableKeyboardEvents ?? false}

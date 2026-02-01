@@ -46,20 +46,23 @@ import type { TableGroupMenuProps, TGroupMenuProps } from "../Table.types";
 
 import styles from "./TableGroupMenu.module.scss";
 
-const GroupMenu: FC<TGroupMenuProps> = memo(({ headerMenu, isBlocked }) => {
-  return (
-    <Scrollbar className={styles.scrollBar}>
-      {headerMenu.map((item) => (
-        <GroupMenuItem
-          key={item.id || item.label}
-          item={item}
-          isBlocked={isBlocked}
-          dataTestId={`table_group_menu_item_${item.id}`}
-        />
-      ))}
-    </Scrollbar>
-  );
-}, equal);
+const GroupMenu: FC<TGroupMenuProps> = memo(
+  ({ headerMenu, isBlocked, isMobileView }) => {
+    return (
+      <Scrollbar className={styles.scrollBar}>
+        {headerMenu.map((item) => (
+          <GroupMenuItem
+            key={item.id || item.label}
+            item={{ ...item, isMobileView: item.isMobileView ?? isMobileView }}
+            isBlocked={isBlocked}
+            dataTestId={`table_group_menu_item_${item.id}`}
+          />
+        ))}
+      </Scrollbar>
+    );
+  },
+  equal,
+);
 
 const TableGroupMenu = memo((props: TableGroupMenuProps) => {
   const {
@@ -151,7 +154,11 @@ const TableGroupMenu = memo((props: TableGroupMenuProps) => {
           "table-container_group-menu-separator",
         )}
       />
-      <GroupMenu headerMenu={headerMenu} isBlocked={isBlocked} />
+      <GroupMenu
+        headerMenu={headerMenu}
+        isBlocked={isBlocked}
+        isMobileView={isMobileView}
+      />
       {isCloseable ? (
         <div className={styles.tableHeaderIcon}>
           <IconButton

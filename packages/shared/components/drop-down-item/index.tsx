@@ -54,6 +54,29 @@ const IconComponent = ({
     (!src.includes("images/") && !src.includes(".svg")) ||
     src.includes("webplugins");
 
+  const isDataUriSvg = (src: string) => src.startsWith("data:image/svg+xml");
+
+  if (typeof icon === "string" && isDataUriSvg(icon)) {
+    // Decode data URI SVG and inject directly so CSS can style it
+    try {
+      const svgContent = decodeURIComponent(
+        icon.replace("data:image/svg+xml;utf8,", ""),
+      );
+      return (
+        <div
+          className={
+            fillIcon
+              ? classNames(styles.dropDownItemIcon, "drop-down-item_icon")
+              : ""
+          }
+          dangerouslySetInnerHTML={{ __html: svgContent }}
+        />
+      );
+    } catch {
+      return <img className="drop-down-icon_image" src={icon} alt="icon" />;
+    }
+  }
+
   if (typeof icon === "string" && isImageSrc(icon)) {
     return (
       <img className="drop-down-icon_image" src={icon} alt="plugin-logo" />

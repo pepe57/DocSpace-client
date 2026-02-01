@@ -74,6 +74,8 @@ export interface DropDownProps {
 
   isMobileView?: boolean;
   isNoFixedHeightOptions?: boolean;
+  /** Disables scrollbar inline padding to allow hover styles to extend to edge */
+  disableScrollbarPadding?: boolean;
   enableKeyboardEvents?: boolean;
   appendTo?: HTMLElement;
   isAside?: boolean;
@@ -101,6 +103,8 @@ export interface VirtualListProps {
   calculatedHeight: number;
   /** Whether to use fixed height options */
   isNoFixedHeightOptions: boolean;
+  /** Disables scrollbar inline padding to allow hover styles to extend to edge */
+  disableScrollbarPadding?: boolean;
   /** Clean children elements */
   cleanChildren?: React.ReactNode;
   /** Children elements */

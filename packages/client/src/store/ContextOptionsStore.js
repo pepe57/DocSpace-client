@@ -90,6 +90,7 @@ import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
 import CreateGroupReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
+import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 
 import { makeAutoObservable, runInAction } from "mobx";
 import copy from "copy-to-clipboard";
@@ -894,16 +895,22 @@ class ContextOptionsStore {
     let index = 0;
     const last = model.length;
 
+    // Keys that should preserve their items without filtering
+    const preserveItemsKeys = ["add-to-group"];
+
     for (index; index < last; index++) {
       if (filter.includes(model[index].key)) {
         options[index] = model[index];
         if (model[index].items) {
-          options[index].items = model[index].items.filter((item) =>
-            filter.includes(item.key),
-          );
+          // Skip filtering items for keys that need to preserve dynamic items
+          if (!preserveItemsKeys.includes(model[index].key)) {
+            options[index].items = model[index].items.filter((item) =>
+              filter.includes(item.key),
+            );
 
-          if (options[index].items.length === 1) {
-            options[index] = options[index].items[0];
+            if (options[index].items.length === 1) {
+              options[index] = options[index].items[0];
+            }
           }
         }
       }
@@ -1176,6 +1183,23 @@ class ContextOptionsStore {
       setArchiveDialogVisible(true);
     } else {
       setRestoreRoomDialogVisible(true);
+    }
+  };
+
+  onAddRoomsToGroup = async (roomIds, groupId, t, groupName) => {
+    try {
+      await this.dialogsStore.updateRoomGroup(groupId, {
+        roomsToAdd: roomIds,
+      });
+      await this.dialogsStore.getAllRoomGroups();
+      const message =
+        roomIds.length === 1
+          ? t("GroupingRooms:RoomAddedToGroup", { groupName })
+          : t("GroupingRooms:RoomsAddedToGroup", { groupName });
+      toastr.success(message);
+    } catch (error) {
+      console.error("Error adding rooms to group:", error);
+      toastr.error(t("Common:Error"));
     }
   };
 
@@ -2177,6 +2201,32 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
+        id: "option_add-to-group",
+        key: "add-to-group",
+        label: t("GroupingRooms:AddToGroup"),
+        icon: AddToGroupReactSvgUrl,
+        items: this.dialogsStore.roomGroups.map((group) => {
+          let groupIcon = CreateGroupReactSvgUrl;
+          if (typeof group.icon === "string" && group.icon) {
+            groupIcon = group.icon;
+          } else if (
+            typeof group.icon === "object" &&
+            group.icon?.data?.small
+          ) {
+            groupIcon = `data:image/svg+xml;utf8,${encodeURIComponent(group.icon.data.small)}`;
+          }
+          return {
+            id: `option_add-to-group-${group.id}`,
+            key: `add-to-group-${group.id}`,
+            label: group.name,
+            icon: groupIcon,
+            onClick: () =>
+              this.onAddRoomsToGroup([item.id], group.id, t, group.name),
+          };
+        }),
+        disabled: false,
+      },
+      {
         id: "option_export-room-index",
         key: "export-room-index",
         label: t("Files:ExportRoomIndex"),
@@ -2869,7 +2919,7 @@ class ContextOptionsStore {
       }
 
       const { organizeRoomsGrouping } = this.filesSettingsStore;
-      const { setEditRoomGroupsDialogVisible } = this.dialogsStore;
+      const { setEditRoomGroupsDialogVisible, roomGroups } = this.dialogsStore;
 
       if (organizeRoomsGrouping && !isArchiveFolder && !isAIAgentsFolder) {
         const roomIds = selection.map((room) => room.id);
@@ -2880,6 +2930,34 @@ class ContextOptionsStore {
           onClick: () => setEditRoomGroupsDialogVisible(true, roomIds),
           disabled: false,
         });
+
+        if (roomGroups && roomGroups.length > 0) {
+          options.push({
+            key: "add-to-group",
+            label: t("GroupingRooms:AddToGroup"),
+            icon: AddToGroupReactSvgUrl,
+            items: roomGroups.map((group) => {
+              let groupIcon = CreateGroupReactSvgUrl;
+              if (typeof group.icon === "string" && group.icon) {
+                groupIcon = group.icon;
+              } else if (
+                typeof group.icon === "object" &&
+                group.icon?.data?.small
+              ) {
+                groupIcon = `data:image/svg+xml;utf8,${encodeURIComponent(group.icon.data.small)}`;
+              }
+              return {
+                id: `option_add-to-group-${group.id}`,
+                key: `add-to-group-${group.id}`,
+                label: group.name,
+                icon: groupIcon,
+                onClick: () =>
+                  this.onAddRoomsToGroup(roomIds, group.id, t, group.name),
+              };
+            }),
+            disabled: false,
+          });
+        }
       }
 
       if ((canArchiveRoom || canDelete) && !isArchiveFolder) {

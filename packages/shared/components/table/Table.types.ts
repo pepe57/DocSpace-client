@@ -164,6 +164,9 @@ export type TGroupMenuItem = {
   title: string;
   withDropDown?: boolean;
   options?: ContextMenuModel[];
+  isMobileView?: boolean;
+  /** When true, applies fixed width (161px) and responsive height for the dropdown */
+  fixedDropdownStyles?: boolean;
   id: string;
 };
 
@@ -186,7 +189,7 @@ interface TableGroupMenuBased {
 
 export type TGroupMenuProps = Pick<
   TableGroupMenuBased,
-  "headerMenu" | "isBlocked"
+  "headerMenu" | "isBlocked" | "isMobileView"
 >;
 
 export type TableGroupMenuProps =
