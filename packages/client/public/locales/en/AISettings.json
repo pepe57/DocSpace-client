@@ -6,6 +6,7 @@
   "APIKey": "API Key",
   "ConnectProductToYourDataAndTools": "Connect {{productName}} to your data and tools.",
   "CustomMCPListTitle": "Custom",
+  "ChangeDefaultProviderDescription": "This {{aiProvider}} is currently set as the default and cannot be removed.\n Please select another provider as the default before deleting this one.",
   "DefaultProviderTitle": "Default provider",
   "DefaultProviderDescription": "Select the default {{aiProvider}} and model for all features across {{productName}} ({{aiAgents}}, document editors, etc.)",
   "DeleteImage": "Delete image",

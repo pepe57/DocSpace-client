@@ -46,11 +46,13 @@ import styles from "../AISettings.module.scss";
 
 import { AddUpdateProviderDialog } from "./dialogs/add-update";
 import { DeleteAIProviderDialog } from "./dialogs/delete";
+import {
+  ChangeDefaultProviderDialog
+} from "./dialogs/change-default-provider";
 
 import { AiProviderTile } from "./Tile";
 import { ProvidersLoader } from "./ProvidersLoader";
 import { DefaultProvider } from "./DefaultProvider";
-import { toastr } from "@docspace/shared/components/toast";
 
 type TDeleteDialogData =
   | {
@@ -101,6 +103,7 @@ const AIProviderComponent = ({
     visible: false,
     providerId: null,
   });
+  const [changeDefaultProviderDialogVisible, setChangeDefaultProviderDialogVisible] = useState(false);
   const [aiProviderTypesWithUrls, setAiProviderTypesWithUrls] = useState<
     TProviderTypeWithUrl[]
   >([]);
@@ -114,16 +117,14 @@ const AIProviderComponent = ({
   const hideDeleteProviderDialog = () =>
     setDeleteDialogData({ visible: false, providerId: null });
 
+  const hideChangeDefaultProviderDialog = () =>
+    setChangeDefaultProviderDialogVisible(false);
+
   const onDeleteAIProvider = async (id: TAiProvider["id"]) => {
     const provider = aiProviders?.find((p) => p.id === id);
 
-    // Todo: Add translation when design are ready
-    const defaultProviderWarning = "This provider is currently your default. To delete it, please set a different provider as the default first."
-
     if (aiProviders && aiProviders.length > 1 && provider?.isDefault) {
-      toastr.info(
-        defaultProviderWarning,
-      );
+      setChangeDefaultProviderDialogVisible(true);
       return;
     }
 
@@ -233,6 +234,12 @@ const AIProviderComponent = ({
         <DeleteAIProviderDialog
           onClose={hideDeleteProviderDialog}
           providerId={deleteDialogData.providerId}
+        />
+      ) : null}
+
+      {changeDefaultProviderDialogVisible ? (
+        <ChangeDefaultProviderDialog
+          onClose={hideChangeDefaultProviderDialog}
         />
       ) : null}
     </div>
