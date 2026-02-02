@@ -259,4 +259,6 @@ export type FilterProps = SearchInputProps &
     onFilterByGroup?: (groupId: string | null) => void;
     isRoomsFolder?: boolean;
     organizeRoomsGrouping?: boolean;
+    /** When true, hides the room grouping row because filters/search are active */
+    isFilterOrSearchActive?: boolean;
   };

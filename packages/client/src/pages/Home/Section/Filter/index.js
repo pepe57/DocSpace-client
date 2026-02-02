@@ -159,6 +159,30 @@ const SectionFilterContent = ({
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsGuestsPage = contactsTab === "guests";
 
+  // Check if any filter or search is active (excluding sorting and groupId)
+  // Room grouping should be hidden when filters/search are active
+  const isFilterOrSearchActive = React.useMemo(() => {
+    if (!isRooms) return false;
+    return !!(
+      roomsFilter.filterValue ||
+      roomsFilter.type ||
+      roomsFilter.subjectId ||
+      roomsFilter.provider ||
+      roomsFilter.quotaFilter ||
+      (roomsFilter.tags && roomsFilter.tags.length > 0) ||
+      roomsFilter.withoutTags
+    );
+  }, [
+    isRooms,
+    roomsFilter.filterValue,
+    roomsFilter.type,
+    roomsFilter.subjectId,
+    roomsFilter.provider,
+    roomsFilter.quotaFilter,
+    roomsFilter.tags,
+    roomsFilter.withoutTags,
+  ]);
+
   const {
     onContactsFilter,
     onContactsSearch,
@@ -215,6 +239,8 @@ const SectionFilterContent = ({
         newFilter.page = 0;
         newFilter.provider = providerType || null;
         newFilter.type = type || null;
+        // Clear groupId when filter is applied - grouping doesn't work with filters
+        newFilter.groupId = null;
 
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
@@ -427,6 +453,8 @@ const SectionFilterContent = ({
 
         newFilter.page = 0;
         newFilter.filterValue = searchValue;
+        // Clear groupId when search is applied - grouping doesn't work with filters
+        newFilter.groupId = null;
 
         const path =
           newFilter.searchArea === RoomSearchArea.Active ||
@@ -1807,6 +1835,7 @@ const SectionFilterContent = ({
       onFilterByGroup={onFilterByGroup}
       isRoomsFolder={isRoomsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}
+      isFilterOrSearchActive={isFilterOrSearchActive}
     />
   );
 };

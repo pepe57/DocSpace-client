@@ -111,6 +111,7 @@ const SectionBodyContent = (props) => {
     setAddRoomToGroupDialogVisible,
     deleteRoomGroup,
     getAllRoomGroups,
+    isFilterOrSearchActive,
   } = props;
 
   useEffect(() => {
@@ -486,7 +487,7 @@ const SectionBodyContent = (props) => {
     !welcomeFormFillingTipsVisible &&
     !formFillingTipsVisible
   ) {
-    if (roomsFilterGroupId) {
+    if (roomsFilterGroupId && !isFilterOrSearchActive) {
       const onAddRoom = () => {
         setAddRoomToGroupDialogVisible?.(true, roomsFilterGroupId);
       };
@@ -609,6 +610,16 @@ export default inject(
       setAddRoomToGroupDialogVisible,
       deleteRoomGroup,
       getAllRoomGroups,
+      // Check if any filter or search is active (excluding sorting and groupId)
+      isFilterOrSearchActive: !!(
+        roomsFilter?.filterValue ||
+        roomsFilter?.type ||
+        roomsFilter?.subjectId ||
+        roomsFilter?.provider ||
+        roomsFilter?.quotaFilter ||
+        (roomsFilter?.tags && roomsFilter?.tags.length > 0) ||
+        roomsFilter?.withoutTags
+      ),
     };
   },
 )(
