@@ -41,7 +41,7 @@ import {
 import {
 	TBreadCrumb,
 	TSelectorItem,
-} from "@docspace/shared/components/selector/Selector.types";
+} from "@docspace/ui-kit/components/selector";
 import { type TData } from "@docspace/ui-kit/components/toast";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";

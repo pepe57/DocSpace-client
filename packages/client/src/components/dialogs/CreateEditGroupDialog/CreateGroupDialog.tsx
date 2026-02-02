@@ -35,7 +35,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { createGroup } from "@docspace/shared/api/groups";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";
+import { TOnSubmit } from "@docspace/ui-kit/components/selector";
 
 import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
 import { GroupParams } from "./types";

@@ -33,7 +33,7 @@ import { mobile } from "@docspace/ui-kit/utils/device";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { ImageEditor } from "@docspace/shared/components/image-editor";
 
 import { loadAvatar } from "@docspace/shared/api/people";
@@ -58,8 +58,8 @@ const StyledModalDialog = styled(ModalDialog)`
     }
 
     ${(props) =>
-      props.scrollBodyHeight &&
-      css`
+			props.scrollBodyHeight &&
+			css`
         .modal-body {
           height: ${`${props.scrollBodyHeight}px`};
         }
@@ -99,179 +99,179 @@ const StyledBodyContent = styled.div`
 `;
 
 const AvatarEditorDialog = (props) => {
-  const { t } = useTranslation([
-    "Profile",
-    "PeopleTranslations",
-    "Common",
-    "CreateEditRoomDialog",
-    "Ldap",
-    "RoomLogoCover",
-  ]);
+	const { t } = useTranslation([
+		"Profile",
+		"PeopleTranslations",
+		"Common",
+		"CreateEditRoomDialog",
+		"Ldap",
+		"RoomLogoCover",
+	]);
 
-  const {
-    visible,
-    onClose,
-    onSave,
-    profile,
-    updateCreatedAvatar,
-    setHasAvatar,
-    maxImageUploadSize,
-    onChangeImage,
-    image,
-    onChangeFile,
-    isProfileUpload,
-    setPreview,
-    dataTestId,
-    isAIAgentsFolderRoot,
-  } = props;
+	const {
+		visible,
+		onClose,
+		onSave,
+		profile,
+		updateCreatedAvatar,
+		setHasAvatar,
+		maxImageUploadSize,
+		onChangeImage,
+		image,
+		onChangeFile,
+		isProfileUpload,
+		setPreview,
+		dataTestId,
+		isAIAgentsFolderRoot,
+	} = props;
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [preview, setPreviewState] = useState(null);
-  const [scrollBodyHeight, setScrollBodyHeight] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
+	const [preview, setPreviewState] = useState(null);
+	const [scrollBodyHeight, setScrollBodyHeight] = useState(null);
 
-  const editorBorderRadius = isProfileUpload ? 400 : 110;
+	const editorBorderRadius = isProfileUpload ? 400 : 110;
 
-  const avatarTitle = isProfileUpload
-    ? t("Ldap:LdapAvatar")
-    : isAIAgentsFolderRoot
-      ? t("RoomLogoCover:AgentCover")
-      : t("RoomLogoCover:RoomCover");
+	const avatarTitle = isProfileUpload
+		? t("Ldap:LdapAvatar")
+		: isAIAgentsFolderRoot
+			? t("RoomLogoCover:AgentCover")
+			: t("RoomLogoCover:RoomCover");
 
-  const onResize = () => {
-    const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;
-    const screenHeight = document.documentElement.clientHeight;
+	const onResize = () => {
+		const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;
+		const screenHeight = document.documentElement.clientHeight;
 
-    if (screenHeight < imageCropperModalHeight)
-      setScrollBodyHeight(screenHeight - HEADER - BUTTONS);
-    else setScrollBodyHeight(null);
-  };
+		if (screenHeight < imageCropperModalHeight)
+			setScrollBodyHeight(screenHeight - HEADER - BUTTONS);
+		else setScrollBodyHeight(null);
+	};
 
-  useEffect(() => {
-    onResize();
-    window.addEventListener("resize", onResize);
+	useEffect(() => {
+		onResize();
+		window.addEventListener("resize", onResize);
 
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
+		return () => {
+			window.removeEventListener("resize", onResize);
+		};
+	}, []);
 
-  const onCloseModal = () => {
-    onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });
-    setPreview && setPreview("");
-    onClose && onClose();
-  };
+	const onCloseModal = () => {
+		onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });
+		setPreview && setPreview("");
+		onClose && onClose();
+	};
 
-  const onSaveClick = async () => {
-    setIsLoading(true);
+	const onSaveClick = async () => {
+		setIsLoading(true);
 
-    const file = await dataUrlToFile(preview);
+		const file = await dataUrlToFile(preview);
 
-    const avatarData = new FormData();
-    avatarData.append("file", file);
-    avatarData.append("Autosave", true);
+		const avatarData = new FormData();
+		avatarData.append("file", file);
+		avatarData.append("Autosave", true);
 
-    try {
-      const res = await loadAvatar(profile.id, avatarData);
+		try {
+			const res = await loadAvatar(profile.id, avatarData);
 
-      if (res.success) {
-        res.data && updateCreatedAvatar(res.data);
-        setHasAvatar(true);
-        toastr.success(t("Common:ChangesSavedSuccessfully"));
-      } else {
-        throw new Error(t("Common:ErrorInternalServer"));
-      }
+			if (res.success) {
+				res.data && updateCreatedAvatar(res.data);
+				setHasAvatar(true);
+				toastr.success(t("Common:ChangesSavedSuccessfully"));
+			} else {
+				throw new Error(t("Common:ErrorInternalServer"));
+			}
 
-      onClose();
-    } catch (error) {
-      console.error(error);
-      toastr.error(error);
-    } finally {
-      onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });
-      setIsLoading(false);
-    }
-  };
+			onClose();
+		} catch (error) {
+			console.error(error);
+			toastr.error(error);
+		} finally {
+			onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });
+			setIsLoading(false);
+		}
+	};
 
-  const onSaveAction = async (img) => {
-    setIsLoading(true);
+	const onSaveAction = async (img) => {
+		setIsLoading(true);
 
-    await onSave(img);
+		await onSave(img);
 
-    setIsLoading(false);
-  };
+		setIsLoading(false);
+	};
 
-  return (
-    <StyledModalDialog
-      displayType="modal"
-      withBodyScroll
-      visible={visible}
-      onClose={onCloseModal}
-      withFooterBorder
-      withBodyScrollForcibly={!!scrollBodyHeight}
-      scrollBodyHeight={scrollBodyHeight}
-      dataTestId={dataTestId}
-    >
-      <ModalDialog.Header>
-        <Text fontSize="21px" fontWeight={700}>
-          {avatarTitle}
-        </Text>
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        <StyledBodyContent>
-          <ImageEditor
-            t={t}
-            className="wrapper-image-editor"
-            classNameWrapperImageCropper="avatar-editor"
-            image={image}
-            setPreview={setPreview || setPreviewState}
-            onChangeImage={onChangeImage}
-            onChangeFile={onChangeFile}
-            maxImageSize={maxImageUploadSize}
-            editorBorderRadius={editorBorderRadius}
-          />
-        </StyledBodyContent>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          className="save"
-          key="AvatarEditorSaveBtn"
-          label={t("Common:SaveButton")}
-          size="normal"
-          scale
-          primary
-          onClick={onSave ? () => onSaveAction(image) : onSaveClick}
-          isLoading={isLoading}
-          testId="avatar_editor_save_button"
-        />
-        <Button
-          className="cancel-button"
-          key="AvatarEditorCloseBtn"
-          label={t("Common:CancelButton")}
-          size="normal"
-          scale
-          onClick={onCloseModal}
-          testId="avatar_editor_cancel_button"
-        />
-      </ModalDialog.Footer>
-    </StyledModalDialog>
-  );
+	return (
+		<StyledModalDialog
+			displayType="modal"
+			withBodyScroll
+			visible={visible}
+			onClose={onCloseModal}
+			withFooterBorder
+			withBodyScrollForcibly={!!scrollBodyHeight}
+			scrollBodyHeight={scrollBodyHeight}
+			dataTestId={dataTestId}
+		>
+			<ModalDialog.Header>
+				<Text fontSize="21px" fontWeight={700}>
+					{avatarTitle}
+				</Text>
+			</ModalDialog.Header>
+			<ModalDialog.Body>
+				<StyledBodyContent>
+					<ImageEditor
+						t={t}
+						className="wrapper-image-editor"
+						classNameWrapperImageCropper="avatar-editor"
+						image={image}
+						setPreview={setPreview || setPreviewState}
+						onChangeImage={onChangeImage}
+						onChangeFile={onChangeFile}
+						maxImageSize={maxImageUploadSize}
+						editorBorderRadius={editorBorderRadius}
+					/>
+				</StyledBodyContent>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					className="save"
+					key="AvatarEditorSaveBtn"
+					label={t("Common:SaveButton")}
+					size="normal"
+					scale
+					primary
+					onClick={onSave ? () => onSaveAction(image) : onSaveClick}
+					isLoading={isLoading}
+					testId="avatar_editor_save_button"
+				/>
+				<Button
+					className="cancel-button"
+					key="AvatarEditorCloseBtn"
+					label={t("Common:CancelButton")}
+					size="normal"
+					scale
+					onClick={onCloseModal}
+					testId="avatar_editor_cancel_button"
+				/>
+			</ModalDialog.Footer>
+		</StyledModalDialog>
+	);
 };
 
 export default inject(
-  ({ peopleStore, settingsStore, userStore, treeFoldersStore }) => {
-    const { targetUserStore } = peopleStore;
-    const { maxImageUploadSize } = settingsStore;
+	({ peopleStore, settingsStore, userStore, treeFoldersStore }) => {
+		const { targetUserStore } = peopleStore;
+		const { maxImageUploadSize } = settingsStore;
 
-    const { user: profile } = userStore;
+		const { user: profile } = userStore;
 
-    const { updateCreatedAvatar, setHasAvatar } = targetUserStore;
-    const { isAIAgentsFolderRoot } = treeFoldersStore;
+		const { updateCreatedAvatar, setHasAvatar } = targetUserStore;
+		const { isAIAgentsFolderRoot } = treeFoldersStore;
 
-    return {
-      profile,
-      setHasAvatar,
-      updateCreatedAvatar,
-      maxImageUploadSize,
-      isAIAgentsFolderRoot,
-    };
-  },
+		return {
+			profile,
+			setHasAvatar,
+			updateCreatedAvatar,
+			maxImageUploadSize,
+			isAIAgentsFolderRoot,
+		};
+	},
 )(observer(AvatarEditorDialog));

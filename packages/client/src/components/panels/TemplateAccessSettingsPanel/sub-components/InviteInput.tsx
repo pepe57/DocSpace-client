@@ -37,7 +37,7 @@ import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { LinkType } from "@docspace/ui-kit/components/link";
-import { TSelectorItem } from "@docspace/shared/components/selector";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList } from "@docspace/shared/api/people";
 import { AccountsSearchArea, EmployeeType } from "@docspace/shared/enums";

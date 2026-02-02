@@ -47,7 +47,7 @@ import type { TData } from "@docspace/ui-kit/components/toast";
 import type {
 	TBreadCrumb,
 	TInfoBarData,
-} from "@docspace/shared/components/selector/Selector.types";
+} from "@docspace/ui-kit/components/selector";
 import type {
 	InjectShareCollectSelectorProps,
 	ShareCollectSelectorProps,

@@ -30,98 +30,98 @@ import { createFolder } from "../../../api/files";
 import { createRoom } from "../../../api/rooms";
 import { createAIAgent } from "../../../api/ai";
 import { RoomsType } from "../../../enums";
-import { TSelectorItem } from "../../../components/selector/Selector.types";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { TUseInputItemHelper } from "../types";
 
 const useInputItemHelper = ({
-  withCreate,
-  selectedItemId,
-  setItems,
+	withCreate,
+	selectedItemId,
+	setItems,
 }: TUseInputItemHelper) => {
-  const selectedItemIdRef = React.useRef(selectedItemId);
+	const selectedItemIdRef = React.useRef(selectedItemId);
 
-  React.useEffect(() => {
-    selectedItemIdRef.current = selectedItemId;
-  }, [selectedItemId]);
+	React.useEffect(() => {
+		selectedItemIdRef.current = selectedItemId;
+	}, [selectedItemId]);
 
-  const onCancelInput = React.useCallback(() => {
-    if (!withCreate) return;
+	const onCancelInput = React.useCallback(() => {
+		if (!withCreate) return;
 
-    setItems?.((value) => {
-      if (!value[1]?.isInputItem && !value[0]?.isInputItem) return value;
+		setItems?.((value) => {
+			if (!value[1]?.isInputItem && !value[0]?.isInputItem) return value;
 
-      let idx = 1;
+			let idx = 1;
 
-      if (value[0].isInputItem) idx = 0;
+			if (value[0].isInputItem) idx = 0;
 
-      const newValue = [...value];
+			const newValue = [...value];
 
-      newValue.splice(idx, 1);
+			newValue.splice(idx, 1);
 
-      return newValue;
-    });
-  }, [setItems, withCreate]);
+			return newValue;
+		});
+	}, [setItems, withCreate]);
 
-  const onAcceptInput = React.useCallback(
-    async (value: string, roomType?: RoomsType, isAgent?: boolean) => {
-      const currentSelectedItemId = selectedItemIdRef.current;
-      if (!withCreate || (!currentSelectedItemId && !roomType && !isAgent))
-        return;
+	const onAcceptInput = React.useCallback(
+		async (value: string, roomType?: RoomsType, isAgent?: boolean) => {
+			const currentSelectedItemId = selectedItemIdRef.current;
+			if (!withCreate || (!currentSelectedItemId && !roomType && !isAgent))
+				return;
 
-      try {
-        if (isAgent) await createAIAgent({ title: value });
-        else if (currentSelectedItemId)
-          await createFolder(currentSelectedItemId, value.trimEnd());
-        else if (roomType) {
-          await createRoom({ roomType, title: value });
-        }
-      } catch (e) {
-        console.log(e);
-        toastr.error(e as string);
-      }
-    },
-    [withCreate],
-  );
+			try {
+				if (isAgent) await createAIAgent({ title: value });
+				else if (currentSelectedItemId)
+					await createFolder(currentSelectedItemId, value.trimEnd());
+				else if (roomType) {
+					await createRoom({ roomType, title: value });
+				}
+			} catch (e) {
+				console.log(e);
+				toastr.error(e as string);
+			}
+		},
+		[withCreate],
+	);
 
-  const addInputItem = React.useCallback(
-    (
-      defaultInputValue: string,
-      icon: string,
-      roomType?: RoomsType,
-      placeholder?: string,
-      isAgent?: boolean,
-    ) => {
-      if (!withCreate || !setItems) return;
+	const addInputItem = React.useCallback(
+		(
+			defaultInputValue: string,
+			icon: string,
+			roomType?: RoomsType,
+			placeholder?: string,
+			isAgent?: boolean,
+		) => {
+			if (!withCreate || !setItems) return;
 
-      const inputItem: TSelectorItem = {
-        label: "",
-        id: "new-folder-input",
-        isInputItem: true,
-        onAcceptInput: (value: string) =>
-          onAcceptInput(value, roomType, isAgent),
-        onCancelInput,
-        defaultInputValue,
-        icon,
-        roomType,
-        placeholder,
-      };
+			const inputItem: TSelectorItem = {
+				label: "",
+				id: "new-folder-input",
+				isInputItem: true,
+				onAcceptInput: (value: string) =>
+					onAcceptInput(value, roomType, isAgent),
+				onCancelInput,
+				defaultInputValue,
+				icon,
+				roomType,
+				placeholder,
+			};
 
-      setItems((value) => {
-        if (value[1]?.isInputItem || value[0]?.isInputItem) return value;
+			setItems((value) => {
+				if (value[1]?.isInputItem || value[0]?.isInputItem) return value;
 
-        const newValue = [...value];
+				const newValue = [...value];
 
-        newValue.splice(1, 0, inputItem);
+				newValue.splice(1, 0, inputItem);
 
-        return newValue;
-      });
-    },
-    [onAcceptInput, onCancelInput, setItems, withCreate],
-  );
+				return newValue;
+			});
+		},
+		[onAcceptInput, onCancelInput, setItems, withCreate],
+	);
 
-  return { onAcceptInput, onCancelInput, addInputItem };
+	return { onAcceptInput, onCancelInput, addInputItem };
 };
 
 export default useInputItemHelper;

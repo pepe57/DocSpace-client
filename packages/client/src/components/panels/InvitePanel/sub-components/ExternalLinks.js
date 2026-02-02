@@ -34,7 +34,7 @@ import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";

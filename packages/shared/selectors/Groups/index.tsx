@@ -32,162 +32,162 @@ import EmptyScreenGroupSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.groups
 
 import api from "../../api";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
-import { Selector, TSelectorItem } from "../../components/selector";
+import { Selector, TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { GroupsSelectorProps } from "./GroupsSelector.types";
 
 const GroupsSelector = (props: GroupsSelectorProps) => {
-  const {
-    id,
-    className,
+	const {
+		id,
+		className,
 
-    headerProps,
+		headerProps,
 
-    onSubmit,
-  } = props;
+		onSubmit,
+	} = props;
 
-  const { t } = useTranslation(["Common"]);
-  const { isBase } = useTheme();
+	const { t } = useTranslation(["Common"]);
+	const { isBase } = useTheme();
 
-  const [searchValue, setSearchValue] = useState("");
-  const [hasNextPage, setHasNextPage] = useState(false);
-  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
-  const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
-  const [selectedItem, setSelectedItem] = useState<TSelectorItem | null>(null);
+	const [searchValue, setSearchValue] = useState("");
+	const [hasNextPage, setHasNextPage] = useState(false);
+	const [isNextPageLoading, setIsNextPageLoading] = useState(false);
+	const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
+	const [selectedItem, setSelectedItem] = useState<TSelectorItem | null>(null);
 
-  const isFirstLoad = useRef(true);
-  const afterSearch = useRef(false);
-  const totalRef = useRef(0);
+	const isFirstLoad = useRef(true);
+	const afterSearch = useRef(false);
+	const totalRef = useRef(0);
 
-  const emptyScreenImg = isBase
-    ? EmptyScreenGroupSvgUrl
-    : EmptyScreenGroupSvgDarkUrl;
+	const emptyScreenImg = isBase
+		? EmptyScreenGroupSvgUrl
+		: EmptyScreenGroupSvgDarkUrl;
 
-  const onSelect = (
-    item: TSelectorItem,
-    isDoubleClick: boolean,
-    doubleClickCallback: () => void,
-  ) => {
-    setSelectedItem((el) => {
-      if (el?.id === item.id) return null;
+	const onSelect = (
+		item: TSelectorItem,
+		isDoubleClick: boolean,
+		doubleClickCallback: () => void,
+	) => {
+		setSelectedItem((el) => {
+			if (el?.id === item.id) return null;
 
-      return item;
-    });
+			return item;
+		});
 
-    if (isDoubleClick) {
-      doubleClickCallback();
-    }
-  };
-  const onSearch = useCallback((value: string, callback?: () => void) => {
-    isFirstLoad.current = true;
-    afterSearch.current = true;
-    setSearchValue(() => {
-      return value;
-    });
-    callback?.();
-  }, []);
+		if (isDoubleClick) {
+			doubleClickCallback();
+		}
+	};
+	const onSearch = useCallback((value: string, callback?: () => void) => {
+		isFirstLoad.current = true;
+		afterSearch.current = true;
+		setSearchValue(() => {
+			return value;
+		});
+		callback?.();
+	}, []);
 
-  const onClearSearch = useCallback((callback?: () => void) => {
-    isFirstLoad.current = true;
-    afterSearch.current = true;
-    setSearchValue(() => {
-      return "";
-    });
-    callback?.();
-  }, []);
+	const onClearSearch = useCallback((callback?: () => void) => {
+		isFirstLoad.current = true;
+		afterSearch.current = true;
+		setSearchValue(() => {
+			return "";
+		});
+		callback?.();
+	}, []);
 
-  const onSubmitAction = useCallback(
-    (items: TSelectorItem[]) => {
-      onSubmit?.(items);
-    },
-    [onSubmit],
-  );
+	const onSubmitAction = useCallback(
+		(items: TSelectorItem[]) => {
+			onSubmit?.(items);
+		},
+		[onSubmit],
+	);
 
-  const onLoadNextPage = useCallback(
-    async (startIndex: number) => {
-      const pageCount = 100;
-      setIsNextPageLoading(true);
+	const onLoadNextPage = useCallback(
+		async (startIndex: number) => {
+			const pageCount = 100;
+			setIsNextPageLoading(true);
 
-      // Todo: fix types after TS API will be done
-      const { items, total } = await api.groups.getGroupsByName(
-        searchValue,
-        startIndex,
-        pageCount,
-      );
+			// Todo: fix types after TS API will be done
+			const { items, total } = await api.groups.getGroupsByName(
+				searchValue,
+				startIndex,
+				pageCount,
+			);
 
-      const convertedItems: TSelectorItem[] = items.map((group) => ({
-        id: group.id,
-        label: group.name,
-        name: group.name,
-        isGroup: true,
-      }));
+			const convertedItems: TSelectorItem[] = items.map((group) => ({
+				id: group.id,
+				label: group.name,
+				name: group.name,
+				isGroup: true,
+			}));
 
-      if (isFirstLoad.current) {
-        totalRef.current = total;
-        setItemsList([...convertedItems]);
-        setHasNextPage(convertedItems.length < total);
+			if (isFirstLoad.current) {
+				totalRef.current = total;
+				setItemsList([...convertedItems]);
+				setHasNextPage(convertedItems.length < total);
 
-        isFirstLoad.current = false;
-      } else {
-        setItemsList((value) => {
-          const arr = [...value, ...convertedItems];
-          setHasNextPage(arr.length < total);
-          return arr;
-        });
-        isFirstLoad.current = false;
-      }
+				isFirstLoad.current = false;
+			} else {
+				setItemsList((value) => {
+					const arr = [...value, ...convertedItems];
+					setHasNextPage(arr.length < total);
+					return arr;
+				});
+				isFirstLoad.current = false;
+			}
 
-      setIsNextPageLoading(false);
-    },
-    [searchValue],
-  );
+			setIsNextPageLoading(false);
+		},
+		[searchValue],
+	);
 
-  return (
-    <Selector
-      id={id}
-      className={className}
-      withHeader
-      headerProps={{
-        ...headerProps,
-        onCloseClick: () => {},
-        headerLabel: headerProps?.headerLabel || t("Common:Groups"),
-      }}
-      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
-      withSearch
-      searchPlaceholder={t("Common:Search")}
-      onSearch={onSearch}
-      searchValue={searchValue}
-      onClearSearch={onClearSearch}
-      isSearchLoading={false}
-      disableSubmitButton={!selectedItem}
-      isMultiSelect={false}
-      items={itemsList}
-      submitButtonLabel={t("Common:SelectAction")}
-      onSubmit={onSubmitAction}
-      emptyScreenImage={emptyScreenImg}
-      emptyScreenHeader={t("Common:NotFoundGroups")}
-      emptyScreenDescription={t("Common:GroupsNotFoundDescription")}
-      searchEmptyScreenImage={emptyScreenImg}
-      searchEmptyScreenHeader={t("Common:NotFoundGroups")}
-      searchEmptyScreenDescription={t("Common:GroupsNotFoundDescription")}
-      totalItems={totalRef.current}
-      hasNextPage={hasNextPage}
-      isNextPageLoading={isNextPageLoading}
-      loadNextPage={onLoadNextPage}
-      isLoading={isFirstLoad.current}
-      searchLoader={<SearchLoader />}
-      onSelect={onSelect}
-      rowLoader={
-        <RowLoader
-          isMultiSelect={false}
-          isContainer={isFirstLoad.current}
-          isUser={false}
-        />
-      }
-      dataTestId="groups_selector"
-    />
-  );
+	return (
+		<Selector
+			id={id}
+			className={className}
+			withHeader
+			headerProps={{
+				...headerProps,
+				onCloseClick: () => {},
+				headerLabel: headerProps?.headerLabel || t("Common:Groups"),
+			}}
+			alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
+			withSearch
+			searchPlaceholder={t("Common:Search")}
+			onSearch={onSearch}
+			searchValue={searchValue}
+			onClearSearch={onClearSearch}
+			isSearchLoading={false}
+			disableSubmitButton={!selectedItem}
+			isMultiSelect={false}
+			items={itemsList}
+			submitButtonLabel={t("Common:SelectAction")}
+			onSubmit={onSubmitAction}
+			emptyScreenImage={emptyScreenImg}
+			emptyScreenHeader={t("Common:NotFoundGroups")}
+			emptyScreenDescription={t("Common:GroupsNotFoundDescription")}
+			searchEmptyScreenImage={emptyScreenImg}
+			searchEmptyScreenHeader={t("Common:NotFoundGroups")}
+			searchEmptyScreenDescription={t("Common:GroupsNotFoundDescription")}
+			totalItems={totalRef.current}
+			hasNextPage={hasNextPage}
+			isNextPageLoading={isNextPageLoading}
+			loadNextPage={onLoadNextPage}
+			isLoading={isFirstLoad.current}
+			searchLoader={<SearchLoader />}
+			onSelect={onSelect}
+			rowLoader={
+				<RowLoader
+					isMultiSelect={false}
+					isContainer={isFirstLoad.current}
+					isUser={false}
+				/>
+			}
+			dataTestId="groups_selector"
+		/>
+	);
 };
 
 export default GroupsSelector;

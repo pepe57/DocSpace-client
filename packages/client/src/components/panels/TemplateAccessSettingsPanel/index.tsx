@@ -41,7 +41,7 @@ import {
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { TSelectorItem } from "@docspace/shared/components/selector";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import {
 	getRoomMembers,
 	getTemplateAvailable,

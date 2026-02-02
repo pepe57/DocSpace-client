@@ -37,8 +37,11 @@ import { FilterGroups, FilterSelectorTypes } from "../../../enums";
 import { FilterBlockLoader } from "../../../skeletons/filter";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { TSelectorItem } from "../../selector";
-import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import {
+	ModalDialog,
+	ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import styles from "../Filter.module.scss";
