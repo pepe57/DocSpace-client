@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -68,7 +68,7 @@ const PluginPage = ({
     addPlugin(formData, t);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setDocumentTitle(t("Common:Plugins"));
   }, [t]);
 

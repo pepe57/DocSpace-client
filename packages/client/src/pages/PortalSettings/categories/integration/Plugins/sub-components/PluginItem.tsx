@@ -40,6 +40,7 @@ import { getPluginUrl } from "SRC_DIR/helpers/plugins/utils";
 
 import styles from "../Plugins.module.scss";
 import { PluginItemProps } from "../Plugins.types";
+import classNames from "classnames";
 
 const PluginItem = ({
   name,
@@ -96,12 +97,11 @@ const PluginItem = ({
     />
   );
 
-  const pluginItemClass = description
-    ? styles.pluginItem
-    : `${styles.pluginItem} ${styles.noDescription}`;
 
   return (
-    <div className={pluginItemClass} data-testid={dataTestId}>
+    <div className={classNames(styles.pluginItem, {
+      [styles.noDescription]: !description,
+    })} data-testid={dataTestId}>
       <img
         className={styles.pluginLogo}
         src={imgSrc || PluginDefaultLogoUrl}
