@@ -282,6 +282,7 @@ const FilterInput = React.memo(
       [],
     );
     const [isRowReady, setIsRowReady] = React.useState(false);
+    const hasEverBeenReadyRef = React.useRef(false);
     const [activeGroupId, setActiveGroupId] = React.useState<string | null>(
       currentGroupId != null ? String(currentGroupId) : null,
     );
@@ -330,8 +331,12 @@ const FilterInput = React.memo(
       roomGroupsWithIcons.length === 0 && !hasGroupEverBeenCreated;
 
     React.useEffect(() => {
-      setVisibleGroupIds(roomGroupsWithIcons.map((g) => g.id));
-      setOverflowGroups([]);
+      // Only reset if this is the first time we're setting up groups
+      // After initial setup, just trigger recalculation without resetting state
+      if (!hasEverBeenReadyRef.current) {
+        setVisibleGroupIds(roomGroupsWithIcons.map((g) => g.id));
+        setOverflowGroups([]);
+      }
       setIsRowReady(false);
     }, [roomGroupsWithIcons]);
 
@@ -405,6 +410,7 @@ const FilterInput = React.memo(
         setVisibleGroupIds(roomGroupsWithIcons.map((g) => g.id));
         setOverflowGroups([]);
         setIsRowReady(true);
+        hasEverBeenReadyRef.current = true;
         return;
       }
 
@@ -468,6 +474,7 @@ const FilterInput = React.memo(
       setVisibleGroupIds(visible);
       setOverflowGroups(overflow);
       setIsRowReady(true);
+      hasEverBeenReadyRef.current = true;
     }, [roomGroupsWithIcons, areIconsReady, activeGroupId]);
 
     React.useLayoutEffect(() => {
@@ -657,7 +664,7 @@ const FilterInput = React.memo(
           organizeRoomsGrouping &&
           !isFilterOrSearchActive && (
             <div className={styles.rowGroupingRooms} ref={rowRef}>
-              {isRowReady && (
+              {(isRowReady || hasEverBeenReadyRef.current) && (
                 <div className="group-tags">
                   <SelectedItem
                     propKey="all-rooms"
@@ -786,7 +793,7 @@ const FilterInput = React.memo(
                 </div>
               </div>
 
-              {isRowReady && (
+              {(isRowReady || hasEverBeenReadyRef.current) && (
                 <TooltipContainer
                   as="div"
                   className={styles.groupManagementButton}
