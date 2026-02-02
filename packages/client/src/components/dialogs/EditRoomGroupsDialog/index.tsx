@@ -270,11 +270,7 @@ const EditRoomGroupsDialog = ({
             cancelButtonLabel={t("Common:CancelButton")}
             onCancel={onCloseGroupRoomList}
             forceIsMultiSelect
-            // withInit
-            // initItems={selectedGroup.rooms}
-            // initTotal={selectedGroup.rooms.length}
-            // initHasNextPage={false}
-            // disableFirstFetch
+            sortSelectedFirst
           />
         </Aside>
       </div>

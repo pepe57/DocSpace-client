@@ -76,4 +76,6 @@ export type RoomSelectorProps = TSelectorHeader &
     emptyScreenHeader?: string;
     emptyScreenDescription?: string;
     disableFirstFetch?: boolean;
+    /** When true, sorts items so that selectedItems appear at the beginning of the list */
+    sortSelectedFirst?: boolean;
   } & TInitValue;

@@ -103,6 +103,7 @@ const RoomSelectorComponent = ({
   initSearchValue,
   forceIsMultiSelect,
   disableFirstFetch,
+  sortSelectedFirst,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
   const { isBase } = useTheme();
@@ -128,6 +129,27 @@ const RoomSelectorComponent = ({
         )
       : [],
   );
+
+  // Sort items so that selectedItems appear first
+  const sortedItems = React.useMemo(() => {
+    if (!sortSelectedFirst || !selectedItems || selectedItems.length === 0) {
+      return items;
+    }
+
+    const selectedIds = new Set(selectedItems.map((item) => item.id));
+    const selected: TSelectorItem[] = [];
+    const others: TSelectorItem[] = [];
+
+    items.forEach((item) => {
+      if (selectedIds.has(item.id)) {
+        selected.push(item);
+      } else {
+        others.push(item);
+      }
+    });
+
+    return [...selected, ...others];
+  }, [items, selectedItems, sortSelectedFirst]);
 
   const isInitRef = React.useRef<boolean>(!withInit);
   const afterSearch = React.useRef(false);
@@ -250,7 +272,7 @@ const RoomSelectorComponent = ({
       {...withAside}
       withPadding={withPadding}
       onSelect={onSelect}
-      items={items}
+      items={sortedItems}
       selectedItems={selectedItems}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
@@ -277,7 +299,7 @@ const RoomSelectorComponent = ({
       loadNextPage={onLoadNextPage}
       isLoading={isFirstLoad}
       disableSubmitButton={!selectedItem}
-      alwaysShowFooter={items.length !== 0 || Boolean(searchValue)}
+      alwaysShowFooter={sortedItems.length !== 0 || Boolean(searchValue)}
       rowLoader={
         <RowLoader
           isMultiSelect={isMultiSelect}
