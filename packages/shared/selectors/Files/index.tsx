@@ -122,7 +122,6 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 		disableBySecurity,
 	} = props;
 
-	const { displayFileExtension } = React.use(SettingsContext);
 	const { t } = useTranslation(["Common"]);
 	const { isFirstLoad, setIsFirstLoad, showLoader } = use(LoadersContext);
 
