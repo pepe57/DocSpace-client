@@ -113,6 +113,7 @@ const SectionBodyContent = (props) => {
     deleteRoomGroup,
     getAllRoomGroups,
     isFilterOrSearchActive,
+    isRoomsFolder,
   } = props;
 
   useEffect(() => {
@@ -488,7 +489,7 @@ const SectionBodyContent = (props) => {
     !welcomeFormFillingTipsVisible &&
     !formFillingTipsVisible
   ) {
-    if (roomsFilterGroupId && !isFilterOrSearchActive) {
+    if (roomsFilterGroupId && !isFilterOrSearchActive && isRoomsFolder) {
       const onAddRoom = () => {
         setAddRoomToGroupDialogVisible?.(true, roomsFilterGroupId);
       };
@@ -581,6 +582,7 @@ export default inject(
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
       isArchiveFolderRoot: treeFoldersStore.isArchiveFolderRoot,
+      isRoomsFolder: treeFoldersStore.isRoomsFolder,
       moveDragItems: filesActionsStore.moveDragItems,
       changeIndex: filesActionsStore.changeIndex,
       viewAs,
