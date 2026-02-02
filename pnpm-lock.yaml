@@ -96,6 +96,9 @@ importers:
       hex-rgb:
         specifier: ^5.0.0
         version: 5.0.0
+      lib:
+        specifier: ^5.1.0
+        version: 5.1.0
       lodash:
         specifier: 4.17.23
         version: 4.17.23
@@ -7288,6 +7291,10 @@ packages:
   lefthook@2.0.14:
     resolution: {integrity: sha512-JpNpQLXwJJlWNZB/4gDD8UW1pVdABZ6bYRbCShjYHoPq70xbcuZKVIKj177IxJ4R5Nz6xD33BJVdUb1N1NdO7g==}
     hasBin: true
+
+  lib@5.1.0:
+    resolution: {integrity: sha512-RqaGSpLSf6vtSls86+kUqMuQkNiXLtUFbKrh/mKOuZmi3ENJOXHsScw8/grKOLzDgYTgOvpFPGgmNsEh5f2yuA==}
+    engines: {node: '>=4.0.0'}
 
   lie@3.3.0:
     resolution: {integrity: sha512-UaiMJzeWRlEujzAuw5LokY1L5ecNQYZKfmyZ9L7wDHb/p5etKaxXhohBcrw0EYby+G/NA52vRSN4N39dxHAIwQ==}
@@ -17158,6 +17165,8 @@ snapshots:
       lefthook-openbsd-x64: 2.0.14
       lefthook-windows-arm64: 2.0.14
       lefthook-windows-x64: 2.0.14
+
+  lib@5.1.0: {}
 
   lie@3.3.0:
     dependencies:
