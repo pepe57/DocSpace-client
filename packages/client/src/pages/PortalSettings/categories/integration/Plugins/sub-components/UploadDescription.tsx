@@ -1,6 +1,7 @@
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
-import { StyledUploadDescription } from "../Plugins.styled";
+import { InfoBar } from "@docspace/shared/components/info-bar";
+import styles from "../Plugins.module.scss";
 import { UploadDecsriptionProps } from "../Plugins.types";
 
 const UploadDescription = ({
@@ -9,13 +10,13 @@ const UploadDescription = ({
   t,
 }: UploadDecsriptionProps) => {
   return (
-    <StyledUploadDescription>
-      <Text className="upload-description-text">
+    <div className={styles.uploadDescription}>
+      <Text className={styles.uploadDescriptionText}>
         {t("UploadDescription", { productName: t("Common:ProductName") })}
       </Text>
       {pluginsSdkUrl ? (
         <Link
-          className="link-learn-more"
+          className={styles.linkLearnMore}
           color={currentColorScheme.main?.accent}
           isHovered
           target={LinkTarget.blank}
@@ -25,7 +26,13 @@ const UploadDescription = ({
           {t("Common:LearnMore")}
         </Link>
       ) : null}
-    </StyledUploadDescription>
+      <InfoBar
+        className={styles.infoBar}
+        title={t("PluginCacheWarningTitle")}
+        description={t("PluginCacheWarningDescription")}
+        dataTestId="plugin_cache_warning"
+      />
+    </div>
   );
 };
 
