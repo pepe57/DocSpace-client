@@ -43,7 +43,11 @@ import {
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import { CoverDialogProps } from "../RoomLogoCoverDialog.types";
-import type { IUpdateRoomGroup, ICover } from "../EditRoomGroupsDialog.types";
+import type {
+  IUpdateRoomGroup,
+  ICover,
+  ILogo,
+} from "../EditRoomGroupsDialog.types";
 import { SelectIcon } from "./SelectIcon";
 import {
   InputSize,
@@ -139,7 +143,9 @@ const GroupIconDialog = ({
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common", "RoomLogoCover", "GroupingRooms"]);
 
-  const [roomIcon, setRoomIcon] = React.useState<ICover | string | null>({
+  const [roomIcon, setRoomIcon] = React.useState<
+    ICover | ILogo | string | null
+  >({
     data: `<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-7a1 1 0 0 1-.832-.445L7.465 3H3zM.879 1.879A3 3 0 0 1 3 1h5a1 1 0 0 1 .832.445L10.535 4H17a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V4a3 3 0 0 1 .879-2.121z" fill="${currentColorScheme?.main?.accent}"/></svg>`,
     id: "folder",
   });
@@ -266,7 +272,7 @@ const GroupIconDialog = ({
             t={t}
             $currentColorScheme={currentColorScheme}
             coverId={coverId}
-            setIcon={(icon: ILogo | string | null) => setRoomIcon(icon)}
+            setIcon={(icon: ICover | string | null) => setRoomIcon(icon)}
             covers={covers}
           />
         </RoomLogoCoverContainer>
