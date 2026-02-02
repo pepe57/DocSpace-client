@@ -196,7 +196,6 @@ const ManualBackup = ({
     "",
   );
 
-  const [isCancelOperation, setIsCancelOperation] = useState(false);
   const isCheckedTemporaryStorage = storageType === TEMPORARY_STORAGE;
   const isCheckedDocuments = storageType === DOCUMENTS;
   const isCheckedThirdParty = storageType === THIRD_PARTY_RESOURCE;
@@ -227,7 +226,6 @@ const ManualBackup = ({
       );
 
       if (!options) return;
-
       const { error, success, warning } = options;
 
       if (error) {
@@ -264,7 +262,7 @@ const ManualBackup = ({
       JSON.stringify(TEMPORARY_STORAGE),
     );
 
-    setDownloadingProgress(0);
+    setDownloadingProgress(0)
     setIsBackupProgressVisible(true);
 
     try {
@@ -393,7 +391,6 @@ const ManualBackup = ({
 
   const onCancelOperation = async () => {
     await cancelBackup();
-    setIsCancelOperation(true);
   };
 
   if (isEmptyContentBeforeLoader && !isInitialLoading) return null;
