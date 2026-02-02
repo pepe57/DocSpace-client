@@ -207,6 +207,8 @@ const DefaultProviderComponent = ({
             displaySelectedOption
             dataTestId="default-provider-combobox"
             dropDownTestId="default-provider-dropdown"
+            directionY="both"
+            dropDownMaxHeight={300}
           />
         </FieldContainer>
         <FieldContainer
@@ -224,6 +226,8 @@ const DefaultProviderComponent = ({
             dataTestId="default-model-combobox"
             dropDownTestId="default-model-dropdown"
             isLoading={isDefaultProviderModelsLoading}
+            directionY="both"
+            dropDownMaxHeight={300}
           />
         </FieldContainer>
 
