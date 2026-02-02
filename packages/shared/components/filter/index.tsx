@@ -290,27 +290,6 @@ const FilterInput = React.memo(
     const [activeGroupId, setActiveGroupId] = React.useState<string | null>(
       currentGroupId != null ? String(currentGroupId) : null,
     );
-    const [hasGroupEverBeenCreated, setHasGroupEverBeenCreated] =
-      React.useState(() => {
-        try {
-          return localStorage.getItem("roomGroupEverCreated") === "true";
-        } catch {
-          return false;
-        }
-      });
-
-    // Track when the first group is created
-    React.useEffect(() => {
-      if (roomGroupsWithIcons.length > 0 && !hasGroupEverBeenCreated) {
-        setHasGroupEverBeenCreated(true);
-        try {
-          localStorage.setItem("roomGroupEverCreated", "true");
-        } catch {
-          // Ignore localStorage errors
-        }
-      }
-    }, [roomGroupsWithIcons.length, hasGroupEverBeenCreated]);
-
     // Sync activeGroupId with currentGroupId from URL (page load, browser navigation)
     React.useEffect(() => {
       // Ensure groupId is stored as string for consistent comparison with group.id
@@ -331,8 +310,8 @@ const FilterInput = React.memo(
       setEditRoomGroupsDialogVisible?.(true);
     }, [setEditRoomGroupsDialogVisible]);
 
-    const showCreateGroupButton =
-      roomGroupsWithIcons.length === 0 && !hasGroupEverBeenCreated;
+    // Show Create group button when no groups exist (grouping setting and rooms folder are checked in render)
+    const showCreateGroupButton = roomGroupsWithIcons.length === 0;
 
     React.useEffect(() => {
       // Only reset if this is the first time we're setting up groups
