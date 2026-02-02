@@ -70,6 +70,7 @@ export interface EditRoomGroupsDialogProps {
   setEditRoomGroupsDialogVisible: (
     visible: boolean,
     roomIds?: number[] | null,
+    openInCreateMode?: boolean,
   ) => void;
   arrRoomGroups: IRoomGroup[];
   roomGroups: IRoomGroup[];
@@ -81,6 +82,8 @@ export interface EditRoomGroupsDialogProps {
   deleteRoomGroup: (groupId: string) => Promise<void>;
   createGroupFromRoomIds?: number[] | null;
   currentFilterGroupId?: string | number | null;
+  /** When true, opens the dialog with room list panel visible for creating a new group */
+  openInCreateMode?: boolean;
 }
 
 export interface IRoomItem {

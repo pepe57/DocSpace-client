@@ -307,7 +307,7 @@ const FilterInput = React.memo(
     }, [isFilterOrSearchActive]);
 
     const handleCreateGroupClick = React.useCallback(() => {
-      setEditRoomGroupsDialogVisible?.(true);
+      setEditRoomGroupsDialogVisible?.(true, null, true);
     }, [setEditRoomGroupsDialogVisible]);
 
     // Show Create group button when no groups exist (grouping setting and rooms folder are checked in render)

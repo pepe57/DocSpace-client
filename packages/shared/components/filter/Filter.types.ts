@@ -253,7 +253,11 @@ export type FilterProps = SearchInputProps &
 
     currentDeviceType: DeviceType;
     initSelectedFilterData?: TItem[];
-    setEditRoomGroupsDialogVisible?: (visible: boolean) => void;
+    setEditRoomGroupsDialogVisible?: (
+      visible: boolean,
+      roomIds?: number[] | null,
+      openInCreateMode?: boolean,
+    ) => void;
     getAllRoomGroups?: () => Promise<TRoomGroup[]>;
     roomGroups?: TRoomGroup[];
     onFilterByGroup?: (groupId: string | null) => void;

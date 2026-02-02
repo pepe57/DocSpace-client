@@ -345,6 +345,8 @@ class DialogsStore {
 
   createGroupFromRoomIds = null;
 
+  openInCreateMode = false;
+
   roomGroupingDialogVisible = false;
 
   addRoomToGroupDialogVisible = false;
@@ -1127,9 +1129,14 @@ class DialogsStore {
     this.disconnectAccountDialogVisible = visible;
   };
 
-  setEditRoomGroupsDialogVisible = (visible, roomIds = null) => {
+  setEditRoomGroupsDialogVisible = (
+    visible,
+    roomIds = null,
+    openInCreateMode = false,
+  ) => {
     this.editRoomGroupsDialogVisible = visible;
     this.createGroupFromRoomIds = roomIds;
+    this.openInCreateMode = openInCreateMode;
   };
 
   setRoomGroupingDialogVisible = (visible) => {

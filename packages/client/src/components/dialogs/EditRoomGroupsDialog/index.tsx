@@ -66,10 +66,13 @@ const EditRoomGroupsDialog = ({
   deleteRoomGroup,
   createGroupFromRoomIds,
   currentFilterGroupId,
+  openInCreateMode,
 }: EditRoomGroupsDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
 
-  const [isOpenRoomList, setIsOpenRoomList] = useState(false);
+  const [isOpenRoomList, setIsOpenRoomList] = useState(
+    () => !!openInCreateMode,
+  );
   const [isOpenGroupIcon, setIsOpenGroupIcon] = useState(
     () => !!createGroupFromRoomIds && createGroupFromRoomIds.length > 0,
   );
@@ -410,6 +413,7 @@ export default inject(({ dialogsStore, filesStore }: TStore) => {
     updateRoomGroup,
     deleteRoomGroup,
     createGroupFromRoomIds,
+    openInCreateMode,
   } = dialogsStore;
 
   const { roomsFilter } = filesStore;
@@ -424,5 +428,6 @@ export default inject(({ dialogsStore, filesStore }: TStore) => {
     deleteRoomGroup,
     createGroupFromRoomIds,
     currentFilterGroupId: roomsFilter?.groupId,
+    openInCreateMode,
   };
 })(observer(EditRoomGroupsDialog));
