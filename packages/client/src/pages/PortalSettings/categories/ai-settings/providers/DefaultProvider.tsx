@@ -126,7 +126,7 @@ const DefaultProviderComponent = ({
       defaultModel: selectedModel.key as string,
     };
 
-    await changeDefaultProvider?.(data);
+    await changeDefaultProvider?.(data, t);
 
     setIsSaveRequestRunning(false);
   };

@@ -65,6 +65,7 @@ import {
   KnowledgeType,
 } from "@docspace/shared/api/ai/enums";
 import { toastr } from "@docspace/shared/components/toast";
+import { TTranslation } from "@docspace/shared/types";
 
 class AISettingsStore {
   isInit = false;
@@ -389,12 +390,12 @@ class AISettingsStore {
     }
   };
 
-  changeDefaultProvider = async (data: {
+  changeDefaultProvider = async (providerData: {
     providerId: number;
     defaultModel: string;
-  }) => {
+  }, t: TTranslation) => {
     try {
-      const newDefaultProvider = await updateDefaultProvider(data);
+      const newDefaultProvider = await updateDefaultProvider(providerData);
 
       this.aiProviders.forEach((p) => {
         if (p.isDefault) {
@@ -407,7 +408,9 @@ class AISettingsStore {
       });
 
       this.setDefaultProvider(newDefaultProvider);
+      toastr.success(t("AISettings:DefaultProviderSetSuccess"));
     } catch (e) {
+      toastr.error(e as string)
       console.error(e);
     }
   };

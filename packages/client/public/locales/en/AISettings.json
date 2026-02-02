@@ -9,6 +9,7 @@
   "ChangeDefaultProviderDescription": "This {{aiProvider}} is currently set as the default and cannot be removed.\n Please select another provider as the default before deleting this one.",
   "DefaultProviderTitle": "Default provider",
   "DefaultProviderDescription": "Select the default {{aiProvider}} and model for all features across {{productName}} ({{aiAgents}}, document editors, etc.)",
+  "DefaultProviderSetSuccess": "Default provider successfully set",
   "DeleteImage": "Delete image",
   "DeleteProvider": "Delete {{aiProvider}}",
   "DeleteProviderDescription": "Deleting this provider will revoke access for all users, and its settings will be permanently erased.\n To use the provider again, you will need to set it up from scratch.",
