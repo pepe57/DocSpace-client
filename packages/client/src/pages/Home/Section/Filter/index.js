@@ -1833,6 +1833,9 @@ const SectionFilterContent = ({
       getAllRoomGroups={getAllRoomGroups}
       roomGroups={roomGroups}
       onFilterByGroup={onFilterByGroup}
+      currentGroupId={(() => {
+        return roomsFilter?.groupId;
+      })()}
       isRoomsFolder={isRoomsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}
       isFilterOrSearchActive={isFilterOrSearchActive}

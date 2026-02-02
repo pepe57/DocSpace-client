@@ -257,6 +257,8 @@ export type FilterProps = SearchInputProps &
     getAllRoomGroups?: () => Promise<TRoomGroup[]>;
     roomGroups?: TRoomGroup[];
     onFilterByGroup?: (groupId: string | null) => void;
+    /** Current group ID from URL filter - used to highlight the correct group tag on page load */
+    currentGroupId?: string | null;
     isRoomsFolder?: boolean;
     organizeRoomsGrouping?: boolean;
     /** When true, hides the room grouping row because filters/search are active */

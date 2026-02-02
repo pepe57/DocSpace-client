@@ -124,6 +124,7 @@ const FilterInput = React.memo(
     getAllRoomGroups,
     roomGroups,
     onFilterByGroup,
+    currentGroupId,
     isRoomsFolder,
     organizeRoomsGrouping,
     isFilterOrSearchActive,
@@ -282,7 +283,7 @@ const FilterInput = React.memo(
     );
     const [isRowReady, setIsRowReady] = React.useState(false);
     const [activeGroupId, setActiveGroupId] = React.useState<string | null>(
-      null,
+      currentGroupId != null ? String(currentGroupId) : null,
     );
     const [hasGroupEverBeenCreated, setHasGroupEverBeenCreated] =
       React.useState(() => {
@@ -304,6 +305,14 @@ const FilterInput = React.memo(
         }
       }
     }, [roomGroupsWithIcons.length, hasGroupEverBeenCreated]);
+
+    // Sync activeGroupId with currentGroupId from URL (page load, browser navigation)
+    React.useEffect(() => {
+      // Ensure groupId is stored as string for consistent comparison with group.id
+      const normalizedGroupId =
+        currentGroupId != null ? String(currentGroupId) : null;
+      setActiveGroupId(normalizedGroupId);
+    }, [currentGroupId]);
 
     // Clear selected group when filters/search become active
     React.useEffect(() => {
@@ -685,7 +694,7 @@ const FilterInput = React.memo(
                         onClose={() => {}}
                         hideCross
                         clickable
-                        isActive={activeGroupId === group.id}
+                        isActive={String(activeGroupId) === String(group.id)}
                       />
                     );
                   })}
