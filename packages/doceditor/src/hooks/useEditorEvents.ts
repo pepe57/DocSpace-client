@@ -256,61 +256,61 @@ const useEditorEvents = ({
     const connector = docEditor?.createConnector?.();
 
     if (connector) {
-      try {
-        const providers = await getProviders();
-        const openAIProvider = providers.find(
-          (provider: TAiProvider) =>
-            provider.type === ProviderType.OpenAi && !provider.needReset,
-        );
+      const providers = await getProviders();
+      const openAIProvider = providers.find(
+        (provider: TAiProvider) =>
+          (provider.type === ProviderType.PortalAi ||
+            provider.type === ProviderType.OpenAi ||
+            provider.type === ProviderType.OpenRouter ||
+            provider.type === ProviderType.OpenAiCompatible) &&
+          !provider.needReset,
+      );
 
-        if (openAIProvider) {
-          const models = await getModels(openAIProvider.id);
-          const providerName = t("Common:ProductName");
-          const defaultModel = models[0]?.modelId || "gpt-5.2";
-          const modelName = `${providerName} [${defaultModel}]`;
+      if (openAIProvider) {
+        const models = await getModels(openAIProvider.id);
+        const providerName = t("Common:ProductName");
+        const defaultModel = models[0]?.modelId || "gpt-5.2";
+        const modelName = `${providerName} [${defaultModel}]`;
 
-          const sendProviders = () => {
-            connector.sendEvent("ai_onCustomProviders", [
-              { name: providerName },
-            ]);
+        console.log("AI Provider found:", {
+          providerName,
+          defaultModel,
+          modelName,
+        });
 
-            connector.sendEvent("ai_onCustomInit", {
-              settingsLock: undefined,
-              actionsOverride: true,
-              actions: {
-                Chat: { model: defaultModel },
-                Summarization: { model: defaultModel },
-                Translation: { model: defaultModel },
-                TextAnalyze: { model: defaultModel },
+        const sendProviders = () => {
+          connector.sendEvent("ai_onCustomProviders", [{ name: providerName }]);
+
+          connector.sendEvent("ai_onCustomInit", {
+            settingsLock: undefined,
+            actionsOverride: true,
+            actions: {
+              Chat: { model: defaultModel },
+              Summarization: { model: defaultModel },
+              Translation: { model: defaultModel },
+              TextAnalyze: { model: defaultModel },
+            },
+            models: [
+              {
+                capabilities: 255,
+                provider: providerName,
+                name: modelName,
+                id: defaultModel,
               },
-              models: [
-                {
-                  capabilities: 255,
-                  provider: providerName,
-                  name: modelName,
-                  id: defaultModel,
-                },
-              ],
-            });
-          };
-
-          connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
-            if (
-              data &&
-              typeof data === "object" &&
-              "error" in data &&
-              data.error
-            )
-              connector.attachEvent("ai_onInit", sendProviders);
-            else sendProviders();
+            ],
           });
+        };
 
-          connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
-            externalAIFetch(connector, e as TEditorAIEvent, openAIProvider.id),
-          );
-        }
-      } catch (error) {
-        console.error("Failed to initialize AI provider:", error);
+        connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
+          console.log("AI Actions data:", data);
+          if (data && typeof data === "object" && "error" in data && data.error)
+            connector.attachEvent("ai_onInit", sendProviders);
+          else sendProviders();
+        });
+
+        connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
+          externalAIFetch(connector, e as TEditorAIEvent, openAIProvider.id),
+        );
       }
     }
 
