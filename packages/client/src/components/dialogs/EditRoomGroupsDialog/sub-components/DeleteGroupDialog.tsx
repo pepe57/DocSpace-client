@@ -39,6 +39,7 @@ interface DeleteGroupDialogProps {
   onClose: () => void;
   deleteRoomGroup: (groupId: string) => Promise<void>;
   getAllRoomGroups: () => Promise<void>;
+  currentFilterGroupId?: string | number | null;
 }
 
 const DeleteGroupDialog = ({
@@ -47,6 +48,7 @@ const DeleteGroupDialog = ({
   onClose,
   deleteRoomGroup,
   getAllRoomGroups,
+  currentFilterGroupId,
 }: DeleteGroupDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -59,6 +61,14 @@ const DeleteGroupDialog = ({
       await deleteRoomGroup(groupId);
       toastr.success(t("GroupingRooms:GroupHasBeenDeleted"));
       await getAllRoomGroups();
+
+      // If the deleted group was the currently selected filter, navigate to All rooms
+      if (
+        currentFilterGroupId != null &&
+        String(currentFilterGroupId) === String(groupId)
+      ) {
+        window.DocSpace.navigate("/rooms/shared/filter");
+      }
     } catch (error) {
       console.error("Error deleting group:", error);
     } finally {

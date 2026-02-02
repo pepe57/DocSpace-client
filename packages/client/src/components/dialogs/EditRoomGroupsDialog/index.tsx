@@ -65,6 +65,7 @@ const EditRoomGroupsDialog = ({
   updateRoomGroup,
   deleteRoomGroup,
   createGroupFromRoomIds,
+  currentFilterGroupId,
 }: EditRoomGroupsDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
 
@@ -202,6 +203,7 @@ const EditRoomGroupsDialog = ({
         onClose={onCloseDeleteConfirm}
         deleteRoomGroup={deleteRoomGroup}
         getAllRoomGroups={getAllRoomGroups}
+        currentFilterGroupId={currentFilterGroupId}
       />
     );
   }
@@ -398,7 +400,7 @@ const EditRoomGroupsDialog = ({
   );
 };
 
-export default inject(({ dialogsStore }: TStore) => {
+export default inject(({ dialogsStore, filesStore }: TStore) => {
   const {
     setCreateGroupRooms,
     getAllRoomGroups,
@@ -410,6 +412,8 @@ export default inject(({ dialogsStore }: TStore) => {
     createGroupFromRoomIds,
   } = dialogsStore;
 
+  const { roomsFilter } = filesStore;
+
   return {
     setCreateGroupRooms,
     getAllRoomGroups,
@@ -419,5 +423,6 @@ export default inject(({ dialogsStore }: TStore) => {
     updateRoomGroup,
     deleteRoomGroup,
     createGroupFromRoomIds,
+    currentFilterGroupId: roomsFilter?.groupId,
   };
 })(observer(EditRoomGroupsDialog));

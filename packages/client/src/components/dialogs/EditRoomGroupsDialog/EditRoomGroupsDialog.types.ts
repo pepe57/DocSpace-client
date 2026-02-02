@@ -80,6 +80,7 @@ export interface EditRoomGroupsDialogProps {
   updateRoomGroup: (groupId: string, data: IUpdateRoomGroup) => Promise<void>;
   deleteRoomGroup: (groupId: string) => Promise<void>;
   createGroupFromRoomIds?: number[] | null;
+  currentFilterGroupId?: string | number | null;
 }
 
 export interface IRoomItem {
