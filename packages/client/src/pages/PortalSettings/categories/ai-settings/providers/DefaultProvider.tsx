@@ -41,6 +41,7 @@ import {
   TModel,
 } from "@docspace/shared/api/ai/types";
 import { getAiModelName } from "@docspace/shared/utils/ai";
+import { TTranslation } from "@docspace/shared/types";
 
 import styles from "../AISettings.module.scss";
 import { inject, observer } from "mobx-react";
@@ -60,7 +61,7 @@ const getSelectedProvider = (
   aiProviders?: TAiProvider[],
   defaultProvider?: TDefaultProvider | null,
 ): TOption => {
-  if (!aiProviders || !defaultProvider) return { key: "", label: "" };
+  if (!aiProviders || !defaultProvider) return { key: "-1", label: "" };
 
   const provider =
     aiProviders.find((p) => p.id === defaultProvider.providerId) ||
@@ -69,10 +70,11 @@ const getSelectedProvider = (
 };
 
 const getSelectedModel = (
+  t: TTranslation,
   models?: TModel[] | null,
   defaultProvider?: TDefaultProvider | null,
 ): TOption => {
-  if (!models || !defaultProvider) return { key: "", label: "" };
+  if (!models || !defaultProvider) return { key: "-1", label: t("Common:NoModelsFound") };
 
   const model =
     models.find((m) => m.modelId === defaultProvider.defaultModel) || models[0];
@@ -93,7 +95,7 @@ const DefaultProviderComponent = ({
     getSelectedProvider(aiProviders, defaultProvider),
   );
   const [selectedModel, setSelectedModel] = useState<TOption | null>(() =>
-    getSelectedModel(defaultProviderModels, defaultProvider),
+    getSelectedModel(t, defaultProviderModels, defaultProvider),
   );
   const [isSaveRequestRunning, setIsSaveRequestRunning] = useState(false);
 
@@ -155,7 +157,7 @@ const DefaultProviderComponent = ({
     setSelectedProvider(option);
 
     const models = await fetchDefaultProviderModels?.(option.key as number);
-    setSelectedModel(getSelectedModel(models, defaultProvider));
+    setSelectedModel(getSelectedModel(t, models, defaultProvider));
   };
 
   const onSelectModel = (option: TOption) => {
@@ -165,9 +167,9 @@ const DefaultProviderComponent = ({
   };
 
   const isSaveDisabled =
-    (!isProviderChanged && !isModelChanged) || isDefaultProviderModelsLoading;
+    (!isProviderChanged && !isModelChanged) || isDefaultProviderModelsLoading || !defaultProviderModels;
   const isCancelDisabled =
-    (!isProviderChanged && !isModelChanged) || isDefaultProviderModelsLoading;
+    (!isProviderChanged && !isModelChanged) || isDefaultProviderModelsLoading || !defaultProviderModels;
 
   if (!selectedProvider || !selectedModel) {
     return null;
@@ -226,6 +228,7 @@ const DefaultProviderComponent = ({
             dataTestId="default-model-combobox"
             dropDownTestId="default-model-dropdown"
             isLoading={isDefaultProviderModelsLoading}
+            isDisabled={!defaultProviderModels}
             directionY="both"
             dropDownMaxHeight={300}
           />

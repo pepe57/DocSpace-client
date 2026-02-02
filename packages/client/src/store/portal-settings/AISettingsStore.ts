@@ -367,7 +367,9 @@ class AISettingsStore {
       models = await getModels(providerId);
       this.setDefaultProviderModels(models);
     } catch (e) {
+      toastr.error(e as string);
       console.error(e);
+      this.setDefaultProviderModels(null);
     } finally {
       this.setIsDefaultProviderModelsLoading(false);
     }
@@ -441,7 +443,6 @@ class AISettingsStore {
     return (
       this.aiProviders.length > 0 &&
       this.defaultProvider &&
-      this.defaultProviderModels &&
       this.defaultProviderInitied
     );
   }
