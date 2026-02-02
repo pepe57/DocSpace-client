@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Link } from "react-router";
-import { ArticleItem as ArticleItemComponent } from "./index";
-import { ArticleItemProps } from "./ArticleItem.types";
+import { ArticleItem as ArticleItemComponent } from "@docspace/ui-kit/components/article/item";
+import { ArticleItemProps } from "@docspace/ui-kit/components/article/item/ArticleItem.types";
 
 export const ArticleItem = (props: ArticleItemProps) => {
   const { linkData, isDisabled } = props;
