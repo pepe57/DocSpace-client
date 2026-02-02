@@ -264,7 +264,7 @@ const ManualBackup = ({
       JSON.stringify(TEMPORARY_STORAGE),
     );
 
-    setDownloadingProgress(1);
+    setDownloadingProgress(0);
     setIsBackupProgressVisible(true);
 
     try {
@@ -342,7 +342,7 @@ const ManualBackup = ({
       selectedStorageTitle,
     );
 
-    setDownloadingProgress(1);
+    setDownloadingProgress(0);
     setIsBackupProgressVisible(true);
 
     try {
@@ -654,8 +654,8 @@ const ManualBackup = ({
 
       {isBackupProgressVisible ? (
         <OperationsProgressButton
-          operationsAlert={!isCancelOperation && Boolean(backupProgressError)}
-          operationsCompleted={isCancelOperation || downloadingProgress === 100}
+          operationsAlert={Boolean(backupProgressError)}
+          operationsCompleted={downloadingProgress === 100}
           operations={[
             {
               label:
