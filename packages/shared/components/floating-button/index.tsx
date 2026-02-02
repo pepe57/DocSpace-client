@@ -101,7 +101,7 @@ const FloatingButton = forwardRef<HTMLDivElement, FloatingButtonProps>(
   ) => {
     const iconComponent = useMemo(() => {
       if (iconUrl) {
-        return <img src={iconUrl} alt="icon"/>;
+        return <img src={iconUrl} width={20} alt="icon"/>;
       }
       return (
         ICON_COMPONENTS[icon] ?? ICON_COMPONENTS[FloatingButtonIcons.other]

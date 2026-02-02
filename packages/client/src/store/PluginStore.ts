@@ -129,10 +129,10 @@ class PluginStore {
 
   pluginSelectorVisible = false;
 
-  pluginFloatingOperationsButtonVisible = false;
-
-  pluginFloatingOperationsButtonProps: null | IFloatingOperationsButtonClient =
-    null;
+  pluginFloatingOperationsButtons: Map<
+    string,
+    IFloatingOperationsButtonClient
+  > = new Map();
 
   pluginDialogProps: null | ModalDialogProps = null;
 
@@ -185,10 +185,9 @@ class PluginStore {
       updatePlugin: this.updatePlugin,
       setPluginSelectorVisible: this.setPluginSelectorVisible,
       setPluginSelectorProps: this.setPluginSelectorProps,
-      setPluginFloatingOperationsButtonProps:
-        this.setPluginFloatingOperationsButtonProps,
-      setPluginFloatingOperationsButtonVisible:
-        this.setPluginFloatingOperationsButtonVisible,
+      addPluginFloatingOperations: this.addPluginFloatingOperations,
+      removePluginFloatingOperations: this.removePluginFloatingOperations,
+      updatePluginFloatingOperations: this.updatePluginFloatingOperations,
     });
   };
 
@@ -234,23 +233,23 @@ class PluginStore {
     this.deletePluginDialogProps = value;
   };
 
-  setPluginFloatingOperationsButtonVisible = (value: boolean) => {
-    this.pluginFloatingOperationsButtonVisible = value;
+  addPluginFloatingOperations = (value: IFloatingOperationsButtonClient) => {
+    if (this.pluginFloatingOperationsButtons.has(value.id)) return;
+    this.pluginFloatingOperationsButtons.set(value.id, value);
   };
 
-  setPluginFloatingOperationsButtonProps = (
-    value: null | IFloatingOperationsButtonClient,
-  ) => {
-    if (value === null) {
-      this.pluginFloatingOperationsButtonProps = null;
-      return;
-    }
-
-    this.pluginFloatingOperationsButtonProps = {
-      ...(this.pluginFloatingOperationsButtonProps || {}),
-      ...value,
-    };
+  updatePluginFloatingOperations = (value: IFloatingOperationsButtonClient) => {
+    if (!this.pluginFloatingOperationsButtons.has(value.id)) return;
+    this.pluginFloatingOperationsButtons.set(value.id, value);
   };
+
+  removePluginFloatingOperations = (id: string) => {
+    this.pluginFloatingOperationsButtons.delete(id);
+  };
+
+  get pluginFloatingOperationsArray(): IFloatingOperationsButtonClient[] {
+    return Array.from(this.pluginFloatingOperationsButtons.values());
+  }
 
   updatePluginStatus = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);

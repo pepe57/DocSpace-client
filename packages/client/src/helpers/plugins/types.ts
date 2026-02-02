@@ -92,7 +92,6 @@ export type {
 export interface IFloatingOperationsButtonClient
   extends IFloatingOperationsButton {
   pluginName: string;
-  id: string;
 }
 
 export interface IContextMenuItemClient extends IContextMenuItem {

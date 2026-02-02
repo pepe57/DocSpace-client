@@ -43,7 +43,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
-import PluginFloatingOperationsButton from "SRC_DIR/components/PluginFloatingOperationsButton";
 
 import {
   SectionFilterContent,
@@ -64,7 +63,7 @@ import {
 
 import MediaViewer from "./MediaViewer";
 
-import { useSDK, useOperations } from "./Hooks";
+import { useSDK, useOperations, usePluginOperations } from "./Hooks";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 const PureHome = (props) => {
@@ -168,6 +167,11 @@ const PureHome = (props) => {
     aiConfig,
     currentTab,
     setIsAboutDialogVisible,
+
+    pluginFloatingOperationsArray,
+    removePluginFloatingOperations,
+    dispatchMessage,
+    getPluginIconUrl,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
@@ -229,6 +233,20 @@ const PureHome = (props) => {
     clearConversionData,
   });
 
+  const {
+    pluginOperations,
+    pluginOperationsCompleted,
+    pluginOperationsAlert,
+    pluginShowCancelButton,
+    handlePluginCancelOperation,
+    handlePluginClearOperation,
+  } = usePluginOperations({
+    pluginFloatingOperationsArray,
+    dispatchMessage,
+    getPluginIconUrl,
+    removePluginFloatingOperations,
+  });
+
   useSDK({
     frameConfig,
     setFrameConfig,
@@ -263,13 +281,47 @@ const PureHome = (props) => {
   }, [isFrame, isProfile, isContactsPage, getContactsModel, getFolderModel]);
 
   const onCancelUpload = useCallback(() => {
+    if (pluginShowCancelButton) {
+      handlePluginCancelOperation();
+      return;
+    }
+
     if (hideConfirmCancelOperation) {
       cancelUpload(t);
       return;
     }
 
     setOperationCancelVisible(true);
-  }, [hideConfirmCancelOperation, cancelUpload, setOperationCancelVisible]);
+  }, [
+    hideConfirmCancelOperation,
+    cancelUpload,
+    setOperationCancelVisible,
+    handlePluginCancelOperation,
+    pluginOperations,
+    pluginShowCancelButton,
+  ]);
+
+  const onClearSecondaryProgressData = useCallback(
+    (operationId, operation, operationItem) => {
+      // When button is hidden, clear progress data
+      if (!operationItem && !operationId && !operation) {
+        clearSecondaryProgressData?.();
+        handlePluginClearOperation();
+        return;
+      }
+
+      const isPluginOperation = pluginOperations.find(
+        (item) => item.id === operationItem?.id,
+      );
+
+      if (isPluginOperation) {
+        handlePluginClearOperation(operationItem.id);
+      } else {
+        clearSecondaryProgressData?.(operationId, operation);
+      }
+    },
+    [clearSecondaryProgressData, handlePluginClearOperation],
+  );
 
   React.useEffect(() => {
     window.addEventListener("popstate", onClickBack);
@@ -358,7 +410,7 @@ const PureHome = (props) => {
   sectionProps.secondaryActiveOperations = secondaryActiveOperations;
   sectionProps.secondaryOperationsCompleted = secondaryOperationsCompleted;
   sectionProps.dropTargetPreview = dropTargetPreview;
-  sectionProps.clearSecondaryProgressData = clearSecondaryProgressData;
+  sectionProps.clearSecondaryProgressData = onClearSecondaryProgressData;
   sectionProps.primaryOperationsArray = primaryOperationsArray;
   sectionProps.clearPrimaryProgressData = clearPrimaryProgressData;
   sectionProps.clearDropPreviewLocation = clearDropPreviewLocation;
@@ -373,6 +425,12 @@ const PureHome = (props) => {
   sectionProps.onDragLeaveEmpty = onDragLeaveEmpty;
   sectionProps.dragging = dragging;
   sectionProps.startDropPreview = startDropPreview;
+
+  // Plugin operations
+  sectionProps.pluginOperations = pluginOperations;
+  sectionProps.pluginOperationsCompleted = pluginOperationsCompleted;
+  sectionProps.pluginOperationsAlert = pluginOperationsAlert;
+  sectionProps.pluginShowCancelButton = pluginShowCancelButton;
 
   const hasVisibleContent =
     !isEmptyPage ||
@@ -454,7 +512,6 @@ const PureHome = (props) => {
         </Section.InfoPanelBody>
       </SectionWrapper>
       <InfoPanelActions />
-      <PluginFloatingOperationsButton />
     </>
   );
 };
@@ -480,6 +537,7 @@ export const Component = inject(
     filesSettingsStore,
     aiRoomStore,
     profileActionsStore,
+    pluginStore,
   }) => {
     const {
       setSelectedFolder,
@@ -622,6 +680,13 @@ export const Component = inject(
 
     const { isRoomAdmin, isAdmin } = authStore;
 
+    const {
+      pluginFloatingOperationsArray,
+      dispatchMessage,
+      getPluginIconUrl,
+      removePluginFloatingOperations,
+    } = pluginStore;
+
     const withRoomsTabs =
       (isRoomsFolderRoot || isTemplatesFolder) && (isRoomAdmin || isAdmin);
 
@@ -761,6 +826,11 @@ export const Component = inject(
       aiConfig: settingsStore.aiConfig,
 
       setIsAboutDialogVisible: profileActionsStore.setIsAboutDialogVisible,
+
+      pluginFloatingOperationsArray,
+      removePluginFloatingOperations,
+      dispatchMessage,
+      getPluginIconUrl,
     };
   },
 )(observer(Home));

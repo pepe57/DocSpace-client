@@ -47,8 +47,9 @@ export const messageActions = ({
   setPluginDialogProps,
   setPluginSelectorVisible,
   setPluginSelectorProps,
-  setPluginFloatingOperationsButtonProps,
-  setPluginFloatingOperationsButtonVisible,
+  addPluginFloatingOperations,
+  removePluginFloatingOperations,
+  updatePluginFloatingOperations,
   updateContextMenuItems,
   updateInfoPanelItems,
   updateMainButtonItems,
@@ -131,36 +132,34 @@ export const messageActions = ({
         }
         break;
 
-      case PluginActions.showFloatingOperationsButton:
+      case PluginActions.addFloatingOperationsButton:
         {
           if (!message.floatingOperationsButtonProps) return;
-
-          setPluginFloatingOperationsButtonVisible &&
-            setPluginFloatingOperationsButtonVisible(true);
-          setPluginFloatingOperationsButtonProps &&
-            setPluginFloatingOperationsButtonProps({
+          addPluginFloatingOperations &&
+            addPluginFloatingOperations({
               ...message.floatingOperationsButtonProps,
-              id: uuid(),
               pluginName,
             });
         }
         break;
 
-      case PluginActions.closeFloatingOperationsButton:
-        setPluginFloatingOperationsButtonVisible &&
-          setPluginFloatingOperationsButtonVisible(false);
-        setPluginFloatingOperationsButtonProps &&
-          setPluginFloatingOperationsButtonProps(null);
-        break;
+      case PluginActions.removeFloatingOperationsButton:
+          {
+            if (!message.floatingOperationsButtonPropsId) return;
+          removePluginFloatingOperations &&
+              removePluginFloatingOperations(message.floatingOperationsButtonPropsId);
+            break;
+          }
 
       case PluginActions.updateFloatingOperationsButton:
         {
           if (!message.floatingOperationsButtonProps) return;
 
-          setPluginFloatingOperationsButtonProps &&
-            setPluginFloatingOperationsButtonProps(
-              message.floatingOperationsButtonProps,
-            );
+          updatePluginFloatingOperations &&
+            updatePluginFloatingOperations({
+              ...message.floatingOperationsButtonProps,
+              pluginName,
+            });
         }
         break;
 
