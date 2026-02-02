@@ -25,21 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import uniqueId from "lodash/uniqueId";
-import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import {
-  mobile,
-  tablet,
-  isMobile,
-  isDesktop,
-  isTablet,
-  size,
-} from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import { CoverDialogProps } from "../RoomLogoCoverDialog.types";
@@ -56,73 +47,6 @@ import {
 } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import styles from "../EditRoomGroupsDialog.module.scss";
-
-const RoomLogoCoverContainer = styled.div`
-  color: ${(props) => props.theme.logoCover.textColor};
-  .room-logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 16px;
-    padding-right: 16px;
-  }
-
-  .color-select-container {
-    margin-bottom: 16px;
-  }
-
-  .color-name {
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 20px;
-    padding-bottom: 8px;
-  }
-  .colors-container {
-    flex-wrap: nowrap;
-  }
-
-  .colors-container,
-  .cover-icon-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    box-sizing: border-box;
-    width: 390px;
-  }
-
-  @media ${mobile} {
-    .cover-icon-container {
-      width: 100%;
-      align-items: center;
-      text-align: center;
-    }
-
-    .color-name {
-      text-align: center;
-    }
-
-    .room-logo-container {
-      padding-right: 0px;
-    }
-
-    .icon-select-container {
-      text-align: center;
-    }
-    .colors-container {
-      width: 100%;
-    }
-
-    .colors-container,
-    .cover-icon-container {
-      gap: 16px;
-    }
-  }
-
-  .cover-icon-container,
-  .color-name {
-    user-select: none;
-  }
-`;
 
 const GroupIconDialog = ({
   getCovers,
@@ -267,7 +191,7 @@ const GroupIconDialog = ({
             onChange={onChangeGroupName}
           />
         </div>
-        <RoomLogoCoverContainer>
+        <div className={styles.roomLogoCoverContainer}>
           <SelectIcon
             t={t}
             $currentColorScheme={currentColorScheme}
@@ -275,7 +199,7 @@ const GroupIconDialog = ({
             setIcon={(icon: ICover | string | null) => setRoomIcon(icon)}
             covers={covers}
           />
-        </RoomLogoCoverContainer>
+        </div>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>

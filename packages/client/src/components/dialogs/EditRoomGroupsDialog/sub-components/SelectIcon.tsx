@@ -42,7 +42,7 @@ const StyledIconContainer = styled.div<{
   justify-content: center;
   box-sizing: border-box;
   width: 30px;
-  height: 32px;
+  height: 30px;
 
   border-radius: 4px;
 
