@@ -266,34 +266,36 @@ const useEditorEvents = ({
       const defaultPortalProvider =
         (await getDefaultProvider()) as TDefaultProvider;
 
-      const providerBasePrefix = t("Common:ProductName");
-      let provider: TAiProvider | undefined = undefined;
-      let model = "gpt-5.2";
+      const defaultModel = "gpt-5.2";
+      let provider: TAiProvider | undefined;
+      let model = defaultPortalProvider.defaultModel || defaultModel;
 
       if (defaultPortalProvider.providerId === -1) {
         provider = {
           id: defaultPortalProvider.providerId,
           title: defaultPortalProvider.providerTitle,
         } as TAiProvider;
-        model = defaultPortalProvider.defaultModel || model;
       } else {
         const providers = await getProviders();
-        const openAiCompatibleProvider = providers.find(
-          (provider: TAiProvider) =>
-            provider.id === defaultPortalProvider?.providerId &&
-            (provider.type === ProviderType.PortalAi ||
-              provider.type === ProviderType.OpenAi ||
-              provider.type === ProviderType.OpenRouter ||
-              provider.type === ProviderType.OpenAiCompatible) &&
-            !provider.needReset,
+        const compatibleTypes = [
+          ProviderType.PortalAi,
+          ProviderType.OpenAi,
+          ProviderType.OpenRouter,
+          ProviderType.OpenAiCompatible,
+        ];
+
+        provider = providers.find(
+          (p: TAiProvider) =>
+            p.id === defaultPortalProvider?.providerId &&
+            compatibleTypes.includes(p.type) &&
+            !p.needReset,
         );
 
-        if (!openAiCompatibleProvider) return;
+        if (!provider) return;
 
-        const models = await getModels(openAiCompatibleProvider.id);
-        openAiCompatibleProvider.title = `${providerBasePrefix} [${openAiCompatibleProvider.title}]`;
-        provider = openAiCompatibleProvider;
-        model = models[0]?.modelId || defaultPortalProvider.defaultModel;
+        const models = await getModels(provider.id);
+        provider.title = `${t("Common:ProductName")} [${provider.title}]`;
+        model = models[0]?.modelId || model;
       }
 
       console.log("AI Provider selected:", provider, model);
@@ -327,7 +329,6 @@ const useEditorEvents = ({
         };
 
         connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
-          console.log("AI Actions data:", data);
           if (data && typeof data === "object" && "error" in data && data.error)
             connector.attachEvent("ai_onInit", sendProviders);
           else sendProviders();
