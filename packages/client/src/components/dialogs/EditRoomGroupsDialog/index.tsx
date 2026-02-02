@@ -67,6 +67,8 @@ const EditRoomGroupsDialog = ({
   createGroupFromRoomIds,
   currentFilterGroupId,
   openInCreateMode,
+  fetchRooms,
+  roomsFilter,
 }: EditRoomGroupsDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
 
@@ -139,6 +141,15 @@ const EditRoomGroupsDialog = ({
           });
 
           await getAllRoomGroups();
+
+          // Refresh the section if we're currently viewing this group
+          const isViewingThisGroup =
+            currentFilterGroupId != null &&
+            String(currentFilterGroupId) === String(selectedGroup.id);
+
+          if (isViewingThisGroup && fetchRooms) {
+            await fetchRooms(null, roomsFilter, false, false, false);
+          }
         }
       } catch (error) {
         console.error("Error updating group rooms:", error);
@@ -413,7 +424,7 @@ export default inject(({ dialogsStore, filesStore }: TStore) => {
     openInCreateMode,
   } = dialogsStore;
 
-  const { roomsFilter } = filesStore;
+  const { roomsFilter, fetchRooms } = filesStore;
 
   return {
     setCreateGroupRooms,
@@ -426,5 +437,7 @@ export default inject(({ dialogsStore, filesStore }: TStore) => {
     createGroupFromRoomIds,
     currentFilterGroupId: roomsFilter?.groupId,
     openInCreateMode,
+    fetchRooms,
+    roomsFilter,
   };
 })(observer(EditRoomGroupsDialog));

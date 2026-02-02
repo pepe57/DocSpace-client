@@ -84,6 +84,16 @@ export interface EditRoomGroupsDialogProps {
   currentFilterGroupId?: string | number | null;
   /** When true, opens the dialog with room list panel visible for creating a new group */
   openInCreateMode?: boolean;
+  /** Fetches rooms to refresh the section view */
+  fetchRooms: (
+    folderId?: number | string | null,
+    filter?: unknown,
+    clearFilter?: boolean,
+    withSubfolders?: boolean,
+    clearSelection?: boolean,
+  ) => Promise<void>;
+  /** Current rooms filter */
+  roomsFilter?: { groupId?: string | number | null } | null;
 }
 
 export interface IRoomItem {
