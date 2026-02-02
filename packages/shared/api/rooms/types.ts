@@ -98,6 +98,14 @@ export type TWatermark = {
   image?: File | string;
   isImage?: boolean;
 };
+
+export type TAIRoomChatSettings = {
+  prompt: string;
+  providerId: number;
+  modelId: string;
+  internal: boolean;
+};
+
 export type TRoom = {
   parentId: number;
   filesCount: number;
@@ -138,7 +146,7 @@ export type TRoom = {
   isTemplate?: boolean;
   isAvailable?: boolean;
   isRoom?: boolean;
-  chatSettings?: { prompt: string; providerId: number; modelId: string };
+  chatSettings?: TAIRoomChatSettings;
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;
   path?: TPathParts[];
