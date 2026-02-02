@@ -274,6 +274,10 @@ const FilterInput = React.memo(
     const groupMeasureRefs = React.useRef(
       new Map<string, React.RefObject<HTMLDivElement | null>>(),
     );
+    // Cache group widths so we can use them when groups are in overflow
+    const cachedGroupWidths = React.useRef(new Map<string, number>());
+    // Track group that was manually moved from overflow - should stay visible
+    const manuallyMovedGroupRef = React.useRef<string | null>(null);
 
     const [visibleGroupIds, setVisibleGroupIds] = React.useState<string[]>(() =>
       roomGroupsWithIcons.map((g) => g.id),
@@ -370,8 +374,9 @@ const FilterInput = React.memo(
       const rowWidth = row.clientWidth;
       if (rowWidth <= 0) return;
 
-      // Wait for icons to be rendered before measuring
-      if (!areIconsReady()) return;
+      // Wait for icons to be rendered before measuring (only on initial load)
+      // After first ready, we can recalculate even if some icons aren't rendered
+      if (!hasEverBeenReadyRef.current && !areIconsReady()) return;
 
       const MANAGEMENT_BTN_W = 40;
       const ROW_GAP = 16;
@@ -385,15 +390,27 @@ const FilterInput = React.memo(
 
       const containerWidth = rowWidth - MANAGEMENT_BTN_W - ROW_GAP;
 
-      const groupWidths = roomGroupsWithIcons.map((g) => ({
-        id: g.id,
-        width: getElementFullWidth(
+      const groupWidths = roomGroupsWithIcons.map((g) => {
+        const measuredWidth = getElementFullWidth(
           groupMeasureRefs.current.get(g.id)?.current ?? null,
-        ),
-      }));
+        );
+        // Cache valid measurements, use cached value if current measurement is 0
+        if (measuredWidth > 0) {
+          cachedGroupWidths.current.set(g.id, measuredWidth);
+        }
+        return {
+          id: g.id,
+          width:
+            measuredWidth > 0
+              ? measuredWidth
+              : (cachedGroupWidths.current.get(g.id) ?? 0),
+        };
+      });
 
-      // Wait for all group measurements to be ready
+      // Wait for all group measurements to be ready (only on initial load)
+      // After first ready, some groups may be in overflow but we have cached widths
       if (
+        !hasEverBeenReadyRef.current &&
         roomGroupsWithIcons.length > 0 &&
         groupWidths.some((g) => g.width <= 0)
       ) {
@@ -445,19 +462,21 @@ const FilterInput = React.memo(
         }
       }
 
-      // If the active group ended up in overflow, move it to position 0 (after AllRooms)
-      if (activeGroupId) {
-        const activeGroupInOverflow = overflow.findIndex(
-          (g) => g.id === activeGroupId,
+      // If the active group or manually moved group ended up in overflow, move it to position 0
+      const groupToKeepVisible = manuallyMovedGroupRef.current || activeGroupId;
+      if (groupToKeepVisible) {
+        const groupInOverflow = overflow.findIndex(
+          (g) => String(g.id) === String(groupToKeepVisible),
         );
-        if (activeGroupInOverflow !== -1) {
-          overflow.splice(activeGroupInOverflow, 1);
-          visible.unshift(activeGroupId);
+        if (groupInOverflow !== -1) {
+          const groupToMove = overflow[groupInOverflow];
+          overflow.splice(groupInOverflow, 1);
+          visible.unshift(groupToMove.id); // Use the actual group ID to maintain type consistency
 
-          // Recalculate overflow to make room for the active group at position 0
+          // Recalculate overflow to make room for the group at position 0
           while (visible.length > 1 && getVisibleWidth() > availableW) {
             const removedId = visible.pop()!;
-            if (removedId === activeGroupId) {
+            if (String(removedId) === String(groupToKeepVisible)) {
               visible.push(removedId);
               break;
             }
@@ -468,6 +487,13 @@ const FilterInput = React.memo(
               overflow.unshift(removedGroup);
             }
           }
+        }
+        // Clear manually moved group only when activeGroupId has caught up
+        if (
+          manuallyMovedGroupRef.current &&
+          String(activeGroupId) === String(manuallyMovedGroupRef.current)
+        ) {
+          manuallyMovedGroupRef.current = null;
         }
       }
 
@@ -512,10 +538,36 @@ const FilterInput = React.memo(
 
     const handleFilterByGroup = React.useCallback(
       (groupId: string | null) => {
+        // If selecting a group that's currently in overflow, move it to visible
+        if (groupId) {
+          const isInOverflow = overflowGroups.some((g) => g.id === groupId);
+
+          if (isInOverflow) {
+            const newVisible = [groupId, ...visibleGroupIds];
+            const newOverflow = overflowGroups.filter((g) => g.id !== groupId);
+
+            // Remove last visible group to make room
+            if (newVisible.length > 1) {
+              const removedId = newVisible.pop()!;
+              const removedGroup = roomGroupsWithIcons.find(
+                (g) => g.id === removedId,
+              );
+              if (removedGroup && removedId !== groupId) {
+                newOverflow.unshift(removedGroup);
+              }
+            }
+
+            // Track this group so calculateOverflow keeps it visible
+            manuallyMovedGroupRef.current = groupId;
+            setVisibleGroupIds(newVisible);
+            setOverflowGroups(newOverflow);
+          }
+        }
+
         setActiveGroupId(groupId);
         onFilterByGroup?.(groupId);
       },
-      [onFilterByGroup],
+      [onFilterByGroup, overflowGroups, visibleGroupIds, roomGroupsWithIcons],
     );
 
     const contextMenuRef = React.useRef<ContextMenuRefType>(null);
