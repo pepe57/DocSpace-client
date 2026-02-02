@@ -30,7 +30,11 @@ import { Trans, useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
-import { getModels, getProviders } from "@docspace/shared/api/ai";
+import {
+  getDefaultProvider,
+  getModels,
+  getProviders,
+} from "@docspace/shared/api/ai";
 import { toastr } from "@docspace/shared/components/toast";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
@@ -62,13 +66,17 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
   const prevSelectedModel = React.useRef<TModel | null>(null);
 
   React.useEffect(() => {
+    const defaultProvider = modelCache.getDefaultProvider();
     const cachedProviders = modelCache.getProviders();
     if (cachedProviders) {
       setProviders(cachedProviders);
       setIsProvidersFetched(true);
 
       if (selectedProvider.id === -2) {
-        setSelectedProvider(cachedProviders[0]);
+        const preferredProvider = cachedProviders.find(
+          (pr) => pr.id === defaultProvider?.providerId,
+        );
+        setSelectedProvider(preferredProvider || cachedProviders[0]);
       } else {
         const provider = cachedProviders.find(
           (pr) => pr.id === selectedProvider.id,
@@ -86,14 +94,19 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
         setIsProvidersLoading(true);
 
         const p = await getProviders();
+        const defaultProvider = await getDefaultProvider();
         const enabledProviders = p.filter((pr) => !pr.needReset);
         setProviders(enabledProviders);
         modelCache.setProviders(p);
+        modelCache.setDefaultProvider(defaultProvider);
 
         setIsProvidersFetched(true);
 
         if (selectedProvider.id === -2) {
-          setSelectedProvider(enabledProviders[0]);
+          const preferredProvider = enabledProviders.find(
+            (pr) => pr.id === defaultProvider?.providerId,
+          );
+          setSelectedProvider(preferredProvider || enabledProviders[0]);
         } else {
           const provider = enabledProviders.find(
             (pr) => pr.id === selectedProvider.id,
@@ -126,6 +139,8 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
   ]);
 
   React.useEffect(() => {
+    const defaultModel = modelCache.getDefaultProvider()?.defaultModel;
+
     const fetchModels = async () => {
       try {
         const m = await getModels(selectedProvider?.id);
@@ -136,14 +151,16 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
           const model = m.find((mo) => mo.modelId === selectedModel.modelId);
 
           if (!model) {
-            setSelectedModel(m[0]);
+            const preferredModel = m.find((mo) => mo.modelId === defaultModel);
+            setSelectedModel(preferredModel || m[0]);
 
             return;
           }
 
           setSelectedModel(model);
         } else {
-          setSelectedModel(m[0]);
+          const preferredModel = m.find((mo) => mo.modelId === defaultModel);
+          setSelectedModel(preferredModel || m[0]);
         }
       } catch (e) {
         toastr.error(e as string);
@@ -154,6 +171,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       return;
 
     const cachedModels = modelCache.getModels(selectedProvider.id);
+
     if (cachedModels) {
       setModels(cachedModels);
 
@@ -167,7 +185,10 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
           setSelectedModel(cachedModels[0]);
         }
       } else {
-        setSelectedModel(cachedModels[0]);
+        const preferredModel = cachedModels.find(
+          (mo) => mo.modelId === defaultModel,
+        );
+        setSelectedModel(preferredModel || cachedModels[0]);
       }
       return;
     }
