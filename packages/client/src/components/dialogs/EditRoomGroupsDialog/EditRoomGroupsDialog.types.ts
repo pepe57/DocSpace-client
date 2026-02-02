@@ -27,15 +27,20 @@
 import { TColorScheme } from "@docspace/shared/themes";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 
+export interface ILogoData {
+  small: string;
+  default: string;
+}
+
 export interface ILogo {
   id: string;
-  data: string;
+  data: ILogoData;
 }
 
 export interface IRoomGroup {
   id: string;
   name: string;
-  icon: ILogo | string | null;
+  icon: ILogo;
   rooms: TRoom[];
   totalRooms: number;
 }

@@ -318,11 +318,8 @@ const EditRoomGroupsDialog = ({
   const nodeAddedGroups = () => {
     return roomGroups.map((item) => {
       const totalRooms = item.totalRooms;
-      const iconData =
-        typeof item.icon === "object" && item.icon !== null
-          ? item.icon.data
-          : "";
 
+      const iconData = item?.icon?.data.small;
       return (
         <div className={styles.addedGroups} key={item.id}>
           <div className={styles.group}>
