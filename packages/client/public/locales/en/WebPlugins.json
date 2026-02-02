@@ -15,5 +15,7 @@
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Using Plugin SDK you can extend your {{productName}} functionality, connect the third-party services or enhance the existing user experience. Here you can find the plugin samples with code source available on GitHub.",
   "PluginSDKInstruction": "Click the button for the detailed instructions on how to create your own plugins.",
-  "UploadDescription": "You can add plugins to extend the functionality of {{productName}} with extra features. Click Upload plugin or drop file in the ZIP archive."
+  "UploadDescription": "You can add plugins to extend the functionality of {{productName}} with extra features. Click Upload plugin or drop file in the ZIP archive.",
+  "PluginCacheWarningTitle": "Plugin version caching",
+  "PluginCacheWarningDescription": "Plugins are cached by version. If you upload a plugin with the same version, it will not be updated. Please increment the version number in package.json to see changes."
 }
