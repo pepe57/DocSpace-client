@@ -30,7 +30,6 @@ import React, {
   useState,
   useDeferredValue,
   useCallback,
-  useEffect,
 } from "react";
 
 import type {
@@ -39,7 +38,7 @@ import type {
   TagSelectorProviderProps,
   ITagSelectorStateContext,
 } from "./TagSelector.types";
-import { unionTagsData } from "./TagSelector.utils";
+import { searchFilter, unionTagsData } from "./TagSelector.utils";
 
 const TagSelectorStateContext = createContext<ITagSelectorStateContext | null>(
   null,
@@ -57,21 +56,17 @@ export const TagSelectorProvider: React.FC<TagSelectorProviderProps> = ({
     return unionTagsData(roomTags, fetchedTags);
   });
 
-  const filteredTags = useMemo(() => {
-    const search = deferredSearchValue.toLowerCase().trim();
-    if (!search) return tags;
-    return tags.filter((tag) => tag.label.toLowerCase().includes(search));
+  const [filteredTags, showCreateTag] = useMemo(() => {
+    const search = deferredSearchValue.trim().toLowerCase();
+
+    if (!search) return [tags, false];
+
+    const filtered = searchFilter(tags, search);
+
+    const showCreateTag = filtered.every((tag) => tag.label.trim() !== search);
+
+    return [filtered, showCreateTag];
   }, [tags, deferredSearchValue]);
-
-  const showCreateTag = useMemo(() => {
-    const trimmedValue = deferredSearchValue.trim();
-    return (
-      trimmedValue.length > 0 &&
-      filteredTags.every((tag) => tag.label.trim() !== trimmedValue)
-    );
-  }, [deferredSearchValue, filteredTags]);
-
-  console.log({ filteredTags, showCreateTag, deferredSearchValue });
 
   const clearSearch = useCallback(() => {
     setSearchValue("");
