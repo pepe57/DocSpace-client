@@ -35,6 +35,7 @@ import styles from "./Dropzone.module.scss";
 import { Link } from "../link";
 
 const Dropzone = ({
+  className,
   isLoading,
   isDisabled = false,
   onDrop,
@@ -55,7 +56,7 @@ const Dropzone = ({
 
   return (
     <div
-      className={classNames(styles.dropzoneWrapper, {
+      className={classNames(styles.dropzoneWrapper, className, {
         [styles.isLoading]: isLoading,
       })}
       data-testid={dataTestId ?? "dropzone"}

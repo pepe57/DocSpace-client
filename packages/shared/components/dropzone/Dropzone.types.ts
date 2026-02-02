@@ -27,6 +27,7 @@
 import { ReactNode } from "react";
 
 type BaseDropzoneProps = {
+  className?: string;
   /** Shows loading state of the dropzone */
   isLoading: boolean;
   /** Disables the dropzone */
