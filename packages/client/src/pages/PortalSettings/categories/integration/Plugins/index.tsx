@@ -40,11 +40,7 @@ import EmptyScreen from "./sub-components/EmptyScreen";
 import ListLoader from "./sub-components/ListLoader";
 import UploadDescription from "./sub-components/UploadDescription";
 
-import {
-  PluginListContainer,
-  StyledContainer,
-  StyledEmptyContainer,
-} from "./Plugins.styled";
+import styles from "./Plugins.module.scss";
 import { PluginsProps } from "./Plugins.types";
 
 const PluginPage = ({
@@ -79,11 +75,11 @@ const PluginPage = ({
   return showPortalSettingsLoader ||
     (!isEmptyList && pluginList.length === 0) ||
     !ready ? (
-    <StyledContainer>
+    <div className={styles.container}>
       <ListLoader withUpload={withUpload} />
-    </StyledContainer>
+    </div>
   ) : isEmptyList ? (
-    <StyledEmptyContainer>
+    <div className={styles.emptyContainer}>
       <EmptyScreen
         t={t}
         theme={theme}
@@ -92,9 +88,9 @@ const PluginPage = ({
         pluginsSdkUrl={pluginsSdkUrl}
         currentColorScheme={currentColorScheme}
       />
-    </StyledEmptyContainer>
+    </div>
   ) : (
-    <StyledContainer>
+    <div className={styles.container}>
       {/* <Header
             t={t}
             currentColorScheme={currentColorScheme}
@@ -116,7 +112,7 @@ const PluginPage = ({
           />
         </>
       ) : null}
-      <PluginListContainer>
+      <div className={styles.pluginListContainer}>
         {pluginList.map((plugin) => (
           <PluginItem
             key={`plugin-${plugin.name}-${plugin.version}`}
@@ -127,8 +123,8 @@ const PluginPage = ({
             {...plugin}
           />
         ))}
-      </PluginListContainer>
-    </StyledContainer>
+      </div>
+    </div>
   );
 };
 
