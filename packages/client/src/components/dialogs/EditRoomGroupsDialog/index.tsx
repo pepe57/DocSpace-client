@@ -271,6 +271,7 @@ const EditRoomGroupsDialog = ({
             onCancel={onCloseGroupRoomList}
             forceIsMultiSelect
             sortSelectedFirst
+            disableSubmitUntilChanged
           />
         </Aside>
       </div>

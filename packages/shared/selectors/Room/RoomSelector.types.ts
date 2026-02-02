@@ -78,4 +78,6 @@ export type RoomSelectorProps = TSelectorHeader &
     disableFirstFetch?: boolean;
     /** When true, sorts items so that selectedItems appear at the beginning of the list */
     sortSelectedFirst?: boolean;
+    /** When true, disables submit button until selection changes from initial state (for grouping panel) */
+    disableSubmitUntilChanged?: boolean;
   } & TInitValue;

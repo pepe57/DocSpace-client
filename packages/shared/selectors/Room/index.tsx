@@ -104,6 +104,7 @@ const RoomSelectorComponent = ({
   forceIsMultiSelect,
   disableFirstFetch,
   sortSelectedFirst,
+  disableSubmitUntilChanged,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
   const { isBase } = useTheme();
@@ -120,6 +121,43 @@ const RoomSelectorComponent = ({
   const [selectedItem, setSelectedItem] = React.useState<TSelectorItem | null>(
     null,
   );
+
+  // Track initial selected item IDs for multi-select mode
+  const initialSelectedIdsRef = React.useRef<Set<string | number>>(
+    new Set(
+      selectedItems
+        ?.map((item) => item.id)
+        .filter((id): id is string | number => id !== undefined) || [],
+    ),
+  );
+
+  // Track current selection state for multi-select mode
+  const [currentSelectedIds, setCurrentSelectedIds] = React.useState<
+    Set<string | number>
+  >(
+    () =>
+      new Set(
+        selectedItems
+          ?.map((item) => item.id)
+          .filter((id): id is string | number => id !== undefined) || [],
+      ),
+  );
+
+  // Check if selection has changed from initial state (only when disableSubmitUntilChanged is true)
+  const hasSelectionChanged = React.useMemo(() => {
+    if (!isMultiSelect || !disableSubmitUntilChanged) return true;
+
+    const initial = initialSelectedIdsRef.current;
+    if (initial.size !== currentSelectedIds.size) return true;
+
+    for (const id of currentSelectedIds) {
+      if (!initial.has(id)) return true;
+    }
+    for (const id of initial) {
+      if (!currentSelectedIds.has(id)) return true;
+    }
+    return false;
+  }, [currentSelectedIds, isMultiSelect, disableSubmitUntilChanged]);
 
   const [total, setTotal] = React.useState(() => (withInit ? initTotal : -1));
   const [items, setItems] = React.useState<TSelectorItem[]>(
@@ -168,6 +206,20 @@ const RoomSelectorComponent = ({
 
       return item;
     });
+
+    // Track selection changes for multi-select mode
+    if (isMultiSelect && item.id !== undefined) {
+      setCurrentSelectedIds((prev) => {
+        const newSet = new Set(prev);
+        if (newSet.has(item.id!)) {
+          newSet.delete(item.id!);
+        } else {
+          newSet.add(item.id!);
+        }
+        return newSet;
+      });
+    }
+
     if (isDoubleClick && !isMultiSelect) {
       doubleClickCallback();
     }
@@ -298,7 +350,7 @@ const RoomSelectorComponent = ({
       isNextPageLoading={isNextPageLoading}
       loadNextPage={onLoadNextPage}
       isLoading={isFirstLoad}
-      disableSubmitButton={!selectedItem}
+      disableSubmitButton={isMultiSelect ? !hasSelectionChanged : !selectedItem}
       alwaysShowFooter={sortedItems.length !== 0 || Boolean(searchValue)}
       rowLoader={
         <RowLoader
