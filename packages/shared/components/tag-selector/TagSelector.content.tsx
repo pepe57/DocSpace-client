@@ -184,8 +184,6 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
     };
   }, [isMobile, filteredTags.length]);
 
-  console.log({ style, filteredTagsLength: filteredTags.length });
-
   return (
     <div className={styles.wrapperList} style={style}>
       <Scrollbar fixedSize className={styles.scrollbar}>
