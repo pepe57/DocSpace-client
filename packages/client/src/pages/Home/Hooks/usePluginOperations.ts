@@ -87,7 +87,6 @@ export const usePluginOperations = ({
       pluginFloatingOperationsArray.map(async (pluginProps) => {
         if (!pluginProps.cancelOperation) return;
 
-        console.log(`Cancelling operation for plugin: ${pluginProps.pluginName}`);
         const message = await pluginProps.cancelOperation();
         dispatchMessage({
           message,
@@ -99,9 +98,8 @@ export const usePluginOperations = ({
 
   const handlePluginClearOperation = useCallback(
     async (operationId?: string) => {
-      // operations button is hidden, clear all plugin operations
       if (!operationId) {
-        console.log("Clearing all plugin operations");
+        // operations button is hidden, remove all plugin operations
         pluginFloatingOperationsArray.forEach((pluginProps) => {
           removePluginFloatingOperations(pluginProps.id);
         })
@@ -121,7 +119,6 @@ export const usePluginOperations = ({
 
       const pureOperationId = operationId.replace(`${prefix(pluginName)}`, "");
 
-      console.log(`Clearing operation ${pureOperationId} for plugin: ${pluginName}`);
       const message = await onCancelOperationFromList(pureOperationId);
       dispatchMessage({
         message,
@@ -138,10 +135,6 @@ export const usePluginOperations = ({
       .sort()
       .join(",");
   }, [pluginFloatingOperationsArray]);
-
-  console.log("Plugin Keys:", pluginKeys);
-
-
 
   useEffect(() => {
     pluginFloatingOperationsArray.forEach((pluginProps) => {
