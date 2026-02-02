@@ -26,7 +26,7 @@
 
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-
+import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -57,6 +57,7 @@ const DeleteGroupDialog = ({
     setIsDeleting(true);
     try {
       await deleteRoomGroup(groupId);
+      toastr.success(t("GroupingRooms:GroupHasBeenDeleted"));
       await getAllRoomGroups();
     } catch (error) {
       console.error("Error deleting group:", error);
@@ -109,4 +110,3 @@ const DeleteGroupDialog = ({
 };
 
 export default DeleteGroupDialog;
-

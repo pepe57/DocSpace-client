@@ -35,6 +35,7 @@ import {
   isTablet,
   onEdgeScrolling,
 } from "@docspace/shared/utils";
+import { toastr } from "@docspace/shared/components/toast";
 import { isElementInViewport } from "@docspace/shared/utils/common";
 import { EMPTY_ARRAY } from "@docspace/shared/constants";
 import {
@@ -496,6 +497,7 @@ const SectionBodyContent = (props) => {
         try {
           await deleteRoomGroup(roomsFilterGroupId);
           await getAllRoomGroups();
+          toastr.success(t("GroupingRooms:GroupHasBeenDeleted"));
           // Navigate back to rooms list after deleting the group
           window.DocSpace.navigate("/rooms/shared/filter");
         } catch (error) {
