@@ -47,9 +47,16 @@ import type {
   TGetReferenceData,
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
-import { getProviders, getModels } from "@docspace/shared/api/ai";
+import {
+  getProviders,
+  getModels,
+  getDefaultProvider,
+} from "@docspace/shared/api/ai";
 import { ProviderType } from "@docspace/shared/api/ai/enums";
-import type { TAiProvider } from "@docspace/shared/api/ai/types";
+import type {
+  TAiProvider,
+  TDefaultProvider,
+} from "@docspace/shared/api/ai/types";
 import { EDITOR_ID, FILLING_STATUS_ID } from "@docspace/shared/constants";
 import {
   assign,
@@ -256,46 +263,64 @@ const useEditorEvents = ({
     const connector = docEditor?.createConnector?.();
 
     if (connector) {
-      const providers = await getProviders();
-      const openAIProvider = providers.find(
-        (provider: TAiProvider) =>
-          (provider.type === ProviderType.PortalAi ||
-            provider.type === ProviderType.OpenAi ||
-            provider.type === ProviderType.OpenRouter ||
-            provider.type === ProviderType.OpenAiCompatible) &&
-          !provider.needReset,
-      );
+      const defaultPortalProvider =
+        (await getDefaultProvider()) as TDefaultProvider;
 
-      if (openAIProvider) {
-        const models = await getModels(openAIProvider.id);
-        const providerName = t("Common:ProductName");
-        const defaultModel = models[0]?.modelId || "gpt-5.2";
-        const modelName = `${providerName} [${defaultModel}]`;
+      const providerBasePrefix = t("Common:ProductName");
+      let provider: TAiProvider | undefined = undefined;
+      let model = "gpt-5.2";
 
-        console.log("AI Provider found:", {
-          providerName,
-          defaultModel,
-          modelName,
-        });
+      if (defaultPortalProvider.providerId === -1) {
+        provider = {
+          id: defaultPortalProvider.providerId,
+          title: defaultPortalProvider.providerTitle,
+        } as TAiProvider;
+        model = defaultPortalProvider.defaultModel || model;
+      } else {
+        const providers = await getProviders();
+        const openAiCompatibleProvider = providers.find(
+          (provider: TAiProvider) =>
+            provider.id === defaultPortalProvider?.providerId &&
+            (provider.type === ProviderType.PortalAi ||
+              provider.type === ProviderType.OpenAi ||
+              provider.type === ProviderType.OpenRouter ||
+              provider.type === ProviderType.OpenAiCompatible) &&
+            !provider.needReset,
+        );
+
+        if (!openAiCompatibleProvider) return;
+
+        const models = await getModels(openAiCompatibleProvider.id);
+        openAiCompatibleProvider.title = `${providerBasePrefix} [${openAiCompatibleProvider.title}]`;
+        provider = openAiCompatibleProvider;
+        model = models[0]?.modelId || defaultPortalProvider.defaultModel;
+      }
+
+      console.log("AI Provider selected:", provider, model);
+
+      if (provider) {
+        const modelName = `${provider.title} [${model}]`;
 
         const sendProviders = () => {
-          connector.sendEvent("ai_onCustomProviders", [{ name: providerName }]);
+          connector.sendEvent("ai_onCustomProviders", [
+            { name: provider.title },
+          ]);
 
           connector.sendEvent("ai_onCustomInit", {
             settingsLock: undefined,
             actionsOverride: true,
             actions: {
-              Chat: { model: defaultModel },
-              Summarization: { model: defaultModel },
-              Translation: { model: defaultModel },
-              TextAnalyze: { model: defaultModel },
+              Chat: { model: model },
+              Summarization: { model: model },
+              Translation: { model: model },
+              TextAnalyze: { model: model },
             },
             models: [
               {
                 capabilities: 255,
-                provider: providerName,
+                provider: provider.title,
                 name: modelName,
-                id: defaultModel,
+                id: model,
               },
             ],
           });
@@ -309,7 +334,7 @@ const useEditorEvents = ({
         });
 
         connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
-          externalAIFetch(connector, e as TEditorAIEvent, openAIProvider.id),
+          externalAIFetch(connector, e as TEditorAIEvent, provider.id),
         );
       }
     }
