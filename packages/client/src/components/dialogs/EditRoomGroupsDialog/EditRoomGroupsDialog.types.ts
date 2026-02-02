@@ -37,6 +37,11 @@ export interface ILogo {
   data: ILogoData;
 }
 
+export interface ICover {
+  id: string;
+  data: string;
+}
+
 export interface IRoomGroup {
   id: string;
   name: string;
@@ -60,7 +65,7 @@ export interface IUpdateRoomGroup {
 export interface EditRoomGroupsDialogProps {
   currentColorScheme: TColorScheme;
   getCovers: () => void;
-  covers: ILogo[] | null;
+  covers: ICover[] | null;
   setArrRoomGroups: (group: IRoomGroup) => void;
   setEditRoomGroupsDialogVisible: (
     visible: boolean,

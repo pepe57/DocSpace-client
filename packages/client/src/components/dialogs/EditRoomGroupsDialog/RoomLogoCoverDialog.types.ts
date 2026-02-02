@@ -27,7 +27,7 @@
 import { TColorScheme } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
 
-import { ILogo, IUpdateRoomGroup } from "./EditRoomGroupsDialog.types";
+import { ICover, ILogo, IUpdateRoomGroup } from "./EditRoomGroupsDialog.types";
 
 export interface ICreateRoomGroup {
   name: string;
@@ -37,7 +37,7 @@ export interface ICreateRoomGroup {
 
 export interface CoverDialogProps {
   getCovers: () => void;
-  covers: ILogo[] | null;
+  covers: ICover[] | null;
   currentColorScheme: TColorScheme;
   arrIdsRooms: string[] | null;
   setIsOpenGroupIcon: (visible: boolean) => void;
@@ -55,8 +55,8 @@ export interface CoverDialogProps {
 
 export interface SelectIconProps {
   t: TTranslation;
-  setIcon: (icon: ILogo | string | null) => void;
-  covers: ILogo[] | null;
+  setIcon: (icon: ICover | string | null) => void;
+  covers: ICover[] | null;
   $currentColorScheme: TColorScheme;
   coverId: string;
 }

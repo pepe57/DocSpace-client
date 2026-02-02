@@ -30,7 +30,7 @@ import { mobile } from "@docspace/shared/utils";
 import { TColorScheme } from "@docspace/shared/themes";
 import hexRgb from "hex-rgb";
 import { SelectIconProps } from "../RoomLogoCoverDialog.types";
-import { ILogo } from "../EditRoomGroupsDialog.types";
+import { ICover } from "../EditRoomGroupsDialog.types";
 
 const StyledIconContainer = styled.div<{
   $currentColorScheme?: TColorScheme;
@@ -104,7 +104,7 @@ export const SelectIcon = ({
   $currentColorScheme,
   coverId,
 }: SelectIconProps) => {
-  const onSelectIcon = (icon: ILogo | string | null) => {
+  const onSelectIcon = (icon: ICover | string | null) => {
     setIcon(icon);
   };
 
@@ -122,9 +122,7 @@ export const SelectIcon = ({
               key={icon.id}
             >
               <ReactSVG
-                src={`data:image/svg+xml;utf8,${encodeURIComponent(
-                  icon.data,
-                )}`}
+                src={`data:image/svg+xml;utf8,${encodeURIComponent(icon.data)}`}
               />
             </StyledIconContainer>
           );
