@@ -168,14 +168,17 @@ const FilterInput = React.memo(
     const [isRoomGroupsLoaded, setIsRoomGroupsLoaded] = React.useState(false);
 
     React.useEffect(() => {
-      if (getAllRoomGroups) {
+      if (getAllRoomGroups && organizeRoomsGrouping) {
         getAllRoomGroups().finally(() => {
           setIsRoomGroupsLoaded(true);
         });
+      } else if (!organizeRoomsGrouping) {
+        // Reset loaded state when grouping is disabled
+        setIsRoomGroupsLoaded(false);
       } else {
         setIsRoomGroupsLoaded(true);
       }
-    }, [getAllRoomGroups]);
+    }, [getAllRoomGroups, organizeRoomsGrouping]);
 
     const mountRef = React.useRef(true);
 
