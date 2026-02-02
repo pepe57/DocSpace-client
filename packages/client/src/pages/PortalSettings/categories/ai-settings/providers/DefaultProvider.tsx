@@ -46,6 +46,7 @@ import { TTranslation } from "@docspace/shared/types";
 import styles from "../AISettings.module.scss";
 import { inject, observer } from "mobx-react";
 import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import classNames from "classnames";
 
 type DefaultProviderProps = {
   aiProviders?: AISettingsStore["aiProviders"];
@@ -55,6 +56,7 @@ type DefaultProviderProps = {
   fetchDefaultProviderModels?: AISettingsStore["fetchDefaultProviderModels"];
   isDefaultProviderModelsLoading?: AISettingsStore["isDefaultProviderModelsLoading"];
   changeDefaultProvider?: AISettingsStore["changeDefaultProvider"];
+  defaultProviderModelsError?: AISettingsStore["defaultProviderModelsError"];
 };
 
 const getSelectedProvider = (
@@ -89,6 +91,7 @@ const DefaultProviderComponent = ({
   fetchDefaultProviderModels,
   isDefaultProviderModelsLoading,
   changeDefaultProvider,
+  defaultProviderModelsError,
 }: DefaultProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [selectedProvider, setSelectedProvider] = useState<TOption | null>(() =>
@@ -200,8 +203,13 @@ const DefaultProviderComponent = ({
           isVertical
           labelText={t("AISettings:Provider")}
           removeMargin
+          hasError={!!defaultProviderModelsError}
+          errorMessage={defaultProviderModelsError || ""}
         >
           <ComboBox
+            className={classNames({
+              [styles.hasError]: !!defaultProviderModelsError,
+            })}
             options={getProviderOptions()}
             selectedOption={selectedProvider}
             displayArrow
@@ -269,5 +277,6 @@ export const DefaultProvider = inject(({ aiSettingsStore }: TStore) => {
     isDefaultProviderModelsLoading:
       aiSettingsStore.isDefaultProviderModelsLoading,
     changeDefaultProvider: aiSettingsStore.changeDefaultProvider,
+    defaultProviderModelsError: aiSettingsStore.defaultProviderModelsError,
   };
 })(observer(DefaultProviderComponent));

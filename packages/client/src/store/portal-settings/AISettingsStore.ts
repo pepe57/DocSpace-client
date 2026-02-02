@@ -27,6 +27,7 @@
  */
 
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 
 import {
   type WebSearchConfig,
@@ -96,6 +97,8 @@ class AISettingsStore {
 
   isDefaultProviderModelsLoading = false;
 
+  defaultProviderModelsError: string | null = null;
+
   defaultProviderInitied = false;
 
   constructor() {
@@ -132,6 +135,10 @@ class AISettingsStore {
 
   setIsDefaultProviderModelsLoading = (value: boolean) => {
     this.isDefaultProviderModelsLoading = value;
+  };
+
+  setDefaultProviderModelsError = (error: string | null) => {
+    this.defaultProviderModelsError = error;
   };
 
   setDefaultProviderInitied = (value: boolean) => {
@@ -363,12 +370,22 @@ class AISettingsStore {
 
     try {
       this.setIsDefaultProviderModelsLoading(true);
+      this.setDefaultProviderModelsError(null);
 
       models = await getModels(providerId);
       this.setDefaultProviderModels(models);
     } catch (e) {
-      toastr.error(e as string);
+      let error = e;
+
+
+
+      if (axios.isAxiosError(e)) {
+        error = e.response?.data?.error?.message;
+      }
+
+      toastr.error(error as string);
       console.error(e);
+      this.setDefaultProviderModelsError(error as string);
       this.setDefaultProviderModels(null);
     } finally {
       this.setIsDefaultProviderModelsLoading(false);
@@ -421,6 +438,7 @@ class AISettingsStore {
     this.setDefaultProvider(null);
     this.setDefaultProviderModels(null);
     this.setDefaultProviderInitied(false);
+    this.setDefaultProviderModelsError(null);
   };
 
   get systemMCPServers() {
