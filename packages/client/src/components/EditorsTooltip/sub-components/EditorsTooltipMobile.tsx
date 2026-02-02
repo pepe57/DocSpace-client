@@ -24,46 +24,57 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type {TAiProvider, TDefaultProvider, TModel} from "@docspace/shared/api/ai/types";
+import React from "react";
+import { Portal } from "@docspace/shared/components/portal";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { AvatarSize } from "@docspace/shared/components/avatar";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
-/**
- * Global cache for providers and models AI
- * Saved between unmounting components until the dialog is fully closed
- */
-class ModelCache {
-  private providers: TAiProvider[] | null = null;
-  private modelsByProvider: Map<number, TModel[]> = new Map();
-  private defaultProvider: TDefaultProvider | null = null;
+import { EditorsList } from "./EditorsList";
+import type { EditorsTooltipMobileProps } from "../EditorsTooltip.types";
+import styles from "../EditorsTooltip.module.scss";
 
-  getProviders(): TAiProvider[] | null {
-    return this.providers;
-  }
+const EditorsTooltipMobile = ({
+  visible,
+  editors,
+  onClose,
+  t,
+  height,
+}: EditorsTooltipMobileProps) => {
+  if (!visible || editors.length === 0) return null;
 
-  setProviders(providers: TAiProvider[]): void {
-    this.providers = providers;
-  }
+  const content = (
+    <>
+      <Backdrop
+        visible={visible}
+        onClick={onClose}
+        withBackground
+        zIndex={310}
+      />
+      <div
+        className={styles.mobileContainer}
+        style={{ height: `${height}px` }}
+        data-testid="editors-tooltip-mobile"
+      >
+        <Scrollbar autoHide={false}>
+          <div className={styles.tooltipHeader}>
+            {t("FileCurrentlyEditedBy")}
+          </div>
+          <EditorsList
+            editors={editors}
+            avatarSize={AvatarSize.min}
+            isMobile={true}
+          />
+        </Scrollbar>
+      </div>
+    </>
+  );
 
-  getModels(providerId: number): TModel[] | null {
-    return this.modelsByProvider.get(providerId) || null;
-  }
+  return (
+    <>
+      <Portal element={content} visible={visible} />
+    </>
+  );
+};
 
-  setModels(providerId: number, models: TModel[]): void {
-    this.modelsByProvider.set(providerId, models);
-  }
-
-  setDefaultProvider(defaultProvider: TDefaultProvider): void {
-    this.defaultProvider = defaultProvider;
-  }
-
-  getDefaultProvider(): TDefaultProvider | null {
-    return this.defaultProvider;
-  }
-
-  clear(): void {
-    this.providers = null;
-    this.modelsByProvider.clear();
-    this.defaultProvider = null;
-  }
-}
-
-export const modelCache = new ModelCache();
+export default EditorsTooltipMobile;

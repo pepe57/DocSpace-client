@@ -70,6 +70,10 @@ import {
   defaultTemplatesHandler,
   defaultTemplatesSetHandler,
 } from "./defaultTemplates";
+import {
+  filesWithEditorsHandler,
+  filesWithManyEditorsHandler,
+} from "./editorsTooltip";
 
 export { TypeFolder } from "./folder";
 export { TypeRoomList } from "./roomList";
@@ -110,6 +114,8 @@ export {
   validatePublicRoomKeyPasswordHandler,
   defaultTemplatesHandler,
   defaultTemplatesSetHandler,
+  filesWithEditorsHandler,
+  filesWithManyEditorsHandler,
 };
 
 // Note: recentHandler, sharedWithMeHandler, favoritesHandler are NOT included here

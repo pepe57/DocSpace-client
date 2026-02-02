@@ -24,46 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type {TAiProvider, TDefaultProvider, TModel} from "@docspace/shared/api/ai/types";
+import React from "react";
+import { Avatar, AvatarRole } from "@docspace/shared/components/avatar";
+import { classNames } from "@docspace/shared/utils";
+import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
-/**
- * Global cache for providers and models AI
- * Saved between unmounting components until the dialog is fully closed
- */
-class ModelCache {
-  private providers: TAiProvider[] | null = null;
-  private modelsByProvider: Map<number, TModel[]> = new Map();
-  private defaultProvider: TDefaultProvider | null = null;
+import type { EditorsListProps } from "../EditorsTooltip.types";
+import styles from "../EditorsTooltip.module.scss";
 
-  getProviders(): TAiProvider[] | null {
-    return this.providers;
-  }
+export const EditorsList = ({
+  editors,
+  avatarSize,
+  isMobile = false,
+}: EditorsListProps) => {
+  if (editors.length === 0) return null;
 
-  setProviders(providers: TAiProvider[]): void {
-    this.providers = providers;
-  }
+  const getClassName = (baseClassName: string) =>
+    classNames(baseClassName, { [styles.mobile]: isMobile });
 
-  getModels(providerId: number): TModel[] | null {
-    return this.modelsByProvider.get(providerId) || null;
-  }
-
-  setModels(providerId: number, models: TModel[]): void {
-    this.modelsByProvider.set(providerId, models);
-  }
-
-  setDefaultProvider(defaultProvider: TDefaultProvider): void {
-    this.defaultProvider = defaultProvider;
-  }
-
-  getDefaultProvider(): TDefaultProvider | null {
-    return this.defaultProvider;
-  }
-
-  clear(): void {
-    this.providers = null;
-    this.modelsByProvider.clear();
-    this.defaultProvider = null;
-  }
-}
-
-export const modelCache = new ModelCache();
+  return (
+    <div className={styles.editorsList}>
+      {editors.map((editor) => (
+        <div key={editor.id} className={getClassName(styles.editorItem)}>
+          <Avatar
+            size={avatarSize}
+            userName={editor.name}
+            source={editor.photo?.big || DefaultUserAvatarSmall}
+            className={getClassName(styles.editorAvatar)}
+            role={AvatarRole.user}
+          />
+          <span className={styles.editorName}>{editor.name}</span>
+        </div>
+      ))}
+    </div>
+  );
+};

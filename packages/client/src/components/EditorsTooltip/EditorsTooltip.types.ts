@@ -24,46 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type {TAiProvider, TDefaultProvider, TModel} from "@docspace/shared/api/ai/types";
-
-/**
- * Global cache for providers and models AI
- * Saved between unmounting components until the dialog is fully closed
- */
-class ModelCache {
-  private providers: TAiProvider[] | null = null;
-  private modelsByProvider: Map<number, TModel[]> = new Map();
-  private defaultProvider: TDefaultProvider | null = null;
-
-  getProviders(): TAiProvider[] | null {
-    return this.providers;
-  }
-
-  setProviders(providers: TAiProvider[]): void {
-    this.providers = providers;
-  }
-
-  getModels(providerId: number): TModel[] | null {
-    return this.modelsByProvider.get(providerId) || null;
-  }
-
-  setModels(providerId: number, models: TModel[]): void {
-    this.modelsByProvider.set(providerId, models);
-  }
-
-  setDefaultProvider(defaultProvider: TDefaultProvider): void {
-    this.defaultProvider = defaultProvider;
-  }
-
-  getDefaultProvider(): TDefaultProvider | null {
-    return this.defaultProvider;
-  }
-
-  clear(): void {
-    this.providers = null;
-    this.modelsByProvider.clear();
-    this.defaultProvider = null;
-  }
+import type { AvatarSize } from "@docspace/shared/components/avatar";
+export interface UserPhoto {
+  original: string;
+  retina: string;
+  max: string;
+  big: string;
+  medium: string;
+  small: string;
 }
 
-export const modelCache = new ModelCache();
+export interface EditorUser {
+  id: string;
+  name: string;
+  photo: UserPhoto | null;
+}
+
+export interface EditorsTooltipItem {
+  editingBy?: Record<string, string>;
+  activeEditors?: Record<string, string>;
+}
+
+export interface EditorsTooltipProps {
+  item: EditorsTooltipItem;
+  currentUserId?: string;
+}
+
+export interface EditorsListProps {
+  editors: EditorUser[];
+  avatarSize: AvatarSize;
+  isMobile?: boolean;
+}
+
+export interface EditorsTooltipMobileProps {
+  visible: boolean;
+  editors: EditorUser[];
+  onClose: () => void;
+  t: (key: string) => string;
+  height: number;
+}
+
+export interface UseEditorsDataProps {
+  activeEditors: Record<string, string> | undefined;
+  editingBy: Record<string, string> | undefined;
+  currentUserId?: string;
+}
+
+export interface UseEditorsDataReturn {
+  editors: EditorUser[];
+  isOpen: boolean;
+  openTooltip: () => void;
+  closeTooltip: () => void;
+  setIsOpen: (value: boolean) => void;
+}
+
+export interface TooltipDimensions {
+  width: number;
+  height: number;
+}

@@ -41,4 +41,5 @@ export enum AvatarSize {
   base = "base",
   small = "small",
   min = "min",
+  extraSmall = "extraSmall",
 }

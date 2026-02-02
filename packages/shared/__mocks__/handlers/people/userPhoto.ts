@@ -24,46 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type {TAiProvider, TDefaultProvider, TModel} from "@docspace/shared/api/ai/types";
+import { http, HttpResponse } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-/**
- * Global cache for providers and models AI
- * Saved between unmounting components until the dialog is fully closed
- */
-class ModelCache {
-  private providers: TAiProvider[] | null = null;
-  private modelsByProvider: Map<number, TModel[]> = new Map();
-  private defaultProvider: TDefaultProvider | null = null;
+export const PATH_USER_PHOTO = "people/:userId/photo";
 
-  getProviders(): TAiProvider[] | null {
-    return this.providers;
+export const successUserPhoto = {
+  original: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  retina: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  max: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  big: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  medium: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  small: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+};
+
+export const userPhotoResolver = (userId: string): Response => {
+  // Don't return photos for anonymous users
+  if (userId.startsWith("uid-")) {
+    return new HttpResponse(null, { status: 404 });
   }
 
-  setProviders(providers: TAiProvider[]): void {
-    this.providers = providers;
+  return new Response(JSON.stringify({ response: successUserPhoto }));
+};
+
+export const userPhotoHandler = (port?: string) => {
+  let baseUrl;
+  if (port) {
+    baseUrl = `${BASE_URL}:${port}`;
+  } else {
+    baseUrl =
+      typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
   }
 
-  getModels(providerId: number): TModel[] | null {
-    return this.modelsByProvider.get(providerId) || null;
-  }
-
-  setModels(providerId: number, models: TModel[]): void {
-    this.modelsByProvider.set(providerId, models);
-  }
-
-  setDefaultProvider(defaultProvider: TDefaultProvider): void {
-    this.defaultProvider = defaultProvider;
-  }
-
-  getDefaultProvider(): TDefaultProvider | null {
-    return this.defaultProvider;
-  }
-
-  clear(): void {
-    this.providers = null;
-    this.modelsByProvider.clear();
-    this.defaultProvider = null;
-  }
-}
-
-export const modelCache = new ModelCache();
+  return http.get(
+    `${baseUrl}/${API_PREFIX}/${PATH_USER_PHOTO}`,
+    ({ params }) => {
+      const { userId } = params;
+      return userPhotoResolver(userId as string);
+    },
+  );
+};

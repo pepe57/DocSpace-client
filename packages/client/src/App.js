@@ -45,7 +45,18 @@ import router from "./router";
 import i18n from "./i18n";
 
 const App = () => {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            retry: 1,
+            staleTime: 5 * 60 * 1000,
+          },
+        },
+      }),
+  );
 
   React.useEffect(() => {
     const regex = /(\/){2,}/g;
@@ -57,8 +68,8 @@ const App = () => {
   }, []);
 
   return (
-    <MobxProvider {...store}>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <MobxProvider {...store}>
         <I18nextProvider i18n={i18n}>
           <ThemeProvider>
             <ErrorBoundary>
@@ -66,8 +77,8 @@ const App = () => {
             </ErrorBoundary>
           </ThemeProvider>
         </I18nextProvider>
-      </QueryClientProvider>
-    </MobxProvider>
+      </MobxProvider>
+    </QueryClientProvider>
   );
 };
 

@@ -78,9 +78,6 @@ importers:
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@tanstack/react-query':
-        specifier: ^5.90.19
-        version: 5.90.19(react@19.2.3)
       '@uiw/codemirror-theme-github':
         specifier: 4.23.5
         version: 4.23.5(@codemirror/language@6.11.3)(@codemirror/state@6.5.2)(@codemirror/view@6.38.1)
@@ -3988,14 +3985,6 @@ packages:
 
   '@tanem/svg-injector@10.1.68':
     resolution: {integrity: sha512-UkJajeR44u73ujtr5GVSbIlELDWD/mzjqWe54YMK61ljKxFcJoPd9RBSaO7xj02ISCWUqJW99GjrS+sVF0UnrA==}
-
-  '@tanstack/query-core@5.90.19':
-    resolution: {integrity: sha512-GLW5sjPVIvH491VV1ufddnfldyVB+teCnpPIvweEfkpRx7CfUmUGhoh9cdcUKBh/KwVxk22aNEDxeTsvmyB/WA==}
-
-  '@tanstack/react-query@5.90.19':
-    resolution: {integrity: sha512-qTZRZ4QyTzQc+M0IzrbKHxSeISUmRB3RPGmao5bT+sI6ayxSRhn0FXEnT5Hg3as8SBFcRosrXXRFB+yAcxVxJQ==}
-    peerDependencies:
-      react: ^18 || ^19
 
   '@testing-library/dom@10.4.0':
     resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
@@ -12935,13 +12924,6 @@ snapshots:
       '@babel/runtime': 7.28.3
       content-type: 1.0.5
       tslib: 2.8.1
-
-  '@tanstack/query-core@5.90.19': {}
-
-  '@tanstack/react-query@5.90.19(react@19.2.3)':
-    dependencies:
-      '@tanstack/query-core': 5.90.19
-      react: 19.2.3
 
   '@testing-library/dom@10.4.0':
     dependencies:
