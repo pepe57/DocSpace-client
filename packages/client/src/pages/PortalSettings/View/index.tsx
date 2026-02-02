@@ -110,6 +110,7 @@ const View = ({
   fetchMCPServers,
   fetchWebSearch,
   fetchKnowledge,
+  initDefaultProvider,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation();
@@ -164,6 +165,7 @@ const View = ({
   const { getServicesInitialValue } = useServices(defaultProps.services);
   const { getAiSettingsInitialValue } = useAiSettings({
     fetchAIProviders,
+    initDefaultProvider,
     fetchMCPServers,
     fetchWebSearch,
     fetchKnowledge,
@@ -406,6 +408,7 @@ export const ViewComponent = inject(
       fetchMCPServers: aiSettingsStore.fetchMCPServers,
       fetchWebSearch: aiSettingsStore.fetchWebSearch,
       fetchKnowledge: aiSettingsStore.fetchKnowledge,
+      initDefaultProvider: aiSettingsStore.initDefaultProvider,
     };
   },
 )(observer(View));
