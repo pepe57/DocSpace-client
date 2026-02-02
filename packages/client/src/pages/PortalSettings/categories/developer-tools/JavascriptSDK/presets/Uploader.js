@@ -82,6 +82,16 @@ const Uploader = (props) => {
     frameId: "ds-frame",
     init: true,
     acceptCategories: "document",
+    linkMainText: t("Common:Upload"),
+    linkSecondaryText: t("Common:DropzoneTitleSecondary"),
+    events: {
+      onUploadSuccess: (data) => {
+        console.log("onUploadSuccess", data);
+      },
+      onUploadError: (data) => {
+        console.log("onUploadError", data);
+      },
+    },
   });
 
   const fromPackage = source === sdkSource.Package;
