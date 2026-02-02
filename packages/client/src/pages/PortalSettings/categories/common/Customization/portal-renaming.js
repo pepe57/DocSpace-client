@@ -29,7 +29,7 @@ import { useTheme } from "styled-components";
 import { withTranslation, Trans } from "react-i18next";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";

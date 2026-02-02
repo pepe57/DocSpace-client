@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@docspace/ui-kit/components/button";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { FileInput } from "@docspace/shared/components/file-input";

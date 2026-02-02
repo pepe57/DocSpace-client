@@ -38,7 +38,7 @@ import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
   InputSize,
   InputType,

@@ -34,7 +34,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { TenantTrustedDomainsType } from "@docspace/shared/enums";
 

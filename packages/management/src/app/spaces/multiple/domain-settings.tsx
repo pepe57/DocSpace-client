@@ -28,7 +28,7 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
 import { Text } from "@docspace/ui-kit/components/text";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
   TextInput,
   InputType,

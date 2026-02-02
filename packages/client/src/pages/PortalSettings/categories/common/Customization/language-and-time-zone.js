@@ -26,7 +26,7 @@
 
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";

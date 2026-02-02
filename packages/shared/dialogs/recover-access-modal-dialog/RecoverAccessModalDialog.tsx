@@ -38,7 +38,7 @@ import {
 	ModalDialog,
 	ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import { FieldContainer } from "../../components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { TValidate } from "../../components/email-input/EmailInput.types";
 
 import { sendRecoverRequest } from "../../api/settings";

@@ -31,7 +31,7 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { TPasswordSettings } from "@docspace/shared/api/settings/types";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import {
   InputSize,

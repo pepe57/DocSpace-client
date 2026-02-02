@@ -26,7 +26,7 @@
 
 import { withTranslation } from "react-i18next";
 
-import { SnackBar } from "@docspace/shared/components/snackbar";
+import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 
 import { Link } from "@docspace/ui-kit/components/link";
 
