@@ -176,6 +176,70 @@
   }
 }
 
+.styledIconContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+
+  :global {
+    .color-name {
+      padding-bottom: 4px;
+    }
+
+    .cover-icon {
+      overflow: visible;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  svg {
+    path {
+      fill: $light-gray-dark;
+    }
+  }
+
+  :global(.dark) & {
+    svg {
+      path {
+        fill: $dark-gray-dark;
+      }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    svg {
+      path {
+        fill: var(--icon-hover-color);
+      }
+    }
+  }
+
+  &.isSelected {
+    background-color: var(--icon-selected-bg);
+
+    svg {
+      path {
+        fill: var(--icon-hover-color);
+      }
+    }
+  }
+
+  @include mixins.mobile {
+    width: 40px;
+    height: 40px;
+  }
+}
+
 .roomLogoCoverContainer {
   :global {
     .room-logo-container {

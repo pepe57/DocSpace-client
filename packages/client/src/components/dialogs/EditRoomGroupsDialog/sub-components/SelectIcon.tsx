@@ -24,78 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { ReactSVG } from "react-svg";
-import styled, { css } from "styled-components";
-import { mobile } from "@docspace/shared/utils";
-import { TColorScheme } from "@docspace/shared/themes";
 import hexRgb from "hex-rgb";
 import { SelectIconProps } from "../RoomLogoCoverDialog.types";
 import { ICover } from "../EditRoomGroupsDialog.types";
-
-const StyledIconContainer = styled.div<{
-  $currentColorScheme?: TColorScheme;
-  isSelected: boolean;
-}>`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  width: 30px;
-  height: 30px;
-
-  border-radius: 4px;
-
-  .color-name {
-    padding-bottom: 4px;
-  }
-
-  svg {
-    path {
-      fill: ${(props) => props.theme.logoCover.iconColor};
-    }
-  }
-
-  &:hover {
-    cursor: pointer;
-    svg {
-      path {
-        ${({ $currentColorScheme }) =>
-          $currentColorScheme &&
-          css`
-            fill: ${$currentColorScheme.main?.accent};
-          `}
-      }
-    }
-  }
-
-  .cover-icon {
-    overflow: visible;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-  ${(props) =>
-    props.isSelected &&
-    props.$currentColorScheme &&
-    css`
-      background-color: ${hexRgb(props.$currentColorScheme.main?.accent, {
-        alpha: 0.2,
-        format: "css",
-      })};
-
-      svg {
-        path {
-          fill: ${props.$currentColorScheme.main?.accent};
-        }
-      }
-    `}
-
-  @media ${mobile} {
-    width: 40px;
-    height: 40px;
-  }
-`;
+import styles from "../EditRoomGroupsDialog.module.scss";
 
 export const SelectIcon = ({
   t,
@@ -115,16 +49,26 @@ export const SelectIcon = ({
       <div className="cover-icon-container">
         {covers?.map((icon) => {
           return (
-            <StyledIconContainer
-              isSelected={coverId === icon.id}
-              $currentColorScheme={$currentColorScheme}
+            <div
+              className={`${styles.styledIconContainer} ${coverId === icon.id ? styles.isSelected : ""}`}
               onClick={() => onSelectIcon(icon)}
               key={icon.id}
+              style={
+                {
+                  "--icon-hover-color": $currentColorScheme?.main?.accent,
+                  "--icon-selected-bg": $currentColorScheme?.main?.accent
+                    ? hexRgb($currentColorScheme.main.accent, {
+                        alpha: 0.2,
+                        format: "css",
+                      })
+                    : undefined,
+                } as React.CSSProperties
+              }
             >
               <ReactSVG
                 src={`data:image/svg+xml;utf8,${encodeURIComponent(icon.data)}`}
               />
-            </StyledIconContainer>
+            </div>
           );
         })}
       </div>
