@@ -34,6 +34,7 @@ import DropzoneComponent from "@docspace/shared/components/dropzone";
 import UploadSvgUrl from "PUBLIC_DIR/images/upload.svg?url";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
+import { frameCallEvent } from "@docspace/shared/utils/common";
 import {
   finalizeUploadSession,
   startUploadSession,
@@ -65,6 +66,9 @@ export type UploaderClientProps = {
   baseConfig?: {
     targetId?: string;
     acceptCategories?: string;
+    linkMainText?: string;
+    linkSecondaryText?: string;
+    extensionsText?: string;
   };
 };
 
@@ -78,6 +82,8 @@ export default function UploaderClient({
   const { t } = useTranslation(["Common"]);
 
   const folderTargetId = +(baseConfig?.targetId ?? 0);
+
+  console.log("baseConfig", baseConfig);
 
   const chunkUploadSize =
     filesSettings?.chunkUploadSize || DEFAULT_CHUNK_UPLOAD_SIZE;
@@ -99,18 +105,16 @@ export default function UploaderClient({
     return getAcceptExtensions(filesSettings, categories);
   }, [filesSettings, baseConfig?.acceptCategories]);
 
-  const exstsText = useMemo(
-    () => getExtsDisplayText(accept),
-    [accept],
-  );
+  const exstsText = useMemo(() => getExtsDisplayText(accept), [accept]);
 
   const uploadFiles = useCallback(async (rawFiles: File[]) => {
     const prepared = await attachParentFolderId(rawFiles, folderTargetId);
 
     const onlyFiles = prepared.filter((f) => !isEmptyDirectoryFile(f));
 
-    await runWithConcurrency(onlyFiles, maxUploadFilesCount, async (file) => {
+    const uploadedFiles: unknown[] = [];
 
+    await runWithConcurrency(onlyFiles, maxUploadFilesCount, async (file) => {
       const session = await startUploadSession(
         folderTargetId,
         file.name,
@@ -133,8 +137,11 @@ export default function UploaderClient({
         );
       });
 
-      await finalizeUploadSession(folderTargetId, session.id);
+      const result = await finalizeUploadSession(folderTargetId, session.id);
+      uploadedFiles.push(result);
     });
+
+    return uploadedFiles;
   }, []);
 
   const onDrop = useCallback(
@@ -144,15 +151,25 @@ export default function UploaderClient({
       setIsLoading(true);
 
       try {
-        await uploadFiles(acceptedFiles);
+        const uploadedFiles = await uploadFiles(acceptedFiles);
         toastr.success(
           t("Common:ItemsSuccessfullyUploaded", {
             count: acceptedFiles.length,
           }),
         );
+
+        frameCallEvent({
+          event: "onUploadSuccess",
+          data: uploadedFiles,
+        });
       } catch (err) {
         const message = getErrorMessage(err) || t("Common:UnexpectedError");
         toastr.error(message);
+
+        frameCallEvent({
+          event: "onUploadError",
+          data: { error: message },
+        });
       } finally {
         setIsLoading(false);
       }
@@ -167,8 +184,10 @@ export default function UploaderClient({
       onDrop={onDrop}
       accept={accept}
       getFilesFromEvent={getFilesFromEvent}
-      linkMainText={t("Common:Upload")}
-      linkSecondaryText={t("Common:DropzoneTitleSecondary")}
+      linkMainText={baseConfig?.linkMainText ?? t("Common:Upload")}
+      linkSecondaryText={
+        baseConfig?.linkSecondaryText ?? t("Common:DropzoneTitleSecondary")
+      }
       exstsText={exstsText}
       dataTestId="sdk-uploader"
       icon={UploadSvgUrl}
