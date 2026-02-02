@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router"; // или ваш роутер
+import { Link } from "react-router";
 
 import { PageType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";

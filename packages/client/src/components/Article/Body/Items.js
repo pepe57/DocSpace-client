@@ -28,7 +28,7 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Link } from "react-router"; // или ваш роутер
+import { Link } from "react-router";
 
 import {
   FolderType,
