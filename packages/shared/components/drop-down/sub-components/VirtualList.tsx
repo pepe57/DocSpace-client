@@ -46,6 +46,7 @@ const VirtualList = ({
   calculatedHeight,
   isNoFixedHeightOptions,
   disableScrollbarPadding,
+  useFlexibleHeight,
   getItemSize,
   enableKeyboardEvents,
 }: VirtualListProps) => {
@@ -142,7 +143,9 @@ const VirtualList = ({
 
   return isNoFixedHeightOptions ? (
     <Scrollbar
-      style={{ height: maxHeight, width: "100%" }}
+      style={
+        useFlexibleHeight ? { maxHeight, width: "100%" } : { height: maxHeight }
+      }
       className={disableScrollbarPadding ? "scroll-drop-down-item" : undefined}
       paddingInlineEnd={disableScrollbarPadding ? "0" : undefined}
     >

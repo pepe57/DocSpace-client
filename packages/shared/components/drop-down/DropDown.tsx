@@ -58,6 +58,7 @@ const DropDown = ({
   isMobileView,
   isNoFixedHeightOptions,
   disableScrollbarPadding,
+  useFlexibleHeight,
   enableKeyboardEvents,
   appendTo,
   eventTypes,
@@ -345,6 +346,7 @@ const DropDown = ({
             calculatedHeight={calculatedHeight || 0}
             isNoFixedHeightOptions={isNoFixedHeightOptions ?? false}
             disableScrollbarPadding={disableScrollbarPadding}
+            useFlexibleHeight={useFlexibleHeight}
             getItemSize={getItemSize}
             isOpen={open ?? false}
             enableKeyboardEvents={enableKeyboardEvents ?? false}

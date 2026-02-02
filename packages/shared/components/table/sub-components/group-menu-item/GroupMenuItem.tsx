@@ -119,13 +119,15 @@ const GroupMenuItem = React.memo(
             maxHeight={
               fixedDropdownStyles
                 ? isTabletOrBelow
-                  ? 5 * ITEM_HEIGHT_TABLET_MOBILE
-                  : 5 * ITEM_HEIGHT_DESKTOP
+                  ? Math.min(options?.length || 5, 5) *
+                    ITEM_HEIGHT_TABLET_MOBILE
+                  : Math.min(options?.length || 5, 5) * ITEM_HEIGHT_DESKTOP
                 : undefined
             }
             isMobileView={isMobileView}
             isNoFixedHeightOptions={fixedDropdownStyles}
             disableScrollbarPadding={fixedDropdownStyles}
+            useFlexibleHeight={fixedDropdownStyles}
             style={
               fixedDropdownStyles && !isMobileView
                 ? { width: "161px" }
