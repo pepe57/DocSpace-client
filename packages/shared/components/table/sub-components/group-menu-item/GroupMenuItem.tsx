@@ -141,6 +141,7 @@ const GroupMenuItem = React.memo(
                   {...rest}
                   setOpen={setOpen}
                   truncateText
+                  stopMouseDownPropagation={fixedDropdownStyles}
                 />
               );
             })}

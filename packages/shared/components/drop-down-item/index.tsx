@@ -130,6 +130,7 @@ const DropDownItem = ({
   testId,
   tooltip,
   truncateText,
+  stopMouseDownPropagation,
   ...rest
 }: DropDownItemProps) => {
   const { t } = useTranslation(["Common"]);
@@ -137,6 +138,12 @@ const DropDownItem = ({
   const { isBase } = useTheme();
 
   const withDisabledTooltip = disabled && tooltip;
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLElement>) => {
+    // Stop propagation to prevent click-outside detection from closing dropdown
+    if (stopMouseDownPropagation) e.stopPropagation();
+    onMouseDown?.(e);
+  };
 
   const handleClick = (
     e: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLInputElement>,
@@ -179,7 +186,7 @@ const DropDownItem = ({
         className,
       )}
       onClick={handleClick}
-      onMouseDown={onMouseDown}
+      onMouseDown={handleMouseDown}
       tabIndex={tabIndex}
       data-testid={testId ?? "drop-down-item"}
       data-focused={isActiveDescendant}

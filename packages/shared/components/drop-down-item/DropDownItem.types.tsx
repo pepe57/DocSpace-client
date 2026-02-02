@@ -116,4 +116,7 @@ export type DropDownItemProps = {
   testId?: string;
 
   tooltip?: string;
+
+  /** When true, stops mousedown propagation to prevent click-outside detection from closing dropdown before click fires */
+  stopMouseDownPropagation?: boolean;
 };
