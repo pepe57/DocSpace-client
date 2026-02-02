@@ -50,6 +50,7 @@ export type TAiProvider = {
   url: string;
   createdOn: string;
   modifiedOn: string;
+  isDefault: boolean;
   needReset?: boolean;
 };
 
@@ -249,3 +250,14 @@ export type TGetAgents = {
 };
 
 export type TEditAgentData = Partial<TCreateAgentData>;
+
+export type TDefaultProvider = {
+  providerId: TAiProvider["id"];
+  providerTitle: TAiProvider["title"];
+  defaultModel: TModel["modelId"];
+};
+
+export type TUpdateDefaultProviderData = {
+  providerId: TAiProvider["id"];
+  defaultModel: TModel["modelId"];
+};
