@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "De link naar het bestand met ingeschakeld <strong>aangepast filter</strong> is succesvol naar het klembord gekopieerd.",
   "LinkDoesNotExist": "De link die u probeert te openen bestaat niet.",
   "LinkExpirationDate": "Het bestand dat via de link is gedeeld, verloopt op <1>{{date}}</1>",
-  "LinkExpireAfter": "De link verloopt na <1>{{date}}</1>",
   "LinkExpired": "De link is verlopen.",
   "LinkHasExpired": "De link die u heeft gevolgd is verlopen.",
-  "LinkHasExpiredAndHasBeenDisabled": "De link is verlopen en uitgeschakeld",
   "LinkIsValid": "De link is geldig tot <1>{{date}}</1>",
   "LinkName": "Link naam",
   "LinkNoExpiration": "De link heeft <1>geen vervaldatum</1>",
@@ -756,7 +754,6 @@
   "Remove": "Verwijder",
   "RemovedFromList": "Verwijderd uit de lijst",
   "RemoveFromList": "Verwijder uit de lijst",
-  "RemoveLink": "Verwijder link",
   "Rename": "Hernoemen",
   "RenewSubscription": "Abonnement verlengen?",
   "RepeatInvitation": "Uitnodiging herhalen",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "Deel het originele formulier om in te vullen.",
   "ShareTheRoom": "kamer",
   "ShareToFillOut": "Deel om in te vullen",
-  "ShareVia": "Deel via",
   "ShareWithPortalUsers": "Delen met {{productName}} gebruikers",
   "ShareWithPortalUsersDescription": "Selecteer specifieke gebruikers van {{productName}} en nodig ze uit om het originele formulier in te vullen.",
   "ShowAboutWindow": "Laat het Overzichtvenster zien",
@@ -1054,5 +1050,6 @@
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
-  "YourTurn": "Uw beurt"
+  "YourTurn": "Uw beurt",
+  "ExternalLink": "Externe link"
 }

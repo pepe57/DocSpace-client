@@ -69,10 +69,12 @@ export const configureFilterByFilterParam = (
       filter.filterType = FilterType.DiagramsOnly;
       break;
 
+    case FilesSelectorFilterTypes.PDFForm:
     case FilterType.PDFForm:
       filter.filterType = FilterType.PDFForm;
       break;
 
+    case FilesSelectorFilterTypes.PPTX:
     case FilterType.PresentationsOnly:
       filter.filterType = FilterType.PresentationsOnly;
       break;

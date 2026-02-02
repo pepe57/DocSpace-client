@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "Đã sao chép liên kết đến tệp có <strong>Bộ lọc tùy chỉnh</strong> được bật vào bảng tạm.",
   "LinkDoesNotExist": "Liên kết bạn đang cố gắng mở không tồn tại.",
   "LinkExpirationDate": "Tệp tin được chia sẻ qua liên kết sẽ hết hạn vào <1>{{date}}</1>",
-  "LinkExpireAfter": "Liên kết sẽ hết hạn sau <1>{{date}} </1>",
   "LinkExpired": "Liên kết đã hết hạn.",
   "LinkHasExpired": "Liên kết bạn theo dõi đã hết hạn.",
-  "LinkHasExpiredAndHasBeenDisabled": "Liên kết đã hết hạn và đã bị vô hiệu hóa",
   "LinkIsValid": "Liên kết hợp lệ trong <1>{{date}} </1>",
   "LinkName": "Tên liên kết",
   "LinkNoExpiration": "Liên kết này không có <1>ngày hết hạn</1>",
@@ -756,7 +754,6 @@
   "Remove": "Xóa",
   "RemovedFromList": "Đã xóa khỏi danh sách",
   "RemoveFromList": "Xóa khỏi danh sách",
-  "RemoveLink": "Xóa đường dẫn",
   "Rename": "Đổi tên",
   "RenewSubscription": "Gia hạn đăng ký?",
   "RepeatInvitation": "Lặp lại lời mời",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "Chia sẻ biểu mẫu gốc để điền vào.",
   "ShareTheRoom": "phòng",
   "ShareToFillOut": "Chia sẻ để điền",
-  "ShareVia": "Chia sẻ qua",
   "ShareWithPortalUsers": "Chia sẻ với người dùng {{productName}}",
   "ShareWithPortalUsersDescription": "Chọn những người dùng cụ thể từ {{productName}} và mời họ điền vào biểu mẫu gốc.",
   "ShowAboutWindow": "Hiển thị cửa sổ Giới thiệu",
@@ -1054,5 +1050,6 @@
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "ExternalLink": "Liên kết bên ngoài"
 }

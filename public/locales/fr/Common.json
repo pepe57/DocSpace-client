@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "Le lien vers le fichier avec le <strong>Filtre personnalisé</strong> activé est copié avec succès dans le presse-papiers.",
   "LinkDoesNotExist": "Le lien que vous essayez d'ouvrir n'existe pas.",
   "LinkExpirationDate": "Le fichier partagé par lien expirera dans <1>{{date}}</1>",
-  "LinkExpireAfter": "Le lien expire après <1>{{date}}</1>",
   "LinkExpired": "Le lien a expiré.",
   "LinkHasExpired": "Le lien que vous avez suivi a expiré.",
-  "LinkHasExpiredAndHasBeenDisabled": "Le lien a expiré et a été désactivé",
   "LinkIsValid": "Le lien est valable pour <1>{{date}}</1>",
   "LinkName": "Nom du lien",
   "LinkNoExpiration": "Le lien n'a <1>pas de date d'expiration</1>",
@@ -756,7 +754,6 @@
   "Remove": "Supprimer",
   "RemovedFromList": "Retiré de la liste",
   "RemoveFromList": "Retirer de la liste",
-  "RemoveLink": "Supprimer le lien",
   "Rename": "Renommer",
   "RenewSubscription": "Renouveler l’abonnement ?",
   "RepeatInvitation": "Renouveler l’invitation",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "Partager le formulaire original à remplir.",
   "ShareTheRoom": "la salle",
   "ShareToFillOut": "Partager pour remplir",
-  "ShareVia": "Partager via",
   "ShareWithPortalUsers": "Partage avec les utilisateurs {{productName}}",
   "ShareWithPortalUsersDescription": "Sélectionnez des utilisateurs spécifiques dans {{productName}} et invitez-les à remplir le formulaire d'origine.",
   "ShowAboutWindow": "Afficher la fenêtre À propos",
@@ -1054,5 +1050,6 @@
   "YouHaveUnsavedChanges": "Vous avec des modifications non-sauvegardées",
   "YourCurrentDomain": "Votre domaine actuel",
   "YourLogo": "Votre logo",
-  "YourTurn": "Votre tour"
+  "YourTurn": "Votre tour",
+  "ExternalLink": "Lien externe"
 }

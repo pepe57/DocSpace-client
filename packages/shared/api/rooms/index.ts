@@ -354,7 +354,14 @@ export function removeLogoFromRoom(id) {
   });
 }
 
-export const setInvitationLinks = async (roomId, title, access, linkId) => {
+export const setInvitationLinks = async (
+  roomId,
+  title,
+  access,
+  linkId,
+  expirationDate,
+  maxUseCount,
+) => {
   const options = {
     method: "put",
     url: `/files/rooms/${roomId}/links`,
@@ -362,6 +369,8 @@ export const setInvitationLinks = async (roomId, title, access, linkId) => {
       linkId,
       title,
       access,
+      expirationDate,
+      maxUseCount,
     },
   };
   const skipRedirect = true;

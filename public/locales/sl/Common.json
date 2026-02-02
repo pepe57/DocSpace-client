@@ -522,10 +522,8 @@
   "LinkCopySuccessWithCustomFilter": "Povezava do datoteke z omogočenim <strong>prilagojenim filtrom</strong> je uspešno kopirana v odložišče.",
   "LinkDoesNotExist": "Povezava, ki jo poskušate odpreti, ne obstaja.",
   "LinkExpirationDate": "Datoteka, deljena po povezavi, bo potekla <1>{{date}}</1>",
-  "LinkExpireAfter": "Povezava bo potekla z dnem <1>{{date}}</1>",
   "LinkExpired": "Povezava je potekla.",
   "LinkHasExpired": "Povezava, ki ste ji sledili, je potekla.",
-  "LinkHasExpiredAndHasBeenDisabled": "Povezava je potekla in je onemogočena",
   "LinkIsValid": "Povezava je veljavna do<1>{{date}}</1>",
   "LinkName": "Ime povezave",
   "LinkNoExpiration": "Povezava nima <1>datuma poteka veljavnosti</1>",
@@ -756,7 +754,6 @@
   "Remove": "Odstrani",
   "RemovedFromList": "Odstranjeno s seznama",
   "RemoveFromList": "Odstrani iz seznama",
-  "RemoveLink": "Odstrani povezavo",
   "Rename": "Preimenuj",
   "RenewSubscription": "Želite obnoviti naročnino?",
   "RepeatInvitation": "Ponovi povabilo",
@@ -876,7 +873,6 @@
   "ShareTheOriginalFormForFillingOut": "Deli originalni obrazec za izpolnjevanje.",
   "ShareTheRoom": "soba",
   "ShareToFillOut": "Deli za izpolnjevanje",
-  "ShareVia": "Deli preko",
   "ShareWithPortalUsers": "Deljenje z uporabniki {{productName}}",
   "ShareWithPortalUsersDescription": "Izberite določene uporabnike iz {{productName}} in jih povabite, da izpolnijo izvirni obrazec.",
   "ShowAboutWindow": "Pokaži okno o programu",
@@ -1054,5 +1050,6 @@
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
-  "YourTurn": "Vi ste na vrsti"
+  "YourTurn": "Vi ste na vrsti",
+  "ExternalLink": "Zunanja povezava"
 }
