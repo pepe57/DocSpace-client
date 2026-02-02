@@ -26,7 +26,13 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { getTags, editRoom, updateTagName } from "../../../api/rooms";
+import {
+  getTags,
+  updateTagName,
+  addTagsToRoom,
+  removeTagRequest,
+  removeTagsFromRoom,
+} from "../../../api/rooms";
 
 import type { TTag, UpdateTagNameParams } from "../TagSelector.types";
 import { TAGS_QUERY_KEY } from "../TagSelector.constants";
@@ -36,35 +42,6 @@ export function useTagsQuery() {
     queryKey: TAGS_QUERY_KEY,
     queryFn: () => getTags() ?? Promise.resolve([]),
     refetchOnMount: true,
-  });
-}
-
-export function useUpdateRoomTagsMutation(roomId: string | number) {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: (tags: TTag[]) =>
-      editRoom(roomId, {
-        tags: tags.filter((tag) => tag.checked).map((tag) => tag.label),
-      }),
-    // onSuccess: () => {
-    //   queryClient.invalidateQueries({ queryKey: TAGS_QUERY_KEY });
-    // },
-    onMutate: async (newTags: TTag[]) => {
-      await queryClient.cancelQueries({ queryKey: TAGS_QUERY_KEY });
-
-      const previousData: string[] | undefined =
-        queryClient.getQueryData(TAGS_QUERY_KEY);
-
-      console.log({ previousData });
-
-      queryClient.setQueryData(TAGS_QUERY_KEY, newTags);
-
-      return { previousData };
-    },
-    onError: (_, __, context) => {
-      queryClient.setQueryData(TAGS_QUERY_KEY, context?.previousData);
-    },
   });
 }
 
@@ -91,6 +68,68 @@ export function useUpdateTagNameMutation() {
     },
     onError: (_, __, context) => {
       queryClient.setQueryData(TAGS_QUERY_KEY, context?.previousData);
+    },
+  });
+}
+
+export function useCreateTagMutation(roomId: string | number) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (newTag: string) => addTagsToRoom(roomId, [newTag]),
+
+    onMutate: async (newTag: string) => {
+      await queryClient.cancelQueries({ queryKey: TAGS_QUERY_KEY });
+
+      const previousData: string[] | undefined =
+        queryClient.getQueryData(TAGS_QUERY_KEY);
+
+      queryClient.setQueryData(TAGS_QUERY_KEY, [
+        newTag,
+        ...(previousData || []),
+      ]);
+
+      return { previousData };
+    },
+    onError: (_, __, context) => {
+      queryClient.setQueryData(TAGS_QUERY_KEY, context?.previousData);
+    },
+  });
+}
+
+export function useRemoveTagMutation() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (removeTag: string) => removeTagRequest([removeTag]),
+
+    onMutate: async (removeTag: string) => {
+      await queryClient.cancelQueries({ queryKey: TAGS_QUERY_KEY });
+
+      const previousData: string[] | undefined =
+        queryClient.getQueryData(TAGS_QUERY_KEY);
+
+      if (previousData) {
+        queryClient.setQueryData(
+          TAGS_QUERY_KEY,
+          previousData.filter((tag) => removeTag !== tag),
+        );
+      }
+
+      return { previousData };
+    },
+    onError: (_, __, context) => {
+      queryClient.setQueryData(TAGS_QUERY_KEY, context?.previousData);
+    },
+  });
+}
+
+export function useUpdateTag(roomId: string | number) {
+  return useMutation({
+    mutationFn: (tag: TTag) => {
+      const requestApi = tag.checked ? addTagsToRoom : removeTagsFromRoom;
+
+      return requestApi(roomId, [tag.label]);
     },
   });
 }

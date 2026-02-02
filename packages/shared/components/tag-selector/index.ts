@@ -28,7 +28,4 @@ export { TagSelectorProvider, useTagSelector } from "./TagSelector.provider";
 export { TagSelectorFilter } from "./TagSelector.filter";
 export { TagSelectorContent } from "./TagSelector.content";
 export { TagSelectorLoader } from "./TagSelector.loader";
-export {
-  useTagsQuery,
-  useUpdateRoomTagsMutation,
-} from "./hooks/useTagsQuery";
+export { useTagsQuery } from "./hooks/useTagsQuery";

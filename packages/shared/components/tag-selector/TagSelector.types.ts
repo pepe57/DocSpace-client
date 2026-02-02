@@ -76,3 +76,7 @@ export interface ITagSelectorStateContext {
   setSearchValue: (value: string) => void;
   clearSearch: () => void;
 }
+
+export interface TagSelectorFilterProps {
+  roomId: string | number;
+}

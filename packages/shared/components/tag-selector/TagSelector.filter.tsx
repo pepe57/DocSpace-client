@@ -40,13 +40,9 @@ import { InputType, TextInput } from "../text-input";
 import { toastr } from "../toast";
 
 import { useTagSelector } from "./TagSelector.provider";
-import { useUpdateRoomTagsMutation } from "./hooks/useTagsQuery";
-import type { TTag } from "./TagSelector.types";
+import { useCreateTagMutation } from "./hooks/useTagsQuery";
+import type { TagSelectorFilterProps, TTag } from "./TagSelector.types";
 import styles from "./TagSelector.module.scss";
-
-interface TagSelectorFilterProps {
-  roomId: string | number;
-}
 
 export const TagSelectorFilter: React.FC<TagSelectorFilterProps> = ({
   roomId,
@@ -62,7 +58,7 @@ export const TagSelectorFilter: React.FC<TagSelectorFilterProps> = ({
     setTags,
     filteredTags,
   } = useTagSelector();
-  const updateRoomTags = useUpdateRoomTagsMutation(roomId);
+  const createTag = useCreateTagMutation(roomId);
 
   const [inputValue, setInputValue] = useState("");
 
@@ -92,7 +88,7 @@ export const TagSelectorFilter: React.FC<TagSelectorFilterProps> = ({
     clearSearch();
     setInputValue("");
 
-    updateRoomTags.mutate(updatedTags, {
+    createTag.mutate(trimmedValue, {
       onSuccess: () => {
         setTags(updatedTags);
       },
@@ -102,7 +98,7 @@ export const TagSelectorFilter: React.FC<TagSelectorFilterProps> = ({
       },
     });
     setTags(updatedTags);
-  }, [searchValue, tags, clearSearch, updateRoomTags, setTags]);
+  }, [searchValue, tags, clearSearch, createTag, setTags]);
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {

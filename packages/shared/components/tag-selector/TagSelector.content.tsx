@@ -42,7 +42,9 @@ import { InputSize, InputType, TextInput } from "../text-input";
 
 import { useTagSelector } from "./TagSelector.provider";
 import {
-  useUpdateRoomTagsMutation,
+  useCreateTagMutation,
+  useUpdateTag,
+  useRemoveTagMutation,
   useUpdateTagNameMutation,
 } from "./hooks/useTagsQuery";
 import styles from "./TagSelector.module.scss";
@@ -60,22 +62,25 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
 }) => {
   const isMobile = useIsMobile();
   const { filteredTags, tags, setTags } = useTagSelector();
-  const updateRoomTags = useUpdateRoomTagsMutation(roomId);
+  const removeTag = useRemoveTagMutation();
+  const addTagToRoom = useCreateTagMutation(roomId);
+  const updateTag = useUpdateTag(roomId);
   const updateTagName = useUpdateTagNameMutation();
 
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editValue, setEditValue] = useState("");
 
   const toggleChecked = useCallback(
-    (index: string) => {
+    (label: string) => {
       const updatedTags = [...tags];
-      const tagIndex = updatedTags.findIndex((tag) => tag.label === index);
+      const tagIndex = updatedTags.findIndex((tag) => tag.label === label);
 
       if (tagIndex === -1) return;
+      const checked = !updatedTags[tagIndex].checked;
 
-      updatedTags[tagIndex].checked = !updatedTags[tagIndex].checked;
+      updatedTags[tagIndex].checked = checked;
 
-      updateRoomTags.mutate(updatedTags, {
+      updateTag.mutate(updatedTags[tagIndex], {
         onSuccess: () => {
           setTags(updatedTags);
         },
@@ -85,7 +90,7 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
         },
       });
     },
-    [tags, updateRoomTags],
+    [tags, removeTag, addTagToRoom],
   );
 
   const handleEdit = useCallback(
@@ -121,7 +126,7 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
         },
       },
     );
-  }, [editingIndex, editValue, tags, updateRoomTags]);
+  }, [editingIndex, editValue, tags]);
 
   const cancelEdit = useCallback(() => {
     setEditingIndex(null);
@@ -137,7 +142,7 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
 
       updatedTags.splice(tagIndex, 1);
 
-      updateRoomTags.mutate(updatedTags, {
+      removeTag.mutate(tag, {
         onSuccess: () => {
           setTags(updatedTags);
         },
@@ -147,7 +152,7 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
         },
       });
     },
-    [tags, updateRoomTags],
+    [tags, removeTag],
   );
 
   const editTagHandleKey = useCallback(
