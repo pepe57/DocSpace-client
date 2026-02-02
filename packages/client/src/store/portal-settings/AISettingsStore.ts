@@ -377,9 +377,11 @@ class AISettingsStore {
   initDefaultProvider = async () => {
     try {
       const defaultProvider = await getDefaultProvider();
-      this.setDefaultProvider(defaultProvider);
 
-      await this.fetchDefaultProviderModels(defaultProvider.providerId);
+      if (defaultProvider) {
+        this.setDefaultProvider(defaultProvider);
+        await this.fetchDefaultProviderModels(defaultProvider.providerId);
+      }
     } catch (e) {
       console.error(e);
     } finally {
@@ -414,7 +416,7 @@ class AISettingsStore {
     this.setDefaultProvider(null);
     this.setDefaultProviderModels(null);
     this.setDefaultProviderInitied(false);
-  }
+  };
 
   get systemMCPServers() {
     return this.mcpServers.filter(
