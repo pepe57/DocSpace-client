@@ -3320,6 +3320,14 @@
   --icon-error-color: #{$dark-error-status};
   --default-templates-border-color: #{$gray-dark-mid};
 }
+
+.light { 
+  --editors-tooltip-header-color: #{$gray-text};
+}
+
+.dark { 
+  --editors-tooltip-header-color: #{$dark-gray-dark};
+}
 .light {
   --room-grouping-dialog-tag-text: #{$light-gray-dark};
   --room-grouping-dialog-tag-icon: #{$light-gray-dark};

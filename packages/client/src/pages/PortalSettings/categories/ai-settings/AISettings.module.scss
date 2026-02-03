@@ -55,6 +55,23 @@
   margin-bottom: 8px;
 }
 
+.defaultProviderDescription {
+  margin-bottom: 16px;
+}
+
+.defaultProviderForm {
+  max-width: 340px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.defaultProviderFormButtons {
+  display: flex;
+  gap: 8px;
+}
+
 .learnMoreLink {
   margin-bottom: 16px;
 }
@@ -74,6 +91,10 @@
   @include mixins.mobile {
     grid-template-columns: 1fr;
   }
+}
+
+.providerList {
+  margin-bottom: 20px;
 }
 
 .mcpHeading {

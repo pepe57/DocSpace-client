@@ -283,6 +283,7 @@ const View = ({
   const toolsSettings = useToolsSettings({
     roomId: roomId ?? "",
     aiConfig,
+    chatSettings: selectedFolderStore.chatSettings,
   });
 
   const initChats = useInitChats({

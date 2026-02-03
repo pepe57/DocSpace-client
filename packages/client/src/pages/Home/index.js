@@ -161,6 +161,7 @@ const PureHome = (props) => {
     dropTargetPreview,
     setDropTargetPreview,
     selectedFolderTitle,
+    selectedFolderChatSettings,
     clearDropPreviewLocation,
     canCreateSecurity,
     startDropPreview,
@@ -394,7 +395,9 @@ const PureHome = (props) => {
   }, [shouldRenderSectionFilter, isChangePageRequestRunning]);
 
   const isDisabledKnowledge =
-    !aiConfig?.vectorizationEnabled && currentTab === "knowledge";
+    !aiConfig?.vectorizationEnabled &&
+    !selectedFolderChatSettings?.internal &&
+    currentTab === "knowledge";
 
   const isErrorAvailable =
     isErrorRoomNotAvailable || isErrorAIAgentNotAvailable;
@@ -485,6 +488,7 @@ export const Component = inject(
       setSelectedFolder,
       security: folderSecurity,
       title: selectedFolderTitle,
+      chatSettings: selectedFolderChatSettings,
     } = selectedFolderStore;
 
     const canCreateSecurity = folderSecurity?.Create;
@@ -754,6 +758,7 @@ export const Component = inject(
       dropTargetPreview,
       setDropTargetPreview,
       selectedFolderTitle,
+      selectedFolderChatSettings,
       clearDropPreviewLocation,
       canCreateSecurity,
       startDropPreview,

@@ -108,6 +108,7 @@ const SectionBodyContent = (props) => {
     aiConfig,
     isInsideKnowledge,
     isErrorAIAgentNotAvailable,
+    selectedFolderChatSettings,
     roomsFilterGroupId,
     setAddRoomToGroupDialogVisible,
     deleteRoomGroup,
@@ -481,7 +482,11 @@ const SectionBodyContent = (props) => {
   if (isErrorRoomNotAvailable)
     return <NoAccessContainer type={NoAccessContainerType.Room} />;
 
-  if (isInsideKnowledge && !aiConfig?.vectorizationEnabled)
+  if (
+    isInsideKnowledge &&
+    !aiConfig?.vectorizationEnabled &&
+    !selectedFolderChatSettings?.internal
+  )
     return <KnowledgeDisabledContainer />;
 
   if (
@@ -579,6 +584,7 @@ export default inject(
       setDragging,
       folderId: selectedFolderStore.id,
       roomType: selectedFolderStore.roomType,
+      selectedFolderChatSettings: selectedFolderStore.chatSettings,
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
       isArchiveFolderRoot: treeFoldersStore.isArchiveFolderRoot,
