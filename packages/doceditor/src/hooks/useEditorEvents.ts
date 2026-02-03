@@ -262,7 +262,7 @@ const useEditorEvents = ({
 
     const connector = docEditor?.createConnector?.();
 
-    if (connector) {
+    if (connector && successAuth) {
       const defaultPortalProvider =
         (await getDefaultProvider()) as TDefaultProvider;
 
@@ -347,7 +347,13 @@ const useEditorEvents = ({
         docEditor,
       ); // Do not remove: it's for Back button on Mobile App
     }
-  }, [config?.errorMessage, sdkConfig?.frameId, checkAndRequestRoles, t]);
+  }, [
+    config?.errorMessage,
+    sdkConfig?.frameId,
+    checkAndRequestRoles,
+    t,
+    successAuth,
+  ]);
 
   const onUserActionRequired = React.useCallback(() => {
     frameCallCommand("setIsLoaded");
