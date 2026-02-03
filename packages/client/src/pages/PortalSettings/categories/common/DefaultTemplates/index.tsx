@@ -38,21 +38,9 @@ import styles from "./DefaultTemplates.module.scss";
 
 type Props = {
   templates?: TStore["defaultTemplatesStore"]["templates"];
-  setTemplate?: TStore["defaultTemplatesStore"]["setTemplate"];
-  resetTemplate?: TStore["defaultTemplatesStore"]["resetTemplate"];
-  getFilterParam?: TStore["defaultTemplatesStore"]["getFilterParam"];
-  openUrl?: TStore["settingsStore"]["openUrl"];
-  uploadTemplate?: TStore["defaultTemplatesStore"]["uploadTemplate"];
 };
 
-const DefaultTemplates = ({
-  templates,
-  setTemplate,
-  resetTemplate,
-  getFilterParam,
-  openUrl,
-  uploadTemplate,
-}: Props) => {
+const DefaultTemplates = ({ templates }: Props) => {
   const { t } = useTranslation("Settings");
 
   useEffect(() => {
@@ -70,11 +58,6 @@ const DefaultTemplates = ({
             index={index}
             key={`default-template-row-${index}`}
             item={item}
-            getFilterParam={getFilterParam}
-            setTemplate={setTemplate}
-            resetTemplate={resetTemplate}
-            uploadTemplate={uploadTemplate}
-            openUrl={openUrl}
           />
         ))}
       </div>
@@ -82,23 +65,9 @@ const DefaultTemplates = ({
   );
 };
 
-export default inject(({ defaultTemplatesStore, settingsStore }: TStore) => {
-  const {
-    templates,
-    setTemplate,
-    getFilterParam,
-    resetTemplate,
-    uploadTemplate,
-  } = defaultTemplatesStore;
-
-  const { openUrl } = settingsStore;
-
+export default inject(({ defaultTemplatesStore }: TStore) => {
+  const { templates } = defaultTemplatesStore;
   return {
     templates,
-    setTemplate,
-    getFilterParam,
-    resetTemplate,
-    openUrl,
-    uploadTemplate,
   };
 })(withLoading(observer(DefaultTemplates)));

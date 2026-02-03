@@ -203,26 +203,38 @@ const TemplatesRow = ({
         directionX="left"
         getData={getOptions}
       />
-      {/* @ts-expect-error need pass all props */}
-      <FilesSelector
-        key="select-default-template-dialog"
-        filterParam={filterParam}
-        isPanelVisible={isSelectorVisible}
-        // @ts-expect-error its always be good
-        onSelectFile={(file) => onSelectFile(file)}
-        onClose={() => setIsSelectorVisible(false)}
-        acceptButtonLabel={t("Common:SelectAction")}
-        isMultiSelect={false}
-        openRoot
-      />
+      {isSelectorVisible ? (
+        /* @ts-expect-error need pass all props */
+        <FilesSelector
+          key="select-default-template-dialog"
+          filterParam={filterParam}
+          isPanelVisible={isSelectorVisible}
+          onSelectFile={(file) => onSelectFile(file as TFile)}
+          onClose={() => setIsSelectorVisible(false)}
+          acceptButtonLabel={t("Common:SelectAction")}
+          isMultiSelect={false}
+          openRoot
+        />
+      ) : null}
     </div>
   );
 };
 
-export default inject(({ filesSettingsStore }: TStore) => {
-  const { getFileIcon } = filesSettingsStore;
+export default inject(
+  ({ filesSettingsStore, defaultTemplatesStore, settingsStore }: TStore) => {
+    const { getFileIcon } = filesSettingsStore;
+    const { setTemplate, getFilterParam, resetTemplate, uploadTemplate } =
+      defaultTemplatesStore;
 
-  return {
-    getFileIcon,
-  };
-})(observer(TemplatesRow));
+    const { openUrl } = settingsStore;
+
+    return {
+      getFileIcon,
+      getFilterParam,
+      setTemplate,
+      resetTemplate,
+      openUrl,
+      uploadTemplate,
+    };
+  },
+)(observer(TemplatesRow));
