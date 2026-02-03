@@ -35,249 +35,250 @@ import { getAvailablePortals as getAvailablePortalsServer } from "./actions";
 import { MessageKey, OAuth2ErrorKey } from "./enums";
 
 export async function oAuthLogin(profile: string) {
-  let isSuccess = false;
-  try {
-    await thirdPartyLogin(profile);
-    isSuccess = true;
-    const redirectPath = localStorage.getItem("redirectPath");
+	let isSuccess = false;
+	try {
+		await thirdPartyLogin(profile);
+		isSuccess = true;
+		const redirectPath = localStorage.getItem("redirectPath");
 
-    if (redirectPath) {
-      localStorage.removeItem("redirectPath");
-      window.location.href = redirectPath;
-    }
-  } catch (e) {
-    console.error(e);
-    isSuccess = false;
-    return isSuccess;
-  }
+		if (redirectPath) {
+			localStorage.removeItem("redirectPath");
+			window.location.href = redirectPath;
+		}
+	} catch (e) {
+		console.error(e);
+		isSuccess = false;
+		return isSuccess;
+	}
 
-  localStorage.removeItem("profile");
-  localStorage.removeItem("code");
+	localStorage.removeItem("profile");
+	localStorage.removeItem("code");
 
-  return isSuccess;
+	return isSuccess;
 }
 
 export const getMessageFromKey = (messageKey: number) => {
-  return MessageKey[messageKey];
+	return MessageKey[messageKey];
 };
 
 export const getMessageKeyTranslate = (t: TTranslation, message: string) => {
-  switch (message) {
-    case "Error":
-      return t("Common:Error");
-    case "None":
-      return t("Common:UnknownError");
-    case "ErrorUserNotFound":
-      return t("Errors:ErrorUserNotFound");
-    case "ErrorExpiredActivationLink":
-      return t("Errors:ErrorExpiredActivationLink");
-    case "ErrorInvalidActivationLink":
-      return t("Errors:ErrorInvalidActivationLink");
-    case "ErrorConfirmURLError":
-      return t("Errors:ErrorConfirmURLError");
-    case "ErrorNotCorrectEmail":
-      return t("Common:IncorrectEmail");
-    case "LoginWithBruteForce":
-      return t("Errors:LoginWithBruteForce");
-    case "RecaptchaInvalid":
-      return t("Errors:RecaptchaInvalid");
-    case "LoginWithAccountNotFound":
-      return t("Errors:LoginWithAccountNotFound");
-    case "InvalidUsernameOrPassword":
-      return t("Errors:InvalidUsernameOrPassword");
-    case "SsoSettingsDisabled":
-      return t("Errors:SsoSettingsDisabled");
-    case "ErrorNotAllowedOption":
-      return t("Errors:ErrorNotAllowedOption");
-    case "SsoSettingsEmptyToken":
-      return t("Errors:SsoSettingsEmptyToken");
-    case "SsoSettingsNotValidToken":
-      return t("Errors:SsoSettingsNotValidToken");
-    case "SsoSettingsCantCreateUser":
-      return t("Errors:SsoSettingsCantCreateUser");
-    case "SsoSettingsUserTerminated":
-      return t("Errors:SsoSettingsUserTerminated");
-    case "SsoError":
-      return t("Errors:SsoError");
-    case "SsoAuthFailed":
-      return t("Errors:SsoAuthFailed");
-    case "SsoAttributesNotFound":
-      return t("Errors:SsoAttributesNotFound");
-    case "QuotaPaidUserLimitError":
-      return t("Common:QuotaPaidUserLimitError");
-    case "InvalidLink":
-      return t("Common:InvalidLink");
-    default:
-      return t("Common:Error");
-  }
+	switch (message) {
+		case "Error":
+			return t("Common:Error");
+		case "None":
+			return t("Common:UnknownError");
+		case "ErrorUserNotFound":
+			return t("Errors:ErrorUserNotFound");
+		case "ErrorExpiredActivationLink":
+			return t("Errors:ErrorExpiredActivationLink");
+		case "ErrorInvalidActivationLink":
+			return t("Errors:ErrorInvalidActivationLink");
+		case "ErrorConfirmURLError":
+			return t("Errors:ErrorConfirmURLError");
+		case "ErrorNotCorrectEmail":
+			return t("Common:IncorrectEmail");
+		case "LoginWithBruteForce":
+			return t("Errors:LoginWithBruteForce");
+		case "RecaptchaInvalid":
+			return t("Errors:RecaptchaInvalid");
+		case "LoginWithAccountNotFound":
+			return t("Errors:LoginWithAccountNotFound");
+		case "InvalidUsernameOrPassword":
+			return t("Errors:InvalidUsernameOrPassword");
+		case "SsoSettingsDisabled":
+			return t("Errors:SsoSettingsDisabled");
+		case "ErrorNotAllowedOption":
+			return t("Errors:ErrorNotAllowedOption");
+		case "SsoSettingsEmptyToken":
+			return t("Errors:SsoSettingsEmptyToken");
+		case "SsoSettingsNotValidToken":
+			return t("Errors:SsoSettingsNotValidToken");
+		case "SsoSettingsCantCreateUser":
+			return t("Errors:SsoSettingsCantCreateUser");
+		case "SsoSettingsUserTerminated":
+			return t("Errors:SsoSettingsUserTerminated");
+		case "SsoError":
+			return t("Errors:SsoError");
+		case "SsoAuthFailed":
+			return t("Errors:SsoAuthFailed");
+		case "SsoAttributesNotFound":
+			return t("Errors:SsoAttributesNotFound");
+		case "QuotaPaidUserLimitError":
+			return t("Common:QuotaPaidUserLimitError");
+		case "InvalidLink":
+			return t("Common:InvalidLink");
+		default:
+			return t("Common:Error");
+	}
 };
 
 export const getOAuthMessageKeyTranslation = (
-  t: TTranslation,
-  messageKey?: OAuth2ErrorKey,
+	t: TTranslation,
+	messageKey?: OAuth2ErrorKey,
 ) => {
-  if (!messageKey) return;
-  switch (messageKey) {
-    case OAuth2ErrorKey.asc_retrieval_error:
-      return t("Common:SomethingWentWrong");
-    case OAuth2ErrorKey.client_disabled_error:
-      return t("Errors:OAuthApplicationDisabled");
-    case OAuth2ErrorKey.client_not_found_error:
-      return t("Errors:OAuthApplicationEmpty");
-    case OAuth2ErrorKey.client_permission_denied_error:
-      return t("Common:AccessDenied");
-    case OAuth2ErrorKey.missing_client_id_error:
-      return t("Errors:OAuthClientEmpty");
-    case OAuth2ErrorKey.something_went_wrong_error:
-      return t("Common:UnknownError");
-    case OAuth2ErrorKey.missing_asc_cookie_error:
-    default:
-      return t("Common:Error");
-  }
+	if (!messageKey) return;
+	switch (messageKey) {
+		case OAuth2ErrorKey.asc_retrieval_error:
+			return t("Common:SomethingWentWrong");
+		case OAuth2ErrorKey.client_disabled_error:
+			return t("Errors:OAuthApplicationDisabled");
+		case OAuth2ErrorKey.client_not_found_error:
+			return t("Errors:OAuthApplicationEmpty");
+		case OAuth2ErrorKey.client_permission_denied_error:
+			return t("Common:AccessDenied");
+		case OAuth2ErrorKey.missing_client_id_error:
+			return t("Errors:OAuthClientEmpty");
+		case OAuth2ErrorKey.something_went_wrong_error:
+			return t("Common:UnknownError");
+		case OAuth2ErrorKey.missing_asc_cookie_error:
+		default:
+			return t("Common:Error");
+	}
 };
 
 export const getInvitationLinkData = (encodeString: Nullable<string>) => {
-  if (!encodeString) return;
+	if (!encodeString) return;
 
-  let locationObject;
+	let locationObject;
 
-  try {
-    const decodeString = decodeURIComponent(encodeString);
-    locationObject = parseURL(decodeString);
-  } catch (e) {
-    console.error("parse error", e);
-  }
+	try {
+		const decodeString = decodeURIComponent(encodeString);
+		locationObject = parseURL(decodeString);
+	} catch (e) {
+		console.error("parse error", e);
+	}
 
-  return locationObject;
+	return locationObject;
 };
 
 export const getEmailFromInvitation = (encodeString: Nullable<string>) => {
-  if (!encodeString) return "";
+	if (!encodeString) return "";
 
-  const queryParams = getInvitationLinkData(encodeString);
+	const queryParams = getInvitationLinkData(encodeString);
 
-  if (!queryParams || !queryParams.email) return "";
+	if (!queryParams || !queryParams.email) return "";
 
-  return queryParams.email;
+	return queryParams.email;
 };
 
 export const generateOAuth2ReferenceURl = (clientId: string) => {
-  return `/login/consent?clientId=${clientId}`;
+	return `/login/consent?clientId=${clientId}`;
 };
 
 export const getConfirmDataFromInvitation = (
-  encodeString: Nullable<string>,
+	encodeString: Nullable<string>,
 ) => {
-  if (!encodeString) return "";
+	if (!encodeString) return "";
 
-  const queryParams = getInvitationLinkData(encodeString);
+	const queryParams = getInvitationLinkData(encodeString);
 
-  if (!queryParams || !queryParams.linkData) return {};
+	if (!queryParams || !queryParams.linkData) return {};
 
-  return queryParams.linkData;
+	return queryParams.linkData;
 };
 
 export const getStringFromSearchParams = (searchParams: {
-  [key: string]: string;
+	[key: string]: string;
 }): string => {
-  const stringSearchParams = Object.entries(searchParams).reduce(
-    (acc, [key, value]) => `${acc}&${key}=${value}`,
-    "",
-  );
+	const stringSearchParams = Object.entries(searchParams).reduce(
+		(acc, [key, value]) => `${acc}&${key}=${value}`,
+		"",
+	);
 
-  return stringSearchParams.slice(1);
+	return stringSearchParams.slice(1);
 };
 
 export const getRedirectURL = () => {
-  const redirect_url = getCookie("x-redirect-authorization-uri");
+	const redirect_url = getCookie("x-redirect-authorization-uri");
 
-  if (!redirect_url) {
-    const scopes = getCookie("x-scopes");
-    const url = getCookie("x-url");
+	if (!redirect_url) {
+		const scopes = getCookie("x-scopes");
+		const url = getCookie("x-url");
 
-    let redirectUrl = url;
+		let redirectUrl = url;
 
-    if (scopes) redirectUrl += `&scope=${scopes?.split(";").join("%20")}`;
+		if (scopes) redirectUrl += `&scope=${scopes?.split(";").join("%20")}`;
 
-    return redirectUrl!;
-  }
+		return redirectUrl!;
+	}
 
-  const decodedRedirectUrl = window.atob(
-    redirect_url.replace(/-/g, "+").replace(/_/g, "/"),
-  );
+	const decodedRedirectUrl = window.atob(
+		redirect_url.replace(/-/g, "+").replace(/_/g, "/"),
+	);
 
-  return decodedRedirectUrl;
+	return decodedRedirectUrl;
 };
 
 export const encodeParams = (str: string) => {
-  return str
-    .split("&")
-    .map((pair) => {
-      const [key, value] = pair.split("=");
-      const encodedValue = encodeURIComponent(value);
-      return `${key}=${encodedValue}`;
-    })
-    .join("&");
+	return str
+		.split("&")
+		.map((pair) => {
+			const [key, value] = pair.split("=");
+			const encodedValue = encodeURIComponent(value);
+			return `${key}=${encodedValue}`;
+		})
+		.join("&");
 };
 
 export async function getAvailablePortals(data: {
-  Email: string;
-  PasswordHash: string;
-  recaptchaResponse?: string | null | undefined;
-  recaptchaType?: unknown | undefined;
+	Email?: string;
+	PasswordHash?: string;
+	recaptchaResponse?: string | null | undefined;
+	recaptchaType?: unknown | undefined;
+	ThirdPartyProfile?: string;
 }) {
-  const config = window.ClientConfig;
+	const config = window.ClientConfig;
 
-  const path = `/portal/signin`;
+	const path = `/portal/signin`;
 
-  if (config?.oauth2?.apiSystem.length) {
-    const urls: string[] = config.oauth2.apiSystem.map(
-      (url: string) => `https://${url}/apisystem${path}`,
-    );
+	if (config?.oauth2?.apiSystem.length) {
+		const urls: string[] = config.oauth2.apiSystem.map(
+			(url: string) => `https://${url}/apisystem${path}`,
+		);
 
-    const actions = await Promise.allSettled(
-      urls.map((url: string) =>
-        fetch(url, {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }),
-      ),
-    );
+		const actions = await Promise.allSettled(
+			urls.map((url: string) =>
+				fetch(url, {
+					method: "POST",
+					body: JSON.stringify(data),
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}),
+			),
+		);
 
-    const fullFiledActions = actions.filter(
-      (action) => action.status === "fulfilled",
-    );
+		const fullFiledActions = actions.filter(
+			(action) => action.status === "fulfilled",
+		);
 
-    if (fullFiledActions.length) {
-      const portalsRes = fullFiledActions
-        .filter((action) => {
-          return action.value.ok;
-        })
-        .map((action) => action.value);
+		if (fullFiledActions.length) {
+			const portalsRes = fullFiledActions
+				.filter((action) => {
+					return action.value.ok;
+				})
+				.map((action) => action.value);
 
-      if (!portalsRes.length) {
-        const portals = await fullFiledActions[0].value.json();
+			if (!portalsRes.length) {
+				const portals = await fullFiledActions[0].value.json();
 
-        return { ...portals, status: fullFiledActions[0].status };
-      }
+				return { ...portals, status: fullFiledActions[0].status };
+			}
 
-      const portals = (await Promise.all(portalsRes.map((res) => res.json())))
-        .map(
-          (p: { tenants: { portalLink: string; portalName: string }[] }) =>
-            p.tenants,
-        )
-        .flat();
+			const portals = (await Promise.all(portalsRes.map((res) => res.json())))
+				.map(
+					(p: { tenants: { portalLink: string; portalName: string }[] }) =>
+						p.tenants,
+				)
+				.flat();
 
-      return portals;
-    }
-  }
+			return portals;
+		}
+	}
 
-  const portalsRes = await getAvailablePortalsServer(data);
+	const portalsRes = await getAvailablePortalsServer(data);
 
-  if (portalsRes.error) return portalsRes;
+	if (portalsRes.error) return portalsRes;
 
-  return portalsRes as { portalLink: string; portalName: string }[];
+	return portalsRes as { portalLink: string; portalName: string }[];
 }
