@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
@@ -50,22 +50,22 @@ import {
   attachParentFolderId,
   runWithConcurrency,
   createChunks,
-  getAcceptExtensions,
-  parseAcceptCategories,
-  getExtsDisplayText,
 } from "./_utils";
 import styles from "./Uploader.module.scss";
 import { getErrorMessage } from "@/utils";
-
-const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;
-const DEFAULT_MAX_UPLOAD_THREAD_COUNT = 3;
-const DEFAULT_MAX_UPLOAD_FILES_COUNT = 2;
+import {
+  DEFAULT_CHUNK_UPLOAD_SIZE,
+  DEFAULT_MAX_UPLOAD_FILES_COUNT,
+  DEFAULT_MAX_UPLOAD_THREAD_COUNT,
+} from "@/utils/constants";
 
 export type UploaderClientProps = {
   filesSettings?: TFilesSettings;
+  accept: string;
+  exstsText: string;
   baseConfig?: {
     targetId?: string;
-    acceptCategories?: string;
+    acceptExtensions?: string;
     linkMainText?: string;
     linkSecondaryText?: string;
     extensionsText?: string;
@@ -73,6 +73,8 @@ export type UploaderClientProps = {
 };
 
 export default function UploaderClient({
+  accept,
+  exstsText,
   filesSettings,
   baseConfig,
 }: UploaderClientProps) {
@@ -83,8 +85,6 @@ export default function UploaderClient({
 
   const folderTargetId = +(baseConfig?.targetId ?? 0);
 
-  console.log("baseConfig", baseConfig);
-
   const chunkUploadSize =
     filesSettings?.chunkUploadSize || DEFAULT_CHUNK_UPLOAD_SIZE;
   const maxUploadThreadCount =
@@ -92,20 +92,7 @@ export default function UploaderClient({
   const maxUploadFilesCount =
     filesSettings?.maxUploadFilesCount || DEFAULT_MAX_UPLOAD_FILES_COUNT;
 
-  const [isDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const accept = useMemo(() => {
-    const categories = parseAcceptCategories(baseConfig?.acceptCategories);
-
-    if (categories.length === 0) {
-      return filesSettings?.extsUploadable?.join(",") ?? "";
-    }
-
-    return getAcceptExtensions(filesSettings, categories);
-  }, [filesSettings, baseConfig?.acceptCategories]);
-
-  const exstsText = useMemo(() => getExtsDisplayText(accept), [accept]);
 
   const uploadFiles = useCallback(async (rawFiles: File[]) => {
     const prepared = await attachParentFolderId(rawFiles, folderTargetId);
@@ -127,6 +114,18 @@ export default function UploaderClient({
       );
 
       const chunks = createChunks(file, chunkUploadSize);
+      let uploadedChunks = 0;
+
+      frameCallEvent({
+        event: "onUploadProgress",
+        data: {
+          sessionId: session.id,
+          fileName: file.name,
+          uploadedChunks: 0,
+          totalChunks: chunks.length,
+          percent: 0,
+        },
+      });
 
       await runWithConcurrency(chunks, maxUploadThreadCount, async (chunk) => {
         await uploadChunkParallel(
@@ -135,6 +134,20 @@ export default function UploaderClient({
           chunk.index,
           chunk.data,
         );
+
+        uploadedChunks += 1;
+        const percent = Math.round((uploadedChunks / chunks.length) * 100);
+
+        frameCallEvent({
+          event: "onUploadProgress",
+          data: {
+            sessionId: session.id,
+            fileName: file.name,
+            uploadedChunks,
+            totalChunks: chunks.length,
+            percent,
+          },
+        });
       });
 
       const result = await finalizeUploadSession(folderTargetId, session.id);
@@ -179,7 +192,7 @@ export default function UploaderClient({
 
   return (
     <DropzoneComponent
-      isDisabled={isDisabled || isLoading}
+      isDisabled={isLoading}
       isLoading={isLoading}
       onDrop={onDrop}
       accept={accept}
@@ -188,7 +201,7 @@ export default function UploaderClient({
       linkSecondaryText={
         baseConfig?.linkSecondaryText ?? t("Common:DropzoneTitleSecondary")
       }
-      exstsText={exstsText}
+      exstsText={baseConfig?.extensionsText ?? exstsText}
       dataTestId="sdk-uploader"
       icon={UploadSvgUrl}
       className={`${styles.dropzoneWrapper} ${styles.dropzoneCentered}`}
