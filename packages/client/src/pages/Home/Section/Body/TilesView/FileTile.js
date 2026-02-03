@@ -31,7 +31,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { FolderType } from "@docspace/shared/enums";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 

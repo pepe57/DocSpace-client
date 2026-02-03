@@ -39,7 +39,7 @@ import { FOLDER_NAMES } from "@docspace/shared/constants";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import { ArticleItem } from "@docspace/ui-kit/components/article/item";
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import { toastr } from "@docspace/ui-kit/components/toast";

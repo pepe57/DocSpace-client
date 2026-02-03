@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 import { globalColors } from "@docspace/shared/themes";
 import { TableRow } from "@docspace/shared/components/table";
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import CursorPalmSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 

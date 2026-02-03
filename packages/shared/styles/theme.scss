@@ -186,9 +186,7 @@
   --context-menu-button-border: #{$gray-strong};
   --context-menu-button-hover-border: #{$gray};
 
-  --drag-and-drop-height: 100%;
   --drag-and-drop-accept-bg: #{$dnd-hover-color};
-  --drag-and-drop-bg: #{$dnd-color};
 
   --dropdown-background: #{$white};
   --dropdown-border: none;
@@ -290,7 +288,7 @@
 
   --aside-custom-z-index: unset;
   --input-text-align: left;
-  --drag-and-drop-height: 100%;
+
   --aside-content-padding-bottom: unset;
   --aside-header-custom-height: 53px;
   --badge-border: 1px solid transparent;
@@ -421,7 +419,6 @@
   --context-menu-button-hover-border: #{$gray-dark};
 
   --drag-and-drop-accept-bg: #{$dnd-dark-hover};
-  --drag-and-drop-bg: #{$dnd-dark-color};
 
   --dropdown-background: #{$black};
   --dropdown-border: 1px solid #{$gray-dark-strong};
