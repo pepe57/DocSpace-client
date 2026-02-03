@@ -36,18 +36,18 @@
     "@types/react-text-mask": "5.4.14",
     "babel-plugin-react-compiler": "^1.0.0",
     "he": "1.2.0",
-    "lefthook": "^2.0.14",
+    "lefthook": "^2.0.16",
     "madge": "8.0.0",
-    "nx": "22.3.3",
-    "react": "19.2.3",
+    "nx": "22.4.4",
+    "react": "19.2.4",
     "shx": "0.4.0",
-    "terser": "5.44.1",
+    "terser": "5.46.0",
     "ts-node": "10.9.2",
     "typescript": "5.9.3"
   },
   "packageManager": "pnpm@10.28.2",
   "resolutions": {
-    "@types/react": "19.2.8",
+    "@types/react": "19.2.10",
     "@types/react-dom": "19.2.3",
     "nth-check": "2.1.1"
   },
@@ -55,7 +55,7 @@
     "overrides": {
       "pnpm": "^10.28.2",
       "on-headers": "^1.1.0",
-      "@types/react": "19.2.8",
+      "@types/react": "19.2.10",
       "@types/react-dom": "19.2.3",
       "@smithy/config-resolver": "4.4.6",
       "diff": "4.0.4",

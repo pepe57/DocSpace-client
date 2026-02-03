@@ -24,59 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import "@docspace/shared/utils/wdyr";
-import React from "react";
-import { I18nextProvider } from "react-i18next";
-import { RouterProvider } from "react-router";
-import { Provider as MobxProvider } from "mobx-react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import type { AvatarSize } from "@docspace/shared/components/avatar";
+export interface UserPhoto {
+  original: string;
+  retina: string;
+  max: string;
+  big: string;
+  medium: string;
+  small: string;
+}
 
-import store from "SRC_DIR/store";
+export interface EditorUser {
+  id: string;
+  name: string;
+  photo: UserPhoto | null;
+}
 
-import "@docspace/shared/polyfills/broadcastchannel";
+export interface EditorsTooltipItem {
+  editingBy?: Record<string, string>;
+  activeEditors?: Record<string, string>;
+}
 
-import "@docspace/shared/styles/custom.scss";
+export interface EditorsTooltipProps {
+  item: EditorsTooltipItem;
+  currentUserId?: string;
+}
 
-import ThemeProvider from "./components/ThemeProviderWrapper";
-import ErrorBoundary from "./components/ErrorBoundaryWrapper";
+export interface EditorsListProps {
+  editors: EditorUser[];
+  avatarSize: AvatarSize;
+  isMobile?: boolean;
+}
 
-import router from "./router";
+export interface EditorsTooltipMobileProps {
+  visible: boolean;
+  editors: EditorUser[];
+  onClose: () => void;
+  t: (key: string) => string;
+  height: number;
+}
 
-import i18n from "./i18n";
+export interface UseEditorsDataProps {
+  activeEditors: Record<string, string> | undefined;
+  editingBy: Record<string, string> | undefined;
+  currentUserId?: string;
+}
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-      staleTime: 5 * 60 * 1000,
-    },
-  },
-});
+export interface UseEditorsDataReturn {
+  editors: EditorUser[];
+  isOpen: boolean;
+  openTooltip: () => void;
+  closeTooltip: () => void;
+  setIsOpen: (value: boolean) => void;
+}
 
-const App = () => {
-  React.useEffect(() => {
-    const regex = /(\/){2,}/g;
-    const replaceRegex = /(\/)+/g;
-    const pathname = window.location.pathname;
-
-    if (regex.test(pathname))
-      window.location.replace(pathname.replace(replaceRegex, "$1"));
-  }, []);
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <MobxProvider {...store}>
-        <I18nextProvider i18n={i18n}>
-          <ThemeProvider>
-            <ErrorBoundary>
-              <RouterProvider router={router} />
-            </ErrorBoundary>
-          </ThemeProvider>
-        </I18nextProvider>
-      </MobxProvider>
-    </QueryClientProvider>
-  );
-};
-
-export default App;
+export interface TooltipDimensions {
+  width: number;
+  height: number;
+}

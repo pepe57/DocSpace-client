@@ -24,59 +24,57 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import "@docspace/shared/utils/wdyr";
 import React from "react";
-import { I18nextProvider } from "react-i18next";
-import { RouterProvider } from "react-router";
-import { Provider as MobxProvider } from "mobx-react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Portal } from "@docspace/shared/components/portal";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { AvatarSize } from "@docspace/shared/components/avatar";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
-import store from "SRC_DIR/store";
+import { EditorsList } from "./EditorsList";
+import type { EditorsTooltipMobileProps } from "../EditorsTooltip.types";
+import styles from "../EditorsTooltip.module.scss";
 
-import "@docspace/shared/polyfills/broadcastchannel";
+const EditorsTooltipMobile = ({
+  visible,
+  editors,
+  onClose,
+  t,
+  height,
+}: EditorsTooltipMobileProps) => {
+  if (!visible || editors.length === 0) return null;
 
-import "@docspace/shared/styles/custom.scss";
-
-import ThemeProvider from "./components/ThemeProviderWrapper";
-import ErrorBoundary from "./components/ErrorBoundaryWrapper";
-
-import router from "./router";
-
-import i18n from "./i18n";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-      staleTime: 5 * 60 * 1000,
-    },
-  },
-});
-
-const App = () => {
-  React.useEffect(() => {
-    const regex = /(\/){2,}/g;
-    const replaceRegex = /(\/)+/g;
-    const pathname = window.location.pathname;
-
-    if (regex.test(pathname))
-      window.location.replace(pathname.replace(replaceRegex, "$1"));
-  }, []);
+  const content = (
+    <>
+      <Backdrop
+        visible={visible}
+        onClick={onClose}
+        withBackground
+        zIndex={310}
+      />
+      <div
+        className={styles.mobileContainer}
+        style={{ height: `${height}px` }}
+        data-testid="editors-tooltip-mobile"
+      >
+        <Scrollbar autoHide={false}>
+          <div className={styles.tooltipHeader}>
+            {t("FileCurrentlyEditedBy")}
+          </div>
+          <EditorsList
+            editors={editors}
+            avatarSize={AvatarSize.min}
+            isMobile={true}
+          />
+        </Scrollbar>
+      </div>
+    </>
+  );
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <MobxProvider {...store}>
-        <I18nextProvider i18n={i18n}>
-          <ThemeProvider>
-            <ErrorBoundary>
-              <RouterProvider router={router} />
-            </ErrorBoundary>
-          </ThemeProvider>
-        </I18nextProvider>
-      </MobxProvider>
-    </QueryClientProvider>
+    <>
+      <Portal element={content} visible={visible} />
+    </>
   );
 };
 
-export default App;
+export default EditorsTooltipMobile;
