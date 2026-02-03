@@ -223,7 +223,7 @@ const Uploader = (props) => {
             onSetVersion={onSetVersion}
           />
           <ControlsSection>
-            <CategorySubHeader>{t("FolderId")}</CategorySubHeader>
+            <CategorySubHeader>{t("DestinationFolderId")}</CategorySubHeader>
             <ControlsGroup>
               <LabelGroup>
                 <Label className="label" text={t("Common:SelectFolder")} />
