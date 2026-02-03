@@ -26,6 +26,7 @@
 
 import { TColorScheme } from "@docspace/shared/themes";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
+import type { TSelectorItem } from "@docspace/shared/components/selector/Selector.types";
 
 export interface ILogoData {
   small: string;
@@ -66,13 +67,11 @@ export interface EditRoomGroupsDialogProps {
   currentColorScheme: TColorScheme;
   getCovers: () => void;
   covers: ICover[] | null;
-  setArrRoomGroups: (group: IRoomGroup) => void;
   setEditRoomGroupsDialogVisible: (
     visible: boolean,
     roomIds?: number[] | null,
     openInCreateMode?: boolean,
   ) => void;
-  arrRoomGroups: IRoomGroup[];
   roomGroups: IRoomGroup[];
   setCreateGroupRooms: (newGroup: ICreateRoomGroup) => Promise<void>;
   getAllRoomGroups: () => Promise<void>;
@@ -99,4 +98,31 @@ export interface EditRoomGroupsDialogProps {
 export interface IRoomItem {
   id?: string | number;
   [key: string]: unknown;
+}
+
+export interface DeleteGroupDialogProps {
+  visible: boolean;
+  groupId: string | null;
+  onClose: () => void;
+  deleteRoomGroup: (groupId: string) => Promise<void>;
+  getAllRoomGroups: () => Promise<void>;
+  currentFilterGroupId?: string | number | null;
+}
+
+export interface GroupItemProps {
+  group: IRoomGroup;
+  onClickGroup: (groupId: string) => void;
+  onClickEditIcon: (groupId: string) => void;
+  onClickDeleteGroup: (groupId: string) => void;
+}
+
+export interface RoomListPanelProps {
+  visible: boolean;
+  onClose: () => void;
+  onSubmit: (items: TSelectorItem[]) => void;
+  headerLabel: string;
+  selectedRooms?: TRoom[];
+  withSearch?: boolean;
+  disableSubmitUntilChanged?: boolean;
+  sortSelectedFirst?: boolean;
 }

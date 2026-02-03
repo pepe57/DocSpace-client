@@ -27,13 +27,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { ReactSVG } from "react-svg";
 
-import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
-
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Button } from "@docspace/shared/components/button";
 import {
   ModalDialog,
   ModalDialogType,
@@ -41,16 +35,15 @@ import {
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import { Aside } from "@docspace/shared/components/aside";
+
 import styles from "./EditRoomGroupsDialog.module.scss";
-import RoomSelector from "@docspace/shared/selectors/Room";
-import { Backdrop } from "@docspace/shared/components/backdrop";
 import GroupIconDialog from "./sub-components/GroupIconDialog";
 import DeleteGroupDialog from "./sub-components/DeleteGroupDialog";
+import RoomListPanel from "./sub-components/RoomListPanel";
+import GroupItem from "./sub-components/GroupItem";
 import { EditRoomGroupsDialogProps } from "./EditRoomGroupsDialog.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TSelectorItem } from "@docspace/shared/components/selector/Selector.types";
-import { convertToItems } from "@docspace/shared/selectors/Room/RoomSelector.utils";
 
 const EditRoomGroupsDialog = ({
   currentColorScheme,
@@ -249,132 +242,41 @@ const EditRoomGroupsDialog = ({
 
   if (isOpenRoomList && selectedGroup) {
     return (
-      <div>
-        <Backdrop
-          visible={isOpenRoomList}
-          isAside
-          withBackground
-          zIndex={309}
-          onClick={onCloseGroupRoomList}
-        />
-        <Aside
-          visible={isOpenRoomList}
-          withoutBodyScroll
-          zIndex={310}
-          onClose={onCloseGroupRoomList}
-          withoutHeader
-        >
-          <RoomSelector
-            onSubmit={onSubmitRoom}
-            withHeader
-            headerProps={{
-              onBackClick: onCloseGroupRoomList,
-              onCloseClick: onCloseGroupRoomList,
-              headerLabel: selectedGroup.name,
-              withoutBorder: false,
-              withoutBackButton: false,
-            }}
-            withSearch={false}
-            isMultiSelect
-            selectedItems={convertToItems(selectedGroup.rooms || [])}
-            withCancelButton
-            cancelButtonLabel={t("Common:CancelButton")}
-            onCancel={onCloseGroupRoomList}
-            forceIsMultiSelect
-            sortSelectedFirst
-            disableSubmitUntilChanged
-          />
-        </Aside>
-      </div>
+      <RoomListPanel
+        visible={isOpenRoomList}
+        onClose={onCloseGroupRoomList}
+        onSubmit={onSubmitRoom}
+        headerLabel={selectedGroup.name}
+        selectedRooms={selectedGroup.rooms || []}
+        withSearch={false}
+        disableSubmitUntilChanged
+        sortSelectedFirst
+      />
     );
   }
 
   if (isOpenRoomList && !selectedGroup) {
     return (
-      <div>
-        <Backdrop
-          visible={isOpenRoomList}
-          isAside
-          withBackground
-          zIndex={309}
-          onClick={onCloseRoomList}
-        />
-        <Aside
-          visible={isOpenRoomList}
-          withoutBodyScroll
-          zIndex={310}
-          onClose={onCloseRoomList}
-          withoutHeader
-        >
-          <RoomSelector
-            onSubmit={onSubmitRoom}
-            withHeader
-            headerProps={{
-              onBackClick: onCloseRoomList,
-              onCloseClick: onCloseRoomList,
-              headerLabel: "Room list",
-              withoutBorder: false,
-              withoutBackButton: false,
-            }}
-            withSearch
-            isMultiSelect
-            forceIsMultiSelect
-            withCancelButton
-            cancelButtonLabel={t("Common:CancelButton")}
-            onCancel={onCloseRoomList}
-          />
-        </Aside>
-      </div>
+      <RoomListPanel
+        visible={isOpenRoomList}
+        onClose={onCloseRoomList}
+        onSubmit={onSubmitRoom}
+        headerLabel={t("GroupingRooms:RoomList")}
+        withSearch
+      />
     );
   }
 
-  const nodeAddedGroups = () => {
-    return roomGroups.map((item) => {
-      const totalRooms = item.totalRooms;
-
-      const iconData = item?.icon?.data.small;
-      return (
-        <div className={styles.addedGroups} key={item.id}>
-          <div className={styles.group}>
-            <div
-              className={styles.groupData}
-              onClick={() => onClickGroup(item.id)}
-            >
-              <div className={styles.iconGroup}>
-                {iconData && (
-                  <ReactSVG
-                    src={`data:image/svg+xml;utf8,${encodeURIComponent(
-                      iconData,
-                    )}`}
-                  />
-                )}
-              </div>
-              <div className={styles.titleContainer}>
-                <div className={styles.nameGroup}>{item.name}</div>
-                <div className={styles.countRooms}>
-                  {totalRooms} {t("Common:Rooms")}
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.editGroup}>
-              <IconButton
-                className="edit_icon"
-                iconName={PencilReactSvgUrl}
-                size={16}
-                onClick={() => onClickEditIcon(item.id)}
-              />
-              <IconButton
-                className="delete_icon"
-                iconName={TrashReactSvgUrl}
-                size={16}
-                onClick={() => onClickDeleteGroup(item.id)}
-              />
-            </div>
-          </div>
-        </div>
-      );
-    });
+  const renderGroupItems = () => {
+    return roomGroups.map((group) => (
+      <GroupItem
+        key={group.id}
+        group={group}
+        onClickGroup={onClickGroup}
+        onClickEditIcon={onClickEditIcon}
+        onClickDeleteGroup={onClickDeleteGroup}
+      />
+    ));
   };
 
   return (
@@ -392,7 +294,9 @@ const EditRoomGroupsDialog = ({
       <ModalDialog.Body>
         <div className={styles.settingRoomGroups}>
           <div className={styles.roomGroups}>
-            <div className={styles.title}>Enable room grouping</div>
+            <div className={styles.title}>
+              {t("GroupingRooms:EnableRoomGrouping")}
+            </div>
             <ToggleButton className={styles.roomGroupsToggle} />
           </div>
 
@@ -405,7 +309,7 @@ const EditRoomGroupsDialog = ({
           className={styles.selectorAddButton}
           label={t("GroupingRooms:CreateNewGroup")}
         />
-        <div className={styles.addedGroups}>{nodeAddedGroups()}</div>
+        <div className={styles.addedGroups}>{renderGroupItems()}</div>
       </ModalDialog.Body>
     </ModalDialog>
   );

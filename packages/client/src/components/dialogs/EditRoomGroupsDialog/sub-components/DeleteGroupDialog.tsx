@@ -32,15 +32,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 
 import styles from "../EditRoomGroupsDialog.module.scss";
-
-interface DeleteGroupDialogProps {
-  visible: boolean;
-  groupId: string | null;
-  onClose: () => void;
-  deleteRoomGroup: (groupId: string) => Promise<void>;
-  getAllRoomGroups: () => Promise<void>;
-  currentFilterGroupId?: string | number | null;
-}
+import type { DeleteGroupDialogProps } from "../EditRoomGroupsDialog.types";
 
 const DeleteGroupDialog = ({
   visible,

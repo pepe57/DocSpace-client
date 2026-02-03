@@ -27,13 +27,12 @@
 import { TColorScheme } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
 
-import { ICover, ILogo, IUpdateRoomGroup } from "./EditRoomGroupsDialog.types";
-
-export interface ICreateRoomGroup {
-  name: string;
-  icon: string;
-  rooms: string[];
-}
+import {
+  ICover,
+  ILogo,
+  IUpdateRoomGroup,
+  ICreateRoomGroup,
+} from "./EditRoomGroupsDialog.types";
 
 export interface CoverDialogProps {
   getCovers: () => void;
