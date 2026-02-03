@@ -270,7 +270,7 @@ const EditRoomGroupsDialog = ({
         visible={isOpenRoomList}
         onClose={onCloseRoomList}
         onSubmit={onSubmitRoom}
-        headerLabel={t("GroupingRooms:RoomList")}
+        headerLabel={t("Common:RoomList")}
         withSearch
       />
     );
