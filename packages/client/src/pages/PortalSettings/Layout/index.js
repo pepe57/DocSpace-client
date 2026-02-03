@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -99,6 +99,11 @@ const Layout = ({
   const oauthCreatePath = `${path}/developer-tools/oauth/create`;
   const oauthEditPath = `${path}/developer-tools/oauth/${id}`;
   const currentPath = window.location.pathname;
+
+  useEffect(() => {
+    const sel = window.getSelection?.();
+    if (sel?.rangeCount) sel.removeAllRanges();
+  }, [location.pathname]);
 
   useEffect(() => {
     currentProductId !== "settings" && setCurrentProductId("settings");

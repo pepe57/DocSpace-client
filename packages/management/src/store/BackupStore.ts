@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -99,7 +99,7 @@ class BackupStore {
   };
 
   public fetchConnectingStorages = async (): Promise<TConnectingStorages> => {
-    const res = await getConnectingStorages();
+    const res = await getConnectingStorages("excludewebdav=true");
 
     this.setConnectingStorages(
       res.map((storage) => ({

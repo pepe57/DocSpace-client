@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,7 +37,6 @@ import {
   AvatarSize,
 } from "@docspace/shared/components/avatar";
 import { Badge } from "@docspace/shared/components/badge";
-import { Tooltip } from "@docspace/shared/components/tooltip";
 import { globalColors } from "@docspace/shared/themes";
 import { TGroup } from "@docspace/shared/api/groups/types";
 
@@ -115,9 +114,12 @@ const ItemTitle = ({
         ) : null}
 
         {groupSelection?.isLDAP ? (
-          <>
+          <div
+            data-tooltip-id="system-tooltip"
+            data-tooltip-content={t("PeopleTranslations:LDAPGroupTooltip")}
+            data-tooltip-place="bottom"
+          >
             <Badge
-              id="ldap-badge-info-panel"
               className="ldap-badge"
               label={t("Common:LDAP")}
               color={globalColors.white}
@@ -126,10 +128,7 @@ const ItemTitle = ({
               fontWeight={800}
               noHover
             />
-            <Tooltip anchorSelect={`div[id='ldap-badge-info-panel'] div`}>
-              {t("PeopleTranslations:LDAPGroupTooltip")}
-            </Tooltip>
-          </>
+          </div>
         ) : null}
       </div>
 

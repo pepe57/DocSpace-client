@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,12 +44,13 @@ import {
 } from "@docspace/shared/enums";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
-import RoomNoAccessContainer from "../../../../components/EmptyContainer/RoomNoAccessContainer";
+import { NoAccessContainerType } from "../../../../components/EmptyContainer/NoAccessContainer";
 import KnowledgeDisabledContainer from "../../../../components/EmptyContainer/KnowledgeDisabledContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
+import NoAccessContainer from "../../../../components/EmptyContainer/NoAccessContainer";
 
 const separatorStyles = `width: 100vw;  position: absolute; height: 3px; z-index: 1;`;
 const sectionClass = "section-wrapper-content";
@@ -104,6 +105,8 @@ const SectionBodyContent = (props) => {
     setDropTargetPreview,
     aiConfig,
     isInsideKnowledge,
+    isErrorAIAgentNotAvailable,
+    selectedFolderChatSettings,
   } = props;
 
   useEffect(() => {
@@ -465,9 +468,17 @@ const SectionBodyContent = (props) => {
     filesList,
   ]);
 
-  if (isErrorRoomNotAvailable) return <RoomNoAccessContainer />;
+  if (isErrorAIAgentNotAvailable)
+    return <NoAccessContainer type={NoAccessContainerType.Agent} />;
 
-  if (isInsideKnowledge && !aiConfig?.vectorizationEnabled)
+  if (isErrorRoomNotAvailable)
+    return <NoAccessContainer type={NoAccessContainerType.Room} />;
+
+  if (
+    isInsideKnowledge &&
+    !aiConfig?.vectorizationEnabled &&
+    !selectedFolderChatSettings?.internal
+  )
     return <KnowledgeDisabledContainer />;
 
   if (
@@ -514,6 +525,7 @@ export default inject(
       filesList,
       isEmptyPage,
       isErrorRoomNotAvailable,
+      isErrorAIAgentNotAvailable,
     } = filesStore;
 
     const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
@@ -532,6 +544,7 @@ export default inject(
       setDragging,
       folderId: selectedFolderStore.id,
       roomType: selectedFolderStore.roomType,
+      selectedFolderChatSettings: selectedFolderStore.chatSettings,
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
       isArchiveFolderRoot: treeFoldersStore.isArchiveFolderRoot,
@@ -554,6 +567,7 @@ export default inject(
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
+      isErrorAIAgentNotAvailable,
       getSelectedFolder: selectedFolderStore.getSelectedFolder,
       isInsideKnowledge: selectedFolderStore.isInsideKnowledge,
       welcomeFormFillingTipsVisible,

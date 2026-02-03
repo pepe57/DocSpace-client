@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,6 +37,7 @@ import {
   TSelectorCancelButton,
   TSelectorHeader,
   TSelectorSearch,
+  TSelectorWithAside,
 } from "../../components/selector/Selector.types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 
@@ -86,6 +87,11 @@ const RoomSelectorComponent = ({
 
   createDefineRoomLabel,
   createDefineRoomType,
+
+  useAside,
+  onClose,
+  withBlur,
+  withoutBackground,
 
   withInit,
   withCreate,
@@ -225,6 +231,10 @@ const RoomSelectorComponent = ({
       }
     : {};
 
+  const withAside: TSelectorWithAside = useAside
+    ? { useAside, onClose, withBlur, withoutBackground }
+    : {};
+
   return (
     <Selector
       id={id}
@@ -233,6 +243,7 @@ const RoomSelectorComponent = ({
       {...headerSelectorProps}
       {...cancelButtonSelectorProps}
       {...searchSelectorProps}
+      {...withAside}
       withPadding={withPadding}
       onSelect={onSelect}
       items={items}

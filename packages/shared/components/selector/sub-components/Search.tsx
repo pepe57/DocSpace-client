@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -68,7 +68,7 @@ const Search = React.memo(({ isSearch }: SearchProps) => {
 
   return (
     <SearchInput
-      className="search-input"
+      className="search-input selector-search-input"
       placeholder={searchPlaceholder}
       value={searchValue ?? ""}
       onChange={onSearchAction}
@@ -76,6 +76,7 @@ const Search = React.memo(({ isSearch }: SearchProps) => {
       size={InputSize.base}
       resetOnBlur
       dataTestId="selector_search_input"
+      tabIndex={1}
     />
   );
 });

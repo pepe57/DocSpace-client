@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,6 +27,16 @@
 import { TTranslation } from "@docspace/shared/types";
 import { truncateNumberToFraction } from "@docspace/shared/utils/common";
 
+const truncateNumberToFractionNumeric = (
+  value: number,
+  fractionDigits: number,
+) => {
+  if (!Number.isFinite(value)) return value;
+
+  const factor = 10 ** fractionDigits;
+  return Math.trunc(value * factor) / factor;
+};
+
 export const formattedBalanceTokens = (
   language: string,
   amount: number,
@@ -46,21 +56,66 @@ export const formattedBalanceTokens = (
   return formatter.formatToParts(truncated);
 };
 
+export const getEffectiveFraction = (
+  value: number,
+  fractionDigits: number = 2,
+  isScientific: boolean = false,
+): number => {
+  const str = value.toString();
+
+  if (isScientific) {
+    const [mantissa, expPart] = str.split("e-");
+    const exponent = Number(expPart);
+
+    const mantissaFraction = mantissa.split(".")[1]?.length;
+
+    const actualFractionDigits = exponent + mantissaFraction;
+
+    return Math.min(fractionDigits, actualFractionDigits);
+  }
+
+  const actualFractionLength = str.split(".")[1]?.length;
+
+  return Math.min(fractionDigits, actualFractionLength);
+};
+
 export const accountingLedgersFormat = (
   language: string,
   amount: number,
   isCredit: boolean,
   currency: string,
 ) => {
-  const maximumFractionDigits = 2;
-  const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
-  const truncated = Number(truncatedStr);
+  const maximumFractionDigits = 8;
+
+  let effectiveDigits = maximumFractionDigits;
+
+  const str = amount.toString();
+  const isScientific = /e/i.test(str);
+
+  const isWholeNumber = isScientific
+    ? false
+    : Number.isFinite(amount) && Math.abs(amount - Math.trunc(amount)) < 1e-9;
+
+  if (!isWholeNumber) {
+    effectiveDigits = getEffectiveFraction(
+      amount,
+      maximumFractionDigits,
+      isScientific,
+    );
+  }
+
+  const effectiveFractionDigits = isWholeNumber ? 2 : effectiveDigits;
+
+  // Use truncation approach for specific fraction digits
+  const truncated = isScientific
+    ? truncateNumberToFractionNumeric(amount, effectiveFractionDigits)
+    : Number(truncateNumberToFraction(amount, effectiveFractionDigits));
 
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
-    minimumFractionDigits: maximumFractionDigits,
-    maximumFractionDigits,
+    minimumFractionDigits: effectiveFractionDigits,
+    maximumFractionDigits: effectiveFractionDigits,
   });
 
   const value = formatter.format(truncated);

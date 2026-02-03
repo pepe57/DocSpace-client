@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -396,6 +396,8 @@ export const useFeedTranslation = (
         return t("InfoPanel:RoomIndexExportLocation", {
           sectionName: t("Common:MyDocuments"),
         });
+      case FeedActionKeys.RoomChangeOwner:
+        return t("InfoPanel:RoomChangeOwner");
       case FeedActionKeys.FormSubmit:
         return t("InfoPanel:FilledOutForm");
       case FeedActionKeys.FormOpenedForFilling:

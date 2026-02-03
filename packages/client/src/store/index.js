@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -93,9 +93,11 @@ import BrandingStore from "./portal-settings/BrandingStore";
 import AISettingsStore from "./portal-settings/AISettingsStore";
 import CreateEditAgentStore from "./CreateEditAgentStore";
 
-const aiRoomStore = new AiRoomStore();
+import DefaultTemplatesStore from "./portal-settings/DefaultTemplatesStore";
 
 import TelegramStore from "./TelegramStore";
+
+const aiRoomStore = new AiRoomStore();
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
@@ -192,7 +194,7 @@ const mediaViewerDataStore = new MediaViewerDataStore(
   selectedFolderStore,
 );
 
-const oformsStore = new OformsStore(settingsStore, userStore);
+const oformsStore = new OformsStore(settingsStore, userStore, treeFoldersStore);
 
 const secondaryProgressDataStore = new SecondaryProgressDataStore(
   treeFoldersStore,
@@ -210,6 +212,7 @@ const dialogsStore = new DialogsStore(
   filesStore,
   selectedFolderStore,
   versionHistoryStore,
+  infoPanelStore,
 );
 
 const profileActionsStore = new ProfileActionsStore(
@@ -381,6 +384,9 @@ const editGroupStore = new EditGroupStore(peopleStore);
 const brandingStore = new BrandingStore(settingsStore);
 
 const aiSettingsStore = new AISettingsStore();
+
+const defaultTemplatesStore = new DefaultTemplatesStore();
+
 const telegramStore = new TelegramStore();
 
 const store = {
@@ -451,6 +457,7 @@ const store = {
   aiSettingsStore,
   telegramStore,
   createEditAgentStore,
+  defaultTemplatesStore,
 };
 
 export default store;

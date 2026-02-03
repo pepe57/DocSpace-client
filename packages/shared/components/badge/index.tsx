@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,7 @@ import React from "react";
 import { BadgeProps } from "./Badge.types";
 import styles from "./Badge.module.scss";
 import { Text } from "../text";
+import { TooltipContainer } from "../tooltip";
 
 const Badge = (props: BadgeProps) => {
   const {
@@ -96,7 +97,8 @@ const Badge = (props: BadgeProps) => {
   } as React.CSSProperties;
 
   return (
-    <div
+    <TooltipContainer
+      as="div"
       ref={ref}
       className={`${styles.badge} ${styles.themed} ${className || ""}`}
       style={badgeStyle}
@@ -134,7 +136,7 @@ const Badge = (props: BadgeProps) => {
           {label}
         </Text>
       </div>
-    </div>
+    </TooltipContainer>
   );
 };
 

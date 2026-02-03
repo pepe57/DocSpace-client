@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TFile, TFolder, TShareSettings } from "../files/types";
-import {
+import type {
   ExportRoomIndexTaskStatus,
   FolderType,
   LinkSharingEntityType,
@@ -38,8 +38,8 @@ import type {
   TCreatedBy,
   TPathParts,
 } from "../../types";
-import { TUser } from "../people/types";
-import { TGroup } from "../groups/types";
+import type { TUser } from "../people/types";
+import type { TGroup } from "../groups/types";
 
 export type ICover = {
   data: string;
@@ -98,6 +98,14 @@ export type TWatermark = {
   image?: File | string;
   isImage?: boolean;
 };
+
+export type TAIRoomChatSettings = {
+  prompt: string;
+  providerId: number;
+  modelId: string;
+  internal: boolean;
+};
+
 export type TRoom = {
   parentId: number;
   filesCount: number;
@@ -138,7 +146,7 @@ export type TRoom = {
   isTemplate?: boolean;
   isAvailable?: boolean;
   isRoom?: boolean;
-  chatSettings?: { prompt: string; providerId: number; modelId: string };
+  chatSettings?: TAIRoomChatSettings;
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;
   path?: TPathParts[];
@@ -166,7 +174,10 @@ export type TExportRoomIndexTask = {
   resultFileUrl: string;
 };
 
-export type TNewFilesItem = TFile[] | { room: TRoom; items: TFile[] };
+export type TNewFilesItem =
+  | TFile[]
+  | { room: TRoom; items: TFile[] }
+  | { agent: TRoom; items: TFile[] };
 
 export type TNewFiles = {
   date: string;
@@ -298,6 +309,7 @@ export enum FeedAction {
   Invite = "invite",
   CHANGE_COLOR = "changeColor",
   CHANGE_COVER = "changeCover",
+  CHANGE_OWNER = "changeOwner",
   DeleteVersion = "deleteVersion",
   FormStartedToFill = "formStartedToFill",
   FormPartiallyFilled = "formPartiallyFilled",
@@ -376,6 +388,7 @@ export enum FeedActionKeys {
   RoomExternalLinkDeleted = "RoomExternalLinkDeleted",
   RoomExternalLinkRevoked = "RoomExternalLinkRevoked",
   RoomCreateUser = "RoomCreateUser",
+  RoomChangeOwner = "RoomChangeOwner",
   RoomUpdateAccessForUser = "RoomUpdateAccessForUser",
   RoomRemoveUser = "RoomRemoveUser",
   RoomInviteResend = "RoomInviteResend",

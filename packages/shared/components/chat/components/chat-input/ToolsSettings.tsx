@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,7 +44,7 @@ import {
 } from "../../../../api/ai";
 import { ServerType } from "../../../../api/ai/enums";
 import { getOAuthToken } from "../../../../utils/common";
-import { getServerIcon } from "../../../../utils";
+import { getServerIcon, isMobile } from "../../../../utils";
 import { useTheme } from "../../../../hooks/useTheme";
 
 import { Text } from "../../../text";
@@ -54,6 +54,7 @@ import { Aside } from "../../../aside";
 import { Button, ButtonSize } from "../../../button";
 import { Backdrop } from "../../../backdrop";
 import { Portal } from "../../../portal";
+import { TooltipContainer } from "../../../tooltip";
 
 import { useChatStore } from "../../store/chatStore";
 import { useMessageStore } from "../../store/messageStore";
@@ -66,7 +67,7 @@ import { Link, LinkType } from "../../../link";
 const ToolsSettings = ({
   servers,
   MCPTools,
-  webSearchPortalEnabled,
+  webSearchAvailable,
   webSearchEnabled,
   isFetched,
   knowledgeSearchToolName,
@@ -154,9 +155,9 @@ const ToolsSettings = ({
     [MCPTools, roomId, setMCPTools],
   );
 
-  const onGoToWebSearchPage = () => {
+  const onGoToWebSearchPage = React.useCallback(() => {
     navigate("/portal-settings/ai-settings/search");
-  };
+  }, [navigate]);
 
   const openOauthWindow = async (serverId: string, type: string) => {
     const url = await openConnectWindow(type);
@@ -236,11 +237,11 @@ const ToolsSettings = ({
   }, []);
 
   const onWebSearchToggle = React.useCallback(() => {
-    if (!webSearchPortalEnabled) return;
+    if (!webSearchAvailable) return;
 
     updateWebSearchInRoom(Number(roomId), !webSearchEnabled);
     setWebSearchEnabled(!webSearchEnabled);
-  }, [roomId, webSearchEnabled, webSearchPortalEnabled, setWebSearchEnabled]);
+  }, [roomId, webSearchEnabled, webSearchAvailable, setWebSearchEnabled]);
 
   React.useEffect(() => {
     setKnowledgeSearchToolName(knowledgeSearchToolName);
@@ -255,57 +256,59 @@ const ToolsSettings = ({
   }, [webCrawlingToolName, setWebCrawlingToolName]);
 
   const model = React.useMemo(() => {
-    const serverItems = Array.from(MCPTools.entries()).map(([mcpId, tools]) => {
-      const server = servers.find((s) => s.id === mcpId);
+    const serverItems = Array.from(MCPTools.entries())
+      .map(([mcpId, tools]) => {
+        const server = servers.find((s) => s.id === mcpId);
 
-      if (!server)
-        return {
-          key: "",
-          label: "",
-        };
+        if (!server || server.needReset)
+          return {
+            key: "",
+            label: "",
+          };
 
-      const items = [
-        {
-          key: "all_tools",
-          label: "All tools",
-          withToggle: true,
-          checked: tools.some((tool) => tool.enabled),
-          onClick: () => {
-            toggleTool(mcpId, "all_tools");
-          },
-        },
-        {
-          key: "separator-sub-menu-1",
-          isSeparator: true,
-        },
-        ...tools
-          .map((tool) => ({
-            key: tool.name,
-            label: tool.name,
+        const items = [
+          {
+            key: "all_tools",
+            label: "All tools",
             withToggle: true,
-            checked: tool.enabled,
+            checked: tools.some((tool) => tool.enabled),
             onClick: () => {
-              toggleTool(mcpId, tool.name);
+              toggleTool(mcpId, "all_tools");
             },
-          }))
-          .filter(Boolean),
-      ];
+          },
+          {
+            key: "separator-sub-menu-1",
+            isSeparator: true,
+          },
+          ...tools
+            .map((tool) => ({
+              key: tool.name,
+              label: tool.name,
+              withToggle: true,
+              checked: tool.enabled,
+              onClick: () => {
+                toggleTool(mcpId, tool.name);
+              },
+            }))
+            .filter(Boolean),
+        ];
 
-      const name =
-        server.serverType === ServerType.Portal
-          ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
-          : server.name;
+        const name =
+          server.serverType === ServerType.Portal
+            ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+            : server.name;
 
-      return {
-        key: mcpId,
-        label: name,
-        icon:
-          (server.icon?.icon16 || getServerIcon(server.serverType, isBase)) ??
-          "",
-        withMCPIcon: true,
-        items,
-      };
-    });
+        return {
+          key: mcpId,
+          label: name,
+          icon:
+            (server.icon?.icon16 || getServerIcon(server.serverType, isBase)) ??
+            "",
+          withMCPIcon: true,
+          items,
+        };
+      })
+      .filter((i) => i.key);
 
     const showManageConnectionItem = servers.some(
       (server) =>
@@ -319,14 +322,15 @@ const ToolsSettings = ({
         label: "Web Search",
         icon: WebSearchIconUrl,
         withToggle: true,
-        checked: webSearchEnabled && webSearchPortalEnabled,
+        checked: webSearchEnabled && webSearchAvailable,
         onClick: onWebSearchToggle,
-        disabled: !webSearchPortalEnabled,
+        disabled: !webSearchAvailable,
         tooltipTarget: "toggle",
         getTooltipContent: () => (
           <>
             <Text>
               {t("ConnectWebSearch", {
+                webSearch: t("Common:WebSearchAI"),
                 productName: t("Common:ProductName"),
               })}
             </Text>
@@ -336,6 +340,7 @@ const ToolsSettings = ({
                 isHovered
                 fontWeight={600}
                 onClick={onGoToWebSearchPage}
+                dataTestId="go-to-settings-link"
               >
                 {t("Common:GoToSettings")}
               </Link>
@@ -360,7 +365,13 @@ const ToolsSettings = ({
               },
               icon: ManageConnectionsReactSvgUrl,
               disabled: !showManageConnectionItem,
-              getTooltipContent: () => <Text>{t("ConnectMCPServers")}</Text>,
+              getTooltipContent: () => (
+                <Text>
+                  {t("ConnectMCPServers", {
+                    mcpServers: t("Common:MCPSettingTitle"),
+                  })}
+                </Text>
+              ),
             },
           ]
         : []),
@@ -368,18 +379,22 @@ const ToolsSettings = ({
   }, [
     MCPTools,
     isBase,
+    isAdmin,
     servers,
     t,
     toggleTool,
     webSearchEnabled,
-    webSearchPortalEnabled,
+    webSearchAvailable,
+    onGoToWebSearchPage,
+    onWebSearchToggle,
   ]);
 
   if (!isFetched) return;
 
   return (
     <>
-      <div
+      <TooltipContainer
+        as="div"
         title={t("AIToolsHint")}
         className={classNames(
           styles.chatInputButton,
@@ -390,6 +405,8 @@ const ToolsSettings = ({
           },
         )}
         onClick={showMcpTools}
+        data-testid="chat-input-tools-button"
+        aria-disabled={!aiReady}
       >
         <IconButton iconName={McpToolReactSvgUrl} size={16} isFill={false} />
         <Text lineHeight="16px" fontSize="13px" fontWeight={600} noSelect>
@@ -401,11 +418,13 @@ const ToolsSettings = ({
           onHide={hideMcpTools}
           maxHeightLowerSubmenu={360}
           showDisabledItems
-          // ignoreChangeView
+          withBackdrop={isMobile()}
+          //ignoreChangeView
           headerOnlyMobile
           withoutBackHeaderButton
+          dataTestId="chat-input-tools-context-menu"
         />
-      </div>
+      </TooltipContainer>
       {showManageConnections ? (
         <Portal
           visible

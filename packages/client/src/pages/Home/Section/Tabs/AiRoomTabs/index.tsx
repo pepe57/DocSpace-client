@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -46,6 +46,7 @@ type AiRoomTabsProps = {
 
   currentClientView?: ClientLoadingStore["currentClientView"];
   showTabsLoader?: ClientLoadingStore["showTabsLoader"];
+  showArticleLoader?: ClientLoadingStore["showArticleLoader"];
   setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
 
   currentTab?: AiRoomStore["currentTab"];
@@ -59,6 +60,7 @@ const AiRoomTabs = ({
   rootRoomId,
 
   showTabsLoader,
+  showArticleLoader,
   currentClientView,
   setIsSectionBodyLoading,
 
@@ -82,11 +84,12 @@ const AiRoomTabs = ({
         currentSearch.delete("chat");
       }
 
-      window.history.replaceState(
-        null,
-        "",
-        `${window.location.pathname}?${currentSearch.toString()}`,
-      );
+      const searchString = currentSearch.toString();
+      const newUrl = searchString
+        ? `${window.location.pathname}?${searchString}`
+        : window.location.pathname;
+
+      window.history.replaceState(null, "", newUrl);
     };
   }, []);
 
@@ -143,7 +146,7 @@ const AiRoomTabs = ({
 
   const isChat = currentClientView === "chat";
 
-  if (showTabsLoader)
+  if (showTabsLoader || showArticleLoader)
     return (
       <SectionSubmenuSkeleton style={{ marginBottom: isChat ? 0 : "20px" }} />
     );
@@ -167,8 +170,12 @@ export default inject(
     selectedFolderStore,
     accessRightsStore,
   }: TStore) => {
-    const { showTabsLoader, setIsSectionBodyLoading, currentClientView } =
-      clientLoadingStore;
+    const {
+      showTabsLoader,
+      showArticleLoader,
+      setIsSectionBodyLoading,
+      currentClientView,
+    } = clientLoadingStore;
 
     const { currentTab, setCurrentTab, setKnowledgeId, setResultId } =
       aiRoomStore;
@@ -180,6 +187,7 @@ export default inject(
       rootRoomId,
 
       showTabsLoader,
+      showArticleLoader,
       setIsSectionBodyLoading,
 
       currentTab,

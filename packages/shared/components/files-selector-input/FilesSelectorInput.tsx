@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -243,7 +243,6 @@ const FilesSelectorInput = ({
           rootFolderType={FolderType.Rooms}
           currentDeviceType={currentDeviceType ?? DeviceType.desktop}
           {...filesSelectorSettings}
-          withRecentTreeFolder={isFilesSelection}
           withFavoritesTreeFolder={isFilesSelection}
           withAIAgentsTreeFolder={withAIAgentsTreeFolder}
         />

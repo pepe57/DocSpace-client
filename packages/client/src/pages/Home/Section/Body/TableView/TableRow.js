@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -90,6 +90,7 @@ const FilesTableRow = memo((props) => {
     isRecentFolder,
     isFavoritesFolder,
     isSharedWithMeFolder,
+    isInSharedFolder,
     isAIAgentsFolder,
     canDrag,
     onEditIndex,
@@ -334,7 +335,7 @@ const FilesTableRow = memo((props) => {
             dragStyles={dragStyles}
             {...props}
           />
-        ) : isSharedWithMeFolder ? (
+        ) : isSharedWithMeFolder || isInSharedFolder ? (
           <SharedWithMeRowDataComponent
             element={element}
             dragStyles={dragStyles}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -112,9 +112,9 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
     applyFilterOption,
     onSelectItem,
+    isPortalView,
 
     renderInPortal,
-
     disableBySecurity,
   } = props;
   const { t } = useTranslation(["Common"]);
@@ -126,6 +126,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
   const afterSearch = React.useRef(false);
   const ssrRendered = React.useRef(false);
   const ssrTypeRendered = React.useRef(false);
+  const clearSearchCallback = React.useRef<null | VoidFunction>(null);
 
   const withInitProps = withInit
     ? {
@@ -232,6 +233,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     setSelectedTreeNode,
     searchValue,
     withCreate: withCreateState,
+    disableBySecurity,
 
     withInit,
   });
@@ -479,7 +481,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     if (!selectedItemId) return;
     if (selectedItemId && isRoot) return unsubscribe(+selectedItemId);
 
-    subscribe(+selectedItemId);
+    subscribe(selectedItemId);
   }, [selectedItemId, isRoot, unsubscribe, subscribe]);
 
   React.useEffect(() => {
@@ -553,7 +555,6 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
     if (searchValue) {
       setIsFirstLoad(true);
-      setItems([]);
     }
   }, [searchValue, selectedItemType, setIsFirstLoad, setItems]);
 
@@ -561,12 +562,14 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     (callback?: VoidFunction) => {
       if (!searchValue) return;
       setIsFirstLoad(true);
-      setItems([]);
 
       setSearchValue("");
 
-      callback?.();
       afterSearch.current = true;
+
+      if (callback) {
+        clearSearchCallback.current = callback;
+      }
     },
     [searchValue, setIsFirstLoad, setItems, setSearchValue],
   );
@@ -642,6 +645,13 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     isUserOnly,
     withInit,
   ]);
+
+  React.useEffect(() => {
+    if (clearSearchCallback.current && !isFirstLoad && !searchValue) {
+      clearSearchCallback.current();
+      clearSearchCallback.current = null;
+    }
+  }, [isFirstLoad, searchValue]);
 
   const withSearch = withSearchProp
     ? isRoot
@@ -722,10 +732,11 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     </>
   );
 
-  return (renderInPortal ??
+  return ((renderInPortal ??
     (currentDeviceType === DeviceType.mobile ||
       currentDeviceType === DeviceType.tablet)) &&
-    !embedded ? (
+    !embedded) ||
+    isPortalView ? (
     <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
   ) : (
     selectorComponent

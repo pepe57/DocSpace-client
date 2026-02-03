@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -132,7 +132,12 @@ function ConfirmRoute(props: ConfirmRouteProps) {
           confirmLinkParams,
           validationResult: confirmLinkResult.result,
         });
-        throw new Error(t("Common:LinkExpired"));
+        if (confirmLinkParams.type === "LinkInvite") {
+          window.location.href = "/login/error/link-expired";
+        } else {
+          throw new Error(t("Common:LinkExpired"));
+        }
+        return;
       case ValidationResult.TariffLimit:
         console.error("tariff limit", {
           confirmLinkParams,
@@ -144,7 +149,12 @@ function ConfirmRoute(props: ConfirmRouteProps) {
           confirmLinkParams,
           validationResult: confirmLinkResult.result,
         });
-        throw new Error(t("Common:Error"));
+        if (confirmLinkParams.type === "LinkInvite") {
+          window.location.href = "/login/error/link-quota";
+        } else {
+          throw new Error(t("Common:Error"));
+        }
+        return;
       default:
         console.error("unknown link", {
           confirmLinkParams,

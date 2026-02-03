@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,7 +44,7 @@ import { AuthStore } from "@docspace/shared/store/AuthStore";
 
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
-import { StyledWrapper } from "./SocialNetworks.styled";
+import styles from "../login.module.scss";
 
 type SocialNetworksProps = {
   providers?: UsersStore["providers"];
@@ -163,12 +163,12 @@ const SocialNetworks = (props: SocialNetworksProps) => {
   if (providers?.length === 0) return null;
 
   return (
-    <StyledWrapper>
+    <div className={styles.socialNetworksWrapper} data-testid="profile-social-networks">
       <Text fontSize="16px" fontWeight={700} lineHeight="22px">
         {t("ConnectSocialNetworks")}
       </Text>
-      <div className="buttons">{providerButtons}</div>
-    </StyledWrapper>
+      <div className={styles.buttons}>{providerButtons}</div>
+    </div>
   );
 };
 

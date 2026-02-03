@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { type FC, useId } from "react";
+import { type FC, useId, useState } from "react";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 
@@ -65,14 +65,12 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
         withToggle={false}
         bodyText={bodyText}
         headerText={headerText}
+        isExpired={isExpired}
       />
     );
   }
 
-  // const minDate = new Date(new Date().getTime());
-  // minDate.setDate(new Date().getDate() - 1);
-  // minDate.setTime(minDate.getTime() + 60 * 60 * 1000);
-  const minDate = new Date();
+  const minDate = moment().subtract(1, "days");
 
   return (
     <ToggleBlock {...props} withToggle={false}>
@@ -80,13 +78,14 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
         id={id}
         locale={language}
         minDate={minDate}
-        hasError={isExpired}
+        hasError={false}
         onChange={onChange}
         openDate={new Date()}
         initialDate={expirationDate}
         className="public-room_date-picker"
         selectDateText={t("Common:SelectDate")}
         dataTestId="edit_link_panel_date_time_picker"
+        useMaxTime
       />
     </ToggleBlock>
   );

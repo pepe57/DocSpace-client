@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -72,6 +72,7 @@ const AIAgentSelectorComponent = ({
   initTotal,
   initHasNextPage,
   initSearchValue,
+  disableBySecurity,
 }: AIAgentSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -94,7 +95,7 @@ const AIAgentSelectorComponent = ({
   const [total, setTotal] = React.useState(() => (withInit ? initTotal : -1));
   const [items, setItems] = React.useState<TSelectorItem[]>(
     withInit
-      ? convertToItems(initItems).filter((x) =>
+      ? convertToItems(initItems, disableBySecurity).filter((x) =>
           excludeItems ? !excludeItems.includes(x.id) : true,
         )
       : [],
@@ -161,6 +162,7 @@ const AIAgentSelectorComponent = ({
     setTotal,
     setItems,
     disabledItems: [],
+    disableBySecurity,
   });
 
   const onClearSearchAction = React.useCallback(
@@ -179,7 +181,9 @@ const AIAgentSelectorComponent = ({
     withCreate: true,
     isInit: isInitRef.current,
     setIsInit,
-    createDefineLabel: t("Common:CreateAIAgent"),
+    createDefineLabel: t("Common:CreateAIAgent", {
+      aiAgent: t("Common:AIAgent"),
+    }),
     excludeItems,
     searchValue,
     setHasNextPage,
@@ -187,6 +191,7 @@ const AIAgentSelectorComponent = ({
     setItems,
     withInit,
     subscribe,
+    disableBySecurity,
   });
 
   React.useEffect(() => {
@@ -244,14 +249,18 @@ const AIAgentSelectorComponent = ({
           ? EmptyScreenAIAgentsSelectorSvgUrl
           : EmptyScreenAIAgentsSelectorSvgUrlDark
       }
-      emptyScreenHeader={t("Common:NoAIAgents")}
+      emptyScreenHeader={t("Common:NoAIAgents", {
+        aiAgents: t("Common:AIAgents"),
+      })}
       emptyScreenDescription={t("Common:NoAIAgentsDescription")}
       searchEmptyScreenImage={
         isBase
           ? EmptyScreenAIAgentsSelectorSvgUrl
           : EmptyScreenAIAgentsSelectorSvgUrlDark
       }
-      searchEmptyScreenHeader={t("Common:NoAIAgentsSearch")}
+      searchEmptyScreenHeader={t("Common:NoAIAgentsSearch", {
+        aiAgents: t("Common:AIAgents"),
+      })}
       searchEmptyScreenDescription={t("Common:NoAIAgentsSearchDescription")}
       totalItems={total}
       hasNextPage={hasNextPage}
@@ -273,7 +282,9 @@ const AIAgentSelectorComponent = ({
       onClose={onClose}
       withInfoBar={withInfo}
       infoBarData={{
-        title: t("Common:ChooseAIAgent"),
+        title: t("Common:ChooseAIAgent", {
+          aiAgent: t("Common:AIAgent"),
+        }),
         icon: InfoIconSvgUrl,
         onClose: () => setWithInfo(!withInfo),
         description: t("Common:ChooseAIAgentDescription"),

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -396,6 +396,7 @@ class FilesActionStore {
 
         const error = isAIAgentsFolderRoot
           ? t("Common:AIAgentSpaceQuotaExceeded", {
+              aiAgent: t("Common:AIAgent"),
               size,
             })
           : t("Common:RoomSpaceQuotaExceeded", {
@@ -407,20 +408,16 @@ class FilesActionStore {
 
     const toFolderId = folderId || this.selectedFolderStore.id;
 
-    setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });
+    if (withoutHiddenFiles.length) {
+      setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });
+    }
 
     const tree = this.convertToTree(withoutHiddenFiles);
 
     const filesList = [];
     await this.createFolderTree(tree, toFolderId, filesList);
 
-    if (!filesList.length) {
-      setPrimaryProgressBarData({
-        ...pbData,
-        completed: uploaded,
-        withoutStatus: !tree.length,
-      });
-    } else {
+    if (filesList.length) {
       setPrimaryProgressBarData({ ...pbData });
     }
 
@@ -462,9 +459,11 @@ class FilesActionStore {
       newSelection ||
       (this.filesStore.selection.length
         ? this.filesStore.selection
-        : [bufferSelection]);
+        : bufferSelection
+          ? [bufferSelection]
+          : []);
 
-    selection = selection.filter((item) => item.security.Delete);
+    selection = selection.filter((item) => item?.security?.Delete);
 
     //  const isThirdPartyFile = selection.some((f) => f.providerKey);
 
@@ -585,6 +584,10 @@ class FilesActionStore {
         this.setGroupMenuBlocked(false);
       }
     }
+  };
+
+  askAIAction = (item) => {
+    this.dialogsStore.setAiAgentSelectorDialogProps(true, item);
   };
 
   emptyTrash = async (translations) => {
@@ -1328,11 +1331,11 @@ class FilesActionStore {
 
       if (isAIAgent) {
         translationForOneItem = isPin
-          ? t("AIAgentPinned")
-          : t("AIAgentUnpinned");
+          ? t("AIAgentPinned", { aiAgent: t("Common:AIAgent") })
+          : t("AIAgentUnpinned", { aiAgent: t("Common:AIAgent") });
         translationForSeverals = isPin
-          ? t("AIAgentsPinned")
-          : t("AIAgentsUnpinned");
+          ? t("AIAgentsPinned", { aiAgents: t("Common:AIAgents") })
+          : t("AIAgentsUnpinned", { aiAgents: t("Common:AIAgents") });
       } else {
         translationForOneItem = isPin ? t("RoomPinned") : t("RoomUnpinned");
         translationForSeverals = isPin
@@ -1367,7 +1370,9 @@ class FilesActionStore {
 
       if (isError) {
         isAIAgent
-          ? toastr.error(t("AIAgentPinLimitMessage"))
+          ? toastr.error(
+              t("AIAgentPinLimitMessage", { aiAgents: t("Common:AIAgents") }),
+            )
           : toastr.error(t("RoomsPinLimitMessage"));
       }
 
@@ -1411,8 +1416,12 @@ class FilesActionStore {
     let notificationsEnabled = t("RoomNotificationsEnabled");
 
     if (isAIAgent) {
-      notificationsDisabled = t("AIAgentNotificationsDisabled");
-      notificationsEnabled = t("AIAgentNotificationsEnabled");
+      notificationsDisabled = t("AIAgentNotificationsDisabled", {
+        aiAgent: t("Common:AIAgent"),
+      });
+      notificationsEnabled = t("AIAgentNotificationsEnabled", {
+        aiAgent: t("Common:AIAgent"),
+      });
     }
 
     muteRoomNotification(id, muteStatus)
@@ -1733,6 +1742,8 @@ class FilesActionStore {
   };
 
   nameWithoutExtension = (title) => {
+    if (!title) return "";
+
     const indexPoint = title.lastIndexOf(".");
     const splitTitle = title.split(".");
     const splitTitleLength = splitTitle.length;
@@ -2409,6 +2420,8 @@ class FilesActionStore {
       .set("downloadAs", downloadAs)
       .set("copy", copy)
       .set("delete", {
+        id: "menu-remove-from-shared-with-me",
+        key: "remove-from-shared-with-me",
         label: t("Common:RemoveFromList"),
         onClick: () => {
           setUnsubscribe(true);
@@ -2768,7 +2781,7 @@ class FilesActionStore {
   onClickBack = (fromHotkeys = true) => {
     const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
-    const { clearFiles, setBufferSelection } = this.filesStore;
+    const { clearFiles, setBufferSelection, setSelection } = this.filesStore;
     const { insideGroupBackUrl } = this.peopleStore.groupsStore;
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
@@ -2778,6 +2791,7 @@ class FilesActionStore {
     }
 
     setBufferSelection(null);
+    setSelection([]);
 
     const categoryType = getCategoryType(window.DocSpace.location);
 
@@ -3079,7 +3093,7 @@ class FilesActionStore {
   };
 
   onLeaveRoom = (t, isOwner = false) => {
-    const { selection, bufferSelection } = this.filesStore;
+    const { selection, setSelected, bufferSelection } = this.filesStore;
     const { user } = this.userStore;
 
     const room = selection.length
@@ -3126,6 +3140,9 @@ class FilesActionStore {
         }
 
         toastr.success(successText);
+      })
+      .finally(() => {
+        setSelected("none");
       });
   };
 
@@ -3170,18 +3187,19 @@ class FilesActionStore {
       });
   };
 
-  onClickRemoveFromRecent = (selection) => {
+  onClickRemoveFromRecent = (selection, t) => {
     const { setSelected } = this.filesStore;
     const ids = selection.map((item) => item.id);
-    this.removeFilesFromRecent(ids);
+    this.removeFilesFromRecent(ids, t);
     setSelected("none");
   };
 
-  removeFilesFromRecent = async (fileIds) => {
+  removeFilesFromRecent = async (fileIds, t) => {
     const { refreshFiles } = this.filesStore;
 
     await deleteFilesFromRecent(fileIds);
     await refreshFiles();
+    toastr.success(t("Files:RemovedFromRecent"));
   };
 
   onCreateRoomFromTemplate = (item, addSelection) => {

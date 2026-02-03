@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -35,17 +34,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import { getDialogContent } from "./DeleteDialog.helper";
-
-const StyledModalWrapper = styled(ModalDialog)`
-  strong {
-    display: inline-block;
-    max-width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: top;
-  }
-`;
+import styles from "./DeleteDialog.module.scss";
 
 const DeleteDialogComponent = (props) => {
   const {
@@ -280,7 +269,13 @@ const DeleteDialogComponent = (props) => {
     isRoomDelete || isTemplate || isAIAgent ? !isChecked : !selection.length;
 
   return (
-    <StyledModalWrapper isLoading={!tReady} visible={visible} onClose={onClose}>
+    <ModalDialog
+      className={styles.modalWrapper}
+      isLoading={!tReady}
+      visible={visible}
+      onClose={onClose}
+      dataTestId="delete-dialog"
+    >
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{noteText}</Text>
@@ -323,7 +318,7 @@ const DeleteDialogComponent = (props) => {
           testId="delete_dialog_modal_cancel"
         />
       </ModalDialog.Footer>
-    </StyledModalWrapper>
+    </ModalDialog>
   );
 };
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -152,6 +152,7 @@ const Table = ({
   withContentSelection,
   isFavoritesFolder,
   isSharedWithMeFolder,
+  isInSharedFolder,
   isAIAgentsFolder,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
@@ -229,6 +230,7 @@ const Table = ({
         isTrashFolder={isTrashFolder}
         isFavoritesFolder={isFavoritesFolder}
         isSharedWithMeFolder={isSharedWithMeFolder}
+        isInSharedFolder={isInSharedFolder}
         isAIAgentsFolder={isAIAgentsFolder}
         hideColumns={hideColumns}
         isHighlight={
@@ -326,6 +328,7 @@ export default inject(
       isTemplatesFolder,
       isFavoritesFolder,
       isSharedWithMeFolder,
+      isInSharedFolder,
       isAIAgentsFolder,
     } = treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
@@ -392,6 +395,7 @@ export default inject(
       withContentSelection,
       isFavoritesFolder,
       isSharedWithMeFolder,
+      isInSharedFolder,
       isAIAgentsFolder,
     };
   },

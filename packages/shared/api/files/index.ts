@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -75,6 +75,7 @@ import {
   TFormRoleMappingRequest,
   TFileFillingFormStatus,
   TShareToUser,
+  TDefaultTemplate,
 } from "./types";
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
 
@@ -711,13 +712,48 @@ export async function startUploadSession(
     createOn,
     CreateNewIfExist,
   };
-  const res = (await request({
+
+  return request({
     method: "post",
-    url: `/files/${folderId}/upload/create_session`,
+    url: `/files/${folderId}/session`,
     data,
     skipForbidden: true,
-  })) as TUploadOperation;
+  }) as TUploadOperation;
+}
 
+export async function uploadChunkParallel(
+  folderId: string | number,
+  sessionId: string,
+  chunkNumber: number,
+  data: FormData,
+) {
+  return request({
+    method: "post",
+    url: `/files/${folderId}/session/${sessionId}/upload?chunkNumber=${chunkNumber}`,
+    data,
+  });
+}
+
+export async function uploadChunkSequential(
+  folderId: string | number,
+  sessionId: string,
+  data: FormData,
+) {
+  return request({
+    method: "post",
+    url: `/files/${folderId}/session/${sessionId}`,
+    data,
+  });
+}
+
+export async function finalizeUploadSession(
+  folderId: string | number,
+  sessionId: string,
+) {
+  const res = await request({
+    method: "put",
+    url: `/files/${folderId}/session/${sessionId}/finalize`,
+  });
   return res;
 }
 
@@ -882,6 +918,15 @@ export async function getNewFiles(folderId: number | string) {
   const res = (await request({
     method: "get",
     url: `/files/${folderId}/news`,
+  })) as TNewFiles[];
+
+  return res;
+}
+
+export async function getNewFilesAgents() {
+  const res = (await request({
+    method: "get",
+    url: `/ai/agents/news`,
   })) as TNewFiles[];
 
   return res;
@@ -1715,10 +1760,14 @@ export async function getFilesUsedSpace(signal?: AbortSignal) {
   return res;
 }
 
-export async function getConnectingStorages() {
+export async function getConnectingStorages(paramsString?: string) {
+  const url = paramsString
+    ? `files/thirdparty/providers?${paramsString}`
+    : "files/thirdparty/providers";
+
   const res = (await request({
     method: "get",
-    url: "files/thirdparty/providers",
+    url,
   })) as TConnectingStorages;
 
   return res;
@@ -1880,4 +1929,46 @@ export async function shareFileToUsers(
   })) as RoomMember[];
 
   return res;
+}
+
+export async function getDefaultTemplates() {
+  const res = await request({
+    method: "get",
+    url: "/files/settings/defaulttemplate",
+  });
+
+  return res.items as TDefaultTemplate[];
+}
+
+export async function setDefaultTemplates(
+  selectedFile: number | null,
+  fileExtension: string,
+) {
+  const res = await request({
+    method: "put",
+    url: "/files/settings/defaulttemplate",
+    data: {
+      selectedFile,
+      fileExtension,
+    },
+  });
+
+  return res.items as TDefaultTemplate[];
+}
+
+export async function uploadTemplateFromDevice(
+  file: File,
+  fileExtension: string,
+) {
+  const formData = new FormData();
+  formData.append("File", file);
+  const res = await request({
+    method: "post",
+    url: `/files/settings/defaulttemplate?FileExtension=${encodeURIComponent(fileExtension)}`,
+    data: formData,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.items as TDefaultTemplate[];
 }

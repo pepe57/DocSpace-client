@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -164,9 +164,7 @@ const BenefitsContainer = ({ t, features }) => {
               className="icons-container"
             />
             <div className="payment-benefits_feature">
-              <Text noSelect as="span">
-                {item.title}
-              </Text>
+              <Text as="span">{item.title}</Text>
               {item.id === FREE_BACKUP ? renderTooltip() : null}
             </div>
           </div>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -149,6 +149,9 @@ const FilesSelectorWrapper = ({
   folderIsShared,
   checkCreating,
   isMultiSelect,
+  disableBySecurity,
+  isPortalView = false,
+  withoutDescriptionText = false,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -478,7 +481,8 @@ const FilesSelectorWrapper = ({
         !filterParam ||
         filterParam === "ALL" ||
         (filterParam as unknown as FilterType) !== FilterType.DocumentsOnly ||
-        !descriptionText
+        !descriptionText ||
+        withoutDescriptionText
           ? ""
           : (descriptionText ?? t("Common:SelectDOCXFormat"))
       }
@@ -497,6 +501,8 @@ const FilesSelectorWrapper = ({
       formProps={formProps}
       checkCreating={checkCreating}
       isMultiSelect={isMultiSelect}
+      disableBySecurity={disableBySecurity}
+      isPortalView={isPortalView}
     />
   );
 };

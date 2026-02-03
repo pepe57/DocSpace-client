@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -64,6 +64,7 @@ const BonusItem = ({ showText, toggleArticleOpen, currentColorScheme }) => {
       onClick={onClick}
       folderId="document_catalog-bonus"
       style={{ marginBottom: "16px" }}
+      linkData={{ path: bonusUrl }}
       $currentColorScheme={currentColorScheme}
     />
   );

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,6 +30,7 @@ import {
   TSelectorCancelButton,
   TSelectorHeader,
   TSelectorItem,
+  TSelectorWithAside,
 } from "../../components/selector/Selector.types";
 
 import { RoomSearchArea, RoomsType } from "../../enums";
@@ -46,7 +47,8 @@ export type TInitValue = WithFlag<
 >;
 
 export type RoomSelectorProps = TSelectorHeader &
-  TSelectorCancelButton & {
+  TSelectorCancelButton &
+  TSelectorWithAside & {
     id?: string;
     className?: string;
     style?: React.CSSProperties;

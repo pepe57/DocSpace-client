@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -48,6 +48,7 @@ import {
   TShareSettings,
 } from "@docspace/shared/api/files/types";
 import {
+  TAIRoomChatSettings,
   TLogo,
   TRoomLifetime,
   TRoomSecurity,
@@ -180,9 +181,7 @@ class SelectedFolderStore {
 
   passwordProtected: boolean = false;
 
-  chatSettings:
-    | { modelId: string; providerId: number; prompt: string }
-    | undefined;
+  chatSettings: TAIRoomChatSettings | undefined;
 
   rootRoomType: Nullable<RoomsType> = null;
 

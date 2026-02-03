@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,9 +42,6 @@ import styles from "./Badges.module.scss";
 
 describe("<Badges />", () => {
   const mockT = vi.fn((key) => key);
-  // Use the actual Base theme to avoid type errors
-  const mockTheme = Base;
-
   const defaultItem = {
     id: 1,
     isFolder: false,
@@ -83,7 +80,7 @@ describe("<Badges />", () => {
 
   const defaultProps = {
     t: mockT,
-    theme: mockTheme,
+    themeIsBase: true,
     item: defaultItem,
     viewAs: "row" as TViewAs,
     showNew: true,
@@ -344,10 +341,14 @@ describe("<Badges />", () => {
 
       const lockButton = screen.getByTitle("Common:UnblockFile");
       expect(lockButton).toBeInTheDocument();
-      expect(lockButton).toHaveAttribute(
+
+      // data-tooltip-id is on the parent div, not on the button itself
+      const tooltipContainer = lockButton.parentElement;
+      expect(tooltipContainer).toHaveAttribute(
         "data-tooltip-id",
-        `lockTooltip${defaultItem.id}`,
+        "info-tooltip",
       );
+      expect(tooltipContainer).toHaveAttribute("data-tooltip-content");
     });
   });
 });

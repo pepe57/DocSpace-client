@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -441,10 +441,7 @@ const FileSelector = (props) => {
             {sharedLinks ? (
               <ControlsGroup>
                 <LabelGroup>
-                  <Label
-                    className="label"
-                    text={t("SharingPanel:ExternalLink")}
-                  />
+                  <Label className="label" text={t("Common:ExternalLink")} />
                   <HelpButton
                     offsetRight={0}
                     size={12}
@@ -522,6 +519,5 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
     "EmbeddingPanel",
     "Common",
     "Translations",
-    "SharingPanel",
   ])(observer(FileSelector)),
 );

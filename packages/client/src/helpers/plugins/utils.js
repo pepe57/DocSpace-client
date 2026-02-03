@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,6 +44,8 @@ export const messageActions = ({
   updatePropsContext,
   setPluginDialogVisible,
   setPluginDialogProps,
+  setPluginSelectorVisible,
+  setPluginSelectorProps,
   updateContextMenuItems,
   updateInfoPanelItems,
   updateMainButtonItems,
@@ -96,6 +98,35 @@ export const messageActions = ({
         }
 
         break;
+      case PluginActions.showSelector:
+        {
+          if (!message.selectorProps) return;
+
+          setPluginSelectorVisible && setPluginSelectorVisible(true);
+          setPluginSelectorProps &&
+            setPluginSelectorProps({
+              ...message.selectorProps,
+              pluginName,
+            });
+        }
+        break;
+
+      case PluginActions.closeSelector:
+        setPluginSelectorVisible && setPluginSelectorVisible(false);
+        setPluginSelectorProps && setPluginSelectorProps(null);
+        break;
+
+      case PluginActions.updateSelector:
+        {
+          if (!message.selectorProps) return;
+
+          setPluginSelectorProps &&
+            setPluginSelectorProps({
+              ...message.selectorProps,
+              pluginName,
+            });
+        }
+        break;
 
       case PluginActions.showSettingsModal:
         if (pluginName) {
@@ -143,7 +174,6 @@ export const messageActions = ({
           setPluginDialogProps &&
             setPluginDialogProps({ ...message.modalDialogProps, pluginName });
         }
-
         break;
 
       case PluginActions.closeModal:

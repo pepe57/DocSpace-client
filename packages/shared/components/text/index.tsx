@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,6 +30,7 @@ import equal from "fast-deep-equal/react";
 
 import styles from "./Text.module.scss";
 import type { TextProps } from "./Text.types";
+import { withTooltip } from "../tooltip";
 
 const TextPure = ({
   ref,
@@ -113,6 +114,8 @@ const TextPure = ({
 
 TextPure.displayName = "TextPure";
 
-const Text = React.memo(TextPure, equal);
+const TextBase = React.memo(TextPure, equal);
+
+const Text = withTooltip(TextBase);
 
 export { Text };

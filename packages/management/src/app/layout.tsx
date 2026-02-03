@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,6 @@ import { SYSTEM_THEME_KEY, LANGUAGE } from "@docspace/shared/constants";
 
 import { Toast } from "@docspace/shared/components/toast";
 
-import StyledComponentsRegistry from "@/lib/registry";
 import {
   getSettings,
   getUser,
@@ -114,22 +113,20 @@ export default async function RootLayout({
       <body
         className={`${systemTheme?.value === ThemeKeys.DarkStr ? "dark" : "light"}`}
       >
-        <StyledComponentsRegistry>
-          <Providers
-            contextData={{
-              user,
-              settings,
-              systemTheme: systemTheme?.value as ThemeKeys,
-              colorTheme,
-            }}
-          >
-            <Toast isSSR />
-            <ManagementDialogs settings={settings!} user={user!} />
-            <LayoutWrapper portals={portals!} isCommunity={openSource}>
-              {children}
-            </LayoutWrapper>
-          </Providers>
-        </StyledComponentsRegistry>
+        <Providers
+          contextData={{
+            user,
+            settings,
+            systemTheme: systemTheme?.value as ThemeKeys,
+            colorTheme,
+          }}
+        >
+          <Toast isSSR />
+          <ManagementDialogs settings={settings!} user={user!} />
+          <LayoutWrapper portals={portals!} isCommunity={openSource}>
+            {children}
+          </LayoutWrapper>
+        </Providers>
         <Scripts />
       </body>
     </html>

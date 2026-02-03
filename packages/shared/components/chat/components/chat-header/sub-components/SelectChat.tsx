@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -51,6 +51,7 @@ import { useChatStore } from "../../../store/chatStore";
 import { useMessageStore } from "../../../store/messageStore";
 import { openFile } from "../../../utils";
 import { SelectChatProps } from "../../../Chat.types";
+import { TooltipContainer } from "../../../../tooltip";
 
 import ExportSelector from "../../export-selector";
 
@@ -68,6 +69,7 @@ const SelectChat = ({
   getResultStorageId,
   setIsAIAgentChatDelete,
   setDeleteDialogVisible,
+  folderFormValidation,
 }: SelectChatProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -126,7 +128,6 @@ const SelectChat = ({
         startNewChat();
         updateUrlChatId("");
       }
-      setIsOpen(false);
       setHoveredItem("");
 
       toastr.success(t("Common:ChatSuccessDeleted"));
@@ -151,6 +152,7 @@ const SelectChat = ({
       onDeleteAction: onDeleteAction,
     });
     setDeleteDialogVisible?.(true);
+    setIsOpen(false);
   }, [
     isRequestRunning,
     hoveredItem,
@@ -191,29 +193,33 @@ const SelectChat = ({
 
         const title = chats.find((chat) => chat.id === hoveredItem)?.title;
 
-        if (isChecked) {
-          openFile(resultFile.id.toString());
+        if (resultFile) {
+          if (isChecked) {
+            openFile(resultFile.id.toString());
+          }
+
+          const toastMsg = (
+            <Trans
+              ns="Common"
+              i18nKey="ChatExported"
+              t={t}
+              values={{ fileName, title }}
+              components={{
+                1: <b />,
+                2: (
+                  <Link
+                    type={LinkType.action}
+                    onClick={() => openFile(resultFile.id.toString())}
+                  />
+                ),
+              }}
+            />
+          );
+
+          toastr.success(toastMsg);
+        } else {
+          toastr.error(data.error);
         }
-
-        const toastMsg = (
-          <Trans
-            ns="Common"
-            i18nKey="ChatExported"
-            t={t}
-            values={{ fileName, title }}
-            components={{
-              1: <b />,
-              2: (
-                <Link
-                  type={LinkType.action}
-                  onClick={() => openFile(resultFile.id.toString())}
-                />
-              ),
-            }}
-          />
-        );
-
-        toastr.success(toastMsg);
 
         socket?.off(SocketEvents.ExportChat);
         socket?.emit(SocketCommands.Unsubscribe, {
@@ -291,14 +297,16 @@ const SelectChat = ({
 
   return (
     <>
-      <div
+      <TooltipContainer
+        as="div"
         title={t("Common:ChatHistory")}
         className={classNames(styles.selectChat, { [styles.open]: isOpen })}
         onClick={toggleOpen}
         ref={parentRef}
+        data-testid="select-chat"
       >
         <SelectSessionReactSvg />
-      </div>
+      </TooltipContainer>
       {isOpen ? (
         <DropDown
           open={isOpen}
@@ -311,6 +319,7 @@ const SelectChat = ({
           maxHeight={maxHeight}
           manualWidth={`${CHAT_LIST_WIDTH}px`}
           isNoFixedHeightOptions
+          dataTestId="select-chat-dropdown"
         >
           <ChatList
             chats={chats}
@@ -341,6 +350,7 @@ const SelectChat = ({
           currentFolderId={getResultStorageId() || roomId}
           getFileName={getFileName}
           onSubmit={onSubmit}
+          folderFormValidation={folderFormValidation}
         />
       ) : null}
     </>

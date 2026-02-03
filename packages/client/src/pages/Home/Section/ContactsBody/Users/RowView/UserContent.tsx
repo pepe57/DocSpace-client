@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,6 +33,7 @@ import {
   getUserTypeName,
 } from "@docspace/shared/utils/common";
 import { Link, LinkType } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
 import Badges from "../../Badges";
 
@@ -51,6 +52,7 @@ const UserContent = ({
 
   isRoomAdmin: isRoomAdminUser,
   itemIndex,
+  isMe,
 }: UserContentProps) => {
   const { t } = useTranslation(["People", "Common"]);
   const theme = useTheme();
@@ -67,6 +69,7 @@ const UserContent = ({
     isRoomAdmin,
     usedSpace,
     quotaLimit,
+    id,
   } = item;
 
   const isGuests = contactsTab === "guests";
@@ -104,6 +107,7 @@ const UserContent = ({
   return (
     <StyledRowContent sideColor={sideInfoColor} sectionWidth={sectionWidth}>
       <Link
+        className="name-block"
         type={LinkType.page}
         title={displayName}
         fontWeight={600}
@@ -119,6 +123,11 @@ const UserContent = ({
           : displayName?.trim()
             ? displayName
             : email}
+        {isMe?.(id) ? (
+          <Text as="div" className="me-label" fontWeight="600" fontSize="13px">
+            ({t("Common:MeLabel")})
+          </Text>
+        ) : null}
       </Link>
       <Badges
         statusType={statusType}

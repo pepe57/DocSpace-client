@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -60,6 +60,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
     updateEventListenerItems,
     updateFileItems,
     updatePlugin,
+    setPluginSelectorVisible,
+    setPluginSelectorProps,
   } = pluginStore;
 
   return {
@@ -75,6 +77,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
     updateEventListenerItems,
     updateFileItems,
     updatePlugin,
+    setPluginSelectorVisible,
+    setPluginSelectorProps,
   };
 })(
   observer(
@@ -96,6 +100,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
       updateEventListenerItems,
       updateFileItems,
       updatePlugin,
+      setPluginSelectorVisible,
+      setPluginSelectorProps,
     }) => {
       const [elementProps, setElementProps] = React.useState(component.props);
 
@@ -166,7 +172,15 @@ export const PluginComponent = inject(({ pluginStore }) => {
               ),
             );
 
-            return <div style={elementStyles}>{childrenComponents}</div>;
+            return (
+              <div
+                id={elementProps?.id}
+                className={elementProps?.className}
+                style={elementStyles}
+              >
+                {childrenComponents}
+              </div>
+            );
           }
 
           case PluginComponents.text: {
@@ -197,6 +211,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 
@@ -223,6 +239,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 
@@ -249,6 +267,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 
@@ -275,6 +295,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 
@@ -321,6 +343,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateEventListenerItems,
                 updateFileItems,
                 updatePlugin,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
 
               setIsRequestRunning && setIsRequestRunning(false);
@@ -374,6 +398,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 

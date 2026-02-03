@@ -218,6 +218,11 @@
       cursor: pointer;
     }
   }
+  &[data-size="extraSmall"] {
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+  }
 
   &[data-size="min"] {
     width: 32px;

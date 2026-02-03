@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -74,6 +74,7 @@ const Modal = ({
   withBorder = false,
   dataTestId,
   scrollbarCreateContext,
+  backdropVisible = true,
   closeOnBackdropClick = true,
   ...rest
 }: ModalSubComponentsProps) => {
@@ -199,6 +200,7 @@ const Modal = ({
       <ModalBackdrop
         className={classNames({
           [styles.modalBackdropActive]: visible,
+          [styles.hideBackdrop]: visible && !backdropVisible,
           "backdrop-active": visible,
         })}
         zIndex={zIndex}

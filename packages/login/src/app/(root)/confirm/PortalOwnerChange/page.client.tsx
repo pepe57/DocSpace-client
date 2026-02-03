@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,7 +36,7 @@ import { ownerChange } from "@docspace/shared/api/settings";
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { ButtonsWrapper } from "@/components/Confirm.styled";
+import styles from "../confirm.module.scss";
 
 type ChangeOwnerFormProps = {
   newOwner?: string;
@@ -93,7 +93,7 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
           productName: t("Common:ProductName"),
         })}
       </Text>
-      <ButtonsWrapper>
+      <div className={styles.buttonsWrapper}>
         <Button
           primary
           scale
@@ -113,7 +113,7 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
           onClick={onCancelClick}
           testId="cancel_button"
         />
-      </ButtonsWrapper>
+      </div>
     </>
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,6 +50,7 @@ const PeopleRowContainer = ({
   isDefaultUsersQuotaSet,
   isRoomAdmin,
   withContentSelection,
+  isMe,
 }: RowViewProps) => {
   useViewEffect({
     view: viewAs!,
@@ -81,6 +82,7 @@ const PeopleRowContainer = ({
           showStorageInfo={showStorageInfo}
           isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
           isRoomAdmin={isRoomAdmin}
+          isMe={isMe}
         />
       ))}
     </StyledRowContainer>
@@ -133,6 +135,7 @@ export default inject(
       isDefaultUsersQuotaSet,
       isRoomAdmin,
       withContentSelection,
+      isMe: userStore.isMe,
     };
   },
 )(observer(PeopleRowContainer));

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -65,9 +65,11 @@ export type ViewProps = {
   paymentStore: TStore["paymentStore"];
   servicesStore: TStore["servicesStore"];
   currentTariffStatusStore: TStore["currentTariffStatusStore"];
+  defaultTemplatesStore: TStore["defaultTemplatesStore"];
   clearAbortControllerArr: TStore["settingsStore"]["clearAbortControllerArr"];
   fetchAIProviders: TStore["aiSettingsStore"]["fetchAIProviders"];
   fetchMCPServers: TStore["aiSettingsStore"]["fetchMCPServers"];
   fetchWebSearch: TStore["aiSettingsStore"]["fetchWebSearch"];
   fetchKnowledge: TStore["aiSettingsStore"]["fetchKnowledge"];
+  initDefaultProvider: TStore["aiSettingsStore"]["initDefaultProvider"];
 };

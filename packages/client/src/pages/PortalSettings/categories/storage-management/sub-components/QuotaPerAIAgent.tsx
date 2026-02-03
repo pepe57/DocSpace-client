@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,7 +38,7 @@ type QuotaPerAIAgentComponentProps = {
 const QuotaPerAIAgentComponent = (props: QuotaPerAIAgentComponentProps) => {
   const { setAIAgentQuota, defaultAIAgentsQuota, isDefaultAIAgentsQuotaSet } =
     props;
-  const { t } = useTranslation("Settings");
+  const { t } = useTranslation(["Settings", "Common"]);
 
   const initialSizeProp = isDefaultAIAgentsQuotaSet
     ? { initialSize: defaultAIAgentsQuota }
@@ -50,16 +50,22 @@ const QuotaPerAIAgentComponent = (props: QuotaPerAIAgentComponentProps) => {
   return (
     <QuotaPerItemComponent
       type="agent"
-      formLabel={t("QuotaPerAIAgent")}
-      toggleLabel={t("DefineQuotaPerAIAgent")}
+      formLabel={t("QuotaPerAIAgent", {
+        aiAgent: t("Common:AIAgent"),
+      })}
+      toggleLabel={t("DefineQuotaPerAIAgent", {
+        aiAgent: t("Common:AIAgent"),
+      })}
       disableQuota={disableQuota}
       saveQuota={saveQuota}
       {...initialSizeProp}
       isQuotaSet={isDefaultAIAgentsQuotaSet}
-      tabIndex={1}
+      tabIndex={3}
       dataTestId="quota_ai_agent"
       toggleDescription={t("SetDefaultAIAgentQuota", {
         productName: t("Common:ProductName"),
+        aiAgents: t("Common:AIAgents"),
+        aiAgent: t("Common:AIAgent"),
       })}
     />
   );

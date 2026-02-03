@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,6 +54,16 @@ const InfoBadge: FC<InfoBadgeProps> = ({
     tooltipRef.current?.close();
   }, []);
 
+  const isSimpleContent =
+    typeof tooltipTitle === "string" && typeof tooltipDescription === "string";
+
+  const tooltipHtmlContent = isSimpleContent
+    ? `<div style="max-width: 300px;">
+         <div style="font-weight: 600; margin-bottom: 8px;">${tooltipTitle}</div>
+         <div>${tooltipDescription}</div>
+       </div>`
+    : null;
+
   return (
     <div data-testid={dataTestId ?? "info-badge"}>
       <Badge
@@ -62,11 +72,17 @@ const InfoBadge: FC<InfoBadgeProps> = ({
         isHovered={false}
         borderRadius="50px"
         label={label}
-        data-tooltip-id={id}
+        data-tooltip-id={isSimpleContent ? "info-tooltip" : id}
+        {...(isSimpleContent && tooltipHtmlContent
+          ? {
+              "data-tooltip-html": tooltipHtmlContent,
+              "data-tooltip-place": place,
+            }
+          : {})}
         backgroundColor={globalColors.mainPurple}
       />
 
-      {tooltipDescription && tooltipTitle ? (
+      {!isSimpleContent && tooltipDescription && tooltipTitle ? (
         <Tooltip
           id={id}
           ref={tooltipRef}

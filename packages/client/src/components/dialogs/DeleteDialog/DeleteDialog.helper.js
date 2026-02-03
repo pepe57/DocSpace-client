@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -95,9 +95,12 @@ export const getDialogContent = (
       <>
         <Trans
           t={t}
-          i18nKey="DeleteAIAgentChatDescription"
+          i18nKey="DeleteAIChatDescription"
           ns="DeleteDialog"
           values={{ chatName: isAIAgentChatDelete.itemName }}
+          components={{
+            1: <Text key="chat-title" fontWeight={400} as="span" />,
+          }}
         ></Trans>{" "}
         {t("Common:WantToContinue")}
       </>

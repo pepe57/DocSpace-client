@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,6 +30,7 @@ import {
   FilesSelectorFilterTypes,
   FilterType,
 } from "../../enums";
+import { TEMPLATE_GALLERY_FORMATS } from "../../constants";
 
 export const configureFilterByFilterParam = (
   filter: FilesFilter,
@@ -68,10 +69,12 @@ export const configureFilterByFilterParam = (
       filter.filterType = FilterType.DiagramsOnly;
       break;
 
+    case FilesSelectorFilterTypes.PDFForm:
     case FilterType.PDFForm:
       filter.filterType = FilterType.PDFForm;
       break;
 
+    case FilesSelectorFilterTypes.PPTX:
     case FilterType.PresentationsOnly:
       filter.filterType = FilterType.PresentationsOnly;
       break;
@@ -111,8 +114,10 @@ export const configureFilterByFilterParam = (
         .join(",");
       break;
 
-    case "PDFTypes":
-      filter.extension = "pdf";
+    case "TemplateGalleryTypes":
+      filter.extension = TEMPLATE_GALLERY_FORMATS.map((extension) =>
+        extension.slice(1),
+      ).join(",");
       break;
 
     default:

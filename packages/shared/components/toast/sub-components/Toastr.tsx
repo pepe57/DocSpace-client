@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -126,7 +126,11 @@ const createToastContent = (
   data: string | React.ReactNode,
   title: string,
 ) => (
-  <div className={styles.toastContent} data-type={type}>
+  <div
+    data-testId="toast-content"
+    className={styles.toastContent}
+    data-type={type}
+  >
     <div className="icon-wrapper">
       <Icon size={IconSizeType.medium} type={type} />
     </div>

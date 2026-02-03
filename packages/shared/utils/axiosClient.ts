@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -263,6 +263,9 @@ class AxiosClient {
       const loginURL = combineUrl(proxyURL, "/login");
 
       if (!this.isSSR) {
+        const w = window as unknown as { __redirectToLogin?: boolean };
+        if (w.__redirectToLogin) return Promise.resolve();
+
         switch (error.response?.status) {
           case 401: {
             if (options.skipUnauthorized) return Promise.resolve();
@@ -280,11 +283,12 @@ class AxiosClient {
               url: "/authentication/logout",
             };
 
+            w.__redirectToLogin = true;
             this.request(opt)?.then(() => {
               this.setWithCredentialsStatus(false);
               window.location.href = `${loginURL}?authError=true`;
             });
-            break;
+            return Promise.resolve();
           }
           case 402:
             if (!window.location.pathname.includes("payments")) {

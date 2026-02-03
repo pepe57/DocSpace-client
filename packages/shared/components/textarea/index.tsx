@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -70,6 +70,7 @@ const Textarea = ({
   classNameCopyIcon,
   isChatMode = false,
   dataTestId,
+  onKeyDown,
 }: TextareaProps) => {
   const { isRTL } = useInterfaceDirection();
 
@@ -228,6 +229,7 @@ const Textarea = ({
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
           onClick={(e) => e.stopPropagation()}
+          onKeyDown={onKeyDown}
         />
       </Scrollbar>
     </div>

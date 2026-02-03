@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import { makeAutoObservable } from "mobx";
 import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 import i18n from "../i18n";
@@ -347,6 +347,9 @@ class TreeFoldersStore {
   get isSharedWithMeFolderRoot() {
     return this.selectedFolderStore.rootFolderType === FolderType.SHARE;
   }
+  get isInSharedFolder() {
+    return !this.isSharedWithMeFolder && this.isSharedWithMeFolderRoot;
+  }
 
   get isFavoritesFolder() {
     return (
@@ -410,6 +413,13 @@ class TreeFoldersStore {
     return FolderType.AIAgents === this.selectedFolderStore.rootFolderType;
   }
 
+  get isFormRoomRoot() {
+    return (
+      this.selectedFolderStore.roomType === RoomsType.FormRoom ||
+      this.selectedFolderStore.parentRoomType === FolderType.FormRoom
+    );
+  }
+
   get isRoom() {
     return (
       this.roomsFolder &&
@@ -446,7 +456,8 @@ class TreeFoldersStore {
 
   get isVDRRoomRoot() {
     return (
-      FolderType.VirtualDataRoom === this.selectedFolderStore.parentRoomType
+      FolderType.VirtualDataRoom === this.selectedFolderStore.parentRoomType ||
+      this.selectedFolderStore.roomType === RoomsType.VirtualDataRoom // need when changing the room settings, because parentRoomType is reset
     );
   }
 

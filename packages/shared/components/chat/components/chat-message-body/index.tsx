@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
@@ -36,7 +36,7 @@ import { Loader, LoaderTypes } from "../../../loader";
 import { useMessageStore } from "../../store/messageStore";
 import { useChatStore } from "../../store/chatStore";
 
-import { MessageBodyProps } from "../../Chat.types";
+import type { MessageBodyProps } from "../../Chat.types";
 
 import EmptyScreen from "./sub-components/EmptyScreen";
 import Message from "./sub-components/message";
@@ -49,6 +49,7 @@ const ChatMessageBody = ({
   getIcon,
   isLoading,
   getResultStorageId,
+  folderFormValidation,
 }: MessageBodyProps) => {
   const {
     messages,
@@ -98,6 +99,7 @@ const ChatMessageBody = ({
       className={classNames(styles.chatMessageBody, {
         [styles.empty]: isEmpty,
       })}
+      data-testid="chat-message-body"
     >
       {isEmpty ? (
         <EmptyScreen isLoading={isLoading} />
@@ -116,6 +118,7 @@ const ChatMessageBody = ({
                 isLast={index === 0}
                 getIcon={getIcon}
                 getResultStorageId={getResultStorageId}
+                folderFormValidation={folderFormValidation}
               />
             );
           })}

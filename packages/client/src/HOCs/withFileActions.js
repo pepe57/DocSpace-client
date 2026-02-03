@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -454,7 +454,7 @@ export default function withFileActions(WrappedFileItem) {
         withCtrlSelect,
         withShiftSelect,
       } = filesStore;
-      const { id } = selectedFolderStore;
+      const { id, isInsideResultStorage } = selectedFolderStore;
       const { startUpload, secondaryProgressDataStore } = uploadDataStore;
       const { withContentSelection } = hotkeyStore;
       const { findOperationById } = secondaryProgressDataStore;
@@ -467,7 +467,8 @@ export default function withFileActions(WrappedFileItem) {
         (x) => x.id === item.id && x.fileExst === item?.fileExst,
       );
 
-      const isDisabledDropItem = item.security?.Create === false;
+      const isDisabledDropItem =
+        item.security?.Create === false || isInsideResultStorage;
 
       const draggable =
         !isRecycleBinFolder && selectedItem && !isDisabledDropItem;

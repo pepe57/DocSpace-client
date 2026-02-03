@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -37,6 +37,8 @@ import {
   type TServer,
   type TUpdateAiProvider,
   type TUpdateServer,
+  TDefaultProvider,
+  TModel,
 } from "@docspace/shared/api/ai/types";
 import {
   addNewServer,
@@ -53,6 +55,9 @@ import {
   updateKnowledgeConfig,
   getKnowledgeConfig,
   getProviderAvailabilityStatus,
+  getDefaultProvider,
+  getModels,
+  updateDefaultProvider,
 } from "@docspace/shared/api/ai";
 import {
   ServerType,
@@ -84,6 +89,14 @@ class AISettingsStore {
 
   checkProvidersAbortController: AbortController | null = null;
 
+  defaultProvider: TDefaultProvider | null = null;
+
+  defaultProviderModels: TModel[] | null = null;
+
+  isDefaultProviderModelsLoading = false;
+
+  defaultProviderInitied = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -108,6 +121,22 @@ class AISettingsStore {
     this.webSearchInitied = value;
   };
 
+  setDefaultProvider = (provider: TDefaultProvider | null) => {
+    this.defaultProvider = provider;
+  };
+
+  setDefaultProviderModels = (models: TModel[] | null) => {
+    this.defaultProviderModels = models;
+  };
+
+  setIsDefaultProviderModelsLoading = (value: boolean) => {
+    this.isDefaultProviderModelsLoading = value;
+  };
+
+  setDefaultProviderInitied = (value: boolean) => {
+    this.defaultProviderInitied = value;
+  };
+
   setAIProviders = (providers: TAiProvider[]) => {
     this.aiProviders = providers;
   };
@@ -128,6 +157,10 @@ class AISettingsStore {
     const newProvider = await createProvider(provider);
 
     this.aiProviders.push(newProvider);
+
+    if (this.aiProviders.length === 1) {
+      await this.initDefaultProvider();
+    }
   };
 
   updateAIProvider = async (id: TAiProvider["id"], data: TUpdateAiProvider) => {
@@ -153,6 +186,10 @@ class AISettingsStore {
     this.aiProviders = this.aiProviders.filter(
       (provider) => provider.id !== id,
     );
+
+    if (this.aiProviders.length === 0) {
+      this.clearDefaultProviderData();
+    }
   };
 
   fetchAIProviders = async () => {
@@ -320,6 +357,67 @@ class AISettingsStore {
     return !this.unavailableProvidersIdsSet.has(id);
   };
 
+  fetchDefaultProviderModels = async (providerId: TAiProvider["id"]) => {
+    let models = null;
+
+    try {
+      this.setIsDefaultProviderModelsLoading(true);
+
+      models = await getModels(providerId);
+      this.setDefaultProviderModels(models);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.setIsDefaultProviderModelsLoading(false);
+    }
+
+    return models;
+  };
+
+  initDefaultProvider = async () => {
+    try {
+      const defaultProvider = await getDefaultProvider();
+
+      if (defaultProvider) {
+        this.setDefaultProvider(defaultProvider);
+        await this.fetchDefaultProviderModels(defaultProvider.providerId);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.setDefaultProviderInitied(true);
+    }
+  };
+
+  changeDefaultProvider = async (data: {
+    providerId: number;
+    defaultModel: string;
+  }) => {
+    try {
+      const newDefaultProvider = await updateDefaultProvider(data);
+
+      this.aiProviders.forEach((p) => {
+        if (p.isDefault) {
+          p.isDefault = false;
+        }
+
+        if (p.id === newDefaultProvider.providerId) {
+          p.isDefault = true;
+        }
+      });
+
+      this.setDefaultProvider(newDefaultProvider);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  clearDefaultProviderData = () => {
+    this.setDefaultProvider(null);
+    this.setDefaultProviderModels(null);
+    this.setDefaultProviderInitied(false);
+  };
+
   get systemMCPServers() {
     return this.mcpServers.filter(
       (mcp) => mcp.serverType !== ServerType.Custom,
@@ -334,6 +432,15 @@ class AISettingsStore {
 
   get hasAIProviders() {
     return this.aiProviders.length > 0;
+  }
+
+  get isDefaultProviderSettingsAvailable() {
+    return (
+      this.aiProviders.length > 0 &&
+      this.defaultProvider &&
+      this.defaultProviderModels &&
+      this.defaultProviderInitied
+    );
   }
 }
 

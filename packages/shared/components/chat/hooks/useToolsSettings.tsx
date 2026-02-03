@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,15 +34,17 @@ import {
   getWebSearchInRoom,
 } from "../../../api/ai";
 import { TAIConfig, TMCPTool, TServer } from "../../../api/ai/types";
+import { TAIRoomChatSettings } from "../../../api/rooms/types";
 import { Nullable } from "../../../types";
 import { RoomsType } from "../../../enums";
 
 type Props = {
   roomId: string | number;
   aiConfig: Nullable<TAIConfig>;
+  chatSettings?: TAIRoomChatSettings;
 };
 
-const useToolsSettings = ({ roomId, aiConfig }: Props) => {
+const useToolsSettings = ({ roomId, aiConfig, chatSettings }: Props) => {
   const [servers, setServers] = React.useState<TServer[]>([]);
   const [MCPTools, setMCPTools] = React.useState<Map<string, TMCPTool[]>>(
     new Map(),
@@ -52,7 +54,9 @@ const useToolsSettings = ({ roomId, aiConfig }: Props) => {
 
   const fetchServerTools = React.useCallback(
     async (res: TServer[], roomId: string | number) => {
-      const enabledServers = res.filter((server) => server.connected);
+      const enabledServers = res.filter(
+        (server) => server.connected && !server.needReset,
+      );
 
       const actions = await Promise.all(
         enabledServers.map((server) =>
@@ -78,7 +82,7 @@ const useToolsSettings = ({ roomId, aiConfig }: Props) => {
 
     setServers(res);
     fetchServerTools(res, roomId);
-  }, [roomId]);
+  }, [roomId, fetchServerTools]);
 
   const initTools = React.useCallback(async () => {
     if (!roomId) return;
@@ -125,7 +129,8 @@ const useToolsSettings = ({ roomId, aiConfig }: Props) => {
   return {
     servers,
     MCPTools,
-    webSearchPortalEnabled: aiConfig?.webSearchEnabled || false,
+    webSearchAvailable:
+      aiConfig?.webSearchEnabled || chatSettings?.internal || false,
     webSearchEnabled,
     isFetched,
     knowledgeSearchToolName: aiConfig?.knowledgeSearchToolName || "",

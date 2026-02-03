@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -121,6 +121,10 @@ const AuthHandler = () => {
               combineUrl(window.location.origin, referenceUrl),
             );
           }
+        }
+
+        if (res && res.tfa && res.confirmUrl) {
+          return window.location.replace(res.confirmUrl);
         }
 
         if (typeof res === "string") window.location.replace(res);

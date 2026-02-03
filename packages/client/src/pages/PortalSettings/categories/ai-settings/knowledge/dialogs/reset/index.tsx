@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,17 +35,20 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import { inject, observer } from "mobx-react";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 type ResetKnowledgeDialogProps = {
   onSuccess?: VoidFunction;
   onClose: VoidFunction;
   restoreKnowledge?: AISettingsStore["restoreKnowledge"];
+  getAIConfig?: SettingsStore["getAIConfig"];
 };
 
 const ResetKnowledgeDialogComponent = ({
   onSuccess,
   onClose,
   restoreKnowledge,
+  getAIConfig,
 }: ResetKnowledgeDialogProps) => {
   const { t } = useTranslation(["AISettings", "Common", "OAuth", "Settings"]);
 
@@ -58,6 +61,7 @@ const ResetKnowledgeDialogComponent = ({
       await restoreKnowledge?.();
       toastr.success(t("AISettings:KnowledgeDisabledSuccess"));
       onSuccess?.();
+      getAIConfig?.();
     } catch (error) {
       console.error(error);
       toastr.error(error as string);
@@ -83,6 +87,7 @@ const ResetKnowledgeDialogComponent = ({
           scale
           onClick={onSubmitAction}
           isLoading={loading}
+          testId="reset-button"
         />
         <Button
           size={ButtonSize.normal}
@@ -96,8 +101,11 @@ const ResetKnowledgeDialogComponent = ({
   );
 };
 
-export const ResetKnowledgeDialog = inject(({ aiSettingsStore }: TStore) => {
-  return {
-    restoreKnowledge: aiSettingsStore.restoreKnowledge,
-  };
-})(observer(ResetKnowledgeDialogComponent));
+export const ResetKnowledgeDialog = inject(
+  ({ aiSettingsStore, settingsStore }: TStore) => {
+    return {
+      restoreKnowledge: aiSettingsStore.restoreKnowledge,
+      getAIConfig: settingsStore.getAIConfig,
+    };
+  },
+)(observer(ResetKnowledgeDialogComponent));

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -86,6 +86,7 @@ const MCPServersSelector = ({
           "",
         isMCP: true,
         isSelected: initedSelectedServers?.includes(server.id),
+        isDisabled: server.needReset,
       };
     },
     [isBase, initedSelectedServers, t],
@@ -166,9 +167,13 @@ const MCPServersSelector = ({
       emptyScreenImage={
         isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl
       }
-      emptyScreenHeader={t("Common:NoMCPServers")}
+      emptyScreenHeader={t("Common:NoMCPServers", {
+        mcpServers: t("Common:MCPSettingTitle"),
+      })}
       emptyScreenDescription={t("Common:NoMCPServersDescription", {
+        mcpServers: t("Common:MCPSettingTitle"),
         productName: t("Common:ProductName"),
+        aiAgent: t("Common:AIAgent"),
       })}
       searchEmptyScreenImage={
         isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl
@@ -190,7 +195,9 @@ const MCPServersSelector = ({
       onSelect={onSelect}
       withHeader
       headerProps={{
-        headerLabel: t("Common:AvailableMCPServers"),
+        headerLabel: t("Common:AvailableMCPServers", {
+          mcpServers: t("Common:MCPSettingTitle"),
+        }),
         withoutBackButton: false,
         onBackClick: onBackClick,
         onCloseClick: onClose,

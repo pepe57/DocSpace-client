@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -219,6 +219,15 @@ class TargetUserStore {
         notificationType,
         (notification as { isEnabled: boolean }).isEnabled,
       );
+    }
+  };
+
+  checkNotificationsChannels = async () => {
+    try {
+      const res = await api.settings.getNotificationsSettings();
+      this.setNotificationChannels(res);
+    } catch (error) {
+      console.log(error);
     }
   };
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -58,6 +58,7 @@ const Chat = observer(
     getResultStorageId,
     setIsAIAgentChatDelete,
     setDeleteDialogVisible,
+    folderFormValidation,
   }: ChatProps & { isLoadingChat: boolean }) => {
     const { currentChat } = useChatStore();
 
@@ -84,6 +85,7 @@ const Chat = observer(
           aiReady={aiReady}
           setIsAIAgentChatDelete={setIsAIAgentChatDelete}
           setDeleteDialogVisible={setDeleteDialogVisible}
+          folderFormValidation={folderFormValidation}
         />
         {showEmptyScreen ? (
           <ChatNoAccessScreen
@@ -98,6 +100,7 @@ const Chat = observer(
               isLoading={isLoadingChat}
               getIcon={getIcon}
               getResultStorageId={getResultStorageId}
+              folderFormValidation={folderFormValidation}
             />
             <ChatFooter
               attachmentFile={attachmentFile}
@@ -147,7 +150,7 @@ const ChatWrapper = (props: ChatProps) => {
   return (
     <ChatStoreContextProvider roomId={roomId} {...initChats}>
       <MessageStoreContextProvider roomId={roomId} {...messagesSettings}>
-        <ChatContainer>
+        <ChatContainer isLoadingChat={isLoadingChat}>
           <Chat {...props} isLoadingChat={isLoadingChat} />
         </ChatContainer>
       </MessageStoreContextProvider>

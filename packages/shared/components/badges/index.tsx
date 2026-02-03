@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -31,7 +31,6 @@ import React, { useMemo, useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import FileActionsConvertEditDocReactSvg from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?url";
@@ -106,7 +105,7 @@ const BadgeWrapper = ({
 
 const Badges = ({
   t,
-  theme,
+  themeIsBase,
   item,
   isTrashFolder,
   showNew,
@@ -132,6 +131,7 @@ const Badges = ({
   onClickLock,
   onClickFavorite,
   isPublicRoom,
+  editorsTooltip,
 }: BadgesProps) => {
   const {
     id,
@@ -174,8 +174,6 @@ const Badges = ({
 
   const fontSizeBadge = isTile || tabletViewBadge ? "11px" : "9px";
 
-  const iconEdit = <FileActionsConvertEditDocReactSvg />;
-
   const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
   const iconLock = desktopView ? LockedIconReact12Svg : LockedIconReactSvg;
 
@@ -205,7 +203,7 @@ const Badges = ({
 
   const versionBadgeProps = {
     borderRadius: "50px",
-    color: theme.filesBadges.color,
+    color: globalColors.white,
     fontSize: "9px",
     fontWeight: 800,
     maxWidth: "60px",
@@ -297,11 +295,9 @@ const Badges = ({
     [styles.tileView]: viewAs === "tile",
   });
 
-  const getLockTooltip = () => (
-    <Text fontSize="12px" fontWeight={400} noSelect>
-      {t("Common:LockedBy", { userName: lockedByUser })}
-    </Text>
-  );
+  const getLockTooltip = () => {
+    return t("Common:LockedBy", { userName: lockedByUser });
+  };
 
   const onIconLockClick = () => {
     if (!canLock) {
@@ -348,13 +344,14 @@ const Badges = ({
       {hasDraft ? (
         <BadgeWrapper isTile={isTile}>
           <Badge
-            noHover
             isVersionBadge
             className={classNames(
               styles.versionBadge,
               "badge-version badge-version-current tablet-badge icons-group",
             )}
-            backgroundColor={theme.filesBadges.badgeBackgroundColor}
+            backgroundColor={
+              themeIsBase ? globalColors.gray : globalColors.grayDark
+            }
             label={t("Common:BadgeMyDraftTitle")}
             title={t("Common:BadgeMyDraftTitle")}
             {...versionBadgeProps}
@@ -366,22 +363,18 @@ const Badges = ({
         </BadgeWrapper>
       ) : null}
 
-      {isEditing ? (
-        <IconButton
-          iconNode={iconEdit}
-          className={classNames(
-            styles.iconBadge,
-            "badge icons-group is-editing tablet-badge tablet-edit",
-          )}
-          onClick={onFilesClick}
-          color="accent"
-          hoverColor="accent"
-          title={t("Common:EditButton")}
-        />
-      ) : null}
+      {isEditing ? <>{editorsTooltip}</> : null}
 
       {locked && !isTile ? (
-        <>
+        <div
+          data-tooltip-id={
+            lockedByUser && !canLock ? "info-tooltip" : undefined
+          }
+          data-tooltip-content={
+            lockedByUser && !canLock ? getLockTooltip() : undefined
+          }
+          data-tooltip-place="bottom"
+        >
           <IconButton
             iconName={iconLock}
             className={classNames(
@@ -391,21 +384,11 @@ const Badges = ({
             data-id={id}
             data-locked={!!locked}
             onClick={onIconLockClick}
-            color={theme.filesQuickButtons.sharedColor}
+            color={themeIsBase ? globalColors.lightIcons : globalColors.white}
             hoverColor="accent"
             title={t("Common:UnblockFile")}
-            data-tooltip-id={`lockTooltip${item.id}`}
           />
-          {lockedByUser && !canLock ? (
-            <Tooltip
-              id={`lockTooltip${item.id}`}
-              place="bottom"
-              getContent={getLockTooltip}
-              maxWidth="300px"
-              openOnClick
-            />
-          ) : null}
-        </>
+        </div>
       ) : null}
 
       {item.viewAccessibility?.MustConvert &&
@@ -432,12 +415,13 @@ const Badges = ({
               styles.versionBadge,
               "badge-version badge-version-current tablet-badge icons-group",
             )}
-            backgroundColor={theme.filesBadges.badgeBackgroundColor}
+            backgroundColor={
+              themeIsBase ? globalColors.gray : globalColors.grayDark
+            }
             label={t("Common:VersionBadge", {
               version: countVersions as string,
             })}
             {...onShowVersionHistoryProp}
-            noHover
             isVersionBadge
             title={t("Common:ShowVersionHistory")}
           />
@@ -499,13 +483,16 @@ const Badges = ({
                 styles.versionBadge,
                 "badge-version badge-version-current tablet-badge icons-group",
               )}
-              backgroundColor={theme.filesBadges.badgeBackgroundColor}
+              backgroundColor={
+                themeIsBase ? globalColors.gray : globalColors.grayDark
+              }
               label={t("Common:Preparing")}
               borderRadius="50px"
-              color={theme.filesBadges.color}
+              color={globalColors.white}
               fontSize="9px"
               fontWeight={700}
               data-tooltip-id={preparingForAITooltipId}
+              dataTestId="preparing-for-ai-badge"
             />
           </BadgeWrapper>
           <Tooltip

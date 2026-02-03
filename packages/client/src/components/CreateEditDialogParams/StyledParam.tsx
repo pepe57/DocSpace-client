@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -51,6 +51,8 @@ const StyledParam = styled.div.attrs(injectDefaultTheme)<{
     display: flex;
     flex-direction: column;
     gap: ${(props) => (props.increaseGap ? 12 : 4)}px;
+
+    overflow: hidden;
 
     .set_room_params-info-title {
       display: flex;

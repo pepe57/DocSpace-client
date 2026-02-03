@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,17 +35,20 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import { inject, observer } from "mobx-react";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 type ResetWebSearchDialogProps = {
   onSuccess?: VoidFunction;
   onClose: VoidFunction;
   restoreWebSearch?: AISettingsStore["restoreWebSearch"];
+  getAIConfig?: SettingsStore["getAIConfig"];
 };
 
 const ResetWebSearchDialogComponent = ({
   onSuccess,
   onClose,
   restoreWebSearch,
+  getAIConfig,
 }: ResetWebSearchDialogProps) => {
   const { t } = useTranslation(["AISettings", "Common", "OAuth", "Settings"]);
 
@@ -56,8 +59,13 @@ const ResetWebSearchDialogComponent = ({
 
     try {
       await restoreWebSearch?.();
-      toastr.success(t("AISettings:WebSearchDisabledSuccess"));
+      toastr.success(
+        t("AISettings:WebSearchDisabledSuccess", {
+          webSearch: t("Common:WebSearchAI"),
+        }),
+      );
       onSuccess?.();
+      getAIConfig?.();
     } catch (error) {
       console.error(error);
       toastr.error(error as string);
@@ -72,7 +80,10 @@ const ResetWebSearchDialogComponent = ({
       <ModalDialog.Header>{t("Settings:ResetSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>
-          <Trans t={t} i18nKey="ResetWebSearchDescription" ns="AISettings" />
+          {t("AISettings:ResetWebSearchDescription", {
+            webSearch: t("Common:WebSearchAI"),
+            aiChats: t("Common:AIChats"),
+          })}
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -83,6 +94,7 @@ const ResetWebSearchDialogComponent = ({
           scale
           onClick={onSubmitAction}
           isLoading={loading}
+          testId="reset-button"
         />
         <Button
           size={ButtonSize.normal}
@@ -96,8 +108,11 @@ const ResetWebSearchDialogComponent = ({
   );
 };
 
-export const ResetWebSearchDialog = inject(({ aiSettingsStore }: TStore) => {
-  return {
-    restoreWebSearch: aiSettingsStore.restoreWebSearch,
-  };
-})(observer(ResetWebSearchDialogComponent));
+export const ResetWebSearchDialog = inject(
+  ({ aiSettingsStore, settingsStore }: TStore) => {
+    return {
+      restoreWebSearch: aiSettingsStore.restoreWebSearch,
+      getAIConfig: settingsStore.getAIConfig,
+    };
+  },
+)(observer(ResetWebSearchDialogComponent));

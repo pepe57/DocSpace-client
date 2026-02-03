@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,7 @@ import type { TFileLink } from "../../../api/files/types";
 
 import type { TOption } from "../../combobox";
 import { ContextMenuButton } from "../../context-menu-button";
+import { toastr } from "../../toast";
 
 import {
   getAccessTypeOptions,
@@ -138,7 +139,11 @@ const LinkRow = ({
             shareLink={shareLink}
             isExpiredLink={isExpiredLink}
             disabledCopy={isArchiveFolder}
-            onCopyLink={() => onCopyLink(link)}
+            onCopyLink={() =>
+              isExpiredLink
+                ? toastr.error(t("Common:LinkExpired"))
+                : onCopyLink(link)
+            }
           />
           <LinkExpiration
             t={t}
@@ -153,7 +158,6 @@ const LinkRow = ({
           <LinkTypeSelector
             isLoaded={isLoaded}
             canEditInternal={canEditInternal}
-            isExpiredLink={isExpiredLink}
             onSelect={(item) => changeShareOption(item, link)}
             selectedOption={shareOption}
             options={shareOptions}
@@ -163,7 +167,6 @@ const LinkRow = ({
             isFolder={isFolder}
             isLoaded={isLoaded}
             isRoomsLink={isRoomsLink}
-            isExpiredLink={isExpiredLink}
             accessOptions={accessOptions}
             selectedAccessOption={selectedAccessOption}
             isArchiveFolder={isArchiveFolder}
@@ -179,7 +182,7 @@ const LinkRow = ({
               onClick={onOpenContextMenu}
               onClose={onCloseContextMenu}
               title={t("Files:ShowLinkActions")}
-              isDisabled={isExpiredLink || isLoaded}
+              isDisabled={isLoaded}
             />
           ) : null}
         </div>

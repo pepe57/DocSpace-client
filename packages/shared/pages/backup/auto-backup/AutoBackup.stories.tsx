@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,12 +28,14 @@ import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ThirdPartyStorages } from "../../../enums";
 
-import { createGetRoomsHandler } from "../../../__mocks__/storybook/handlers/files/rooms";
 import {
-  createGetFolderHandler,
-  createGetFolderInfoHandler,
-} from "../../../__mocks__/storybook/handlers/files/folders";
-import { createGetFolderTreeHandler } from "../../../__mocks__/storybook/handlers/files/foldersTree";
+  roomListHandler,
+  folderHandler,
+  folderInfoHandler,
+  TypeFolder,
+  foldersTreeHandler,
+} from "../../../__mocks__/handlers";
+
 import type { Nullable } from "../../../types";
 
 import AutomaticBackup from "./index";
@@ -89,10 +91,10 @@ const meta: Meta<typeof AutomaticBackup> = {
     },
     msw: {
       handlers: [
-        createGetFolderTreeHandler(),
-        createGetRoomsHandler(),
-        createGetFolderInfoHandler(),
-        createGetFolderHandler(true),
+        foldersTreeHandler(""),
+        roomListHandler(""),
+        folderInfoHandler(""),
+        folderHandler("", TypeFolder.IsEmpty),
       ],
     },
   },

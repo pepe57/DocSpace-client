@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -219,16 +219,6 @@ class AccessRightsStore {
     if (isAdmin) return needRemove && !userIsAdmin && !userIsOwner;
 
     return false;
-  };
-
-  canRemoveOnlyOneUser = (user) => {
-    const { id } = this.userStore.user;
-
-    const { status, id: userId } = user;
-
-    const needRemove = status === EmployeeStatus.Disabled && userId !== id;
-
-    return needRemove;
   };
 
   canChangeQuota = () => {

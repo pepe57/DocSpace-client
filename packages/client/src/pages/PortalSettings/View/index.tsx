@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -102,12 +102,15 @@ const View = ({
   paymentStore,
   servicesStore,
   currentTariffStatusStore,
+  defaultTemplatesStore,
+
   clearAbortControllerArr,
 
   fetchAIProviders,
   fetchMCPServers,
   fetchWebSearch,
   fetchKnowledge,
+  initDefaultProvider,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation();
@@ -144,6 +147,7 @@ const View = ({
     paymentStore,
     servicesStore,
     currentTariffStatusStore,
+    defaultTemplatesStore,
   });
 
   const { getCommonInitialValue } = useCommon(defaultProps.common);
@@ -161,6 +165,7 @@ const View = ({
   const { getServicesInitialValue } = useServices(defaultProps.services);
   const { getAiSettingsInitialValue } = useAiSettings({
     fetchAIProviders,
+    initDefaultProvider,
     fetchMCPServers,
     fetchWebSearch,
     fetchKnowledge,
@@ -350,6 +355,7 @@ export const ViewComponent = inject(
     servicesStore,
     currentTariffStatusStore,
     aiSettingsStore,
+    defaultTemplatesStore,
   }: TStore) => {
     const { initSettings: initSettingsCommon } = common;
 
@@ -390,6 +396,7 @@ export const ViewComponent = inject(
       servicesStore,
       currentTariffStatusStore,
       ssoFormStore: ssoStore,
+      defaultTemplatesStore,
 
       // Direct values needed in safeProps
       isMobileView,
@@ -401,6 +408,7 @@ export const ViewComponent = inject(
       fetchMCPServers: aiSettingsStore.fetchMCPServers,
       fetchWebSearch: aiSettingsStore.fetchWebSearch,
       fetchKnowledge: aiSettingsStore.fetchKnowledge,
+      initDefaultProvider: aiSettingsStore.initDefaultProvider,
     };
   },
 )(observer(View));

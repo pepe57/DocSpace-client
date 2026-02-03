@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,42 +24,125 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React, { PropsWithChildren, useCallback } from "react";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 
-import { MessageMarkdownFieldProps } from "../../../../../Chat.types";
+import type { MessageMarkdownFieldProps } from "../../../../../Chat.types";
 
 import styles from "../../../ChatMessageBody.module.scss";
 
-import { createMarkdownComponents } from "./Markdown.utils";
+import Think from "../Think";
 
-// Function to replace <think> tags with a placeholder before markdown processing
-const preprocessChatMessage = (text: string): string => {
-  // Replace <think> tags with `<span class="think-tag">think:</span>`
-  return text
-    .replace(/<think>/g, "`<think>`")
-    .replace(/<\/think>/g, "`</think>`");
-};
+import {
+  Anchor,
+  Blockquote,
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  H6,
+  Table,
+  Hr,
+  Th,
+  Td,
+  Tr,
+  Paragraph,
+  Ol,
+  Ul,
+  Li,
+  Code,
+} from "./Markdown.utils";
 
-const MarkdownField = ({
-  chatMessage,
-  propLanguage,
-}: MessageMarkdownFieldProps) => {
-  // Process the chat message to handle <think> tags
-  const processedChatMessage = preprocessChatMessage(chatMessage);
+// // Function to replace <think> tags with a placeholder before markdown processing
+// const preprocessChatMessage = (text: string): string => {
+//   // Replace <think> tags with `<span class="think-tag">think:</span>`
+//   return text
+//     .replace(/<think>/g, "`<think>`")
+//     .replace(/<\/think>/g, "`</think>`");
+// };
 
-  return (
-    <div style={{ width: "100%" }} className={styles.markdownField}>
-      <Markdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw]}
-        components={createMarkdownComponents({ propLanguage })}
-      >
-        {processedChatMessage}
-      </Markdown>
-    </div>
-  );
-};
+const MarkdownField = React.memo(
+  ({
+    chatMessage,
+    propLanguage,
+    isFirst,
+    successCopyMessage,
+  }: MessageMarkdownFieldProps) => {
+    // Process the chat message to handle <think> tags
+    // const processedChatMessage = preprocessChatMessage(chatMessage);
+
+    const withThinkBlock = chatMessage.includes("<think>");
+    const splitedMsg = withThinkBlock
+      ? chatMessage.split("</think>\n")
+      : [chatMessage];
+
+    const thinkBlock = withThinkBlock
+      ? splitedMsg[0].replace("<think>\n", "")
+      : "";
+
+    const CodeWithProps = useCallback(
+      (props: PropsWithChildren<{ className?: string }>) => (
+        <Code
+          {...props}
+          propLanguage={propLanguage}
+          successCopyMessage={successCopyMessage}
+        />
+      ),
+      [propLanguage, successCopyMessage],
+    );
+
+    const components = {
+      h1: H1,
+      h2: H2,
+      h3: H3,
+      h4: H4,
+      h5: H5,
+      h6: H6,
+      a: Anchor,
+      blockquote: Blockquote,
+      hr: Hr,
+      table: Table,
+      th: Th,
+      td: Td,
+      tr: Tr,
+      p: Paragraph,
+      ol: Ol,
+      ul: Ul,
+      li: Li,
+      code: CodeWithProps,
+    };
+
+    const processedChatMessage = withThinkBlock ? splitedMsg[1] : chatMessage;
+
+    return (
+      <div style={{ width: "100%" }} className={styles.markdownField}>
+        {thinkBlock ? (
+          <Think
+            isFinished={chatMessage.includes("</think>")}
+            isFirst={isFirst}
+          >
+            <Markdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+              components={components}
+            >
+              {thinkBlock}
+            </Markdown>
+          </Think>
+        ) : null}
+        <Markdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
+          components={components}
+        >
+          {processedChatMessage}
+        </Markdown>
+      </div>
+    );
+  },
+);
 
 export default MarkdownField;

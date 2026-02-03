@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -301,7 +301,7 @@ const useFilesHelper = ({
         if (firstLoadRef.current || startIndex === 0) {
           const { security } = current;
 
-          if (withCreate && security.Create) {
+          if (withCreate && security?.Create) {
             setTotal(total + 1);
             itemList.unshift({
               isCreateNewItem: true,

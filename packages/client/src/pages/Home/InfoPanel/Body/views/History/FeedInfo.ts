@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -346,6 +346,11 @@ export const feedInfo = [
     key: FeedActionKeys.RoomInviteResend,
     targetType: FeedTarget.User,
     actionType: FeedAction.Invite,
+  },
+  {
+    key: FeedActionKeys.RoomChangeOwner,
+    targetType: FeedTarget.User,
+    actionType: FeedAction.CHANGE_OWNER,
   },
   //
   // GROUP

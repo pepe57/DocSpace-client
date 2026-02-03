@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -132,10 +132,15 @@
     .newNameHeader {
       margin-bottom: 4px;
     }
+  }
 
-    .newFileInput {
-      margin-bottom: 16px;
-    }
+  .newFileInputContainer {
+    margin-bottom: 16px;
+  }
+
+  .errorText {
+    margin-top: 4px;
+    color: var(--input-error-color);
   }
 
   .buttonContainer {

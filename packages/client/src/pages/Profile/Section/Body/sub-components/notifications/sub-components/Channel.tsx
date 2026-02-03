@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,7 +36,6 @@ import classNames from "classnames";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkType, LinkTarget } from "@docspace/shared/components/link";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Badge } from "@docspace/shared/components/badge";
 import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
 
 import { globalColors } from "@docspace/shared/themes";
@@ -53,7 +52,6 @@ type ChannelProps = {
   isNeedConfig?: boolean;
   isAdmin?: boolean;
   isNotValid?: boolean;
-  isThirdPartyAvailable?: boolean;
 };
 
 const getIcon = (type: ChannelProps["type"]) => {
@@ -142,6 +140,7 @@ const getChannelContent = (
 
   return (
     <Link
+      dataTestId="profile-telegram-connect"
       fontSize="13px"
       fontWeight={600}
       isHovered
@@ -162,10 +161,8 @@ const Channel = ({
   isNeedConfig,
   isAdmin,
   isNotValid,
-  isThirdPartyAvailable,
 }: ChannelProps) => {
   const { t } = useTranslation(["Notifications", "Common"]);
-  const { isBase } = useTheme();
 
   return (
     <div
@@ -211,20 +208,6 @@ const Channel = ({
             }
           />
         </div>
-      ) : null}
-
-      {!isThirdPartyAvailable && isNeedConfig ? (
-        <Badge
-          className={styles.paidBadge}
-          fontWeight="700"
-          label={t("Common:Paid")}
-          backgroundColor={
-            isBase
-              ? globalColors.favoritesStatus
-              : globalColors.favoriteStatusDark
-          }
-          isPaidBadge
-        />
       ) : null}
     </div>
   );

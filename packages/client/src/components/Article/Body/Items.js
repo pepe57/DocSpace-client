@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -47,13 +46,9 @@ import { toastr } from "@docspace/shared/components/toast";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import BonusItem from "./BonusItem";
 
-const StyledDragAndDrop = styled(DragAndDrop)`
-  display: contents;
-`;
-
-const CatalogDivider = styled.div`
-  height: 16px;
-`;
+const CatalogDivider = () => {
+  return <div style={{ height: "16px" }}></div>;
+};
 
 const Item = ({
   t,
@@ -79,6 +74,7 @@ const Item = ({
   getLinkData,
   onBadgeClick,
   roomsFolderId,
+  aiAgentsFolderId,
   setDropTargetPreview,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
@@ -168,7 +164,8 @@ const Item = ({
   const droppableClassName = isDragging ? "droppable" : "";
 
   return (
-    <StyledDragAndDrop
+    <DragAndDrop
+      style={{ display: "contents" }}
       key={item.id}
       data-title={item.title}
       value={value}
@@ -209,7 +206,13 @@ const Item = ({
         badgeComponent={
           <NewFilesBadge
             newFilesCount={labelBadge}
-            folderId={item.id === roomsFolderId ? "rooms" : item.id}
+            folderId={
+              item.id === roomsFolderId
+                ? "rooms"
+                : item.id === aiAgentsFolderId
+                  ? "agents"
+                  : item.id
+            }
             parentDOMId={folderId}
             onBadgeClick={onBadgeClick}
           />
@@ -218,7 +221,7 @@ const Item = ({
         $currentColorScheme={currentColorScheme}
         dataTooltipId={`aiAgentsTooltip${item.id}`}
       />
-    </StyledDragAndDrop>
+    </DragAndDrop>
   );
 };
 
@@ -263,6 +266,7 @@ const Items = ({
 
   getLinkData,
   roomsFolderId,
+  aiAgentsFolderId,
   setDropTargetPreview,
 }) => {
   const getFolderIcon = React.useCallback((item) => {
@@ -377,6 +381,7 @@ const Items = ({
             folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
             currentColorScheme={currentColorScheme}
             roomsFolderId={roomsFolderId}
+            aiAgentsFolderId={aiAgentsFolderId}
             onHide={onHide}
             isIndexEditingMode={isIndexEditingMode}
             setDropTargetPreview={setDropTargetPreview}
@@ -386,11 +391,37 @@ const Items = ({
         );
       });
 
-      items.splice(1, 0, <CatalogDivider key="ai-agents-divider" />);
+      // guest doesn't have my documents by default, but has if he was downgraded from another type
+      const hasMyDocuments = elm.some(
+        (f) => f.rootFolderType === FolderType.USER,
+      );
 
-      items.splice(6, 0, <CatalogDivider key="doc-other-header" />);
+      const agentsDividerIndex = 1;
+      let roomsDividerIndex = 4;
+      let recentDividerIndex = 8;
 
-      items.splice(9, 0, <CatalogDivider key="trash-divider" />);
+      if (!hasMyDocuments) {
+        roomsDividerIndex = 3;
+        recentDividerIndex = 7;
+      }
+
+      items.splice(
+        agentsDividerIndex,
+        0,
+        <CatalogDivider key="ai-agents-divider" />,
+      );
+
+      items.splice(
+        roomsDividerIndex,
+        0,
+        <CatalogDivider key="rooms-divider" />,
+      );
+
+      items.splice(
+        recentDividerIndex,
+        0,
+        <CatalogDivider key="recent-divider" />,
+      );
 
       if (isCommunity && isPaymentPageAvailable)
         items.push(<BonusItem key="bonus-item" />);
@@ -474,6 +505,7 @@ export default inject(
       commonFolderId,
       isPrivacyFolder,
       roomsFolderId,
+      aiAgentsFolderId,
     } = treeFoldersStore;
 
     const { id, access: folderAccess } = selectedFolderStore;
@@ -521,6 +553,7 @@ export default inject(
       folderAccess,
       currentColorScheme,
       roomsFolderId,
+      aiAgentsFolderId,
       isIndexEditingMode,
       setDropTargetPreview,
     };

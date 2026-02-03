@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { SnackBar } from "./Snackbar";
-import { globalColors } from "../../themes";
 
 describe("SnackBar", () => {
   const defaultProps = {
@@ -35,7 +34,6 @@ describe("SnackBar", () => {
     btnText: "Action",
     countDownTime: 5000,
     sectionWidth: 400,
-    backgroundColor: globalColors.lightToastAlert,
   };
 
   it("renders with required props", () => {
@@ -92,23 +90,11 @@ describe("SnackBar", () => {
   });
 
   it("applies correct styles based on props", () => {
-    const backgroundColor = "#ff0000";
     const textAlign = "center";
 
-    render(
-      <SnackBar
-        {...defaultProps}
-        backgroundColor={backgroundColor}
-        textAlign={textAlign}
-      />,
-    );
+    render(<SnackBar {...defaultProps} textAlign={textAlign} />);
 
     const container = screen.getByTestId("snackbar-container");
-    expect(container).toHaveStyle({
-      "--background-color": backgroundColor,
-    });
-
-    // Check if textContainer exists and has the style
     const textContainer = container.querySelector("[class*='textContainer']");
     if (textContainer) {
       expect(textContainer).toHaveStyle({

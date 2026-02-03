@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -83,8 +83,8 @@ export class ThirdPartyStore {
     return list;
   };
 
-  fetchConnectingStorages = async () => {
-    const res = await api.files.getConnectingStorages();
+  fetchConnectingStorages = async (paramsString?: string) => {
+    const res = await api.files.getConnectingStorages(paramsString);
 
     this.connectingStorages = res.map((storage) => ({
       ...storage,

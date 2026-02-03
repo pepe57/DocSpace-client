@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation } from "react-router";
 
-import Chat from "@docspace/shared/components/chat";
 import useToolsSettings from "@docspace/shared/components/chat/hooks/useToolsSettings";
 import useInitChats from "@docspace/shared/components/chat/hooks/useInitChats";
 import useInitMessages from "@docspace/shared/components/chat/hooks/useInitMessages";
@@ -38,30 +37,28 @@ import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
 import { Consumer } from "@docspace/shared/utils";
 import type { Nullable } from "@docspace/shared/types";
+import type { TError } from "@docspace/shared/utils/axiosClient";
 
 import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
-import type { TUser } from "@docspace/shared/api/people/types";
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import { toastr } from "@docspace/shared/components/toast";
 import { TOAST_FOLDER_PUBLIC_KEY } from "@docspace/shared/constants";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
-import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FolderType, SearchArea } from "@docspace/shared/enums";
 
-import type SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
-import type FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import type DialogsStore from "SRC_DIR/store/DialogsStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 import type AiRoomStore from "SRC_DIR/store/AiRoomStore";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { AIAgentView } from "SRC_DIR/pages/Home/View/AIAgentView";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 import ProfileSectionBodyContent from "../../Profile/Section/Body";
@@ -71,6 +68,7 @@ import useProfileBody, {
 } from "../../Profile/Section/Body/useProfileBody";
 import useContacts, { type UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { type UseFilesProps } from "../Hooks/useFiles";
+import OformsStore from "SRC_DIR/store/OformsStore";
 
 type ViewProps = UseContactsProps &
   UseFilesProps &
@@ -81,10 +79,6 @@ type ViewProps = UseContactsProps &
     showBodyLoader: ClientLoadingStore["showBodyLoader"];
 
     clearFiles: FilesStore["clearFiles"];
-
-    userAvatar: TUser["avatar"];
-    getIcon: FilesSettingsStore["getIcon"];
-    chatSettings: SelectedFolderStore["chatSettings"];
 
     usersAbortController: Nullable<AbortController>;
     groupsAbortController: Nullable<AbortController>;
@@ -97,15 +91,14 @@ type ViewProps = UseContactsProps &
 
     aiAgentSelectorDialogProps: DialogsStore["aiAgentSelectorDialogProps"];
     setAiAgentSelectorDialogProps: DialogsStore["setAiAgentSelectorDialogProps"];
-    setIsAIAgentChatDelete: DialogsStore["setIsAIAgentChatDelete"];
-    setDeleteDialogVisible: DialogsStore["setDeleteDialogVisible"];
 
     canUseChat: AccessRightsStore["canUseChat"];
-    isAdmin: AuthStore["isAdmin"];
+
     aiConfig: SettingsStore["aiConfig"];
-    standalone: SettingsStore["standalone"];
-    isResultTab: AiRoomStore["isResultTab"];
     resultId: AiRoomStore["resultId"];
+    setHotkeyCaret: FilesStore["setHotkeyCaret"];
+    setIsErrorAccountNotAvailable: FilesStore["setIsErrorAccountNotAvailable"];
+    currentExtensionGallery: OformsStore["currentExtensionGallery"];
   };
 
 const View = ({
@@ -142,17 +135,17 @@ const View = ({
   setIsUpdatingRowItem,
 
   gallerySelected,
+  isVisibleInfoPanelTemplateGallery,
+  currentExtensionGallery,
   userId,
 
   selectedFolderStore,
   wsCreatedPDFForm,
+  setHotkeyCaret,
   clearFiles,
 
   setIsSectionHeaderLoading,
 
-  userAvatar,
-  getIcon,
-  chatSettings,
   showBodyLoader,
   showHeaderLoader,
 
@@ -175,14 +168,11 @@ const View = ({
 
   aiAgentSelectorDialogProps,
   setAiAgentSelectorDialogProps,
-  setIsAIAgentChatDelete,
-  setDeleteDialogVisible,
+
+  setIsErrorAccountNotAvailable,
 
   canUseChat,
-  isAdmin,
   aiConfig,
-  standalone,
-  isResultTab,
   resultId,
 }: ViewProps) => {
   const location = useLocation();
@@ -255,11 +245,12 @@ const View = ({
     setIsUpdatingRowItem,
 
     gallerySelected,
+    isVisibleInfoPanelTemplateGallery,
     userId,
 
-    scrollToTop,
     selectedFolderStore,
     wsCreatedPDFForm,
+    currentExtensionGallery,
   });
 
   const { getProfileInitialValue } = useProfileBody({
@@ -292,13 +283,14 @@ const View = ({
   const toolsSettings = useToolsSettings({
     roomId: roomId ?? "",
     aiConfig,
+    chatSettings: selectedFolderStore.chatSettings,
   });
 
   const initChats = useInitChats({
     roomId: roomId ?? "",
   });
 
-  const { initMessages, ...messagesSettings } = useInitMessages();
+  const { initMessages, ...messagesSettings } = useInitMessages(roomId ?? "");
 
   const { initTools } = toolsSettings;
   const { fetchChats } = initChats;
@@ -509,6 +501,16 @@ const View = ({
           return;
         }
 
+        const typedError = error as TError;
+
+        if (
+          typedError?.response?.data?.error?.message === "Access denied" &&
+          isContactsPage
+        ) {
+          setIsErrorAccountNotAvailable(true);
+          setIsSectionHeaderLoading(false, false);
+        }
+
         setIsChangePageRequestRunning(false);
         setIsLoading(false);
       }
@@ -518,7 +520,25 @@ const View = ({
   }, [location, isContactsPage, isProfilePage, isChatPage, showToastAccess]);
 
   React.useEffect(() => {
-    if (isResultTab && !canUseChat && !showBodyLoader) {
+    if (isLoading || currentView === "chat") return;
+
+    const scroll = document.getElementsByClassName("section-body");
+
+    if (scroll && scroll[0]) {
+      const firstChild = scroll[0] as HTMLElement;
+      firstChild.focus();
+      setHotkeyCaret(null);
+    }
+
+    scrollToTop();
+  }, [isLoading, currentView, scrollToTop]);
+
+  React.useEffect(() => {
+    if (
+      selectedFolderStore.isInsideResultStorage &&
+      !canUseChat &&
+      !showBodyLoader
+    ) {
       toastr.info(
         <Trans
           t={t}
@@ -527,10 +547,16 @@ const View = ({
           components={{
             strong: <strong />,
           }}
+          values={{ aiAgent: t("Common:AIAgent"), aiChat: t("AIRoom:AIChat") }}
         />,
       );
     }
-  }, [isResultTab, canUseChat, showBodyLoader, t]);
+  }, [
+    selectedFolderStore.isInsideResultStorage,
+    canUseChat,
+    showBodyLoader,
+    t,
+  ]);
 
   const attachmentFile = React.useMemo(
     () => aiAgentSelectorDialogProps?.file,
@@ -555,7 +581,10 @@ const View = ({
   };
 
   const shouldRedirectToResultStorage =
-    currentView === "chat" && !!selectedFolderStore.id && !canUseChat;
+    currentView === "chat" &&
+    selectedFolderStore.isAIRoom &&
+    !canUseChat &&
+    !showBodyLoader;
 
   if (shouldRedirectToResultStorage) {
     const agentId = selectedFolderStore.id || "";
@@ -579,24 +608,17 @@ const View = ({
               sectionWidth={context.sectionWidth}
               currentView={currentView}
             />
-          ) : currentView === "chat" ? (
-            <Chat
-              userAvatar={userAvatar}
-              roomId={isLoading && !showHeaderLoader ? "-1" : roomId!}
-              getIcon={getIcon}
-              selectedModel={chatSettings?.modelId ?? ""}
-              isLoading={showBodyLoader}
+          ) : currentView === "chat" || selectedFolderStore.isAIRoom ? (
+            <AIAgentView
+              currentView={currentView}
+              isViewLoading={isLoading}
+              roomId={roomId}
               attachmentFile={attachmentFile}
-              clearAttachmentFile={onClearAttachmentFile}
+              onClearAttachmentFile={onClearAttachmentFile}
               toolsSettings={toolsSettings}
               initChats={initChats}
               messagesSettings={messagesSettings}
-              isAdmin={isAdmin}
-              aiReady={aiConfig?.aiReady || false}
-              standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
               getResultStorageId={getResultStorageId}
-              setIsAIAgentChatDelete={setIsAIAgentChatDelete}
-              setDeleteDialogVisible={setDeleteDialogVisible}
             />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
@@ -631,8 +653,8 @@ export const ViewComponent = inject(
     settingsStore,
     aiRoomStore,
   }: TStore) => {
-    const { isResultTab, resultId } = aiRoomStore;
-    const { aiConfig, standalone } = settingsStore;
+    const { resultId } = aiRoomStore;
+    const { aiConfig } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
 
@@ -661,12 +683,14 @@ export const ViewComponent = inject(
       setIsPreview,
       setIsUpdatingRowItem,
       wsCreatedPDFForm,
+      setHotkeyCaret,
 
       filesController,
       roomsController,
       aiAgentsController,
 
       clearFiles,
+      setIsErrorAccountNotAvailable,
     } = filesStore;
 
     const {
@@ -680,7 +704,11 @@ export const ViewComponent = inject(
 
     const { playlist, setToPreviewFile } = mediaViewerDataStore;
 
-    const { gallerySelected } = oformsStore;
+    const {
+      gallerySelected,
+      isVisibleInfoPanelTemplateGallery,
+      currentExtensionGallery,
+    } = oformsStore;
 
     const { getFilesSettings } = filesSettingsStore;
 
@@ -695,18 +723,14 @@ export const ViewComponent = inject(
     const { tfaSettings, setBackupCodes, getTfaType } = tfaStore;
 
     const { setProviders } = peopleStore.usersStore;
-    const { getCapabilities, isAdmin } = authStore;
+    const { getCapabilities } = authStore;
 
     const { getSessions } = setup;
 
     const { checkTg } = telegramStore;
 
-    const {
-      aiAgentSelectorDialogProps,
-      setAiAgentSelectorDialogProps,
-      setIsAIAgentChatDelete,
-      setDeleteDialogVisible,
-    } = dialogsStore;
+    const { aiAgentSelectorDialogProps, setAiAgentSelectorDialogProps } =
+      dialogsStore;
 
     return {
       setContactsTab,
@@ -724,6 +748,7 @@ export const ViewComponent = inject(
       setIsPreview,
       setIsUpdatingRowItem,
       wsCreatedPDFForm,
+      setHotkeyCaret,
 
       setIsChangePageRequestRunning,
       setCurrentClientView,
@@ -739,6 +764,8 @@ export const ViewComponent = inject(
       setToPreviewFile,
 
       gallerySelected,
+      isVisibleInfoPanelTemplateGallery,
+      currentExtensionGallery,
 
       userId: userStore?.user?.id,
 
@@ -748,9 +775,6 @@ export const ViewComponent = inject(
 
       setIsSectionHeaderLoading,
 
-      userAvatar: userStore.user?.avatar,
-      getIcon: filesSettingsStore.getIcon,
-      chatSettings: selectedFolderStore?.chatSettings,
       showBodyLoader: clientLoadingStore.showBodyLoader,
       showHeaderLoader,
 
@@ -772,14 +796,11 @@ export const ViewComponent = inject(
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
-      setIsAIAgentChatDelete,
-      setDeleteDialogVisible,
+
+      setIsErrorAccountNotAvailable,
 
       canUseChat,
-      isAdmin,
       aiConfig,
-      standalone,
-      isResultTab,
       resultId,
     };
   },

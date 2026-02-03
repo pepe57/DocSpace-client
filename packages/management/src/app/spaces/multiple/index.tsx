@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,7 +34,7 @@ import { useEndAnimation } from "@/hooks/useEndAnimation";
 import { Header } from "./header";
 import { Spaces } from "./spaces";
 import { DomainSettings } from "./domain-settings";
-import { StyledWrapper } from "./multiple.styled";
+import styles from "./multiple.module.scss";
 
 interface IProps {
   baseDomain: string;
@@ -51,11 +51,11 @@ export const MultipleSpaces = ({
 
   return (
     <LoaderWrapper isLoading={isLoading}>
-      <StyledWrapper>
+      <div className={styles.wrapper} data-testid="multiple-spaces-wrapper">
         <Header />
         <Spaces portals={portals} tenantAlias={tenantAlias} />
         <DomainSettings baseDomain={baseDomain} />
-      </StyledWrapper>
+      </div>
     </LoaderWrapper>
   );
 };

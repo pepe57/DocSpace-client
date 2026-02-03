@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -67,7 +67,7 @@
     max-height: 172px !important;
 
     background-color: var(--chat-input-background-color);
-    border: none;
+    border: var(--chat-input-border);
   }
 
   .chatInputTextAreaWrapperFiles {
@@ -91,6 +91,7 @@
   box-sizing: border-box;
 
   padding: 0 8px;
+  width: 100%;
 }
 
 .chatInputButtonsTools {
@@ -338,6 +339,8 @@
       .filesListItemInfoText {
         display: flex;
         flex-direction: row;
+
+        max-width: calc(100% - 24px);
 
         span {
           color: var(--chat-file-item-exst-color);

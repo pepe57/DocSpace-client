@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -289,7 +289,9 @@ export type FilesSelectorProps = TInfoBar &
 
     isMultiSelect?: boolean;
     onSelectItem?: (item: TSelectorItem) => void;
+    isPortalView?: boolean;
     maxSelectedItems?: number;
     renderInPortal?: boolean;
     disableBySecurity?: string;
+    folderFormValidation?: RegExp;
   };

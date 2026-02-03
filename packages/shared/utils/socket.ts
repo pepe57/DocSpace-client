@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -73,6 +73,7 @@ export const enum SocketEvents {
   ChatMessageId = "s:commit-chat-message",
   UpdateChat = "s:update-chat",
   UpdateTelegram = "s:update-telegram",
+  ConnectTelegram = "s:telegram",
   SelfRestrictionFile = "s:self-restriction-file",
   SelfRestrictionFolder = "s:self-restriction-folder",
   ChaneFolderAccessRights = "s:change-access-rights-folder",
@@ -218,13 +219,25 @@ type TOptQuota =
  * @extends TOptQuota
  */
 export type TOptSocket = {
-  featureId: string;
-  value: number;
+  featureId?: string;
+  value?: number;
   data?: string;
   type?: "folder" | "file";
-  id?: string;
+  id?: string | number;
   cmd?: "create" | "update" | "delete";
 } & TOptQuota;
+
+/**
+ * Export chat event data type.
+ */
+export type ExportChatEventData =
+  | {
+      resultFile: TFile;
+    }
+  | {
+      resultFile: null;
+      error: string;
+    };
 
 /**
  * A type defining the mapping between socket events and their respective listener callbacks.
@@ -233,6 +246,11 @@ export type TOptSocket = {
  *
  * Each callback can have specific parameters and a return type, which are defined for each event.
  */
+export type TEditFileData =
+  | number
+  | string
+  | { fileId: number | string; editingBy: Record<string, string> };
+
 export type TListenEventCallbackMap = {
   [SocketEvents.LogoutSession]: (data: {
     loginEventId: unknown;
@@ -253,8 +271,8 @@ export type TListenEventCallbackMap = {
     fileId: number | string;
     count: number;
   }) => void;
-  [SocketEvents.StartEditFile]: (id: number | string) => void;
-  [SocketEvents.StopEditFile]: (id: number | string) => void;
+  [SocketEvents.StartEditFile]: (data: TEditFileData) => void;
+  [SocketEvents.StopEditFile]: (data: TEditFileData) => void;
   [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;
@@ -293,7 +311,8 @@ export type TListenEventCallbackMap = {
     chatId: string;
     chatTitle: string;
   }) => void;
-  [SocketEvents.UpdateTelegram]: (data: { username: string }) => void;
+  [SocketEvents.UpdateTelegram]: (data: string) => void;
+  [SocketEvents.ConnectTelegram]: (data: string) => void;
   [SocketEvents.SelfRestrictionFile]: (data: {
     id: number;
     data: string;
@@ -302,7 +321,7 @@ export type TListenEventCallbackMap = {
     id: number;
     data: string;
   }) => void;
-  [SocketEvents.ExportChat]: (data: { resultFile: TFile }) => void;
+  [SocketEvents.ExportChat]: (data: ExportChatEventData) => void;
 };
 
 /**

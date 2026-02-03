@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,10 +35,12 @@ type UseAiSettingsProps = {
   fetchMCPServers?: AISettingsStore["fetchMCPServers"];
   fetchWebSearch?: AISettingsStore["fetchWebSearch"];
   fetchKnowledge?: AISettingsStore["fetchKnowledge"];
+  initDefaultProvider?: AISettingsStore["initDefaultProvider"];
 };
 
 const useAISettings = ({
   fetchAIProviders,
+  initDefaultProvider,
   fetchMCPServers,
   fetchWebSearch,
   fetchKnowledge,
@@ -48,7 +50,8 @@ const useAISettings = ({
 
   const initAIProviders = React.useCallback(async () => {
     await fetchAIProviders?.();
-  }, [fetchAIProviders]);
+    await initDefaultProvider?.();
+  }, [fetchAIProviders, initDefaultProvider]);
 
   const initMCPServers = React.useCallback(async () => {
     await Promise.all([fetchMCPServers?.(), fetchAIProviders?.()]);

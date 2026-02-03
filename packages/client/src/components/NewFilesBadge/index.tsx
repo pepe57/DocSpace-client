@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,13 +29,13 @@ import { inject, observer } from "mobx-react";
 
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
-import { Nullable } from "@docspace/shared/types";
+import type { Nullable } from "@docspace/shared/types";
 import { isMobile } from "@docspace/shared/utils";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
-import DialogsStore from "SRC_DIR/store/DialogsStore";
+import type DialogsStore from "SRC_DIR/store/DialogsStore";
 
-import {
+import type {
   NewFilesBadgeProps,
   TPanelDirection,
   TPanelPosition,
@@ -154,7 +154,12 @@ const NewFilesBadge = ({
     setShowPanel(true);
     setNewFilesPanelFolderId?.(folderId);
     calculatePosition();
-  }, [folderId, disableBadgeClick, calculatePosition]);
+  }, [
+    folderId,
+    disableBadgeClick,
+    setNewFilesPanelFolderId,
+    calculatePosition,
+  ]);
 
   const onPanelHide = React.useCallback(() => {
     setShowPanel(false);

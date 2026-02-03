@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -255,17 +255,24 @@ export const getExpiredOptions = (
 export const getDate = (expirationDate: string) => {
   if (!expirationDate) return "";
 
-  const currentDare = moment(new Date());
+  const currentDate = moment(new Date());
   const expDate = moment(new Date(expirationDate));
-  const calculatedDate = expDate.diff(currentDare, "days");
+  const calculatedDate = expDate.diff(currentDate, "days");
+  const calculatedHours = expDate.diff(currentDate, "hours");
+
+  if (calculatedHours < 1) {
+    return moment
+      .duration(expDate.diff(currentDate, "minutes") + 1, "minutes")
+      .humanize(true);
+  }
 
   if (calculatedDate < 1) {
     return moment
-      .duration(expDate.diff(currentDare, "hours") + 1, "hours")
-      .humanize();
+      .duration(expDate.diff(currentDate, "hours") + 1, "hours")
+      .humanize(true);
   }
 
-  return moment.duration(calculatedDate + 1, "days").humanize();
+  return moment.duration(calculatedDate + 1, "days").humanize(true);
 };
 
 export const isExpired = (expirationDate: string | Date) => {

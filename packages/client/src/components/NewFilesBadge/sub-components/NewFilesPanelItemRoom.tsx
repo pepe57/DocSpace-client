@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,8 +29,9 @@ import { inject, observer } from "mobx-react";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { Text } from "@docspace/shared/components/text";
 
-import { StyledRoomItem } from "../NewFilesBadge.styled";
-import { NewFilesPanelItemRoomProps } from "../NewFilesBadge.types";
+import type { NewFilesPanelItemRoomProps } from "../NewFilesBadge.types";
+
+import styles from "../new-files-panel.module.scss";
 
 const NewFilesPanelItemRoomComponent = ({
   room,
@@ -38,12 +39,12 @@ const NewFilesPanelItemRoomComponent = ({
   onClose,
 }: NewFilesPanelItemRoomProps) => {
   const onClick = async () => {
-    openItemAction!({ ...room, isFolder: true });
+    openItemAction?.({ ...room, isFolder: true });
     onClose();
   };
 
   return (
-    <StyledRoomItem onClick={onClick}>
+    <div className={styles.roomItem} onClick={onClick}>
       <RoomIcon
         className="room-icon"
         imgClassName="room-image"
@@ -64,7 +65,7 @@ const NewFilesPanelItemRoomComponent = ({
       >
         {room.title}
       </Text>
-    </StyledRoomItem>
+    </div>
   );
 };
 

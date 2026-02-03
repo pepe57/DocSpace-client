@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -158,6 +158,8 @@ export type TFile = {
   external?: boolean;
   isLinkExpired?: boolean;
   dimensions?: TDimensions;
+  editingBy?: Record<string, string>;
+  activeEditors?: Record<string, string>;
 };
 
 export type TOpenEditRequest = {
@@ -578,4 +580,12 @@ export type TFileFillingFormStatus = {
 export type TShareToUser = {
   shareTo: string;
   access: ShareAccessRights;
+};
+
+export type TDefaultTemplate = {
+  selectedFile?: number;
+  fileExtension: string;
+  lastModified?: string;
+  fileTitle?: string;
+  viewUrl?: string;
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -660,12 +660,11 @@ export async function getFileById(fileId: number | string) {
       [["", ""]],
       "GET",
     );
+    const hdrs = await headers();
 
     const response = await fetch(getFile);
 
     if (response.ok) return (await response.json()).response as TFile;
-
-    const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
 

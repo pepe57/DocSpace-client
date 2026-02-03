@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,14 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import {
-  EmployeeStatus,
-  EmployeeType,
-  RoomsType,
-  ShareAccessRights,
-  FileType,
-  FolderType,
-} from "../../enums";
+import { EmployeeStatus, EmployeeType, RoomsType, ShareAccessRights, FileType, FolderType } from "../../enums";
 import { MergeTypes, Nullable, WithFlag } from "../../types";
 
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
@@ -45,7 +38,7 @@ import { TTabItem } from "../tabs";
 import { SelectorAccessRightsMode } from "./Selector.enums";
 
 // header
-type THeaderBackButton =
+export type THeaderBackButton =
   | {
       onBackClick: () => void;
       withoutBackButton: false;
@@ -94,15 +87,7 @@ export type TSelectorHeader = WithFlag<
 >;
 
 // bread crumbs
-type TOnBreadCrumbClick = ({
-  e,
-  open,
-  item,
-}: {
-  e: React.MouseEvent;
-  open: boolean;
-  item: TBreadCrumb;
-}) => void;
+type TOnBreadCrumbClick = ({ e, open, item }: { e: React.MouseEvent; open: boolean; item: TBreadCrumb }) => void;
 
 export type TBreadCrumb = {
   id: string | number;
@@ -314,15 +299,9 @@ export type TSelectorWithAside =
   | ({ useAside: true; onClose: VoidFunction } & TAsideCommonProps)
   | ({ useAside?: false; onClose?: VoidFunction } & TAsideCommonProps);
 
-export type TSelectorAccessRights = WithFlag<
-  "withAccessRights",
-  TWithAccessRightsProps
->;
+export type TSelectorAccessRights = WithFlag<"withAccessRights", TWithAccessRightsProps>;
 
-export type AccessSelectorProps = Omit<
-  TWithAccessRightsProps,
-  "withAccessRights"
-> & {
+export type AccessSelectorProps = Omit<TWithAccessRightsProps, "withAccessRights"> & {
   footerRef: React.RefObject<HTMLDivElement | null>;
 };
 
@@ -339,6 +318,7 @@ export type TSelectorInput = WithFlag<
 
 export type TSelectorFooterInput = TSelectorInput & {
   setNewFooterInputValue: React.Dispatch<React.SetStateAction<string>>;
+  withErrorFooter?: boolean;
 };
 
 // footer checkbox
@@ -371,6 +351,7 @@ export type TRenderCustomItem = (
   email?: string,
   isGroup?: boolean,
   status?: EmployeeStatus,
+  id?: string | number,
 ) => React.ReactNode | null;
 
 export type SelectorProps = TSelectorHeader &
@@ -392,11 +373,7 @@ export type SelectorProps = TSelectorHeader &
     className?: string;
     style?: React.CSSProperties;
 
-    onSelect?: (
-      item: TSelectorItem,
-      isDoubleClick: boolean,
-      doubleClickCallback: () => Promise<void>,
-    ) => void;
+    onSelect?: (item: TSelectorItem, isDoubleClick: boolean, doubleClickCallback: () => Promise<void>) => void;
 
     isMultiSelect: boolean;
     selectedItems?: TSelectorItem[];
@@ -418,6 +395,7 @@ export type SelectorProps = TSelectorHeader &
     dataTestId?: string;
 
     hideBackButton?: boolean;
+    folderFormValidation?: RegExp;
   };
 
 export type BodyProps = TSelectorInfo &
@@ -440,12 +418,14 @@ export type BodyProps = TSelectorInfo &
 
     withFooterInput?: boolean;
     withFooterCheckbox?: boolean;
+    withErrorFooter?: boolean;
     descriptionText?: string;
     withInfoBadge?: boolean;
     injectedElement?: React.ReactElement;
 
     isSSR?: boolean;
     hideBackButton?: boolean;
+    isLimitReached?: boolean;
   };
 
 export type FooterProps = TSelectorFooterSubmitButton &
@@ -456,6 +436,7 @@ export type FooterProps = TSelectorFooterSubmitButton &
     isMultiSelect: boolean;
     selectedItemsCount: number;
     requestRunning?: boolean;
+    withErrorFooter?: boolean;
   };
 
 type TSelectorItemEmpty = {
@@ -659,6 +640,7 @@ export type Data = {
   savedInputValue: Nullable<string>;
   setSavedInputValue: (value: Nullable<string>) => void;
   listHeight: number;
+  isLimitReached?: boolean;
 };
 
 export interface ItemProps {

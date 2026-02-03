@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,6 +50,8 @@ export type TAiProvider = {
   url: string;
   createdOn: string;
   modifiedOn: string;
+  isDefault: boolean;
+  needReset?: boolean;
 };
 
 export type TUpdateAiProvider = {
@@ -154,6 +156,7 @@ export type TServer = {
   headers: Record<string, string>;
   endpoint: string;
   authorizationEndpoint?: string;
+  needReset?: boolean;
 };
 
 export type TVectorizeOperation = {
@@ -185,20 +188,25 @@ export type WebSearchConfig = {
   enabled: boolean;
   type: WebSearchType;
   key?: string;
+  needReset?: boolean;
 };
 
 export type KnowledgeConfig = {
   type: KnowledgeType;
   key?: string;
+  needReset?: boolean;
 };
 
 export type TAIConfig = {
   vectorizationEnabled: boolean;
+  vectorizationNeedReset?: boolean;
   webSearchEnabled: boolean;
+  webSearchNeedReset?: boolean;
   knowledgeSearchToolName: string;
   webSearchToolName: string;
   webCrawlingToolName: string;
   aiReady: boolean;
+  aiReadyNeedReset?: boolean;
   embeddingModel: string;
   portalMcpServerId: string;
 };
@@ -242,3 +250,14 @@ export type TGetAgents = {
 };
 
 export type TEditAgentData = Partial<TCreateAgentData>;
+
+export type TDefaultProvider = {
+  providerId: TAiProvider["id"];
+  providerTitle: TAiProvider["title"];
+  defaultModel: TModel["modelId"];
+};
+
+export type TUpdateDefaultProviderData = {
+  providerId: TAiProvider["id"];
+  defaultModel: TModel["modelId"];
+};

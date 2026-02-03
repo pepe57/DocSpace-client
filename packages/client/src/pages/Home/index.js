@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -105,6 +105,7 @@ const PureHome = (props) => {
     isPrivacyFolder,
     isRecycleBinFolder,
     isErrorRoomNotAvailable,
+    isErrorAIAgentNotAvailable,
     isIndexEditingMode,
 
     isSecondaryProgressVisbile,
@@ -119,6 +120,7 @@ const PureHome = (props) => {
     onClickBack,
 
     showFilterLoader,
+    showHeaderLoader,
 
     getSettings,
     logout,
@@ -158,17 +160,27 @@ const PureHome = (props) => {
     dropTargetPreview,
     setDropTargetPreview,
     selectedFolderTitle,
+    selectedFolderChatSettings,
     clearDropPreviewLocation,
     canCreateSecurity,
     startDropPreview,
 
     aiConfig,
     currentTab,
+    setIsAboutDialogVisible,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
 
   const location = useLocation();
+
+  React.useEffect(() => {
+    if (location.state?.openAboutDialog && setIsAboutDialogVisible) {
+      setIsAboutDialogVisible(true);
+      // clear state
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state, setIsAboutDialogVisible]);
 
   // console.log(t("Common:ComingSoon"))
 
@@ -313,7 +325,7 @@ const PureHome = (props) => {
         setDropTargetPreview(selectedFolderTitle);
       }
     },
-    [selectedFolderTitle, setDropTargetPreview, disableDrag, canCreateSecurity]
+    [selectedFolderTitle, setDropTargetPreview, disableDrag, canCreateSecurity],
   );
 
   const onDragLeaveEmpty = React.useCallback(
@@ -335,7 +347,7 @@ const PureHome = (props) => {
         }
       }
     },
-    [setDropTargetPreview]
+    [setDropTargetPreview],
   );
 
   // sectionProps.onOpenUploadPanel = showUploadPanel;
@@ -381,7 +393,12 @@ const PureHome = (props) => {
   }, [shouldRenderSectionFilter, isChangePageRequestRunning]);
 
   const isDisabledKnowledge =
-    !aiConfig?.vectorizationEnabled && currentTab === "knowledge";
+    !aiConfig?.vectorizationEnabled &&
+    !selectedFolderChatSettings?.internal &&
+    currentTab === "knowledge";
+
+  const isErrorAvailable =
+    isErrorRoomNotAvailable || isErrorAIAgentNotAvailable;
 
   return (
     <>
@@ -398,10 +415,11 @@ const PureHome = (props) => {
       )}
       <MediaViewer />
       <SectionWrapper {...sectionProps} withoutFooter={isChat}>
-        {!isErrorRoomNotAvailable ||
+        {!isErrorAvailable ||
         isContactsPage ||
         isProfile ||
-        isSettingsPage ? (
+        isSettingsPage ||
+        showHeaderLoader ? (
           <Section.SectionHeader>
             <SectionHeaderContent />
           </Section.SectionHeader>
@@ -416,6 +434,7 @@ const PureHome = (props) => {
         </Section.SectionWarning>
 
         {!isChat &&
+        !isErrorAvailable &&
         !isDisabledKnowledge &&
         shouldShowFilter &&
         !isProfile &&
@@ -452,7 +471,6 @@ export const Component = inject(
     mediaViewerDataStore,
     peopleStore,
     filesActionsStore,
-    oformsStore,
     selectedFolderStore,
     clientLoadingStore,
     userStore,
@@ -462,11 +480,13 @@ export const Component = inject(
     dialogsStore,
     filesSettingsStore,
     aiRoomStore,
+    profileActionsStore,
   }) => {
     const {
       setSelectedFolder,
       security: folderSecurity,
       title: selectedFolderTitle,
+      chatSettings: selectedFolderChatSettings,
     } = selectedFolderStore;
 
     const canCreateSecurity = folderSecurity?.Create;
@@ -486,6 +506,7 @@ export const Component = inject(
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
+      showHeaderLoader,
       showFilterLoader,
       isChangePageRequestRunning,
       currentClientView,
@@ -520,6 +541,7 @@ export const Component = inject(
 
       disableDrag,
       isErrorRoomNotAvailable,
+      isErrorAIAgentNotAvailable,
       setIsPreview,
       getRooms,
       scrollToTop,
@@ -528,8 +550,6 @@ export const Component = inject(
 
       removeActiveItem,
     } = filesStore;
-
-    const { gallerySelected } = oformsStore;
 
     const {
       isRecycleBinFolder,
@@ -661,7 +681,6 @@ export const Component = inject(
       playlist,
 
       getFileInfo,
-      gallerySelected,
       setIsUpdatingRowItem,
 
       setFrameConfig,
@@ -685,6 +704,7 @@ export const Component = inject(
       onClickBack,
 
       showFilterLoader,
+      showHeaderLoader,
 
       getSettings,
       logout: authStore.logout,
@@ -734,12 +754,16 @@ export const Component = inject(
       dropTargetPreview,
       setDropTargetPreview,
       selectedFolderTitle,
+      selectedFolderChatSettings,
       clearDropPreviewLocation,
       canCreateSecurity,
       startDropPreview,
 
+      isErrorAIAgentNotAvailable,
       currentTab: aiRoomStore.currentTab,
       aiConfig: settingsStore.aiConfig,
+
+      setIsAboutDialogVisible: profileActionsStore.setIsAboutDialogVisible,
     };
-  }
+  },
 )(observer(Home));

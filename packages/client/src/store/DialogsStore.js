@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,6 +57,8 @@ class DialogsStore {
   selectedFolderStore;
 
   versionHistoryStore;
+
+  infoPanelStore;
 
   moveToPanelVisible = false;
 
@@ -339,6 +341,7 @@ class DialogsStore {
     filesStore,
     selectedFolderStore,
     versionHistoryStore,
+    infoPanelStore,
   ) {
     makeAutoObservable(this);
 
@@ -347,6 +350,7 @@ class DialogsStore {
     this.selectedFolderStore = selectedFolderStore;
     this.authStore = authStore;
     this.versionHistoryStore = versionHistoryStore;
+    this.infoPanelStore = infoPanelStore;
   }
 
   /**
@@ -429,7 +433,8 @@ class DialogsStore {
     if (
       visible &&
       !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection
+      !this.filesStore.hasBufferSelection &&
+      !this.infoPanelStore.infoPanelSelection
     )
       return;
 
@@ -457,7 +462,8 @@ class DialogsStore {
     if (
       visible &&
       !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection
+      !this.filesStore.hasBufferSelection &&
+      !this.infoPanelStore.infoPanelSelection
     ) {
       console.log("No files selected");
       return;

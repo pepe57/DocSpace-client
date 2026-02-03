@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -100,6 +100,10 @@ import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialo
 import AssignRoles from "../dialogs/AssignRoles";
 import ShareSelector from "../ShareSelector";
 
+import TemplateGallery from "../TemplateGallery";
+import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
+import PluginSelector from "../PluginSelector";
+
 const Panels = (props) => {
   const {
     uploadPanelVisible,
@@ -143,6 +147,7 @@ const Panels = (props) => {
     moveToPublicRoomVisible,
     settingsPluginDialogVisible,
     pluginDialogVisible,
+    pluginSelectorVisible,
     leaveRoomDialogVisible,
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
@@ -180,6 +185,8 @@ const Panels = (props) => {
     extsFilesVectorized,
     aiAgentSelectorDialogProps,
     setAiAgentSelectorDialogProps,
+    templateGalleryVisible,
+    isVisibleInfoPanelTemplateGallery,
   } = props;
 
   const navigate = useNavigate();
@@ -277,6 +284,7 @@ const Panels = (props) => {
     pluginDialogVisible && (
       <PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
     ),
+    pluginSelectorVisible && <PluginSelector key="plugin-selector" />,
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
     conversionVisible && <ConversionPanel key="conversion-panel" />,
     (moveToPanelVisible ||
@@ -290,6 +298,7 @@ const Panels = (props) => {
         isRestore={restorePanelVisible}
         isRestoreAll={restoreAllPanelVisible}
         withAIAgentsTreeFolder
+        disableBySecurity="UseChat"
       />
     ),
     connectDialogVisible && <ConnectDialog key="connect-dialog" />,
@@ -482,6 +491,10 @@ const Panels = (props) => {
       <SocialAuthWelcomeDialog key="joining-space-dialog" />
     ),
     <ShareSelector key="share-selector" />,
+    templateGalleryVisible && <TemplateGallery key="template-gallery" />,
+    isVisibleInfoPanelTemplateGallery && (
+      <InfoPanelTemplateGallery key="template-gallery-info-panel" />
+    ),
   ];
 };
 
@@ -500,6 +513,7 @@ export default inject(
     userStore,
     guidanceStore,
     filesSettingsStore,
+    oformsStore,
   }) => {
     const {
       copyPanelVisible,
@@ -593,9 +607,13 @@ export default inject(
       settingsPluginDialogVisible,
       deletePluginDialogVisible,
       pluginDialogVisible,
+      pluginSelectorVisible,
     } = pluginStore;
 
     const { getRefElement, config } = guidanceStore;
+
+    const { templateGalleryVisible, isVisibleInfoPanelTemplateGallery } =
+      oformsStore;
 
     const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
     const resetQuotaItem = () => {
@@ -656,6 +674,7 @@ export default inject(
       moveToPublicRoomVisible,
       settingsPluginDialogVisible,
       pluginDialogVisible,
+      pluginSelectorVisible,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,
@@ -694,6 +713,8 @@ export default inject(
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
+      templateGalleryVisible,
+      isVisibleInfoPanelTemplateGallery,
     };
   },
 )(observer(Panels));

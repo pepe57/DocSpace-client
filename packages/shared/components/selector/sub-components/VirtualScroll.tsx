@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -45,6 +45,28 @@ export const VirtualScroll = ({
     if (!isSearchInputFocused) {
       scrollContentRef.current?.focus();
     }
+  }, []);
+
+  useEffect(() => {
+    const onTabClick = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+
+      e.preventDefault();
+
+      const searchInput = document.querySelector(
+        ".selector-search-input input",
+      ) as HTMLInputElement;
+
+      if (searchInput) {
+        searchInput.focus();
+      }
+    };
+
+    scrollContentRef.current?.addEventListener("keydown", onTabClick);
+
+    return () => {
+      scrollContentRef.current?.removeEventListener("keydown", onTabClick);
+    };
   }, []);
 
   return (

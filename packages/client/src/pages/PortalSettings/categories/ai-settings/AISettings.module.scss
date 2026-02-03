@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -55,6 +55,23 @@
   margin-bottom: 8px;
 }
 
+.defaultProviderDescription {
+  margin-bottom: 16px;
+}
+
+.defaultProviderForm {
+  max-width: 340px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.defaultProviderFormButtons {
+  display: flex;
+  gap: 8px;
+}
+
 .learnMoreLink {
   margin-bottom: 16px;
 }
@@ -76,6 +93,10 @@
   }
 }
 
+.providerList {
+  margin-bottom: 20px;
+}
+
 .mcpHeading {
   margin-bottom: 20px;
 }
@@ -87,4 +108,10 @@
 
 .aiContextMenuDropDown {
   margin-top: 15px;
+}
+
+.tabsLoader {
+  width: min(400px, 100%);
+  height: 33px;
+  margin-bottom: 20px;
 }

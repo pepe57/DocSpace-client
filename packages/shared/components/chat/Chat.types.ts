@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -59,6 +59,7 @@ export type SelectChatProps = {
     onDeleteAction: () => void;
   }) => void;
   setDeleteDialogVisible?: (value: boolean) => void;
+  folderFormValidation: RegExp;
 };
 
 export type RenameChatProps = {
@@ -76,6 +77,7 @@ export type ChatHeaderProps = SelectModelProps &
       onDeleteAction: () => void;
     }) => void;
     setDeleteDialogVisible?: (value: boolean) => void;
+    folderFormValidation: RegExp;
   };
 
 export type MessageProps = {
@@ -85,6 +87,7 @@ export type MessageProps = {
   isLast: boolean;
   getIcon: TGetIcon;
   getResultStorageId: () => number | null;
+  folderFormValidation: RegExp;
 };
 
 export type MessageButtonsProps = {
@@ -95,11 +98,13 @@ export type MessageButtonsProps = {
   getIcon: TGetIcon;
   messageIndex: number;
   getResultStorageId: () => number | null;
+  folderFormValidation: RegExp;
 };
 
 export type MessageCodeBlockProps = {
   language?: string;
   content: string;
+  successCopyMessage?: string;
 };
 
 export type MessageErrorProps = {
@@ -114,6 +119,8 @@ export type MessageFilesProps = {
 export type MessageMarkdownFieldProps = {
   chatMessage: string;
   propLanguage?: string;
+  isFirst?: boolean;
+  successCopyMessage?: string;
 };
 
 export type MessageToolCallProps = {
@@ -130,6 +137,7 @@ export type MessageBodyProps = {
 
   getIcon: TGetIcon;
   getResultStorageId: () => number | null;
+  folderFormValidation: RegExp;
 };
 
 export type FilesListProps = {
@@ -140,7 +148,6 @@ export type FilesListProps = {
 };
 
 export type ButtonsProps = {
-  inputWidth: number;
   isFilesSelectorVisible: boolean;
 
   toggleFilesSelector: VoidFunction;
@@ -159,17 +166,14 @@ export type AttachmentProps = {
   toggleAttachment: VoidFunction;
   getIcon: TGetIcon;
   setSelectedFiles: (files: Partial<TFile>[]) => void;
-
-  attachmentFile: Partial<TFile> | null;
-  clearAttachmentFile: VoidFunction;
 };
 
 export type ChatInputProps = {
   getIcon: AttachmentProps["getIcon"];
   isLoading?: boolean;
 
-  attachmentFile: AttachmentProps["attachmentFile"];
-  clearAttachmentFile: AttachmentProps["clearAttachmentFile"];
+  attachmentFile: Partial<TFile> | null;
+  clearAttachmentFile: VoidFunction;
   selectedModel: string;
 
   toolsSettings: ReturnType<typeof useToolsSettings>;
@@ -186,6 +190,7 @@ export type ChatFooterProps = ChatInputProps & ChatInfoBlockProps;
 
 export type ChatContainerProps = {
   children: React.ReactNode;
+  isLoadingChat?: boolean;
 };
 
 export type ChatProps = {
@@ -212,4 +217,5 @@ export type ChatProps = {
     onDeleteAction: () => void;
   }) => void;
   setDeleteDialogVisible?: (value: boolean) => void;
+  folderFormValidation: RegExp;
 };

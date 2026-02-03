@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -155,7 +155,7 @@ class CreateEditRoomStore {
     newParams: TAgentParams,
     agent: TAgent,
   ) => {
-    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
+    const { isDefaultAIAgentsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore!;
     const { changeRoomOwner } = this.filesActionsStore!;
@@ -190,7 +190,7 @@ class CreateEditRoomStore {
         tags,
       }),
 
-      ...(isDefaultRoomsQuotaSet &&
+      ...(isDefaultAIAgentsQuotaSet &&
         isQuotaChanged && {
           quota: +quotaLimit!,
         }),
