@@ -24,59 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import "@docspace/shared/utils/wdyr";
 import React from "react";
-import { I18nextProvider } from "react-i18next";
-import { RouterProvider } from "react-router";
-import { Provider as MobxProvider } from "mobx-react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Avatar, AvatarRole } from "@docspace/shared/components/avatar";
+import { classNames } from "@docspace/shared/utils";
+import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
-import store from "SRC_DIR/store";
+import type { EditorsListProps } from "../EditorsTooltip.types";
+import styles from "../EditorsTooltip.module.scss";
 
-import "@docspace/shared/polyfills/broadcastchannel";
+export const EditorsList = ({
+  editors,
+  avatarSize,
+  isMobile = false,
+}: EditorsListProps) => {
+  if (editors.length === 0) return null;
 
-import "@docspace/shared/styles/custom.scss";
-
-import ThemeProvider from "./components/ThemeProviderWrapper";
-import ErrorBoundary from "./components/ErrorBoundaryWrapper";
-
-import router from "./router";
-
-import i18n from "./i18n";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-      staleTime: 5 * 60 * 1000,
-    },
-  },
-});
-
-const App = () => {
-  React.useEffect(() => {
-    const regex = /(\/){2,}/g;
-    const replaceRegex = /(\/)+/g;
-    const pathname = window.location.pathname;
-
-    if (regex.test(pathname))
-      window.location.replace(pathname.replace(replaceRegex, "$1"));
-  }, []);
+  const getClassName = (baseClassName: string) =>
+    classNames(baseClassName, { [styles.mobile]: isMobile });
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <MobxProvider {...store}>
-        <I18nextProvider i18n={i18n}>
-          <ThemeProvider>
-            <ErrorBoundary>
-              <RouterProvider router={router} />
-            </ErrorBoundary>
-          </ThemeProvider>
-        </I18nextProvider>
-      </MobxProvider>
-    </QueryClientProvider>
+    <div className={styles.editorsList}>
+      {editors.map((editor) => (
+        <div key={editor.id} className={getClassName(styles.editorItem)}>
+          <Avatar
+            size={avatarSize}
+            userName={editor.name}
+            source={editor.photo?.big || DefaultUserAvatarSmall}
+            className={getClassName(styles.editorAvatar)}
+            role={AvatarRole.user}
+          />
+          <span className={styles.editorName}>{editor.name}</span>
+        </div>
+      ))}
+    </div>
   );
 };
-
-export default App;
