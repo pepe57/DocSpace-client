@@ -189,14 +189,21 @@ class AISettingsStore {
   };
 
   deleteAIProvider = async (id: TAiProvider["id"]) => {
+    const isDefaultProvider = this.aiProviders?.find((p) => p.id === id)?.isDefault;
+    const isLastProvider = this.aiProviders.length === 1
+
     await deleteProviders({ ids: [id] });
 
     this.aiProviders = this.aiProviders.filter(
       (provider) => provider.id !== id,
     );
 
-    if (this.aiProviders.length === 0) {
+    if (isLastProvider || isDefaultProvider) {
       this.clearDefaultProviderData();
+    }
+
+    if (isDefaultProvider && !isLastProvider) {
+      await this.initDefaultProvider();
     }
   };
 
