@@ -39,6 +39,7 @@ COPY common/tests/package-lock.json ./common/tests/package-lock.json
 COPY common/tests/package.json ./common/tests/package.json
 COPY packages/client/package.json ./packages/client/package.json
 COPY packages/client/onlyoffice-docspace-plugin-sdk-*.tgz ./packages/client/
+COPY packages/client/onlyoffice-docspace-sdk-js-*.tgz ./packages/client/
 COPY packages/shared/package.json ./packages/shared/package.json
 
 # Install dependencies with recursive installation
