@@ -205,6 +205,7 @@ const DefaultProviderComponent = ({
           removeMargin
           hasError={!!defaultProviderModelsError}
           errorMessage={defaultProviderModelsError || ""}
+          errorMessageWidth="100%"
         >
           <ComboBox
             className={classNames({
