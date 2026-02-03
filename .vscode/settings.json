@@ -19,5 +19,10 @@
     "**/LICENSE": true,
     "**/build/install": true
   },
-  "gitlens.remotes": [{ "domain": "git.onlyoffice.com", "type": "Gitea" }]
+  "gitlens.remotes": [
+    {
+      "domain": "git.onlyoffice.com",
+      "type": "Gitea"
+    }
+  ],
 }

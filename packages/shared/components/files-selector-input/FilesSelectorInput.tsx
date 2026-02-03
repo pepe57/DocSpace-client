@@ -243,7 +243,6 @@ const FilesSelectorInput = ({
           rootFolderType={FolderType.Rooms}
           currentDeviceType={currentDeviceType ?? DeviceType.desktop}
           {...filesSelectorSettings}
-          withRecentTreeFolder={isFilesSelection}
           withFavoritesTreeFolder={isFilesSelection}
           withAIAgentsTreeFolder={withAIAgentsTreeFolder}
         />

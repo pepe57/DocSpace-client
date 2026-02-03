@@ -93,6 +93,18 @@ const providerTypes: TOption[] = [
     key: ProviderType.OpenRouter,
     label: getAiProviderLabel(ProviderType.OpenRouter),
   },
+  {
+    key: ProviderType.DeepSeek,
+    label: getAiProviderLabel(ProviderType.DeepSeek),
+  },
+  {
+    key: ProviderType.XAi,
+    label: getAiProviderLabel(ProviderType.XAi),
+  },
+  {
+    key: ProviderType.Google,
+    label: getAiProviderLabel(ProviderType.Google),
+  },
 ];
 
 const getSelectedOptionByProviderType = (type?: ProviderType) => {
@@ -138,11 +150,15 @@ const AddUpdateDialogComponent = ({
   const valuesByProvider = useRef<
     Record<ProviderType, { title: string; url: string; key: string }>
   >({
+    [ProviderType.PortalAi]: { title: "", url: "", key: "" },
     [ProviderType.OpenAi]: { title: "", url: "", key: "" },
     [ProviderType.Anthropic]: { title: "", url: "", key: "" },
     [ProviderType.TogetherAi]: { title: "", url: "", key: "" },
     [ProviderType.OpenAiCompatible]: { title: "", url: "", key: "" },
     [ProviderType.OpenRouter]: { title: "", url: "", key: "" },
+    [ProviderType.DeepSeek]: { title: "", url: "", key: "" },
+    [ProviderType.XAi]: { title: "", url: "", key: "" },
+    [ProviderType.Google]: { title: "", url: "", key: "" },
   });
 
   const initFormData = useRef({

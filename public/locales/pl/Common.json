@@ -521,10 +521,8 @@
   "LinkCopySuccessWithCustomFilter": "Link do pliku z włączonym <strong>niestandardowym filtrem</strong> został pomyślnie skopiowany do schowka.",
   "LinkDoesNotExist": "Link, który próbujesz otworzyć, nie istnieje.",
   "LinkExpirationDate": "Plik udostępniony pod linkiem wygaśnie <1>{{date}}</1>",
-  "LinkExpireAfter": "Link wygaśnie po <1>{{date}}</1>",
   "LinkExpired": "Link wygasł",
   "LinkHasExpired": "Dany link wygasł.",
-  "LinkHasExpiredAndHasBeenDisabled": "Link wygasł i został wyłączony",
   "LinkIsValid": "Link jest ważny do <1>{{date}}</1>",
   "LinkName": "Nazwa linku",
   "LinkNoExpiration": "Link nie ma <1>daty ważności</1>",
@@ -755,7 +753,6 @@
   "Remove": "Usuń",
   "RemovedFromList": "Usunięto z listy",
   "RemoveFromList": "Usuń z listy",
-  "RemoveLink": "Usuń link",
   "Rename": "Zmień nazwę",
   "RenewSubscription": "Odnowić subskrypcję?",
   "RepeatInvitation": "Ponów zaproszenie",
@@ -875,7 +872,6 @@
   "ShareTheOriginalFormForFillingOut": "Udostępnij oryginalny formularz do wypełnienia.",
   "ShareTheRoom": "pokój",
   "ShareToFillOut": "Udostępnij do wypełnienia",
-  "ShareVia": "Udostępnij poprzez",
   "ShareWithPortalUsers": "Dzielenie się z użytkownikami {{productName}}",
   "ShareWithPortalUsersDescription": "Wybierz konkretnych użytkowników z {{productName}} i zaproś ich do wypełnienia oryginalnego formularza.",
   "ShowAboutWindow": "Pokaż okno \"O programie\"",
@@ -1053,5 +1049,6 @@
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej"
+  "YourTurn": "Twoja kolej",
+  "ExternalLink": "Link zewnętrzny"
 }

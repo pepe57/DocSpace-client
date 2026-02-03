@@ -65,9 +65,11 @@ export type ViewProps = {
   paymentStore: TStore["paymentStore"];
   servicesStore: TStore["servicesStore"];
   currentTariffStatusStore: TStore["currentTariffStatusStore"];
+  defaultTemplatesStore: TStore["defaultTemplatesStore"];
   clearAbortControllerArr: TStore["settingsStore"]["clearAbortControllerArr"];
   fetchAIProviders: TStore["aiSettingsStore"]["fetchAIProviders"];
   fetchMCPServers: TStore["aiSettingsStore"]["fetchMCPServers"];
   fetchWebSearch: TStore["aiSettingsStore"]["fetchWebSearch"];
   fetchKnowledge: TStore["aiSettingsStore"]["fetchKnowledge"];
+  initDefaultProvider: TStore["aiSettingsStore"]["initDefaultProvider"];
 };

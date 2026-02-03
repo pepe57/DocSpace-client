@@ -521,10 +521,8 @@
   "LinkCopySuccessWithCustomFilter": "Odkaz na súbor s povoleným <strong>vlastným filtrom</strong> bol úspešne skopírovaný do schránky.",
   "LinkDoesNotExist": "Odkaz, ktorý sa pokúšate otvoriť, neexistuje.",
   "LinkExpirationDate": "Súbor zdieľaný cez odkaz vyprší <1>{{date}}</1>",
-  "LinkExpireAfter": "Platnosť odkazu vyprší po <1>{{date}}</1>",
   "LinkExpired": "Platnosť odkazu vypršala.",
   "LinkHasExpired": "Odkaz, ktorý používate, je neplatný.",
-  "LinkHasExpiredAndHasBeenDisabled": "Platnosť odkazu vypršala a bol deaktivovaný",
   "LinkIsValid": "Odkaz je platný <1>{{date}}</1>",
   "LinkName": "Názov odkazu",
   "LinkNoExpiration": "Odkaz nemá <1>žiadny dátum expirácie</1>",
@@ -755,7 +753,6 @@
   "Remove": "Odstrániť",
   "RemovedFromList": "Odstránené zo zoznamu",
   "RemoveFromList": "Odstrániť zo zoznamu",
-  "RemoveLink": "Odstrániť odkaz",
   "Rename": "Premenovať",
   "RenewSubscription": "Obnoviť predplatné?",
   "RepeatInvitation": "Opakovať pozvanie",
@@ -875,7 +872,6 @@
   "ShareTheOriginalFormForFillingOut": "Zdieľať pôvodný formulár na vyplnenie.",
   "ShareTheRoom": "miestnosť",
   "ShareToFillOut": "Zdieľať na vyplnenie",
-  "ShareVia": "Zdieľať prostredníctvom",
   "ShareWithPortalUsers": "Zdieľanie s používateľmi {{productName}}",
   "ShareWithPortalUsersDescription": "Vyberte konkrétnych používateľov z {{productName}} a pozvite ich, aby vyplnili pôvodný formulár.",
   "ShowAboutWindow": "Zobraziť okno O nás",
@@ -1053,5 +1049,6 @@
   "YouHaveUnsavedChanges": "Máte neuložené zmeny",
   "YourCurrentDomain": "Vaša aktuálna doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Ste na rade"
+  "YourTurn": "Ste na rade",
+  "ExternalLink": "Externý odkaz"
 }

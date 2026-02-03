@@ -521,10 +521,8 @@
   "LinkCopySuccessWithCustomFilter": "Lidhja me skedarin me <strong>Filtër të personalizuar</strong> u kopjua me sukses në të kujtesën e përkohshme.",
   "LinkDoesNotExist": "Lidhja që ju po mundoheni të hapni nuk ekziston.",
   "LinkExpirationDate": "Skedari i ndarë përmes lidhjes do të skadojë më <1>{{date}}</1>",
-  "LinkExpireAfter": "Lidhja do të skadojë pas <1>{{date}}</1>",
   "LinkExpired": "Lidhja ka skaduar.",
   "LinkHasExpired": "Lidhja që keni ndjekur ka skaduar.",
-  "LinkHasExpiredAndHasBeenDisabled": "Lidhja ka skaduar dhe është çaktivizuar",
   "LinkIsValid": "Lidhja është e vlefshme për <1>{{date}}</1>",
   "LinkName": "Emri lidhjes",
   "LinkNoExpiration": "Lidhja nuk ka <1>afat skadimi</1>",
@@ -755,7 +753,6 @@
   "Remove": "Hiqni",
   "RemovedFromList": "Fshirë nga lista",
   "RemoveFromList": "Fshini nga lista",
-  "RemoveLink": "Hiqni lidhjen",
   "Rename": "Riemërtoni",
   "RenewSubscription": "Të rinovohet abonimi?",
   "RepeatInvitation": "Përsëriteni ftesën",
@@ -875,7 +872,6 @@
   "ShareTheOriginalFormForFillingOut": "Ndani formularin origjinal për plotësim",
   "ShareTheRoom": "dhoma",
   "ShareToFillOut": "Shpërndajeni për të plotësuar",
-  "ShareVia": "Shpërndaje nëpërmjet",
   "ShareWithPortalUsers": "Duke ndarë me përdoruesit e {{productName}}",
   "ShareWithPortalUsersDescription": "Zgjidhni përdorues specifik nga {{productName}} dhe ftoji të plotësojnë formularin origjinal.",
   "ShowAboutWindow": "Shfaqni dritaren \"Rreth\"",
@@ -1053,5 +1049,6 @@
   "YouHaveUnsavedChanges": "Ju keni ndryshime të paruajtura",
   "YourCurrentDomain": "Domeni juaj aktual",
   "YourLogo": "Logos juaj",
-  "YourTurn": "Radha jote"
+  "YourTurn": "Radha jote",
+  "ExternalLink": "Lidhje e jashtme"
 }

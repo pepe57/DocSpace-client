@@ -26,13 +26,13 @@
 
 import { toastr } from "../../components/toast";
 import { getCookie } from "../../utils";
+import { getAiModelName } from "../../utils/ai";
+import { checkFilterInstance } from "../../utils/common";
 
 import { request } from "../client";
 import type { TFile } from "../files/types";
 import type { KnowledgeType, ToolsPermission, WebSearchType } from "./enums";
 import RoomsFilter from "../rooms/filter";
-import { checkFilterInstance } from "../../utils/common";
-import { getAiModelName } from "../../utils/ai";
 
 import type {
   TCreateAiProvider,
@@ -55,6 +55,8 @@ import type {
   TCreateAgentData,
   TEditAgentData,
   TGetAgents,
+  TDefaultProvider,
+  TUpdateDefaultProviderData,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -665,4 +667,30 @@ export const getMCPServerById = async (id: string) => {
   const res = await request(options);
 
   return res as TServer;
+};
+
+export const getDefaultProvider = async () => {
+  const options = {
+    method: "get",
+    url: `${baseUrl}/providers/default`,
+  };
+
+  const res = await request(options);
+
+  return res as TDefaultProvider;
+};
+
+export const updateDefaultProvider = async ({
+  providerId,
+  defaultModel,
+}: TUpdateDefaultProviderData) => {
+  const options = {
+    method: "put",
+    url: `${baseUrl}/providers/default`,
+    data: { providerId, defaultModel },
+  };
+
+  const res = await request(options);
+
+  return res as TDefaultProvider;
 };

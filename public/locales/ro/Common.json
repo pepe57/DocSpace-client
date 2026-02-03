@@ -521,10 +521,8 @@
   "LinkCopySuccessWithCustomFilter": "Link-ul către fișierul cu <strong>Filtru particularizat</strong> activ a fost copiat cu succes în clipboard.",
   "LinkDoesNotExist": "Lunk-ul pe care încercați să-l deschideți nu există.",
   "LinkExpirationDate": "Fișierul partajat printr-un link va expira după <1>{{date}}</1>",
-  "LinkExpireAfter": "Link-ul expiră după data <1>{{date}} </1>",
   "LinkExpired": "Link-ul a expirat.",
   "LinkHasExpired": "Linkul pe care l-ați urmat a expirat.",
-  "LinkHasExpiredAndHasBeenDisabled": "Link-ul a expirat și este dezactivat",
   "LinkIsValid": "Linkul este valabil pentru <1>{{date}}</1>.",
   "LinkName": "Numele linkului",
   "LinkNoExpiration": "Linkul <1>fără dată de expirare</1>",
@@ -755,7 +753,6 @@
   "Remove": "Eliminare",
   "RemovedFromList": "Șters din lista",
   "RemoveFromList": "Șterge din lista",
-  "RemoveLink": "Eliminare link",
   "Rename": "Redenumire",
   "RenewSubscription": "Doriţi să reînnoiți abonamentul?",
   "RepeatInvitation": "Repetare invitaţie",
@@ -875,7 +872,6 @@
   "ShareTheOriginalFormForFillingOut": "Partajare formular original pentru completare.",
   "ShareTheRoom": "sala",
   "ShareToFillOut": "Partajare pentru completare",
-  "ShareVia": "Partajare prin",
   "ShareWithPortalUsers": "Partajare cu utilizatorii ai {{productName}}",
   "ShareWithPortalUsersDescription": "Selectați utilizatorii ai {{productName}} și invitați-i să completeze formularul original.",
   "ShowAboutWindow": "Afișează fereastra Informații",
@@ -1053,5 +1049,6 @@
   "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourLogo": "Logo-ul dvs",
-  "YourTurn": "Acum e rândul dvs."
+  "YourTurn": "Acum e rândul dvs.",
+  "ExternalLink": "Link extern"
 }

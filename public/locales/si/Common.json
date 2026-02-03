@@ -521,10 +521,8 @@
   "LinkCopySuccessWithCustomFilter": "<strong>අභිරුචි පෙරහන</strong> සක්‍රීය කර ඇති ගොනුවට සබැඳිය සාර්ථකව පසුරු පුවරුවට පිටපත් කරන ලදී.",
   "LinkDoesNotExist": "ඔබ විවෘත කිරීමට උත්සාහ කරන සබැඳිය නොපවතී.",
   "LinkExpirationDate": "සබැඳිය මගින් බෙදාගත් ගොනුව <1>{{date}}</1> කින් කල් ඉකුත් වනු ඇත.",
-  "LinkExpireAfter": "සබැඳිය <1>{{date}}</1>ට පසු කල් ඉකුත් වේ",
   "LinkExpired": "සබැඳිය කල් ඉකුත් වී ඇත.",
   "LinkHasExpired": "ඔබ අනුගමනය කළ සබැඳිය කල් ඉකුත් වී ඇත.",
-  "LinkHasExpiredAndHasBeenDisabled": "සබැඳිය කල් ඉකුත් වී අබල කර ඇත",
   "LinkIsValid": "සබැඳිය <1>{{date}}</1> දක්වා වලංගු වේ",
   "LinkName": "සබැඳියේ නම",
   "LinkNoExpiration": "සබැඳියේ <1>කල් ඉකුත් වීමේ දිනයක් නැත</1>",
@@ -755,7 +753,6 @@
   "Remove": "ඉවත් කරන්න",
   "RemovedFromList": "ලේඛනයෙන් ඉවත් කරන ලදී",
   "RemoveFromList": "ලැයිස්තුවෙන් ඉවත් කරන්න",
-  "RemoveLink": "ලිංකිය ඉවත් කරන්න",
   "Rename": "නම් කරන්න",
   "RenewSubscription": "දායකත්‍වය අළුත් කරන්න?",
   "RepeatInvitation": "ආරාධනය නැවතත්",
@@ -875,7 +872,6 @@
   "ShareTheOriginalFormForFillingOut": "පූර්ණ පත්‍රය පුරවා ගැනීම සඳහා බෙදා ගන්න.",
   "ShareTheRoom": "කාමරය",
   "ShareToFillOut": "කරන්න බෙදා ගන්න",
-  "ShareVia": "මෙමගින් බෙදාගන්න",
   "ShareWithPortalUsers": "{{productName}} පරිශීලකයින් සමඟ බෙදා ගැනීම",
   "ShareWithPortalUsersDescription": "{{productName}} වෙතින් නිශ්චිත පරිශීලකයින් තෝරාගෙන මුල් පෝරමය පුරවන ලෙස ඔවුන්ට ආරාධනා කරන්න.",
   "ShowAboutWindow": "\"ගැන\" කවුළුව පෙන්වන්න",
@@ -1053,5 +1049,6 @@
   "YouHaveUnsavedChanges": "ඔබ සතුව නොසුරැකි වෙනස්කම් ඇත",
   "YourCurrentDomain": "ඔබගේ වත්මන් වසම",
   "YourLogo": "ඔබේ ලාංචනය",
-  "YourTurn": "ඔබේ වාරය."
+  "YourTurn": "ඔබේ වාරය.",
+  "ExternalLink": "බාහිර සබැඳිය"
 }

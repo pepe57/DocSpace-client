@@ -521,10 +521,8 @@
   "LinkCopySuccessWithCustomFilter": "<strong>Xüsusi filtr</strong> aktivləşdirilmiş faylın linki müvəffəqiyyətlə mübadilə buferinə köçürüldü.",
   "LinkDoesNotExist": "Açmağa çalışdığınız keçid mövcud deyil.",
   "LinkExpirationDate": "Linklə paylaşılan fayl <1>{{date}}</1> tarixində bitəcək.",
-  "LinkExpireAfter": "Link <1>{{date}}</1> sonra başa çatacaq",
   "LinkExpired": "Linkin müddəti bitib.",
   "LinkHasExpired": "İzlədiyiniz keçidin vaxtı keçib.",
-  "LinkHasExpiredAndHasBeenDisabled": "Keçidin vaxtı bitib və deaktiv edilib",
   "LinkIsValid": "Link <1>{{date}}</1> üçün etibarlıdır",
   "LinkName": "Keçid adı",
   "LinkNoExpiration": "Linkin bitmə <1>tarixi yoxdur</1>",
@@ -755,7 +753,6 @@
   "Remove": "Silin",
   "RemovedFromList": "Siyahıdan silindi",
   "RemoveFromList": "Siyahıdan sil",
-  "RemoveLink": "Linki silin",
   "Rename": "Adını dəyiş",
   "RenewSubscription": "Abunəlik yenilənsin?",
   "RepeatInvitation": "Dəvəti təkrarlayın",
@@ -875,7 +872,6 @@
   "ShareTheOriginalFormForFillingOut": "Doldurmaq üçün orijinal formanı paylaşın.",
   "ShareTheRoom": "oтаğ",
   "ShareToFillOut": "Doldurmaq üçün paylaşın",
-  "ShareVia": "Paylaş",
   "ShareWithPortalUsers": "{{productName}} istifadəçiləri ilə paylaşma",
   "ShareWithPortalUsersDescription": "{{productName}} daxilində müəyyən istifadəçiləri seçin və orijinal formanı doldurmaq üçün dəvət edin.",
   "ShowAboutWindow": "{{About Pencərəsinin göstərilməsi}}",
@@ -1053,5 +1049,6 @@
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
-  "YourTurn": "Sizin növbəniz"
+  "YourTurn": "Sizin növbəniz",
+  "ExternalLink": "Xarici keçid"
 }

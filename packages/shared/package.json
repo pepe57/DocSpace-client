@@ -39,20 +39,20 @@
     "fast-deep-equal": "3.1.3",
     "file-saver": "2.0.5",
     "firebase": "11.2.0",
-    "framer-motion": "^12.26.0",
+    "framer-motion": "^12.30.0",
     "he": "1.2.0",
     "heic2any": "0.0.4",
     "hex-rgb": "5.0.0",
     "i18next": "23.7.19",
     "linkify-react": "^4.3.2",
     "linkifyjs": "^4.3.2",
-    "lodash": "4.17.21",
+    "lodash": "4.17.23",
     "luxon": "3.5.0",
     "mobx": "6.13.5",
     "mobx-react": "7.6.0",
     "moment": "2.30.1",
     "moment-timezone": "0.6.0",
-    "next": "16.1.1",
+    "next": "16.1.6",
     "prop-types": "15.8.1",
     "query-string": "7.1.3",
     "react-autosize-textarea": "7.1.0",
@@ -100,8 +100,9 @@
     "@babel/preset-env": "7.25.8",
     "@babel/preset-react": "7.25.7",
     "@babel/preset-typescript": "7.25.7",
-    "@biomejs/biome": "2.3.11",
-    "@playwright/test": "1.56.1",
+    "@biomejs/biome": "2.3.13",
+    "@msw/playwright": "^0.3.1",
+    "@playwright/test": "1.57.0",
     "@storybook/addon-actions": "^8.6.15",
     "@storybook/addon-controls": "^8.6.15",
     "@storybook/addon-designs": "^8.2.1",
@@ -128,7 +129,7 @@
     "@types/lodash": "4.17.10",
     "@types/luxon": "3.4.2",
     "@types/node": "24.10.7",
-    "@types/react": "19.2.8",
+    "@types/react": "19.2.10",
     "@types/react-avatar-editor": "13.0.3",
     "@types/react-dom": "19.2.3",
     "@types/react-google-recaptcha": "2.1.9",
@@ -151,12 +152,12 @@
     "msw": "^2.12.7",
     "msw-storybook-addon": "^2.0.6",
     "open-cli": "^8.0.0",
-    "react": "19.2.3",
+    "react": "19.2.4",
     "react-docgen-typescript-plugin": "1.0.8",
-    "react-dom": "19.2.3",
+    "react-dom": "19.2.4",
     "react-values": "0.3.3",
     "remark-gfm": "4.0.1",
-    "sass": "1.79.5",
+    "sass": "1.79.6",
     "sass-loader": "16.0.5",
     "serve": "14.2.5",
     "storybook": "^8.6.15",
@@ -164,11 +165,11 @@
     "style-loader": "3.3.4",
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
-    "vitest": "4.0.17"
+    "vitest": "4.0.18"
   },
   "peerDependencies": {
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   },
   "nx": {
     "targets": {
@@ -181,7 +182,7 @@
   },
   "msw": {
     "workerDirectory": [
-      "__mocks__/storybook/mockServiceWorker"
+      "__mocks__/storybook"
     ]
   }
 }

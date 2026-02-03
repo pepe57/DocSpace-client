@@ -521,10 +521,8 @@
   "LinkCopySuccessWithCustomFilter": "Ссылка на файл с включенным <strong>Пользовательским фильтром</strong> успешно скопирована в буфер обмена.",
   "LinkDoesNotExist": "Ссылки, которую вы пытаетесь открыть, не существует.",
   "LinkExpirationDate": "Срок действия файла, доступ к которому предоставлен по ссылке, истекает <1>{{date}}</1>",
-  "LinkExpireAfter": "Срок действия ссылки истекает через <1>{{date}}</1>",
   "LinkExpired": "Срок действия ссылки истек.",
   "LinkHasExpired": "Ссылка, по которой вы перешли, просрочена.",
-  "LinkHasExpiredAndHasBeenDisabled": "Срок действия ссылки истек, она отключена",
   "LinkIsValid": "Ссылка действительна до <1>{{date}}</1>",
   "LinkName": "Имя ссылки",
   "LinkNoExpiration": "Ссылка является <1>бессрочной</1>",
@@ -755,7 +753,6 @@
   "Remove": "Удалить",
   "RemovedFromList": "Удалено из списка",
   "RemoveFromList": "Убрать из списка",
-  "RemoveLink": "Удалить ссылку",
   "Rename": "Переименовать",
   "RenewSubscription": "Продлить подписку?",
   "RepeatInvitation": "Повторное приглашение",
@@ -875,7 +872,6 @@
   "ShareTheOriginalFormForFillingOut": "Предоставить доступ к исходной форме для заполнения.",
   "ShareTheRoom": "комната",
   "ShareToFillOut": "Предоставить доступ для заполнения",
-  "ShareVia": "Отправить по",
   "ShareWithPortalUsers": "Предоставление доступа пользователям {{productName}}",
   "ShareWithPortalUsersDescription": "Выберите конкретных пользователей из {{productName}} и предложите им заполнить исходную форму.",
   "ShowAboutWindow": "Показать окно «О программе»",
@@ -1053,5 +1049,6 @@
   "YouHaveUnsavedChanges": "Имеются несохраненные изменения",
   "YourCurrentDomain": "Ваш текущий домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша очередь"
+  "YourTurn": "Ваша очередь",
+  "ExternalLink": "Внешняя ссылка"
 }
