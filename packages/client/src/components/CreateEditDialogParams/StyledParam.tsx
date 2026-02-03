@@ -85,6 +85,10 @@ const StyledParam = styled.div.attrs(injectDefaultTheme)<{
   .ai-combobox {
     padding: 0;
   }
+    
+    .provider-combobox.has-error .combo-button {
+        border-color: var(--input-error-border);
+    }
 
   .ai-button-group {
     display: flex;
