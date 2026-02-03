@@ -121,8 +121,8 @@ importers:
         specifier: 4.4.6
         version: 4.4.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react-dropzone:
-        specifier: ^14.4.0
-        version: 14.4.0(react@19.2.3)
+        specifier: 11.7.1
+        version: 11.7.1(react@19.2.3)
       react-hotkeys-hook:
         specifier: ^5.2.3
         version: 5.2.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -6355,10 +6355,6 @@ packages:
     resolution: {integrity: sha512-iACCiXeMYOvZqlF1kTiYINzgepRBymz1wwjiuup9u9nayhb6g4fSwiyJ/6adli+EPwrWtpgQAh2PoS7HukEGEg==}
     engines: {node: '>= 10'}
 
-  file-selector@2.1.2:
-    resolution: {integrity: sha512-QgXo+mXTe8ljeqUFaX3QVHc5osSItJ/Km+xpocx0aSqWGMSCf6qYs/VnzZgS864Pjn5iceMRFigeAV7AfTlaig==}
-    engines: {node: '>= 12'}
-
   file-stream-rotator@0.6.1:
     resolution: {integrity: sha512-u+dBid4PvZw17PmDeRcNOtCP9CCK/9lRN2w+r1xIS7yOL9JFrIBKTvrYsxT4P0pGtThYTn++QS5ChHaUov3+zQ==}
 
@@ -8841,12 +8837,6 @@ packages:
     engines: {node: '>= 10.13'}
     peerDependencies:
       react: '>= 16.8'
-
-  react-dropzone@14.4.0:
-    resolution: {integrity: sha512-8VvsHqg9WGAr+wAnP0oVErK5HOwAoTOzRsxLPzbBXrtXtFfukkxMyuvdI/lJ+5OxtsrzmvWE5Eoo3Y4hMsaxpA==}
-    engines: {node: '>= 10.13'}
-    peerDependencies:
-      react: '>= 16.8 || 18.0.0'
 
   react-google-recaptcha@3.1.0:
     resolution: {integrity: sha512-cYW2/DWas8nEKZGD7SCu9BSuVz8iOcOLHChHyi7upUuVhkpkhYG/6N3KDiTQ3XAiZ2UAZkfvYKMfAHOzBOcGEg==}
@@ -16122,10 +16112,6 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  file-selector@2.1.2:
-    dependencies:
-      tslib: 2.8.1
-
   file-stream-rotator@0.6.1:
     dependencies:
       moment: 2.30.1
@@ -18985,13 +18971,6 @@ snapshots:
     dependencies:
       attr-accept: 2.2.5
       file-selector: 0.4.0
-      prop-types: 15.8.1
-      react: 19.2.3
-
-  react-dropzone@14.4.0(react@19.2.3):
-    dependencies:
-      attr-accept: 2.2.5
-      file-selector: 2.1.2
       prop-types: 15.8.1
       react: 19.2.3
 

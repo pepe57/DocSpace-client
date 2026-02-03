@@ -1186,18 +1186,6 @@
 }
 
 .light {
-  --dropzone-border: 2px dashed #{$gray-light-mid};
-  --dropzone-secondary-link: #${black};
-  --dropzone-exsts-color: #{$gray};
-}
-
-.dark {
-  --dropzone-border: 2px dashed #{$gray-dark-strong};
-  --dropzone-secondary-link: #${white};
-  --dropzone-exsts-color: #{$gray};
-}
-
-.light {
   --social-button-border: 1px solid #{$gray-strong};
   --social-button-text-color: #{$black};
   --social-button-connect-text-color: #{$white};
