@@ -39,7 +39,7 @@ import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 import PencilSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
-import { ColorPicker } from "@docspace/shared/components/color-picker";
+import { ColorPicker } from "@docspace/ui-kit/components/color-picker";
 import { SelectColorProps } from "../../RoomLogoCoverDialog.types";
 
 import {
