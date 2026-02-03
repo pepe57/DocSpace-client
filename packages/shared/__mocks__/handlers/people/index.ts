@@ -42,6 +42,7 @@ import { thirdPartyProvidersHandler } from "./thirdPartyProviders";
 import { peopleHandler } from "./people";
 import { peopleListHandler, peopleListAccessDeniedHandler } from "./list";
 import { themeProviderHandler } from "./theme";
+import { userPhotoHandler } from "./userPhoto";
 
 export {
   selfHandler,
@@ -60,6 +61,7 @@ export {
   selfByTypeHandler,
   selfHandlerWithCulture,
   themeProviderHandler,
+  userPhotoHandler,
 };
 
 export const peopleHandlers = (port: string) => [
@@ -77,4 +79,5 @@ export const peopleHandlers = (port: string) => [
   peopleListHandler(port),
   peopleListAccessDeniedHandler(port),
   themeProviderHandler(port),
+  userPhotoHandler(port),
 ];
