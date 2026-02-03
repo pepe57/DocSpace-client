@@ -12,6 +12,7 @@
   "DefaultProviderSetSuccess": "Default provider successfully set",
   "DeleteImage": "Delete image",
   "DeleteProvider": "Delete {{aiProvider}}",
+  "DeleteDefaultProviderDescription": "<1>This {{aiProvider}} is currently set as the default.</1>\n Deleting it will revoke access for all users, and its settings will be permanently erased.\n Another provider will be set as default automatically and can be changed later in settings.",
   "DeleteProviderDescription": "Deleting this provider will revoke access for all users, and its settings will be permanently erased.\n To use the provider again, you will need to set it up from scratch.",
   "DeleteServer": "Delete server",
   "DeleteServerDescription": "Deleting this server will revoke access for all users, and its settings will be permanently erased.\n To use the server again, you will need to set it up from scratch.",

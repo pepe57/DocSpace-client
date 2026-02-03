@@ -46,9 +46,6 @@ import styles from "../AISettings.module.scss";
 
 import { AddUpdateProviderDialog } from "./dialogs/add-update";
 import { DeleteAIProviderDialog } from "./dialogs/delete";
-import {
-  ChangeDefaultProviderDialog
-} from "./dialogs/change-default-provider";
 
 import { AiProviderTile } from "./Tile";
 import { ProvidersLoader } from "./ProvidersLoader";
@@ -58,10 +55,12 @@ type TDeleteDialogData =
   | {
       visible: false;
       providerId: null;
+      showDefaultProviderWarning?: false;
     }
   | {
       visible: true;
       providerId: TAiProvider["id"];
+      showDefaultProviderWarning?: boolean;
     };
 
 type TUpdateDialogData =
@@ -103,7 +102,6 @@ const AIProviderComponent = ({
     visible: false,
     providerId: null,
   });
-  const [changeDefaultProviderDialogVisible, setChangeDefaultProviderDialogVisible] = useState(false);
   const [aiProviderTypesWithUrls, setAiProviderTypesWithUrls] = useState<
     TProviderTypeWithUrl[]
   >([]);
@@ -117,18 +115,11 @@ const AIProviderComponent = ({
   const hideDeleteProviderDialog = () =>
     setDeleteDialogData({ visible: false, providerId: null });
 
-  const hideChangeDefaultProviderDialog = () =>
-    setChangeDefaultProviderDialogVisible(false);
-
   const onDeleteAIProvider = async (id: TAiProvider["id"]) => {
-    const provider = aiProviders?.find((p) => p.id === id);
+    const isDefaultProvider = aiProviders?.find((p) => p.id === id)?.isDefault;
+    const isLastProvider = aiProviders && aiProviders.length === 1
 
-    if (aiProviders && aiProviders.length > 1 && provider?.isDefault) {
-      setChangeDefaultProviderDialogVisible(true);
-      return;
-    }
-
-    setDeleteDialogData({ visible: true, providerId: id });
+    setDeleteDialogData({ visible: true, providerId: id, showDefaultProviderWarning: isDefaultProvider && !isLastProvider });
   };
 
   const onUpdateAIProvider = async (provider: TAiProvider) => {
@@ -209,9 +200,7 @@ const AIProviderComponent = ({
         ))}
       </div>
 
-      {isDefaultProviderSettingsAvailable ? (
-        <DefaultProvider />
-      ) : null}
+      {isDefaultProviderSettingsAvailable ? <DefaultProvider /> : null}
 
       {addDialogVisible ? (
         <AddUpdateProviderDialog
@@ -234,12 +223,7 @@ const AIProviderComponent = ({
         <DeleteAIProviderDialog
           onClose={hideDeleteProviderDialog}
           providerId={deleteDialogData.providerId}
-        />
-      ) : null}
-
-      {changeDefaultProviderDialogVisible ? (
-        <ChangeDefaultProviderDialog
-          onClose={hideChangeDefaultProviderDialog}
+          showDefaultProviderWarning={deleteDialogData.showDefaultProviderWarning}
         />
       ) : null}
     </div>
@@ -255,7 +239,8 @@ export const AIProvider = inject(
       isProviderAvailable: aiSettingsStore.isProviderAvailable,
       cancelAvailabilityCheck: aiSettingsStore.cancelAvailabilityCheck,
       aiProviderSettingsUrl: settingsStore.aiProviderSettingsUrl,
-      isDefaultProviderSettingsAvailable: aiSettingsStore.isDefaultProviderSettingsAvailable,
+      isDefaultProviderSettingsAvailable:
+        aiSettingsStore.isDefaultProviderSettingsAvailable,
     };
   },
 )(observer(AIProviderComponent));
