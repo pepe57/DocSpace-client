@@ -117,9 +117,13 @@ const AIProviderComponent = ({
 
   const onDeleteAIProvider = async (id: TAiProvider["id"]) => {
     const isDefaultProvider = aiProviders?.find((p) => p.id === id)?.isDefault;
-    const isLastProvider = aiProviders && aiProviders.length === 1
+    const isLastProvider = aiProviders && aiProviders.length === 1;
 
-    setDeleteDialogData({ visible: true, providerId: id, showDefaultProviderWarning: isDefaultProvider && !isLastProvider });
+    setDeleteDialogData({
+      visible: true,
+      providerId: id,
+      showDefaultProviderWarning: isDefaultProvider && !isLastProvider,
+    });
   };
 
   const onUpdateAIProvider = async (provider: TAiProvider) => {
@@ -223,7 +227,9 @@ const AIProviderComponent = ({
         <DeleteAIProviderDialog
           onClose={hideDeleteProviderDialog}
           providerId={deleteDialogData.providerId}
-          showDefaultProviderWarning={deleteDialogData.showDefaultProviderWarning}
+          showDefaultProviderWarning={
+            deleteDialogData.showDefaultProviderWarning
+          }
         />
       ) : null}
     </div>

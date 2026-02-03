@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
@@ -63,7 +63,7 @@ const getSelectedProvider = (
   aiProviders?: TAiProvider[],
   defaultProvider?: TDefaultProvider | null,
 ): TOption => {
-  if (!aiProviders || !defaultProvider) return { key: "-1", label: "" };
+  if (!aiProviders || !defaultProvider) return { key: "-2", label: "" };
 
   const provider =
     aiProviders.find((p) => p.id === defaultProvider.providerId) ||
@@ -76,7 +76,8 @@ const getSelectedModel = (
   models?: TModel[] | null,
   defaultProvider?: TDefaultProvider | null,
 ): TOption => {
-  if (!models || !defaultProvider) return { key: "-1", label: t("Common:NoModelsFound") };
+  if (!models || !defaultProvider)
+    return { key: "-2", label: t("Common:NoModelsFound") };
 
   const model =
     models.find((m) => m.modelId === defaultProvider.defaultModel) || models[0];
@@ -170,9 +171,29 @@ const DefaultProviderComponent = ({
   };
 
   const isSaveDisabled =
-    (!isProviderChanged && !isModelChanged) || isDefaultProviderModelsLoading || !defaultProviderModels;
+    (!isProviderChanged && !isModelChanged) ||
+    isDefaultProviderModelsLoading ||
+    !defaultProviderModels;
   const isCancelDisabled =
-    (!isProviderChanged && !isModelChanged) || isDefaultProviderModelsLoading || !defaultProviderModels;
+    (!isProviderChanged && !isModelChanged) ||
+    isDefaultProviderModelsLoading ||
+    !defaultProviderModels;
+
+  const recalculateState = useEffectEvent(() => {
+    setSelectedProvider(getSelectedProvider(aiProviders, defaultProvider));
+    setSelectedModel(
+      getSelectedModel(t, defaultProviderModels, defaultProvider),
+    );
+  });
+
+  useEffect(() => {
+    if (
+      defaultProvider &&
+      defaultProvider.providerId !== selectedProvider?.key
+    ) {
+      recalculateState();
+    }
+  }, [defaultProvider]);
 
   if (!selectedProvider || !selectedModel) {
     return null;

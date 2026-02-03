@@ -198,7 +198,7 @@ class AISettingsStore {
       (provider) => provider.id !== id,
     );
 
-    if (isLastProvider || isDefaultProvider) {
+    if (isLastProvider) {
       this.clearDefaultProviderData();
     }
 
