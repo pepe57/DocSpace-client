@@ -26,6 +26,7 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 
 import {
@@ -62,6 +63,7 @@ const EditRoomGroupsDialog = ({
   openInCreateMode,
   fetchRooms,
   roomsFilter,
+  organizeRoomsGrouping,
 }: EditRoomGroupsDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
 
@@ -96,6 +98,13 @@ const EditRoomGroupsDialog = ({
 
   const onCloseEditRoomGroupsDialog = () => {
     setEditRoomGroupsDialogVisible(false);
+  };
+
+  const navigate = useNavigate();
+
+  const onClickRoomGroupingSetting = () => {
+    setEditRoomGroupsDialogVisible(false);
+    navigate("/profile/file-management");
   };
 
   const onSubmitRoom = async (items: TSelectorItem[]) => {
@@ -297,7 +306,11 @@ const EditRoomGroupsDialog = ({
             <div className={styles.title}>
               {t("GroupingRooms:EnableRoomGrouping")}
             </div>
-            <ToggleButton className={styles.roomGroupsToggle} />
+            <ToggleButton
+              className={styles.roomGroupsToggle}
+              isChecked={organizeRoomsGrouping}
+              onChange={onClickRoomGroupingSetting}
+            />
           </div>
 
           <Text className={styles.description}>
@@ -315,33 +328,37 @@ const EditRoomGroupsDialog = ({
   );
 };
 
-export default inject(({ dialogsStore, filesStore }: TStore) => {
-  const {
-    setCreateGroupRooms,
-    getAllRoomGroups,
-    roomGroups,
-    getGroupById,
-    updateGroupIcon,
-    updateRoomGroup,
-    deleteRoomGroup,
-    createGroupFromRoomIds,
-    openInCreateMode,
-  } = dialogsStore;
+export default inject(
+  ({ dialogsStore, filesStore, filesSettingsStore }: TStore) => {
+    const {
+      setCreateGroupRooms,
+      getAllRoomGroups,
+      roomGroups,
+      getGroupById,
+      updateGroupIcon,
+      updateRoomGroup,
+      deleteRoomGroup,
+      createGroupFromRoomIds,
+      openInCreateMode,
+    } = dialogsStore;
 
-  const { roomsFilter, fetchRooms } = filesStore;
+    const { roomsFilter, fetchRooms } = filesStore;
+    const { organizeRoomsGrouping } = filesSettingsStore;
 
-  return {
-    setCreateGroupRooms,
-    getAllRoomGroups,
-    roomGroups,
-    getGroupById,
-    updateGroupIcon,
-    updateRoomGroup,
-    deleteRoomGroup,
-    createGroupFromRoomIds,
-    currentFilterGroupId: roomsFilter?.groupId,
-    openInCreateMode,
-    fetchRooms,
-    roomsFilter,
-  };
-})(observer(EditRoomGroupsDialog));
+    return {
+      setCreateGroupRooms,
+      getAllRoomGroups,
+      roomGroups,
+      getGroupById,
+      updateGroupIcon,
+      updateRoomGroup,
+      deleteRoomGroup,
+      createGroupFromRoomIds,
+      currentFilterGroupId: roomsFilter?.groupId,
+      openInCreateMode,
+      fetchRooms,
+      roomsFilter,
+      organizeRoomsGrouping,
+    };
+  },
+)(observer(EditRoomGroupsDialog));

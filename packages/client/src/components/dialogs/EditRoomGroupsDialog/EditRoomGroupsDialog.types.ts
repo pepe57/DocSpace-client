@@ -93,6 +93,8 @@ export interface EditRoomGroupsDialogProps {
   ) => Promise<void>;
   /** Current rooms filter */
   roomsFilter?: { groupId?: string | number | null } | null;
+  /** Whether room grouping is enabled in portal settings */
+  organizeRoomsGrouping?: boolean;
 }
 
 export interface IRoomItem {
