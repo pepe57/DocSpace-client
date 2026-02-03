@@ -23,7 +23,7 @@
     "test:clean-failed-tests": "node scripts/cleanFailedTests.js"
   },
   "dependencies": {
-    "@aws-sdk/client-cloudwatch-logs": "3.816.0",
+    "@aws-sdk/client-cloudwatch-logs": "3.981.0",
     "@docspace/shared": "workspace:*",
     "classnames": "2.5.1",
     "crypto-js": "4.2.0",

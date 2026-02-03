@@ -23,7 +23,7 @@
     "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx cp -r .next/standalone/* ../../../publish/web/management && shx --silent mkdir -p ../../../publish/web/management/packages/management/.next/static && shx cp -r .next/static/* ../../../publish/web/management/packages/management/.next/static && shx cp -f server.prod.js ../../../publish/web/management/server.js"
   },
   "dependencies": {
-    "@aws-sdk/client-cloudwatch-logs": "3.816.0",
+    "@aws-sdk/client-cloudwatch-logs": "3.981.0",
     "@babel/runtime": "7.28.3",
     "@docspace/shared": "workspace:*",
     "axios": "1.13.2",

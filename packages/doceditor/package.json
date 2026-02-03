@@ -23,7 +23,7 @@
     "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx cp -r .next/standalone/* ../../../publish/web/editor && shx --silent mkdir -p ../../../publish/web/editor/packages/doceditor/.next/static && shx cp -r .next/static/* ../../../publish/web/editor/packages/doceditor/.next/static && shx cp -f server.prod.js ../../../publish/web/editor/server.js"
   },
   "dependencies": {
-    "@aws-sdk/client-cloudwatch-logs": "3.816.0",
+    "@aws-sdk/client-cloudwatch-logs": "3.981.0",
     "@docspace/shared": "workspace:*",
     "@onlyoffice/document-editor-react": "2.1.1",
     "classnames": "2.5.1",
