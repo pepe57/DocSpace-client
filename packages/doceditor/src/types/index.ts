@@ -447,6 +447,17 @@ export type TDocEditor = {
   startFilling?: VoidFunction;
   requestRoles?: VoidFunction;
   setFavorite?: (favorite: boolean) => void;
+  createConnector?: () => TEditorConnector;
+};
+
+export type TEditorConnector = {
+  attachEvent: (id: string, action: (...args: unknown[]) => void) => void;
+  sendEvent: (name: string, data?: string | object | unknown[]) => void;
+  executeMethod: (
+    name: string,
+    params: object[],
+    callback: (response: object | { error: string }) => void,
+  ) => void;
 };
 
 export type TCatchError =
@@ -513,4 +524,12 @@ export type ConflictStateType = {
 export type TFormRole = {
   name: string;
   color: string;
+};
+
+export type TEditorAIEvent = {
+  id: string;
+  type: string;
+  url: string;
+  streaming: boolean;
+  options: RequestInit & { headers: Record<string, string> };
 };

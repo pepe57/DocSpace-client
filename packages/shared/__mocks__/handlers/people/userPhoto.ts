@@ -24,59 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import "@docspace/shared/utils/wdyr";
-import React from "react";
-import { I18nextProvider } from "react-i18next";
-import { RouterProvider } from "react-router";
-import { Provider as MobxProvider } from "mobx-react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { http, HttpResponse } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-import store from "SRC_DIR/store";
+export const PATH_USER_PHOTO = "people/:userId/photo";
 
-import "@docspace/shared/polyfills/broadcastchannel";
-
-import "@docspace/shared/styles/custom.scss";
-
-import ThemeProvider from "./components/ThemeProviderWrapper";
-import ErrorBoundary from "./components/ErrorBoundaryWrapper";
-
-import router from "./router";
-
-import i18n from "./i18n";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-      staleTime: 5 * 60 * 1000,
-    },
-  },
-});
-
-const App = () => {
-  React.useEffect(() => {
-    const regex = /(\/){2,}/g;
-    const replaceRegex = /(\/)+/g;
-    const pathname = window.location.pathname;
-
-    if (regex.test(pathname))
-      window.location.replace(pathname.replace(replaceRegex, "$1"));
-  }, []);
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <MobxProvider {...store}>
-        <I18nextProvider i18n={i18n}>
-          <ThemeProvider>
-            <ErrorBoundary>
-              <RouterProvider router={router} />
-            </ErrorBoundary>
-          </ThemeProvider>
-        </I18nextProvider>
-      </MobxProvider>
-    </QueryClientProvider>
-  );
+export const successUserPhoto = {
+  original: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  retina: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  max: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  big: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  medium: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
+  small: `${BASE_URL}/static/images/default_user_photo_size_82-82.png`,
 };
 
-export default App;
+export const userPhotoResolver = (userId: string): Response => {
+  // Don't return photos for anonymous users
+  if (userId.startsWith("uid-")) {
+    return new HttpResponse(null, { status: 404 });
+  }
+
+  return new Response(JSON.stringify({ response: successUserPhoto }));
+};
+
+export const userPhotoHandler = (port?: string) => {
+  let baseUrl;
+  if (port) {
+    baseUrl = `${BASE_URL}:${port}`;
+  } else {
+    baseUrl =
+      typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
+  }
+
+  return http.get(
+    `${baseUrl}/${API_PREFIX}/${PATH_USER_PHOTO}`,
+    ({ params }) => {
+      const { userId } = params;
+      return userPhotoResolver(userId as string);
+    },
+  );
+};

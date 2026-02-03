@@ -247,6 +247,11 @@ export type ExportChatEventData =
  *
  * Each callback can have specific parameters and a return type, which are defined for each event.
  */
+export type TEditFileData =
+  | number
+  | string
+  | { fileId: number | string; editingBy: Record<string, string> };
+
 export type TListenEventCallbackMap = {
   [SocketEvents.LogoutSession]: (data: {
     loginEventId: unknown;
@@ -267,8 +272,8 @@ export type TListenEventCallbackMap = {
     fileId: number | string;
     count: number;
   }) => void;
-  [SocketEvents.StartEditFile]: (id: number | string) => void;
-  [SocketEvents.StopEditFile]: (id: number | string) => void;
+  [SocketEvents.StartEditFile]: (data: TEditFileData) => void;
+  [SocketEvents.StopEditFile]: (data: TEditFileData) => void;
   [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;

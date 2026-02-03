@@ -37,6 +37,7 @@ export enum ContentType {
 }
 
 export enum ProviderType {
+  PortalAi = 0,
   OpenAi = 1,
   TogetherAi = 2,
   OpenAiCompatible = 3,
