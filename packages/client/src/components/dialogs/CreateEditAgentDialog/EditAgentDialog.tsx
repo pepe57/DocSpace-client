@@ -254,7 +254,8 @@ const EditAgentDialog = ({
           isDisabled={
             !cover
               ? isWrongTitle ||
-                compareRoomParams(prevRoomParams.current, agentParams) || !isModelSelected
+                compareRoomParams(prevRoomParams.current, agentParams) ||
+                !isModelSelected
               : false
           }
           isLoading={isLoading}

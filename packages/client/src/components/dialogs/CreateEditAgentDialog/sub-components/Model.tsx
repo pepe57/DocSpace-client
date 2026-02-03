@@ -40,7 +40,7 @@ import {
 import { toastr } from "@docspace/shared/components/toast";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
-import {FieldContainer} from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 import { modelCache } from "./modelCache";
@@ -97,7 +97,10 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       try {
         setIsProvidersLoading(true);
 
-        const [p, defaultProvider] = await Promise.all([getProviders(), getDefaultProvider()])
+        const [p, defaultProvider] = await Promise.all([
+          getProviders(),
+          getDefaultProvider(),
+        ]);
 
         const enabledProviders = p.filter((pr) => !pr.needReset);
         setProviders(enabledProviders);
@@ -343,18 +346,20 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             errorMessage={error || ""}
             errorMessageWidth="100%"
             removeMargin
-          ><ComboBox
-            options={providerOptions}
-            selectedOption={providerSelectedOption}
-            onSelect={onSelectProvider}
-            scaled
-            scaledOptions
-            noBorder={false}
-            className={classNames("ai-combobox provider-combobox", {
-              "has-error": !!error,
-            })}
-            displaySelectedOption
-          /></FieldContainer>
+          >
+            <ComboBox
+              options={providerOptions}
+              selectedOption={providerSelectedOption}
+              onSelect={onSelectProvider}
+              scaled
+              scaledOptions
+              noBorder={false}
+              className={classNames("ai-combobox provider-combobox", {
+                "has-error": !!error,
+              })}
+              displaySelectedOption
+            />
+          </FieldContainer>
         )}
         {!selectedModel && !error ? (
           <RectangleSkeleton width="100%" height="32px" />
