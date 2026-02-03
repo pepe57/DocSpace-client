@@ -48,6 +48,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
+import i18n from "../i18n";
 
 class FilesSettingsStore {
   thirdPartyStore;
@@ -309,6 +310,12 @@ class FilesSettingsStore {
     try {
       const res = await setOrganizeGrouping(data);
       this.setFilesSetting("organizeRoomsGrouping", res);
+
+      const message = res
+        ? i18n.t("GroupingRooms:RoomGroupingEnabled")
+        : i18n.t("GroupingRooms:RoomGroupingDisabled");
+      toastr.success(message);
+
       return res;
     } catch (e) {
       toastr.error(e);

@@ -27,5 +27,7 @@
     "RoomList": "Room list",
     "RoomRemovedFromGroup": "The selected room has been removed from <1>{{groupName}}</1>.",
     "RoomsAddedToGroup": "The selected rooms have been added to <1>{{groupName}}</1>.",
-    "RoomsRemovedFromGroup": "The selected rooms have been removed from <1>{{groupName}}</1>."
+    "RoomsRemovedFromGroup": "The selected rooms have been removed from <1>{{groupName}}</1>.",
+    "RoomGroupingEnabled": "Room grouping is enabled",
+    "RoomGroupingDisabled": "Room grouping is disabled"
 }
