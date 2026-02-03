@@ -51,6 +51,7 @@ import {
   sdkSource,
   sdkVersion,
   FILE_TYPE_CATEGORIES,
+  FILE_TYPE_EXTENSIONS,
 } from "../constants";
 
 import {
@@ -81,7 +82,7 @@ const Uploader = (props) => {
     height: `${defaultSize.height}${defaultDimension.label}`,
     frameId: "ds-frame",
     init: true,
-    acceptCategories: "document",
+    acceptExtensions: FILE_TYPE_EXTENSIONS.document.join(","),
     linkMainText: t("Common:Upload"),
     linkSecondaryText: t("Common:DropzoneTitleSecondary"),
     events: {
@@ -90,6 +91,9 @@ const Uploader = (props) => {
       },
       onUploadError: (data) => {
         console.log("onUploadError", data);
+      },
+      onUploadProgress: (data) => {
+        console.log("onUploadProgress", data);
       },
     },
   });
@@ -152,24 +156,37 @@ const Uploader = (props) => {
     });
   };
 
-  const getSelectedCategories = () => {
-    return config.acceptCategories ? config.acceptCategories.split(",") : [];
+  const getSelectedExtensions = () => {
+    return config.acceptExtensions ? config.acceptExtensions.split(",") : [];
+  };
+
+  const isCategorySelected = (category) => {
+    const selectedExtensions = getSelectedExtensions();
+    const categoryExtensions = FILE_TYPE_EXTENSIONS[category] || [];
+    return categoryExtensions.every((ext) => selectedExtensions.includes(ext));
   };
 
   const onChangeCategoryCheckbox = (category) => {
-    const selectedCategories = getSelectedCategories();
-    const isSelected = selectedCategories.includes(category);
+    const selectedExtensions = getSelectedExtensions();
+    const categoryExtensions = FILE_TYPE_EXTENSIONS[category] || [];
+    const isSelected = isCategorySelected(category);
 
-    let newCategories;
+    let newExtensions;
     if (isSelected) {
-      newCategories = selectedCategories.filter((c) => c !== category);
+      newExtensions = selectedExtensions.filter(
+        (ext) => !categoryExtensions.includes(ext),
+      );
     } else {
-      newCategories = [...selectedCategories, category];
+      const extensionsSet = new Set([
+        ...selectedExtensions,
+        ...categoryExtensions,
+      ]);
+      newExtensions = [...extensionsSet];
     }
 
     setConfig((oldConfig) => ({
       ...oldConfig,
-      acceptCategories: newCategories.join(","),
+      acceptExtensions: newExtensions.join(","),
       init: true,
     }));
   };
@@ -229,7 +246,7 @@ const Uploader = (props) => {
                   className="checkbox"
                   label={t(category.labelKey)}
                   onChange={() => onChangeCategoryCheckbox(category.key)}
-                  isChecked={getSelectedCategories().includes(category.key)}
+                  isChecked={isCategorySelected(category.key)}
                   dataTestId={`${category.key}_checkbox`}
                 />
               ))}

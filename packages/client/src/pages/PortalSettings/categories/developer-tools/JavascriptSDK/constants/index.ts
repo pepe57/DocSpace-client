@@ -59,3 +59,14 @@ export const FILE_TYPE_CATEGORIES = [
   { key: "archive", labelKey: "Common:Archives" },
   { key: "pdf", labelKey: "PDF" },
 ];
+
+export const FILE_TYPE_EXTENSIONS = {
+  document: [".doc", ".docx", ".odt", ".rtf", ".txt"],
+  spreadsheet: [".xls", ".xlsx", ".ods", ".csv"],
+  presentation: [".ppt", ".pptx", ".odp"],
+  image: [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp", ".svg", ".tiff"],
+  video: [".mp4", ".avi", ".mov", ".mkv", ".webm", ".wmv"],
+  audio: [".mp3", ".wav", ".ogg", ".flac", ".aac", ".wma"],
+  archive: [".zip", ".rar", ".7z", ".tar", ".gz"],
+  pdf: [".pdf"],
+};
