@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http } from "msw";
-import { v4 as uuidv4 } from "uuid";
+import { uuid } from "../../../utils/uuid";
 import { ShareAccessRights } from "../../../enums";
 import { TGetRooms, TRoom } from "../../../api/rooms/types";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
@@ -2661,7 +2661,7 @@ export const createRoomHandler = (port?: string) => {
       const response = {
         ...getRoomList().folders[0],
         title: body.title,
-        id: uuidv4(),
+        id: uuid(),
       };
 
       return new Response(JSON.stringify({ response }));

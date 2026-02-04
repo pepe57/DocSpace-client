@@ -36,6 +36,8 @@ export type FloatingButtonProps = {
   style?: React.CSSProperties;
   /** Sets the icon on the button */
   icon?: keyof typeof FloatingButtonIcons;
+  /** Custom icon URL */
+  iconUrl?: string;
   /** Displays the alert */
   alert?: boolean;
   /**  Sets a callback function that is triggered when the button is clicked */
