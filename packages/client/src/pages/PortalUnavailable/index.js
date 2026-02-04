@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 
 import { Button } from "@docspace/ui-kit/components/button";
 import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
-import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
+import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
 import { Link } from "@docspace/ui-kit/components/link";
 
 const StyledBodyContent = styled.div`
