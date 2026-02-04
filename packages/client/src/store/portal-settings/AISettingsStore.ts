@@ -206,6 +206,14 @@ class AISettingsStore {
 
     if (isDefaultProvider && !isLastProvider) {
       await this.initDefaultProvider();
+
+      const defaultProviderInList = this.aiProviders.find(
+        (p) => p.id === this.defaultProvider?.providerId,
+      );
+
+      if (defaultProviderInList && !defaultProviderInList.isDefault) {
+        defaultProviderInList.isDefault = true;
+      }
     }
   };
 
