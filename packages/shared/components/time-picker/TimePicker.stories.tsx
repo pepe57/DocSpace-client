@@ -26,10 +26,10 @@
 
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import moment from "moment";
 
 import { TimePicker } from "./TimePicker";
 import { TimePickerProps } from "./TimePicker.types";
+import { createDateTime, formatDate, type DateTime } from "../../utils/date";
 
 const meta = {
   title: "Components/TimePicker",
@@ -86,9 +86,10 @@ const Template = (args: TimePickerProps) => {
 export const Default: Story = {
   render: Template,
   args: {
-    initialTime: moment("2025-01-27T10:30:00"),
+    initialTime: createDateTime(2025, 1, 27, 10, 30, 0),
     hasError: false,
-    onChange: (time) => console.log("Time changed:", time?.format("HH:mm")),
+    onChange: (time: DateTime) =>
+      console.log("Time changed:", formatDate(time, "HH:mm")),
     tabIndex: 0,
     focusOnRender: false,
     className: "",

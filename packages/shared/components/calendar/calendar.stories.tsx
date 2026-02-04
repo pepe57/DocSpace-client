@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-import moment from "moment";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { Calendar } from "./Calendar";
 import { CalendarProps } from "./Calendar.types";
+import { now, type DateTime } from "../../utils/date";
 
 const meta = {
   title: "Components/Calendar",
@@ -88,7 +88,7 @@ type Story = StoryObj<typeof Calendar>;
 export default meta;
 
 const Template = ({ locale, minDate, maxDate, ...args }: CalendarProps) => {
-  const [selectedDate, setSelectedDate] = useState(moment());
+  const [selectedDate, setSelectedDate] = useState<DateTime>(now());
   return (
     <Calendar
       {...args}

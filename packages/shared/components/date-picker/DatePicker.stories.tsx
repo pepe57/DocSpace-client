@@ -26,10 +26,18 @@
 
 import React, { useState } from "react";
 import type { Meta, StoryFn } from "@storybook/react";
-import moment from "moment";
 
 import { DatePicker } from "./DatePicker";
 import { DatePickerProps } from "./DatePicker.types";
+import {
+  now,
+  addToDate,
+  startOf,
+  createDateTime,
+  parseToDateTime,
+  formatDate,
+  type DateTime,
+} from "../../utils/date";
 
 export default {
   title: "Components/DatePicker",
@@ -92,8 +100,8 @@ const Template: StoryFn<typeof DatePicker> = ({
   initialDate,
   ...rest
 }: DatePickerProps) => {
-  const [selectedDate, setSelectedDate] = useState<moment.Moment | null>(
-    initialDate ? moment(initialDate) : null,
+  const [selectedDate, setSelectedDate] = useState<DateTime | null>(
+    initialDate ? parseToDateTime(initialDate) : null,
   );
 
   return (
@@ -113,41 +121,44 @@ const Template: StoryFn<typeof DatePicker> = ({
 
 export const Default = Template.bind({});
 Default.args = {
-  maxDate: moment().add(10, "years").startOf("year"),
-  minDate: moment("1970-01-01"),
-  openDate: moment(),
+  maxDate: startOf(addToDate(now(), 10, "years")!, "year")!,
+  minDate: createDateTime(1970, 1, 1),
+  openDate: now(),
   locale: "en",
   selectDateText: "Select date",
   onChange: (date) =>
-    console.log("Selected date:", date?.format("DD MMM YYYY") ?? "No date"),
+    console.log(
+      "Selected date:",
+      date ? formatDate(date, "dd MMM yyyy") : "No date",
+    ),
 };
 
 export const WithInitialDate = Template.bind({});
 WithInitialDate.args = {
   ...Default.args,
-  initialDate: moment(),
+  initialDate: now(),
   selectDateText: "Date with initial value",
 };
 
 export const WithCustomOpenDate = Template.bind({});
 WithCustomOpenDate.args = {
   ...Default.args,
-  openDate: moment().add(1, "month"),
+  openDate: addToDate(now(), 1, "months")!,
   selectDateText: "Date with custom open date",
 };
 
 export const WithFutureOnlyDates = Template.bind({});
 WithFutureOnlyDates.args = {
   ...Default.args,
-  minDate: moment().startOf("day"),
+  minDate: startOf(now(), "day")!,
   selectDateText: "Only future dates available",
 };
 
 export const WithSpecificYear = Template.bind({});
 WithSpecificYear.args = {
   ...Default.args,
-  minDate: moment("2023-01-01"),
-  maxDate: moment("2023-12-31"),
-  openDate: moment("2023-06-15"),
+  minDate: createDateTime(2023, 1, 1),
+  maxDate: createDateTime(2023, 12, 31),
+  openDate: createDateTime(2023, 6, 15),
   selectDateText: "Only dates from 2023",
 };
