@@ -33,9 +33,9 @@ import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ALLOWED_PASSWORD_CHARACTERS } from "../../constants";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
+import { PasswordInput } from "../../components/password-input";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import type { PasswordInputHandle } from "@docspace/ui-kit/components/password-input";
+import type { PasswordInputHandle } from "../../components/password-input";
 
 import ToggleBlock from "./ToggleBlock";
 import type { PasswordAccessBlockProps } from "./EditLinkPanel.types";

@@ -50,7 +50,7 @@ import { EmailSettings } from "@docspace/shared/utils";
 import {
   PasswordInput,
   PasswordInputHandle,
-} from "@docspace/ui-kit/components/password-input";
+} from "@docspace/shared/components/password-input";
 import { FileInput } from "@docspace/shared/components/file-input";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";

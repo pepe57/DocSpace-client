@@ -36,7 +36,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { WebSearchType } from "@docspace/shared/api/ai/enums";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
+import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";

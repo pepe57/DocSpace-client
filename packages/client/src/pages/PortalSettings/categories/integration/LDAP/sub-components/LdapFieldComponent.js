@@ -28,87 +28,87 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
+import { PasswordInput } from "@docspace/shared/components/password-input";
 
 const LdapFieldComponent = (props) => {
-  const {
-    isTextArea,
-    removeErrorField,
-    setErrorField,
-    name,
-    onChange,
-    isPassword,
-    dataTestId,
-    ...rest
-  } = props;
+	const {
+		isTextArea,
+		removeErrorField,
+		setErrorField,
+		name,
+		onChange,
+		isPassword,
+		dataTestId,
+		...rest
+	} = props;
 
-  const onChangeFn = (e) => {
-    const { value, name: inputName } = e.target;
+	const onChangeFn = (e) => {
+		const { value, name: inputName } = e.target;
 
-    if (value.trim() !== "") {
-      removeErrorField(inputName);
-    } else {
-      setErrorField(inputName);
-    }
+		if (value.trim() !== "") {
+			removeErrorField(inputName);
+		} else {
+			setErrorField(inputName);
+		}
 
-    onChange && onChange(e);
-  };
+		onChange && onChange(e);
+	};
 
-  // const onFocus = (e) => {
-  //   const name = e.target.name;
-  //   if (errors[name]) {
-  //     removeErrorField(name);
-  //   }
-  // };
+	// const onFocus = (e) => {
+	//   const name = e.target.name;
+	//   if (errors[name]) {
+	//     removeErrorField(name);
+	//   }
+	// };
 
-  const onBlur = (e) => {
-    if (e.target.value.trim() === "") {
-      setErrorField(e.target.name);
-    }
-  };
+	const onBlur = (e) => {
+		if (e.target.value.trim() === "") {
+			setErrorField(e.target.name);
+		}
+	};
 
-  if (isTextArea)
-    return (
-      <Textarea
-        dataTestId={dataTestId ? `${dataTestId}_textarea` : undefined}
-        name={name}
-        onChange={onChangeFn}
-        {...rest}
-      />
-    );
+	if (isTextArea)
+		return (
+			<Textarea
+				dataTestId={dataTestId ? `${dataTestId}_textarea` : undefined}
+				name={name}
+				onChange={onChangeFn}
+				{...rest}
+			/>
+		);
 
-  if (isPassword) {
-    return (
-      <PasswordInput
-        testId={dataTestId ? `${dataTestId}_password_input` : undefined}
-        inputName={name}
-        inputValue={rest?.value || ""}
-        onBlur={onBlur}
-        // onFocus={onFocus}
-        onChange={onChangeFn}
-        {...rest}
-      />
-    );
-  }
+	if (isPassword) {
+		return (
+			<PasswordInput
+				testId={dataTestId ? `${dataTestId}_password_input` : undefined}
+				inputName={name}
+				inputValue={rest?.value || ""}
+				onBlur={onBlur}
+				// onFocus={onFocus}
+				onChange={onChangeFn}
+				{...rest}
+			/>
+		);
+	}
 
-  return (
-    <TextInput
-      testId={dataTestId ? `${dataTestId}_input` : undefined}
-      name={name}
-      onBlur={onBlur}
-      // onFocus={onFocus}
-      onChange={onChangeFn}
-      {...rest}
-    />
-  );
+	return (
+		<TextInput
+			testId={dataTestId ? `${dataTestId}_input` : undefined}
+			name={name}
+			onBlur={onBlur}
+			// onFocus={onFocus}
+			onChange={onChangeFn}
+			{...rest}
+		/>
+	);
 };
 
 export default inject(({ ldapStore }) => {
-  const { errors, removeErrorField, setErrorField } = ldapStore;
+	const { errors, removeErrorField, setErrorField } = ldapStore;
 
-  return {
-    errors,
-    removeErrorField,
-    setErrorField,
-  };
+	return {
+		errors,
+		removeErrorField,
+		setErrorField,
+	};
 })(observer(LdapFieldComponent));

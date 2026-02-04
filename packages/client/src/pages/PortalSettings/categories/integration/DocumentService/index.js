@@ -33,7 +33,7 @@ import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { Label } from "@docspace/ui-kit/components/label";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
+import { PasswordInput } from "@docspace/shared/components/password-input";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
