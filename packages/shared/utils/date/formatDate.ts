@@ -289,3 +289,34 @@ export function getMonths(
 export function getMonthsShort(locale?: string): string[] {
   return Info.months("short", { locale });
 }
+
+/**
+ * Gets the first day of week for a locale (0 = Sunday, 1 = Monday, etc.)
+ * Most locales use Monday (1), US/Canada use Sunday (0)
+ * @param locale - Locale string
+ * @returns First day of week (0-6)
+ */
+export function getFirstDayOfWeek(locale?: string): number {
+  // Locales that typically start the week on Sunday
+  const sundayStartLocales = [
+    "en-US",
+    "en-CA",
+    "en-AU",
+    "he",
+    "ar",
+    "ko",
+    "zh",
+    "ja",
+  ];
+
+  const normalizedLocale = locale?.toLowerCase() || "en";
+
+  // Check if the locale starts with any of the Sunday-start locales
+  const startsSunday = sundayStartLocales.some(
+    (l) =>
+      normalizedLocale === l.toLowerCase() ||
+      normalizedLocale.startsWith(`${l.toLowerCase()}-`),
+  );
+
+  return startsSunday ? 0 : 1;
+}

@@ -27,7 +27,7 @@
 // @ts-nocheck
 
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import moment from "moment";
+import type { DateTime } from "../../utils/date";
 
 import {
   ConflictResolveType,
@@ -1595,7 +1595,7 @@ export async function getPrimaryLinkIfNotExistCreate(
   fileId: number | string,
   access: ShareAccessRights,
   internal: boolean,
-  expirationDate: moment.Moment | null,
+  expirationDate: DateTime | string | null,
 ) {
   const res = (await request(
     {
@@ -1612,7 +1612,7 @@ export async function getOrCreatePrimaryFolderLink(
   folderId: number | string,
   access?: ShareAccessRights,
   internal?: boolean,
-  expirationDate?: moment.Moment | null,
+  expirationDate?: DateTime | string | null,
 ) {
   const res = (await request(
     {
@@ -1641,7 +1641,7 @@ export async function editExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate: moment.Moment | string | null,
+  expirationDate: DateTime | string | string | null,
   title: string,
   password?: string,
   denyDownload?: boolean,
@@ -1669,7 +1669,7 @@ export async function editExternalFolderLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate: moment.Moment | string | null,
+  expirationDate: DateTime | string | string | null,
   title: string,
   password?: string,
   denyDownload?: boolean,
@@ -1697,7 +1697,7 @@ export async function addExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate?: moment.Moment | null,
+  expirationDate?: DateTime | string | null,
 ) {
   const res = (await request({
     method: "put",
@@ -1712,7 +1712,7 @@ export async function addExternalFolderLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate?: moment.Moment | null,
+  expirationDate?: DateTime | string | null,
 ) {
   const res = (await request({
     method: "put",
