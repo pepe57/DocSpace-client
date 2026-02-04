@@ -41,7 +41,6 @@ import StyledSettingsSeparator from "../../StyledSettingsSeparator";
 
 const StorageManagementWrapper = (props) => {
   const {
-    language,
     clearIntervalCheckRecalculate,
     standalone,
     showPortalSettingsLoader,
@@ -76,14 +75,12 @@ const StorageManagementWrapper = (props) => {
 };
 
 export const Component = inject(
-  ({ authStore, storageManagement, settingsStore, clientLoadingStore }) => {
-    const { language } = authStore;
+  ({ storageManagement, settingsStore, clientLoadingStore }) => {
     const { clearIntervalCheckRecalculate } = storageManagement;
     const { standalone } = settingsStore;
     const { showPortalSettingsLoader } = clientLoadingStore;
 
     return {
-      language,
       clearIntervalCheckRecalculate,
       standalone,
       showPortalSettingsLoader,
