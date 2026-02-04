@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React, { FC } from "react";
-import type moment from "moment";
 
 import type { TFileLink } from "../../../api/files/types";
+import type { DateTime } from "../../../utils/date";
 import type { TTranslation } from "../../../types";
 
 import { Text } from "../../text";
@@ -44,7 +44,7 @@ export interface LinkExpirationProps {
   removedExpiredLink: (link: TFileLink) => void;
   changeExpirationOption: (
     link: TFileLink,
-    expirationDate: moment.Moment | null,
+    expirationDate: DateTime | null,
   ) => Promise<void>;
 }
 
