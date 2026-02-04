@@ -34,15 +34,17 @@ import {
   getWebSearchInRoom,
 } from "../../../api/ai";
 import { TAIConfig, TMCPTool, TServer } from "../../../api/ai/types";
+import { TAIRoomChatSettings } from "../../../api/rooms/types";
 import { Nullable } from "../../../types";
 import { RoomsType } from "../../../enums";
 
 type Props = {
   roomId: string | number;
   aiConfig: Nullable<TAIConfig>;
+  chatSettings?: TAIRoomChatSettings;
 };
 
-const useToolsSettings = ({ roomId, aiConfig }: Props) => {
+const useToolsSettings = ({ roomId, aiConfig, chatSettings }: Props) => {
   const [servers, setServers] = React.useState<TServer[]>([]);
   const [MCPTools, setMCPTools] = React.useState<Map<string, TMCPTool[]>>(
     new Map(),
@@ -127,7 +129,8 @@ const useToolsSettings = ({ roomId, aiConfig }: Props) => {
   return {
     servers,
     MCPTools,
-    webSearchPortalEnabled: aiConfig?.webSearchEnabled || false,
+    webSearchAvailable:
+      aiConfig?.webSearchEnabled || chatSettings?.internal || false,
     webSearchEnabled,
     isFetched,
     knowledgeSearchToolName: aiConfig?.knowledgeSearchToolName || "",

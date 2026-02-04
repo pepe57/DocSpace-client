@@ -131,6 +131,11 @@ const Section = (props: SectionProps) => {
     startDropPreview,
     fullHeightBody,
     asideInfoPanel,
+
+    pluginOperations = [],
+    pluginOperationsCompleted,
+    pluginOperationsAlert,
+    pluginShowCancelButton,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -216,31 +221,51 @@ const Section = (props: SectionProps) => {
   const isShowOperationButton =
     secondaryActiveOperations?.length ||
     primaryOperationsArray?.length ||
+    pluginOperations?.length ||
     startDropPreview;
 
   const isCompletedOperations = useMemo(() => {
-    if (
-      secondaryActiveOperations?.length > 0 &&
-      primaryOperationsArray?.length > 0 &&
-      secondaryActiveOperations.length + primaryOperationsArray.length > 1
-    )
-      return secondaryOperationsCompleted && primaryOperationsCompleted;
+    const hasMultipleOperations =
+      (secondaryActiveOperations?.length || 0) +
+        (primaryOperationsArray?.length || 0) +
+        (pluginOperations?.length || 0) >
+      1;
+
+    if (hasMultipleOperations) {
+      const completionStates = [];
+
+      if (secondaryActiveOperations?.length)
+        completionStates.push(secondaryOperationsCompleted);
+
+      if (primaryOperationsArray?.length)
+        completionStates.push(primaryOperationsCompleted);
+
+      if (pluginOperations?.length)
+        completionStates.push(pluginOperationsCompleted);
+
+      return completionStates.every((state) => state);
+    }
+
+    if (pluginOperations?.length > 0) return pluginOperationsCompleted;
 
     if (secondaryActiveOperations?.length > 0)
       return secondaryOperationsCompleted;
-
+    
     return primaryOperationsCompleted;
   }, [
     secondaryOperationsCompleted,
     primaryOperationsCompleted,
+    pluginOperationsCompleted,
     secondaryActiveOperations,
     primaryOperationsArray,
+    pluginOperations,
   ]);
 
   const showCancelButton =
-    primaryOperationsArray.length > 0 &&
-    !primaryOperationsCompleted &&
-    primaryOperationsArray.some((op) => op.operation === "upload");
+    (primaryOperationsArray.length > 0 &&
+      !primaryOperationsCompleted &&
+      primaryOperationsArray.some((op) => op.operation === "upload")) ||
+    pluginShowCancelButton;
 
   const isInfoVisible = canDisplay && isInfoPanelVisible;
 
@@ -326,11 +351,18 @@ const Section = (props: SectionProps) => {
         {isShowOperationButton ? (
           <OperationsProgressButton
             clearOperationsData={clearSecondaryProgressData}
-            operations={secondaryActiveOperations}
+            operations={[
+              ...(secondaryActiveOperations || []),
+              ...(pluginOperations || []),
+            ]}
             operationsCompleted={isCompletedOperations}
             clearPanelOperationsData={clearPrimaryProgressData}
             clearDropPreviewLocation={clearDropPreviewLocation}
-            operationsAlert={primaryOperationsAlert || secondaryOperationsAlert}
+            operationsAlert={
+              primaryOperationsAlert ||
+              secondaryOperationsAlert ||
+              pluginOperationsAlert
+            }
             needErrorChecking={needErrorChecking}
             panelOperations={primaryOperationsArray}
             cancelUpload={cancelUpload}
