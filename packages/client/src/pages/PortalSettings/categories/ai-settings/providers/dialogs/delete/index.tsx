@@ -63,8 +63,10 @@ const DeleteDialogComponent = ({
 
   const onSubmit = async () => {
     try {
+      setLoading(true);
+
       await deleteAIProvider?.(providerId);
-      await getAIConfig?.();
+      getAIConfig?.();
 
       toastr.success(
         t("AISettings:ProviderRemovedSuccess", {

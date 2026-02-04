@@ -203,25 +203,27 @@ class AISettingsStore {
 
     await deleteProviders({ ids: [id] });
 
-    this.aiProviders = this.aiProviders.filter(
-      (provider) => provider.id !== id,
-    );
-
-    if (isLastProvider) {
-      this.clearDefaultProviderData();
-    }
-
-    if (isDefaultProvider && !isLastProvider) {
-      await this.initDefaultProvider();
-
-      const defaultProviderInList = this.aiProviders.find(
-        (p) => p.id === this.defaultProvider?.providerId,
+    runInAction(async () => {
+      this.aiProviders = this.aiProviders.filter(
+        (provider) => provider.id !== id,
       );
 
-      if (defaultProviderInList && !defaultProviderInList.isDefault) {
-        defaultProviderInList.isDefault = true;
+      if (isLastProvider) {
+        this.clearDefaultProviderData();
       }
-    }
+
+      if (isDefaultProvider && !isLastProvider) {
+        await this.initDefaultProvider();
+
+        const defaultProviderInList = this.aiProviders.find(
+          (p) => p.id === this.defaultProvider?.providerId,
+        );
+
+        if (defaultProviderInList && !defaultProviderInList.isDefault) {
+          defaultProviderInList.isDefault = true;
+        }
+      }
+    })
   };
 
   fetchAIProviders = async () => {
