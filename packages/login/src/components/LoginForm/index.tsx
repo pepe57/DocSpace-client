@@ -50,7 +50,7 @@ import { login } from "@docspace/shared/utils/loginUtils";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
-import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { TValidate } from "@docspace/ui-kit/components/email-input";
 import { ButtonKeys } from "@docspace/shared/enums";
 import { getCookie } from "@docspace/shared/utils";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";

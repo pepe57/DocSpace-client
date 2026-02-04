@@ -30,7 +30,7 @@ import { ChangeEvent, KeyboardEvent, Ref } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { EmailInput, TValidate } from "@docspace/shared/components/email-input";
+import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { Text } from "@docspace/ui-kit/components/text";

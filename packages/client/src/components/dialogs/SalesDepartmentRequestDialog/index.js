@@ -38,7 +38,7 @@ import {
 	ModalDialog,
 	ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import { EmailInput } from "@docspace/shared/components/email-input";
+import { EmailInput } from "@docspace/ui-kit/components/email-input";
 import { ErrorKeys } from "@docspace/shared/enums";
 
 const SalesDepartmentRequestDialog = ({
