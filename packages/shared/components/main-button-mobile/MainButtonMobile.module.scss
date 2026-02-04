@@ -139,7 +139,6 @@
 }
 
 .buttonOptions {
-  padding: 16px 0;
   background-color: var(--main-button-mobile-button-options-background-color);
   color: var(--main-button-mobile-button-options-color);
 
@@ -174,8 +173,8 @@
   }
 }
 
-.containerAction {
-  padding: 16px 0px;
+:where(.containerAction, .buttonOptions) {
+  padding: 16px 0;
 
   .sublevel {
     padding-inline-start: 48px;
