@@ -61,7 +61,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { ButtonKeys } from "@docspace/shared/enums";
-import { TValidate } from "@docspace/shared/components/email-input";
+import { TValidate } from "@docspace/ui-kit/components/email-input";
 import { TCreateUserData, TError } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import { Text } from "@docspace/ui-kit/components/text";

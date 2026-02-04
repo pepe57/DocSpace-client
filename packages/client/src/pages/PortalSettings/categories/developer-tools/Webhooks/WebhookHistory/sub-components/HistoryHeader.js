@@ -50,7 +50,7 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { useTranslation } from "react-i18next";
 
-import { FloatingButton } from "@docspace/shared/components/floating-button";
+import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 
 import { globalColors } from "@docspace/shared/themes";
 

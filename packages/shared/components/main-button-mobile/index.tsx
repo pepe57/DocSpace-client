@@ -39,7 +39,10 @@ import { IconSizeType, classNames } from "../../utils";
 
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import { FloatingButton, FloatingButtonIcons } from "../floating-button";
+import {
+  FloatingButton,
+  FloatingButtonIcons,
+} from "@docspace/ui-kit/components/floating-button";
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { DropDownItem } from "../drop-down-item";
 

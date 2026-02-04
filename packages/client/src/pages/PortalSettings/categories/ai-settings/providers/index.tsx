@@ -38,7 +38,6 @@ import type {
   TProviderTypeWithUrl,
 } from "@docspace/shared/api/ai/types";
 import { getAvailableProviderUrls } from "@docspace/shared/api/ai";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
@@ -50,6 +49,8 @@ import { DeleteAIProviderDialog } from "./dialogs/delete";
 
 import { AiProviderTile } from "./Tile";
 import { ProvidersLoader } from "./ProvidersLoader";
+import { DefaultProvider } from "./DefaultProvider";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 type TDeleteDialogData =
   | {
@@ -78,6 +79,7 @@ type AIProviderProps = {
   isProviderAvailable?: AISettingsStore["isProviderAvailable"];
   cancelAvailabilityCheck?: AISettingsStore["cancelAvailabilityCheck"];
   aiProviderSettingsUrl?: SettingsStore["aiProviderSettingsUrl"];
+  isDefaultProviderSettingsAvailable?: AISettingsStore["isDefaultProviderSettingsAvailable"];
 };
 
 const AIProviderComponent = ({
@@ -87,6 +89,7 @@ const AIProviderComponent = ({
   isProviderAvailable,
   cancelAvailabilityCheck,
   aiProviderSettingsUrl,
+  isDefaultProviderSettingsAvailable,
 }: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setaddDialogVisible] = useState(false);
@@ -112,6 +115,17 @@ const AIProviderComponent = ({
     setDeleteDialogData({ visible: false, providerId: null });
 
   const onDeleteAIProvider = async (id: TAiProvider["id"]) => {
+    const provider = aiProviders?.find((p) => p.id === id);
+
+    // Todo: Add translation when design are ready
+    const defaultProviderWarning =
+      "This provider is currently your default. To delete it, please set a different provider as the default first.";
+
+    if (aiProviders && aiProviders.length > 1 && provider?.isDefault) {
+      toastr.info(defaultProviderWarning);
+      return;
+    }
+
     setDeleteDialogData({ visible: true, providerId: id });
   };
 
@@ -193,6 +207,8 @@ const AIProviderComponent = ({
         ))}
       </div>
 
+      {isDefaultProviderSettingsAvailable ? <DefaultProvider /> : null}
+
       {addDialogVisible ? (
         <AddUpdateProviderDialog
           variant="add"
@@ -229,6 +245,8 @@ export const AIProvider = inject(
       isProviderAvailable: aiSettingsStore.isProviderAvailable,
       cancelAvailabilityCheck: aiSettingsStore.cancelAvailabilityCheck,
       aiProviderSettingsUrl: settingsStore.aiProviderSettingsUrl,
+      isDefaultProviderSettingsAvailable:
+        aiSettingsStore.isDefaultProviderSettingsAvailable,
     };
   },
 )(observer(AIProviderComponent));

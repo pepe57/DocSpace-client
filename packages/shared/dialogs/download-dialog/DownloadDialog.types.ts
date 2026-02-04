@@ -29,7 +29,7 @@
 import type { JSX } from "react";
 import type { TTranslation } from "../../types";
 import type { TFile, TFolder } from "../../api/files/types";
-import type { LinkWithDropDownProps } from "../../components/link-with-dropdown";
+import type { LinkWithDropDownProps } from "@docspace/ui-kit/components/link-with-dropdown";
 import type { ContextMenuTypeOnClick } from "@docspace/ui-kit/components/context-menu";
 
 import {

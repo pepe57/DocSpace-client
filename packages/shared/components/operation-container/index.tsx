@@ -32,7 +32,7 @@ import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { OperationContainerProps } from "./OperationContainer.types";
 import { Text } from "@docspace/ui-kit/components/text";
-import PortalLogo from "../portal-logo/PortalLogo";
+import PortalLogo from "@docspace/ui-kit/components/portal-logo/PortalLogo";
 
 import styles from "./OperationContainer.module.scss";
 

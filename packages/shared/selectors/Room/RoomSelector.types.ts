@@ -27,47 +27,49 @@
 import { WithFlag } from "../../types";
 import { TRoom } from "../../api/rooms/types";
 import {
-	TSelectorCancelButton,
-	TSelectorHeader,
-	TSelectorItem,
+  TSelectorCancelButton,
+  TSelectorHeader,
+  TSelectorItem,
+  TSelectorWithAside,
 } from "@docspace/ui-kit/components/selector";
 
 import { RoomSearchArea, RoomsType } from "../../enums";
 
 export type TInitValue = WithFlag<
-	"withInit",
-	{
-		withInit: true;
-		initItems: TRoom[];
-		initTotal: number;
-		initHasNextPage: boolean;
-		initSearchValue?: string;
-	}
+  "withInit",
+  {
+    withInit: true;
+    initItems: TRoom[];
+    initTotal: number;
+    initHasNextPage: boolean;
+    initSearchValue?: string;
+  }
 >;
 
 export type RoomSelectorProps = TSelectorHeader &
-	TSelectorCancelButton & {
-		id?: string;
-		className?: string;
-		style?: React.CSSProperties;
+  TSelectorCancelButton &
+  TSelectorWithAside & {
+    id?: string;
+    className?: string;
+    style?: React.CSSProperties;
 
-		isMultiSelect: boolean;
+    isMultiSelect: boolean;
 
-		onSubmit: (items: TSelectorItem[]) => void | Promise<void>;
-		roomType?: RoomsType | RoomsType[];
-		searchArea?: RoomSearchArea | string;
-		excludeItems?: (number | string | undefined)[];
-		setIsDataReady?: (value: boolean) => void;
-		submitButtonLabel?: string;
+    onSubmit: (items: TSelectorItem[]) => void | Promise<void>;
+    roomType?: RoomsType | RoomsType[];
+    searchArea?: RoomSearchArea | string;
+    excludeItems?: (number | string | undefined)[];
+    setIsDataReady?: (value: boolean) => void;
+    submitButtonLabel?: string;
 
-		disableThirdParty?: boolean;
+    disableThirdParty?: boolean;
 
-		withPadding?: boolean;
-		withSearch?: boolean;
-		withCreate?: boolean;
-		createDefineRoomLabel?: string;
-		createDefineRoomType?: RoomsType;
+    withPadding?: boolean;
+    withSearch?: boolean;
+    withCreate?: boolean;
+    createDefineRoomLabel?: string;
+    createDefineRoomType?: RoomsType;
 
-		emptyScreenHeader?: string;
-		emptyScreenDescription?: string;
-	} & TInitValue;
+    emptyScreenHeader?: string;
+    emptyScreenDescription?: string;
+  } & TInitValue;

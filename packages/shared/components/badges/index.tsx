@@ -31,7 +31,6 @@ import React, { useMemo, useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import FileActionsConvertEditDocReactSvg from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?url";
@@ -132,6 +131,7 @@ const Badges = ({
   onClickLock,
   onClickFavorite,
   isPublicRoom,
+  editorsTooltip,
 }: BadgesProps) => {
   const {
     id,
@@ -173,8 +173,6 @@ const Badges = ({
   const paddingBadge = isTile || tabletViewBadge ? "0 5px" : "0 5px";
 
   const fontSizeBadge = isTile || tabletViewBadge ? "11px" : "9px";
-
-  const iconEdit = <FileActionsConvertEditDocReactSvg />;
 
   const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
   const iconLock = desktopView ? LockedIconReact12Svg : LockedIconReactSvg;
@@ -365,19 +363,7 @@ const Badges = ({
         </BadgeWrapper>
       ) : null}
 
-      {isEditing ? (
-        <IconButton
-          iconNode={iconEdit}
-          className={classNames(
-            styles.iconBadge,
-            "badge icons-group is-editing tablet-badge tablet-edit",
-          )}
-          onClick={onFilesClick}
-          color="accent"
-          hoverColor="accent"
-          title={t("Common:EditButton")}
-        />
-      ) : null}
+      {isEditing ? <>{editorsTooltip}</> : null}
 
       {locked && !isTile ? (
         <div

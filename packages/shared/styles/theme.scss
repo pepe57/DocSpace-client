@@ -1172,18 +1172,6 @@
 }
 
 .light {
-  --dropzone-border: 2px dashed #{$gray-light-mid};
-  --dropzone-secondary-link: #${black};
-  --dropzone-exsts-color: #{$gray};
-}
-
-.dark {
-  --dropzone-border: 2px dashed #{$gray-dark-strong};
-  --dropzone-secondary-link: #${white};
-  --dropzone-exsts-color: #{$gray};
-}
-
-.light {
   --social-button-border: 1px solid #{$gray-strong};
   --social-button-text-color: #{$black};
   --social-button-connect-text-color: #{$white};
@@ -2389,6 +2377,32 @@
 }
 
 .light {
+  --modified-text-color: #{$gray};
+  --modified-badge-background-color: #{$gray};
+  --modified-badge-active-background-color: var(
+    --color-scheme-main-accent,
+    #{$light-blue-main}
+  );
+}
+
+.dark {
+  --modified-text-color: #{$gray-dark};
+  --modified-badge-background-color: #{$gray-dark};
+  --modified-badge-active-background-color: var(
+    --color-scheme-main-accent,
+    #{$light-blue-main}
+  );
+}
+
+.light {
+  --mcp-icon-bg-opacity: 1;
+}
+
+.dark {
+  --mcp-icon-bg-opacity: 0.1;
+}
+
+.light {
   --delete-image-link-color: #{$light-gray-dark};
 }
 
@@ -2463,6 +2477,7 @@
 .dark {
   --oauth-info-separator-color: #{$gray-dark-strong};
 }
+
 .light {
   --template-gallery-header-border: #{$gray-light-mid};
 
@@ -2641,9 +2656,19 @@
 .light {
   --tfa-text-color: #{$gray};
   --icon-error-color: #{$light-error-status};
+  --default-templates-border-color: #{$gray-light-mid};
 }
 
 .dark {
   --tfa-text-color: #{$gray-dark};
   --icon-error-color: #{$dark-error-status};
+  --default-templates-border-color: #{$gray-dark-mid};
+}
+
+.light { 
+  --editors-tooltip-header-color: #{$gray-text};
+}
+
+.dark { 
+  --editors-tooltip-header-color: #{$dark-gray-dark};
 }

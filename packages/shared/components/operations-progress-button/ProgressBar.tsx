@@ -36,7 +36,7 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { globalColors } from "../../themes";
 import styles from "./OperationsProgressButton.module.scss";
 import { ProgressBarMobileProps } from "./OperationsProgressButton.types";
-import { LoadingButton } from "../loading-button";
+import { LoadingButton } from "@docspace/ui-kit/components/loading-button";
 
 const ProgressBar = ({
 	label,

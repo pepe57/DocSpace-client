@@ -40,7 +40,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { EmailInput, TValidate } from "@docspace/shared/components/email-input";
+import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,

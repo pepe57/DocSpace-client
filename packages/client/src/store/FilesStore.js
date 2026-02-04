@@ -413,19 +413,26 @@ class FilesStore {
     });
 
     // WAIT FOR RESPONSES OF EDITING FILE
-    SocketHelper?.on(SocketEvents.StartEditFile, (id) => {
+    SocketHelper?.on(SocketEvents.StartEditFile, (data) => {
+      const fileId = typeof data === "object" ? data.fileId : data;
+      const editingBy = typeof data === "object" ? data.editingBy : undefined;
+
       const { socketSubscribers } = SocketHelper;
-      const pathParts = `FILE-${id}`;
+      const pathParts = `FILE-${fileId}`;
 
       if (!socketSubscribers.has(pathParts)) return;
 
-      const foundIndex = this.files.findIndex((x) => x.id === id);
+      const foundIndex = this.files.findIndex((x) => x.id === fileId);
       if (foundIndex == -1) return;
 
-      console.log(`[WS] s:start-edit-file`, id, this.files[foundIndex].title);
+      console.log(
+        `[WS] s:start-edit-file`,
+        fileId,
+        this.files[foundIndex].title,
+      );
 
       this.updateSelectionStatus(
-        id,
+        fileId,
         this.files[foundIndex].fileStatus | FileStatus.IsEditing,
         true,
       );
@@ -434,6 +441,8 @@ class FilesStore {
         foundIndex,
         this.files[foundIndex].fileStatus | FileStatus.IsEditing,
       );
+
+      this.updateFileLiveEditingBy(foundIndex, editingBy);
     });
 
     SocketHelper?.on(SocketEvents.ModifyRoom, (option) => {
@@ -451,20 +460,23 @@ class FilesStore {
       this.wsChangeFolderAccessRights(option);
     });
 
-    SocketHelper?.on(SocketEvents.StopEditFile, (id) => {
+    SocketHelper?.on(SocketEvents.StopEditFile, (data) => {
+      const fileId = typeof data === "object" ? data.fileId : data;
+
       const { socketSubscribers } = SocketHelper;
-      const pathParts = `FILE-${id}`;
+      const pathParts = `FILE-${fileId}`;
 
       if (!socketSubscribers.has(pathParts)) return;
 
-      const foundIndex = this.files.findIndex((x) => x.id === id);
+      const foundIndex = this.files.findIndex((x) => x.id === fileId);
+
       if (foundIndex == -1) return;
       const foundFile = this.files[foundIndex];
 
-      console.log(`[WS] s:stop-edit-file`, id, foundFile.title);
+      console.log(`[WS] s:stop-edit-file`, fileId, foundFile.title);
 
       this.updateSelectionStatus(
-        id,
+        fileId,
         foundFile.fileStatus & ~FileStatus.IsEditing,
         false,
       );
@@ -474,7 +486,9 @@ class FilesStore {
         foundFile.fileStatus & ~FileStatus.IsEditing,
       );
 
-      this.getFileInfo(id, foundFile.requestToken);
+      this.updateFileLiveEditingBy(foundIndex, undefined);
+
+      this.getFileInfo(fileId, foundFile.requestToken);
       this.createThumbnail(foundFile);
     });
 
@@ -1353,6 +1367,12 @@ class FilesStore {
     if (index < 0) return;
 
     this.files[index].fileStatus = status;
+  };
+
+  updateFileLiveEditingBy = (index, activeEditors) => {
+    if (index < 0) return;
+
+    this.files[index].activeEditors = activeEditors;
   };
 
   updateFileVectorizationStatus = (fileId, status) => {

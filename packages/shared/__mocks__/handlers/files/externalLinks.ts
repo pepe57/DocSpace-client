@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http, HttpResponse } from "msw";
-import { v4 as uuidv4 } from "uuid";
+import { uuid } from "@docspace/ui-kit/utils/uuid";
 import moment from "moment/moment";
 
 import { TFileLink } from "../../../api/files/types";
@@ -35,122 +35,122 @@ export const PATH_LINK = "files/file/:fileId/link";
 export const PATH_LINKS = "files/file/:fileId/links";
 
 const generateFileLink = ({
-  id = uuidv4(),
-  title = "New link",
-  access = 2,
-  primary = false,
-  internal = false,
-  expirationDate,
-  isExpired = false,
+	id = uuid(),
+	title = "New link",
+	access = 2,
+	primary = false,
+	internal = false,
+	expirationDate,
+	isExpired = false,
 }: {
-  id?: string;
-  title?: string;
-  access?: number;
-  primary?: boolean;
-  internal?: boolean;
-  expirationDate?: moment.Moment;
-  isExpired?: boolean;
+	id?: string;
+	title?: string;
+	access?: number;
+	primary?: boolean;
+	internal?: boolean;
+	expirationDate?: moment.Moment;
+	isExpired?: boolean;
 } = {}): TFileLink => {
-  return {
-    access,
-    canEditInternal: true,
-    canEditExpirationDate: true,
-    canRevoke: true,
-    sharedTo: {
-      id,
-      title,
-      shareLink: "",
-      linkType: 1,
-      denyDownload: false,
-      isExpired,
-      primary,
-      internal,
-      requestToken: "",
-      expirationDate: expirationDate?.toISOString(),
-    },
-    canEditDenyDownload: false,
-    isLocked: false,
-    isOwner: false,
-    canEditAccess: false,
-    subjectType: 1,
-  };
+	return {
+		access,
+		canEditInternal: true,
+		canEditExpirationDate: true,
+		canRevoke: true,
+		sharedTo: {
+			id,
+			title,
+			shareLink: "",
+			linkType: 1,
+			denyDownload: false,
+			isExpired,
+			primary,
+			internal,
+			requestToken: "",
+			expirationDate: expirationDate?.toISOString(),
+		},
+		canEditDenyDownload: false,
+		isLocked: false,
+		isOwner: false,
+		canEditAccess: false,
+		subjectType: 1,
+	};
 };
 
 function generateFileLinks(count = 3): TFileLink[] {
-  return Array.from({ length: count }, (_, i) =>
-    generateFileLink({
-      title: `Link ${i + 1}`,
-      primary: i === 0,
-      isExpired: i === count - 1,
-    }),
-  );
+	return Array.from({ length: count }, (_, i) =>
+		generateFileLink({
+			title: `Link ${i + 1}`,
+			primary: i === 0,
+			isExpired: i === count - 1,
+		}),
+	);
 }
 
 export const externalLinksHandler = (port?: string) => {
-  let baseUrl;
-  if (port) {
-    baseUrl = `${BASE_URL}:${port}`;
-  } else {
-    baseUrl =
-      typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
-  }
+	let baseUrl;
+	if (port) {
+		baseUrl = `${BASE_URL}:${port}`;
+	} else {
+		baseUrl =
+			typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
+	}
 
-  return http.get(`${baseUrl}/${API_PREFIX}/${PATH_LINKS}`, () => {
-    const response = { items: generateFileLinks(3), total: 3 };
+	return http.get(`${baseUrl}/${API_PREFIX}/${PATH_LINKS}`, () => {
+		const response = { items: generateFileLinks(3), total: 3 };
 
-    return HttpResponse.json({ response });
-  });
+		return HttpResponse.json({ response });
+	});
 };
 
 export const primaryLinkHandler = (port?: string) => {
-  let baseUrl;
-  if (port) {
-    baseUrl = `${BASE_URL}:${port}`;
-  } else {
-    baseUrl =
-      typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
-  }
-  return http.get(`${baseUrl}/${API_PREFIX}/${PATH_LINK}`, () => {
-    const response = generateFileLink({
-      title: "Primary link",
-      primary: true,
-    });
+	let baseUrl;
+	if (port) {
+		baseUrl = `${BASE_URL}:${port}`;
+	} else {
+		baseUrl =
+			typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
+	}
+	return http.get(`${baseUrl}/${API_PREFIX}/${PATH_LINK}`, () => {
+		const response = generateFileLink({
+			title: "Primary link",
+			primary: true,
+		});
 
-    return HttpResponse.json({ response });
-  });
+		return HttpResponse.json({ response });
+	});
 };
 
 export const editExternalLinkHandler = (port?: string) => {
-  let baseUrl;
-  if (port) {
-    baseUrl = `${BASE_URL}:${port}`;
-  } else {
-    baseUrl = window.location.origin;
-  }
+	let baseUrl;
+	if (port) {
+		baseUrl = `${BASE_URL}:${port}`;
+	} else {
+		baseUrl = window.location.origin;
+	}
 
-  return http.put(
-    `${baseUrl}/${API_PREFIX}/${PATH_LINKS}`,
-    async ({ request }) => {
-      const body = await request.json();
+	return http.put(
+		`${baseUrl}/${API_PREFIX}/${PATH_LINKS}`,
+		async ({ request }) => {
+			const body = await request.json();
 
-      const { linkId, access, primary, internal, expirationDate } = body as {
-        linkId: string;
-        access: number;
-        primary: boolean;
-        internal: boolean;
-        expirationDate?: moment.Moment;
-      };
+			const { linkId, access, primary, internal, expirationDate } = body as {
+				linkId: string;
+				access: number;
+				primary: boolean;
+				internal: boolean;
+				expirationDate?: moment.Moment;
+			};
 
-      const response = generateFileLink({
-        id: linkId,
-        title: `Edited Link ${linkId}`,
-        access,
-        primary,
-        internal,
-        expirationDate,
-      });
+			const response = generateFileLink({
+				id: linkId,
+				title: `Edited Link ${linkId}`,
+				access,
+				primary,
+				internal,
+				expirationDate,
+			});
 
-      return HttpResponse.json({ response });
-    },
-  );
+			return HttpResponse.json({ response });
+		},
+	);
 };

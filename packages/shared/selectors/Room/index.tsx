@@ -34,9 +34,10 @@ import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.ro
 
 import { Selector, TSelectorItem } from "@docspace/ui-kit/components/selector";
 import {
-	TSelectorCancelButton,
-	TSelectorHeader,
-	TSelectorSearch,
+  TSelectorCancelButton,
+  TSelectorHeader,
+  TSelectorSearch,
+  TSelectorWithAside,
 } from "@docspace/ui-kit/components/selector";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 
@@ -48,240 +49,250 @@ import useRoomsHelper from "../utils/hooks/useRoomsHelper";
 import { RoomSelectorProps } from "./RoomSelector.types";
 import { convertToItems } from "./RoomSelector.utils";
 import {
-	LoadersContext,
-	LoadersContextProvider,
+  LoadersContext,
+  LoadersContextProvider,
 } from "../utils/contexts/Loaders";
 
 const RoomSelectorComponent = ({
-	id,
-	className,
-	style,
+  id,
+  className,
+  style,
 
-	excludeItems,
+  excludeItems,
 
-	withSearch,
+  withSearch,
 
-	isMultiSelect,
+  isMultiSelect,
 
-	submitButtonLabel,
-	onSubmit,
+  submitButtonLabel,
+  onSubmit,
 
-	withHeader,
-	headerProps,
+  withHeader,
+  headerProps,
 
-	withPadding,
+  withPadding,
 
-	setIsDataReady,
+  setIsDataReady,
 
-	withCancelButton,
-	cancelButtonLabel,
-	onCancel,
+  withCancelButton,
+  cancelButtonLabel,
+  onCancel,
 
-	roomType,
-	searchArea,
+  roomType,
+  searchArea,
 
-	disableThirdParty,
-	emptyScreenHeader,
-	emptyScreenDescription,
+  disableThirdParty,
+  emptyScreenHeader,
+  emptyScreenDescription,
 
-	createDefineRoomLabel,
-	createDefineRoomType,
+  createDefineRoomLabel,
+  createDefineRoomType,
 
-	withInit,
-	withCreate,
-	initItems,
-	initTotal,
-	initHasNextPage,
-	initSearchValue,
+  useAside,
+  onClose,
+  withBlur,
+  withoutBackground,
+
+  withInit,
+  withCreate,
+  initItems,
+  initTotal,
+  initHasNextPage,
+  initSearchValue,
 }: RoomSelectorProps) => {
-	const { t }: { t: TTranslation } = useTranslation(["Common"]);
-	const { isBase } = useTheme();
+  const { t }: { t: TTranslation } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
 
-	const { isFirstLoad, isNextPageLoading, setIsFirstLoad } =
-		React.useContext(LoadersContext);
+  const { isFirstLoad, isNextPageLoading, setIsFirstLoad } =
+    React.useContext(LoadersContext);
 
-	const [searchValue, setSearchValue] = React.useState(() =>
-		withInit ? initSearchValue : "",
-	);
-	const [hasNextPage, setHasNextPage] = React.useState(() =>
-		withInit ? initHasNextPage : false,
-	);
-	const [selectedItem, setSelectedItem] = React.useState<TSelectorItem | null>(
-		null,
-	);
+  const [searchValue, setSearchValue] = React.useState(() =>
+    withInit ? initSearchValue : "",
+  );
+  const [hasNextPage, setHasNextPage] = React.useState(() =>
+    withInit ? initHasNextPage : false,
+  );
+  const [selectedItem, setSelectedItem] = React.useState<TSelectorItem | null>(
+    null,
+  );
 
-	const [total, setTotal] = React.useState(() => (withInit ? initTotal : -1));
-	const [items, setItems] = React.useState<TSelectorItem[]>(
-		withInit
-			? convertToItems(initItems).filter((x) =>
-					excludeItems ? !excludeItems.includes(x.id) : true,
-				)
-			: [],
-	);
+  const [total, setTotal] = React.useState(() => (withInit ? initTotal : -1));
+  const [items, setItems] = React.useState<TSelectorItem[]>(
+    withInit
+      ? convertToItems(initItems).filter((x) =>
+          excludeItems ? !excludeItems.includes(x.id) : true,
+        )
+      : [],
+  );
 
-	const isInitRef = React.useRef<boolean>(!withInit);
-	const afterSearch = React.useRef(false);
+  const isInitRef = React.useRef<boolean>(!withInit);
+  const afterSearch = React.useRef(false);
 
-	const setIsInit = React.useCallback((value: boolean) => {
-		isInitRef.current = value;
-	}, []);
+  const setIsInit = React.useCallback((value: boolean) => {
+    isInitRef.current = value;
+  }, []);
 
-	const onSelect = (
-		item: TSelectorItem,
-		isDoubleClick: boolean,
-		doubleClickCallback: () => void,
-	) => {
-		setSelectedItem((el) => {
-			if (el?.id === item.id) return null;
+  const onSelect = (
+    item: TSelectorItem,
+    isDoubleClick: boolean,
+    doubleClickCallback: () => void,
+  ) => {
+    setSelectedItem((el) => {
+      if (el?.id === item.id) return null;
 
-			return item;
-		});
-		if (isDoubleClick && !isMultiSelect) {
-			doubleClickCallback();
-		}
-	};
+      return item;
+    });
+    if (isDoubleClick && !isMultiSelect) {
+      doubleClickCallback();
+    }
+  };
 
-	useEffect(() => {
-		setIsDataReady?.(!isFirstLoad);
-	}, [setIsDataReady, isFirstLoad]);
+  useEffect(() => {
+    setIsDataReady?.(!isFirstLoad);
+  }, [setIsDataReady, isFirstLoad]);
 
-	const onSearchAction = React.useCallback(
-		(value: string, callback?: VoidFunction) => {
-			afterSearch.current = true;
-			setIsFirstLoad(true);
-			setSearchValue(() => {
-				return value;
-			});
-			callback?.();
-		},
-		[setIsFirstLoad],
-	);
+  const onSearchAction = React.useCallback(
+    (value: string, callback?: VoidFunction) => {
+      afterSearch.current = true;
+      setIsFirstLoad(true);
+      setSearchValue(() => {
+        return value;
+      });
+      callback?.();
+    },
+    [setIsFirstLoad],
+  );
 
-	const { subscribe } = useSocketHelper({
-		withCreate,
-		setTotal,
-		setItems,
-		disabledItems: [],
-	});
+  const { subscribe } = useSocketHelper({
+    withCreate,
+    setTotal,
+    setItems,
+    disabledItems: [],
+  });
 
-	const onClearSearchAction = React.useCallback(
-		(callback?: VoidFunction) => {
-			setIsFirstLoad(true);
-			afterSearch.current = true;
-			setSearchValue(() => {
-				return "";
-			});
-			callback?.();
-		},
-		[setIsFirstLoad],
-	);
+  const onClearSearchAction = React.useCallback(
+    (callback?: VoidFunction) => {
+      setIsFirstLoad(true);
+      afterSearch.current = true;
+      setSearchValue(() => {
+        return "";
+      });
+      callback?.();
+    },
+    [setIsFirstLoad],
+  );
 
-	const { getRoomList: onLoadNextPage } = useRoomsHelper({
-		withCreate,
-		isInit: isInitRef.current,
-		setIsInit,
-		createDefineRoomLabel,
-		createDefineRoomType,
-		excludeItems,
-		roomType,
-		searchValue,
-		isRoomsOnly: true,
-		setHasNextPage,
-		setTotal,
-		setItems,
-		withInit,
-		disableThirdParty,
-		searchArea,
-		subscribe,
-	});
+  const { getRoomList: onLoadNextPage } = useRoomsHelper({
+    withCreate,
+    isInit: isInitRef.current,
+    setIsInit,
+    createDefineRoomLabel,
+    createDefineRoomType,
+    excludeItems,
+    roomType,
+    searchValue,
+    isRoomsOnly: true,
+    setHasNextPage,
+    setTotal,
+    setItems,
+    withInit,
+    disableThirdParty,
+    searchArea,
+    subscribe,
+  });
 
-	const headerSelectorProps: TSelectorHeader = withHeader
-		? {
-				withHeader,
-				headerProps: {
-					...headerProps,
-					headerLabel: headerProps.headerLabel || t("Common:RoomList"),
-				},
-			}
-		: {};
+  const headerSelectorProps: TSelectorHeader = withHeader
+    ? {
+        withHeader,
+        headerProps: {
+          ...headerProps,
+          headerLabel: headerProps.headerLabel || t("Common:RoomList"),
+        },
+      }
+    : {};
 
-	const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton
-		? {
-				withCancelButton: true,
-				cancelButtonLabel: cancelButtonLabel || t("Common:CancelButton"),
-				onCancel,
-			}
-		: {};
+  const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton
+    ? {
+        withCancelButton: true,
+        cancelButtonLabel: cancelButtonLabel || t("Common:CancelButton"),
+        onCancel,
+      }
+    : {};
 
-	const searchSelectorProps: TSelectorSearch = withSearch
-		? {
-				withSearch: true,
-				searchPlaceholder: t("Common:Search"),
-				searchValue,
-				onSearch: onSearchAction,
-				onClearSearch: onClearSearchAction,
-				searchLoader: <SearchLoader />,
-				isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,
-			}
-		: {};
+  const searchSelectorProps: TSelectorSearch = withSearch
+    ? {
+        withSearch: true,
+        searchPlaceholder: t("Common:Search"),
+        searchValue,
+        onSearch: onSearchAction,
+        onClearSearch: onClearSearchAction,
+        searchLoader: <SearchLoader />,
+        isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,
+      }
+    : {};
 
-	return (
-		<Selector
-			id={id}
-			className={className}
-			style={style}
-			{...headerSelectorProps}
-			{...cancelButtonSelectorProps}
-			{...searchSelectorProps}
-			withPadding={withPadding}
-			onSelect={onSelect}
-			items={items}
-			submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
-			onSubmit={onSubmit}
-			isMultiSelect={isMultiSelect}
-			emptyScreenImage={
-				isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
-			}
-			emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyRoomsHeader")}
-			emptyScreenDescription={
-				emptyScreenDescription ??
-				t("Common:EmptyRoomsDescriptionText", {
-					sectionName: t("Common:Rooms"),
-				})
-			}
-			searchEmptyScreenImage={
-				isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
-			}
-			searchEmptyScreenHeader={t("Common:NotFoundTitle")}
-			searchEmptyScreenDescription={t("Common:SearchEmptyRoomsDescription")}
-			totalItems={total}
-			hasNextPage={hasNextPage}
-			isNextPageLoading={isNextPageLoading}
-			loadNextPage={onLoadNextPage}
-			isLoading={isFirstLoad}
-			disableSubmitButton={!selectedItem}
-			alwaysShowFooter={items.length !== 0 || Boolean(searchValue)}
-			rowLoader={
-				<RowLoader
-					isMultiSelect={isMultiSelect}
-					isContainer={isFirstLoad}
-					isUser={false}
-				/>
-			}
-			isSSR={withInit}
-			dataTestId="room_selector"
-		/>
-	);
+  const withAside: TSelectorWithAside = useAside
+    ? { useAside, onClose, withBlur, withoutBackground }
+    : {};
+
+  return (
+    <Selector
+      id={id}
+      className={className}
+      style={style}
+      {...headerSelectorProps}
+      {...cancelButtonSelectorProps}
+      {...searchSelectorProps}
+      {...withAside}
+      withPadding={withPadding}
+      onSelect={onSelect}
+      items={items}
+      submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
+      onSubmit={onSubmit}
+      isMultiSelect={isMultiSelect}
+      emptyScreenImage={
+        isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
+      }
+      emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyRoomsHeader")}
+      emptyScreenDescription={
+        emptyScreenDescription ??
+        t("Common:EmptyRoomsDescriptionText", {
+          sectionName: t("Common:Rooms"),
+        })
+      }
+      searchEmptyScreenImage={
+        isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
+      }
+      searchEmptyScreenHeader={t("Common:NotFoundTitle")}
+      searchEmptyScreenDescription={t("Common:SearchEmptyRoomsDescription")}
+      totalItems={total}
+      hasNextPage={hasNextPage}
+      isNextPageLoading={isNextPageLoading}
+      loadNextPage={onLoadNextPage}
+      isLoading={isFirstLoad}
+      disableSubmitButton={!selectedItem}
+      alwaysShowFooter={items.length !== 0 || Boolean(searchValue)}
+      rowLoader={
+        <RowLoader
+          isMultiSelect={isMultiSelect}
+          isContainer={isFirstLoad}
+          isUser={false}
+        />
+      }
+      isSSR={withInit}
+      dataTestId="room_selector"
+    />
+  );
 };
 
 const RoomSelector = (props: RoomSelectorProps) => {
-	const { withInit } = props;
+  const { withInit } = props;
 
-	return (
-		<LoadersContextProvider withInit={withInit}>
-			<RoomSelectorComponent {...props} />
-		</LoadersContextProvider>
-	);
+  return (
+    <LoadersContextProvider withInit={withInit}>
+      <RoomSelectorComponent {...props} />
+    </LoadersContextProvider>
+  );
 };
 
 export default RoomSelector;

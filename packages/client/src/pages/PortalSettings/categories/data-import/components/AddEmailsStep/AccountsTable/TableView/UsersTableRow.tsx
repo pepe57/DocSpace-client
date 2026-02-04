@@ -33,15 +33,13 @@ import { TableRow, TableCell } from "@docspace/shared/components/table";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { EmailInput } from "@docspace/shared/components/email-input";
+import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
 
 import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvgUrl from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 import CheckSvgUrl from "PUBLIC_DIR/images/check.edit.react.svg?url";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { globalColors } from "@docspace/shared/themes";
-
-import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import {
 	AddEmailTableRowProps,
 	InjectedAddEmailTableRowProps,

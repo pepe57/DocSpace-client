@@ -342,3 +342,12 @@ declare global {
 	export type SeparatorType =
 		import("@docspace/ui-kit/components/context-menu").SeparatorType;
 }
+
+export type TDefaultTemplateItem = {
+  id: number | null;
+  title?: string;
+  isModified?: boolean;
+  lastModified?: string;
+  extension: string;
+  viewUrl: string;
+};

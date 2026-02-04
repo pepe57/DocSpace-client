@@ -32,7 +32,7 @@ import { getCrashReport } from "../../utils/crashReport";
 
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import ReportDialog from "../report-dialog";
-import ErrorContainer from "../error-container/ErrorContainer";
+import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
 import { zendeskAPI } from "../zendesk/Zendesk.utils";
 
 import styles from "./Errors.module.scss";
