@@ -33,7 +33,6 @@
   "CopyFolderItem": "ໄຟລ໌ <2>{{title}}</2> ຖືກສໍາເນົາສູ່ <1>{{folderName}}</1> ຢ່າງສໍາເລັດແລ້ວ",
   "CopyItems": "<2>{{qty}} ຢ່າງ</2> ຖືກສໍາເນົາເຂົ້າສູ່ <1>{{folderName}}</1> ຢ່າງສໍາເລັດແລ້ວ",
   "CopyLinkPassword": "ສຳເນົາລະຫັດຜ່ານລິ້ງ",
-  "CreateNewFolder": "ສ້າງໂຟນເດີໃໝ່",
   "CreateNewFolderInStorage": "ສ້າງໂຟນເດີໃຫມ່ໃນບ່ອນເກັບຂໍ້ມູນ",
   "CreateNewLink": "ສ້າງລິ້ງໃໝ່",
   "CreateTemplate": "ສ້າງແມ່ແບບ",

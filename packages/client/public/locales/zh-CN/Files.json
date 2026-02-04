@@ -33,7 +33,6 @@
   "CopyFolderItem": "文件夹<2>{{title}}</2>已成功复制到<1>{{folderName}}</1>",
   "CopyItems": "<2>{{qty}}个元素</2>已成功复制到<1>{{folderName}}</1>",
   "CopyLinkPassword": "复制链接密码",
-  "CreateNewFolder": "创建新文件夹",
   "CreateNewFolderInStorage": "在存储空间中创建一个新文件夹",
   "CreateNewLink": "创建新链接",
   "CreateTemplate": "创建模板",
