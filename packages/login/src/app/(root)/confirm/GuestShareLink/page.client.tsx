@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";

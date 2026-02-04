@@ -37,7 +37,7 @@ import Image from "next/image";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Text } from "@docspace/ui-kit/components/text";
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
   InputSize,
