@@ -186,6 +186,13 @@ class AISettingsStore {
         this.unavailableProvidersIdsSet.delete(id);
       }
     }
+
+    if (
+      this.defaultProvider?.providerId === newProvider.id &&
+      this.defaultProvider?.providerTitle !== newProvider.title
+    ) {
+      this.defaultProvider.providerTitle = newProvider.title;
+    }
   };
 
   deleteAIProvider = async (id: TAiProvider["id"]) => {

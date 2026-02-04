@@ -35,12 +35,7 @@ import { Heading } from "@docspace/shared/components/heading";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 
-import {
-  TAiProvider,
-  TDefaultProvider,
-  TModel,
-} from "@docspace/shared/api/ai/types";
-import { getAiModelName } from "@docspace/shared/utils/ai";
+import { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
 import { TTranslation } from "@docspace/shared/types";
 
 import styles from "../AISettings.module.scss";
@@ -60,28 +55,26 @@ type DefaultProviderProps = {
   defaultProviderInitied?: AISettingsStore["defaultProviderInitied"];
 };
 
-const getSelectedProvider = (
+const getSelectedProviderOption = (
   aiProviders?: TAiProvider[],
-  defaultProvider?: TDefaultProvider | null,
+  selectedProviderId?: number | null,
 ): TOption => {
-  if (!aiProviders || !defaultProvider) return { key: "-2", label: "" };
+  if (!aiProviders || !selectedProviderId) return { key: "-2", label: "" };
 
   const provider =
-    aiProviders.find((p) => p.id === defaultProvider.providerId) ||
-    aiProviders[0];
+    aiProviders.find((p) => p.id === selectedProviderId) || aiProviders[0];
   return { key: provider?.id, label: provider.title };
 };
 
-const getSelectedModel = (
+const getSelectedModelOption = (
   t: TTranslation,
   models?: TModel[] | null,
-  defaultProvider?: TDefaultProvider | null,
+  selectedModelId?: string | null,
 ): TOption => {
-  if (!models || !defaultProvider)
+  if (!models || !selectedModelId)
     return { key: "-2", label: t("Common:NoModelsFound") };
 
-  const model =
-    models.find((m) => m.modelId === defaultProvider.defaultModel) || models[0];
+  const model = models.find((m) => m.modelId === selectedModelId) || models[0];
 
   return { key: model.modelId, label: model.name };
 };
@@ -97,18 +90,17 @@ const DefaultProviderComponent = ({
   defaultProviderInitied,
 }: DefaultProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
-  const [selectedProvider, setSelectedProvider] = useState<TOption | null>(() =>
-    getSelectedProvider(aiProviders, defaultProvider),
+  const [selectedProviderId, setSelectedProviderId] = useState<number | null>(
+    defaultProvider?.providerId || null,
   );
-  const [selectedModel, setSelectedModel] = useState<TOption | null>(() =>
-    getSelectedModel(t, defaultProviderModels, defaultProvider),
+  const [selectedModelId, setSelectedModelId] = useState<string | null>(
+    defaultProvider?.defaultModel || null,
   );
   const [isSaveRequestRunning, setIsSaveRequestRunning] = useState(false);
   const prevDefaultProviderInitiedRef = useRef(defaultProviderInitied);
 
-  const isProviderChanged =
-    selectedProvider?.key !== defaultProvider?.providerId;
-  const isModelChanged = selectedModel?.key !== defaultProvider?.defaultModel;
+  const isProviderChanged = selectedProviderId !== defaultProvider?.providerId;
+  const isModelChanged = selectedModelId !== defaultProvider?.defaultModel;
 
   const getProviderOptions = () => {
     return (
@@ -126,13 +118,23 @@ const DefaultProviderComponent = ({
     );
   };
 
+  const selectedProviderOption = getSelectedProviderOption(
+    aiProviders,
+    selectedProviderId,
+  );
+  const selectedModelOption = getSelectedModelOption(
+    t,
+    defaultProviderModels,
+    selectedModelId,
+  );
+
   const onSave = async () => {
-    if (!selectedProvider || !selectedModel) return;
+    if (!selectedProviderId || !selectedModelId) return;
 
     setIsSaveRequestRunning(true);
     const data = {
-      providerId: selectedProvider.key as number,
-      defaultModel: selectedModel.key as string,
+      providerId: selectedProviderId,
+      defaultModel: selectedModelId,
     };
 
     await changeDefaultProvider?.(data, t);
@@ -143,15 +145,9 @@ const DefaultProviderComponent = ({
   const onCancel = () => {
     if (!defaultProvider) return;
 
-    setSelectedProvider({
-      key: defaultProvider.providerId,
-      label: defaultProvider.providerTitle,
-    });
+    setSelectedProviderId(defaultProvider.providerId);
 
-    setSelectedModel({
-      key: defaultProvider.defaultModel,
-      label: getAiModelName(defaultProvider.defaultModel),
-    });
+    setSelectedModelId(defaultProvider.defaultModel);
 
     if (isProviderChanged) {
       fetchDefaultProviderModels?.(defaultProvider.providerId);
@@ -159,18 +155,25 @@ const DefaultProviderComponent = ({
   };
 
   const onSelectProvider = async (option: TOption) => {
-    if (option.key === selectedProvider?.key) return;
+    if (option.key === selectedProviderId) return;
 
-    setSelectedProvider(option);
+    setSelectedProviderId(option.key as number);
 
-    const models = await fetchDefaultProviderModels?.(option.key as number);
-    setSelectedModel(getSelectedModel(t, models, defaultProvider));
+    const models =
+      (await fetchDefaultProviderModels?.(option.key as number)) || [];
+    const hasDefaultModel =
+      defaultProvider?.defaultModel &&
+      models.some((m) => m.modelId === defaultProvider.defaultModel);
+    const newModelId = hasDefaultModel
+      ? defaultProvider.defaultModel
+      : models[0].modelId;
+    setSelectedModelId(newModelId || null);
   };
 
   const onSelectModel = (option: TOption) => {
-    if (option.key === selectedModel?.key) return;
+    if (option.key === selectedModelId) return;
 
-    setSelectedModel(option);
+    setSelectedModelId(option.key as string);
   };
 
   const isSaveDisabled =
@@ -188,10 +191,8 @@ const DefaultProviderComponent = ({
       prevDefaultProviderInitiedRef.current === false;
 
     if (isNewInit) {
-      setSelectedProvider(getSelectedProvider(aiProviders, defaultProvider));
-      setSelectedModel(
-        getSelectedModel(t, defaultProviderModels, defaultProvider),
-      );
+      setSelectedProviderId(defaultProvider?.providerId || null);
+      setSelectedModelId(defaultProvider?.defaultModel || null);
     }
 
     prevDefaultProviderInitiedRef.current = defaultProviderInitied;
@@ -203,7 +204,7 @@ const DefaultProviderComponent = ({
     t,
   ]);
 
-  if (!selectedProvider || !selectedModel) {
+  if (!selectedProviderId || !selectedModelId) {
     return null;
   }
 
@@ -241,7 +242,7 @@ const DefaultProviderComponent = ({
               [styles.hasError]: !!defaultProviderModelsError,
             })}
             options={getProviderOptions()}
-            selectedOption={selectedProvider}
+            selectedOption={selectedProviderOption}
             displayArrow
             onSelect={onSelectProvider}
             displaySelectedOption
@@ -259,7 +260,7 @@ const DefaultProviderComponent = ({
         >
           <ComboBox
             options={getModelOptions()}
-            selectedOption={selectedModel}
+            selectedOption={selectedModelOption}
             displayArrow
             onSelect={onSelectModel}
             displaySelectedOption
