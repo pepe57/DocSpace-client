@@ -29,7 +29,7 @@ import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 export const PATH_DEFAULT_TEMPLATES = "files/settings/defaulttemplate";
 
-type ResponseType = "default" | "customized";
+type ResponseType = "default" | "customized" | "long";
 
 const defaultTemplates = {
   response: {
@@ -90,10 +90,44 @@ const defaultTemplatesCustomized = {
   statusCode: 200,
 };
 
+const defaultTemplatesLongTitle = {
+  response: {
+    items: [
+      {
+        selectedFile: 13,
+        fileExtension: ".docx",
+        fileTitle:
+          "Long long long long long long long long long long long long long long long long long",
+        lastModified: "2026-01-21T18:34:37+00:00",
+      },
+      {
+        fileExtension: ".pdf",
+      },
+      {
+        fileExtension: ".xlsx",
+      },
+      {
+        fileExtension: ".pptx",
+      },
+    ],
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_DEFAULT_TEMPLATES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 export const defaultTemplatesResolver = (type?: ResponseType) => {
   switch (type) {
     case "customized":
       return new Response(JSON.stringify(defaultTemplatesCustomized));
+    case "long":
+      return new Response(JSON.stringify(defaultTemplatesLongTitle));
     default:
       return new Response(JSON.stringify(defaultTemplates));
   }
@@ -113,6 +147,18 @@ export const defaultTemplatesSetHandler = (
   type?: ResponseType,
 ) => {
   return http.put(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_DEFAULT_TEMPLATES}`,
+    () => {
+      return defaultTemplatesResolver(type);
+    },
+  );
+};
+
+export const defaultTemplatesLongHandler = (
+  port: string,
+  type?: ResponseType,
+) => {
+  return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_DEFAULT_TEMPLATES}`,
     () => {
       return defaultTemplatesResolver(type);
