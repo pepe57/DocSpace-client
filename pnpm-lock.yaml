@@ -1272,9 +1272,6 @@ importers:
       '@types/utif':
         specifier: 3.0.5
         version: 3.0.5
-      '@types/uuid':
-        specifier: ^10.0.0
-        version: 10.0.0
       '@vitest/coverage-v8':
         specifier: 4.0.17
         version: 4.0.17(vitest@4.0.18)
@@ -4570,9 +4567,6 @@ packages:
 
   '@types/utif@3.0.5':
     resolution: {integrity: sha512-ULwKfCC9b5JxJyjkkG0WCeOWz7pfBLuvf1ax1fbxt0e+DnZtLUjGnnwMeAU4ukKYmIa3HyITNHOyeKQyf0aAUg==}
-
-  '@types/uuid@10.0.0':
-    resolution: {integrity: sha512-7gqG38EyHgyP1S+7+xomFtL+ZNHcKv6DwNaCZmJmo1vgMugyF3TCnXVg4t1uk89mLNwnLtnY3TpOpCOyp1/xHQ==}
 
   '@types/uuid@9.0.8':
     resolution: {integrity: sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA==}
@@ -13744,8 +13738,6 @@ snapshots:
   '@types/utif@3.0.5':
     dependencies:
       '@types/node': 24.10.7
-
-  '@types/uuid@10.0.0': {}
 
   '@types/uuid@9.0.8': {}
 
