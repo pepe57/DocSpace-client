@@ -42,7 +42,7 @@ import {
   TPasswordSettings,
 } from "@docspace/shared/api/settings/types";
 import { createPasswordHash } from "@docspace/shared/utils/common";
-import { PasswordInput } from "@docspace/shared/components/password-input";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { login } from "@docspace/shared/utils/loginUtils";

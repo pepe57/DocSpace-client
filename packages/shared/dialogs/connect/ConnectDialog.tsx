@@ -38,7 +38,7 @@ import {
   InputType,
   TextInput,
 } from "@docspace/ui-kit/components/text-input";
-import { PasswordInput } from "../../components/password-input";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { getOAuthToken } from "../../utils/common";
 import { saveSettingsThirdParty } from "../../api/files";

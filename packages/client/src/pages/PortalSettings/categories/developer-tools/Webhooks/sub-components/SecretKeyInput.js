@@ -34,7 +34,7 @@ import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Text } from "@docspace/ui-kit/components/text";
 
-import { PasswordInput } from "@docspace/shared/components/password-input";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { inject, observer } from "mobx-react";
 
 import { useTranslation } from "react-i18next";
@@ -72,136 +72,136 @@ const Header = styled.h4`
 `;
 
 const SecretKeyInput = (props) => {
-	const {
-		isResetVisible,
-		name,
-		value,
-		onChange,
-		passwordSettings,
-		isPasswordValid,
-		setIsPasswordValid,
-		setIsResetVisible,
-		webhooksGuideUrl,
-		passwordInputKey,
-		additionalId,
-		isDisabled,
-	} = props;
+  const {
+    isResetVisible,
+    name,
+    value,
+    onChange,
+    passwordSettings,
+    isPasswordValid,
+    setIsPasswordValid,
+    setIsResetVisible,
+    webhooksGuideUrl,
+    passwordInputKey,
+    additionalId,
+    isDisabled,
+  } = props;
 
-	const { t } = useTranslation(["Webhooks"]);
+  const { t } = useTranslation(["Webhooks"]);
 
-	const secretKeyInputRef = useRef(null);
+  const secretKeyInputRef = useRef(null);
 
-	const handleInputValidation = (isValid) => {
-		setIsPasswordValid(isValid);
-	};
+  const handleInputValidation = (isValid) => {
+    setIsPasswordValid(isValid);
+  };
 
-	const generatePassword = () => {
-		if (isDisabled) return;
-		secretKeyInputRef.current.onGeneratePassword();
-	};
+  const generatePassword = () => {
+    if (isDisabled) return;
+    secretKeyInputRef.current.onGeneratePassword();
+  };
 
-	const handleOnChange = (e) => {
-		onChange({ target: { name, value: e.target.value } });
-	};
+  const handleOnChange = (e) => {
+    onChange({ target: { name, value: e.target.value } });
+  };
 
-	const hideReset = () => {
-		generatePassword();
-		setIsResetVisible(false);
-	};
+  const hideReset = () => {
+    generatePassword();
+    setIsResetVisible(false);
+  };
 
-	useEffect(() => {
-		if (!isResetVisible) {
-			onChange({
-				target: { name, value: secretKeyInputRef.current.value },
-			});
-		}
-	}, [isResetVisible]);
+  useEffect(() => {
+    if (!isResetVisible) {
+      onChange({
+        target: { name, value: secretKeyInputRef.current.value },
+      });
+    }
+  }, [isResetVisible]);
 
-	return (
-		<SecretKeyWrapper>
-			<Header>
-				{t("SecretKey")}
-				<HelpButton
-					className="secretKeyHelpButton"
-					iconName={InfoReactSvgUrl}
-					tooltipContent={
-						<Text fontSize="12px">
-							{t("SecretKeyHint")} <br /> <br />
-							{webhooksGuideUrl ? (
-								<Link
-									id="read-more-link"
-									type="page"
-									isHovered
-									fontWeight={600}
-									href={webhooksGuideUrl}
-									target="_blank"
-									className="link"
-									dataTestId="webhooks_guide_link"
-								>
-									{t("ReadMore")}
-								</Link>
-							) : null}
-						</Text>
-					}
-					place="bottom"
-					dataTestId="secret_key_help_button"
-				/>
-			</Header>
-			{isResetVisible ? (
-				<Hint>
-					{t("SecretKeyWarning")} <br />
-					<Link
-						id="reset-key-link"
-						type="action"
-						fontWeight={600}
-						isHovered
-						onClick={hideReset}
-						className="link"
-						dataTestId="reset_key_link"
-					>
-						{t("ResetKey")}
-					</Link>
-				</Hint>
-			) : null}
-			<div hidden={isResetVisible}>
-				<PasswordInput
-					id={`${additionalId}-secret-key-input`}
-					onChange={handleOnChange}
-					inputValue={value}
-					inputName={name}
-					placeholder={t("EnterSecretKey")}
-					onValidateInput={handleInputValidation}
-					ref={secretKeyInputRef}
-					hasError={!isPasswordValid}
-					isDisableTooltip
-					inputType="password"
-					isFullWidth
-					passwordSettings={passwordSettings}
-					key={passwordInputKey}
-					isDisabled={isDisabled}
-					dataTestId="secret_key_input"
-				/>
-				<Link
-					id="generate-link"
-					type="action"
-					fontWeight={600}
-					isHovered
-					onClick={generatePassword}
-					className="link dotted"
-					dataTestId="generate_link"
-				>
-					{t("Generate")}
-				</Link>
-			</div>
-		</SecretKeyWrapper>
-	);
+  return (
+    <SecretKeyWrapper>
+      <Header>
+        {t("SecretKey")}
+        <HelpButton
+          className="secretKeyHelpButton"
+          iconName={InfoReactSvgUrl}
+          tooltipContent={
+            <Text fontSize="12px">
+              {t("SecretKeyHint")} <br /> <br />
+              {webhooksGuideUrl ? (
+                <Link
+                  id="read-more-link"
+                  type="page"
+                  isHovered
+                  fontWeight={600}
+                  href={webhooksGuideUrl}
+                  target="_blank"
+                  className="link"
+                  dataTestId="webhooks_guide_link"
+                >
+                  {t("ReadMore")}
+                </Link>
+              ) : null}
+            </Text>
+          }
+          place="bottom"
+          dataTestId="secret_key_help_button"
+        />
+      </Header>
+      {isResetVisible ? (
+        <Hint>
+          {t("SecretKeyWarning")} <br />
+          <Link
+            id="reset-key-link"
+            type="action"
+            fontWeight={600}
+            isHovered
+            onClick={hideReset}
+            className="link"
+            dataTestId="reset_key_link"
+          >
+            {t("ResetKey")}
+          </Link>
+        </Hint>
+      ) : null}
+      <div hidden={isResetVisible}>
+        <PasswordInput
+          id={`${additionalId}-secret-key-input`}
+          onChange={handleOnChange}
+          inputValue={value}
+          inputName={name}
+          placeholder={t("EnterSecretKey")}
+          onValidateInput={handleInputValidation}
+          ref={secretKeyInputRef}
+          hasError={!isPasswordValid}
+          isDisableTooltip
+          inputType="password"
+          isFullWidth
+          passwordSettings={passwordSettings}
+          key={passwordInputKey}
+          isDisabled={isDisabled}
+          dataTestId="secret_key_input"
+        />
+        <Link
+          id="generate-link"
+          type="action"
+          fontWeight={600}
+          isHovered
+          onClick={generatePassword}
+          className="link dotted"
+          dataTestId="generate_link"
+        >
+          {t("Generate")}
+        </Link>
+      </div>
+    </SecretKeyWrapper>
+  );
 };
 
 export default inject(({ settingsStore }) => {
-	const { webhooksGuideUrl, passwordSettings } = settingsStore;
+  const { webhooksGuideUrl, passwordSettings } = settingsStore;
 
-	return {
-		webhooksGuideUrl,
-		passwordSettings,
-	};
+  return {
+    webhooksGuideUrl,
+    passwordSettings,
+  };
 })(observer(SecretKeyInput));

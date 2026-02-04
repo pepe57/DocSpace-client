@@ -661,20 +661,6 @@
 }
 
 .light {
-  --password-input-tooltip-text-color: #{$black};
-  --password-input-icon-color: #{$gray-strong};
-  --password-input-icon-color-hover: #{$gray};
-  --password-input-icon-color-disabled: #{$gray-strong};
-}
-
-.dark {
-  --password-input-tooltip-text-color: #{$black};
-  --password-input-icon-color: #{$gray-dark-strong};
-  --password-input-icon-color-hover: #{$gray-dark};
-  --password-input-icon-color-disabled: #{$gray-dark};
-}
-
-.light {
   --header-background-color: #{$gray-light};
   --header-height: 48px;
   --header-burger-color: #{$light-gray-dark};
