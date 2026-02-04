@@ -64,6 +64,9 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     modelId: agentParams.modelId ?? "",
   } as TModel);
 
+  const initProviderIdRef = React.useRef<number | null>(agentParams.providerId || null);
+  const initModelIdRef = React.useRef<string | null>(agentParams.modelId || null);
+
   const [isProvidersLoading, setIsProvidersLoading] = React.useState(false);
   const [isProvidersFetched, setIsProvidersFetched] = React.useState(false);
 
@@ -197,10 +200,15 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
           setSelectedModel(cachedModels[0]);
         }
       } else {
-        const preferredModel = cachedModels.find(
-          (mo) => mo.modelId === defaultModel,
-        );
-        setSelectedModel(preferredModel || cachedModels[0]);
+        const preferredModelId =
+          selectedProvider?.id === initProviderIdRef.current
+            ? initModelIdRef.current
+            : defaultModel;
+
+        const preferredModel =
+          cachedModels.find((mo) => mo.modelId === preferredModelId) ?? cachedModels[0];
+
+        setSelectedModel(preferredModel);
       }
       return;
     }
