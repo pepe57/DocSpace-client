@@ -166,7 +166,7 @@ const DefaultProviderComponent = ({
       models.some((m) => m.modelId === defaultProvider.defaultModel);
     const newModelId = hasDefaultModel
       ? defaultProvider.defaultModel
-      : models[0].modelId;
+      : models[0]?.modelId;
     setSelectedModelId(newModelId || null);
   };
 
@@ -203,10 +203,6 @@ const DefaultProviderComponent = ({
     defaultProviderModels,
     t,
   ]);
-
-  if (!selectedProviderId || !selectedModelId) {
-    return null;
-  }
 
   return (
     <div className={styles.defaultProvider}>

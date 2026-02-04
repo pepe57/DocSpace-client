@@ -28,16 +28,17 @@
 
 import { expect, test, TEST_PORT } from "../fixtures/base";
 import { ProviderType } from "@docspace/shared/api/ai/enums";
-import { 
-  settingsHandler, 
-  selfActivationStatusHandler, 
-  TypeSettings, 
-  aiProvidersHandler, 
-  aiProvidersPostHandler, 
+import {
+  settingsHandler,
+  selfActivationStatusHandler,
+  TypeSettings,
+  aiProvidersHandler,
+  aiProvidersPostHandler,
   aiProvidersAvailableHandler,
   aiModelsHandler,
   aiProvidersDeleteHandler,
-  aiProvidersPutHandler
+  aiProvidersPutHandler,
+  aiProvidersDefaultHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { PATH_AI_PROVIDERS_LIST } from "@docspace/shared/__mocks__/handlers/ai/providers";
 
@@ -81,7 +82,12 @@ test.describe("AI Provider", () => {
     mockRequest.use(
       aiProvidersHandler(TEST_PORT, false, true),
       aiProvidersPostHandler(TEST_PORT),
-      aiProvidersAvailableHandler(TEST_PORT));
+      aiProvidersAvailableHandler(TEST_PORT),
+      aiProvidersDefaultHandler(TEST_PORT, { isNewProvider: true }),
+      aiModelsHandler(TEST_PORT, {
+        isOpenAI: true,
+      })
+    );
 
     await page.goto(`${baseUrl}/portal-settings/ai-settings/providers`);
 
@@ -140,13 +146,14 @@ test.describe("AI Provider", () => {
     ]);
   });
 
-  test("should delete AI Provider", async ({ page, mockRequest, baseUrl }) => {
+  test("should delete AI Provider (default provider)", async ({ page, mockRequest, baseUrl }) => {
     mockRequest.use(
       aiProvidersHandler(TEST_PORT),
       aiProvidersDeleteHandler(TEST_PORT),
       aiModelsHandler(TEST_PORT, {
         isClaude: true,
       }),
+      aiProvidersDefaultHandler(TEST_PORT, { isClaude: true }),
     );
 
     const listRespPromise = page.waitForResponse(
@@ -177,12 +184,25 @@ test.describe("AI Provider", () => {
     await expect(deleteProviderDialog).toBeVisible();
     await expect(deleteProviderDialog).toContainText("Delete AI provider");
 
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "ai-provider-settings",
+      "ai-provider-delete-default-modal.png",
+    ]);
+
     const deleteProviderButton = deleteProviderDialog.getByTestId(
       "delete-provider-button",
     );
 
     const deleteReqPromise = page.waitForRequest(
       (r) => r.url().endsWith(PATH_AI_PROVIDERS_LIST) && r.method() === "DELETE",
+    );
+
+    mockRequest.use(
+      aiModelsHandler(TEST_PORT, {
+        isOpenAI: true,
+      }),
+      aiProvidersDefaultHandler(TEST_PORT, { isOpenAI: true }),
     );
 
     await deleteProviderButton.click();
@@ -202,6 +222,54 @@ test.describe("AI Provider", () => {
     ]);
   });
 
+  test("should delete AI Provider (non default provider)", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT),
+      aiProvidersDeleteHandler(TEST_PORT),
+      aiModelsHandler(TEST_PORT, {
+        isClaude: true,
+      }),
+      aiProvidersDefaultHandler(TEST_PORT, { isClaude: true }),
+    );
+
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/providers`);
+
+    const allProviderTiles = page.getByTestId("ai-provider-tile");
+
+    const secondProviderTile = allProviderTiles.nth(1);
+    await expect(secondProviderTile).toBeVisible();
+
+    const contextMenuBtn = secondProviderTile.getByTestId("context-menu-button");
+    await contextMenuBtn.click();
+
+    const deleteItem = page.getByTestId("delete_item");
+    await deleteItem.click();
+
+    const deleteProviderDialog = page.getByRole("dialog");
+    await expect(deleteProviderDialog).toBeVisible();
+    await expect(deleteProviderDialog).toContainText("Delete AI provider");
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "ai-provider-settings",
+      "ai-provider-delete-non-default-modal.png",
+    ]);
+
+    const deleteProviderButton = deleteProviderDialog.getByTestId(
+      "delete-provider-button",
+    );
+
+    await deleteProviderButton.click();
+
+    await expect(allProviderTiles).toHaveCount(3);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "ai-provider-settings",
+      "ai-provider-after-delete-non-default.png",
+    ]);
+  });
+
   test("should update AI Provider", async ({ page, mockRequest, baseUrl }) => {
     mockRequest.use(
       aiProvidersHandler(TEST_PORT),
@@ -210,6 +278,7 @@ test.describe("AI Provider", () => {
       aiModelsHandler(TEST_PORT, {
         isClaude: true,
       }),
+      aiProvidersDefaultHandler(TEST_PORT, { isClaude: true }),
     );
 
     const listRespPromise = page.waitForResponse(
@@ -304,8 +373,9 @@ test.describe("AI Provider", () => {
       aiProvidersAvailableHandler(TEST_PORT),
       aiProvidersPutHandler(TEST_PORT),
       aiModelsHandler(TEST_PORT, {
-        isClaude: true,
+        isError: true,
       }),
+      aiProvidersDefaultHandler(TEST_PORT, { isClaude: true }),
     );
 
     await page.goto(`${baseUrl}/portal-settings/ai-settings/providers`);
@@ -343,7 +413,7 @@ test.describe("AI Provider", () => {
     ]);
   });
 
-  test("should render error icon in providers tiles if models are not available", async ({
+  test("should render error icon in providers tiles and error text in default provider if models are not available", async ({
     page,
     mockRequest,
     baseUrl
@@ -354,6 +424,7 @@ test.describe("AI Provider", () => {
       aiModelsHandler(TEST_PORT, {
         isError: true,
       }),
+      aiProvidersDefaultHandler(TEST_PORT, { isClaude: true }),
     );
 
     await page.goto(`${baseUrl}/portal-settings/ai-settings/providers`);
@@ -370,7 +441,7 @@ test.describe("AI Provider", () => {
     ]);
   });
 
-  test("should not render error icon in providers tiles if models are available", async ({
+  test("should not render error icon in providers tiles and error text in default provider if models are available", async ({
     page,
     mockRequest,
     baseUrl
@@ -381,6 +452,7 @@ test.describe("AI Provider", () => {
       aiModelsHandler(TEST_PORT, {
         isClaude: true,
       }),
+      aiProvidersDefaultHandler(TEST_PORT, { isClaude: true }),
     );
 
     await page.goto(`${baseUrl}/portal-settings/ai-settings/providers`);
