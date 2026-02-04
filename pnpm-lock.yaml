@@ -146,8 +146,8 @@ importers:
         specifier: 4.0.8
         version: 4.0.8
       luxon:
-        specifier: 3.5.0
-        version: 3.5.0
+        specifier: 3.7.2
+        version: 3.7.2
       mobx:
         specifier: 6.13.5
         version: 6.13.5
@@ -997,8 +997,8 @@ importers:
         specifier: 4.17.23
         version: 4.17.23
       luxon:
-        specifier: 3.5.0
-        version: 3.5.0
+        specifier: 3.7.2
+        version: 3.7.2
       mobx:
         specifier: 6.13.5
         version: 6.13.5
@@ -1232,8 +1232,8 @@ importers:
         specifier: 4.17.10
         version: 4.17.10
       '@types/luxon':
-        specifier: 3.4.2
-        version: 3.4.2
+        specifier: 3.6.2
+        version: 3.6.2
       '@types/node':
         specifier: 24.10.7
         version: 24.10.7
@@ -4443,8 +4443,8 @@ packages:
   '@types/lodash@4.17.10':
     resolution: {integrity: sha512-YpS0zzoduEhuOWjAotS6A5AVCva7X4lVlYLF0FYHAY9sdraBfnatttHItlWeZdGhuEkf+OzMNg2ZYAx8t+52uQ==}
 
-  '@types/luxon@3.4.2':
-    resolution: {integrity: sha512-TifLZlFudklWlMBfhubvgqTXRzLDI5pCbGa4P8a3wPyUQSW+1xQ5eDsreP9DWHX3tjq1ke96uYG/nwundroWcA==}
+  '@types/luxon@3.6.2':
+    resolution: {integrity: sha512-R/BdP7OxEMc44l2Ex5lSXHoIXTB2JLNa3y2QISIbr58U/YcsffyQrYW//hZSdrfxrjRZj3GcUoxMPGdO8gSYuw==}
 
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
@@ -7247,8 +7247,8 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
-  luxon@3.5.0:
-    resolution: {integrity: sha512-rh+Zjr6DNfUYR3bPwJEnuwDdqMbxZW7LOQfUN4B54+Cl+0o5zaU9RJ6bcidfDtC1cWCZXQ+nvX8bf6bAji37QQ==}
+  luxon@3.7.2:
+    resolution: {integrity: sha512-vtEhXh/gNjI9Yg1u4jX/0YVPMvxzHuGgCm6tC5kZyb08yjGWGnqAjGJvcXbqQR2P3MyMEFnRbpcdFS6PBcLqew==}
     engines: {node: '>=12'}
 
   lws-basic-auth@2.0.0:
@@ -13607,7 +13607,7 @@ snapshots:
 
   '@types/lodash@4.17.10': {}
 
-  '@types/luxon@3.4.2': {}
+  '@types/luxon@3.6.2': {}
 
   '@types/mdast@4.0.4':
     dependencies:
@@ -16717,7 +16717,7 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
-  luxon@3.5.0: {}
+  luxon@3.7.2: {}
 
   lws-basic-auth@2.0.0:
     dependencies:
