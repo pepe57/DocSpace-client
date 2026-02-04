@@ -189,8 +189,10 @@ class AISettingsStore {
   };
 
   deleteAIProvider = async (id: TAiProvider["id"]) => {
-    const isDefaultProvider = this.aiProviders?.find((p) => p.id === id)?.isDefault;
-    const isLastProvider = this.aiProviders.length === 1
+    const isDefaultProvider = this.aiProviders?.find(
+      (p) => p.id === id,
+    )?.isDefault;
+    const isLastProvider = this.aiProviders.length === 1;
 
     await deleteProviders({ ids: [id] });
 
@@ -384,8 +386,6 @@ class AISettingsStore {
     } catch (e) {
       let error = e;
 
-
-
       if (axios.isAxiosError(e)) {
         error = e.response?.data?.error?.message;
       }
@@ -402,6 +402,8 @@ class AISettingsStore {
   };
 
   initDefaultProvider = async () => {
+    this.setDefaultProviderInitied(false);
+
     try {
       const defaultProvider = await getDefaultProvider();
 
@@ -416,10 +418,13 @@ class AISettingsStore {
     }
   };
 
-  changeDefaultProvider = async (providerData: {
-    providerId: number;
-    defaultModel: string;
-  }, t: TTranslation) => {
+  changeDefaultProvider = async (
+    providerData: {
+      providerId: number;
+      defaultModel: string;
+    },
+    t: TTranslation,
+  ) => {
     try {
       const newDefaultProvider = await updateDefaultProvider(providerData);
 
@@ -436,7 +441,7 @@ class AISettingsStore {
       this.setDefaultProvider(newDefaultProvider);
       toastr.success(t("AISettings:DefaultProviderSetSuccess"));
     } catch (e) {
-      toastr.error(e as string)
+      toastr.error(e as string);
       console.error(e);
     }
   };
