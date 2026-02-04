@@ -28,14 +28,13 @@ import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import className from "classnames";
-import moment from "moment";
 
 import {
   FolderType,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
-import { getCookie, isDesktop } from "@docspace/shared/utils";
+import { isDesktop } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
@@ -92,8 +91,6 @@ const Members = ({
   setAccessSettingsIsVisible,
   templateAvailable,
 }: MembersProps) => {
-  moment.locale(getCookie(LANGUAGE));
-
   const { t } = useTranslation([
     "InfoPanel",
     "Common",

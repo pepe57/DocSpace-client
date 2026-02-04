@@ -291,6 +291,25 @@ export function getMonthsShort(locale?: string): string[] {
 }
 
 /**
+ * Gets the localized weekday name by weekday index (1-7, Monday is 1)
+ * @param weekday - Weekday index (1 = Monday, 7 = Sunday in luxon)
+ * @param format - Format type: "narrow", "short", "long"
+ * @param locale - Locale string
+ * @returns Weekday name
+ */
+export function getWeekdayName(
+  weekday: number,
+  format: "narrow" | "short" | "long" = "long",
+  locale?: string,
+): string {
+  const weekdays = Info.weekdays(format, { locale });
+  // luxon weekdays are 1-indexed (1 = Monday, 7 = Sunday)
+  // Array is 0-indexed, so subtract 1
+  const index = ((weekday - 1) % 7 + 7) % 7;
+  return weekdays[index] || "";
+}
+
+/**
  * Gets the first day of week for a locale (0 = Sunday, 1 = Monday, etc.)
  * Most locales use Monday (1), US/Canada use Sunday (0)
  * @param locale - Locale string
