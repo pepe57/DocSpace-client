@@ -3127,16 +3127,10 @@ class ContextOptionsStore {
     this.dialogsStore.setSelectFileAiKnowledgeDialogVisible(true);
   };
 
-  getContextOptionsPlusFormRoom = (t, { formActions }) => {
-    const showSelectorFormRoomDocx = {
-      id: "actions_form-room_template_from-file",
-      className: "main-button_drop-down_sub",
-      icon: FormGalleryReactSvgUrl,
-      label: t("Common:ChooseFromTemplates"),
-      onClick: () => this.onShowTemplateGallery(),
-      key: "form-file",
-    };
-
+  getContextOptionsPlusFormRoom = (
+    t,
+    { formActions, templateGallery, createNewFolder },
+  ) => {
     const uploadReadyPDFFrom = {
       id: "personal_upload-ready-Pdf-from",
       className: "main-button_drop-down_sub",
@@ -3166,24 +3160,15 @@ class ContextOptionsStore {
       ],
     };
 
-    const createNewFolder = {
-      id: "actions_new-folder",
-      className: "main-button_drop-down",
-      icon: CatalogFolderReactSvgUrl,
-      label: t("Files:CreateNewFolder"),
-      onClick: () => this.onCreate(),
-      key: "new-folder",
-    };
-
     return [
-      uploadReadyPDFFrom,
       ...formActions,
-      showSelectorFormRoomDocx,
+      createNewFolder,
+      ...templateGallery,
       {
         isSeparator: true,
         key: "separator-1",
       },
-      createNewFolder,
+      uploadReadyPDFFrom,
     ];
   };
 
@@ -3315,6 +3300,8 @@ class ContextOptionsStore {
     if (isFormRoomType) {
       return this.getContextOptionsPlusFormRoom(t, {
         formActions,
+        templateGallery,
+        createNewFolder,
       });
     }
 

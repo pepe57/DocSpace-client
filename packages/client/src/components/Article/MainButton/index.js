@@ -302,26 +302,12 @@ const ArticleMainButtonContent = (props) => {
 
   const createActionsForFormRoom = React.useCallback(
     (actionList) => {
-      const { formGallery, formActions } = actionList;
-
-      const createNewFolder = {
-        id: "actions_new-folder",
-        className: "main-button_drop-down",
-        icon: CatalogFolderReactSvgUrl,
-        label: t("Files:CreateNewFolder"),
-        onClick: onCreate,
-        key: "new-folder",
-      };
-
-      const formFromTemplateAction = {
-        id: "actions_form-room_template_from-file",
-        className: "main-button_drop-down_sub",
-        icon: FormGalleryReactSvgUrl,
-        label: t("Common:ChooseFromTemplates"),
-        onClick: formGallery.onClick,
-        disabled: isPrivacy,
-        key: "form-file",
-      };
+      const {
+        formGallery,
+        formActions,
+        createNewFolder,
+        templateGalleryAvailable,
+      } = actionList;
 
       const uploadFromDocSpace = {
         id: "actions_upload-from-docspace",
@@ -357,22 +343,30 @@ const ArticleMainButtonContent = (props) => {
         key: "separator",
       };
 
-      const mobileMoreActions = null;
+      const formGallerySeparator = {
+        isSeparator: true,
+        key: "separator-form-gallery",
+      };
+
+      const formGalleryOption = templateGalleryAvailable
+        ? [formGallerySeparator, formGallery]
+        : [];
 
       const formRoomActions = [
-        uploadPDFFrom,
-        uploadPDFFromSeparator,
         formActions,
-        formFromTemplateAction,
         createNewFolder,
+        ...formGalleryOption,
+        uploadPDFFromSeparator,
+        uploadPDFFrom,
       ];
 
-      const mobileFormRoomActions = [
-        uploadPDFFrom,
-        formActions,
-        formFromTemplateAction,
-        createNewFolder,
-      ];
+      const mobileFormRoomActions = [formActions, createNewFolder];
+
+      if (mobileFormRoomActions) {
+        mobileFormRoomActions.push(formGallery);
+      }
+
+      const mobileMoreActions = [uploadPDFFrom];
 
       return {
         formRoomActions,
@@ -487,13 +481,12 @@ const ArticleMainButtonContent = (props) => {
     };
 
     const formGallery = {
-      id: "actions_template_oforms-gallery",
-      className: "main-button_drop-down_sub",
-      icon: FormGalleryReactSvgUrl,
+      id: "actions_open-template-gallery",
+      className: "main-button_drop-down",
+      icon: TemplateGalleryReactSvgUrl,
       label: t("Common:TemplateGallery"),
       onClick: onShowTemplateGallery,
-      disabled: isPrivacy,
-      key: "form-gallery",
+      key: "template-gallery",
     };
 
     const createNewPresentationPptx = {
@@ -536,7 +529,8 @@ const ArticleMainButtonContent = (props) => {
         createActionsForFormRoom({
           formGallery,
           formActions,
-          newUploadActions,
+          createNewFolder,
+          templateGalleryAvailable,
         });
 
       // for mobile
@@ -586,14 +580,7 @@ const ArticleMainButtonContent = (props) => {
         });
       }
 
-      newActions.push({
-        id: "actions_open-template-gallery",
-        className: "main-button_drop-down",
-        icon: TemplateGalleryReactSvgUrl,
-        label: t("Common:TemplateGallery"),
-        onClick: onShowTemplateGallery,
-        key: "template-gallery",
-      });
+      newActions.push(formGallery);
     }
 
     const menuModel = [...newActions];
