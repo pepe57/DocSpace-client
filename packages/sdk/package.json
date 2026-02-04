@@ -27,7 +27,6 @@
     "@docspace/ui-kit": "workspace:*",
     "classnames": "2.5.1",
     "date-and-time": "3.6.0",
-    "framer-motion": "^12.30.0",
     "i18next": "23.7.19",
     "lodash": "4.17.23",
     "mobx": "6.13.5",

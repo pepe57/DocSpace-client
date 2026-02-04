@@ -1180,9 +1180,6 @@ importers:
       firebase:
         specifier: 11.2.0
         version: 11.2.0
-      framer-motion:
-        specifier: ^12.30.0
-        version: 12.30.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       he:
         specifier: 1.2.0
         version: 1.2.0
