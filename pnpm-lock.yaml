@@ -154,12 +154,6 @@ importers:
       mobx-react:
         specifier: 7.6.0
         version: 7.6.0(mobx@6.13.5)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      moment:
-        specifier: 2.30.1
-        version: 2.30.1
-      moment-timezone:
-        specifier: 0.6.0
-        version: 0.6.0
       msw:
         specifier: ^2.12.7
         version: 2.12.7(@types/node@25.2.0)(typescript@5.9.3)
@@ -449,9 +443,6 @@ importers:
       lodash:
         specifier: 4.17.23
         version: 4.17.23
-      moment:
-        specifier: 2.30.1
-        version: 2.30.1
       nconf:
         specifier: 0.12.1
         version: 0.12.1
@@ -685,9 +676,6 @@ importers:
       mobx-react:
         specifier: 7.6.0
         version: 7.6.0(mobx@6.13.5)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      moment-timezone:
-        specifier: 0.6.0
-        version: 0.6.0
       nconf:
         specifier: 0.12.1
         version: 0.12.1
@@ -833,12 +821,6 @@ importers:
       mobx-react:
         specifier: 7.6.0
         version: 7.6.0(mobx@6.13.5)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      moment:
-        specifier: 2.30.1
-        version: 2.30.1
-      moment-timezone:
-        specifier: 0.6.0
-        version: 0.6.0
       nconf:
         specifier: 0.12.1
         version: 0.12.1
@@ -1005,12 +987,6 @@ importers:
       mobx-react:
         specifier: 7.6.0
         version: 7.6.0(mobx@6.13.5)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      moment:
-        specifier: 2.30.1
-        version: 2.30.1
-      moment-timezone:
-        specifier: 0.6.0
-        version: 0.6.0
       next:
         specifier: 16.1.6
         version: 16.1.6(@babel/core@7.25.8)(@playwright/test@1.58.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.79.6)
@@ -7635,9 +7611,6 @@ packages:
     resolution: {integrity: sha512-Rs5FVpVcBYRHPLuhHOjgbRhosaQYLtEo3JIeDIbmNo7mSssi1CTzwMh8v36gAzpbzLGXI9wB/yHh+5+3fY1QVw==}
     engines: {node: '>=18'}
     hasBin: true
-
-  moment-timezone@0.6.0:
-    resolution: {integrity: sha512-ldA5lRNm3iJCWZcBCab4pnNL3HSZYXVb/3TYr75/1WCTWYuTqYUb5f/S384pncYjJ88lbO8Z4uPDvmoluHJc8Q==}
 
   moment@2.30.1:
     resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
@@ -17328,10 +17301,6 @@ snapshots:
       glob: 7.2.3
       requirejs: 2.3.8
       requirejs-config-file: 4.0.0
-
-  moment-timezone@0.6.0:
-    dependencies:
-      moment: 2.30.1
 
   moment@2.30.1: {}
 
