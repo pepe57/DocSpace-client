@@ -35,8 +35,10 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import { isMobile } from "react-device-detect";
-import { FloatingButton } from "../floating-button";
-import { FloatingButtonIcons } from "../floating-button/FloatingButton.enums";
+import {
+  FloatingButton,
+  FloatingButtonIcons,
+} from "@docspace/ui-kit/components/floating-button";
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import ProgressList from "./ProgressList";
 import styles from "./OperationsProgressButton.module.scss";
