@@ -36,7 +36,7 @@ import {
   ModalDialogType,
   DialogAsideSkeleton
 } from "@docspace/ui-kit/components/modal-dialog";
-import { LoadingButton } from "@docspace/shared/components/loading-button";
+import { LoadingButton } from "@docspace/ui-kit/components/loading-button";
 
 import { StyledUploadBody } from "../StyledPanels";
 import FileList from "./FileList";
