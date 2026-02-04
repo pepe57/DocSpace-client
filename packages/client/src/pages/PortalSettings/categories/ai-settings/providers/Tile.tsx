@@ -31,14 +31,14 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
 import type { TAiProvider } from "@docspace/shared/api/ai/types";
+import { ProviderType } from "@docspace/shared/api/ai/enums";
 import { getAiProviderIcon, getAiProviderLabel } from "@docspace/shared/utils";
 
 import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 
 import { AiTile } from "../sub-components/ai-tile";
-
-import styles from "./../AISettings.module.scss";
+import styles from "../AISettings.module.scss";
 
 type AiProviderTileProps = {
   item: TAiProvider;
@@ -94,12 +94,14 @@ export const AiProviderTile = ({
         hasError={!isAvailable}
         getErrorTooltipContent={getErrorTooltipContent}
       >
-        <ContextMenuButton
-          directionX="right"
-          directionY="both"
-          getData={getContextOptions}
-          dropDownClassName={styles.aiContextMenuDropDown}
-        />
+        {item.type !== ProviderType.PortalAi ? (
+          <ContextMenuButton
+            directionX="right"
+            directionY="both"
+            getData={getContextOptions}
+            dropDownClassName={styles.aiContextMenuDropDown}
+          />
+        ) : null}
       </AiTile.Header>
 
       <AiTile.Body>

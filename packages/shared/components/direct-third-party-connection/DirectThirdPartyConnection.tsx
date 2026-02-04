@@ -334,7 +334,8 @@ const DirectThirdPartyConnection = ({
           isDisabled={isLoading}
           selectedOption={{
             key: 0,
-            label: selectedThirdPartyAccount?.label ?? "",
+            label:
+              selectedThirdPartyAccount?.label ?? t("Common:SelectResource"),
           }}
           dataTestId={buildDataTestId(dataTestId, "accounts_combobox")}
           dropDownTestId={buildDataTestId(dataTestId, "accounts_dropdown")}

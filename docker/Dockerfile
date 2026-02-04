@@ -31,7 +31,7 @@ RUN apt-get -y update && \
     apt-get install -yq
     
 # Install PNPM
-RUN npm install -g pnpm@10.28.0
+RUN npm install -g pnpm@10.28.2
 
 WORKDIR /app
 

@@ -42,11 +42,21 @@ import {
   markAsFavorite,
   removeFromFavorite,
 } from "@docspace/shared/api/files";
-import {
+import type {
   TEditHistory,
   TGetReferenceData,
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
+import {
+  getProviders,
+  getModels,
+  getDefaultProvider,
+} from "@docspace/shared/api/ai";
+import { ProviderType } from "@docspace/shared/api/ai/enums";
+import type {
+  TAiProvider,
+  TDefaultProvider,
+} from "@docspace/shared/api/ai/types";
 import { EDITOR_ID, FILLING_STATUS_ID } from "@docspace/shared/constants";
 import {
   assign,
@@ -56,7 +66,7 @@ import {
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { StartFillingMode } from "@docspace/shared/enums";
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
-import { Nullable } from "@docspace/shared/types";
+import type { Nullable } from "@docspace/shared/types";
 
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 
@@ -68,14 +78,16 @@ import {
   setDocumentTitle,
 } from "@/utils";
 
-import {
+import type {
   TCatchError,
   TDocEditor,
   TEvent,
   THistoryData,
   UseEventsProps,
+  TEditorAIEvent,
 } from "@/types";
 import { onSDKInfo } from "@/utils/events";
+import externalAIFetch from "@/utils/aiProxy";
 
 let docEditor: TDocEditor | null = null;
 
@@ -233,11 +245,11 @@ const useEditorEvents = ({
     }
   }, [config?.Error, errorMessage, isSkipError, searchParams, t, fixSize]);
 
-  const onDocumentReady = React.useCallback(() => {
-    // console.log("onDocumentReady", { docEditor });
+  const onDocumentReady = React.useCallback(async () => {
     setDocumentReady(true);
 
     frameCallCommand("setIsLoaded");
+
     checkAndRequestRoles();
 
     frameCallEvent({
@@ -247,19 +259,100 @@ const useEditorEvents = ({
 
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
 
-    // if (config?.file?.canShare) {
-    //   loadUsersRightsList(docEditor);
-    // }
+    const connector = docEditor?.createConnector?.();
+
+    if (connector && successAuth) {
+      const defaultPortalProvider =
+        (await getDefaultProvider()) as TDefaultProvider;
+
+      const defaultModel = "gpt-5.2";
+      let provider: TAiProvider | undefined;
+      let model = defaultPortalProvider.defaultModel || defaultModel;
+
+      if (defaultPortalProvider.providerId === -1) {
+        provider = {
+          id: defaultPortalProvider.providerId,
+          title: defaultPortalProvider.providerTitle,
+        } as TAiProvider;
+      } else {
+        const providers = await getProviders();
+        const compatibleTypes = [
+          ProviderType.PortalAi,
+          ProviderType.OpenAi,
+          ProviderType.OpenRouter,
+          ProviderType.OpenAiCompatible,
+        ];
+
+        provider = providers.find(
+          (p: TAiProvider) =>
+            p.id === defaultPortalProvider?.providerId &&
+            compatibleTypes.includes(p.type) &&
+            !p.needReset,
+        );
+
+        if (!provider) return;
+
+        const models = await getModels(provider.id);
+        provider.title = `${t("Common:ProductName")} [${provider.title}]`;
+        model = models[0]?.modelId || model;
+      }
+
+      console.log("AI Provider selected:", provider, model);
+
+      if (provider) {
+        const modelName = `${provider.title} [${model}]`;
+
+        const sendProviders = () => {
+          connector.sendEvent("ai_onCustomProviders", [
+            { name: provider.title },
+          ]);
+
+          connector.sendEvent("ai_onCustomInit", {
+            settingsLock: undefined,
+            actionsOverride: true,
+            actions: {
+              Chat: { model: model },
+              Summarization: { model: model },
+              Translation: { model: model },
+              TextAnalyze: { model: model },
+            },
+            models: [
+              {
+                capabilities: 255,
+                provider: provider.title,
+                name: modelName,
+                id: model,
+              },
+            ],
+          });
+        };
+
+        connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
+          if (data && typeof data === "object" && "error" in data && data.error)
+            connector.attachEvent("ai_onInit", sendProviders);
+          else sendProviders();
+        });
+
+        connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
+          externalAIFetch(connector, e as TEditorAIEvent, provider.id),
+        );
+      }
+    }
 
     if (docEditor) {
-      // console.log("call assign for asc files editor doceditor");
       assign(
         window as unknown as { [key: string]: object },
         ["ASC", "Files", "Editor", "docEditor"],
         docEditor,
       ); // Do not remove: it's for Back button on Mobile App
     }
-  }, [config?.errorMessage, sdkConfig?.frameId, checkAndRequestRoles]);
+  }, [
+    config?.errorMessage,
+    sdkConfig?.frameId,
+    checkAndRequestRoles,
+    t,
+    successAuth,
+  ]);
 
   const onUserActionRequired = React.useCallback(() => {
     frameCallCommand("setIsLoaded");

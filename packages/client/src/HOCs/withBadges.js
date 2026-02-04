@@ -35,6 +35,7 @@ import Badges from "@docspace/shared/components/badges";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
+import EditorsTooltip from "SRC_DIR/components/EditorsTooltip";
 
 export default function withBadges(WrappedComponent) {
   class WithBadges extends React.Component {
@@ -196,6 +197,28 @@ export default function withBadges(WrappedComponent) {
         .catch((err) => toastr.error(err));
     };
 
+    getEditingUsersTooltip = () => {
+      const { t, item, currentUserId } = this.props;
+      const { editingBy, activeEditors } = item;
+
+      const currentEditingBy = activeEditors || editingBy;
+
+      if (!currentEditingBy) return undefined;
+
+      const userNames = Object.entries(currentEditingBy)
+        .map(([userId, user]) => {
+          if (currentUserId && userId === currentUserId) {
+            return t("Common:MeLabel");
+          }
+          return user;
+        })
+        .join(", ");
+
+      return userNames
+        ? t("Common:EditingBy", { users: userNames })
+        : undefined;
+    };
+
     render() {
       const {
         t,
@@ -216,6 +239,7 @@ export default function withBadges(WrappedComponent) {
         isExtsCustomFilter,
         docspaceManagingRoomsHelpUrl,
         isRecentFolder,
+        currentUserId,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -271,6 +295,9 @@ export default function withBadges(WrappedComponent) {
           isRecentFolder={isRecentFolder}
           isPublicRoom={isPublicRoom}
           onClickFavorite={this.onClickFavorite}
+          editorsTooltip={
+            <EditorsTooltip item={item} currentUserId={currentUserId} />
+          }
         />
       );
 
@@ -362,6 +389,7 @@ export default function withBadges(WrappedComponent) {
         retryVectorization,
         setFavoriteAction,
         isRecentFolder,
+        currentUserId: userStore?.user?.id,
       };
     },
   )(observer(WithBadges));

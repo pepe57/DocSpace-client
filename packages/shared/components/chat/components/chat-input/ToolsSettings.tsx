@@ -71,7 +71,7 @@ import { Link, LinkType } from "@docspace/ui-kit/components/link";
 const ToolsSettings = ({
   servers,
   MCPTools,
-  webSearchPortalEnabled,
+  webSearchAvailable,
   webSearchEnabled,
   isFetched,
   knowledgeSearchToolName,
@@ -241,11 +241,11 @@ const ToolsSettings = ({
   }, []);
 
   const onWebSearchToggle = React.useCallback(() => {
-    if (!webSearchPortalEnabled) return;
+    if (!webSearchAvailable) return;
 
     updateWebSearchInRoom(Number(roomId), !webSearchEnabled);
     setWebSearchEnabled(!webSearchEnabled);
-  }, [roomId, webSearchEnabled, webSearchPortalEnabled, setWebSearchEnabled]);
+  }, [roomId, webSearchEnabled, webSearchAvailable, setWebSearchEnabled]);
 
   React.useEffect(() => {
     setKnowledgeSearchToolName(knowledgeSearchToolName);
@@ -326,9 +326,9 @@ const ToolsSettings = ({
         label: "Web Search",
         icon: WebSearchIconUrl,
         withToggle: true,
-        checked: webSearchEnabled && webSearchPortalEnabled,
+        checked: webSearchEnabled && webSearchAvailable,
         onClick: onWebSearchToggle,
-        disabled: !webSearchPortalEnabled,
+        disabled: !webSearchAvailable,
         tooltipTarget: "toggle",
         getTooltipContent: () => (
           <>
@@ -388,7 +388,7 @@ const ToolsSettings = ({
     t,
     toggleTool,
     webSearchEnabled,
-    webSearchPortalEnabled,
+    webSearchAvailable,
     onGoToWebSearchPage,
     onWebSearchToggle,
   ]);

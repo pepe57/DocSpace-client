@@ -150,6 +150,7 @@ const AddUpdateDialogComponent = ({
   const valuesByProvider = useRef<
     Record<ProviderType, { title: string; url: string; key: string }>
   >({
+    [ProviderType.PortalAi]: { title: "", url: "", key: "" },
     [ProviderType.OpenAi]: { title: "", url: "", key: "" },
     [ProviderType.Anthropic]: { title: "", url: "", key: "" },
     [ProviderType.TogetherAi]: { title: "", url: "", key: "" },
