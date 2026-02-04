@@ -25,11 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef, useState, useEffect } from "react";
-import moment from "moment";
 import classNames from "classnames";
 
 import CalendarIconUrl from "PUBLIC_DIR/images/calendar.react.svg?url";
 import CalendarIcon from "PUBLIC_DIR/images/calendar.react.svg";
+
+import {
+  parseToDateTime,
+  formatDate,
+  now,
+  type DateTime,
+} from "../../utils/date";
 
 import { Calendar } from "../calendar";
 import { SelectorAddButton } from "../selector-add-button";
@@ -63,7 +69,9 @@ const DatePicker = (props: DatePickerProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [shouldAlignRight, setShouldAlignRight] = useState(false);
 
-  const [date, setDate] = useState(initialDate ? moment(initialDate) : null);
+  const [date, setDate] = useState<DateTime | null>(
+    initialDate ? parseToDateTime(initialDate) : null,
+  );
 
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
@@ -87,7 +95,7 @@ const DatePicker = (props: DatePickerProps) => {
     setIsCalendarOpen(false);
   };
 
-  const handleChange = (d: null | moment.Moment) => {
+  const handleChange = (d: null | DateTime) => {
     onChange?.(d);
     setDate(d);
     closeCalendar();
@@ -133,12 +141,12 @@ const DatePicker = (props: DatePickerProps) => {
       setDate(null);
     }
 
-    if (
-      outerDate &&
-      moment(outerDate).format("YYYY-MM-D HH:mm") !==
-        moment(date).format("YYYY-MM-D HH:mm")
-    ) {
-      setDate(outerDate);
+    if (outerDate) {
+      const outerDateFormatted = formatDate(outerDate, "yyyy-MM-d HH:mm");
+      const dateFormatted = date ? formatDate(date, "yyyy-MM-d HH:mm") : "";
+      if (outerDateFormatted !== dateFormatted) {
+        setDate(outerDate);
+      }
     }
   }, [date, outerDate]);
 
@@ -187,15 +195,15 @@ const DatePicker = (props: DatePickerProps) => {
                   className={styles.calendarIcon}
                   data-testid="calendar-icon"
                 />
-                {date.format("DD MMM YYYY")}
+                {formatDate(date, "dd MMM yyyy")}
               </span>
             ) : (
-              date.format("DD MMM YYYY")
+              formatDate(date, "dd MMM yyyy")
             )
           }
           onClick={toggleCalendar}
           forwardedRef={selectedItemRef}
-          aria-label={`Selected date: ${date.format("DD MMMM YYYY")}`}
+          aria-label={`Selected date: ${formatDate(date, "dd MMMM yyyy")}`}
           aria-expanded={isCalendarOpen}
         />
       ) : null}
@@ -206,7 +214,7 @@ const DatePicker = (props: DatePickerProps) => {
             [styles.rightAligned]: shouldAlignRight,
           })}
           isMobile={isMobile}
-          selectedDate={date ?? moment()}
+          selectedDate={date ?? now()}
           setSelectedDate={handleChange}
           onChange={closeCalendar}
           forwardedRef={calendarRef}
