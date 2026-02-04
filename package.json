@@ -38,7 +38,7 @@
     "he": "1.2.0",
     "lefthook": "^2.0.16",
     "madge": "8.0.0",
-    "nx": "22.4.4",
+    "nx": "22.4.5",
     "react": "19.2.4",
     "shx": "0.4.0",
     "terser": "5.46.0",
@@ -49,7 +49,8 @@
   "resolutions": {
     "@types/react": "19.2.10",
     "@types/react-dom": "19.2.3",
-    "nth-check": "2.1.1"
+    "nth-check": "2.1.1",
+    "@isaacs/brace-expansion": "5.0.1"
   },
   "pnpm": {
     "overrides": {
