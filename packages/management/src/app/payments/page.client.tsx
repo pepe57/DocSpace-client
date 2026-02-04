@@ -28,6 +28,7 @@
 
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import moment from "moment-timezone";
 import { useRouter } from "next/navigation";
 
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
@@ -71,7 +72,7 @@ const PaymentsPage = ({
   isLifetimeLicense: boolean;
   isGracePeriod: boolean;
   isNotPaidPeriod: boolean;
-  gracePeriodEndDate: string;
+  gracePeriodEndDate: Date;
   delayDaysCount: string;
 }) => {
   const { t } = useTranslation("Common");
@@ -158,7 +159,9 @@ const PaymentsPage = ({
           isLifetimeLicense={isLifetimeLicense}
           isGracePeriod={isGracePeriod}
           isNotPaidPeriod={isNotPaidPeriod}
-          gracePeriodEndDate={gracePeriodEndDate}
+          gracePeriodEndDate={moment(gracePeriodEndDate)
+            .tz(window.timezone)
+            ?.format("LL")}
           delayDaysCount={delayDaysCount}
         />
       </LoaderWrapper>

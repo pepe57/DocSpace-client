@@ -40,7 +40,6 @@ import PaymentsPage from "./page.client";
 import { logger } from "../../../logger.mjs";
 import { TariffState } from "@docspace/shared/enums";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
-import moment from "moment-timezone";
 
 async function Page() {
   logger.info("Payments page");
@@ -115,7 +114,7 @@ async function Page() {
       isLifetimeLicense={false}
       isGracePeriod={state === TariffState.Delay}
       isNotPaidPeriod={state === TariffState.NotPaid}
-      gracePeriodEndDate={moment(delayDueDate).tz(window.timezone).format("LL")}
+      gracePeriodEndDate={delayDueDate}
       delayDaysCount={getDaysRemaining(delayDueDate)}
     />
   );
