@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http, HttpResponse } from "msw";
-import { v4 as uuidv4 } from "uuid";
+import { uuid } from "../../../utils/uuid";
 import moment from "moment/moment";
 
 import { TFileLink } from "../../../api/files/types";
@@ -35,7 +35,7 @@ export const PATH_LINK = "files/file/:fileId/link";
 export const PATH_LINKS = "files/file/:fileId/links";
 
 const generateFileLink = ({
-  id = uuidv4(),
+  id = uuid(),
   title = "New link",
   access = 2,
   primary = false,
