@@ -116,9 +116,9 @@ export function convertMomentFormatToLuxon(momentFormat: string): string {
   }
 
   // Step 2: Replace all placeholders with luxon tokens
-  for (const [placeholder, luxonToken] of placeholders) {
+  Array.from(placeholders.entries()).forEach(([placeholder, luxonToken]) => {
     result = result.split(placeholder).join(luxonToken);
-  }
+  });
 
   return result;
 }

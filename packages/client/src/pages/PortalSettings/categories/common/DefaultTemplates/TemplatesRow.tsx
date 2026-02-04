@@ -33,7 +33,7 @@ import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import moment from "moment";
+import { parseToDateTime, formatDate } from "@docspace/shared/utils/date";
 
 import { Badge } from "@docspace/shared/components/badge";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
@@ -149,7 +149,7 @@ const TemplatesRow = ({
   const filterParam = getFilterParam?.(item.extension);
 
   const lastModified = item.lastModified
-    ? moment(item.lastModified).format("MM/DD/YYYY hh:mm A")
+    ? formatDate(parseToDateTime(item.lastModified), "MM/dd/yyyy hh:mm a")
     : t("Settings:NotModified");
 
   return (

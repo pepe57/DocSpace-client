@@ -27,7 +27,6 @@
 import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
 
 import { SettingsStorageManagementSkeleton } from "@docspace/shared/skeletons/settings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -49,8 +48,6 @@ const StorageManagementWrapper = (props) => {
   } = props;
 
   useEffect(() => {
-    moment.locale(language);
-
     return () => {
       clearIntervalCheckRecalculate();
     };
