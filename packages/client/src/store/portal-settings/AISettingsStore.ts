@@ -468,14 +468,6 @@ class AISettingsStore {
   get hasAIProviders() {
     return this.aiProviders.length > 0;
   }
-
-  get isDefaultProviderSettingsAvailable() {
-    return (
-      this.aiProviders.length > 0 &&
-      this.defaultProvider &&
-      this.defaultProviderInitied
-    );
-  }
 }
 
 export default AISettingsStore;

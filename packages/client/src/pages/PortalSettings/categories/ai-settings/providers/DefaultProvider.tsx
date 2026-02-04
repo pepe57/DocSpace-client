@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useEffect, useEffectEvent, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
@@ -57,6 +57,7 @@ type DefaultProviderProps = {
   isDefaultProviderModelsLoading?: AISettingsStore["isDefaultProviderModelsLoading"];
   changeDefaultProvider?: AISettingsStore["changeDefaultProvider"];
   defaultProviderModelsError?: AISettingsStore["defaultProviderModelsError"];
+  defaultProviderInitied?: AISettingsStore["defaultProviderInitied"];
 };
 
 const getSelectedProvider = (
@@ -93,6 +94,7 @@ const DefaultProviderComponent = ({
   isDefaultProviderModelsLoading,
   changeDefaultProvider,
   defaultProviderModelsError,
+  defaultProviderInitied,
 }: DefaultProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [selectedProvider, setSelectedProvider] = useState<TOption | null>(() =>
@@ -102,6 +104,7 @@ const DefaultProviderComponent = ({
     getSelectedModel(t, defaultProviderModels, defaultProvider),
   );
   const [isSaveRequestRunning, setIsSaveRequestRunning] = useState(false);
+  const prevDefaultProviderInitiedRef = useRef(defaultProviderInitied);
 
   const isProviderChanged =
     selectedProvider?.key !== defaultProvider?.providerId;
@@ -179,21 +182,26 @@ const DefaultProviderComponent = ({
     isDefaultProviderModelsLoading ||
     !defaultProviderModels;
 
-  const recalculateState = useEffectEvent(() => {
-    setSelectedProvider(getSelectedProvider(aiProviders, defaultProvider));
-    setSelectedModel(
-      getSelectedModel(t, defaultProviderModels, defaultProvider),
-    );
-  });
-
   useEffect(() => {
-    if (
-      defaultProvider &&
-      defaultProvider.providerId !== selectedProvider?.key
-    ) {
-      recalculateState();
+    const isNewInit =
+      defaultProviderInitied === true &&
+      prevDefaultProviderInitiedRef.current === false;
+
+    if (isNewInit) {
+      setSelectedProvider(getSelectedProvider(aiProviders, defaultProvider));
+      setSelectedModel(
+        getSelectedModel(t, defaultProviderModels, defaultProvider),
+      );
     }
-  }, [defaultProvider]);
+
+    prevDefaultProviderInitiedRef.current = defaultProviderInitied;
+  }, [
+    defaultProviderInitied,
+    aiProviders,
+    defaultProvider,
+    defaultProviderModels,
+    t,
+  ]);
 
   if (!selectedProvider || !selectedModel) {
     return null;
@@ -300,5 +308,6 @@ export const DefaultProvider = inject(({ aiSettingsStore }: TStore) => {
       aiSettingsStore.isDefaultProviderModelsLoading,
     changeDefaultProvider: aiSettingsStore.changeDefaultProvider,
     defaultProviderModelsError: aiSettingsStore.defaultProviderModelsError,
+    defaultProviderInitied: aiSettingsStore.defaultProviderInitied,
   };
 })(observer(DefaultProviderComponent));
