@@ -233,18 +233,24 @@ const Section = (props: SectionProps) => {
 
     if (hasMultipleOperations) {
       const completionStates = [];
+
       if (secondaryActiveOperations?.length)
         completionStates.push(secondaryOperationsCompleted);
+
       if (primaryOperationsArray?.length)
         completionStates.push(primaryOperationsCompleted);
+
       if (pluginOperations?.length)
         completionStates.push(pluginOperationsCompleted);
+
       return completionStates.every((state) => state);
     }
 
     if (pluginOperations?.length > 0) return pluginOperationsCompleted;
+
     if (secondaryActiveOperations?.length > 0)
       return secondaryOperationsCompleted;
+    
     return primaryOperationsCompleted;
   }, [
     secondaryOperationsCompleted,
