@@ -38,7 +38,7 @@ import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
-import { EmailInput } from "@docspace/shared/components/email-input";
+import { EmailInput } from "@docspace/ui-kit/components/email-input";
 import { StyledComponent } from "../StyledComponent";
 import { SMTPSettingsFields } from "../constants";
 import ButtonContainer from "./ButtonContainer";

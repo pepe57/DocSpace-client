@@ -30,8 +30,7 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { EmailInput } from "@docspace/shared/components/email-input";
-import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
 import { Text } from "@docspace/ui-kit/components/text";
 import styles from "./EmailChange.module.scss";
 

@@ -29,7 +29,7 @@ import PropTypes from "prop-types";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
-import { EmailInput } from "@docspace/shared/components/email-input";
+import { EmailInput } from "@docspace/ui-kit/components/email-input";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { toastr } from "@docspace/ui-kit/components/toast";
 

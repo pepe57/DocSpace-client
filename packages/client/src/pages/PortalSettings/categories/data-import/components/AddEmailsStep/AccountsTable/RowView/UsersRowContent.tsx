@@ -32,8 +32,7 @@ import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/ui-kit/components/text";
 import { RowContent } from "@docspace/shared/components/rows";
 
-import { EmailInput } from "@docspace/shared/components/email-input";
-import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
 
 import { isMobile } from "@docspace/shared/utils";
 

@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { TValidate } from "@docspace/ui-kit/components/email-input";
 import { sendRegisterRequest } from "@docspace/shared/api/settings";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 

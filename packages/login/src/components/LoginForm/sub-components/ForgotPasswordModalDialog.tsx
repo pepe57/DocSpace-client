@@ -28,7 +28,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { EmailInput } from "@docspace/shared/components/email-input";
+import { EmailInput } from "@docspace/ui-kit/components/email-input";
 import { Text } from "@docspace/ui-kit/components/text";
 import {
   ModalDialog,
@@ -37,7 +37,7 @@ import {
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { sendInstructionsToChangePassword } from "@docspace/shared/api/people";
-import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { TValidate } from "@docspace/ui-kit/components/email-input";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { ButtonKeys } from "@docspace/shared/enums";
 import { useCaptcha } from "@docspace/shared/hooks/useCaptcha";
