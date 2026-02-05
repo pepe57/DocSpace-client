@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { now, parseToDateTime, addToDate, diffInMilliseconds } from "@docspace/shared/utils/date";
+import { now, parseToDateTime, addToDate, dateDiff } from "@docspace/shared/utils/date";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
@@ -122,8 +122,8 @@ export default function withQuickButtons(WrappedComponent) {
       const startDate = this.getStartDate();
       const startDateTime = parseToDateTime(startDate);
       const expiredDateTime = parseToDateTime(item.expired);
-      const dateDiff = diffInMilliseconds(startDateTime, expiredDateTime) * 0.1;
-      const showDate = addToDate(expiredDateTime, dateDiff, "milliseconds");
+      const diffMs = dateDiff(startDateTime, expiredDateTime, "milliseconds") * 0.1;
+      const showDate = addToDate(expiredDateTime, diffMs, "milliseconds");
 
       return now().toMillis() >= showDate.toMillis();
     };
