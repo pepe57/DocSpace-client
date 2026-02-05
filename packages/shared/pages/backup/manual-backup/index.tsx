@@ -44,7 +44,7 @@ import SocketHelper, {
   TSocketListener,
 } from "../../../utils/socket";
 import { OPERATIONS_NAME } from "../../../constants";
-import OperationsProgressButton from "../../../components/operations-progress-button";
+import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
 import DataBackupLoader from "../../../skeletons/backup/DataBackup";
 import { getBackupProgressInfo, getErrorInfo } from "../../../utils/common";
 import { getFromLocalStorage } from "../../../utils";

@@ -264,7 +264,7 @@ const PureHome = (props) => {
 
   const onCancelUpload = useCallback(() => {
     if (hideConfirmCancelOperation) {
-      cancelUpload(t);
+      cancelUpload();
       return;
     }
 

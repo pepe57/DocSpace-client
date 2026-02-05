@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
-import { Trans } from "react-i18next";
+import { i18n, Trans } from "react-i18next";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
@@ -261,7 +261,7 @@ class UploadDataStore {
     return this.files.filter((f) => f.uniqueId === id);
   };
 
-  cancelUpload = (t) => {
+  cancelUpload = () => {
     this.finishUploadFilesCalled = false;
 
     const newUploadData = {
@@ -299,7 +299,7 @@ class UploadDataStore {
     this.setUploadData(newUploadData);
     this.uploadedFilesHistory = newHistory;
 
-    toastr.info(t("Common:CancelUpload"));
+    toastr.info(i18n.t("Common:CancelUpload"));
   };
 
   cancelConversion = () => {
