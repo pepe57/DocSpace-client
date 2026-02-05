@@ -33,7 +33,7 @@ import classNames from "classnames";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { PasswordInput } from "../../../components/password-input";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { frameCallCommand } from "../../../utils/common";
