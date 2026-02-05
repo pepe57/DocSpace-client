@@ -27,6 +27,7 @@
 import {
   colorThemeHandler,
   getPortalApiHandler,
+  getPortalHandler,
   registerHandler,
   removePortalHandler,
   setDomainHandler,
@@ -46,7 +47,7 @@ test.describe("Spaces", () => {
     serverRequestInterceptor,
     port,
   }) => {
-    serverRequestInterceptor.use(getPortalApiHandler(port, true));
+    serverRequestInterceptor.use(getPortalHandler(port, true));
 
     await page.goto(`${baseUrl}/management/spaces`);
 
@@ -68,7 +69,7 @@ test.describe("Spaces", () => {
   }) => {
     // Override to return portals with uncompleted tenant
     serverRequestInterceptor.use(
-      getPortalApiHandler(port, false, true),
+      getPortalHandler(port, false, true),
       settingsHandler(port, TypeSettings.Connected),
     );
 
@@ -89,6 +90,7 @@ test.describe("Spaces", () => {
     port,
   }) => {
     serverRequestInterceptor.use(
+      getPortalHandler(port, false, true),
       registerHandler(port),
       settingsHandler(port, TypeSettings.Connected),
     );
@@ -137,7 +139,7 @@ test.describe("Spaces", () => {
     port,
   }) => {
     // Start with uncompleted tenant
-    serverRequestInterceptor.use(getPortalApiHandler(port, false, true));
+    serverRequestInterceptor.use(getPortalHandler(port, false, true));
     serverRequestInterceptor.use(
       removePortalHandler(port),
       settingsHandler(port, TypeSettings.Connected),
@@ -180,7 +182,7 @@ test.describe("Spaces", () => {
     port,
   }) => {
     // Start with uncompleted tenant
-    serverRequestInterceptor.use(getPortalApiHandler(port, false, true));
+    serverRequestInterceptor.use(getPortalHandler(port, false, true));
     serverRequestInterceptor.use(
       setDomainHandler(port),
       settingsHandler(port, TypeSettings.Connected),
