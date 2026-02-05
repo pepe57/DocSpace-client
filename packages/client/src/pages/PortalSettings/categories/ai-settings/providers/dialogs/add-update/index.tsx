@@ -54,7 +54,7 @@ import type {
 } from "@docspace/shared/api/ai/types";
 import { type TData, toastr } from "@docspace/ui-kit/components/toast";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { PasswordInput } from "@docspace/shared/components/password-input";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { Text } from "@docspace/ui-kit/components/text";
 

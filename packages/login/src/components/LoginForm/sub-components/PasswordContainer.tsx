@@ -28,66 +28,66 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { PasswordInput } from "@docspace/shared/components/password-input";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 
 interface IPasswordContainer {
-	passwordValid: boolean;
-	passwordErrorMessage: string;
-	password: string;
+  passwordValid: boolean;
+  passwordErrorMessage: string;
+  password: string;
 
-	isLoading: boolean;
-	emailFromInvitation: string;
+  isLoading: boolean;
+  emailFromInvitation: string;
 
-	onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const settings = {
-	minLength: 6,
-	upperCase: false,
-	digits: false,
-	specSymbols: false,
+  minLength: 6,
+  upperCase: false,
+  digits: false,
+  specSymbols: false,
 };
 
 const PasswordContainer = ({
-	passwordValid,
-	passwordErrorMessage,
-	password,
-	isLoading,
-	emailFromInvitation,
-	onChangePassword,
+  passwordValid,
+  passwordErrorMessage,
+  password,
+  isLoading,
+  emailFromInvitation,
+  onChangePassword,
 }: IPasswordContainer) => {
-	const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common"]);
 
-	return (
-		<FieldContainer
-			isVertical
-			labelVisible={false}
-			hasError={!passwordValid}
-			errorMessage={passwordErrorMessage} // TODO: Add wrong password server error
-			dataTestId="password_field_container"
-		>
-			<PasswordInput
-				className="password-input"
-				simpleView
-				passwordSettings={settings}
-				id="login_password"
-				inputName="password"
-				placeholder={t("Common:Password")}
-				hasError={!passwordValid}
-				inputValue={password}
-				size={InputSize.large}
-				scale
-				tabIndex={1}
-				isDisabled={isLoading}
-				autoComplete="current-password"
-				onChange={onChangePassword}
-				isAutoFocussed={!!emailFromInvitation}
-				inputType={InputType.password}
-				isDisableTooltip
-			/>
-		</FieldContainer>
-	);
+  return (
+    <FieldContainer
+      isVertical
+      labelVisible={false}
+      hasError={!passwordValid}
+      errorMessage={passwordErrorMessage} // TODO: Add wrong password server error
+      dataTestId="password_field_container"
+    >
+      <PasswordInput
+        className="password-input"
+        simpleView
+        passwordSettings={settings}
+        id="login_password"
+        inputName="password"
+        placeholder={t("Common:Password")}
+        hasError={!passwordValid}
+        inputValue={password}
+        size={InputSize.large}
+        scale
+        tabIndex={1}
+        isDisabled={isLoading}
+        autoComplete="current-password"
+        onChange={onChangePassword}
+        isAutoFocussed={!!emailFromInvitation}
+        inputType={InputType.password}
+        isDisableTooltip
+      />
+    </FieldContainer>
+  );
 };
 
 export default PasswordContainer;
