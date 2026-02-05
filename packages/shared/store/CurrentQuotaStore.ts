@@ -236,6 +236,13 @@ class CurrentQuotasStore {
     return result?.value ?? 0;
   }
 
+  get isLifetimeLicense() {
+    const result = this.currentPortalQuotaFeatures.get(
+      "lifetime",
+    ) as TBooleanPaymentFeature;
+    return result?.value;
+  }
+
   get isRestoreAndAutoBackupAvailable() {
     const result = this.currentPortalQuotaFeatures.get(
       "restore",

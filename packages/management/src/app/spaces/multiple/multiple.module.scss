@@ -55,10 +55,10 @@
 
 .rowContainer {
   @include mixins.desktop {
-    max-width: 620px;
+    max-width: 620px !important;
 
     :global(.row_content) {
-      max-width: 508px;
+      max-width: 508px !important;
     }
   }
 
