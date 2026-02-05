@@ -44,6 +44,7 @@ import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelecto
 import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
+  FolderType,
   RoomsType,
   StartFillingMode,
 } from "@docspace/shared/enums";
@@ -213,6 +214,7 @@ export interface IInitialConfig {
   startFillingMode?: StartFillingMode;
   fillingSessionId?: string;
   fillingStatus?: boolean;
+  quotaExceededScope?: number;
 }
 
 export type TError = {
@@ -382,6 +384,8 @@ export interface UseSocketHelperProps {
   user?: TUser;
   shareKey?: string;
   standalone?: boolean;
+  folderId?: string | number;
+  folderType?: FolderType;
 }
 
 export interface UseEventsProps {
@@ -444,6 +448,17 @@ export type TDocEditor = {
   startFilling?: VoidFunction;
   requestRoles?: VoidFunction;
   setFavorite?: (favorite: boolean) => void;
+  createConnector?: () => TEditorConnector;
+};
+
+export type TEditorConnector = {
+  attachEvent: (id: string, action: (...args: unknown[]) => void) => void;
+  sendEvent: (name: string, data?: string | object | unknown[]) => void;
+  executeMethod: (
+    name: string,
+    params: object[],
+    callback: (response: object | { error: string }) => void,
+  ) => void;
 };
 
 export type TCatchError =
@@ -510,4 +525,12 @@ export type ConflictStateType = {
 export type TFormRole = {
   name: string;
   color: string;
+};
+
+export type TEditorAIEvent = {
+  id: string;
+  type: string;
+  url: string;
+  streaming: boolean;
+  options: RequestInit & { headers: Record<string, string> };
 };

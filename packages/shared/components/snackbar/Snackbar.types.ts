@@ -41,6 +41,10 @@ export type SnackbarProps = {
    */
   headerText?: string;
   /**
+   * Specifies additional information text next to the header.
+   */
+  additionalHeaderText?: string;
+  /**
    * Specifies the button text.
    */
   btnText?: string;
@@ -104,6 +108,8 @@ export type SnackbarProps = {
    * Callback when close button is clicked.
    */
   onClose?: () => void;
+
+  skipBlur?: boolean;
 };
 
 /**

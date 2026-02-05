@@ -50,7 +50,7 @@ const ResetTemplateDialog = ({
       onClose={onClose}
       visible={isVisible}
     >
-      <ModalDialog.Header>{t("Settings:ResetTemplate")}?</ModalDialog.Header>
+      <ModalDialog.Header>{t("Settings:ResetToDefault")}</ModalDialog.Header>
 
       <ModalDialog.Body>
         <Text>{t("Settings:ResetTemplateDescription")}</Text>

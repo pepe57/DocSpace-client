@@ -86,6 +86,7 @@ const FloatingButton = forwardRef<HTMLDivElement, FloatingButtonProps>(
       className,
       style,
       icon = FloatingButtonIcons.other,
+      iconUrl,
       alert = false,
       completed = false,
       onClick,
@@ -99,10 +100,13 @@ const FloatingButton = forwardRef<HTMLDivElement, FloatingButtonProps>(
     ref,
   ) => {
     const iconComponent = useMemo(() => {
+      if (iconUrl) {
+        return <img src={iconUrl} width={20} alt="icon"/>;
+      }
       return (
         ICON_COMPONENTS[icon] ?? ICON_COMPONENTS[FloatingButtonIcons.other]
       );
-    }, [icon]);
+    }, [icon, iconUrl]);
 
     const handleProgressClear = () => {
       clearUploadedFilesHistory?.();
