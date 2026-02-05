@@ -260,9 +260,9 @@ describe("Date Utilities", () => {
     });
 
     it("humanizes duration", () => {
-      expect(humanizeDuration(1, "days")).toBe("a day");
+      expect(humanizeDuration(1, "days")).toBe("1 day");
       expect(humanizeDuration(5, "days")).toBe("5 days");
-      expect(humanizeDuration(1, "hours")).toBe("an hour");
+      expect(humanizeDuration(1, "hours")).toBe("1 hour");
       expect(humanizeDuration(2, "hours")).toBe("2 hours");
     });
 
