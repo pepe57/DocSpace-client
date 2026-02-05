@@ -111,7 +111,6 @@ export type ArticleProps = ArticleProfileProps &
     isGracePeriod?: boolean;
     isFreeTariff?: boolean;
     isPaymentPageAvailable?: boolean;
-    isLicenseExpiring?: boolean;
     isLicenseDateExpired?: boolean;
     isTrial?: boolean;
     standalone?: boolean;

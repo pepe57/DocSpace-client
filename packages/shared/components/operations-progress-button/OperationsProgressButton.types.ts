@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export interface Operation {
+  id?: string;
   operation: string;
   label: string;
   alert: boolean;
@@ -33,13 +34,14 @@ export interface Operation {
   withoutStatus?: boolean;
   showPanel?: (open: boolean) => void;
   withoutProgress?: boolean;
+  iconUrl?: string;
   items?: Array<{
     operationId: string;
     percent: number;
   }>;
   errorCount?: number;
   dragged?: string | null;
-}
+  }
 
 export interface OperationsProgressProps {
   panelOperations?: Operation[];
@@ -49,6 +51,7 @@ export interface OperationsProgressProps {
   clearOperationsData?: (
     operationId?: string | null,
     operation?: string | null,
+    operationItem?: Operation,
   ) => void;
   clearPanelOperationsData?: (operation?: string | null) => void;
   clearDropPreviewLocation?: () => void;
