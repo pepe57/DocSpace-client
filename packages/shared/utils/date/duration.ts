@@ -127,7 +127,7 @@ export function humanizeDuration(
   // Without suffix: use Luxon's toHuman() for localized duration
   const pluralUnit = `${significantUnit}s` as DurationUnit;
   const durationToFormat = createDuration(Math.abs(significantValue), pluralUnit);
-  return durationToFormat.toHuman({ locale });
+  return durationToFormat.reconfigure({ locale }).toHuman();
 }
 
 /**
