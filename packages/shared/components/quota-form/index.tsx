@@ -251,7 +251,7 @@ export const QuotaForm = forwardRef<{ focus: () => void }, QuotaFormProps>(
             isDisabled={isDisable}
             onKeyDown={onKeyDownInput}
             hasError={isError || hasError}
-            pattern="^\d+(?:\.\d{0,2})?"
+            pattern="^(?!^0(?:\.\d{0,2})?$)\d+(?:\.\d{0,2})?$"
             scale
             withBorder
             tabIndex={tabIndex}

@@ -32,12 +32,13 @@ import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.
 import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.light.svg?url";
 import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg?url";
 
-import { Selector, TSelectorItem } from "../../components/selector";
+import { Selector, TSelectorItem } from "@docspace/ui-kit/components/selector";
 import {
   TSelectorCancelButton,
   TSelectorHeader,
   TSelectorSearch,
-} from "../../components/selector/Selector.types";
+  TSelectorWithAside,
+} from "@docspace/ui-kit/components/selector";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 
 import { TTranslation } from "../../types";
@@ -86,6 +87,11 @@ const RoomSelectorComponent = ({
 
   createDefineRoomLabel,
   createDefineRoomType,
+
+  useAside,
+  onClose,
+  withBlur,
+  withoutBackground,
 
   withInit,
   withCreate,
@@ -225,6 +231,10 @@ const RoomSelectorComponent = ({
       }
     : {};
 
+  const withAside: TSelectorWithAside = useAside
+    ? { useAside, onClose, withBlur, withoutBackground }
+    : {};
+
   return (
     <Selector
       id={id}
@@ -233,6 +243,7 @@ const RoomSelectorComponent = ({
       {...headerSelectorProps}
       {...cancelButtonSelectorProps}
       {...searchSelectorProps}
+      {...withAside}
       withPadding={withPadding}
       onSelect={onSelect}
       items={items}

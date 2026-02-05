@@ -40,7 +40,7 @@ import {
   getNotificationSubscription,
 } from "@docspace/shared/api/settings";
 import { TNotificationChannel } from "@docspace/shared/api/settings/types";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Nullable } from "@docspace/shared/types";
 

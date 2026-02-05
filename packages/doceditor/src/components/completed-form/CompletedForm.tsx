@@ -36,7 +36,7 @@ import DownloadIconUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import LinkIconUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import MailIcon from "PUBLIC_DIR/images/icons/12/mail.svg";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";

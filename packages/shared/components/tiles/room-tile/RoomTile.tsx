@@ -26,9 +26,9 @@
 
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Tags } from "../../tags";
+import { Tags } from "@docspace/ui-kit/components/tags";
 import { classNames } from "../../../utils";
-import { TagType } from "../../tags/Tags.types";
+import { TagType } from "@docspace/ui-kit/components/tags";
 import { RoomTileProps, RoomItem } from "./RoomTile.types";
 import { BaseTile } from "../base-tile/BaseTile";
 import { TileItem } from "../tile-container/TileContainer.types";

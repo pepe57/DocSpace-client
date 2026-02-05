@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 import { IndexRange } from "react-virtualized";
 
 import { InfiniteLoaderComponent } from "./InfiniteLoader";
-import { Scrollbar } from "../scrollbar/Scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { TViewAs } from "../../types";
 
 const generateItems = (

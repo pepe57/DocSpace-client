@@ -33,14 +33,14 @@ import { inject, observer } from "mobx-react";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { size } from "@docspace/shared/utils";
 import type { TColorScheme } from "@docspace/shared/themes";
-import type { TData } from "@docspace/shared/components/toast";
+import type { TData } from "@docspace/ui-kit/components/toast";
 
 import { LearnMoreWrapper } from "../StyledSecurity";
 

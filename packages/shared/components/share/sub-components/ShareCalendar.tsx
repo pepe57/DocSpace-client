@@ -28,7 +28,7 @@ import moment from "moment";
 
 import { useIsMobile } from "../../../hooks/useIsMobile";
 
-import { Calendar } from "../../calendar";
+import { Calendar } from "@docspace/ui-kit/components/calendar";
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 

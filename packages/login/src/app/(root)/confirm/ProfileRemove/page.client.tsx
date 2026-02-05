@@ -31,9 +31,9 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { deleteSelf } from "@docspace/shared/api/people";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 

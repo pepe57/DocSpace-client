@@ -57,6 +57,7 @@ import type {
   IApiPlugin,
   ISettingsPlugin,
   ButtonGroup,
+  IFloatingOperationsButton,
 } from "@onlyoffice/docspace-plugin-sdk";
 
 import type {
@@ -88,6 +89,11 @@ export type {
 };
 
 //Extended client-side types
+export interface IFloatingOperationsButtonClient
+  extends IFloatingOperationsButton {
+  pluginName: string;
+}
+
 export interface IContextMenuItemClient extends IContextMenuItem {
   pluginName: string;
   items?: Omit<IContextMenuItemClient, "items">[];
@@ -158,6 +164,7 @@ export type TPlugin = {
   enabled: boolean;
   system: boolean;
   url: string;
+  cssUrl?: string;
   settings: string;
   iconUrl: string;
   setLanguage?: (locale: string) => void;

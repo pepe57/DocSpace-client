@@ -40,7 +40,7 @@ import { ReactSVG } from "react-svg";
 
 import { Row } from "@docspace/shared/components/rows";
 import { ChangeStorageQuotaDialog } from "@docspace/shared/dialogs/change-storage-quota";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import type { TPortals } from "@docspace/shared/api/management/types";
 

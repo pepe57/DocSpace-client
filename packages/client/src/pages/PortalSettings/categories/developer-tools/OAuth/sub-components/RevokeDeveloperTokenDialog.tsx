@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
 import { introspectDeveloperToken } from "@docspace/shared/api/oauth";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import {
   ModalDialog,
@@ -38,7 +38,7 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
-import { toastr, type TData } from "@docspace/shared/components/toast";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 
 import {
   InputSize,

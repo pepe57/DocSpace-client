@@ -31,130 +31,130 @@ import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 
 import { RoomsType } from "../../enums";
 
-import { RoomLogo } from "../room-logo";
+import { RoomLogo } from "@docspace/ui-kit/components/room-logo";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import {
-	getRoomTypeDescriptionTranslation,
-	getRoomTypeTitleTranslation,
+  getRoomTypeDescriptionTranslation,
+  getRoomTypeTitleTranslation,
 } from "./RoomType.utils";
 import styles from "./RoomType.module.scss";
 import { RoomTypeProps } from "./RoomType.types";
 
 const RoomType = ({
-	roomType,
-	onClick,
-	type = "listItem",
-	isOpen,
-	id,
-	selectedId,
-	disabledFormRoom,
-	isTemplate,
-	isTemplateRoom,
+  roomType,
+  onClick,
+  type = "listItem",
+  isOpen,
+  id,
+  selectedId,
+  disabledFormRoom,
+  isTemplate,
+  isTemplateRoom,
 }: RoomTypeProps) => {
-	const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common"]);
 
-	const room = {
-		type: roomType,
-		title: getRoomTypeTitleTranslation(t, roomType, isTemplate),
-		description: getRoomTypeDescriptionTranslation(t, roomType, isTemplate),
-	};
+  const room = {
+    type: roomType,
+    title: getRoomTypeTitleTranslation(t, roomType, isTemplate),
+    description: getRoomTypeDescriptionTranslation(t, roomType, isTemplate),
+  };
 
-	const isFormRoom = roomType === RoomsType.FormRoom;
+  const isFormRoom = roomType === RoomsType.FormRoom;
 
-	const disabled = isFormRoom && disabledFormRoom;
+  const disabled = isFormRoom && disabledFormRoom;
 
-	const arrowClassName =
-		type === "dropdownButton"
-			? "choose_room-forward_btn dropdown-button"
-			: type === "dropdownItem"
-				? "choose_room-forward_btn dropdown-item"
-				: "choose_room-forward_btn";
+  const arrowClassName =
+    type === "dropdownButton"
+      ? "choose_room-forward_btn dropdown-button"
+      : type === "dropdownItem"
+        ? "choose_room-forward_btn dropdown-item"
+        : "choose_room-forward_btn";
 
-	const content = (
-		<>
-			<div className="choose_room-logo_wrapper">
-				<RoomLogo
-					type={room.type}
-					isTemplate={isTemplate}
-					isTemplateRoom={isTemplateRoom}
-				/>
-			</div>
+  const content = (
+    <>
+      <div className="choose_room-logo_wrapper">
+        <RoomLogo
+          type={room.type}
+          isTemplate={isTemplate}
+          isTemplateRoom={isTemplateRoom}
+        />
+      </div>
 
-			<div className="choose_room-info_wrapper">
-				<div className="choose_room-title">
-					<Text className="choose_room-title-text">{t(room.title)}</Text>
-				</div>
-				<Text className="choose_room-description">{t(room.description)}</Text>
-			</div>
+      <div className="choose_room-info_wrapper">
+        <div className="choose_room-title">
+          <Text className="choose_room-title-text">{t(room.title)}</Text>
+        </div>
+        <Text className="choose_room-description">{t(room.description)}</Text>
+      </div>
 
-			<IconButton
-				className={arrowClassName}
-				iconName={ArrowReactSvgUrl}
-				size={16}
-				onClick={onClick}
-			/>
-		</>
-	);
+      <IconButton
+        className={arrowClassName}
+        iconName={ArrowReactSvgUrl}
+        size={16}
+        onClick={onClick}
+      />
+    </>
+  );
 
-	return type === "listItem" ? (
-		<TooltipContainer
-			as="div"
-			className={classNames(styles.roomType, styles.listItem, {
-				[styles.isOpen]: isOpen,
-			})}
-			id={id}
-			title={disabled ? "" : t(room.title)}
-			onClick={onClick}
-			data-tooltip-id={disabled ? "create-room-tooltip" : undefined}
-			data-testid="room-type-list-item"
-			data-selected-id={selectedId}
-		>
-			{content}
-		</TooltipContainer>
-	) : type === "dropdownButton" ? (
-		<TooltipContainer
-			as="div"
-			id={id}
-			title={t(room.title)}
-			onClick={onClick}
-			className={classNames(styles.roomType, styles.dropDownButton, {
-				[styles.isOpen]: isOpen,
-			})}
-			data-selected-id={selectedId}
-			data-testid="room-type-dropdown-button"
-		>
-			{content}
-		</TooltipContainer>
-	) : type === "dropdownItem" ? (
-		<TooltipContainer
-			as="div"
-			id={id}
-			title={t(room.title)}
-			onClick={onClick}
-			data-selected-id={selectedId}
-			className={classNames(styles.roomType, styles.dropDownItem, {
-				[styles.isOpen]: isOpen,
-			})}
-			data-testid="room-type-dropdown-item"
-		>
-			{content}
-		</TooltipContainer>
-	) : (
-		<TooltipContainer
-			as="div"
-			id={id}
-			title={t(room.title)}
-			data-selected-id={selectedId}
-			className={classNames(styles.roomType, styles.displayItem, {
-				[styles.isOpen]: isOpen,
-			})}
-		>
-			{content}
-		</TooltipContainer>
-	);
+  return type === "listItem" ? (
+    <TooltipContainer
+      as="div"
+      className={classNames(styles.roomType, styles.listItem, {
+        [styles.isOpen]: isOpen,
+      })}
+      id={id}
+      title={disabled ? "" : t(room.title)}
+      onClick={onClick}
+      data-tooltip-id={disabled ? "create-room-tooltip" : undefined}
+      data-testid="room-type-list-item"
+      data-selected-id={selectedId}
+    >
+      {content}
+    </TooltipContainer>
+  ) : type === "dropdownButton" ? (
+    <TooltipContainer
+      as="div"
+      id={id}
+      title={t(room.title)}
+      onClick={onClick}
+      className={classNames(styles.roomType, styles.dropDownButton, {
+        [styles.isOpen]: isOpen,
+      })}
+      data-selected-id={selectedId}
+      data-testid="room-type-dropdown-button"
+    >
+      {content}
+    </TooltipContainer>
+  ) : type === "dropdownItem" ? (
+    <TooltipContainer
+      as="div"
+      id={id}
+      title={t(room.title)}
+      onClick={onClick}
+      data-selected-id={selectedId}
+      className={classNames(styles.roomType, styles.dropDownItem, {
+        [styles.isOpen]: isOpen,
+      })}
+      data-testid="room-type-dropdown-item"
+    >
+      {content}
+    </TooltipContainer>
+  ) : (
+    <TooltipContainer
+      as="div"
+      id={id}
+      title={t(room.title)}
+      data-selected-id={selectedId}
+      className={classNames(styles.roomType, styles.displayItem, {
+        [styles.isOpen]: isOpen,
+      })}
+    >
+      {content}
+    </TooltipContainer>
+  );
 };
 
 export default RoomType;

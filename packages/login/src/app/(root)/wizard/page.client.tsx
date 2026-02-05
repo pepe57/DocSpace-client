@@ -39,8 +39,8 @@ import {
   setTimezoneForUnauthorized,
 } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/ui-kit/components/text";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { EmailInput, TValidate } from "@docspace/shared/components/email-input";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
@@ -50,7 +50,7 @@ import { EmailSettings } from "@docspace/shared/utils";
 import {
   PasswordInput,
   PasswordInputHandle,
-} from "@docspace/shared/components/password-input";
+} from "@docspace/ui-kit/components/password-input";
 import { FileInput } from "@docspace/shared/components/file-input";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
@@ -83,7 +83,7 @@ import {
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 
 import { TError, TTimeZoneOption } from "@/types";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import styles from "./wizard.module.scss";
 
 type WizardFormProps = {

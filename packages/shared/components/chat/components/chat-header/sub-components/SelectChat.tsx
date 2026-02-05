@@ -38,13 +38,13 @@ import { RectangleSkeleton } from "../../../../../skeletons";
 import { exportChat } from "../../../../../api/ai";
 
 import socket, {
-  SocketCommands,
-  SocketEvents,
+	SocketCommands,
+	SocketEvents,
 } from "../../../../../utils/socket";
 
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
-import { TBreadCrumb } from "../../../../selector/Selector.types";
-import { toastr } from "../../../../toast";
+import { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 import { useChatStore } from "../../../store/chatStore";
@@ -63,298 +63,298 @@ import { getSelectChatRowHeight } from "../utils";
 import { ChatList } from "./ChatList";
 
 const SelectChat = ({
-  isLoadingProp,
-  roomId,
-  getIcon,
-  getResultStorageId,
-  setIsAIAgentChatDelete,
-  setDeleteDialogVisible,
-  folderFormValidation,
+	isLoadingProp,
+	roomId,
+	getIcon,
+	getResultStorageId,
+	setIsAIAgentChatDelete,
+	setDeleteDialogVisible,
+	folderFormValidation,
 }: SelectChatProps) => {
-  const { t } = useTranslation(["Common"]);
+	const { t } = useTranslation(["Common"]);
 
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [hoveredItem, setHoveredItem] = React.useState("");
-  const [isRenameOpen, setIsRenameOpen] = React.useState(false);
-  const [isExportOpen, setIsExportOpen] = React.useState(false);
+	const [isOpen, setIsOpen] = React.useState(false);
+	const [hoveredItem, setHoveredItem] = React.useState("");
+	const [isRenameOpen, setIsRenameOpen] = React.useState(false);
+	const [isExportOpen, setIsExportOpen] = React.useState(false);
 
-  const parentRef = React.useRef<HTMLDivElement>(null);
+	const parentRef = React.useRef<HTMLDivElement>(null);
 
-  const {
-    chats,
-    isLoading,
-    currentChat,
-    fetchChat,
-    deleteChat,
-    totalChats,
-    fetchNextChats,
-    hasNextChats,
-    updateUrlChatId,
-  } = useChatStore();
-  const { fetchMessages, startNewChat, isRequestRunning } = useMessageStore();
+	const {
+		chats,
+		isLoading,
+		currentChat,
+		fetchChat,
+		deleteChat,
+		totalChats,
+		fetchNextChats,
+		hasNextChats,
+		updateUrlChatId,
+	} = useChatStore();
+	const { fetchMessages, startNewChat, isRequestRunning } = useMessageStore();
 
-  const closeExportSelector = () => setIsExportOpen(false);
+	const closeExportSelector = () => setIsExportOpen(false);
 
-  const toggleOpen = () => {
-    if (isRequestRunning) return;
-    setIsOpen((value) => !value);
-    setHoveredItem("");
-  };
+	const toggleOpen = () => {
+		if (isRequestRunning) return;
+		setIsOpen((value) => !value);
+		setHoveredItem("");
+	};
 
-  const onSelectAction = (id: string) => {
-    if (isRequestRunning) return;
-    fetchChat(id);
-    fetchMessages(id);
-    toggleOpen();
-  };
+	const onSelectAction = (id: string) => {
+		if (isRequestRunning) return;
+		fetchChat(id);
+		fetchMessages(id);
+		toggleOpen();
+	};
 
-  const onRenameToggle = React.useCallback(() => {
-    if (isRequestRunning) return;
-    setIsOpen(false);
-    setIsRenameOpen((value) => !value);
-  }, [isRequestRunning]);
+	const onRenameToggle = React.useCallback(() => {
+		if (isRequestRunning) return;
+		setIsOpen(false);
+		setIsRenameOpen((value) => !value);
+	}, [isRequestRunning]);
 
-  const getFileName = () => {
-    const title = chats.find((chat) => chat.id === hoveredItem)?.title;
+	const getFileName = () => {
+		const title = chats.find((chat) => chat.id === hoveredItem)?.title;
 
-    return title ?? "";
-  };
+		return title ?? "";
+	};
 
-  const onDeleteAction = React.useCallback(async () => {
-    try {
-      await deleteChat(hoveredItem);
+	const onDeleteAction = React.useCallback(async () => {
+		try {
+			await deleteChat(hoveredItem);
 
-      if (hoveredItem === currentChat?.id) {
-        startNewChat();
-        updateUrlChatId("");
-      }
-      setHoveredItem("");
+			if (hoveredItem === currentChat?.id) {
+				startNewChat();
+				updateUrlChatId("");
+			}
+			setHoveredItem("");
 
-      toastr.success(t("Common:ChatSuccessDeleted"));
-    } catch (error) {
-      console.error(error);
-    }
-  }, [
-    hoveredItem,
-    deleteChat,
-    currentChat?.id,
-    startNewChat,
-    updateUrlChatId,
-    t,
-  ]);
+			toastr.success(t("Common:ChatSuccessDeleted"));
+		} catch (error) {
+			console.error(error);
+		}
+	}, [
+		hoveredItem,
+		deleteChat,
+		currentChat?.id,
+		startNewChat,
+		updateUrlChatId,
+		t,
+	]);
 
-  const onDelete = React.useCallback(() => {
-    if (isRequestRunning) return;
+	const onDelete = React.useCallback(() => {
+		if (isRequestRunning) return;
 
-    setIsAIAgentChatDelete?.({
-      visible: true,
-      itemName: getFileName(),
-      onDeleteAction: onDeleteAction,
-    });
-    setDeleteDialogVisible?.(true);
-    setIsOpen(false);
-  }, [
-    isRequestRunning,
-    hoveredItem,
-    chats,
-    onDeleteAction,
-    setIsAIAgentChatDelete,
-    setDeleteDialogVisible,
-  ]);
+		setIsAIAgentChatDelete?.({
+			visible: true,
+			itemName: getFileName(),
+			onDeleteAction: onDeleteAction,
+		});
+		setDeleteDialogVisible?.(true);
+		setIsOpen(false);
+	}, [
+		isRequestRunning,
+		hoveredItem,
+		chats,
+		onDeleteAction,
+		setIsAIAgentChatDelete,
+		setDeleteDialogVisible,
+	]);
 
-  const onSaveToFileAction = React.useCallback(async () => {
-    if (isRequestRunning) return;
-    setIsExportOpen(true);
-    setIsOpen(false);
-  }, [hoveredItem, chats, isRequestRunning, t]);
+	const onSaveToFileAction = React.useCallback(async () => {
+		if (isRequestRunning) return;
+		setIsExportOpen(true);
+		setIsOpen(false);
+	}, [hoveredItem, chats, isRequestRunning, t]);
 
-  const onSubmit = React.useCallback(
-    async (
-      selectedItemId: string | number | undefined,
-      folderTitle: string,
-      isPublic: boolean,
-      breadCrumbs: TBreadCrumb[],
-      fileName: string,
-      isChecked: boolean,
-    ) => {
-      if (!selectedItemId) return;
+	const onSubmit = React.useCallback(
+		async (
+			selectedItemId: string | number | undefined,
+			folderTitle: string,
+			isPublic: boolean,
+			breadCrumbs: TBreadCrumb[],
+			fileName: string,
+			isChecked: boolean,
+		) => {
+			if (!selectedItemId) return;
 
-      const chatParts = ["CHAT-" + hoveredItem];
+			const chatParts = ["CHAT-" + hoveredItem];
 
-      socket?.emit(SocketCommands.Subscribe, {
-        roomParts: ["CHAT-" + hoveredItem],
-        individual: true,
-      });
+			socket?.emit(SocketCommands.Subscribe, {
+				roomParts: ["CHAT-" + hoveredItem],
+				individual: true,
+			});
 
-      await exportChat(hoveredItem, selectedItemId, fileName);
+			await exportChat(hoveredItem, selectedItemId, fileName);
 
-      socket?.on(SocketEvents.ExportChat, (data) => {
-        const { resultFile } = data;
+			socket?.on(SocketEvents.ExportChat, (data) => {
+				const { resultFile } = data;
 
-        const title = chats.find((chat) => chat.id === hoveredItem)?.title;
+				const title = chats.find((chat) => chat.id === hoveredItem)?.title;
 
-        if (resultFile) {
-          if (isChecked) {
-            openFile(resultFile.id.toString());
-          }
+				if (resultFile) {
+					if (isChecked) {
+						openFile(resultFile.id.toString());
+					}
 
-          const toastMsg = (
-            <Trans
-              ns="Common"
-              i18nKey="ChatExported"
-              t={t}
-              values={{ fileName, title }}
-              components={{
-                1: <b />,
-                2: (
-                  <Link
-                    type={LinkType.action}
-                    onClick={() => openFile(resultFile.id.toString())}
-                  />
-                ),
-              }}
-            />
-          );
+					const toastMsg = (
+						<Trans
+							ns="Common"
+							i18nKey="ChatExported"
+							t={t}
+							values={{ fileName, title }}
+							components={{
+								1: <b />,
+								2: (
+									<Link
+										type={LinkType.action}
+										onClick={() => openFile(resultFile.id.toString())}
+									/>
+								),
+							}}
+						/>
+					);
 
-          toastr.success(toastMsg);
-        } else {
-          toastr.error(data.error);
-        }
+					toastr.success(toastMsg);
+				} else {
+					toastr.error(data.error);
+				}
 
-        socket?.off(SocketEvents.ExportChat);
-        socket?.emit(SocketCommands.Unsubscribe, {
-          roomParts: chatParts,
-          individual: true,
-        });
-      });
+				socket?.off(SocketEvents.ExportChat);
+				socket?.emit(SocketCommands.Unsubscribe, {
+					roomParts: chatParts,
+					individual: true,
+				});
+			});
 
-      setIsExportOpen(false);
-    },
-    [hoveredItem, chats, isRequestRunning, t],
-  );
+			setIsExportOpen(false);
+		},
+		[hoveredItem, chats, isRequestRunning, t],
+	);
 
-  const contextModel = React.useMemo(() => {
-    return [
-      {
-        key: "rename",
-        label: t("Common:Rename"),
-        icon: RenameReactSvgUrl,
-        onClick: onRenameToggle,
-      },
-      {
-        key: "save_to_file",
-        label: t("Common:SaveToFile"),
-        icon: SaveToFileIconUrl,
-        onClick: onSaveToFileAction,
-      },
-      { key: "separator", isSeparator: true },
-      {
-        key: "remove",
-        label: t("Common:Delete"),
-        icon: RemoveSvgUrl,
-        onClick: onDelete,
-      },
-    ];
-  }, [t, onDelete, onRenameToggle, onSaveToFileAction]);
+	const contextModel = React.useMemo(() => {
+		return [
+			{
+				key: "rename",
+				label: t("Common:Rename"),
+				icon: RenameReactSvgUrl,
+				onClick: onRenameToggle,
+			},
+			{
+				key: "save_to_file",
+				label: t("Common:SaveToFile"),
+				icon: SaveToFileIconUrl,
+				onClick: onSaveToFileAction,
+			},
+			{ key: "separator", isSeparator: true },
+			{
+				key: "remove",
+				label: t("Common:Delete"),
+				icon: RemoveSvgUrl,
+				onClick: onDelete,
+			},
+		];
+	}, [t, onDelete, onRenameToggle, onSaveToFileAction]);
 
-  const rowHeight = getSelectChatRowHeight();
+	const rowHeight = getSelectChatRowHeight();
 
-  const maxHeight =
-    chats.length > 7 ? CHAT_LIST_MAX_HEIGHT : rowHeight * chats.length;
+	const maxHeight =
+		chats.length > 7 ? CHAT_LIST_MAX_HEIGHT : rowHeight * chats.length;
 
-  React.useEffect(() => {
-    if (isRequestRunning) {
-      setIsOpen(false);
-    }
-  }, [isRequestRunning]);
+	React.useEffect(() => {
+		if (isRequestRunning) {
+			setIsOpen(false);
+		}
+	}, [isRequestRunning]);
 
-  React.useEffect(() => {
-    if (!isOpen) return;
+	React.useEffect(() => {
+		if (!isOpen) return;
 
-    const onResize = () => {
-      setIsOpen(false);
-    };
+		const onResize = () => {
+			setIsOpen(false);
+		};
 
-    window.addEventListener("resize", onResize);
+		window.addEventListener("resize", onResize);
 
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [isOpen]);
+		return () => {
+			window.removeEventListener("resize", onResize);
+		};
+	}, [isOpen]);
 
-  if (isLoadingProp) {
-    return (
-      <RectangleSkeleton
-        width="32px"
-        height="32px"
-        borderRadius="3px"
-        style={{ minWidth: "32px" }}
-      />
-    );
-  }
+	if (isLoadingProp) {
+		return (
+			<RectangleSkeleton
+				width="32px"
+				height="32px"
+				borderRadius="3px"
+				style={{ minWidth: "32px" }}
+			/>
+		);
+	}
 
-  if (!chats.length) return null;
+	if (!chats.length) return null;
 
-  return (
-    <>
-      <TooltipContainer
-        as="div"
-        title={t("Common:ChatHistory")}
-        className={classNames(styles.selectChat, { [styles.open]: isOpen })}
-        onClick={toggleOpen}
-        ref={parentRef}
-        data-testid="select-chat"
-      >
-        <SelectSessionReactSvg />
-      </TooltipContainer>
-      {isOpen ? (
-        <DropDown
-          open={isOpen}
-          // isDefaultMode
-          zIndex={500}
-          clickOutsideAction={() => setIsOpen(false)}
-          directionY="bottom"
-          directionX="right"
-          forwardedRef={parentRef}
-          maxHeight={maxHeight}
-          manualWidth={`${CHAT_LIST_WIDTH}px`}
-          isNoFixedHeightOptions
-          dataTestId="select-chat-dropdown"
-        >
-          <ChatList
-            chats={chats}
-            activeChatId={currentChat?.id}
-            contextModel={contextModel}
-            onSelectChat={onSelectAction}
-            hoveredChatId={hoveredItem}
-            setHoveredChatId={setHoveredItem}
-            loadNextPage={fetchNextChats}
-            hasNextPage={hasNextChats}
-            isNextPageLoading={isLoading}
-            total={totalChats}
-          />
-        </DropDown>
-      ) : null}
-      {isRenameOpen ? (
-        <RenameChat
-          chatId={hoveredItem}
-          prevTitle={chats.find((chat) => chat.id === hoveredItem)?.title || ""}
-          onRenameToggle={onRenameToggle}
-        />
-      ) : null}
-      {isExportOpen ? (
-        <ExportSelector
-          getIcon={getIcon}
-          showFolderSelector={isExportOpen}
-          onCloseFolderSelector={closeExportSelector}
-          currentFolderId={getResultStorageId() || roomId}
-          getFileName={getFileName}
-          onSubmit={onSubmit}
-          folderFormValidation={folderFormValidation}
-        />
-      ) : null}
-    </>
-  );
+	return (
+		<>
+			<TooltipContainer
+				as="div"
+				title={t("Common:ChatHistory")}
+				className={classNames(styles.selectChat, { [styles.open]: isOpen })}
+				onClick={toggleOpen}
+				ref={parentRef}
+				data-testid="select-chat"
+			>
+				<SelectSessionReactSvg />
+			</TooltipContainer>
+			{isOpen ? (
+				<DropDown
+					open={isOpen}
+					// isDefaultMode
+					zIndex={500}
+					clickOutsideAction={() => setIsOpen(false)}
+					directionY="bottom"
+					directionX="right"
+					forwardedRef={parentRef}
+					maxHeight={maxHeight}
+					manualWidth={`${CHAT_LIST_WIDTH}px`}
+					isNoFixedHeightOptions
+					dataTestId="select-chat-dropdown"
+				>
+					<ChatList
+						chats={chats}
+						activeChatId={currentChat?.id}
+						contextModel={contextModel}
+						onSelectChat={onSelectAction}
+						hoveredChatId={hoveredItem}
+						setHoveredChatId={setHoveredItem}
+						loadNextPage={fetchNextChats}
+						hasNextPage={hasNextChats}
+						isNextPageLoading={isLoading}
+						total={totalChats}
+					/>
+				</DropDown>
+			) : null}
+			{isRenameOpen ? (
+				<RenameChat
+					chatId={hoveredItem}
+					prevTitle={chats.find((chat) => chat.id === hoveredItem)?.title || ""}
+					onRenameToggle={onRenameToggle}
+				/>
+			) : null}
+			{isExportOpen ? (
+				<ExportSelector
+					getIcon={getIcon}
+					showFolderSelector={isExportOpen}
+					onCloseFolderSelector={closeExportSelector}
+					currentFolderId={getResultStorageId() || roomId}
+					getFileName={getFileName}
+					onSubmit={onSubmit}
+					folderFormValidation={folderFormValidation}
+				/>
+			) : null}
+		</>
+	);
 };
 
 export default observer(SelectChat);

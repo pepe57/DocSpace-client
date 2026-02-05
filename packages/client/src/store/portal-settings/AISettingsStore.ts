@@ -27,6 +27,7 @@
  */
 
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 
 import {
   type WebSearchConfig,
@@ -37,6 +38,8 @@ import {
   type TServer,
   type TUpdateAiProvider,
   type TUpdateServer,
+  TDefaultProvider,
+  TModel,
 } from "@docspace/shared/api/ai/types";
 import {
   addNewServer,
@@ -53,13 +56,17 @@ import {
   updateKnowledgeConfig,
   getKnowledgeConfig,
   getProviderAvailabilityStatus,
+  getDefaultProvider,
+  getModels,
+  updateDefaultProvider,
 } from "@docspace/shared/api/ai";
 import {
   ServerType,
   WebSearchType,
   KnowledgeType,
 } from "@docspace/shared/api/ai/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { TTranslation } from "@docspace/shared/types";
 
 class AISettingsStore {
   isInit = false;
@@ -83,6 +90,16 @@ class AISettingsStore {
   unavailableProvidersIdsSet: Set<number> = new Set<number>();
 
   checkProvidersAbortController: AbortController | null = null;
+
+  defaultProvider: TDefaultProvider | null = null;
+
+  defaultProviderModels: TModel[] | null = null;
+
+  isDefaultProviderModelsLoading = false;
+
+  defaultProviderModelsError: string | null = null;
+
+  defaultProviderInitied = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -108,6 +125,26 @@ class AISettingsStore {
     this.webSearchInitied = value;
   };
 
+  setDefaultProvider = (provider: TDefaultProvider | null) => {
+    this.defaultProvider = provider;
+  };
+
+  setDefaultProviderModels = (models: TModel[] | null) => {
+    this.defaultProviderModels = models;
+  };
+
+  setIsDefaultProviderModelsLoading = (value: boolean) => {
+    this.isDefaultProviderModelsLoading = value;
+  };
+
+  setDefaultProviderModelsError = (error: string | null) => {
+    this.defaultProviderModelsError = error;
+  };
+
+  setDefaultProviderInitied = (value: boolean) => {
+    this.defaultProviderInitied = value;
+  };
+
   setAIProviders = (providers: TAiProvider[]) => {
     this.aiProviders = providers;
   };
@@ -128,6 +165,10 @@ class AISettingsStore {
     const newProvider = await createProvider(provider);
 
     this.aiProviders.push(newProvider);
+
+    if (this.aiProviders.length === 1) {
+      await this.initDefaultProvider();
+    }
   };
 
   updateAIProvider = async (id: TAiProvider["id"], data: TUpdateAiProvider) => {
@@ -145,14 +186,44 @@ class AISettingsStore {
         this.unavailableProvidersIdsSet.delete(id);
       }
     }
+
+    if (
+      this.defaultProvider?.providerId === newProvider.id &&
+      this.defaultProvider?.providerTitle !== newProvider.title
+    ) {
+      this.defaultProvider.providerTitle = newProvider.title;
+    }
   };
 
   deleteAIProvider = async (id: TAiProvider["id"]) => {
+    const isDefaultProvider = this.aiProviders?.find(
+      (p) => p.id === id,
+    )?.isDefault;
+    const isLastProvider = this.aiProviders.length === 1;
+
     await deleteProviders({ ids: [id] });
 
-    this.aiProviders = this.aiProviders.filter(
-      (provider) => provider.id !== id,
-    );
+    runInAction(async () => {
+      this.aiProviders = this.aiProviders.filter(
+        (provider) => provider.id !== id,
+      );
+
+      if (isLastProvider) {
+        this.clearDefaultProviderData();
+      }
+
+      if (isDefaultProvider && !isLastProvider) {
+        await this.initDefaultProvider();
+
+        const defaultProviderInList = this.aiProviders.find(
+          (p) => p.id === this.defaultProvider?.providerId,
+        );
+
+        if (defaultProviderInList && !defaultProviderInList.isDefault) {
+          defaultProviderInList.isDefault = true;
+        }
+      }
+    });
   };
 
   fetchAIProviders = async () => {
@@ -318,6 +389,85 @@ class AISettingsStore {
 
   isProviderAvailable = (id: number) => {
     return !this.unavailableProvidersIdsSet.has(id);
+  };
+
+  fetchDefaultProviderModels = async (providerId: TAiProvider["id"]) => {
+    let models = null;
+
+    try {
+      this.setIsDefaultProviderModelsLoading(true);
+      this.setDefaultProviderModelsError(null);
+
+      models = await getModels(providerId);
+      this.setDefaultProviderModels(models);
+    } catch (e) {
+      let error = e;
+
+      if (axios.isAxiosError(e)) {
+        error = e.response?.data?.error?.message;
+      }
+
+      toastr.error(error as string);
+      console.error(e);
+      this.setDefaultProviderModelsError(error as string);
+      this.setDefaultProviderModels(null);
+    } finally {
+      this.setIsDefaultProviderModelsLoading(false);
+    }
+
+    return models;
+  };
+
+  initDefaultProvider = async () => {
+    this.setDefaultProviderInitied(false);
+
+    try {
+      const defaultProvider = await getDefaultProvider();
+
+      if (defaultProvider) {
+        this.setDefaultProvider(defaultProvider);
+        await this.fetchDefaultProviderModels(defaultProvider.providerId);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.setDefaultProviderInitied(true);
+    }
+  };
+
+  changeDefaultProvider = async (
+    providerData: {
+      providerId: number;
+      defaultModel: string;
+    },
+    t: TTranslation,
+  ) => {
+    try {
+      const newDefaultProvider = await updateDefaultProvider(providerData);
+
+      this.aiProviders.forEach((p) => {
+        if (p.isDefault) {
+          p.isDefault = false;
+        }
+
+        if (p.id === newDefaultProvider.providerId) {
+          p.isDefault = true;
+        }
+      });
+
+      this.setDefaultProvider(newDefaultProvider);
+      toastr.success(t("AISettings:DefaultProviderSetSuccess"));
+    } catch (e) {
+      toastr.error(e as string);
+      console.error(e);
+    }
+  };
+
+  clearDefaultProviderData = () => {
+    this.setDefaultProvider(null);
+    this.setDefaultProviderModels(null);
+    this.setDefaultProviderInitied(false);
+    this.setDefaultProviderModelsError(null);
   };
 
   get systemMCPServers() {

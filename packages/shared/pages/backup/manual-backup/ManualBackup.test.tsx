@@ -15,7 +15,7 @@ vi.mock("../../../api/portal", () => ({
   startBackup: vi.fn().mockResolvedValue(undefined),
 }));
 
-vi.mock("@docspace/shared/components/toast", () => ({
+vi.mock("@docspace/ui-kit/components/toast", () => ({
   toastr: {
     success: vi.fn(),
     error: vi.fn(),

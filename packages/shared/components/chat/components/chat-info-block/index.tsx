@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import PublicRoomBar from "../../../public-room-bar";
+import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
 
 import { ChatInfoBlockProps } from "../../Chat.types";
 import styles from "./ChatInfoBlock.module.scss";

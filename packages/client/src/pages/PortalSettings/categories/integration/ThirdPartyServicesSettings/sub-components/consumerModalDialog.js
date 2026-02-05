@@ -34,7 +34,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 import { mobile } from "@docspace/shared/utils";
 import styled from "styled-components";

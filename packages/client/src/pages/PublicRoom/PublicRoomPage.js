@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 import { useLocation, Outlet } from "react-router";
 import Section from "@docspace/shared/components/section";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { ShareAccessRights } from "@docspace/shared/enums";
@@ -47,224 +47,224 @@ import { StyledToast } from "./StyledPublicRoom";
 const PUBLIC_SIGN_IN_TOAST = "showPublicSignInToast";
 
 const PublicRoomPage = (props) => {
-	const {
-		fetchFiles,
-		isEmptyPage,
+  const {
+    fetchFiles,
+    isEmptyPage,
 
-		fetchPublicRoom,
-		fetchPreviewMediaFile,
+    fetchPublicRoom,
+    fetchPreviewMediaFile,
 
-		frameConfig,
-		setFrameConfig,
-		isFrame,
-		isLoading,
-		access,
-		roomType,
-		parentRoomType,
+    frameConfig,
+    setFrameConfig,
+    isFrame,
+    isLoading,
+    access,
+    roomType,
+    parentRoomType,
 
-		isSecondaryProgressVisbile,
-		secondaryOperationsCompleted,
-		clearSecondaryProgressData,
-		secondaryActiveOperations,
-		secondaryOperationsAlert,
-		onOpenSignInWindow,
-		windowIsOpen,
-		isAuthenticated,
-	} = props;
+    isSecondaryProgressVisbile,
+    secondaryOperationsCompleted,
+    clearSecondaryProgressData,
+    secondaryActiveOperations,
+    secondaryOperationsAlert,
+    onOpenSignInWindow,
+    windowIsOpen,
+    isAuthenticated,
+  } = props;
 
-	const location = useLocation();
+  const location = useLocation();
 
-	const { t, ready } = useTranslation(["Common"]);
+  const { t, ready } = useTranslation(["Common"]);
 
-	useSDK({ frameConfig, setFrameConfig, isLoading });
+  useSDK({ frameConfig, setFrameConfig, isLoading });
 
-	usePublic({
-		location,
-		fetchFiles,
-		fetchPublicRoom,
-		fetchPreviewMediaFile,
-	});
+  usePublic({
+    location,
+    fetchFiles,
+    fetchPublicRoom,
+    fetchPreviewMediaFile,
+  });
 
-	const getAccessTranslation = () => {
-		switch (access) {
-			case ShareAccessRights.ReadOnly:
-				return t("Common:ViewOnly");
-			case ShareAccessRights.Comment:
-				return t("Common:Commenting");
-			case ShareAccessRights.Review:
-				return t("Common:Reviewing");
-			case ShareAccessRights.Editing:
-				return t("Common:Editor");
-			case ShareAccessRights.FormFilling:
-				return t("Common:FillingOnly");
-			default:
-				return t("Common:ViewOnly");
-		}
-	};
+  const getAccessTranslation = () => {
+    switch (access) {
+      case ShareAccessRights.ReadOnly:
+        return t("Common:ViewOnly");
+      case ShareAccessRights.Comment:
+        return t("Common:Commenting");
+      case ShareAccessRights.Review:
+        return t("Common:Reviewing");
+      case ShareAccessRights.Editing:
+        return t("Common:Editor");
+      case ShareAccessRights.FormFilling:
+        return t("Common:FillingOnly");
+      default:
+        return t("Common:ViewOnly");
+    }
+  };
 
-	useEffect(() => {
-		const toastIsDisabled =
-			sessionStorage.getItem(PUBLIC_SIGN_IN_TOAST) === access?.toString();
+  useEffect(() => {
+    const toastIsDisabled =
+      sessionStorage.getItem(PUBLIC_SIGN_IN_TOAST) === access?.toString();
 
-		if (!access || !ready || toastIsDisabled || isFrame || isAuthenticated)
-			return;
+    if (!access || !ready || toastIsDisabled || isFrame || isAuthenticated)
+      return;
 
-		const roomMode = getAccessTranslation().toLowerCase();
+    const roomMode = getAccessTranslation().toLowerCase();
 
-		sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, access?.toString());
+    sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, access?.toString());
 
-		const content = (
-			<Trans
-				t={t}
-				ns="Common"
-				i18nKey="PublicAuthorizeToast"
-				values={{ roomMode, productName: t("Common:ProductName") }}
-				components={{
-					1: (
-						<Text
-							key="productName"
-							as="span"
-							fontSize="12px"
-							fontWeight={700}
-						/>
-					),
-				}}
-			/>
-		);
+    const content = (
+      <Trans
+        t={t}
+        ns="Common"
+        i18nKey="PublicAuthorizeToast"
+        values={{ roomMode, productName: t("Common:ProductName") }}
+        components={{
+          1: (
+            <Text
+              key="productName"
+              as="span"
+              fontSize="12px"
+              fontWeight={700}
+            />
+          ),
+        }}
+      />
+    );
 
-		const toastText = (
-			<StyledToast>
-				<Text fontSize="12px" fontWeight={400}>
-					{content}
-				</Text>
-				<Link
-					fontSize="12px"
-					fontWeight={400}
-					className="public-toast_link"
-					onClick={onOpenSignInWindow}
-				>
-					{t("Common:LoginButton")}
-				</Link>
-			</StyledToast>
-		);
+    const toastText = (
+      <StyledToast>
+        <Text fontSize="12px" fontWeight={400}>
+          {content}
+        </Text>
+        <Link
+          fontSize="12px"
+          fontWeight={400}
+          className="public-toast_link"
+          onClick={onOpenSignInWindow}
+        >
+          {t("Common:LoginButton")}
+        </Link>
+      </StyledToast>
+    );
 
-		toastr.info(toastText);
-	}, [access, ready, roomType, parentRoomType, isAuthenticated]);
+    toastr.info(toastText);
+  }, [access, ready, roomType, parentRoomType, isAuthenticated]);
 
-	const sectionProps = {
-		isSecondaryProgressVisbile,
-		secondaryOperationsCompleted,
-		clearSecondaryProgressData,
-		secondaryActiveOperations,
-		secondaryOperationsAlert,
-	};
+  const sectionProps = {
+    isSecondaryProgressVisbile,
+    secondaryOperationsCompleted,
+    clearSecondaryProgressData,
+    secondaryActiveOperations,
+    secondaryOperationsAlert,
+  };
 
-	const showSignInButton = !isFrame && !isAuthenticated;
+  const showSignInButton = !isFrame && !isAuthenticated;
 
-	return (
-		<>
-			<SectionWrapper
-				withBodyScroll
-				// withBodyAutoFocus={!isMobile}
-				{...sectionProps}
-			>
-				<Section.SectionHeader>
-					<SectionHeaderContent
-						showSignInButton={showSignInButton}
-						onSignInClick={() => onOpenSignInWindow()}
-						signInButtonIsDisabled={windowIsOpen}
-					/>
-				</Section.SectionHeader>
+  return (
+    <>
+      <SectionWrapper
+        withBodyScroll
+        // withBodyAutoFocus={!isMobile}
+        {...sectionProps}
+      >
+        <Section.SectionHeader>
+          <SectionHeaderContent
+            showSignInButton={showSignInButton}
+            onSignInClick={() => onOpenSignInWindow()}
+            signInButtonIsDisabled={windowIsOpen}
+          />
+        </Section.SectionHeader>
 
-				{!isEmptyPage ? (
-					<Section.SectionFilter>
-						{isFrame ? (
-							frameConfig?.showFilter && <SectionFilterContent />
-						) : (
-							<SectionFilterContent />
-						)}
-					</Section.SectionFilter>
-				) : null}
+        {!isEmptyPage ? (
+          <Section.SectionFilter>
+            {isFrame ? (
+              frameConfig?.showFilter && <SectionFilterContent />
+            ) : (
+              <SectionFilterContent />
+            )}
+          </Section.SectionFilter>
+        ) : null}
 
-				<Section.SectionBody>
-					<Outlet />
-				</Section.SectionBody>
-			</SectionWrapper>
+        <Section.SectionBody>
+          <Outlet />
+        </Section.SectionBody>
+      </SectionWrapper>
 
-			<FilesPanels />
-			<SelectionArea />
-			<MediaViewer />
-		</>
-	);
+      <FilesPanels />
+      <SelectionArea />
+      <MediaViewer />
+    </>
+  );
 };
 
 export default inject(
-	({
-		authStore,
-		settingsStore,
-		filesStore,
-		publicRoomStore,
-		uploadDataStore,
-		filesSettingsStore,
-		mediaViewerDataStore,
-		selectedFolderStore,
-		clientLoadingStore,
-	}) => {
-		const { frameConfig, setFrameConfig, isFrame } = settingsStore;
-		const {
-			isLoaded,
-			roomStatus,
-			fetchPublicRoom,
-			onOpenSignInWindow,
-			windowIsOpen,
-			validationData,
-		} = publicRoomStore;
-		const { isLoading } = clientLoadingStore;
+  ({
+    authStore,
+    settingsStore,
+    filesStore,
+    publicRoomStore,
+    uploadDataStore,
+    filesSettingsStore,
+    mediaViewerDataStore,
+    selectedFolderStore,
+    clientLoadingStore,
+  }) => {
+    const { frameConfig, setFrameConfig, isFrame } = settingsStore;
+    const {
+      isLoaded,
+      roomStatus,
+      fetchPublicRoom,
+      onOpenSignInWindow,
+      windowIsOpen,
+      validationData,
+    } = publicRoomStore;
+    const { isLoading } = clientLoadingStore;
 
-		const { fetchFiles, isEmptyPage } = filesStore;
-		const { getFilesSettings } = filesSettingsStore;
-		const { access, roomType, parentRoomType } = selectedFolderStore;
+    const { fetchFiles, isEmptyPage } = filesStore;
+    const { getFilesSettings } = filesSettingsStore;
+    const { access, roomType, parentRoomType } = selectedFolderStore;
 
-		const {
-			isSecondaryProgressVisbile,
-			secondaryOperationsCompleted,
-			clearSecondaryProgressData,
-			secondaryActiveOperations,
-			secondaryOperationsAlert,
-		} = uploadDataStore.secondaryProgressDataStore;
+    const {
+      isSecondaryProgressVisbile,
+      secondaryOperationsCompleted,
+      clearSecondaryProgressData,
+      secondaryActiveOperations,
+      secondaryOperationsAlert,
+    } = uploadDataStore.secondaryProgressDataStore;
 
-		const { fetchPreviewMediaFile } = mediaViewerDataStore;
+    const { fetchPreviewMediaFile } = mediaViewerDataStore;
 
-		const isAuthenticated =
-			(validationData?.isAuthenticated || authStore.isAuthenticated) &&
-			!isPublicRoom();
+    const isAuthenticated =
+      (validationData?.isAuthenticated || authStore.isAuthenticated) &&
+      !isPublicRoom();
 
-		return {
-			isLoaded,
-			isLoading,
-			roomStatus,
-			fetchFiles,
-			getFilesSettings,
+    return {
+      isLoaded,
+      isLoading,
+      roomStatus,
+      fetchFiles,
+      getFilesSettings,
 
-			isSecondaryProgressVisbile,
-			secondaryOperationsCompleted,
-			clearSecondaryProgressData,
-			secondaryActiveOperations,
-			secondaryOperationsAlert,
+      isSecondaryProgressVisbile,
+      secondaryOperationsCompleted,
+      clearSecondaryProgressData,
+      secondaryActiveOperations,
+      secondaryOperationsAlert,
 
-			isAuthenticated,
-			isEmptyPage,
-			fetchPublicRoom,
-			fetchPreviewMediaFile,
+      isAuthenticated,
+      isEmptyPage,
+      fetchPublicRoom,
+      fetchPreviewMediaFile,
 
-			frameConfig,
-			setFrameConfig,
-			isFrame,
-			access,
-			roomType,
-			parentRoomType,
-			onOpenSignInWindow,
-			windowIsOpen,
-		};
-	},
+      frameConfig,
+      setFrameConfig,
+      isFrame,
+      access,
+      roomType,
+      parentRoomType,
+      onOpenSignInWindow,
+      windowIsOpen,
+    };
+  },
 )(observer(PublicRoomPage));

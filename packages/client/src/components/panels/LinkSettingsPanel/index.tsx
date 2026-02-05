@@ -39,12 +39,12 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { DateTimePicker } from "@docspace/shared/components/date-time-picker";
+import { DateTimePicker } from "@docspace/ui-kit/components/date-time-picker";
 import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import LinkRolesDropdown from "./sub-components/LinkRolesDropdown";
 import styles from "./LinkSettingsPanel.module.scss";
 import { LinkSettingsPanelProps } from "./LinkSettingsPanel.types";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { TOption } from "@docspace/ui-kit/components/combobox";
 import { getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
@@ -92,7 +92,7 @@ const LinkSettingsPanel = ({
 
   const currentAccess = filteredAccesses.find(
     (a) =>
-      a.access ===
+      a.access ==
       (linkSelectedAccess?.access ?? activeLink?.access ?? defaultAccess),
   );
 
@@ -240,6 +240,7 @@ const LinkSettingsPanel = ({
                   maxLength={4}
                   onChange={onInputChange}
                   hasError={hasError}
+                  testId="link-settings_users-limit"
                 />
                 <Text
                   fontSize="12px"
@@ -305,6 +306,7 @@ const LinkSettingsPanel = ({
             minDate={moment().subtract(1, "days")}
             maxDate={maxDate}
             useMaxTime={!activeLink.expirationDate}
+            translations={{ AM: t("Common:AM"), PM: t("Common:PM") }}
           />
         </div>
       </ModalDialog.Body>
@@ -316,7 +318,7 @@ const LinkSettingsPanel = ({
           primary
           label={t("Common:SaveAndCopy")}
           type="submit"
-          testId="template_access_settings_modal_save_button"
+          testId="link-settings_modal_save_button"
           isDisabled={hasError || showLimitError || showExpiredError}
         />
         <Button
@@ -325,7 +327,7 @@ const LinkSettingsPanel = ({
           size={ButtonSize.normal}
           onClick={onBackClick}
           label={t("Common:CancelButton")}
-          testId="template_access_settings_modal_cancel_button"
+          testId="link-settings_modal_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

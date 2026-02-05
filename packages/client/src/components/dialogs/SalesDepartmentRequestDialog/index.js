@@ -29,252 +29,252 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { Button } from "@docspace/ui-kit/components/button";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Textarea } from "@docspace/shared/components/textarea";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
 import {
-  ModalDialog,
-  ModalDialogType,
+	ModalDialog,
+	ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import { EmailInput } from "@docspace/shared/components/email-input";
+import { EmailInput } from "@docspace/ui-kit/components/email-input";
 import { ErrorKeys } from "@docspace/shared/enums";
 
 const SalesDepartmentRequestDialog = ({
-  visible,
-  onClose,
-  sendPaymentRequest,
+	visible,
+	onClose,
+	sendPaymentRequest,
 }) => {
-  const { t, ready } = useTranslation([
-    "SalesDepartmentRequestDialog",
-    "Common",
-    "SMTPSettings",
-  ]);
+	const { t, ready } = useTranslation([
+		"SalesDepartmentRequestDialog",
+		"Common",
+		"SMTPSettings",
+	]);
 
-  const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
-  const [email, setEmail] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(true);
-  const [emailError, setEmailError] = useState("");
+	const [email, setEmail] = useState("");
+	const [isValidEmail, setIsValidEmail] = useState(true);
+	const [emailError, setEmailError] = useState("");
 
-  const [description, setDescription] = useState("");
-  const [isValidDescription, setIsValidDescription] = useState(true);
+	const [description, setDescription] = useState("");
+	const [isValidDescription, setIsValidDescription] = useState(true);
 
-  const [name, setName] = useState("");
-  const [isValidName, setIsValidName] = useState(true);
+	const [name, setName] = useState("");
+	const [isValidName, setIsValidName] = useState(true);
 
-  const onCloseModal = () => {
-    onClose && onClose();
-  };
+	const onCloseModal = () => {
+		onClose && onClose();
+	};
 
-  const onChangeEmail = (e) => {
-    setEmail(e.currentTarget.value);
-    setIsValidEmail(true);
-  };
+	const onChangeEmail = (e) => {
+		setEmail(e.currentTarget.value);
+		setIsValidEmail(true);
+	};
 
-  const onChangeDescription = (e) => {
-    setDescription(e.currentTarget.value);
-    setIsValidName(true);
-  };
-  const onChangeName = (e) => {
-    setName(e.currentTarget.value);
-    setIsValidDescription(true);
-  };
-  const onSendRequest = async () => {
-    const isEmailValid = email.trim();
-    const isDescriptionValid = description.trim();
-    const isNameValid = name.trim();
+	const onChangeDescription = (e) => {
+		setDescription(e.currentTarget.value);
+		setIsValidName(true);
+	};
+	const onChangeName = (e) => {
+		setName(e.currentTarget.value);
+		setIsValidDescription(true);
+	};
+	const onSendRequest = async () => {
+		const isEmailValid = email.trim();
+		const isDescriptionValid = description.trim();
+		const isNameValid = name.trim();
 
-    if (!isEmailValid || !isDescriptionValid || !isNameValid) {
-      setIsValidEmail(isEmailValid);
-      setIsValidName(isNameValid);
-      setIsValidDescription(isDescriptionValid);
-      return;
-    }
+		if (!isEmailValid || !isDescriptionValid || !isNameValid) {
+			setIsValidEmail(isEmailValid);
+			setIsValidName(isNameValid);
+			setIsValidDescription(isDescriptionValid);
+			return;
+		}
 
-    if (emailError) {
-      setIsValidEmail(false);
-      return;
-    }
+		if (emailError) {
+			setIsValidEmail(false);
+			return;
+		}
 
-    setIsLoading(true);
+		setIsLoading(true);
 
-    await sendPaymentRequest(email, name, description, t);
+		await sendPaymentRequest(email, name, description, t);
 
-    onClose && onClose();
-  };
+		onClose && onClose();
+	};
 
-  const onValidateEmailInput = (result) => {
-    if (result.isValid) {
-      setEmailError("");
-      return;
-    }
+	const onValidateEmailInput = (result) => {
+		if (result.isValid) {
+			setEmailError("");
+			return;
+		}
 
-    const translatedErrors = result.errors.map((errorKey) => {
-      switch (errorKey) {
-        case ErrorKeys.LocalDomain:
-          return t("Common:LocalDomain");
-        case ErrorKeys.IncorrectDomain:
-          return t("Common:IncorrectDomain");
-        case ErrorKeys.DomainIpAddress:
-          return t("Common:DomainIpAddress");
-        case ErrorKeys.PunycodeDomain:
-          return t("Common:PunycodeDomain");
-        case ErrorKeys.PunycodeLocalPart:
-          return t("Common:PunycodeLocalPart");
-        case ErrorKeys.IncorrectLocalPart:
-          return t("Common:IncorrectLocalPart");
-        case ErrorKeys.SpacesInLocalPart:
-          return t("Common:SpacesInLocalPart");
-        case ErrorKeys.MaxLengthExceeded:
-          return t("Common:MaxLengthExceeded");
-        case ErrorKeys.IncorrectEmail:
-          return t("Common:IncorrectEmail");
-        case ErrorKeys.ManyEmails:
-          return t("Common:ManyEmails");
-        case ErrorKeys.EmptyEmail:
-          return t("Common:EmptyEmail");
-        default:
-          throw new Error("Unknown translation key");
-      }
-    });
+		const translatedErrors = result.errors.map((errorKey) => {
+			switch (errorKey) {
+				case ErrorKeys.LocalDomain:
+					return t("Common:LocalDomain");
+				case ErrorKeys.IncorrectDomain:
+					return t("Common:IncorrectDomain");
+				case ErrorKeys.DomainIpAddress:
+					return t("Common:DomainIpAddress");
+				case ErrorKeys.PunycodeDomain:
+					return t("Common:PunycodeDomain");
+				case ErrorKeys.PunycodeLocalPart:
+					return t("Common:PunycodeLocalPart");
+				case ErrorKeys.IncorrectLocalPart:
+					return t("Common:IncorrectLocalPart");
+				case ErrorKeys.SpacesInLocalPart:
+					return t("Common:SpacesInLocalPart");
+				case ErrorKeys.MaxLengthExceeded:
+					return t("Common:MaxLengthExceeded");
+				case ErrorKeys.IncorrectEmail:
+					return t("Common:IncorrectEmail");
+				case ErrorKeys.ManyEmails:
+					return t("Common:ManyEmails");
+				case ErrorKeys.EmptyEmail:
+					return t("Common:EmptyEmail");
+				default:
+					throw new Error("Unknown translation key");
+			}
+		});
 
-    setEmailError(translatedErrors[0]);
-  };
+		setEmailError(translatedErrors[0]);
+	};
 
-  return (
-    <ModalDialog
-      visible={visible}
-      onClose={onCloseModal}
-      autoMaxHeight
-      isLoading={!ready}
-      displayType={ModalDialogType.modal}
-    >
-      <ModalDialog.Header>
-        <Text isBold fontSize="21px">
-          {t("SalesDepartmentRequest")}
-        </Text>
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        <Text
-          key="text-body"
-          className="text-body"
-          isBold={false}
-          fontSize="13px"
-        >
-          {t("YouWillBeContacted")}
-        </Text>
+	return (
+		<ModalDialog
+			visible={visible}
+			onClose={onCloseModal}
+			autoMaxHeight
+			isLoading={!ready}
+			displayType={ModalDialogType.modal}
+		>
+			<ModalDialog.Header>
+				<Text isBold fontSize="21px">
+					{t("SalesDepartmentRequest")}
+				</Text>
+			</ModalDialog.Header>
+			<ModalDialog.Body>
+				<Text
+					key="text-body"
+					className="text-body"
+					isBold={false}
+					fontSize="13px"
+				>
+					{t("YouWillBeContacted")}
+				</Text>
 
-        <br />
-        <FieldContainer
-          className="name_field"
-          key="name"
-          isVertical
-          hasError={!isValidName}
-          labelVisible={false}
-          errorMessage={t("Common:RequiredField")}
-          dataTestId="request_name_field"
-        >
-          <TextInput
-            id="your-name"
-            hasError={!isValidName}
-            name="name"
-            type="text"
-            size="base"
-            scale
-            tabIndex={1}
-            placeholder={t("YourName")}
-            isAutoFocussed
-            isDisabled={isLoading}
-            value={name}
-            onChange={onChangeName}
-            testId="request_name_input"
-          />
-        </FieldContainer>
+				<br />
+				<FieldContainer
+					className="name_field"
+					key="name"
+					isVertical
+					hasError={!isValidName}
+					labelVisible={false}
+					errorMessage={t("Common:RequiredField")}
+					dataTestId="request_name_field"
+				>
+					<TextInput
+						id="your-name"
+						hasError={!isValidName}
+						name="name"
+						type="text"
+						size="base"
+						scale
+						tabIndex={1}
+						placeholder={t("YourName")}
+						isAutoFocussed
+						isDisabled={isLoading}
+						value={name}
+						onChange={onChangeName}
+						testId="request_name_input"
+					/>
+				</FieldContainer>
 
-        <FieldContainer
-          className="e-mail_field"
-          key="e-mail"
-          isVertical
-          labelVisible={false}
-          hasError={!isValidEmail}
-          errorMessage={emailError}
-          dataTestId="request_email_field"
-        >
-          <EmailInput
-            id="registration-email"
-            name="e-mail"
-            scale
-            value={email}
-            onChange={onChangeEmail}
-            onValidateInput={onValidateEmailInput}
-            hasError={!isValidEmail}
-            placeholder={t("SMTPSettings:EnterEmail")}
-            testId="request_email_input"
-          />
-        </FieldContainer>
+				<FieldContainer
+					className="e-mail_field"
+					key="e-mail"
+					isVertical
+					labelVisible={false}
+					hasError={!isValidEmail}
+					errorMessage={emailError}
+					dataTestId="request_email_field"
+				>
+					<EmailInput
+						id="registration-email"
+						name="e-mail"
+						scale
+						value={email}
+						onChange={onChangeEmail}
+						onValidateInput={onValidateEmailInput}
+						hasError={!isValidEmail}
+						placeholder={t("SMTPSettings:EnterEmail")}
+						testId="request_email_input"
+					/>
+				</FieldContainer>
 
-        <FieldContainer
-          className="description_field"
-          key="text-description"
-          isVertical
-          hasError={!isValidDescription}
-          labelVisible={false}
-          errorMessage={t("Common:RequiredField")}
-          dataTestId="request_description_field"
-        >
-          <Textarea
-            id="request-details"
-            heightScale={false}
-            hasError={!isValidDescription}
-            placeholder={t("RequestDetails")}
-            tabIndex={3}
-            value={description}
-            onChange={onChangeDescription}
-            isDisabled={isLoading}
-            heightTextArea={100}
-            maxLength={255}
-            dataTestId="request_description_textarea"
-          />
-        </FieldContainer>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          className="send-button"
-          label={isLoading ? t("Common:Sending") : t("Common:SendButton")}
-          size="normal"
-          primary
-          onClick={onSendRequest}
-          isLoading={isLoading}
-          isDisabled={isLoading}
-          tabIndex={3}
-          testId="send_sales_request_button"
-        />
-        <Button
-          className="cancel-button"
-          label={t("Common:CancelButton")}
-          size="normal"
-          onClick={onCloseModal}
-          isLoading={isLoading}
-          isDisabled={isLoading}
-          tabIndex={3}
-          testId="cancel_sales_request_button"
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+				<FieldContainer
+					className="description_field"
+					key="text-description"
+					isVertical
+					hasError={!isValidDescription}
+					labelVisible={false}
+					errorMessage={t("Common:RequiredField")}
+					dataTestId="request_description_field"
+				>
+					<Textarea
+						id="request-details"
+						heightScale={false}
+						hasError={!isValidDescription}
+						placeholder={t("RequestDetails")}
+						tabIndex={3}
+						value={description}
+						onChange={onChangeDescription}
+						isDisabled={isLoading}
+						heightTextArea={100}
+						maxLength={255}
+						dataTestId="request_description_textarea"
+					/>
+				</FieldContainer>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					className="send-button"
+					label={isLoading ? t("Common:Sending") : t("Common:SendButton")}
+					size="normal"
+					primary
+					onClick={onSendRequest}
+					isLoading={isLoading}
+					isDisabled={isLoading}
+					tabIndex={3}
+					testId="send_sales_request_button"
+				/>
+				<Button
+					className="cancel-button"
+					label={t("Common:CancelButton")}
+					size="normal"
+					onClick={onCloseModal}
+					isLoading={isLoading}
+					isDisabled={isLoading}
+					tabIndex={3}
+					testId="cancel_sales_request_button"
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 SalesDepartmentRequestDialog.propTypes = {
-  visible: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
+	visible: PropTypes.bool.isRequired,
+	onClose: PropTypes.func.isRequired,
 };
 
 export default inject(({ paymentStore }) => {
-  const { sendPaymentRequest } = paymentStore;
+	const { sendPaymentRequest } = paymentStore;
 
-  return {
-    sendPaymentRequest,
-  };
+	return {
+		sendPaymentRequest,
+	};
 })(observer(SalesDepartmentRequestDialog));

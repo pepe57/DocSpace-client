@@ -35,7 +35,7 @@ import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType, LinkTarget } from "@docspace/ui-kit/components/link";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
 
 import { globalColors } from "@docspace/shared/themes";

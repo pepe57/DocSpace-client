@@ -39,7 +39,7 @@ import {
 	InputSize,
 	InputType,
 } from "@docspace/ui-kit/components/text-input";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { useTranslation } from "react-i18next";
 
 const StyledPlusIcon = styled(PlusIcon).attrs(injectDefaultTheme)`

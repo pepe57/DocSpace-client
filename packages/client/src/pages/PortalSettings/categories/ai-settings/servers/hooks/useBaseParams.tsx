@@ -29,13 +29,13 @@ import { useTranslation } from "react-i18next";
 import equal from "fast-deep-equal/react";
 import classNames from "classnames";
 import { ALLOWED_MCP_CHARACTERS } from "@docspace/shared/constants";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
 	TextInput,
 	InputType,
 	InputSize,
 } from "@docspace/ui-kit/components/text-input";
-import { Textarea } from "@docspace/shared/components/textarea";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "./useBaseParams.module.scss";

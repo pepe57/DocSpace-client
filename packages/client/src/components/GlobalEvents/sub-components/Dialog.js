@@ -33,7 +33,7 @@ import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Button } from "@docspace/ui-kit/components/button";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
 import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
 

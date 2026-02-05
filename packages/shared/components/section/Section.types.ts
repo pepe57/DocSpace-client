@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Operation } from "../operations-progress-button/OperationsProgressButton.types";
+import type { Operation } from "@docspace/ui-kit/components/operations-progress-button/OperationsProgressButton.types";
 import { DeviceType } from "../../enums";
 import { TViewAs } from "../../types";
 
@@ -146,9 +146,10 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     clearSecondaryProgressData?: (
       operationId?: string | null,
       operation?: string | null,
+      operationItem?: Operation,
     ) => void;
     clearPrimaryProgressData?: (operation?: string | null) => void;
-    cancelUpload?: (t: (key: string) => string) => void;
+    cancelUpload?: () => void;
     secondaryOperationsAlert?: boolean;
     mainButtonVisible?: boolean;
     primaryOperationsAlert?: boolean;
@@ -173,6 +174,11 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     clearDropPreviewLocation?: () => void;
     startDropPreview?: () => void;
     asideInfoPanel?: boolean;
+    // Plugin operations props
+    pluginOperations?: Operation[];
+    pluginOperationsCompleted?: boolean;
+    pluginOperationsAlert?: boolean;
+    pluginShowCancelButton?: boolean;
   };
 
 export type SectionContextMenuProps = {

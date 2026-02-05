@@ -31,7 +31,7 @@ import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { PreparationPortalProgress } from "../../components/preparation-portal-progress";
-import ErrorContainer from "../../components/error-container/ErrorContainer";
+import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
 
 import { EncryptionStatus } from "../../enums";

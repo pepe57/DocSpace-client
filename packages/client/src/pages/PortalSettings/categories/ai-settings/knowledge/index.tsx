@@ -30,12 +30,12 @@ import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore"
 import { KnowledgeType } from "@docspace/shared/api/ai/enums";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { PasswordInput } from "@docspace/shared/components/password-input";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { inject, observer } from "mobx-react";

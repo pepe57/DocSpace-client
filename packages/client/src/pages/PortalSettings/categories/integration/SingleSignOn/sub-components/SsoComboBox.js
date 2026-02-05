@@ -28,7 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
 import StyledInputWrapper from "../styled-containers/StyledInputWrapper";
 

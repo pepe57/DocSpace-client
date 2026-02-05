@@ -32,8 +32,8 @@ import { withTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/shared/components/toast";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 
 import {
 	LogoutSessionDialog,

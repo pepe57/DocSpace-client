@@ -26,14 +26,21 @@
 
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
+import axios from "axios";
+import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
-import { getModels, getProviders } from "@docspace/shared/api/ai";
-import { toastr } from "@docspace/shared/components/toast";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import {
+  getDefaultProvider,
+  getModels,
+  getProviders,
+} from "@docspace/shared/api/ai";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 import { modelCache } from "./modelCache";
@@ -48,6 +55,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
 
   const [providers, setProviders] = React.useState<TAiProvider[]>([]);
   const [models, setModels] = React.useState<TModel[]>([]);
+  const [error, setError] = React.useState<string | null>(null);
 
   const [selectedProvider, setSelectedProvider] = React.useState<TAiProvider>({
     id: agentParams.providerId || -2,
@@ -56,19 +64,30 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     modelId: agentParams.modelId ?? "",
   } as TModel);
 
+  const initProviderIdRef = React.useRef<number | null>(
+    agentParams.providerId || null,
+  );
+  const initModelIdRef = React.useRef<string | null>(
+    agentParams.modelId || null,
+  );
+
   const [isProvidersLoading, setIsProvidersLoading] = React.useState(false);
   const [isProvidersFetched, setIsProvidersFetched] = React.useState(false);
 
   const prevSelectedModel = React.useRef<TModel | null>(null);
 
   React.useEffect(() => {
+    const defaultProvider = modelCache.getDefaultProvider();
     const cachedProviders = modelCache.getProviders();
     if (cachedProviders) {
       setProviders(cachedProviders);
       setIsProvidersFetched(true);
 
       if (selectedProvider.id === -2) {
-        setSelectedProvider(cachedProviders[0]);
+        const preferredProvider = cachedProviders.find(
+          (pr) => pr.id === defaultProvider?.providerId,
+        );
+        setSelectedProvider(preferredProvider || cachedProviders[0]);
       } else {
         const provider = cachedProviders.find(
           (pr) => pr.id === selectedProvider.id,
@@ -85,15 +104,23 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       try {
         setIsProvidersLoading(true);
 
-        const p = await getProviders();
+        const [p, defaultProvider] = await Promise.all([
+          getProviders(),
+          getDefaultProvider(),
+        ]);
+
         const enabledProviders = p.filter((pr) => !pr.needReset);
         setProviders(enabledProviders);
         modelCache.setProviders(p);
+        modelCache.setDefaultProvider(defaultProvider);
 
         setIsProvidersFetched(true);
 
         if (selectedProvider.id === -2) {
-          setSelectedProvider(enabledProviders[0]);
+          const preferredProvider = enabledProviders.find(
+            (pr) => pr.id === defaultProvider?.providerId,
+          );
+          setSelectedProvider(preferredProvider || enabledProviders[0]);
         } else {
           const provider = enabledProviders.find(
             (pr) => pr.id === selectedProvider.id,
@@ -110,6 +137,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
         toastr.error(e as string);
       } finally {
         setIsProvidersLoading(false);
+        setIsProvidersFetched(true);
       }
     };
 
@@ -126,6 +154,8 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
   ]);
 
   React.useEffect(() => {
+    const defaultModel = modelCache.getDefaultProvider()?.defaultModel;
+
     const fetchModels = async () => {
       try {
         const m = await getModels(selectedProvider?.id);
@@ -136,17 +166,23 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
           const model = m.find((mo) => mo.modelId === selectedModel.modelId);
 
           if (!model) {
-            setSelectedModel(m[0]);
+            const preferredModel = m.find((mo) => mo.modelId === defaultModel);
+            setSelectedModel(preferredModel || m[0]);
 
             return;
           }
 
           setSelectedModel(model);
         } else {
-          setSelectedModel(m[0]);
+          const preferredModel = m.find((mo) => mo.modelId === defaultModel);
+          setSelectedModel(preferredModel || m[0]);
         }
       } catch (e) {
         toastr.error(e as string);
+
+        if (axios.isAxiosError(e)) {
+          setError(e.response?.data?.error?.message);
+        }
       }
     };
 
@@ -154,6 +190,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       return;
 
     const cachedModels = modelCache.getModels(selectedProvider.id);
+
     if (cachedModels) {
       setModels(cachedModels);
 
@@ -167,7 +204,16 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
           setSelectedModel(cachedModels[0]);
         }
       } else {
-        setSelectedModel(cachedModels[0]);
+        const preferredModelId =
+          selectedProvider?.id === initProviderIdRef.current
+            ? initModelIdRef.current
+            : defaultModel;
+
+        const preferredModel =
+          cachedModels.find((mo) => mo.modelId === preferredModelId) ??
+          cachedModels[0];
+
+        setSelectedModel(preferredModel);
       }
       return;
     }
@@ -205,6 +251,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
 
       setSelectedProvider(provider);
       setSelectedModel(null);
+      setError(null);
     },
     [providers, selectedProvider.id],
   );
@@ -226,9 +273,9 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
         }
       : {
           key: "empty-selected-option",
-          label: "",
+          label: t("Common:NoModelsFound"),
         };
-  }, [selectedModel]);
+  }, [selectedModel, t]);
 
   const onSelectModel = React.useCallback(
     (option: TOption) => {
@@ -242,13 +289,21 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
   );
 
   React.useEffect(() => {
-    if (!selectedModel) return;
+    if (!selectedModel && !error) return;
+
+    if (!selectedModel && error) {
+      setAgentParams({
+        modelId: undefined,
+      });
+      prevSelectedModel.current = selectedModel;
+      return;
+    }
 
     const hasChanges =
       prevSelectedModel.current?.modelId !== selectedModel?.modelId ||
       prevSelectedModel.current?.providerId !== selectedModel?.providerId;
 
-    if (!hasChanges || typeof selectedModel.providerId !== "number") return;
+    if (!hasChanges || typeof selectedModel?.providerId !== "number") return;
 
     setAgentParams({
       modelId: selectedModel?.modelId,
@@ -256,7 +311,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     });
 
     prevSelectedModel.current = selectedModel;
-  }, [selectedModel?.modelId, selectedModel?.providerId, setAgentParams]);
+  }, [selectedModel, setAgentParams, error]);
 
   return (
     <StyledParam increaseGap>
@@ -298,18 +353,28 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
         {isProvidersLoading ? (
           <RectangleSkeleton width="100%" height="32px" />
         ) : (
-          <ComboBox
-            options={providerOptions}
-            selectedOption={providerSelectedOption}
-            onSelect={onSelectProvider}
-            scaled
-            scaledOptions
-            noBorder={false}
-            className="ai-combobox"
-            displaySelectedOption
-          />
+          <FieldContainer
+            isVertical
+            hasError={!!error}
+            errorMessage={error || ""}
+            errorMessageWidth="100%"
+            removeMargin
+          >
+            <ComboBox
+              options={providerOptions}
+              selectedOption={providerSelectedOption}
+              onSelect={onSelectProvider}
+              scaled
+              scaledOptions
+              noBorder={false}
+              className={classNames("ai-combobox provider-combobox", {
+                "has-error": !!error,
+              })}
+              displaySelectedOption
+            />
+          </FieldContainer>
         )}
-        {!selectedModel ? (
+        {!selectedModel && !error ? (
           <RectangleSkeleton width="100%" height="32px" />
         ) : (
           <ComboBox
@@ -323,6 +388,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             className="ai-combobox"
             displaySelectedOption
             dropDownClassName="not-selectable"
+            isDisabled={!!error}
           />
         )}
       </div>

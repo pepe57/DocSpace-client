@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { size, isMobileDevice } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -76,334 +76,334 @@ const MainContainer = styled.div`
 `;
 
 const IpSecurity = (props) => {
-	const {
-		t,
-		tReady,
-		ipRestrictionEnable,
-		ipRestrictions,
-		setIpRestrictions,
-		ipSettingsUrl,
-		currentColorScheme,
-		currentDeviceType,
+  const {
+    t,
+    tReady,
+    ipRestrictionEnable,
+    ipRestrictions,
+    setIpRestrictions,
+    ipSettingsUrl,
+    currentColorScheme,
+    currentDeviceType,
 
-		settingsStore,
-		tfaStore,
-		setup,
-	} = props;
+    settingsStore,
+    tfaStore,
+    setup,
+  } = props;
 
-	const navigate = useNavigate();
-	const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-	const regexp = /^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/; // check ip valid
-	const isValidIp = (input) => regexp.test(input);
+  const regexp = /^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/; // check ip valid
+  const isValidIp = (input) => regexp.test(input);
 
-	const [enable, setEnable] = useState(false);
-	const [ips, setIps] = useState();
-	const [showReminder, setShowReminder] = useState(false);
-	const [isLoaded, setIsLoaded] = useState(false);
-	const [isSaving, setIsSaving] = useState(false);
-	const [autoFocus, setAutoFocus] = useState(false);
-	const [errorMessages, setErrorMessages] = useState([]);
+  const [enable, setEnable] = useState(false);
+  const [ips, setIps] = useState();
+  const [showReminder, setShowReminder] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [autoFocus, setAutoFocus] = useState(false);
+  const [errorMessages, setErrorMessages] = useState([]);
 
-	const defaultProps = createDefaultHookSettingsProps({
-		settingsStore,
-		tfaStore,
-		setup,
-	});
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
 
-	const { getSecurityInitialValue } = useSecurity(defaultProps.security);
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
 
-	const checkWidth = () => {
-		window.innerWidth > size.mobile &&
-			location.pathname.includes("ip") &&
-			navigate("/portal-settings/security/access-portal");
-	};
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("ip") &&
+      navigate("/portal-settings/security/access-portal");
+  };
 
-	const getSettingsFromDefault = () => {
-		const defaultSettings = getFromSessionStorage("defaultIPSettings");
-		if (defaultSettings) {
-			setEnable(defaultSettings.enable);
-			setIps(defaultSettings.ips);
-		}
-	};
+  const getSettingsFromDefault = () => {
+    const defaultSettings = getFromSessionStorage("defaultIPSettings");
+    if (defaultSettings) {
+      setEnable(defaultSettings.enable);
+      setIps(defaultSettings.ips);
+    }
+  };
 
-	const getSettings = () => {
-		const currentSettings = getFromSessionStorage("currentIPSettings");
-		const defaultData = {
-			enable: ipRestrictionEnable,
-			ips: ipRestrictions,
-		};
-		saveToSessionStorage("defaultIPSettings", defaultData);
+  const getSettings = () => {
+    const currentSettings = getFromSessionStorage("currentIPSettings");
+    const defaultData = {
+      enable: ipRestrictionEnable,
+      ips: ipRestrictions,
+    };
+    saveToSessionStorage("defaultIPSettings", defaultData);
 
-		if (currentSettings) {
-			setEnable(currentSettings.enable);
-			setIps(currentSettings.ips);
-		} else {
-			setEnable(ipRestrictionEnable);
-			setIps(ipRestrictions);
-		}
-	};
+    if (currentSettings) {
+      setEnable(currentSettings.enable);
+      setIps(currentSettings.ips);
+    } else {
+      setEnable(ipRestrictionEnable);
+      setIps(ipRestrictions);
+    }
+  };
 
-	useEffect(() => {
-		if (isMobileDevice()) {
-			getSecurityInitialValue();
-			setIsLoaded(true);
-		}
-	}, [isMobileDevice]);
+  useEffect(() => {
+    if (isMobileDevice()) {
+      getSecurityInitialValue();
+      setIsLoaded(true);
+    }
+  }, [isMobileDevice]);
 
-	useEffect(() => {
-		checkWidth();
-		window.addEventListener("resize", checkWidth);
+  useEffect(() => {
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
 
-		return () => window.removeEventListener("resize", checkWidth);
-	}, []);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
 
-	useEffect(() => {
-		const currentSettings = getFromSessionStorage("currentIPSettings");
-		const defaultSettings = getFromSessionStorage("defaultIPSettings");
+  useEffect(() => {
+    const currentSettings = getFromSessionStorage("currentIPSettings");
+    const defaultSettings = getFromSessionStorage("defaultIPSettings");
 
-		if (isEqual(currentSettings, defaultSettings)) {
-			getSettings();
-		} else {
-			getSettingsFromDefault();
-		}
-	}, []);
+    if (isEqual(currentSettings, defaultSettings)) {
+      getSettings();
+    } else {
+      getSettingsFromDefault();
+    }
+  }, []);
 
-	useEffect(() => {
-		const defaultSettings = getFromSessionStorage("defaultIPSettings");
-		const newSettings = {
-			enable,
-			ips,
-		};
-		saveToSessionStorage("currentIPSettings", newSettings);
+  useEffect(() => {
+    const defaultSettings = getFromSessionStorage("defaultIPSettings");
+    const newSettings = {
+      enable,
+      ips,
+    };
+    saveToSessionStorage("currentIPSettings", newSettings);
 
-		if (isEqual(defaultSettings, newSettings)) {
-			setShowReminder(false);
-		} else {
-			setShowReminder(true);
-		}
-	}, [enable, ips]);
+    if (isEqual(defaultSettings, newSettings)) {
+      setShowReminder(false);
+    } else {
+      setShowReminder(true);
+    }
+  }, [enable, ips]);
 
-	const onSelectType = (e) => {
-		const value = e.target.value;
-		if (value === "enable" && !autoFocus) setAutoFocus(true);
-		setEnable(value === "enable");
-	};
+  const onSelectType = (e) => {
+    const value = e.target.value;
+    if (value === "enable" && !autoFocus) setAutoFocus(true);
+    setEnable(value === "enable");
+  };
 
-	const onChangeInput = (e, index) => {
-		const newInputs = Array.from(ips);
-		newInputs[index] = e.target.value;
-		setIps(newInputs);
-	};
+  const onChangeInput = (e, index) => {
+    const newInputs = Array.from(ips);
+    newInputs[index] = e.target.value;
+    setIps(newInputs);
+  };
 
-	const onClickAdd = () => {
-		if (!autoFocus) setAutoFocus(true);
-		setIps([...ips, ""]);
-		setErrorMessages((prev) => [...prev, null]);
-	};
+  const onClickAdd = () => {
+    if (!autoFocus) setAutoFocus(true);
+    setIps([...ips, ""]);
+    setErrorMessages((prev) => [...prev, null]);
+  };
 
-	const checkDuplicate = (ips, input, index) => {
-		const firstIndex = ips.findIndex((d) => d === input && d !== "");
-		return firstIndex !== -1 && firstIndex !== index;
-	};
+  const checkDuplicate = (ips, input, index) => {
+    const firstIndex = ips.findIndex((d) => d === input && d !== "");
+    return firstIndex !== -1 && firstIndex !== index;
+  };
 
-	const getErrorMessage = (ip, index, ipsArray = ips) => {
-		const isDuplicate = checkDuplicate(ipsArray, ip, index);
-		const isValidFormat = isValidIp(ip) && ip !== "";
+  const getErrorMessage = (ip, index, ipsArray = ips) => {
+    const isDuplicate = checkDuplicate(ipsArray, ip, index);
+    const isValidFormat = isValidIp(ip) && ip !== "";
 
-		if (isDuplicate) return t("Common:IpAlreadyAdded");
-		if (!isValidFormat) return t("Common:IncorrectIp");
-		return null;
-	};
+    if (isDuplicate) return t("Common:IpAlreadyAdded");
+    if (!isValidFormat) return t("Common:IncorrectIp");
+    return null;
+  };
 
-	const validateAllIps = (ipsArray) => {
-		return ipsArray.map((ip, index) => getErrorMessage(ip, index, ipsArray));
-	};
+  const validateAllIps = (ipsArray) => {
+    return ipsArray.map((ip, index) => getErrorMessage(ip, index, ipsArray));
+  };
 
-	const onDeleteInput = (index) => {
-		const newInputs = Array.from(ips);
-		newInputs.splice(index, 1);
-		setIps(newInputs);
-		setErrorMessages(validateAllIps(newInputs));
-	};
+  const onDeleteInput = (index) => {
+    const newInputs = Array.from(ips);
+    newInputs.splice(index, 1);
+    setIps(newInputs);
+    setErrorMessages(validateAllIps(newInputs));
+  };
 
-	const onCheckValid = (ip, index) => {
-		const errorMessage = getErrorMessage(ip, index);
+  const onCheckValid = (ip, index) => {
+    const errorMessage = getErrorMessage(ip, index);
 
-		setErrorMessages((prev) => {
-			const newErrors = [...prev];
-			newErrors[index] = errorMessage;
-			return newErrors;
-		});
-		return !errorMessage;
-	};
+    setErrorMessages((prev) => {
+      const newErrors = [...prev];
+      newErrors[index] = errorMessage;
+      return newErrors;
+    });
+    return !errorMessage;
+  };
 
-	const onSaveClick = async () => {
-		setIsSaving(true);
+  const onSaveClick = async () => {
+    setIsSaving(true);
 
-		const valid = ips.map((ip) => isValidIp(ip));
+    const valid = ips.map((ip) => isValidIp(ip));
 
-		if (valid.includes(false)) {
-			setIsSaving(false);
-			return;
-		}
+    if (valid.includes(false)) {
+      setIsSaving(false);
+      return;
+    }
 
-		const ipsObjectArr = ips.map((ip) => {
-			return { ip };
-		});
+    const ipsObjectArr = ips.map((ip) => {
+      return { ip };
+    });
 
-		try {
-			await setIpRestrictions(ipsObjectArr, enable);
+    try {
+      await setIpRestrictions(ipsObjectArr, enable);
 
-			saveToSessionStorage("currentIPSettings", {
-				enable,
-				ips,
-			});
-			saveToSessionStorage("defaultIPSettings", {
-				enable,
-				ips,
-			});
-			setShowReminder(false);
-			toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
-		} catch (error) {
-			toastr.error(error);
-		}
+      saveToSessionStorage("currentIPSettings", {
+        enable,
+        ips,
+      });
+      saveToSessionStorage("defaultIPSettings", {
+        enable,
+        ips,
+      });
+      setShowReminder(false);
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+    } catch (error) {
+      toastr.error(error);
+    }
 
-		setIsSaving(false);
-	};
+    setIsSaving(false);
+  };
 
-	const onCancelClick = () => {
-		const defaultSettings = getFromSessionStorage("defaultIPSettings");
-		setEnable(defaultSettings?.enable);
-		setIps(defaultSettings?.ips);
-		setShowReminder(false);
-		setErrorMessages([]);
-	};
+  const onCancelClick = () => {
+    const defaultSettings = getFromSessionStorage("defaultIPSettings");
+    setEnable(defaultSettings?.enable);
+    setIps(defaultSettings?.ips);
+    setShowReminder(false);
+    setErrorMessages([]);
+  };
 
-	if ((currentDeviceType === DeviceType.mobile && !isLoaded) || !tReady) {
-		return <IpSecurityLoader />;
-	}
+  if ((currentDeviceType === DeviceType.mobile && !isLoaded) || !tReady) {
+    return <IpSecurityLoader />;
+  }
 
-	return (
-		<MainContainer>
-			<LearnMoreWrapper withoutExternalLink={!ipSettingsUrl}>
-				<Text className="page-subtitle">
-					{t("IPSecuritySettingDescription")}
-				</Text>
-				{ipSettingsUrl ? (
-					<Link
-						className="link-learn-more"
-						dataTestId="ip_security_component_learn_more"
-						color={currentColorScheme.main?.accent}
-						target="_blank"
-						isHovered
-						href={ipSettingsUrl}
-					>
-						{t("Common:LearnMore")}
-					</Link>
-				) : null}
-			</LearnMoreWrapper>
+  return (
+    <MainContainer>
+      <LearnMoreWrapper withoutExternalLink={!ipSettingsUrl}>
+        <Text className="page-subtitle">
+          {t("IPSecuritySettingDescription")}
+        </Text>
+        {ipSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="ip_security_component_learn_more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={ipSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </LearnMoreWrapper>
 
-			<RadioButtonGroup
-				className="box"
-				fontSize="13px"
-				fontWeight="400"
-				name="group"
-				orientation="vertical"
-				spacing="8px"
-				dataTestId="ip_security_radio_button_group"
-				options={[
-					{
-						id: "ip-security-disabled",
-						label: t("Common:Disabled"),
-						value: "disabled",
-						dataTestId: "ip_security_disabled",
-					},
-					{
-						id: "ip-security-enable",
-						label: t("Common:Enable"),
-						value: "enable",
-						dataTestId: "ip_security_enabled",
-					},
-				]}
-				selected={enable ? "enable" : "disabled"}
-				onClick={onSelectType}
-			/>
+      <RadioButtonGroup
+        className="box"
+        fontSize="13px"
+        fontWeight="400"
+        name="group"
+        orientation="vertical"
+        spacing="8px"
+        dataTestId="ip_security_radio_button_group"
+        options={[
+          {
+            id: "ip-security-disabled",
+            label: t("Common:Disabled"),
+            value: "disabled",
+            dataTestId: "ip_security_disabled",
+          },
+          {
+            id: "ip-security-enable",
+            label: t("Common:Enable"),
+            value: "enable",
+            dataTestId: "ip_security_enabled",
+          },
+        ]}
+        selected={enable ? "enable" : "disabled"}
+        onClick={onSelectType}
+      />
 
-			{enable ? (
-				<UserFields
-					className="user-fields"
-					inputs={ips}
-					buttonLabel={t("AddAllowedIP")}
-					onChangeInput={onChangeInput}
-					onDeleteInput={onDeleteInput}
-					onClickAdd={onClickAdd}
-					onBlurAction={(index) => onCheckValid(ips[index], index)}
-					validateFunc={isValidIp}
-					errorMessages={errorMessages}
-					hideDeleteIcon={ips.length === 1}
-					classNameAdditional="add-allowed-ip-address"
-					isAutoFocussed={autoFocus}
-					inputDataTestId="ip_security_ip_input"
-					deleteIconDataTestId="ip_security_delete_ip_icon"
-					addButtonDataTestId="ip_security_add_ip_button"
-				/>
-			) : null}
+      {enable ? (
+        <UserFields
+          className="user-fields"
+          inputs={ips}
+          buttonLabel={t("AddAllowedIP")}
+          onChangeInput={onChangeInput}
+          onDeleteInput={onDeleteInput}
+          onClickAdd={onClickAdd}
+          onBlurAction={(index) => onCheckValid(ips[index], index)}
+          validateFunc={isValidIp}
+          errorMessages={errorMessages}
+          hideDeleteIcon={ips.length === 1}
+          classNameAdditional="add-allowed-ip-address"
+          isAutoFocussed={autoFocus}
+          inputDataTestId="ip_security_ip_input"
+          deleteIconDataTestId="ip_security_delete_ip_icon"
+          addButtonDataTestId="ip_security_add_ip_button"
+        />
+      ) : null}
 
-			{enable ? (
-				<>
-					<Text fontSize="16px" fontWeight="700" className="warning-text">
-						{t("Common:Warning")}
-					</Text>
-					<Text className="ip-security_warning">
-						{t("IPSecurityWarningHelper")}
-					</Text>
-				</>
-			) : null}
+      {enable ? (
+        <>
+          <Text fontSize="16px" fontWeight="700" className="warning-text">
+            {t("Common:Warning")}
+          </Text>
+          <Text className="ip-security_warning">
+            {t("IPSecurityWarningHelper")}
+          </Text>
+        </>
+      ) : null}
 
-			<SaveCancelButtons
-				className="save-cancel-buttons"
-				onSaveClick={onSaveClick}
-				onCancelClick={onCancelClick}
-				showReminder={showReminder}
-				reminderText={t("Common:YouHaveUnsavedChanges")}
-				saveButtonLabel={t("Common:SaveButton")}
-				cancelButtonLabel={t("Common:CancelButton")}
-				displaySettings
-				hasScroll={false}
-				isSaving={isSaving}
-				additionalClassSaveButton="ip-security-save"
-				additionalClassCancelButton="ip-security-cancel"
-				saveButtonDataTestId="ip_security_save_button"
-				cancelButtonDataTestId="ip_security_cancel_button"
-			/>
-		</MainContainer>
-	);
+      <SaveCancelButtons
+        className="save-cancel-buttons"
+        onSaveClick={onSaveClick}
+        onCancelClick={onCancelClick}
+        showReminder={showReminder}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
+        saveButtonLabel={t("Common:SaveButton")}
+        cancelButtonLabel={t("Common:CancelButton")}
+        displaySettings
+        hasScroll={false}
+        isSaving={isSaving}
+        additionalClassSaveButton="ip-security-save"
+        additionalClassCancelButton="ip-security-cancel"
+        saveButtonDataTestId="ip_security_save_button"
+        cancelButtonDataTestId="ip_security_cancel_button"
+      />
+    </MainContainer>
+  );
 };
 
 export const IpSecuritySection = inject(
-	({ settingsStore, tfaStore, setup }) => {
-		const {
-			ipRestrictionEnable,
-			ipRestrictions,
-			setIpRestrictions,
-			ipSettingsUrl,
-			currentColorScheme,
-			currentDeviceType,
-		} = settingsStore;
+  ({ settingsStore, tfaStore, setup }) => {
+    const {
+      ipRestrictionEnable,
+      ipRestrictions,
+      setIpRestrictions,
+      ipSettingsUrl,
+      currentColorScheme,
+      currentDeviceType,
+    } = settingsStore;
 
-		return {
-			ipRestrictionEnable,
-			ipRestrictions,
-			setIpRestrictions,
+    return {
+      ipRestrictionEnable,
+      ipRestrictions,
+      setIpRestrictions,
 
-			ipSettingsUrl,
-			currentColorScheme,
-			currentDeviceType,
+      ipSettingsUrl,
+      currentColorScheme,
+      currentDeviceType,
 
-			settingsStore,
-			tfaStore,
-			setup,
-		};
-	},
+      settingsStore,
+      tfaStore,
+      setup,
+    };
+  },
 )(withTranslation(["Settings", "Common"])(observer(IpSecurity)));

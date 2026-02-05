@@ -32,7 +32,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {

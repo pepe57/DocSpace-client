@@ -26,8 +26,7 @@
 
 import React from "react";
 
-import { Tags } from "@docspace/shared/components/tags";
-
+import { Tags } from "@docspace/ui-kit/components/tags";
 import { Text } from "@docspace/ui-kit/components/text";
 
 const TagsCell = ({ item, tagCount, onSelectTag, sideColor }) => {

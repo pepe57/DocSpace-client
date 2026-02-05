@@ -30,7 +30,8 @@ import {
   TSelectorCancelButton,
   TSelectorHeader,
   TSelectorItem,
-} from "../../components/selector/Selector.types";
+  TSelectorWithAside,
+} from "@docspace/ui-kit/components/selector";
 
 import { RoomSearchArea, RoomsType } from "../../enums";
 
@@ -46,7 +47,8 @@ export type TInitValue = WithFlag<
 >;
 
 export type RoomSelectorProps = TSelectorHeader &
-  TSelectorCancelButton & {
+  TSelectorCancelButton &
+  TSelectorWithAside & {
     id?: string;
     className?: string;
     style?: React.CSSProperties;

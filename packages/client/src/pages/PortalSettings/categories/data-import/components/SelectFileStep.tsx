@@ -38,7 +38,7 @@ import { FileInput } from "@docspace/shared/components/file-input";
 import { ProgressBar } from "@docspace/shared/components/progress-bar";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { InjectedSelectFileStepProps, SelectFileStepProps } from "../types";
 import { TMigrationStatusResult } from "@docspace/shared/api/settings/types";

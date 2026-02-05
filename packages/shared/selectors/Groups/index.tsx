@@ -32,7 +32,11 @@ import EmptyScreenGroupSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.groups
 
 import api from "../../api";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
-import { Selector, TSelectorItem } from "../../components/selector";
+import {
+  Selector,
+  TSelectorItem,
+  TSelectorWithAside,
+} from "@docspace/ui-kit/components/selector";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { GroupsSelectorProps } from "./GroupsSelector.types";
@@ -43,6 +47,11 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
     className,
 
     headerProps,
+
+    useAside,
+    onClose,
+    withoutBackground,
+    withBlur,
 
     onSubmit,
   } = props;
@@ -143,14 +152,19 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
     [searchValue],
   );
 
+  const withAside: TSelectorWithAside = useAside
+    ? { useAside, onClose, withBlur, withoutBackground }
+    : {};
+
   return (
     <Selector
       id={id}
       className={className}
       withHeader
+      {...withAside}
       headerProps={{
         ...headerProps,
-        onCloseClick: () => {},
+        onCloseClick: headerProps?.onCloseClick ?? onClose ?? (() => {}),
         headerLabel: headerProps?.headerLabel || t("Common:Groups"),
       }}
       alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}

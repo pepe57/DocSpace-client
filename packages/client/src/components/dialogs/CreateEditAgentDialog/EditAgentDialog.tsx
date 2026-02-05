@@ -119,6 +119,8 @@ const EditAgentDialog = ({
     );
   };
 
+  const isModelSelected = !!agentParams?.modelId;
+
   const setAgentParamsAction = React.useCallback(
     (newParams: Partial<TAgentParams>) => {
       setAgentParams((value) => ({ ...value, ...newParams }));
@@ -252,7 +254,8 @@ const EditAgentDialog = ({
           isDisabled={
             !cover
               ? isWrongTitle ||
-                compareRoomParams(prevRoomParams.current, agentParams)
+                compareRoomParams(prevRoomParams.current, agentParams) ||
+                !isModelSelected
               : false
           }
           isLoading={isLoading}

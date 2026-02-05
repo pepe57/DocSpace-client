@@ -35,7 +35,7 @@ import {
   MEDIA_VIEW_URL,
   CategoryType,
 } from "@docspace/shared/constants";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   Events,
   FolderType,

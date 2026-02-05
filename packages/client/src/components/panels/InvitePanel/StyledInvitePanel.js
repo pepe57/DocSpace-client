@@ -31,7 +31,7 @@ import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Link } from "@docspace/ui-kit/components/link";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import {

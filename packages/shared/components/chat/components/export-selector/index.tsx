@@ -31,99 +31,99 @@ import { isDesktop, isTablet } from "../../../../utils";
 
 import FilesSelector from "../../../../selectors/Files";
 import { TGetIcon } from "../../../../selectors/utils/types";
-import { TBreadCrumb } from "../../../selector/Selector.types";
+import { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 
 type ExportSelectorProps = {
-  showFolderSelector: boolean;
-  onCloseFolderSelector: () => void;
-  getIcon: TGetIcon;
-  onSubmit: (
-    selectedItemId: string | number | undefined,
-    folderTitle: string,
-    isPublic: boolean,
-    breadCrumbs: TBreadCrumb[],
-    fileName: string,
-    isChecked: boolean,
-  ) => Promise<void>;
-  currentFolderId: string | number;
-  getFileName: () => string;
-  folderFormValidation: RegExp;
+	showFolderSelector: boolean;
+	onCloseFolderSelector: () => void;
+	getIcon: TGetIcon;
+	onSubmit: (
+		selectedItemId: string | number | undefined,
+		folderTitle: string,
+		isPublic: boolean,
+		breadCrumbs: TBreadCrumb[],
+		fileName: string,
+		isChecked: boolean,
+	) => Promise<void>;
+	currentFolderId: string | number;
+	getFileName: () => string;
+	folderFormValidation: RegExp;
 };
 
 const ExportSelector = ({
-  showFolderSelector,
-  onCloseFolderSelector,
-  getIcon,
-  onSubmit,
-  currentFolderId,
-  getFileName,
-  folderFormValidation,
+	showFolderSelector,
+	onCloseFolderSelector,
+	getIcon,
+	onSubmit,
+	currentFolderId,
+	getFileName,
+	folderFormValidation,
 }: ExportSelectorProps) => {
-  const { t } = useTranslation(["Common"]);
+	const { t } = useTranslation(["Common"]);
 
-  return (
-    <FilesSelector
-      isPanelVisible={showFolderSelector}
-      onCancel={onCloseFolderSelector}
-      getIcon={getIcon}
-      getIsDisabled={(
-        isFirstLoad,
-        isSelectedParentFolder,
-        selectedItemId,
-        selectedItemType,
-        isRoot,
-        selectedItemSecurity,
-      ) => {
-        if (selectedItemType === "rooms" || selectedItemType === "agents")
-          return true;
+	return (
+		<FilesSelector
+			isPanelVisible={showFolderSelector}
+			onCancel={onCloseFolderSelector}
+			getIcon={getIcon}
+			getIsDisabled={(
+				isFirstLoad,
+				isSelectedParentFolder,
+				selectedItemId,
+				selectedItemType,
+				isRoot,
+				selectedItemSecurity,
+			) => {
+				if (selectedItemType === "rooms" || selectedItemType === "agents")
+					return true;
 
-        if (
-          selectedItemSecurity &&
-          "Create" in selectedItemSecurity &&
-          selectedItemSecurity.Create
-        )
-          return false;
+				if (
+					selectedItemSecurity &&
+					"Create" in selectedItemSecurity &&
+					selectedItemSecurity.Create
+				)
+					return false;
 
-        return true;
-      }}
-      onSubmit={onSubmit}
-      withHeader
-      headerProps={{
-        headerLabel: t("Common:SaveButton"),
-        isCloseable: true,
-        onCloseClick: onCloseFolderSelector,
-      }}
-      withSearch
-      withBreadCrumbs
-      withoutBackButton
-      withCancelButton
-      withCreate={false}
-      withFooterCheckbox
-      withFooterInput
-      cancelButtonLabel={t("Common:CancelButton")}
-      submitButtonLabel={t("Common:SaveButton")}
-      disabledItems={[]}
-      isRoomsOnly={false}
-      isThirdParty={false}
-      currentFolderId={currentFolderId}
-      rootFolderType={FolderType.Rooms}
-      footerCheckboxLabel={t("Common:OpenSavedDocument")}
-      footerInputHeader={t("Common:FileName")}
-      currentFooterInputValue={getFileName()}
-      descriptionText=""
-      getFilesArchiveError={() => ""}
-      withAIAgentsTreeFolder
-      currentDeviceType={
-        isDesktop()
-          ? DeviceType.desktop
-          : isTablet()
-            ? DeviceType.tablet
-            : DeviceType.mobile
-      }
-      folderFormValidation={folderFormValidation}
-      renderInPortal
-    />
-  );
+				return true;
+			}}
+			onSubmit={onSubmit}
+			withHeader
+			headerProps={{
+				headerLabel: t("Common:SaveButton"),
+				isCloseable: true,
+				onCloseClick: onCloseFolderSelector,
+			}}
+			withSearch
+			withBreadCrumbs
+			withoutBackButton
+			withCancelButton
+			withCreate={false}
+			withFooterCheckbox
+			withFooterInput
+			cancelButtonLabel={t("Common:CancelButton")}
+			submitButtonLabel={t("Common:SaveButton")}
+			disabledItems={[]}
+			isRoomsOnly={false}
+			isThirdParty={false}
+			currentFolderId={currentFolderId}
+			rootFolderType={FolderType.Rooms}
+			footerCheckboxLabel={t("Common:OpenSavedDocument")}
+			footerInputHeader={t("Common:FileName")}
+			currentFooterInputValue={getFileName()}
+			descriptionText=""
+			getFilesArchiveError={() => ""}
+			withAIAgentsTreeFolder
+			currentDeviceType={
+				isDesktop()
+					? DeviceType.desktop
+					: isTablet()
+						? DeviceType.tablet
+						: DeviceType.mobile
+			}
+			folderFormValidation={folderFormValidation}
+			renderInPortal
+		/>
+	);
 };
 
 export default ExportSelector;

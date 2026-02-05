@@ -41,9 +41,12 @@ import { Portal } from "@docspace/ui-kit/components/portal";
 import FillFormsReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { toastr } from "../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
-import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
 import {
   getLinkAccessRightOptions,
   getRoomLinkAccessOptions,

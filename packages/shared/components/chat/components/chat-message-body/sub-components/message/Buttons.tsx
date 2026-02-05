@@ -35,13 +35,13 @@ import SaveToFileIconUrl from "PUBLIC_DIR/images/message.save.svg?url";
 import { exportChatMessage } from "../../../../../../api/ai";
 
 import socket, {
-  SocketCommands,
-  SocketEvents,
+	SocketCommands,
+	SocketEvents,
 } from "../../../../../../utils/socket";
 
-import { TBreadCrumb } from "../../../../../selector/Selector.types";
+import { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 
-import { toastr } from "../../../../../toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 
 import { useMessageStore } from "../../../../store/messageStore";
@@ -58,159 +58,159 @@ import { FOLDER_FORM_VALIDATION } from "../../../../../../constants";
 import { ContentType } from "../../../../../../api/ai/enums";
 
 const Buttons = ({
-  text,
-  chatName,
-  messageId,
-  // isLast,
-  getIcon,
-  messageIndex,
-  getResultStorageId,
-  folderFormValidation,
+	text,
+	chatName,
+	messageId,
+	// isLast,
+	getIcon,
+	messageIndex,
+	getResultStorageId,
+	folderFormValidation,
 }: MessageButtonsProps) => {
-  const { t } = useTranslation(["Common"]);
-  const { roomId, findPreviousUserMessage } = useMessageStore();
-  const { currentChat } = useChatStore();
+	const { t } = useTranslation(["Common"]);
+	const { roomId, findPreviousUserMessage } = useMessageStore();
+	const { currentChat } = useChatStore();
 
-  const [showFolderSelector, setShowFolderSelector] = React.useState(false);
+	const [showFolderSelector, setShowFolderSelector] = React.useState(false);
 
-  const onCloseFolderSelector = () => setShowFolderSelector(false);
+	const onCloseFolderSelector = () => setShowFolderSelector(false);
 
-  const onCopyAction = () => {
-    copy(text, { format: "text/plain" });
-    toastr.success(t("MessageCopiedSuccess"));
-  };
+	const onCopyAction = () => {
+		copy(text, { format: "text/plain" });
+		toastr.success(t("MessageCopiedSuccess"));
+	};
 
-  const onExportMessage = async (
-    selectedItemId: string | number | undefined,
-    folderTitle: string,
-    isPublic: boolean,
-    breadCrumbs: TBreadCrumb[],
-    fileName: string,
-    isChecked: boolean,
-  ) => {
-    if (!messageId || !selectedItemId || !currentChat) return;
+	const onExportMessage = async (
+		selectedItemId: string | number | undefined,
+		folderTitle: string,
+		isPublic: boolean,
+		breadCrumbs: TBreadCrumb[],
+		fileName: string,
+		isChecked: boolean,
+	) => {
+		if (!messageId || !selectedItemId || !currentChat) return;
 
-    const chatParts = ["CHAT-" + currentChat.id];
+		const chatParts = ["CHAT-" + currentChat.id];
 
-    socket?.emit(SocketCommands.Subscribe, {
-      roomParts: chatParts,
-      individual: true,
-    });
+		socket?.emit(SocketCommands.Subscribe, {
+			roomParts: chatParts,
+			individual: true,
+		});
 
-    await exportChatMessage(messageId, selectedItemId, fileName);
+		await exportChatMessage(messageId, selectedItemId, fileName);
 
-    console.log(socket?.socketSubscribers);
+		console.log(socket?.socketSubscribers);
 
-    socket?.on(SocketEvents.ExportChat, (data) => {
-      const { resultFile } = data;
+		socket?.on(SocketEvents.ExportChat, (data) => {
+			const { resultFile } = data;
 
-      if (resultFile) {
-        if (isChecked) {
-          openFile(resultFile.id.toString());
-        }
+			if (resultFile) {
+				if (isChecked) {
+					openFile(resultFile.id.toString());
+				}
 
-        const toastMsg = (
-          <Trans
-            ns="Common"
-            i18nKey="MessageExported"
-            values={{ fileName }}
-            t={t}
-            components={{
-              1: (
-                <Link
-                  type={LinkType.action}
-                  onClick={() => openFile(resultFile.id.toString())}
-                />
-              ),
-            }}
-          />
-        );
+				const toastMsg = (
+					<Trans
+						ns="Common"
+						i18nKey="MessageExported"
+						values={{ fileName }}
+						t={t}
+						components={{
+							1: (
+								<Link
+									type={LinkType.action}
+									onClick={() => openFile(resultFile.id.toString())}
+								/>
+							),
+						}}
+					/>
+				);
 
-        toastr.success(toastMsg);
-      } else {
-        toastr.error(data.error);
-      }
+				toastr.success(toastMsg);
+			} else {
+				toastr.error(data.error);
+			}
 
-      socket?.off(SocketEvents.ExportChat);
-      socket?.emit(SocketCommands.Unsubscribe, {
-        roomParts: chatParts,
-        individual: true,
-      });
-    });
+			socket?.off(SocketEvents.ExportChat);
+			socket?.emit(SocketCommands.Unsubscribe, {
+				roomParts: chatParts,
+				individual: true,
+			});
+		});
 
-    setShowFolderSelector(false);
-  };
+		setShowFolderSelector(false);
+	};
 
-  const getExportedFileName = () => {
-    const userMessage = findPreviousUserMessage(messageIndex);
-    let text = "";
+	const getExportedFileName = () => {
+		const userMessage = findPreviousUserMessage(messageIndex);
+		let text = "";
 
-    if (userMessage && userMessage.contents?.length > 0) {
-      for (const content of userMessage.contents) {
-        if (content.type === ContentType.Text) {
-          text = content.text;
-        }
-      }
-    }
+		if (userMessage && userMessage.contents?.length > 0) {
+			for (const content of userMessage.contents) {
+				if (content.type === ContentType.Text) {
+					text = content.text;
+				}
+			}
+		}
 
-    if (!text) {
-      text = chatName || "";
-    }
+		if (!text) {
+			text = chatName || "";
+		}
 
-    const sanitizedStr = text
-      .slice(0, 49) // only first 50 chars
-      .replace(/[\r\n]+/g, " ") // multiline to single line
-      .replace(FOLDER_FORM_VALIDATION, "_") // unacceptable symbols to "_"
-      .replace(/_+/g, "_") // remove "_" duplicates
-      .trim();
+		const sanitizedStr = text
+			.slice(0, 49) // only first 50 chars
+			.replace(/[\r\n]+/g, " ") // multiline to single line
+			.replace(FOLDER_FORM_VALIDATION, "_") // unacceptable symbols to "_"
+			.replace(/_+/g, "_") // remove "_" duplicates
+			.trim();
 
-    return sanitizedStr;
-  };
+		return sanitizedStr;
+	};
 
-  return (
-    <>
-      <div className={styles.buttonsBlock}>
-        <div
-          className={styles.buttonsBlockItem}
-          onClick={onCopyAction}
-          title={t("CopyMessage")}
-        >
-          <ReactSVG src={CopyIconUrl} />
-        </div>
+	return (
+		<>
+			<div className={styles.buttonsBlock}>
+				<div
+					className={styles.buttonsBlockItem}
+					onClick={onCopyAction}
+					title={t("CopyMessage")}
+				>
+					<ReactSVG src={CopyIconUrl} />
+				</div>
 
-        {/*{isLast ? (*/}
-        {/*  <div*/}
-        {/*    className={styles.buttonsBlockItem}*/}
-        {/*    title={t("RefreshMessage")}*/}
-        {/*    onClick={() => {*/}
-        {/*      toastr.info(t("Common:WorkInProgress"));*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    <ReactSVG src={RefreshIconUrl} />*/}
-        {/*  </div>*/}
-        {/*) : null}*/}
+				{/*{isLast ? (*/}
+				{/*  <div*/}
+				{/*    className={styles.buttonsBlockItem}*/}
+				{/*    title={t("RefreshMessage")}*/}
+				{/*    onClick={() => {*/}
+				{/*      toastr.info(t("Common:WorkInProgress"));*/}
+				{/*    }}*/}
+				{/*  >*/}
+				{/*    <ReactSVG src={RefreshIconUrl} />*/}
+				{/*  </div>*/}
+				{/*) : null}*/}
 
-        <div
-          className={styles.buttonsBlockItem}
-          onClick={() => setShowFolderSelector(true)}
-          title={t("SaveToFile")}
-        >
-          <ReactSVG src={SaveToFileIconUrl} />
-        </div>
-      </div>
-      {showFolderSelector ? (
-        <ExportSelector
-          onCloseFolderSelector={onCloseFolderSelector}
-          onSubmit={onExportMessage}
-          currentFolderId={getResultStorageId() || roomId}
-          getFileName={getExportedFileName}
-          getIcon={getIcon}
-          showFolderSelector={showFolderSelector}
-          folderFormValidation={folderFormValidation}
-        />
-      ) : null}
-    </>
-  );
+				<div
+					className={styles.buttonsBlockItem}
+					onClick={() => setShowFolderSelector(true)}
+					title={t("SaveToFile")}
+				>
+					<ReactSVG src={SaveToFileIconUrl} />
+				</div>
+			</div>
+			{showFolderSelector ? (
+				<ExportSelector
+					onCloseFolderSelector={onCloseFolderSelector}
+					onSubmit={onExportMessage}
+					currentFolderId={getResultStorageId() || roomId}
+					getFileName={getExportedFileName}
+					getIcon={getIcon}
+					showFolderSelector={showFolderSelector}
+					folderFormValidation={folderFormValidation}
+				/>
+			) : null}
+		</>
+	);
 };
 
 export default observer(Buttons);

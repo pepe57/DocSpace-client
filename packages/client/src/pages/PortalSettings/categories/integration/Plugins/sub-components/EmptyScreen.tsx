@@ -32,7 +32,7 @@ import styled from "styled-components";
 
 import { mobile } from "@docspace/shared/utils";
 
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 
 import { PluginsEmptyScreen } from "../Plugins.types";
 

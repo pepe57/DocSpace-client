@@ -30,7 +30,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject } from "mobx-react";
 
 import { Consumer } from "@docspace/shared/utils";
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 
 import EmptyScreenRecentUrl from "PUBLIC_DIR/images/emptyview/empty.history.light.svg?url";
 import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/emptyview/empty.history.dark.svg?url";

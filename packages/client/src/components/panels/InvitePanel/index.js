@@ -38,7 +38,7 @@ import {
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 import { Button } from "@docspace/ui-kit/components/button";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
@@ -67,7 +67,7 @@ import {
 } from "@docspace/shared/api/portal";
 import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { getDate } from "@docspace/shared/components/share/Share.helpers";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import styles from "./InvitePanel.module.scss";
 import { Badge } from "@docspace/ui-kit/components/badge";
@@ -321,10 +321,10 @@ const InvitePanel = ({
       onChangeExternalLinksVisible(true);
 
       const newLinkData = {
-        ...linkData,
         access: linkData.employeeType,
         shareLink: linkData.url,
         expirationDate: linkData.expiration,
+        ...linkData,
       };
 
       setActiveLink(newLinkData);
@@ -655,7 +655,7 @@ const InvitePanel = ({
     if (requestIsRunning) return;
 
     const createNewLink =
-      activeLink?.access !== defaultLink?.access || !activeLink?.access;
+      activeLink?.access != defaultLink?.access || !activeLink?.access;
 
     setRequestIsRunning(true);
     try {

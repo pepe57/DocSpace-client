@@ -31,7 +31,7 @@ import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { Textarea } from "@docspace/shared/components/textarea";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Label } from "@docspace/ui-kit/components/label";
 import { Button } from "@docspace/ui-kit/components/button";
@@ -60,6 +60,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
     updateEventListenerItems,
     updateFileItems,
     updatePlugin,
+    setPluginSelectorVisible,
+    setPluginSelectorProps,
   } = pluginStore;
 
   return {
@@ -75,6 +77,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
     updateEventListenerItems,
     updateFileItems,
     updatePlugin,
+    setPluginSelectorVisible,
+    setPluginSelectorProps,
   };
 })(
   observer(
@@ -96,6 +100,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
       updateEventListenerItems,
       updateFileItems,
       updatePlugin,
+      setPluginSelectorVisible,
+      setPluginSelectorProps,
     }) => {
       const [elementProps, setElementProps] = React.useState(component.props);
 
@@ -205,6 +211,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 
@@ -231,6 +239,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 
@@ -257,6 +267,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 
@@ -283,6 +295,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 
@@ -329,6 +343,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateEventListenerItems,
                 updateFileItems,
                 updatePlugin,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
 
               setIsRequestRunning && setIsRequestRunning(false);
@@ -382,6 +398,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
             };
 

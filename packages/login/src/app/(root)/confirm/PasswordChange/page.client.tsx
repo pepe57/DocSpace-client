@@ -30,11 +30,11 @@ import { ChangeEvent, KeyboardEvent, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { PasswordInput } from "@docspace/shared/components/password-input";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { Text } from "@docspace/ui-kit/components/text";
 import { createPasswordHash } from "@docspace/shared/utils/common";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 import {
   TPasswordHash,

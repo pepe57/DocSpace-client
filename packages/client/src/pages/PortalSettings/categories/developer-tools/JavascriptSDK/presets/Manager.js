@@ -51,8 +51,8 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";

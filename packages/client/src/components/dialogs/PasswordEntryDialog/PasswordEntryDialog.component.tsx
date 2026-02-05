@@ -34,12 +34,12 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { ValidationStatus } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { validatePublicRoomPassword } from "@docspace/shared/api/rooms";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { PasswordInput } from "@docspace/shared/components/password-input";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
 import type { PasswordEntryDialogProps } from "./PasswordEntryDialog.types";
 import styles from "./PasswordEntry.module.scss";

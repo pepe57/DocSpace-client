@@ -39,7 +39,7 @@ import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu"
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { ContextMenuButton } from "../../../components/context-menu-button";
+import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
 import { SimulatePassword } from "../../../components/simulate-password";
 
 import { isFile, type PasswordRowProps } from "../DownloadDialog.types";

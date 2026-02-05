@@ -33,7 +33,7 @@ import {
   setDefaultAIAgentQuota,
 } from "../api/settings";
 
-import { toastr, type TData } from "../components/toast";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 import { EmployeeType, PortalFeaturesLimitations } from "../enums";
 import api from "../api";
 import {
@@ -233,6 +233,13 @@ class CurrentQuotasStore {
     ) as TNumericPaymentFeature;
 
     return result?.value ?? 0;
+  }
+
+  get isLifetimeLicense() {
+    const result = this.currentPortalQuotaFeatures.get(
+      "lifetime",
+    ) as TBooleanPaymentFeature;
+    return result?.value;
   }
 
   get isRestoreAndAutoBackupAvailable() {

@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { size, isMobileDevice } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -55,291 +55,291 @@ const MainContainer = styled.div`
 
 const TFA_HASH = "#tfa-section";
 const SCROLL_MARGIN_TOP =
-	window.innerWidth > size.mobile && window.innerWidth < size.desktop
-		? "190px"
-		: "230px";
+  window.innerWidth > size.mobile && window.innerWidth < size.desktop
+    ? "190px"
+    : "230px";
 
 const TwoFactorAuth = (props) => {
-	const {
-		t,
-		tReady,
-		setIsInit,
-		isInit,
-		currentColorScheme,
-		tfaSettingsUrl,
-		currentDeviceType,
-		appAvailable,
-		tfaSettings,
-		onSettingsSkeletonNotShown,
+  const {
+    t,
+    tReady,
+    setIsInit,
+    isInit,
+    currentColorScheme,
+    tfaSettingsUrl,
+    currentDeviceType,
+    appAvailable,
+    tfaSettings,
+    onSettingsSkeletonNotShown,
 
-		settingsStore,
-		tfaStore,
-		setup,
-	} = props;
+    settingsStore,
+    tfaStore,
+    setup,
+  } = props;
 
-	const [type, setType] = useState("none");
-	const [showReminder, setShowReminder] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
-	const [isSaving, setIsSaving] = useState(false);
-	const targetRef = useRef(null);
+  const [type, setType] = useState("none");
+  const [showReminder, setShowReminder] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const targetRef = useRef(null);
 
-	const navigate = useNavigate();
-	const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-	const defaultProps = createDefaultHookSettingsProps({
-		settingsStore,
-		tfaStore,
-		setup,
-	});
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
 
-	const { getSecurityInitialValue } = useSecurity(defaultProps.security);
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
 
-	const checkWidth = () => {
-		window.innerWidth > size.mobile &&
-			location.pathname.includes("tfa") &&
-			navigate("/portal-settings/security/access-portal");
-	};
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("tfa") &&
+      navigate("/portal-settings/security/access-portal");
+  };
 
-	const getSettingsFromDefault = () => {
-		const defaultSettings = getFromSessionStorage("defaultTfaSettings");
-		if (defaultSettings) setType(defaultSettings);
-	};
+  const getSettingsFromDefault = () => {
+    const defaultSettings = getFromSessionStorage("defaultTfaSettings");
+    if (defaultSettings) setType(defaultSettings);
+  };
 
-	const getSettings = async () => {
-		const currentSettings = getFromSessionStorage("currentTfaSettings");
+  const getSettings = async () => {
+    const currentSettings = getFromSessionStorage("currentTfaSettings");
 
-		saveToSessionStorage("defaultTfaSettings", tfaSettings);
+    saveToSessionStorage("defaultTfaSettings", tfaSettings);
 
-		if (currentSettings) {
-			setType(currentSettings);
-		} else {
-			setType(tfaSettings);
-		}
-	};
+    if (currentSettings) {
+      setType(currentSettings);
+    } else {
+      setType(tfaSettings);
+    }
+  };
 
-	useEffect(() => {
-		if (isMobileDevice()) {
-			getSecurityInitialValue();
-			setIsLoading(true);
-		}
-	}, [isMobileDevice]);
+  useEffect(() => {
+    if (isMobileDevice()) {
+      getSecurityInitialValue();
+      setIsLoading(true);
+    }
+  }, [isMobileDevice]);
 
-	useEffect(() => {
-		if (isInit) {
-			setIsLoading(true);
-		}
-	}, [isInit]);
+  useEffect(() => {
+    if (isInit) {
+      setIsLoading(true);
+    }
+  }, [isInit]);
 
-	useEffect(() => {
-		if (!onSettingsSkeletonNotShown) return;
-		if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
-			onSettingsSkeletonNotShown("Tfa");
-	}, [currentDeviceType, isLoading]);
+  useEffect(() => {
+    if (!onSettingsSkeletonNotShown) return;
+    if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
+      onSettingsSkeletonNotShown("Tfa");
+  }, [currentDeviceType, isLoading]);
 
-	const scrollToTarget = () => {
-		targetRef.current.style.scrollMarginTop = SCROLL_MARGIN_TOP;
-		targetRef.current.scrollIntoView({
-			behavior: "smooth",
-			block: "start",
-		});
-		window.history.replaceState(
-			null,
-			null,
-			window.location.pathname + window.location.search,
-		);
-		setType("app");
-	};
+  const scrollToTarget = () => {
+    targetRef.current.style.scrollMarginTop = SCROLL_MARGIN_TOP;
+    targetRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    window.history.replaceState(
+      null,
+      null,
+      window.location.pathname + window.location.search,
+    );
+    setType("app");
+  };
 
-	useEffect(() => {
-		if (!isInit && !isMobileDevice()) {
-			getSecurityInitialValue();
-		}
+  useEffect(() => {
+    if (!isInit && !isMobileDevice()) {
+      getSecurityInitialValue();
+    }
 
-		if (window.location.hash !== TFA_HASH) return;
-		if (!targetRef?.current) {
-			// If element is not available yet, try again after a small delay
-			const timer = setTimeout(scrollToTarget, 50);
-			return () => clearTimeout(timer);
-		}
+    if (window.location.hash !== TFA_HASH) return;
+    if (!targetRef?.current) {
+      // If element is not available yet, try again after a small delay
+      const timer = setTimeout(scrollToTarget, 50);
+      return () => clearTimeout(timer);
+    }
 
-		if (targetRef.current) {
-			const timer = setTimeout(scrollToTarget, 700);
-			return () => clearTimeout(timer);
-		}
-	}, []);
+    if (targetRef.current) {
+      const timer = setTimeout(scrollToTarget, 700);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
-	useEffect(() => {
-		checkWidth();
-		window.addEventListener("resize", checkWidth);
-		return () => window.removeEventListener("resize", checkWidth);
-	}, []);
+  useEffect(() => {
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
 
-	useEffect(() => {
-		if (!isLoading || !tfaSettings || isSaving) return;
-		const currentSettings = getFromSessionStorage("currentTfaSettings");
-		const defaultSettings = getFromSessionStorage("defaultTfaSettings");
+  useEffect(() => {
+    if (!isLoading || !tfaSettings || isSaving) return;
+    const currentSettings = getFromSessionStorage("currentTfaSettings");
+    const defaultSettings = getFromSessionStorage("defaultTfaSettings");
 
-		if (currentSettings === defaultSettings) {
-			getSettings();
-		} else {
-			getSettingsFromDefault();
-		}
-	}, [isLoading, tfaSettings]);
+    if (currentSettings === defaultSettings) {
+      getSettings();
+    } else {
+      getSettingsFromDefault();
+    }
+  }, [isLoading, tfaSettings]);
 
-	useEffect(() => {
-		if (!isLoading) return;
+  useEffect(() => {
+    if (!isLoading) return;
 
-		const defaultSettings = getFromSessionStorage("defaultTfaSettings");
-		saveToSessionStorage("currentTfaSettings", type);
+    const defaultSettings = getFromSessionStorage("defaultTfaSettings");
+    saveToSessionStorage("currentTfaSettings", type);
 
-		if (isEqual(defaultSettings, type)) {
-			setShowReminder(false);
-		} else {
-			setShowReminder(true);
-		}
-	}, [type]);
+    if (isEqual(defaultSettings, type)) {
+      setShowReminder(false);
+    } else {
+      setShowReminder(true);
+    }
+  }, [type]);
 
-	const onSelectTfaType = (e) => {
-		if (type !== e.target.value) {
-			setType(e.target.value);
-		}
-	};
+  const onSelectTfaType = (e) => {
+    if (type !== e.target.value) {
+      setType(e.target.value);
+    }
+  };
 
-	const onSaveClick = async () => {
-		const { setTfaSettings } = props;
-		setIsSaving(true);
+  const onSaveClick = async () => {
+    const { setTfaSettings } = props;
+    setIsSaving(true);
 
-		try {
-			const res = await setTfaSettings(type);
-			setType(type);
-			setShowReminder(false);
-			saveToSessionStorage("defaultTfaSettings", type);
-			saveToSessionStorage("currentTfaSettings", type);
-			toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+    try {
+      const res = await setTfaSettings(type);
+      setType(type);
+      setShowReminder(false);
+      saveToSessionStorage("defaultTfaSettings", type);
+      saveToSessionStorage("currentTfaSettings", type);
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
 
-			if (res) {
-				setIsInit(false);
-				window.location.replace(res);
-			}
-		} catch (error) {
-			toastr.error(error);
-		}
+      if (res) {
+        setIsInit(false);
+        window.location.replace(res);
+      }
+    } catch (error) {
+      toastr.error(error);
+    }
 
-		setIsSaving(false);
-	};
+    setIsSaving(false);
+  };
 
-	const onCancelClick = () => {
-		const defaultSettings = getFromSessionStorage("defaultTfaSettings");
-		saveToSessionStorage("currentTfaSettings", defaultSettings);
-		setType(defaultSettings || "none");
-		setShowReminder(false);
-	};
+  const onCancelClick = () => {
+    const defaultSettings = getFromSessionStorage("defaultTfaSettings");
+    saveToSessionStorage("currentTfaSettings", defaultSettings);
+    setType(defaultSettings || "none");
+    setShowReminder(false);
+  };
 
-	if ((currentDeviceType === DeviceType.mobile && !isLoading) || !tReady) {
-		return <TfaLoader />;
-	}
+  if ((currentDeviceType === DeviceType.mobile && !isLoading) || !tReady) {
+    return <TfaLoader />;
+  }
 
-	return (
-		<MainContainer id="tfa-section" ref={targetRef}>
-			<LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>
-				<Text fontSize="13px" fontWeight="400">
-					{t("TwoFactorAuthEnableDescription", {
-						productName: t("Common:ProductName"),
-					})}
-				</Text>
-				{tfaSettingsUrl ? (
-					<Link
-						className="link-learn-more"
-						color={currentColorScheme.main?.accent}
-						target="_blank"
-						isHovered
-						href={tfaSettingsUrl}
-						dataTestId="tfa_component_learn_more"
-					>
-						{t("Common:LearnMore")}
-					</Link>
-				) : null}
-			</LearnMoreWrapper>
+  return (
+    <MainContainer id="tfa-section" ref={targetRef}>
+      <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>
+        <Text fontSize="13px" fontWeight="400">
+          {t("TwoFactorAuthEnableDescription", {
+            productName: t("Common:ProductName"),
+          })}
+        </Text>
+        {tfaSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={tfaSettingsUrl}
+            dataTestId="tfa_component_learn_more"
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </LearnMoreWrapper>
 
-			<RadioButtonGroup
-				className="box"
-				fontSize="13px"
-				fontWeight="400"
-				name="group"
-				orientation="vertical"
-				spacing="8px"
-				dataTestId="tfa_radio_button_group"
-				options={[
-					{
-						id: "tfa-disabled",
-						label: t("Common:Disabled"),
-						value: "none",
-						dataTestId: "tfa_radio_button_disabled",
-					},
-					// TODO: hide while 2fa by sms is not working
-					/* {
+      <RadioButtonGroup
+        className="box"
+        fontSize="13px"
+        fontWeight="400"
+        name="group"
+        orientation="vertical"
+        spacing="8px"
+        dataTestId="tfa_radio_button_group"
+        options={[
+          {
+            id: "tfa-disabled",
+            label: t("Common:Disabled"),
+            value: "none",
+            dataTestId: "tfa_radio_button_disabled",
+          },
+          // TODO: hide while 2fa by sms is not working
+          /* {
             id: "by-sms",
             label: t("BySms"),
             value: "sms",
             disabled: !smsAvailable,
           }, */
-					{
-						id: "by-app",
-						label: t("ByApp"),
-						value: "app",
-						disabled: !appAvailable,
-						dataTestId: "tfa_radio_button_app",
-					},
-				]}
-				selected={type}
-				onClick={onSelectTfaType}
-			/>
+          {
+            id: "by-app",
+            label: t("ByApp"),
+            value: "app",
+            disabled: !appAvailable,
+            dataTestId: "tfa_radio_button_app",
+          },
+        ]}
+        selected={type}
+        onClick={onSelectTfaType}
+      />
 
-			<SaveCancelButtons
-				className="save-cancel-buttons"
-				onSaveClick={onSaveClick}
-				onCancelClick={onCancelClick}
-				showReminder={showReminder}
-				reminderText={t("Common:YouHaveUnsavedChanges")}
-				saveButtonLabel={t("Common:SaveButton")}
-				cancelButtonLabel={t("Common:CancelButton")}
-				displaySettings
-				hasScroll={false}
-				isSaving={isSaving}
-				additionalClassSaveButton="two-factor-auth-save"
-				additionalClassCancelButton="two-factor-auth-cancel"
-				saveButtonDataTestId="tfa_save_button"
-				cancelButtonDataTestId="tfa_cancel_button"
-			/>
-		</MainContainer>
-	);
+      <SaveCancelButtons
+        className="save-cancel-buttons"
+        onSaveClick={onSaveClick}
+        onCancelClick={onCancelClick}
+        showReminder={showReminder}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
+        saveButtonLabel={t("Common:SaveButton")}
+        cancelButtonLabel={t("Common:CancelButton")}
+        displaySettings
+        hasScroll={false}
+        isSaving={isSaving}
+        additionalClassSaveButton="two-factor-auth-save"
+        additionalClassCancelButton="two-factor-auth-cancel"
+        saveButtonDataTestId="tfa_save_button"
+        cancelButtonDataTestId="tfa_cancel_button"
+      />
+    </MainContainer>
+  );
 };
 
 export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
-	const {
-		setTfaSettings,
+  const {
+    setTfaSettings,
 
-		tfaSettings,
-		smsAvailable,
-		appAvailable,
-	} = tfaStore;
+    tfaSettings,
+    smsAvailable,
+    appAvailable,
+  } = tfaStore;
 
-	const { setIsInit, isInit } = setup;
-	const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
-		settingsStore;
+  const { setIsInit, isInit } = setup;
+  const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
+    settingsStore;
 
-	return {
-		setTfaSettings,
-		tfaSettings,
-		smsAvailable,
-		appAvailable,
-		setIsInit,
-		isInit,
-		currentColorScheme,
-		tfaSettingsUrl,
-		currentDeviceType,
-		settingsStore,
-		tfaStore,
-		setup,
-	};
+  return {
+    setTfaSettings,
+    tfaSettings,
+    smsAvailable,
+    appAvailable,
+    setIsInit,
+    isInit,
+    currentColorScheme,
+    tfaSettingsUrl,
+    currentDeviceType,
+    settingsStore,
+    tfaStore,
+    setup,
+  };
 })(withTranslation(["Settings", "Common"])(observer(TwoFactorAuth)));

@@ -31,12 +31,15 @@ import InfoIconSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import EmptyScreenAIAgentsSelectorSvgUrl from "PUBLIC_DIR/images/emptyview/ai.agents.selector.light.svg?url";
 import EmptyScreenAIAgentsSelectorSvgUrlDark from "PUBLIC_DIR/images/emptyview/ai.agents.selector.dark.svg?url";
 
-import { Selector, type TSelectorItem } from "../../components/selector";
+import {
+	Selector,
+	type TSelectorItem,
+} from "@docspace/ui-kit/components/selector";
 import type {
-  TSelectorCancelButton,
-  TSelectorHeader,
-  TSelectorSearch,
-} from "../../components/selector/Selector.types";
+	TSelectorCancelButton,
+	TSelectorHeader,
+	TSelectorSearch,
+} from "@docspace/ui-kit/components/selector";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 
 import type { TTranslation } from "../../types";
@@ -45,263 +48,263 @@ import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import useSocketHelper from "../utils/hooks/useSocketHelper";
 import useAgentsHelper from "../utils/hooks/useAgentsHelper";
 import {
-  LoadersContext,
-  LoadersContextProvider,
+	LoadersContext,
+	LoadersContextProvider,
 } from "../utils/contexts/Loaders";
 
 import type { AIAgentSelectorProps } from "./AIAgent.types";
 import { convertToItems } from "./AIAgent.utils";
 
 const AIAgentSelectorComponent = ({
-  id,
-  className,
-  style,
+	id,
+	className,
+	style,
 
-  excludeItems,
+	excludeItems,
 
-  onSubmit,
+	onSubmit,
 
-  withPadding,
+	withPadding,
 
-  setIsDataReady,
+	setIsDataReady,
 
-  onClose,
+	onClose,
 
-  withInit,
-  initItems,
-  initTotal,
-  initHasNextPage,
-  initSearchValue,
-  disableBySecurity,
+	withInit,
+	initItems,
+	initTotal,
+	initHasNextPage,
+	initSearchValue,
+	disableBySecurity,
 }: AIAgentSelectorProps) => {
-  const { t }: { t: TTranslation } = useTranslation(["Common"]);
+	const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
-  const { isBase } = useTheme();
+	const { isBase } = useTheme();
 
-  const { isFirstLoad, isNextPageLoading, setIsFirstLoad } =
-    React.useContext(LoadersContext);
+	const { isFirstLoad, isNextPageLoading, setIsFirstLoad } =
+		React.useContext(LoadersContext);
 
-  const [searchValue, setSearchValue] = React.useState(() =>
-    withInit ? initSearchValue : "",
-  );
-  const [hasNextPage, setHasNextPage] = React.useState(() =>
-    withInit ? initHasNextPage : false,
-  );
-  const [selectedItem, setSelectedItem] = React.useState<TSelectorItem | null>(
-    null,
-  );
-  const [withInfo, setWithInfo] = React.useState(true);
+	const [searchValue, setSearchValue] = React.useState(() =>
+		withInit ? initSearchValue : "",
+	);
+	const [hasNextPage, setHasNextPage] = React.useState(() =>
+		withInit ? initHasNextPage : false,
+	);
+	const [selectedItem, setSelectedItem] = React.useState<TSelectorItem | null>(
+		null,
+	);
+	const [withInfo, setWithInfo] = React.useState(true);
 
-  const [total, setTotal] = React.useState(() => (withInit ? initTotal : -1));
-  const [items, setItems] = React.useState<TSelectorItem[]>(
-    withInit
-      ? convertToItems(initItems, disableBySecurity).filter((x) =>
-          excludeItems ? !excludeItems.includes(x.id) : true,
-        )
-      : [],
-  );
+	const [total, setTotal] = React.useState(() => (withInit ? initTotal : -1));
+	const [items, setItems] = React.useState<TSelectorItem[]>(
+		withInit
+			? convertToItems(initItems, disableBySecurity).filter((x) =>
+					excludeItems ? !excludeItems.includes(x.id) : true,
+				)
+			: [],
+	);
 
-  const isInitRef = React.useRef<boolean>(!withInit);
-  const afterSearch = React.useRef(false);
+	const isInitRef = React.useRef<boolean>(!withInit);
+	const afterSearch = React.useRef(false);
 
-  const setIsInit = React.useCallback((value: boolean) => {
-    isInitRef.current = value;
-  }, []);
+	const setIsInit = React.useCallback((value: boolean) => {
+		isInitRef.current = value;
+	}, []);
 
-  const onSelect = (
-    item: TSelectorItem,
-    isDoubleClick: boolean,
-    doubleClickCallback: () => void,
-  ) => {
-    if (
-      item.security &&
-      "UseChat" in item.security &&
-      !item.security?.UseChat
-    ) {
-      setSelectedItem(null);
+	const onSelect = (
+		item: TSelectorItem,
+		isDoubleClick: boolean,
+		doubleClickCallback: () => void,
+	) => {
+		if (
+			item.security &&
+			"UseChat" in item.security &&
+			!item.security?.UseChat
+		) {
+			setSelectedItem(null);
 
-      return;
-    }
+			return;
+		}
 
-    setSelectedItem((el) => {
-      if (el?.id === item.id) return null;
+		setSelectedItem((el) => {
+			if (el?.id === item.id) return null;
 
-      if (
-        item.security &&
-        "UseChat" in item.security &&
-        !item.security?.UseChat
-      ) {
-        return null;
-      }
+			if (
+				item.security &&
+				"UseChat" in item.security &&
+				!item.security?.UseChat
+			) {
+				return null;
+			}
 
-      return item;
-    });
-    if (isDoubleClick) {
-      doubleClickCallback();
-    }
-  };
+			return item;
+		});
+		if (isDoubleClick) {
+			doubleClickCallback();
+		}
+	};
 
-  useEffect(() => {
-    setIsDataReady?.(!isFirstLoad);
-  }, [setIsDataReady, isFirstLoad]);
+	useEffect(() => {
+		setIsDataReady?.(!isFirstLoad);
+	}, [setIsDataReady, isFirstLoad]);
 
-  const onSearchAction = React.useCallback(
-    (value: string, callback?: VoidFunction) => {
-      afterSearch.current = true;
-      setIsFirstLoad(true);
-      setSearchValue(() => {
-        return value;
-      });
-      callback?.();
-    },
-    [setIsFirstLoad],
-  );
+	const onSearchAction = React.useCallback(
+		(value: string, callback?: VoidFunction) => {
+			afterSearch.current = true;
+			setIsFirstLoad(true);
+			setSearchValue(() => {
+				return value;
+			});
+			callback?.();
+		},
+		[setIsFirstLoad],
+	);
 
-  const { subscribe } = useSocketHelper({
-    withCreate: true,
-    setTotal,
-    setItems,
-    disabledItems: [],
-    disableBySecurity,
-  });
+	const { subscribe } = useSocketHelper({
+		withCreate: true,
+		setTotal,
+		setItems,
+		disabledItems: [],
+		disableBySecurity,
+	});
 
-  const onClearSearchAction = React.useCallback(
-    (callback?: VoidFunction) => {
-      setIsFirstLoad(true);
-      afterSearch.current = true;
-      setSearchValue(() => {
-        return "";
-      });
-      callback?.();
-    },
-    [setIsFirstLoad],
-  );
+	const onClearSearchAction = React.useCallback(
+		(callback?: VoidFunction) => {
+			setIsFirstLoad(true);
+			afterSearch.current = true;
+			setSearchValue(() => {
+				return "";
+			});
+			callback?.();
+		},
+		[setIsFirstLoad],
+	);
 
-  const { getAgentList: onLoadNextPage } = useAgentsHelper({
-    withCreate: true,
-    isInit: isInitRef.current,
-    setIsInit,
-    createDefineLabel: t("Common:CreateAIAgent", {
-      aiAgent: t("Common:AIAgent"),
-    }),
-    excludeItems,
-    searchValue,
-    setHasNextPage,
-    setTotal,
-    setItems,
-    withInit,
-    subscribe,
-    disableBySecurity,
-  });
+	const { getAgentList: onLoadNextPage } = useAgentsHelper({
+		withCreate: true,
+		isInit: isInitRef.current,
+		setIsInit,
+		createDefineLabel: t("Common:CreateAIAgent", {
+			aiAgent: t("Common:AIAgent"),
+		}),
+		excludeItems,
+		searchValue,
+		setHasNextPage,
+		setTotal,
+		setItems,
+		withInit,
+		subscribe,
+		disableBySecurity,
+	});
 
-  React.useEffect(() => {
-    const withInfo =
-      items.length > 1
-        ? items.length === 2
-          ? !items[1].isInputItem
-          : true
-        : false;
+	React.useEffect(() => {
+		const withInfo =
+			items.length > 1
+				? items.length === 2
+					? !items[1].isInputItem
+					: true
+				: false;
 
-    setWithInfo(withInfo);
-  }, [items]);
+		setWithInfo(withInfo);
+	}, [items]);
 
-  const headerSelectorProps: TSelectorHeader = {
-    withHeader: true,
-    headerProps: {
-      headerLabel: t("Common:AIAgents"),
-      onCloseClick: onClose,
-      isCloseable: true,
-    },
-  };
+	const headerSelectorProps: TSelectorHeader = {
+		withHeader: true,
+		headerProps: {
+			headerLabel: t("Common:AIAgents"),
+			onCloseClick: onClose,
+			isCloseable: true,
+		},
+	};
 
-  const cancelButtonSelectorProps: TSelectorCancelButton = {
-    withCancelButton: true,
-    cancelButtonLabel: t("Common:CancelButton"),
-    onCancel: onClose,
-  };
+	const cancelButtonSelectorProps: TSelectorCancelButton = {
+		withCancelButton: true,
+		cancelButtonLabel: t("Common:CancelButton"),
+		onCancel: onClose,
+	};
 
-  const searchSelectorProps: TSelectorSearch = {
-    withSearch: true,
-    searchPlaceholder: t("Common:Search"),
-    searchValue,
-    onSearch: onSearchAction,
-    onClearSearch: onClearSearchAction,
-    searchLoader: <SearchLoader />,
-    isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,
-  };
+	const searchSelectorProps: TSelectorSearch = {
+		withSearch: true,
+		searchPlaceholder: t("Common:Search"),
+		searchValue,
+		onSearch: onSearchAction,
+		onClearSearch: onClearSearchAction,
+		searchLoader: <SearchLoader />,
+		isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,
+	};
 
-  return (
-    <Selector
-      id={id}
-      className={className}
-      style={style}
-      {...headerSelectorProps}
-      {...cancelButtonSelectorProps}
-      {...searchSelectorProps}
-      withPadding={withPadding}
-      onSelect={onSelect}
-      items={items}
-      submitButtonLabel={t("Common:SelectAction")}
-      onSubmit={onSubmit}
-      isMultiSelect={false}
-      emptyScreenImage={
-        isBase
-          ? EmptyScreenAIAgentsSelectorSvgUrl
-          : EmptyScreenAIAgentsSelectorSvgUrlDark
-      }
-      emptyScreenHeader={t("Common:NoAIAgents", {
-        aiAgents: t("Common:AIAgents"),
-      })}
-      emptyScreenDescription={t("Common:NoAIAgentsDescription")}
-      searchEmptyScreenImage={
-        isBase
-          ? EmptyScreenAIAgentsSelectorSvgUrl
-          : EmptyScreenAIAgentsSelectorSvgUrlDark
-      }
-      searchEmptyScreenHeader={t("Common:NoAIAgentsSearch", {
-        aiAgents: t("Common:AIAgents"),
-      })}
-      searchEmptyScreenDescription={t("Common:NoAIAgentsSearchDescription")}
-      totalItems={total}
-      hasNextPage={hasNextPage}
-      isNextPageLoading={isNextPageLoading}
-      loadNextPage={onLoadNextPage}
-      isLoading={isFirstLoad}
-      disableSubmitButton={!selectedItem}
-      alwaysShowFooter={items.length !== 0 || Boolean(searchValue)}
-      rowLoader={
-        <RowLoader
-          isMultiSelect={false}
-          isContainer={isFirstLoad}
-          isUser={false}
-        />
-      }
-      isSSR={withInit}
-      dataTestId="ai_agent_selector"
-      useAside
-      onClose={onClose}
-      withInfoBar={withInfo}
-      infoBarData={{
-        title: t("Common:ChooseAIAgent", {
-          aiAgent: t("Common:AIAgent"),
-        }),
-        icon: InfoIconSvgUrl,
-        onClose: () => setWithInfo(!withInfo),
-        description: t("Common:ChooseAIAgentDescription"),
-      }}
-      hideBackButton
-    />
-  );
+	return (
+		<Selector
+			id={id}
+			className={className}
+			style={style}
+			{...headerSelectorProps}
+			{...cancelButtonSelectorProps}
+			{...searchSelectorProps}
+			withPadding={withPadding}
+			onSelect={onSelect}
+			items={items}
+			submitButtonLabel={t("Common:SelectAction")}
+			onSubmit={onSubmit}
+			isMultiSelect={false}
+			emptyScreenImage={
+				isBase
+					? EmptyScreenAIAgentsSelectorSvgUrl
+					: EmptyScreenAIAgentsSelectorSvgUrlDark
+			}
+			emptyScreenHeader={t("Common:NoAIAgents", {
+				aiAgents: t("Common:AIAgents"),
+			})}
+			emptyScreenDescription={t("Common:NoAIAgentsDescription")}
+			searchEmptyScreenImage={
+				isBase
+					? EmptyScreenAIAgentsSelectorSvgUrl
+					: EmptyScreenAIAgentsSelectorSvgUrlDark
+			}
+			searchEmptyScreenHeader={t("Common:NoAIAgentsSearch", {
+				aiAgents: t("Common:AIAgents"),
+			})}
+			searchEmptyScreenDescription={t("Common:NoAIAgentsSearchDescription")}
+			totalItems={total}
+			hasNextPage={hasNextPage}
+			isNextPageLoading={isNextPageLoading}
+			loadNextPage={onLoadNextPage}
+			isLoading={isFirstLoad}
+			disableSubmitButton={!selectedItem}
+			alwaysShowFooter={items.length !== 0 || Boolean(searchValue)}
+			rowLoader={
+				<RowLoader
+					isMultiSelect={false}
+					isContainer={isFirstLoad}
+					isUser={false}
+				/>
+			}
+			isSSR={withInit}
+			dataTestId="ai_agent_selector"
+			useAside
+			onClose={onClose}
+			withInfoBar={withInfo}
+			infoBarData={{
+				title: t("Common:ChooseAIAgent", {
+					aiAgent: t("Common:AIAgent"),
+				}),
+				icon: InfoIconSvgUrl,
+				onClose: () => setWithInfo(!withInfo),
+				description: t("Common:ChooseAIAgentDescription"),
+			}}
+			hideBackButton
+		/>
+	);
 };
 
 const AIAgentSelector = (props: AIAgentSelectorProps) => {
-  const { withInit } = props;
+	const { withInit } = props;
 
-  return (
-    <LoadersContextProvider withInit={withInit}>
-      <AIAgentSelectorComponent {...props} />
-    </LoadersContextProvider>
-  );
+	return (
+		<LoadersContextProvider withInit={withInit}>
+			<AIAgentSelectorComponent {...props} />
+		</LoadersContextProvider>
+	);
 };
 
 export default AIAgentSelector;

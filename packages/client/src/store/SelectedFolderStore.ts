@@ -48,6 +48,7 @@ import {
   TShareSettings,
 } from "@docspace/shared/api/files/types";
 import {
+  TAIRoomChatSettings,
   TRoomLifetime,
   TRoomSecurity,
   TWatermark,
@@ -180,9 +181,7 @@ class SelectedFolderStore {
 
   passwordProtected: boolean = false;
 
-  chatSettings:
-    | { modelId: string; providerId: number; prompt: string }
-    | undefined;
+  chatSettings: TAIRoomChatSettings | undefined;
 
   rootRoomType: Nullable<RoomsType> = null;
 

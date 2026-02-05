@@ -45,7 +45,7 @@ import {
   getLicenseQuota,
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { UserStore } from "@docspace/shared/store/UserStore";
@@ -54,7 +54,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TTranslation } from "@docspace/shared/types";
-import { type TData } from "@docspace/shared/components/toast";
+import { type TData } from "@docspace/ui-kit/components/toast";
 import {
   TBalance,
   TAutoTopUpSettings,

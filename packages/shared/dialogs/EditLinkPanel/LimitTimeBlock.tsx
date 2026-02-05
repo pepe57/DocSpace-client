@@ -28,7 +28,7 @@ import { type FC, useId, useState } from "react";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 
-import { DateTimePicker } from "../../components/date-time-picker";
+import { DateTimePicker } from "@docspace/ui-kit/components/date-time-picker";
 import type { Nullable } from "../../types";
 
 import ToggleBlock from "./ToggleBlock";
@@ -86,6 +86,7 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
         selectDateText={t("Common:SelectDate")}
         dataTestId="edit_link_panel_date_time_picker"
         useMaxTime
+        translations={{ AM: t("Common:AM"), PM: t("Common:PM") }}
       />
     </ToggleBlock>
   );

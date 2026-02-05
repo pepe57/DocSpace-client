@@ -38,7 +38,7 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "../../context-menu-button";
+} from "@docspace/ui-kit/components/context-menu-button";
 import {
   ContextMenu,
   ContextMenuRefType,

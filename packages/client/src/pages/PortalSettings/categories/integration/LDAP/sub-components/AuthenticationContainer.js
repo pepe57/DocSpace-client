@@ -27,8 +27,8 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 import LdapFieldComponent from "./LdapFieldComponent";

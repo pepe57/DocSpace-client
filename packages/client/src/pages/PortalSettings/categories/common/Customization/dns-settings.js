@@ -27,7 +27,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useTheme } from "styled-components";
 import { withTranslation } from "react-i18next";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Button } from "@docspace/ui-kit/components/button";
 import { inject, observer } from "mobx-react";
@@ -37,7 +37,7 @@ import { isMobileDevice } from "@docspace/shared/utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/ui-kit/components/badge";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";

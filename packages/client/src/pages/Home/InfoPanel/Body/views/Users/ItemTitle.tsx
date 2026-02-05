@@ -33,12 +33,8 @@ import { Text } from "@docspace/ui-kit/components/text";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
-import {
-  ContextMenu,
-  ContextMenuRefType,
-  HeaderType,
-} from "@docspace/ui-kit";
+} from "@docspace/ui-kit/components/context-menu-button";
+import { ContextMenu, ContextMenuRefType, HeaderType } from "@docspace/ui-kit";
 import { Avatar, AvatarSize } from "@docspace/ui-kit/components/avatar";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";

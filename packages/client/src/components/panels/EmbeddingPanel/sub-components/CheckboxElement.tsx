@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { TooltipContent } from "../../../../pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/TooltipContent";
 import styles from "../EmbeddingPanel.module.scss";
 

@@ -36,7 +36,7 @@ import { TTranslation } from "@docspace/shared/types";
 interface ICancelOperationDialogProps {
   visible: boolean;
   setOperationCancelVisible: (visible: boolean) => void;
-  cancelUpload: (t: TTranslation) => void;
+  cancelUpload: () => void;
   setHideConfirmCancelOperation: (hide: boolean) => void;
   isSecondaryProgressVisbile: boolean;
 }
@@ -47,7 +47,7 @@ interface IStoreProps {
     setOperationCancelVisible: (visible: boolean) => void;
   };
   uploadDataStore: {
-    cancelUpload: (t: TTranslation) => void;
+    cancelUpload: () => void;
     secondaryProgressDataStore: {
       isSecondaryProgressVisbile: boolean;
     };
@@ -72,7 +72,7 @@ const CancelOperationDialog: React.FC<ICancelOperationDialogProps> = ({
   };
 
   const onConfirm = () => {
-    cancelUpload(t);
+    cancelUpload();
     if (isChecked) setHideConfirmCancelOperation(true);
     setOperationCancelVisible(false);
   };

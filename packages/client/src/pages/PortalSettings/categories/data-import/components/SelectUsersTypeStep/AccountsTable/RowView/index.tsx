@@ -33,12 +33,12 @@ import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/ui-kit/utils/device";
 import styled, { useTheme } from "styled-components";
 
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import {
-	TableGroupMenu,
-	TGroupMenuItem,
+  TableGroupMenu,
+  TGroupMenuItem,
 } from "@docspace/shared/components/table";
 import { RowContainer, Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -46,8 +46,8 @@ import { globalColors } from "@docspace/shared/themes";
 
 import UsersRow from "./UsersRow";
 import {
-	InjectedTypeSelectRowViewProps,
-	TypeSelectRowViewProps,
+  InjectedTypeSelectRowViewProps,
+  TypeSelectRowViewProps,
 } from "../../../../types";
 
 const StyledRowContainer = styled(RowContainer)`
@@ -82,7 +82,7 @@ const StyledRowContainer = styled(RowContainer)`
   .header-container-text {
     font-size: 12px;
     color: ${(props) =>
-			props.theme.client.settings.migration.tableRowTextColor};
+      props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .table-container_header {
@@ -130,123 +130,123 @@ const StyledRow = styled(Row)`
 const checkedAccountType = "result";
 
 const RowView = (props: TypeSelectRowViewProps) => {
-	const {
-		t,
-		sectionWidth,
-		accountsData,
-		typeOptions,
+  const {
+    t,
+    sectionWidth,
+    accountsData,
+    typeOptions,
 
-		filteredUsers,
-		checkedUsers,
-		toggleAccount,
-		toggleAllAccounts,
-		isAccountChecked,
-		setSearchValue,
-	} = props as InjectedTypeSelectRowViewProps;
-	const theme = useTheme();
+    filteredUsers,
+    checkedUsers,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    setSearchValue,
+  } = props as InjectedTypeSelectRowViewProps;
+  const theme = useTheme();
 
-	const isIndeterminate =
-		checkedUsers.result.length > 0 &&
-		checkedUsers.result.length !== filteredUsers.length;
+  const isIndeterminate =
+    checkedUsers.result.length > 0 &&
+    checkedUsers.result.length !== filteredUsers.length;
 
-	const toggleAll = (isChecked: boolean) =>
-		toggleAllAccounts(isChecked, filteredUsers, checkedAccountType);
+  const toggleAll = (isChecked: boolean) =>
+    toggleAllAccounts(isChecked, filteredUsers, checkedAccountType);
 
-	const onClearFilter = () => setSearchValue("");
+  const onClearFilter = () => setSearchValue("");
 
-	const headerMenu = [
-		{
-			id: "change-type",
-			label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
-			disabled: false,
-			withDropDown: true,
-			options: typeOptions,
-			iconUrl: ChangeTypeReactSvgUrl,
-			onClick: () => {},
-			title: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
-		},
-	] as TGroupMenuItem[];
+  const headerMenu = [
+    {
+      id: "change-type",
+      label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
+      disabled: false,
+      withDropDown: true,
+      options: typeOptions,
+      iconUrl: ChangeTypeReactSvgUrl,
+      onClick: () => {},
+      title: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
+    },
+  ] as TGroupMenuItem[];
 
-	return (
-		<StyledRowContainer useReactWindow={false}>
-			{checkedUsers.result.length > 0 ? (
-				<div className="table-group-menu">
-					<TableGroupMenu
-						headerMenu={headerMenu}
-						withoutInfoPanelToggler
-						withComboBox={false}
-						isIndeterminate={isIndeterminate}
-						isChecked={checkedUsers.result.length === filteredUsers.length}
-						onChange={toggleAll}
-					/>
-				</div>
-			) : null}
-			{accountsData.length > 0 ? (
-				<>
-					<StyledRow key="Name">
-						<Text className="row-header-title">{t("Common:Name")}</Text>
-					</StyledRow>
+  return (
+    <StyledRowContainer useReactWindow={false}>
+      {checkedUsers.result.length > 0 ? (
+        <div className="table-group-menu">
+          <TableGroupMenu
+            headerMenu={headerMenu}
+            withoutInfoPanelToggler
+            withComboBox={false}
+            isIndeterminate={isIndeterminate}
+            isChecked={checkedUsers.result.length === filteredUsers.length}
+            onChange={toggleAll}
+          />
+        </div>
+      ) : null}
+      {accountsData.length > 0 ? (
+        <>
+          <StyledRow key="Name">
+            <Text className="row-header-title">{t("Common:Name")}</Text>
+          </StyledRow>
 
-					{accountsData.map((data) => (
-						<UsersRow
-							key={data.key}
-							data={data}
-							sectionWidth={sectionWidth}
-							typeOptions={typeOptions}
-							isChecked={isAccountChecked(data.key, checkedAccountType)}
-							toggleAccount={() => toggleAccount(data, checkedAccountType)}
-						/>
-					))}
-				</>
-			) : (
-				<EmptyScreenContainer
-					imageSrc={
-						theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl
-					}
-					imageAlt={t("Common:NotFoundUsers")}
-					headerText={t("Common:NotFoundUsers")}
-					descriptionText={t("Common:NotFoundUsersDescription")}
-					buttons={
-						<div className="buttons-box">
-							<IconButton
-								className="clear-icon"
-								isFill
-								size={12}
-								onClick={onClearFilter}
-								iconName={ClearEmptyFilterSvgUrl}
-							/>
-							<Link
-								type={LinkType.action}
-								isHovered
-								fontWeight="600"
-								onClick={onClearFilter}
-							>
-								{t("Common:ClearFilter")}
-							</Link>
-						</div>
-					}
-				/>
-			)}
-		</StyledRowContainer>
-	);
+          {accountsData.map((data) => (
+            <UsersRow
+              key={data.key}
+              data={data}
+              sectionWidth={sectionWidth}
+              typeOptions={typeOptions}
+              isChecked={isAccountChecked(data.key, checkedAccountType)}
+              toggleAccount={() => toggleAccount(data, checkedAccountType)}
+            />
+          ))}
+        </>
+      ) : (
+        <EmptyScreenContainer
+          imageSrc={
+            theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl
+          }
+          imageAlt={t("Common:NotFoundUsers")}
+          headerText={t("Common:NotFoundUsers")}
+          descriptionText={t("Common:NotFoundUsersDescription")}
+          buttons={
+            <div className="buttons-box">
+              <IconButton
+                className="clear-icon"
+                isFill
+                size={12}
+                onClick={onClearFilter}
+                iconName={ClearEmptyFilterSvgUrl}
+              />
+              <Link
+                type={LinkType.action}
+                isHovered
+                fontWeight="600"
+                onClick={onClearFilter}
+              >
+                {t("Common:ClearFilter")}
+              </Link>
+            </div>
+          }
+        />
+      )}
+    </StyledRowContainer>
+  );
 };
 
 export default inject<TStore>(({ importAccountsStore }) => {
-	const {
-		checkedUsers,
-		toggleAccount,
-		toggleAllAccounts,
-		isAccountChecked,
-		setSearchValue,
-		filteredUsers,
-	} = importAccountsStore;
+  const {
+    checkedUsers,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    setSearchValue,
+    filteredUsers,
+  } = importAccountsStore;
 
-	return {
-		checkedUsers,
-		toggleAccount,
-		toggleAllAccounts,
-		isAccountChecked,
-		setSearchValue,
-		filteredUsers,
-	};
+  return {
+    checkedUsers,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    setSearchValue,
+    filteredUsers,
+  };
 })(observer(RowView));

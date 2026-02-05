@@ -36,12 +36,12 @@ import classNames from "classnames";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
-	InputSize,
-	InputType,
-	TextInput,
+  InputSize,
+  InputType,
+  TextInput,
 } from "@docspace/ui-kit/components/text-input";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { toastr } from "../toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import styles from "./FileInput.module.scss";
 
@@ -49,194 +49,194 @@ import { FileInputProps } from "./FileInput.types";
 import { globalColors } from "../../themes";
 
 const FileInputPure = ({
-	onInput,
-	size = InputSize.base,
-	placeholder,
-	isDisabled = false,
-	scale = false,
-	hasError = false,
-	hasWarning = false,
-	accept = [""],
-	id,
-	buttonLabel,
-	isLoading = false,
-	fromStorage = false,
-	path,
-	idButton,
-	isDocumentIcon = false,
-	isMultiple = true,
-	className,
-	"data-test-id": dataTestId,
-	...rest
+  onInput,
+  size = InputSize.base,
+  placeholder,
+  isDisabled = false,
+  scale = false,
+  hasError = false,
+  hasWarning = false,
+  accept = [""],
+  id,
+  buttonLabel,
+  isLoading = false,
+  fromStorage = false,
+  path,
+  idButton,
+  isDocumentIcon = false,
+  isMultiple = true,
+  className,
+  "data-test-id": dataTestId,
+  ...rest
 }: FileInputProps) => {
-	const { t } = useTranslation("Common");
+  const { t } = useTranslation("Common");
 
-	const inputRef = React.useRef<null | HTMLInputElement>(null);
+  const inputRef = React.useRef<null | HTMLInputElement>(null);
 
-	const [fileName, setFileName] = React.useState("");
+  const [fileName, setFileName] = React.useState("");
 
-	const onDrop = (acceptedFiles: File[]) => {
-		if (acceptedFiles.length === 0) {
-			toastr.error(t("Common:NotSupportedFormat"));
-			return;
-		}
+  const onDrop = (acceptedFiles: File[]) => {
+    if (acceptedFiles.length === 0) {
+      toastr.error(t("Common:NotSupportedFormat"));
+      return;
+    }
 
-		setFileName(
-			acceptedFiles.length > 1
-				? acceptedFiles.map((file) => file.name).join(", ")
-				: acceptedFiles[0].name,
-		);
+    setFileName(
+      acceptedFiles.length > 1
+        ? acceptedFiles.map((file) => file.name).join(", ")
+        : acceptedFiles[0].name,
+    );
 
-		onInput?.(acceptedFiles.length > 1 ? acceptedFiles : acceptedFiles[0]);
-	};
+    onInput?.(acceptedFiles.length > 1 ? acceptedFiles : acceptedFiles[0]);
+  };
 
-	const getSize = () => {
-		let iconSize = 0;
-		let buttonSize = ButtonSize.small;
+  const getSize = () => {
+    let iconSize = 0;
+    let buttonSize = ButtonSize.small;
 
-		switch (size) {
-			case InputSize.base:
-				iconSize = 15;
-				buttonSize = ButtonSize.extraSmall;
-				break;
-			case InputSize.middle:
-				iconSize = 15;
-				buttonSize = ButtonSize.small;
-				break;
-			case InputSize.large:
-				iconSize = 16;
-				buttonSize = ButtonSize.medium;
-				break;
-			default:
-				break;
-		}
+    switch (size) {
+      case InputSize.base:
+        iconSize = 15;
+        buttonSize = ButtonSize.extraSmall;
+        break;
+      case InputSize.middle:
+        iconSize = 15;
+        buttonSize = ButtonSize.small;
+        break;
+      case InputSize.large:
+        iconSize = 16;
+        buttonSize = ButtonSize.medium;
+        break;
+      default:
+        break;
+    }
 
-		return { iconSize, buttonSize };
-	};
+    return { iconSize, buttonSize };
+  };
 
-	const { iconSize, buttonSize } = getSize();
+  const { iconSize, buttonSize } = getSize();
 
-	const wrapperClasses = classNames(styles.container, className, {
-		[styles.scale]: scale ? 1 : 0,
-		[styles[size]]: size,
-		[styles.error]: hasError,
-		[styles.warning]: hasWarning,
-		[styles.disabled]: isDisabled,
-	});
+  const wrapperClasses = classNames(styles.container, className, {
+    [styles.scale]: scale ? 1 : 0,
+    [styles[size]]: size,
+    [styles.error]: hasError,
+    [styles.warning]: hasWarning,
+    [styles.disabled]: isDisabled,
+  });
 
-	const iconClasses = classNames(styles.icon, {
-		[styles[size]]: size,
-		[styles.disabled]: isDisabled,
-		[styles.error]: hasError,
-		[styles.warning]: hasWarning,
-	});
+  const iconClasses = classNames(styles.icon, {
+    [styles[size]]: size,
+    [styles.disabled]: isDisabled,
+    [styles.error]: hasError,
+    [styles.warning]: hasWarning,
+  });
 
-	const textInputClasses = classNames(
-		styles.textInput,
-		{
-			[styles[size]]: size,
-			[styles.disabled]: isDisabled || isLoading,
-			[styles.error]: hasError,
-			[styles.warning]: hasWarning,
-		},
-		"text-input",
-	);
+  const textInputClasses = classNames(
+    styles.textInput,
+    {
+      [styles[size]]: size,
+      [styles.disabled]: isDisabled || isLoading,
+      [styles.error]: hasError,
+      [styles.warning]: hasWarning,
+    },
+    "text-input",
+  );
 
-	const iconButtonClasses = classNames(styles.iconButton, {
-		[styles.disabled]: isDisabled,
-	});
+  const iconButtonClasses = classNames(styles.iconButton, {
+    [styles.disabled]: isDisabled,
+  });
 
-	const onClickProp =
-		fromStorage && !isDisabled ? { onClick: rest.onClick } : {};
+  const onClickProp =
+    fromStorage && !isDisabled ? { onClick: rest.onClick } : {};
 
-	return (
-		<Dropzone
-			onDrop={onDrop}
-			noClick={isDisabled || isLoading}
-			accept={accept}
-			multiple={isMultiple}
-		>
-			{({ getRootProps, getInputProps }) => (
-				<div
-					className={wrapperClasses}
-					id={idButton}
-					data-testid={dataTestId ?? "file-input"}
-					aria-disabled={isDisabled ? "true" : "false"}
-					role="button"
-					{...rest}
-					{...getRootProps()}
-				>
-					<TextInput
-						isReadOnly
-						className={textInputClasses}
-						placeholder={placeholder}
-						value={fromStorage && path ? path : fileName}
-						size={size}
-						isDisabled={isDisabled || isLoading}
-						hasError={hasError}
-						hasWarning={hasWarning}
-						scale={scale}
-						type={InputType.text}
-						withBorder
-						{...onClickProp}
-					/>
-					{!fromStorage ? (
-						<input
-							data-testid="upload-click-input"
-							type="file"
-							id={id}
-							ref={inputRef}
-							style={{ display: "none" }}
-							{...getInputProps()}
-						/>
-					) : null}
+  return (
+    <Dropzone
+      onDrop={onDrop}
+      noClick={isDisabled || isLoading}
+      accept={accept}
+      multiple={isMultiple}
+    >
+      {({ getRootProps, getInputProps }) => (
+        <div
+          className={wrapperClasses}
+          id={idButton}
+          data-testid={dataTestId ?? "file-input"}
+          aria-disabled={isDisabled ? "true" : "false"}
+          role="button"
+          {...rest}
+          {...getRootProps()}
+        >
+          <TextInput
+            isReadOnly
+            className={textInputClasses}
+            placeholder={placeholder}
+            value={fromStorage && path ? path : fileName}
+            size={size}
+            isDisabled={isDisabled || isLoading}
+            hasError={hasError}
+            hasWarning={hasWarning}
+            scale={scale}
+            type={InputType.text}
+            withBorder
+            {...onClickProp}
+          />
+          {!fromStorage ? (
+            <input
+              data-testid="upload-click-input"
+              type="file"
+              id={id}
+              ref={inputRef}
+              style={{ display: "none" }}
+              {...getInputProps()}
+            />
+          ) : null}
 
-					{buttonLabel ? (
-						<Button
-							isDisabled={isDisabled}
-							label={buttonLabel}
-							size={buttonSize}
-							type="button"
-						/>
-					) : (
-						<div className={iconClasses} {...onClickProp}>
-							{isLoading ? (
-								<Loader
-									className={styles.loader}
-									size="20px"
-									type={LoaderTypes.track}
-								/>
-							) : (
-								<IconButton
-									data-testid="icon-button"
-									className={iconButtonClasses}
-									iconNode={
-										isDocumentIcon ? (
-											<DocumentReactSvgUrl />
-										) : (
-											<CatalogFolderReactSvgUrl />
-										)
-									}
-									color={globalColors.gray}
-									size={iconSize}
-									isDisabled={isDisabled}
-								/>
-							)}
-						</div>
-					)}
-				</div>
-			)}
-		</Dropzone>
-	);
+          {buttonLabel ? (
+            <Button
+              isDisabled={isDisabled}
+              label={buttonLabel}
+              size={buttonSize}
+              type="button"
+            />
+          ) : (
+            <div className={iconClasses} {...onClickProp}>
+              {isLoading ? (
+                <Loader
+                  className={styles.loader}
+                  size="20px"
+                  type={LoaderTypes.track}
+                />
+              ) : (
+                <IconButton
+                  data-testid="icon-button"
+                  className={iconButtonClasses}
+                  iconNode={
+                    isDocumentIcon ? (
+                      <DocumentReactSvgUrl />
+                    ) : (
+                      <CatalogFolderReactSvgUrl />
+                    )
+                  }
+                  color={globalColors.gray}
+                  size={iconSize}
+                  isDisabled={isDisabled}
+                />
+              )}
+            </div>
+          )}
+        </div>
+      )}
+    </Dropzone>
+  );
 };
 
 export { FileInputPure };
 
 const compare = (
-	prevProps: Readonly<FileInputProps>,
-	nextProps: Readonly<FileInputProps>,
+  prevProps: Readonly<FileInputProps>,
+  nextProps: Readonly<FileInputProps>,
 ) => {
-	return equal(prevProps, nextProps);
+  return equal(prevProps, nextProps);
 };
 
 export const FileInput = React.memo(FileInputPure, compare);

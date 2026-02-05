@@ -186,9 +186,7 @@
   --context-menu-button-border: #{$gray-strong};
   --context-menu-button-hover-border: #{$gray};
 
-  --drag-and-drop-height: 100%;
   --drag-and-drop-accept-bg: #{$dnd-hover-color};
-  --drag-and-drop-bg: #{$dnd-color};
 
   --dropdown-background: #{$white};
   --dropdown-border: none;
@@ -246,27 +244,6 @@
   --floating-button-background: #{$light-icons};
   --floating-button-box-shadow: 0px 5px 20px #{$popup-shadow};
 
-  --slider-track-height: 8px;
-  --slider-thumb-size: 24px;
-  --slider-thumb-border: 6px;
-  --slider-border-radius: 5.6px;
-  --slider-thumb-disabled-color: #{$gray-strong};
-  --slider-thumb-disabled-border: #{$light-second-main-disabled};
-  --slider-runnable-track-border: #{$gray-light-mid};
-  --slider-thumb-background: var(
-    --color-scheme-main-accent,
-    #{$light-second-main}
-  );
-  --slider-thumb-border-color: #{$white};
-  --slider-thumb-box-shadow: 0px 5px 20px #{$popup-shadow};
-  --slider-range-track-border: #{$white};
-  --slider-range-track-background: #{$light-second-main};
-  --slider-background: #{$gray-light-mid};
-  --slider-background-image: linear-gradient(
-    var(--slider-thumb-background),
-    var(--slider-thumb-background)
-  );
-
   --save-cancel-border-color: #{$gray-light-mid};
   --save-cancel-reminder-color: #{$gray};
 
@@ -311,7 +288,7 @@
 
   --aside-custom-z-index: unset;
   --input-text-align: left;
-  --drag-and-drop-height: 100%;
+
   --aside-content-padding-bottom: unset;
   --aside-header-custom-height: 53px;
   --badge-border: 1px solid transparent;
@@ -442,7 +419,6 @@
   --context-menu-button-hover-border: #{$gray-dark};
 
   --drag-and-drop-accept-bg: #{$dnd-dark-hover};
-  --drag-and-drop-bg: #{$dnd-dark-color};
 
   --dropdown-background: #{$black};
   --dropdown-border: 1px solid #{$gray-dark-strong};
@@ -492,24 +468,6 @@
   --floating-button-icon-fill: #{$black};
   --floating-button-background: #{$white};
   --floating-button-box-shadow: 0px 12px 24px #{$popup-shadow};
-
-  --slider-track-height: 8px;
-  --slider-thumb-size: 24px;
-  --slider-thumb-border: 6px;
-  --slider-border-radius: 5.6px;
-  --slider-thumb-disabled-color: #{$gray-dark-strong};
-  --slider-thumb-disabled-border: #{$light-second-main-disabled};
-  --slider-runnable-track-border: #{$gray-dark-mid};
-  --slider-thumb-background: #{$white};
-  --slider-thumb-border-color: #{$black};
-  --slider-thumb-box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.25);
-  --slider-range-track-border: #{$black};
-  --slider-range-track-background: #{$white};
-  --slider-background: #{$gray-dark-mid};
-  --slider-background-image: linear-gradient(
-    var(--slider-thumb-background),
-    var(--slider-thumb-background)
-  );
 
   --save-cancel-border-color: #{$gray-light-mid};
   --save-cancel-reminder-color: #{$gray};
@@ -700,20 +658,6 @@
   --navigation-header-icon-fill: #{$dark-gray-dark};
   --navigation-lifetime-enabled-fill: none;
   --navigation-lifetime-enabled-stroke: #{$main-red};
-}
-
-.light {
-  --password-input-tooltip-text-color: #{$black};
-  --password-input-icon-color: #{$gray-strong};
-  --password-input-icon-color-hover: #{$gray};
-  --password-input-icon-color-disabled: #{$gray-strong};
-}
-
-.dark {
-  --password-input-tooltip-text-color: #{$black};
-  --password-input-icon-color: #{$gray-dark-strong};
-  --password-input-icon-color-hover: #{$gray-dark};
-  --password-input-icon-color-disabled: #{$gray-dark};
 }
 
 .light {
@@ -932,18 +876,6 @@
   --info-panel-links-color: #{$light-blue-main};
   --info-panel-links-primary-color: #{$dark-gray-dark};
   --info-panel-members-create-link: #{$gray-dark};
-}
-
-.light {
-  --disabled-selected-item-color: #{$gray};
-  --filter-input-selected-items-background: #{$gray-light-mid};
-  --filter-input-selected-items-hover-background: #{$light-gray-hover};
-}
-
-.dark {
-  --disabled-selected-item-color: #{$gray-dark-text};
-  --filter-input-selected-items-background: #{$gray-dark-strong};
-  --filter-input-selected-items-hover-background: #{$dark-gray-light};
 }
 
 .light {
@@ -1237,46 +1169,6 @@
   --form-filling-tips-circle-background-color: #{$gray-dark-mid};
   --form-filling-tips-circle-border: 3px solid
     var(--accent-main, #{$light-second-main});
-}
-
-.light {
-  --color-picker-border: 1px solid #{$gray-strong};
-  --color-picker-background: #{$white};
-  --color-picker-color: #{$gray-text};
-}
-
-.dark {
-  --color-picker-border: 1px solid #{$gray-dark-strong};
-  --color-picker-background: #{$dark-gray-light};
-  --color-picker-color: #{$gray-dark-text};
-}
-
-.light {
-  --date-picker-background: #{$white};
-  --date-picker-border: 1px solid #{$gray-strong};
-  --date-picker-cell-background: #{$gray-light-mid};
-  --date-picker-icon-color: #{$light-gray-dark};
-  --data-picker-calendar-icon: #{$light-gray-dark};
-}
-
-.dark {
-  --date-picker-background: #{$black};
-  --date-picker-border: 1px solid #{$gray-dark-strong};
-  --date-picker-cell-background: #{$gray-dark-mid};
-  --date-picker-icon-color: #{$dark-gray-dark};
-  --data-picker-calendar-icon: #{$dark-gray-dark};
-}
-
-.light {
-  --dropzone-border: 2px dashed #{$gray-light-mid};
-  --dropzone-secondary-link: #${black};
-  --dropzone-exsts-color: #{$gray};
-}
-
-.dark {
-  --dropzone-border: 2px dashed #{$gray-dark-strong};
-  --dropzone-secondary-link: #${white};
-  --dropzone-exsts-color: #{$gray};
 }
 
 .light {
@@ -2485,6 +2377,32 @@
 }
 
 .light {
+  --modified-text-color: #{$gray};
+  --modified-badge-background-color: #{$gray};
+  --modified-badge-active-background-color: var(
+    --color-scheme-main-accent,
+    #{$light-blue-main}
+  );
+}
+
+.dark {
+  --modified-text-color: #{$gray-dark};
+  --modified-badge-background-color: #{$gray-dark};
+  --modified-badge-active-background-color: var(
+    --color-scheme-main-accent,
+    #{$light-blue-main}
+  );
+}
+
+.light {
+  --mcp-icon-bg-opacity: 1;
+}
+
+.dark {
+  --mcp-icon-bg-opacity: 0.1;
+}
+
+.light {
   --delete-image-link-color: #{$light-gray-dark};
 }
 
@@ -2553,26 +2471,13 @@
 }
 
 .light {
-  --snackbar-background-color: #{$snackbar-light-background};
-  --snackbar-border-color: #{$light-status-warning};
-  --snackbar-color: #{$black};
-  --snackbar-icon-color: #{$light-status-warning};
-}
-
-.dark {
-  --snackbar-background-color: #{$light-dark-gray-hover};
-  --snackbar-border-color: #{$light-status-warning};
-  --snackbar-color: #{$white};
-  --snackbar-icon-color: #{$light-status-warning};
-}
-
-.light {
   --oauth-info-separator-color: #{$black};
 }
 
 .dark {
   --oauth-info-separator-color: #{$gray-dark-strong};
 }
+
 .light {
   --template-gallery-header-border: #{$gray-light-mid};
 
@@ -2751,9 +2656,19 @@
 .light {
   --tfa-text-color: #{$gray};
   --icon-error-color: #{$light-error-status};
+  --default-templates-border-color: #{$gray-light-mid};
 }
 
 .dark {
   --tfa-text-color: #{$gray-dark};
   --icon-error-color: #{$dark-error-status};
+  --default-templates-border-color: #{$gray-dark-mid};
+}
+
+.light { 
+  --editors-tooltip-header-color: #{$gray-text};
+}
+
+.dark { 
+  --editors-tooltip-header-color: #{$dark-gray-dark};
 }

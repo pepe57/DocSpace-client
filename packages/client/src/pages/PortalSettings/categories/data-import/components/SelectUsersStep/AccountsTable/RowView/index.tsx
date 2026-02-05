@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/ui-kit/utils/device";
 import styled, { useTheme } from "styled-components";
 
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
@@ -75,7 +75,7 @@ const StyledRowContainer = styled(RowContainer)`
   .header-container-text {
     font-size: 12px;
     color: ${(props) =>
-			props.theme.client.settings.migration.tableRowTextColor};
+      props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .table-container_header {
@@ -130,111 +130,111 @@ const StyledRow = styled(Row)`
 const checkedAccountType = "withEmail";
 
 const RowView = (props: RowViewProps) => {
-	const {
-		t,
-		sectionWidth,
-		accountsData,
-		checkedUsers,
-		withEmailUsers,
-		toggleAccount,
-		toggleAllAccounts,
-		isAccountChecked,
-		setSearchValue,
-	} = props as InjectedRowViewProps;
-	const theme = useTheme();
+  const {
+    t,
+    sectionWidth,
+    accountsData,
+    checkedUsers,
+    withEmailUsers,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    setSearchValue,
+  } = props as InjectedRowViewProps;
+  const theme = useTheme();
 
-	const toggleAll = (e: React.ChangeEvent<HTMLInputElement>) =>
-		toggleAllAccounts(e.target.checked, withEmailUsers, checkedAccountType);
+  const toggleAll = (e: React.ChangeEvent<HTMLInputElement>) =>
+    toggleAllAccounts(e.target.checked, withEmailUsers, checkedAccountType);
 
-	const handleToggle = (user: TEnhancedMigrationUser) =>
-		toggleAccount(user, checkedAccountType);
+  const handleToggle = (user: TEnhancedMigrationUser) =>
+    toggleAccount(user, checkedAccountType);
 
-	const onClearFilter = () => setSearchValue("");
+  const onClearFilter = () => setSearchValue("");
 
-	const isIndeterminate =
-		checkedUsers.withEmail.length > 0 &&
-		checkedUsers.withEmail.length !== withEmailUsers.length;
+  const isIndeterminate =
+    checkedUsers.withEmail.length > 0 &&
+    checkedUsers.withEmail.length !== withEmailUsers.length;
 
-	const isChecked = checkedUsers.withEmail.length === withEmailUsers.length;
+  const isChecked = checkedUsers.withEmail.length === withEmailUsers.length;
 
-	return (
-		<StyledRowContainer useReactWindow={false}>
-			{accountsData.length > 0 ? (
-				<>
-					<StyledRow>
-						<div className="row-header-item">
-							{checkedUsers.withEmail.length > 0 ? (
-								<Checkbox
-									isIndeterminate={isIndeterminate}
-									isChecked={isChecked}
-									onChange={toggleAll}
-									label={t("Common:Name")}
-								/>
-							) : null}
-						</div>
-					</StyledRow>
+  return (
+    <StyledRowContainer useReactWindow={false}>
+      {accountsData.length > 0 ? (
+        <>
+          <StyledRow>
+            <div className="row-header-item">
+              {checkedUsers.withEmail.length > 0 ? (
+                <Checkbox
+                  isIndeterminate={isIndeterminate}
+                  isChecked={isChecked}
+                  onChange={toggleAll}
+                  label={t("Common:Name")}
+                />
+              ) : null}
+            </div>
+          </StyledRow>
 
-					{accountsData.map((data) => (
-						<UsersRow
-							t={t}
-							key={data.key}
-							data={data}
-							sectionWidth={sectionWidth}
-							isChecked={isAccountChecked(data.key, checkedAccountType)}
-							toggleAccount={() => handleToggle(data)}
-						/>
-					))}
-				</>
-			) : (
-				<EmptyScreenContainer
-					imageSrc={
-						theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl
-					}
-					imageAlt={t("Common:NotFoundUsers")}
-					headerText={t("Common:NotFoundUsers")}
-					descriptionText={t("Common:NotFoundUsersDescription")}
-					buttons={
-						<div className="buttons-box">
-							<IconButton
-								className="clear-icon"
-								isFill
-								size={12}
-								onClick={onClearFilter}
-								iconName={ClearEmptyFilterSvgUrl}
-							/>
-							<Link
-								type={LinkType.action}
-								isHovered
-								fontWeight="600"
-								onClick={onClearFilter}
-							>
-								{t("Common:ClearFilter")}
-							</Link>
-						</div>
-					}
-				/>
-			)}
-			<div />
-		</StyledRowContainer>
-	);
+          {accountsData.map((data) => (
+            <UsersRow
+              t={t}
+              key={data.key}
+              data={data}
+              sectionWidth={sectionWidth}
+              isChecked={isAccountChecked(data.key, checkedAccountType)}
+              toggleAccount={() => handleToggle(data)}
+            />
+          ))}
+        </>
+      ) : (
+        <EmptyScreenContainer
+          imageSrc={
+            theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl
+          }
+          imageAlt={t("Common:NotFoundUsers")}
+          headerText={t("Common:NotFoundUsers")}
+          descriptionText={t("Common:NotFoundUsersDescription")}
+          buttons={
+            <div className="buttons-box">
+              <IconButton
+                className="clear-icon"
+                isFill
+                size={12}
+                onClick={onClearFilter}
+                iconName={ClearEmptyFilterSvgUrl}
+              />
+              <Link
+                type={LinkType.action}
+                isHovered
+                fontWeight="600"
+                onClick={onClearFilter}
+              >
+                {t("Common:ClearFilter")}
+              </Link>
+            </div>
+          }
+        />
+      )}
+      <div />
+    </StyledRowContainer>
+  );
 };
 
 export default inject<TStore>(({ importAccountsStore }) => {
-	const {
-		checkedUsers,
-		withEmailUsers,
-		toggleAccount,
-		toggleAllAccounts,
-		isAccountChecked,
-		setSearchValue,
-	} = importAccountsStore;
+  const {
+    checkedUsers,
+    withEmailUsers,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    setSearchValue,
+  } = importAccountsStore;
 
-	return {
-		checkedUsers,
-		withEmailUsers,
-		toggleAccount,
-		toggleAllAccounts,
-		isAccountChecked,
-		setSearchValue,
-	};
+  return {
+    checkedUsers,
+    withEmailUsers,
+    toggleAccount,
+    toggleAllAccounts,
+    isAccountChecked,
+    setSearchValue,
+  };
 })(observer(RowView));

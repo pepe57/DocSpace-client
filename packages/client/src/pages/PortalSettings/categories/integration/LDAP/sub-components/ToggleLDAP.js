@@ -33,7 +33,7 @@ import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 import { mobile } from "@docspace/shared/utils";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledWrapper = styled.div`

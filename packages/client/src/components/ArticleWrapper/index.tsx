@@ -26,8 +26,8 @@
 
 import { inject, observer } from "mobx-react";
 
-import Article from "@docspace/shared/components/article";
-import { ArticleProps } from "@docspace/shared/components/article/Article.types";
+import Article from "@docspace/ui-kit/components/article";
+import { ArticleProps } from "@docspace/ui-kit/components/article/Article.types";
 import { getUserType } from "@docspace/shared/utils/common";
 
 const ArticleWrapper = (props: ArticleProps) => {
@@ -98,12 +98,8 @@ export default inject<TStore>(
 
     const { isFreeTariff, isNonProfit, isTrial, currentTariffPlanTitle } =
       currentQuotaStore;
-    const {
-      isGracePeriod,
-      isLicenseExpiring,
-      isLicenseDateExpired,
-      trialDaysLeft,
-    } = currentTariffStatusStore;
+    const { isGracePeriod, isLicenseDateExpired, trialDaysLeft } =
+      currentTariffStatusStore;
 
     return {
       onProfileClick,
@@ -132,7 +128,6 @@ export default inject<TStore>(
       isGracePeriod,
       isFreeTariff,
       isPaymentPageAvailable,
-      isLicenseExpiring,
 
       standalone,
 

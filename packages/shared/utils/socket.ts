@@ -78,6 +78,7 @@ export const enum SocketEvents {
   SelfRestrictionFolder = "s:self-restriction-folder",
   ChaneFolderAccessRights = "s:change-access-rights-folder",
   ExportChat = "s:export-chat",
+  QuotaExceeded = "s:quota_exceeded",
 }
 
 /**
@@ -246,6 +247,11 @@ export type ExportChatEventData =
  *
  * Each callback can have specific parameters and a return type, which are defined for each event.
  */
+export type TEditFileData =
+  | number
+  | string
+  | { fileId: number | string; editingBy: Record<string, string> };
+
 export type TListenEventCallbackMap = {
   [SocketEvents.LogoutSession]: (data: {
     loginEventId: unknown;
@@ -266,8 +272,8 @@ export type TListenEventCallbackMap = {
     fileId: number | string;
     count: number;
   }) => void;
-  [SocketEvents.StartEditFile]: (id: number | string) => void;
-  [SocketEvents.StopEditFile]: (id: number | string) => void;
+  [SocketEvents.StartEditFile]: (data: TEditFileData) => void;
+  [SocketEvents.StopEditFile]: (data: TEditFileData) => void;
   [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;
@@ -317,6 +323,13 @@ export type TListenEventCallbackMap = {
     data: string;
   }) => void;
   [SocketEvents.ExportChat]: (data: ExportChatEventData) => void;
+  [SocketEvents.QuotaExceeded]: (eventData: {
+    data: {
+      id: string;
+      room: string;
+      scope: "room" | "user" | "tenant";
+    };
+  }) => void;
 };
 
 /**

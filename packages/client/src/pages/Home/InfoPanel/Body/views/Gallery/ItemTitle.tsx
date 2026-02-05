@@ -39,7 +39,7 @@ import {
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
+} from "@docspace/ui-kit/components/context-menu-button";
 
 import OformsStore from "SRC_DIR/store/OformsStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";

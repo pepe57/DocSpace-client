@@ -60,12 +60,13 @@ import {
   StatusIndicator,
 } from "@docspace/shared/components/filling-role-process";
 import { copyShareLink } from "@docspace/shared/utils/copy";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
 } from "@docspace/shared/utils/socket";
 import type { TFile } from "@docspace/shared/api/files/types";
+import type { TEditFileData } from "@docspace/shared/utils/socket";
 import { getFolderUrl } from "./CompletedForm.helper";
 import type { CompletedVDRFormProps } from "./CompletedForm.types";
 import styles from "./completed-form.module.scss";
@@ -107,8 +108,9 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
         individual: true,
       });
 
-    const stopEditFileHandler = (id: number | string) => {
-      if (Number(id) === formId) {
+    const stopEditFileHandler = (data: TEditFileData) => {
+      const fileId = typeof data === "object" ? data.fileId : data;
+      if (Number(fileId) === formId) {
         setForm((prev) => ({
           ...prev,
           fileStatus: prev.fileStatus & ~FileStatus.IsEditing,

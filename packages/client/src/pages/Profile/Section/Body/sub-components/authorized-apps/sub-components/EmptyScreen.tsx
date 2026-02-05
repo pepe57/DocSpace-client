@@ -1,7 +1,7 @@
 import EmptyScreenOauthSvgUrl from "PUBLIC_DIR/images/emptyview/empty.oauth.light.svg?url";
 import EmptyScreenOauthDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.oauth.dark.svg?url";
 
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 import { TTranslation } from "@docspace/shared/types";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 

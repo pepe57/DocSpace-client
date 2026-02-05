@@ -27,7 +27,7 @@
 import { ChangeEvent } from "react";
 import { Label } from "@docspace/ui-kit/components/label";
 import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./index.styled";
 

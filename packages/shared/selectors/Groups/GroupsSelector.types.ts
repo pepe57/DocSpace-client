@@ -27,18 +27,20 @@
 import {
   TAccessRight,
   TSelectorHeader,
-} from "../../components/selector/Selector.types";
-import { TSelectorItem } from "../../components/selector";
+  TSelectorWithAside,
+  TSelectorItem,
+} from "@docspace/ui-kit/components/selector";
 
-export type GroupsSelectorProps = TSelectorHeader & {
-  id?: string;
-  className?: string;
-  onSubmit: (
-    selectedItems: TSelectorItem[],
-    access?: TAccessRight | null,
-    fileName?: string,
-    isFooterCheckboxChecked?: boolean,
-  ) => void | Promise<void>;
-};
+export type GroupsSelectorProps = TSelectorHeader &
+  TSelectorWithAside & {
+    id?: string;
+    className?: string;
+    onSubmit: (
+      selectedItems: TSelectorItem[],
+      access?: TAccessRight | null,
+      fileName?: string,
+      isFooterCheckboxChecked?: boolean,
+    ) => void | Promise<void>;
+  };
 
 export type GroupsSelectorItem = Pick<TSelectorItem, "id" | "label">;

@@ -38,7 +38,7 @@ import { Aside } from "@docspace/ui-kit/components/aside";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { useUnmount } from "../../hooks/useUnmount";
 
-import type { TBreadCrumb } from "../selector/Selector.types";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import type { FilesSelectorProps } from "../../selectors/Files/FilesSelector.types";
 
 import {
@@ -244,7 +244,6 @@ const FilesSelectorInput = ({
           rootFolderType={FolderType.Rooms}
           currentDeviceType={currentDeviceType ?? DeviceType.desktop}
           {...filesSelectorSettings}
-          withRecentTreeFolder={isFilesSelection}
           withFavoritesTreeFolder={isFilesSelection}
           withAIAgentsTreeFolder={withAIAgentsTreeFolder}
         />

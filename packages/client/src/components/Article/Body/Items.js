@@ -28,6 +28,7 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { Link } from "react-router";
 
 import {
   FolderType,
@@ -37,11 +38,11 @@ import {
 import { FOLDER_NAMES } from "@docspace/shared/constants";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
-import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { ArticleItem } from "@docspace/ui-kit/components/article/item";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import BonusItem from "./BonusItem";
@@ -220,6 +221,7 @@ const Item = ({
         linkData={linkData}
         $currentColorScheme={currentColorScheme}
         dataTooltipId={`aiAgentsTooltip${item.id}`}
+        LinkRouter={Link}
       />
     </DragAndDrop>
   );

@@ -36,20 +36,18 @@ import {
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
-import {
-  HeaderProps,
-  TBreadCrumb,
-} from "@docspace/shared/components/selector/Selector.types";
+import { HeaderProps, TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
-  RoomsType,
+  FolderType,
   StartFillingMode,
 } from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
+import type { RoomsType } from "@docspace/ui-kit/enums";
 
 export type TGoBack = {
   requestClose: boolean;
@@ -213,6 +211,7 @@ export interface IInitialConfig {
   startFillingMode?: StartFillingMode;
   fillingSessionId?: string;
   fillingStatus?: boolean;
+  quotaExceededScope?: number;
 }
 
 export type TError = {
@@ -382,6 +381,8 @@ export interface UseSocketHelperProps {
   user?: TUser;
   shareKey?: string;
   standalone?: boolean;
+  folderId?: string | number;
+  folderType?: FolderType;
 }
 
 export interface UseEventsProps {
@@ -444,6 +445,17 @@ export type TDocEditor = {
   startFilling?: VoidFunction;
   requestRoles?: VoidFunction;
   setFavorite?: (favorite: boolean) => void;
+  createConnector?: () => TEditorConnector;
+};
+
+export type TEditorConnector = {
+  attachEvent: (id: string, action: (...args: unknown[]) => void) => void;
+  sendEvent: (name: string, data?: string | object | unknown[]) => void;
+  executeMethod: (
+    name: string,
+    params: object[],
+    callback: (response: object | { error: string }) => void,
+  ) => void;
 };
 
 export type TCatchError =
@@ -510,4 +522,12 @@ export type ConflictStateType = {
 export type TFormRole = {
   name: string;
   color: string;
+};
+
+export type TEditorAIEvent = {
+  id: string;
+  type: string;
+  url: string;
+  streaming: boolean;
+  options: RequestInit & { headers: Record<string, string> };
 };

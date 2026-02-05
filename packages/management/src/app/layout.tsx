@@ -30,7 +30,7 @@ import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { SYSTEM_THEME_KEY, LANGUAGE } from "@docspace/shared/constants";
 
-import { Toast } from "@docspace/shared/components/toast";
+import { Toast } from "@docspace/ui-kit/components/toast";
 
 import {
   getSettings,

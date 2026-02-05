@@ -58,7 +58,7 @@ import type { TPortals } from "@docspace/shared/api/management/types";
 
 import { useBackup } from "@/hooks/useBackup";
 import useAppState from "@/hooks/useAppState";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useStores } from "@/hooks/useStores";
 import { useFilesSelectorInput } from "@/hooks/useFilesSelectorInput";
 

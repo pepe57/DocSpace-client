@@ -34,7 +34,7 @@ import {
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 

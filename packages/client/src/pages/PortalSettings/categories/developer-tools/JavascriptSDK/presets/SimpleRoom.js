@@ -33,7 +33,7 @@ import RoomsSelectorInput from "SRC_DIR/components/RoomsSelectorInput";
 import { inject, observer } from "mobx-react";
 import SDK from "@onlyoffice/docspace-sdk-js";
 
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { useNavigate } from "react-router";

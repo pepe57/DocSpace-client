@@ -28,7 +28,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { toastr } from "../../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import StatusMessage from "@docspace/ui-kit/components/status-message";
 import { getBackupProgressInfo } from "../../../utils/common";
 import SocketHelper, {
@@ -258,6 +258,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           size={InputSize.base}
           onInput={onLocalFileInputClick}
           accept={[".tar", ".gz"]}
+          placeholder={t("Common:SelectAction")}
           className={classNames(
             styles.restoreBackupInput,
             "restore-backup_input",

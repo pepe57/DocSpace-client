@@ -30,8 +30,8 @@ import resizeImage from "resize-image";
 import equal from "fast-deep-equal/react";
 
 import { AddButton } from "@docspace/ui-kit/components/add-button";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { toastr } from "@docspace/shared/components/toast";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { ONE_MEGABYTE } from "@docspace/shared/constants";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 

@@ -38,7 +38,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
+} from "@docspace/ui-kit/components/context-menu-button";
 import {
   Avatar,
   AvatarRole,
@@ -47,7 +47,7 @@ import {
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { TTranslation } from "@docspace/shared/types";
 import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import { Tag } from "@docspace/shared/components/tag";
+import { Tag } from "@docspace/ui-kit/components/tag";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 

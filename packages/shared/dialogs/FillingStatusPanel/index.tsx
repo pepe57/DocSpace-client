@@ -44,10 +44,13 @@ import { FileFillingFormStatus } from "../../enums";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
-import { toastr } from "../../components/toast";
-import PublicRoomBar from "../../components/public-room-bar";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
 import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
-import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
 import { FillingRoleProcess } from "../../components/filling-role-process";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { getFormFillingStatus as getFormFillingStatusApi } from "../../api/files";

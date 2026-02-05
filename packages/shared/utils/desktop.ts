@@ -27,7 +27,7 @@
 import isEmpty from "lodash/isEmpty";
 import omit from "lodash/omit";
 
-import { toastr } from "../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Nullable, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { ThemeKeys } from "../enums";

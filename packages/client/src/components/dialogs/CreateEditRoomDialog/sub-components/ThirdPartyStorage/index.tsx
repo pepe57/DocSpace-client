@@ -30,7 +30,7 @@ import styled from "styled-components";
 import { TFunction } from "i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 

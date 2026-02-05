@@ -50,7 +50,7 @@ import type {
   TTimeZone,
   TVersionBuild,
 } from "../api/settings/types";
-import { toastr, type TData } from "../components/toast";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import {
   DeepLinkType,

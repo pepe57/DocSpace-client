@@ -26,7 +26,7 @@
 
 import React, { useEffect } from "react";
 import { useParams, useLocation } from "react-router";
-import Article from "@docspace/shared/components/article";
+import Article from "@docspace/ui-kit/components/article";
 import { inject, observer } from "mobx-react";
 import Section from "@docspace/shared/components/section";
 import { DeviceType } from "@docspace/shared/enums";

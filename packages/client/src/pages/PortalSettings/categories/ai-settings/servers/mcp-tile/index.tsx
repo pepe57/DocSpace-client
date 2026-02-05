@@ -33,7 +33,7 @@ import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getServerIcon } from "@docspace/shared/utils";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Text } from "@docspace/ui-kit/components/text";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
 import { ServerType } from "@docspace/shared/api/ai/enums";
 import { MCPIcon, MCPIconSize } from "@docspace/ui-kit/components/mcp-icon";
 

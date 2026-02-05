@@ -30,11 +30,11 @@ import moment from "moment-timezone";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { useTranslation } from "react-i18next";
-import { DatePicker } from "@docspace/shared/components/date-picker";
-import { Calendar } from "@docspace/shared/components/calendar";
-import { TimePicker } from "@docspace/shared/components/time-picker";
+import { DatePicker } from "@docspace/ui-kit/components/date-picker";
+import { Calendar } from "@docspace/ui-kit/components/calendar";
+import { TimePicker } from "@docspace/ui-kit/components/time-picker";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
-import { SelectedItem } from "@docspace/shared/components/selected-item";
+import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
 
 import { isMobile } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";

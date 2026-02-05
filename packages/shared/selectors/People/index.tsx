@@ -32,18 +32,21 @@ import axios from "axios";
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Selector, SelectorAccessRightsMode } from "../../components/selector";
 import {
-  TSelectorAccessRights,
-  TSelectorCancelButton,
-  TSelectorCheckbox,
-  TSelectorHeader,
-  TSelectorInfo,
-  TSelectorItem,
-  TSelectorSearch,
-  TSelectorTabs,
-  TSelectorWithAside,
-} from "../../components/selector/Selector.types";
+	Selector,
+	SelectorAccessRightsMode,
+} from "@docspace/ui-kit/components/selector";
+import {
+	TSelectorAccessRights,
+	TSelectorCancelButton,
+	TSelectorCheckbox,
+	TSelectorHeader,
+	TSelectorInfo,
+	TSelectorItem,
+	TSelectorSearch,
+	TSelectorTabs,
+	TSelectorWithAside,
+} from "@docspace/ui-kit/components/selector";
 import { AccountsSearchArea, EmployeeStatus } from "../../enums";
 import { TTranslation } from "../../types";
 import { getUserAvatarRoleByType, getUserType } from "../../utils/common";
@@ -55,7 +58,7 @@ import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Text } from "@docspace/ui-kit/components/text";
 import { globalColors } from "../../themes";
 import { isNextImage } from "../../utils/typeGuards";
-import { toastr } from "../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
@@ -67,668 +70,668 @@ const GROUP_TAB_ID = "1";
 const GUESTS_TAB_ID = "2";
 
 const toListItem = (
-  item: TUser | TGroup,
-  t: TTranslation,
-  disableDisabledUsers?: boolean,
-  disableInvitedUsers?: string[],
-  isRoom?: boolean,
-  checkIfUserInvited?: (user: TUser) => void,
-  disabledInvitedText?: string,
+	item: TUser | TGroup,
+	t: TTranslation,
+	disableDisabledUsers?: boolean,
+	disableInvitedUsers?: string[],
+	isRoom?: boolean,
+	checkIfUserInvited?: (user: TUser) => void,
+	disabledInvitedText?: string,
 ): TSelectorItem => {
-  if ("displayName" in item) {
-    const {
-      id: userId,
-      email,
-      avatar,
-      displayName,
-      hasAvatar,
-      isOwner,
-      isAdmin,
-      isVisitor,
-      isCollaborator,
-      isRoomAdmin,
-      status,
-      shared,
-      groups,
-      access,
-    } = item;
+	if ("displayName" in item) {
+		const {
+			id: userId,
+			email,
+			avatar,
+			displayName,
+			hasAvatar,
+			isOwner,
+			isAdmin,
+			isVisitor,
+			isCollaborator,
+			isRoomAdmin,
+			status,
+			shared,
+			groups,
+			access,
+		} = item;
 
-    const role = getUserType(item);
+		const role = getUserType(item);
 
-    const defaultUserPhotoURL = isNextImage(DefaultUserPhoto)
-      ? DefaultUserPhoto.src
-      : DefaultUserPhoto;
+		const defaultUserPhotoURL = isNextImage(DefaultUserPhoto)
+			? DefaultUserPhoto.src
+			: DefaultUserPhoto;
 
-    const userAvatar = hasAvatar ? avatar : defaultUserPhotoURL;
+		const userAvatar = hasAvatar ? avatar : defaultUserPhotoURL;
 
-    const isInvited = checkIfUserInvited
-      ? checkIfUserInvited(item)
-      : disableInvitedUsers?.includes(userId) || (isRoom && shared);
+		const isInvited = checkIfUserInvited
+			? checkIfUserInvited(item)
+			: disableInvitedUsers?.includes(userId) || (isRoom && shared);
 
-    const isDisabled =
-      disableDisabledUsers && status === EmployeeStatus.Disabled;
+		const isDisabled =
+			disableDisabledUsers && status === EmployeeStatus.Disabled;
 
-    const disabledText = isInvited
-      ? (disabledInvitedText ?? t("Common:Invited"))
-      : isDisabled
-        ? t("Common:Disabled")
-        : "";
+		const disabledText = isInvited
+			? (disabledInvitedText ?? t("Common:Invited"))
+			: isDisabled
+				? t("Common:Disabled")
+				: "";
 
-    const avatarRole = getUserAvatarRoleByType(role);
+		const avatarRole = getUserAvatarRoleByType(role);
 
-    const i: TSelectorItem = {
-      id: userId,
-      email,
-      avatar: userAvatar,
-      label: displayName || email,
-      displayName: displayName || email,
-      role: avatarRole,
-      userType: role,
-      isOwner,
-      isAdmin,
-      isVisitor,
-      isCollaborator,
-      isRoomAdmin,
-      hasAvatar,
-      isDisabled: isInvited || isDisabled,
-      disabledText,
-      status,
-      groups,
-      access,
-    };
+		const i: TSelectorItem = {
+			id: userId,
+			email,
+			avatar: userAvatar,
+			label: displayName || email,
+			displayName: displayName || email,
+			role: avatarRole,
+			userType: role,
+			isOwner,
+			isAdmin,
+			isVisitor,
+			isCollaborator,
+			isRoomAdmin,
+			hasAvatar,
+			isDisabled: isInvited || isDisabled,
+			disabledText,
+			status,
+			groups,
+			access,
+		};
 
-    return i;
-  }
+		return i;
+	}
 
-  const {
-    id,
+	const {
+		id,
 
-    name: groupName,
-    shared,
-    isSystem,
-  } = item;
+		name: groupName,
+		shared,
+		isSystem,
+	} = item;
 
-  const isInvited = disableInvitedUsers?.includes(id) || (isRoom && shared);
-  const disabledText = isInvited
-    ? (disabledInvitedText ?? t("Common:Invited"))
-    : "";
+	const isInvited = disableInvitedUsers?.includes(id) || (isRoom && shared);
+	const disabledText = isInvited
+		? (disabledInvitedText ?? t("Common:Invited"))
+		: "";
 
-  return {
-    id,
-    name: groupName,
-    isGroup: true,
-    label: groupName,
-    disabledText,
-    isDisabled: isInvited,
-    isSystem,
-  };
+	return {
+		id,
+		name: groupName,
+		isGroup: true,
+		label: groupName,
+		disabledText,
+		isDisabled: isInvited,
+		isSystem,
+	};
 };
 
 const PeopleSelector = ({
-  submitButtonLabel,
-  submitButtonId,
-  disableSubmitButton,
-  onSubmit,
+	submitButtonLabel,
+	submitButtonId,
+	disableSubmitButton,
+	onSubmit,
 
-  id,
-  className,
-  style,
+	id,
+	className,
+	style,
 
-  withCancelButton,
-  cancelButtonLabel,
-  onCancel,
+	withCancelButton,
+	cancelButtonLabel,
+	onCancel,
 
-  filter,
+	filter,
 
-  excludeItems,
+	excludeItems,
 
-  filterUserId,
-  currentUserId,
+	filterUserId,
+	currentUserId,
 
-  // Accessibility attributes
-  "aria-label": ariaLabel,
-  "data-selector-type": dataSelectorType,
-  "data-test-id": dataTestId,
-  withOutCurrentAuthorizedUser,
+	// Accessibility attributes
+	"aria-label": ariaLabel,
+	"data-selector-type": dataSelectorType,
+	"data-test-id": dataTestId,
+	withOutCurrentAuthorizedUser,
 
-  withFooterCheckbox,
-  footerCheckboxLabel,
-  isChecked,
+	withFooterCheckbox,
+	footerCheckboxLabel,
+	isChecked,
 
-  withHeader,
-  headerProps,
+	withHeader,
+	headerProps,
 
-  disableDisabledUsers,
-  disableInvitedUsers,
-  isMultiSelect,
+	disableDisabledUsers,
+	disableInvitedUsers,
+	isMultiSelect,
 
-  withInfo,
-  infoText,
+	withInfo,
+	infoText,
 
-  emptyScreenHeader,
-  emptyScreenDescription,
+	emptyScreenHeader,
+	emptyScreenDescription,
 
-  roomId,
+	roomId,
 
-  checkIfUserInvited,
+	checkIfUserInvited,
 
-  withGroups,
-  isGroupsOnly,
+	withGroups,
+	isGroupsOnly,
 
-  withGuests,
-  isGuestsOnly,
+	withGuests,
+	isGuestsOnly,
 
-  withAccessRights,
-  accessRights,
-  selectedAccessRight,
-  onAccessRightsChange,
-  accessRightsMode,
+	withAccessRights,
+	accessRights,
+	selectedAccessRight,
+	onAccessRightsChange,
+	accessRightsMode,
 
-  useAside,
-  onClose,
-  withoutBackground,
-  withBlur,
-  setActiveTab,
-  injectedElement,
-  alwaysShowFooter = false,
-  onlyRoomMembers,
-  targetEntityType = "room",
-  disabledInvitedText,
-  isAgent,
+	useAside,
+	onClose,
+	withoutBackground,
+	withBlur,
+	setActiveTab,
+	injectedElement,
+	alwaysShowFooter = false,
+	onlyRoomMembers,
+	targetEntityType = "room",
+	disabledInvitedText,
+	isAgent,
 }: PeopleSelectorProps) => {
-  const { t }: { t: TTranslation } = useTranslation(["Common"]);
+	const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
-  const { isBase } = useTheme();
+	const { isBase } = useTheme();
 
-  const [activeTabId, setActiveTabId] = useState<string>(
-    isGuestsOnly ? GUESTS_TAB_ID : isGroupsOnly ? GROUP_TAB_ID : PEOPLE_TAB_ID,
-  );
+	const [activeTabId, setActiveTabId] = useState<string>(
+		isGuestsOnly ? GUESTS_TAB_ID : isGroupsOnly ? GROUP_TAB_ID : PEOPLE_TAB_ID,
+	);
 
-  const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
-  const [searchValue, setSearchValue] = useState("");
-  const [total, setTotal] = useState<number>(-1);
-  const [hasNextPage, setHasNextPage] = useState(true);
-  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
-  const [selectedItems, setSelectedItems] = useState<TSelectorItem[]>([]);
-  const isFirstLoadRef = useRef(true);
-  const afterSearch = useRef(false);
-  const totalRef = useRef(0);
-  const searchTab = useRef(PEOPLE_TAB_ID);
-  const abortControllerRef = useRef(new AbortController());
+	const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
+	const [searchValue, setSearchValue] = useState("");
+	const [total, setTotal] = useState<number>(-1);
+	const [hasNextPage, setHasNextPage] = useState(true);
+	const [isNextPageLoading, setIsNextPageLoading] = useState(false);
+	const [selectedItems, setSelectedItems] = useState<TSelectorItem[]>([]);
+	const isFirstLoadRef = useRef(true);
+	const afterSearch = useRef(false);
+	const totalRef = useRef(0);
+	const searchTab = useRef(PEOPLE_TAB_ID);
+	const abortControllerRef = useRef(new AbortController());
 
-  useEffect(() => () => abortControllerRef.current.abort(), []);
+	useEffect(() => () => abortControllerRef.current.abort(), []);
 
-  const onSelect = (
-    item: TSelectorItem,
-    isDoubleClick: boolean,
-    doubleClickCallback: () => void,
-  ) => {
-    setSelectedItems((prevItems) => {
-      if (!isMultiSelect) {
-        return item.isSelected ? [] : [item];
-      }
+	const onSelect = (
+		item: TSelectorItem,
+		isDoubleClick: boolean,
+		doubleClickCallback: () => void,
+	) => {
+		setSelectedItems((prevItems) => {
+			if (!isMultiSelect) {
+				return item.isSelected ? [] : [item];
+			}
 
-      return item.isSelected
-        ? prevItems.filter((p) => p.id !== item.id)
-        : [...prevItems, item];
-    });
-    if (isDoubleClick) {
-      doubleClickCallback();
-    }
-  };
+			return item.isSelected
+				? prevItems.filter((p) => p.id !== item.id)
+				: [...prevItems, item];
+		});
+		if (isDoubleClick) {
+			doubleClickCallback();
+		}
+	};
 
-  const moveCurrentUserToTopOfList = useCallback(
-    (listUser: TSelectorItem[]) => {
-      const currentUserIndex = listUser.findIndex(
-        (user) => user.id === currentUserId,
-      );
+	const moveCurrentUserToTopOfList = useCallback(
+		(listUser: TSelectorItem[]) => {
+			const currentUserIndex = listUser.findIndex(
+				(user) => user.id === currentUserId,
+			);
 
-      // return if the current user is already at the top of the list or not found
-      if (currentUserIndex < 1) return listUser;
+			// return if the current user is already at the top of the list or not found
+			if (currentUserIndex < 1) return listUser;
 
-      const [currentUser] = listUser.splice(currentUserIndex, 1);
+			const [currentUser] = listUser.splice(currentUserIndex, 1);
 
-      listUser.splice(0, 0, currentUser);
+			listUser.splice(0, 0, currentUser);
 
-      return listUser;
-    },
-    [currentUserId],
-  );
+			return listUser;
+		},
+		[currentUserId],
+	);
 
-  const removeCurrentUserFromList = useCallback(
-    (listUser: TSelectorItem[]) => {
-      if (filterUserId) {
-        return listUser.filter((user) => user.id !== filterUserId);
-      }
-      return listUser.filter((user) => user.id !== currentUserId);
-    },
-    [currentUserId, filterUserId],
-  );
+	const removeCurrentUserFromList = useCallback(
+		(listUser: TSelectorItem[]) => {
+			if (filterUserId) {
+				return listUser.filter((user) => user.id !== filterUserId);
+			}
+			return listUser.filter((user) => user.id !== currentUserId);
+		},
+		[currentUserId, filterUserId],
+	);
 
-  const loadNextPage = useCallback(
-    async (startIndex: number) => {
-      try {
-        if (searchTab.current !== activeTabId && searchValue) {
-          setSearchValue("");
-          searchTab.current = activeTabId;
-          return;
-        }
-        const pageCount = 100;
+	const loadNextPage = useCallback(
+		async (startIndex: number) => {
+			try {
+				if (searchTab.current !== activeTabId && searchValue) {
+					setSearchValue("");
+					searchTab.current = activeTabId;
+					return;
+				}
+				const pageCount = 100;
 
-        setIsNextPageLoading(true);
+				setIsNextPageLoading(true);
 
-        let searchArea = AccountsSearchArea.People;
+				let searchArea = AccountsSearchArea.People;
 
-        if (withGroups || withGuests) {
-          searchArea =
-            activeTabId !== GROUP_TAB_ID
-              ? AccountsSearchArea.People
-              : AccountsSearchArea.Groups;
-        }
+				if (withGroups || withGuests) {
+					searchArea =
+						activeTabId !== GROUP_TAB_ID
+							? AccountsSearchArea.People
+							: AccountsSearchArea.Groups;
+				}
 
-        const currentFilter: Filter =
-          typeof filter === "function"
-            ? filter()
-            : (filter ?? Filter.getDefault());
+				const currentFilter: Filter =
+					typeof filter === "function"
+						? filter()
+						: (filter ?? Filter.getDefault());
 
-        currentFilter.page = startIndex / pageCount;
-        currentFilter.pageCount = pageCount;
+				currentFilter.page = startIndex / pageCount;
+				currentFilter.pageCount = pageCount;
 
-        currentFilter.search = searchValue || "";
+				currentFilter.search = searchValue || "";
 
-        if (activeTabId === GUESTS_TAB_ID) {
-          currentFilter.area = "guests";
-        } else if (activeTabId === PEOPLE_TAB_ID) {
-          currentFilter.area = "people";
-        }
+				if (activeTabId === GUESTS_TAB_ID) {
+					currentFilter.area = "guests";
+				} else if (activeTabId === PEOPLE_TAB_ID) {
+					currentFilter.area = "people";
+				}
 
-        if (onlyRoomMembers) {
-          currentFilter.includeShared = true;
-        }
+				if (onlyRoomMembers) {
+					currentFilter.includeShared = true;
+				}
 
-        abortControllerRef.current.abort();
-        abortControllerRef.current = new AbortController();
+				abortControllerRef.current.abort();
+				abortControllerRef.current = new AbortController();
 
-        const response = !roomId
-          ? await getUserList(currentFilter, abortControllerRef.current?.signal)
-          : await getMembersList(
-              searchArea,
-              roomId,
-              currentFilter,
-              abortControllerRef.current?.signal,
-              targetEntityType,
-            );
+				const response = !roomId
+					? await getUserList(currentFilter, abortControllerRef.current?.signal)
+					: await getMembersList(
+							searchArea,
+							roomId,
+							currentFilter,
+							abortControllerRef.current?.signal,
+							targetEntityType,
+						);
 
-        let totalDifferent = startIndex ? response.total - totalRef.current : 0;
+				let totalDifferent = startIndex ? response.total - totalRef.current : 0;
 
-        const data = response.items
-          .filter((item) => {
-            if (
-              (excludeItems && excludeItems.includes(item.id)) ||
-              ("status" in item && item.status === EmployeeStatus.Disabled)
-            ) {
-              totalDifferent += 1;
-              return false;
-            }
-            return true;
-          })
-          .map((item) =>
-            toListItem(
-              item,
-              t,
-              disableDisabledUsers,
-              disableInvitedUsers,
-              !!roomId,
-              checkIfUserInvited,
-              disabledInvitedText,
-            ),
-          );
+				const data = response.items
+					.filter((item) => {
+						if (
+							(excludeItems && excludeItems.includes(item.id)) ||
+							("status" in item && item.status === EmployeeStatus.Disabled)
+						) {
+							totalDifferent += 1;
+							return false;
+						}
+						return true;
+					})
+					.map((item) =>
+						toListItem(
+							item,
+							t,
+							disableDisabledUsers,
+							disableInvitedUsers,
+							!!roomId,
+							checkIfUserInvited,
+							disabledInvitedText,
+						),
+					);
 
-        const newTotal = withOutCurrentAuthorizedUser
-          ? response.total - totalDifferent - 1
-          : response.total - totalDifferent;
+				const newTotal = withOutCurrentAuthorizedUser
+					? response.total - totalDifferent - 1
+					: response.total - totalDifferent;
 
-        if (isFirstLoadRef.current) {
-          const newItems = withOutCurrentAuthorizedUser
-            ? removeCurrentUserFromList(data)
-            : moveCurrentUserToTopOfList(data);
+				if (isFirstLoadRef.current) {
+					const newItems = withOutCurrentAuthorizedUser
+						? removeCurrentUserFromList(data)
+						: moveCurrentUserToTopOfList(data);
 
-          setHasNextPage(newItems.length < newTotal);
-          setItemsList(newItems);
-        } else {
-          setItemsList((i) => {
-            const tempItems = [...i, ...data];
+					setHasNextPage(newItems.length < newTotal);
+					setItemsList(newItems);
+				} else {
+					setItemsList((i) => {
+						const tempItems = [...i, ...data];
 
-            const ids = new Set();
-            const filteredTempItems = tempItems.filter(
-              (item) => !ids.has(item.id) && ids.add(item.id),
-            );
+						const ids = new Set();
+						const filteredTempItems = tempItems.filter(
+							(item) => !ids.has(item.id) && ids.add(item.id),
+						);
 
-            const newItems = withOutCurrentAuthorizedUser
-              ? removeCurrentUserFromList(filteredTempItems)
-              : moveCurrentUserToTopOfList(filteredTempItems);
+						const newItems = withOutCurrentAuthorizedUser
+							? removeCurrentUserFromList(filteredTempItems)
+							: moveCurrentUserToTopOfList(filteredTempItems);
 
-            setHasNextPage(newItems.length < newTotal);
+						setHasNextPage(newItems.length < newTotal);
 
-            return newItems;
-          });
-        }
+						return newItems;
+					});
+				}
 
-        setTotal(newTotal);
-        totalRef.current = newTotal;
+				setTotal(newTotal);
+				totalRef.current = newTotal;
 
-        setIsNextPageLoading(false);
-        isFirstLoadRef.current = false;
-      } catch (error) {
-        if (axios.isCancel(error)) return;
+				setIsNextPageLoading(false);
+				isFirstLoadRef.current = false;
+			} catch (error) {
+				if (axios.isCancel(error)) return;
 
-        console.error(error);
-        toastr.error(error as Error);
-      }
-    },
-    [
-      activeTabId,
-      checkIfUserInvited,
-      disableDisabledUsers,
-      disableInvitedUsers,
-      excludeItems,
-      filter,
-      moveCurrentUserToTopOfList,
-      removeCurrentUserFromList,
-      roomId,
-      searchValue,
-      t,
-      withGroups,
-      withGuests,
-      withOutCurrentAuthorizedUser,
-      onlyRoomMembers,
-      targetEntityType,
-    ],
-  );
+				console.error(error);
+				toastr.error(error as Error);
+			}
+		},
+		[
+			activeTabId,
+			checkIfUserInvited,
+			disableDisabledUsers,
+			disableInvitedUsers,
+			excludeItems,
+			filter,
+			moveCurrentUserToTopOfList,
+			removeCurrentUserFromList,
+			roomId,
+			searchValue,
+			t,
+			withGroups,
+			withGuests,
+			withOutCurrentAuthorizedUser,
+			onlyRoomMembers,
+			targetEntityType,
+		],
+	);
 
-  const resetSelectorList = useCallback(() => {
-    setItemsList([]);
-    setHasNextPage(true);
-    setTotal(-1);
-    totalRef.current = 0;
-    isFirstLoadRef.current = true;
-  }, []);
+	const resetSelectorList = useCallback(() => {
+		setItemsList([]);
+		setHasNextPage(true);
+		setTotal(-1);
+		totalRef.current = 0;
+		isFirstLoadRef.current = true;
+	}, []);
 
-  const onSearch = useCallback(
-    (value: string, callback?: VoidFunction) => {
-      afterSearch.current = true;
-      searchTab.current = activeTabId;
-      resetSelectorList();
+	const onSearch = useCallback(
+		(value: string, callback?: VoidFunction) => {
+			afterSearch.current = true;
+			searchTab.current = activeTabId;
+			resetSelectorList();
 
-      setSearchValue(() => {
-        return value;
-      });
-      callback?.();
-    },
-    [activeTabId, resetSelectorList],
-  );
+			setSearchValue(() => {
+				return value;
+			});
+			callback?.();
+		},
+		[activeTabId, resetSelectorList],
+	);
 
-  const onClearSearch = useCallback(
-    (callback?: VoidFunction) => {
-      afterSearch.current = true;
-      resetSelectorList();
-      setSearchValue(() => {
-        return "";
-      });
+	const onClearSearch = useCallback(
+		(callback?: VoidFunction) => {
+			afterSearch.current = true;
+			resetSelectorList();
+			setSearchValue(() => {
+				return "";
+			});
 
-      // Trigger initial load after clearing search
-      loadNextPage(0);
+			// Trigger initial load after clearing search
+			loadNextPage(0);
 
-      callback?.();
-    },
-    [resetSelectorList, loadNextPage],
-  );
+			callback?.();
+		},
+		[resetSelectorList, loadNextPage],
+	);
 
-  const emptyScreenImage = isBase
-    ? EmptyScreenPersonsSvgUrl
-    : EmptyScreenPersonsSvgDarkUrl;
+	const emptyScreenImage = isBase
+		? EmptyScreenPersonsSvgUrl
+		: EmptyScreenPersonsSvgDarkUrl;
 
-  const headerSelectorProps: TSelectorHeader = withHeader
-    ? {
-        withHeader,
-        headerProps: {
-          ...headerProps,
-          headerLabel: headerProps.headerLabel || t("Common:Contacts"),
-        },
-      }
-    : ({} as TSelectorHeader);
+	const headerSelectorProps: TSelectorHeader = withHeader
+		? {
+				withHeader,
+				headerProps: {
+					...headerProps,
+					headerLabel: headerProps.headerLabel || t("Common:Contacts"),
+				},
+			}
+		: ({} as TSelectorHeader);
 
-  const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton
-    ? {
-        withCancelButton,
-        cancelButtonLabel: cancelButtonLabel || t("Common:CancelButton"),
-        onCancel,
-      }
-    : ({} as TSelectorCancelButton);
+	const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton
+		? {
+				withCancelButton,
+				cancelButtonLabel: cancelButtonLabel || t("Common:CancelButton"),
+				onCancel,
+			}
+		: ({} as TSelectorCancelButton);
 
-  const searchSelectorProps: TSelectorSearch = {
-    withSearch: true,
-    searchPlaceholder: t("Common:Search"),
-    searchValue,
-    onSearch,
-    onClearSearch,
-    searchLoader: <SearchLoader />,
-    isSearchLoading:
-      isFirstLoadRef.current && !searchValue && !afterSearch.current,
-  };
+	const searchSelectorProps: TSelectorSearch = {
+		withSearch: true,
+		searchPlaceholder: t("Common:Search"),
+		searchValue,
+		onSearch,
+		onClearSearch,
+		searchLoader: <SearchLoader />,
+		isSearchLoading:
+			isFirstLoadRef.current && !searchValue && !afterSearch.current,
+	};
 
-  const infoProps: TSelectorInfo = withInfo
-    ? {
-        withInfo,
-        infoText,
-      }
-    : {};
+	const infoProps: TSelectorInfo = withInfo
+		? {
+				withInfo,
+				infoText,
+			}
+		: {};
 
-  const checkboxSelectorProps: TSelectorCheckbox = withFooterCheckbox
-    ? {
-        withFooterCheckbox,
-        footerCheckboxLabel,
-        isChecked,
-      }
-    : {};
+	const checkboxSelectorProps: TSelectorCheckbox = withFooterCheckbox
+		? {
+				withFooterCheckbox,
+				footerCheckboxLabel,
+				isChecked,
+			}
+		: {};
 
-  const renderCustomItem = (
-    label: string,
-    userType?: string,
-    email?: string,
-    isGroup?: boolean,
-    status?: EmployeeStatus,
-    id?: string | number,
-  ) => {
-    return (
-      <div
-        style={{ width: "100%", overflow: "hidden", marginInlineEnd: "16px" }}
-        aria-label={`${isGroup ? "Group" : "User"}: ${label}${
-          email ? `, ${email}` : ""
-        }`}
-      >
-        <div
-          style={{
-            display: "flex",
-            boxSizing: "border-box",
-            alignItems: "center",
-          }}
-        >
-          <Text
-            className="selector-item_label"
-            fontWeight={600}
-            fontSize="14px"
-            noSelect
-            truncate
-            title={label}
-            aria-label={label}
-            dir="auto"
-          >
-            {label}
-          </Text>
-          {!isGroup && String(id) === currentUserId ? (
-            <Text className={styles.isMeLabel} fontWeight={600} fontSize="14px">
-              ({t("Common:MeLabel")})
-            </Text>
-          ) : null}
-          {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
-        </div>
-        {!isGroup ? (
-          <div style={{ display: "flex" }}>
-            <Text
-              className="selector-item_label"
-              fontWeight={400}
-              fontSize="12px"
-              noSelect
-              truncate
-              color={globalColors.gray}
-              dir="auto"
-            >
-              {`${userType} | ${email}`}
-            </Text>
-          </div>
-        ) : null}
-      </div>
-    );
-  };
+	const renderCustomItem = (
+		label: string,
+		userType?: string,
+		email?: string,
+		isGroup?: boolean,
+		status?: EmployeeStatus,
+		id?: string | number,
+	) => {
+		return (
+			<div
+				style={{ width: "100%", overflow: "hidden", marginInlineEnd: "16px" }}
+				aria-label={`${isGroup ? "Group" : "User"}: ${label}${
+					email ? `, ${email}` : ""
+				}`}
+			>
+				<div
+					style={{
+						display: "flex",
+						boxSizing: "border-box",
+						alignItems: "center",
+					}}
+				>
+					<Text
+						className="selector-item_label"
+						fontWeight={600}
+						fontSize="14px"
+						noSelect
+						truncate
+						title={label}
+						aria-label={label}
+						dir="auto"
+					>
+						{label}
+					</Text>
+					{!isGroup && String(id) === currentUserId ? (
+						<Text className={styles.isMeLabel} fontWeight={600} fontSize="14px">
+							({t("Common:MeLabel")})
+						</Text>
+					) : null}
+					{status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
+				</div>
+				{!isGroup ? (
+					<div style={{ display: "flex" }}>
+						<Text
+							className="selector-item_label"
+							fontWeight={400}
+							fontSize="12px"
+							noSelect
+							truncate
+							color={globalColors.gray}
+							dir="auto"
+						>
+							{`${userType} | ${email}`}
+						</Text>
+					</div>
+				) : null}
+			</div>
+		);
+	};
 
-  const changeActiveTab = useCallback(
-    (tab: number | string) => {
-      if (setActiveTab) setActiveTab(`${tab}`);
-      setActiveTabId(`${tab}`);
-      onSearch("");
-      resetSelectorList();
-    },
-    [onSearch, resetSelectorList, setActiveTab],
-  );
+	const changeActiveTab = useCallback(
+		(tab: number | string) => {
+			if (setActiveTab) setActiveTab(`${tab}`);
+			setActiveTabId(`${tab}`);
+			onSearch("");
+			resetSelectorList();
+		},
+		[onSearch, resetSelectorList, setActiveTab],
+	);
 
-  const withTabsProps: TSelectorTabs =
-    (withGroups || withGuests) && !isGroupsOnly && !isGuestsOnly
-      ? {
-          withTabs: true,
-          tabsData: [
-            {
-              id: PEOPLE_TAB_ID,
-              name: t("Common:Members"),
-              onClick: () => changeActiveTab(PEOPLE_TAB_ID),
-              content: null,
-            },
-            ...[
-              withGroups && {
-                id: GROUP_TAB_ID,
-                name: t("Common:Groups"),
-                onClick: () => changeActiveTab(GROUP_TAB_ID),
-                content: null,
-              },
-            ],
-            ...[
-              withGuests && {
-                id: GUESTS_TAB_ID,
-                name: t("Common:Guests"),
-                onClick: () => changeActiveTab(GUESTS_TAB_ID),
-                content: null,
-              },
-            ],
-          ].filter((i) => !!i),
-          activeTabId,
-        }
-      : {};
+	const withTabsProps: TSelectorTabs =
+		(withGroups || withGuests) && !isGroupsOnly && !isGuestsOnly
+			? {
+					withTabs: true,
+					tabsData: [
+						{
+							id: PEOPLE_TAB_ID,
+							name: t("Common:Members"),
+							onClick: () => changeActiveTab(PEOPLE_TAB_ID),
+							content: null,
+						},
+						...[
+							withGroups && {
+								id: GROUP_TAB_ID,
+								name: t("Common:Groups"),
+								onClick: () => changeActiveTab(GROUP_TAB_ID),
+								content: null,
+							},
+						],
+						...[
+							withGuests && {
+								id: GUESTS_TAB_ID,
+								name: t("Common:Guests"),
+								onClick: () => changeActiveTab(GUESTS_TAB_ID),
+								content: null,
+							},
+						],
+					].filter((i) => !!i),
+					activeTabId,
+				}
+			: {};
 
-  const withAccessRightsProps: TSelectorAccessRights =
-    withAccessRights && isMultiSelect
-      ? {
-          withAccessRights: true,
-          accessRights,
-          selectedAccessRight,
-          onAccessRightsChange,
-          accessRightsMode:
-            accessRightsMode ?? SelectorAccessRightsMode.Detailed,
-        }
-      : {};
+	const withAccessRightsProps: TSelectorAccessRights =
+		withAccessRights && isMultiSelect
+			? {
+					withAccessRights: true,
+					accessRights,
+					selectedAccessRight,
+					onAccessRightsChange,
+					accessRightsMode:
+						accessRightsMode ?? SelectorAccessRightsMode.Detailed,
+				}
+			: {};
 
-  const withAside: TSelectorWithAside = useAside
-    ? { useAside, onClose, withBlur, withoutBackground }
-    : {};
+	const withAside: TSelectorWithAside = useAside
+		? { useAside, onClose, withBlur, withoutBackground }
+		: {};
 
-  return (
-    <Selector
-      {...headerSelectorProps}
-      {...searchSelectorProps}
-      {...checkboxSelectorProps}
-      {...cancelButtonSelectorProps}
-      {...infoProps}
-      {...withTabsProps}
-      {...withAccessRightsProps}
-      {...withAside}
-      id={id}
-      injectedElement={injectedElement}
-      alwaysShowFooter={
-        itemsList.length !== 0 || Boolean(searchValue) || alwaysShowFooter
-      }
-      className={className}
-      style={style}
-      renderCustomItem={renderCustomItem}
-      aria-label={ariaLabel || "People Selector"}
-      data-selector-type={dataSelectorType || "people"}
-      dataTestId={dataTestId || "people-selector"}
-      items={itemsList}
-      submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
-      onSubmit={onSubmit}
-      disableSubmitButton={disableSubmitButton || !selectedItems.length}
-      selectedItem={isMultiSelect ? null : selectedItems[0]}
-      submitButtonId={submitButtonId}
-      emptyScreenImage={emptyScreenImage}
-      emptyScreenHeader={
-        emptyScreenHeader ??
-        (activeTabId === GUESTS_TAB_ID
-          ? t("Common:NotFoundGuests")
-          : activeTabId === PEOPLE_TAB_ID
-            ? t("Common:EmptyHeader")
-            : t("Common:NotFoundGroups"))
-      }
-      emptyScreenDescription={
-        emptyScreenDescription ??
-        (activeTabId === GUESTS_TAB_ID
-          ? isAgent
-            ? t("Common:NotFoundGuestsDescriptionAgent")
-            : t("Common:NotFoundGuestsDescription")
-          : activeTabId === PEOPLE_TAB_ID
-            ? t("Common:EmptyDescription", {
-                productName: t("Common:ProductName"),
-              })
-            : t("Common:GroupsNotFoundDescription"))
-      }
-      searchEmptyScreenImage={emptyScreenImage}
-      searchEmptyScreenHeader={
-        activeTabId === GUESTS_TAB_ID
-          ? t("Common:NotFoundGuestsFilter")
-          : activeTabId === PEOPLE_TAB_ID
-            ? t("Common:NotFoundMembers")
-            : t("Common:NotFoundGroups")
-      }
-      searchEmptyScreenDescription={
-        activeTabId === GUESTS_TAB_ID
-          ? t("Common:NotFoundFilterGuestsDescription")
-          : activeTabId === PEOPLE_TAB_ID
-            ? t("Common:NotFoundUsersDescription")
-            : t("Common:GroupsNotFoundDescription")
-      }
-      hasNextPage={hasNextPage}
-      isNextPageLoading={isNextPageLoading}
-      loadNextPage={loadNextPage}
-      isMultiSelect={isMultiSelect ?? false}
-      totalItems={total}
-      isLoading={isFirstLoadRef.current}
-      rowLoader={
-        <RowLoader
-          isUser
-          isContainer={isFirstLoadRef.current}
-          isMultiSelect={isMultiSelect}
-        />
-      }
-      onSelect={onSelect}
-    />
-  );
+	return (
+		<Selector
+			{...headerSelectorProps}
+			{...searchSelectorProps}
+			{...checkboxSelectorProps}
+			{...cancelButtonSelectorProps}
+			{...infoProps}
+			{...withTabsProps}
+			{...withAccessRightsProps}
+			{...withAside}
+			id={id}
+			injectedElement={injectedElement}
+			alwaysShowFooter={
+				itemsList.length !== 0 || Boolean(searchValue) || alwaysShowFooter
+			}
+			className={className}
+			style={style}
+			renderCustomItem={renderCustomItem}
+			aria-label={ariaLabel || "People Selector"}
+			data-selector-type={dataSelectorType || "people"}
+			dataTestId={dataTestId || "people-selector"}
+			items={itemsList}
+			submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
+			onSubmit={onSubmit}
+			disableSubmitButton={disableSubmitButton || !selectedItems.length}
+			selectedItem={isMultiSelect ? null : selectedItems[0]}
+			submitButtonId={submitButtonId}
+			emptyScreenImage={emptyScreenImage}
+			emptyScreenHeader={
+				emptyScreenHeader ??
+				(activeTabId === GUESTS_TAB_ID
+					? t("Common:NotFoundGuests")
+					: activeTabId === PEOPLE_TAB_ID
+						? t("Common:EmptyHeader")
+						: t("Common:NotFoundGroups"))
+			}
+			emptyScreenDescription={
+				emptyScreenDescription ??
+				(activeTabId === GUESTS_TAB_ID
+					? isAgent
+						? t("Common:NotFoundGuestsDescriptionAgent")
+						: t("Common:NotFoundGuestsDescription")
+					: activeTabId === PEOPLE_TAB_ID
+						? t("Common:EmptyDescription", {
+								productName: t("Common:ProductName"),
+							})
+						: t("Common:GroupsNotFoundDescription"))
+			}
+			searchEmptyScreenImage={emptyScreenImage}
+			searchEmptyScreenHeader={
+				activeTabId === GUESTS_TAB_ID
+					? t("Common:NotFoundGuestsFilter")
+					: activeTabId === PEOPLE_TAB_ID
+						? t("Common:NotFoundMembers")
+						: t("Common:NotFoundGroups")
+			}
+			searchEmptyScreenDescription={
+				activeTabId === GUESTS_TAB_ID
+					? t("Common:NotFoundFilterGuestsDescription")
+					: activeTabId === PEOPLE_TAB_ID
+						? t("Common:NotFoundUsersDescription")
+						: t("Common:GroupsNotFoundDescription")
+			}
+			hasNextPage={hasNextPage}
+			isNextPageLoading={isNextPageLoading}
+			loadNextPage={loadNextPage}
+			isMultiSelect={isMultiSelect ?? false}
+			totalItems={total}
+			isLoading={isFirstLoadRef.current}
+			rowLoader={
+				<RowLoader
+					isUser
+					isContainer={isFirstLoadRef.current}
+					isMultiSelect={isMultiSelect}
+				/>
+			}
+			onSelect={onSelect}
+		/>
+	);
 };
 
 export default PeopleSelector;

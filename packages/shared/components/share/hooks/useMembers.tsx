@@ -45,7 +45,7 @@ import type { RoomMember } from "../../../api/rooms/types";
 import SocketHelper, { SocketEvents } from "../../../utils/socket";
 
 import type { TOption } from "@docspace/ui-kit/components/combobox";
-import { TData, toastr } from "../../toast";
+import { TData, toastr } from "@docspace/ui-kit/components/toast";
 
 import type {
   Filter,

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { toastr } from "../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { getCookie } from "../../utils";
 import { getAiModelName } from "../../utils/ai";
 import { checkFilterInstance } from "../../utils/common";
@@ -55,6 +55,8 @@ import type {
   TCreateAgentData,
   TEditAgentData,
   TGetAgents,
+  TDefaultProvider,
+  TUpdateDefaultProviderData,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -665,4 +667,30 @@ export const getMCPServerById = async (id: string) => {
   const res = await request(options);
 
   return res as TServer;
+};
+
+export const getDefaultProvider = async () => {
+  const options = {
+    method: "get",
+    url: `${baseUrl}/providers/default`,
+  };
+
+  const res = await request(options);
+
+  return res as TDefaultProvider;
+};
+
+export const updateDefaultProvider = async ({
+  providerId,
+  defaultModel,
+}: TUpdateDefaultProviderData) => {
+  const options = {
+    method: "put",
+    url: `${baseUrl}/providers/default`,
+    data: { providerId, defaultModel },
+  };
+
+  const res = await request(options);
+
+  return res as TDefaultProvider;
 };
