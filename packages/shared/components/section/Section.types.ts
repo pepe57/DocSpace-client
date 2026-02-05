@@ -146,6 +146,7 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     clearSecondaryProgressData?: (
       operationId?: string | null,
       operation?: string | null,
+      operationItem?: Operation,
     ) => void;
     clearPrimaryProgressData?: (operation?: string | null) => void;
     cancelUpload?: (t: (key: string) => string) => void;
@@ -173,6 +174,11 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     clearDropPreviewLocation?: () => void;
     startDropPreview?: () => void;
     asideInfoPanel?: boolean;
+    // Plugin operations props
+    pluginOperations?: Operation[];
+    pluginOperationsCompleted?: boolean;
+    pluginOperationsAlert?: boolean;
+    pluginShowCancelButton?: boolean;
   };
 
 export type SectionContextMenuProps = {
