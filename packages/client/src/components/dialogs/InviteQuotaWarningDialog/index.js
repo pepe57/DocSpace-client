@@ -50,6 +50,7 @@ const InviteQuotaWarningDialog = (props) => {
     isGracePeriod,
     currentTariffPlanTitle,
     isPaymentPageAvailable,
+    standalone,
   } = props;
 
   const navigate = useNavigate();
@@ -103,25 +104,47 @@ const InviteQuotaWarningDialog = (props) => {
   const contentForGracePeriod = (
     <>
       <Text fontWeight={700}>
-        {t("BusinessPlanPaymentOverdue", {
-          planName: currentTariffPlanTitle,
-        })}
+        {standalone
+          ? t("LicenseExpired")
+          : t("BusinessPlanPaymentOverdue", {
+              planName: currentTariffPlanTitle,
+            })}
       </Text>
       <br />
       <Text as="div">
-        <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
-          Grace period activated
-          <strong>
-            from {{ fromDate }} to {{ byDate }}
-          </strong>
-          (days remaining: {{ delayDaysCount }})
-        </Trans>
+        {standalone ? (
+          <Trans
+            i18nKey="GracePeriodActive"
+            ns="Payments"
+            t={t}
+            values={{
+              fromDate,
+              byDate,
+              delayDaysCount,
+            }}
+            components={{
+              1: <Text as="span" />,
+            }}
+          />
+        ) : (
+          <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
+            Grace period activated
+            <strong>
+              from {{ fromDate }} to {{ byDate }}
+            </strong>
+            (days remaining: {{ delayDaysCount }})
+          </Trans>
+        )}
       </Text>
       <br />
       <Text>
-        {t("GracePeriodActivatedDescription", {
-          productName: t("Common:ProductName"),
-        })}
+        {standalone
+          ? t("LicenseGracePeriodInfo", {
+              productName: t("Common:ProductName"),
+            })
+          : t("GracePeriodActivatedDescription", {
+              productName: t("Common:ProductName"),
+            })}
       </Text>
     </>
   );
@@ -175,6 +198,7 @@ export default inject(
     dialogsStore,
     currentTariffStatusStore,
     currentQuotaStore,
+    settingsStore,
   }) => {
     const { isPaymentPageAvailable } = authStore;
     const { dueDate, delayDueDate, isGracePeriod } = currentTariffStatusStore;
@@ -182,6 +206,7 @@ export default inject(
 
     const { inviteQuotaWarningDialogVisible, setQuotaWarningDialogVisible } =
       dialogsStore;
+    const { standalone } = settingsStore;
 
     return {
       isPaymentPageAvailable,
@@ -192,6 +217,7 @@ export default inject(
       dueDate,
       delayDueDate,
       isGracePeriod,
+      standalone,
     };
   },
 )(observer(withTranslation(["Payments", "Common"])(InviteQuotaWarningDialog)));

@@ -33,6 +33,9 @@ import LifetimeLicenseReactSvgUrl from "PUBLIC_DIR/images/lifetime_license.react
 import TechSupportReactSvgUrl from "PUBLIC_DIR/images/tech_support.react.svg?url";
 import MobileEditingReactSvgUrl from "PUBLIC_DIR/images/mobile_editing.react.svg?url";
 import ScalabilityReactSvgUrl from "PUBLIC_DIR/images/scalability.react.svg?url";
+import RegularUpdatesReactSvgUrl from "PUBLIC_DIR/images/regular_updates.react.svg?url";
+import CustomizationReactSvgUrl from "PUBLIC_DIR/images/customization_updates.react.svg?url";
+
 import { Text } from "../../../components/text";
 
 import styles from "./BenefitsContainer.module.scss";
@@ -42,8 +45,9 @@ export const BenefitsContainer = ({
   isTrial,
   isEnterprise,
   isDeveloper,
+  isLifetimeLicense,
 }: TBenefitsContainerProps) => {
-  const { t } = useTranslation("Common");
+  const { t } = useTranslation(["Common", "Settings"]);
 
   const title = isEnterprise
     ? t("ActivateToProBannerHeaderTrial", {
@@ -54,6 +58,28 @@ export const BenefitsContainer = ({
     : t("UpgradeToProBannerHeader");
 
   const features = () => {
+    const getFeatures = () => {
+      if (isLifetimeLicense && !isTrial) return [regularUpdates, techSupport];
+
+      if (isTrial)
+        return [
+          scalabilityClustering,
+          mobileEditing,
+          lifetimeLicense,
+          techSupport,
+        ];
+
+      if (isEnterprise)
+        return [
+          scalabilityClustering,
+          mobileEditing,
+          regularUpdates,
+          techSupport,
+        ];
+
+      return [customization, mobileEditing, regularUpdates, techSupport];
+    };
+
     const techSupport = {
       imag: TechSupportReactSvgUrl,
       title: t("UpgradeToProBannerItemSupportHeader"),
@@ -78,22 +104,19 @@ export const BenefitsContainer = ({
       description: t("UpgradeToProBannerItemScalabilityDescr"),
     };
 
-    const featuresArray = [];
+    const regularUpdates = {
+      imag: RegularUpdatesReactSvgUrl,
+      title: t("RegularUpdates"),
+      description: t("RegularUpdatesDescription"),
+    };
 
-    if (isEnterprise) {
-      if (isTrial) {
-        featuresArray.push(
-          scalabilityClustering,
-          mobileEditing,
-          lifetimeLicense,
-          techSupport,
-        );
-      } else {
-        featuresArray.push(lifetimeLicense, techSupport);
-      }
-    } else {
-      featuresArray.push(scalabilityClustering, mobileEditing, techSupport);
-    }
+    const customization = {
+      imag: CustomizationReactSvgUrl,
+      title: t("Settings:Customization"),
+      description: t("ProvideBrandedExperience"),
+    };
+
+    const featuresArray = getFeatures();
 
     return featuresArray.map((item) => {
       return (

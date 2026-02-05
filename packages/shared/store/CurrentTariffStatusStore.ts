@@ -223,7 +223,7 @@ class CurrentTariffStatusStore {
   }
 
   get isLicenseExpiring() {
-    if (!this.dueDate || !this.isEnterprise) return;
+    if (!this.dueDate) return false;
 
     const days = getDaysLeft(this.dueDate);
 

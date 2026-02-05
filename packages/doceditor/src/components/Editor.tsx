@@ -57,6 +57,8 @@ import useEditorEvents from "@/hooks/useEditorEvents";
 import useGoBackAndClose from "@/hooks/useGoBackAndClose";
 import { isPDFDocument } from "@/utils";
 
+import Bar from "./Bar";
+
 const Editor = ({
   config,
   successAuth,
@@ -87,6 +89,7 @@ const Editor = ({
   openShareFormDialog,
   onStartFilling,
 }: EditorProps) => {
+  console.log("config", config);
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
   const { isBase } = useTheme();
 
@@ -311,22 +314,34 @@ const Editor = ({
   }
 
   return (
-    <DocumentEditor
-      id={EDITOR_ID}
-      documentServerUrl={documentServerUrl}
-      config={
-        errorMessage || isSkipError
-          ? {
-              events: {
-                onAppReady: onSDKAppReady,
-              },
-            }
-          : newConfig
-      }
-      height="100%"
-      width="100%"
-      events_onDocumentReady={onDocumentReady}
-    />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
+      }}
+    >
+      <div style={{ height: "auto", overflow: "visible" }}>
+        <Bar quotaExceededScope={config?.quotaExceededScope} />
+      </div>
+      <DocumentEditor
+        id={EDITOR_ID}
+        documentServerUrl={documentServerUrl}
+        config={
+          errorMessage || isSkipError
+            ? {
+                events: {
+                  onAppReady: onSDKAppReady,
+                },
+              }
+            : newConfig
+        }
+        height="100%"
+        width="100%"
+        events_onDocumentReady={onDocumentReady}
+      />
+    </div>
   );
 };
 

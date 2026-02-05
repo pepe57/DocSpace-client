@@ -33,13 +33,14 @@ import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { parseToDateTime, formatDate } from "@docspace/shared/utils/date";
 
 import { Badge } from "@docspace/shared/components/badge";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Text } from "@docspace/shared/components/text";
 import { TDefaultTemplateItem } from "@docspace/shared/types";
 import { UrlActionType } from "@docspace/shared/enums";
+import { getCorrectDate, getCookie } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";
 import { ResetTemplateDialog } from "SRC_DIR/components/dialogs";
@@ -55,6 +56,7 @@ type Props = {
   getFilterParam?: TStore["defaultTemplatesStore"]["getFilterParam"];
   openUrl?: TStore["settingsStore"]["openUrl"];
   uploadTemplate?: TStore["defaultTemplatesStore"]["uploadTemplate"];
+  culture?: TStore["settingsStore"]["culture"];
   index?: number;
 };
 
@@ -66,6 +68,7 @@ const TemplatesRow = ({
   resetTemplate,
   openUrl,
   uploadTemplate,
+  culture,
   index,
 }: Props) => {
   const { t } = useTranslation(["Settings", "EmptyView", "Common"]);
@@ -148,8 +151,9 @@ const TemplatesRow = ({
 
   const filterParam = getFilterParam?.(item.extension);
 
+  const locale = getCookie(LANGUAGE) ?? culture ?? "en";
   const lastModified = item.lastModified
-    ? formatDate(parseToDateTime(item.lastModified), "MM/dd/yyyy hh:mm a")
+    ? getCorrectDate(locale, item.lastModified)
     : t("Settings:NotModified");
 
   return (
@@ -226,7 +230,7 @@ export default inject(
     const { setTemplate, getFilterParam, resetTemplate, uploadTemplate } =
       defaultTemplatesStore;
 
-    const { openUrl } = settingsStore;
+    const { openUrl, culture } = settingsStore;
 
     return {
       getFileIcon,
@@ -235,6 +239,7 @@ export default inject(
       resetTemplate,
       openUrl,
       uploadTemplate,
+      culture,
     };
   },
 )(observer(TemplatesRow));
