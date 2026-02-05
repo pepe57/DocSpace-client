@@ -28,7 +28,7 @@ import { useState } from "react";
 import { observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { FileInput } from "@docspace/shared/components/file-input";
+import { FileInput } from "@docspace/ui-kit/components/file-input";
 
 import RoomSelector from "@docspace/shared/selectors/Room";
 

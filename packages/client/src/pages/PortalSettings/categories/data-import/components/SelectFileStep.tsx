@@ -34,7 +34,7 @@ import styled from "styled-components";
 import { WarningQuotaDialog } from "SRC_DIR/components/dialogs/WarningQuotaDialog";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { FileInput } from "@docspace/shared/components/file-input";
+import { FileInput } from "@docspace/ui-kit/components/file-input";
 import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
