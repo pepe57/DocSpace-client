@@ -162,6 +162,8 @@ const Root = ({
     user,
     shareKey,
     standalone: settings?.standalone,
+    folderId: config?.file?.folderId,
+    folderType: config?.file?.rootFolderType,
   });
 
   const {

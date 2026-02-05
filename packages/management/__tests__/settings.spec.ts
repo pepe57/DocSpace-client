@@ -27,6 +27,8 @@
 import {
   colorThemeHandler,
   encryptionSettingsHandler,
+  getPortalHandler,
+  quotaHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 
@@ -35,7 +37,14 @@ test.describe("Settings", () => {
     serverRequestInterceptor.use(colorThemeHandler(port));
   });
 
-  test("should branding settings render", async ({ page, baseUrl }) => {
+  test("should branding settings render", async ({
+    page,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+  }) => {
+    serverRequestInterceptor.use(getPortalHandler(port, false, true));
+
     await page.goto(`${baseUrl}/management/settings`);
 
     await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
@@ -47,7 +56,14 @@ test.describe("Settings", () => {
     ]);
   });
 
-  test("should data backup settings render", async ({ page, baseUrl }) => {
+  test("should data backup settings render", async ({
+    page,
+    baseUrl,
+    port,
+    serverRequestInterceptor,
+  }) => {
+    serverRequestInterceptor.use(getPortalHandler(port, false, true));
+
     await page.goto(`${baseUrl}/management/settings/data-backup`);
 
     await expect(page.getByTestId("manual-backup-wrapper")).toBeVisible();
@@ -59,7 +75,14 @@ test.describe("Settings", () => {
     ]);
   });
 
-  test("should auto backup settings render", async ({ page, baseUrl }) => {
+  test("should auto backup settings render", async ({
+    page,
+    baseUrl,
+    port,
+    serverRequestInterceptor,
+  }) => {
+    serverRequestInterceptor.use(getPortalHandler(port, false, true));
+
     await page.goto(`${baseUrl}/management/settings/auto-backup`);
 
     await expect(page.getByTestId("auto-backup")).toBeVisible();
@@ -71,7 +94,13 @@ test.describe("Settings", () => {
     ]);
   });
 
-  test("should restore settings render", async ({ page, baseUrl }) => {
+  test("should restore settings render", async ({
+    page,
+    baseUrl,
+    port,
+    serverRequestInterceptor,
+  }) => {
+    serverRequestInterceptor.use(getPortalHandler(port, false, true));
     await page.goto(`${baseUrl}/management/settings/restore`);
 
     await expect(page.getByTestId("restore-backup")).toBeVisible();
@@ -83,7 +112,13 @@ test.describe("Settings", () => {
     ]);
   });
 
-  test("should encrypt settings render", async ({ page, baseUrl }) => {
+  test("should encrypt settings render", async ({
+    page,
+    baseUrl,
+    port,
+    serverRequestInterceptor,
+  }) => {
+    serverRequestInterceptor.use(getPortalHandler(port, false, true));
     await page.goto(`${baseUrl}/management/settings/encrypt-data`);
 
     await expect(page.getByTestId("encrypt-data-page")).toBeVisible();
@@ -102,7 +137,10 @@ test.describe("Settings", () => {
     port,
   }) => {
     // Override encryption settings handler to return encrypted state
-    serverRequestInterceptor.use(encryptionSettingsHandler(port, true));
+    serverRequestInterceptor.use(
+      getPortalHandler(port, false, true),
+      encryptionSettingsHandler(port, true),
+    );
 
     await page.goto(`${baseUrl}/management/settings/encrypt-data`);
 
@@ -112,6 +150,103 @@ test.describe("Settings", () => {
       "desktop",
       "settings",
       "settings-encrypt-encrypted-render.png",
+    ]);
+  });
+
+  test("should unavailable branding settings render", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/management/settings`);
+
+    await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "settings",
+      "settings-branding-unavailable-render.png",
+    ]);
+  });
+
+  test("should unavailable data backup settings render", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/management/settings/data-backup`);
+
+    await expect(page.getByTestId("manual-backup-wrapper")).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "settings",
+      "settings-data-backup-unavailable-render.png",
+    ]);
+  });
+
+  test("should unavailable auto backup settings render", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/management/settings/auto-backup`);
+
+    await expect(page.getByTestId("auto-backup")).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "settings",
+      "settings-auto-backup-unavailable-render.png",
+    ]);
+  });
+
+  test("should unavailable restore settings render", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/management/settings/restore`);
+
+    await expect(page.getByTestId("restore-backup")).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "settings",
+      "settings-restore-unavailable-render.png",
+    ]);
+  });
+
+  test("should unavailable encrypt settings render", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/management/settings/encrypt-data`);
+
+    await expect(page.getByTestId("encrypt-data-page")).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "settings",
+      "settings-encrypt-unavailable-render.png",
+    ]);
+  });
+
+  test("should not available branding settings render", async ({
+    page,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+  }) => {
+    serverRequestInterceptor.use(
+      getPortalHandler(port, false, true),
+      quotaHandler(port, false),
+    );
+
+    await page.goto(`${baseUrl}/management/settings`);
+
+    await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "settings",
+      "settings-branding-without-customization-render.png",
     ]);
   });
 });

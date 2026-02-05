@@ -98,12 +98,8 @@ export default inject<TStore>(
 
     const { isFreeTariff, isNonProfit, isTrial, currentTariffPlanTitle } =
       currentQuotaStore;
-    const {
-      isGracePeriod,
-      isLicenseExpiring,
-      isLicenseDateExpired,
-      trialDaysLeft,
-    } = currentTariffStatusStore;
+    const { isGracePeriod, isLicenseDateExpired, trialDaysLeft } =
+      currentTariffStatusStore;
 
     return {
       onProfileClick,
@@ -132,7 +128,6 @@ export default inject<TStore>(
       isGracePeriod,
       isFreeTariff,
       isPaymentPageAvailable,
-      isLicenseExpiring,
 
       standalone,
 

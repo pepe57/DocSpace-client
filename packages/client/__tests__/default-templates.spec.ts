@@ -172,4 +172,27 @@ test.describe("Default templates", () => {
     const badge = row.getByTestId("badge-text");
     await expect(badge).toHaveText("Default");
   });
+
+  test("should navigate to default templates page with template width long title", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(defaultTemplatesHandler(TEST_PORT, "long"));
+    await page.goto(
+      `${baseUrl}/portal-settings/customization/default-templates`,
+    );
+
+    const container = page.getByTestId("default-templates");
+    await expect(container).toBeVisible();
+
+    const row = page.getByTestId("default-template-row-0");
+    await expect(row).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "default-templates",
+      "default-templates-long-title.png",
+    ]);
+  });
 });

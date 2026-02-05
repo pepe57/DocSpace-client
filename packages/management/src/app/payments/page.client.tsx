@@ -28,6 +28,7 @@
 
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import moment from "moment-timezone";
 import { useRouter } from "next/navigation";
 
 import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
@@ -52,6 +53,11 @@ const PaymentsPage = ({
   docspaceFaqUrl,
   licenseQuota,
   filesSettings,
+  isLifetimeLicense,
+  isGracePeriod,
+  isNotPaidPeriod,
+  gracePeriodEndDate,
+  delayDaysCount,
 }: {
   isTrial: boolean;
   salesEmail: string;
@@ -63,6 +69,11 @@ const PaymentsPage = ({
   docspaceFaqUrl: string;
   licenseQuota: TLicenseQuota;
   filesSettings: TFilesSettings;
+  isLifetimeLicense: boolean;
+  isGracePeriod: boolean;
+  isNotPaidPeriod: boolean;
+  gracePeriodEndDate: Date;
+  delayDaysCount: string;
 }) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
@@ -145,6 +156,13 @@ const PaymentsPage = ({
           docspaceFaqUrl={docspaceFaqUrl}
           licenseQuota={licenseQuota}
           openOnNewPage={shouldOpenEditorInNewTab()}
+          isLifetimeLicense={isLifetimeLicense}
+          isGracePeriod={isGracePeriod}
+          isNotPaidPeriod={isNotPaidPeriod}
+          gracePeriodEndDate={moment(gracePeriodEndDate)
+            .tz(window.timezone)
+            ?.format("LL")}
+          delayDaysCount={delayDaysCount}
         />
       </LoaderWrapper>
     </div>
