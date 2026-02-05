@@ -34,7 +34,7 @@ import { inject, observer } from "mobx-react";
 import {
   ModalDialog,
   ModalDialogType,
-  DialogAsideSkeleton
+  DialogAsideSkeleton,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { LoadingButton } from "@docspace/ui-kit/components/loading-button";
 
@@ -76,8 +76,8 @@ class UploadPanelComponent extends React.Component {
   };
 
   onCancelUpload = () => {
-    const { cancelUpload, t } = this.props;
-    cancelUpload(t);
+    const { cancelUpload } = this.props;
+    cancelUpload();
   };
 
   getHeaderContent = () => {

@@ -29,6 +29,8 @@
 import equal from "fast-deep-equal";
 import React, { useEffect, useMemo, memo, FC, PropsWithChildren } from "react";
 
+import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
+
 import { Provider } from "../../utils";
 import { DeviceType } from "../../enums";
 
@@ -56,8 +58,6 @@ import {
   SECTION_SUBMENU_NAME,
 } from "./Section.constants";
 import { parseChildren } from "./Section.utils";
-
-import OperationsProgressButton from "../operations-progress-button";
 
 export type { SectionProps };
 
