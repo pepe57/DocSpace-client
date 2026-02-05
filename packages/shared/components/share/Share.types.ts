@@ -26,8 +26,7 @@
 
 import React from "react";
 import type { TFunction } from "i18next";
-
-import type { DateTime } from "../../utils/date";
+import type { DateTime } from "luxon";
 import type { IndexRange } from "react-virtualized";
 
 import type { TFile, TFileLink, TFolder } from "../../api/files/types";

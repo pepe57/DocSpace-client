@@ -27,9 +27,10 @@
 import { useState } from "react";
 import copy from "copy-to-clipboard";
 import type { TFunction } from "i18next";
+import type { DateTime } from "luxon";
 import { observer, inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { addToDate, now, type DateTime } from "@docspace/shared/utils/date";
+import { addToDate, now } from "@docspace/shared/utils/date";
 
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";

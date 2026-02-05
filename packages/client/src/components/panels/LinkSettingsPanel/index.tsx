@@ -26,7 +26,8 @@
 
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { now, addToDate, subtractFromDate, parseToDateTime, isAfter, type DateTime } from "@docspace/shared/utils/date";
+import type { DateTime } from "luxon";
+import { now, addToDate, subtractFromDate, parseToDateTime, isAfter } from "@docspace/shared/utils/date";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";

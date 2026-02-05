@@ -26,15 +26,11 @@
 
 import React from "react";
 import classNames from "classnames";
+import type { DateTime } from "luxon";
 
 import { getCalendarDays } from "./getCalendarDays";
 import styles from "../Calendar.module.scss";
-import {
-  parseWithFormat,
-  formatDate,
-  now,
-  type DateTime,
-} from "../../../utils/date";
+import { parseWithFormat, formatDate, now } from "../../../utils/date";
 
 const parseDay = (key: string): DateTime | null => {
   return parseWithFormat(key, "yyyy-MM-d");

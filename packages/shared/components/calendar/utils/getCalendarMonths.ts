@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getMonths, addToDate, type DateTime } from "../../../utils/date";
+import type { DateTime } from "luxon";
+import { getMonths, addToDate } from "../../../utils/date";
 
 export const getCalendarMonths = (observedDate: DateTime) => {
   // Get short month names and capitalize first letter

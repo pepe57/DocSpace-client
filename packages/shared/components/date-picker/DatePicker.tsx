@@ -26,16 +26,12 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import classNames from "classnames";
+import type { DateTime } from "luxon";
 
 import CalendarIconUrl from "PUBLIC_DIR/images/calendar.react.svg?url";
 import CalendarIcon from "PUBLIC_DIR/images/calendar.react.svg";
 
-import {
-  parseToDateTime,
-  formatDate,
-  now,
-  type DateTime,
-} from "../../utils/date";
+import { parseToDateTime, formatDate, now } from "../../utils/date";
 
 import { Calendar } from "../calendar";
 import { SelectorAddButton } from "../selector-add-button";

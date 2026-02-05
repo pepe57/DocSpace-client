@@ -26,6 +26,7 @@
 
 import React, { useState } from "react";
 import type { Meta, StoryFn } from "@storybook/react";
+import type { DateTime } from "luxon";
 
 import { DatePicker } from "./DatePicker";
 import { DatePickerProps } from "./DatePicker.types";
@@ -36,7 +37,6 @@ import {
   createDateTime,
   parseToDateTime,
   formatDate,
-  type DateTime,
 } from "../../utils/date";
 
 export default {

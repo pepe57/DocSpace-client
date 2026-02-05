@@ -26,6 +26,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import classNames from "classnames";
+import type { DateTime } from "luxon";
 
 import ClockIcon from "PUBLIC_DIR/images/clock.react.svg";
 
@@ -36,7 +37,6 @@ import {
   formatDate,
   addToDate,
   subtractFromDate,
-  type DateTime,
 } from "../../utils/date";
 
 import { TimePicker } from "../time-picker";

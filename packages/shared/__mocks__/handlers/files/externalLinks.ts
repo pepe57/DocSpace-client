@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http, HttpResponse } from "msw";
+import type { DateTime } from "luxon";
 import { uuid } from "../../../utils/uuid";
-import type { DateTime } from "../../../utils/date";
 
 import { TFileLink } from "../../../api/files/types";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";

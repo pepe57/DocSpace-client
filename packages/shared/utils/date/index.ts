@@ -30,6 +30,3 @@ export * from "./dateComparison";
 export * from "./duration";
 export * from "./timezone";
 export * from "./parse";
-
-// Re-export DateTime type for use in other packages
-export type { DateTime } from "luxon";

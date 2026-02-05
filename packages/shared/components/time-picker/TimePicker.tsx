@@ -26,6 +26,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import classNames from "classnames";
+import type { DateTime } from "luxon";
 
 import { InputSize, InputType, TextInput } from "../text-input";
 
@@ -35,7 +36,6 @@ import {
   startOf,
   now,
   parseWithFormat,
-  type DateTime,
 } from "../../utils/date";
 
 import { TimePickerProps } from "./TimePicker.types";

@@ -26,14 +26,10 @@
 
 import React from "react";
 import classNames from "classnames";
+import type { DateTime } from "luxon";
 
 import styles from "../Calendar.module.scss";
-import {
-  now,
-  endOf,
-  createDateTime,
-  type DateTime,
-} from "../../../utils/date";
+import { now, endOf, createDateTime } from "../../../utils/date";
 
 export const getYearElements = (
   years: string[],

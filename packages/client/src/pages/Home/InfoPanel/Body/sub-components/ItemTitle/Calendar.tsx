@@ -1,10 +1,11 @@
 import IconCalendar from "PUBLIC_DIR/images/calendar.info.panel.react.svg?url";
 import { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
+import type { DateTime } from "luxon";
 import { Calendar } from "@docspace/shared/components/calendar";
 import { isMobile } from "@docspace/shared/utils";
 import { ReactSVG } from "react-svg";
-import { now, formatDate, parseToDateTime, type DateTime } from "@docspace/shared/utils/date";
+import { now, formatDate, parseToDateTime } from "@docspace/shared/utils/date";
 
 const heightCalendar = 376;
 const heightCalendarMobile = 420;

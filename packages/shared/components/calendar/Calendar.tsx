@@ -29,6 +29,7 @@ import classNames from "classnames";
 import { Scrollbar } from "../scrollbar";
 import { Days, Months, Years } from "./sub-components";
 
+import type { DateTime } from "luxon";
 import {
   now,
   parseToDateTime,
@@ -36,7 +37,6 @@ import {
   endOf,
   dateDiffAbs,
   formatDate,
-  type DateTime,
 } from "../../utils/date";
 
 import { getValidDates } from "./utils";

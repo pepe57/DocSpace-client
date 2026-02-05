@@ -26,10 +26,11 @@
 
 import React from "react";
 import { StoryObj, Meta } from "@storybook/react";
+import type { DateTime } from "luxon";
 
 import { DateTimePicker } from "./DateTimePicker";
 import { DateTimePickerProps } from "./DateTimerPicker.types";
-import { now, type DateTime } from "../../utils/date";
+import { now } from "../../utils/date";
 
 const locales = [
   "az",

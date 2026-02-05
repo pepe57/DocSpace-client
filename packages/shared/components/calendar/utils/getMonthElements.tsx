@@ -26,6 +26,7 @@
 
 import React from "react";
 import classNames from "classnames";
+import type { DateTime } from "luxon";
 
 import styles from "../Calendar.module.scss";
 import {
@@ -34,7 +35,6 @@ import {
   endOf,
   startOf,
   createDateTime,
-  type DateTime,
 } from "../../../utils/date";
 
 const parseMonth = (key: string): DateTime | null => {

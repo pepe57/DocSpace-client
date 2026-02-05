@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { DateTime } from "luxon";
 import {
   startOf,
   formatDate,
   subtractFromDate,
   addToDate,
   daysInMonth,
-  type DateTime,
 } from "../../../utils/date";
 
 export const getCalendarDays = (date: DateTime) => {

@@ -27,8 +27,7 @@
 // @ts-nocheck
 
 import { AxiosRequestConfig } from "axios";
-
-import type { DateTime } from "../../utils/date";
+import type { DateTime } from "luxon";
 import { Nullable } from "types";
 import {
   FolderType,

@@ -70,11 +70,11 @@ import {
   STORAGE_TARIFF_DEACTIVATED,
   WEB_SEARCH,
 } from "@docspace/shared/constants";
+import type { DateTime } from "luxon";
 import {
   now,
   subtractFromDate,
   formatDate as formatDateUtil,
-  type DateTime,
 } from "@docspace/shared/utils/date";
 
 // Constants for feature identifiers

@@ -26,10 +26,11 @@
 
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
+import type { DateTime } from "luxon";
 
 import { TimePicker } from "./TimePicker";
 import { TimePickerProps } from "./TimePicker.types";
-import { createDateTime, formatDate, type DateTime } from "../../utils/date";
+import { createDateTime, formatDate } from "../../utils/date";
 
 const meta = {
   title: "Components/TimePicker",

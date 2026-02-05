@@ -27,7 +27,7 @@
 // @ts-nocheck
 
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import type { DateTime } from "../../utils/date";
+import type { DateTime } from "luxon";
 
 import {
   ConflictResolveType,

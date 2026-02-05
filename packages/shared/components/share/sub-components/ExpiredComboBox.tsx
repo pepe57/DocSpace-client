@@ -26,8 +26,9 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
+import type { DateTime } from "luxon";
 
-import { now, addToDate, type DateTime } from "../../../utils/date";
+import { now, addToDate } from "../../../utils/date";
 
 import { Text } from "../../text";
 import { Link, LinkType } from "../../link";

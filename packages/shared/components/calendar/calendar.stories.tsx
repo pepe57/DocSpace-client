@@ -26,10 +26,11 @@
 
 import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
+import type { DateTime } from "luxon";
 
 import { Calendar } from "./Calendar";
 import { CalendarProps } from "./Calendar.types";
-import { now, type DateTime } from "../../utils/date";
+import { now } from "../../utils/date";
 
 const meta = {
   title: "Components/Calendar",

@@ -28,7 +28,8 @@ import React, { useState, useMemo } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
-import { parseToDateTime, isSameDay, now, type DateTime } from "@docspace/shared/utils/date";
+import type { DateTime } from "luxon";
+import { parseToDateTime, isSameDay, now } from "@docspace/shared/utils/date";
 import { getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 

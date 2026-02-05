@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { DateTime } from "../../../utils/date";
+import type { DateTime } from "luxon";
 
 export const getCalendarYears = (observedDate: DateTime) => {
   const years: string[] = [];
