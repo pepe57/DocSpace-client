@@ -40,6 +40,8 @@ import { ContextMenuButton } from "@docspace/shared/components/context-menu-butt
 import { Text } from "@docspace/shared/components/text";
 import { TDefaultTemplateItem } from "@docspace/shared/types";
 import { UrlActionType } from "@docspace/shared/enums";
+import { getCorrectDate, getCookie } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";
 import { ResetTemplateDialog } from "SRC_DIR/components/dialogs";
@@ -55,6 +57,7 @@ type Props = {
   getFilterParam?: TStore["defaultTemplatesStore"]["getFilterParam"];
   openUrl?: TStore["settingsStore"]["openUrl"];
   uploadTemplate?: TStore["defaultTemplatesStore"]["uploadTemplate"];
+  culture?: TStore["settingsStore"]["culture"];
   index?: number;
 };
 
@@ -66,6 +69,7 @@ const TemplatesRow = ({
   resetTemplate,
   openUrl,
   uploadTemplate,
+  culture,
   index,
 }: Props) => {
   const { t } = useTranslation(["Settings", "EmptyView", "Common"]);
@@ -148,8 +152,9 @@ const TemplatesRow = ({
 
   const filterParam = getFilterParam?.(item.extension);
 
+  const locale = getCookie(LANGUAGE) ?? culture ?? "en";
   const lastModified = item.lastModified
-    ? moment(item.lastModified).format("MM/DD/YYYY hh:mm A")
+    ? getCorrectDate(locale, item.lastModified)
     : t("Settings:NotModified");
 
   return (
@@ -226,7 +231,7 @@ export default inject(
     const { setTemplate, getFilterParam, resetTemplate, uploadTemplate } =
       defaultTemplatesStore;
 
-    const { openUrl } = settingsStore;
+    const { openUrl, culture } = settingsStore;
 
     return {
       getFileIcon,
@@ -235,6 +240,7 @@ export default inject(
       resetTemplate,
       openUrl,
       uploadTemplate,
+      culture,
     };
   },
 )(observer(TemplatesRow));

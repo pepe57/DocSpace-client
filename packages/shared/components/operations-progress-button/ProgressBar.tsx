@@ -67,7 +67,6 @@ const ProgressBar = ({
       closeTimerRef.current = null;
     }
   };
-
   const onCloseClick = () => {
     if (onClearProgress && operation) {
       setIsVisible(false);

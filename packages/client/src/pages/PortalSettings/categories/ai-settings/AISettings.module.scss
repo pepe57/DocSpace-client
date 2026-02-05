@@ -115,3 +115,9 @@
   height: 33px;
   margin-bottom: 20px;
 }
+
+.hasError {
+  :global(.combo-button) {
+    border-color: var(--input-error-border);
+  }
+}

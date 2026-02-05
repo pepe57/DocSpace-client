@@ -77,6 +77,7 @@ newInstance
       "Errors",
       "Translations",
       "FormFillingTipsDialog",
+      "Settings",
     ],
 
     backend: {

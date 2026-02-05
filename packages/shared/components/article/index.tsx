@@ -92,7 +92,6 @@ const Article = ({
   isFreeTariff,
   isGracePeriod,
   isLicenseDateExpired,
-  isLicenseExpiring,
   isPaymentPageAvailable,
   isTrial,
   standalone,

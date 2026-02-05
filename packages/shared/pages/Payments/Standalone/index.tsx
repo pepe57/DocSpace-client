@@ -50,6 +50,11 @@ export const StandalonePage = ({
   docspaceFaqUrl,
   licenseQuota,
   openOnNewPage,
+  isLifetimeLicense,
+  isGracePeriod,
+  isNotPaidPeriod,
+  gracePeriodEndDate,
+  delayDaysCount,
 }: IPaymentsProps) => {
   return (
     <div data-testid="standalone-page" className={styles.pageWrapper}>
@@ -81,6 +86,11 @@ export const StandalonePage = ({
           docspaceFaqUrl={docspaceFaqUrl}
           licenseQuota={licenseQuota}
           openOnNewPage={openOnNewPage}
+          isLifetimeLicense={isLifetimeLicense}
+          isGracePeriod={isGracePeriod}
+          isNotPaidPeriod={isNotPaidPeriod}
+          gracePeriodEndDate={gracePeriodEndDate}
+          delayDaysCount={delayDaysCount}
         />
       )}
       <LicenseContainer

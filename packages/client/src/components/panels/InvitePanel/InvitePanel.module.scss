@@ -62,7 +62,7 @@
   }
 
   :global(.access-selector) {
-    margin-inline-end: 0;
+    margin-inline-end: 0 !important;
 
     // Add space between access-selector's absolute positioned dropdown and modal footer
     .dropdown-container {
