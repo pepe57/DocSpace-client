@@ -24,100 +24,60 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins";
+import {http} from "msw";
+import {API_PREFIX, BASE_URL} from "../../e2e/utils";
 
-.aiSettingsContainer {
-  width: 100%;
-  max-width: 700px;
-}
+export const PATH_AI_PROVIDERS_DEFAULT = "ai/providers/default";
 
-.aiProvider,
-.mcpServers,
-.search {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+export const aiProvidersDefaultResolver = ({isNewProvider, isUpdatedProvider, isClaude, isOpenAI}: {
+  isNewProvider?: boolean,
+  isUpdatedProvider?: boolean,
+  isClaude?: boolean,
+  isOpenAI?: boolean
+}) => {
+  let response = null;
 
-  max-width: 700px;
-}
-
-.aiProvider {
-  margin-bottom: 24px;
-}
-
-.heading {
-  margin-bottom: 8px;
-}
-
-.description {
-  color: var(--settings-common-description-color);
-
-  margin-bottom: 8px;
-}
-
-.defaultProviderDescription {
-  margin-bottom: 16px;
-}
-
-.defaultProviderForm {
-  max-width: 340px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.defaultProviderFormButtons {
-  display: flex;
-  gap: 8px;
-}
-
-.learnMoreLink {
-  margin-bottom: 16px;
-}
-
-.addProviderButton {
-  margin-bottom: 20px;
-}
-
-.providerList,
-.mcpList {
-  width: 100%;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 340px);
-  gap: 20px;
-
-  @include mixins.mobile {
-    grid-template-columns: 1fr;
+  if (isNewProvider) {
+    response = {
+      providerId: 2,
+      defaultModel: "gpt-5.1-2025-11-13",
+      providerTitle: "new provider",
+    }
+  } else if (isUpdatedProvider) {
+    response = {
+      providerId: 2,
+      defaultModel: "gpt-5.1-2025-11-13",
+      providerTitle: "updated provider",
+    }
+  } else if (isOpenAI) {
+    response = {
+      providerId: 2,
+      defaultModel: "gpt-5.1-2025-11-13",
+      providerTitle: "OpenAI",
+    }
+  } else {
+    response = {
+      providerId: 1,
+      defaultModel: "claude-opus-4-5-20251101",
+      providerTitle: "Claude AI",
+    }
   }
-}
 
-.providerList {
-  margin-bottom: 20px;
-}
+  return new Response(JSON.stringify(
+    {
+      response,
+      status: 0,
+      statusCode: 200,
+    }
+  ));
+};
 
-.mcpHeading {
-  margin-bottom: 20px;
-}
-
-.mcpListContainer {
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.aiContextMenuDropDown {
-  margin-top: 15px;
-}
-
-.tabsLoader {
-  width: min(400px, 100%);
-  height: 33px;
-  margin-bottom: 20px;
-}
-
-.hasError {
-  :global(.combo-button) {
-    border-color: var(--input-error-border);
-  }
-}
+export const aiProvidersDefaultHandler = (
+  port: string,
+  data: { isNewProvider?: boolean, isUpdatedProvider?: boolean, isClaude?: boolean, isOpenAI?: boolean }
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_DEFAULT}`,
+    () => aiProvidersDefaultResolver(data),
+  );
+};
