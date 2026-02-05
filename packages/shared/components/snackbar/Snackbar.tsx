@@ -75,7 +75,8 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
   componentDidMount() {
     const { onLoad } = this.props;
     onLoad?.();
-    window.addEventListener("blur", this.onClickIFrame);
+    const skipBlur = this.props.skipBlur ?? false;
+    if (!skipBlur) window.addEventListener("blur", this.onClickIFrame);
   }
 
   componentWillUnmount() {

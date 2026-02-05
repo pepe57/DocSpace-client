@@ -34,29 +34,46 @@ interface QuotaInfo {
   description: string;
 }
 
-const Bar: React.FC = () => {
+interface BarProps {
+  quotaExceededScope?: number;
+}
+
+const Bar: React.FC<BarProps> = ({ quotaExceededScope }) => {
   const { t } = useTranslation("Common");
 
   const [quotaInfo, setQuotaInfo] = React.useState<QuotaInfo | null>(null);
 
-  const getQuotaInfo = (type: "room" | "user" | "tenant"): QuotaInfo => {
+  const getQuotaInfo = (
+    type: "room" | "user" | "tenant",
+    initial: boolean = false,
+  ): QuotaInfo => {
     switch (type) {
       case "room":
         return {
-          description: t("YourFurtherEditsNotSaved"),
-          header: t("RoomQuotaLimitWarning"),
+          description: initial
+            ? t("EditingUnavailable")
+            : t("YourFurtherEditsNotSaved"),
+          header: initial ? t("RoomQuotaReached") : t("RoomQuotaLimitWarning"),
         };
       case "user":
         return {
-          description: t("YourFurtherEditsNotSaved"),
-          header: t("UserQuotaLimitWarning"),
+          description: initial
+            ? t("EditingUnavailable")
+            : t("YourFurtherEditsNotSaved"),
+          header: initial ? t("UserQuotaReached") : t("UserQuotaLimitWarning"),
         };
       case "tenant":
         return {
-          description: t("YourFurtherEditsNotSaved"),
-          header: t("PortalQuotaLimitWarning", {
-            productName: t("ProductName"),
-          }),
+          description: initial
+            ? t("EditingUnavailable")
+            : t("YourFurtherEditsNotSaved"),
+          header: initial
+            ? t("PortalQuotaReached", {
+                productName: t("ProductName"),
+              })
+            : t("PortalQuotaLimitWarning", {
+                productName: t("ProductName"),
+              }),
         };
     }
   };
@@ -86,6 +103,17 @@ const Bar: React.FC = () => {
 
     SocketHelper?.on(SocketEvents.QuotaExceeded, handleQuotaChange);
 
+    if (quotaExceededScope !== undefined) {
+      const scope =
+        quotaExceededScope === 0
+          ? "user"
+          : quotaExceededScope === 1
+            ? "room"
+            : "tenant";
+      const info = getQuotaInfo(scope, true);
+      setQuotaInfo(info);
+    }
+
     return () => {
       SocketHelper?.off(SocketEvents.QuotaExceeded, handleQuotaChange);
     };
@@ -101,6 +129,7 @@ const Bar: React.FC = () => {
       showIcon
       additionalHeaderText={quotaInfo.description}
       onAction={onAction}
+      skipBlur
     />
   ) : null;
 };

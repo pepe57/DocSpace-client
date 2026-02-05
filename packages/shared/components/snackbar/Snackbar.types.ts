@@ -108,6 +108,8 @@ export type SnackbarProps = {
    * Callback when close button is clicked.
    */
   onClose?: () => void;
+
+  skipBlur?: boolean;
 };
 
 /**

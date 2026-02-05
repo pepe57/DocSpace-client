@@ -214,6 +214,7 @@ export interface IInitialConfig {
   startFillingMode?: StartFillingMode;
   fillingSessionId?: string;
   fillingStatus?: boolean;
+  quotaExceededScope?: number;
 }
 
 export type TError = {

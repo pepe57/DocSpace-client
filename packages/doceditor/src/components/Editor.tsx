@@ -323,7 +323,7 @@ const Editor = ({
       }}
     >
       <div style={{ height: "auto", overflow: "visible" }}>
-        <Bar />
+        <Bar quotaExceededScope={config?.quotaExceededScope} />
       </div>
       <DocumentEditor
         id={EDITOR_ID}
