@@ -92,7 +92,7 @@ import {
   TPasswordHash,
   TTimeZone,
 } from "../api/settings/types";
-import { TopLoaderService } from "@docspace/ui-kit";
+import { TopLoaderService } from "@docspace/ui-kit/components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
