@@ -320,6 +320,9 @@ importers:
       '@types/lodash.debounce':
         specifier: ^4.0.9
         version: 4.0.9
+      '@types/luxon':
+        specifier: 3.6.2
+        version: 3.6.2
       '@types/react':
         specifier: 19.2.10
         version: 19.2.10
