@@ -78,6 +78,7 @@ export const enum SocketEvents {
   SelfRestrictionFolder = "s:self-restriction-folder",
   ChaneFolderAccessRights = "s:change-access-rights-folder",
   ExportChat = "s:export-chat",
+  QuotaExceeded = "s:quota_exceeded",
 }
 
 /**
@@ -322,6 +323,13 @@ export type TListenEventCallbackMap = {
     data: string;
   }) => void;
   [SocketEvents.ExportChat]: (data: ExportChatEventData) => void;
+  [SocketEvents.QuotaExceeded]: (eventData: {
+    data: {
+      id: string;
+      room: string;
+      scope: "room" | "user" | "tenant";
+    };
+  }) => void;
 };
 
 /**

@@ -55,6 +55,11 @@ const StandalonePage = (props) => {
     licenseQuota,
     openOnNewPage,
     logoText,
+    isLifetimeLicense,
+    isGracePeriod,
+    isNotPaidPeriod,
+    gracePeriodEndDate,
+    delayDaysCount,
   } = props;
 
   const { t, ready } = useTranslation("Common");
@@ -72,7 +77,7 @@ const StandalonePage = (props) => {
     showPortalSettingsLoader
   )
     return <PaymentsStandaloneLoader isEnterprise={!isTrial} />;
-
+  console.log("isGracePeriod", isGracePeriod);
   return (
     <StandalonePageComponent
       isTrial={isTrial}
@@ -90,6 +95,11 @@ const StandalonePage = (props) => {
       licenseQuota={licenseQuota}
       openOnNewPage={openOnNewPage}
       logoText={logoText}
+      isLifetimeLicense={isLifetimeLicense}
+      isGracePeriod={isGracePeriod}
+      isNotPaidPeriod={isNotPaidPeriod}
+      gracePeriodEndDate={gracePeriodEndDate}
+      delayDaysCount={delayDaysCount}
     />
   );
 };
@@ -113,14 +123,22 @@ export default inject(
       salesEmail,
       licenseQuota,
     } = paymentStore;
-    const { isLoaded: isLoadedCurrentQuota, isTrial } = currentQuotaStore;
+    const {
+      isLoaded: isLoadedCurrentQuota,
+      isTrial,
+      isLifetimeLicense,
+    } = currentQuotaStore;
     const {
       isLoaded: isLoadedTariffStatus,
       trialDaysLeft,
       paymentDate,
       isLicenseDateExpired,
       isDeveloper,
+      isGracePeriod,
       isEnterprise,
+      isNotPaidPeriod,
+      gracePeriodEndDate,
+      delayDaysCount,
     } = currentTariffStatusStore;
 
     const { showPortalSettingsLoader } = clientLoadingStore;
@@ -150,6 +168,11 @@ export default inject(
       licenseQuota,
       openOnNewPage,
       logoText,
+      isLifetimeLicense,
+      isGracePeriod,
+      isNotPaidPeriod,
+      gracePeriodEndDate,
+      delayDaysCount,
     };
   },
 )(observer(StandalonePage));

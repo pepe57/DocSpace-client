@@ -30,6 +30,11 @@ describe("StandalonePage", () => {
     isEnterprise: true,
     logoText: "DocSpace",
     openOnNewPage: false,
+    isLifetimeLicense: true,
+    isGracePeriod: false,
+    isNotPaidPeriod: false,
+    gracePeriodEndDate: "2025-07-11",
+    delayDaysCount: "30",
     licenseQuota: {
       userQuota: {},
       license: {
