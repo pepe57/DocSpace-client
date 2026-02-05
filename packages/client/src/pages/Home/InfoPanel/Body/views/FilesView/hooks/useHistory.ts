@@ -50,7 +50,11 @@ const PAGE_COUNT = 100;
 const addLinksToHistory = (fetchedHistory: TFeed, links: RoomMember[]) => {
   const historyWithLinks: TFeedAction<TFeedData | RoomMember>[] =
     fetchedHistory.items.map((feed) => {
-      const { actionType, targetType } = getFeedInfo(feed);
+      const feedInfo = getFeedInfo(feed);
+
+      if (!feedInfo) return feed;
+
+      const { actionType, targetType } = feedInfo;
 
       if (
         targetType !== "roomExternalLink" ||

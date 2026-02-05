@@ -58,11 +58,15 @@ const HistoryTitleBlock = ({
 }) => {
   const { t } = useTranslation(["InfoPanel", "Common", "Translations"]);
 
-  const { actionType, targetType } = getFeedInfo(feed);
-
   const hasRelatedItems = feed.related.length > 0;
 
   const { getFeedTranslation } = useFeedTranslation(feed, hasRelatedItems);
+
+  const feedInfo = getFeedInfo(feed);
+
+  if (!feedInfo) return null;
+
+  const { actionType, targetType } = feedInfo;
 
   const isDisplayFolderInfo =
     ((targetType === "file" || targetType === "folder") &&
