@@ -119,7 +119,7 @@ const ExpiredComboBox = ({
 
       return (
         <Trans t={t} i18nKey="LinkExpireAfter" ns="Common">
-          The link will expire after
+          The link will expire
           <LinkWithDropdown
             className={styles.expiredOptions}
             color={globalColors.lightBlueMain}

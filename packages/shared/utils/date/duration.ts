@@ -69,6 +69,11 @@ export function humanizeDuration(
 ): string {
   const duration = createDuration(value, unit);
 
+  // Get locale from options or browser
+  const locale =
+    options?.locale ||
+    (typeof navigator !== "undefined" ? navigator.language : "en");
+
   // Shift to larger units for readability
   const shifted = duration
     .shiftTo("years", "months", "days", "hours", "minutes", "seconds")
@@ -84,20 +89,17 @@ export function humanizeDuration(
     "seconds",
   ];
 
-  let significantUnit: string | null = null;
+  let significantUnit: Intl.RelativeTimeFormatUnit = "second";
   let significantValue = 0;
 
   for (const u of units) {
     const val = shifted[u] ?? 0;
     if (Math.abs(val) >= 1) {
-      significantUnit = u;
+      // Convert plural unit names to Intl.RelativeTimeFormat unit names
+      significantUnit = u.slice(0, -1) as Intl.RelativeTimeFormatUnit;
       significantValue = Math.round(val);
       break;
     }
-  }
-
-  if (!significantUnit) {
-    return options?.locale ? "a few seconds" : "a few seconds";
   }
 
   // Apply thresholds if provided
@@ -107,57 +109,25 @@ export function humanizeDuration(
       options.thresholds.days &&
       Math.abs(totalDays) >= options.thresholds.days
     ) {
-      significantUnit = "days";
+      significantUnit = "day";
       significantValue = Math.round(totalDays);
     }
   }
 
-  // Format the result
-  const absValue = Math.abs(significantValue);
-  const unitSingular = significantUnit.slice(0, -1); // Remove 's'
-
-  let result: string;
-  if (absValue === 1) {
-    // Handle special cases
-    switch (unitSingular) {
-      case "year":
-        result = "a year";
-        break;
-      case "month":
-        result = "a month";
-        break;
-      case "week":
-        result = "a week";
-        break;
-      case "day":
-        result = "a day";
-        break;
-      case "hour":
-        result = "an hour";
-        break;
-      case "minute":
-        result = "a minute";
-        break;
-      case "second":
-        result = "a few seconds";
-        break;
-      default:
-        result = `1 ${unitSingular}`;
-    }
-  } else {
-    result = `${absValue} ${significantUnit}`;
-  }
-
-  // Add suffix if requested (like "in 2 days" or "2 days ago")
+  // Use Intl.RelativeTimeFormat for localized output
   if (options?.addSuffix) {
-    if (significantValue > 0) {
-      result = `in ${result}`;
-    } else if (significantValue < 0) {
-      result = `${result} ago`;
-    }
+    // With suffix: "in 2 days" / "2 days ago"
+    const rtf = new Intl.RelativeTimeFormat(locale, {
+      numeric: "auto",
+      style: "long",
+    });
+    return rtf.format(significantValue, significantUnit);
   }
 
-  return result;
+  // Without suffix: use Luxon's toHuman() for localized duration
+  const pluralUnit = `${significantUnit}s` as DurationUnit;
+  const durationToFormat = createDuration(Math.abs(significantValue), pluralUnit);
+  return durationToFormat.toHuman({ locale });
 }
 
 /**

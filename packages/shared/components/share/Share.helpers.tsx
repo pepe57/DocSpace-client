@@ -61,6 +61,9 @@ import {
   humanizeDuration,
 } from "../../utils/date";
 
+import { getCookie } from "../../utils/cookie";
+import { LANGUAGE } from "../../constants";
+
 import type { RoomMember, TRoom } from "../../api/rooms/types";
 import type {
   TAvailableShareRights,
@@ -271,17 +274,26 @@ export const getDate = (expirationDate: string) => {
     dateDiff(expDate, currentDate, "minutes"),
   );
 
+  const locale = getCookie(LANGUAGE) ?? "en";
+
   if (calculatedHours < 1) {
     return humanizeDuration(calculatedMinutes + 1, "minutes", {
+      locale,
       addSuffix: true,
     });
   }
 
   if (calculatedDays < 1) {
-    return humanizeDuration(calculatedHours + 1, "hours", { addSuffix: true });
+    return humanizeDuration(calculatedHours + 1, "hours", {
+      addSuffix: true,
+      locale,
+    });
   }
 
-  return humanizeDuration(calculatedDays + 1, "days", { addSuffix: true });
+  return humanizeDuration(calculatedDays + 1, "days", {
+    addSuffix: true,
+    locale,
+  });
 };
 
 export const isExpired = (expirationDate: string | Date) => {
