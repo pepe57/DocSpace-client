@@ -38,7 +38,7 @@ import { RadioButton } from "@docspace/ui-kit/components/radio-button";
 import { startBackup } from "../../../api/portal";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { BackupStorageLocalKey, BackupStorageType } from "../../../enums";
-import StatusMessage from "../../../components/status-message";
+import StatusMessage from "@docspace/ui-kit/components/status-message";
 import SocketHelper, {
   SocketEvents,
   TSocketListener,
