@@ -196,6 +196,9 @@ const ManualBackup = ({
     "",
   );
 
+  const [showCancelOperation, setShowCancelOperation] = useState(false);
+  const [isCancelOperation, setIsCancelOperation] = useState(false);
+
   const isCheckedTemporaryStorage = storageType === TEMPORARY_STORAGE;
   const isCheckedDocuments = storageType === DOCUMENTS;
   const isCheckedThirdParty = storageType === THIRD_PARTY_RESOURCE;
@@ -223,9 +226,12 @@ const ManualBackup = ({
         t,
         setDownloadingProgress,
         setTemporaryLink,
+        setShowCancelOperation,
+        showCancelOperation,
       );
 
       if (!options) return;
+
       const { error, success, warning } = options;
 
       if (error) {
@@ -262,8 +268,10 @@ const ManualBackup = ({
       JSON.stringify(TEMPORARY_STORAGE),
     );
 
-    setDownloadingProgress(0)
+    setDownloadingProgress(0);
     setIsBackupProgressVisible(true);
+    setIsCancelOperation(false);
+    setShowCancelOperation(false);
 
     try {
       await startBackup(
@@ -272,6 +280,7 @@ const ManualBackup = ({
         false,
         isManagement,
       );
+      setShowCancelOperation(true);
     } catch (err) {
       let customText;
 
@@ -342,10 +351,13 @@ const ManualBackup = ({
 
     setDownloadingProgress(0);
     setIsBackupProgressVisible(true);
+    setIsCancelOperation(false);
+    setShowCancelOperation(false);
 
     try {
       await startBackup(moduleType, storageParams, false, isManagement);
 
+      setShowCancelOperation(true);
       setTemporaryLink("");
     } catch (err) {
       let customText;
@@ -390,7 +402,13 @@ const ManualBackup = ({
   };
 
   const onCancelOperation = async () => {
-    await cancelBackup();
+    setShowCancelOperation(false);
+    setIsCancelOperation(true);
+    const res = await cancelBackup();
+
+    if (!res) {
+      setShowCancelOperation(true);
+    }
   };
 
   if (isEmptyContentBeforeLoader && !isInitialLoading) return null;
@@ -670,7 +688,7 @@ const ManualBackup = ({
             },
           ]}
           cancelUpload={onCancelOperation}
-          showCancelButton
+          showCancelButton={!isCancelOperation && showCancelOperation}
           clearOperationsData={() => setIsBackupProgressVisible(false)}
         />
       ) : null}
