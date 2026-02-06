@@ -37,7 +37,7 @@ import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
 
 import { isMobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 const Selectors = styled.div`
   position: relative;

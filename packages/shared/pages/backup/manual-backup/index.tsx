@@ -426,7 +426,7 @@ const ManualBackup = ({
             href={dataBackupUrl}
             target={LinkTarget.blank}
             fontSize="13px"
-            color={currentColorScheme?.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             isHovered
             dataTestId="creating_backup_learn_link"
           >

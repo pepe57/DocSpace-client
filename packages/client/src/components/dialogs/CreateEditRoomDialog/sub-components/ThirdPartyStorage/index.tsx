@@ -134,7 +134,7 @@ const ThirdPartyStorage = ({
 						href="/portal-settings/integration/third-party-services"
 						type={LinkType.page}
 						noHover
-						color={currentColorScheme?.main?.accent}
+						color={currentColorScheme?.main?.accent ?? undefined}
 					>
 						{t("Translations:ThirdPartyTitle")}
 					</Link>

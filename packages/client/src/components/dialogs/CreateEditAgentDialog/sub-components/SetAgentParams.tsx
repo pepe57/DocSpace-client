@@ -29,7 +29,7 @@ import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { isMobile, mobile } from "@docspace/shared/utils";
 
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";

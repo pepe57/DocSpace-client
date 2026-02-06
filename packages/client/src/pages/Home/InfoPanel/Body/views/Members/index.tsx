@@ -35,7 +35,8 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
-import { getCookie, isDesktop } from "@docspace/shared/utils";
+import { isDesktop } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/ui-kit/components/toast";

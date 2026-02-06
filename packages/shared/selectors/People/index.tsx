@@ -56,7 +56,7 @@ import { TUser } from "../../api/people/types";
 import { TGroup } from "../../api/groups/types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Text } from "@docspace/ui-kit/components/text";
-import { globalColors } from "../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 import { isNextImage } from "../../utils/typeGuards";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";

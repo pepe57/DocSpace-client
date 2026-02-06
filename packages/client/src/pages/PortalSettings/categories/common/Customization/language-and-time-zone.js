@@ -34,7 +34,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
-import { setCookie } from "@docspace/shared/utils/cookie";
+import { setCookie } from "@docspace/ui-kit/utils/cookie";
 import { useNavigate } from "react-router";
 import { isMobileDevice, isBetaLanguage } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";

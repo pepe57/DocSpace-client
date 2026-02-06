@@ -9,7 +9,7 @@ import { ErrorOfflineContainer } from "./ErrorOffline";
 import ErrorUnavailable from "./ErrorUnavailable";
 import { AccessRestricted } from "./AccessRestricted";
 import FirebaseHelper from "../../utils/firebase";
-import type { TColorScheme } from "../../themes";
+import type { TColorScheme } from "@docspace/ui-kit/providers/theme";
 import { DeviceType } from "../../enums";
 
 // Mock react-svg

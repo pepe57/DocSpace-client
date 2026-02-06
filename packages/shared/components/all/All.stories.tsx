@@ -67,7 +67,7 @@ import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Toast, toastr } from "@docspace/ui-kit/components/toast";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { globalColors } from "../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 const arrayItems = [
 	{

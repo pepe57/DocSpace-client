@@ -51,7 +51,7 @@ import {
 	getUserTypeDescription,
 } from "@docspace/shared/utils/common";
 import { isMobile, classNames } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { TDirectionY } from "@docspace/shared/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { UserStore } from "@docspace/shared/store/UserStore";

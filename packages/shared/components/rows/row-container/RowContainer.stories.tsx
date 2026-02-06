@@ -43,7 +43,7 @@ import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { RowContainer } from ".";
 
 import { RowContainerProps } from "./RowContainer.types";
-import { globalColors } from "../../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 import styles from "./RowContainer.stories.module.scss";
 

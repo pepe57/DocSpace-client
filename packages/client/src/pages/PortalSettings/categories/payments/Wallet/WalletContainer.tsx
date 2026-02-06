@@ -36,7 +36,7 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
 import { Link } from "@docspace/ui-kit/components/link";
-import { TColorScheme } from "@docspace/shared/themes";
+import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
@@ -200,7 +200,7 @@ const Wallet = (props: WalletProps) => {
           textDecoration="underline"
           fontWeight={600}
           href={walletHelpUrl}
-          color={currentColorScheme?.main?.accent}
+          color={currentColorScheme?.main?.accent ?? undefined}
           dataTestId="wallet_learn_more_link"
         >
           {t("Common:LearnMore")}

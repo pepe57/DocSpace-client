@@ -32,7 +32,7 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import styles from "../../active-sessions.module.scss";
 
 const SessionsTableRow = (props) => {

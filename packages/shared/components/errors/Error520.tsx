@@ -108,7 +108,7 @@ const Error520 = ({
           fontWeight={600}
           type={LinkType.action}
           onClick={onReloadClick}
-          color={currentColorScheme?.main?.accent}
+          color={currentColorScheme?.main?.accent ?? undefined}
         >
           {t("ReloadPage")}
         </Link>

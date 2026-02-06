@@ -47,7 +47,7 @@ import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
+import { getCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
 import { handleCopy } from "@docspace/shared/utils/copy";
 
 import "@docspace/shared/styles/theme.scss";

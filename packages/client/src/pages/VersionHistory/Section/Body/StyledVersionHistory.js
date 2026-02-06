@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 import { Row } from "@docspace/shared/components/rows";
 import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 const StyledBody = styled.div`
   height: 100%;

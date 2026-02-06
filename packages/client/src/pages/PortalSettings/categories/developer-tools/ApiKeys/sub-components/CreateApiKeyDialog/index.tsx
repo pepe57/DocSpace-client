@@ -46,7 +46,7 @@ import { Tabs, TabsTypes, TTabItem } from "@docspace/ui-kit/components/tabs";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { CreateApiKeyDialogProps, TPermissionsList } from "../../types";
 import {
   getCategoryTranslation,

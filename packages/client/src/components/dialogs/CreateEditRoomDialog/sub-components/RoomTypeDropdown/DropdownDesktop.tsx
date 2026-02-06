@@ -28,7 +28,7 @@ import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";

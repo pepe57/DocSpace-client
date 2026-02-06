@@ -40,7 +40,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { convertToLanguage } from "@docspace/shared/utils/common";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getCookie } from "@docspace/shared/utils/cookie";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const myDocumentsFolderId = 2;

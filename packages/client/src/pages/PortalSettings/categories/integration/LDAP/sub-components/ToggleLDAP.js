@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Badge } from "@docspace/ui-kit/components/badge";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { mobile } from "@docspace/shared/utils";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";

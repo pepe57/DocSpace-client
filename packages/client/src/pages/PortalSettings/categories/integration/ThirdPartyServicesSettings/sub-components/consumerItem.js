@@ -29,7 +29,7 @@ import { ReactSVG } from "react-svg";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import { Text } from "@docspace/ui-kit/components/text";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { thirdpartiesLogo } from "@docspace/shared/utils/image-thirdparties";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import ConsumerToggle from "./consumerToggle";

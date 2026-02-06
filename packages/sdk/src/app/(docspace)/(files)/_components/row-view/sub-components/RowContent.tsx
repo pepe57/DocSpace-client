@@ -39,7 +39,7 @@ import { FilesRowContent } from "@docspace/shared/components/files-row";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { SortByFieldName } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";

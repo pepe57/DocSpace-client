@@ -31,7 +31,7 @@ import isEqual from "lodash/isEqual";
 import { TTranslation } from "@docspace/shared/types";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { TColorScheme } from "@docspace/shared/themes";
+import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Text } from "@docspace/ui-kit/components/text";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -258,7 +258,7 @@ const InvitationSettings = ({
           <Link
             className="link-learn-more"
             dataTestId="invitation_settings_learn_more"
-            color={currentColorScheme.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             target={LinkTarget.blank}
             isHovered
             href={invitationSettingsUrl}

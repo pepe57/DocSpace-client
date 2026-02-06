@@ -36,7 +36,7 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/ui-kit/components/avatar";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { TGroup } from "@docspace/shared/api/groups/types";
 
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";

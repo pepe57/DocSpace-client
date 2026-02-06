@@ -64,7 +64,7 @@ import { BetaBadge } from "@docspace/shared/components/beta-badge";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import api from "@docspace/shared/api";
-import { setCookie, deleteCookie } from "@docspace/shared/utils/cookie";
+import { setCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
 import {
   InputSize,
   InputType,

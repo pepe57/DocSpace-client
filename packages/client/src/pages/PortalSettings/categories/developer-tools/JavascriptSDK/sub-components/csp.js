@@ -38,7 +38,7 @@ import { Link } from "@docspace/ui-kit/components/link";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
 import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 const CategoryHeader = styled.div`
   margin-top: 24px;

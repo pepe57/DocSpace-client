@@ -30,7 +30,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { RowContent } from ".";
-import { globalColors } from "../../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 import styles from "./RowContent.module.scss";
 
 const mainLink = (

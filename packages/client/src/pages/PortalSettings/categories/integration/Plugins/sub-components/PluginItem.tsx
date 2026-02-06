@@ -31,7 +31,7 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { Text } from "@docspace/ui-kit/components/text";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import PluginSettingsIconUrl from "PUBLIC_DIR/images/plugin.settings.react.svg?url";
 import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";

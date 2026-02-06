@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { getConvertedSize } from "@docspace/shared/utils/common";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import {
   StyledDiagramComponent,
   StyledFolderTagColor,

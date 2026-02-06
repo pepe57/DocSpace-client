@@ -117,7 +117,7 @@ const ProfileRemoveForm = ({
               <Link
                 type={LinkType.page}
                 href={legalTerms}
-                color={currentColorScheme?.main?.accent}
+                color={currentColorScheme?.main?.accent ?? undefined}
                 target={LinkTarget.blank}
                 dataTestId="privacy_policy_link"
               >
@@ -173,7 +173,7 @@ const ProfileRemoveForm = ({
               <Link
                 type={LinkType.page}
                 href={legalTerms}
-                color={currentColorScheme?.main?.accent}
+                color={currentColorScheme?.main?.accent ?? undefined}
                 target={LinkTarget.blank}
                 dataTestId="privacy_policy_link"
               >

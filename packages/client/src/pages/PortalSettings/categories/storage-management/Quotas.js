@@ -31,7 +31,7 @@ import { useTheme } from "styled-components";
 import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Badge } from "@docspace/ui-kit/components/badge";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { Link } from "@docspace/ui-kit/components/link";
 
 import { StyledBaseQuotaComponent, StyledMainTitle } from "./StyledComponent";

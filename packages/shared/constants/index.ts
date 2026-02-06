@@ -32,7 +32,7 @@ import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
 import ShareWeixinReactSvg from "PUBLIC_DIR/images/share.weixin.react.svg";
-import { globalColors } from "../themes/globalColors";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { FileFillingFormStatus } from "../enums";
 
 export { LOADER_STYLE } from "@docspace/ui-kit/constants";
@@ -59,7 +59,6 @@ export const OPEN_BACKUP_CODES_DIALOG = "openBackupCodesDialog";
 export const COUNT_FOR_SHOWING_BAR = 2;
 export const PERCENTAGE_FOR_SHOWING_BAR = 90;
 
-export const LANGUAGE = "asc_language";
 export const TIMEZONE = "timezone";
 
 export const MOBILE_FOOTER_HEIGHT = "64px";
@@ -73,75 +72,75 @@ export const LINKS_LIMIT_COUNT = 5;
 export const LOADER_TIMEOUT = 300;
 
 export const ROOMS_PROVIDER_TYPE_NAME = Object.freeze({
-  1: "Box",
-  2: "DropBox",
-  3: "Google Drive",
-  4: "kDrive",
-  5: "OneDrive",
-  6: "SharePoint",
-  7: "WebDav",
-  8: "Yandex",
+	1: "Box",
+	2: "DropBox",
+	3: "Google Drive",
+	4: "kDrive",
+	5: "OneDrive",
+	6: "SharePoint",
+	7: "WebDav",
+	8: "Yandex",
 });
 
 // extends FolderType keys
 export const FOLDER_NAMES = Object.freeze({
-  0: "default",
-  1: "common",
-  2: "bunch",
-  3: "trash",
-  5: "personal",
-  6: "share",
-  8: "projects",
-  10: "favorites",
-  11: "recent",
-  12: "templates",
-  13: "privacy",
-  14: "shared",
-  20: "archive",
-  31: "ai-agents",
+	0: "default",
+	1: "common",
+	2: "bunch",
+	3: "trash",
+	5: "personal",
+	6: "share",
+	8: "projects",
+	10: "favorites",
+	11: "recent",
+	12: "templates",
+	13: "privacy",
+	14: "shared",
+	20: "archive",
+	31: "ai-agents",
 });
 
 export const PROVIDERS_DATA = Object.freeze({
-  appleid: {
-    label: "apple",
-    icon: ShareAppleReactSvg,
-    iconOptions: undefined,
-  },
-  google: {
-    label: "google",
-    icon: ShareGoogleReactSvg,
-    iconOptions: undefined,
-  },
-  facebook: {
-    label: "facebook",
-    icon: ShareFacebookReactSvg,
-    iconOptions: undefined,
-  },
-  twitter: {
-    label: "twitter",
-    icon: ShareTwitterReactSvg,
-    iconOptions: undefined,
-  },
-  linkedin: {
-    label: "linkedin",
-    icon: ShareLinkedinReactSvg,
-    iconOptions: undefined,
-  },
-  microsoft: {
-    label: "microsoft",
-    icon: ShareMicrosoftReactSvg,
-    iconOptions: undefined,
-  },
-  zoom: {
-    label: "zoom",
-    icon: ShareZoomReactSvg,
-    iconOptions: undefined,
-  },
-  weixin: {
-    label: "weixin",
-    icon: ShareWeixinReactSvg,
-    iconOptions: undefined,
-  },
+	appleid: {
+		label: "apple",
+		icon: ShareAppleReactSvg,
+		iconOptions: undefined,
+	},
+	google: {
+		label: "google",
+		icon: ShareGoogleReactSvg,
+		iconOptions: undefined,
+	},
+	facebook: {
+		label: "facebook",
+		icon: ShareFacebookReactSvg,
+		iconOptions: undefined,
+	},
+	twitter: {
+		label: "twitter",
+		icon: ShareTwitterReactSvg,
+		iconOptions: undefined,
+	},
+	linkedin: {
+		label: "linkedin",
+		icon: ShareLinkedinReactSvg,
+		iconOptions: undefined,
+	},
+	microsoft: {
+		label: "microsoft",
+		icon: ShareMicrosoftReactSvg,
+		iconOptions: undefined,
+	},
+	zoom: {
+		label: "zoom",
+		icon: ShareZoomReactSvg,
+		iconOptions: undefined,
+	},
+	weixin: {
+		label: "weixin",
+		icon: ShareWeixinReactSvg,
+		iconOptions: undefined,
+	},
 });
 
 export const PASSWORD_LIMIT_SPECIAL_CHARACTERS = "!@#$%^&*";
@@ -153,126 +152,105 @@ export const FILLING_STATUS_ID = "fillingStatusDialog" as const;
 export const MEDIA_VIEW_URL = "/media/view/";
 export const PUBLIC_MEDIA_VIEW_URL = "/rooms/share/media/view";
 
-export const RTL_LANGUAGES = Object.freeze([
-  "ar",
-  "arc",
-  "dv",
-  "fa",
-  "ha",
-  "he",
-  "khw",
-  "ks",
-  "ku",
-  "ps",
-  "ur",
-  "yi",
-]);
-
 export const DEFAULT_FONT_FAMILY = "Open Sans, sans-serif, Arial";
 
 export const ONE_MEGABYTE = 1024 * 1024;
 export const COMPRESSION_RATIO = 2;
 export const NO_COMPRESSION_RATIO = 1;
 
-// Contains system fonts used in mac, ios, windows, android and linux
-export const SYSTEM_FONT_FAMILY =
-  "-apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Arial, sans-serif, Roboto, Noto Sans Arabic, Geeza Pro, Traditional Arabic, Noto Sans";
-
 export const HTML_EXST = [".htm", ".mht", ".html", ".mhtml"];
 
 export const EBOOK_EXST = [".fb2", ".pb2", ".ibk", ".prc", ".epub", ".djvu"];
 
-export const SYSTEM_THEME_KEY = "system_theme";
-
 const SDK_VERSION = "2.1.0";
 
 export const SDK_SCRIPT_URL =
-  typeof window !== "undefined"
-    ? `${window.location.origin}/static/scripts/sdk/${SDK_VERSION}/api.js`
-    : "";
+	typeof window !== "undefined"
+		? `${window.location.origin}/static/scripts/sdk/${SDK_VERSION}/api.js`
+		: "";
 
 export const ALLOWED_PASSWORD_CHARACTERS =
-  "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";
+	"a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";
 
 export const ALLOWED_MCP_CHARACTERS = "A-Z, a-z, 0-9, _, -.";
 
 export const ThirdPartyServicesUrlName = Object.freeze({
-  GoogleDrive: "google",
-  Box: "box",
-  Dropbox: "dropbox",
-  OneDrive: "skydrive",
-  Nextcloud: "nextcloud",
-  kDrive: "kdrive",
-  ownCloud: "owncloud",
-  WebDav: "webdav",
+	GoogleDrive: "google",
+	Box: "box",
+	Dropbox: "dropbox",
+	OneDrive: "skydrive",
+	Nextcloud: "nextcloud",
+	kDrive: "kdrive",
+	ownCloud: "owncloud",
+	WebDav: "webdav",
 });
 export const GENERAL_LINK_HEADER_KEY = "general-link_header";
 
 export const FOLDER_FORM_VALIDATION = /[*+:"<>?|\\\/]/gim;
 
 export const FILLING_FORM_STATUS_COLORS = Object.freeze({
-  [FileFillingFormStatus.None]: globalColors.mainRed,
-  [FileFillingFormStatus.Draft]: globalColors.mainRed,
-  [FileFillingFormStatus.YourTurn]: globalColors.lightBlueMain,
-  [FileFillingFormStatus.InProgress]: globalColors.gray,
-  [FileFillingFormStatus.Completed]: globalColors.mainGreen,
-  [FileFillingFormStatus.Stopped]: globalColors.mainRed,
+	[FileFillingFormStatus.None]: globalColors.mainRed,
+	[FileFillingFormStatus.Draft]: globalColors.mainRed,
+	[FileFillingFormStatus.YourTurn]: globalColors.lightBlueMain,
+	[FileFillingFormStatus.InProgress]: globalColors.gray,
+	[FileFillingFormStatus.Completed]: globalColors.mainGreen,
+	[FileFillingFormStatus.Stopped]: globalColors.mainRed,
 });
 
 export const OPERATIONS_NAME = Object.freeze({
-  trash: "trash",
-  deletePermanently: "deletePermanently",
-  download: "download",
-  duplicate: "duplicate",
-  exportIndex: "exportIndex",
-  markAsRead: "markAsRead",
-  copy: "copy",
-  move: "move",
-  convert: "convert",
-  other: "other",
-  upload: "upload",
-  deleteVersionFile: "deleteVersionFile",
-  backup: "backup",
+	trash: "trash",
+	deletePermanently: "deletePermanently",
+	download: "download",
+	duplicate: "duplicate",
+	exportIndex: "exportIndex",
+	markAsRead: "markAsRead",
+	copy: "copy",
+	move: "move",
+	convert: "convert",
+	other: "other",
+	upload: "upload",
+	deleteVersionFile: "deleteVersionFile",
+	backup: "backup",
 });
 
 export const thumbnailStatuses = {
-  WAITING: 0,
-  CREATED: 1,
-  ERROR: 2,
-  NOT_REQUIRED: 3,
+	WAITING: 0,
+	CREATED: 1,
+	ERROR: 2,
+	NOT_REQUIRED: 3,
 };
 
 export const THIRD_PARTY_SERVICES_URL =
-  "/portal-settings/integration/third-party-services?service=";
+	"/portal-settings/integration/third-party-services?service=";
 
 export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";
 
 // any unicode letters are allowed, characters are prohibited
 export const BRAND_NAME_REGEX =
-  /^[^\s-]([^<>\/\\|:*?"'`~!@#$%^&()+={}[\];,.])*[^\s-]$/;
+	/^[^\s-]([^<>\/\\|:*?"'`~!@#$%^&()+={}[\];,.])*[^\s-]$/;
 
 /**
  * Enum for type of confirm link.
  * @readonly
  */
 export const CategoryType = Object.freeze({
-  Personal: 0,
-  Shared: 1,
-  SharedRoom: 2,
-  Archive: 3,
-  ArchivedRoom: 4,
-  Favorite: 5,
-  Recent: 6,
-  Trash: 7,
-  Settings: 8,
-  Accounts: 9,
-  PublicRoom: 10,
-  Chat: 11,
-  SharedWithMe: 12,
-  Groups: 13,
-  Guests: 14,
-  AIAgents: 15,
-  AIAgent: 16,
+	Personal: 0,
+	Shared: 1,
+	SharedRoom: 2,
+	Archive: 3,
+	ArchivedRoom: 4,
+	Favorite: 5,
+	Recent: 6,
+	Trash: 7,
+	Settings: 8,
+	Accounts: 9,
+	PublicRoom: 10,
+	Chat: 11,
+	SharedWithMe: 12,
+	Groups: 13,
+	Guests: 14,
+	AIAgents: 15,
+	AIAgent: 16,
 });
 
 export const SHARED_MEMBERS_COUNT = 100;

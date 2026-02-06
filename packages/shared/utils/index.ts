@@ -33,11 +33,7 @@ import { isArrayEqual } from "./array";
 import * as email from "./email";
 import { EmailSettings, parseAddress, parseAddresses, getParts } from "./email";
 import useId from "./useId";
-import {
-  getCorrectTextAlign,
-  getCorrectBorderRadius,
-  getCorrectFourValuesStyle,
-} from "./rtlUtils";
+
 import { useClickOutside } from "@docspace/ui-kit/utils";
 import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
@@ -60,7 +56,6 @@ import {
   INFO_PANEL_WIDTH,
   isMobileDevice,
 } from "@docspace/ui-kit/utils/device";
-import { getCookie } from "./cookie";
 import { Context, Provider, Consumer } from "./context";
 import commonIconsStyles, {
   IconSizeType,
@@ -73,7 +68,6 @@ import { commonInputStyles } from "./commonInputStyles";
 import {
   RoomsTypeValues,
   RoomsTypes,
-  getSystemTheme,
   getEditorTheme,
   getLogoFromPath,
   isBetaLanguage,
@@ -86,7 +80,7 @@ import {
   FileFillingFormStatus,
   FolderType,
 } from "../enums";
-import { TFile } from "../api/files/types";
+import type { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
 import { injectDefaultTheme } from "./injectDefaultTheme";
@@ -103,7 +97,6 @@ import { getAiProviderIcon, getServerIcon, getAiProviderLabel } from "./ai";
 export {
   isBetaLanguage,
   getLogoFromPath,
-  getSystemTheme,
   getEditorTheme,
   RoomsTypeValues,
   RoomsTypes,
@@ -126,7 +119,6 @@ export {
   Context,
   Provider,
   Consumer,
-  getCookie,
   size,
   mobile,
   mobileMore,
@@ -136,9 +128,6 @@ export {
   isTablet,
   isDesktop,
   isTouchDevice,
-  getCorrectTextAlign,
-  getCorrectBorderRadius,
-  getCorrectFourValuesStyle,
   email,
   useId,
   useClickOutside,

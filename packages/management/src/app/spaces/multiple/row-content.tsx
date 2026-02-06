@@ -36,7 +36,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { globalColors } from "@docspace/shared/themes/globalColors";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import type { TPortals } from "@docspace/shared/api/management/types";
 
 import useDeviceType from "@/hooks/useDeviceType";

@@ -40,7 +40,7 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/ui-kit/components/badge";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { DeviceType } from "@docspace/shared/enums";
 
 import TariffBar from "SRC_DIR/components/TariffBar";

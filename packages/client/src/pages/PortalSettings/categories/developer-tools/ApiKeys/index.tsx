@@ -174,7 +174,7 @@ const ApiKeys = (props: ApiKeysProps) => {
         {apiKeysUrl ? (
           <Link
             isHovered
-            color={currentColorScheme?.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             fontSize="13px"
             fontWeight={600}
             onClick={() => window.open(apiKeysUrl, "_blank")}

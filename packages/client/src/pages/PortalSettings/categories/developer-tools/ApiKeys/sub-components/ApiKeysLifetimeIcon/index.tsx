@@ -31,7 +31,7 @@ import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { Text } from "@docspace/ui-kit/components/text";
 import { TTranslation } from "@docspace/shared/types";
 import { TApiKey } from "@docspace/shared/api/api-keys/types";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import moment from "moment-timezone";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 

@@ -134,7 +134,7 @@ const Register = (props: RegisterProps) => {
       >
         <Text
           as="span"
-          color={currentColorScheme?.main?.accent}
+          color={currentColorScheme?.main?.accent ?? undefined}
           lineHeight="20px"
         >
           {t("Register")}

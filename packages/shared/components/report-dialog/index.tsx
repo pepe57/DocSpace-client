@@ -49,7 +49,7 @@ import {
 
 import styles from "./ReportDialog.module.scss";
 import type { ReportDialogProps } from "./ReportDialog.types";
-import { globalColors } from "../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 const ReportDialog = (props: ReportDialogProps) => {
 	const { t, ready } = useTranslation(["Common"]);

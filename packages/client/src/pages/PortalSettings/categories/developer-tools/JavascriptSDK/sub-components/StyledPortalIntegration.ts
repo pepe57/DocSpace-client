@@ -29,7 +29,7 @@ import styled, { css } from "styled-components";
 import { mobile, tablet } from "@docspace/ui-kit/utils/device";
 import { isMobile } from "react-device-detect";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 const SDKContainer = styled.div`
   box-sizing: border-box;

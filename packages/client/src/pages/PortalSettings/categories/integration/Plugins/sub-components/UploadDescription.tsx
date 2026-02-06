@@ -16,7 +16,7 @@ const UploadDescription = ({
       {pluginsSdkUrl ? (
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main?.accent}
+          color={currentColorScheme?.main?.accent ?? undefined}
           isHovered
           target={LinkTarget.blank}
           href={pluginsSdkUrl}

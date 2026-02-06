@@ -26,7 +26,7 @@
 
 import { TComboboxProps, TOption } from "@docspace/ui-kit/components/combobox";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { TTheme } from "@docspace/shared/themes";
+import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 
 export type LinkRolesDropdownItemProps = {
   item: TOption;

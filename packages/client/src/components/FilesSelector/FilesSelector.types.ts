@@ -35,7 +35,7 @@ import {
 	TSelectorItem,
 } from "@docspace/ui-kit/components/selector";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
-import { TTheme } from "@docspace/shared/themes";
+import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 
 export type FilesSelectorProps = TSelectorHeader & {
 	isPanelVisible: boolean;

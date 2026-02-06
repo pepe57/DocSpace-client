@@ -40,7 +40,7 @@ import styles from "./CampaignsBanner.module.scss";
 import { CampaignsBannerProps } from "./CampaignsBanner.types";
 
 import useFitText from "./useFitText";
-import { globalColors } from "../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 const CampaignsBanner = (props: CampaignsBannerProps) => {
 	const {

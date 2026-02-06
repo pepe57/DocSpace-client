@@ -28,7 +28,7 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { ThemeProvider } from "@docspace/ui-kit/components/theme-provider";
-import Base from "../../../themes/base";
+import { Base } from "@docspace/ui-kit/providers/theme/themes";
 import { BrandName } from "./index";
 
 vi.mock("react-device-detect", () => ({

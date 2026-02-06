@@ -5,7 +5,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 
-import { getCookie } from "@docspace/shared/utils/cookie";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 
 import NameCell from "./columns/name";

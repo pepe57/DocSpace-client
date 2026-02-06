@@ -32,7 +32,7 @@ import moment from "moment";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { LinkWithDropdown } from "@docspace/ui-kit/components/link-with-dropdown";
-import { globalColors } from "../../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 import { getDate, getExpiredOptions } from "../Share.helpers";
 import { ExpiredComboBoxProps } from "../Share.types";

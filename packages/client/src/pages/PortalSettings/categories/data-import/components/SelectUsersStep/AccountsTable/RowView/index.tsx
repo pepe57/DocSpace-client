@@ -37,7 +37,7 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { RowContainer, Row } from "@docspace/shared/components/rows";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
 
 import UsersRow from "./UsersRow";

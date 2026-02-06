@@ -30,7 +30,7 @@ import classNames from "classnames";
 
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
-import { globalColors } from "../../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Badge } from "@docspace/ui-kit/components/badge";

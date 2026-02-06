@@ -38,7 +38,7 @@ import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { TColorScheme } from "@docspace/shared/themes";
+import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 import { DeviceType, DeepLinkType } from "@docspace/shared/enums";
 import { saveDeepLinkSettings } from "@docspace/shared/api/settings";
 
@@ -203,7 +203,7 @@ const ConfigureDeepLinkComponent = (props: Props) => {
       {configureDeepLinkUrl ? (
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main?.accent}
+          color={currentColorScheme?.main?.accent ?? undefined}
           target={LinkTarget.blank}
           isHovered
           href={configureDeepLinkUrl}

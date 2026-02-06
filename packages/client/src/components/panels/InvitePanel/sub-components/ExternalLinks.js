@@ -33,7 +33,8 @@ import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { InputBlock } from "@docspace/ui-kit/components/input-block";

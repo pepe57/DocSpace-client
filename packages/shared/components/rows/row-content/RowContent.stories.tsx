@@ -35,7 +35,7 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { RowContent } from ".";
 import { RowContentProps } from "./RowContent.types";
-import { globalColors } from "../../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 import styles from "./RowContent.stories.module.scss";
 

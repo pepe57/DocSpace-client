@@ -66,14 +66,14 @@ const BetaBadge = ({
               <Link
                 href={forumLinkUrl}
                 target={LinkTarget.blank}
-                color={currentColorScheme?.main?.accent}
+                color={currentColorScheme?.main?.accent ?? undefined}
                 dataTestId={buildDataTestId(dataTestId, "forum_link")}
               />
             ),
             3: (
               <Link
                 href={`mailto:${documentationEmail}`}
-                color={currentColorScheme?.main?.accent}
+                color={currentColorScheme?.main?.accent ?? undefined}
                 dataTestId={buildDataTestId(
                   dataTestId,
                   "documentation_email_link",

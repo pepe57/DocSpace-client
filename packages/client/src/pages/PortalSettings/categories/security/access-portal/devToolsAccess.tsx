@@ -39,7 +39,7 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { size } from "@docspace/shared/utils";
-import type { TColorScheme } from "@docspace/shared/themes";
+import type { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 import type { TData } from "@docspace/ui-kit/components/toast";
 
 import { LearnMoreWrapper } from "../StyledSecurity";
@@ -208,7 +208,7 @@ const DevToolsAccess = ({
           <Link
             className="link-learn-more"
             dataTestId="developer_tools_access_component_learn_more"
-            color={currentColorScheme.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             target={LinkTarget.blank}
             isHovered
             href={limitedDevToolsBlockHelpUrl}

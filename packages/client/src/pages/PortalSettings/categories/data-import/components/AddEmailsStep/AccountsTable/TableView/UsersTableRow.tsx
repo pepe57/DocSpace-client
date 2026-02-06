@@ -39,7 +39,7 @@ import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvgUrl from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 import CheckSvgUrl from "PUBLIC_DIR/images/check.edit.react.svg?url";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import {
 	AddEmailTableRowProps,
 	InjectedAddEmailTableRowProps,

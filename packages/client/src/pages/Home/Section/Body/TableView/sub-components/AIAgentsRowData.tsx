@@ -37,7 +37,7 @@ import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
 } from "../StyledTable";
-import { TTheme } from "@docspace/shared/themes";
+import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 import { TAgent } from "@docspace/shared/api/ai/types";
 import { TTranslation } from "@docspace/shared/types";
 

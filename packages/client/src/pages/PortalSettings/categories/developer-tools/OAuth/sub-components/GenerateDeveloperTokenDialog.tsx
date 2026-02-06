@@ -211,7 +211,7 @@ const GenerateDeveloperTokenDialog = ({
                     1: (
                       <Link
                         href={`mailto:${email}`}
-                        color={theme?.currentColorScheme?.main?.accent}
+                        color={theme?.currentColorScheme?.main?.accent ?? undefined}
                         dataTestId="generate_token_email_link"
                       />
                     ),

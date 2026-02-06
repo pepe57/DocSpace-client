@@ -42,7 +42,7 @@ import {
   TGroupMenuItem,
 } from "@docspace/shared/components/table";
 import { injectDefaultTheme } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { StyledTableContainer } from "../../../../StyledDataImport";
 import UsersTableRow from "./UsersTableRow";

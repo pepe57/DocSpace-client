@@ -46,7 +46,7 @@ import styles from "./LinkSettingsPanel.module.scss";
 import { LinkSettingsPanelProps } from "./LinkSettingsPanel.types";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { TOption } from "@docspace/ui-kit/components/combobox";
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 const MAX_USERS_COUNT = 1000;

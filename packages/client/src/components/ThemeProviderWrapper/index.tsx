@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ThemeProvider } from "@docspace/ui-kit/components/theme-provider";
 import type { ThemeProviderProps } from "@docspace/ui-kit/components/theme-provider";
-import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
+import { getFontFamilyDependingOnLanguage } from "@docspace/ui-kit/providers/theme/rtl-utils";
 
 const ThemeProviderWrapper = ({
 	children,

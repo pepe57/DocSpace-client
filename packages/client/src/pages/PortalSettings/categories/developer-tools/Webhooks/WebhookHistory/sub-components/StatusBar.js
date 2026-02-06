@@ -31,7 +31,7 @@ import { inject, observer } from "mobx-react";
 
 import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
 import { Link } from "@docspace/ui-kit/components/link";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 
 const StatusBarWrapper = styled.div`

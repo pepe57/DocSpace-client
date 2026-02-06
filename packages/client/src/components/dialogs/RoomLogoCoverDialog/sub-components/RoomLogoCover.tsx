@@ -32,7 +32,7 @@ import { mobile, tablet, isMobile } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { ICover, getRoomTitle } from "@docspace/ui-kit";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { CustomLogo } from "./CustomLogo";
 import { SelectColor } from "./SelectColor/SelectColor";

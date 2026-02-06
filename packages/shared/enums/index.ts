@@ -303,19 +303,6 @@ export const enum TenantStatus {
 }
 
 /**
- * Enum for theme keys.
- * @readonly
- */
-export const enum ThemeKeys {
-  Base = "0",
-  BaseStr = "Base",
-  Dark = "1",
-  DarkStr = "Dark",
-  System = "2",
-  SystemStr = "System",
-}
-
-/**
  * Enum for global events.
  * @readonly
  */

@@ -163,7 +163,7 @@ const DeepLink = ({
                     fontSize="13px"
                     fontWeight="600"
                     isHovered
-                    color={currentColorScheme?.main?.accent}
+                    color={currentColorScheme?.main?.accent ?? undefined}
                     onClick={onStayBrowserClick}
                   >
                     {t("DeepLink:StayInBrowser")}

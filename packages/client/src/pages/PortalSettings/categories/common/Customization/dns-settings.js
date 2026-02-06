@@ -43,7 +43,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 import { parseDomain } from "@docspace/shared/utils/common";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import { StyledSettingsComponent } from "./StyledSettings";
 import checkScrollSettingsBlock from "../utils";

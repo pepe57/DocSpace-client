@@ -27,7 +27,7 @@
 import { Text } from "@docspace/ui-kit/components/text";
 import styled from "styled-components";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 const Wrapper = styled.div`
   box-sizing: border-box;

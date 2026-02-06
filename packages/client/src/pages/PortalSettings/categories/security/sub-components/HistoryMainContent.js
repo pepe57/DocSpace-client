@@ -34,7 +34,7 @@ import { TwoFactorCampaignBanner } from "@docspace/shared/components/two-factor-
 // import { toastr } from "@docspace/ui-kit/components/toast";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Badge } from "@docspace/ui-kit/components/badge";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";

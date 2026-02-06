@@ -35,7 +35,7 @@ import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
 import HistoryItemLoader from "@docspace/shared/skeletons/info-panel/body/views/HistoryItemLoader";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { TTranslation } from "@docspace/shared/types";
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 
 import { useHistory } from "../FilesView/hooks/useHistory";
 

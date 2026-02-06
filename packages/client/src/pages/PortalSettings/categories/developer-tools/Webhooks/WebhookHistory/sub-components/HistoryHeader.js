@@ -52,7 +52,7 @@ import { useTranslation } from "react-i18next";
 
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { retryWebhooks } from "@docspace/shared/api/settings";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";

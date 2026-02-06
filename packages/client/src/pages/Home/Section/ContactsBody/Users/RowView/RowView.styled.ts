@@ -33,7 +33,7 @@ import {
   RowContent,
 } from "@docspace/shared/components/rows";
 import { mobile, tablet } from "@docspace/ui-kit/utils/device";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 const marginStyles = css`
   margin-inline: -24px;

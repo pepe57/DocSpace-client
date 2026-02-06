@@ -29,7 +29,7 @@ import { useTheme } from "styled-components";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { Text } from "@docspace/ui-kit/components/text";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 
 import EmptyScreenOauthLightSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.light.svg";

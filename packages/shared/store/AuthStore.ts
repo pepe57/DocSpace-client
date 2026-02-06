@@ -43,7 +43,7 @@ import {
 	isPublicPreview,
 } from "../utils/common";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
-import { getCookie, setCookie } from "../utils/cookie";
+import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import { Nullable, TI18n } from "../types";

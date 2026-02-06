@@ -428,7 +428,7 @@ const AutomaticBackup = ({
             href={automaticBackupUrl}
             target={LinkTarget.blank}
             fontSize="13px"
-            color={currentColorScheme?.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             isHovered
             dataTestId="automatic_backup_learn_link"
           >

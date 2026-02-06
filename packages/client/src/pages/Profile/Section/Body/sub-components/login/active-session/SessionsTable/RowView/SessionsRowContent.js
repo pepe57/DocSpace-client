@@ -33,7 +33,7 @@ import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { Text } from "@docspace/ui-kit/components/text";
 import { RowContent } from "@docspace/shared/components/rows";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import styles from "../../active-sessions.module.scss";
 

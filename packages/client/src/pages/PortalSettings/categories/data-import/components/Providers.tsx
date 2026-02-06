@@ -92,7 +92,7 @@ const Providers = (props: ProvidersProps) => {
         {dataImportUrl ? (
           <Link
             className="link-learn-more"
-            color={currentColorScheme?.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             target={LinkTarget.blank}
             isHovered
             href={dataImportUrl}

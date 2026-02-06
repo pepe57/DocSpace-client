@@ -32,7 +32,7 @@ import {
   NotificationsType,
   EmployeeActivationStatus,
 } from "@docspace/shared/enums";
-import { setCookie } from "@docspace/shared/utils/cookie";
+import { setCookie } from "@docspace/ui-kit/utils/cookie";
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { AvatarActionKeys } from "@docspace/ui-kit/components/avatar";
 import {
