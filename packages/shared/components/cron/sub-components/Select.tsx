@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { getFirstDayOfWeek } from "@docspace/ui-kit/utils/date";
 
 import {
   ComboBox,
@@ -58,7 +58,7 @@ export const Select = ({
     const isWeek = unit.name === "weekday";
 
     if (isWeek) {
-      firstDayOfWeek = moment.localeData(i18n.language).firstDayOfWeek();
+      firstDayOfWeek = getFirstDayOfWeek(i18n.language);
     }
 
     if (altWithTranslation) {

@@ -26,7 +26,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
-import moment from "moment-timezone";
+import { now, formatDate } from "@docspace/ui-kit/utils/date";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { useTranslation } from "react-i18next";
@@ -111,18 +111,14 @@ const SelectedDateTime = ({
 }) => {
   const formattedTime = isTimeEqual
     ? ""
-    : ` ${moment(filters.deliveryFrom).tz(window.timezone).format("HH:mm")} - ${moment(
-        filters.deliveryTo,
-      )
-        .tz(window.timezone)
-        .format("HH:mm")}`;
+    : ` ${formatDate(filters.deliveryFrom.setZone(window.timezone), "HH:mm")} - ${formatDate(filters.deliveryTo.setZone(window.timezone), "HH:mm")}`;
 
   return (
     <div>
       <SelectedItem
         className="selectedItem delete-delivery-date-button"
         onClose={deleteSelectedDate}
-        label={filters.deliveryDate.format("DD MMM YYYY") + formattedTime}
+        label={formatDate(filters.deliveryDate, "dd MMM yyyy") + formattedTime}
         onClick={toggleCalendar}
         dataTestId="selected_delivery_date"
       />
@@ -158,8 +154,8 @@ const DeliveryDatePicker = ({
     setFilters((prevFilters) => ({
       ...prevFilters,
       deliveryDate: null,
-      deliveryFrom: moment().tz(window.timezone).startOf("day"),
-      deliveryTo: moment().tz(window.timezone).endOf("day"),
+      deliveryFrom: now().setZone(window.timezone).startOf("day"),
+      deliveryTo: now().setZone(window.timezone).endOf("day"),
     }));
     setIsTimeOpen(false);
     setIsCalendarOpen(false);
@@ -178,8 +174,8 @@ const DeliveryDatePicker = ({
     setFilters((prevFilters) => ({
       ...prevFilters,
       deliveryDate: date,
-      deliveryFrom: moment().tz(window.timezone).startOf("day"),
-      deliveryTo: moment().tz(window.timezone).endOf("day"),
+      deliveryFrom: now().setZone(window.timezone).startOf("day"),
+      deliveryTo: now().setZone(window.timezone).endOf("day"),
     }));
   };
 
@@ -204,26 +200,26 @@ const DeliveryDatePicker = ({
   };
   const isEqualDates = (firstDate, secondDate) => {
     return (
-      firstDate.format("YYYY-MM-D HH:mm") ===
-      secondDate.format("YYYY-MM-D HH:mm")
+      formatDate(firstDate, "yyyy-MM-d HH:mm") ===
+      formatDate(secondDate, "yyyy-MM-d HH:mm")
     );
   };
 
   const isTimeEqual =
     isEqualDates(
       filters.deliveryFrom,
-      filters.deliveryFrom.clone().startOf("day"),
+      filters.deliveryFrom.startOf("day"),
     ) &&
-    isEqualDates(filters.deliveryTo, filters.deliveryTo.clone().endOf("day"));
+    isEqualDates(filters.deliveryTo, filters.deliveryTo.endOf("day"));
 
   const isDefaultTime = isApplied
     ? isEqualDates(
         filters.deliveryFrom,
-        moment().tz(window.timezone).startOf("day"),
+        now().setZone(window.timezone).startOf("day"),
       ) &&
       isEqualDates(
         filters.deliveryTo,
-        moment().tz(window.timezone).endOf("day"),
+        now().setZone(window.timezone).endOf("day"),
       )
     : true;
 

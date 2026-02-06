@@ -25,8 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import moment from "moment";
 import { Trans, useTranslation } from "react-i18next";
+import type { DateTime } from "luxon";
+import { now, addToDate, subtractFromDate, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
@@ -74,13 +75,13 @@ const LinkSettingsPanel = ({
 
   const isEdit = Object.keys(activeLink).length === 0 ? false : true;
   const date = activeLink.expirationDate
-    ? moment(activeLink.expirationDate)
+    ? parseToDateTime(activeLink.expirationDate)
     : isEdit
       ? null
-      : moment().add(7, "days");
+      : addToDate(now(), 7, "days");
 
   const [userLimitIsChecked, setUserLimitIsChecked] = useState(limitIsChecked);
-  const [limitDate, setLimitDate] = useState<moment.Moment | null>(date);
+  const [limitDate, setLimitDate] = useState<DateTime | null>(date);
   const [maxNumber, setMaxNumber] = useState(String(maxUsersNumber));
   const [hasError, setHasError] = useState(false);
 
@@ -88,7 +89,7 @@ const LinkSettingsPanel = ({
     ? Number(maxNumber) <= usersNumber
     : false;
 
-  const showExpiredError = moment(new Date()).isAfter(limitDate);
+  const showExpiredError = isAfter(now(), limitDate);
 
   const currentAccess = filteredAccesses.find(
     (a) =>
@@ -124,7 +125,7 @@ const LinkSettingsPanel = ({
     if (defaultLink) {
       const linkToSubmit = {
         ...defaultLink,
-        expirationDate: limitDate ? moment(limitDate).toISOString() : null,
+        expirationDate: limitDate ? limitDate.toISO() : null,
         maxUseCount: userLimitIsChecked ? Number(maxNumber) : null,
         currentUseCount: usersNumber,
       } as TOption & {
@@ -303,7 +304,7 @@ const LinkSettingsPanel = ({
             className={styles.linkSettingsDatePicker}
             selectDateText={t("Common:SelectDate")}
             initialDate={limitDate}
-            minDate={moment().subtract(1, "days")}
+            minDate={subtractFromDate(now(), 1, "days") ?? undefined}
             maxDate={maxDate}
             useMaxTime={!activeLink.expirationDate}
             translations={{ AM: t("Common:AM"), PM: t("Common:PM") }}

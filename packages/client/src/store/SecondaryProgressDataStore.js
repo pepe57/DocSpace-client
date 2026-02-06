@@ -370,12 +370,32 @@ class SecondaryProgressDataStore {
         (item) => item.operationId === operationId,
       );
       if (itemIndex === -1) return;
-      operationObject.items.splice(itemIndex, 1);
-      if (operationObject.items.length === 0) {
-        this.secondaryOperationsArray.splice(operationIndex, 1);
+
+      const newItems = operationObject.items.filter(
+        (item) => item.operationId !== operationId,
+      );
+
+      if (newItems.length === 0) {
+        const newSecondaryOperationsArray =
+          this.secondaryOperationsArray.filter(
+            (_, index) => index !== operationIndex,
+          );
+
+        this.secondaryOperationsArray = [...newSecondaryOperationsArray];
+      } else {
+        const newSecondaryOperationsArray = this.secondaryOperationsArray.map(
+          (item, index) =>
+            index === operationIndex ? { ...item, items: newItems } : item,
+        );
+
+        this.secondaryOperationsArray = [...newSecondaryOperationsArray];
       }
     } else {
-      this.secondaryOperationsArray.splice(operationIndex, 1);
+      const newSecondaryOperationsArray = this.secondaryOperationsArray.filter(
+        (_, index) => index !== operationIndex,
+      );
+
+      this.secondaryOperationsArray = [...newSecondaryOperationsArray];
     }
     console.log("clearSecondaryProgressData", this.secondaryOperationsArray);
   };

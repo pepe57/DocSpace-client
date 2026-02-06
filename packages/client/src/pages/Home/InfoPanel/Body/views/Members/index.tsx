@@ -28,7 +28,6 @@ import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import className from "classnames";
-import moment from "moment";
 
 import {
   FolderType,
@@ -36,7 +35,6 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import { isDesktop } from "@docspace/shared/utils";
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -45,7 +43,7 @@ import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import { GENERAL_LINK_HEADER_KEY, LANGUAGE } from "@docspace/shared/constants";
+import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
 import { createExternalLink } from "@docspace/shared/api/rooms";
 import MembersList from "@docspace/shared/components/share/sub-components/List";
 
@@ -93,8 +91,6 @@ const Members = ({
   setAccessSettingsIsVisible,
   templateAvailable,
 }: MembersProps) => {
-  moment.locale(getCookie(LANGUAGE));
-
   const { t } = useTranslation([
     "InfoPanel",
     "Common",
