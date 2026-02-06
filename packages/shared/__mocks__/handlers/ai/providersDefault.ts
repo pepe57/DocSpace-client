@@ -24,35 +24,60 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TLicenseQuota } from "../../../api/portal/types";
-import { TTranslation } from "../../../types";
+import {http} from "msw";
+import {API_PREFIX, BASE_URL} from "../../e2e/utils";
 
-export interface IPaymentsProps {
-  isTrial: boolean;
-  setPaymentsLicense: (confirmKey: string | null, data: FormData) => void;
-  acceptPaymentsLicense: (t: TTranslation) => void;
-  isLicenseCorrect: boolean;
-  salesEmail: string;
-  isLicenseDateExpired: boolean;
-  isDeveloper: boolean;
-  buyUrl: string;
-  trialDaysLeft: string | number;
-  paymentDate: string;
-  isEnterprise: boolean;
-  logoText: string;
-  docspaceFaqUrl: string;
-  licenseQuota: TLicenseQuota;
-  openOnNewPage: boolean;
-  isLifetimeLicense: boolean;
-  isGracePeriod: boolean;
-  isNotPaidPeriod: boolean;
-  gracePeriodEndDate: string;
-  delayDaysCount: string;
-}
+export const PATH_AI_PROVIDERS_DEFAULT = "ai/providers/default";
 
-export interface ILicenseProps {
-  setPaymentsLicense: (confirmKey: string | null, data: FormData) => void;
-  acceptPaymentsLicense: (t: TTranslation) => void;
-  isLicenseCorrect: boolean;
-  isTrial: boolean;
-}
+export const aiProvidersDefaultResolver = ({isNewProvider, isUpdatedProvider, isClaude, isOpenAI}: {
+  isNewProvider?: boolean,
+  isUpdatedProvider?: boolean,
+  isClaude?: boolean,
+  isOpenAI?: boolean
+}) => {
+  let response = null;
+
+  if (isNewProvider) {
+    response = {
+      providerId: 2,
+      defaultModel: "gpt-5.1-2025-11-13",
+      providerTitle: "new provider",
+    }
+  } else if (isUpdatedProvider) {
+    response = {
+      providerId: 2,
+      defaultModel: "gpt-5.1-2025-11-13",
+      providerTitle: "updated provider",
+    }
+  } else if (isOpenAI) {
+    response = {
+      providerId: 2,
+      defaultModel: "gpt-5.1-2025-11-13",
+      providerTitle: "OpenAI",
+    }
+  } else {
+    response = {
+      providerId: 1,
+      defaultModel: "claude-opus-4-5-20251101",
+      providerTitle: "Claude AI",
+    }
+  }
+
+  return new Response(JSON.stringify(
+    {
+      response,
+      status: 0,
+      statusCode: 200,
+    }
+  ));
+};
+
+export const aiProvidersDefaultHandler = (
+  port: string,
+  data: { isNewProvider?: boolean, isUpdatedProvider?: boolean, isClaude?: boolean, isOpenAI?: boolean }
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_DEFAULT}`,
+    () => aiProvidersDefaultResolver(data),
+  );
+};
