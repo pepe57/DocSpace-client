@@ -345,7 +345,7 @@ export default inject(
       isGracePeriod,
       isNotPaidPeriod,
       email: walletCustomerEmail,
-      payerInfo: undefined,
+      payerInfo: walletCustomerInfo,
       fetchPayerInfo,
     };
   },
