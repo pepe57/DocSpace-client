@@ -58,8 +58,8 @@ export const formattedBalanceTokens = (
 
 export const getEffectiveFraction = (
   value: number,
-  fractionDigits: number = 2,
   isScientific: boolean = false,
+  fractionDigits: number = 0,
 ): number => {
   const str = value.toString();
 
@@ -71,10 +71,14 @@ export const getEffectiveFraction = (
 
     const actualFractionDigits = exponent + mantissaFraction;
 
+    if (fractionDigits === 0) return actualFractionDigits;
+
     return Math.min(fractionDigits, actualFractionDigits);
   }
 
   const actualFractionLength = str.split(".")[1]?.length;
+
+  if (fractionDigits === 0) return actualFractionLength;
 
   return Math.min(fractionDigits, actualFractionLength);
 };
@@ -97,19 +101,14 @@ export const accountingLedgersFormat = (
     : Number.isFinite(amount) && Math.abs(amount - Math.trunc(amount)) < 1e-9;
 
   if (!isWholeNumber) {
-    effectiveDigits = getEffectiveFraction(
-      amount,
-      maximumFractionDigits,
-      isScientific,
-    );
+    effectiveDigits = getEffectiveFraction(amount, isScientific);
   }
 
   const effectiveFractionDigits = isWholeNumber ? 2 : effectiveDigits;
 
-  // Use truncation approach for specific fraction digits
   const truncated = isScientific
     ? truncateNumberToFractionNumeric(amount, effectiveFractionDigits)
-    : Number(truncateNumberToFraction(amount, effectiveFractionDigits));
+    : amount;
 
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
