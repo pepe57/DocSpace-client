@@ -111,7 +111,7 @@ const PayerInformation = ({
   payerInfo,
   email,
   isNotPaidPeriod,
-  fetchPayerInfo,
+  fetchPayerInfo = async () => {},
   isStripePortalAvailable,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
