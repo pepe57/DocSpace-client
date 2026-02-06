@@ -26,8 +26,8 @@
 
 "use client";
 
-import moment from "moment-timezone";
 import { TTranslation } from "../types";
+import { parseToDateTime } from "./date";
 
 import { isArrayEqual } from "./array";
 import * as email from "./email";
@@ -176,7 +176,8 @@ export const getModalType = () => {
 };
 
 export const isValidDate = (date: Date) => {
-  return moment(date).tz(window.timezone).year() !== 9999;
+  const dt = parseToDateTime(date);
+  return dt ? dt.setZone(window.timezone).year !== 9999 : false;
 };
 
 export const presentInArray = (

@@ -27,8 +27,11 @@
 import React, { useState, useMemo } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import moment from "moment";
 import classNames from "classnames";
+import type { DateTime } from "luxon";
+import { parseToDateTime, isSameDay, now } from "@docspace/shared/utils/date";
+import { getCookie } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -76,8 +79,8 @@ type TransactionHistoryProps = {
   getStartTransactionDate?: () => string;
   getEndTransactionDate?: () => string;
   fetchTransactionHistory?: (
-    startDate: moment.Moment,
-    endDate: moment.Moment,
+    startDate: DateTime,
+    endDate: DateTime,
     isCredit: boolean,
     isDebit: boolean,
     participantName?: string,
@@ -87,7 +90,7 @@ type TransactionHistoryProps = {
   isMobile?: boolean;
   isTablet?: boolean;
   isNotPaidPeriod?: boolean;
-  formatDate?: (date: moment.Moment) => string;
+  formatDate?: (date: DateTime) => string;
 };
 
 const getTransactionType = (key: string) => {
@@ -114,8 +117,8 @@ const useInitialState = (
   const initialState = useMemo(() => {
     return {
       selectedType: initialType,
-      startDate: moment(getStartTransactionDate()),
-      endDate: moment(getEndTransactionDate()),
+      startDate: parseToDateTime(getStartTransactionDate()) ?? now(),
+      endDate: parseToDateTime(getEndTransactionDate()) ?? now(),
       selectedContact: null as TUser | null,
       isChanged: false,
     };
@@ -123,14 +126,14 @@ const useInitialState = (
 
   const isStateModified = (currentState: {
     selectedType: TOption;
-    startDate: moment.Moment;
-    endDate: moment.Moment;
+    startDate: DateTime;
+    endDate: DateTime;
     selectedContact: TUser | null;
   }) => {
     return (
       currentState.selectedType.key !== initialState.selectedType.key ||
-      !currentState.startDate.isSame(initialState.startDate, "day") ||
-      !currentState.endDate.isSame(initialState.endDate, "day") ||
+      !isSameDay(currentState.startDate, initialState.startDate) ||
+      !isSameDay(currentState.endDate, initialState.endDate) ||
       currentState.selectedContact !== initialState.selectedContact
     );
   };
@@ -140,16 +143,16 @@ const useInitialState = (
 
 const fetchTransactions = async (
   fetchTransactionHistory: (
-    startDate: moment.Moment,
-    endDate: moment.Moment,
+    startDate: DateTime,
+    endDate: DateTime,
     isCredit: boolean,
     isDebit: boolean,
     participantName?: string,
   ) => Promise<void>,
   setIsLoading: (loading: boolean) => void,
   selectedType: string,
-  startDate: moment.Moment,
-  endDate: moment.Moment,
+  startDate: DateTime,
+  endDate: DateTime,
   participantName?: string,
 ) => {
   timerId = setTimeout(() => setIsLoading(true), 500);
@@ -216,10 +219,10 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   const [selectedType, setSelectedType] = useState<TOption>(
     initialState.selectedType,
   );
-  const [startDate, setStartDate] = useState<moment.Moment>(
+  const [startDate, setStartDate] = useState<DateTime>(
     initialState.startDate,
   );
-  const [endDate, setEndDate] = useState<moment.Moment>(initialState.endDate);
+  const [endDate, setEndDate] = useState<DateTime>(initialState.endDate);
   const [selectedContact, setSelectedContact] = useState<TUser | null>(
     initialState.selectedContact,
   );
@@ -328,7 +331,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   };
 
   const onStartDateChange = async (
-    date: moment.Moment | null,
+    date: DateTime | null,
   ): Promise<void> => {
     if (!date) {
       return;
@@ -357,7 +360,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     }
   };
 
-  const onEndDateChange = async (date: moment.Moment | null): Promise<void> => {
+  const onEndDateChange = async (date: DateTime | null): Promise<void> => {
     if (!date) {
       return;
     }
@@ -533,7 +536,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               }
               onChange={onStartDateChange}
               selectDateText={t("Common:SelectDate")}
-              locale={moment.locale()}
+              locale={getCookie(LANGUAGE) ?? "en"}
               openDate={
                 isFilterDialogVisible ? mobileFilterState.startDate : startDate
               }
@@ -557,7 +560,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               }
               onChange={onEndDateChange}
               selectDateText={t("Common:SelectDate")}
-              locale={moment.locale()}
+              locale={getCookie(LANGUAGE) ?? "en"}
               openDate={
                 isFilterDialogVisible ? mobileFilterState.endDate : endDate
               }
