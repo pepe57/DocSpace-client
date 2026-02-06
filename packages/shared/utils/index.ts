@@ -61,7 +61,6 @@ import {
   isMobileDevice,
 } from "@docspace/ui-kit/utils/device";
 import { getCookie } from "./cookie";
-import { Context, Provider, Consumer } from "./context";
 import commonIconsStyles, {
   IconSizeType,
   isIconSizeType,
@@ -123,9 +122,6 @@ export {
   commonIconsStyles,
   IconSizeType,
   isIconSizeType,
-  Context,
-  Provider,
-  Consumer,
   getCookie,
   size,
   mobile,

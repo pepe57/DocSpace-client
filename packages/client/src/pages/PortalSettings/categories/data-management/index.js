@@ -40,10 +40,10 @@ import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { DeviceType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isManagement } from "@docspace/shared/utils/common";
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import SocketHelper, {
-	SocketCommands,
-	SocketEvents,
+  SocketCommands,
+  SocketEvents,
 } from "@docspace/shared/utils/socket";
 
 import config from "../../../../../package.json";
@@ -54,212 +54,212 @@ import useBackup from "./backup/useBackup";
 import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
 
 const DataManagementWrapper = (props) => {
-	const {
-		dataBackupUrl,
-		automaticBackupUrl,
-		buttonSize,
-		t,
+  const {
+    dataBackupUrl,
+    automaticBackupUrl,
+    buttonSize,
+    t,
 
-		currentDeviceType,
-		standalone,
+    currentDeviceType,
+    standalone,
 
-		backup,
-		authStore,
-		currentQuotaStore,
-		paymentStore,
-		currentTariffStatusStore,
-		settingsStore,
-		clearAbortControllerArr,
-		isNotPaidPeriod,
-	} = props;
+    backup,
+    authStore,
+    currentQuotaStore,
+    paymentStore,
+    currentTariffStatusStore,
+    settingsStore,
+    clearAbortControllerArr,
+    isNotPaidPeriod,
+  } = props;
 
-	const navigate = useNavigate();
-	const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-	const [currentTabId, setCurrentTabId] = useState();
+  const [currentTabId, setCurrentTabId] = useState();
 
-	const { interfaceDirection } = useTheme();
-	const directionTooltip = interfaceDirection === "rtl" ? "left" : "right";
+  const { interfaceDirection } = useTheme();
+  const directionTooltip = interfaceDirection === "rtl" ? "left" : "right";
 
-	const defaultProps = createDefaultHookSettingsProps({
-		backupStore: backup,
-		authStore,
-		currentQuotaStore,
-		paymentStore,
-		currentTariffStatusStore,
-		settingsStore,
-	});
+  const defaultProps = createDefaultHookSettingsProps({
+    backupStore: backup,
+    authStore,
+    currentQuotaStore,
+    paymentStore,
+    currentTariffStatusStore,
+    settingsStore,
+  });
 
-	const { getManualBackupData, getAutoBackupData } = useBackup(
-		defaultProps.backup,
-	);
+  const { getManualBackupData, getAutoBackupData } = useBackup(
+    defaultProps.backup,
+  );
 
-	const renderTooltip = (helpInfo, className) => {
-		const isAutoBackupPage = window.location.pathname.includes(
-			"portal-settings/backup/auto-backup",
-		);
+  const renderTooltip = (helpInfo, className) => {
+    const isAutoBackupPage = window.location.pathname.includes(
+      "portal-settings/backup/auto-backup",
+    );
 
-		return (
-			<HelpButton
-				size={12}
-				offsetRight={5}
-				place={directionTooltip}
-				className={className}
-				iconName={HelpReactSvgUrl}
-				tooltipContent={
-					<Text fontSize="12px">
-						<Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
-							{helpInfo}
-						</Trans>
-						<span style={{ margin: "10px 0 0" }}>
-							{(isAutoBackupPage ? automaticBackupUrl : dataBackupUrl) ? (
-								<Link
-									id="link-tooltip"
-									fontSize="13px"
-									href={isAutoBackupPage ? automaticBackupUrl : dataBackupUrl}
-									target="_blank"
-									isBold
-									isHovered
-								>
-									{t("Common:LearnMore")}
-								</Link>
-							) : null}
-						</span>
-					</Text>
-				}
-			/>
-		);
-	};
+    return (
+      <HelpButton
+        size={12}
+        offsetRight={5}
+        place={directionTooltip}
+        className={className}
+        iconName={HelpReactSvgUrl}
+        tooltipContent={
+          <Text fontSize="12px">
+            <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
+              {helpInfo}
+            </Trans>
+            <span style={{ margin: "10px 0 0" }}>
+              {(isAutoBackupPage ? automaticBackupUrl : dataBackupUrl) ? (
+                <Link
+                  id="link-tooltip"
+                  fontSize="13px"
+                  href={isAutoBackupPage ? automaticBackupUrl : dataBackupUrl}
+                  target="_blank"
+                  isBold
+                  isHovered
+                >
+                  {t("Common:LearnMore")}
+                </Link>
+              ) : null}
+            </span>
+          </Text>
+        }
+      />
+    );
+  };
 
-	const data = [
-		{
-			id: "data-backup",
-			name: t("Common:DataBackup"),
-			content: (
-				<ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
-			),
-			onClick: async () => {
-				clearAbortControllerArr();
-				await getManualBackupData();
-			},
-		},
-		{
-			id: "auto-backup",
-			name: t("Common:AutoBackup"),
-			content: (
-				<AutoBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
-			),
-			onClick: async () => {
-				clearAbortControllerArr();
-				await getAutoBackupData();
-			},
-		},
-	];
+  const data = [
+    {
+      id: "data-backup",
+      name: t("Common:DataBackup"),
+      content: (
+        <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
+      ),
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getManualBackupData();
+      },
+    },
+    {
+      id: "auto-backup",
+      name: t("Common:AutoBackup"),
+      content: (
+        <AutoBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
+      ),
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getAutoBackupData();
+      },
+    },
+  ];
 
-	useEffect(() => {
-		const path = location.pathname;
-		const currentTab = data.find((item) => path.includes(item.id));
-		if (currentTab && data.length) setCurrentTabId(currentTab.id);
-	}, [location.pathname]);
+  useEffect(() => {
+    const path = location.pathname;
+    const currentTab = data.find((item) => path.includes(item.id));
+    if (currentTab && data.length) setCurrentTabId(currentTab.id);
+  }, [location.pathname]);
 
-	useEffect(() => {
-		const { socketSubscribers } = SocketHelper;
+  useEffect(() => {
+    const { socketSubscribers } = SocketHelper;
 
-		if (!socketSubscribers.has("backup")) {
-			if (!isManagement()) {
-				SocketHelper?.emit(SocketCommands.Subscribe, {
-					roomParts: "backup",
-				});
-			}
+    if (!socketSubscribers.has("backup")) {
+      if (!isManagement()) {
+        SocketHelper?.emit(SocketCommands.Subscribe, {
+          roomParts: "backup",
+        });
+      }
 
-			if (standalone && isManagement()) {
-				SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
-					roomParts: "backup",
-				});
-			}
-		}
+      if (standalone && isManagement()) {
+        SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
+          roomParts: "backup",
+        });
+      }
+    }
 
-		return () => {
-			SocketHelper?.off(SocketEvents.BackupProgress);
+    return () => {
+      SocketHelper?.off(SocketEvents.BackupProgress);
 
-			if (!isManagement()) {
-				SocketHelper?.emit(SocketCommands.Unsubscribe, {
-					roomParts: "backup",
-				});
-			}
+      if (!isManagement()) {
+        SocketHelper?.emit(SocketCommands.Unsubscribe, {
+          roomParts: "backup",
+        });
+      }
 
-			if (standalone && isManagement()) {
-				SocketHelper?.emit(SocketCommands.UnsubscribeInSpaces, {
-					roomParts: "backup",
-				});
-			}
-		};
-	}, []);
+      if (standalone && isManagement()) {
+        SocketHelper?.emit(SocketCommands.UnsubscribeInSpaces, {
+          roomParts: "backup",
+        });
+      }
+    };
+  }, []);
 
-	const onSelect = (e) => {
-		const url = isManagement()
-			? `/management/settings/backup/${e.id}`
-			: `/portal-settings/backup/${e.id}`;
+  const onSelect = (e) => {
+    const url = isManagement()
+      ? `/management/settings/backup/${e.id}`
+      : `/portal-settings/backup/${e.id}`;
 
-		navigate(
-			combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
-		);
-		setCurrentTabId(e.id);
-	};
+    navigate(
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
+    );
+    setCurrentTabId(e.id);
+  };
 
-	if (isNotPaidPeriod)
-		return (
-			<ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
-		);
+  if (isNotPaidPeriod)
+    return (
+      <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
+    );
 
-	return (
-		<Tabs
-			items={data}
-			selectedItemId={currentTabId}
-			onSelect={(e) => onSelect(e)}
-			stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
-			withAnimation
-		/>
-	);
+  return (
+    <Tabs
+      items={data}
+      selectedItemId={currentTabId}
+      onSelect={(e) => onSelect(e)}
+      stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      withAnimation
+    />
+  );
 };
 
 export const Component = inject(
-	({
-		settingsStore,
-		paymentStore,
-		currentTariffStatusStore,
-		currentQuotaStore,
-		backup,
-		authStore,
-	}) => {
-		const {
-			dataBackupUrl,
-			automaticBackupUrl,
+  ({
+    settingsStore,
+    paymentStore,
+    currentTariffStatusStore,
+    currentQuotaStore,
+    backup,
+    authStore,
+  }) => {
+    const {
+      dataBackupUrl,
+      automaticBackupUrl,
 
-			currentDeviceType,
-			standalone,
-			clearAbortControllerArr,
-		} = settingsStore;
+      currentDeviceType,
+      standalone,
+      clearAbortControllerArr,
+    } = settingsStore;
 
-		const buttonSize =
-			currentDeviceType !== DeviceType.desktop ? "normal" : "small";
-		const { isNotPaidPeriod } = currentTariffStatusStore;
-		return {
-			dataBackupUrl,
-			automaticBackupUrl,
-			buttonSize,
+    const buttonSize =
+      currentDeviceType !== DeviceType.desktop ? "normal" : "small";
+    const { isNotPaidPeriod } = currentTariffStatusStore;
+    return {
+      dataBackupUrl,
+      automaticBackupUrl,
+      buttonSize,
 
-			currentDeviceType,
-			standalone,
+      currentDeviceType,
+      standalone,
 
-			backup,
-			authStore,
-			currentQuotaStore,
-			paymentStore,
-			currentTariffStatusStore,
-			settingsStore,
-			clearAbortControllerArr,
-			isNotPaidPeriod,
-		};
-	},
+      backup,
+      authStore,
+      currentQuotaStore,
+      paymentStore,
+      currentTariffStatusStore,
+      settingsStore,
+      clearAbortControllerArr,
+      isNotPaidPeriod,
+    };
+  },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

@@ -30,7 +30,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Tabs } from "@docspace/ui-kit/components/tabs";
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { isManagement } from "@docspace/shared/utils/common";
 
 import config from "../../../../../package.json";

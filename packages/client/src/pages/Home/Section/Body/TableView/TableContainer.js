@@ -33,7 +33,8 @@ import React, { useEffect, useRef, useCallback, useMemo, use } from "react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { TableContainer, TableBody } from "@docspace/shared/components/table";
-import { Context, injectDefaultTheme } from "@docspace/shared/utils";
+import { injectDefaultTheme } from "@docspace/shared/utils";
+import { Context } from "@docspace/ui-kit/utils/context";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
