@@ -101,7 +101,7 @@
     "@types/he": "1.2.3",
     "@types/lodash": "4.17.10",
     "@types/lodash.debounce": "^4.0.9",
-    "@types/luxon": "3.6.2",
+    "@types/luxon": "3.7.1",
     "@types/react": "19.2.10",
     "@types/react-virtualized": "9.21.30",
     "@types/react-window": "1.8.8",
