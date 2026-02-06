@@ -26,7 +26,7 @@
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Loader } from "@docspace/ui-kit/components/loader";
-import { ProgressBar } from "@docspace/shared/components/progress-bar";
+import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import styled from "styled-components";
 
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";

@@ -42,43 +42,42 @@ import { uuid, getTextColor, trimSeparator } from "@docspace/ui-kit/utils";
 
 import { DomHelpers } from "@docspace/ui-kit/utils";
 import {
-  size,
-  mobile,
-  mobileMore,
-  tablet,
-  desktop,
-  transitionalScreenSize,
-  isMobile,
-  isTablet,
-  isDesktop,
-  isTouchDevice,
-  checkIsSSR,
-  INFO_PANEL_WIDTH,
-  isMobileDevice,
+	size,
+	mobile,
+	mobileMore,
+	tablet,
+	desktop,
+	transitionalScreenSize,
+	isMobile,
+	isTablet,
+	isDesktop,
+	isTouchDevice,
+	checkIsSSR,
+	INFO_PANEL_WIDTH,
+	isMobileDevice,
 } from "@docspace/ui-kit/utils/device";
-import { Context, Provider, Consumer } from "./context";
 import commonIconsStyles, {
-  IconSizeType,
-  isIconSizeType,
+	IconSizeType,
+	isIconSizeType,
 } from "@docspace/ui-kit/utils/common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
 import { NoUserSelect } from "./commonStyles";
 import { commonInputStyles } from "./commonInputStyles";
 import {
-  RoomsTypeValues,
-  RoomsTypes,
-  getEditorTheme,
-  getLogoFromPath,
-  isBetaLanguage,
-  getLogoUrl,
+	RoomsTypeValues,
+	RoomsTypes,
+	getEditorTheme,
+	getLogoFromPath,
+	isBetaLanguage,
+	getLogoUrl,
 } from "./common";
 import {
-  DeviceType,
-  FilterType,
-  RoomsType,
-  FileFillingFormStatus,
-  FolderType,
+	DeviceType,
+	FilterType,
+	RoomsType,
+	FileFillingFormStatus,
+	FolderType,
 } from "../enums";
 import type { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
@@ -95,294 +94,291 @@ import * as filterConstants from "./filterConstants";
 import { getAiProviderIcon, getServerIcon, getAiProviderLabel } from "./ai";
 
 export {
-  isBetaLanguage,
-  getLogoFromPath,
-  getEditorTheme,
-  RoomsTypeValues,
-  RoomsTypes,
-  parseAddresses,
-  getParts,
-  NoUserSelect,
-  commonInputStyles,
-  INFO_PANEL_WIDTH,
-  EmailSettings,
-  parseAddress,
-  desktop,
-  checkIsSSR,
-  getLanguage,
-  isArrayEqual,
-  getBannerAttribute,
-  classNames,
-  commonIconsStyles,
-  IconSizeType,
-  isIconSizeType,
-  Context,
-  Provider,
-  Consumer,
-  size,
-  mobile,
-  mobileMore,
-  tablet,
-  transitionalScreenSize,
-  isMobile,
-  isTablet,
-  isDesktop,
-  isTouchDevice,
-  email,
-  useId,
-  useClickOutside,
-  getCorrectDate,
-  handleAnyClick,
-  DomHelpers,
-  getLogoUrl,
-  isMobileDevice,
-  onEdgeScrolling,
-  clearEdgeScrollingTimer,
-  injectDefaultTheme,
-  getFromSessionStorage,
-  saveToSessionStorage,
-  getFromLocalStorage,
-  getFormFillingTipsStorageName,
-  fakeFormFillingList,
-  getCountTilesInRow,
-  getSelectFormatTranslation,
-  userFilterUtils,
-  filterConstants,
-  getAiProviderIcon,
-  getServerIcon,
-  getAiProviderLabel,
-  uuid,
-  getTextColor,
-  trimSeparator,
+	isBetaLanguage,
+	getLogoFromPath,
+	getEditorTheme,
+	RoomsTypeValues,
+	RoomsTypes,
+	parseAddresses,
+	getParts,
+	NoUserSelect,
+	commonInputStyles,
+	INFO_PANEL_WIDTH,
+	EmailSettings,
+	parseAddress,
+	desktop,
+	checkIsSSR,
+	getLanguage,
+	isArrayEqual,
+	getBannerAttribute,
+	classNames,
+	commonIconsStyles,
+	IconSizeType,
+	isIconSizeType,
+	size,
+	mobile,
+	mobileMore,
+	tablet,
+	transitionalScreenSize,
+	isMobile,
+	isTablet,
+	isDesktop,
+	isTouchDevice,
+	email,
+	useId,
+	useClickOutside,
+	getCorrectDate,
+	handleAnyClick,
+	DomHelpers,
+	getLogoUrl,
+	isMobileDevice,
+	onEdgeScrolling,
+	clearEdgeScrollingTimer,
+	injectDefaultTheme,
+	getFromSessionStorage,
+	saveToSessionStorage,
+	getFromLocalStorage,
+	getFormFillingTipsStorageName,
+	fakeFormFillingList,
+	getCountTilesInRow,
+	getSelectFormatTranslation,
+	userFilterUtils,
+	filterConstants,
+	getAiProviderIcon,
+	getServerIcon,
+	getAiProviderLabel,
+	uuid,
+	getTextColor,
+	trimSeparator,
 };
 
 export const getModalType = () => {
-  return window.innerWidth < size.desktop ? "aside" : "modal";
+	return window.innerWidth < size.desktop ? "aside" : "modal";
 };
 
 export const isValidDate = (date: Date) => {
-  return moment(date).tz(window.timezone).year() !== 9999;
+	return moment(date).tz(window.timezone).year() !== 9999;
 };
 
 export const presentInArray = (
-  array: string[],
-  search: string,
-  caseInsensitive = false,
+	array: string[],
+	search: string,
+	caseInsensitive = false,
 ) => {
-  const pattern = caseInsensitive ? search.toLowerCase() : search;
-  const result = array?.findIndex((item) => item === pattern);
-  return result !== -1;
+	const pattern = caseInsensitive ? search.toLowerCase() : search;
+	const result = array?.findIndex((item) => item === pattern);
+	return result !== -1;
 };
 
 export const getDeviceTypeByWidth = (width: number): DeviceType => {
-  if (width <= size.mobile) return DeviceType.mobile;
+	if (width <= size.mobile) return DeviceType.mobile;
 
-  if (isTablet(width)) return DeviceType.tablet;
+	if (isTablet(width)) return DeviceType.tablet;
 
-  return DeviceType.desktop;
+	return DeviceType.desktop;
 };
 
 export const getTitleWithoutExtension = (
-  item: TFile,
-  fromTemplate: boolean,
+	item: TFile,
+	fromTemplate: boolean,
 ) => {
-  const titleWithoutExst = item.title.split(".").slice(0, -1).join(".");
-  return titleWithoutExst && item.fileExst && !fromTemplate
-    ? titleWithoutExst
-    : item.title;
+	const titleWithoutExst = item.title.split(".").slice(0, -1).join(".");
+	return titleWithoutExst && item.fileExst && !fromTemplate
+		? titleWithoutExst
+		: item.title;
 };
 
 export const getLastColumn = (
-  tableStorageName: string,
-  storageColumnsSize?: string,
-  isIndexedFolder?: boolean,
+	tableStorageName: string,
+	storageColumnsSize?: string,
+	isIndexedFolder?: boolean,
 ) => {
-  if (!tableStorageName) return;
+	if (!tableStorageName) return;
 
-  const storageColumns = localStorage.getItem(tableStorageName);
-  if (!storageColumns) return;
+	const storageColumns = localStorage.getItem(tableStorageName);
+	if (!storageColumns) return;
 
-  const columns = storageColumns.split(",");
-  const filterColumns = columns.filter(
-    (column) => column !== "false" && column !== "QuickButtons",
-  );
-  let hideColumnsTable = false;
+	const columns = storageColumns.split(",");
+	const filterColumns = columns.filter(
+		(column) => column !== "false" && column !== "QuickButtons",
+	);
+	let hideColumnsTable = false;
 
-  if (storageColumnsSize) {
-    const enabledColumn = storageColumnsSize
-      .split(" ")
-      .filter((_, index, array) => {
-        if (isIndexedFolder) {
-          return index !== 0 && index !== 1 && index !== array.length - 1;
-        }
-        return index !== 0 && index !== array.length - 1;
-      })
-      .find((item) => item !== "0px");
+	if (storageColumnsSize) {
+		const enabledColumn = storageColumnsSize
+			.split(" ")
+			.filter((_, index, array) => {
+				if (isIndexedFolder) {
+					return index !== 0 && index !== 1 && index !== array.length - 1;
+				}
+				return index !== 0 && index !== array.length - 1;
+			})
+			.find((item) => item !== "0px");
 
-    hideColumnsTable = !enabledColumn;
-  }
+		hideColumnsTable = !enabledColumn;
+	}
 
-  if (hideColumnsTable) {
-    return isIndexedFolder ? filterColumns[1] : filterColumns[0];
-  }
+	if (hideColumnsTable) {
+		return isIndexedFolder ? filterColumns[1] : filterColumns[0];
+	}
 
-  if (filterColumns.length > 0) {
-    return filterColumns[filterColumns.length - 1];
-  }
-  return null;
+	if (filterColumns.length > 0) {
+		return filterColumns[filterColumns.length - 1];
+	}
+	return null;
 };
 
 export const isLockedSharedRoom = (item?: TRoom) => {
-  if (!item) return false;
+	if (!item) return false;
 
-  return Boolean(
-    item.external && item.passwordProtected && !item.isLinkExpired,
-  );
+	return Boolean(
+		item.external && item.passwordProtected && !item.isLinkExpired,
+	);
 };
 
 export const addLog = (log: string, category: "socket") => {
-  if (!window.ClientConfig?.logs?.enableLogs) return;
+	if (!window.ClientConfig?.logs?.enableLogs) return;
 
-  if (window.ClientConfig.logs.logsToConsole) console.log(log);
-  else {
-    if (!window.logs) window.logs = { socket: [] };
+	if (window.ClientConfig.logs.logsToConsole) console.log(log);
+	else {
+		if (!window.logs) window.logs = { socket: [] };
 
-    if (!window.logs[category]) window.logs[category] = [];
+		if (!window.logs[category]) window.logs[category] = [];
 
-    window.logs[category].push(log);
-  }
+		window.logs[category].push(log);
+	}
 };
 
 export const getFillingStatusLabel = (
-  status: FileFillingFormStatus | undefined,
-  t: TTranslation,
+	status: FileFillingFormStatus | undefined,
+	t: TTranslation,
 ) => {
-  switch (status) {
-    case FileFillingFormStatus.Draft:
-      return t("Common:BadgeMyDraftTitle");
-    case FileFillingFormStatus.YourTurn:
-      return t("Common:YourTurn");
-    case FileFillingFormStatus.InProgress:
-      return t("Common:InProgress");
-    case FileFillingFormStatus.Stopped:
-      return t("Common:Stopped");
-    case FileFillingFormStatus.Completed:
-      return t("Common:Complete");
-    default:
-      return "";
-  }
+	switch (status) {
+		case FileFillingFormStatus.Draft:
+			return t("Common:BadgeMyDraftTitle");
+		case FileFillingFormStatus.YourTurn:
+			return t("Common:YourTurn");
+		case FileFillingFormStatus.InProgress:
+			return t("Common:InProgress");
+		case FileFillingFormStatus.Stopped:
+			return t("Common:Stopped");
+		case FileFillingFormStatus.Completed:
+			return t("Common:Complete");
+		default:
+			return "";
+	}
 };
 export const getFillingStatusTitle = (
-  status: FileFillingFormStatus | undefined,
-  t: TTranslation,
+	status: FileFillingFormStatus | undefined,
+	t: TTranslation,
 ) => {
-  switch (status) {
-    case FileFillingFormStatus.Draft:
-      return t("Common:BadgeDraftTitle");
-    case FileFillingFormStatus.YourTurn:
-      return t("Common:BadgeYourTurnTitle");
-    case FileFillingFormStatus.InProgress:
-      return t("Common:BadgeInProgressTitle");
-    case FileFillingFormStatus.Stopped:
-      return t("Common:BadgeStoppedTitle");
-    case FileFillingFormStatus.Completed:
-      return t("Common:BadgeCompletedTitle");
-    default:
-      return "";
-  }
+	switch (status) {
+		case FileFillingFormStatus.Draft:
+			return t("Common:BadgeDraftTitle");
+		case FileFillingFormStatus.YourTurn:
+			return t("Common:BadgeYourTurnTitle");
+		case FileFillingFormStatus.InProgress:
+			return t("Common:BadgeInProgressTitle");
+		case FileFillingFormStatus.Stopped:
+			return t("Common:BadgeStoppedTitle");
+		case FileFillingFormStatus.Completed:
+			return t("Common:BadgeCompletedTitle");
+		default:
+			return "";
+	}
 };
 
 export const getCheckboxItemId = (key: string | FilterType | RoomsType) => {
-  switch (key) {
-    case "all":
-      return "selected-all";
-    case FilterType.FoldersOnly:
-      return "selected-only-folders";
-    case FilterType.DocumentsOnly:
-      return "selected-only-documents";
-    case FilterType.PresentationsOnly:
-      return "selected-only-presentations";
-    case FilterType.SpreadsheetsOnly:
-      return "selected-only-spreadsheets";
-    case FilterType.DiagramsOnly:
-      return "selected-only-diagrams";
-    case FilterType.ImagesOnly:
-      return "selected-only-images";
-    case FilterType.MediaOnly:
-      return "selected-only-media";
-    case FilterType.ArchiveOnly:
-      return "selected-only-archives";
-    case FilterType.FilesOnly:
-      return "selected-only-files";
+	switch (key) {
+		case "all":
+			return "selected-all";
+		case FilterType.FoldersOnly:
+			return "selected-only-folders";
+		case FilterType.DocumentsOnly:
+			return "selected-only-documents";
+		case FilterType.PresentationsOnly:
+			return "selected-only-presentations";
+		case FilterType.SpreadsheetsOnly:
+			return "selected-only-spreadsheets";
+		case FilterType.DiagramsOnly:
+			return "selected-only-diagrams";
+		case FilterType.ImagesOnly:
+			return "selected-only-images";
+		case FilterType.MediaOnly:
+			return "selected-only-media";
+		case FilterType.ArchiveOnly:
+			return "selected-only-archives";
+		case FilterType.FilesOnly:
+			return "selected-only-files";
 
-    case `room-${RoomsType.CustomRoom}`:
-    case `room-${RoomsType.AIRoom}`:
-      return "selected-only-custom-room";
-    case `room-${RoomsType.EditingRoom}`:
-      return "selected-only-collaboration-rooms";
+		case `room-${RoomsType.CustomRoom}`:
+		case `room-${RoomsType.AIRoom}`:
+			return "selected-only-custom-room";
+		case `room-${RoomsType.EditingRoom}`:
+			return "selected-only-collaboration-rooms";
 
-    case `room-${RoomsType.PublicRoom}`:
-      return "selected-only-public-rooms";
-    case `room-${RoomsType.VirtualDataRoom}`:
-      return "selected-only-vdr-rooms";
+		case `room-${RoomsType.PublicRoom}`:
+			return "selected-only-public-rooms";
+		case `room-${RoomsType.VirtualDataRoom}`:
+			return "selected-only-vdr-rooms";
 
-    default:
-      return "";
-  }
+		default:
+			return "";
+	}
 };
 
 export const getCheckboxItemLabel = (
-  t: TTranslation,
-  key: FilterType | RoomsType | string,
+	t: TTranslation,
+	key: FilterType | RoomsType | string,
 ) => {
-  switch (key) {
-    case "all":
-      return t("Common:All");
-    case FilterType.FoldersOnly:
-      return t("Common:Folders");
-    case FilterType.DocumentsOnly:
-      return t("Common:Documents");
-    case FilterType.PresentationsOnly:
-      return t("Common:Presentations");
-    case FilterType.SpreadsheetsOnly:
-      return t("Common:Spreadsheets");
-    case FilterType.ImagesOnly:
-      return t("Common:Images");
-    case FilterType.MediaOnly:
-      return t("Common:Media");
-    case FilterType.ArchiveOnly:
-      return t("Common:Archives");
-    case FilterType.FilesOnly:
-      return t("Common:Files");
-    case FilterType.DiagramsOnly:
-      return t("Common:Diagrams");
+	switch (key) {
+		case "all":
+			return t("Common:All");
+		case FilterType.FoldersOnly:
+			return t("Common:Folders");
+		case FilterType.DocumentsOnly:
+			return t("Common:Documents");
+		case FilterType.PresentationsOnly:
+			return t("Common:Presentations");
+		case FilterType.SpreadsheetsOnly:
+			return t("Common:Spreadsheets");
+		case FilterType.ImagesOnly:
+			return t("Common:Images");
+		case FilterType.MediaOnly:
+			return t("Common:Media");
+		case FilterType.ArchiveOnly:
+			return t("Common:Archives");
+		case FilterType.FilesOnly:
+			return t("Common:Files");
+		case FilterType.DiagramsOnly:
+			return t("Common:Diagrams");
 
-    case `room-${RoomsType.CustomRoom}`:
-      return t("Common:CustomRooms");
-    case `room-${RoomsType.EditingRoom}`:
-      return t("Common:CollaborationRooms");
+		case `room-${RoomsType.CustomRoom}`:
+			return t("Common:CustomRooms");
+		case `room-${RoomsType.EditingRoom}`:
+			return t("Common:CollaborationRooms");
 
-    case `room-${RoomsType.FormRoom}`:
-      return t("Common:FormRoom");
+		case `room-${RoomsType.FormRoom}`:
+			return t("Common:FormRoom");
 
-    case `room-${RoomsType.AIRoom}`:
-      return "AI Room";
+		case `room-${RoomsType.AIRoom}`:
+			return "AI Room";
 
-    case `room-${RoomsType.PublicRoom}`:
-      return t("Common:PublicRoomLabel");
-    case `room-${RoomsType.VirtualDataRoom}`:
-      return t("Common:VirtualDataRoom");
+		case `room-${RoomsType.PublicRoom}`:
+			return t("Common:PublicRoomLabel");
+		case `room-${RoomsType.VirtualDataRoom}`:
+			return t("Common:VirtualDataRoom");
 
-    default:
-      return "";
-  }
+		default:
+			return "";
+	}
 };
 
 export const isSystemFolder = (folderType: FolderType) => {
-  return (
-    folderType === FolderType.InProgress ||
-    folderType === FolderType.Done ||
-    folderType === FolderType.SubFolderDone ||
-    folderType === FolderType.SubFolderInProgress
-  );
+	return (
+		folderType === FolderType.InProgress ||
+		folderType === FolderType.Done ||
+		folderType === FolderType.SubFolderDone ||
+		folderType === FolderType.SubFolderInProgress
+	);
 };

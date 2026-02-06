@@ -27,7 +27,7 @@
 import { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 
-import { ProgressBar } from "@docspace/shared/components/progress-bar";
+import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Wrapper } from "../StyledDataImport";

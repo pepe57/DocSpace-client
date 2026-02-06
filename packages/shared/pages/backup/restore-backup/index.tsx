@@ -42,7 +42,7 @@ import { BackupStorageType, FilesSelectorFilterTypes } from "../../../enums";
 import RestoreBackupLoader from "../../../skeletons/backup/RestoreBackup";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
-import { FileInput } from "../../../components/file-input";
+import { FileInput } from "@docspace/ui-kit/components/file-input";
 import { FilesSelectorInput } from "../../../components/files-selector-input";
 import type { FileInfoType } from "../../../components/files-selector-input/FilesSelectorInput.types";
 import { DirectThirdPartyConnection } from "../../../components/direct-third-party-connection";
