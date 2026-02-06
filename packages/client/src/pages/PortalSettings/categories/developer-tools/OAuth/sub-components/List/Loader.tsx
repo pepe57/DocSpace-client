@@ -28,7 +28,7 @@ import React from "react";
 
 // import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import { TableSkeleton } from "@docspace/shared/skeletons/table";
-import { RowsSkeleton } from "@docspace/shared/skeletons/rows";
+import { RowsSkeleton } from "@docspace/ui-kit/components/rows";
 // import { DeviceType } from "@docspace/shared/enums";
 
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";

@@ -29,7 +29,7 @@ import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
 import classNames from "classnames";
 
 import { TableSkeleton } from "../../../skeletons/table";
-import { RowsSkeleton } from "../../../skeletons/rows";
+import { RowsSkeleton } from "../../../skeletons";
 
 import { ListComponentProps } from "../InfiniteLoader.types";
 import styles from "../InfiniteLoader.module.scss";

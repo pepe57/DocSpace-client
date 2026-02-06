@@ -28,7 +28,7 @@ import { useEffect, useState } from "react";
 
 import { isDesktop } from "../../utils";
 
-import { RowsSkeleton } from "../rows";
+import { RowsSkeleton } from "@docspace/ui-kit/components/rows";
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import styles from "./Profile.module.scss";
