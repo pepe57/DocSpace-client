@@ -61,7 +61,7 @@ import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { Heading, HeadingSize } from "@docspace/ui-kit/components/heading";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { Row, RowProps } from "../rows";
+import { Row, RowProps } from "@docspace/ui-kit/components/rows";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
 import { Text } from "@docspace/ui-kit/components/text";

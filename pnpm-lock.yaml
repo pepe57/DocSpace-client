@@ -157,6 +157,9 @@ importers:
       react-transition-group:
         specifier: 4.4.5
         version: 4.4.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react-virtualized:
+        specifier: ^9.22.6
+        version: 9.22.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-window:
         specifier: 1.8.10
         version: 1.8.10(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -245,6 +248,9 @@ importers:
       '@types/react-transition-group':
         specifier: 4.4.11
         version: 4.4.11
+      '@types/react-virtualized':
+        specifier: ^9.22.3
+        version: 9.22.3
       '@types/react-window':
         specifier: 1.8.8
         version: 1.8.8
@@ -4823,6 +4829,9 @@ packages:
 
   '@types/react-virtualized@9.21.30':
     resolution: {integrity: sha512-4l2TFLQ8BCjNDQlvH85tU6gctuZoEdgYzENQyZHpgTHU7hoLzYgPSOALMAeA58LOWua8AzC6wBivPj1lfl6JgQ==}
+
+  '@types/react-virtualized@9.22.3':
+    resolution: {integrity: sha512-UKRWeBIrECaKhE4O//TSFhlgwntMwyiEIOA7WZoVkr52Jahv0dH6YIOorqc358N2V3oKFclsq5XxPmx2PiYB5A==}
 
   '@types/react-window-infinite-loader@1.0.9':
     resolution: {integrity: sha512-gEInTjQwURCnDOFyIEK2+fWB5gTjqwx30O62QfxA9stE5aiB6EWkGj4UMhc0axq7/FV++Gs/TGW8FtgEx0S6Tw==}
@@ -14580,6 +14589,11 @@ snapshots:
       '@types/react': 19.2.10
 
   '@types/react-virtualized@9.21.30':
+    dependencies:
+      '@types/prop-types': 15.7.15
+      '@types/react': 19.2.10
+
+  '@types/react-virtualized@9.22.3':
     dependencies:
       '@types/prop-types': 15.7.15
       '@types/react': 19.2.10

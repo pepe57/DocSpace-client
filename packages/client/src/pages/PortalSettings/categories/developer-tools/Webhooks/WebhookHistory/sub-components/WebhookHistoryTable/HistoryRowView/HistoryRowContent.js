@@ -29,7 +29,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { RowContent } from "@docspace/shared/components/rows";
+import { RowContent } from "@docspace/ui-kit/components/rows";
 
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { getCorrectDate } from "@docspace/shared/utils";

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css, keyframes } from "styled-components";
-import { Row } from "@docspace/shared/components/rows";
+import { Row } from "@docspace/ui-kit/components/rows";
 import { isMobile } from "react-device-detect";
 import { NoUserSelect } from "@docspace/shared/utils";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";

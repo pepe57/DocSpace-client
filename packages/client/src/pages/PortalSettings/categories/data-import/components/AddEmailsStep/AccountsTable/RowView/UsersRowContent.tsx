@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { RowContent } from "@docspace/shared/components/rows";
+import { RowContent } from "@docspace/ui-kit/components/rows";
 
 import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
 

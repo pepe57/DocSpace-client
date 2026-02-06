@@ -304,27 +304,10 @@
   --main-button-mobile-dropdown-mobile-bottom: 40px;
 
   --row-min-width: 160px;
-  --row-overflow: hidden;
-  --row-text-overflow: ellipsis;
-  --row-element-margin-right: 14px;
-  --row-element-margin-left: 2px;
-  --row-option-button-padding: 8px 0px 9px 7px;
 
-  --row-content-margin: 0 6px;
-  --row-content-font-size: 12px;
-  --row-content-font-style: normal;
-  --row-content-font-weight: 600;
-  --row-content-font-family:
-    "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
-  --row-content-max-width: 100%;
   --row-content-side-info-min-width: 160px;
   --row-content-side-info-margin: 0 6px;
   --row-content-side-info-width: 160px;
-  --row-content-main-wrapper-min-width: 140px;
-  --row-content-main-wrapper-margin-right: 8px;
-  --row-content-main-wrapper-margin-top: 8px;
-  --row-content-main-wrapper-width: 95%;
-  --row-content-icons-height: 16px;
 
   --selector-add-button-border: none;
   --selector-add-button-box-sizing: border-box;
@@ -773,47 +756,13 @@
 }
 
 .light {
-  --row-min-height: 47px;
-  --row-width: 100%;
-  --row-border-bottom: #{$gray-light-mid};
-  --row-background-color: #{$light-gray-hover};
-  --row-min-width: 160px;
-  --row-overflow: hidden;
-  --row-text-overflow: ellipsis;
-  --row-element-margin-right: 14px;
-  --row-element-margin-left: 2px;
-  --row-option-button-padding: 8px 0px 9px 7px;
-  --row-content-height: 56px;
+
 }
 
 .dark {
-  --row-border-bottom: #{$gray-dark-strong};
-  --row-background-color: #{$light-dark-gray-hover};
-
-  --row-min-height: 47px;
-  --row-width: 100%;
-  --row-min-width: 160px;
-  --row-overflow: hidden;
-  --row-text-overflow: ellipsis;
-  --row-element-margin-right: 14px;
-  --row-element-margin-left: 2px;
-  --row-option-button-padding: 8px 0px 9px 7px;
-  --row-content-height: 56px;
-
-  --row-content-margin: 0 6px;
-  --row-content-font-size: 12px;
-  --row-content-font-style: normal;
-  --row-content-font-weight: 600;
-  --row-content-font-family:
-    "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
-  --row-content-max-width: 100%;
   --row-content-side-info-min-width: 160px;
   --row-content-side-info-margin: 0 6px;
   --row-content-side-info-width: 160px;
-  --row-content-main-wrapper-min-width: 140px;
-  --row-content-main-wrapper-margin-right: 8px;
-  --row-content-main-wrapper-margin-top: 8px;
-  --row-content-main-wrapper-width: 95%;
 
   --section-header-height: 69px;
   --section-header-height-tablet: 61px;
@@ -825,25 +774,10 @@
 }
 
 .light {
-  --row-content-margin: 0 6px;
-  --row-content-font-size: 12px;
-  --row-content-font-style: normal;
-  --row-content-font-weight: 600;
-  --row-content-font-family:
-    "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
-  --row-content-height: 56px;
-  --row-content-max-width: 100%;
 
   --row-content-side-info-min-width: 160px;
   --row-content-side-info-margin: 0 6px;
   --row-content-side-info-width: 160px;
-
-  --row-content-main-wrapper-min-width: 140px;
-  --row-content-main-wrapper-margin-right: 8px;
-  --row-content-main-wrapper-margin-top: 8px;
-  --row-content-main-wrapper-width: 95%;
-
-  --row-content-icons-height: 16px;
 }
 
 .light {
@@ -1753,16 +1687,6 @@
   --selector-empty-screen-button-color: #{$dark-gray-dark};
   --selector-empty-screen-hover-button-color: #{$white};
   --selector-empty-screen-description-color: #{$dark-gray-dark};
-}
-
-.light {
-  --index-bg-button-hover: #{$light-blue-hover};
-  --index-arrow-button-hover: #{$light-blue-main};
-}
-
-.dark {
-  --index-bg-button-hover: #{$dark-grey-hover};
-  --index-arrow-button-hover: #{$white};
 }
 
 .light {

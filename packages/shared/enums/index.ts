@@ -565,12 +565,6 @@ export const enum RoomsStorageFilter {
   thirdparty = 2,
 }
 
-export const enum VDRIndexingAction {
-  HigherIndex = "HigherIndex",
-  LowerIndex = "LowerIndex",
-  MoveIndex = "MoveIndex",
-}
-
 export const enum LDAPOperation {
   SaveAndSync = "Save",
   Sync = "Sync",
