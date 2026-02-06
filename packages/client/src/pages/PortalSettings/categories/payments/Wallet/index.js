@@ -27,7 +27,6 @@
 import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
 
 import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 
@@ -48,7 +47,7 @@ const Wallet = (props) => {
   const shouldShowLoader = !isInitWalletPage || !ready;
 
   useEffect(() => {
-    moment.locale(language);
+    // Locale is now handled by the date utility functions
   }, [language]);
 
   useEffect(() => {

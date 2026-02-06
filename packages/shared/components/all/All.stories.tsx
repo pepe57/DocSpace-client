@@ -29,7 +29,7 @@
 import React from "react";
 // import { BooleanValue, StringValue } from "react-values";
 
-import moment from "moment";
+import { now } from "../../utils/date";
 
 import SettingsReactSvg from "PUBLIC_DIR/images/settings.react.svg";
 import CatalogFolderReactSvg from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
@@ -436,7 +436,7 @@ const Template = () => (
       <div style={{ padding: "8px 0" }}>
         <Calendar
           onChange={() => {}}
-          selectedDate={moment()}
+          selectedDate={now()}
           minDate={new Date("1970/01/01")}
           maxDate={new Date("3000/01/01")}
           locale="en"
