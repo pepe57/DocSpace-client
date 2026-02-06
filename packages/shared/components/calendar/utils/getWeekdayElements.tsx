@@ -25,14 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import moment from "moment";
 import classNames from "classnames";
+import { getWeekdays } from "../../../utils/date";
 import styles from "../Calendar.module.scss";
 
 export const getWeekdayElements = () => {
-  const weekdays = moment
-    .weekdaysMin(true)
-    .map((weekday) => weekday.charAt(0).toUpperCase() + weekday.substring(1));
+  // Get minimal weekday names starting from Monday (luxon uses Monday=1 by default)
+  const weekdays = getWeekdays("narrow").map(
+    (weekday) => weekday.charAt(0).toUpperCase() + weekday.substring(1),
+  );
   return weekdays.map((day) => (
     <span className={classNames(styles.weekDay, "weekday")} key={day}>
       {day}

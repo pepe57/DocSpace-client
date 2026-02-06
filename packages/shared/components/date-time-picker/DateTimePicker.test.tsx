@@ -25,21 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { describe, it, expect, afterEach, vi } from "vitest";
 import { screen, render, fireEvent } from "@testing-library/react";
-import moment from "moment";
 import { DateTimePicker } from "./DateTimePicker";
 import { DateTimePickerProps } from "./DateTimerPicker.types";
 import styles from "./DateTimePicker.module.scss";
+import { createDateTime } from "../../utils/date";
 
 describe("DateTimePicker", () => {
   const defaultProps: DateTimePickerProps = {
-    initialDate: moment("2025-01-27T10:00:00"),
+    initialDate: createDateTime(2025, 1, 27, 10, 0, 0),
     selectDateText: "Select Date",
     onChange: vi.fn(),
     className: "test-date-picker",
     id: "test-date-picker",
     locale: "en",
     hasError: false,
-    openDate: moment("2025-01-27T10:00:00"),
+    openDate: createDateTime(2025, 1, 27, 10, 0, 0)!,
   };
 
   afterEach(() => {
@@ -86,8 +86,8 @@ describe("DateTimePicker", () => {
   });
 
   it("should respect min and max date constraints", () => {
-    const minDate = moment("2025-01-01");
-    const maxDate = moment("2025-12-31");
+    const minDate = createDateTime(2025, 1, 1);
+    const maxDate = createDateTime(2025, 12, 31);
 
     render(
       <DateTimePicker {...defaultProps} minDate={minDate} maxDate={maxDate} />,

@@ -26,8 +26,9 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
+import type { DateTime } from "luxon";
 
-import moment from "moment";
+import { now, addToDate } from "../../../utils/date";
 
 import { Text } from "../../text";
 import { Link, LinkType } from "../../link";
@@ -63,17 +64,17 @@ const ExpiredComboBox = ({
   };
 
   const setTwelveHours = () => {
-    const currentDate = moment().add(12, "hour");
+    const currentDate = addToDate(now(), 12, "hours");
     changeExpirationOption(link, currentDate);
   };
 
   const setOneDay = () => {
-    const currentDate = moment().add(1, "days");
+    const currentDate = addToDate(now(), 1, "days");
     changeExpirationOption(link, currentDate);
   };
 
   const setSevenDays = () => {
-    const currentDate = moment().add(7, "days");
+    const currentDate = addToDate(now(), 7, "days");
     changeExpirationOption(link, currentDate);
   };
 
@@ -89,9 +90,8 @@ const ExpiredComboBox = ({
     setShowCalendar(false);
   };
 
-  const setDateFromCalendar = (e: moment.Moment) => {
-    const currentDate = moment(e);
-    changeExpirationOption(link, currentDate);
+  const setDateFromCalendar = (e: DateTime) => {
+    changeExpirationOption(link, e);
   };
 
   const onReactivate = () => {
@@ -120,7 +120,7 @@ const ExpiredComboBox = ({
 
       return (
         <Trans t={t} i18nKey="LinkExpireAfter" ns="Common">
-          The link will expire after
+          The link will expire
           <LinkWithDropdown
             className={styles.expiredOptions}
             color={globalColors.lightBlueMain}
