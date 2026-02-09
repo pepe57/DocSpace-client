@@ -55,7 +55,7 @@ import styles from "../InvitePanel.module.scss";
 
 import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 import { deleteInviteLink } from "@docspace/shared/api/portal";
-import moment from "moment";
+import { now, parseToDateTime, isAfter } from "@docspace/shared/utils/date";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 const ExternalLinks = ({
@@ -89,9 +89,7 @@ const ExternalLinks = ({
   const showLifetimeBlock = !!activeLink?.expirationDate;
   const showUsersLimitWarning =
     activeLink?.currentUseCount >= activeLink?.maxUseCount;
-  const linkIsExpired = moment(new Date()).isAfter(
-    moment(activeLink?.expirationDate),
-  );
+  const linkIsExpired = isAfter(now(), parseToDateTime(activeLink?.expirationDate));
 
   const locale = getCookie(LANGUAGE) ?? culture ?? "en";
 

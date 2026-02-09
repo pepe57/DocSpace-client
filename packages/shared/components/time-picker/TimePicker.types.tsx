@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Moment } from "moment";
+import type { DateTime } from "luxon";
 
 export type TimePickerProps = {
   /** Initial time value */
-  initialTime?: object | string | Date | Moment;
+  initialTime?: string | Date | DateTime;
   /** Callback function when time changes */
-  onChange?: (date: Moment) => void;
+  onChange?: (date: DateTime) => void;
   /** Additional CSS class */
   className?: string;
   /** CSS class for input */

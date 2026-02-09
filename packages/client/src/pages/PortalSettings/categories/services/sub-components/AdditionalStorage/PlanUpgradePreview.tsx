@@ -28,7 +28,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
-import moment from "moment";
+import { now, formatDateLocalized } from "@docspace/shared/utils/date";
 
 import { Text } from "@docspace/shared/components/text";
 import { calcalateWalletPayment } from "@docspace/shared/api/portal";
@@ -86,7 +86,7 @@ const PlanUpgradePreview: React.FC<PlanUpgradePreviewProps> = (props) => {
           {daysUntilStorageExpiry === 0
             ? t("PartialPaymentNoDate", { storageUnit: t("Common:Gigabyte") })
             : t("PartialPaymentWithDate", {
-                startDate: moment().tz(window.timezone).format("LL"),
+                startDate: formatDateLocalized(now().setZone(window.timezone), "DATE_MED"),
                 endDate: storageExpiryDate,
                 storageUnit: t("Common:Gigabyte"),
               })}

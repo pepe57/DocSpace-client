@@ -34,6 +34,8 @@ import { Avatar } from "@docspace/shared/components/avatar";
 import { toastr } from "@docspace/shared/components/toast";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { Link } from "@docspace/shared/components/link";
+import { useState } from "react";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -54,6 +56,20 @@ const StyledContainer = styled.div`
   .payer-info {
     margin-inline-end: 3px;
   }
+    
+  .payer-info_container{
+    display: flex;
+    gap:8px;
+    flex-wrap:wrap;
+    align-items: center;
+
+    .loader_container{
+      .refresh-data_loader{
+        height:16px;
+      }
+    }
+  }
+
   .payer-info_wrapper {
     height: max-content;
     display: grid;
@@ -77,7 +93,14 @@ const StyledContainer = styled.div`
       cursor: pointer;
       text-decoration: underline;
     }
-  }
+
+    .payer-info_refresh-data {
+      cursor: ${(props) => (props.isDisabled ? "default" : "pointer")};
+      color: ${(props) =>
+        props.isDisabled
+          ? props.theme.client.settings.payment.payerInfo.disableColor
+          : "inherit"};
+    }
 `;
 
 const PayerInformation = ({
@@ -88,15 +111,38 @@ const PayerInformation = ({
   payerInfo,
   email,
   isNotPaidPeriod,
-
+  fetchPayerInfo = async () => {},
   isStripePortalAvailable,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
+  const [isDisabled, setDisabled] = useState(false);
   const goToStripePortal = () => {
     accountLink
       ? window.open(accountLink, "_blank")
       : toastr.error(t("Common:UnexpectedError"));
+  };
+
+  const onRefreshData = async () => {
+    setDisabled(true);
+    try {
+      await fetchPayerInfo(true);
+    } catch (error) {
+      let errorMessage = "";
+
+      if (typeof error === "object") {
+        errorMessage =
+          error?.response?.data?.error?.message ||
+          error?.statusText ||
+          error?.message ||
+          "";
+      } else if (typeof error === "string") {
+        errorMessage = error;
+      }
+
+      toastr.error(errorMessage || t("Common:UnexpectedError"));
+    }
+    setDisabled(false);
   };
 
   const renderTooltip = (
@@ -149,18 +195,46 @@ const PayerInformation = ({
       </Text>
       <div>
         {isStripePortalAvailable ? (
-          <Link
-            noSelect
-            fontWeight={600}
-            tag="a"
-            target="_blank"
-            className="payer-info_account-link"
-            color="accent"
-            onClick={goToStripePortal}
-            dataTestId="stripe_customer_portal_link"
-          >
-            {t("ChooseNewPayer")}
-          </Link>
+          <div className="payer-info_container">
+            <Trans
+              t={t}
+              i18nKey="ChooseNewPayerOrRefrashData"
+              components={{
+                1: (
+                  <Link
+                    noSelect
+                    fontWeight={600}
+                    tag="a"
+                    target="_blank"
+                    className="payer-info_account-link"
+                    color="accent"
+                    onClick={goToStripePortal}
+                    dataTestId="stripe_customer_portal_link"
+                  />
+                ),
+                2: (
+                  <Link
+                    noSelect
+                    fontWeight={600}
+                    onClick={isDisabled ? () => {} : onRefreshData}
+                    textDecoration="underline dotted"
+                    className="payer-info_refresh-data"
+                    dataTestId="stripe_customer_refresh_data"
+                  />
+                ),
+              }}
+            />
+            {isDisabled ? (
+              <div className="loader_container">
+                <Loader
+                  color=""
+                  size="16px"
+                  type={LoaderTypes.track}
+                  className="refresh-data_loader"
+                />
+              </div>
+            ) : null}
+          </div>
         ) : null}
       </div>
     </div>
@@ -223,7 +297,7 @@ const PayerInformation = ({
     : {};
 
   return (
-    <StyledContainer style={style}>
+    <StyledContainer style={style} isDisabled={isDisabled}>
       <div className="payer-info_avatar">
         <Avatar
           size="base"
@@ -259,6 +333,7 @@ export default inject(
       isNotPaidPeriod,
       walletCustomerEmail,
       walletCustomerInfo,
+      fetchPayerInfo,
     } = currentTariffStatusStore;
     const { user } = userStore;
 
@@ -271,6 +346,7 @@ export default inject(
       isNotPaidPeriod,
       email: walletCustomerEmail,
       payerInfo: walletCustomerInfo,
+      fetchPayerInfo,
     };
   },
 )(observer(PayerInformation));
