@@ -218,28 +218,6 @@
   --error-container-body-text: #{$gray};
   --error-container-link-color: #{$link};
 
-  --filter-button-border: 1px solid #{$gray-strong};
-  --filter-button-hover-border: 1px solid #{$gray};
-
-  --filter-button-open-background: #{$gray};
-  --filter-button-open-fill: #{$white};
-
-  --filter-block-background: #{$white};
-  --filter-block-item-color: #{$gray};
-  --filter-block-selected-item-color: #{$white};
-  --filter-block-selected-backgroud-color: var(
-    --accent-main,
-    #{$light-blue-main}
-  );
-  --filter-block-item-separator-background: #{$gray-light-mid};
-  --filter-block-item-tag-border: 1px solid #{$gray-light-mid};
-
-  --filter-sort-button-background: #{$white};
-  --filter-sort-button-selected-icon: #{$light-gray-selected};
-  --filter-sort-button-unselected-icon: #{$gray};
-  --filter-sort-button-sort-fill: #{$light-gray-dark};
-  --filter-sort-button-selected-background: #{$light-gray-hover};
-
   --floating-button-icon-fill: #{$white};
   --floating-button-background: #{$light-icons};
   --floating-button-box-shadow: 0px 5px 20px #{$popup-shadow};
@@ -273,8 +251,6 @@
 
   --background-color: #{$black};
   --text-color: #{$white};
-
-  --view-selector-items-count: unset;
 
   --font-family: "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
 
@@ -445,25 +421,6 @@
   --error-container-background: #{$black};
   --error-container-body-text: #{$gray-dark};
   --error-container-link-color: #{$dark-link};
-
-  --filter-button-border: 1px solid #{$gray-dark-strong};
-  --filter-button-hover-border: 1px solid #{$gray-dark};
-
-  --filter-button-open-background: #{$gray};
-  --filter-button-open-fill: #{$white};
-
-  --filter-block-background: #{$black};
-  --filter-block-item-color: #{$gray};
-  --filter-block-selected-backgroud-color: #{$white};
-  --filter-block-selected-item-color: #{$black};
-  --filter-block-item-separator-background: #{$gray-dark-strong};
-  --filter-block-item-tag-border: 1px solid #{$gray-dark-strong};
-
-  --filter-sort-button-background: #{$black};
-  --filter-sort-button-selected-icon: #{$light-gray-selected};
-  --filter-sort-button-unselected-icon: #{$gray-dark};
-  --filter-sort-button-sort-fill: #{$dark-gray-dark};
-  --filter-sort-button-selected-background: #{$gray-dark-strong};
 
   --floating-button-icon-fill: #{$black};
   --floating-button-background: #{$white};
@@ -970,8 +927,6 @@
   --tag-text-line-height: 20px;
   --tag-dropdown-text-line-height: 30px;
   --tag-font-size: 13px;
-
-  --view-selector-items-count: unset;
 }
 
 .light {
@@ -1058,30 +1013,6 @@
 }
 
 .light {
-  --view-selector-fill-color: #{$white};
-  --view-selector-checked-fill-color: #{$gray};
-  --view-selector-fill-disabled-color: #{$gray-light};
-  --view-selector-disabled-fill-color: #{$gray-light-mid};
-  --view-selector-disabled-fill-color-inner: #{$gray-strong};
-  --view-selector-border-color: #{$gray-strong};
-  --view-selector-hover-border-color: #{$gray};
-  --view-selector-icon-button-hover-color: #{$light-gray-dark};
-
-  --view-selector-items-count: unset;
-}
-
-.dark {
-  --view-selector-fill-color: #{$black};
-  --view-selector-checked-fill-color: #{$gray-dark};
-  --view-selector-fill-disabled-color: #{$gray-light};
-  --view-selector-disabled-fill-color: #{$gray-light-mid};
-  --view-selector-disabled-fill-color-inner: #{$gray-strong};
-  --view-selector-border-color: #{$gray-dark-strong};
-  --view-selector-hover-border-color: #{$gray-dark};
-  --view-selector-icon-button-hover-color: #{$white};
-}
-
-.light {
   --catalog-profile-background: #{$light-gray-hover};
   --catalog-profile-border-top: 1px solid #{$gray-light-mid};
 }
@@ -1091,13 +1022,6 @@
   --catalog-profile-border-top: 1px solid #{$gray-dark-strong};
 }
 
-.light {
-  --filter-block-border-color: #{$gray-light-mid};
-}
-
-.dark {
-  --filter-block-border-color: #{$gray-dark-strong};
-}
 
 .light {
   --body-info-border-color: #{$gray-light-mid};

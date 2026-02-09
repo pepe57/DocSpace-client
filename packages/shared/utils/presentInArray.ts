@@ -24,27 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type TViewSelectorOption = {
-  value: string;
-  icon: string | React.ReactElement;
-  id?: string;
-  callback?: () => void;
-};
-
-type PickedDivProps = Pick<
-  React.ComponentPropsWithRef<"div">,
-  "className" | "id" | "style"
->;
-
-export type ViewSelectorProps = PickedDivProps & {
-  /** Disables the button default functionality */
-  isDisabled?: boolean;
-  /** Sets a callback function that is triggered when the button is clicked */
-  onChangeView: (view: string) => void;
-  /** Array that contains the view settings  */
-  viewSettings: TViewSelectorOption[];
-  /** Current application view */
-  viewAs: string;
-  /** Displays only available selector options  */
-  isFilter?: boolean;
+export const presentInArray = (
+  array: string[],
+  search: string,
+  caseInsensitive = false,
+) => {
+  const pattern = caseInsensitive ? search.toLowerCase() : search;
+  const result = array?.findIndex((item) => item === pattern);
+  return result !== -1;
 };

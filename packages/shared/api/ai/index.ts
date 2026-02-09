@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { getCookie } from "../../utils";
+import { getCookie } from "../../utils/cookie";
 import { getAiModelName } from "../../utils/ai";
 import { checkFilterInstance } from "../../utils/common";
 

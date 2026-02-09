@@ -28,7 +28,7 @@ import React from "react";
 
 import api from "../../../api";
 import { TFilesSettings } from "../../../api/files/types";
-import { presentInArray } from "../../../utils";
+import { presentInArray } from "../../../utils/presentInArray";
 import {
   iconSize32,
   iconSize64,

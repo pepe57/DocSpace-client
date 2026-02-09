@@ -24,56 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { TFile } from "../api/files/types";
 
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
-import { FilterLoaderProps } from "./Filter.types";
-import styles from "../Filter.module.scss";
-
-const FilterLoader = ({ id, className, style, ...rest }: FilterLoaderProps) => {
-	const {
-		title,
-		height,
-		borderRadius,
-		backgroundColor,
-		foregroundColor,
-		backgroundOpacity,
-		foregroundOpacity,
-		speed,
-		animate,
-	} = rest;
-
-	return (
-		<div
-			id={id}
-			className={`${styles.filterLoader} ${className || ""}`}
-			style={style}
-			data-testid="filter-loader"
-		>
-			<RectangleSkeleton
-				title={title}
-				height={height}
-				borderRadius={borderRadius}
-				backgroundColor={backgroundColor}
-				foregroundColor={foregroundColor}
-				backgroundOpacity={backgroundOpacity}
-				foregroundOpacity={foregroundOpacity}
-				speed={speed}
-				animate={animate}
-			/>
-			<RectangleSkeleton
-				title={title}
-				height={height}
-				borderRadius={borderRadius}
-				backgroundColor={backgroundColor}
-				foregroundColor={foregroundColor}
-				backgroundOpacity={backgroundOpacity}
-				foregroundOpacity={foregroundOpacity}
-				speed={speed}
-				animate={animate}
-			/>
-		</div>
-	);
+export const getTitleWithoutExtension = (
+  item: TFile,
+  fromTemplate: boolean,
+) => {
+  const titleWithoutExst = item.title.split(".").slice(0, -1).join(".");
+  return titleWithoutExst && item.fileExst && !fromTemplate
+    ? titleWithoutExst
+    : item.title;
 };
-
-export default FilterLoader;
