@@ -64,9 +64,9 @@ function useEventListener<K extends keyof DocumentEventMap>(
   options?: boolean | AddEventListenerOptions,
 ): void;
 
-function useEventListener<K extends string>(
+function useEventListener<K extends string, D = unknown>(
   eventName: K,
-  handler: (event: CustomEvent) => void,
+  handler: (event: CustomEvent<D>) => void,
   element?: RefObject<HTMLElement | Document | null>,
   options?: boolean | AddEventListenerOptions,
 ): void;
@@ -77,6 +77,7 @@ function useEventListener<
   KM extends keyof MediaQueryListEventMap,
   KC extends string,
   T extends HTMLElement | SVGAElement | MediaQueryList | Document = HTMLElement,
+  D = unknown,
 >(
   eventName: KW | KH | KM | KC,
   handler: (
@@ -85,7 +86,7 @@ function useEventListener<
       | HTMLElementEventMap[KH]
       | SVGElementEventMap[KH]
       | MediaQueryListEventMap[KM]
-      | CustomEvent
+      | CustomEvent<D>
       | Event,
   ) => void,
   element?: RefObject<T | null>,
