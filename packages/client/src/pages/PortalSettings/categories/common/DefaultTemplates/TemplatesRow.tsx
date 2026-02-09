@@ -217,6 +217,9 @@ const TemplatesRow = ({
           onClose={() => setIsSelectorVisible(false)}
           acceptButtonLabel={t("Common:SelectAction")}
           isMultiSelect={false}
+          withRecentTreeFolder
+          withFavoritesTreeFolder
+          withAIAgentsTreeFolder
           openRoot
         />
       ) : null}
