@@ -149,7 +149,7 @@ const ItemsList = ({
 		>
 			<List
 				style={{ overflow: overflowStyle, willChange: "transform" }}
-				direction={interfaceDirection}
+				direction={interfaceDirection as "ltr" | "rtl"}
 				height={bodyHeight}
 				width="auto"
 				itemCount={listItems.length}
