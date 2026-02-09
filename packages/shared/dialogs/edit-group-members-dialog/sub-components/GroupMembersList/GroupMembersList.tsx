@@ -114,7 +114,7 @@ const GroupMembersList = ({
             <List
               className="list-scroll"
               ref={ref}
-              direction={interfaceDirection}
+              direction={interfaceDirection as "ltr" | "rtl"}
               height={height - SEARCH_WITH_PADDING_HEIGHT}
               width={width}
               itemCount={itemCount}
