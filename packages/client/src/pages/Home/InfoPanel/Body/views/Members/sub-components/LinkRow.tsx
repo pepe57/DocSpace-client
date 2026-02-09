@@ -24,12 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
 import { useState } from "react";
 import copy from "copy-to-clipboard";
 import type { TFunction } from "i18next";
+import type { DateTime } from "luxon";
 import { observer, inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { addToDate, now } from "@docspace/shared/utils/date";
 
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
@@ -173,7 +174,7 @@ const LinkRow = (props: LinkRowProps) => {
 
   const editExternalLinkAction = async (newLink: TFileLink) => {
     if (link.sharedTo.isExpired) {
-      newLink.sharedTo.expirationDate = moment().add(7, "days").toISOString();
+      newLink.sharedTo.expirationDate = addToDate(now(), 7, "days")?.toISO() ?? null;
     }
 
     setLoadingLinks([newLink.sharedTo.id]);
@@ -220,7 +221,7 @@ const LinkRow = (props: LinkRowProps) => {
         access: isReactivate ? link.access : ShareAccessRights.None,
         sharedTo: {
           ...link.sharedTo,
-          expirationDate: moment().add(7, "days").toISOString(),
+          expirationDate: addToDate(now(), 7, "days")?.toISO() ?? null,
         },
       });
 
@@ -244,11 +245,11 @@ const LinkRow = (props: LinkRowProps) => {
 
   const changeExpirationOption = async (
     _linkData: TFileLink,
-    expirationDate: moment.Moment | null,
+    expirationDate: DateTime | null,
   ) => {
     const newLink = { ...link };
     newLink.sharedTo.expirationDate = expirationDate
-      ? moment(expirationDate).toISOString()
+      ? expirationDate.toISO()
       : null;
     editExternalLinkAction(newLink);
   };

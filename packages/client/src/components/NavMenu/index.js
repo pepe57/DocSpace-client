@@ -91,7 +91,11 @@ const NavMenu = (props) => {
 
     const isNearBottom = scrollHeight - (currentScrollTop + clientHeight) < 100;
 
-    if (scrollShift > 0 && !isNearBottom) {
+    const isAtTop = currentScrollTop < 20;
+
+    if (isAtTop) {
+      setIsFixed(false);
+    } else if (scrollShift > 0 && !isNearBottom) {
       setIsFixed(true);
     } else if (scrollShift <= 0) {
       setIsFixed(false);

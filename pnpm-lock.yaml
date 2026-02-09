@@ -146,20 +146,14 @@ importers:
         specifier: 4.0.8
         version: 4.0.8
       luxon:
-        specifier: 3.5.0
-        version: 3.5.0
+        specifier: 3.7.2
+        version: 3.7.2
       mobx:
         specifier: 6.13.5
         version: 6.13.5
       mobx-react:
         specifier: 7.6.0
         version: 7.6.0(mobx@6.13.5)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      moment:
-        specifier: 2.30.1
-        version: 2.30.1
-      moment-timezone:
-        specifier: 0.6.0
-        version: 0.6.0
       msw:
         specifier: ^2.12.7
         version: 2.12.7(@types/node@25.2.0)(typescript@5.9.3)
@@ -326,6 +320,9 @@ importers:
       '@types/lodash.debounce':
         specifier: ^4.0.9
         version: 4.0.9
+      '@types/luxon':
+        specifier: 3.6.2
+        version: 3.6.2
       '@types/react':
         specifier: 19.2.10
         version: 19.2.10
@@ -449,9 +446,6 @@ importers:
       lodash:
         specifier: 4.17.23
         version: 4.17.23
-      moment:
-        specifier: 2.30.1
-        version: 2.30.1
       nconf:
         specifier: 0.12.1
         version: 0.12.1
@@ -685,9 +679,6 @@ importers:
       mobx-react:
         specifier: 7.6.0
         version: 7.6.0(mobx@6.13.5)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      moment-timezone:
-        specifier: 0.6.0
-        version: 0.6.0
       nconf:
         specifier: 0.12.1
         version: 0.12.1
@@ -833,12 +824,6 @@ importers:
       mobx-react:
         specifier: 7.6.0
         version: 7.6.0(mobx@6.13.5)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      moment:
-        specifier: 2.30.1
-        version: 2.30.1
-      moment-timezone:
-        specifier: 0.6.0
-        version: 0.6.0
       nconf:
         specifier: 0.12.1
         version: 0.12.1
@@ -997,20 +982,14 @@ importers:
         specifier: 4.17.23
         version: 4.17.23
       luxon:
-        specifier: 3.5.0
-        version: 3.5.0
+        specifier: 3.7.2
+        version: 3.7.2
       mobx:
         specifier: 6.13.5
         version: 6.13.5
       mobx-react:
         specifier: 7.6.0
         version: 7.6.0(mobx@6.13.5)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      moment:
-        specifier: 2.30.1
-        version: 2.30.1
-      moment-timezone:
-        specifier: 0.6.0
-        version: 0.6.0
       next:
         specifier: 16.1.6
         version: 16.1.6(@babel/core@7.25.8)(@playwright/test@1.58.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.79.6)
@@ -1232,8 +1211,8 @@ importers:
         specifier: 4.17.10
         version: 4.17.10
       '@types/luxon':
-        specifier: 3.4.2
-        version: 3.4.2
+        specifier: 3.6.2
+        version: 3.6.2
       '@types/node':
         specifier: 24.10.7
         version: 24.10.7
@@ -4443,8 +4422,8 @@ packages:
   '@types/lodash@4.17.10':
     resolution: {integrity: sha512-YpS0zzoduEhuOWjAotS6A5AVCva7X4lVlYLF0FYHAY9sdraBfnatttHItlWeZdGhuEkf+OzMNg2ZYAx8t+52uQ==}
 
-  '@types/luxon@3.4.2':
-    resolution: {integrity: sha512-TifLZlFudklWlMBfhubvgqTXRzLDI5pCbGa4P8a3wPyUQSW+1xQ5eDsreP9DWHX3tjq1ke96uYG/nwundroWcA==}
+  '@types/luxon@3.6.2':
+    resolution: {integrity: sha512-R/BdP7OxEMc44l2Ex5lSXHoIXTB2JLNa3y2QISIbr58U/YcsffyQrYW//hZSdrfxrjRZj3GcUoxMPGdO8gSYuw==}
 
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
@@ -7247,8 +7226,8 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
-  luxon@3.5.0:
-    resolution: {integrity: sha512-rh+Zjr6DNfUYR3bPwJEnuwDdqMbxZW7LOQfUN4B54+Cl+0o5zaU9RJ6bcidfDtC1cWCZXQ+nvX8bf6bAji37QQ==}
+  luxon@3.7.2:
+    resolution: {integrity: sha512-vtEhXh/gNjI9Yg1u4jX/0YVPMvxzHuGgCm6tC5kZyb08yjGWGnqAjGJvcXbqQR2P3MyMEFnRbpcdFS6PBcLqew==}
     engines: {node: '>=12'}
 
   lws-basic-auth@2.0.0:
@@ -7635,9 +7614,6 @@ packages:
     resolution: {integrity: sha512-Rs5FVpVcBYRHPLuhHOjgbRhosaQYLtEo3JIeDIbmNo7mSssi1CTzwMh8v36gAzpbzLGXI9wB/yHh+5+3fY1QVw==}
     engines: {node: '>=18'}
     hasBin: true
-
-  moment-timezone@0.6.0:
-    resolution: {integrity: sha512-ldA5lRNm3iJCWZcBCab4pnNL3HSZYXVb/3TYr75/1WCTWYuTqYUb5f/S384pncYjJ88lbO8Z4uPDvmoluHJc8Q==}
 
   moment@2.30.1:
     resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
@@ -13607,7 +13583,7 @@ snapshots:
 
   '@types/lodash@4.17.10': {}
 
-  '@types/luxon@3.4.2': {}
+  '@types/luxon@3.6.2': {}
 
   '@types/mdast@4.0.4':
     dependencies:
@@ -16717,7 +16693,7 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
-  luxon@3.5.0: {}
+  luxon@3.7.2: {}
 
   lws-basic-auth@2.0.0:
     dependencies:
@@ -17328,10 +17304,6 @@ snapshots:
       glob: 7.2.3
       requirejs: 2.3.8
       requirejs-config-file: 4.0.0
-
-  moment-timezone@0.6.0:
-    dependencies:
-      moment: 2.30.1
 
   moment@2.30.1: {}
 

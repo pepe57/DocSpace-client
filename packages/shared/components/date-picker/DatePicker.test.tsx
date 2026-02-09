@@ -25,11 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import moment from "moment";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { DatePicker } from "./DatePicker";
+import {
+  now,
+  createDateTime,
+  addToDate,
+  startOf,
+} from "../../utils/date";
 
 // Mock selector-add-button
 vi.mock("../selector-add-button", () => ({
@@ -43,9 +48,9 @@ vi.mock("../selector-add-button", () => ({
 
 describe("DatePicker tests", () => {
   const defaultProps = {
-    maxDate: moment().add(10, "years").startOf("year").toDate(),
-    minDate: moment("1970-01-01").toDate(),
-    openDate: moment(),
+    maxDate: startOf(addToDate(now(), 10, "years")!, "year")!.toJSDate(),
+    minDate: new Date("1970-01-01"),
+    openDate: now(),
     locale: "en",
     selectDateText: "Select date",
     onChange: vi.fn(),
@@ -69,7 +74,7 @@ describe("DatePicker tests", () => {
   });
 
   it("renders with initial date", () => {
-    const initialDate = moment("2024-01-15");
+    const initialDate = createDateTime(2024, 1, 15);
     render(
       <DatePicker
         initialDate={initialDate}
@@ -85,7 +90,7 @@ describe("DatePicker tests", () => {
   });
 
   it("shows calendar icon when enabled", () => {
-    const initialDate = moment("2024-01-15");
+    const initialDate = createDateTime(2024, 1, 15);
     render(
       <DatePicker
         initialDate={initialDate}
@@ -127,7 +132,7 @@ describe("DatePicker tests", () => {
 
   it("handles date deletion", async () => {
     const onChange = vi.fn();
-    const initialDate = moment("2024-01-15");
+    const initialDate = createDateTime(2024, 1, 15);
     const { rerender } = render(
       <DatePicker
         {...defaultProps}
@@ -158,7 +163,7 @@ describe("DatePicker tests", () => {
   });
 
   it("updates date when outerDate prop changes", async () => {
-    const initialDate = moment("2024-01-15");
+    const initialDate = createDateTime(2024, 1, 15);
     const { rerender } = render(
       <DatePicker
         {...defaultProps}
@@ -172,7 +177,7 @@ describe("DatePicker tests", () => {
       "15 Jan 2024",
     );
 
-    const newInitialDate = moment("2024-02-01");
+    const newInitialDate = createDateTime(2024, 2, 1);
 
     rerender(
       <DatePicker
