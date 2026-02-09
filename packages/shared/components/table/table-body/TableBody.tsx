@@ -27,7 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import { InfiniteLoaderComponent } from "../../infinite-loader";
+import { InfiniteLoaderComponent } from "@docspace/ui-kit/components/infinite-loader";
 
 import { TableBodyProps } from "../Table.types";
 import styles from "./TableBody.module.scss";
