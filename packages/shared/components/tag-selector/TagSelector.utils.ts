@@ -28,6 +28,7 @@ import isString from "lodash/isString";
 
 import type { TagType } from "../tag/Tag.types";
 import type { TTag } from "./TagSelector.types";
+import { TAG_SELECTOR_EVENT_NAME } from "./TagSelector.constants";
 
 export function transformTagsData(
   roomTags: Array<TagType | string | TTag>,
