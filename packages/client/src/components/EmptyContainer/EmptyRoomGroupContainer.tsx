@@ -33,19 +33,16 @@ import type { EmptyViewOptionsType } from "@docspace/shared/components/empty-vie
 import EmptyRoomGroupsLightIcon from "PUBLIC_DIR/images/emptyview/empty.room.groups.light.svg";
 import EmptyRoomGroupsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.room.groups.dark.svg";
 
-import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg";
-import CrossIcon from "PUBLIC_DIR/images/icons/12/cross.react.svg";
+import PencilIcon from "PUBLIC_DIR/images/pencil.react.svg";
 
 import styles from "./EmptyRoomGroupContainer.module.scss";
 
 type EmptyRoomGroupContainerProps = {
-  onAddRoom?: () => void;
-  onDeleteGroup?: () => void;
+  onManageGroups?: () => void;
 };
 
 const EmptyRoomGroupContainer = ({
-  onAddRoom,
-  onDeleteGroup,
+  onManageGroups,
 }: EmptyRoomGroupContainerProps) => {
   const { t } = useTranslation(["GroupingRooms", "Common"]);
   const theme = useTheme();
@@ -58,24 +55,11 @@ const EmptyRoomGroupContainer = ({
 
   const options: EmptyViewOptionsType = [
     {
-      key: "add-room",
-      title: t("GroupingRooms:AddRoom"),
-      icon: <PlusIcon />,
-      onClick: onAddRoom,
+      key: "manage-groups",
+      title: t("GroupingRooms:ManageGroups"),
+      icon: <PencilIcon width={12} height={12} />,
+      onClick: onManageGroups,
       type: "action",
-    },
-    {
-      key: "separator",
-      text: t("Common:Or"),
-      type: "separator",
-    },
-    {
-      key: "delete-group",
-      title: t("GroupingRooms:DeleteGroup"),
-      icon: <CrossIcon />,
-      onClick: onDeleteGroup,
-      type: "action",
-      className: "secondary",
     },
   ];
 

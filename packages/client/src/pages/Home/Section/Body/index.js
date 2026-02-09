@@ -110,9 +110,7 @@ const SectionBodyContent = (props) => {
     isErrorAIAgentNotAvailable,
     selectedFolderChatSettings,
     roomsFilterGroupId,
-    setAddRoomToGroupDialogVisible,
-    deleteRoomGroup,
-    getAllRoomGroups,
+    setEditRoomGroupsDialogVisible,
     isFilterOrSearchActive,
     isRoomsFolder,
   } = props;
@@ -495,28 +493,11 @@ const SectionBodyContent = (props) => {
     !formFillingTipsVisible
   ) {
     if (roomsFilterGroupId && !isFilterOrSearchActive && isRoomsFolder) {
-      const onAddRoom = () => {
-        setAddRoomToGroupDialogVisible?.(true, roomsFilterGroupId);
+      const onManageGroups = () => {
+        setEditRoomGroupsDialogVisible?.(true);
       };
 
-      const onDeleteGroup = async () => {
-        try {
-          await deleteRoomGroup(roomsFilterGroupId);
-          await getAllRoomGroups();
-          toastr.success(t("GroupingRooms:GroupHasBeenDeleted"));
-          // Navigate back to rooms list after deleting the group
-          window.DocSpace.navigate("/rooms/shared/filter");
-        } catch (error) {
-          console.error("Error deleting group:", error);
-        }
-      };
-
-      return (
-        <EmptyRoomGroupContainer
-          onAddRoom={onAddRoom}
-          onDeleteGroup={onDeleteGroup}
-        />
-      );
+      return <EmptyRoomGroupContainer onManageGroups={onManageGroups} />;
     }
     return <EmptyContainer isEmptyPage={isEmptyPage} />;
   }
@@ -564,9 +545,7 @@ export default inject(
     const {
       welcomeFormFillingTipsVisible,
       formFillingTipsVisible,
-      setAddRoomToGroupDialogVisible,
-      deleteRoomGroup,
-      getAllRoomGroups,
+      setEditRoomGroupsDialogVisible,
     } = dialogsStore;
 
     const { roomsFilter } = filesStore;
@@ -617,9 +596,7 @@ export default inject(
       onEnableFormFillingGuid,
       setDropTargetPreview,
       roomsFilterGroupId: roomsFilter?.groupId,
-      setAddRoomToGroupDialogVisible,
-      deleteRoomGroup,
-      getAllRoomGroups,
+      setEditRoomGroupsDialogVisible,
       // Check if any filter or search is active (excluding sorting and groupId)
       isFilterOrSearchActive: !!(
         roomsFilter?.filterValue ||
