@@ -31,7 +31,7 @@ import { render, screen } from "@testing-library/react";
 import { TableBody } from "./TableBody";
 import { TableCell } from "../sub-components/table-cell";
 
-vi.mock("../../infinite-loader", () => ({
+vi.mock("@docspace/ui-kit/components/infinite-loader", () => ({
   InfiniteLoaderComponent: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="infinite-loader">{children}</div>
   ),

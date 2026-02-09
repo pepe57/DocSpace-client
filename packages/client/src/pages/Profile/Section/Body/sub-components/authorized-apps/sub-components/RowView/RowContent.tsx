@@ -1,6 +1,6 @@
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
-import { RowContent as RowContentComponent } from "@docspace/shared/components/rows";
+import { RowContent as RowContentComponent } from "@docspace/ui-kit/components/rows";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { RowContentProps } from "./RowView.types";

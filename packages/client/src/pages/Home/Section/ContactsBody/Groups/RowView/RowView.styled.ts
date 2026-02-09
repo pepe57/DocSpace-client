@@ -31,7 +31,7 @@ import {
   RowContainer,
   Row,
   RowContent,
-} from "@docspace/shared/components/rows";
+} from "@docspace/ui-kit/components/rows";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { tablet } from "@docspace/ui-kit/utils/device";
 
