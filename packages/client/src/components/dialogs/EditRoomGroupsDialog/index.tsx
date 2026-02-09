@@ -26,6 +26,7 @@
 
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 
 import {
@@ -72,6 +73,7 @@ const EditRoomGroupsDialog = ({
   setOrganizeRoomsGrouping,
 }: EditRoomGroupsDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
+  const navigate = useNavigate();
 
   const [isOpenRoomList, setIsOpenRoomList] = useState(
     () => !!openInCreateMode,
@@ -146,8 +148,15 @@ const EditRoomGroupsDialog = ({
     if (setOrganizeRoomsGrouping) {
       await setOrganizeRoomsGrouping(localGroupingEnabled);
     }
+
     setHasGroupingChanged(false);
     setEditRoomGroupsDialogVisible(false);
+
+    // If grouping was disabled and we're currently viewing a group,
+    // navigate away to show all rooms instead of empty group placeholder
+    if (!localGroupingEnabled && currentFilterGroupId) {
+      navigate("rooms/shared");
+    }
   };
 
   const onCancelGroupingChange = () => {
