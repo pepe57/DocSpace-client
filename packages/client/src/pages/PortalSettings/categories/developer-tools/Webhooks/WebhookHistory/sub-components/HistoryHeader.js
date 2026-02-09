@@ -44,7 +44,7 @@ import {
   injectDefaultTheme,
 } from "@docspace/shared/utils";
 
-import { TableGroupMenu } from "@docspace/shared/components/table";
+import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import { toastr } from "@docspace/ui-kit/components/toast";

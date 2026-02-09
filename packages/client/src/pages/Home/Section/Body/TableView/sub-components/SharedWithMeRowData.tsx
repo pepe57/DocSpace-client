@@ -29,7 +29,7 @@ import classNames from "classnames";
 import type { TFunction } from "i18next";
 import { inject, observer } from "mobx-react";
 
-import { TableCell } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/ui-kit/components/table";
 import type { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { LinkProps } from "@docspace/shared/utils/plugin-file-utils";

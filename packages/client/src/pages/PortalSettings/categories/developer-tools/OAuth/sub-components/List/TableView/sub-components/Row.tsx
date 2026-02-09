@@ -27,7 +27,7 @@
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { TableCell } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/ui-kit/components/table";
 import { Tags } from "@docspace/ui-kit/components/tags";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
