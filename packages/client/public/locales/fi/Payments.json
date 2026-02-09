@@ -34,7 +34,6 @@
   "CardUnlinked": "Card poistettu käytöstä",
   "ChangeShedule": "Muuta ajoitettua",
   "ChargeAmount": "Summa <1>{{price}}</1> veloitetaan tallennetusta maksutavastasi.",
-  "ChooseNewPayer": "Valitse uusi Maksaja",
   "ChooseNewPlan": "Haluaisitko valita uuden hinnoitteluohjelman?",
   "ConfirmPayment": "Vahvista maksu",
   "ConnectAndConfigureServices": "Tämä osio on tarkoitettu palveluiden yhdistämiseen ja konfigurointiin.",

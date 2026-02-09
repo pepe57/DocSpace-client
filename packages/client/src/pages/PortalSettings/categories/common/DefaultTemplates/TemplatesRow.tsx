@@ -33,7 +33,6 @@ import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import moment from "moment";
 
 import { Badge } from "@docspace/shared/components/badge";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
@@ -218,6 +217,9 @@ const TemplatesRow = ({
           onClose={() => setIsSelectorVisible(false)}
           acceptButtonLabel={t("Common:SelectAction")}
           isMultiSelect={false}
+          withRecentTreeFolder
+          withFavoritesTreeFolder
+          withAIAgentsTreeFolder
           openRoot
         />
       ) : null}

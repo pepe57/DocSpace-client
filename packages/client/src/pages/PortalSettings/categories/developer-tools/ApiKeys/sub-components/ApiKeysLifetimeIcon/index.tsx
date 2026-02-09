@@ -32,7 +32,7 @@ import { Text } from "@docspace/shared/components/text";
 import { TTranslation } from "@docspace/shared/types";
 import { TApiKey } from "@docspace/shared/api/api-keys/types";
 import { globalColors } from "@docspace/shared/themes";
-import moment from "moment-timezone";
+import { now, parseToDateTime, isAfter } from "@docspace/shared/utils/date";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
 const StyledApiKeysLifetimeIcon = styled.div<{ isExpired: boolean }>`
@@ -66,7 +66,7 @@ export const ApiKeysLifetimeIcon = ({
   expiresAtDate: string;
 }) => {
   const showLifetimeIcon = expiresAt;
-  const isExpired = moment().isAfter(moment(expiresAt));
+  const isExpired = isAfter(now(), parseToDateTime(expiresAt));
 
   const getTooltipContent = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>

@@ -34,7 +34,6 @@
   "CardUnlinked": "카드 연결 해제",
   "ChangeShedule": "예약 변경",
   "ChargeAmount": "저장된 결제 수단에 <1>{{price}}</1>가 청구됩니다.",
-  "ChooseNewPayer": "새 지불자 선택",
   "ChooseNewPlan": "새로운 요금제를 선택하시겠습니까?",
   "ConfirmPayment": "결제 확인",
   "ConnectAndConfigureServices": "이 섹션은 서비스 연결 및 구성을 위해 사용됩니다.",

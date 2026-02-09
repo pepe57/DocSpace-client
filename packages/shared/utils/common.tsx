@@ -26,8 +26,8 @@
 
 import type { Location } from "react-router";
 import find from "lodash/find";
-import moment from "moment-timezone";
 import { findWindows } from "windows-iana";
+import { parseToDateTime, startOf, dateDiffAbs } from "./date";
 import { isMobile } from "react-device-detect";
 import { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
@@ -799,7 +799,9 @@ export const getBgPattern = (colorSchemeId: number | undefined) => {
 };
 
 export const getDaysLeft = (date: Date) => {
-  return moment(date).startOf("day").diff(moment().startOf("day"), "days");
+  const targetDate = startOf(parseToDateTime(date)!, "day")!;
+  const currentDate = startOf(parseToDateTime(new Date())!, "day")!;
+  return dateDiffAbs(targetDate, currentDate, "days");
 };
 
 export const getDaysRemaining = (autoDelete: Date) => {

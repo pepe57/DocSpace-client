@@ -23,7 +23,6 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import moment from "moment";
 import { match, P } from "ts-pattern";
 import { Trans } from "react-i18next";
 import type { TFunction } from "i18next";
@@ -55,6 +54,15 @@ import {
   isFolderOrRoom,
   isRoom,
 } from "../../utils/typeGuards";
+import {
+  parseToDateTime,
+  dateDiff,
+  now,
+  humanizeDuration,
+} from "../../utils/date";
+
+import { getCookie } from "../../utils/cookie";
+import { LANGUAGE } from "../../constants";
 
 import type { RoomMember, TRoom } from "../../api/rooms/types";
 import type {
@@ -255,31 +263,46 @@ export const getExpiredOptions = (
 export const getDate = (expirationDate: string) => {
   if (!expirationDate) return "";
 
-  const currentDate = moment(new Date());
-  const expDate = moment(new Date(expirationDate));
-  const calculatedDate = expDate.diff(currentDate, "days");
-  const calculatedHours = expDate.diff(currentDate, "hours");
+  const currentDate = now();
+  const expDate = parseToDateTime(expirationDate);
+
+  if (!expDate) return "";
+
+  const calculatedDays = Math.floor(dateDiff(expDate, currentDate, "days"));
+  const calculatedHours = Math.floor(dateDiff(expDate, currentDate, "hours"));
+  const calculatedMinutes = Math.floor(
+    dateDiff(expDate, currentDate, "minutes"),
+  );
+
+  const locale = getCookie(LANGUAGE) ?? "en";
 
   if (calculatedHours < 1) {
-    return moment
-      .duration(expDate.diff(currentDate, "minutes") + 1, "minutes")
-      .humanize(true);
+    return humanizeDuration(calculatedMinutes + 1, "minutes", {
+      locale,
+      addSuffix: true,
+    });
   }
 
-  if (calculatedDate < 1) {
-    return moment
-      .duration(expDate.diff(currentDate, "hours") + 1, "hours")
-      .humanize(true);
+  if (calculatedDays < 1) {
+    return humanizeDuration(calculatedHours + 1, "hours", {
+      addSuffix: true,
+      locale,
+    });
   }
 
-  return moment.duration(calculatedDate + 1, "days").humanize(true);
+  return humanizeDuration(calculatedDays + 1, "days", {
+    addSuffix: true,
+    locale,
+  });
 };
 
 export const isExpired = (expirationDate: string | Date) => {
-  const currentDare = moment(new Date());
-  const expDate = moment(new Date(expirationDate));
+  const currentDate = now();
+  const expDate = parseToDateTime(expirationDate);
 
-  return currentDare.unix() - expDate.unix() > 0;
+  if (!expDate) return true;
+
+  return currentDate.toMillis() - expDate.toMillis() > 0;
 };
 
 export const getPasswordDescription = (t: TFunction, link: TFileLink) => {
