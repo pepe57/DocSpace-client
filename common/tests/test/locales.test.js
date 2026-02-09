@@ -170,9 +170,10 @@ beforeAll(() => {
 	const pattern2 = 'i18nKey="([a-zA-Z0-9_.:-]+)"';
 	const pattern3 = 'tKey:\\s"([a-zA-Z0-9_.:-]+)"';
 	const pattern4 = 'getTitle\\("([a-zA-Z0-9_.:-]+)"\\)';
+	const pattern5 = 'getCommonTranslation\\("([a-zA-Z0-9_.:-]+)"\\)';
 
 	const regexp = new RegExp(
-		`(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})`,
+		`(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})|(${pattern5})`,
 		"gm",
 	);
 
@@ -217,7 +218,7 @@ beforeAll(() => {
 		const matches = [...jsFileText.matchAll(regexp)];
 
 		const translationKeys = matches
-			.map((m) => m[2] || m[4] || m[6] || m[8])
+			.map((m) => m[2] || m[4] || m[6] || m[8] || m[10])
 			.filter((m) => m != null);
 
 		if (translationKeys.length === 0) return;
