@@ -224,7 +224,7 @@ export async function changeEmail(
   userId: string,
   email: string,
   encemail: string,
-  key: string,
+  confirmKey: string,
 ) {
   const data = encemail ? { encemail } : { email };
 
@@ -232,7 +232,7 @@ export async function changeEmail(
     method: "put",
     url: `/people/${userId}/email`,
     data,
-    headers: { confirm: key },
+    headers: { confirm: confirmKey },
   })) as TUser;
 
   return res;
