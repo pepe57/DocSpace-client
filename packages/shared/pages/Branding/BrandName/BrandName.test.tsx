@@ -27,7 +27,7 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
-import { ThemeProvider } from "@docspace/ui-kit/components/theme-provider";
+import { ThemeProviderComponent } from "@docspace/ui-kit/components/theme-provider";
 import { Base } from "@docspace/ui-kit/providers/theme/themes";
 import { BrandName } from "./index";
 
@@ -50,11 +50,11 @@ const defaultProps = {
 
 const renderComponent = (props = {}) => {
   return render(
-    <ThemeProvider theme={Base}>
+    <ThemeProviderComponent theme={Base}>
       <MemoryRouter>
         <BrandName {...defaultProps} {...props} />
       </MemoryRouter>
-    </ThemeProvider>,
+    </ThemeProviderComponent>,
   );
 };
 

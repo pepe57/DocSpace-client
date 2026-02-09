@@ -1,30 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ThemeProvider } from "@docspace/ui-kit/components/theme-provider";
+import { ThemeProviderComponent } from "@docspace/ui-kit/components/theme-provider";
 import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 const ThemeWrapper = ({ theme, children }) => {
-	return (
-		<ThemeProvider
-			theme={theme}
-			currentColorScheme={{
-				main: {
-					accent: globalColors.lightBlueMain,
-					buttons: globalColors.lightSecondMain,
-				},
-				text: {
-					accent: globalColors.white,
-					buttons: globalColors.white,
-				},
-			}}
-		>
-			{children}
-		</ThemeProvider>
-	);
+  return (
+    <ThemeProviderComponent
+      theme={theme}
+      currentColorScheme={{
+        main: {
+          accent: globalColors.lightBlueMain,
+          buttons: globalColors.lightSecondMain,
+        },
+        text: {
+          accent: globalColors.white,
+          buttons: globalColors.white,
+        },
+      }}
+    >
+      {children}
+    </ThemeProviderComponent>
+  );
 };
 
 ThemeWrapper.propTypes = {
-	theme: PropTypes.any,
+  theme: PropTypes.any,
 };
 
 export default ThemeWrapper;
