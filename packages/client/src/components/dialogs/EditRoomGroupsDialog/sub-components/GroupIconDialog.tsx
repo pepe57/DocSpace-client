@@ -26,6 +26,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   ModalDialog,
   ModalDialogType,
@@ -139,6 +140,7 @@ const GroupIconDialog = ({
 
       await getAllRoomGroups();
 
+      toastr.success(t("GroupingRooms:ChangesApplied"));
       onClose();
     } else {
       if (!groupName || !arrIdsRooms?.length || !roomIcon) return;

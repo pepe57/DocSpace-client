@@ -38,6 +38,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+import { toastr } from "@docspace/shared/components/toast";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
@@ -210,6 +211,8 @@ const EditRoomGroupsDialog = ({
           if (isViewingThisGroup && fetchRooms) {
             await fetchRooms(null, roomsFilter, false, false, false);
           }
+
+          toastr.success(t("GroupingRooms:ChangesApplied"));
         }
       } catch (error) {
         console.error("Error updating group rooms:", error);
