@@ -230,7 +230,7 @@ export async function changeEmail(
 
   const res = (await request({
     method: "put",
-    url: `/people/${userId}/password`,
+    url: `/people/${userId}/email`,
     data,
     headers: { confirm: key },
   })) as TUser;
