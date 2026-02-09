@@ -95,6 +95,8 @@ export interface EditRoomGroupsDialogProps {
   roomsFilter?: { groupId?: string | number | null } | null;
   /** Whether room grouping is enabled in portal settings */
   organizeRoomsGrouping?: boolean;
+  /** Function to toggle room grouping setting */
+  setOrganizeRoomsGrouping?: (enabled: boolean) => Promise<boolean>;
 }
 
 export interface IRoomItem {
@@ -113,9 +115,10 @@ export interface DeleteGroupDialogProps {
 
 export interface GroupItemProps {
   group: IRoomGroup;
-  onClickGroup: (groupId: string) => void;
-  onClickEditIcon: (groupId: string) => void;
-  onClickDeleteGroup: (groupId: string) => void;
+  onClickGroup?: (groupId: string) => void;
+  onClickEditIcon?: (groupId: string) => void;
+  onClickDeleteGroup?: (groupId: string) => void;
+  disabled?: boolean;
 }
 
 export interface RoomListPanelProps {

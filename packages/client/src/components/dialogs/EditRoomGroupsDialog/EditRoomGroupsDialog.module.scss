@@ -39,6 +39,29 @@
     padding-inline-end: 0px !important;
   }
 
+  .infoBar {
+    &:global(.public-room-bar) {
+      margin: 16px;
+      margin-bottom: 0;
+
+      path {
+        fill: $light-gray-dark;
+      }
+
+      > div:last-child svg {
+        width: 10px !important;
+        height: 10px !important;
+        padding-top: 3px;
+      }
+
+      :global(.dark) & {
+        path {
+          fill: $dark-gray-dark;
+        }
+      }
+    }
+  }
+
   .settingRoomGroups {
     padding: 20px 16px;
     border-bottom: 1px solid $gray-light-mid;
@@ -79,6 +102,16 @@
     display: flex;
     justify-content: space-between;
     padding: 17px 20px;
+
+    &.groupDisabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  .groupDisabled {
+    opacity: 0.5;
+    pointer-events: none;
   }
 
   .nameGroup {

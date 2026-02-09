@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 
 import {
@@ -35,7 +34,11 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+
+import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import styles from "./EditRoomGroupsDialog.module.scss";
 import GroupIconDialog from "./sub-components/GroupIconDialog";
@@ -45,6 +48,8 @@ import GroupItem from "./sub-components/GroupItem";
 import { EditRoomGroupsDialogProps } from "./EditRoomGroupsDialog.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TSelectorItem } from "@docspace/shared/components/selector/Selector.types";
+
+const TOOLTIP_DISMISSED_KEY = "roomGroupingTooltipDismissed";
 
 const EditRoomGroupsDialog = ({
   currentColorScheme,
@@ -64,6 +69,7 @@ const EditRoomGroupsDialog = ({
   fetchRooms,
   roomsFilter,
   organizeRoomsGrouping,
+  setOrganizeRoomsGrouping,
 }: EditRoomGroupsDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
 
@@ -88,6 +94,27 @@ const EditRoomGroupsDialog = ({
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [groupIdToDelete, setGroupIdToDelete] = useState<string | null>(null);
 
+  // State for dismissible tooltip
+  const [isTooltipVisible, setIsTooltipVisible] = useState(() => {
+    try {
+      return localStorage.getItem(TOOLTIP_DISMISSED_KEY) !== "true";
+    } catch {
+      return true;
+    }
+  });
+
+  // Local state for grouping toggle (to enable Save/Cancel flow)
+  const [localGroupingEnabled, setLocalGroupingEnabled] = useState(
+    () => organizeRoomsGrouping ?? true,
+  );
+  const [hasGroupingChanged, setHasGroupingChanged] = useState(false);
+
+  // Sync local state with prop when it changes externally
+  useEffect(() => {
+    setLocalGroupingEnabled(organizeRoomsGrouping ?? true);
+    setHasGroupingChanged(false);
+  }, [organizeRoomsGrouping]);
+
   const onClickCreateNewGroup = () => {
     setIsOpenRoomList(true);
   };
@@ -100,11 +127,33 @@ const EditRoomGroupsDialog = ({
     setEditRoomGroupsDialogVisible(false);
   };
 
-  const navigate = useNavigate();
+  const onDismissTooltip = () => {
+    setIsTooltipVisible(false);
+    try {
+      localStorage.setItem(TOOLTIP_DISMISSED_KEY, "true");
+    } catch {
+      // Ignore localStorage errors
+    }
+  };
 
-  const onClickRoomGroupingSetting = () => {
+  const onToggleGrouping = () => {
+    const newValue = !localGroupingEnabled;
+    setLocalGroupingEnabled(newValue);
+    setHasGroupingChanged(newValue !== organizeRoomsGrouping);
+  };
+
+  const onSaveGroupingChange = async () => {
+    if (setOrganizeRoomsGrouping) {
+      await setOrganizeRoomsGrouping(localGroupingEnabled);
+    }
+    setHasGroupingChanged(false);
     setEditRoomGroupsDialogVisible(false);
-    navigate("/profile/file-management");
+  };
+
+  const onCancelGroupingChange = () => {
+    setLocalGroupingEnabled(organizeRoomsGrouping ?? true);
+    setHasGroupingChanged(false);
+    setEditRoomGroupsDialogVisible(false);
   };
 
   const onSubmitRoom = async (items: TSelectorItem[]) => {
@@ -281,9 +330,12 @@ const EditRoomGroupsDialog = ({
       <GroupItem
         key={group.id}
         group={group}
-        onClickGroup={onClickGroup}
-        onClickEditIcon={onClickEditIcon}
-        onClickDeleteGroup={onClickDeleteGroup}
+        onClickGroup={localGroupingEnabled ? onClickGroup : undefined}
+        onClickEditIcon={localGroupingEnabled ? onClickEditIcon : undefined}
+        onClickDeleteGroup={
+          localGroupingEnabled ? onClickDeleteGroup : undefined
+        }
+        disabled={!localGroupingEnabled}
       />
     ));
   };
@@ -301,29 +353,72 @@ const EditRoomGroupsDialog = ({
       </ModalDialog.Header>
 
       <ModalDialog.Body>
+        {isTooltipVisible && (
+          <PublicRoomBar
+            className={styles.infoBar}
+            headerText={
+              <span
+                style={{
+                  fontWeight: 600,
+                  fontSize: "12px",
+                  lineHeight: "16px",
+                }}
+              >
+                {t("GroupingRooms:DisablingRoomGroups")}
+              </span>
+            }
+            bodyText={
+              <span style={{ display: "block", marginTop: "1px" }}>
+                {t("GroupingRooms:DisablingRoomGroupsDescription")}
+              </span>
+            }
+            iconName={InfoIcon}
+            onClose={onDismissTooltip}
+          />
+        )}
+
         <div className={styles.settingRoomGroups}>
           <div className={styles.roomGroups}>
             <div className={styles.title}>
-              {t("GroupingRooms:EnableRoomGrouping")}
+              {t("GroupingRooms:RoomGrouping")}
             </div>
             <ToggleButton
               className={styles.roomGroupsToggle}
-              isChecked={organizeRoomsGrouping}
-              onChange={onClickRoomGroupingSetting}
+              isChecked={localGroupingEnabled}
+              onChange={onToggleGrouping}
             />
           </div>
 
           <Text className={styles.description}>
-            {t("GroupingRooms:RoomGroupsDescription")}
+            {t("GroupingRooms:RoomGroupingSettingDescription")}
           </Text>
         </div>
         <SelectorAddButton
           onClick={onClickCreateNewGroup}
           className={styles.selectorAddButton}
           label={t("GroupingRooms:CreateNewGroup")}
+          isDisabled={!localGroupingEnabled}
         />
         <div className={styles.addedGroups}>{renderGroupItems()}</div>
       </ModalDialog.Body>
+
+      {hasGroupingChanged ? (
+        <ModalDialog.Footer>
+          <Button
+            label={t("Common:SaveButton")}
+            size={ButtonSize.normal}
+            primary
+            onClick={onSaveGroupingChange}
+            scale
+          />
+          <Button
+            label={t("Common:CancelButton")}
+            size={ButtonSize.normal}
+            onClick={onCancelGroupingChange}
+            scale
+          />
+        </ModalDialog.Footer>
+      ) : null}
     </ModalDialog>
   );
 };
@@ -343,7 +438,8 @@ export default inject(
     } = dialogsStore;
 
     const { roomsFilter, fetchRooms } = filesStore;
-    const { organizeRoomsGrouping } = filesSettingsStore;
+    const { organizeRoomsGrouping, setOrganizeRoomsGrouping } =
+      filesSettingsStore;
 
     return {
       setCreateGroupRooms,
@@ -359,6 +455,7 @@ export default inject(
       fetchRooms,
       roomsFilter,
       organizeRoomsGrouping,
+      setOrganizeRoomsGrouping,
     };
   },
 )(observer(EditRoomGroupsDialog));

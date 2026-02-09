@@ -40,17 +40,39 @@ const GroupItem = ({
   onClickGroup,
   onClickEditIcon,
   onClickDeleteGroup,
+  disabled,
 }: GroupItemProps) => {
   const { t } = useTranslation(["Common"]);
 
   const iconData = group?.icon?.data.small;
 
+  const handleGroupClick = () => {
+    if (!disabled && onClickGroup) {
+      onClickGroup(group.id);
+    }
+  };
+
+  const handleEditClick = () => {
+    if (!disabled && onClickEditIcon) {
+      onClickEditIcon(group.id);
+    }
+  };
+
+  const handleDeleteClick = () => {
+    if (!disabled && onClickDeleteGroup) {
+      onClickDeleteGroup(group.id);
+    }
+  };
+
   return (
     <div className={styles.addedGroups}>
-      <div className={styles.group}>
+      <div
+        className={`${styles.group} ${disabled ? styles.groupDisabled : ""}`}
+      >
         <div
           className={styles.groupData}
-          onClick={() => onClickGroup(group.id)}
+          onClick={handleGroupClick}
+          style={disabled ? { cursor: "default" } : undefined}
         >
           <div className={styles.iconGroup}>
             {iconData && (
@@ -72,13 +94,15 @@ const GroupItem = ({
             className="edit_icon"
             iconName={PencilReactSvgUrl}
             size={16}
-            onClick={() => onClickEditIcon(group.id)}
+            onClick={handleEditClick}
+            isDisabled={disabled}
           />
           <IconButton
             className="delete_icon"
             iconName={TrashReactSvgUrl}
             size={16}
-            onClick={() => onClickDeleteGroup(group.id)}
+            onClick={handleDeleteClick}
+            isDisabled={disabled}
           />
         </div>
       </div>
