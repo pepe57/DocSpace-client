@@ -2233,11 +2233,11 @@ export const getBaseTheme = () => {
         },
       },
 
-      previewTile: {
-        background: white,
-        borderColor: grayStrong,
-        iconBorderColor: grayLightMid,
-      },
+      // previewTile: {
+      //   background: white,
+      //   borderColor: grayStrong,
+      //   iconBorderColor: grayLightMid,
+      // },
 
       dropzone: {
         borderColor: grayLightMid,

@@ -2227,11 +2227,11 @@ const Dark: TTheme = {
       },
     },
 
-    previewTile: {
-      background: black,
-      borderColor: grayDarkStrong,
-      iconBorderColor: grayLightMid,
-    },
+    // previewTile: {
+    //   background: black,
+    //   borderColor: grayDarkStrong,
+    //   iconBorderColor: grayLightMid,
+    // },
 
     dropzone: {
       borderColor: grayDarkStrong,
