@@ -71,7 +71,7 @@ export const StyledBodyContent = styled.div`
 
   .change-domain_link,
   .change-profile_link {
-    color: ${(props) => props.theme.currentColorScheme?.main.accent};
+    color: ${(props) => props.theme.currentColorScheme?.main?.accent};
   }
 
   @media ${mobile} {

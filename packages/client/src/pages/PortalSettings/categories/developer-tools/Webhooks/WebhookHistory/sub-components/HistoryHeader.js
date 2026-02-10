@@ -44,7 +44,7 @@ import {
   injectDefaultTheme,
 } from "@docspace/shared/utils";
 
-import { TableGroupMenu } from "@docspace/shared/components/table";
+import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -52,7 +52,7 @@ import { useTranslation } from "react-i18next";
 
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { retryWebhooks } from "@docspace/shared/api/settings";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";

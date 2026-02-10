@@ -30,7 +30,7 @@ import { notFound, useSearchParams } from "next/navigation";
 import React, { createContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
 import AppLoader from "@docspace/ui-kit/components/app-loader";
 

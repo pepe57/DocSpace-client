@@ -30,8 +30,8 @@ import FileSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import moment from "moment-timezone";
 import { ReactSVG } from "react-svg";
+import { now, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
@@ -86,7 +86,7 @@ const CertificatesTable = (props) => {
       return `${new Date(date).toLocaleDateString()}`;
     };
 
-    const isExpired = moment().isAfter(moment(certificate.expiredDate));
+    const isExpired = isAfter(now(), parseToDateTime(certificate.expiredDate));
 
     return (
       <div key={`certificate-${index}`} className="row">

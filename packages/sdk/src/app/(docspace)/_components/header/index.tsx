@@ -35,7 +35,7 @@ import { useSearchParams } from "next/navigation";
 import Navigation, {
   TNavigationItem,
 } from "@docspace/ui-kit/components/navigation";
-import { TableGroupMenu } from "@docspace/shared/components/table";
+import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";

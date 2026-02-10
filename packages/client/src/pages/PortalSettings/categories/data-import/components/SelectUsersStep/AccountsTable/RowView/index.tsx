@@ -36,8 +36,8 @@ import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-c
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { RowContainer, Row } from "@docspace/shared/components/rows";
-import { globalColors } from "@docspace/shared/themes";
+import { RowContainer, Row } from "@docspace/ui-kit/components/rows";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
 
 import UsersRow from "./UsersRow";

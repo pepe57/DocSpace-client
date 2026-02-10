@@ -31,7 +31,7 @@ import { CircleSkeleton } from "@docspace/ui-kit/components/circle";
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import type { NavMenuHeaderLoaderProps } from "./NavMenu.types";
-import { globalColors } from "../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 import styles from "./NavMenu.module.scss";
 
 export const NavMenuHeaderLoader = ({

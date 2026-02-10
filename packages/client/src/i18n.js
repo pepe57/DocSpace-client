@@ -29,7 +29,7 @@ import { initReactI18next } from "react-i18next";
 import Backend from "@docspace/shared/utils/i18next-http-backend";
 import config from "PACKAGE_FILE";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 
 import { loadLanguagePath } from "./helpers/language-helpers";
 

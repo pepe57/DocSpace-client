@@ -31,7 +31,7 @@ import { Textarea } from "@docspace/ui-kit/components/textarea";
 import { inject, observer } from "mobx-react";
 
 import { useTranslation } from "react-i18next";
-import StatusMessage from "@docspace/shared/components/status-message";
+import StatusMessage from "@docspace/ui-kit/components/status-message";
 import { isJSON } from "@docspace/shared/utils/json";
 
 const DetailsWrapper = styled.div`

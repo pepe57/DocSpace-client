@@ -303,19 +303,6 @@ export const enum TenantStatus {
 }
 
 /**
- * Enum for theme keys.
- * @readonly
- */
-export const enum ThemeKeys {
-  Base = "0",
-  BaseStr = "Base",
-  Dark = "1",
-  DarkStr = "Dark",
-  System = "2",
-  SystemStr = "System",
-}
-
-/**
  * Enum for global events.
  * @readonly
  */
@@ -576,12 +563,6 @@ export enum WatermarkAdditions {
 export const enum RoomsStorageFilter {
   internal = 1,
   thirdparty = 2,
-}
-
-export const enum VDRIndexingAction {
-  HigherIndex = "HigherIndex",
-  LowerIndex = "LowerIndex",
-  MoveIndex = "MoveIndex",
 }
 
 export const enum LDAPOperation {

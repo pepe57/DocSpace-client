@@ -51,7 +51,7 @@ import {
   PasswordInput,
   PasswordInputHandle,
 } from "@docspace/ui-kit/components/password-input";
-import { FileInput } from "@docspace/shared/components/file-input";
+import { FileInput } from "@docspace/ui-kit/components/file-input";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { setLicense } from "@docspace/shared/api/settings";
@@ -64,7 +64,7 @@ import { BetaBadge } from "@docspace/shared/components/beta-badge";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import api from "@docspace/shared/api";
-import { setCookie, deleteCookie } from "@docspace/shared/utils/cookie";
+import { setCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
 import {
   InputSize,
   InputType,

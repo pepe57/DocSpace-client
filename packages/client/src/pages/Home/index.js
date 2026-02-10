@@ -36,7 +36,7 @@ import {
   createTag,
 } from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
-import Section from "@docspace/shared/components/section";
+import Section from "@docspace/ui-kit/components/section";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { toastr } from "@docspace/ui-kit/components/toast";
 

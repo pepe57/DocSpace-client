@@ -28,7 +28,7 @@ import React from "react";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { StyledInputGroup } from "../ClientForm.styled";
 

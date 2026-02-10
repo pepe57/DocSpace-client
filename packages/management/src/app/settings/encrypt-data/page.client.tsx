@@ -115,7 +115,7 @@ const EncryptDataPage = ({
                     <Link
                       key="more-details-link"
                       className="link"
-                      color={currentColorScheme?.main?.accent}
+                      color={currentColorScheme?.main?.accent ?? undefined}
                       href={encryptionBlockHelpUrl}
                     />
                   ),

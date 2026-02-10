@@ -52,7 +52,7 @@ import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { TValidate } from "@docspace/ui-kit/components/email-input";
 import { ButtonKeys } from "@docspace/shared/enums";
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 

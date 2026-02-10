@@ -32,7 +32,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import SocketHelper, { SocketEvents } from "../../utils/socket";
 import { getRestoreProgress } from "../../api/portal";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
-import { PreparationPortalProgress } from "../../components/preparation-portal-progress";
+import { PreparationPortalProgress } from "@docspace/ui-kit/components/progress-bar";
 
 import { clearLocalStorage, returnToPortal } from "./PreparationPortal.utils";
 import { IPreparationPortal } from "./PreparationPortal.types";

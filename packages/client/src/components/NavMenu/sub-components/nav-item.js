@@ -39,7 +39,7 @@ import {
 } from "@docspace/shared/utils";
 
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 const NavItemSeparator = styled.div.attrs(injectDefaultTheme)`
   border-bottom: 1px ${(props) => (props.dashed ? "dashed" : "solid")}

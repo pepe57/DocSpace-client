@@ -38,7 +38,7 @@ import { ContextMenu, ContextMenuRefType, HeaderType } from "@docspace/ui-kit";
 import { Avatar, AvatarSize } from "@docspace/ui-kit/components/avatar";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";

@@ -42,7 +42,7 @@ import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
 import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.types";
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 

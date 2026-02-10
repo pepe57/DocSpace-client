@@ -28,7 +28,7 @@ import { useEffect, useState, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router";
-import moment from "moment";
+import { now, addToDate, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
 
 import {
   EmployeeType,
@@ -483,7 +483,7 @@ const InvitePanel = ({
     if (!link.shareLink && !link.url) return;
 
     const expirationDate = link?.expirationDate ?? link.expiration;
-    const isExpired = moment(new Date()).isAfter(moment(expirationDate));
+    const isExpired = isAfter(now(), parseToDateTime(expirationDate));
     const isLimit = link?.currentUseCount >= link?.maxUseCount;
 
     if (isExpired) {
@@ -523,7 +523,7 @@ const InvitePanel = ({
 
     const expiration = defaultLink
       ? defaultLink?.expirationDate
-      : moment().add(7, "days");
+      : addToDate(now(), 7, "days");
 
     let link = null;
 
@@ -593,13 +593,13 @@ const InvitePanel = ({
       }
     } else {
       try {
-        let linkExpirationDate = moment(
+        let linkExpirationDate = parseToDateTime(
           access.expirationDate ?? activeLink?.expirationDate,
         );
-        const isExpired = moment(new Date()).isAfter(linkExpirationDate);
+        const isExpired = isAfter(now(), linkExpirationDate);
 
         if (isExpired) {
-          linkExpirationDate = moment().add(7, "days");
+          linkExpirationDate = addToDate(now(), 7, "days");
         }
 
         if (access.expirationDate === null) {
@@ -665,7 +665,7 @@ const InvitePanel = ({
         maxUseCount: defaultLink?.maxUseCount,
         expiration: defaultLink
           ? defaultLink.expirationDate
-          : moment().add(7, "days"),
+          : addToDate(now(), 7, "days"),
       };
 
       const link = createNewLink

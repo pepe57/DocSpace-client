@@ -30,7 +30,7 @@ import React from "react";
 import { I18nextProvider } from "react-i18next";
 import { usePathname, useSearchParams } from "next/navigation";
 
-import { ThemeProvider } from "@docspace/ui-kit/components/theme-provider";
+import { ThemeProviderComponent } from "@docspace/ui-kit/components/theme-provider";
 import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
@@ -111,7 +111,10 @@ export const Providers = ({
   });
 
   return (
-    <ThemeProvider theme={theme} currentColorScheme={currentColorTheme}>
+    <ThemeProviderComponent
+      theme={theme}
+      currentColorScheme={currentColorTheme}
+    >
       <I18nextProvider i18n={i18n}>
         <ErrorBoundaryWrapper
           user={{} as TUser}
@@ -124,6 +127,6 @@ export const Providers = ({
             : children}
         </ErrorBoundaryWrapper>
       </I18nextProvider>
-    </ThemeProvider>
+    </ThemeProviderComponent>
   );
 };

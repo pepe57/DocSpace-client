@@ -31,14 +31,14 @@ import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { Text } from "@docspace/ui-kit/components/text";
 import { TTranslation } from "@docspace/shared/types";
 import { TApiKey } from "@docspace/shared/api/api-keys/types";
-import { globalColors } from "@docspace/shared/themes";
-import moment from "moment-timezone";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { now, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 const StyledApiKeysLifetimeIcon = styled.div<{ isExpired: boolean }>`
   ${({ isExpired }) =>
-		!isExpired &&
-		css`
+    !isExpired &&
+    css`
       .api-keys_lifetime {
         svg {
           path,
@@ -55,43 +55,43 @@ const StyledApiKeysLifetimeIcon = styled.div<{ isExpired: boolean }>`
 `;
 
 export const ApiKeysLifetimeIcon = ({
-	t,
-	item,
-	expiresAt,
-	expiresAtDate,
+  t,
+  item,
+  expiresAt,
+  expiresAtDate,
 }: {
-	t: TTranslation;
-	item: TApiKey;
-	expiresAt: string;
-	expiresAtDate: string;
+  t: TTranslation;
+  item: TApiKey;
+  expiresAt: string;
+  expiresAtDate: string;
 }) => {
-	const showLifetimeIcon = expiresAt;
-	const isExpired = moment().isAfter(moment(expiresAt));
+  const showLifetimeIcon = expiresAt;
+  const isExpired = isAfter(now(), parseToDateTime(expiresAt));
 
-	const getTooltipContent = () => (
-		<Text fontSize="12px" fontWeight={400} noSelect>
-			{isExpired
-				? t("Settings:APIKeyExpired")
-				: t("Settings:APIKeyDeactivated", { date: expiresAtDate })}
-		</Text>
-	);
+  const getTooltipContent = () => (
+    <Text fontSize="12px" fontWeight={400} noSelect>
+      {isExpired
+        ? t("Settings:APIKeyExpired")
+        : t("Settings:APIKeyDeactivated", { date: expiresAtDate })}
+    </Text>
+  );
 
-	return showLifetimeIcon ? (
-		<StyledApiKeysLifetimeIcon isExpired={isExpired}>
-			<IconButton
-				iconName={LifetimeReactSvgUrl}
-				className="api-keys_lifetime"
-				size={IconSizeType.medium}
-				isClickable
-				data-tooltip-id={`lifetimeTooltip${item.id}`}
-				isFill={false}
-			/>
-			<Tooltip
-				id={`lifetimeTooltip${item.id}`}
-				place="bottom"
-				getContent={getTooltipContent}
-				maxWidth="300px"
-			/>
-		</StyledApiKeysLifetimeIcon>
-	) : null;
+  return showLifetimeIcon ? (
+    <StyledApiKeysLifetimeIcon isExpired={isExpired}>
+      <IconButton
+        iconName={LifetimeReactSvgUrl}
+        className="api-keys_lifetime"
+        size={IconSizeType.medium}
+        isClickable
+        data-tooltip-id={`lifetimeTooltip${item.id}`}
+        isFill={false}
+      />
+      <Tooltip
+        id={`lifetimeTooltip${item.id}`}
+        place="bottom"
+        getContent={getTooltipContent}
+        maxWidth="300px"
+      />
+    </StyledApiKeysLifetimeIcon>
+  ) : null;
 };

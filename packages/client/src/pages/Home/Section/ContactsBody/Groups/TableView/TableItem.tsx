@@ -27,7 +27,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
-import { TableCell } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/ui-kit/components/table";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -36,7 +36,7 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/ui-kit/components/avatar";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { TGroup } from "@docspace/shared/api/groups/types";
 
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";

@@ -26,13 +26,13 @@
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Loader } from "@docspace/ui-kit/components/loader";
-import { ProgressBar } from "@docspace/shared/components/progress-bar";
+import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import styled from "styled-components";
 
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import InterruptIcon from "PUBLIC_DIR/images/interrupt.icon.react.svg";
 import { commonIconsStyles, injectDefaultTheme } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { withTranslation, Trans } from "react-i18next";
 
 const StyledCheckIcon = styled(CheckIcon).attrs(injectDefaultTheme)`

@@ -56,7 +56,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { FileInput } from "@docspace/shared/components/file-input";
+import { FileInput } from "@docspace/ui-kit/components/file-input";
 import { imageProcessing } from "@docspace/shared/utils/common";
 import { ButtonDelete } from "@docspace/ui-kit/components/image-editor";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";

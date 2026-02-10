@@ -40,7 +40,7 @@ import { ScopeGroup, ScopeType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import BlockHeader from "./BlockHeader";
 

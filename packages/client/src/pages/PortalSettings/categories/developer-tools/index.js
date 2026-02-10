@@ -34,7 +34,7 @@ import { useTranslation } from "react-i18next";
 
 import { Tabs } from "@docspace/ui-kit/components/tabs";
 
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import SSOLoader from "./sub-components/ssoLoader";
 

@@ -32,7 +32,7 @@ import {
   mobile,
   tablet,
 } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 const PanelStyles = css`
   .panel_combo-box {

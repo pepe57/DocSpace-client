@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { TableRow, TableCell } from "@docspace/shared/components/table";
+import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
@@ -52,7 +52,7 @@ const StyledTableRow = styled(TableRow)`
     font-size: 13px;
     font-weight: 600;
     color: ${(props) =>
-			props.theme.client.settings.migration.tableRowTextColor};
+      props.theme.client.settings.migration.tableRowTextColor};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -62,14 +62,14 @@ const StyledTableRow = styled(TableRow)`
     font-size: 13px;
     font-weight: 600;
     color: ${(props) =>
-			props.theme.client.settings.migration.tableRowTextColor};
+      props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .user-existing {
     font-size: 13px;
     font-weight: 600;
     color: ${(props) =>
-			props.theme.client.settings.migration.existingTextColor};
+      props.theme.client.settings.migration.existingTextColor};
 
     white-space: nowrap;
     overflow: hidden;
@@ -80,42 +80,42 @@ const StyledTableRow = styled(TableRow)`
 const NOT_EXIST = "—";
 
 const UsersTableRow = (props: UsersTableRowProps) => {
-	const { t, displayName, email, isDuplicate, isChecked, toggleAccount } =
-		props;
+  const { t, displayName, email, isDuplicate, isChecked, toggleAccount } =
+    props;
 
-	const handleRowClick = (e: React.MouseEvent) => {
-		if ((e.target as HTMLElement).closest(".user-select")) {
-			return;
-		}
-		toggleAccount(e);
-	};
+  const handleRowClick = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest(".user-select")) {
+      return;
+    }
+    toggleAccount(e);
+  };
 
-	return (
-		<StyledTableRow onClick={handleRowClick}>
-			<TableCell className="checkboxWrapper">
-				<Checkbox
-					isChecked={isChecked}
-					label={displayName}
-					onChange={toggleAccount}
-					className="user-select"
-				/>
-			</TableCell>
+  return (
+    <StyledTableRow onClick={handleRowClick}>
+      <TableCell className="checkboxWrapper">
+        <Checkbox
+          isChecked={isChecked}
+          label={displayName}
+          onChange={toggleAccount}
+          className="user-select"
+        />
+      </TableCell>
 
-			<TableCell>
-				<Text className="user-email">{email}</Text>
-			</TableCell>
+      <TableCell>
+        <Text className="user-email">{email}</Text>
+      </TableCell>
 
-			<TableCell>
-				{isDuplicate ? (
-					<Text className="user-existing">
-						{t("Settings:AccountAlreadyExists")}
-					</Text>
-				) : (
-					<Text className="not-existing">{NOT_EXIST}</Text>
-				)}
-			</TableCell>
-		</StyledTableRow>
-	);
+      <TableCell>
+        {isDuplicate ? (
+          <Text className="user-existing">
+            {t("Settings:AccountAlreadyExists")}
+          </Text>
+        ) : (
+          <Text className="not-existing">{NOT_EXIST}</Text>
+        )}
+      </TableCell>
+    </StyledTableRow>
+  );
 };
 
 export default UsersTableRow;

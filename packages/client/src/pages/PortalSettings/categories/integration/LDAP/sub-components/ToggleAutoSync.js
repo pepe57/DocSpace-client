@@ -33,7 +33,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { mobile } from "@docspace/shared/utils";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 

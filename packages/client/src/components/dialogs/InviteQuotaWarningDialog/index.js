@@ -28,7 +28,10 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
-import moment from "moment-timezone";
+import {
+  parseToDateTime,
+  formatDateLocalized,
+} from "@docspace/ui-kit/utils/date";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -63,22 +66,23 @@ const InviteQuotaWarningDialog = (props) => {
   const { fromDate, byDate, delayDaysCount } = datesData;
 
   const gracePeriodDays = () => {
-    const fromDateMoment = moment(dueDate);
-    const byDateMoment = moment(delayDueDate);
+    const fromDateDt = parseToDateTime(dueDate);
+    const byDateDt = parseToDateTime(delayDueDate);
 
     setDatesData({
-      fromDate: fromDateMoment.format("LL"),
-      byDate: byDateMoment.format("LL"),
-      delayDaysCount: getDaysRemaining(byDateMoment),
+      fromDate: fromDateDt
+        ? formatDateLocalized(fromDateDt, "DATE_MED", { locale: language })
+        : "",
+      byDate: byDateDt
+        ? formatDateLocalized(byDateDt, "DATE_MED", { locale: language })
+        : "",
+      delayDaysCount: getDaysRemaining(byDateDt),
     });
   };
 
   useEffect(() => {
-    moment.locale(language);
-    if (window.timezone) moment().tz(window.timezone);
-
     gracePeriodDays();
-  }, [language, window.timezone]);
+  }, [language, dueDate, delayDueDate]);
 
   const onClose = () => {
     if (!isGracePeriod) {

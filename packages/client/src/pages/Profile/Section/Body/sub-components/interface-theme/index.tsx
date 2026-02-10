@@ -33,9 +33,10 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { ThemeKeys } from "@docspace/shared/enums";
-import { getSystemTheme, getEditorTheme } from "@docspace/shared/utils";
+import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+import { getEditorTheme } from "@docspace/shared/utils/common";
 import { hideLoader, showLoader } from "@docspace/shared/utils/common";
-import { TColorScheme } from "@docspace/shared/themes";
+import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 
 import ThemePreview from "./ThemePreview";
 import styles from "./interface-theme.module.scss";
@@ -69,7 +70,7 @@ const InterfaceTheme = (props: InterfaceThemeProps) => {
 
       if (isDesktopClient && newTheme !== ThemeKeys.SystemStr) {
         const editorTheme = getEditorTheme(newTheme);
-        window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
+        window.AscDesktopEditor?.execCommand("portal:uitheme", editorTheme);
       }
 
       await changeTheme?.(newTheme);
@@ -133,8 +134,8 @@ const InterfaceTheme = (props: InterfaceThemeProps) => {
         <ThemePreview
           label={t("LightTheme")}
           theme="Light"
-          accentColor={currentColorScheme!.main?.accent}
-          themeId={selectedThemeId!}
+          accentColor={currentColorScheme?.main?.accent ?? ""}
+          themeId={selectedThemeId ?? ""}
           value={ThemeKeys.BaseStr}
           isChecked={
             currentTheme === ThemeKeys.BaseStr ||
@@ -146,8 +147,8 @@ const InterfaceTheme = (props: InterfaceThemeProps) => {
         <ThemePreview
           label={t("DarkTheme")}
           theme="Dark"
-          accentColor={currentColorScheme!.main?.accent}
-          themeId={selectedThemeId!}
+          accentColor={currentColorScheme?.main?.accent ?? ""}
+          themeId={selectedThemeId ?? ""}
           value={ThemeKeys.DarkStr}
           isChecked={
             currentTheme === ThemeKeys.DarkStr ||

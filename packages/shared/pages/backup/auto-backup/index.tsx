@@ -40,7 +40,7 @@ import { OPERATIONS_NAME } from "../../../constants";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { getBackupStorage } from "../../../api/settings";
 import AutoBackupLoader from "../../../skeletons/backup/AutoBackup";
-import StatusMessage from "../../../components/status-message";
+import StatusMessage from "@docspace/ui-kit/components/status-message";
 import SocketHelper, {
   SocketEvents,
   type TSocketListener,
@@ -428,7 +428,7 @@ const AutomaticBackup = ({
             href={automaticBackupUrl}
             target={LinkTarget.blank}
             fontSize="13px"
-            color={currentColorScheme?.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             isHovered
             dataTestId="automatic_backup_learn_link"
           >

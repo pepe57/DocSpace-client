@@ -42,12 +42,12 @@ import Navigation from "@docspace/ui-kit/components/navigation";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import {
-  Context,
   getLogoUrl,
   getCheckboxItemId,
   getCheckboxItemLabel,
 } from "@docspace/shared/utils";
-import { TableGroupMenu } from "@docspace/shared/components/table";
+import { Context } from "@docspace/ui-kit/utils/context";
+import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import {
   RoomsType,
   DeviceType,

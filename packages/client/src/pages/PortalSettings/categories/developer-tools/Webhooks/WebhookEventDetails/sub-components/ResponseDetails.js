@@ -35,7 +35,7 @@ import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { isMobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { isJSON } from "@docspace/shared/utils/json";
 
 const DetailsWrapper = styled.div`

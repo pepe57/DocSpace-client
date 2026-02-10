@@ -99,7 +99,7 @@ const ChangeRoomOwner = ({
             type={LinkType.action}
             fontWeight={600}
             fontSize="13px"
-            color={currentColorScheme?.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             onClick={onOwnerChange}
           >
             {t("Common:ChangeButton")}

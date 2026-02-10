@@ -35,7 +35,7 @@ import useInitMessages from "@docspace/shared/components/chat/hooks/useInitMessa
 
 import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
-import { Consumer } from "@docspace/shared/utils";
+import { Consumer } from "@docspace/ui-kit/utils";
 import type { Nullable } from "@docspace/shared/types";
 import type { TError } from "@docspace/shared/utils/axiosClient";
 
@@ -602,8 +602,7 @@ const View = ({
     <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>
       <Consumer>
         {(context) =>
-          context.sectionWidth &&
-          (currentView === "users" || currentView === "groups" ? (
+          currentView === "users" || currentView === "groups" ? (
             <ContactsSectionBodyContent
               sectionWidth={context.sectionWidth}
               currentView={currentView}
@@ -624,7 +623,7 @@ const View = ({
             <ProfileSectionBodyContent />
           ) : (
             <SectionBodyContent sectionWidth={context.sectionWidth} />
-          ))
+          )
         }
       </Consumer>
     </LoaderWrapper>

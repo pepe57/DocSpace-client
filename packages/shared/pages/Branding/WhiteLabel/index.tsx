@@ -32,7 +32,7 @@ import classNames from "classnames";
 import { Text } from "@docspace/ui-kit/components/text";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { WhiteLabelLogoType } from "../../../enums";
-import { globalColors } from "../../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 import { Logo } from "./Logo";
 import { IWhiteLabel, IWhiteLabelData } from "./WhiteLabel.types";

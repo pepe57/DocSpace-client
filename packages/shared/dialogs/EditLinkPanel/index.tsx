@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
 import { useTranslation } from "react-i18next";
 import React, {
   useState,
@@ -60,6 +59,7 @@ import {
   isFolderOrRoom,
   isRoom,
 } from "../../utils/typeGuards";
+import { parseToDateTime } from "@docspace/ui-kit/utils/date";
 
 import { ShareLinkService } from "../../services/share-link.service";
 import type { TFileLink } from "../../api/files/types";
@@ -378,7 +378,10 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
   useEffect(() => {
     const isSameDateCheck =
-      date || expirationDate ? moment(date).isSame(expirationDate) : true;
+      date || expirationDate
+        ? parseToDateTime(date)?.toMillis() ===
+          parseToDateTime(expirationDate)?.toMillis()
+        : true;
     setIsSameDate(isSameDateCheck);
   }, [date, expirationDate]);
 

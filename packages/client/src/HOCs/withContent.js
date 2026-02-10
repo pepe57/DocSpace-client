@@ -35,9 +35,9 @@ import {
 // import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   getCorrectDate,
-  getCookie,
   getTitleWithoutExtension,
 } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
 import config from "PACKAGE_FILE";
 

@@ -36,7 +36,7 @@ import { SocialButton } from "@docspace/shared/components/social-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Textarea } from "@docspace/ui-kit/components/textarea";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { generatePKCEPair } from "@docspace/shared/utils/oauth";
 import { AuthenticationMethod } from "@docspace/shared/enums";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";

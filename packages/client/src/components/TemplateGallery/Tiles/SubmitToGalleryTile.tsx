@@ -30,7 +30,7 @@ import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import hexRgb from "hex-rgb";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import classNames from "classnames";
 import styles from "./SubmitToGalleryTile.module.scss";

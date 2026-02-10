@@ -104,7 +104,7 @@ const ItemTitle = ({
         {gallerySelected?.attributes?.name_form}
       </Text>
 
-      <Text color={currentColorScheme?.main?.accent} className="free-label">
+      <Text color={currentColorScheme?.main?.accent ?? undefined} className="free-label">
         {t("Common:Free")}
       </Text>
       {gallerySelected ? (

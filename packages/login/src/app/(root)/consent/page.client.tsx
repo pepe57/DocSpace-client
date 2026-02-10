@@ -47,7 +47,7 @@ import {
   getCookie,
   deleteCookie,
   setCookie,
-} from "@docspace/shared/utils/cookie";
+} from "@docspace/ui-kit/utils/cookie";
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";

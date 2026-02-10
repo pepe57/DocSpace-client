@@ -26,18 +26,14 @@
 
 "use client";
 
-import moment from "moment-timezone";
 import type { TTranslation } from "../types";
+import { parseToDateTime } from "@docspace/ui-kit/utils/date";
 
 import { isArrayEqual } from "./array";
 import * as email from "./email";
 import { EmailSettings, parseAddress, parseAddresses, getParts } from "./email";
 import useId from "./useId";
-import {
-  getCorrectTextAlign,
-  getCorrectBorderRadius,
-  getCorrectFourValuesStyle,
-} from "./rtlUtils";
+
 import { useClickOutside } from "@docspace/ui-kit/utils";
 import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
@@ -60,8 +56,6 @@ import {
   INFO_PANEL_WIDTH,
   isMobileDevice,
 } from "@docspace/ui-kit/utils/device";
-import { getCookie } from "./cookie";
-import { Context, Provider, Consumer } from "./context";
 import commonIconsStyles, {
   IconSizeType,
   isIconSizeType,
@@ -73,7 +67,6 @@ import { commonInputStyles } from "./commonInputStyles";
 import {
   RoomsTypeValues,
   RoomsTypes,
-  getSystemTheme,
   getEditorTheme,
   getLogoFromPath,
   isBetaLanguage,
@@ -86,7 +79,7 @@ import {
   FileFillingFormStatus,
   FolderType,
 } from "../enums";
-import { getTitleWithoutExtension } from "./getTitleWithoutExtension";
+import type { getTitleWithoutExtension } from "./getTitleWithoutExtension";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
 import { injectDefaultTheme } from "./injectDefaultTheme";
@@ -104,7 +97,6 @@ import { presentInArray } from "./presentInArray";
 export {
   isBetaLanguage,
   getLogoFromPath,
-  getSystemTheme,
   getEditorTheme,
   RoomsTypeValues,
   RoomsTypes,
@@ -124,10 +116,6 @@ export {
   commonIconsStyles,
   IconSizeType,
   isIconSizeType,
-  Context,
-  Provider,
-  Consumer,
-  getCookie,
   size,
   mobile,
   mobileMore,
@@ -137,9 +125,6 @@ export {
   isTablet,
   isDesktop,
   isTouchDevice,
-  getCorrectTextAlign,
-  getCorrectBorderRadius,
-  getCorrectFourValuesStyle,
   email,
   useId,
   useClickOutside,
@@ -174,7 +159,8 @@ export const getModalType = () => {
 };
 
 export const isValidDate = (date: Date) => {
-  return moment(date).tz(window.timezone).year() !== 9999;
+  const dt = parseToDateTime(date);
+  return dt ? dt.setZone(window.timezone).year !== 9999 : false;
 };
 
 export { presentInArray };

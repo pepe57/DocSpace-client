@@ -27,47 +27,50 @@
 import React, { PropsWithChildren, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { ThemeProvider } from "@docspace/ui-kit/components/theme-provider";
+import { ThemeProviderComponent } from "@docspace/ui-kit/components/theme-provider";
 import type { ThemeProviderProps } from "@docspace/ui-kit/components/theme-provider";
-import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
+import { getFontFamilyDependingOnLanguage } from "@docspace/ui-kit/providers/theme/rtl-utils";
 
 const ThemeProviderWrapper = ({
-	children,
-	theme,
-	currentColorScheme,
+  children,
+  theme,
+  currentColorScheme,
 }: PropsWithChildren<Partial<Omit<ThemeProviderProps, "children">>>) => {
-	const { i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
-	const currentLang = i18n.language;
-	const interfaceDirection = i18n.dir(currentLang);
-	const fontFamily = getFontFamilyDependingOnLanguage(currentLang);
+  const currentLang = i18n.language;
+  const interfaceDirection = i18n.dir(currentLang);
+  const fontFamily = getFontFamilyDependingOnLanguage(currentLang);
 
-	const themeWrapper = useMemo(() => {
-		return {
-			...(theme! ?? {}),
-			interfaceDirection,
-			fontFamily,
-		};
-	}, [theme, interfaceDirection, fontFamily]);
+  const themeWrapper = useMemo(() => {
+    return {
+      ...(theme! ?? {}),
+      interfaceDirection,
+      fontFamily,
+    };
+  }, [theme, interfaceDirection, fontFamily]);
 
-	return (
-		<ThemeProvider theme={themeWrapper} currentColorScheme={currentColorScheme}>
-			{children}
-		</ThemeProvider>
-	);
+  return (
+    <ThemeProviderComponent
+      theme={themeWrapper}
+      currentColorScheme={currentColorScheme}
+    >
+      {children}
+    </ThemeProviderComponent>
+  );
 };
 
 const ThemeProviderInjectWrapper = inject<TStore>(({ settingsStore }) => {
-	const { theme, timezone, currentColorScheme } = settingsStore;
+  const { theme, timezone, currentColorScheme } = settingsStore;
 
-	window.theme = theme;
-	window.timezone = timezone;
+  window.theme = theme;
+  window.timezone = timezone;
 
-	return {
-		theme,
-		currentColorScheme,
-		timezone,
-	};
+  return {
+    theme,
+    currentColorScheme,
+    timezone,
+  };
 })(observer(ThemeProviderWrapper));
 
 export default ThemeProviderInjectWrapper;

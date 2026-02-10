@@ -54,7 +54,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { getDate, isExpired } from "../share/Share.helpers";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { isRoom } from "../../utils/typeGuards";
-import { globalColors } from "../../themes/globalColors";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import type { QuickButtonsProps } from "./QuickButtons.types";
 import { FailedVectorizationBadge } from "../failed-vectorization-badge";

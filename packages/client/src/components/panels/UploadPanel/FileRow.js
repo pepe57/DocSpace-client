@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { Button } from "@docspace/ui-kit/components/button";
-import { ProgressBar } from "@docspace/shared/components/progress-bar";
+import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { SimulatePassword } from "@docspace/shared/components/simulate-password";

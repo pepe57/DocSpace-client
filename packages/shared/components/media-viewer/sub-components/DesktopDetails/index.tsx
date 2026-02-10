@@ -34,7 +34,7 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import type { DesktopDetailsProps } from "./DesktopDetails.type";
 import styles from "./DesktopDetails.module.scss";
-import { globalColors } from "../../../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 export const DesktopDetails = ({
 	onMaskClick,

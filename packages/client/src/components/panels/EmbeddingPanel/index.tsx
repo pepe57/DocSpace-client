@@ -45,7 +45,7 @@ import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
 import { type TData } from "@docspace/ui-kit/components/toast";
 import type { TFileLink } from "@docspace/shared/api/files/types";
 import type { LinkParamsType, TTranslation } from "@docspace/shared/types";
-import { TColorScheme, TTheme } from "@docspace/shared/themes";
+import { TColorScheme, TTheme } from "@docspace/ui-kit/providers/theme/themes";
 import {
 	ModalDialog,
 	ModalDialogType,
@@ -384,7 +384,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 				type={LinkType.action}
 				fontSize="13px"
 				fontWeight={600}
-				color={currentColorScheme?.main?.accent}
+				color={currentColorScheme?.main?.accent ?? undefined}
 				onClick={onEditLink}
 				isTextOverflow
 			>
@@ -420,7 +420,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 											1: (
 												<Link
 													onClick={onOpenDevTools}
-													color={currentColorScheme?.main?.accent}
+													color={currentColorScheme?.main?.accent ?? undefined}
 													isHovered
 													dataTestId="embedding_panel_dev_tools_link"
 												/>

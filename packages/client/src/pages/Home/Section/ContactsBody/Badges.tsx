@@ -31,7 +31,7 @@ import { useNavigate, useLocation } from "react-router";
 
 import Filter from "@docspace/shared/api/people/filter";
 import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { commonIconsStyles, IconSizeType } from "@docspace/shared/utils";
 

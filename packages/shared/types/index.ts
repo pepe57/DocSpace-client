@@ -34,7 +34,7 @@ import type {
 	ShareAccessRights,
 	ShareRights,
 } from "../enums";
-import type { TTheme, TColorScheme } from "../themes";
+import type { TTheme, TColorScheme } from "@docspace/ui-kit/providers/theme";
 import type FirebaseHelper from "../utils/firebase";
 import type { TRoom } from "../api/rooms/types";
 
@@ -299,7 +299,7 @@ declare global {
 				loaderTime: number;
 			};
 		};
-		AscDesktopEditor: {
+		AscDesktopEditor?: {
 			execCommand: (key: string, value: string) => void;
 			cloudCryptoCommand: (
 				key: string,
@@ -323,7 +323,7 @@ declare global {
 			opMessage?: string;
 			opType: number;
 		}) => void;
-		RendererProcessVariable: {
+		RendererProcessVariable?: {
 			theme?: { id: string; system: string; type: string; addlocal: string };
 		};
 		Tiff: new (
@@ -344,10 +344,10 @@ declare global {
 }
 
 export type TDefaultTemplateItem = {
-  id: number | null;
-  title?: string;
-  isModified?: boolean;
-  lastModified?: string;
-  extension: string;
-  viewUrl: string;
+	id: number | null;
+	title?: string;
+	isModified?: boolean;
+	lastModified?: string;
+	extension: string;
+	viewUrl: string;
 };

@@ -39,7 +39,7 @@ import { Badge } from "@docspace/ui-kit/components/badge";
 
 import { Button } from "@docspace/ui-kit/components/button";
 import { isMobile, NoUserSelect } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import ConsumerItem from "./sub-components/consumerItem";

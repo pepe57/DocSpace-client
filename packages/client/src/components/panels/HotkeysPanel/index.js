@@ -33,7 +33,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import Base from "@docspace/shared/themes/base";
+import Base from "@docspace/ui-kit/providers/theme/themes/base";
 import styles from "./HotkeysPanel.module.scss";
 import SelectionBlock from "./SelectionBlock";
 import MoveBlock from "./MoveBlock";

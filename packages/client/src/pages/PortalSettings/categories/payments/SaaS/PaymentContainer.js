@@ -31,7 +31,7 @@ import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { size, desktop, mobile, Consumer } from "@docspace/shared/utils";
+import { size, desktop, mobile, Consumer } from "@docspace/ui-kit/utils";
 
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 

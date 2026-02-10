@@ -33,7 +33,8 @@ import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { InputBlock } from "@docspace/ui-kit/components/input-block";
@@ -55,7 +56,7 @@ import styles from "../InvitePanel.module.scss";
 
 import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 import { deleteInviteLink } from "@docspace/shared/api/portal";
-import moment from "moment";
+import { now, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 const ExternalLinks = ({
@@ -89,9 +90,7 @@ const ExternalLinks = ({
   const showLifetimeBlock = !!activeLink?.expirationDate;
   const showUsersLimitWarning =
     activeLink?.currentUseCount >= activeLink?.maxUseCount;
-  const linkIsExpired = moment(new Date()).isAfter(
-    moment(activeLink?.expirationDate),
-  );
+  const linkIsExpired = isAfter(now(), parseToDateTime(activeLink?.expirationDate));
 
   const locale = getCookie(LANGUAGE) ?? culture ?? "en";
 
