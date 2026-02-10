@@ -56,7 +56,7 @@ const defaultProps: TagSelectorProps = {
   roomId: "123",
   onClose: vi.fn(),
   onSelectTag: vi.fn(),
-  reference: { current: document.createElement("div") },
+  anchor: document.createElement("div"),
 };
 
 const renderWithQueryClient = (

@@ -30,3 +30,8 @@ export const MAX_BODY_HEIGHT = 220;
 export const ICON_SIZE = 16;
 
 export const TAGS_QUERY_KEY = ["tags"];
+export const TAG_SELECTOR_EVENT_NAME = "tag-selector-event";
+
+export const EVENT_OPTIONS: AddEventListenerOptions = {
+  capture: true,
+};

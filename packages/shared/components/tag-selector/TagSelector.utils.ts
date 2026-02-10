@@ -26,8 +26,11 @@
 import unionBy from "lodash/unionBy";
 import isString from "lodash/isString";
 
+import type { ShareAccessRights } from "../../enums";
+
 import type { TagType } from "../tag/Tag.types";
-import type { TTag } from "./TagSelector.types";
+
+import type { TagSelectorEventType, TTag } from "./TagSelector.types";
 import { TAG_SELECTOR_EVENT_NAME } from "./TagSelector.constants";
 
 export function transformTagsData(
@@ -90,3 +93,26 @@ export function searchFilter(list: TTag[], query: string) {
     .sort((a, b) => b.score - a.score)
     .map((obj) => obj.item);
 }
+
+export const stopPropagation = (event: React.MouseEvent) =>
+  event.stopPropagation();
+
+export const callSelectorEvent = (
+  tags: Array<TagType | string>,
+  id: string,
+  anchorId: string,
+  handleOverflowVisible: (visible: boolean) => void,
+  access: ShareAccessRights,
+) => {
+  const event = new CustomEvent<TagSelectorEventType>(TAG_SELECTOR_EVENT_NAME, {
+    detail: {
+      tags,
+      roomId: id,
+      anchorId,
+      handleOverflowVisible,
+      access,
+    },
+  });
+
+  window.dispatchEvent(event);
+};

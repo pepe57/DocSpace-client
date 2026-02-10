@@ -29,3 +29,6 @@ export { TagSelectorFilter } from "./TagSelector.filter";
 export { TagSelectorContent } from "./TagSelector.content";
 export { TagSelectorLoader } from "./TagSelector.loader";
 export { useTagsQuery } from "./hooks/useTagsQuery";
+export type { TagSelectorEventType } from "./TagSelector.types";
+export { TAG_SELECTOR_EVENT_NAME } from "./TagSelector.constants";
+export { callSelectorEvent } from "./TagSelector.utils";

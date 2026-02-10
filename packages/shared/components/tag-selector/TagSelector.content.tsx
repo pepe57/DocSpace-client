@@ -61,7 +61,8 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
   roomId,
 }) => {
   const isMobile = useIsMobile();
-  const { filteredTags, tags, setTags } = useTagSelector();
+  const { filteredTags, tags, setTags, canEdit, canRemove, canBindTag } =
+    useTagSelector();
   const removeTag = useRemoveTagMutation();
   const addTagToRoom = useCreateTagMutation(roomId);
   const updateTag = useUpdateTag(roomId);
@@ -199,6 +200,7 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
                 className={styles.checkbox}
                 isChecked={tag.checked}
                 onChange={() => toggleChecked(tag.label)}
+                isDisabled={!canBindTag}
               />
               {editingIndex === index ? (
                 <>
@@ -235,18 +237,22 @@ export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
                     tag={tag.label}
                     onClick={onSelectTag}
                   />
-                  <IconButton
-                    size={ICON_SIZE}
-                    className={styles.editIcon}
-                    iconName={AccessEditReactSvgUrl}
-                    onClick={() => handleEdit(index)}
-                  />
-                  <IconButton
-                    size={ICON_SIZE}
-                    iconName={TrashReactSvgUrl}
-                    className={styles.deleteIcon}
-                    onClick={() => deleteTag(tag.label)}
-                  />
+                  {canEdit ? (
+                    <IconButton
+                      size={ICON_SIZE}
+                      className={styles.editIcon}
+                      iconName={AccessEditReactSvgUrl}
+                      onClick={() => handleEdit(index)}
+                    />
+                  ) : null}
+                  {canRemove && (
+                    <IconButton
+                      size={ICON_SIZE}
+                      iconName={TrashReactSvgUrl}
+                      className={styles.deleteIcon}
+                      onClick={() => deleteTag(tag.label)}
+                    />
+                  )}
                 </>
               )}
             </div>

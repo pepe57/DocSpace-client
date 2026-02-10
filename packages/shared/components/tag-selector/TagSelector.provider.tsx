@@ -48,6 +48,11 @@ export const TagSelectorProvider: React.FC<TagSelectorProviderProps> = ({
   children,
   roomTags,
   fetchedTags,
+  canCreate,
+  canEdit,
+  canRemove,
+  canSearch,
+  canBindTag,
 }) => {
   const [searchValue, setSearchValue] = useState("");
   const deferredSearchValue = useDeferredValue(searchValue);
@@ -82,6 +87,11 @@ export const TagSelectorProvider: React.FC<TagSelectorProviderProps> = ({
       showCreateTag,
       setSearchValue,
       clearSearch,
+      canCreate,
+      canEdit,
+      canRemove,
+      canSearch,
+      canBindTag,
     }),
     [
       fetchedTags,
@@ -90,6 +100,10 @@ export const TagSelectorProvider: React.FC<TagSelectorProviderProps> = ({
       filteredTags,
       showCreateTag,
       clearSearch,
+      canCreate,
+      canEdit,
+      canRemove,
+      canSearch,
     ],
   );
 

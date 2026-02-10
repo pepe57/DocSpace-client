@@ -37,43 +37,51 @@ import {
 
 import { useClickOutside } from "../../utils/useClickOutside";
 import { useIsMobile } from "../../hooks/useIsMobile";
+import { useEventListener } from "../../hooks/useEventListener";
 
 import { ModalDialog, ModalDialogType } from "../modal-dialog";
-
-import { useTagsQuery } from "./hooks/useTagsQuery";
 
 import { TagSelectorProvider } from "./TagSelector.provider";
 import { TagSelectorFilter } from "./TagSelector.filter";
 import { TagSelectorContent } from "./TagSelector.content";
 import { TagSelectorLoader } from "./TagSelector.loader";
 import type { TagSelectorProps } from "./TagSelector.types";
+import { stopPropagation } from "./TagSelector.utils";
+import { EVENT_OPTIONS } from "./TagSelector.constants";
 
 import styles from "./TagSelector.module.scss";
+
+import { useTagsQuery } from "./hooks/useTagsQuery";
 
 export const TagSelector: React.FC<TagSelectorProps> = ({
   roomId,
   onClose,
-  reference,
+  anchor,
   onSelectTag,
   tags: roomTags,
+
+  canCreate = false,
+  canRemove = false,
+  canSearch = false,
+  canEdit = false,
+  canBindTag = false,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // const [roomTags] = useState(propsTags);
-
   const isMobile = useIsMobile();
-  useClickOutside(isMobile ? modalRef : ref, onClose);
+  useClickOutside(isMobile ? modalRef : ref, onClose, EVENT_OPTIONS);
+  useEventListener("resize", onClose);
 
   const { data: fetchedTags, status } = useTagsQuery();
 
   useLayoutEffect(() => {
-    if (!reference.current || !ref.current || isMobile) return;
+    if (!anchor || !ref.current || isMobile) return;
 
-    const cleanup = autoUpdate(reference.current, ref.current, () => {
-      if (!reference.current || !ref.current || isMobile) return;
+    const cleanup = autoUpdate(anchor, ref.current, () => {
+      if (!anchor || !ref.current || isMobile) return;
 
-      computePosition(reference.current, ref.current, {
+      computePosition(anchor, ref.current, {
         placement: "bottom-start",
         strategy: "fixed",
         middleware: [
@@ -92,12 +100,12 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
     });
 
     return cleanup;
-  }, [reference, reference.current, ref, isMobile]);
+  }, [anchor, ref, isMobile]);
 
   const element = (
     <div
-      onClick={(event) => event.stopPropagation()}
-      onDoubleClick={(event) => event.stopPropagation()}
+      onClick={stopPropagation}
+      onDoubleClick={stopPropagation}
       className={styles.tagSelector}
       ref={ref}
     >
@@ -107,6 +115,11 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
           <TagSelectorProvider
             fetchedTags={fetchedTags ?? []}
             roomTags={roomTags}
+            canRemove={canRemove}
+            canCreate={canCreate}
+            canSearch={canSearch}
+            canEdit={canEdit}
+            canBindTag={canBindTag}
           >
             <TagSelectorFilter roomId={roomId} />
             <TagSelectorContent onSelectTag={onSelectTag} roomId={roomId} />

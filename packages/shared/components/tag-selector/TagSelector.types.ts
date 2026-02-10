@@ -24,14 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { ShareAccessRights } from "../../enums";
 import type { TagClickEvent, TagType } from "../tag/Tag.types";
 
 export interface TagSelectorProps {
   tags: Array<TagType | string>;
   roomId: string | number;
-  onClose: (event: MouseEvent) => void;
+  onClose: VoidFunction;
   onSelectTag: (tag: TagClickEvent) => void;
-  reference: React.RefObject<HTMLElement | null>;
+  anchor: Element | null;
+
+  canRemove?: boolean;
+  canCreate?: boolean;
+  canSearch?: boolean;
+  canEdit?: boolean;
+  canBindTag?: boolean;
 }
 
 export type TTag = {
@@ -39,7 +46,18 @@ export type TTag = {
   checked: boolean;
 };
 
-export interface TagSelectorContextValue {
+export interface TagSelectorProviderProps {
+  children: React.ReactNode;
+  fetchedTags: string[];
+  roomTags: Array<TagType | string>;
+
+  canRemove: boolean;
+  canCreate: boolean;
+  canSearch: boolean;
+  canEdit: boolean;
+  canBindTag: boolean;
+}
+export interface ITagSelectorStateContext {
   tags: TTag[];
   setTags: React.Dispatch<React.SetStateAction<TTag[]>>;
   searchValue: string;
@@ -48,13 +66,15 @@ export interface TagSelectorContextValue {
   showCreateTag: boolean;
   setSearchValue: (value: string) => void;
   clearSearch: () => void;
+
+  canRemove: boolean;
+  canCreate: boolean;
+  canSearch: boolean;
+  canEdit: boolean;
+  canBindTag: boolean;
 }
 
-export interface TagSelectorProviderProps {
-  children: React.ReactNode;
-  fetchedTags: string[];
-  roomTags: Array<TagType | string>;
-}
+export interface TagSelectorContextValue extends ITagSelectorStateContext {}
 
 export interface UpdateTagNameParams {
   oldLabel: string;
@@ -66,17 +86,14 @@ export interface TagSelectorContentProps {
   roomId: string | number;
 }
 
-export interface ITagSelectorStateContext {
-  tags: TTag[];
-  setTags: React.Dispatch<React.SetStateAction<TTag[]>>;
-  searchValue: string;
-  deferredSearchValue: string;
-  filteredTags: TTag[];
-  showCreateTag: boolean;
-  setSearchValue: (value: string) => void;
-  clearSearch: () => void;
-}
-
 export interface TagSelectorFilterProps {
   roomId: string | number;
+}
+
+export interface TagSelectorEventType {
+  roomId: string;
+  anchorId: string;
+  tags: Array<TagType | string>;
+  handleOverflowVisible: (visible: boolean) => void;
+  access: ShareAccessRights;
 }
