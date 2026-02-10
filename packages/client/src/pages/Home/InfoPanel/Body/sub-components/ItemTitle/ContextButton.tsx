@@ -131,8 +131,8 @@ const RoomsContextBtn = ({
         className="expandButton"
         title={
           "isFolder" in selection && selection.isFolder
-            ? t("Translations:TitleShowFolderActions")
-            : t("Translations:TitleShowActions")
+            ? t("Common:TitleShowFolderActions")
+            : t("Common:TitleShowActions")
         }
         onClick={onContextMenu}
         getData={getData}

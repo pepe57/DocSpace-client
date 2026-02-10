@@ -104,7 +104,10 @@ const ItemTitle = ({
         {gallerySelected?.attributes?.name_form}
       </Text>
 
-      <Text color={currentColorScheme?.main?.accent ?? undefined} className="free-label">
+      <Text
+        color={currentColorScheme?.main?.accent ?? undefined}
+        className="free-label"
+      >
         {t("Common:Free")}
       </Text>
       {gallerySelected ? (
@@ -122,7 +125,7 @@ const ItemTitle = ({
           <ContextMenuButton
             id="info-options"
             className="expandButton"
-            title={t("Translations:TitleShowActions")}
+            title={t("Common:TitleShowActions")}
             onClick={onClickContextMenu}
             getData={onGetContextOptions}
             directionX="right"
