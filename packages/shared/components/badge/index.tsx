@@ -125,6 +125,7 @@ const Badge = (props: BadgeProps) => {
         data-type={type}
         data-testid="badge-inner"
         aria-hidden="true"
+        data-no-hover={noHover}
       >
         <Text
           className={styles.text}

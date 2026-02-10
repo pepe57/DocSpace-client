@@ -141,7 +141,7 @@ const TagDropdown = ({
   return (
     <DropDown
       className={classNames(styles.tagDropdown, "dropdown-content", {
-        [styles.hidden]: !!dropdownItems.length,
+        [styles.hidden]: !dropdownItems.length,
       })}
       open={open}
       forwardedRef={dropdownRef}
