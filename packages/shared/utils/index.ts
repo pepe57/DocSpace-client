@@ -79,7 +79,7 @@ import {
   FileFillingFormStatus,
   FolderType,
 } from "../enums";
-import type { getTitleWithoutExtension } from "./getTitleWithoutExtension";
+import { getTitleWithoutExtension } from "./getTitleWithoutExtension";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
 import { injectDefaultTheme } from "./injectDefaultTheme";
