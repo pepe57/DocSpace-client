@@ -103,7 +103,7 @@ import ShareSelector from "../ShareSelector";
 import TemplateGallery from "../TemplateGallery";
 import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
-import { TagManagement } from "../TagSelector";
+import { TagManagement } from "../TagManagement";
 
 const Panels = (props) => {
   const {
