@@ -26,12 +26,9 @@
 import unionBy from "lodash/unionBy";
 import isString from "lodash/isString";
 
-import type { ShareAccessRights } from "../../enums";
-
 import type { TagType } from "../tag/Tag.types";
 
-import type { TagManagementEventType, TTag } from "./TagManagement.types";
-import { TAG_MANAGEMENT_EVENT_NAME } from "./TagManagement.constants";
+import type { TTag } from "./TagManagement.types";
 
 export function transformTagsData(
   roomTags: Array<TagType | string | TTag>,
@@ -96,26 +93,3 @@ export function searchFilter(list: TTag[], query: string) {
 
 export const stopPropagation = (event: React.MouseEvent) =>
   event.stopPropagation();
-
-export const callManagementEvent = (
-  tags: Array<TagType | string>,
-  id: string,
-  anchorId: string,
-  handleOverflowVisible: (visible: boolean) => void,
-  access: ShareAccessRights,
-) => {
-  const event = new CustomEvent<TagManagementEventType>(
-    TAG_MANAGEMENT_EVENT_NAME,
-    {
-      detail: {
-        tags,
-        roomId: id,
-        anchorId,
-        handleOverflowVisible,
-        access,
-      },
-    },
-  );
-
-  window.dispatchEvent(event);
-};

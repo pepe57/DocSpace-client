@@ -26,17 +26,15 @@
 
 import React, { FC, useCallback } from "react";
 import isNil from "lodash/isNil";
-import { isMobile as isMobileDevice } from "react-device-detect";
 
 import { classNames } from "../../utils/classNames";
-import { useIsTable } from "../../hooks/useIsTable";
-import { useIsMobile } from "../../hooks/useIsMobile";
-import { Tag, type TagType, type TagClickEvent } from "../tag";
+import { useUnmount } from "../../hooks/useUnmount";
+import { Tag, type TagType } from "../tag";
 
 import styles from "./Tags.module.scss";
 import { TagsDropdown } from "./Tags.dropdown";
 import { calculateRenderedTags } from "./Tags.utils";
-import type { OverflowClickEvent, TagsProps } from "./Tags.types";
+import type { TagsProps } from "./Tags.types";
 
 const Tags: FC<TagsProps> = ({
   id,
@@ -49,48 +47,35 @@ const Tags: FC<TagsProps> = ({
   onMouseEnter,
   onMouseLeave,
   showCreateTag,
-  onOverflowClick,
+  onOptionTagClick,
+  optionTagRef,
 }) => {
   const [renderedTags, setRenderedTags] = React.useState<TagType[]>([]);
-  const [isOverflowVisible, setIsOverflowVisible] = React.useState(false);
+  const callBackRef = React.useRef<VoidFunction | undefined | null>(null);
 
   const tagsRef = React.useRef<HTMLDivElement>(null);
-
-  const isTableView = useIsTable();
-  const isMobileView = useIsMobile();
-
-  const isMobile = isTableView || isMobileView || isMobileDevice;
-
-  const canShowCreate = showCreateTag || isMobile || isOverflowVisible;
 
   React.useLayoutEffect(() => {
     if (isNil(columnCount) || !tags || !tagsRef.current) return;
 
-    const withDropDownTags = !onOverflowClick;
+    const withDropDownTags = !onOptionTagClick;
 
     const newTags = calculateRenderedTags(
       tags,
       columnCount,
       tagsRef.current.offsetWidth,
-      canShowCreate,
+      showCreateTag,
       withDropDownTags,
     );
 
     setRenderedTags(newTags);
-  }, [tags, columnCount, canShowCreate]);
+  }, [tags, columnCount, showCreateTag]);
 
-  const handleOverflowVisible = useCallback((visible: boolean) => {
-    setIsOverflowVisible(visible);
-  }, []);
+  useUnmount(() => callBackRef.current?.());
 
-  const handleOverflowClick = useCallback(
-    ({ anchorId }: TagClickEvent) => {
-      if (!id || !anchorId) return;
-
-      onOverflowClick?.(tags, id, anchorId, handleOverflowVisible);
-    },
-    [id, tags, onOverflowClick, handleOverflowVisible],
-  );
+  const handleOptionTagClick = useCallback(() => {
+    onOptionTagClick?.();
+  }, [onOptionTagClick]);
 
   return (
     <div
@@ -102,7 +87,7 @@ const Tags: FC<TagsProps> = ({
       className={classNames(styles.tags, className)}
     >
       {renderedTags.map((tag, idx) => {
-        if (tag.isOverflowTrigger && tag.advancedOptions?.length) {
+        if (tag.isOptionTag && tag.advancedOptions?.length) {
           return (
             <TagsDropdown
               key={tag.key}
@@ -122,6 +107,15 @@ const Tags: FC<TagsProps> = ({
           );
         }
 
+        const props = tag.isOptionTag
+          ? {
+              ref: optionTagRef,
+              onClick: handleOptionTagClick,
+            }
+          : {
+              onClick: onSelectTag,
+            };
+
         return (
           <Tag
             key={tag.label}
@@ -134,7 +128,7 @@ const Tags: FC<TagsProps> = ({
             roomType={tag.roomType}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            onClick={tag.isOverflowTrigger ? handleOverflowClick : onSelectTag}
+            {...props}
           />
         );
       })}
@@ -142,4 +136,4 @@ const Tags: FC<TagsProps> = ({
   );
 };
 
-export { Tags, type OverflowClickEvent };
+export { Tags };

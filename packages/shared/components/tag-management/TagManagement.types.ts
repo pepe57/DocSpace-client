@@ -32,7 +32,7 @@ export interface TagManagementProps {
   roomId: string | number;
   onClose: VoidFunction;
   onSelectTag: (tag: TagClickEvent) => void;
-  anchor: Element | null;
+  anchor: React.RefObject<Element | null>;
 
   canRemove?: boolean;
   canCreate?: boolean;
@@ -88,12 +88,4 @@ export interface TagManagementContentProps {
 
 export interface TagManagementFilterProps {
   roomId: string | number;
-}
-
-export interface TagManagementEventType {
-  roomId: string;
-  anchorId: string;
-  tags: Array<TagType | string>;
-  handleOverflowVisible: (visible: boolean) => void;
-  access: ShareAccessRights;
 }

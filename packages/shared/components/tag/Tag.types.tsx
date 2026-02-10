@@ -28,7 +28,6 @@ export type TagClickEvent = {
   label?: string;
   roomType?: number;
   providerType?: number;
-  anchorId?: string;
 };
 
 export type TagProps = {
@@ -100,5 +99,5 @@ export type TagType = {
   /** Accepts the function that is called when the tag is clicked */
   onClick?: () => void;
   /** Indicates if the tag is an overflow trigger */
-  isOverflowTrigger?: boolean;
+  isOptionTag?: boolean;
 };

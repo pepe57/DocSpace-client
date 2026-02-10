@@ -76,12 +76,12 @@ export const TagManagement: React.FC<TagManagementProps> = ({
   const { data: fetchedTags, status } = useTagsQuery();
 
   useLayoutEffect(() => {
-    if (!anchor || !ref.current || isMobile) return;
+    if (!anchor.current || !ref.current || isMobile) return onClose();
 
-    const cleanup = autoUpdate(anchor, ref.current, () => {
-      if (!anchor || !ref.current || isMobile) return;
+    const cleanup = autoUpdate(anchor.current, ref.current, () => {
+      if (!anchor.current || !ref.current || isMobile) return;
 
-      computePosition(anchor, ref.current, {
+      computePosition(anchor.current, ref.current, {
         placement: "bottom-start",
         strategy: "fixed",
         middleware: [
@@ -100,7 +100,7 @@ export const TagManagement: React.FC<TagManagementProps> = ({
     });
 
     return cleanup;
-  }, [anchor, ref, isMobile]);
+  }, [anchor, anchor.current, ref, isMobile, onClose]);
 
   const element = (
     <div

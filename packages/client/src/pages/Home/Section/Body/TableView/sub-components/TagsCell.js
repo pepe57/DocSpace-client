@@ -24,22 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 
-import { Tags } from "@docspace/shared/components/tags";
-import { ShareAccessRights } from "@docspace/shared/enums";
-import { callManagementEvent } from "@docspace/shared/components/tag-management";
+import { TagManagement } from "SRC_DIR/components/TagManagement";
 
-const TagsCell = ({
-  item,
-  tagCount,
-  onSelectTag,
-  // sideColor,
-  isHovered,
-  isActive,
-  isAdmin,
-  checkedProps,
-}) => {
+const TagsCell = ({ item, tagCount, isHovered, isActive, checkedProps }) => {
   const styleTagsCell = {
     width: "100%",
     overflow: "hidden",
@@ -65,33 +54,14 @@ const TagsCell = ({
     return [...thirdPartyTag, ...itemTags];
   }, [item.providerType, item.providerKey, item.thirdPartyIcon, item.tags]);
 
-  const access = item.access;
-
-  const isRoomManager = access === ShareAccessRights.RoomManager;
-  const isOwnerRoom =
-    access === ShareAccessRights.FullAccess ||
-    access === ShareAccessRights.None;
-
-  const showCreateTag =
-    (isHovered || isActive || checkedProps) &&
-    (isAdmin || isRoomManager || isOwnerRoom);
-
-  const handleOverflowVisible = useCallback(
-    (tags, id, anchorId, setIsOverflowVisible) => {
-      callManagementEvent(tags, id, anchorId, setIsOverflowVisible, access);
-    },
-    [access],
-  );
-
   return (
     <div style={styleTagsCell}>
-      <Tags
+      <TagManagement
         tags={tags}
         id={item.id}
+        access={item.access}
         columnCount={tagCount}
-        onSelectTag={onSelectTag}
-        showCreateTag={showCreateTag}
-        onOverflowClick={handleOverflowVisible}
+        isActive={isHovered || isActive || checkedProps}
       />
     </div>
   );

@@ -32,6 +32,3 @@ export { TagManagementFilter } from "./TagManagement.filter";
 export { TagManagementContent } from "./TagManagement.content";
 export { TagManagementLoader } from "./TagManagement.loader";
 export { useTagsQuery } from "./hooks/useTagsQuery";
-export type { TagManagementEventType } from "./TagManagement.types";
-export { TAG_MANAGEMENT_EVENT_NAME } from "./TagManagement.constants";
-export { callManagementEvent } from "./TagManagement.utils";

@@ -24,12 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TagManagementEventType } from "@docspace/shared/components/tag-management";
+import type { ShareAccessRights } from "@docspace/shared/enums";
+import type { TagType } from "@docspace/shared/components/tag";
 
 export interface InjectedTagManagementProps {
   onSelectTag: TStore["filesActionsStore"]["selectTag"];
+  isAdmin: boolean;
 }
 
-export interface TagManagementState extends TagManagementEventType {
-  anchor: Element;
+export interface TagManagementProps {
+  id: string | number;
+  tags: Array<TagType | string>;
+  columnCount: number;
+  access: ShareAccessRights;
+  isActive: boolean;
+  className?: string;
 }
+export interface TagManagementWrapperProps
+  extends TagManagementProps,
+    InjectedTagManagementProps {}

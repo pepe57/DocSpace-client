@@ -34,9 +34,8 @@ import { Text } from "@docspace/shared/components/text";
 import { isRoom } from "@docspace/shared/utils/typeGuards";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
-import { Tags } from "@docspace/shared/components/tags";
-import { callManagementEvent } from "@docspace/shared/components/tag-management";
 
+import type { ShareAccessRights } from "@docspace/shared/enums";
 import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
@@ -45,12 +44,12 @@ import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
   getRoomTypeName,
 } from "SRC_DIR/helpers/filesUtils";
+import { TagManagement } from "SRC_DIR/components/TagManagement";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getPropertyClassName } from "SRC_DIR/helpers/infopanel";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 import CommentEditor from "../../sub-components/CommentEditor";
-import { ShareAccessRights } from "@docspace/shared/enums";
 
 const text = (value: React.ReactNode) => (
   <Text truncate className="property-content">
@@ -70,27 +69,15 @@ const link = (txt: React.ReactNode, onClick: () => void) => (
   </Link>
 );
 
-const tagList = (
-  tags: string[],
-  selectTag: (tag: { label: string }) => void,
-  id: number,
-  access: ShareAccessRights,
-) => (
+const tagList = (tags: string[], id: number, access: ShareAccessRights) => (
   <div className="property-tag_list" data-testid="info_panel_details_tag_list">
-    <Tags
-      id={id.toString()}
-      className="tags"
-      showCreateTag
+    <TagManagement
+      id={id}
+      isActive
       tags={tags}
+      className="tags"
       columnCount={-1}
-      onSelectTag={(tag) => {
-        const label = tag.label;
-        if (!label) return;
-        selectTag({ label });
-      }}
-      onOverflowClick={(tags, id, anchorId, handleOverflowVisible) =>
-        callManagementEvent(tags, id, anchorId, handleOverflowVisible, access)
-      }
+      access={access}
     />
   </div>
 );
@@ -113,7 +100,6 @@ type DetailsHelperProps = {
   culture: string;
   isVisitor: boolean;
   isCollaborator: boolean;
-  selectTag: (tag: { label: string }) => void;
   isDefaultRoomsQuotaSet: boolean;
   isDefaultAIAgentsQuotaSet: boolean;
   isAIAgentsFolder: boolean;
@@ -133,8 +119,6 @@ class DetailsHelper {
 
   isCollaborator: boolean;
 
-  selectTag: (tag: { label: string }) => void;
-
   isDefaultRoomsQuotaSet: boolean;
 
   isDefaultAIAgentsQuotaSet: boolean;
@@ -150,7 +134,6 @@ class DetailsHelper {
     this.culture = props.culture;
     this.isVisitor = props.isVisitor;
     this.isCollaborator = props.isCollaborator;
-    this.selectTag = props.selectTag;
     this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
     this.isDefaultAIAgentsQuotaSet = props.isDefaultAIAgentsQuotaSet;
     this.isAIAgentsFolder = props.isAIAgentsFolder;
@@ -456,12 +439,7 @@ class DetailsHelper {
 
   getItemTags = () => {
     if ("tags" in this.item)
-      return tagList(
-        this.item.tags,
-        this.selectTag,
-        this.item.id,
-        this.item.access,
-      );
+      return tagList(this.item.tags, this.item.id, this.item.access);
   };
 
   getQuotaItem = () => {

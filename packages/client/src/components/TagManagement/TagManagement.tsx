@@ -24,72 +24,100 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useRef, useState } from "react";
+import { isMobile as isMobileDevice } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 
-import {
-  TAG_MANAGEMENT_EVENT_NAME,
-  TagManagement,
-  type TagManagementEventType,
-} from "@docspace/shared/components/tag-management";
-import { useEventListener } from "@docspace/shared/hooks/useEventListener";
-import type { Nullable } from "@docspace/shared/types";
+import { TagManagement } from "@docspace/shared/components/tag-management";
+
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
+import { useIsTable } from "@docspace/shared/hooks/useIsTable";
+import { useIsMobile } from "@docspace/shared/hooks/useIsMobile";
+
+import { ShareAccessRights } from "@docspace/shared/enums";
+import { Tags } from "@docspace/shared/components/tags";
 
 import type {
   InjectedTagManagementProps,
-  TagManagementState,
+  TagManagementProps,
+  TagManagementWrapperProps,
 } from "./TagManagement.types";
 
-const TagManagementWrapper: FC<InjectedTagManagementProps> = ({
+const TagManagementWrapper: FC<TagManagementWrapperProps> = ({
+  id,
   onSelectTag,
+  access,
+  isAdmin,
+  tags,
+  columnCount,
+  isActive,
+  className,
 }) => {
-  const [state, setState] = useState<Nullable<TagManagementState>>(null);
-
-  useEventListener(
-    TAG_MANAGEMENT_EVENT_NAME,
-    (e: CustomEvent<TagManagementEventType>) => {
-      console.log(e.detail);
-
-      const anchor = document.querySelector(
-        `[data-anchor-id="${e.detail.anchorId}"]`,
-      );
-
-      if (!anchor) {
-        console.error("Anchor element not found");
-        return;
-      }
-
-      e.detail?.handleOverflowVisible?.(true);
-      setState({
-        ...e.detail,
-        anchor,
-      });
-    },
-  );
+  const [showTagManagement, setShowTagManagement] = useState(false);
+  const anchorRef = useRef<HTMLDivElement>(null);
 
   const onClose = useCallback(() => {
-    state?.handleOverflowVisible?.(false);
-    setState(null);
-  }, [state]);
+    setShowTagManagement(false);
+  }, []);
+
+  const handleOptionClick = useCallback(() => {
+    setShowTagManagement(true);
+  }, []);
 
   useUnmount(onClose);
 
-  if (!state) return null;
+  const isTableView = useIsTable();
+  const isMobileView = useIsMobile();
+
+  const isMobile = isTableView || isMobileView || isMobileDevice;
+
+  const isRoomOwner =
+    access === ShareAccessRights.None ||
+    access === ShareAccessRights.FullAccess;
+
+  const isRoomManager = access === ShareAccessRights.RoomManager;
+
+  const canEdit = isAdmin;
+  const canDelete = isAdmin;
+  const canCreate = isAdmin || isRoomOwner || isRoomManager;
+  const canBindTag = isRoomManager || isAdmin || isRoomOwner;
+
+  const canShowCreateTag =
+    (isActive || isMobile || showTagManagement) && canCreate;
 
   return (
-    <TagManagement
-      tags={state.tags}
-      roomId={state.roomId}
-      anchor={state.anchor}
-      onClose={onClose}
-      onSelectTag={onSelectTag}
-    />
+    <>
+      <Tags
+        tags={tags}
+        id={id.toString()}
+        columnCount={columnCount}
+        onSelectTag={onSelectTag}
+        optionTagRef={anchorRef}
+        onOptionTagClick={handleOptionClick}
+        showCreateTag={canShowCreateTag}
+        className={className}
+      />
+      {showTagManagement ? (
+        <TagManagement
+          tags={tags}
+          roomId={id}
+          anchor={anchorRef}
+          onClose={onClose}
+          onSelectTag={onSelectTag}
+          canCreate={canCreate}
+          canEdit={canEdit}
+          canRemove={canDelete}
+          canBindTag={canBindTag}
+          canSearch
+        />
+      ) : null}
+    </>
   );
 };
 
-export default inject<TStore, InjectedTagManagementProps>(
-  ({ filesActionsStore }) => ({
+export default inject<TStore, TagManagementProps, InjectedTagManagementProps>(
+  ({ filesActionsStore, authStore }) => ({
+    isAdmin: authStore.isAdmin,
     onSelectTag: filesActionsStore.selectTag,
   }),
-)(observer(TagManagementWrapper as FC));
+)(observer(TagManagementWrapper as FC<TagManagementProps>));

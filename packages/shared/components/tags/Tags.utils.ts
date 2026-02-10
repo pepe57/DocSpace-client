@@ -122,7 +122,7 @@ export const calculateRenderedTags = (
       label: withDropDownTags ? "..." : `+${tags.length - columnCount}`,
       key: "selector",
       maxWidth: fixedTagWidth,
-      isOverflowTrigger: true,
+      isOptionTag: true,
       advancedOptions: withDropDownTags
         ? tags
             .slice(columnCount, tags.length)

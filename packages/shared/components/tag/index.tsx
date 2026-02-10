@@ -59,21 +59,11 @@ const TagPure: FC<TagProps> = ({
   onMouseEnter,
   onMouseLeave,
 }) => {
-  const anchorId = React.useId();
-
   const onClickAction = React.useCallback(() => {
     if (onClick && !isDisabled && !isDeleted) {
-      onClick({ roomType, label, providerType, anchorId });
+      onClick({ roomType, label, providerType });
     }
-  }, [
-    onClick,
-    isDisabled,
-    isDeleted,
-    roomType,
-    providerType,
-    label,
-    anchorId,
-  ]);
+  }, [onClick, isDisabled, isDeleted, roomType, providerType, label]);
 
   const onDeleteAction = React.useCallback(() => {
     onDelete?.(tag);
@@ -98,7 +88,6 @@ const TagPure: FC<TagProps> = ({
       aria-label={label}
       aria-disabled={isDisabled}
       data-testid={dataTestId ?? "tag_item"}
-      data-anchor-id={anchorId}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
