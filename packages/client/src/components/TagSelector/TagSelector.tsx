@@ -34,11 +34,12 @@ import {
 } from "@docspace/shared/components/tag-selector";
 import { useEventListener } from "@docspace/shared/hooks/useEventListener";
 import type { Nullable } from "@docspace/shared/types";
+import { useUnmount } from "@docspace/shared/hooks/useUnmount";
+
 import type {
   InjectedTagSelectorProps,
   TagSelectorState,
 } from "./TagSelector.types";
-import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 
 const TagSelectorWrapper: FC<InjectedTagSelectorProps> = ({ onSelectTag }) => {
   const [state, setState] = useState<Nullable<TagSelectorState>>(null);

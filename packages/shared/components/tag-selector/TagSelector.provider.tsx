@@ -104,6 +104,7 @@ export const TagSelectorProvider: React.FC<TagSelectorProviderProps> = ({
       canEdit,
       canRemove,
       canSearch,
+      canBindTag,
     ],
   );
 

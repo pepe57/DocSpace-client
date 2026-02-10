@@ -51,11 +51,11 @@ export interface TagSelectorProviderProps {
   fetchedTags: string[];
   roomTags: Array<TagType | string>;
 
-  canRemove: boolean;
-  canCreate: boolean;
-  canSearch: boolean;
-  canEdit: boolean;
-  canBindTag: boolean;
+  canRemove?: boolean;
+  canCreate?: boolean;
+  canSearch?: boolean;
+  canEdit?: boolean;
+  canBindTag?: boolean;
 }
 export interface ITagSelectorStateContext {
   tags: TTag[];
@@ -67,11 +67,11 @@ export interface ITagSelectorStateContext {
   setSearchValue: (value: string) => void;
   clearSearch: () => void;
 
-  canRemove: boolean;
-  canCreate: boolean;
-  canSearch: boolean;
-  canEdit: boolean;
-  canBindTag: boolean;
+  canRemove?: boolean;
+  canCreate?: boolean;
+  canSearch?: boolean;
+  canEdit?: boolean;
+  canBindTag?: boolean;
 }
 
 export interface TagSelectorContextValue extends ITagSelectorStateContext {}
