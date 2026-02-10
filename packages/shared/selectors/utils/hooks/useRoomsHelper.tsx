@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { getRooms } from "../../../api/rooms";
 import RoomsFilter from "../../../api/rooms/filter";
 import { RoomsStorageFilter, RoomsType } from "../../../enums";
-import { RoomsTypeValues } from "../../../utils";
+import { RoomsTypeValues } from "../../../utils/common";
 import RoomType from "../../../components/room-type";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { TBreadCrumb } from "@docspace/ui-kit/components/selector";
@@ -44,230 +44,230 @@ import { convertRoomsToItems, getDefaultBreadCrumb } from "..";
 import useInputItemHelper from "./useInputItemHelper";
 
 const useRoomsHelper = ({
-	setHasNextPage,
-	setTotal,
-	setItems,
-	setBreadCrumbs,
-	setIsRoot,
-	onSetBaseFolderPath,
+  setHasNextPage,
+  setTotal,
+  setItems,
+  setBreadCrumbs,
+  setIsRoot,
+  onSetBaseFolderPath,
 
-	searchValue,
-	searchArea,
-	roomType,
-	isRoomsOnly,
+  searchValue,
+  searchArea,
+  roomType,
+  isRoomsOnly,
 
-	isInit,
-	setIsInit,
-	withCreate,
-	disableThirdParty,
-	excludeItems,
-	createDefineRoomLabel,
-	createDefineRoomType,
-	getRootData,
-	setSelectedItemType,
-	subscribe,
-	setSelectedItemSecurity,
-	setSelectedTreeNode,
+  isInit,
+  setIsInit,
+  withCreate,
+  disableThirdParty,
+  excludeItems,
+  createDefineRoomLabel,
+  createDefineRoomType,
+  getRootData,
+  setSelectedItemType,
+  subscribe,
+  setSelectedItemSecurity,
+  setSelectedTreeNode,
 }: UseRoomsHelperProps) => {
-	const { t } = useTranslation(["Common"]);
-	const {
-		setIsNextPageLoading,
-		setIsBreadCrumbsLoading,
-		setIsFirstLoad,
+  const { t } = useTranslation(["Common"]);
+  const {
+    setIsNextPageLoading,
+    setIsBreadCrumbsLoading,
+    setIsFirstLoad,
 
-		isFirstLoad,
-	} = use(LoadersContext);
+    isFirstLoad,
+  } = use(LoadersContext);
 
-	const { addInputItem } = useInputItemHelper({ withCreate, setItems });
+  const { addInputItem } = useInputItemHelper({ withCreate, setItems });
 
-	const requestRunning = React.useRef(false);
-	const initRef = React.useRef(isInit);
-	const firstLoadRef = React.useRef(isFirstLoad);
+  const requestRunning = React.useRef(false);
+  const initRef = React.useRef(isInit);
+  const firstLoadRef = React.useRef(isFirstLoad);
 
-	React.useEffect(() => {
-		firstLoadRef.current = isFirstLoad;
-	}, [isFirstLoad]);
+  React.useEffect(() => {
+    firstLoadRef.current = isFirstLoad;
+  }, [isFirstLoad]);
 
-	React.useEffect(() => {
-		initRef.current = isInit;
-	}, [isInit]);
+  React.useEffect(() => {
+    initRef.current = isInit;
+  }, [isInit]);
 
-	const createDropDownItems = React.useMemo(() => {
-		return RoomsTypeValues.map((value) => {
-			const onClick = () => {
-				addInputItem("", "", value as RoomsType, t("EnterName"));
-			};
+  const createDropDownItems = React.useMemo(() => {
+    return RoomsTypeValues.map((value) => {
+      const onClick = () => {
+        addInputItem("", "", value as RoomsType, t("EnterName"));
+      };
 
-			return (
-				<RoomType
-					key={value}
-					roomType={value}
-					selectedId={value}
-					type="dropdownItem"
-					isOpen={false}
-					onClick={onClick}
-				/>
-			);
-		});
-	}, [addInputItem, t]);
+      return (
+        <RoomType
+          key={value}
+          roomType={value}
+          selectedId={value}
+          type="dropdownItem"
+          isOpen={false}
+          onClick={onClick}
+        />
+      );
+    });
+  }, [addInputItem, t]);
 
-	const getRoomList = React.useCallback(
-		async (sIndex: number) => {
-			if (requestRunning.current) return;
+  const getRoomList = React.useCallback(
+    async (sIndex: number) => {
+      if (requestRunning.current) return;
 
-			requestRunning.current = true;
-			setIsNextPageLoading(true);
+      requestRunning.current = true;
+      setIsNextPageLoading(true);
 
-			let startIndex = sIndex;
+      let startIndex = sIndex;
 
-			if (withCreate) {
-				startIndex -= startIndex % 100;
-			}
+      if (withCreate) {
+        startIndex -= startIndex % 100;
+      }
 
-			const filterValue = searchValue || "";
+      const filterValue = searchValue || "";
 
-			const page = startIndex / PAGE_COUNT;
+      const page = startIndex / PAGE_COUNT;
 
-			const filter = RoomsFilter.getDefault();
+      const filter = RoomsFilter.getDefault();
 
-			let filterType = roomType;
+      let filterType = roomType;
 
-			if (createDefineRoomType) {
-				if (filterType) {
-					filterType = Array.isArray(filterType)
-						? [...filterType, createDefineRoomType]
-						: [filterType, createDefineRoomType];
-				} else {
-					filterType = createDefineRoomType;
-				}
-			}
+      if (createDefineRoomType) {
+        if (filterType) {
+          filterType = Array.isArray(filterType)
+            ? [...filterType, createDefineRoomType]
+            : [filterType, createDefineRoomType];
+        } else {
+          filterType = createDefineRoomType;
+        }
+      }
 
-			filter.page = page;
-			filter.pageCount = PAGE_COUNT;
-			if (searchArea) filter.searchArea = searchArea;
-			filter.filterValue = filterValue;
-			filter.type = filterType as unknown as string | string[];
-			filter.searchArea = searchArea || "";
+      filter.page = page;
+      filter.pageCount = PAGE_COUNT;
+      if (searchArea) filter.searchArea = searchArea;
+      filter.filterValue = filterValue;
+      filter.type = filterType as unknown as string | string[];
+      filter.searchArea = searchArea || "";
 
-			if (disableThirdParty)
-				filter.storageFilter = RoomsStorageFilter.internal as unknown as string;
+      if (disableThirdParty)
+        filter.storageFilter = RoomsStorageFilter.internal as unknown as string;
 
-			const roomsFromApi = await getRooms(filter);
+      const roomsFromApi = await getRooms(filter);
 
-			const { folders, total, count, current } = roomsFromApi;
+      const { folders, total, count, current } = roomsFromApi;
 
-			if (initRef.current) {
-				const { title, id } = current;
+      if (initRef.current) {
+        const { title, id } = current;
 
-				if (isRoomsOnly) subscribe(id);
+        if (isRoomsOnly) subscribe(id);
 
-				const breadCrumbs: TBreadCrumb[] = [{ label: title, id, isRoom: true }];
+        const breadCrumbs: TBreadCrumb[] = [{ label: title, id, isRoom: true }];
 
-				if (!isRoomsOnly) breadCrumbs.unshift({ ...getDefaultBreadCrumb(t) });
+        if (!isRoomsOnly) breadCrumbs.unshift({ ...getDefaultBreadCrumb(t) });
 
-				onSetBaseFolderPath?.(breadCrumbs);
+        onSetBaseFolderPath?.(breadCrumbs);
 
-				setBreadCrumbs?.(breadCrumbs);
+        setBreadCrumbs?.(breadCrumbs);
 
-				setIsBreadCrumbsLoading(false);
-			}
+        setIsBreadCrumbsLoading(false);
+      }
 
-			const itemList: TSelectorItem[] = convertRoomsToItems(folders, t).filter(
-				(x) => (excludeItems ? !excludeItems.includes(x.id) : true),
-			);
+      const itemList: TSelectorItem[] = convertRoomsToItems(folders, t).filter(
+        (x) => (excludeItems ? !excludeItems.includes(x.id) : true),
+      );
 
-			setHasNextPage(count === PAGE_COUNT);
+      setHasNextPage(count === PAGE_COUNT);
 
-			setSelectedItemSecurity?.(current.security);
+      setSelectedItemSecurity?.(current.security);
 
-			setSelectedTreeNode?.({ ...current, path: roomsFromApi.pathParts });
+      setSelectedTreeNode?.({ ...current, path: roomsFromApi.pathParts });
 
-			if (firstLoadRef.current || startIndex === 0) {
-				const { security } = current;
+      if (firstLoadRef.current || startIndex === 0) {
+        const { security } = current;
 
-				if (withCreate && security.Create) {
-					setTotal(total + 1);
-					const createItem: TSelectorItem = {
-						isCreateNewItem: true,
-						label: createDefineRoomLabel ?? t("NewRoom"),
-						id: "create-room-item",
-						key: "create-room-item",
-						hotkey: "r",
-						isRoomsOnly,
-						createDefineRoomType,
-						dropDownItems: createDefineRoomType
-							? undefined
-							: createDropDownItems,
+        if (withCreate && security.Create) {
+          setTotal(total + 1);
+          const createItem: TSelectorItem = {
+            isCreateNewItem: true,
+            label: createDefineRoomLabel ?? t("NewRoom"),
+            id: "create-room-item",
+            key: "create-room-item",
+            hotkey: "r",
+            isRoomsOnly,
+            createDefineRoomType,
+            dropDownItems: createDefineRoomType
+              ? undefined
+              : createDropDownItems,
 
-						onBackClick: () => {
-							setIsRoot?.(true);
-							setSelectedItemType?.(undefined);
-							setBreadCrumbs?.((val) => {
-								const newVal = [...val];
+            onBackClick: () => {
+              setIsRoot?.(true);
+              setSelectedItemType?.(undefined);
+              setBreadCrumbs?.((val) => {
+                const newVal = [...val];
 
-								newVal.pop();
+                newVal.pop();
 
-								return newVal;
-							});
-							getRootData?.();
-						},
-					};
+                return newVal;
+              });
+              getRootData?.();
+            },
+          };
 
-					if (createDefineRoomType) {
-						createItem.onCreateClick = () =>
-							addInputItem("", "", createDefineRoomType, createDefineRoomLabel);
-					}
+          if (createDefineRoomType) {
+            createItem.onCreateClick = () =>
+              addInputItem("", "", createDefineRoomType, createDefineRoomLabel);
+          }
 
-					itemList.unshift(createItem);
-				} else {
-					setTotal(total);
-				}
-				setItems?.(itemList);
-			} else {
-				setItems?.((prevState) => {
-					if (prevState) return [...prevState, ...itemList];
-					return [...itemList];
-				});
-			}
+          itemList.unshift(createItem);
+        } else {
+          setTotal(total);
+        }
+        setItems?.(itemList);
+      } else {
+        setItems?.((prevState) => {
+          if (prevState) return [...prevState, ...itemList];
+          return [...itemList];
+        });
+      }
 
-			requestRunning.current = false;
-			setIsNextPageLoading(false);
-			setIsRoot?.(false);
-			setIsInit(false);
-			setIsFirstLoad(false);
-		},
-		[
-			searchValue,
-			createDefineRoomType,
-			t,
-			setHasNextPage,
-			setSelectedItemSecurity,
-			setIsRoot,
-			setIsInit,
-			setIsFirstLoad,
-			setIsNextPageLoading,
-			roomType,
-			isRoomsOnly,
-			subscribe,
-			onSetBaseFolderPath,
-			setBreadCrumbs,
-			setIsBreadCrumbsLoading,
-			withCreate,
-			setItems,
-			setTotal,
-			createDefineRoomLabel,
-			createDropDownItems,
-			setSelectedItemType,
-			getRootData,
-			addInputItem,
-			searchArea,
-			disableThirdParty,
-			excludeItems,
-			setSelectedTreeNode,
-		],
-	);
+      requestRunning.current = false;
+      setIsNextPageLoading(false);
+      setIsRoot?.(false);
+      setIsInit(false);
+      setIsFirstLoad(false);
+    },
+    [
+      searchValue,
+      createDefineRoomType,
+      t,
+      setHasNextPage,
+      setSelectedItemSecurity,
+      setIsRoot,
+      setIsInit,
+      setIsFirstLoad,
+      setIsNextPageLoading,
+      roomType,
+      isRoomsOnly,
+      subscribe,
+      onSetBaseFolderPath,
+      setBreadCrumbs,
+      setIsBreadCrumbsLoading,
+      withCreate,
+      setItems,
+      setTotal,
+      createDefineRoomLabel,
+      createDropDownItems,
+      setSelectedItemType,
+      getRootData,
+      addInputItem,
+      searchArea,
+      disableThirdParty,
+      excludeItems,
+      setSelectedTreeNode,
+    ],
+  );
 
-	return { getRoomList };
+  return { getRoomList };
 };
 
 export default useRoomsHelper;

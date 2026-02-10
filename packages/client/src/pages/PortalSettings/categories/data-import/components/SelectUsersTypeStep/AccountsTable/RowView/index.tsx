@@ -39,7 +39,7 @@ import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import {
   TableGroupMenu,
   TGroupMenuItem,
-} from "@docspace/shared/components/table";
+} from "@docspace/ui-kit/components/table";
 import { RowContainer, Row } from "@docspace/ui-kit/components/rows";
 import { Text } from "@docspace/ui-kit/components/text";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";

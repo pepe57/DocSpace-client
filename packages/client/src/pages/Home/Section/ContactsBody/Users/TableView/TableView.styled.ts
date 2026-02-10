@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import styled, { css } from "styled-components";
 
-import { TableContainer, TableRow } from "@docspace/shared/components/table";
+import { TableContainer, TableRow } from "@docspace/ui-kit/components/table";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
 
 const userNameCss = css`

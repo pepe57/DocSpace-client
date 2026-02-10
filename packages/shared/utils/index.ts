@@ -79,7 +79,7 @@ import {
   FileFillingFormStatus,
   FolderType,
 } from "../enums";
-import type { TFile } from "../api/files/types";
+import { getTitleWithoutExtension } from "./getTitleWithoutExtension";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
 import { injectDefaultTheme } from "./injectDefaultTheme";
@@ -92,6 +92,7 @@ import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
 import * as userFilterUtils from "./userFilterUtils";
 import * as filterConstants from "./filterConstants";
 import { getAiProviderIcon, getServerIcon, getAiProviderLabel } from "./ai";
+import { presentInArray } from "./presentInArray";
 
 export {
   isBetaLanguage,
@@ -150,6 +151,7 @@ export {
   uuid,
   getTextColor,
   trimSeparator,
+  getTitleWithoutExtension,
 };
 
 export const getModalType = () => {
@@ -161,15 +163,7 @@ export const isValidDate = (date: Date) => {
   return dt ? dt.setZone(window.timezone).year !== 9999 : false;
 };
 
-export const presentInArray = (
-  array: string[],
-  search: string,
-  caseInsensitive = false,
-) => {
-  const pattern = caseInsensitive ? search.toLowerCase() : search;
-  const result = array?.findIndex((item) => item === pattern);
-  return result !== -1;
-};
+export { presentInArray };
 
 export const getDeviceTypeByWidth = (width: number): DeviceType => {
   if (width <= size.mobile) return DeviceType.mobile;
@@ -177,16 +171,6 @@ export const getDeviceTypeByWidth = (width: number): DeviceType => {
   if (isTablet(width)) return DeviceType.tablet;
 
   return DeviceType.desktop;
-};
-
-export const getTitleWithoutExtension = (
-  item: TFile,
-  fromTemplate: boolean,
-) => {
-  const titleWithoutExst = item.title.split(".").slice(0, -1).join(".");
-  return titleWithoutExst && item.fileExst && !fromTemplate
-    ? titleWithoutExst
-    : item.title;
 };
 
 export const getLastColumn = (

@@ -35,7 +35,7 @@ import { useTranslation } from "react-i18next";
 
 import { retryWebhook } from "@docspace/shared/api/settings";
 
-import { TableRow, TableCell } from "@docspace/shared/components/table";
+import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { toastr } from "@docspace/ui-kit/components/toast";

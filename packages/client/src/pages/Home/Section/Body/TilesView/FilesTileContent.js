@@ -35,7 +35,7 @@ import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-uti
 
 import { DeviceType } from "@docspace/shared/enums";
 import { tablet } from "@docspace/shared/utils";
-import { TileContent } from "@docspace/shared/components/tiles";
+import { TileContent } from "@docspace/ui-kit/components/tiles/tile-content";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 

@@ -21,7 +21,5 @@
   "SubNewFormFile": "Aus Textdatei",
   "ThirdPartyInfo": "Ändern Sie die Drittanbieterinformationen",
   "ThirdPartyTitle": "Dienste von Dritten",
-  "TitleShowActions": "Dateiaktionen anzeigen",
-  "TitleShowFolderActions": "Ordneraktionen anzeigen",
   "TrashItemsDeleteSuccess": "Ausgewählte Elemente wurden erfolgreich aus {{sectionName}} gelöscht"
 }

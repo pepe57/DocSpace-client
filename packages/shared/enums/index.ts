@@ -398,81 +398,8 @@ export const enum NotificationsType {
   UsefulTips = 3,
 }
 
-export const enum FilterGroups {
-  filterType = "filter-filterType",
-  filterAuthor = "filter-author",
-  filterSharedBy = "filter-sharedBy",
-  filterFolders = "filter-folders",
-  filterRoom = "filter-room",
-  filterContent = "filter-withContent",
-  filterQuota = "filter-quota",
-  roomFilterProviderType = "filter-provider-type",
-  roomFilterType = "filter-type",
-  roomFilterSubject = "filter-subject",
-  roomFilterOwner = "filter-owner",
-  roomFilterTags = "filter-tags",
-  roomFilterFolders = "filter-withSubfolders",
-  roomFilterContent = "filter-content",
-  filterGroup = "filter-group",
-  groupsFilterMember = "filter-group-member",
-  groupsFilterManager = "filter-group-manager",
-
-  filterLoginType = "filter-login-type",
-  filterStatus = "filter-status",
-  filterAccount = "filter-account",
-  filterOther = "filter-other",
-  filterInviter = "filter-inviter",
-  filterLocation = "filter-location",
-}
-
-export const enum FilterKeys {
-  withSubfolders = "withSubfolders",
-  excludeSubfolders = "excludeSubfolders",
-  withContent = "withContent",
-  me = "me",
-  other = "other",
-  user = "user",
-  withoutGroup = "withoutGroup",
-  selectedGroup = "selectedGroup",
-  byManager = "byManager",
-  customQuota = "2",
-  defaultQuota = "1",
-}
-
 export const enum IndexedDBStores {
   images = "images",
-}
-
-export const enum FilterSelectorTypes {
-  people = "people-selector",
-  rooms = "rooms-selector",
-  groups = "groups-selector",
-}
-
-export enum DeviceType {
-  mobile = "mobile",
-  tablet = "tablet",
-  desktop = "desktop",
-}
-
-export const enum ParseErrorTypes {
-  None = 0,
-  EmptyRecipients = 1,
-  IncorrectEmail = 2,
-}
-
-export const enum ErrorKeys {
-  LocalDomain = "LocalDomain",
-  IncorrectDomain = "IncorrectDomain",
-  DomainIpAddress = "DomainIpAddress",
-  PunycodeDomain = "PunycodeDomain",
-  PunycodeLocalPart = "PunycodeLocalPart",
-  IncorrectLocalPart = "IncorrectLocalPart",
-  SpacesInLocalPart = "SpacesInLocalPart",
-  MaxLengthExceeded = "MaxLengthExceeded",
-  IncorrectEmail = "IncorrectEmail",
-  ManyEmails = "ManyEmails",
-  EmptyEmail = "EmptyEmail",
 }
 
 export const enum RecaptchaType {
@@ -503,25 +430,6 @@ export enum MembersSubjectType {
 export const enum UrlActionType {
   Download = 0,
   Link = 1,
-}
-
-export const enum WhiteLabelLogoType {
-  LightSmall = 1,
-  LoginPage = 2,
-  Favicon = 3,
-  DocsEditor = 4,
-  DocsEditorEmbed = 5,
-  LeftMenu = 6,
-  AboutPage = 7,
-  Notification = 8,
-  SpreadsheetEditor = 9,
-  SpreadsheetEditorEmbed = 10,
-  PresentationEditor = 11,
-  PresentationEditorEmbed = 12,
-  PdfEditor = 13,
-  PdfEditorEmbed = 14,
-  DiagramEditor = 15,
-  DiagramEditorEmbed = 16,
 }
 
 /**

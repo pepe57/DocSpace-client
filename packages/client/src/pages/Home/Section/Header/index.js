@@ -47,7 +47,7 @@ import {
   getCheckboxItemLabel,
 } from "@docspace/shared/utils";
 import { Context } from "@docspace/ui-kit/utils/context";
-import { TableGroupMenu } from "@docspace/shared/components/table";
+import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import {
   RoomsType,
   DeviceType,
@@ -979,7 +979,7 @@ const SectionHeaderContent = (props) => {
                 actions: isRoomsFolder
                   ? t("Common:NewRoom")
                   : t("Common:Actions"),
-                contextMenu: t("Translations:TitleShowFolderActions"),
+                contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
               }}
               withMenu={withMenu}

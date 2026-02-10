@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { TableCell, TableRow } from "@docspace/shared/components/table";
+import { TableCell, TableRow } from "@docspace/ui-kit/components/table";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";

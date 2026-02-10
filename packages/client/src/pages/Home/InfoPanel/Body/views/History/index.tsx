@@ -124,7 +124,7 @@ const History = ({
   });
 
   const onCheckListScroll = () => {
-    if (loading.current) return;
+    if (loading.current || !scrollElement) return;
     const all = scrollElement.scrollHeight;
     const current = scrollElement.scrollTop;
     const more = all - (current + scrollElement.clientHeight) <= 10;

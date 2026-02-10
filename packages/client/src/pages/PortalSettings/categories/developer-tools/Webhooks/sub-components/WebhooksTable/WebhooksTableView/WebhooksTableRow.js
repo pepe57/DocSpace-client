@@ -35,7 +35,7 @@ import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { TableRow, TableCell } from "@docspace/shared/components/table";
+import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Avatar } from "@docspace/ui-kit/components/avatar";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
