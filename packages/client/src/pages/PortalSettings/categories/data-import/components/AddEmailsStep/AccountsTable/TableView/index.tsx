@@ -35,7 +35,7 @@ import { useTheme } from "styled-components";
 import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { TableBody } from "@docspace/shared/components/table";
+import { TableBody } from "@docspace/ui-kit/components/table";
 
 import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";

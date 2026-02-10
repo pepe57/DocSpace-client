@@ -35,7 +35,7 @@ import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { Heading } from "@docspace/ui-kit/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { TableGroupMenu } from "@docspace/shared/components/table";
+import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";

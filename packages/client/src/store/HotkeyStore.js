@@ -37,7 +37,7 @@ import { clearTextSelection } from "@docspace/shared/utils/copy";
 
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
+import { TABLE_HEADER_HEIGHT } from "@docspace/ui-kit/components/table/Table.constants";
 import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
 
 class HotkeyStore {

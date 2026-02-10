@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { TableRow, TableCell } from "@docspace/shared/components/table";
+import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 import { Text } from "@docspace/ui-kit/components/text";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 import { Encoder } from "@docspace/shared/utils/encoder";

@@ -32,7 +32,7 @@ import React, { useEffect, useRef, useCallback, useMemo, use } from "react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { TableContainer, TableBody } from "@docspace/shared/components/table";
+import { TableContainer, TableBody } from "@docspace/ui-kit/components/table";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import { Context } from "@docspace/ui-kit/utils/context";
 

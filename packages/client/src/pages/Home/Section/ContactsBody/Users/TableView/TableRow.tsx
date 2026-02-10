@@ -29,7 +29,7 @@ import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { TableCell } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/ui-kit/components/table";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
