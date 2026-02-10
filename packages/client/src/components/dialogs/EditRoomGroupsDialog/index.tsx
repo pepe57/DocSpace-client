@@ -111,6 +111,7 @@ const EditRoomGroupsDialog = ({
     () => organizeRoomsGrouping ?? true,
   );
   const [hasGroupingChanged, setHasGroupingChanged] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   // Sync local state with prop when it changes externally
   useEffect(() => {
@@ -146,17 +147,23 @@ const EditRoomGroupsDialog = ({
   };
 
   const onSaveGroupingChange = async () => {
-    if (setOrganizeRoomsGrouping) {
-      await setOrganizeRoomsGrouping(localGroupingEnabled);
-    }
+    if (isSaving) return;
+    setIsSaving(true);
+    try {
+      if (setOrganizeRoomsGrouping) {
+        await setOrganizeRoomsGrouping(localGroupingEnabled);
+      }
 
-    setHasGroupingChanged(false);
-    setEditRoomGroupsDialogVisible(false);
+      setHasGroupingChanged(false);
+      setEditRoomGroupsDialogVisible(false);
 
-    // If grouping was disabled and we're currently viewing a group,
-    // navigate away to show all rooms instead of empty group placeholder
-    if (!localGroupingEnabled && currentFilterGroupId) {
-      navigate("rooms/shared");
+      // If grouping was disabled and we're currently viewing a group,
+      // navigate away to show all rooms instead of empty group placeholder
+      if (!localGroupingEnabled && currentFilterGroupId) {
+        navigate("rooms/shared");
+      }
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -422,6 +429,8 @@ const EditRoomGroupsDialog = ({
             primary
             onClick={onSaveGroupingChange}
             scale
+            isLoading={isSaving}
+            isDisabled={isSaving}
           />
           <Button
             label={t("Common:CancelButton")}
