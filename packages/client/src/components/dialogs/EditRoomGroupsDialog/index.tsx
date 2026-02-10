@@ -340,6 +340,7 @@ const EditRoomGroupsDialog = ({
         onSubmit={onSubmitRoom}
         headerLabel={t("Common:RoomList")}
         withSearch
+        disableSubmitUntilChanged
       />
     );
   }
