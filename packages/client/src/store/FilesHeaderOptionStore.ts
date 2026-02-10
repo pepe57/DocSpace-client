@@ -127,6 +127,7 @@ export default class FilesHeaderOptionStore {
 
   private createGroupHandle = () => {
     const roomIds = this.filesStore.selection.map((room) => room.id as number);
+    this.filesStore.resetSelections();
     this.dialogsStore.setEditRoomGroupsDialogVisible(true, roomIds);
   };
 
@@ -152,6 +153,7 @@ export default class FilesHeaderOptionStore {
           ...transProps,
         }),
       );
+      this.filesStore.resetSelections();
     } catch (error) {
       console.error("Error adding rooms to group:", error);
       toastr.error(this.t("Common:Error"));
@@ -194,6 +196,7 @@ export default class FilesHeaderOptionStore {
           ...transProps,
         }),
       );
+      this.filesStore.resetSelections();
     } catch (error) {
       console.error("Error removing rooms from group:", error);
       toastr.error(this.t("Common:Error"));
