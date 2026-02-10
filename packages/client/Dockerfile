@@ -41,6 +41,7 @@ COPY packages/client/package.json ./packages/client/package.json
 COPY packages/client/onlyoffice-docspace-plugin-sdk-*.tgz ./packages/client/
 COPY packages/shared/package.json ./packages/shared/package.json
 COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
+COPY libs/ui-kit/onlyoffice-docspace-api-sdk-*.tgz ./libs/ui-kit/
 
 # Install dependencies with recursive installation
 RUN pnpm install --frozen-lockfile

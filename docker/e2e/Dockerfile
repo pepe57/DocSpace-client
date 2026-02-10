@@ -4,6 +4,7 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV CI=true
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 
 # Install required dependencies and fonts in a single layer
 # Using minimal font set - only what's needed for consistent rendering
@@ -40,6 +41,7 @@ COPY packages/sdk/package.json ./packages/sdk/package.json
 COPY packages/management/package.json ./packages/management/package.json
 COPY packages/shared/package.json ./packages/shared/package.json
 COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
+COPY libs/ui-kit/onlyoffice-docspace-api-sdk-*.tgz ./libs/ui-kit/
 
 # Install dependencies and clean cache in same layer
 RUN pnpm install --frozen-lockfile && \
