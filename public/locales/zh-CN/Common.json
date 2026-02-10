@@ -1051,5 +1051,7 @@
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
   "YourTurn": "轮到您了",
-  "ExternalLink": "外部链接"
+  "ExternalLink": "外部链接",
+  "TitleShowFolderActions": "显示文件夹相关操作",
+  "TitleShowActions": "显示文件相关操作"
 }

@@ -1051,5 +1051,7 @@
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
   "YourTurn": "Twoja kolej",
-  "ExternalLink": "Link zewnętrzny"
+  "ExternalLink": "Link zewnętrzny",
+  "TitleShowFolderActions": "Działania na folderach",
+  "TitleShowActions": "Działania na plikach"
 }

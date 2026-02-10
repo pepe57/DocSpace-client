@@ -1051,5 +1051,7 @@
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
   "YourTurn": "Vi ste na vrsti",
-  "ExternalLink": "Zunanja povezava"
+  "ExternalLink": "Zunanja povezava",
+  "TitleShowFolderActions": "Pokaži akcije mape",
+  "TitleShowActions": "Pokaži akcije datoteke"
 }

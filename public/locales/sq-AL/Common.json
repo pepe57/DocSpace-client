@@ -1051,5 +1051,7 @@
   "YourCurrentDomain": "Domeni juaj aktual",
   "YourLogo": "Logos juaj",
   "YourTurn": "Radha jote",
-  "ExternalLink": "Lidhje e jashtme"
+  "ExternalLink": "Lidhje e jashtme",
+  "TitleShowFolderActions": "Shfaqni veprimet e dosjeve",
+  "TitleShowActions": "Shfaqni veprimet e skedarit"
 }
