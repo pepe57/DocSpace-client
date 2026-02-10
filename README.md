@@ -356,10 +356,17 @@ The backend will start with all required services (MySQL, Redis, RabbitMQ, OpenS
 > **Note:** Aspire will launch multiple services in the terminal. Some services run directly in the terminal, while others run in Docker containers. To stop all services, press `Ctrl+C` in the terminal. If you need to completely remove and reinstall Docker services, use the "Clear Aspire Docker artifacts" command below.
 
 **Clear Aspire Docker artifacts:**
+
+Linux/macOS (bash):
 ```bash
 docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-editors|openresty' | xargs -r docker stop && \
 docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-editors|openresty' | xargs -r docker rm && \
 docker volume prune -f && docker network prune -f
+```
+
+Windows (PowerShell):
+```powershell
+$c = docker ps -a --format '{{.Names}}' | Where-Object { $_ -match 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-editors|openresty' }; if ($c) { $c | ForEach-Object { docker stop $_ }; $c | ForEach-Object { docker rm $_ } }; docker volume prune -f; docker network prune -f
 ```
 
 ### 3. Start Frontend (pnpm)
