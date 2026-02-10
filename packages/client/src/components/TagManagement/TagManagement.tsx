@@ -39,7 +39,7 @@ import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import type {
   InjectedTagManagementProps,
   TagManagementState,
-} from "./TagSelector.types";
+} from "./TagManagement.types";
 
 const TagManagementWrapper: FC<InjectedTagManagementProps> = ({
   onSelectTag,
