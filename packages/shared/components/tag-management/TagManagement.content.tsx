@@ -40,29 +40,29 @@ import { Scrollbar } from "../scrollbar";
 import { IconButton } from "../icon-button";
 import { InputSize, InputType, TextInput } from "../text-input";
 
-import { useTagSelector } from "./TagSelector.provider";
+import { useTagManagement } from "./TagManagement.provider";
 import {
   useCreateTagMutation,
   useUpdateTag,
   useRemoveTagMutation,
   useUpdateTagNameMutation,
 } from "./hooks/useTagsQuery";
-import styles from "./TagSelector.module.scss";
+import styles from "./TagManagement.module.scss";
 import {
   ROW_HEIGHT,
   ICON_SIZE,
   MAX_BODY_HEIGHT,
   MARGIN_BOTTOM,
-} from "./TagSelector.constants";
-import type { TagSelectorContentProps } from "./TagSelector.types";
+} from "./TagManagement.constants";
+import type { TagManagementContentProps } from "./TagManagement.types";
 
-export const TagSelectorContent: React.FC<TagSelectorContentProps> = ({
+export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   onSelectTag,
   roomId,
 }) => {
   const isMobile = useIsMobile();
   const { filteredTags, tags, setTags, canEdit, canRemove, canBindTag } =
-    useTagSelector();
+    useTagManagement();
   const removeTag = useRemoveTagMutation();
   const addTagToRoom = useCreateTagMutation(roomId);
   const updateTag = useUpdateTag(roomId);

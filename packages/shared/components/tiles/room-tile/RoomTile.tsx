@@ -29,7 +29,7 @@ import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { type OverflowClickEvent, Tags } from "../../tags";
-import { callSelectorEvent } from "../../tag-selector";
+import { callManagementEvent } from "../../tag-management";
 import type { TagType } from "../../tag";
 import { BaseTile } from "../base-tile/BaseTile";
 import { TileItem } from "../tile-container/TileContainer.types";
@@ -156,7 +156,7 @@ export const RoomTile = ({
 
   const onOverflowClick = useCallback<OverflowClickEvent>(
     (tags, roomId, anchorId, handleOverflowVisible) =>
-      callSelectorEvent(
+      callManagementEvent(
         tags,
         roomId,
         anchorId,

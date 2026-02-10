@@ -30,11 +30,11 @@ import {
   transformTagsData,
   unionTagsData,
   searchFilter,
-} from "./TagSelector.utils";
-import type { TTag } from "./TagSelector.types";
+} from "./TagManagement.utils";
+import type { TTag } from "./TagManagement.types";
 import type { TagType } from "../tag/Tag.types";
 
-describe("TagSelector.utils", () => {
+describe("TagManagement.utils", () => {
   describe("transformTagsData", () => {
     it("transforms string tags to TTag format", () => {
       const input = ["tag1", "tag2", "tag3"];
@@ -173,9 +173,7 @@ describe("TagSelector.utils", () => {
 
     it("prioritizes startsWith matches after exact matches", () => {
       const result = searchFilter(mockTags, "test");
-      const startsWithTest = result.filter((t) =>
-        t.label.startsWith("test"),
-      );
+      const startsWithTest = result.filter((t) => t.label.startsWith("test"));
       expect(startsWithTest.length).toBeGreaterThan(0);
       expect(startsWithTest[0].label).toBe("test");
     });

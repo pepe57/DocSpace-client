@@ -34,8 +34,8 @@ import {
   removeTagsFromRoom,
 } from "../../../api/rooms";
 
-import type { TTag, UpdateTagNameParams } from "../TagSelector.types";
-import { TAGS_QUERY_KEY } from "../TagSelector.constants";
+import type { TTag, UpdateTagNameParams } from "../TagManagement.types";
+import { TAGS_QUERY_KEY } from "../TagManagement.constants";
 
 export function useTagsQuery() {
   return useQuery({

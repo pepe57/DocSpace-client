@@ -29,7 +29,10 @@ import { describe, it, expect } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { TagSelectorProvider, useTagSelector } from "./TagSelector.provider";
+import {
+  TagManagementProvider,
+  useTagManagement,
+} from "./TagManagement.provider";
 import type { TagType } from "../tag/Tag.types";
 
 const TestComponent = () => {
@@ -41,7 +44,7 @@ const TestComponent = () => {
     showCreateTag,
     setSearchValue,
     clearSearch,
-  } = useTagSelector();
+  } = useTagManagement();
 
   return (
     <div>
@@ -67,10 +70,10 @@ const TestComponent = () => {
   );
 };
 
-describe("TagSelectorProvider", () => {
-  it("throws error when useTagSelector is used outside provider", () => {
+describe("TagManagementProvider", () => {
+  it("throws error when useTagManagement is used outside provider", () => {
     expect(() => render(<TestComponent />)).toThrow(
-      "useTagSelector must be used within TagSelectorProvider",
+      "useTagManagement must be used within TagManagementProvider",
     );
   });
 
@@ -79,9 +82,9 @@ describe("TagSelectorProvider", () => {
     const fetchedTags = ["tag3", "tag4"];
 
     render(
-      <TagSelectorProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
         <TestComponent />
-      </TagSelectorProvider>,
+      </TagManagementProvider>,
     );
 
     expect(screen.getByTestId("tags-count")).toHaveTextContent("4");
@@ -96,9 +99,9 @@ describe("TagSelectorProvider", () => {
     const fetchedTags = ["tag3"];
 
     render(
-      <TagSelectorProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
         <TestComponent />
-      </TagSelectorProvider>,
+      </TagManagementProvider>,
     );
 
     expect(screen.getByTestId("tags-count")).toHaveTextContent("2");
@@ -112,9 +115,9 @@ describe("TagSelectorProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagSelectorProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
         <TestComponent />
-      </TagSelectorProvider>,
+      </TagManagementProvider>,
     );
 
     const input = screen.getByTestId("search-input");
@@ -129,9 +132,9 @@ describe("TagSelectorProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagSelectorProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
         <TestComponent />
-      </TagSelectorProvider>,
+      </TagManagementProvider>,
     );
 
     const input = screen.getByTestId("search-input");
@@ -153,9 +156,9 @@ describe("TagSelectorProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagSelectorProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
         <TestComponent />
-      </TagSelectorProvider>,
+      </TagManagementProvider>,
     );
 
     const input = screen.getByTestId("search-input");
@@ -174,9 +177,9 @@ describe("TagSelectorProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagSelectorProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
         <TestComponent />
-      </TagSelectorProvider>,
+      </TagManagementProvider>,
     );
 
     const input = screen.getByTestId("search-input");
@@ -193,9 +196,9 @@ describe("TagSelectorProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagSelectorProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
         <TestComponent />
-      </TagSelectorProvider>,
+      </TagManagementProvider>,
     );
 
     const input = screen.getByTestId("search-input");
@@ -211,9 +214,9 @@ describe("TagSelectorProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagSelectorProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
         <TestComponent />
-      </TagSelectorProvider>,
+      </TagManagementProvider>,
     );
 
     expect(screen.getByTestId("filtered-count")).toHaveTextContent("3");
@@ -222,9 +225,9 @@ describe("TagSelectorProvider", () => {
 
   it("handles empty room tags and fetched tags", () => {
     render(
-      <TagSelectorProvider roomTags={[]} fetchedTags={[]}>
+      <TagManagementProvider roomTags={[]} fetchedTags={[]}>
         <TestComponent />
-      </TagSelectorProvider>,
+      </TagManagementProvider>,
     );
 
     expect(screen.getByTestId("tags-count")).toHaveTextContent("0");
@@ -237,9 +240,9 @@ describe("TagSelectorProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagSelectorProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
         <TestComponent />
-      </TagSelectorProvider>,
+      </TagManagementProvider>,
     );
 
     const input = screen.getByTestId("search-input");
@@ -258,9 +261,9 @@ describe("TagSelectorProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagSelectorProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
         <TestComponent />
-      </TagSelectorProvider>,
+      </TagManagementProvider>,
     );
 
     const input = screen.getByTestId("search-input");
@@ -278,9 +281,9 @@ describe("TagSelectorProvider", () => {
     const fetchedTags = ["tag2", "tag3"];
 
     render(
-      <TagSelectorProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
         <TestComponent />
-      </TagSelectorProvider>,
+      </TagManagementProvider>,
     );
 
     expect(screen.getByTestId("tags-count")).toHaveTextContent("3");

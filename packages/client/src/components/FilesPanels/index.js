@@ -103,7 +103,7 @@ import ShareSelector from "../ShareSelector";
 import TemplateGallery from "../TemplateGallery";
 import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
-import { TagSelector } from "../TagSelector";
+import { TagManagement } from "../TagSelector";
 
 const Panels = (props) => {
   const {
@@ -493,7 +493,7 @@ const Panels = (props) => {
       <SocialAuthWelcomeDialog key="joining-space-dialog" />
     ),
     <ShareSelector key="share-selector" />,
-    <TagSelector key="tag-selector" />,
+    <TagManagement key="tag-management" />,
     templateGalleryVisible && <TemplateGallery key="template-gallery" />,
     isVisibleInfoPanelTemplateGallery && (
       <InfoPanelTemplateGallery key="template-gallery-info-panel" />

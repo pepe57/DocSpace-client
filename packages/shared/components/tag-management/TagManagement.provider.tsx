@@ -34,17 +34,16 @@ import React, {
 
 import type {
   TTag,
-  TagSelectorContextValue,
-  TagSelectorProviderProps,
-  ITagSelectorStateContext,
-} from "./TagSelector.types";
-import { searchFilter, unionTagsData } from "./TagSelector.utils";
+  TagManagementContextValue,
+  TagManagementProviderProps,
+  ITagManagementStateContext,
+} from "./TagManagement.types";
+import { searchFilter, unionTagsData } from "./TagManagement.utils";
 
-const TagSelectorStateContext = createContext<ITagSelectorStateContext | null>(
-  null,
-);
+const TagManagementStateContext =
+  createContext<ITagManagementStateContext | null>(null);
 
-export const TagSelectorProvider: React.FC<TagSelectorProviderProps> = ({
+export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
   children,
   roomTags,
   fetchedTags,
@@ -77,7 +76,7 @@ export const TagSelectorProvider: React.FC<TagSelectorProviderProps> = ({
     setSearchValue("");
   }, []);
 
-  const value = useMemo<ITagSelectorStateContext>(
+  const value = useMemo<ITagManagementStateContext>(
     () => ({
       tags,
       setTags,
@@ -109,16 +108,18 @@ export const TagSelectorProvider: React.FC<TagSelectorProviderProps> = ({
   );
 
   return (
-    <TagSelectorStateContext.Provider value={value}>
+    <TagManagementStateContext.Provider value={value}>
       {children}
-    </TagSelectorStateContext.Provider>
+    </TagManagementStateContext.Provider>
   );
 };
 
-export const useTagSelector = (): TagSelectorContextValue => {
-  const context = React.use(TagSelectorStateContext);
+export const useTagManagement = (): TagManagementContextValue => {
+  const context = React.use(TagManagementStateContext);
   if (!context) {
-    throw new Error("useTagSelector must be used within TagSelectorProvider");
+    throw new Error(
+      "useTagManagement must be used within TagManagementProvider",
+    );
   }
   return context;
 };

@@ -24,12 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TagManagementEventType } from "@docspace/shared/components/tag-management";
+import { makeAutoObservable } from "mobx";
 
-export interface InjectedTagManagementProps {
-  onSelectTag: TStore["filesActionsStore"]["selectTag"];
+import { TagManagementEventType } from "@docspace/shared/components/tag-management";
+import { Nullable } from "@docspace/shared/types";
+
+class TagManagementStore {
+  tagManagementData: Nullable<TagManagementEventType> = null;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  openTagManagement(data: TagManagementEventType) {
+    this.tagManagementData = data;
+  }
+
+  closeTagManagement(roomId: string) {
+    if (this.tagManagementData?.roomId !== roomId) return;
+
+    this.tagManagementData = null;
+  }
 }
 
-export interface TagManagementState extends TagManagementEventType {
-  anchor: Element;
-}
+export default TagManagementStore;

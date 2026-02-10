@@ -28,7 +28,7 @@ import React, { useCallback, useMemo } from "react";
 
 import { Tags } from "@docspace/shared/components/tags";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { callSelectorEvent } from "@docspace/shared/components/tag-selector";
+import { callManagementEvent } from "@docspace/shared/components/tag-management";
 
 const TagsCell = ({
   item,
@@ -78,7 +78,7 @@ const TagsCell = ({
 
   const handleOverflowVisible = useCallback(
     (tags, id, anchorId, setIsOverflowVisible) => {
-      callSelectorEvent(tags, id, anchorId, setIsOverflowVisible, access);
+      callManagementEvent(tags, id, anchorId, setIsOverflowVisible, access);
     },
     [access],
   );

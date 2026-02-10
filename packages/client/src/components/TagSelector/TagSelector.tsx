@@ -28,25 +28,27 @@ import { FC, useCallback, useState } from "react";
 import { inject, observer } from "mobx-react";
 
 import {
-  TAG_SELECTOR_EVENT_NAME,
-  TagSelector,
-  type TagSelectorEventType,
-} from "@docspace/shared/components/tag-selector";
+  TAG_MANAGEMENT_EVENT_NAME,
+  TagManagement,
+  type TagManagementEventType,
+} from "@docspace/shared/components/tag-management";
 import { useEventListener } from "@docspace/shared/hooks/useEventListener";
 import type { Nullable } from "@docspace/shared/types";
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 
 import type {
-  InjectedTagSelectorProps,
-  TagSelectorState,
+  InjectedTagManagementProps,
+  TagManagementState,
 } from "./TagSelector.types";
 
-const TagSelectorWrapper: FC<InjectedTagSelectorProps> = ({ onSelectTag }) => {
-  const [state, setState] = useState<Nullable<TagSelectorState>>(null);
+const TagManagementWrapper: FC<InjectedTagManagementProps> = ({
+  onSelectTag,
+}) => {
+  const [state, setState] = useState<Nullable<TagManagementState>>(null);
 
   useEventListener(
-    TAG_SELECTOR_EVENT_NAME,
-    (e: CustomEvent<TagSelectorEventType>) => {
+    TAG_MANAGEMENT_EVENT_NAME,
+    (e: CustomEvent<TagManagementEventType>) => {
       console.log(e.detail);
 
       const anchor = document.querySelector(
@@ -76,7 +78,7 @@ const TagSelectorWrapper: FC<InjectedTagSelectorProps> = ({ onSelectTag }) => {
   if (!state) return null;
 
   return (
-    <TagSelector
+    <TagManagement
       tags={state.tags}
       roomId={state.roomId}
       anchor={state.anchor}
@@ -86,8 +88,8 @@ const TagSelectorWrapper: FC<InjectedTagSelectorProps> = ({ onSelectTag }) => {
   );
 };
 
-export default inject<TStore, InjectedTagSelectorProps>(
+export default inject<TStore, InjectedTagManagementProps>(
   ({ filesActionsStore }) => ({
     onSelectTag: filesActionsStore.selectTag,
   }),
-)(observer(TagSelectorWrapper as FC));
+)(observer(TagManagementWrapper as FC));

@@ -39,12 +39,12 @@ import { Text } from "../text";
 import { InputType, TextInput } from "../text-input";
 import { toastr } from "../toast";
 
-import { useTagSelector } from "./TagSelector.provider";
+import { useTagManagement } from "./TagManagement.provider";
 import { useCreateTagMutation } from "./hooks/useTagsQuery";
-import type { TagSelectorFilterProps, TTag } from "./TagSelector.types";
-import styles from "./TagSelector.module.scss";
+import type { TagManagementFilterProps, TTag } from "./TagManagement.types";
+import styles from "./TagManagement.module.scss";
 
-export const TagSelectorFilter: React.FC<TagSelectorFilterProps> = ({
+export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
   roomId,
 }) => {
   const { t } = useTranslation("Common");
@@ -57,7 +57,7 @@ export const TagSelectorFilter: React.FC<TagSelectorFilterProps> = ({
     tags,
     setTags,
     filteredTags,
-  } = useTagSelector();
+  } = useTagManagement();
   const createTag = useCreateTagMutation(roomId);
 
   const [inputValue, setInputValue] = useState("");

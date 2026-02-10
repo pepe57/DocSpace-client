@@ -30,8 +30,8 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { UseQueryResult } from "@tanstack/react-query";
 
-import { TagSelector } from "./TagSelector";
-import type { TagSelectorProps } from "./TagSelector.types";
+import { TagManagement } from "./TagManagement";
+import type { TagManagementProps } from "./TagManagement.types";
 import * as useTagsQueryModule from "./hooks/useTagsQuery";
 
 vi.mock("../../utils/useClickOutside", () => ({
@@ -51,7 +51,7 @@ const createQueryClient = () =>
     },
   });
 
-const defaultProps: TagSelectorProps = {
+const defaultProps: TagManagementProps = {
   tags: ["tag1", "tag2"],
   roomId: "123",
   onClose: vi.fn(),
@@ -68,7 +68,7 @@ const renderWithQueryClient = (
   );
 };
 
-describe("<TagSelector />", () => {
+describe("<TagManagement />", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -82,7 +82,7 @@ describe("<TagSelector />", () => {
       isSuccess: false,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagSelector {...defaultProps} />);
+    renderWithQueryClient(<TagManagement {...defaultProps} />);
 
     expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
   });
@@ -96,11 +96,11 @@ describe("<TagSelector />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagSelector {...defaultProps} />);
+    renderWithQueryClient(<TagManagement {...defaultProps} />);
 
     await waitFor(() => {
       expect(
-        screen.queryByTestId("tag-selector-loader"),
+        screen.queryByTestId("tag-management-loader"),
       ).not.toBeInTheDocument();
     });
   });
@@ -114,7 +114,7 @@ describe("<TagSelector />", () => {
       isSuccess: false,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagSelector {...defaultProps} />);
+    renderWithQueryClient(<TagManagement {...defaultProps} />);
 
     expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
     const skeletons = document.querySelectorAll(
@@ -136,12 +136,14 @@ describe("<TagSelector />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagSelector {...defaultProps} onClose={onClose} />);
+    renderWithQueryClient(
+      <TagManagement {...defaultProps} onClose={onClose} />,
+    );
 
     expect(mockUseClickOutside).toHaveBeenCalled();
   });
 
-  it("passes correct props to TagSelectorProvider", async () => {
+  it("passes correct props to TagManagementProvider", async () => {
     const roomTags = ["roomTag1", "roomTag2"];
     const fetchedTags = ["fetchedTag1"];
 
@@ -153,11 +155,11 @@ describe("<TagSelector />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagSelector {...defaultProps} tags={roomTags} />);
+    renderWithQueryClient(<TagManagement {...defaultProps} tags={roomTags} />);
 
     await waitFor(() => {
       expect(
-        screen.queryByTestId("tag-selector-loader"),
+        screen.queryByTestId("tag-management-loader"),
       ).not.toBeInTheDocument();
     });
   });
@@ -172,7 +174,7 @@ describe("<TagSelector />", () => {
     } as unknown as UseQueryResult<string[], Error>);
 
     const { container } = renderWithQueryClient(
-      <TagSelector {...defaultProps} tags={[]} />,
+      <TagManagement {...defaultProps} tags={[]} />,
     );
 
     expect(container.querySelector(".loaderWrapper")).not.toBeInTheDocument();
@@ -191,7 +193,7 @@ describe("<TagSelector />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagSelector {...defaultProps} />);
+    renderWithQueryClient(<TagManagement {...defaultProps} />);
 
     await waitFor(() => {
       expect(screen.getByRole("textbox")).toBeInTheDocument();
@@ -207,7 +209,7 @@ describe("<TagSelector />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagSelector {...defaultProps} />);
+    renderWithQueryClient(<TagManagement {...defaultProps} />);
 
     await waitFor(() => {
       const searchInput = screen.getByRole("textbox");
@@ -224,16 +226,16 @@ describe("<TagSelector />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagSelector {...defaultProps} />);
+    renderWithQueryClient(<TagManagement {...defaultProps} />);
 
     await waitFor(() => {
       expect(
-        screen.queryByTestId("tag-selector-loader"),
+        screen.queryByTestId("tag-management-loader"),
       ).not.toBeInTheDocument();
     });
   });
 
-  it("renders TagSelectorFilter and TagSelectorContent on success", async () => {
+  it("renders TagManagementFilter and TagManagementContent on success", async () => {
     vi.spyOn(useTagsQueryModule, "useTagsQuery").mockReturnValue({
       data: ["tag1"],
       status: "success",
@@ -242,7 +244,7 @@ describe("<TagSelector />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagSelector {...defaultProps} />);
+    renderWithQueryClient(<TagManagement {...defaultProps} />);
 
     await waitFor(() => {
       const container = screen.getByRole("textbox");
@@ -261,11 +263,11 @@ describe("<TagSelector />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagSelector {...defaultProps} roomId={roomId} />);
+    renderWithQueryClient(<TagManagement {...defaultProps} roomId={roomId} />);
 
     await waitFor(() => {
       expect(
-        screen.queryByTestId("tag-selector-loader"),
+        screen.queryByTestId("tag-management-loader"),
       ).not.toBeInTheDocument();
     });
   });

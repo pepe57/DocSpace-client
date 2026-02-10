@@ -23,12 +23,15 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-export { TagSelector } from "./TagSelector";
-export { TagSelectorProvider, useTagSelector } from "./TagSelector.provider";
-export { TagSelectorFilter } from "./TagSelector.filter";
-export { TagSelectorContent } from "./TagSelector.content";
-export { TagSelectorLoader } from "./TagSelector.loader";
+export { TagManagement } from "./TagManagement";
+export {
+  TagManagementProvider,
+  useTagManagement,
+} from "./TagManagement.provider";
+export { TagManagementFilter } from "./TagManagement.filter";
+export { TagManagementContent } from "./TagManagement.content";
+export { TagManagementLoader } from "./TagManagement.loader";
 export { useTagsQuery } from "./hooks/useTagsQuery";
-export type { TagSelectorEventType } from "./TagSelector.types";
-export { TAG_SELECTOR_EVENT_NAME } from "./TagSelector.constants";
-export { callSelectorEvent } from "./TagSelector.utils";
+export type { TagManagementEventType } from "./TagManagement.types";
+export { TAG_MANAGEMENT_EVENT_NAME } from "./TagManagement.constants";
+export { callManagementEvent } from "./TagManagement.utils";

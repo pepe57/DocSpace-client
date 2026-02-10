@@ -35,7 +35,7 @@ import { isRoom } from "@docspace/shared/utils/typeGuards";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 import { Tags } from "@docspace/shared/components/tags";
-import { callSelectorEvent } from "@docspace/shared/components/tag-selector";
+import { callManagementEvent } from "@docspace/shared/components/tag-management";
 
 import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
@@ -89,7 +89,7 @@ const tagList = (
         selectTag({ label });
       }}
       onOverflowClick={(tags, id, anchorId, handleOverflowVisible) =>
-        callSelectorEvent(tags, id, anchorId, handleOverflowVisible, access)
+        callManagementEvent(tags, id, anchorId, handleOverflowVisible, access)
       }
     />
   </div>

@@ -28,7 +28,7 @@
 
 :global(.light) {
   :local {
-    .tagSelector {
+    .tagManagement {
       --selector-background-color: #{colors.$white};
     }
     .text,
@@ -44,7 +44,7 @@
 
 :global(.dark) {
   :local {
-    .tagSelector {
+    .tagManagement {
       --selector-background-color: #{colors.$dark-gray-light};
     }
     .text,
@@ -66,7 +66,7 @@
   }
 }
 
-.tagSelector {
+.tagManagement {
   position: fixed;
   z-index: 310;
 

@@ -27,7 +27,7 @@
 import type { ShareAccessRights } from "../../enums";
 import type { TagClickEvent, TagType } from "../tag/Tag.types";
 
-export interface TagSelectorProps {
+export interface TagManagementProps {
   tags: Array<TagType | string>;
   roomId: string | number;
   onClose: VoidFunction;
@@ -46,7 +46,7 @@ export type TTag = {
   checked: boolean;
 };
 
-export interface TagSelectorProviderProps {
+export interface TagManagementProviderProps {
   children: React.ReactNode;
   fetchedTags: string[];
   roomTags: Array<TagType | string>;
@@ -57,7 +57,7 @@ export interface TagSelectorProviderProps {
   canEdit?: boolean;
   canBindTag?: boolean;
 }
-export interface ITagSelectorStateContext {
+export interface ITagManagementStateContext {
   tags: TTag[];
   setTags: React.Dispatch<React.SetStateAction<TTag[]>>;
   searchValue: string;
@@ -74,23 +74,23 @@ export interface ITagSelectorStateContext {
   canBindTag?: boolean;
 }
 
-export interface TagSelectorContextValue extends ITagSelectorStateContext {}
+export interface TagManagementContextValue extends ITagManagementStateContext {}
 
 export interface UpdateTagNameParams {
   oldLabel: string;
   newLabel: string;
 }
 
-export interface TagSelectorContentProps {
+export interface TagManagementContentProps {
   onSelectTag: (tag: TagClickEvent) => void;
   roomId: string | number;
 }
 
-export interface TagSelectorFilterProps {
+export interface TagManagementFilterProps {
   roomId: string | number;
 }
 
-export interface TagSelectorEventType {
+export interface TagManagementEventType {
   roomId: string;
   anchorId: string;
   tags: Array<TagType | string>;

@@ -41,19 +41,19 @@ import { useEventListener } from "../../hooks/useEventListener";
 
 import { ModalDialog, ModalDialogType } from "../modal-dialog";
 
-import { TagSelectorProvider } from "./TagSelector.provider";
-import { TagSelectorFilter } from "./TagSelector.filter";
-import { TagSelectorContent } from "./TagSelector.content";
-import { TagSelectorLoader } from "./TagSelector.loader";
-import type { TagSelectorProps } from "./TagSelector.types";
-import { stopPropagation } from "./TagSelector.utils";
-import { EVENT_OPTIONS } from "./TagSelector.constants";
+import { TagManagementProvider } from "./TagManagement.provider";
+import { TagManagementFilter } from "./TagManagement.filter";
+import { TagManagementContent } from "./TagManagement.content";
+import { TagManagementLoader } from "./TagManagement.loader";
+import type { TagManagementProps } from "./TagManagement.types";
+import { stopPropagation } from "./TagManagement.utils";
+import { EVENT_OPTIONS } from "./TagManagement.constants";
 
-import styles from "./TagSelector.module.scss";
+import styles from "./TagManagement.module.scss";
 
 import { useTagsQuery } from "./hooks/useTagsQuery";
 
-export const TagSelector: React.FC<TagSelectorProps> = ({
+export const TagManagement: React.FC<TagManagementProps> = ({
   roomId,
   onClose,
   anchor,
@@ -106,13 +106,13 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
     <div
       onClick={stopPropagation}
       onDoubleClick={stopPropagation}
-      className={styles.tagSelector}
+      className={styles.tagManagement}
       ref={ref}
     >
       {match(status)
-        .with("pending", () => <TagSelectorLoader />)
+        .with("pending", () => <TagManagementLoader />)
         .with("success", () => (
-          <TagSelectorProvider
+          <TagManagementProvider
             fetchedTags={fetchedTags ?? []}
             roomTags={roomTags}
             canRemove={canRemove}
@@ -121,9 +121,9 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
             canEdit={canEdit}
             canBindTag={canBindTag}
           >
-            <TagSelectorFilter roomId={roomId} />
-            <TagSelectorContent onSelectTag={onSelectTag} roomId={roomId} />
-          </TagSelectorProvider>
+            <TagManagementFilter roomId={roomId} />
+            <TagManagementContent onSelectTag={onSelectTag} roomId={roomId} />
+          </TagManagementProvider>
         ))
         .with("error", () => <></>)
         .otherwise(() => (

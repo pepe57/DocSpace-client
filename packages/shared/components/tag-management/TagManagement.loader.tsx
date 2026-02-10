@@ -29,9 +29,9 @@ import classNames from "classnames";
 
 import { RectangleSkeleton } from "../../skeletons/rectangle";
 
-import styles from "./TagSelector.module.scss";
+import styles from "./TagManagement.module.scss";
 
-export const TagSelectorLoader: React.FC = () => {
+export const TagManagementLoader: React.FC = () => {
   return (
     <>
       <div className={styles.input}>
