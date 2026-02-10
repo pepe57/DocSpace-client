@@ -92,8 +92,13 @@
     },
     {
       "label": "Backend | run EE (Aspire)",
-      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; DOTNET_ENVIRONMENT=enterprise dotnet run --launch-profile frontend-dev",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev",
       "type": "shell",
+      "options": {
+        "env": {
+          "DOTNET_ENVIRONMENT": "enterprise"
+        }
+      },
       "group": {
         "kind": "build",
         "isDefault": true
@@ -197,8 +202,13 @@
     },
     {
       "label": "Backend | run DE (Aspire)",
-      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; DOTNET_ENVIRONMENT=developer dotnet run --launch-profile frontend-dev",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev",
       "type": "shell",
+      "options": {
+        "env": {
+          "DOTNET_ENVIRONMENT": "developer"
+        }
+      },
       "group": {
         "kind": "build",
         "isDefault": true
