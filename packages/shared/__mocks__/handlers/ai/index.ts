@@ -59,6 +59,7 @@ import {
   aiVectorizationPutHandler,
 } from "./vectorization";
 import { aiWebSearchGetHandler, aiWebSearchPutHandler } from "./webSearch";
+import { aiProvidersDefaultHandler } from "./providersDefault";
 
 export {
   aiAgentsHandler,
@@ -89,6 +90,7 @@ export {
   aiWebSearchPutHandler,
   aiServerPutHandler,
   aiServerStatusPutHandler,
+  aiProvidersDefaultHandler,
 };
 
 export const aiHandlers = (port: string) => [

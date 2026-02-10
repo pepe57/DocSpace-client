@@ -27,6 +27,7 @@
  */
 
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 
 import {
   type WebSearchConfig,
@@ -65,6 +66,7 @@ import {
   KnowledgeType,
 } from "@docspace/shared/api/ai/enums";
 import { toastr } from "@docspace/shared/components/toast";
+import { TTranslation } from "@docspace/shared/types";
 
 class AISettingsStore {
   isInit = false;
@@ -94,6 +96,8 @@ class AISettingsStore {
   defaultProviderModels: TModel[] | null = null;
 
   isDefaultProviderModelsLoading = false;
+
+  defaultProviderModelsError: string | null = null;
 
   defaultProviderInitied = false;
 
@@ -131,6 +135,10 @@ class AISettingsStore {
 
   setIsDefaultProviderModelsLoading = (value: boolean) => {
     this.isDefaultProviderModelsLoading = value;
+  };
+
+  setDefaultProviderModelsError = (error: string | null) => {
+    this.defaultProviderModelsError = error;
   };
 
   setDefaultProviderInitied = (value: boolean) => {
@@ -178,18 +186,44 @@ class AISettingsStore {
         this.unavailableProvidersIdsSet.delete(id);
       }
     }
+
+    if (
+      this.defaultProvider?.providerId === newProvider.id &&
+      this.defaultProvider?.providerTitle !== newProvider.title
+    ) {
+      this.defaultProvider.providerTitle = newProvider.title;
+    }
   };
 
   deleteAIProvider = async (id: TAiProvider["id"]) => {
+    const isDefaultProvider = this.aiProviders?.find(
+      (p) => p.id === id,
+    )?.isDefault;
+    const isLastProvider = this.aiProviders.length === 1;
+
     await deleteProviders({ ids: [id] });
 
-    this.aiProviders = this.aiProviders.filter(
-      (provider) => provider.id !== id,
-    );
+    runInAction(async () => {
+      this.aiProviders = this.aiProviders.filter(
+        (provider) => provider.id !== id,
+      );
 
-    if (this.aiProviders.length === 0) {
-      this.clearDefaultProviderData();
-    }
+      if (isLastProvider) {
+        this.clearDefaultProviderData();
+      }
+
+      if (isDefaultProvider && !isLastProvider) {
+        await this.initDefaultProvider();
+
+        const defaultProviderInList = this.aiProviders.find(
+          (p) => p.id === this.defaultProvider?.providerId,
+        );
+
+        if (defaultProviderInList && !defaultProviderInList.isDefault) {
+          defaultProviderInList.isDefault = true;
+        }
+      }
+    })
   };
 
   fetchAIProviders = async () => {
@@ -362,11 +396,21 @@ class AISettingsStore {
 
     try {
       this.setIsDefaultProviderModelsLoading(true);
+      this.setDefaultProviderModelsError(null);
 
       models = await getModels(providerId);
       this.setDefaultProviderModels(models);
     } catch (e) {
+      let error = e;
+
+      if (axios.isAxiosError(e)) {
+        error = e.response?.data?.error?.message;
+      }
+
+      toastr.error(error as string);
       console.error(e);
+      this.setDefaultProviderModelsError(error as string);
+      this.setDefaultProviderModels(null);
     } finally {
       this.setIsDefaultProviderModelsLoading(false);
     }
@@ -375,6 +419,8 @@ class AISettingsStore {
   };
 
   initDefaultProvider = async () => {
+    this.setDefaultProviderInitied(false);
+
     try {
       const defaultProvider = await getDefaultProvider();
 
@@ -389,12 +435,15 @@ class AISettingsStore {
     }
   };
 
-  changeDefaultProvider = async (data: {
-    providerId: number;
-    defaultModel: string;
-  }) => {
+  changeDefaultProvider = async (
+    providerData: {
+      providerId: number;
+      defaultModel: string;
+    },
+    t: TTranslation,
+  ) => {
     try {
-      const newDefaultProvider = await updateDefaultProvider(data);
+      const newDefaultProvider = await updateDefaultProvider(providerData);
 
       this.aiProviders.forEach((p) => {
         if (p.isDefault) {
@@ -407,7 +456,9 @@ class AISettingsStore {
       });
 
       this.setDefaultProvider(newDefaultProvider);
+      toastr.success(t("AISettings:DefaultProviderSetSuccess"));
     } catch (e) {
+      toastr.error(e as string);
       console.error(e);
     }
   };
@@ -416,6 +467,7 @@ class AISettingsStore {
     this.setDefaultProvider(null);
     this.setDefaultProviderModels(null);
     this.setDefaultProviderInitied(false);
+    this.setDefaultProviderModelsError(null);
   };
 
   get systemMCPServers() {
@@ -432,15 +484,6 @@ class AISettingsStore {
 
   get hasAIProviders() {
     return this.aiProviders.length > 0;
-  }
-
-  get isDefaultProviderSettingsAvailable() {
-    return (
-      this.aiProviders.length > 0 &&
-      this.defaultProvider &&
-      this.defaultProviderModels &&
-      this.defaultProviderInitied
-    );
   }
 }
 
