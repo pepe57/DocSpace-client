@@ -27,6 +27,7 @@
 import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, fireEvent, screen, within } from "@testing-library/react";
+import { ShareAccessRights } from "../../../enums";
 import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
 import { RoomTile } from "./RoomTile";
 import { RoomTileProps } from "./RoomTile.types";
@@ -139,6 +140,7 @@ describe("RoomTile", () => {
     providerKey: "provider-key",
     thirdPartyIcon: "icon-url",
     tags: [{ label: "Custom Tag" }],
+    access: ShareAccessRights.FullAccess,
   };
 
   const mockContextOptions: ContextMenuModel[] = [
