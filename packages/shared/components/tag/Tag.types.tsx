@@ -28,6 +28,7 @@ export type TagClickEvent = {
   label?: string;
   roomType?: number;
   providerType?: number;
+  anchorId?: string;
 };
 
 export type TagProps = {
@@ -87,7 +88,7 @@ export type TagType = {
   /** Accepts the max width of the tag */
   maxWidth?: string;
   /** Accepts the dropdown options */
-  advancedOptions?: React.ReactNode[];
+  advancedOptions?: string[];
   /** Accepts the tag styles as disabled and disables clicking */
   isDisabled?: boolean;
   /** Indicates the type of room associated with the tag. */
@@ -98,6 +99,6 @@ export type TagType = {
   providerType?: number;
   /** Accepts the function that is called when the tag is clicked */
   onClick?: () => void;
-  /** Indicates if the tag is a selector trigger */
-  isSelectorTrigger?: boolean;
+  /** Indicates if the tag is an overflow trigger */
+  isOverflowTrigger?: boolean;
 };

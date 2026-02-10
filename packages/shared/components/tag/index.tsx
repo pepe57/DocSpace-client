@@ -34,7 +34,7 @@ import { IconButton } from "../icon-button";
 import { Text } from "../text";
 import { TooltipContainer } from "../tooltip";
 
-import type { TagProps, TagType } from "./Tag.types";
+import type { TagProps, TagType, TagClickEvent } from "./Tag.types";
 import styles from "./Tag.module.scss";
 
 const TagPure: FC<TagProps> = ({
@@ -59,11 +59,21 @@ const TagPure: FC<TagProps> = ({
   onMouseEnter,
   onMouseLeave,
 }) => {
+  const anchorId = React.useId();
+
   const onClickAction = React.useCallback(() => {
     if (onClick && !isDisabled && !isDeleted) {
-      onClick({ roomType, label, providerType });
+      onClick({ roomType, label, providerType, anchorId });
     }
-  }, [onClick, isDisabled, isDeleted, roomType, providerType, label]);
+  }, [
+    onClick,
+    isDisabled,
+    isDeleted,
+    roomType,
+    providerType,
+    label,
+    anchorId,
+  ]);
 
   const onDeleteAction = React.useCallback(() => {
     onDelete?.(tag);
@@ -88,6 +98,7 @@ const TagPure: FC<TagProps> = ({
       aria-label={label}
       aria-disabled={isDisabled}
       data-testid={dataTestId ?? "tag_item"}
+      data-anchor-id={anchorId}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -116,4 +127,4 @@ TagPure.displayName = "TagPure";
 
 const Tag = React.memo(TagPure);
 
-export { Tag, TagProps, TagType };
+export { Tag, TagProps, TagType, type TagClickEvent };
