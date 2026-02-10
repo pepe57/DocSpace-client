@@ -31,13 +31,12 @@ import { isMobile as isMobileDevice } from "react-device-detect";
 import { classNames } from "../../utils/classNames";
 import { useIsTable } from "../../hooks/useIsTable";
 import { useIsMobile } from "../../hooks/useIsMobile";
-
-import { Tag, type TagType } from "../tag";
-import { TagSelector } from "../tag-selector";
+import { Tag, type TagType, type TagClickEvent } from "../tag";
 
 import styles from "./Tags.module.scss";
+import { TagsDropdown } from "./Tags.dropdown";
 import { calculateRenderedTags } from "./Tags.utils";
-import type { TagsProps } from "./Tags.types";
+import type { OverflowClickEvent, TagsProps } from "./Tags.types";
 
 const Tags: FC<TagsProps> = ({
   id,
@@ -45,14 +44,15 @@ const Tags: FC<TagsProps> = ({
   style,
   className,
   columnCount,
+  removeTagIcon = false,
   onSelectTag,
   onMouseEnter,
   onMouseLeave,
   showCreateTag,
+  onOverflowClick,
 }) => {
-  const ref = React.useRef<HTMLDivElement>(null);
   const [renderedTags, setRenderedTags] = React.useState<TagType[]>([]);
-  const [isSelectorOpen, setIsSelectorOpen] = React.useState(false);
+  const [isOverflowVisible, setIsOverflowVisible] = React.useState(false);
 
   const tagsRef = React.useRef<HTMLDivElement>(null);
 
@@ -61,27 +61,36 @@ const Tags: FC<TagsProps> = ({
 
   const isMobile = isTableView || isMobileView || isMobileDevice;
 
-  const canShowCreate = isSelectorOpen || showCreateTag || isMobile;
+  const canShowCreate = showCreateTag || isMobile || isOverflowVisible;
 
-  const onCloseSelector = useCallback(() => {
-    setIsSelectorOpen(false);
-  }, []);
-
-  const onOpenSelector = useCallback(() => {
-    setIsSelectorOpen(true);
-  }, []);
   React.useLayoutEffect(() => {
     if (isNil(columnCount) || !tags || !tagsRef.current) return;
+
+    const withDropDownTags = !onOverflowClick;
 
     const newTags = calculateRenderedTags(
       tags,
       columnCount,
       tagsRef.current.offsetWidth,
       canShowCreate,
+      withDropDownTags,
     );
 
     setRenderedTags(newTags);
   }, [tags, columnCount, canShowCreate]);
+
+  const handleOverflowVisible = useCallback((visible: boolean) => {
+    setIsOverflowVisible(visible);
+  }, []);
+
+  const handleOverflowClick = useCallback(
+    ({ anchorId }: TagClickEvent) => {
+      if (!id || !anchorId) return;
+
+      onOverflowClick?.(tags, id, anchorId, handleOverflowVisible);
+    },
+    [id, tags, onOverflowClick, handleOverflowVisible],
+  );
 
   return (
     <div
@@ -93,9 +102,25 @@ const Tags: FC<TagsProps> = ({
       className={classNames(styles.tags, className)}
     >
       {renderedTags.map((tag, idx) => {
-        const props = tag.isSelectorTrigger
-          ? { onClick: onOpenSelector, ref }
-          : { onClick: onSelectTag };
+        if (tag.isOverflowTrigger && tag.advancedOptions?.length) {
+          return (
+            <TagsDropdown
+              key={tag.key}
+              tag={tag.label}
+              icon={tag.icon}
+              tagMaxWidth={tag.maxWidth}
+              providerType={tag.providerType}
+              isLast={idx === renderedTags.length - 1}
+              label={tag.label}
+              roomType={tag.roomType}
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
+              advancedOptions={tag.advancedOptions}
+              onClick={onSelectTag}
+              removeTagIcon={removeTagIcon}
+            />
+          );
+        }
 
         return (
           <Tag
@@ -109,22 +134,12 @@ const Tags: FC<TagsProps> = ({
             roomType={tag.roomType}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            {...props}
+            onClick={tag.isOverflowTrigger ? handleOverflowClick : onSelectTag}
           />
         );
       })}
-
-      {isSelectorOpen && !isNil(id) ? (
-        <TagSelector
-          roomId={id}
-          tags={tags}
-          reference={ref}
-          onClose={onCloseSelector}
-          onSelectTag={onSelectTag}
-        />
-      ) : null}
     </div>
   );
 };
 
-export { Tags };
+export { Tags, type OverflowClickEvent };

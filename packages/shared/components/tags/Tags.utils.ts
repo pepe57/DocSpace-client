@@ -32,7 +32,7 @@ import {
   fixedTagWidth,
   paddingSize,
   thirdPartyTagWidth,
-} from "./tags.constants";
+} from "./Tags.constants";
 
 export const isTagType = (tag: TagType | string): tag is TagType => {
   return typeof tag === "object";
@@ -62,6 +62,7 @@ export const calculateRenderedTags = (
   columnCount: number,
   offsetWidth: number = 0,
   canShowCreate: boolean = false,
+  withDropDownTags: boolean = false,
 ) => {
   const newTags: TagType[] = [];
 
@@ -118,10 +119,15 @@ export const calculateRenderedTags = (
   } else {
     // Handle case where we need a dropdown
     const tagWithDropdown = {
-      label: `+${tags.length - columnCount}`,
+      label: withDropDownTags ? "..." : `+${tags.length - columnCount}`,
       key: "selector",
       maxWidth: fixedTagWidth,
-      isSelectorTrigger: true,
+      isOverflowTrigger: true,
+      advancedOptions: withDropDownTags
+        ? tags
+            .slice(columnCount, tags.length)
+            .map((tag) => (typeof tag === "string" ? tag : tag.label))
+        : [],
     };
 
     const currentTagMaxWidth =

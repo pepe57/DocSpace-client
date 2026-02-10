@@ -40,5 +40,5 @@ export const createTag = {
   advancedOptions: [],
   maxWidth: "32px",
   icon: PlusIcon,
-  isSelectorTrigger: true,
+  isOverflowTrigger: true,
 };

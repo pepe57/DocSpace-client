@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TagClickEvent, TagType } from "../tag/Tag.types";
+import type { TagClickEvent, TagProps, TagType } from "../tag/Tag.types";
 
 export type TagsProps = {
   /** Accepts id */
@@ -41,5 +41,24 @@ export type TagsProps = {
   onSelectTag: (tag: TagClickEvent) => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
+
+  onOverflowClick?: OverflowClickEvent;
+
+  /** Controls visibility of the create tag button */
   showCreateTag?: boolean;
+  removeTagIcon?: boolean;
 };
+
+export interface OverflowClickEvent {
+  (
+    tags: Array<TagType | string>,
+    id: string,
+    anchorId: string,
+    setIsOverflowVisible: (visible: boolean) => void,
+  ): void;
+}
+
+export interface DropDownTagsProps extends TagProps {
+  removeTagIcon: boolean;
+  advancedOptions: string[];
+}
