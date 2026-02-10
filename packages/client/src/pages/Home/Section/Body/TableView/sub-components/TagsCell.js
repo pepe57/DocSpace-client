@@ -24,9 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 
 import { Tags } from "@docspace/shared/components/tags";
+import { ShareAccessRights } from "@docspace/shared/enums";
+import { callSelectorEvent } from "@docspace/shared/components/tag-selector";
 
 const TagsCell = ({
   item,
@@ -35,6 +37,7 @@ const TagsCell = ({
   // sideColor,
   isHovered,
   isActive,
+  isAdmin,
   checkedProps,
 }) => {
   const styleTagsCell = {
@@ -62,6 +65,24 @@ const TagsCell = ({
     return [...thirdPartyTag, ...itemTags];
   }, [item.providerType, item.providerKey, item.thirdPartyIcon, item.tags]);
 
+  const access = item.access;
+
+  const isRoomManager = access === ShareAccessRights.RoomManager;
+  const isOwnerRoom =
+    access === ShareAccessRights.FullAccess ||
+    access === ShareAccessRights.None;
+
+  const showCreateTag =
+    (isHovered || isActive || checkedProps) &&
+    (isAdmin || isRoomManager || isOwnerRoom);
+
+  const handleOverflowVisible = useCallback(
+    (tags, id, anchorId, setIsOverflowVisible) => {
+      callSelectorEvent(tags, id, anchorId, setIsOverflowVisible, access);
+    },
+    [access],
+  );
+
   return (
     <div style={styleTagsCell}>
       <Tags
@@ -69,7 +90,8 @@ const TagsCell = ({
         id={item.id}
         columnCount={tagCount}
         onSelectTag={onSelectTag}
-        showCreateTag={isHovered || isActive || checkedProps}
+        showCreateTag={showCreateTag}
+        onOverflowClick={handleOverflowVisible}
       />
     </div>
   );

@@ -28,7 +28,8 @@ import classNames from "classnames";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Tags } from "../../tags";
+import { type OverflowClickEvent, Tags } from "../../tags";
+import { callSelectorEvent } from "../../tag-selector";
 import type { TagType } from "../../tag";
 import { BaseTile } from "../base-tile/BaseTile";
 import { TileItem } from "../tile-container/TileContainer.types";
@@ -153,15 +154,30 @@ export const RoomTile = ({
     [item.isAIAgent, hasTags, selectTag],
   );
 
+  const onOverflowClick = useCallback<OverflowClickEvent>(
+    (tags, roomId, anchorId, handleOverflowVisible) =>
+      callSelectorEvent(
+        tags,
+        roomId,
+        anchorId,
+        handleOverflowVisible,
+        item.access,
+      ),
+    [item.access],
+  );
+
+  const id = item.id.toString();
+
   const bottomContent = (
     <Tags
       tags={tags}
       className="room-tags"
-      id={item.id.toString()}
+      id={id}
       columnCount={columnCount}
       onSelectTag={handleTagSelect}
-      key={`tags-${item.id.toString()}`}
+      key={`tags-${id}`}
       showCreateTag={isHovered || checked}
+      onOverflowClick={onOverflowClick}
     />
   );
 

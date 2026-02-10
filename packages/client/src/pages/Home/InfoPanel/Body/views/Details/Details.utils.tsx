@@ -35,6 +35,7 @@ import { isRoom } from "@docspace/shared/utils/typeGuards";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 import { Tags } from "@docspace/shared/components/tags";
+import { callSelectorEvent } from "@docspace/shared/components/tag-selector";
 
 import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
@@ -49,6 +50,7 @@ import { getPropertyClassName } from "SRC_DIR/helpers/infopanel";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 import CommentEditor from "../../sub-components/CommentEditor";
+import { ShareAccessRights } from "@docspace/shared/enums";
 
 const text = (value: React.ReactNode) => (
   <Text truncate className="property-content">
@@ -72,6 +74,7 @@ const tagList = (
   tags: string[],
   selectTag: (tag: { label: string }) => void,
   id: number,
+  access: ShareAccessRights,
 ) => (
   <div className="property-tag_list" data-testid="info_panel_details_tag_list">
     <Tags
@@ -85,6 +88,9 @@ const tagList = (
         if (!label) return;
         selectTag({ label });
       }}
+      onOverflowClick={(tags, id, anchorId, handleOverflowVisible) =>
+        callSelectorEvent(tags, id, anchorId, handleOverflowVisible, access)
+      }
     />
   </div>
 );
@@ -450,7 +456,12 @@ class DetailsHelper {
 
   getItemTags = () => {
     if ("tags" in this.item)
-      return tagList(this.item.tags, this.selectTag, this.item.id);
+      return tagList(
+        this.item.tags,
+        this.selectTag,
+        this.item.id,
+        this.item.access,
+      );
   };
 
   getQuotaItem = () => {

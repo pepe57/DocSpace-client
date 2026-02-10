@@ -25,11 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TFunction } from "i18next";
+import type { ShareAccessRights } from "../../../enums";
 import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
 import type { TagType } from "../../tag";
 import { TileItem } from "../tile-container/TileContainer.types";
 
 export interface RoomItem extends TileItem {
+  access: ShareAccessRights;
   title: string;
   roomType: string;
   providerType?: string;

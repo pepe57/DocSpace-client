@@ -144,6 +144,7 @@ const RoomsRowDataComponent = (props) => {
             isActive={props.isActive}
             isHovered={props.isHovered}
             sideColor={theme.filesSection.tableView.row.sideColor}
+            isAdmin={props.isAdmin}
           />
           {lastColumn === "Tags" ? quickButtonsComponentNode : null}
         </TableCell>
