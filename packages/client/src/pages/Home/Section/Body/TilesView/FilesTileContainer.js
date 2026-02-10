@@ -36,7 +36,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Context } from "@docspace/ui-kit/utils/context";
-import { TileContainer } from "@docspace/shared/components/tiles";
+import { TileContainer } from "@docspace/ui-kit/components/tiles/tile-container";
 
 import FileTile from "./FileTile";
 import { FileTileProvider } from "./FileTile.provider";

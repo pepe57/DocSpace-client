@@ -32,7 +32,9 @@ import { observer } from "mobx-react";
 import classNames from "classnames";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { FileTile, FolderTile } from "@docspace/shared/components/tiles";
+import { FileTile } from "@docspace/ui-kit/components/tiles/file-tile";
+import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
+
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
