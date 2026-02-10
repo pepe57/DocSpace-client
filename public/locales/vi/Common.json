@@ -1051,5 +1051,7 @@
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
   "YourTurn": "Phiên của bạn",
-  "ExternalLink": "Liên kết bên ngoài"
+  "ExternalLink": "Liên kết bên ngoài",
+  "TitleShowFolderActions": "Hiển thị Hoạt động Thư mục",
+  "TitleShowActions": "Hiển thị Hoạt động của File"
 }

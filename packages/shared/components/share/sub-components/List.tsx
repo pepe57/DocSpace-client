@@ -71,7 +71,7 @@ const List: FC<ListProps> = (props) => {
   const scrollContext = use(ScrollbarContext);
   const scrollElement = scrollContext.parentScrollbar?.scrollerElement;
 
-  const scrollRef = useRef<HTMLDivElement>(scrollElement);
+  const scrollRef = useRef<HTMLDivElement | null>(scrollElement ?? null);
 
   const list = useMemo(() => {
     const temp: React.ReactElement<{

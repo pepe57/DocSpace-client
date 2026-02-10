@@ -979,7 +979,7 @@ const SectionHeaderContent = (props) => {
                 actions: isRoomsFolder
                   ? t("Common:NewRoom")
                   : t("Common:Actions"),
-                contextMenu: t("Translations:TitleShowFolderActions"),
+                contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
               }}
               withMenu={withMenu}
