@@ -213,23 +213,7 @@ packages/shared/
 
 ### Application Flow
 
-```mermaid
-graph TD
-    A[Browser] -->|Navigate to /| B[@docspace/client]
-    A -->|Navigate to /login| C[@docspace/login]
-    A -->|Navigate to /doceditor| D[@docspace/doceditor]
-    A -->|Navigate to /management| E[@docspace/management]
-
-    B --> F[@docspace/shared]
-    C --> F
-    D --> F
-    E --> F
-
-    F -->|API Calls| G[Backend Services]
-
-    H[External Apps] -->|Embed via| I[@docspace/sdk]
-    I -->|Uses| F
-```
+![Application Flow](assets/Application_flow.png)
 
 ### Build System
 
