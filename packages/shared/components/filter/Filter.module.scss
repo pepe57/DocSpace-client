@@ -654,6 +654,10 @@
     .optionalBlock {
       margin-inline-end: 0;
     }
+
+    .overflow-dropdown-scroll-body {
+      padding-inline-end: 0 !important;
+    }
   }
 }
 
@@ -662,10 +666,6 @@
   height: 32px;
   max-width: 32px;
 }
-
-// :global(.overflow-dropdown-scroll-body) {
-//   padding-inline-end: 0 !important;
-// }
 
 .ellipsisIcon {
   color: var(--room-group-tag-inactive-color);
