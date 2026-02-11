@@ -22,7 +22,11 @@ This repository contains the **frontend** for [ONLYOFFICE DocSpace](https://gith
   - [Clear Aspire Docker Artifacts](#clear-aspire-docker-artifacts)
 - [Browser Support](#browser-support)
 - [Testing](#testing)
+  - [Static Analysis](#static-analysis)
+  - [Unit Tests](#unit-tests)
+  - [Common Tests](#common-tests)
   - [E2E Testing with Playwright](#e2e-testing-with-playwright)
+  - [CI/CD Pipeline](#cicd-pipeline)
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 - [Licensing](#licensing)
@@ -280,6 +284,62 @@ Mobile browsers are supported on iOS 14+ and Android 8+.
 
 ## Testing
 
+### Static Analysis
+
+```bash
+# Biome linting (all packages)
+pnpm lint
+
+# Auto-fix lint issues
+pnpm lint:fix
+
+# TypeScript type checking (all packages)
+pnpm tsc
+```
+
+### Unit Tests
+
+Unit tests use [Vitest](https://vitest.dev/) and cover shared components, hooks, and utilities in `@docspace/shared`.
+
+```bash
+# Run all unit tests
+pnpm test
+
+# Run with interactive UI
+cd packages/shared && pnpm test:ui
+
+# Run with coverage report
+cd packages/shared && pnpm test:coverage
+```
+
+### Common Tests
+
+Asset validation and quality checks located in `common/tests/`:
+
+```bash
+cd common/tests
+
+# Run all common tests
+npm test
+
+# Individual test suites
+npm run test:locales        # Translation completeness validation
+npm run test:images         # Image asset validation
+npm run test:colors         # Color palette validation
+npm run test:ascii          # ASCII character validation
+npm run test:dependencies   # Dependency audit and security checks
+```
+
+Additional quality checks from the root:
+
+```bash
+# License compliance audit
+pnpm licenses-audit
+
+# Dependency security audit
+pnpm audit --audit-level=moderate
+```
+
 ### E2E Testing with Playwright
 
 This project uses [Playwright](https://playwright.dev/) for end-to-end testing. Tests are run in **Docker containers** to ensure consistency across different development environments.
@@ -452,6 +512,23 @@ pnpm exec playwright test --debug
 cd packages/client
 pnpm exec playwright show-trace trace.zip
 ```
+
+### CI/CD Pipeline
+
+The [frontend-common-tests](.github/workflows/frontend-common-tests.yaml) GitHub Actions workflow runs automatically on pushes and pull requests to `develop`, `release/*`, and `hotfix/*` branches.
+
+**Pipeline stages:**
+
+1. **Changes Detection** — determines which tests to run based on changed files
+2. **Static Analysis & Tests** — runs in parallel:
+   - Biome linting
+   - TypeScript compilation
+   - Unit tests (Vitest)
+   - Common tests (images, colors, ASCII, locales)
+   - Dependency audit and license compliance
+3. **E2E Tests** — Playwright tests per package (client, login, doceditor, SDK, management), each running in Docker containers
+
+Only affected tests run — for example, changes in `packages/login/` trigger only Login E2E tests, while changes in `packages/shared/` trigger all E2E suites.
 
 ## Troubleshooting
 
