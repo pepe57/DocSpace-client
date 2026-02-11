@@ -238,50 +238,44 @@ const FileTile = (props) => {
     badgeUrl,
   };
 
-  const fileTile = (
-    <FileTileComponent
-      {...commonProps}
-      key={item.id}
-      temporaryIcon={temporaryIcon}
-      thumbnail={!providerItem && thumbnailUrl ? thumbnailUrl : ""}
-      thumbSize={thumbSize}
-      contentElement={quickButtonsComponent}
-      thumbnailClick={onFilesClick}
-    />
-  );
-
-  const folderTile = (
-    <FolderTile {...commonProps} temporaryIcon={temporaryIcon} />
-  );
-
-  const roomTile = (
-    <RoomTile
-      {...commonProps}
-      key={item.id}
-      selectTag={onSelectTag}
-      selectOption={onSelectOption}
-      columnCount={columnCount}
-      thumbnailClick={onFilesClick}
-      getRoomTypeName={getRoomTypeName}
-    />
-  );
-
-  const remplateTile = (
-    <TemplateTile
-      {...commonProps}
-      key={item.id}
-      thumbnailClick={onFilesClick}
-      openUser={onOpenUser}
-      showStorageInfo={showStorageInfo}
-      SpaceQuotaComponent={SpaceQuota}
-    />
-  );
-
   const renderTile = () => {
-    if (item.isTemplate) return remplateTile;
-    if (item.isRoom) return roomTile;
-    if (item.isFolder) return folderTile;
-    return fileTile;
+    if (item.isTemplate)
+      return (
+        <TemplateTile
+          {...commonProps}
+          key={item.id}
+          thumbnailClick={onFilesClick}
+          openUser={onOpenUser}
+          showStorageInfo={showStorageInfo}
+          SpaceQuotaComponent={SpaceQuota}
+        />
+      );
+    if (item.isRoom)
+      return (
+        <RoomTile
+          {...commonProps}
+          key={item.id}
+          selectTag={onSelectTag}
+          selectOption={onSelectOption}
+          columnCount={columnCount}
+          thumbnailClick={onFilesClick}
+          getRoomTypeName={getRoomTypeName}
+        />
+      );
+    if (item.isFolder)
+      return <FolderTile {...commonProps} temporaryIcon={temporaryIcon} />;
+
+    return (
+      <FileTileComponent
+        {...commonProps}
+        key={item.id}
+        temporaryIcon={temporaryIcon}
+        thumbnail={!providerItem && thumbnailUrl ? thumbnailUrl : ""}
+        thumbSize={thumbSize}
+        contentElement={quickButtonsComponent}
+        thumbnailClick={onFilesClick}
+      />
+    );
   };
 
   const droppableClassName = isDragging ? "droppable" : "";
