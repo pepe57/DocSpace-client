@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export type TagClickEvent = {
-  label?: string;
+  label: string;
   roomType?: number;
   providerType?: number;
 };

@@ -61,9 +61,9 @@ const TagPure: FC<TagProps> = ({
 }) => {
   const onClickAction = React.useCallback(() => {
     if (onClick && !isDisabled && !isDeleted) {
-      onClick({ roomType, label, providerType });
+      onClick({ roomType, label: label ?? tag, providerType });
     }
-  }, [onClick, isDisabled, isDeleted, roomType, providerType, label]);
+  }, [onClick, isDisabled, isDeleted, roomType, providerType, label, tag]);
 
   const onDeleteAction = React.useCallback(() => {
     onDelete?.(tag);
