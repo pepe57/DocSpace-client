@@ -76,7 +76,9 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   const { data: fetchedTags, status } = useTagsQuery();
 
   useLayoutEffect(() => {
-    if (!anchor.current || !ref.current || isMobile) return onClose();
+    if (isMobile) return;
+
+    if (!anchor.current || !ref.current) return onClose();
 
     const cleanup = autoUpdate(anchor.current, ref.current, () => {
       if (!anchor.current || !ref.current || isMobile) return;
