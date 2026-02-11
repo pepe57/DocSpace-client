@@ -27,8 +27,7 @@
 // @ts-nocheck
 
 import { AxiosRequestConfig } from "axios";
-
-import moment from "moment";
+import type { DateTime } from "luxon";
 import { Nullable } from "types";
 import {
   FolderType,
@@ -452,7 +451,7 @@ export function editExternalLink(
   linkId: number | string,
   title: string,
   access: ShareAccessRights,
-  expirationDate: moment.Moment | string | null,
+  expirationDate: DateTime | string | string | null,
   linkType: number,
   password: string | undefined,
   disabled: boolean,
@@ -486,7 +485,7 @@ export function createExternalLink(
   link: Partial<{
     title: string;
     access: ShareAccessRights;
-    expirationDate: moment.Moment | string | null;
+    expirationDate: DateTime | string | string | null;
     linkType: number;
     password: string | undefined;
     denyDownload: boolean;

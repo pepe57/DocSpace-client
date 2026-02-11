@@ -24,15 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
+import type { DateTime } from "luxon";
 
-export const getCalendarYears = (observedDate: moment.Moment) => {
-  const years = [];
-  const selectedYear = observedDate.year();
+export const getCalendarYears = (observedDate: DateTime) => {
+  const years: string[] = [];
+  const selectedYear = observedDate.year;
   const firstYear = selectedYear - 1;
 
   for (let i = firstYear; i <= firstYear + 15; i += 1) {
-    years.push(moment(i, "YYYY").format("YYYY"));
+    years.push(String(i));
   }
 
   return years;

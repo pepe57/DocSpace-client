@@ -28,7 +28,7 @@
 
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import moment from "moment-timezone";
+import { parseToDateTime, formatDateLocalized } from "@docspace/shared/utils/date";
 import { useRouter } from "next/navigation";
 
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
@@ -159,9 +159,10 @@ const PaymentsPage = ({
           isLifetimeLicense={isLifetimeLicense}
           isGracePeriod={isGracePeriod}
           isNotPaidPeriod={isNotPaidPeriod}
-          gracePeriodEndDate={moment(gracePeriodEndDate)
-            .tz(window.timezone)
-            ?.format("LL")}
+          gracePeriodEndDate={formatDateLocalized(
+            parseToDateTime(gracePeriodEndDate)?.setZone(window.timezone),
+            "DATE_MED",
+          )}
           delayDaysCount={delayDaysCount}
         />
       </LoaderWrapper>

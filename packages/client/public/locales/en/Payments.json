@@ -34,7 +34,7 @@
   "CardUnlinked": "Card unlinked",
   "ChangeShedule": "Change scheduled",
   "ChargeAmount": "An amount of <1>{{price}}</1> will be charged to your saved payment method.",
-  "ChooseNewPayer": "Choose a new Payer",
+  "ChooseNewPayerOrRefrashData": "<1>Choose a new Payer</1> or <2>Refresh data</2>",
   "ChooseNewPlan": "Would you like to choose a new pricing plan?",
   "ConfirmPayment": "Confirm Payment",
   "ConnectAndConfigureServices": "This section is used to connect and configure the services.",

@@ -26,7 +26,6 @@
 
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
-import moment from "moment";
 
 import {
   getPaymentSettings,
@@ -71,6 +70,12 @@ import {
   STORAGE_TARIFF_DEACTIVATED,
   WEB_SEARCH,
 } from "@docspace/shared/constants";
+import type { DateTime } from "luxon";
+import {
+  now,
+  subtractFromDate,
+  formatDate as formatDateUtil,
+} from "@docspace/shared/utils/date";
 
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
@@ -499,21 +504,22 @@ class PaymentStore {
     }
   };
 
-  getEndTransactionDate = (format = "YYYY-MM-DDTHH:mm:ss") => {
-    return moment().format(format);
+  getEndTransactionDate = (format = "yyyy-MM-dd'T'HH:mm:ss") => {
+    return formatDateUtil(now(), format);
   };
 
-  getStartTransactionDate = (format = "YYYY-MM-DDTHH:mm:ss") => {
-    return moment().subtract(4, "weeks").format(format);
+  getStartTransactionDate = (format = "yyyy-MM-dd'T'HH:mm:ss") => {
+    const date = subtractFromDate(now(), 4, "weeks");
+    return date ? formatDateUtil(date, format) : "";
   };
 
-  formatDate = (date: moment.Moment) => {
-    return date.clone().locale("en").format("YYYY-MM-DDTHH:mm:ss");
+  formatDate = (date: DateTime) => {
+    return formatDateUtil(date, "yyyy-MM-dd'T'HH:mm:ss", { locale: "en" });
   };
 
   fetchTransactionHistory = async (
-    startDate = moment().subtract(4, "weeks"),
-    endDate = moment(),
+    startDate: DateTime | null = subtractFromDate(now(), 4, "weeks"),
+    endDate: DateTime | null = now(),
     credit = true,
     debit = true,
     participantName?: string,
@@ -523,8 +529,8 @@ class PaymentStore {
 
     try {
       const res = await getTransactionHistory(
-        this.formatDate(startDate),
-        this.formatDate(endDate),
+        startDate ? this.formatDate(startDate) : "",
+        endDate ? this.formatDate(endDate) : "",
         credit,
         debit,
         participantName,

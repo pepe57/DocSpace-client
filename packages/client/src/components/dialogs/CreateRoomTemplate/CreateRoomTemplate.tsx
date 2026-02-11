@@ -165,7 +165,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
       profileUrl: "", // Add the required profileUrl property
       displayName: user.displayName || "", // Ensure displayName is a string
       hasAvatar: !!user.avatar,
-      templateAccess: 1, // Default access right (assuming 1 is ReadWrite)
+      // templateAccess: 1, // Default access right (assuming 1 is ReadWrite)
     }));
 
     const items = [...inviteItems, ...mappedUsers];

@@ -2852,6 +2852,10 @@ const Dark: TTheme = {
         },
         warningColor: darkErrorStatus,
         color: darkStatusWarning,
+
+        payerInfo: {
+          disableColor: grayDark,
+        },
       },
 
       migration: {
