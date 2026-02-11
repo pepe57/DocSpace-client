@@ -416,7 +416,7 @@ const EditRoomGroupsDialog = ({
               </span>
             }
             bodyText={
-              <span style={{ display: "block", marginTop: "1px" }}>
+              <span style={{ display: "block", marginTop: "2px" }}>
                 {t("GroupingRooms:DisablingRoomGroupsDescription")}
               </span>
             }

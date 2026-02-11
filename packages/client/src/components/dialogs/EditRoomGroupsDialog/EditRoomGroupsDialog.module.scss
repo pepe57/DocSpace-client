@@ -43,6 +43,7 @@
     &:global(.public-room-bar) {
       margin: 16px;
       margin-bottom: 0;
+      margin: 17px 15px 0 16px;
 
       path {
         fill: $light-gray-dark;
@@ -63,7 +64,7 @@
   }
 
   .settingRoomGroups {
-    padding: 20px 16px;
+    padding: 20px 9px 20px 16px;
     border-bottom: 1px solid $gray-light-mid;
   }
 
@@ -87,7 +88,7 @@
   }
 
   .selectorAddButton {
-    padding: 16px 20px;
+    padding: 17px 20px;
   }
 
   .roomGroupsToggle {
@@ -101,7 +102,7 @@
   .group {
     display: flex;
     justify-content: space-between;
-    padding: 17px 20px;
+    padding: 17px 20px 17px 28px;
 
     &.groupDisabled {
       opacity: 0.5;
@@ -145,6 +146,7 @@
   }
 
   .iconGroup {
+    padding-top: 2px;
     padding-inline-end: 16px;
   }
 }
@@ -200,6 +202,7 @@
   display: flex;
   gap: 18px;
   flex-shrink: 0;
+  padding-top: 8px;
   margin-inline-start: 8px;
 }
 
