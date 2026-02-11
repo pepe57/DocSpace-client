@@ -2427,6 +2427,8 @@
   --files-drag-tooltip-box-shadow: 0px 5px 20px #{$popup-shadow};
   --files-drag-tooltip-color: #{$gray};
   --create-edit-room-description-color: #{$gray};
+  --create-edit-dropdown-border: #{$gray-strong};
+  --create-edit-dropdown-bg: #{$white};
   --menu-container-background: #{$light-gray-hover};
   --menu-container-color: #{$black};
   --new-files-panel-border-color: #{$gray-light-mid};
@@ -2441,6 +2443,8 @@
   --files-drag-tooltip-box-shadow: 0px 5px 20px #{$popup-shadow};
   --files-drag-tooltip-color: #{$white};
   --create-edit-room-description-color: #{$gray};
+  --create-edit-dropdown-border: #{$gray-dark-strong};
+  --create-edit-dropdown-bg: #{$black};
   --menu-container-background: #{$light-dark-gray-hover};
   --menu-container-color: #{$white};
   --new-files-panel-border-color: #{$gray-dark-strong};
@@ -2479,10 +2483,10 @@
   --default-templates-border-color: #{$gray-dark-mid};
 }
 
-.light { 
+.light {
   --editors-tooltip-header-color: #{$gray-text};
 }
 
-.dark { 
+.dark {
   --editors-tooltip-header-color: #{$dark-gray-dark};
 }

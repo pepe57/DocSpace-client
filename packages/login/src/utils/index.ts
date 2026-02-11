@@ -221,10 +221,11 @@ export const encodeParams = (str: string) => {
 };
 
 export async function getAvailablePortals(data: {
-  Email: string;
-  PasswordHash: string;
+  Email?: string;
+  PasswordHash?: string;
   recaptchaResponse?: string | null | undefined;
   recaptchaType?: unknown | undefined;
+  ThirdPartyProfile?: string;
 }) {
   const config = window.ClientConfig;
 

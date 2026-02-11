@@ -34,7 +34,6 @@
   "CardUnlinked": "Carte déconnectée",
   "ChangeShedule": "Modification programmée",
   "ChargeAmount": "Un montant de <1>{{price}}</1> sera débité de la méthode de paiement que vous avez enregistrée.",
-  "ChooseNewPayer": "Choisir un nouveau payeur",
   "ChooseNewPlan": "Vous souhaitez choisir un nouveau plan tarifaire ?",
   "ConfirmPayment": "Confirmer le paiement",
   "ConnectAndConfigureServices": "Cette section est utilisée pour connecter et configurer les services.",
