@@ -44,4 +44,4 @@ export default inject<TStore, TagManagementProps, InjectedTagManagementProps>(
     isAdmin: authStore.isAdmin,
     onSelectTag: filesActionsStore.selectTag,
   }),
-)(observer(TagManagement));
+)(observer(TagManagement as FC<TagManagementProps>));
