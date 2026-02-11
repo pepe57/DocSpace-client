@@ -70,7 +70,11 @@ export const TagsDropdown: FC<DropDownTagsProps> = ({
 
       if (onClick && !isDisabled && !isDeleted) {
         const target = e.target as HTMLDivElement;
-        onClick({ roomType, label: target.dataset.tag, providerType });
+        const label = target.dataset.tag;
+
+        if (!label) return;
+
+        onClick({ roomType, label, providerType });
         setOpenDropdown(false);
       }
     },
@@ -91,10 +95,10 @@ export const TagsDropdown: FC<DropDownTagsProps> = ({
         isDefaultMode
         directionY="both"
       >
-        {advancedOptions.map((tag, index) => (
+        {advancedOptions.map((tag) => (
           <DropDownItem
             className="tag__dropdown-item tag"
-            key={`${tag}_${index * 50}`}
+            key={tag}
             onClick={onClickAction}
             data-tag={tag}
             testId={"tag_dropdown_item"}
