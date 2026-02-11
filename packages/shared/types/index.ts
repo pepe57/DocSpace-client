@@ -245,10 +245,16 @@ declare global {
 		zE: {
 			apply: (...args: unknown[]) => void;
 		};
-		i18n: {
-			loaded: {
-				[key: string]: { data: { [key: string]: string }; namespaces: string };
-			};
+		i18n?: {
+			t?: (
+				key: string,
+				options?: Record<string, string | number>,
+			) => string;
+			inLoad: { url: string; callbacks: Function[] }[];
+			loaded: Record<
+				string,
+				{ data: Record<string, string>; namespaces: string }
+			>;
 		};
 		timezone: string;
 		snackbar?: object;
