@@ -89,6 +89,12 @@ newInstance
     react: {
       useSuspense: false,
     },
+  })
+  .then(() => {
+    if (!window.i18n) {
+      window.i18n = { inLoad: [], loaded: {} };
+    }
+    window.i18n.t = newInstance.t.bind(newInstance);
   });
 
 export default newInstance;

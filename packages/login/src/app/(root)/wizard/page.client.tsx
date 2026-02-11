@@ -46,7 +46,7 @@ import {
   LANGUAGE,
   TIMEZONE,
 } from "@docspace/shared/constants";
-import { EmailSettings } from "@docspace/shared/utils";
+import { EmailSettings } from "@docspace/ui-kit/utils/email";
 import {
   PasswordInput,
   PasswordInputHandle,
