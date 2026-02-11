@@ -27,7 +27,7 @@
 import type { ShareAccessRights } from "../../enums";
 import type { TagClickEvent, TagType } from "../tag/Tag.types";
 
-export interface TagManagementProps {
+export interface TagManagementPopupProps {
   tags: Array<TagType | string>;
   roomId: string | number;
   onClose: VoidFunction;
@@ -88,4 +88,15 @@ export interface TagManagementContentProps {
 
 export interface TagManagementFilterProps {
   roomId: string | number;
+}
+
+export interface TagManagementProps {
+  id: string | number;
+  tags: Array<TagType | string>;
+  columnCount: number;
+  access: ShareAccessRights;
+  isActive: boolean;
+  className?: string;
+  isAdmin: boolean;
+  onSelectTag: (tag: TagClickEvent) => void;
 }

@@ -26,24 +26,18 @@
 
 import { FC, useCallback, useRef, useState } from "react";
 import { isMobile as isMobileDevice } from "react-device-detect";
-import { inject, observer } from "mobx-react";
 
-import { TagManagement } from "@docspace/shared/components/tag-management";
+import { useUnmount } from "../../hooks/useUnmount";
+import { useIsTable } from "../../hooks/useIsTable";
+import { useIsMobile } from "../../hooks/useIsMobile";
+import { ShareAccessRights } from "../../enums";
+import { Tags } from "../tags";
 
-import { useUnmount } from "@docspace/shared/hooks/useUnmount";
-import { useIsTable } from "@docspace/shared/hooks/useIsTable";
-import { useIsMobile } from "@docspace/shared/hooks/useIsMobile";
+import { TagManagementPopup } from "./TagManagement.popup";
 
-import { ShareAccessRights } from "@docspace/shared/enums";
-import { Tags } from "@docspace/shared/components/tags";
+import type { TagManagementProps } from "./TagManagement.types";
 
-import type {
-  InjectedTagManagementProps,
-  TagManagementProps,
-  TagManagementWrapperProps,
-} from "./TagManagement.types";
-
-const TagManagementWrapper: FC<TagManagementWrapperProps> = ({
+export const TagManagement: FC<TagManagementProps> = ({
   id,
   onSelectTag,
   access,
@@ -98,7 +92,7 @@ const TagManagementWrapper: FC<TagManagementWrapperProps> = ({
         className={className}
       />
       {showTagManagement ? (
-        <TagManagement
+        <TagManagementPopup
           tags={tags}
           roomId={id}
           anchor={anchorRef}
@@ -114,10 +108,3 @@ const TagManagementWrapper: FC<TagManagementWrapperProps> = ({
     </>
   );
 };
-
-export default inject<TStore, TagManagementProps, InjectedTagManagementProps>(
-  ({ filesActionsStore, authStore }) => ({
-    isAdmin: authStore.isAdmin,
-    onSelectTag: filesActionsStore.selectTag,
-  }),
-)(observer(TagManagementWrapper as FC<TagManagementProps>));

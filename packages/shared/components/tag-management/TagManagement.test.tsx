@@ -30,8 +30,8 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { UseQueryResult } from "@tanstack/react-query";
 
-import { TagManagement } from "./TagManagement";
-import type { TagManagementProps } from "./TagManagement.types";
+import { TagManagementPopup } from "./TagManagement.popup";
+import type { TagManagementPopupProps } from "./TagManagement.types";
 import * as useTagsQueryModule from "./hooks/useTagsQuery";
 
 vi.mock("../../utils/useClickOutside", () => ({
@@ -51,12 +51,12 @@ const createQueryClient = () =>
     },
   });
 
-const defaultProps: TagManagementProps = {
+const defaultProps: TagManagementPopupProps = {
   tags: ["tag1", "tag2"],
   roomId: "123",
   onClose: vi.fn(),
   onSelectTag: vi.fn(),
-  anchor: document.createElement("div"),
+  anchor: { current: document.createElement("div") },
 };
 
 const renderWithQueryClient = (
@@ -68,7 +68,7 @@ const renderWithQueryClient = (
   );
 };
 
-describe("<TagManagement />", () => {
+describe("<TagManagementPopup />", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -82,7 +82,7 @@ describe("<TagManagement />", () => {
       isSuccess: false,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagManagement {...defaultProps} />);
+    renderWithQueryClient(<TagManagementPopup {...defaultProps} />);
 
     expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
   });
@@ -96,7 +96,7 @@ describe("<TagManagement />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagManagement {...defaultProps} />);
+    renderWithQueryClient(<TagManagementPopup {...defaultProps} />);
 
     await waitFor(() => {
       expect(
@@ -114,7 +114,7 @@ describe("<TagManagement />", () => {
       isSuccess: false,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagManagement {...defaultProps} />);
+    renderWithQueryClient(<TagManagementPopup {...defaultProps} />);
 
     expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
     const skeletons = document.querySelectorAll(
@@ -137,7 +137,7 @@ describe("<TagManagement />", () => {
     } as unknown as UseQueryResult<string[], Error>);
 
     renderWithQueryClient(
-      <TagManagement {...defaultProps} onClose={onClose} />,
+      <TagManagementPopup {...defaultProps} onClose={onClose} />,
     );
 
     expect(mockUseClickOutside).toHaveBeenCalled();
@@ -155,7 +155,9 @@ describe("<TagManagement />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagManagement {...defaultProps} tags={roomTags} />);
+    renderWithQueryClient(
+      <TagManagementPopup {...defaultProps} tags={roomTags} />,
+    );
 
     await waitFor(() => {
       expect(
@@ -174,7 +176,7 @@ describe("<TagManagement />", () => {
     } as unknown as UseQueryResult<string[], Error>);
 
     const { container } = renderWithQueryClient(
-      <TagManagement {...defaultProps} tags={[]} />,
+      <TagManagementPopup {...defaultProps} tags={[]} />,
     );
 
     expect(container.querySelector(".loaderWrapper")).not.toBeInTheDocument();
@@ -193,7 +195,7 @@ describe("<TagManagement />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagManagement {...defaultProps} />);
+    renderWithQueryClient(<TagManagementPopup {...defaultProps} />);
 
     await waitFor(() => {
       expect(screen.getByRole("textbox")).toBeInTheDocument();
@@ -209,7 +211,7 @@ describe("<TagManagement />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagManagement {...defaultProps} />);
+    renderWithQueryClient(<TagManagementPopup {...defaultProps} />);
 
     await waitFor(() => {
       const searchInput = screen.getByRole("textbox");
@@ -226,7 +228,7 @@ describe("<TagManagement />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagManagement {...defaultProps} />);
+    renderWithQueryClient(<TagManagementPopup {...defaultProps} />);
 
     await waitFor(() => {
       expect(
@@ -244,7 +246,7 @@ describe("<TagManagement />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagManagement {...defaultProps} />);
+    renderWithQueryClient(<TagManagementPopup {...defaultProps} />);
 
     await waitFor(() => {
       const container = screen.getByRole("textbox");
@@ -263,7 +265,9 @@ describe("<TagManagement />", () => {
       isSuccess: true,
     } as unknown as UseQueryResult<string[], Error>);
 
-    renderWithQueryClient(<TagManagement {...defaultProps} roomId={roomId} />);
+    renderWithQueryClient(
+      <TagManagementPopup {...defaultProps} roomId={roomId} />,
+    );
 
     await waitFor(() => {
       expect(

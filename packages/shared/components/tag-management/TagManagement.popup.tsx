@@ -45,7 +45,7 @@ import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementFilter } from "./TagManagement.filter";
 import { TagManagementContent } from "./TagManagement.content";
 import { TagManagementLoader } from "./TagManagement.loader";
-import type { TagManagementProps } from "./TagManagement.types";
+import type { TagManagementPopupProps } from "./TagManagement.types";
 import { stopPropagation } from "./TagManagement.utils";
 import { EVENT_OPTIONS } from "./TagManagement.constants";
 
@@ -53,7 +53,7 @@ import styles from "./TagManagement.module.scss";
 
 import { useTagsQuery } from "./hooks/useTagsQuery";
 
-export const TagManagement: React.FC<TagManagementProps> = ({
+export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   roomId,
   onClose,
   anchor,
