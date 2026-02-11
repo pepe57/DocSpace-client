@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import {
@@ -151,10 +152,25 @@ const GroupIconDialog = ({
         rooms: arrIdsRooms,
       };
 
-      await setCreateGroupRooms(newGroup);
-      await getAllRoomGroups();
+      try {
+        await setCreateGroupRooms(newGroup);
+        await getAllRoomGroups();
 
-      onCloseEditRoomGroupsDialog();
+        onCloseEditRoomGroupsDialog();
+      } catch (error: unknown) {
+        let message = "";
+
+        if (axios.isAxiosError(error)) {
+          message =
+            error.response?.data?.response?.errors?.Name ??
+            error.response?.data?.message ??
+            error.message;
+        } else if (error instanceof Error) {
+          message = error.message;
+        }
+
+        toastr.error(message);
+      }
     }
   };
 
