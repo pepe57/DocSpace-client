@@ -93,4 +93,6 @@ export type RoomTileProps = {
   isEdit?: boolean;
   /** Data test id for the tile */
   dataTestId?: string;
+
+  isUserAdmin?: boolean;
 };

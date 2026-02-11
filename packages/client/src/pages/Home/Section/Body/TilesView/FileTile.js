@@ -73,6 +73,7 @@ const FileTile = (props) => {
     onFilesClick,
 
     isActive,
+    isUserAdmin,
     isEdit,
     inProgress,
     quickButtonsComponent,
@@ -260,6 +261,7 @@ const FileTile = (props) => {
           columnCount={columnCount}
           thumbnailClick={onFilesClick}
           getRoomTypeName={getRoomTypeName}
+          isUserAdmin={isUserAdmin}
         />
       );
     if (item.isFolder)
@@ -319,6 +321,7 @@ export default inject(
       infoPanelStore,
       guidanceStore,
       currentQuotaStore,
+      authStore,
     },
     { item },
   ) => {
@@ -338,6 +341,8 @@ export default inject(
 
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
+    const isUserAdmin = authStore.isAdmin;
+
     return {
       getIcon,
       setSelection,
@@ -349,6 +354,7 @@ export default inject(
       deleteRefMap,
       openUser: infoPanelStore.openUser,
       showStorageInfo,
+      isUserAdmin,
     };
   },
 )(

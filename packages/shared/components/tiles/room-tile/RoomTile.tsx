@@ -28,7 +28,7 @@ import classNames from "classnames";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Tags } from "../../tags";
+import { TagManagement } from "../../tag-management";
 import type { TagClickEvent, TagType } from "../../tag";
 import { BaseTile } from "../base-tile/BaseTile";
 import { TileItem } from "../tile-container/TileContainer.types";
@@ -49,6 +49,7 @@ export const RoomTile = ({
   thumbnailClick,
   badges,
   onSelect,
+  isUserAdmin = false,
   ...rest
 }: RoomTileProps) => {
   const childrenArray = React.Children.toArray(children);
@@ -152,14 +153,16 @@ export const RoomTile = ({
   const id = item.id.toString();
 
   const bottomContent = (
-    <Tags
+    <TagManagement
       id={id}
       tags={tags}
       className="room-tags"
       columnCount={columnCount}
       onSelectTag={handleTagSelect}
       key={`tags-${id}`}
-      showCreateTag={isHovered || checked}
+      isActive={Boolean(isHovered || checked || isActive)}
+      access={item.access}
+      isAdmin={isUserAdmin}
     />
   );
 
