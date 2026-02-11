@@ -24,18 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TagManagementProps as SharedTagManagementProps } from "@docspace/shared/components/tag-management/TagManagement.types";
+import { FC } from "react";
+import { inject, observer } from "mobx-react";
 
-export interface InjectedTagManagementProps {
-  onSelectTag: TStore["filesActionsStore"]["selectTag"];
-  isAdmin: boolean;
-}
+import { TagManagement as TagManagementShared } from "@docspace/shared/components/tag-management";
 
-export type TagManagementProps = Omit<
-  SharedTagManagementProps,
-  "isAdmin" | "onSelectTag"
->;
+import type {
+  InjectedTagManagementProps,
+  TagManagementProps,
+  TagManagementWrapperProps,
+} from "./TagManagement.types";
 
-export interface TagManagementWrapperProps
-  extends TagManagementProps,
-    InjectedTagManagementProps {}
+const TagManagement: FC<TagManagementWrapperProps> = (props) => {
+  return <TagManagementShared {...props} />;
+};
+
+export default inject<TStore, TagManagementProps, InjectedTagManagementProps>(
+  ({ filesActionsStore, authStore }) => ({
+    isAdmin: authStore.isAdmin,
+    onSelectTag: filesActionsStore.selectTag,
+  }),
+)(observer(TagManagement));
