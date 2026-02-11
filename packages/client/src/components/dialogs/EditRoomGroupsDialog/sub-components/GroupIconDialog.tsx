@@ -120,29 +120,44 @@ const GroupIconDialog = ({
 
       const iconId = typeof roomIcon === "object" ? roomIcon.id : roomIcon;
 
-      const updateData: IUpdateRoomGroup = {};
+      try {
+        const updateData: IUpdateRoomGroup = {};
 
-      if (groupName && groupName !== currentGroupName) {
-        updateData.groupName = groupName;
+        if (groupName && groupName !== currentGroupName) {
+          updateData.groupName = groupName;
+        }
+
+        if (Object.keys(updateData).length > 0) {
+          await updateRoomGroup(editingGroupId, updateData);
+        }
+
+        if (
+          iconId !==
+          (typeof currentGroupIcon === "object" && currentGroupIcon !== null
+            ? currentGroupIcon.id
+            : currentGroupIcon)
+        ) {
+          await updateGroupIcon(editingGroupId, iconId);
+        }
+
+        await getAllRoomGroups();
+
+        toastr.success(t("GroupingRooms:ChangesApplied"));
+        onClose();
+      } catch (error: unknown) {
+        let message = "";
+
+        if (axios.isAxiosError(error)) {
+          message =
+            error.response?.data?.response?.errors?.Name ??
+            error.response?.data?.message ??
+            error.message;
+        } else if (error instanceof Error) {
+          message = error.message;
+        }
+
+        toastr.error(message);
       }
-
-      if (Object.keys(updateData).length > 0) {
-        await updateRoomGroup(editingGroupId, updateData);
-      }
-
-      if (
-        iconId !==
-        (typeof currentGroupIcon === "object" && currentGroupIcon !== null
-          ? currentGroupIcon.id
-          : currentGroupIcon)
-      ) {
-        await updateGroupIcon(editingGroupId, iconId);
-      }
-
-      await getAllRoomGroups();
-
-      toastr.success(t("GroupingRooms:ChangesApplied"));
-      onClose();
     } else {
       if (!groupName || !arrIdsRooms?.length || !roomIcon) return;
 

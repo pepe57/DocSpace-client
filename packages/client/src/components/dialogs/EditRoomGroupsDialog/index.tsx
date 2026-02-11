@@ -162,6 +162,8 @@ const EditRoomGroupsDialog = ({
       if (!localGroupingEnabled && currentFilterGroupId) {
         navigate("rooms/shared");
       }
+    } catch (error) {
+      toastr.error(error as Error);
     } finally {
       setIsSaving(false);
     }
@@ -222,7 +224,7 @@ const EditRoomGroupsDialog = ({
           toastr.success(t("GroupingRooms:ChangesApplied"));
         }
       } catch (error) {
-        console.error("Error updating group rooms:", error);
+        toastr.error(error as Error);
       }
 
       onCloseGroupRoomList();
@@ -251,7 +253,7 @@ const EditRoomGroupsDialog = ({
       });
       setIsOpenRoomList(true);
     } catch (error) {
-      console.error("Error fetching group data:", error);
+      toastr.error(error as Error);
     }
   };
 

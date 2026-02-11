@@ -62,7 +62,7 @@ const DeleteGroupDialog = ({
         window.DocSpace.navigate("/rooms/shared/filter");
       }
     } catch (error) {
-      console.error("Error deleting group:", error);
+      toastr.error(error as Error);
     } finally {
       setIsDeleting(false);
       onClose();
