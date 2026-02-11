@@ -24,11 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { ButtonKeys } from "@docspace/shared/enums";
 import { Text } from "@docspace/shared/components/text";
 
 import styles from "../EditRoomGroupsDialog.module.scss";
@@ -45,7 +46,7 @@ const DeleteGroupDialog = ({
   const { t } = useTranslation(["Common", "GroupingRooms"]);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const onConfirmDelete = async () => {
+  const onConfirmDelete = useCallback(async () => {
     if (!groupId) return;
 
     setIsDeleting(true);
@@ -67,7 +68,32 @@ const DeleteGroupDialog = ({
       setIsDeleting(false);
       onClose();
     }
-  };
+  }, [
+    groupId,
+    deleteRoomGroup,
+    getAllRoomGroups,
+    currentFilterGroupId,
+    onClose,
+    t,
+  ]);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === ButtonKeys.enter && !isDeleting) {
+        e.preventDefault();
+        onConfirmDelete();
+      }
+    };
+
+    const rafId = requestAnimationFrame(() => {
+      document.addEventListener("keydown", onKeyDown, false);
+    });
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      document.removeEventListener("keydown", onKeyDown, false);
+    };
+  }, [onConfirmDelete, isDeleting]);
 
   return (
     <ModalDialog

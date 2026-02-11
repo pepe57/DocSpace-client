@@ -33,6 +33,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { isMobile } from "@docspace/shared/utils";
+import { ButtonKeys } from "@docspace/shared/enums";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import { CoverDialogProps } from "../RoomLogoCoverDialog.types";
@@ -188,6 +189,24 @@ const GroupIconDialog = ({
       }
     }
   };
+
+  React.useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === ButtonKeys.enter) {
+        e.preventDefault();
+        handleSubmit();
+      }
+    };
+
+    const rafId = requestAnimationFrame(() => {
+      document.addEventListener("keydown", onKeyDown, false);
+    });
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      document.removeEventListener("keydown", onKeyDown, false);
+    };
+  }, [handleSubmit]);
 
   if (!covers) return null;
 
