@@ -38,7 +38,7 @@
 
   svg {
     path {
-      fill: variables.$light-status-warning;
+      fill: variables.$light-status-warning !important;
     }
   }
 }
