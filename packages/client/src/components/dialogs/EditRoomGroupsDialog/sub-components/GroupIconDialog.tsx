@@ -207,6 +207,7 @@ const GroupIconDialog = ({
             scale
             placeholder={t("Common:EnterName")}
             isAutoFocussed
+            maxLength={128}
             onChange={onChangeGroupName}
           />
         </div>
