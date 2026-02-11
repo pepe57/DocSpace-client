@@ -25,16 +25,44 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, fireEvent, screen, within } from "@testing-library/react";
 import { ShareAccessRights } from "../../../enums";
 import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
 import { RoomTile } from "./RoomTile";
 import { RoomTileProps } from "./RoomTile.types";
 
+// Mock window.matchMedia
+Object.defineProperty(window, "matchMedia", {
+  writable: true,
+  value: vi.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
+});
+
 // Mock translations
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
+}));
+
+// Mock hooks used by TagManagement
+vi.mock("../../hooks/useIsMobile", () => ({
+  useIsMobile: () => false,
+}));
+
+vi.mock("../../hooks/useIsTable", () => ({
+  useIsTable: () => false,
+}));
+
+vi.mock("../../utils/useClickOutside", () => ({
+  useClickOutside: vi.fn(),
 }));
 
 // Mock styles - return default export for CSS Modules
@@ -54,9 +82,9 @@ interface TagProps {
   providerType?: number | string;
 }
 
-// Mock Tags component to mimic key behaviour
-vi.mock("../../tags", () => ({
-  Tags: ({
+// Mock TagManagement component to mimic key behaviour
+vi.mock("../../tag-management", () => ({
+  TagManagement: ({
     tags,
     onSelectTag,
   }: {
