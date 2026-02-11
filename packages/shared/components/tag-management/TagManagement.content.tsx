@@ -111,6 +111,8 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     setEditingIndex(null);
     setEditValue("");
 
+    if (newLabel === oldLabel) return;
+
     updateTagName.mutate(
       { oldLabel, newLabel },
       {
