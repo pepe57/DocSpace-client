@@ -8,7 +8,7 @@
 This repository contains the **frontend** for [ONLYOFFICE DocSpace](https://github.com/ONLYOFFICE/DocSpace) — a room-based collaborative platform for document management.
 
 > For the full product overview, see the [main repository README](https://github.com/ONLYOFFICE/DocSpace#readme).
-> For the backend setup and architecture, see the [server README](../server/README.md).
+> For the backend setup and architecture, see the [server README](https://github.com/ONLYOFFICE/DocSpace-server#readme).
 
 ## Table of Contents
 
@@ -162,7 +162,7 @@ All applications depend on `@docspace/shared`, which provides:
 
 ## Getting Started
 
-> **Note:** The frontend requires a running backend. See the [server README](../server/README.md) for backend setup instructions.
+> **Note:** The frontend requires a running backend. See the [server README](https://github.com/ONLYOFFICE/DocSpace-server#readme) for backend setup instructions.
 
 ### Prerequisites
 
@@ -182,7 +182,7 @@ cd server/common/ASC.AppHost
 dotnet run --launch-profile frontend-dev
 ```
 
-> See the [server README](../server/README.md) for details on launch profiles and backend configuration.
+> See the [server README](https://github.com/ONLYOFFICE/DocSpace-server#launch-profiles) for details on launch profiles and backend configuration.
 
 **Terminal 2 - Start frontend:**
 ```bash
@@ -251,7 +251,7 @@ Start the backend and frontend directly from the VSCode toolbar:
 
 Tasks are also available through the standard VSCode task menu (`Terminal → Run Task`).
 
-> For C# backend development with VSCode, see the [Server README](../server/README.md#development-with-vscode).
+> For C# backend development with VSCode, see the [Server README](https://github.com/ONLYOFFICE/DocSpace-server#development-with-vscode).
 
 ### Clear Aspire Docker Artifacts
 
@@ -481,7 +481,7 @@ taskkill /PID <PID> /F
 <details>
 <summary><b>Backend issues</b></summary>
 
-See the [server README troubleshooting section](../server/README.md#troubleshooting) for Docker and backend-related issues.
+See the [server README troubleshooting section](https://github.com/ONLYOFFICE/DocSpace-server#troubleshooting) for Docker and backend-related issues.
 </details>
 
 For more issues, check our [Issue Tracker](https://github.com/ONLYOFFICE/DocSpace/issues) or [Forum](https://forum.onlyoffice.com/).
