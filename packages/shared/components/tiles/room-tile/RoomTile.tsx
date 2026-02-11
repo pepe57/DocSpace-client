@@ -29,7 +29,7 @@ import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Tags } from "../../tags";
-import type { TagType } from "../../tag";
+import type { TagClickEvent, TagType } from "../../tag";
 import { BaseTile } from "../base-tile/BaseTile";
 import { TileItem } from "../tile-container/TileContainer.types";
 
@@ -139,15 +139,11 @@ export const RoomTile = ({
   );
 
   const handleTagSelect = useCallback(
-    (tag?: object | undefined) => {
+    (tag: TagClickEvent) => {
       if (item.isAIAgent && !hasTags) return;
 
-      if (!tag) {
-        selectTag(undefined);
-        return;
-      }
       if ("label" in tag && "roomType" in tag) {
-        selectTag(tag as Array<TagType | string>);
+        selectTag(tag);
       }
     },
     [item.isAIAgent, hasTags, selectTag],

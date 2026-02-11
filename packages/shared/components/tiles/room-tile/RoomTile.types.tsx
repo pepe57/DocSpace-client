@@ -27,7 +27,7 @@
 import { TFunction } from "i18next";
 import type { ShareAccessRights } from "../../../enums";
 import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
-import type { TagType } from "../../tag";
+import type { TagClickEvent, TagType } from "../../tag";
 import { TileItem } from "../tile-container/TileContainer.types";
 
 export interface RoomItem extends TileItem {
@@ -78,7 +78,7 @@ export type RoomTileProps = {
   /** Column count for tags layout */
   columnCount: number;
   /** Callback for tag selection */
-  selectTag: (tag: Array<TagType | string> | undefined) => void;
+  selectTag: (tag: TagClickEvent) => void;
   /** Callback for option selection */
   selectOption: (option: SelectOption) => void;
   /** Function to get room type name */
