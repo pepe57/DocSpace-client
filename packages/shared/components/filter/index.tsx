@@ -596,7 +596,8 @@ const FilterInput = React.memo(
             className="option-item"
             icon={buildGroupIconDataUrl(g.icon)}
             truncateText
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               handleFilterByGroup(g.id);
               setIsOverflowOpen(false);
             }}
