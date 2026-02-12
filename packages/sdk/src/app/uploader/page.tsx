@@ -28,6 +28,7 @@ import { getFilesSettings } from "@/api/files";
 import { logger } from "../../../logger.mjs";
 
 import UploaderClient from "./page.client";
+import { formatExtensions } from "./_utils";
 
 export default async function Page({
   searchParams,
@@ -48,34 +49,17 @@ export default async function Page({
 
   const filesSettings = await getFilesSettings();
 
-  const extensionsStr = baseConfig?.acceptExtensions?.trim() ?? "";
-  const parsedExtensions = extensionsStr
-    ? extensionsStr
-        .split(",")
-        .map((ext: string) => ext.trim())
-        .filter((ext: string) => ext.startsWith(".") && ext.length > 1)
-    : [];
-
-  const accept = parsedExtensions.length > 0 ? parsedExtensions.join(",") : "";
-
-  const allExtensions = accept ? accept.split(",") : [];
-  const displayExtensions = allExtensions
-    .slice(0, 5)
-    .map((ext: string) => ext.replace(".", "").toUpperCase());
-  const remaining = allExtensions.length - displayExtensions.length;
-
-  const exstsText =
-    displayExtensions.length > 0
-      ? remaining > 0
-        ? `(${displayExtensions.join(", ")} +${remaining})`
-        : `(${displayExtensions.join(", ")})`
-      : "";
+  const { accept, shortText, fullText, badgeValue } = formatExtensions(
+    baseConfig?.acceptExtensions,
+  );
 
   return (
     <UploaderClient
       filesSettings={filesSettings}
       accept={accept}
-      exstsText={exstsText}
+      shortText={shortText}
+      fullText={fullText}
+      badgeValue={badgeValue}
       baseConfig={baseConfig}
     />
   );

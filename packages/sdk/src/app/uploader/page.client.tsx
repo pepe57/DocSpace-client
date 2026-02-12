@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
@@ -62,7 +62,9 @@ import {
 export type UploaderClientProps = {
   filesSettings?: TFilesSettings;
   accept: string;
-  exstsText: string;
+  shortText: string;
+  fullText?: string;
+  badgeValue?: number;
   baseConfig?: {
     targetId?: string;
     acceptExtensions?: string;
@@ -74,7 +76,9 @@ export type UploaderClientProps = {
 
 export default function UploaderClient({
   accept,
-  exstsText,
+  shortText,
+  fullText,
+  badgeValue,
   filesSettings,
   baseConfig,
 }: UploaderClientProps) {
@@ -201,7 +205,9 @@ export default function UploaderClient({
       linkSecondaryText={
         baseConfig?.linkSecondaryText ?? t("Common:DropzoneTitleSecondary")
       }
-      exstsText={baseConfig?.extensionsText ?? exstsText}
+      exstsText={baseConfig?.extensionsText ?? shortText}
+      fullExstsText={fullText}
+      formatsPlusBadgeValue={badgeValue}
       dataTestId="sdk-uploader"
       icon={UploadSvgUrl}
       className={`${styles.dropzoneWrapper} ${styles.dropzoneCentered}`}
