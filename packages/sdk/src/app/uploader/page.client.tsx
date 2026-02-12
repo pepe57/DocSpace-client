@@ -169,10 +169,24 @@ export default function UploaderClient({
 
       try {
         const uploadedFiles = await uploadFiles(acceptedFiles);
+        const folderUrl = `${window.location.origin}/rooms/personal/filter?folder=${folderTargetId}`;
+
         toastr.success(
-          t("Common:ItemsSuccessfullyUploaded", {
-            count: acceptedFiles.length,
-          }),
+          <>
+            {t("Common:ItemsSuccessfullyUploaded", {
+              count: acceptedFiles.length,
+            })}
+            <br />
+            <a
+              href={folderUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "inherit", textDecoration: "underline" }}
+            >
+              {t("Common:Open")}
+            </a>
+          </>,
+          t("Common:Done"),
         );
 
         frameCallEvent({
