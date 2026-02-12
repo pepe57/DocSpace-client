@@ -45,7 +45,6 @@ import {
   useCreateTagMutation,
   useUpdateTag,
   useRemoveTagMutation,
-  useUpdateTagNameMutation,
 } from "./hooks/useTagsQuery";
 import styles from "./TagManagement.module.scss";
 import {
@@ -54,6 +53,7 @@ import {
   MAX_BODY_HEIGHT,
   MARGIN_BOTTOM,
   EDIT_CANCELLED,
+  DELETE_CANCELLED,
 } from "./TagManagement.constants";
 import type { TagManagementContentProps } from "./TagManagement.types";
 
@@ -119,43 +119,37 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
       return cancelEdit();
     }
 
-    onEditTag?.(oldLabel, newLabel)
-      .then(() => {
-        setTags((prev) =>
-          prev.map((tag) =>
-            tag.label === oldLabel ? { ...tag, label: newLabel } : tag,
-          ),
-        );
-        cancelEdit();
-      })
-      .catch((error) => {
-        if (error === EDIT_CANCELLED) return;
+    try {
+      await onEditTag?.(oldLabel, newLabel);
+      setTags((prev) =>
+        prev.map((tag) =>
+          tag.label === oldLabel ? { ...tag, label: newLabel } : tag,
+        ),
+      );
+      cancelEdit();
+    } catch (error) {
+      if (error === EDIT_CANCELLED) return;
 
-        toastr.error(error);
-        console.error("Failed to update tag name:", error);
-      });
+      toastr.error(error as Error);
+      console.error("Failed to update tag name:", error);
+    }
   }, [editingIndex, editValue, tags, cancelEdit, onEditTag]);
 
   const deleteTag = useCallback(
     async (tag: string) => {
-      const updatedTags = [...tags];
-      const tagIndex = updatedTags.findIndex((t) => t.label === tag);
+      try {
+        await onDeleteTag?.(tag);
 
-      if (tagIndex === -1) return;
+        const updatedTags = tags.filter((t) => t.label !== tag);
+        setTags(updatedTags);
+      } catch (error) {
+        if (error === DELETE_CANCELLED) return;
 
-      updatedTags.splice(tagIndex, 1);
-
-      removeTag.mutate(tag, {
-        onSuccess: () => {
-          setTags(updatedTags);
-        },
-        onError: (error) => {
-          toastr.error(error);
-          console.error("Failed to remove room tag:", error);
-        },
-      });
+        toastr.error(error as Error);
+        console.error("Failed to remove room tag:", error);
+      }
     },
-    [tags, removeTag],
+    [tags, removeTag, onDeleteTag],
   );
 
   const editTagHandleKey = useCallback(

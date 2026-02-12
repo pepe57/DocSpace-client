@@ -38,4 +38,8 @@ export const EVENT_OPTIONS: AddEventListenerOptions = {
 export const EDIT_TAG_DONT_SHOW_AGAIN_KEY = "edit-tag-dont-show-again";
 export const EDIT_TAG_MODAL_ID = "edit-tag-modal";
 
+export const DELETE_TAG_DONT_SHOW_AGAIN_KEY = "delete-tag-dont-show-again";
+export const DELETE_TAG_MODAL_ID = "delete-tag-modal";
+
 export const EDIT_CANCELLED = Symbol("EDIT_CANCELLED");
+export const DELETE_CANCELLED = Symbol("DELETE_CANCELLED");

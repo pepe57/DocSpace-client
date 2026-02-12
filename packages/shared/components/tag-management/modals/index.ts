@@ -25,3 +25,4 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export { EditTagModal } from "./EditTag.modal";
+export { DeleteTagModal } from "./DeleteTag.modal";

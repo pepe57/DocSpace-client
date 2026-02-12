@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useTranslation, Trans } from "react-i18next";
 import { FC, useCallback, useRef, useState } from "react";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
@@ -31,15 +32,21 @@ import { useUnmount } from "../../hooks/useUnmount";
 import { useIsTable } from "../../hooks/useIsTable";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { ShareAccessRights } from "../../enums";
+
 import { Tags } from "../tags";
+import { toastr } from "../toast";
 
 import { TagManagementPopup } from "./TagManagement.popup";
 
 import type { TagManagementProps } from "./TagManagement.types";
-import { EditTagModal } from "./modals";
-import { useUpdateTagNameMutation } from "./hooks/useTagsQuery";
+import { EditTagModal, DeleteTagModal } from "./modals";
+import {
+  useUpdateTagNameMutation,
+  useRemoveTagMutation,
+} from "./hooks/useTagsQuery";
 import { useEditConfirmation } from "./hooks/useEditConfirmation";
-import { EDIT_CANCELLED } from "./TagManagement.constants";
+import { useDeleteConfirmation } from "./hooks/useDeleteConfirmation";
+import { EDIT_CANCELLED, DELETE_CANCELLED } from "./TagManagement.constants";
 
 export const TagManagement: FC<TagManagementProps> = ({
   id,
@@ -60,16 +67,31 @@ export const TagManagement: FC<TagManagementProps> = ({
     handleCancel,
   } = useEditConfirmation();
 
+  const { t } = useTranslation();
+
+  const {
+    isModalOpen: isDeleteModalOpen,
+    tagToDelete,
+    isChecked: isDeleteChecked,
+    setIsChecked: setIsDeleteChecked,
+    requestConfirmation: requestDeleteConfirmation,
+    handleConfirm: handleDeleteConfirm,
+    handleCancel: handleDeleteCancel,
+  } = useDeleteConfirmation();
+
   const [showTagManagement, setShowTagManagement] = useState(false);
   const anchorRef = useRef<HTMLDivElement>(null);
   const editTagModalRef = useRef<HTMLDivElement>(null);
+  const deleteTagModalRef = useRef<HTMLDivElement>(null);
 
   const updateTagName = useUpdateTagNameMutation();
+  const removeTag = useRemoveTagMutation();
 
   const onClose = useCallback((event?: Event) => {
     if (
       event?.target instanceof HTMLElement &&
-      editTagModalRef.current?.contains(event.target)
+      (editTagModalRef.current?.contains(event.target) ||
+        deleteTagModalRef.current?.contains(event.target))
     )
       return;
 
@@ -101,6 +123,37 @@ export const TagManagement: FC<TagManagementProps> = ({
       }
     },
     [requestConfirmation, updateTagName],
+  );
+
+  const confirmDeleteTag = useCallback(
+    async (tag: string) => {
+      const confirmed = await requestDeleteConfirmation(tag);
+
+      if (!confirmed) {
+        return Promise.reject(DELETE_CANCELLED);
+      }
+
+      try {
+        await removeTag.mutateAsync(tag);
+        toastr.success(
+          <Trans
+            t={t}
+            i18nKey="RemoveTag"
+            ns="TagManagement"
+            components={{
+              1: <strong />,
+            }}
+            values={{
+              tag,
+            }}
+          />,
+        );
+      } catch (error) {
+        console.error("Failed to delete tag:", error);
+        throw error;
+      }
+    },
+    [requestDeleteConfirmation, removeTag, t],
   );
 
   const isTableView = useIsTable();
@@ -147,10 +200,11 @@ export const TagManagement: FC<TagManagementProps> = ({
           canBindTag={canBindTag}
           canSearch
           onEditTag={confirmEditTag}
+          onDeleteTag={confirmDeleteTag}
         />
       ) : null}
 
-      {isModalOpen && (
+      {isModalOpen ? (
         <EditTagModal
           onClose={handleCancel}
           onSubmit={handleConfirm}
@@ -158,7 +212,18 @@ export const TagManagement: FC<TagManagementProps> = ({
           onCheckboxChange={setIsChecked}
           ref={editTagModalRef}
         />
-      )}
+      ) : null}
+
+      {isDeleteModalOpen ? (
+        <DeleteTagModal
+          onClose={handleDeleteCancel}
+          onSubmit={handleDeleteConfirm}
+          isChecked={isDeleteChecked}
+          onCheckboxChange={setIsDeleteChecked}
+          tagName={tagToDelete}
+          ref={deleteTagModalRef}
+        />
+      ) : null}
     </>
   );
 };
