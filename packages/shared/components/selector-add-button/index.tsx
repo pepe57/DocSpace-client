@@ -59,6 +59,7 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
 
     testId = "selector-add-button",
     isLoading = false,
+    tabIndex,
     ...rest
   } = props;
 
@@ -67,6 +68,12 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
 
   const onClickAction = (e: React.MouseEvent) => {
     if (!isDisabled && !isLoading) onClick?.(e);
+  };
+
+  const onKeyDownAction = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !isDisabled && !isLoading) {
+      onClick?.(e as unknown as React.MouseEvent);
+    }
   };
 
   const buttonClassName = classNames(styles.selectorButton, {
@@ -97,6 +104,9 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     <div
       data-testid="selector-add-button-container"
       className={containerClassName}
+      tabIndex={tabIndex}
+      onKeyDown={onKeyDownAction}
+      role="button"
     >
       <TooltipContainer
         as="div"

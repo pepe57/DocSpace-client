@@ -27,6 +27,8 @@
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
+import { ButtonKeys } from "@docspace/shared/enums";
+
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
@@ -64,6 +66,13 @@ const GroupItem = ({
     }
   };
 
+  const onKeyDown = (e: React.KeyboardEvent, handler: () => void) => {
+    if (e.key === ButtonKeys.enter) {
+      e.preventDefault();
+      handler();
+    }
+  };
+
   return (
     <div className={styles.addedGroups}>
       <div
@@ -72,7 +81,10 @@ const GroupItem = ({
         <div
           className={styles.groupData}
           onClick={handleGroupClick}
+          onKeyDown={(e) => onKeyDown(e, handleGroupClick)}
           style={disabled ? { cursor: "default" } : undefined}
+          tabIndex={disabled ? -1 : 0}
+          role="button"
         >
           <div className={styles.iconGroup}>
             {iconData && (
@@ -95,14 +107,18 @@ const GroupItem = ({
             iconName={PencilReactSvgUrl}
             size={16}
             onClick={handleEditClick}
+            onKeyDown={(e) => onKeyDown(e, handleEditClick)}
             isDisabled={disabled}
+            tabIndex={disabled ? -1 : 0}
           />
           <IconButton
             className="delete_icon"
             iconName={TrashReactSvgUrl}
             size={16}
             onClick={handleDeleteClick}
+            onKeyDown={(e) => onKeyDown(e, handleDeleteClick)}
             isDisabled={disabled}
+            tabIndex={disabled ? -1 : 0}
           />
         </div>
       </div>

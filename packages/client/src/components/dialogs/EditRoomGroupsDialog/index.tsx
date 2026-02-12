@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
@@ -39,6 +39,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import { toastr } from "@docspace/shared/components/toast";
+import { ButtonKeys } from "@docspace/shared/enums";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
@@ -123,11 +124,18 @@ const EditRoomGroupsDialog = ({
     setIsOpenRoomList(true);
   };
 
+  const skipNextCloseRef = useRef(false);
+
   const onCloseRoomList = () => {
+    skipNextCloseRef.current = true;
     setIsOpenRoomList(false);
   };
 
   const onCloseEditRoomGroupsDialog = () => {
+    if (skipNextCloseRef.current) {
+      skipNextCloseRef.current = false;
+      return;
+    }
     setEditRoomGroupsDialogVisible(false);
   };
 
@@ -162,6 +170,8 @@ const EditRoomGroupsDialog = ({
       if (!localGroupingEnabled && currentFilterGroupId) {
         navigate("rooms/shared");
       }
+    } catch (error) {
+      toastr.error(error as Error);
     } finally {
       setIsSaving(false);
     }
@@ -172,6 +182,23 @@ const EditRoomGroupsDialog = ({
     setHasGroupingChanged(false);
     setEditRoomGroupsDialogVisible(false);
   };
+
+  const onKeyUpHandler = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === ButtonKeys.enter && hasGroupingChanged && !isSaving) {
+        onSaveGroupingChange();
+      }
+    },
+    [hasGroupingChanged, isSaving, onSaveGroupingChange],
+  );
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUpHandler, false);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyUpHandler, false);
+    };
+  }, [onKeyUpHandler]);
 
   const onSubmitRoom = async (items: TSelectorItem[]) => {
     if (selectedGroup) {
@@ -222,7 +249,7 @@ const EditRoomGroupsDialog = ({
           toastr.success(t("GroupingRooms:ChangesApplied"));
         }
       } catch (error) {
-        console.error("Error updating group rooms:", error);
+        toastr.error(error as Error);
       }
 
       onCloseGroupRoomList();
@@ -251,11 +278,12 @@ const EditRoomGroupsDialog = ({
       });
       setIsOpenRoomList(true);
     } catch (error) {
-      console.error("Error fetching group data:", error);
+      toastr.error(error as Error);
     }
   };
 
   const onCloseGroupRoomList = () => {
+    skipNextCloseRef.current = true;
     setIsOpenRoomList(false);
     setSelectedGroup(null);
   };
@@ -388,7 +416,7 @@ const EditRoomGroupsDialog = ({
               </span>
             }
             bodyText={
-              <span style={{ display: "block", marginTop: "1px" }}>
+              <span style={{ display: "block", marginTop: "2px" }}>
                 {t("GroupingRooms:DisablingRoomGroupsDescription")}
               </span>
             }
@@ -418,6 +446,7 @@ const EditRoomGroupsDialog = ({
           className={styles.selectorAddButton}
           label={t("GroupingRooms:CreateNewGroup")}
           isDisabled={!localGroupingEnabled}
+          tabIndex={localGroupingEnabled ? 0 : -1}
         />
         <div className={styles.addedGroups}>{renderGroupItems()}</div>
       </ModalDialog.Body>

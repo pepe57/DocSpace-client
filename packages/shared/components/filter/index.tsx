@@ -596,7 +596,8 @@ const FilterInput = React.memo(
             className="option-item"
             icon={buildGroupIconDataUrl(g.icon)}
             truncateText
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               handleFilterByGroup(g.id);
               setIsOverflowOpen(false);
             }}
@@ -608,7 +609,12 @@ const FilterInput = React.memo(
     );
 
     return (
-      <div className={styles.filterInput} data-testid="filter_container">
+      <div
+        className={classNames(styles.filterInput, {
+          [styles.tileView]: viewAs === "tile",
+        })}
+        data-testid="filter_container"
+      >
         <div className="filter-input_filter-row">
           {searchComponent}
           {!isIndexEditingMode && !isFlowsPage ? (

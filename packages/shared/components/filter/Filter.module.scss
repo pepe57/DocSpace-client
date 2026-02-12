@@ -57,7 +57,8 @@
       align-items: center;
       flex-wrap: wrap;
 
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      margin-top: 8px;
 
       .clear-all-link {
         margin-inline-start: 12px;
@@ -549,6 +550,22 @@
   }
 }
 
+.tileView {
+  :global {
+    .filter-input_selected-row {
+      margin-bottom: 5px;
+
+      @include mixins.tablet-and-below {
+        margin-bottom: 3px;
+      }
+    }
+  }
+
+  .rowGroupingRooms {
+    margin-bottom: 5px;
+  }
+}
+
 .rowGroupingRooms {
   display: flex;
   align-items: center;
@@ -569,6 +586,7 @@
         padding: 7px 12px;
         border-radius: 6px;
         margin: 0;
+        height: 34px;
 
         .selected-item_label {
           font-weight: 600;

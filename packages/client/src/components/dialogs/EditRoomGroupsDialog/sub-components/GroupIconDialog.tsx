@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import {
@@ -32,6 +33,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { isMobile } from "@docspace/shared/utils";
+import { ButtonKeys } from "@docspace/shared/enums";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import { CoverDialogProps } from "../RoomLogoCoverDialog.types";
@@ -119,29 +121,44 @@ const GroupIconDialog = ({
 
       const iconId = typeof roomIcon === "object" ? roomIcon.id : roomIcon;
 
-      const updateData: IUpdateRoomGroup = {};
+      try {
+        const updateData: IUpdateRoomGroup = {};
 
-      if (groupName && groupName !== currentGroupName) {
-        updateData.groupName = groupName;
+        if (groupName && groupName !== currentGroupName) {
+          updateData.groupName = groupName;
+        }
+
+        if (Object.keys(updateData).length > 0) {
+          await updateRoomGroup(editingGroupId, updateData);
+        }
+
+        if (
+          iconId !==
+          (typeof currentGroupIcon === "object" && currentGroupIcon !== null
+            ? currentGroupIcon.id
+            : currentGroupIcon)
+        ) {
+          await updateGroupIcon(editingGroupId, iconId);
+        }
+
+        await getAllRoomGroups();
+
+        toastr.success(t("GroupingRooms:ChangesApplied"));
+        onClose();
+      } catch (error: unknown) {
+        let message = "";
+
+        if (axios.isAxiosError(error)) {
+          message =
+            error.response?.data?.response?.errors?.Name ??
+            error.response?.data?.message ??
+            error.message;
+        } else if (error instanceof Error) {
+          message = error.message;
+        }
+
+        toastr.error(message);
       }
-
-      if (Object.keys(updateData).length > 0) {
-        await updateRoomGroup(editingGroupId, updateData);
-      }
-
-      if (
-        iconId !==
-        (typeof currentGroupIcon === "object" && currentGroupIcon !== null
-          ? currentGroupIcon.id
-          : currentGroupIcon)
-      ) {
-        await updateGroupIcon(editingGroupId, iconId);
-      }
-
-      await getAllRoomGroups();
-
-      toastr.success(t("GroupingRooms:ChangesApplied"));
-      onClose();
     } else {
       if (!groupName || !arrIdsRooms?.length || !roomIcon) return;
 
@@ -151,12 +168,45 @@ const GroupIconDialog = ({
         rooms: arrIdsRooms,
       };
 
-      await setCreateGroupRooms(newGroup);
-      await getAllRoomGroups();
+      try {
+        await setCreateGroupRooms(newGroup);
+        await getAllRoomGroups();
 
-      onCloseEditRoomGroupsDialog();
+        onCloseEditRoomGroupsDialog();
+      } catch (error: unknown) {
+        let message = "";
+
+        if (axios.isAxiosError(error)) {
+          message =
+            error.response?.data?.response?.errors?.Name ??
+            error.response?.data?.message ??
+            error.message;
+        } else if (error instanceof Error) {
+          message = error.message;
+        }
+
+        toastr.error(message);
+      }
     }
   };
+
+  React.useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === ButtonKeys.enter) {
+        e.preventDefault();
+        handleSubmit();
+      }
+    };
+
+    const rafId = requestAnimationFrame(() => {
+      document.addEventListener("keydown", onKeyDown, false);
+    });
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      document.removeEventListener("keydown", onKeyDown, false);
+    };
+  }, [handleSubmit]);
 
   if (!covers) return null;
 
@@ -191,6 +241,7 @@ const GroupIconDialog = ({
             scale
             placeholder={t("Common:EnterName")}
             isAutoFocussed
+            maxLength={128}
             onChange={onChangeGroupName}
           />
         </div>
