@@ -83,9 +83,10 @@ async function Page() {
   }
 
   const { logoText, externalResources } = settings;
-  const { helpcenter } = externalResources;
+  const { helpcenter, support } = externalResources;
 
   const docspaceFaqUrl = helpcenter.domain + helpcenter.entries.docspacefaq;
+  const feedbackAndSupportUrl = support.domain;
 
   const { trial } = quota;
   const { enterprise, developer, dueDate, openSource, state, delayDueDate } =
@@ -116,6 +117,7 @@ async function Page() {
       isNotPaidPeriod={state === TariffState.NotPaid}
       gracePeriodEndDate={delayDueDate}
       delayDaysCount={getDaysRemaining(delayDueDate)}
+      feedbackAndSupportUrl={feedbackAndSupportUrl}
     />
   );
 }

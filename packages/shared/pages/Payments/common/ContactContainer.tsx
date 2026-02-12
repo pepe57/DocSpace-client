@@ -28,11 +28,10 @@ import React from "react";
 
 import { Trans, useTranslation } from "react-i18next";
 
-import { Text } from "../../../../components/text";
-import { Link, LinkTarget } from "../../../../components/link";
+import { Text } from "../../../components/text";
+import { Link, LinkTarget } from "../../../components/link";
 
-import { IBonusProps } from "../Bonus.types";
-import styles from "../Bonus.module.scss";
+import styles from "../Bonus/Bonus.module.scss";
 
 export const ContactContainer = ({
   salesEmail,
@@ -40,7 +39,13 @@ export const ContactContainer = ({
   forEnterprisesUrl,
   demoOrderUrl,
   feedbackAndSupportUrl,
-}: Partial<IBonusProps>) => {
+}: {
+  salesEmail: string;
+  feedbackAndSupportUrl: string;
+  isCommunity?: boolean;
+  forEnterprisesUrl?: string;
+  demoOrderUrl?: string;
+}) => {
   const { t } = useTranslation("Common");
 
   return (

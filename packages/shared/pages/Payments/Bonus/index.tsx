@@ -31,7 +31,7 @@ import { Text } from "../../../components/text";
 import { PaymentsStandaloneLoader } from "../../../skeletons/payments";
 
 import { BenefitsContainer } from "../common/BenefitsContainer";
-import { ContactContainer } from "./sub-components/ContactContainer";
+import { ContactContainer } from "../common/ContactContainer";
 import { OfficialDocumentation } from "./sub-components/OfficialDocumentation";
 
 import { IBonusProps } from "./Bonus.types";

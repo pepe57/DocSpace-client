@@ -28,7 +28,10 @@
 
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { parseToDateTime, formatDateLocalized } from "@docspace/shared/utils/date";
+import {
+  parseToDateTime,
+  formatDateLocalized,
+} from "@docspace/shared/utils/date";
 import { useRouter } from "next/navigation";
 
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
@@ -58,6 +61,7 @@ const PaymentsPage = ({
   isNotPaidPeriod,
   gracePeriodEndDate,
   delayDaysCount,
+  feedbackAndSupportUrl,
 }: {
   isTrial: boolean;
   salesEmail: string;
@@ -74,6 +78,7 @@ const PaymentsPage = ({
   isNotPaidPeriod: boolean;
   gracePeriodEndDate: Date;
   delayDaysCount: string;
+  feedbackAndSupportUrl: string;
 }) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
@@ -164,6 +169,7 @@ const PaymentsPage = ({
             "DATE_MED",
           )}
           delayDaysCount={delayDaysCount}
+          feedbackAndSupportUrl={feedbackAndSupportUrl}
         />
       </LoaderWrapper>
     </div>
