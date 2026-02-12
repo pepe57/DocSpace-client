@@ -92,6 +92,7 @@ beforeAll(() => {
 		"storybook-static",
 		"node_modules",
 		".meta",
+		"scripts",
 	];
 
 	const translations = workspaces.flatMap((wsPath) => {
@@ -417,20 +418,37 @@ describe("Locales Tests", () => {
 			.flatMap((item) => item.translations)
 			.map((item) => item.key);
 
-		const allJsTranslationKeys = javascriptFiles
+		const jsKeyToFiles = {};
+		javascriptFiles
 			.filter((f) => !f.path.includes("Banner.js")) // skip Banner.js (translations from firebase)
-			.flatMap((j) => j.translationKeys)
-			.map((k) => k.substring(k.indexOf(":") + 1))
-			.filter((value, index, self) => self.indexOf(value) === index); // Distinct
+			.forEach((j) => {
+				j.translationKeys.forEach((k) => {
+					const stripped = k.substring(k.indexOf(":") + 1);
+					if (!jsKeyToFiles[stripped]) {
+						jsKeyToFiles[stripped] = [];
+					}
+					if (!jsKeyToFiles[stripped].includes(j.path)) {
+						jsKeyToFiles[stripped].push(j.path);
+					}
+				});
+			});
+
+		const allJsTranslationKeys = Object.keys(jsKeyToFiles);
 
 		const notFoundJsKeys = allJsTranslationKeys.filter(
 			(k) => !allEnKeys.includes(k),
 		);
 
-		let i = 0;
-		const message = `Some i18n-keys do not exist in translations in 'en' language:\r\n\r\nKeys:\r\n\r\n${notFoundJsKeys.join(
-			`\r\n${++i}`,
-		)}`;
+		let message =
+			"Some i18n-keys do not exist in translations in 'en' language:\r\n\r\nKeys:\r\n\r\n";
+		notFoundJsKeys.forEach((key, index) => {
+			message += `${index + 1}. Key: "${key}"\r\n`;
+			message += `   Files:\r\n`;
+			jsKeyToFiles[key].forEach((filePath) => {
+				message += `   - ${filePath}\r\n`;
+			});
+			message += "\r\n";
+		});
 
 		expect(notFoundJsKeys.length, message).toBe(0);
 	});

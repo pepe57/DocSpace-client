@@ -222,6 +222,7 @@ const TemplatesRow = ({
           withFavoritesTreeFolder
           withAIAgentsTreeFolder
           openRoot
+          isSelect
         />
       ) : null}
     </div>
