@@ -1702,12 +1702,28 @@
   --dropzone-border: 2px dashed #{$gray-light-mid};
   --dropzone-secondary-link: #${black};
   --dropzone-exsts-color: #{$gray};
+
+  --dropzone-exsts-color-background-focus: #{$light-gray-selected};
+  --dropzone-exsts-color-background-hover: #{$gray-light-mid};
+  --dropzone-exsts-color-background-pressed: #{$gray-strong};
+
+  --dropzone-exsts-color-focus: #{$black};
+  --dropzone-exsts-badge-focus: #{$gray-text};
+  --dropzone-arrow-icon-color-focus: #{$black};
 }
 
 .dark {
   --dropzone-border: 2px dashed #{$gray-dark-strong};
   --dropzone-secondary-link: #${white};
   --dropzone-exsts-color: #{$gray};
+
+  --dropzone-exsts-color-background-focus: #{$gray-dark-mid};
+  --dropzone-exsts-color-background-hover: #{$gray-dark-strong};
+  --dropzone-exsts-color-background-pressed: #{$dark-gray-light};
+
+  --dropzone-exsts-color-focus: #{$white};
+  --dropzone-exsts-badge-focus: #{$gray-dark};
+  --dropzone-arrow-icon-color-focus: #{$white};
 }
 
 .light {

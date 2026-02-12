@@ -100,10 +100,106 @@
 }
 
 .dropzoneExsts {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+
+  color: var(--dropzone-exsts-color);
+}
+
+.dropzoneExstsTextContainer {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  border-radius: 3px;
+
+  padding-inline: 8px;
+  padding-block: 4px;
+
+  &.clickable {
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--dropzone-exsts-color-background-hover);
+    }
+
+    &:active {
+      background-color: var(--dropzone-exsts-color-background-pressed);
+    }
+  }
+
+  &.isOpen {
+    cursor: pointer;
+    background-color: var(--dropzone-exsts-color-background-focus);
+
+    .dropzoneExstsText {
+      color: var(--dropzone-exsts-color-focus);
+    }
+
+    .dropzoneExstsBadge {
+      [data-testid="badge-inner"] {
+        background-color: var(--dropzone-exsts-badge-focus);
+      }
+    }
+  }
+}
+
+.dropzoneExstsText {
   font-weight: 600;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.dropzoneExstsBadge {
+  [data-testid="badge-text"] {
+    font-weight: 700 !important;
+    font-size: 9px !important;
+  }
+}
+
+.dropzoneArrowIcon {
+  width: 6px;
+  height: 6px;
+  margin-inline-start: 2px;
+  transition: transform 0.2s ease;
+
+  path {
+    fill: var(--dropzone-exsts-color);
+  }
+
+  &.isOpen {
+    transform: rotate(180deg);
+    path {
+      fill: var(--dropzone-arrow-icon-color-focus);
+    }
+  }
+}
+
+.dropzoneFormatsDropdown {
+  position: absolute !important;
+  top: calc(100% + 4px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+  z-index: 200;
+  width: 100%;
+  background: var(--background-content);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: 0px 5px 20px rgba(4, 15, 27, 0.13);
+}
+
+.dropzoneFormatsContent {
+  padding-inline: 12px;
+  font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  color: var(--dropzone-exsts-color);
+  color: var(--text-secondary);
+  word-wrap: break-word;
 }
 
 .dropzoneChildren {

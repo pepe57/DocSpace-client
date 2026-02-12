@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { CSSProperties, ReactNode } from "react";
 import type { DropEvent } from "react-dropzone";
 
 type BaseDropzoneProps = {
@@ -36,8 +35,12 @@ type BaseDropzoneProps = {
   linkMainText: string;
   /** Secondary text displayed in the dropzone */
   linkSecondaryText: string;
-  /** Text displaying supported file types */
+  /** Text displaying supported file types (short version) */
   exstsText: string;
+  /** Full text displaying all supported file types (shown in dropdown) */
+  fullExstsText?: string;
+  /** Value for plus badge showing additional formats count */
+  formatsPlusBadgeValue?: number;
   /** Maximum number of files allowed (0 for unlimited) */
   maxFiles?: number;
   /** Optional icon URL to display */

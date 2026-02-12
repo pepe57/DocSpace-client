@@ -28,7 +28,12 @@ import React from "react";
 import { useDropzone, DropEvent } from "react-dropzone";
 import classNames from "classnames";
 
+import TriangleDownIcon from "PUBLIC_DIR/images/triangle.down.react.svg";
+
 import { Loader, LoaderTypes } from "../loader";
+import { Badge } from "../badge";
+import { DropDown } from "../drop-down";
+import { IconSizeType } from "../../utils";
 
 import { DropzoneProps } from "./Dropzone.types";
 import styles from "./Dropzone.module.scss";
@@ -44,6 +49,8 @@ const Dropzone = ({
   linkMainText,
   linkSecondaryText,
   exstsText,
+  fullExstsText,
+  formatsPlusBadgeValue,
   dataTestId,
   icon,
   iconClassName,
@@ -65,6 +72,23 @@ const Dropzone = ({
   } as Parameters<typeof useDropzone>[0];
 
   const { getRootProps, getInputProps } = useDropzone(dropzoneOptions);
+
+  const [isFormatsOpen, setIsFormatsOpen] = React.useState(false);
+  const formatsRef = React.useRef<HTMLDivElement>(null);
+
+  const handleFormatsClick = (e: React.MouseEvent) => {
+    if (fullExstsText) {
+      e.stopPropagation();
+      e.preventDefault();
+      setIsFormatsOpen((prev) => !prev);
+    }
+  };
+
+  const handleFormatsClose = (e: Event, open: boolean) => {
+    if (!open) {
+      setIsFormatsOpen(false);
+    }
+  };
 
   return (
     <div
@@ -129,11 +153,52 @@ const Dropzone = ({
             </span>
           </div>
           <div
-            className={styles.dropzoneExsts}
+            ref={formatsRef}
+            className={classNames(styles.dropzoneExsts, {
+              [styles.clickable]: !!fullExstsText,
+            })}
             data-testid="dropzone-file-types"
             aria-label="Supported file types"
+            onClick={handleFormatsClick}
           >
-            {exstsText}
+            <div className={classNames(styles.dropzoneExstsTextContainer, {
+              [styles.isOpen]: isFormatsOpen,
+              [styles.clickable]: !!fullExstsText,
+            })}>
+              <span className={styles.dropzoneExstsText}>{exstsText}</span>
+              {formatsPlusBadgeValue && formatsPlusBadgeValue > 0 ? (
+                <Badge
+                  className={styles.dropzoneExstsBadge}
+                  label={`+${formatsPlusBadgeValue}`}
+                  isMutedBadge
+                  borderRadius="50px"
+                />
+              ) : null}
+              {fullExstsText ? (
+                <TriangleDownIcon
+                  data-size={IconSizeType.scale}
+                  className={classNames(styles.dropzoneArrowIcon, {
+                    [styles.isOpen]: isFormatsOpen,
+                  })}
+                />
+              ) : null}
+              {fullExstsText ? (
+                <DropDown
+                  className={styles.dropzoneFormatsDropdown}
+                  open={isFormatsOpen}
+                  clickOutsideAction={handleFormatsClose}
+                  forwardedRef={formatsRef}
+                  manualY="4"
+                  directionY="bottom"
+                  withBackdrop={false}
+                  isDefaultMode={false}
+                >
+                  <div className={styles.dropzoneFormatsContent}>
+                    {fullExstsText}
+                  </div>
+                </DropDown>
+              ) : null}
+            </div>
           </div>
         </div>
       )}
