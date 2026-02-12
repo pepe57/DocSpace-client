@@ -65,6 +65,9 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   canSearch = false,
   canEdit = false,
   canBindTag = false,
+
+  onDeleteTag,
+  onEditTag,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -124,7 +127,12 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
             canBindTag={canBindTag}
           >
             <TagManagementFilter roomId={roomId} />
-            <TagManagementContent onSelectTag={onSelectTag} roomId={roomId} />
+            <TagManagementContent
+              onSelectTag={onSelectTag}
+              roomId={roomId}
+              onDeleteTag={onDeleteTag}
+              onEditTag={onEditTag}
+            />
           </TagManagementProvider>
         ))
         .with("error", () => <></>)

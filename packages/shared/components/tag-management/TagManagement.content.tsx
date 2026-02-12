@@ -53,12 +53,15 @@ import {
   ICON_SIZE,
   MAX_BODY_HEIGHT,
   MARGIN_BOTTOM,
+  EDIT_CANCELLED,
 } from "./TagManagement.constants";
 import type { TagManagementContentProps } from "./TagManagement.types";
 
 export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   onSelectTag,
   roomId,
+  onDeleteTag,
+  onEditTag,
 }) => {
   const isMobile = useIsMobile();
   const { filteredTags, tags, setTags, canEdit, canRemove, canBindTag } =
@@ -66,7 +69,6 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   const removeTag = useRemoveTagMutation();
   const addTagToRoom = useCreateTagMutation(roomId);
   const updateTag = useUpdateTag(roomId);
-  const updateTagName = useUpdateTagNameMutation();
 
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editValue, setEditValue] = useState("");
@@ -102,39 +104,37 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     [tags],
   );
 
+  const cancelEdit = useCallback(() => {
+    setEditingIndex(null);
+    setEditValue("");
+  }, []);
+
   const confirmEdit = useCallback(async () => {
     if (editingIndex === null) return;
 
     const newLabel = editValue.trim();
     const oldLabel = tags[editingIndex].label;
 
-    setEditingIndex(null);
-    setEditValue("");
+    if (newLabel === oldLabel) {
+      return cancelEdit();
+    }
 
-    if (newLabel === oldLabel) return;
+    onEditTag?.(oldLabel, newLabel)
+      .then(() => {
+        setTags((prev) =>
+          prev.map((tag) =>
+            tag.label === oldLabel ? { ...tag, label: newLabel } : tag,
+          ),
+        );
+        cancelEdit();
+      })
+      .catch((error) => {
+        if (error === EDIT_CANCELLED) return;
 
-    updateTagName.mutate(
-      { oldLabel, newLabel },
-      {
-        onSuccess: () => {
-          setTags((prev) =>
-            prev.map((tag) =>
-              tag.label === oldLabel ? { ...tag, label: newLabel } : tag,
-            ),
-          );
-        },
-        onError: (error) => {
-          console.error("Failed to update tag name:", error);
-          toastr.error(error);
-        },
-      },
-    );
-  }, [editingIndex, editValue, tags]);
-
-  const cancelEdit = useCallback(() => {
-    setEditingIndex(null);
-    setEditValue("");
-  }, []);
+        toastr.error(error);
+        console.error("Failed to update tag name:", error);
+      });
+  }, [editingIndex, editValue, tags, cancelEdit, onEditTag]);
 
   const deleteTag = useCallback(
     async (tag: string) => {

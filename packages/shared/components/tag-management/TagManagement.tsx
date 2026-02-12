@@ -36,6 +36,10 @@ import { Tags } from "../tags";
 import { TagManagementPopup } from "./TagManagement.popup";
 
 import type { TagManagementProps } from "./TagManagement.types";
+import { EditTagModal } from "./modals";
+import { useUpdateTagNameMutation } from "./hooks/useTagsQuery";
+import { useEditConfirmation } from "./hooks/useEditConfirmation";
+import { EDIT_CANCELLED } from "./TagManagement.constants";
 
 export const TagManagement: FC<TagManagementProps> = ({
   id,
@@ -47,10 +51,28 @@ export const TagManagement: FC<TagManagementProps> = ({
   isActive,
   className,
 }) => {
+  const {
+    isModalOpen,
+    isChecked,
+    setIsChecked,
+    requestConfirmation,
+    handleConfirm,
+    handleCancel,
+  } = useEditConfirmation();
+
   const [showTagManagement, setShowTagManagement] = useState(false);
   const anchorRef = useRef<HTMLDivElement>(null);
+  const editTagModalRef = useRef<HTMLDivElement>(null);
 
-  const onClose = useCallback(() => {
+  const updateTagName = useUpdateTagNameMutation();
+
+  const onClose = useCallback((event?: Event) => {
+    if (
+      event?.target instanceof HTMLElement &&
+      editTagModalRef.current?.contains(event.target)
+    )
+      return;
+
     setShowTagManagement(false);
   }, []);
 
@@ -59,6 +81,27 @@ export const TagManagement: FC<TagManagementProps> = ({
   }, []);
 
   useUnmount(onClose);
+
+  const confirmEditTag = useCallback(
+    async (oldLabel: string, newLabel: string) => {
+      const confirmed = await requestConfirmation();
+
+      if (!confirmed) {
+        return Promise.reject(EDIT_CANCELLED);
+      }
+
+      try {
+        await updateTagName.mutateAsync({
+          oldLabel,
+          newLabel,
+        });
+      } catch (error) {
+        console.error("Failed to update tag name:", error);
+        throw error;
+      }
+    },
+    [requestConfirmation, updateTagName],
+  );
 
   const isTableView = useIsTable();
   const isMobileView = useIsMobile();
@@ -103,8 +146,19 @@ export const TagManagement: FC<TagManagementProps> = ({
           canRemove={canDelete}
           canBindTag={canBindTag}
           canSearch
+          onEditTag={confirmEditTag}
         />
       ) : null}
+
+      {isModalOpen && (
+        <EditTagModal
+          onClose={handleCancel}
+          onSubmit={handleConfirm}
+          isChecked={isChecked}
+          onCheckboxChange={setIsChecked}
+          ref={editTagModalRef}
+        />
+      )}
     </>
   );
 };

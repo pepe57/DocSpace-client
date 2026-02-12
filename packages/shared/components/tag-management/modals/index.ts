@@ -24,18 +24,4 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const ROW_HEIGHT = 30;
-export const MARGIN_BOTTOM = 10;
-export const MAX_BODY_HEIGHT = 220;
-export const ICON_SIZE = 16;
-
-export const TAGS_QUERY_KEY = ["tags"];
-
-export const EVENT_OPTIONS: AddEventListenerOptions = {
-  capture: true,
-};
-
-export const EDIT_TAG_DONT_SHOW_AGAIN_KEY = "edit-tag-dont-show-again";
-export const EDIT_TAG_MODAL_ID = "edit-tag-modal";
-
-export const EDIT_CANCELLED = Symbol("EDIT_CANCELLED");
+export { EditTagModal } from "./EditTag.modal";
