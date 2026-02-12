@@ -69,10 +69,9 @@ import {
 } from "./StyledPresets";
 
 const Uploader = (props) => {
-  const { t, theme } = props;
+  const { t, theme, myFolderId, fetchTreeFolders } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
-
   const [version, onSetVersion] = useState(sdkVersion[210]);
 
   const [source, onSetSource] = useState(sdkSource.Package);
@@ -87,6 +86,7 @@ const Uploader = (props) => {
     acceptExtensions: FILE_TYPE_EXTENSIONS.document.join(","),
     linkMainText: t("Common:Upload"),
     linkSecondaryText: t("Common:DropzoneTitleSecondary"),
+    id: myFolderId,
     events: {
       onUploadSuccess: (data) => {
         console.log("onUploadSuccess", data);
@@ -138,6 +138,14 @@ const Uploader = (props) => {
       scroll.scrollTop = 0;
     }
   }, []);
+
+  useEffect(() => {
+    if (!myFolderId) {
+      fetchTreeFolders();
+    } else {
+      setConfig((oldConfig) => ({ ...oldConfig, id: myFolderId }));
+    }
+  }, [myFolderId, fetchTreeFolders]);
 
   useEffect(() => {
     initFrame();
@@ -251,10 +259,14 @@ const Uploader = (props) => {
                 <Label className="label" text={t("Common:SelectFolder")} />
               </LabelGroup>
               <FilesSelectorInputWrapper>
-                <FilesSelectorInput
-                  onSelectFolder={onChangeFolderId}
-                  isSelect
-                />
+                {myFolderId && (
+                  <FilesSelectorInput
+                    key={myFolderId}
+                    id={myFolderId}
+                    onSelectFolder={onChangeFolderId}
+                    isSelect
+                  />
+                )}
               </FilesSelectorInputWrapper>
             </ControlsGroup>
           </ControlsSection>
@@ -316,11 +328,14 @@ const Uploader = (props) => {
   );
 };
 
-export const Component = inject(({ settingsStore }) => {
+export const Component = inject(({ settingsStore, treeFoldersStore }) => {
   const { theme } = settingsStore;
+  const { myFolderId, fetchTreeFolders } = treeFoldersStore;
 
   return {
     theme,
+    myFolderId,
+    fetchTreeFolders,
   };
 })(
   withTranslation([
