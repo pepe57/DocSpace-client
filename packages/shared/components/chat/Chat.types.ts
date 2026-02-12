@@ -33,6 +33,11 @@ import type useToolsSettings from "./hooks/useToolsSettings";
 import type useInitChats from "./hooks/useInitChats";
 import type useInitMessages from "./hooks/useInitMessages";
 
+export type TGenerateDocStoreProps = {
+  roomId: string | number;
+  children: React.ReactNode;
+};
+
 export type TChatStoreProps = {
   roomId: string | number;
   children: React.ReactNode;

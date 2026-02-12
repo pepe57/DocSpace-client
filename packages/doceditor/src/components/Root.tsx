@@ -116,6 +116,7 @@ const Root = ({
 
   deepLinkSettings,
   baseSdkConfig,
+  aiConfig,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -360,6 +361,7 @@ const Root = ({
           setFillingStatusDialogVisible={setFillingStatusDialogVisible}
           openShareFormDialog={openShareFormDialog}
           onStartFilling={onStartFilling}
+          aiConfig={aiConfig}
         />
       ) : null}
 

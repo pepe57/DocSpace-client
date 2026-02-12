@@ -66,6 +66,11 @@ export type TDocumentInfoSharingSettings = {
   permissions: string;
 };
 
+export type AISearchParams = {
+  toolCallDescription?: string;
+  toolCallName?: string;
+};
+
 export type SdkSearchParams = {
   locale?: string | null | undefined;
   theme?: string | undefined;
@@ -86,7 +91,8 @@ export type RootPageProps = {
       editorType: string;
       error?: string;
     }> &
-      SdkSearchParams
+      SdkSearchParams &
+      AISearchParams
   >;
 };
 export type TDocumentInfo = {
@@ -239,6 +245,7 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+      aiConfig?: AISearchParams;
     }
   | {
       error: TError;
@@ -254,6 +261,7 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+      aiConfig?: AISearchParams;
     };
 
 export type EditorProps = {
@@ -264,6 +272,7 @@ export type EditorProps = {
   documentServerUrl: string;
   fileInfo?: TFile;
   sdkConfig?: TFrameConfig | null;
+  aiConfig?: AISearchParams;
   isSharingAccess?: boolean;
   errorMessage?: string;
   isSkipError?: boolean;
@@ -398,6 +407,7 @@ export interface UseEventsProps {
   isSkipError?: boolean;
   openOnNewPage: boolean;
   t: TTranslation;
+  aiConfig?: AISearchParams;
 
   sdkConfig?: TFrameConfig | null;
   organizationName: string;

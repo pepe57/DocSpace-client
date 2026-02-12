@@ -107,6 +107,7 @@ const useEditorEvents = ({
   setFillingStatusDialogVisible,
   openShareFormDialog,
   onStartFillingVDRPanel,
+  aiConfig,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
 
@@ -337,9 +338,21 @@ const useEditorEvents = ({
                 typeof data === "object" &&
                 "error" in data &&
                 data.error
-              )
+              ) {
                 connector.attachEvent("ai_onInit", sendProviders);
-              else sendProviders();
+              } else {
+                sendProviders();
+              }
+
+              if (aiConfig?.toolCallDescription && aiConfig.toolCallName) {
+                const { toolCallDescription, toolCallName } = aiConfig;
+                connector.sendEvent("ai_onCallTool", {
+                  name: toolCallName,
+                  arguments: {
+                    description: toolCallDescription,
+                  },
+                });
+              }
             });
 
             connector.attachEvent("ai_onExternalFetch", (e: unknown) =>

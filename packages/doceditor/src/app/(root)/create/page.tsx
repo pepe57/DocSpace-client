@@ -48,6 +48,8 @@ type TSearchParams = {
   fromTemplate?: string;
   action?: string;
   toForm?: string;
+  toolCallName?: string;
+  toolCallDescription?: string;
 };
 
 async function Page(props: { searchParams: Promise<TSearchParams> }) {
@@ -74,6 +76,9 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
     action,
     toForm,
     share,
+
+    toolCallName,
+    toolCallDescription,
   } = searchParams;
 
   if (!parentId || !fileTitle) redirect(baseURL);
@@ -173,6 +178,11 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
 
     if (share) {
       newSearchParams.append("share", share);
+    }
+
+    if (toolCallDescription && toolCallName) {
+      newSearchParams.append("toolCallDescription", toolCallDescription);
+      newSearchParams.append("toolCallName", toolCallName);
     }
 
     logger.debug(

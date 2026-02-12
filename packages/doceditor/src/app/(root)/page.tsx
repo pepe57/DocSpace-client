@@ -38,7 +38,7 @@ import {
 } from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
 
-import { RootPageProps } from "@/types";
+import { AISearchParams, RootPageProps } from "@/types";
 import Root from "@/components/Root";
 import FilePassword from "@/components/file-password";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
@@ -51,6 +51,8 @@ const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
   action: undefined,
   share: undefined,
   editorType: undefined,
+  toolCallName: undefined,
+  toolCallDescription: undefined,
 };
 
 async function Page(props: RootPageProps) {
@@ -70,6 +72,8 @@ async function Page(props: RootPageProps) {
     is_file,
     editorGoBack,
     isSDK,
+    toolCallName,
+    toolCallDescription,
   } = searchParams ?? initialSearchParams;
 
   const baseSdkConfig: TFrameConfig & { is_file?: boolean; isSDK?: boolean } = {
@@ -85,6 +89,11 @@ async function Page(props: RootPageProps) {
     theme,
     is_file,
     isSDK,
+  };
+
+  const aiConfig: AISearchParams = {
+    toolCallName,
+    toolCallDescription,
   };
 
   const cookieStore = await cookies();
@@ -190,6 +199,7 @@ async function Page(props: RootPageProps) {
         {...data}
         shareKey={share}
         baseSdkConfig={baseSdkConfig}
+        aiConfig={aiConfig}
         deepLinkSettings={deepLinkSettings?.handlingMode}
       />
     </>

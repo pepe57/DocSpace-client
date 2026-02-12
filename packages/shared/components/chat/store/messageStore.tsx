@@ -306,6 +306,37 @@ export default class MessageStore {
     }
   };
 
+  handleGenerateDoc = (toolName: string, toolArgs: Record<string, unknown>) => {
+    if (toolName !== "docspace_generate_docx") return;
+
+    const name = toolName
+      .replace("docspace_", "")
+      .split("_")
+      .map((v, i) => {
+        if (i === 0) return v;
+        return v.charAt(0).toUpperCase() + v.slice(1);
+      })
+      .join("");
+
+    const description = toolArgs.description;
+
+    const searchParams = new URLSearchParams();
+
+    const parentId = Number(this.roomId) + 2;
+
+    searchParams.append("parentId", parentId.toString());
+    searchParams.append("toolCallName", name);
+    searchParams.append("toolCallDescription", description as string);
+    searchParams.append("id", "-1");
+    searchParams.append("fileTitle", "New document.docx");
+
+    const url = `${window.location.origin}/doceditor/create?${searchParams.toString()}`;
+
+    console.log(url);
+
+    window.open(url, "_blank");
+  };
+
   handleToolCall = (jsonData: string) => {
     const { name, arguments: args, callId, ...rest } = JSON.parse(jsonData);
     const lastMessage = this.getLastMessage();
@@ -339,6 +370,8 @@ export default class MessageStore {
 
       this.replaceLastMessage(newMsg);
     }
+
+    this.handleGenerateDoc(name, args);
   };
 
   handleToolResult = (jsonData: string) => {
