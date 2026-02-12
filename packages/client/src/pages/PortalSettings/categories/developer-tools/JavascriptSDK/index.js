@@ -40,6 +40,7 @@ import FileSelectorImg from "PUBLIC_DIR/images/sdk-presets_file-selector.react.s
 import EditorImg from "PUBLIC_DIR/images/sdk-presets_editor.react.svg?url";
 import ViewerImg from "PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url";
 import CustomImg from "PUBLIC_DIR/images/sdk-presets_custom.react.svg?url";
+import UploaderImg from "PUBLIC_DIR/images/sdk-presets_uploader.react.svg?url";
 
 import PortalImgDark from "PUBLIC_DIR/images/sdk-presets_portal_dark.react.svg?url";
 import PublicRoomImgDark from "PUBLIC_DIR/images/sdk-presets_public-room_dark.react.svg?url";
@@ -48,6 +49,8 @@ import FileSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_file-selector_dar
 import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?url";
 import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
 import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
+import UploaderImgDark from "PUBLIC_DIR/images/sdk-presets_uploader_dark.react.svg?url";
+
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import Integration from "./sub-components/Integration";
 import PresetTile from "./sub-components/PresetTile";
@@ -134,7 +137,7 @@ const PortalIntegration = (props) => {
     {
       title: t("Common:Uploader"),
       description: t("UploaderDescription"),
-      image: theme.isBase ? CustomImg : CustomImgDark,
+      image: theme.isBase ? UploaderImg : UploaderImgDark,
       handleOnClick: navigateToUploader,
     },
   ];
