@@ -24,18 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const PAGE_COUNT = 100;
+import { MAX_VISIBLE_EXTENSIONS } from "@/utils/constants";
 
-export const THEME_HEADER = "x-sdk-config-theme";
-export const LOCALE_HEADER = "x-sdk-config-locale";
-export const FILTER_HEADER = "x-sdk-config-filter";
-export const SHARE_KEY_HEADER = "x-sdk-config-share-key";
-export const PATHNAME_HEADER = "x-pathname";
+type FormattedExtensions = {
+  accept: string;
+  shortText: string;
+  fullText?: string;
+  badgeValue?: number;
+};
 
-export const PUBLIC_ROOM_TITLE_HEADER = "x-public-room-title";
+export const formatExtensions = (
+  acceptExtensions?: string,
+): FormattedExtensions => {
+  if (!acceptExtensions?.trim()) {
+    return { accept: "", shortText: "" };
+  }
 
-export const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;
-export const DEFAULT_MAX_UPLOAD_THREAD_COUNT = 3;
-export const DEFAULT_MAX_UPLOAD_FILES_COUNT = 2;
+  const extensions = acceptExtensions
+    .split(",")
+    .map((ext) => ext.trim())
+    .filter((ext) => ext.startsWith(".") && ext.length > 1);
 
-export const MAX_VISIBLE_EXTENSIONS = 5;
+  if (extensions.length === 0) {
+    return { accept: "", shortText: "" };
+  }
+
+  const accept = extensions.join(",");
+  const displayExtensions = extensions.map((ext) =>
+    ext.replace(/^\./, "").toUpperCase(),
+  );
+
+  if (displayExtensions.length <= MAX_VISIBLE_EXTENSIONS) {
+    return {
+      accept,
+      shortText: displayExtensions.join(", "),
+    };
+  }
+
+  return {
+    accept,
+    shortText: displayExtensions.slice(0, MAX_VISIBLE_EXTENSIONS).join(", "),
+    fullText: `${displayExtensions.join(", ")}.`,
+    badgeValue: displayExtensions.length - MAX_VISIBLE_EXTENSIONS,
+  };
+};

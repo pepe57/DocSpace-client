@@ -27,4 +27,4 @@
 export * from "./path";
 export * from "./folder";
 export * from "./upload";
-export * from "./acceptExtensions";
+export * from "./formatExtensions";
