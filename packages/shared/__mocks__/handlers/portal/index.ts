@@ -34,6 +34,10 @@ import { quotaHandler } from "./quota";
 import { backupProgressHandler } from "./backupprogress";
 import { backupScheduleHandler } from "./backupshedule";
 import { licenseQuotaHandler } from "./licensequota";
+import { portalPaymentQuotasHandler } from "./paymentQuotas";
+import { paymentCustomerInfoHandler } from "./paymentCustomerInfo";
+import { paymentAccountHandler } from "./paymentAccount";
+import { paymentUrlHandler } from "./paymentUrl";
 
 export {
   suspendPortalHandler,
@@ -47,6 +51,10 @@ export {
   backupProgressHandler,
   backupScheduleHandler,
   licenseQuotaHandler,
+  portalPaymentQuotasHandler,
+  paymentCustomerInfoHandler,
+  paymentAccountHandler,
+  paymentUrlHandler,
 };
 
 export const portalHandlers = (port: string) => [
@@ -61,4 +69,8 @@ export const portalHandlers = (port: string) => [
   backupProgressHandler(port),
   backupScheduleHandler(port),
   licenseQuotaHandler(port),
+  portalPaymentQuotasHandler(port),
+  paymentCustomerInfoHandler(port),
+  paymentAccountHandler(port),
+  paymentUrlHandler(port),
 ];

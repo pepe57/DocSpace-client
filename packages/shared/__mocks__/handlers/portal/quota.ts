@@ -33,6 +33,8 @@ export const quotaSuccess = (
   withCustomization: boolean = true,
   lifetime: boolean = true,
   trial: boolean = false,
+  saas: boolean = false,
+  year: boolean = false,
 ) => ({
   response: {
     id: -10,
@@ -76,7 +78,7 @@ export const quotaSuccess = (
       },
       {
         id: "branding",
-        value: true,
+        value: !saas,
         type: "flag",
       },
       {
@@ -86,7 +88,7 @@ export const quotaSuccess = (
       },
       {
         id: "year",
-        value: true,
+        value: year,
         type: "flag",
       },
       {
@@ -183,7 +185,7 @@ export const quotaSuccess = (
       lastRecalculateDate: "2024-04-03T13:02:17.63658Z",
     },
     roomsQuota: {
-      enableQuota: true,
+      enableQuota: false,
       defaultQuota: 0,
       lastRecalculateDate: "2024-04-03T13:02:17.6733891Z",
     },
@@ -214,9 +216,13 @@ export const quotaResolver = (
   withCustomization: boolean = true,
   lifetime: boolean = true,
   trial: boolean = false,
+  saas: boolean = false,
+  year: boolean = false,
 ) => {
   return new Response(
-    JSON.stringify(quotaSuccess(withCustomization, lifetime, trial)),
+    JSON.stringify(
+      quotaSuccess(withCustomization, lifetime, trial, saas, year),
+    ),
   );
 };
 
@@ -225,8 +231,10 @@ export const quotaHandler = (
   withCustomization: boolean = true,
   lifetime: boolean = true,
   trial: boolean = false,
+  saas: boolean = false,
+  year: boolean = false,
 ) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_QUOTA}`, () => {
-    return quotaResolver(withCustomization, lifetime, trial);
+    return quotaResolver(withCustomization, lifetime, trial, saas, year);
   });
 };

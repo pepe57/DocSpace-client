@@ -28,10 +28,15 @@ import {
   colorThemeHandler,
   licenseQuotaHandler,
   paymentSettingsHandler,
+  paymentAccountHandler,
+  paymentCustomerInfoHandler,
+  paymentUrlHandler,
+  portalPaymentQuotasHandler,
   quotaHandler,
   settingsHandler,
   tariffHandler,
   TypeSettings,
+  selfByTypeHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import type { BrowserContext } from "@playwright/test";
 import { expect, test, TEST_PORT } from "./fixtures/base";
@@ -370,7 +375,6 @@ test.describe("Standalone payments", () => {
         settingsHandler(TEST_PORT, TypeSettings.Authenticated),
         colorThemeHandler(TEST_PORT),
         paymentSettingsHandler(TEST_PORT),
-        //  licenseQuotaHandler(TEST_PORT),
         tariffHandler(TEST_PORT, true),
         quotaHandler(TEST_PORT, true, false),
       );
@@ -386,6 +390,342 @@ test.describe("Standalone payments", () => {
         "standalone-payments",
         "community.png",
       ]);
+    });
+  });
+});
+
+test.describe("SaaS payments", () => {
+  test.describe("Business / month", () => {
+    test.describe("Payer view", () => {
+      test.beforeEach(async ({ mockRequest, context }) => {
+        const frozenNowMs = new Date("2025-12-10T06:00:00.000Z").getTime();
+        await freezeTime(context, frozenNowMs);
+
+        mockRequest.use(
+          selfByTypeHandler(TEST_PORT, "owner"),
+          settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+          colorThemeHandler(TEST_PORT),
+          paymentSettingsHandler(TEST_PORT, false),
+          portalPaymentQuotasHandler(TEST_PORT),
+          paymentCustomerInfoHandler(TEST_PORT),
+          paymentAccountHandler(TEST_PORT),
+          paymentUrlHandler(TEST_PORT),
+          tariffHandler(TEST_PORT, false, false, false),
+          quotaHandler(TEST_PORT, false, false, false, true),
+        );
+      });
+
+      test("renders payments state", async ({ page, baseUrl }) => {
+        await page.goto(`${baseUrl}/portal-settings/payments/portal-payments`);
+
+        await expect(page.getByTestId("payments-loader")).toHaveCount(0);
+        await expect(page.getByTestId("saas-page")).toBeVisible();
+
+        await expect(page).toHaveScreenshot([
+          "desktop",
+          "saas-business-payments",
+          "month-payer-view.png",
+        ]);
+      });
+    });
+
+    test.describe("Owner view", () => {
+      test.beforeEach(async ({ mockRequest, context }) => {
+        const frozenNowMs = new Date("2025-12-10T06:00:00.000Z").getTime();
+        await freezeTime(context, frozenNowMs);
+
+        mockRequest.use(
+          selfByTypeHandler(TEST_PORT, "owner"),
+          settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+          colorThemeHandler(TEST_PORT),
+          paymentSettingsHandler(TEST_PORT, false),
+          portalPaymentQuotasHandler(TEST_PORT),
+          paymentCustomerInfoHandler(TEST_PORT, false, "another@test.com"),
+          paymentAccountHandler(TEST_PORT),
+          paymentUrlHandler(TEST_PORT),
+          tariffHandler(TEST_PORT, false, false, false),
+          quotaHandler(TEST_PORT, false, false, false, true),
+        );
+      });
+
+      test("renders payments state", async ({ page, baseUrl }) => {
+        await page.goto(`${baseUrl}/portal-settings/payments/portal-payments`);
+
+        await expect(page.getByTestId("payments-loader")).toHaveCount(0);
+        await expect(page.getByTestId("saas-page")).toBeVisible();
+
+        await expect(page).toHaveScreenshot([
+          "desktop",
+          "saas-business-payments",
+          "month-owner-view.png",
+        ]);
+      });
+    });
+
+    test.describe("Owner view / without payer", () => {
+      test.beforeEach(async ({ mockRequest, context }) => {
+        const frozenNowMs = new Date("2025-12-10T06:00:00.000Z").getTime();
+        await freezeTime(context, frozenNowMs);
+
+        mockRequest.use(
+          selfByTypeHandler(TEST_PORT, "owner"),
+          settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+          colorThemeHandler(TEST_PORT),
+          paymentSettingsHandler(TEST_PORT, false),
+          portalPaymentQuotasHandler(TEST_PORT),
+          paymentCustomerInfoHandler(TEST_PORT, true),
+          paymentAccountHandler(TEST_PORT),
+          paymentUrlHandler(TEST_PORT),
+          tariffHandler(TEST_PORT, false, false, false),
+          quotaHandler(TEST_PORT, false, false, false, true),
+        );
+      });
+
+      test("renders payments state", async ({ page, baseUrl }) => {
+        await page.goto(`${baseUrl}/portal-settings/payments/portal-payments`);
+
+        await expect(page.getByTestId("payments-loader")).toHaveCount(0);
+        await expect(page.getByTestId("saas-page")).toBeVisible();
+
+        await expect(page).toHaveScreenshot([
+          "desktop",
+          "saas-business-payments",
+          "month-owner-view-without-payer.png",
+        ]);
+      });
+    });
+
+    test.describe("Admin view", () => {
+      test.beforeEach(async ({ mockRequest, context }) => {
+        const frozenNowMs = new Date("2025-12-10T06:00:00.000Z").getTime();
+        await freezeTime(context, frozenNowMs);
+
+        mockRequest.use(
+          selfByTypeHandler(TEST_PORT, "admin"),
+          settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+          colorThemeHandler(TEST_PORT),
+          paymentSettingsHandler(TEST_PORT, false),
+          portalPaymentQuotasHandler(TEST_PORT),
+          paymentCustomerInfoHandler(TEST_PORT),
+          paymentAccountHandler(TEST_PORT),
+          paymentUrlHandler(TEST_PORT),
+          tariffHandler(TEST_PORT, false, false, false),
+          quotaHandler(TEST_PORT, false, false, false, true),
+        );
+      });
+
+      test("renders payments state", async ({ page, baseUrl }) => {
+        await page.goto(`${baseUrl}/portal-settings/payments/portal-payments`);
+
+        await expect(page.getByTestId("payments-loader")).toHaveCount(0);
+        await expect(page.getByTestId("saas-page")).toBeVisible();
+
+        await expect(page).toHaveScreenshot([
+          "desktop",
+          "saas-business-payments",
+          "month-admin-view.png",
+        ]);
+      });
+    });
+
+    test.describe("Admin view / without payer", () => {
+      test.beforeEach(async ({ mockRequest, context }) => {
+        const frozenNowMs = new Date("2025-12-10T06:00:00.000Z").getTime();
+        await freezeTime(context, frozenNowMs);
+
+        mockRequest.use(
+          selfByTypeHandler(TEST_PORT, "admin"),
+          settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+          colorThemeHandler(TEST_PORT),
+          paymentSettingsHandler(TEST_PORT, false),
+          portalPaymentQuotasHandler(TEST_PORT),
+          paymentCustomerInfoHandler(TEST_PORT, true),
+          paymentAccountHandler(TEST_PORT),
+          paymentUrlHandler(TEST_PORT),
+          tariffHandler(TEST_PORT, false, false, false),
+          quotaHandler(TEST_PORT, false, false, false, true),
+        );
+      });
+
+      test("renders payments state", async ({ page, baseUrl }) => {
+        await page.goto(`${baseUrl}/portal-settings/payments/portal-payments`);
+
+        await expect(page.getByTestId("payments-loader")).toHaveCount(0);
+        await expect(page.getByTestId("saas-page")).toBeVisible();
+
+        await expect(page).toHaveScreenshot([
+          "desktop",
+          "saas-business-payments",
+          "month-admin-view-without-payer.png",
+        ]);
+      });
+    });
+  });
+
+  test.describe("Business / year", () => {
+    test.describe("Payer view", () => {
+      test.beforeEach(async ({ mockRequest, context }) => {
+        const frozenNowMs = new Date("2025-12-10T06:00:00.000Z").getTime();
+        await freezeTime(context, frozenNowMs);
+
+        mockRequest.use(
+          selfByTypeHandler(TEST_PORT, "owner"),
+          settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+          colorThemeHandler(TEST_PORT),
+          paymentSettingsHandler(TEST_PORT, false),
+          portalPaymentQuotasHandler(TEST_PORT),
+          paymentCustomerInfoHandler(TEST_PORT),
+          paymentAccountHandler(TEST_PORT),
+          paymentUrlHandler(TEST_PORT),
+          tariffHandler(TEST_PORT, false, false, false),
+          quotaHandler(TEST_PORT, false, false, false, true, true),
+        );
+      });
+
+      test("renders payments state", async ({ page, baseUrl }) => {
+        await page.goto(`${baseUrl}/portal-settings/payments/portal-payments`);
+
+        await expect(page.getByTestId("payments-loader")).toHaveCount(0);
+        await expect(page.getByTestId("saas-page")).toBeVisible();
+
+        await expect(page).toHaveScreenshot([
+          "desktop",
+          "saas-business-payments",
+          "year-payer-view.png",
+        ]);
+      });
+    });
+
+    test.describe("Owner view", () => {
+      test.beforeEach(async ({ mockRequest, context }) => {
+        const frozenNowMs = new Date("2025-12-10T06:00:00.000Z").getTime();
+        await freezeTime(context, frozenNowMs);
+
+        mockRequest.use(
+          selfByTypeHandler(TEST_PORT, "owner"),
+          settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+          colorThemeHandler(TEST_PORT),
+          paymentSettingsHandler(TEST_PORT, false),
+          portalPaymentQuotasHandler(TEST_PORT),
+          paymentCustomerInfoHandler(TEST_PORT, false, "another@test.com"),
+          paymentAccountHandler(TEST_PORT),
+          paymentUrlHandler(TEST_PORT),
+          tariffHandler(TEST_PORT, false, false, false),
+          quotaHandler(TEST_PORT, false, false, false, true, true),
+        );
+      });
+
+      test("renders payments state", async ({ page, baseUrl }) => {
+        await page.goto(`${baseUrl}/portal-settings/payments/portal-payments`);
+
+        await expect(page.getByTestId("payments-loader")).toHaveCount(0);
+        await expect(page.getByTestId("saas-page")).toBeVisible();
+
+        await expect(page).toHaveScreenshot([
+          "desktop",
+          "saas-business-payments",
+          "year-owner-view.png",
+        ]);
+      });
+    });
+
+    test.describe("Owner view / without payer", () => {
+      test.beforeEach(async ({ mockRequest, context }) => {
+        const frozenNowMs = new Date("2025-12-10T06:00:00.000Z").getTime();
+        await freezeTime(context, frozenNowMs);
+
+        mockRequest.use(
+          selfByTypeHandler(TEST_PORT, "owner"),
+          settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+          colorThemeHandler(TEST_PORT),
+          paymentSettingsHandler(TEST_PORT, false),
+          portalPaymentQuotasHandler(TEST_PORT),
+          paymentCustomerInfoHandler(TEST_PORT, true),
+          paymentAccountHandler(TEST_PORT),
+          paymentUrlHandler(TEST_PORT),
+          tariffHandler(TEST_PORT, false, false, false),
+          quotaHandler(TEST_PORT, false, false, false, true, true),
+        );
+      });
+
+      test("renders payments state", async ({ page, baseUrl }) => {
+        await page.goto(`${baseUrl}/portal-settings/payments/portal-payments`);
+
+        await expect(page.getByTestId("payments-loader")).toHaveCount(0);
+        await expect(page.getByTestId("saas-page")).toBeVisible();
+
+        await expect(page).toHaveScreenshot([
+          "desktop",
+          "saas-business-payments",
+          "year-owner-view-without-payer.png",
+        ]);
+      });
+    });
+
+    test.describe("Admin view", () => {
+      test.beforeEach(async ({ mockRequest, context }) => {
+        const frozenNowMs = new Date("2025-12-10T06:00:00.000Z").getTime();
+        await freezeTime(context, frozenNowMs);
+
+        mockRequest.use(
+          selfByTypeHandler(TEST_PORT, "admin"),
+          settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+          colorThemeHandler(TEST_PORT),
+          paymentSettingsHandler(TEST_PORT, false),
+          portalPaymentQuotasHandler(TEST_PORT),
+          paymentCustomerInfoHandler(TEST_PORT),
+          paymentAccountHandler(TEST_PORT),
+          paymentUrlHandler(TEST_PORT),
+          tariffHandler(TEST_PORT, false, false, false),
+          quotaHandler(TEST_PORT, false, false, false, true, true),
+        );
+      });
+
+      test("renders payments state", async ({ page, baseUrl }) => {
+        await page.goto(`${baseUrl}/portal-settings/payments/portal-payments`);
+
+        await expect(page.getByTestId("payments-loader")).toHaveCount(0);
+        await expect(page.getByTestId("saas-page")).toBeVisible();
+
+        await expect(page).toHaveScreenshot([
+          "desktop",
+          "saas-business-payments",
+          "year-admin-view.png",
+        ]);
+      });
+    });
+
+    test.describe("Admin view / without payer", () => {
+      test.beforeEach(async ({ mockRequest, context }) => {
+        const frozenNowMs = new Date("2025-12-10T06:00:00.000Z").getTime();
+        await freezeTime(context, frozenNowMs);
+
+        mockRequest.use(
+          selfByTypeHandler(TEST_PORT, "admin"),
+          settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+          colorThemeHandler(TEST_PORT),
+          paymentSettingsHandler(TEST_PORT, false),
+          portalPaymentQuotasHandler(TEST_PORT),
+          paymentCustomerInfoHandler(TEST_PORT, true),
+          paymentAccountHandler(TEST_PORT),
+          paymentUrlHandler(TEST_PORT),
+          tariffHandler(TEST_PORT, false, false, false),
+          quotaHandler(TEST_PORT, false, false, false, true, true),
+        );
+      });
+
+      test("renders payments state", async ({ page, baseUrl }) => {
+        await page.goto(`${baseUrl}/portal-settings/payments/portal-payments`);
+
+        await expect(page.getByTestId("payments-loader")).toHaveCount(0);
+        await expect(page.getByTestId("saas-page")).toBeVisible();
+
+        await expect(page).toHaveScreenshot([
+          "desktop",
+          "saas-business-payments",
+          "year-admin-view-without-payer.png",
+        ]);
+      });
     });
   });
 });
