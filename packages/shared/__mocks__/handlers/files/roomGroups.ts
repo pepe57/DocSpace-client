@@ -31,7 +31,17 @@ export const PATH_ROOM_GROUPS = "files/group";
 export const PATH_ROOM_GROUP_BY_ID = "files/group/:groupId";
 export const PATH_ROOM_GROUP_ICON = "files/group/:groupId/icon";
 
-const FOLDER_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="M4 6h10l2 2h12v18H4V6z" fill="#35ABE5"/></svg>`;
+const FOLDER_ICON_SVG_SMALL = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path d="M3 5h8l2 2h10v14H3V5z" fill="#35ABE5"/></svg>`;
+const FOLDER_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M4 6h10l2 2h12v18H4V6z" fill="#35ABE5"/></svg>`;
+const FOLDER_ICON_SVG_MEDIUM = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="M5 8h16l3 3h16v24H5V8z" fill="#35ABE5"/></svg>`;
+
+const mockRoomLogo = {
+  original: "",
+  large: "",
+  medium: "",
+  small: "",
+  color: "61C059",
+};
 
 const mockRoomGroups = [
   {
@@ -41,15 +51,66 @@ const mockRoomGroups = [
     icon: {
       id: "folder",
       data: {
-        small: FOLDER_ICON_SVG,
-        medium: FOLDER_ICON_SVG,
-        large: FOLDER_ICON_SVG,
+        small: FOLDER_ICON_SVG_SMALL,
+        medium: FOLDER_ICON_SVG_MEDIUM,
+        default: FOLDER_ICON_SVG,
       },
     },
     rooms: [
-      { id: 101, title: "Marketing Room 1" },
-      { id: 102, title: "Marketing Room 2" },
-      { id: 103, title: "Marketing Room 3" },
+      {
+        id: 101,
+        title: "Marketing Room 1",
+        roomType: 6,
+        logo: mockRoomLogo,
+        shared: false,
+        parentId: 2,
+        filesCount: 0,
+        foldersCount: 0,
+        rootFolderType: 14,
+        security: { Read: true },
+        tags: [],
+        pinned: false,
+        private: false,
+        indexing: false,
+        denyDownload: false,
+        inRoom: true,
+      },
+      {
+        id: 102,
+        title: "Marketing Room 2",
+        roomType: 6,
+        logo: mockRoomLogo,
+        shared: false,
+        parentId: 2,
+        filesCount: 0,
+        foldersCount: 0,
+        rootFolderType: 14,
+        security: { Read: true },
+        tags: [],
+        pinned: false,
+        private: false,
+        indexing: false,
+        denyDownload: false,
+        inRoom: true,
+      },
+      {
+        id: 103,
+        title: "Marketing Room 3",
+        roomType: 6,
+        logo: mockRoomLogo,
+        shared: false,
+        parentId: 2,
+        filesCount: 0,
+        foldersCount: 0,
+        rootFolderType: 14,
+        security: { Read: true },
+        tags: [],
+        pinned: false,
+        private: false,
+        indexing: false,
+        denyDownload: false,
+        inRoom: true,
+      },
     ],
   },
   {
@@ -59,14 +120,48 @@ const mockRoomGroups = [
     icon: {
       id: "folder",
       data: {
-        small: FOLDER_ICON_SVG,
-        medium: FOLDER_ICON_SVG,
-        large: FOLDER_ICON_SVG,
+        small: FOLDER_ICON_SVG_SMALL,
+        medium: FOLDER_ICON_SVG_MEDIUM,
+        default: FOLDER_ICON_SVG,
       },
     },
     rooms: [
-      { id: 201, title: "Engineering Room 1" },
-      { id: 202, title: "Engineering Room 2" },
+      {
+        id: 201,
+        title: "Engineering Room 1",
+        roomType: 6,
+        logo: mockRoomLogo,
+        shared: false,
+        parentId: 2,
+        filesCount: 0,
+        foldersCount: 0,
+        rootFolderType: 14,
+        security: { Read: true },
+        tags: [],
+        pinned: false,
+        private: false,
+        indexing: false,
+        denyDownload: false,
+        inRoom: true,
+      },
+      {
+        id: 202,
+        title: "Engineering Room 2",
+        roomType: 6,
+        logo: mockRoomLogo,
+        shared: false,
+        parentId: 2,
+        filesCount: 0,
+        foldersCount: 0,
+        rootFolderType: 14,
+        security: { Read: true },
+        tags: [],
+        pinned: false,
+        private: false,
+        indexing: false,
+        denyDownload: false,
+        inRoom: true,
+      },
     ],
   },
 ];
@@ -133,9 +228,8 @@ export const createRoomGroupHandler = (port: string) => {
             icon: {
               id: "folder",
               data: {
-                small: FOLDER_ICON_SVG,
-                medium: FOLDER_ICON_SVG,
-                large: FOLDER_ICON_SVG,
+                small: FOLDER_ICON_SVG_SMALL,
+                default: FOLDER_ICON_SVG,
               },
             },
             rooms: [],

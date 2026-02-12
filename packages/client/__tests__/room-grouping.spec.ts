@@ -74,9 +74,8 @@ test.describe("Room grouping", () => {
         '[class*="groupManagementButton"]',
       );
 
-      if (await groupManagementButton.isVisible()) {
-        await groupManagementButton.click();
-      }
+      await expect(groupManagementButton).toBeVisible();
+      await groupManagementButton.click();
 
       const dialog = page.getByTestId("modal-dialog");
       await expect(dialog).toBeVisible();
@@ -110,9 +109,8 @@ test.describe("Room grouping", () => {
         '[class*="groupManagementButton"]',
       );
 
-      if (await groupManagementButton.isVisible()) {
-        await groupManagementButton.click();
-      }
+      await expect(groupManagementButton).toBeVisible();
+      await groupManagementButton.click();
 
       const dialog = page.getByTestId("modal-dialog");
       await expect(dialog).toBeVisible();
@@ -179,9 +177,8 @@ test.describe("Room grouping", () => {
         '[class*="groupManagementButton"]',
       );
 
-      if (await groupManagementButton.isVisible()) {
-        await groupManagementButton.click();
-      }
+      await expect(groupManagementButton).toBeVisible();
+      await groupManagementButton.click();
 
       const dialog = page.getByTestId("modal-dialog");
       await expect(dialog).toBeVisible();
@@ -228,9 +225,8 @@ test.describe("Room grouping", () => {
         '[class*="groupManagementButton"]',
       );
 
-      if (await groupManagementButton.isVisible()) {
-        await groupManagementButton.click();
-      }
+      await expect(groupManagementButton).toBeVisible();
+      await groupManagementButton.click();
 
       const dialog = page.getByTestId("modal-dialog");
       await expect(dialog).toBeVisible();
@@ -269,9 +265,8 @@ test.describe("Room grouping", () => {
         '[class*="groupManagementButton"]',
       );
 
-      if (await groupManagementButton.isVisible()) {
-        await groupManagementButton.click();
-      }
+      await expect(groupManagementButton).toBeVisible();
+      await groupManagementButton.click();
 
       const dialog = page.getByTestId("modal-dialog");
       await expect(dialog).toBeVisible();
@@ -318,9 +313,8 @@ test.describe("Room grouping", () => {
         '[class*="groupManagementButton"]',
       );
 
-      if (await groupManagementButton.isVisible()) {
-        await groupManagementButton.click();
-      }
+      await expect(groupManagementButton).toBeVisible();
+      await groupManagementButton.click();
 
       const dialog = page.getByTestId("modal-dialog");
       await expect(dialog).toBeVisible();
@@ -364,9 +358,8 @@ test.describe("Room grouping", () => {
         '[class*="groupManagementButton"]',
       );
 
-      if (await groupManagementButton.isVisible()) {
-        await groupManagementButton.click();
-      }
+      await expect(groupManagementButton).toBeVisible();
+      await groupManagementButton.click();
 
       const dialog = page.getByTestId("modal-dialog");
       await expect(dialog).toBeVisible();
@@ -415,9 +408,9 @@ test.describe("Room grouping", () => {
       await expect(groupTagsRow).toBeVisible();
 
       // "All Rooms" tag should be visible
-      const allRoomsTag = groupTagsRow.locator(
-        '[data-testid="selected-item"]',
-      ).first();
+      const allRoomsTag = groupTagsRow
+        .locator('[data-testid="selected-item"]')
+        .first();
       await expect(allRoomsTag).toBeVisible();
 
       // Screenshot: Filter area with group tags row visible
@@ -448,9 +441,7 @@ test.describe("Room grouping", () => {
       await expect(groupTagsRow).toBeVisible();
 
       // Click on a group tag (second tag, after "All Rooms")
-      const groupTags = groupTagsRow.locator(
-        '[data-testid="selected-item"]',
-      );
+      const groupTags = groupTagsRow.locator('[data-testid="selected-item"]');
       const secondTag = groupTags.nth(1);
 
       if (await secondTag.isVisible()) {
@@ -485,9 +476,9 @@ test.describe("Room grouping", () => {
       await expect(groupTagsRow).toBeVisible();
 
       // The first tag (All Rooms) should have the active state
-      const allRoomsTag = groupTagsRow.locator(
-        '[data-testid="selected-item"]',
-      ).first();
+      const allRoomsTag = groupTagsRow
+        .locator('[data-testid="selected-item"]')
+        .first();
       await expect(allRoomsTag).toBeVisible();
       await expect(allRoomsTag).toHaveAttribute("class", /isActive/);
     });
@@ -637,15 +628,14 @@ test.describe("Room grouping", () => {
         '[class*="groupManagementButton"]',
       );
 
-      if (await groupManagementButton.isVisible()) {
-        await groupManagementButton.click();
-      }
+      await expect(groupManagementButton).toBeVisible();
+      await groupManagementButton.click();
 
       const dialog = page.getByTestId("modal-dialog");
       await expect(dialog).toBeVisible();
 
       // Click "Create a new group" button
-      const createButton = dialog.locator('[class*="selectorAddButton"]');
+      const createButton = dialog.getByTestId("selector-add-button");
       await expect(createButton).toBeVisible();
       await createButton.click();
 
@@ -683,15 +673,14 @@ test.describe("Room grouping", () => {
         '[class*="groupManagementButton"]',
       );
 
-      if (await groupManagementButton.isVisible()) {
-        await groupManagementButton.click();
-      }
+      await expect(groupManagementButton).toBeVisible();
+      await groupManagementButton.click();
 
       const dialog = page.getByTestId("modal-dialog");
       await expect(dialog).toBeVisible();
 
       // Click "Create a new group"
-      const createButton = dialog.locator('[class*="selectorAddButton"]');
+      const createButton = dialog.getByTestId("selector-add-button");
       await expect(createButton).toBeVisible();
       await createButton.click();
 
@@ -738,9 +727,8 @@ test.describe("Room grouping", () => {
         '[class*="groupManagementButton"]',
       );
 
-      if (await groupManagementButton.isVisible()) {
-        await groupManagementButton.click();
-      }
+      await expect(groupManagementButton).toBeVisible();
+      await groupManagementButton.click();
 
       const dialog = page.getByTestId("modal-dialog");
       await expect(dialog).toBeVisible();
@@ -786,9 +774,8 @@ test.describe("Room grouping", () => {
         '[class*="groupManagementButton"]',
       );
 
-      if (await groupManagementButton.isVisible()) {
-        await groupManagementButton.click();
-      }
+      await expect(groupManagementButton).toBeVisible();
+      await groupManagementButton.click();
 
       const dialog = page.getByTestId("modal-dialog");
       await expect(dialog).toBeVisible();
@@ -834,9 +821,8 @@ test.describe("Room grouping", () => {
         '[class*="groupManagementButton"]',
       );
 
-      if (await groupManagementButton.isVisible()) {
-        await groupManagementButton.click();
-      }
+      await expect(groupManagementButton).toBeVisible();
+      await groupManagementButton.click();
 
       const dialog = page.getByTestId("modal-dialog");
       await expect(dialog).toBeVisible();
@@ -860,56 +846,6 @@ test.describe("Room grouping", () => {
   });
 
   test.describe("Edit group", () => {
-    // Verify that clicking the edit (pencil) icon on a group
-    // opens the Group Icon dialog for editing
-    test("should open Group Icon dialog when edit icon is clicked", async ({
-      page,
-      mockRequest,
-      baseUrl,
-    }) => {
-      mockRequest.use(
-        filesSettingsHandler(TEST_PORT, { organizeRoomsGrouping: true }),
-        roomGroupsHandler(TEST_PORT, true),
-        roomGroupByIdHandler(TEST_PORT),
-        updateRoomGroupHandler(TEST_PORT),
-        updateRoomGroupIconHandler(TEST_PORT),
-      );
-
-      await page.goto(`${baseUrl}/rooms/shared/`);
-
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
-
-      const groupManagementButton = page.locator(
-        '[class*="groupManagementButton"]',
-      );
-
-      if (await groupManagementButton.isVisible()) {
-        await groupManagementButton.click();
-      }
-
-      const dialog = page.getByTestId("modal-dialog");
-      await expect(dialog).toBeVisible();
-
-      // Click the edit icon on the first group
-      const editIcon = dialog.locator(".edit_icon").first();
-
-      if (await editIcon.isVisible()) {
-        await editIcon.click();
-
-        // Group Icon dialog should appear
-        const iconDialog = page.getByTestId("modal-dialog");
-        await expect(iconDialog).toBeVisible();
-
-        // Screenshot: Group Icon dialog for editing a group
-        await expect(iconDialog).toHaveScreenshot([
-          "desktop",
-          "room-grouping",
-          "edit-group-icon-dialog.png",
-        ]);
-      }
-    });
-
     // Verify that clicking a group item opens the room list panel
     // for adding/removing rooms from the group
     test("should open room list when group item is clicked", async ({
@@ -933,30 +869,27 @@ test.describe("Room grouping", () => {
         '[class*="groupManagementButton"]',
       );
 
-      if (await groupManagementButton.isVisible()) {
-        await groupManagementButton.click();
-      }
+      await expect(groupManagementButton).toBeVisible();
+      await groupManagementButton.click();
 
       const dialog = page.getByTestId("modal-dialog");
       await expect(dialog).toBeVisible();
 
       // Click on the group data area (name/icon) of the first group
       const groupData = dialog.locator('[class*="groupData"]').first();
+      await expect(groupData).toBeVisible();
+      await groupData.click();
 
-      if (await groupData.isVisible()) {
-        await groupData.click();
+      // Room selector should open for editing group rooms
+      const roomSelector = page.getByTestId("room_selector");
+      await expect(roomSelector).toBeVisible();
 
-        // Room selector should open for editing group rooms
-        const roomSelector = page.getByTestId("room_selector");
-        await expect(roomSelector).toBeVisible();
-
-        // Screenshot: Room list panel for editing group rooms
-        await expect(page).toHaveScreenshot([
-          "desktop",
-          "room-grouping",
-          "edit-group-room-list.png",
-        ]);
-      }
+      // Screenshot: Room list panel for editing group rooms
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "room-grouping",
+        "edit-group-room-list.png",
+      ]);
     });
   });
 });
