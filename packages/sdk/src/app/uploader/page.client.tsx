@@ -219,7 +219,11 @@ export default function UploaderClient({
       linkSecondaryText={
         baseConfig?.linkSecondaryText ?? t("Common:DropzoneTitleSecondary")
       }
-      exstsText={baseConfig?.extensionsText ?? shortText}
+      exstsText={
+        (baseConfig?.extensionsText ?? shortText)
+          ? shortText
+          : t("Common:AnyFiles")
+      }
       fullExstsText={fullText}
       formatsPlusBadgeValue={badgeValue}
       dataTestId="sdk-uploader"
