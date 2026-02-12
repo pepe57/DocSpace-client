@@ -29,7 +29,11 @@ import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_QUOTA = "portal/payment/quota";
 
-export const quotaSuccess = (withCustomization: boolean = true) => ({
+export const quotaSuccess = (
+  withCustomization: boolean = true,
+  lifetime: boolean = true,
+  trial: boolean = false,
+) => ({
   response: {
     id: -10,
     title: "Business",
@@ -38,7 +42,7 @@ export const quotaSuccess = (withCustomization: boolean = true) => ({
     },
     nonProfit: false,
     free: false,
-    trial: false,
+    trial,
     features: [
       {
         id: "manager",
@@ -167,6 +171,11 @@ export const quotaSuccess = (withCustomization: boolean = true) => ({
           value: 8,
         },
       },
+      {
+        id: "lifetime",
+        type: "flag",
+        value: lifetime,
+      },
     ],
     usersQuota: {
       enableQuota: false,
@@ -201,15 +210,23 @@ export const quotaSuccess = (withCustomization: boolean = true) => ({
   ok: true,
 });
 
-export const quotaResolver = (withCustomization: boolean = true) => {
-  return new Response(JSON.stringify(quotaSuccess(withCustomization)));
+export const quotaResolver = (
+  withCustomization: boolean = true,
+  lifetime: boolean = true,
+  trial: boolean = false,
+) => {
+  return new Response(
+    JSON.stringify(quotaSuccess(withCustomization, lifetime, trial)),
+  );
 };
 
 export const quotaHandler = (
   port: string,
   withCustomization: boolean = true,
+  lifetime: boolean = true,
+  trial: boolean = false,
 ) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_QUOTA}`, () => {
-    return quotaResolver(withCustomization);
+    return quotaResolver(withCustomization, lifetime, trial);
   });
 };
