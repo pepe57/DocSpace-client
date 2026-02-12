@@ -69,7 +69,7 @@ export const BenefitsContainer = ({
           techSupport,
         ];
 
-      if (isEnterprise)
+      if (isEnterprise && !isDeveloper)
         return [
           scalabilityClustering,
           mobileEditing,
