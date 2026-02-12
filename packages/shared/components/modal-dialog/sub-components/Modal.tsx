@@ -76,6 +76,7 @@ const Modal = ({
   scrollbarCreateContext,
   backdropVisible = true,
   closeOnBackdropClick = true,
+  ref,
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
@@ -196,6 +197,7 @@ const Modal = ({
         [styles.modalActive]: visible,
       })}
       data-testid={dataTestId ?? "modal"}
+      ref={ref}
     >
       <ModalBackdrop
         className={classNames({

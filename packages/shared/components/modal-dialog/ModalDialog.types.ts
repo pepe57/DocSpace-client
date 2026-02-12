@@ -109,6 +109,9 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   scrollbarCreateContext?: boolean;
   /** Controls the visibility of the backdrop overlay */
   backdropVisible?: boolean;
+
+  /** Ref for modal */
+  ref?: React.RefObject<HTMLDivElement | null>;
 };
 
 export type ModalDialogProps = Partial<

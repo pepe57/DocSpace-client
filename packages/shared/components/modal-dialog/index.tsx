@@ -100,7 +100,6 @@ const ModalDialog = ({
   hideContent = false,
   dataTestId,
   backdropVisible,
-
   ...rest
 }: ModalDialogProps) => {
   const onCloseEvent = React.useCallback(
