@@ -215,7 +215,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Fetch ui-kit submodule from develop
-        run: git submodule update --init --remote libs/ui-kit
+        run: |
+          git config --global url."https://git.onlyoffice.com/".insteadOf "git@git.onlyoffice.com:"
+          git submodule update --init --remote libs/ui-kit
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -438,7 +440,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Fetch ui-kit submodule from develop
-        run: git submodule update --init --remote libs/ui-kit
+        run: |
+          git config --global url."https://git.onlyoffice.com/".insteadOf "git@git.onlyoffice.com:"
+          git submodule update --init --remote libs/ui-kit
       - name: Cleanup existing containers
         run: docker ps -a --filter name=client-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -465,7 +469,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Fetch ui-kit submodule from develop
-        run: git submodule update --init --remote libs/ui-kit
+        run: |
+          git config --global url."https://git.onlyoffice.com/".insteadOf "git@git.onlyoffice.com:"
+          git submodule update --init --remote libs/ui-kit
       - name: Cleanup existing containers
         run: docker ps -a --filter name=login-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -492,7 +498,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Fetch ui-kit submodule from develop
-        run: git submodule update --init --remote libs/ui-kit
+        run: |
+          git config --global url."https://git.onlyoffice.com/".insteadOf "git@git.onlyoffice.com:"
+          git submodule update --init --remote libs/ui-kit
       - name: Cleanup existing containers
         run: docker ps -a --filter name=doceditor-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -519,7 +527,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Fetch ui-kit submodule from develop
-        run: git submodule update --init --remote libs/ui-kit
+        run: |
+          git config --global url."https://git.onlyoffice.com/".insteadOf "git@git.onlyoffice.com:"
+          git submodule update --init --remote libs/ui-kit
       - name: Cleanup existing containers
         run: docker ps -a --filter name=sdk-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -546,7 +556,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Fetch ui-kit submodule from develop
-        run: git submodule update --init --remote libs/ui-kit
+        run: |
+          git config --global url."https://git.onlyoffice.com/".insteadOf "git@git.onlyoffice.com:"
+          git submodule update --init --remote libs/ui-kit
       - name: Cleanup existing containers
         run: docker ps -a --filter name=management-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
