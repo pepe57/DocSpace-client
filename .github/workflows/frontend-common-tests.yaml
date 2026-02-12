@@ -214,8 +214,10 @@ jobs:
       licenses_result: ${{ steps.licenses.outputs.result }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
+      - name: Fetch ui-kit submodule from develop
+        run: |
+          git config --global url."https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/".insteadOf "git@git.onlyoffice.com:"
+          git submodule update --init --remote libs/ui-kit
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -437,8 +439,10 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
+      - name: Fetch ui-kit submodule from develop
+        run: |
+          git config --global url."https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/".insteadOf "git@git.onlyoffice.com:"
+          git submodule update --init --remote libs/ui-kit
       - name: Cleanup existing containers
         run: docker ps -a --filter name=client-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -464,8 +468,10 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
+      - name: Fetch ui-kit submodule from develop
+        run: |
+          git config --global url."https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/".insteadOf "git@git.onlyoffice.com:"
+          git submodule update --init --remote libs/ui-kit
       - name: Cleanup existing containers
         run: docker ps -a --filter name=login-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -491,8 +497,10 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
+      - name: Fetch ui-kit submodule from develop
+        run: |
+          git config --global url."https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/".insteadOf "git@git.onlyoffice.com:"
+          git submodule update --init --remote libs/ui-kit
       - name: Cleanup existing containers
         run: docker ps -a --filter name=doceditor-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -518,8 +526,10 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
+      - name: Fetch ui-kit submodule from develop
+        run: |
+          git config --global url."https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/".insteadOf "git@git.onlyoffice.com:"
+          git submodule update --init --remote libs/ui-kit
       - name: Cleanup existing containers
         run: docker ps -a --filter name=sdk-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -545,8 +555,10 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
+      - name: Fetch ui-kit submodule from develop
+        run: |
+          git config --global url."https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/".insteadOf "git@git.onlyoffice.com:"
+          git submodule update --init --remote libs/ui-kit
       - name: Cleanup existing containers
         run: docker ps -a --filter name=management-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
