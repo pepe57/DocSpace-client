@@ -7,6 +7,7 @@
   "AllTypesSupportedByEditor": "All types supported by {{organizationName}} editors",
   "APILink": "API library",
   "Ascending": "Ascending",
+  "AvailableFileTypes": "Available file types",
   "ButtonColor": "Button color",
   "ButtonCustomization": "Button customization",
   "ButtonText": "Button text",
@@ -48,7 +49,6 @@
   "FileContentCopy": "File content copy restriction",
   "FileFilter": "File Filter",
   "FileId": "File ID",
-  "FileTypes": "File types",
   "FilePreview": "File preview",
   "FileSelectorDescription": "Embed a file selector to allow users to access any file from the list of the available ones.",
   "FilesSearchDescription": "File search within the opened folder/room.",
@@ -120,5 +120,6 @@
   "TabPlugins": "Tab Plugins",
   "ViewerDescription": "Embed a viewer to allow users to open a file for viewing from the corresponding room.",
   "CreateSampleUploader": "Create sample Uploader embed",
-  "UploaderDescription": "Embed an uploader to allow users to upload files to the selected folder."
+  "UploaderDescription": "Embed an uploader to allow users to upload files to the selected folder.",
+  "UploaderPresetInfo": "Embed the uploader so that users can upload documents to your space without registration. Choose the allowed file types for upload."
 }

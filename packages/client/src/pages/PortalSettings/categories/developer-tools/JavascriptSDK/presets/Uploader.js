@@ -24,12 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
+import debounce from "lodash.debounce";
 import { Label } from "@docspace/shared/components/label";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import { TextInput } from "@docspace/shared/components/text-input";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
@@ -156,6 +158,26 @@ const Uploader = (props) => {
     });
   };
 
+  const debouncedSetLinkMainText = useCallback(
+    debounce((newText) => {
+      setConfig((oldConfig) => ({
+        ...oldConfig,
+        linkMainText: newText,
+        init: true,
+      }));
+    }, 500),
+    [setConfig],
+  );
+
+  const onChangeLinkMainText = (e) => {
+    const newText = e.target.value;
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      linkMainText: newText,
+    }));
+    debouncedSetLinkMainText(newText);
+  };
+
   const getSelectedExtensions = () => {
     return config.acceptExtensions ? config.acceptExtensions.split(",") : [];
   };
@@ -203,7 +225,7 @@ const Uploader = (props) => {
 
   return (
     <PresetWrapper
-      description={t("UploaderDescription")}
+      description={t("UploaderPresetInfo")}
       header={t("CreateSampleUploader")}
     >
       <Container>
@@ -238,7 +260,7 @@ const Uploader = (props) => {
           </ControlsSection>
 
           <ControlsSection>
-            <CategorySubHeader>{t("FileTypes")}</CategorySubHeader>
+            <CategorySubHeader>{t("AvailableFileTypes")}</CategorySubHeader>
             <CheckboxGroup>
               {FILE_TYPE_CATEGORIES.map((category) => (
                 <Checkbox
@@ -251,9 +273,18 @@ const Uploader = (props) => {
                 />
               ))}
             </CheckboxGroup>
-          </ControlsSection>
 
-          <ControlsSection>
+            <ControlsGroup>
+              <Label className="label" text={t("ButtonText")} />
+              <TextInput
+                scale
+                value={config.linkMainText}
+                onChange={onChangeLinkMainText}
+                tabIndex={5}
+                testId="button_text_input"
+              />
+            </ControlsGroup>
+
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
             <WidthSetter
               t={t}
