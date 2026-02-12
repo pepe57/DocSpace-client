@@ -92,6 +92,7 @@ beforeAll(() => {
 		"storybook-static",
 		"node_modules",
 		".meta",
+		"scripts",
 	];
 
 	const translations = workspaces.flatMap((wsPath) => {
