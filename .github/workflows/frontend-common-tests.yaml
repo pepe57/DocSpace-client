@@ -43,7 +43,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          submodules: 'true'
+          path: "."
       - name: Detect file changes
         id: changes
         shell: bash
@@ -214,6 +215,12 @@ jobs:
       licenses_result: ${{ steps.licenses.outputs.result }}
     steps:
       - uses: actions/checkout@v4
+      - name: Fetch ui-kit submodule from develop
+        run: |
+          git clone https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/${{ github.repository_owner }}/docspace-ui-kit-react.git libs/ui-kit
+          cd libs/ui-kit
+          git checkout develop
+          git pull origin develop
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -435,6 +442,12 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Fetch ui-kit submodule from develop
+        run: |
+          git clone https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/${{ github.repository_owner }}/docspace-ui-kit-react.git libs/ui-kit
+          cd libs/ui-kit
+          git checkout develop
+          git pull origin develop
       - name: Cleanup existing containers
         run: docker ps -a --filter name=client-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -460,6 +473,12 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Fetch ui-kit submodule from develop
+        run: |
+          git clone https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/${{ github.repository_owner }}/docspace-ui-kit-react.git libs/ui-kit
+          cd libs/ui-kit
+          git checkout develop
+          git pull origin develop
       - name: Cleanup existing containers
         run: docker ps -a --filter name=login-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -485,6 +504,12 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Fetch ui-kit submodule from develop
+        run: |
+          git clone https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/${{ github.repository_owner }}/docspace-ui-kit-react.git libs/ui-kit
+          cd libs/ui-kit
+          git checkout develop
+          git pull origin develop
       - name: Cleanup existing containers
         run: docker ps -a --filter name=doceditor-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -510,6 +535,12 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Fetch ui-kit submodule from develop
+        run: |
+          git clone https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/${{ github.repository_owner }}/docspace-ui-kit-react.git libs/ui-kit
+          cd libs/ui-kit
+          git checkout develop
+          git pull origin develop
       - name: Cleanup existing containers
         run: docker ps -a --filter name=sdk-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -535,6 +566,12 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Fetch ui-kit submodule from develop
+        run: |
+          git clone https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/${{ github.repository_owner }}/docspace-ui-kit-react.git libs/ui-kit
+          cd libs/ui-kit
+          git checkout develop
+          git pull origin develop
       - name: Cleanup existing containers
         run: docker ps -a --filter name=management-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
