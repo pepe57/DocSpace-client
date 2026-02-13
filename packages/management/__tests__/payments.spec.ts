@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { colorThemeHandler } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Payments", () => {
@@ -37,7 +38,7 @@ test.describe("Payments", () => {
 
     await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "payments",
       "payments-render.png",
