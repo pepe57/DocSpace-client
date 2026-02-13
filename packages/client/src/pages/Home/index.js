@@ -117,8 +117,6 @@ const PureHome = (props) => {
 
     contactsViewAs,
 
-    onClickBack,
-
     showFilterLoader,
     showHeaderLoader,
 
@@ -325,13 +323,10 @@ const PureHome = (props) => {
   );
 
   React.useEffect(() => {
-    window.addEventListener("popstate", onClickBack);
-
     return () => {
       setSelectedFolder(null);
-      window.removeEventListener("popstate", onClickBack);
     };
-  }, []);
+  }, [setSelectedFolder]);
 
   let sectionProps = {};
 
@@ -647,7 +642,7 @@ export const Component = inject(
 
     const { startUpload } = uploadDataStore;
 
-    const { createFoldersTree, onClickBack } = filesActionsStore;
+    const { createFoldersTree } = filesActionsStore;
 
     const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
@@ -768,7 +763,6 @@ export const Component = inject(
       isEmptyPage,
 
       setSelectedNode,
-      onClickBack,
 
       showFilterLoader,
       showHeaderLoader,
