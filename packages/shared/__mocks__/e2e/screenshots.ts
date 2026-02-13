@@ -35,8 +35,6 @@ export const expectScreenshot = async (
   name: string | string[],
   options?: PageAssertionsToHaveScreenshotOptions,
 ) => {
-  // Wait for fonts to load
-  await page.evaluate(() => document.fonts.ready);
   // Add delay to ensure fonts are fully rendered on slower machines
   await page.waitForTimeout(500);
   await expect(page).toHaveScreenshot(name, options);
