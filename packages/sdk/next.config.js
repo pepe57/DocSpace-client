@@ -86,6 +86,7 @@ const nextConfig = {
       alias: {
         ...config.resolve?.alias,
         "@docspace/shared": path.resolve(__dirname, "../shared"),
+        "@docspace/ui-kit": path.resolve(__dirname, "../../libs/ui-kit"),
       },
     };
 

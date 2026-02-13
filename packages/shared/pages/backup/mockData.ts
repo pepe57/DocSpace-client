@@ -27,7 +27,7 @@
 import { useState } from "react";
 
 import { AutoBackupPeriod, ThirdPartyStorages } from "../../enums";
-import type { TOption } from "../../components/combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 import type {
   ConnectedThirdPartyAccountType,
   Nullable,

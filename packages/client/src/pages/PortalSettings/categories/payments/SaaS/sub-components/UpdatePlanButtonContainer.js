@@ -29,15 +29,15 @@ import { inject, observer } from "mobx-react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { toastr } from "@docspace/shared/components/toast";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import api from "@docspace/shared/api";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { updatePayment } from "@docspace/shared/api/portal";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
 import ChangePricingPlanDialog from "../../../../../../components/dialogs/ChangePricingPlanDialog";

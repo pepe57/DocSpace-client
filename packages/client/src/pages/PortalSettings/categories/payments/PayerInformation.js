@@ -26,16 +26,16 @@
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import styled from "styled-components";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Avatar } from "@docspace/shared/components/avatar";
-import { toastr } from "@docspace/shared/components/toast";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Avatar } from "@docspace/ui-kit/components/avatar";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 import { useState } from "react";
-import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 const StyledContainer = styled.div`
   display: flex;

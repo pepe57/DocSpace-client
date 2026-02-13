@@ -31,20 +31,20 @@ import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TFunction } from "i18next";
 
-import { Text } from "../../../components/text";
-import { Button } from "../../../components/button";
-import { Link, LinkTarget } from "../../../components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { RadioButton } from "@docspace/ui-kit/components/radio-button";
 import { startBackup } from "../../../api/portal";
-import { RadioButton } from "../../../components/radio-button";
-import { toastr } from "../../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { BackupStorageLocalKey, BackupStorageType } from "../../../enums";
-import StatusMessage from "../../../components/status-message";
+import StatusMessage from "@docspace/ui-kit/components/status-message";
 import SocketHelper, {
   SocketEvents,
   TSocketListener,
 } from "../../../utils/socket";
 import { OPERATIONS_NAME } from "../../../constants";
-import OperationsProgressButton from "../../../components/operations-progress-button";
+import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
 import DataBackupLoader from "../../../skeletons/backup/DataBackup";
 import { getBackupProgressInfo, getErrorInfo } from "../../../utils/common";
 import { getFromLocalStorage } from "../../../utils";
@@ -426,7 +426,7 @@ const ManualBackup = ({
             href={dataBackupUrl}
             target={LinkTarget.blank}
             fontSize="13px"
-            color={currentColorScheme?.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             isHovered
             dataTestId="creating_backup_learn_link"
           >

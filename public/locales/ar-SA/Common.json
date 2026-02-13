@@ -1051,5 +1051,7 @@
   "YourCurrentDomain": "النطاق الحالي الخاص بك",
   "YourLogo": "شعاركم",
   "YourTurn": "دوركم الآن",
-  "ExternalLink": "رابط خارجي"
+  "ExternalLink": "رابط خارجي",
+  "TitleShowFolderActions": "عرض إجراءات المجلد",
+  "TitleShowActions": "عرض إجراءات الملف"
 }

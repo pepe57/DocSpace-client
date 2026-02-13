@@ -29,11 +29,10 @@ import { useTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 
 import { mobile, tablet, isMobile } from "@docspace/shared/utils";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { ICover, TRoom } from "@docspace/shared/api/rooms/types";
-
-import { getRoomTitle } from "@docspace/shared/components/room-icon/RoomIcon.utils";
-import { globalColors } from "@docspace/shared/themes";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { TRoom } from "@docspace/shared/api/rooms/types";
+import { ICover, getRoomTitle } from "@docspace/ui-kit";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { CustomLogo } from "./CustomLogo";
 import { SelectColor } from "./SelectColor/SelectColor";

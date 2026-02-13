@@ -29,20 +29,16 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 import { decode } from "he";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
-import {
-  ContextMenu,
-  ContextMenuRefType,
-} from "@docspace/shared/components/context-menu";
-import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
-import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
-import { Badge } from "@docspace/shared/components/badge";
+} from "@docspace/ui-kit/components/context-menu-button";
+import { ContextMenu, ContextMenuRefType, HeaderType } from "@docspace/ui-kit";
+import { Avatar, AvatarSize } from "@docspace/ui-kit/components/avatar";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";

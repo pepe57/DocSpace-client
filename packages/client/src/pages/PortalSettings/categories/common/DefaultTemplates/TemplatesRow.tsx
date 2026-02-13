@@ -34,14 +34,14 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
-import { Badge } from "@docspace/shared/components/badge";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import { Text } from "@docspace/shared/components/text";
+import { Badge } from "@docspace/ui-kit/components/badge";
+import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
+import { Text } from "@docspace/ui-kit/components/text";
 import { TDefaultTemplateItem } from "@docspace/shared/types";
 import { UrlActionType } from "@docspace/shared/enums";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import {
   getCorrectDate,
-  getCookie,
   getTitleWithoutExtension,
   getUpperCaseExtension,
 } from "@docspace/shared/utils";

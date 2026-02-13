@@ -34,9 +34,9 @@ import { RowSkeleton } from "../../../skeletons/share";
 import { useIsMobile } from "../../../hooks/useIsMobile";
 import type { TFileLink } from "../../../api/files/types";
 
-import type { TOption } from "../../combobox";
-import { ContextMenuButton } from "../../context-menu-button";
-import { toastr } from "../../toast";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
+import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import {
   getAccessTypeOptions,

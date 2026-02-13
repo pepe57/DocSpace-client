@@ -29,13 +29,13 @@
 import { PropsWithChildren } from "react";
 import classNames from "classnames";
 
-import { Text } from "../../../../../../text";
-import { Heading, HeadingLevel } from "../../../../../../heading";
-import { Link, LinkTarget } from "../../../../../../link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 
 import styles from "../../../ChatMessageBody.module.scss";
 import CodeBlock from "../CodeBlock";
-import { Scrollbar } from "../../../../../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 export const Code = ({
   className,

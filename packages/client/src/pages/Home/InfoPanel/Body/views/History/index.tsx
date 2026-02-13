@@ -30,11 +30,11 @@ import { useTranslation } from "react-i18next";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
+import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
 import HistoryItemLoader from "@docspace/shared/skeletons/info-panel/body/views/HistoryItemLoader";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { TTranslation } from "@docspace/shared/types";
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import {
   parseToDateTime,
   now as dateNow,
@@ -44,7 +44,7 @@ import {
   formatDate,
   getWeekdayName,
   isSameDay,
-} from "@docspace/shared/utils/date";
+} from "@docspace/ui-kit/utils/date";
 
 import { useHistory } from "../FilesView/hooks/useHistory";
 
@@ -124,7 +124,7 @@ const History = ({
   });
 
   const onCheckListScroll = () => {
-    if (loading.current) return;
+    if (loading.current || !scrollElement) return;
     const all = scrollElement.scrollHeight;
     const current = scrollElement.scrollTop;
     const more = all - (current + scrollElement.clientHeight) <= 10;

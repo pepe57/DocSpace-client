@@ -30,7 +30,7 @@ import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getOAuthToken, getLoginLink } from "@docspace/shared/utils/common";
 import {
   TCapabilities,

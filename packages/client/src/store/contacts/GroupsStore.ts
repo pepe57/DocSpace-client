@@ -30,7 +30,7 @@ import { TFunction } from "i18next";
 import * as groupsApi from "@docspace/shared/api/groups";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
 import { TGroup } from "@docspace/shared/api/groups/types";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";

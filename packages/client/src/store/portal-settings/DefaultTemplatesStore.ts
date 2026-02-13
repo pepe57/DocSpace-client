@@ -33,8 +33,8 @@ import {
   uploadTemplateFromDevice,
 } from "@docspace/shared/api/files";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { TData } from "@docspace/ui-kit/components/toast";
 import { TDefaultTemplateItem } from "@docspace/shared/types";
 import { TDefaultTemplate } from "@docspace/shared/api/files/types";
 

@@ -26,7 +26,6 @@
 
 import { useMemo } from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { inject, observer } from "mobx-react";
 
@@ -42,8 +41,7 @@ const HeaderNav = ({
   getActions,
   hideProfileMenu,
 }) => {
-  const { t } = useTranslation(["Common"]);
-  const userActions = useMemo(() => getActions(t), [getActions, t]);
+  const userActions = useMemo(() => getActions(), [getActions]);
 
   return (
     <nav className={classNames(styles.nav, "profileMenuIcon", "hidingHeader")}>

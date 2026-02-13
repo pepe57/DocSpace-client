@@ -28,14 +28,14 @@ import React, { use } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
-  TBreadCrumb,
-  TSelectorItem,
-} from "../../../components/selector/Selector.types";
+	TBreadCrumb,
+	TSelectorItem,
+} from "@docspace/ui-kit/components/selector";
 import {
-  TFolderSecurity,
-  TFileSecurity,
-  TFolder,
-  TFile,
+	TFolderSecurity,
+	TFileSecurity,
+	TFolder,
+	TFile,
 } from "../../../api/files/types";
 import { TRoom, TRoomSecurity } from "../../../api/rooms/types";
 import { TTranslation } from "../../../types";
@@ -43,192 +43,192 @@ import { FileType, FolderType } from "../../../enums";
 
 import { FilesSelectorProps, TFilesSelectorInit } from "../FilesSelector.types";
 import {
-  convertFoldersToItems,
-  convertRoomsToItems,
-  convertFilesToItems,
+	convertFoldersToItems,
+	convertRoomsToItems,
+	convertFilesToItems,
 } from "../../utils";
 import { SettingsContext } from "../../utils/contexts/Settings";
 
 type UseSelectorStateProps = Pick<
-  FilesSelectorProps,
-  | "checkCreating"
-  | "filterParam"
-  | "disabledItems"
-  | "withCreate"
-  | "disableBySecurity"
+	FilesSelectorProps,
+	| "checkCreating"
+	| "filterParam"
+	| "disabledItems"
+	| "withCreate"
+	| "disableBySecurity"
 >;
 
 const transformInitItems = (
-  items: (TFolder | TFile | TRoom)[],
-  disabledItems: (string | number)[],
-  withCreate: boolean,
-  t: TTranslation,
-  getIcon: (fileExst: string) => string,
-  initSelectedItemType?: string,
-  filterParam?: string | number,
-  disableBySecurity?: string,
+	items: (TFolder | TFile | TRoom)[],
+	disabledItems: (string | number)[],
+	withCreate: boolean,
+	t: TTranslation,
+	getIcon: (fileExst: string) => string,
+	initSelectedItemType?: string,
+	filterParam?: string | number,
+	disableBySecurity?: string,
 ) => {
-  const rooms = convertRoomsToItems(
-    items.filter((item) => "roomType" in item && item.roomType) as TRoom[],
-    t,
-  );
-  const folders = convertFoldersToItems(
-    items.filter(
-      (item) => "parentId" in item && item.parentId && !item.roomType,
-    ) as TFolder[],
-    disabledItems,
-    filterParam,
-  );
-  const files = convertFilesToItems(
-    items.filter((item) => "folderId" in item && item.folderId) as TFile[],
-    getIcon,
-    filterParam,
-    undefined,
-    disableBySecurity,
-  );
+	const rooms = convertRoomsToItems(
+		items.filter((item) => "roomType" in item && item.roomType) as TRoom[],
+		t,
+	);
+	const folders = convertFoldersToItems(
+		items.filter(
+			(item) => "parentId" in item && item.parentId && !item.roomType,
+		) as TFolder[],
+		disabledItems,
+		filterParam,
+	);
+	const files = convertFilesToItems(
+		items.filter((item) => "folderId" in item && item.folderId) as TFile[],
+		getIcon,
+		filterParam,
+		undefined,
+		disableBySecurity,
+	);
 
-  return [
-    ...((withCreate && [
-      {
-        isCreateNewItem: true,
-        label: initSelectedItemType === "files" ? t("NewFolder") : t("NewRoom"),
-        id: "create-folder-item",
-        key: "create-folder-item",
-        hotkey: "f",
-        onBackClick: () => {},
-      },
-    ]) ||
-      []),
-    ...rooms,
-    ...folders,
-    ...files,
-  ];
+	return [
+		...((withCreate && [
+			{
+				isCreateNewItem: true,
+				label: initSelectedItemType === "files" ? t("NewFolder") : t("NewRoom"),
+				id: "create-folder-item",
+				key: "create-folder-item",
+				hotkey: "f",
+				onBackClick: () => {},
+			},
+		]) ||
+			[]),
+		...rooms,
+		...folders,
+		...files,
+	];
 };
 
 const useSelectorState = ({
-  checkCreating,
-  disabledItems,
-  filterParam,
-  withCreate,
+	checkCreating,
+	disabledItems,
+	filterParam,
+	withCreate,
 
-  withInit,
-  initBreadCrumbs,
-  initHasNextPage,
-  initItems,
-  initSearchValue,
-  initSelectedItemId,
-  initSelectedItemType,
-  initTotal,
+	withInit,
+	initBreadCrumbs,
+	initHasNextPage,
+	initItems,
+	initSearchValue,
+	initSelectedItemId,
+	initSelectedItemType,
+	initTotal,
 
-  disableBySecurity,
+	disableBySecurity,
 }: UseSelectorStateProps & TFilesSelectorInit) => {
-  const { t } = useTranslation(["Common"]);
-  const { getIcon } = use(SettingsContext);
+	const { t } = useTranslation(["Common"]);
+	const { getIcon } = use(SettingsContext);
 
-  const [breadCrumbs, setBreadCrumbs] = React.useState<TBreadCrumb[]>(
-    withInit ? initBreadCrumbs : [],
-  );
-  const [searchValue, setSearchValue] = React.useState<string>(
-    withInit && initSearchValue ? initSearchValue : "",
-  );
-  const [items, setItems] = React.useState<TSelectorItem[]>(
-    withInit
-      ? transformInitItems(
-          initItems,
-          disabledItems,
-          withCreate,
-          t,
-          getIcon,
-          initSelectedItemType,
-          filterParam,
-          disableBySecurity,
-        )
-      : [],
-  );
-  const [selectedItemType, setSelectedItemType] = React.useState<
-    "rooms" | "files" | "agents" | undefined
-  >(withInit ? initSelectedItemType : undefined);
-  const [selectedItemId, setSelectedItemId] = React.useState<
-    number | string | undefined
-  >(withInit ? initSelectedItemId : undefined);
-  const [selectedItemSecurity, setSelectedItemSecurity] = React.useState<
-    TRoomSecurity | TFolderSecurity | TFileSecurity | undefined
-  >(undefined);
-  const [selectedTreeNode, setSelectedTreeNode] = React.useState({} as TFolder);
-  const [selectedFileInfo, setSelectedFileInfo] = React.useState<{
-    id: number | string;
-    title: string;
-    path?: string[];
-    fileExst?: string;
-    fileType?: FileType;
-    viewUrl?: string;
-    inPublic?: boolean;
-  } | null>(null);
-  const [total, setTotal] = React.useState<number>(withInit ? initTotal : 0);
-  const [hasNextPage, setHasNextPage] = React.useState<boolean>(
-    withInit ? initHasNextPage : false,
-  );
-  const [isSelectedParentFolder, setIsSelectedParentFolder] =
-    React.useState<boolean>(false);
-  const [isDisabledFolder, setIsDisabledFolder] = React.useState<
-    boolean | undefined
-  >(checkCreating);
-  const [isInit, setIsInit] = React.useState<boolean>(!withInit);
-  const [isInsideKnowledge, setIsInsideKnowledge] =
-    React.useState<boolean>(false);
-  const [isInsideResultStorage, setIsInsideResultStorage] =
-    React.useState<boolean>(false);
+	const [breadCrumbs, setBreadCrumbs] = React.useState<TBreadCrumb[]>(
+		withInit ? initBreadCrumbs : [],
+	);
+	const [searchValue, setSearchValue] = React.useState<string>(
+		withInit && initSearchValue ? initSearchValue : "",
+	);
+	const [items, setItems] = React.useState<TSelectorItem[]>(
+		withInit
+			? transformInitItems(
+					initItems,
+					disabledItems,
+					withCreate,
+					t,
+					getIcon,
+					initSelectedItemType,
+					filterParam,
+					disableBySecurity,
+				)
+			: [],
+	);
+	const [selectedItemType, setSelectedItemType] = React.useState<
+		"rooms" | "files" | "agents" | undefined
+	>(withInit ? initSelectedItemType : undefined);
+	const [selectedItemId, setSelectedItemId] = React.useState<
+		number | string | undefined
+	>(withInit ? initSelectedItemId : undefined);
+	const [selectedItemSecurity, setSelectedItemSecurity] = React.useState<
+		TRoomSecurity | TFolderSecurity | TFileSecurity | undefined
+	>(undefined);
+	const [selectedTreeNode, setSelectedTreeNode] = React.useState({} as TFolder);
+	const [selectedFileInfo, setSelectedFileInfo] = React.useState<{
+		id: number | string;
+		title: string;
+		path?: string[];
+		fileExst?: string;
+		fileType?: FileType;
+		viewUrl?: string;
+		inPublic?: boolean;
+	} | null>(null);
+	const [total, setTotal] = React.useState<number>(withInit ? initTotal : 0);
+	const [hasNextPage, setHasNextPage] = React.useState<boolean>(
+		withInit ? initHasNextPage : false,
+	);
+	const [isSelectedParentFolder, setIsSelectedParentFolder] =
+		React.useState<boolean>(false);
+	const [isDisabledFolder, setIsDisabledFolder] = React.useState<
+		boolean | undefined
+	>(checkCreating);
+	const [isInit, setIsInit] = React.useState<boolean>(!withInit);
+	const [isInsideKnowledge, setIsInsideKnowledge] =
+		React.useState<boolean>(false);
+	const [isInsideResultStorage, setIsInsideResultStorage] =
+		React.useState<boolean>(false);
 
-  const [withCreateState, setWithCreateState] =
-    React.useState<boolean>(withCreate);
+	const [withCreateState, setWithCreateState] =
+		React.useState<boolean>(withCreate);
 
-  React.useEffect(() => {
-    const isInsideKnowledgeState = !!selectedTreeNode?.path?.find(
-      (f) => f.folderType === FolderType.Knowledge,
-    );
-    const isInsideResultStorageState = !!selectedTreeNode?.path?.find(
-      (f) => f.folderType === FolderType.ResultStorage,
-    );
-    setWithCreateState(
-      withCreate && !isInsideKnowledgeState && !isInsideResultStorageState,
-    );
-    setIsInsideKnowledge(isInsideKnowledgeState);
-    setIsInsideResultStorage(isInsideResultStorageState);
-  }, [selectedTreeNode, withCreate]);
+	React.useEffect(() => {
+		const isInsideKnowledgeState = !!selectedTreeNode?.path?.find(
+			(f) => f.folderType === FolderType.Knowledge,
+		);
+		const isInsideResultStorageState = !!selectedTreeNode?.path?.find(
+			(f) => f.folderType === FolderType.ResultStorage,
+		);
+		setWithCreateState(
+			withCreate && !isInsideKnowledgeState && !isInsideResultStorageState,
+		);
+		setIsInsideKnowledge(isInsideKnowledgeState);
+		setIsInsideResultStorage(isInsideResultStorageState);
+	}, [selectedTreeNode, withCreate]);
 
-  return {
-    breadCrumbs,
-    setBreadCrumbs,
-    searchValue,
-    setSearchValue,
-    items,
-    setItems,
-    selectedItemType,
-    setSelectedItemType,
-    selectedItemId,
-    setSelectedItemId,
-    selectedItemSecurity,
-    setSelectedItemSecurity,
-    selectedTreeNode,
-    setSelectedTreeNode,
-    selectedFileInfo,
-    setSelectedFileInfo,
-    total,
-    setTotal,
-    hasNextPage,
-    setHasNextPage,
-    isSelectedParentFolder,
-    setIsSelectedParentFolder,
-    isDisabledFolder,
-    setIsDisabledFolder,
-    isInit,
-    setIsInit,
-    isInsideKnowledge,
-    setIsInsideKnowledge,
-    isInsideResultStorage,
-    setIsInsideResultStorage,
-    withCreateState,
-  };
+	return {
+		breadCrumbs,
+		setBreadCrumbs,
+		searchValue,
+		setSearchValue,
+		items,
+		setItems,
+		selectedItemType,
+		setSelectedItemType,
+		selectedItemId,
+		setSelectedItemId,
+		selectedItemSecurity,
+		setSelectedItemSecurity,
+		selectedTreeNode,
+		setSelectedTreeNode,
+		selectedFileInfo,
+		setSelectedFileInfo,
+		total,
+		setTotal,
+		hasNextPage,
+		setHasNextPage,
+		isSelectedParentFolder,
+		setIsSelectedParentFolder,
+		isDisabledFolder,
+		setIsDisabledFolder,
+		isInit,
+		setIsInit,
+		isInsideKnowledge,
+		setIsInsideKnowledge,
+		isInsideResultStorage,
+		setIsInsideResultStorage,
+		withCreateState,
+	};
 };
 
 export default useSelectorState;

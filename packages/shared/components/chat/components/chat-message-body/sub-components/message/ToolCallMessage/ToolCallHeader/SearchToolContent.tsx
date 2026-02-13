@@ -40,8 +40,8 @@ import {
 } from "../../../../../../../../api/ai/types";
 import { useMessageStore } from "../../../../../../store/messageStore";
 import styles from "../../../../ChatMessageBody.module.scss";
-import { Text } from "../../../../../../../text";
-import { Link, LinkTarget } from "../../../../../../../link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 
 const WebCrawlingToolContent = ({ content }: { content: TToolCallContent }) => {
   const { t } = useTranslation(["Common"]);

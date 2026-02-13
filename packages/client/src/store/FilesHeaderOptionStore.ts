@@ -44,7 +44,7 @@ import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { isDesktop } from "@docspace/shared/utils";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 import { showInfoPanel } from "SRC_DIR/helpers/info-panel";

@@ -26,13 +26,13 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ButtonSize } from "../button";
+import { ButtonSize } from "@docspace/ui-kit/components/button";
 
 import DirectThirdPartyConnection from "./DirectThirdPartyConnection";
 import {
   folderHandler,
   folderInfoHandler,
-} from '../../__mocks__/handlers/files/folder'
+} from "../../__mocks__/handlers/files/folder";
 
 import {
   mockAccounts,

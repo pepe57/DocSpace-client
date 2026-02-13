@@ -27,8 +27,11 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { parseToDateTime, formatDateLocalized } from "@docspace/shared/utils/date";
+import { Text } from "@docspace/ui-kit/components/text";
+import {
+  parseToDateTime,
+  formatDateLocalized,
+} from "@docspace/ui-kit/utils/date";
 
 import { StyledMainInfo } from "./StyledComponent";
 
@@ -36,7 +39,10 @@ const MainInfoComponent = (props) => {
   const { portalInfo, activeUsersCount } = props;
   const { t } = useTranslation("Settings");
 
-  const creationDate = formatDateLocalized(parseToDateTime(portalInfo.creationDateTime), "DATE_SHORT");
+  const creationDate = formatDateLocalized(
+    parseToDateTime(portalInfo.creationDateTime),
+    "DATE_SHORT",
+  );
 
   return (
     <StyledMainInfo>

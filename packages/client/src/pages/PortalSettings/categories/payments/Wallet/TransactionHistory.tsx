@@ -29,19 +29,19 @@ import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 import type { DateTime } from "luxon";
-import { parseToDateTime, isSameDay, now } from "@docspace/shared/utils/date";
-import { getCookie } from "@docspace/shared/utils";
+import { parseToDateTime, isSameDay, now } from "@docspace/ui-kit/utils/date";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/shared/components/combobox";
-import { DatePicker } from "@docspace/shared/components/date-picker";
-import { toastr } from "@docspace/shared/components/toast";
+} from "@docspace/ui-kit/components/combobox";
+import { DatePicker } from "@docspace/ui-kit/components/date-picker";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   checkTransactionHistoryReport,
   startTransactionHistoryReport,
@@ -54,11 +54,11 @@ import {
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import FilterIcon from "@docspace/shared/components/filter/sub-components/FilterIcon";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import { SelectedItemPure } from "@docspace/shared/components/selected-item/SelectedItem";
-import { TSelectorItem } from "@docspace/shared/components/selector";
+} from "@docspace/ui-kit/components/modal-dialog";
+import FilterIcon from "@docspace/ui-kit/components/filter/sub-components/FilterIcon";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
+import { SelectedItemPure } from "@docspace/ui-kit/components/selected-item";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { TUser } from "@docspace/shared/api/people/types";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import Filter from "@docspace/shared/api/people/filter";
@@ -67,7 +67,7 @@ import FilterPanel from "./sub-components/FilterPanel";
 import TransactionBody from "./sub-components/TransactionBody";
 import styles from "./styles/TransactionHistory.module.scss";
 import TableLoader from "./sub-components/TableLoader";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 type TransactionHistoryReportResponse = {
   error?: string;
@@ -219,9 +219,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   const [selectedType, setSelectedType] = useState<TOption>(
     initialState.selectedType,
   );
-  const [startDate, setStartDate] = useState<DateTime>(
-    initialState.startDate,
-  );
+  const [startDate, setStartDate] = useState<DateTime>(initialState.startDate);
   const [endDate, setEndDate] = useState<DateTime>(initialState.endDate);
   const [selectedContact, setSelectedContact] = useState<TUser | null>(
     initialState.selectedContact,
@@ -330,9 +328,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     }
   };
 
-  const onStartDateChange = async (
-    date: DateTime | null,
-  ): Promise<void> => {
+  const onStartDateChange = async (date: DateTime | null): Promise<void> => {
     if (!date) {
       return;
     }
@@ -586,10 +582,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     : selectedContact;
 
   const contactSelector = !currentContact ? (
-    <SelectorAddButton
-      label={t("SelectContact")}
-      onClick={onSelectorAddButtonClick}
-    />
+    <AddButton label={t("SelectContact")} onClick={onSelectorAddButtonClick} />
   ) : (
     <SelectedItemPure
       key={`${currentContact}`}

@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-import { formatDate } from "@docspace/shared/utils/date";
+import { formatDate } from "@docspace/ui-kit/utils/date";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { Link } from "@docspace/shared/components/link";
-import { globalColors } from "@docspace/shared/themes";
+import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
+import { Link } from "@docspace/ui-kit/components/link";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 
 const StatusBarWrapper = styled.div`

@@ -34,7 +34,7 @@ import type {
 } from "@onlyoffice/docspace-plugin-sdk";
 
 import FilesSelector from "@docspace/shared/selectors/Files";
-import { TSelectorHeader } from "@docspace/shared/components/selector/Selector.types";
+import { TSelectorHeader } from "@docspace/ui-kit/components/selector";
 import { FilesSelectorProps } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 import { DeviceType, FolderType } from "@docspace/shared/enums";

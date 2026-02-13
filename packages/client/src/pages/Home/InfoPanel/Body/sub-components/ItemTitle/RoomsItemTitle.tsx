@@ -29,10 +29,10 @@ import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";

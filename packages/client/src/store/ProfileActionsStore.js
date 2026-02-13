@@ -50,7 +50,7 @@ import {
   LIVE_CHAT_LOCAL_STORAGE_KEY,
   CategoryType,
 } from "@docspace/shared/constants";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import AccountsFilter from "@docspace/shared/api/people/filter";
@@ -59,6 +59,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { PEOPLE_ROUTE_WITH_FILTER } from "SRC_DIR/helpers/contacts";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
+import i18n from "SRC_DIR/i18n";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile/login");
@@ -283,7 +284,7 @@ class ProfileActionsStore {
     this.setIsDebugDialogVisible(true);
   };
 
-  getActions = (t) => {
+  getActions = () => {
     const {
       enablePlugins,
       standalone,
@@ -312,7 +313,7 @@ class ProfileActionsStore {
         ? {
             key: "user-menu-settings",
             icon: CatalogSettingsReactSvgUrl,
-            label: t("Common:Settings"),
+            label: i18n.t("Common:Settings"),
             onClick: (obj) => this.onSettingsClick("/portal-settings", obj),
             url: SETTINGS_URL,
             preventNewTab: true,
@@ -339,7 +340,7 @@ class ProfileActionsStore {
             key: "spaces-management-settings",
             id: "spaces",
             icon: SpacesReactSvgUrl,
-            label: t("Common:Spaces"),
+            label: i18n.t("Common:Spaces"),
             onClick: this.onSpacesClick,
             url: SPACES_URL,
             preventNewTab: true,
@@ -353,7 +354,7 @@ class ProfileActionsStore {
                     },
                     {
                       key: "spaces-management",
-                      label: t("Common:SpaceManagement"),
+                      label: i18n.t("Common:SpaceManagement"),
                       onClick: this.onSpacesClick,
                     },
                   ]
@@ -373,7 +374,7 @@ class ProfileActionsStore {
       hotkeys = {
         key: "user-menu-hotkeys",
         icon: HotkeysReactSvgUrl,
-        label: t("Common:Hotkeys"),
+        label: i18n.t("Common:Hotkeys"),
         onClick: (e) => this.onHotkeysClick(e),
         url: `${window.location.pathname}?action=hotkeys`,
         preventNewTab: true,
@@ -392,7 +393,7 @@ class ProfileActionsStore {
       liveChat = {
         key: "user-menu-live-chat",
         icon: LiveChatReactSvgUrl,
-        label: t("Common:LiveChat"),
+        label: i18n.t("Common:LiveChat"),
         onClick: () => this.onLiveChatClick(t),
         checked: this.isShowLiveChat,
         withToggle: true,
@@ -405,7 +406,7 @@ class ProfileActionsStore {
       bookTraining = {
         key: "user-menu-book-training",
         icon: BookTrainingReactSvgUrl,
-        label: t("Common:BookTraining"),
+        label: i18n.t("Common:BookTraining"),
         onClick: this.onBookTraining,
       };
     }
@@ -416,7 +417,7 @@ class ProfileActionsStore {
       about = {
         key: "user-menu-about",
         icon: InfoOutlineReactSvgUrl,
-        label: t("Common:AboutCompanyTitle"),
+        label: i18n.t("Common:AboutCompanyTitle"),
         onClick: (e) => this.onAboutClick(e),
         url: `${window.location.pathname}?action=about`,
       };
@@ -427,7 +428,7 @@ class ProfileActionsStore {
         ? {
             key: "user-menu-accounts",
             icon: CatalogAccountsReactSvgUrl,
-            label: t("Common:Contacts"),
+            label: i18n.t("Common:Contacts"),
             onClick: (obj) =>
               this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),
             url: PEOPLE_ROUTE_WITH_FILTER,
@@ -447,7 +448,7 @@ class ProfileActionsStore {
       !isNotPaidPeriod && {
         key: "user-menu-profile",
         icon: ProfileReactSvgUrl,
-        label: t("Common:Profile"),
+        label: i18n.t("Common:Profile"),
         onClick: (obj) => this.onProfileClick(obj),
         url: PROFILE_SELF_URL,
         preventNewTab: true,
@@ -460,7 +461,7 @@ class ProfileActionsStore {
         !isCommunity && {
           key: "user-menu-payments",
           icon: PaymentsReactSvgUrl,
-          label: t("Common:PaymentsTitle"),
+          label: i18n.t("Common:PaymentsTitle"),
           onClick: (obj) => this.onPaymentsClick(obj),
           additionalElement: <TariffBar />,
           url: PAYMENTS_URL,
@@ -473,7 +474,7 @@ class ProfileActionsStore {
       helpCenterEnabled && {
         key: "user-menu-help-center",
         icon: HelpCenterReactSvgUrl,
-        label: t("Common:HelpCenter"),
+        label: i18n.t("Common:HelpCenter"),
         onClick: this.onHelpCenterClick,
         url: this.settingsStore.helpCenterDomain || "#",
         preventNewTab: true,
@@ -493,7 +494,7 @@ class ProfileActionsStore {
       feedbackAndSupportEnabled && {
         key: "user-menu-support",
         icon: EmailReactSvgUrl,
-        label: t("Common:FeedbackAndSupport"),
+        label: i18n.t("Common:FeedbackAndSupport"),
         onClick: this.onSupportClick,
         url: this.settingsStore.feedbackAndSupportUrl || "#",
         preventNewTab: true,
@@ -501,7 +502,7 @@ class ProfileActionsStore {
       feedbackAndSupportEnabled && {
         key: "user-menu-suggest-feature",
         icon: LampReactSvgUrl,
-        label: t("Common:SuggestFeature"),
+        label: i18n.t("Common:SuggestFeature"),
         onClick: this.onSuggestFeatureClick,
         url: this.settingsStore.suggestFeatureUrl || "#",
         preventNewTab: true,
@@ -514,8 +515,8 @@ class ProfileActionsStore {
       actions.push({
         key: "user-menu-logout",
         icon: LogoutReactSvgUrl,
-        label: t("Common:LogoutButton"),
-        onClick: () => this.onLogoutClick(t),
+        label: i18n.t("Common:LogoutButton"),
+        onClick: () => this.onLogoutClick(i18n.t),
         isButton: true,
       });
     }
