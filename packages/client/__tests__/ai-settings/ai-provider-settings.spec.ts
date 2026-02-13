@@ -26,6 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "../fixtures/base";
 import { ProviderType } from "@docspace/shared/api/ai/enums";
 import {
@@ -71,7 +72,7 @@ test.describe("AI Provider", () => {
     const tiles = page.getByTestId("ai-provider-tile");
     await expect(tiles).toHaveCount(0);
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-provider-settings",
       "ai-provider-empty.png",
@@ -139,7 +140,7 @@ test.describe("AI Provider", () => {
     const createdProviderTile = page.getByTestId("ai-provider-tile");
     await expect(createdProviderTile).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-provider-settings",
       "ai-provider-after-create.png",
@@ -184,7 +185,7 @@ test.describe("AI Provider", () => {
     await expect(deleteProviderDialog).toBeVisible();
     await expect(deleteProviderDialog).toContainText("Delete AI provider");
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-provider-settings",
       "ai-provider-delete-default-modal.png",
@@ -215,7 +216,7 @@ test.describe("AI Provider", () => {
     await expect(allProviderTiles).toHaveCount(3);
     await expect(firstProviderTile).not.toContainText(firstProviderData.title);
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-provider-settings",
       "ai-provider-after-delete.png",
@@ -249,7 +250,7 @@ test.describe("AI Provider", () => {
     await expect(deleteProviderDialog).toBeVisible();
     await expect(deleteProviderDialog).toContainText("Delete AI provider");
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-provider-settings",
       "ai-provider-delete-non-default-modal.png",
@@ -263,7 +264,7 @@ test.describe("AI Provider", () => {
 
     await expect(allProviderTiles).toHaveCount(3);
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-provider-settings",
       "ai-provider-after-delete-non-default.png",
@@ -356,7 +357,7 @@ test.describe("AI Provider", () => {
     await expect(firstProviderTile).toBeVisible();
     await expect(firstProviderTile).toContainText(updateRes.response.title);
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-provider-settings",
       "ai-provider-after-update.png",
@@ -386,7 +387,7 @@ test.describe("AI Provider", () => {
     const errorIcon = firstProviderTile.getByTestId("ai-tile-error-icon");
     await expect(errorIcon).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-provider-settings",
       "ai-provider-tile-need-reset.png",
@@ -406,7 +407,7 @@ test.describe("AI Provider", () => {
     await expect(providerKeyInput).toBeVisible();
     await expect(providerKeyInput).toHaveAttribute("data-error", "true");
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-provider-settings",
       "ai-provider-update-dialog-need-reset.png",
@@ -434,7 +435,7 @@ test.describe("AI Provider", () => {
     const tilesWithErrors = page.getByTestId("ai-tile-error-icon");
     await expect(tilesWithErrors).toHaveCount(4);
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-provider-settings",
       "ai-provider-models-not-available.png",
@@ -462,7 +463,7 @@ test.describe("AI Provider", () => {
     const tilesWithErrors = page.getByTestId("ai-tile-error-icon");
     await expect(tilesWithErrors).toHaveCount(0);
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-provider-settings",
       "ai-provider-models-available.png",
