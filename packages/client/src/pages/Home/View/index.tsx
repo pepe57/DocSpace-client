@@ -517,7 +517,14 @@ const View = ({
     };
 
     getView();
-  }, [location, isContactsPage, isProfilePage, isChatPage, showToastAccess]);
+  }, [
+    location.pathname,
+    location.search,
+    isContactsPage,
+    isProfilePage,
+    isChatPage,
+    showToastAccess,
+  ]);
 
   React.useEffect(() => {
     if (isLoading || currentView === "chat") return;

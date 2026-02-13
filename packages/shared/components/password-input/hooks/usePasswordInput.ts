@@ -15,6 +15,7 @@ export const usePasswordInput = (
   setState: React.Dispatch<React.SetStateAction<TPasswordState>>,
   onChange?: (e: ChangeEvent<HTMLInputElement>, value?: string) => void,
   valueInput?: string,
+  sanitizeValue?: (value: string) => string,
 ) => {
   const [caretPosition, setCaretPosition] = useState<number | null>(null);
 
@@ -72,6 +73,10 @@ export const usePasswordInput = (
         value = setPasswordSettings(e.target.value);
       }
 
+      if (sanitizeValue) {
+        value = sanitizeValue(value);
+      }
+
       onChange?.(e, value);
 
       if (simpleView) {
@@ -91,6 +96,7 @@ export const usePasswordInput = (
       checkPassword,
       setState,
       setPasswordSettings,
+      sanitizeValue,
     ],
   );
 
