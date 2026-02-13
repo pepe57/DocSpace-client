@@ -239,7 +239,7 @@ describe("ManualBackup", () => {
       false,
     );
 
-    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(1);
+    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(0);
     expect(defaultProps.setIsBackupProgressVisible).toHaveBeenCalledWith(true);
   });
 
@@ -305,7 +305,7 @@ describe("ManualBackup", () => {
     expect(portalApi.startBackup).toHaveBeenCalled();
 
     expect(defaultProps.setIsBackupProgressVisible).toHaveBeenCalledWith(true);
-    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(1);
+    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(0);
   });
 
   it("handles backup from Third Party Resource", async () => {
@@ -323,7 +323,7 @@ describe("ManualBackup", () => {
     expect(portalApi.startBackup).toHaveBeenCalled();
 
     expect(defaultProps.setIsBackupProgressVisible).toHaveBeenCalledWith(true);
-    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(1);
+    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(0);
   });
 
   it("handles backup from Third Party Storage", async () => {
@@ -343,7 +343,7 @@ describe("ManualBackup", () => {
     expect(portalApi.startBackup).toHaveBeenCalled();
 
     expect(defaultProps.setIsBackupProgressVisible).toHaveBeenCalledWith(true);
-    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(1);
+    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(0);
   });
 
   it("disables radio buttons and actions when downloadingProgress is not 100", () => {

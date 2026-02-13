@@ -64,6 +64,7 @@ import {
 import styles from "./ManualBackup.module.scss";
 import { combineUrl } from "../../../utils/combineUrl";
 import NoteComponent from "../sub-components/NoteComponent";
+import { cancelBackup } from "../../../api/backup";
 
 const getPaymentError = (
   t: TFunction,
@@ -195,6 +196,9 @@ const ManualBackup = ({
     "",
   );
 
+  const [showCancelOperation, setShowCancelOperation] = useState(false);
+  const [isCancelOperation, setIsCancelOperation] = useState(false);
+
   const isCheckedTemporaryStorage = storageType === TEMPORARY_STORAGE;
   const isCheckedDocuments = storageType === DOCUMENTS;
   const isCheckedThirdParty = storageType === THIRD_PARTY_RESOURCE;
@@ -222,6 +226,8 @@ const ManualBackup = ({
         t,
         setDownloadingProgress,
         setTemporaryLink,
+        setShowCancelOperation,
+        showCancelOperation,
       );
 
       if (!options) return;
@@ -256,14 +262,17 @@ const ManualBackup = ({
   const onMakeTemporaryBackup = async () => {
     setErrorMessage("");
     setBackupProgressError("");
+    setBackupProgressWarning("");
     clearLocalStorage();
     localStorage.setItem(
       BackupStorageLocalKey.StorageType,
       JSON.stringify(TEMPORARY_STORAGE),
     );
 
-    setDownloadingProgress(1);
+    setDownloadingProgress(0);
     setIsBackupProgressVisible(true);
+    setIsCancelOperation(false);
+    setShowCancelOperation(false);
 
     try {
       await startBackup(
@@ -272,6 +281,7 @@ const ManualBackup = ({
         false,
         isManagement,
       );
+      setShowCancelOperation(true);
     } catch (err) {
       let customText;
 
@@ -323,6 +333,8 @@ const ManualBackup = ({
 
     setErrorMessage("");
     setBackupProgressError("");
+    setBackupProgressWarning("");
+    
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
       selectedFolder,
@@ -340,12 +352,15 @@ const ManualBackup = ({
       selectedStorageTitle,
     );
 
-    setDownloadingProgress(1);
+    setDownloadingProgress(0);
     setIsBackupProgressVisible(true);
+    setIsCancelOperation(false);
+    setShowCancelOperation(false);
 
     try {
       await startBackup(moduleType, storageParams, false, isManagement);
 
+      setShowCancelOperation(true);
       setTemporaryLink("");
     } catch (err) {
       let customText;
@@ -387,6 +402,16 @@ const ManualBackup = ({
     isMaxProgress,
     onMakeCopy,
     buttonSize,
+  };
+
+  const onCancelOperation = async () => {
+    setShowCancelOperation(false);
+    setIsCancelOperation(true);
+    const res = await cancelBackup();
+
+    if (!res) {
+      setShowCancelOperation(true);
+    }
   };
 
   if (isEmptyContentBeforeLoader && !isInitialLoading) return null;
@@ -665,6 +690,8 @@ const ManualBackup = ({
               completed: false,
             },
           ]}
+          cancelUpload={onCancelOperation}
+          showCancelButton={!isCancelOperation && showCancelOperation}
           clearOperationsData={() => setIsBackupProgressVisible(false)}
         />
       ) : null}

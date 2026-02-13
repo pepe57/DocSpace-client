@@ -1409,15 +1409,23 @@ export const getBackupProgressInfo = (
   t: TTranslation,
   setBackupProgress: (progress: number) => void,
   setLink: (link: string) => void,
+  setShowCancelOperation?: (show: boolean) => void,
+  showCancelOperation?: boolean,
 ) => {
   const { isCompleted, link, error, progress, warning } = opt;
 
   if (progress !== 100) {
     setBackupProgress(progress);
+    if (!isCompleted && !showCancelOperation) setShowCancelOperation?.(true);
+  }
+
+  if (progress === 100 && !isCompleted) {
+    setShowCancelOperation?.(false);
   }
 
   if (isCompleted) {
     setBackupProgress(100);
+    if (showCancelOperation) setShowCancelOperation?.(false);
 
     if (link && link.slice(0, 1) === "/") {
       setLink(link);
