@@ -1011,12 +1011,10 @@ class PluginStore {
       const newItems: IMainButtonItemClient[] = [];
 
       if (value.items && storeId) {
-        const storeIdNum = Number(storeId);
 
-        if (!isNaN(storeIdNum)) {
           value.items.forEach((i) => {
             const onClick = async () => {
-              const message = await i.onClick?.(storeIdNum);
+              const message = await i.onClick?.(storeId);
 
               this.dispatchMessage({ message, pluginName: plugin.name });
             };
@@ -1030,19 +1028,15 @@ class PluginStore {
               pluginName: plugin.name,
             });
           });
-        }
       }
 
       const onClick = async () => {
         if (!value.onClick) return;
         const currStoreId = this.selectedFolderStore.id;
+
         if (!currStoreId) return;
 
-        const currStoreIdNum = Number(currStoreId);
-
-        if (isNaN(currStoreIdNum)) return;
-
-        const message = await value.onClick(currStoreIdNum);
+        const message = await value.onClick(currStoreId);
 
         this.dispatchMessage({ message, pluginName: plugin.name });
       };
