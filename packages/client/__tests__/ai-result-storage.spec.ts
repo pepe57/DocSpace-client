@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import {
   settingsHandler,
@@ -61,7 +62,7 @@ test.describe("AI result storage", () => {
 
     await expect(emptyView).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-result-storage",
       "ai-result-storage-default-empty.png",
@@ -108,7 +109,7 @@ test.describe("AI result storage", () => {
     await expect(infoToast).toBeVisible();
     await expect(infoToast).toContainText("Info");
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-result-storage",
       "ai-result-storage-empty-cannot-use-chat.png",
@@ -128,7 +129,7 @@ test.describe("AI result storage", () => {
 
     await expect(tableRows).toHaveCount(3);
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-result-storage",
       "ai-result-storage-with-files.png",
@@ -151,7 +152,7 @@ test.describe("AI result storage", () => {
 
     await expect(tableRows).toHaveCount(3);
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "ai-result-storage",
       "ai-result-storage-with-files-cannot-use-chat.png",

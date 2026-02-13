@@ -30,6 +30,7 @@ import {
   getPortalHandler,
   quotaHandler,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Settings", () => {
@@ -49,7 +50,7 @@ test.describe("Settings", () => {
 
     await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "settings",
       "settings-branding-render.png",
@@ -68,7 +69,7 @@ test.describe("Settings", () => {
 
     await expect(page.getByTestId("manual-backup-wrapper")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "settings",
       "settings-data-backup-render.png",
@@ -87,7 +88,7 @@ test.describe("Settings", () => {
 
     await expect(page.getByTestId("auto-backup")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "settings",
       "settings-auto-backup-render.png",
@@ -105,7 +106,7 @@ test.describe("Settings", () => {
 
     await expect(page.getByTestId("restore-backup")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "settings",
       "settings-restore-render.png",
@@ -123,7 +124,7 @@ test.describe("Settings", () => {
 
     await expect(page.getByTestId("encrypt-data-page")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "settings",
       "settings-encrypt-render.png",
@@ -146,7 +147,7 @@ test.describe("Settings", () => {
 
     await expect(page.getByTestId("encrypt-data-page")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "settings",
       "settings-encrypt-encrypted-render.png",
@@ -161,7 +162,7 @@ test.describe("Settings", () => {
 
     await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "settings",
       "settings-branding-unavailable-render.png",
@@ -176,7 +177,7 @@ test.describe("Settings", () => {
 
     await expect(page.getByTestId("manual-backup-wrapper")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "settings",
       "settings-data-backup-unavailable-render.png",
@@ -191,7 +192,7 @@ test.describe("Settings", () => {
 
     await expect(page.getByTestId("auto-backup")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "settings",
       "settings-auto-backup-unavailable-render.png",
@@ -206,7 +207,7 @@ test.describe("Settings", () => {
 
     await expect(page.getByTestId("restore-backup")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "settings",
       "settings-restore-unavailable-render.png",
@@ -221,7 +222,7 @@ test.describe("Settings", () => {
 
     await expect(page.getByTestId("encrypt-data-page")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "settings",
       "settings-encrypt-unavailable-render.png",
@@ -243,7 +244,7 @@ test.describe("Settings", () => {
 
     await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "settings",
       "settings-branding-without-customization-render.png",

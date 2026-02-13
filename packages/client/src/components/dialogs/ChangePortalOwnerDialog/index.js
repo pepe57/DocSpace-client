@@ -242,7 +242,7 @@ const ChangePortalOwnerDialog = ({
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <div className={styles.footerWrapper}>
-          <Text className="info">
+          <Text className={styles.info}>
             {t("Settings:AccessRightsChangeOwnerConfirmText")}
           </Text>
           <div className={styles.buttonWrapper}>

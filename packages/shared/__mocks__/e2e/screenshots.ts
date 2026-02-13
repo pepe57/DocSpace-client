@@ -24,66 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { selfActivationStatusHandler } from "@docspace/shared/__mocks__/handlers";
-import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
-import { test } from "./fixtures/base";
-import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
+import type {
+  Page,
+  PageAssertionsToHaveScreenshotOptions,
+} from "@playwright/test";
+import { expect } from "@playwright/test";
 
-const URL = "/login/confirm/EmailActivation";
-
-const QUERY_PARAMS = [
-  {
-    name: "type",
-    value: "EmailActivation",
-  },
-  {
-    name: "key",
-    value: "123",
-  },
-  {
-    name: "encemail",
-    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
-  },
-  {
-    name: "uid",
-    value: "123",
-  },
-];
-
-const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-
-test("email activation success", async ({
-  page,
-  baseUrl,
-  port,
-  clientRequestInterceptor,
-}) => {
-  clientRequestInterceptor.use(selfActivationStatusHandler(port, null, true));
-  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
-
-  await page.waitForURL(`${baseUrl}/login`, {
-    waitUntil: "load",
-  });
-
-  await expectScreenshot(page,[
-    "desktop",
-    "email-activation",
-    "email-activation-success.png",
-  ]);
-});
-
-test("email activation error", async ({
-  page,
-  baseUrl,
-  clientRequestInterceptor,
-  port,
-}) => {
-  clientRequestInterceptor.use(selfActivationStatusHandler(port, 400));
-  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
-
-  await expectScreenshot(page,[
-    "desktop",
-    "email-activation",
-    "email-activation-error.png",
-  ]);
-});
+export const expectScreenshot = async (
+  page: Page,
+  name: string | string[],
+  options?: PageAssertionsToHaveScreenshotOptions,
+) => {
+  // Add delay to ensure fonts are fully rendered on slower machines
+  await page.waitForTimeout(500);
+  await expect(page).toHaveScreenshot(name, options);
+};
