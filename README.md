@@ -186,8 +186,6 @@ cd server/common/ASC.AppHost
 dotnet run --launch-profile frontend-dev
 ```
 
-> See the [server README](https://github.com/ONLYOFFICE/DocSpace-server#launch-profiles) for details on launch profiles and backend configuration.
-
 **Terminal 2 - Start frontend:**
 ```bash
 # From the DocSpace root
@@ -199,8 +197,36 @@ pnpm install && pnpm start
 - DocSpace: http://localhost:8092
 - Aspire Dashboard: http://localhost:15208
 
+### Backend Editions
+
+By default, the backend runs in **Community Edition (CE)** mode. You can run different editions by setting the `APP_EDITION` environment variable.
+
+**Choose and run one of the following commands:**
+
+```bash
+# From the DocSpace root
+cd server/common/ASC.AppHost
+
+# Community Edition (CE) - default, no license required
+dotnet run --launch-profile frontend-dev
+
+# Enterprise Edition (EE) - requires license file
+APP_EDITION=enterprise dotnet run --launch-profile frontend-dev
+
+# Developer Edition (DE) - requires license file
+APP_EDITION=developer dotnet run --launch-profile frontend-dev
+
+# SAAS mode (multi-tenant)
+dotnet run --launch-profile frontend-dev --APP_HOSTING_STANDALONE false
+```
+
+> **Note:** Enterprise Edition (EE) and Developer Edition (DE) require a valid license file. See the [server README](https://github.com/ONLYOFFICE/DocSpace-server#launch-profiles) for details on launch profiles and backend configuration.
+
 ### Running Individual Applications
 
+**Choose and run one of the following commands:**
+
+**Developer mode:**
 ```bash
 # Run only client
 cd packages/client && pnpm start
