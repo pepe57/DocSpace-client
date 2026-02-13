@@ -33,6 +33,7 @@ import {
   rootHandler,
   filesSettingsHandler,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 test.describe("My documents context menu", () => {
@@ -65,7 +66,7 @@ test.describe("My documents context menu", () => {
     await shareMenu.hover();
     await expect(shareMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_folder-share.png",
@@ -75,7 +76,7 @@ test.describe("My documents context menu", () => {
     await moveMenu.hover();
     await expect(moveMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_folder-move.png",
@@ -101,7 +102,7 @@ test.describe("My documents context menu", () => {
     await shareMenu.hover();
     await expect(shareMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_docx-share.png",
@@ -111,7 +112,7 @@ test.describe("My documents context menu", () => {
     await moveMenu.hover();
     await expect(moveMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_docx-move.png",
@@ -121,7 +122,7 @@ test.describe("My documents context menu", () => {
     await downloadMenu.hover();
     await expect(downloadMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_docx-download.png",
@@ -131,7 +132,7 @@ test.describe("My documents context menu", () => {
     await moreMenu.hover();
     await expect(moreMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_docx-more.png",
@@ -157,7 +158,7 @@ test.describe("My documents context menu", () => {
     await shareMenu.hover();
     await expect(shareMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_pptx-share.png",
@@ -167,7 +168,7 @@ test.describe("My documents context menu", () => {
     await moveMenu.hover();
     await expect(moveMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_pptx-move.png",
@@ -177,7 +178,7 @@ test.describe("My documents context menu", () => {
     await downloadMenu.hover();
     await expect(downloadMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_pptx-download.png",
@@ -187,7 +188,7 @@ test.describe("My documents context menu", () => {
     await moreMenu.hover();
     await expect(moreMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_pptx-more.png",
@@ -213,7 +214,7 @@ test.describe("My documents context menu", () => {
     await shareMenu.hover();
     await expect(shareMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_xlsx-share.png",
@@ -223,7 +224,7 @@ test.describe("My documents context menu", () => {
     await moveMenu.hover();
     await expect(moveMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_xlsx-move.png",
@@ -233,7 +234,7 @@ test.describe("My documents context menu", () => {
     await downloadMenu.hover();
     await expect(downloadMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_xlsx-download.png",
@@ -243,7 +244,7 @@ test.describe("My documents context menu", () => {
     await moreMenu.hover();
     await expect(moreMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_xlsx-more.png",
@@ -269,7 +270,7 @@ test.describe("My documents context menu", () => {
     await shareMenu.hover();
     await expect(shareMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_pdf-share.png",
@@ -279,7 +280,7 @@ test.describe("My documents context menu", () => {
     await moveMenu.hover();
     await expect(moveMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_pdf-move.png",
@@ -289,7 +290,7 @@ test.describe("My documents context menu", () => {
     await downloadMenu.hover();
     await expect(downloadMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_pdf-download.png",
@@ -299,7 +300,7 @@ test.describe("My documents context menu", () => {
     await moreMenu.hover();
     await expect(moreMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_pdf-more.png",
@@ -325,7 +326,7 @@ test.describe("My documents context menu", () => {
     await shareMenu.hover();
     await expect(shareMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_image-share.png",
@@ -335,7 +336,7 @@ test.describe("My documents context menu", () => {
     await moveMenu.hover();
     await expect(moveMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_image-move.png",
@@ -345,7 +346,7 @@ test.describe("My documents context menu", () => {
     await moreMenu.hover();
     await expect(moreMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_image-more.png",
@@ -371,7 +372,7 @@ test.describe("My documents context menu", () => {
     await shareMenu.hover();
     await expect(shareMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_media-share.png",
@@ -381,7 +382,7 @@ test.describe("My documents context menu", () => {
     await moveMenu.hover();
     await expect(moveMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_media-move.png",
@@ -391,7 +392,7 @@ test.describe("My documents context menu", () => {
     await moreMenu.hover();
     await expect(moreMenu).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "files-context-menu_media-more.png",
