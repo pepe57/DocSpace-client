@@ -111,6 +111,7 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
     <div
       onClick={stopPropagation}
       onDoubleClick={stopPropagation}
+      onMouseDown={stopPropagation}
       className={styles.tagManagement}
       ref={ref}
     >
