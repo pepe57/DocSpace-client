@@ -20,6 +20,7 @@ overrides:
   mdast-util-to-hast: '>=13.2.1'
   express: '>=5.2.1'
   qs: '>=6.14.1'
+  node-fetch: '>=2.6.7'
 
 importers:
 
@@ -144,7 +145,7 @@ importers:
         version: 5.2.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-i18n:
         specifier: ^1.0.1
-        version: 1.0.1(prop-types@15.8.1)(react@19.2.4)
+        version: 1.0.1(encoding@0.1.13)(prop-types@15.8.1)(react@19.2.4)
       react-i18next:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -8271,9 +8272,6 @@ packages:
   node-addon-api@7.1.1:
     resolution: {integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==}
 
-  node-fetch@1.7.3:
-    resolution: {integrity: sha512-NhZ4CsKx7cYm2vSrBAr2PvFOe6sWDf0UYLRqA6svUYg7+/TSfVAu49jYC4BvQ4Sms9SZgdqGBgroqfDhJdTyKQ==}
-
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
     engines: {node: 4.x || >=6.0.0}
@@ -15930,11 +15928,13 @@ snapshots:
 
   create-mixin@3.0.0: {}
 
-  create-react-class@15.6.3:
+  create-react-class@15.6.3(encoding@0.1.13):
     dependencies:
-      fbjs: 0.8.18
+      fbjs: 0.8.18(encoding@0.1.13)
       loose-envify: 1.4.0
       object-assign: 4.1.1
+    transitivePeerDependencies:
+      - encoding
 
   create-require@1.1.1: {}
 
@@ -16448,6 +16448,7 @@ snapshots:
   encoding@0.1.13:
     dependencies:
       iconv-lite: 0.6.3
+    optional: true
 
   end-of-stream@1.4.5:
     dependencies:
@@ -16742,15 +16743,17 @@ snapshots:
     dependencies:
       websocket-driver: 0.7.4
 
-  fbjs@0.8.18:
+  fbjs@0.8.18(encoding@0.1.13):
     dependencies:
       core-js: 1.2.7
-      isomorphic-fetch: 2.2.1
+      isomorphic-fetch: 2.2.1(encoding@0.1.13)
       loose-envify: 1.4.0
       object-assign: 4.1.1
       promise: 7.3.1
       setimmediate: 1.0.5
       ua-parser-js: 0.7.41
+    transitivePeerDependencies:
+      - encoding
 
   fdir@6.5.0(picomatch@4.0.3):
     optionalDependencies:
@@ -17578,10 +17581,12 @@ snapshots:
 
   isobject@3.0.1: {}
 
-  isomorphic-fetch@2.2.1:
+  isomorphic-fetch@2.2.1(encoding@0.1.13):
     dependencies:
-      node-fetch: 1.7.3
+      node-fetch: 2.7.0(encoding@0.1.13)
       whatwg-fetch: 3.6.20
+    transitivePeerDependencies:
+      - encoding
 
   istanbul-lib-coverage@3.2.2: {}
 
@@ -18790,11 +18795,6 @@ snapshots:
 
   node-addon-api@7.1.1: {}
 
-  node-fetch@1.7.3:
-    dependencies:
-      encoding: 0.1.13
-      is-stream: 1.1.0
-
   node-fetch@2.7.0(encoding@0.1.13):
     dependencies:
       whatwg-url: 5.0.0
@@ -19767,13 +19767,15 @@ snapshots:
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
-  react-i18n@1.0.1(prop-types@15.8.1)(react@19.2.4):
+  react-i18n@1.0.1(encoding@0.1.13)(prop-types@15.8.1)(react@19.2.4):
     dependencies:
-      create-react-class: 15.6.3
+      create-react-class: 15.6.3(encoding@0.1.13)
       i18n-js: 4.5.2
       object-assign: 4.1.1
       prop-types: 15.8.1
       react: 19.2.4
+    transitivePeerDependencies:
+      - encoding
 
   react-i18next@14.0.1(i18next@23.7.19)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
