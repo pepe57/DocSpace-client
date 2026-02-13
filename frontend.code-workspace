@@ -27,6 +27,10 @@
     {
       "name": "📦 @docspace/shared",
       "path": "packages/shared"
+    },
+    {
+      "name": "📦 @docspace/ui-kit",
+      "path": "libs/ui-kit"
     }
   ],
   "settings": {

@@ -26,71 +26,71 @@
 
 import { FolderType } from "../../enums";
 import { TRoom, TRoomSecurity } from "../../api/rooms/types";
-import { TSelectorItem } from "../../components/selector";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 
 export const convertToItems = (
-  folders: TRoom[],
-  disableBySecurity?: string,
+	folders: TRoom[],
+	disableBySecurity?: string,
 ) => {
-  const items: TSelectorItem[] = folders.map((folder) => {
-    const {
-      id,
-      title,
-      roomType,
-      logo,
-      shared,
-      parentId,
-      filesCount,
-      foldersCount,
-      rootFolderType,
-      security,
+	const items: TSelectorItem[] = folders.map((folder) => {
+		const {
+			id,
+			title,
+			roomType,
+			logo,
+			shared,
+			parentId,
+			filesCount,
+			foldersCount,
+			rootFolderType,
+			security,
 
-      denyDownload,
-      indexing,
-      lifetime,
-      watermark,
-      tags,
-      quotaLimit,
-    } = folder;
+			denyDownload,
+			indexing,
+			lifetime,
+			watermark,
+			tags,
+			quotaLimit,
+		} = folder;
 
-    const icon = logo.medium;
-    const iconOriginal = logo.original;
-    const { color } = logo;
-    const cover = logo?.cover;
-    const isTemplate = rootFolderType === FolderType.RoomTemplates;
+		const icon = logo.medium;
+		const iconOriginal = logo.original;
+		const { color } = logo;
+		const cover = logo?.cover;
+		const isTemplate = rootFolderType === FolderType.RoomTemplates;
 
-    const isDisabledBySecurity = disableBySecurity
-      ? !security?.[disableBySecurity as keyof TRoomSecurity]
-      : false;
+		const isDisabledBySecurity = disableBySecurity
+			? !security?.[disableBySecurity as keyof TRoomSecurity]
+			: false;
 
-    return {
-      id,
-      label: title,
-      icon,
-      iconOriginal,
-      color,
-      roomType,
-      shared,
-      isFolder: true,
-      parentId,
-      filesCount,
-      foldersCount,
-      rootFolderType,
-      security,
-      cover,
-      isTemplate,
-      logo,
+		return {
+			id,
+			label: title,
+			icon,
+			iconOriginal,
+			color,
+			roomType,
+			shared,
+			isFolder: true,
+			parentId,
+			filesCount,
+			foldersCount,
+			rootFolderType,
+			security,
+			cover,
+			isTemplate,
+			logo,
 
-      title,
-      denyDownload,
-      indexing,
-      lifetime,
-      watermark,
-      tags,
-      quotaLimit,
-      isDisabled: isDisabledBySecurity,
-    };
-  });
+			title,
+			denyDownload,
+			indexing,
+			lifetime,
+			watermark,
+			tags,
+			quotaLimit,
+			isDisabled: isDisabledBySecurity,
+		};
+	});
 
-  return items;
+	return items;
 };

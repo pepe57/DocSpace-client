@@ -35,7 +35,7 @@ import {
   THeaderBackButton,
   TSelectorCancelButton,
   TSelectorHeader,
-} from "@docspace/shared/components/selector/Selector.types";
+} from "@docspace/ui-kit/components/selector";
 import { RoomsType } from "@docspace/shared/enums";
 
 import PluginStore from "SRC_DIR/store/PluginStore";

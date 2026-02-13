@@ -36,9 +36,9 @@ import EyeIcon from "PUBLIC_DIR/images/eye.react.svg";
 import FormFillIcon from "PUBLIC_DIR/images/form.fill.rect.svg";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import {
   FileFillingFormStatus,
   FileStatus,
@@ -49,18 +49,18 @@ import {
   mobile,
   mobileMore,
 } from "@docspace/shared/utils";
-import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
-import { Text } from "@docspace/shared/components/text";
+import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
+import { Text } from "@docspace/ui-kit/components/text";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { InputBlock } from "@docspace/shared/components/input-block";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { InputBlock } from "@docspace/ui-kit/components/input-block";
+import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 import {
   RoleStep,
   StatusIndicator,
 } from "@docspace/shared/components/filling-role-process";
 import { copyShareLink } from "@docspace/shared/utils/copy";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
@@ -188,7 +188,11 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
   } as React.CSSProperties;
 
   return (
-    <section className={styles.container} style={bgBlockStyle} data-testid="completed_form_vdr_container">
+    <section
+      className={styles.container}
+      style={bgBlockStyle}
+      data-testid="completed_form_vdr_container"
+    >
       <Scrollbar fixedSize>
         <div
           className={classNames(

@@ -4,7 +4,7 @@ import { fireEvent, screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { BackupStorageType, DeviceType, FolderType } from "../../../enums";
-import { ButtonSize } from "../../../components/button";
+import { ButtonSize } from "@docspace/ui-kit/components/button";
 import * as portalApi from "../../../api/portal";
 import * as socketModule from "../../../utils/socket";
 
@@ -15,7 +15,7 @@ vi.mock("../../../api/portal", () => ({
   startBackup: vi.fn().mockResolvedValue(undefined),
 }));
 
-vi.mock("@docspace/shared/components/toast", () => ({
+vi.mock("@docspace/ui-kit/components/toast", () => ({
   toastr: {
     success: vi.fn(),
     error: vi.fn(),

@@ -34,7 +34,7 @@ import type {
   TFormRoleMappingRequest,
 } from "@docspace/shared/api/files/types";
 import { formRoleMapping } from "@docspace/shared/api/files";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import type { TFormRole } from "../types";
 

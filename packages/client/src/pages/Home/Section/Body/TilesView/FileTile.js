@@ -31,16 +31,14 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { FolderType } from "@docspace/shared/enums";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 
-import {
-  FileTile as FileTileComponent,
-  FolderTile,
-  RoomTile,
-  TemplateTile,
-} from "@docspace/shared/components/tiles";
+import { FileTile as FileTileComponent } from "@docspace/ui-kit/components/tiles/file-tile";
+import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
+import { RoomTile } from "@docspace/ui-kit/components/tiles/room-tile";
+import { TemplateTile } from "@docspace/ui-kit/components/tiles/template-tile";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
@@ -257,6 +255,7 @@ const FileTile = (props) => {
   const roomTile = (
     <RoomTile
       {...commonProps}
+      t={t}
       key={item.id}
       selectTag={onSelectTag}
       selectOption={onSelectOption}
@@ -358,7 +357,7 @@ export default inject(
     };
   },
 )(
-  withTranslation(["Files", "InfoPanel", "Notifications"])(
+  withTranslation(["Files", "InfoPanel", "Notifications", "Common"])(
     withFileActions(withBadges(withQuickButtons(observer(FileTile)))),
   ),
 );

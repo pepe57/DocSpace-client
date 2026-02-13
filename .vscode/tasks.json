@@ -96,7 +96,7 @@
       "type": "shell",
       "options": {
         "env": {
-          "DOTNET_ENVIRONMENT": "enterprise"
+          "APP_EDITION": "enterprise"
         }
       },
       "group": {
@@ -206,7 +206,7 @@
       "type": "shell",
       "options": {
         "env": {
-          "DOTNET_ENVIRONMENT": "developer"
+          "APP_EDITION": "developer"
         }
       },
       "group": {
@@ -766,7 +766,7 @@
     {
       "label": "Test | E2E All - Run",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; docker compose -f docker/e2e/compose.yaml run --rm -e RUN_CLIENT=true -e RUN_LOGIN=true -e RUN_DOCEDITOR=true -e RUN_SDK=true -e RUN_MANAGEMENT=true e2e-tests",
+      "command": "cd ${workspaceFolder} ; docker compose -f docker/e2e/compose.yaml run --rm -e RUN_CLIENT=true -e RUN_LOGIN=true -e RUN_DOCEDITOR=true -e RUN_SDK=true -e RUN_MANAGEMENT=true -e WORKERS=5 e2e-tests",
       "group": {
         "kind": "build",
         "isDefault": true

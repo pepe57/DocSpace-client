@@ -27,13 +27,13 @@
 import isEmpty from "lodash/isEmpty";
 import omit from "lodash/omit";
 
-import { toastr } from "../components/toast";
-import { Nullable, TTranslation } from "../types";
-import { TUser } from "../api/people/types";
-import { ThemeKeys } from "../enums";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import type { Nullable, TTranslation } from "../types";
+import type { TUser } from "../api/people/types";
+import { ThemeKeys } from "@docspace/ui-kit/enums";
 
 import { desktopConstants, getEditorTheme } from "./common";
-import { checkIsSSR } from "./device";
+import { checkIsSSR } from "@docspace/ui-kit/utils/device";
 
 const isSSR = checkIsSSR();
 
@@ -55,7 +55,7 @@ export function regDesktop(
       domain: desktopConstants.domain,
       provider: desktopConstants.provider,
       userId: user.id,
-      uiTheme: getEditorTheme(user.theme || ThemeKeys.BaseStr),
+      uiTheme: getEditorTheme(user.theme),
     };
 
     let extendedData;
@@ -145,7 +145,7 @@ export function relogin() {
         domain: desktopConstants.domain,
         onsuccess: "reload",
       };
-      window.AscDesktopEditor.execCommand(
+      window.AscDesktopEditor?.execCommand(
         "portal:logout",
         JSON.stringify(data),
       );
@@ -159,7 +159,7 @@ export function checkPwd() {
       emailInput: "login",
       pwdInput: "password",
     };
-    window.AscDesktopEditor.execCommand(
+    window.AscDesktopEditor?.execCommand(
       "portal:checkpwd",
       JSON.stringify(data),
     );
@@ -171,6 +171,6 @@ export function logout() {
     const data = {
       domain: desktopConstants.domain,
     };
-    window.AscDesktopEditor.execCommand("portal:logout", JSON.stringify(data));
+    window.AscDesktopEditor?.execCommand("portal:logout", JSON.stringify(data));
   }
 }

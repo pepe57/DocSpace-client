@@ -26,7 +26,7 @@
 
 import { memo } from "react";
 import type { HeaderProps } from "./StartFillingPanel.types";
-import { TooltipContainer } from "../../components/tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 export const Header = memo(
   ({

@@ -29,10 +29,10 @@ import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 
-import WarningComponent from "@docspace/shared/components/navigation/sub-components/WarningComponent";
-import { Link } from "@docspace/shared/components/link";
+import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
+import { Link } from "@docspace/ui-kit/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 type InjectedProps = {
   isPayer?: boolean;

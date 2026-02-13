@@ -26,15 +26,16 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { classNames, getCookie } from "@docspace/shared/utils";
+import { Text } from "@docspace/ui-kit/components/text";
+import { classNames } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import {
   TFeedAction,
   TFeedData,
   RoomMember,
 } from "@docspace/shared/api/rooms/types";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { formatDateLocalized, parseToDateTime } from "@docspace/shared/utils/date";
+import { formatDateLocalized, parseToDateTime } from "@docspace/ui-kit/utils/date";
 
 import { useFeedTranslation } from "../hooks/useFeedTranslation";
 

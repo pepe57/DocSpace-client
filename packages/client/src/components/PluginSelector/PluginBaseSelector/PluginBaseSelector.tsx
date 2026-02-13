@@ -34,7 +34,7 @@ import {
   Selector,
   TSelectorItem,
   type SelectorProps,
-} from "@docspace/shared/components/selector";
+} from "@docspace/ui-kit/components/selector";
 
 import {
   BreadCrumbsLoader,
@@ -49,7 +49,7 @@ import {
   TSelectorCancelButton,
   TSelectorHeader,
   TSelectorSubmitButton,
-} from "@docspace/shared/components/selector/Selector.types";
+} from "@docspace/ui-kit/components/selector";
 
 import EmptyScreenFilter from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg?url";
 import PluginStore from "SRC_DIR/store/PluginStore";

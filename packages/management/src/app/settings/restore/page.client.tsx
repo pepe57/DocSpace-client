@@ -38,7 +38,7 @@ import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 import { RestoreBackup } from "@docspace/shared/pages/backup/restore-backup";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-import { ButtonSize } from "@docspace/shared/components/button";
+import { ButtonSize } from "@docspace/ui-kit/components/button";
 import { uploadBackup } from "@docspace/shared/api/files";
 
 import type {
@@ -58,7 +58,7 @@ import type { TPortals } from "@docspace/shared/api/management/types";
 
 import { useBackup } from "@/hooks/useBackup";
 import useAppState from "@/hooks/useAppState";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useStores } from "@/hooks/useStores";
 import { useFilesSelectorInput } from "@/hooks/useFilesSelectorInput";
 
