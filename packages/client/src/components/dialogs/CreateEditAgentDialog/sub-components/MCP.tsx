@@ -81,7 +81,7 @@ const MCPSettings = ({
 					<AddButton onClick={onClickAction} />
 
 					{selectedServers?.map((server) => (
-						<div className="ai-mcp-item" key={server.id}>
+						<div className="ai-mcp-item" key={server.id} data-testid="ai-mcp-item">
 							<MCPIcon
 								title={server.label}
 								imgSrc={server.icon}
@@ -104,6 +104,7 @@ const MCPSettings = ({
 										});
 									}
 								}}
+                dataTestId="remove-mcp-button"
 							/>
 						</div>
 					))}
