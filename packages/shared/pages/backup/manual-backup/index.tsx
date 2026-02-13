@@ -262,6 +262,7 @@ const ManualBackup = ({
   const onMakeTemporaryBackup = async () => {
     setErrorMessage("");
     setBackupProgressError("");
+    setBackupProgressWarning("");
     clearLocalStorage();
     localStorage.setItem(
       BackupStorageLocalKey.StorageType,
@@ -332,6 +333,8 @@ const ManualBackup = ({
 
     setErrorMessage("");
     setBackupProgressError("");
+    setBackupProgressWarning("");
+    
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
       selectedFolder,
