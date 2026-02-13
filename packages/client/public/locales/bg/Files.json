@@ -126,7 +126,6 @@
   "NewInRooms": "Нов в стаи",
   "NoAccessRoomTitle": "За съжаление нямате достъп до тази стая.",
   "NoExternalLinks": "Няма външни линкове",
-  "Open": "Отвори",
   "OpenCreatedTemplate": "Отвори създаден шаблон",
   "OpenedViaLink": "Отворено чрез линк: достъп <strong>{{access}}</strong>.",
   "OpenLocation": "Отвори локация",

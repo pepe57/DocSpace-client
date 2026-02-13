@@ -126,7 +126,6 @@
   "NewInRooms": "Νέα στα δωμάτια",
   "NoAccessRoomTitle": "Δυστυχώς, δεν έχετε πρόσβαση σε αυτό το δωμάτιο.",
   "NoExternalLinks": "Δεν υπάρχουν εξωτερικοί σύνδεσμοι",
-  "Open": "Άνοιγμα",
   "OpenCreatedTemplate": "Άνοιγμα δημιουργημένου προτύπου",
   "OpenedViaLink": "Ανοίχθηκε μέσω συνδέσμου: πρόσβαση <strong>{{access}}</strong>.",
   "OpenLocation": "Ανοιχτή τοποθεσία",

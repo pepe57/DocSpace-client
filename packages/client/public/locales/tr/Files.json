@@ -126,7 +126,6 @@
   "NewInRooms": "Odalarda yeni",
   "NoAccessRoomTitle": "Üzgünüz, bu odaya erişiminiz yok.",
   "NoExternalLinks": "Harici bağlantı yok",
-  "Open": "Aç",
   "OpenCreatedTemplate": "Oluşturulan şablonu aç",
   "OpenedViaLink": "Bağlantı yoluyla açıldı: erişim <strong>{{access}}</strong>.",
   "OpenLocation": "Konumu aç",

@@ -202,7 +202,7 @@ const VersionRow = (props) => {
     {
       key: "open",
       icon: ExternalLinkIcon,
-      label: t("Files:Open"),
+      label: t("Common:Open"),
       onClick: onOpenFile,
     },
     canChangeVersionFileHistory && {
