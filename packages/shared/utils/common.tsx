@@ -1269,15 +1269,15 @@ export const getSelectZone = (
 
   if (isWindowsZones) {
     const windowsZoneKey = findWindows(userTimezone);
-    return (
-      zones.filter((zone) => zone.key === windowsZoneKey[0]) ||
-      zones.filter((zone) => zone.key === defaultTimezone)
-    );
+    const result = zones.filter((zone) => zone.key === windowsZoneKey[0]);
+    return result.length
+      ? result
+      : zones.filter((zone) => zone.key === defaultTimezone);
   }
-  return (
-    zones.filter((zone) => zone.key === userTimezone) ||
-    zones.filter((zone) => zone.key === defaultTimezone)
-  );
+  const userTimezoneResult = zones.filter((zone) => zone.key === userTimezone);
+  return userTimezoneResult.length
+    ? userTimezoneResult
+    : zones.filter((zone) => zone.key === defaultTimezone);
 };
 
 export function getLogoUrl(
