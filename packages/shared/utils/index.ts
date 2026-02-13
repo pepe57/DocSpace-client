@@ -79,7 +79,6 @@ import {
   FileFillingFormStatus,
   FolderType,
 } from "../enums";
-import { getTitleWithoutExtension } from "./getTitleWithoutExtension";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
 import { injectDefaultTheme } from "./injectDefaultTheme";
@@ -151,7 +150,6 @@ export {
   uuid,
   getTextColor,
   trimSeparator,
-  getTitleWithoutExtension,
 };
 
 export const getModalType = () => {
@@ -171,6 +169,16 @@ export const getDeviceTypeByWidth = (width: number): DeviceType => {
   if (isTablet(width)) return DeviceType.tablet;
 
   return DeviceType.desktop;
+};
+
+export const getTitleWithoutExtension = (
+  item: { title?: string; fileExst: string },
+  fromTemplate: boolean,
+) => {
+  const titleWithoutExst = item?.title?.split(".").slice(0, -1).join(".");
+  return titleWithoutExst && item.fileExst && !fromTemplate
+    ? titleWithoutExst
+    : (item?.title ?? "");
 };
 
 export const getUpperCaseExtension = (extension: string) => {
