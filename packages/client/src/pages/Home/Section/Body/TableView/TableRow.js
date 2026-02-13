@@ -326,6 +326,7 @@ const FilesTableRow = memo((props) => {
             t={t}
             element={element}
             dragStyles={dragStyles}
+            isHovered={isHovered}
             {...props}
           />
         ) : isRooms ? (
