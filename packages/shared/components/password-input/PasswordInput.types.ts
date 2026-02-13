@@ -155,4 +155,6 @@ export type PasswordInputProps = Omit<
     inputWidth?: string;
     /** Callback function triggered on input change */
     onChange?: (e: React.ChangeEvent<HTMLInputElement>, value?: string) => void;
+    /** Optional function to sanitize the input value in real time (e.g. strip spaces) */
+    sanitizeValue?: (value: string) => string;
   };

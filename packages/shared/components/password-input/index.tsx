@@ -114,6 +114,7 @@ const PasswordInput = ({
   // clipEmailResource = "E-mail ",
   // clipPasswordResource = "Password ",
   simulateSymbol = "•",
+  sanitizeValue,
 }: PasswordInputProps) => {
   const refTooltip = useRef(null);
 
@@ -148,6 +149,7 @@ const PasswordInput = ({
     setState,
     onChange,
     state.value,
+    sanitizeValue,
   );
 
   const { onGeneratePassword } = usePasswordGenerator(

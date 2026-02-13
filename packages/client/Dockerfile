@@ -65,4 +65,5 @@ RUN pnpm --filter @docspace/client run build:translations
 WORKDIR /app/packages/client
 
 # Run test:build
-RUN pnpm --filter @docspace/client run test:build
+RUN NODE_OPTIONS="--max-old-space-size=4096" \
+    pnpm --filter @docspace/client run test:build
