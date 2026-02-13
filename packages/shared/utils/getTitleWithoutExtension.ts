@@ -24,14 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile } from "../api/files/types";
-
 export const getTitleWithoutExtension = (
-  item: TFile,
+  item: { title?: string; fileExst: string },
   fromTemplate: boolean,
 ) => {
-  const titleWithoutExst = item.title.split(".").slice(0, -1).join(".");
+  const titleWithoutExst = item?.title?.split(".").slice(0, -1).join(".");
   return titleWithoutExst && item.fileExst && !fromTemplate
     ? titleWithoutExst
-    : item.title;
+    : (item?.title ?? "");
 };
