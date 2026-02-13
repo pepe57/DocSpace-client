@@ -78,7 +78,7 @@ class DefaultTemplatesStore {
   formTemplatesArray = (templates: TDefaultTemplate[]) => {
     const templatesArr = templates.map((item) => ({
       id: item?.selectedFile || null,
-      extension: item.fileExtension,
+      fileExst: item.fileExtension,
       isModified: !!item?.selectedFile,
       title: item?.fileTitle || this.getTitleByExt(item.fileExtension),
       lastModified: item?.lastModified,

@@ -173,6 +173,10 @@ export const getDeviceTypeByWidth = (width: number): DeviceType => {
   return DeviceType.desktop;
 };
 
+export const getUpperCaseExtension = (extension: string) => {
+  return extension.split(".").pop()?.toUpperCase() ?? "";
+};
+
 export const getLastColumn = (
   tableStorageName: string,
   storageColumnsSize?: string,

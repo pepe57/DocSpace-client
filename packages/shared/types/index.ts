@@ -350,10 +350,10 @@ declare global {
 }
 
 export type TDefaultTemplateItem = {
-	id: number | null;
-	title?: string;
-	isModified?: boolean;
-	lastModified?: string;
-	extension: string;
-	viewUrl: string;
+  id: number | null;
+  title?: string;
+  isModified?: boolean;
+  lastModified?: string;
+  fileExst: string;
+  viewUrl: string;
 };
