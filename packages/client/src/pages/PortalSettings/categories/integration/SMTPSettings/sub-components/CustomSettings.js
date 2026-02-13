@@ -158,6 +158,7 @@ const CustomSettings = (props) => {
         inputType={InputType.password}
         size={InputSize.base}
         testId="smtp_host_password_input"
+        sanitizeValue={(v) => v.replace(/\s/g, "")}
       />
 
       <Checkbox

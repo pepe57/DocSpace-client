@@ -78,7 +78,8 @@ RUN pnpm --filter @docspace/client run build:translations && \
     pnpm --filter @docspace/management run build:translations
 
 # Build test bundles for all packages and clean up in single layer
-RUN pnpm --filter @docspace/client run test:build && \
+RUN NODE_OPTIONS="--max-old-space-size=4096" \
+    pnpm --filter @docspace/client run test:build && \
     pnpm --filter @docspace/login run test:build && \
     pnpm --filter @docspace/doceditor run test:build && \
     pnpm --filter @docspace/sdk run test:build && \

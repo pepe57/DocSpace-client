@@ -126,7 +126,7 @@ class ConsumerModalDialog extends React.Component {
 
   onChangeHandler = (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.replace(/\s/g, ""),
     });
   };
 
@@ -149,7 +149,7 @@ class ConsumerModalDialog extends React.Component {
     for (i = 0; i < stateLength; i++) {
       prop.push({
         name: Object.keys(state)[i],
-        value: Object.values(state)[i],
+        value: Object.values(state)[i].replace(/\s/g, ""),
       });
     }
     const data = {
