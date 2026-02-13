@@ -347,6 +347,6 @@ export type TDefaultTemplateItem = {
   title?: string;
   isModified?: boolean;
   lastModified?: string;
-  extension: string;
+  fileExst: string;
   viewUrl: string;
 };

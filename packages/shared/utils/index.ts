@@ -26,7 +26,7 @@
 
 "use client";
 
-import { TTranslation } from "../types";
+import { TDefaultTemplateItem, TTranslation } from "../types";
 import { parseToDateTime } from "./date";
 
 import { isArrayEqual } from "./array";
@@ -199,13 +199,17 @@ export const getDeviceTypeByWidth = (width: number): DeviceType => {
 };
 
 export const getTitleWithoutExtension = (
-  item: TFile,
+  item: TFile | TDefaultTemplateItem,
   fromTemplate: boolean,
 ) => {
-  const titleWithoutExst = item.title.split(".").slice(0, -1).join(".");
+  const titleWithoutExst = item?.title?.split(".").slice(0, -1).join(".");
   return titleWithoutExst && item.fileExst && !fromTemplate
     ? titleWithoutExst
-    : item.title;
+    : item?.title;
+};
+
+export const getUpperCaseExtension = (extension: string) => {
+  return extension.split(".").pop()?.toUpperCase() ?? "";
 };
 
 export const getLastColumn = (
