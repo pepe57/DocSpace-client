@@ -77,6 +77,7 @@ export const DeletePortalDialog = observer(() => {
         toastr.success(
           <Trans
             i18nKey="DeleteRequestSuccess"
+            ns="Management"
             values={{
               productName: t("Common:ProductName"),
               email,
@@ -117,6 +118,7 @@ export const DeletePortalDialog = observer(() => {
             </Text>
             <Trans
               i18nKey="DeleteSetupPortalText"
+              ns="Management"
               values={{
                 productName: t("Common:ProductName"),
                 domain,
@@ -130,6 +132,7 @@ export const DeletePortalDialog = observer(() => {
         ) : (
           <Trans
             i18nKey="DeleteEmptyPortalText"
+            ns="Management"
             values={{
               domain,
             }}
