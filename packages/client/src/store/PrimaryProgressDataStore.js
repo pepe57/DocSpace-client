@@ -77,10 +77,14 @@ class PrimaryProgressDataStore {
         progressInfo.label = getOperationsProgressTitle(operation);
       }
 
-      this.primaryOperationsArray[operationIndex] = {
+      const updatedOperation = {
         ...operationObject,
         ...progressInfo,
       };
+
+      const newPrimaryOperationsArray = this.primaryOperationsArray.slice();
+      newPrimaryOperationsArray[operationIndex] = updatedOperation;
+      this.primaryOperationsArray = newPrimaryOperationsArray;
     } else {
       const progress = {
         operation,
@@ -101,11 +105,7 @@ class PrimaryProgressDataStore {
         (item) => !item.completed,
       );
 
-      this.primaryOperationsArray.splice(
-        0,
-        this.primaryOperationsArray.length,
-        ...incompleteOperations,
-      );
+      this.primaryOperationsArray = [...incompleteOperations];
 
       // console.log("clearPrimaryProgressData", this.primaryOperationsArray);
       return;
@@ -117,7 +117,11 @@ class PrimaryProgressDataStore {
 
     if (operationIndex === -1) return;
 
-    this.primaryOperationsArray.splice(operationIndex, 1);
+    const newPrimaryOperationsArray = this.primaryOperationsArray.filter(
+      (_, index) => index !== operationIndex,
+    );
+
+    this.primaryOperationsArray = [...newPrimaryOperationsArray];
 
     console.log("clearPrimaryProgressData", this.primaryOperationsArray);
   };
