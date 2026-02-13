@@ -14,6 +14,7 @@ This repository contains the **frontend** for [ONLYOFFICE DocSpace](https://gith
 
 - [Technology Stack](#technology-stack)
 - [Project Structure](#project-structure)
+- [Git Submodules](#git-submodules)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Quick Start](#quick-start)
@@ -164,6 +165,46 @@ All applications depend on `@docspace/shared`, which provides:
 - Shared types and utilities
 - Common business logic
 
+### Git Submodules
+
+This repository uses a git submodule for the UI component library:
+
+#### `libs/ui-kit` - UI Component Library
+
+**Purpose:** Shared UI component library for DocSpace applications
+
+**Repository:** [docspace-ui-kit-react](https://github.com/ONLYOFFICE/docspace-ui-kit-react)
+**Location:** `libs/ui-kit/`
+
+**Features:**
+- 90+ React components (Button, Input, Modal, Table, etc.)
+- Custom hooks and contexts
+- Theme system with Base/Dark modes
+- Internationalization support
+- TypeScript types and utilities
+
+**Working with the submodule:**
+
+```bash
+# Clone repository with submodules
+git clone --recurse-submodules https://github.com/ONLYOFFICE/DocSpace.git
+
+# If already cloned without submodules, initialize them
+git submodule update --init --recursive
+
+# Update submodule to latest commit
+cd libs/ui-kit
+git pull origin develop
+cd ../..
+git add libs/ui-kit
+git commit -m "Update ui-kit submodule"
+
+# Check submodule status
+git submodule status
+```
+
+**Documentation:** See [libs/ui-kit/README.md](https://github.com/ONLYOFFICE/docspace-ui-kit-react#readme) for component documentation and usage examples.
+
 ## Getting Started
 
 > **Note:** The frontend requires a running backend. See the [server README](https://github.com/ONLYOFFICE/DocSpace-server#readme) for backend setup instructions.
@@ -178,6 +219,8 @@ All applications depend on `@docspace/shared`, which provides:
 | [Docker](https://www.docker.com/) | >= 28.5.0 | `docker --version` |
 
 ### Quick Start
+
+> **Note:** This repository uses git submodules. If you haven't cloned with `--recurse-submodules`, run `git submodule update --init --recursive` first. See [Git Submodules](#git-submodules) for details.
 
 **Terminal 1 - Start backend:**
 ```bash
