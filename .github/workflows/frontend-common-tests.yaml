@@ -41,10 +41,17 @@ jobs:
       dependencies: ${{ steps.changes.outputs.packages }}
       licenses: ${{ steps.changes.outputs.packages }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Add known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan git.onlyoffice.com >> ~/.ssh/known_hosts
+
+      - name: Checkout repository with submodules
+        uses: actions/checkout@v4
         with:
           submodules: 'true'
           path: "."
+          ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Detect file changes
         id: changes
         shell: bash
@@ -214,13 +221,17 @@ jobs:
       dependencies_result: ${{ steps.dependencies.outputs.result }}
       licenses_result: ${{ steps.licenses.outputs.result }}
     steps:
-      - uses: actions/checkout@v4
-      - name: Fetch ui-kit submodule from develop
+      - name: Add known hosts
         run: |
-          git clone https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/${{ github.repository_owner }}/docspace-ui-kit-react.git libs/ui-kit
-          cd libs/ui-kit
-          git checkout develop
-          git pull origin develop
+          mkdir -p ~/.ssh
+          ssh-keyscan git.onlyoffice.com >> ~/.ssh/known_hosts
+
+      - name: Checkout repository with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+          path: "."
+          ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -441,13 +452,17 @@ jobs:
     if: needs.changes.outputs.playwright_client == 'true' || needs.changes.outputs.workflow == 'true'
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - name: Fetch ui-kit submodule from develop
+      - name: Add known hosts
         run: |
-          git clone https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/${{ github.repository_owner }}/docspace-ui-kit-react.git libs/ui-kit
-          cd libs/ui-kit
-          git checkout develop
-          git pull origin develop
+          mkdir -p ~/.ssh
+          ssh-keyscan git.onlyoffice.com >> ~/.ssh/known_hosts
+
+      - name: Checkout repository with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+          path: "."
+          ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
         run: docker ps -a --filter name=client-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -472,13 +487,17 @@ jobs:
     if: always() && (needs.changes.outputs.playwright_login == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - name: Fetch ui-kit submodule from develop
+      - name: Add known hosts
         run: |
-          git clone https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/${{ github.repository_owner }}/docspace-ui-kit-react.git libs/ui-kit
-          cd libs/ui-kit
-          git checkout develop
-          git pull origin develop
+          mkdir -p ~/.ssh
+          ssh-keyscan git.onlyoffice.com >> ~/.ssh/known_hosts
+
+      - name: Checkout repository with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+          path: "."
+          ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
         run: docker ps -a --filter name=login-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -503,13 +522,17 @@ jobs:
     if: always() && (needs.changes.outputs.playwright_doceditor == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - name: Fetch ui-kit submodule from develop
+      - name: Add known hosts
         run: |
-          git clone https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/${{ github.repository_owner }}/docspace-ui-kit-react.git libs/ui-kit
-          cd libs/ui-kit
-          git checkout develop
-          git pull origin develop
+          mkdir -p ~/.ssh
+          ssh-keyscan git.onlyoffice.com >> ~/.ssh/known_hosts
+
+      - name: Checkout repository with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+          path: "."
+          ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
         run: docker ps -a --filter name=doceditor-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -534,13 +557,17 @@ jobs:
     if: always() && (needs.changes.outputs.playwright_sdk == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - name: Fetch ui-kit submodule from develop
+      - name: Add known hosts
         run: |
-          git clone https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/${{ github.repository_owner }}/docspace-ui-kit-react.git libs/ui-kit
-          cd libs/ui-kit
-          git checkout develop
-          git pull origin develop
+          mkdir -p ~/.ssh
+          ssh-keyscan git.onlyoffice.com >> ~/.ssh/known_hosts
+
+      - name: Checkout repository with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+          path: "."
+          ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
         run: docker ps -a --filter name=sdk-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
@@ -565,13 +592,17 @@ jobs:
     if: always() && (needs.changes.outputs.playwright_management == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - name: Fetch ui-kit submodule from develop
+      - name: Add known hosts
         run: |
-          git clone https://${{ secrets.GITEA_TOKEN }}@${{ secrets.GITEA_HOST }}/${{ github.repository_owner }}/docspace-ui-kit-react.git libs/ui-kit
-          cd libs/ui-kit
-          git checkout develop
-          git pull origin develop
+          mkdir -p ~/.ssh
+          ssh-keyscan git.onlyoffice.com >> ~/.ssh/known_hosts
+
+      - name: Checkout repository with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+          path: "."
+          ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
         run: docker ps -a --filter name=management-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
