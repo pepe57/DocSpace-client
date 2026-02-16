@@ -50,7 +50,7 @@ import RoomListPanel from "./sub-components/RoomListPanel";
 import GroupItem from "./sub-components/GroupItem";
 import { EditRoomGroupsDialogProps } from "./EditRoomGroupsDialog.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TSelectorItem } from "@docspace/shared/components/selector/Selector.types";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector/Selector.types";
 
 const TOOLTIP_DISMISSED_KEY = "roomGroupingTooltipDismissed";
 

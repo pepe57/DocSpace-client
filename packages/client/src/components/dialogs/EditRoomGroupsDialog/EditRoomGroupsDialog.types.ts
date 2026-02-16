@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TColorScheme } from "@docspace/shared/themes";
+import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TSelectorItem } from "@docspace/shared/components/selector/Selector.types";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector/Selector.types";
 
 export interface ILogoData {
   small: string;
