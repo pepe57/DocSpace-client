@@ -72,9 +72,10 @@ const Uploader = (props) => {
   const { t, theme, myFolderId, fetchTreeFolders } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
-  const [version, onSetVersion] = useState(sdkVersion[210]);
 
+  const [version, onSetVersion] = useState(sdkVersion[210]);
   const [source, onSetSource] = useState(sdkSource.Package);
+  const [enableFolderUpload, setEnableFolderUpload] = useState(false);
 
   const [config, setConfig] = useState({
     src: window.location.origin,
@@ -84,8 +85,9 @@ const Uploader = (props) => {
     frameId: "ds-frame",
     init: true,
     acceptExtensions: FILE_TYPE_EXTENSIONS.document.join(","),
-    linkMainText: t("Common:Upload"),
-    linkSecondaryText: t("Common:DropzoneTitleSecondary"),
+    linkMainTextForFiles: t("Common:Upload"),
+    linkMainTextForFolders: "",
+    secondaryText: t("Common:DropzoneTitleSecondary"),
     id: myFolderId,
     events: {
       onUploadSuccess: (data) => {
@@ -166,24 +168,54 @@ const Uploader = (props) => {
     });
   };
 
-  const debouncedSetLinkMainText = useCallback(
+  const debouncedSetLinkFilesText = useCallback(
     debounce((newText) => {
       setConfig((oldConfig) => ({
         ...oldConfig,
-        linkMainText: newText,
+        linkMainTextForFiles: newText,
         init: true,
       }));
     }, 500),
     [setConfig],
   );
 
-  const onChangeLinkMainText = (e) => {
+  const onChangeLinkFileText = (e) => {
     const newText = e.target.value;
     setConfig((oldConfig) => ({
       ...oldConfig,
-      linkMainText: newText,
+      linkMainTextForFiles: newText,
     }));
-    debouncedSetLinkMainText(newText);
+    debouncedSetLinkFilesText(newText);
+  };
+
+  const debouncedSetLinkFolderText = useCallback(
+    debounce((newText) => {
+      setConfig((oldConfig) => ({
+        ...oldConfig,
+        linkMainTextForFolders: newText,
+        init: true,
+      }));
+    }, 500),
+    [setConfig],
+  );
+
+  const onChangeLinkFolderText = (e) => {
+    const newText = e.target.value;
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      linkMainTextForFolders: newText,
+    }));
+    debouncedSetLinkFolderText(newText);
+  };
+
+  const onChangeEnableFolderUpload = () => {
+    const newValue = !enableFolderUpload;
+    setEnableFolderUpload(newValue);
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      linkMainTextForFolders: newValue ? "Upload folder" : undefined,
+      init: true,
+    }));
   };
 
   const getSelectedExtensions = () => {
@@ -290,12 +322,35 @@ const Uploader = (props) => {
               <Label className="label" text={t("ButtonText")} />
               <TextInput
                 scale
-                value={config.linkMainText}
-                onChange={onChangeLinkMainText}
+                value={config.linkMainTextForFiles}
+                onChange={onChangeLinkFileText}
                 tabIndex={5}
                 testId="button_text_input"
               />
             </ControlsGroup>
+
+            <ControlsGroup>
+              <Checkbox
+                className="checkbox"
+                label="Enable folder upload"
+                onChange={onChangeEnableFolderUpload}
+                isChecked={enableFolderUpload}
+                dataTestId="enable_folder_upload_checkbox"
+              />
+            </ControlsGroup>
+
+            {enableFolderUpload && (
+              <ControlsGroup>
+                <Label className="label" text="Button text for folder" />
+                <TextInput
+                  scale
+                  value={config.linkMainTextForFolders || ""}
+                  onChange={onChangeLinkFolderText}
+                  tabIndex={6}
+                  testId="button_folder_text_input"
+                />
+              </ControlsGroup>
+            )}
 
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
             <WidthSetter
