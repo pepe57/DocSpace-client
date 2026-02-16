@@ -32,13 +32,13 @@ import { inject, observer } from "mobx-react";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import PublicRoomBar from "@docspace/shared/components/public-room-bar";
-import { toastr } from "@docspace/shared/components/toast";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
+import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
@@ -441,7 +441,7 @@ const EditRoomGroupsDialog = ({
             {t("GroupingRooms:RoomGroupingSettingDescription")}
           </Text>
         </div>
-        <SelectorAddButton
+        <AddButton
           onClick={onClickCreateNewGroup}
           className={styles.selectorAddButton}
           label={t("GroupingRooms:CreateNewGroup")}

@@ -26,8 +26,8 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { Aside } from "@docspace/ui-kit/components/aside";
 import RoomSelector from "@docspace/shared/selectors/Room";
 import { convertToItems } from "@docspace/shared/selectors/Room/RoomSelector.utils";
 

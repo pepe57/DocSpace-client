@@ -27,14 +27,14 @@
 import React from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { isMobile } from "@docspace/shared/utils";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { isMobile } from "@docspace/ui-kit/utils";
 import { ButtonKeys } from "@docspace/shared/enums";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import { CoverDialogProps } from "../RoomLogoCoverDialog.types";
 import type {
@@ -47,8 +47,8 @@ import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/shared/components/text-input";
-import { Text } from "@docspace/shared/components/text";
+} from "@docspace/ui-kit/components/text-input";
+import { Text } from "@docspace/ui-kit/components/text";
 import styles from "../EditRoomGroupsDialog.module.scss";
 
 const GroupIconDialog = ({

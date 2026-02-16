@@ -1,7 +1,6 @@
 {
     "AddRoom": "Add room",
     "AddToGroup": "Add to group",
-    "AllRooms": "All rooms",
     "CreateAGroup": "Create a group",
     "CreateNewGroup": "Create a new group",
     "ChangesApplied": "Changes have been applied",
@@ -26,7 +25,6 @@
     "RoomGrouping": "Room grouping",
     "RoomGroupingSettingDescription": "You can group rooms into folders and easily switch between them.",
     "RoomGroupingDescription": "Easily navigate your {{productName}} with the new room grouping option. Organize rooms by specific features to quickly find what you need. You can enable room grouping now or anytime later in your profile settings.",
-    "RoomGroups": "Room groups",
     "RoomRemovedFromGroup": "The selected room has been removed from <1>{{groupName}}</1>.",
     "RoomsAddedToGroup": "The selected rooms have been added to <1>{{groupName}}</1>.",
     "RoomsRemovedFromGroup": "The selected rooms have been removed from <1>{{groupName}}</1>.",

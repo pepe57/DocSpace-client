@@ -26,11 +26,11 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { toastr } from "@docspace/shared/components/toast";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ButtonKeys } from "@docspace/shared/enums";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "../EditRoomGroupsDialog.module.scss";
 import type { DeleteGroupDialogProps } from "../EditRoomGroupsDialog.types";

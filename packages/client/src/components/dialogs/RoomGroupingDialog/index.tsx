@@ -32,10 +32,10 @@ import classNames from "classnames";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { SearchInput } from "@docspace/shared/components/search-input";
-import { InputSize } from "@docspace/shared/components/text-input";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { SearchInput } from "@docspace/ui-kit/components/search-input";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { isDesktop } from "@docspace/shared/utils";
 import MailIconUrl from "PUBLIC_DIR/images/mail.svg?url";
@@ -117,7 +117,7 @@ const RoomGroupingDialog = ({
                   [styles.tagNameTablet]: !isDesktopView,
                 })}
               >
-                {t("GroupingRooms:AllRooms")}
+                {t("Common:AllRooms")}
               </div>
             </div>
 

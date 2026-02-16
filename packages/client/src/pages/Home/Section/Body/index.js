@@ -35,7 +35,7 @@ import {
   isTablet,
   onEdgeScrolling,
 } from "@docspace/shared/utils";
-import { toastr } from "@docspace/shared/components/toast";
+
 import { isElementInViewport } from "@docspace/shared/utils/common";
 import { EMPTY_ARRAY } from "@docspace/shared/constants";
 import {

@@ -32,7 +32,7 @@ import { ButtonKeys } from "@docspace/shared/enums";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import type { GroupItemProps } from "../EditRoomGroupsDialog.types";
 import styles from "../EditRoomGroupsDialog.module.scss";
