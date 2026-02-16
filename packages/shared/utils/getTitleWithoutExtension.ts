@@ -24,29 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-<<<<<<<< HEAD:packages/client/src/components/TagManagement/TagManagement.tsx
-import { FC } from "react";
-import { inject, observer } from "mobx-react";
-
-import { TagManagement as TagManagementShared } from "@docspace/shared/components/tag-management";
-
-import type {
-  InjectedTagManagementProps,
-  TagManagementProps,
-  TagManagementWrapperProps,
-} from "./TagManagement.types";
-
-const TagManagement: FC<TagManagementWrapperProps> = (props) => {
-  return <TagManagementShared {...props} />;
-};
-
-export default inject<TStore, TagManagementProps, InjectedTagManagementProps>(
-  ({ filesActionsStore, authStore }) => ({
-    isAdmin: authStore.isAdmin,
-    onSelectTag: filesActionsStore.selectTag,
-  }),
-)(observer(TagManagement as FC<TagManagementProps>));
-========
 export const getTitleWithoutExtension = (
   item: { title?: string; fileExst: string },
   fromTemplate: boolean,
@@ -56,4 +33,3 @@ export const getTitleWithoutExtension = (
     ? titleWithoutExst
     : (item?.title ?? "");
 };
->>>>>>>> origin/develop:packages/shared/utils/getTitleWithoutExtension.ts

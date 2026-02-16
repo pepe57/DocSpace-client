@@ -28,13 +28,13 @@ import { useTranslation, Trans } from "react-i18next";
 import { FC, useCallback, useRef, useState } from "react";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
+import { Tags } from "@docspace/ui-kit/components/tags";
+import { toastr } from "@docspace/ui-kit/components/toast";
+
 import { useUnmount } from "../../hooks/useUnmount";
 import { useIsTable } from "../../hooks/useIsTable";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { ShareAccessRights } from "../../enums";
-
-import { Tags } from "../tags";
-import { toastr } from "../toast";
 
 import { TagManagementPopup } from "./TagManagement.popup";
 
