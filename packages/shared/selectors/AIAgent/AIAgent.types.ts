@@ -25,32 +25,32 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TRoom } from "../../api/rooms/types";
-import type { TSelectorItem } from "../../components/selector/Selector.types";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import type { WithFlag } from "../../types";
 
 export type TInitValue = WithFlag<
-  "withInit",
-  {
-    withInit: true;
-    initItems: TRoom[];
-    initTotal: number;
-    initHasNextPage: boolean;
-    initSearchValue?: string;
-  }
+	"withInit",
+	{
+		withInit: true;
+		initItems: TRoom[];
+		initTotal: number;
+		initHasNextPage: boolean;
+		initSearchValue?: string;
+	}
 >;
 
 export type AIAgentSelectorProps = {
-  id?: string;
-  className?: string;
-  style?: React.CSSProperties;
+	id?: string;
+	className?: string;
+	style?: React.CSSProperties;
 
-  onSubmit: (items: TSelectorItem[]) => void | Promise<void>;
-  excludeItems?: (number | string | undefined)[];
-  setIsDataReady?: (value: boolean) => void;
+	onSubmit: (items: TSelectorItem[]) => void | Promise<void>;
+	excludeItems?: (number | string | undefined)[];
+	setIsDataReady?: (value: boolean) => void;
 
-  withPadding?: boolean;
+	withPadding?: boolean;
 
-  onClose: () => void;
+	onClose: () => void;
 
-  disableBySecurity?: string;
+	disableBySecurity?: string;
 } & TInitValue;

@@ -25,28 +25,29 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import moment from "moment";
 import { Trans, useTranslation } from "react-i18next";
+import type { DateTime } from "luxon";
+import { now, addToDate, subtractFromDate, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
 import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { DateTimePicker } from "@docspace/shared/components/date-time-picker";
-import { InputType, TextInput } from "@docspace/shared/components/text-input";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { DateTimePicker } from "@docspace/ui-kit/components/date-time-picker";
+import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import LinkRolesDropdown from "./sub-components/LinkRolesDropdown";
 import styles from "./LinkSettingsPanel.module.scss";
 import { LinkSettingsPanelProps } from "./LinkSettingsPanel.types";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { TOption } from "@docspace/shared/components/combobox";
-import { getCookie } from "@docspace/shared/utils";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { TOption } from "@docspace/ui-kit/components/combobox";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 const MAX_USERS_COUNT = 1000;
@@ -74,13 +75,13 @@ const LinkSettingsPanel = ({
 
   const isEdit = Object.keys(activeLink).length === 0 ? false : true;
   const date = activeLink.expirationDate
-    ? moment(activeLink.expirationDate)
+    ? parseToDateTime(activeLink.expirationDate)
     : isEdit
       ? null
-      : moment().add(7, "days");
+      : addToDate(now(), 7, "days");
 
   const [userLimitIsChecked, setUserLimitIsChecked] = useState(limitIsChecked);
-  const [limitDate, setLimitDate] = useState<moment.Moment | null>(date);
+  const [limitDate, setLimitDate] = useState<DateTime | null>(date);
   const [maxNumber, setMaxNumber] = useState(String(maxUsersNumber));
   const [hasError, setHasError] = useState(false);
 
@@ -88,7 +89,7 @@ const LinkSettingsPanel = ({
     ? Number(maxNumber) <= usersNumber
     : false;
 
-  const showExpiredError = moment(new Date()).isAfter(limitDate);
+  const showExpiredError = isAfter(now(), limitDate);
 
   const currentAccess = filteredAccesses.find(
     (a) =>
@@ -124,7 +125,7 @@ const LinkSettingsPanel = ({
     if (defaultLink) {
       const linkToSubmit = {
         ...defaultLink,
-        expirationDate: limitDate ? moment(limitDate).toISOString() : null,
+        expirationDate: limitDate ? limitDate.toISO() : null,
         maxUseCount: userLimitIsChecked ? Number(maxNumber) : null,
         currentUseCount: usersNumber,
       } as TOption & {
@@ -303,9 +304,10 @@ const LinkSettingsPanel = ({
             className={styles.linkSettingsDatePicker}
             selectDateText={t("Common:SelectDate")}
             initialDate={limitDate}
-            minDate={moment().subtract(1, "days")}
+            minDate={subtractFromDate(now(), 1, "days") ?? undefined}
             maxDate={maxDate}
             useMaxTime={!activeLink.expirationDate}
+            translations={{ AM: t("Common:AM"), PM: t("Common:PM") }}
           />
         </div>
       </ModalDialog.Body>

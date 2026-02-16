@@ -1053,5 +1053,7 @@
   "YourTurn": "ඔබේ වාරය.",
   "ExternalLink": "බාහිර සබැඳිය",
   "Upload": "උඩුගත",
-  "Open": "අරින්න"
+  "Open": "අරින්න",
+  "TitleShowFolderActions": "බහාලුමේ ක්‍රියාමාර්ග පෙන්වන්න",
+  "TitleShowActions": "ගොනුවේ ක්‍රියාමාර්ග පෙන්වන්න"
 }

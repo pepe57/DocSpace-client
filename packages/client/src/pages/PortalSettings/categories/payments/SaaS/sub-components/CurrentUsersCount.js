@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import React from "react";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
@@ -36,8 +36,9 @@ const StyledCurrentUsersContainer = styled.div`
     ${(props) =>
       props.isDisabled &&
       css`
-        color: ${props.theme.client.settings.payment.priceContainer
-          .disableColor};
+        color: ${
+          props.theme.client.settings.payment.priceContainer.disableColor
+        };
       `}
   }
 `;

@@ -1,5 +1,7 @@
-import moment from "moment";
 import axios, { AxiosError } from "axios";
+import type { DateTime } from "luxon";
+
+import { now, addToDate, toISOString } from "@docspace/ui-kit/utils/date";
 import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
@@ -17,11 +19,11 @@ import type { TFileLink } from "../../../api/files/types";
 import { ShareLinkService } from "../../../services/share-link.service";
 import { getExternalFolderLinks, getExternalLinks } from "../../../api/files";
 
-import { TOption } from "../../combobox";
-import { TData, toastr } from "../../toast";
-import { Text } from "../../text";
-import { IconButton } from "../../icon-button";
-import { Tooltip } from "../../tooltip";
+import { TOption } from "@docspace/ui-kit/components/combobox";
+import { TData, toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import LinkRow from "../sub-components/LinkRow";
 import ShareHeader from "../sub-components/ShareHeader";
@@ -217,7 +219,8 @@ export const useShare = ({
 
   const changeShareOption = async (item: TOption, link: TFileLink) => {
     if (link.sharedTo.isExpired) {
-      link.sharedTo.expirationDate = moment().add(7, "days").toISOString();
+      link.sharedTo.expirationDate =
+        addToDate(now(), 7, "days")?.toISO() ?? null;
     }
 
     try {
@@ -243,7 +246,8 @@ export const useShare = ({
       setLoadingLinks([...loadingLinks, link.sharedTo.id]);
 
       if (link.sharedTo.isExpired) {
-        link.sharedTo.expirationDate = moment().add(7, "days").toISOString();
+        link.sharedTo.expirationDate =
+          addToDate(now(), 7, "days")?.toISO() ?? null;
       }
 
       try {
@@ -289,7 +293,7 @@ export const useShare = ({
         access: isReactivate ? link.access : ShareAccessRights.None,
         sharedTo: {
           ...link.sharedTo,
-          expirationDate: moment().add(7, "days").toISOString(),
+          expirationDate: addToDate(now(), 7, "days")?.toISO() ?? null,
         },
       });
 
@@ -343,18 +347,16 @@ export const useShare = ({
 
   const changeExpirationOption = async (
     link: TFileLink,
-    expirationDate: moment.Moment | null,
+    expirationDate: DateTime | null,
   ) => {
     try {
       setLoadingLinks([...loadingLinks, link.sharedTo.id]);
-
-      const expDate = moment(expirationDate);
 
       const res = await ShareLinkService.editLink(infoPanelSelection, {
         ...link,
         sharedTo: {
           ...link.sharedTo,
-          expirationDate: expirationDate ? expDate.toISOString() : null,
+          expirationDate: expirationDate ? toISOString(expirationDate) : null,
         },
       });
 

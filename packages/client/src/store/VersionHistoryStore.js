@@ -27,7 +27,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
 import { FileStatus, FileAction } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 class VersionHistoryStore {

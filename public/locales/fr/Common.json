@@ -1053,5 +1053,7 @@
   "YourTurn": "Votre tour",
   "ExternalLink": "Lien externe",
   "Upload": "Télécharger",
-  "Open": "Ouvrir"
+  "Open": "Ouvrir",
+  "TitleShowFolderActions": "Actions sur le dossier",
+  "TitleShowActions": "Actions sur le fichier"
 }

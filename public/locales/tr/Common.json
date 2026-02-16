@@ -1053,5 +1053,7 @@
   "YourTurn": "Sıra sizde",
   "ExternalLink": "Harici bağlantı",
   "Upload": "Yükle",
-  "Open": "Aç"
+  "Open": "Aç",
+  "TitleShowFolderActions": "Klasör eylemlerini göster",
+  "TitleShowActions": "Dosya eylemlerini göster"
 }

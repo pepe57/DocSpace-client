@@ -26,12 +26,12 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Text } from "@docspace/ui-kit/components/text";
 
 const ResetTemplateDialog = ({
   isVisible,
@@ -50,7 +50,7 @@ const ResetTemplateDialog = ({
       onClose={onClose}
       visible={isVisible}
     >
-      <ModalDialog.Header>{t("Settings:ResetTemplate")}?</ModalDialog.Header>
+      <ModalDialog.Header>{t("Settings:ResetToDefault")}</ModalDialog.Header>
 
       <ModalDialog.Body>
         <Text>{t("Settings:ResetTemplateDescription")}</Text>

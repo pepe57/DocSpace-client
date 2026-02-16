@@ -1053,5 +1053,7 @@
   "YourTurn": "A sua vez",
   "ExternalLink": "Ligação externa",
   "Upload": "Carregar",
-  "Open": "Abrir"
+  "Open": "Abrir",
+  "TitleShowFolderActions": "Mostrar ações da pasta",
+  "TitleShowActions": "Mostrar ações com ficheiros"
 }

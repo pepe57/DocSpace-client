@@ -1053,5 +1053,7 @@
   "YourTurn": "Acum e rândul dvs.",
   "ExternalLink": "Link extern",
   "Upload": "Încarcă",
-  "Open": "Deschide"
+  "Open": "Deschide",
+  "TitleShowFolderActions": "Afișare acțiuni asupra folderului",
+  "TitleShowActions": "Afișare acțiuni asupra fișierului"
 }

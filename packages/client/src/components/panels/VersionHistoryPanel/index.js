@@ -26,14 +26,14 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { FloatingButton } from "@docspace/shared/components/floating-button";
+import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import config from "PACKAGE_FILE";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { SectionBodyContent } from "../../../pages/VersionHistory/Section";
 
 class PureVersionHistoryPanel extends React.Component {

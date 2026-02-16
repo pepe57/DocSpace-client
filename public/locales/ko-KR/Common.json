@@ -1052,6 +1052,8 @@
   "YourLogo": "로고",
   "YourTurn": "고객님의 차례입니다",
   "ExternalLink": "외부 링크",
+  "TitleShowFolderActions": "폴더 작업 표시",
+  "TitleShowActions": "파일 동작 표시",
   "Upload": "업로드",
   "Open": "열기"
 }

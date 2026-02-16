@@ -1052,6 +1052,8 @@
   "YourLogo": "您的logo",
   "YourTurn": "轮到您了",
   "ExternalLink": "外部链接",
+  "TitleShowFolderActions": "显示文件夹相关操作",
+  "TitleShowActions": "显示文件相关操作",
   "Upload": "上传",
   "Open": "打开"
 }

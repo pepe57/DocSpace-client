@@ -30,91 +30,90 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { RoomIcon } from "@docspace/shared/components/room-icon";
-import { TLogo } from "@docspace/shared/api/rooms/types";
-import { TModel } from "@docspace/shared/components/room-icon/RoomIcon.types";
+import type { TLogo } from "@docspace/ui-kit/types";
+import { RoomIcon, type TModel } from "@docspace/ui-kit/components";
 
 import styles from "./icons.module.scss";
 
 type ItemIconProps = {
-  icon?: string;
-  fileExst?: string;
-  isPrivacy?: boolean;
-  isRoom?: boolean;
-  title: string;
-  logo?: TLogo | string;
-  color?: string;
-  isArchive?: boolean;
-  badgeUrl?: string;
-  size?: string;
-  radius?: string;
-  withEditing?: boolean;
-  showDefault?: boolean;
-  imgClassName?: string;
-  model?: TModel[];
-  onChangeFile?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  className: string;
-  isTemplate?: boolean;
-  dataTestId?: string;
+	icon?: string;
+	fileExst?: string;
+	isPrivacy?: boolean;
+	isRoom?: boolean;
+	title: string;
+	logo?: TLogo | string;
+	color?: string;
+	isArchive?: boolean;
+	badgeUrl?: string;
+	size?: string;
+	radius?: string;
+	withEditing?: boolean;
+	showDefault?: boolean;
+	imgClassName?: string;
+	model?: TModel[];
+	onChangeFile?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	className: string;
+	isTemplate?: boolean;
+	dataTestId?: string;
 };
 
 const ItemIcon = ({
-  icon,
-  fileExst,
-  isPrivacy,
-  isRoom,
-  title,
-  logo,
-  color,
-  isArchive,
-  badgeUrl,
-  size,
-  radius,
-  withEditing,
-  showDefault,
-  imgClassName,
-  model,
-  onChangeFile,
-  className,
-  isTemplate,
-  dataTestId,
+	icon,
+	fileExst,
+	isPrivacy,
+	isRoom,
+	title,
+	logo,
+	color,
+	isArchive,
+	badgeUrl,
+	size,
+	radius,
+	withEditing,
+	showDefault,
+	imgClassName,
+	model,
+	onChangeFile,
+	className,
+	isTemplate,
+	dataTestId,
 }: ItemIconProps) => {
-  const isLoadedRoomIcon = !!logo;
-  const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
+	const isLoadedRoomIcon = !!logo;
+	const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
 
-  return (
-    <>
-      <div
-        className={classNames(styles.iconWrapper, { [styles.isRoom]: isRoom })}
-      >
-        <RoomIcon
-          color={color}
-          title={title}
-          size={size}
-          radius={radius}
-          isArchive={isArchive}
-          showDefault={showDefault || showDefaultRoomIcon}
-          imgClassName={imgClassName || "react-svg-icon"}
-          logo={isRoom ? logo : icon}
-          badgeUrl={badgeUrl || ""}
-          isTemplate={isTemplate}
-          withEditing={withEditing}
-          model={model}
-          onChangeFile={onChangeFile}
-          className={className}
-          dataTestId={dataTestId}
-        />
-      </div>
-      {isPrivacy && fileExst ? (
-        <div
-          className={styles.encryptedFileIcon}
-          style={{ backgroundImage: `url(${SecuritySvgUrl})` }}
-        />
-      ) : null}
-    </>
-  );
+	return (
+		<>
+			<div
+				className={classNames(styles.iconWrapper, { [styles.isRoom]: isRoom })}
+			>
+				<RoomIcon
+					color={color}
+					title={title}
+					size={size}
+					radius={radius}
+					isArchive={isArchive}
+					showDefault={showDefault || showDefaultRoomIcon}
+					imgClassName={imgClassName || "react-svg-icon"}
+					logo={isRoom ? logo : icon}
+					badgeUrl={badgeUrl || ""}
+					isTemplate={isTemplate}
+					withEditing={withEditing}
+					model={model}
+					onChangeFile={onChangeFile}
+					className={className}
+					dataTestId={dataTestId}
+				/>
+			</div>
+			{isPrivacy && fileExst ? (
+				<div
+					className={styles.encryptedFileIcon}
+					style={{ backgroundImage: `url(${SecuritySvgUrl})` }}
+				/>
+			) : null}
+		</>
+	);
 };
 
 export default inject(({ treeFoldersStore }: TStore) => {
-  return { isPrivacy: treeFoldersStore.isPrivacyFolder };
+	return { isPrivacy: treeFoldersStore.isPrivacyFolder };
 })(observer(ItemIcon));

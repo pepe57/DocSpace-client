@@ -31,15 +31,15 @@ import { Trans } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { toastr } from "@docspace/shared/components/toast";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   calculateTotalPrice,
   getConvertedSize,
 } from "@docspace/shared/utils/common";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { useServicesActions } from "../../hooks/useServicesActions";
 import { PaymentProvider } from "../../context/PaymentContext";

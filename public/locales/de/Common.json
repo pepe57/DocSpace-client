@@ -1053,5 +1053,7 @@
   "YourTurn": "Jetzt sind Sie dran",
   "ExternalLink": "Externer Link",
   "Upload": "Hochladen",
-  "Open": "Öffnen"
+  "Open": "Öffnen",
+  "TitleShowFolderActions": "Ordneraktionen anzeigen",
+  "TitleShowActions": "Dateiaktionen anzeigen"
 }

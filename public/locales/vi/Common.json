@@ -1053,5 +1053,7 @@
   "YourTurn": "Phiên của bạn",
   "ExternalLink": "Liên kết bên ngoài",
   "Upload": "Tải lên",
-  "Open": "Mở"
+  "Open": "Mở",
+  "TitleShowFolderActions": "Hiển thị Hoạt động Thư mục",
+  "TitleShowActions": "Hiển thị Hoạt động của File"
 }

@@ -1053,5 +1053,7 @@
   "YourTurn": "Ваша черга",
   "ExternalLink": "Зовнішнє посилання",
   "Upload": "Завантажити",
-  "Open": "Відкрити"
+  "Open": "Відкрити",
+  "TitleShowFolderActions": "Відобразити дії з папками",
+  "TitleShowActions": "Показати дії з файлами"
 }

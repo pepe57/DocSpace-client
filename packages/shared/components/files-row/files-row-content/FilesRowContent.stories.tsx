@@ -29,73 +29,73 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 
-import { Link } from "../../link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import { FilesRowContent } from ".";
 import { IconSizeType } from "../../../utils";
-import { IconButton } from "../../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 const MainContent = (
-  <Link>
-    File name<span className="item-file-exst">.exst</span>
-  </Link>
+	<Link>
+		File name<span className="item-file-exst">.exst</span>
+	</Link>
 );
 
 const MainIcons = (
-  <IconButton
-    iconName={LinkReactSvgUrl}
-    size={IconSizeType.small}
-    hoverColor="accent"
-  />
+	<IconButton
+		iconName={LinkReactSvgUrl}
+		size={IconSizeType.small}
+		hoverColor="accent"
+	/>
 );
 
 const SideElement = <span className="row_update-text">01/01/1970 00:00</span>;
 
 const meta = {
-  title: "Components/FilesRow/FilesRowContent",
-  component: FilesRowContent,
-  parameters: {
-    docs: {
-      description: {
-        component:
-          "FilesRowContent component for displaying file information and badges within a row layout",
-      },
-    },
-  },
-  argTypes: {
-    disableSideInfo: { control: "boolean" },
-    sideColor: { control: "color" },
+	title: "Components/FilesRow/FilesRowContent",
+	component: FilesRowContent,
+	parameters: {
+		docs: {
+			description: {
+				component:
+					"FilesRowContent component for displaying file information and badges within a row layout",
+			},
+		},
+	},
+	argTypes: {
+		disableSideInfo: { control: "boolean" },
+		sideColor: { control: "color" },
 
-    // Disabled controls
-    children: { table: { disable: true } },
-    className: { table: { disable: true } },
-    id: { table: { disable: true } },
-    onClick: { table: { disable: true } },
-    style: { table: { disable: true } },
-    convertSideInfo: { table: { disable: true } },
-    sectionWidth: { table: { disable: true } },
-  },
+		// Disabled controls
+		children: { table: { disable: true } },
+		className: { table: { disable: true } },
+		id: { table: { disable: true } },
+		onClick: { table: { disable: true } },
+		style: { table: { disable: true } },
+		convertSideInfo: { table: { disable: true } },
+		sectionWidth: { table: { disable: true } },
+	},
 } satisfies Meta<typeof FilesRowContent>;
 
 type Story = StoryObj<typeof FilesRowContent>;
 export default meta;
 
 export const Default: Story = {
-  args: {
-    children: [MainContent, MainIcons, SideElement],
-  },
+	args: {
+		children: [MainContent, MainIcons, SideElement],
+	},
 };
 
 export const WithoutSideInfo: Story = {
-  args: {
-    disableSideInfo: true,
-    children: [MainContent, MainIcons, SideElement],
-  },
+	args: {
+		disableSideInfo: true,
+		children: [MainContent, MainIcons, SideElement],
+	},
 };
 
 export const WithCustomSideColor: Story = {
-  args: {
-    sideColor: "#2DA7DB",
-    children: [MainContent, MainIcons, SideElement],
-  },
+	args: {
+		sideColor: "#2DA7DB",
+		children: [MainContent, MainIcons, SideElement],
+	},
 };

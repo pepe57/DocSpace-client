@@ -1052,6 +1052,8 @@
   "YourLogo": "شعاركم",
   "YourTurn": "دوركم الآن",
   "ExternalLink": "رابط خارجي",
+  "TitleShowFolderActions": "عرض إجراءات المجلد",
+  "TitleShowActions": "عرض إجراءات الملف",
   "Upload": "رفع",
   "Open": "فتح"
 }

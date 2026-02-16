@@ -1,6 +1,7 @@
 {
   "files.exclude": {
     "**/packages": true,
+    // "**/libs": true,
     "**/.nuget": true,
     "**/Data": true,
     "**/i18next": true,

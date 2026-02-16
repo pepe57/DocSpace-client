@@ -1053,5 +1053,7 @@
   "YourTurn": "Radha jote",
   "ExternalLink": "Lidhje e jashtme",
   "Upload": "Ngarkoni",
-  "Open": "Hapni"
+  "Open": "Hapni",
+  "TitleShowFolderActions": "Shfaqni veprimet e dosjeve",
+  "TitleShowActions": "Shfaqni veprimet e skedarit"
 }

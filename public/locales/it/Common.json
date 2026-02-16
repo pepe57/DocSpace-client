@@ -1053,5 +1053,7 @@
   "YourTurn": "Il tuo turno",
   "ExternalLink": "Collegamento esterno",
   "Upload": "Carica",
-  "Open": "Apri"
+  "Open": "Apri",
+  "TitleShowFolderActions": "Mostra azioni con cartelle",
+  "TitleShowActions": "Mostra azioni con file"
 }

@@ -30,7 +30,7 @@ import isEqual from "lodash/isEqual";
 import { TFunction } from "i18next";
 
 import api from "@docspace/shared/api";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { RoomsType, SearchArea } from "@docspace/shared/enums";

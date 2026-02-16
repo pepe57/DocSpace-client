@@ -1053,5 +1053,7 @@
   "YourTurn": "Sizin növbəniz",
   "ExternalLink": "Xarici keçid",
   "Upload": "Yüklə",
-  "Open": "Açmaq"
+  "Open": "Açmaq",
+  "TitleShowFolderActions": "Qovluq əyləmlərini göstər",
+  "TitleShowActions": "Fayl əyləmlərini göstər"
 }

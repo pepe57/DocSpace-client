@@ -230,11 +230,10 @@ test.describe("AI agents", () => {
 
     expect(instructionValueInput).toBe(instructionValue);
 
-    const removeDocSpaceServer = page.locator(
-      ".ai-mcp-item > .IconButton-module__iconButton--aPwf0 > .IconButton-module__notSelectable--faLNW > div > .injected-svg > path",
-    );
+    const aiMCPItem = page.getByTestId("ai-mcp-item");
+    const removeMcpButton = aiMCPItem.getByTestId("remove-mcp-button");
 
-    await removeDocSpaceServer.click();
+    await removeMcpButton.click();
 
     await expect(
       page.getByText("ONLYOFFICE DocSpace").first(),
@@ -248,11 +247,11 @@ test.describe("AI agents", () => {
     await expect(page.getByText("custom").first()).toBeVisible();
 
     const firstCheckBox = page
-      .locator(".Checkbox-module__checkbox--oU4gW")
+      .getByTestId("checkbox")
       .first();
 
     const secondCheckBox = page
-      .locator(".Checkbox-module__checkbox--oU4gW")
+      .getByTestId("checkbox")
       .nth(1);
 
     await firstCheckBox.click();
@@ -318,7 +317,7 @@ test.describe("AI agents", () => {
     await expect(page.getByText("Pin").first()).toBeVisible();
     await expect(page.getByText("Delete").first()).toBeVisible();
 
-    await page.locator(".Checkbox-module__checkbox--oU4gW ").first().click();
+    await page.getByTestId("checkbox").first().click();
 
     await expect(page.getByText("Pin").first()).not.toBeVisible();
     await expect(page.getByText("Delete").first()).not.toBeVisible();

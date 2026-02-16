@@ -57,7 +57,7 @@ import FillingStatusDialog from "./filling-status-dialog";
 import Editor from "./Editor";
 
 const ErrorContainer = dynamic(
-  () => import("@docspace/shared/components/error-container/ErrorContainer"),
+  () => import("@docspace/ui-kit/components/error-container/ErrorContainer"),
   {
     ssr: false,
   },

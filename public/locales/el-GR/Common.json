@@ -1053,5 +1053,7 @@
   "YourTurn": "Η σειρά σας",
   "ExternalLink": "Εξωτερικός σύνδεσμος",
   "Upload": "Μεταφόρτωση",
-  "Open": "Άνοιγμα"
+  "Open": "Άνοιγμα",
+  "TitleShowFolderActions": "Εμφάνιση Ενεργειών Φακέλου",
+  "TitleShowActions": "Εμφάνιση ενεργειών αρχείου"
 }

@@ -27,6 +27,10 @@
     {
       "name": "📦 @docspace/shared",
       "path": "packages/shared"
+    },
+    {
+      "name": "📦 @docspace/ui-kit",
+      "path": "libs/ui-kit"
     }
   ],
   "settings": {
@@ -34,6 +38,37 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "biomejs.biome",
     "VsCodeTaskButtons.tasks": [
+      {
+        "label": "Server (Aspire)",
+        "tasks": [
+          {
+            "label": "Apire : run CE (Community Edition)",
+            "task": "Backend | run CE (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire CE\" task"
+          },
+          {
+            "label": "Apire : run EE (Enterprise Edition)",
+            "task": "Backend | run EE (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire EE\" task"
+          },
+          {
+            "label": "Apire : run DE (Developer Edition)",
+            "task": "Backend | run DE (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire DE\" task"
+          },
+          {
+            "label": "Apire : run SAAS",
+            "task": "Backend | run SAAS (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire SAAS\" task"
+          },
+          {
+            "label": "Apire : clear Docker artifacts",
+            "task": "Backend | clear Aspire (Docker)",
+            "tooltip": "🛠️ Start the \"backend aspire clear Docker\" task"
+          }
+        ],
+        "tooltip": "🛠️ Server tasks (Apire)"
+      },
       {
         "label": "Server",
         "tasks": [

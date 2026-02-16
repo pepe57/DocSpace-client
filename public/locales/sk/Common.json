@@ -1053,5 +1053,7 @@
   "YourTurn": "Ste na rade",
   "ExternalLink": "Externý odkaz",
   "Upload": "Nahrať",
-  "Open": "Otvoriť"
+  "Open": "Otvoriť",
+  "TitleShowFolderActions": "Zobraziť akcie pre priečinky",
+  "TitleShowActions": "Zobraziť akcie pre súbor"
 }

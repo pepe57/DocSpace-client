@@ -1053,5 +1053,7 @@
   "YourTurn": "Vaš red",
   "ExternalLink": "Eksterni link",
   "Upload": "Otpremi",
-  "Open": "Otvori"
+  "Open": "Otvori",
+  "TitleShowFolderActions": "Prikaži akciije foldera",
+  "TitleShowActions": "Prikaži akcije datoteka"
 }

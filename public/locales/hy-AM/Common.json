@@ -1053,5 +1053,7 @@
   "YourTurn": "Ձեր հերթն է",
   "ExternalLink": "Արտաքին հղում",
   "Upload": "Վերբեռնել",
-  "Open": "Բաց"
+  "Open": "Բաց",
+  "TitleShowFolderActions": "Ցույց տալ պանակի գործողությունները",
+  "TitleShowActions": "Ցույց տալ ֆայլի գործողությունները"
 }

@@ -34,7 +34,6 @@
   "CardUnlinked": "Tarjeta desvinculada",
   "ChangeShedule": "Cambio programado",
   "ChargeAmount": "Se cargará un importe de <1>{{price}}</1> a su método de pago guardado.",
-  "ChooseNewPayer": "Elija un nuevo pagador",
   "ChooseNewPlan": "¿Desea elegir un nuevo plan de precios?",
   "ConfirmPayment": "Confirmar pago",
   "ConnectAndConfigureServices": "Esta sección se utiliza para conectar y configurar los servicios.",

@@ -36,9 +36,9 @@ import {
   createTag,
 } from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
-import Section from "@docspace/shared/components/section";
+import Section from "@docspace/ui-kit/components/section";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
@@ -116,8 +116,6 @@ const PureHome = (props) => {
     isEmptyPage,
 
     contactsViewAs,
-
-    onClickBack,
 
     showFilterLoader,
     showHeaderLoader,
@@ -288,7 +286,7 @@ const PureHome = (props) => {
     }
 
     if (hideConfirmCancelOperation) {
-      cancelUpload(t);
+      cancelUpload();
       return;
     }
 
@@ -325,13 +323,10 @@ const PureHome = (props) => {
   );
 
   React.useEffect(() => {
-    window.addEventListener("popstate", onClickBack);
-
     return () => {
       setSelectedFolder(null);
-      window.removeEventListener("popstate", onClickBack);
     };
-  }, []);
+  }, [setSelectedFolder]);
 
   let sectionProps = {};
 
@@ -647,7 +642,7 @@ export const Component = inject(
 
     const { startUpload } = uploadDataStore;
 
-    const { createFoldersTree, onClickBack } = filesActionsStore;
+    const { createFoldersTree } = filesActionsStore;
 
     const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
@@ -768,7 +763,6 @@ export const Component = inject(
       isEmptyPage,
 
       setSelectedNode,
-      onClickBack,
 
       showFilterLoader,
       showHeaderLoader,

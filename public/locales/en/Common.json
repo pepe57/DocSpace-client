@@ -649,6 +649,7 @@
   "NoGroupsHere": "No groups here",
   "NoMCPServers": "No {{mcpServers}} connected yet",
   "NoMCPServersDescription": "Please connect {{mcpServers}} in {{productName}} settings to use them in the {{aiAgent}}.",
+  "NoModelsFound": "No models found",
   "NoRoomsFound": "No rooms found",
   "NoTags": "No tags",
   "NotAvailableUnderLicense": "Not available under this license",
@@ -1118,6 +1119,8 @@
   "YourFurtherEditsNotSaved": "Your further edits may not be saved.",
   "YourLogo": "Your logo",
   "YourTurn": "Your turn",
+  "TitleShowFolderActions": "Show Folder Actions",
+  "TitleShowActions": "Show File Actions",
   "Upload": "Upload",
   "AnyFiles": "Any files",
   "Open": "Open"

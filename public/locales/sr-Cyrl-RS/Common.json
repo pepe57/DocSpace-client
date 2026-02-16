@@ -1053,5 +1053,7 @@
   "YourTurn": "Ваш ред",
   "ExternalLink": "Екстерни линк",
   "Upload": "Отпреми",
-  "Open": "Отвори"
+  "Open": "Отвори",
+  "TitleShowFolderActions": "Прикажи акциије фолдера",
+  "TitleShowActions": "Прикажи акције датотека"
 }

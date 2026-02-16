@@ -26,7 +26,7 @@
 import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TableBody, TableContainer } from "@docspace/shared/components/table";
+import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 
 import styles from "../../styles/TransactionHistory.module.scss";

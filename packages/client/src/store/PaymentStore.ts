@@ -26,7 +26,6 @@
 
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
-import moment from "moment";
 
 import {
   getPaymentSettings,
@@ -45,7 +44,7 @@ import {
   getLicenseQuota,
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { UserStore } from "@docspace/shared/store/UserStore";
@@ -54,7 +53,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TTranslation } from "@docspace/shared/types";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { type TData } from "@docspace/ui-kit/components/toast";
 import {
   TBalance,
   TAutoTopUpSettings,
@@ -71,6 +70,12 @@ import {
   STORAGE_TARIFF_DEACTIVATED,
   WEB_SEARCH,
 } from "@docspace/shared/constants";
+import type { DateTime } from "luxon";
+import {
+  now,
+  subtractFromDate,
+  formatDate as formatDateUtil,
+} from "@docspace/ui-kit/utils/date";
 
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
@@ -499,21 +504,22 @@ class PaymentStore {
     }
   };
 
-  getEndTransactionDate = (format = "YYYY-MM-DDTHH:mm:ss") => {
-    return moment().format(format);
+  getEndTransactionDate = (format = "yyyy-MM-dd'T'HH:mm:ss") => {
+    return formatDateUtil(now(), format);
   };
 
-  getStartTransactionDate = (format = "YYYY-MM-DDTHH:mm:ss") => {
-    return moment().subtract(4, "weeks").format(format);
+  getStartTransactionDate = (format = "yyyy-MM-dd'T'HH:mm:ss") => {
+    const date = subtractFromDate(now(), 4, "weeks");
+    return date ? formatDateUtil(date, format) : "";
   };
 
-  formatDate = (date: moment.Moment) => {
-    return date.clone().locale("en").format("YYYY-MM-DDTHH:mm:ss");
+  formatDate = (date: DateTime) => {
+    return formatDateUtil(date, "yyyy-MM-dd'T'HH:mm:ss", { locale: "en" });
   };
 
   fetchTransactionHistory = async (
-    startDate = moment().subtract(4, "weeks"),
-    endDate = moment(),
+    startDate: DateTime | null = subtractFromDate(now(), 4, "weeks"),
+    endDate: DateTime | null = now(),
     credit = true,
     debit = true,
     participantName?: string,
@@ -523,8 +529,8 @@ class PaymentStore {
 
     try {
       const res = await getTransactionHistory(
-        this.formatDate(startDate),
-        this.formatDate(endDate),
+        startDate ? this.formatDate(startDate) : "",
+        endDate ? this.formatDate(endDate) : "",
         credit,
         debit,
         participantName,

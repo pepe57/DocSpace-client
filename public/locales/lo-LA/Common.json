@@ -1053,5 +1053,7 @@
   "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
   "ExternalLink": "ລິງພາຍນອກ",
   "Upload": "ອັບໂຫລດ",
-  "Open": "ເປີດ"
+  "Open": "ເປີດ",
+  "TitleShowFolderActions": "ສະແດງ ໂຟນເດີ ການ​ປະ​ຕິ​ບັດ",
+  "TitleShowActions": "ສະແດງ ໄຟລ໌ ການ​ປະ​ຕິ​ບັດ"
 }

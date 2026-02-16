@@ -1053,5 +1053,7 @@
   "YourTurn": "Ваш ред",
   "ExternalLink": "Външна връзка",
   "Upload": "Качи",
-  "Open": "Отвори"
+  "Open": "Отвори",
+  "TitleShowFolderActions": "Покажи действията за папки",
+  "TitleShowActions": "Покажи действията за файлове"
 }

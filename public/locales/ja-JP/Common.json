@@ -1052,6 +1052,8 @@
   "YourLogo": "あなたのロゴ",
   "YourTurn": "あなたの番です",
   "ExternalLink": "外部リンク",
+  "TitleShowFolderActions": "フォルダアクションを表示",
+  "TitleShowActions": "ファイルアクションを表示",
   "Upload": "アップロード",
   "Open": "開く"
 }

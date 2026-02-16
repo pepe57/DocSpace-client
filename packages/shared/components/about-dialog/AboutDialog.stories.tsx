@@ -27,7 +27,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 
-import { Button, ButtonSize } from "../button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import { IDialogProps } from "./About.types";
 import { AboutDialog } from "./index";

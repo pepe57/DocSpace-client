@@ -35,6 +35,7 @@ import {
   webPluginsHandler,
   webPluginsUpdateHandler,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 test.describe("Plugins", () => {
@@ -60,7 +61,7 @@ test.describe("Plugins", () => {
     const emptyView = page.getByTestId("empty-screen-container");
     await expect(emptyView).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "plugins",
       "plugins-empty.png",
@@ -312,7 +313,7 @@ test.describe("Plugins", () => {
   //   const pluginAz = page.getByTestId("plugin_archives.zip");
   //   await expect(pluginAz).toBeVisible();
 
-  //   await expect(page).toHaveScreenshot([
+  //   await expectScreenshot(page,[
   //     "desktop",
   //     "plugins",
   //     "plugins-locale-az.png",
@@ -329,7 +330,7 @@ test.describe("Plugins", () => {
   //     dateText.style.display = "none";
   //   });
 
-  //   await expect(page).toHaveScreenshot([
+  //   await expectScreenshot(page,[
   //     "desktop",
   //     "plugins",
   //     "plugins-locale-az-settings.png",
@@ -397,7 +398,7 @@ test.describe("Plugins", () => {
     const pluginEn = page.getByTestId("plugin_archives.zip");
     await expect(pluginEn).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "plugins",
       "plugins-fallback-locale-en.png",
@@ -414,7 +415,7 @@ test.describe("Plugins", () => {
       dateText.style.display = "none";
     });
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "plugins",
       "plugins-fallback-locale-en-settings.png",
