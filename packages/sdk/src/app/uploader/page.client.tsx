@@ -69,7 +69,9 @@ export type UploaderClientProps = {
     targetId?: string;
     acceptExtensions?: string;
     linkMainText?: string;
-    linkSecondaryText?: string;
+    linkMainTextForFiles?: string;
+    linkMainTextForFolders?: string;
+    secondaryText?: string;
     extensionsText?: string;
   };
 };
@@ -106,8 +108,10 @@ export default function UploaderClient({
     const uploadedFiles: unknown[] = [];
 
     await runWithConcurrency(onlyFiles, maxUploadFilesCount, async (file) => {
+      const targetFolderId = file.parentFolderId ?? folderTargetId;
+
       const session = await startUploadSession(
-        folderTargetId,
+        targetFolderId,
         file.name,
         file.size,
         "",
@@ -133,7 +137,7 @@ export default function UploaderClient({
 
       await runWithConcurrency(chunks, maxUploadThreadCount, async (chunk) => {
         await uploadChunkParallel(
-          folderTargetId,
+          targetFolderId,
           session.id,
           chunk.index,
           chunk.data,
@@ -154,7 +158,7 @@ export default function UploaderClient({
         });
       });
 
-      const result = await finalizeUploadSession(folderTargetId, session.id);
+      const result = await finalizeUploadSession(targetFolderId, session.id);
       uploadedFiles.push(result);
     });
 
@@ -215,9 +219,12 @@ export default function UploaderClient({
       onDrop={onDrop}
       accept={accept}
       getFilesFromEvent={getFilesFromEvent}
-      linkMainText={baseConfig?.linkMainText ?? t("Common:Upload")}
+      linkMainTextForFiles={
+        baseConfig?.linkMainTextForFiles ?? t("Common:Upload")
+      }
+      linkMainTextForFolders={baseConfig?.linkMainTextForFolders}
       linkSecondaryText={
-        baseConfig?.linkSecondaryText ?? t("Common:DropzoneTitleSecondary")
+        baseConfig?.secondaryText ?? t("Common:DropzoneTitleSecondary")
       }
       exstsText={
         (baseConfig?.extensionsText ?? shortText)
