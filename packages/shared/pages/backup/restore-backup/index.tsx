@@ -28,21 +28,21 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { toastr } from "../../../components/toast";
-import StatusMessage from "../../../components/status-message";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import StatusMessage from "@docspace/ui-kit/components/status-message";
 import { getBackupProgressInfo } from "../../../utils/common";
 import SocketHelper, {
   SocketEvents,
   TSocketListener,
 } from "../../../utils/socket";
 
-import { Text } from "../../../components/text";
-import { Checkbox } from "../../../components/checkbox";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { BackupStorageType, FilesSelectorFilterTypes } from "../../../enums";
 import RestoreBackupLoader from "../../../skeletons/backup/RestoreBackup";
-import { RadioButtonGroup } from "../../../components/radio-button-group";
-import { InputSize } from "../../../components/text-input";
-import { FileInput } from "../../../components/file-input";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { FileInput } from "@docspace/ui-kit/components/file-input";
 import { FilesSelectorInput } from "../../../components/files-selector-input";
 import type { FileInfoType } from "../../../components/files-selector-input/FilesSelectorInput.types";
 import { DirectThirdPartyConnection } from "../../../components/direct-third-party-connection";

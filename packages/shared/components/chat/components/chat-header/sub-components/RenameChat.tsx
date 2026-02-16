@@ -27,9 +27,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog, ModalDialogType } from "../../../../modal-dialog";
-import { InputSize, InputType, TextInput } from "../../../../text-input";
-import { Button, ButtonSize } from "../../../../button";
+import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/ui-kit/components/text-input";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import { useChatStore } from "../../../store/chatStore";
 

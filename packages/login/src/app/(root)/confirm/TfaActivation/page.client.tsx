@@ -34,19 +34,19 @@ import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import Image from "next/image";
 
-import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { Text } from "@docspace/shared/components/text";
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { Text } from "@docspace/ui-kit/components/text";
+import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/shared/components/text-input";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { toastr } from "@docspace/shared/components/toast";
-import { IconButton } from "@docspace/shared/components/icon-button";
+} from "@docspace/ui-kit/components/text-input";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import { checkConfirmLink } from "@docspace/shared/api/user";
 import { validateTfaCode } from "@docspace/shared/api/settings";
@@ -85,7 +85,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
   useEffect(() => {
     proxyBaseUrl.current = combineUrl(
       window.ClientConfig?.proxy?.url,
-      "/profile"
+      "/profile",
     );
   }, []);
 

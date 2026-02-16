@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { AvatarSize } from "@docspace/shared/components/avatar";
+import type { AvatarSize } from "@docspace/ui-kit/components/avatar";
 export interface UserPhoto {
   original: string;
   retina: string;

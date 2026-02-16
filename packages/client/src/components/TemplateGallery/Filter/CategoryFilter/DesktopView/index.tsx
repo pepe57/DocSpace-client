@@ -26,7 +26,7 @@
 
 import React, { useState } from "react";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import classNames from "classnames";

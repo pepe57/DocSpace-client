@@ -28,7 +28,7 @@ import React, { useState } from "react";
 import { StoryFn, Meta } from "@storybook/react";
 import RecoverAccessModalDialog from "./RecoverAccessModalDialog";
 import type { RecoverAccessModalDialogProps } from "./RecoverAccessModalDialog.types";
-import { Button, ButtonSize } from "../../components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 export default {
   title: "Dialogs/RecoverAccessModalDialog",

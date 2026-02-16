@@ -30,12 +30,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import type { TToolCallContent } from "../../../../../../../../api/ai/types";
-import { useTheme } from "../../../../../../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getServerIcon } from "../../../../../../../../utils";
 import { ServerType } from "../../../../../../../../api/ai/enums";
-import { Text } from "../../../../../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import styles from "../../../../ChatMessageBody.module.scss";
-import { MCPIcon, MCPIconSize } from "../../../../../../../mcp-icon";
+import { MCPIcon, MCPIconSize } from "@docspace/ui-kit/components/mcp-icon";
 
 export const MCPToolContent = ({ content }: { content: TToolCallContent }) => {
   const { t } = useTranslation(["Common"]);

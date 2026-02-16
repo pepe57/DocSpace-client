@@ -27,11 +27,11 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import {
   getStartAgentParams,
   type TAgentParams,

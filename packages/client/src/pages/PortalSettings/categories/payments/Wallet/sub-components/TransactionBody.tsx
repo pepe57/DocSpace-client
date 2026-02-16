@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { Consumer } from "@docspace/shared/utils";
+import { Consumer } from "@docspace/ui-kit/utils";
 
 import NoTransactionsIcon from "PUBLIC_DIR/images/no.transactions.react.svg";
 import NoTransactionsFilterIcon from "PUBLIC_DIR/images/no.transactions.filter.react.svg";

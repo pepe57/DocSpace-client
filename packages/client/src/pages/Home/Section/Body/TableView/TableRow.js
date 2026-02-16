@@ -309,8 +309,8 @@ const FilesTableRow = memo((props) => {
         displayFileExtension={displayFileExtension}
         title={
           item.isFolder
-            ? t("Translations:TitleShowFolderActions")
-            : t("Translations:TitleShowActions")
+            ? t("Common:TitleShowFolderActions")
+            : t("Common:TitleShowActions")
         }
         isRoom={item.isRoom}
         isHighlight={isHighlight}

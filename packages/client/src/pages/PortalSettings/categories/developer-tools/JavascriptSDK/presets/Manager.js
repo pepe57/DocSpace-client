@@ -46,13 +46,13 @@ import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { Label } from "@docspace/shared/components/label";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { Label } from "@docspace/ui-kit/components/label";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";

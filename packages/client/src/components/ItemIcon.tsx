@@ -30,9 +30,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { RoomIcon } from "@docspace/shared/components/room-icon";
-import { TLogo } from "@docspace/shared/api/rooms/types";
-import { TModel } from "@docspace/shared/components/room-icon/RoomIcon.types";
+import { RoomIcon, TModel, TLogo } from "@docspace/ui-kit";
 
 import styles from "./icons.module.scss";
 

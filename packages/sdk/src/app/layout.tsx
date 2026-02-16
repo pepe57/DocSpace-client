@@ -26,10 +26,12 @@
 import { headers, cookies } from "next/headers";
 import type { Metadata } from "next";
 
-import { ThemeKeys } from "@docspace/shared/enums";
-import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
-import { getDirectionByLanguage } from "@docspace/shared/utils/common";
-import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
+import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import {
+	getDirectionByLanguage,
+	getFontFamilyDependingOnLanguage,
+} from "@docspace/ui-kit/providers/theme/rtl-utils";
 
 import "@docspace/shared/styles/theme.scss";
 
@@ -93,10 +95,10 @@ export default async function RootLayout({
       : "light";
 
   const styles = {
-    "--color-scheme-main-accent": currentColorScheme?.main.accent,
-    "--color-scheme-text-accent": currentColorScheme?.text.accent,
-    "--color-scheme-main-buttons": currentColorScheme?.main.buttons,
-    "--color-scheme-text-buttons": currentColorScheme?.text.buttons,
+    "--color-scheme-main-accent": currentColorScheme?.main?.accent,
+    "--color-scheme-text-accent": currentColorScheme?.text?.accent,
+    "--color-scheme-main-buttons": currentColorScheme?.main?.buttons,
+    "--color-scheme-text-buttons": currentColorScheme?.text?.buttons,
 
     "--interface-direction": dirClass,
 

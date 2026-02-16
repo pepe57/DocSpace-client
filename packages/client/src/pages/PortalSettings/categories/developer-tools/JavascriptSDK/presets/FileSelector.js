@@ -30,12 +30,12 @@ import { inject, observer } from "mobx-react";
 
 import SDK from "@onlyoffice/docspace-sdk-js";
 
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Label } from "@docspace/shared/components/label";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Label } from "@docspace/ui-kit/components/label";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { Text } from "@docspace/ui-kit/components/text";
 import { FilterType, FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { getSdkScriptUrl, loadScript } from "@docspace/shared/utils/common";
 

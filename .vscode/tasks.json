@@ -96,7 +96,7 @@
       "type": "shell",
       "options": {
         "env": {
-          "DOTNET_ENVIRONMENT": "enterprise"
+          "APP_EDITION": "enterprise"
         }
       },
       "group": {
@@ -206,7 +206,7 @@
       "type": "shell",
       "options": {
         "env": {
-          "DOTNET_ENVIRONMENT": "developer"
+          "APP_EDITION": "developer"
         }
       },
       "group": {

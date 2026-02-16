@@ -30,6 +30,8 @@ import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useNavigate } from "react-router";
 
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import McpToolReactSvgUrl from "PUBLIC_DIR/images/mcp.tool.svg?url";
 import WebSearchIconUrl from "PUBLIC_DIR/images/web.search.svg?url";
 import ManageConnectionsReactSvgUrl from "PUBLIC_DIR/images/manage.connection.react.svg?url";
@@ -45,16 +47,18 @@ import {
 import { ServerType } from "../../../../api/ai/enums";
 import { getOAuthToken } from "../../../../utils/common";
 import { getServerIcon, isMobile } from "../../../../utils";
-import { useTheme } from "../../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
-import { Text } from "../../../text";
-import { ContextMenu, type ContextMenuRefType } from "../../../context-menu";
-import { IconButton } from "../../../icon-button";
-import { Aside } from "../../../aside";
-import { Button, ButtonSize } from "../../../button";
-import { Backdrop } from "../../../backdrop";
-import { Portal } from "../../../portal";
-import { TooltipContainer } from "../../../tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import {
+  ContextMenu,
+  type ContextMenuRefType,
+} from "@docspace/ui-kit/components/context-menu";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Aside } from "@docspace/ui-kit/components/aside";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import { useChatStore } from "../../store/chatStore";
 import { useMessageStore } from "../../store/messageStore";
@@ -62,7 +66,7 @@ import { useMessageStore } from "../../store/messageStore";
 import type useToolsSettings from "../../hooks/useToolsSettings";
 
 import styles from "./ChatInput.module.scss";
-import { Link, LinkType } from "../../../link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 const ToolsSettings = ({
   servers,

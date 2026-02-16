@@ -29,7 +29,7 @@ import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg?url";
 import { getIconPathByFolderType } from "./common";
 import { iconSize32 } from "./image-helpers";
 import { FolderType } from "../enums";
-import { now, formatDate } from "./date";
+import { now, formatDate } from "@docspace/ui-kit/utils/date";
 
 const fakeCreatedBy = {
   id: "id",

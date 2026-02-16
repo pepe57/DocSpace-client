@@ -24,61 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Portal } from "@docspace/shared/components/portal";
+import { Portal } from "@docspace/ui-kit/components/portal";
 import { TUser } from "@docspace/shared/api/people/types";
 import PeopleSelector from "@docspace/shared/selectors/People";
-import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";
+import { TOnSubmit } from "@docspace/ui-kit/components/selector";
 
 type MembersSelectorProps = {
-  isVisible: boolean;
-  onClose: () => void;
-  onParentPanelClose: () => void;
+	isVisible: boolean;
+	onClose: () => void;
+	onParentPanelClose: () => void;
 
-  addMembers: TOnSubmit;
+	addMembers: TOnSubmit;
 } & (
-  | { checkIfUserInvited: (user: TUser) => boolean; invitedUsers?: undefined }
-  | { invitedUsers: string[]; checkIfUserInvited?: undefined }
+	| { checkIfUserInvited: (user: TUser) => boolean; invitedUsers?: undefined }
+	| { invitedUsers: string[]; checkIfUserInvited?: undefined }
 );
 
 export const MembersSelector = ({
-  addMembers,
-  onParentPanelClose,
-  onClose,
-  checkIfUserInvited,
-  invitedUsers,
+	addMembers,
+	onParentPanelClose,
+	onClose,
+	checkIfUserInvited,
+	invitedUsers,
 }: MembersSelectorProps) => {
-  const invitedProps = checkIfUserInvited
-    ? { checkIfUserInvited }
-    : { disableInvitedUsers: invitedUsers };
+	const invitedProps = checkIfUserInvited
+		? { checkIfUserInvited }
+		: { disableInvitedUsers: invitedUsers };
 
-  return (
-    <Portal
-      element={
-        <PeopleSelector
-          useAside
-          onClose={() => {
-            onClose();
-            onParentPanelClose();
-          }}
-          withoutBackground
-          withBlur={false}
-          isMultiSelect
-          submitButtonLabel=""
-          disableSubmitButton={false}
-          onSubmit={addMembers}
-          withHeader
-          headerProps={{
-            // Todo: Update groups empty screen texts when they are ready
-            headerLabel: "",
-            withoutBackButton: false,
-            withoutBorder: true,
-            onBackClick: onClose,
-            onCloseClick: onParentPanelClose,
-          }}
-          disableDisabledUsers
-          {...invitedProps}
-        />
-      }
-    />
-  );
+	return (
+		<Portal
+			element={
+				<PeopleSelector
+					useAside
+					onClose={() => {
+						onClose();
+						onParentPanelClose();
+					}}
+					withoutBackground
+					withBlur={false}
+					isMultiSelect
+					submitButtonLabel=""
+					disableSubmitButton={false}
+					onSubmit={addMembers}
+					withHeader
+					headerProps={{
+						// Todo: Update groups empty screen texts when they are ready
+						headerLabel: "",
+						withoutBackButton: false,
+						withoutBorder: true,
+						onBackClick: onClose,
+						onCloseClick: onParentPanelClose,
+					}}
+					disableDisabledUsers
+					{...invitedProps}
+				/>
+			}
+		/>
+	);
 };

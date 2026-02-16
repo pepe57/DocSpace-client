@@ -31,11 +31,13 @@ import { RouterProvider } from "react-router";
 import { Provider as MobxProvider } from "mobx-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import "@docspace/ui-kit/components/theme-provider/ThemeProvider.scss";
+
 import store from "SRC_DIR/store";
 
 import "@docspace/shared/polyfills/broadcastchannel";
 
-import "@docspace/shared/styles/custom.scss";
+import "./custom.scss";
 
 import ThemeProvider from "./components/ThemeProviderWrapper";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";

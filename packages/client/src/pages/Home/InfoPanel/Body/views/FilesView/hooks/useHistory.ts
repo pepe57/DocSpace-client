@@ -28,7 +28,7 @@ import React from "react";
 import axios from "axios";
 
 import api from "@docspace/shared/api";
-import { formatDate, parseToDateTime } from "@docspace/shared/utils/date";
+import { formatDate, parseToDateTime } from "@docspace/ui-kit/utils/date";
 import { RoomsType } from "@docspace/shared/enums";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import {

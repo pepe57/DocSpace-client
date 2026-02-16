@@ -26,7 +26,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { SnackBar } from "@docspace/shared/components/snackbar";
+import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 interface QuotaInfo {

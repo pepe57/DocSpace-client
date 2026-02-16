@@ -30,11 +30,11 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { RoomsType } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { isMobile, mobile } from "@docspace/shared/utils";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
 
 import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
