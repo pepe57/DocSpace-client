@@ -24,23 +24,339 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { colorThemeHandler } from "@docspace/shared/__mocks__/handlers";
+import {
+  colorThemeHandler,
+  licenseQuotaHandler,
+  paymentSettingsHandler,
+  quotaHandler,
+  settingsHandler,
+  tariffHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
+import type { BrowserContext } from "@playwright/test";
 import { expect, test } from "./fixtures/base";
 
-test.describe("Payments", () => {
-  test.beforeEach(async ({ serverRequestInterceptor, port }) => {
-    serverRequestInterceptor.use(colorThemeHandler(port));
+test.use({ timezoneId: "UTC" });
+
+const freezeTime = async (context: BrowserContext, frozenNowMs: number) => {
+  await context.addInitScript((now: number) => {
+    const OriginalDate = Date;
+
+    window.timezone = "UTC";
+
+    Date.now = () => now;
+
+    (globalThis as unknown as Record<string, unknown>).Date = class extends (
+      OriginalDate
+    ) {
+      constructor(...args: unknown[]) {
+        if (!args.length) {
+          super(now);
+          return;
+        }
+
+        const value = args[0];
+
+        if (value instanceof OriginalDate) {
+          super(value);
+          return;
+        }
+
+        if (typeof value === "string" || typeof value === "number") {
+          super(value);
+          return;
+        }
+
+        super(now);
+      }
+
+      static now() {
+        return now;
+      }
+    };
+  }, frozenNowMs);
+};
+
+test.describe("Enterprise Edition", () => {
+  test.describe("trial", () => {
+    test.beforeEach(async ({ serverRequestInterceptor, port, page }) => {
+      const frozenNowMs = new Date("2025-12-10T06:00:00.000Z").getTime();
+      await freezeTime(page.context(), frozenNowMs);
+
+      serverRequestInterceptor.use(
+        settingsHandler(port, TypeSettings.Authenticated),
+        colorThemeHandler(port),
+        paymentSettingsHandler(port),
+        licenseQuotaHandler(port),
+        tariffHandler(port, false, false, true),
+        quotaHandler(port, true, true, true),
+      );
+    });
+
+    test("renders trial state", async ({ page, baseUrl }) => {
+      await page.goto(`${baseUrl}/management/payments`);
+
+      await expect(page.getByTestId("standalone-page")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "payments",
+        "ee-trial.png",
+      ]);
+    });
   });
 
-  test("should payments render", async ({ page, baseUrl }) => {
-    await page.goto(`${baseUrl}/management/payments`);
+  test.describe("trial / expired", () => {
+    test.beforeEach(async ({ serverRequestInterceptor, port, page }) => {
+      const frozenNowMs = new Date("2026-01-06T06:00:00.000Z").getTime();
+      await freezeTime(page.context(), frozenNowMs);
 
-    await expect(page.getByTestId("standalone-page")).toBeVisible();
+      serverRequestInterceptor.use(
+        settingsHandler(port, TypeSettings.Authenticated),
+        colorThemeHandler(port),
+        paymentSettingsHandler(port),
+        licenseQuotaHandler(port),
+        tariffHandler(port, false, false, true),
+        quotaHandler(port, true, true, true),
+      );
+    });
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "payments",
-      "payments-render.png",
-    ]);
+    test("renders trial expired state", async ({ page, baseUrl }) => {
+      await page.goto(`${baseUrl}/management/payments`);
+
+      await expect(page.getByTestId("standalone-page")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "payments",
+        "ee-trial-expired.png",
+      ]);
+    });
+  });
+
+  test.describe("time-limited", () => {
+    test.beforeEach(async ({ serverRequestInterceptor, port, page }) => {
+      const frozenNowMs = new Date("2025-12-10T06:00:00.000Z").getTime();
+      await freezeTime(page.context(), frozenNowMs);
+
+      serverRequestInterceptor.use(
+        settingsHandler(port, TypeSettings.Authenticated),
+        colorThemeHandler(port),
+        paymentSettingsHandler(port),
+        licenseQuotaHandler(port),
+        tariffHandler(port, false, false, true),
+        quotaHandler(port, true, false),
+      );
+    });
+
+    test("renders time-limited state", async ({ page, baseUrl }) => {
+      await page.goto(`${baseUrl}/management/payments`);
+
+      await expect(page.getByTestId("standalone-page")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "payments",
+        "ee-time-limited.png",
+      ]);
+    });
+  });
+
+  test.describe("time-limited / grace period", () => {
+    test.beforeEach(async ({ serverRequestInterceptor, port, page }) => {
+      const frozenNowMs = new Date("2026-01-06T06:00:00.000Z").getTime();
+      await freezeTime(page.context(), frozenNowMs);
+
+      serverRequestInterceptor.use(
+        settingsHandler(port, TypeSettings.Authenticated),
+        colorThemeHandler(port),
+        paymentSettingsHandler(port),
+        licenseQuotaHandler(port),
+        tariffHandler(port, false, true, true),
+        quotaHandler(port, true, false),
+      );
+    });
+
+    test("renders grace period state", async ({ page, baseUrl }) => {
+      await page.goto(`${baseUrl}/management/payments`);
+
+      await expect(page.getByTestId("standalone-page")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "payments",
+        "ee-time-limited-grace-period.png",
+      ]);
+    });
+  });
+
+  test.describe("lifetime", () => {
+    test.beforeEach(async ({ serverRequestInterceptor, port, page }) => {
+      const frozenNowMs = new Date("2026-01-04T06:00:00.000Z").getTime();
+      await freezeTime(page.context(), frozenNowMs);
+
+      serverRequestInterceptor.use(
+        settingsHandler(port, TypeSettings.Authenticated),
+        colorThemeHandler(port),
+        paymentSettingsHandler(port),
+        licenseQuotaHandler(port),
+        tariffHandler(port, false, false, true),
+        quotaHandler(port),
+      );
+    });
+
+    test("renders lifetime state", async ({ page, baseUrl }) => {
+      await page.goto(`${baseUrl}/management/payments`);
+
+      await expect(page.getByTestId("standalone-page")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "payments",
+        "ee-lifetime.png",
+      ]);
+    });
+  });
+
+  test.describe("lifetime / expired", () => {
+    test.beforeEach(async ({ serverRequestInterceptor, port, page }) => {
+      const frozenNowMs = new Date("2026-01-06T06:00:00.000Z").getTime();
+      await freezeTime(page.context(), frozenNowMs);
+
+      serverRequestInterceptor.use(
+        settingsHandler(port, TypeSettings.Authenticated),
+        colorThemeHandler(port),
+        paymentSettingsHandler(port),
+        licenseQuotaHandler(port),
+        tariffHandler(port, false, false, true),
+        quotaHandler(port),
+      );
+    });
+
+    test("renders lifetime expired state", async ({ page, baseUrl }) => {
+      await page.goto(`${baseUrl}/management/payments`);
+
+      await expect(page.getByTestId("standalone-page")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "payments",
+        "ee-lifetime-expired.png",
+      ]);
+    });
+  });
+});
+
+test.describe("Developer Edition", () => {
+  test.describe("time-limited", () => {
+    test.beforeEach(async ({ serverRequestInterceptor, port, page }) => {
+      const frozenNowMs = new Date("2025-12-10T06:00:00.000Z").getTime();
+      await freezeTime(page.context(), frozenNowMs);
+
+      serverRequestInterceptor.use(
+        settingsHandler(port, TypeSettings.Authenticated),
+        colorThemeHandler(port),
+        paymentSettingsHandler(port),
+        licenseQuotaHandler(port),
+        tariffHandler(port, false, false, true, true),
+        quotaHandler(port, true, false),
+      );
+    });
+
+    test("renders paid state", async ({ page, baseUrl }) => {
+      await page.goto(`${baseUrl}/management/payments`);
+
+      await expect(page.getByTestId("standalone-page")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "payments",
+        "de-time-limited.png",
+      ]);
+    });
+  });
+
+  test.describe("time-limited / grace period", () => {
+    test.beforeEach(async ({ serverRequestInterceptor, port, page }) => {
+      const frozenNowMs = new Date("2026-01-06T06:00:00.000Z").getTime();
+      await freezeTime(page.context(), frozenNowMs);
+
+      serverRequestInterceptor.use(
+        settingsHandler(port, TypeSettings.Authenticated),
+        colorThemeHandler(port),
+        paymentSettingsHandler(port),
+        licenseQuotaHandler(port),
+        tariffHandler(port, false, true, true, true),
+        quotaHandler(port, true, false),
+      );
+    });
+
+    test("renders grace period state", async ({ page, baseUrl }) => {
+      await page.goto(`${baseUrl}/management/payments`);
+
+      await expect(page.getByTestId("standalone-page")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "payments",
+        "de-time-limited-grace-period.png",
+      ]);
+    });
+  });
+
+  test.describe("lifetime", () => {
+    test.beforeEach(async ({ serverRequestInterceptor, port, page }) => {
+      const frozenNowMs = new Date("2026-01-04T06:00:00.000Z").getTime();
+      await freezeTime(page.context(), frozenNowMs);
+
+      serverRequestInterceptor.use(
+        settingsHandler(port, TypeSettings.Authenticated),
+        colorThemeHandler(port),
+        paymentSettingsHandler(port),
+        licenseQuotaHandler(port),
+        tariffHandler(port, false, false, true, true),
+        quotaHandler(port),
+      );
+    });
+
+    test("renders lifetime state", async ({ page, baseUrl }) => {
+      await page.goto(`${baseUrl}/management/payments`);
+
+      await expect(page.getByTestId("standalone-page")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "payments",
+        "de-lifetime.png",
+      ]);
+    });
+  });
+
+  test.describe("lifetime / expired", () => {
+    test.beforeEach(async ({ serverRequestInterceptor, port, page }) => {
+      const frozenNowMs = new Date("2026-01-06T06:00:00.000Z").getTime();
+      await freezeTime(page.context(), frozenNowMs);
+
+      serverRequestInterceptor.use(
+        settingsHandler(port, TypeSettings.Authenticated),
+        colorThemeHandler(port),
+        paymentSettingsHandler(port),
+        licenseQuotaHandler(port),
+        tariffHandler(port, false, false, true, true),
+        quotaHandler(port),
+      );
+    });
+
+    test("renders lifetime state", async ({ page, baseUrl }) => {
+      await page.goto(`${baseUrl}/management/payments`);
+
+      await expect(page.getByTestId("standalone-page")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "payments",
+        "de-lifetime-expired.png",
+      ]);
+    });
   });
 });
