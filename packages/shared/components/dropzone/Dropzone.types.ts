@@ -31,8 +31,10 @@ type BaseDropzoneProps = {
   isLoading: boolean;
   /** Disables the dropzone */
   isDisabled?: boolean;
-  /** Main text displayed in the dropzone */
-  linkMainText: string;
+  /** Main text displayed in the dropzone for file */
+  linkMainTextForFiles: string;
+  /** Main text displayed in the dropzone for folder */
+  linkMainTextForFolders?: string;
   /** Secondary text displayed in the dropzone */
   linkSecondaryText: string;
   /** Text displaying supported file types (short version) */

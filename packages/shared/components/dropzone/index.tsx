@@ -46,7 +46,8 @@ const Dropzone = ({
   accept,
   maxFiles = 0,
   getFilesFromEvent,
-  linkMainText,
+  linkMainTextForFiles,
+  linkMainTextForFolders,
   linkSecondaryText,
   exstsText,
   fullExstsText,
@@ -57,11 +58,14 @@ const Dropzone = ({
   className,
   loaderClassName,
 }: DropzoneProps) => {
+  const folderInputRef = React.useRef<HTMLInputElement>(null);
+
   const dropzoneOptions = {
     maxFiles,
-    noClick: isDisabled,
+    noClick: isDisabled || !!linkMainTextForFolders,
     noKeyboard: isDisabled,
-    accept,
+    noDrag: isDisabled,
+    ...(accept ? { accept } : {}),
     onDrop,
     ...(getFilesFromEvent
       ? {
@@ -71,7 +75,31 @@ const Dropzone = ({
       : {}),
   } as Parameters<typeof useDropzone>[0];
 
-  const { getRootProps, getInputProps } = useDropzone(dropzoneOptions);
+  const { getRootProps, getInputProps, open } = useDropzone(dropzoneOptions);
+
+  const handleFileClick = (e: React.MouseEvent) => {
+    if (linkMainTextForFolders && !isDisabled) {
+      e.stopPropagation();
+      e.preventDefault();
+      open();
+    }
+  };
+
+  const handleFolderClick = (e: React.MouseEvent) => {
+    if (linkMainTextForFolders && !isDisabled) {
+      e.stopPropagation();
+      e.preventDefault();
+      folderInputRef.current?.click();
+    }
+  };
+
+  const handleFolderChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || !getFilesFromEvent) return;
+    const files = await getFilesFromEvent(e as unknown as DropEvent);
+    if (onDrop) {
+      onDrop(files as File[]);
+    }
+  };
 
   const [isFormatsOpen, setIsFormatsOpen] = React.useState(false);
   const formatsRef = React.useRef<HTMLDivElement>(null);
@@ -120,6 +148,21 @@ const Dropzone = ({
               "data-testid": "dropzone-input",
             })}
           />
+          {!!linkMainTextForFolders && (
+            <input
+              ref={folderInputRef}
+              type="file"
+              disabled={isDisabled}
+              style={{ display: "none" }}
+              onChange={handleFolderChange}
+              {...({
+                webkitdirectory: "",
+                directory: "",
+              } as React.InputHTMLAttributes<HTMLInputElement>)}
+              aria-label="Folder input"
+              data-testid="dropzone-folder-input"
+            />
+          )}
           {icon && (
             <img
               src={icon}
@@ -140,9 +183,31 @@ const Dropzone = ({
               })}
               data-testid="dropzone-main-text"
               color="accent"
+              onClick={linkMainTextForFolders ? handleFileClick : undefined}
             >
-              {linkMainText}
+              {linkMainTextForFiles}
             </Link>
+            {!!linkMainTextForFolders && (
+              <>
+                <span
+                  className={classNames(styles.dropzoneLink, {
+                    [styles.secondary]: true,
+                  })}
+                >
+                  {" or "}
+                </span>
+                <Link
+                  className={classNames(styles.dropzoneLink, {
+                    [styles.main]: true,
+                  })}
+                  data-testid="dropzone-folder-text"
+                  color="accent"
+                  onClick={handleFolderClick}
+                >
+                  {linkMainTextForFolders}
+                </Link>
+              </>
+            )}
             <span
               className={classNames(styles.dropzoneLink, {
                 [styles.secondary]: true,
@@ -161,10 +226,12 @@ const Dropzone = ({
             aria-label="Supported file types"
             onClick={handleFormatsClick}
           >
-            <div className={classNames(styles.dropzoneExstsTextContainer, {
-              [styles.isOpen]: isFormatsOpen,
-              [styles.clickable]: !!fullExstsText,
-            })}>
+            <div
+              className={classNames(styles.dropzoneExstsTextContainer, {
+                [styles.isOpen]: isFormatsOpen,
+                [styles.clickable]: !!fullExstsText,
+              })}
+            >
               <span className={styles.dropzoneExstsText}>{exstsText}</span>
               {formatsPlusBadgeValue && formatsPlusBadgeValue > 0 ? (
                 <Badge
