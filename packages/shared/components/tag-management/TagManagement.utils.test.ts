@@ -26,13 +26,13 @@
 
 import { describe, it, expect } from "vitest";
 
+import type { TagType } from "@docspace/ui-kit/components/tag";
 import {
   transformTagsData,
   unionTagsData,
   searchFilter,
 } from "./TagManagement.utils";
 import type { TTag } from "./TagManagement.types";
-import type { TagType } from "../tag/Tag.types";
 
 describe("TagManagement.utils", () => {
   describe("transformTagsData", () => {
