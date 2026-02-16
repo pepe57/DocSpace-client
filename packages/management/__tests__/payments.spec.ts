@@ -33,6 +33,7 @@ import {
   tariffHandler,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import type { BrowserContext } from "@playwright/test";
 import { expect, test } from "./fixtures/base";
 
@@ -98,11 +99,7 @@ test.describe("Enterprise Edition", () => {
 
       await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
-        "desktop",
-        "payments",
-        "ee-trial.png",
-      ]);
+      await expectScreenshot(page, ["desktop", "payments", "ee-trial.png"]);
     });
   });
 
@@ -126,7 +123,7 @@ test.describe("Enterprise Edition", () => {
 
       await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "payments",
         "ee-trial-expired.png",
@@ -154,7 +151,7 @@ test.describe("Enterprise Edition", () => {
 
       await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "payments",
         "ee-time-limited.png",
@@ -182,7 +179,7 @@ test.describe("Enterprise Edition", () => {
 
       await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "payments",
         "ee-time-limited-grace-period.png",
@@ -210,11 +207,7 @@ test.describe("Enterprise Edition", () => {
 
       await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
-        "desktop",
-        "payments",
-        "ee-lifetime.png",
-      ]);
+      await expectScreenshot(page, ["desktop", "payments", "ee-lifetime.png"]);
     });
   });
 
@@ -238,7 +231,7 @@ test.describe("Enterprise Edition", () => {
 
       await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "payments",
         "ee-lifetime-expired.png",
@@ -268,7 +261,7 @@ test.describe("Developer Edition", () => {
 
       await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "payments",
         "de-time-limited.png",
@@ -296,7 +289,7 @@ test.describe("Developer Edition", () => {
 
       await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "payments",
         "de-time-limited-grace-period.png",
@@ -324,11 +317,7 @@ test.describe("Developer Edition", () => {
 
       await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
-        "desktop",
-        "payments",
-        "de-lifetime.png",
-      ]);
+      await expectScreenshot(page, ["desktop", "payments", "de-lifetime.png"]);
     });
   });
 
@@ -352,7 +341,7 @@ test.describe("Developer Edition", () => {
 
       await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "payments",
         "de-lifetime-expired.png",
