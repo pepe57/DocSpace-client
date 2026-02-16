@@ -3363,7 +3363,7 @@ packages:
     hasBin: true
 
   '@onlyoffice/docspace-sdk-js@file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz':
-    resolution: {integrity: sha512-fEiAjuw5/kY7muBkntKOFN3I1adwCjbw2hGlCto5h+0wFLaXT4p/S8y+6cdXX14rzu6h6opMrisiEMvA3zCjAw==, tarball: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz}
+    resolution: {integrity: sha512-V9eK/KJksl7ic/TAZrfn6yM7oxsTv4HQ42sXmOsCvtoUt1dqt7ZhTfG/aV3OVplZSpb+6ufePUokBb+XjXKdhA==, tarball: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz}
     version: 2.2.0
     engines: {node: '>=22', pnpm: '>=10'}
 
