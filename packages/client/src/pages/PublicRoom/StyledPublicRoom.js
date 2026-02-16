@@ -27,7 +27,7 @@
 import styled from "styled-components";
 
 import { tablet, mobile } from "@docspace/shared/utils";
-import { Heading } from "@docspace/shared/components/heading";
+import { Heading } from "@docspace/ui-kit/components/heading";
 
 const StyledHeadline = styled(Heading)`
   font-weight: 700;

@@ -43,7 +43,7 @@ import {
 
 import { addExternalLink, getExternalLinks } from "@docspace/shared/api/files";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Nullable, TResolver } from "@docspace/shared/types";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 

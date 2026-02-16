@@ -34,7 +34,7 @@ import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import styles from "./ChangeRoomOwnerPanel.module.scss";
 
 const ChangeRoomOwner = (props) => {

@@ -31,7 +31,7 @@ import {
   formatDate,
   convertMomentFormatToLuxon,
   getAppTimezone,
-} from "./date";
+} from "@docspace/ui-kit/utils/date";
 
 export default function getCorrectDate(
   locale: string,

@@ -42,7 +42,7 @@ import {
   getAppTimezone,
   isAfter,
   now,
-} from "../utils/date";
+} from "@docspace/ui-kit/utils/date";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
 import { SettingsStore } from "./SettingsStore";

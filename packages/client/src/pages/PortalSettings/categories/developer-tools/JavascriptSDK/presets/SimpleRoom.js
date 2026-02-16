@@ -26,15 +26,15 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { Label } from "@docspace/shared/components/label";
-import { Text } from "@docspace/shared/components/text";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { Label } from "@docspace/ui-kit/components/label";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import RoomsSelectorInput from "SRC_DIR/components/RoomsSelectorInput";
 import { inject, observer } from "mobx-react";
 import SDK from "@onlyoffice/docspace-sdk-js";
 
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { useNavigate } from "react-router";
 import { getPrimaryLink } from "@docspace/shared/api/rooms";

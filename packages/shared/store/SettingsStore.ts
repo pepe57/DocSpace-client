@@ -50,28 +50,27 @@ import type {
   TTimeZone,
   TVersionBuild,
 } from "../api/settings/types";
-import { toastr } from "../components/toast";
-import type { TData } from "../components/toast/Toast.type";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import {
   DeepLinkType,
   type RecaptchaType,
   TenantStatus,
-  ThemeKeys,
-  type UrlActionType,
   FolderType,
+  UrlActionType,
 } from "../enums";
 import { version } from "../package.json";
 import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
-import { Base, Dark, type TColorScheme } from "../themes";
+import {
+  Base,
+  Dark,
+  type TColorScheme,
+} from "@docspace/ui-kit/providers/theme";
 import type { Nullable } from "../types";
 import type { TFrameConfig } from "../types/Frame";
-import {
-  size as deviceSize,
-  getDeviceTypeByWidth,
-  getSystemTheme,
-  isTablet,
-} from "../utils";
+import { size as deviceSize, getDeviceTypeByWidth, isTablet } from "../utils";
+import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import { combineUrl } from "../utils/combineUrl";
 import {
@@ -82,7 +81,7 @@ import {
   isPublicRoom,
   openUrl,
 } from "../utils/common";
-import { getCookie, setCookie } from "../utils/cookie";
+import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 import FirebaseHelper from "../utils/firebase";
 import SocketHelper from "../utils/socket";
 
@@ -1418,7 +1417,7 @@ class SettingsStore {
   };
 
   setTheme = (key: ThemeKeys) => {
-    let theme: null | ThemeKeys.BaseStr | ThemeKeys.DarkStr = null;
+    let theme: ThemeKeys.BaseStr | ThemeKeys.DarkStr = ThemeKeys.BaseStr;
     switch (key) {
       case ThemeKeys.Base:
       case ThemeKeys.BaseStr:
@@ -1431,11 +1430,6 @@ class SettingsStore {
       case ThemeKeys.System:
       case ThemeKeys.SystemStr:
       default:
-        theme =
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? ThemeKeys.DarkStr
-            : ThemeKeys.BaseStr;
         theme = getSystemTheme();
     }
 

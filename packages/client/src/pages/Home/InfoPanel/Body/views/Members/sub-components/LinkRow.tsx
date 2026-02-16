@@ -30,7 +30,7 @@ import type { TFunction } from "i18next";
 import type { DateTime } from "luxon";
 import { observer, inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { addToDate, now } from "@docspace/shared/utils/date";
+import { addToDate, now } from "@docspace/ui-kit/utils/date";
 
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
@@ -39,7 +39,7 @@ import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
@@ -47,7 +47,7 @@ import LinkRowComponent from "@docspace/shared/components/share/sub-components/L
 
 import type { TFileLink } from "@docspace/shared/api/files/types";
 
-import type { TOption } from "@docspace/shared/components/combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 
 import { LinkRowProps } from "../Members.types";
 

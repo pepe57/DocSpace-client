@@ -26,18 +26,18 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
-import { now, formatDate } from "@docspace/shared/utils/date";
+import { now, formatDate } from "@docspace/ui-kit/utils/date";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { useTranslation } from "react-i18next";
-import { DatePicker } from "@docspace/shared/components/date-picker";
-import { Calendar } from "@docspace/shared/components/calendar";
-import { TimePicker } from "@docspace/shared/components/time-picker";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import { SelectedItem } from "@docspace/shared/components/selected-item";
+import { DatePicker } from "@docspace/ui-kit/components/date-picker";
+import { Calendar } from "@docspace/ui-kit/components/calendar";
+import { TimePicker } from "@docspace/ui-kit/components/time-picker";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
+import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
 
 import { isMobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 const Selectors = styled.div`
   position: relative;
@@ -304,7 +304,7 @@ const DeliveryDatePicker = ({
             </TimePickerCell>
           ) : (
             <TimePickerCell>
-              <SelectorAddButton
+              <AddButton
                 title={t("Common:AddButton")}
                 onClick={showTimePicker}
                 className="mr-8 add-delivery-time-button"

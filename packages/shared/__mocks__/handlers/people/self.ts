@@ -28,7 +28,7 @@ import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH = "people/:userId";
-export const PATH_CHANGE_AUTH_DATA = "people/*/password";
+export const PATH_CHANGE_AUTH_DATA = "people/*/email";
 export const PATH_ACTIVATION_STATUS = "people/activationstatus*";
 export const PATH_UPDATE_USER = "people/*";
 export const PATH_DELETE_USER = "people/@self";

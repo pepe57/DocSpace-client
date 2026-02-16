@@ -28,7 +28,7 @@ import React, { useImperativeHandle, useRef, useState, type JSX } from "react";
 import classNames from "classnames";
 import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 import styles from "./ViewerToolbar.module.scss";
-import { useClickOutside } from "../../../../utils/useClickOutside";
+import { useClickOutside } from "../../../../utils";
 import ImageViewerToolbarProps, {
   ToolbarItemType,
 } from "./ViewerToolbar.props";

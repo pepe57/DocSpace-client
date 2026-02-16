@@ -21,7 +21,5 @@
   "SubNewFormFile": "من ملف نصي",
   "ThirdPartyInfo": "تغيير معلومات الجهة الخارجية",
   "ThirdPartyTitle": "الخدمات الجهة الخارجية",
-  "TitleShowActions": "عرض إجراءات الملف",
-  "TitleShowFolderActions": "عرض إجراءات المجلد",
   "TrashItemsDeleteSuccess": "تم حذف العناصر المحددة بنجاح من {{sectionName}}"
 }

@@ -27,14 +27,14 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useLocation } from "react-router";
+import { useLocation, Link } from "react-router";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
-import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
+import { ArticleItem } from "@docspace/ui-kit/components/article/item";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import {
   // getKeyByLink,
@@ -327,6 +327,7 @@ const ArticleBodyContent = (props) => {
           $currentColorScheme={currentColorScheme}
           withAnimation={!isMobileView}
           isEndOfBlock={isLastIndex}
+          LinkRouter={Link}
         />,
       );
     });

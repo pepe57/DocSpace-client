@@ -28,11 +28,14 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { recalculateQuota } from "@docspace/shared/api/settings";
-import { parseToDateTime, formatDateLocalized } from "@docspace/shared/utils/date";
-import { toastr } from "@docspace/shared/components/toast";
+import {
+  parseToDateTime,
+  formatDateLocalized,
+} from "@docspace/ui-kit/utils/date";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
-import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button } from "@docspace/ui-kit/components/button";
 
 const RecalculateButton = (props) => {
   const { t } = useTranslation("Settings");
@@ -76,7 +79,10 @@ const RecalculateButton = (props) => {
             dataTestId="last_recalculate_date"
           >
             {t("LastUpdate", {
-              date: formatDateLocalized(parseToDateTime(lastRecalculateDate), "DATETIME_SHORT"),
+              date: formatDateLocalized(
+                parseToDateTime(lastRecalculateDate),
+                "DATETIME_SHORT",
+              ),
             })}
           </Text>
         ) : null}

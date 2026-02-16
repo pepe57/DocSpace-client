@@ -34,6 +34,7 @@ import {
   settingsHandler,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Spaces", () => {
@@ -54,7 +55,7 @@ test.describe("Spaces", () => {
     await expect(
       page.getByTestId("configuration-spaces-wrapper"),
     ).toBeVisible();
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "spaces",
       "spaces-configuration-render.png",
@@ -76,7 +77,7 @@ test.describe("Spaces", () => {
     await page.goto(`${baseUrl}/management/spaces`);
 
     await expect(page.getByTestId("multiple-spaces-wrapper")).toBeVisible();
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "spaces",
       "spaces-multiple-render.png",
@@ -111,7 +112,7 @@ test.describe("Spaces", () => {
     const createPortalButton = page.getByTestId("create-portal-button");
     await expect(createPortalButton).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "spaces",
       "spaces-create-space-modal.png",
@@ -125,7 +126,7 @@ test.describe("Spaces", () => {
 
     await createPortalButton.click();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "spaces",
       "spaces-create-space-render.png",
@@ -157,7 +158,7 @@ test.describe("Spaces", () => {
     await deleteContextItem.click();
     const deleteSpaceButton = page.getByTestId("delete-space-button");
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "spaces",
       "spaces-delete-space-modal.png",
@@ -168,7 +169,7 @@ test.describe("Spaces", () => {
 
     await deleteSpaceButton.click();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "spaces",
       "spaces-delete-space-render.png",
@@ -201,7 +202,7 @@ test.describe("Spaces", () => {
 
     await changeDomainInput.fill("test.com");
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "spaces",
       "spaces-change-domain-modal.png",

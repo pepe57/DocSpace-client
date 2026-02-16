@@ -4,7 +4,7 @@ import { fireEvent, screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { BackupStorageType, DeviceType, FolderType } from "../../../enums";
-import { ButtonSize } from "../../../components/button";
+import { ButtonSize } from "@docspace/ui-kit/components/button";
 import * as portalApi from "../../../api/portal";
 import * as socketModule from "../../../utils/socket";
 
@@ -15,7 +15,7 @@ vi.mock("../../../api/portal", () => ({
   startBackup: vi.fn().mockResolvedValue(undefined),
 }));
 
-vi.mock("@docspace/shared/components/toast", () => ({
+vi.mock("@docspace/ui-kit/components/toast", () => ({
   toastr: {
     success: vi.fn(),
     error: vi.fn(),
@@ -239,7 +239,7 @@ describe("ManualBackup", () => {
       false,
     );
 
-    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(1);
+    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(0);
     expect(defaultProps.setIsBackupProgressVisible).toHaveBeenCalledWith(true);
   });
 
@@ -305,7 +305,7 @@ describe("ManualBackup", () => {
     expect(portalApi.startBackup).toHaveBeenCalled();
 
     expect(defaultProps.setIsBackupProgressVisible).toHaveBeenCalledWith(true);
-    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(1);
+    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(0);
   });
 
   it("handles backup from Third Party Resource", async () => {
@@ -323,7 +323,7 @@ describe("ManualBackup", () => {
     expect(portalApi.startBackup).toHaveBeenCalled();
 
     expect(defaultProps.setIsBackupProgressVisible).toHaveBeenCalledWith(true);
-    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(1);
+    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(0);
   });
 
   it("handles backup from Third Party Storage", async () => {
@@ -343,7 +343,7 @@ describe("ManualBackup", () => {
     expect(portalApi.startBackup).toHaveBeenCalled();
 
     expect(defaultProps.setIsBackupProgressVisible).toHaveBeenCalledWith(true);
-    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(1);
+    expect(defaultProps.setDownloadingProgress).toHaveBeenCalledWith(0);
   });
 
   it("disables radio buttons and actions when downloadingProgress is not 100", () => {

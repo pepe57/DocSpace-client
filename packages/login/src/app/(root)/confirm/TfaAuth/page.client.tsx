@@ -32,15 +32,15 @@ import { ChangeEvent, useContext, useState } from "react";
 import { validateTfaCode } from "@docspace/shared/api/settings";
 import { checkConfirmLink } from "@docspace/shared/api/user";
 
-import { toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/shared/components/text-input";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+} from "@docspace/ui-kit/components/text-input";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";

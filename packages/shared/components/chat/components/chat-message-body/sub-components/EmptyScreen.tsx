@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import { RectangleSkeleton } from "../../../../../skeletons";
 
-import { Text } from "../../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { MessageEmptyProps } from "../../../Chat.types";
 

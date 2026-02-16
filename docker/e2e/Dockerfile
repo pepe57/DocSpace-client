@@ -4,6 +4,7 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV CI=true
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 
 # Install required dependencies and fonts in a single layer
 # Using minimal font set - only what's needed for consistent rendering
@@ -39,6 +40,8 @@ COPY packages/doceditor/package.json ./packages/doceditor/package.json
 COPY packages/sdk/package.json ./packages/sdk/package.json
 COPY packages/management/package.json ./packages/management/package.json
 COPY packages/shared/package.json ./packages/shared/package.json
+COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
+COPY libs/ui-kit/onlyoffice-docspace-api-sdk-*.tgz ./libs/ui-kit/
 
 # Install dependencies and clean cache in same layer
 RUN pnpm install --frozen-lockfile && \
@@ -61,6 +64,8 @@ COPY packages/sdk/ ./packages/sdk/
 COPY packages/management/ ./packages/management/
 COPY packages/shared/ ./packages/shared/
 COPY public/ ./public/
+COPY libs/ui-kit/ ./libs/ui-kit/
+
 
 # Run before-build script (packages/runtime.json)
 RUN pnpm run before-build
@@ -73,7 +78,8 @@ RUN pnpm --filter @docspace/client run build:translations && \
     pnpm --filter @docspace/management run build:translations
 
 # Build test bundles for all packages and clean up in single layer
-RUN pnpm --filter @docspace/client run test:build && \
+RUN NODE_OPTIONS="--max-old-space-size=4096" \
+    pnpm --filter @docspace/client run test:build && \
     pnpm --filter @docspace/login run test:build && \
     pnpm --filter @docspace/doceditor run test:build && \
     pnpm --filter @docspace/sdk run test:build && \
