@@ -1136,6 +1136,9 @@ importers:
       '@docspace/ui-kit':
         specifier: workspace:*
         version: link:../../libs/ui-kit
+      '@floating-ui/dom':
+        specifier: 1.6.13
+        version: 1.6.13
       '@hcaptcha/react-hcaptcha':
         specifier: 1.11.0
         version: 1.11.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -14955,7 +14958,7 @@ snapshots:
       obug: 2.1.1
       std-env: 3.10.0
       tinyrainbow: 3.0.3
-      vitest: 4.0.18(@types/node@24.10.7)(@vitest/ui@4.0.17)(jsdom@27.4.0)(msw@2.12.7(@types/node@24.10.7)(typescript@5.9.3))(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2)
+      vitest: 4.0.18(@types/node@24.10.7)(@vitest/ui@4.0.17)(jsdom@27.4.0)(msw@2.12.7(@types/node@24.10.7)(typescript@5.9.3))(sass@1.79.6)(terser@5.46.0)(yaml@2.8.2)
 
   '@vitest/expect@2.0.5':
     dependencies:
@@ -15049,7 +15052,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.15
       tinyrainbow: 3.0.3
-      vitest: 4.0.18(@types/node@24.10.7)(@vitest/ui@4.0.17)(jsdom@27.4.0)(msw@2.12.7(@types/node@24.10.7)(typescript@5.9.3))(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2)
+      vitest: 4.0.18(@types/node@24.10.7)(@vitest/ui@4.0.17)(jsdom@27.4.0)(msw@2.12.7(@types/node@24.10.7)(typescript@5.9.3))(sass@1.79.6)(terser@5.46.0)(yaml@2.8.2)
 
   '@vitest/utils@2.0.5':
     dependencies:
