@@ -27,8 +27,8 @@ import type { TSelectorItem } from "../../components/selector";
 import type { TFile, TFileSecurity, TFolder } from "../../api/files/types";
 import type { TRoom } from "../../api/rooms/types";
 import {
-  getIconPathByFolderType,
-  getLifetimePeriodTranslation,
+	getIconPathByFolderType,
+	getLifetimePeriodTranslation,
 } from "../../utils/common";
 import { iconSize32 } from "../../utils/image-helpers";
 import { getTitleWithoutExtension } from "../../utils";
@@ -38,175 +38,175 @@ import type { FolderType } from "../../enums";
 import { DEFAULT_FILE_EXTS } from "./constants";
 
 export const convertRoomsToItems: (
-  rooms: TRoom[],
-  t: TTranslation,
+	rooms: TRoom[],
+	t: TTranslation,
 ) => TSelectorItem[] = (rooms: TRoom[], t: TTranslation) => {
-  const items = rooms.map((room) => {
-    const {
-      id,
-      title,
-      roomType,
-      logo,
-      filesCount,
-      foldersCount,
-      security,
-      parentId,
-      rootFolderType,
-      shared,
-      lifetime,
-      quotaLimit,
-    } = room;
+	const items = rooms.map((room) => {
+		const {
+			id,
+			title,
+			roomType,
+			logo,
+			filesCount,
+			foldersCount,
+			security,
+			parentId,
+			rootFolderType,
+			shared,
+			lifetime,
+			quotaLimit,
+		} = room;
 
-    const icon = logo?.medium || "";
-    const cover = logo?.cover;
+		const icon = logo?.medium || "";
+		const cover = logo?.cover;
 
-    const iconProp = icon ? { icon } : { color: logo?.color as string };
+		const iconProp = icon ? { icon } : { color: logo?.color as string };
 
-    const lifetimeTooltip = lifetime
-      ? t("Files:RoomFilesLifetime", {
-          days: String(lifetime.value),
-          period: getLifetimePeriodTranslation(lifetime.period, t),
-        })
-      : null;
+		const lifetimeTooltip = lifetime
+			? t("Files:RoomFilesLifetime", {
+					days: String(lifetime.value),
+					period: getLifetimePeriodTranslation(lifetime.period, t),
+				})
+			: null;
 
-    return {
-      id,
-      label: title,
-      title,
-      filesCount,
-      foldersCount,
-      security,
-      parentId,
-      rootFolderType,
-      isFolder: true,
-      roomType,
-      shared,
-      lifetimeTooltip,
-      cover,
-      disableMultiSelect: true,
+		return {
+			id,
+			label: title,
+			title,
+			filesCount,
+			foldersCount,
+			security,
+			parentId,
+			rootFolderType,
+			isFolder: true,
+			roomType,
+			shared,
+			lifetimeTooltip,
+			cover,
+			disableMultiSelect: true,
 
-      quotaLimit,
-      ...iconProp,
-    };
-  });
+			quotaLimit,
+			...iconProp,
+		};
+	});
 
-  return items;
+	return items;
 };
 
 export const convertFilesToItems: (
-  files: TFile[],
-  getIcon: (fileExst: string) => string,
-  filterParam?: string | number,
-  includedItems?: (number | string)[],
-  disableBySecurity?: string,
+	files: TFile[],
+	getIcon: (fileExst: string) => string,
+	filterParam?: string | number,
+	includedItems?: (number | string)[],
+	disableBySecurity?: string,
 ) => TSelectorItem[] = (
-  files: TFile[],
-  getIcon: (fileExst: string) => string,
-  filterParam?: string | number,
-  includedItems?: (number | string)[],
-  disableBySecurity?: string,
+	files: TFile[],
+	getIcon: (fileExst: string) => string,
+	filterParam?: string | number,
+	includedItems?: (number | string)[],
+	disableBySecurity?: string,
 ) => {
-  const items = files.map((file) => {
-    const {
-      id,
-      title,
-      security,
-      folderId,
-      rootFolderType,
-      fileExst,
-      fileType,
-      viewUrl,
-    } = file;
+	const items = files.map((file) => {
+		const {
+			id,
+			title,
+			security,
+			folderId,
+			rootFolderType,
+			fileExst,
+			fileType,
+			viewUrl,
+		} = file;
 
-    const icon = getIcon(fileExst || DEFAULT_FILE_EXTS);
-    const label = getTitleWithoutExtension(file, false);
+		const icon = getIcon(fileExst || DEFAULT_FILE_EXTS);
+		const label = getTitleWithoutExtension(file, false);
 
-    const isDisabled = includedItems?.length
-      ? !includedItems.includes(id)
-      : false;
+		const isDisabled = includedItems?.length
+			? !includedItems.includes(id)
+			: false;
 
-    const isDisabledBySecurity = disableBySecurity
-      ? !security[disableBySecurity as keyof TFileSecurity]
-      : false;
+		const isDisabledBySecurity = disableBySecurity
+			? !security[disableBySecurity as keyof TFileSecurity]
+			: false;
 
-    return {
-      id,
-      label,
-      title,
-      icon,
-      security,
-      parentId: folderId,
-      rootFolderType,
-      isDisabled: !filterParam || isDisabled || isDisabledBySecurity,
-      fileExst,
-      fileType,
-      viewUrl,
-    };
-  });
-  return items;
+		return {
+			id,
+			label,
+			title,
+			icon,
+			security,
+			parentId: folderId,
+			rootFolderType,
+			isDisabled: !filterParam || isDisabled || isDisabledBySecurity,
+			fileExst,
+			fileType,
+			viewUrl,
+		};
+	});
+	return items;
 };
 
 const isDisableFolder = (
-  folder: TFolder,
-  disabledItems: (number | string)[],
-  filterParam?: string | number,
+	folder: TFolder,
+	disabledItems: (number | string)[],
+	filterParam?: string | number,
 ) => {
-  return filterParam ? false : disabledItems?.includes(folder.id);
+	return filterParam ? false : disabledItems?.includes(folder.id);
 };
 
 export const convertFoldersToItems: (
-  folders: TFolder[],
-  disabledItems: (number | string)[],
-  filterParam?: string | number,
-  disabledFolderType?: FolderType,
+	folders: TFolder[],
+	disabledItems: (number | string)[],
+	filterParam?: string | number,
+	disabledFolderType?: FolderType,
 ) => TSelectorItem[] = (
-  folders: TFolder[],
-  disabledItems: (number | string)[],
-  filterParam?: string | number,
-  disabledFolderType?: FolderType,
+	folders: TFolder[],
+	disabledItems: (number | string)[],
+	filterParam?: string | number,
+	disabledFolderType?: FolderType,
 ) => {
-  const items = folders.map((folder: TFolder) => {
-    const {
-      id,
-      title,
-      filesCount,
-      foldersCount,
-      security,
-      parentId,
-      type,
-      rootFolderType,
-    } = folder;
+	const items = folders.map((folder: TFolder) => {
+		const {
+			id,
+			title,
+			filesCount,
+			foldersCount,
+			security,
+			parentId,
+			type,
+			rootFolderType,
+		} = folder;
 
-    const folderIconPath = getIconPathByFolderType(type);
-    const icon = iconSize32.get(folderIconPath) as string;
+		const folderIconPath = getIconPathByFolderType(type);
+		const icon = iconSize32.get(folderIconPath) as string;
 
-    const isDisabled =
-      isDisableFolder(folder, disabledItems, filterParam) ||
-      (disabledFolderType ? type === disabledFolderType : false);
+		const isDisabled =
+			isDisableFolder(folder, disabledItems, filterParam) ||
+			(disabledFolderType ? type === disabledFolderType : false);
 
-    return {
-      id,
-      label: title,
-      title,
-      icon,
-      filesCount,
-      foldersCount,
-      security,
-      parentId,
-      rootFolderType,
-      isFolder: true,
-      isDisabled,
-      disableMultiSelect: true,
-    };
-  });
+		return {
+			id,
+			label: title,
+			title,
+			icon,
+			filesCount,
+			foldersCount,
+			security,
+			parentId,
+			rootFolderType,
+			isFolder: true,
+			isDisabled,
+			disableMultiSelect: true,
+		};
+	});
 
-  return items;
+	return items;
 };
 
 export const getDefaultBreadCrumb = (t: TTranslation) => {
-  return {
-    label: t("Common:ProductName"),
-    id: 0,
-    isRoom: false,
-  };
+	return {
+		label: t("Common:ProductName"),
+		id: 0,
+		isRoom: false,
+	};
 };

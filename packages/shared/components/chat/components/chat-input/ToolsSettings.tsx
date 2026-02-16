@@ -73,6 +73,9 @@ const ToolsSettings = ({
   knowledgeSearchToolName,
   webSearchToolName,
   webCrawlingToolName,
+  generateDocxToolName,
+  generateFormToolName,
+  generatePresentationToolName,
   setServers,
   setMCPTools,
   setWebSearchEnabled,
@@ -90,6 +93,9 @@ const ToolsSettings = ({
     setKnowledgeSearchToolName,
     setWebSearchToolName,
     setWebCrawlingToolName,
+    setGenerateDocxToolName,
+    setGenerateFormToolName,
+    setGeneratePresentationToolName,
   } = useMessageStore();
   const { isBase } = useTheme();
 
@@ -254,6 +260,18 @@ const ToolsSettings = ({
   React.useEffect(() => {
     setWebCrawlingToolName(webCrawlingToolName);
   }, [webCrawlingToolName, setWebCrawlingToolName]);
+
+  React.useEffect(() => {
+    setGenerateDocxToolName(generateDocxToolName);
+  }, [generateDocxToolName, setGenerateDocxToolName]);
+
+  React.useEffect(() => {
+    setGenerateFormToolName(generateFormToolName);
+  }, [generateFormToolName, setGenerateFormToolName]);
+
+  React.useEffect(() => {
+    setGeneratePresentationToolName(generatePresentationToolName);
+  }, [generatePresentationToolName, setGeneratePresentationToolName]);
 
   const model = React.useMemo(() => {
     const serverItems = Array.from(MCPTools.entries())

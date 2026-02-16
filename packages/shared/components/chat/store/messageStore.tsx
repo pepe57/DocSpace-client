@@ -68,6 +68,12 @@ export default class MessageStore {
 
   webCrawlingToolName: string = "";
 
+  generateDocxToolName: string = "";
+
+  generatePresentationToolName: string = "";
+
+  generateFormToolName: string = "";
+
   toolsConfirmQueue: string[] = [];
 
   constructor() {
@@ -121,6 +127,19 @@ export default class MessageStore {
 
   setWebCrawlingToolName = (webCrawlingToolName: string) => {
     this.webCrawlingToolName = webCrawlingToolName;
+  };
+
+  setGenerateDocxToolName = (generateDocxToolName: string) => {
+    this.generateDocxToolName = generateDocxToolName;
+  };
+
+  setGeneratePresentationToolName = (generatePresentationToolName: string) => {
+    console.log("set", generatePresentationToolName);
+    this.generatePresentationToolName = generatePresentationToolName;
+  };
+
+  setGenerateFormToolName = (generateFormToolName: string) => {
+    this.generateFormToolName = generateFormToolName;
   };
 
   setStartIndex = (startIndex: number) => {
@@ -306,33 +325,30 @@ export default class MessageStore {
     }
   };
 
-  handleGenerateDoc = (toolName: string, toolArgs: Record<string, unknown>) => {
-    if (toolName !== "docspace_generate_docx") return;
+  handleGenerateDoc = (content: TToolCallContent) => {
+    const { type } = content;
 
-    const name = toolName
-      .replace("docspace_", "")
-      .split("_")
-      .map((v, i) => {
-        if (i === 0) return v;
-        return v.charAt(0).toUpperCase() + v.slice(1);
-      })
-      .join("");
+    if (type !== ContentType.Tool) return;
 
-    const description = toolArgs.description;
+    const { name, result } = content;
 
-    const searchParams = new URLSearchParams();
+    if (
+      name !== this.generateDocxToolName &&
+      name !== this.generateFormToolName &&
+      name !== this.generatePresentationToolName
+    )
+      return;
 
-    const parentId = Number(this.roomId) + 2;
+    const { data } = result as {
+      data: { extension: string; id: number; title: string };
+    };
 
-    searchParams.append("parentId", parentId.toString());
-    searchParams.append("toolCallName", name);
-    searchParams.append("toolCallDescription", description as string);
-    searchParams.append("id", "-1");
-    searchParams.append("fileTitle", "New document.docx");
+    const webSearhParams = new URLSearchParams();
 
-    const url = `${window.location.origin}/doceditor/create?${searchParams.toString()}`;
+    webSearhParams.append("fileId", `${data.id}`);
+    webSearhParams.append("withTool", "true");
 
-    console.log(url);
+    const url = `${window.location.origin}/doceditor?${webSearhParams.toString()}`;
 
     window.open(url, "_blank");
   };
@@ -370,8 +386,6 @@ export default class MessageStore {
 
       this.replaceLastMessage(newMsg);
     }
-
-    this.handleGenerateDoc(name, args);
   };
 
   handleToolResult = (jsonData: string) => {
@@ -402,6 +416,8 @@ export default class MessageStore {
     };
 
     this.replaceLastMessage(newMsg);
+
+    this.handleGenerateDoc(content);
   };
 
   handleStreamError = (jsonData: string) => {
