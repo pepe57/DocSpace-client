@@ -703,7 +703,7 @@ class ContactsConextOptionsStore {
         id: "create_group",
         className: "main-button_drop-down",
         icon: GroupReactSvgUrl,
-        label: t("PeopleTranslations:CreateGroup"),
+        label: t("Common:CreateGroup"),
         onClick: createGroup,
         action: "group",
         key: "group",
