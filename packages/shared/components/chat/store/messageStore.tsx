@@ -134,7 +134,6 @@ export default class MessageStore {
   };
 
   setGeneratePresentationToolName = (generatePresentationToolName: string) => {
-    console.log("set", generatePresentationToolName);
     this.generatePresentationToolName = generatePresentationToolName;
   };
 
