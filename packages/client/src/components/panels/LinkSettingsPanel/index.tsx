@@ -27,7 +27,13 @@
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import type { DateTime } from "luxon";
-import { now, addToDate, subtractFromDate, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
+import {
+  now,
+  addToDate,
+  subtractFromDate,
+  parseToDateTime,
+  isAfter,
+} from "@docspace/ui-kit/utils/date";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
@@ -101,7 +107,7 @@ const LinkSettingsPanel = ({
   maxDate.setFullYear(maxDate.getFullYear() + 1);
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.value || !/^\d+$/.test(e.target.value)) {
+    if (e.target.value && !/^\d+$/.test(e.target.value)) {
       return;
     }
 

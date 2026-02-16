@@ -25,13 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
 
 import Article from "@docspace/ui-kit/components/article";
 import { ArticleProps } from "@docspace/ui-kit/components/article/Article.types";
 import { getUserType } from "@docspace/shared/utils/common";
 
 const ArticleWrapper = (props: ArticleProps) => {
-  return <Article {...props} />;
+  const navigate = useNavigate();
+
+  return <Article {...props} navigate={navigate} />;
 };
 
 export default inject<TStore>(
