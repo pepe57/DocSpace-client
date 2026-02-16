@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { useState, useEffect } from "react";
-import { tablet, isTablet as isTabletUtil } from "../utils/device";
+import {
+  tablet,
+  isTablet as isTabletUtil,
+} from "@docspace/ui-kit/utils/device";
 
 export function useIsTable() {
   const [isTable, setIsTable] = useState<boolean>(() => isTabletUtil());
