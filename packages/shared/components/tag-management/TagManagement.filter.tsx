@@ -34,10 +34,10 @@ import { useTranslation } from "react-i18next";
 
 import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 
-import { Tag } from "../tag";
-import { Text } from "../text";
-import { InputType, TextInput } from "../text-input";
-import { toastr } from "../toast";
+import { Tag } from "@docspace/ui-kit/components/tag";
+import { Text } from "@docspace/ui-kit/components/text";
+import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useTagManagement } from "./TagManagement.provider";
 import { useCreateTagMutation } from "./hooks/useTagsQuery";
@@ -142,7 +142,6 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
         >
           <span className={styles.createTagText}>{t("Common:CreateTag")}</span>
           <Tag
-            withIcon
             icon={PlusIcon}
             className={styles.createTag}
             iconClassName={styles.createTagIcon}

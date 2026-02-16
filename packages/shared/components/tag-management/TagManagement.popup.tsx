@@ -35,11 +35,15 @@ import {
   shift,
 } from "@floating-ui/dom";
 
-import { useClickOutside } from "../../utils/useClickOutside";
-import { useIsMobile } from "../../hooks/useIsMobile";
-import { useEventListener } from "../../hooks/useEventListener";
+import { useClickOutside } from "@docspace/ui-kit/utils/use-click-outside";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 
-import { ModalDialog, ModalDialogType } from "../modal-dialog";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
+
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementFilter } from "./TagManagement.filter";

@@ -31,14 +31,18 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
-import { useIsMobile } from "../../hooks/useIsMobile";
+import { Tag } from "@docspace/ui-kit/components/tag";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/ui-kit/components/text-input";
 
-import { Tag } from "../tag";
-import { toastr } from "../toast";
-import { Checkbox } from "../checkbox";
-import { Scrollbar } from "../scrollbar";
-import { IconButton } from "../icon-button";
-import { InputSize, InputType, TextInput } from "../text-input";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 import { useTagManagement } from "./TagManagement.provider";
 import {

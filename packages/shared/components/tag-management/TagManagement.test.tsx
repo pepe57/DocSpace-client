@@ -125,7 +125,9 @@ describe("<TagManagementPopup />", () => {
 
   it("calls onClose when clicking outside", async () => {
     const onClose = vi.fn();
-    const useClickOutside = await import("../../utils/useClickOutside");
+    const useClickOutside = await import(
+      "@docspace/ui-kit/utils/use-click-outside"
+    );
     const mockUseClickOutside = vi.spyOn(useClickOutside, "useClickOutside");
 
     vi.spyOn(useTagsQueryModule, "useTagsQuery").mockReturnValue({

@@ -27,10 +27,13 @@
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "../../text";
-import { Checkbox } from "../../checkbox";
-import { ModalDialog, ModalDialogType } from "../../modal-dialog";
-import { Button, ButtonSize } from "../../button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import { DELETE_TAG_MODAL_ID } from "../TagManagement.constants";
 import styles from "../TagManagement.module.scss";

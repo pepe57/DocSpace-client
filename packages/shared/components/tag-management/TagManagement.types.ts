@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { ShareAccessRights } from "../../enums";
-import type { TagClickEvent, TagType } from "../tag/Tag.types";
+import type { TagClickEvent, TagType } from "@docspace/ui-kit/components/tag";
 
 export interface TagManagementPopupProps {
   tags: Array<TagType | string>;

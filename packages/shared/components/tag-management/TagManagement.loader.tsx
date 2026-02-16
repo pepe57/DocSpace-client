@@ -27,7 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import { RectangleSkeleton } from "../../skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import styles from "./TagManagement.module.scss";
 

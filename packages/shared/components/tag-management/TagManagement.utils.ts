@@ -26,7 +26,7 @@
 import unionBy from "lodash/unionBy";
 import isString from "lodash/isString";
 
-import type { TagType } from "../tag/Tag.types";
+import type { TagType } from "@docspace/ui-kit/components/tag";
 
 import type { TTag } from "./TagManagement.types";
 

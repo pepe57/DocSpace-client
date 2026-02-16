@@ -29,11 +29,11 @@ import { describe, it, expect } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+import type { TagType } from "@docspace/ui-kit/components/tag";
 import {
   TagManagementProvider,
   useTagManagement,
 } from "./TagManagement.provider";
-import type { TagType } from "../tag/Tag.types";
 
 const TestComponent = () => {
   const {
