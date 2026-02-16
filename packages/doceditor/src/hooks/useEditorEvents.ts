@@ -104,10 +104,10 @@ const useEditorEvents = ({
   sdkConfig,
   organizationName,
   shareKey,
+  generationToolCallState,
   setFillingStatusDialogVisible,
   openShareFormDialog,
   onStartFillingVDRPanel,
-  aiConfig,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
 
@@ -344,12 +344,11 @@ const useEditorEvents = ({
                 sendProviders();
               }
 
-              if (aiConfig?.toolCallDescription && aiConfig.toolCallName) {
-                const { toolCallDescription, toolCallName } = aiConfig;
+              if (generationToolCallState) {
                 connector.sendEvent("ai_onCallTool", {
-                  name: toolCallName,
+                  name: generationToolCallState.toolName,
                   arguments: {
-                    description: toolCallDescription,
+                    ...generationToolCallState.parameters,
                   },
                 });
               }
@@ -379,6 +378,7 @@ const useEditorEvents = ({
     checkAndRequestRoles,
     t,
     successAuth,
+    generationToolCallState,
   ]);
 
   const onUserActionRequired = React.useCallback(() => {

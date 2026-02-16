@@ -66,17 +66,17 @@ export type TDocumentInfoSharingSettings = {
   permissions: string;
 };
 
-export type AISearchParams = {
-  toolCallDescription?: string;
-  toolCallName?: string;
-};
-
 export type SdkSearchParams = {
   locale?: string | null | undefined;
   theme?: string | undefined;
   editorGoBack?: boolean | "event";
   is_file?: boolean;
   isSDK?: boolean;
+};
+
+export type TGenerationToolCallState = {
+  toolName: string;
+  parameters: Record<string, string>;
 };
 
 export type RootPageProps = {
@@ -90,9 +90,9 @@ export type RootPageProps = {
       share: string;
       editorType: string;
       error?: string;
+      withTool?: string;
     }> &
-      SdkSearchParams &
-      AISearchParams
+      SdkSearchParams
   >;
 };
 export type TDocumentInfo = {
@@ -245,7 +245,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
-      aiConfig?: AISearchParams;
+
+      generationToolCallState?: TGenerationToolCallState;
     }
   | {
       error: TError;
@@ -261,7 +262,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
-      aiConfig?: AISearchParams;
+
+      generationToolCallState?: TGenerationToolCallState;
     };
 
 export type EditorProps = {
@@ -272,13 +274,14 @@ export type EditorProps = {
   documentServerUrl: string;
   fileInfo?: TFile;
   sdkConfig?: TFrameConfig | null;
-  aiConfig?: AISearchParams;
   isSharingAccess?: boolean;
   errorMessage?: string;
   isSkipError?: boolean;
   filesSettings?: TFilesSettings;
   organizationName?: string;
   shareKey?: string;
+
+  generationToolCallState?: TGenerationToolCallState;
 
   onDownloadAs?: (obj: object) => void;
   openShareFormDialog?: () => void;
@@ -407,11 +410,11 @@ export interface UseEventsProps {
   isSkipError?: boolean;
   openOnNewPage: boolean;
   t: TTranslation;
-  aiConfig?: AISearchParams;
 
   sdkConfig?: TFrameConfig | null;
   organizationName: string;
   shareKey?: string;
+  generationToolCallState?: TGenerationToolCallState;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   openShareFormDialog?: VoidFunction;
   onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
@@ -427,6 +430,7 @@ export interface UseInitProps {
   setDocTitle: (value: string) => void;
   documentReady: boolean;
   organizationName: string;
+  generationToolCallState?: TGenerationToolCallState;
 }
 
 export type THistoryData =

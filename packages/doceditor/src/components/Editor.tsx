@@ -72,7 +72,7 @@ const Editor = ({
   isSkipError,
 
   sdkConfig,
-  aiConfig,
+  generationToolCallState,
 
   organizationName = "",
   filesSettings,
@@ -139,7 +139,7 @@ const Editor = ({
     openShareFormDialog,
     onStartFillingVDRPanel,
     shareKey,
-    aiConfig,
+    generationToolCallState,
   });
 
   useInit({
