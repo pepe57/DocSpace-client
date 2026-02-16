@@ -332,7 +332,7 @@ const Uploader = (props) => {
             <ControlsGroup>
               <Checkbox
                 className="checkbox"
-                label="Enable folder upload"
+                label={t("EnableFolderUpload")}
                 onChange={onChangeEnableFolderUpload}
                 isChecked={enableFolderUpload}
                 dataTestId="enable_folder_upload_checkbox"
@@ -341,7 +341,7 @@ const Uploader = (props) => {
 
             {enableFolderUpload && (
               <ControlsGroup>
-                <Label className="label" text="Button text for folder" />
+                <Label className="label" text={t("ButtonText")} />
                 <TextInput
                   scale
                   value={config.linkMainTextForFolders || ""}
