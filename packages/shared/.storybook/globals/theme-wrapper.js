@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ThemeProvider } from "../../components/theme-provider";
-import { globalColors } from "../../themes";
+import { ThemeProviderComponent } from "@docspace/ui-kit/components/theme-provider";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 const ThemeWrapper = ({ theme, children }) => {
   return (
-    <ThemeProvider
+    <ThemeProviderComponent
       theme={theme}
       currentColorScheme={{
         main: {
@@ -19,7 +19,7 @@ const ThemeWrapper = ({ theme, children }) => {
       }}
     >
       {children}
-    </ThemeProvider>
+    </ThemeProviderComponent>
   );
 };
 

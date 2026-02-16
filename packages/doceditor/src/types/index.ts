@@ -36,21 +36,18 @@ import {
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
-import {
-  HeaderProps,
-  TBreadCrumb,
-} from "@docspace/shared/components/selector/Selector.types";
+import { HeaderProps, TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
   FolderType,
-  RoomsType,
   StartFillingMode,
 } from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
+import type { RoomsType } from "@docspace/ui-kit/enums";
 
 export type TGoBack = {
   requestClose: boolean;

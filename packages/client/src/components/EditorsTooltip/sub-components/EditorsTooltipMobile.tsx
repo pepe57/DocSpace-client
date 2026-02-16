@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Portal } from "@docspace/shared/components/portal";
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { AvatarSize } from "@docspace/shared/components/avatar";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Portal } from "@docspace/ui-kit/components/portal";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { AvatarSize } from "@docspace/ui-kit/components/avatar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import { EditorsList } from "./EditorsList";
 import type { EditorsTooltipMobileProps } from "../EditorsTooltip.types";

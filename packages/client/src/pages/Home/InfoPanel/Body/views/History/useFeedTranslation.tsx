@@ -27,7 +27,7 @@
 import { Trans } from "react-i18next";
 import { TFunction } from "i18next";
 import { FeedActionKeys } from "@docspace/shared/api/rooms/types";
-import { humanizeDuration, type DurationUnit } from "@docspace/shared/utils/date";
+import { humanizeDuration, type DurationUnit } from "@docspace/ui-kit/utils/date";
 import { TTranslation } from "@docspace/shared/types";
 
 import { HistoryText } from "./HistoryText";

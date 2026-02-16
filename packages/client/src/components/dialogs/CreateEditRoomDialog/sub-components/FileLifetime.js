@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { capitalize } from "lodash";
-import { Text } from "@docspace/shared/components/text";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { mobile } from "@docspace/shared/utils/device";
+import { Text } from "@docspace/ui-kit/components/text";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { mobile } from "@docspace/ui-kit/utils/device";
 
 const StyledFileLifetime = styled.div`
   margin-top: 12px;

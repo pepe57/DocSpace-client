@@ -28,7 +28,7 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { Label } from "@docspace/shared/components/label";
+import { Label } from "@docspace/ui-kit/components/label";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 import api from "@docspace/shared/api";

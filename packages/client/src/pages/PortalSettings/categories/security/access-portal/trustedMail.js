@@ -29,10 +29,10 @@ import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { size } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
@@ -175,7 +175,7 @@ const TrustedMail = (props) => {
     setErrorMessages((prev) => [...prev, null]);
   };
 
-  const checkDuplicate = (domains,input, index) => {
+  const checkDuplicate = (domains, input, index) => {
     const firstIndex = domains.findIndex((d) => d === input && d !== "");
     return firstIndex !== -1 && firstIndex !== index;
   };
@@ -187,18 +187,17 @@ const TrustedMail = (props) => {
   };
 
   const getErrorMessage = (domain, index, domainsArray = domains) => {
-    
     const isDuplicate = checkDuplicate(domainsArray, domain, index);
     const isValidFormat = isValidDomainName(domain) && domain !== "";
-    
+
     if (isDuplicate) return t("Common:DomainAlreadyAdded");
     if (!isValidFormat) return t("Common:IncorrectDomain");
     return null;
   };
 
   const validateAllDomains = (domainsArray) => {
-    return domainsArray.map((domain, index) => 
-      getErrorMessage(domain, index, domainsArray)
+    return domainsArray.map((domain, index) =>
+      getErrorMessage(domain, index, domainsArray),
     );
   };
 
@@ -206,13 +205,13 @@ const TrustedMail = (props) => {
     const newInputs = Array.from(domains);
     newInputs.splice(index, 1);
     setDomains(newInputs);
-    
+
     setErrorMessages(validateAllDomains(newInputs));
   };
 
   const onCheckValid = (domain, index) => {
     const errorMessage = getErrorMessage(domain, index);
-    
+
     setErrorMessages((prev) => {
       const newErrors = [...prev];
       newErrors[index] = errorMessage;

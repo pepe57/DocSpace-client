@@ -29,18 +29,18 @@ import { Trans, useTranslation } from "react-i18next";
 import axios from "axios";
 import classNames from "classnames";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
-import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
+import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import {
   getDefaultProvider,
   getModels,
   getProviders,
 } from "@docspace/shared/api/ai";
-import { toastr } from "@docspace/shared/components/toast";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 import { modelCache } from "./modelCache";
@@ -64,8 +64,12 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     modelId: agentParams.modelId ?? "",
   } as TModel);
 
-  const initProviderIdRef = React.useRef<number | null>(agentParams.providerId || null);
-  const initModelIdRef = React.useRef<string | null>(agentParams.modelId || null);
+  const initProviderIdRef = React.useRef<number | null>(
+    agentParams.providerId || null,
+  );
+  const initModelIdRef = React.useRef<string | null>(
+    agentParams.modelId || null,
+  );
 
   const [isProvidersLoading, setIsProvidersLoading] = React.useState(false);
   const [isProvidersFetched, setIsProvidersFetched] = React.useState(false);
@@ -206,7 +210,8 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             : defaultModel;
 
         const preferredModel =
-          cachedModels.find((mo) => mo.modelId === preferredModelId) ?? cachedModels[0];
+          cachedModels.find((mo) => mo.modelId === preferredModelId) ??
+          cachedModels[0];
 
         setSelectedModel(preferredModel);
       }

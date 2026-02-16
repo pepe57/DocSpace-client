@@ -28,10 +28,13 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
-import { parseToDateTime, formatDateLocalized } from "@docspace/shared/utils/date";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import {
+  parseToDateTime,
+  formatDateLocalized,
+} from "@docspace/ui-kit/utils/date";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
 
 import RoomsContent from "./sub-components/RoomsContent";
@@ -67,8 +70,12 @@ const InviteQuotaWarningDialog = (props) => {
     const byDateDt = parseToDateTime(delayDueDate);
 
     setDatesData({
-      fromDate: fromDateDt ? formatDateLocalized(fromDateDt, "DATE_MED", { locale: language }) : "",
-      byDate: byDateDt ? formatDateLocalized(byDateDt, "DATE_MED", { locale: language }) : "",
+      fromDate: fromDateDt
+        ? formatDateLocalized(fromDateDt, "DATE_MED", { locale: language })
+        : "",
+      byDate: byDateDt
+        ? formatDateLocalized(byDateDt, "DATE_MED", { locale: language })
+        : "",
       delayDaysCount: getDaysRemaining(byDateDt),
     });
   };

@@ -34,8 +34,7 @@ import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { UrlActionType } from "@docspace/shared/enums";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
-import { Portal } from "@docspace/shared/components/portal";
-
+import { Portal } from "@docspace/ui-kit/components/portal";
 const FilesMediaViewer = (props) => {
   const {
     t,

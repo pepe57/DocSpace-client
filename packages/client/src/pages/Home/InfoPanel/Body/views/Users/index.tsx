@@ -31,14 +31,14 @@ import { useNavigate } from "react-router";
 import classNames from "classnames";
 
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/shared/components/combobox";
-import { TContextMenuValueTypeOnClick } from "@docspace/shared/components/context-menu/ContextMenu.types";
+} from "@docspace/ui-kit/components/combobox";
+import { TContextMenuValueTypeOnClick } from "@docspace/ui-kit";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";

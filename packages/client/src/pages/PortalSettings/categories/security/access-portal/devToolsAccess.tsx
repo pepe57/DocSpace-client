@@ -30,18 +30,17 @@ import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
-import { toastr } from "@docspace/shared/components/toast";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { size } from "@docspace/shared/utils";
-import type { TColorScheme } from "@docspace/shared/themes";
-
-import type { TData } from "@docspace/shared/components/toast/Toast.type";
+import type { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
+import type { TData } from "@docspace/ui-kit/components/toast";
 
 import { LearnMoreWrapper } from "../StyledSecurity";
 
@@ -209,7 +208,7 @@ const DevToolsAccess = ({
           <Link
             className="link-learn-more"
             dataTestId="developer_tools_access_component_learn_more"
-            color={currentColorScheme.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             target={LinkTarget.blank}
             isHovered
             href={limitedDevToolsBlockHelpUrl}

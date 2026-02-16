@@ -29,7 +29,7 @@ import classNames from "classnames";
 
 import { ContentType } from "../../../../../../api/ai/enums";
 
-import { Text } from "../../../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import type { MessageFilesProps } from "../../../../Chat.types";
 

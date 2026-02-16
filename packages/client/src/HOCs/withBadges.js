@@ -30,7 +30,7 @@ import { ShareAccessRights, FileStatus } from "@docspace/shared/enums";
 
 import config from "PACKAGE_FILE";
 import { copyShareLink } from "@docspace/shared/utils/copy";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import Badges from "@docspace/shared/components/badges";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 

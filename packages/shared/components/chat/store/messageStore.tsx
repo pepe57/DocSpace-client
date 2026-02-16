@@ -39,7 +39,7 @@ import type {
 } from "../../../api/ai/types";
 import type { TFile } from "../../../api/files/types";
 
-import { toastr } from "../../toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import type { TMessageStoreProps } from "../Chat.types";
 

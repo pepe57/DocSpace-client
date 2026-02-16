@@ -32,17 +32,17 @@ import api from "@docspace/shared/api";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import { TData, toastr } from "@docspace/shared/components/toast";
+import { TData, toastr } from "@docspace/ui-kit/components/toast";
 import type {
   TFile,
   TFileSecurity,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
-import type { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
+import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.types";
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -1011,23 +1011,22 @@ class PluginStore {
       const newItems: IMainButtonItemClient[] = [];
 
       if (value.items && storeId) {
+        value.items.forEach((i) => {
+          const onClick = async () => {
+            const message = await i.onClick?.(storeId);
 
-          value.items.forEach((i) => {
-            const onClick = async () => {
-              const message = await i.onClick?.(storeId);
+            this.dispatchMessage({ message, pluginName: plugin.name });
+          };
 
-              this.dispatchMessage({ message, pluginName: plugin.name });
-            };
+          const { items: _, ...rest } = i;
 
-            const { items: _, ...rest } = i;
-
-            newItems.push({
-              ...rest,
-              onClick,
-              icon: `${plugin.iconUrl}/assets/${i.icon}?hash=${plugin.version}`,
-              pluginName: plugin.name,
-            });
+          newItems.push({
+            ...rest,
+            onClick,
+            icon: `${plugin.iconUrl}/assets/${i.icon}?hash=${plugin.version}`,
+            pluginName: plugin.name,
           });
+        });
       }
 
       const onClick = async () => {

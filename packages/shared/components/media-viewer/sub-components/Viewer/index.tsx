@@ -33,7 +33,7 @@ import React, {
 
 import { DeviceType } from "../../../../enums";
 import { includesMethod } from "../../../../utils/typeGuards";
-import type { ContextMenuRefType } from "../../../context-menu";
+import type { ContextMenuRefType } from "@docspace/ui-kit/components/context-menu";
 
 import { isGif, isHeic, isTiff, isWebp } from "../../MediaViewer.utils";
 import styles from "./Viewer.module.scss";

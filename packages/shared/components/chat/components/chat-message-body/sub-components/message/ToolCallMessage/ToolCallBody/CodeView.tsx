@@ -33,7 +33,7 @@ import type { TToolCallContent } from "../../../../../../../../api/ai/types";
 import styles from "../../../../ChatMessageBody.module.scss";
 import MarkdownField from "../../Markdown";
 import { formatJsonWithMarkdown } from "../../../../../../utils";
-import { Text } from "../../../../../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import type { ToolCallPlacement } from "../ToolCall.enum";
 
 export const CodeView = observer(

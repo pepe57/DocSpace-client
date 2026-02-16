@@ -21,7 +21,5 @@
   "SubNewFormFile": "От текстов файл",
   "ThirdPartyInfo": "Смени информацията от трето лице",
   "ThirdPartyTitle": "Услуги на трети страни",
-  "TitleShowActions": "Покажи действията за файлове",
-  "TitleShowFolderActions": "Покажи действията за папки",
   "TrashItemsDeleteSuccess": "Избраните елементи бяха успешно изтрити от {{sectionName}}"
 }

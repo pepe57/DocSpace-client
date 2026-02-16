@@ -35,7 +35,7 @@ import {
 } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { TContextMenuValueTypeOnClick } from "@docspace/shared/components/context-menu/ContextMenu.types";
+import { TContextMenuValueTypeOnClick } from "@docspace/ui-kit";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { UserStore } from "@docspace/shared/store/UserStore";

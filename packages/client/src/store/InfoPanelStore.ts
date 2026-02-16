@@ -34,11 +34,13 @@ import { getTemplateAvailable } from "@docspace/shared/api/rooms";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TLogo, TRoom } from "@docspace/shared/api/rooms/types";
+import { TRoom } from "@docspace/shared/api/rooms/types";
+import type { TLogo } from "@docspace/ui-kit";
 import { Nullable, TCreatedBy } from "@docspace/shared/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
-import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { getUserType } from "@docspace/shared/utils/common";
 import { LANGUAGE, SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 

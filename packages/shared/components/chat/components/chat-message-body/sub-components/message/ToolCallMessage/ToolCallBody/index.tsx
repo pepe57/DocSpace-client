@@ -34,7 +34,7 @@ import type { ToolCallPlacement } from "../ToolCall.enum";
 import { useMessageStore } from "../../../../../../store/messageStore";
 import { CodeView } from "./CodeView";
 import { SourceView } from "./SourceView";
-import { Text } from "../../../../../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 type ToolCallBodyProps = {
   content: TToolCallContent;

@@ -30,10 +30,10 @@ import { useTranslation } from "react-i18next";
 import { getRooms } from "../../../api/rooms";
 import RoomsFilter from "../../../api/rooms/filter";
 import { RoomsStorageFilter, RoomsType } from "../../../enums";
-import { RoomsTypeValues } from "../../../utils";
+import { RoomsTypeValues } from "../../../utils/common";
 import RoomType from "../../../components/room-type";
-import { TSelectorItem } from "../../../components/selector";
-import { TBreadCrumb } from "../../../components/selector/Selector.types";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 
 import { LoadersContext } from "../contexts/Loaders";
 
