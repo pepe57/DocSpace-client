@@ -48,7 +48,7 @@ import CreateGroupReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 
 import { isDesktop } from "@docspace/shared/utils";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import type { TRoomGroup } from "@docspace/shared/components/filter/Filter.types";
 

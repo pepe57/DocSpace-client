@@ -30,73 +30,73 @@ import classNames from "classnames";
 
 import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 
-import { Text } from "../../../text";
-import { IconButton } from "../../../icon-button";
-import { Scrollbar } from "../../../scrollbar";
+import { Text } from "@docspace/ui-kit/components/text";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import type { FilesListProps } from "../../Chat.types";
 
 import styles from "./ChatInput.module.scss";
 
 const FilesList = ({ files, isFixed, getIcon, onRemove }: FilesListProps) => {
-  if (!files.length) return null;
+	if (!files.length) return null;
 
-  return (
-    <div
-      className={classNames(styles.filesList, {
-        [styles.filesListFixed]: isFixed,
-      })}
-    >
-      <Scrollbar noScrollY>
-        <div className={styles.filesListWrapper}>
-          {files.map((file) => (
-            <div
-              className={styles.filesListItem}
-              key={file.id}
-              style={{ maxWidth: "300px" }}
-              data-testid="files-list-item"
-            >
-              <ReactSVG
-                src={getIcon(24, file.fileExst ?? "")}
-                className={styles.filesListItemIcon}
-              />
+	return (
+		<div
+			className={classNames(styles.filesList, {
+				[styles.filesListFixed]: isFixed,
+			})}
+		>
+			<Scrollbar noScrollY>
+				<div className={styles.filesListWrapper}>
+					{files.map((file) => (
+						<div
+							className={styles.filesListItem}
+							key={file.id}
+							style={{ maxWidth: "300px" }}
+							data-testid="files-list-item"
+						>
+							<ReactSVG
+								src={getIcon(24, file.fileExst ?? "")}
+								className={styles.filesListItemIcon}
+							/>
 
-              <div className={styles.filesListItemInfo}>
-                <div className={styles.filesListItemInfoText}>
-                  <Text
-                    fontSize="12px"
-                    lineHeight="16px"
-                    fontWeight={600}
-                    truncate
-                  >
-                    {file.title?.replaceAll(file?.fileExst || "", "")}
-                  </Text>
-                  <Text
-                    fontSize="12px"
-                    lineHeight="16px"
-                    fontWeight={600}
-                    as="span"
-                  >
-                    {file.fileExst}
-                  </Text>
-                </div>
+							<div className={styles.filesListItemInfo}>
+								<div className={styles.filesListItemInfoText}>
+									<Text
+										fontSize="12px"
+										lineHeight="16px"
+										fontWeight={600}
+										truncate
+									>
+										{file.title?.replaceAll(file?.fileExst || "", "")}
+									</Text>
+									<Text
+										fontSize="12px"
+										lineHeight="16px"
+										fontWeight={600}
+										as="span"
+									>
+										{file.fileExst}
+									</Text>
+								</div>
 
-                {onRemove ? (
-                  <IconButton
-                    iconName={CloseCircleReactSvgUrl}
-                    size={16}
-                    isClickable
-                    onClick={() => onRemove(file)}
-                    dataTestId="remove-file-button"
-                  />
-                ) : null}
-              </div>
-            </div>
-          ))}
-        </div>
-      </Scrollbar>
-    </div>
-  );
+								{onRemove ? (
+									<IconButton
+										iconName={CloseCircleReactSvgUrl}
+										size={16}
+										isClickable
+										onClick={() => onRemove(file)}
+										dataTestId="remove-file-button"
+									/>
+								) : null}
+							</div>
+						</div>
+					))}
+				</div>
+			</Scrollbar>
+		</div>
+	);
 };
 
 export default FilesList;

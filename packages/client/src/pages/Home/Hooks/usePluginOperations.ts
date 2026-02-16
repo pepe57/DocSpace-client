@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect,  useMemo, useCallback } from "react";
-import type { Operation } from "@docspace/shared/components/operations-progress-button/OperationsProgressButton.types";
+import React, { useEffect, useMemo, useCallback } from "react";
+import type { Operation } from "@docspace/ui-kit/components/operations-progress-button/OperationsProgressButton.types";
 import type { IFloatingOperationsButtonClient } from "SRC_DIR/helpers/plugins/types";
 import type PluginStore from "SRC_DIR/store/PluginStore";
 
@@ -41,9 +41,7 @@ interface UsePluginOperationsReturn {
   pluginOperationsAlert?: boolean;
   pluginShowCancelButton?: boolean;
   handlePluginCancelOperation: () => void;
-  handlePluginClearOperation: (
-    operationId: string,
-  ) => void;
+  handlePluginClearOperation: (operationId: string) => void;
 }
 
 export const usePluginOperations = ({
@@ -52,7 +50,6 @@ export const usePluginOperations = ({
   getPluginIconUrl,
   removePluginFloatingOperations,
 }: UsePluginOperationsParams): UsePluginOperationsReturn => {
-
   const loadedPluginsRef = React.useRef<Set<string>>(new Set());
 
   const prefix = (pluginName: string) => `${pluginName}-`;
@@ -81,7 +78,6 @@ export const usePluginOperations = ({
     return allOperations;
   }, [pluginFloatingOperationsArray, getPluginIconUrl]);
 
-
   const handlePluginCancelOperation = useCallback(async () => {
     await Promise.all(
       pluginFloatingOperationsArray.map(async (pluginProps) => {
@@ -102,15 +98,15 @@ export const usePluginOperations = ({
         // operations button is hidden, remove all plugin operations
         pluginFloatingOperationsArray.forEach((pluginProps) => {
           removePluginFloatingOperations(pluginProps.id);
-        })
+        });
         loadedPluginsRef.current = new Set();
         return;
-      };
+      }
 
-      const floatingOperationsProps = pluginFloatingOperationsArray.find((pluginProps) =>
-        operationId.startsWith(pluginProps.pluginName),
+      const floatingOperationsProps = pluginFloatingOperationsArray.find(
+        (pluginProps) => operationId.startsWith(pluginProps.pluginName),
       );
-      
+
       if (!floatingOperationsProps) return;
 
       const { pluginName, onCancelOperationFromList } = floatingOperationsProps;
@@ -159,7 +155,9 @@ export const usePluginOperations = ({
     });
 
     loadedPluginsRef.current = new Set(
-      pluginFloatingOperationsArray.map(({ pluginName, id }) => `${prefix(pluginName)}${id}`),
+      pluginFloatingOperationsArray.map(
+        ({ pluginName, id }) => `${prefix(pluginName)}${id}`,
+      ),
     );
   }, [pluginKeys, dispatchMessage]);
 
@@ -183,8 +181,7 @@ export const usePluginOperations = ({
     if (pluginFloatingOperationsArray.length === 0) return false;
 
     return pluginFloatingOperationsArray.some((p) => {
-      const hasOperations =
-        p.operations && p.operations.length > 0;
+      const hasOperations = p.operations && p.operations.length > 0;
       return hasOperations && p.showCancelButton === true;
     });
   }, [pluginFloatingOperationsArray]);

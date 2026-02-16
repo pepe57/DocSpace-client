@@ -36,7 +36,7 @@ import type { TFile } from "../../../../api/files/types";
 
 import FilesSelector from "../../../../selectors/Files";
 
-import type { TSelectorItem } from "../../../selector";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 
 import type { AttachmentProps } from "../../Chat.types";
 import {

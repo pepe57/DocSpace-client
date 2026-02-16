@@ -63,7 +63,7 @@ import {
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";

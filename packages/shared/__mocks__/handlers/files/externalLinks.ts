@@ -26,7 +26,7 @@
 
 import { http, HttpResponse } from "msw";
 import type { DateTime } from "luxon";
-import { uuid } from "../../../utils/uuid";
+import { uuid } from "@docspace/ui-kit/utils/uuid";
 
 import { TFileLink } from "../../../api/files/types";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
@@ -69,7 +69,7 @@ const generateFileLink = ({
       expirationDate:
         typeof expirationDate === "string"
           ? expirationDate
-          : expirationDate?.toISO() ?? undefined,
+          : (expirationDate?.toISO() ?? undefined),
     },
     canEditDenyDownload: false,
     isLocked: false,

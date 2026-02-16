@@ -27,13 +27,13 @@
 import styled, { css } from "styled-components";
 import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
 import { IconSizeType } from "@docspace/shared/utils";
-import { Tooltip } from "@docspace/shared/components/tooltip";
-import { Text } from "@docspace/shared/components/text";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
 import { TTranslation } from "@docspace/shared/types";
 import { TApiKey } from "@docspace/shared/api/api-keys/types";
-import { globalColors } from "@docspace/shared/themes";
-import { now, parseToDateTime, isAfter } from "@docspace/shared/utils/date";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { now, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 const StyledApiKeysLifetimeIcon = styled.div<{ isExpired: boolean }>`
   ${({ isExpired }) =>

@@ -26,13 +26,14 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { now, parseToDateTime, addToDate, dateDiff } from "@docspace/shared/utils/date";
+import { now, parseToDateTime, addToDate, dateDiff } from "@docspace/ui-kit/utils/date";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
 import { openShareTab } from "SRC_DIR/helpers/info-panel";

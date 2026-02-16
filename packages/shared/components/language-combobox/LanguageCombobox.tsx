@@ -27,7 +27,11 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { TOption, ComboBoxSize, ComboBox } from "../combobox";
+import {
+  TOption,
+  ComboBoxSize,
+  ComboBox,
+} from "@docspace/ui-kit/components/combobox";
 import { mapCulturesToArray } from "../../utils/common";
 import { TCulture, ComboboxProps } from "./LanguageCombobox.types";
 import styles from "./LanguageCombobox.module.scss";

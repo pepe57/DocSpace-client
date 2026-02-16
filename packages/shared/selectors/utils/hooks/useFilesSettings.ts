@@ -28,15 +28,14 @@ import React from "react";
 
 import api from "../../../api";
 import { TFilesSettings } from "../../../api/files/types";
-import { presentInArray } from "../../../utils";
+import { presentInArray } from "../../../utils/presentInArray";
 import {
   iconSize32,
   iconSize64,
   iconSize96,
 } from "../../../utils/image-helpers";
 import { HTML_EXST, EBOOK_EXST } from "../../../constants";
-import { toastr } from "../../../components/toast";
-import { TData } from "../../../components/toast/Toast.type";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 
 import { TGetIcon } from "../types";
 

@@ -1051,5 +1051,7 @@
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourLogo": "Logo-ul dvs",
   "YourTurn": "Acum e rândul dvs.",
-  "ExternalLink": "Link extern"
+  "ExternalLink": "Link extern",
+  "TitleShowFolderActions": "Afișare acțiuni asupra folderului",
+  "TitleShowActions": "Afișare acțiuni asupra fișierului"
 }

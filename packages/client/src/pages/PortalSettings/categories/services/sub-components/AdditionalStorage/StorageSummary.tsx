@@ -28,8 +28,8 @@ import React from "react";
 import classNames from "classnames";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import styles from "../../styles/StorageSummary.module.scss";
 import PlanInfo from "./PlanInfo";

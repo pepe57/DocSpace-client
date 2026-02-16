@@ -29,7 +29,7 @@ import { ReactSVG } from "react-svg";
 
 import { ContentType } from "../../../../../../api/ai/enums";
 
-import { Text } from "../../../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { MessageFilesProps } from "../../../../Chat.types";
 

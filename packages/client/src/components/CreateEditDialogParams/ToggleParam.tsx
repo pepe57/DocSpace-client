@@ -27,7 +27,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 
 import { StyledParam } from "./StyledParam";
 

@@ -98,7 +98,7 @@ import copy from "copy-to-clipboard";
 import { isMobile, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { Trans } from "react-i18next";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import {
   isMobile as isMobileUtils,

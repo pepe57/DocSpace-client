@@ -29,11 +29,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Heading } from "@docspace/shared/components/heading";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Heading } from "@docspace/ui-kit/components/heading";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
 
 import { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
 import { TTranslation } from "@docspace/shared/types";

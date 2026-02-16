@@ -32,7 +32,7 @@ import { withTranslation } from "react-i18next";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
-import FilterInput from "@docspace/shared/components/filter";
+import FilterInput from "@docspace/ui-kit/components/filter";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
 import { getUser } from "@docspace/shared/api/people";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -52,7 +52,7 @@ import {
   getQuotaFilter,
   getFilterLocation,
   getSharedBy,
-} from "@docspace/shared/components/filter/Filter.utils";
+} from "@docspace/ui-kit/components/filter/Filter.utils";
 
 import {
   DeviceType,
@@ -76,7 +76,8 @@ import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 
 import { getRoomInfo } from "@docspace/shared/api/rooms";
-import { FilterLoader } from "@docspace/shared/skeletons/filter";
+import { FilterLoader } from "@docspace/ui-kit/components/filter/skeletons";
+import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 
 import { useContactsFilter } from "./useContacts";
 
@@ -1829,6 +1830,7 @@ const SectionFilterContent = ({
       isContactsInsideGroupPage={isContactsInsideGroupPage}
       isContactsGuestsPage={isContactsGuestsPage}
       isRecentFolder={isRecentFolder}
+      renderSelector={renderFilterSelector}
       setEditRoomGroupsDialogVisible={setEditRoomGroupsDialogVisible}
       getAllRoomGroups={getAllRoomGroups}
       roomGroups={roomGroups}

@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/DisplayPageBlock.js",
       "line_number": 34,
-      "context": "import { TextInput } from \"@docspace/shared/components/text-input\";\n import { Label } from \"@docspace/shared/components/label\";\n \n import { ControlsGroup } from \"../presets/StyledPresets\";\n \n export const DisplayPageBlock = ({ t, config, setConfig }) => {\n const [value, setValue] = useState(config.filter.page);\n \n const debouncedSetConfig = useCallback(\n debounce((newValue) => {\n setConfig((oldConfig) => ({",
+      "context": "import { TextInput } from \"@docspace/shared/components/text-input\";\n import { Label } from \"@docspace/ui-kit/components/label\";\n \n import { ControlsGroup } from \"../presets/StyledPresets\";\n \n export const DisplayPageBlock = ({ t, config, setConfig }) => {\n const [value, setValue] = useState(config.filter.page);\n \n const debouncedSetConfig = useCallback(\n debounce((newValue) => {\n setConfig((oldConfig) => ({",
       "module": "/packages/client"
     }
   ],

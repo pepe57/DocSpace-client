@@ -31,14 +31,14 @@ import styled from "styled-components";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import { TextInput } from "@docspace/shared/components/text-input";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import { SelectedItem } from "@docspace/shared/components/selected-item";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
+import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
 import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 const CategoryHeader = styled.div`
   margin-top: 24px;
@@ -272,7 +272,7 @@ const CSP = ({
           isDisabled={disableCSP}
           testId="allowed_domains_text_input"
         />
-        <SelectorAddButton
+        <AddButton
           testId="allowed_domains_add_button"
           isDisabled={!domain.trim()}
           onClick={addDomain}

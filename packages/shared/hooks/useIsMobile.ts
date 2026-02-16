@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { useState, useEffect } from "react";
-import { mobile, isMobile as isMobileUtil } from "../utils/device";
+import {
+  mobile,
+  isMobile as isMobileUtil,
+} from "@docspace/ui-kit/utils/device";
 
 export function useIsMobile() {
   const [isMobile, setIsMobile] = useState<boolean>(() => isMobileUtil());

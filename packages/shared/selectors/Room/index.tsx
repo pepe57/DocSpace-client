@@ -32,17 +32,17 @@ import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.
 import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.light.svg?url";
 import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg?url";
 
-import { Selector, TSelectorItem } from "../../components/selector";
+import { Selector, TSelectorItem } from "@docspace/ui-kit/components/selector";
 import {
   TSelectorCancelButton,
   TSelectorHeader,
   TSelectorSearch,
   TSelectorWithAside,
-} from "../../components/selector/Selector.types";
+} from "@docspace/ui-kit/components/selector";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 
 import { TTranslation } from "../../types";
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import useSocketHelper from "../utils/hooks/useSocketHelper";
 import useRoomsHelper from "../utils/hooks/useRoomsHelper";

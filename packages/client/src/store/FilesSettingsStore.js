@@ -46,7 +46,7 @@ import {
   isPublicPreview,
   insertEditorPreloadFrame,
 } from "@docspace/shared/utils/common";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import i18n from "../i18n";
 

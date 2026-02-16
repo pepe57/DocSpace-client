@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Avatar, AvatarRole } from "@docspace/shared/components/avatar";
+import { Avatar, AvatarRole } from "@docspace/ui-kit/components/avatar";
 import { classNames } from "@docspace/shared/utils";
 import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 

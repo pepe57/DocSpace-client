@@ -31,7 +31,7 @@ import {
   TSelectorHeader,
   TSelectorItem,
   TSelectorWithAside,
-} from "../../components/selector/Selector.types";
+} from "@docspace/ui-kit/components/selector";
 
 import { RoomSearchArea, RoomsType } from "../../enums";
 

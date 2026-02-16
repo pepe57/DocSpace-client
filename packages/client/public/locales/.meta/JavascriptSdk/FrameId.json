@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FrameIdSetter.js",
       "line_number": 34,
-      "context": "import { TextInput } from \"@docspace/shared/components/text-input\";\n import { Label } from \"@docspace/shared/components/label\";\n \n import { ControlsGroup } from \"../presets/StyledPresets\";\n \n export const FrameIdSetter = (props) => {\n const { t, defaultFrameId, setConfig } = props;\n \n const [frameId, setFrameId] = useState(defaultFrameId);\n \n const debouncedSetConfig = useCallback(",
+      "context": "import { TextInput } from \"@docspace/shared/components/text-input\";\n import { Label } from \"@docspace/ui-kit/components/label\";\n \n import { ControlsGroup } from \"../presets/StyledPresets\";\n \n export const FrameIdSetter = (props) => {\n const { t, defaultFrameId, setConfig } = props;\n \n const [frameId, setFrameId] = useState(defaultFrameId);\n \n const debouncedSetConfig = useCallback(",
       "module": "/packages/client"
     }
   ],

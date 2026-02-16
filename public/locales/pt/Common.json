@@ -1051,5 +1051,7 @@
   "YourCurrentDomain": "O seu domínio atual",
   "YourLogo": "O seu logótipo",
   "YourTurn": "A sua vez",
-  "ExternalLink": "Ligação externa"
+  "ExternalLink": "Ligação externa",
+  "TitleShowFolderActions": "Mostrar ações da pasta",
+  "TitleShowActions": "Mostrar ações com ficheiros"
 }

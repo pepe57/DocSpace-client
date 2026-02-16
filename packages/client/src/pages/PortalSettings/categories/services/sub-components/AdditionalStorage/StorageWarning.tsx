@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "../../styles/StorageSummary.module.scss";
 import { useServicesActions } from "../../hooks/useServicesActions";

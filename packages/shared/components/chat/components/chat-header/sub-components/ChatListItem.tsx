@@ -32,11 +32,14 @@ import classNames from "classnames";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 
 import type { TChat } from "../../../../../api/ai/types";
-import { ContextMenu, ContextMenuRefType } from "../../../../context-menu";
+import {
+  ContextMenu,
+  ContextMenuRefType,
+} from "@docspace/ui-kit/components/context-menu";
 import { isDesktop } from "../../../../../utils";
 import { DropDownItem } from "../../../../drop-down-item";
-import { Text } from "../../../../text";
-import { IconButton } from "../../../../icon-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import styles from "../ChatHeader.module.scss";
 
 type ChatListItemProps = {

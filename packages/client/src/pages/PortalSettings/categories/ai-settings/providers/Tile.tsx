@@ -28,8 +28,8 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
 import type { TAiProvider } from "@docspace/shared/api/ai/types";
 import { ProviderType } from "@docspace/shared/api/ai/enums";
 import { getAiProviderIcon, getAiProviderLabel } from "@docspace/shared/utils";

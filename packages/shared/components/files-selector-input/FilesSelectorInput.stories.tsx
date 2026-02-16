@@ -26,7 +26,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { DeviceType } from "../../enums";
-import type { TBreadCrumb } from "../selector/Selector.types";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 
 import { FilesSelectorInput } from "./index";
 import {

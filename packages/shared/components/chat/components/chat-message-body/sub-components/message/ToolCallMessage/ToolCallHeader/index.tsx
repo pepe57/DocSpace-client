@@ -35,7 +35,7 @@ import ToolFinish from "PUBLIC_DIR/images/tool.finish.svg?url";
 import AlertIcon from "PUBLIC_DIR/images/button.alert.transparent.react.svg?url";
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 
-import { Loader, LoaderTypes } from "../../../../../../../loader";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import type { TToolCallContent } from "../../../../../../../../api/ai/types";
 
 import styles from "../../../../ChatMessageBody.module.scss";
@@ -45,72 +45,72 @@ import { MCPToolContent } from "./MCPToolContent";
 import { useMessageStore } from "../../../../../../store/messageStore";
 
 type ToolCallHeaderProps = {
-  content: TToolCallContent;
-  collapsed: boolean;
-  setCollapsed: (value: boolean) => void;
-  status: ToolCallStatus;
-  placement: ToolCallPlacement;
-  expandable?: boolean;
-  isSearchTool?: boolean;
+	content: TToolCallContent;
+	collapsed: boolean;
+	setCollapsed: (value: boolean) => void;
+	status: ToolCallStatus;
+	placement: ToolCallPlacement;
+	expandable?: boolean;
+	isSearchTool?: boolean;
 };
 
 export const ToolCallHeader = observer(
-  ({
-    content,
-    collapsed,
-    setCollapsed,
-    status,
-    placement,
-    expandable,
-    isSearchTool,
-  }: ToolCallHeaderProps) => {
-    const { webCrawlingToolName } = useMessageStore();
+	({
+		content,
+		collapsed,
+		setCollapsed,
+		status,
+		placement,
+		expandable,
+		isSearchTool,
+	}: ToolCallHeaderProps) => {
+		const { webCrawlingToolName } = useMessageStore();
 
-    const isWebCrawlingTool = content.name === webCrawlingToolName;
+		const isWebCrawlingTool = content.name === webCrawlingToolName;
 
-    const statusIcons: Record<ToolCallStatus, React.ReactNode> = {
-      [ToolCallStatus.Loading]: <Loader type={LoaderTypes.track} size="12px" />,
-      [ToolCallStatus.Confirmation]: (
-        <Loader type={LoaderTypes.track} size="12px" />
-      ),
-      [ToolCallStatus.Finished]: (
-        <ReactSVG src={ToolFinish} className={styles.toolFinishIcon} />
-      ),
-      [ToolCallStatus.Failed]: <ReactSVG src={AlertIcon} />,
-    };
+		const statusIcons: Record<ToolCallStatus, React.ReactNode> = {
+			[ToolCallStatus.Loading]: <Loader type={LoaderTypes.track} size="12px" />,
+			[ToolCallStatus.Confirmation]: (
+				<Loader type={LoaderTypes.track} size="12px" />
+			),
+			[ToolCallStatus.Finished]: (
+				<ReactSVG src={ToolFinish} className={styles.toolFinishIcon} />
+			),
+			[ToolCallStatus.Failed]: <ReactSVG src={AlertIcon} />,
+		};
 
-    const statusIcon =
-      placement === ToolCallPlacement.ConfirmDialog
-        ? null
-        : statusIcons[status];
+		const statusIcon =
+			placement === ToolCallPlacement.ConfirmDialog
+				? null
+				: statusIcons[status];
 
-    const onClick = () => {
-      if (isWebCrawlingTool && !content.result?.error) return;
+		const onClick = () => {
+			if (isWebCrawlingTool && !content.result?.error) return;
 
-      setCollapsed(!collapsed);
-    };
+			setCollapsed(!collapsed);
+		};
 
-    return (
-      <div
-        className={classNames(styles.toolCallHeader, {
-          [styles.hide]: collapsed,
-          [styles.pointer]: expandable,
-        })}
-        onClick={onClick}
-        data-testid="tool-call-header"
-      >
-        <div className={styles.toolStatusIcon}>{statusIcon}</div>
+		return (
+			<div
+				className={classNames(styles.toolCallHeader, {
+					[styles.hide]: collapsed,
+					[styles.pointer]: expandable,
+				})}
+				onClick={onClick}
+				data-testid="tool-call-header"
+			>
+				<div className={styles.toolStatusIcon}>{statusIcon}</div>
 
-        {isSearchTool ? (
-          <SearchToolContent content={content} />
-        ) : (
-          <MCPToolContent content={content} />
-        )}
+				{isSearchTool ? (
+					<SearchToolContent content={content} />
+				) : (
+					<MCPToolContent content={content} />
+				)}
 
-        {expandable ? (
-          <ReactSVG src={ArrowRightIcon} className={styles.arrowRightIcon} />
-        ) : null}
-      </div>
-    );
-  },
+				{expandable ? (
+					<ReactSVG src={ArrowRightIcon} className={styles.arrowRightIcon} />
+				) : null}
+			</div>
+		);
+	},
 );

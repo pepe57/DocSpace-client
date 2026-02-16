@@ -28,8 +28,8 @@ import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Link } from "../../../../components/link";
-import { Text } from "../../../../components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { getTwoDotsReplacing } from "../Standalone.helpers";
 import { IPaymentsProps } from "../Standalone.types";
