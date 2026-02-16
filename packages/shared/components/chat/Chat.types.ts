@@ -23,11 +23,12 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
+import type React from "react";
 
 import type { TContent, TMessage, TToolCallContent } from "../../api/ai/types";
-import type { TGetIcon } from "../../selectors/utils/types";
 import type { TFile } from "../../api/files/types";
+import type { TMultimodal } from "../../api/rooms/types";
+import type { TGetIcon } from "../../selectors/utils/types";
 
 import type useToolsSettings from "./hooks/useToolsSettings";
 import type useInitChats from "./hooks/useInitChats";
@@ -41,6 +42,7 @@ export type TChatStoreProps = {
 export type TMessageStoreProps = {
   roomId: string | number;
   children: React.ReactNode;
+  multimodal?: TMultimodal;
 } & Omit<ReturnType<typeof useInitMessages>, "initMessages">;
 
 export type SelectModelProps = {
@@ -116,6 +118,10 @@ export type MessageFilesProps = {
   getIcon: TGetIcon;
 };
 
+export type MessageImagesProps = {
+  images: TContent[];
+};
+
 export type MessageMarkdownFieldProps = {
   chatMessage: string;
   propLanguage?: string;
@@ -143,6 +149,7 @@ export type MessageBodyProps = {
 export type FilesListProps = {
   files: Partial<TFile>[];
   isFixed?: boolean;
+  multimodal?: TMultimodal;
   getIcon: TGetIcon;
   onRemove?: (file: Partial<TFile>) => void;
 };
@@ -166,6 +173,7 @@ export type AttachmentProps = {
   toggleAttachment: VoidFunction;
   getIcon: TGetIcon;
   setSelectedFiles: (files: Partial<TFile>[]) => void;
+  multimodal?: TMultimodal;
 };
 
 export type ChatInputProps = {
@@ -179,6 +187,7 @@ export type ChatInputProps = {
   toolsSettings: ReturnType<typeof useToolsSettings>;
   isPortalAdmin: boolean;
   aiReady: boolean;
+  multimodal?: TMultimodal;
 };
 
 export type ChatInfoBlockProps = {
@@ -218,4 +227,6 @@ export type ChatProps = {
   }) => void;
   setDeleteDialogVisible?: (value: boolean) => void;
   folderFormValidation: RegExp;
+
+  multimodal?: TMultimodal;
 };

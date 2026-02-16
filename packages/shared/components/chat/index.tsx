@@ -59,6 +59,7 @@ const Chat = observer(
     setIsAIAgentChatDelete,
     setDeleteDialogVisible,
     folderFormValidation,
+    multimodal,
   }: ChatProps & { isLoadingChat: boolean }) => {
     const { currentChat } = useChatStore();
 
@@ -112,6 +113,7 @@ const Chat = observer(
               isPortalAdmin={isAdmin}
               aiReady={aiReady}
               standalone={standalone}
+              multimodal={multimodal}
             />
           </>
         )}
@@ -132,6 +134,7 @@ const ChatWrapper = (props: ChatProps) => {
     isAdmin = false,
     standalone = false,
     aiReady = false,
+    multimodal,
   } = props;
 
   const isLoadingChat = isLoading || !roomId;
@@ -149,7 +152,11 @@ const ChatWrapper = (props: ChatProps) => {
 
   return (
     <ChatStoreContextProvider roomId={roomId} {...initChats}>
-      <MessageStoreContextProvider roomId={roomId} {...messagesSettings}>
+      <MessageStoreContextProvider
+        roomId={roomId}
+        {...messagesSettings}
+        multimodal={multimodal}
+      >
         <ChatContainer isLoadingChat={isLoadingChat}>
           <Chat {...props} isLoadingChat={isLoadingChat} />
         </ChatContainer>

@@ -27,7 +27,7 @@
 import type { TCreatedBy, TPathParts } from "../../types";
 import type { TFile, TFolder } from "../files/types";
 import type { TRoom } from "../rooms/types";
-import type {
+import {
   ContentType,
   KnowledgeType,
   ProviderType,
@@ -126,6 +126,12 @@ export type TContent =
       id: number;
       title: string;
       extension: string;
+    }
+  | {
+      type: ContentType.Images;
+      id: number;
+      url: string;
+      fileType: number;
     };
 
 export type TMessage = {

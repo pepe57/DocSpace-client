@@ -26,10 +26,10 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { Activity } from "react";
+import { Activity } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TFile } from "@docspace/shared/api/files/types";
+import type { TFile } from "@docspace/shared/api/files/types";
 import type useToolsSettings from "@docspace/shared/components/chat/hooks/useToolsSettings";
 import type useInitChats from "@docspace/shared/components/chat/hooks/useInitChats";
 import type useInitMessages from "@docspace/shared/components/chat/hooks/useInitMessages";
@@ -47,7 +47,7 @@ import type SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type DialogsStore from "SRC_DIR/store/DialogsStore";
-import AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
+import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 
 type Props = {
   currentView: string;
@@ -134,6 +134,7 @@ const AIAgentViewComponent = ({
             setIsAIAgentChatDelete={setIsAIAgentChatDelete}
             setDeleteDialogVisible={setDeleteDialogVisible}
             folderFormValidation={folderFormValidation!}
+            multimodal={chatSettings?.multimodal}
           />
         </Activity>
       ) : null}

@@ -52,6 +52,7 @@ import Markdown from "./Markdown";
 import ToolCallMessage from "./ToolCallMessage";
 import Error from "./Error";
 import Files from "./Files";
+import Images from "./Images";
 import Buttons from "./Buttons";
 
 const renderLink = ({
@@ -91,6 +92,9 @@ const Message = ({
 
   if (isUser) {
     const files = message.contents.filter((c) => c.type === ContentType.Files);
+    const images = message.contents.filter(
+      (c) => c.type === ContentType.Images,
+    );
 
     return (
       <div className={styles.userMessageContainer} data-testid="user-message">
@@ -107,7 +111,11 @@ const Message = ({
           />
 
           <div className={classNames(styles.chatMessageContent)}>
-            {files ? <Files files={files} getIcon={getIcon} /> : null}
+            {images.length > 0 ? <Images images={images} /> : null}
+
+            {files.length > 0 ? (
+              <Files files={files} getIcon={getIcon} />
+            ) : null}
 
             {message.contents.map((c) => {
               if (c.type === ContentType.Text)
