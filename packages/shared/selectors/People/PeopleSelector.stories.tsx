@@ -27,9 +27,9 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import { EmployeeStatus, EmployeeType, ShareAccessRights } from "../../enums";
-import { AvatarRole } from "../../components/avatar";
-import { SelectorAccessRightsMode } from "../../components/selector";
-import { TSelectorItem } from "../../components/selector/Selector.types";
+import { AvatarRole } from "@docspace/ui-kit/components/avatar";
+import { SelectorAccessRightsMode } from "@docspace/ui-kit/components/selector";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 
 import { peopleHandler } from "../../__mocks__/handlers";
 
@@ -37,21 +37,21 @@ import PeopleSelector from "./index";
 import type { PeopleSelectorProps } from "./PeopleSelector.types";
 
 const meta = {
-  title: "Components/Selectors/PeopleSelector",
-  component: PeopleSelector,
-  argTypes: {
-    isMultiSelect: { control: "boolean" },
-    withCancelButton: { control: "boolean" },
-    withFooterCheckbox: { control: "boolean" },
-    withInfo: { control: "boolean" },
-  },
-  parameters: {
-    docs: {
-      description: {
-        component: "PeopleSelector component for selecting users and groups",
-      },
-    },
-  },
+	title: "Components/Selectors/PeopleSelector",
+	component: PeopleSelector,
+	argTypes: {
+		isMultiSelect: { control: "boolean" },
+		withCancelButton: { control: "boolean" },
+		withFooterCheckbox: { control: "boolean" },
+		withInfo: { control: "boolean" },
+	},
+	parameters: {
+		docs: {
+			description: {
+				component: "PeopleSelector component for selecting users and groups",
+			},
+		},
+	},
 } as Meta<typeof PeopleSelector>;
 
 export default meta;
@@ -60,234 +60,234 @@ type Story = StoryObj<typeof PeopleSelector>;
 
 // Create users with real names and emails
 const users: TSelectorItem[] = [
-  {
-    id: "user-1",
-    key: "user-1",
-    label: "John Smith",
-    email: "john.smith@example.com",
-    isOwner: true,
-    isAdmin: true,
-    isVisitor: false,
-    isCollaborator: false,
-    isRoomAdmin: true,
-    avatar: "",
-    role: AvatarRole.admin,
-    hasAvatar: false,
-    userType: EmployeeType.Admin,
-    status: EmployeeStatus.Active,
-  },
-  {
-    id: "user-2",
-    key: "user-2",
-    label: "Sarah Johnson",
-    email: "sarah.johnson@example.com",
-    isOwner: false,
-    isAdmin: false,
-    isVisitor: false,
-    isCollaborator: true,
-    isRoomAdmin: false,
-    avatar: "",
-    role: AvatarRole.collaborator,
-    hasAvatar: false,
-    userType: EmployeeType.User,
-    status: EmployeeStatus.Active,
-  },
-  {
-    id: "user-3",
-    key: "user-3",
-    label: "Michael Brown",
-    email: "michael.brown@example.com",
-    isOwner: false,
-    isAdmin: false,
-    isVisitor: false,
-    isCollaborator: true,
-    isRoomAdmin: false,
-    avatar: "",
-    role: AvatarRole.collaborator,
-    hasAvatar: false,
-    userType: EmployeeType.User,
-    status: EmployeeStatus.Active,
-  },
-  {
-    id: "user-4",
-    key: "user-4",
-    label: "Emily Davis",
-    email: "emily.davis@example.com",
-    isOwner: false,
-    isAdmin: false,
-    isVisitor: true,
-    isCollaborator: false,
-    isRoomAdmin: false,
-    avatar: "",
-    role: AvatarRole.guest,
-    hasAvatar: false,
-    userType: EmployeeType.Guest,
-    status: EmployeeStatus.Active,
-  },
-  {
-    id: "user-5",
-    key: "user-5",
-    label: "David Wilson",
-    email: "david.wilson@example.com",
-    isOwner: false,
-    isAdmin: true,
-    isVisitor: false,
-    isCollaborator: false,
-    isRoomAdmin: true,
-    avatar: "",
-    role: AvatarRole.admin,
-    hasAvatar: false,
-    userType: EmployeeType.Admin,
-    status: EmployeeStatus.Active,
-  },
+	{
+		id: "user-1",
+		key: "user-1",
+		label: "John Smith",
+		email: "john.smith@example.com",
+		isOwner: true,
+		isAdmin: true,
+		isVisitor: false,
+		isCollaborator: false,
+		isRoomAdmin: true,
+		avatar: "",
+		role: AvatarRole.admin,
+		hasAvatar: false,
+		userType: EmployeeType.Admin,
+		status: EmployeeStatus.Active,
+	},
+	{
+		id: "user-2",
+		key: "user-2",
+		label: "Sarah Johnson",
+		email: "sarah.johnson@example.com",
+		isOwner: false,
+		isAdmin: false,
+		isVisitor: false,
+		isCollaborator: true,
+		isRoomAdmin: false,
+		avatar: "",
+		role: AvatarRole.collaborator,
+		hasAvatar: false,
+		userType: EmployeeType.User,
+		status: EmployeeStatus.Active,
+	},
+	{
+		id: "user-3",
+		key: "user-3",
+		label: "Michael Brown",
+		email: "michael.brown@example.com",
+		isOwner: false,
+		isAdmin: false,
+		isVisitor: false,
+		isCollaborator: true,
+		isRoomAdmin: false,
+		avatar: "",
+		role: AvatarRole.collaborator,
+		hasAvatar: false,
+		userType: EmployeeType.User,
+		status: EmployeeStatus.Active,
+	},
+	{
+		id: "user-4",
+		key: "user-4",
+		label: "Emily Davis",
+		email: "emily.davis@example.com",
+		isOwner: false,
+		isAdmin: false,
+		isVisitor: true,
+		isCollaborator: false,
+		isRoomAdmin: false,
+		avatar: "",
+		role: AvatarRole.guest,
+		hasAvatar: false,
+		userType: EmployeeType.Guest,
+		status: EmployeeStatus.Active,
+	},
+	{
+		id: "user-5",
+		key: "user-5",
+		label: "David Wilson",
+		email: "david.wilson@example.com",
+		isOwner: false,
+		isAdmin: true,
+		isVisitor: false,
+		isCollaborator: false,
+		isRoomAdmin: true,
+		avatar: "",
+		role: AvatarRole.admin,
+		hasAvatar: false,
+		userType: EmployeeType.Admin,
+		status: EmployeeStatus.Active,
+	},
 ];
 
 // Create access rights
 const accessRights = [
-  {
-    id: ShareAccessRights.FullAccess,
-    key: "fullAccess",
-    label: "Full Access",
-    description: "Can view, edit, and share",
-    access: ShareAccessRights.FullAccess,
-  },
-  {
-    id: ShareAccessRights.ReadOnly,
-    key: "readWrite",
-    label: "Read & Write",
-    description: "Can view and edit",
-    access: ShareAccessRights.ReadOnly,
-  },
-  {
-    id: ShareAccessRights.ReadOnly,
-    key: "readOnly",
-    label: "Read Only",
-    description: "Can only view",
-    access: ShareAccessRights.ReadOnly,
-  },
-  {
-    id: ShareAccessRights.Editing,
-    key: "restricted",
-    label: "Restricted",
-    description: "No access",
-    access: ShareAccessRights.Editing,
-  },
+	{
+		id: ShareAccessRights.FullAccess,
+		key: "fullAccess",
+		label: "Full Access",
+		description: "Can view, edit, and share",
+		access: ShareAccessRights.FullAccess,
+	},
+	{
+		id: ShareAccessRights.ReadOnly,
+		key: "readWrite",
+		label: "Read & Write",
+		description: "Can view and edit",
+		access: ShareAccessRights.ReadOnly,
+	},
+	{
+		id: ShareAccessRights.ReadOnly,
+		key: "readOnly",
+		label: "Read Only",
+		description: "Can only view",
+		access: ShareAccessRights.ReadOnly,
+	},
+	{
+		id: ShareAccessRights.Editing,
+		key: "restricted",
+		label: "Restricted",
+		description: "No access",
+		access: ShareAccessRights.Editing,
+	},
 ];
 
 const Template = (args: PeopleSelectorProps) => {
-  return (
-    <div
-      style={{
-        width: "480px",
-        height: "485px",
-        margin: "auto",
-      }}
-    >
-      <PeopleSelector
-        {...args}
-        aria-label="People selector"
-        data-selector-type="people"
-        data-test-id="people-selector"
-      />
-    </div>
-  );
+	return (
+		<div
+			style={{
+				width: "480px",
+				height: "485px",
+				margin: "auto",
+			}}
+		>
+			<PeopleSelector
+				{...args}
+				aria-label="People selector"
+				data-selector-type="people"
+				data-test-id="people-selector"
+			/>
+		</div>
+	);
 };
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
-  parameters: {
-    msw: {
-      handlers: [peopleHandler()],
-    },
-  },
-  args: {
-    headerProps: {
-      headerLabel: "Select People",
-      onCloseClick: () => {},
-    },
-    onSubmit: () => {},
-    isMultiSelect: false,
-    submitButtonLabel: "Select",
+	render: (args) => <Template {...args} />,
+	parameters: {
+		msw: {
+			handlers: [peopleHandler()],
+		},
+	},
+	args: {
+		headerProps: {
+			headerLabel: "Select People",
+			onCloseClick: () => {},
+		},
+		onSubmit: () => {},
+		isMultiSelect: false,
+		submitButtonLabel: "Select",
 
-    accessRights,
-    selectedAccessRight: accessRights[1],
-    onAccessRightsChange: () => {},
-    withCancelButton: true,
-    cancelButtonLabel: "Cancel",
-    onCancel: () => {},
-    disableSubmitButton: false,
-  },
+		accessRights,
+		selectedAccessRight: accessRights[1],
+		onAccessRightsChange: () => {},
+		withCancelButton: true,
+		cancelButtonLabel: "Cancel",
+		onCancel: () => {},
+		disableSubmitButton: false,
+	},
 };
 
 export const WithMultiSelect: Story = {
-  render: (args) => <Template {...args} />,
-  parameters: {
-    msw: {
-      handlers: [peopleHandler()],
-    },
-  },
-  args: {
-    ...Default.args,
-    isMultiSelect: true,
-  },
+	render: (args) => <Template {...args} />,
+	parameters: {
+		msw: {
+			handlers: [peopleHandler()],
+		},
+	},
+	args: {
+		...Default.args,
+		isMultiSelect: true,
+	},
 };
 
 export const WithAccessRights: Story = {
-  render: (args) => <Template {...args} />,
-  parameters: {
-    msw: {
-      handlers: [peopleHandler()],
-    },
-  },
-  args: {
-    ...Default.args,
-    withAccessRights: true,
-    isMultiSelect: true,
-    accessRights,
-    selectedAccessRight: accessRights[1],
-    accessRightsMode: SelectorAccessRightsMode.Detailed,
-    onAccessRightsChange: () => {},
-  },
+	render: (args) => <Template {...args} />,
+	parameters: {
+		msw: {
+			handlers: [peopleHandler()],
+		},
+	},
+	args: {
+		...Default.args,
+		withAccessRights: true,
+		isMultiSelect: true,
+		accessRights,
+		selectedAccessRight: accessRights[1],
+		accessRightsMode: SelectorAccessRightsMode.Detailed,
+		onAccessRightsChange: () => {},
+	},
 };
 
 export const WithFooterCheckbox: Story = {
-  render: (args) => <Template {...args} />,
-  parameters: {
-    msw: {
-      handlers: [peopleHandler()],
-    },
-  },
-  args: {
-    ...Default.args,
-    withFooterCheckbox: true,
-    footerCheckboxLabel: "Notify users",
-    isChecked: true,
-  },
+	render: (args) => <Template {...args} />,
+	parameters: {
+		msw: {
+			handlers: [peopleHandler()],
+		},
+	},
+	args: {
+		...Default.args,
+		withFooterCheckbox: true,
+		footerCheckboxLabel: "Notify users",
+		isChecked: true,
+	},
 };
 
 export const WithInfo: Story = {
-  render: (args) => <Template {...args} />,
-  parameters: {
-    msw: {
-      handlers: [peopleHandler()],
-    },
-  },
-  args: {
-    ...Default.args,
-    withInfo: true,
-    infoText: "Select users to collaborate with",
-  },
+	render: (args) => <Template {...args} />,
+	parameters: {
+		msw: {
+			handlers: [peopleHandler()],
+		},
+	},
+	args: {
+		...Default.args,
+		withInfo: true,
+		infoText: "Select users to collaborate with",
+	},
 };
 
 export const WithDisabledUsers: Story = {
-  render: (args) => <Template {...args} />,
-  parameters: {
-    msw: {
-      handlers: [peopleHandler()],
-    },
-  },
-  args: {
-    ...Default.args,
-    disableInvitedUsers: [String(users[1].id), String(users[3].id)],
-  },
+	render: (args) => <Template {...args} />,
+	parameters: {
+		msw: {
+			handlers: [peopleHandler()],
+		},
+	},
+	args: {
+		...Default.args,
+		disableInvitedUsers: [String(users[1].id), String(users[3].id)],
+	},
 };

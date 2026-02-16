@@ -27,7 +27,7 @@
 import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { Button } from "../../components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { ConflictResolveType } from "../../enums";
 
 import ConflictResolve from "./ConflictResolve";

@@ -27,7 +27,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { PaymentsStandaloneLoader } from "../../../skeletons/payments";
 
 import { BenefitsContainer } from "../common/BenefitsContainer";

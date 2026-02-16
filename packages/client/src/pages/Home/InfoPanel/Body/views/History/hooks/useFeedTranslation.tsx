@@ -33,7 +33,7 @@ import {
   RoomMember,
   TFeedData,
 } from "@docspace/shared/api/rooms/types";
-import { humanizeDuration, type DurationUnit } from "@docspace/shared/utils/date";
+import { humanizeDuration, type DurationUnit } from "@docspace/ui-kit/utils/date";
 
 import { HistoryText } from "../HistoryText";
 

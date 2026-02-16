@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect, useRef } from "react";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { LabledInput } from "./LabledInput";
 import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";

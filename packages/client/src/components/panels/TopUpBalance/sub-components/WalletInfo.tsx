@@ -29,8 +29,8 @@ import { useTranslation, Trans } from "react-i18next";
 import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import WalletReactSvgUrl from "PUBLIC_DIR/images/icons/16/wallet.react.svg?url";
 

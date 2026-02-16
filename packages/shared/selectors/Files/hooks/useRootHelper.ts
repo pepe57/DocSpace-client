@@ -31,127 +31,127 @@ import { FolderType } from "../../../enums";
 import { getFoldersTree } from "../../../api/files";
 import { TFolder } from "../../../api/files/types";
 import { getCatalogIconUrlByType } from "../../../utils/catalogIconHelper";
-import { TSelectorItem } from "../../../components/selector";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { getDefaultBreadCrumb } from "../../utils";
 import { LoadersContext } from "../../utils/contexts/Loaders";
 
 import { UseRootHelperProps } from "../FilesSelector.types";
 
 const useRootHelper = ({
-  setBreadCrumbs,
+	setBreadCrumbs,
 
-  setItems,
-  treeFolders,
-  withRecentTreeFolder,
-  withFavoritesTreeFolder,
-  withAIAgentsTreeFolder,
+	setItems,
+	treeFolders,
+	withRecentTreeFolder,
+	withFavoritesTreeFolder,
+	withAIAgentsTreeFolder,
 
-  setTotal,
-  setHasNextPage,
-  isUserOnly,
-  setIsInit,
+	setTotal,
+	setHasNextPage,
+	isUserOnly,
+	setIsInit,
 }: UseRootHelperProps) => {
-  const { t } = useTranslation(["Common"]);
+	const { t } = useTranslation(["Common"]);
 
-  const { setIsBreadCrumbsLoading, setIsNextPageLoading, setIsFirstLoad } =
-    use(LoadersContext);
+	const { setIsBreadCrumbsLoading, setIsNextPageLoading, setIsFirstLoad } =
+		use(LoadersContext);
 
-  const [isRoot, setIsRoot] = React.useState<boolean>(false);
-  const requestRunning = React.useRef(false);
+	const [isRoot, setIsRoot] = React.useState<boolean>(false);
+	const requestRunning = React.useRef(false);
 
-  const getRootData = React.useCallback(async () => {
-    if (requestRunning.current) return;
+	const getRootData = React.useCallback(async () => {
+		if (requestRunning.current) return;
 
-    requestRunning.current = true;
-    setBreadCrumbs([getDefaultBreadCrumb(t)]);
-    setIsRoot(true);
-    setIsNextPageLoading(true);
-    setIsBreadCrumbsLoading(false);
-    const newItems: TSelectorItem[] = [];
+		requestRunning.current = true;
+		setBreadCrumbs([getDefaultBreadCrumb(t)]);
+		setIsRoot(true);
+		setIsNextPageLoading(true);
+		setIsBreadCrumbsLoading(false);
+		const newItems: TSelectorItem[] = [];
 
-    let currentTree: TFolder[] | null = null;
+		let currentTree: TFolder[] | null = null;
 
-    if (treeFolders && treeFolders?.length > 0) {
-      currentTree = treeFolders;
-    } else {
-      const folders = await getFoldersTree();
+		if (treeFolders && treeFolders?.length > 0) {
+			currentTree = treeFolders;
+		} else {
+			const folders = await getFoldersTree();
 
-      currentTree = folders;
-    }
+			currentTree = folders;
+		}
 
-    currentTree?.forEach((folder) => {
-      let avatar = "";
-      if (folder.rootFolderType)
-        avatar = getCatalogIconUrlByType(folder.rootFolderType);
+		currentTree?.forEach((folder) => {
+			let avatar = "";
+			if (folder.rootFolderType)
+				avatar = getCatalogIconUrlByType(folder.rootFolderType);
 
-      if (
-        (!isUserOnly && folder.rootFolderType === FolderType.Rooms) ||
-        folder.rootFolderType === FolderType.USER ||
-        (withRecentTreeFolder && folder.rootFolderType === FolderType.Recent) ||
-        (withFavoritesTreeFolder &&
-          folder.rootFolderType === FolderType.Favorites) ||
-        (withAIAgentsTreeFolder &&
-          folder.rootFolderType === FolderType.AIAgents)
-      ) {
-        let title = "";
-        switch (folder.rootFolderType) {
-          case FolderType.USER:
-            title = t("Common:MyDocuments");
-            break;
-          case FolderType.Rooms:
-            title = t("Common:Rooms");
-            break;
-          case FolderType.Favorites:
-            title = t("Common:Favorites");
-            break;
-          case FolderType.Recent:
-            title = t("Common:Recent");
-            break;
-          case FolderType.AIAgents:
-            title = t("Common:AIAgents");
-            break;
-          default:
-            break;
-        }
-        newItems.push({
-          label: title,
-          id: folder.id,
-          parentId: folder.parentId,
-          rootFolderType: folder.rootFolderType,
-          filesCount: folder.filesCount,
-          foldersCount: folder.foldersCount,
-          security: folder.security,
-          isFolder: true,
-          avatar,
-          disableMultiSelect: true,
-        });
-      }
-    });
+			if (
+				(!isUserOnly && folder.rootFolderType === FolderType.Rooms) ||
+				folder.rootFolderType === FolderType.USER ||
+				(withRecentTreeFolder && folder.rootFolderType === FolderType.Recent) ||
+				(withFavoritesTreeFolder &&
+					folder.rootFolderType === FolderType.Favorites) ||
+				(withAIAgentsTreeFolder &&
+					folder.rootFolderType === FolderType.AIAgents)
+			) {
+				let title = "";
+				switch (folder.rootFolderType) {
+					case FolderType.USER:
+						title = t("Common:MyDocuments");
+						break;
+					case FolderType.Rooms:
+						title = t("Common:Rooms");
+						break;
+					case FolderType.Favorites:
+						title = t("Common:Favorites");
+						break;
+					case FolderType.Recent:
+						title = t("Common:Recent");
+						break;
+					case FolderType.AIAgents:
+						title = t("Common:AIAgents");
+						break;
+					default:
+						break;
+				}
+				newItems.push({
+					label: title,
+					id: folder.id,
+					parentId: folder.parentId,
+					rootFolderType: folder.rootFolderType,
+					filesCount: folder.filesCount,
+					foldersCount: folder.foldersCount,
+					security: folder.security,
+					isFolder: true,
+					avatar,
+					disableMultiSelect: true,
+				});
+			}
+		});
 
-    setItems(newItems);
-    setTotal(newItems.length);
-    setHasNextPage(false);
-    setIsNextPageLoading(false);
-    setIsInit(false);
-    setIsFirstLoad(false);
-    requestRunning.current = false;
-  }, [
-    isUserOnly,
-    setIsFirstLoad,
-    setBreadCrumbs,
-    setHasNextPage,
-    setIsBreadCrumbsLoading,
-    setIsInit,
-    setIsNextPageLoading,
-    setItems,
-    setTotal,
-    treeFolders,
-    withRecentTreeFolder,
-    withFavoritesTreeFolder,
-    t,
-  ]);
+		setItems(newItems);
+		setTotal(newItems.length);
+		setHasNextPage(false);
+		setIsNextPageLoading(false);
+		setIsInit(false);
+		setIsFirstLoad(false);
+		requestRunning.current = false;
+	}, [
+		isUserOnly,
+		setIsFirstLoad,
+		setBreadCrumbs,
+		setHasNextPage,
+		setIsBreadCrumbsLoading,
+		setIsInit,
+		setIsNextPageLoading,
+		setItems,
+		setTotal,
+		treeFolders,
+		withRecentTreeFolder,
+		withFavoritesTreeFolder,
+		t,
+	]);
 
-  return { isRoot, setIsRoot, getRootData };
+	return { isRoot, setIsRoot, getRootData };
 };
 
 export default useRootHelper;

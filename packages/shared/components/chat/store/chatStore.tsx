@@ -30,7 +30,7 @@ import { deleteChat, getChat, getChats, renameChat } from "../../../api/ai";
 import type { TChat } from "../../../api/ai/types";
 import type { Nullable } from "../../../types";
 import socket, { SocketEvents } from "../../../utils/socket";
-import { toastr } from "../../toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import type { TChatStoreProps } from "../Chat.types";
 
 export default class ChatStore {

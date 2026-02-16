@@ -34,12 +34,12 @@ import FormIcon from "PUBLIC_DIR/images/icons/16/pdf.svg";
 import PresentationIcon from "PUBLIC_DIR/images/icons/16/presentation.svg";
 
 import type { TToolCallContent } from "../../../../../../../../api/ai/types";
-import { useTheme } from "../../../../../../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getServerIcon } from "../../../../../../../../utils";
 import { ServerType } from "../../../../../../../../api/ai/enums";
-import { Text } from "../../../../../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import styles from "../../../../ChatMessageBody.module.scss";
-import { MCPIcon, MCPIconSize } from "../../../../../../../mcp-icon";
+import { MCPIcon, MCPIconSize } from "@docspace/ui-kit/components/mcp-icon";
 
 import { useMessageStore } from "../../../../../../store/messageStore";
 

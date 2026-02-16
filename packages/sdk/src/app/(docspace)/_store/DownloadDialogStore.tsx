@@ -38,7 +38,7 @@ import type {
 } from "@docspace/shared/dialogs/download-dialog/DownloadDialog.types";
 import type { TTranslation } from "@docspace/shared/types";
 import { ProtectedFileCategoryType } from "@docspace/shared/dialogs/download-dialog/DownloadDialog.enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 class DownloadDialogStore {
   sortedFiles: TSortedFiles = {

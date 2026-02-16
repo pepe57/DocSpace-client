@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-import { now, parseToDateTime, formatDate, formatDateLocalized, isBefore, isAfter } from "@docspace/shared/utils/date";
+import { now, parseToDateTime, formatDate, formatDateLocalized, isBefore, isAfter } from "@docspace/ui-kit/utils/date";
 import { Outlet, useLocation } from "react-router";
 import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
@@ -37,18 +37,17 @@ import SocketHelper, {
   SocketEvents,
   SocketCommands,
 } from "@docspace/shared/utils/socket";
-import { Portal } from "@docspace/shared/components/portal";
-import { SnackBar } from "@docspace/shared/components/snackbar";
-import { Toast, toastr } from "@docspace/shared/components/toast";
-import { RootTooltip } from "@docspace/shared/components/tooltip/rootTooltip";
-import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
+import { Portal } from "@docspace/ui-kit/components/portal";
+import { SnackBar } from "@docspace/ui-kit/components/snackbar";
+import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
+import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
+import { getCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
 import { handleCopy } from "@docspace/shared/utils/copy";
 
 import "@docspace/shared/styles/theme.scss";

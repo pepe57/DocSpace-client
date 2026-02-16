@@ -33,13 +33,13 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { Badge } from "@docspace/shared/components/badge";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Badge } from "@docspace/ui-kit/components/badge";
 
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { isMobile, NoUserSelect } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import ConsumerItem from "./sub-components/consumerItem";

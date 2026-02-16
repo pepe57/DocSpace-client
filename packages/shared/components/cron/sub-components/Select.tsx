@@ -26,9 +26,13 @@
 
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { getFirstDayOfWeek } from "../../../utils/date";
+import { getFirstDayOfWeek } from "@docspace/ui-kit/utils/date";
 
-import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TOption,
+} from "@docspace/ui-kit/components/combobox";
 
 import { fixFormatValue } from "../Cron.utils";
 

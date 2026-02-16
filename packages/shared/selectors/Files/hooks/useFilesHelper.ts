@@ -33,10 +33,9 @@ import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 import { getFolder, getFolderInfo } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
 import { FolderType, RoomsType } from "../../../enums";
-import { toastr } from "../../../components/toast";
-import type { TSelectorItem } from "../../../components/selector";
-import type { TData } from "../../../components/toast/Toast.type";
-import type { TBreadCrumb } from "../../../components/selector/Selector.types";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 
 import useInputItemHelper from "../../utils/hooks/useInputItemHelper";
 import { SettingsContext } from "../../utils/contexts/Settings";
@@ -45,382 +44,382 @@ import { LoadersContext } from "../../utils/contexts/Loaders";
 import { PAGE_COUNT } from "../../utils/constants";
 import type { UseFilesHelpersProps } from "../FilesSelector.types";
 import {
-  convertFilesToItems,
-  convertFoldersToItems,
-  getDefaultBreadCrumb,
+	convertFilesToItems,
+	convertFoldersToItems,
+	getDefaultBreadCrumb,
 } from "../../utils";
 
 import { configureFilterByFilterParam } from "../FilesSelector.utils";
 
 const useFilesHelper = ({
-  setHasNextPage,
-  setTotal,
-  setItems,
-  setBreadCrumbs,
+	setHasNextPage,
+	setTotal,
+	setItems,
+	setBreadCrumbs,
 
-  selectedItemId,
-  setIsRoot,
-  searchValue,
-  disabledItems,
-  disabledFolderType,
-  includedItems,
-  setSelectedItemSecurity,
-  isThirdParty,
-  setSelectedTreeNode,
-  filterParam,
-  getRootData,
-  onSetBaseFolderPath,
-  isRoomsOnly,
-  isUserOnly,
-  rootThirdPartyId,
-  getRoomList,
+	selectedItemId,
+	setIsRoot,
+	searchValue,
+	disabledItems,
+	disabledFolderType,
+	includedItems,
+	setSelectedItemSecurity,
+	isThirdParty,
+	setSelectedTreeNode,
+	filterParam,
+	getRootData,
+	onSetBaseFolderPath,
+	isRoomsOnly,
+	isUserOnly,
+	rootThirdPartyId,
+	getRoomList,
 
-  setIsSelectedParentFolder,
-  roomsFolderId,
-  getFilesArchiveError,
-  isInit,
-  setIsInit,
+	setIsSelectedParentFolder,
+	roomsFolderId,
+	getFilesArchiveError,
+	isInit,
+	setIsInit,
 
-  withCreate,
-  setSelectedItemId,
-  setSelectedItemType,
-  shareKey,
+	withCreate,
+	setSelectedItemId,
+	setSelectedItemType,
+	shareKey,
 
-  applyFilterOption,
+	applyFilterOption,
 
-  setIsInsideKnowledge,
-  setIsInsideResultStorage,
+	setIsInsideKnowledge,
+	setIsInsideResultStorage,
 
-  disableBySecurity,
+	disableBySecurity,
 }: UseFilesHelpersProps) => {
-  const { t } = useTranslation(["Common"]);
+	const { t } = useTranslation(["Common"]);
 
-  const {
-    isFirstLoad,
-    setIsFirstLoad,
-    setIsNextPageLoading,
-    setIsBreadCrumbsLoading,
-  } = use(LoadersContext);
+	const {
+		isFirstLoad,
+		setIsFirstLoad,
+		setIsNextPageLoading,
+		setIsBreadCrumbsLoading,
+	} = use(LoadersContext);
 
-  const { getIcon, extsWebEdited, filesSettingsLoading } = use(SettingsContext);
+	const { getIcon, extsWebEdited, filesSettingsLoading } = use(SettingsContext);
 
-  const { addInputItem } = useInputItemHelper({
-    withCreate,
-    selectedItemId,
-    setItems,
-  });
+	const { addInputItem } = useInputItemHelper({
+		withCreate,
+		selectedItemId,
+		setItems,
+	});
 
-  const requestRunning = React.useRef(false);
-  const initRef = React.useRef(isInit);
-  const firstLoadRef = React.useRef(isFirstLoad);
-  const disabledItemsRef = React.useRef(disabledItems);
+	const requestRunning = React.useRef(false);
+	const initRef = React.useRef(isInit);
+	const firstLoadRef = React.useRef(isFirstLoad);
+	const disabledItemsRef = React.useRef(disabledItems);
 
-  React.useEffect(() => {
-    disabledItemsRef.current = disabledItems;
-  }, [disabledItems]);
+	React.useEffect(() => {
+		disabledItemsRef.current = disabledItems;
+	}, [disabledItems]);
 
-  React.useEffect(() => {
-    firstLoadRef.current = isFirstLoad;
-  }, [isFirstLoad]);
+	React.useEffect(() => {
+		firstLoadRef.current = isFirstLoad;
+	}, [isFirstLoad]);
 
-  React.useEffect(() => {
-    initRef.current = isInit;
-  }, [isInit]);
+	React.useEffect(() => {
+		initRef.current = isInit;
+	}, [isInit]);
 
-  const getFileList = React.useCallback(
-    async (sIndex: number) => {
-      if (requestRunning.current || filesSettingsLoading) return;
+	const getFileList = React.useCallback(
+		async (sIndex: number) => {
+			if (requestRunning.current || filesSettingsLoading) return;
 
-      requestRunning.current = true;
-      setIsNextPageLoading(true);
+			requestRunning.current = true;
+			setIsNextPageLoading(true);
 
-      let startIndex = sIndex;
+			let startIndex = sIndex;
 
-      if (withCreate) {
-        startIndex -= startIndex % 100;
-      }
+			if (withCreate) {
+				startIndex -= startIndex % 100;
+			}
 
-      const currentSearch = searchValue || "";
+			const currentSearch = searchValue || "";
 
-      const page = startIndex / PAGE_COUNT;
+			const page = startIndex / PAGE_COUNT;
 
-      const filter = FilesFilter.getDefault();
+			const filter = FilesFilter.getDefault();
 
-      filter.page = page;
-      filter.pageCount = PAGE_COUNT;
-      filter.search = currentSearch;
-      filter.applyFilterOption = null;
-      filter.withSubfolders = false;
-      if (filterParam) {
-        configureFilterByFilterParam(
-          filter,
-          filterParam,
-          extsWebEdited,
-          applyFilterOption,
-        );
-      }
+			filter.page = page;
+			filter.pageCount = PAGE_COUNT;
+			filter.search = currentSearch;
+			filter.applyFilterOption = null;
+			filter.withSubfolders = false;
+			if (filterParam) {
+				configureFilterByFilterParam(
+					filter,
+					filterParam,
+					extsWebEdited,
+					applyFilterOption,
+				);
+			}
 
-      const id = selectedItemId ?? (isUserOnly ? "@my" : "");
+			const id = selectedItemId ?? (isUserOnly ? "@my" : "");
 
-      filter.folder = id.toString();
+			filter.folder = id.toString();
 
-      const setSettings = async (
-        folderId: string | number,
-        isErrorPath = false,
-      ) => {
-        if (initRef.current && getRootData && folderId !== "@my") {
-          const folder = await getFolderInfo(folderId, true, shareKey);
+			const setSettings = async (
+				folderId: string | number,
+				isErrorPath = false,
+			) => {
+				if (initRef.current && getRootData && folderId !== "@my") {
+					const folder = await getFolderInfo(folderId, true, shareKey);
 
-          const isArchive = folder.rootFolderType === FolderType.Archive;
+					const isArchive = folder.rootFolderType === FolderType.Archive;
 
-          if (folder.rootFolderType === FolderType.TRASH || isArchive) {
-            if (isRoomsOnly && getRoomList) {
-              await getRoomList(0);
-              onSetBaseFolderPath?.([]);
-              const error = getFilesArchiveError(folder.title);
-              toastr.error(error);
+					if (folder.rootFolderType === FolderType.TRASH || isArchive) {
+						if (isRoomsOnly && getRoomList) {
+							await getRoomList(0);
+							onSetBaseFolderPath?.([]);
+							const error = getFilesArchiveError(folder.title);
+							toastr.error(error);
 
-              requestRunning.current = false;
-              return;
-            }
+							requestRunning.current = false;
+							return;
+						}
 
-            await getRootData();
+						await getRootData();
 
-            if (onSetBaseFolderPath && isArchive) {
-              onSetBaseFolderPath?.([]);
-              const error = getFilesArchiveError(folder.title);
-              toastr.error(error);
-            }
-            requestRunning.current = false;
-            return;
-          }
-        }
+						if (onSetBaseFolderPath && isArchive) {
+							onSetBaseFolderPath?.([]);
+							const error = getFilesArchiveError(folder.title);
+							toastr.error(error);
+						}
+						requestRunning.current = false;
+						return;
+					}
+				}
 
-        const currentFolder = await getFolder(
-          folderId,
-          filter,
-          undefined,
-          shareKey,
-        );
+				const currentFolder = await getFolder(
+					folderId,
+					filter,
+					undefined,
+					shareKey,
+				);
 
-        const { folders, files, total, count, pathParts, current } =
-          currentFolder;
+				const { folders, files, total, count, pathParts, current } =
+					currentFolder;
 
-        setSelectedItemSecurity(current.security);
+				setSelectedItemSecurity(current.security);
 
-        const foldersList: TSelectorItem[] = convertFoldersToItems(
-          folders,
-          disabledItemsRef.current,
-          filterParam,
-          disabledFolderType,
-        );
+				const foldersList: TSelectorItem[] = convertFoldersToItems(
+					folders,
+					disabledItemsRef.current,
+					filterParam,
+					disabledFolderType,
+				);
 
-        const filesList: TSelectorItem[] = convertFilesToItems(
-          files,
-          getIcon,
-          filterParam,
-          includedItems,
-          disableBySecurity,
-        );
+				const filesList: TSelectorItem[] = convertFilesToItems(
+					files,
+					getIcon,
+					filterParam,
+					includedItems,
+					disableBySecurity,
+				);
 
-        const itemList = [...foldersList, ...filesList];
+				const itemList = [...foldersList, ...filesList];
 
-        setHasNextPage(count === PAGE_COUNT);
+				setHasNextPage(count === PAGE_COUNT);
 
-        setSelectedTreeNode?.({ ...current, path: pathParts });
+				setSelectedTreeNode?.({ ...current, path: pathParts });
 
-        const isInsideKnowledge = pathParts.some(
-          (x) => x.folderType === FolderType.Knowledge,
-        );
-        const isInsideResultStorage = pathParts.some(
-          (x) => x.folderType === FolderType.ResultStorage,
-        );
+				const isInsideKnowledge = pathParts.some(
+					(x) => x.folderType === FolderType.Knowledge,
+				);
+				const isInsideResultStorage = pathParts.some(
+					(x) => x.folderType === FolderType.ResultStorage,
+				);
 
-        setIsInsideKnowledge(isInsideKnowledge);
-        setIsInsideResultStorage(isInsideResultStorage);
+				setIsInsideKnowledge(isInsideKnowledge);
+				setIsInsideResultStorage(isInsideResultStorage);
 
-        if (initRef.current) {
-          let foundParentId = false;
-          let currentFolderIndex = -1;
+				if (initRef.current) {
+					let foundParentId = false;
+					let currentFolderIndex = -1;
 
-          const breadCrumbs: TBreadCrumb[] = pathParts.map(
-            (
-              {
-                id: breadCrumbId,
-                title,
-                roomType,
-              }: {
-                id: number | string;
-                title: string;
-                roomType?: number;
-              },
-              index,
-            ) => {
-              if (!foundParentId && disabledItemsRef.current) {
-                currentFolderIndex = disabledItemsRef.current.findIndex(
-                  (x) => x === id,
-                );
-              }
+					const breadCrumbs: TBreadCrumb[] = pathParts.map(
+						(
+							{
+								id: breadCrumbId,
+								title,
+								roomType,
+							}: {
+								id: number | string;
+								title: string;
+								roomType?: number;
+							},
+							index,
+						) => {
+							if (!foundParentId && disabledItemsRef.current) {
+								currentFolderIndex = disabledItemsRef.current.findIndex(
+									(x) => x === id,
+								);
+							}
 
-              if (!foundParentId && currentFolderIndex !== -1) {
-                foundParentId = true;
-                setIsSelectedParentFolder(true);
-              }
+							if (!foundParentId && currentFolderIndex !== -1) {
+								foundParentId = true;
+								setIsSelectedParentFolder(true);
+							}
 
-              const nextItem = pathParts[index + 1];
+							const nextItem = pathParts[index + 1];
 
-              return {
-                label: title,
-                id: breadCrumbId,
-                isRoom:
-                  roomsFolderId === id ||
-                  (index === 0 && typeof nextItem?.roomType !== "undefined"),
-                isAgent:
-                  index === 0 &&
-                  typeof nextItem?.roomType !== "undefined" &&
-                  nextItem.roomType === RoomsType.AIRoom,
-                roomType,
-                rootFolderType: current.rootFolderType,
-              };
-            },
-          );
+							return {
+								label: title,
+								id: breadCrumbId,
+								isRoom:
+									roomsFolderId === id ||
+									(index === 0 && typeof nextItem?.roomType !== "undefined"),
+								isAgent:
+									index === 0 &&
+									typeof nextItem?.roomType !== "undefined" &&
+									nextItem.roomType === RoomsType.AIRoom,
+								roomType,
+								rootFolderType: current.rootFolderType,
+							};
+						},
+					);
 
-          // breadCrumbs.forEach((item, idx) => {
-          //   if (item.roomType) breadCrumbs[idx].isRoom = true;
-          // });
+					// breadCrumbs.forEach((item, idx) => {
+					//   if (item.roomType) breadCrumbs[idx].isRoom = true;
+					// });
 
-          if (!isThirdParty && !isRoomsOnly && !isUserOnly)
-            breadCrumbs.unshift({ ...getDefaultBreadCrumb(t) });
+					if (!isThirdParty && !isRoomsOnly && !isUserOnly)
+						breadCrumbs.unshift({ ...getDefaultBreadCrumb(t) });
 
-          onSetBaseFolderPath?.(isErrorPath ? [] : breadCrumbs);
+					onSetBaseFolderPath?.(isErrorPath ? [] : breadCrumbs);
 
-          setBreadCrumbs(breadCrumbs);
-          setIsBreadCrumbsLoading(false);
-        }
+					setBreadCrumbs(breadCrumbs);
+					setIsBreadCrumbsLoading(false);
+				}
 
-        if (firstLoadRef.current || startIndex === 0) {
-          const { security } = current;
+				if (firstLoadRef.current || startIndex === 0) {
+					const { security } = current;
 
-          if (withCreate && security?.Create) {
-            setTotal(total + 1);
-            itemList.unshift({
-              isCreateNewItem: true,
-              label: t("NewFolder"),
-              id: "create-folder-item",
-              key: "create-folder-item",
-              hotkey: "f",
-              onCreateClick: () => addInputItem(t("NewFolder"), FolderSvgUrl),
-              onBackClick: () => {
-                let isRooms = false;
-                setBreadCrumbs((val) => {
-                  const newVal = [...val];
+					if (withCreate && security?.Create) {
+						setTotal(total + 1);
+						itemList.unshift({
+							isCreateNewItem: true,
+							label: t("NewFolder"),
+							id: "create-folder-item",
+							key: "create-folder-item",
+							hotkey: "f",
+							onCreateClick: () => addInputItem(t("NewFolder"), FolderSvgUrl),
+							onBackClick: () => {
+								let isRooms = false;
+								setBreadCrumbs((val) => {
+									const newVal = [...val];
 
-                  const item = newVal.pop();
+									const item = newVal.pop();
 
-                  isRooms = !!item?.roomType;
+									isRooms = !!item?.roomType;
 
-                  return newVal;
-                });
+									return newVal;
+								});
 
-                if (isRooms) setSelectedItemType("rooms");
+								if (isRooms) setSelectedItemType("rooms");
 
-                setSelectedItemId(current.parentId);
-              },
-            });
-          } else {
-            setTotal(total);
-          }
-          setItems(itemList);
-        } else {
-          setItems((prevState) => {
-            if (prevState) return [...prevState, ...itemList];
-            return [...itemList];
-          });
-        }
-        setIsRoot(false);
-        setIsInit(false);
-        setIsNextPageLoading(false);
-        setIsFirstLoad(false);
-      };
+								setSelectedItemId(current.parentId);
+							},
+						});
+					} else {
+						setTotal(total);
+					}
+					setItems(itemList);
+				} else {
+					setItems((prevState) => {
+						if (prevState) return [...prevState, ...itemList];
+						return [...itemList];
+					});
+				}
+				setIsRoot(false);
+				setIsInit(false);
+				setIsNextPageLoading(false);
+				setIsFirstLoad(false);
+			};
 
-      try {
-        await setSettings(id);
+			try {
+				await setSettings(id);
 
-        requestRunning.current = false;
-      } catch (e) {
-        sessionStorage.removeItem("filesSelectorPath");
-        if (isThirdParty && rootThirdPartyId) {
-          await setSettings(rootThirdPartyId, true);
+				requestRunning.current = false;
+			} catch (e) {
+				sessionStorage.removeItem("filesSelectorPath");
+				if (isThirdParty && rootThirdPartyId) {
+					await setSettings(rootThirdPartyId, true);
 
-          toastr.error(e as TData);
-          requestRunning.current = false;
-          return;
-        }
+					toastr.error(e as TData);
+					requestRunning.current = false;
+					return;
+				}
 
-        if (isRoomsOnly && getRoomList) {
-          await getRoomList(0, null, true, true);
+				if (isRoomsOnly && getRoomList) {
+					await getRoomList(0, null, true, true);
 
-          toastr.error(e as TData);
-          requestRunning.current = false;
-          return;
-        }
+					toastr.error(e as TData);
+					requestRunning.current = false;
+					return;
+				}
 
-        requestRunning.current = false;
+				requestRunning.current = false;
 
-        getRootData?.();
-        if (selectedItemId) setSelectedItemId("");
+				getRootData?.();
+				if (selectedItemId) setSelectedItemId("");
 
-        if (onSetBaseFolderPath) {
-          onSetBaseFolderPath([]);
-        }
-        setIsFirstLoad(false);
-        toastr.error(e as TData);
-      }
-    },
-    [
-      filesSettingsLoading,
-      setIsNextPageLoading,
-      withCreate,
-      searchValue,
-      filterParam,
-      selectedItemId,
-      isUserOnly,
-      extsWebEdited,
-      getRootData,
-      setSelectedItemSecurity,
-      getIcon,
-      setHasNextPage,
-      setSelectedTreeNode,
-      setIsRoot,
-      setIsInit,
-      setIsFirstLoad,
-      isRoomsOnly,
-      getRoomList,
-      onSetBaseFolderPath,
-      getFilesArchiveError,
-      isThirdParty,
-      setBreadCrumbs,
-      setIsBreadCrumbsLoading,
-      roomsFolderId,
-      setIsSelectedParentFolder,
-      setItems,
-      setTotal,
-      t,
-      addInputItem,
-      setSelectedItemType,
-      setSelectedItemId,
-      setIsInsideKnowledge,
-      setIsInsideResultStorage,
-      rootThirdPartyId,
-      shareKey,
-      applyFilterOption,
-      includedItems,
-      disabledFolderType,
-      disableBySecurity,
-    ],
-  );
+				if (onSetBaseFolderPath) {
+					onSetBaseFolderPath([]);
+				}
+				setIsFirstLoad(false);
+				toastr.error(e as TData);
+			}
+		},
+		[
+			filesSettingsLoading,
+			setIsNextPageLoading,
+			withCreate,
+			searchValue,
+			filterParam,
+			selectedItemId,
+			isUserOnly,
+			extsWebEdited,
+			getRootData,
+			setSelectedItemSecurity,
+			getIcon,
+			setHasNextPage,
+			setSelectedTreeNode,
+			setIsRoot,
+			setIsInit,
+			setIsFirstLoad,
+			isRoomsOnly,
+			getRoomList,
+			onSetBaseFolderPath,
+			getFilesArchiveError,
+			isThirdParty,
+			setBreadCrumbs,
+			setIsBreadCrumbsLoading,
+			roomsFolderId,
+			setIsSelectedParentFolder,
+			setItems,
+			setTotal,
+			t,
+			addInputItem,
+			setSelectedItemType,
+			setSelectedItemId,
+			setIsInsideKnowledge,
+			setIsInsideResultStorage,
+			rootThirdPartyId,
+			shareKey,
+			applyFilterOption,
+			includedItems,
+			disabledFolderType,
+			disableBySecurity,
+		],
+	);
 
-  return { getFileList };
+	return { getFileList };
 };
 
 export default useFilesHelper;

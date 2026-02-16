@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import { useServicesActions } from "../../hooks/useServicesActions";
 import { usePaymentContext } from "../../context/PaymentContext";

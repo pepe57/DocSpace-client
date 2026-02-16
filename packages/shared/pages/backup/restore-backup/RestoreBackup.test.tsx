@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { ButtonSize } from "../../../components/button";
+import { ButtonSize } from "@docspace/ui-kit/components/button";
 
 import { RestoreBackup } from "./index";
 import {
@@ -24,7 +24,7 @@ vi.mock("@docspace/shared/utils/socket", () => ({
   },
 }));
 
-vi.mock("../../../components/toast", () => ({
+vi.mock("@docspace/ui-kit/components/toast", () => ({
   toastr: {
     error: vi.fn(),
     success: vi.fn(),

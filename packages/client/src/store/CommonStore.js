@@ -29,7 +29,7 @@ import axios from "axios";
 
 import api from "@docspace/shared/api";
 import { setDNSSettings } from "@docspace/shared/api/settings";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
 
 class CommonStore {

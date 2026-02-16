@@ -28,7 +28,7 @@ import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import ReportDialog from ".";
-import { Button } from "../button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { DeviceType } from "../../enums";
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
 import type { ReportDialogProps } from "./ReportDialog.types";

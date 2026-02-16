@@ -26,7 +26,7 @@
 
 import { TTranslation } from "../../../types";
 import { LANGUAGE } from "../../../constants";
-import { getCookie } from "../../../utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import getCorrectDate from "../../../utils/getCorrectDate";
 import { combineUrl } from "../../../utils/combineUrl";
 

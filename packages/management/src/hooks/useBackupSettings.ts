@@ -30,7 +30,7 @@ import { useCallback, useMemo, useReducer, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { AutoBackupPeriod } from "@docspace/shared/enums";
-import type { TOption } from "@docspace/shared/components/combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 import type { Nullable, TWeekdaysLabel } from "@docspace/shared/types";
 import type { TBackupSchedule } from "@docspace/shared/api/portal/types";
 

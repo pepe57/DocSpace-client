@@ -26,12 +26,12 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { now, formatDate } from "@docspace/shared/utils/date";
+import { now, formatDate } from "@docspace/ui-kit/utils/date";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import styled from "styled-components";
 
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { useParams, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";

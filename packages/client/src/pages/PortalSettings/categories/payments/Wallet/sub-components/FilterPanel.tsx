@@ -28,17 +28,17 @@ import { useTranslation } from "react-i18next";
 
 import ClearReactSvgUrl from "PUBLIC_DIR/images/icons/17/clear.react.svg?url";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/shared/components/combobox";
+} from "@docspace/ui-kit/components/combobox";
 
 import styles from "../styles/TransactionHistory.module.scss";
 

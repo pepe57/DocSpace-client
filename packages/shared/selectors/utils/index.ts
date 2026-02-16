@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import type { TSelectorItem } from "../../components/selector";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import type { TFile, TFileSecurity, TFolder } from "../../api/files/types";
 import type { TRoom } from "../../api/rooms/types";
 import {
@@ -31,7 +31,7 @@ import {
 	getLifetimePeriodTranslation,
 } from "../../utils/common";
 import { iconSize32 } from "../../utils/image-helpers";
-import { getTitleWithoutExtension } from "../../utils";
+import { getTitleWithoutExtension } from "../../utils/getTitleWithoutExtension";
 import type { TTranslation } from "../../types";
 import type { FolderType } from "../../enums";
 
