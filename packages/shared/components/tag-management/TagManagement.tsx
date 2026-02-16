@@ -30,8 +30,8 @@ import { isMobile as isMobileDevice } from "react-device-detect";
 
 import { Tags } from "@docspace/ui-kit/components/tags";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
 
-import { useUnmount } from "../../hooks/useUnmount";
 import { useIsTable } from "../../hooks/useIsTable";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { ShareAccessRights } from "../../enums";
