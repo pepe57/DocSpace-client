@@ -76,8 +76,8 @@ type Props = {
   folderFormValidation?: RegExp;
   canUseChat?: AccessRightsStore["canUseChat"];
 
-  setMediaViewerVisible: MediaViewerDataStore["setMediaViewerVisible"];
-  setAiPlaylistImages: AiRoomStore["setAiPlaylistImages"];
+  setMediaViewerVisible?: MediaViewerDataStore["setMediaViewerVisible"];
+  setAiPlaylistImages?: AiRoomStore["setAiPlaylistImages"];
 };
 
 const AIAgentViewComponent = ({
