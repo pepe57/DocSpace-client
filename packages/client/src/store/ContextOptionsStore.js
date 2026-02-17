@@ -1083,7 +1083,8 @@ class ContextOptionsStore {
 
     if (enablePlugins && this.pluginStore.contextMenuItemsList) {
       this.pluginStore.contextMenuItemsList.forEach((option) => {
-        // Helper function to recursively process context menu items
+        if (option.value.isGroupAction) return;
+
         const processOptionValue = (value) => {
           if (contextOptions.includes(value.key)) {
             const onClick = async () => {
