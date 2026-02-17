@@ -2715,7 +2715,7 @@ class ContextOptionsStore {
               "open-location",
             ],
             ["ask-ai"],
-            ["share", "move", "copy-to", "download", "rename"],
+            ["share", "move", "copy-to", "download", "edit-index", "rename"],
             [
               "mark-as-favorite",
               "block-unblock-version",
