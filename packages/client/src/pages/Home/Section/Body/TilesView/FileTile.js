@@ -42,6 +42,7 @@ import { TemplateTile } from "@docspace/ui-kit/components/tiles/template-tile";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+import { TagManagement } from "SRC_DIR/components/TagManagement";
 
 import FilesTileContent from "./FilesTileContent";
 import { FileTileContext } from "./FileTile.provider";
@@ -71,7 +72,6 @@ const FileTile = (props) => {
     onFilesClick,
 
     isActive,
-    isUserAdmin,
     isEdit,
     inProgress,
     quickButtonsComponent,
@@ -260,7 +260,16 @@ const FileTile = (props) => {
           columnCount={columnCount}
           thumbnailClick={onFilesClick}
           getRoomTypeName={getRoomTypeName}
-          isUserAdmin={isUserAdmin}
+          customBottomContent={(isHovered, tags) => (
+            <TagManagement
+              tags={tags}
+              id={item.id}
+              access={item.access}
+              columnCount={columnCount}
+              onSelectTag={onSelectTag}
+              isActive={isActive || isHovered || checkedProps}
+            />
+          )}
         />
       );
     if (item.isFolder)
@@ -320,7 +329,6 @@ export default inject(
       infoPanelStore,
       guidanceStore,
       currentQuotaStore,
-      authStore,
     },
     { item },
   ) => {
@@ -340,8 +348,6 @@ export default inject(
 
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
-    const isUserAdmin = authStore.isAdmin;
-
     return {
       getIcon,
       setSelection,
@@ -353,7 +359,6 @@ export default inject(
       deleteRefMap,
       openUser: infoPanelStore.openUser,
       showStorageInfo,
-      isUserAdmin,
     };
   },
 )(
