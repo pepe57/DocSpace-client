@@ -2406,6 +2406,7 @@ class FilesStore {
           if (
             isRoomsFolderByType &&
             data.total >= 10 &&
+            !this.filesSettingsStore.organizeRoomsGrouping &&
             this.dialogsStore?.setRoomGroupingDialogVisible
           ) {
             const dialogShown = localStorage.getItem("roomGroupingDialogShown");
