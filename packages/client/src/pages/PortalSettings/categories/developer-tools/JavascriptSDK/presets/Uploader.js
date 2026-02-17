@@ -29,9 +29,9 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import debounce from "lodash.debounce";
-import { Label } from "@docspace/shared/components/label";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { Label } from "@docspace/ui-kit/components/label";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
