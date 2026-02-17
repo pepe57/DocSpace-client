@@ -55,7 +55,7 @@ import { TAgent } from "@docspace/shared/api/ai/types";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
-import { TLogo } from "@docspace/ui-kit";
+import { TLogo } from "@docspace/ui-kit/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
 import RoomQuota from "SRC_DIR/components/RoomQuota";

@@ -8,6 +8,7 @@
     "build:deploy": "cross-env DEPLOY=true next build --webpack",
     "start": "cross-env NODE_ENV=development PORT=5011 next dev --webpack",
     "start-prod": "cross-env NODE_ENV=production node server.js",
+    "analyze": "cross-env ANALYZE=true next build --webpack",
     "lint": "biome lint ./src ./__tests__",
     "lint:fix": "biome lint --write ./src ./__tests__",
     "format": "biome check ./src ./__tests__",
@@ -48,6 +49,7 @@
   "devDependencies": {
     "@babel/core": "7.25.8",
     "@biomejs/biome": "2.3.14",
+    "@next/bundle-analyzer": "16.1.6",
     "@playwright/test": "1.58.1",
     "@svgr/webpack": "8.1.0",
     "@types/crypto-js": "4.2.2",
