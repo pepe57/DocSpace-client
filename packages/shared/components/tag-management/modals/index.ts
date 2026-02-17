@@ -24,46 +24,5 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useMemo } from "react";
-
-import { TagManagement } from "SRC_DIR/components/TagManagement";
-
-const TagsCell = ({ item, tagCount, isHovered, isActive, checkedProps }) => {
-  const styleTagsCell = {
-    width: "100%",
-    overflow: "hidden",
-    display: item.thirdPartyIcon ? "flex" : "",
-    marginInlineEnd: "8px",
-  };
-
-  const tags = useMemo(() => {
-    const thirdPartyTag = item.providerType
-      ? [
-          {
-            isDefault: true,
-            isThirdParty: true,
-            label: item.providerKey,
-            icon: item.thirdPartyIcon,
-            providerType: item.providerType,
-          },
-        ]
-      : [];
-
-    const itemTags = item?.tags?.length > 0 ? item.tags : [];
-
-    return [...thirdPartyTag, ...itemTags];
-  }, [item.providerType, item.providerKey, item.thirdPartyIcon, item.tags]);
-
-  return (
-    <div style={styleTagsCell}>
-      <TagManagement
-        tags={tags}
-        id={item.id}
-        access={item.access}
-        columnCount={tagCount}
-        isActive={isHovered || isActive || checkedProps}
-      />
-    </div>
-  );
-};
-export default React.memo(TagsCell);
+export { EditTagModal } from "./EditTag.modal";
+export { DeleteTagModal } from "./DeleteTag.modal";

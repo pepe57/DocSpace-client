@@ -24,42 +24,67 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
+import { useCallback, useState } from "react";
 
-import { PublicRoute } from "@docspace/shared/routes";
-import type { PublicRouteProps } from "@docspace/shared/routes";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import { EDIT_TAG_DONT_SHOW_AGAIN_KEY } from "../TagManagement.constants";
 
-const PublicRouteWrapper = ({
-  children,
-  isAuthenticated = false,
-  isPortalDeactivate,
-  tenantStatus,
-  isFirstLoaded,
-  wizardCompleted,
-}: Partial<PublicRouteProps>) => {
-  return (
-    <PublicRoute
-      tenantStatus={tenantStatus!}
-      isFirstLoaded={isFirstLoaded!}
-      isAuthenticated={isAuthenticated}
-      wizardCompleted={wizardCompleted!}
-      isPortalDeactivate={isPortalDeactivate!}
-    >
-      {children}
-    </PublicRoute>
+interface ModalState {
+  isOpen: boolean;
+  resolve?: (value: boolean) => void;
+}
+
+interface UseEditConfirmationReturn {
+  isModalOpen: boolean;
+  isChecked: boolean;
+  setIsChecked: (checked: boolean) => void;
+  requestConfirmation: () => Promise<boolean>;
+  handleConfirm: () => void;
+  handleCancel: () => void;
+}
+
+export function useEditConfirmation(): UseEditConfirmationReturn {
+  const [isChecked, setIsChecked] = useLocalStorage<boolean>(
+    EDIT_TAG_DONT_SHOW_AGAIN_KEY,
+    false,
   );
-};
 
-export default inject<TStore>(({ authStore, settingsStore }) => {
-  const { isAuthenticated } = authStore;
-  const { wizardCompleted, tenantStatus, isPortalDeactivate, isFirstLoaded } =
-    settingsStore;
+  const [modalState, setModalState] = useState<ModalState>({ isOpen: false });
+
+  const requestConfirmation = useCallback(async (): Promise<boolean> => {
+    if (isChecked) {
+      return true;
+    }
+
+    return new Promise<boolean>((resolve) => {
+      setModalState({ isOpen: true, resolve });
+    });
+  }, [isChecked]);
+
+  const handleConfirm = useCallback(() => {
+    setModalState((prev) => {
+      if (prev.resolve) {
+        prev.resolve(true);
+      }
+      return { isOpen: false };
+    });
+  }, []);
+
+  const handleCancel = useCallback(() => {
+    setModalState((prev) => {
+      if (prev.resolve) {
+        prev.resolve(false);
+      }
+      return { isOpen: false };
+    });
+  }, []);
 
   return {
-    tenantStatus,
-    isFirstLoaded,
-    wizardCompleted,
-    isAuthenticated,
-    isPortalDeactivate,
+    isModalOpen: modalState.isOpen,
+    isChecked,
+    setIsChecked,
+    requestConfirmation,
+    handleConfirm,
+    handleCancel,
   };
-})(observer(PublicRouteWrapper));
+}

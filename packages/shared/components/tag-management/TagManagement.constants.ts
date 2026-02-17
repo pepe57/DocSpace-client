@@ -24,46 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useMemo } from "react";
+export const ROW_HEIGHT = 30;
+export const MARGIN_BOTTOM = 10;
+export const MAX_BODY_HEIGHT = 220;
+export const ICON_SIZE = 16;
 
-import { TagManagement } from "SRC_DIR/components/TagManagement";
+export const TAGS_QUERY_KEY = ["tags"];
 
-const TagsCell = ({ item, tagCount, isHovered, isActive, checkedProps }) => {
-  const styleTagsCell = {
-    width: "100%",
-    overflow: "hidden",
-    display: item.thirdPartyIcon ? "flex" : "",
-    marginInlineEnd: "8px",
-  };
-
-  const tags = useMemo(() => {
-    const thirdPartyTag = item.providerType
-      ? [
-          {
-            isDefault: true,
-            isThirdParty: true,
-            label: item.providerKey,
-            icon: item.thirdPartyIcon,
-            providerType: item.providerType,
-          },
-        ]
-      : [];
-
-    const itemTags = item?.tags?.length > 0 ? item.tags : [];
-
-    return [...thirdPartyTag, ...itemTags];
-  }, [item.providerType, item.providerKey, item.thirdPartyIcon, item.tags]);
-
-  return (
-    <div style={styleTagsCell}>
-      <TagManagement
-        tags={tags}
-        id={item.id}
-        access={item.access}
-        columnCount={tagCount}
-        isActive={isHovered || isActive || checkedProps}
-      />
-    </div>
-  );
+export const EVENT_OPTIONS: AddEventListenerOptions = {
+  capture: true,
 };
-export default React.memo(TagsCell);
+
+export const EDIT_TAG_DONT_SHOW_AGAIN_KEY = "edit-tag-dont-show-again";
+export const EDIT_TAG_MODAL_ID = "edit-tag-modal";
+
+export const DELETE_TAG_DONT_SHOW_AGAIN_KEY = "delete-tag-dont-show-again";
+export const DELETE_TAG_MODAL_ID = "delete-tag-modal";
+
+export const EDIT_CANCELLED = Symbol("EDIT_CANCELLED");
+export const DELETE_CANCELLED = Symbol("DELETE_CANCELLED");

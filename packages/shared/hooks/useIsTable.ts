@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2026
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,47 +23,27 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { useState, useEffect } from "react";
+import {
+  tablet,
+  isTablet as isTabletUtil,
+} from "@docspace/ui-kit/utils/device";
 
-import React, { useMemo } from "react";
+export function useIsTable() {
+  const [isTable, setIsTable] = useState<boolean>(() => isTabletUtil());
 
-import { TagManagement } from "SRC_DIR/components/TagManagement";
+  useEffect(() => {
+    setIsTable(isTabletUtil());
 
-const TagsCell = ({ item, tagCount, isHovered, isActive, checkedProps }) => {
-  const styleTagsCell = {
-    width: "100%",
-    overflow: "hidden",
-    display: item.thirdPartyIcon ? "flex" : "",
-    marginInlineEnd: "8px",
-  };
+    const mql = window.matchMedia(tablet);
+    const onChange = (event: MediaQueryListEvent) => {
+      setIsTable(event.matches);
+    };
 
-  const tags = useMemo(() => {
-    const thirdPartyTag = item.providerType
-      ? [
-          {
-            isDefault: true,
-            isThirdParty: true,
-            label: item.providerKey,
-            icon: item.thirdPartyIcon,
-            providerType: item.providerType,
-          },
-        ]
-      : [];
+    mql.addEventListener("change", onChange);
 
-    const itemTags = item?.tags?.length > 0 ? item.tags : [];
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
 
-    return [...thirdPartyTag, ...itemTags];
-  }, [item.providerType, item.providerKey, item.thirdPartyIcon, item.tags]);
-
-  return (
-    <div style={styleTagsCell}>
-      <TagManagement
-        tags={tags}
-        id={item.id}
-        access={item.access}
-        columnCount={tagCount}
-        isActive={isHovered || isActive || checkedProps}
-      />
-    </div>
-  );
-};
-export default React.memo(TagsCell);
+  return isTable;
+}

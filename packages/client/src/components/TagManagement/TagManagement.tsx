@@ -24,46 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useMemo } from "react";
+import { FC } from "react";
+import { inject, observer } from "mobx-react";
 
-import { TagManagement } from "SRC_DIR/components/TagManagement";
+import { TagManagement as TagManagementShared } from "@docspace/shared/components/tag-management";
 
-const TagsCell = ({ item, tagCount, isHovered, isActive, checkedProps }) => {
-  const styleTagsCell = {
-    width: "100%",
-    overflow: "hidden",
-    display: item.thirdPartyIcon ? "flex" : "",
-    marginInlineEnd: "8px",
-  };
+import type {
+  InjectedTagManagementProps,
+  TagManagementProps,
+  TagManagementWrapperProps,
+} from "./TagManagement.types";
 
-  const tags = useMemo(() => {
-    const thirdPartyTag = item.providerType
-      ? [
-          {
-            isDefault: true,
-            isThirdParty: true,
-            label: item.providerKey,
-            icon: item.thirdPartyIcon,
-            providerType: item.providerType,
-          },
-        ]
-      : [];
-
-    const itemTags = item?.tags?.length > 0 ? item.tags : [];
-
-    return [...thirdPartyTag, ...itemTags];
-  }, [item.providerType, item.providerKey, item.thirdPartyIcon, item.tags]);
-
-  return (
-    <div style={styleTagsCell}>
-      <TagManagement
-        tags={tags}
-        id={item.id}
-        access={item.access}
-        columnCount={tagCount}
-        isActive={isHovered || isActive || checkedProps}
-      />
-    </div>
-  );
+const TagManagement: FC<TagManagementWrapperProps> = (props) => {
+  return <TagManagementShared {...props} />;
 };
-export default React.memo(TagsCell);
+
+export default inject<TStore, TagManagementProps, InjectedTagManagementProps>(
+  ({ filesActionsStore, authStore }) => ({
+    isAdmin: authStore.isAdmin,
+    onSelectTag: filesActionsStore.selectTag,
+  }),
+)(observer(TagManagement as FC<TagManagementProps>));

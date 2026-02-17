@@ -24,46 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useMemo } from "react";
+import React from "react";
+import classNames from "classnames";
 
-import { TagManagement } from "SRC_DIR/components/TagManagement";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
-const TagsCell = ({ item, tagCount, isHovered, isActive, checkedProps }) => {
-  const styleTagsCell = {
-    width: "100%",
-    overflow: "hidden",
-    display: item.thirdPartyIcon ? "flex" : "",
-    marginInlineEnd: "8px",
-  };
+import styles from "./TagManagement.module.scss";
 
-  const tags = useMemo(() => {
-    const thirdPartyTag = item.providerType
-      ? [
-          {
-            isDefault: true,
-            isThirdParty: true,
-            label: item.providerKey,
-            icon: item.thirdPartyIcon,
-            providerType: item.providerType,
-          },
-        ]
-      : [];
-
-    const itemTags = item?.tags?.length > 0 ? item.tags : [];
-
-    return [...thirdPartyTag, ...itemTags];
-  }, [item.providerType, item.providerKey, item.thirdPartyIcon, item.tags]);
-
+export const TagManagementLoader: React.FC = () => {
   return (
-    <div style={styleTagsCell}>
-      <TagManagement
-        tags={tags}
-        id={item.id}
-        access={item.access}
-        columnCount={tagCount}
-        isActive={isHovered || isActive || checkedProps}
-      />
-    </div>
+    <>
+      <div className={styles.input}>
+        <RectangleSkeleton height="24px" width="100%" />
+      </div>
+      <hr className={styles.divider} />
+      <div className={styles.textLoader}>
+        <RectangleSkeleton height="12px" width="70%" />
+      </div>
+      <div className={styles.loaderWrapper}>
+        {Array.from({ length: 6 }).map((_, index) => (
+          <div key={index} className={classNames(styles.row, styles.rowLoader)}>
+            <RectangleSkeleton
+              className={styles.loaderCheckIcon}
+              height="15px"
+              width="15px"
+            />
+            <RectangleSkeleton
+              className={styles.loaderTag}
+              height="22px"
+              width="100%"
+            />
+            <RectangleSkeleton
+              className={styles.loaderCheckIcon}
+              height="16px"
+              width="16px"
+            />
+            <RectangleSkeleton
+              className={styles.loaderCheckIcon}
+              height="16px"
+              width="16px"
+            />
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
-export default React.memo(TagsCell);

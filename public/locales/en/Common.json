@@ -33,6 +33,7 @@
   "ActivationRequired": "activation required",
   "Active": "Active",
   "AddButton": "Add",
+  "AddTag": "Add a tag",
   "AddFiles": "Add files",
   "AdditionalResources": "Additional resources",
   "AdditionalResourcesDescription": "Choose whether you want to display links to additional resources in {{productName}} menu.",
@@ -1119,6 +1120,9 @@
   "YourFurtherEditsNotSaved": "Your further edits may not be saved.",
   "YourLogo": "Your logo",
   "YourTurn": "Your turn",
+  "OrSelectFromAvailableMatches": "Or select from available matches",
+  "SelectAnOptionOrCreateOne": "Select an option or create one",
+  "CreateTag": "Create tag",
   "TitleShowFolderActions": "Show Folder Actions",
   "TitleShowActions": "Show File Actions"
 }
