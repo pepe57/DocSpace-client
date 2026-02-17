@@ -31,7 +31,7 @@ import { ContentType } from "../../../../../../api/ai/enums";
 
 import { Text } from "@docspace/ui-kit/components/text";
 
-import { MessageFilesProps } from "../../../../Chat.types";
+import type { MessageFilesProps } from "../../../../Chat.types";
 
 import { openFile } from "../../../../utils";
 

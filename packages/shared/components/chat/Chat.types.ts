@@ -34,6 +34,12 @@ import type useToolsSettings from "./hooks/useToolsSettings";
 import type useInitChats from "./hooks/useInitChats";
 import type useInitMessages from "./hooks/useInitMessages";
 
+export type TChatPlaylistImage = {
+  fileId: number;
+  title: string;
+  src: string;
+};
+
 export type TChatStoreProps = {
   roomId: string | number;
   children: React.ReactNode;
@@ -90,7 +96,7 @@ export type MessageProps = {
   getIcon: TGetIcon;
   getResultStorageId: () => number | null;
   folderFormValidation: RegExp;
-};
+} & Pick<MessageImagesProps, "setAiPlaylistImages" | "setMediaViewerVisible">;
 
 export type MessageButtonsProps = {
   text: string;
@@ -120,6 +126,8 @@ export type MessageFilesProps = {
 
 export type MessageImagesProps = {
   images: TContent[];
+  setAiPlaylistImages?: (value: TChatPlaylistImage[]) => void;
+  setMediaViewerVisible?: (value: boolean) => void;
 };
 
 export type MessageMarkdownFieldProps = {
@@ -144,7 +152,7 @@ export type MessageBodyProps = {
   getIcon: TGetIcon;
   getResultStorageId: () => number | null;
   folderFormValidation: RegExp;
-};
+} & Pick<MessageProps, "setAiPlaylistImages" | "setMediaViewerVisible">;
 
 export type FilesListProps = {
   files: Partial<TFile>[];
@@ -229,4 +237,7 @@ export type ChatProps = {
   folderFormValidation: RegExp;
 
   multimodal?: TMultimodal;
+
+  setAiPlaylistImages?: (value: TChatPlaylistImage[]) => void;
+  setMediaViewerVisible?: (value: boolean) => void;
 };

@@ -60,6 +60,9 @@ const Chat = observer(
     setDeleteDialogVisible,
     folderFormValidation,
     multimodal,
+
+    setAiPlaylistImages,
+    setMediaViewerVisible,
   }: ChatProps & { isLoadingChat: boolean }) => {
     const { currentChat } = useChatStore();
 
@@ -102,6 +105,8 @@ const Chat = observer(
               getIcon={getIcon}
               getResultStorageId={getResultStorageId}
               folderFormValidation={folderFormValidation}
+              setAiPlaylistImages={setAiPlaylistImages}
+              setMediaViewerVisible={setMediaViewerVisible}
             />
             <ChatFooter
               attachmentFile={attachmentFile}

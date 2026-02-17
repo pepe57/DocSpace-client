@@ -30,14 +30,22 @@ import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import { ContentType } from "../../../../../../api/ai/enums";
 
-import { MessageImagesProps } from "../../../../Chat.types";
+import type {
+  MessageImagesProps,
+  TChatPlaylistImage,
+} from "../../../../Chat.types";
 
 import { downloadImageAsBase64 } from "../../../../utils";
 
 import styles from "../../ChatMessageBody.module.scss";
 
-const Images = ({ images }: MessageImagesProps) => {
+const Images = ({
+  images,
+  setAiPlaylistImages,
+  setMediaViewerVisible,
+}: MessageImagesProps) => {
   const [img, setImg] = useState<Map<string, string>>(new Map());
+  const [playlist, setPlaylist] = useState<TChatPlaylistImage[]>([]);
 
   useEffect(() => {
     if (!images.length) return;
@@ -63,7 +71,35 @@ const Images = ({ images }: MessageImagesProps) => {
     downloadImages();
   }, [images]);
 
+  useEffect(() => {
+    if (!images.length) return;
+
+    const playlist: TChatPlaylistImage[] = [];
+
+    for (const image of images) {
+      if (image.type !== ContentType.Images || !image.url || !image.id)
+        continue;
+
+      playlist.push({ title: "Test.jpg", fileId: image.id, src: image.url });
+    }
+
+    setPlaylist(playlist);
+  }, [images]);
+
   if (!images.length) return null;
+
+  const isClickable = !!(setMediaViewerVisible && setAiPlaylistImages);
+
+  const onImageClick = (imageId: string) => {
+    if (!isClickable) return;
+
+    setMediaViewerVisible(true);
+    const openedImg = playlist.find(
+      (item) => item.fileId.toString() === imageId,
+    );
+    if (!openedImg) return;
+    setAiPlaylistImages([openedImg]);
+  };
 
   return (
     <div className={styles.imagesListWrapper}>
@@ -78,7 +114,9 @@ const Images = ({ images }: MessageImagesProps) => {
               <img
                 className={styles.imagesListItemImage}
                 src={base64Image}
-                alt={`Image ${image.id}`}
+                alt={`${image.id}`}
+                onClick={() => onImageClick(image.id.toString())}
+                style={isClickable ? { cursor: "pointer" } : undefined}
               />
             ) : (
               <Loader
