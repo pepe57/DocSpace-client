@@ -55,6 +55,7 @@
   "ExtraStorage": "Additional storage ({{storageUnit}})",
   "FirstAddPaymentMethod": "First you need to add a payment method",
   "ForDays": "for days: {{count}}",
+  "From": "From",
   "FromTo": "From <1>{{fromDate}}</1> To <2>{{toDate}}</2>",
   "GoToPayments": "Go to Payments",
   "GoToService": "Go to service",
@@ -132,6 +133,7 @@
   "TopUpTakeSomeTimeToComplete": "The top-up might take some time to complete",
   "TopUpToReactivateStorage": "To reactivate your subscription, please top up your wallet via Services. Once the payment is complete, your additional storage will become available again.",
   "TopUpWallet": "Top up wallet",
+  "To": "To",
   "Total": "Total",
   "TotalPricePerMonth": "<2>{{price}}</2><3>/month</3>",
   "TotalPricePerYear": "<2>{{price}}</2><3>/year</3>",
@@ -157,5 +159,7 @@
   "YouHaveNotAddedAnyPayment": "You have not added any payment",
   "YourCurrentPayment": "Your current payment",
   "YourCurrentPlan": "<1>Your current plan:</1> {{amount}} <2>({{price}}/month)</2>",
-  "YourPrice": "Your price"
+  "YourPrice": "Your price",
+  "EnterAmountShort": "Enter amount",
+  "AICreditsHelper": "Credits never expire and work across all AI features"
 }

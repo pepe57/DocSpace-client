@@ -40,10 +40,12 @@ type WalletInfoProps = {
   balance?: string;
   onTopUp?: () => void;
   isBalanceInsufficient?: boolean;
+  title?: string;
+  iconUrl?: string;
 };
 
 const WalletInfo = (props: WalletInfoProps) => {
-  const { balance, onTopUp, isBalanceInsufficient } = props;
+  const { balance, onTopUp, isBalanceInsufficient, title, iconUrl } = props;
   const { t } = useTranslation(["Payments", "Common"]);
 
   const keyProp = isBalanceInsufficient
@@ -53,7 +55,7 @@ const WalletInfo = (props: WalletInfoProps) => {
   return (
     <div className={styles.walletInfoContainer}>
       <div className={styles.walletInfoIcon}>
-        <ReactSVG src={WalletReactSvgUrl} />
+        <ReactSVG src={iconUrl ?? WalletReactSvgUrl} />
       </div>
       <div className={styles.walletInfoBody}>
         <Text
@@ -61,7 +63,8 @@ const WalletInfo = (props: WalletInfoProps) => {
           fontWeight="600"
           fontSize="14px"
         >
-          {t("ProductNameWallet", { productName: t("Common:ProductName") })}
+          {title ??
+            t("ProductNameWallet", { productName: t("Common:ProductName") })}
         </Text>
         <div
           className={classNames(styles.walletInfoBalance, {
