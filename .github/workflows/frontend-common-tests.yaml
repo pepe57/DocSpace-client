@@ -473,6 +473,7 @@ jobs:
           docker run \
             --name playwright-client-${{ github.run_id }} \
             -e CI=true \
+            -e WORKERS=$(nproc) \
             -e GITHUB_WORKFLOW="${{ github.workflow }}" \
             -e GITHUB_RUN_ID="${{ github.run_id }}" \
             -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
@@ -525,6 +526,7 @@ jobs:
           docker run \
             --name playwright-login-${{ github.run_id }} \
             -e CI=true \
+            -e WORKERS=$(nproc) \
             -e GITHUB_WORKFLOW="${{ github.workflow }}" \
             -e GITHUB_RUN_ID="${{ github.run_id }}" \
             -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
@@ -577,6 +579,7 @@ jobs:
           docker run \
             --name playwright-doceditor-${{ github.run_id }} \
             -e CI=true \
+            -e WORKERS=$(nproc) \
             -e GITHUB_WORKFLOW="${{ github.workflow }}" \
             -e GITHUB_RUN_ID="${{ github.run_id }}" \
             -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
@@ -629,6 +632,7 @@ jobs:
           docker run \
             --name playwright-sdk-${{ github.run_id }} \
             -e CI=true \
+            -e WORKERS=$(nproc) \
             -e GITHUB_WORKFLOW="${{ github.workflow }}" \
             -e GITHUB_RUN_ID="${{ github.run_id }}" \
             -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
@@ -681,6 +685,7 @@ jobs:
           docker run \
             --name playwright-management-${{ github.run_id }} \
             -e CI=true \
+            -e WORKERS=$(nproc) \
             -e GITHUB_WORKFLOW="${{ github.workflow }}" \
             -e GITHUB_RUN_ID="${{ github.run_id }}" \
             -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
