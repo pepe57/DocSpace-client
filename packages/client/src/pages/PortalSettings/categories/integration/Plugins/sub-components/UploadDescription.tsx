@@ -1,6 +1,5 @@
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { InfoBar } from "@docspace/shared/components/info-bar";
 import styles from "../Plugins.module.scss";
 import { UploadDecsriptionProps } from "../Plugins.types";
 
@@ -26,12 +25,6 @@ const UploadDescription = ({
           {t("Common:LearnMore")}
         </Link>
       ) : null}
-      <InfoBar
-        className={styles.infoBar}
-        title={t("PluginCacheWarningTitle")}
-        description={t("PluginCacheWarningDescription")}
-        dataTestId="plugin_cache_warning"
-      />
     </div>
   );
 };
