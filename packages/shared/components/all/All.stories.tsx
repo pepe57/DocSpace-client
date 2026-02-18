@@ -29,37 +29,45 @@
 import React from "react";
 // import { BooleanValue, StringValue } from "react-values";
 
-import moment from "moment";
+import { now } from "@docspace/ui-kit/utils/date";
 
 import SettingsReactSvg from "PUBLIC_DIR/images/settings.react.svg";
 import CatalogFolderReactSvg from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
 import CatalogEmployeeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 
-import { Avatar, AvatarRole, AvatarSize } from "../avatar";
-import { Button, ButtonSize } from "../button";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/ui-kit/components/avatar";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 // import HelpButton from "../help-button";
-// import IconButton from "../icon-button";
-import { ToggleButton } from "../toggle-button";
-import { Calendar } from "../calendar";
-import { Checkbox } from "../checkbox";
-import { ComboBox, ComboBoxSize } from "../combobox";
-import { InputBlock } from "../input-block";
-import { RadioButtonGroup } from "../radio-button-group";
-import { InputSize, InputType, TextInput } from "../text-input";
-import { Textarea } from "../textarea";
-// import ContextMenuButton from "../context-menu-button";
+// import IconButton from "@docspace/ui-kit/components/icon-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Calendar } from "@docspace/ui-kit/components/calendar";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { ComboBox, ComboBoxSize } from "@docspace/ui-kit/components/combobox";
+import { InputBlock } from "@docspace/ui-kit/components/input-block";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/ui-kit/components/text-input";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
+// import ContextMenuButton from "@docspace/ui-kit/components/context-menu-button";
 // import DatePicker from "../date-picker";
-import { FieldContainer } from "../field-container";
-import { Heading, HeadingSize } from "../heading";
-import { Link, LinkType } from "../link";
-import { Loader, LoaderTypes } from "../loader";
-import { Row, RowProps } from "../rows";
-import { Scrollbar } from "../scrollbar";
-import { Tabs, TabsTypes } from "../tabs";
-import { Text } from "../text";
-import { Toast, toastr } from "../toast";
-import { Tooltip } from "../tooltip";
-import { globalColors } from "../../themes";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { Heading, HeadingSize } from "@docspace/ui-kit/components/heading";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { Row, RowProps } from "@docspace/ui-kit/components/rows";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Toast, toastr } from "@docspace/ui-kit/components/toast";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 const arrayItems = [
   {
@@ -436,7 +444,7 @@ const Template = () => (
       <div style={{ padding: "8px 0" }}>
         <Calendar
           onChange={() => {}}
-          selectedDate={moment()}
+          selectedDate={now()}
           minDate={new Date("1970/01/01")}
           maxDate={new Date("3000/01/01")}
           locale="en"

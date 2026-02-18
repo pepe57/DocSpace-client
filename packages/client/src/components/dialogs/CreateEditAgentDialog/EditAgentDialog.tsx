@@ -30,8 +30,8 @@ import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
 import type {
   TAgentParams,
   TAgentTagsParams,
@@ -118,6 +118,8 @@ const EditAgentDialog = ({
         currentParams.mcpServersInitial?.length
     );
   };
+
+  const isModelSelected = !!agentParams?.modelId;
 
   const setAgentParamsAction = React.useCallback(
     (newParams: Partial<TAgentParams>) => {
@@ -252,7 +254,8 @@ const EditAgentDialog = ({
           isDisabled={
             !cover
               ? isWrongTitle ||
-                compareRoomParams(prevRoomParams.current, agentParams)
+                compareRoomParams(prevRoomParams.current, agentParams) ||
+                !isModelSelected
               : false
           }
           isLoading={isLoading}

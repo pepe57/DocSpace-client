@@ -34,7 +34,6 @@
   "CardUnlinked": "カードの紐付けが解除されました",
   "ChangeShedule": "変更の予定を立てました",
   "ChargeAmount": "<1>{{price}}</1> が、登録されているお支払い方法に請求されます。",
-  "ChooseNewPayer": "新しい支払人を選択してください",
   "ChooseNewPlan": " 新しい料金プランの選択を希望されますか？",
   "ConfirmPayment": "お支払いを確定",
   "ConnectAndConfigureServices": "このセクションは、サービスを接続および設定するために使用されます。",

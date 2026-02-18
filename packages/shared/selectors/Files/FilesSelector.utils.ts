@@ -53,7 +53,7 @@ export const configureFilterByFilterParam = (
       break;
 
     case FilesSelectorFilterTypes.XLSX:
-      filter.filterType = FilterType.SpreadsheetsOnly;
+      filter.extension = FilesSelectorFilterTypes.XLSX;
       break;
 
     case FilesSelectorFilterTypes.PDF:
@@ -75,6 +75,9 @@ export const configureFilterByFilterParam = (
       break;
 
     case FilesSelectorFilterTypes.PPTX:
+      filter.extension = FilesSelectorFilterTypes.PPTX;
+      break;
+
     case FilterType.PresentationsOnly:
       filter.filterType = FilterType.PresentationsOnly;
       break;

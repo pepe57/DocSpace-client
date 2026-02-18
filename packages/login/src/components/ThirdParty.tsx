@@ -30,7 +30,7 @@ import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getOAuthToken, getLoginLink } from "@docspace/shared/utils/common";
 import {
   TCapabilities,
@@ -46,6 +46,7 @@ type ThirdPartyProps = {
   capabilities?: TCapabilities;
   ssoExists?: boolean;
   oauthDataExists?: boolean;
+  isOauth?: boolean;
 };
 
 const ThirdParty = ({
@@ -53,6 +54,7 @@ const ThirdParty = ({
   capabilities,
   ssoExists,
   oauthDataExists,
+  isOauth,
 }: ThirdPartyProps) => {
   const { isLoading } = useContext(LoginValueContext);
   const { setIsModalOpen } = useContext(LoginDispatchContext);
@@ -78,6 +80,10 @@ const ThirdParty = ({
         // Lifehack for Twitter
         if (providerName == "twitter") {
           url += "authCallback";
+
+          if (isOauth) {
+            url += "&pure=true";
+          }
         }
 
         const tokenGetterWin =
@@ -90,13 +96,16 @@ const ThirdParty = ({
               );
 
         getOAuthToken(tokenGetterWin).then((code) => {
-          const token = window.btoa(
-            JSON.stringify({
-              auth: providerName,
-              mode: "popup",
-              callback: "authCallback",
-            }),
-          );
+          const tokenObj: Record<string, string | undefined> = {
+            auth: providerName,
+            mode: "popup",
+            callback: "authCallback",
+          };
+
+          if (isOauth) {
+            tokenObj["pure"] = "true";
+          }
+          const token = window.btoa(JSON.stringify(tokenObj));
 
           if (tokenGetterWin && typeof tokenGetterWin !== "string")
             tokenGetterWin.location.href = getLoginLink(token, code);

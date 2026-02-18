@@ -23,95 +23,95 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import type { TSelectorItem } from "../../../components/selector";
-import { TBreadCrumb } from "../../../components/selector/Selector.types";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 
 import { RoomsType, FolderType } from "../../../enums";
 import { TRoomSecurity } from "../../../api/rooms/types";
 
 import {
-  TFileSecurity,
-  TFolder,
-  TFolderSecurity,
+	TFileSecurity,
+	TFolder,
+	TFolderSecurity,
 } from "../../../api/files/types";
 
 export type TUseInputItemHelper = {
-  withCreate?: boolean;
-  selectedItemId?: string | number | undefined;
-  setItems?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
+	withCreate?: boolean;
+	selectedItemId?: string | number | undefined;
+	setItems?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
 };
 
 export type TGetIcon = (size: number, fileExst: string) => string;
 
 export type UseRoomsHelperProps = TUseInputItemHelper & {
-  isAgent?: boolean;
-  searchValue?: string;
-  searchArea?: string;
-  disableThirdParty?: boolean;
-  isRoomsOnly: boolean;
-  roomType?: RoomsType | RoomsType[];
-  excludeItems?: (number | string | undefined)[];
-  isInit: boolean;
-  createDefineRoomLabel?: string;
-  createDefineRoomType?: RoomsType;
-  onSetBaseFolderPath?: (
-    value: number | string | undefined | TBreadCrumb[],
-  ) => void;
-  getRootData?: () => Promise<void>;
-  subscribe: (id: number) => void;
-  withInit?: boolean;
-  setIsInit: (value: boolean) => void;
-  setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
-  setHasNextPage: (value: boolean) => void;
-  setTotal: (value: number) => void;
-  setIsRoot?: (value: boolean) => void;
-  setSelectedItemType?: React.Dispatch<
-    React.SetStateAction<"rooms" | "files" | "agents" | undefined>
-  >;
-  setSelectedItemSecurity?: React.Dispatch<
-    React.SetStateAction<
-      TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
-    >
-  >;
-  setSelectedTreeNode?: React.Dispatch<React.SetStateAction<TFolder>>;
+	isAgent?: boolean;
+	searchValue?: string;
+	searchArea?: string;
+	disableThirdParty?: boolean;
+	isRoomsOnly: boolean;
+	roomType?: RoomsType | RoomsType[];
+	excludeItems?: (number | string | undefined)[];
+	isInit: boolean;
+	createDefineRoomLabel?: string;
+	createDefineRoomType?: RoomsType;
+	onSetBaseFolderPath?: (
+		value: number | string | undefined | TBreadCrumb[],
+	) => void;
+	getRootData?: () => Promise<void>;
+	subscribe: (id: number) => void;
+	withInit?: boolean;
+	setIsInit: (value: boolean) => void;
+	setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
+	setHasNextPage: (value: boolean) => void;
+	setTotal: (value: number) => void;
+	setIsRoot?: (value: boolean) => void;
+	setSelectedItemType?: React.Dispatch<
+		React.SetStateAction<"rooms" | "files" | "agents" | undefined>
+	>;
+	setSelectedItemSecurity?: React.Dispatch<
+		React.SetStateAction<
+			TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
+		>
+	>;
+	setSelectedTreeNode?: React.Dispatch<React.SetStateAction<TFolder>>;
 };
 
 export type UseAgentsHelperProps = TUseInputItemHelper & {
-  searchValue?: string;
-  // isRoomsOnly: boolean;
-  excludeItems?: (number | string | undefined)[];
-  isInit: boolean;
-  createDefineLabel?: string;
-  onSetBaseFolderPath?: (
-    value: number | string | undefined | TBreadCrumb[],
-  ) => void;
-  getRootData?: () => Promise<void>;
-  subscribe: (id: number) => void;
-  withInit?: boolean;
-  setIsInit: (value: boolean) => void;
-  setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
-  setHasNextPage: (value: boolean) => void;
-  setTotal: (value: number) => void;
-  setIsRoot?: (value: boolean) => void;
-  setSelectedItemType?: React.Dispatch<
-    React.SetStateAction<"rooms" | "files" | "agents" | undefined>
-  >;
-  setSelectedItemSecurity?: React.Dispatch<
-    React.SetStateAction<
-      TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
-    >
-  >;
-  setSelectedTreeNode?: React.Dispatch<React.SetStateAction<TFolder>>;
-  disableBySecurity?: string;
+	searchValue?: string;
+	// isRoomsOnly: boolean;
+	excludeItems?: (number | string | undefined)[];
+	isInit: boolean;
+	createDefineLabel?: string;
+	onSetBaseFolderPath?: (
+		value: number | string | undefined | TBreadCrumb[],
+	) => void;
+	getRootData?: () => Promise<void>;
+	subscribe: (id: number) => void;
+	withInit?: boolean;
+	setIsInit: (value: boolean) => void;
+	setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
+	setHasNextPage: (value: boolean) => void;
+	setTotal: (value: number) => void;
+	setIsRoot?: (value: boolean) => void;
+	setSelectedItemType?: React.Dispatch<
+		React.SetStateAction<"rooms" | "files" | "agents" | undefined>
+	>;
+	setSelectedItemSecurity?: React.Dispatch<
+		React.SetStateAction<
+			TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
+		>
+	>;
+	setSelectedTreeNode?: React.Dispatch<React.SetStateAction<TFolder>>;
+	disableBySecurity?: string;
 };
 
 export type UseSocketHelperProps = {
-  setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
-  setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
-  setTotal: React.Dispatch<React.SetStateAction<number>>;
-  disabledItems: (string | number)[];
-  disabledFolderType?: FolderType;
-  filterParam?: string | number;
-  withCreate?: boolean;
-  disableBySecurity?: string;
+	setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
+	setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
+	setTotal: React.Dispatch<React.SetStateAction<number>>;
+	disabledItems: (string | number)[];
+	disabledFolderType?: FolderType;
+	filterParam?: string | number;
+	withCreate?: boolean;
+	disableBySecurity?: string;
 };

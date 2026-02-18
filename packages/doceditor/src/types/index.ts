@@ -36,20 +36,18 @@ import {
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
-import {
-  HeaderProps,
-  TBreadCrumb,
-} from "@docspace/shared/components/selector/Selector.types";
+import { HeaderProps, TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
-  RoomsType,
+  FolderType,
   StartFillingMode,
 } from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
+import type { RoomsType } from "@docspace/ui-kit/enums";
 
 export type TGoBack = {
   requestClose: boolean;
@@ -73,6 +71,11 @@ export type SdkSearchParams = {
   isSDK?: boolean;
 };
 
+export type TGenerationToolCallState = {
+  toolName: string;
+  parameters: Record<string, string>;
+};
+
 export type RootPageProps = {
   searchParams: Promise<
     Partial<{
@@ -84,6 +87,7 @@ export type RootPageProps = {
       share: string;
       editorType: string;
       error?: string;
+      withTool?: string;
     }> &
       SdkSearchParams
   >;
@@ -213,6 +217,7 @@ export interface IInitialConfig {
   startFillingMode?: StartFillingMode;
   fillingSessionId?: string;
   fillingStatus?: boolean;
+  quotaExceededScope?: number;
 }
 
 export type TError = {
@@ -237,6 +242,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+
+      generationToolCallState?: TGenerationToolCallState;
     }
   | {
       error: TError;
@@ -252,6 +259,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+
+      generationToolCallState?: TGenerationToolCallState;
     };
 
 export type EditorProps = {
@@ -268,6 +277,8 @@ export type EditorProps = {
   filesSettings?: TFilesSettings;
   organizationName?: string;
   shareKey?: string;
+
+  generationToolCallState?: TGenerationToolCallState;
 
   onDownloadAs?: (obj: object) => void;
   openShareFormDialog?: () => void;
@@ -382,6 +393,8 @@ export interface UseSocketHelperProps {
   user?: TUser;
   shareKey?: string;
   standalone?: boolean;
+  folderId?: string | number;
+  folderType?: FolderType;
 }
 
 export interface UseEventsProps {
@@ -398,6 +411,7 @@ export interface UseEventsProps {
   sdkConfig?: TFrameConfig | null;
   organizationName: string;
   shareKey?: string;
+  generationToolCallState?: TGenerationToolCallState;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   openShareFormDialog?: VoidFunction;
   onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
@@ -413,6 +427,7 @@ export interface UseInitProps {
   setDocTitle: (value: string) => void;
   documentReady: boolean;
   organizationName: string;
+  generationToolCallState?: TGenerationToolCallState;
 }
 
 export type THistoryData =

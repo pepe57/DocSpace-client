@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@use "../../../../styles/variables";
+@use "@docspace/ui-kit/styles/variables";
 
 .chatInfoBlock {
   box-sizing: border-box;
@@ -38,7 +38,7 @@
 
   svg {
     path {
-      fill: variables.$light-status-warning;
+      fill: variables.$light-status-warning !important;
     }
   }
 }

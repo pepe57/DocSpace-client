@@ -32,21 +32,22 @@ import api from "@docspace/shared/api";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import { TData, toastr } from "@docspace/shared/components/toast";
+import { TData, toastr } from "@docspace/ui-kit/components/toast";
 import type {
   TFile,
   TFileSecurity,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
-import type { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
+import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.types";
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import type {
+  IFloatingOperationsButtonClient,
   IContextMenuItem,
   IContextMenuItemClient,
   IContextMenuItemValidation,
@@ -76,6 +77,7 @@ import {
 
 import type SelectedFolderStore from "./SelectedFolderStore";
 import { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
+import type { IFloatingOperationsButton } from "@onlyoffice/docspace-plugin-sdk";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -126,6 +128,11 @@ class PluginStore {
   pluginDialogVisible = false;
 
   pluginSelectorVisible = false;
+
+  pluginFloatingOperationsButtons: Map<
+    string,
+    IFloatingOperationsButtonClient
+  > = new Map();
 
   pluginDialogProps: null | ModalDialogProps = null;
 
@@ -178,6 +185,9 @@ class PluginStore {
       updatePlugin: this.updatePlugin,
       setPluginSelectorVisible: this.setPluginSelectorVisible,
       setPluginSelectorProps: this.setPluginSelectorProps,
+      addPluginFloatingOperations: this.addPluginFloatingOperations,
+      removePluginFloatingOperations: this.removePluginFloatingOperations,
+      updatePluginFloatingOperations: this.updatePluginFloatingOperations,
     });
   };
 
@@ -222,6 +232,24 @@ class PluginStore {
   setDeletePluginDialogProps = (value: null | { pluginName: string }) => {
     this.deletePluginDialogProps = value;
   };
+
+  addPluginFloatingOperations = (value: IFloatingOperationsButtonClient) => {
+    if (this.pluginFloatingOperationsButtons.has(value.id)) return;
+    this.pluginFloatingOperationsButtons.set(value.id, value);
+  };
+
+  updatePluginFloatingOperations = (value: IFloatingOperationsButtonClient) => {
+    if (!this.pluginFloatingOperationsButtons.has(value.id)) return;
+    this.pluginFloatingOperationsButtons.set(value.id, value);
+  };
+
+  removePluginFloatingOperations = (id: string) => {
+    this.pluginFloatingOperationsButtons.delete(id);
+  };
+
+  get pluginFloatingOperationsArray(): IFloatingOperationsButtonClient[] {
+    return Array.from(this.pluginFloatingOperationsButtons.values());
+  }
 
   updatePluginStatus = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
@@ -983,38 +1011,31 @@ class PluginStore {
       const newItems: IMainButtonItemClient[] = [];
 
       if (value.items && storeId) {
-        const storeIdNum = Number(storeId);
+        value.items.forEach((i) => {
+          const onClick = async () => {
+            const message = await i.onClick?.(storeId);
 
-        if (!isNaN(storeIdNum)) {
-          value.items.forEach((i) => {
-            const onClick = async () => {
-              const message = await i.onClick?.(storeIdNum);
+            this.dispatchMessage({ message, pluginName: plugin.name });
+          };
 
-              this.dispatchMessage({ message, pluginName: plugin.name });
-            };
+          const { items: _, ...rest } = i;
 
-            const { items: _, ...rest } = i;
-
-            newItems.push({
-              ...rest,
-              onClick,
-              icon: `${plugin.iconUrl}/assets/${i.icon}?hash=${plugin.version}`,
-              pluginName: plugin.name,
-            });
+          newItems.push({
+            ...rest,
+            onClick,
+            icon: `${plugin.iconUrl}/assets/${i.icon}?hash=${plugin.version}`,
+            pluginName: plugin.name,
           });
-        }
+        });
       }
 
       const onClick = async () => {
         if (!value.onClick) return;
         const currStoreId = this.selectedFolderStore.id;
+
         if (!currStoreId) return;
 
-        const currStoreIdNum = Number(currStoreId);
-
-        if (isNaN(currStoreIdNum)) return;
-
-        const message = await value.onClick(currStoreIdNum);
+        const message = await value.onClick(currStoreId);
 
         this.dispatchMessage({ message, pluginName: plugin.name });
       };

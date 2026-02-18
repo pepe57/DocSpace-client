@@ -21,7 +21,5 @@
   "SubNewFormFile": "Depuis un fichier texte",
   "ThirdPartyInfo": "Modifier les informations sur les tiers",
   "ThirdPartyTitle": "Services tiers",
-  "TitleShowActions": "Actions sur le fichier",
-  "TitleShowFolderActions": "Actions sur le dossier",
   "TrashItemsDeleteSuccess": "Les éléments sélectionnés ont été supprimés avec succès de {{sectionName}}"
 }

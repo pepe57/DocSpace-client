@@ -1051,5 +1051,7 @@
   "YourCurrentDomain": "Ваш поточний домен",
   "YourLogo": "Ваш логотип",
   "YourTurn": "Ваша черга",
-  "ExternalLink": "Зовнішнє посилання"
+  "ExternalLink": "Зовнішнє посилання",
+  "TitleShowFolderActions": "Відобразити дії з папками",
+  "TitleShowActions": "Показати дії з файлами"
 }

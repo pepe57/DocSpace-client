@@ -25,15 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-
-import moment from "moment";
-import "moment/min/locales.min";
+import React, { useLayoutEffect, useRef, useState } from "react";
 
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import Share from "@docspace/shared/components/share";
 import { getPortalPasswordSettings } from "@docspace/shared/api/settings";
 import EditLinkPanel, {
@@ -68,10 +65,6 @@ const SharingDialog = ({
   const [isSharePanelVisible, setIsSharePanelVisible] = useState(false);
   const [isEditGroupPanelVisible, setIsEditGroupPanelVisible] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState<TGroup | null>(null);
-
-  useEffect(() => {
-    moment.locale(i18n.language);
-  }, [i18n.language]);
 
   useLayoutEffect(() => {
     const fileSocketPart = `FILE-${fileInfo.id}`;

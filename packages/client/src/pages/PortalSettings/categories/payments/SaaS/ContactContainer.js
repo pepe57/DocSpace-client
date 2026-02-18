@@ -26,8 +26,8 @@
 
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 
 const StyledContactContainer = styled.div`
   display: flex;
@@ -38,31 +38,31 @@ const StyledContactContainer = styled.div`
 `;
 
 const ContactContainer = ({ t, salesEmail }) => {
-  return (
-    <StyledContactContainer>
-      {salesEmail ? (
-        <Text as="span" fontWeight={600}>
-          {t("Common:ContactUs")}
-          <Link
-            className="sales-email-link"
-            tag="a"
-            fontWeight="600"
-            href={`mailto:${salesEmail}`}
-            color="accent"
-            dataTestId="sales_email_link"
-          >
-            {salesEmail}
-          </Link>
-        </Text>
-      ) : null}
-    </StyledContactContainer>
-  );
+	return (
+		<StyledContactContainer>
+			{salesEmail ? (
+				<Text as="span" fontWeight={600}>
+					{t("Common:ContactUs")}
+					<Link
+						className="sales-email-link"
+						tag="a"
+						fontWeight="600"
+						href={`mailto:${salesEmail}`}
+						color="accent"
+						dataTestId="sales_email_link"
+					>
+						{salesEmail}
+					</Link>
+				</Text>
+			) : null}
+		</StyledContactContainer>
+	);
 };
 
 export default inject(({ paymentStore, settingsStore }) => {
-  const { salesEmail } = paymentStore;
-  return {
-    salesEmail,
-    theme: settingsStore.theme,
-  };
+	const { salesEmail } = paymentStore;
+	return {
+		salesEmail,
+		theme: settingsStore.theme,
+	};
 })(observer(ContactContainer));

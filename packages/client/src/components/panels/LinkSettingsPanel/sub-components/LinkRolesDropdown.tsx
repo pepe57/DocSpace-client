@@ -30,16 +30,16 @@ import { isMobile } from "@docspace/shared/utils";
 
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Text } from "@docspace/shared/components/text";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import { LinkRolesDropdownItem } from "./LinkRolesDropdownItem";
-import { TOption } from "@docspace/shared/components/combobox";
+import { TOption } from "@docspace/ui-kit/components/combobox";
 import styles from "./LinkRolesDropdown.module.scss";
 import { LinkRolesDropdownProps } from "../LinkSettingsPanel.types";
-import { Portal } from "@docspace/shared/components/portal";
-import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Portal } from "@docspace/ui-kit/components/portal";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 
 const LinkRolesDropdown = ({
   currentAccess,
@@ -104,7 +104,7 @@ const LinkRolesDropdown = ({
   }, [isOpen, heightList]);
 
   return (
-    <div className={styles.linkRolesDropdown}>
+    <div className={styles.linkRolesDropdown} data-testid="link-roles-dropdown">
       <div
         title={currentAccess?.label}
         onClick={() => setIsOpen(!isOpen)}

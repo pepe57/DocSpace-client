@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TComboboxProps, TOption } from "@docspace/shared/components/combobox";
+import { TComboboxProps, TOption } from "@docspace/ui-kit/components/combobox";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { TTheme } from "@docspace/shared/themes";
+import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 
 export type LinkRolesDropdownItemProps = {
   item: TOption;

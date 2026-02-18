@@ -30,7 +30,7 @@ import { Meta, StoryFn } from "@storybook/react";
 import MoreLoginModal from "./index";
 import type { MoreLoginModalProps } from "./MoreLoginModal.types";
 
-import { Button } from "../../components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 
 const mockTranslation = (key: string) => {
   const translations: { [key: string]: string } = {

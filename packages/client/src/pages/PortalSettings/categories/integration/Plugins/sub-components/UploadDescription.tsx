@@ -1,5 +1,5 @@
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { InfoBar } from "@docspace/shared/components/info-bar";
 import styles from "../Plugins.module.scss";
 import { UploadDecsriptionProps } from "../Plugins.types";
@@ -16,8 +16,8 @@ const UploadDescription = ({
       </Text>
       {pluginsSdkUrl ? (
         <Link
-          className={styles.linkLearnMore}
-          color={currentColorScheme.main?.accent}
+          className="link-learn-more"
+          color={currentColorScheme?.main?.accent ?? undefined}
           isHovered
           target={LinkTarget.blank}
           href={pluginsSdkUrl}

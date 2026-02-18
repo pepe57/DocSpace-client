@@ -1051,5 +1051,7 @@
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
   "YourTurn": "Jste na řadě",
-  "ExternalLink": "Externí odkaz"
+  "ExternalLink": "Externí odkaz",
+  "TitleShowFolderActions": "Zobrazit akce složek",
+  "TitleShowActions": "Zobrazit akce souborů"
 }

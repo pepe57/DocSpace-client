@@ -27,8 +27,7 @@
 // @ts-nocheck
 
 import { AxiosRequestConfig } from "axios";
-
-import moment from "moment";
+import type { DateTime } from "luxon";
 import { Nullable } from "types";
 import {
   FolderType,
@@ -273,8 +272,30 @@ export function createTag(name) {
     return res;
   });
 }
+export async function removeTagRequest(names: string[]) {
+  const data = { names };
+  const options = {
+    method: "delete",
+    url: "/files/tags",
+    data,
+  };
 
-export function addTagsToRoom(id, tagArray) {
+  return request(options).then((res) => {
+    return res;
+  });
+}
+export function updateTagName(oldName: string, newName: string) {
+  const data = { oldName, newName };
+  const options = {
+    method: "PUT",
+    url: "/files/tags",
+    data,
+  };
+
+  return request(options)!;
+}
+
+export function addTagsToRoom(id: string | number, tagArray: string[]) {
   const data = { names: tagArray };
   const options = {
     method: "put",
@@ -283,11 +304,11 @@ export function addTagsToRoom(id, tagArray) {
   };
 
   return request(options).then((res) => {
-    return res;
+    return res as TRoom;
   });
 }
 
-export function removeTagsFromRoom(id, tagArray) {
+export function removeTagsFromRoom(id: string | number, tagArray: string[]) {
   const data = { names: tagArray };
   const options = {
     method: "delete",
@@ -306,9 +327,7 @@ export function getTags() {
     url: "/files/tags",
   };
 
-  return request(options).then((res) => {
-    return res;
-  });
+  return request<string[]>(options);
 }
 
 export function uploadRoomLogo(data) {
@@ -432,7 +451,7 @@ export function editExternalLink(
   linkId: number | string,
   title: string,
   access: ShareAccessRights,
-  expirationDate: moment.Moment | string | null,
+  expirationDate: DateTime | string | string | null,
   linkType: number,
   password: string | undefined,
   disabled: boolean,
@@ -466,7 +485,7 @@ export function createExternalLink(
   link: Partial<{
     title: string;
     access: ShareAccessRights;
-    expirationDate: moment.Moment | string | null;
+    expirationDate: DateTime | string | string | null;
     linkType: number;
     password: string | undefined;
     denyDownload: boolean;

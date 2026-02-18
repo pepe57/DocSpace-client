@@ -29,9 +29,9 @@
 import { useMemo } from "react";
 import { observer } from "mobx-react";
 
-import { useUnmount } from "@docspace/shared/hooks/useUnmount";
+import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
 import { TariffState } from "@docspace/shared/enums";

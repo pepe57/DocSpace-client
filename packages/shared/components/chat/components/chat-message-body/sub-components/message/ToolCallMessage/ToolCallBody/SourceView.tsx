@@ -36,9 +36,9 @@ import type {
   TToolCallContent,
   TToolCallResultSourceData,
 } from "../../../../../../../../api/ai/types";
-import { Link, LinkTarget } from "../../../../../../../link";
-import { Text } from "../../../../../../../text";
-import { Tooltip } from "../../../../../../../tooltip";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "../../../../ChatMessageBody.module.scss";
 import {

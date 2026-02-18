@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import classNames from "classnames";
 import { inject, observer } from "mobx-react";
@@ -34,64 +34,64 @@ import { DeviceType } from "@docspace/shared/enums";
 import styles from "./styles/ServicesLoader.module.scss";
 
 type ServicesLoaderProps = {
-  currentDeviceType?: DeviceType;
+	currentDeviceType?: DeviceType;
 };
 
 const LoaderContainer = () => {
-  return (
-    <div className={styles.loaderContainer}>
-      <div className={styles.topRow}>
-        <RectangleSkeleton width="32px" height="32px" />
-        <RectangleSkeleton width="28px" height="16px" />
-      </div>
+	return (
+		<div className={styles.loaderContainer}>
+			<div className={styles.topRow}>
+				<RectangleSkeleton width="32px" height="32px" />
+				<RectangleSkeleton width="28px" height="16px" />
+			</div>
 
-      <div className={styles.middleRow}>
-        <RectangleSkeleton width="100%" height="16px" />
-      </div>
+			<div className={styles.middleRow}>
+				<RectangleSkeleton width="100%" height="16px" />
+			</div>
 
-      <div className={styles.longRow}>
-        <RectangleSkeleton width="100%" height="16px" />
-      </div>
+			<div className={styles.longRow}>
+				<RectangleSkeleton width="100%" height="16px" />
+			</div>
 
-      <div className={styles.bottomRow}>
-        <RectangleSkeleton width="111px" height="16px" />
-      </div>
-    </div>
-  );
+			<div className={styles.bottomRow}>
+				<RectangleSkeleton width="111px" height="16px" />
+			</div>
+		</div>
+	);
 };
 
 const ServicesLoader: React.FC<ServicesLoaderProps> = ({
-  currentDeviceType,
+	currentDeviceType,
 }) => {
-  const isMobile = currentDeviceType === DeviceType.mobile;
+	const isMobile = currentDeviceType === DeviceType.mobile;
 
-  const gridClassName = isMobile
-    ? `${styles.gridContainer} ${styles.gridContainerMobile}`
-    : `${styles.gridContainer} ${styles.gridContainerDesktop}`;
+	const gridClassName = isMobile
+		? `${styles.gridContainer} ${styles.gridContainerMobile}`
+		: `${styles.gridContainer} ${styles.gridContainerDesktop}`;
 
-  return (
-    <div className={styles.loaderWrapper}>
-      <div
-        className={classNames(styles.firstLoader, {
-          [styles.firstMobileLoader]: isMobile,
-        })}
-      >
-        <RectangleSkeleton width="100%" height="20px" />
-      </div>
-      <div className={gridClassName}>
-        <LoaderContainer />
-        <LoaderContainer />
-        <LoaderContainer />
-        <LoaderContainer />
-      </div>
-    </div>
-  );
+	return (
+		<div className={styles.loaderWrapper}>
+			<div
+				className={classNames(styles.firstLoader, {
+					[styles.firstMobileLoader]: isMobile,
+				})}
+			>
+				<RectangleSkeleton width="100%" height="20px" />
+			</div>
+			<div className={gridClassName}>
+				<LoaderContainer />
+				<LoaderContainer />
+				<LoaderContainer />
+				<LoaderContainer />
+			</div>
+		</div>
+	);
 };
 
 export default inject(({ settingsStore }: TStore) => {
-  const { currentDeviceType } = settingsStore;
+	const { currentDeviceType } = settingsStore;
 
-  return {
-    currentDeviceType,
-  };
+	return {
+		currentDeviceType,
+	};
 })(observer(ServicesLoader));

@@ -31,7 +31,7 @@ import {
   HeaderProps,
   THeaderBackButton,
   TSelectorHeader,
-} from "@docspace/shared/components/selector/Selector.types";
+} from "@docspace/ui-kit/components/selector";
 
 import GroupsSelector from "@docspace/shared/selectors/Groups";
 import { GroupsSelectorProps } from "@docspace/shared/selectors/Groups/GroupsSelector.types";

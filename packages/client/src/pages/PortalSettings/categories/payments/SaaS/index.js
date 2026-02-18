@@ -27,7 +27,6 @@
 import React, { useEffect } from "react";
 
 import { inject, observer } from "mobx-react";
-import moment from "moment";
 import { useTranslation } from "react-i18next";
 
 import { regDesktop } from "@docspace/shared/utils/desktop";
@@ -58,8 +57,6 @@ const SaaSPage = ({
     !isInitPaymentPage || !ready || isUpdatingTariff || isUpdatingBasicSettings;
 
   useEffect(() => {
-    moment.locale(language);
-
     if (isDesktop && !isDesktopClientInit) {
       setIsDesktopClientInit(true);
 

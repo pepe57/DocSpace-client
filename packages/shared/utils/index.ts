@@ -26,28 +26,21 @@
 
 "use client";
 
-import moment from "moment-timezone";
-import { TTranslation } from "../types";
+import type { TTranslation } from "../types";
+import { parseToDateTime } from "@docspace/ui-kit/utils/date";
 
 import { isArrayEqual } from "./array";
 import * as email from "./email";
 import { EmailSettings, parseAddress, parseAddresses, getParts } from "./email";
 import useId from "./useId";
-import {
-  getCorrectTextAlign,
-  getCorrectBorderRadius,
-  getCorrectFourValuesStyle,
-} from "./rtlUtils";
-import * as useClickOutside from "./useClickOutside";
-import { trimSeparator } from "./trimSeparator";
+
+import { useClickOutside } from "@docspace/ui-kit/utils";
 import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
-import { getTextColor } from "./getTextColor";
 import { getFormFillingTipsStorageName } from "./getFormFillingTipsStorageName";
-import { uuid } from "./uuid";
+import { uuid, getTextColor, trimSeparator } from "@docspace/ui-kit/utils";
 
-import DomHelpers from "./domHelpers";
-import ObjectUtils from "./objectUtils";
+import { DomHelpers } from "@docspace/ui-kit/utils";
 import {
   size,
   mobile,
@@ -62,13 +55,11 @@ import {
   checkIsSSR,
   INFO_PANEL_WIDTH,
   isMobileDevice,
-} from "./device";
-import { getCookie } from "./cookie";
-import { Context, Provider, Consumer } from "./context";
+} from "@docspace/ui-kit/utils/device";
 import commonIconsStyles, {
   IconSizeType,
   isIconSizeType,
-} from "./common-icons-style";
+} from "@docspace/ui-kit/utils/common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
 import { NoUserSelect } from "./commonStyles";
@@ -76,7 +67,6 @@ import { commonInputStyles } from "./commonInputStyles";
 import {
   RoomsTypeValues,
   RoomsTypes,
-  getSystemTheme,
   getEditorTheme,
   getLogoFromPath,
   isBetaLanguage,
@@ -89,7 +79,7 @@ import {
   FileFillingFormStatus,
   FolderType,
 } from "../enums";
-import { TFile } from "../api/files/types";
+import { getTitleWithoutExtension } from "./getTitleWithoutExtension";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
 import { injectDefaultTheme } from "./injectDefaultTheme";
@@ -102,11 +92,11 @@ import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
 import * as userFilterUtils from "./userFilterUtils";
 import * as filterConstants from "./filterConstants";
 import { getAiProviderIcon, getServerIcon, getAiProviderLabel } from "./ai";
+import { presentInArray } from "./presentInArray";
 
 export {
   isBetaLanguage,
   getLogoFromPath,
-  getSystemTheme,
   getEditorTheme,
   RoomsTypeValues,
   RoomsTypes,
@@ -126,10 +116,6 @@ export {
   commonIconsStyles,
   IconSizeType,
   isIconSizeType,
-  Context,
-  Provider,
-  Consumer,
-  getCookie,
   size,
   mobile,
   mobileMore,
@@ -139,23 +125,17 @@ export {
   isTablet,
   isDesktop,
   isTouchDevice,
-  getCorrectTextAlign,
-  getCorrectBorderRadius,
-  getCorrectFourValuesStyle,
   email,
   useId,
   useClickOutside,
-  trimSeparator,
   getCorrectDate,
   handleAnyClick,
   DomHelpers,
-  ObjectUtils,
   getLogoUrl,
   isMobileDevice,
   onEdgeScrolling,
   clearEdgeScrollingTimer,
   injectDefaultTheme,
-  getTextColor,
   getFromSessionStorage,
   saveToSessionStorage,
   getFromLocalStorage,
@@ -169,6 +149,9 @@ export {
   getServerIcon,
   getAiProviderLabel,
   uuid,
+  getTextColor,
+  trimSeparator,
+  getTitleWithoutExtension,
 };
 
 export const getModalType = () => {
@@ -176,18 +159,11 @@ export const getModalType = () => {
 };
 
 export const isValidDate = (date: Date) => {
-  return moment(date).tz(window.timezone).year() !== 9999;
+  const dt = parseToDateTime(date);
+  return dt ? dt.setZone(window.timezone).year !== 9999 : false;
 };
 
-export const presentInArray = (
-  array: string[],
-  search: string,
-  caseInsensitive = false,
-) => {
-  const pattern = caseInsensitive ? search.toLowerCase() : search;
-  const result = array?.findIndex((item) => item === pattern);
-  return result !== -1;
-};
+export { presentInArray };
 
 export const getDeviceTypeByWidth = (width: number): DeviceType => {
   if (width <= size.mobile) return DeviceType.mobile;
@@ -197,14 +173,8 @@ export const getDeviceTypeByWidth = (width: number): DeviceType => {
   return DeviceType.desktop;
 };
 
-export const getTitleWithoutExtension = (
-  item: TFile,
-  fromTemplate: boolean,
-) => {
-  const titleWithoutExst = item.title.split(".").slice(0, -1).join(".");
-  return titleWithoutExst && item.fileExst && !fromTemplate
-    ? titleWithoutExst
-    : item.title;
+export const getUpperCaseExtension = (extension: string) => {
+  return extension.split(".").pop()?.toUpperCase() ?? "";
 };
 
 export const getLastColumn = (

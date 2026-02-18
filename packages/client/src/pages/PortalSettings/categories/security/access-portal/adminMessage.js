@@ -31,10 +31,10 @@ import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { toastr } from "@docspace/shared/components/toast";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { size } from "@docspace/shared/utils";
 

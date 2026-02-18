@@ -27,7 +27,7 @@
 import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.light.svg?url";
 import EmptyScreenPluginsDarkUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.dark.svg?url";
 
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 
 import { PluginsEmptyScreen } from "../Plugins.types";
 import styles from "../Plugins.module.scss";

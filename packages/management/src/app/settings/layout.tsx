@@ -32,8 +32,8 @@ import { observer } from "mobx-react";
 import { usePathname, useRouter } from "next/navigation";
 import classNames from "classnames";
 
-import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
-import { Tabs, type TTabItem } from "@docspace/shared/components/tabs";
+import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
+import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,

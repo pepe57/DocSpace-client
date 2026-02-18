@@ -32,7 +32,7 @@ import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.a
 import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
 
 import { EmptyView } from "../../../empty-view";
-import { useTheme } from "../../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { match, P } from "ts-pattern";
 
 type Props = {

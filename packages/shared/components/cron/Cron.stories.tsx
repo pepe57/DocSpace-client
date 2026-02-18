@@ -24,16 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { DateTime } from "luxon";
 import { Meta, StoryObj } from "@storybook/react";
 import { useTranslation } from "react-i18next";
 
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
 
 import { Cron, getNextSynchronization } from ".";
-import { InputSize, InputType, TextInput } from "../text-input";
-import { Button, ButtonSize } from "../button";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/ui-kit/components/text-input";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import type { CronProps } from "./Cron.types";
 import { defaultCronString } from "./Cron.constants";
 
@@ -228,7 +232,7 @@ export default meta;
 export const Default: Story = {
   args: {
     locale: "en-GB",
-    timezone: moment.tz(moment.tz.guess()).format("Z"),
+    timezone: DateTime.local().toFormat("ZZ"),
   },
 
   render: ({ value: defaultValue = defaultCronString, locale, timezone }) => {

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import type { TEditorAIEvent, TEditorConnector } from "@/types";
 
 const requests: Record<string, { controller: AbortController }> = {};

@@ -28,10 +28,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { getDialogContent } from "./DeleteDialog.helper";
 import styles from "./DeleteDialog.module.scss";
