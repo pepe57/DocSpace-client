@@ -125,7 +125,7 @@
     "@types/utif": "3.0.5",
     "@vitest/coverage-v8": "4.0.17",
     "@vitest/ui": "4.0.17",
-    "copy-webpack-plugin": "9.1.0",
+    "copy-webpack-plugin": "12.0.2",
     "css-loader": "6.11.0",
     "i18next-http-backend": "2.6.2",
     "identity-obj-proxy": "3.0.0",
