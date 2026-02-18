@@ -2546,7 +2546,11 @@ class ContextOptionsStore {
         groupLabel: t("Common:Share"),
         groupIcon: ShareReactSvgUrl,
         itemKeys: [
-          [{ key: "copy-shared-link" }, { key: "manage-links" }],
+          [
+            { key: "link-for-room-members" },
+            { key: "copy-shared-link" },
+            { key: "manage-links" },
+          ],
           [{ key: "create-room" }],
         ],
         needsGrouping: true,
@@ -2596,7 +2600,11 @@ class ContextOptionsStore {
         groupLabel: t("Common:MoreOptions"),
         groupIcon: DotsHorizontalUrl,
         itemKeys: [
-          [{ key: "show-version-history" }, { key: "show-info" }],
+          [
+            { key: "show-version-history" },
+            { key: "show-info" },
+            { key: "embedding-settings" },
+          ],
           pluginItems.map((plug) => {
             return { key: plug.key };
           }),
@@ -2606,7 +2614,7 @@ class ContextOptionsStore {
       });
     }
 
-    let menuGroups = [];
+    const menuGroups = [];
     let keysToRemove = [];
 
     menuGroupsConfig.forEach((configItem) => {
@@ -2625,25 +2633,6 @@ class ContextOptionsStore {
 
     if (downloadOption && downloadAsOption) {
       keysToRemove.push("download-original");
-    }
-
-    const hasCopySharedLink = newOptions.some(
-      (option) => option.key === "copy-shared-link",
-    );
-    const linkForRoomMembers = newOptions.some(
-      (option) => option.key === "link-for-room-members",
-    );
-
-    if (hasCopySharedLink && linkForRoomMembers && menuGroups.length > 0) {
-      menuGroups = menuGroups.map((group) => {
-        if (group.key === "share" && Array.isArray(group.items)) {
-          const items = group.items.filter(
-            (i) => i.key !== "link-for-room-members",
-          );
-          return { ...group, items };
-        }
-        return group;
-      });
     }
 
     const resultOptions = newOptions.filter(
@@ -2688,7 +2677,7 @@ class ContextOptionsStore {
         ? [
             ["select", "open", "mark-read", "open-location"],
             ["share", "move", "copy-to", "download", "rename"],
-            ["mark-as-favorite", "link-for-room-members", "show-info"],
+            ["mark-as-favorite", "show-info"],
             ["restore"],
             ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
           ]
