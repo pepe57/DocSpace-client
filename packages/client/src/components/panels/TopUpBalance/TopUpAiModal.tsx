@@ -102,13 +102,13 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
           <div className={styles.modalBody}>
             <div className={modalStyles.transferSection}>
               <div className={modalStyles.transferBlock}>
-                <Text>{t("Payments:From")}</Text>
+                <Text>{t("Payments:TopUpFrom")}</Text>
 
                 <WalletInfo balance={balanceValue} />
               </div>
 
               <div className={modalStyles.transferBlock}>
-                <Text>{t("Payments:To")}</Text>
+                <Text>{t("Payments:TopUpTo")}</Text>
 
                 <WalletInfo
                   title={t("Services:OrganizationAI", {

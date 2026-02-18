@@ -20,7 +20,6 @@
   "FreeBackupsPerMonth": "Ücretsiz yedeklemeler: {{value}}/{{maxValue}} mevcut ay için.",
   "ImageGeneration": "Resim oluşturma",
   "ImageGenerationDescription": "Belgeleriniz için yapay zeka kullanarak özgün görseller ve çizimler tasarlayın.",
-  "NewAIfeatures": "Yeni yapay zeka özellikleri, daha hızlı, daha akıllı ve daha az çaba ile çalışmanıza yardımcı olmak için düzenli olarak eklenmektedir.",
   "OCR": "OCR",
   "OCRDescription": "Taranmış PDF'lerden ve resimlerden metin tanıyın ve çıkarın.",
   "Summarization": "Özetleme",

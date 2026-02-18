@@ -20,7 +20,6 @@
   "FreeBackupsPerMonth": "Sao lưu miễn phí: {{value}}/{{maxValue}} mỗi tháng hiện tại.",
   "ImageGeneration": "Tạo ảnh",
   "ImageGenerationDescription": "Thiết kế hình ảnh và minh họa độc đáo bằng AI cho tài liệu của bạn.",
-  "NewAIfeatures": "Các tính năng AI mới được bổ sung thường xuyên để giúp bạn làm việc nhanh hơn, thông minh hơn và với ít nỗ lực hơn.",
   "OCR": "OCR",
   "OCRDescription": "Nhận diện và trích xuất văn bản từ các tệp PDF và hình ảnh đã quét.",
   "Summarization": "Tóm tắt",

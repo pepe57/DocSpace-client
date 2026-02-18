@@ -49,6 +49,6 @@ const TopUpContainer = (props: TopUpContainerTypes) => {
   ) : null;
 };
 
-export default inject(({}: TStore) => {
+export default inject((_store: TStore) => {
   return {};
 })(observer(TopUpContainer));

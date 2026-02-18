@@ -20,7 +20,6 @@
   "FreeBackupsPerMonth": "Bezplatné zálohy: {{value}}/{{maxValue}} za aktuální měsíc.",
   "ImageGeneration": "Generování obrázků",
   "ImageGenerationDescription": "Navrhněte originální obrázky a ilustrace pomocí AI pro vaše dokumenty.",
-  "NewAIfeatures": "Do umělé inteligence jsou pravidelně přidávány nové funkce, které vám pomohou pracovat rychleji, chytřeji a s menší námahou.",
   "OCR": "OCR",
   "OCRDescription": "Rozpoznávejte a extrahujte text z naskenovaných PDF a obrázků.",
   "Summarization": "Shrnutí",

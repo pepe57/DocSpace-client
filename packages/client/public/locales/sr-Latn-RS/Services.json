@@ -20,7 +20,6 @@
   "FreeBackupsPerMonth": "Besplatni bekapi: {{value}}/{{maxValue}} u trenutnom mesecu.",
   "ImageGeneration": "Generisanje slika",
   "ImageGenerationDescription": "Dizajnirajte originalne slike i ilustracije koristeći AI za svoje dokumente.",
-  "NewAIfeatures": "Nove AI funkcije se redovno dodaju kako bi vam pomogle da radite brže, pametnije i sa manje napora.",
   "OCR": "OCR",
   "OCRDescription": "Prepoznajte i izdvojite tekst iz skeniranih PDF-ova i slika.",
   "Summarization": "Sažimanje",

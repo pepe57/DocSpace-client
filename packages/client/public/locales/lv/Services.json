@@ -20,7 +20,6 @@
   "FreeBackupsPerMonth": "Bezvērtīgi dubultniekopi: {{value}}/{{maxValue}} par šo mēnesi.",
   "ImageGeneration": "Attēlu ģenerēšana",
   "ImageGenerationDescription": "Izveidojiet oriģinālus attēlus un ilustrācijas, izmantojot AI, saviem dokumentiem.",
-  "NewAIfeatures": "Jaunās AI funkcijas tiek regulāri pievienotas, lai palīdzētu jums strādāt ātrāk, viedāk un ar mazākiem pūliem.",
   "OCR": "OCR",
   "OCRDescription": "Atpazīstiet un izvilciet tekstu no skenētu PDF failu un attēlu.",
   "Summarization": "Kopsavilkums",

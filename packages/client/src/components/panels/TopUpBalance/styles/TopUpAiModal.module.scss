@@ -13,7 +13,7 @@
 }
 
 .transferCard {
-  background: #f8f9f9;
+  background: var(--payment-background-color);
   border-radius: 6px;
   padding: 16px;
   display: flex;
@@ -26,7 +26,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #eceef1;
+  background: var(--payment-icon-background);
   display: flex;
   align-items: center;
   justify-content: center;

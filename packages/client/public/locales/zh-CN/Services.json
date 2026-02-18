@@ -20,7 +20,6 @@
   "FreeBackupsPerMonth": "免费备份额度：每月 {{value}}/{{maxValue}}。",
   "ImageGeneration": "图像生成",
   "ImageGenerationDescription": "使用 AI 为您的文档设计原创图像和插图。",
-  "NewAIfeatures": "定期新增 AI 功能，帮助您更快速、更智能、更轻松地工作。",
   "OCR": "OCR 文字识别",
   "OCRDescription": "识别并提取扫描 PDF 和图像中的文本。",
   "Summarization": "摘要生成",

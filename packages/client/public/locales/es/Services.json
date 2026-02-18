@@ -20,7 +20,6 @@
   "FreeBackupsPerMonth": "Copias de seguridad gratuitas: {{value}}/{{maxValue}} por mes actual.",
   "ImageGeneration": "Generación de imágenes",
   "ImageGenerationDescription": "Diseñe imágenes e ilustraciones originales utilizando la IA para sus documentos.",
-  "NewAIfeatures": "Periódicamente se añaden nuevas funciones de IA para ayudarle a trabajar de forma más rápida, inteligente y con menos esfuerzo.",
   "OCR": "OCR",
   "OCRDescription": "Reconozca y extraiga texto de PDF e imágenes escaneados.",
   "Summarization": "Resumen",

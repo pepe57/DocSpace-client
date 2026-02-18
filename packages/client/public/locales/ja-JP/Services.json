@@ -20,7 +20,6 @@
   "FreeBackupsPerMonth": "今月の無料バックアップ: {{value}}/{{maxValue}}",
   "ImageGeneration": "画像生成",
   "ImageGenerationDescription": "文書用にAIを活用したオリジナル画像やイラストをデザインする。",
-  "NewAIfeatures": "新しいAI機能が定期的に追加され、より速く、よりスマートに、より少ない労力で作業できるよう支援する。",
   "OCR": "OCR",
   "OCRDescription": "スキャンしたPDFや画像からテキストを認識・抽出する。",
   "Summarization": "要約生成",

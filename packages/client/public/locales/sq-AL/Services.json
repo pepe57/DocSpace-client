@@ -20,7 +20,6 @@
   "FreeBackupsPerMonth": "Backup falas: {{value}}/{{maxValue}} për muajin aktual.",
   "ImageGeneration": "Gjenerimi i imazhit",
   "ImageGenerationDescription": "Dizenjoni imazhe dhe ilustrime origjinale duke përdorur inteligjencën artificiale për dokumentet tuaja.",
-  "NewAIfeatures": "Karakteristika të reja të inteligjencës artificiale shtohen rregullisht për t'ju ndihmuar të punoni më shpejt, më me zgjuarsi dhe me më pak përpjekje.",
   "OCR": "OCR",
   "OCRDescription": "Njoh dhe nxirr tekstin nga PDF-të dhe imazhet e skanuara.",
   "Summarization": "Përmbledhje",

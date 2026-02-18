@@ -20,7 +20,6 @@
   "FreeBackupsPerMonth": "무료 백업: {{value}}/{{maxValue}} (이번 달 기준).",
   "ImageGeneration": "이미지 생성",
   "ImageGenerationDescription": "문서에 사용할 AI를 사용하여 독창적인 이미지와 삽화를 디자인하세요.",
-  "NewAIfeatures": "새로운 AI 기능은 작업을 더 빠르고, 더 스마트하게, 그리고 더 적은 노력으로 수행할 수 있도록 정기적으로 추가됩니다.",
   "OCR": "OCR",
   "OCRDescription": "스캔한 PDF 및 이미지에서 텍스트를 인식하고 추출합니다.",
   "Summarization": "요약",

@@ -20,7 +20,6 @@
   "FreeBackupsPerMonth": "Kostenlose Backups: {{value}}/{{maxValue}} pro Monat.",
   "ImageGeneration": "Bildgenerierung",
   "ImageGenerationDescription": "Entwerfen Sie mithilfe von KI originelle Bilder und Illustrationen für Ihre Dokumente.",
-  "NewAIfeatures": "Es werden regelmäßig neue KI-Funktionen hinzugefügt, die Ihnen helfen, schneller, intelligenter und mit weniger Aufwand zu arbeiten.",
   "OCR": "OCR",
   "OCRDescription": "Erkennen und extrahieren Sie Text aus gescannten PDFs und Bildern.",
   "Summarization": "Zusammenfassung",

@@ -20,7 +20,6 @@
   "FreeBackupsPerMonth": "Ilmaiset varmuuskopiot: {{value}}/{{maxValue}} nykyisenä kuukautena.",
   "ImageGeneration": "Kuvan generointi",
   "ImageGenerationDescription": "Suunnittele alkuperäisiä kuvia ja kuvituksia tekoälyn avulla asiakirjoihisi.",
-  "NewAIfeatures": "Uusia tekoälyominaisuuksia lisätään säännöllisesti, jotta voit työskennellä nopeammin, älykkäämmin ja pienemmällä vaivalla.",
   "OCR": "OCR",
   "OCRDescription": "Tunnista ja poimi teksti skannatuista PDF-tiedostoista ja kuvista.",
   "Summarization": "Yhteenveto",
