@@ -477,7 +477,7 @@ jobs:
             -e GITHUB_RUN_ID="${{ github.run_id }}" \
             -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
             client-tests \
-            pnpm exec playwright test
+            pnpm exec playwright test --workers=4 --retries=0
         continue-on-error: true
       - name: Extract Playwright report
         if: always()
@@ -536,7 +536,7 @@ jobs:
             -e GITHUB_RUN_ID="${{ github.run_id }}" \
             -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
             login-tests \
-            pnpm exec playwright test
+            pnpm exec playwright test --workers=4 --retries=0
         continue-on-error: true
       - name: Extract Playwright report
         if: always()
@@ -595,7 +595,7 @@ jobs:
             -e GITHUB_RUN_ID="${{ github.run_id }}" \
             -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
             doceditor-tests \
-            pnpm exec playwright test
+            pnpm exec playwright test --workers=4 --retries=0
         continue-on-error: true
       - name: Extract Playwright report
         if: always()
@@ -654,7 +654,7 @@ jobs:
             -e GITHUB_RUN_ID="${{ github.run_id }}" \
             -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
             sdk-tests \
-            pnpm exec playwright test
+            pnpm exec playwright test --workers=4 --retries=0
         continue-on-error: true
       - name: Extract Playwright report
         if: always()
@@ -713,7 +713,7 @@ jobs:
             -e GITHUB_RUN_ID="${{ github.run_id }}" \
             -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
             management-tests \
-            pnpm exec playwright test
+            pnpm exec playwright test --workers=4 --retries=0
         continue-on-error: true
       - name: Extract Playwright report
         if: always()
