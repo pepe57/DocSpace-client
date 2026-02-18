@@ -478,6 +478,13 @@ jobs:
             GITHUB_WORKFLOW=${{ github.workflow }}
             GITHUB_RUN_ID=${{ github.run_id }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-client
+          path: playwright-report/client/
+          retention-days: 7
 
   # Playwright Login tests
   playwright-login:
@@ -513,6 +520,13 @@ jobs:
             GITHUB_WORKFLOW=${{ github.workflow }}
             GITHUB_RUN_ID=${{ github.run_id }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-login
+          path: playwright-report/login/
+          retention-days: 7
 
   # Playwright Doceditor tests
   playwright-doceditor:
@@ -548,6 +562,13 @@ jobs:
             GITHUB_WORKFLOW=${{ github.workflow }}
             GITHUB_RUN_ID=${{ github.run_id }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-doceditor
+          path: playwright-report/doceditor/
+          retention-days: 7
 
   # Playwright SDK tests
   playwright-sdk:
@@ -583,6 +604,13 @@ jobs:
             GITHUB_WORKFLOW=${{ github.workflow }}
             GITHUB_RUN_ID=${{ github.run_id }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-sdk
+          path: playwright-report/sdk/
+          retention-days: 7
 
   # Playwright Management tests
   playwright-management:
@@ -618,6 +646,13 @@ jobs:
             GITHUB_WORKFLOW=${{ github.workflow }}
             GITHUB_RUN_ID=${{ github.run_id }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-management
+          path: playwright-report/management/
+          retention-days: 7
 
   # Summary job to report overall status
   test-summary:
