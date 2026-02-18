@@ -37,11 +37,12 @@ const Dropzone = ({
   isLoading,
   isDisabled,
   dataTestId,
+  isEmptyList,
 }: PluginDropzoneProps) => {
   const { t } = useTranslation(["Article", "Common"]);
 
   return (
-    <div>
+    <div className={styles.dropzoneWrapper}>
       <DropzoneComponent
         className={styles.dropzone}
         isDisabled={isDisabled}
@@ -53,9 +54,11 @@ const Dropzone = ({
         exstsText="(ZIP)"
         dataTestId={dataTestId}
       />
-      <Text fontSize="12px" className={styles.dropzoneWarningDescription}>
-        {t("WebPlugins:PluginCacheWarningDescription")}
-      </Text>
+      {!isEmptyList ? (
+        <Text fontSize="12px" className={styles.dropzoneWarningDescription}>
+          {t("WebPlugins:PluginCacheWarningDescription")}
+        </Text>
+      ) : null}
     </div>
   );
 };

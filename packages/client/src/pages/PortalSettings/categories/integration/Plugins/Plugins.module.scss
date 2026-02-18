@@ -134,6 +134,9 @@
   }
 }
 
+.dropzoneWrapper {
+  width: 100%;
+
   .dropzone {
     margin-bottom: 8px;
     height: 135px;
@@ -142,6 +145,7 @@
   .dropzoneWarningDescription {
     color: var(--text-disable-color);
   }
+}
 
 .emptyScreen {
   :global {

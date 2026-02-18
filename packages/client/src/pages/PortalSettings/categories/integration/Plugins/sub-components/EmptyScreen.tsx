@@ -69,6 +69,7 @@ const EmptyScreen = ({
           <Dropzone
             isDisabled={!withUpload}
             isLoading={false}
+            isEmptyList
             onDrop={onDrop}
             dataTestId="upload_plugin_dropzone"
           />
