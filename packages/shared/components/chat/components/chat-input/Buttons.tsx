@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -32,87 +31,87 @@ import { useTranslation } from "react-i18next";
 import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
 import AttachmentReactSvgUrl from "PUBLIC_DIR/images/attachment.react.svg?url";
 
-import { IconButton } from "../../../icon-button";
-import { TooltipContainer } from "../../../tooltip";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import { useMessageStore } from "../../store/messageStore";
 
-import { ButtonsProps } from "../../Chat.types";
+import type { ButtonsProps } from "../../Chat.types";
 
 import styles from "./ChatInput.module.scss";
 import ToolsSettings from "./ToolsSettings";
 
 const Buttons = ({
-  isFilesSelectorVisible,
-  toggleFilesSelector,
-  sendMessageAction,
-  value,
-  selectedModel,
-  toolsSettings,
-  isAdmin,
-  aiReady,
+	isFilesSelectorVisible,
+	toggleFilesSelector,
+	sendMessageAction,
+	value,
+	selectedModel,
+	toolsSettings,
+	isAdmin,
+	aiReady,
 }: ButtonsProps) => {
-  const { isRequestRunning, stopMessage } = useMessageStore();
+	const { isRequestRunning, stopMessage } = useMessageStore();
 
-  const { t } = useTranslation(["Common"]);
+	const { t } = useTranslation(["Common"]);
 
-  const isSendButtonDisabled = !isRequestRunning
-    ? !value.trim() || !selectedModel
-    : false;
+	const isSendButtonDisabled = !isRequestRunning
+		? !value.trim() || !selectedModel
+		: false;
 
-  const sendIconProps = !isRequestRunning
-    ? {
-        onClick: sendMessageAction,
-        isDisabled: isSendButtonDisabled,
-        iconNode: null,
-      }
-    : {
-        onClick: stopMessage,
-        isDisabled: false,
-        iconNode: <div className={styles.square} />,
-      };
+	const sendIconProps = !isRequestRunning
+		? {
+				onClick: sendMessageAction,
+				isDisabled: isSendButtonDisabled,
+				iconNode: null,
+			}
+		: {
+				onClick: stopMessage,
+				isDisabled: false,
+				iconNode: <div className={styles.square} />,
+			};
 
-  const onAttachmentToggleClick = () => {
-    if (!aiReady) return;
+	const onAttachmentToggleClick = () => {
+		if (!aiReady) return;
 
-    toggleFilesSelector();
-  };
+		toggleFilesSelector();
+	};
 
-  return (
-    <div className={styles.chatInputButtons} data-testid="chat-input-buttons">
-      <div className={styles.chatInputButtonsTools}>
-        <TooltipContainer
-          as="div"
-          title={t("AddFiles")}
-          className={classNames(styles.chatInputButton, {
-            [styles.activeChatInputButton]: isFilesSelectorVisible,
-            [styles.disabled]: !aiReady,
-          })}
-          onClick={onAttachmentToggleClick}
-        >
-          <IconButton
-            iconName={AttachmentReactSvgUrl}
-            size={16}
-            isFill={false}
-            isDisabled={!aiReady}
-            className={classNames({ [styles.disabled]: !aiReady })}
-            data-testid="chat-input-attachment-button"
-          />
-        </TooltipContainer>
-        <ToolsSettings {...toolsSettings} isAdmin={isAdmin} aiReady={aiReady} />
-      </div>
-      <IconButton
-        iconName={SendReactSvgUrl}
-        size={16}
-        isClickable
-        className={classNames(styles.chatInputButtonsSend, {
-          [styles.disabled]: isSendButtonDisabled,
-        })}
-        {...sendIconProps}
-        data-testid="chat-input-send-button"
-      />
-    </div>
-  );
+	return (
+		<div className={styles.chatInputButtons} data-testid="chat-input-buttons">
+			<div className={styles.chatInputButtonsTools}>
+				<TooltipContainer
+					as="div"
+					title={t("AddFiles")}
+					className={classNames(styles.chatInputButton, {
+						[styles.activeChatInputButton]: isFilesSelectorVisible,
+						[styles.disabled]: !aiReady,
+					})}
+					onClick={onAttachmentToggleClick}
+				>
+					<IconButton
+						iconName={AttachmentReactSvgUrl}
+						size={16}
+						isFill={false}
+						isDisabled={!aiReady}
+						className={classNames({ [styles.disabled]: !aiReady })}
+						data-testid="chat-input-attachment-button"
+					/>
+				</TooltipContainer>
+				<ToolsSettings {...toolsSettings} isAdmin={isAdmin} aiReady={aiReady} />
+			</div>
+			<IconButton
+				iconName={SendReactSvgUrl}
+				size={16}
+				isClickable
+				className={classNames(styles.chatInputButtonsSend, {
+					[styles.disabled]: isSendButtonDisabled,
+				})}
+				{...sendIconProps}
+				data-testid="chat-input-send-button"
+			/>
+		</div>
+	);
 };
 
 export default observer(Buttons);

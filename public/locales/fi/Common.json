@@ -1049,5 +1049,7 @@
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
   "YourTurn": "Sinun vuorosi",
-  "ExternalLink": "Ulkoinen linkki"
+  "ExternalLink": "Ulkoinen linkki",
+  "TitleShowFolderActions": "Kansion toiminnot",
+  "TitleShowActions": "Toimenpiteet"
 }

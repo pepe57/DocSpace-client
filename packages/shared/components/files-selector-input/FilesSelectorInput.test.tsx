@@ -51,7 +51,7 @@ vi.mock("../../selectors/Files", () => ({
   default: mocks.FilesSelectorMock,
 }));
 
-vi.mock("@docspace/shared/components/file-input", () => ({
+vi.mock("@docspace/ui-kit/components/file-input", () => ({
   __esModule: true,
   FileInput: mocks.FileInputMock,
 }));

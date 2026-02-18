@@ -26,25 +26,22 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Heading } from "@docspace/shared/components/heading";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Heading } from "@docspace/ui-kit/components/heading";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
 
-import {
-  TAiProvider,
-  TDefaultProvider,
-  TModel,
-} from "@docspace/shared/api/ai/types";
-import { getAiModelName } from "@docspace/shared/utils/ai";
+import { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
+import { TTranslation } from "@docspace/shared/types";
 
 import styles from "../AISettings.module.scss";
 import { inject, observer } from "mobx-react";
 import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import classNames from "classnames";
 
 type DefaultProviderProps = {
   aiProviders?: AISettingsStore["aiProviders"];
@@ -54,28 +51,30 @@ type DefaultProviderProps = {
   fetchDefaultProviderModels?: AISettingsStore["fetchDefaultProviderModels"];
   isDefaultProviderModelsLoading?: AISettingsStore["isDefaultProviderModelsLoading"];
   changeDefaultProvider?: AISettingsStore["changeDefaultProvider"];
+  defaultProviderModelsError?: AISettingsStore["defaultProviderModelsError"];
+  defaultProviderInitied?: AISettingsStore["defaultProviderInitied"];
 };
 
-const getSelectedProvider = (
+const getSelectedProviderOption = (
   aiProviders?: TAiProvider[],
-  defaultProvider?: TDefaultProvider | null,
+  selectedProviderId?: number | null,
 ): TOption => {
-  if (!aiProviders || !defaultProvider) return { key: "", label: "" };
+  if (!aiProviders || !selectedProviderId) return { key: "-2", label: "" };
 
   const provider =
-    aiProviders.find((p) => p.id === defaultProvider.providerId) ||
-    aiProviders[0];
+    aiProviders.find((p) => p.id === selectedProviderId) || aiProviders[0];
   return { key: provider?.id, label: provider.title };
 };
 
-const getSelectedModel = (
+const getSelectedModelOption = (
+  t: TTranslation,
   models?: TModel[] | null,
-  defaultProvider?: TDefaultProvider | null,
+  selectedModelId?: string | null,
 ): TOption => {
-  if (!models || !defaultProvider) return { key: "", label: "" };
+  if (!models || !selectedModelId)
+    return { key: "-2", label: t("Common:NoModelsFound") };
 
-  const model =
-    models.find((m) => m.modelId === defaultProvider.defaultModel) || models[0];
+  const model = models.find((m) => m.modelId === selectedModelId) || models[0];
 
   return { key: model.modelId, label: model.name };
 };
@@ -87,19 +86,21 @@ const DefaultProviderComponent = ({
   fetchDefaultProviderModels,
   isDefaultProviderModelsLoading,
   changeDefaultProvider,
+  defaultProviderModelsError,
+  defaultProviderInitied,
 }: DefaultProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
-  const [selectedProvider, setSelectedProvider] = useState<TOption | null>(() =>
-    getSelectedProvider(aiProviders, defaultProvider),
+  const [selectedProviderId, setSelectedProviderId] = useState<number | null>(
+    defaultProvider?.providerId || null,
   );
-  const [selectedModel, setSelectedModel] = useState<TOption | null>(() =>
-    getSelectedModel(defaultProviderModels, defaultProvider),
+  const [selectedModelId, setSelectedModelId] = useState<string | null>(
+    defaultProvider?.defaultModel || null,
   );
   const [isSaveRequestRunning, setIsSaveRequestRunning] = useState(false);
+  const prevDefaultProviderInitiedRef = useRef(defaultProviderInitied);
 
-  const isProviderChanged =
-    selectedProvider?.key !== defaultProvider?.providerId;
-  const isModelChanged = selectedModel?.key !== defaultProvider?.defaultModel;
+  const isProviderChanged = selectedProviderId !== defaultProvider?.providerId;
+  const isModelChanged = selectedModelId !== defaultProvider?.defaultModel;
 
   const getProviderOptions = () => {
     return (
@@ -117,16 +118,26 @@ const DefaultProviderComponent = ({
     );
   };
 
+  const selectedProviderOption = getSelectedProviderOption(
+    aiProviders,
+    selectedProviderId,
+  );
+  const selectedModelOption = getSelectedModelOption(
+    t,
+    defaultProviderModels,
+    selectedModelId,
+  );
+
   const onSave = async () => {
-    if (!selectedProvider || !selectedModel) return;
+    if (!selectedProviderId || !selectedModelId) return;
 
     setIsSaveRequestRunning(true);
     const data = {
-      providerId: selectedProvider.key as number,
-      defaultModel: selectedModel.key as string,
+      providerId: selectedProviderId,
+      defaultModel: selectedModelId,
     };
 
-    await changeDefaultProvider?.(data);
+    await changeDefaultProvider?.(data, t);
 
     setIsSaveRequestRunning(false);
   };
@@ -134,15 +145,9 @@ const DefaultProviderComponent = ({
   const onCancel = () => {
     if (!defaultProvider) return;
 
-    setSelectedProvider({
-      key: defaultProvider.providerId,
-      label: defaultProvider.providerTitle,
-    });
+    setSelectedProviderId(defaultProvider.providerId);
 
-    setSelectedModel({
-      key: defaultProvider.defaultModel,
-      label: getAiModelName(defaultProvider.defaultModel),
-    });
+    setSelectedModelId(defaultProvider.defaultModel);
 
     if (isProviderChanged) {
       fetchDefaultProviderModels?.(defaultProvider.providerId);
@@ -150,28 +155,54 @@ const DefaultProviderComponent = ({
   };
 
   const onSelectProvider = async (option: TOption) => {
-    if (option.key === selectedProvider?.key) return;
+    if (option.key === selectedProviderId) return;
 
-    setSelectedProvider(option);
+    setSelectedProviderId(option.key as number);
 
-    const models = await fetchDefaultProviderModels?.(option.key as number);
-    setSelectedModel(getSelectedModel(models, defaultProvider));
+    const models =
+      (await fetchDefaultProviderModels?.(option.key as number)) || [];
+    const hasDefaultModel =
+      defaultProvider?.defaultModel &&
+      models.some((m) => m.modelId === defaultProvider.defaultModel);
+    const newModelId = hasDefaultModel
+      ? defaultProvider.defaultModel
+      : models[0]?.modelId;
+    setSelectedModelId(newModelId || null);
   };
 
   const onSelectModel = (option: TOption) => {
-    if (option.key === selectedModel?.key) return;
+    if (option.key === selectedModelId) return;
 
-    setSelectedModel(option);
+    setSelectedModelId(option.key as string);
   };
 
   const isSaveDisabled =
-    (!isProviderChanged && !isModelChanged) || isDefaultProviderModelsLoading;
+    (!isProviderChanged && !isModelChanged) ||
+    isDefaultProviderModelsLoading ||
+    !defaultProviderModels;
   const isCancelDisabled =
-    (!isProviderChanged && !isModelChanged) || isDefaultProviderModelsLoading;
+    (!isProviderChanged && !isModelChanged) ||
+    isDefaultProviderModelsLoading ||
+    !defaultProviderModels;
 
-  if (!selectedProvider || !selectedModel) {
-    return null;
-  }
+  useEffect(() => {
+    const isNewInit =
+      defaultProviderInitied === true &&
+      prevDefaultProviderInitiedRef.current === false;
+
+    if (isNewInit) {
+      setSelectedProviderId(defaultProvider?.providerId || null);
+      setSelectedModelId(defaultProvider?.defaultModel || null);
+    }
+
+    prevDefaultProviderInitiedRef.current = defaultProviderInitied;
+  }, [
+    defaultProviderInitied,
+    aiProviders,
+    defaultProvider,
+    defaultProviderModels,
+    t,
+  ]);
 
   return (
     <div className={styles.defaultProvider}>
@@ -198,10 +229,16 @@ const DefaultProviderComponent = ({
           isVertical
           labelText={t("AISettings:Provider")}
           removeMargin
+          hasError={!!defaultProviderModelsError}
+          errorMessage={defaultProviderModelsError || ""}
+          errorMessageWidth="100%"
         >
           <ComboBox
+            className={classNames({
+              [styles.hasError]: !!defaultProviderModelsError,
+            })}
             options={getProviderOptions()}
-            selectedOption={selectedProvider}
+            selectedOption={selectedProviderOption}
             displayArrow
             onSelect={onSelectProvider}
             displaySelectedOption
@@ -219,13 +256,14 @@ const DefaultProviderComponent = ({
         >
           <ComboBox
             options={getModelOptions()}
-            selectedOption={selectedModel}
+            selectedOption={selectedModelOption}
             displayArrow
             onSelect={onSelectModel}
             displaySelectedOption
             dataTestId="default-model-combobox"
             dropDownTestId="default-model-dropdown"
             isLoading={isDefaultProviderModelsLoading}
+            isDisabled={!defaultProviderModels}
             directionY="both"
             dropDownMaxHeight={300}
           />
@@ -266,5 +304,7 @@ export const DefaultProvider = inject(({ aiSettingsStore }: TStore) => {
     isDefaultProviderModelsLoading:
       aiSettingsStore.isDefaultProviderModelsLoading,
     changeDefaultProvider: aiSettingsStore.changeDefaultProvider,
+    defaultProviderModelsError: aiSettingsStore.defaultProviderModelsError,
+    defaultProviderInitied: aiSettingsStore.defaultProviderInitied,
   };
 })(observer(DefaultProviderComponent));

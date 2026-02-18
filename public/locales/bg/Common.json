@@ -1049,5 +1049,7 @@
   "YourCurrentDomain": "Вашият текущ домейн",
   "YourLogo": "Вашето лого",
   "YourTurn": "Ваш ред",
-  "ExternalLink": "Външна връзка"
+  "ExternalLink": "Външна връзка",
+  "TitleShowFolderActions": "Покажи действията за папки",
+  "TitleShowActions": "Покажи действията за файлове"
 }

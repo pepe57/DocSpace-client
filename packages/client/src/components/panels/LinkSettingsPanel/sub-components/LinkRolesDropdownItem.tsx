@@ -26,7 +26,7 @@
 
 import classNames from "classnames";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Badge } from "@docspace/shared/components/badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { LinkRolesDropdownItemProps } from "../LinkSettingsPanel.types";
 import styles from "./LinkRolesDropdown.module.scss";
 

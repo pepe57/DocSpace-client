@@ -25,17 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 // import "@docspace/shared/utils/wdyr";
-import React from "react";
+import React, { useState } from "react";
 import { I18nextProvider } from "react-i18next";
 import { RouterProvider } from "react-router";
 import { Provider as MobxProvider } from "mobx-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import "@docspace/ui-kit/components/theme-provider/ThemeProvider.scss";
+
 import store from "SRC_DIR/store";
 
 import "@docspace/shared/polyfills/broadcastchannel";
 
-import "@docspace/shared/styles/custom.scss";
+import "./custom.scss";
 
 import ThemeProvider from "./components/ThemeProviderWrapper";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
@@ -44,17 +46,20 @@ import router from "./router";
 
 import i18n from "./i18n";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-      staleTime: 5 * 60 * 1000,
-    },
-  },
-});
-
 const App = () => {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            retry: 1,
+            staleTime: 5 * 60 * 1000,
+          },
+        },
+      }),
+  );
+
   React.useEffect(() => {
     const regex = /(\/){2,}/g;
     const replaceRegex = /(\/)+/g;

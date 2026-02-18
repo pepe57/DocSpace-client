@@ -33,13 +33,19 @@ import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import moment from "moment";
 
-import { Badge } from "@docspace/shared/components/badge";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import { Text } from "@docspace/shared/components/text";
+import { Badge } from "@docspace/ui-kit/components/badge";
+import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
+import { Text } from "@docspace/ui-kit/components/text";
 import { TDefaultTemplateItem } from "@docspace/shared/types";
 import { UrlActionType } from "@docspace/shared/enums";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import {
+  getCorrectDate,
+  getTitleWithoutExtension,
+  getUpperCaseExtension,
+} from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";
 import { ResetTemplateDialog } from "SRC_DIR/components/dialogs";
@@ -55,6 +61,8 @@ type Props = {
   getFilterParam?: TStore["defaultTemplatesStore"]["getFilterParam"];
   openUrl?: TStore["settingsStore"]["openUrl"];
   uploadTemplate?: TStore["defaultTemplatesStore"]["uploadTemplate"];
+  openDocEditor?: TStore["filesStore"]["openDocEditor"];
+  culture?: TStore["settingsStore"]["culture"];
   index?: number;
 };
 
@@ -66,6 +74,8 @@ const TemplatesRow = ({
   resetTemplate,
   openUrl,
   uploadTemplate,
+  openDocEditor,
+  culture,
   index,
 }: Props) => {
   const { t } = useTranslation(["Settings", "EmptyView", "Common"]);
@@ -107,8 +117,7 @@ const TemplatesRow = ({
         {
           key: "preview",
           label: t("Common:Preview"),
-          onClick: () =>
-            window.open(`/doceditor?fileId=${item.id}&action=view`, "_blank"),
+          onClick: () => openDocEditor?.(item.id, true),
           disabled: false,
           icon: EyeIcon,
         },
@@ -136,20 +145,21 @@ const TemplatesRow = ({
   };
 
   const onResetFile = () => {
-    resetTemplate?.(item.extension);
+    resetTemplate?.(item.fileExst);
     setIsDialogVisible(false);
   };
 
-  const icon = getFileIcon?.(item.extension);
+  const icon = getFileIcon?.(item.fileExst);
 
   const badgeBackgroundColor = item.isModified
     ? "var(--modified-badge-active-background-color)"
     : "var(--modified-badge-background-color)";
 
-  const filterParam = getFilterParam?.(item.extension);
+  const filterParam = getFilterParam?.(item.fileExst);
 
+  const locale = getCookie(LANGUAGE) ?? culture ?? "en";
   const lastModified = item.lastModified
-    ? moment(item.lastModified).format("MM/DD/YYYY hh:mm A")
+    ? getCorrectDate(locale, item.lastModified)
     : t("Settings:NotModified");
 
   return (
@@ -160,9 +170,9 @@ const TemplatesRow = ({
       <input
         ref={fileInputRef}
         type="file"
-        accept={item.extension}
+        accept={item.fileExst}
         style={{ display: "none" }}
-        onChange={(event) => uploadTemplate?.(event, item.extension)}
+        onChange={(event) => uploadTemplate?.(event, item.fileExst)}
       />
       <ResetTemplateDialog
         isVisible={isDialogVisible}
@@ -173,7 +183,7 @@ const TemplatesRow = ({
       <div className={styles.rowContent}>
         <div className={styles.mainContent}>
           <Text fontWeight={600} fontSize="13px" truncate>
-            {item.title}
+            {getTitleWithoutExtension(item, false)}
           </Text>
           <Text
             className={styles.modifiedText}
@@ -183,7 +193,7 @@ const TemplatesRow = ({
             fontWeight={600}
             truncate
           >
-            {lastModified}
+            {lastModified} | {getUpperCaseExtension(item.fileExst)}
           </Text>
         </div>
 
@@ -213,7 +223,11 @@ const TemplatesRow = ({
           onClose={() => setIsSelectorVisible(false)}
           acceptButtonLabel={t("Common:SelectAction")}
           isMultiSelect={false}
+          withRecentTreeFolder
+          withFavoritesTreeFolder
+          withAIAgentsTreeFolder
           openRoot
+          isSelect
         />
       ) : null}
     </div>
@@ -221,12 +235,19 @@ const TemplatesRow = ({
 };
 
 export default inject(
-  ({ filesSettingsStore, defaultTemplatesStore, settingsStore }: TStore) => {
+  ({
+    filesSettingsStore,
+    defaultTemplatesStore,
+    settingsStore,
+    filesStore,
+  }: TStore) => {
     const { getFileIcon } = filesSettingsStore;
     const { setTemplate, getFilterParam, resetTemplate, uploadTemplate } =
       defaultTemplatesStore;
 
-    const { openUrl } = settingsStore;
+    const { openUrl, culture } = settingsStore;
+
+    const { openDocEditor } = filesStore;
 
     return {
       getFileIcon,
@@ -235,6 +256,8 @@ export default inject(
       resetTemplate,
       openUrl,
       uploadTemplate,
+      culture,
+      openDocEditor,
     };
   },
 )(observer(TemplatesRow));

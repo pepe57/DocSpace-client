@@ -35,21 +35,22 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
-import { Text } from "../text";
-import { toastr } from "../toast";
-import { Button } from "../button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button } from "@docspace/ui-kit/components/button";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
+
 import { buildDataTestId, getOAuthToken } from "../../utils/common";
-import { ComboBox } from "../combobox";
 import { saveSettingsThirdParty } from "../../api/files";
 import { THIRD_PARTY_SERVICES_URL } from "../../constants";
 import { DropDownItem } from "../drop-down-item";
-import { ContextMenuButton } from "../context-menu-button";
 import { DeleteThirdPartyDialog } from "../../dialogs/delete-third-party";
 import { FilesSelectorInput } from "../files-selector-input";
 import { isNullOrUndefined } from "../../utils/typeGuards";
-import { IconButton } from "../icon-button";
 import { useDidMount } from "../../hooks/useDidMount";
-import { useUnmount } from "../../hooks/useUnmount";
 import type { ConnectedThirdPartyAccountType } from "../../types";
 
 import { initialState } from "./DirectThirdPartyConnection.constants";

@@ -25,7 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { type FC } from "react";
-import { ComboBox, ComboBoxSize, type TOption } from "../../combobox";
+import {
+  ComboBox,
+  ComboBoxSize,
+  type TOption,
+} from "@docspace/ui-kit/components/combobox";
 
 import { IconDisplay } from "./IconDisplay";
 

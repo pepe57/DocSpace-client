@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { type FC, useId, useState } from "react";
-import moment from "moment";
+import { type FC, useId } from "react";
 import { useTranslation } from "react-i18next";
+import type { DateTime } from "luxon";
 
-import { DateTimePicker } from "../../components/date-time-picker";
-import type { Nullable } from "../../types";
+import { DateTimePicker } from "@docspace/ui-kit/components/date-time-picker";
+import { subtractFromDate, now } from "@docspace/ui-kit/utils/date";
 
 import ToggleBlock from "./ToggleBlock";
 import type { LimitTimeBlockProps } from "./EditLinkPanel.types";
@@ -50,12 +50,12 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
 
   const { t } = useTranslation(["Common"]);
 
-  const onChange = (date: Nullable<moment.Moment>) => {
+  const onChange = (date: DateTime | null) => {
     const expired = date
-      ? moment(date).toDate().getTime() <= new Date().getTime()
+      ? date.toJSDate().getTime() <= new Date().getTime()
       : false;
 
-    setExpirationDate(date?.toDate().toISOString() ?? null);
+    setExpirationDate(date?.toJSDate().toISOString() ?? null);
     setIsExpired(expired);
   };
 
@@ -70,7 +70,7 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
     );
   }
 
-  const minDate = moment().subtract(1, "days");
+  const minDate = subtractFromDate(now(), 1, "days")!;
 
   return (
     <ToggleBlock {...props} withToggle={false}>
@@ -86,6 +86,7 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
         selectDateText={t("Common:SelectDate")}
         dataTestId="edit_link_panel_date_time_picker"
         useMaxTime
+        translations={{ AM: t("Common:AM"), PM: t("Common:PM") }}
       />
     </ToggleBlock>
   );

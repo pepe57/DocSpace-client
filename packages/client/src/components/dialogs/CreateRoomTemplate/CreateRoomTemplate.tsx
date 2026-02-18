@@ -26,16 +26,16 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
-import { TSelectorItem } from "@docspace/shared/components/selector";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TRoomParams, TRoomTagsParams } from "@docspace/shared/utils/rooms";
 
@@ -165,7 +165,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
       profileUrl: "", // Add the required profileUrl property
       displayName: user.displayName || "", // Ensure displayName is a string
       hasAvatar: !!user.avatar,
-      templateAccess: 1, // Default access right (assuming 1 is ReadWrite)
+      // templateAccess: 1, // Default access right (assuming 1 is ReadWrite)
     }));
 
     const items = [...inviteItems, ...mappedUsers];

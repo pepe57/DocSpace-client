@@ -28,7 +28,7 @@ import { useEffect, useState, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router";
-import moment from "moment";
+import { now, addToDate, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
 
 import {
   EmployeeType,
@@ -37,8 +37,8 @@ import {
 } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
-import { Button } from "@docspace/shared/components/button";
-import { toastr } from "@docspace/shared/components/toast";
+import { Button } from "@docspace/ui-kit/components/button";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
@@ -47,8 +47,8 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Link } from "@docspace/shared/components/link";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Link } from "@docspace/ui-kit/components/link";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
@@ -65,12 +65,12 @@ import {
   createInviteLink,
   updateInviteLink,
 } from "@docspace/shared/api/portal";
-import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { getDate } from "@docspace/shared/components/share/Share.helpers";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Text } from "@docspace/shared/components/text";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Text } from "@docspace/ui-kit/components/text";
 import styles from "./InvitePanel.module.scss";
-import { Badge } from "@docspace/shared/components/badge";
+import { Badge } from "@docspace/ui-kit/components/badge";
 
 const InvitePanel = ({
   folders,
@@ -321,10 +321,10 @@ const InvitePanel = ({
       onChangeExternalLinksVisible(true);
 
       const newLinkData = {
-        ...linkData,
         access: linkData.employeeType,
         shareLink: linkData.url,
         expirationDate: linkData.expiration,
+        ...linkData,
       };
 
       setActiveLink(newLinkData);
@@ -483,7 +483,7 @@ const InvitePanel = ({
     if (!link.shareLink && !link.url) return;
 
     const expirationDate = link?.expirationDate ?? link.expiration;
-    const isExpired = moment(new Date()).isAfter(moment(expirationDate));
+    const isExpired = isAfter(now(), parseToDateTime(expirationDate));
     const isLimit = link?.currentUseCount >= link?.maxUseCount;
 
     if (isExpired) {
@@ -523,7 +523,7 @@ const InvitePanel = ({
 
     const expiration = defaultLink
       ? defaultLink?.expirationDate
-      : moment().add(7, "days");
+      : addToDate(now(), 7, "days");
 
     let link = null;
 
@@ -593,13 +593,13 @@ const InvitePanel = ({
       }
     } else {
       try {
-        let linkExpirationDate = moment(
+        let linkExpirationDate = parseToDateTime(
           access.expirationDate ?? activeLink?.expirationDate,
         );
-        const isExpired = moment(new Date()).isAfter(linkExpirationDate);
+        const isExpired = isAfter(now(), linkExpirationDate);
 
         if (isExpired) {
-          linkExpirationDate = moment().add(7, "days");
+          linkExpirationDate = addToDate(now(), 7, "days");
         }
 
         if (access.expirationDate === null) {
@@ -655,7 +655,7 @@ const InvitePanel = ({
     if (requestIsRunning) return;
 
     const createNewLink =
-      activeLink?.access !== defaultLink?.access || !activeLink?.access;
+      activeLink?.access != defaultLink?.access || !activeLink?.access;
 
     setRequestIsRunning(true);
     try {
@@ -665,7 +665,7 @@ const InvitePanel = ({
         maxUseCount: defaultLink?.maxUseCount,
         expiration: defaultLink
           ? defaultLink.expirationDate
-          : moment().add(7, "days"),
+          : addToDate(now(), 7, "days"),
       };
 
       const link = createNewLink

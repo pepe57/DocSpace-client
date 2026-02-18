@@ -1049,5 +1049,7 @@
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
   "YourTurn": "Jūsu kārta",
-  "ExternalLink": "Ārējā saite"
+  "ExternalLink": "Ārējā saite",
+  "TitleShowFolderActions": "Rādīt mapes darbības",
+  "TitleShowActions": "Rādīt failu darbības"
 }

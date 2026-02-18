@@ -1049,5 +1049,7 @@
   "YourCurrentDomain": "Il tuo dominio attuale",
   "YourLogo": "Il tuo logo",
   "YourTurn": "Il tuo turno",
-  "ExternalLink": "Collegamento esterno"
+  "ExternalLink": "Collegamento esterno",
+  "TitleShowFolderActions": "Mostra azioni con cartelle",
+  "TitleShowActions": "Mostra azioni con file"
 }

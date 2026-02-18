@@ -32,6 +32,7 @@ import {
   TypeRoomList,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 test.describe("Default templates", () => {
@@ -52,7 +53,7 @@ test.describe("Default templates", () => {
     const container = page.getByTestId("default-templates");
     await expect(container).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "default-templates",
       "default-templates.png",
@@ -85,7 +86,7 @@ test.describe("Default templates", () => {
     const selectOption = page.getByTestId("upload-from-docspace_item");
     await expect(selectOption).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "default-templates",
       "default-templates-default-context-menu.png",
@@ -117,7 +118,7 @@ test.describe("Default templates", () => {
     const badge = row.getByTestId("badge-text");
     await expect(badge).toHaveText("Customized");
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "default-templates",
       "default-templates-customized.png",
@@ -146,7 +147,7 @@ test.describe("Default templates", () => {
     const resetOption = page.getByTestId("reset_item");
     await expect(resetOption).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "default-templates",
       "default-templates-customized-context-menu.png",
@@ -157,7 +158,7 @@ test.describe("Default templates", () => {
     const dialog = page.getByRole("dialog").first();
     await expect(dialog).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "default-templates",
       "default-templates-reset-dialog.png",
@@ -171,5 +172,28 @@ test.describe("Default templates", () => {
 
     const badge = row.getByTestId("badge-text");
     await expect(badge).toHaveText("Default");
+  });
+
+  test("should navigate to default templates page with template width long title", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(defaultTemplatesHandler(TEST_PORT, "long"));
+    await page.goto(
+      `${baseUrl}/portal-settings/customization/default-templates`,
+    );
+
+    const container = page.getByTestId("default-templates");
+    await expect(container).toBeVisible();
+
+    const row = page.getByTestId("default-template-row-0");
+    await expect(row).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "default-templates",
+      "default-templates-long-title.png",
+    ]);
   });
 });

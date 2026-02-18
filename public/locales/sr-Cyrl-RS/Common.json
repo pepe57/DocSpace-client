@@ -1049,5 +1049,7 @@
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
   "YourTurn": "Ваш ред",
-  "ExternalLink": "Екстерни линк"
+  "ExternalLink": "Екстерни линк",
+  "TitleShowFolderActions": "Прикажи акциије фолдера",
+  "TitleShowActions": "Прикажи акције датотека"
 }

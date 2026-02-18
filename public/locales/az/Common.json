@@ -1049,5 +1049,7 @@
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
   "YourTurn": "Sizin növbəniz",
-  "ExternalLink": "Xarici keçid"
+  "ExternalLink": "Xarici keçid",
+  "TitleShowFolderActions": "Qovluq əyləmlərini göstər",
+  "TitleShowActions": "Fayl əyləmlərini göstər"
 }

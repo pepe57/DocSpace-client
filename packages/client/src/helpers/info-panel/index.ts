@@ -28,7 +28,7 @@ import { TRoom } from "@docspace/shared/api/rooms/types";
 import { Nullable } from "@docspace/shared/types";
 import { InfoPanelEvents } from "@docspace/shared/enums";
 import { INFO_PANEL_LOADER_EVENT } from "@docspace/shared/constants";
-import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
 export const showInfoPanel = () => {
   const event = new CustomEvent(InfoPanelEvents.showInfoPanel);

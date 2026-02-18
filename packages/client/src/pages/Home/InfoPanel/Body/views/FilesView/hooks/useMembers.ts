@@ -37,7 +37,7 @@ import {
 } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
 import { Nullable } from "@docspace/shared/types";
-import { TOption } from "@docspace/shared/components/combobox";
+import { TOption } from "@docspace/ui-kit/components/combobox";
 
 import type {
   TInfoPanelMember,

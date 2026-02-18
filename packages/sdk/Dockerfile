@@ -54,6 +54,8 @@ COPY common/tests/package-lock.json ./common/tests/package-lock.json
 COPY common/tests/package.json ./common/tests/package.json
 COPY packages/sdk/package.json ./packages/sdk/package.json
 COPY packages/shared/package.json ./packages/shared/package.json
+COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
+COPY libs/ui-kit/onlyoffice-docspace-api-sdk-*.tgz ./libs/ui-kit/
 
 # Install dependencies with recursive installation
 RUN pnpm install --frozen-lockfile
@@ -69,6 +71,7 @@ COPY common/ ./common/
 COPY packages/sdk/ ./packages/sdk/
 COPY packages/shared/ ./packages/shared/
 COPY public/ ./public/
+COPY libs/ui-kit/ ./libs/ui-kit/
 
 # Run before-build script (packages/runtime.json)
 RUN pnpm run before-build

@@ -1049,5 +1049,7 @@
   "YourCurrentDomain": "Ձեր ընթացիկ տիրույթը",
   "YourLogo": "Ձեր լոգոն",
   "YourTurn": "Ձեր հերթն է",
-  "ExternalLink": "Արտաքին հղում"
+  "ExternalLink": "Արտաքին հղում",
+  "TitleShowFolderActions": "Ցույց տալ պանակի գործողությունները",
+  "TitleShowActions": "Ցույց տալ ֆայլի գործողությունները"
 }

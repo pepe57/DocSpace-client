@@ -27,7 +27,7 @@
 import { makeAutoObservable } from "mobx";
 import axios from "axios";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 

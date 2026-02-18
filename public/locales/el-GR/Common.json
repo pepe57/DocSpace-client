@@ -1049,5 +1049,7 @@
   "YourCurrentDomain": "Το τρέχον όνομα τομέα σας",
   "YourLogo": "Το λογότυπό σας",
   "YourTurn": "Η σειρά σας",
-  "ExternalLink": "Εξωτερικός σύνδεσμος"
+  "ExternalLink": "Εξωτερικός σύνδεσμος",
+  "TitleShowFolderActions": "Εμφάνιση Ενεργειών Φακέλου",
+  "TitleShowActions": "Εμφάνιση ενεργειών αρχείου"
 }

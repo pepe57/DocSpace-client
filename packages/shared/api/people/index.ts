@@ -224,15 +224,15 @@ export async function changeEmail(
   userId: string,
   email: string,
   encemail: string,
-  key: string,
+  confirmKey: string,
 ) {
   const data = encemail ? { encemail } : { email };
 
   const res = (await request({
     method: "put",
-    url: `/people/${userId}/password`,
+    url: `/people/${userId}/email`,
     data,
-    headers: { confirm: key },
+    headers: { confirm: confirmKey },
   })) as TUser;
 
   return res;

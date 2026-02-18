@@ -31,262 +31,265 @@ import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.
 import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.light.svg?url";
 import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg?url";
 
-import { Selector } from "../../../components/selector";
+import { Selector } from "@docspace/ui-kit/components/selector";
 import { FolderType } from "../../../enums";
 import type { TFolder } from "../../../api/files/types";
 import {
-  SelectorProps,
-  TSelectorBreadCrumbs,
-  TSelectorCancelButton,
-  TSelectorCheckbox,
-  TSelectorHeader,
-  TSelectorInput,
-  TSelectorSearch,
-  TSelectorSubmitButton,
-} from "../../../components/selector/Selector.types";
+	SelectorProps,
+	TSelectorBreadCrumbs,
+	TSelectorCancelButton,
+	TSelectorCheckbox,
+	TSelectorHeader,
+	TSelectorInput,
+	TSelectorSearch,
+	TSelectorSubmitButton,
+} from "@docspace/ui-kit/components/selector";
 import {
-  BreadCrumbsLoader,
-  RowLoader,
-  SearchLoader,
+	BreadCrumbsLoader,
+	RowLoader,
+	SearchLoader,
 } from "../../../skeletons/selector";
-import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { FilesSelectorProps } from "../FilesSelector.types";
 import { LoadersContext } from "../../utils/contexts/Loaders";
+import { SettingsContext } from "../../utils/contexts/Settings";
 
 type PickedSearchProps = Pick<
-  TSelectorSearch,
-  "searchValue" | "onSearch" | "onClearSearch"
+	TSelectorSearch,
+	"searchValue" | "onSearch" | "onClearSearch"
 > & { withSearch: boolean };
 
 type PickedSubmitButtonProps = Pick<
-  TSelectorSubmitButton,
-  "onSubmit" | "disableSubmitButton"
+	TSelectorSubmitButton,
+	"onSubmit" | "disableSubmitButton"
 >;
 
 type PickedBreadCrumbsProps = Pick<
-  TSelectorBreadCrumbs,
-  "onSelectBreadCrumb" | "breadCrumbs"
+	TSelectorBreadCrumbs,
+	"onSelectBreadCrumb" | "breadCrumbs"
 > & { withBreadCrumbs: boolean };
 
 type PickedSelectorBodyProps = Pick<
-  SelectorProps,
-  "items" | "onSelect" | "hasNextPage" | "totalItems" | "loadNextPage"
+	SelectorProps,
+	"items" | "onSelect" | "hasNextPage" | "totalItems" | "loadNextPage"
 > & { isRoot: boolean; selectedItemType?: string };
 
 type SelectedTreeNodeProps = {
-  selectedTreeNode: TFolder;
+	selectedTreeNode: TFolder;
 };
 
 const useSelectorBody = ({
-  // header props
-  withHeader,
-  headerProps,
+	// header props
+	withHeader,
+	headerProps,
 
-  // search input
-  withSearch,
-  searchValue,
-  onSearch,
-  onClearSearch,
+	// search input
+	withSearch,
+	searchValue,
+	onSearch,
+	onClearSearch,
 
-  // submit button
-  submitButtonLabel,
-  submitButtonId,
-  onSubmit,
-  disableSubmitButton,
+	// submit button
+	submitButtonLabel,
+	submitButtonId,
+	onSubmit,
+	disableSubmitButton,
 
-  // cancel button
-  withCancelButton,
-  cancelButtonLabel,
-  cancelButtonId,
-  onCancel,
+	// cancel button
+	withCancelButton,
+	cancelButtonLabel,
+	cancelButtonId,
+	onCancel,
 
-  // footer input
-  withFooterInput,
-  footerInputHeader,
-  currentFooterInputValue,
-  folderFormValidation,
+	// footer input
+	withFooterInput,
+	footerInputHeader,
+	currentFooterInputValue,
+	folderFormValidation,
 
-  // footer checkbox
-  withFooterCheckbox,
-  footerCheckboxLabel,
+	// footer checkbox
+	withFooterCheckbox,
+	footerCheckboxLabel,
 
-  // with bread crumbs
-  withBreadCrumbs,
-  breadCrumbs,
-  onSelectBreadCrumb,
+	// with bread crumbs
+	withBreadCrumbs,
+	breadCrumbs,
+	onSelectBreadCrumb,
 
-  // files selector props
-  descriptionText,
-  withInfoBar,
-  infoBarData,
-  withPadding,
-  isRoot,
+	// files selector props
+	descriptionText,
+	withInfoBar,
+	infoBarData,
+	withPadding,
+	isRoot,
 
-  // selector props
-  items,
-  onSelect,
-  hasNextPage,
-  totalItems,
-  loadNextPage,
-  withInit,
+	// selector props
+	items,
+	onSelect,
+	hasNextPage,
+	totalItems,
+	loadNextPage,
+	withInit,
 
-  isMultiSelect,
-  maxSelectedItems,
+	isMultiSelect,
+	maxSelectedItems,
 
-  selectedItemType,
-  selectedTreeNode,
+	selectedItemType,
+	selectedTreeNode,
 }: Omit<FilesSelectorProps, "withSearch" | "onSubmit"> &
-  PickedSearchProps &
-  PickedSubmitButtonProps &
-  PickedBreadCrumbsProps &
-  PickedSelectorBodyProps &
-  SelectedTreeNodeProps) => {
-  const { isBase } = useTheme();
-  const { t } = useTranslation(["Common"]);
+	PickedSearchProps &
+	PickedSubmitButtonProps &
+	PickedBreadCrumbsProps &
+	PickedSelectorBodyProps &
+	SelectedTreeNodeProps) => {
+	const { isBase } = useTheme();
+	const { t } = useTranslation(["Common"]);
 
-  const { showBreadCrumbsLoader, isNextPageLoading, showLoader } =
-    use(LoadersContext);
+	const { showBreadCrumbsLoader, isNextPageLoading, showLoader } =
+		use(LoadersContext);
+	const { displayFileExtension } = use(SettingsContext);
 
-  const headerSelectorProps: TSelectorHeader = withHeader
-    ? {
-        withHeader,
-        headerProps: {
-          ...headerProps,
-          headerLabel: headerProps?.headerLabel || t("Common:SelectAction"),
-          onCloseClick: onCancel,
-        },
-      }
-    : {};
+	const headerSelectorProps: TSelectorHeader = withHeader
+		? {
+				withHeader,
+				headerProps: {
+					...headerProps,
+					headerLabel: headerProps?.headerLabel || t("Common:SelectAction"),
+					onCloseClick: onCancel,
+				},
+			}
+		: {};
 
-  const searchProps: TSelectorSearch = withSearch
-    ? {
-        withSearch,
-        searchLoader: <SearchLoader />,
-        searchPlaceholder: t("Common:Search"),
-        searchValue,
-        isSearchLoading: showBreadCrumbsLoader,
-        onSearch: onSearch!,
-        onClearSearch: onClearSearch!,
-      }
-    : {};
+	const searchProps: TSelectorSearch = withSearch
+		? {
+				withSearch,
+				searchLoader: <SearchLoader />,
+				searchPlaceholder: t("Common:Search"),
+				searchValue,
+				isSearchLoading: showBreadCrumbsLoader,
+				onSearch: onSearch!,
+				onClearSearch: onClearSearch!,
+			}
+		: {};
 
-  const submitButtonProps: TSelectorSubmitButton = {
-    onSubmit,
-    submitButtonLabel,
-    submitButtonId,
-    disableSubmitButton,
-  };
+	const submitButtonProps: TSelectorSubmitButton = {
+		onSubmit,
+		submitButtonLabel,
+		submitButtonId,
+		disableSubmitButton,
+	};
 
-  const cancelButtonProps: TSelectorCancelButton = withCancelButton
-    ? {
-        withCancelButton,
-        cancelButtonLabel: cancelButtonLabel || t("Common:CancelButton"),
-        cancelButtonId,
-        onCancel,
-      }
-    : {};
+	const cancelButtonProps: TSelectorCancelButton = withCancelButton
+		? {
+				withCancelButton,
+				cancelButtonLabel: cancelButtonLabel || t("Common:CancelButton"),
+				cancelButtonId,
+				onCancel,
+			}
+		: {};
 
-  const footerInputProps: TSelectorInput = withFooterInput
-    ? {
-        withFooterInput,
-        footerInputHeader,
-        currentFooterInputValue,
-      }
-    : {};
+	const footerInputProps: TSelectorInput = withFooterInput
+		? {
+				withFooterInput,
+				footerInputHeader,
+				currentFooterInputValue,
+			}
+		: {};
 
-  const footerCheckboxProps: TSelectorCheckbox = withFooterCheckbox
-    ? {
-        withFooterCheckbox,
-        footerCheckboxLabel,
-        isChecked: false,
-      }
-    : {};
+	const footerCheckboxProps: TSelectorCheckbox = withFooterCheckbox
+		? {
+				withFooterCheckbox,
+				footerCheckboxLabel,
+				isChecked: false,
+			}
+		: {};
 
-  const breadCrumbsProps: TSelectorBreadCrumbs = withBreadCrumbs
-    ? {
-        breadCrumbs: breadCrumbs!,
-        breadCrumbsLoader: <BreadCrumbsLoader />,
-        isBreadCrumbsLoading: showBreadCrumbsLoader,
-        withBreadCrumbs: true,
-        onSelectBreadCrumb: onSelectBreadCrumb!,
-        bodyIsLoading: showLoader,
-      }
-    : {};
+	const breadCrumbsProps: TSelectorBreadCrumbs = withBreadCrumbs
+		? {
+				breadCrumbs: breadCrumbs!,
+				breadCrumbsLoader: <BreadCrumbsLoader />,
+				isBreadCrumbsLoading: showBreadCrumbsLoader,
+				withBreadCrumbs: true,
+				onSelectBreadCrumb: onSelectBreadCrumb!,
+				bodyIsLoading: showLoader,
+			}
+		: {};
 
-  const isKnowledgeFolder = selectedTreeNode?.type === FolderType.Knowledge;
-  const isEmptyFilesRootScreen = selectedItemType === "files";
-  const isEmptyAgentsRootScreen = selectedItemType === "agents";
+	const isKnowledgeFolder = selectedTreeNode?.type === FolderType.Knowledge;
+	const isEmptyFilesRootScreen = selectedItemType === "files";
+	const isEmptyAgentsRootScreen = selectedItemType === "agents";
 
-  const emptyScreenHeader = useMemo(() => {
-    if (isKnowledgeFolder) {
-      return t("Common:SelectorEmptyScreenHeaderKnowledge");
-    }
+	const emptyScreenHeader = useMemo(() => {
+		if (isKnowledgeFolder) {
+			return t("Common:SelectorEmptyScreenHeaderKnowledge");
+		}
 
-    if (isEmptyFilesRootScreen) return t("Common:SelectorEmptyScreenHeader");
+		if (isEmptyFilesRootScreen) return t("Common:SelectorEmptyScreenHeader");
 
-    if (isEmptyAgentsRootScreen) return t("Common:EmptyRoomsHeaderAgent");
+		if (isEmptyAgentsRootScreen) return t("Common:EmptyRoomsHeaderAgent");
 
-    return t("Common:EmptyRoomsHeader");
-  }, [t, isKnowledgeFolder, isEmptyFilesRootScreen, isEmptyAgentsRootScreen]);
+		return t("Common:EmptyRoomsHeader");
+	}, [t, isKnowledgeFolder, isEmptyFilesRootScreen, isEmptyAgentsRootScreen]);
 
-  const emptyScreenDescription = isEmptyFilesRootScreen
-    ? ""
-    : isEmptyAgentsRootScreen
-      ? t("Common:EmptyRoomsDescriptionTextAgent", {
-          sectionName: t("Common:AIAgents"),
-        })
-      : t("Common:EmptyRoomsDescriptionText", {
-          sectionName: t("Common:Rooms"),
-        });
+	const emptyScreenDescription = isEmptyFilesRootScreen
+		? ""
+		: isEmptyAgentsRootScreen
+			? t("Common:EmptyRoomsDescriptionTextAgent", {
+					sectionName: t("Common:AIAgents"),
+				})
+			: t("Common:EmptyRoomsDescriptionText", {
+					sectionName: t("Common:Rooms"),
+				});
 
-  const SelectorBody = (
-    <Selector
-      {...headerSelectorProps}
-      {...searchProps}
-      {...submitButtonProps}
-      {...cancelButtonProps}
-      {...footerInputProps}
-      {...footerCheckboxProps}
-      {...breadCrumbsProps}
-      isMultiSelect={isMultiSelect ?? false}
-      maxSelectedItems={maxSelectedItems}
-      items={items}
-      onSelect={onSelect}
-      emptyScreenImage={
-        isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
-      }
-      emptyScreenHeader={emptyScreenHeader}
-      emptyScreenDescription={emptyScreenDescription}
-      searchEmptyScreenImage={
-        isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
-      }
-      searchEmptyScreenHeader={t("Common:NotFoundTitle")}
-      searchEmptyScreenDescription={t("Common:EmptyFilterDescriptionText")}
-      isLoading={showLoader}
-      rowLoader={
-        <RowLoader
-          isMultiSelect={false}
-          isUser={isRoot}
-          isContainer={showLoader}
-        />
-      }
-      alwaysShowFooter
-      isNextPageLoading={isNextPageLoading}
-      hasNextPage={hasNextPage}
-      totalItems={totalItems}
-      loadNextPage={loadNextPage}
-      descriptionText={descriptionText}
-      disableFirstFetch
-      withInfoBar={withInfoBar}
-      infoBarData={infoBarData}
-      withPadding={withPadding}
-      isSSR={withInit}
-      folderFormValidation={folderFormValidation}
-    />
-  );
+	const SelectorBody = (
+		<Selector
+			{...headerSelectorProps}
+			{...searchProps}
+			{...submitButtonProps}
+			{...cancelButtonProps}
+			{...footerInputProps}
+			{...footerCheckboxProps}
+			{...breadCrumbsProps}
+			isMultiSelect={isMultiSelect ?? false}
+			maxSelectedItems={maxSelectedItems}
+			items={items}
+			onSelect={onSelect}
+			emptyScreenImage={
+				isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
+			}
+			emptyScreenHeader={emptyScreenHeader}
+			emptyScreenDescription={emptyScreenDescription}
+			searchEmptyScreenImage={
+				isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
+			}
+			searchEmptyScreenHeader={t("Common:NotFoundTitle")}
+			searchEmptyScreenDescription={t("Common:EmptyFilterDescriptionText")}
+			isLoading={showLoader}
+			rowLoader={
+				<RowLoader
+					isMultiSelect={false}
+					isUser={isRoot}
+					isContainer={showLoader}
+				/>
+			}
+			alwaysShowFooter
+			isNextPageLoading={isNextPageLoading}
+			hasNextPage={hasNextPage}
+			totalItems={totalItems}
+			loadNextPage={loadNextPage}
+			descriptionText={descriptionText}
+			disableFirstFetch
+			withInfoBar={withInfoBar}
+			infoBarData={infoBarData}
+			withPadding={withPadding}
+			isSSR={withInit}
+			folderFormValidation={folderFormValidation}
+			displayFileExtension={displayFileExtension}
+		/>
+	);
 
-  return SelectorBody;
+	return SelectorBody;
 };
 
 export default useSelectorBody;

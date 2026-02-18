@@ -29,9 +29,9 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { TTheme } from "@docspace/shared/themes";
-import { Text } from "@docspace/shared/components/text";
-import { Row, RowContent } from "@docspace/shared/components/rows";
+import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Row, RowContent } from "@docspace/ui-kit/components/rows";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import { getCorrectDate } from "@docspace/shared/utils";

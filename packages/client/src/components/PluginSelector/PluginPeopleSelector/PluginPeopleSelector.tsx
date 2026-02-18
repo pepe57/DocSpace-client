@@ -33,7 +33,7 @@ import {
   THeaderBackButton,
   TSelectorCancelButton,
   TSelectorHeader,
-} from "@docspace/shared/components/selector/Selector.types";
+} from "@docspace/ui-kit/components/selector";
 
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { PeopleSelectorProps } from "@docspace/shared/selectors/People/PeopleSelector.types";

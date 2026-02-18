@@ -29,9 +29,9 @@ import { Trans } from "react-i18next";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Link } from "@docspace/ui-kit/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { FREE_BACKUP } from "@docspace/shared/constants";
 
@@ -45,7 +45,7 @@ const StyledBody = styled.div`
   padding: 24px;
   box-sizing: border-box;
   background: ${(props) =>
-    props.theme.client.settings.payment.backgroundBenefitsColor};
+		props.theme.client.settings.payment.backgroundBenefitsColor};
 
   p {
     margin-bottom: 24px;
@@ -74,8 +74,8 @@ const StyledBody = styled.div`
       height: 24px;
 
       ${(props) =>
-        !props.theme.isBase &&
-        css`
+				!props.theme.isBase &&
+				css`
           svg {
          
             path[stroke],
@@ -83,8 +83,8 @@ const StyledBody = styled.div`
             circle[stroke],
             rect[stroke] {
               stroke: ${({ theme }) =>
-                theme.client.settings.payment.benefitsContainer
-                  .iconsColor} !important;
+								theme.client.settings.payment.benefitsContainer
+									.iconsColor} !important;
             }
             
             path[fill]:not([fill="none"]),
@@ -92,22 +92,22 @@ const StyledBody = styled.div`
             circle[fill]:not([fill="none"]),
             rect[fill]:not([fill="none"]) {
               fill: ${({ theme }) =>
-                theme.client.settings.payment.benefitsContainer
-                  .iconsColor} !important;
+								theme.client.settings.payment.benefitsContainer
+									.iconsColor} !important;
             }
             
             path:not([stroke]):not([fill]),
             g:not([stroke]):not([fill]) path:not([stroke]):not([fill]) {
               fill: ${({ theme }) =>
-                theme.client.settings.payment.benefitsContainer
-                  .iconsColor} !important;
+								theme.client.settings.payment.benefitsContainer
+									.iconsColor} !important;
             }
             
 
             mask path {
               fill: ${({ theme }) =>
-                theme.client.settings.payment.benefitsContainer
-                  .iconsColor} !important;
+								theme.client.settings.payment.benefitsContainer
+									.iconsColor} !important;
             }
           }
         `}
@@ -116,70 +116,70 @@ const StyledBody = styled.div`
 `;
 
 const BenefitsContainer = ({ t, features }) => {
-  const renderTooltip = () => {
-    const onClickServiceUrl = () => {
-      const servicePageUrl = combineUrl("/portal-settings", "/services");
+	const renderTooltip = () => {
+		const onClickServiceUrl = () => {
+			const servicePageUrl = combineUrl("/portal-settings", "/services");
 
-      window.DocSpace.navigate(servicePageUrl);
-    };
+			window.DocSpace.navigate(servicePageUrl);
+		};
 
-    return (
-      <HelpButton
-        className="payment-tooltip"
-        offsetRight={0}
-        iconName={HelpReactSvgUrl}
-        tooltipContent={
-          <Trans
-            t={t}
-            i18nKey="NeedMoreGoToServices"
-            ns="Payments"
-            components={{
-              1: (
-                <Link
-                  key="contact-payer-link"
-                  tag="a"
-                  color="accent"
-                  onClick={onClickServiceUrl}
-                />
-              ),
-            }}
-          />
-        }
-      />
-    );
-  };
+		return (
+			<HelpButton
+				className="payment-tooltip"
+				offsetRight={0}
+				iconName={HelpReactSvgUrl}
+				tooltipContent={
+					<Trans
+						t={t}
+						i18nKey="NeedMoreGoToServices"
+						ns="Payments"
+						components={{
+							1: (
+								<Link
+									key="contact-payer-link"
+									tag="a"
+									color="accent"
+									onClick={onClickServiceUrl}
+								/>
+							),
+						}}
+					/>
+				}
+			/>
+		);
+	};
 
-  return (
-    <StyledBody className="benefits-container">
-      <Text fontSize="16px" fontWeight="600" className="payment-benefits_text">
-        {t("Benefits")}
-      </Text>
-      {Array.from(features.values()).map((item) => {
-        if (!item.title || !item.image) return;
-        return (
-          <div className="payment-benefits" key={item.title || item.image}>
-            <div
-              // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
-              dangerouslySetInnerHTML={{ __html: item.image }}
-              className="icons-container"
-            />
-            <div className="payment-benefits_feature">
-              <Text as="span">{item.title}</Text>
-              {item.id === FREE_BACKUP ? renderTooltip() : null}
-            </div>
-          </div>
-        );
-      })}
-    </StyledBody>
-  );
+	return (
+		<StyledBody className="benefits-container">
+			<Text fontSize="16px" fontWeight="600" className="payment-benefits_text">
+				{t("Benefits")}
+			</Text>
+			{Array.from(features.values()).map((item) => {
+				if (!item.title || !item.image) return;
+				return (
+					<div className="payment-benefits" key={item.title || item.image}>
+						<div
+							// biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
+							dangerouslySetInnerHTML={{ __html: item.image }}
+							className="icons-container"
+						/>
+						<div className="payment-benefits_feature">
+							<Text as="span">{item.title}</Text>
+							{item.id === FREE_BACKUP ? renderTooltip() : null}
+						</div>
+					</div>
+				);
+			})}
+		</StyledBody>
+	);
 };
 
 export default inject(({ settingsStore, paymentQuotasStore }) => {
-  const { theme } = settingsStore;
-  const { portalPaymentQuotasFeatures } = paymentQuotasStore;
+	const { theme } = settingsStore;
+	const { portalPaymentQuotasFeatures } = paymentQuotasStore;
 
-  return {
-    theme,
-    features: portalPaymentQuotasFeatures,
-  };
+	return {
+		theme,
+		features: portalPaymentQuotasFeatures,
+	};
 })(observer(BenefitsContainer));

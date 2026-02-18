@@ -1049,5 +1049,7 @@
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
   "YourTurn": "Uw beurt",
-  "ExternalLink": "Externe link"
+  "ExternalLink": "Externe link",
+  "TitleShowFolderActions": "Toon folder acties",
+  "TitleShowActions": "Bestand acties tonen"
 }

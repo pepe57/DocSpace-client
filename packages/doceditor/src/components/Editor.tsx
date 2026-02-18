@@ -37,7 +37,7 @@ import {
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
 import UserAvatarDarkSvgUrl from "PUBLIC_DIR/images/avatar.editor.dark.svg?url";
@@ -57,6 +57,8 @@ import useEditorEvents from "@/hooks/useEditorEvents";
 import useGoBackAndClose from "@/hooks/useGoBackAndClose";
 import { isPDFDocument } from "@/utils";
 
+import Bar from "./Bar";
+
 const Editor = ({
   config,
   successAuth,
@@ -70,6 +72,8 @@ const Editor = ({
   isSkipError,
 
   sdkConfig,
+  generationToolCallState,
+
   organizationName = "",
   filesSettings,
 
@@ -135,6 +139,7 @@ const Editor = ({
     openShareFormDialog,
     onStartFillingVDRPanel,
     shareKey,
+    generationToolCallState,
   });
 
   useInit({
@@ -311,22 +316,34 @@ const Editor = ({
   }
 
   return (
-    <DocumentEditor
-      id={EDITOR_ID}
-      documentServerUrl={documentServerUrl}
-      config={
-        errorMessage || isSkipError
-          ? {
-              events: {
-                onAppReady: onSDKAppReady,
-              },
-            }
-          : newConfig
-      }
-      height="100%"
-      width="100%"
-      events_onDocumentReady={onDocumentReady}
-    />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
+      }}
+    >
+      <div style={{ height: "auto", overflow: "visible" }}>
+        <Bar quotaExceededScope={config?.quotaExceededScope} />
+      </div>
+      <DocumentEditor
+        id={EDITOR_ID}
+        documentServerUrl={documentServerUrl}
+        config={
+          errorMessage || isSkipError
+            ? {
+                events: {
+                  onAppReady: onSDKAppReady,
+                },
+              }
+            : newConfig
+        }
+        height="100%"
+        width="100%"
+        events_onDocumentReady={onDocumentReady}
+      />
+    </div>
   );
 };
 

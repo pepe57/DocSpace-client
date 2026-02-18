@@ -28,7 +28,7 @@ import type { AxiosResponse } from "axios";
 
 import type { Nullable, Option, TTranslation } from "../../../../../types";
 import type { BackupStorageType, TenantStatus } from "../../../../../enums";
-import type { ButtonSize } from "../../../../../components/button";
+import type { ButtonSize } from "@docspace/ui-kit/components/button";
 import type { TUploadBackup } from "../../../../../api/files/types";
 
 export interface ButtonContainerProps {

@@ -29,14 +29,14 @@ import { inject, observer } from "mobx-react";
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Textarea } from "@docspace/shared/components/textarea";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Label } from "@docspace/shared/components/label";
-import { Button } from "@docspace/shared/components/button";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { Label } from "@docspace/ui-kit/components/label";
+import { Button } from "@docspace/ui-kit/components/button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 
 import { PluginComponents } from "./enums";
 

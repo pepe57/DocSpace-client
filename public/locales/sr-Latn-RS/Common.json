@@ -1049,5 +1049,7 @@
   "YourCurrentDomain": "Vaš trenutni domen",
   "YourLogo": "Vaš logo",
   "YourTurn": "Vaš red",
-  "ExternalLink": "Eksterni link"
+  "ExternalLink": "Eksterni link",
+  "TitleShowFolderActions": "Prikaži akciije foldera",
+  "TitleShowActions": "Prikaži akcije datoteka"
 }

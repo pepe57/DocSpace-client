@@ -1049,5 +1049,7 @@
   "YourCurrentDomain": "Seu domínio atual",
   "YourLogo": "Seu logotipo",
   "YourTurn": "Sua vez",
-  "ExternalLink": "Link externo"
+  "ExternalLink": "Link externo",
+  "TitleShowFolderActions": "Exibir ações da pasta",
+  "TitleShowActions": "Exibir ações do arquivo"
 }

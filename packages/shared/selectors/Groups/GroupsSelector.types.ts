@@ -28,8 +28,8 @@ import {
   TAccessRight,
   TSelectorHeader,
   TSelectorWithAside,
-} from "../../components/selector/Selector.types";
-import { TSelectorItem } from "../../components/selector";
+  TSelectorItem,
+} from "@docspace/ui-kit/components/selector";
 
 export type GroupsSelectorProps = TSelectorHeader &
   TSelectorWithAside & {

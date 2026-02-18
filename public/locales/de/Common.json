@@ -1049,5 +1049,7 @@
   "YourCurrentDomain": "Ihre aktuelle Domain",
   "YourLogo": "Ihr Logo",
   "YourTurn": "Jetzt sind Sie dran",
-  "ExternalLink": "Externer Link"
+  "ExternalLink": "Externer Link",
+  "TitleShowFolderActions": "Ordneraktionen anzeigen",
+  "TitleShowActions": "Dateiaktionen anzeigen"
 }

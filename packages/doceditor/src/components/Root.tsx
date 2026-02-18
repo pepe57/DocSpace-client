@@ -57,7 +57,7 @@ import FillingStatusDialog from "./filling-status-dialog";
 import Editor from "./Editor";
 
 const ErrorContainer = dynamic(
-  () => import("@docspace/shared/components/error-container/ErrorContainer"),
+  () => import("@docspace/ui-kit/components/error-container/ErrorContainer"),
   {
     ssr: false,
   },
@@ -116,6 +116,8 @@ const Root = ({
 
   deepLinkSettings,
   baseSdkConfig,
+
+  generationToolCallState,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -162,6 +164,8 @@ const Root = ({
     user,
     shareKey,
     standalone: settings?.standalone,
+    folderId: config?.file?.folderId,
+    folderType: config?.file?.rootFolderType,
   });
 
   const {
@@ -347,6 +351,7 @@ const Root = ({
           onDownloadAs={onDownloadAs}
           filesSettings={filesSettings}
           shareKey={shareKey}
+          generationToolCallState={generationToolCallState}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}

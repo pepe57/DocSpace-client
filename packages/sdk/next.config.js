@@ -86,6 +86,7 @@ const nextConfig = {
       alias: {
         ...config.resolve?.alias,
         "@docspace/shared": path.resolve(__dirname, "../shared"),
+        "@docspace/ui-kit": path.resolve(__dirname, "../../libs/ui-kit"),
       },
     };
 
@@ -201,4 +202,8 @@ if (process.env.DEPLOY) {
   nextConfig.output = "standalone";
 }
 
-module.exports = nextConfig;
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
+module.exports = withBundleAnalyzer(nextConfig);

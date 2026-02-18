@@ -26,92 +26,92 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Text } from "@docspace/ui-kit/components/text";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { WebhookTriggers } from "@docspace/shared/enums";
 
 import { getTriggerTranslate } from "../Webhooks.helpers";
 
 type TProps = {
-  isDisabled: boolean;
-  triggers: number;
-  toggleTrigger: (value: number) => void;
-  triggerAll: boolean;
-  onChange: (value: string) => void;
+	isDisabled: boolean;
+	triggers: number;
+	toggleTrigger: (value: number) => void;
+	triggerAll: boolean;
+	onChange: (value: string) => void;
 };
 
 const triggersList = Object.values(WebhookTriggers)
-  .filter(
-    (value) => !Number.isNaN(Number(value)) && value !== WebhookTriggers.All,
-  )
-  .map(Number);
+	.filter(
+		(value) => !Number.isNaN(Number(value)) && value !== WebhookTriggers.All,
+	)
+	.map(Number);
 
 const TriggersForm = ({
-  isDisabled,
-  triggers,
-  toggleTrigger,
-  triggerAll,
-  onChange,
+	isDisabled,
+	triggers,
+	toggleTrigger,
+	triggerAll,
+	onChange,
 }: TProps) => {
-  const { t } = useTranslation(["Webhooks", "Files", "Common"]);
+	const { t } = useTranslation(["Webhooks", "Files", "Common"]);
 
-  return (
-    <div style={{ marginTop: "22px" }}>
-      <Text fontWeight={600} style={{ marginBottom: "10px" }}>
-        {t("EventToTriggerThisWebhook")}
-      </Text>
-      <RadioButtonGroup
-        fontSize="13px"
-        fontWeight="400"
-        name="ssl"
-        onClick={(e) => onChange(e.target.value)}
-        options={[
-          {
-            id: "enable-all",
-            label: t("SendEverything"),
-            value: "true",
-            dataTestId: "enable_all_radio_button",
-          },
-          {
-            id: "select-from-list",
-            label: t("IndividualEvents"),
-            value: "false",
-            dataTestId: "select_from_list_radio_button",
-          },
-        ]}
-        selected={triggerAll ? "true" : "false"}
-        width="100%"
-        orientation="vertical"
-        spacing="8px"
-        isDisabled={isDisabled}
-        dataTestId="triggers_form_radio_button_group"
-      />
-      {!triggerAll ? (
-        <div
-          style={{
-            display: "grid",
-            gap: "8px",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            marginTop: "10px",
-            marginInlineStart: "24px",
-          }}
-          data-testid="triggers_form_checkbox_group"
-        >
-          {triggersList.map((value) => (
-            <Checkbox
-              key={value}
-              label={getTriggerTranslate(value, t)}
-              isChecked={(triggers & value) !== 0}
-              onChange={() => toggleTrigger(value)}
-              dataTestId={`triggers_form_checkbox_${value}`}
-            />
-          ))}
-        </div>
-      ) : null}
-    </div>
-  );
+	return (
+		<div style={{ marginTop: "22px" }}>
+			<Text fontWeight={600} style={{ marginBottom: "10px" }}>
+				{t("EventToTriggerThisWebhook")}
+			</Text>
+			<RadioButtonGroup
+				fontSize="13px"
+				fontWeight="400"
+				name="ssl"
+				onClick={(e) => onChange(e.target.value)}
+				options={[
+					{
+						id: "enable-all",
+						label: t("SendEverything"),
+						value: "true",
+						dataTestId: "enable_all_radio_button",
+					},
+					{
+						id: "select-from-list",
+						label: t("IndividualEvents"),
+						value: "false",
+						dataTestId: "select_from_list_radio_button",
+					},
+				]}
+				selected={triggerAll ? "true" : "false"}
+				width="100%"
+				orientation="vertical"
+				spacing="8px"
+				isDisabled={isDisabled}
+				dataTestId="triggers_form_radio_button_group"
+			/>
+			{!triggerAll ? (
+				<div
+					style={{
+						display: "grid",
+						gap: "8px",
+						gridTemplateColumns: "repeat(2, 1fr)",
+						marginTop: "10px",
+						marginInlineStart: "24px",
+					}}
+					data-testid="triggers_form_checkbox_group"
+				>
+					{triggersList.map((value) => (
+						<Checkbox
+							key={value}
+							label={getTriggerTranslate(value, t)}
+							isChecked={(triggers & value) !== 0}
+							onChange={() => toggleTrigger(value)}
+							dataTestId={`triggers_form_checkbox_${value}`}
+						/>
+					))}
+				</div>
+			) : null}
+		</div>
+	);
 };
 
 export default TriggersForm;

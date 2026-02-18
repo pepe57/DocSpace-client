@@ -1049,5 +1049,7 @@
   "YourCurrentDomain": "Su dominio actual",
   "YourLogo": "Su logotipo",
   "YourTurn": "Su turno",
-  "ExternalLink": "Enlace externo"
+  "ExternalLink": "Enlace externo",
+  "TitleShowFolderActions": "Mostrar las acciones con la carpeta",
+  "TitleShowActions": "Mostrar acciones con archivo"
 }

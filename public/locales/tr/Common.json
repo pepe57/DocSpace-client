@@ -1049,5 +1049,7 @@
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
   "YourTurn": "Sıra sizde",
-  "ExternalLink": "Harici bağlantı"
+  "ExternalLink": "Harici bağlantı",
+  "TitleShowFolderActions": "Klasör eylemlerini göster",
+  "TitleShowActions": "Dosya eylemlerini göster"
 }

@@ -65,10 +65,9 @@ import {
 } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { StartFillingMode } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
-import type { TData } from "@docspace/shared/components/toast/Toast.type";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { FolderType } from "@docspace/ui-kit/enums";
 import type { Nullable } from "@docspace/shared/types";
-
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 
 import { isMobile } from "react-device-detect";
@@ -104,6 +103,7 @@ const useEditorEvents = ({
   sdkConfig,
   organizationName,
   shareKey,
+  generationToolCallState,
   setFillingStatusDialogVisible,
   openShareFormDialog,
   onStartFillingVDRPanel,
@@ -262,92 +262,123 @@ const useEditorEvents = ({
 
     const connector = docEditor?.createConnector?.();
 
-    if (connector) {
-      const defaultPortalProvider =
-        (await getDefaultProvider()) as TDefaultProvider;
+    if (connector && successAuth) {
+      try {
+        const defaultPortalProvider = (await getDefaultProvider()) as
+          | TDefaultProvider
+          | undefined;
 
-      const defaultModel = "gpt-5.2";
-      let provider: TAiProvider | undefined;
-      let model = defaultPortalProvider.defaultModel || defaultModel;
+        if (defaultPortalProvider) {
+          const DEFAULT_MODEL = "gpt-5.2";
+          let provider: TAiProvider | undefined;
+          let model = defaultPortalProvider.defaultModel || DEFAULT_MODEL;
 
-      if (defaultPortalProvider.providerId === -1) {
-        provider = {
-          id: defaultPortalProvider.providerId,
-          title: defaultPortalProvider.providerTitle,
-        } as TAiProvider;
-      } else {
-        const providers = await getProviders();
-        const compatibleTypes = [
-          ProviderType.PortalAi,
-          ProviderType.OpenAi,
-          ProviderType.OpenRouter,
-          ProviderType.OpenAiCompatible,
-        ];
+          if (defaultPortalProvider.providerId === -1) {
+            provider = {
+              id: defaultPortalProvider.providerId,
+              title: defaultPortalProvider.providerTitle,
+            } as TAiProvider;
+          } else {
+            const providers = await getProviders();
+            const compatibleTypes = [
+              ProviderType.PortalAi,
+              ProviderType.OpenAi,
+              ProviderType.OpenRouter,
+              ProviderType.OpenAiCompatible,
+            ];
 
-        provider = providers.find(
-          (p: TAiProvider) =>
-            p.id === defaultPortalProvider?.providerId &&
-            compatibleTypes.includes(p.type) &&
-            !p.needReset,
-        );
+            provider = providers.find(
+              (p: TAiProvider) =>
+                p.id === defaultPortalProvider?.providerId &&
+                compatibleTypes.includes(p.type) &&
+                !p.needReset,
+            );
 
-        if (!provider) return;
+            if (provider) {
+              const models = await getModels(provider.id);
+              provider.title = `${t("Common:ProductName")} [${provider.title}]`;
+              model = models[0]?.modelId || model;
+            }
+          }
 
-        const models = await getModels(provider.id);
-        provider.title = `${t("Common:ProductName")} [${provider.title}]`;
-        model = models[0]?.modelId || model;
-      }
+          if (provider) {
+            const providerTitle = provider.title;
+            const modelName = `${providerTitle} [${model}]`;
+            const providerId = provider.id;
 
-      console.log("AI Provider selected:", provider, model);
+            const sendProviders = () => {
+              connector.sendEvent("ai_onCustomProviders", [
+                { name: providerTitle },
+              ]);
 
-      if (provider) {
-        const modelName = `${provider.title} [${model}]`;
+              connector.sendEvent("ai_onCustomInit", {
+                settingsLock: undefined,
+                actionsOverride: true,
+                actions: {
+                  Chat: { model },
+                  Summarization: { model },
+                  Translation: { model },
+                  TextAnalyze: { model },
+                },
+                models: [
+                  {
+                    capabilities: 255,
+                    provider: providerTitle,
+                    name: modelName,
+                    id: model,
+                  },
+                ],
+              });
+            };
 
-        const sendProviders = () => {
-          connector.sendEvent("ai_onCustomProviders", [
-            { name: provider.title },
-          ]);
+            connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
+              if (
+                data &&
+                typeof data === "object" &&
+                "error" in data &&
+                data.error
+              ) {
+                connector.attachEvent("ai_onInit", sendProviders);
+              } else {
+                sendProviders();
+              }
 
-          connector.sendEvent("ai_onCustomInit", {
-            settingsLock: undefined,
-            actionsOverride: true,
-            actions: {
-              Chat: { model: model },
-              Summarization: { model: model },
-              Translation: { model: model },
-              TextAnalyze: { model: model },
-            },
-            models: [
-              {
-                capabilities: 255,
-                provider: provider.title,
-                name: modelName,
-                id: model,
-              },
-            ],
-          });
-        };
+              if (generationToolCallState) {
+                connector.sendEvent("ai_onCallTool", {
+                  name: generationToolCallState.toolName,
+                  arguments: {
+                    ...generationToolCallState.parameters,
+                  },
+                });
+              }
+            });
 
-        connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
-          if (data && typeof data === "object" && "error" in data && data.error)
-            connector.attachEvent("ai_onInit", sendProviders);
-          else sendProviders();
-        });
-
-        connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
-          externalAIFetch(connector, e as TEditorAIEvent, provider.id),
-        );
+            connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
+              externalAIFetch(connector, e as TEditorAIEvent, providerId),
+            );
+          }
+        }
+      } catch (error) {
+        console.error("Failed to initialize AI provider:", error);
       }
     }
 
+    // Do not remove: it's for Back button on Mobile App
     if (docEditor) {
       assign(
         window as unknown as { [key: string]: object },
         ["ASC", "Files", "Editor", "docEditor"],
         docEditor,
-      ); // Do not remove: it's for Back button on Mobile App
+      );
     }
-  }, [config?.errorMessage, sdkConfig?.frameId, checkAndRequestRoles, t]);
+  }, [
+    config?.errorMessage,
+    sdkConfig?.frameId,
+    checkAndRequestRoles,
+    t,
+    successAuth,
+    generationToolCallState,
+  ]);
 
   const onUserActionRequired = React.useCallback(() => {
     frameCallCommand("setIsLoaded");
@@ -936,7 +967,11 @@ const useEditorEvents = ({
       onSDKInfo(e);
 
       // Add to recently viewed files in any mode (read or edit)
-      if (successAuth && fileInfo?.id) {
+      if (
+        successAuth &&
+        fileInfo?.id &&
+        fileInfo?.rootFolderType !== FolderType.DefaultTemplates
+      ) {
         addFileToRecentlyViewed(fileInfo.id);
       }
     },
