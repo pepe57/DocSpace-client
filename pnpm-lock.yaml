@@ -87,9 +87,6 @@ importers:
       '@types/react-text-mask':
         specifier: 5.4.14
         version: 5.4.14
-      axios:
-        specifier: ^1.13.5
-        version: 1.13.5
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
