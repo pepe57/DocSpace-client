@@ -1,0 +1,21 @@
+{
+  "key_path": "BlankSpreadsheet",
+  "content": "Blank Spreadsheet",
+  "content_en_sha1_hash": "a5da75f1bb925b30f2f1c319c42d7a11feb6f0e3",
+  "created_at": "2026-02-18T14:56:25.425Z",
+  "updated_at": "2026-02-18T14:56:25.425Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

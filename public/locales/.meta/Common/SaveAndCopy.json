@@ -1,0 +1,21 @@
+{
+  "key_path": "SaveAndCopy",
+  "content": "Save & copy",
+  "content_en_sha1_hash": "603fdf838c5744f12c8c5ca87bdd30bbeee7233f",
+  "created_at": "2026-02-18T14:56:12.395Z",
+  "updated_at": "2026-02-18T14:56:12.395Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

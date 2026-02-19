@@ -1,0 +1,21 @@
+{
+  "key_path": "FileCurrentlyEditedBy",
+  "content": "File is currently edited by:",
+  "content_en_sha1_hash": "92b2cc7ef909ac1b88cb53e3754ac541b1861a48",
+  "created_at": "2026-02-18T14:55:55.967Z",
+  "updated_at": "2026-02-18T14:55:55.967Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

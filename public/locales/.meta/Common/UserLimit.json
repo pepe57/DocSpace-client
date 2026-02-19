@@ -1,0 +1,21 @@
+{
+  "key_path": "UserLimit",
+  "content": "User limit",
+  "content_en_sha1_hash": "c00c89a60a03540e20fe0675ceb182b9fc1900a0",
+  "created_at": "2026-02-18T14:56:20.525Z",
+  "updated_at": "2026-02-18T14:56:20.525Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

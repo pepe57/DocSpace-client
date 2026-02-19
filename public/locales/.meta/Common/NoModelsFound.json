@@ -1,0 +1,21 @@
+{
+  "key_path": "NoModelsFound",
+  "content": "No models found",
+  "content_en_sha1_hash": "3d02178b7a78aaa935e174c3b52e143f4d548b07",
+  "created_at": "2026-02-18T14:56:04.517Z",
+  "updated_at": "2026-02-18T14:56:04.517Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

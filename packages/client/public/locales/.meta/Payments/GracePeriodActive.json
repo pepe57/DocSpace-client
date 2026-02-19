@@ -1,0 +1,21 @@
+{
+  "key_path": "GracePeriodActive",
+  "content": "The grace period is active from {{fromDate}} to {{byDate}}</1> (days remaining: {{delayDaysCount}}).",
+  "content_en_sha1_hash": "adec9d51e32d8362573ea3497004adba87aa2355",
+  "created_at": "2026-02-18T14:56:32.648Z",
+  "updated_at": "2026-02-18T14:56:32.648Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -34,6 +34,7 @@ import AutomaticBackup from "@docspace/shared/pages/backup/auto-backup";
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 
 import { useDefaultOptions } from "@docspace/shared/pages/backup/auto-backup/hooks";
 
@@ -196,7 +197,7 @@ const AutoBackup = ({
       isInitialLoading={false}
       isEmptyContentBeforeLoader={false}
       settingsFileSelector={{
-        filesSettings,
+        filesSettings: filesSettings as unknown as FilesSettingsDto,
       }}
       removeItem={selectedThirdPartyAccount as ThirdPartyAccountType}
       language={language}

@@ -1,0 +1,21 @@
+{
+  "key_path": "DefaultTemplatesDescription",
+  "content": "Admins can assign default templates for DOCX, XLSX, and other formats. When users create new documents, these templates are applied automatically based on language and region. Admins can upload or reset templates to default. Each template shows its status, last modified date, and file size.",
+  "content_en_sha1_hash": "a69271c260bdb74fce8be26cdc6a3b62b54ede4f",
+  "created_at": "2026-02-18T14:56:26.355Z",
+  "updated_at": "2026-02-18T14:56:26.355Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

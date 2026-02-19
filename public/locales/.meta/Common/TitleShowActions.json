@@ -1,22 +1,15 @@
 {
-  "key_path": "LinkHasExpiredAndHasBeenDisabled",
-  "content": "The link has expired and has been disabled",
-  "content_en_sha1_hash": "0d17398d6f4b329335a9bb4c55a3f6fff17c2689",
-  "created_at": "2025-08-26T11:15:03.701Z",
-  "updated_at": "2025-10-27T16:14:33.740Z",
+  "key_path": "TitleShowActions",
+  "content": "Show File Actions",
+  "content_en_sha1_hash": "5f4d732bf49f42d2b52ab6682a11f986c01135a6",
+  "created_at": "2026-02-18T14:56:21.929Z",
+  "updated_at": "2026-02-18T14:56:21.929Z",
   "comment": {
-    "text": "This key displays a message within a dialog (likely an Edit Link Panel) to inform the user that a link has expired and is no longer functional. It indicates the link's disabled status due to expiration. Translators should ensure the message clearly conveys the link's unavailability.",
-    "is_auto": true,
-    "updated_at": "2025-08-26T11:23:54.286Z"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 410,
-      "context": "return \"\";\n }\n \n if (isExpired) {\n return t(\"Common:LinkHasExpiredAndHasBeenDisabled\");\n }\n \n return expirationDate\n ? `${t(\"Common:LinkValidUntil\")}:`\n : t(\"Common:ChooseExpirationDate\");",
-      "module": "/packages/shared"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

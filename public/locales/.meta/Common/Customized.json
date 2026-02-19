@@ -1,0 +1,21 @@
+{
+  "key_path": "Customized",
+  "content": "Customized",
+  "content_en_sha1_hash": "78cdab3abf9dc85d580caef459aa5a8b05f47f62",
+  "created_at": "2026-02-18T14:55:47.489Z",
+  "updated_at": "2026-02-18T14:55:47.489Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

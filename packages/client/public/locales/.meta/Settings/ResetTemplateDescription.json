@@ -1,0 +1,21 @@
+{
+  "key_path": "ResetTemplateDescription",
+  "content": "Are you sure you want to reset the current state of the blank to its default state?\n You will not be able to undo this action.",
+  "content_en_sha1_hash": "313697170c1339b2a3303e71014c0c3c62634501",
+  "created_at": "2026-02-18T14:56:29.424Z",
+  "updated_at": "2026-02-18T14:56:29.424Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

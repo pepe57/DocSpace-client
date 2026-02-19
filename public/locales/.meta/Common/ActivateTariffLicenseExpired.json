@@ -1,0 +1,21 @@
+{
+  "key_path": "ActivateTariffLicenseExpired",
+  "content": "Your license expired on {{date}}",
+  "content_en_sha1_hash": "099047a1bc90fe8b80e495c09c43ac0ea7222641",
+  "created_at": "2026-02-18T14:55:13.340Z",
+  "updated_at": "2026-02-18T14:55:13.340Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

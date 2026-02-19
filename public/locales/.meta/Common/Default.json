@@ -1,0 +1,21 @@
+{
+  "key_path": "Default",
+  "content": "Default",
+  "content_en_sha1_hash": "808d7dca8a74d84af27a2d6602c3d786de45fe1e",
+  "created_at": "2026-02-18T14:55:47.937Z",
+  "updated_at": "2026-02-18T14:55:47.937Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}
