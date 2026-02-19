@@ -184,7 +184,13 @@ test.describe("Enterprise Edition", () => {
         "desktop",
         "payments",
         "ee-time-limited-grace-period.png",
-      ]);
+      ], {
+        mask: [
+          page.getByTestId("grace-period-start-date"),
+          page.getByTestId("grace-period-date-range"),
+          page.getByTestId("grace-period-days-remaining"),
+        ],
+      });
     });
   });
 
@@ -294,7 +300,13 @@ test.describe("Developer Edition", () => {
         "desktop",
         "payments",
         "de-time-limited-grace-period.png",
-      ]);
+      ], {
+        mask: [
+          page.getByTestId("grace-period-start-date"),
+          page.getByTestId("grace-period-date-range"),
+          page.getByTestId("grace-period-days-remaining"),
+        ],
+      });
     });
   });
 

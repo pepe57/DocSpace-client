@@ -193,7 +193,13 @@ test.describe("Standalone payments", () => {
           "desktop",
           "standalone-payments",
           "ee-time-limited-grace-period.png",
-        ]);
+        ], {
+          mask: [
+            page.getByTestId("grace-period-start-date"),
+            page.getByTestId("grace-period-date-range"),
+            page.getByTestId("grace-period-days-remaining"),
+          ],
+        });
       });
     });
 
@@ -306,7 +312,13 @@ test.describe("Standalone payments", () => {
           "desktop",
           "standalone-payments",
           "de-time-limited-grace-period.png",
-        ]);
+        ], {
+          mask: [
+            page.getByTestId("grace-period-start-date"),
+            page.getByTestId("grace-period-date-range"),
+            page.getByTestId("grace-period-days-remaining"),
+          ],
+        });
       });
     });
 
