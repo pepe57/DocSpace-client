@@ -26,14 +26,15 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { Activity } from "react";
+import { Activity, useCallback } from "react";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
 
-import type { TFile } from "@docspace/shared/api/files/types";
-import type useToolsSettings from "@docspace/shared/components/chat/hooks/useToolsSettings";
-import type useInitChats from "@docspace/shared/components/chat/hooks/useInitChats";
-import type useInitMessages from "@docspace/shared/components/chat/hooks/useInitMessages";
-import Chat from "@docspace/shared/components/chat";
+import type { TFile } from "@docspace/ui-kit/types";
+import type useToolsSettings from "@docspace/ui-kit/ai-agent/chat/hooks/useToolsSettings";
+import type useInitChats from "@docspace/ui-kit/ai-agent/chat/hooks/useInitChats";
+import type useInitMessages from "@docspace/ui-kit/ai-agent/chat/hooks/useInitMessages";
+import Chat from "@docspace/ui-kit/ai-agent/chat";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TUser } from "@docspace/shared/api/people/types";
@@ -106,6 +107,16 @@ const AIAgentViewComponent = ({
   setMediaViewerVisible,
   setAiPlaylistImages,
 }: Props) => {
+  const navigate = useNavigate();
+
+  const goToWebSearchSettings = useCallback(() => {
+    navigate("/portal-settings/ai-settings/search");
+  }, [navigate]);
+
+  const goToAISettings = useCallback(() => {
+    navigate("/portal-settings/ai-settings/providers");
+  }, [navigate]);
+
   if (
     currentView === "chat" &&
     isErrorAIAgentNotAvailable &&
@@ -144,6 +155,8 @@ const AIAgentViewComponent = ({
             multimodal={chatSettings?.multimodal}
             setMediaViewerVisible={setMediaViewerVisible}
             setAiPlaylistImages={setAiPlaylistImages}
+            goToWebSearchSettings={goToWebSearchSettings}
+            goToAISettings={goToAISettings}
           />
         </Activity>
       ) : null}
