@@ -40,6 +40,7 @@ export const sdkVersion = {
   "101": "1.0.1",
   "200": "2.0.0",
   "210": "2.1.0",
+  "220": "2.2.0",
 } as const;
 
 export const sdkSource = {
