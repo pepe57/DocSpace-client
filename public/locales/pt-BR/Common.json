@@ -210,6 +210,7 @@
   "CreateFileCopy": "Criar cópia do arquivo",
   "CreateFolderDescription": "Haverá duas pastas diferentes no destino",
   "CreateFormFillingRoom": "Criar sala de preenchimento de formulários",
+  "CreateGroup": "Criar grupo",
   "CreateMasterFormFromFile": "Criar formulário PDF do arquivo",
   "CreateRoom": "Criar sala",
   "CreateVirtualDataRoom": "Criar sala de dados virtual",
@@ -385,6 +386,7 @@
   "Exabyte": "EB",
   "Example": "Exemplo: {{example}}",
   "ExpiredLink": "Link vencido",
+  "ExternalLink": "Link externo",
   "Favorites": "Favoritos",
   "FeeAppliesToEachBackup": "Observação: há uma taxa para cada backup.",
   "FeedbackAndSupport": "Feedback e Suporte",
@@ -956,6 +958,8 @@
   "ThisSectionIsEmpty": "Esta seção está vazia",
   "Title": "Título",
   "TitleSelectFile": "Selecionar",
+  "TitleShowActions": "Exibir ações do arquivo",
+  "TitleShowFolderActions": "Exibir ações da pasta",
   "Today": "Hoje",
   "ToolCallArg": "Argumentos de chamada da ferramenta:",
   "ToolCallArgCopied": "Argumentos da chamada da ferramenta copiados com sucesso para a área de transferência",
@@ -1048,8 +1052,5 @@
   "YouHaveUnsavedChanges": "Você tem mudanças não salvas",
   "YourCurrentDomain": "Seu domínio atual",
   "YourLogo": "Seu logotipo",
-  "YourTurn": "Sua vez",
-  "ExternalLink": "Link externo",
-  "TitleShowFolderActions": "Exibir ações da pasta",
-  "TitleShowActions": "Exibir ações do arquivo"
+  "YourTurn": "Sua vez"
 }

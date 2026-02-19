@@ -210,6 +210,7 @@
   "CreateFileCopy": "Izveidojiet faila kopiju",
   "CreateFolderDescription": "Galamērķī būs divas dažādas mapes",
   "CreateFormFillingRoom": "Izveidot veidlapu aizpildīšanas telpu",
+  "CreateGroup": "Izveidot grupu",
   "CreateMasterFormFromFile": "Izveidojiet PDF veidlapu no faila",
   "CreateRoom": "Izveidot telpu",
   "CreateVirtualDataRoom": "Izveidot virtuālo datu telpu",
@@ -385,6 +386,7 @@
   "Exabyte": "EB",
   "Example": "Piemērs: {{example}}",
   "ExpiredLink": "Saites derīgums ir beidzies",
+  "ExternalLink": "Ārējā saite",
   "Favorites": "Iemīļākākie",
   "FeeAppliesToEachBackup": "Lūdzu, ņemiet vērā: par katru rezerveskopiju tiek iekasēta maksa.",
   "FeedbackAndSupport": "Feedback & Support",
@@ -956,6 +958,8 @@
   "ThisSectionIsEmpty": "Šī sadaļa ir tukša",
   "Title": "Nosaukums",
   "TitleSelectFile": "Atlasīt",
+  "TitleShowActions": "Rādīt failu darbības",
+  "TitleShowFolderActions": "Rādīt mapes darbības",
   "Today": "Šodien",
   "ToolCallArg": "Instrumenta izsaukuma argumenti:",
   "ToolCallArgCopied": "Rīka izsaukuma argumenti veiksmīgi kopēti starpliktrūkā",
@@ -1048,8 +1052,5 @@
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
-  "YourTurn": "Jūsu kārta",
-  "ExternalLink": "Ārējā saite",
-  "TitleShowFolderActions": "Rādīt mapes darbības",
-  "TitleShowActions": "Rādīt failu darbības"
+  "YourTurn": "Jūsu kārta"
 }

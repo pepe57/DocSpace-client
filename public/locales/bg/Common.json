@@ -210,6 +210,7 @@
   "CreateFileCopy": "Създай копие на файла",
   "CreateFolderDescription": "Ще има две различни папки в дестинацията",
   "CreateFormFillingRoom": "Създайте стая за Попълване на формуляри",
+  "CreateGroup": "Създай група",
   "CreateMasterFormFromFile": "Създай PDF формуляр от файл",
   "CreateRoom": "Създайте стая",
   "CreateVirtualDataRoom": "Създай виртуална стая за данни",
@@ -385,6 +386,7 @@
   "Exabyte": "EB",
   "Example": "Пример: {{example}}",
   "ExpiredLink": "Изтекъл линк",
+  "ExternalLink": "Външна връзка",
   "Favorites": "Любими",
   "FeeAppliesToEachBackup": "Моля, обърнете внимание: Такса се прилага за всяко архивиране.",
   "FeedbackAndSupport": "Обратна връзка и поддръжка",
@@ -956,6 +958,8 @@
   "ThisSectionIsEmpty": "Този раздел е празен",
   "Title": "Заглавие",
   "TitleSelectFile": "Изберете",
+  "TitleShowActions": "Покажи действията за файлове",
+  "TitleShowFolderActions": "Покажи действията за папки",
   "Today": "Днес",
   "ToolCallArg": "Аргументи за извикване на инструмент:",
   "ToolCallArgCopied": "Успешно копирани аргументите за извикване на инструмента в клипборда",
@@ -1048,8 +1052,5 @@
   "YouHaveUnsavedChanges": "Имате незапазени промени",
   "YourCurrentDomain": "Вашият текущ домейн",
   "YourLogo": "Вашето лого",
-  "YourTurn": "Ваш ред",
-  "ExternalLink": "Външна връзка",
-  "TitleShowFolderActions": "Покажи действията за папки",
-  "TitleShowActions": "Покажи действията за файлове"
+  "YourTurn": "Ваш ред"
 }

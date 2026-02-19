@@ -210,6 +210,7 @@
   "CreateFileCopy": "Maak bestandskopie",
   "CreateFolderDescription": "Er zullen twee aparte mappen zijn in de bestemming",
   "CreateFormFillingRoom": "Maak kamer voor het invullen van formulieren",
+  "CreateGroup": "Groep aanmaken",
   "CreateMasterFormFromFile": "Maak PDF-formulier van bestand",
   "CreateRoom": "Maak kamer aan",
   "CreateVirtualDataRoom": "Creëer een virtuele data kamer",
@@ -385,6 +386,7 @@
   "Exabyte": "EB",
   "Example": "Voorbeeld: {{example}}",
   "ExpiredLink": "Verlopen link",
+  "ExternalLink": "Externe link",
   "Favorites": "Favorieten",
   "FeeAppliesToEachBackup": "Let op: Er wordt een vergoeding per back-up in rekening gebracht.",
   "FeedbackAndSupport": "Feedback en Support",
@@ -956,6 +958,8 @@
   "ThisSectionIsEmpty": "Deze sectie is leeg",
   "Title": "Titel",
   "TitleSelectFile": "Selecteren",
+  "TitleShowActions": "Bestand acties tonen",
+  "TitleShowFolderActions": "Toon folder acties",
   "Today": "Vandaag",
   "ToolCallArg": "Arguments van toolaanroepen:",
   "ToolCallArgCopied": "Tool call arguments succesvol naar het klembord gekopieerd",
@@ -1048,8 +1052,5 @@
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
-  "YourTurn": "Uw beurt",
-  "ExternalLink": "Externe link",
-  "TitleShowFolderActions": "Toon folder acties",
-  "TitleShowActions": "Bestand acties tonen"
+  "YourTurn": "Uw beurt"
 }

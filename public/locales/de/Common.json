@@ -210,6 +210,7 @@
   "CreateFileCopy": "als Kopie speichern",
   "CreateFolderDescription": "Es gibt zwei verschiedene Ordner im Zielbereich",
   "CreateFormFillingRoom": "Raum zum Formularausfüllen erstellen",
+  "CreateGroup": "Gruppe erstellen",
   "CreateMasterFormFromFile": "PDF-Formular aus Datei erstellen",
   "CreateRoom": "Raum erstellen",
   "CreateVirtualDataRoom": "Virtuellen Datenraum erstellen",
@@ -385,6 +386,7 @@
   "Exabyte": "EB",
   "Example": "Beispiel: {{example}}",
   "ExpiredLink": "Abgelaufener Link",
+  "ExternalLink": "Externer Link",
   "Favorites": "Favoriten",
   "FeeAppliesToEachBackup": "Bitte beachten Sie: Für jedes Backup fällt eine Gebühr an.",
   "FeedbackAndSupport": "Feedback und Support",
@@ -956,6 +958,8 @@
   "ThisSectionIsEmpty": "Dieser Abschnitt ist leer",
   "Title": "Titel",
   "TitleSelectFile": "Wählen",
+  "TitleShowActions": "Dateiaktionen anzeigen",
+  "TitleShowFolderActions": "Ordneraktionen anzeigen",
   "Today": "Heute",
   "ToolCallArg": "Tool call arguments:",
   "ToolCallArgCopied": "Tool-Aufrufargumente erfolgreich in die Zwischenablage kopiert",
@@ -1048,8 +1052,5 @@
   "YouHaveUnsavedChanges": "Sie haben nicht gespeicherte Änderungen.",
   "YourCurrentDomain": "Ihre aktuelle Domain",
   "YourLogo": "Ihr Logo",
-  "YourTurn": "Jetzt sind Sie dran",
-  "ExternalLink": "Externer Link",
-  "TitleShowFolderActions": "Ordneraktionen anzeigen",
-  "TitleShowActions": "Dateiaktionen anzeigen"
+  "YourTurn": "Jetzt sind Sie dran"
 }

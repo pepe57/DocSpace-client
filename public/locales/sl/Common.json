@@ -210,6 +210,7 @@
   "CreateFileCopy": "Ustvari kopijo datoteke",
   "CreateFolderDescription": "Na destinaciji bosta dve različni mapi",
   "CreateFormFillingRoom": "Ustvari sobo za izpolnjevanje obrazcev",
+  "CreateGroup": "Ustvari skupino",
   "CreateMasterFormFromFile": "Ustvarite obrazec PDF iz datoteke",
   "CreateRoom": "Ustvari sobo",
   "CreateVirtualDataRoom": "Ustvari virtualno podatkovno sobo",
@@ -385,6 +386,7 @@
   "Exabyte": "EB",
   "Example": "Primer: {{example}}",
   "ExpiredLink": "Iztečena povezava",
+  "ExternalLink": "Zunanja povezava",
   "Favorites": "Najljubši",
   "FeeAppliesToEachBackup": "Upoštevajte, da se za vsako varnostno kopijo zaračuna pristojbina.",
   "FeedbackAndSupport": "Povratne informacije & Pomoč",
@@ -956,6 +958,8 @@
   "ThisSectionIsEmpty": "Ta razdelek je prazen",
   "Title": "Naslov",
   "TitleSelectFile": "Izberi",
+  "TitleShowActions": "Pokaži akcije datoteke",
+  "TitleShowFolderActions": "Pokaži akcije mape",
   "Today": "Danes",
   "ToolCallArg": "Argumenti za klic orodja:",
   "ToolCallArgCopied": "Argumenti za klic orodja uspešno kopirani v odložišče",
@@ -1048,8 +1052,5 @@
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
-  "YourTurn": "Vi ste na vrsti",
-  "ExternalLink": "Zunanja povezava",
-  "TitleShowFolderActions": "Pokaži akcije mape",
-  "TitleShowActions": "Pokaži akcije datoteke"
+  "YourTurn": "Vi ste na vrsti"
 }

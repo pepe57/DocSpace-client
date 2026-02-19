@@ -210,6 +210,7 @@
   "CreateFileCopy": "Crear copia de archivo",
   "CreateFolderDescription": "Habrá dos carpetas diferentes en la ubicación de destino",
   "CreateFormFillingRoom": "Crear sala para rellenar formularios",
+  "CreateGroup": "Crear grupo",
   "CreateMasterFormFromFile": "Crear formulario PDF desde archivo",
   "CreateRoom": "Crear sala",
   "CreateVirtualDataRoom": "Crear sala de datos virtuales",
@@ -385,6 +386,7 @@
   "Exabyte": "EB",
   "Example": "Ejemplo: {{example}}",
   "ExpiredLink": "Enlace expirado",
+  "ExternalLink": "Enlace externo",
   "Favorites": "Favoritos",
   "FeeAppliesToEachBackup": "Por favor, tenga en cuenta: Cada copia de seguridad tiene un coste adicional.",
   "FeedbackAndSupport": "Sugerencias y ayuda",
@@ -956,6 +958,8 @@
   "ThisSectionIsEmpty": "Esta sección está vacía",
   "Title": "Título",
   "TitleSelectFile": "Seleccionar",
+  "TitleShowActions": "Mostrar acciones con archivo",
+  "TitleShowFolderActions": "Mostrar las acciones con la carpeta",
   "Today": "Hoy",
   "ToolCallArg": "Argumentos de llamada a la herramienta:",
   "ToolCallArgCopied": "Argumentos de la llamada a la herramienta copiados correctamente al portapapeles",
@@ -1048,8 +1052,5 @@
   "YouHaveUnsavedChanges": "Tiene cambios no guardados",
   "YourCurrentDomain": "Su dominio actual",
   "YourLogo": "Su logotipo",
-  "YourTurn": "Su turno",
-  "ExternalLink": "Enlace externo",
-  "TitleShowFolderActions": "Mostrar las acciones con la carpeta",
-  "TitleShowActions": "Mostrar acciones con archivo"
+  "YourTurn": "Su turno"
 }

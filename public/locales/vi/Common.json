@@ -210,6 +210,7 @@
   "CreateFileCopy": "Tạo bản sao tệp",
   "CreateFolderDescription": "Sẽ có hai thư mục khác nhau ở đích đến",
   "CreateFormFillingRoom": "Tạo phòng Điền biểu mẫu",
+  "CreateGroup": "Tạo nhóm",
   "CreateMasterFormFromFile": "Tạo biểu mẫu PDF từ tệp",
   "CreateRoom": "Tạo phòng",
   "CreateVirtualDataRoom": "Tạo phòng dữ liệu ảo",
@@ -385,6 +386,7 @@
   "Exabyte": "EB",
   "Example": "Ví dụ: {{example}}",
   "ExpiredLink": "Liên kết đã hết hạn",
+  "ExternalLink": "Liên kết bên ngoài",
   "Favorites": "Yêu thích",
   "FeeAppliesToEachBackup": "Xin lưu ý: Một khoản phí áp dụng cho mỗi bản sao lưu.",
   "FeedbackAndSupport": "Phản hồi & Hỗ trợ",
@@ -956,6 +958,8 @@
   "ThisSectionIsEmpty": "Phần này trống",
   "Title": "Tiêu đề",
   "TitleSelectFile": "Chọn",
+  "TitleShowActions": "Hiển thị Hoạt động của File",
+  "TitleShowFolderActions": "Hiển thị Hoạt động Thư mục",
   "Today": "Hôm nay",
   "ToolCallArg": "Lập luận đối số cuộc gọi công cụ:",
   "ToolCallArgCopied": "Các đối số gọi công cụ đã được sao chép thành công vào bảng tạm",
@@ -1048,8 +1052,5 @@
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn",
-  "ExternalLink": "Liên kết bên ngoài",
-  "TitleShowFolderActions": "Hiển thị Hoạt động Thư mục",
-  "TitleShowActions": "Hiển thị Hoạt động của File"
+  "YourTurn": "Phiên của bạn"
 }

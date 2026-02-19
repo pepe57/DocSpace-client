@@ -210,6 +210,7 @@
   "CreateFileCopy": "ファイルコピーの作成",
   "CreateFolderDescription": "コピー先には2つの異なるフォルダが作成されます",
   "CreateFormFillingRoom": "フォーム記入ルームを作成",
+  "CreateGroup": "グループの作成",
   "CreateMasterFormFromFile": "ファイルからPDFフォームを作成する",
   "CreateRoom": "ルームを作成する",
   "CreateVirtualDataRoom": "バーチャルデータルームを作成する",
@@ -385,6 +386,7 @@
   "Exabyte": "EB",
   "Example": "例： {{example}}",
   "ExpiredLink": "期限切れリンク",
+  "ExternalLink": "外部リンク",
   "Favorites": "お気に入り",
   "FeeAppliesToEachBackup": "ご注意：バックアップごとに料金が発生します。",
   "FeedbackAndSupport": "フィードバック＆サポート",
@@ -956,6 +958,8 @@
   "ThisSectionIsEmpty": "このセクションは空です",
   "Title": "タイトル",
   "TitleSelectFile": "選択",
+  "TitleShowActions": "ファイルアクションを表示",
+  "TitleShowFolderActions": "フォルダアクションを表示",
   "Today": "今日",
   "ToolCallArg": "ツール呼び出し引数:",
   "ToolCallArgCopied": "ツール呼び出し引数がクリップボードに正常にコピーされました",
@@ -1048,8 +1052,5 @@
   "YouHaveUnsavedChanges": "未保存変更はあります。",
   "YourCurrentDomain": "現在お使いのドメイン",
   "YourLogo": "あなたのロゴ",
-  "YourTurn": "あなたの番です",
-  "ExternalLink": "外部リンク",
-  "TitleShowFolderActions": "フォルダアクションを表示",
-  "TitleShowActions": "ファイルアクションを表示"
+  "YourTurn": "あなたの番です"
 }
