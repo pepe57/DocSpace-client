@@ -131,7 +131,10 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.dialogBody}>
-          <GetStartedBody onPricingBillingClick={onPricingBillingClick} />
+          <GetStartedBody
+            onPricingBillingClick={onPricingBillingClick}
+            onTopUpClick={onTopUpClick}
+          />
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>

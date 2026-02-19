@@ -28,12 +28,14 @@ interface ServiceOption {
 
 interface GetStartedBodyProps {
   onPricingBillingClick: () => void;
+  onTopUpClick: () => void;
 }
 
 const GetStartedBody: React.FC<GetStartedBodyProps> = ({
   onPricingBillingClick,
+  onTopUpClick,
 }) => {
-  const { t } = useTranslation(["Services", "Common"]);
+  const { t } = useTranslation(["Services", "Payments", "Common"]);
 
   const serviceOptions: ServiceOption[] = [
     {
@@ -118,10 +120,10 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
             </div>
             <div className={styles.topUpButtonWrapper}>
               <Button
-                label={t("TopUpBalance")}
+                label={t("Payments:TopUpBalance")}
                 size={ButtonSize.small}
-                onClick={() => {}}
-                isDisabled
+                onClick={onTopUpClick}
+                primary
               />
             </div>
           </div>
