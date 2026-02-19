@@ -141,7 +141,7 @@ export const TagManagement: FC<TagManagementProps> = ({
             i18nKey="RemoveTag"
             ns="TagManagement"
             components={{
-              1: <strong />,
+              1: <strong key="removed-tag" />,
             }}
             values={{
               tag,
