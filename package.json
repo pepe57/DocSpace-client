@@ -71,7 +71,8 @@
       "node-fetch": ">=2.6.7",
       "ajv": ">=8.18.0",
       "file-loader>schema-utils": "^4.3.3",
-      "fast-xml-parser": ">=5.3.6"
+      "fast-xml-parser": ">=5.3.6",
+      "minimatch": ">=10.2.1"
     }
   }
 }
