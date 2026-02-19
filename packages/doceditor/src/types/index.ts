@@ -73,6 +73,11 @@ export type SdkSearchParams = {
   isSDK?: boolean;
 };
 
+export type TGenerationToolCallState = {
+  toolName: string;
+  parameters: Record<string, string>;
+};
+
 export type RootPageProps = {
   searchParams: Promise<
     Partial<{
@@ -84,6 +89,7 @@ export type RootPageProps = {
       share: string;
       editorType: string;
       error?: string;
+      withTool?: string;
     }> &
       SdkSearchParams
   >;
@@ -238,6 +244,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+
+      generationToolCallState?: TGenerationToolCallState;
     }
   | {
       error: TError;
@@ -253,6 +261,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+
+      generationToolCallState?: TGenerationToolCallState;
     };
 
 export type EditorProps = {
@@ -269,6 +279,8 @@ export type EditorProps = {
   filesSettings?: TFilesSettings;
   organizationName?: string;
   shareKey?: string;
+
+  generationToolCallState?: TGenerationToolCallState;
 
   onDownloadAs?: (obj: object) => void;
   openShareFormDialog?: () => void;
@@ -404,6 +416,7 @@ export interface UseEventsProps {
   sdkConfig?: TFrameConfig | null;
   organizationName: string;
   shareKey?: string;
+  generationToolCallState?: TGenerationToolCallState;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   openShareFormDialog?: VoidFunction;
   onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
@@ -419,6 +432,7 @@ export interface UseInitProps {
   setDocTitle: (value: string) => void;
   documentReady: boolean;
   organizationName: string;
+  generationToolCallState?: TGenerationToolCallState;
 }
 
 export type THistoryData =

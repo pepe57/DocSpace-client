@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 // import "@docspace/shared/utils/wdyr";
-import React from "react";
+import React, { useState } from "react";
 import { I18nextProvider } from "react-i18next";
 import { RouterProvider } from "react-router";
 import { Provider as MobxProvider } from "mobx-react";
@@ -49,51 +49,54 @@ import router from "./router";
 
 import i18n from "./i18n";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-      staleTime: 5 * 60 * 1000,
-    },
-  },
-});
-
 const getApiUrl = () => {
-  const origin = window.ClientConfig?.api?.origin || window.location.origin;
-  const proxy = window.ClientConfig?.proxy?.url || "";
+	const origin = window.ClientConfig?.api?.origin || window.location.origin;
+	const proxy = window.ClientConfig?.proxy?.url || "";
 
-  return combineUrl(origin, proxy);
+	return combineUrl(origin, proxy);
 };
 
 const App = () => {
-  React.useEffect(() => {
-    const regex = /(\/){2,}/g;
-    const replaceRegex = /(\/)+/g;
-    const pathname = window.location.pathname;
+	const [queryClient] = useState(
+		() =>
+			new QueryClient({
+				defaultOptions: {
+					queries: {
+						refetchOnWindowFocus: false,
+						retry: 1,
+						staleTime: 5 * 60 * 1000,
+					},
+				},
+			}),
+	);
 
-    if (regex.test(pathname))
-      window.location.replace(pathname.replace(replaceRegex, "$1"));
-  }, []);
+	React.useEffect(() => {
+		const regex = /(\/){2,}/g;
+		const replaceRegex = /(\/)+/g;
+		const pathname = window.location.pathname;
 
-  const apiUrl = getApiUrl();
-  const apiKey = getCookie("asc_auth_key") || "";
+		if (regex.test(pathname))
+			window.location.replace(pathname.replace(replaceRegex, "$1"));
+	}, []);
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <MobxProvider {...store}>
-        <ApiProvider url={apiUrl} apiKey={apiKey}>
-          <I18nextProvider i18n={i18n}>
-            <ThemeProvider>
-              <ErrorBoundary>
-                <RouterProvider router={router} />
-              </ErrorBoundary>
-            </ThemeProvider>
-          </I18nextProvider>
-        </ApiProvider>
-      </MobxProvider>
-    </QueryClientProvider>
-  );
+	const apiUrl = getApiUrl();
+	const apiKey = getCookie("asc_auth_key") || "";
+
+	return (
+		<QueryClientProvider client={queryClient}>
+			<MobxProvider {...store}>
+				<ApiProvider url={apiUrl} apiKey={apiKey}>
+					<I18nextProvider i18n={i18n}>
+						<ThemeProvider>
+							<ErrorBoundary>
+								<RouterProvider router={router} />
+							</ErrorBoundary>
+						</ThemeProvider>
+					</I18nextProvider>
+				</ApiProvider>
+			</MobxProvider>
+		</QueryClientProvider>
+	);
 };
 
 export default App;
