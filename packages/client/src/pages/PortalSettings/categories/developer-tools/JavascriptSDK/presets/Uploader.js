@@ -32,6 +32,9 @@ import debounce from "lodash.debounce";
 import { Label } from "@docspace/ui-kit/components/label";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Text } from "@docspace/ui-kit/components/text";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
@@ -75,7 +78,19 @@ const Uploader = (props) => {
 
   const [version, onSetVersion] = useState(sdkVersion[220]);
   const [source, onSetSource] = useState(sdkSource.Package);
-  const [enableFolderUpload, setEnableFolderUpload] = useState(false);
+  const [uploadMode, setUploadMode] = useState("files");
+  const [uploadQuantity, setUploadQuantity] = useState("single");
+
+  const uploadQuantityOptions = [
+    {
+      value: "single",
+      label: `${t("Common:SingleFile")} (${t("Common:SingleFileDescription")})`,
+    },
+    {
+      value: "multiple",
+      label: `${t("Common:MultipleFiles")} (${t("Common:MultipleFilesDescription")})`,
+    },
+  ];
 
   const [config, setConfig] = useState({
     src: window.location.origin,
@@ -85,10 +100,11 @@ const Uploader = (props) => {
     frameId: "ds-frame",
     init: true,
     acceptExtensions: FILE_TYPE_EXTENSIONS.document.join(","),
-    linkMainTextForFiles: t("Common:Upload"),
-    linkMainTextForFolders: "",
+    linkMainText: t("Common:Upload"),
     secondaryText: t("Common:DropzoneTitleSecondary"),
     id: myFolderId,
+    isFolder: false,
+    isMultiple: false,
     events: {
       onUploadSuccess: (data) => {
         console.log("onUploadSuccess", data);
@@ -172,7 +188,7 @@ const Uploader = (props) => {
     debounce((newText) => {
       setConfig((oldConfig) => ({
         ...oldConfig,
-        linkMainTextForFiles: newText,
+        linkMainText: newText,
         init: true,
       }));
     }, 500),
@@ -183,39 +199,9 @@ const Uploader = (props) => {
     const newText = e.target.value;
     setConfig((oldConfig) => ({
       ...oldConfig,
-      linkMainTextForFiles: newText,
+      linkMainText: newText,
     }));
     debouncedSetLinkFilesText(newText);
-  };
-
-  const debouncedSetLinkFolderText = useCallback(
-    debounce((newText) => {
-      setConfig((oldConfig) => ({
-        ...oldConfig,
-        linkMainTextForFolders: newText,
-        init: true,
-      }));
-    }, 500),
-    [setConfig],
-  );
-
-  const onChangeLinkFolderText = (e) => {
-    const newText = e.target.value;
-    setConfig((oldConfig) => ({
-      ...oldConfig,
-      linkMainTextForFolders: newText,
-    }));
-    debouncedSetLinkFolderText(newText);
-  };
-
-  const onChangeEnableFolderUpload = () => {
-    const newValue = !enableFolderUpload;
-    setEnableFolderUpload(newValue);
-    setConfig((oldConfig) => ({
-      ...oldConfig,
-      linkMainTextForFolders: newValue ? "Upload folder" : undefined,
-      init: true,
-    }));
   };
 
   const getSelectedExtensions = () => {
@@ -289,6 +275,15 @@ const Uploader = (props) => {
             <ControlsGroup>
               <LabelGroup>
                 <Label className="label" text={t("Common:SelectFolder")} />
+                 <HelpButton
+                    offsetRight={0}
+                    size={12}
+                    place="right-end"
+                    tooltipContent={
+                      <Text fontSize="12px">{t("Common:SelectDestinationFolder")}</Text>
+                    }
+                    dataTestId="room_or_folder_help_button"
+                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
                 {myFolderId && (
@@ -304,7 +299,69 @@ const Uploader = (props) => {
           </ControlsSection>
 
           <ControlsSection>
-            <CategorySubHeader>{t("AvailableFileTypes")}</CategorySubHeader>
+            <CategorySubHeader>{t("Common:UploadMode")}</CategorySubHeader>
+            <RadioButtonGroup
+              orientation="vertical"
+              options={[
+                {
+                  value: "files",
+                  label: `${t("Common:Files")} (${t("Common:UploadFilesDescription")})`,
+                },
+                {
+                  value: "folders",
+                  label: `${t("Common:Folders")} (${t("Common:UploadFoldersDescription")})`,
+                },
+              ]}
+              name="uploadMode"
+              selected={uploadMode}
+              onClick={(e) => {
+                const value = e.target.value;
+                setUploadMode(value);
+                setConfig((oldConfig) => ({
+                  ...oldConfig,
+                  isFolder: value === "folders",
+                  init: true,
+                }));
+              }}
+              spacing="8px"
+              dataTestId="upload_mode_radiobutton_group"
+            />
+          </ControlsSection>
+
+          <ControlsSection>
+            <CategorySubHeader>{t("Common:Quantity")}</CategorySubHeader>
+            <RadioButtonGroup
+              orientation="vertical"
+              options={uploadQuantityOptions}
+              name="uploadQuantity"
+              selected={uploadQuantity}
+              onClick={(e) => {
+                const value = e.target.value;
+                setUploadQuantity(value);
+                setConfig((oldConfig) => ({
+                  ...oldConfig,
+                  isMultiple: value === "multiple",
+                  init: true,
+                }));
+              }}
+              spacing="8px"
+              dataTestId="upload_quantity_radiobutton_group"
+            />
+          </ControlsSection>
+
+          <ControlsSection>
+            <LabelGroup>
+              <CategorySubHeader>{t("AvailableFileTypes")}</CategorySubHeader>
+              <HelpButton
+                offsetRight={0}
+                size={12}
+                place="right"
+                tooltipContent={
+                  <Text fontSize="12px">{t("Common:AllowedFileTypes")}</Text>
+                }
+                dataTestId="room_or_folder_help_button"
+              />
+            </LabelGroup>
             <CheckboxGroup>
               {FILE_TYPE_CATEGORIES.map((category) => (
                 <Checkbox
@@ -322,35 +379,12 @@ const Uploader = (props) => {
               <Label className="label" text={t("ButtonText")} />
               <TextInput
                 scale
-                value={config.linkMainTextForFiles}
+                value={config.linkMainText}
                 onChange={onChangeLinkFileText}
                 tabIndex={5}
                 testId="button_text_input"
               />
             </ControlsGroup>
-
-            <ControlsGroup>
-              <Checkbox
-                className="checkbox"
-                label={t("EnableFolderUpload")}
-                onChange={onChangeEnableFolderUpload}
-                isChecked={enableFolderUpload}
-                dataTestId="enable_folder_upload_checkbox"
-              />
-            </ControlsGroup>
-
-            {enableFolderUpload && (
-              <ControlsGroup>
-                <Label className="label" text={t("ButtonText")} />
-                <TextInput
-                  scale
-                  value={config.linkMainTextForFolders || ""}
-                  onChange={onChangeLinkFolderText}
-                  tabIndex={6}
-                  testId="button_folder_text_input"
-                />
-              </ControlsGroup>
-            )}
 
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
             <WidthSetter
