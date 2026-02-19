@@ -550,6 +550,7 @@ export enum StartFillingMode {
 export enum FormFillingManageAction {
   Stop,
   Resume,
+  Start,
 }
 
 export enum FormFillingTipsState {

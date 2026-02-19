@@ -128,12 +128,14 @@ import {
   FilterType,
   FileExtensions,
   ShareAccessRights,
+  FormFillingManageAction,
 } from "@docspace/shared/enums";
 
 import {
   formRoleMapping,
   getFileLink,
   getFolderLink,
+  manageFormFilling,
   removeSharedFolderOrFile,
 } from "@docspace/shared/api/files";
 
@@ -159,6 +161,7 @@ import {
   showInfoPanel,
 } from "SRC_DIR/helpers/info-panel";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -729,7 +732,7 @@ class ContextOptionsStore {
     this.dialogsStore.setFillingStatusPanelVisible(true);
   };
 
-  onClickStartFilling = (item, t) => {
+  startFillingInRoleBasedRoom = (item, t) => {
     if (isMobile)
       return toastr.info(t("Common:MobileStartFillingPdfNotAvailableInfo"));
 
@@ -742,6 +745,27 @@ class ContextOptionsStore {
     );
 
     if (refPage) refPage.sessionStorage.setItem(FILLING_STATUS_ID, "true");
+  };
+
+  startFillingInFormRoom = async (item, t) => {
+    try {
+      await manageFormFilling(item.id, FormFillingManageAction.Start);
+
+      showCreatedPDFFormDialog(item, this.userStore.user.id);
+    } catch (error) {
+      toastr.error(error);
+    }
+  };
+
+  onClickStartFilling = (item, t) => {
+    const isFormRoom = item.parentRoomType === FolderType.FormRoom;
+
+    if (isFormRoom) {
+      this.startFillingInFormRoom(item, t);
+      return;
+    }
+
+    this.startFillingInRoleBasedRoom(item, t);
   };
 
   onClickResetAndStartFilling = async (item) => {
@@ -2809,6 +2833,7 @@ class ContextOptionsStore {
               "view",
               "fill-form",
               "edit",
+              "start-filling",
               "vectorization",
               "preview",
               "mark-read",
