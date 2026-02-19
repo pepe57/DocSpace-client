@@ -30,11 +30,15 @@ import { TariffState } from "../../../enums";
 
 export const PATH_TARIFF = "portal/tariff";
 
+export const TARIFF_DUE_DATE_ACTIVE = "2026-06-05T13:03:34.0000000+04:00";
+export const TARIFF_DUE_DATE_EXPIRED = "2026-01-05T13:03:34.0000000+04:00";
+
 export const tariffSuccess = (
   openSource: boolean = false,
   gracePeriod: boolean = false,
   enterprise: boolean = false,
   developer: boolean = false,
+  dueDate: string = TARIFF_DUE_DATE_ACTIVE,
 ) => {
   return {
     response: {
@@ -43,7 +47,7 @@ export const tariffSuccess = (
       developer,
       id: 1,
       state: gracePeriod ? TariffState.Delay : TariffState.Paid,
-      dueDate: "2026-01-05T13:03:34.0000000+04:00",
+      dueDate,
       delayDueDate: gracePeriod
         ? "2026-01-07T13:03:34.0000000+04:00"
         : "0001-01-01T00:00:00.0000000Z",
@@ -75,10 +79,11 @@ export const tariffResolver = (
   gracePeriod: boolean = false,
   enterprise: boolean = false,
   developer: boolean = false,
+  dueDate: string = TARIFF_DUE_DATE_ACTIVE,
 ) => {
   return new Response(
     JSON.stringify(
-      tariffSuccess(openSource, gracePeriod, enterprise, developer),
+      tariffSuccess(openSource, gracePeriod, enterprise, developer, dueDate),
     ),
   );
 };
@@ -89,8 +94,9 @@ export const tariffHandler = (
   gracePeriod: boolean = false,
   enterprise: boolean = false,
   developer: boolean = false,
+  dueDate: string = TARIFF_DUE_DATE_ACTIVE,
 ) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_TARIFF}`, () => {
-    return tariffResolver(openSource, gracePeriod, enterprise, developer);
+    return tariffResolver(openSource, gracePeriod, enterprise, developer, dueDate);
   });
 };

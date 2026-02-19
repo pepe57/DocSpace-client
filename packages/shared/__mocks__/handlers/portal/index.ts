@@ -28,7 +28,7 @@ import { suspendPortalHandler } from "./suspend";
 import { continuePortalHandler } from "./continue";
 import { deletePortalHandler } from "./delete";
 import { restoreProgressHandler } from "./restoreProgress";
-import { tariffHandler } from "./tariff";
+import { tariffHandler, TARIFF_DUE_DATE_EXPIRED } from "./tariff";
 import { getPortalHandler, getPortalApiHandler } from "./getPortal";
 import { quotaHandler } from "./quota";
 import { backupProgressHandler } from "./backupprogress";
@@ -45,6 +45,7 @@ export {
   deletePortalHandler,
   restoreProgressHandler,
   tariffHandler,
+  TARIFF_DUE_DATE_EXPIRED,
   getPortalHandler,
   getPortalApiHandler,
   quotaHandler,

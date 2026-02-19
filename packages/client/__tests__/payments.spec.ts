@@ -35,6 +35,7 @@ import {
   quotaHandler,
   settingsHandler,
   tariffHandler,
+  TARIFF_DUE_DATE_EXPIRED,
   TypeSettings,
   selfByTypeHandler,
 } from "@docspace/shared/__mocks__/handlers";
@@ -94,7 +95,7 @@ test.describe("Standalone payments", () => {
           colorThemeHandler(TEST_PORT),
           paymentSettingsHandler(TEST_PORT),
           licenseQuotaHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, true),
+          tariffHandler(TEST_PORT, false, false, true, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, true, true, true),
         );
       });
@@ -122,7 +123,7 @@ test.describe("Standalone payments", () => {
           colorThemeHandler(TEST_PORT),
           paymentSettingsHandler(TEST_PORT),
           licenseQuotaHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, true),
+          tariffHandler(TEST_PORT, false, false, true, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, true, true, true),
         );
       });
@@ -150,7 +151,7 @@ test.describe("Standalone payments", () => {
           colorThemeHandler(TEST_PORT),
           paymentSettingsHandler(TEST_PORT),
           licenseQuotaHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, true),
+          tariffHandler(TEST_PORT, false, false, true, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, true, false),
         );
       });
@@ -178,7 +179,7 @@ test.describe("Standalone payments", () => {
           colorThemeHandler(TEST_PORT),
           paymentSettingsHandler(TEST_PORT),
           licenseQuotaHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, true, true),
+          tariffHandler(TEST_PORT, false, true, true, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, true, false),
         );
       });
@@ -205,7 +206,7 @@ test.describe("Standalone payments", () => {
           colorThemeHandler(TEST_PORT),
           paymentSettingsHandler(TEST_PORT),
           licenseQuotaHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, true),
+          tariffHandler(TEST_PORT, false, false, true, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT),
         );
       });
@@ -233,7 +234,7 @@ test.describe("Standalone payments", () => {
           colorThemeHandler(TEST_PORT),
           paymentSettingsHandler(TEST_PORT),
           licenseQuotaHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, true),
+          tariffHandler(TEST_PORT, false, false, true, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT),
         );
       });
@@ -263,7 +264,7 @@ test.describe("Standalone payments", () => {
           colorThemeHandler(TEST_PORT),
           paymentSettingsHandler(TEST_PORT),
           licenseQuotaHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, true, true),
+          tariffHandler(TEST_PORT, false, false, true, true, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, true, false),
         );
       });
@@ -291,7 +292,7 @@ test.describe("Standalone payments", () => {
           colorThemeHandler(TEST_PORT),
           paymentSettingsHandler(TEST_PORT),
           licenseQuotaHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, true, true, true),
+          tariffHandler(TEST_PORT, false, true, true, true, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, true, false),
         );
       });
@@ -319,7 +320,7 @@ test.describe("Standalone payments", () => {
           colorThemeHandler(TEST_PORT),
           paymentSettingsHandler(TEST_PORT),
           licenseQuotaHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, true, true),
+          tariffHandler(TEST_PORT, false, false, true, true, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT),
         );
       });
@@ -347,7 +348,7 @@ test.describe("Standalone payments", () => {
           colorThemeHandler(TEST_PORT),
           paymentSettingsHandler(TEST_PORT),
           licenseQuotaHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, true, true),
+          tariffHandler(TEST_PORT, false, false, true, true, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT),
         );
       });
@@ -375,7 +376,7 @@ test.describe("Standalone payments", () => {
         settingsHandler(TEST_PORT, TypeSettings.Authenticated),
         colorThemeHandler(TEST_PORT),
         paymentSettingsHandler(TEST_PORT),
-        tariffHandler(TEST_PORT, true),
+        tariffHandler(TEST_PORT, true, false, false, false, TARIFF_DUE_DATE_EXPIRED),
         quotaHandler(TEST_PORT, true, false),
       );
     });
@@ -410,7 +411,7 @@ test.describe("SaaS payments", () => {
           paymentCustomerInfoHandler(TEST_PORT),
           paymentAccountHandler(TEST_PORT),
           paymentUrlHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, false),
+          tariffHandler(TEST_PORT, false, false, false, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, false, false, false, true),
         );
       });
@@ -443,7 +444,7 @@ test.describe("SaaS payments", () => {
           paymentCustomerInfoHandler(TEST_PORT, false, "another@test.com"),
           paymentAccountHandler(TEST_PORT),
           paymentUrlHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, false),
+          tariffHandler(TEST_PORT, false, false, false, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, false, false, false, true),
         );
       });
@@ -476,7 +477,7 @@ test.describe("SaaS payments", () => {
           paymentCustomerInfoHandler(TEST_PORT, true),
           paymentAccountHandler(TEST_PORT),
           paymentUrlHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, false),
+          tariffHandler(TEST_PORT, false, false, false, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, false, false, false, true),
         );
       });
@@ -509,7 +510,7 @@ test.describe("SaaS payments", () => {
           paymentCustomerInfoHandler(TEST_PORT),
           paymentAccountHandler(TEST_PORT),
           paymentUrlHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, false),
+          tariffHandler(TEST_PORT, false, false, false, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, false, false, false, true),
         );
       });
@@ -542,7 +543,7 @@ test.describe("SaaS payments", () => {
           paymentCustomerInfoHandler(TEST_PORT, true),
           paymentAccountHandler(TEST_PORT),
           paymentUrlHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, false),
+          tariffHandler(TEST_PORT, false, false, false, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, false, false, false, true),
         );
       });
@@ -577,7 +578,7 @@ test.describe("SaaS payments", () => {
           paymentCustomerInfoHandler(TEST_PORT),
           paymentAccountHandler(TEST_PORT),
           paymentUrlHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, false),
+          tariffHandler(TEST_PORT, false, false, false, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, false, false, false, true, true),
         );
       });
@@ -610,7 +611,7 @@ test.describe("SaaS payments", () => {
           paymentCustomerInfoHandler(TEST_PORT, false, "another@test.com"),
           paymentAccountHandler(TEST_PORT),
           paymentUrlHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, false),
+          tariffHandler(TEST_PORT, false, false, false, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, false, false, false, true, true),
         );
       });
@@ -643,7 +644,7 @@ test.describe("SaaS payments", () => {
           paymentCustomerInfoHandler(TEST_PORT, true),
           paymentAccountHandler(TEST_PORT),
           paymentUrlHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, false),
+          tariffHandler(TEST_PORT, false, false, false, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, false, false, false, true, true),
         );
       });
@@ -676,7 +677,7 @@ test.describe("SaaS payments", () => {
           paymentCustomerInfoHandler(TEST_PORT),
           paymentAccountHandler(TEST_PORT),
           paymentUrlHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, false),
+          tariffHandler(TEST_PORT, false, false, false, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, false, false, false, true, true),
         );
       });
@@ -709,7 +710,7 @@ test.describe("SaaS payments", () => {
           paymentCustomerInfoHandler(TEST_PORT, true),
           paymentAccountHandler(TEST_PORT),
           paymentUrlHandler(TEST_PORT),
-          tariffHandler(TEST_PORT, false, false, false),
+          tariffHandler(TEST_PORT, false, false, false, false, TARIFF_DUE_DATE_EXPIRED),
           quotaHandler(TEST_PORT, false, false, false, true, true),
         );
       });

@@ -31,6 +31,7 @@ import {
   quotaHandler,
   settingsHandler,
   tariffHandler,
+  TARIFF_DUE_DATE_EXPIRED,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
@@ -89,7 +90,7 @@ test.describe("Enterprise Edition", () => {
         colorThemeHandler(port),
         paymentSettingsHandler(port),
         licenseQuotaHandler(port),
-        tariffHandler(port, false, false, true),
+        tariffHandler(port, false, false, true, false, TARIFF_DUE_DATE_EXPIRED),
         quotaHandler(port, true, true, true),
       );
     });
@@ -113,7 +114,7 @@ test.describe("Enterprise Edition", () => {
         colorThemeHandler(port),
         paymentSettingsHandler(port),
         licenseQuotaHandler(port),
-        tariffHandler(port, false, false, true),
+        tariffHandler(port, false, false, true, false, TARIFF_DUE_DATE_EXPIRED),
         quotaHandler(port, true, true, true),
       );
     });
@@ -141,7 +142,7 @@ test.describe("Enterprise Edition", () => {
         colorThemeHandler(port),
         paymentSettingsHandler(port),
         licenseQuotaHandler(port),
-        tariffHandler(port, false, false, true),
+        tariffHandler(port, false, false, true, false, TARIFF_DUE_DATE_EXPIRED),
         quotaHandler(port, true, false),
       );
     });
@@ -169,7 +170,7 @@ test.describe("Enterprise Edition", () => {
         colorThemeHandler(port),
         paymentSettingsHandler(port),
         licenseQuotaHandler(port),
-        tariffHandler(port, false, true, true),
+        tariffHandler(port, false, true, true, false, TARIFF_DUE_DATE_EXPIRED),
         quotaHandler(port, true, false),
       );
     });
@@ -197,7 +198,7 @@ test.describe("Enterprise Edition", () => {
         colorThemeHandler(port),
         paymentSettingsHandler(port),
         licenseQuotaHandler(port),
-        tariffHandler(port, false, false, true),
+        tariffHandler(port, false, false, true, false, TARIFF_DUE_DATE_EXPIRED),
         quotaHandler(port),
       );
     });
@@ -221,7 +222,7 @@ test.describe("Enterprise Edition", () => {
         colorThemeHandler(port),
         paymentSettingsHandler(port),
         licenseQuotaHandler(port),
-        tariffHandler(port, false, false, true),
+        tariffHandler(port, false, false, true, false, TARIFF_DUE_DATE_EXPIRED),
         quotaHandler(port),
       );
     });
@@ -251,7 +252,7 @@ test.describe("Developer Edition", () => {
         colorThemeHandler(port),
         paymentSettingsHandler(port),
         licenseQuotaHandler(port),
-        tariffHandler(port, false, false, true, true),
+        tariffHandler(port, false, false, true, true, TARIFF_DUE_DATE_EXPIRED),
         quotaHandler(port, true, false),
       );
     });
@@ -279,7 +280,7 @@ test.describe("Developer Edition", () => {
         colorThemeHandler(port),
         paymentSettingsHandler(port),
         licenseQuotaHandler(port),
-        tariffHandler(port, false, true, true, true),
+        tariffHandler(port, false, true, true, true, TARIFF_DUE_DATE_EXPIRED),
         quotaHandler(port, true, false),
       );
     });
@@ -307,7 +308,7 @@ test.describe("Developer Edition", () => {
         colorThemeHandler(port),
         paymentSettingsHandler(port),
         licenseQuotaHandler(port),
-        tariffHandler(port, false, false, true, true),
+        tariffHandler(port, false, false, true, true, TARIFF_DUE_DATE_EXPIRED),
         quotaHandler(port),
       );
     });
@@ -331,7 +332,7 @@ test.describe("Developer Edition", () => {
         colorThemeHandler(port),
         paymentSettingsHandler(port),
         licenseQuotaHandler(port),
-        tariffHandler(port, false, false, true, true),
+        tariffHandler(port, false, false, true, true, TARIFF_DUE_DATE_EXPIRED),
         quotaHandler(port),
       );
     });
