@@ -69,10 +69,10 @@ export type UploaderClientProps = {
     targetId?: string;
     acceptExtensions?: string;
     linkMainText?: string;
-    linkMainTextForFiles?: string;
-    linkMainTextForFolders?: string;
     secondaryText?: string;
     extensionsText?: string;
+    isFolderUpload?: boolean;
+    isMultipleUpload?: boolean;
   };
 };
 
@@ -212,20 +212,40 @@ export default function UploaderClient({
     [t, uploadFiles],
   );
 
+  const getSecondaryText = () => {
+    if (baseConfig?.secondaryText) {
+      return baseConfig.secondaryText;
+    }
+
+    const isFolderUpload = baseConfig?.isFolderUpload ?? false;
+    const isMultipleUpload = baseConfig?.isMultipleUpload ?? true;
+
+    if (isFolderUpload && isMultipleUpload) {
+      return t("Common:DropzoneFoldersSecondary");
+    }
+    if (isFolderUpload && !isMultipleUpload) {
+      return t("Common:DropzoneFolderSecondary");
+    }
+    if (!isFolderUpload && isMultipleUpload) {
+      return t("Common:DropzoneFilesSecondary");
+    }
+    return t("Common:DropzoneTitleSecondary");
+  };
+
   return (
     <DropzoneComponent
       isDisabled={isLoading}
       isLoading={isLoading}
+      isFolderUpload={baseConfig?.isFolderUpload}
+      isMultipleUpload={baseConfig?.isMultipleUpload}
+      onSingleUploadError={() => {
+        toastr.warning(t("Common:SingleUploadWarning"));
+      }}
       onDrop={onDrop}
       accept={accept}
       getFilesFromEvent={getFilesFromEvent}
-      linkMainTextForFiles={
-        baseConfig?.linkMainTextForFiles ?? t("Common:Upload")
-      }
-      linkMainTextForFolders={baseConfig?.linkMainTextForFolders}
-      linkSecondaryText={
-        baseConfig?.secondaryText ?? t("Common:DropzoneTitleSecondary")
-      }
+      linkMainText={baseConfig?.linkMainText ?? t("Common:Upload")}
+      linkSecondaryText={getSecondaryText()}
       exstsText={
         (baseConfig?.extensionsText ?? shortText)
           ? shortText
