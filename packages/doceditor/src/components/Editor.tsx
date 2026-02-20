@@ -86,7 +86,7 @@ const Editor = ({
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
-  onStartFillingVDRPanel,
+  onOpenRoleMappingPanel,
   setFillingStatusDialogVisible,
   openShareFormDialog,
   onStartFilling,
@@ -137,7 +137,7 @@ const Editor = ({
     organizationName,
     setFillingStatusDialogVisible,
     openShareFormDialog,
-    onStartFillingVDRPanel,
+    onOpenRoleMappingPanel,
     shareKey,
     generationToolCallState,
   });

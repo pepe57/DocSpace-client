@@ -33,13 +33,13 @@ import type { TTranslation } from "../../types";
 
 export type Invitation = { id: string | number; access: string | number };
 
-export interface IStartFillingPanelProps {
+export interface IRoleMappingPanelProps {
   roles: Omit<IRole, "user">[];
   user: TUser;
   settings: TSettings;
   fileId: number;
   roomId: string;
-  setStartFillingPanelVisible: Dispatch<SetStateAction<boolean>>;
+  setRoleMappingPanelVisible: Dispatch<SetStateAction<boolean>>;
   onSubmit: (data: TFormRoleMappingRequest) => Promise<void>;
   inviteUserToRoom: (
     roomId: string,

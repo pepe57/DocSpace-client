@@ -37,20 +37,20 @@ import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import { ButtonSize, Button } from "@docspace/ui-kit/components/button";
 import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
 import {
-	ModalDialog,
-	ModalDialogType,
+  ModalDialog,
+  ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import {
-	FillingRoleSelector,
-	type IRole,
+  FillingRoleSelector,
+  type IRole,
 } from "../../components/filling-role-selector";
 
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import PeopleSelector from "../../selectors/People";
 import type {
-	HeaderProps,
-	TAccessRight,
-	TOnSubmit,
+  HeaderProps,
+  TAccessRight,
+  TOnSubmit,
 } from "@docspace/ui-kit/components/selector";
 
 import styles from "./StartFillingPanel.module.scss";
@@ -58,348 +58,348 @@ import { getAccessOptions } from "../../utils/getAccessOptions";
 import { RoomsType, ShareAccessRights } from "../../enums";
 
 import type {
-	Invitation,
-	IStartFillingPanelProps,
+  Invitation,
+  IRoleMappingPanelProps,
 } from "./StartFillingPanel.types";
 import { Header } from "./StartFillingPanel.helpers";
 import UnsavedChangesDialog from "../../dialogs/unsaved-changes-dialog";
 import { useUnsavedChanges } from "../../hooks/useUnsavedChanges";
 
 const StartFillingPanel = ({
-	user,
-	fileId,
-	roomId,
-	settings,
-	inviteUserToRoom,
-	setStartFillingPanelVisible,
-	withBorder,
-	canEditRoom = false,
-	...props
-}: IStartFillingPanelProps) => {
-	const [infoBarVisible, setInfoBarVisible] = useLocalStorage(
-		`start-filling-panel-${user.id}`,
-		true,
-	);
-	const { t } = useTranslation("Common");
-	const [currentRoleIndex, setCurrentRoleIndex] = useState(-1);
-	const [isPending, startTransition] = useTransition();
+  user,
+  fileId,
+  roomId,
+  settings,
+  inviteUserToRoom,
+  setRoleMappingPanelVisible,
+  withBorder,
+  canEditRoom = false,
+  ...props
+}: IRoleMappingPanelProps) => {
+  const [infoBarVisible, setInfoBarVisible] = useLocalStorage(
+    `start-filling-panel-${user.id}`,
+    true,
+  );
+  const { t } = useTranslation("Common");
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(-1);
+  const [isPending, startTransition] = useTransition();
 
-	const accessOptions = useMemo(
-		() =>
-			getAccessOptions(
-				t,
-				RoomsType.VirtualDataRoom,
-				false,
-				true,
-				user.isOwner,
-				user.isAdmin,
-				settings.standalone,
-			),
-		[t, settings, user],
-	);
+  const accessOptions = useMemo(
+    () =>
+      getAccessOptions(
+        t,
+        RoomsType.VirtualDataRoom,
+        false,
+        true,
+        user.isOwner,
+        user.isAdmin,
+        settings.standalone,
+      ),
+    [t, settings, user],
+  );
 
-	const selectedAccessRight = useMemo(
-		() =>
-			accessOptions.find(
-				(option) =>
-					"access" in option && option.access === ShareAccessRights.FormFilling,
-			) ?? accessOptions[accessOptions.length - 1],
-		[accessOptions],
-	);
+  const selectedAccessRight = useMemo(
+    () =>
+      accessOptions.find(
+        (option) =>
+          "access" in option && option.access === ShareAccessRights.FormFilling,
+      ) ?? accessOptions[accessOptions.length - 1],
+    [accessOptions],
+  );
 
-	const [roles, setRoles] = useState<IRole[]>(() => props.roles);
+  const [roles, setRoles] = useState<IRole[]>(() => props.roles);
 
-	const [isRoleSelectorVisible, setIsRoleSelectorVisible] = useState(false);
-	const [isInvitePanelVisible, setIsInvitePanelVisible] = useState(false);
-	const [unsavedChangesDialogVisible, setUnsavedChangesDialogVisible] =
-		useState(false);
+  const [isRoleSelectorVisible, setIsRoleSelectorVisible] = useState(false);
+  const [isInvitePanelVisible, setIsInvitePanelVisible] = useState(false);
+  const [unsavedChangesDialogVisible, setUnsavedChangesDialogVisible] =
+    useState(false);
 
-	const initData = useMemo(() => ({ roles: props.roles }), [props.roles]);
-	const currentDate = useMemo(() => ({ roles }), [roles]);
-	const hasChanges = useUnsavedChanges(initData, currentDate);
+  const initData = useMemo(() => ({ roles: props.roles }), [props.roles]);
+  const currentDate = useMemo(() => ({ roles }), [roles]);
+  const hasChanges = useUnsavedChanges(initData, currentDate);
 
-	const closeUsersPanel = useCallback(() => {
-		setIsRoleSelectorVisible(false);
-	}, []);
+  const closeUsersPanel = useCallback(() => {
+    setIsRoleSelectorVisible(false);
+  }, []);
 
-	const closeStartFillingPanel = useCallback(
-		(e?: React.MouseEvent) => {
-			const checkChanges = !e;
+  const closeStartFillingPanel = useCallback(
+    (e?: React.MouseEvent) => {
+      const checkChanges = !e;
 
-			if (checkChanges && hasChanges) {
-				setUnsavedChangesDialogVisible(true);
-				return;
-			}
+      if (checkChanges && hasChanges) {
+        setUnsavedChangesDialogVisible(true);
+        return;
+      }
 
-			setStartFillingPanelVisible(false);
-		},
-		[setStartFillingPanelVisible, hasChanges],
-	);
+      setRoleMappingPanelVisible(false);
+    },
+    [setRoleMappingPanelVisible, hasChanges],
+  );
 
-	const closeInvitePanel = useCallback(() => {
-		setIsInvitePanelVisible(false);
-	}, []);
+  const closeInvitePanel = useCallback(() => {
+    setIsInvitePanelVisible(false);
+  }, []);
 
-	const openInvitePanel = useCallback(() => {
-		if (!canEditRoom) return;
+  const openInvitePanel = useCallback(() => {
+    if (!canEditRoom) return;
 
-		setIsInvitePanelVisible(true);
-	}, [canEditRoom]);
+    setIsInvitePanelVisible(true);
+  }, [canEditRoom]);
 
-	const onSubmit = async () => {
-		startTransition(async () => {
-			await props
-				.onSubmit({
-					formId: fileId,
-					roles: roles.map((role) => ({
-						userId: role.user!.id,
-						roleName: role.name,
-						roleColor: role.color.split("#")[1],
-						roomId: Number(roomId),
-					})),
-				})
-				.catch((err) => {
-					console.log(err);
-				});
-			startTransition(() => {
-				setStartFillingPanelVisible(false);
-			});
-		});
-	};
+  const onSubmit = async () => {
+    startTransition(async () => {
+      await props
+        .onSubmit({
+          formId: fileId,
+          roles: roles.map((role) => ({
+            userId: role.user!.id,
+            roleName: role.name,
+            roleColor: role.color.split("#")[1],
+            roomId: Number(roomId),
+          })),
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      startTransition(() => {
+        setRoleMappingPanelVisible(false);
+      });
+    });
+  };
 
-	const onSelectUser: TOnSubmit = useCallback(
-		(item) => {
-			if (item.length === 0) return;
+  const onSelectUser: TOnSubmit = useCallback(
+    (item) => {
+      if (item.length === 0) return;
 
-			const selectedUser = item[0];
+      const selectedUser = item[0];
 
-			const { avatar, id, displayName } = selectedUser;
+      const { avatar, id, displayName } = selectedUser;
 
-			if (id && displayName) {
-				setRoles((prev) => {
-					if (currentRoleIndex === -1) return prev;
+      if (id && displayName) {
+        setRoles((prev) => {
+          if (currentRoleIndex === -1) return prev;
 
-					const role = prev[currentRoleIndex];
-					const newRole = {
-						...role,
-						user: {
-							id: id.toString(),
-							avatar,
-							displayName,
-						},
-					};
-					return prev.map((x, i) => (i === currentRoleIndex ? newRole : x));
-				});
-			}
-			setIsRoleSelectorVisible(false);
-		},
-		[currentRoleIndex, setRoles],
-	);
+          const role = prev[currentRoleIndex];
+          const newRole = {
+            ...role,
+            user: {
+              id: id.toString(),
+              avatar,
+              displayName,
+            },
+          };
+          return prev.map((x, i) => (i === currentRoleIndex ? newRole : x));
+        });
+      }
+      setIsRoleSelectorVisible(false);
+    },
+    [currentRoleIndex, setRoles],
+  );
 
-	const inviteUsers: TOnSubmit = async (selectedItems, access) => {
-		if (isNull(access) || selectedItems.length === 0) return;
+  const inviteUsers: TOnSubmit = async (selectedItems, access) => {
+    if (isNull(access) || selectedItems.length === 0) return;
 
-		const invitations = selectedItems.reduce<Invitation[]>((acc, item) => {
-			if (isUndefined(item.id)) return acc;
+    const invitations = selectedItems.reduce<Invitation[]>((acc, item) => {
+      if (isUndefined(item.id)) return acc;
 
-			const temp = {
-				id: item.id,
-				access: access.access,
-			};
+      const temp = {
+        id: item.id,
+        access: access.access,
+      };
 
-			return [...acc, temp];
-		}, []);
+      return [...acc, temp];
+    }, []);
 
-		await inviteUserToRoom(roomId, invitations).catch((err) => {
-			console.log(err);
-		});
+    await inviteUserToRoom(roomId, invitations).catch((err) => {
+      console.log(err);
+    });
 
-		setIsInvitePanelVisible(false);
-	};
+    setIsInvitePanelVisible(false);
+  };
 
-	const onSelect = (roleId: number) => {
-		setCurrentRoleIndex(roleId);
-		setIsRoleSelectorVisible(true);
-	};
+  const onSelect = (roleId: number) => {
+    setCurrentRoleIndex(roleId);
+    setIsRoleSelectorVisible(true);
+  };
 
-	const checkIfUserInvited = useCallback(() => false, []);
+  const checkIfUserInvited = useCallback(() => false, []);
 
-	const removeUserFromRole = (roleIdx: number) => {
-		setRoles((prev) => {
-			if (roleIdx === -1) return prev;
+  const removeUserFromRole = (roleIdx: number) => {
+    setRoles((prev) => {
+      if (roleIdx === -1) return prev;
 
-			const role = prev[roleIdx];
-			const newRole = {
-				...role,
-				user: null,
-			};
-			return prev.map((x, i) => (i === roleIdx ? newRole : x));
-		});
-	};
+      const role = prev[roleIdx];
+      const newRole = {
+        ...role,
+        user: null,
+      };
+      return prev.map((x, i) => (i === roleIdx ? newRole : x));
+    });
+  };
 
-	const disabledSubmit = roles.some((role) => !role.user);
+  const disabledSubmit = roles.some((role) => !role.user);
 
-	const headerProps = useMemo(
-		() =>
-			({
-				headerLabel: t("Common:AssignToRecipient"),
-				withoutBackButton: false,
-				withoutBorder: false,
-				isCloseable: true,
-				onBackClick: closeUsersPanel,
-				onCloseClick: () => {
-					closeUsersPanel();
-					closeStartFillingPanel();
-				},
-			}) satisfies HeaderProps,
-		[closeUsersPanel, closeStartFillingPanel, t],
-	);
+  const headerProps = useMemo(
+    () =>
+      ({
+        headerLabel: t("Common:AssignToRecipient"),
+        withoutBackButton: false,
+        withoutBorder: false,
+        isCloseable: true,
+        onBackClick: closeUsersPanel,
+        onCloseClick: () => {
+          closeUsersPanel();
+          closeStartFillingPanel();
+        },
+      }) satisfies HeaderProps,
+    [closeUsersPanel, closeStartFillingPanel, t],
+  );
 
-	const invitePanelSelectorHeader = useMemo(
-		() =>
-			({
-				headerLabel: t("Common:ListAccounts"),
-				withoutBackButton: false,
-				withoutBorder: true,
-				isCloseable: true,
-				onBackClick: closeInvitePanel,
-				onCloseClick: () => {
-					closeInvitePanel();
-					closeUsersPanel();
-					closeStartFillingPanel();
-				},
-			}) satisfies HeaderProps,
-		[closeInvitePanel, closeUsersPanel, closeStartFillingPanel, t],
-	);
+  const invitePanelSelectorHeader = useMemo(
+    () =>
+      ({
+        headerLabel: t("Common:ListAccounts"),
+        withoutBackButton: false,
+        withoutBorder: true,
+        isCloseable: true,
+        onBackClick: closeInvitePanel,
+        onCloseClick: () => {
+          closeInvitePanel();
+          closeUsersPanel();
+          closeStartFillingPanel();
+        },
+      }) satisfies HeaderProps,
+    [closeInvitePanel, closeUsersPanel, closeStartFillingPanel, t],
+  );
 
-	return (
-		<>
-			{unsavedChangesDialogVisible ? (
-				<UnsavedChangesDialog
-					visible={unsavedChangesDialogVisible}
-					onClose={() => setUnsavedChangesDialogVisible(false)}
-					onCancel={() => setUnsavedChangesDialogVisible(false)}
-					onConfirm={() => {
-						setUnsavedChangesDialogVisible(false);
-						setStartFillingPanelVisible(false);
-					}}
-				/>
-			) : null}
+  return (
+    <>
+      {unsavedChangesDialogVisible ? (
+        <UnsavedChangesDialog
+          visible={unsavedChangesDialogVisible}
+          onClose={() => setUnsavedChangesDialogVisible(false)}
+          onCancel={() => setUnsavedChangesDialogVisible(false)}
+          onConfirm={() => {
+            setUnsavedChangesDialogVisible(false);
+            setRoleMappingPanelVisible(false);
+          }}
+        />
+      ) : null}
 
-			<ModalDialog
-				visible
-				withBodyScroll
-				withBorder={withBorder}
-				onClose={closeStartFillingPanel}
-				displayType={ModalDialogType.aside}
-				containerVisible={isRoleSelectorVisible || isInvitePanelVisible}
-				withoutPadding
-			>
-				<ModalDialog.Container>
-					{isRoleSelectorVisible && !isInvitePanelVisible ? (
-						<PeopleSelector
-							roomId={roomId}
-							useAside
-							withHeader
-							withGuests
-							onlyRoomMembers
-							withCancelButton
-							alwaysShowFooter
-							onSubmit={onSelectUser}
-							onCancel={closeUsersPanel}
-							onClose={closeUsersPanel}
-							submitButtonLabel={t("Common:SelectAction")}
-							cancelButtonLabel={t("Common:CancelButton")}
-							disableDisabledUsers
-							disableSubmitButton={false}
-							checkIfUserInvited={checkIfUserInvited}
-							injectedElement={
-								<Header
-									t={t}
-									canEditRoom={canEditRoom}
-									className={styles.header}
-									roleName={roles[currentRoleIndex]?.name ?? ""}
-									openInvitePanel={openInvitePanel}
-								/>
-							}
-							headerProps={headerProps}
-						/>
-					) : null}
+      <ModalDialog
+        visible
+        withBodyScroll
+        withBorder={withBorder}
+        onClose={closeStartFillingPanel}
+        displayType={ModalDialogType.aside}
+        containerVisible={isRoleSelectorVisible || isInvitePanelVisible}
+        withoutPadding
+      >
+        <ModalDialog.Container>
+          {isRoleSelectorVisible && !isInvitePanelVisible ? (
+            <PeopleSelector
+              roomId={roomId}
+              useAside
+              withHeader
+              withGuests
+              onlyRoomMembers
+              withCancelButton
+              alwaysShowFooter
+              onSubmit={onSelectUser}
+              onCancel={closeUsersPanel}
+              onClose={closeUsersPanel}
+              submitButtonLabel={t("Common:SelectAction")}
+              cancelButtonLabel={t("Common:CancelButton")}
+              disableDisabledUsers
+              disableSubmitButton={false}
+              checkIfUserInvited={checkIfUserInvited}
+              injectedElement={
+                <Header
+                  t={t}
+                  canEditRoom={canEditRoom}
+                  className={styles.header}
+                  roleName={roles[currentRoleIndex]?.name ?? ""}
+                  openInvitePanel={openInvitePanel}
+                />
+              }
+              headerProps={headerProps}
+            />
+          ) : null}
 
-					{isInvitePanelVisible ? (
-						<PeopleSelector
-							roomId={roomId}
-							useAside
-							withHeader
-							withGuests
-							isMultiSelect
-							alwaysShowFooter
-							withAccessRights
-							accessRights={accessOptions as TAccessRight[]}
-							selectedAccessRight={selectedAccessRight as TAccessRight}
-							onAccessRightsChange={() => {}}
-							onSubmit={inviteUsers}
-							onClose={closeInvitePanel}
-							submitButtonLabel={t("Common:AddToRoom")}
-							disableDisabledUsers
-							disableSubmitButton={false}
-							headerProps={invitePanelSelectorHeader}
-						/>
-					) : null}
-				</ModalDialog.Container>
-				<ModalDialog.Header>{t("Common:StartFilling")}</ModalDialog.Header>
-				<ModalDialog.Body>
-					<section className={styles.container}>
-						{infoBarVisible ? (
-							<>
-								<PublicRoomBar
-									headerText={t("Common:StartFillingBarHeader")}
-									bodyText={t("Common:StartFillingBarDescription")}
-									iconName={InfoSvgUrl}
-									onClose={() => setInfoBarVisible(false)}
-								/>
-								<hr className={styles.divider} />
-							</>
-						) : null}
-						<p
-							className={classNames(styles.title, {
-								[styles.titleMargin]: !infoBarVisible,
-							})}
-						>
-							{t("Common:RecipientsFromTheForm")}
-						</p>
-						<FillingRoleSelector
-							roles={roles}
-							onSelect={onSelect}
-							removeUserFromRole={removeUserFromRole}
-							currentUserId={user.id}
-						/>
-					</section>
-				</ModalDialog.Body>
-				<ModalDialog.Footer>
-					<Button
-						id="shared_move-to-archived-modal_submit"
-						key="OKButton"
-						label={t("Common:Start")}
-						size={ButtonSize.normal}
-						primary
-						scale
-						isDisabled={disabledSubmit}
-						onClick={onSubmit}
-						isLoading={isPending}
-					/>
-					<Button
-						id="shared_move-to-archived-modal_cancel"
-						key="CancelButton"
-						label={t("Common:CancelButton")}
-						size={ButtonSize.normal}
-						scale
-						onClick={closeStartFillingPanel}
-					/>
-				</ModalDialog.Footer>
-			</ModalDialog>
-		</>
-	);
+          {isInvitePanelVisible ? (
+            <PeopleSelector
+              roomId={roomId}
+              useAside
+              withHeader
+              withGuests
+              isMultiSelect
+              alwaysShowFooter
+              withAccessRights
+              accessRights={accessOptions as TAccessRight[]}
+              selectedAccessRight={selectedAccessRight as TAccessRight}
+              onAccessRightsChange={() => {}}
+              onSubmit={inviteUsers}
+              onClose={closeInvitePanel}
+              submitButtonLabel={t("Common:AddToRoom")}
+              disableDisabledUsers
+              disableSubmitButton={false}
+              headerProps={invitePanelSelectorHeader}
+            />
+          ) : null}
+        </ModalDialog.Container>
+        <ModalDialog.Header>{t("Common:StartFilling")}</ModalDialog.Header>
+        <ModalDialog.Body>
+          <section className={styles.container}>
+            {infoBarVisible ? (
+              <>
+                <PublicRoomBar
+                  headerText={t("Common:StartFillingBarHeader")}
+                  bodyText={t("Common:StartFillingBarDescription")}
+                  iconName={InfoSvgUrl}
+                  onClose={() => setInfoBarVisible(false)}
+                />
+                <hr className={styles.divider} />
+              </>
+            ) : null}
+            <p
+              className={classNames(styles.title, {
+                [styles.titleMargin]: !infoBarVisible,
+              })}
+            >
+              {t("Common:RecipientsFromTheForm")}
+            </p>
+            <FillingRoleSelector
+              roles={roles}
+              onSelect={onSelect}
+              removeUserFromRole={removeUserFromRole}
+              currentUserId={user.id}
+            />
+          </section>
+        </ModalDialog.Body>
+        <ModalDialog.Footer>
+          <Button
+            id="shared_move-to-archived-modal_submit"
+            key="OKButton"
+            label={t("Common:Start")}
+            size={ButtonSize.normal}
+            primary
+            scale
+            isDisabled={disabledSubmit}
+            onClick={onSubmit}
+            isLoading={isPending}
+          />
+          <Button
+            id="shared_move-to-archived-modal_cancel"
+            key="CancelButton"
+            label={t("Common:CancelButton")}
+            size={ButtonSize.normal}
+            scale
+            onClick={closeStartFillingPanel}
+          />
+        </ModalDialog.Footer>
+      </ModalDialog>
+    </>
+  );
 };
 
 export default StartFillingPanel;

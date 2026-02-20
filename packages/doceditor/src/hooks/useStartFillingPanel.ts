@@ -43,8 +43,7 @@ export const useStartFillingPanel = (
   roomId: string | undefined,
 ) => {
   const [roles, setRoles] = useState<TFormRole[]>([]);
-  const [startFillingPanelVisible, setStartFillingPanelVisible] =
-    useState(false);
+  const [roleMappingPanelVisible, setRoleMappingPanelVisible] = useState(false);
 
   const resolveRef = useRef<() => void>(undefined);
 
@@ -61,7 +60,7 @@ export const useStartFillingPanel = (
     [],
   );
 
-  const onSubmitStartFilling = useCallback(
+  const onSubmitFormRoleMapping = useCallback(
     async (data: TFormRoleMappingRequest) => {
       try {
         await formRoleMapping(data);
@@ -100,18 +99,18 @@ export const useStartFillingPanel = (
     resolveRef.current = undefined;
   }, []);
 
-  const onStartFillingVDRPanel = useCallback((r: TFormRole[]) => {
+  const onOpenRoleMappingPanel = useCallback((r: TFormRole[]) => {
     setRoles(r);
-    setStartFillingPanelVisible(true);
+    setRoleMappingPanelVisible(true);
   }, []);
 
   return {
     roles,
     onStartFilling,
     inviteUserToRoom,
-    onSubmitStartFilling,
-    onStartFillingVDRPanel,
-    startFillingPanelVisible,
-    setStartFillingPanelVisible,
+    onSubmitFormRoleMapping,
+    onOpenRoleMappingPanel,
+    roleMappingPanelVisible,
+    setRoleMappingPanelVisible,
   };
 };

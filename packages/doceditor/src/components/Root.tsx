@@ -233,10 +233,10 @@ const Root = ({
     roles,
     onStartFilling,
     inviteUserToRoom,
-    startFillingPanelVisible,
-    setStartFillingPanelVisible,
-    onStartFillingVDRPanel,
-    onSubmitStartFilling,
+    roleMappingPanelVisible,
+    setRoleMappingPanelVisible,
+    onOpenRoleMappingPanel,
+    onSubmitFormRoleMapping,
   } = useStartFillingPanel(fileInfo, roomId);
 
   useUpdateSearchParamId(fileId, hash);
@@ -275,7 +275,7 @@ const Root = ({
       isSharingDialogVisible ||
       isVisibleSelectFolderDialog ||
       selectFileDialogVisible ||
-      startFillingPanelVisible ||
+      roleMappingPanelVisible ||
       fillingStatusDialogVisible ||
       shareFormDialogVisible
     ) {
@@ -294,7 +294,7 @@ const Root = ({
     isSharingDialogVisible,
     isVisibleSelectFolderDialog,
     selectFileDialogVisible,
-    startFillingPanelVisible,
+    roleMappingPanelVisible,
     fillingStatusDialogVisible,
     shareFormDialogVisible,
   ]);
@@ -359,7 +359,7 @@ const Root = ({
           onSDKRequestSelectDocument={onSDKRequestSelectDocument}
           onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
           organizationName={organizationName}
-          onStartFillingVDRPanel={onStartFillingVDRPanel}
+          onOpenRoleMappingPanel={onOpenRoleMappingPanel}
           setFillingStatusDialogVisible={setFillingStatusDialogVisible}
           openShareFormDialog={openShareFormDialog}
           onStartFilling={onStartFilling}
@@ -403,7 +403,7 @@ const Root = ({
         />
       ) : null}
 
-      {user && settings && fileInfo && startFillingPanelVisible && roomId ? (
+      {user && settings && fileInfo && roleMappingPanelVisible && roomId ? (
         <StartFillingPanel
           withBorder
           user={user}
@@ -412,9 +412,9 @@ const Root = ({
           settings={settings}
           fileId={fileInfo.id}
           canEditRoom={canEditRoom}
-          onSubmit={onSubmitStartFilling}
+          onSubmit={onSubmitFormRoleMapping}
           inviteUserToRoom={inviteUserToRoom}
-          setStartFillingPanelVisible={setStartFillingPanelVisible}
+          setRoleMappingPanelVisible={setRoleMappingPanelVisible}
         />
       ) : null}
       {fillingStatusDialogVisible && fileInfo && user ? (

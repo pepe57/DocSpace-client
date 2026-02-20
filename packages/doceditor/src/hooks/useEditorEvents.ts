@@ -106,7 +106,7 @@ const useEditorEvents = ({
   generationToolCallState,
   setFillingStatusDialogVisible,
   openShareFormDialog,
-  onStartFillingVDRPanel,
+  onOpenRoleMappingPanel,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
 
@@ -917,6 +917,8 @@ const useEditorEvents = ({
 
   const onRequestStartFilling = useCallback(
     (event: object) => {
+      console.log("onRequestStartFilling", { event }, config?.startFillingMode);
+
       switch (config?.startFillingMode) {
         case StartFillingMode.ShareToFillOut:
           openShareFormDialog?.();
@@ -929,14 +931,14 @@ const useEditorEvents = ({
             "data" in event &&
             isFormRole(event.data)
           ) {
-            onStartFillingVDRPanel?.(event.data);
+            onOpenRoleMappingPanel?.(event.data);
           }
           break;
         default:
           break;
       }
     },
-    [config?.startFillingMode, openShareFormDialog, onStartFillingVDRPanel],
+    [config?.startFillingMode, openShareFormDialog, onOpenRoleMappingPanel],
   );
 
   const onRequestRefreshFile = React.useCallback(async () => {
