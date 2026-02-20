@@ -28,7 +28,7 @@ import { useState, useCallback, useRef } from "react";
 
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { setRoomSecurity } from "@docspace/shared/api/rooms";
-import type { Invitation } from "@docspace/shared/dialogs/start-filling/RoleMappingPanel.types";
+import type { Invitation } from "@docspace/shared/dialogs/role-mapping/RoleMappingPanel.types";
 import type {
   TFile,
   TFormRoleMappingRequest,

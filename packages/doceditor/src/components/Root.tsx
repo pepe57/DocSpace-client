@@ -78,7 +78,7 @@ const SharingDialog = dynamic(() => import("./ShareDialog"), {
 
 const RoleMappingPanel = dynamic(
   async () =>
-    (await import("@docspace/shared/dialogs/start-filling")).RoleMappingPanel,
+    (await import("@docspace/shared/dialogs/role-mapping")).RoleMappingPanel,
   {
     ssr: false,
   },
