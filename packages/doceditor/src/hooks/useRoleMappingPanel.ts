@@ -38,7 +38,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import type { TFormRole } from "../types";
 
-export const useStartFillingPanel = (
+export const useRoleMappingPanel = (
   file: TFile | undefined,
   roomId: string | undefined,
 ) => {

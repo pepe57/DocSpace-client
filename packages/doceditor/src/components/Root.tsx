@@ -41,7 +41,7 @@ import useSocketHelper from "@/hooks/useSocketHelper";
 import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
-import { useStartFillingPanel } from "@/hooks/useStartFillingPanel";
+import { useRoleMappingPanel } from "@/hooks/useRoleMappingPanel";
 import useSDK from "@/hooks/useSDK";
 
 import { calculateAsideHeight } from "@/utils";
@@ -237,7 +237,7 @@ const Root = ({
     setRoleMappingPanelVisible,
     onOpenRoleMappingPanel,
     onSubmitFormRoleMapping,
-  } = useStartFillingPanel(fileInfo, roomId);
+  } = useRoleMappingPanel(fileInfo, roomId);
 
   useUpdateSearchParamId(fileId, hash);
   const {
