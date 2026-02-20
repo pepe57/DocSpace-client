@@ -84,6 +84,9 @@ importers:
       '@types/node':
         specifier: 24.10.7
         version: 24.10.7
+      '@types/react-syntax-highlighter':
+        specifier: ^15.5.13
+        version: 15.5.13
       '@types/react-text-mask':
         specifier: 5.4.14
         version: 5.4.14
@@ -120,12 +123,21 @@ importers:
       i18next:
         specifier: 23.7.19
         version: 23.7.19
+      linkify-react:
+        specifier: ^4.3.2
+        version: 4.3.2(linkifyjs@4.3.2)(react@19.2.4)
       lodash:
         specifier: 4.17.23
         version: 4.17.23
       luxon:
         specifier: 3.7.2
         version: 3.7.2
+      mobx:
+        specifier: 6.13.5
+        version: 6.13.5
+      mobx-react:
+        specifier: 7.6.0
+        version: 7.6.0(mobx@6.13.5)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-autosize-textarea:
         specifier: 7.1.0
         version: 7.1.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -159,9 +171,15 @@ importers:
       react-i18next:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react-markdown:
+        specifier: ^10.1.0
+        version: 10.1.0(@types/react@19.2.10)(react@19.2.4)
       react-svg:
         specifier: 16.1.34
         version: 16.1.34(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react-syntax-highlighter:
+        specifier: ^16.1.0
+        version: 16.1.0(react@19.2.4)
       react-text-mask:
         specifier: 5.5.0
         version: 5.5.0(react@19.2.4)
@@ -177,12 +195,21 @@ importers:
       react-virtualized:
         specifier: ^9.22.6
         version: 9.22.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react-virtualized-auto-sizer:
+        specifier: 1.0.24
+        version: 1.0.24(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-window:
         specifier: 1.8.10
         version: 1.8.10(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-window-infinite-loader:
         specifier: 1.0.9
         version: 1.0.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      rehype-raw:
+        specifier: ^7.0.0
+        version: 7.0.0
+      remark-gfm:
+        specifier: 4.0.1
+        version: 4.0.1
       socket.io-client:
         specifier: 4.8.3
         version: 4.8.3
@@ -346,6 +373,9 @@ importers:
       '@docspace/ui-kit':
         specifier: workspace:*
         version: link:../../libs/ui-kit
+      '@onlyoffice/docspace-api-sdk':
+        specifier: ^3.6.0
+        version: 3.6.0
       '@onlyoffice/docspace-sdk-js':
         specifier: 2.1.0
         version: 2.1.0
@@ -493,9 +523,6 @@ importers:
       sjcl:
         specifier: 1.0.8
         version: 1.0.8
-      socket.io-client:
-        specifier: 4.8.3
-        version: 4.8.3
       styled-components:
         specifier: 5.3.11
         version: 5.3.11(@babel/core@7.25.8)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)
@@ -949,9 +976,6 @@ importers:
       sass:
         specifier: 1.97.3
         version: 1.97.3
-      socket.io-client:
-        specifier: 4.8.3
-        version: 4.8.3
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
@@ -1170,9 +1194,6 @@ importers:
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@socket.io/component-emitter':
-        specifier: 3.1.2
-        version: 3.1.2
       '@tanstack/react-query':
         specifier: ^5.90.20
         version: 5.90.20(react@19.2.4)
@@ -1215,9 +1236,6 @@ importers:
       i18next:
         specifier: 23.7.19
         version: 23.7.19
-      linkify-react:
-        specifier: ^4.3.2
-        version: 4.3.2(linkifyjs@4.3.2)(react@19.2.4)
       linkifyjs:
         specifier: ^4.3.2
         version: 4.3.2
@@ -1251,18 +1269,12 @@ importers:
       react-i18next:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      react-markdown:
-        specifier: ^10.1.0
-        version: 10.1.0(@types/react@19.2.10)(react@19.2.4)
       react-router:
         specifier: 7.12.0
         version: 7.12.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-svg:
         specifier: 16.1.34
         version: 16.1.34(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      react-syntax-highlighter:
-        specifier: ^16.1.0
-        version: 16.1.0(react@19.2.4)
       react-tooltip:
         specifier: 5.28.0
         version: 5.28.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1278,18 +1290,12 @@ importers:
       react-window-infinite-loader:
         specifier: 1.0.9
         version: 1.0.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      rehype-raw:
-        specifier: ^7.0.0
-        version: 7.0.0
       resize-image:
         specifier: 0.1.0
         version: 0.1.0
       sjcl:
         specifier: 1.0.8
         version: 1.0.8
-      socket.io-client:
-        specifier: 4.8.3
-        version: 4.8.3
       styled-components:
         specifier: 5.3.11
         version: 5.3.11(@babel/core@7.25.8)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)
@@ -1432,9 +1438,6 @@ importers:
       '@types/react-google-recaptcha':
         specifier: 2.1.9
         version: 2.1.9
-      '@types/react-syntax-highlighter':
-        specifier: ^15.5.13
-        version: 15.5.13
       '@types/react-virtualized':
         specifier: 9.21.30
         version: 9.21.30
@@ -3610,6 +3613,9 @@ packages:
     resolution: {integrity: sha512-52RfBcq9PXt76soCAZAJcNmCYrdsg6BvhBmjf0IFTMZ8IaeqZ9ktxAy1TZf/gCkOaM3ly4htbYMStiZ4MHX7Eg==}
     cpu: [x64]
     os: [win32]
+
+  '@onlyoffice/docspace-api-sdk@3.6.0':
+    resolution: {integrity: sha512-cRY8UcOaYg21WuSNuSSJqdeoJWGW1imIuvJJn1Usr8HpKBDOtVZWx5CWrnVz9RxqxGXmnNlKDv5t3rx7Rt+rSw==}
 
   '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz':
     resolution: {integrity: sha512-XnuCns9SwkAVbao09HIy5VzMoFnQFXI+JP/6ZB1xtez3Xqzg56bb9EKE1V48bronBmjIibR3gRWKfp5FZiHW4g==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz}
@@ -13364,6 +13370,12 @@ snapshots:
 
   '@nx/nx-win32-x64-msvc@22.4.5':
     optional: true
+
+  '@onlyoffice/docspace-api-sdk@3.6.0':
+    dependencies:
+      axios: 1.13.5
+    transitivePeerDependencies:
+      - debug
 
   '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz':
     dependencies:

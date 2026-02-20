@@ -43,7 +43,7 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 
-import { useIsMobile } from "../../hooks/useIsMobile";
+import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 
 import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementFilter } from "./TagManagement.filter";

@@ -33,7 +33,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
 
 import { useIsTable } from "../../hooks/useIsTable";
-import { useIsMobile } from "../../hooks/useIsMobile";
+import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 import { ShareAccessRights } from "../../enums";
 
 import { TagManagementPopup } from "./TagManagement.popup";
