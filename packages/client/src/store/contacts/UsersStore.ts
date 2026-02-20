@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
+import { EmployeeFullDto } from "@onlyoffice/docspace-api-sdk";
 
 import api from "@docspace/shared/api";
 import Filter from "@docspace/shared/api/people/filter";
@@ -159,7 +160,7 @@ class UsersStore {
 
     makeAutoObservable(this);
 
-    const addUser = async (value: { id: string; data: TUser }) => {
+    const addUser = async (value: { id: string; data: EmployeeFullDto }) => {
       console.log(`[WS] ${SocketEvents.AddUser}, id: ${value?.id}`);
       const { id, data } = value;
 
@@ -167,7 +168,7 @@ class UsersStore {
 
       const idx = this.users.findIndex((x) => x.id === id);
 
-      const user = await api.people.getUserById(data.id);
+      const user = await api.people.getUserById(data.id!);
 
       runInAction(() => {
         if (idx === -1) {
@@ -179,7 +180,7 @@ class UsersStore {
       });
     };
 
-    const updateUser = async (value: { id: string; data: TUser }) => {
+    const updateUser = async (value: { id: string; data: EmployeeFullDto }) => {
       console.log(`[WS] ${SocketEvents.UpdateUser},id: ${value?.id}`);
 
       const { id, data } = value;
@@ -190,7 +191,7 @@ class UsersStore {
 
       if (idx === -1) return;
 
-      const user = await api.people.getUserById(data.id);
+      const user = await api.people.getUserById(data.id!);
 
       runInAction(() => {
         this.users[idx] = user;
@@ -217,7 +218,7 @@ class UsersStore {
 
     const changeMyType = async (value: {
       id: string;
-      data: TUser;
+      data: EmployeeFullDto;
       admin: string;
       hasPersonalFolder: boolean;
     }) => {
@@ -238,7 +239,7 @@ class UsersStore {
 
       const userData = { ...data, hasPersonalFolder };
 
-      setUser(userData);
+      setUser(userData as TUser);
 
       fetchTreeFolders();
 
@@ -306,7 +307,7 @@ class UsersStore {
 
     SocketHelper?.on(
       SocketEvents.UpdateGroup,
-      async (value: { id: string; data: TGroup }) => {
+      async (value) => {
         console.log(
           `[WS] ${SocketEvents.UpdateGroup}: ${value?.id}:${value?.data}`,
         );

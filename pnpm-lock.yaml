@@ -366,6 +366,9 @@ importers:
       '@docspace/ui-kit':
         specifier: workspace:*
         version: link:../../libs/ui-kit
+      '@onlyoffice/docspace-api-sdk':
+        specifier: ^3.6.0
+        version: 3.6.0
       '@onlyoffice/docspace-sdk-js':
         specifier: 2.1.0
         version: 2.1.0
@@ -3628,6 +3631,9 @@ packages:
     resolution: {integrity: sha512-52RfBcq9PXt76soCAZAJcNmCYrdsg6BvhBmjf0IFTMZ8IaeqZ9ktxAy1TZf/gCkOaM3ly4htbYMStiZ4MHX7Eg==}
     cpu: [x64]
     os: [win32]
+
+  '@onlyoffice/docspace-api-sdk@3.6.0':
+    resolution: {integrity: sha512-cRY8UcOaYg21WuSNuSSJqdeoJWGW1imIuvJJn1Usr8HpKBDOtVZWx5CWrnVz9RxqxGXmnNlKDv5t3rx7Rt+rSw==}
 
   '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz':
     resolution: {integrity: sha512-XnuCns9SwkAVbao09HIy5VzMoFnQFXI+JP/6ZB1xtez3Xqzg56bb9EKE1V48bronBmjIibR3gRWKfp5FZiHW4g==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz}
@@ -13371,6 +13377,12 @@ snapshots:
 
   '@nx/nx-win32-x64-msvc@22.4.5':
     optional: true
+
+  '@onlyoffice/docspace-api-sdk@3.6.0':
+    dependencies:
+      axios: 1.13.5
+    transitivePeerDependencies:
+      - debug
 
   '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz':
     dependencies:
