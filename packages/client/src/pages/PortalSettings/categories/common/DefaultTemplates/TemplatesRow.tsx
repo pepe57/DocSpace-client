@@ -41,10 +41,10 @@ import { TDefaultTemplateItem } from "@docspace/shared/types";
 import { UrlActionType } from "@docspace/shared/enums";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import {
-  getCorrectDate,
   getTitleWithoutExtension,
   getUpperCaseExtension,
 } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";

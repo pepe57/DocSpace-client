@@ -35,7 +35,6 @@ import { EmailSettings, parseAddress, parseAddresses, getParts } from "./email";
 import useId from "./useId";
 
 import { useClickOutside } from "@docspace/ui-kit/utils";
-import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
 import { getFormFillingTipsStorageName } from "./getFormFillingTipsStorageName";
 import { uuid, getTextColor, trimSeparator } from "@docspace/ui-kit/utils";
@@ -128,7 +127,6 @@ export {
   email,
   useId,
   useClickOutside,
-  getCorrectDate,
   handleAnyClick,
   DomHelpers,
   getLogoUrl,

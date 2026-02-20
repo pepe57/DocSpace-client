@@ -31,7 +31,7 @@ import { TableCell } from "@docspace/ui-kit/components/table";
 import { Tags } from "@docspace/ui-kit/components/tags";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
