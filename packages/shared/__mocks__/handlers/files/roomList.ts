@@ -49,8 +49,8 @@ const current = {
   indexing: false,
   denyDownload: false,
   fileEntryType: 1,
-  id: 2,
-  rootFolderId: 2,
+  id: 2002,
+  rootFolderId: 2002,
   canShare: false,
   security: {
     Read: true,
@@ -119,7 +119,7 @@ const current = {
 const getRoomList = (filtered: boolean = false) => {
   const folders: TRoom[] = [
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 1,
       foldersCount: 0,
       new: 0,
@@ -141,7 +141,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 2154431,
       fileEntryType: 1,
       id: 33,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -192,7 +192,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 0,
       foldersCount: 0,
       new: 0,
@@ -214,7 +214,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 0,
       fileEntryType: 1,
       id: 40,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -264,7 +264,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 0,
       foldersCount: 0,
       new: 0,
@@ -286,7 +286,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 0,
       fileEntryType: 1,
       id: 41,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -336,7 +336,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 0,
       foldersCount: 0,
       new: 0,
@@ -358,7 +358,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 0,
       fileEntryType: 1,
       id: 42,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -408,7 +408,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 0,
       foldersCount: 0,
       new: 0,
@@ -430,7 +430,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 0,
       fileEntryType: 1,
       id: 43,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -480,7 +480,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 0,
       foldersCount: 0,
       new: 0,
@@ -502,7 +502,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 0,
       fileEntryType: 1,
       id: 44,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -552,7 +552,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 0,
       foldersCount: 0,
       new: 0,
@@ -574,7 +574,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 0,
       fileEntryType: 1,
       id: 45,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -624,7 +624,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 0,
       foldersCount: 0,
       new: 0,
@@ -646,7 +646,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 0,
       fileEntryType: 1,
       id: 46,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -696,7 +696,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 0,
       foldersCount: 0,
       new: 0,
@@ -718,7 +718,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 0,
       fileEntryType: 1,
       id: 39,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -768,7 +768,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 0,
       foldersCount: 0,
       new: 0,
@@ -790,7 +790,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 0,
       fileEntryType: 1,
       id: 24,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -840,7 +840,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 0,
       foldersCount: 0,
       new: 0,
@@ -862,7 +862,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 0,
       fileEntryType: 1,
       id: 25,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -912,7 +912,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 0,
       foldersCount: 0,
       new: 0,
@@ -934,7 +934,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 0,
       fileEntryType: 1,
       id: 31,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -984,7 +984,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 0,
       foldersCount: 0,
       new: 0,
@@ -1006,7 +1006,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 0,
       fileEntryType: 1,
       id: 22,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -1056,7 +1056,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 0,
       foldersCount: 0,
       new: 0,
@@ -1078,7 +1078,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 0,
       fileEntryType: 1,
       id: 29,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -1128,7 +1128,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 1,
       foldersCount: 0,
       new: 0,
@@ -1150,7 +1150,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 6942,
       fileEntryType: 1,
       id: 8,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -1200,7 +1200,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 1,
       foldersCount: 0,
       new: 0,
@@ -1222,7 +1222,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 6942,
       fileEntryType: 1,
       id: 20,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -1272,7 +1272,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 1,
       foldersCount: 0,
       new: 0,
@@ -1294,7 +1294,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 2154431,
       fileEntryType: 1,
       id: 7,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -1344,7 +1344,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 1,
       foldersCount: 0,
       new: 0,
@@ -1366,7 +1366,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 2154431,
       fileEntryType: 1,
       id: 18,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -1416,7 +1416,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 1,
       foldersCount: 0,
       new: 0,
@@ -1438,7 +1438,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 2154431,
       fileEntryType: 1,
       id: 27,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -1488,7 +1488,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 1,
       foldersCount: 0,
       new: 0,
@@ -1510,7 +1510,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 2154431,
       fileEntryType: 1,
       id: 30,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -1560,7 +1560,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 1,
       foldersCount: 0,
       new: 0,
@@ -1582,7 +1582,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 2154431,
       fileEntryType: 1,
       id: 34,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -1632,7 +1632,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 1,
       foldersCount: 0,
       new: 0,
@@ -1654,7 +1654,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 2154431,
       fileEntryType: 1,
       id: 36,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -1704,7 +1704,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 1,
       foldersCount: 0,
       new: 0,
@@ -1726,7 +1726,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 2154431,
       fileEntryType: 1,
       id: 38,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -1776,7 +1776,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 1,
       foldersCount: 0,
       new: 0,
@@ -1798,7 +1798,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 2154431,
       fileEntryType: 1,
       id: 32,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -1848,7 +1848,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 1,
       foldersCount: 0,
       new: 0,
@@ -1870,7 +1870,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 2154431,
       fileEntryType: 1,
       id: 35,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -1920,7 +1920,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
     },
     {
-      parentId: 2,
+      parentId: 2002,
       filesCount: 1,
       foldersCount: 0,
       new: 0,
@@ -1942,7 +1942,7 @@ const getRoomList = (filtered: boolean = false) => {
       usedSpace: 2154431,
       fileEntryType: 1,
       id: 37,
-      rootFolderId: 2,
+      rootFolderId: 2002,
       canShare: true,
       security: {
         Read: true,
@@ -2001,7 +2001,7 @@ const getRoomList = (filtered: boolean = false) => {
     current,
     pathParts: [
       {
-        id: 2,
+        id: 2002,
         title: "Rooms",
       },
     ],
@@ -2019,7 +2019,7 @@ const getEmptyRoomList = (): TGetRooms => {
     current,
     pathParts: [
       {
-        id: 2,
+        id: 2002,
         title: "Rooms",
       },
     ],
@@ -2212,7 +2212,7 @@ const getContextMenuRoomList = ({
     files: [],
     folders: [
       {
-        parentId: 2,
+        parentId: 2002,
         filesCount: 0,
         foldersCount: 0,
         new: 0,
@@ -2233,7 +2233,7 @@ const getContextMenuRoomList = ({
         inRoom,
         fileEntryType: 1,
         id: 10,
-        rootFolderId: 2,
+        rootFolderId: 2002,
         canShare: true,
         security: { ...security, Embed: false },
         title: "Custom without share",
@@ -2264,7 +2264,7 @@ const getContextMenuRoomList = ({
         },
       },
       {
-        parentId: 2,
+        parentId: 2002,
         filesCount: 0,
         foldersCount: 0,
         new: 0,
@@ -2285,7 +2285,7 @@ const getContextMenuRoomList = ({
         inRoom,
         fileEntryType: 1,
         id: 11,
-        rootFolderId: 2,
+        rootFolderId: 2002,
         canShare: true,
         security,
         title: "Public",
@@ -2316,7 +2316,7 @@ const getContextMenuRoomList = ({
         },
       },
       {
-        parentId: 2,
+        parentId: 2002,
         filesCount: 0,
         foldersCount: 0,
         new: 0,
@@ -2337,7 +2337,7 @@ const getContextMenuRoomList = ({
         inRoom,
         fileEntryType: 1,
         id: 12,
-        rootFolderId: 2,
+        rootFolderId: 2002,
         canShare: true,
         security,
         title: "Form room",
@@ -2368,7 +2368,7 @@ const getContextMenuRoomList = ({
         },
       },
       {
-        parentId: 2,
+        parentId: 2002,
         filesCount: 0,
         foldersCount: 0,
         new: 0,
@@ -2389,7 +2389,7 @@ const getContextMenuRoomList = ({
         inRoom,
         fileEntryType: 1,
         id: 13,
-        rootFolderId: 2,
+        rootFolderId: 2002,
         canShare: true,
         security,
         title: "Custom",
@@ -2420,7 +2420,7 @@ const getContextMenuRoomList = ({
         },
       },
       {
-        parentId: 2,
+        parentId: 2002,
         filesCount: 0,
         foldersCount: 0,
         new: 0,
@@ -2441,7 +2441,7 @@ const getContextMenuRoomList = ({
         inRoom,
         fileEntryType: 1,
         id: "box-821",
-        rootFolderId: 2,
+        rootFolderId: 2002,
         canShare: true,
         security: { ...security, Duplicate: false },
         title: "Public third-party",
@@ -2475,7 +2475,7 @@ const getContextMenuRoomList = ({
         providerId: 821,
       },
       {
-        parentId: 2,
+        parentId: 2002,
         filesCount: 0,
         foldersCount: 0,
         new: 0,
@@ -2496,7 +2496,7 @@ const getContextMenuRoomList = ({
         inRoom,
         fileEntryType: 1,
         id: 14,
-        rootFolderId: 2,
+        rootFolderId: 2002,
         canShare: false,
         security: { ...security, Embed: false, CopySharedLink: false },
         title: "Collaboration",
@@ -2527,7 +2527,7 @@ const getContextMenuRoomList = ({
         },
       },
       {
-        parentId: 2,
+        parentId: 2002,
         filesCount: 0,
         foldersCount: 0,
         new: 0,
@@ -2548,7 +2548,7 @@ const getContextMenuRoomList = ({
         inRoom,
         fileEntryType: 1,
         id: 15,
-        rootFolderId: 2,
+        rootFolderId: 2002,
         canShare: false,
         security: {
           ...security,
@@ -2586,7 +2586,7 @@ const getContextMenuRoomList = ({
     current,
     pathParts: [
       {
-        id: 2,
+        id: 2002,
         title: "Rooms",
       },
     ],
