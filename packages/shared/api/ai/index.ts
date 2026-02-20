@@ -26,7 +26,7 @@
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
-import { getAiModelName } from "../../utils/ai";
+import { getAiModelName } from "@docspace/ui-kit/utils/ai/getAiModelName";
 import { checkFilterInstance } from "../../utils/common";
 
 import { request } from "../client";
