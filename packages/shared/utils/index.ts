@@ -90,7 +90,7 @@ import { getCountTilesInRow } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
 import * as userFilterUtils from "./userFilterUtils";
 import * as filterConstants from "./filterConstants";
-import { getAiProviderIcon, getServerIcon, getAiProviderLabel } from "./ai";
+import { getAiProviderIcon, getServerIconUrl, getAiProviderLabel } from "./ai";
 import { presentInArray } from "./presentInArray";
 
 export {
@@ -144,7 +144,7 @@ export {
   userFilterUtils,
   filterConstants,
   getAiProviderIcon,
-  getServerIcon,
+  getServerIconUrl,
   getAiProviderLabel,
   uuid,
   getTextColor,

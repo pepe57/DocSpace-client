@@ -38,7 +38,7 @@ import {
 	Selector,
 	type TSelectorItem,
 } from "@docspace/ui-kit/components/selector";
-import { getServerIcon } from "../../utils";
+import { getServerIconUrl } from "../../utils";
 import { RowLoader } from "../../skeletons/selector";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
@@ -85,7 +85,7 @@ const MCPServersSelector = ({
 				id: server.id,
 				label: name,
 				icon:
-					(server.icon?.icon32 || getServerIcon(server.serverType, isBase)) ??
+					(server.icon?.icon32 || getServerIconUrl(server.serverType, isBase)) ??
 					"",
 				isMCP: true,
 				isSelected: initedSelectedServers?.includes(server.id),

@@ -34,7 +34,7 @@ import GitHubLightSvgUrl from "PUBLIC_DIR/images/thirdparties/github.light.react
 
 import { ServerType } from "../../api/ai/enums";
 
-export const getServerIcon = (type: ServerType, isBase: boolean) => {
+export const getServerIconUrl = (type: ServerType, isBase: boolean) => {
   switch (type) {
     case ServerType.Custom:
       return null;
