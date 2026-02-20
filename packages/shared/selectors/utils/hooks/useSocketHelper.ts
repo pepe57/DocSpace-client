@@ -31,7 +31,7 @@ import SocketHelper, {
 	SocketCommands,
 	SocketEvents,
 	TOptSocket,
-} from "../../../utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 
 import { getFileInfo, getFolderInfo } from "../../../api/files";
 import { getRoomInfo } from "../../../api/rooms";
@@ -46,7 +46,7 @@ import {
 
 import { UseSocketHelperProps } from "../types";
 import { SettingsContext } from "../contexts/Settings";
-import socket from "../../../utils/socket";
+import socket from "@docspace/ui-kit/utils/socket";
 
 const useSocketHelper = ({
 	disabledItems,

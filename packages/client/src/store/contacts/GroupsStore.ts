@@ -40,7 +40,7 @@ import {
   setUserFilter,
 } from "@docspace/shared/utils/userFilterUtils";
 import { FILTER_GROUPS } from "@docspace/shared/utils/filterConstants";
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
 
 import api from "@docspace/shared/api";
 

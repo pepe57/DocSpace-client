@@ -27,7 +27,7 @@ vi.mock("@docspace/ui-kit/components/toast", () => ({
   },
 }));
 
-vi.mock("@docspace/shared/utils/socket", () => ({
+vi.mock("@docspace/ui-kit/utils/socket", () => ({
   on: vi.fn(),
   off: vi.fn(),
   SocketEvents: {

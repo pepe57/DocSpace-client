@@ -83,7 +83,7 @@ import {
 } from "../utils/common";
 import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 import FirebaseHelper from "../utils/firebase";
-import SocketHelper from "../utils/socket";
+import SocketHelper from "@docspace/ui-kit/utils/socket";
 
 const themes = {
   Dark,
