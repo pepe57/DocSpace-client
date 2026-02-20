@@ -25,8 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { memo } from "react";
-import type { HeaderProps } from "./StartFillingPanel.types";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+
+import type { HeaderProps } from "./RoleMappingPanel.types";
 
 export const Header = memo(
   ({

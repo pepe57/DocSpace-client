@@ -27,45 +27,46 @@
 "use client";
 
 import isNull from "lodash/isNull";
-import isUndefined from "lodash/isUndefined";
-import { useState, useCallback, useMemo, useTransition } from "react";
-import { useTranslation } from "react-i18next";
 import classNames from "classnames";
+import isUndefined from "lodash/isUndefined";
+import { useTranslation } from "react-i18next";
+import { useState, useCallback, useMemo, useTransition } from "react";
 
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { ButtonSize, Button } from "@docspace/ui-kit/components/button";
 import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
-import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import {
-  FillingRoleSelector,
-  type IRole,
-} from "../../components/filling-role-selector";
-
-import { useLocalStorage } from "../../hooks/useLocalStorage";
-import PeopleSelector from "../../selectors/People";
 import type {
   HeaderProps,
   TAccessRight,
   TOnSubmit,
 } from "@docspace/ui-kit/components/selector";
 
-import styles from "./StartFillingPanel.module.scss";
-import { getAccessOptions } from "../../utils/getAccessOptions";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
+
+import {
+  FillingRoleSelector,
+  type IRole,
+} from "../../components/filling-role-selector";
+
+import PeopleSelector from "../../selectors/People";
 import { RoomsType, ShareAccessRights } from "../../enums";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { getAccessOptions } from "../../utils/getAccessOptions";
+import { useUnsavedChanges } from "../../hooks/useUnsavedChanges";
+import UnsavedChangesDialog from "../../dialogs/unsaved-changes-dialog";
 
 import type {
   Invitation,
   IRoleMappingPanelProps,
-} from "./StartFillingPanel.types";
-import { Header } from "./StartFillingPanel.helpers";
-import UnsavedChangesDialog from "../../dialogs/unsaved-changes-dialog";
-import { useUnsavedChanges } from "../../hooks/useUnsavedChanges";
+} from "./RoleMappingPanel.types";
+import styles from "./RoleMappingPanel.module.scss";
+import { Header } from "./RoleMappingPanel.helpers";
 
-const StartFillingPanel = ({
+const RoleMappingPanel = ({
   user,
   fileId,
   roomId,
@@ -122,7 +123,7 @@ const StartFillingPanel = ({
     setIsRoleSelectorVisible(false);
   }, []);
 
-  const closeStartFillingPanel = useCallback(
+  const closeRoleMappingPanel = useCallback(
     (e?: React.MouseEvent) => {
       const checkChanges = !e;
 
@@ -249,10 +250,10 @@ const StartFillingPanel = ({
         onBackClick: closeUsersPanel,
         onCloseClick: () => {
           closeUsersPanel();
-          closeStartFillingPanel();
+          closeRoleMappingPanel();
         },
       }) satisfies HeaderProps,
-    [closeUsersPanel, closeStartFillingPanel, t],
+    [closeUsersPanel, closeRoleMappingPanel, t],
   );
 
   const invitePanelSelectorHeader = useMemo(
@@ -266,10 +267,10 @@ const StartFillingPanel = ({
         onCloseClick: () => {
           closeInvitePanel();
           closeUsersPanel();
-          closeStartFillingPanel();
+          closeRoleMappingPanel();
         },
       }) satisfies HeaderProps,
-    [closeInvitePanel, closeUsersPanel, closeStartFillingPanel, t],
+    [closeInvitePanel, closeUsersPanel, closeRoleMappingPanel, t],
   );
 
   return (
@@ -290,7 +291,7 @@ const StartFillingPanel = ({
         visible
         withBodyScroll
         withBorder={withBorder}
-        onClose={closeStartFillingPanel}
+        onClose={closeRoleMappingPanel}
         displayType={ModalDialogType.aside}
         containerVisible={isRoleSelectorVisible || isInvitePanelVisible}
         withoutPadding
@@ -394,7 +395,7 @@ const StartFillingPanel = ({
             label={t("Common:CancelButton")}
             size={ButtonSize.normal}
             scale
-            onClick={closeStartFillingPanel}
+            onClick={closeRoleMappingPanel}
           />
         </ModalDialog.Footer>
       </ModalDialog>
@@ -402,4 +403,4 @@ const StartFillingPanel = ({
   );
 };
 
-export default StartFillingPanel;
+export default RoleMappingPanel;

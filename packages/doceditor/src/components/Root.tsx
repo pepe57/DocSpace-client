@@ -76,9 +76,9 @@ const SharingDialog = dynamic(() => import("./ShareDialog"), {
   ssr: false,
 });
 
-const StartFillingPanel = dynamic(
+const RoleMappingPanel = dynamic(
   async () =>
-    (await import("@docspace/shared/dialogs/start-filling")).StartFillingPanel,
+    (await import("@docspace/shared/dialogs/start-filling")).RoleMappingPanel,
   {
     ssr: false,
   },
@@ -404,7 +404,7 @@ const Root = ({
       ) : null}
 
       {user && settings && fileInfo && roleMappingPanelVisible && roomId ? (
-        <StartFillingPanel
+        <RoleMappingPanel
           withBorder
           user={user}
           roles={roles}
