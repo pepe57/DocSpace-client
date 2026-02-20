@@ -27,6 +27,9 @@ vi.mock("@docspace/ui-kit/utils/socket", () => ({
     on: vi.fn(),
     off: vi.fn(),
   },
+  SocketEvents: {
+    BackupProgress: "BACKUP_PROGRESS",
+  },
 }));
 
 vi.mock("./sub-components/RoomsModule", () => ({

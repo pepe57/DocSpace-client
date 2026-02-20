@@ -28,8 +28,10 @@ vi.mock("@docspace/ui-kit/components/toast", () => ({
 }));
 
 vi.mock("@docspace/ui-kit/utils/socket", () => ({
-  on: vi.fn(),
-  off: vi.fn(),
+  default: {
+    on: vi.fn(),
+    off: vi.fn(),
+  },
   SocketEvents: {
     BackupProgress: "BACKUP_PROGRESS",
   },
