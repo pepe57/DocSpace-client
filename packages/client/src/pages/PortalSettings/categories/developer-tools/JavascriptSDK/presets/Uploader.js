@@ -81,14 +81,53 @@ const Uploader = (props) => {
   const [uploadMode, setUploadMode] = useState("files");
   const [uploadQuantity, setUploadQuantity] = useState("single");
 
+  const uploadModeOptions = [
+    {
+      value: "files",
+      label: (
+        <>
+          {t("Common:Files")}{" "}
+          <Text as="span" color="gray">
+            ({t("Common:UploadFilesDescription")})
+          </Text>
+        </>
+      ),
+    },
+    {
+      value: "folders",
+      label: (
+        <>
+          {t("Common:Folders")}{" "}
+          <Text as="span" color="gray">
+            ({t("Common:UploadFoldersDescription")})
+          </Text>
+        </>
+      ),
+    },
+  ];
+
   const uploadQuantityOptions = [
     {
       value: "single",
-      label: `${t("Common:SingleFile")} (${t("Common:SingleFileDescription")})`,
+      label: (
+        <>
+          {t("Common:SingleFile")}{" "}
+          <Text as="span" color="gray">
+            ({t("Common:SingleFileDescription")})
+          </Text>
+        </>
+      ),
     },
     {
       value: "multiple",
-      label: `${t("Common:MultipleFiles")} (${t("Common:MultipleFilesDescription")})`,
+      label: (
+        <>
+          {t("Common:MultipleFiles")}{" "}
+          <Text as="span" color="gray">
+            ({t("Common:MultipleFilesDescription")})
+          </Text>
+        </>
+      ),
     },
   ];
 
@@ -103,8 +142,8 @@ const Uploader = (props) => {
     linkMainText: t("Common:Upload"),
     secondaryText: t("Common:DropzoneTitleSecondary"),
     id: myFolderId,
-    isFolder: false,
-    isMultiple: false,
+    isFolderUpload: false,
+    isMultipleUpload: false,
     events: {
       onUploadSuccess: (data) => {
         console.log("onUploadSuccess", data);
@@ -275,15 +314,17 @@ const Uploader = (props) => {
             <ControlsGroup>
               <LabelGroup>
                 <Label className="label" text={t("Common:SelectFolder")} />
-                 <HelpButton
-                    offsetRight={0}
-                    size={12}
-                    place="right-end"
-                    tooltipContent={
-                      <Text fontSize="12px">{t("Common:SelectDestinationFolder")}</Text>
-                    }
-                    dataTestId="room_or_folder_help_button"
-                 />
+                <HelpButton
+                  offsetRight={0}
+                  size={12}
+                  place="right-end"
+                  tooltipContent={
+                    <Text fontSize="12px">
+                      {t("Common:SelectDestinationFolder")}
+                    </Text>
+                  }
+                  dataTestId="room_or_folder_help_button"
+                />
               </LabelGroup>
               <FilesSelectorInputWrapper>
                 {myFolderId && (
@@ -302,16 +343,7 @@ const Uploader = (props) => {
             <CategorySubHeader>{t("Common:UploadMode")}</CategorySubHeader>
             <RadioButtonGroup
               orientation="vertical"
-              options={[
-                {
-                  value: "files",
-                  label: `${t("Common:Files")} (${t("Common:UploadFilesDescription")})`,
-                },
-                {
-                  value: "folders",
-                  label: `${t("Common:Folders")} (${t("Common:UploadFoldersDescription")})`,
-                },
-              ]}
+              options={uploadModeOptions}
               name="uploadMode"
               selected={uploadMode}
               onClick={(e) => {
@@ -319,7 +351,7 @@ const Uploader = (props) => {
                 setUploadMode(value);
                 setConfig((oldConfig) => ({
                   ...oldConfig,
-                  isFolder: value === "folders",
+                  isFolderUpload: value === "folders",
                   init: true,
                 }));
               }}
@@ -340,7 +372,7 @@ const Uploader = (props) => {
                 setUploadQuantity(value);
                 setConfig((oldConfig) => ({
                   ...oldConfig,
-                  isMultiple: value === "multiple",
+                  isMultipleUpload: value === "multiple",
                   init: true,
                 }));
               }}
@@ -349,32 +381,36 @@ const Uploader = (props) => {
             />
           </ControlsSection>
 
-          <ControlsSection>
-            <LabelGroup>
-              <CategorySubHeader>{t("AvailableFileTypes")}</CategorySubHeader>
-              <HelpButton
-                offsetRight={0}
-                size={12}
-                place="right"
-                tooltipContent={
-                  <Text fontSize="12px">{t("Common:AllowedFileTypes")}</Text>
-                }
-                dataTestId="room_or_folder_help_button"
-              />
-            </LabelGroup>
-            <CheckboxGroup>
-              {FILE_TYPE_CATEGORIES.map((category) => (
-                <Checkbox
-                  key={category.key}
-                  className="checkbox"
-                  label={t(category.labelKey)}
-                  onChange={() => onChangeCategoryCheckbox(category.key)}
-                  isChecked={isCategorySelected(category.key)}
-                  dataTestId={`${category.key}_checkbox`}
+          {!config.isFolderUpload && (
+            <ControlsSection>
+              <LabelGroup>
+                <CategorySubHeader>{t("AvailableFileTypes")}</CategorySubHeader>
+                <HelpButton
+                  offsetRight={0}
+                  size={12}
+                  place="right"
+                  tooltipContent={
+                    <Text fontSize="12px">{t("Common:AllowedFileTypes")}</Text>
+                  }
+                  dataTestId="available_file_types_help_button"
                 />
-              ))}
-            </CheckboxGroup>
+              </LabelGroup>
+              <CheckboxGroup>
+                {FILE_TYPE_CATEGORIES.map((category) => (
+                  <Checkbox
+                    key={category.key}
+                    className="checkbox"
+                    label={t(category.labelKey)}
+                    onChange={() => onChangeCategoryCheckbox(category.key)}
+                    isChecked={isCategorySelected(category.key)}
+                    dataTestId={`${category.key}_checkbox`}
+                  />
+                ))}
+              </CheckboxGroup>
+            </ControlsSection>
+          )}
 
+          <ControlsSection>
             <ControlsGroup>
               <Label className="label" text={t("ButtonText")} />
               <TextInput
