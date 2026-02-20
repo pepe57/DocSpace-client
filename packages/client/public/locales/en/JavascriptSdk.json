@@ -121,6 +121,5 @@
   "ViewerDescription": "Embed a viewer to allow users to open a file for viewing from the corresponding room.",
   "CreateSampleUploader": "Create sample Uploader embed",
   "UploaderDescription": "Embed an uploader to allow users to upload files to the selected folder.",
-  "UploaderPresetInfo": "Embed the uploader so that users can upload documents to your space without registration. Choose the allowed file types for upload.",
-  "EnableFolderUpload": "Enable folder upload"
+  "UploaderPresetInfo": "Embed the uploader so that users can upload documents to your space without registration. Choose the allowed file types for upload."
 }
