@@ -140,7 +140,7 @@ const Uploader = (props) => {
     init: true,
     acceptExtensions: FILE_TYPE_EXTENSIONS.document.join(","),
     linkMainText: t("Common:Upload"),
-    secondaryText: t("Common:DropzoneTitleSecondary"),
+    secondaryText: "",
     id: myFolderId,
     isFolderUpload: false,
     isMultipleUpload: false,
