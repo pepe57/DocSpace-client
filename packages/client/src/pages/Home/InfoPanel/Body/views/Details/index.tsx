@@ -275,7 +275,9 @@ const Details = ({
             badgeUrl={badgeUrl ?? undefined}
             tooltipContent={tooltipContent ?? undefined}
             tooltipId="info-panel-details_icon-tooltip"
-            withEditing={"isRoom" in selection ? selection.isRoom : false}
+            withEditing={
+              "isRoom" in selection ? selection.security.EditRoom : false
+            }
             dataTestId="info_panel_details_room_icon"
           />
         </div>
