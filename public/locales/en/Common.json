@@ -1134,7 +1134,6 @@
   "UploadMode": "Upload mode",
   "UploadFilesDescription": "Users can upload individual files.",
   "UploadFoldersDescription": "Users can upload entire folders with their structure.",
-  "Quantity": "Quantity",
   "SingleFile": "Single file",
   "SingleFileDescription": "Only one file can be uploaded at a time.",
   "MultipleFiles": "Multiple files",
@@ -1144,5 +1143,6 @@
   "SingleUploadWarning": "Only one file or folder can be uploaded at a time. Please select a single item.",
   "DropzoneFoldersSecondary": "or drop folders here",
   "DropzoneFolderSecondary": "or drop folder here",
-  "DropzoneFilesSecondary": "or drop files here"
+  "DropzoneFilesSecondary": "or drop files here",
+  "Quantity": "Quantity"
 }
