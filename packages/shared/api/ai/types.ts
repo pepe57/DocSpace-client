@@ -215,6 +215,10 @@ export type TAIConfig = {
   aiReadyNeedReset?: boolean;
   embeddingModel: string;
   portalMcpServerId: string;
+
+  generateDocxToolName?: string;
+  generateFormToolName?: string;
+  generatePresentationToolName?: string;
 };
 
 export type TAgent = TRoom;

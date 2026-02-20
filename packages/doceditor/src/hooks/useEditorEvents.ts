@@ -66,8 +66,8 @@ import {
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { StartFillingMode } from "@docspace/shared/enums";
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { FolderType } from "@docspace/ui-kit/enums";
 import type { Nullable } from "@docspace/shared/types";
-
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 
 import { isMobile } from "react-device-detect";
@@ -103,6 +103,7 @@ const useEditorEvents = ({
   sdkConfig,
   organizationName,
   shareKey,
+  generationToolCallState,
   setFillingStatusDialogVisible,
   openShareFormDialog,
   onStartFillingVDRPanel,
@@ -328,6 +329,15 @@ const useEditorEvents = ({
                   },
                 ],
               });
+
+              if (generationToolCallState) {
+                connector.sendEvent("ai_onCallTool", {
+                  name: generationToolCallState.toolName,
+                  arguments: {
+                    ...generationToolCallState.parameters,
+                  },
+                });
+              }
             };
 
             connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
@@ -336,9 +346,11 @@ const useEditorEvents = ({
                 typeof data === "object" &&
                 "error" in data &&
                 data.error
-              )
+              ) {
                 connector.attachEvent("ai_onInit", sendProviders);
-              else sendProviders();
+              } else {
+                sendProviders();
+              }
             });
 
             connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
@@ -365,6 +377,7 @@ const useEditorEvents = ({
     checkAndRequestRoles,
     t,
     successAuth,
+    generationToolCallState,
   ]);
 
   const onUserActionRequired = React.useCallback(() => {
@@ -954,7 +967,11 @@ const useEditorEvents = ({
       onSDKInfo(e);
 
       // Add to recently viewed files in any mode (read or edit)
-      if (successAuth && fileInfo?.id) {
+      if (
+        successAuth &&
+        fileInfo?.id &&
+        fileInfo?.rootFolderType !== FolderType.DefaultTemplates
+      ) {
         addFileToRecentlyViewed(fileInfo.id);
       }
     },

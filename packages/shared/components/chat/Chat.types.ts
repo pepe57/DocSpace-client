@@ -26,218 +26,224 @@
 import type React from "react";
 
 import type { TContent, TMessage, TToolCallContent } from "../../api/ai/types";
+import type { TGetIcon } from "@docspace/ui-kit/selectors/utils/types";
 import type { TFile } from "../../api/files/types";
 import type { TMultimodal } from "../../api/rooms/types";
-import type { TGetIcon } from "../../selectors/utils/types";
 
 import type useToolsSettings from "./hooks/useToolsSettings";
 import type useInitChats from "./hooks/useInitChats";
 import type useInitMessages from "./hooks/useInitMessages";
 
 export type TChatPlaylistImage = {
-  fileId: number;
-  title: string;
-  src: string;
+	fileId: number;
+	title: string;
+	src: string;
+};
+
+export type TGenerateDocStoreProps = {
+	roomId: string | number;
+	children: React.ReactNode;
 };
 
 export type TChatStoreProps = {
-  roomId: string | number;
-  children: React.ReactNode;
+	roomId: string | number;
+	children: React.ReactNode;
 } & ReturnType<typeof useInitChats>;
 
 export type TMessageStoreProps = {
-  roomId: string | number;
-  children: React.ReactNode;
-  multimodal?: TMultimodal;
+	roomId: string | number;
+	children: React.ReactNode;
+	multimodal?: TMultimodal;
 } & Omit<ReturnType<typeof useInitMessages>, "initMessages">;
 
 export type SelectModelProps = {
-  selectedModel: string;
-  isLoading?: boolean;
+	selectedModel: string;
+	isLoading?: boolean;
 };
 
 export type SelectChatProps = {
-  isLoadingProp?: boolean;
-  roomId: string | number;
-  getIcon: TGetIcon;
-  getResultStorageId: () => number | null;
-  setIsAIAgentChatDelete?: (value: {
-    visible: boolean;
-    itemName: string;
-    onDeleteAction: () => void;
-  }) => void;
-  setDeleteDialogVisible?: (value: boolean) => void;
-  folderFormValidation: RegExp;
+	isLoadingProp?: boolean;
+	roomId: string | number;
+	getIcon: TGetIcon;
+	getResultStorageId: () => number | null;
+	setIsAIAgentChatDelete?: (value: {
+		visible: boolean;
+		itemName: string;
+		onDeleteAction: () => void;
+	}) => void;
+	setDeleteDialogVisible?: (value: boolean) => void;
+	folderFormValidation: RegExp;
 };
 
 export type RenameChatProps = {
-  chatId: string;
-  prevTitle: string;
-  onRenameToggle: VoidFunction;
+	chatId: string;
+	prevTitle: string;
+	onRenameToggle: VoidFunction;
 };
 
 export type ChatHeaderProps = SelectModelProps &
-  Omit<SelectChatProps, "isLoadingProp"> & {
-    aiReady: boolean;
-    setIsAIAgentChatDelete?: (value: {
-      visible: boolean;
-      itemName: string;
-      onDeleteAction: () => void;
-    }) => void;
-    setDeleteDialogVisible?: (value: boolean) => void;
-    folderFormValidation: RegExp;
-  };
+	Omit<SelectChatProps, "isLoadingProp"> & {
+		aiReady: boolean;
+		setIsAIAgentChatDelete?: (value: {
+			visible: boolean;
+			itemName: string;
+			onDeleteAction: () => void;
+		}) => void;
+		setDeleteDialogVisible?: (value: boolean) => void;
+		folderFormValidation: RegExp;
+	};
 
 export type MessageProps = {
-  message: TMessage;
-  idx: number;
-  userAvatar: string;
-  isLast: boolean;
-  getIcon: TGetIcon;
-  getResultStorageId: () => number | null;
-  folderFormValidation: RegExp;
+	message: TMessage;
+	idx: number;
+	userAvatar: string;
+	isLast: boolean;
+	getIcon: TGetIcon;
+	getResultStorageId: () => number | null;
+	folderFormValidation: RegExp;
 } & Pick<MessageImagesProps, "setAiPlaylistImages" | "setMediaViewerVisible">;
 
 export type MessageButtonsProps = {
-  text: string;
-  chatName?: string;
-  messageId?: number;
-  isLast: boolean;
-  getIcon: TGetIcon;
-  messageIndex: number;
-  getResultStorageId: () => number | null;
-  folderFormValidation: RegExp;
+	text: string;
+	chatName?: string;
+	messageId?: number;
+	isLast: boolean;
+	getIcon: TGetIcon;
+	messageIndex: number;
+	getResultStorageId: () => number | null;
+	folderFormValidation: RegExp;
 };
 
 export type MessageCodeBlockProps = {
-  language?: string;
-  content: string;
-  successCopyMessage?: string;
+	language?: string;
+	content: string;
+	successCopyMessage?: string;
 };
 
 export type MessageErrorProps = {
-  content: TContent;
+	content: TContent;
 };
 
 export type MessageFilesProps = {
-  files: TContent[];
-  getIcon: TGetIcon;
+	files: TContent[];
+	getIcon: TGetIcon;
+	reverse?: boolean;
 };
 
 export type MessageImagesProps = {
-  images: TContent[];
-  setAiPlaylistImages?: (value: TChatPlaylistImage[]) => void;
-  setMediaViewerVisible?: (value: boolean) => void;
+	images: TContent[];
+	setAiPlaylistImages?: (value: TChatPlaylistImage[]) => void;
+	setMediaViewerVisible?: (value: boolean) => void;
 };
 
 export type MessageMarkdownFieldProps = {
-  chatMessage: string;
-  propLanguage?: string;
-  isFirst?: boolean;
-  successCopyMessage?: string;
+	chatMessage: string;
+	propLanguage?: string;
+	isFirst?: boolean;
+	successCopyMessage?: string;
 };
 
 export type MessageToolCallProps = {
-  content: TToolCallContent;
+	content: TToolCallContent;
 };
 
 export type MessageEmptyProps = {
-  isLoading?: boolean;
+	isLoading?: boolean;
 };
 
 export type MessageBodyProps = {
-  userAvatar: string;
-  isLoading?: boolean;
+	userAvatar: string;
+	isLoading?: boolean;
 
-  getIcon: TGetIcon;
-  getResultStorageId: () => number | null;
-  folderFormValidation: RegExp;
+	getIcon: TGetIcon;
+	getResultStorageId: () => number | null;
+	folderFormValidation: RegExp;
 } & Pick<MessageProps, "setAiPlaylistImages" | "setMediaViewerVisible">;
 
 export type FilesListProps = {
-  files: Partial<TFile>[];
-  isFixed?: boolean;
-  multimodal?: TMultimodal;
-  getIcon: TGetIcon;
-  onRemove?: (file: Partial<TFile>) => void;
+	files: Partial<TFile>[];
+	isFixed?: boolean;
+	multimodal?: TMultimodal;
+	getIcon: TGetIcon;
+	onRemove?: (file: Partial<TFile>) => void;
 };
 
 export type ButtonsProps = {
-  isFilesSelectorVisible: boolean;
+	isFilesSelectorVisible: boolean;
 
-  toggleFilesSelector: VoidFunction;
-  sendMessageAction: () => Promise<void>;
+	toggleFilesSelector: VoidFunction;
+	sendMessageAction: () => Promise<void>;
 
-  value: string;
-  selectedModel: string;
+	value: string;
+	selectedModel: string;
 
-  toolsSettings: ReturnType<typeof useToolsSettings>;
-  isAdmin?: boolean;
-  aiReady: boolean;
+	toolsSettings: ReturnType<typeof useToolsSettings>;
+	isAdmin?: boolean;
+	aiReady: boolean;
 };
 
 export type AttachmentProps = {
-  isVisible: boolean;
-  toggleAttachment: VoidFunction;
-  getIcon: TGetIcon;
-  setSelectedFiles: (files: Partial<TFile>[]) => void;
-  multimodal?: TMultimodal;
+	isVisible: boolean;
+	toggleAttachment: VoidFunction;
+	getIcon: TGetIcon;
+	setSelectedFiles: (files: Partial<TFile>[]) => void;
+	multimodal?: TMultimodal;
 };
 
 export type ChatInputProps = {
-  getIcon: AttachmentProps["getIcon"];
-  isLoading?: boolean;
+	getIcon: AttachmentProps["getIcon"];
+	isLoading?: boolean;
 
-  attachmentFile: Partial<TFile> | null;
-  clearAttachmentFile: VoidFunction;
-  selectedModel: string;
+	attachmentFile: Partial<TFile> | null;
+	clearAttachmentFile: VoidFunction;
+	selectedModel: string;
 
-  toolsSettings: ReturnType<typeof useToolsSettings>;
-  isPortalAdmin: boolean;
-  aiReady: boolean;
-  multimodal?: TMultimodal;
+	toolsSettings: ReturnType<typeof useToolsSettings>;
+	isPortalAdmin: boolean;
+	aiReady: boolean;
+	multimodal?: TMultimodal;
 };
 
 export type ChatInfoBlockProps = {
-  standalone: boolean;
-  isPortalAdmin: boolean;
+	standalone: boolean;
+	isPortalAdmin: boolean;
 };
 
 export type ChatFooterProps = ChatInputProps & ChatInfoBlockProps;
 
 export type ChatContainerProps = {
-  children: React.ReactNode;
-  isLoadingChat?: boolean;
+	children: React.ReactNode;
+	isLoadingChat?: boolean;
 };
 
 export type ChatProps = {
-  roomId: TChatStoreProps["roomId"];
-  userAvatar: MessageBodyProps["userAvatar"];
-  selectedModel: string;
-  getIcon: ChatInputProps["getIcon"];
-  getResultStorageId: () => number | null;
-  isLoading?: boolean;
-  aiReady: boolean;
+	roomId: TChatStoreProps["roomId"];
+	userAvatar: MessageBodyProps["userAvatar"];
+	selectedModel: string;
+	getIcon: ChatInputProps["getIcon"];
+	getResultStorageId: () => number | null;
+	isLoading?: boolean;
+	aiReady: boolean;
 
-  attachmentFile: ChatInputProps["attachmentFile"];
-  clearAttachmentFile: ChatInputProps["clearAttachmentFile"];
+	attachmentFile: ChatInputProps["attachmentFile"];
+	clearAttachmentFile: ChatInputProps["clearAttachmentFile"];
 
-  toolsSettings: ChatInputProps["toolsSettings"];
-  initChats: ReturnType<typeof useInitChats>;
-  messagesSettings: Omit<ReturnType<typeof useInitMessages>, "initMessages">;
-  isAdmin?: boolean;
-  standalone?: boolean;
+	toolsSettings: ChatInputProps["toolsSettings"];
+	initChats: ReturnType<typeof useInitChats>;
+	messagesSettings: Omit<ReturnType<typeof useInitMessages>, "initMessages">;
+	isAdmin?: boolean;
+	standalone?: boolean;
 
-  setIsAIAgentChatDelete?: (value: {
-    visible: boolean;
-    itemName: string;
-    onDeleteAction: () => void;
-  }) => void;
-  setDeleteDialogVisible?: (value: boolean) => void;
-  folderFormValidation: RegExp;
+	setIsAIAgentChatDelete?: (value: {
+		visible: boolean;
+		itemName: string;
+		onDeleteAction: () => void;
+	}) => void;
+	setDeleteDialogVisible?: (value: boolean) => void;
+	folderFormValidation: RegExp;
 
-  multimodal?: TMultimodal;
+	multimodal?: TMultimodal;
 
-  setAiPlaylistImages?: (value: TChatPlaylistImage[]) => void;
-  setMediaViewerVisible?: (value: boolean) => void;
+	setAiPlaylistImages?: (value: TChatPlaylistImage[]) => void;
+	setMediaViewerVisible?: (value: boolean) => void;
 };

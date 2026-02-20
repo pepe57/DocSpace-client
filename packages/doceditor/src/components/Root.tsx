@@ -30,7 +30,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
 
-import { TResponse } from "@/types";
+import type { TResponse, SelectFolderDialogProps, SelectFileDialogProps, StartFillingSelectorDialogProps } from "@/types";
 
 import useError from "@/hooks/useError";
 import useRootInit from "@/hooks/useRootInit";
@@ -116,6 +116,8 @@ const Root = ({
 
   deepLinkSettings,
   baseSdkConfig,
+
+  generationToolCallState,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -349,6 +351,7 @@ const Root = ({
           onDownloadAs={onDownloadAs}
           filesSettings={filesSettings}
           shareKey={shareKey}
+          generationToolCallState={generationToolCallState}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}
@@ -366,23 +369,23 @@ const Root = ({
       {isVisibleSelectFolderDialog && fileInfo ? (
         <SelectFolderDialog
           isVisible={isVisibleSelectFolderDialog}
-          onSubmit={onSubmitSelectFolderDialog}
+          onSubmit={onSubmitSelectFolderDialog as SelectFolderDialogProps["onSubmit"]}
           onClose={onCloseSelectFolderDialog}
           titleSelectorFolder={titleSelectorFolderDialog}
           fileInfo={fileInfo}
-          getIsDisabled={getIsDisabledSelectFolderDialog}
-          filesSettings={filesSettings}
+          getIsDisabled={getIsDisabledSelectFolderDialog as SelectFolderDialogProps["getIsDisabled"]}
+          filesSettings={filesSettings as SelectFolderDialogProps["filesSettings"]}
           fileSaveAsExtension={extensionSelectorFolderDialog}
           selectedFolderId={selectedFolderId}
         />
       ) : null}
       {selectFileDialogVisible && fileInfo ? (
         <SelectFileDialog
-          filesSettings={filesSettings}
+          filesSettings={filesSettings as SelectFileDialogProps["filesSettings"]}
           isVisible={selectFileDialogVisible}
-          onSubmit={onSubmitSelectFileDialog}
+          onSubmit={onSubmitSelectFileDialog as SelectFileDialogProps["onSubmit"]}
           onClose={onCloseSelectFileDialog}
-          getIsDisabled={getIsDisabledSelectFileDialog}
+          getIsDisabled={getIsDisabledSelectFileDialog as SelectFileDialogProps["getIsDisabled"]}
           fileTypeDetection={selectFileDialogFileTypeDetection}
           fileInfo={fileInfo}
           shareKey={shareKey}
@@ -436,17 +439,17 @@ const Root = ({
       {shareFormDialogVisible && fileInfo ? (
         <ShareFormDialog
           file={fileInfo}
-          filesSettings={filesSettings}
+          filesSettings={filesSettings as unknown as StartFillingSelectorDialogProps["filesSettings"]}
           createDefineRoomType={createDefineRoomType}
           headerLabelSFSDialog={headerLabelSFSDialog}
           onClose={onCloseShareFormDialog}
           onClickFormRoom={onClickFormRoom}
           onClickVirtualDataRoom={onClickVirtualDataRoom}
           getIsDisabledStartFillingSelectDialog={
-            getIsDisabledStartFillingSelectDialog
+            getIsDisabledStartFillingSelectDialog as unknown as StartFillingSelectorDialogProps["getIsDisabled"]
           }
           onCloseStartFillingSelectDialog={onCloseStartFillingSelectDialog}
-          onSubmitStartFillingSelectDialog={onSubmitStartFillingSelectDialog}
+          onSubmitStartFillingSelectDialog={onSubmitStartFillingSelectDialog as unknown as StartFillingSelectorDialogProps["onSubmit"]}
           isVisibleStartFillingSelectDialog={isVisibleStartFillingSelectDialog}
           openChangeLinkTypeDialog={openChangeLinkTypeDialog}
         />
