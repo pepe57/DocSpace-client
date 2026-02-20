@@ -15,6 +15,7 @@
     "test:e2e:docker:start": "docker-compose run --rm tests-local pnpm exec playwright test",
     "test:e2e:docker:update-screenshots": "docker-compose run --rm tests-local pnpm exec playwright test --update-snapshots",
     "test:e2e:docker:clear": "docker rmi management-tests",
+    "test:e2e:ui": "pnpm run test:build && pnpm exec playwright test --ui",
     "lint": "biome lint ./src",
     "lint:fix": "biome lint --write ./src",
     "format": "biome check ./src",

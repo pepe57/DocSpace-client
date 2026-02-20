@@ -58,14 +58,6 @@ import { CurrentQuotasStore } from "./CurrentQuotaStore";
 import { SettingsStore } from "./SettingsStore";
 
 class AuthStore {
-  private userStore: UserStore | null = null;
-
-  private currentQuotaStore: CurrentQuotasStore | null = null;
-
-  private currentTariffStatusStore: CurrentTariffStatusStore | null = null;
-
-  settingsStore: SettingsStore | null = null;
-
   isLoading = false;
 
   version: string = "";
@@ -89,16 +81,11 @@ class AuthStore {
   isPortalInfoLoaded = false;
 
   constructor(
-    userStoreConst: UserStore,
-    currentTariffStatusStoreConst: CurrentTariffStatusStore,
-    currentQuotaStoreConst: CurrentQuotasStore,
-    settingsStore: SettingsStore,
+    private userStore: UserStore,
+    private currentTariffStatusStore: CurrentTariffStatusStore,
+    private currentQuotaStore: CurrentQuotasStore,
+    public settingsStore: SettingsStore,
   ) {
-    this.userStore = userStoreConst;
-    this.currentTariffStatusStore = currentTariffStatusStoreConst;
-    this.currentQuotaStore = currentQuotaStoreConst;
-    this.settingsStore = settingsStore;
-
     makeAutoObservable(this);
 
     SocketHelper?.on(

@@ -51,42 +51,42 @@ import i18n from "./i18n";
 import { SocketProvider } from "@docspace/ui-kit/providers/socket";
 
 const getApiUrl = () => {
-  const origin = window.ClientConfig?.api?.origin || window.location.origin;
-  const proxy = window.ClientConfig?.proxy?.url || "";
+	const origin = window.ClientConfig?.api?.origin || window.location.origin;
+	const proxy = window.ClientConfig?.proxy?.url || "";
 
-  return combineUrl(origin, proxy);
+	return combineUrl(origin, proxy);
 };
 
 const App = () => {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            refetchOnWindowFocus: false,
-            retry: 1,
-            staleTime: 5 * 60 * 1000,
-          },
-        },
-      }),
-  );
+	const [queryClient] = useState(
+		() =>
+			new QueryClient({
+				defaultOptions: {
+					queries: {
+						refetchOnWindowFocus: false,
+						retry: 1,
+						staleTime: 5 * 60 * 1000,
+					},
+				},
+			}),
+	);
 
-  React.useEffect(() => {
-    const regex = /(\/){2,}/g;
-    const replaceRegex = /(\/)+/g;
-    const pathname = window.location.pathname;
+	React.useEffect(() => {
+		const regex = /(\/){2,}/g;
+		const replaceRegex = /(\/)+/g;
+		const pathname = window.location.pathname;
 
-    if (regex.test(pathname))
-      window.location.replace(pathname.replace(replaceRegex, "$1"));
-  }, []);
+		if (regex.test(pathname))
+			window.location.replace(pathname.replace(replaceRegex, "$1"));
+	}, []);
 
-  const apiUrl = getApiUrl();
-  const apiKey = getCookie("asc_auth_key") || "";
+	const apiUrl = getApiUrl();
+	const apiKey = getCookie("asc_auth_key") || "";
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <MobxProvider {...store}>
-        <ApiProvider url={apiUrl} apiKey={apiKey}>
+	return (
+		<QueryClientProvider client={queryClient}>
+			<MobxProvider {...store}>
+				<ApiProvider url={apiUrl} apiKey={apiKey}>
           <SocketProvider>
             <I18nextProvider i18n={i18n}>
               <ThemeProvider>
@@ -96,10 +96,10 @@ const App = () => {
               </ThemeProvider>
             </I18nextProvider>
           </SocketProvider>
-        </ApiProvider>
-      </MobxProvider>
-    </QueryClientProvider>
-  );
+				</ApiProvider>
+			</MobxProvider>
+		</QueryClientProvider>
+	);
 };
 
 export default App;
