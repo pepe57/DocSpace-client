@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
@@ -76,15 +76,19 @@ const Services = (props: InjectedProps) => {
     [WEB_SEARCH]: false,
   });
 
-  const updateDialogVisibility = (
-    dialogType: keyof typeof dialogVisibility,
-    isVisible: boolean,
-  ) => {
-    setDialogVisibility((prev) => ({
-      ...prev,
-      [dialogType]: isVisible,
-    }));
-  };
+  const updateDialogVisibility = useCallback(
+    (dialogType: keyof typeof dialogVisibility, isVisible: boolean) => {
+      setDialogVisibility((prev) => {
+        if (prev[dialogType] === isVisible) return prev;
+
+        return {
+          ...prev,
+          [dialogType]: isVisible,
+        };
+      });
+    },
+    [],
+  );
 
   const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
   const [isCurrentConfirmState, setIsCurrentConfirmState] = useState(false);
@@ -95,6 +99,7 @@ const Services = (props: InjectedProps) => {
 
   const [isTopUpBalanceVisible, setIsTopUpBalanceVisible] = useState(false);
 
+  const [isAiServiceTopUpVisible, setIsAiServiceTopUpVisible] = useState(false);
   const shouldShowLoader = !isInitServicesPage || !ready;
   const location = useLocation();
   const navigate = useNavigate();
@@ -107,6 +112,9 @@ const Services = (props: InjectedProps) => {
 
     if (confirmActionType === TOTAL_SIZE) {
       updateDialogVisibility(TOTAL_SIZE, isVisibleWalletSettings);
+    } else if (confirmActionType === AI_TOOLS) {
+      setIsAiServiceTopUpVisible(true);
+      updateDialogVisibility(AI_TOOLS, isVisibleWalletSettings);
     } else {
       setIsTopUpBalanceVisible(true);
     }
@@ -363,6 +371,7 @@ const Services = (props: InjectedProps) => {
           visible={dialogVisibility[AI_TOOLS]}
           onClose={onCloseAiService}
           onToggle={onToggle}
+          isTopUpVisible={isAiServiceTopUpVisible}
         />
       ) : null}
       {dialogVisibility[WEB_SEARCH] ? (
