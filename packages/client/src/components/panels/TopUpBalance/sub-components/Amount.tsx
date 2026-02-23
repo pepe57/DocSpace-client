@@ -35,6 +35,7 @@ import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "../styles/Amount.module.scss";
 import { useAmountValue } from "../../../../pages/PortalSettings/categories/payments/Wallet/context";
+import { FieldContainer } from "@docspace/ui-kit/components";
 
 type AmountProps = {
   isDisabled: boolean;
@@ -42,6 +43,8 @@ type AmountProps = {
   walletCustomerStatusNotActive?: boolean;
   reccomendedAmount?: string;
   formatWalletCurrency?: (item: number, fractionDigits?: number) => string;
+  minValue?: string;
+  maxValue?: string;
 };
 
 const MAX_LENGTH = 6;
@@ -53,9 +56,12 @@ const Amount = (props: AmountProps) => {
     walletCustomerStatusNotActive,
     reccomendedAmount,
     formatWalletCurrency,
+    minValue,
+    maxValue,
   } = props;
 
-  const { amount, setAmount } = useAmountValue();
+  const { amount, setAmount, hasError, setHasError } = useAmountValue();
+  const [hasMinError, setHasMinError] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState<string | undefined>();
   const { t } = useTranslation("Payments");
 
@@ -70,6 +76,19 @@ const Amount = (props: AmountProps) => {
     }));
   };
 
+  const checkError = (amount: string) => {
+    const isMinError = !minValue ? false : +amount < +minValue;
+    const isMaxError = !maxValue ? false : +amount > +maxValue;
+
+    setHasMinError(isMinError);
+
+    if (isMinError || isMaxError) {
+      setHasError(true);
+    } else {
+      setHasError(false);
+    }
+  };
+
   const onSelectAmount = (e: React.MouseEvent<HTMLDivElement>) => {
     const itemId = e.currentTarget.dataset.id;
     const currentAmount = amount ? parseInt(amount, 10) : 0;
@@ -77,6 +96,7 @@ const Amount = (props: AmountProps) => {
     const newTotal = (currentAmount + selectedValue).toString();
 
     const amountValue = newTotal.length <= MAX_LENGTH ? newTotal : amount;
+    checkError(amountValue);
     setSelectedAmount(itemId);
     setAmount(amountValue);
   };
@@ -85,6 +105,8 @@ const Amount = (props: AmountProps) => {
     const { value, validity } = e.target;
 
     if (!validity.valid) return;
+
+    checkError(value);
 
     setAmount(value);
   };
@@ -127,27 +149,40 @@ const Amount = (props: AmountProps) => {
         <Text fontWeight={600} className={styles.amountTitle}>
           {t("Amount")}
         </Text>
-
-        <TextInput
-          value={amount}
-          onChange={onChangeTextInput}
-          pattern="^[1-9]\d*$"
-          scale
-          withBorder
-          type={InputType.text}
-          placeholder={t("EnterAmount")}
-          isDisabled={isDisabled || !walletCustomerEmail}
-          maxLength={MAX_LENGTH}
-          testId="top_up_amount_input"
-        />
-        {reccomendedAmount ? (
-          <Text className={styles.reccomendedAmount}>
-            {t("RecommendedTopUpAmount", {
-              amount: formatWalletCurrency!(+reccomendedAmount, 0),
-            })}
-          </Text>
-        ) : null}
+        <FieldContainer
+          isVertical
+          errorMessage={
+            hasMinError
+              ? t("MinCurrency", {
+                  currency: formatWalletCurrency!(+minValue!, 0),
+                })
+              : ""
+          }
+          hasError={hasError}
+        >
+          <TextInput
+            value={amount}
+            onChange={onChangeTextInput}
+            pattern="^[1-9]\d*$"
+            scale
+            withBorder
+            type={InputType.text}
+            placeholder={t("EnterAmount")}
+            isDisabled={isDisabled || !walletCustomerEmail}
+            maxLength={MAX_LENGTH}
+            testId="top_up_amount_input"
+            hasError={hasError}
+          />
+          {reccomendedAmount ? (
+            <Text className={styles.reccomendedAmount}>
+              {t("RecommendedTopUpAmount", {
+                amount: formatWalletCurrency!(+reccomendedAmount, 0),
+              })}
+            </Text>
+          ) : null}
+        </FieldContainer>
       </div>
+
       {!walletCustomerEmail || walletCustomerStatusNotActive ? (
         <Tooltip
           id="iconTooltip"
