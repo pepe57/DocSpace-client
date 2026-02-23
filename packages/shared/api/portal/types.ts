@@ -231,9 +231,11 @@ export type TCustomerInfo = {
 export type TBalance =
   | {
       accountNumber?: number;
-      subAccounts: [{ currency: string; amount: number }];
+      subAccountNumber?: number;
+      subAccounts: { currency: string; amount: number }[];
     }
-  | 0;
+  | 0
+  | null;
 
 export type TTransactionCollection = {
   date: string;

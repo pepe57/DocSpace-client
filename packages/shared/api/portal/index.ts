@@ -471,6 +471,29 @@ export function getBalance(refresh?: boolean, signal?: AbortSignal) {
   }) as TBalance;
 }
 
+export async function getServiceQuotaBalance(
+  serviceName: string = "aitools",
+  refresh?: boolean,
+  signal?: AbortSignal,
+) {
+  const params = refresh ? { refresh: true } : {};
+
+  return request({
+    method: "get",
+    url: `/portal/payment/customer/servicequota?serviceName=${serviceName}`,
+    params,
+    signal,
+  }) as TBalance;
+}
+
+export async function getAiPrices(signal?: AbortSignal) {
+  return request({
+    method: "get",
+    url: `/portal/payment/aiprices`,
+    signal,
+  });
+}
+
 export async function getWalletPayer(refresh?: boolean, signal?: AbortSignal) {
   const params = refresh ? { refresh: true } : {};
 

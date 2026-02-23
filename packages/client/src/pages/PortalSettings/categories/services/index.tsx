@@ -66,6 +66,7 @@ const Services = (props: InjectedProps) => {
     setVisibleWalletSetting,
     showPortalSettingsLoader,
     isFreeTariff,
+    wasFirstAiServiceTopUp,
   } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [dialogVisibility, setDialogVisibility] = useState({
@@ -174,6 +175,10 @@ const Services = (props: InjectedProps) => {
       return;
     }
 
+    if (id === AI_TOOLS && wasFirstAiServiceTopUp) {
+      return;
+    }
+
     updateDialogVisibility(id as keyof typeof dialogVisibility, true);
   };
 
@@ -197,6 +202,11 @@ const Services = (props: InjectedProps) => {
       }
       updateDialogVisibility(TOTAL_SIZE, true);
 
+      return;
+    }
+
+    if (id === AI_TOOLS && !wasFirstAiServiceTopUp) {
+      updateDialogVisibility(AI_TOOLS, true);
       return;
     }
 
@@ -395,6 +405,7 @@ const mapStoreToProps = ({
     confirmActionType,
     setIsInitServicesPage,
     setVisibleWalletSetting,
+    wasFirstAiServiceTopUp,
   } = servicesStore;
   const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
   const { isFreeTariff } = currentQuotaStore;
@@ -420,6 +431,7 @@ const mapStoreToProps = ({
     setVisibleWalletSetting,
     showPortalSettingsLoader,
     isFreeTariff,
+    wasFirstAiServiceTopUp,
   };
 };
 
