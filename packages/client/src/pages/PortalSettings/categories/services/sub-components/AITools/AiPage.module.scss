@@ -1,0 +1,99 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.toggleSection {
+  max-width: 660px;
+}
+
+.balanceSection {
+  width: 100%;
+}
+
+.balanceCard {
+  width: 320px;
+  border: 1px solid var(--aside-header-border-color);
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.balanceHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.balanceTitle {
+  color: var(--text-color);
+}
+
+.refreshIcon {
+  margin-left: auto;
+}
+
+.spinning {
+  animation: aiPageSpin 1s linear infinite;
+}
+
+@keyframes aiPageSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.balanceAmount {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.balanceMajor {
+  font-size: 44px;
+  line-height: 60px;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.balanceMinor {
+  font-size: 28px;
+  line-height: 38px;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.lastTopUpRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.lastTopUpLabel {
+  color: var(--text-disable-color);
+}
+
+.lastTopUpValue {
+  color: var(--text-color);
+}
+
+.lastTopUpDate {
+  color: var(--text-disable-color);
+}
+
+.pricingLink {
+  padding: 2px 0;
+}
+
+

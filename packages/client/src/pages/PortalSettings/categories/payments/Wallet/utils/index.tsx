@@ -67,7 +67,7 @@ export const getEffectiveFraction = (
     const [mantissa, expPart] = str.split("e-");
     const exponent = Number(expPart);
 
-    const mantissaFraction = mantissa.split(".")[1]?.length;
+    const mantissaFraction = mantissa.split(".")[1]?.length ?? 0;
 
     const actualFractionDigits = exponent + mantissaFraction;
 
@@ -76,17 +76,16 @@ export const getEffectiveFraction = (
     return Math.min(fractionDigits, actualFractionDigits);
   }
 
-  const actualFractionLength = str.split(".")[1]?.length;
+  const actualFractionLength = str.split(".")[1]?.length ?? 0;
 
   if (fractionDigits === 0) return actualFractionLength;
 
   return Math.min(fractionDigits, actualFractionLength);
 };
 
-export const accountingLedgersFormat = (
+export const formatterCurrencyWithoutTranction = (
   language: string,
   amount: number,
-  isCredit: boolean,
   currency: string,
 ) => {
   const maximumFractionDigits = 8;
@@ -110,6 +109,7 @@ export const accountingLedgersFormat = (
     ? truncateNumberToFractionNumeric(amount, effectiveFractionDigits)
     : amount;
 
+  console.log("effectiveFractionDigits", effectiveFractionDigits);
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
@@ -117,7 +117,17 @@ export const accountingLedgersFormat = (
     maximumFractionDigits: effectiveFractionDigits,
   });
 
-  const value = formatter.format(truncated);
+  return formatter.format(truncated);
+};
+
+export const accountingLedgersFormat = (
+  language: string,
+  amount: number,
+  isCredit: boolean,
+  currency: string,
+) => {
+  const value = formatterCurrencyWithoutTranction(language, amount, currency);
+
   return `${isCredit ? "+" : "-"}${value}`;
 };
 

@@ -40,7 +40,7 @@ import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
-import TransactionHistory from "./TransactionHistory";
+import TransactionHistory from "../TransactionHistory";
 import TopUpModal from "../../../../../components/panels/TopUpBalance/TopUpModal";
 import WalletRefilledModal from "./WalletRefilledModal";
 import { formattedBalanceTokens } from "./utils";
@@ -312,7 +312,9 @@ const Wallet = (props: WalletProps) => {
       {wasChangeBalance ? (
         <WalletRefilledModal visible={wasChangeBalance} />
       ) : null}
-      <TransactionHistory />
+      {fetchTransactionHistory ? (
+        <TransactionHistory fetchTransactionHistory={fetchTransactionHistory} />
+      ) : null}
     </div>
   );
 };

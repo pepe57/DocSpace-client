@@ -63,10 +63,10 @@ import { TUser } from "@docspace/shared/api/people/types";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import Filter from "@docspace/shared/api/people/filter";
 
-import FilterPanel from "./sub-components/FilterPanel";
-import TransactionBody from "./sub-components/TransactionBody";
-import styles from "./styles/TransactionHistory.module.scss";
-import TableLoader from "./sub-components/TableLoader";
+import FilterPanel from "./Wallet/sub-components/FilterPanel";
+import TransactionBody from "./Wallet/sub-components/TransactionBody";
+import styles from "./Wallet/styles/TransactionHistory.module.scss";
+import TableLoader from "./Wallet/sub-components/TableLoader";
 import { Link } from "@docspace/ui-kit/components/link";
 
 type TransactionHistoryReportResponse = {
@@ -78,19 +78,21 @@ type TransactionHistoryReportResponse = {
 type TransactionHistoryProps = {
   getStartTransactionDate?: () => string;
   getEndTransactionDate?: () => string;
-  fetchTransactionHistory?: (
-    startDate: DateTime,
-    endDate: DateTime,
-    isCredit: boolean,
-    isDebit: boolean,
+  fetchTransactionHistory: (
+    startDate: DateTime | null,
+    endDate: DateTime | null,
+    credit: boolean,
+    debit: boolean,
     participantName?: string,
   ) => Promise<void>;
   openOnNewPage?: boolean;
+  userId?: string;
   isTransactionHistoryExist?: boolean;
   isMobile?: boolean;
   isTablet?: boolean;
   isNotPaidPeriod?: boolean;
   formatDate?: (date: DateTime) => string;
+  withoutHeader?: boolean;
 };
 
 const getTransactionType = (key: string) => {
@@ -187,6 +189,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     isTablet,
     isNotPaidPeriod,
     formatDate,
+    withoutHeader,
   } = props;
 
   const { t } = useTranslation(["Payments", "Settings"]);
@@ -666,9 +669,15 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   return (
     <>
       <div className={styles.transactionHistoryHeader}>
-        <Text isBold fontSize="16px" className={styles.transactionHistoryTitle}>
-          {t("TransactionHistory")}
-        </Text>
+        {withoutHeader ? null : (
+          <Text
+            isBold
+            fontSize="16px"
+            className={styles.transactionHistoryTitle}
+          >
+            {t("TransactionHistory")}
+          </Text>
+        )}
         {isMobile ? mobileFilter : null}
       </div>
       {!isMobile ? filterCombobox : null}
@@ -755,7 +764,6 @@ export default inject(
     const {
       getStartTransactionDate,
       getEndTransactionDate,
-      fetchTransactionHistory,
       isTransactionHistoryExist,
       currentTariffStatusStore,
       formatDate,
@@ -774,7 +782,6 @@ export default inject(
     return {
       getStartTransactionDate,
       getEndTransactionDate,
-      fetchTransactionHistory,
       openOnNewPage,
       userId,
       isMobile,
