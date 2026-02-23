@@ -386,6 +386,7 @@ class PaymentStore {
     return (
       this.previousBalance === 0 &&
       typeof this.balance !== "number" &&
+      !!this.balance &&
       this.balance.subAccounts.length > 0
     );
   }
