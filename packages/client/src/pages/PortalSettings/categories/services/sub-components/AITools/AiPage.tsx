@@ -130,7 +130,7 @@ const AiPage = (props: AiPageProps) => {
         <ServiceToggleSection
           isEnabled={isEnabled}
           onToggle={onToggleChange}
-          title={t("EnableONLYOFFICEAI", { organizationName: logoText })}
+          title={t("EnableOrganizationAI", { organizationName: logoText })}
           description={t("EnableAIDescription")}
           testId="service-ai-toggle-button"
         />
