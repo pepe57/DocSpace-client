@@ -36,6 +36,7 @@ import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { ButtonSize, Button } from "@docspace/ui-kit/components/button";
 import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import type {
   HeaderProps,
   TAccessRight,
@@ -52,7 +53,6 @@ import {
   type IRole,
 } from "../../components/filling-role-selector";
 
-import PeopleSelector from "../../selectors/People";
 import { RoomsType, ShareAccessRights } from "../../enums";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { getAccessOptions } from "../../utils/getAccessOptions";
@@ -185,7 +185,7 @@ const RoleMappingPanel = ({
             ...role,
             user: {
               id: id.toString(),
-              avatar,
+              avatar: typeof avatar === "string" ? avatar : undefined,
               displayName,
             },
           };
