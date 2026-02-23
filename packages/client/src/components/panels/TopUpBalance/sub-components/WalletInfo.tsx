@@ -94,6 +94,7 @@ const WalletInfo = (props: WalletInfoProps) => {
           onClick={onTopUp}
           textDecoration="underline"
           dataTestId="top_up_wallet_link"
+          color="accent"
         >
           {t("TopUp")}
         </Link>
