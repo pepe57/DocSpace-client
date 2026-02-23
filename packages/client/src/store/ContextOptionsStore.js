@@ -611,21 +611,48 @@ class ContextOptionsStore {
     }
   };
 
-  onClickLinkEdit = (item) => {
+  /**
+   * Confirm pausing form filling before editing
+   * @param {Object} item - File item to check
+   * @returns {Promise<boolean>} - Returns true if user confirmed to proceed
+   */
+  confirmPauseFormSubmissions = async (item) => {
+    const isParentFormRoom = item.parentRoomType === FolderType.FormRoom;
+    const isFormActive = isParentFormRoom && item.startFilling;
+
+    if (!isFormActive) return true;
+
+    // Show confirmation dialog to pause filling
+    const confirmed = await new Promise((resolve) => {
+      this.dialogsStore.setPauseSubmissionsDialogVisible(true, resolve);
+    });
+
+    return confirmed;
+  };
+
+  showConvertDialog = (item) => {
     const { setConvertItem, setConvertDialogVisible, setConvertDialogData } =
       this.dialogsStore;
-    const canConvert =
+
+    setConvertItem({ ...item, isOpen: true });
+    setConvertDialogData({ files: item });
+    setConvertDialogVisible(true);
+  };
+
+  onClickLinkEdit = async (item) => {
+    // Confirm pausing form filling if form is active
+    const confirmed = await this.confirmPauseFormSubmissions(item);
+    if (!confirmed) return;
+
+    const mustConvert =
       item.viewAccessibility?.MustConvert && item.security?.Convert;
 
-    if (canConvert) {
-      setConvertItem({ ...item, isOpen: true });
-      setConvertDialogData({
-        files: item,
-      });
-      setConvertDialogVisible(true);
-    } else {
-      this.gotoDocEditor(item, false, null, item.isPDFForm);
+    if (mustConvert) {
+      this.showConvertDialog(item);
+      return;
     }
+
+    this.gotoDocEditor(item, false, null, item.isPDFForm);
   };
 
   onPreviewClick = (item) => {
@@ -747,7 +774,7 @@ class ContextOptionsStore {
     if (refPage) refPage.sessionStorage.setItem(FILLING_STATUS_ID, "true");
   };
 
-  startFillingInFormRoom = async (item, t) => {
+  startFillingInFormRoom = async (item) => {
     try {
       await manageFormFilling(item.id, FormFillingManageAction.Start);
 
@@ -761,7 +788,7 @@ class ContextOptionsStore {
     const isFormRoom = item.parentRoomType === FolderType.FormRoom;
 
     if (isFormRoom) {
-      this.startFillingInFormRoom(item, t);
+      this.startFillingInFormRoom(item);
       return;
     }
 
