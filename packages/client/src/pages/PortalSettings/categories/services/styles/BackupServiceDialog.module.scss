@@ -181,20 +181,7 @@
   width: 100%;
 }
 
-.payForIconPurple {
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  background: color-mix(
-    in srgb,
-    var(--color-scheme-main-buttons) 10%,
-    transparent
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-}
+
 
 
 .payForItemTextMuted {
