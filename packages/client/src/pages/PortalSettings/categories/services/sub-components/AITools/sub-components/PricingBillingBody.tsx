@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Trans } from "react-i18next";
-
+import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
@@ -11,6 +11,7 @@ import VectorizationIcon from "PUBLIC_DIR/images/icons/16/ai-vectorization.svg";
 import WebSearchIcon from "PUBLIC_DIR/images/icons/16/web-search.svg";
 
 import styles from "../../../styles/BackupServiceDialog.module.scss";
+import type { TAiToolsPrices } from "SRC_DIR/store/ServicesStore";
 import {
   Button,
   ButtonSize,
@@ -23,6 +24,11 @@ interface PricingBillingBodyProps {
   visible: boolean;
   onClose: () => void;
   onTopUpClick: () => void;
+
+  aiToolsPrices?: TAiToolsPrices;
+  formatAiModelsCurrency?: (amount: number) => string;
+  minimumInputPrice?: number;
+  minimumOutputPrice?: number;
 }
 
 const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
@@ -30,9 +36,17 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
   onClose,
   visible,
   onTopUpClick,
+  aiToolsPrices,
+  formatAiModelsCurrency,
+  minimumInputPrice,
+  minimumOutputPrice,
 }) => {
   const { t } = useTranslation(["Services", "Common"]);
 
+  const safeFormatAiModelsCurrency = (amount: number) =>
+    formatAiModelsCurrency ? formatAiModelsCurrency(amount) : String(amount);
+
+  const chatModels = aiToolsPrices?.chat ?? [];
   return (
     <ModalDialog
       visible={visible}
@@ -84,8 +98,7 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                       ),
                     }}
                     values={{
-                      price: "$0.006",
-                      tokens: "1M",
+                      price: safeFormatAiModelsCurrency(minimumInputPrice ?? 0),
                     }}
                   />
                 </Text>
@@ -110,8 +123,9 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                       ),
                     }}
                     values={{
-                      price: "$0.006",
-                      tokens: "1M",
+                      price: safeFormatAiModelsCurrency(
+                        minimumOutputPrice ?? 0,
+                      ),
                     }}
                   />
                 </Text>
@@ -161,7 +175,7 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                     <Trans
                       t={t}
                       ns="Services"
-                      i18nKey="AIPricingVectorizationPrice"
+                      i18nKey="AIPricingPricePerTokens"
                       components={{
                         1: (
                           <Text
@@ -172,8 +186,9 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                         ),
                       }}
                       values={{
-                        price: "$0.006",
-                        tokens: "1M",
+                        price: safeFormatAiModelsCurrency(
+                          aiToolsPrices?.embedding?.[0]?.price?.prompt ?? 0,
+                        ),
                       }}
                     />
                   </Text>
@@ -192,7 +207,7 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                     <Trans
                       t={t}
                       ns="Services"
-                      i18nKey="AIPricingWebSearchPrice"
+                      i18nKey="AIPricingPricePerRequest"
                       components={{
                         1: (
                           <Text
@@ -203,7 +218,40 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                         ),
                       }}
                       values={{
-                        price: "$0.006",
+                        price: safeFormatAiModelsCurrency(
+                          aiToolsPrices?.webSearch?.contents ?? 0,
+                        ),
+                      }}
+                    />
+                  </Text>
+                </Text>
+              </div>
+              <div className={styles.pricingRow}>
+                <div className={styles.pricingRowLeft}>
+                  <div className={styles.pricingRowIconBox}>
+                    <WebSearchIcon />
+                  </div>
+                  <Text fontSize="12px">{t("AIWhatYouPayForWebSearch")}</Text>
+                </div>
+                <Text fontSize="12px">
+                  <Text fontWeight="600">
+                    <Trans
+                      t={t}
+                      ns="Services"
+                      i18nKey="AIPricingPricePerRequest"
+                      components={{
+                        1: (
+                          <Text
+                            fontSize="12px"
+                            as="span"
+                            className={styles.payForItemTextMuted}
+                          />
+                        ),
+                      }}
+                      values={{
+                        price: safeFormatAiModelsCurrency(
+                          aiToolsPrices?.webSearch?.search ?? 0,
+                        ),
                       }}
                     />
                   </Text>
@@ -221,71 +269,30 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
             </Text>
 
             <div className={styles.modelList}>
-              <div className={styles.modelRow}>
-                <div className={styles.modelIconPlaceholder}>
-                  <span>GPT</span>
-                </div>
-                <div className={styles.modelText}>
-                  <Text className={styles.modelName}>{t("AIModelGPT")}</Text>
-                  <Text className={styles.modelPriceLine}>
-                    {t("AIModelGPTPrice")}
-                  </Text>
-                </div>
-              </div>
+              {chatModels.map((model, index) => {
+                const id = model?.id ?? "Model";
 
-              <div className={styles.modelRow}>
-                <div className={styles.modelIconPlaceholder}>
-                  <span>AI</span>
-                </div>
-                <div className={styles.modelText}>
-                  <Text className={styles.modelName}>{t("AIModelClaude")}</Text>
-                  <Text className={styles.modelPriceLine}>
-                    {t("AIModelClaudePrice")}
-                  </Text>
-                </div>
-              </div>
-
-              <div className={styles.modelRow}>
-                <div className={styles.modelIconPlaceholder}>
-                  <span>DS</span>
-                </div>
-                <div className={styles.modelText}>
-                  <Text className={styles.modelName}>
-                    {t("AIModelDeepseek")}
-                  </Text>
-                  <Text className={styles.modelPriceLine}>
-                    {t("AIModelDeepseekPrice")}
-                  </Text>
-                </div>
-              </div>
-
-              <div className={styles.modelRow}>
-                <div className={styles.modelIconPlaceholder}>
-                  <span>G</span>
-                </div>
-                <div className={styles.modelText}>
-                  <Text className={styles.modelName}>
-                    {t("AIModelGeminiFlash")}
-                  </Text>
-                  <Text className={styles.modelPriceLine}>
-                    {t("AIModelGeminiFlashPrice")}
-                  </Text>
-                </div>
-              </div>
-
-              <div className={styles.modelRow}>
-                <div className={styles.modelIconPlaceholder}>
-                  <span>G</span>
-                </div>
-                <div className={styles.modelText}>
-                  <Text className={styles.modelName}>
-                    {t("AIModelGeminiPro")}
-                  </Text>
-                  <Text className={styles.modelPriceLine}>
-                    {t("AIModelGeminiProPrice")}
-                  </Text>
-                </div>
-              </div>
+                return (
+                  <div key={`${id}-${index}`} className={styles.modelRow}>
+                    <div className={styles.modelIconPlaceholder}>
+                      <span>{id}</span>
+                    </div>
+                    <div className={styles.modelText}>
+                      <Text className={styles.modelName}>{id}</Text>
+                      <Text className={styles.modelPriceLine}>
+                        {t("AIModelPrice", {
+                          inputPrice: safeFormatAiModelsCurrency(
+                            model?.price?.prompt ?? 0,
+                          ),
+                          outputPrice: safeFormatAiModelsCurrency(
+                            model?.price?.completion ?? 0,
+                          ),
+                        })}
+                      </Text>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -318,4 +325,18 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
   );
 };
 
-export default PricingBillingBody;
+export default inject(({ servicesStore }: TStore) => {
+  const {
+    aiToolsPrices,
+    formatAiModelsCurrency,
+    minimumInputPrice,
+    minimumOutputPrice,
+  } = servicesStore;
+
+  return {
+    aiToolsPrices,
+    formatAiModelsCurrency,
+    minimumInputPrice,
+    minimumOutputPrice,
+  };
+})(observer(PricingBillingBody));

@@ -174,7 +174,7 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
 
             <div className={styles.payForList}>
               <div className={styles.payForItem}>
-                <div className={styles.payForIconPurple}>
+                <div className={styles.featureTileIcon}>
                   <AiTokensIcon />
                 </div>
                 <Text fontSize="12px" fontWeight={600}>
@@ -183,7 +183,7 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
               </div>
 
               <div className={styles.payForItem}>
-                <div className={styles.payForIconPurple}>
+                <div className={styles.featureTileIcon}>
                   <AiVectorizationIcon />
                 </div>
                 <Text fontSize="12px" fontWeight={600} as="span">
@@ -205,7 +205,7 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
               </div>
 
               <div className={styles.payForItem}>
-                <div className={styles.payForIconPurple}>
+                <div className={styles.featureTileIcon}>
                   <AiSearchIcon />
                 </div>
                 <Text fontSize="12px" fontWeight={600}>

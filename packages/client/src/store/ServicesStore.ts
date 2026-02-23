@@ -34,6 +34,44 @@ import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffSt
 import { TTranslation } from "@docspace/shared/types";
 
 import PaymentStore from "./PaymentStore";
+import { TBalance } from "@docspace/shared/api/portal/types";
+import {
+  getAiPrices,
+  getServiceQuotaBalance,
+} from "@docspace/shared/api/portal";
+import { authStore } from "@docspace/shared/store";
+import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/Wallet/utils";
+
+type TAiToolsChatPrice = {
+  prompt: number;
+  completion: number;
+};
+
+type TAiToolsEmbeddingPrice = {
+  prompt: number;
+};
+
+type TAiToolsChatModelPrice = {
+  id: string;
+  price: TAiToolsChatPrice;
+};
+
+type TAiToolsEmbeddingModelPrice = {
+  id: string;
+  price: TAiToolsEmbeddingPrice;
+};
+
+type TAiToolsWebSearchPrices = {
+  search: number;
+  contents: number;
+};
+
+export type TAiToolsPrices = {
+  currency?: string;
+  chat?: TAiToolsChatModelPrice[];
+  embedding?: TAiToolsEmbeddingModelPrice[];
+  webSearch?: TAiToolsWebSearchPrices;
+};
 
 class ServicesStore {
   currentTariffStatusStore: CurrentTariffStatusStore | null = null;
@@ -55,6 +93,10 @@ class ServicesStore {
   featureCountData: number = 0;
 
   confirmActionType: string | null = null;
+
+  aiToolsBalance: TBalance = null;
+
+  aiToolsPrices: TAiToolsPrices | null = null;
 
   constructor(
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -87,6 +129,59 @@ class ServicesStore {
   //   );
   // }
 
+  get aiServiceBalance() {
+    if (this.aiToolsBalance && this.aiToolsBalance.subAccounts.length > 0)
+      return this.aiToolsBalance.subAccounts[0].amount;
+
+    return 0.0;
+  }
+
+  get aiServiceCodeCurrency() {
+    if (this.aiToolsBalance && this.aiToolsBalance.subAccounts.length > 0)
+      return this.aiToolsBalance.subAccounts[0].currency;
+
+    return "USD";
+  }
+
+  get aiModelsCurrency() {
+    if (!this.aiToolsPrices?.currency) return "USD";
+
+    return this.aiToolsPrices.currency;
+  }
+
+  get minimumInputPrice() {
+    const inputValues: Array<number | undefined> = [];
+
+    for (const model of this.aiToolsPrices?.chat ?? []) {
+      inputValues.push(model.price?.prompt);
+    }
+
+    for (const model of this.aiToolsPrices?.embedding ?? []) {
+      inputValues.push(model.price?.prompt);
+    }
+
+    inputValues.push(this.aiToolsPrices?.webSearch?.search);
+    inputValues.push(this.aiToolsPrices?.webSearch?.contents);
+
+    const values = inputValues.filter((v): v is number => Number.isFinite(v));
+
+    return values.length ? Math.min(...values) : 0;
+  }
+
+  get minimumOutputPrice() {
+    const values = (this.aiToolsPrices?.chat ?? [])
+      .map((m) => m.price?.completion)
+      .filter((v): v is number => Number.isFinite(v));
+
+    return values.length ? Math.min(...values) : 0;
+  }
+
+  get wasFirstAiServiceTopUp() {
+    if (!this.aiToolsBalance) return false;
+
+    return this.aiToolsBalance.subAccounts.length !== 0;
+  }
+
   setPartialUpgradeFee = (partialUpgradeFee: number) => {
     this.partialUpgradeFee = partialUpgradeFee;
   };
@@ -97,6 +192,40 @@ class ServicesStore {
 
   setIsInitServicesPage = (isInitServicesPage: boolean) => {
     this.isInitServicesPage = isInitServicesPage;
+  };
+
+  setAiServiceBalance = async () => {
+    const balance = await getServiceQuotaBalance();
+
+    this.aiToolsBalance = balance;
+  };
+
+  setAiPrices = async () => {
+    const prices = await getAiPrices();
+
+    this.aiToolsPrices = prices as TAiToolsPrices;
+  };
+
+  formatAiModelsCurrency = (amount: number) => {
+    const { language } = authStore;
+
+    return formatterCurrencyWithoutTranction(
+      language,
+      amount,
+      this.aiModelsCurrency,
+    );
+  };
+
+  formatAiServiceCurrency = (item: number | null = null) => {
+    const { language } = authStore;
+
+    const amount = item ?? this.aiServiceBalance;
+
+    return formatterCurrencyWithoutTranction(
+      language,
+      amount,
+      this.aiServiceCodeCurrency,
+    );
   };
 
   // handleServicesQuotas = async () => { // temp in payment store because of storage tariff deeactivation
@@ -148,6 +277,8 @@ class ServicesStore {
         handleServicesQuotas(),
         initWalletPayerAndBalance(isRefresh),
         fetchPortalTariff(),
+        this.setAiServiceBalance(),
+        this.setAiPrices(),
       ];
 
       const [quotas] = await Promise.all(requests);
