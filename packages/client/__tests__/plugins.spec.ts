@@ -61,11 +61,7 @@ test.describe("Plugins", () => {
     const emptyView = page.getByTestId("empty-screen-container");
     await expect(emptyView).toBeVisible();
 
-    await expectScreenshot(page,[
-      "desktop",
-      "plugins",
-      "plugins-empty.png",
-    ]);
+    await expectScreenshot(page, ["desktop", "plugins", "plugins-empty.png"]);
 
     const emptyTitle = page.getByText(/No plugins/i);
     await expect(emptyTitle).toBeVisible();
@@ -195,10 +191,9 @@ test.describe("Plugins", () => {
     await expect(deleteButton).toBeVisible();
     await deleteButton.click();
 
-    const confirmDeleteButton = page.getByRole("button", {
-      name: "OK",
-      exact: true,
-    });
+    const confirmDeleteButton = page.getByTestId(
+      "confirm_delete_plugin_button",
+    );
 
     await expect(confirmDeleteButton).toBeVisible();
     await confirmDeleteButton.click();
@@ -398,7 +393,7 @@ test.describe("Plugins", () => {
     const pluginEn = page.getByTestId("plugin_archives.zip");
     await expect(pluginEn).toBeVisible();
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "plugins",
       "plugins-fallback-locale-en.png",
@@ -415,7 +410,7 @@ test.describe("Plugins", () => {
       dateText.style.display = "none";
     });
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "plugins",
       "plugins-fallback-locale-en-settings.png",
