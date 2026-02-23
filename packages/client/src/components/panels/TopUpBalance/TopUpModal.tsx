@@ -40,6 +40,7 @@ import TopUpButtons from "./sub-components/TopUpButtons";
 import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
 import { AmountProvider } from "../../../pages/PortalSettings/categories/payments/Wallet/context";
 import styles from "./styles/TopUpModal.module.scss";
+import { saveDeposite } from "@docspace/shared/api/portal";
 
 type TopUpModalProps = {
   visible: boolean;
@@ -64,6 +65,7 @@ type TopUpModalProps = {
   amount?: string;
   walletCustomerStatusNotActive?: boolean;
   formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
+  afterTopUp?: () => void;
 };
 
 const TopUpModal = (props: TopUpModalProps) => {
@@ -83,6 +85,7 @@ const TopUpModal = (props: TopUpModalProps) => {
     amount,
     walletCustomerStatusNotActive,
     formatWalletCurrency,
+    afterTopUp,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -140,6 +143,8 @@ const TopUpModal = (props: TopUpModalProps) => {
             setIsLoading={setIsLoading}
             isLoading={isLoading}
             walletCustomerStatusNotActive={walletCustomerStatusNotActive}
+            onTopUpBalance={saveDeposite}
+            afterTopUp={afterTopUp}
           />
         </ModalDialog.Footer>
       </ModalDialog>

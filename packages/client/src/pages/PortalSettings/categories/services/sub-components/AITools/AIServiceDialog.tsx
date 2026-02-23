@@ -76,6 +76,7 @@ interface AIServiceDialogProps {
     fractionDigits: number,
   ) => string;
   logoText?: string;
+  isTopUpVisible?: boolean;
 }
 
 type DialogView = "get-started" | "pricing" | "top-up";
@@ -84,10 +85,13 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
   visible,
   onClose,
   logoText,
+  isTopUpVisible,
 }) => {
   const { t } = useTranslation(["Services", "Common", "Payments"]);
 
-  const [view, setView] = useState<DialogView>("top-up");
+  const [view, setView] = useState<DialogView>(
+    isTopUpVisible ? "top-up" : "get-started",
+  );
 
   const onTopUpClick = () => {
     setView("top-up");

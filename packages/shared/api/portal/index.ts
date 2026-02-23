@@ -535,6 +535,17 @@ export async function saveDeposite(amount: number, currency: string) {
   }) as string;
 }
 
+export async function buyWalletService(quantity: number, serviceName: string) {
+  return request({
+    method: "post",
+    url: "/portal/payment/buywalletservice",
+    data: {
+      quantity,
+      serviceName,
+    },
+  }) as string;
+}
+
 export async function getTransactionHistory(
   startDate: string,
   endDate: string,

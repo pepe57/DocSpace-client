@@ -38,17 +38,23 @@ import Amount from "./sub-components/Amount";
 import TopUpButtons from "./sub-components/TopUpButtons";
 import { AmountProvider } from "../../../pages/PortalSettings/categories/payments/Wallet/context";
 import styles from "./styles/TopUpModal.module.scss";
-import AiAgents from "PUBLIC_DIR/images/icons/16/ai-agents.svg?url";
-import modalStyles from "./styles/TopUpAiModal.module.scss";
 
-import WalletInfo from "./sub-components/WalletInfo";
+import modalStyles from "./styles/TopUpAiModal.module.scss";
+import { buyWalletService } from "@docspace/shared/api/portal";
+
+//import { useNavigate } from "react-router";
+
+import FromWalletToAi from "./sub-components/FromWalletToAi";
 
 type TopUpAiModalProps = {
+  onTopUpBalance: () => void;
+  onAmountDifferenceChange?: (diff: number, amount: number) => void;
   visible: boolean;
   currency?: string;
   fetchTransactionHistory?: () => Promise<void>;
   walletCustomerEmail?: boolean;
   fetchBalance?: () => Promise<void>;
+  fetchAiServiceBalance?: () => Promise<void>;
   onClose: (isTopUp: boolean) => void;
   cardLinked?: string;
   accountLink?: string;
@@ -62,7 +68,9 @@ type TopUpAiModalProps = {
   reccomendedAmount?: string;
   amount?: string;
   walletCustomerStatusNotActive?: boolean;
+  walletBalance?: number;
   formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
+  initialAmount?: string;
   logoText?: string;
 };
 
@@ -73,52 +81,54 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
     fetchTransactionHistory,
     walletCustomerEmail,
     fetchBalance,
+    fetchAiServiceBalance,
     onClose,
     headerProps,
     reccomendedAmount,
     walletCustomerStatusNotActive,
     formatWalletCurrency,
+    walletBalance,
+    onTopUpBalance,
+    onAmountDifferenceChange,
+    initialAmount,
     logoText,
   } = props;
 
   const { t } = useTranslation(["Payments", "Services", "Common"]);
+  //  const navigate = useNavigate();
 
-  const balanceValue = formatWalletCurrency!();
   const [isLoading, setIsLoading] = useState(false);
 
   const isDisabled = (isLoading || walletCustomerStatusNotActive) ?? false;
 
+  // const onCloseDialog = () => {
+  //   navigate("/portal-settings/ai-services");
+
+  //   onClose(false);
+  // };
+
+  const onCloseGlobal = () => {
+    onClose(false);
+  };
+
   return (
-    <AmountProvider initialAmount={reccomendedAmount}>
+    <AmountProvider initialAmount={reccomendedAmount || initialAmount}>
       <ModalDialog
         visible={visible}
-        onClose={() => onClose(false)}
+        onClose={onCloseGlobal}
         displayType={ModalDialogType.aside}
         {...headerProps}
         withBodyScroll
       >
-        <ModalDialog.Header>{t("TopUpBalance")}</ModalDialog.Header>
+        <ModalDialog.Header>
+          {t("TopUpAi", { organizationName: logoText })}
+        </ModalDialog.Header>
         <ModalDialog.Body>
           <div className={styles.modalBody}>
-            <div className={modalStyles.transferSection}>
-              <div className={modalStyles.transferBlock}>
-                <Text>{t("Payments:TopUpFrom")}</Text>
-
-                <WalletInfo balance={balanceValue} />
-              </div>
-
-              <div className={modalStyles.transferBlock}>
-                <Text>{t("Payments:TopUpTo")}</Text>
-
-                <WalletInfo
-                  title={t("Services:OrganizationAI", {
-                    organizationName: logoText,
-                  })}
-                  balance={balanceValue}
-                  iconUrl={AiAgents}
-                />
-              </div>
-            </div>
+            <FromWalletToAi
+              onTopUpBalance={onTopUpBalance}
+              onAmountDifferenceChange={onAmountDifferenceChange}
+            />
 
             <Amount
               formatWalletCurrency={formatWalletCurrency}
@@ -126,6 +136,8 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
               isDisabled={isDisabled}
               walletCustomerStatusNotActive={walletCustomerStatusNotActive}
               reccomendedAmount={reccomendedAmount}
+              minValue={"10"}
+              maxValue={walletBalance?.toString()}
             />
 
             <Text fontSize="12px" className={modalStyles.helperText}>
@@ -137,12 +149,15 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
           <TopUpButtons
             currency={currency}
             fetchBalance={fetchBalance}
+            fetchServiceBalance={fetchAiServiceBalance}
             fetchTransactionHistory={fetchTransactionHistory}
             onClose={onClose}
             walletCustomerEmail={walletCustomerEmail}
             setIsLoading={setIsLoading}
             isLoading={isLoading}
             walletCustomerStatusNotActive={walletCustomerStatusNotActive}
+            onTopUpBalance={buyWalletService}
+            serviceName={"aitools"}
           />
         </ModalDialog.Footer>
       </ModalDialog>
@@ -151,7 +166,12 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
 };
 
 export default inject(
-  ({ paymentStore, currentTariffStatusStore, settingsStore }: TStore) => {
+  ({
+    paymentStore,
+    currentTariffStatusStore,
+    settingsStore,
+    servicesStore,
+  }: TStore) => {
     const {
       fetchBalance,
       fetchTransactionHistory,
@@ -160,7 +180,9 @@ export default inject(
       walletCodeCurrency,
       wasFirstTopUp,
       formatWalletCurrency,
+      walletBalance,
     } = paymentStore;
+    const { formatAiServiceCurrency, fetchAiServiceBalance } = servicesStore;
 
     const { walletCustomerStatusNotActive, walletCustomerEmail } =
       currentTariffStatusStore;
@@ -177,6 +199,9 @@ export default inject(
       walletCustomerStatusNotActive,
       formatWalletCurrency,
       logoText,
+      formatAiServiceCurrency,
+      walletBalance,
+      fetchAiServiceBalance,
     };
   },
 )(observer(TopUpAiModal));

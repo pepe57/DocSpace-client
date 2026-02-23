@@ -41,6 +41,7 @@ import {
 } from "@docspace/shared/api/portal";
 import { authStore } from "@docspace/shared/store";
 import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/Wallet/utils";
+import { formatCurrencyValue } from "@docspace/shared/utils/common";
 
 type TAiToolsChatPrice = {
   prompt: number;
@@ -216,16 +217,39 @@ class ServicesStore {
     );
   };
 
-  formatAiServiceCurrency = (item: number | null = null) => {
+  formatAiServiceCurrency = (
+    item: number | null = null,
+    fractionDigits: number = 3,
+  ) => {
     const { language } = authStore;
 
     const amount = item ?? this.aiServiceBalance;
 
-    return formatterCurrencyWithoutTranction(
+    return formatCurrencyValue(
       language,
       amount,
       this.aiServiceCodeCurrency,
+      fractionDigits,
     );
+  };
+
+  fetchAiServiceBalance = async (isRefresh?: boolean) => {
+    const abortController = new AbortController();
+
+    try {
+      const res = await getServiceQuotaBalance(
+        "aitools",
+        isRefresh,
+        abortController.signal,
+      );
+
+      if (!res) return;
+
+      this.aiToolsBalance = res;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   // handleServicesQuotas = async () => { // temp in payment store because of storage tariff deeactivation
@@ -319,6 +343,11 @@ class ServicesStore {
           const recommendedAmount = Number(recommendedAmountParam);
 
           this.setReccomendedAmount(Math.ceil(recommendedAmount));
+          this.setFeatureCountData(amount);
+        }
+
+        if (amountParam && !recommendedAmountParam) {
+          const amount = Number(amountParam);
           this.setFeatureCountData(amount);
         }
 

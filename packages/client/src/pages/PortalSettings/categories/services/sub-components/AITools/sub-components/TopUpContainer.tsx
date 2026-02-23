@@ -25,19 +25,59 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { useState } from "react";
 
 import TopUpAiModal from "SRC_DIR/components/panels/TopUpBalance/TopUpAiModal";
+import TopUpModal from "SRC_DIR/components/panels/TopUpBalance/TopUpModal";
 
 type TopUpContainerTypes = {
   visible: boolean;
   onCloseTopUpModal: () => void;
   onBackClick: () => void;
+  featureCountData?: number;
 };
 
 const TopUpContainer = (props: TopUpContainerTypes) => {
-  const { visible, onCloseTopUpModal, onBackClick } = props;
-  return visible ? (
+  const { visible, onCloseTopUpModal, onBackClick, featureCountData } = props;
+
+  const [walletTopUpModalVisible, setWalletTopUpModalVisible] = useState(false);
+  const [recommendedAmount, setRecommendedAmount] = useState<number>(0);
+  const [selectedAmount, setSelectedAmount] = useState<number>(
+    featureCountData ?? 0,
+  );
+
+  const onTopUpBalance = () => {
+    setWalletTopUpModalVisible(true);
+  };
+
+  const onAmountDifferenceChange = (diff: number, amount: number) => {
+    setRecommendedAmount(diff);
+    setSelectedAmount(amount);
+  };
+
+  const onBackWalletClick = () => {
+    setWalletTopUpModalVisible(false);
+  };
+
+  return walletTopUpModalVisible ? (
+    <TopUpModal
+      visible={visible}
+      onClose={onBackWalletClick}
+      afterTopUp={onBackWalletClick}
+      headerProps={{
+        isBackButton: true,
+        onBackClick: onBackWalletClick,
+        onCloseClick: onCloseTopUpModal,
+      }}
+      {...(recommendedAmount > 0 && {
+        reccomendedAmount: recommendedAmount.toString(),
+        amount: selectedAmount.toString(),
+      })}
+    />
+  ) : visible ? (
     <TopUpAiModal
+      onTopUpBalance={onTopUpBalance}
+      onAmountDifferenceChange={onAmountDifferenceChange}
       visible={visible}
       onClose={onCloseTopUpModal}
       headerProps={{
@@ -45,10 +85,14 @@ const TopUpContainer = (props: TopUpContainerTypes) => {
         onBackClick: onBackClick,
         onCloseClick: onCloseTopUpModal,
       }}
+      initialAmount={selectedAmount > 0 ? selectedAmount.toString() : ""}
     />
   ) : null;
 };
 
-export default inject((_store: TStore) => {
-  return {};
+export default inject(({ servicesStore }: TStore) => {
+  const { featureCountData } = servicesStore;
+  return {
+    featureCountData,
+  };
 })(observer(TopUpContainer));
