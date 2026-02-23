@@ -27,7 +27,6 @@
 import { useTranslation } from "react-i18next";
 
 import DropzoneComponent from "@docspace/ui-kit/components/dropzone";
-import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "../Plugins.module.scss";
 import { PluginDropzoneProps } from "../Plugins.types";
@@ -37,7 +36,6 @@ const Dropzone = ({
   isLoading,
   isDisabled,
   dataTestId,
-  isEmptyList,
 }: PluginDropzoneProps) => {
   const { t } = useTranslation(["Article", "Common"]);
 
@@ -54,11 +52,6 @@ const Dropzone = ({
         exstsText="(ZIP)"
         dataTestId={dataTestId}
       />
-      {!isEmptyList ? (
-        <Text fontSize="12px" className={styles.dropzoneWarningDescription}>
-          {t("WebPlugins:PluginCacheWarningDescription")}
-        </Text>
-      ) : null}
     </div>
   );
 };

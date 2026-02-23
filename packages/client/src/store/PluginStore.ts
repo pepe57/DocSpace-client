@@ -77,7 +77,6 @@ import {
 
 import type SelectedFolderStore from "./SelectedFolderStore";
 import { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
-import type { IFloatingOperationsButton } from "@onlyoffice/docspace-plugin-sdk";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -370,7 +369,13 @@ class PluginStore {
     return true;
   };
 
-  addPlugin = async (data: FormData, t: TTranslation) => {
+  checkPluginCacheWarning = (plugin: TAPIPlugin) => {
+    return this.plugins.some(
+      (p) => p.name === plugin.name && p.version === plugin.version,
+    );
+  };
+
+  addPlugin = async (data: FormData) => {
     try {
       const plugin = await api.plugins.addPlugin(data);
 
@@ -378,19 +383,16 @@ class PluginStore {
         plugin.minDocSpaceVersion,
       );
 
-      if (!isPluginCompatible) {
-        toastr.error(
-          t("PluginIsNotCompatible", {
-            productName: t("Common:ProductName"),
-          }),
-        );
-      } else {
-        toastr.success(t("PluginLoadedSuccessfully"));
-      }
+      const isPluginInCache = this.checkPluginCacheWarning(plugin);
 
       this.setNeedPageReload(true);
 
       this.initPlugin(plugin);
+
+      return {
+        isPluginCompatible,
+        isPluginInCache,
+      };
     } catch (e) {
       toastr.error(e as TData);
     }

@@ -24,58 +24,66 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.light.svg?url";
-import EmptyScreenPluginsDarkUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.dark.svg?url";
+import { useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
-import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
+import { toastr } from "@docspace/ui-kit/components";
 
-import { PluginsEmptyScreen } from "../Plugins.types";
-import styles from "../Plugins.module.scss";
+import PluginStore from "SRC_DIR/store/PluginStore";
 
-import Dropzone from "./Dropzone";
-import UploadDescription from "./UploadDescription";
-
-const EmptyScreen = ({
-  t,
-  theme,
-  withUpload,
-  onDrop,
-  pluginsSdkUrl,
-  currentColorScheme,
-}: PluginsEmptyScreen) => {
-  const imageSrc = theme.isBase
-    ? EmptyScreenPluginsUrl
-    : EmptyScreenPluginsDarkUrl;
-
-  return (
-    <EmptyScreenContainer
-      className={styles.emptyScreen}
-      headerText={t("NoPlugins")}
-      descriptionText={
-        withUpload ? (
-          <UploadDescription
-            pluginsSdkUrl={pluginsSdkUrl}
-            t={t}
-            currentColorScheme={currentColorScheme}
-          />
-        ) : null
-      }
-      style={{ gridColumnGap: "39px" }}
-      buttonStyle={{ marginTop: "16px" }}
-      imageSrc={imageSrc}
-      imageAlt={t("NoPlugins")}
-      buttons={
-        withUpload ? (
-          <Dropzone
-            isDisabled={!withUpload}
-            isLoading={false}
-            onDrop={onDrop}
-            dataTestId="upload_plugin_dropzone"
-          />
-        ) : null
-      }
-    />
-  );
+export type UsePluginUploadProps = {
+  addPlugin: PluginStore["addPlugin"];
 };
 
-export default EmptyScreen;
+const usePluginUpload = ({ addPlugin }: UsePluginUploadProps) => {
+  const { t } = useTranslation(["WebPlugins", "Common"]);
+  const [showCacheWarning, setShowCacheWarning] = useState(false);
+
+  const handleAddPluginResult = useCallback(
+    (result: Awaited<ReturnType<typeof addPlugin>>) => {
+      if (!result) return;
+
+      const { isPluginCompatible, isPluginInCache } = result;
+
+      if (isPluginInCache) {
+        setShowCacheWarning(true);
+        return;
+      }
+
+      if (!isPluginCompatible) {
+        toastr.error(
+          t("PluginIsNotCompatible", {
+            productName: t("Common:ProductName"),
+          }),
+        );
+      } else {
+        toastr.success(t("PluginLoadedSuccessfully"));
+      }
+    },
+    [t],
+  );
+
+  const onDrop = useCallback(
+    async (files: File[]) => {
+      const formData = new FormData();
+
+      formData.append("file", files[0]);
+
+      const result = await addPlugin(formData);
+      handleAddPluginResult(result);
+    },
+    [addPlugin, handleAddPluginResult],
+  );
+
+  const handleCloseCacheWarning = useCallback(() => {
+    setShowCacheWarning(false);
+  }, []);
+
+  return {
+    onDrop,
+    showCacheWarning,
+    handleCloseCacheWarning,
+  };
+};
+
+export default usePluginUpload;

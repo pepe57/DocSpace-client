@@ -24,58 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.light.svg?url";
-import EmptyScreenPluginsDarkUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.dark.svg?url";
+import { useTranslation } from "react-i18next";
 
-import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 
-import { PluginsEmptyScreen } from "../Plugins.types";
-import styles from "../Plugins.module.scss";
+interface PluginCacheWarningDialogProps {
+  visible: boolean;
+  onClose: () => void;
+}
 
-import Dropzone from "./Dropzone";
-import UploadDescription from "./UploadDescription";
-
-const EmptyScreen = ({
-  t,
-  theme,
-  withUpload,
-  onDrop,
-  pluginsSdkUrl,
-  currentColorScheme,
-}: PluginsEmptyScreen) => {
-  const imageSrc = theme.isBase
-    ? EmptyScreenPluginsUrl
-    : EmptyScreenPluginsDarkUrl;
+const PluginCacheWarningDialog = ({
+  visible,
+  onClose,
+}: PluginCacheWarningDialogProps) => {
+  const { t } = useTranslation(["WebPlugins", "Common"]);
 
   return (
-    <EmptyScreenContainer
-      className={styles.emptyScreen}
-      headerText={t("NoPlugins")}
-      descriptionText={
-        withUpload ? (
-          <UploadDescription
-            pluginsSdkUrl={pluginsSdkUrl}
-            t={t}
-            currentColorScheme={currentColorScheme}
-          />
-        ) : null
-      }
-      style={{ gridColumnGap: "39px" }}
-      buttonStyle={{ marginTop: "16px" }}
-      imageSrc={imageSrc}
-      imageAlt={t("NoPlugins")}
-      buttons={
-        withUpload ? (
-          <Dropzone
-            isDisabled={!withUpload}
-            isLoading={false}
-            onDrop={onDrop}
-            dataTestId="upload_plugin_dropzone"
-          />
-        ) : null
-      }
-    />
+    <ModalDialog
+      autoMaxHeight
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.modal}
+    >
+      <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <Text>{t("WebPlugins:PluginCacheWarningDescription")}</Text>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          label={t("Common:OKButton")}
+          size={ButtonSize.normal}
+          onClick={onClose}
+          scale
+          testId="plugin_cache_warning_ok_button"
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
   );
 };
 
-export default EmptyScreen;
+export default PluginCacheWarningDialog;
