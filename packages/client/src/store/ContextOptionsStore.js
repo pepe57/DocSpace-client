@@ -2858,6 +2858,7 @@ class ContextOptionsStore {
             [
               "select",
               "view",
+              "open-pdf",
               "fill-form",
               "edit",
               "start-filling",
@@ -2866,6 +2867,7 @@ class ContextOptionsStore {
               "mark-read",
               "open-location",
             ],
+            ["filling-status", "reset-and-start-filling"],
             ["ask-ai"],
             ["share", "move", "copy-to", "download", "edit-index", "rename"],
             [
@@ -2876,7 +2878,12 @@ class ContextOptionsStore {
               "show-info",
             ],
             ["restore"],
-            ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
+            [
+              "remove-from-favorites",
+              "remove-shared-folder-or-file",
+              "stop-filling",
+              "delete",
+            ],
           ];
 
       const items = resultOptions.filter((opt) => !opt.isSeparator);
