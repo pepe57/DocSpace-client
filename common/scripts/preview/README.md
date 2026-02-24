@@ -2,7 +2,7 @@
 
 Preview mode allows running all 4 Next.js applications (login, doceditor, management, sdk) as pre-built production bundles in a single orchestrated server, instead of running them in development mode via webpack-dev-server.
 
-This significantly reduces startup time and memory usage during local development with the .NET Aspire AppHost.
+This significantly reduces startup time and memory usage during local development.
 
 ## How it works
 
@@ -10,17 +10,27 @@ The `deploy:preview` script builds each Next.js app in standalone mode (`output:
 
 At runtime, `server.js` starts each app as an isolated child process on its original port (login:5011, doceditor:5013, management:5015, sdk:5099) and acts as an HTTP reverse proxy on port 5055, routing requests by URL prefix.
 
+The client SPA (webpack build) is deployed separately to `publish/web/client/` and served by nginx in Docker, or locally via `npx serve -s -p 5001`.
+
 ```
-Browser → nginx (8092) → preview server (5055) → child processes
-                                                   ├── login (5011)
-                                                   ├── doceditor (5013)
-                                                   ├── management (5015)
-                                                   └── sdk (5099)
+Browser -> nginx (8092) -> apps server (5055) -> child processes
+                |                                  |-- login (5011)
+                |                                  |-- doceditor (5013)
+                |                                  |-- management (5015)
+                |                                  +-- sdk (5099)
+                +-> client static (5001)
 ```
 
 ## Quick start
 
-### 1. Build and deploy
+### 1. Start the backend
+
+```bash
+cd server/common/ASC.AppHost
+dotnet run --launch-profile frontend-dev
+```
+
+### 2. Build and deploy
 
 ```bash
 cd client
@@ -33,27 +43,25 @@ This will:
 - Merge standalone outputs into `publish/web/apps/`
 - Copy public assets and minify locales
 
-### 2. Run with Aspire
+### 3. Start the client static server
 
 ```bash
-cd server/common/ASC.AppHost
-dotnet run --launch-profile preview
+cd publish/web/client
+npx serve -s -p 5001
 ```
 
-Aspire starts the preview server automatically and opens the portal at `http://localhost:8092`.
-
-### 3. Run standalone (without Aspire)
+### 4. Start the apps server
 
 ```bash
 cd publish/web/apps
-API_HOST=http://localhost:8092 node server.js
+node server.js --app.port=5055 --app.hostname=127.0.0.1
 ```
 
-Or with custom port:
+The portal is available at http://localhost:8092.
 
-```bash
-PORT=5055 API_HOST=http://localhost:8092 node server.js
-```
+### Docker preview
+
+In Docker, nginx serves the client static files directly and proxies SSR requests to the apps server. No separate `npx serve` is needed.
 
 ## Architecture
 
@@ -69,19 +77,21 @@ PORT=5055 API_HOST=http://localhost:8092 node server.js
 ### Deploy output
 
 ```
-publish/web/apps/
-├── node_modules/              # Merged from all 4 standalone builds
-├── packages/
-│   ├── login/.next/           # Login build output + static assets
-│   ├── doceditor/.next/       # DocEditor build output + static assets
-│   ├── management/.next/      # Management build output + static assets
-│   ├── sdk/.next/             # SDK build output + static assets
-│   └── shared/                # Shared workspace dependency
-├── libs/
-│   └── ui-kit/                # UI kit workspace dependency
-├── server.js                  # Entry point (= server.prod.js)
-├── server.combined.js         # Proxy server (= server.js)
-└── app-worker.js              # Child process wrapper
+publish/web/
+|-- apps/
+|   |-- node_modules/              # Merged from all 4 standalone builds
+|   |-- packages/
+|   |   |-- login/.next/           # Login build output + static assets
+|   |   |-- doceditor/.next/       # DocEditor build output + static assets
+|   |   |-- management/.next/      # Management build output + static assets
+|   |   |-- sdk/.next/             # SDK build output + static assets
+|   |   +-- shared/                # Shared workspace dependency
+|   |-- libs/
+|   |   +-- ui-kit/                # UI kit workspace dependency
+|   |-- server.js                  # Entry point (= server.prod.js)
+|   |-- server.combined.js         # Proxy server (= server.js from source)
+|   +-- app-worker.js              # Child process wrapper
++-- client/                        # Client SPA (webpack build)
 ```
 
 ### Why process-per-app
@@ -94,7 +104,7 @@ Next.js uses `globalThis` singletons (`Symbol.for('next.server.manifests')`, `Sy
 |----------|---------|-------------|
 | `PORT` | `5055` | Main proxy server port |
 | `HOSTNAME` | `0.0.0.0` | Main proxy server bind address |
-| `API_HOST` | — | Backend API URL (passed to child processes) |
+| `API_HOST` | `http://localhost:8092` | Backend API URL (passed to child processes for SSR) |
 | `NODE_ENV` | `production` | Node environment |
 
 ## Comparison with other modes

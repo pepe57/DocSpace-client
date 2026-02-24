@@ -27,8 +27,8 @@
 // Preview server — process-per-app reverse proxy.
 // Each Next.js app runs in its own child process for full isolation
 // (separate globalThis, module cache, AsyncLocalStorage).
-// The main process acts as an HTTP reverse proxy routing by URL prefix,
-// and serves static assets directly for efficiency.
+// The main process acts as an HTTP reverse proxy routing by URL prefix
+// and serves Next.js static assets directly.
 
 const { createServer, request: httpRequest } = require("http");
 const { fork } = require("child_process");
@@ -37,8 +37,10 @@ const fs = require("fs");
 const net = require("net");
 
 const MIME_TYPES = {
+  ".html": "text/html",
   ".css": "text/css",
   ".js": "application/javascript",
+  ".mjs": "application/javascript",
   ".json": "application/json",
   ".map": "application/json",
   ".woff": "font/woff",
@@ -50,6 +52,8 @@ const MIME_TYPES = {
   ".gif": "image/gif",
   ".webp": "image/webp",
   ".ico": "image/x-icon",
+  ".txt": "text/plain",
+  ".xml": "application/xml",
 };
 
 const port = parseInt(process.env.PORT, 10) || 5055;
@@ -121,9 +125,26 @@ function waitForPort(targetPort, timeout = 60000) {
   });
 }
 
-// Try to serve a static file from .next/static/ for the given app.
-// Returns true if served, false otherwise.
-function tryServeStatic(req, res, app) {
+// Try to serve a static file. Returns true if served, false otherwise.
+function serveFile(filePath, res) {
+  try {
+    const stat = fs.statSync(filePath);
+    if (stat.isFile()) {
+      const ext = path.extname(filePath);
+      const contentType = MIME_TYPES[ext] || "application/octet-stream";
+      res.setHeader("Content-Type", contentType);
+      res.statusCode = 200;
+      fs.createReadStream(filePath).pipe(res);
+      return true;
+    }
+  } catch {
+    // File not found
+  }
+  return false;
+}
+
+// Try to serve a Next.js static file from .next/static/ for the given app.
+function tryServeAppStatic(req, res, app) {
   const staticPrefix = app.basePath + "/_next/static/";
   if (!req.url.startsWith(staticPrefix)) return false;
 
@@ -137,19 +158,9 @@ function tryServeStatic(req, res, app) {
     relativePath,
   );
 
-  try {
-    const stat = fs.statSync(filePath);
-    if (stat.isFile()) {
-      const ext = path.extname(filePath);
-      const contentType = MIME_TYPES[ext] || "application/octet-stream";
-      res.setHeader("Content-Type", contentType);
-      res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
-      res.statusCode = 200;
-      fs.createReadStream(filePath).pipe(res);
-      return true;
-    }
-  } catch {
-    // File not found — fall through
+  if (serveFile(filePath, res)) {
+    res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+    return true;
   }
   return false;
 }
@@ -160,16 +171,18 @@ async function main() {
   const workerPath = path.resolve(__dirname, "app-worker.js");
   const children = [];
 
-  // Start all app workers
+  // Start all app workers.
+  // Children bind to 0.0.0.0 so they are reachable from Docker containers
+  // (nginx uses host.docker.internal to reach host ports).
   for (const app of apps) {
     const appDir = path.resolve(__dirname, "packages", app.name);
-    console.log(`Starting ${app.name} on internal port ${app.internalPort}...`);
+    console.log(`Starting ${app.name} on port ${app.internalPort}...`);
 
     const child = fork(workerPath, [appDir], {
       env: {
         ...process.env,
         PORT: String(app.internalPort),
-        HOSTNAME: "127.0.0.1",
+        HOSTNAME: "0.0.0.0",
         NODE_ENV: "production",
       },
       stdio: ["pipe", "pipe", "pipe", "ipc"],
@@ -232,7 +245,7 @@ async function main() {
 
     // Serve static files directly (faster than proxying to child)
     for (const app of apps) {
-      if (tryServeStatic(req, res, app)) return;
+      if (tryServeAppStatic(req, res, app)) return;
     }
 
     // Route to the correct app via reverse proxy

@@ -307,18 +307,24 @@ cd client
 pnpm deploy:preview
 ```
 
-**Step 2 — Start with Aspire:**
+**Step 2 — Start the client static server:**
 ```bash
-cd server/common/ASC.AppHost
-dotnet run --launch-profile preview
+cd publish/web/client
+npx serve -s -p 5001
 ```
 
-The portal is available at http://localhost:8092 (same as development mode).
+**Step 3 — Start the apps server:**
+```bash
+cd publish/web/apps
+node server.js --app.port=5055 --app.hostname=127.0.0.1
+```
+
+The portal is available at http://localhost:8092 (backend must be running with `frontend-dev` profile).
 
 **Key differences from `pnpm start`:**
 - SSR apps run in production mode (faster, less memory)
 - No hot reload — rebuild with `pnpm deploy:preview` after changes
-- Client app served as static files via nginx
+- Client app served as static files (via nginx in Docker, or `npx serve` locally)
 
 For detailed architecture and configuration, see the [Preview Mode README](common/scripts/preview/README.md).
 

@@ -27,6 +27,7 @@
 // Set custom environment variables here before requiring server.combined.js
 process.env.NODE_ENV = process.env.NODE_ENV || "production";
 process.env.PORT = process.env.PORT || "5055";
+process.env.API_HOST = process.env.API_HOST || "http://localhost:8092";
 
 // You can pass command line arguments to the server.combined.js process
 // by setting them before requiring the file
