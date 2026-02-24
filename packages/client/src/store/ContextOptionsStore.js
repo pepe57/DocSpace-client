@@ -2906,7 +2906,7 @@ class ContextOptionsStore {
       isAIAgentsFolder,
     } = this.treeFoldersStore;
 
-    const { pinRooms, unpinRooms /* deleteRooms */ } = this.filesActionsStore;
+    const { pinRooms, unpinRooms, deleteRooms } = this.filesActionsStore;
 
     if (isRoomsFolder || isArchiveFolder || isAIAgentsFolder) {
       const isPinOption = selection.filter((item) => !item.pinned).length > 0;
@@ -3031,13 +3031,13 @@ class ContextOptionsStore {
 
       options.push(archiveOptions);
 
-      /* canDelete &&
+      canDelete &&
         options.push({
           key: "delete-rooms",
           label: t("Common:Delete"),
           icon: TrashReactSvgUrl,
           onClick: () => deleteRooms(t),
-        }); */
+        });
 
       return options;
     }
