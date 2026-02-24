@@ -40,7 +40,7 @@ interface IFromWalletToAi {
   logoText?: string;
   formatAiServiceCurrency?: () => string;
   formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
-  walletCustomerStatusNotActive?: boolean;
+
   walletCustomerEmail?: string;
 }
 
@@ -52,7 +52,7 @@ const FromWalletToAi = (props: IFromWalletToAi) => {
     logoText,
     formatAiServiceCurrency,
     formatWalletCurrency,
-    walletCustomerStatusNotActive,
+
     walletCustomerEmail,
   } = props;
   const { t } = useTranslation(["Payments", "Services", "Common"]);
@@ -70,9 +70,7 @@ const FromWalletToAi = (props: IFromWalletToAi) => {
   }, [amountDiff, amountNumber, onAmountDifferenceChange]);
 
   const isBalanceInsufficient =
-    walletCustomerStatusNotActive ||
-    !walletCustomerEmail ||
-    amountNumber > walletBalanceNumber;
+    !walletCustomerEmail || amountNumber > walletBalanceNumber;
 
   return (
     <div className={modalStyles.transferSection}>
@@ -112,14 +110,13 @@ export default inject(
 
     const { logoText } = settingsStore;
     const { walletBalance, formatWalletCurrency } = paymentStore;
-    const { walletCustomerStatusNotActive, walletCustomerEmail } =
-      currentTariffStatusStore;
+    const { walletCustomerEmail } = currentTariffStatusStore;
     return {
       logoText,
       formatAiServiceCurrency,
       walletBalance,
       formatWalletCurrency,
-      walletCustomerStatusNotActive,
+
       walletCustomerEmail,
     };
   },
