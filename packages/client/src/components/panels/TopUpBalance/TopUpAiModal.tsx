@@ -42,7 +42,7 @@ import styles from "./styles/TopUpModal.module.scss";
 import modalStyles from "./styles/TopUpAiModal.module.scss";
 import { buyWalletService } from "@docspace/shared/api/portal";
 
-//import { useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 import FromWalletToAi from "./sub-components/FromWalletToAi";
 
@@ -95,17 +95,17 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
   } = props;
 
   const { t } = useTranslation(["Payments", "Services", "Common"]);
-  //  const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
 
   const isDisabled = (isLoading || walletCustomerStatusNotActive) ?? false;
 
-  // const onCloseDialog = () => {
-  //   navigate("/portal-settings/ai-services");
+  const onRedirect = () => {
+    navigate("/portal-settings/ai-services");
 
-  //   onClose(false);
-  // };
+    onClose(false);
+  };
 
   const onCloseGlobal = () => {
     onClose(false);
@@ -158,6 +158,7 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
             walletCustomerStatusNotActive={walletCustomerStatusNotActive}
             onTopUpBalance={buyWalletService}
             serviceName={"aitools"}
+            afterTopUp={onRedirect}
           />
         </ModalDialog.Footer>
       </ModalDialog>

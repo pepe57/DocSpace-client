@@ -46,6 +46,7 @@ import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
 import { Component as Services } from "../categories/services";
 import { Component as AISettings } from "../categories/ai-settings";
+import AiPage from "../categories/services/sub-components/AITools/AiPage";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
@@ -73,6 +74,7 @@ const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("delete-data")) return "delete-data";
   if (pathname.includes("payments")) return "payments";
   if (pathname.includes("bonus")) return "bonus";
+  if (pathname.includes("ai-services")) return "ai-services";
   if (pathname.includes("services")) return "services";
   if (pathname.includes("ai-settings")) return "ai-settings";
   return "";
@@ -287,6 +289,10 @@ const View = ({
             await getServicesInitialValue();
             break;
 
+          case "ai-services":
+            await getServicesInitialValue();
+            break;
+
           case "ai-settings":
             await getAiSettingsInitialValue();
             break;
@@ -327,6 +333,7 @@ const View = ({
       {currentView === "payments" ? <Payments /> : null}
       {currentView === "bonus" ? <Bonus /> : null}
       {currentView === "services" ? <Services /> : null}
+      {currentView === "ai-services" ? <AiPage /> : null}
       {currentView === "ai-settings" ? <AISettings /> : null}
     </LoaderWrapper>
   );
