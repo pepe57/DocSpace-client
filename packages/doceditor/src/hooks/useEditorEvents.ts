@@ -926,47 +926,28 @@ const useEditorEvents = ({
 
   const onRequestStartFilling = useCallback(
     (event: object) => {
+      match([config?.startFillingMode])
+        .with([StartFillingMode.ShareToFillOut], () => openShareFormDialog?.())
+        .with([StartFillingMode.StartFilling], () => {
+          if (
+            typeof event === "object" &&
+            event !== null &&
+            "data" in event &&
+            isFormRole(event.data)
+          )
+            onOpenRoleMappingPanel?.(event.data);
+        })
+        .with([StartFillingMode.StartFillingRoomForm], async () => {
+          await manageFormFilling(fileInfo!.id, FormFillingManageAction.Start);
 
-      match([config?.startFillingMode, fileInfo?.parentRoomType])
-        .with([StartFillingMode.ShareToFillOut, Pattern.any], () =>
-          openShareFormDialog?.(),
-        )
-        .with(
-          [StartFillingMode.StartFilling, FolderType.VirtualDataRoom],
-          () => {
-            if (
-              typeof event === "object" &&
-              event !== null &&
-              "data" in event &&
-              isFormRole(event.data)
-            )
-              onOpenRoleMappingPanel?.(event.data);
-          },
-        )
-        .with(
-          [StartFillingMode.StartFilling, FolderType.FormRoom],
-          async () => {
-            await manageFormFilling(
-              fileInfo!.id,
-              FormFillingManageAction.Start,
-            );
+          sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(fileInfo));
 
-            sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(fileInfo));
-
-            const url = new URL(
-              `${window.location.origin}/rooms/shared/filter`,
-            );
-            url.searchParams.set("folder", fileInfo!.folderId.toString());
-            window.location.replace(url.toString());
-          },
-        );
+          const url = new URL(`${window.location.origin}/rooms/shared/filter`);
+          url.searchParams.set("folder", fileInfo!.folderId.toString());
+          window.location.replace(url.toString());
+        });
     },
-    [
-      config?.startFillingMode,
-      fileInfo?.parentRoomType,
-      openShareFormDialog,
-      onOpenRoleMappingPanel,
-    ],
+    [config?.startFillingMode, openShareFormDialog, onOpenRoleMappingPanel],
   );
 
   const onRequestRefreshFile = React.useCallback(async () => {

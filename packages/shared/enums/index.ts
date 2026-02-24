@@ -545,6 +545,7 @@ export enum StartFillingMode {
   None,
   ShareToFillOut,
   StartFilling,
+  StartFillingRoomForm,
 }
 
 export enum FormFillingManageAction {
