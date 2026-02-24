@@ -40,19 +40,17 @@ const Dropzone = ({
   const { t } = useTranslation(["Article", "Common"]);
 
   return (
-    <div className={styles.dropzoneWrapper}>
-      <DropzoneComponent
-        className={styles.dropzone}
-        isDisabled={isDisabled}
-        isLoading={isLoading}
-        onDrop={onDrop}
-        accept={[".zip"]}
-        linkMainTextForFiles={t("Article:Upload")}
-        linkSecondaryText={t("Common:DropzoneTitleSecondary")}
-        exstsText="(ZIP)"
-        dataTestId={dataTestId}
-      />
-    </div>
+    <DropzoneComponent
+      className={styles.dropzone}
+      isDisabled={isDisabled}
+      isLoading={isLoading}
+      onDrop={onDrop}
+      accept={[".zip"]}
+      linkMainTextForFiles={t("Article:Upload")}
+      linkSecondaryText={t("Common:DropzoneTitleSecondary")}
+      exstsText="(ZIP)"
+      dataTestId={dataTestId}
+    />
   );
 };
 
