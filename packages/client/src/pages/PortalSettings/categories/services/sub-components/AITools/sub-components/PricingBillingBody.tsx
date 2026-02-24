@@ -148,115 +148,121 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
             </div>
 
             <div className={styles.pricingCard}>
-              <div className={styles.pricingRow}>
-                <div className={styles.pricingRowLeft}>
-                  <div className={styles.pricingRowIconBox}>
-                    <VectorizationIcon />
+              {aiToolsPrices?.embedding?.[0]?.price?.prompt ? (
+                <div className={styles.pricingRow}>
+                  <div className={styles.pricingRowLeft}>
+                    <div className={styles.pricingRowIconBox}>
+                      <VectorizationIcon />
+                    </div>
+                    <Text fontSize="12px">
+                      <Trans
+                        t={t}
+                        ns="Services"
+                        i18nKey="AIWhatYouPayForVectorization"
+                        components={{
+                          1: (
+                            <Text
+                              fontSize="12px"
+                              as="span"
+                              className={styles.payForItemTextMuted}
+                            />
+                          ),
+                        }}
+                      />
+                    </Text>
+                  </div>
+                  <Text className={styles.pricingRowPrice}>
+                    <Text fontWeight="600">
+                      <Trans
+                        t={t}
+                        ns="Services"
+                        i18nKey="AIPricingPricePerTokens"
+                        components={{
+                          1: (
+                            <Text
+                              fontSize="12px"
+                              as="span"
+                              className={styles.payForItemTextMuted}
+                            />
+                          ),
+                        }}
+                        values={{
+                          price: safeFormatAiModelsCurrency(
+                            aiToolsPrices.embedding[0].price.prompt,
+                          ),
+                        }}
+                      />
+                    </Text>
+                  </Text>
+                </div>
+              ) : null}
+
+              {aiToolsPrices?.webSearch?.contents ? (
+                <div className={styles.pricingRow}>
+                  <div className={styles.pricingRowLeft}>
+                    <div className={styles.pricingRowIconBox}>
+                      <WebSearchIcon />
+                    </div>
+                    <Text fontSize="12px">{t("AIWhatYouPayForWebSearch")}</Text>
                   </div>
                   <Text fontSize="12px">
-                    <Trans
-                      t={t}
-                      ns="Services"
-                      i18nKey="AIWhatYouPayForVectorization"
-                      components={{
-                        1: (
-                          <Text
-                            fontSize="12px"
-                            as="span"
-                            className={styles.payForItemTextMuted}
-                          />
-                        ),
-                      }}
-                    />
+                    <Text fontWeight="600">
+                      <Trans
+                        t={t}
+                        ns="Services"
+                        i18nKey="AIPricingPricePerRequest"
+                        components={{
+                          1: (
+                            <Text
+                              fontSize="12px"
+                              as="span"
+                              className={styles.payForItemTextMuted}
+                            />
+                          ),
+                        }}
+                        values={{
+                          price: safeFormatAiModelsCurrency(
+                            aiToolsPrices.webSearch.contents,
+                          ),
+                        }}
+                      />
+                    </Text>
                   </Text>
                 </div>
-                <Text className={styles.pricingRowPrice}>
-                  <Text fontWeight="600">
-                    <Trans
-                      t={t}
-                      ns="Services"
-                      i18nKey="AIPricingPricePerTokens"
-                      components={{
-                        1: (
-                          <Text
-                            fontSize="12px"
-                            as="span"
-                            className={styles.payForItemTextMuted}
-                          />
-                        ),
-                      }}
-                      values={{
-                        price: safeFormatAiModelsCurrency(
-                          aiToolsPrices?.embedding?.[0]?.price?.prompt ?? 0,
-                        ),
-                      }}
-                    />
-                  </Text>
-                </Text>
-              </div>
-
-              <div className={styles.pricingRow}>
-                <div className={styles.pricingRowLeft}>
-                  <div className={styles.pricingRowIconBox}>
-                    <WebSearchIcon />
+              ) : null}
+              {aiToolsPrices?.webSearch?.search ? (
+                <div className={styles.pricingRow}>
+                  <div className={styles.pricingRowLeft}>
+                    <div className={styles.pricingRowIconBox}>
+                      <WebSearchIcon />
+                    </div>
+                    <Text fontSize="12px">{t("AIWhatYouPayForWebSearch")}</Text>
                   </div>
-                  <Text fontSize="12px">{t("AIWhatYouPayForWebSearch")}</Text>
-                </div>
-                <Text fontSize="12px">
-                  <Text fontWeight="600">
-                    <Trans
-                      t={t}
-                      ns="Services"
-                      i18nKey="AIPricingPricePerRequest"
-                      components={{
-                        1: (
-                          <Text
-                            fontSize="12px"
-                            as="span"
-                            className={styles.payForItemTextMuted}
-                          />
-                        ),
-                      }}
-                      values={{
-                        price: safeFormatAiModelsCurrency(
-                          aiToolsPrices?.webSearch?.contents ?? 0,
-                        ),
-                      }}
-                    />
+                  <Text fontSize="12px">
+                    <Text fontWeight="600">
+                      <Trans
+                        t={t}
+                        ns="Services"
+                        i18nKey="AIPricingPricePerRequest"
+                        components={{
+                          1: (
+                            <Text
+                              fontSize="12px"
+                              as="span"
+                              className={styles.payForItemTextMuted}
+                            />
+                          ),
+                        }}
+                        values={{
+                          price: safeFormatAiModelsCurrency(
+                            aiToolsPrices.webSearch.search,
+                          ),
+                        }}
+                      />
+                    </Text>
                   </Text>
-                </Text>
-              </div>
-              <div className={styles.pricingRow}>
-                <div className={styles.pricingRowLeft}>
-                  <div className={styles.pricingRowIconBox}>
-                    <WebSearchIcon />
-                  </div>
-                  <Text fontSize="12px">{t("AIWhatYouPayForWebSearch")}</Text>
                 </div>
-                <Text fontSize="12px">
-                  <Text fontWeight="600">
-                    <Trans
-                      t={t}
-                      ns="Services"
-                      i18nKey="AIPricingPricePerRequest"
-                      components={{
-                        1: (
-                          <Text
-                            fontSize="12px"
-                            as="span"
-                            className={styles.payForItemTextMuted}
-                          />
-                        ),
-                      }}
-                      values={{
-                        price: safeFormatAiModelsCurrency(
-                          aiToolsPrices?.webSearch?.search ?? 0,
-                        ),
-                      }}
-                    />
-                  </Text>
-                </Text>
-              </div>
+              ) : null}
             </div>
           </div>
 
@@ -269,7 +275,7 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
             </Text>
 
             <div className={styles.modelList}>
-              {chatModels.map((model, index) => {
+              {chatModels?.map((model, index) => {
                 const id = model?.id ?? "Model";
 
                 return (
