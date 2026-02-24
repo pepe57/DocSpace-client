@@ -33,21 +33,28 @@ import { useAmountValue } from "../../../../pages/PortalSettings/categories/paym
 import { inject, observer } from "mobx-react";
 import React, { useEffect } from "react";
 
-const FromWalletToAi = ({
-  onTopUpBalance,
-  onAmountDifferenceChange,
-  walletBalance,
-  logoText,
-  formatAiServiceCurrency,
-  formatWalletCurrency,
-}: {
+interface IFromWalletToAi {
   onTopUpBalance: () => void;
   onAmountDifferenceChange?: (diff: number, amount: number) => void;
   walletBalance?: number;
   logoText?: string;
   formatAiServiceCurrency?: () => string;
   formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
-}) => {
+  walletCustomerStatusNotActive?: boolean;
+  walletCustomerEmail?: string;
+}
+
+const FromWalletToAi = (props: IFromWalletToAi) => {
+  const {
+    onTopUpBalance,
+    onAmountDifferenceChange,
+    walletBalance,
+    logoText,
+    formatAiServiceCurrency,
+    formatWalletCurrency,
+    walletCustomerStatusNotActive,
+    walletCustomerEmail,
+  } = props;
   const { t } = useTranslation(["Payments", "Services", "Common"]);
   const aiServiceBalanceValue = formatAiServiceCurrency!();
   const { amount } = useAmountValue();
@@ -62,7 +69,10 @@ const FromWalletToAi = ({
       onAmountDifferenceChange(Math.ceil(amountDiff), amountNumber);
   }, [amountDiff, amountNumber, onAmountDifferenceChange]);
 
-  const isBalanceInsufficient = amountNumber > walletBalanceNumber;
+  const isBalanceInsufficient =
+    walletCustomerStatusNotActive ||
+    !walletCustomerEmail ||
+    amountNumber > walletBalanceNumber;
 
   return (
     <div className={modalStyles.transferSection}>
@@ -92,16 +102,25 @@ const FromWalletToAi = ({
 };
 
 export default inject(
-  ({ paymentStore, settingsStore, servicesStore }: TStore) => {
+  ({
+    paymentStore,
+    settingsStore,
+    servicesStore,
+    currentTariffStatusStore,
+  }: TStore) => {
     const { formatAiServiceCurrency } = servicesStore;
 
     const { logoText } = settingsStore;
     const { walletBalance, formatWalletCurrency } = paymentStore;
+    const { walletCustomerStatusNotActive, walletCustomerEmail } =
+      currentTariffStatusStore;
     return {
       logoText,
       formatAiServiceCurrency,
       walletBalance,
       formatWalletCurrency,
+      walletCustomerStatusNotActive,
+      walletCustomerEmail,
     };
   },
 )(observer(FromWalletToAi));
