@@ -276,7 +276,9 @@ const Details = ({
             tooltipContent={tooltipContent ?? undefined}
             tooltipId="info-panel-details_icon-tooltip"
             withEditing={
-              "isRoom" in selection ? selection.security.EditRoom : false
+              "isRoom" in selection && selection.isRoom
+                ? selection.security.EditRoom
+                : false
             }
             dataTestId="info_panel_details_room_icon"
           />
