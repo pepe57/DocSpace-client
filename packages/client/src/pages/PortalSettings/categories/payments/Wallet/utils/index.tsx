@@ -109,7 +109,6 @@ export const formatterCurrencyWithoutTranction = (
     ? truncateNumberToFractionNumeric(amount, effectiveFractionDigits)
     : amount;
 
-  console.log("effectiveFractionDigits", effectiveFractionDigits);
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,

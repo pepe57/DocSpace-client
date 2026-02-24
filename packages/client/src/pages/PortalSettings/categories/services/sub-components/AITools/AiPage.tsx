@@ -24,14 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import classNames from "classnames";
-
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import {
   Tabs,
@@ -39,33 +36,39 @@ import {
   type TTabItem,
 } from "@docspace/ui-kit/components/tabs";
 import { Link } from "@docspace/ui-kit/components/link";
+import { DateTime } from "luxon";
 
 import { AI_TOOLS } from "@docspace/shared/constants";
 
 import TransactionHistory from "SRC_DIR/pages/PortalSettings/categories/payments/TransactionHistory";
+import BalanceAmount from "SRC_DIR/pages/PortalSettings/categories/payments/BalanceAmount";
 import ServiceToggleSection from "SRC_DIR/pages/PortalSettings/categories/services/sub-components/ServiceToggleSection";
+import { finishRefreshingWithMinCycle } from "SRC_DIR/helpers/refreshing";
 
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import PricingBillingBody from "./sub-components/PricingBillingBody";
+import TopUpContainer from "./sub-components/TopUpContainer";
 
 import styles from "./AiPage.module.scss";
 
 type AiPageProps = {
+  aiServiceCodeCurrency: string;
+  aiServiceBalance: number;
   isEnabled?: boolean;
   onToggle?: (id: string, enabled: boolean) => void;
   onTopUpClick?: () => void;
   onPricingBillingClick?: () => void;
-  walletBalance?: number;
-  fetchBalance?: () => Promise<void>;
-  fetchTransactionHistory?: () => Promise<void>;
+  language?: string;
+  fetchAiServiceBalance?: () => Promise<void>;
+  fetchTransactionHistory?: (
+    startDate: DateTime | null,
+    endDate: DateTime | null,
+    credit: boolean,
+    debit: boolean,
+    participantName?: string,
+    serviceName?: string,
+  ) => Promise<void>;
   logoText?: string;
-};
-
-const formatBalanceParts = (balance: number) => {
-  const [major, minor] = balance.toFixed(3).split(".");
-  return {
-    major: `${major}`,
-    minor: `.${minor ?? "000"}`,
-  };
+  aiServiceLastTopUp?: string;
 };
 
 const AiPage = (props: AiPageProps) => {
@@ -74,29 +77,37 @@ const AiPage = (props: AiPageProps) => {
     onToggle,
     onTopUpClick,
     onPricingBillingClick,
-    walletBalance = 0,
-    fetchBalance,
+    aiServiceBalance,
+    aiServiceCodeCurrency,
+    fetchAiServiceBalance,
     fetchTransactionHistory,
     logoText,
+    aiServiceLastTopUp,
   } = props;
 
   const { t } = useTranslation("Services");
 
   const [selectedTabId, setSelectedTabId] = useState("usage");
   const [isRefreshing, setIsRefreshing] = useState(false);
-
-  const balanceParts = useMemo(() => {
-    return formatBalanceParts(walletBalance);
-  }, [walletBalance]);
+  const [isPricingBillingVisible, setIsPricingBillingVisible] = useState(false);
+  const [isTopUpVisible, setIsTopUpVisible] = useState(false);
 
   const onRefresh = async () => {
     if (isRefreshing) return;
 
     setIsRefreshing(true);
+
+    const startTime = Date.now();
     try {
-      await Promise.all([fetchBalance?.(), fetchTransactionHistory?.()]);
+      await Promise.all([
+        fetchAiServiceBalance?.(),
+        fetchTransactionHistory?.(null, null, true, true, "", "aitools"),
+      ]);
     } finally {
-      setIsRefreshing(false);
+      finishRefreshingWithMinCycle({
+        startTime,
+        setRefreshing: setIsRefreshing,
+      });
     }
   };
 
@@ -104,18 +115,34 @@ const AiPage = (props: AiPageProps) => {
     onToggle?.(AI_TOOLS, isEnabled);
   };
 
+  const onOpenPricingBilling = () => {
+    onPricingBillingClick?.();
+    setIsPricingBillingVisible(true);
+  };
+
+  const onClosePricingBilling = () => {
+    setIsPricingBillingVisible(false);
+  };
+
+  const onOpenTopUp = () => {
+    onTopUpClick?.();
+    setIsPricingBillingVisible(false);
+    setIsTopUpVisible(true);
+  };
+
+  const onCloseTopUp = () => {
+    setIsTopUpVisible(false);
+  };
+
   const tabsItems: TTabItem[] = [
     {
       id: "usage",
       name: t("Usage"),
-      content: fetchTransactionHistory ? (
+      content: (
         <div>
-          <TransactionHistory
-            fetchTransactionHistory={fetchTransactionHistory}
-            withoutHeader
-          />
+          <TransactionHistory withoutHeader serviceName={AI_TOOLS} />
         </div>
-      ) : null,
+      ),
     },
     {
       id: "model-settings",
@@ -126,6 +153,18 @@ const AiPage = (props: AiPageProps) => {
 
   return (
     <div className={styles.container}>
+      <PricingBillingBody
+        visible={isPricingBillingVisible}
+        onClose={onClosePricingBilling}
+        isBackButton={false}
+        withoutFooter
+      />
+
+      <TopUpContainer
+        visible={isTopUpVisible}
+        onCloseTopUpModal={onCloseTopUp}
+        onBackClick={onCloseTopUp}
+      />
       <div className={styles.toggleSection}>
         <ServiceToggleSection
           isEnabled={isEnabled}
@@ -138,67 +177,49 @@ const AiPage = (props: AiPageProps) => {
 
       <div className={styles.balanceSection}>
         <div className={styles.balanceCard}>
-          <div className={styles.balanceHeader}>
-            <Text
-              className={styles.balanceTitle}
-              fontSize="18px"
-              fontWeight={700}
-            >
-              {t("AvailableCredits")}
-            </Text>
-            <IconButton
-              iconName={RefreshReactSvgUrl}
-              size={16}
-              onClick={onRefresh}
-              className={classNames(styles.refreshIcon, {
-                [styles.spinning]: isRefreshing,
-              })}
-            />
-          </div>
-
-          <div className={styles.balanceAmount}>
-            <span
-              className={styles.balanceMajor}
-            >{`$${balanceParts.major}`}</span>
-            <span className={styles.balanceMinor}>{balanceParts.minor}</span>
-          </div>
-
-          <div className={styles.lastTopUpRow}>
-            <Text
-              className={styles.lastTopUpLabel}
-              fontSize="13px"
-              fontWeight={600}
-            >
-              {t("LastTopUp")}
-            </Text>
-            <Text
-              className={styles.lastTopUpValue}
-              fontSize="14px"
-              fontWeight={600}
-            >
-              {"—"}
-            </Text>
-            <Link
-              className={styles.pricingLink}
-              onClick={onPricingBillingClick}
-              textDecoration="underline dotted"
-              color="accent"
-            >
-              <Text fontSize="13px" fontWeight={600}>
-                {t("AIPricingAndBilling")}
-              </Text>
-            </Link>
-          </div>
+          <BalanceAmount
+            amount={aiServiceBalance}
+            currency={aiServiceCodeCurrency}
+            title={t("AvailableCredits")}
+            onRefresh={onRefresh}
+            isRefreshing={isRefreshing}
+          />
 
           <Button
             size={ButtonSize.small}
             primary
             label={t("TopUpCredits")}
-            onClick={onTopUpClick}
+            onClick={onOpenTopUp}
             scale
             testId="top_up_credits_button"
           />
         </div>
+      </div>
+      <div className={styles.lastTopUpRow}>
+        <Text
+          className={styles.lastTopUpLabel}
+          fontSize="13px"
+          fontWeight={600}
+        >
+          {t("LastTopUp")}
+        </Text>
+        <Text
+          className={styles.lastTopUpValue}
+          fontSize="14px"
+          fontWeight={600}
+        >
+          {aiServiceLastTopUp ? aiServiceLastTopUp : "—"}
+        </Text>
+        <Link
+          className={styles.pricingLink}
+          onClick={onOpenPricingBilling}
+          textDecoration="underline dotted"
+          color="accent"
+        >
+          <Text fontSize="13px" fontWeight={600}>
+            {t("AIPricingAndBilling")}
+          </Text>
+        </Link>
       </div>
 
       <div className={styles.tabsWrapper}>
@@ -213,13 +234,25 @@ const AiPage = (props: AiPageProps) => {
   );
 };
 
-export default inject(({ paymentStore, settingsStore }: TStore) => {
-  const { walletBalance, fetchBalance, fetchTransactionHistory } = paymentStore;
-  const { logoText } = settingsStore;
-  return {
-    walletBalance,
-    fetchBalance,
-    fetchTransactionHistory,
-    logoText,
-  };
-})(observer(AiPage));
+export default inject(
+  ({ servicesStore, paymentStore, settingsStore }: TStore) => {
+    const { fetchTransactionHistory } = paymentStore;
+    const { logoText } = settingsStore;
+
+    const {
+      aiServiceCodeCurrency,
+      aiServiceBalance,
+      fetchAiServiceBalance,
+      aiServiceLastTopUp,
+    } = servicesStore;
+
+    return {
+      aiServiceBalance,
+      aiServiceCodeCurrency,
+      fetchAiServiceBalance,
+      fetchTransactionHistory,
+      logoText,
+      aiServiceLastTopUp,
+    };
+  },
+)(observer(AiPage));

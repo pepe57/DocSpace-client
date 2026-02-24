@@ -164,7 +164,9 @@ const View = ({
   );
   const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
   const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
-  const { getServicesInitialValue } = useServices(defaultProps.services);
+  const { getServicesInitialValue, getAiServiceInitialValue } = useServices(
+    defaultProps.services,
+  );
   const { getAiSettingsInitialValue } = useAiSettings({
     fetchAIProviders,
     initDefaultProvider,
@@ -290,7 +292,7 @@ const View = ({
             break;
 
           case "ai-services":
-            await getServicesInitialValue();
+            await getAiServiceInitialValue();
             break;
 
           case "ai-settings":

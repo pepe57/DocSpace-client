@@ -78,7 +78,7 @@ type TransactionHistoryReportResponse = {
 type TransactionHistoryProps = {
   getStartTransactionDate?: () => string;
   getEndTransactionDate?: () => string;
-  fetchTransactionHistory: (
+  fetchTransactionHistory?: (
     startDate: DateTime | null,
     endDate: DateTime | null,
     credit: boolean,
@@ -93,6 +93,7 @@ type TransactionHistoryProps = {
   isNotPaidPeriod?: boolean;
   formatDate?: (date: DateTime) => string;
   withoutHeader?: boolean;
+  serviceName?: string;
 };
 
 const getTransactionType = (key: string) => {
@@ -150,12 +151,14 @@ const fetchTransactions = async (
     isCredit: boolean,
     isDebit: boolean,
     participantName?: string,
+    serviceName?: string,
   ) => Promise<void>,
   setIsLoading: (loading: boolean) => void,
   selectedType: string,
   startDate: DateTime,
   endDate: DateTime,
   participantName?: string,
+  serviceName?: string,
 ) => {
   timerId = setTimeout(() => setIsLoading(true), 500);
 
@@ -168,6 +171,7 @@ const fetchTransactions = async (
       isCredit,
       isDebit,
       participantName,
+      serviceName,
     );
 
     setIsLoading(false);
@@ -190,6 +194,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     isNotPaidPeriod,
     formatDate,
     withoutHeader,
+    serviceName,
   } = props;
 
   const { t } = useTranslation(["Payments", "Settings"]);
@@ -288,6 +293,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         initialState.startDate,
         initialState.endDate,
         initialState.selectedContact?.id,
+        serviceName,
       );
     }
   };
@@ -327,6 +333,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         startDate,
         endDate,
         selectedContact?.id,
+        serviceName,
       );
     }
   };
@@ -355,6 +362,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         date,
         endDate,
         selectedContact?.id,
+        serviceName,
       );
     }
   };
@@ -383,6 +391,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         startDate,
         date,
         selectedContact?.id,
+        serviceName,
       );
     }
   };
@@ -409,6 +418,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         startDate,
         endDate,
         contacts[0].id as string,
+        serviceName,
       );
     }
   };
@@ -432,6 +442,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         selectedType.key as string,
         startDate,
         endDate,
+        serviceName,
       );
     }
   };
@@ -454,6 +465,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         mobileFilterState.startDate,
         mobileFilterState.endDate,
         mobileFilterState.selectedContact?.id,
+        serviceName,
       );
     }
   };
@@ -767,6 +779,7 @@ export default inject(
       isTransactionHistoryExist,
       currentTariffStatusStore,
       formatDate,
+      fetchTransactionHistory,
     } = paymentStore;
 
     const { openOnNewPage } = filesSettingsStore;
@@ -789,6 +802,7 @@ export default inject(
       isTransactionHistoryExist,
       isNotPaidPeriod,
       formatDate,
+      fetchTransactionHistory,
     };
   },
 )(observer(TransactionHistory));

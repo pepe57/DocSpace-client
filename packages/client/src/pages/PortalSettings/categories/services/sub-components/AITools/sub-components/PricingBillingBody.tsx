@@ -20,15 +20,16 @@ import {
 } from "@docspace/ui-kit/components";
 
 interface PricingBillingBodyProps {
-  onBack: () => void;
   visible: boolean;
   onClose: () => void;
-  onTopUpClick: () => void;
-
+  onTopUpClick?: () => void;
+  onBack?: () => void;
   aiToolsPrices?: TAiToolsPrices;
   formatAiModelsCurrency?: (amount: number) => string;
   minimumInputPrice?: number;
   minimumOutputPrice?: number;
+  withoutFooter?: boolean;
+  isBackButton?: boolean;
 }
 
 const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
@@ -40,6 +41,8 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
   formatAiModelsCurrency,
   minimumInputPrice,
   minimumOutputPrice,
+  isBackButton = true,
+  withoutFooter,
 }) => {
   const { t } = useTranslation(["Services", "Common"]);
 
@@ -52,7 +55,7 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.aside}
-      isBackButton
+      isBackButton={isBackButton}
       onBackClick={onBack}
       onCloseClick={onClose}
       withBodyScroll
@@ -303,30 +306,32 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
           </div>
         </div>
       </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <div className={styles.closeFooter}>
-          <Button
-            key="OkButton"
-            label={t("Payments:TopUp")}
-            size={ButtonSize.normal}
-            primary
-            scale
-            isDisabled={false}
-            onClick={onTopUpClick}
-            isLoading={false}
-            testId="top_up_button"
-          />
-          <Button
-            key="CancelButton"
-            label={t("Common:CancelButton")}
-            size={ButtonSize.normal}
-            scale
-            onClick={onClose}
-            isDisabled={false}
-            testId="cancel_top_up_button"
-          />
-        </div>
-      </ModalDialog.Footer>
+      {withoutFooter ? null : (
+        <ModalDialog.Footer>
+          <div className={styles.closeFooter}>
+            <Button
+              key="OkButton"
+              label={t("Payments:TopUp")}
+              size={ButtonSize.normal}
+              primary
+              scale
+              isDisabled={false}
+              onClick={onTopUpClick}
+              isLoading={false}
+              testId="top_up_button"
+            />
+            <Button
+              key="CancelButton"
+              label={t("Common:CancelButton")}
+              size={ButtonSize.normal}
+              scale
+              onClick={onClose}
+              isDisabled={false}
+              testId="cancel_top_up_button"
+            />
+          </div>
+        </ModalDialog.Footer>
+      )}
     </ModalDialog>
   );
 };

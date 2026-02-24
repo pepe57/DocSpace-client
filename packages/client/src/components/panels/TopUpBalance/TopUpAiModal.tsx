@@ -45,13 +45,21 @@ import { buyWalletService } from "@docspace/shared/api/portal";
 import { useNavigate } from "react-router";
 
 import FromWalletToAi from "./sub-components/FromWalletToAi";
+import { AI_TOOLS } from "@docspace/shared/constants";
+import { DateTime } from "luxon";
 
 type TopUpAiModalProps = {
   onTopUpBalance: () => void;
   onAmountDifferenceChange?: (diff: number, amount: number) => void;
   visible: boolean;
   currency?: string;
-  fetchTransactionHistory?: () => Promise<void>;
+  fetchTransactionHistory?: (
+    startDate: DateTime | null,
+    endDate: DateTime | null,
+    credit: boolean,
+    debit: boolean,
+    participantName?: string,
+  ) => Promise<void>;
   walletCustomerEmail?: boolean;
   fetchBalance?: () => Promise<void>;
   fetchAiServiceBalance?: () => Promise<void>;
@@ -111,6 +119,10 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
     onClose(false);
   };
 
+  const onFetchHistory = () => {
+    fetchTransactionHistory?.(null, null, true, true, AI_TOOLS);
+  };
+
   return (
     <AmountProvider initialAmount={reccomendedAmount || initialAmount}>
       <ModalDialog
@@ -150,14 +162,14 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
             currency={currency}
             fetchBalance={fetchBalance}
             fetchServiceBalance={fetchAiServiceBalance}
-            fetchTransactionHistory={fetchTransactionHistory}
+            fetchTransactionHistory={onFetchHistory}
             onClose={onClose}
             walletCustomerEmail={walletCustomerEmail}
             setIsLoading={setIsLoading}
             isLoading={isLoading}
             walletCustomerStatusNotActive={walletCustomerStatusNotActive}
             onTopUpBalance={buyWalletService}
-            serviceName={"aitools"}
+            serviceName={AI_TOOLS}
             afterTopUp={onRedirect}
           />
         </ModalDialog.Footer>

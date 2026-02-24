@@ -41,6 +41,7 @@ import {
 } from "./types";
 import { Nullable } from "../../types";
 import { Encoder } from "../../utils/encoder";
+import { AI_TOOLS } from "../../constants";
 
 const baseURL = "/apisystem";
 
@@ -472,7 +473,7 @@ export function getBalance(refresh?: boolean, signal?: AbortSignal) {
 }
 
 export async function getServiceQuotaBalance(
-  serviceName: string = "aitools",
+  serviceName: string = AI_TOOLS,
   refresh?: boolean,
   signal?: AbortSignal,
 ) {
@@ -554,6 +555,7 @@ export async function getTransactionHistory(
   participantName: string = "",
   offset: number = 0,
   limit: number = 25,
+  serviceName: string = "",
   signal?: AbortSignal,
 ) {
   const params = {
@@ -567,6 +569,10 @@ export async function getTransactionHistory(
 
   if (participantName) {
     params.participantName = participantName;
+  }
+
+  if (serviceName) {
+    params.serviceName = serviceName;
   }
 
   const options = {

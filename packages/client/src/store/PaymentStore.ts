@@ -524,6 +524,7 @@ class PaymentStore {
     credit = true,
     debit = true,
     participantName?: string,
+    serviceName?: string,
   ) => {
     const abortController = new AbortController();
     this.settingsStore?.addAbortControllers(abortController);
@@ -537,6 +538,7 @@ class PaymentStore {
         participantName,
         0,
         25,
+        serviceName,
         abortController.signal,
       );
 

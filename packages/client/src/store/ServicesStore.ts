@@ -144,6 +144,13 @@ class ServicesStore {
     return "USD";
   }
 
+  get aiServiceLastTopUp() {
+    if (this.aiToolsBalance && this.aiToolsBalance.subAccounts.length > 0)
+      return this.aiToolsBalance.subAccounts[0].lastTopUp;
+
+    return "";
+  }
+
   get aiModelsCurrency() {
     if (!this.aiToolsPrices?.currency) return "USD";
 
@@ -195,16 +202,15 @@ class ServicesStore {
     this.isInitServicesPage = isInitServicesPage;
   };
 
-  setAiServiceBalance = async () => {
-    const balance = await getServiceQuotaBalance();
-
-    this.aiToolsBalance = balance;
-  };
-
-  setAiPrices = async () => {
-    const prices = await getAiPrices();
-
-    this.aiToolsPrices = prices as TAiToolsPrices;
+  fetchAiPrices = async () => {
+    try {
+      const res = await getAiPrices();
+      if (!res) return;
+      this.aiToolsPrices = res;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   formatAiModelsCurrency = (amount: number) => {
@@ -278,6 +284,27 @@ class ServicesStore {
     this.featureCountData = featureCountData;
   };
 
+  aiServicesinit = async (t: TTranslation) => {
+    const isRefresh = window.location.href.includes("complete=true");
+
+    const { fetchTransactionHistory, initWalletPayerAndBalance } =
+      this.paymentStore!;
+
+    try {
+      const requests = [
+        this.fetchAiPrices(),
+        this.fetchAiServiceBalance(),
+        fetchTransactionHistory(null, null, true, true, "", "aitools"),
+        initWalletPayerAndBalance(isRefresh),
+      ];
+
+      await Promise.all(requests);
+    } catch (error) {
+      console.error(error);
+      toastr.error(t("Common:UnexpectedError"));
+    }
+  };
+
   servicesInit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
 
@@ -301,8 +328,8 @@ class ServicesStore {
         handleServicesQuotas(),
         initWalletPayerAndBalance(isRefresh),
         fetchPortalTariff(),
-        this.setAiServiceBalance(),
-        this.setAiPrices(),
+        this.fetchAiServiceBalance(),
+        this.fetchAiPrices(),
       ];
 
       const [quotas] = await Promise.all(requests);

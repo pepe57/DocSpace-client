@@ -70,7 +70,9 @@ const FromWalletToAi = (props: IFromWalletToAi) => {
   }, [amountDiff, amountNumber, onAmountDifferenceChange]);
 
   const isBalanceInsufficient =
-    !walletCustomerEmail || amountNumber > walletBalanceNumber;
+    !walletCustomerEmail ||
+    walletBalanceNumber === 0 ||
+    amountNumber > walletBalanceNumber;
 
   return (
     <div className={modalStyles.transferSection}>

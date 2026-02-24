@@ -20,43 +20,8 @@
   padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
   box-sizing: border-box;
   overflow: hidden;
-}
-
-.balanceHeader {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.balanceTitle {
-  color: var(--text-color);
-}
-
-.refreshIcon {
-  margin-left: auto;
-}
-
-.spinning {
-  animation: aiPageSpin 1s linear infinite;
-}
-
-@keyframes aiPageSpin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.balanceAmount {
-  display: flex;
-  align-items: baseline;
-  justify-content: flex-start;
-  gap: 0;
 }
 
 .balanceMajor {
