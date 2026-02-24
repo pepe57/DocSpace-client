@@ -62,6 +62,53 @@ for (const app of apps) {
   fs.cpSync(staticPath, staticDest, { recursive: true });
 }
 
+// Fix absolute symlinks.
+// pnpm standalone builds create absolute symlinks (e.g.
+// node_modules/next -> /abs/build/path/.pnpm/next@.../node_modules/next).
+// After copying to a different location these break. Convert them to relative.
+const standaloneRoots = apps.map((app) =>
+  path.resolve(packagesPath, app, ".next", "standalone"),
+);
+
+let fixedSymlinks = 0;
+
+function fixAbsoluteSymlinks(dir) {
+  let entries;
+  try {
+    entries = fs.readdirSync(dir, { withFileTypes: true });
+  } catch {
+    return;
+  }
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isSymbolicLink()) {
+      const target = fs.readlinkSync(fullPath);
+      if (path.isAbsolute(target)) {
+        for (const root of standaloneRoots) {
+          if (target.startsWith(root + "/")) {
+            const relativeToRoot = path.relative(root, target);
+            const targetInOutput = path.join(publishPath, relativeToRoot);
+            const relativeLink = path.relative(
+              path.dirname(fullPath),
+              targetInOutput,
+            );
+            fs.unlinkSync(fullPath);
+            fs.symlinkSync(relativeLink, fullPath);
+            fixedSymlinks++;
+            break;
+          }
+        }
+      }
+    } else if (entry.isDirectory()) {
+      fixAbsoluteSymlinks(fullPath);
+    }
+  }
+}
+
+console.log("Fixing absolute symlinks...");
+fixAbsoluteSymlinks(publishPath);
+console.log(`Fixed ${fixedSymlinks} absolute symlinks.`);
+
 // Copy the server entry points
 fs.copyFileSync(
   path.join(__dirname, "server.prod.js"),
