@@ -122,22 +122,26 @@ const Uploader = (props) => {
     },
   ];
 
+  const isFolderMode = uploadMode === "folders";
+
   const uploadQuantityOptions = [
     {
       value: "single",
       label: (
         <LabelGroup>
-          {t("Common:SingleFile")}
+          {isFolderMode ? t("Common:SingleFolder") : t("Common:SingleFile")}
           <HelpButton
             offsetRight={0}
             size={12}
             place="right"
             tooltipContent={
               <Text fontSize="12px">
-                {t("Common:SingleFileDescription")}
+                {isFolderMode
+                  ? t("Common:SingleFolderDescription")
+                  : t("Common:SingleFileDescription")}
               </Text>
             }
-            dataTestId="single_file_help_button"
+            dataTestId="single_help_button"
           />
         </LabelGroup>
       ),
@@ -146,17 +150,19 @@ const Uploader = (props) => {
       value: "multiple",
       label: (
         <LabelGroup>
-          {t("Common:MultipleFiles")}
+          {isFolderMode ? t("Common:MultipleFolders") : t("Common:MultipleFiles")}
           <HelpButton
             offsetRight={0}
             size={12}
             place="right"
             tooltipContent={
               <Text fontSize="12px">
-                {t("Common:MultipleFilesDescription")}
+                {isFolderMode
+                  ? t("Common:MultipleFoldersDescription")
+                  : t("Common:MultipleFilesDescription")}
               </Text>
             }
-            dataTestId="multiple_files_help_button"
+            dataTestId="multiple_help_button"
           />
         </LabelGroup>
       ),
