@@ -57,7 +57,7 @@
   "InputCurrency": "Input ({{currency}}/1M)",
   "LastTopUp": "Last top-up: {{currency}} on {{date}}.",
   "LowBalance": "Low balance. Top up to ensure uninterrupted service.",
-  "Model": "Model",
+  "AIModel": "Model",
   "ModelSettings": "Model settings",
   "OCR": "OCR",
   "OCRDescription": "Recognize and extract text from scanned PDFs and images.",

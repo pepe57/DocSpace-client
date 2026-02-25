@@ -119,8 +119,8 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
     onClose(false);
   };
 
-  const onFetchHistory = () => {
-    fetchTransactionHistory?.(null, null, true, true, AI_TOOLS);
+  const onFetchHistory = async () => {
+    await fetchTransactionHistory?.(null, null, true, true, AI_TOOLS);
   };
 
   return (

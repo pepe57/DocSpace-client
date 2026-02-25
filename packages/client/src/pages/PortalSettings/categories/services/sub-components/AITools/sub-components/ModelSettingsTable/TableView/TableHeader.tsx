@@ -20,7 +20,7 @@ const ModelSettingsTableHeader = (props: TableHeaderProps) => {
   const defaultColumns = [
     {
       key: "Model",
-      title: t("Model"),
+      title: t("AIModel"),
       enable: true,
       resizable: false,
       default: true,
