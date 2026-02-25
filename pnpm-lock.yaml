@@ -537,8 +537,8 @@ importers:
         specifier: 2.3.14
         version: 2.3.14
       '@onlyoffice/docspace-plugin-sdk':
-        specifier: file:onlyoffice-docspace-plugin-sdk-2.1.0.tgz
-        version: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz(@types/node@24.10.7)
+        specifier: file:onlyoffice-docspace-plugin-sdk-v2.1.0.tgz
+        version: file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz(@types/node@24.10.7)
       '@playwright/test':
         specifier: 1.58.1
         version: 1.58.1
@@ -3598,11 +3598,6 @@ packages:
   '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz':
     resolution: {integrity: sha512-21LcYXnFmz1ufRMNPIhiPEtHdGrPphMpRZ9absNmFcjKd97xCJtBSpBys3cdJv/rlGp+hp2A3vzxVofY5xaDvQ==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz}
     version: 3.6.0
-
-  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
-    resolution: {integrity: sha512-1sGSxpDZ5CNUGhCaGn7IfAdZ4RikSNk0/WlRG4YjOiUzIS+ERGujaf9pSS9LilqDkYupHvh6mFp+nbAV4HA65Q==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
-    version: 2.1.0
-    hasBin: true
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz':
     resolution: {integrity: sha512-1sGSxpDZ5CNUGhCaGn7IfAdZ4RikSNk0/WlRG4YjOiUzIS+ERGujaf9pSS9LilqDkYupHvh6mFp+nbAV4HA65Q==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz}
@@ -13247,14 +13242,6 @@ snapshots:
       axios: 1.13.5
     transitivePeerDependencies:
       - debug
-
-  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz(@types/node@24.10.7)':
-    dependencies:
-      '@onlyoffice/docspace-plugin-sdk': file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz(@types/node@24.10.7)
-      inquirer: 9.3.8(@types/node@24.10.7)
-      jszip: 3.10.1
-    transitivePeerDependencies:
-      - '@types/node'
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz(@types/node@24.10.7)':
     dependencies:
