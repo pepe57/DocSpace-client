@@ -11,7 +11,7 @@
   "AIModelListSubtitle": "Prices shown include 20% service fee",
   "AIModelListTitle": "Model list",
   "AIModelPrice": "{{inputPrice}}/M input tokens | {{outputPrice}}/M output tokens",
-  "AIModelsIntro": "Pick the right model for your task — from budget-friendly to advanced. Pricing is based on <1>OpenRouter</1> rates with a 20% service fee.",
+  "AIModelsIntro": "Pick the right model for your task — from budget-friendly to advanced. <1>OpenRouter pricing</1> shown. 20% service fee added at usage.",
   "AIPricingAdditionalFeaturesTitle": "Additional features",
   "AIPricingAndBilling": "Pricing & billing",
   "AIPricingAvailableCredits": "Available credits: {{price}}",

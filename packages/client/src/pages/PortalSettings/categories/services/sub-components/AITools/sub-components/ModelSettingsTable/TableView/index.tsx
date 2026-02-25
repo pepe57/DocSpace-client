@@ -3,13 +3,14 @@ import { inject, observer } from "mobx-react";
 
 import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
 import { Text } from "@docspace/ui-kit/components/text";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 
 import type { TAiToolsPrices } from "SRC_DIR/store/ServicesStore";
 
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 import styles from "./ModelSettingsTable.module.scss";
+import { Link } from "@docspace/ui-kit/components";
 
 const TABLE_VERSION = "1";
 const COLUMNS_SIZE = `aiModelsColumnsSize_ver-${TABLE_VERSION}`;
@@ -50,7 +51,25 @@ const TableView = (props: ModelSettingsTableViewProps) => {
 
   return (
     <div className={styles.tableWrapper}>
-      <Text>{t("AIModelsIntro")}</Text>
+      <Text>
+        <Trans
+          t={t}
+          ns="Services"
+          i18nKey="AIModelsIntro"
+          components={{
+            1: (
+              <Link
+                fontWeight={600}
+                fontSize="12px"
+                as="span"
+                className={styles.servicesLink}
+                textDecoration="underline"
+              />
+            ),
+          }}
+        />
+      </Text>
+
       <TableContainer
         forwardedRef={ref as React.RefObject<HTMLDivElement>}
         useReactWindow={false}
