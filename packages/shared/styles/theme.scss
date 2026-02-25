@@ -1445,7 +1445,7 @@
   --payment-devider-color: #{$gray-light-mid};
   --payment-contact-container-text-color: #{$gray};
   --payment-contact-container-link-color: #{$light-gray-dark};
-
+  --payment-inactive-color: #{$gray};
   --warning-color: #{$light-error-status};
   --background-service-color: #{$light-gray-hover};
   --border-service-color: #{$gray-light-mid};
@@ -1461,7 +1461,7 @@
   --payment-devider-color: #{$gray-dark-mid};
   --payment-contact-container-text-color: #{$dark-gray-dark};
   --payment-contact-container-link-color: #{$gray-dark};
-
+  --payment-inactive-color: #{$gray-dark};
   --warning-color: #{$dark-error-status};
   --background-service-color: #{$light-dark-gray-hover};
   --border-service-color: #{$gray-dark-strong};

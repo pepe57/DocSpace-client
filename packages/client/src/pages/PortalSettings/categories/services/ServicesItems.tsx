@@ -43,6 +43,7 @@ import { DeviceType } from "@docspace/shared/enums";
 
 import CheckIcon from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg";
+import PriceIcon from "PUBLIC_DIR/images/icons/16/price.react.svg";
 
 import styles from "./styles/AdditionalStorage.module.scss";
 import { useServicesActions } from "./hooks/useServicesActions";
@@ -231,7 +232,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
               >
                 {isAiServiceLowBalance ? (
                   <div
-                    className={classNames(styles.changeShedule, {
+                    className={classNames(styles.additionalInfo, {
                       [styles.warningColor]: true,
                     })}
                     data-tooltip-id="serviceTooltip"
@@ -249,11 +250,12 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 aiServiceBalance > 0 &&
                 !isAiServiceLowBalance ? (
                   <div
-                    className={classNames(styles.changeShedule, {
-                      [styles.greenColor]: true,
+                    className={classNames(styles.additionalInfo, {
+                      [styles.greenColor]: item.value,
+                      [styles.inactiveColor]: !item.value!,
                     })}
                   >
-                    <CheckIcon />
+                    <PriceIcon />
                     <Text>
                       {t("Services:AIPricingAvailableCredits", {
                         price: formatAiServiceCurrency!(),
@@ -285,7 +287,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
               >
                 {hasScheduledStorageChange ? (
                   <div
-                    className={classNames(styles.changeShedule, {
+                    className={classNames(styles.additionalInfo, {
                       [styles.warningColor]: true,
                     })}
                     data-tooltip-id="serviceTooltip"
@@ -307,7 +309,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
 
                 {!hasScheduledStorageChange && currentStoragePlanSize! > 0 ? (
                   <div
-                    className={classNames(styles.changeShedule, {
+                    className={classNames(styles.additionalInfo, {
                       [styles.greenColor]: true,
                     })}
                   >
