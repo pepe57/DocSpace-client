@@ -482,6 +482,8 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         formatDate!(endDate),
         isCredit,
         isDebit,
+        selectedContact?.id,
+        serviceName,
       );
 
       const result = await new Promise<TransactionHistoryReportResponse>(

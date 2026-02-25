@@ -626,17 +626,29 @@ export async function startTransactionHistoryReport(
   startDate: string,
   endDate: string,
   credit: boolean,
-  withdrawal: boolean,
+  debit: boolean,
+  participantName?: string,
+  serviceName?: string,
 ) {
+  const data = {
+    startDate,
+    endDate,
+    credit,
+    debit,
+  };
+
+  if (participantName) {
+    data.participantName = participantName;
+  }
+
+  if (serviceName) {
+    data.serviceName = serviceName;
+  }
+
   const options = {
     method: "post",
     url: "/portal/payment/customer/operationsreport",
-    data: {
-      startDate,
-      endDate,
-      credit,
-      withdrawal,
-    },
+    data,
   };
   const res = (await request(options)) as TransactionHistoryReport;
 
