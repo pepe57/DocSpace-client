@@ -137,6 +137,7 @@ const AiPage = (props: AiPageProps) => {
     try {
       await setServiceState(raw);
     } catch (error) {
+      console.error(error);
       toastr.error(t("Common:UnexpectedError"));
       changeServiceState?.(AI_TOOLS);
     }
