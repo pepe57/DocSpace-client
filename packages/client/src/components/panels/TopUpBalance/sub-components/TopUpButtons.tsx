@@ -34,6 +34,8 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 import { useAmountValue } from "../../../../pages/PortalSettings/categories/payments/Wallet/context";
 import styles from "../styles/TopUpModal.module.scss";
+import { AI_TOOLS } from "@docspace/shared/constants";
+import { inject, observer } from "mobx-react";
 
 interface TopUpButtonsProps {
   currency: string;
@@ -48,6 +50,7 @@ interface TopUpButtonsProps {
   onTopUpBalance: (amount: number, currency: string) => Promise<string>;
   serviceName?: string;
   afterTopUp?: () => void;
+  logoText?: string;
 }
 
 const TopUpButtons: React.FC<TopUpButtonsProps> = ({
@@ -63,8 +66,9 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
   onTopUpBalance,
   serviceName,
   afterTopUp,
+  logoText,
 }) => {
-  const { t } = useTranslation(["Payments", "Common"]);
+  const { t } = useTranslation(["Payments", "Services", "Common"]);
 
   const { amount, hasError } = useAmountValue();
 
@@ -92,7 +96,12 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
 
       await Promise.allSettled(requests);
 
-      toastr.success(t("WalletToppedUp"));
+      const toastMessage =
+        serviceName === AI_TOOLS
+          ? t("Services:AIServiceToppedUp", { organizationName: logoText })
+          : t("WalletToppedUp");
+
+      toastr.success(toastMessage);
       afterTopUp ? afterTopUp() : onClose(true);
     } catch (e) {
       toastr.error(e as unknown as string);
@@ -130,4 +139,10 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
   );
 };
 
-export default TopUpButtons;
+export default inject(({ settingsStore }: TStore) => {
+  const { logoText } = settingsStore;
+
+  return {
+    logoText,
+  };
+})(observer(TopUpButtons));
