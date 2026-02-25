@@ -54,16 +54,27 @@ type TAiToolsEmbeddingPrice = {
 
 type TAiToolsChatModelPrice = {
   id: string;
+  alias: string;
+  provider: string;
+  image: string;
   price: TAiToolsChatPrice;
 };
 
 type TAiToolsEmbeddingModelPrice = {
   id: string;
+  alias: string;
+  provider: string;
+  image: string;
   price: TAiToolsEmbeddingPrice;
 };
 
 type TAiToolsWebSearchPrices = {
   search: number;
+  provider: string;
+  searchAlias: string;
+  contentsAlias: string;
+  searchImage: string;
+  crawlingImage: string;
   contents: number;
 };
 

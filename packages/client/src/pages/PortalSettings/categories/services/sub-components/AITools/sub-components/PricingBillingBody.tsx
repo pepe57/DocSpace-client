@@ -155,24 +155,22 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                 <div className={styles.pricingRow}>
                   <div className={styles.pricingRowLeft}>
                     <div className={styles.pricingRowIconBox}>
-                      <VectorizationIcon />
+                      <div
+                        // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
+                        dangerouslySetInnerHTML={{
+                          __html: aiToolsPrices.embedding[0].image,
+                        }}
+                        className={styles.iconsContainer}
+                      />
                     </div>
                     <Text fontSize="12px">
-                      <Trans
-                        t={t}
-                        ns="Services"
-                        i18nKey="AIWhatYouPayForVectorization"
-                        components={{
-                          1: (
-                            <Text
-                              fontSize="12px"
-                              as="span"
-                              className={styles.payForItemTextMuted}
-                            />
-                          ),
-                        }}
-                      />
+                      {aiToolsPrices.embedding[0].alias}
                     </Text>
+                    {aiToolsPrices.embedding[0].provider ? (
+                      <Text className={styles.payForItemTextMuted} as="span">
+                        ({aiToolsPrices.embedding[0].provider})
+                      </Text>
+                    ) : null}
                   </div>
                   <Text className={styles.pricingRowPrice}>
                     <Text fontWeight="600">
@@ -204,32 +202,38 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                 <div className={styles.pricingRow}>
                   <div className={styles.pricingRowLeft}>
                     <div className={styles.pricingRowIconBox}>
-                      <WebSearchIcon />
-                    </div>
-                    <Text fontSize="12px">{t("AIWhatYouPayForWebSearch")}</Text>
-                  </div>
-                  <Text fontSize="12px">
-                    <Text fontWeight="600">
-                      <Trans
-                        t={t}
-                        ns="Services"
-                        i18nKey="AIPricingPricePerRequest"
-                        components={{
-                          1: (
-                            <Text
-                              fontSize="12px"
-                              as="span"
-                              className={styles.payForItemTextMuted}
-                            />
-                          ),
+                      <div
+                        // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
+                        dangerouslySetInnerHTML={{
+                          __html: aiToolsPrices.webSearch.crawlingImage,
                         }}
-                        values={{
-                          price: safeFormatAiModelsCurrency(
-                            aiToolsPrices.webSearch.contents,
-                          ),
-                        }}
+                        className={styles.iconsContainer}
                       />
+                    </div>
+                    <Text fontSize="12px">
+                      {aiToolsPrices.webSearch.contentsAlias}
                     </Text>
+                  </div>
+                  <Text fontSize="12px" fontWeight="600">
+                    <Trans
+                      t={t}
+                      ns="Services"
+                      i18nKey="AIPricingPricePerRequest"
+                      components={{
+                        1: (
+                          <Text
+                            fontSize="12px"
+                            as="span"
+                            className={styles.payForItemTextMuted}
+                          />
+                        ),
+                      }}
+                      values={{
+                        price: safeFormatAiModelsCurrency(
+                          aiToolsPrices.webSearch.contents,
+                        ),
+                      }}
+                    />
                   </Text>
                 </div>
               ) : null}
@@ -237,32 +241,38 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                 <div className={styles.pricingRow}>
                   <div className={styles.pricingRowLeft}>
                     <div className={styles.pricingRowIconBox}>
-                      <WebSearchIcon />
-                    </div>
-                    <Text fontSize="12px">{t("AIWhatYouPayForWebSearch")}</Text>
-                  </div>
-                  <Text fontSize="12px">
-                    <Text fontWeight="600">
-                      <Trans
-                        t={t}
-                        ns="Services"
-                        i18nKey="AIPricingPricePerRequest"
-                        components={{
-                          1: (
-                            <Text
-                              fontSize="12px"
-                              as="span"
-                              className={styles.payForItemTextMuted}
-                            />
-                          ),
+                      <div
+                        // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
+                        dangerouslySetInnerHTML={{
+                          __html: aiToolsPrices.webSearch.searchImage,
                         }}
-                        values={{
-                          price: safeFormatAiModelsCurrency(
-                            aiToolsPrices.webSearch.search,
-                          ),
-                        }}
+                        className={styles.iconsContainer}
                       />
+                    </div>
+                    <Text fontSize="12px">
+                      {aiToolsPrices.webSearch.searchAlias}
                     </Text>
+                  </div>
+                  <Text fontSize="12px" fontWeight="600">
+                    <Trans
+                      t={t}
+                      ns="Services"
+                      i18nKey="AIPricingPricePerRequest"
+                      components={{
+                        1: (
+                          <Text
+                            fontSize="12px"
+                            as="span"
+                            className={styles.payForItemTextMuted}
+                          />
+                        ),
+                      }}
+                      values={{
+                        price: safeFormatAiModelsCurrency(
+                          aiToolsPrices.webSearch.search,
+                        ),
+                      }}
+                    />
                   </Text>
                 </div>
               ) : null}
@@ -279,15 +289,32 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
 
             <div className={styles.modelList}>
               {chatModels?.map((model, index) => {
-                const id = model?.id ?? "Model";
+                const title = model?.alias ?? "";
+                const image = model?.image ?? "";
 
                 return (
-                  <div key={`${id}-${index}`} className={styles.modelRow}>
+                  <div key={`${model.id}-${index}`} className={styles.modelRow}>
                     <div className={styles.modelIconPlaceholder}>
-                      <span>{id}</span>
+                      <div
+                        // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
+                        dangerouslySetInnerHTML={{ __html: image }}
+                        className={styles.iconsContainer}
+                      />
                     </div>
                     <div className={styles.modelText}>
-                      <Text className={styles.modelName}>{id}</Text>
+                      <div className={styles.modelNameWrapper}>
+                        <Text className={styles.modelName} as="span">
+                          {title}
+                        </Text>
+                        {model.provider ? (
+                          <Text
+                            className={styles.payForItemTextMuted}
+                            as="span"
+                          >
+                            ({model.provider})
+                          </Text>
+                        ) : null}
+                      </div>
                       <Text className={styles.modelPriceLine}>
                         {t("AIModelPrice", {
                           inputPrice: safeFormatAiModelsCurrency(
