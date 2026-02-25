@@ -24,11 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import SDK from "@onlyoffice/docspace-sdk-js";
+
+import { EventLogBlock } from "../sub-components/EventLogBlock";
 
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
@@ -78,6 +80,18 @@ import {
   Frame,
   LabelGroup,
 } from "./StyledPresets";
+
+const FILE_SELECTOR_EVENT_TYPES = [
+  "onSelectCallback",
+  "onCloseCallback",
+  "onAppReady",
+  "onAppError",
+  "onAuthSuccess",
+  "onSignOut",
+  "onNoAccess",
+  "onNotFound",
+  "onContentReady",
+];
 
 const FileSelector = (props) => {
   const { t, fetchExternalLinks, theme, logoText } = props;
@@ -151,6 +165,9 @@ const FileSelector = (props) => {
     },
   ];
 
+  const [eventLog, setEventLog] = useState([]);
+  const onClearEventLog = useCallback(() => setEventLog([]), []);
+
   const [version, onSetVersion] = useState(sdkVersion[210]);
 
   const [source, onSetSource] = useState(sdkSource.Package);
@@ -176,15 +193,33 @@ const FileSelector = (props) => {
     isButtonMode: false,
     buttonWithLogo: true,
     events: {
-      onSelectCallback: (items) => {
-        console.log("onSelectCallback", items);
+      onSelectCallback: (data) => {
+        console.log("onSelectCallback", data);
       },
-      onCloseCallback: null,
-      onAppReady: null,
-      onAppError: (e) => console.log("onAppError", e),
-      onEditorCloseCallback: null,
-      onAuthSuccess: null,
-      onSignOut: null,
+      onCloseCallback: (data) => {
+        console.log("onCloseCallback", data);
+      },
+      onAppReady: (data) => {
+        console.log("onAppReady", data);
+      },
+      onAppError: (data) => {
+        console.log("onAppError", data);
+      },
+      onAuthSuccess: (data) => {
+        console.log("onAuthSuccess", data);
+      },
+      onSignOut: (data) => {
+        console.log("onSignOut", data);
+      },
+      onNoAccess: (data) => {
+        console.log("onNoAccess", data);
+      },
+      onNotFound: (data) => {
+        console.log("onNotFound", data);
+      },
+      onContentReady: (data) => {
+        console.log("onContentReady", data);
+      },
     },
   });
 
@@ -306,14 +341,51 @@ const FileSelector = (props) => {
     }));
   };
 
+  useEffect(() => {
+    const frameId = config.frameId;
+
+    const handleMessage = (e) => {
+      let parsed;
+      try {
+        parsed = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+      } catch {
+        return;
+      }
+
+      if (parsed?.type !== "onEventReturn" || parsed?.frameId !== frameId)
+        return;
+
+      const { event, data } = parsed.eventReturnData ?? {};
+      if (!event) return;
+
+      setEventLog((prev) => {
+        const next = [
+          ...prev,
+          { id: `${Date.now()}-${Math.random()}`, timestamp: new Date(), event, data },
+        ];
+        return next.length > 200 ? next.slice(-200) : next;
+      });
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [config.frameId]);
+
   const preview = (
-    <Frame
-      width={config.width.includes("px") ? config.width : undefined}
-      height={config.height.includes("px") ? config.height : undefined}
-      targetId={config.frameId}
-    >
-      <div id={config.frameId} />
-    </Frame>
+    <>
+      <Frame
+        width={config.width.includes("px") ? config.width : undefined}
+        height={config.height.includes("px") ? config.height : undefined}
+        targetId={config.frameId}
+      >
+        <div id={config.frameId} />
+      </Frame>
+      <EventLogBlock
+        events={eventLog}
+        onClear={onClearEventLog}
+        eventTypes={FILE_SELECTOR_EVENT_TYPES}
+      />
+    </>
   );
 
   return (

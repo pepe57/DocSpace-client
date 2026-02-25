@@ -48,6 +48,7 @@ import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { VersionSelector } from "../sub-components/VersionSelector";
 import Integration from "../sub-components/Integration";
+import { EventLogBlock } from "../sub-components/EventLogBlock";
 
 import {
   dimensionsModel,
@@ -71,6 +72,12 @@ import {
   CheckboxGroup,
 } from "./StyledPresets";
 
+const UPLOADER_EVENT_TYPES = [
+  "onUploadSuccess",
+  "onUploadError",
+  "onUploadProgress",
+];
+
 const Uploader = (props) => {
   const { t, theme, myFolderId, fetchTreeFolders } = props;
 
@@ -80,6 +87,7 @@ const Uploader = (props) => {
   const [source, onSetSource] = useState(sdkSource.Package);
   const [uploadMode, setUploadMode] = useState("files");
   const [uploadQuantity, setUploadQuantity] = useState("single");
+  const [eventLog, setEventLog] = useState([]);
 
   const uploadModeOptions = [
     {
@@ -210,7 +218,39 @@ const Uploader = (props) => {
     return () => {
       destroyFrame();
     };
-  });
+  }, [config]);
+
+  const onClearEventLog = useCallback(() => setEventLog([]), []);
+
+  useEffect(() => {
+    const frameId = config.frameId;
+
+    const handleMessage = (e) => {
+      let parsed;
+      try {
+        parsed = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+      } catch {
+        return;
+      }
+
+      if (parsed?.type !== "onEventReturn" || parsed?.frameId !== frameId)
+        return;
+
+      const { event, data } = parsed.eventReturnData ?? {};
+      if (!event) return;
+
+      setEventLog((prev) => {
+        const next = [
+          ...prev,
+          { id: `${Date.now()}-${Math.random()}`, timestamp: new Date(), event, data },
+        ];
+        return next.length > 200 ? next.slice(-200) : next;
+      });
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [config.frameId]);
 
   const onChangeFolderId = (folderId) => {
     const newConfig = {
@@ -279,13 +319,20 @@ const Uploader = (props) => {
   };
 
   const preview = (
-    <Frame
-      width={config.width.includes("px") ? config.width : undefined}
-      height={config.height.includes("px") ? config.height : undefined}
-      targetId={config.frameId}
-    >
-      <div id={config.frameId} />
-    </Frame>
+    <>
+      <Frame
+        width={config.width.includes("px") ? config.width : undefined}
+        height={config.height.includes("px") ? config.height : undefined}
+        targetId={config.frameId}
+      >
+        <div id={config.frameId} />
+      </Frame>
+      <EventLogBlock
+        events={eventLog}
+        onClear={onClearEventLog}
+        eventTypes={UPLOADER_EVENT_TYPES}
+      />
+    </>
   );
 
   return (

@@ -1,0 +1,320 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { useRef, useEffect, useState, useMemo } from "react";
+import styled from "styled-components";
+import { injectDefaultTheme, NoUserSelect } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Link } from "@docspace/ui-kit/components/link";
+
+const GUTTER_WIDTH = 80;
+
+const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
+  max-width: 800px;
+  width: 100%;
+  margin-top: 16px;
+  border: 1px solid ${(p) => p.theme.plugins.borderColor};
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: ${(p) =>
+    p.theme.isBase
+      ? p.theme.backgroundColor
+      : p.theme.sdkPresets.previewBackgroundColor};
+  color: ${(p) =>
+    p.theme.isBase ? globalColors.black : globalColors.darkGrayDark};
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    monospace;
+  font-size: 13px;
+  line-height: 20px;
+`;
+
+const Header = styled.div.attrs(injectDefaultTheme)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 8px 16px;
+  border-bottom: 1px solid ${(p) => p.theme.plugins.borderColor};
+  background-color: ${(p) =>
+    p.theme.isBase ? globalColors.grayLight : globalColors.grayDarkMid};
+  ${NoUserSelect}
+`;
+
+const HeaderTitle = styled.span.attrs(injectDefaultTheme)`
+  font-size: 13px;
+  font-weight: 600;
+  color: ${(p) =>
+    p.theme.isBase ? globalColors.black : globalColors.darkGrayDark};
+`;
+
+
+const LogScroller = styled.div.attrs(injectDefaultTheme)`
+  overflow-y: auto;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+
+  scrollbar-width: thin;
+  scrollbar-color: ${(p) => p.theme.plugins.borderColor} transparent;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${(p) => p.theme.plugins.borderColor};
+    border-radius: 4px;
+  }
+`;
+
+const EmptyState = styled.div.attrs(injectDefaultTheme)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  font-size: 12px;
+  color: ${(p) => (p.theme.isBase ? globalColors.gray : globalColors.grayDark)};
+  font-style: italic;
+  ${NoUserSelect}
+`;
+
+const LogEntry = styled.div.attrs(injectDefaultTheme)`
+  display: flex;
+  align-items: center;
+  min-height: 28px;
+  cursor: ${(p) => (p.$expandable ? "pointer" : "default")};
+
+  &:hover {
+    background-color: ${(p) =>
+      p.theme.isBase
+        ? globalColors.lightGrayHover
+        : globalColors.lightDarkGrayHover};
+  }
+`;
+
+const Gutter = styled.span.attrs(injectDefaultTheme)`
+  flex-shrink: 0;
+  width: ${GUTTER_WIDTH}px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  font-size: 12px;
+  color: ${(p) => (p.theme.isBase ? globalColors.gray : globalColors.grayDark)};
+  border-right: 1px solid ${(p) => p.theme.plugins.borderColor};
+  white-space: nowrap;
+  ${NoUserSelect}
+`;
+
+const Chevron = styled.span`
+  font-size: 9px;
+  line-height: 1;
+  opacity: ${(p) => (p.$visible ? 1 : 0)};
+  transition: transform 0.15s ease;
+  transform: ${(p) => (p.$expanded ? "rotate(90deg)" : "rotate(0deg)")};
+  display: inline-block;
+`;
+
+const EventName = styled.span`
+  flex-shrink: 0;
+  padding: 0 6px 0 10px;
+  font-weight: 600;
+  white-space: nowrap;
+`;
+
+const Arrow = styled.span.attrs(injectDefaultTheme)`
+  flex-shrink: 0;
+  color: ${(p) => (p.theme.isBase ? globalColors.gray : globalColors.grayDark)};
+  padding-right: 6px;
+  ${NoUserSelect}
+`;
+
+const EventData = styled.span.attrs(injectDefaultTheme)`
+  color: ${(p) => p.theme.sdkPresets.secondaryColor};
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 12px;
+`;
+
+const ExpandedRow = styled.div.attrs(injectDefaultTheme)`
+  display: flex;
+  border-top: 1px solid ${(p) => p.theme.plugins.borderColor};
+`;
+
+const ExpandedGutter = styled.div.attrs(injectDefaultTheme)`
+  flex-shrink: 0;
+  width: ${GUTTER_WIDTH}px;
+  border-right: 1px solid ${(p) => p.theme.plugins.borderColor};
+`;
+
+const ExpandedContent = styled.pre.attrs(injectDefaultTheme)`
+  margin: 0;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 20px;
+  color: ${(p) => p.theme.sdkPresets.secondaryColor};
+  white-space: pre-wrap;
+  word-break: break-all;
+  flex: 1;
+`;
+
+const FilterSection = styled.div.attrs(injectDefaultTheme)`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid ${(p) => p.theme.plugins.borderColor};
+`;
+
+const formatTime = (date) => {
+  const h = String(date.getHours()).padStart(2, "0");
+  const m = String(date.getMinutes()).padStart(2, "0");
+  const s = String(date.getSeconds()).padStart(2, "0");
+  return `${h}:${m}:${s}`;
+};
+
+const formatCompact = (data) => {
+  if (data === undefined || data === null) return "";
+  try {
+    const str = JSON.stringify(data);
+    return str.length > 120 ? `${str.slice(0, 120)}…` : str;
+  } catch {
+    return String(data);
+  }
+};
+
+const formatExpanded = (data) => {
+  try {
+    return JSON.stringify(data, null, 2);
+  } catch {
+    return String(data);
+  }
+};
+
+const isExpandable = (data) =>
+  data !== null && data !== undefined && typeof data === "object";
+
+export const EventLogBlock = ({ events, onClear, eventTypes }) => {
+  const scrollerRef = useRef(null);
+  const [expandedIds, setExpandedIds] = useState(new Set());
+  const [hiddenEvents, setHiddenEvents] = useState(new Set());
+
+  const displayedEvents = useMemo(
+    () => events.filter((e) => !hiddenEvents.has(e.event)),
+    [events, hiddenEvents],
+  );
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [events]);
+
+  useEffect(() => {
+    if (events.length === 0) setExpandedIds(new Set());
+  }, [events.length]);
+
+  const toggle = (id) => {
+    setExpandedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleEvent = (eventName) => {
+    setHiddenEvents((prev) => {
+      const next = new Set(prev);
+      if (next.has(eventName)) next.delete(eventName);
+      else next.add(eventName);
+      return next;
+    });
+  };
+
+  return (
+    <StyledWrapper>
+      {eventTypes?.length > 0 && (
+        <FilterSection>
+          {eventTypes.map((eventName) => (
+            <Checkbox
+              key={eventName}
+              label={eventName}
+              isChecked={!hiddenEvents.has(eventName)}
+              onChange={() => toggleEvent(eventName)}
+            />
+          ))}
+        </FilterSection>
+      )}
+      <Header>
+        <HeaderTitle>Event Log</HeaderTitle>
+        {events.length > 0 && (
+          <Link type="action" fontSize="13px" onClick={onClear}>
+            Clear
+          </Link>
+        )}
+      </Header>
+      <LogScroller ref={scrollerRef}>
+        {displayedEvents.length === 0 ? (
+          <EmptyState>No events yet.</EmptyState>
+        ) : (
+          displayedEvents.map((entry) => {
+            const expandable = isExpandable(entry.data);
+            const expanded = expandedIds.has(entry.id);
+
+            return (
+              <div key={entry.id}>
+                <LogEntry
+                  $expandable={expandable}
+                  onClick={expandable ? () => toggle(entry.id) : undefined}
+                >
+                  <Gutter>
+                    <Chevron $visible={expandable} $expanded={expanded}>
+                      ▶
+                    </Chevron>
+                    <span>{formatTime(entry.timestamp)}</span>
+                  </Gutter>
+                  <EventName>{entry.event}</EventName>
+                  <Arrow>→</Arrow>
+                  <EventData>{formatCompact(entry.data)}</EventData>
+                </LogEntry>
+                {expanded && (
+                  <ExpandedRow>
+                    <ExpandedGutter />
+                    <ExpandedContent>
+                      {formatExpanded(entry.data)}
+                    </ExpandedContent>
+                  </ExpandedRow>
+                )}
+              </div>
+            );
+          })
+        )}
+      </LogScroller>
+    </StyledWrapper>
+  );
+};

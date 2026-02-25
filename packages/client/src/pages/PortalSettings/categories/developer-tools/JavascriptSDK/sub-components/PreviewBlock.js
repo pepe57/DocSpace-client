@@ -60,7 +60,8 @@ export const PreviewBlock = ({
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
   );
-  const params = objectToGetParams(config);
+  const { events: _, ...configWithoutEvents } = config;
+  const params = objectToGetParams(configWithoutEvents);
 
   const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
