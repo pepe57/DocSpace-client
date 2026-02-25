@@ -94,9 +94,10 @@ export interface IFloatingOperationsButtonClient
   pluginName: string;
 }
 
-export interface IContextMenuItemClient extends IContextMenuItem {
+export interface IContextMenuItemClient extends Omit<IContextMenuItem, "onClick"> {
   pluginName: string;
   items?: Omit<IContextMenuItemClient, "items">[];
+  onClick?: (id: number | string) => Promise<IMessage> | Promise<void> | IMessage | void;
 }
 
 export interface IMainButtonItemClient extends IMainButtonItem {
