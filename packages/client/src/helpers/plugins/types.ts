@@ -58,6 +58,8 @@ import type {
   ISettingsPlugin,
   ButtonGroup,
   IFloatingOperationsButton,
+  IPostMessageCallbackMessage,
+  IPostMessagePlugin,
 } from "@onlyoffice/docspace-plugin-sdk";
 
 import type {
@@ -71,6 +73,7 @@ import type {
 export type {
   ISettings,
   IMessage,
+  IPostMessageCallbackMessage,
   IPostMessage,
   IFrame,
   IImage,
@@ -177,4 +180,5 @@ export type TPlugin = {
   Partial<IInfoPanelPlugin> &
   Partial<IMainButtonPlugin> &
   Partial<IProfileMenuPlugin> &
-  Partial<ISettingsPlugin>;
+  Partial<ISettingsPlugin> &
+  Partial<IPostMessagePlugin>;
