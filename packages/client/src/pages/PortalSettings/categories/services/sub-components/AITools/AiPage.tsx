@@ -40,6 +40,8 @@ import BalanceAmount from "SRC_DIR/pages/PortalSettings/categories/payments/Bala
 import ServiceToggleSection from "SRC_DIR/pages/PortalSettings/categories/services/sub-components/ServiceToggleSection";
 import { finishRefreshingWithMinCycle } from "SRC_DIR/helpers/refreshing";
 
+import ConfirmationDialog from "SRC_DIR/pages/PortalSettings/categories/services/sub-components/ConfirmationDialog";
+
 import PricingBillingBody from "./sub-components/PricingBillingBody";
 import TopUpContainer from "./sub-components/TopUpContainer";
 import ModelSettingsTable from "./sub-components/ModelSettingsTable";
@@ -106,6 +108,7 @@ const AiPage = (props: AiPageProps) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isPricingBillingVisible, setIsPricingBillingVisible] = useState(false);
   const [isTopUpVisible, setIsTopUpVisible] = useState(false);
+  const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
 
   const onRefresh = async () => {
     if (isRefreshing) return;
@@ -126,7 +129,17 @@ const AiPage = (props: AiPageProps) => {
     }
   };
 
-  const onToggleChange = async () => {
+  const onToggleChange = () => {
+    setIsConfirmDialogVisible(true);
+  };
+
+  const onCloseConfirmDialog = () => {
+    setIsConfirmDialogVisible(false);
+  };
+
+  const onConfirm = async () => {
+    setIsConfirmDialogVisible(false);
+
     const raw = {
       service: AI_TOOLS,
       enabled: !isAiToolsServiceOn,
@@ -135,13 +148,57 @@ const AiPage = (props: AiPageProps) => {
     changeServiceState?.(AI_TOOLS);
 
     try {
-      await setServiceState(raw);
+      const result = await setServiceState(raw);
+
+      if (!result) {
+        toastr.error(t("Common:UnexpectedError"));
+        changeServiceState?.(AI_TOOLS);
+        return;
+      }
+
+      if (!isAiToolsServiceOn) toastr.success(t("Services:AIToolsEnabled"));
     } catch (error) {
       console.error(error);
       toastr.error(t("Common:UnexpectedError"));
       changeServiceState?.(AI_TOOLS);
     }
   };
+
+  const confirmationDialogContent = isAiToolsServiceOn
+    ? {
+        title: t("Common:Confirmation"),
+        body: [
+          t("Services:DisableAIToolsConfirm", {
+            organizationName: logoText,
+          }),
+          <Trans
+            key="DisableBalance"
+            i18nKey="Services:DisableAIToolsConfirmBalance"
+            t={t}
+            values={{
+              balance: formatAiServiceCurrency!(
+                aiServiceBalance ?? 0,
+                3,
+                aiServiceCodeCurrency!,
+              ),
+            }}
+            components={{
+              1: <span style={{ fontWeight: 600 }} />,
+            }}
+          />,
+          t("Services:DisableAIToolsConfirmReEnable"),
+        ],
+      }
+    : {
+        title: t("Common:Confirmation"),
+        body: [
+          t("Services:AIToolsDescription", {
+            productName: t("Common:ProductName"),
+            organizationName: logoText,
+          }),
+          t("Common:WantToContinue"),
+        ],
+      };
 
   const onOpenPricingBilling = () => {
     onPricingBillingClick?.();
@@ -278,6 +335,16 @@ const AiPage = (props: AiPageProps) => {
           //withAnimation
         />
       </div>
+
+      {isConfirmDialogVisible ? (
+        <ConfirmationDialog
+          visible={isConfirmDialogVisible}
+          onClose={onCloseConfirmDialog}
+          onConfirm={onConfirm}
+          title={confirmationDialogContent.title}
+          bodyText={confirmationDialogContent.body}
+        />
+      ) : null}
     </div>
   );
 };
