@@ -56,6 +56,7 @@
   "FrameId": "Frame ID",
   "GetCode": "Get code to insert",
   "Header": "Header",
+  "HelperText": "Helper text",
   "HeaderDescription": "You can disable header in the mobile version to limit access to the {{productName}} sections (just like disabling the left menu in the desktop version).",
   "HtmlCodeDescription": "Embedding {{productName}} or its part using the <script> tag. Copy the HTML code below and insert it into your HTML file.",
   "InitializeSDK": "Select one of the suggested modes, or use Custom to configure all the parameters manually.",

@@ -131,6 +131,19 @@ const Uploader = (props) => {
     },
   ];
 
+  const getDefaultSecondaryText = (isFolderUpload, isMultipleUpload) => {
+    if (isFolderUpload && isMultipleUpload) {
+      return t("Common:DropzoneFoldersSecondary");
+    }
+    if (isFolderUpload && !isMultipleUpload) {
+      return t("Common:DropzoneFolderSecondary");
+    }
+    if (!isFolderUpload && isMultipleUpload) {
+      return t("Common:DropzoneFilesSecondary");
+    }
+    return t("Common:DropzoneTitleSecondary");
+  };
+
   const [config, setConfig] = useState({
     src: window.location.origin,
     mode: "uploader",
@@ -140,7 +153,7 @@ const Uploader = (props) => {
     init: true,
     acceptExtensions: FILE_TYPE_EXTENSIONS.document.join(","),
     linkMainText: t("Common:Upload"),
-    secondaryText: "",
+    secondaryText: getDefaultSecondaryText(false, false),
     id: myFolderId,
     isFolderUpload: false,
     isMultipleUpload: false,
@@ -241,6 +254,26 @@ const Uploader = (props) => {
       linkMainText: newText,
     }));
     debouncedSetLinkFilesText(newText);
+  };
+
+  const debouncedSetSecondaryText = useCallback(
+    debounce((newText) => {
+      setConfig((oldConfig) => ({
+        ...oldConfig,
+        secondaryText: newText,
+        init: true,
+      }));
+    }, 500),
+    [setConfig],
+  );
+
+  const onChangeSecondaryText = (e) => {
+    const newText = e.target.value;
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      secondaryText: newText,
+    }));
+    debouncedSetSecondaryText(newText);
   };
 
   const getSelectedExtensions = () => {
@@ -348,10 +381,12 @@ const Uploader = (props) => {
               selected={uploadMode}
               onClick={(e) => {
                 const value = e.target.value;
+                const isFolderUpload = value === "folders";
                 setUploadMode(value);
                 setConfig((oldConfig) => ({
                   ...oldConfig,
-                  isFolderUpload: value === "folders",
+                  isFolderUpload,
+                  secondaryText: getDefaultSecondaryText(isFolderUpload, oldConfig.isMultipleUpload),
                   init: true,
                 }));
               }}
@@ -369,10 +404,12 @@ const Uploader = (props) => {
               selected={uploadQuantity}
               onClick={(e) => {
                 const value = e.target.value;
+                const isMultipleUpload = value === "multiple";
                 setUploadQuantity(value);
                 setConfig((oldConfig) => ({
                   ...oldConfig,
-                  isMultipleUpload: value === "multiple",
+                  isMultipleUpload,
+                  secondaryText: getDefaultSecondaryText(oldConfig.isFolderUpload, isMultipleUpload),
                   init: true,
                 }));
               }}
@@ -419,6 +456,17 @@ const Uploader = (props) => {
                 onChange={onChangeLinkFileText}
                 tabIndex={5}
                 testId="button_text_input"
+              />
+            </ControlsGroup>
+
+            <ControlsGroup>
+              <Label className="label" text={t("HelperText")} />
+              <TextInput
+                scale
+                value={config.secondaryText}
+                onChange={onChangeSecondaryText}
+                tabIndex={6}
+                testId="helper_text_input"
               />
             </ControlsGroup>
 
