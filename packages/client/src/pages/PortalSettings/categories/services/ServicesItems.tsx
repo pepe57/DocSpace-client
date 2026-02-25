@@ -88,6 +88,7 @@ type ServicesItemsProps = {
     fractionDigits?: number,
   ) => string;
   aiServiceBalance?: number;
+  isAiServiceLowBalance?: boolean;
 };
 
 const ServicesItems: React.FC<ServicesItemsProps> = ({
@@ -111,6 +112,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
   formatWalletCurrency,
   formatAiServiceCurrency,
   aiServiceBalance,
+  isAiServiceLowBalance,
 }) => {
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
   const { t } = useServicesActions();
@@ -227,7 +229,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 image={item.image}
                 isEnabled={hasStorageSubscription}
               >
-                {hasScheduledStorageChange ? (
+                {isAiServiceLowBalance ? (
                   <div
                     className={classNames(styles.changeShedule, {
                       [styles.warningColor]: true,
@@ -236,16 +238,10 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                   >
                     <InfoIcon />
                     <Text fontWeight={600} fontSize="12px">
-                      {t("ChangeShedule")}
+                      {t("Services:AIPricingAvailableCreditsLowBalance", {
+                        price: formatAiServiceCurrency!(),
+                      })}
                     </Text>
-                    <Tooltip
-                      id="serviceTooltip"
-                      place="bottom"
-                      maxWidth="300px"
-                      float
-                      getContent={textTooltip}
-                      dataTestId="service_change_shedule_tooltip"
-                    />
                   </div>
                 ) : null}
 
@@ -371,7 +367,8 @@ export default inject(
       formatWalletCurrency,
     } = paymentStore;
 
-    const { aiServiceBalance, formatAiServiceCurrency } = servicesStore;
+    const { aiServiceBalance, formatAiServiceCurrency, isAiServiceLowBalance } =
+      servicesStore;
     const {
       currentStoragePlanSize,
       nextStoragePlanSize,
@@ -406,6 +403,7 @@ export default inject(
       formatWalletCurrency,
       formatAiServiceCurrency,
       aiServiceBalance,
+      isAiServiceLowBalance,
     };
   },
 )(observer(ServicesItems));

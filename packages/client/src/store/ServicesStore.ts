@@ -148,6 +148,12 @@ class ServicesStore {
     return 0.0;
   }
 
+  get isAiServiceLowBalance() {
+    if (!this.wasFirstAiServiceTopUp) return false;
+
+    return this.aiServiceBalance < 1;
+  }
+
   get aiServiceCodeCurrency() {
     if (this.aiToolsBalance && this.aiToolsBalance.subAccounts.length > 0)
       return this.aiToolsBalance.subAccounts[0].currency;
