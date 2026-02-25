@@ -245,7 +245,9 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                   </div>
                 ) : null}
 
-                {aiServiceBalance && aiServiceBalance > 0 ? (
+                {aiServiceBalance &&
+                aiServiceBalance > 0 &&
+                !isAiServiceLowBalance ? (
                   <div
                     className={classNames(styles.changeShedule, {
                       [styles.greenColor]: true,
