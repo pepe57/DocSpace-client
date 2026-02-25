@@ -18,7 +18,7 @@
   "AIPricingAvailableCredits": "Available credits: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Available credits: {{price}}. Low balance",
   "AIPricingBilledPerTokenUsage": "Billed per token usage",
-  "AIPricingFeeNote": "* Model pricing + 20% service fee",
+  "AIPricingFeeNote": "* <1>OpenRouter pricing</1> + 20% service fee",
   "AIPricingInputTokens": "Input tokens",
   "AIPricingInputTokensPrice": "from {{price}}* , <1>per 1M tokens</1>",
   "AIPricingIntro": "AI features are pay-as-you-go. Credits are deducted from your balance based on actual usage.",

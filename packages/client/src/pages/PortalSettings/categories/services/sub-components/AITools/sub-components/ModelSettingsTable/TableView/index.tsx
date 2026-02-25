@@ -61,7 +61,6 @@ const TableView = (props: ModelSettingsTableViewProps) => {
               <Link
                 fontWeight={600}
                 fontSize="12px"
-                className={styles.servicesLink}
                 textDecoration="underline"
                 href="https://openrouter.ai/models"
                 target={LinkTarget.blank}

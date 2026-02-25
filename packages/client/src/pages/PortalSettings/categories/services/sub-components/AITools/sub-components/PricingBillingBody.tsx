@@ -15,6 +15,8 @@ import type { TAiToolsPrices } from "SRC_DIR/store/ServicesStore";
 import {
   Button,
   ButtonSize,
+  Link,
+  LinkTarget,
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components";
@@ -135,7 +137,25 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
               </div>
             </div>
 
-            <Text className={styles.pricingNote}>{t("AIPricingFeeNote")}</Text>
+            <Text className={styles.pricingNote}>
+              <Trans
+                t={t}
+                ns="Services"
+                i18nKey="AIPricingFeeNote"
+                components={{
+                  1: (
+                    <Link
+                      fontWeight={600}
+                      fontSize="12px"
+                      textDecoration="underline"
+                      href="https://openrouter.ai/models"
+                      target={LinkTarget.blank}
+                      className={styles.pricingNote}
+                    />
+                  ),
+                }}
+              />
+            </Text>
           </div>
 
           <div className={styles.pricingSection}>

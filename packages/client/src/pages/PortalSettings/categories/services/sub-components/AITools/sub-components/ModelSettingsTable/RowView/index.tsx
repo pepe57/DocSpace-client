@@ -50,7 +50,6 @@ const RowView = (props: ModelSettingsRowViewProps) => {
               <Link
                 fontWeight={600}
                 fontSize="12px"
-                className={styles.servicesLink}
                 textDecoration="underline"
                 href="https://openrouter.ai/models"
                 target={LinkTarget.blank}
