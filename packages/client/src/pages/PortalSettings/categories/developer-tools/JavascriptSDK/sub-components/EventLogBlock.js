@@ -207,7 +207,7 @@ const formatCompact = (data) => {
   if (data === undefined || data === null) return "";
   try {
     const str = JSON.stringify(data);
-    return str.length > 120 ? `${str.slice(0, 120)}…` : str;
+    return str.length > 120 ? `${str.slice(0, 120)}\u2026` : str;
   } catch {
     return String(data);
   }
@@ -275,7 +275,6 @@ export const EventLogBlock = ({ events, onClear, eventTypes }) => {
             <FilterButtonWrapper ref={filterButtonRef}>
               <IconButton
                 size={16}
-                title="Filter events"
                 color={hasHidden ? globalColors.lightBlueMain : undefined}
                 onClick={() => setFilterOpen((v) => !v)}
                 iconName={VerticalDotsReactSvgUrl}
@@ -324,7 +323,7 @@ export const EventLogBlock = ({ events, onClear, eventTypes }) => {
                 >
                   <Gutter>
                     <Chevron $visible={expandable} $expanded={expanded}>
-                      ▶
+                      {"\u25B6"}
                     </Chevron>
                     <span>{formatTime(entry.timestamp)}</span>
                   </Gutter>
