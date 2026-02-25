@@ -71,14 +71,12 @@ type TAiToolsEmbeddingModelPrice = {
   price: TAiToolsEmbeddingPrice;
 };
 
-type TAiToolsWebSearchPrices = {
-  search: number;
+type TAiToolsWebSearchPrice = {
+  id: string;
+  alias: string;
   provider: string;
-  searchAlias: string;
-  contentsAlias: string;
-  searchImage: string;
-  crawlingImage: string;
-  contents: number;
+  image: string;
+  price: number;
 };
 
 export type TAiToolsPrices = {
@@ -88,7 +86,7 @@ export type TAiToolsPrices = {
   };
   chat?: TAiToolsChatModelPrice[];
   embedding?: TAiToolsEmbeddingModelPrice[];
-  webSearch?: TAiToolsWebSearchPrices;
+  webSearch?: TAiToolsWebSearchPrice[];
 };
 
 class ServicesStore {
@@ -220,8 +218,9 @@ class ServicesStore {
       inputValues.push(model.price?.prompt);
     }
 
-    inputValues.push(this.aiToolsPrices?.webSearch?.search);
-    inputValues.push(this.aiToolsPrices?.webSearch?.contents);
+    for (const ws of this.aiToolsPrices?.webSearch ?? []) {
+      inputValues.push(ws.price);
+    }
 
     const values = inputValues.filter((v): v is number => Number.isFinite(v));
 
