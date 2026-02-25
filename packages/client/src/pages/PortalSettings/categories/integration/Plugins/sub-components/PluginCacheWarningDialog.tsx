@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import {
   ModalDialog,
@@ -53,7 +53,16 @@ const PluginCacheWarningDialog = ({
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>{t("WebPlugins:PluginCacheWarningDescription")}</Text>
+        <Text>
+          <Trans
+            t={t}
+            i18nKey="PluginCacheWarningDescription"
+            ns="WebPlugins"
+            components={{
+              1: <Text as="span" fontWeight={600} />,
+            }}
+          />
+        </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
