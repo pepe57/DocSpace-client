@@ -13,6 +13,7 @@ import styles from "./ModelSettingsRowView.module.scss";
 
 type ModelSettingsRowViewProps = {
   sectionWidth: number;
+  isDisabled: boolean;
   aiToolsPrices?: TAiToolsPrices | null;
   formatAiModelsCurrency?: (amount: number) => string;
   setAiModelAvailability?: (modelId: string, enabled: boolean) => Promise<void>;
@@ -27,6 +28,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
+    isDisabled,
   } = props;
 
   const models = aiToolsPrices?.chat ?? [];
@@ -119,7 +121,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
                 <ToggleButton
                   isChecked={enabled}
                   onChange={() => onToggle(m.id, !enabled)}
-                  isDisabled={isUpdating}
+                  isDisabled={isDisabled || isUpdating}
                   dataTestId={`ai_model_toggle_${m.id}`}
                 />
               </div>

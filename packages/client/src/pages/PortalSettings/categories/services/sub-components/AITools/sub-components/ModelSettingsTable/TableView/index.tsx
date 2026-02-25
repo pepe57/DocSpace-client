@@ -24,6 +24,7 @@ type ModelSettingsTableViewProps = {
   aiModelAvailabilityMap?: Map<string, boolean>;
   aiModelAvailabilityUpdatingSet?: Set<string>;
   userId?: string;
+  isDisabled: boolean;
 };
 
 const TableView = (props: ModelSettingsTableViewProps) => {
@@ -35,6 +36,7 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     aiModelAvailabilityUpdatingSet,
     userId,
     sectionWidth,
+    isDisabled,
   } = props;
 
   const models = aiToolsPrices?.chat ?? [];
@@ -104,6 +106,7 @@ const TableView = (props: ModelSettingsTableViewProps) => {
               isUpdating={aiModelAvailabilityUpdatingSet?.has(m.id) ?? false}
               onToggle={onToggle}
               image={m.image}
+              isDisabled={isDisabled}
             />
           ))}
         </TableBody>

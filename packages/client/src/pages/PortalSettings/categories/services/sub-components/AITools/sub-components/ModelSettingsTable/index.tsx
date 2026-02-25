@@ -12,12 +12,14 @@ type ModelSettingsTableProps = {
   viewAs?: string;
   setViewAs?: (view: string) => void;
   currentDeviceType?: DeviceType;
+  isDisabled: boolean;
 };
 
 const ModelSettingsTable = ({
   viewAs,
   setViewAs,
   currentDeviceType,
+  isDisabled,
 }: ModelSettingsTableProps) => {
   useViewEffect({
     view: viewAs!,
@@ -29,9 +31,15 @@ const ModelSettingsTable = ({
     <Consumer>
       {(context) =>
         viewAs === "table" ? (
-          <TableView sectionWidth={context.sectionWidth || 0} />
+          <TableView
+            sectionWidth={context.sectionWidth || 0}
+            isDisabled={isDisabled}
+          />
         ) : (
-          <RowView sectionWidth={context.sectionWidth || 0} />
+          <RowView
+            sectionWidth={context.sectionWidth || 0}
+            isDisabled={isDisabled}
+          />
         )
       }
     </Consumer>

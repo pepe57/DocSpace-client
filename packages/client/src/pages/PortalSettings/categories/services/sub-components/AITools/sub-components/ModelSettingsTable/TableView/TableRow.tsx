@@ -10,6 +10,7 @@ type ModelSettingsRowProps = {
   modelId: string;
   image: string;
   title: string;
+  isDisabled: boolean;
   provider?: string;
   inputPrice: string;
   outputPrice?: string;
@@ -28,6 +29,7 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
   isUpdating,
   onToggle,
   image,
+  isDisabled,
 }) => {
   const onChange = useCallback(() => {
     void onToggle(modelId, !enabled);
@@ -80,7 +82,7 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
           <ToggleButton
             isChecked={enabled}
             onChange={onChange}
-            isDisabled={isUpdating}
+            isDisabled={isDisabled || isUpdating}
             dataTestId={`ai_model_toggle_${modelId}`}
           />
         </div>

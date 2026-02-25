@@ -82,6 +82,9 @@ type AiPageProps = {
   aiServiceLastCreditDate?: string;
   isAiServiceLowBalance?: boolean;
   isInitAiPage?: boolean;
+  cardLinkedOnFreeTariff?: boolean;
+  isFreeTariff?: boolean;
+  isPayer?: boolean;
 };
 
 const AiPage = (props: AiPageProps) => {
@@ -102,6 +105,9 @@ const AiPage = (props: AiPageProps) => {
     language,
     isAiServiceLowBalance,
     isInitAiPage,
+    cardLinkedOnFreeTariff,
+    isFreeTariff,
+    isPayer,
   } = props;
 
   const { t } = useTranslation("Services");
@@ -111,6 +117,8 @@ const AiPage = (props: AiPageProps) => {
   const [isPricingBillingVisible, setIsPricingBillingVisible] = useState(false);
   const [isTopUpVisible, setIsTopUpVisible] = useState(false);
   const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
+
+  const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
 
   const onRefresh = async () => {
     if (isRefreshing) return;
@@ -234,7 +242,7 @@ const AiPage = (props: AiPageProps) => {
     {
       id: "model-settings",
       name: t("ModelSettings"),
-      content: <ModelSettingsTable />,
+      content: <ModelSettingsTable isDisabled={isDisabled} />,
     },
   ];
 
@@ -261,6 +269,7 @@ const AiPage = (props: AiPageProps) => {
           title={t("EnableOrganizationAI", { organizationName: logoText })}
           description={t("EnableAIDescription")}
           testId="service-ai-toggle-button"
+          isDisabled={isDisabled}
         />
       </div>
 
@@ -286,6 +295,7 @@ const AiPage = (props: AiPageProps) => {
             onClick={onOpenTopUp}
             scale
             testId="top_up_credits_button"
+            isDisabled={isDisabled}
           />
         </div>
       </div>
@@ -354,9 +364,20 @@ const AiPage = (props: AiPageProps) => {
 };
 
 export default inject(
-  ({ servicesStore, paymentStore, settingsStore, authStore }: TStore) => {
-    const { fetchTransactionHistory, changeServiceState, isAiToolsServiceOn } =
-      paymentStore;
+  ({
+    servicesStore,
+    paymentStore,
+    settingsStore,
+    authStore,
+    currentQuotaStore,
+  }: TStore) => {
+    const {
+      fetchTransactionHistory,
+      changeServiceState,
+      isAiToolsServiceOn,
+      cardLinkedOnFreeTariff,
+      isPayer,
+    } = paymentStore;
     const { logoText } = settingsStore;
     const { language } = authStore;
     const {
@@ -370,7 +391,7 @@ export default inject(
       isAiServiceLowBalance,
       isInitAiPage,
     } = servicesStore;
-
+    const { isFreeTariff } = currentQuotaStore;
     return {
       aiServiceBalance,
       aiServiceCodeCurrency,
@@ -386,6 +407,9 @@ export default inject(
       changeServiceState,
       isAiToolsServiceOn,
       isInitAiPage,
+      cardLinkedOnFreeTariff,
+      isPayer,
+      isFreeTariff,
     };
   },
 )(observer(AiPage));
