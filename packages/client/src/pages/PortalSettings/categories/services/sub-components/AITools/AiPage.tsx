@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
@@ -230,22 +230,30 @@ const AiPage = (props: AiPageProps) => {
       </div>
       <div className={styles.lastTopUpRow}>
         {aiServiceLastCreditAmount ? (
-          <Text
-            className={styles.lastTopUpLabel}
-            fontSize="13px"
-            fontWeight={600}
-          >
-            {t("LastTopUp", {
-              currency: formatAiServiceCurrency!(
-                aiServiceLastCreditAmount,
-                3,
-                aiServiceLastCreditCurrency!,
-              ),
-              date: formatDateLocalized(aiServiceLastCreditDate, "DATE_FULL", {
-                locale: language,
-                timezone: getAppTimezone(),
-              }),
-            })}
+          <Text className={styles.lastTopUpLabel} fontWeight={600}>
+            <Trans
+              t={t}
+              ns="Services"
+              i18nKey="LastTopUp"
+              components={{
+                1: <Text fontWeight={600} as="span" />,
+              }}
+              values={{
+                currency: formatAiServiceCurrency!(
+                  aiServiceLastCreditAmount,
+                  3,
+                  aiServiceLastCreditCurrency!,
+                ),
+                date: formatDateLocalized(
+                  aiServiceLastCreditDate,
+                  "DATE_FULL",
+                  {
+                    locale: language,
+                    timezone: getAppTimezone(),
+                  },
+                ),
+              }}
+            />
           </Text>
         ) : null}
 
