@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -42,6 +42,7 @@ import { finishRefreshingWithMinCycle } from "SRC_DIR/helpers/refreshing";
 
 import ConfirmationDialog from "SRC_DIR/pages/PortalSettings/categories/services/sub-components/ConfirmationDialog";
 
+import AiPageLoader from "./AiPageLoader";
 import PricingBillingBody from "./sub-components/PricingBillingBody";
 import TopUpContainer from "./sub-components/TopUpContainer";
 import ModelSettingsTable from "./sub-components/ModelSettingsTable";
@@ -81,6 +82,7 @@ type AiPageProps = {
   ) => string;
   aiServiceLastCreditDate?: string;
   isAiServiceLowBalance?: boolean;
+  isInitAiPage?: boolean;
 };
 
 const AiPage = (props: AiPageProps) => {
@@ -100,6 +102,7 @@ const AiPage = (props: AiPageProps) => {
     aiServiceLastCreditDate,
     language,
     isAiServiceLowBalance,
+    isInitAiPage,
   } = props;
 
   const { t } = useTranslation("Services");
@@ -236,6 +239,8 @@ const AiPage = (props: AiPageProps) => {
     },
   ];
 
+  if (!isInitAiPage) return null;
+
   return (
     <div className={styles.container}>
       <PricingBillingBody
@@ -364,6 +369,7 @@ export default inject(
       formatAiServiceCurrency,
       aiServiceLastCreditDate,
       isAiServiceLowBalance,
+      isInitAiPage,
     } = servicesStore;
 
     return {
@@ -380,6 +386,7 @@ export default inject(
       isAiServiceLowBalance,
       changeServiceState,
       isAiToolsServiceOn,
+      isInitAiPage,
     };
   },
 )(observer(AiPage));

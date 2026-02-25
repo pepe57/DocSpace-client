@@ -100,6 +100,8 @@ class ServicesStore {
 
   isInitServicesPage = false;
 
+  isInitAiPage = false;
+
   isVisibleWalletSettings = false;
 
   partialUpgradeFee: number = 0;
@@ -254,6 +256,10 @@ class ServicesStore {
     this.isInitServicesPage = isInitServicesPage;
   };
 
+  setIsInitAiPage = (isInitAiPage: boolean) => {
+    this.isInitAiPage = isInitAiPage;
+  };
+
   fetchAiPrices = async () => {
     try {
       const res = await getAiPrices();
@@ -400,6 +406,8 @@ class ServicesStore {
   aiServicesinit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
 
+    this.setIsInitAiPage(false);
+
     const {
       fetchTransactionHistory,
       initWalletPayerAndBalance,
@@ -420,6 +428,8 @@ class ServicesStore {
     } catch (error) {
       console.error(error);
       toastr.error(t("Common:UnexpectedError"));
+    } finally {
+      this.setIsInitAiPage(true);
     }
   };
 
