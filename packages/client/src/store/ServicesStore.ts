@@ -81,7 +81,10 @@ type TAiToolsWebSearchPrices = {
 };
 
 export type TAiToolsPrices = {
-  currency?: string;
+  currency?: {
+    code: string;
+    symbol: string;
+  };
   chat?: TAiToolsChatModelPrice[];
   embedding?: TAiToolsEmbeddingModelPrice[];
   webSearch?: TAiToolsWebSearchPrices;
@@ -192,15 +195,17 @@ class ServicesStore {
   }
 
   get aiModelsCurrency() {
-    if (!this.aiToolsPrices?.currency) return "USD";
+    const currency = this.aiToolsPrices?.currency;
+    if (!currency) return "USD";
 
-    return this.aiToolsPrices.currency;
+    return currency.code ?? "USD";
   }
 
   get aiModelsCurrencySymbol() {
-    if (!this.aiToolsPrices?.currencySymbol) return "$";
+    const currency = this.aiToolsPrices?.currency;
+    if (!currency) return "$";
 
-    return this.aiToolsPrices.currencySymbol;
+    return currency.symbol ?? "$";
   }
 
   get minimumInputPrice() {
@@ -231,7 +236,7 @@ class ServicesStore {
   }
 
   get wasFirstAiServiceTopUp() {
-    return false;
+    // return false;
     if (!this.aiToolsBalance) return false;
 
     return this.aiToolsBalance.subAccounts.length !== 0;
