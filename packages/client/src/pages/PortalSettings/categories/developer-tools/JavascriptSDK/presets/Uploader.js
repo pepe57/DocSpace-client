@@ -360,10 +360,10 @@ const Uploader = (props) => {
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
-                {myFolderId && (
+                {config.id && (
                   <FilesSelectorInput
-                    key={myFolderId}
-                    id={myFolderId}
+                    key={config.id}
+                    id={config.id}
                     onSelectFolder={onChangeFolderId}
                     isSelect
                   />
