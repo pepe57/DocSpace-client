@@ -24,19 +24,10 @@
   overflow: hidden;
 }
 
-.balanceMajor {
-  font-size: 44px;
-  line-height: 60px;
-  font-weight: 700;
-  color: var(--text-color);
+.lowBalance{
+  color: var(--warning-color);
 }
 
-.balanceMinor {
-  font-size: 28px;
-  line-height: 38px;
-  font-weight: 700;
-  color: var(--text-color);
-}
 
 .lastTopUpRow {
   display: flex;

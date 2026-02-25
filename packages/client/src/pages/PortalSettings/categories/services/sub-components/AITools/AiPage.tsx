@@ -82,7 +82,7 @@ type AiPageProps = {
     currency: string,
   ) => string;
   aiServiceLastCreditDate?: string;
-  language?: string;
+  isAiServiceLowBalance?: boolean;
 };
 
 const AiPage = (props: AiPageProps) => {
@@ -101,6 +101,7 @@ const AiPage = (props: AiPageProps) => {
     formatAiServiceCurrency,
     aiServiceLastCreditDate,
     language,
+    isAiServiceLowBalance,
   } = props;
 
   const { t } = useTranslation("Services");
@@ -193,6 +194,11 @@ const AiPage = (props: AiPageProps) => {
         />
       </div>
 
+      {isAiServiceLowBalance ? (
+        <Text fontSize="15px" fontWeight={700} className={styles.lowBalance}>
+          {t("LowBalance")}
+        </Text>
+      ) : null}
       <div className={styles.balanceSection}>
         <div className={styles.balanceCard}>
           <BalanceAmount
@@ -271,6 +277,7 @@ export default inject(
       aiServiceLastCreditCurrency,
       formatAiServiceCurrency,
       aiServiceLastCreditDate,
+      isAiServiceLowBalance,
     } = servicesStore;
 
     return {
@@ -284,6 +291,7 @@ export default inject(
       formatAiServiceCurrency,
       aiServiceLastCreditDate,
       language,
+      isAiServiceLowBalance,
     };
   },
 )(observer(AiPage));
