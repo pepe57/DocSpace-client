@@ -55,7 +55,7 @@
   "ImageGeneration": "Image generation",
   "ImageGenerationDescription": "Design original images and illustrations using AI for your documents.",
   "InputCurrency": "Input ({{currency}}/1M)",
-  "LastTopUp": "Last top-up:",
+  "LastTopUp": "Last top-up: {{currency}} on {{date}}.",
   "Model": "Model",
   "ModelSettings": "Model settings",
   "OCR": "OCR",

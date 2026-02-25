@@ -170,11 +170,25 @@ class ServicesStore {
     return "USD";
   }
 
-  get aiServiceLastTopUp() {
-    if (this.aiToolsBalance && this.aiToolsBalance.subAccounts.length > 0)
-      return this.aiToolsBalance.subAccounts[0].lastTopUp;
+  get aiServiceLastCreditAmount() {
+    if (!this.aiToolsBalance || typeof this.aiToolsBalance === "number")
+      return null;
 
-    return "";
+    return this.aiToolsBalance.lastCredit?.amount ?? null;
+  }
+
+  get aiServiceLastCreditCurrency() {
+    if (!this.aiToolsBalance || typeof this.aiToolsBalance === "number")
+      return "";
+
+    return this.aiToolsBalance.lastCredit?.currency ?? "USD";
+  }
+
+  get aiServiceLastCreditDate() {
+    if (!this.aiToolsBalance || typeof this.aiToolsBalance === "number")
+      return null;
+
+    return this.aiToolsBalance.lastCredit?.date ?? null;
   }
 
   get aiModelsCurrency() {
@@ -324,17 +338,13 @@ class ServicesStore {
   formatAiServiceCurrency = (
     item: number | null = null,
     fractionDigits: number = 3,
+    currency: string = this.aiServiceCodeCurrency,
   ) => {
     const { language } = authStore;
 
     const amount = item ?? this.aiServiceBalance;
 
-    return formatCurrencyValue(
-      language,
-      amount,
-      this.aiServiceCodeCurrency,
-      fractionDigits,
-    );
+    return formatCurrencyValue(language, amount, currency, fractionDigits);
   };
 
   fetchAiServiceBalance = async (isRefresh?: boolean) => {

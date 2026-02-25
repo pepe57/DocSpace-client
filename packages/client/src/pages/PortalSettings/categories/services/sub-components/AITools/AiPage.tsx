@@ -50,10 +50,15 @@ import TopUpContainer from "./sub-components/TopUpContainer";
 import ModelSettingsTable from "./sub-components/ModelSettingsTable";
 
 import styles from "./AiPage.module.scss";
+import {
+  formatDateLocalized,
+  getAppTimezone,
+} from "@docspace/ui-kit/utils/date";
+import { authStore } from "@docspace/shared/store";
 
 type AiPageProps = {
-  aiServiceCodeCurrency: string;
-  aiServiceBalance: number;
+  aiServiceCodeCurrency?: string;
+  aiServiceBalance?: number;
   isEnabled?: boolean;
   onToggle?: (id: string, enabled: boolean) => void;
   onTopUpClick?: () => void;
@@ -61,15 +66,23 @@ type AiPageProps = {
   language?: string;
   fetchAiServiceBalance?: () => Promise<void>;
   fetchTransactionHistory?: (
-    startDate: DateTime | null,
-    endDate: DateTime | null,
-    credit: boolean,
-    debit: boolean,
+    startDate?: string | null,
+    endDate?: string | null,
+    credit?: boolean,
+    debit?: boolean,
     participantName?: string,
     serviceName?: string,
   ) => Promise<void>;
   logoText?: string;
-  aiServiceLastTopUp?: string;
+  aiServiceLastCreditAmount?: number | null;
+  aiServiceLastCreditCurrency?: string;
+  formatAiServiceCurrency?: (
+    amount: number,
+    fractionDigits: number,
+    currency: string,
+  ) => string;
+  aiServiceLastCreditDate?: string;
+  language?: string;
 };
 
 const AiPage = (props: AiPageProps) => {
@@ -83,7 +96,11 @@ const AiPage = (props: AiPageProps) => {
     fetchAiServiceBalance,
     fetchTransactionHistory,
     logoText,
-    aiServiceLastTopUp,
+    aiServiceLastCreditAmount,
+    aiServiceLastCreditCurrency,
+    formatAiServiceCurrency,
+    aiServiceLastCreditDate,
+    language,
   } = props;
 
   const { t } = useTranslation("Services");
@@ -197,20 +214,26 @@ const AiPage = (props: AiPageProps) => {
         </div>
       </div>
       <div className={styles.lastTopUpRow}>
-        <Text
-          className={styles.lastTopUpLabel}
-          fontSize="13px"
-          fontWeight={600}
-        >
-          {t("LastTopUp")}
-        </Text>
-        <Text
-          className={styles.lastTopUpValue}
-          fontSize="14px"
-          fontWeight={600}
-        >
-          {aiServiceLastTopUp ? aiServiceLastTopUp : "—"}
-        </Text>
+        {aiServiceLastCreditAmount ? (
+          <Text
+            className={styles.lastTopUpLabel}
+            fontSize="13px"
+            fontWeight={600}
+          >
+            {t("LastTopUp", {
+              currency: formatAiServiceCurrency!(
+                aiServiceLastCreditAmount,
+                3,
+                aiServiceLastCreditCurrency!,
+              ),
+              date: formatDateLocalized(aiServiceLastCreditDate, "DATE_FULL", {
+                locale: language,
+                timezone: getAppTimezone(),
+              }),
+            })}
+          </Text>
+        ) : null}
+
         <Link
           className={styles.pricingLink}
           onClick={onOpenPricingBilling}
@@ -236,15 +259,18 @@ const AiPage = (props: AiPageProps) => {
 };
 
 export default inject(
-  ({ servicesStore, paymentStore, settingsStore }: TStore) => {
+  ({ servicesStore, paymentStore, settingsStore, authStore }: TStore) => {
     const { fetchTransactionHistory } = paymentStore;
     const { logoText } = settingsStore;
-
+    const { language } = authStore;
     const {
       aiServiceCodeCurrency,
       aiServiceBalance,
       fetchAiServiceBalance,
-      aiServiceLastTopUp,
+      aiServiceLastCreditAmount,
+      aiServiceLastCreditCurrency,
+      formatAiServiceCurrency,
+      aiServiceLastCreditDate,
     } = servicesStore;
 
     return {
@@ -253,7 +279,11 @@ export default inject(
       fetchAiServiceBalance,
       fetchTransactionHistory,
       logoText,
-      aiServiceLastTopUp,
+      aiServiceLastCreditAmount,
+      aiServiceLastCreditCurrency,
+      formatAiServiceCurrency,
+      aiServiceLastCreditDate,
+      language,
     };
   },
 )(observer(AiPage));
