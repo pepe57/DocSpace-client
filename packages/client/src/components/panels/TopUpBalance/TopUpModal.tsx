@@ -41,12 +41,20 @@ import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
 import { AmountProvider } from "../../../pages/PortalSettings/categories/payments/Wallet/context";
 import styles from "./styles/TopUpModal.module.scss";
 import { saveDeposite } from "@docspace/shared/api/portal";
+import type { DateTime } from "luxon";
 
 type TopUpModalProps = {
   visible: boolean;
   currency?: string;
   balanceValue?: string;
-  fetchTransactionHistory?: () => Promise<void>;
+  fetchTransactionHistory?: (
+    startDate?: DateTime | null,
+    endDate?: DateTime | null,
+    credit?: boolean,
+    debit?: boolean,
+    participantName?: string,
+    serviceName?: string,
+  ) => Promise<void>;
   walletCustomerEmail?: boolean;
   fetchBalance?: () => Promise<void>;
   onClose: (isTopUp: boolean) => void;
@@ -66,6 +74,7 @@ type TopUpModalProps = {
   walletCustomerStatusNotActive?: boolean;
   formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
   afterTopUp?: () => void;
+  serviceName?: string;
 };
 
 const TopUpModal = (props: TopUpModalProps) => {
@@ -86,6 +95,7 @@ const TopUpModal = (props: TopUpModalProps) => {
     walletCustomerStatusNotActive,
     formatWalletCurrency,
     afterTopUp,
+    serviceName,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -93,6 +103,10 @@ const TopUpModal = (props: TopUpModalProps) => {
   const balanceValue = formatWalletCurrency!();
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const onFetchHistory = async () => {
+    await fetchTransactionHistory?.(null, null, true, true, "", serviceName);
+  };
 
   return (
     <AmountProvider initialAmount={reccomendedAmount}>
@@ -137,7 +151,7 @@ const TopUpModal = (props: TopUpModalProps) => {
           <TopUpButtons
             currency={currency}
             fetchBalance={fetchBalance}
-            fetchTransactionHistory={fetchTransactionHistory}
+            fetchTransactionHistory={onFetchHistory}
             onClose={onClose}
             walletCustomerEmail={walletCustomerEmail}
             setIsLoading={setIsLoading}
