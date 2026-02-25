@@ -261,14 +261,34 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                 ) : null,
               )}
             </div>
+            <Text className={styles.pricingNote}>
+              {t("AIPricingFeeNoteWithoutLink")}
+            </Text>
           </div>
 
           <div className={styles.modelListSection}>
             <Text className={styles.modelListTitle}>
               {t("AIModelListTitle")}
             </Text>
-            <Text className={styles.modelListSubtitle}>
-              {t("AIModelListSubtitle")}
+
+            <Text className={styles.pricingNote}>
+              <Trans
+                t={t}
+                ns="Services"
+                i18nKey="AIPricingFeeNoteUsage"
+                components={{
+                  1: (
+                    <Link
+                      fontWeight={600}
+                      fontSize="12px"
+                      textDecoration="underline"
+                      href="https://openrouter.ai/models"
+                      target={LinkTarget.blank}
+                      className={styles.pricingNote}
+                    />
+                  ),
+                }}
+              />
             </Text>
 
             <div className={styles.modelList}>
