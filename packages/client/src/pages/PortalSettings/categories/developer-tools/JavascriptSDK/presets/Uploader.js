@@ -85,23 +85,39 @@ const Uploader = (props) => {
     {
       value: "files",
       label: (
-        <>
-          {t("Common:Files")}{" "}
-          <Text as="span" color="gray">
-            ({t("Common:UploadFilesDescription")})
-          </Text>
-        </>
+        <LabelGroup>
+          {t("Common:Files")}
+          <HelpButton
+            offsetRight={0}
+            size={12}
+            place="right"
+            tooltipContent={
+              <Text fontSize="12px">
+                {t("Common:UploadFilesDescription")}
+              </Text>
+            }
+            dataTestId="upload_files_help_button"
+          />
+        </LabelGroup>
       ),
     },
     {
       value: "folders",
       label: (
-        <>
-          {t("Common:Folders")}{" "}
-          <Text as="span" color="gray">
-            ({t("Common:UploadFoldersDescription")})
-          </Text>
-        </>
+        <LabelGroup>
+          {t("Common:Folders")}
+          <HelpButton
+            offsetRight={0}
+            size={12}
+            place="right"
+            tooltipContent={
+              <Text fontSize="12px">
+                {t("Common:UploadFoldersDescription")}
+              </Text>
+            }
+            dataTestId="upload_folders_help_button"
+          />
+        </LabelGroup>
       ),
     },
   ];
@@ -110,23 +126,39 @@ const Uploader = (props) => {
     {
       value: "single",
       label: (
-        <>
-          {t("Common:SingleFile")}{" "}
-          <Text as="span" color="gray">
-            ({t("Common:SingleFileDescription")})
-          </Text>
-        </>
+        <LabelGroup>
+          {t("Common:SingleFile")}
+          <HelpButton
+            offsetRight={0}
+            size={12}
+            place="right"
+            tooltipContent={
+              <Text fontSize="12px">
+                {t("Common:SingleFileDescription")}
+              </Text>
+            }
+            dataTestId="single_file_help_button"
+          />
+        </LabelGroup>
       ),
     },
     {
       value: "multiple",
       label: (
-        <>
-          {t("Common:MultipleFiles")}{" "}
-          <Text as="span" color="gray">
-            ({t("Common:MultipleFilesDescription")})
-          </Text>
-        </>
+        <LabelGroup>
+          {t("Common:MultipleFiles")}
+          <HelpButton
+            offsetRight={0}
+            size={12}
+            place="right"
+            tooltipContent={
+              <Text fontSize="12px">
+                {t("Common:MultipleFilesDescription")}
+              </Text>
+            }
+            dataTestId="multiple_files_help_button"
+          />
+        </LabelGroup>
       ),
     },
   ];
