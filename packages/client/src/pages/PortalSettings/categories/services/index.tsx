@@ -158,22 +158,38 @@ const Services = (props: InjectedProps) => {
     },
     [AI_TOOLS]: {
       title: t("Common:Confirmation"),
-      body: [
-        t("Services:AIToolsDescription", {
-          productName: t("Common:ProductName"),
-          organizationName: logoText,
-        }),
-        <Trans
-          key="Payments"
-          i18nKey="CurrentBalance"
-          t={t}
-          values={{ balance: formatAiServiceCurrency!() }}
-          components={{
-            1: <span style={{ fontWeight: 600 }} />,
-          }}
-        />,
-        t("Common:WantToContinue"),
-      ],
+      body: isCurrentConfirmState
+        ? [
+            t("Services:DisableAIToolsConfirm", {
+              organizationName: logoText,
+            }),
+            <Trans
+              key="DisableBalance"
+              i18nKey="Services:DisableAIToolsConfirmBalance"
+              t={t}
+              values={{ balance: formatAiServiceCurrency!() }}
+              components={{
+                1: <span style={{ fontWeight: 600 }} />,
+              }}
+            />,
+            t("Services:DisableAIToolsConfirmReEnable"),
+          ]
+        : [
+            t("Services:AIToolsDescription", {
+              productName: t("Common:ProductName"),
+              organizationName: logoText,
+            }),
+            <Trans
+              key="Payments"
+              i18nKey="CurrentBalance"
+              t={t}
+              values={{ balance: formatAiServiceCurrency!() }}
+              components={{
+                1: <span style={{ fontWeight: 600 }} />,
+              }}
+            />,
+            t("Common:WantToContinue"),
+          ],
     },
     [WEB_SEARCH]: {
       title: t("Common:Confirmation"),
@@ -244,7 +260,7 @@ const Services = (props: InjectedProps) => {
       }
     }
 
-    if (!currentEnabled || id === BACKUP_SERVICE)
+    if (!currentEnabled || id === BACKUP_SERVICE || id === AI_TOOLS)
       setIsConfirmDialogVisible(true);
     else {
       const raw = {
