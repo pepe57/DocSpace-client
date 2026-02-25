@@ -926,9 +926,9 @@ const useEditorEvents = ({
 
   const onRequestStartFilling = useCallback(
     (event: object) => {
-      match([config?.startFillingMode])
-        .with([StartFillingMode.ShareToFillOut], () => openShareFormDialog?.())
-        .with([StartFillingMode.StartFilling], () => {
+      match(config?.startFillingMode)
+        .with(StartFillingMode.ShareToFillOut, () => openShareFormDialog?.())
+        .with(StartFillingMode.StartFilling, () => {
           if (
             typeof event === "object" &&
             event !== null &&
@@ -937,7 +937,7 @@ const useEditorEvents = ({
           )
             onOpenRoleMappingPanel?.(event.data);
         })
-        .with([StartFillingMode.StartFillingRoomForm], async () => {
+        .with(StartFillingMode.StartFillingRoomForm, async () => {
           await manageFormFilling(fileInfo!.id, FormFillingManageAction.Start);
 
           sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(fileInfo));
