@@ -65,7 +65,7 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
 
     if (!search) return [tags, false];
 
-    const filtered = searchFilter(tags, search.toLowerCase());
+    const filtered = searchFilter(tags, search);
 
     const showCreateTag = filtered.every((tag) => tag.label.trim() !== search);
 
