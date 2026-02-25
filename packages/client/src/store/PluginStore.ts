@@ -872,15 +872,26 @@ class PluginStore {
     const processContextMenuItem = (
       value: IContextMenuItem,
     ): IContextMenuItemClient => {
-      const onClick = async (fileId: number) => {
-        if (!value.onClick || value.items) return;
+      const onClick: IContextMenuItemClient["onClick"] = async (fileId) => {
+        // Support both new onItemClick and deprecated onClick for backward compatibility
+        const onClickCallback = value.onItemClick || value.onClick;
 
-        const message = await value.onClick(fileId);
+        if (!onClickCallback || value.items) return;
+
+        let message: IMessage | void;
+
+        if (value.onItemClick) {
+          message = await value.onItemClick(fileId);
+        } else {
+          message = await value.onClick?.(fileId as number);
+        }
 
         this.dispatchMessage({ message, pluginName: plugin.name });
       };
 
-      const onGroupClick: IContextMenuItem["onGroupClick"] = async (items) => {
+      const onGroupClick: IContextMenuItemClient["onGroupClick"] = async (
+        items,
+      ) => {
         if (!value.onGroupClick || !value.isGroupAction || value.items) return;
 
         const message = await value.onGroupClick(items);
