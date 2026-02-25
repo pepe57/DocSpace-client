@@ -490,7 +490,7 @@ export async function getServiceQuotaBalance(
 export async function getAiPrices(signal?: AbortSignal) {
   return request({
     method: "get",
-    url: `/portal/payment/aiprices`,
+    url: `/portal/payment/ai-prices`,
     signal,
   });
 }
