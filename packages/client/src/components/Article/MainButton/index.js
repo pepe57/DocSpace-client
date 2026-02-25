@@ -131,6 +131,7 @@ const ArticleMainButtonContent = (props) => {
     isWarningRoomsDialog,
     getContactsModel,
     contactsCanCreate,
+    contactsTab,
     setRefMap,
     setTemplateGalleryVisible,
     templateGalleryAvailable,
@@ -431,7 +432,7 @@ const ArticleMainButtonContent = (props) => {
       });
     }
 
-    const blankPDFFormAction = {
+    const createTemplateBlankPDF = {
       id: "actions_template_blank",
       className: "main-button_drop-down_sub",
       icon: FormBlankReactSvgUrl,
@@ -517,14 +518,13 @@ const ArticleMainButtonContent = (props) => {
       icon: FormReactSvgUrl,
       label: t("Translations:NewForm"),
       key: "new-form",
-      items: [blankPDFFormAction, showSelectorDocx],
+      items: [createTemplateBlankPDF, showSelectorDocx],
     };
 
-    const isFormRoomContext =
+    if (
       currentRoomType === RoomsType.FormRoom ||
-      (parentRoomType === FolderType.FormRoom && isFolder);
-
-    if (isFormRoomContext) {
+      (parentRoomType === FolderType.FormRoom && isFolder)
+    ) {
       const { formRoomActions, mobileFormRoomActions, mobileMoreActions } =
         createActionsForFormRoom({
           formGallery,
@@ -626,6 +626,7 @@ const ArticleMainButtonContent = (props) => {
 
     isAIRoom,
     isKnowledgeTab,
+    contactsTab,
   ]);
 
   const isProfile = location.pathname.includes("/profile");
@@ -941,6 +942,7 @@ export default inject(
 
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
+      contactsTab: peopleStore.usersStore.contactsTab,
       setRefMap,
       setTemplateGalleryVisible,
       templateGalleryAvailable,

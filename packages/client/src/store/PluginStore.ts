@@ -64,6 +64,7 @@ import type {
   IProfileMenuItemClient,
   IframeWindow,
   TPlugin,
+  IPostMessageCallbackMessage,
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
@@ -76,8 +77,7 @@ import {
 } from "../helpers/plugins/enums";
 
 import type SelectedFolderStore from "./SelectedFolderStore";
-import { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
-import type { IFloatingOperationsButton } from "@onlyoffice/docspace-plugin-sdk";
+import type { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -585,6 +585,10 @@ class PluginStore {
     if (plugin.scopes.includes(PluginScopes.File)) {
       this.updateFileItems(name);
     }
+
+    if (plugin.scopes.includes(PluginScopes.PostMessage)) {
+      this.initPostMessagePlugin(plugin);
+    }
   };
 
   updatePlugin = async (
@@ -857,7 +861,7 @@ class PluginStore {
     if (!plugin || !plugin.enabled) return;
 
     const items: Map<string, IContextMenuItem> | undefined =
-      plugin.getContextMenuItems && plugin.getContextMenuItems();
+      plugin.getContextMenuItems?.();
 
     if (!items) return;
 
@@ -868,15 +872,26 @@ class PluginStore {
     const processContextMenuItem = (
       value: IContextMenuItem,
     ): IContextMenuItemClient => {
-      const onClick = async (fileId: number) => {
-        if (!value.onClick || value.items) return;
+      const onClick: IContextMenuItemClient["onClick"] = async (fileId) => {
+        // Support both new onItemClick and deprecated onClick for backward compatibility
+        const onClickCallback = value.onItemClick || value.onClick;
 
-        const message = await value.onClick(fileId);
+        if (!onClickCallback || value.items) return;
+
+        let message: IMessage | void;
+
+        if (value.onItemClick) {
+          message = await value.onItemClick(fileId);
+        } else {
+          message = await value.onClick?.(fileId as number);
+        }
 
         this.dispatchMessage({ message, pluginName: plugin.name });
       };
 
-      const onGroupClick: IContextMenuItem["onGroupClick"] = async (items) => {
+      const onGroupClick: IContextMenuItemClient["onGroupClick"] = async (
+        items,
+      ) => {
         if (!value.onGroupClick || !value.isGroupAction || value.items) return;
 
         const message = await value.onGroupClick(items);
@@ -933,7 +948,7 @@ class PluginStore {
     if (!plugin || !plugin.enabled) return;
 
     const items: Map<string, IInfoPanelItem> | undefined =
-      plugin.getInfoPanelItems && plugin.getInfoPanelItems();
+      plugin.getInfoPanelItems?.();
 
     if (!items) return;
 
@@ -974,7 +989,7 @@ class PluginStore {
     if (!plugin) return;
 
     const items: Map<string, IInfoPanelItem> | undefined =
-      plugin.getInfoPanelItems && plugin.getInfoPanelItems();
+      plugin.getInfoPanelItems?.();
 
     if (!items) return;
 
@@ -1054,7 +1069,7 @@ class PluginStore {
     if (!plugin) return;
 
     const items: Map<string, IMainButtonItem> | undefined =
-      plugin.getMainButtonItems && plugin.getMainButtonItems();
+      plugin.getMainButtonItems?.();
 
     if (!items) return;
 
@@ -1069,7 +1084,7 @@ class PluginStore {
     if (!plugin || !plugin.enabled) return;
 
     const items: Map<string, IProfileMenuItem> | undefined =
-      plugin.getProfileMenuItems && plugin.getProfileMenuItems();
+      plugin.getProfileMenuItems?.();
 
     if (!items) return;
 
@@ -1108,7 +1123,7 @@ class PluginStore {
     if (!plugin) return;
 
     const items: Map<string, IProfileMenuItem> | undefined =
-      plugin.getProfileMenuItems && plugin.getProfileMenuItems();
+      plugin.getProfileMenuItems?.();
 
     if (!items) return;
 
@@ -1123,7 +1138,7 @@ class PluginStore {
     if (!plugin || !plugin.enabled) return;
 
     const items: Map<string, IEventListenerItem> | undefined =
-      plugin.getEventListenerItems && plugin.getEventListenerItems();
+      plugin.getEventListenerItems?.();
 
     if (!items) return;
 
@@ -1160,7 +1175,7 @@ class PluginStore {
     if (!plugin) return;
 
     const items: Map<string, IEventListenerItem> | undefined =
-      plugin.getEventListenerItems && plugin.getEventListenerItems();
+      plugin.getEventListenerItems?.();
 
     if (!items) return;
 
@@ -1174,8 +1189,7 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items: Map<string, IFileItem> | undefined =
-      plugin.getFileItems && plugin.getFileItems();
+    const items: Map<string, IFileItem> | undefined = plugin.getFileItems?.();
 
     if (!items) return;
 
@@ -1237,14 +1251,21 @@ class PluginStore {
   deactivateFileItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items: Map<string, IFileItem> | undefined =
-      plugin.getFileItems && plugin.getFileItems();
+    const items: Map<string, IFileItem> | undefined = plugin.getFileItems?.();
 
     if (!items) return;
 
     Array.from(items).forEach(([key]) => {
       this.fileItems.delete(key);
     });
+  };
+
+  initPostMessagePlugin = (plugin: TPlugin) => {
+    const callback = (message: IPostMessageCallbackMessage) => {
+      this.dispatchMessage({ message, pluginName: plugin.name });
+    };
+
+    plugin.setPostMessageCallback?.(callback);
   };
 
   get pluginList() {
