@@ -266,6 +266,7 @@ const AiPage = (props: AiPageProps) => {
           items={tabsItems}
           selectedItemId={selectedTabId}
           onSelect={(item) => setSelectedTabId(item.id)}
+          withoutStickyIntend
           //withAnimation
         />
       </div>

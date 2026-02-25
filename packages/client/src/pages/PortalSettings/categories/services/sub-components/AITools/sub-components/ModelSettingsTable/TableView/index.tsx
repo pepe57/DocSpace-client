@@ -10,7 +10,7 @@ import type { TAiToolsPrices } from "SRC_DIR/store/ServicesStore";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 import styles from "./ModelSettingsTable.module.scss";
-import { Link } from "@docspace/ui-kit/components";
+import { Link, LinkTarget } from "@docspace/ui-kit/components";
 
 const TABLE_VERSION = "1";
 const COLUMNS_SIZE = `aiModelsColumnsSize_ver-${TABLE_VERSION}`;
@@ -51,7 +51,7 @@ const TableView = (props: ModelSettingsTableViewProps) => {
 
   return (
     <div className={styles.tableWrapper}>
-      <Text>
+      <Text className={styles.introText}>
         <Trans
           t={t}
           ns="Services"
@@ -61,9 +61,10 @@ const TableView = (props: ModelSettingsTableViewProps) => {
               <Link
                 fontWeight={600}
                 fontSize="12px"
-                as="span"
                 className={styles.servicesLink}
                 textDecoration="underline"
+                href="https://openrouter.ai/models"
+                target={LinkTarget.blank}
               />
             ),
           }}
