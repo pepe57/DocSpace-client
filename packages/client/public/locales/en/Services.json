@@ -56,6 +56,7 @@
   "ImageGenerationDescription": "Design original images and illustrations using AI for your documents.",
   "InputCurrency": "Input ({{currency}}/1M)",
   "LastTopUp": "Last top-up: {{currency}} on {{date}}.",
+  "LowBalance": "Low balance. Top up to ensure uninterrupted service.",
   "Model": "Model",
   "ModelSettings": "Model settings",
   "OCR": "OCR",
