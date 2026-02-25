@@ -737,3 +737,24 @@ export async function updateInviteLink(data) {
   const res = await request(options);
   return res;
 }
+
+export type TAiModelAvailabilitySettingsResponse =
+  | []
+  | {
+      models: string[];
+    };
+
+export const getAiModelRestrictions = async () => {
+  return request({
+    method: "get",
+    url: "/portal/payment/ai-model/restrictions",
+  }) as Promise<TAiModelAvailabilitySettingsResponse>;
+};
+
+export const setAiModelRestrictions = async (models: string[]) => {
+  return request({
+    method: "put",
+    url: "/portal/payment/ai-model/restrictions",
+    data: { models },
+  });
+};

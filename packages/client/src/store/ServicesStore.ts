@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, observable } from "mobx";
 import axios from "axios";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -37,6 +37,8 @@ import PaymentStore from "./PaymentStore";
 import { TBalance } from "@docspace/shared/api/portal/types";
 import {
   getAiPrices,
+  getAiModelRestrictions,
+  setAiModelRestrictions,
   getServiceQuotaBalance,
 } from "@docspace/shared/api/portal";
 import { authStore } from "@docspace/shared/store";
@@ -110,6 +112,10 @@ class ServicesStore {
 
   aiToolsPrices: TAiToolsPrices | null = null;
 
+  aiModelAvailabilityMap: Map<string, boolean> = new Map();
+
+  aiModelAvailabilityUpdatingSet: Set<string> = new Set();
+
   constructor(
     currentTariffStatusStore: CurrentTariffStatusStore,
     paymentStore: PaymentStore,
@@ -117,7 +123,10 @@ class ServicesStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.paymentStore = paymentStore;
 
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      aiModelAvailabilityMap: observable.ref,
+      aiModelAvailabilityUpdatingSet: observable.ref,
+    });
   }
 
   // get storageSizeIncrement() { // temp in payment store because of storage tariff deeactivation
@@ -174,6 +183,12 @@ class ServicesStore {
     return this.aiToolsPrices.currency;
   }
 
+  get aiModelsCurrencySymbol() {
+    if (!this.aiToolsPrices?.currencySymbol) return "$";
+
+    return this.aiToolsPrices.currencySymbol;
+  }
+
   get minimumInputPrice() {
     const inputValues: Array<number | undefined> = [];
 
@@ -202,6 +217,7 @@ class ServicesStore {
   }
 
   get wasFirstAiServiceTopUp() {
+    return false;
     if (!this.aiToolsBalance) return false;
 
     return this.aiToolsBalance.subAccounts.length !== 0;
@@ -227,6 +243,71 @@ class ServicesStore {
     } catch (e) {
       if (axios.isCancel(e)) return;
       throw e;
+    }
+  };
+
+  fetchAiModelAvailabilitySettings = async () => {
+    try {
+      const res = await getAiModelRestrictions();
+      if (!res) return;
+
+      const nextMap = new Map<string, boolean>();
+
+      const restrictedModels = new Set<string>();
+
+      if (Array.isArray((res as { models?: unknown }).models)) {
+        (res as { models: string[] }).models.forEach((id) => {
+          if (!id) return;
+          restrictedModels.add(String(id));
+        });
+      }
+
+      restrictedModels.forEach((modelId) => {
+        nextMap.set(modelId, false);
+      });
+
+      this.aiModelAvailabilityMap = nextMap;
+    } catch (e) {
+      toastr.error(e as Error);
+      throw e;
+    }
+  };
+
+  setAiModelAvailability = async (modelId: string, enabled: boolean) => {
+    if (!modelId || this.aiModelAvailabilityUpdatingSet.has(modelId)) return;
+
+    this.aiModelAvailabilityUpdatingSet = new Set([
+      ...this.aiModelAvailabilityUpdatingSet,
+      modelId,
+    ]);
+
+    try {
+      const restrictedModels: string[] = Array.from(
+        this.aiModelAvailabilityMap.keys(),
+      );
+
+      const idx = restrictedModels.indexOf(modelId);
+
+      if (enabled && idx >= 0) {
+        restrictedModels.splice(idx, 1);
+      }
+      if (!enabled && idx < 0) {
+        restrictedModels.push(modelId);
+      }
+
+      await setAiModelRestrictions(restrictedModels);
+
+      const nextMap = new Map(this.aiModelAvailabilityMap);
+      if (enabled) nextMap.delete(modelId);
+      else nextMap.set(modelId, false);
+      this.aiModelAvailabilityMap = nextMap;
+    } catch (e) {
+      toastr.error(e as Error);
+      throw e;
+    } finally {
+      const nextSet = new Set(this.aiModelAvailabilityUpdatingSet);
+      nextSet.delete(modelId);
+      this.aiModelAvailabilityUpdatingSet = nextSet;
     }
   };
 
@@ -311,6 +392,7 @@ class ServicesStore {
       const requests = [
         this.fetchAiPrices(),
         this.fetchAiServiceBalance(),
+        this.fetchAiModelAvailabilitySettings(),
         fetchTransactionHistory(null, null, true, true, "", "aitools"),
         initWalletPayerAndBalance(isRefresh),
       ];

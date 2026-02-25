@@ -47,6 +47,7 @@ import { finishRefreshingWithMinCycle } from "SRC_DIR/helpers/refreshing";
 
 import PricingBillingBody from "./sub-components/PricingBillingBody";
 import TopUpContainer from "./sub-components/TopUpContainer";
+import ModelSettingsTable from "./sub-components/ModelSettingsTable";
 
 import styles from "./AiPage.module.scss";
 
@@ -147,7 +148,7 @@ const AiPage = (props: AiPageProps) => {
     {
       id: "model-settings",
       name: t("ModelSettings"),
-      content: null,
+      content: <ModelSettingsTable />,
     },
   ];
 
@@ -227,7 +228,7 @@ const AiPage = (props: AiPageProps) => {
           items={tabsItems}
           selectedItemId={selectedTabId}
           onSelect={(item) => setSelectedTabId(item.id)}
-          withAnimation
+          //withAnimation
         />
       </div>
     </div>
