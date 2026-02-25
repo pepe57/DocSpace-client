@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -42,7 +42,6 @@ import { finishRefreshingWithMinCycle } from "SRC_DIR/helpers/refreshing";
 
 import ConfirmationDialog from "SRC_DIR/pages/PortalSettings/categories/services/sub-components/ConfirmationDialog";
 
-import AiPageLoader from "./AiPageLoader";
 import PricingBillingBody from "./sub-components/PricingBillingBody";
 import TopUpContainer from "./sub-components/TopUpContainer";
 import ModelSettingsTable from "./sub-components/ModelSettingsTable";
