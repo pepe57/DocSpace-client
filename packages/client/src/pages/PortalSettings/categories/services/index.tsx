@@ -26,7 +26,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -67,6 +67,8 @@ const Services = (props: InjectedProps) => {
     showPortalSettingsLoader,
     isFreeTariff,
     wasFirstAiServiceTopUp,
+    logoText,
+    formatAiServiceCurrency,
   } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [dialogVisibility, setDialogVisibility] = useState({
@@ -156,9 +158,22 @@ const Services = (props: InjectedProps) => {
     },
     [AI_TOOLS]: {
       title: t("Common:Confirmation"),
-      body: t("Services:AItoolsConfirm", {
-        productName: t("Common:ProductName"),
-      }),
+      body: [
+        t("Services:AIToolsDescription", {
+          productName: t("Common:ProductName"),
+          organizationName: logoText,
+        }),
+        <Trans
+          key="Payments"
+          i18nKey="CurrentBalance"
+          t={t}
+          values={{ balance: formatAiServiceCurrency!() }}
+          components={{
+            1: <span style={{ fontWeight: 600 }} />,
+          }}
+        />,
+        t("Common:WantToContinue"),
+      ],
     },
     [WEB_SEARCH]: {
       title: t("Common:Confirmation"),
@@ -406,6 +421,7 @@ const mapStoreToProps = ({
   paymentStore,
   clientLoadingStore,
   currentQuotaStore,
+  settingsStore,
 }: TStore) => {
   const {
     isInitServicesPage,
@@ -415,6 +431,7 @@ const mapStoreToProps = ({
     setIsInitServicesPage,
     setVisibleWalletSetting,
     wasFirstAiServiceTopUp,
+    formatAiServiceCurrency,
   } = servicesStore;
   const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
   const { isFreeTariff } = currentQuotaStore;
@@ -425,7 +442,7 @@ const mapStoreToProps = ({
   } = paymentStore;
 
   const { showPortalSettingsLoader } = clientLoadingStore;
-
+  const { logoText } = settingsStore;
   return {
     isInitServicesPage,
     isVisibleWalletSettings,
@@ -441,6 +458,8 @@ const mapStoreToProps = ({
     showPortalSettingsLoader,
     isFreeTariff,
     wasFirstAiServiceTopUp,
+    logoText,
+    formatAiServiceCurrency,
   };
 };
 
