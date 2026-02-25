@@ -945,6 +945,9 @@ const useEditorEvents = ({
           const url = new URL(`${window.location.origin}/rooms/shared/filter`);
           url.searchParams.set("folder", fileInfo!.folderId.toString());
           window.location.replace(url.toString());
+        })
+        .otherwise(() => {
+          console.error("Unknown start filling mode");
         });
     },
     [config?.startFillingMode, openShareFormDialog, onOpenRoleMappingPanel],
