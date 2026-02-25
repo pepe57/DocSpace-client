@@ -78,6 +78,9 @@ importers:
       '@onlyoffice/docspace-api-sdk':
         specifier: file:onlyoffice-docspace-api-sdk-3.6.0.tgz
         version: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz
+      '@onlyoffice/document-editor-react':
+        specifier: 2.1.1
+        version: 2.1.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@socket.io/component-emitter':
         specifier: 3.1.2
         version: 3.1.2
@@ -665,9 +668,6 @@ importers:
       '@docspace/ui-kit':
         specifier: workspace:*
         version: link:../../libs/ui-kit
-      '@onlyoffice/document-editor-react':
-        specifier: 2.1.1
-        version: 2.1.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       classnames:
         specifier: 2.5.1
         version: 2.5.1
