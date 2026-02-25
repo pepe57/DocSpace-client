@@ -1262,11 +1262,8 @@ class PluginStore {
 
   initPostMessagePlugin = (plugin: TPlugin) => {
     const callback = (message: IPostMessageCallbackMessage) => {
-      console.log("====", message);
       this.dispatchMessage({ message, pluginName: plugin.name });
     };
-
-    console.log("call");
 
     plugin.setPostMessageCallback?.(callback);
   };
