@@ -28,8 +28,11 @@ import { useRef, useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
 import { injectDefaultTheme, NoUserSelect } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Link } from "@docspace/ui-kit/components/link";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
+import { DropDownItem } from "@docspace/ui-kit/components/drop-down-item";
 
 const GUTTER_WIDTH = 80;
 
@@ -70,6 +73,16 @@ const HeaderTitle = styled.span.attrs(injectDefaultTheme)`
     p.theme.isBase ? globalColors.black : globalColors.darkGrayDark};
 `;
 
+const HeaderActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const FilterButtonWrapper = styled.div`
+  position: relative;
+  display: inline-flex;
+`;
 
 const LogScroller = styled.div.attrs(injectDefaultTheme)`
   overflow-y: auto;
@@ -183,14 +196,6 @@ const ExpandedContent = styled.pre.attrs(injectDefaultTheme)`
   flex: 1;
 `;
 
-const FilterSection = styled.div.attrs(injectDefaultTheme)`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 12px 16px;
-  border-bottom: 1px solid ${(p) => p.theme.plugins.borderColor};
-`;
-
 const formatTime = (date) => {
   const h = String(date.getHours()).padStart(2, "0");
   const m = String(date.getMinutes()).padStart(2, "0");
@@ -221,8 +226,10 @@ const isExpandable = (data) =>
 
 export const EventLogBlock = ({ events, onClear, eventTypes }) => {
   const scrollerRef = useRef(null);
+  const filterButtonRef = useRef(null);
   const [expandedIds, setExpandedIds] = useState(new Set());
   const [hiddenEvents, setHiddenEvents] = useState(new Set());
+  const [filterOpen, setFilterOpen] = useState(false);
 
   const displayedEvents = useMemo(
     () => events.filter((e) => !hiddenEvents.has(e.event)),
@@ -256,22 +263,45 @@ export const EventLogBlock = ({ events, onClear, eventTypes }) => {
     });
   };
 
+  const hasFilter = eventTypes?.length > 0;
+  const hasHidden = hiddenEvents.size > 0;
+
   return (
     <StyledWrapper>
-      {eventTypes?.length > 0 && (
-        <FilterSection>
-          {eventTypes.map((eventName) => (
-            <Checkbox
-              key={eventName}
-              label={eventName}
-              isChecked={!hiddenEvents.has(eventName)}
-              onChange={() => toggleEvent(eventName)}
-            />
-          ))}
-        </FilterSection>
-      )}
       <Header>
-        <HeaderTitle>Event Log</HeaderTitle>
+        <HeaderActions>
+          <HeaderTitle>Event Log</HeaderTitle>
+          {hasFilter && (
+            <FilterButtonWrapper ref={filterButtonRef}>
+              <IconButton
+                size={16}
+                title="Filter events"
+                color={hasHidden ? globalColors.lightBlueMain : undefined}
+                onClick={() => setFilterOpen((v) => !v)}
+                iconName={VerticalDotsReactSvgUrl}
+              />
+              <DropDown
+                open={filterOpen}
+                forwardedRef={filterButtonRef}
+                clickOutsideAction={() => setFilterOpen(false)}
+                directionY="bottom"
+                directionX="right"
+              >
+                {eventTypes.map((eventName) => (
+                  <DropDownItem
+                    key={eventName}
+                    label={eventName}
+                    withToggle
+                    checked={!hiddenEvents.has(eventName)}
+                    onClick={() => toggleEvent(eventName)}
+                    stopMouseDownPropagation
+                    style={{ lineHeight: "28px", padding: "0 8px", gap: "24px" }}
+                  />
+                ))}
+              </DropDown>
+            </FilterButtonWrapper>
+          )}
+        </HeaderActions>
         {events.length > 0 && (
           <Link type="action" fontSize="13px" onClick={onClear}>
             Clear
