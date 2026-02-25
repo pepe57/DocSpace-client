@@ -215,6 +215,7 @@ const Services = (props: InjectedProps) => {
     }
 
     if (id === AI_TOOLS && wasFirstAiServiceTopUp) {
+      navigate("/portal-settings/ai-services");
       return;
     }
 
