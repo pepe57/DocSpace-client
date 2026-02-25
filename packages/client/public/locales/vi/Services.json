@@ -1,6 +1,5 @@
 {
   "AITools": "Công cụ AI",
-  "AItoolsConfirm": "Kích hoạt dịch vụ công cụ AI sẽ cấp quyền truy cập vào các tính năng hỗ trợ AI cho tất cả người dùng {{productName}}, với điều kiện ví có đủ tiền. Bạn có chắc chắn muốn tiếp tục không?",
   "AIToolsEnabled": "Các công cụ hỗ trợ AI đã được kích hoạt thành công.",
   "AndMore": "Và còn nữa!",
   "AutomaticBackupDescription": "Thiết lập sao lưu theo lịch trình để bảo vệ dữ liệu liên tục mà không cần các thao tác thủ công.",

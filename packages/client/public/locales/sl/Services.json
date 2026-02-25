@@ -1,6 +1,5 @@
 {
   "AITools": "AI orodja",
-  "AItoolsConfirm": "Omogočanje storitve AI orodij bo vsem uporabnikom {{productName}} omogočilo dostop do funkcij, ki jih poganja umetna inteligenca, če ima denarnica zadostna sredstva. Ste prepričani, da želite nadaljevati?",
   "AIToolsEnabled": "Orodja umetne inteligence so bila uspešno omogočena.",
   "AndMore": "In več!",
   "AutomaticBackupDescription": "Nastavite urnik rezervnih kopij za stalno zaščito podatkov brez ročnih posegov.",

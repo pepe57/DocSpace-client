@@ -1,6 +1,5 @@
 {
   "AITools": "Nástroje umělé inteligence",
-  "AItoolsConfirm": "Zapnutí služby nástrojů AI umožní všem uživatelům {{productName}} přístup k funkcím poháněným umělou inteligencí, za předpokladu, že peněženka má dostatečný zůstatek. Jste si jistí, že chcete pokračovat?",
   "AIToolsEnabled": "Služba nástrojů AI byla úspěšně povolena.",
   "AndMore": "A více!",
   "AutomaticBackupDescription": "Nastavte si plánované zálohy pro nepřetržitou ochranu dat bez manuálních zásahů.",

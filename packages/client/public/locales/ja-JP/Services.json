@@ -1,6 +1,5 @@
 {
   "AITools": "AIツール",
-  "AItoolsConfirm": "AIツールサービスを有効にすると、ウォレットに十分な資金がある場合に限り、すべての{{productName}}ユーザーがAI搭載機能を利用できるようになります。続行してもよろしいですか？",
   "AIToolsEnabled": "AIツールサービスが正常に有効化されました。",
   "AndMore": "などなど！",
   "AutomaticBackupDescription": "手動操作なしで継続的なデータ保護のために、スケジュールされたバックアップを設定します。",

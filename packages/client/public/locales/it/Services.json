@@ -1,6 +1,5 @@
 {
   "AITools": "Strumenti AI",
-  "AItoolsConfirm": "Abilitando il servizio strumenti AI, tutti gli utenti di {{productName}} avranno accesso alle funzionalità basate su AI, a condizione che il wallet disponga di fondi sufficienti. Sei sicuro di voler continuare?",
   "AIToolsEnabled": "Servizio strumenti AI abilitato con successo.",
   "AndMore": "E altro ancora!",
   "AutomaticBackupDescription": "Imposta backup programmati per la protezione continua dei dati senza interventi manuali.",

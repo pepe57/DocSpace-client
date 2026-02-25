@@ -1,6 +1,5 @@
 {
   "AITools": "Yapay zeka araçları",
-  "AItoolsConfirm": "Yapay Zeka araçları hizmetinin etkinleştirilmesi, cüzdanda yeterli bakiye olması koşuluyla tüm {{productName}} kullanıcılarına yapay zeka destekli özelliklere erişim hakkı verecektir. Devam etmek istediğinizden emin misiniz?",
   "AIToolsEnabled": "AI araçları hizmeti başarıyla etkinleştirildi.",
   "AndMore": "Ve daha fazlası!",
   "AutomaticBackupDescription": "Manuel müdahaleler olmadan sürekli veri koruması için planlı yedeklemeler ayarlayın.",

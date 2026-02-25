@@ -1,6 +1,5 @@
 {
   "AITools": "AI 工具",
-  "AItoolsConfirm": "启用 AI 工具服务将授予所有{{productName}}用户访问 AI 功能的权限，前提是钱包有足够资金。确定要继续吗？",
   "AIToolsEnabled": "AI 工具服务已成功启用。",
   "AndMore": "还有更多！",
   "AutomaticBackupDescription": "设置定时备份，无需手动操作，即可持续保护数据安全。",

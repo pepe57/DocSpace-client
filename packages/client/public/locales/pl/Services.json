@@ -1,6 +1,5 @@
 {
   "AITools": "Narzędzia AI",
-  "AItoolsConfirm": "Włączenie usługi narzędzi AI zapewni wszystkim użytkownikom {{productName}} dostęp do funkcji opartych na sztucznej inteligencji, pod warunkiem, że portfel posiada wystarczające środki. Czy na pewno chcesz kontynuować?",
   "AIToolsEnabled": "Usługa narzędzi AI włączona pomyślnie.",
   "AndMore": "A więcej!",
   "AutomaticBackupDescription": "Skonfiguruj zaplanowane kopie zapasowe w celu zapewnienia ciągłej ochrony danych bez ręcznych działań.",

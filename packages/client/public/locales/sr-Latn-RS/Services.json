@@ -1,6 +1,5 @@
 {
   "AITools": "AI alati",
-  "AItoolsConfirm": "Omogućavanje usluge alatki veštačke inteligencije omogućiće svim korisnicima {{productName}} pristup funkcijama koje pokreće veštačka inteligencija, pod uslovom da novčanik ima dovoljno sredstava. Da li ste sigurni da želite da nastavite?",
   "AIToolsEnabled": "Usluga AI alata je uspešno omogućena.",
   "AndMore": "Dodajte više",
   "AutomaticBackupDescription": "Podesi zakazane bekape za kontinuiranu zaštitu podataka bez ručnih radnji.",

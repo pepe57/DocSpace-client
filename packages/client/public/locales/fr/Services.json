@@ -1,6 +1,5 @@
 {
   "AITools": "Outils IA",
-  "AItoolsConfirm": "L'activation du service d'outils IA permettra à tous les utilisateurs de {{productName}} d'accéder aux fonctionnalités basées sur l'IA, à condition que le wallet dispose de fonds suffisants. Souhaitez-vous vraiment continuer ?",
   "AIToolsEnabled": "Service d'outils IA activé avec succès.",
   "AndMore": "Et plus encore !",
   "AutomaticBackupDescription": "Configurez des sauvegardes planifiées pour une protection continue des données sans actions manuelles.",

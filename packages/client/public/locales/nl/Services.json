@@ -1,6 +1,5 @@
 {
   "AITools": "AI-tools",
-  "AItoolsConfirm": "Het inschakelen van de AI-tools service geeft alle {{productName}} gebruikers toegang tot AI-gestuurde functies, mits de wallet voldoende saldo heeft. Ben je zeker dat je verder wilt gaan?",
   "AIToolsEnabled": "AI-tools service succesvol ingeschakeld.",
   "AndMore": "En meer!",
   "AutomaticBackupDescription": "Stel geplande back-ups in voor continue gegevensbescherming zonder handmatige acties.",

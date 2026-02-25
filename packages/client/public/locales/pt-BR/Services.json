@@ -1,6 +1,5 @@
 {
   "AITools": "Ferramentas de IA",
-  "AItoolsConfirm": "A ativação do serviço de ferramentas de IA concederá a todos os usuários do {{productName}} acesso a recursos baseados em IA, desde que a carteira tenha fundos suficientes. Tem certeza de que deseja continuar?",
   "AIToolsEnabled": "Serviço de ferramentas de IA ativado com sucesso.",
   "AndMore": "E muito mais!",
   "AutomaticBackupDescription": "Configure backups agendados para proteção contínua de dados sem ações manuais.",
