@@ -335,6 +335,7 @@ const Uploader = (props) => {
           scriptUrl={sdkScriptUrl}
           config={config}
           isDisabled={config?.id === undefined}
+          showScriptParamsWithEvents={false}
         />
         <Controls>
           <VersionSelector
