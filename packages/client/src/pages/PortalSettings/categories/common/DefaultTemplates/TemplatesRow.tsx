@@ -194,8 +194,10 @@ const TemplatesRow = ({
             fontWeight={600}
             truncate
           >
-            {lastModified} | {getUpperCaseExtension(item.fileExst)} |{" "}
-            {item?.fileSize ? getConvertedSize(t, item?.fileSize) : null}
+            {lastModified} | {getUpperCaseExtension(item.fileExst)}
+            {item?.fileSize
+              ? " | " + getConvertedSize(t, item?.fileSize)
+              : null}
           </Text>
         </div>
 
