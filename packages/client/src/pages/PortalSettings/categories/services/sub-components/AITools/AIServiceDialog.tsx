@@ -70,7 +70,6 @@ interface AIServiceDialogProps {
   onClose: () => void;
   onToggle: (id: string, enabled: boolean) => void;
   isEnabled?: boolean;
-  aiToolsPrice?: number;
   formatWalletCurrency?: (
     item: number | null,
     fractionDigits: number,
@@ -170,11 +169,11 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
 };
 
 export default inject(({ paymentStore, settingsStore }: TStore) => {
-  const { aiToolsPrice, formatWalletCurrency } = paymentStore;
+  const { formatWalletCurrency } = paymentStore;
   const { logoText } = settingsStore;
   return {
     isEnabled: true,
-    aiToolsPrice,
+
     formatWalletCurrency,
     logoText,
   };

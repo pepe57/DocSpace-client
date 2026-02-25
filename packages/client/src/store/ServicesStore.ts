@@ -44,6 +44,7 @@ import {
 import { authStore } from "@docspace/shared/store";
 import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/Wallet/utils";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
+import { AI_TOOLS } from "@docspace/shared/constants";
 
 type TAiToolsChatPrice = {
   prompt: number;
@@ -400,14 +401,18 @@ class ServicesStore {
   aiServicesinit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
 
-    const { fetchTransactionHistory, initWalletPayerAndBalance } =
-      this.paymentStore!;
+    const {
+      fetchTransactionHistory,
+      initWalletPayerAndBalance,
+      handleServicesQuotas,
+    } = this.paymentStore!;
 
     try {
       const requests = [
         this.fetchAiPrices(),
         this.fetchAiServiceBalance(),
         this.fetchAiModelAvailabilitySettings(),
+        handleServicesQuotas(AI_TOOLS),
         fetchTransactionHistory(null, null, true, true, "", "aitools"),
         initWalletPayerAndBalance(isRefresh),
       ];

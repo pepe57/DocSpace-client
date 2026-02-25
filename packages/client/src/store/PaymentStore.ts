@@ -437,13 +437,6 @@ class PaymentStore {
     );
   }
 
-  get aiToolsPrice() {
-    return (
-      (this.servicesQuotasFeatures.get(AI_TOOLS) as TServiceFeatureWithPrice)
-        ?.price?.value || 0
-    );
-  }
-
   get webSearchPrice() {
     return (
       (this.servicesQuotasFeatures.get(WEB_SEARCH) as TServiceFeatureWithPrice)
@@ -453,6 +446,10 @@ class PaymentStore {
 
   get isBackupServiceOn() {
     return this.servicesQuotasFeatures.get(BACKUP_SERVICE)?.value;
+  }
+
+  get isAiToolsServiceOn() {
+    return this.servicesQuotasFeatures.get(AI_TOOLS)?.value;
   }
 
   formatWalletCurrency = (
@@ -615,13 +612,13 @@ class PaymentStore {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
 
-  handleServicesQuotas = async () => {
+  handleServicesQuotas = async (serviceName: string = "") => {
     // temporary solution, should be in the service store
 
     const abortController = new AbortController();
     this.settingsStore?.addAbortControllers(abortController);
 
-    const res = await getServicesQuotas(abortController.signal);
+    const res = await getServicesQuotas(serviceName, abortController.signal);
 
     if (!res) return;
 

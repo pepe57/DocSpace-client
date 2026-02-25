@@ -30,13 +30,8 @@ import { inject, observer } from "mobx-react";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
-import {
-  Tabs,
-  TabsTypes,
-  type TTabItem,
-} from "@docspace/ui-kit/components/tabs";
+import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
 import { Link } from "@docspace/ui-kit/components/link";
-import { DateTime } from "luxon";
 
 import { AI_TOOLS } from "@docspace/shared/constants";
 
@@ -54,13 +49,14 @@ import {
   formatDateLocalized,
   getAppTimezone,
 } from "@docspace/ui-kit/utils/date";
-import { authStore } from "@docspace/shared/store";
+import { setServiceState } from "@docspace/shared/api/portal";
+import { toastr } from "@docspace/ui-kit/components";
 
 type AiPageProps = {
   aiServiceCodeCurrency?: string;
   aiServiceBalance?: number;
-  isEnabled?: boolean;
-  onToggle?: (id: string, enabled: boolean) => void;
+  isAiToolsServiceOn?: boolean;
+  changeServiceState?: (service: string) => void;
   onTopUpClick?: () => void;
   onPricingBillingClick?: () => void;
   language?: string;
@@ -87,8 +83,8 @@ type AiPageProps = {
 
 const AiPage = (props: AiPageProps) => {
   const {
-    isEnabled = false,
-    onToggle,
+    isAiToolsServiceOn = false,
+    changeServiceState,
     onTopUpClick,
     onPricingBillingClick,
     aiServiceBalance,
@@ -130,8 +126,20 @@ const AiPage = (props: AiPageProps) => {
     }
   };
 
-  const onToggleChange = () => {
-    onToggle?.(AI_TOOLS, isEnabled);
+  const onToggleChange = async () => {
+    const raw = {
+      service: AI_TOOLS,
+      enabled: !isAiToolsServiceOn,
+    };
+
+    changeServiceState?.(AI_TOOLS);
+
+    try {
+      await setServiceState(raw);
+    } catch (error) {
+      toastr.error(t("Common:UnexpectedError"));
+      changeServiceState?.(AI_TOOLS);
+    }
   };
 
   const onOpenPricingBilling = () => {
@@ -186,7 +194,7 @@ const AiPage = (props: AiPageProps) => {
       />
       <div className={styles.toggleSection}>
         <ServiceToggleSection
-          isEnabled={isEnabled}
+          isEnabled={isAiToolsServiceOn}
           onToggle={onToggleChange}
           title={t("EnableOrganizationAI", { organizationName: logoText })}
           description={t("EnableAIDescription")}
@@ -194,7 +202,7 @@ const AiPage = (props: AiPageProps) => {
         />
       </div>
 
-      {isAiServiceLowBalance ? (
+      {isAiToolsServiceOn && isAiServiceLowBalance ? (
         <Text fontSize="15px" fontWeight={700} className={styles.lowBalance}>
           {t("LowBalance")}
         </Text>
@@ -266,7 +274,8 @@ const AiPage = (props: AiPageProps) => {
 
 export default inject(
   ({ servicesStore, paymentStore, settingsStore, authStore }: TStore) => {
-    const { fetchTransactionHistory } = paymentStore;
+    const { fetchTransactionHistory, changeServiceState, isAiToolsServiceOn } =
+      paymentStore;
     const { logoText } = settingsStore;
     const { language } = authStore;
     const {
@@ -292,6 +301,8 @@ export default inject(
       aiServiceLastCreditDate,
       language,
       isAiServiceLowBalance,
+      changeServiceState,
+      isAiToolsServiceOn,
     };
   },
 )(observer(AiPage));

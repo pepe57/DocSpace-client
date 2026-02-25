@@ -301,10 +301,19 @@ export async function getPortalPaymentQuotas(signal?: AbortSignal) {
   return res;
 }
 
-export async function getServicesQuotas(signal?: AbortSignal) {
+export async function getServicesQuotas(
+  serviceName: string,
+  signal?: AbortSignal,
+) {
+  const params = {};
+
+  if (serviceName) {
+    params.service = serviceName;
+  }
   const res = (await request({
     method: "get",
     url: "/portal/payment/walletservices",
+    params,
     signal,
   })) as TPaymentQuota[];
 

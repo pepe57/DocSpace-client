@@ -227,7 +227,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 priceTitle={item.priceTitle}
                 id={item.id}
                 image={item.image}
-                isEnabled={hasStorageSubscription}
+                isEnabled={item.value}
               >
                 {isAiServiceLowBalance ? (
                   <div
