@@ -99,6 +99,7 @@ export default function UploaderClient({
     filesSettings?.maxUploadFilesCount || DEFAULT_MAX_UPLOAD_FILES_COUNT;
 
   const [isLoading, setIsLoading] = useState(false);
+  const [uploadPercent, setUploadPercent] = useState(0);
 
   const uploadFiles = useCallback(async (rawFiles: File[]) => {
     const prepared = await attachParentFolderId(rawFiles, folderTargetId);
@@ -106,6 +107,11 @@ export default function UploaderClient({
     const onlyFiles = prepared.filter((f) => !isEmptyDirectoryFile(f));
 
     const uploadedFiles: unknown[] = [];
+
+    const totalBytes = onlyFiles.reduce((sum, f) => sum + f.size, 0);
+    let uploadedBytes = 0;
+
+    setUploadPercent(0);
 
     await runWithConcurrency(onlyFiles, maxUploadFilesCount, async (file) => {
       const targetFolderId = file.parentFolderId ?? folderTargetId;
@@ -144,7 +150,11 @@ export default function UploaderClient({
         );
 
         uploadedChunks += 1;
-        const percent = Math.round((uploadedChunks / chunks.length) * 100);
+        uploadedBytes += chunk.size;
+        const filePercent = Math.round((uploadedChunks / chunks.length) * 100);
+        const overallPercent = Math.round((uploadedBytes / totalBytes) * 100);
+
+        setUploadPercent(overallPercent);
 
         frameCallEvent({
           event: "onUploadProgress",
@@ -153,7 +163,7 @@ export default function UploaderClient({
             fileName: file.name,
             uploadedChunks,
             totalChunks: chunks.length,
-            percent,
+            percent: filePercent,
           },
         });
       });
@@ -236,6 +246,7 @@ export default function UploaderClient({
     <DropzoneComponent
       isDisabled={isLoading}
       isLoading={isLoading}
+      uploadPercent={uploadPercent}
       isFolderUpload={baseConfig?.isFolderUpload}
       isMultipleUpload={baseConfig?.isMultipleUpload}
       onSingleUploadError={() => {
