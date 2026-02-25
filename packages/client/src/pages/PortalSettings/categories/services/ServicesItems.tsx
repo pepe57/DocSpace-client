@@ -233,7 +233,8 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 {isAiServiceLowBalance ? (
                   <div
                     className={classNames(styles.additionalInfo, {
-                      [styles.warningColor]: true,
+                      [styles.warningColor]: item.value,
+                      [styles.inactiveColor]: !item.value,
                     })}
                     data-tooltip-id="serviceTooltip"
                   >
@@ -252,7 +253,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                   <div
                     className={classNames(styles.additionalInfo, {
                       [styles.greenColor]: item.value,
-                      [styles.inactiveColor]: !item.value!,
+                      [styles.inactiveColor]: !item.value,
                     })}
                   >
                     <PriceIcon />
