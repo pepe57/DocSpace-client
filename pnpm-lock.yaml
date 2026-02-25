@@ -3612,7 +3612,7 @@ packages:
     os: [win32]
 
   '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz':
-    resolution: {integrity: sha512-XnuCns9SwkAVbao09HIy5VzMoFnQFXI+JP/6ZB1xtez3Xqzg56bb9EKE1V48bronBmjIibR3gRWKfp5FZiHW4g==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz}
+    resolution: {integrity: sha512-21LcYXnFmz1ufRMNPIhiPEtHdGrPphMpRZ9absNmFcjKd97xCJtBSpBys3cdJv/rlGp+hp2A3vzxVofY5xaDvQ==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz}
     version: 3.6.0
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
