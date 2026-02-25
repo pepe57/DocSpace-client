@@ -268,6 +268,30 @@ const Uploader = (props) => {
     });
   };
 
+  const onClickUploadMode = (e) => {
+    const value = e.target.value;
+    const isFolderUpload = value === "folders";
+    setUploadMode(value);
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      isFolderUpload,
+      secondaryText: getDefaultSecondaryText(isFolderUpload, oldConfig.isMultipleUpload),
+      init: true,
+    }));
+  };
+
+  const onClickUploadQuantity = (e) => {
+    const value = e.target.value;
+    const isMultipleUpload = value === "multiple";
+    setUploadQuantity(value);
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      isMultipleUpload,
+      secondaryText: getDefaultSecondaryText(oldConfig.isFolderUpload, isMultipleUpload),
+      init: true,
+    }));
+  };
+
   const debouncedSetLinkFilesText = useCallback(
     debounce((newText) => {
       setConfig((oldConfig) => ({
@@ -412,17 +436,7 @@ const Uploader = (props) => {
               options={uploadModeOptions}
               name="uploadMode"
               selected={uploadMode}
-              onClick={(e) => {
-                const value = e.target.value;
-                const isFolderUpload = value === "folders";
-                setUploadMode(value);
-                setConfig((oldConfig) => ({
-                  ...oldConfig,
-                  isFolderUpload,
-                  secondaryText: getDefaultSecondaryText(isFolderUpload, oldConfig.isMultipleUpload),
-                  init: true,
-                }));
-              }}
+              onClick={onClickUploadMode}
               spacing="8px"
               dataTestId="upload_mode_radiobutton_group"
             />
@@ -435,17 +449,7 @@ const Uploader = (props) => {
               options={uploadQuantityOptions}
               name="uploadQuantity"
               selected={uploadQuantity}
-              onClick={(e) => {
-                const value = e.target.value;
-                const isMultipleUpload = value === "multiple";
-                setUploadQuantity(value);
-                setConfig((oldConfig) => ({
-                  ...oldConfig,
-                  isMultipleUpload,
-                  secondaryText: getDefaultSecondaryText(oldConfig.isFolderUpload, isMultipleUpload),
-                  init: true,
-                }));
-              }}
+              onClick={onClickUploadQuantity}
               spacing="8px"
               dataTestId="upload_quantity_radiobutton_group"
             />
