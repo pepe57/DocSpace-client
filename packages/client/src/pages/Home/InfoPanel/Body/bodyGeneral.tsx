@@ -134,7 +134,6 @@ const InfoPanelBodyGeneral = ({
   }, [fileView, selection, isTemplatesRoom, isAgent]);
 
   useEffect(() => {
-    console.log(currentView);
     if (!currentView.startsWith("info_plugin-")) return;
 
     const itemKey = currentView.replace("info_plugin-", "");
