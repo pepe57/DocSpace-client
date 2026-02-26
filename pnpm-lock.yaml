@@ -3600,7 +3600,7 @@ packages:
     version: 3.6.0
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz':
-    resolution: {integrity: sha512-1sGSxpDZ5CNUGhCaGn7IfAdZ4RikSNk0/WlRG4YjOiUzIS+ERGujaf9pSS9LilqDkYupHvh6mFp+nbAV4HA65Q==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz}
+    resolution: {integrity: sha512-kHydWZOAelJ22s3DjMRfCEl2yUIQSfYhOFj88PP6SIiiUQ5Wpc6KRLN079Swx5Iqg53vAKTrIOarqVAAu3BtAQ==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz}
     version: 2.1.0
     hasBin: true
 
