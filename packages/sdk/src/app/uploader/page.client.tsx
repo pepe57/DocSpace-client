@@ -59,6 +59,27 @@ import {
   DEFAULT_MAX_UPLOAD_THREAD_COUNT,
 } from "@/utils/constants";
 
+const parseSizeLimit = (sizeString?: string): number | null => {
+  if (!sizeString) return null;
+
+  const match = sizeString.toLowerCase().match(/^(\d+)(kb|mb|gb)$/);
+  if (!match) return null;
+
+  const value = Number.parseInt(match[1], 10);
+  const unit = match[2];
+
+  switch (unit) {
+    case "kb":
+      return value * 1024;
+    case "mb":
+      return value * 1024 * 1024;
+    case "gb":
+      return value * 1024 * 1024 * 1024;
+    default:
+      return null;
+  }
+};
+
 export type UploaderClientProps = {
   filesSettings?: TFilesSettings;
   accept: string;
@@ -73,6 +94,8 @@ export type UploaderClientProps = {
     extensionsText?: string;
     isFolderUpload?: boolean;
     isMultipleUpload?: boolean;
+    maxPerUploadSize?: string;
+    maxTotalUploadSize?: string;
   };
 };
 
@@ -178,6 +201,58 @@ export default function UploaderClient({
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
       if (!acceptedFiles.length) return;
+
+      const maxPerUploadBytes = parseSizeLimit(baseConfig?.maxPerUploadSize);
+
+      if (maxPerUploadBytes) {
+        const oversizedFiles = acceptedFiles.filter(
+          (file) => file.size > maxPerUploadBytes,
+        );
+
+        if (oversizedFiles.length > 0) {
+          const maxSizeFormatted = baseConfig?.maxPerUploadSize?.toUpperCase();
+          const isFolderUpload = baseConfig?.isFolderUpload ?? false;
+
+          const errorKey = isFolderUpload
+            ? "Common:FolderSizeExceedsLimit"
+            : "Common:FileSizeExceedsLimit";
+
+          toastr.error(
+            t(errorKey, {
+              maxSize: maxSizeFormatted,
+            }),
+          );
+          return;
+        }
+      }
+
+      if (baseConfig?.isMultipleUpload && baseConfig?.maxTotalUploadSize) {
+        const maxTotalBytes = parseSizeLimit(baseConfig.maxTotalUploadSize);
+
+        if (maxTotalBytes) {
+          const totalSize = acceptedFiles.reduce(
+            (sum, file) => sum + file.size,
+            0,
+          );
+
+          if (totalSize > maxTotalBytes) {
+            const maxTotalFormatted =
+              baseConfig.maxTotalUploadSize.toUpperCase();
+            const isFolderUpload = baseConfig?.isFolderUpload ?? false;
+
+            const errorKey = isFolderUpload
+              ? "Common:FoldersSizeExceedsLimit"
+              : "Common:FilesSizeExceedsLimit";
+
+            toastr.error(
+              t(errorKey, {
+                maxSize: maxTotalFormatted,
+              }),
+            );
+            return;
+          }
+        }
+      }
 
       setIsLoading(true);
 
