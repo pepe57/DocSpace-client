@@ -592,6 +592,7 @@
   "MakeForm": "Save as PDF form",
   "ManageConnection": "Manage connection",
   "ManageNotifications": "Manage",
+  "ManageGroupRooms": "Manage group of rooms",
   "ManageStorageQuota": "Manage storage quota",
   "ManualBackupDescription": "Use this option if you want to get all data contained in the space as a file.",
   "ManyEmails": "Too many email addresses parsed",
