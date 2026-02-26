@@ -28,14 +28,14 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
-import type { IArticleItemClient } from "SRC_DIR/helpers/plugins/types";
+import type { IArticleButtonItemClient } from "SRC_DIR/helpers/plugins/types";
 
 interface ArticlePluginItemProps {
-  item: IArticleItemClient;
+  item: IArticleButtonItemClient;
 }
 
 const ArticlePluginItem: React.FC<ArticlePluginItemProps> = ({ item }) => {
-  const { body: boxProps, onLoad, onClick, pluginName } = item;
+  const { body: boxProps, onLoad, pluginName } = item;
 
   const [bodyProps, setBodyProps] = useState(boxProps || {});
 
@@ -54,15 +54,9 @@ const ArticlePluginItem: React.FC<ArticlePluginItemProps> = ({ item }) => {
     onLoadAction();
   }, [onLoadAction]);
 
-  const handleClick = useCallback(async () => {
-    if (!onClick) return;
-    await onClick();
-  }, [onClick]);
 
   return (
     <div
-      onClick={handleClick}
-      style={{ cursor: onClick ? "pointer" : "default" }}
     >
       <WrappedComponent
         pluginName={pluginName}
