@@ -62,8 +62,8 @@ import type {
   IMessage,
   IProfileMenuItem,
   IProfileMenuItemClient,
-  IArticleItem,
-  IArticleItemClient,
+  IArticleButtonItem,
+  IArticleButtonItemClient,
   IframeWindow,
   TPlugin,
   IPostMessageCallbackMessage,
@@ -119,7 +119,7 @@ class PluginStore {
 
   fileItems: Map<string, IFileItemClient> = new Map();
 
-  articleItems: Map<string, IArticleItemClient> = new Map();
+  articleButtonItems: Map<string, IArticleButtonItemClient> = new Map();
 
   pluginFrame: HTMLIFrameElement | null = null;
 
@@ -185,7 +185,7 @@ class PluginStore {
       updateProfileMenuItems: this.updateProfileMenuItems,
       updateEventListenerItems: this.updateEventListenerItems,
       updateFileItems: this.updateFileItems,
-      updateArticleItems: this.updateArticleItems,
+      updateArticleButtonItems: this.updateArticleButtonItems,
       updateCreateDialogProps: updateCreateDialogProps,
       updatePlugin: this.updatePlugin,
       setPluginSelectorVisible: this.setPluginSelectorVisible,
@@ -298,8 +298,8 @@ class PluginStore {
           this.updateFileItems(name);
         }
 
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.Article)) {
-          this.updateArticleItems(name);
+        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.ArticleButton)) {
+          this.updateArticleButtonItems(name);
         }
       }
     }
@@ -599,8 +599,8 @@ class PluginStore {
       this.initPostMessagePlugin(plugin);
     }
 
-    if (plugin.scopes.includes(PluginScopes.Article)) {
-      this.updateArticleItems(name);
+    if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
+      this.updateArticleButtonItems(name);
     }
   };
 
@@ -692,8 +692,8 @@ class PluginStore {
       this.deactivateFileItems(plugin);
     }
 
-    if (plugin.scopes.includes(PluginScopes.Article)) {
-      this.deactivateArticleItems(plugin);
+    if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
+      this.deactivateArticleButtonItems(plugin);
     }
   };
 
@@ -1285,13 +1285,13 @@ class PluginStore {
     plugin.setPostMessageCallback?.(callback);
   };
 
-  updateArticleItems = async (name: string) => {
+  updateArticleButtonItems = async (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin || !plugin.enabled) return;
 
-    const items: Map<string, IArticleItem> | undefined =
-      plugin.getArticleItems && plugin.getArticleItems();
+    const items: Map<string, IArticleButtonItem> | undefined =
+      plugin.getArticleButtonItems && plugin.getArticleButtonItems();
 
     if (!items) return;
 
@@ -1309,32 +1309,23 @@ class PluginStore {
 
       if (!correctUserType || !correctDevice) continue;
 
-      const onClick = async () => {
-        if (!value.onClick) return;
-
-        const message = await value.onClick();
-
-        this.dispatchMessage({ message, pluginName: plugin.name });
-      };
-
-      this.articleItems.set(key, {
+      this.articleButtonItems.set(key, {
         ...value,
-        onClick,
         pluginName: plugin.name,
       });
     }
   };
 
-  deactivateArticleItems = (plugin: TPlugin) => {
+  deactivateArticleButtonItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items: Map<string, IArticleItem> | undefined =
-      plugin.getArticleItems && plugin.getArticleItems();
+    const items: Map<string, IArticleButtonItem> | undefined =
+      plugin.getArticleButtonItems && plugin.getArticleButtonItems();
 
     if (!items) return;
 
     Array.from(items).forEach(([key]) => {
-      this.articleItems.delete(key);
+      this.articleButtonItems.delete(key);
     });
   };
 
@@ -1447,8 +1438,8 @@ class PluginStore {
     return null;
   }
 
-  get articleItemsList() {
-    const items = Array.from(this.articleItems, ([key, value]) => {
+  get articleButtonItemsList() {
+    const items = Array.from(this.articleButtonItems, ([key, value]) => {
       return {
         key,
         value: {

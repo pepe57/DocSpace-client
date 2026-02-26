@@ -45,7 +45,7 @@ enum PluginScopes {
   EventListener = "EventListener",
   File = "File",
   PostMessage = "PostMessage",
-  Article = "Article",
+  ArticleButton = "ArticleButton",
 }
 
 export {

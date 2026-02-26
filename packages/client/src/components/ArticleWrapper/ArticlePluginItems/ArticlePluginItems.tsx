@@ -26,13 +26,13 @@
 
 import React from "react";
 
-import type { IArticleItemClient } from "SRC_DIR/helpers/plugins/types";
+import type { IArticleButtonItemClient } from "SRC_DIR/helpers/plugins/types";
 
 import ArticlePluginItem from "./ArticlePluginItem";
 import styles from "./ArticlePluginItems.module.scss";
 
 interface ArticlePluginItemsProps {
-  items: Array<{ key: string; value: IArticleItemClient }>;
+  items: Array<{ key: string; value: IArticleButtonItemClient }>;
   maxItems?: number;
 }
 

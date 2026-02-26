@@ -107,8 +107,8 @@ export default inject<TStore>(
     const { isGracePeriod, isLicenseDateExpired, trialDaysLeft } =
       currentTariffStatusStore;
 
-    const customSlot = pluginStore?.articleItemsList ? (
-      <ArticlePluginItems items={pluginStore.articleItemsList} />
+    const customSlot = pluginStore?.articleButtonItemsList ? (
+      <ArticlePluginItems items={pluginStore.articleButtonItemsList} />
     ) : null;
 
     return {

@@ -41,7 +41,7 @@ import type {
   IInfoPanelSubMenu,
   IMainButtonItem,
   IProfileMenuItem,
-  IArticleItem,
+  IArticleButtonItem,
   ISettings,
   IMessage,
   IPostMessage,
@@ -54,7 +54,7 @@ import type {
   IInfoPanelPlugin,
   IMainButtonPlugin,
   IProfileMenuPlugin,
-  IArticlePlugin,
+  IArticleButtonPlugin,
   IPlugin,
   IApiPlugin,
   ISettingsPlugin,
@@ -91,7 +91,7 @@ export type {
   IInfoPanelItem,
   IMainButtonItem,
   IProfileMenuItem,
-  IArticleItem,
+  IArticleButtonItem,
 };
 
 //Extended client-side types
@@ -139,7 +139,7 @@ export interface IFileItemClient extends Omit<IFileItem, "onClick"> {
   pluginName: string;
 }
 
-export interface IArticleItemClient extends IArticleItem {
+export interface IArticleButtonItemClient extends IArticleButtonItem {
   pluginName: string;
 }
 
@@ -193,4 +193,4 @@ export type TPlugin = {
   Partial<IProfileMenuPlugin> &
   Partial<ISettingsPlugin> &
   Partial<IPostMessagePlugin> &
-  Partial<IArticlePlugin>;
+  Partial<IArticleButtonPlugin>;
