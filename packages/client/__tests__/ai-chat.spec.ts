@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { FileDtoInteger } from "@docspace/ui-kit/types";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
-import { TFile } from "@docspace/shared/api/files/types";
 import {
   settingsHandler,
   TypeSettings,
@@ -879,7 +879,7 @@ test.describe("AI chat", () => {
           title: "Lorem ipsum",
           version: 1,
           versionGroup: 1,
-        } as TFile,
+        } as FileDtoInteger,
       });
 
       await expect(page.getByTestId("toast-content")).toContainText(
@@ -935,7 +935,7 @@ test.describe("AI chat", () => {
           title: "Test message",
           version: 1,
           versionGroup: 1,
-        } as TFile,
+        } as FileDtoInteger,
       });
 
       await expect(page.getByTestId("toast-content")).toContainText(
