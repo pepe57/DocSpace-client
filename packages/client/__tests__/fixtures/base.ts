@@ -46,7 +46,7 @@ export const test = base.extend<
   }
 >({
   baseUrl: [
-    async (_, use) => {
+    async ({}, use) => {
       await use(`${BASE_URL}:${TEST_PORT}`);
     },
     {
