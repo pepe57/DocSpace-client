@@ -30,7 +30,6 @@ import { withTranslation } from "react-i18next";
 
 import debounce from "lodash.debounce";
 import { Label } from "@docspace/ui-kit/components/label";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
@@ -44,6 +43,8 @@ import SDK from "@onlyoffice/docspace-sdk-js";
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { SizeLimitSetter } from "../sub-components/SizeLimitSetter";
+import { FileTypesFilter } from "../sub-components/FileTypesFilter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { VersionSelector } from "../sub-components/VersionSelector";
@@ -56,7 +57,6 @@ import {
   defaultDimension,
   sdkSource,
   sdkVersion,
-  FILE_TYPE_CATEGORIES,
   FILE_TYPE_EXTENSIONS,
 } from "../constants";
 
@@ -69,7 +69,6 @@ import {
   Frame,
   Container,
   FilesSelectorInputWrapper,
-  CheckboxGroup,
 } from "./StyledPresets";
 
 const UPLOADER_EVENT_TYPES = [
@@ -89,55 +88,110 @@ const Uploader = (props) => {
   const [uploadQuantity, setUploadQuantity] = useState("single");
   const [eventLog, setEventLog] = useState([]);
 
+  const fileSizeUnits = [
+    { key: "kb", label: t("Common:Kilobyte") },
+    { key: "mb", label: t("Common:Megabyte") },
+    { key: "gb", label: t("Common:Gigabyte") },
+  ];
+
+  const defaultSizeUnit = fileSizeUnits[1];
+
   const uploadModeOptions = [
     {
       value: "files",
       label: (
-        <>
-          {t("Common:Files")}{" "}
-          <Text as="span" color="gray">
-            ({t("Common:UploadFilesDescription")})
-          </Text>
-        </>
+        <LabelGroup>
+          {t("Common:Files")}
+          <HelpButton
+            offsetRight={0}
+            size={12}
+            place="right"
+            tooltipContent={
+              <Text fontSize="12px">{t("UploadFilesDescription")}</Text>
+            }
+            dataTestId="upload_files_help_button"
+          />
+        </LabelGroup>
       ),
     },
     {
       value: "folders",
       label: (
-        <>
-          {t("Common:Folders")}{" "}
-          <Text as="span" color="gray">
-            ({t("Common:UploadFoldersDescription")})
-          </Text>
-        </>
+        <LabelGroup>
+          {t("Common:Folders")}
+          <HelpButton
+            offsetRight={0}
+            size={12}
+            place="right"
+            tooltipContent={
+              <Text fontSize="12px">{t("UploadFoldersDescription")}</Text>
+            }
+            dataTestId="upload_folders_help_button"
+          />
+        </LabelGroup>
       ),
     },
   ];
+
+  const isFolderMode = uploadMode === "folders";
 
   const uploadQuantityOptions = [
     {
       value: "single",
       label: (
-        <>
-          {t("Common:SingleFile")}{" "}
-          <Text as="span" color="gray">
-            ({t("Common:SingleFileDescription")})
-          </Text>
-        </>
+        <LabelGroup>
+          {isFolderMode ? t("SingleFolder") : t("SingleFile")}
+          <HelpButton
+            offsetRight={0}
+            size={12}
+            place="right"
+            tooltipContent={
+              <Text fontSize="12px">
+                {isFolderMode
+                  ? t("SingleFolderDescription")
+                  : t("SingleFileDescription")}
+              </Text>
+            }
+            dataTestId="single_help_button"
+          />
+        </LabelGroup>
       ),
     },
     {
       value: "multiple",
       label: (
-        <>
-          {t("Common:MultipleFiles")}{" "}
-          <Text as="span" color="gray">
-            ({t("Common:MultipleFilesDescription")})
-          </Text>
-        </>
+        <LabelGroup>
+          {isFolderMode ? t("MultipleFolders") : t("MultipleFiles")}
+          <HelpButton
+            offsetRight={0}
+            size={12}
+            place="right"
+            tooltipContent={
+              <Text fontSize="12px">
+                {isFolderMode
+                  ? t("MultipleFoldersDescription")
+                  : t("MultipleFilesDescription")}
+              </Text>
+            }
+            dataTestId="multiple_help_button"
+          />
+        </LabelGroup>
       ),
     },
   ];
+
+  const getDefaultSecondaryText = (isFolderUpload, isMultipleUpload) => {
+    if (isFolderUpload && isMultipleUpload) {
+      return t("Common:DropzoneFoldersSecondary");
+    }
+    if (isFolderUpload && !isMultipleUpload) {
+      return t("Common:DropzoneFolderSecondary");
+    }
+    if (!isFolderUpload && isMultipleUpload) {
+      return t("Common:DropzoneFilesSecondary");
+    }
+    return t("Common:DropzoneTitleSecondary");
+  };
 
   const [config, setConfig] = useState({
     src: window.location.origin,
@@ -148,10 +202,12 @@ const Uploader = (props) => {
     init: true,
     acceptExtensions: FILE_TYPE_EXTENSIONS.document.join(","),
     linkMainText: t("Common:Upload"),
-    secondaryText: "",
+    secondaryText: getDefaultSecondaryText(false, false),
     id: myFolderId,
     isFolderUpload: false,
     isMultipleUpload: false,
+    maxPerUploadSize: "25mb",
+    maxTotalUploadSize: "100mb",
     events: {
       onUploadSuccess: (data) => {
         console.log("onUploadSuccess", data);
@@ -263,6 +319,36 @@ const Uploader = (props) => {
     });
   };
 
+  const onClickUploadMode = (e) => {
+    const value = e.target.value;
+    const isFolderUpload = value === "folders";
+    setUploadMode(value);
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      isFolderUpload,
+      secondaryText: getDefaultSecondaryText(
+        isFolderUpload,
+        oldConfig.isMultipleUpload,
+      ),
+      init: true,
+    }));
+  };
+
+  const onClickUploadQuantity = (e) => {
+    const value = e.target.value;
+    const isMultipleUpload = value === "multiple";
+    setUploadQuantity(value);
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      isMultipleUpload,
+      secondaryText: getDefaultSecondaryText(
+        oldConfig.isFolderUpload,
+        isMultipleUpload,
+      ),
+      init: true,
+    }));
+  };
+
   const debouncedSetLinkFilesText = useCallback(
     debounce((newText) => {
       setConfig((oldConfig) => ({
@@ -283,39 +369,24 @@ const Uploader = (props) => {
     debouncedSetLinkFilesText(newText);
   };
 
-  const getSelectedExtensions = () => {
-    return config.acceptExtensions ? config.acceptExtensions.split(",") : [];
-  };
+  const debouncedSetSecondaryText = useCallback(
+    debounce((newText) => {
+      setConfig((oldConfig) => ({
+        ...oldConfig,
+        secondaryText: newText,
+        init: true,
+      }));
+    }, 500),
+    [setConfig],
+  );
 
-  const isCategorySelected = (category) => {
-    const selectedExtensions = getSelectedExtensions();
-    const categoryExtensions = FILE_TYPE_EXTENSIONS[category] || [];
-    return categoryExtensions.every((ext) => selectedExtensions.includes(ext));
-  };
-
-  const onChangeCategoryCheckbox = (category) => {
-    const selectedExtensions = getSelectedExtensions();
-    const categoryExtensions = FILE_TYPE_EXTENSIONS[category] || [];
-    const isSelected = isCategorySelected(category);
-
-    let newExtensions;
-    if (isSelected) {
-      newExtensions = selectedExtensions.filter(
-        (ext) => !categoryExtensions.includes(ext),
-      );
-    } else {
-      const extensionsSet = new Set([
-        ...selectedExtensions,
-        ...categoryExtensions,
-      ]);
-      newExtensions = [...extensionsSet];
-    }
-
+  const onChangeSecondaryText = (e) => {
+    const newText = e.target.value;
     setConfig((oldConfig) => ({
       ...oldConfig,
-      acceptExtensions: newExtensions.join(","),
-      init: true,
+      secondaryText: newText,
     }));
+    debouncedSetSecondaryText(newText);
   };
 
   const preview = (
@@ -349,6 +420,7 @@ const Uploader = (props) => {
           scriptUrl={sdkScriptUrl}
           config={config}
           isDisabled={config?.id === undefined}
+          showScriptParamsWithEvents={false}
         />
         <Controls>
           <VersionSelector
@@ -366,18 +438,16 @@ const Uploader = (props) => {
                   size={12}
                   place="right-end"
                   tooltipContent={
-                    <Text fontSize="12px">
-                      {t("Common:SelectDestinationFolder")}
-                    </Text>
+                    <Text fontSize="12px">{t("SelectDestinationFolder")}</Text>
                   }
                   dataTestId="room_or_folder_help_button"
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
-                {myFolderId && (
+                {config.id && (
                   <FilesSelectorInput
-                    key={myFolderId}
-                    id={myFolderId}
+                    key={config.id}
+                    id={config.id}
                     onSelectFolder={onChangeFolderId}
                     isSelect
                   />
@@ -387,21 +457,13 @@ const Uploader = (props) => {
           </ControlsSection>
 
           <ControlsSection>
-            <CategorySubHeader>{t("Common:UploadMode")}</CategorySubHeader>
+            <CategorySubHeader>{t("UploadMode")}</CategorySubHeader>
             <RadioButtonGroup
               orientation="vertical"
               options={uploadModeOptions}
               name="uploadMode"
               selected={uploadMode}
-              onClick={(e) => {
-                const value = e.target.value;
-                setUploadMode(value);
-                setConfig((oldConfig) => ({
-                  ...oldConfig,
-                  isFolderUpload: value === "folders",
-                  init: true,
-                }));
-              }}
+              onClick={onClickUploadMode}
               spacing="8px"
               dataTestId="upload_mode_radiobutton_group"
             />
@@ -414,47 +476,59 @@ const Uploader = (props) => {
               options={uploadQuantityOptions}
               name="uploadQuantity"
               selected={uploadQuantity}
-              onClick={(e) => {
-                const value = e.target.value;
-                setUploadQuantity(value);
-                setConfig((oldConfig) => ({
-                  ...oldConfig,
-                  isMultipleUpload: value === "multiple",
-                  init: true,
-                }));
-              }}
+              onClick={onClickUploadQuantity}
               spacing="8px"
               dataTestId="upload_quantity_radiobutton_group"
             />
           </ControlsSection>
 
+          <ControlsSection>
+            <CategorySubHeader>{t("UploadLimits")}</CategorySubHeader>
+            <SizeLimitSetter
+              labelText={
+                config.isMultipleUpload
+                  ? config.isFolderUpload
+                    ? t("MaximumFolderSizePerFolder")
+                    : t("MaximumFileSizePerFile")
+                  : config.isFolderUpload
+                    ? t("MaximumFolderSize")
+                    : t("MaximumFileSize")
+              }
+              tooltipText={
+                config.isMultipleUpload
+                  ? config.isFolderUpload
+                    ? t("MaximumFoldersSizeDescription")
+                    : t("MaximumFilesSizeDescription")
+                  : config.isFolderUpload
+                    ? t("MaximumFolderSizeDescription")
+                    : t("MaximumFileSizeDescription")
+              }
+              configKey="maxPerUploadSize"
+              defaultValue="25"
+              sizeUnits={fileSizeUnits}
+              defaultUnit={defaultSizeUnit}
+              setConfig={setConfig}
+              tabIndex={7}
+              dataTestId="max_file_size"
+            />
+
+            {config.isMultipleUpload && (
+              <SizeLimitSetter
+                labelText={t("MaximumTotalUploadSize")}
+                tooltipText={t("MaximumTotalUploadSizeDescription")}
+                configKey="maxTotalUploadSize"
+                defaultValue="100"
+                sizeUnits={fileSizeUnits}
+                defaultUnit={defaultSizeUnit}
+                setConfig={setConfig}
+                tabIndex={8}
+                dataTestId="max_total_upload_size"
+              />
+            )}
+          </ControlsSection>
+
           {!config.isFolderUpload && (
-            <ControlsSection>
-              <LabelGroup>
-                <CategorySubHeader>{t("AvailableFileTypes")}</CategorySubHeader>
-                <HelpButton
-                  offsetRight={0}
-                  size={12}
-                  place="right"
-                  tooltipContent={
-                    <Text fontSize="12px">{t("Common:AllowedFileTypes")}</Text>
-                  }
-                  dataTestId="available_file_types_help_button"
-                />
-              </LabelGroup>
-              <CheckboxGroup>
-                {FILE_TYPE_CATEGORIES.map((category) => (
-                  <Checkbox
-                    key={category.key}
-                    className="checkbox"
-                    label={t(category.labelKey)}
-                    onChange={() => onChangeCategoryCheckbox(category.key)}
-                    isChecked={isCategorySelected(category.key)}
-                    dataTestId={`${category.key}_checkbox`}
-                  />
-                ))}
-              </CheckboxGroup>
-            </ControlsSection>
+            <FileTypesFilter t={t} config={config} setConfig={setConfig} />
           )}
 
           <ControlsSection>
@@ -466,6 +540,17 @@ const Uploader = (props) => {
                 onChange={onChangeLinkFileText}
                 tabIndex={5}
                 testId="button_text_input"
+              />
+            </ControlsGroup>
+
+            <ControlsGroup>
+              <Label className="label" text={t("HelperText")} />
+              <TextInput
+                scale
+                value={config.secondaryText}
+                onChange={onChangeSecondaryText}
+                tabIndex={6}
+                testId="helper_text_input"
               />
             </ControlsGroup>
 

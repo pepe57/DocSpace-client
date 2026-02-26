@@ -50,6 +50,7 @@ import {
   attachParentFolderId,
   runWithConcurrency,
   createChunks,
+  parseSizeLimit,
 } from "./_utils";
 import styles from "./Uploader.module.scss";
 import { getErrorMessage } from "@/utils";
@@ -73,6 +74,8 @@ export type UploaderClientProps = {
     extensionsText?: string;
     isFolderUpload?: boolean;
     isMultipleUpload?: boolean;
+    maxPerUploadSize?: string;
+    maxTotalUploadSize?: string;
   };
 };
 
@@ -99,6 +102,7 @@ export default function UploaderClient({
     filesSettings?.maxUploadFilesCount || DEFAULT_MAX_UPLOAD_FILES_COUNT;
 
   const [isLoading, setIsLoading] = useState(false);
+  const [uploadPercent, setUploadPercent] = useState(0);
 
   const uploadFiles = useCallback(async (rawFiles: File[]) => {
     const prepared = await attachParentFolderId(rawFiles, folderTargetId);
@@ -106,6 +110,11 @@ export default function UploaderClient({
     const onlyFiles = prepared.filter((f) => !isEmptyDirectoryFile(f));
 
     const uploadedFiles: unknown[] = [];
+
+    const totalBytes = onlyFiles.reduce((sum, f) => sum + f.size, 0);
+    let uploadedBytes = 0;
+
+    setUploadPercent(0);
 
     await runWithConcurrency(onlyFiles, maxUploadFilesCount, async (file) => {
       const targetFolderId = file.parentFolderId ?? folderTargetId;
@@ -144,7 +153,11 @@ export default function UploaderClient({
         );
 
         uploadedChunks += 1;
-        const percent = Math.round((uploadedChunks / chunks.length) * 100);
+        uploadedBytes += chunk.size;
+        const filePercent = Math.round((uploadedChunks / chunks.length) * 100);
+        const overallPercent = Math.round((uploadedBytes / totalBytes) * 100);
+
+        setUploadPercent(overallPercent);
 
         frameCallEvent({
           event: "onUploadProgress",
@@ -153,7 +166,7 @@ export default function UploaderClient({
             fileName: file.name,
             uploadedChunks,
             totalChunks: chunks.length,
-            percent,
+            percent: filePercent,
           },
         });
       });
@@ -168,6 +181,62 @@ export default function UploaderClient({
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
       if (!acceptedFiles.length) return;
+
+      const maxPerUploadBytes = parseSizeLimit(baseConfig?.maxPerUploadSize);
+
+      if (maxPerUploadBytes) {
+        const oversizedFiles = acceptedFiles.filter(
+          (file) => file.size > maxPerUploadBytes,
+        );
+
+        if (oversizedFiles.length > 0) {
+          const maxSizeFormatted = baseConfig?.maxPerUploadSize?.toUpperCase();
+          const isFolderUpload = baseConfig?.isFolderUpload ?? false;
+
+          if (isFolderUpload) {
+            toastr.error(
+              t("Common:FolderSizeExceedsLimit", { maxSize: maxSizeFormatted }),
+            );
+          } else {
+            toastr.error(
+              t("Common:FileSizeExceedsLimit", { maxSize: maxSizeFormatted }),
+            );
+          }
+          return;
+        }
+      }
+
+      if (baseConfig?.isMultipleUpload && baseConfig?.maxTotalUploadSize) {
+        const maxTotalBytes = parseSizeLimit(baseConfig.maxTotalUploadSize);
+
+        if (maxTotalBytes) {
+          const totalSize = acceptedFiles.reduce(
+            (sum, file) => sum + file.size,
+            0,
+          );
+
+          if (totalSize > maxTotalBytes) {
+            const maxTotalFormatted =
+              baseConfig.maxTotalUploadSize.toUpperCase();
+            const isFolderUpload = baseConfig?.isFolderUpload ?? false;
+
+            if (isFolderUpload) {
+              toastr.error(
+                t("Common:FoldersSizeExceedsLimit", {
+                  maxSize: maxTotalFormatted,
+                }),
+              );
+            } else {
+              toastr.error(
+                t("Common:FilesSizeExceedsLimit", {
+                  maxSize: maxTotalFormatted,
+                }),
+              );
+            }
+            return;
+          }
+        }
+      }
 
       setIsLoading(true);
 
@@ -236,6 +305,7 @@ export default function UploaderClient({
     <DropzoneComponent
       isDisabled={isLoading}
       isLoading={isLoading}
+      uploadPercent={uploadPercent}
       isFolderUpload={baseConfig?.isFolderUpload}
       isMultipleUpload={baseConfig?.isMultipleUpload}
       onSingleUploadError={() => {

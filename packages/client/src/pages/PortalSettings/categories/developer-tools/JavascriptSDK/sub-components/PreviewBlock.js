@@ -46,6 +46,7 @@ export const PreviewBlock = ({
   scriptUrl,
   config,
   isDisabled = false,
+  showScriptParamsWithEvents = false,
 }) => {
   const { t, ready } = useTranslation([
     "JavascriptSdk",
