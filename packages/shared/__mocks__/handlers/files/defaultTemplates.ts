@@ -67,6 +67,7 @@ const defaultTemplatesCustomized = {
         fileExtension: ".docx",
         fileTitle: "ONLYOFFICE Document Sample.docx",
         lastModified: "2026-01-21T18:34:37+00:00",
+        fileSize: 408980,
       },
       {
         fileExtension: ".pdf",
@@ -99,6 +100,7 @@ const defaultTemplatesLongTitle = {
         fileTitle:
           "Long long long long long long long long long long long long long long long long long",
         lastModified: "2026-01-21T18:34:37+00:00",
+        fileSize: 408980,
       },
       {
         fileExtension: ".pdf",
