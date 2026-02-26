@@ -99,7 +99,7 @@ const Uploader = (props) => {
             size={12}
             place="right"
             tooltipContent={
-              <Text fontSize="12px">{t("Common:UploadFilesDescription")}</Text>
+              <Text fontSize="12px">{t("UploadFilesDescription")}</Text>
             }
             dataTestId="upload_files_help_button"
           />
@@ -116,9 +116,7 @@ const Uploader = (props) => {
             size={12}
             place="right"
             tooltipContent={
-              <Text fontSize="12px">
-                {t("Common:UploadFoldersDescription")}
-              </Text>
+              <Text fontSize="12px">{t("UploadFoldersDescription")}</Text>
             }
             dataTestId="upload_folders_help_button"
           />
@@ -134,7 +132,7 @@ const Uploader = (props) => {
       value: "single",
       label: (
         <LabelGroup>
-          {isFolderMode ? t("Common:SingleFolder") : t("Common:SingleFile")}
+          {isFolderMode ? t("SingleFolder") : t("SingleFile")}
           <HelpButton
             offsetRight={0}
             size={12}
@@ -142,8 +140,8 @@ const Uploader = (props) => {
             tooltipContent={
               <Text fontSize="12px">
                 {isFolderMode
-                  ? t("Common:SingleFolderDescription")
-                  : t("Common:SingleFileDescription")}
+                  ? t("SingleFolderDescription")
+                  : t("SingleFileDescription")}
               </Text>
             }
             dataTestId="single_help_button"
@@ -155,9 +153,7 @@ const Uploader = (props) => {
       value: "multiple",
       label: (
         <LabelGroup>
-          {isFolderMode
-            ? t("Common:MultipleFolders")
-            : t("Common:MultipleFiles")}
+          {isFolderMode ? t("MultipleFolders") : t("MultipleFiles")}
           <HelpButton
             offsetRight={0}
             size={12}
@@ -165,8 +161,8 @@ const Uploader = (props) => {
             tooltipContent={
               <Text fontSize="12px">
                 {isFolderMode
-                  ? t("Common:MultipleFoldersDescription")
-                  : t("Common:MultipleFilesDescription")}
+                  ? t("MultipleFoldersDescription")
+                  : t("MultipleFilesDescription")}
               </Text>
             }
             dataTestId="multiple_help_button"
@@ -395,9 +391,7 @@ const Uploader = (props) => {
                   size={12}
                   place="right-end"
                   tooltipContent={
-                    <Text fontSize="12px">
-                      {t("Common:SelectDestinationFolder")}
-                    </Text>
+                    <Text fontSize="12px">{t("SelectDestinationFolder")}</Text>
                   }
                   dataTestId="room_or_folder_help_button"
                 />
@@ -416,7 +410,7 @@ const Uploader = (props) => {
           </ControlsSection>
 
           <ControlsSection>
-            <CategorySubHeader>{t("Common:UploadMode")}</CategorySubHeader>
+            <CategorySubHeader>{t("UploadMode")}</CategorySubHeader>
             <RadioButtonGroup
               orientation="vertical"
               options={uploadModeOptions}
@@ -442,25 +436,25 @@ const Uploader = (props) => {
           </ControlsSection>
 
           <ControlsSection>
-            <CategorySubHeader>{t("Common:UploadLimits")}</CategorySubHeader>
+            <CategorySubHeader>{t("UploadLimits")}</CategorySubHeader>
             <SizeLimitSetter
               labelText={
                 config.isMultipleUpload
                   ? config.isFolderUpload
-                    ? t("Common:MaximumFolderSizePerFolder")
-                    : t("Common:MaximumFileSizePerFile")
+                    ? t("MaximumFolderSizePerFolder")
+                    : t("MaximumFileSizePerFile")
                   : config.isFolderUpload
-                    ? t("Common:MaximumFolderSize")
-                    : t("Common:MaximumFileSize")
+                    ? t("MaximumFolderSize")
+                    : t("MaximumFileSize")
               }
               tooltipText={
                 config.isMultipleUpload
                   ? config.isFolderUpload
-                    ? t("Common:MaximumFoldersSizeDescription")
-                    : t("Common:MaximumFilesSizeDescription")
+                    ? t("MaximumFoldersSizeDescription")
+                    : t("MaximumFilesSizeDescription")
                   : config.isFolderUpload
-                    ? t("Common:MaximumFolderSizeDescription")
-                    : t("Common:MaximumFileSizeDescription")
+                    ? t("MaximumFolderSizeDescription")
+                    : t("MaximumFileSizeDescription")
               }
               configKey="maxPerUploadSize"
               defaultValue="25"
@@ -473,8 +467,8 @@ const Uploader = (props) => {
 
             {config.isMultipleUpload && (
               <SizeLimitSetter
-                labelText={t("Common:MaximumTotalUploadSize")}
-                tooltipText={t("Common:MaximumTotalUploadSizeDescription")}
+                labelText={t("MaximumTotalUploadSize")}
+                tooltipText={t("MaximumTotalUploadSizeDescription")}
                 configKey="maxTotalUploadSize"
                 defaultValue="100"
                 sizeUnits={fileSizeUnits}

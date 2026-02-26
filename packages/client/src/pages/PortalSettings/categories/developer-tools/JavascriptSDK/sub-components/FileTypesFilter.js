@@ -83,9 +83,7 @@ export const FileTypesFilter = (props) => {
           offsetRight={0}
           size={12}
           place="right"
-          tooltipContent={
-            <Text fontSize="12px">{t("Common:AllowedFileTypes")}</Text>
-          }
+          tooltipContent={<Text fontSize="12px">{t("AllowedFileTypes")}</Text>}
           dataTestId="available_file_types_help_button"
         />
       </LabelGroup>
