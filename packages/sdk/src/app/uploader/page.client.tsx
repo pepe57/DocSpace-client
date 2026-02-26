@@ -50,6 +50,7 @@ import {
   attachParentFolderId,
   runWithConcurrency,
   createChunks,
+  parseSizeLimit,
 } from "./_utils";
 import styles from "./Uploader.module.scss";
 import { getErrorMessage } from "@/utils";
@@ -58,27 +59,6 @@ import {
   DEFAULT_MAX_UPLOAD_FILES_COUNT,
   DEFAULT_MAX_UPLOAD_THREAD_COUNT,
 } from "@/utils/constants";
-
-const parseSizeLimit = (sizeString?: string): number | null => {
-  if (!sizeString) return null;
-
-  const match = sizeString.toLowerCase().match(/^(\d+)(kb|mb|gb)$/);
-  if (!match) return null;
-
-  const value = Number.parseInt(match[1], 10);
-  const unit = match[2];
-
-  switch (unit) {
-    case "kb":
-      return value * 1024;
-    case "mb":
-      return value * 1024 * 1024;
-    case "gb":
-      return value * 1024 * 1024 * 1024;
-    default:
-      return null;
-  }
-};
 
 export type UploaderClientProps = {
   filesSettings?: TFilesSettings;
