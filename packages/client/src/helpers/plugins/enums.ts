@@ -44,6 +44,7 @@ enum PluginScopes {
   ProfileMenu = "ProfileMenu",
   EventListener = "EventListener",
   File = "File",
+  PostMessage = "PostMessage",
   Article = "Article",
 }
 

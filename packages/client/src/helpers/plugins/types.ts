@@ -60,6 +60,8 @@ import type {
   ISettingsPlugin,
   ButtonGroup,
   IFloatingOperationsButton,
+  IPostMessageCallbackMessage,
+  IPostMessagePlugin,
 } from "@onlyoffice/docspace-plugin-sdk";
 
 import type {
@@ -73,6 +75,7 @@ import type {
 export type {
   ISettings,
   IMessage,
+  IPostMessageCallbackMessage,
   IPostMessage,
   IFrame,
   IImage,
@@ -97,9 +100,13 @@ export interface IFloatingOperationsButtonClient
   pluginName: string;
 }
 
-export interface IContextMenuItemClient extends IContextMenuItem {
+export interface IContextMenuItemClient
+  extends Omit<IContextMenuItem, "onClick"> {
   pluginName: string;
   items?: Omit<IContextMenuItemClient, "items">[];
+  onClick?: (
+    id: number | string,
+  ) => Promise<IMessage> | Promise<void> | IMessage | void;
 }
 
 export interface IMainButtonItemClient extends IMainButtonItem {
@@ -185,4 +192,5 @@ export type TPlugin = {
   Partial<IMainButtonPlugin> &
   Partial<IProfileMenuPlugin> &
   Partial<ISettingsPlugin> &
+  Partial<IPostMessagePlugin> &
   Partial<IArticlePlugin>;
