@@ -54,22 +54,44 @@ export const SizeLimitSetter = (props) => {
   const [value, setValue] = useState(defaultValue);
 
   const onChangeValue = (e) => {
-    const newValue = e.target.value;
-    setValue(newValue);
+    const inputValue = e.target.value;
+
+    if (inputValue === "") {
+      setValue("");
+      setConfig((oldConfig) => {
+        const { [configKey]: _, ...rest } = oldConfig;
+        return { ...rest, init: true };
+      });
+      return;
+    }
+
+    if (!/^\d+$/.test(inputValue)) {
+      return;
+    }
+
+    const numericValue = Number.parseInt(inputValue, 10);
+
+    if (numericValue <= 0) {
+      return;
+    }
+
+    setValue(inputValue);
     setConfig((oldConfig) => ({
       ...oldConfig,
-      [configKey]: `${newValue}${unit.key}`,
+      [configKey]: `${inputValue}${unit.key}`,
       init: true,
     }));
   };
 
   const onChangeUnit = (item) => {
     setUnit(item);
-    setConfig((oldConfig) => ({
-      ...oldConfig,
-      [configKey]: `${value}${item.key}`,
-      init: true,
-    }));
+    if (value) {
+      setConfig((oldConfig) => ({
+        ...oldConfig,
+        [configKey]: `${value}${item.key}`,
+        init: true,
+      }));
+    }
   };
 
   return (
