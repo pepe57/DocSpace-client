@@ -62,6 +62,8 @@ import type {
   IMessage,
   IProfileMenuItem,
   IProfileMenuItemClient,
+  IArticleItem,
+  IArticleItemClient,
   IframeWindow,
   TPlugin,
 } from "SRC_DIR/helpers/plugins/types";
@@ -77,7 +79,6 @@ import {
 
 import type SelectedFolderStore from "./SelectedFolderStore";
 import { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
-import type { IFloatingOperationsButton } from "@onlyoffice/docspace-plugin-sdk";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -116,6 +117,8 @@ class PluginStore {
   eventListenerItems: Map<string, IEventListenerItemClient> = new Map();
 
   fileItems: Map<string, IFileItemClient> = new Map();
+
+  articleItems: Map<string, IArticleItemClient> = new Map();
 
   pluginFrame: HTMLIFrameElement | null = null;
 
@@ -181,6 +184,7 @@ class PluginStore {
       updateProfileMenuItems: this.updateProfileMenuItems,
       updateEventListenerItems: this.updateEventListenerItems,
       updateFileItems: this.updateFileItems,
+      updateArticleItems: this.updateArticleItems,
       updateCreateDialogProps: updateCreateDialogProps,
       updatePlugin: this.updatePlugin,
       setPluginSelectorVisible: this.setPluginSelectorVisible,
@@ -291,6 +295,10 @@ class PluginStore {
 
         if (this.plugins[pluginIdx].scopes.includes(PluginScopes.File)) {
           this.updateFileItems(name);
+        }
+
+        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.Article)) {
+          this.updateArticleItems(name);
         }
       }
     }
@@ -585,6 +593,10 @@ class PluginStore {
     if (plugin.scopes.includes(PluginScopes.File)) {
       this.updateFileItems(name);
     }
+
+    if (plugin.scopes.includes(PluginScopes.Article)) {
+      this.updateArticleItems(name);
+    }
   };
 
   updatePlugin = async (
@@ -673,6 +685,10 @@ class PluginStore {
 
     if (plugin.scopes.includes(PluginScopes.File)) {
       this.deactivateFileItems(plugin);
+    }
+
+    if (plugin.scopes.includes(PluginScopes.Article)) {
+      this.deactivateArticleItems(plugin);
     }
   };
 
@@ -1247,6 +1263,59 @@ class PluginStore {
     });
   };
 
+  updateArticleItems = async (name: string) => {
+    const plugin = this.plugins.find((p) => p.name === name);
+
+    if (!plugin || !plugin.enabled) return;
+
+    const items: Map<string, IArticleItem> | undefined =
+      plugin.getArticleItems && plugin.getArticleItems();
+
+    if (!items) return;
+
+    const userRole = this.getUserRole();
+    const device = this.getCurrentDevice();
+
+    for (const [key, value] of Array.from(items)) {
+      const correctUserType = value.usersTypes
+        ? value.usersTypes.includes(userRole)
+        : true;
+
+      const correctDevice = value.devices
+        ? value.devices.includes(device)
+        : true;
+
+      if (!correctUserType || !correctDevice) continue;
+
+      const onClick = async () => {
+        if (!value.onClick) return;
+
+        const message = await value.onClick();
+
+        this.dispatchMessage({ message, pluginName: plugin.name });
+      };
+
+      this.articleItems.set(key, {
+        ...value,
+        onClick,
+        pluginName: plugin.name,
+      });
+    }
+  };
+
+  deactivateArticleItems = (plugin: TPlugin) => {
+    if (!plugin) return;
+
+    const items: Map<string, IArticleItem> | undefined =
+      plugin.getArticleItems && plugin.getArticleItems();
+
+    if (!items) return;
+
+    Array.from(items).forEach(([key]) => {
+      this.articleItems.delete(key);
+    });
+  };
+
   get pluginList() {
     return this.plugins;
   }
@@ -1341,6 +1410,23 @@ class PluginStore {
 
   get fileItemsList() {
     const items = Array.from(this.fileItems, ([key, value]) => {
+      return {
+        key,
+        value: {
+          ...value,
+        },
+      };
+    });
+
+    if (items.length > 0) {
+      return items;
+    }
+
+    return null;
+  }
+
+  get articleItemsList() {
+    const items = Array.from(this.articleItems, ([key, value]) => {
       return {
         key,
         value: {

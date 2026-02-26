@@ -41,6 +41,7 @@ import type {
   IInfoPanelSubMenu,
   IMainButtonItem,
   IProfileMenuItem,
+  IArticleItem,
   ISettings,
   IMessage,
   IPostMessage,
@@ -53,6 +54,7 @@ import type {
   IInfoPanelPlugin,
   IMainButtonPlugin,
   IProfileMenuPlugin,
+  IArticlePlugin,
   IPlugin,
   IApiPlugin,
   ISettingsPlugin,
@@ -86,6 +88,7 @@ export type {
   IInfoPanelItem,
   IMainButtonItem,
   IProfileMenuItem,
+  IArticleItem,
 };
 
 //Extended client-side types
@@ -126,6 +129,10 @@ export interface IFileItemClient extends Omit<IFileItem, "onClick"> {
   onClick: (item: TFile) => Promise<IMessage> | Promise<void> | void | IMessage;
   fileIcon: string;
   fileIconTile: string;
+  pluginName: string;
+}
+
+export interface IArticleItemClient extends IArticleItem {
   pluginName: string;
 }
 
@@ -177,4 +184,5 @@ export type TPlugin = {
   Partial<IInfoPanelPlugin> &
   Partial<IMainButtonPlugin> &
   Partial<IProfileMenuPlugin> &
-  Partial<ISettingsPlugin>;
+  Partial<ISettingsPlugin> &
+  Partial<IArticlePlugin>;

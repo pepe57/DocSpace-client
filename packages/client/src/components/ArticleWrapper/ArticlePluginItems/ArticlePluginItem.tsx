@@ -24,37 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  Actions,
-  FilesType,
-  Events,
-  PluginStatus,
-  ToastType,
-  Components,
-  UsersType,
-  Devices,
-} from "@onlyoffice/docspace-plugin-sdk";
+import React, { useCallback, useEffect, useState } from "react";
 
-enum PluginScopes {
-  API = "API",
-  Settings = "Settings",
-  ContextMenu = "ContextMenu",
-  InfoPanel = "InfoPanel",
-  MainButton = "MainButton",
-  ProfileMenu = "ProfileMenu",
-  EventListener = "EventListener",
-  File = "File",
-  Article = "Article",
+import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
+import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
+import type { IArticleItemClient } from "SRC_DIR/helpers/plugins/types";
+
+interface ArticlePluginItemProps {
+  item: IArticleItemClient;
 }
 
-export {
-  PluginScopes,
-  Actions as PluginActions,
-  FilesType as PluginFileType,
-  Events as PluginEvents,
-  PluginStatus,
-  ToastType as PluginToastType,
-  Components as PluginComponents,
-  UsersType as PluginUsersType,
-  Devices as PluginDevices,
+const ArticlePluginItem: React.FC<ArticlePluginItemProps> = ({ item }) => {
+  const { body: boxProps, onLoad, onClick, pluginName } = item;
+
+  const [bodyProps, setBodyProps] = useState(boxProps || {});
+
+  const onLoadAction = useCallback(async () => {
+    if (!onLoad) return;
+    const res = await onLoad();
+
+    const { body } = res;
+
+    if (body) {
+      setBodyProps({ ...body });
+    }
+  }, [onLoad]);
+
+  useEffect(() => {
+    onLoadAction();
+  }, [onLoadAction]);
+
+  const handleClick = useCallback(async () => {
+    if (!onClick) return;
+    await onClick();
+  }, [onClick]);
+
+  return (
+    <div
+      onClick={handleClick}
+      style={{ cursor: onClick ? "pointer" : "default" }}
+    >
+      <WrappedComponent
+        pluginName={pluginName}
+        component={{
+          component: PluginComponents.box,
+          props: bodyProps,
+        }}
+        saveButton={undefined}
+        setSaveButtonProps={undefined}
+        setModalRequestRunning={undefined}
+        modalRequestRunning={undefined}
+      />
+    </div>
+  );
 };
+
+export default ArticlePluginItem;
