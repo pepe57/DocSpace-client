@@ -136,7 +136,7 @@ const AIAgentViewComponent = ({
         <Activity mode={currentView === "chat" ? "visible" : "hidden"}>
           <Chat
             userAvatar={userAvatar!}
-            roomId={isViewLoading && !showHeaderLoader ? "-1" : roomId!}
+            agentId={isViewLoading && !showHeaderLoader ? "-1" : roomId!}
             getIcon={getIcon!}
             selectedModel={chatSettings?.modelId ?? ""}
             isLoading={showBodyLoader}
