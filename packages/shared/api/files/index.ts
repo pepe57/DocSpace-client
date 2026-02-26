@@ -1956,6 +1956,18 @@ export async function setDefaultTemplates(
   return res.items as TDefaultTemplate[];
 }
 
+export async function resetDefaultTemplates(fileExtension: string) {
+  const res = await request({
+    method: "delete",
+    url: "/files/settings/defaulttemplate",
+    data: {
+      fileExtension,
+    },
+  });
+
+  return res.items as TDefaultTemplate[];
+}
+
 export async function uploadTemplateFromDevice(
   file: File,
   fileExtension: string,
