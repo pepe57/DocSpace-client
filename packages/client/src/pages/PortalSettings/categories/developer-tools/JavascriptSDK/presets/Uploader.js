@@ -30,12 +30,10 @@ import { withTranslation } from "react-i18next";
 
 import debounce from "lodash.debounce";
 import { Label } from "@docspace/ui-kit/components/label";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Text } from "@docspace/ui-kit/components/text";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
@@ -45,6 +43,8 @@ import SDK from "@onlyoffice/docspace-sdk-js";
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { SizeLimitSetter } from "../sub-components/SizeLimitSetter";
+import { FileTypesFilter } from "../sub-components/FileTypesFilter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { VersionSelector } from "../sub-components/VersionSelector";
@@ -56,7 +56,6 @@ import {
   defaultDimension,
   sdkSource,
   sdkVersion,
-  FILE_TYPE_CATEGORIES,
   FILE_TYPE_EXTENSIONS,
 } from "../constants";
 
@@ -69,8 +68,6 @@ import {
   Frame,
   Container,
   FilesSelectorInputWrapper,
-  CheckboxGroup,
-  RowContainer,
 } from "./StyledPresets";
 
 const Uploader = (props) => {
@@ -89,12 +86,7 @@ const Uploader = (props) => {
     { key: "gb", label: t("Common:Gigabyte") },
   ];
 
-  const [perUploadSizeUnit, setPerUploadSizeUnit] = useState(fileSizeUnits[1]);
-  const [maxPerUploadSize, setMaxPerUploadSize] = useState("25");
-  const [totalUploadSizeUnit, setTotalUploadSizeUnit] = useState(
-    fileSizeUnits[1],
-  );
-  const [maxTotalUploadSize, setMaxTotalUploadSize] = useState("100");
+  const defaultSizeUnit = fileSizeUnits[1];
 
   const uploadModeOptions = [
     {
@@ -361,41 +353,6 @@ const Uploader = (props) => {
     debouncedSetSecondaryText(newText);
   };
 
-  const getSelectedExtensions = () => {
-    return config.acceptExtensions ? config.acceptExtensions.split(",") : [];
-  };
-
-  const isCategorySelected = (category) => {
-    const selectedExtensions = getSelectedExtensions();
-    const categoryExtensions = FILE_TYPE_EXTENSIONS[category] || [];
-    return categoryExtensions.every((ext) => selectedExtensions.includes(ext));
-  };
-
-  const onChangeCategoryCheckbox = (category) => {
-    const selectedExtensions = getSelectedExtensions();
-    const categoryExtensions = FILE_TYPE_EXTENSIONS[category] || [];
-    const isSelected = isCategorySelected(category);
-
-    let newExtensions;
-    if (isSelected) {
-      newExtensions = selectedExtensions.filter(
-        (ext) => !categoryExtensions.includes(ext),
-      );
-    } else {
-      const extensionsSet = new Set([
-        ...selectedExtensions,
-        ...categoryExtensions,
-      ]);
-      newExtensions = [...extensionsSet];
-    }
-
-    setConfig((oldConfig) => ({
-      ...oldConfig,
-      acceptExtensions: newExtensions.join(","),
-      init: true,
-    }));
-  };
-
   const preview = (
     <Frame
       width={config.width.includes("px") ? config.width : undefined}
@@ -486,160 +443,51 @@ const Uploader = (props) => {
 
           <ControlsSection>
             <CategorySubHeader>{t("Common:UploadLimits")}</CategorySubHeader>
-            <ControlsGroup>
-              <LabelGroup>
-                <Label
-                  className="label"
-                  text={
-                    config.isMultipleUpload
-                      ? config.isFolderUpload
-                        ? t("Common:MaximumFolderSizePerFolder")
-                        : t("Common:MaximumFileSizePerFile")
-                      : config.isFolderUpload
-                        ? t("Common:MaximumFolderSize")
-                        : t("Common:MaximumFileSize")
-                  }
-                />
-                <HelpButton
-                  offsetRight={0}
-                  size={12}
-                  place="right"
-                  tooltipContent={
-                    <Text fontSize="12px">
-                      {config.isMultipleUpload
-                        ? config.isFolderUpload
-                          ? t("Common:MaximumFoldersSizeDescription")
-                          : t("Common:MaximumFilesSizeDescription")
-                        : config.isFolderUpload
-                          ? t("Common:MaximumFolderSizeDescription")
-                          : t("Common:MaximumFileSizeDescription")}
-                    </Text>
-                  }
-                  dataTestId="upload_limits_help_button"
-                />
-              </LabelGroup>
-              <RowContainer combo>
-                <TextInput
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setMaxPerUploadSize(value);
-                    setConfig((oldConfig) => ({
-                      ...oldConfig,
-                      maxPerUploadSize: `${value}${perUploadSizeUnit.key}`,
-                      init: true,
-                    }));
-                  }}
-                  value={maxPerUploadSize}
-                  tabIndex={7}
-                  testId="max_file_size_input"
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions
-                  onSelect={(item) => {
-                    setPerUploadSizeUnit(item);
-                    setConfig((oldConfig) => ({
-                      ...oldConfig,
-                      maxPerUploadSize: `${maxPerUploadSize}${item.key}`,
-                      init: true,
-                    }));
-                  }}
-                  options={fileSizeUnits}
-                  selectedOption={perUploadSizeUnit}
-                  displaySelectedOption
-                  directionY="bottom"
-                  dataTestId="file_size_unit_combobox"
-                  dropDownTestId="file_size_unit_dropdown"
-                />
-              </RowContainer>
-            </ControlsGroup>
+            <SizeLimitSetter
+              labelText={
+                config.isMultipleUpload
+                  ? config.isFolderUpload
+                    ? t("Common:MaximumFolderSizePerFolder")
+                    : t("Common:MaximumFileSizePerFile")
+                  : config.isFolderUpload
+                    ? t("Common:MaximumFolderSize")
+                    : t("Common:MaximumFileSize")
+              }
+              tooltipText={
+                config.isMultipleUpload
+                  ? config.isFolderUpload
+                    ? t("Common:MaximumFoldersSizeDescription")
+                    : t("Common:MaximumFilesSizeDescription")
+                  : config.isFolderUpload
+                    ? t("Common:MaximumFolderSizeDescription")
+                    : t("Common:MaximumFileSizeDescription")
+              }
+              configKey="maxPerUploadSize"
+              defaultValue="25"
+              sizeUnits={fileSizeUnits}
+              defaultUnit={defaultSizeUnit}
+              setConfig={setConfig}
+              tabIndex={7}
+              dataTestId="max_file_size"
+            />
 
             {config.isMultipleUpload && (
-              <ControlsGroup>
-                <LabelGroup>
-                  <Label
-                    className="label"
-                    text={t("Common:MaximumTotalUploadSize")}
-                  />
-                  <HelpButton
-                    offsetRight={0}
-                    size={12}
-                    place="right"
-                    tooltipContent={
-                      <Text fontSize="12px">
-                        {t("Common:MaximumTotalUploadSizeDescription")}
-                      </Text>
-                    }
-                    dataTestId="total_upload_size_help_button"
-                  />
-                </LabelGroup>
-                <RowContainer combo>
-                  <TextInput
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setMaxTotalUploadSize(value);
-                      setConfig((oldConfig) => ({
-                        ...oldConfig,
-                        maxTotalUploadSize: `${value}${totalUploadSizeUnit.key}`,
-                        init: true,
-                      }));
-                    }}
-                    value={maxTotalUploadSize}
-                    tabIndex={8}
-                    testId="max_total_upload_size_input"
-                  />
-                  <ComboBox
-                    size="content"
-                    scaled={false}
-                    scaledOptions
-                    onSelect={(item) => {
-                      setTotalUploadSizeUnit(item);
-                      setConfig((oldConfig) => ({
-                        ...oldConfig,
-                        maxTotalUploadSize: `${maxTotalUploadSize}${item.key}`,
-                        init: true,
-                      }));
-                    }}
-                    options={fileSizeUnits}
-                    selectedOption={totalUploadSizeUnit}
-                    displaySelectedOption
-                    directionY="bottom"
-                    dataTestId="total_upload_size_unit_combobox"
-                    dropDownTestId="total_upload_size_unit_dropdown"
-                  />
-                </RowContainer>
-              </ControlsGroup>
+              <SizeLimitSetter
+                labelText={t("Common:MaximumTotalUploadSize")}
+                tooltipText={t("Common:MaximumTotalUploadSizeDescription")}
+                configKey="maxTotalUploadSize"
+                defaultValue="100"
+                sizeUnits={fileSizeUnits}
+                defaultUnit={defaultSizeUnit}
+                setConfig={setConfig}
+                tabIndex={8}
+                dataTestId="max_total_upload_size"
+              />
             )}
           </ControlsSection>
 
           {!config.isFolderUpload && (
-            <ControlsSection>
-              <LabelGroup>
-                <CategorySubHeader>{t("AvailableFileTypes")}</CategorySubHeader>
-                <HelpButton
-                  offsetRight={0}
-                  size={12}
-                  place="right"
-                  tooltipContent={
-                    <Text fontSize="12px">{t("Common:AllowedFileTypes")}</Text>
-                  }
-                  dataTestId="available_file_types_help_button"
-                />
-              </LabelGroup>
-              <CheckboxGroup>
-                {FILE_TYPE_CATEGORIES.map((category) => (
-                  <Checkbox
-                    key={category.key}
-                    className="checkbox"
-                    label={t(category.labelKey)}
-                    onChange={() => onChangeCategoryCheckbox(category.key)}
-                    isChecked={isCategorySelected(category.key)}
-                    dataTestId={`${category.key}_checkbox`}
-                  />
-                ))}
-              </CheckboxGroup>
-            </ControlsSection>
+            <FileTypesFilter t={t} config={config} setConfig={setConfig} />
           )}
 
           <ControlsSection>
