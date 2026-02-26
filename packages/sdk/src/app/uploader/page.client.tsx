@@ -193,15 +193,15 @@ export default function UploaderClient({
           const maxSizeFormatted = baseConfig?.maxPerUploadSize?.toUpperCase();
           const isFolderUpload = baseConfig?.isFolderUpload ?? false;
 
-          const errorKey = isFolderUpload
-            ? "Common:FolderSizeExceedsLimit"
-            : "Common:FileSizeExceedsLimit";
-
-          toastr.error(
-            t(errorKey, {
-              maxSize: maxSizeFormatted,
-            }),
-          );
+          if (isFolderUpload) {
+            toastr.error(
+              t("Common:FolderSizeExceedsLimit", { maxSize: maxSizeFormatted }),
+            );
+          } else {
+            toastr.error(
+              t("Common:FileSizeExceedsLimit", { maxSize: maxSizeFormatted }),
+            );
+          }
           return;
         }
       }
@@ -220,15 +220,19 @@ export default function UploaderClient({
               baseConfig.maxTotalUploadSize.toUpperCase();
             const isFolderUpload = baseConfig?.isFolderUpload ?? false;
 
-            const errorKey = isFolderUpload
-              ? "Common:FoldersSizeExceedsLimit"
-              : "Common:FilesSizeExceedsLimit";
-
-            toastr.error(
-              t(errorKey, {
-                maxSize: maxTotalFormatted,
-              }),
-            );
+            if (isFolderUpload) {
+              toastr.error(
+                t("Common:FoldersSizeExceedsLimit", {
+                  maxSize: maxTotalFormatted,
+                }),
+              );
+            } else {
+              toastr.error(
+                t("Common:FilesSizeExceedsLimit", {
+                  maxSize: maxTotalFormatted,
+                }),
+              );
+            }
             return;
           }
         }
