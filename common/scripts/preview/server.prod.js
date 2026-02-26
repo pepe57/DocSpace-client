@@ -24,56 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { type FC } from "react";
-import {
-  ComboBox,
-  ComboBoxSize,
-  type TOption,
-} from "@docspace/ui-kit/components/combobox";
+// Set custom environment variables here before requiring server.combined.js
+process.env.NODE_ENV = process.env.NODE_ENV || "production";
+process.env.PORT = process.env.PORT || "5055";
+process.env.API_HOST = process.env.API_HOST || "http://localhost:8092";
 
-import { IconDisplay } from "./IconDisplay";
-
-import styles from "../Share.module.scss";
-
-export interface AccessOptionProps {
-  isLoaded: boolean;
-  canEditInternal: boolean;
-
-  options: TOption[];
-  selectedOption: TOption;
-  onSelect: (option: TOption) => void;
-}
-
-export const LinkTypeSelector: FC<AccessOptionProps> = ({
-  options,
-  isLoaded,
-  onSelect,
-  selectedOption,
-  canEditInternal,
-}) => {
-  if (!canEditInternal) {
-    return <IconDisplay option={selectedOption} />;
-  }
+// You can pass command line arguments to the server.combined.js process
+// by setting them before requiring the file
+const argv = (key) => {
+  if (process.argv.includes(`--${key}`)) return true;
 
   return (
-    <ComboBox
-      fillIcon
-      modernView
-      type="onlyIcon"
-      directionY="both"
-      manualWidth="auto"
-      withBackdrop={false}
-      scaled={false}
-      noSelect={false}
-      options={options}
-      scaledOptions={false}
-      className={styles.internalCombobox}
-      size={ComboBoxSize.content}
-      selectedOption={selectedOption}
-      onSelect={onSelect}
-      showDisabledItems
-      isDisabled={isLoaded}
-      useImageIcon
-    />
+    process.argv.find((arg) => arg.startsWith(`--${key}=`))?.split("=")[1] ||
+    null
   );
 };
+
+// Set port from command line arguments if provided
+if (argv("app.port")) {
+  process.env.PORT = argv("app.port");
+}
+
+// Set hostname from command line arguments if provided
+if (argv("app.hostname")) {
+  process.env.HOSTNAME = argv("app.hostname");
+}
+
+console.log(
+  `Starting preview server with environment: NODE_ENV=${process.env.NODE_ENV}, PORT=${process.env.PORT}` +
+    (process.env.HOSTNAME ? `, HOSTNAME=${process.env.HOSTNAME}` : ""),
+);
+
+// Now require server.combined.js which will use the environment variables we just set
+require("./server.combined.js");
