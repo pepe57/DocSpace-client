@@ -35,6 +35,7 @@ import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Text } from "@docspace/ui-kit/components/text";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
@@ -69,6 +70,7 @@ import {
   Container,
   FilesSelectorInputWrapper,
   CheckboxGroup,
+  RowContainer,
 } from "./StyledPresets";
 
 const Uploader = (props) => {
@@ -81,6 +83,19 @@ const Uploader = (props) => {
   const [uploadMode, setUploadMode] = useState("files");
   const [uploadQuantity, setUploadQuantity] = useState("single");
 
+  const fileSizeUnits = [
+    { key: "kb", label: t("Common:Kilobyte") },
+    { key: "mb", label: t("Common:Megabyte") },
+    { key: "gb", label: t("Common:Gigabyte") },
+  ];
+
+  const [perUploadSizeUnit, setPerUploadSizeUnit] = useState(fileSizeUnits[1]);
+  const [maxPerUploadSize, setMaxPerUploadSize] = useState("25");
+  const [totalUploadSizeUnit, setTotalUploadSizeUnit] = useState(
+    fileSizeUnits[1],
+  );
+  const [maxTotalUploadSize, setMaxTotalUploadSize] = useState("100");
+
   const uploadModeOptions = [
     {
       value: "files",
@@ -92,9 +107,7 @@ const Uploader = (props) => {
             size={12}
             place="right"
             tooltipContent={
-              <Text fontSize="12px">
-                {t("Common:UploadFilesDescription")}
-              </Text>
+              <Text fontSize="12px">{t("Common:UploadFilesDescription")}</Text>
             }
             dataTestId="upload_files_help_button"
           />
@@ -150,7 +163,9 @@ const Uploader = (props) => {
       value: "multiple",
       label: (
         <LabelGroup>
-          {isFolderMode ? t("Common:MultipleFolders") : t("Common:MultipleFiles")}
+          {isFolderMode
+            ? t("Common:MultipleFolders")
+            : t("Common:MultipleFiles")}
           <HelpButton
             offsetRight={0}
             size={12}
@@ -195,6 +210,8 @@ const Uploader = (props) => {
     id: myFolderId,
     isFolderUpload: false,
     isMultipleUpload: false,
+    maxPerUploadSize: "25mb",
+    maxTotalUploadSize: "100mb",
     events: {
       onUploadSuccess: (data) => {
         console.log("onUploadSuccess", data);
@@ -281,7 +298,10 @@ const Uploader = (props) => {
     setConfig((oldConfig) => ({
       ...oldConfig,
       isFolderUpload,
-      secondaryText: getDefaultSecondaryText(isFolderUpload, oldConfig.isMultipleUpload),
+      secondaryText: getDefaultSecondaryText(
+        isFolderUpload,
+        oldConfig.isMultipleUpload,
+      ),
       init: true,
     }));
   };
@@ -293,7 +313,10 @@ const Uploader = (props) => {
     setConfig((oldConfig) => ({
       ...oldConfig,
       isMultipleUpload,
-      secondaryText: getDefaultSecondaryText(oldConfig.isFolderUpload, isMultipleUpload),
+      secondaryText: getDefaultSecondaryText(
+        oldConfig.isFolderUpload,
+        isMultipleUpload,
+      ),
       init: true,
     }));
   };
@@ -459,6 +482,135 @@ const Uploader = (props) => {
               spacing="8px"
               dataTestId="upload_quantity_radiobutton_group"
             />
+          </ControlsSection>
+
+          <ControlsSection>
+            <CategorySubHeader>{t("Common:UploadLimits")}</CategorySubHeader>
+            <ControlsGroup>
+              <LabelGroup>
+                <Label
+                  className="label"
+                  text={
+                    config.isMultipleUpload
+                      ? config.isFolderUpload
+                        ? t("Common:MaximumFolderSizePerFolder")
+                        : t("Common:MaximumFileSizePerFile")
+                      : config.isFolderUpload
+                        ? t("Common:MaximumFolderSize")
+                        : t("Common:MaximumFileSize")
+                  }
+                />
+                <HelpButton
+                  offsetRight={0}
+                  size={12}
+                  place="right"
+                  tooltipContent={
+                    <Text fontSize="12px">
+                      {config.isMultipleUpload
+                        ? config.isFolderUpload
+                          ? t("Common:MaximumFoldersSizeDescription")
+                          : t("Common:MaximumFilesSizeDescription")
+                        : config.isFolderUpload
+                          ? t("Common:MaximumFolderSizeDescription")
+                          : t("Common:MaximumFileSizeDescription")}
+                    </Text>
+                  }
+                  dataTestId="upload_limits_help_button"
+                />
+              </LabelGroup>
+              <RowContainer combo>
+                <TextInput
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setMaxPerUploadSize(value);
+                    setConfig((oldConfig) => ({
+                      ...oldConfig,
+                      maxPerUploadSize: `${value}${perUploadSizeUnit.key}`,
+                      init: true,
+                    }));
+                  }}
+                  value={maxPerUploadSize}
+                  tabIndex={7}
+                  testId="max_file_size_input"
+                />
+                <ComboBox
+                  size="content"
+                  scaled={false}
+                  scaledOptions
+                  onSelect={(item) => {
+                    setPerUploadSizeUnit(item);
+                    setConfig((oldConfig) => ({
+                      ...oldConfig,
+                      maxPerUploadSize: `${maxPerUploadSize}${item.key}`,
+                      init: true,
+                    }));
+                  }}
+                  options={fileSizeUnits}
+                  selectedOption={perUploadSizeUnit}
+                  displaySelectedOption
+                  directionY="bottom"
+                  dataTestId="file_size_unit_combobox"
+                  dropDownTestId="file_size_unit_dropdown"
+                />
+              </RowContainer>
+            </ControlsGroup>
+
+            {config.isMultipleUpload && (
+              <ControlsGroup>
+                <LabelGroup>
+                  <Label
+                    className="label"
+                    text={t("Common:MaximumTotalUploadSize")}
+                  />
+                  <HelpButton
+                    offsetRight={0}
+                    size={12}
+                    place="right"
+                    tooltipContent={
+                      <Text fontSize="12px">
+                        {t("Common:MaximumTotalUploadSizeDescription")}
+                      </Text>
+                    }
+                    dataTestId="total_upload_size_help_button"
+                  />
+                </LabelGroup>
+                <RowContainer combo>
+                  <TextInput
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setMaxTotalUploadSize(value);
+                      setConfig((oldConfig) => ({
+                        ...oldConfig,
+                        maxTotalUploadSize: `${value}${totalUploadSizeUnit.key}`,
+                        init: true,
+                      }));
+                    }}
+                    value={maxTotalUploadSize}
+                    tabIndex={8}
+                    testId="max_total_upload_size_input"
+                  />
+                  <ComboBox
+                    size="content"
+                    scaled={false}
+                    scaledOptions
+                    onSelect={(item) => {
+                      setTotalUploadSizeUnit(item);
+                      setConfig((oldConfig) => ({
+                        ...oldConfig,
+                        maxTotalUploadSize: `${maxTotalUploadSize}${item.key}`,
+                        init: true,
+                      }));
+                    }}
+                    options={fileSizeUnits}
+                    selectedOption={totalUploadSizeUnit}
+                    displaySelectedOption
+                    directionY="bottom"
+                    dataTestId="total_upload_size_unit_combobox"
+                    dropDownTestId="total_upload_size_unit_dropdown"
+                  />
+                </RowContainer>
+              </ControlsGroup>
+            )}
           </ControlsSection>
 
           {!config.isFolderUpload && (
