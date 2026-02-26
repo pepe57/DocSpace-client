@@ -29,7 +29,6 @@
     "@codemirror/lang-javascript": "6.2.2",
     "@docspace/shared": "workspace:*",
     "@docspace/ui-kit": "workspace:*",
-    "@onlyoffice/docspace-api-sdk": "^3.6.0",
     "@onlyoffice/docspace-sdk-js": "2.1.0",
     "@react-spring/web": "9.7.5",
     "@tanstack/react-query": "^5.90.20",

@@ -103,7 +103,7 @@ class GroupsStore {
 
     SocketHelper?.on(
       SocketEvents.AddGroup,
-      async (value) => {
+      async (value: { id: string; data: TGroup }) => {
         const { contactsTab } = this.peopleStore.usersStore;
 
         if (contactsTab !== "groups") return;
@@ -133,7 +133,7 @@ class GroupsStore {
 
     SocketHelper?.on(
       SocketEvents.UpdateGroup,
-      async (value) => {
+      async (value: { id: string; data: TGroup }) => {
         const { contactsTab } = this.peopleStore.usersStore;
 
         const { id, data } = value;
