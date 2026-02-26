@@ -281,13 +281,13 @@ const View = ({
   }, [location.search]);
 
   const toolsSettings = useToolsSettings({
-    roomId: roomId ?? "",
+    agentId: roomId ?? "",
     aiConfig,
     chatSettings: selectedFolderStore.chatSettings,
   });
 
   const initChats = useInitChats({
-    roomId: roomId ?? "",
+    agentId: roomId ?? "",
   });
 
   const { initMessages, ...messagesSettings } = useInitMessages(roomId ?? "");
