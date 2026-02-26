@@ -1135,5 +1135,9 @@
   "DropzoneFoldersSecondary": "or drop folders here",
   "DropzoneFolderSecondary": "or drop folder here",
   "DropzoneFilesSecondary": "or drop files here",
-  "Quantity": "Quantity"
+  "Quantity": "Quantity",
+  "FileSizeExceedsLimit": "The file is too large. The maximum size is {{maxSize}}.",
+  "FolderSizeExceedsLimit": "The folder is too large. The maximum size is {{maxSize}}.",
+  "FilesSizeExceedsLimit": "The files are too large. The maximum size is {{maxSize}}.",
+  "FoldersSizeExceedsLimit": "The folders are too large. The maximum size is {{maxSize}}."
 }
