@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect, useCallback } from "react";
-import { createPortal } from "react-dom";
+import { Portal } from "@docspace/ui-kit/components/portal";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
@@ -422,37 +422,41 @@ const EditRoomGroupsDialog = ({
         ) : null}
       </ModalDialog>
 
-      {isOpenRoomList &&
-        selectedGroup &&
-        createPortal(
-          <RoomListPanel
-            visible={isOpenRoomList}
-            onClose={onCloseGroupRoomList}
-            onSubmit={onSubmitRoom}
-            headerLabel={selectedGroup.name}
-            selectedRooms={selectedGroup.rooms || []}
-            withSearch={false}
-            disableSubmitUntilChanged
-            sortSelectedFirst
-            withoutBackdropBackground
-          />,
-          document.body,
-        )}
+      {isOpenRoomList && selectedGroup && (
+        <Portal
+          visible={isOpenRoomList}
+          element={
+            <RoomListPanel
+              visible={isOpenRoomList}
+              onClose={onCloseGroupRoomList}
+              onSubmit={onSubmitRoom}
+              headerLabel={selectedGroup.name}
+              selectedRooms={selectedGroup.rooms || []}
+              withSearch={false}
+              disableSubmitUntilChanged
+              sortSelectedFirst
+              withoutBackdropBackground
+            />
+          }
+        />
+      )}
 
-      {isOpenRoomList &&
-        !selectedGroup &&
-        createPortal(
-          <RoomListPanel
-            visible={isOpenRoomList}
-            onClose={onCloseRoomList}
-            onSubmit={onSubmitRoom}
-            headerLabel={t("Common:RoomList")}
-            withSearch
-            disableSubmitUntilChanged
-            withoutBackdropBackground
-          />,
-          document.body,
-        )}
+      {isOpenRoomList && !selectedGroup && (
+        <Portal
+          visible={isOpenRoomList}
+          element={
+            <RoomListPanel
+              visible={isOpenRoomList}
+              onClose={onCloseRoomList}
+              onSubmit={onSubmitRoom}
+              headerLabel={t("Common:RoomList")}
+              withSearch
+              disableSubmitUntilChanged
+              withoutBackdropBackground
+            />
+          }
+        />
+      )}
 
       {isOpenGroupIcon && (
         <GroupIconDialog
