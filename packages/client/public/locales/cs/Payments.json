@@ -96,7 +96,6 @@
   "PriceCalculation": "Vypočítejte si cenu",
   "PriceForEach": "{{currency}} za {{amount}}",
   "ProductNameWallet": "{{productName}} Peněženka",
-  "Quantity": "Množství",
   "RecommendedTopUpAmount": "Doporučená výše doplnění: {{amount}}",
   "RemainingDays": "Zbývající dny účtovacího období: {{count}}",
   "Reminder": "Připomínka:",

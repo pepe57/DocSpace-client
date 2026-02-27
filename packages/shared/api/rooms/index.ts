@@ -693,3 +693,60 @@ export function hideConfirmRoomLifetime(val: boolean) {
 
   return request(options);
 }
+
+export function createGroupRooms(newGroup) {
+  const options = {
+    method: "post",
+    url: "/files/group",
+    data: newGroup,
+  };
+
+  return request(options);
+}
+
+export function getRoomGroups() {
+  const options = {
+    method: "get",
+    url: "/files/group?includeMembers=false",
+  };
+
+  return request(options);
+}
+
+export function getGroupById(groupId) {
+  const options = {
+    method: "get",
+    url: `/files/group/${groupId}?includeMembers=true`,
+  };
+
+  return request(options);
+}
+
+export function updateGroupIcon(groupId, icon) {
+  const options = {
+    method: "post",
+    url: `/files/group/${groupId}/icon`,
+    data: { icon },
+  };
+
+  return request(options);
+}
+
+export function updateRoomGroup(groupId, data) {
+  const options = {
+    method: "put",
+    url: `/files/group/${groupId}`,
+    data,
+  };
+
+  return request(options);
+}
+
+export function deleteRoomGroup(groupId) {
+  const options = {
+    method: "delete",
+    url: `/files/group/${groupId}`,
+  };
+
+  return request(options);
+}
