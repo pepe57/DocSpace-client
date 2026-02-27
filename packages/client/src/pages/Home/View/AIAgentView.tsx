@@ -159,6 +159,7 @@ const AIAgentViewComponent = ({
             goToAISettings={goToAISettings}
             allowExternalNavigation
             allowAttachFiles
+            allowManageTools
             persistDraft
           />
         </Activity>
