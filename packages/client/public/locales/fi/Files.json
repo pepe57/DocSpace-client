@@ -125,7 +125,6 @@
   "NewInRooms": "Uutta huoneissa",
   "NoAccessRoomTitle": "Valitettavasti sinulla ei ole pääsyä tähän huoneeseen.",
   "NoExternalLinks": "EI ulkoisia linkkejä",
-  "Open": "Avaa",
   "OpenCreatedTemplate": "Avaa luotu malli",
   "OpenedViaLink": "Avattu linkin kautta: pääsy <strong>{{access}}</strong>.",
   "OpenLocation": "Avaa sijainti",

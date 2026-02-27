@@ -1052,5 +1052,8 @@
   "YouHaveUnsavedChanges": "Você tem mudanças não salvas",
   "YourCurrentDomain": "Seu domínio atual",
   "YourLogo": "Seu logotipo",
-  "YourTurn": "Sua vez"
+  "YourTurn": "Sua vez",
+  "Upload": "Carregar",
+  "Open": "Abrir",
+  "Quantity": "Quantidade"
 }

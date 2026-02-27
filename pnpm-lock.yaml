@@ -352,8 +352,8 @@ importers:
         specifier: workspace:*
         version: link:../../libs/ui-kit
       '@onlyoffice/docspace-sdk-js':
-        specifier: 2.1.0
-        version: 2.1.0
+        specifier: file:onlyoffice-docspace-sdk-js-2.2.0.tgz
+        version: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1084,6 +1084,9 @@ importers:
       react-i18next:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react-svg:
+        specifier: 16.1.34
+        version: 16.1.34(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-virtualized:
         specifier: ^9.22.6
         version: 9.22.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -3588,12 +3591,13 @@ packages:
     version: 3.6.0
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz':
-    resolution: {integrity: sha512-ARJPshXtOqTcZiVSbxONGOZTn1IjPPjMXk5Zu2rSEU3/DowAyiBWF5YLofdXeSqNQxomDWo+M0lwVN+dsU+buA==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz}
+    resolution: {integrity: sha512-OB5sU4pBNrqe9w7Ixig9gink7Kp6a2qo7lYy57a60xlF8Rmifk+pxQVdK3YXexjjBQuxOz5aZz4moxkd2OmXLQ==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz}
     version: 2.1.0
     hasBin: true
 
-  '@onlyoffice/docspace-sdk-js@2.1.0':
-    resolution: {integrity: sha512-Jgqr6LblkWIW/m8OH1z8qm6DQ6AhoW07oMhQYSHZFVvwLEtTP0tMryZ+pOuXOCoh4/XHF/AwSKETkj89W0xgmw==}
+  '@onlyoffice/docspace-sdk-js@file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz':
+    resolution: {integrity: sha512-kSflAFVIwLIBvNcDV8PwNUZzylRdcSq6WKoVpKYAuL65yL1pHAO0IjgoxxFXahGXsXAh8AHhRAj2lwTuqn1kiQ==, tarball: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz}
+    version: 2.2.0
     engines: {node: '>=22', pnpm: '>=10'}
 
   '@onlyoffice/document-editor-react@2.1.1':
@@ -12851,7 +12855,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@onlyoffice/docspace-sdk-js@2.1.0': {}
+  '@onlyoffice/docspace-sdk-js@file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz': {}
 
   '@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:

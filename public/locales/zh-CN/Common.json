@@ -1052,5 +1052,8 @@
   "YouHaveUnsavedChanges": "您有未保存的变更",
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
-  "YourTurn": "轮到您了"
+  "YourTurn": "轮到您了",
+  "Upload": "上传",
+  "Open": "打开",
+  "Quantity": "数量"
 }

@@ -1052,5 +1052,8 @@
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "Upload": "Отпреми",
+  "Open": "Отвори",
+  "Quantity": "Колиčina"
 }

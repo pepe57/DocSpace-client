@@ -125,7 +125,6 @@
   "NewInRooms": "جديد في الغرف",
   "NoAccessRoomTitle": "عذرا، ليس لديك حق الوصول إلى هذه الغرفة.",
   "NoExternalLinks": "لا يوجد روابط خارجية",
-  "Open": "فتح",
   "OpenCreatedTemplate": "فتح القالب المُنشأ",
   "OpenedViaLink": "تم الفتح عبر الرابط: الوصول <strong>\"{{access}}\"</strong>. ",
   "OpenLocation": "افتح الموقع",
