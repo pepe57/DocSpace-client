@@ -37,6 +37,7 @@ import { AI_TOOLS } from "@docspace/shared/constants";
 
 import TransactionHistory from "SRC_DIR/pages/PortalSettings/categories/payments/TransactionHistory";
 import BalanceAmount from "SRC_DIR/pages/PortalSettings/categories/payments/BalanceAmount";
+import PayerInformation from "SRC_DIR/pages/PortalSettings/categories/payments/PayerInformation";
 import ServiceToggleSection from "SRC_DIR/pages/PortalSettings/categories/services/sub-components/ServiceToggleSection";
 import { finishRefreshingWithMinCycle } from "SRC_DIR/helpers/refreshing";
 
@@ -271,6 +272,10 @@ const AiPage = (props: AiPageProps) => {
           testId="service-ai-toggle-button"
           isDisabled={isDisabled}
         />
+        <div className={styles.toggleSection}>
+          {/* @ts-expect-error all props are injected via MobX inject() */}
+          <PayerInformation />
+        </div>
       </div>
 
       {isAiToolsServiceOn && isAiServiceLowBalance ? (
