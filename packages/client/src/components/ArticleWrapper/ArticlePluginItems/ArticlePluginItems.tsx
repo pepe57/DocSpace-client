@@ -24,38 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  Actions,
-  FilesType,
-  Events,
-  PluginStatus,
-  ToastType,
-  Components,
-  UsersType,
-  Devices,
-} from "@onlyoffice/docspace-plugin-sdk";
+import React from "react";
 
-enum PluginScopes {
-  API = "API",
-  Settings = "Settings",
-  ContextMenu = "ContextMenu",
-  InfoPanel = "InfoPanel",
-  MainButton = "MainButton",
-  ProfileMenu = "ProfileMenu",
-  EventListener = "EventListener",
-  File = "File",
-  PostMessage = "PostMessage",
-  ArticleButton = "ArticleButton",
+import type { IArticleButtonItemClient } from "SRC_DIR/helpers/plugins/types";
+
+import ArticlePluginItem from "./ArticlePluginItem";
+import styles from "./ArticlePluginItems.module.scss";
+
+interface ArticlePluginItemsProps {
+  items: Array<{ key: string; value: IArticleButtonItemClient }>;
+  maxItems?: number;
 }
 
-export {
-  PluginScopes,
-  Actions as PluginActions,
-  FilesType as PluginFileType,
-  Events as PluginEvents,
-  PluginStatus,
-  ToastType as PluginToastType,
-  Components as PluginComponents,
-  UsersType as PluginUsersType,
-  Devices as PluginDevices,
+const ArticlePluginItems: React.FC<ArticlePluginItemsProps> = ({
+  items,
+  maxItems = 5,
+}) => {
+  if (!items || items.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className={styles.container}>
+      {items.slice(0, maxItems).map((item) => (
+        <div key={item.key} className={styles.item}>
+          <ArticlePluginItem item={item.value} />
+        </div>
+      ))}
+    </div>
+  );
 };
+
+export default ArticlePluginItems;
