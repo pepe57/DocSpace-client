@@ -303,35 +303,12 @@ const ArticleMainButtonContent = (props) => {
 
   const createActionsForFormRoom = React.useCallback(
     (actionList) => {
-      const { formGallery } = actionList;
-
-      const createNewFolder = {
-        id: "actions_new-folder",
-        className: "main-button_drop-down",
-        icon: CatalogFolderReactSvgUrl,
-        label: t("Files:CreateNewFolder"),
-        onClick: onCreate,
-        key: "new-folder",
-      };
-
-      const showSelectorFormRoomDocx = {
-        id: "actions_form-room_template_from-file",
-        className: "main-button_drop-down_sub",
-        icon: FormGalleryReactSvgUrl,
-        label: t("Common:ChooseFromTemplates"),
-        onClick: formGallery.onClick,
-        disabled: isPrivacy,
-        key: "form-file",
-      };
-
-      // const templatePDFForm = {
-      //   id: "actions_template-PDF-form",
-      //   className: "main-button_drop-down",
-      //   icon: FormReactSvgUrl,
-      //   label: t("Common:CreatePDFForm"),
-      //   key: "new-form",
-      //   items: [createTemplateBlankDocxf],
-      // };
+      const {
+        formGallery,
+        formActions,
+        createNewFolder,
+        templateGalleryAvailable,
+      } = actionList;
 
       const uploadFromDocSpace = {
         id: "actions_upload-from-docspace",
@@ -362,58 +339,35 @@ const ArticleMainButtonContent = (props) => {
         items: [uploadFromDocSpace, uploadFormDevice],
       };
 
-      // const moreActions = {
-      //   id: "actions_more-form",
-      //   className: "main-button_drop-down",
-      //   icon: PluginMoreReactSvgUrl,
-      //   label: t("Common:More"),
-      //   disabled: false,
-      //   key: "more-form",
-      //   items: [
-      //     createNewFolder,
-      //     {
-      //       isSeparator: true,
-      //       key: "actions_more-form__separator-1",
-      //     },
-      //     createNewDocumentDocx,
-      //     createNewPresentationPptx,
-      //     createNewSpreadsheetXlsx,
-      //     {
-      //       isSeparator: true,
-      //       key: "actions_more-form__separator-2",
-      //     },
-      //     ...uploadActions,
-      //   ],
-      // };
+      const uploadPDFFromSeparator = {
+        isSeparator: true,
+        key: "separator",
+      };
 
-      // const mobileMoreActions = {
-      //   ...moreActions,
-      //   items: moreActions.items.filter((item) => !item.isSeparator),
-      // };
+      const formGallerySeparator = {
+        isSeparator: true,
+        key: "separator-form-gallery",
+      };
 
-      const mobileMoreActions = null;
+      const formGalleryOption = templateGalleryAvailable
+        ? [formGallerySeparator, formGallery]
+        : [];
+
       const formRoomActions = [
-        // templatePDFForm,
-        uploadPDFFrom,
-        showSelectorFormRoomDocx,
-        {
-          isSeparator: true,
-          key: "separator",
-        },
+        formActions,
         createNewFolder,
-        // {
-        //   isSeparator: true,
-        //   key: "separator-1",
-        // },
-        // moreActions,
+        ...formGalleryOption,
+        uploadPDFFromSeparator,
+        uploadPDFFrom,
       ];
 
-      const mobileFormRoomActions = [
-        // templatePDFForm,
-        uploadPDFFrom,
-        showSelectorFormRoomDocx,
-        createNewFolder,
-      ];
+      const mobileFormRoomActions = [formActions, createNewFolder];
+
+      if (mobileFormRoomActions) {
+        mobileFormRoomActions.push(formGallery);
+      }
+
+      const mobileMoreActions = [uploadPDFFrom];
 
       return {
         formRoomActions,
@@ -421,7 +375,7 @@ const ArticleMainButtonContent = (props) => {
         mobileMoreActions,
       };
     },
-    [onShowFormRoomSelectFileDialog, onUploadPDFFilesClick],
+    [onShowFormRoomSelectFileDialog, onUploadPDFFilesClick, onCreate],
   );
 
   React.useEffect(() => {
@@ -478,7 +432,7 @@ const ArticleMainButtonContent = (props) => {
       });
     }
 
-    const createTemplateBlankDocxf = {
+    const createTemplateBlankPDF = {
       id: "actions_template_blank",
       className: "main-button_drop-down_sub",
       icon: FormBlankReactSvgUrl,
@@ -528,13 +482,12 @@ const ArticleMainButtonContent = (props) => {
     };
 
     const formGallery = {
-      id: "actions_template_oforms-gallery",
-      className: "main-button_drop-down_sub",
-      icon: FormGalleryReactSvgUrl,
+      id: "actions_open-template-gallery",
+      className: "main-button_drop-down",
+      icon: TemplateGalleryReactSvgUrl,
       label: t("Common:TemplateGallery"),
       onClick: onShowTemplateGallery,
-      disabled: isPrivacy,
-      key: "form-gallery",
+      key: "template-gallery",
     };
 
     const createNewPresentationPptx = {
@@ -559,6 +512,15 @@ const ArticleMainButtonContent = (props) => {
       });
     }
 
+    const formActions = {
+      id: "actions_template",
+      className: "main-button_drop-down",
+      icon: FormReactSvgUrl,
+      label: t("Translations:NewForm"),
+      key: "new-form",
+      items: [createTemplateBlankPDF, showSelectorDocx],
+    };
+
     if (
       currentRoomType === RoomsType.FormRoom ||
       (parentRoomType === FolderType.FormRoom && isFolder)
@@ -566,12 +528,9 @@ const ArticleMainButtonContent = (props) => {
       const { formRoomActions, mobileFormRoomActions, mobileMoreActions } =
         createActionsForFormRoom({
           formGallery,
-          newUploadActions,
-          // createNewFolder,
-          // createNewDocumentDocx,
-          // createTemplateBlankDocxf,
-          // createNewPresentationPptx,
-          // createNewSpreadsheetXlsx,
+          formActions,
+          createNewFolder,
+          templateGalleryAvailable,
         });
 
       // for mobile
@@ -583,22 +542,11 @@ const ArticleMainButtonContent = (props) => {
       return;
     }
 
-    const formActions = [
-      {
-        id: "actions_template",
-        className: "main-button_drop-down",
-        icon: FormReactSvgUrl,
-        label: t("Translations:NewForm"),
-        key: "new-form",
-        items: [createTemplateBlankDocxf, showSelectorDocx],
-      },
-    ];
-
     const newActions = [
       createNewDocumentDocx,
       createNewSpreadsheetXlsx,
       createNewPresentationPptx,
-      ...formActions,
+      formActions,
       createNewFolder,
     ];
 
@@ -632,14 +580,7 @@ const ArticleMainButtonContent = (props) => {
         });
       }
 
-      newActions.push({
-        id: "actions_open-template-gallery",
-        className: "main-button_drop-down",
-        icon: TemplateGalleryReactSvgUrl,
-        label: t("Common:TemplateGallery"),
-        onClick: onShowTemplateGallery,
-        key: "template-gallery",
-      });
+      newActions.push(formGallery);
     }
 
     const menuModel = [...newActions];
