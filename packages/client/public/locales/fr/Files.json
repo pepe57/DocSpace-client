@@ -126,7 +126,6 @@
   "NewInRooms": "Nouveau dans les salles",
   "NoAccessRoomTitle": "Malheureusement, vous n’avez pas accès à cette salle.",
   "NoExternalLinks": "Pas de liens externes",
-  "Open": "Ouvrir",
   "OpenCreatedTemplate": "Ouvrir le modèle créé",
   "OpenedViaLink": "Ouvert via le lien : accès <strong>« {{access}} »</strong>.",
   "OpenLocation": "Ouvrir un emplacement ",

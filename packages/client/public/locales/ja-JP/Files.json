@@ -126,7 +126,6 @@
   "NewInRooms": "ルームに新しい項目",
   "NoAccessRoomTitle": "申し訳ありませんが、このルームにはアクセスできません。",
   "NoExternalLinks": "外部リンクなし",
-  "Open": "開く",
   "OpenCreatedTemplate": "作成したテンプレートを開く",
   "OpenedViaLink": "リンクを介して開きました: アクセス <strong>「{{access}}」</strong>.",
   "OpenLocation": "オープンロケーション",

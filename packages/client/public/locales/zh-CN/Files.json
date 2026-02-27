@@ -126,7 +126,6 @@
   "NewInRooms": "多个房间中新建",
   "NoAccessRoomTitle": "对不起，您不能进入这个房间。",
   "NoExternalLinks": "无外部链接",
-  "Open": "打开",
   "OpenCreatedTemplate": "打开已创建的模板",
   "OpenedViaLink": "通过链接打开：访问权限为<strong>\"{{access}}\"</strong>。",
   "OpenLocation": "打开位置",

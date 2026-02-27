@@ -37,7 +37,7 @@ const Dropzone = ({
   isDisabled,
   dataTestId,
 }: PluginDropzoneProps) => {
-  const { t } = useTranslation(["Article", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   return (
     <DropzoneComponent
@@ -46,7 +46,7 @@ const Dropzone = ({
       isLoading={isLoading}
       onDrop={onDrop}
       accept={[".zip"]}
-      linkMainTextForFiles={t("Article:Upload")}
+      linkMainText={t("Common:Upload")}
       linkSecondaryText={t("Common:DropzoneTitleSecondary")}
       exstsText="(ZIP)"
       dataTestId={dataTestId}

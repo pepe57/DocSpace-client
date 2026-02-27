@@ -594,6 +594,7 @@
   "MakeForm": "Save as PDF form",
   "ManageConnection": "Manage connection",
   "ManageNotifications": "Manage",
+  "ManageGroupRooms": "Manage group of rooms",
   "ManageStorageQuota": "Manage storage quota",
   "ManualBackupDescription": "Use this option if you want to get all data contained in the space as a file.",
   "ManyEmails": "Too many email addresses parsed",
@@ -1127,5 +1128,17 @@
   "YourTurn": "Your turn",
   "OrSelectFromAvailableMatches": "Or select from available matches",
   "SelectAnOptionOrCreateOne": "Select an option or create one",
-  "CreateTag": "Create tag"
+  "CreateTag": "Create tag",
+  "Upload": "Upload",
+  "AnyFiles": "Any files",
+  "Open": "Open",
+  "SingleUploadWarning": "Only one file or folder can be uploaded at a time. Please select a single item.",
+  "DropzoneFoldersSecondary": "or drop folders here",
+  "DropzoneFolderSecondary": "or drop folder here",
+  "DropzoneFilesSecondary": "or drop files here",
+  "Quantity": "Quantity",
+  "FileSizeExceedsLimit": "The file is too large. The maximum size is {{maxSize}}.",
+  "FolderSizeExceedsLimit": "The folder is too large. The maximum size is {{maxSize}}.",
+  "FilesSizeExceedsLimit": "The files are too large. The maximum size is {{maxSize}}.",
+  "FoldersSizeExceedsLimit": "The folders are too large. The maximum size is {{maxSize}}."
 }
