@@ -41,7 +41,8 @@ import {
   setAiModelRestrictions,
   getServiceQuotaBalance,
 } from "@docspace/shared/api/portal";
-import { authStore } from "@docspace/shared/store";
+import { authStore, settingsStore } from "@docspace/shared/store";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/Wallet/utils";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import { AI_TOOLS } from "@docspace/shared/constants";
@@ -98,6 +99,8 @@ class ServicesStore {
 
   paymentStore: PaymentStore | null = null;
 
+  settingsStore: SettingsStore | null = null;
+
   isInitServicesPage = false;
 
   isInitAiPage = false;
@@ -126,6 +129,7 @@ class ServicesStore {
   ) {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.paymentStore = paymentStore;
+    this.settingsStore = settingsStore;
 
     makeAutoObservable(this, {
       aiModelAvailabilityMap: observable.ref,
@@ -261,19 +265,25 @@ class ServicesStore {
   };
 
   fetchAiPrices = async () => {
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
     try {
-      const res = await getAiPrices();
+      const res = await getAiPrices(abortController.signal);
       if (!res) return;
       this.aiToolsPrices = res;
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-      throw e;
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
     }
   };
 
   fetchAiModelAvailabilitySettings = async () => {
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
     try {
-      const res = await getAiModelRestrictions();
+      const res = await getAiModelRestrictions(abortController.signal);
       if (!res) return;
 
       const nextMap = new Map<string, boolean>();
@@ -292,14 +302,17 @@ class ServicesStore {
       });
 
       this.aiModelAvailabilityMap = nextMap;
-    } catch (e) {
-      toastr.error(e as Error);
-      throw e;
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
     }
   };
 
   setAiModelAvailability = async (modelId: string, enabled: boolean) => {
     if (!modelId || this.aiModelAvailabilityUpdatingSet.has(modelId)) return;
+
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
 
     this.aiModelAvailabilityUpdatingSet = new Set([
       ...this.aiModelAvailabilityUpdatingSet,
@@ -320,15 +333,15 @@ class ServicesStore {
         restrictedModels.push(modelId);
       }
 
-      await setAiModelRestrictions(restrictedModels);
+      await setAiModelRestrictions(restrictedModels, abortController.signal);
 
       const nextMap = new Map(this.aiModelAvailabilityMap);
       if (enabled) nextMap.delete(modelId);
       else nextMap.set(modelId, false);
       this.aiModelAvailabilityMap = nextMap;
-    } catch (e) {
-      toastr.error(e as Error);
-      throw e;
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
     } finally {
       const nextSet = new Set(this.aiModelAvailabilityUpdatingSet);
       nextSet.delete(modelId);
@@ -360,6 +373,7 @@ class ServicesStore {
 
   fetchAiServiceBalance = async (isRefresh?: boolean) => {
     const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
 
     try {
       const res = await getServiceQuotaBalance(
@@ -371,9 +385,9 @@ class ServicesStore {
       if (!res) return;
 
       this.aiToolsBalance = res;
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-      throw e;
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
     }
   };
 
