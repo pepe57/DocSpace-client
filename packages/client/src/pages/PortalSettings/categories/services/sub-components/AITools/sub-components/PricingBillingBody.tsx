@@ -77,7 +77,27 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
               <HelpButton
                 iconName={HelpReactSvgUrl}
                 style={{ height: "15px", margin: "0" }}
-                tooltipContent={<></>}
+                tooltipContent={
+                  <>
+                    <Trans
+                      t={t}
+                      ns="Services"
+                      i18nKey="AIPricingTokensTooltipInput"
+                      components={{
+                        1: <strong />,
+                      }}
+                    />
+                    <br />
+                    <Trans
+                      t={t}
+                      ns="Services"
+                      i18nKey="AIPricingTokensTooltipOutput"
+                      components={{
+                        1: <strong />,
+                      }}
+                    />
+                  </>
+                }
               />
             </div>
 
@@ -164,7 +184,36 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
               <HelpButton
                 iconName={HelpReactSvgUrl}
                 style={{ height: "15px", margin: "0" }}
-                tooltipContent={<></>}
+                tooltipContent={
+                  <>
+                    <Trans
+                      t={t}
+                      ns="Services"
+                      i18nKey="AIPricingAdditionalTooltipVectorization"
+                      components={{
+                        1: <strong />,
+                      }}
+                    />
+                    <br />
+                    <Trans
+                      t={t}
+                      ns="Services"
+                      i18nKey="AIPricingAdditionalTooltipWebSearch"
+                      components={{
+                        1: <strong />,
+                      }}
+                    />
+                    <br />
+                    <Trans
+                      t={t}
+                      ns="Services"
+                      i18nKey="AIPricingAdditionalTooltipWebCrawling"
+                      components={{
+                        1: <strong />,
+                      }}
+                    />
+                  </>
+                }
               />
             </div>
 
