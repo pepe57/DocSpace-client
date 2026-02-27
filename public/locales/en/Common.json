@@ -1128,5 +1128,17 @@
   "YourTurn": "Your turn",
   "OrSelectFromAvailableMatches": "Or select from available matches",
   "SelectAnOptionOrCreateOne": "Select an option or create one",
-  "CreateTag": "Create tag"
+  "CreateTag": "Create tag",
+  "Upload": "Upload",
+  "AnyFiles": "Any files",
+  "Open": "Open",
+  "SingleUploadWarning": "Only one file or folder can be uploaded at a time. Please select a single item.",
+  "DropzoneFoldersSecondary": "or drop folders here",
+  "DropzoneFolderSecondary": "or drop folder here",
+  "DropzoneFilesSecondary": "or drop files here",
+  "Quantity": "Quantity",
+  "FileSizeExceedsLimit": "The file is too large. The maximum size is {{maxSize}}.",
+  "FolderSizeExceedsLimit": "The folder is too large. The maximum size is {{maxSize}}.",
+  "FilesSizeExceedsLimit": "The files are too large. The maximum size is {{maxSize}}.",
+  "FoldersSizeExceedsLimit": "The folders are too large. The maximum size is {{maxSize}}."
 }

@@ -126,7 +126,6 @@
   "NewInRooms": "룸의 새 항목",
   "NoAccessRoomTitle": "죄송하지만, 이 방에 액세스할 수 없습니다.",
   "NoExternalLinks": "외부 링크가 없습니다",
-  "Open": "열기",
   "OpenCreatedTemplate": "생성된 템플릿 열기",
   "OpenedViaLink": "링크를 통해 열음: 접근 <strong>{{access}}</strong>.",
   "OpenLocation": "위치 열기",
