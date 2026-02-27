@@ -51,6 +51,7 @@ interface TopUpButtonsProps {
   serviceName?: string;
   afterTopUp?: () => void;
   logoText?: string;
+  handleServicesQuotas?: (serviceName: string) => Promise<void>;
 }
 
 const TopUpButtons: React.FC<TopUpButtonsProps> = ({
@@ -67,6 +68,7 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
   serviceName,
   afterTopUp,
   logoText,
+  handleServicesQuotas,
 }) => {
   const { t } = useTranslation(["Payments", "Services", "Common"]);
 
@@ -92,6 +94,7 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
 
       if (serviceName) {
         requests.push(fetchServiceBalance!());
+        requests.push(handleServicesQuotas!(AI_TOOLS));
       }
 
       await Promise.allSettled(requests);
@@ -139,10 +142,11 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
   );
 };
 
-export default inject(({ settingsStore }: TStore) => {
+export default inject(({ settingsStore, paymentStore }: TStore) => {
   const { logoText } = settingsStore;
-
+  const { handleServicesQuotas } = paymentStore!;
   return {
     logoText,
+    handleServicesQuotas,
   };
 })(observer(TopUpButtons));
