@@ -753,17 +753,22 @@ export type TAiModelAvailabilitySettingsResponse =
       models: string[];
     };
 
-export const getAiModelRestrictions = async () => {
+export const getAiModelRestrictions = async (signal?: AbortSignal) => {
   return request({
     method: "get",
     url: "/portal/payment/ai-model/restrictions",
+    signal,
   }) as Promise<TAiModelAvailabilitySettingsResponse>;
 };
 
-export const setAiModelRestrictions = async (models: string[]) => {
+export const setAiModelRestrictions = async (
+  models: string[],
+  signal?: AbortSignal,
+) => {
   return request({
     method: "put",
     url: "/portal/payment/ai-model/restrictions",
     data: { models },
+    signal,
   });
 };
