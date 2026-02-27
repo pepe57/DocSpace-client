@@ -80,7 +80,7 @@ const Banner = ({
 
   return (
     <div
-      style={{ marginBottom: hasCustomSlot && !isDesktop() ? "10px" : "16px" }}
+      style={{ marginBottom: hasCustomSlot && !isDesktop() ? "12px" : "16px" }}
     >
       {campaignBackground &&
       campaignTranslate &&
