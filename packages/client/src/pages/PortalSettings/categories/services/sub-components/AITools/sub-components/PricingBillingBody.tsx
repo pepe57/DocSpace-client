@@ -270,13 +270,15 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                   <div className={styles.pricingRow} key={ws.id}>
                     <div className={styles.pricingRowLeft}>
                       <div className={styles.pricingRowIconBox}>
-                        <div
-                          // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
-                          dangerouslySetInnerHTML={{
-                            __html: ws.image,
-                          }}
-                          className={styles.iconsContainer}
-                        />
+                        {ws.image ? (
+                          <div
+                            // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
+                            dangerouslySetInnerHTML={{
+                              __html: ws.image,
+                            }}
+                            className={styles.iconsContainer}
+                          />
+                        ) : null}
                       </div>
                       <Text fontSize="12px">{ws.alias}</Text>
                       {ws.provider ? (
