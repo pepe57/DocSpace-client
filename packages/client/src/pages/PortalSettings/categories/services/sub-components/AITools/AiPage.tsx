@@ -272,17 +272,18 @@ const AiPage = (props: AiPageProps) => {
           testId="service-ai-toggle-button"
           isDisabled={isDisabled}
         />
-        <div className={styles.toggleSection}>
+        <div className={styles.payerSection}>
           {/* @ts-expect-error all props are injected via MobX inject() */}
-          <PayerInformation />
+          {isDisabled ? <PayerInformation /> : null}
         </div>
+
+        {isAiToolsServiceOn && isAiServiceLowBalance ? (
+          <Text fontSize="15px" fontWeight={700} className={styles.lowBalance}>
+            {t("LowBalance")}
+          </Text>
+        ) : null}
       </div>
 
-      {isAiToolsServiceOn && isAiServiceLowBalance ? (
-        <Text fontSize="15px" fontWeight={700} className={styles.lowBalance}>
-          {t("LowBalance")}
-        </Text>
-      ) : null}
       <div className={styles.balanceSection}>
         <div className={styles.balanceCard}>
           <BalanceAmount

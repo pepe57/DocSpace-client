@@ -5,8 +5,12 @@
   box-sizing: border-box;
 }
 
-.toggleSection {
+.toggleSection , .payerSection {
   max-width: 660px;
+}
+
+.payerSection {
+  margin-bottom: 16px;
 }
 
 .balanceSection {
