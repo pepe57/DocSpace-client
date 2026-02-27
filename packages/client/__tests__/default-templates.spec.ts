@@ -28,6 +28,7 @@ import {
   settingsHandler,
   defaultTemplatesHandler,
   defaultTemplatesSetHandler,
+  defaultTemplatesResetHandler,
   roomListHandler,
   TypeRoomList,
   TypeSettings,
@@ -166,10 +167,10 @@ test.describe("Default templates", () => {
 
     const resetBtn = page.getByTestId("reset-button").first();
     await expect(resetBtn).toBeVisible();
-    await resetBtn.click();
 
-    mockRequest.use(defaultTemplatesSetHandler(TEST_PORT));
-    mockRequest.use(defaultTemplatesHandler(TEST_PORT));
+    mockRequest.use(defaultTemplatesResetHandler(TEST_PORT, "default"));
+
+    await resetBtn.click();
 
     const badge = row.getByTestId("badge-text");
     await expect(badge).toHaveText("Default");
