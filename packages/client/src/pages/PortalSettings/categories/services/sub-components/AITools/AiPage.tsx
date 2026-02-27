@@ -122,6 +122,7 @@ const AiPage = (props: AiPageProps) => {
   const [isPricingBillingVisible, setIsPricingBillingVisible] = useState(false);
   const [isTopUpVisible, setIsTopUpVisible] = useState(false);
   const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
+  const [isTopUpConfirmVisible, setIsTopUpConfirmVisible] = useState(false);
 
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
 
