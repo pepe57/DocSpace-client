@@ -157,6 +157,8 @@ const AIAgentViewComponent = ({
             setAiPlaylistImages={setAiPlaylistImages}
             goToWebSearchSettings={goToWebSearchSettings}
             goToAISettings={goToAISettings}
+            allowExternalNavigation
+            persistDraft
           />
         </Activity>
       ) : null}
