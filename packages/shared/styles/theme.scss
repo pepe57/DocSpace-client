@@ -1449,11 +1449,13 @@
   --warning-color: #{$light-error-status};
   --background-service-color: #{$light-gray-hover};
   --border-service-color: #{$gray-light-mid};
+  --services-additional-info: #{$gray};
+    --services-link-color: #{$gray};
 }
 
 .dark {
   --payment-background-color: #{$light-dark-gray-hover};
-  --payment-text-color: #{$dark-gray-dark};
+  --payment-text-color: #{$dark-gray-dark}; 
   --payment-credit-color: #{$dark-status-positive};
   --payment-icon-background: #{$gray-dark-mid};
   --payment-icon-color: #{$dark-gray-dark};
@@ -1466,6 +1468,8 @@
   --background-service-color: #{$light-dark-gray-hover};
   --border-service-color: #{$gray-dark-strong};
   --modal-dialog-border-color: #{$gray-dark-strong};
+  --services-additional-info: #{$gray-dark};
+  --services-link-color: #{$dark-gray-dark};
 }
 
 .light {

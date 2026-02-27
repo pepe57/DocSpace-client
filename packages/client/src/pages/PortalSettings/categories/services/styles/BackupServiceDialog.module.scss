@@ -24,8 +24,6 @@
   margin-top: 20px;
 }
 
-
-
 .stepMainRow {
   display: flex;
   align-items: center;
@@ -184,7 +182,11 @@
 
 
 .payForItemTextMuted {
-  color: var(--text-disable-color);
+  color: var(--services-additional-info);
+}
+
+.payForItemTextMutedLink {
+  color: var(--services-link-color) !important;
 }
 
 .pricingBillingLink {
@@ -327,18 +329,6 @@
 
 
 
-.pricingRowPriceMuted {
-  font-weight: 400;
-  color: var(--text-disable-color);
-}
-
-.pricingNote {
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 400;
-  color: var(--text-disable-color);
-}
-
 .modelListSection {
   display: flex;
   flex-direction: column;
@@ -405,12 +395,6 @@
   color: var(--text-color);
 }
 
-.modelPriceLine {
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 400;
-  color: var(--text-disable-color);
-}
 
 .billingSection {
   display: flex;

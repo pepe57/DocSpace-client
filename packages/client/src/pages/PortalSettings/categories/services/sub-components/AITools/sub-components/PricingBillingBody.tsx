@@ -7,8 +7,6 @@ import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import InputTokensIcon from "PUBLIC_DIR/images/icons/16/input-tokens.svg";
 import OutputTokensIcon from "PUBLIC_DIR/images/icons/16/output-tokens.svg";
-import VectorizationIcon from "PUBLIC_DIR/images/icons/16/ai-vectorization.svg";
-import WebSearchIcon from "PUBLIC_DIR/images/icons/16/web-search.svg";
 
 import styles from "../../../styles/BackupServiceDialog.module.scss";
 import type { TAiToolsPrices } from "SRC_DIR/store/ServicesStore";
@@ -137,7 +135,7 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
               </div>
             </div>
 
-            <Text className={styles.pricingNote}>
+            <Text className={styles.payForItemTextMuted}>
               <Trans
                 t={t}
                 ns="Services"
@@ -150,7 +148,7 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                       textDecoration="underline"
                       href="https://openrouter.ai/models"
                       target={LinkTarget.blank}
-                      className={styles.pricingNote}
+                      className={styles.payForItemTextMutedLink}
                     />
                   ),
                 }}
@@ -261,7 +259,7 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                 ) : null,
               )}
             </div>
-            <Text className={styles.pricingNote}>
+            <Text className={styles.payForItemTextMuted}>
               {t("AIPricingFeeNoteWithoutLink")}
             </Text>
           </div>
@@ -271,7 +269,7 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
               {t("AIModelListTitle")}
             </Text>
 
-            <Text className={styles.pricingNote}>
+            <Text className={styles.payForItemTextMuted}>
               <Trans
                 t={t}
                 ns="Services"
@@ -284,7 +282,7 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                       textDecoration="underline"
                       href="https://openrouter.ai/models"
                       target={LinkTarget.blank}
-                      className={styles.pricingNote}
+                      className={styles.payForItemTextMutedLink}
                     />
                   ),
                 }}
@@ -319,7 +317,7 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                           </Text>
                         ) : null}
                       </div>
-                      <Text className={styles.modelPriceLine}>
+                      <Text className={styles.payForItemTextMuted}>
                         {t("AIModelPrice", {
                           inputPrice: safeFormatAiModelsCurrency(
                             model?.price?.prompt ?? 0,
