@@ -52,4 +52,9 @@
   padding: 2px 0;
 }
 
+.tabsWrapper {
+  :global(.tabs-body) {
+    display: block;
+  }
+}
 
