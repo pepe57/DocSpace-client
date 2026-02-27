@@ -45,6 +45,7 @@ import {
   agentFolderInfoHandler,
   agentFolderResultStorageHandler,
   aiChatPutHandler,
+  aiChatDeleteHandler,
   aiChatMessagesExportHandler,
   favoritesHandler,
   aiRoomsChatsStreamHandler,
@@ -692,6 +693,7 @@ test.describe("AI chat", () => {
         agentFolderChatHandler(TEST_PORT),
         aiChatMessagesHandler(TEST_PORT),
         aiChatHandler(TEST_PORT),
+        aiChatDeleteHandler(TEST_PORT),
       );
       await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
