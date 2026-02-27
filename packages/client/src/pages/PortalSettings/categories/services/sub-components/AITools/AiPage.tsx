@@ -47,6 +47,7 @@ import ConfirmationDialog from "SRC_DIR/pages/PortalSettings/categories/services
 import PricingBillingBody from "./sub-components/PricingBillingBody";
 import TopUpContainer from "./sub-components/TopUpContainer";
 import ModelSettingsTable from "./sub-components/ModelSettingsTable";
+import AiPageLoader from "./AiPageLoader";
 
 import styles from "./AiPage.module.scss";
 import {
@@ -226,6 +227,21 @@ const AiPage = (props: AiPageProps) => {
   const onOpenTopUp = () => {
     onTopUpClick?.();
     setIsPricingBillingVisible(false);
+
+    if (!isAiToolsServiceOn) {
+      setIsTopUpConfirmVisible(true);
+      return;
+    }
+
+    setIsTopUpVisible(true);
+  };
+
+  const onCloseTopUpConfirm = () => {
+    setIsTopUpConfirmVisible(false);
+  };
+
+  const onConfirmTopUp = () => {
+    setIsTopUpConfirmVisible(false);
     setIsTopUpVisible(true);
   };
 
@@ -369,6 +385,16 @@ const AiPage = (props: AiPageProps) => {
           onConfirm={onConfirm}
           title={confirmationDialogContent.title}
           bodyText={confirmationDialogContent.body}
+        />
+      ) : null}
+
+      {isTopUpConfirmVisible ? (
+        <ConfirmationDialog
+          visible={isTopUpConfirmVisible}
+          onClose={onCloseTopUpConfirm}
+          onConfirm={onConfirmTopUp}
+          title={t("ServiceIsDisabled")}
+          bodyText={t("AddCreditsToEnableAI", { organizationName: logoText })}
         />
       ) : null}
     </div>
