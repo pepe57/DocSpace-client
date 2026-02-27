@@ -160,6 +160,7 @@ const AIAgentViewComponent = ({
             allowExternalNavigation
             allowAttachFiles
             allowManageTools
+            allowSelectChat
             persistDraft
           />
         </Activity>
