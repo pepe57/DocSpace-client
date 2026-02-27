@@ -158,6 +158,7 @@ const AIAgentViewComponent = ({
             goToWebSearchSettings={goToWebSearchSettings}
             goToAISettings={goToAISettings}
             allowExternalNavigation
+            allowAttachFiles
             persistDraft
           />
         </Activity>
