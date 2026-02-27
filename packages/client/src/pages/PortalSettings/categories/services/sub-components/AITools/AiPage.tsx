@@ -270,7 +270,7 @@ const AiPage = (props: AiPageProps) => {
     },
   ];
 
-  if (!isInitAiPage) return null;
+  if (!isInitAiPage) return <AiPageLoader />;
 
   return (
     <div className={styles.container}>
