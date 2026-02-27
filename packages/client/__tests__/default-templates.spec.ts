@@ -53,7 +53,7 @@ test.describe("Default templates", () => {
     const container = page.getByTestId("default-templates");
     await expect(container).toBeVisible();
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "default-templates",
       "default-templates.png",
@@ -86,7 +86,7 @@ test.describe("Default templates", () => {
     const selectOption = page.getByTestId("upload-from-docspace_item");
     await expect(selectOption).toBeVisible();
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "default-templates",
       "default-templates-default-context-menu.png",
@@ -118,7 +118,7 @@ test.describe("Default templates", () => {
     const badge = row.getByTestId("badge-text");
     await expect(badge).toHaveText("Customized");
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "default-templates",
       "default-templates-customized.png",
@@ -147,7 +147,7 @@ test.describe("Default templates", () => {
     const resetOption = page.getByTestId("reset_item");
     await expect(resetOption).toBeVisible();
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "default-templates",
       "default-templates-customized-context-menu.png",
@@ -158,7 +158,7 @@ test.describe("Default templates", () => {
     const dialog = page.getByRole("dialog").first();
     await expect(dialog).toBeVisible();
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "default-templates",
       "default-templates-reset-dialog.png",
@@ -169,6 +169,7 @@ test.describe("Default templates", () => {
     await resetBtn.click();
 
     mockRequest.use(defaultTemplatesSetHandler(TEST_PORT));
+    mockRequest.use(defaultTemplatesHandler(TEST_PORT));
 
     const badge = row.getByTestId("badge-text");
     await expect(badge).toHaveText("Default");
@@ -190,7 +191,7 @@ test.describe("Default templates", () => {
     const row = page.getByTestId("default-template-row-0");
     await expect(row).toBeVisible();
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "default-templates",
       "default-templates-long-title.png",
