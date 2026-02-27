@@ -110,6 +110,7 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
         visible={view === "top-up"}
         onCloseTopUpModal={onClose}
         onBackClick={onGetStartedClick}
+        isTopUpVisible={isTopUpVisible}
       />
     ) : view === "pricing" ? (
       <PricingBillingBody

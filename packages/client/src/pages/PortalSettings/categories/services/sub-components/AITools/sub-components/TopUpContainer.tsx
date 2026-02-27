@@ -36,12 +36,20 @@ type TopUpContainerTypes = {
   onCloseTopUpModal: () => void;
   onBackClick: () => void;
   featureCountData?: number;
+  isTopUpVisible?: boolean;
 };
 
 const TopUpContainer = (props: TopUpContainerTypes) => {
-  const { visible, onCloseTopUpModal, onBackClick, featureCountData } = props;
+  const {
+    visible,
+    onCloseTopUpModal,
+    onBackClick,
+    featureCountData,
+    isTopUpVisible,
+  } = props;
 
-  const [walletTopUpModalVisible, setWalletTopUpModalVisible] = useState(false);
+  const [walletTopUpModalVisible, setWalletTopUpModalVisible] =
+    useState(isTopUpVisible);
   const [recommendedAmount, setRecommendedAmount] = useState<number>(0);
   const [selectedAmount, setSelectedAmount] = useState<number>(
     featureCountData ?? 0,
