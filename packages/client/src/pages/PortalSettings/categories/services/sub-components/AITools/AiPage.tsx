@@ -34,6 +34,7 @@ import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
 import { Link } from "@docspace/ui-kit/components/link";
 
 import { AI_TOOLS } from "@docspace/shared/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 import TransactionHistory from "SRC_DIR/pages/PortalSettings/categories/payments/TransactionHistory";
 import BalanceAmount from "SRC_DIR/pages/PortalSettings/categories/payments/BalanceAmount";
@@ -86,6 +87,7 @@ type AiPageProps = {
   cardLinkedOnFreeTariff?: boolean;
   isFreeTariff?: boolean;
   isPayer?: boolean;
+  currentDeviceType?: string;
 };
 
 const AiPage = (props: AiPageProps) => {
@@ -109,6 +111,7 @@ const AiPage = (props: AiPageProps) => {
     cardLinkedOnFreeTariff,
     isFreeTariff,
     isPayer,
+    currentDeviceType,
   } = props;
 
   const { t } = useTranslation("Services");
@@ -236,7 +239,10 @@ const AiPage = (props: AiPageProps) => {
       name: t("Usage"),
       content: (
         <div>
-          <TransactionHistory withoutHeader serviceName={AI_TOOLS} />
+          <TransactionHistory
+            withoutHeader={currentDeviceType !== DeviceType.mobile}
+            serviceName={AI_TOOLS}
+          />
         </div>
       ),
     },
@@ -384,7 +390,7 @@ export default inject(
       cardLinkedOnFreeTariff,
       isPayer,
     } = paymentStore;
-    const { logoText } = settingsStore;
+    const { logoText, currentDeviceType } = settingsStore;
     const { language } = authStore;
     const {
       aiServiceCodeCurrency,
@@ -416,6 +422,7 @@ export default inject(
       cardLinkedOnFreeTariff,
       isPayer,
       isFreeTariff,
+      currentDeviceType,
     };
   },
 )(observer(AiPage));
