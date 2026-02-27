@@ -156,6 +156,18 @@ export const defaultTemplatesSetHandler = (
   );
 };
 
+export const defaultTemplatesResetHandler = (
+  port: string,
+  type?: ResponseType,
+) => {
+  return http.delete(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_DEFAULT_TEMPLATES}`,
+    () => {
+      return defaultTemplatesResolver(type);
+    },
+  );
+};
+
 export const defaultTemplatesLongHandler = (
   port: string,
   type?: ResponseType,

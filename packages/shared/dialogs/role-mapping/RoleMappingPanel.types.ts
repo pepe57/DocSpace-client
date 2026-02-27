@@ -24,35 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { memo } from "react";
-import type { HeaderProps } from "./StartFillingPanel.types";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import type { Dispatch, SetStateAction } from "react";
+import type { TUser } from "../../api/people/types";
+import type { TSettings } from "../../api/settings/types";
+import type { IRole } from "../../components/filling-role-selector";
+import type { TFormRoleMappingRequest } from "../../api/files/types";
+import type { TTranslation } from "../../types";
 
-export const Header = memo(
-  ({
-    ref,
-    t,
-    roleName,
-    className,
-    openInvitePanel,
-    canEditRoom,
-  }: HeaderProps) => (
-    <div className={className} ref={ref}>
-      <TooltipContainer
-        as="h3"
-        title={t("Common:RecipientFields", {
-          recipientName: roleName,
-        })}
-      >
-        {t("Common:RecipientFields", {
-          recipientName: roleName,
-        })}
-      </TooltipContainer>
-      {canEditRoom ? (
-        <span onClick={openInvitePanel}>{t("Common:AddUserToRoom")}</span>
-      ) : null}
-    </div>
-  ),
-);
+export type Invitation = { id: string | number; access: string | number };
 
-Header.displayName = "Header";
+export interface IRoleMappingPanelProps {
+  roles: Omit<IRole, "user">[];
+  user: TUser;
+  settings: TSettings;
+  fileId: number;
+  roomId: string;
+  setRoleMappingPanelVisible: Dispatch<SetStateAction<boolean>>;
+  onSubmit: (data: TFormRoleMappingRequest) => Promise<void>;
+  inviteUserToRoom: (
+    roomId: string,
+    invitations: Invitation[],
+  ) => Promise<unknown>;
+  withBorder?: boolean;
+  canEditRoom?: boolean;
+}
+
+export interface HeaderProps {
+  ref?: React.RefObject<HTMLDivElement>;
+  canEditRoom: boolean;
+  roleName: string;
+  t: TTranslation;
+  openInvitePanel: VoidFunction;
+
+  className?: string;
+}

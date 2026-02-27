@@ -24,5 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { CreatedPDFFormDialog } from "./CreatedPDFFormDialog";
-export { showCreatedPDFFormDialog } from "./CreatedPDFFormDialog.helper";
+import { memo } from "react";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+
+import type { HeaderProps } from "./RoleMappingPanel.types";
+
+export const Header = memo(
+  ({
+    ref,
+    t,
+    roleName,
+    className,
+    openInvitePanel,
+    canEditRoom,
+  }: HeaderProps) => (
+    <div className={className} ref={ref}>
+      <TooltipContainer
+        as="h3"
+        title={t("Common:RecipientFields", {
+          recipientName: roleName,
+        })}
+      >
+        {t("Common:RecipientFields", {
+          recipientName: roleName,
+        })}
+      </TooltipContainer>
+      {canEditRoom ? (
+        <span onClick={openInvitePanel}>{t("Common:AddUserToRoom")}</span>
+      ) : null}
+    </div>
+  ),
+);
+
+Header.displayName = "Header";
