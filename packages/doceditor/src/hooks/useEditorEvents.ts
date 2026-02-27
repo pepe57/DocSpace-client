@@ -52,7 +52,6 @@ import {
   getModels,
   getDefaultProvider,
 } from "@docspace/shared/api/ai";
-import { ProviderType } from "@docspace/shared/api/ai/enums";
 import type {
   TAiProvider,
   TDefaultProvider,
@@ -280,18 +279,10 @@ const useEditorEvents = ({
             } as TAiProvider;
           } else {
             const providers = await getProviders();
-            const compatibleTypes = [
-              ProviderType.PortalAi,
-              ProviderType.OpenAi,
-              ProviderType.OpenRouter,
-              ProviderType.OpenAiCompatible,
-            ];
 
             provider = providers.find(
               (p: TAiProvider) =>
-                p.id === defaultPortalProvider?.providerId &&
-                compatibleTypes.includes(p.type) &&
-                !p.needReset,
+                p.id === defaultPortalProvider?.providerId && !p.needReset,
             );
 
             if (provider) {
