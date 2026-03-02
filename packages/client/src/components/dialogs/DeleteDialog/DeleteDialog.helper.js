@@ -48,7 +48,6 @@ export const getDialogContent = (
   isAIAgent,
   isAIAgentsFolderRoot,
   unsubscribe,
-  isAIAgentChatDelete,
 ) => {
   if (!selection) return null;
 
@@ -85,23 +84,6 @@ export const getDialogContent = (
           ns="DeleteDialog"
           values={{ agentName: selection[0]?.title }}
         />{" "}
-        {t("Common:WantToContinue")}
-      </>
-    );
-  }
-
-  if (isAIAgentChatDelete.visible) {
-    return (
-      <>
-        <Trans
-          t={t}
-          i18nKey="DeleteAIChatDescription"
-          ns="DeleteDialog"
-          values={{ chatName: isAIAgentChatDelete.itemName }}
-          components={{
-            1: <Text key="chat-title" fontWeight={400} as="span" />,
-          }}
-        ></Trans>{" "}
         {t("Common:WantToContinue")}
       </>
     );

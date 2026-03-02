@@ -72,8 +72,6 @@ type Props = {
   chatSettings?: SelectedFolderStore["chatSettings"];
   isAdmin?: AuthStore["isAdmin"];
   aiConfig?: SettingsStore["aiConfig"];
-  setIsAIAgentChatDelete?: DialogsStore["setIsAIAgentChatDelete"];
-  setDeleteDialogVisible?: DialogsStore["setDeleteDialogVisible"];
   folderFormValidation?: RegExp;
   canUseChat?: AccessRightsStore["canUseChat"];
 
@@ -100,8 +98,6 @@ const AIAgentViewComponent = ({
   isAdmin,
   aiConfig,
   getResultStorageId,
-  setIsAIAgentChatDelete,
-  setDeleteDialogVisible,
   folderFormValidation,
   canUseChat,
   setMediaViewerVisible,
@@ -149,8 +145,6 @@ const AIAgentViewComponent = ({
             aiReady={aiConfig?.aiReady || false}
             standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
             getResultStorageId={getResultStorageId}
-            setIsAIAgentChatDelete={setIsAIAgentChatDelete}
-            setDeleteDialogVisible={setDeleteDialogVisible}
             folderFormValidation={folderFormValidation!}
             multimodal={chatSettings?.multimodal}
             setMediaViewerVisible={setMediaViewerVisible}
@@ -202,8 +196,6 @@ export const AIAgentView = inject(
 
     const { aiConfig, folderFormValidation } = settingsStore;
 
-    const { setIsAIAgentChatDelete, setDeleteDialogVisible } = dialogsStore;
-
     const { canUseChat } = accessRightsStore;
 
     const { setAiPlaylistImages } = aiRoomStore;
@@ -218,8 +210,6 @@ export const AIAgentView = inject(
       chatSettings,
       isAdmin,
       aiConfig,
-      setIsAIAgentChatDelete,
-      setDeleteDialogVisible,
       folderFormValidation,
       canUseChat,
 

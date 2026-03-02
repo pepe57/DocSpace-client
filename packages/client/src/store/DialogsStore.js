@@ -161,12 +161,6 @@ class DialogsStore {
 
   isRoomDelete = false;
 
-  isAIAgentChatDelete = {
-    visible: false,
-    itemName: "",
-    onDeleteAction: () => {},
-  };
-
   convertItem = null;
 
   formCreationInfo = null;
@@ -395,10 +389,6 @@ class DialogsStore {
       file:
         file === null ? null : (file ?? this.aiAgentSelectorDialogProps.file),
     };
-  };
-
-  setIsAIAgentChatDelete = ({ visible, itemName, onDeleteAction }) => {
-    this.isAIAgentChatDelete = { visible, itemName, onDeleteAction };
   };
 
   setEditRoomDialogProps = (props) => {
