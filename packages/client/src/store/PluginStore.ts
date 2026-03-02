@@ -62,6 +62,8 @@ import type {
   IMessage,
   IProfileMenuItem,
   IProfileMenuItemClient,
+  IArticleButtonItem,
+  IArticleButtonItemClient,
   IframeWindow,
   TPlugin,
   IPostMessageCallbackMessage,
@@ -116,6 +118,8 @@ class PluginStore {
   eventListenerItems: Map<string, IEventListenerItemClient> = new Map();
 
   fileItems: Map<string, IFileItemClient> = new Map();
+
+  articleButtonItems: Map<string, IArticleButtonItemClient> = new Map();
 
   pluginFrame: HTMLIFrameElement | null = null;
 
@@ -181,6 +185,7 @@ class PluginStore {
       updateProfileMenuItems: this.updateProfileMenuItems,
       updateEventListenerItems: this.updateEventListenerItems,
       updateFileItems: this.updateFileItems,
+      updateArticleButtonItems: this.updateArticleButtonItems,
       updateCreateDialogProps: updateCreateDialogProps,
       updatePlugin: this.updatePlugin,
       setPluginSelectorVisible: this.setPluginSelectorVisible,
@@ -292,6 +297,12 @@ class PluginStore {
         if (this.plugins[pluginIdx].scopes.includes(PluginScopes.File)) {
           this.updateFileItems(name);
         }
+
+        if (
+          this.plugins[pluginIdx].scopes.includes(PluginScopes.ArticleButton)
+        ) {
+          this.updateArticleButtonItems(name);
+        }
       }
     }
   };
@@ -370,7 +381,13 @@ class PluginStore {
     return true;
   };
 
-  addPlugin = async (data: FormData, t: TTranslation) => {
+  checkPluginCacheWarning = (plugin: TAPIPlugin) => {
+    return this.plugins.some(
+      (p) => p.name === plugin.name && p.version === plugin.version,
+    );
+  };
+
+  addPlugin = async (data: FormData) => {
     try {
       const plugin = await api.plugins.addPlugin(data);
 
@@ -378,19 +395,16 @@ class PluginStore {
         plugin.minDocSpaceVersion,
       );
 
-      if (!isPluginCompatible) {
-        toastr.error(
-          t("PluginIsNotCompatible", {
-            productName: t("Common:ProductName"),
-          }),
-        );
-      } else {
-        toastr.success(t("PluginLoadedSuccessfully"));
-      }
+      const isPluginInCache = this.checkPluginCacheWarning(plugin);
 
       this.setNeedPageReload(true);
 
       this.initPlugin(plugin);
+
+      return {
+        isPluginCompatible,
+        isPluginInCache,
+      };
     } catch (e) {
       toastr.error(e as TData);
     }
@@ -589,6 +603,10 @@ class PluginStore {
     if (plugin.scopes.includes(PluginScopes.PostMessage)) {
       this.initPostMessagePlugin(plugin);
     }
+
+    if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
+      this.updateArticleButtonItems(name);
+    }
   };
 
   updatePlugin = async (
@@ -677,6 +695,10 @@ class PluginStore {
 
     if (plugin.scopes.includes(PluginScopes.File)) {
       this.deactivateFileItems(plugin);
+    }
+
+    if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
+      this.deactivateArticleButtonItems(plugin);
     }
   };
 
@@ -1268,6 +1290,50 @@ class PluginStore {
     plugin.setPostMessageCallback?.(callback);
   };
 
+  updateArticleButtonItems = async (name: string) => {
+    const plugin = this.plugins.find((p) => p.name === name);
+
+    if (!plugin || !plugin.enabled) return;
+
+    const items: Map<string, IArticleButtonItem> | undefined =
+      plugin.getArticleButtonItems && plugin.getArticleButtonItems();
+
+    if (!items) return;
+
+    const userRole = this.getUserRole();
+    const device = this.getCurrentDevice();
+
+    for (const [key, value] of Array.from(items)) {
+      const correctUserType = value.usersTypes
+        ? value.usersTypes.includes(userRole)
+        : true;
+
+      const correctDevice = value.devices
+        ? value.devices.includes(device)
+        : true;
+
+      if (!correctUserType || !correctDevice) continue;
+
+      this.articleButtonItems.set(key, {
+        ...value,
+        pluginName: plugin.name,
+      });
+    }
+  };
+
+  deactivateArticleButtonItems = (plugin: TPlugin) => {
+    if (!plugin) return;
+
+    const items: Map<string, IArticleButtonItem> | undefined =
+      plugin.getArticleButtonItems && plugin.getArticleButtonItems();
+
+    if (!items) return;
+
+    Array.from(items).forEach(([key]) => {
+      this.articleButtonItems.delete(key);
+    });
+  };
+
   get pluginList() {
     return this.plugins;
   }
@@ -1362,6 +1428,23 @@ class PluginStore {
 
   get fileItemsList() {
     const items = Array.from(this.fileItems, ([key, value]) => {
+      return {
+        key,
+        value: {
+          ...value,
+        },
+      };
+    });
+
+    if (items.length > 0) {
+      return items;
+    }
+
+    return null;
+  }
+
+  get articleButtonItemsList() {
+    const items = Array.from(this.articleButtonItems, ([key, value]) => {
       return {
         key,
         value: {

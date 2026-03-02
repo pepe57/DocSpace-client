@@ -227,6 +227,7 @@ const GroupIconDialog = ({
       visible
       autoMaxHeight
       withBodyScroll
+      backdropVisible={false}
       displayType={isMobile() ? ModalDialogType.aside : ModalDialogType.modal}
       onClose={onClose}
     >

@@ -28,7 +28,7 @@ import { useState, useCallback, useRef } from "react";
 
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { setRoomSecurity } from "@docspace/shared/api/rooms";
-import type { Invitation } from "@docspace/shared/dialogs/start-filling/StartFillingPanel.types";
+import type { Invitation } from "@docspace/shared/dialogs/role-mapping/RoleMappingPanel.types";
 import type {
   TFile,
   TFormRoleMappingRequest,
@@ -38,13 +38,12 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import type { TFormRole } from "../types";
 
-export const useStartFillingPanel = (
+export const useRoleMappingPanel = (
   file: TFile | undefined,
   roomId: string | undefined,
 ) => {
   const [roles, setRoles] = useState<TFormRole[]>([]);
-  const [startFillingPanelVisible, setStartFillingPanelVisible] =
-    useState(false);
+  const [roleMappingPanelVisible, setRoleMappingPanelVisible] = useState(false);
 
   const resolveRef = useRef<() => void>(undefined);
 
@@ -61,7 +60,7 @@ export const useStartFillingPanel = (
     [],
   );
 
-  const onSubmitStartFilling = useCallback(
+  const onSubmitFormRoleMapping = useCallback(
     async (data: TFormRoleMappingRequest) => {
       try {
         await formRoleMapping(data);
@@ -100,18 +99,18 @@ export const useStartFillingPanel = (
     resolveRef.current = undefined;
   }, []);
 
-  const onStartFillingVDRPanel = useCallback((r: TFormRole[]) => {
+  const onOpenRoleMappingPanel = useCallback((r: TFormRole[]) => {
     setRoles(r);
-    setStartFillingPanelVisible(true);
+    setRoleMappingPanelVisible(true);
   }, []);
 
   return {
     roles,
     onStartFilling,
     inviteUserToRoom,
-    onSubmitStartFilling,
-    onStartFillingVDRPanel,
-    startFillingPanelVisible,
-    setStartFillingPanelVisible,
+    onSubmitFormRoleMapping,
+    onOpenRoleMappingPanel,
+    roleMappingPanelVisible,
+    setRoleMappingPanelVisible,
   };
 };

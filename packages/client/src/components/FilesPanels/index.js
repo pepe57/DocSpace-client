@@ -30,9 +30,9 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import {
-	Events,
-	FilesSelectorFilterTypes,
-	FilterType,
+  Events,
+  FilesSelectorFilterTypes,
+  FilterType,
 } from "@docspace/shared/enums";
 
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
@@ -45,42 +45,43 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
 
 import {
-	UploadPanel,
-	VersionHistoryPanel,
-	HotkeysPanel,
-	InvitePanel,
-	EditLinkPanel,
-	EmbeddingPanel,
-	ConversionPanel,
-	ShareFormPanel,
+  UploadPanel,
+  VersionHistoryPanel,
+  HotkeysPanel,
+  InvitePanel,
+  EditLinkPanel,
+  EmbeddingPanel,
+  ConversionPanel,
+  ShareFormPanel,
 } from "../panels";
 import {
-	ConnectDialog,
-	EmptyTrashDialog,
-	DeleteDialog,
-	DownloadDialog,
-	ConflictResolveDialog,
-	ConvertDialog,
-	InviteQuotaWarningDialog,
-	CreateRoomConfirmDialog,
-	SubmitToFormGallery,
-	EditGroupMembersDialog,
-	ChangeQuotaDialog,
-	DeleteLinkDialog,
-	MoveToPublicRoom,
-	SettingsPluginDialog,
-	PluginDialog,
-	DeletePluginDialog,
-	ShareFolderDialog,
-	RoomLogoCoverDialog,
-	FormFillingTipsDialog,
-	DeleteVersionDialog,
-	CancelOperationDialog,
-	ReducedRightsDialog,
-	SocialAuthWelcomeDialog,
-	EditRoomGroupsDialog,
-	RoomGroupingDialog,
-	AddRoomToGroupDialog,
+  ConnectDialog,
+  EmptyTrashDialog,
+  DeleteDialog,
+  DownloadDialog,
+  ConflictResolveDialog,
+  ConvertDialog,
+  InviteQuotaWarningDialog,
+  CreateRoomConfirmDialog,
+  SubmitToFormGallery,
+  EditGroupMembersDialog,
+  ChangeQuotaDialog,
+  DeleteLinkDialog,
+  MoveToPublicRoom,
+  SettingsPluginDialog,
+  PluginDialog,
+  DeletePluginDialog,
+  ShareFolderDialog,
+  RoomLogoCoverDialog,
+  FormFillingTipsDialog,
+  DeleteVersionDialog,
+  CancelOperationDialog,
+  ReducedRightsDialog,
+  SocialAuthWelcomeDialog,
+  EditRoomGroupsDialog,
+  RoomGroupingDialog,
+  AddRoomToGroupDialog,
+  PauseSubmissionsDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -108,660 +109,652 @@ import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
 
 const Panels = (props) => {
-	const {
-		uploadPanelVisible,
-		copyPanelVisible,
-		moveToPanelVisible,
-		restorePanelVisible,
-		connectDialogVisible,
-		versionHistoryPanelVisible,
-		deleteDialogVisible,
-		lifetimeDialogVisible,
-		downloadDialogVisible,
-		emptyTrashDialogVisible,
-		conflictResolveDialogVisible,
-		convertDialogVisible,
-		createMasterForm,
-		selectFileDialogVisible,
-		setSelectFileDialogVisible,
-		selectFileFormRoomDialogVisible,
-		selectFileFormRoomFilterParam,
-		setSelectFileFormRoomDialogVisible,
-		selectFileAiKnowledgeDialogVisible,
-		setSelectFileAiKnowledgeDialogVisible,
-		copyFromTemplateForm,
-		copyFileToAiKnowledge,
-		hotkeyPanelVisible,
-		invitePanelVisible,
-		convertPasswordDialogVisible,
-		createRoomConfirmDialogVisible,
-		confirmDialogIsLoading,
-		restoreAllPanelVisible,
-		archiveDialogVisible,
-		inviteQuotaWarningDialogVisible,
-		preparationPortalDialogVisible,
-		restoreRoomDialogVisible,
-		submitToGalleryDialogVisible,
-		editGroupMembersDialogVisible,
-		changeQuotaDialogVisible,
-		editLinkPanelIsVisible,
-		deleteLinkDialogVisible,
-		embeddingPanelData,
-		moveToPublicRoomVisible,
-		settingsPluginDialogVisible,
-		pluginDialogVisible,
-		pluginSelectorVisible,
-		leaveRoomDialogVisible,
-		changeRoomOwnerIsVisible,
-		deletePluginDialogVisible,
-		shareFolderDialogVisible,
-		selectFileFormRoomOpenRoot,
-		reorderDialogVisible,
-		fillPDFDialogData,
-		createRoomTemplateDialogVisible,
-		templateAccessSettingsVisible,
+  const {
+    uploadPanelVisible,
+    copyPanelVisible,
+    moveToPanelVisible,
+    restorePanelVisible,
+    connectDialogVisible,
+    versionHistoryPanelVisible,
+    deleteDialogVisible,
+    lifetimeDialogVisible,
+    downloadDialogVisible,
+    emptyTrashDialogVisible,
+    conflictResolveDialogVisible,
+    convertDialogVisible,
+    createMasterForm,
+    selectFileDialogVisible,
+    setSelectFileDialogVisible,
+    selectFileFormRoomDialogVisible,
+    selectFileFormRoomFilterParam,
+    setSelectFileFormRoomDialogVisible,
+    selectFileAiKnowledgeDialogVisible,
+    setSelectFileAiKnowledgeDialogVisible,
+    copyFromTemplateForm,
+    copyFileToAiKnowledge,
+    hotkeyPanelVisible,
+    invitePanelVisible,
+    convertPasswordDialogVisible,
+    createRoomConfirmDialogVisible,
+    confirmDialogIsLoading,
+    restoreAllPanelVisible,
+    archiveDialogVisible,
+    inviteQuotaWarningDialogVisible,
+    preparationPortalDialogVisible,
+    restoreRoomDialogVisible,
+    submitToGalleryDialogVisible,
+    editGroupMembersDialogVisible,
+    changeQuotaDialogVisible,
+    editLinkPanelIsVisible,
+    deleteLinkDialogVisible,
+    embeddingPanelData,
+    moveToPublicRoomVisible,
+    settingsPluginDialogVisible,
+    pluginDialogVisible,
+    pluginSelectorVisible,
+    leaveRoomDialogVisible,
+    changeRoomOwnerIsVisible,
+    deletePluginDialogVisible,
+    shareFolderDialogVisible,
+    selectFileFormRoomOpenRoot,
+    reorderDialogVisible,
+    fillPDFDialogData,
+    createRoomTemplateDialogVisible,
+    templateAccessSettingsVisible,
 
-		setQuotaWarningDialogVisible,
-		resetQuotaItem,
-		isShowWarningDialog,
-		roomLogoCoverDialogVisible,
-		welcomeFormFillingTipsVisible,
-		passwordEntryDialogDate,
-		closeEditIndexDialogVisible,
-		conversionVisible,
-		deleteVersionDialogVisible,
+    setQuotaWarningDialogVisible,
+    resetQuotaItem,
+    isShowWarningDialog,
+    roomLogoCoverDialogVisible,
+    welcomeFormFillingTipsVisible,
+    passwordEntryDialogDate,
+    closeEditIndexDialogVisible,
+    conversionVisible,
+    deleteVersionDialogVisible,
 
-		setStopFillingDialogVisible,
-		stopFillingDialogData,
-		operationCancelVisible,
-		setFormFillingTipsDialog,
-		formFillingTipsVisible,
-		viewAs,
-		userId,
-		getRefElement,
-		config,
-		isShareFormData,
-		reducedRightsVisible,
-		removeUserConfirmation,
-		assignRolesDialogVisible,
-		socialAuthWelcomeDialogVisible,
-		extsFilesVectorized,
-		aiAgentSelectorDialogProps,
-		setAiAgentSelectorDialogProps,
-		templateGalleryVisible,
-		isVisibleInfoPanelTemplateGallery,
-		editRoomGroupsDialogVisible,
-		getCovers,
-		currentColorScheme,
-		covers,
-		setArrRoomGroups,
-		setEditRoomGroupsDialogVisible,
-		arrRoomGroups,
-		roomGroupingDialogVisible,
-		addRoomToGroupDialogVisible,
-	} = props;
+    setStopFillingDialogVisible,
+    stopFillingDialogData,
+    operationCancelVisible,
+    setFormFillingTipsDialog,
+    formFillingTipsVisible,
+    viewAs,
+    userId,
+    getRefElement,
+    config,
+    isShareFormData,
+    reducedRightsVisible,
+    removeUserConfirmation,
+    assignRolesDialogVisible,
+    socialAuthWelcomeDialogVisible,
+    extsFilesVectorized,
+    aiAgentSelectorDialogProps,
+    setAiAgentSelectorDialogProps,
+    templateGalleryVisible,
+    isVisibleInfoPanelTemplateGallery,
+    editRoomGroupsDialogVisible,
+    getCovers,
+    currentColorScheme,
+    covers,
+    setArrRoomGroups,
+    setEditRoomGroupsDialogVisible,
+    arrRoomGroups,
+    roomGroupingDialogVisible,
+    addRoomToGroupDialogVisible,
+    pauseSubmissionsDialogVisible,
+  } = props;
 
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	const [sharePDFForm, setSharePDFForm] = useState({
-		visible: false,
-		data: null,
-		onClose: null,
-	});
+  const [sharePDFForm, setSharePDFForm] = useState({
+    visible: false,
+    data: null,
+    onClose: null,
+  });
 
-	const onCloseStopFillingDialog = () => {
-		setStopFillingDialogVisible(false);
-	};
+  const onCloseStopFillingDialog = () => {
+    setStopFillingDialogVisible(false);
+  };
 
-	const { t } = useTranslation(["Translations", "Common", "PDFFormDialog"]);
+  const { t } = useTranslation(["Translations", "Common", "PDFFormDialog"]);
 
-	const onClose = () => {
-		setSelectFileDialogVisible(false);
-	};
+  const onClose = () => {
+    setSelectFileDialogVisible(false);
+  };
 
-	const onCloseFileFormRoomDialog = () => {
-		setSelectFileFormRoomDialogVisible(false);
-	};
+  const onCloseFileFormRoomDialog = () => {
+    setSelectFileFormRoomDialogVisible(false);
+  };
 
-	const onCloseFileFormAiKnowledgeDialog = () => {
-		setSelectFileAiKnowledgeDialogVisible(false);
-	};
+  const onCloseFileFormAiKnowledgeDialog = () => {
+    setSelectFileAiKnowledgeDialogVisible(false);
+  };
 
-	const descriptionTextFileFormRoomDialog = useMemo(() => {
-		const text = {
-			[FilesSelectorFilterTypes.DOCX]: t("Common:SelectDOCXFormat"),
-			// [FilesSelectorFilterTypes.DOCXF]: t("Common:SelectDOCXFFormat"),
-			[FilesSelectorFilterTypes.PDF]: t("Common:SelectPDFFormat"),
-			[FilterType.PDFForm]: t("Common:SelectPDFFormat"),
-		};
+  const descriptionTextFileFormRoomDialog = useMemo(() => {
+    const text = {
+      [FilesSelectorFilterTypes.DOCX]: t("Common:SelectDOCXFormat"),
+      // [FilesSelectorFilterTypes.DOCXF]: t("Common:SelectDOCXFFormat"),
+      [FilesSelectorFilterTypes.PDF]: t("Common:SelectPDFFormat"),
+      [FilterType.PDFForm]: t("Common:SelectPDFFormat"),
+    };
 
-		return text[selectFileFormRoomFilterParam];
-	}, [selectFileFormRoomFilterParam, t]);
+    return text[selectFileFormRoomFilterParam];
+  }, [selectFileFormRoomFilterParam, t]);
 
-	const handleSharePDFForm = useCallback(
-		/**
-		 * @param {CustomEvent} event
-		 */
-		(event) => {
-			const { file } = event.detail;
+  const handleSharePDFForm = useCallback(
+    /**
+     * @param {CustomEvent} event
+     */
+    (event) => {
+      const { file } = event.detail;
 
-			setSharePDFForm({
-				visible: true,
-				file,
-				onClose: () => {
-					setSharePDFForm({ visible: false, onClose: null, file: null });
-				},
-			});
-		},
-		[],
-	);
+      setSharePDFForm({
+        visible: true,
+        file,
+        onClose: () => {
+          setSharePDFForm({ visible: false, onClose: null, file: null });
+        },
+      });
+    },
+    [],
+  );
 
-	useEffect(() => {
-		window.addEventListener(Events.Share_PDF_Form, handleSharePDFForm);
+  useEffect(() => {
+    window.addEventListener(Events.Share_PDF_Form, handleSharePDFForm);
 
-		return () => {
-			window.removeEventListener(Events.Share_PDF_Form, handleSharePDFForm);
-		};
-	}, [handleSharePDFForm]);
+    return () => {
+      window.removeEventListener(Events.Share_PDF_Form, handleSharePDFForm);
+    };
+  }, [handleSharePDFForm]);
 
-	useEffect(() => {
-		if (isShowWarningDialog) {
-			setQuotaWarningDialogVisible(true);
+  useEffect(() => {
+    if (isShowWarningDialog) {
+      setQuotaWarningDialogVisible(true);
 
-			resetQuotaItem();
-		}
-		return () => {
-			resetQuotaItem();
-		};
-	}, [isShowWarningDialog]);
+      resetQuotaItem();
+    }
+    return () => {
+      resetQuotaItem();
+    };
+  }, [isShowWarningDialog]);
 
-	const onCloseGuidance = () => {
-		setFormFillingTipsDialog(false);
-		window.localStorage.setItem(getFormFillingTipsStorageName(userId), "true");
-	};
+  const onCloseGuidance = () => {
+    setFormFillingTipsDialog(false);
+    window.localStorage.setItem(getFormFillingTipsStorageName(userId), "true");
+  };
 
-	return [
-		settingsPluginDialogVisible && (
-			<SettingsPluginDialog
-				isVisible={settingsPluginDialogVisible}
-				key="settings-plugin-dialog"
-			/>
-		),
-		deletePluginDialogVisible && (
-			<DeletePluginDialog
-				isVisible={deletePluginDialogVisible}
-				key="delete-plugin-dialog"
-			/>
-		),
-		pluginDialogVisible && (
-			<PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
-		),
-		pluginSelectorVisible && <PluginSelector key="plugin-selector" />,
-		uploadPanelVisible && <UploadPanel key="upload-panel" />,
-		conversionVisible && <ConversionPanel key="conversion-panel" />,
-		(moveToPanelVisible ||
-			copyPanelVisible ||
-			restorePanelVisible ||
-			restoreAllPanelVisible) && (
-			<FilesSelector
-				key="files-selector"
-				isMove={moveToPanelVisible}
-				isCopy={copyPanelVisible}
-				isRestore={restorePanelVisible}
-				isRestoreAll={restoreAllPanelVisible}
-				withAIAgentsTreeFolder
-				disableBySecurity="UseChat"
-			/>
-		),
-		connectDialogVisible && <ConnectDialog key="connect-dialog" />,
-		versionHistoryPanelVisible && (
-			<VersionHistoryPanel key="version-history-panel" />
-		),
-		deleteDialogVisible && <DeleteDialog key="delete-dialog" />,
-		lifetimeDialogVisible && <LifetimeDialog key="lifetime-dialog" />,
-		emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
-		downloadDialogVisible && <DownloadDialog key="download-dialog" />,
+  return [
+    settingsPluginDialogVisible && (
+      <SettingsPluginDialog
+        isVisible={settingsPluginDialogVisible}
+        key="settings-plugin-dialog"
+      />
+    ),
+    deletePluginDialogVisible && (
+      <DeletePluginDialog
+        isVisible={deletePluginDialogVisible}
+        key="delete-plugin-dialog"
+      />
+    ),
+    pluginDialogVisible && (
+      <PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
+    ),
+    pluginSelectorVisible && <PluginSelector key="plugin-selector" />,
+    uploadPanelVisible && <UploadPanel key="upload-panel" />,
+    conversionVisible && <ConversionPanel key="conversion-panel" />,
+    (moveToPanelVisible ||
+      copyPanelVisible ||
+      restorePanelVisible ||
+      restoreAllPanelVisible) && (
+      <FilesSelector
+        key="files-selector"
+        isMove={moveToPanelVisible}
+        isCopy={copyPanelVisible}
+        isRestore={restorePanelVisible}
+        isRestoreAll={restoreAllPanelVisible}
+        withAIAgentsTreeFolder
+        disableBySecurity="UseChat"
+      />
+    ),
+    connectDialogVisible && <ConnectDialog key="connect-dialog" />,
+    versionHistoryPanelVisible && (
+      <VersionHistoryPanel key="version-history-panel" />
+    ),
+    deleteDialogVisible && <DeleteDialog key="delete-dialog" />,
+    lifetimeDialogVisible && <LifetimeDialog key="lifetime-dialog" />,
+    emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
+    downloadDialogVisible && <DownloadDialog key="download-dialog" />,
+    conflictResolveDialogVisible && (
+      <ConflictResolveDialog key="conflict-resolve-dialog" />
+    ),
+    convertDialogVisible && <ConvertDialog key="convert-dialog" />,
+    (createRoomConfirmDialogVisible || confirmDialogIsLoading) && (
+      <CreateRoomConfirmDialog key="create-room-confirm-dialog" />
+    ),
+    selectFileDialogVisible && (
+      <FilesSelector
+        key="select-file-dialog"
+        filterParam={FilesSelectorFilterTypes.DOCX}
+        isPanelVisible={selectFileDialogVisible}
+        onSelectFile={createMasterForm}
+        onClose={onClose}
+        withRecentTreeFolder
+        withFavoritesTreeFolder
+        withAIAgentsTreeFolder
+      />
+    ),
+    selectFileFormRoomDialogVisible && (
+      <FilesSelector
+        isFormRoom
+        isPanelVisible
+        key="select-file-form-room-dialog"
+        onClose={onCloseFileFormRoomDialog}
+        openRoot={selectFileFormRoomOpenRoot}
+        onSelectFile={(file) => copyFromTemplateForm(file, t)}
+        filterParam={selectFileFormRoomFilterParam}
+        descriptionText={descriptionTextFileFormRoomDialog}
+        withRecentTreeFolder
+        withFavoritesTreeFolder
+        withAIAgentsTreeFolder
+      />
+    ),
+    selectFileAiKnowledgeDialogVisible && (
+      <FilesSelector
+        isFormRoom
+        isPanelVisible
+        key="select-file-ai-knowledge-dialog"
+        onClose={onCloseFileFormAiKnowledgeDialog}
+        openRoot
+        onSelectFile={(files) => copyFileToAiKnowledge(files, t)}
+        filterParam={extsFilesVectorized.join(",")}
+        descriptionText=""
+        isMultiSelect
+        withRecentTreeFolder
+        withFavoritesTreeFolder
+        withAIAgentsTreeFolder
+      />
+    ),
+    aiAgentSelectorDialogProps.visible && (
+      <AIAgentsSelector
+        key="ai-agents-selector"
+        onClose={() => setAiAgentSelectorDialogProps(false, null)}
+        withPadding
+        withSearch
+        onSubmit={(items) => {
+          const id = items[0]?.id;
 
-		conflictResolveDialogVisible && (
-			<ConflictResolveDialog key="conflict-resolve-dialog" />
-		),
-		convertDialogVisible && <ConvertDialog key="convert-dialog" />,
+          setAiAgentSelectorDialogProps(false);
 
-		// createRoomDialogVisible && <CreateRoomDialog key="create-room-dialog" />,
-		(createRoomConfirmDialogVisible || confirmDialogIsLoading) && (
-			<CreateRoomConfirmDialog key="create-room-confirm-dialog" />
-		),
-		selectFileDialogVisible && (
-			<FilesSelector
-				key="select-file-dialog"
-				filterParam={FilesSelectorFilterTypes.DOCX}
-				isPanelVisible={selectFileDialogVisible}
-				onSelectFile={createMasterForm}
-				onClose={onClose}
-				withRecentTreeFolder
-				withFavoritesTreeFolder
-				withAIAgentsTreeFolder
-			/>
-		),
+          const url = getCategoryUrl(CategoryType.Chat, id);
 
-		selectFileFormRoomDialogVisible && (
-			<FilesSelector
-				isFormRoom
-				isPanelVisible
-				key="select-file-form-room-dialog"
-				onClose={onCloseFileFormRoomDialog}
-				openRoot={selectFileFormRoomOpenRoot}
-				onSelectFile={(file) => copyFromTemplateForm(file, t)}
-				filterParam={selectFileFormRoomFilterParam}
-				descriptionText={descriptionTextFileFormRoomDialog}
-				withRecentTreeFolder
-				withFavoritesTreeFolder
-				withAIAgentsTreeFolder
-			/>
-		),
+          const filter = new FilesFilter();
 
-		selectFileAiKnowledgeDialogVisible && (
-			<FilesSelector
-				isFormRoom
-				isPanelVisible
-				key="select-file-ai-knowledge-dialog"
-				onClose={onCloseFileFormAiKnowledgeDialog}
-				openRoot
-				onSelectFile={(files) => copyFileToAiKnowledge(files, t)}
-				filterParam={extsFilesVectorized.join(",")}
-				descriptionText=""
-				isMultiSelect
-				withRecentTreeFolder
-				withFavoritesTreeFolder
-				withAIAgentsTreeFolder
-			/>
-		),
+          filter.folder = id;
 
-		aiAgentSelectorDialogProps.visible && (
-			<AIAgentsSelector
-				key="ai-agents-selector"
-				onClose={() => setAiAgentSelectorDialogProps(false, null)}
-				withPadding
-				withSearch
-				onSubmit={(items) => {
-					const id = items[0]?.id;
-
-					setAiAgentSelectorDialogProps(false);
-
-					const url = getCategoryUrl(CategoryType.Chat, id);
-
-					const filter = new FilesFilter();
-
-					filter.folder = id;
-
-					navigate(`${url}?${filter.toUrlParams()}`);
-				}}
-			/>
-		),
-
-		hotkeyPanelVisible && <HotkeysPanel key="hotkey-panel" />,
-		invitePanelVisible && <InvitePanel key="invite-panel" />,
-		convertPasswordDialogVisible && (
-			<ConvertPasswordDialog key="convert-password-dialog" />
-		),
-		archiveDialogVisible && <ArchiveDialog key="archive-dialog" />,
-		restoreRoomDialogVisible && <RestoreRoomDialog key="archive-dialog" />,
-		inviteQuotaWarningDialogVisible && (
-			<InviteQuotaWarningDialog key="invite-users-warning-dialog" />
-		),
-		preparationPortalDialogVisible && (
-			<PreparationPortalDialog key="preparation-portal-dialog" />
-		),
-		submitToGalleryDialogVisible && (
-			<SubmitToFormGallery key="submit-to-form-gallery-dialog" />
-		),
-		editGroupMembersDialogVisible && (
-			<EditGroupMembersDialog key="edit-group-members-dialog" />
-		),
-		changeQuotaDialogVisible && <ChangeQuotaDialog key="change-quota-dialog" />,
-		editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
-
-		deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
-		embeddingPanelData.visible && <EmbeddingPanel key="embedding-panel" />,
-		moveToPublicRoomVisible && (
-			<MoveToPublicRoom key="move-to-public-room-panel" />
-		),
-
-		leaveRoomDialogVisible && <LeaveRoomDialog key="leave-room-dialog" />,
-		changeRoomOwnerIsVisible && (
-			<ChangeRoomOwnerPanel key="change-room-owner" />
-		),
-		shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
-		reorderDialogVisible && <ReorderIndexDialog key="reorder-index-dialog" />,
-		createRoomTemplateDialogVisible && (
-			<CreateRoomTemplateDialog key="create-room-template-dialog" />
-		),
-		templateAccessSettingsVisible && (
-			<TemplateAccessSettingsPanel key="template-access-settings" />
-		),
-		sharePDFForm.visible && (
-			<SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />
-		),
-		fillPDFDialogData.visible && (
-			<FillPDFDialog key="fill-pdf-form-dialog" {...fillPDFDialogData} />
-		),
-		roomLogoCoverDialogVisible && (
-			<RoomLogoCoverDialog key="room-logo-cover-dialog" />
-		),
-		passwordEntryDialogDate.visible && (
-			<PasswordEntryDialog
-				key="password-entry-dialog"
-				item={passwordEntryDialogDate.item}
-				isDownload={passwordEntryDialogDate.isDownload}
-			/>
-		),
-		closeEditIndexDialogVisible && (
-			<CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
-		),
-		<FillingStatusPanel key="filling-status-panel" />,
-		deleteVersionDialogVisible && (
-			<DeleteVersionDialog key="delete-version-dialog" />
-		),
-
-		stopFillingDialogData.visible && (
-			<StopFillingDialog
-				key="stop-filling-dialog"
-				visible={stopFillingDialogData.visible}
-				formId={stopFillingDialogData.formId}
-				onClose={onCloseStopFillingDialog}
-			/>
-		),
-		operationCancelVisible && (
-			<CancelOperationDialog key="cancel-operation-dialog" />
-		),
-		welcomeFormFillingTipsVisible ? (
-			<FormFillingTipsDialog key="form-filling_tips_dialog" />
-		) : null,
-
-		formFillingTipsVisible ? (
-			<Guidance
-				key="form-filling-tips-guidance"
-				viewAs={viewAs}
-				onClose={onCloseGuidance}
-				getRefElement={getRefElement}
-				config={config}
-			/>
-		) : null,
-
-		isShareFormData.visible && (
-			<ShareFormPanel key="share-form-dialog" {...isShareFormData} />
-		),
-
-		reducedRightsVisible ? (
-			<ReducedRightsDialog key="reduced-rights-dialog" />
-		) : null,
-
-		removeUserConfirmation && (
-			<RemoveUserConfirmationDialog key="remove-user-confirmation-dialog" />
-		),
-		assignRolesDialogVisible && <AssignRoles key="assign-roles-dialog" />,
-		socialAuthWelcomeDialogVisible && (
-			<SocialAuthWelcomeDialog key="joining-space-dialog" />
-		),
-		<ShareSelector key="share-selector" />,
-		templateGalleryVisible && <TemplateGallery key="template-gallery" />,
-		isVisibleInfoPanelTemplateGallery && (
-			<InfoPanelTemplateGallery key="template-gallery-info-panel" />
-		),
-		editRoomGroupsDialogVisible && (
-			<EditRoomGroupsDialog
-				key="edit-room-groups-dialog"
-				currentColorScheme={currentColorScheme}
-				getCovers={getCovers}
-				covers={covers}
-				setArrRoomGroups={setArrRoomGroups}
-				setEditRoomGroupsDialogVisible={setEditRoomGroupsDialogVisible}
-				arrRoomGroups={arrRoomGroups}
-			/>
-		),
-		roomGroupingDialogVisible && (
-			<RoomGroupingDialog key="room-grouping-dialog" />
-		),
-		addRoomToGroupDialogVisible && (
-			<AddRoomToGroupDialog key="add-room-to-group-dialog" />
-		),
-	];
+          navigate(`${url}?${filter.toUrlParams()}`);
+        }}
+      />
+    ),
+    hotkeyPanelVisible && <HotkeysPanel key="hotkey-panel" />,
+    invitePanelVisible && <InvitePanel key="invite-panel" />,
+    convertPasswordDialogVisible && (
+      <ConvertPasswordDialog key="convert-password-dialog" />
+    ),
+    archiveDialogVisible && <ArchiveDialog key="archive-dialog" />,
+    restoreRoomDialogVisible && <RestoreRoomDialog key="archive-dialog" />,
+    inviteQuotaWarningDialogVisible && (
+      <InviteQuotaWarningDialog key="invite-users-warning-dialog" />
+    ),
+    preparationPortalDialogVisible && (
+      <PreparationPortalDialog key="preparation-portal-dialog" />
+    ),
+    submitToGalleryDialogVisible && (
+      <SubmitToFormGallery key="submit-to-form-gallery-dialog" />
+    ),
+    editGroupMembersDialogVisible && (
+      <EditGroupMembersDialog key="edit-group-members-dialog" />
+    ),
+    changeQuotaDialogVisible && <ChangeQuotaDialog key="change-quota-dialog" />,
+    editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
+    deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
+    embeddingPanelData.visible && <EmbeddingPanel key="embedding-panel" />,
+    moveToPublicRoomVisible && (
+      <MoveToPublicRoom key="move-to-public-room-panel" />
+    ),
+    leaveRoomDialogVisible && <LeaveRoomDialog key="leave-room-dialog" />,
+    changeRoomOwnerIsVisible && (
+      <ChangeRoomOwnerPanel key="change-room-owner" />
+    ),
+    shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
+    reorderDialogVisible && <ReorderIndexDialog key="reorder-index-dialog" />,
+    createRoomTemplateDialogVisible && (
+      <CreateRoomTemplateDialog key="create-room-template-dialog" />
+    ),
+    templateAccessSettingsVisible && (
+      <TemplateAccessSettingsPanel key="template-access-settings" />
+    ),
+    sharePDFForm.visible && (
+      <SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />
+    ),
+    fillPDFDialogData.visible && (
+      <FillPDFDialog key="fill-pdf-form-dialog" {...fillPDFDialogData} />
+    ),
+    roomLogoCoverDialogVisible && (
+      <RoomLogoCoverDialog key="room-logo-cover-dialog" />
+    ),
+    passwordEntryDialogDate.visible && (
+      <PasswordEntryDialog
+        key="password-entry-dialog"
+        item={passwordEntryDialogDate.item}
+        isDownload={passwordEntryDialogDate.isDownload}
+      />
+    ),
+    closeEditIndexDialogVisible && (
+      <CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
+    ),
+    <FillingStatusPanel key="filling-status-panel" />,
+    deleteVersionDialogVisible && (
+      <DeleteVersionDialog key="delete-version-dialog" />
+    ),
+    stopFillingDialogData.visible && (
+      <StopFillingDialog
+        key="stop-filling-dialog"
+        visible={stopFillingDialogData.visible}
+        formId={stopFillingDialogData.formId}
+        onClose={onCloseStopFillingDialog}
+      />
+    ),
+    operationCancelVisible && (
+      <CancelOperationDialog key="cancel-operation-dialog" />
+    ),
+    welcomeFormFillingTipsVisible ? (
+      <FormFillingTipsDialog key="form-filling_tips_dialog" />
+    ) : null,
+    formFillingTipsVisible ? (
+      <Guidance
+        key="form-filling-tips-guidance"
+        viewAs={viewAs}
+        onClose={onCloseGuidance}
+        getRefElement={getRefElement}
+        config={config}
+      />
+    ) : null,
+    isShareFormData.visible && (
+      <ShareFormPanel key="share-form-dialog" {...isShareFormData} />
+    ),
+    reducedRightsVisible ? (
+      <ReducedRightsDialog key="reduced-rights-dialog" />
+    ) : null,
+    removeUserConfirmation && (
+      <RemoveUserConfirmationDialog key="remove-user-confirmation-dialog" />
+    ),
+    assignRolesDialogVisible && <AssignRoles key="assign-roles-dialog" />,
+    socialAuthWelcomeDialogVisible && (
+      <SocialAuthWelcomeDialog key="joining-space-dialog" />
+    ),
+    <ShareSelector key="share-selector" />,
+    templateGalleryVisible && <TemplateGallery key="template-gallery" />,
+    isVisibleInfoPanelTemplateGallery && (
+      <InfoPanelTemplateGallery key="template-gallery-info-panel" />
+    ),
+    editRoomGroupsDialogVisible && (
+      <EditRoomGroupsDialog
+        key="edit-room-groups-dialog"
+        currentColorScheme={currentColorScheme}
+        getCovers={getCovers}
+        covers={covers}
+        setArrRoomGroups={setArrRoomGroups}
+        setEditRoomGroupsDialogVisible={setEditRoomGroupsDialogVisible}
+        arrRoomGroups={arrRoomGroups}
+      />
+    ),
+    roomGroupingDialogVisible && (
+      <RoomGroupingDialog key="room-grouping-dialog" />
+    ),
+    addRoomToGroupDialogVisible && (
+      <AddRoomToGroupDialog key="add-room-to-group-dialog" />
+    ),
+    pauseSubmissionsDialogVisible && (
+      <PauseSubmissionsDialog key="pause-submissions-dialog" />
+    ),
+  ];
 };
 
 export default inject(
-	({
-		settingsStore,
-		dialogsStore,
-		uploadDataStore,
-		versionHistoryStore,
-		backup,
-		createEditRoomStore,
-		pluginStore,
-		currentQuotaStore,
-		filesActionsStore,
-		filesStore,
-		userStore,
-		guidanceStore,
-		filesSettingsStore,
-		oformsStore,
-	}) => {
-		const {
-			copyPanelVisible,
-			moveToPanelVisible,
-			restorePanelVisible,
-			connectDialogVisible,
-			deleteDialogVisible,
-			lifetimeDialogVisible,
-			downloadDialogVisible,
-			emptyTrashDialogVisible,
-			conflictResolveDialogVisible,
-			convertDialogVisible,
-			createRoomDialogVisible,
-			createRoomConfirmDialogVisible,
-			convertPasswordDialogVisible,
-			connectItem, // TODO:
-			restoreAllPanelVisible,
-			archiveDialogVisible,
-			restoreRoomDialogVisible,
-			welcomeFormFillingTipsVisible,
+  ({
+    settingsStore,
+    dialogsStore,
+    uploadDataStore,
+    versionHistoryStore,
+    backup,
+    createEditRoomStore,
+    pluginStore,
+    currentQuotaStore,
+    filesActionsStore,
+    filesStore,
+    userStore,
+    guidanceStore,
+    filesSettingsStore,
+    oformsStore,
+  }) => {
+    const {
+      copyPanelVisible,
+      moveToPanelVisible,
+      restorePanelVisible,
+      connectDialogVisible,
+      deleteDialogVisible,
+      lifetimeDialogVisible,
+      downloadDialogVisible,
+      emptyTrashDialogVisible,
+      conflictResolveDialogVisible,
+      convertDialogVisible,
+      createRoomDialogVisible,
+      createRoomConfirmDialogVisible,
+      convertPasswordDialogVisible,
+      connectItem,
+      restoreAllPanelVisible,
+      archiveDialogVisible,
+      restoreRoomDialogVisible,
+      welcomeFormFillingTipsVisible,
 
-			createMasterForm,
-			selectFileDialogVisible,
-			setSelectFileDialogVisible,
-			selectFileFormRoomDialogVisible,
-			selectFileFormRoomFilterParam,
-			setSelectFileFormRoomDialogVisible,
-			selectFileAiKnowledgeDialogVisible,
-			setSelectFileAiKnowledgeDialogVisible,
-			invitePanelOptions,
-			inviteQuotaWarningDialogVisible,
-			changeQuotaDialogVisible,
-			submitToGalleryDialogVisible,
-			editGroupMembersDialogVisible,
-			editLinkPanelIsVisible,
-			deleteLinkDialogVisible,
-			embeddingPanelData,
-			moveToPublicRoomVisible,
-			leaveRoomDialogVisible,
-			changeRoomOwnerIsVisible,
-			shareFolderDialogVisible,
-			selectFileFormRoomOpenRoot,
-			reorderDialogVisible,
-			fillPDFDialogData,
-			roomLogoCoverDialogVisible,
-			createRoomTemplateDialogVisible,
-			templateAccessSettingsVisible,
+      createMasterForm,
+      selectFileDialogVisible,
+      setSelectFileDialogVisible,
+      selectFileFormRoomDialogVisible,
+      selectFileFormRoomFilterParam,
+      setSelectFileFormRoomDialogVisible,
+      selectFileAiKnowledgeDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
+      invitePanelOptions,
+      inviteQuotaWarningDialogVisible,
+      changeQuotaDialogVisible,
+      submitToGalleryDialogVisible,
+      editGroupMembersDialogVisible,
+      editLinkPanelIsVisible,
+      deleteLinkDialogVisible,
+      embeddingPanelData,
+      moveToPublicRoomVisible,
+      leaveRoomDialogVisible,
+      changeRoomOwnerIsVisible,
+      shareFolderDialogVisible,
+      selectFileFormRoomOpenRoot,
+      reorderDialogVisible,
+      fillPDFDialogData,
+      roomLogoCoverDialogVisible,
+      createRoomTemplateDialogVisible,
+      templateAccessSettingsVisible,
 
-			setQuotaWarningDialogVisible,
-			setIsNewRoomByCurrentUser,
-			setIsNewUserByCurrentUser,
-			isNewUserByCurrentUser,
-			isNewRoomByCurrentUser,
-			passwordEntryDialogDate,
-			closeEditIndexDialogVisible,
+      setQuotaWarningDialogVisible,
+      setIsNewRoomByCurrentUser,
+      setIsNewUserByCurrentUser,
+      isNewUserByCurrentUser,
+      isNewRoomByCurrentUser,
+      passwordEntryDialogDate,
+      closeEditIndexDialogVisible,
 
-			setStopFillingDialogVisible,
-			stopFillingDialogData,
-			operationCancelVisible,
+      setStopFillingDialogVisible,
+      stopFillingDialogData,
+      operationCancelVisible,
 
-			setFormFillingTipsDialog,
-			formFillingTipsVisible,
-			isShareFormData,
-			reducedRightsData,
-			removeUserConfirmation,
-			assignRolesDialogData,
-			socialAuthWelcomeDialogVisible,
+      setFormFillingTipsDialog,
+      formFillingTipsVisible,
+      isShareFormData,
+      reducedRightsData,
+      removeUserConfirmation,
+      assignRolesDialogData,
+      socialAuthWelcomeDialogVisible,
 
-			aiAgentSelectorDialogProps,
-			setAiAgentSelectorDialogProps,
-			editRoomGroupsDialogVisible,
-			getCovers,
-			covers,
-			setEditRoomGroupsDialogVisible,
-			roomGroupingDialogVisible,
-			addRoomToGroupDialogVisible,
-		} = dialogsStore;
+      aiAgentSelectorDialogProps,
+      setAiAgentSelectorDialogProps,
+      editRoomGroupsDialogVisible,
+      getCovers,
+      covers,
+      setEditRoomGroupsDialogVisible,
+      roomGroupingDialogVisible,
+      addRoomToGroupDialogVisible,
+      pauseSubmissionsDialogVisible,
+    } = dialogsStore;
 
-		const { viewAs, setArrRoomGroups, arrRoomGroups } = filesStore;
+    const { viewAs, setArrRoomGroups, arrRoomGroups } = filesStore;
 
-		const { extsFilesVectorized } = filesSettingsStore;
+    const { extsFilesVectorized } = filesSettingsStore;
 
-		const { preparationPortalDialogVisible } = backup;
-		const { copyFromTemplateForm, copyFileToAiKnowledge } = filesActionsStore;
+    const { preparationPortalDialogVisible } = backup;
+    const { copyFromTemplateForm, copyFileToAiKnowledge } = filesActionsStore;
 
-		const { uploadPanelVisible, conversionVisible } = uploadDataStore;
-		const {
-			isVisible: versionHistoryPanelVisible,
-			deleteVersionDialogVisible,
-		} = versionHistoryStore;
+    const { uploadPanelVisible, conversionVisible } = uploadDataStore;
+    const {
+      isVisible: versionHistoryPanelVisible,
+      deleteVersionDialogVisible,
+    } = versionHistoryStore;
 
-		const { hotkeyPanelVisible, currentColorScheme } = settingsStore;
+    const { hotkeyPanelVisible, currentColorScheme } = settingsStore;
 
-		const { confirmDialogIsLoading } = createEditRoomStore;
-		const { isRoomsTariffAlmostLimit, isUserTariffAlmostLimit } =
-			currentQuotaStore;
+    const { confirmDialogIsLoading } = createEditRoomStore;
+    const { isRoomsTariffAlmostLimit, isUserTariffAlmostLimit } =
+      currentQuotaStore;
 
-		const {
-			settingsPluginDialogVisible,
-			deletePluginDialogVisible,
-			pluginDialogVisible,
-			pluginSelectorVisible,
-		} = pluginStore;
+    const {
+      settingsPluginDialogVisible,
+      deletePluginDialogVisible,
+      pluginDialogVisible,
+      pluginSelectorVisible,
+    } = pluginStore;
 
-		const { getRefElement, config } = guidanceStore;
+    const { getRefElement, config } = guidanceStore;
 
-		const { templateGalleryVisible, isVisibleInfoPanelTemplateGallery } =
-			oformsStore;
+    const { templateGalleryVisible, isVisibleInfoPanelTemplateGallery } =
+      oformsStore;
 
-		const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
-		const resetQuotaItem = () => {
-			if (isNewUserByCurrentUser) setIsNewUserByCurrentUser(false);
-			if (isNewRoomByCurrentUser) setIsNewRoomByCurrentUser(false);
-		};
+    const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
+    const resetQuotaItem = () => {
+      if (isNewUserByCurrentUser) setIsNewUserByCurrentUser(false);
+      if (isNewRoomByCurrentUser) setIsNewRoomByCurrentUser(false);
+    };
 
-		const closeItems = JSON.parse(localStorage.getItem("warning-dialog")) || [];
+    const closeItems = JSON.parse(localStorage.getItem("warning-dialog")) || [];
 
-		const isShowWarningDialog = isAccounts
-			? isUserTariffAlmostLimit &&
-				!closeItems.includes("user-quota") &&
-				isNewUserByCurrentUser
-			: isRoomsTariffAlmostLimit &&
-				!closeItems.includes("room-quota") &&
-				isNewRoomByCurrentUser;
+    const isShowWarningDialog = isAccounts
+      ? isUserTariffAlmostLimit &&
+        !closeItems.includes("user-quota") &&
+        isNewUserByCurrentUser
+      : isRoomsTariffAlmostLimit &&
+        !closeItems.includes("room-quota") &&
+        isNewRoomByCurrentUser;
 
-		return {
-			preparationPortalDialogVisible,
-			uploadPanelVisible,
-			copyPanelVisible,
-			moveToPanelVisible,
-			restorePanelVisible,
-			connectDialogVisible: connectDialogVisible || !!connectItem, // TODO:
-			versionHistoryPanelVisible,
-			deleteDialogVisible,
-			lifetimeDialogVisible,
-			downloadDialogVisible,
-			emptyTrashDialogVisible,
-			conflictResolveDialogVisible,
-			convertDialogVisible,
-			createRoomDialogVisible,
-			createRoomConfirmDialogVisible,
-			convertPasswordDialogVisible,
-			selectFileDialogVisible,
-			createMasterForm,
-			setSelectFileDialogVisible,
-			selectFileFormRoomDialogVisible,
-			selectFileFormRoomFilterParam,
-			setSelectFileFormRoomDialogVisible,
-			selectFileAiKnowledgeDialogVisible,
-			setSelectFileAiKnowledgeDialogVisible,
-			copyFromTemplateForm,
-			copyFileToAiKnowledge,
-			hotkeyPanelVisible,
-			restoreAllPanelVisible,
-			invitePanelVisible: invitePanelOptions.visible,
-			archiveDialogVisible,
-			inviteQuotaWarningDialogVisible,
-			confirmDialogIsLoading,
-			restoreRoomDialogVisible,
-			submitToGalleryDialogVisible,
-			editGroupMembersDialogVisible,
-			changeQuotaDialogVisible,
-			editLinkPanelIsVisible,
-			deleteLinkDialogVisible,
-			embeddingPanelData,
-			moveToPublicRoomVisible,
-			settingsPluginDialogVisible,
-			pluginDialogVisible,
-			pluginSelectorVisible,
-			leaveRoomDialogVisible,
-			changeRoomOwnerIsVisible,
-			deletePluginDialogVisible,
-			shareFolderDialogVisible,
-			selectFileFormRoomOpenRoot,
-			reorderDialogVisible,
-			fillPDFDialogData,
-			roomLogoCoverDialogVisible,
-			createRoomTemplateDialogVisible,
-			templateAccessSettingsVisible,
+    return {
+      preparationPortalDialogVisible,
+      uploadPanelVisible,
+      copyPanelVisible,
+      moveToPanelVisible,
+      restorePanelVisible,
+      connectDialogVisible: connectDialogVisible || !!connectItem,
+      versionHistoryPanelVisible,
+      deleteDialogVisible,
+      lifetimeDialogVisible,
+      downloadDialogVisible,
+      emptyTrashDialogVisible,
+      conflictResolveDialogVisible,
+      convertDialogVisible,
+      createRoomDialogVisible,
+      createRoomConfirmDialogVisible,
+      convertPasswordDialogVisible,
+      selectFileDialogVisible,
+      createMasterForm,
+      setSelectFileDialogVisible,
+      selectFileFormRoomDialogVisible,
+      selectFileFormRoomFilterParam,
+      setSelectFileFormRoomDialogVisible,
+      selectFileAiKnowledgeDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
+      copyFromTemplateForm,
+      copyFileToAiKnowledge,
+      hotkeyPanelVisible,
+      restoreAllPanelVisible,
+      invitePanelVisible: invitePanelOptions.visible,
+      archiveDialogVisible,
+      inviteQuotaWarningDialogVisible,
+      confirmDialogIsLoading,
+      restoreRoomDialogVisible,
+      submitToGalleryDialogVisible,
+      editGroupMembersDialogVisible,
+      changeQuotaDialogVisible,
+      editLinkPanelIsVisible,
+      deleteLinkDialogVisible,
+      embeddingPanelData,
+      moveToPublicRoomVisible,
+      settingsPluginDialogVisible,
+      pluginDialogVisible,
+      pluginSelectorVisible,
+      leaveRoomDialogVisible,
+      changeRoomOwnerIsVisible,
+      deletePluginDialogVisible,
+      shareFolderDialogVisible,
+      selectFileFormRoomOpenRoot,
+      reorderDialogVisible,
+      fillPDFDialogData,
+      roomLogoCoverDialogVisible,
+      createRoomTemplateDialogVisible,
+      templateAccessSettingsVisible,
 
-			setQuotaWarningDialogVisible,
-			welcomeFormFillingTipsVisible,
-			resetQuotaItem,
-			isShowWarningDialog,
-			passwordEntryDialogDate,
-			closeEditIndexDialogVisible,
-			conversionVisible,
-			deleteVersionDialogVisible,
+      setQuotaWarningDialogVisible,
+      welcomeFormFillingTipsVisible,
+      resetQuotaItem,
+      isShowWarningDialog,
+      passwordEntryDialogDate,
+      closeEditIndexDialogVisible,
+      conversionVisible,
+      deleteVersionDialogVisible,
 
-			setStopFillingDialogVisible,
-			stopFillingDialogData,
-			operationCancelVisible,
-			setFormFillingTipsDialog,
-			formFillingTipsVisible,
-			viewAs,
-			userId: userStore?.user?.id,
-			getRefElement,
-			config,
-			isShareFormData,
-			reducedRightsVisible: reducedRightsData.visible,
-			removeUserConfirmation: removeUserConfirmation.visible,
-			assignRolesDialogVisible: assignRolesDialogData.visible,
-			socialAuthWelcomeDialogVisible,
-			extsFilesVectorized,
+      setStopFillingDialogVisible,
+      stopFillingDialogData,
+      operationCancelVisible,
+      setFormFillingTipsDialog,
+      formFillingTipsVisible,
+      viewAs,
+      userId: userStore?.user?.id,
+      getRefElement,
+      config,
+      isShareFormData,
+      reducedRightsVisible: reducedRightsData.visible,
+      removeUserConfirmation: removeUserConfirmation.visible,
+      assignRolesDialogVisible: assignRolesDialogData.visible,
+      socialAuthWelcomeDialogVisible,
+      extsFilesVectorized,
 
-			aiAgentSelectorDialogProps,
-			setAiAgentSelectorDialogProps,
-			templateGalleryVisible,
-			isVisibleInfoPanelTemplateGallery,
-			editRoomGroupsDialogVisible,
-			currentColorScheme,
-			getCovers,
-			covers,
-			setArrRoomGroups,
-			setEditRoomGroupsDialogVisible,
-			arrRoomGroups,
-			roomGroupingDialogVisible,
-			addRoomToGroupDialogVisible,
-		};
-	},
+      aiAgentSelectorDialogProps,
+      setAiAgentSelectorDialogProps,
+      templateGalleryVisible,
+      isVisibleInfoPanelTemplateGallery,
+      editRoomGroupsDialogVisible,
+      currentColorScheme,
+      getCovers,
+      covers,
+      setArrRoomGroups,
+      setEditRoomGroupsDialogVisible,
+      arrRoomGroups,
+      roomGroupingDialogVisible,
+      addRoomToGroupDialogVisible,
+      pauseSubmissionsDialogVisible,
+    };
+  },
 )(observer(Panels));

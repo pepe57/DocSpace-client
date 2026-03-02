@@ -24,4 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { default as StartFillingPanel } from "./StartFillingPanel";
+import { PDF_FORM_DIALOG_KEY } from "@docspace/shared/constants";
+import { Events } from "@docspace/shared/enums";
+
+import type { TFile } from "@docspace/ui-kit/types";
+
+export const showCreatedPDFFormDialog = (file: TFile, userId: string) => {
+  const localKey = `${PDF_FORM_DIALOG_KEY}-${userId}`;
+
+  const show = !JSON.parse(localStorage.getItem(localKey) ?? "false");
+
+  const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
+    detail: {
+      file,
+      show,
+    },
+  });
+
+  window?.dispatchEvent(event);
+};

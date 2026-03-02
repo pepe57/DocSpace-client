@@ -126,7 +126,7 @@ const RoomSelector = (props) => {
   const [eventLog, setEventLog] = useState([]);
   const onClearEventLog = useCallback(() => setEventLog([]), []);
 
-  const [version, onSetVersion] = useState(sdkVersion[210]);
+  const [version, onSetVersion] = useState(sdkVersion[220]);
 
   const [source, onSetSource] = useState(sdkSource.Package);
 

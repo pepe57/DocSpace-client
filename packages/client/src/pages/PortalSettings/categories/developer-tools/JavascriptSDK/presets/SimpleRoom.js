@@ -104,7 +104,7 @@ const SimpleRoom = (props) => {
   const [eventLog, setEventLog] = useState([]);
   const onClearEventLog = useCallback(() => setEventLog([]), []);
 
-  const [version, onSetVersion] = useState(sdkVersion[210]);
+  const [version, onSetVersion] = useState(sdkVersion[220]);
 
   const [source, onSetSource] = useState(sdkSource.Package);
 
@@ -259,7 +259,7 @@ const SimpleRoom = (props) => {
 
     newConfig.requestToken = links[0]?.sharedTo?.requestToken;
     newConfig.rootPath = "/rooms/share";
-    newConfig.mode = version === sdkVersion[210] ? "public-room" : "manager";
+    newConfig.mode = version === sdkVersion[220] ? "public-room" : "manager";
 
     setConfig((oldConfig) => {
       return { ...oldConfig, ...newConfig, init: true };
