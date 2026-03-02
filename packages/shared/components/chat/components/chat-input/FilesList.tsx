@@ -41,132 +41,132 @@ import { downloadImageAsBase64 } from "../../utils";
 import styles from "./ChatInput.module.scss";
 
 const FilesList = ({
-  files,
-  isFixed,
-  multimodal,
-  getIcon,
-  onRemove,
+	files,
+	isFixed,
+	multimodal,
+	getIcon,
+	onRemove,
 }: FilesListProps) => {
-  const [imgsBase64, setImgsBase64] = React.useState<Map<string, string>>(
-    new Map(),
-  );
+	const [imgsBase64, setImgsBase64] = React.useState<Map<string, string>>(
+		new Map(),
+	);
 
-  React.useEffect(() => {
-    if (!files.length) return;
+	React.useEffect(() => {
+		if (!files.length) return;
 
-    const imgFiles = files.filter(
-      (file) =>
-        file.fileExst && multimodal?.image.formats.includes(file.fileExst),
-    );
+		const imgFiles = files.filter(
+			(file) =>
+				file.fileExst && multimodal?.image.formats.includes(file.fileExst),
+		);
 
-    if (!imgFiles.length) return;
+		if (!imgFiles.length) return;
 
-    const downloadImages = async () => {
-      const newImg = new Map<string, string>();
+		const downloadImages = async () => {
+			const newImg = new Map<string, string>();
 
-      const actions = [];
-      for (const file of imgFiles) {
-        if (!file.viewUrl || !file.id) continue;
+			const actions = [];
+			for (const file of imgFiles) {
+				if (!file.viewUrl || !file.id) continue;
 
-        actions.push(downloadImageAsBase64(file.viewUrl));
-      }
+				actions.push(downloadImageAsBase64(file.viewUrl));
+			}
 
-      const results = await Promise.all(actions);
+			const results = await Promise.all(actions);
 
-      results.forEach((result, index) => {
-        const file = imgFiles[index];
-        if (!file.id) return;
-        newImg.set(file.id.toString(), result);
-      });
+			results.forEach((result, index) => {
+				const file = imgFiles[index];
+				if (!file.id) return;
+				newImg.set(file.id.toString(), result);
+			});
 
-      setImgsBase64(newImg);
-    };
+			setImgsBase64(newImg);
+		};
 
-    downloadImages();
-  }, [files, multimodal]);
+		downloadImages();
+	}, [files, multimodal]);
 
-  if (!files.length) return null;
+	if (!files.length) return null;
 
-  return (
-    <div
-      className={classNames(styles.filesList, {
-        [styles.filesListFixed]: isFixed,
-      })}
-    >
-      <Scrollbar noScrollY>
-        <div className={styles.filesListWrapper}>
-          {files.map((file) => {
-            const isImage =
-              file.fileExst &&
-              multimodal?.image.formats.includes(file.fileExst);
+	return (
+		<div
+			className={classNames(styles.filesList, {
+				[styles.filesListFixed]: isFixed,
+			})}
+		>
+			<Scrollbar noScrollY>
+				<div className={styles.filesListWrapper}>
+					{files.map((file) => {
+						const isImage =
+							file.fileExst &&
+							multimodal?.image.formats.includes(file.fileExst);
 
-            return (
-              <div
-                className={styles.filesListItem}
-                key={file.id}
-                style={{ maxWidth: "300px" }}
-                data-testid="files-list-item"
-              >
-                {!isImage && (
-                  <ReactSVG
-                    src={getIcon(24, file.fileExst ?? "")}
-                    className={styles.filesListItemIcon}
-                  />
-                )}
+						return (
+							<div
+								className={styles.filesListItem}
+								key={file.id}
+								style={{ maxWidth: "300px" }}
+								data-testid="files-list-item"
+							>
+								{!isImage && (
+									<ReactSVG
+										src={getIcon(24, file.fileExst ?? "")}
+										className={styles.filesListItemIcon}
+									/>
+								)}
 
-                <div className={styles.filesListItemInfo}>
-                  {isImage ? (
-                    imgsBase64.get(file.id?.toString() || "") ? (
-                      <img
-                        className={styles.filesListItemImage}
-                        src={imgsBase64.get(file.id?.toString() || "")}
-                        alt={file.title}
-                      />
-                    ) : (
-                      <Loader
-                        className={styles.loader}
-                        size="20px"
-                        type={LoaderTypes.track}
-                      />
-                    )
-                  ) : (
-                    <div className={styles.filesListItemInfoText}>
-                      <Text
-                        fontSize="12px"
-                        lineHeight="16px"
-                        fontWeight={600}
-                        truncate
-                      >
-                        {file.title?.replaceAll(file?.fileExst || "", "")}
-                      </Text>
-                      <Text
-                        fontSize="12px"
-                        lineHeight="16px"
-                        fontWeight={600}
-                        as="span"
-                      >
-                        {file.fileExst}
-                      </Text>
-                    </div>
-                  )}
+								<div className={styles.filesListItemInfo}>
+									{isImage ? (
+										imgsBase64.get(file.id?.toString() || "") ? (
+											<img
+												className={styles.filesListItemImage}
+												src={imgsBase64.get(file.id?.toString() || "")}
+												alt={file.title}
+											/>
+										) : (
+											<Loader
+												className={styles.loader}
+												size="20px"
+												type={LoaderTypes.track}
+											/>
+										)
+									) : (
+										<div className={styles.filesListItemInfoText}>
+											<Text
+												fontSize="12px"
+												lineHeight="16px"
+												fontWeight={600}
+												truncate
+											>
+												{file.title?.replaceAll(file?.fileExst || "", "")}
+											</Text>
+											<Text
+												fontSize="12px"
+												lineHeight="16px"
+												fontWeight={600}
+												as="span"
+											>
+												{file.fileExst}
+											</Text>
+										</div>
+									)}
 
-                  {onRemove ? (
-                    <IconButton
-                      iconName={CloseCircleReactSvgUrl}
-                      size={16}
-                      isClickable
-                      onClick={() => onRemove(file)}
-                      dataTestId="remove-file-button"
-                    />
-                  ) : null}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </Scrollbar>
-    </div>
-  );
+									{onRemove ? (
+										<IconButton
+											iconName={CloseCircleReactSvgUrl}
+											size={16}
+											isClickable
+											onClick={() => onRemove(file)}
+											dataTestId="remove-file-button"
+										/>
+									) : null}
+								</div>
+							</div>
+						);
+					})}
+				</div>
+			</Scrollbar>
+		</div>
+	);
 };
 
 export default FilesList;

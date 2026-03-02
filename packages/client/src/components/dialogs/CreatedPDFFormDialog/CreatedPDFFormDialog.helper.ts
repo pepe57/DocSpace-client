@@ -24,35 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { memo } from "react";
-import type { HeaderProps } from "./StartFillingPanel.types";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { PDF_FORM_DIALOG_KEY } from "@docspace/shared/constants";
+import { Events } from "@docspace/shared/enums";
 
-export const Header = memo(
-  ({
-    ref,
-    t,
-    roleName,
-    className,
-    openInvitePanel,
-    canEditRoom,
-  }: HeaderProps) => (
-    <div className={className} ref={ref}>
-      <TooltipContainer
-        as="h3"
-        title={t("Common:RecipientFields", {
-          recipientName: roleName,
-        })}
-      >
-        {t("Common:RecipientFields", {
-          recipientName: roleName,
-        })}
-      </TooltipContainer>
-      {canEditRoom ? (
-        <span onClick={openInvitePanel}>{t("Common:AddUserToRoom")}</span>
-      ) : null}
-    </div>
-  ),
-);
+import type { TFile } from "@docspace/ui-kit/types";
 
-Header.displayName = "Header";
+export const showCreatedPDFFormDialog = (file: TFile, userId: string) => {
+  const localKey = `${PDF_FORM_DIALOG_KEY}-${userId}`;
+
+  const show = !JSON.parse(localStorage.getItem(localKey) ?? "false");
+
+  const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
+    detail: {
+      file,
+      show,
+    },
+  });
+
+  window?.dispatchEvent(event);
+};
