@@ -24,37 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { Dispatch, SetStateAction } from "react";
-import type { TUser } from "../../api/people/types";
-import type { TSettings } from "../../api/settings/types";
-import type { IRole } from "../../components/filling-role-selector";
-import type { TFormRoleMappingRequest } from "../../api/files/types";
-import type { TTranslation } from "../../types";
+import React from "react";
 
-export type Invitation = { id: string | number; access: string | number };
+import type { IArticleButtonItemClient } from "SRC_DIR/helpers/plugins/types";
 
-export interface IStartFillingPanelProps {
-  roles: Omit<IRole, "user">[];
-  user: TUser;
-  settings: TSettings;
-  fileId: number;
-  roomId: string;
-  setStartFillingPanelVisible: Dispatch<SetStateAction<boolean>>;
-  onSubmit: (data: TFormRoleMappingRequest) => Promise<void>;
-  inviteUserToRoom: (
-    roomId: string,
-    invitations: Invitation[],
-  ) => Promise<unknown>;
-  withBorder?: boolean;
-  canEditRoom?: boolean;
+import ArticlePluginItem from "./ArticlePluginItem";
+import styles from "./ArticlePluginItems.module.scss";
+
+interface ArticlePluginItemsProps {
+  items: Array<{ key: string; value: IArticleButtonItemClient }>;
+  maxItems?: number;
 }
 
-export interface HeaderProps {
-  ref?: React.RefObject<HTMLDivElement>;
-  canEditRoom: boolean;
-  roleName: string;
-  t: TTranslation;
-  openInvitePanel: VoidFunction;
+const ArticlePluginItems: React.FC<ArticlePluginItemsProps> = ({
+  items,
+  maxItems = 5,
+}) => {
+  if (!items || items.length === 0) {
+    return null;
+  }
 
-  className?: string;
-}
+  return (
+    <div className={styles.container}>
+      {items.slice(0, maxItems).map((item) => (
+        <div key={item.key} className={styles.item}>
+          <ArticlePluginItem item={item.value} />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default ArticlePluginItems;

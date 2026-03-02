@@ -1042,7 +1042,15 @@ export function createWebhook(name, uri, secretKey, ssl, triggers, targetId) {
   return request({
     method: "post",
     url: `/settings/webhook`,
-    data: { name, uri, secretKey, enabled: true, ssl, triggers, targetId },
+    data: {
+      name,
+      uri,
+      secretKey,
+      enabled: true,
+      ssl,
+      triggers: Number(triggers),
+      targetId,
+    },
   });
 }
 
@@ -1066,7 +1074,16 @@ export function updateWebhook(
   return request({
     method: "put",
     url: `/settings/webhook`,
-    data: { id, name, uri, secretKey, enabled: true, ssl, triggers, targetId },
+    data: {
+      id,
+      name,
+      uri,
+      secretKey,
+      enabled: true,
+      ssl,
+      triggers: Number(triggers),
+      targetId,
+    },
   });
 }
 

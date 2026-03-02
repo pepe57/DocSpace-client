@@ -27,7 +27,11 @@
 import type { Location } from "react-router";
 import find from "lodash/find";
 import { findWindows } from "windows-iana";
-import { parseToDateTime, startOf, dateDiffAbs } from "@docspace/ui-kit/utils/date";
+import {
+  parseToDateTime,
+  startOf,
+  dateDiffAbs,
+} from "@docspace/ui-kit/utils/date";
 import { isMobile } from "react-device-detect";
 import type { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";

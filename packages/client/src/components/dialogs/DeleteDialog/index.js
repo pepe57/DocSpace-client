@@ -210,6 +210,7 @@ const DeleteDialogComponent = (props) => {
     }
 
     if (isRoomDelete) {
+      if (selection.length > 1) return t("DeleteRoomsTitle");
       return t("DeleteRoomTitle");
     }
 

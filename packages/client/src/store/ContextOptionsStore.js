@@ -128,12 +128,14 @@ import {
   FilterType,
   FileExtensions,
   ShareAccessRights,
+  FormFillingManageAction,
 } from "@docspace/shared/enums";
 
 import {
   formRoleMapping,
   getFileLink,
   getFolderLink,
+  manageFormFilling,
   removeSharedFolderOrFile,
 } from "@docspace/shared/api/files";
 
@@ -159,6 +161,7 @@ import {
   showInfoPanel,
 } from "SRC_DIR/helpers/info-panel";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -608,21 +611,48 @@ class ContextOptionsStore {
     }
   };
 
-  onClickLinkEdit = (item) => {
+  /**
+   * Confirm pausing form filling before editing
+   * @param {Object} item - File item to check
+   * @returns {Promise<boolean>} - Returns true if user confirmed to proceed
+   */
+  confirmPauseFormSubmissions = async (item) => {
+    const isParentFormRoom = item.parentRoomType === FolderType.FormRoom;
+    const isFormActive = isParentFormRoom && item.startFilling;
+
+    if (!isFormActive) return true;
+
+    // Show confirmation dialog to pause filling
+    const confirmed = await new Promise((resolve) => {
+      this.dialogsStore.setPauseSubmissionsDialogVisible(true, resolve);
+    });
+
+    return confirmed;
+  };
+
+  showConvertDialog = (item) => {
     const { setConvertItem, setConvertDialogVisible, setConvertDialogData } =
       this.dialogsStore;
-    const canConvert =
+
+    setConvertItem({ ...item, isOpen: true });
+    setConvertDialogData({ files: item });
+    setConvertDialogVisible(true);
+  };
+
+  onClickLinkEdit = async (item) => {
+    // Confirm pausing form filling if form is active
+    const confirmed = await this.confirmPauseFormSubmissions(item);
+    if (!confirmed) return;
+
+    const mustConvert =
       item.viewAccessibility?.MustConvert && item.security?.Convert;
 
-    if (canConvert) {
-      setConvertItem({ ...item, isOpen: true });
-      setConvertDialogData({
-        files: item,
-      });
-      setConvertDialogVisible(true);
-    } else {
-      this.gotoDocEditor(item, false, null, item.isPDFForm);
+    if (mustConvert) {
+      this.showConvertDialog(item);
+      return;
     }
+
+    this.gotoDocEditor(item, false, null, item.isPDFForm);
   };
 
   onPreviewClick = (item) => {
@@ -729,7 +759,7 @@ class ContextOptionsStore {
     this.dialogsStore.setFillingStatusPanelVisible(true);
   };
 
-  onClickStartFilling = (item, t) => {
+  startFillingInRoleBasedRoom = (item, t) => {
     if (isMobile)
       return toastr.info(t("Common:MobileStartFillingPdfNotAvailableInfo"));
 
@@ -742,6 +772,27 @@ class ContextOptionsStore {
     );
 
     if (refPage) refPage.sessionStorage.setItem(FILLING_STATUS_ID, "true");
+  };
+
+  startFillingInFormRoom = async (item) => {
+    try {
+      await manageFormFilling(item.id, FormFillingManageAction.Start);
+
+      showCreatedPDFFormDialog(item, this.userStore.user.id);
+    } catch (error) {
+      toastr.error(error);
+    }
+  };
+
+  onClickStartFilling = (item, t) => {
+    const isFormRoom = item.parentRoomType === FolderType.FormRoom;
+
+    if (isFormRoom) {
+      this.startFillingInFormRoom(item);
+      return;
+    }
+
+    this.startFillingInRoleBasedRoom(item, t);
   };
 
   onClickResetAndStartFilling = async (item) => {
@@ -1030,49 +1081,60 @@ class ContextOptionsStore {
 
     if (enablePlugins && this.pluginStore.contextMenuItemsList) {
       this.pluginStore.contextMenuItemsList.forEach((option) => {
-        const processOptionValue = (value) => {
+        const optionItem = option.value;
+
+        const resolveItemType = (item) => {
+          if (isFileUtil(item)) return "file";
+          if (isFolderUtil(item)) return "folder";
+          if (isRoomUtil(item)) return "room";
+        };
+
+        const processOptionItem = (value) => {
           const isEveryItemIncludesOption = items.every(({ contextOptions }) =>
             contextOptions.includes(value.key),
           );
 
-          if (isEveryItemIncludesOption && value.isGroupAction) {
-            const filesIds = items.map(({ id }) => id);
+          if (!isEveryItemIncludesOption || !value.isGroupAction) return;
 
-            const onClick = async () => {
-              if (value.withActiveItem) {
-                const { setActiveFiles } = this.filesStore;
+          const groupItems = items.map((item) => ({
+            id: item.id,
+            itemType: resolveItemType(item),
+          }));
 
-                setActiveFiles(filesIds);
+          const onClick = async () => {
+            if (value.withActiveItem) {
+              const { setActiveFiles } = this.filesStore;
 
-                await value.onGroupClick(filesIds);
+              setActiveFiles(items.map((item) => item.id));
 
-                setActiveFiles([]);
-              } else {
-                value.onGroupClick(filesIds);
-              }
-            };
+              await value.onGroupClick(groupItems);
 
-            const processedOptionValue = {
-              key: value.key,
-              id: value.key,
-              label: value.label,
-              icon: value.icon,
-              disabled: false,
-              onClick,
-            };
+              setActiveFiles([]);
+            } else {
+              value.onGroupClick(groupItems);
+            }
+          };
 
-            return processedOptionValue;
-          }
+          const processedOptionValue = {
+            key: value.key,
+            id: value.key,
+            label: value.label,
+            icon: value.icon,
+            disabled: false,
+            onClick,
+          };
+
+          return processedOptionValue;
         };
 
-        if (option.items && option.items.length > 0) {
-          option.items.forEach((nestedItem) => {
-            const processedItem = processOptionValue(nestedItem);
+        if (optionItem.items && optionItem.items.length > 0) {
+          optionItem.items.forEach((nestedItem) => {
+            const processedItem = processOptionItem(nestedItem);
             processedItem && pluginItems.push(processedItem);
           });
         } else {
-          const value = processOptionValue(option.value);
-          value && pluginItems.push(value);
+          const item = processOptionItem(optionItem);
+          item && pluginItems.push(item);
         }
       });
     }
@@ -1092,49 +1154,49 @@ class ContextOptionsStore {
 
     if (enablePlugins && this.pluginStore.contextMenuItemsList) {
       this.pluginStore.contextMenuItemsList.forEach((option) => {
-        // Helper function to recursively process context menu items
         const processOptionValue = (value) => {
-          if (contextOptions.includes(value.key)) {
-            const onClick = async () => {
-              if (value.withActiveItem) {
-                const { setActiveFiles } = this.filesStore;
+          if (!contextOptions.includes(value.key) || value.isGroupAction)
+            return;
 
-                setActiveFiles([item.id]);
+          const onClick = async () => {
+            if (value.withActiveItem) {
+              const { setActiveFiles } = this.filesStore;
 
-                await value.onClick(item.id);
+              setActiveFiles([item.id]);
 
-                setActiveFiles([]);
-              } else {
-                value.onClick(item.id);
-              }
-            };
+              await value.onClick(item.id);
 
-            const processedOptionValue = {
-              key: value.key,
-              id: value.key,
-              label: value.label,
-              icon: value.icon,
-              onClick,
-            };
-
-            const processedItems = [];
-            // Recursively process nested items if they exist
-            if (value.items && value.items.length > 0) {
-              value.items.forEach((nestedItem) => {
-                const processedItem = processOptionValue(nestedItem);
-                processedItem && processedItems.push(processedItem);
-              });
-
-              if (processedItems.length > 0) {
-                processedOptionValue.items = processedItems;
-              } else {
-                // If we have no processed items, we dont render this option
-                return null;
-              }
+              setActiveFiles([]);
+            } else {
+              value.onClick(item.id);
             }
+          };
 
-            return processedOptionValue;
+          const processedOptionValue = {
+            key: value.key,
+            id: value.key,
+            label: value.label,
+            icon: value.icon,
+            onClick,
+          };
+
+          const processedItems = [];
+          // Recursively process nested items if they exist
+          if (value.items && value.items.length > 0) {
+            value.items.forEach((nestedItem) => {
+              const processedItem = processOptionValue(nestedItem);
+              processedItem && processedItems.push(processedItem);
+            });
+
+            if (processedItems.length > 0) {
+              processedOptionValue.items = processedItems;
+            } else {
+              // If we have no processed items, we dont render this option
+              return null;
+            }
           }
+
+          return processedOptionValue;
         };
 
         const value = processOptionValue(option.value);
@@ -2807,13 +2869,16 @@ class ContextOptionsStore {
             [
               "select",
               "view",
+              "open-pdf",
               "fill-form",
               "edit",
+              "start-filling",
               "vectorization",
               "preview",
               "mark-read",
               "open-location",
             ],
+            ["filling-status", "reset-and-start-filling"],
             ["ask-ai"],
             ["share", "move", "copy-to", "download", "edit-index", "rename"],
             [
@@ -2824,7 +2889,12 @@ class ContextOptionsStore {
               "show-info",
             ],
             ["restore"],
-            ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
+            [
+              "remove-from-favorites",
+              "remove-shared-folder-or-file",
+              "stop-filling",
+              "delete",
+            ],
           ];
 
       const items = resultOptions.filter((opt) => !opt.isSeparator);
@@ -2906,7 +2976,7 @@ class ContextOptionsStore {
       isAIAgentsFolder,
     } = this.treeFoldersStore;
 
-    const { pinRooms, unpinRooms /* deleteRooms */ } = this.filesActionsStore;
+    const { pinRooms, unpinRooms, deleteRooms } = this.filesActionsStore;
 
     if (isRoomsFolder || isArchiveFolder || isAIAgentsFolder) {
       const isPinOption = selection.filter((item) => !item.pinned).length > 0;
@@ -3029,15 +3099,17 @@ class ContextOptionsStore {
         });
       }
 
-      options.push(archiveOptions);
+      const pluginOptions = this.onMultiLoadPlugins(selection);
 
-      /* canDelete &&
+      options.push(archiveOptions, ...pluginOptions);
+
+      canDelete &&
         options.push({
           key: "delete-rooms",
           label: t("Common:Delete"),
           icon: TrashReactSvgUrl,
           onClick: () => deleteRooms(t),
-        }); */
+        });
 
       return options;
     }
@@ -3191,9 +3263,9 @@ class ContextOptionsStore {
       isCollaborator: false,
     };
 
-    const pluginItems = this.onMultiLoadPlugins(selection);
+    const pluginOptions = this.onMultiLoadPlugins(selection);
 
-    options.splice(1, 0, ...pluginItems);
+    options.splice(1, 0, ...pluginOptions);
 
     const newOptions = options.filter(
       (option, index) =>
@@ -3291,16 +3363,10 @@ class ContextOptionsStore {
     this.dialogsStore.setSelectFileAiKnowledgeDialogVisible(true);
   };
 
-  getContextOptionsPlusFormRoom = (t) => {
-    const showSelectorFormRoomDocx = {
-      id: "actions_form-room_template_from-file",
-      className: "main-button_drop-down_sub",
-      icon: FormGalleryReactSvgUrl,
-      label: t("Common:ChooseFromTemplates"),
-      onClick: () => this.onShowTemplateGallery(),
-      key: "form-file",
-    };
-
+  getContextOptionsPlusFormRoom = (
+    t,
+    { formActions, templateGallery, createNewFolder },
+  ) => {
     const uploadReadyPDFFrom = {
       id: "personal_upload-ready-Pdf-from",
       className: "main-button_drop-down_sub",
@@ -3330,56 +3396,15 @@ class ContextOptionsStore {
       ],
     };
 
-    const createNewFolder = {
-      id: "actions_new-folder",
-      className: "main-button_drop-down",
-      icon: CatalogFolderReactSvgUrl,
-      label: t("Files:CreateNewFolder"),
-      onClick: () => this.onCreate(),
-      key: "new-folder",
-    };
-
-    // const showUploadFolder = !(isMobile || isTablet);
-
-    // const moreActions = {
-    //   id: "personal_more-form",
-    //   className: "main-button_drop-down",
-    //   icon: PluginMoreReactSvgUrl,
-    //   label: t("Common:More"),
-    //   disabled: false,
-    //   key: "more-form",
-    //   items: [
-    //     createNewFolder,
-    //     {
-    //       isSeparator: true,
-    //       key: "personal_more-form__separator-1",
-    //     },
-    //     createNewDoc,
-    //     createNewPresentation,
-    //     createNewSpreadsheet,
-    //     {
-    //       isSeparator: true,
-    //       key: "personal_more-form__separator-2",
-    //     },
-    //     uploadFiles,
-    //     showUploadFolder ? uploadFolder : null,
-    //   ],
-    // };
-
     return [
-      uploadReadyPDFFrom,
-      showSelectorFormRoomDocx,
-      // templatePDFForm,
-      // {
-      //   isSeparator: true,
-      //   key: "separator",
-      // },
+      ...formActions,
+      createNewFolder,
+      ...templateGallery,
       {
         isSeparator: true,
         key: "separator-1",
       },
-      createNewFolder,
-      // moreActions,
+      uploadReadyPDFFrom,
     ];
   };
 
@@ -3455,14 +3480,14 @@ class ContextOptionsStore {
       disabled: isPrivacyFolder,
     };
 
-    const createTemplateSelectFormFile = {
-      id: "personal_template_new-form-file",
-      key: "new-form-file",
-      label: t("Translations:SubNewFormFile"),
-      icon: FormFileReactSvgUrl,
-      onClick: () => this.onCreateFormFromFile(t),
-      disabled: isPrivacyFolder,
-    };
+    // const createTemplateSelectFormFile = {
+    //   id: "personal_template_new-form-file",
+    //   key: "new-form-file",
+    //   label: t("Translations:SubNewFormFile"),
+    //   icon: FormFileReactSvgUrl,
+    //   onClick: () => this.onCreateFormFromFile(t),
+    //   disabled: isPrivacyFolder,
+    // };
 
     const createNewFolder = {
       id: "personal_new-folder",
@@ -3498,19 +3523,6 @@ class ContextOptionsStore {
         ]
       : [];
 
-    if (isFormRoomType) {
-      return this.getContextOptionsPlusFormRoom(t, {
-        createTemplateForm,
-        createTemplateSelectFormFile,
-        createNewFolder,
-        createNewDoc,
-        createNewPresentation,
-        createNewSpreadsheet,
-        uploadFiles,
-        uploadFolder,
-      });
-    }
-
     const formActions = [
       {
         id: "personal_form-template",
@@ -3520,6 +3532,14 @@ class ContextOptionsStore {
         items: [createTemplateForm, createTemplateNewFormFile],
       },
     ];
+
+    if (isFormRoomType) {
+      return this.getContextOptionsPlusFormRoom(t, {
+        formActions,
+        templateGallery,
+        createNewFolder,
+      });
+    }
 
     if (isAIRoom) {
       return [

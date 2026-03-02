@@ -44,6 +44,7 @@ import {
   getTitleWithoutExtension,
   getUpperCaseExtension,
 } from "@docspace/shared/utils";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { LANGUAGE } from "@docspace/shared/constants";
 
@@ -194,6 +195,9 @@ const TemplatesRow = ({
             truncate
           >
             {lastModified} | {getUpperCaseExtension(item.fileExst)}
+            {item?.fileSize
+              ? " | " + getConvertedSize(t, item?.fileSize)
+              : null}
           </Text>
         </div>
 
