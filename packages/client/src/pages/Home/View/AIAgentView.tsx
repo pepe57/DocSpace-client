@@ -136,6 +136,7 @@ const AIAgentViewComponent = ({
             messagesSettings={messagesSettings}
             isAdmin={isAdmin}
             aiReady={aiConfig?.aiReady || false}
+            modelAliases={aiConfig?.modelAliases}
             standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
             getResultStorageId={getResultStorageId}
             setIsAIAgentChatDelete={setIsAIAgentChatDelete}

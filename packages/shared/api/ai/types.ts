@@ -68,7 +68,6 @@ export type TModel = {
   providerId: TAiProvider["id"];
   providerTitle: TAiProvider["title"];
   modelId: string;
-  name?: string;
 };
 
 export type TModelList = TModel[];
@@ -219,6 +218,8 @@ export type TAIConfig = {
   generateDocxToolName?: string;
   generateFormToolName?: string;
   generatePresentationToolName?: string;
+
+  modelAliases: Record<string, string>;
 };
 
 export type TAgent = TRoom;

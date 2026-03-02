@@ -63,6 +63,8 @@ const Chat = observer(
 
     setAiPlaylistImages,
     setMediaViewerVisible,
+
+    modelAliases,
   }: ChatProps & { isLoadingChat: boolean }) => {
     const { currentChat } = useChatStore();
 
@@ -90,6 +92,7 @@ const Chat = observer(
           setIsAIAgentChatDelete={setIsAIAgentChatDelete}
           setDeleteDialogVisible={setDeleteDialogVisible}
           folderFormValidation={folderFormValidation}
+          modelAliases={modelAliases}
         />
         {showEmptyScreen ? (
           <ChatNoAccessScreen
