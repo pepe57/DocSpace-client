@@ -1,5 +1,6 @@
 {
   "AddCreditsToEnableAI": "Adding credits will automatically enable {{organizationName}} AI and make models available to all users. Continue?",
+  "InsufficientPermissionsMessage": "You don't have sufficient permissions. Please contact the payer (<1>{{payerContact}}</1>) to access and configure the services.",
   "AIAgentsDescription": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an {{mcpServer}}.",
   "AIGetStartedCurrentBalance": "Current balance",
   "AIGetStartedStep1Description": "Transfer credits from your {{productName}} wallet to start using AI features. Top up with any amount — credits never expire.",
