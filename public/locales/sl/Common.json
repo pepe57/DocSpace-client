@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
   "YourTurn": "Vi ste na vrsti",
-  "DeleteAIAgentChatTitle": "Izbrisiti klepetal?"
+  "DeleteAIAgentChatTitle": "Izbrisiti klepetal?",
+  "DeleteAIChatDescription": "Brišete <strong>{{chatName}}<1>.</1></strong>\n Vse objave in zgodovina klepeta bodo trajno izbrisane in jih ne bo mogoče obnoviti."
 }

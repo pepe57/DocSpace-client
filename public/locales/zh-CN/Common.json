@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
   "YourTurn": "轮到您了",
-  "DeleteAIAgentChatTitle": "删除聊天？"
+  "DeleteAIAgentChatTitle": "删除聊天？",
+  "DeleteAIChatDescription": "您将要删除<strong>{{chatName}}<1>.</1></strong>\n所有消息和聊天记录将被永久删除，且无法恢复。"
 }

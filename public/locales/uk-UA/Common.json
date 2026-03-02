@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "Ваш поточний домен",
   "YourLogo": "Ваш логотип",
   "YourTurn": "Ваша черга",
-  "DeleteAIAgentChatTitle": "Видалити чат?"
+  "DeleteAIAgentChatTitle": "Видалити чат?",
+  "DeleteAIChatDescription": "Ви збираєтесь видалити <strong>{{chatName}}<1>.</1></strong>\nВсі повідомлення та історія чату будуть безповоротно видалені та не підлягають відновленню."
 }

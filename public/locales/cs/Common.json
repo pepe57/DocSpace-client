@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
   "YourTurn": "Jste na řadě",
-  "DeleteAIAgentChatTitle": "Smazat chat?"
+  "DeleteAIAgentChatTitle": "Smazat chat?",
+  "DeleteAIChatDescription": "Mazat se chystáte <strong>{{chatName}}<1>.</1></strong>\n Všechny zprávy a historie chatu budou trvale smazány a nelze je obnovit."
 }

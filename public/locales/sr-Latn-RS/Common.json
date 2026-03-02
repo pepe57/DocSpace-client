@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "Vaš trenutni domen",
   "YourLogo": "Vaš logo",
   "YourTurn": "Vaš red",
-  "DeleteAIAgentChatTitle": "Briši čat?"
+  "DeleteAIAgentChatTitle": "Briši čat?",
+  "DeleteAIChatDescription": "Brišem <strong>{{chatName}}<1>.</1></strong>\nSve poruke i istorija chata biće trajno obrisane i neće moći da budu vraćene."
 }

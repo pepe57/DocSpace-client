@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
   "YourTurn": "Phiên của bạn",
-  "DeleteAIAgentChatTitle": "Xóa cuộc trò chuyện?"
+  "DeleteAIAgentChatTitle": "Xóa cuộc trò chuyện?",
+  "DeleteAIChatDescription": "Bạn sắp xóa <strong>{{chatName}}<1>.</1></strong>\n Tất cả tin nhắn và lịch sử trò chuyện sẽ bị xóa vĩnh viễn và không thể khôi phục."
 }

@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
   "YourTurn": "Jūsu kārta",
-  "DeleteAIAgentChatTitle": "Dzēst sarunu?"
+  "DeleteAIAgentChatTitle": "Dzēst sarunu?",
+  "DeleteAIChatDescription": "Jūs gatavojaties dzēst <strong>{{chatName}}<1>.</1></strong>\n Visi ziņojumi un tērzēšanas vēsture tiks neatgriežami izdzēsta un to nevarēs atjaunot."
 }

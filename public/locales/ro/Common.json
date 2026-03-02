@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourLogo": "Logo-ul dvs",
   "YourTurn": "Acum e rândul dvs.",
-  "DeleteAIAgentChatTitle": "Șterge conversație?"
+  "DeleteAIAgentChatTitle": "Șterge conversație?",
+  "DeleteAIChatDescription": "Pe cale să ștergeți <strong>{{chatName}}<1>.</1></strong>\n Toate mesajele și istoricul conversației vor fi șterse permanent și nu pot fi recuperate."
 }

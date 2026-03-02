@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "내 현재 도메인",
   "YourLogo": "로고",
   "YourTurn": "고객님의 차례입니다",
-  "DeleteAIAgentChatTitle": "채팅 삭제하시겠습니까?"
+  "DeleteAIAgentChatTitle": "채팅 삭제하시겠습니까?",
+  "DeleteAIChatDescription": "<strong>{{chatName}}<1>.</1></strong> 삭제하시려고 합니다.\n 모든 메시지와 채팅 기록이 영구적으로 삭제되며 복구할 수 없습니다."
 }

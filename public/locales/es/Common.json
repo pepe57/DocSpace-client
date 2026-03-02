@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "Su dominio actual",
   "YourLogo": "Su logotipo",
   "YourTurn": "Su turno",
-  "DeleteAIAgentChatTitle": "¿Eliminar el chat?"
+  "DeleteAIAgentChatTitle": "¿Eliminar el chat?",
+  "DeleteAIChatDescription": "Está a punto de eliminar <strong>{{chatName}}<1>.</1></strong> Todos los mensajes y el historial del chat se eliminarán de forma permanente y no se podrán restaurar."
 }

@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "Domeni juaj aktual",
   "YourLogo": "Logos juaj",
   "YourTurn": "Radha jote",
-  "DeleteAIAgentChatTitle": "Fshir chat?"
+  "DeleteAIAgentChatTitle": "Fshir chat?",
+  "DeleteAIChatDescription": "Po për të shlyer <strong>{{chatName}}<1>.</1></strong>\n Të gjitha mesazhet dhe historia e bisedës do të hiqen përgjithimisht dhe nuk mund të rivendosen."
 }

@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "النطاق الحالي الخاص بك",
   "YourLogo": "شعاركم",
   "YourTurn": "دوركم الآن",
-  "DeleteAIAgentChatTitle": "حذف الدردشة؟"
+  "DeleteAIAgentChatTitle": "حذف الدردشة؟",
+  "DeleteAIChatDescription": "أنت على وشك حذف <strong>{{chatName}}<1>.</1></strong> ستتم إزالة جميع الرسائل وسجل الدردشة نهائيًا ولا يمكن استعادتها."
 }

@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "ඔබගේ වත්මන් වසම",
   "YourLogo": "ඔබේ ලාංචනය",
   "YourTurn": "ඔබේ වාරය.",
-  "DeleteAIAgentChatTitle": "කතාබහ මකන්නද?"
+  "DeleteAIAgentChatTitle": "කතාබහ මකන්නද?",
+  "DeleteAIChatDescription": "ඔබ <strong>{{chatName}}<1>.</1></strong> මකා දැමීමට ආසන්නයි සියලුම පණිවිඩ සහ කතාබස් ඉතිහාසය ස්ථිරවම ඉවත් කරනු ලබන අතර ප්‍රතිසාධනය කළ නොහැක."
 }

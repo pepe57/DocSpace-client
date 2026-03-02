@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
   "YourTurn": "Sizin növbəniz",
-  "DeleteAIAgentChatTitle": "Söhbəti sil?"
+  "DeleteAIAgentChatTitle": "Söhbəti sil?",
+  "DeleteAIChatDescription": "Yarıma <strong>{{chatName}}<1>.</1></strong> silməyə hazırlaşırsınız.\nBütün mesajlar və söhbət tarixçəsi daimi şəkildə silinəcək və bərpa edilə bilməyəcəkdir."
 }

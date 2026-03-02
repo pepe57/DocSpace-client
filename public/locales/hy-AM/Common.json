@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "Ձեր ընթացիկ տիրույթը",
   "YourLogo": "Ձեր լոգոն",
   "YourTurn": "Ձեր հերթն է",
-  "DeleteAIAgentChatTitle": "Հեռացնել զրույցը։"
+  "DeleteAIAgentChatTitle": "Հեռացնել զրույցը։",
+  "DeleteAIChatDescription": "Դուք այժմ ջնջելու եք <strong>{{chatName}}<1>.</1></strong>։\nԲոլոր հաղորդագրություններն ու չափաբանության պատմությունը կջնջվեն մշտականօրինաբար և չեն կարող վերականգնվել։"
 }

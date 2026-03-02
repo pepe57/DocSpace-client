@@ -1055,5 +1055,6 @@
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
   "YourTurn": "Sıra sizde",
-  "DeleteAIAgentChatTitle": "Sohbeti sil?"
+  "DeleteAIAgentChatTitle": "Sohbeti sil?",
+  "DeleteAIChatDescription": "<strong>{{chatName}}<1>.</1></strong> silmek üzeresiniz.\nTüm mesajlar ve sohbet geçmişi kalıcı olarak silinecek ve geri yüklenemeyecektir."
 }
