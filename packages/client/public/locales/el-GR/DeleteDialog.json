@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatTitle": "Διαγραφή συνομιλίας;",
   "DeleteAIAgentDescription": "Ο πράκτορας <strong>\"{{agentName}}\"</strong> θα διαγραφεί οριστικά. Όλα τα δεδομένα και οι πρόσβαση χρήστη θα χαθούν.",
   "DeleteAIAgentTitle": "Διαγραφή αυτού του πράκτορα;",
   "DeleteAIAgentWarning": "Κατανοώ τις συνέπειες και θέλω να διαγράψω τον πράκτορα.",

@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatTitle": "Söhbəti sil?",
   "DeleteAIAgentDescription": "Agent <strong>\"{{agentName}}\"</strong> daimi şəkildə silinəcək. Bütün məlumatlar və istifadəçi girişləri itiriləcək.",
   "DeleteAIAgentTitle": "Bu agenti silməli?",
   "DeleteAIAgentWarning": "Mövcud nəticələri başa düşürəm və agenti silmək istəyirəm.",

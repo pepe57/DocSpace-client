@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatTitle": "Fshir chat?",
   "DeleteAIAgentDescription": "Agjenti <strong>\"{{agentName}}\"</strong> do të fshihet përgjithmonë. Të gjitha të dhënat dhe qasjet e përdoruesve do të humbasin.",
   "DeleteAIAgentTitle": "Të fshihet ky agjent?",
   "DeleteAIAgentWarning": "Unë i kuptoj pasojat dhe dua ta fshij agjentin",

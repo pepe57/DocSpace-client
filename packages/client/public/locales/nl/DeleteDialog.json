@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatTitle": "Chat wissen?",
   "DeleteAIAgentDescription": "De agent <strong>\"{{agentName}}\"</strong> wordt permanent verwijderd. Alle data en gebruikersrechten gaan verloren.",
   "DeleteAIAgentTitle": "Deze agent verwijderen?",
   "DeleteAIAgentWarning": "Ik begrijp de gevolgen en wil de agent verwijderen.",

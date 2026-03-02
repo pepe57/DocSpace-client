@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatTitle": "කතාබහ මකන්නද?",
   "DeleteAIAgentDescription": "නියෝජිතයා <strong>\"{{agentName}}\"</strong> ස්ථිරවම මකා දැමෙනු ඇත. සියලුම දත්ත සහ පරිශීලක ප්‍රවේශයන් නැති වී යනු ඇත.",
   "DeleteAIAgentTitle": "මෙම නියෝජිතයා මකන්නද?",
   "DeleteAIAgentWarning": "මට ප්‍රතිවිපාක තේරෙනවා, ඒ නිසා නියෝජිතයා මකා දැමීමට අවශ්‍යයි.",

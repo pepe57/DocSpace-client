@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatTitle": "Șterge conversație?",
   "DeleteAIAgentDescription": "Agentul <strong>\"{{agentName}}\"</strong> va fi șters definitiv. Toate datele și conectările utilizatorilor se vor pierde.",
   "DeleteAIAgentTitle": "Doriți să ștergeți acest agent?",
   "DeleteAIAgentWarning": "Confirm că înțeleg efectele și doresc să șterg acest agent",

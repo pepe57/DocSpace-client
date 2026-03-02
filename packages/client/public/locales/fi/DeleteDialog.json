@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatTitle": "Poista keskustelu?",
   "DeleteAIAgentDescription": "Agentti <strong>\"{{agentName}}\"</strong> poistetaan pysyvästi. Kaikki tiedot ja käyttäjäoikeudet menetetään.",
   "DeleteAIAgentTitle": "Poista tämä agentti?",
   "DeleteAIAgentWarning": "Ymmärrän seuraukset ja haluan poistaa agentin.",

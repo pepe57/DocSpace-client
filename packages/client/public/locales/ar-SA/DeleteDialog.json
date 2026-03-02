@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatTitle": "حذف الدردشة؟",
   "DeleteAIAgentDescription": "سيتم حذف الوكيل <strong>\"{{agentName}}\"</strong> نهائيًا. سيتم فقدان جميع البيانات ووصول المستخدمين.",
   "DeleteAIAgentTitle": "هل تريدون حذف هذا الوكيل؟",
   "DeleteAIAgentWarning": "أنا أفهم العواقب وأريد حذف الوكيل",

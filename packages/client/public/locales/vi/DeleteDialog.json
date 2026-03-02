@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatTitle": "Xóa cuộc trò chuyện?",
   "DeleteAIAgentDescription": "Tài khoản <strong>\"{{agentName}}\"</strong> sẽ bị xóa vĩnh viễn. Tất cả dữ liệu và quyền truy cập của người dùng sẽ bị mất.",
   "DeleteAIAgentTitle": "Xóa bỏ người đại diện này?",
   "DeleteAIAgentWarning": "Tôi hiểu những hậu quả và muốn xóa bỏ người đại diện.",

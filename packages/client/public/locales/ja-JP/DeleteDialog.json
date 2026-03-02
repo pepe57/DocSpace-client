@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatTitle": "チャットを削除しますか？",
   "DeleteAIAgentDescription": "エージェント<strong>「{{agentName}}」</strong>は完全に削除されます。すべてのデータとユーザーアクセス権限が失われます。",
   "DeleteAIAgentTitle": "このエージェントを削除",
   "DeleteAIAgentWarning": "結果を理解した上で、エージェントを削除したい",

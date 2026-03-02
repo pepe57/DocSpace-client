@@ -1127,5 +1127,6 @@
   "YourTurn": "Your turn",
   "OrSelectFromAvailableMatches": "Or select from available matches",
   "SelectAnOptionOrCreateOne": "Select an option or create one",
-  "CreateTag": "Create tag"
+  "CreateTag": "Create tag",
+  "DeleteAIAgentChatTitle": "Delete chat?"
 }

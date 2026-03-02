@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatTitle": "Հեռացնել զրույցը։",
   "DeleteAIAgentDescription": "Գործակալ <strong>\"{{agentName}}\"</strong>-ը ընդմիշտ կջնջվի։ Բոլոր տվյալները և օգտատիրոջ մուտքի իրավունքները կկորչեն։",
   "DeleteAIAgentTitle": "Ջնջե՞լ այս գործակալին։",
   "DeleteAIAgentWarning": "Ես հասկանում եմ հետևանքները և ցանկանում եմ հեռացնել գործակալին",

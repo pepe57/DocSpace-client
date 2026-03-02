@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatTitle": "Briši čat?",
   "DeleteAIAgentDescription": "Agent <strong>\"{{agentName}}\"</strong> će biti trajno izbrisan. Svi podaci i pristupi korisnika će biti izgubljeni.",
   "DeleteAIAgentTitle": "Obrišite ovog agenta",
   "DeleteAIAgentWarning": "Razumem posledice i želim da izbrišem agenta",

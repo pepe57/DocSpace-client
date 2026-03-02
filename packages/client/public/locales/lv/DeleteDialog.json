@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatTitle": "Dzēst sarunu?",
   "DeleteAIAgentDescription": "Aģents <strong>\"{{agentName}}\"</strong> tiks izdzēsts pavisam. Visi dati un lietotāju piekļuves tiks zaudēti.",
   "DeleteAIAgentTitle": "Dzēst šo aģentu?",
   "DeleteAIAgentWarning": "Es saprotu sekmes un vēlos dzēst aģentu.",
