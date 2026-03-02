@@ -24,12 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useRef } from "react";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Button } from "@docspace/ui-kit/components/button";
+import isNil from "lodash/isNil";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import { useState, useEffect, useRef } from "react";
+
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
+
 import { LabledInput } from "./LabledInput";
 import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
@@ -88,12 +91,12 @@ const WebhookDialog = (props) => {
     secretKey: "",
     enabled: webhook ? webhook.enabled : true,
     ssl: webhook ? webhook.ssl : true,
-    triggers: webhook ? webhook.triggers : 0,
+    triggers: isNil(webhook?.triggers) ? 0n : BigInt(webhook.triggers),
     targetId: webhook ? webhook?.targetId : "",
   });
   const [passwordInputKey, setPasswordInputKey] = useState(0);
   const [triggerAll, setTriggerAll] = useState(
-    webhook ? webhook.triggers === 0 : true,
+    isNil(webhook?.triggers) ? true : BigInt(webhook.triggers) === 0n,
   );
 
   const onModalClose = () => {
@@ -156,7 +159,7 @@ const WebhookDialog = (props) => {
     if (!validateForm()) return;
     setIsLoading(true);
     try {
-      if (triggerAll) webhookInfo.triggers = 0;
+      if (triggerAll) webhookInfo.triggers = 0n;
       await onSubmit(webhookInfo);
       isSettingsModal
         ? toastr.success(t("WebhookEditedSuccessfully"))
@@ -167,7 +170,7 @@ const WebhookDialog = (props) => {
         uri: "",
         secretKey: "",
         enabled: true,
-        triggers: 0,
+        triggers: 0n,
         targetId: "",
       });
       setIsPasswordValid(false);
@@ -188,10 +191,12 @@ const WebhookDialog = (props) => {
       secretKey: "",
       enabled: webhook ? webhook.enabled : true,
       ssl: webhook ? webhook.ssl : true,
-      triggers: webhook ? webhook.triggers : 0,
+      triggers: isNil(webhook?.triggers) ? 0n : BigInt(webhook.triggers),
       targetId: webhook ? webhook.targetId : "",
     });
-    setTriggerAll(webhook ? webhook.triggers === 0 : true);
+    setTriggerAll(
+      isNil(webhook?.triggers) ? true : BigInt(webhook.triggers) === 0n,
+    );
   }, [webhook]);
 
   return (
