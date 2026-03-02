@@ -159,7 +159,7 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
               <Trans
                 t={t}
                 ns="Services"
-                i18nKey="AIPricingFeeNote"
+                i18nKey="AIPricingFeeNoteUsage"
                 components={{
                   1: (
                     <Link

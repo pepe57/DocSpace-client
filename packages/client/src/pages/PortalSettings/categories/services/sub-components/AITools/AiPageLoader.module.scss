@@ -1,68 +1,41 @@
-.loaderContainer {
+.container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   box-sizing: border-box;
 }
 
 .toggleSection {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 660px;
+  max-width: 550px;
 }
 
-.toggleRow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.toggleDescription {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  max-width: 660px;
-}
-
-.balanceCard {
-  width: 320px;
-  border: 1px solid var(--aside-header-border-color);
-  border-radius: 6px;
-  padding: 12px;
+.balanceGroup {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  box-sizing: border-box;
 }
 
 .lastTopUpRow {
   display: flex;
   align-items: center;
-  gap: 4px;
 }
 
-.tabsSection {
+.tabsRow {
   display: flex;
-  flex-direction: column;
   gap: 16px;
-  width: 100%;
 }
 
-.tabsHeader {
+.filterRow {
   display: flex;
-  gap: 20px;
+  gap: 8px;
 }
 
-.tableHeader {
+.tableHeaderRow {
   display: flex;
-  gap: 12px;
+  justify-content: space-between;
   width: 100%;
 }
 
 .tableRow {
-  display: flex;
-  gap: 12px;
   width: 100%;
-  padding: 8px 0;
 }

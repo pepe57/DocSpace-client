@@ -370,12 +370,16 @@
 .modelIconPlaceholder {
   width: 32px;
   height: 32px;
-  border: 1px solid var(--aside-header-border-color);
-  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
+
+  svg{
+    rect{
+      stroke: var(--border-service-color)
+    }
+  }
 }
 
 .modelText {
