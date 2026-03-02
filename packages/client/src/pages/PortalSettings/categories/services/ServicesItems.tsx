@@ -27,6 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
+import { Trans } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import {
@@ -90,6 +91,9 @@ type ServicesItemsProps = {
   ) => string;
   aiServiceBalance?: number;
   isAiServiceLowBalance?: boolean;
+  walletCustomerInfo?: { displayName?: string } | null;
+  walletCustomerEmail?: string | null;
+  wasFirstAiServiceTopUp?: boolean;
 };
 
 const ServicesItems: React.FC<ServicesItemsProps> = ({
@@ -114,9 +118,25 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
   formatAiServiceCurrency,
   aiServiceBalance,
   isAiServiceLowBalance,
+  walletCustomerInfo,
+  walletCustomerEmail,
+  wasFirstAiServiceTopUp,
 }) => {
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
   const { t } = useServicesActions();
+
+  const permissionTooltipText = (
+    <Trans
+      t={t}
+      i18nKey="InsufficientPermissionsMessage"
+      ns="Services"
+      values={{
+        payerContact:
+          walletCustomerInfo?.displayName || walletCustomerEmail || "",
+      }}
+      components={{ 1: <strong /> }}
+    />
+  );
 
   const handleToggle = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
@@ -178,7 +198,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
           currency: formatWalletCurrency!(priceValue!, 2),
         });
       case AI_TOOLS:
-        return t("Services:AIPricingBilledPerTokenUsage");
+        return t("Services:AIPricingBilledPerUsage");
       default:
         return "";
     }
@@ -215,12 +235,11 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
           if (!item.title || !item.image) return null;
 
           if (item.id === AI_TOOLS) {
-            const eventDisabled = isDisabled;
-
             return (
               <ServiceCard
                 key={item.id}
-                toggleDisabled={!!eventDisabled}
+                toggleDisabled={isDisabled}
+                cardDisabled={wasFirstAiServiceTopUp ? false : isDisabled}
                 onClick={handleClick}
                 onToggle={handleToggle}
                 serviceTitle={item.title}
@@ -229,6 +248,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 id={item.id}
                 image={item.image}
                 isEnabled={item.value}
+                tooltip={isDisabled ? permissionTooltipText : undefined}
               >
                 {isAiServiceLowBalance ? (
                   <div
@@ -285,6 +305,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 id={item.id}
                 image={item.image}
                 isEnabled={hasStorageSubscription}
+                tooltip={isDisabled ? permissionTooltipText : undefined}
               >
                 {hasScheduledStorageChange ? (
                   <div
@@ -346,6 +367,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
               onClick={handleClick}
               onToggle={handleToggle}
               priceDescription={priceDescription(item.id, item.price.value)}
+              tooltip={isDisabled ? permissionTooltipText : undefined}
             />
           );
         })}
@@ -372,15 +394,21 @@ export default inject(
       formatWalletCurrency,
     } = paymentStore;
 
-    const { aiServiceBalance, formatAiServiceCurrency, isAiServiceLowBalance } =
-      servicesStore;
     const {
+      aiServiceBalance,
+      formatAiServiceCurrency,
+      isAiServiceLowBalance,
+      wasFirstAiServiceTopUp,
+    } = servicesStore;
+    const {
+      isGracePeriod,
+      hasScheduledStorageChange,
+      walletCustomerInfo,
+      walletCustomerEmail,
       currentStoragePlanSize,
       nextStoragePlanSize,
       storageExpiryDate,
       hasStorageSubscription,
-      isGracePeriod,
-      hasScheduledStorageChange,
     } = currentTariffStatusStore;
 
     const { isFreeTariff } = currentQuotaStore;
@@ -394,7 +422,6 @@ export default inject(
       isPayer,
       cardLinkedOnFreeTariff,
       isFreeTariff,
-
       storagePriceIncrement,
       currentStoragePlanSize,
       hasStorageSubscription,
@@ -409,6 +436,9 @@ export default inject(
       formatAiServiceCurrency,
       aiServiceBalance,
       isAiServiceLowBalance,
+      walletCustomerInfo,
+      walletCustomerEmail,
+      wasFirstAiServiceTopUp,
     };
   },
 )(observer(ServicesItems));
