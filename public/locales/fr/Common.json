@@ -1056,5 +1056,6 @@
   "YourLogo": "Votre logo",
   "YourTurn": "Votre tour",
   "DeleteAIAgentChatTitle": "Supprimer le chat ?",
-  "DeleteAIChatDescription": "Vous êtes sur le point de supprimer <strong>{{chatName}}<1>.</1></strong> Tous les messages et l'historique du chat seront définitivement supprimés et ne pourront pas être restaurés."
+  "DeleteAIChatDescription": "Vous êtes sur le point de supprimer <strong>{{chatName}}<1>.</1></strong> Tous les messages et l'historique du chat seront définitivement supprimés et ne pourront pas être restaurés.",
+  "DeleteForeverButton": "Supprimer définitivement"
 }

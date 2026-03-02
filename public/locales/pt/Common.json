@@ -1056,5 +1056,6 @@
   "YourLogo": "O seu logótipo",
   "YourTurn": "A sua vez",
   "DeleteAIAgentChatTitle": "Apagar chat?",
-  "DeleteAIChatDescription": "Você está prestes a excluir <strong>{{chatName}}<1>.</1></strong>\n Todas as mensagens e histórico do chat serão removidos permanentemente e não poderão ser restaurados."
+  "DeleteAIChatDescription": "Você está prestes a excluir <strong>{{chatName}}<1>.</1></strong>\n Todas as mensagens e histórico do chat serão removidos permanentemente e não poderão ser restaurados.",
+  "DeleteForeverButton": "Eliminar para sempre"
 }

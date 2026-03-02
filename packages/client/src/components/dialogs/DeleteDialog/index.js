@@ -190,7 +190,7 @@ const DeleteDialogComponent = (props) => {
     }
 
     if (isRecycleBinFolder)
-      return t("EmptyTrashDialog:DeleteForeverButton");
+      return t("Common:DeleteForeverButton");
 
     if (isPrivacyFolder || selection[0]?.providerKey)
       return t("Common:OKButton");

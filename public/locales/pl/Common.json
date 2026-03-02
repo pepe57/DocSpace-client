@@ -1056,5 +1056,6 @@
   "YourLogo": "Twoje Logo",
   "YourTurn": "Twoja kolej",
   "DeleteAIAgentChatTitle": "Usuń czat?",
-  "DeleteAIChatDescription": "Oznaczysz do usunięcia <strong>{{chatName}}<1>.</1></strong>\n Wszystkie wiadomości i historia czatu zostaną trwale usunięte i nie można ich odzyskać."
+  "DeleteAIChatDescription": "Oznaczysz do usunięcia <strong>{{chatName}}<1>.</1></strong>\n Wszystkie wiadomości i historia czatu zostaną trwale usunięte i nie można ich odzyskać.",
+  "DeleteForeverButton": "Usuń na zawsze"
 }

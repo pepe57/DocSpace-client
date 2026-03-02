@@ -1056,5 +1056,6 @@
   "YourLogo": "Loqonuz",
   "YourTurn": "Sizin növbəniz",
   "DeleteAIAgentChatTitle": "Söhbəti sil?",
-  "DeleteAIChatDescription": "Yarıma <strong>{{chatName}}<1>.</1></strong> silməyə hazırlaşırsınız.\nBütün mesajlar və söhbət tarixçəsi daimi şəkildə silinəcək və bərpa edilə bilməyəcəkdir."
+  "DeleteAIChatDescription": "Yarıma <strong>{{chatName}}<1>.</1></strong> silməyə hazırlaşırsınız.\nBütün mesajlar və söhbət tarixçəsi daimi şəkildə silinəcək və bərpa edilə bilməyəcəkdir.",
+  "DeleteForeverButton": "Həmişəlik sil"
 }

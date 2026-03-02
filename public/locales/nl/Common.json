@@ -1056,5 +1056,6 @@
   "YourLogo": "Uw logo",
   "YourTurn": "Uw beurt",
   "DeleteAIAgentChatTitle": "Chat wissen?",
-  "DeleteAIChatDescription": "U gaat <strong>{{chatName}}<1>.</1></strong> verwijderen.\nAlle berichten en chatgeschiedenis worden permanent verwijderd en kunnen niet worden hersteld."
+  "DeleteAIChatDescription": "U gaat <strong>{{chatName}}<1>.</1></strong> verwijderen.\nAlle berichten en chatgeschiedenis worden permanent verwijderd en kunnen niet worden hersteld.",
+  "DeleteForeverButton": "Voor altijd verwijderen"
 }

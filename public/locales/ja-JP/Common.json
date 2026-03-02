@@ -1056,5 +1056,6 @@
   "YourLogo": "あなたのロゴ",
   "YourTurn": "あなたの番です",
   "DeleteAIAgentChatTitle": "チャットを削除しますか？",
-  "DeleteAIChatDescription": "削除しようとしています：<strong>{{chatName}}<1>.</1></strong>\nすべてのメッセージとチャット履歴が完全に削除され、復元できません。"
+  "DeleteAIChatDescription": "削除しようとしています：<strong>{{chatName}}<1>.</1></strong>\nすべてのメッセージとチャット履歴が完全に削除され、復元できません。",
+  "DeleteForeverButton": "永久削除"
 }

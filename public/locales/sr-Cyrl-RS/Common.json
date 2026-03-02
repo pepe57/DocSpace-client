@@ -1056,5 +1056,6 @@
   "YourLogo": "Ваш лого",
   "YourTurn": "Ваш ред",
   "DeleteAIAgentChatTitle": "Обрисати чат?",
-  "DeleteAIChatDescription": "Бришем <strong>{{chatName}}<1>.</1></strong> Све поруке и историја ћаскања биће трајно обрисане и неће моћи да буду враћене."
+  "DeleteAIChatDescription": "Бришем <strong>{{chatName}}<1>.</1></strong> Све поруке и историја ћаскања биће трајно обрисане и неће моћи да буду враћене.",
+  "DeleteForeverButton": "Обриши заувек"
 }
