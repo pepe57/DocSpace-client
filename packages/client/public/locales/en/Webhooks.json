@@ -90,7 +90,7 @@
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Webhooks Guide",
   "WebhooksInfo": "Use webhooks to perform custom actions on the side of any application or website you are using based on various events in {{organizationName}} {{productName}}.\nHere, you can create and manage all your webhooks, configure them, and browse history of every webhook to audit their performance.",
-  "FormSubmit": "Form is submitted",
-  "FormFilledOut": "Form is filled out",
-  "FormStopped": "Form is stopped"
+  "FormSubmit": "Form Submitted",
+  "FormFilledOut": "Form Filled Out",
+  "FormStopped": "Form Stopped"
 }
