@@ -255,6 +255,7 @@ const ChatInput = ({
             id: Number(attachmentFile.id),
             title: attachmentFile.title,
             fileExst: attachmentFile.fileExst,
+            viewUrl: attachmentFile.viewUrl,
           },
         ];
         handleSelectFile(file);
