@@ -1193,9 +1193,9 @@ const SectionFilterContent = ({
       {
         key: FilterGroups.roomFilterSubject,
         group: FilterGroups.roomFilterSubject,
-        label: isTemplatesFolder ? t("TemplateOwner") : t("Common:Member"),
+        label: isTemplatesFolder ? t("TemplateOwner") : t("Common:Contacts"),
         isHeader: true,
-        withoutSeparator: true,
+        isLast: isAIAgentsFolder && !tags?.length,
         withMultiItems: true,
       },
       {
@@ -1218,7 +1218,7 @@ const SectionFilterContent = ({
         id: "filter_author-other",
         key: FilterKeys.other,
         group: FilterGroups.roomFilterSubject,
-        label: t("Common:OtherLabel"),
+        label: t("Common:Select"),
       });
     }
 
@@ -1226,19 +1226,33 @@ const SectionFilterContent = ({
       {
         key: FilterGroups.roomFilterOwner,
         group: FilterGroups.roomFilterOwner,
+        label: t("Common:Owners"),
         isHeader: true,
-        withoutHeader: true,
-        isLast: isAIAgentsFolder && !tags?.length,
+        withoutSeparator: true,
+        withMultiItems: true,
       },
       {
-        id: "filter_author-user",
-        key: FilterSubject.Owner,
+        id: "filter_owner-me",
+        key: FilterKeys.me,
         group: FilterGroups.roomFilterOwner,
-        label: t("Translations:SearchByOwner"),
-        isCheckbox: true,
-        isDisabled: false,
+        label: t("Common:MeLabel"),
+      },
+      {
+        id: "filter_owner-user",
+        key: FilterKeys.other,
+        group: FilterGroups.roomFilterOwner,
+        displaySelectorType: "link",
       },
     ];
+
+    if (!isCollaborator && !isVisitor) {
+      subjectOptions.push({
+        id: "filter_owner-other",
+        key: FilterKeys.other,
+        group: FilterGroups.roomFilterOwner,
+        label: t("Common:Select"),
+      });
+    }
 
     // const foldersOptions = [
     //   {
@@ -1281,8 +1295,8 @@ const SectionFilterContent = ({
       // filterOptions.push(...foldersOptions);
       // filterOptions.push(...contentOptions);
 
-      filterOptions.push(...subjectOptions);
       filterOptions.push(...ownerOptions);
+      filterOptions.push(...subjectOptions);
 
       filterOptions.push(...typeOptions);
 
@@ -1623,6 +1637,12 @@ const SectionFilterContent = ({
           newFilter.filterSubject = null;
         }
 
+        if (group === FilterGroups.roomFilterOwner) {
+          newFilter.subjectId = null;
+          newFilter.excludeSubject = false;
+          newFilter.filterSubject = null;
+        }
+
         if (group === FilterGroups.roomFilterTags) {
           const newTags = newFilter.tags;
 
@@ -1663,6 +1683,12 @@ const SectionFilterContent = ({
         const newFilter = roomsFilter.clone();
 
         if (group === FilterGroups.roomFilterSubject) {
+          newFilter.subjectId = null;
+          newFilter.excludeSubject = false;
+          newFilter.filterSubject = null;
+        }
+
+        if (group === FilterGroups.roomFilterOwner) {
           newFilter.subjectId = null;
           newFilter.excludeSubject = false;
           newFilter.filterSubject = null;
