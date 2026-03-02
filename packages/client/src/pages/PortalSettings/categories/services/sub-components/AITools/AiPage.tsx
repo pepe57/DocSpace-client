@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -89,6 +90,7 @@ type AiPageProps = {
   isFreeTariff?: boolean;
   isPayer?: boolean;
   currentDeviceType?: string;
+  wasFirstAiServiceTopUp?: boolean;
 };
 
 const AiPage = (props: AiPageProps) => {
@@ -113,6 +115,7 @@ const AiPage = (props: AiPageProps) => {
     isFreeTariff,
     isPayer,
     currentDeviceType,
+    wasFirstAiServiceTopUp,
   } = props;
 
   const { t } = useTranslation("Services");
@@ -125,6 +128,14 @@ const AiPage = (props: AiPageProps) => {
   const [isTopUpConfirmVisible, setIsTopUpConfirmVisible] = useState(false);
 
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isInitAiPage && !wasFirstAiServiceTopUp) {
+      navigate("/portal-settings/services");
+    }
+  }, [isInitAiPage, wasFirstAiServiceTopUp]);
 
   const onRefresh = async () => {
     if (isRefreshing) return;
@@ -270,7 +281,7 @@ const AiPage = (props: AiPageProps) => {
     },
   ];
 
-  if (!isInitAiPage) return <AiPageLoader />;
+  if (!isInitAiPage || !wasFirstAiServiceTopUp) return <AiPageLoader />;
 
   return (
     <div className={styles.container}>
@@ -429,6 +440,7 @@ export default inject(
       aiServiceLastCreditDate,
       isAiServiceLowBalance,
       isInitAiPage,
+      wasFirstAiServiceTopUp,
     } = servicesStore;
     const { isFreeTariff } = currentQuotaStore;
     return {
@@ -450,6 +462,7 @@ export default inject(
       isPayer,
       isFreeTariff,
       currentDeviceType,
+      wasFirstAiServiceTopUp,
     };
   },
 )(observer(AiPage));
