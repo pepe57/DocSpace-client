@@ -1427,5 +1427,6 @@ export default inject(
     "ChangeUserTypeDialog",
     "Notifications",
     "Profile",
+    "GroupingRooms",
   ])(observer(SectionHeaderContent)),
 );
