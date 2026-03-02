@@ -198,7 +198,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
           currency: formatWalletCurrency!(priceValue!, 2),
         });
       case AI_TOOLS:
-        return t("Services:AIPricingBilledPerTokenUsage");
+        return t("Services:AIPricingBilledPerUsage");
       default:
         return "";
     }
