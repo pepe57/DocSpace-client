@@ -30,9 +30,11 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
-import { WebhookTriggers } from "@docspace/shared/enums";
-
-import { getTriggerTranslate } from "../Webhooks.helpers";
+import {
+  getTriggerTranslate,
+  isTriggerDisabled,
+  triggersList,
+} from "../Webhooks.helpers";
 
 type TProps = {
   isDisabled: boolean;
@@ -40,11 +42,8 @@ type TProps = {
   toggleTrigger: (value: bigint) => void;
   triggerAll: boolean;
   onChange: (value: string) => void;
+  disabledTriggers?: bigint[];
 };
-
-const triggersList = Object.values(WebhookTriggers)
-  .filter((value) => typeof value === "number" && value !== WebhookTriggers.All)
-  .map(BigInt);
 
 const TriggersForm = ({
   isDisabled,
@@ -52,6 +51,7 @@ const TriggersForm = ({
   toggleTrigger,
   triggerAll,
   onChange,
+  disabledTriggers,
 }: TProps) => {
   const { t } = useTranslation(["Webhooks", "Files", "Common"]);
 
@@ -97,15 +97,22 @@ const TriggersForm = ({
           }}
           data-testid="triggers_form_checkbox_group"
         >
-          {triggersList.map((value) => (
-            <Checkbox
-              key={value.toString()}
-              label={getTriggerTranslate(Number(value), t)}
-              isChecked={(triggers & value) !== 0n}
-              onChange={() => toggleTrigger(value)}
-              dataTestId={`triggers_form_checkbox_${value}`}
-            />
-          ))}
+          {triggersList.map((value) => {
+            const isCheckboxDisabled = isTriggerDisabled(
+              value,
+              disabledTriggers,
+            );
+            return (
+              <Checkbox
+                key={value.toString()}
+                label={getTriggerTranslate(Number(value), t)}
+                isChecked={(triggers & value) !== 0n}
+                onChange={() => toggleTrigger(value)}
+                isDisabled={isCheckboxDisabled}
+                dataTestId={`triggers_form_checkbox_${value}`}
+              />
+            );
+          })}
         </div>
       ) : null}
     </div>

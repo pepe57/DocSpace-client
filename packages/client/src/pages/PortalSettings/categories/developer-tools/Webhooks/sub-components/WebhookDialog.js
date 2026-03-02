@@ -26,12 +26,15 @@
 
 import isNil from "lodash/isNil";
 import styled from "styled-components";
+import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
+
+import { getDisabledTriggersForUser, validateUrl } from "../Webhooks.helpers";
 
 import { LabledInput } from "./LabledInput";
 import { SSLVerification } from "./SSLVerification";
@@ -58,10 +61,6 @@ const Footer = styled.div`
   }
 `;
 
-function validateUrl(url) {
-  return URL.canParse(url);
-}
-
 const WebhookDialog = (props) => {
   const {
     visible,
@@ -71,6 +70,7 @@ const WebhookDialog = (props) => {
     onSubmit,
     webhook,
     additionalId,
+    user,
   } = props;
 
   const { t } = useTranslation(["Webhooks", "Common"]);
@@ -199,6 +199,11 @@ const WebhookDialog = (props) => {
     );
   }, [webhook]);
 
+  const disabledTriggers = useMemo(
+    () => getDisabledTriggersForUser(user),
+    [user],
+  );
+
   return (
     <ModalDialog
       visible={visible}
@@ -257,6 +262,7 @@ const WebhookDialog = (props) => {
             toggleTrigger={toggleTrigger}
             triggerAll={triggerAll}
             onChange={handleOnChangeTriggerAll}
+            disabledTriggers={disabledTriggers}
           />
           <LabledInput
             id={`${additionalId}-target-id-input`}
@@ -305,4 +311,8 @@ const WebhookDialog = (props) => {
   );
 };
 
-export default WebhookDialog;
+export default inject(({ userStore }) => {
+  return {
+    user: userStore?.user,
+  };
+})(observer(WebhookDialog));
