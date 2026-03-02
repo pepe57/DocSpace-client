@@ -24,37 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { Dispatch, SetStateAction } from "react";
-import type { TUser } from "../../api/people/types";
-import type { TSettings } from "../../api/settings/types";
-import type { IRole } from "../../components/filling-role-selector";
-import type { TFormRoleMappingRequest } from "../../api/files/types";
-import type { TTranslation } from "../../types";
-
-export type Invitation = { id: string | number; access: string | number };
-
-export interface IStartFillingPanelProps {
-  roles: Omit<IRole, "user">[];
-  user: TUser;
-  settings: TSettings;
-  fileId: number;
-  roomId: string;
-  setStartFillingPanelVisible: Dispatch<SetStateAction<boolean>>;
-  onSubmit: (data: TFormRoleMappingRequest) => Promise<void>;
-  inviteUserToRoom: (
-    roomId: string,
-    invitations: Invitation[],
-  ) => Promise<unknown>;
-  withBorder?: boolean;
-  canEditRoom?: boolean;
-}
-
-export interface HeaderProps {
-  ref?: React.RefObject<HTMLDivElement>;
-  canEditRoom: boolean;
-  roleName: string;
-  t: TTranslation;
-  openInvitePanel: VoidFunction;
-
-  className?: string;
-}
+export * from "./path";
+export * from "./folder";
+export * from "./upload";
+export * from "./formatExtensions";
+export * from "./sizeLimit";
