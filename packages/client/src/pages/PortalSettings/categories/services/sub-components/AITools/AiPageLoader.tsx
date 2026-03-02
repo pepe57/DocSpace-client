@@ -5,49 +5,44 @@ import styles from "./AiPageLoader.module.scss";
 
 const AiPageLoader: React.FC = () => {
   return (
-    <div className={styles.loaderContainer}>
+    <div className={styles.container}>
       <div className={styles.toggleSection}>
-        <div className={styles.toggleRow}>
-          <RectangleSkeleton width="28px" height="16px" borderRadius="16px" />
-          <RectangleSkeleton width="200px" height="20px" borderRadius="3px" />
-        </div>
-        <div className={styles.toggleDescription}>
-          <RectangleSkeleton width="100%" height="16px" borderRadius="3px" />
-          <RectangleSkeleton width="80%" height="16px" borderRadius="3px" />
-        </div>
+        <RectangleSkeleton width="100%" height="40px" borderRadius="3px" />
       </div>
 
-      <div className={styles.balanceCard}>
-        <RectangleSkeleton width="100px" height="16px" borderRadius="3px" />
-        <RectangleSkeleton width="80px" height="28px" borderRadius="3px" />
-        <RectangleSkeleton width="100%" height="32px" borderRadius="3px" />
+      <div className={styles.balanceGroup}>
+        <RectangleSkeleton width="120px" height="16px" borderRadius="3px" />
+        <RectangleSkeleton width="200px" height="36px" borderRadius="3px" />
+        <RectangleSkeleton width="200px" height="32px" borderRadius="3px" />
       </div>
 
       <div className={styles.lastTopUpRow}>
-        <RectangleSkeleton width="280px" height="16px" borderRadius="3px" />
+        <RectangleSkeleton width="180px" height="16px" borderRadius="3px" />
       </div>
 
-      <div className={styles.tabsSection}>
-        <div className={styles.tabsHeader}>
-          <RectangleSkeleton width="60px" height="20px" borderRadius="3px" />
-          <RectangleSkeleton width="110px" height="20px" borderRadius="3px" />
-        </div>
-
-        <div className={styles.tableHeader}>
-          <RectangleSkeleton width="100%" height="32px" borderRadius="3px" />
-          <RectangleSkeleton width="100%" height="32px" borderRadius="3px" />
-          <RectangleSkeleton width="100%" height="32px" borderRadius="3px" />
-        </div>
-
-        {Array.from({ length: 4 }).map((_, index) => (
-          <div key={index} className={styles.tableRow}>
-            <RectangleSkeleton width="100%" height="20px" borderRadius="3px" />
-            <RectangleSkeleton width="100%" height="20px" borderRadius="3px" />
-            <RectangleSkeleton width="100%" height="20px" borderRadius="3px" />
-            <RectangleSkeleton width="100%" height="20px" borderRadius="3px" />
-          </div>
-        ))}
+      <div className={styles.tabsRow}>
+        <RectangleSkeleton width="80px" height="32px" borderRadius="3px" />
+        <RectangleSkeleton width="80px" height="32px" borderRadius="3px" />
       </div>
+
+      <div className={styles.filterRow}>
+        <RectangleSkeleton width="151px" height="32px" borderRadius="3px" />
+        <RectangleSkeleton width="151px" height="32px" borderRadius="3px" />
+        <RectangleSkeleton width="151px" height="32px" borderRadius="3px" />
+      </div>
+
+      <div className={styles.tableHeaderRow}>
+        <RectangleSkeleton width="40px" height="12px" borderRadius="3px" />
+        <RectangleSkeleton width="40px" height="12px" borderRadius="3px" />
+        <RectangleSkeleton width="40px" height="12px" borderRadius="3px" />
+        <RectangleSkeleton width="40px" height="12px" borderRadius="3px" />
+      </div>
+
+      {Array.from({ length: 6 }).map((_, index) => (
+        <div key={index} className={styles.tableRow}>
+          <RectangleSkeleton width="100%" height="20px" borderRadius="3px" />
+        </div>
+      ))}
     </div>
   );
 };
