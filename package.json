@@ -72,7 +72,8 @@
       "ajv": ">=8.18.0",
       "file-loader>schema-utils": "^4.3.3",
       "fast-xml-parser": ">=5.3.6",
-      "minimatch": ">=10.2.1"
+      "minimatch": ">=10.2.1",
+      "serialize-javascript": ">=7.0.3"
     }
   }
 }
