@@ -3597,9 +3597,9 @@ packages:
     hasBin: true
 
   '@onlyoffice/docspace-sdk-js@file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz':
-    resolution: {integrity: sha512-kSflAFVIwLIBvNcDV8PwNUZzylRdcSq6WKoVpKYAuL65yL1pHAO0IjgoxxFXahGXsXAh8AHhRAj2lwTuqn1kiQ==, tarball: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz}
+    resolution: {integrity: sha512-F/9MLDkDy6fKz0yr67dgtxXqloPJhJLqi1mB442PJhjNW5q9LT7TA5bYWaHJNo0ulFtBkoMEWseKCufKEZXuvw==, tarball: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz}
     version: 2.2.0
-    engines: {node: '>=22', pnpm: '>=10'}
+    engines: {node: '>=18'}
 
   '@onlyoffice/document-editor-react@2.1.1':
     resolution: {integrity: sha512-b0SnFPmT+OEyJons18PPHpwtFABVCI4nr3gPtAAImar1PhN9tNc9703Yo5KPYsHhIgVq+FqHSWgunI9GJnKa5w==}
