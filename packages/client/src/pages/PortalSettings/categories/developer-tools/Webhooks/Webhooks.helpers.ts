@@ -85,6 +85,12 @@ export const getTriggerTranslate = (trigger: number, t: TTranslation) => {
       return t("RoomRestored");
     case WebhookTriggers.RoomCopied:
       return t("RoomCopied");
+    case WebhookTriggers.FormFilledOut:
+      return t("FormFilledOut");
+    case WebhookTriggers.FormStopped:
+      return t("FormStopped");
+    case WebhookTriggers.FormSubmit:
+      return t("FormSubmit");
     default:
       return "";
   }
