@@ -29,6 +29,10 @@ import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 export const PATH_AI_CONFIG = "ai/config";
 
+const modelAliases = {
+  "GPT-5.1": "GPT-5.1",
+};
+
 const success = {
   response: {
     webSearchEnabled: true,
@@ -39,13 +43,7 @@ const success = {
     knowledgeSearchToolName: "docspace_knowledge_search",
     webSearchToolName: "docspace_web_search",
     webCrawlingToolName: "docspace_web_crawling",
-    modelAliases: {
-      "gpt-5.1-2025-11-13": "GPT-5.1",
-      "gpt-5": "GPT-5",
-      "gpt-4.1": "GPT-4.1",
-      "GPT-5.1": "GPT-5.1",
-      "claude-opus-4-5-20251101": "Claude Opus 4.5",
-    },
+    modelAliases,
   },
   count: 1,
   links: [
@@ -68,13 +66,7 @@ const successDisabled = {
     knowledgeSearchToolName: "docspace_knowledge_search",
     webSearchToolName: "docspace_web_search",
     webCrawlingToolName: "docspace_web_crawling",
-    modelAliases: {
-      "gpt-5.1-2025-11-13": "GPT-5.1",
-      "gpt-5": "GPT-5",
-      "gpt-4.1": "GPT-4.1",
-      "GPT-5.1": "GPT-5.1",
-      "claude-opus-4-5-20251101": "Claude Opus 4.5",
-    },
+    modelAliases,
   },
   count: 1,
   links: [
@@ -97,9 +89,7 @@ const successWebSearchDisabled = {
     knowledgeSearchToolName: "docspace_knowledge_search",
     webSearchToolName: "docspace_web_search",
     webCrawlingToolName: "docspace_web_crawling",
-    modelAliases: {
-      "GPT-5.1": "GPT-5.1",
-    },
+    modelAliases,
   },
   count: 1,
   links: [
@@ -122,13 +112,7 @@ const successVectorizationDisabled = {
     knowledgeSearchToolName: "docspace_knowledge_search",
     webSearchToolName: "docspace_web_search",
     webCrawlingToolName: "docspace_web_crawling",
-    modelAliases: {
-      "gpt-5.1-2025-11-13": "GPT-5.1",
-      "gpt-5": "GPT-5",
-      "gpt-4.1": "GPT-4.1",
-      "GPT-5.1": "GPT-5.1",
-      "claude-opus-4-5-20251101": "Claude Opus 4.5",
-    },
+    modelAliases,
   },
   count: 1,
   links: [
