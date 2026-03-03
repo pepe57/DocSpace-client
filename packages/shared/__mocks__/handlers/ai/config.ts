@@ -31,6 +31,7 @@ export const PATH_AI_CONFIG = "ai/config";
 
 const modelAliases = {
   "GPT-5.1": "GPT-5.1",
+  "claude-opus-4-5-20251101": "Claude Opus 4.5",
 };
 
 const success = {
