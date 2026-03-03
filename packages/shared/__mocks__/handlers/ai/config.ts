@@ -30,124 +30,152 @@ import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 export const PATH_AI_CONFIG = "ai/config";
 
 const success = {
-  response: {
-    webSearchEnabled: true,
-    vectorizationEnabled: true,
-    aiReady: true,
-    portalMcpServerId: "id",
-    embeddingModel: "text-embedding-3-small",
-    knowledgeSearchToolName: "docspace_knowledge_search",
-    webSearchToolName: "docspace_web_search",
-    webCrawlingToolName: "docspace_web_crawling",
-  },
-  count: 1,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
+	response: {
+		webSearchEnabled: true,
+		vectorizationEnabled: true,
+		aiReady: true,
+		portalMcpServerId: "id",
+		embeddingModel: "text-embedding-3-small",
+		knowledgeSearchToolName: "docspace_knowledge_search",
+		webSearchToolName: "docspace_web_search",
+		webCrawlingToolName: "docspace_web_crawling",
+		modelAliases: {
+			"gpt-5.1-2025-11-13": "GPT-5.1",
+			"gpt-5": "GPT-5",
+			"gpt-4.1": "GPT-4.1",
+			"GPT-5.1": "GPT-5.1",
+			"claude-opus-4-5-20251101": "Claude Opus 4.5",
+		},
+	},
+	count: 1,
+	links: [
+		{
+			href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
+			action: "GET",
+		},
+	],
+	status: 0,
+	statusCode: 200,
 };
 
 const successDisabled = {
-  response: {
-    webSearchEnabled: false,
-    vectorizationEnabled: false,
-    aiReady: false,
-    portalMcpServerId: "id",
-    embeddingModel: "text-embedding-3-small",
-    knowledgeSearchToolName: "docspace_knowledge_search",
-    webSearchToolName: "docspace_web_search",
-    webCrawlingToolName: "docspace_web_crawling",
-  },
-  count: 1,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
+	response: {
+		webSearchEnabled: false,
+		vectorizationEnabled: false,
+		aiReady: false,
+		portalMcpServerId: "id",
+		embeddingModel: "text-embedding-3-small",
+		knowledgeSearchToolName: "docspace_knowledge_search",
+		webSearchToolName: "docspace_web_search",
+		webCrawlingToolName: "docspace_web_crawling",
+		modelAliases: {
+			"gpt-5.1-2025-11-13": "GPT-5.1",
+			"gpt-5": "GPT-5",
+			"gpt-4.1": "GPT-4.1",
+			"GPT-5.1": "GPT-5.1",
+			"claude-opus-4-5-20251101": "Claude Opus 4.5",
+		},
+	},
+	count: 1,
+	links: [
+		{
+			href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
+			action: "GET",
+		},
+	],
+	status: 0,
+	statusCode: 200,
 };
 
 const successWebSearchDisabled = {
-  response: {
-    webSearchEnabled: false,
-    vectorizationEnabled: true,
-    aiReady: true,
-    portalMcpServerId: "id",
-    embeddingModel: "text-embedding-3-small",
-    knowledgeSearchToolName: "docspace_knowledge_search",
-    webSearchToolName: "docspace_web_search",
-    webCrawlingToolName: "docspace_web_crawling",
-  },
-  count: 1,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
+	response: {
+		webSearchEnabled: false,
+		vectorizationEnabled: true,
+		aiReady: true,
+		portalMcpServerId: "id",
+		embeddingModel: "text-embedding-3-small",
+		knowledgeSearchToolName: "docspace_knowledge_search",
+		webSearchToolName: "docspace_web_search",
+		webCrawlingToolName: "docspace_web_crawling",
+		modelAliases: {
+			"gpt-5.1-2025-11-13": "GPT-5.1",
+			"gpt-5": "GPT-5",
+			"gpt-4.1": "GPT-4.1",
+			"GPT-5.1": "GPT-5.1",
+			"claude-opus-4-5-20251101": "Claude Opus 4.5",
+		},
+	},
+	count: 1,
+	links: [
+		{
+			href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
+			action: "GET",
+		},
+	],
+	status: 0,
+	statusCode: 200,
 };
 
 const successVectorizationDisabled = {
-  response: {
-    webSearchEnabled: true,
-    vectorizationEnabled: false,
-    aiReady: true,
-    portalMcpServerId: "id",
-    embeddingModel: "text-embedding-3-small",
-    knowledgeSearchToolName: "docspace_knowledge_search",
-    webSearchToolName: "docspace_web_search",
-    webCrawlingToolName: "docspace_web_crawling",
-  },
-  count: 1,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
+	response: {
+		webSearchEnabled: true,
+		vectorizationEnabled: false,
+		aiReady: true,
+		portalMcpServerId: "id",
+		embeddingModel: "text-embedding-3-small",
+		knowledgeSearchToolName: "docspace_knowledge_search",
+		webSearchToolName: "docspace_web_search",
+		webCrawlingToolName: "docspace_web_crawling",
+		modelAliases: {
+			"gpt-5.1-2025-11-13": "GPT-5.1",
+			"gpt-5": "GPT-5",
+			"gpt-4.1": "GPT-4.1",
+			"GPT-5.1": "GPT-5.1",
+			"claude-opus-4-5-20251101": "Claude Opus 4.5",
+		},
+	},
+	count: 1,
+	links: [
+		{
+			href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
+			action: "GET",
+		},
+	],
+	status: 0,
+	statusCode: 200,
 };
 
 export const aiConfigResolver = (
-  isDisabled?: boolean,
-  isWebSearchDisabled?: boolean,
-  isVectorizationDisabled?: boolean,
+	isDisabled?: boolean,
+	isWebSearchDisabled?: boolean,
+	isVectorizationDisabled?: boolean,
 ): Response => {
-  if (isDisabled) {
-    return new Response(JSON.stringify(successDisabled));
-  }
+	if (isDisabled) {
+		return new Response(JSON.stringify(successDisabled));
+	}
 
-  if (isWebSearchDisabled) {
-    return new Response(JSON.stringify(successWebSearchDisabled));
-  }
+	if (isWebSearchDisabled) {
+		return new Response(JSON.stringify(successWebSearchDisabled));
+	}
 
-  if (isVectorizationDisabled) {
-    return new Response(JSON.stringify(successVectorizationDisabled));
-  }
+	if (isVectorizationDisabled) {
+		return new Response(JSON.stringify(successVectorizationDisabled));
+	}
 
-  return new Response(JSON.stringify(success));
+	return new Response(JSON.stringify(success));
 };
 
 export const aiConfigHandler = (
-  port: string,
-  isDisabled?: boolean,
-  isWebSearchDisabled?: boolean,
-  isVectorizationDisabled?: boolean,
+	port: string,
+	isDisabled?: boolean,
+	isWebSearchDisabled?: boolean,
+	isVectorizationDisabled?: boolean,
 ) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CONFIG}`, () => {
-    return aiConfigResolver(
-      isDisabled,
-      isWebSearchDisabled,
-      isVectorizationDisabled,
-    );
-  });
+	return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CONFIG}`, () => {
+		return aiConfigResolver(
+			isDisabled,
+			isWebSearchDisabled,
+			isVectorizationDisabled,
+		);
+	});
 };
