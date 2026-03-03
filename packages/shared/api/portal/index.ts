@@ -40,7 +40,7 @@ import {
   TLicenseQuota,
 } from "./types";
 import { Nullable } from "../../types";
-import { Encoder } from "../../utils/encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import { AI_TOOLS } from "../../constants";
 
 const baseURL = "/apisystem";
