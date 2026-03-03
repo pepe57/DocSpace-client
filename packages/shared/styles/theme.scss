@@ -216,6 +216,12 @@
   --empty-view-separator-color: #{$gray};
   --empty-view-action-secondary-color: #{$gray};
 
+  --info-bar-background: #{$gray-light};
+  --info-bar-text-color: #{$black};
+  --info-bar-title: #{$black};
+  --info-bar-description: #{$gray-text};
+  --info-bar-icon-fill: #{$light-status-warning};
+
   --error-container-background: #{$white};
   --error-container-body-text: #{$gray};
   --error-container-link-color: #{$link};
@@ -428,6 +434,12 @@
   --empty-view-description-color: #{$dark-gray-dark};
   --empty-view-separator-color: #{$gray};
   --empty-view-action-secondary-color: #{$gray-dark};
+
+  --info-bar-background: #{$dark-gray-light};
+  --info-bar-text-color: #{$white};
+  --info-bar-title: #{$white};
+  --info-bar-description: #{$dark-gray-dark};
+  --info-bar-icon-fill: #{$dark-status-warning};
 
   --error-container-background: #{$black};
   --error-container-body-text: #{$gray-dark};
@@ -1512,15 +1524,17 @@
   --payment-devider-color: #{$gray-light-mid};
   --payment-contact-container-text-color: #{$gray};
   --payment-contact-container-link-color: #{$light-gray-dark};
-
+  --payment-inactive-color: #{$gray};
   --warning-color: #{$light-error-status};
   --background-service-color: #{$light-gray-hover};
   --border-service-color: #{$gray-light-mid};
+  --services-additional-info: #{$gray};
+  --services-link-color: #{$gray};
 }
 
 .dark {
   --payment-background-color: #{$light-dark-gray-hover};
-  --payment-text-color: #{$dark-gray-dark};
+  --payment-text-color: #{$dark-gray-dark}; 
   --payment-credit-color: #{$dark-status-positive};
   --payment-icon-background: #{$gray-dark-mid};
   --payment-icon-color: #{$dark-gray-dark};
@@ -1528,11 +1542,13 @@
   --payment-devider-color: #{$gray-dark-mid};
   --payment-contact-container-text-color: #{$dark-gray-dark};
   --payment-contact-container-link-color: #{$gray-dark};
-
+  --payment-inactive-color: #{$gray-dark};
   --warning-color: #{$dark-error-status};
   --background-service-color: #{$light-dark-gray-hover};
   --border-service-color: #{$gray-dark-strong};
   --modal-dialog-border-color: #{$gray-dark-strong};
+  --services-additional-info: #{$gray-dark};
+  --services-link-color: #{$dark-gray-dark};
 }
 
 .light {
