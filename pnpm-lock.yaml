@@ -286,6 +286,9 @@ importers:
       '@vueless/storybook-dark-mode':
         specifier: ^10.0.0
         version: 10.0.7(storybook@10.2.12(@testing-library/dom@10.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
+      blocks:
+        specifier: link:@storybook/addon-docs/blocks
+        version: link:@storybook/addon-docs/blocks
       jsdom:
         specifier: ^27.4.0
         version: 27.4.0
