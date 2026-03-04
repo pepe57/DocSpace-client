@@ -511,8 +511,15 @@ class PaymentStore {
     return date ? formatDateUtil(date, format) : "";
   };
 
-  formatDate = (date: DateTime) => {
-    return formatDateUtil(date, "yyyy-MM-dd'T'HH:mm:ss", { locale: "en" });
+  formatDate = (date: DateTime, timeType?: "start" | "end") => {
+    if (!timeType) {
+      return formatDateUtil(date, "yyyy-MM-dd'T'HH:mm:ss", { locale: "en" });
+    }
+
+    const dateStr = formatDateUtil(date, "yyyy-MM-dd", { locale: "en" });
+    const timeTypeValue = timeType === "start" ? "00:00:00" : "23:59:59";
+
+    return `${dateStr}T${timeTypeValue}`;
   };
 
   fetchTransactionHistory = async (
@@ -528,8 +535,8 @@ class PaymentStore {
 
     try {
       const res = await getTransactionHistory(
-        startDate ? this.formatDate(startDate) : "",
-        endDate ? this.formatDate(endDate) : "",
+        startDate ? this.formatDate(startDate, "start") : "",
+        endDate ? this.formatDate(endDate, "end") : "",
         credit,
         debit,
         participantName,
