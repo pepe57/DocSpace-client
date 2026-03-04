@@ -97,7 +97,7 @@ import {
 } from "../api/settings/types";
 import { TopLoaderService } from "@docspace/ui-kit/components/top-loading-indicator";
 
-import { Encoder } from "./encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 import { checkIsSSR } from "@docspace/ui-kit/utils/device";
