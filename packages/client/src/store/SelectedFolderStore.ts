@@ -517,14 +517,16 @@ class SelectedFolderStore {
   }
 
   get roomQuotaLimit() {
-    return this.navigationPath.length >= 2
-      ? this.navigationPath[0].quotaLimit
+    const { navigationPath } = this;
+    return navigationPath.length >= 2
+      ? navigationPath[navigationPath.length - 2].quotaLimit
       : this.quotaLimit;
   }
 
   get roomUsedSpace() {
-    return this.navigationPath.length >= 2
-      ? this.navigationPath[0].usedSpace
+    const { navigationPath } = this;
+    return navigationPath.length >= 2
+      ? navigationPath[navigationPath.length - 2].usedSpace
       : this.usedSpace;
   }
 
