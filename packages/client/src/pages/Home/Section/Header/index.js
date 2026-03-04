@@ -187,6 +187,8 @@ const SectionHeaderContent = (props) => {
     isAIRoom,
     isAIAgent,
     isRoomStorageQuotaExceeded,
+    roomUsedSpace,
+    roomQuotaLimit,
     isKnowledgeTab,
     currentClientView,
     profile,
@@ -869,8 +871,8 @@ const SectionHeaderContent = (props) => {
     <Trans
       i18nKey="Common:RoomStorageLimitExceeded"
       values={{
-        usedSpace: getConvertedQuota(t, selectedFolder.usedSpace),
-        quotaLimit: getConvertedQuota(t, selectedFolder.quotaLimit),
+        usedSpace: getConvertedQuota(t, roomUsedSpace),
+        quotaLimit: getConvertedQuota(t, roomQuotaLimit),
       }}
       components={{ 1: <strong /> }}
     />
@@ -1190,6 +1192,8 @@ export default inject(
       isAIRoom,
       isAIAgent,
       isRoomStorageQuotaExceeded,
+      roomUsedSpace,
+      roomQuotaLimit,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1415,6 +1419,8 @@ export default inject(
       isAIRoom,
       isAIAgent,
       isRoomStorageQuotaExceeded,
+      roomUsedSpace,
+      roomQuotaLimit,
       isKnowledgeTab,
       contactsTab,
 

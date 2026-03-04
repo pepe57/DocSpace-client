@@ -87,7 +87,7 @@ export default inject(
   ({ treeFoldersStore, settingsStore, selectedFolderStore }: TStore) => {
     const { isRecycleBinFolder, isPersonalReadOnly } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
-    const { isRoomStorageQuotaExceeded, usedSpace, quotaLimit } =
+    const { isRoomStorageQuotaExceeded, roomUsedSpace, roomQuotaLimit } =
       selectedFolderStore;
 
     return {
@@ -95,8 +95,8 @@ export default inject(
       isRecycleBinFolder,
       currentDeviceType,
       isRoomStorageQuotaExceeded,
-      selectedFolderUsedSpace: usedSpace,
-      selectedFolderQuotaLimit: quotaLimit,
+      selectedFolderUsedSpace: roomUsedSpace,
+      selectedFolderQuotaLimit: roomQuotaLimit,
     };
   },
 )(observer(Warning));
