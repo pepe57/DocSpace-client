@@ -773,10 +773,6 @@
   --room-type-display-item-description-text: #{$gray-text};
 }
 
-.light {
-
-}
-
 .dark {
   --row-content-side-info-min-width: 160px;
   --row-content-side-info-margin: 0 6px;
@@ -792,7 +788,6 @@
 }
 
 .light {
-
   --row-content-side-info-min-width: 160px;
   --row-content-side-info-margin: 0 6px;
   --row-content-side-info-width: 160px;
@@ -1042,7 +1037,6 @@
   --catalog-profile-background: #{$light-dark-gray-hover};
   --catalog-profile-border-top: 1px solid #{$gray-dark-strong};
 }
-
 
 .light {
   --body-info-border-color: #{$gray-light-mid};
@@ -1534,7 +1528,7 @@
 
 .dark {
   --payment-background-color: #{$light-dark-gray-hover};
-  --payment-text-color: #{$dark-gray-dark}; 
+  --payment-text-color: #{$dark-gray-dark};
   --payment-credit-color: #{$dark-status-positive};
   --payment-icon-background: #{$gray-dark-mid};
   --payment-icon-color: #{$dark-gray-dark};
@@ -2493,7 +2487,7 @@
 .dark {
   --invite-panel-dropdown-separator: 1px solid #{$gray-dark-strong};
 
-  --files-panel-border-bottom: 1px solid #{$gray-light-mid};
+  --files-panel-border-bottom: 1px solid #{$gray-dark-strong};
   --files-panel-invite-text-color: #{$gray-dark};
 
   --invite-panel-icon-color: #{$gray-dark};
