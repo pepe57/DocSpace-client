@@ -131,6 +131,8 @@ const AIAgentViewComponent = ({
       {shouldRenderChat ? (
         <Activity mode={currentView === "chat" ? "visible" : "hidden"}>
           <Chat
+            useInternalScroll={false}
+            internalInit={false}
             userAvatar={userAvatar!}
             agentId={isViewLoading && !showHeaderLoader ? "-1" : roomId!}
             getIcon={getIcon!}
