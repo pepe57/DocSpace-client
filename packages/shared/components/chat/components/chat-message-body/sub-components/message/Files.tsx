@@ -59,20 +59,17 @@ const Files = ({ files, getIcon, reverse }: MessageFilesProps) => {
               const icon = getIcon(24, file.extension!);
               if (typeof icon === "string")
                 return (
-                  <ReactSVG
-                    src={icon}
-                    className={styles.filesListItemIcon}
-                  />
+                  <ReactSVG src={icon} className={styles.filesListItemIcon} />
                 );
-              if (icon) {
-                const Icon = icon;
-                return (
-                  <div className={styles.filesListItemIcon}>
-                    <Icon />
-                  </div>
-                );
-              }
-              return null;
+              // if (icon) {
+              //   const Icon = icon;
+              //   return (
+              //     <div className={styles.filesListItemIcon}>
+              //       <Icon />
+              //     </div>
+              //   );
+              // }
+              // return null;
             })()}
 
             <div className={styles.filesListItemInfo}>
