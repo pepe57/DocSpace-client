@@ -47,7 +47,7 @@ const FormsEditor = () => {
 
     const params = new URLSearchParams();
     params.set("fileId", editingFile.id.toString());
-    params.append("action", editorAction === "fill" ? "fill" : editorAction);
+    params.append("action", editorAction);
     if (requestToken) params.append("share", requestToken);
 
     return combineUrl(

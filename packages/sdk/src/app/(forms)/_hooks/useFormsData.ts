@@ -145,7 +145,7 @@ export default function useFormsData() {
     } finally {
       requestRunning.current = false;
     }
-  }, [getFolderId, formsListStore, formsSettingsStore.requestToken]);
+  }, [getFolderId, formsListStore, formsSettingsStore.requestToken, activeSection]);
 
   return { fetchSection, fetchMore };
 }
