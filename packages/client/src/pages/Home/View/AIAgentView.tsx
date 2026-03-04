@@ -51,6 +51,7 @@ import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import AiRoomStore from "SRC_DIR/store/AiRoomStore";
 import { useScroll } from "./useScroll";
+import styles from "./AIAgentView.module.scss";
 
 type Props = {
   currentView: string;
@@ -130,6 +131,7 @@ const AIAgentViewComponent = ({
       {shouldRenderChat ? (
         <Activity mode={currentView === "chat" ? "visible" : "hidden"}>
           <Chat
+            className={styles.aiAgentChat}
             useExternalScroll={true}
             externalScrollRef={scrollRef}
             internalInit={false}
