@@ -31,13 +31,16 @@ import { observer } from "mobx-react";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
+import { FormsSection } from "@/types/forms";
+
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 
 const FormsEditor = () => {
-  const { editingFile, editorAction, closeEditor } =
+  const { editingFile, editorAction, closeEditor, setActiveSection } =
     useFormsNavigationStore();
   const { requestToken } = useFormsSettingsStore();
+  const iframeRef = React.useRef<HTMLIFrameElement>(null);
 
   const editorUrl = React.useMemo(() => {
     if (!editingFile) return "";
@@ -67,10 +70,29 @@ const FormsEditor = () => {
     return () => window.removeEventListener("message", onMessage);
   }, [closeEditor]);
 
+  React.useEffect(() => {
+    if (!editingFile) return;
+
+    const interval = setInterval(() => {
+      try {
+        const href = iframeRef.current?.contentWindow?.location.href;
+        if (href && href.includes("completed-form")) {
+          closeEditor();
+          setActiveSection(FormsSection.CompletedForms);
+        }
+      } catch {
+        // cross-origin — ignore
+      }
+    }, 200);
+
+    return () => clearInterval(interval);
+  }, [editingFile, closeEditor, setActiveSection]);
+
   if (!editingFile || !editorUrl) return null;
 
   return (
     <iframe
+      ref={iframeRef}
       src={editorUrl}
       style={{
         width: "100%",

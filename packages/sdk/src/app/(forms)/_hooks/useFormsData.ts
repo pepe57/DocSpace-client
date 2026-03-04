@@ -30,6 +30,7 @@ import { useCallback, useRef } from "react";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import type { TFile } from "@docspace/shared/api/files/types";
 import { FilterType } from "@docspace/shared/enums";
 
 import { PAGE_COUNT } from "@/utils/constants";
@@ -63,6 +64,16 @@ export default function useFormsData() {
     [activeSection, formsSettingsStore],
   );
 
+  const filterByFolder = (
+    files: TFile[],
+    folderId: string | number,
+    section: FormsSection,
+  ) => {
+    if (section !== FormsSection.FormsToFill) return files;
+    const id = Number(folderId);
+    return files.filter((f) => f.folderId === id);
+  };
+
   const fetchSection = useCallback(
     async (section?: FormsSection) => {
       if (requestRunning.current) return;
@@ -75,6 +86,8 @@ export default function useFormsData() {
       }
 
       formsListStore.setIsLoading(true);
+
+      const sec = section ?? activeSection;
 
       try {
         const filter = FilesFilter.getDefault();
@@ -89,7 +102,8 @@ export default function useFormsData() {
           formsSettingsStore.requestToken || undefined,
         );
 
-        formsListStore.setItems(res.files, res.total);
+        const files = filterByFolder(res.files, folderId, sec);
+        formsListStore.setItems(files, files.length);
         currentPage.current = 0;
       } catch {
         formsListStore.setItems([], 0);
@@ -125,7 +139,8 @@ export default function useFormsData() {
         formsSettingsStore.requestToken || undefined,
       );
 
-      formsListStore.appendItems(res.files, res.total);
+      const files = filterByFolder(res.files, folderId, activeSection);
+      formsListStore.appendItems(files, formsListStore.items.length + files.length);
       currentPage.current += 1;
     } finally {
       requestRunning.current = false;
