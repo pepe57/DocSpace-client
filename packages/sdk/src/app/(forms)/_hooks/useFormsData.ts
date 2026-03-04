@@ -69,7 +69,7 @@ export default function useFormsData() {
     folderId: string | number,
     section: FormsSection,
   ) => {
-    if (section !== FormsSection.FormsToFill) return files;
+    if (section === FormsSection.CompletedForms) return files;
     const id = Number(folderId);
     return files.filter((f) => f.folderId === id);
   };
