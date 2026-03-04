@@ -47,7 +47,6 @@ import useNewFormActions from "../../_hooks/useNewFormActions";
 import FormsSidebar from "../sidebar";
 import FormsGrid from "../forms-grid";
 import FormsEditor from "../forms-editor";
-import EditorToolbar from "../forms-editor/EditorToolbar";
 
 const NewFormButton = dynamic(() => import("../sidebar/NewFormButton"), {
   ssr: false,
@@ -115,52 +114,42 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const renderHeader = () => {
     if (isEditing) {
       return (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "100%",
-          }}
-        >
-          <div style={{ flex: "0 1 auto" }}>
-            <Navigation
-              showText
-              isRootFolder={false}
-              canCreate={false}
-              title={editingFile?.title || ""}
-              rootRoomTitle=""
-              isDesktop={currentDeviceType === DeviceType.desktop}
-              isFrame
-              navigationItems={navigationItems}
-              getContextOptionsPlus={() => []}
-              getContextOptionsFolder={() => []}
-              onClickFolder={() => closeEditor()}
-              isTrashFolder={false}
-              isEmptyPage={false}
-              isEmptyFilesList={false}
-              onBackToParentFolder={() => closeEditor()}
-              showRootFolderTitle={false}
-              withLogo=""
-              burgerLogo=""
-              withMenu={false}
-              currentDeviceType={currentDeviceType}
-              titleIcon=""
-              titleIconTooltip=""
-              showNavigationButton={false}
-              isCurrentFolderInfo={false}
-              showTitle
-              isPublicRoom={false}
-              isRoom={false}
-              isInfoPanelVisible={false}
-              toggleInfoPanel={() => {}}
-              onLogoClick={() => {}}
-              hideInfoPanel={() => {}}
-              clearTrash={() => {}}
-              showFolderInfo={() => {}}
-            />
-          </div>
-          <EditorToolbar />
+        <div style={{ flex: "0 1 auto" }}>
+          <Navigation
+            showText
+            isRootFolder={false}
+            canCreate={false}
+            title={editingFile?.title || ""}
+            rootRoomTitle=""
+            isDesktop={currentDeviceType === DeviceType.desktop}
+            isFrame
+            navigationItems={navigationItems}
+            getContextOptionsPlus={() => []}
+            getContextOptionsFolder={() => []}
+            onClickFolder={() => closeEditor()}
+            isTrashFolder={false}
+            isEmptyPage={false}
+            isEmptyFilesList={false}
+            onBackToParentFolder={() => closeEditor()}
+            showRootFolderTitle={false}
+            withLogo=""
+            burgerLogo=""
+            withMenu={false}
+            currentDeviceType={currentDeviceType}
+            titleIcon=""
+            titleIconTooltip=""
+            showNavigationButton={false}
+            isCurrentFolderInfo={false}
+            showTitle
+            isPublicRoom={false}
+            isRoom={false}
+            isInfoPanelVisible={false}
+            toggleInfoPanel={() => {}}
+            onLogoClick={() => {}}
+            hideInfoPanel={() => {}}
+            clearTrash={() => {}}
+            showFolderInfo={() => {}}
+          />
         </div>
       );
     }

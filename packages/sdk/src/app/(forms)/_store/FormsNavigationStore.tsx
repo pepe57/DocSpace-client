@@ -53,10 +53,6 @@ class FormsNavigationStore {
     this.editorAction = action;
   };
 
-  setEditorAction = (action: EditorAction) => {
-    this.editorAction = action;
-  };
-
   closeEditor = () => {
     this.editingFile = null;
     this.editorAction = "fill";

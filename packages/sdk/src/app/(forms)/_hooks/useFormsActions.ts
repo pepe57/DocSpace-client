@@ -28,7 +28,6 @@
 
 import { useCallback } from "react";
 
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { copyShareLink } from "@docspace/shared/utils/copy";
@@ -41,13 +40,11 @@ import type { EditorAction } from "../_store/FormsNavigationStore";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
-import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 
 type UseFormsActionsProps = { t: TTranslation };
 
 export default function useFormsActions({ t }: UseFormsActionsProps) {
   const { sdkConfig } = useSDKConfig();
-  const { requestToken } = useFormsSettingsStore();
   const { openEditor } = useFormsNavigationStore();
 
   const openForm = useCallback(
@@ -78,22 +75,6 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
     [t],
   );
 
-  const downloadForm = useCallback(
-    (file: TFile) => {
-      const searchParams = new URLSearchParams();
-      searchParams.set("fileId", file.id.toString());
-      if (requestToken) searchParams.append("share", requestToken);
-
-      const url = combineUrl(
-        window.location.origin,
-        `/products/files/httphandlers/filehandler.ashx?action=download&${searchParams.toString()}`,
-      );
-
-      window.open(url, "_self");
-    },
-    [requestToken],
-  );
-
   const deleteFromList = useCallback(
     (fileId: number) => {
       frameCallEvent({
@@ -104,5 +85,5 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
     [],
   );
 
-  return { openForm, shareForm, downloadForm, deleteFromList };
+  return { openForm, shareForm, deleteFromList };
 }

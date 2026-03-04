@@ -1130,7 +1130,6 @@
   "Upload": "Upload",
   "AnyFiles": "Any files",
   "Open": "Open",
-  "OpenFileLocation": "Open file location",
   "SingleUploadWarning": "Only one file or folder can be uploaded at a time. Please select a single item.",
   "DropzoneFoldersSecondary": "or drop folders here",
   "DropzoneFolderSecondary": "or drop folder here",

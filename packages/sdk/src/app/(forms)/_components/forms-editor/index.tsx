@@ -28,26 +28,16 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
-import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
-
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
-import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
-import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-import useFormsActions from "../../_hooks/useFormsActions";
 
 const FormsEditor = () => {
-  const { t } = useTranslation(["Common"]);
   const { editingFile, editorAction, closeEditor } =
     useFormsNavigationStore();
   const { requestToken } = useFormsSettingsStore();
-  const { downloadForm, deleteFromList } = useFormsActions({ t });
 
   const editorUrl = React.useMemo(() => {
     if (!editingFile) return "";
@@ -77,88 +67,19 @@ const FormsEditor = () => {
     return () => window.removeEventListener("message", onMessage);
   }, [closeEditor]);
 
-  const getContextMenuModel = React.useCallback(() => {
-    if (!editingFile) return [];
-
-    return [
-      {
-        id: "option_download",
-        key: "download",
-        label: t("Common:Download"),
-        icon: DownloadReactSvgUrl,
-        onClick: () => downloadForm(editingFile),
-      },
-      {
-        id: "option_open-location",
-        key: "open-location",
-        label: t("Common:OpenFileLocation"),
-        icon: CatalogFolderReactSvgUrl,
-        onClick: () => {
-          window.open(
-            combineUrl(
-              window.location.origin,
-              `/products/files/#/rooms/shared/${editingFile.folderId}/filter?folder=${editingFile.folderId}`,
-            ),
-            "_blank",
-          );
-        },
-      },
-      {
-        id: "option_delete",
-        key: "delete",
-        label: t("Common:Delete"),
-        icon: RemoveReactSvgUrl,
-        onClick: () => {
-          deleteFromList(editingFile.id);
-          closeEditor();
-        },
-      },
-    ];
-  }, [editingFile, t, downloadForm, deleteFromList, closeEditor]);
-
   if (!editingFile || !editorUrl) return null;
 
   return (
-    <div
+    <iframe
+      src={editorUrl}
       style={{
-        display: "flex",
-        flexDirection: "column",
         width: "100%",
         height: "100%",
+        border: "none",
       }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          padding: "4px 0",
-          flexShrink: 0,
-        }}
-      >
-        <Heading level={HeadingLevel.h3} truncate>
-          {editingFile.title}
-        </Heading>
-        <ContextMenuButton
-          getData={getContextMenuModel}
-          directionX="right"
-          directionY="bottom"
-          size={16}
-        />
-      </div>
-
-      <iframe
-        src={editorUrl}
-        style={{
-          width: "100%",
-          flex: 1,
-          border: "none",
-          borderRadius: "6px",
-        }}
-        allow="autoplay; camera; microphone; display-capture; clipboard-write"
-        title="Form Editor"
-      />
-    </div>
+      allow="autoplay; camera; microphone; display-capture; clipboard-write"
+      title="Form Editor"
+    />
   );
 };
 
