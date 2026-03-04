@@ -3591,7 +3591,7 @@ packages:
     os: [win32]
 
   '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz':
-    resolution: {integrity: sha512-21LcYXnFmz1ufRMNPIhiPEtHdGrPphMpRZ9absNmFcjKd97xCJtBSpBys3cdJv/rlGp+hp2A3vzxVofY5xaDvQ==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz}
+    resolution: {integrity: sha512-3tDOwn6u7RyF8BpHhwgO5uQQra1vh8tZqAOXHqWB29lI7+g5hWAPfpe8OfTX7Vq4V/twphaZEVG5OBPvH5dM1Q==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz}
     version: 3.6.0
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz':
