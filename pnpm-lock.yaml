@@ -313,6 +313,9 @@ importers:
       '@vueless/storybook-dark-mode':
         specifier: ^10.0.0
         version: 10.0.7(storybook@10.2.12(@testing-library/dom@10.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
+      blocks:
+        specifier: link:@storybook/addon-docs/blocks
+        version: link:@storybook/addon-docs/blocks
       jsdom:
         specifier: ^27.4.0
         version: 27.4.0
@@ -3588,7 +3591,7 @@ packages:
     os: [win32]
 
   '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz':
-    resolution: {integrity: sha512-21LcYXnFmz1ufRMNPIhiPEtHdGrPphMpRZ9absNmFcjKd97xCJtBSpBys3cdJv/rlGp+hp2A3vzxVofY5xaDvQ==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz}
+    resolution: {integrity: sha512-3tDOwn6u7RyF8BpHhwgO5uQQra1vh8tZqAOXHqWB29lI7+g5hWAPfpe8OfTX7Vq4V/twphaZEVG5OBPvH5dM1Q==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz}
     version: 3.6.0
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz':

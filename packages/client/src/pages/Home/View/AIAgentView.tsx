@@ -72,7 +72,6 @@ type Props = {
   chatSettings?: SelectedFolderStore["chatSettings"];
   isAdmin?: AuthStore["isAdmin"];
   aiConfig?: SettingsStore["aiConfig"];
-  folderFormValidation?: RegExp;
   canUseChat?: AccessRightsStore["canUseChat"];
 
   setMediaViewerVisible?: MediaViewerDataStore["setMediaViewerVisible"];
@@ -98,7 +97,6 @@ const AIAgentViewComponent = ({
   isAdmin,
   aiConfig,
   getResultStorageId,
-  folderFormValidation,
   canUseChat,
   setMediaViewerVisible,
   setAiPlaylistImages,
@@ -148,7 +146,6 @@ const AIAgentViewComponent = ({
             modelAliases={aiConfig?.modelAliases}
             standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
             getResultStorageId={getResultStorageId}
-            folderFormValidation={folderFormValidation!}
             multimodal={chatSettings?.multimodal}
             setMediaViewerVisible={setMediaViewerVisible}
             setAiPlaylistImages={setAiPlaylistImages}
@@ -197,7 +194,7 @@ export const AIAgentView = inject(
 
     const { isAdmin } = authStore;
 
-    const { aiConfig, folderFormValidation } = settingsStore;
+    const { aiConfig } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
 
@@ -213,7 +210,6 @@ export const AIAgentView = inject(
       chatSettings,
       isAdmin,
       aiConfig,
-      folderFormValidation,
       canUseChat,
 
       setMediaViewerVisible,
