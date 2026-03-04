@@ -29,68 +29,70 @@ import { headers } from "next/headers";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FilterType } from "@docspace/shared/enums";
 import type {
-  TFilesSettings,
-  TGetFolder,
+	TFilesSettings,
+	TGetFolder,
 } from "@docspace/shared/api/files/types";
 
 import { getFilesSettings } from "@/api/files";
 import { getFormsFolder } from "@/api/forms";
 import {
-  MY_FORMS_FOLDER_HEADER,
-  FORMS_TO_FILL_FOLDER_HEADER,
-  COMPLETED_FORMS_FOLDER_HEADER,
-  REQUEST_TOKEN_HEADER,
-  ROOM_ID_HEADER,
-  PAGE_COUNT,
+	MY_FORMS_FOLDER_HEADER,
+	FORMS_TO_FILL_FOLDER_HEADER,
+	COMPLETED_FORMS_FOLDER_HEADER,
+	REQUEST_TOKEN_HEADER,
+	ROOM_ID_HEADER,
+	PAGE_COUNT,
 } from "@/utils/constants";
 
 import FormsPage from "./page.client";
 
 export default async function Forms({
-  searchParams,
+	searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string }>;
+	searchParams: Promise<{ [key: string]: string }>;
 }) {
-  const hdrs = await headers();
-  const params = await searchParams;
+	const hdrs = await headers();
+	const params = await searchParams;
 
-  const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
-  const myFormsFolderId =
-    hdrs.get(MY_FORMS_FOLDER_HEADER) || params.myFormsFolderId || "";
-  const formsToFillFolderId =
-    hdrs.get(FORMS_TO_FILL_FOLDER_HEADER) || params.formsToFillFolderId || "";
-  const completedFormsFolderId =
-    hdrs.get(COMPLETED_FORMS_FOLDER_HEADER) ||
-    params.completedFormsFolderId ||
-    "";
-  const requestToken =
-    hdrs.get(REQUEST_TOKEN_HEADER) || params.requestToken || "";
+	const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
+	const myFormsFolderId =
+		hdrs.get(MY_FORMS_FOLDER_HEADER) || params.myFormsFolderId || "";
+	const formsToFillFolderId =
+		hdrs.get(FORMS_TO_FILL_FOLDER_HEADER) || params.formsToFillFolderId || "";
+	const completedFormsFolderId =
+		hdrs.get(COMPLETED_FORMS_FOLDER_HEADER) ||
+		params.completedFormsFolderId ||
+		"";
+	const requestToken =
+		hdrs.get(REQUEST_TOKEN_HEADER) || params.requestToken || "";
 
-  const filter = FilesFilter.getDefault();
-  filter.pageCount = PAGE_COUNT;
-  filter.filterType = FilterType.PDFForm;
+	console.log("====", requestToken);
 
-  let filesSettings: TFilesSettings | undefined;
-  let initialFolderData: TGetFolder | undefined;
+	const filter = FilesFilter.getDefault();
+	filter.pageCount = PAGE_COUNT;
+	filter.filterType = FilterType.PDFForm;
 
-  if (myFormsFolderId) {
-    [filesSettings, initialFolderData] = await Promise.all([
-      getFilesSettings(),
-      getFormsFolder(myFormsFolderId, filter, requestToken),
-    ]);
-  } else {
-    filesSettings = await getFilesSettings();
-  }
+	let filesSettings: TFilesSettings | undefined;
+	let initialFolderData: TGetFolder | undefined;
 
-  return (
-    <FormsPage
-      roomId={roomId}
-      myFormsFolderId={myFormsFolderId}
-      formsToFillFolderId={formsToFillFolderId}
-      completedFormsFolderId={completedFormsFolderId}
-      requestToken={requestToken}
-      filesSettings={filesSettings!}
-      initialFolderData={initialFolderData}
-    />
-  );
+	if (myFormsFolderId) {
+		[filesSettings, initialFolderData] = await Promise.all([
+			getFilesSettings(),
+			getFormsFolder(myFormsFolderId, filter, requestToken),
+		]);
+	} else {
+		filesSettings = await getFilesSettings();
+	}
+
+	return (
+		<FormsPage
+			roomId={roomId}
+			myFormsFolderId={myFormsFolderId}
+			formsToFillFolderId={formsToFillFolderId}
+			completedFormsFolderId={completedFormsFolderId}
+			requestToken={requestToken}
+			filesSettings={filesSettings!}
+			initialFolderData={initialFolderData}
+		/>
+	);
 }

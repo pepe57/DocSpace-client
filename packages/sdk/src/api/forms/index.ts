@@ -29,8 +29,8 @@ import { headers } from "next/headers";
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import type { TGetFolder } from "@docspace/shared/api/files/types";
 import {
-  checkFilterInstance,
-  decodeDisplayName,
+	checkFilterInstance,
+	decodeDisplayName,
 } from "@docspace/shared/utils/common";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FolderType } from "@docspace/shared/enums";
@@ -39,61 +39,61 @@ import { REQUEST_TOKEN_HEADER } from "@/utils/constants";
 import { logger } from "@/../logger.mjs";
 
 export async function getFormsFolder(
-  folderId: string | number,
-  filter: FilesFilter,
-  requestToken?: string,
+	folderId: string | number,
+	filter: FilesFilter,
+	requestToken?: string,
 ): Promise<TGetFolder> {
-  logger.debug(`Start GET forms folder /files/${folderId}`);
+	logger.debug(`Start GET forms folder /files/${folderId}`);
 
-  try {
-    const hdrs = await headers();
-    const token = requestToken || hdrs.get(REQUEST_TOKEN_HEADER) || "";
+	try {
+		const hdrs = await headers();
+		const token = requestToken || hdrs.get(REQUEST_TOKEN_HEADER) || "";
 
-    let encodedFolderId = folderId;
+		let encodedFolderId = folderId;
 
-    if (encodedFolderId && typeof encodedFolderId === "string") {
-      encodedFolderId = encodeURIComponent(
-        encodedFolderId.replace(/\\\\/g, "\\"),
-      );
-    }
+		if (encodedFolderId && typeof encodedFolderId === "string") {
+			encodedFolderId = encodeURIComponent(
+				encodedFolderId.replace(/\\\\/g, "\\"),
+			);
+		}
 
-    let params: string | number = encodedFolderId;
+		let params: string | number = encodedFolderId;
 
-    if (filter) {
-      checkFilterInstance(filter, FilesFilter);
-      params = `${encodedFolderId}?${filter.toApiUrlParams()}`;
-    }
+		if (filter) {
+			checkFilterInstance(filter, FilesFilter);
+			params = `${encodedFolderId}?${filter.toApiUrlParams()}`;
+		}
 
-    const tokenHeader: [string, string] = token
-      ? ["Request-Token", token]
-      : ["", ""];
+		const tokenHeader: [string, string] = token
+			? ["Authorization", `Bearer ${token}`]
+			: ["", ""];
 
-    const [req] = await createRequest(
-      [`/files/${params}`],
-      [tokenHeader],
-      "GET",
-    );
+		const [req] = await createRequest(
+			[`/files/${params}`],
+			[tokenHeader],
+			"GET",
+		);
 
-    const res = await fetch(req, { next: { revalidate: 300 } });
+		const res = await fetch(req, { next: { revalidate: 300 } });
 
-    if (!res.ok) {
-      logger.error(`GET /files/${params} failed: ${res.status}`);
-      throw new Error("Failed to get forms folder");
-    }
+		if (!res.ok) {
+			logger.error(`GET /files/${params} failed: ${res.status}`);
+			throw new Error("Failed to get forms folder");
+		}
 
-    const resJson = await res.json();
-    const folder = resJson.response as TGetFolder;
+		const resJson = await res.json();
+		const folder = resJson.response as TGetFolder;
 
-    folder.files = decodeDisplayName(folder.files);
-    folder.folders = decodeDisplayName(folder.folders);
+		folder.files = decodeDisplayName(folder.files);
+		folder.folders = decodeDisplayName(folder.folders);
 
-    folder.current.isArchive =
-      !!folder.current.roomType &&
-      folder.current.rootFolderType === FolderType.Archive;
+		folder.current.isArchive =
+			!!folder.current.roomType &&
+			folder.current.rootFolderType === FolderType.Archive;
 
-    return folder;
-  } catch (error) {
-    logger.error(`Error in getFormsFolder: ${error}`);
-    throw error;
-  }
+		return folder;
+	} catch (error) {
+		logger.error(`Error in getFormsFolder: ${error}`);
+		throw error;
+	}
 }
