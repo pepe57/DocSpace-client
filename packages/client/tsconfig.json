@@ -6,10 +6,13 @@
     "jsx": "react-jsx",
     "paths": {
       "PUBLIC_DIR/*": ["../../public/*"],
+      "ASSETS_DIR/*": ["./public/*"],
       "SRC_DIR/*": ["./src/*"],
-      "PACKAGE_FILE": ["./package.json"]
+      "PACKAGE_FILE": ["./package.json"],
+      "COMMON_DIR/*": ["../common/*"]
     },
-    "target": "esnext"
+    "target": "esnext",
+    "types": ["vite/client"]
   },
-  "include": ["**/*.ts", "**/*.tsx", "types/**/*.d.ts"]
+  "include": ["**/*.ts", "**/*.tsx", "types/**/*.d.ts", "vite.config.ts"]
 }
