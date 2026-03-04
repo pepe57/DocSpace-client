@@ -1130,6 +1130,7 @@
   "Upload": "Upload",
   "AnyFiles": "Any files",
   "Open": "Open",
+  "OpenFileLocation": "Open file location",
   "SingleUploadWarning": "Only one file or folder can be uploaded at a time. Please select a single item.",
   "DropzoneFoldersSecondary": "or drop folders here",
   "DropzoneFolderSecondary": "or drop folder here",
@@ -1138,5 +1139,16 @@
   "FileSizeExceedsLimit": "The file is too large. The maximum size is {{maxSize}}.",
   "FolderSizeExceedsLimit": "The folder is too large. The maximum size is {{maxSize}}.",
   "FilesSizeExceedsLimit": "The files are too large. The maximum size is {{maxSize}}.",
-  "FoldersSizeExceedsLimit": "The folders are too large. The maximum size is {{maxSize}}."
+  "FoldersSizeExceedsLimit": "The folders are too large. The maximum size is {{maxSize}}.",
+  "MyForms": "My forms",
+  "FormsToFill": "Forms to fill",
+  "CompletedForms": "Completed forms",
+  "ChooseFromPersonalFiles": "Choose from Personal files",
+  "CreateFromDocx": "Create from DOCX file",
+  "CreateFromTemplate": "Create from Template",
+  "DeleteFromList": "Delete from list",
+  "EmptyMyForms": "You don't have any forms yet. Create or upload a form to get started.",
+  "EmptyFormsToFill": "There are no forms to fill at the moment.",
+  "EmptyCompletedForms": "There are no completed forms yet.",
+  "ErrorOccurred": "An error occurred"
 }

@@ -24,25 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const PAGE_COUNT = 100;
+"use client";
 
-export const THEME_HEADER = "x-sdk-config-theme";
-export const LOCALE_HEADER = "x-sdk-config-locale";
-export const FILTER_HEADER = "x-sdk-config-filter";
-export const SHARE_KEY_HEADER = "x-sdk-config-share-key";
-export const PATHNAME_HEADER = "x-pathname";
+import React from "react";
+import { makeAutoObservable } from "mobx";
 
-export const PUBLIC_ROOM_TITLE_HEADER = "x-public-room-title";
+import type { TFile } from "@docspace/shared/api/files/types";
 
-export const ROOM_ID_HEADER = "x-sdk-config-room-id";
-export const MY_FORMS_FOLDER_HEADER = "x-sdk-config-my-forms-folder";
-export const FORMS_TO_FILL_FOLDER_HEADER = "x-sdk-config-forms-to-fill-folder";
-export const COMPLETED_FORMS_FOLDER_HEADER =
-  "x-sdk-config-completed-forms-folder";
-export const REQUEST_TOKEN_HEADER = "x-sdk-config-request-token";
+import { FormsSection } from "@/types/forms";
 
-export const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;
-export const DEFAULT_MAX_UPLOAD_THREAD_COUNT = 3;
-export const DEFAULT_MAX_UPLOAD_FILES_COUNT = 2;
+export type EditorAction = "view" | "edit" | "fill";
 
-export const MAX_VISIBLE_EXTENSIONS = 5;
+class FormsNavigationStore {
+  activeSection: FormsSection = FormsSection.MyForms;
+  editingFile: TFile | null = null;
+  editorAction: EditorAction = "fill";
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  setActiveSection = (section: FormsSection) => {
+    this.activeSection = section;
+  };
+
+  openEditor = (file: TFile, action: EditorAction = "fill") => {
+    this.editingFile = file;
+    this.editorAction = action;
+  };
+
+  setEditorAction = (action: EditorAction) => {
+    this.editorAction = action;
+  };
+
+  closeEditor = () => {
+    this.editingFile = null;
+    this.editorAction = "fill";
+  };
+}
+
+export const FormsNavigationStoreContext =
+  React.createContext<FormsNavigationStore>(new FormsNavigationStore());
+
+export const FormsNavigationStoreContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const store = React.useMemo(() => new FormsNavigationStore(), []);
+  return (
+    <FormsNavigationStoreContext.Provider value={store}>
+      {children}
+    </FormsNavigationStoreContext.Provider>
+  );
+};
+
+export const useFormsNavigationStore = () => {
+  return React.useContext(FormsNavigationStoreContext);
+};

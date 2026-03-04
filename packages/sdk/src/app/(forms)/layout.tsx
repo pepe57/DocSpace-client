@@ -24,25 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const PAGE_COUNT = 100;
+import { FormsStoreProviders } from "./_store";
 
-export const THEME_HEADER = "x-sdk-config-theme";
-export const LOCALE_HEADER = "x-sdk-config-locale";
-export const FILTER_HEADER = "x-sdk-config-filter";
-export const SHARE_KEY_HEADER = "x-sdk-config-share-key";
-export const PATHNAME_HEADER = "x-pathname";
-
-export const PUBLIC_ROOM_TITLE_HEADER = "x-public-room-title";
-
-export const ROOM_ID_HEADER = "x-sdk-config-room-id";
-export const MY_FORMS_FOLDER_HEADER = "x-sdk-config-my-forms-folder";
-export const FORMS_TO_FILL_FOLDER_HEADER = "x-sdk-config-forms-to-fill-folder";
-export const COMPLETED_FORMS_FOLDER_HEADER =
-  "x-sdk-config-completed-forms-folder";
-export const REQUEST_TOKEN_HEADER = "x-sdk-config-request-token";
-
-export const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;
-export const DEFAULT_MAX_UPLOAD_THREAD_COUNT = 3;
-export const DEFAULT_MAX_UPLOAD_FILES_COUNT = 2;
-
-export const MAX_VISIBLE_EXTENSIONS = 5;
+export default async function FormsLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <main style={{ width: "100%", height: "100%" }}>
+      <FormsStoreProviders>{children}</FormsStoreProviders>
+    </main>
+  );
+}
