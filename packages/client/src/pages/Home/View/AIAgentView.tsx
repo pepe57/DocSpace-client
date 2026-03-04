@@ -47,10 +47,10 @@ import type FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import type SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
-import type DialogsStore from "SRC_DIR/store/DialogsStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import AiRoomStore from "SRC_DIR/store/AiRoomStore";
+import { useScroll } from "./useScroll";
 
 type Props = {
   currentView: string;
@@ -102,6 +102,7 @@ const AIAgentViewComponent = ({
   setAiPlaylistImages,
 }: Props) => {
   const navigate = useNavigate();
+  const scrollRef = useScroll();
 
   const goToWebSearchSettings = useCallback(() => {
     navigate("/portal-settings/ai-settings/search");
@@ -129,7 +130,8 @@ const AIAgentViewComponent = ({
       {shouldRenderChat ? (
         <Activity mode={currentView === "chat" ? "visible" : "hidden"}>
           <Chat
-            useInternalScroll={false}
+            useExternalScroll={true}
+            externalScrollRef={scrollRef}
             internalInit={false}
             userAvatar={userAvatar!}
             agentId={isViewLoading && !showHeaderLoader ? "-1" : roomId!}
