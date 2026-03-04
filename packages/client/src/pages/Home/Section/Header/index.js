@@ -80,6 +80,7 @@ import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHeader";
 
 import { useContactsHeader } from "./useContacts";
+import { Text } from "@docspace/ui-kit/components";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -871,10 +872,10 @@ const SectionHeaderContent = (props) => {
     <Trans
       i18nKey="Common:RoomStorageLimitExceeded"
       values={{
-        usedSpace: getConvertedQuota(t, roomUsedSpace),
+        usedSpace: getConvertedQuota(t, roomUsedSpace, true),
         quotaLimit: getConvertedQuota(t, roomQuotaLimit),
       }}
-      components={{ 1: <strong /> }}
+      components={{ 1: <Text as="span" fontWeight="600" /> }}
     />
   ) : (
     ""

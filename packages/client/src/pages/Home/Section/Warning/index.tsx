@@ -32,6 +32,7 @@ import WarningComponent from "@docspace/ui-kit/components/navigation/sub-compone
 import { DeviceType } from "@docspace/shared/enums";
 import { getConvertedQuota } from "@docspace/shared/utils/common";
 import WarningQuotaExceededUrl from "PUBLIC_DIR/images/warning.quota-exceeded.react.svg?url";
+import { Text } from "@docspace/ui-kit/components";
 
 type InjectedProps = {
   isPersonalReadOnly: boolean;
@@ -64,10 +65,10 @@ const Warning = ({
     <Trans
       i18nKey="Common:RoomStorageLimitExceeded"
       values={{
-        usedSpace: getConvertedQuota(t, selectedFolderUsedSpace!),
+        usedSpace: getConvertedQuota(t, selectedFolderUsedSpace!, true),
         quotaLimit: getConvertedQuota(t, selectedFolderQuotaLimit!),
       }}
-      components={{ 1: <strong /> }}
+      components={{ 1: <Text as="span" fontWeight="600" /> }}
     />
   ) : (
     ""
