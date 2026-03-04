@@ -99,12 +99,25 @@ const FilesList = ({
                 style={{ maxWidth: "300px" }}
                 data-testid="files-list-item"
               >
-                {!isImage && (
-                  <ReactSVG
-                    src={getIcon(24, file.fileExst ?? "")}
-                    className={styles.filesListItemIcon}
-                  />
-                )}
+                {!isImage && (() => {
+                  const icon = getIcon(24, file.fileExst ?? "");
+                  if (typeof icon === "string")
+                    return (
+                      <ReactSVG
+                        src={icon}
+                        className={styles.filesListItemIcon}
+                      />
+                    );
+                  if (icon) {
+                    const IconComponent = icon;
+                    return (
+                      <div className={styles.filesListItemIcon}>
+                        <IconComponent />
+                      </div>
+                    );
+                  }
+                  return null;
+                })()}
 
                 <div className={styles.filesListItemInfo}>
                   {isImage ? (
