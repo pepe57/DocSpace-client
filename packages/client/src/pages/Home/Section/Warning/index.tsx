@@ -25,47 +25,78 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
 import { DeviceType } from "@docspace/shared/enums";
+import { getConvertedQuota } from "@docspace/shared/utils/common";
+import WarningQuotaExceededUrl from "PUBLIC_DIR/images/warning.quota-exceeded.react.svg?url";
 
 type InjectedProps = {
   isPersonalReadOnly: boolean;
   isRecycleBinFolder: boolean;
   currentDeviceType: DeviceType;
+  isRoomStorageQuotaExceeded: boolean;
+  selectedFolderUsedSpace?: number;
+  selectedFolderQuotaLimit?: number;
 };
 
 const Warning = ({
   isPersonalReadOnly = false,
   isRecycleBinFolder = false,
   currentDeviceType = DeviceType.desktop,
+  isRoomStorageQuotaExceeded,
+  selectedFolderUsedSpace,
+  selectedFolderQuotaLimit,
 }: InjectedProps) => {
   const { t } = useTranslation(["Files", "Common"]);
 
   if (currentDeviceType === DeviceType.desktop) return null;
 
-  const warningText = isRecycleBinFolder
-    ? t("TrashAutoDeleteWarning", {
-        sectionName: t("Common:TrashSection"),
-      })
-    : isPersonalReadOnly
-      ? t("PersonalFolderErasureWarning")
-      : "";
+  const warningText = isRecycleBinFolder ? (
+    t("TrashAutoDeleteWarning", {
+      sectionName: t("Common:TrashSection"),
+    })
+  ) : isPersonalReadOnly ? (
+    t("PersonalFolderErasureWarning")
+  ) : isRoomStorageQuotaExceeded ? (
+    <Trans
+      i18nKey="Common:RoomStorageLimitExceeded"
+      values={{
+        usedSpace: getConvertedQuota(t, selectedFolderUsedSpace!),
+        quotaLimit: getConvertedQuota(t, selectedFolderQuotaLimit!),
+      }}
+      components={{ 1: <strong /> }}
+    />
+  ) : (
+    ""
+  );
 
   if (!warningText) return null;
 
-  return <WarningComponent title={warningText} />;
+  return (
+    <WarningComponent
+      title={warningText}
+      icon={isRoomStorageQuotaExceeded ? WarningQuotaExceededUrl : undefined}
+    />
+  );
 };
 
-export default inject(({ treeFoldersStore, settingsStore }: TStore) => {
-  const { isRecycleBinFolder, isPersonalReadOnly } = treeFoldersStore;
-  const { currentDeviceType } = settingsStore;
+export default inject(
+  ({ treeFoldersStore, settingsStore, selectedFolderStore }: TStore) => {
+    const { isRecycleBinFolder, isPersonalReadOnly } = treeFoldersStore;
+    const { currentDeviceType } = settingsStore;
+    const { isRoomStorageQuotaExceeded, usedSpace, quotaLimit } =
+      selectedFolderStore;
 
-  return {
-    isPersonalReadOnly,
-    isRecycleBinFolder,
-    currentDeviceType,
-  };
-})(observer(Warning));
+    return {
+      isPersonalReadOnly,
+      isRecycleBinFolder,
+      currentDeviceType,
+      isRoomStorageQuotaExceeded,
+      selectedFolderUsedSpace: usedSpace,
+      selectedFolderQuotaLimit: quotaLimit,
+    };
+  },
+)(observer(Warning));

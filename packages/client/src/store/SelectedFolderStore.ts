@@ -261,6 +261,7 @@ class SelectedFolderStore {
       parentShared: this.parentShared,
       ownedBy: this.ownedBy,
       sharedBy: this.sharedBy,
+      isRoomStorageQuotaExceeded: this.isRoomStorageQuotaExceeded,
     };
   };
 
@@ -509,6 +510,16 @@ class SelectedFolderStore {
 
   get isAIAgent() {
     return this.roomType === RoomsType.AIRoom;
+  }
+
+  get isRoomStorageQuotaExceeded() {
+    return (
+      this.rootFolderType === FolderType.Rooms &&
+      this.quotaLimit !== undefined &&
+      this.quotaLimit !== -1 &&
+      this.usedSpace !== undefined &&
+      this.usedSpace >= this.quotaLimit
+    );
   }
 
   get isInsideResultStorage() {

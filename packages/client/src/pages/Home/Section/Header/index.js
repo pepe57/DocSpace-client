@@ -29,12 +29,13 @@ import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
+import WarningQuotaExceededUrl from "PUBLIC_DIR/images/warning.quota-exceeded.react.svg?url";
 
 import React from "react";
 import classnames from "classnames";
 
 import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
@@ -67,7 +68,10 @@ import {
 } from "SRC_DIR/helpers/info-panel";
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
-import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
+import {
+  getConvertedQuota,
+  getLifetimePeriodTranslation,
+} from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -182,6 +186,7 @@ const SectionHeaderContent = (props) => {
 
     isAIRoom,
     isAIAgent,
+    isRoomStorageQuotaExceeded,
     isKnowledgeTab,
     currentClientView,
     profile,
@@ -203,6 +208,8 @@ const SectionHeaderContent = (props) => {
     isCollaborator,
     isVisitor,
   } = props;
+
+  console.log("selectedFolder", selectedFolder);
 
   const location = useLocation();
   const { sectionWidth } = React.use(Context);
@@ -852,13 +859,24 @@ const SectionHeaderContent = (props) => {
 
   const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
 
-  const warningText = isRecycleBinFolder
-    ? t("TrashAutoDeleteWarning", {
-        sectionName: t("Common:TrashSection"),
-      })
-    : isPersonalReadOnly
-      ? t("PersonalFolderErasureWarning")
-      : "";
+  const warningText = isRecycleBinFolder ? (
+    t("TrashAutoDeleteWarning", {
+      sectionName: t("Common:TrashSection"),
+    })
+  ) : isPersonalReadOnly ? (
+    t("PersonalFolderErasureWarning")
+  ) : isRoomStorageQuotaExceeded ? (
+    <Trans
+      i18nKey="Common:RoomStorageLimitExceeded"
+      values={{
+        usedSpace: getConvertedQuota(t, selectedFolder.usedSpace),
+        quotaLimit: getConvertedQuota(t, selectedFolder.quotaLimit),
+      }}
+      components={{ 1: <strong /> }}
+    />
+  ) : (
+    ""
+  );
 
   const isContextButtonVisible = React.useMemo(() => {
     if (isProfile) return true;
@@ -976,6 +994,9 @@ const SectionHeaderContent = (props) => {
               isInfoPanelVisible={isProfile ? false : isInfoPanelVisible}
               titles={{
                 warningText,
+                warningIcon: isRoomStorageQuotaExceeded
+                  ? WarningQuotaExceededUrl
+                  : undefined,
                 actions: isRoomsFolder
                   ? t("Common:NewRoom")
                   : t("Common:Actions"),
@@ -1168,6 +1189,7 @@ export default inject(
       shared,
       isAIRoom,
       isAIAgent,
+      isRoomStorageQuotaExceeded,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1392,6 +1414,7 @@ export default inject(
 
       isAIRoom,
       isAIAgent,
+      isRoomStorageQuotaExceeded,
       isKnowledgeTab,
       contactsTab,
 
