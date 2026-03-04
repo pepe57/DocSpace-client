@@ -156,20 +156,38 @@ const jsonUrlPlugin = (): Plugin => {
 };
 
 // ---------------------------------------------------------------------------
-// Custom plugin: inject runtime.json checksums into index.html placeholders
+// Custom plugin: inject runtime.json checksums into index.html placeholders.
+// In dev mode, when accessed through a backend proxy (e.g. port 8092),
+// rewrite the module entry point to use an absolute Vite URL so the browser
+// loads ES modules directly from the Vite dev server instead of the proxy.
 // ---------------------------------------------------------------------------
 const htmlTransformPlugin = (): Plugin => ({
   name: "html-transform",
-  transformIndexHtml(html) {
-    return html
-      .replace(
-        /%VITE_BROWSER_DETECTOR_HASH%/g,
-        runtime.checksums?.["browserDetector.js"] || dateHash,
-      )
-      .replace(
-        /%VITE_CONFIG_HASH%/g,
-        runtime.checksums?.["config.json"] || dateHash,
-      );
+  transformIndexHtml: {
+    order: "pre",
+    handler(html, ctx) {
+      html = html
+        .replace(
+          /%VITE_BROWSER_DETECTOR_HASH%/g,
+          runtime.checksums?.["browserDetector.js"] || dateHash,
+        )
+        .replace(
+          /%VITE_CONFIG_HASH%/g,
+          runtime.checksums?.["config.json"] || dateHash,
+        );
+
+      // In dev mode, use absolute URLs so modules load from Vite, not the proxy
+      if (ctx.server) {
+        const port = ctx.server.config.server.port || 5001;
+        const viteOrigin = `http://localhost:${port}`;
+        html = html.replace(
+          'src="/src/bootstrap.js"',
+          `src="${viteOrigin}/src/bootstrap.js"`,
+        );
+      }
+
+      return html;
+    },
   },
 });
 
@@ -369,6 +387,13 @@ export default defineConfig(({ mode }) => {
       port: parseInt(process.env.PORT || "5001"),
       strictPort: true,
       cors: true,
+      // Allow the page loaded from the backend proxy (e.g. :8092) to connect
+      // to Vite's WebSocket for HMR
+      hmr: {
+        host: "localhost",
+        port: parseInt(process.env.PORT || "5001"),
+        protocol: "ws",
+      },
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods":
@@ -403,6 +428,10 @@ export default defineConfig(({ mode }) => {
         },
       },
       minify: isProduction ? "esbuild" : false,
+      commonjsOptions: {
+        // Handle firebase compat and other packages that use require() in ESM
+        transformMixedEsModules: true,
+      },
     },
 
     optimizeDeps: {
@@ -417,6 +446,10 @@ export default defineConfig(({ mode }) => {
         "react-i18next",
         "axios",
         "lodash",
+        "firebase/compat/app",
+        "firebase/compat/remote-config",
+        "firebase/compat/storage",
+        "firebase/compat/database",
       ],
     },
   };

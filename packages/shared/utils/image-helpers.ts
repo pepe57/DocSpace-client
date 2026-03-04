@@ -154,8 +154,10 @@ const createIconEntries = (icons: Record<string, string[]>) => {
 
 const { all, nonRoom } = createIconEntries(iconsMap);
 
+// Return the public URL path for the icon.
+// Icons are static files served from public/images/icons/.
 const getUrlByName = (size: number, name: string): string =>
-    require(`PUBLIC_DIR/images/icons/${size}/${name}?url`);
+  `/images/icons/${size}/${name}`;
 
 const generateMapForSize = (
   size: number,
