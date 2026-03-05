@@ -36,7 +36,6 @@ const Scripts = () => {
     <>
       <Script
         id="browser-detector"
-        // strategy="beforeInteractive"
         src={`/static/scripts/browserDetector.js?hash=${browserDetectorHash}`}
       />
 
@@ -51,11 +50,10 @@ const Scripts = () => {
               return response.json();
             })
             .then((config) => {
-              console.log(config)
               window.ClientConfig = {
                 ...config,
               };
-    
+
               if (
                 window.navigator.userAgent.includes("ZoomWebKit") ||
                 window.navigator.userAgent.includes("ZoomApps")
@@ -65,8 +63,6 @@ const Scripts = () => {
                   requestClose: true,
                 };
               }
-    
-              //console.log({ ClientConfig: window.ClientConfig });
             })
             .catch((e) => {
               console.error(e);

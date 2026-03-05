@@ -49,11 +49,10 @@ export const Scripts = () => {
               return response.json();
             })
             .then((config) => {
-              console.log(config)
               window.ClientConfig = {
                 ...config,
               };
-    
+
               if (
                 window.navigator.userAgent.includes("ZoomWebKit") ||
                 window.navigator.userAgent.includes("ZoomApps")
@@ -62,8 +61,6 @@ export const Scripts = () => {
                   requestClose: true,
                 };
               }
-    
-              //console.log({ ClientConfig: window.ClientConfig });
             })
             .catch((e) => {
               console.error(e);
