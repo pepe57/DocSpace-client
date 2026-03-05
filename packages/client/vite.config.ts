@@ -186,8 +186,14 @@ const htmlTransformPlugin = (): Plugin => ({
 
       // In dev mode, use absolute URLs so modules load from Vite, not the proxy
       if (ctx.server) {
-        const port = ctx.server.config.server.port || 5001;
-        const viteOrigin = `http://localhost:${port}`;
+        const serverConfig = ctx.server.config.server;
+        const host =
+          process.env.VITE_DEV_HOST ||
+          (typeof serverConfig.host === "string"
+            ? serverConfig.host
+            : "localhost");
+        const port = serverConfig.port || 5001;
+        const viteOrigin = `http://${host}:${port}`;
         html = html.replace(
           'src="/src/bootstrap.js"',
           `src="${viteOrigin}/src/bootstrap.js"`,
