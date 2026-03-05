@@ -313,6 +313,7 @@ export default defineConfig(({ mode }) => {
         "@docspace/ui-kit": path.resolve(__dirname, "../../libs/ui-kit"),
       },
       extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
+      dedupe: ["styled-components", "react", "react-dom"],
     },
 
     define: {
