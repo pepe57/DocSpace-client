@@ -536,3 +536,7 @@ export type TNotificationChannel = {
 	name: string;
 	isEnabled: boolean;
 };
+
+export type TAiServicesSettings = {
+	enabled: boolean;
+};

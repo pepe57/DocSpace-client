@@ -334,6 +334,10 @@ class SettingsStore {
 
   displayBanners: boolean = false;
 
+  aiServicesEnabled: boolean = true;
+
+  aiServicesManagementUrl?: string;
+
   apiKeys: TApiKey[] = [];
 
   permissions: string[] = [];
@@ -1757,6 +1761,10 @@ class SettingsStore {
 
   setDisplayBanners = (displayBanners: boolean) => {
     this.displayBanners = displayBanners;
+  };
+
+  setAiServicesEnabled = (aiServicesEnabled: boolean) => {
+    this.aiServicesEnabled = aiServicesEnabled;
   };
 
   updateDefaultFolderType = async (folderType: FolderType) => {
