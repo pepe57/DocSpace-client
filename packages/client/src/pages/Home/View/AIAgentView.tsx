@@ -155,7 +155,6 @@ const AIAgentViewComponent = ({
             setAiPlaylistImages={setAiPlaylistImages}
             goToWebSearchSettings={goToWebSearchSettings}
             goToAISettings={goToAISettings}
-            allowExternalNavigation
             allowAttachFiles
             allowManageTools
             allowSelectChat
