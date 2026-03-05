@@ -26,7 +26,7 @@
 
 import Script from "next/script";
 
-const { getStaticHash } = require("../../../../common/scripts/static-hash");
+import { getStaticHash } from "../../../../common/scripts/static-hash";
 
 const Scripts = () => {
   return (

@@ -24,19 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-const { join } = require("path");
-const { readFileSync } = require("fs");
-const crypto = require("crypto");
+import { join } from "path";
+import { readFileSync } from "fs";
+import { createHash } from "crypto";
 
 const publicScriptsDir = join(__dirname, "../../public/scripts");
 
-function getStaticHash(fileName) {
+const cache = new Map();
+
+export function getStaticHash(fileName) {
+  if (cache.has(fileName)) return cache.get(fileName);
+
   try {
     const content = readFileSync(join(publicScriptsDir, fileName));
-    return crypto.createHash("md5").update(content).digest("hex");
+    const hash = createHash("md5").update(content).digest("hex");
+    cache.set(fileName, hash);
+    return hash;
   } catch {
     return "";
   }
 }
-
-module.exports = { getStaticHash };
