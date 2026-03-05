@@ -25,14 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
 import { DeviceType } from "@docspace/shared/enums";
-import { getConvertedQuota } from "@docspace/shared/utils/common";
 import WarningQuotaExceededUrl from "PUBLIC_DIR/images/warning.quota-exceeded.react.svg?url";
-import { Text } from "@docspace/ui-kit/components";
+import { getWarningText } from "../getWarningText";
 
 type InjectedProps = {
   isPersonalReadOnly: boolean;
@@ -55,24 +54,14 @@ const Warning = ({
 
   if (currentDeviceType === DeviceType.desktop) return null;
 
-  const warningText = isRecycleBinFolder ? (
-    t("TrashAutoDeleteWarning", {
-      sectionName: t("Common:TrashSection"),
-    })
-  ) : isPersonalReadOnly ? (
-    t("PersonalFolderErasureWarning")
-  ) : isRoomStorageQuotaExceeded ? (
-    <Trans
-      i18nKey="Common:RoomStorageLimitExceeded"
-      values={{
-        usedSpace: getConvertedQuota(t, selectedFolderUsedSpace!, true),
-        quotaLimit: getConvertedQuota(t, selectedFolderQuotaLimit!),
-      }}
-      components={{ 1: <Text as="span" fontWeight="600" /> }}
-    />
-  ) : (
-    ""
-  );
+  const warningText = getWarningText({
+    t,
+    isRecycleBinFolder,
+    isPersonalReadOnly,
+    isRoomStorageQuotaExceeded,
+    roomUsedSpace: selectedFolderUsedSpace,
+    roomQuotaLimit: selectedFolderQuotaLimit,
+  });
 
   if (!warningText) return null;
 

@@ -35,7 +35,7 @@ import React from "react";
 import classnames from "classnames";
 
 import { inject, observer } from "mobx-react";
-import { withTranslation, Trans } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
@@ -68,10 +68,7 @@ import {
 } from "SRC_DIR/helpers/info-panel";
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
-import {
-  getConvertedQuota,
-  getLifetimePeriodTranslation,
-} from "@docspace/shared/utils/common";
+import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -80,7 +77,7 @@ import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHeader";
 
 import { useContactsHeader } from "./useContacts";
-import { Text } from "@docspace/ui-kit/components";
+import { getWarningText } from "../getWarningText";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -211,8 +208,6 @@ const SectionHeaderContent = (props) => {
     isCollaborator,
     isVisitor,
   } = props;
-
-  console.log("selectedFolder", selectedFolder);
 
   const location = useLocation();
   const { sectionWidth } = React.use(Context);
@@ -862,24 +857,14 @@ const SectionHeaderContent = (props) => {
 
   const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
 
-  const warningText = isRecycleBinFolder ? (
-    t("TrashAutoDeleteWarning", {
-      sectionName: t("Common:TrashSection"),
-    })
-  ) : isPersonalReadOnly ? (
-    t("PersonalFolderErasureWarning")
-  ) : isRoomStorageQuotaExceeded ? (
-    <Trans
-      i18nKey="Common:RoomStorageLimitExceeded"
-      values={{
-        usedSpace: getConvertedQuota(t, roomUsedSpace, true),
-        quotaLimit: getConvertedQuota(t, roomQuotaLimit),
-      }}
-      components={{ 1: <Text as="span" fontWeight="600" /> }}
-    />
-  ) : (
-    ""
-  );
+  const warningText = getWarningText({
+    t,
+    isRecycleBinFolder,
+    isPersonalReadOnly,
+    isRoomStorageQuotaExceeded,
+    roomUsedSpace,
+    roomQuotaLimit,
+  });
 
   const isContextButtonVisible = React.useMemo(() => {
     if (isProfile) return true;
