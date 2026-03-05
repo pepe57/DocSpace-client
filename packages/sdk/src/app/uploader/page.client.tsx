@@ -89,9 +89,6 @@ export default function UploaderClient({
     });
   }, []);
 
-  console.log("baseConfig?.maxTotalUploadSize", baseConfig?.maxTotalUploadSize);
-  console.log("baseConfig?.maxPerUploadSize", baseConfig?.maxPerUploadSize);
-
   return (
     <Uploader
       accept={accept}
