@@ -224,7 +224,7 @@ const formatExpanded = (data) => {
 const isExpandable = (data) =>
   data !== null && data !== undefined && typeof data === "object";
 
-export const EventLogBlock = ({ events, onClear, eventTypes }) => {
+export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
   const scrollerRef = useRef(null);
   const filterButtonRef = useRef(null);
   const [expandedIds, setExpandedIds] = useState(new Set());
@@ -270,7 +270,7 @@ export const EventLogBlock = ({ events, onClear, eventTypes }) => {
     <StyledWrapper>
       <Header>
         <HeaderActions>
-          <HeaderTitle>Event Log</HeaderTitle>
+          <HeaderTitle>{t("EventLog")}</HeaderTitle>
           {hasFilter && (
             <FilterButtonWrapper ref={filterButtonRef}>
               <IconButton
@@ -303,13 +303,13 @@ export const EventLogBlock = ({ events, onClear, eventTypes }) => {
         </HeaderActions>
         {events.length > 0 && (
           <Link type="action" fontSize="13px" onClick={onClear}>
-            Clear
+            {t("Common:ClearAll")}
           </Link>
         )}
       </Header>
       <LogScroller ref={scrollerRef}>
         {displayedEvents.length === 0 ? (
-          <EmptyState>No events yet.</EmptyState>
+          <EmptyState>{t("NoEventsYet")}</EmptyState>
         ) : (
           displayedEvents.map((entry) => {
             const expandable = isExpandable(entry.data);

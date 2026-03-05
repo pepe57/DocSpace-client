@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect, useCallback } from "react";
+import { useEventLog } from "../sub-components/useEventLog";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -86,8 +87,6 @@ const Uploader = (props) => {
   const [source, onSetSource] = useState(sdkSource.Package);
   const [uploadMode, setUploadMode] = useState("files");
   const [uploadQuantity, setUploadQuantity] = useState("single");
-  const [eventLog, setEventLog] = useState([]);
-
   const fileSizeUnits = [
     { key: "kb", label: t("Common:Kilobyte") },
     { key: "mb", label: t("Common:Megabyte") },
@@ -209,15 +208,9 @@ const Uploader = (props) => {
     maxPerUploadSize: "25mb",
     maxTotalUploadSize: "100mb",
     events: {
-      onUploadSuccess: (data) => {
-        console.log("onUploadSuccess", data);
-      },
-      onUploadError: (data) => {
-        console.log("onUploadError", data);
-      },
-      onUploadProgress: (data) => {
-        console.log("onUploadProgress", data);
-      },
+      onUploadSuccess: () => {},
+      onUploadError: () => {},
+      onUploadProgress: () => {},
     },
   });
 
@@ -276,37 +269,7 @@ const Uploader = (props) => {
     };
   }, [config]);
 
-  const onClearEventLog = useCallback(() => setEventLog([]), []);
-
-  useEffect(() => {
-    const frameId = config.frameId;
-
-    const handleMessage = (e) => {
-      let parsed;
-      try {
-        parsed = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
-      } catch {
-        return;
-      }
-
-      if (parsed?.type !== "onEventReturn" || parsed?.frameId !== frameId)
-        return;
-
-      const { event, data } = parsed.eventReturnData ?? {};
-      if (!event) return;
-
-      setEventLog((prev) => {
-        const next = [
-          ...prev,
-          { id: `${Date.now()}-${Math.random()}`, timestamp: new Date(), event, data },
-        ];
-        return next.length > 200 ? next.slice(-200) : next;
-      });
-    };
-
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, [config.frameId]);
+  const [eventLog, onClearEventLog] = useEventLog(config.frameId);
 
   const onChangeFolderId = (folderId) => {
     const newConfig = {
@@ -399,6 +362,7 @@ const Uploader = (props) => {
         <div id={config.frameId} />
       </Frame>
       <EventLogBlock
+        t={t}
         events={eventLog}
         onClear={onClearEventLog}
         eventTypes={UPLOADER_EVENT_TYPES}

@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
+import { useEventLog } from "../sub-components/useEventLog";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -123,9 +124,6 @@ const RoomSelector = (props) => {
     },
   ];
 
-  const [eventLog, setEventLog] = useState([]);
-  const onClearEventLog = useCallback(() => setEventLog([]), []);
-
   const [version, onSetVersion] = useState(sdkVersion[220]);
 
   const [source, onSetSource] = useState(sdkSource.Package);
@@ -150,35 +148,19 @@ const RoomSelector = (props) => {
     isButtonMode: false,
     buttonWithLogo: true,
     events: {
-      onSelectCallback: (data) => {
-        console.log("onSelectCallback", data);
-      },
-      onCloseCallback: (data) => {
-        console.log("onCloseCallback", data);
-      },
-      onAppReady: (data) => {
-        console.log("onAppReady", data);
-      },
-      onAppError: (data) => {
-        console.log("onAppError", data);
-      },
-      onAuthSuccess: (data) => {
-        console.log("onAuthSuccess", data);
-      },
-      onSignOut: (data) => {
-        console.log("onSignOut", data);
-      },
-      onNoAccess: (data) => {
-        console.log("onNoAccess", data);
-      },
-      onNotFound: (data) => {
-        console.log("onNotFound", data);
-      },
-      onContentReady: (data) => {
-        console.log("onContentReady", data);
-      },
+      onSelectCallback: () => {},
+      onCloseCallback: () => {},
+      onAppReady: () => {},
+      onAppError: () => {},
+      onAuthSuccess: () => {},
+      onSignOut: () => {},
+      onNoAccess: () => {},
+      onNotFound: () => {},
+      onContentReady: () => {},
     },
   });
+
+  const [eventLog, onClearEventLog] = useEventLog(config.frameId);
 
   const fromPackage = source === sdkSource.Package;
 
@@ -239,36 +221,6 @@ const RoomSelector = (props) => {
     }));
   };
 
-  useEffect(() => {
-    const frameId = config.frameId;
-
-    const handleMessage = (e) => {
-      let parsed;
-      try {
-        parsed = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
-      } catch {
-        return;
-      }
-
-      if (parsed?.type !== "onEventReturn" || parsed?.frameId !== frameId)
-        return;
-
-      const { event, data } = parsed.eventReturnData ?? {};
-      if (!event) return;
-
-      setEventLog((prev) => {
-        const next = [
-          ...prev,
-          { id: `${Date.now()}-${Math.random()}`, timestamp: new Date(), event, data },
-        ];
-        return next.length > 200 ? next.slice(-200) : next;
-      });
-    };
-
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, [config.frameId]);
-
   const preview = (
     <>
       <Frame
@@ -279,6 +231,7 @@ const RoomSelector = (props) => {
         <div id={config.frameId} />
       </Frame>
       <EventLogBlock
+        t={t}
         events={eventLog}
         onClear={onClearEventLog}
         eventTypes={ROOM_SELECTOR_EVENT_TYPES}
