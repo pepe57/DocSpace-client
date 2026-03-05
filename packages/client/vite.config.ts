@@ -83,8 +83,10 @@ const jsxInJsPlugin = (): Plugin => ({
   },
   async transform(code, id) {
     if (!id.endsWith(".js") || id.includes("node_modules")) return null;
-    // Quick check: skip files that clearly don't contain JSX
-    if (!code.includes("<")) return null;
+    // Quick check: skip files that clearly don't contain JSX.
+    // Match opening JSX tags (<Component, <div) or closing tags (</),
+    // but not plain comparison operators (a < b).
+    if (!/(<\/|<[A-Za-z])/.test(code)) return null;
 
     return transformWithEsbuild(code, id, {
       loader: "jsx",
