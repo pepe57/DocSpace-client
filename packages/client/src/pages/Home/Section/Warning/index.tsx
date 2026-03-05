@@ -40,6 +40,7 @@ type InjectedProps = {
   isRoomStorageQuotaExceeded: boolean;
   selectedFolderUsedSpace?: number;
   selectedFolderQuotaLimit?: number;
+  showHeaderLoader?: boolean;
 };
 
 const Warning = ({
@@ -49,6 +50,7 @@ const Warning = ({
   isRoomStorageQuotaExceeded,
   selectedFolderUsedSpace,
   selectedFolderQuotaLimit,
+  showHeaderLoader,
 }: InjectedProps) => {
   const { t } = useTranslation(["Files", "Common"]);
 
@@ -63,7 +65,7 @@ const Warning = ({
     roomQuotaLimit: selectedFolderQuotaLimit,
   });
 
-  if (!warningText) return null;
+  if (showHeaderLoader || !warningText) return null;
 
   return (
     <WarningComponent
@@ -74,11 +76,18 @@ const Warning = ({
 };
 
 export default inject(
-  ({ treeFoldersStore, settingsStore, selectedFolderStore }: TStore) => {
+  ({
+    treeFoldersStore,
+    settingsStore,
+    selectedFolderStore,
+    clientLoadingStore,
+  }: TStore) => {
     const { isRecycleBinFolder, isPersonalReadOnly } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
     const { isRoomStorageQuotaExceeded, roomUsedSpace, roomQuotaLimit } =
       selectedFolderStore;
+
+    const { showHeaderLoader } = clientLoadingStore;
 
     return {
       isPersonalReadOnly,
@@ -87,6 +96,7 @@ export default inject(
       isRoomStorageQuotaExceeded,
       selectedFolderUsedSpace: roomUsedSpace,
       selectedFolderQuotaLimit: roomQuotaLimit,
+      showHeaderLoader,
     };
   },
 )(observer(Warning));
