@@ -192,6 +192,19 @@ const PortalSettingsRoutes = {
       },
     },
     {
+      path: "customization/general/ai-services-management",
+      async lazy() {
+        const { AiServicesManagement } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Customization/ai-services-management"
+            ),
+        );
+
+        return { Component: AiServicesManagement };
+      },
+    },
+    {
       path: "security",
       element: <Navigate to="security/access-portal" replace />,
     },
