@@ -43,6 +43,7 @@ import withLoader from "../../../../HOCs/withLoader";
 import AvatarEditorDialog from "../../AvatarEditorDialog";
 
 import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
+import FormRoomBlock from "./FormRoomBlock";
 
 import TagInput from "../../../TagInput";
 import RoomQuota from "../../../RoomQuota";
@@ -180,6 +181,8 @@ const SetRoomParams = ({
     roomParams.type === RoomsType.VirtualDataRoom && !isTemplate;
 
   const isPublicRoom = roomParams.type === RoomsType.PublicRoom && !isTemplate;
+
+  const isFormRoom = roomParams.type === RoomsType.FormRoom && !isTemplate;
 
   const filesCount = selection
     ? selection.filesCount + selection.foldersCount
@@ -550,6 +553,15 @@ const SetRoomParams = ({
           canChangeOwner={roomParams.canChangeRoomOwner}
           roomOwner={roomParams.roomOwner}
           onOwnerChange={onOwnerChange}
+        />
+      ) : null}
+
+      {isFormRoom ? (
+        <FormRoomBlock
+          t={t}
+          roomParams={roomParams}
+          setRoomParams={setRoomParams}
+          isDisabled={isDisabled}
         />
       ) : null}
 
