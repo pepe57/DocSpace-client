@@ -714,7 +714,11 @@ export const getSizeFromBytes = (bytes: number, power: number) => {
   return truncateToTwo;
 };
 
-export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
+export const getConvertedSize = (
+  t: (key: string) => string,
+  bytes: number,
+  withoutSizeName: boolean = false,
+) => {
   let power = 0;
   let resultSize = bytes;
 
@@ -735,6 +739,8 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
     resultSize = getSizeFromBytes(bytes, power);
   }
 
+  if (withoutSizeName) return `${resultSize}`;
+
   return `${resultSize} ${sizeNames[power]}`;
 };
 
@@ -743,9 +749,10 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
 export const getConvertedQuota = (
   t: (key: string) => string,
   bytes: number,
+  withoutSizeName: boolean = false,
 ) => {
   if (bytes === -1) return t("Common:Unlimited");
-  return getConvertedSize(t, bytes);
+  return getConvertedSize(t, bytes, withoutSizeName);
 };
 
 export const getSpaceQuotaAsText = (
