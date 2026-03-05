@@ -103,14 +103,26 @@ const CustomizationNavbar = ({
         onClickLink={onClickLink}
       />
       {isEnterprise ? (
-        <CategoryItem
-          title={t("AdManagement")}
-          subtitle={t("AdManagementDescription", {
-            productName: t("Common:ProductName"),
-          })}
-          url="/portal-settings/customization/general/ad-management"
-          onClickLink={onClickLink}
-        />
+        <>
+          <CategoryItem
+            title={t("AdManagement")}
+            subtitle={t("AdManagementDescription", {
+              productName: t("Common:ProductName"),
+            })}
+            url="/portal-settings/customization/general/ad-management"
+            onClickLink={onClickLink}
+          />
+          <CategoryItem
+            title={t("AiServicesManagement")}
+            subtitle={t("AiServicesManagementDescription", {
+              productName: t("Common:ProductName"),
+              aiSettings: t("AISettings"),
+              aiAgents: t("Common:AIAgents"),
+            })}
+            url="/portal-settings/customization/general/ai-services-management"
+            onClickLink={onClickLink}
+          />
+        </>
       ) : null}
     </StyledComponent>
   );
