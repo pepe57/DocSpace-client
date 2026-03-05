@@ -26,9 +26,7 @@
 
 import Script from "next/script";
 
-import runtime from "../../../runtime.json";
-
-const hashDate = runtime?.date;
+const { getStaticHash } = require("../../../../common/scripts/static-hash");
 
 const Scripts = () => {
   return (
@@ -36,13 +34,13 @@ const Scripts = () => {
       <Script
         id="browser-detector"
         // strategy="beforeInteractive"
-        src={`/static/scripts/browserDetector.js?hash=${runtime?.checksums?.["browserDetector.js"] ?? hashDate}`}
+        src={`/static/scripts/browserDetector.js?hash=${getStaticHash("browserDetector.js")}`}
       />
 
       <Script id="portal-config" strategy="beforeInteractive">
         {`
           console.log("It's DocEditor INIT");
-          fetch("/static/scripts/config.json?hash=${runtime?.checksums["config.json"] ?? hashDate}")
+          fetch("/static/scripts/config.json?hash=${getStaticHash("config.json")}")
             .then((response) => {
               if (!response.ok) {
                 throw new Error("HTTP error " + response.status);

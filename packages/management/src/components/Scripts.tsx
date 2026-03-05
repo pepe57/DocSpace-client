@@ -26,26 +26,19 @@
 
 import Script from "next/script";
 
-let runtime = null;
-
-try {
-  runtime = require("../../../runtime.json");
-} catch (e) {
-  console.log(e);
-}
-const hashDate = runtime ? runtime?.date : new Date().getTime();
+const { getStaticHash } = require("../../../../common/scripts/static-hash");
 
 export const Scripts = () => {
   return (
     <>
       <Script
         id="browser-detector"
-        src={`/static/scripts/browserDetector.js?hash=${runtime?.checksums?.["browserDetector.js"] ?? hashDate}`}
+        src={`/static/scripts/browserDetector.js?hash=${getStaticHash("browserDetector.js")}`}
       />
       <Script id="portal-config">
         {`
           console.log("It's MANAGEMENT INIT");
-          fetch("/static/scripts/config.json?hash=${runtime?.checksums["config.json"] ?? hashDate}")
+          fetch("/static/scripts/config.json?hash=${getStaticHash("config.json")}")
             .then((response) => {
               if (!response.ok) {
                 throw new Error("HTTP error " + response.status);

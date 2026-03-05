@@ -1,0 +1,9 @@
+{
+  "date": "202635_162617",
+  "checksums": {
+    "api.js": "57f22e5150830aa551642db88e6deb71",
+    "api.poly.js": "9d9a52b4200a4610244c0d5ebc7f3101",
+    "browserDetector.js": "584b4f8c3206ec2326cee5163a01142b",
+    "config.json": "400a1f5d3bc2dec79e98525cf9fdb4cf"
+  }
+}

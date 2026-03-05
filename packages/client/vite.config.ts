@@ -29,16 +29,22 @@ import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 import path from "path";
 import fs from "fs";
+import crypto from "crypto";
 
 const pkg = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, "package.json"), "utf-8"),
 );
 
-const runtimePath = path.resolve(__dirname, "../runtime.json");
-const runtime = fs.existsSync(runtimePath)
-  ? JSON.parse(fs.readFileSync(runtimePath, "utf-8"))
-  : { date: "", checksums: {} };
-const dateHash = runtime?.date || "";
+const fileHash = (filePath: string): string => {
+  try {
+    const content = fs.readFileSync(filePath);
+    return crypto.createHash("md5").update(content).digest("hex");
+  } catch {
+    return "";
+  }
+};
+
+const publicScriptsDir = path.resolve(__dirname, "../../public/scripts");
 
 const getBuildDate = () => {
   const today = new Date();
@@ -156,7 +162,7 @@ const jsonUrlPlugin = (): Plugin => {
 };
 
 // ---------------------------------------------------------------------------
-// Custom plugin: inject runtime.json checksums into index.html placeholders.
+// Custom plugin: inject content hashes into index.html placeholders.
 // In dev mode, when accessed through a backend proxy (e.g. port 8092),
 // rewrite the module entry point to use an absolute Vite URL so the browser
 // loads ES modules directly from the Vite dev server instead of the proxy.
@@ -169,11 +175,11 @@ const htmlTransformPlugin = (): Plugin => ({
       html = html
         .replace(
           /%VITE_BROWSER_DETECTOR_HASH%/g,
-          runtime.checksums?.["browserDetector.js"] || dateHash,
+          fileHash(path.join(publicScriptsDir, "browserDetector.js")),
         )
         .replace(
           /%VITE_CONFIG_HASH%/g,
-          runtime.checksums?.["config.json"] || dateHash,
+          fileHash(path.join(publicScriptsDir, "config.json")),
         );
 
       // In dev mode, use absolute URLs so modules load from Vite, not the proxy
