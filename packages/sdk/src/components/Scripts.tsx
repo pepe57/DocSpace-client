@@ -28,19 +28,22 @@ import Script from "next/script";
 
 import { getStaticHash } from "../../../../common/scripts/static-hash";
 
+const browserDetectorHash = getStaticHash("browserDetector.js");
+const configHash = getStaticHash("config.json");
+
 const Scripts = () => {
   return (
     <>
       <Script
         id="browser-detector"
-        src={`/static/scripts/browserDetector.js?hash=${getStaticHash("browserDetector.js")}`}
+        src={`/static/scripts/browserDetector.js?hash=${browserDetectorHash}`}
         strategy="beforeInteractive"
       />
 
       <Script id="portal-config" strategy="beforeInteractive">
         {`
           console.log("It's SDK INIT");
-          fetch("/static/scripts/config.json?hash=${getStaticHash("config.json")}")
+          fetch("/static/scripts/config.json?hash=${configHash}")
             .then((response) => {
               if (!response.ok) {
                 throw new Error("HTTP error " + response.status);
