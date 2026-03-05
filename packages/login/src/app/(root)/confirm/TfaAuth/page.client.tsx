@@ -36,9 +36,9 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
-  InputSize,
-  InputType,
-  TextInput,
+	InputSize,
+	InputType,
+	TextInput,
 } from "@docspace/ui-kit/components/text-input";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ButtonKeys } from "@docspace/shared/enums";
@@ -49,138 +49,139 @@ import { useSearchParams } from "next/navigation";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 const TfaAuthForm = () => {
-  const { linkData } = useContext(ConfirmRouteContext);
-  const { t } = useTranslation(["Confirm", "Common"]);
+	const { linkData } = useContext(ConfirmRouteContext);
+	const { t } = useTranslation(["Confirm", "Common"]);
 
-  const searchParams = useSearchParams();
+	const searchParams = useSearchParams();
 
-  const [code, setCode] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+	const [code, setCode] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState("");
 
-  const { confirmHeader = null } = linkData;
+	const { confirmHeader = null } = linkData;
 
-  const linkUrlData = searchParams?.get("linkData");
-  const isPublicAuth = searchParams?.get("publicAuth");
+	const linkUrlData = searchParams?.get("linkData");
+	const isPublicAuth = searchParams?.get("publicAuth");
+	const session = searchParams?.get("session") ? true : false;
 
-  const onSubmit = async () => {
-    try {
-      setIsLoading(true);
+	const onSubmit = async () => {
+		try {
+			setIsLoading(true);
 
-      await validateTfaCode(code, confirmHeader);
+			await validateTfaCode(code, confirmHeader, session);
 
-      let confirmData = "";
-      try {
-        if (linkUrlData) confirmData = JSON.parse(atob(linkUrlData));
-      } catch (e) {
-        console.error("parse error", e);
-      }
+			let confirmData = "";
+			try {
+				if (linkUrlData) confirmData = JSON.parse(atob(linkUrlData));
+			} catch (e) {
+				console.error("parse error", e);
+			}
 
-      try {
-        if (confirmData) await checkConfirmLink(confirmData);
-      } catch (e) {
-        console.error(e);
-      }
+			try {
+				if (confirmData) await checkConfirmLink(confirmData);
+			} catch (e) {
+				console.error(e);
+			}
 
-      const referenceUrl = sessionStorage.getItem("referenceUrl");
+			const referenceUrl = sessionStorage.getItem("referenceUrl");
 
-      if (referenceUrl) {
-        sessionStorage.removeItem("referenceUrl");
-      }
+			if (referenceUrl) {
+				sessionStorage.removeItem("referenceUrl");
+			}
 
-      if (isPublicAuth) {
-        localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
-        window.close();
-      }
+			if (isPublicAuth) {
+				localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
+				window.close();
+			}
 
-      window.location.replace(referenceUrl || "/");
-    } catch (e) {
-      const knownError = e as TError;
-      let errorMessage: string;
+			window.location.replace(referenceUrl || "/");
+		} catch (e) {
+			const knownError = e as TError;
+			let errorMessage: string;
 
-      if (typeof knownError === "object") {
-        errorMessage =
-          knownError?.response?.data?.error?.message ||
-          knownError?.statusText ||
-          knownError?.message ||
-          "";
-      } else {
-        errorMessage = knownError;
-      }
+			if (typeof knownError === "object") {
+				errorMessage =
+					knownError?.response?.data?.error?.message ||
+					knownError?.statusText ||
+					knownError?.message ||
+					"";
+			} else {
+				errorMessage = knownError;
+			}
 
-      setError(errorMessage);
-      toastr.error(errorMessage);
-      setIsLoading(false);
-    }
-  };
+			setError(errorMessage);
+			toastr.error(errorMessage);
+			setIsLoading(false);
+		}
+	};
 
-  const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
-    setCode(event.target.value);
-    setError("");
-  };
+	const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+		setCode(event.target.value);
+		setError("");
+	};
 
-  const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (
-      event.code === ButtonKeys.enter ||
-      event.code === ButtonKeys.numpadEnter
-    )
-      onSubmit();
-  };
+	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (
+			event.code === ButtonKeys.enter ||
+			event.code === ButtonKeys.numpadEnter
+		)
+			onSubmit();
+	};
 
-  return (
-    <>
-      <div className="app-code-description">
-        <Text isBold fontSize="14px" className="app-code-text">
-          {t("EnterAppCodeTitle")}
-        </Text>
-        <Text>{t("EnterAppCodeDescription")}</Text>
-      </div>
-      <div className="app-code-wrapper">
-        <div className="app-code-input">
-          <FieldContainer
-            labelVisible={false}
-            hasError={!!error}
-            errorMessage={error}
-          >
-            <TextInput
-              id="code"
-              name="code"
-              type={InputType.text}
-              size={InputSize.large}
-              scale
-              isAutoFocussed
-              tabIndex={1}
-              placeholder={t("EnterCodePlaceholder")}
-              isDisabled={isLoading}
-              maxLength={6}
-              onChange={onChangeInput}
-              value={code}
-              hasError={!!error}
-              onKeyDown={onKeyPress}
-              testId="app_code_input"
-            />
-          </FieldContainer>
-        </div>
-        <div className="app-code-continue-btn">
-          <Button
-            scale
-            primary
-            size={ButtonSize.medium}
-            tabIndex={3}
-            label={
-              isLoading
-                ? t("Common:LoadingProcessing")
-                : t("Common:ContinueButton")
-            }
-            isDisabled={!code.length || isLoading}
-            isLoading={isLoading}
-            onClick={onSubmit}
-            testId="app_code_continue_button"
-          />
-        </div>
-      </div>
-    </>
-  );
+	return (
+		<>
+			<div className="app-code-description">
+				<Text isBold fontSize="14px" className="app-code-text">
+					{t("EnterAppCodeTitle")}
+				</Text>
+				<Text>{t("EnterAppCodeDescription")}</Text>
+			</div>
+			<div className="app-code-wrapper">
+				<div className="app-code-input">
+					<FieldContainer
+						labelVisible={false}
+						hasError={!!error}
+						errorMessage={error}
+					>
+						<TextInput
+							id="code"
+							name="code"
+							type={InputType.text}
+							size={InputSize.large}
+							scale
+							isAutoFocussed
+							tabIndex={1}
+							placeholder={t("EnterCodePlaceholder")}
+							isDisabled={isLoading}
+							maxLength={6}
+							onChange={onChangeInput}
+							value={code}
+							hasError={!!error}
+							onKeyDown={onKeyPress}
+							testId="app_code_input"
+						/>
+					</FieldContainer>
+				</div>
+				<div className="app-code-continue-btn">
+					<Button
+						scale
+						primary
+						size={ButtonSize.medium}
+						tabIndex={3}
+						label={
+							isLoading
+								? t("Common:LoadingProcessing")
+								: t("Common:ContinueButton")
+						}
+						isDisabled={!code.length || isLoading}
+						isLoading={isLoading}
+						onClick={onSubmit}
+						testId="app_code_continue_button"
+					/>
+				</div>
+			</div>
+		</>
+	);
 };
 
 export default TfaAuthForm;
