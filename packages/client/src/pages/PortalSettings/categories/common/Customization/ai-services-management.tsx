@@ -223,7 +223,7 @@ const AiServicesManagementComponent = ({
           aiSettings: t("AISettings"),
         })}
       </Text>
-      {true ? (
+      {aiServicesManagementUrl ? (
         <Link
           className="link-learn-more"
           color={settingsStore.currentColorScheme?.main?.accent ?? undefined}
