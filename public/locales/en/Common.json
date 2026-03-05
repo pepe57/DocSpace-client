@@ -869,6 +869,7 @@
   "RoomsModule": "Backup room",
   "RoomsModuleDescription": "You may create a new room specifically for the backup, choose one of the existing rooms, or save the copy in their {{roomName}} room.",
   "RoomSpaceQuotaExceeded": "Room space quota exceeded ({{size}}).",
+  "RoomStorageLimitExceeded": "Room storage limit exceeded (<1>{{usedSpace}}/{{quotaLimit}}</1>)",
   "SameEmail": "You can't use the same email address",
   "SaveAndCopy": "Save & copy",
   "SaveButton": "Save",

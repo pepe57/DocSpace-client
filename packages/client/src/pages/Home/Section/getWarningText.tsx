@@ -24,26 +24,55 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import classNames from "classnames";
+import React from "react";
+import { Trans } from "react-i18next";
+import { Text } from "@docspace/ui-kit/components";
+import { getConvertedQuota } from "@docspace/shared/utils/common";
+import { TTranslation } from "@docspace/shared/types";
 
-import MediaPrevIcon from "PUBLIC_DIR/images/viewer.prew.react.svg";
-import styles from "./Buttons.module.scss";
+interface GetWarningTextParams {
+  t: TTranslation;
+  isRecycleBinFolder: boolean;
+  isPersonalReadOnly: boolean;
+  isRoomStorageQuotaExceeded: boolean;
+  roomUsedSpace?: number;
+  roomQuotaLimit?: number;
+}
 
-type PrevButtonProps = {
-  prevClick?: VoidFunction;
-};
+export const getWarningText = ({
+  t,
+  isRecycleBinFolder,
+  isPersonalReadOnly,
+  isRoomStorageQuotaExceeded,
+  roomUsedSpace,
+  roomQuotaLimit,
+}: GetWarningTextParams): React.ReactNode => {
+  if (isRecycleBinFolder) {
+    return t("TrashAutoDeleteWarning", {
+      sectionName: t("Common:TrashSection"),
+    });
+  }
 
-export const PrevButton = ({ prevClick }: PrevButtonProps) => {
-  return (
-    <div
-      className={classNames(styles.switchToolbar, styles.left)}
-      onClick={prevClick}
-      aria-label="Previous"
-      data-testid="prev-button"
-    >
-      <div className={classNames(styles.buttonScroll, styles.left)}>
-        <MediaPrevIcon aria-hidden="true" />
-      </div>
-    </div>
-  );
+  if (isPersonalReadOnly) {
+    return t("PersonalFolderErasureWarning");
+  }
+
+  if (
+    isRoomStorageQuotaExceeded &&
+    roomUsedSpace !== undefined &&
+    roomQuotaLimit !== undefined
+  ) {
+    return (
+      <Trans
+        i18nKey="Common:RoomStorageLimitExceeded"
+        values={{
+          usedSpace: getConvertedQuota(t, roomUsedSpace, true),
+          quotaLimit: getConvertedQuota(t, roomQuotaLimit),
+        }}
+        components={{ 1: <Text as="span" fontWeight="600" /> }}
+      />
+    );
+  }
+
+  return "";
 };
