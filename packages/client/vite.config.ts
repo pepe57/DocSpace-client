@@ -416,6 +416,29 @@ export default defineConfig(({ mode }) => {
       outDir: "dist",
       sourcemap: isProduction ? true : "inline",
       rollupOptions: {
+        onwarn(warning, warn) {
+          // react-virtualized ships a Flow directive that Rollup doesn't understand
+          if (warning.code === "MODULE_LEVEL_DIRECTIVE") return;
+          // sjcl optionally imports Node "crypto" for PRNG seeding;
+          // it falls back to window.crypto in the browser.
+          if (warning.message?.includes("externalized for browser")) return;
+          // json2-mod uses eval() internally — safe, informational only
+          if (
+            warning.code === "EVAL" &&
+            warning.id?.includes("json2-mod")
+          )
+            return;
+          // Suppress Vite reporter warnings about modules that are both dynamically
+          // and statically imported (route-level lazy loading + parent static import).
+          // These are informational — they just mean those chunks won't be code-split.
+          if (
+            warning.message?.includes(
+              "dynamic import will not move module into another chunk",
+            )
+          )
+            return;
+          warn(warning);
+        },
         output: {
           entryFileNames: "static/js/[name].[hash].bundle.js",
           chunkFileNames: "static/js/[name].[hash].js",
@@ -426,8 +449,24 @@ export default defineConfig(({ mode }) => {
             }
             return "static/[name].[hash][extname]";
           },
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              if (id.includes("firebase")) return "vendor-firebase";
+              if (id.includes("mobx")) return "vendor-mobx";
+              if (
+                id.includes("react-dom") ||
+                id.includes("react-router") ||
+                id.includes("react-i18next") ||
+                id.includes("scheduler")
+              )
+                return "vendor-react";
+              if (id.includes("styled-components")) return "vendor-styled";
+              if (id.includes("lodash")) return "vendor-lodash";
+            }
+          },
         },
       },
+      chunkSizeWarningLimit: 1000,
       minify: isProduction ? "esbuild" : false,
       commonjsOptions: {
         // Handle firebase compat and other packages that use require() in ESM
