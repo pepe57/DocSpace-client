@@ -428,7 +428,7 @@ export default defineConfig(({ mode }) => {
 
     build: {
       outDir: "dist",
-      sourcemap: isProduction ? true : "inline",
+      sourcemap: isProduction ? "hidden" : "inline",
       rollupOptions: {
         onwarn(warning, warn) {
           // react-virtualized ships a Flow directive that Rollup doesn't understand
