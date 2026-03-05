@@ -89,6 +89,10 @@ export default function UploaderClient({
     });
   }, []);
 
+  const getFolderUrl = (folderId: number) => {
+    return `${window.location.origin}/rooms/personal/filter?folder=${folderId}`;
+  };
+
   return (
     <Uploader
       accept={accept}
@@ -104,6 +108,7 @@ export default function UploaderClient({
       isMultipleUpload={baseConfig?.isMultipleUpload}
       maxPerUploadSize={baseConfig?.maxPerUploadSize}
       maxTotalUploadSize={baseConfig?.maxTotalUploadSize}
+      getFolderUrl={getFolderUrl}
       onUploadProgress={handleUploadProgress}
       onUploadSuccess={handleUploadSuccess}
       onUploadError={handleUploadError}
