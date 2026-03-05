@@ -278,6 +278,25 @@ export function setLanguageAndTime(lng, timeZoneID) {
 	});
 }
 
+
+export async function getAiServicesSettings(signal?: AbortSignal) {
+	const res = await request({
+		method: "get",
+		url: "/settings/ai-services",
+		signal,
+	});
+	return res;
+}
+
+export async function saveAiServicesSettings(enabled: boolean) {
+	const res = await request({
+		method: "put",
+		url: "/settings/ai-services",
+		data: { enabled },
+	});
+	return res;
+}
+
 export function setGreetingSettings(title) {
 	return request({
 		method: "post",
