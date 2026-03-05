@@ -26,7 +26,7 @@
 
 import Script from "next/script";
 
-import { getStaticHash } from "../../../../common/scripts/static-hash";
+import { getStaticHash } from "@docspace/shared/utils/static-hash";
 
 const browserDetectorHash = getStaticHash("browserDetector.js");
 const configHash = getStaticHash("config.json");

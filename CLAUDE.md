@@ -105,7 +105,7 @@ MobX stores in `packages/shared/store/` are injected via React context. Main sto
 1. `build:translations` generates i18n files
 2. Vite builds client package; Next.js builds login, doceditor, management, sdk
 3. Nx orchestrates parallel builds with caching
-4. Static file hashes (browserDetector.js, config.json) are computed on-demand via `common/scripts/static-hash.js`
+4. Static file hashes (browserDetector.js, config.json) are computed on-demand via `packages/shared/utils/static-hash.ts`
 
 ### Dev Server
 

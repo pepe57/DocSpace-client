@@ -28,12 +28,12 @@ import { join } from "path";
 import { readFileSync } from "fs";
 import { createHash } from "crypto";
 
-const publicScriptsDir = join(__dirname, "../../public/scripts");
+const publicScriptsDir = join(__dirname, "../../../public/scripts");
 
-const cache = new Map();
+const cache = new Map<string, string>();
 
-export function getStaticHash(fileName) {
-  if (cache.has(fileName)) return cache.get(fileName);
+export function getStaticHash(fileName: string): string {
+  if (cache.has(fileName)) return cache.get(fileName)!;
 
   try {
     const content = readFileSync(join(publicScriptsDir, fileName));
