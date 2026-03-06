@@ -65,6 +65,7 @@ HeaderNav.displayName = "HeaderNav";
 HeaderNav.propTypes = {
   user: PropTypes.object,
   isAuthenticated: PropTypes.bool,
+  language: PropTypes.string,
 };
 
 export default inject(({ authStore, profileActionsStore, userStore }) => {

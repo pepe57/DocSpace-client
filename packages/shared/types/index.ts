@@ -252,10 +252,7 @@ declare global {
         string,
         { data: Record<string, string>; namespaces: string }
       >;
-      instance?: {
-        on: (event: string, callback: (...args: unknown[]) => void) => void;
-        off: (event: string, callback: (...args: unknown[]) => void) => void;
-      };
+      instance?: import("i18next").i18n;
     };
     timezone: string;
     snackbar?: object;
