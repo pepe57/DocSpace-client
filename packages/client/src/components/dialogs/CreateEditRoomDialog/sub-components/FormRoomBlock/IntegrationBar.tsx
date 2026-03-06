@@ -29,7 +29,7 @@ import React from "react";
 import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
 import { Link } from "@docspace/ui-kit/components/link";
 
-import DangerToastReactSvg from "@docspace/ui-kit/assets/danger.toast.react.svg?url";
+import DangerToastReactSvg from "@docspace/ui-kit/assets/danger.toast.react.svg";
 import { useLocalStorage } from "@docspace/shared/hooks/useLocalStorage";
 
 import styles from "./FormRoomBlock.module.scss";
@@ -66,7 +66,7 @@ const IntegrationBar = ({
     ? () => setIsDismissed(true)
     : undefined;
 
-  const icon = hasDatabaseConnection ? <></> : DangerToastReactSvg;
+  const icon = hasDatabaseConnection ? <></> : <DangerToastReactSvg />;
 
   return (
     <PublicRoomBar
