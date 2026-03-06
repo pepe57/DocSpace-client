@@ -120,13 +120,11 @@ const PaymentContainer = (props) => {
     gracePeriodEndDate,
     delayDaysCount,
 
-    isAlreadyPaid,
     paymentDate,
     t,
     isNonProfit,
     isPaymentDateValid,
     isYearTariff,
-    cardLinkedOnFreeTariff,
     formatPaymentCurrency,
   } = props;
   const renderTooltip = () => {
@@ -291,10 +289,6 @@ const PaymentContainer = (props) => {
             ? expiredTitleSubscriptionWarning()
             : currentPlanTitle()}
 
-          {!isNonProfit && (isAlreadyPaid || cardLinkedOnFreeTariff) ? (
-            <PayerInformation />
-          ) : null}
-
           <CurrentTariffContainer />
 
           {planSuggestion()}
@@ -370,12 +364,10 @@ export default inject(
     const { planCost, tariffPlanTitle, portalPaymentQuotas } =
       paymentQuotasStore;
 
-    const { isAlreadyPaid, cardLinkedOnFreeTariff, formatPaymentCurrency } =
-      paymentStore;
+    const { formatPaymentCurrency } = paymentStore;
 
     return {
       paymentDate,
-      isAlreadyPaid,
 
       gracePeriodEndDate,
       delayDaysCount,
@@ -398,7 +390,6 @@ export default inject(
       isNonProfit,
       isPaymentDateValid,
       isYearTariff,
-      cardLinkedOnFreeTariff,
     };
   },
 )(observer(PaymentContainer));
