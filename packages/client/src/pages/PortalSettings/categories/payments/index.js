@@ -66,16 +66,33 @@ const PaymentsPage = (props) => {
   const data = [
     {
       id: "portal-payments",
-      name: t("TariffPlan"),
-      content: <PaymentsSaaS />,
+      name: t("MainTariffPlan"),
       onClick: async () => {
         clearAbortControllerArr();
         await getPortalPaymentsData();
       },
     },
     {
+      id: "payment-method",
+      name: t("PaymentMethod"),
+      content: <Wallet />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getWalletData();
+      },
+    },
+    {
       id: "wallet",
       name: t("Wallet"),
+      content: <Wallet />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getWalletData();
+      },
+    },
+    {
+      id: "services",
+      name: t("Services"),
       content: <Wallet />,
       onClick: async () => {
         clearAbortControllerArr();
