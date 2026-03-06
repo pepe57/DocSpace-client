@@ -40,13 +40,23 @@ import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 
+const filterByFolder = (
+  files: TFile[],
+  folderId: string | number,
+  section: FormsSection,
+) => {
+  if (section === FormsSection.CompletedForms) return files;
+  const id = Number(folderId);
+  return files.filter((f) => f.folderId === id);
+};
+
 export default function useFormsData() {
   const formsSettingsStore = useFormsSettingsStore();
   const formsListStore = useFormsListStore();
   const { activeSection } = useFormsNavigationStore();
-  const requestRunning = useRef(false);
   const currentPage = useRef(0);
   const apiExhausted = useRef(false);
+  const abortRef = useRef<AbortController | null>(null);
 
   const getFolderId = useCallback(
     (section?: FormsSection) => {
@@ -65,26 +75,14 @@ export default function useFormsData() {
     [activeSection, formsSettingsStore],
   );
 
-  const filterByFolder = (
-    files: TFile[],
-    folderId: string | number,
-    section: FormsSection,
-  ) => {
-    if (section === FormsSection.CompletedForms) return files;
-    const id = Number(folderId);
-    return files.filter((f) => f.folderId === id);
-  };
-
   const fetchSection = useCallback(
     async (section?: FormsSection) => {
-      if (requestRunning.current) return;
-      requestRunning.current = true;
+      abortRef.current?.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
 
       const folderId = getFolderId(section);
-      if (!folderId) {
-        requestRunning.current = false;
-        return;
-      }
+      if (!folderId) return;
 
       formsListStore.setIsLoading(true);
       apiExhausted.current = false;
@@ -100,9 +98,11 @@ export default function useFormsData() {
         const res = await api.files.getFolder(
           folderId,
           filter,
-          new AbortController().signal,
+          controller.signal,
           formsSettingsStore.requestToken || undefined,
         );
+
+        if (controller.signal.aborted) return;
 
         const files = filterByFolder(res.files, folderId, sec);
         apiExhausted.current = res.files.length < PAGE_COUNT;
@@ -110,26 +110,27 @@ export default function useFormsData() {
         formsListStore.setItems(files, total);
         currentPage.current = 0;
       } catch {
+        if (controller.signal.aborted) return;
         formsListStore.setItems([], 0);
         currentPage.current = 0;
         apiExhausted.current = true;
       } finally {
-        formsListStore.setIsLoading(false);
-        requestRunning.current = false;
+        if (!controller.signal.aborted) {
+          formsListStore.setIsLoading(false);
+        }
       }
     },
-    [getFolderId, formsListStore, formsSettingsStore.requestToken],
+    [activeSection, getFolderId, formsListStore, formsSettingsStore.requestToken],
   );
 
   const fetchMore = useCallback(async () => {
-    if (apiExhausted.current || requestRunning.current) return;
-    requestRunning.current = true;
+    if (apiExhausted.current || abortRef.current?.signal.aborted) return;
+
+    const controller = new AbortController();
+    abortRef.current = controller;
 
     const folderId = getFolderId();
-    if (!folderId) {
-      requestRunning.current = false;
-      return;
-    }
+    if (!folderId) return;
 
     try {
       let fetched: TFile[] = [];
@@ -145,20 +146,24 @@ export default function useFormsData() {
         const res = await api.files.getFolder(
           folderId,
           filter,
-          new AbortController().signal,
+          controller.signal,
           formsSettingsStore.requestToken || undefined,
         );
+
+        if (controller.signal.aborted) return;
 
         fetched = filterByFolder(res.files, folderId, activeSection);
         apiExhausted.current = res.files.length < PAGE_COUNT;
       }
 
+      if (controller.signal.aborted) return;
+
       const total = apiExhausted.current
         ? formsListStore.items.length + fetched.length
         : formsListStore.items.length + fetched.length + 1;
       formsListStore.appendItems(fetched, total);
-    } finally {
-      requestRunning.current = false;
+    } catch {
+      // aborted or network error — ignore
     }
   }, [getFolderId, formsListStore, formsSettingsStore.requestToken, activeSection]);
 
