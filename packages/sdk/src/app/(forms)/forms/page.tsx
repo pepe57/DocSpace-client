@@ -66,8 +66,6 @@ export default async function Forms({
 	const requestToken =
 		hdrs.get(REQUEST_TOKEN_HEADER) || params.requestToken || "";
 
-	console.log("====", requestToken);
-
 	const filter = FilesFilter.getDefault();
 	filter.pageCount = PAGE_COUNT;
 	filter.filterType = FilterType.PDFForm;

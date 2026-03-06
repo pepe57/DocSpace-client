@@ -26,8 +26,8 @@
 
 "use client";
 
-import React from "react";
 import { observer } from "mobx-react";
+import React from "react";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
@@ -56,6 +56,31 @@ const FormsEditor = () => {
     );
   }, [editingFile, editorAction, requestToken]);
 
+  const handleFormCompleted = React.useCallback(() => {
+    closeEditor();
+    setActiveSection(FormsSection.CompletedForms);
+  }, [closeEditor, setActiveSection]);
+
+  const checkCompletedUrl = React.useCallback(() => {
+    try {
+      const href = iframeRef.current?.contentWindow?.location.href;
+      if (href?.includes("completed-form")) {
+        handleFormCompleted();
+        return true;
+      }
+    } catch {
+      // cross-origin — ignore
+    }
+    return false;
+  }, [handleFormCompleted]);
+
+  React.useEffect(() => {
+    if (!editingFile) return;
+
+    const interval = setInterval(checkCompletedUrl, 200);
+    return () => clearInterval(interval);
+  }, [editingFile, checkCompletedUrl]);
+
   React.useEffect(() => {
     const onMessage = (event: MessageEvent) => {
       if (
@@ -64,29 +89,18 @@ const FormsEditor = () => {
       ) {
         closeEditor();
       }
+
+      if (
+        event.data?.type === "onFormComplete" ||
+        event.data === "completed-form"
+      ) {
+        handleFormCompleted();
+      }
     };
 
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
-  }, [closeEditor]);
-
-  React.useEffect(() => {
-    if (!editingFile) return;
-
-    const interval = setInterval(() => {
-      try {
-        const href = iframeRef.current?.contentWindow?.location.href;
-        if (href && href.includes("completed-form")) {
-          closeEditor();
-          setActiveSection(FormsSection.CompletedForms);
-        }
-      } catch {
-        // cross-origin — ignore
-      }
-    }, 200);
-
-    return () => clearInterval(interval);
-  }, [editingFile, closeEditor, setActiveSection]);
+  }, [closeEditor, handleFormCompleted]);
 
   if (!editingFile || !editorUrl) return null;
 
@@ -94,6 +108,7 @@ const FormsEditor = () => {
     <iframe
       ref={iframeRef}
       src={editorUrl}
+      onLoad={checkCompletedUrl}
       style={{
         width: "100%",
         height: "100%",

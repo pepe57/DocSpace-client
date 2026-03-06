@@ -27,6 +27,7 @@
 "use client";
 
 import { observer } from "mobx-react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { EmptyView as EmptyViewComponent } from "@docspace/shared/components/empty-view";
@@ -43,6 +44,9 @@ const FormsEmpty = () => {
   const { t } = useTranslation(["Common"]);
   const { activeSection } = useFormsNavigationStore();
   const { isBase } = useTheme();
+
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => { setMounted(true); }, []);
 
   const getEmptyTitle = () => {
     switch (activeSection) {
@@ -61,7 +65,7 @@ const FormsEmpty = () => {
 
   return (
     <EmptyViewComponent
-      icon={<Icon />}
+      icon={mounted ? <Icon /> : <div style={{ width: 200, height: 147 }} />}
       title={getEmptyTitle()}
       description=""
       options={[]}

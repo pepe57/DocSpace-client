@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 // (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
@@ -133,8 +132,6 @@ class AxiosClient {
 
 				const urlParams = new URLSearchParams(window.location.search);
 				const publicRoomKey = urlParams.get("key") || urlParams.get("share");
-
-				console.log(urlParams);
 
 				const requestToken =
 					publicRoomKey || localStorage.getItem("requestToken");

@@ -46,6 +46,7 @@ export default function useFormsData() {
   const { activeSection } = useFormsNavigationStore();
   const requestRunning = useRef(false);
   const currentPage = useRef(0);
+  const apiExhausted = useRef(false);
 
   const getFolderId = useCallback(
     (section?: FormsSection) => {
@@ -86,6 +87,7 @@ export default function useFormsData() {
       }
 
       formsListStore.setIsLoading(true);
+      apiExhausted.current = false;
 
       const sec = section ?? activeSection;
 
@@ -103,11 +105,14 @@ export default function useFormsData() {
         );
 
         const files = filterByFolder(res.files, folderId, sec);
-        formsListStore.setItems(files, files.length);
+        apiExhausted.current = res.files.length < PAGE_COUNT;
+        const total = apiExhausted.current ? files.length : files.length + 1;
+        formsListStore.setItems(files, total);
         currentPage.current = 0;
       } catch {
         formsListStore.setItems([], 0);
         currentPage.current = 0;
+        apiExhausted.current = true;
       } finally {
         formsListStore.setIsLoading(false);
         requestRunning.current = false;
@@ -117,7 +122,7 @@ export default function useFormsData() {
   );
 
   const fetchMore = useCallback(async () => {
-    if (!formsListStore.hasMore || requestRunning.current) return;
+    if (apiExhausted.current || requestRunning.current) return;
     requestRunning.current = true;
 
     const folderId = getFolderId();
@@ -127,21 +132,31 @@ export default function useFormsData() {
     }
 
     try {
-      const filter = FilesFilter.getDefault();
-      filter.page = currentPage.current + 1;
-      filter.pageCount = PAGE_COUNT;
-      filter.filterType = FilterType.PDFForm;
+      let fetched: TFile[] = [];
 
-      const res = await api.files.getFolder(
-        folderId,
-        filter,
-        new AbortController().signal,
-        formsSettingsStore.requestToken || undefined,
-      );
+      while (!apiExhausted.current && fetched.length === 0) {
+        currentPage.current += 1;
 
-      const files = filterByFolder(res.files, folderId, activeSection);
-      formsListStore.appendItems(files, formsListStore.items.length + files.length);
-      currentPage.current += 1;
+        const filter = FilesFilter.getDefault();
+        filter.page = currentPage.current;
+        filter.pageCount = PAGE_COUNT;
+        filter.filterType = FilterType.PDFForm;
+
+        const res = await api.files.getFolder(
+          folderId,
+          filter,
+          new AbortController().signal,
+          formsSettingsStore.requestToken || undefined,
+        );
+
+        fetched = filterByFolder(res.files, folderId, activeSection);
+        apiExhausted.current = res.files.length < PAGE_COUNT;
+      }
+
+      const total = apiExhausted.current
+        ? formsListStore.items.length + fetched.length
+        : formsListStore.items.length + fetched.length + 1;
+      formsListStore.appendItems(fetched, total);
     } finally {
       requestRunning.current = false;
     }
