@@ -42,6 +42,7 @@ import { ActiveItemsStoreContextProvider } from "@/app/(docspace)/_store/ActiveI
 import { FormsNavigationStoreContextProvider } from "./FormsNavigationStore";
 import { FormsListStoreContextProvider } from "./FormsListStore";
 import { FormsSettingsStoreContextProvider } from "./FormsSettingsStore";
+import { FormsDbSettingsStoreContextProvider } from "./FormsDbSettingsStore";
 
 export const FormsStoreProviders = ({
   children,
@@ -60,11 +61,13 @@ export const FormsStoreProviders = ({
                     <DownloadDialogStoreContextProvider>
                       <ActiveItemsStoreContextProvider>
                         <FormsSettingsStoreContextProvider>
-                          <FormsNavigationStoreContextProvider>
-                            <FormsListStoreContextProvider>
-                              {children}
-                            </FormsListStoreContextProvider>
-                          </FormsNavigationStoreContextProvider>
+                          <FormsDbSettingsStoreContextProvider>
+                            <FormsNavigationStoreContextProvider>
+                              <FormsListStoreContextProvider>
+                                {children}
+                              </FormsListStoreContextProvider>
+                            </FormsNavigationStoreContextProvider>
+                          </FormsDbSettingsStoreContextProvider>
                         </FormsSettingsStoreContextProvider>
                       </ActiveItemsStoreContextProvider>
                     </DownloadDialogStoreContextProvider>

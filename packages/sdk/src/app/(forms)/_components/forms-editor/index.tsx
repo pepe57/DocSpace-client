@@ -30,17 +30,20 @@ import { observer } from "mobx-react";
 import React from "react";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import { FormsSection } from "@/types/forms";
 
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import styles from "./FormsEditor.module.scss";
 
 const FormsEditor = () => {
   const { editingFile, editorAction, closeEditor, setActiveSection } =
     useFormsNavigationStore();
   const { requestToken } = useFormsSettingsStore();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
+  const [isIframeLoaded, setIsIframeLoaded] = React.useState(false);
 
   const editorUrl = React.useMemo(() => {
     if (!editingFile) return "";
@@ -75,6 +78,10 @@ const FormsEditor = () => {
   }, [handleFormCompleted]);
 
   React.useEffect(() => {
+    setIsIframeLoaded(false);
+  }, [editingFile?.id]);
+
+  React.useEffect(() => {
     if (!editingFile) return;
 
     const interval = setInterval(checkCompletedUrl, 200);
@@ -102,21 +109,42 @@ const FormsEditor = () => {
     return () => window.removeEventListener("message", onMessage);
   }, [closeEditor, handleFormCompleted]);
 
+  const onIframeLoad = React.useCallback(() => {
+    setIsIframeLoaded(true);
+    checkCompletedUrl();
+  }, [checkCompletedUrl]);
+
   if (!editingFile || !editorUrl) return null;
 
   return (
-    <iframe
-      ref={iframeRef}
-      src={editorUrl}
-      onLoad={checkCompletedUrl}
-      style={{
-        width: "100%",
-        height: "100%",
-        border: "none",
-      }}
-      allow="autoplay; camera; microphone; display-capture; clipboard-write"
-      title="Form Editor"
-    />
+    <div className={styles.editorWrapper}>
+      {!isIframeLoaded && (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "absolute",
+            inset: 0,
+          }}
+        >
+          <Loader type={LoaderTypes.track} size="40px" />
+        </div>
+      )}
+      <iframe
+        ref={iframeRef}
+        src={editorUrl}
+        onLoad={onIframeLoad}
+        style={{
+          width: "100%",
+          height: "100%",
+          border: "none",
+          opacity: isIframeLoaded ? 1 : 0,
+        }}
+        allow="autoplay; camera; microphone; display-capture; clipboard-write"
+        title="Form Editor"
+      />
+    </div>
   );
 };
 

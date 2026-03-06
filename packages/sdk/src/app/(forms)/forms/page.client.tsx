@@ -33,6 +33,7 @@ import type {
 	TFilesSettings,
 	TGetFolder,
 } from "@docspace/shared/api/files/types";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";

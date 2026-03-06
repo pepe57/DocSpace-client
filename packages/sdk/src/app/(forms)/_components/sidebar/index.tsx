@@ -31,6 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
+import styles from "./FormsSidebar.module.scss";
 
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
@@ -71,9 +72,9 @@ const FormsSidebar = () => {
       data-open="true"
       data-with-main-button="false"
     >
-      <div style={{ height: "20px", flexShrink: 0 }} />
+      <div style={{ height: "16px", flexShrink: 0 }} />
       <Scrollbar
-        className="article-body__scrollbar"
+        className={`article-body__scrollbar ${styles.scrollbar}`}
         scrollClass="article-scroller"
       >
         {sections.map((section) => (

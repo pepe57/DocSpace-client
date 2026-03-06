@@ -50,6 +50,8 @@ import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url
 import FormsSidebar from "../sidebar";
 import FormsGrid from "../forms-grid";
 import FormsEditor from "../forms-editor";
+import SettingsButton from "../settings-button";
+import SettingsPanel from "../settings-panel";
 
 type FormsLayoutProps = {
   filesSettings: TFilesSettings;
@@ -73,15 +75,10 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   React.useEffect(() => {
     if (prevSection.current !== activeSection) {
       setContentVisible(false);
-
-      const timeout = setTimeout(() => {
-        prevSection.current = activeSection;
-        fetchSection(activeSection).then(() => {
-          setContentVisible(true);
-        });
-      }, 150);
-
-      return () => clearTimeout(timeout);
+      prevSection.current = activeSection;
+      fetchSection(activeSection).then(() => {
+        setContentVisible(true);
+      });
     }
   }, [activeSection, fetchSection]);
 
@@ -180,43 +177,53 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     }
 
     return (
-      <div style={{ flex: "0 1 auto" }}>
-        <Navigation
-          showText
-          isRootFolder
-          canCreate={isMyForms}
-          isPlusButtonVisible={isMyForms}
-          title={getSectionTitle()}
-          rootRoomTitle=""
-          isDesktop={currentDeviceType === DeviceType.desktop}
-          isFrame
-          navigationItems={[]}
-          getContextOptionsPlus={getContextOptionsPlus}
-          getContextOptionsFolder={() => []}
-          onClickFolder={() => {}}
-          isTrashFolder={false}
-          isEmptyPage={items.length === 0}
-          isEmptyFilesList={items.length === 0}
-          onBackToParentFolder={() => {}}
-          showRootFolderTitle={false}
-          withLogo=""
-          burgerLogo=""
-          withMenu
-          currentDeviceType={currentDeviceType}
-          titleIcon=""
-          titleIconTooltip=""
-          showNavigationButton={false}
-          isCurrentFolderInfo={false}
-          showTitle
-          isPublicRoom={false}
-          isRoom={false}
-          isInfoPanelVisible={false}
-          toggleInfoPanel={() => {}}
-          onLogoClick={() => {}}
-          hideInfoPanel={() => {}}
-          clearTrash={() => {}}
-          showFolderInfo={() => {}}
-        />
+      <div
+        style={{
+          flex: "0 1 auto",
+          display: "flex",
+          alignItems: "center",
+          gap: "16px",
+        }}
+      >
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <Navigation
+            showText
+            isRootFolder
+            canCreate={isMyForms}
+            isPlusButtonVisible={isMyForms}
+            title={getSectionTitle()}
+            rootRoomTitle=""
+            isDesktop={currentDeviceType === DeviceType.desktop}
+            isFrame
+            navigationItems={[]}
+            getContextOptionsPlus={getContextOptionsPlus}
+            getContextOptionsFolder={() => []}
+            onClickFolder={() => {}}
+            isTrashFolder={false}
+            isEmptyPage={items.length === 0}
+            isEmptyFilesList={items.length === 0}
+            onBackToParentFolder={() => {}}
+            showRootFolderTitle={false}
+            withLogo=""
+            burgerLogo=""
+            withMenu
+            currentDeviceType={currentDeviceType}
+            titleIcon=""
+            titleIconTooltip=""
+            showNavigationButton={false}
+            isCurrentFolderInfo={false}
+            showTitle
+            isPublicRoom={false}
+            isRoom={false}
+            isInfoPanelVisible={false}
+            toggleInfoPanel={() => {}}
+            onLogoClick={() => {}}
+            hideInfoPanel={() => {}}
+            clearTrash={() => {}}
+            showFolderInfo={() => {}}
+          />
+        </div>
+        <SettingsButton />
       </div>
     );
   };
@@ -250,6 +257,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
       <FormsSidebar />
       <Section
         withBodyScroll={!isEditing}
+        withoutFooter={isEditing}
         settingsStudio={false}
         viewAs="tile"
         isEmptyPage={!isEditing && items.length === 0}
@@ -258,6 +266,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
         <Section.SectionHeader>{renderHeader()}</Section.SectionHeader>
         <Section.SectionBody>{renderBody()}</Section.SectionBody>
       </Section>
+      <SettingsPanel />
     </div>
   );
 };
