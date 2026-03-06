@@ -29,11 +29,11 @@
 import { useCallback } from "react";
 
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
-import { Uploader } from "@docspace/ui-kit/components/uploader";
+import { Uploader } from "@docspace/ui-kit/uploader";
 import type {
   UploadProgressData,
   UploaderFilesSettings,
-} from "@docspace/ui-kit/components/uploader/Uploader.types";
+} from "@docspace/ui-kit/uploader/Uploader.types";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
