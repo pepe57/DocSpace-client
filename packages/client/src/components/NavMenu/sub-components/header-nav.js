@@ -66,6 +66,10 @@ HeaderNav.propTypes = {
   user: PropTypes.object,
   isAuthenticated: PropTypes.bool,
   language: PropTypes.string,
+  userIsUpdate: PropTypes.bool,
+  setUserIsUpdate: PropTypes.func,
+  getActions: PropTypes.func,
+  hideProfileMenu: PropTypes.bool,
 };
 
 export default inject(({ authStore, profileActionsStore, userStore }) => {
