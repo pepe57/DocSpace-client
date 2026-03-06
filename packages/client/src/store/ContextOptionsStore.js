@@ -533,7 +533,7 @@ class ContextOptionsStore {
       return;
     }
 
-    if (item.shortWebUrl && item.shared) {
+    if (item.shortWebUrl) {
       copyToBuffer(item.shortWebUrl);
       return toastr.success(t("Common:LinkCopySuccess"));
     }
