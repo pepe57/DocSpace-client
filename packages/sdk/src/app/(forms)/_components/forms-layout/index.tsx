@@ -27,7 +27,6 @@
 "use client";
 
 import React from "react";
-import dynamic from "next/dynamic";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -44,13 +43,13 @@ import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import useFormsData from "../../_hooks/useFormsData";
 import useNewFormActions from "../../_hooks/useNewFormActions";
+import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
+import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
+import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
+
 import FormsSidebar from "../sidebar";
 import FormsGrid from "../forms-grid";
 import FormsEditor from "../forms-editor";
-
-const NewFormButton = dynamic(() => import("../sidebar/NewFormButton"), {
-  ssr: false,
-});
 
 type FormsLayoutProps = {
   filesSettings: TFilesSettings;
@@ -86,7 +85,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     }
   }, [activeSection, fetchSection]);
 
-  const getSectionTitle = () => {
+  const getSectionTitle = React.useCallback(() => {
     switch (activeSection) {
       case FormsSection.MyForms:
         return t("Common:MyForms");
@@ -97,7 +96,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
       default:
         return "";
     }
-  };
+  }, [activeSection, t]);
 
   const navigationItems = React.useMemo(() => {
     if (!isEditing) return [];
@@ -109,7 +108,33 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
         isRootRoom: true,
       },
     ];
-  }, [isEditing, activeSection]);
+  }, [isEditing, getSectionTitle]);
+
+  const getContextOptionsPlus = React.useCallback(() => {
+    return [
+      {
+        id: "choose-from-personal",
+        key: "choose-from-personal",
+        label: t("Common:ChooseFromPersonalFiles"),
+        icon: FormFileReactSvgUrl,
+        onClick: onChooseFromPersonal,
+      },
+      {
+        id: "create-from-docx",
+        key: "create-from-docx",
+        label: t("Common:CreateFromDocx"),
+        icon: ActionsDocumentsReactSvgUrl,
+        onClick: onCreateFromDocx,
+      },
+      {
+        id: "create-from-template",
+        key: "create-from-template",
+        label: t("Common:CreateFromTemplate"),
+        icon: FormGalleryReactSvgUrl,
+        onClick: onCreateFromTemplate,
+      },
+    ];
+  }, [t, onChooseFromPersonal, onCreateFromDocx, onCreateFromTemplate]);
 
   const renderHeader = () => {
     if (isEditing) {
@@ -155,51 +180,43 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     }
 
     return (
-      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-        <div style={{ flex: "0 1 auto" }}>
-          <Navigation
-            showText
-            isRootFolder
-            canCreate={false}
-            title={getSectionTitle()}
-            rootRoomTitle=""
-            isDesktop={currentDeviceType === DeviceType.desktop}
-            isFrame
-            navigationItems={[]}
-            getContextOptionsPlus={() => []}
-            getContextOptionsFolder={() => []}
-            onClickFolder={() => {}}
-            isTrashFolder={false}
-            isEmptyPage={items.length === 0}
-            isEmptyFilesList={items.length === 0}
-            onBackToParentFolder={() => {}}
-            showRootFolderTitle={false}
-            withLogo=""
-            burgerLogo=""
-            withMenu={false}
-            currentDeviceType={currentDeviceType}
-            titleIcon=""
-            titleIconTooltip=""
-            showNavigationButton={false}
-            isCurrentFolderInfo={false}
-            showTitle
-            isPublicRoom={false}
-            isRoom={false}
-            isInfoPanelVisible={false}
-            toggleInfoPanel={() => {}}
-            onLogoClick={() => {}}
-            hideInfoPanel={() => {}}
-            clearTrash={() => {}}
-            showFolderInfo={() => {}}
-          />
-        </div>
-        {isMyForms && (
-          <NewFormButton
-            onChooseFromPersonal={onChooseFromPersonal}
-            onCreateFromDocx={onCreateFromDocx}
-            onCreateFromTemplate={onCreateFromTemplate}
-          />
-        )}
+      <div style={{ flex: "0 1 auto" }}>
+        <Navigation
+          showText
+          isRootFolder
+          canCreate={isMyForms}
+          isPlusButtonVisible={isMyForms}
+          title={getSectionTitle()}
+          rootRoomTitle=""
+          isDesktop={currentDeviceType === DeviceType.desktop}
+          isFrame
+          navigationItems={[]}
+          getContextOptionsPlus={getContextOptionsPlus}
+          getContextOptionsFolder={() => []}
+          onClickFolder={() => {}}
+          isTrashFolder={false}
+          isEmptyPage={items.length === 0}
+          isEmptyFilesList={items.length === 0}
+          onBackToParentFolder={() => {}}
+          showRootFolderTitle={false}
+          withLogo=""
+          burgerLogo=""
+          withMenu
+          currentDeviceType={currentDeviceType}
+          titleIcon=""
+          titleIconTooltip=""
+          showNavigationButton={false}
+          isCurrentFolderInfo={false}
+          showTitle
+          isPublicRoom={false}
+          isRoom={false}
+          isInfoPanelVisible={false}
+          toggleInfoPanel={() => {}}
+          onLogoClick={() => {}}
+          hideInfoPanel={() => {}}
+          clearTrash={() => {}}
+          showFolderInfo={() => {}}
+        />
       </div>
     );
   };
