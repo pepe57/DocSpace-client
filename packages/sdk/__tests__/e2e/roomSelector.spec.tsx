@@ -803,10 +803,12 @@ describe("Room selector rtl light empty", () => {
     baseUrl,
     port,
     clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA&cancel=true&search=true`;
 
     clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expectScreenshot(page,[
