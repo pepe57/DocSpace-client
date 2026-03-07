@@ -388,7 +388,6 @@ export default defineConfig(({ mode }) => {
                 params: {
                   overrides: {
                     removeViewBox: false,
-                    cleanupIds: false,
                   },
                 },
               },
@@ -469,6 +468,12 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: "dist",
       sourcemap: isProduction ? "hidden" : "inline",
+      // Disable base64 inlining of small assets so that imported file names
+      // are preserved in URLs.  The Avatar component detects default photos
+      // by checking whether the URL contains "default_user_photo" and renders
+      // an SVG placeholder instead of the PNG.  Inlining turns the URL into a
+      // data-URI which breaks this detection.
+      assetsInlineLimit: 0,
       rollupOptions: {
         onwarn(warning, warn) {
           // react-virtualized ships a Flow directive that Rollup doesn't understand
