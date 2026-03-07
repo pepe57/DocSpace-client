@@ -259,6 +259,45 @@ const copyLocalesPlugin = (): Plugin => ({
 });
 
 // ---------------------------------------------------------------------------
+// Custom plugin: copy fonts CSS and font files to dist/static/ (production build)
+// In production these are served by nginx from /var/www/public/ at /static/.
+// For E2E tests (serve dist -s) and self-contained builds, we need them in dist/.
+// ---------------------------------------------------------------------------
+const copyFontsPlugin = (): Plugin => ({
+  name: "copy-fonts",
+  closeBundle() {
+    const rootPublicDir = path.resolve(__dirname, "../../public");
+
+    // Copy css/fonts.css → dist/static/css/fonts.css
+    const cssSrc = path.join(rootPublicDir, "css/fonts.css");
+    const cssDest = path.resolve(__dirname, "dist/static/css");
+    if (fs.existsSync(cssSrc)) {
+      fs.mkdirSync(cssDest, { recursive: true });
+      fs.copyFileSync(cssSrc, path.join(cssDest, "fonts.css"));
+    }
+
+    // Copy fonts/v35/ → dist/static/fonts/v35/
+    const fontsSrc = path.join(rootPublicDir, "fonts");
+    const fontsDest = path.resolve(__dirname, "dist/static/fonts");
+    if (fs.existsSync(fontsSrc)) {
+      const copyDir = (src: string, dest: string) => {
+        fs.mkdirSync(dest, { recursive: true });
+        for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+          const srcPath = path.join(src, entry.name);
+          const destPath = path.join(dest, entry.name);
+          if (entry.isDirectory()) {
+            copyDir(srcPath, destPath);
+          } else {
+            fs.copyFileSync(srcPath, destPath);
+          }
+        }
+      };
+      copyDir(fontsSrc, fontsDest);
+    }
+  },
+});
+
+// ---------------------------------------------------------------------------
 // Custom plugin: serve files from root public/ directory in dev mode.
 // The root public/ contains scripts/config.json, images/, css/fonts.css, etc.
 // These are normally served by nginx in production, but in dev we need
@@ -364,6 +403,7 @@ export default defineConfig(({ mode }) => {
       serveRootPublicPlugin(),
       isProduction && bannerPlugin(),
       isProduction && copyLocalesPlugin(),
+      isProduction && copyFontsPlugin(),
     ].filter(Boolean),
 
     css: {
