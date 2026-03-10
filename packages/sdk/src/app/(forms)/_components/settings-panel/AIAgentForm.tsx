@@ -61,10 +61,7 @@ const AIAgentForm = () => {
 
   if (store.isAgentSelectorVisible) {
     return (
-      <AIAgentSelector
-        onSubmit={onAgentSubmit}
-        onClose={onSelectorClose}
-      />
+      <AIAgentSelector onSubmit={onAgentSubmit} onClose={onSelectorClose} />
     );
   }
 

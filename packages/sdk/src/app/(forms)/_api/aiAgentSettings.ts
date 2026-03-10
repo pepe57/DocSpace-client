@@ -53,10 +53,7 @@ export type AgentSettings = {
  * `userHash` should be a stable, non-sensitive user identifier
  * (e.g. a short hash of the auth token or the numeric user ID).
  */
-const storageKey = (
-  roomId: string | number,
-  userHash?: string,
-) =>
+const storageKey = (roomId: string | number, userHash?: string) =>
   userHash
     ? `${AGENT_STORAGE_KEY}_${userHash}_${roomId}`
     : `${AGENT_STORAGE_KEY}_${roomId}`;
@@ -66,10 +63,7 @@ export const saveAgentSettings = (
   settings: AgentSettings,
   userHash?: string,
 ) => {
-  localStorage.setItem(
-    storageKey(roomId, userHash),
-    JSON.stringify(settings),
-  );
+  localStorage.setItem(storageKey(roomId, userHash), JSON.stringify(settings));
 };
 
 export const loadAgentSettings = (
@@ -77,9 +71,7 @@ export const loadAgentSettings = (
   userHash?: string,
 ): AgentSettings | null => {
   try {
-    const val = localStorage.getItem(
-      storageKey(roomId, userHash),
-    );
+    const val = localStorage.getItem(storageKey(roomId, userHash));
     return val ? (JSON.parse(val) as AgentSettings) : null;
   } catch {
     return null;
@@ -93,7 +85,6 @@ export const clearAgentSettings = (
   localStorage.removeItem(storageKey(roomId, userHash));
 };
 
-
 export const getKnowledgeFolderId = async (
   agentId: number,
 ): Promise<number | null> => {
@@ -102,9 +93,7 @@ export const getKnowledgeFolderId = async (
     url: `/files/${agentId}`,
   })) as { folders?: { id: number; type: number }[] };
 
-  const kbFolder = res?.folders?.find(
-    (f) => f.type === FolderType.Knowledge,
-  );
+  const kbFolder = res?.folders?.find((f) => f.type === FolderType.Knowledge);
   return kbFolder?.id ?? null;
 };
 

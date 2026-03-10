@@ -109,9 +109,7 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
     }
   };
 
-  const contextModel = originalFile
-    ? getContextMenuModel(originalFile)
-    : [];
+  const contextModel = originalFile ? getContextMenuModel(originalFile) : [];
 
   const element = (
     <RoomIcon logo={item.icon} title={item.title} showDefault={false} />

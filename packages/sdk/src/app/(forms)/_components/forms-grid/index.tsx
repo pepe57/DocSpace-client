@@ -87,11 +87,7 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
       headingFiles={t("Common:Files")}
     >
       {fileItems.map((item) => (
-        <FormsTile
-          key={`file_${item.id}`}
-          item={item}
-          getIcon={getIcon}
-        />
+        <FormsTile key={`file_${item.id}`} item={item} getIcon={getIcon} />
       ))}
     </TileContainer>
   );

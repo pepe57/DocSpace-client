@@ -52,7 +52,13 @@ const FOLDER_FORM_VALIDATION = /[\\/:*?"<>|]/;
 const AiChatPanel = () => {
   const { t } = useTranslation(["Common"]);
   const aiAgentStore = useFormsAiAgentStore();
-  const { isPanelVisible, closePanel, isSyncing, selectedAgentId, agentChatSettings } = aiAgentStore;
+  const {
+    isPanelVisible,
+    closePanel,
+    isSyncing,
+    selectedAgentId,
+    agentChatSettings,
+  } = aiAgentStore;
   const { filesSettings } = useFormsSettingsStore();
 
   // Use agent ID as roomId for chat — agents ARE rooms (TAgent = TRoom)
@@ -67,10 +73,13 @@ const AiChatPanel = () => {
     chatSettings: agentChatSettings,
   });
 
-  const { getIcon: getIconRaw } = useItemIcon({ filesSettings: filesSettings! });
+  const { getIcon: getIconRaw } = useItemIcon({
+    filesSettings: filesSettings!,
+  });
 
   const getIcon = React.useCallback(
-    (size: number, fileExst: string) => getIconRaw(fileExst, size as 24 | 32 | 64 | 96),
+    (size: number, fileExst: string) =>
+      getIconRaw(fileExst, size as 24 | 32 | 64 | 96),
     [getIconRaw],
   );
 

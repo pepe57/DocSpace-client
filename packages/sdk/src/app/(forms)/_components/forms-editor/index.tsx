@@ -145,9 +145,7 @@ const FormsEditor = () => {
         src={editorUrl}
         onLoad={onIframeLoad}
         className={
-          isIframeLoaded
-            ? styles.editorIframe
-            : styles.editorIframeHidden
+          isIframeLoaded ? styles.editorIframe : styles.editorIframeHidden
         }
         allow="autoplay; camera; microphone; display-capture; clipboard-write"
         referrerPolicy="no-referrer"

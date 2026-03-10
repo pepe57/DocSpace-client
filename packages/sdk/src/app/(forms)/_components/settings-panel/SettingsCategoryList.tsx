@@ -41,8 +41,7 @@ import ArrowRightIconUrl from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 import styles from "./SettingsPanel.module.scss";
 
 const handleKeyDown =
-  (callback: () => void) =>
-  (e: React.KeyboardEvent<HTMLDivElement>) => {
+  (callback: () => void) => (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       callback();
@@ -61,9 +60,7 @@ const SettingsCategoryList = () => {
           role="button"
           tabIndex={0}
           onClick={() => setCurrentLevel("ConnectDatabase")}
-          onKeyDown={handleKeyDown(() =>
-            setCurrentLevel("ConnectDatabase"),
-          )}
+          onKeyDown={handleKeyDown(() => setCurrentLevel("ConnectDatabase"))}
         >
           <IconButton
             iconName={PortfolioIconUrl}
@@ -84,18 +81,14 @@ const SettingsCategoryList = () => {
           role="button"
           tabIndex={0}
           onClick={() => setCurrentLevel("AIAgent")}
-          onKeyDown={handleKeyDown(() =>
-            setCurrentLevel("AIAgent"),
-          )}
+          onKeyDown={handleKeyDown(() => setCurrentLevel("AIAgent"))}
         >
           <IconButton
             iconName={AiAgentsReactSvgUrl}
             size={20}
             isClickable={false}
           />
-          <span className={styles.categoryLabel}>
-            {t("Common:AIAgent")}
-          </span>
+          <span className={styles.categoryLabel}>{t("Common:AIAgent")}</span>
           <IconButton
             iconName={ArrowRightIconUrl}
             size={12}

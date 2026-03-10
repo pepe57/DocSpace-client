@@ -79,11 +79,13 @@ const NewFormButton = ({
       isDropdown
       isDisabled={false}
       model={model}
-      style={{
-        maxWidth: "fit-content",
-        gap: "8px",
-        "--main-button-padding": "4px 10px 4px 12px",
-      } as React.CSSProperties}
+      style={
+        {
+          maxWidth: "fit-content",
+          gap: "8px",
+          "--main-button-padding": "4px 10px 4px 12px",
+        } as React.CSSProperties
+      }
     />
   );
 };

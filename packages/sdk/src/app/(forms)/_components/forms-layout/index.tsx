@@ -67,8 +67,7 @@ type FormsLayoutProps = {
 
 const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const { t } = useTranslation(["Common"]);
-  const { activeSection, editingFile, closeEditor } =
-    useFormsNavigationStore();
+  const { activeSection, editingFile, closeEditor } = useFormsNavigationStore();
   const formsListStore = useFormsListStore();
   const { items } = formsListStore;
   const { roomId, requestToken } = useFormsSettingsStore();
@@ -275,11 +274,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
 
     return (
       <div
-        className={
-          contentVisible
-            ? styles.contentFadeIn
-            : styles.contentHidden
-        }
+        className={contentVisible ? styles.contentFadeIn : styles.contentHidden}
       >
         <FormsGrid filesSettings={filesSettings} fetchMore={fetchMore} />
       </div>

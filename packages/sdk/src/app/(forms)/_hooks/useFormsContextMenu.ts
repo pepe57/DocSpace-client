@@ -212,7 +212,15 @@ export default function useFormsContextMenu() {
 
       return model;
     },
-    [t, activeSection, openForm, shareForm, deleteFromList, downloadFile, stopFilling],
+    [
+      t,
+      activeSection,
+      openForm,
+      shareForm,
+      deleteFromList,
+      downloadFile,
+      stopFilling,
+    ],
   );
 
   return { getContextMenuModel };

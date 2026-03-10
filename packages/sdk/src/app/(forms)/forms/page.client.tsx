@@ -30,8 +30,8 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import type {
-	TFilesSettings,
-	TGetFolder,
+  TFilesSettings,
+  TGetFolder,
 } from "@docspace/shared/api/files/types";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { setAuthToken } from "@docspace/shared/api/client";
@@ -45,97 +45,97 @@ import { useFormsListStore } from "../_store/FormsListStore";
 import FormsLayout from "../_components/forms-layout";
 
 type FormsPageProps = {
-	roomId: string | number;
-	myFormsFolderId: string | number;
-	formsToFillFolderId: string | number;
-	completedFormsFolderId: string | number;
-	requestToken: string;
-	authToken: string;
-	filesSettings: TFilesSettings;
-	initialFolderData?: TGetFolder;
+  roomId: string | number;
+  myFormsFolderId: string | number;
+  formsToFillFolderId: string | number;
+  completedFormsFolderId: string | number;
+  requestToken: string;
+  authToken: string;
+  filesSettings: TFilesSettings;
+  initialFolderData?: TGetFolder;
 };
 
 function FormsPage({
-	roomId,
-	myFormsFolderId,
-	formsToFillFolderId,
-	completedFormsFolderId,
-	requestToken,
-	authToken,
-	filesSettings,
-	initialFolderData,
+  roomId,
+  myFormsFolderId,
+  formsToFillFolderId,
+  completedFormsFolderId,
+  requestToken,
+  authToken,
+  filesSettings,
+  initialFolderData,
 }: FormsPageProps) {
-	useSDKConfig();
+  useSDKConfig();
 
-	const formsSettingsStore = useFormsSettingsStore();
-	const formsListStore = useFormsListStore();
-	const filesSettingsStore = useFilesSettingsStore();
-	const settingsStore = useSettingsStore();
-	const [isReady, setIsReady] = React.useState(false);
+  const formsSettingsStore = useFormsSettingsStore();
+  const formsListStore = useFormsListStore();
+  const filesSettingsStore = useFilesSettingsStore();
+  const settingsStore = useSettingsStore();
+  const [isReady, setIsReady] = React.useState(false);
 
-	React.useEffect(() => {
-		formsSettingsStore.setConfig({
-			roomId,
-			myFormsFolderId,
-			formsToFillFolderId,
-			completedFormsFolderId,
-			requestToken,
-		});
-		formsSettingsStore.setFilesSettings(filesSettings);
-	}, [
-		roomId,
-		myFormsFolderId,
-		formsToFillFolderId,
-		completedFormsFolderId,
-		requestToken,
-		filesSettings,
-		formsSettingsStore,
-	]);
+  React.useEffect(() => {
+    formsSettingsStore.setConfig({
+      roomId,
+      myFormsFolderId,
+      formsToFillFolderId,
+      completedFormsFolderId,
+      requestToken,
+    });
+    formsSettingsStore.setFilesSettings(filesSettings);
+  }, [
+    roomId,
+    myFormsFolderId,
+    formsToFillFolderId,
+    completedFormsFolderId,
+    requestToken,
+    filesSettings,
+    formsSettingsStore,
+  ]);
 
-	React.useEffect(() => {
-		filesSettingsStore.setFilesSettings(filesSettings);
-	}, [filesSettings, filesSettingsStore]);
+  React.useEffect(() => {
+    filesSettingsStore.setFilesSettings(filesSettings);
+  }, [filesSettings, filesSettingsStore]);
 
-	React.useEffect(() => {
-		settingsStore.setFilesViewAs("tile");
-		const token = requestToken || authToken;
-		if (token) {
-			document.cookie = `asc_auth_key=${token}; path=/; SameSite=Lax`;
-			setAuthToken(token);
-		}
-	}, [settingsStore, requestToken, authToken]);
+  React.useEffect(() => {
+    settingsStore.setFilesViewAs("tile");
+    const token = requestToken || authToken;
+    if (token) {
+      document.cookie = `asc_auth_key=${token}; path=/; SameSite=Lax`;
+      setAuthToken(token);
+    }
+  }, [settingsStore, requestToken, authToken]);
 
-	React.useEffect(() => {
-		if (initialFolderData) {
-			const id = Number(myFormsFolderId);
-			const files = id
-				? initialFolderData.files.filter((f) => f.folderId === id)
-				: initialFolderData.files;
-			formsListStore.setItems(files, files.length);
-		}
-	}, [initialFolderData, formsListStore, myFormsFolderId]);
+  React.useEffect(() => {
+    if (initialFolderData) {
+      const id = Number(myFormsFolderId);
+      const files = id
+        ? initialFolderData.files.filter((f) => f.folderId === id)
+        : initialFolderData.files;
+      formsListStore.setItems(files, files.length);
+    }
+  }, [initialFolderData, formsListStore, myFormsFolderId]);
 
-	React.useEffect(() => {
-		setIsReady(true);
-	}, []);
+  React.useEffect(() => {
+    setIsReady(true);
+  }, []);
 
-	if (!isReady) {
-		return (
-			<div
-				style={{
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "center",
-					width: "100%",
-					height: "100%",
-				}}
-			>
-				<Loader type={LoaderTypes.track} size="40px" />
-			</div>
-		);
-	}
+  if (!isReady) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        <Loader type={LoaderTypes.track} size="40px" />
+      </div>
+    );
+  }
 
-	return <FormsLayout filesSettings={filesSettings} />;
+  return <FormsLayout filesSettings={filesSettings} />;
 }
 
 export default observer(FormsPage);

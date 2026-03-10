@@ -68,13 +68,8 @@ class FormsAiAgentStore {
   };
 
   // Load saved agent settings for a room
-  loadAgentForRoom = async (
-    roomId: string | number,
-    requestToken?: string,
-  ) => {
-    const userHash = requestToken
-      ? tokenToHash(requestToken)
-      : undefined;
+  loadAgentForRoom = async (roomId: string | number, requestToken?: string) => {
+    const userHash = requestToken ? tokenToHash(requestToken) : undefined;
     const settings = loadAgentSettings(roomId, userHash);
     if (settings?.agentId) {
       this.selectedAgentId = settings.agentId;
@@ -114,9 +109,7 @@ class FormsAiAgentStore {
 
   // --- Knowledge base sync ---
 
-  syncCompletedForms = async (
-    files: { id: number; title: string }[],
-  ) => {
+  syncCompletedForms = async (files: { id: number; title: string }[]) => {
     if (!this.selectedAgentId || !this.knowledgeFolderId) return;
     if (files.length === 0) return;
     if (this.isSyncingKB) return;
@@ -146,7 +139,9 @@ class FormsAiAgentStore {
 
         // 5. Trigger vectorization for all KB files
         if (allKbFileIds.length > 0) {
-          await vectorizeFiles(allKbFileIds).catch((e) => console.warn("[FormsAI] vectorization failed:", e));
+          await vectorizeFiles(allKbFileIds).catch((e) =>
+            console.warn("[FormsAI] vectorization failed:", e),
+          );
         }
       }
 
