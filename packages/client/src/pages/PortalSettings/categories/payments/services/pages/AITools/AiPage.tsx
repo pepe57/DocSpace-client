@@ -40,10 +40,10 @@ import { DeviceType } from "@docspace/shared/enums";
 import TransactionHistory from "SRC_DIR/pages/PortalSettings/categories/payments/TransactionHistory";
 import BalanceAmount from "SRC_DIR/pages/PortalSettings/categories/payments/BalanceAmount";
 import PayerInformation from "SRC_DIR/pages/PortalSettings/categories/payments/PayerInformation";
-import ServiceToggleSection from "SRC_DIR/pages/PortalSettings/categories/services/sub-components/ServiceToggleSection";
+import ServiceToggleSection from "../../sub-components/ServiceToggleSection";
 import { finishRefreshingWithMinCycle } from "SRC_DIR/helpers/refreshing";
 
-import ConfirmationDialog from "SRC_DIR/pages/PortalSettings/categories/services/sub-components/ConfirmationDialog";
+import ConfirmationDialog from "../../../../../../../components/ConfirmWrapper";
 
 import PricingBillingBody from "./sub-components/PricingBillingBody";
 import TopUpContainer from "./sub-components/TopUpContainer";
@@ -133,7 +133,7 @@ const AiPage = (props: AiPageProps) => {
 
   useEffect(() => {
     if (isInitAiPage && !wasFirstAiServiceTopUp) {
-      navigate("/portal-settings/services");
+      navigate("/portal-settings/payments/services");
     }
   }, [isInitAiPage, wasFirstAiServiceTopUp]);
 
@@ -146,7 +146,7 @@ const AiPage = (props: AiPageProps) => {
     try {
       await Promise.all([
         fetchAiServiceBalance?.(),
-        fetchTransactionHistory?.(null, null, true, true, "", "aitools"),
+        fetchTransactionHistory?.(null, null, true, true, "", AI_TOOLS),
       ]);
     } finally {
       finishRefreshingWithMinCycle({

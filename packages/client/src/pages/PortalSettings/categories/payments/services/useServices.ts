@@ -24,6 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import {
+  AI_TOOLS,
+  BACKUP_SERVICE,
+  DISK_STORAGE,
+} from "@docspace/shared/constants";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -47,14 +52,26 @@ const useServices = ({ servicesInit, aiServicesinit }: UseServicesProps) => {
     }
   }, [servicesInit]);
 
-  const getAiServicesData = useCallback(async () => {
-    try {
-      await aiServicesinit?.(t);
-    } catch (error) {
-      console.error(error);
-      toastr.error(t("Common:UnexpectedError"));
-    }
-  }, [aiServicesinit]);
+  const getServiceData = useCallback(
+    async (serviceName: string) => {
+      try {
+        await aiServicesinit?.(t, serviceName);
+      } catch (error) {
+        console.error(error);
+        toastr.error(t("Common:UnexpectedError"));
+      }
+    },
+    [aiServicesinit],
+  );
+
+  // const getBackupServicesData = useCallback(async () => {
+  //   try {
+  //     await aiServicesinit?.(t, BACKUP_SERVICE);
+  //   } catch (error) {
+  //     console.error(error);
+  //     toastr.error(t("Common:UnexpectedError"));
+  //   }
+  // }, [aiServicesinit]);
 
   const getServicesInitialValue = React.useCallback(async () => {
     const actions = [];
@@ -68,14 +85,34 @@ const useServices = ({ servicesInit, aiServicesinit }: UseServicesProps) => {
     const actions = [];
 
     if (window.location.pathname.includes("ai-services"))
-      actions.push(getAiServicesData());
+      actions.push(getServiceData(AI_TOOLS));
 
     await Promise.all(actions);
-  }, [getAiServicesData]);
+  }, [getServiceData]);
+
+  const getBackupServiceInitialValue = React.useCallback(async () => {
+    const actions = [];
+
+    if (window.location.pathname.includes("services/backup"))
+      actions.push(getServiceData(BACKUP_SERVICE));
+
+    await Promise.all(actions);
+  }, [getServiceData]);
+
+  const getStorageServiceInitialValue = React.useCallback(async () => {
+    const actions = [];
+
+    if (window.location.pathname.includes("services/disk-storage"))
+      actions.push(getServiceData(DISK_STORAGE));
+
+    await Promise.all(actions);
+  }, [getServiceData]);
 
   return {
     getServicesInitialValue,
     getAiServiceInitialValue,
+    getBackupServiceInitialValue,
+    getStorageServiceInitialValue,
   };
 };
 

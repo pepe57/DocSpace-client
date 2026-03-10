@@ -46,9 +46,9 @@ import ServicesLoader from "./ServicesLoader";
 import StoragePlanUpgrade from "./sub-components/AdditionalStorage/StoragePlanUpgrade";
 import StoragePlanCancel from "./sub-components/AdditionalStorage/StoragePlanCancel";
 import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModal";
-import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
+import BackupServiceDialog from "./pages/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";
-import AIServiceDialog from "./sub-components/AITools/AIServiceDialog";
+import AIServiceDialog from "./pages/AITools/AIServiceDialog";
 import WebSearchDialog from "./sub-components/WebSearch/WebSearchDialog";
 
 const Services = (props: InjectedProps) => {
@@ -209,13 +209,23 @@ const Services = (props: InjectedProps) => {
   const onClick = (id: string) => {
     setConfirmActionType(id);
 
+    // navigate("/portal-settings/services/disk-storage");
+
+    // return;
+
     if (id === TOTAL_SIZE && isGracePeriod) {
       setIsGracePeriodModalVisible(true);
       return;
     }
 
-    if (id === AI_TOOLS && wasFirstAiServiceTopUp) {
+    if (true) {
+      //&& wasFirstAiServiceTopUp
       navigate("/portal-settings/ai-services");
+      return;
+    }
+
+    if (id === BACKUP_SERVICE) {
+      navigate("/portal-settings/services/backup");
       return;
     }
 

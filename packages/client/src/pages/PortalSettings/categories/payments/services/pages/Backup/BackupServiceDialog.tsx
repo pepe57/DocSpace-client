@@ -35,8 +35,8 @@ import {
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { BACKUP_SERVICE } from "@docspace/shared/constants";
 
-import ServiceToggleSection from "../ServiceToggleSection";
-import ServiceContent from "../ServiceContent";
+import ServiceToggleSection from "../../sub-components/ServiceToggleSection";
+import ServiceContent from "../../sub-components/ServiceContent";
 
 import ClockIcon from "PUBLIC_DIR/images/icons/32/clock.svg";
 import ServiceIcon from "PUBLIC_DIR/images/icons/32/service.icon.svg";

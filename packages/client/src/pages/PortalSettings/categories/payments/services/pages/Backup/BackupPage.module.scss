@@ -1,0 +1,137 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 661px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.backButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    path {
+      fill: #333333;
+    }
+  }
+}
+
+.title {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: #333333;
+}
+
+.walletCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #dfe2e3;
+  border-radius: 6px;
+  background: #ffffff;
+  max-width: 320px;
+}
+
+.walletIcon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.walletContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.walletTitle {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #333333;
+}
+
+.walletBalance {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: #4781d1;
+}
+
+.backupsCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #dfe2e3;
+  border-radius: 6px;
+  background: #ffffff;
+  max-width: 320px;
+}
+
+.backupsHeader {
+  display: flex;
+  align-items: center;
+}
+
+.backupsTitle {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: #333333;
+}
+
+.backupsAmountContainer {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.backupsNumber {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: normal;
+  color: #333333;
+}
+
+.backupsPriceText {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  color: #a3a9ae;
+  padding-bottom: 4px;
+}
+
+.usageHistorySection {
+  margin-top: 8px;
+}
