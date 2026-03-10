@@ -122,7 +122,7 @@ const ConnectDatabaseForm = () => {
 
         <div className={styles.fieldGroup}>
           <Text fontSize="13px" fontWeight={600}>
-            {t("Common:Host")}
+            {t("Common:DatabaseHost")}
           </Text>
           <TextInput
             scale
@@ -138,7 +138,7 @@ const ConnectDatabaseForm = () => {
 
         <div className={styles.fieldGroup}>
           <Text fontSize="13px" fontWeight={600}>
-            {t("Common:Port")}
+            {t("Common:DatabasePort")}
           </Text>
           <TextInput
             scale
