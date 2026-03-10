@@ -426,7 +426,6 @@
   "Form": "フォーム",
   "FormDataCollection": "フォームデータ収集",
   "FormDataCollectionDescription": "完了したフォームのコピーとそのデータを XLSX 形式で収集し、フォーム記入ルームでの回答を分析します。",
-  "FormFilingRoomInfo": "PDFフォームをルームにアップロードします。 メンバーとゲストを招待して、PDFフォームに入力してもらいます。 完了したフォームを確認し、スプレッドシートに自動的に収集されたデータを分析します。",
   "FormFilingRoomTitle": "フォーム記入ルーム",
   "FormRoom": "フォームルーム",
   "Forms": "フォーム",

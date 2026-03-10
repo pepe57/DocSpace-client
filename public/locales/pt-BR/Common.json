@@ -426,7 +426,6 @@
   "Form": "Formulário",
   "FormDataCollection": "Coleta de dados do formulário",
   "FormDataCollectionDescription": "Colete as cópias dos formulários preenchidos e seus dados em XLSX para análise das respostas nas salas de Preenchimento de Formulários.",
-  "FormFilingRoomInfo": "Faça upload de formulários em PDF na sala. Convide membros e convidados a preencher um formulário em PDF. Revise os formulários preenchidos e analise os dados coletados automaticamente em uma planilha.",
   "FormFilingRoomTitle": "Sala de preenchimento de formulários",
   "FormRoom": "Sala de formulário",
   "Forms": "Formulário",
