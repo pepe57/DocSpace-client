@@ -41,10 +41,9 @@ const HeaderNav = ({
   setUserIsUpdate,
   getActions,
   hideProfileMenu,
-  language,
 }) => {
   const { t } = useTranslation(["Common"]);
-  const userActions = useMemo(() => getActions(t), [getActions, t, language]);
+  const userActions = useMemo(() => getActions(t), [getActions, t]);
 
   return (
     <nav className={classNames(styles.nav, "profileMenuIcon", "hidingHeader")}>
@@ -65,7 +64,6 @@ HeaderNav.displayName = "HeaderNav";
 HeaderNav.propTypes = {
   user: PropTypes.object,
   isAuthenticated: PropTypes.bool,
-  language: PropTypes.string,
   userIsUpdate: PropTypes.bool,
   setUserIsUpdate: PropTypes.func,
   getActions: PropTypes.func,
@@ -73,7 +71,7 @@ HeaderNav.propTypes = {
 };
 
 export default inject(({ authStore, profileActionsStore, userStore }) => {
-  const { isAuthenticated, language } = authStore;
+  const { isAuthenticated } = authStore;
   const { user, userIsUpdate, setUserIsUpdate } = userStore;
   const { getActions } = profileActionsStore;
 
@@ -83,6 +81,5 @@ export default inject(({ authStore, profileActionsStore, userStore }) => {
     userIsUpdate,
     setUserIsUpdate,
     getActions,
-    language,
   };
 })(observer(HeaderNav));
