@@ -27,6 +27,7 @@
 import { request } from "@docspace/shared/api/client";
 import { getProgress } from "@docspace/shared/api/files";
 import type { TOperation } from "@docspace/shared/api/files/types";
+import { FolderType } from "@docspace/shared/enums";
 
 const AGENT_STORAGE_KEY = "forms_ai_agent";
 
@@ -92,10 +93,6 @@ export const clearAgentSettings = (
   localStorage.removeItem(storageKey(roomId, userHash));
 };
 
-// FolderType.KnowledgeBase from the DocSpace API.
-// See @docspace/shared/enums — SearchArea.Knowledge = 5,
-// but the folder type returned by GET /files/{id} is 32.
-const KNOWLEDGE_FOLDER_TYPE = 32;
 
 export const getKnowledgeFolderId = async (
   agentId: number,
@@ -106,7 +103,7 @@ export const getKnowledgeFolderId = async (
   })) as { folders?: { id: number; type: number }[] };
 
   const kbFolder = res?.folders?.find(
-    (f) => f.type === KNOWLEDGE_FOLDER_TYPE,
+    (f) => f.type === FolderType.Knowledge,
   );
   return kbFolder?.id ?? null;
 };

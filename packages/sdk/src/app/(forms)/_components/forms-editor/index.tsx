@@ -61,10 +61,10 @@ const FormsEditor = () => {
     const params = new URLSearchParams();
     params.set("fileId", editingFile.id.toString());
     params.append("action", editorAction);
-    // TODO: Token in URL is visible in server logs, browser history and
-    // Referrer headers. Doceditor currently only supports URL-based auth
-    // for cross-origin iframes. Migrate to postMessage-based token
-    // exchange when doceditor adds support.
+    // Doceditor authenticates via the `share` query parameter on the
+    // initial HTTP request (cross-origin, no cookie access).
+    // referrerPolicy="no-referrer" on the iframe prevents the token
+    // from leaking via Referrer headers to third-party resources.
     if (requestToken) params.append("share", requestToken);
 
     return combineUrl(editorOrigin, `/doceditor?${params.toString()}`);
@@ -75,10 +75,32 @@ const FormsEditor = () => {
     setActiveSection(FormsSection.CompletedForms);
   }, [closeEditor, setActiveSection]);
 
+  const checkCompletedUrl = React.useCallback(() => {
+    try {
+      const href = iframeRef.current?.contentWindow?.location.href;
+      if (href?.includes("completed-form")) {
+        handleFormCompleted();
+        return true;
+      }
+    } catch {
+      // cross-origin — ignore
+    }
+    return false;
+  }, [handleFormCompleted]);
+
   React.useEffect(() => {
     setIsIframeLoaded(false);
   }, [editingFile?.id]);
 
+  // Fallback: poll iframe URL for same-origin completion page
+  React.useEffect(() => {
+    if (!editingFile) return;
+
+    const interval = setInterval(checkCompletedUrl, 500);
+    return () => clearInterval(interval);
+  }, [editingFile, checkCompletedUrl]);
+
+  // Primary: listen for postMessage from doceditor
   React.useEffect(() => {
     if (!editingFile) return;
 
@@ -106,7 +128,8 @@ const FormsEditor = () => {
 
   const onIframeLoad = React.useCallback(() => {
     setIsIframeLoaded(true);
-  }, []);
+    checkCompletedUrl();
+  }, [checkCompletedUrl]);
 
   if (!editingFile || !editorUrl) return null;
 
@@ -127,6 +150,7 @@ const FormsEditor = () => {
             : styles.editorIframeHidden
         }
         allow="autoplay; camera; microphone; display-capture; clipboard-write"
+        referrerPolicy="no-referrer"
         title={t("Common:FormEditor")}
       />
     </div>
