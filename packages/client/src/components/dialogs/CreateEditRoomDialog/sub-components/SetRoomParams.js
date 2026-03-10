@@ -156,6 +156,7 @@ const SetRoomParams = ({
   templateIsAvailable,
   fromTemplate,
   infoPanelSelection,
+  isRoomAdmin,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(roomParams.previewIcon);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -189,6 +190,11 @@ const SetRoomParams = ({
     : 0;
 
   const showLifetimeDialog = !hideConfirmRoomLifetime && filesCount > 0;
+
+  const hasDatabaseConnection = false;
+
+  const showFormRoomBlock =
+    isFormRoom && !(isRoomAdmin && !hasDatabaseConnection);
 
   const checkWidth = () => {
     if (!isMobile()) {
@@ -556,12 +562,13 @@ const SetRoomParams = ({
         />
       ) : null}
 
-      {isFormRoom ? (
+      {showFormRoomBlock ? (
         <FormRoomBlock
           t={t}
           roomParams={roomParams}
           setRoomParams={setRoomParams}
           isDisabled={isDisabled}
+          hasDatabaseConnection={hasDatabaseConnection}
         />
       ) : null}
 
@@ -633,12 +640,15 @@ export default inject(
       infoPanelStore,
       avatarEditorDialogStore,
       filesSettingsStore,
+      authStore,
     },
     { templateItem },
   ) => {
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
     const { folderFormValidation, maxImageUploadSize, currentColorScheme } =
       settingsStore;
+
+    const isRoomAdmin = authStore.isRoomAdmin;
 
     const { bufferSelection } = filesStore;
     const { getInfoPanelItemIcon, infoPanelSelection } = infoPanelStore;
@@ -700,6 +710,7 @@ export default inject(
       setLifetimeDialogVisible,
       hideConfirmRoomLifetime,
       infoPanelSelection,
+      isRoomAdmin,
     };
   },
 )(

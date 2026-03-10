@@ -47,7 +47,7 @@ const FormRoomBlock = ({
   roomParams,
   setRoomParams,
   isDisabled,
-  hasDatabaseConnection = true,
+  hasDatabaseConnection,
 }: FormRoomBlockProps) => {
   const onSaveFormAsXLSXChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRoomParams({
