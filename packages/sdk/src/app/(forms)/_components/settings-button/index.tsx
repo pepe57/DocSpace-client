@@ -41,11 +41,11 @@ import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.rea
 const SettingsButton = () => {
   const { t } = useTranslation(["Common"]);
   const { openPanel } = useFormsDbSettingsStore();
-  const { roomId } = useFormsSettingsStore();
+  const { roomId, requestToken } = useFormsSettingsStore();
 
   const onClick = React.useCallback(() => {
-    openPanel(roomId);
-  }, [openPanel, roomId]);
+    openPanel(roomId, requestToken);
+  }, [openPanel, roomId, requestToken]);
 
   return (
     <IconButton

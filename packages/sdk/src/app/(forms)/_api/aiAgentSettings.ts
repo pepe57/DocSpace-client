@@ -30,6 +30,15 @@ import type { TOperation } from "@docspace/shared/api/files/types";
 
 const AGENT_STORAGE_KEY = "forms_ai_agent";
 
+/** Simple non-crypto hash to turn a long token into a short key. */
+export const tokenToHash = (token: string): string => {
+  let h = 0;
+  for (let i = 0; i < token.length; i++) {
+    h = (Math.imul(31, h) + token.charCodeAt(i)) | 0;
+  }
+  return (h >>> 0).toString(36);
+};
+
 export type AgentSettings = {
   agentId: number | null;
   agentName: string;
@@ -37,31 +46,55 @@ export type AgentSettings = {
   knowledgeFolderId: number | null;
 };
 
+/**
+ * Build a per-user storage key so that switching accounts on the
+ * same browser does not leak agent configuration to another user.
+ * `userHash` should be a stable, non-sensitive user identifier
+ * (e.g. a short hash of the auth token or the numeric user ID).
+ */
+const storageKey = (
+  roomId: string | number,
+  userHash?: string,
+) =>
+  userHash
+    ? `${AGENT_STORAGE_KEY}_${userHash}_${roomId}`
+    : `${AGENT_STORAGE_KEY}_${roomId}`;
+
 export const saveAgentSettings = (
   roomId: string | number,
   settings: AgentSettings,
+  userHash?: string,
 ) => {
   localStorage.setItem(
-    `${AGENT_STORAGE_KEY}_${roomId}`,
+    storageKey(roomId, userHash),
     JSON.stringify(settings),
   );
 };
 
 export const loadAgentSettings = (
   roomId: string | number,
+  userHash?: string,
 ): AgentSettings | null => {
   try {
-    const val = localStorage.getItem(`${AGENT_STORAGE_KEY}_${roomId}`);
+    const val = localStorage.getItem(
+      storageKey(roomId, userHash),
+    );
     return val ? (JSON.parse(val) as AgentSettings) : null;
   } catch {
     return null;
   }
 };
 
-export const clearAgentSettings = (roomId: string | number) => {
-  localStorage.removeItem(`${AGENT_STORAGE_KEY}_${roomId}`);
+export const clearAgentSettings = (
+  roomId: string | number,
+  userHash?: string,
+) => {
+  localStorage.removeItem(storageKey(roomId, userHash));
 };
 
+// FolderType.KnowledgeBase from the DocSpace API.
+// See @docspace/shared/enums — SearchArea.Knowledge = 5,
+// but the folder type returned by GET /files/{id} is 32.
 const KNOWLEDGE_FOLDER_TYPE = 32;
 
 export const getKnowledgeFolderId = async (
@@ -79,11 +112,20 @@ export const getKnowledgeFolderId = async (
 };
 
 const pollOperation = async (opId: string, maxAttempts = 30) => {
+  let misses = 0;
   for (let i = 0; i < maxAttempts; i++) {
     await new Promise((r) => setTimeout(r, 1000));
     const ops = await getProgress(opId);
     const op = ops?.find((o: TOperation) => o.id === opId);
-    if (!op) return;
+    if (!op) {
+      // Operation may not appear immediately; allow a few misses,
+      // then treat as error.
+      misses++;
+      if (misses > 3) {
+        throw new Error("Copy operation not found");
+      }
+      continue;
+    }
     if (op.error) throw new Error(op.error);
     if (op.finished) return op;
   }

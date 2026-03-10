@@ -34,6 +34,7 @@ import { getAIAgent } from "@docspace/shared/api/ai";
 
 import {
   loadAgentSettings,
+  tokenToHash,
   copyFilesToAgentRoom,
   vectorizeFiles,
   getKnowledgeFiles,
@@ -67,8 +68,14 @@ class FormsAiAgentStore {
   };
 
   // Load saved agent settings for a room
-  loadAgentForRoom = async (roomId: string | number) => {
-    const settings = loadAgentSettings(roomId);
+  loadAgentForRoom = async (
+    roomId: string | number,
+    requestToken?: string,
+  ) => {
+    const userHash = requestToken
+      ? tokenToHash(requestToken)
+      : undefined;
+    const settings = loadAgentSettings(roomId, userHash);
     if (settings?.agentId) {
       this.selectedAgentId = settings.agentId;
       this.knowledgeFolderId = settings.knowledgeFolderId ?? null;

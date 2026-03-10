@@ -47,41 +47,33 @@ const FormsEditor = () => {
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const [isIframeLoaded, setIsIframeLoaded] = React.useState(false);
 
+  const editorOrigin = React.useMemo(
+    () =>
+      window.ClientConfig?.proxy?.url ||
+      window.ClientConfig?.api?.origin ||
+      window.location.origin,
+    [],
+  );
+
   const editorUrl = React.useMemo(() => {
     if (!editingFile) return "";
 
     const params = new URLSearchParams();
     params.set("fileId", editingFile.id.toString());
     params.append("action", editorAction);
-    // Doceditor runs on a different origin (main DocSpace server),
-    // so it can't access our asc_auth_key cookie — pass token via URL
+    // TODO: Token in URL is visible in server logs, browser history and
+    // Referrer headers. Doceditor currently only supports URL-based auth
+    // for cross-origin iframes. Migrate to postMessage-based token
+    // exchange when doceditor adds support.
     if (requestToken) params.append("share", requestToken);
 
-    const origin =
-      window.ClientConfig?.proxy?.url ||
-      window.ClientConfig?.api?.origin ||
-      window.location.origin;
-
-    return combineUrl(origin, `/doceditor?${params.toString()}`);
-  }, [editingFile, editorAction, requestToken]);
+    return combineUrl(editorOrigin, `/doceditor?${params.toString()}`);
+  }, [editingFile, editorAction, requestToken, editorOrigin]);
 
   const handleFormCompleted = React.useCallback(() => {
     closeEditor();
     setActiveSection(FormsSection.CompletedForms);
   }, [closeEditor, setActiveSection]);
-
-  const checkCompletedUrl = React.useCallback(() => {
-    try {
-      const href = iframeRef.current?.contentWindow?.location.href;
-      if (href?.includes("completed-form")) {
-        handleFormCompleted();
-        return true;
-      }
-    } catch {
-      // cross-origin — ignore
-    }
-    return false;
-  }, [handleFormCompleted]);
 
   React.useEffect(() => {
     setIsIframeLoaded(false);
@@ -90,12 +82,9 @@ const FormsEditor = () => {
   React.useEffect(() => {
     if (!editingFile) return;
 
-    const interval = setInterval(checkCompletedUrl, 200);
-    return () => clearInterval(interval);
-  }, [editingFile, checkCompletedUrl]);
-
-  React.useEffect(() => {
     const onMessage = (event: MessageEvent) => {
+      if (event.origin !== editorOrigin) return;
+
       if (
         event.data?.type === "onRequestClose" ||
         event.data === "close-editor"
@@ -113,27 +102,18 @@ const FormsEditor = () => {
 
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
-  }, [closeEditor, handleFormCompleted]);
+  }, [editingFile, closeEditor, handleFormCompleted, editorOrigin]);
 
   const onIframeLoad = React.useCallback(() => {
     setIsIframeLoaded(true);
-    checkCompletedUrl();
-  }, [checkCompletedUrl]);
+  }, []);
 
   if (!editingFile || !editorUrl) return null;
 
   return (
     <div className={styles.editorWrapper}>
       {!isIframeLoaded && (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "absolute",
-            inset: 0,
-          }}
-        >
+        <div className={styles.loaderOverlay}>
           <Loader type={LoaderTypes.track} size="40px" />
         </div>
       )}
@@ -141,12 +121,11 @@ const FormsEditor = () => {
         ref={iframeRef}
         src={editorUrl}
         onLoad={onIframeLoad}
-        style={{
-          width: "100%",
-          height: "100%",
-          border: "none",
-          opacity: isIframeLoaded ? 1 : 0,
-        }}
+        className={
+          isIframeLoaded
+            ? styles.editorIframe
+            : styles.editorIframeHidden
+        }
         allow="autoplay; camera; microphone; display-capture; clipboard-write"
         title={t("Common:FormEditor")}
       />

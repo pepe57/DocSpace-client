@@ -59,6 +59,8 @@ import SettingsPanel from "../settings-panel";
 import AiChatPanel from "../ai-chat-panel";
 import AiChatButton from "../ai-chat-button";
 
+import styles from "./FormsLayout.module.scss";
+
 type FormsLayoutProps = {
   filesSettings: TFilesSettings;
 };
@@ -69,7 +71,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     useFormsNavigationStore();
   const formsListStore = useFormsListStore();
   const { items } = formsListStore;
-  const { roomId } = useFormsSettingsStore();
+  const { roomId, requestToken } = useFormsSettingsStore();
   const { fetchSection, fetchMore } = useFormsData();
   const { onChooseFromPersonal, onCreateFromDocx, onCreateFromTemplate } =
     useNewFormActions();
@@ -85,9 +87,9 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
 
   React.useEffect(() => {
     if (roomId) {
-      aiStore.loadAgentForRoom(roomId);
+      aiStore.loadAgentForRoom(roomId, requestToken);
     }
-  }, [roomId, aiStore]);
+  }, [roomId, requestToken, aiStore]);
 
   React.useEffect(() => {
     if (prevSection.current !== activeSection) {
@@ -172,7 +174,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const renderHeader = () => {
     if (isEditing) {
       return (
-        <div style={{ flex: "0 1 auto" }}>
+        <div className={styles.headerEditing}>
           <Navigation
             showText
             isRootFolder={false}
@@ -213,15 +215,8 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     }
 
     return (
-      <div
-        style={{
-          flex: "0 1 auto",
-          display: "flex",
-          alignItems: "center",
-          gap: "16px",
-        }}
-      >
-        <div style={{ flex: 1, minWidth: 0 }}>
+      <div className={styles.headerRow}>
+        <div className={styles.headerNavigation}>
           <Navigation
             showText
             isRootFolder
@@ -272,15 +267,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
 
     if (isSectionLoading) {
       return (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            height: "100%",
-          }}
-        >
+        <div className={styles.loaderCenter}>
           <Loader type={LoaderTypes.track} size="40px" />
         </div>
       );
@@ -288,10 +275,11 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
 
     return (
       <div
-        style={{
-          opacity: contentVisible ? 1 : 0,
-          transition: contentVisible ? "none" : "opacity 0.15s ease",
-        }}
+        className={
+          contentVisible
+            ? styles.contentFadeIn
+            : styles.contentHidden
+        }
       >
         <FormsGrid filesSettings={filesSettings} fetchMore={fetchMore} />
       </div>
@@ -299,14 +287,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        width: "100%",
-        height: "100%",
-        position: "relative",
-      }}
-    >
+    <div className={styles.root}>
       <FormsSidebar />
       <Section
         withBodyScroll={!isEditing}

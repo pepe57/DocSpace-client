@@ -30,7 +30,10 @@ import React from "react";
 import { makeAutoObservable, runInAction } from "mobx";
 
 import { loadDbConfig, loadRoomExternalDb } from "../_api/dbSettings";
-import { loadAgentSettings } from "../_api/aiAgentSettings";
+import {
+  loadAgentSettings,
+  tokenToHash,
+} from "../_api/aiAgentSettings";
 
 export type DatabaseType = "MySQL" | "PostgreSQL";
 
@@ -65,13 +68,22 @@ class FormsDbSettingsStore {
   aiAutoSyncKnowledge = true;
   isAgentSelectorVisible = false;
 
+  // Per-user localStorage key suffix
+  userHash: string | undefined = undefined;
+
   constructor() {
     makeAutoObservable(this);
   }
 
-  openPanel = (roomId: string | number) => {
+  openPanel = (
+    roomId: string | number,
+    requestToken?: string,
+  ) => {
     this.isPanelVisible = true;
     this.currentLevel = "CategoryList";
+    this.userHash = requestToken
+      ? tokenToHash(requestToken)
+      : undefined;
     this.fetchConfig(roomId);
   };
 
@@ -82,7 +94,7 @@ class FormsDbSettingsStore {
         loadRoomExternalDb(roomId),
       ]);
 
-      const agentSettings = loadAgentSettings(roomId);
+      const agentSettings = loadAgentSettings(roomId, this.userHash);
 
       runInAction(() => {
         if (props) {

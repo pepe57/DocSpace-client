@@ -82,13 +82,15 @@ const AiChatPanel = () => {
 
   const getResultStorageId = React.useCallback(() => null, []);
 
+  // Re-init chat data only when panel opens or agent changes.
+  // Init functions are intentionally omitted from deps to avoid
+  // re-fetching on every render (they are not referentially stable).
   React.useEffect(() => {
     if (isPanelVisible && agentRoomId) {
       initChats.fetchChats();
       initMessages();
       toolsSettings.initTools();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPanelVisible, agentRoomId]);
 
   if (!isPanelVisible) return null;

@@ -90,14 +90,18 @@ const SettingsPanel = () => {
           // Get KB folder ID inside agent room
           const kbFolderId = await getKnowledgeFolderId(store.aiAgentId);
 
-          saveAgentSettings(roomId, {
-            ...store.aiAgentFormData,
-            knowledgeFolderId: kbFolderId,
-          });
+          saveAgentSettings(
+            roomId,
+            {
+              ...store.aiAgentFormData,
+              knowledgeFolderId: kbFolderId,
+            },
+            store.userHash,
+          );
           aiAgentStore.setSelectedAgent(store.aiAgentId, kbFolderId);
           await aiAgentStore.fetchAgentChatSettings(store.aiAgentId);
         } else {
-          clearAgentSettings(roomId);
+          clearAgentSettings(roomId, store.userHash);
           aiAgentStore.setSelectedAgent(null);
         }
       }
