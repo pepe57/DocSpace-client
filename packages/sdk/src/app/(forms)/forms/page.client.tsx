@@ -34,6 +34,7 @@ import type {
 	TGetFolder,
 } from "@docspace/shared/api/files/types";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { setAuthToken } from "@docspace/shared/api/client";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
@@ -49,6 +50,7 @@ type FormsPageProps = {
 	formsToFillFolderId: string | number;
 	completedFormsFolderId: string | number;
 	requestToken: string;
+	authToken: string;
 	filesSettings: TFilesSettings;
 	initialFolderData?: TGetFolder;
 };
@@ -59,6 +61,7 @@ function FormsPage({
 	formsToFillFolderId,
 	completedFormsFolderId,
 	requestToken,
+	authToken,
 	filesSettings,
 	initialFolderData,
 }: FormsPageProps) {
@@ -68,6 +71,7 @@ function FormsPage({
 	const formsListStore = useFormsListStore();
 	const filesSettingsStore = useFilesSettingsStore();
 	const settingsStore = useSettingsStore();
+	const [isReady, setIsReady] = React.useState(false);
 
 	React.useEffect(() => {
 		formsSettingsStore.setConfig({
@@ -94,17 +98,42 @@ function FormsPage({
 
 	React.useEffect(() => {
 		settingsStore.setFilesViewAs("tile");
-		if (requestToken) {
-			settingsStore.setShareKey(requestToken);
-			localStorage.setItem("requestToken", requestToken);
+		const token = requestToken || authToken;
+		if (token) {
+			document.cookie = `asc_auth_key=${token}; path=/`;
+			setAuthToken(token);
 		}
-	}, [settingsStore, requestToken]);
+	}, [settingsStore, requestToken, authToken]);
 
 	React.useEffect(() => {
 		if (initialFolderData) {
-			formsListStore.setItems(initialFolderData.files, initialFolderData.total);
+			const id = Number(myFormsFolderId);
+			const files = id
+				? initialFolderData.files.filter((f) => f.folderId === id)
+				: initialFolderData.files;
+			formsListStore.setItems(files, files.length);
 		}
-	}, [initialFolderData, formsListStore]);
+	}, [initialFolderData, formsListStore, myFormsFolderId]);
+
+	React.useEffect(() => {
+		setIsReady(true);
+	}, []);
+
+	if (!isReady) {
+		return (
+			<div
+				style={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+					width: "100%",
+					height: "100%",
+				}}
+			>
+				<Loader type={LoaderTypes.track} size="40px" />
+			</div>
+		);
+	}
 
 	return <FormsLayout filesSettings={filesSettings} />;
 }

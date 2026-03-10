@@ -33,15 +33,20 @@ import { observer } from "mobx-react";
 import { FileTile } from "@docspace/ui-kit/components/tiles/file-tile";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 
+import type { TFile } from "@docspace/shared/api/files/types";
+
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import type { TFileItem } from "@/app/(docspace)/_hooks/useItemList";
 import type { TGetIcon } from "@/app/(docspace)/_hooks/useItemIcon";
 
 import TileContent from "@/app/(docspace)/(files)/_components/tile-view/sub-components/TileContent";
 
+import { FormsSection } from "@/types/forms";
+
 import useFormsActions from "../../_hooks/useFormsActions";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
 import { useFormsListStore } from "../../_store/FormsListStore";
+import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 
 type FormsTileProps = {
   item: TFileItem;
@@ -55,6 +60,7 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
   const { openForm } = useFormsActions({ t });
   const { getContextMenuModel } = useFormsContextMenu();
   const { items } = useFormsListStore();
+  const { activeSection } = useFormsNavigationStore();
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
 
@@ -64,13 +70,42 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
 
   const originalFile = items.find((f) => f.id === item.id);
 
+  const getDefaultAction = React.useCallback(
+    (file: TFile) => {
+      switch (activeSection) {
+        case FormsSection.MyForms: {
+          const canFill =
+            file.security?.FillForms &&
+            file.viewAccessibility?.WebRestrictedEditing;
+          const canEdit =
+            file.security?.EditForm && !file.startFilling && file.isForm;
+
+          if (canFill) return "fill" as const;
+          if (canEdit) return "edit" as const;
+          return "view" as const;
+        }
+        case FormsSection.FormsToFill: {
+          const canFill =
+            file.security?.FillForms &&
+            file.viewAccessibility?.WebRestrictedEditing;
+          if (canFill) return "fill" as const;
+          return "view" as const;
+        }
+        case FormsSection.CompletedForms:
+        default:
+          return "view" as const;
+      }
+    },
+    [activeSection],
+  );
+
   const openItem = (e: React.MouseEvent) => {
     const { target } = e;
     if (target instanceof HTMLElement && target.tagName === "INPUT") return;
     e.preventDefault();
 
     if (originalFile) {
-      openForm(originalFile, "fill");
+      openForm(originalFile, getDefaultAction(originalFile));
     }
   };
 

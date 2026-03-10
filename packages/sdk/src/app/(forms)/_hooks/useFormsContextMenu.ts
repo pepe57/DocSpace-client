@@ -34,6 +34,8 @@ import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
+import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 
 import type { TFile } from "@docspace/shared/api/files/types";
 
@@ -54,21 +56,43 @@ export type TFormsContextMenuItem = {
 export default function useFormsContextMenu() {
   const { t } = useTranslation(["Common"]);
   const { activeSection } = useFormsNavigationStore();
-  const { openForm, shareForm, deleteFromList } = useFormsActions({ t });
+  const { openForm, shareForm, deleteFromList, downloadFile, stopFilling } =
+    useFormsActions({ t });
 
   const getContextMenuModel = useCallback(
     (file: TFile): TFormsContextMenuItem[] => {
       const model: TFormsContextMenuItem[] = [];
 
+      const canEditForm =
+        file.security?.EditForm && !file.startFilling && file.isForm;
+      const canFillForm =
+        file.security?.FillForms &&
+        file.viewAccessibility?.WebRestrictedEditing;
+      const canShare = file.security?.CopyLink;
+      const canDownload = file.security?.Download;
+      const canStopFilling = file.security?.StopFilling;
+      const canDelete = file.security?.Delete;
+
       switch (activeSection) {
         case FormsSection.MyForms: {
-          if (file.security?.Edit) {
+          if (canEditForm) {
             model.push({
-              id: "option_edit",
-              key: "edit",
+              id: "option_edit-form",
+              key: "edit-form",
               label: t("Common:EditButton"),
               icon: AccessEditReactSvgUrl,
               onClick: () => openForm(file, "edit"),
+              disabled: false,
+            });
+          }
+
+          if (canFillForm) {
+            model.push({
+              id: "option_fill-form",
+              key: "fill-form",
+              label: t("Common:FillFormButton"),
+              icon: FormFillRectSvgUrl,
+              onClick: () => openForm(file, "fill"),
               disabled: false,
             });
           }
@@ -82,35 +106,52 @@ export default function useFormsContextMenu() {
             disabled: false,
           });
 
-          model.push({
-            id: "option_share",
-            key: "share",
-            label: t("Common:Share"),
-            icon: InvitationLinkReactSvgUrl,
-            onClick: () => shareForm(file.id),
-            disabled: false,
-          });
+          if (canShare) {
+            model.push({
+              id: "option_share",
+              key: "share",
+              label: t("Common:Share"),
+              icon: InvitationLinkReactSvgUrl,
+              onClick: () => shareForm(file.id),
+              disabled: false,
+            });
+          }
 
-          model.push({
-            id: "option_delete-from-list",
-            key: "delete-from-list",
-            label: t("Common:DeleteFromList"),
-            icon: RemoveReactSvgUrl,
-            onClick: () => deleteFromList(file.id),
-            disabled: false,
-          });
+          if (canDownload) {
+            model.push({
+              id: "option_download",
+              key: "download",
+              label: t("Common:Download"),
+              icon: DownloadReactSvgUrl,
+              onClick: () => downloadFile(file.id),
+              disabled: false,
+            });
+          }
+
+          if (canDelete) {
+            model.push({
+              id: "option_delete-from-list",
+              key: "delete-from-list",
+              label: t("Common:DeleteFromList"),
+              icon: RemoveReactSvgUrl,
+              onClick: () => deleteFromList(file.id),
+              disabled: false,
+            });
+          }
           break;
         }
 
         case FormsSection.FormsToFill: {
-          model.push({
-            id: "option_fill",
-            key: "fill",
-            label: t("Common:FillFormButton"),
-            icon: FormFillRectSvgUrl,
-            onClick: () => openForm(file, "fill"),
-            disabled: false,
-          });
+          if (canFillForm) {
+            model.push({
+              id: "option_fill-form",
+              key: "fill-form",
+              label: t("Common:FillFormButton"),
+              icon: FormFillRectSvgUrl,
+              onClick: () => openForm(file, "fill"),
+              disabled: false,
+            });
+          }
 
           model.push({
             id: "option_view",
@@ -120,6 +161,28 @@ export default function useFormsContextMenu() {
             onClick: () => openForm(file, "view"),
             disabled: false,
           });
+
+          if (canStopFilling) {
+            model.push({
+              id: "option_stop-filling",
+              key: "stop-filling",
+              label: t("Common:StopFilling"),
+              icon: AccessNoneReactSvgUrl,
+              onClick: () => stopFilling(file.id),
+              disabled: false,
+            });
+          }
+
+          if (canDownload) {
+            model.push({
+              id: "option_download",
+              key: "download",
+              label: t("Common:Download"),
+              icon: DownloadReactSvgUrl,
+              onClick: () => downloadFile(file.id),
+              disabled: false,
+            });
+          }
           break;
         }
 
@@ -132,13 +195,24 @@ export default function useFormsContextMenu() {
             onClick: () => openForm(file, "view"),
             disabled: false,
           });
+
+          if (canDownload) {
+            model.push({
+              id: "option_download",
+              key: "download",
+              label: t("Common:Download"),
+              icon: DownloadReactSvgUrl,
+              onClick: () => downloadFile(file.id),
+              disabled: false,
+            });
+          }
           break;
         }
       }
 
       return model;
     },
-    [t, activeSection, openForm, shareForm, deleteFromList],
+    [t, activeSection, openForm, shareForm, deleteFromList, downloadFile, stopFilling],
   );
 
   return { getContextMenuModel };

@@ -75,6 +75,26 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
     [t],
   );
 
+  const downloadFile = useCallback(
+    (fileId: number) => {
+      frameCallEvent({
+        event: "onDownloadFile",
+        data: { fileId },
+      });
+    },
+    [],
+  );
+
+  const stopFilling = useCallback(
+    (fileId: number) => {
+      frameCallEvent({
+        event: "onStopFilling",
+        data: { fileId },
+      });
+    },
+    [],
+  );
+
   const deleteFromList = useCallback(
     (fileId: number) => {
       frameCallEvent({
@@ -85,5 +105,5 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
     [],
   );
 
-  return { openForm, shareForm, deleteFromList };
+  return { openForm, shareForm, downloadFile, stopFilling, deleteFromList };
 }

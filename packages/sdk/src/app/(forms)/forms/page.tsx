@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { headers } from "next/headers";
+import { headers, cookies } from "next/headers";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FilterType } from "@docspace/shared/enums";
@@ -66,6 +66,10 @@ export default async function Forms({
 	const requestToken =
 		hdrs.get(REQUEST_TOKEN_HEADER) || params.requestToken || "";
 
+	// Read httpOnly cookie server-side for AI API auth
+	const cookieStore = await cookies();
+	const authToken = cookieStore.get("asc_auth_key")?.value || "";
+
 	const filter = FilesFilter.getDefault();
 	filter.pageCount = PAGE_COUNT;
 	filter.filterType = FilterType.PDFForm;
@@ -89,6 +93,7 @@ export default async function Forms({
 			formsToFillFolderId={formsToFillFolderId}
 			completedFormsFolderId={completedFormsFolderId}
 			requestToken={requestToken}
+			authToken={authToken}
 			filesSettings={filesSettings!}
 			initialFolderData={initialFolderData}
 		/>

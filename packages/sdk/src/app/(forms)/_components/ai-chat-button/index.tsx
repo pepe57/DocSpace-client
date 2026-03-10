@@ -26,65 +26,26 @@
 
 "use client";
 
+import React from "react";
 import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
 
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
-import { useFormsDbSettingsStore } from "../../_store/FormsDbSettingsStore";
+import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 
-import PortfolioIconUrl from "PUBLIC_DIR/images/icons/16/catalog.portfolio.react.svg?url";
 import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
-import ArrowRightIconUrl from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 
-import styles from "./SettingsPanel.module.scss";
-
-const SettingsCategoryList = () => {
-  const { t } = useTranslation(["Common"]);
-  const { setCurrentLevel } = useFormsDbSettingsStore();
+const AiChatButton = () => {
+  const { togglePanel } = useFormsAiAgentStore();
 
   return (
-    <div className={styles.panelBody}>
-      <div className={styles.categoryList}>
-        <div
-          className={styles.categoryItem}
-          onClick={() => setCurrentLevel("ConnectDatabase")}
-        >
-          <IconButton
-            iconName={PortfolioIconUrl}
-            size={20}
-            isClickable={false}
-          />
-          <span className={styles.categoryLabel}>
-            {t("Common:ConnectDatabase")}
-          </span>
-          <IconButton
-            iconName={ArrowRightIconUrl}
-            size={12}
-            isClickable={false}
-          />
-        </div>
-        <div
-          className={styles.categoryItem}
-          onClick={() => setCurrentLevel("AIAgent")}
-        >
-          <IconButton
-            iconName={AiAgentsReactSvgUrl}
-            size={20}
-            isClickable={false}
-          />
-          <span className={styles.categoryLabel}>
-            {t("Common:AIAgent")}
-          </span>
-          <IconButton
-            iconName={ArrowRightIconUrl}
-            size={12}
-            isClickable={false}
-          />
-        </div>
-      </div>
-    </div>
+    <IconButton
+      iconName={AiAgentsReactSvgUrl}
+      size={16}
+      onClick={togglePanel}
+      isFill
+    />
   );
 };
 
-export default observer(SettingsCategoryList);
+export default observer(AiChatButton);

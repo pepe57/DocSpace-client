@@ -94,6 +94,17 @@
   gap: 4px;
 }
 
+.agentRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  > :first-child {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
 .testButtonWrapper {
   padding-top: 4px;
 }

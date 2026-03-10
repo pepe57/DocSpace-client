@@ -1,0 +1,81 @@
+.chatPanel {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 480px;
+  height: 100%;
+  z-index: 310;
+  border-inline-start: 1px solid var(--info-panel-border);
+  background: var(--info-panel-bg, var(--section-background, #fff));
+  overflow: hidden;
+}
+
+.chatHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--modal-dialog-header-border-color);
+  flex-shrink: 0;
+
+  .headerTitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .headerActions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.chatBody {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  position: relative;
+  --section-header-height: 0px;
+  --section-submenu-height: 0px;
+
+  // ChatContainer: don't constrain to fixed height, grow with content
+  :global(.chat-container) {
+    height: auto;
+  }
+
+  // ChatMessageBody: don't clip messages, let them overflow into .chatBody scroll
+  [data-testid="chat-message-body"] {
+    overflow: visible;
+    height: auto;
+    max-height: none;
+  }
+}
+
+.syncBanner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: var(--color-warning-translucent, rgba(255, 193, 7, 0.1));
+  border-bottom: 1px solid var(--modal-dialog-header-border-color);
+  font-size: 12px;
+  flex-shrink: 0;
+
+  .syncText {
+    flex: 1;
+  }
+}
+
+.authMessage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}

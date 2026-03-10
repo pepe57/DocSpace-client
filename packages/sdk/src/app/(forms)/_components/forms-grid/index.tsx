@@ -39,7 +39,6 @@ import useItemList from "@/app/(docspace)/_hooks/useItemList";
 import InfiniteGrid from "@/app/(docspace)/(files)/_components/tile-view/sub-components/infinite-grid/InfiniteGrid";
 
 import { useFormsListStore } from "../../_store/FormsListStore";
-import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import FormsEmpty from "../forms-empty";
 import FormsTile from "./FormsTile";
 
@@ -52,12 +51,9 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
   const { t } = useTranslation();
   const isServer = useIsServer();
   const { items, hasMore, isLoading } = useFormsListStore();
-  const { requestToken } = useFormsSettingsStore();
-
   const { getIcon } = useItemIcon({ filesSettings });
   const { convertFileToItem } = useItemList({
     getIcon,
-    shareKey: requestToken || undefined,
   });
 
   const fileItems = React.useMemo(

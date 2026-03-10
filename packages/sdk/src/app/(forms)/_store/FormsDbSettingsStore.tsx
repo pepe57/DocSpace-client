@@ -30,10 +30,11 @@ import React from "react";
 import { makeAutoObservable, runInAction } from "mobx";
 
 import { loadDbConfig, loadRoomExternalDb } from "../_api/dbSettings";
+import { loadAgentSettings } from "../_api/aiAgentSettings";
 
 export type DatabaseType = "MySQL" | "PostgreSQL";
 
-export type SettingsLevel = "CategoryList" | "ConnectDatabase";
+export type SettingsLevel = "CategoryList" | "ConnectDatabase" | "AIAgent";
 
 const DEFAULT_PORTS: Record<DatabaseType, string> = {
   MySQL: "3306",
@@ -57,6 +58,13 @@ class FormsDbSettingsStore {
   isSaving = false;
   isTesting = false;
 
+  // AI Agent settings
+  aiAgentEnabled = false;
+  aiAgentId: number | null = null;
+  aiAgentName = "";
+  aiAutoSyncKnowledge = true;
+  isAgentSelectorVisible = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -74,11 +82,19 @@ class FormsDbSettingsStore {
         loadRoomExternalDb(roomId),
       ]);
 
+      const agentSettings = loadAgentSettings(roomId);
+
       runInAction(() => {
         if (props) {
           this.loadFromConfig(props);
         }
         this.sendToDb = roomEnabled;
+        if (agentSettings) {
+          this.aiAgentEnabled = agentSettings.agentId != null;
+          this.aiAgentId = agentSettings.agentId;
+          this.aiAgentName = agentSettings.agentName;
+          this.aiAutoSyncKnowledge = agentSettings.autoSyncKnowledge;
+        }
       });
     } catch {
       // ignore — use defaults
@@ -135,6 +151,38 @@ class FormsDbSettingsStore {
     this.isTesting = value;
   };
 
+  setAiAgentEnabled = (value: boolean) => {
+    this.aiAgentEnabled = value;
+    if (value && !this.aiAgentId) {
+      this.isAgentSelectorVisible = true;
+    }
+    if (!value) {
+      this.aiAgentId = null;
+      this.aiAgentName = "";
+    }
+  };
+
+  setAiAgent = (id: number | null, name: string) => {
+    this.aiAgentId = id;
+    this.aiAgentName = name;
+    this.isAgentSelectorVisible = false;
+  };
+
+  openAgentSelector = () => {
+    this.isAgentSelectorVisible = true;
+  };
+
+  closeAgentSelector = () => {
+    this.isAgentSelectorVisible = false;
+    if (!this.aiAgentId) {
+      this.aiAgentEnabled = false;
+    }
+  };
+
+  setAiAutoSyncKnowledge = (value: boolean) => {
+    this.aiAutoSyncKnowledge = value;
+  };
+
   get formData() {
     return {
       databaseType: this.databaseType,
@@ -147,6 +195,14 @@ class FormsDbSettingsStore {
     };
   }
 
+  get aiAgentFormData() {
+    return {
+      agentId: this.aiAgentId,
+      agentName: this.aiAgentName,
+      autoSyncKnowledge: this.aiAutoSyncKnowledge,
+    };
+  }
+
   resetForm = () => {
     this.sendToDb = false;
     this.databaseType = "MySQL";
@@ -156,6 +212,11 @@ class FormsDbSettingsStore {
     this.user = "";
     this.password = "";
     this.useSsl = false;
+    this.aiAgentEnabled = false;
+    this.aiAgentId = null;
+    this.aiAgentName = "";
+    this.aiAutoSyncKnowledge = true;
+    this.isAgentSelectorVisible = false;
   };
 
   loadFromConfig = (props: { name: string; value: string }[]) => {
@@ -187,6 +248,8 @@ class FormsDbSettingsStore {
           break;
         case "dbSsl":
           this.useSsl = prop.value === "true";
+          break;
+        default:
           break;
       }
     }

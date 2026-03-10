@@ -99,7 +99,6 @@ export default function useFormsData() {
           folderId,
           filter,
           controller.signal,
-          formsSettingsStore.requestToken || undefined,
         );
 
         if (controller.signal.aborted) return;
@@ -120,7 +119,7 @@ export default function useFormsData() {
         }
       }
     },
-    [activeSection, getFolderId, formsListStore, formsSettingsStore.requestToken],
+    [activeSection, getFolderId, formsListStore],
   );
 
   const fetchMore = useCallback(async () => {
@@ -147,7 +146,6 @@ export default function useFormsData() {
           folderId,
           filter,
           controller.signal,
-          formsSettingsStore.requestToken || undefined,
         );
 
         if (controller.signal.aborted) return;
@@ -165,7 +163,7 @@ export default function useFormsData() {
     } catch {
       // aborted or network error — ignore
     }
-  }, [getFolderId, formsListStore, formsSettingsStore.requestToken, activeSection]);
+  }, [getFolderId, formsListStore, activeSection]);
 
   return { fetchSection, fetchMore };
 }

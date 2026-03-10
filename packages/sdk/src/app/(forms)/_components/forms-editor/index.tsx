@@ -51,12 +51,16 @@ const FormsEditor = () => {
     const params = new URLSearchParams();
     params.set("fileId", editingFile.id.toString());
     params.append("action", editorAction);
+    // Doceditor runs on a different origin (main DocSpace server),
+    // so it can't access our asc_auth_key cookie — pass token via URL
     if (requestToken) params.append("share", requestToken);
 
-    return combineUrl(
-      window.location.origin,
-      `/doceditor?${params.toString()}`,
-    );
+    const origin =
+      window.ClientConfig?.proxy?.url ||
+      window.ClientConfig?.api?.origin ||
+      window.location.origin;
+
+    return combineUrl(origin, `/doceditor?${params.toString()}`);
   }, [editingFile, editorAction, requestToken]);
 
   const handleFormCompleted = React.useCallback(() => {

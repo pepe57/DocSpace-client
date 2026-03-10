@@ -39,52 +39,89 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useFormsDbSettingsStore } from "../../_store/FormsDbSettingsStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import { saveDbConfig, setRoomExternalDb } from "../../_api/dbSettings";
+import {
+  saveAgentSettings,
+  clearAgentSettings,
+  getKnowledgeFolderId,
+} from "../../_api/aiAgentSettings";
 
 import SettingsCategoryList from "./SettingsCategoryList";
 import ConnectDatabaseForm from "./ConnectDatabaseForm";
+import AIAgentForm from "./AIAgentForm";
 
 const SettingsPanel = () => {
   const { t } = useTranslation(["Common"]);
   const store = useFormsDbSettingsStore();
   const { roomId } = useFormsSettingsStore();
+  const aiAgentStore = useFormsAiAgentStore();
 
   const isConnectDatabase = store.currentLevel === "ConnectDatabase";
+  const isAIAgent = store.currentLevel === "AIAgent";
+  const isSubLevel = isConnectDatabase || isAIAgent;
 
   const onClose = React.useCallback(() => {
     store.closePanel();
   }, [store]);
 
   const onBack = React.useCallback(() => {
+    if (store.isAgentSelectorVisible) {
+      store.closeAgentSelector();
+      return;
+    }
     store.setCurrentLevel("CategoryList");
   }, [store]);
 
   const onSave = React.useCallback(async () => {
     store.setIsSaving(true);
     try {
-      if (store.sendToDb) {
-        const result = await saveDbConfig(store.formData);
-        if (!result) {
-          toastr.error(t("Common:ErrorOccurred"));
-          return;
+      if (isConnectDatabase) {
+        if (store.sendToDb) {
+          const result = await saveDbConfig(store.formData);
+          if (!result) {
+            toastr.error(t("Common:ErrorOccurred"));
+            return;
+          }
+        }
+        await setRoomExternalDb(roomId, store.sendToDb);
+      } else if (isAIAgent) {
+        if (store.aiAgentEnabled && store.aiAgentId) {
+          // Get KB folder ID inside agent room
+          const kbFolderId = await getKnowledgeFolderId(store.aiAgentId);
+
+          saveAgentSettings(roomId, {
+            ...store.aiAgentFormData,
+            knowledgeFolderId: kbFolderId,
+          });
+          aiAgentStore.setSelectedAgent(store.aiAgentId, kbFolderId);
+          await aiAgentStore.fetchAgentChatSettings(store.aiAgentId);
+        } else {
+          clearAgentSettings(roomId);
+          aiAgentStore.setSelectedAgent(null);
         }
       }
-      await setRoomExternalDb(roomId, store.sendToDb);
       store.closePanel();
     } catch {
       toastr.error(t("Common:ErrorOccurred"));
     } finally {
       store.setIsSaving(false);
     }
-  }, [store, roomId, t]);
+  }, [store, roomId, t, isConnectDatabase, isAIAgent, aiAgentStore]);
 
   const onCancel = React.useCallback(() => {
     store.closePanel();
   }, [store]);
 
+  const showAgentSelector = isAIAgent && store.isAgentSelectorVisible;
+
   const headerTitle = isConnectDatabase
     ? t("Common:ConnectDatabase")
-    : t("Common:Settings");
+    : isAIAgent
+      ? t("Common:AIAgent")
+      : t("Common:Settings");
+
+  const showFooter = isSubLevel && !showAgentSelector;
 
   return (
     <ModalDialog
@@ -92,24 +129,28 @@ const SettingsPanel = () => {
       isCloseable
       onClose={onClose}
       displayType={ModalDialogType.aside}
-      withFooterBorder={isConnectDatabase}
-      withBodyScroll
+      withFooterBorder={showFooter}
+      withBodyScroll={!showAgentSelector}
       withoutPadding
-      isBackButton={isConnectDatabase}
+      isBackButton={isSubLevel}
       onBackClick={onBack}
     >
-      <ModalDialog.Header>{headerTitle}</ModalDialog.Header>
+      {!showAgentSelector ? (
+        <ModalDialog.Header>{headerTitle}</ModalDialog.Header>
+      ) : null}
       <ModalDialog.Body>
         {isConnectDatabase ? (
           <ConnectDatabaseForm />
+        ) : isAIAgent ? (
+          <AIAgentForm />
         ) : (
           <SettingsCategoryList />
         )}
       </ModalDialog.Body>
-      {isConnectDatabase && (
+      {showFooter ? (
         <ModalDialog.Footer>
           <Button
-            label={t("Common:Enable")}
+            label={t("Common:SaveButton")}
             size={ButtonSize.normal}
             primary
             scale
@@ -124,7 +165,7 @@ const SettingsPanel = () => {
             isDisabled={store.isSaving}
           />
         </ModalDialog.Footer>
-      )}
+      ) : null}
     </ModalDialog>
   );
 };

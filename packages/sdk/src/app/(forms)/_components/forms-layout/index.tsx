@@ -41,17 +41,22 @@ import { FormsSection } from "@/types/forms";
 
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
+import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import useFormsData from "../../_hooks/useFormsData";
 import useNewFormActions from "../../_hooks/useNewFormActions";
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
 
+import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
+
 import FormsSidebar from "../sidebar";
 import FormsGrid from "../forms-grid";
 import FormsEditor from "../forms-editor";
 import SettingsButton from "../settings-button";
 import SettingsPanel from "../settings-panel";
+import AiChatPanel from "../ai-chat-panel";
+import AiChatButton from "../ai-chat-button";
 
 type FormsLayoutProps = {
   filesSettings: TFilesSettings;
@@ -61,11 +66,14 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const { t } = useTranslation(["Common"]);
   const { activeSection, editingFile, closeEditor } =
     useFormsNavigationStore();
-  const { items } = useFormsListStore();
+  const formsListStore = useFormsListStore();
+  const { items } = formsListStore;
+  const { roomId } = useFormsSettingsStore();
   const { fetchSection, fetchMore } = useFormsData();
   const { onChooseFromPersonal, onCreateFromDocx, onCreateFromTemplate } =
     useNewFormActions();
   const { currentDeviceType } = useDeviceType();
+  const aiStore = useFormsAiAgentStore();
   const prevSection = React.useRef(activeSection);
   const [contentVisible, setContentVisible] = React.useState(true);
 
@@ -73,14 +81,32 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const isEditing = Boolean(editingFile);
 
   React.useEffect(() => {
+    if (roomId) {
+      aiStore.loadAgentForRoom(roomId);
+    }
+  }, [roomId, aiStore]);
+
+  React.useEffect(() => {
     if (prevSection.current !== activeSection) {
       setContentVisible(false);
       prevSection.current = activeSection;
       fetchSection(activeSection).then(() => {
         setContentVisible(true);
+
+        // Sync completed forms to AI agent KB after data is loaded
+        if (
+          activeSection === FormsSection.CompletedForms &&
+          formsListStore.items.length > 0
+        ) {
+          const files = formsListStore.items.map((f) => ({
+            id: f.id,
+            title: f.title,
+          }));
+          aiStore.syncCompletedForms(files);
+        }
       });
     }
-  }, [activeSection, fetchSection]);
+  }, [activeSection, fetchSection, formsListStore, aiStore]);
 
   const getSectionTitle = React.useCallback(() => {
     switch (activeSection) {
@@ -223,6 +249,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
             showFolderInfo={() => {}}
           />
         </div>
+        <AiChatButton />
         <SettingsButton />
       </div>
     );
@@ -266,6 +293,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
         <Section.SectionHeader>{renderHeader()}</Section.SectionHeader>
         <Section.SectionBody>{renderBody()}</Section.SectionBody>
       </Section>
+      <AiChatPanel />
       <SettingsPanel />
     </div>
   );

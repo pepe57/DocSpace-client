@@ -65,7 +65,7 @@ export async function getFormsFolder(
 		}
 
 		const tokenHeader: [string, string] = token
-			? ["Authorization", `Bearer ${token}`]
+			? ["Authorization", token]
 			: ["", ""];
 
 		const [req] = await createRequest(
