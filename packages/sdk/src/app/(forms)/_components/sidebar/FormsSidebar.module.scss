@@ -1,0 +1,15 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+// Override scrollbar height from Article.module.scss which subtracts
+// 150px for header+profile. We only have a 16px spacer, no profile.
+.scrollbar {
+	height: calc(100% - 16px) !important;
+
+	@include mixins.tablet {
+		height: calc(100% - 16px) !important;
+	}
+
+	@include mixins.mobile {
+		height: 100% !important;
+	}
+}
