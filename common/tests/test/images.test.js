@@ -60,7 +60,7 @@ beforeAll(() => {
     "locales"
   ];
 
-  const workspaces = getWorkSpaces();
+  const workspaces = getWorkSpaces({ excludeUiKit: true });
   workspaces.push(path.resolve(BASE_DIR, "public"));
   const filesPattern = /\.(js|jsx|ts|tsx|html|css|scss|saas|json)$/i;
   const files = workspaces.flatMap((wsPath) => {
