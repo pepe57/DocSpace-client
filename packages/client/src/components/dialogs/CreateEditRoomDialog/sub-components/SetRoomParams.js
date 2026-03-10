@@ -157,6 +157,7 @@ const SetRoomParams = ({
   fromTemplate,
   infoPanelSelection,
   isRoomAdmin,
+  externalDbEnabled,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(roomParams.previewIcon);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -191,8 +192,7 @@ const SetRoomParams = ({
 
   const showLifetimeDialog = !hideConfirmRoomLifetime && filesCount > 0;
 
-  const hasDatabaseConnection = false;
-
+  const hasDatabaseConnection = externalDbEnabled;
   const showFormRoomBlock =
     isFormRoom && !(isRoomAdmin && !hasDatabaseConnection);
 
@@ -645,8 +645,12 @@ export default inject(
     { templateItem },
   ) => {
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
-    const { folderFormValidation, maxImageUploadSize, currentColorScheme } =
-      settingsStore;
+    const {
+      folderFormValidation,
+      maxImageUploadSize,
+      currentColorScheme,
+      externalDbEnabled,
+    } = settingsStore;
 
     const isRoomAdmin = authStore.isRoomAdmin;
 
@@ -711,6 +715,7 @@ export default inject(
       hideConfirmRoomLifetime,
       infoPanelSelection,
       isRoomAdmin,
+      externalDbEnabled,
     };
   },
 )(
