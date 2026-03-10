@@ -37,6 +37,15 @@ const useInitMessagesSDK = (roomId: string | number) => {
   const [messages, setMessages] = React.useState<TMessage[]>([]);
   const [chatId, setChatId] = React.useState("");
   const [total, setTotal] = React.useState(0);
+  const activeRef = React.useRef(true);
+
+  React.useEffect(() => {
+    activeRef.current = true;
+
+    return () => {
+      activeRef.current = false;
+    };
+  }, []);
 
   const resetChat = React.useCallback(() => {
     setMessages([]);
@@ -79,6 +88,9 @@ const useInitMessagesSDK = (roomId: string | number) => {
       cacheChatId.set("chat", currChatId);
 
       const { items, total: t } = await getChatMessages(currChatId, 0);
+
+      if (!activeRef.current) return;
+
       const reversedItems = items.reverse();
 
       setMessages(reversedItems);

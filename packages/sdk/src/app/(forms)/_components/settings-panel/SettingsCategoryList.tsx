@@ -26,6 +26,7 @@
 
 "use client";
 
+import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -39,6 +40,15 @@ import ArrowRightIconUrl from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 
 import styles from "./SettingsPanel.module.scss";
 
+const handleKeyDown =
+  (callback: () => void) =>
+  (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      callback();
+    }
+  };
+
 const SettingsCategoryList = () => {
   const { t } = useTranslation(["Common"]);
   const { setCurrentLevel } = useFormsDbSettingsStore();
@@ -48,7 +58,12 @@ const SettingsCategoryList = () => {
       <div className={styles.categoryList}>
         <div
           className={styles.categoryItem}
+          role="button"
+          tabIndex={0}
           onClick={() => setCurrentLevel("ConnectDatabase")}
+          onKeyDown={handleKeyDown(() =>
+            setCurrentLevel("ConnectDatabase"),
+          )}
         >
           <IconButton
             iconName={PortfolioIconUrl}
@@ -66,7 +81,12 @@ const SettingsCategoryList = () => {
         </div>
         <div
           className={styles.categoryItem}
+          role="button"
+          tabIndex={0}
           onClick={() => setCurrentLevel("AIAgent")}
+          onKeyDown={handleKeyDown(() =>
+            setCurrentLevel("AIAgent"),
+          )}
         >
           <IconButton
             iconName={AiAgentsReactSvgUrl}

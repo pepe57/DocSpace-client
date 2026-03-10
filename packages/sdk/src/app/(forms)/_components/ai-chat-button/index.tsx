@@ -29,6 +29,8 @@
 import React from "react";
 import { observer } from "mobx-react";
 
+import { useTranslation } from "react-i18next";
+
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
@@ -36,6 +38,7 @@ import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 
 const AiChatButton = () => {
+  const { t } = useTranslation(["Common"]);
   const { togglePanel } = useFormsAiAgentStore();
 
   return (
@@ -44,6 +47,7 @@ const AiChatButton = () => {
       size={16}
       onClick={togglePanel}
       isFill
+      title={t("Common:AIChatButton")}
     />
   );
 };

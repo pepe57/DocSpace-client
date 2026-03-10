@@ -32,6 +32,7 @@ import { useTranslation } from "react-i18next";
 
 import Section from "@docspace/ui-kit/components/section";
 import Navigation from "@docspace/ui-kit/components/navigation";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { DeviceType } from "@docspace/shared/enums";
 
 import type { TFilesSettings } from "@docspace/shared/api/files/types";
@@ -75,7 +76,9 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const { currentDeviceType } = useDeviceType();
   const aiStore = useFormsAiAgentStore();
   const prevSection = React.useRef(activeSection);
+  const fetchIdRef = React.useRef(0);
   const [contentVisible, setContentVisible] = React.useState(true);
+  const [isSectionLoading, setIsSectionLoading] = React.useState(false);
 
   const isMyForms = activeSection === FormsSection.MyForms;
   const isEditing = Boolean(editingFile);
@@ -89,9 +92,16 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   React.useEffect(() => {
     if (prevSection.current !== activeSection) {
       setContentVisible(false);
+      setIsSectionLoading(true);
       prevSection.current = activeSection;
+
+      const currentFetchId = ++fetchIdRef.current;
+
       fetchSection(activeSection).then(() => {
+        if (currentFetchId !== fetchIdRef.current) return;
+
         setContentVisible(true);
+        setIsSectionLoading(false);
 
         // Sync completed forms to AI agent KB after data is loaded
         if (
@@ -258,6 +268,22 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const renderBody = () => {
     if (isEditing) {
       return <FormsEditor />;
+    }
+
+    if (isSectionLoading) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <Loader type={LoaderTypes.track} size="40px" />
+        </div>
+      );
     }
 
     return (

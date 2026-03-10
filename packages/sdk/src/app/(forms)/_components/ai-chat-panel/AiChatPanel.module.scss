@@ -8,7 +8,7 @@
   height: 100%;
   z-index: 310;
   border-inline-start: 1px solid var(--info-panel-border);
-  background: var(--info-panel-bg, var(--section-background, #fff));
+  background: var(--info-panel-bg, var(--section-background));
   overflow: hidden;
 }
 

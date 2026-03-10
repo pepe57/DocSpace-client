@@ -112,6 +112,7 @@ class FormsAiAgentStore {
   ) => {
     if (!this.selectedAgentId || !this.knowledgeFolderId) return;
     if (files.length === 0) return;
+    if (this.isSyncingKB) return;
 
     try {
       runInAction(() => {
@@ -138,7 +139,7 @@ class FormsAiAgentStore {
 
         // 5. Trigger vectorization for all KB files
         if (allKbFileIds.length > 0) {
-          await vectorizeFiles(allKbFileIds).catch(() => {});
+          await vectorizeFiles(allKbFileIds).catch((e) => console.warn("[FormsAI] vectorization failed:", e));
         }
       }
 

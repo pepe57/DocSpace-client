@@ -29,6 +29,8 @@
 import React from "react";
 import { observer } from "mobx-react";
 
+import { useTranslation } from "react-i18next";
+
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import { useFormsDbSettingsStore } from "../../_store/FormsDbSettingsStore";
@@ -37,6 +39,7 @@ import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 
 const SettingsButton = () => {
+  const { t } = useTranslation(["Common"]);
   const { openPanel } = useFormsDbSettingsStore();
   const { roomId } = useFormsSettingsStore();
 
@@ -50,6 +53,7 @@ const SettingsButton = () => {
       size={16}
       onClick={onClick}
       isFill
+      title={t("Common:Settings")}
     />
   );
 };

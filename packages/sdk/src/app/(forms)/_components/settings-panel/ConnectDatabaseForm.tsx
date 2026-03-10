@@ -33,7 +33,7 @@ import { useTranslation } from "react-i18next";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { PasswordInput } from "@docspace/ui-kit/components/password-input";
-import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
@@ -126,6 +126,7 @@ const ConnectDatabaseForm = () => {
           </Text>
           <TextInput
             scale
+            type={InputType.text}
             value={store.host}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               store.setHost(e.target.value)
@@ -141,6 +142,7 @@ const ConnectDatabaseForm = () => {
           </Text>
           <TextInput
             scale
+            type={InputType.text}
             value={store.port}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               store.setPort(e.target.value)
@@ -155,6 +157,7 @@ const ConnectDatabaseForm = () => {
           </Text>
           <TextInput
             scale
+            type={InputType.text}
             value={store.databaseName}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               store.setDatabaseName(e.target.value)
@@ -169,6 +172,7 @@ const ConnectDatabaseForm = () => {
           </Text>
           <TextInput
             scale
+            type={InputType.text}
             value={store.user}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               store.setUser(e.target.value)

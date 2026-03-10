@@ -28,6 +28,7 @@
 
 import { observer } from "mobx-react";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
@@ -39,6 +40,7 @@ import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import styles from "./FormsEditor.module.scss";
 
 const FormsEditor = () => {
+  const { t } = useTranslation(["Common"]);
   const { editingFile, editorAction, closeEditor, setActiveSection } =
     useFormsNavigationStore();
   const { requestToken } = useFormsSettingsStore();
@@ -146,7 +148,7 @@ const FormsEditor = () => {
           opacity: isIframeLoaded ? 1 : 0,
         }}
         allow="autoplay; camera; microphone; display-capture; clipboard-write"
-        title="Form Editor"
+        title={t("Common:FormEditor")}
       />
     </div>
   );

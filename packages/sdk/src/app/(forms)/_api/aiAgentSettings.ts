@@ -78,23 +78,6 @@ export const getKnowledgeFolderId = async (
   return kbFolder?.id ?? null;
 };
 
-export const grantAccessToAgentRoom = async (agentId: number) => {
-  // Get current user
-  const self = (await request({
-    method: "get",
-    url: "/people/@self",
-  })) as { id: string };
-
-  // Add user as RoomManager (access=9) to the agent room — needs creation rights
-  await request({
-    method: "put",
-    url: `/files/rooms/${agentId}/share`,
-    data: {
-      share: [{ shareTo: self.id, access: 9 }],
-    },
-  });
-};
-
 const pollOperation = async (opId: string, maxAttempts = 30) => {
   for (let i = 0; i < maxAttempts; i++) {
     await new Promise((r) => setTimeout(r, 1000));

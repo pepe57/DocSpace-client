@@ -100,7 +100,7 @@ function FormsPage({
 		settingsStore.setFilesViewAs("tile");
 		const token = requestToken || authToken;
 		if (token) {
-			document.cookie = `asc_auth_key=${token}; path=/`;
+			document.cookie = `asc_auth_key=${token}; path=/; SameSite=Lax`;
 			setAuthToken(token);
 		}
 	}, [settingsStore, requestToken, authToken]);
