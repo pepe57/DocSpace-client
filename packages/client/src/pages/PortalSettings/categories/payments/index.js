@@ -37,9 +37,13 @@ import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
 import PaymentsSaaS from "./SaaS";
 import Wallet from "./Wallet";
+import PaymentMethod from "./PaymentMethod";
 import usePayments from "./usePayments";
+import { Component as Services } from "./services";
+// import AdditionalStoragePage from "./services/sub-components/AdditionalStorage/AdditionalStoragePage";
 
 import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
+import BackupPage from "./services/pages/Backup/BackupPage";
 
 const PaymentsPage = (props) => {
   const {
@@ -67,6 +71,7 @@ const PaymentsPage = (props) => {
     {
       id: "portal-payments",
       name: t("MainTariffPlan"),
+      content: <PaymentsSaaS />,
       onClick: async () => {
         clearAbortControllerArr();
         await getPortalPaymentsData();
@@ -93,7 +98,7 @@ const PaymentsPage = (props) => {
     {
       id: "services",
       name: t("Services"),
-      content: <Wallet />,
+      content: <Services />,
       onClick: async () => {
         clearAbortControllerArr();
         await getWalletData();
