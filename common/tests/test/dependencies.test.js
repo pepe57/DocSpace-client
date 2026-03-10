@@ -57,7 +57,7 @@ const getPackageDependencies = (packageJson) => {
   // Get dependencies from all sections
   addDeps(packageJson.dependencies);
   addDeps(packageJson.devDependencies);
-  addDeps(packageJson.peerDependencies);
+  // addDeps(packageJson.peerDependencies);
 
   return deps;
 };
