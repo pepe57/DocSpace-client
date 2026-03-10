@@ -437,11 +437,19 @@ const PortalSettingsRoutes = {
       element: <ViewComponent />,
     },
     {
-      path: "services",
+      path: "payments/services",
       element: <ViewComponent />,
     },
     {
       path: "ai-services",
+      element: <ViewComponent />,
+    },
+    {
+      path: "services/backup",
+      element: <ViewComponent />,
+    },
+    {
+      path: "services/disk-storage",
       element: <ViewComponent />,
     },
     {

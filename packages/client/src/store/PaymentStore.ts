@@ -619,13 +619,15 @@ class PaymentStore {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
 
-  handleServicesQuotas = async (serviceName: string = "") => {
+  fetchServicesQuota = (serviceName: string = "") => {};
+
+  handleServicesQuotas = async () => {
     // temporary solution, should be in the service store
 
     const abortController = new AbortController();
     this.settingsStore?.addAbortControllers(abortController);
 
-    const res = await getServicesQuotas(serviceName, abortController.signal);
+    const res = await getServicesQuotas(abortController.signal);
 
     if (!res) return;
 

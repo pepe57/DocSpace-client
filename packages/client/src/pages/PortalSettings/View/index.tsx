@@ -44,9 +44,9 @@ import { Component as DeleteData } from "../categories/delete-data";
 import { Component as StorageManagement } from "../categories/storage-management";
 import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
-import { Component as Services } from "../categories/services";
+import { Component as Services } from "../categories/payments/services";
 import { Component as AISettings } from "../categories/ai-settings";
-import AiPage from "../categories/services/sub-components/AITools/AiPage";
+import AiPage from "../categories/payments/services/pages/AITools/AiPage";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
@@ -56,27 +56,35 @@ import useDeleteData from "../categories/delete-data/useDeleteData";
 import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
 import usePayments from "../categories/payments/usePayments";
-import useServices from "../categories/services/useServices";
+import useServices from "../categories/payments/services/useServices";
 import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
+import BackupPage from "../categories/payments/services/pages/Backup/BackupPage";
+import AdditionalStoragePage from "../categories/payments/services/pages/AdditionalStorage/AdditionalStoragePage";
 
 const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("customization")) return "customization";
   if (pathname.includes("security")) return "security";
   if (pathname.includes("restore")) return "restore";
-  if (pathname.includes("backup")) return "backup";
+  if (pathname.includes("backup") && !pathname.includes("services"))
+    return "backup";
   if (pathname.includes("integration")) return "integration";
   if (pathname.includes("data-import")) return "data-import";
   if (pathname.includes("management")) return "management";
   if (pathname.includes("developer-tools")) return "developer-tools";
   if (pathname.includes("delete-data")) return "delete-data";
-  if (pathname.includes("payments")) return "payments";
-  if (pathname.includes("bonus")) return "bonus";
+  if (pathname.includes("backup")) return "backup-service";
+  if (pathname.includes("disk-storage")) return "disk-storage";
   if (pathname.includes("ai-services")) return "ai-services";
   if (pathname.includes("services")) return "services";
+  if (pathname.includes("payments")) return "payments";
+
+  if (pathname.includes("bonus")) return "bonus";
+
   if (pathname.includes("ai-settings")) return "ai-settings";
+
   return "";
 };
 
@@ -164,9 +172,12 @@ const View = ({
   );
   const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
   const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
-  const { getServicesInitialValue, getAiServiceInitialValue } = useServices(
-    defaultProps.services,
-  );
+  const {
+    getServicesInitialValue,
+    getAiServiceInitialValue,
+    getBackupServiceInitialValue,
+    getStorageServiceInitialValue,
+  } = useServices(defaultProps.services);
   const { getAiSettingsInitialValue } = useAiSettings({
     fetchAIProviders,
     initDefaultProvider,
@@ -295,6 +306,14 @@ const View = ({
             await getAiServiceInitialValue();
             break;
 
+          case "backup-service":
+            await getBackupServiceInitialValue();
+            break;
+
+          case "disk-storage":
+            await getStorageServiceInitialValue();
+            break;
+
           case "ai-settings":
             await getAiSettingsInitialValue();
             break;
@@ -321,6 +340,7 @@ const View = ({
     getView();
   }, [location]);
 
+  console.log("currentView", currentView);
   return (
     <LoaderWrapper isLoading={isLoading}>
       {currentView === "customization" ? <Customization /> : null}
@@ -337,6 +357,8 @@ const View = ({
       {currentView === "services" ? <Services /> : null}
       {currentView === "ai-services" ? <AiPage /> : null}
       {currentView === "ai-settings" ? <AISettings /> : null}
+      {currentView === "backup-service" ? <BackupPage /> : null}
+      {currentView === "disk-storage" ? <AdditionalStoragePage /> : null}
     </LoaderWrapper>
   );
 };

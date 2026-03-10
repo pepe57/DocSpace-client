@@ -45,7 +45,7 @@ import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/Wallet/utils";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
-import { AI_TOOLS } from "@docspace/shared/constants";
+import { AI_TOOLS, BACKUP_SERVICE } from "@docspace/shared/constants";
 
 type TAiToolsChatPrice = {
   prompt: number;
@@ -377,7 +377,7 @@ class ServicesStore {
 
     try {
       const res = await getServiceQuotaBalance(
-        "aitools",
+        AI_TOOLS,
         isRefresh,
         abortController.signal,
       );
@@ -417,7 +417,7 @@ class ServicesStore {
     this.featureCountData = featureCountData;
   };
 
-  aiServicesinit = async (t: TTranslation) => {
+  aiServicesinit = async (t: TTranslation, serviceName: string) => {
     const isRefresh = window.location.href.includes("complete=true");
 
     this.setIsInitAiPage(false);
@@ -425,18 +425,23 @@ class ServicesStore {
     const {
       fetchTransactionHistory,
       initWalletPayerAndBalance,
-      handleServicesQuotas,
+      setServiceQuota,
     } = this.paymentStore!;
 
     try {
       const requests = [
-        this.fetchAiPrices(),
-        this.fetchAiServiceBalance(),
-        this.fetchAiModelAvailabilitySettings(),
-        handleServicesQuotas(AI_TOOLS),
-        fetchTransactionHistory(null, null, true, true, "", "aitools"),
+        setServiceQuota(serviceName),
+        fetchTransactionHistory(null, null, true, true, "", serviceName),
         initWalletPayerAndBalance(isRefresh),
       ];
+
+      if (serviceName === AI_TOOLS) {
+        requests.push(
+          this.fetchAiPrices(),
+          this.fetchAiServiceBalance(),
+          this.fetchAiModelAvailabilitySettings(),
+        );
+      }
 
       await Promise.all(requests);
     } catch (error) {

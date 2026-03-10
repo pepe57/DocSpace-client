@@ -86,7 +86,7 @@ export const ChatNoAccessScreen = ({
     .otherwise(() => "");
 
   const onGoToServices = useCallback(() => {
-    return navigate("/portal-settings/services");
+    return navigate("/portal-settings/payments/services");
   }, []);
 
   const onGoToAIProviderSettings = useCallback(() => {
