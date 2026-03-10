@@ -358,7 +358,8 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       "@biomejs/biome",
       "@vitest/ui",
       "@vitest/coverage-v8",
-      "open-cli"
+      "open-cli",
+      "postcss"
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));
