@@ -38,7 +38,7 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 import WalletIcon from "PUBLIC_DIR/images/web.search.svg";
 import SettingsIcon from "PUBLIC_DIR/images/settings.react.svg";
 
-import TransactionHistory from "../../../TransactionHistory";
+import TransactionHistory from "../../../shared/transaction-history";
 import styles from "./AdditionalStoragePage.module.scss";
 import { DISK_STORAGE } from "@docspace/shared/constants";
 

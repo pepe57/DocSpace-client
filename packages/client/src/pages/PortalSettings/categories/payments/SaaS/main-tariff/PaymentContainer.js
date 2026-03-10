@@ -39,7 +39,7 @@ import CurrentTariffContainer from "./CurrentTariffContainer";
 import PriceCalculation from "./PriceCalculation";
 import BenefitsContainer from "./BenefitsContainer";
 import ContactContainer from "./ContactContainer";
-import PayerInformation from "../PayerInformation";
+import PayerInformation from "../shared/payer-information";
 
 const StyledBody = styled.div`
   max-width: 660px;

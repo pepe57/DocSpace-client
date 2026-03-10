@@ -36,7 +36,7 @@ import CardIconUrl from "PUBLIC_DIR/images/icons/16/card.react.svg";
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 
 import styles from "./PaymentMethod.module.scss";
-import PayerInformation from "../PayerInformation";
+import PayerInformation from "../shared/payer-information";
 
 interface PaymentMethodProps {
   paymentLink?: string;
@@ -64,7 +64,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
   };
 
   return (
-      <div className={styles.container}>
+    <div className={styles.container}>
       <Text fontSize="16px" fontWeight={700} lineHeight="22px">
         {t("Payer")}
       </Text>
@@ -126,7 +126,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
         />
       </div>
     </div>
-  )
+  );
 };
 
 export default inject(({ paymentStore }: InjectedProps) => {

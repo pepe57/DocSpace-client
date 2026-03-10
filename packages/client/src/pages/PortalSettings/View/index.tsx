@@ -44,9 +44,9 @@ import { Component as DeleteData } from "../categories/delete-data";
 import { Component as StorageManagement } from "../categories/storage-management";
 import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
-import { Component as Services } from "../categories/payments/services";
+import { Component as Services } from "../categories/payments/SaaS/services";
 import { Component as AISettings } from "../categories/ai-settings";
-import AiPage from "../categories/payments/services/pages/AITools/AiPage";
+import AiPage from "../categories/payments/SaaS/services/pages/AITools/AiPage";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
@@ -56,13 +56,13 @@ import useDeleteData from "../categories/delete-data/useDeleteData";
 import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
 import usePayments from "../categories/payments/usePayments";
-import useServices from "../categories/payments/services/useServices";
+import useServices from "../categories/payments/SaaS/services/useServices";
 import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
-import BackupPage from "../categories/payments/services/pages/Backup/BackupPage";
-import AdditionalStoragePage from "../categories/payments/services/pages/AdditionalStorage/AdditionalStoragePage";
+import BackupPage from "../categories/payments/SaaS/services/pages/Backup/BackupPage";
+import AdditionalStoragePage from "../categories/payments/SaaS/services/pages/AdditionalStorage/AdditionalStoragePage";
 
 const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("customization")) return "customization";

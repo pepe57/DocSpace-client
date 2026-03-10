@@ -34,7 +34,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "../styles/Amount.module.scss";
-import { useAmountValue } from "../../../../pages/PortalSettings/categories/payments/Wallet/context";
+import { useAmountValue } from "../../../../pages/PortalSettings/categories/payments/SaaS/wallet/context";
 import { FieldContainer } from "@docspace/ui-kit/components";
 
 type AmountProps = {

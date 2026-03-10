@@ -35,7 +35,7 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 import WalletIcon from "PUBLIC_DIR/images/access.comment.react.svg";
 
 import ServiceToggleSection from "../../sub-components/ServiceToggleSection";
-import TransactionHistory from "../../../TransactionHistory";
+import TransactionHistory from "../../../shared/transaction-history";
 import styles from "./BackupPage.module.scss";
 import { BACKUP_SERVICE } from "@docspace/shared/constants";
 import { DeviceType } from "@docspace/ui-kit/enums";
@@ -47,6 +47,7 @@ type BackupPageProps = {
   isBackupEnabled?: boolean;
   formatWalletCurrency?: (amount?: number, fractionDigits?: number) => string;
   onToggleBackup?: (enabled: boolean) => void;
+  currentDeviceType?: DeviceType;
 };
 
 const BackupPage: React.FC<BackupPageProps> = ({

@@ -43,7 +43,7 @@ import {
 } from "@docspace/shared/api/portal";
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/Wallet/utils";
+import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/wallet/utils";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import { AI_TOOLS, BACKUP_SERVICE } from "@docspace/shared/constants";
 

@@ -35,15 +35,13 @@ import { isManagement } from "@docspace/shared/utils/common";
 
 import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
-import PaymentsSaaS from "./SaaS";
-import Wallet from "./Wallet";
-import PaymentMethod from "./PaymentMethod";
+import PaymentsSaaS from "./SaaS/main-tariff";
+import Wallet from "./SaaS/wallet";
+import PaymentMethod from "./SaaS/payment-method";
 import usePayments from "./usePayments";
-import { Component as Services } from "./services";
-// import AdditionalStoragePage from "./services/sub-components/AdditionalStorage/AdditionalStoragePage";
+import { Component as Services } from "./SaaS/services";
 
 import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
-import BackupPage from "./services/pages/Backup/BackupPage";
 
 const PaymentsPage = (props) => {
   const {

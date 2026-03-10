@@ -36,7 +36,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 import Amount from "./sub-components/Amount";
 import TopUpButtons from "./sub-components/TopUpButtons";
-import { AmountProvider } from "../../../pages/PortalSettings/categories/payments/Wallet/context";
+import { AmountProvider } from "../../../pages/PortalSettings/categories/payments/SaaS/wallet/context";
 import styles from "./styles/TopUpModal.module.scss";
 
 import modalStyles from "./styles/TopUpAiModal.module.scss";

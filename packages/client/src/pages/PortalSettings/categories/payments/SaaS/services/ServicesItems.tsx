@@ -48,7 +48,7 @@ import PriceIcon from "PUBLIC_DIR/images/icons/16/price.react.svg";
 
 import styles from "./styles/AdditionalStorage.module.scss";
 import { useServicesActions } from "./hooks/useServicesActions";
-import PayerInformation from "../PayerInformation";
+import PayerInformation from "../shared/payer-information";
 import ServiceCard from "./sub-components/ServiceCard";
 
 interface ServiceQuotaFeature {

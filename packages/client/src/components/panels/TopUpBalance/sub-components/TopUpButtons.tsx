@@ -32,7 +32,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { Text } from "@docspace/ui-kit/components/text";
 
-import { useAmountValue } from "../../../../pages/PortalSettings/categories/payments/Wallet/context";
+import { useAmountValue } from "../../../../pages/PortalSettings/categories/payments/SaaS/wallet/context";
 import styles from "../styles/TopUpModal.module.scss";
 import { AI_TOOLS } from "@docspace/shared/constants";
 import { inject, observer } from "mobx-react";

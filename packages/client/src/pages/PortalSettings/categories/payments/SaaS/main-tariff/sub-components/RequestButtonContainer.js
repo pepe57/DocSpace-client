@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@docspace/ui-kit/components/button";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import SalesDepartmentRequestDialog from "../../../../../../components/dialogs/SalesDepartmentRequestDialog";
+import SalesDepartmentRequestDialog from "../../../../../../../components/dialogs/SalesDepartmentRequestDialog";
 
 const StyledBody = styled.div`
   button {

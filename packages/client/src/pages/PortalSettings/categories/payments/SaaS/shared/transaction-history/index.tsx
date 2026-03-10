@@ -64,10 +64,10 @@ import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import type { PeopleFilter } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
 import Filter from "@docspace/shared/api/people/filter";
 
-import FilterPanel from "./Wallet/sub-components/FilterPanel";
-import TransactionBody from "./Wallet/sub-components/TransactionBody";
-import styles from "./Wallet/styles/TransactionHistory.module.scss";
-import TableLoader from "./Wallet/sub-components/TableLoader";
+import FilterPanel from "../../wallet/sub-components/FilterPanel";
+import TransactionBody from "../../wallet/sub-components/TransactionBody";
+import styles from "../../wallet/styles/TransactionHistory.module.scss";
+import TableLoader from "../../wallet/sub-components/TableLoader";
 import { Link } from "@docspace/ui-kit/components/link";
 
 type TransactionHistoryReportResponse = {

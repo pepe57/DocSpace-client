@@ -39,13 +39,13 @@ import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 
 import { finishRefreshingWithMinCycle } from "SRC_DIR/helpers/refreshing";
 
-import TransactionHistory from "../TransactionHistory";
-import TopUpModal from "../../../../../components/panels/TopUpBalance/TopUpModal";
+import TransactionHistory from "../shared/transaction-history";
+import TopUpModal from "../../../../../../components/panels/TopUpBalance/TopUpModal";
 import WalletRefilledModal from "./WalletRefilledModal";
-import PayerInformation from "../PayerInformation";
+import PayerInformation from "../shared/payer-information";
 import AutoPaymentInfo from "./sub-components/AutoPaymentInfo";
 import styles from "./styles/Wallet.module.scss";
-import BalanceAmount from "../BalanceAmount";
+import BalanceAmount from "../shared/balance-amount";
 
 type WalletProps = {
   walletBalance: number;

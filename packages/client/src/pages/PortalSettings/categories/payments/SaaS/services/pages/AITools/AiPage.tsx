@@ -37,13 +37,13 @@ import { Link } from "@docspace/ui-kit/components/link";
 import { AI_TOOLS } from "@docspace/shared/constants";
 import { DeviceType } from "@docspace/shared/enums";
 
-import TransactionHistory from "SRC_DIR/pages/PortalSettings/categories/payments/TransactionHistory";
-import BalanceAmount from "SRC_DIR/pages/PortalSettings/categories/payments/BalanceAmount";
-import PayerInformation from "SRC_DIR/pages/PortalSettings/categories/payments/PayerInformation";
+import TransactionHistory from "../../../shared/transaction-history";
+import BalanceAmount from "../../../shared/balance-amount";
+import PayerInformation from "../../../shared/payer-information";
 import ServiceToggleSection from "../../sub-components/ServiceToggleSection";
 import { finishRefreshingWithMinCycle } from "SRC_DIR/helpers/refreshing";
 
-import ConfirmationDialog from "../../../../../../../components/ConfirmWrapper";
+import ConfirmationDialog from "../../../../../../../../components/ConfirmWrapper";
 
 import PricingBillingBody from "./sub-components/PricingBillingBody";
 import TopUpContainer from "./sub-components/TopUpContainer";
