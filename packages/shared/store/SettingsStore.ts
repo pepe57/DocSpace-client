@@ -334,9 +334,9 @@ class SettingsStore {
 
   displayBanners: boolean = false;
 
-  aiServicesEnabled: boolean = true;
-
   aiServicesManagementUrl?: string;
+
+  aiServicesEnabled: boolean = true;
 
   apiKeys: TApiKey[] = [];
 
@@ -977,6 +977,10 @@ class SettingsStore {
     });
 
     this.setGreetingSettings(settings.greetingSettings);
+
+    if (settings.aiEnabled !== undefined) {
+      this.aiServicesEnabled = settings.aiEnabled;
+    }
 
     return settings;
   };

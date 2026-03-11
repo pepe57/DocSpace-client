@@ -131,6 +131,7 @@ export type TSettings = {
 	displayAbout: boolean;
 	externalResources: TExternalResources;
 	licenseAgreementsUrl?: string;
+	aiEnabled?: boolean;
 };
 
 export type TCustomSchema = {
