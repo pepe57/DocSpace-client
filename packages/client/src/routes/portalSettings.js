@@ -24,13 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { Navigate } from "react-router";
+import { inject, observer } from "mobx-react";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
 import componentLoader from "@docspace/shared/utils/component-loader";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { generalRoutes } from "./general";
 
 import { ViewComponent } from "../pages/PortalSettings/View";
+
+const ProtectedAISettingsRoute = inject(({ settingsStore }) => ({
+  aiServicesEnabled: settingsStore.aiServicesEnabled,
+}))(
+  observer(({ aiServicesEnabled, children }) => {
+    return aiServicesEnabled ? (
+      children
+    ) : (
+      <Navigate to="/portal-settings" replace />
+    );
+  }),
+);
 
 const PortalSettingsRoutes = {
   path: "portal-settings/",
@@ -339,23 +354,43 @@ const PortalSettingsRoutes = {
     },
     {
       path: "ai-settings",
-      element: <Navigate to="ai-settings/providers" replace />,
+      element: (
+        <ProtectedAISettingsRoute>
+          <Navigate to="ai-settings/providers" replace />
+        </ProtectedAISettingsRoute>
+      ),
     },
     {
       path: "ai-settings/providers",
-      element: <ViewComponent />,
+      element: (
+        <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
     },
     {
       path: "ai-settings/servers",
-      element: <ViewComponent />,
+      element: (
+        <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
     },
     {
       path: "ai-settings/search",
-      element: <ViewComponent />,
+      element: (
+        <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
     },
     {
       path: "ai-settings/knowledge",
-      element: <ViewComponent />,
+      element: (
+        <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
     },
     {
       path: "integration",

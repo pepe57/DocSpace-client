@@ -60,6 +60,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     limitedAccessDevToolsForUsers,
     standalone,
+    requireAIServices,
+    aiServicesEnabled,
   } = props;
 
   const location = useLocation();
@@ -302,6 +304,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (isDeveloperToolsPage) {
       if (user?.isVisitor || (limitedAccessDevToolsForUsers && !user?.isAdmin))
         return <Navigate replace to="/error/403" />;
+    }
+
+    if (requireAIServices && !aiServicesEnabled) {
+      return <Navigate replace to="/rooms/shared" />;
     }
 
     if (isAccountsPage) {
