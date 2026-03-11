@@ -29,10 +29,11 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import type { TFile } from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 class FormsListStore {
   items: TFile[] = [];
+  folders: TFolder[] = [];
   total: number = 0;
   isLoading: boolean = false;
 
@@ -43,6 +44,10 @@ class FormsListStore {
   setItems = (items: TFile[], total: number) => {
     this.items = items;
     this.total = total;
+  };
+
+  setFolders = (folders: TFolder[]) => {
+    this.folders = folders;
   };
 
   appendItems = (items: TFile[], total: number) => {

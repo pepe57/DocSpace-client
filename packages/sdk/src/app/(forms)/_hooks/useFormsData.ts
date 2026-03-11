@@ -33,7 +33,7 @@ import { createThumbnails } from "@docspace/shared/api/files";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TFile } from "@docspace/shared/api/files/types";
 import { thumbnailStatuses } from "@docspace/shared/constants";
-import { FilterType } from "@docspace/shared/enums";
+import { FilterType, FolderType } from "@docspace/shared/enums";
 
 import { PAGE_COUNT } from "@/utils/constants";
 import { FormsSection } from "@/types/forms";
@@ -59,9 +59,7 @@ const requestThumbnails = (files: TFile[]) => {
 const filterByFolder = (
   files: TFile[],
   folderId: string | number,
-  section: FormsSection,
 ) => {
-  if (section === FormsSection.CompletedForms) return files;
   const id = Number(folderId);
   return files.filter((f) => f.folderId === id);
 };
@@ -69,10 +67,11 @@ const filterByFolder = (
 export default function useFormsData() {
   const formsSettingsStore = useFormsSettingsStore();
   const formsListStore = useFormsListStore();
-  const { activeSection } = useFormsNavigationStore();
+  const { activeSection, completedFolder } = useFormsNavigationStore();
   const currentPage = useRef(0);
   const apiExhausted = useRef(false);
   const abortRef = useRef<AbortController | null>(null);
+  const doneFolderIdRef = useRef<number | null>(null);
 
   const getFolderId = useCallback(
     (section?: FormsSection) => {
@@ -83,12 +82,85 @@ export default function useFormsData() {
         case FormsSection.FormsToFill:
           return formsSettingsStore.formsToFillFolderId;
         case FormsSection.CompletedForms:
-          return formsSettingsStore.completedFormsFolderId;
+          return completedFolder?.id ?? doneFolderIdRef.current ?? "";
         default:
           return formsSettingsStore.myFormsFolderId;
       }
     },
-    [activeSection, formsSettingsStore],
+    [activeSection, formsSettingsStore, completedFolder],
+  );
+
+  const fetchCompletedFolders = useCallback(
+    async (signal: AbortSignal) => {
+      const roomId = formsSettingsStore.roomId;
+      if (!roomId) return;
+
+      // Fetch room contents to find the Done virtual folder
+      const roomFilter = FilesFilter.getDefault();
+      roomFilter.page = 0;
+      roomFilter.pageCount = PAGE_COUNT;
+
+      const roomRes = await api.files.getFolder(
+        roomId,
+        roomFilter,
+        signal,
+      );
+
+      if (signal.aborted) return;
+
+      const doneFolder = roomRes.folders.find(
+        (f) => f.type === FolderType.Done,
+      );
+
+      if (!doneFolder) {
+        formsListStore.setFolders([]);
+        formsListStore.setItems([], 0);
+        return;
+      }
+
+      doneFolderIdRef.current = doneFolder.id;
+
+      // Fetch Done folder contents to get SubFolderDone entries
+      const filter = FilesFilter.getDefault();
+      filter.page = 0;
+      filter.pageCount = PAGE_COUNT;
+
+      const res = await api.files.getFolder(
+        doneFolder.id,
+        filter,
+        signal,
+      );
+
+      if (signal.aborted) return;
+
+      formsListStore.setFolders(res.folders);
+      formsListStore.setItems([], 0);
+    },
+    [formsSettingsStore, formsListStore],
+  );
+
+  const fetchCompletedSubfolder = useCallback(
+    async (folderId: number, signal: AbortSignal) => {
+      const filter = FilesFilter.getDefault();
+      filter.page = 0;
+      filter.pageCount = PAGE_COUNT;
+      filter.filterType = FilterType.PDFForm;
+
+      const res = await api.files.getFolder(folderId, filter, signal);
+
+      if (signal.aborted) return;
+
+      const files = res.files;
+      apiExhausted.current = res.files.length < PAGE_COUNT;
+      const total = apiExhausted.current
+        ? files.length
+        : files.length + 1;
+      formsListStore.setFolders([]);
+      formsListStore.setItems(files, total);
+      currentPage.current = 0;
+      requestThumbnails(files);
+    },
+    [formsListStore],
   );
 
   const fetchSection = useCallback(
@@ -97,40 +169,57 @@ export default function useFormsData() {
       const controller = new AbortController();
       abortRef.current = controller;
 
-      const folderId = getFolderId(section);
-      if (!folderId) return;
-
       formsListStore.setIsLoading(true);
       apiExhausted.current = false;
 
       const sec = section ?? activeSection;
 
       try {
-        const filter = FilesFilter.getDefault();
-        filter.page = 0;
-        filter.pageCount = PAGE_COUNT;
-        filter.filterType = FilterType.PDFForm;
+        if (sec === FormsSection.CompletedForms) {
+          if (completedFolder) {
+            await fetchCompletedSubfolder(
+              completedFolder.id,
+              controller.signal,
+            );
+          } else {
+            await fetchCompletedFolders(controller.signal);
+          }
 
-        const res = await api.files.getFolder(
-          folderId,
-          filter,
-          controller.signal,
-        );
+          if (controller.signal.aborted) return;
+        } else {
+          const folderId = getFolderId(section);
+          if (!folderId) return;
 
-        if (controller.signal.aborted) return;
+          const filter = FilesFilter.getDefault();
+          filter.page = 0;
+          filter.pageCount = PAGE_COUNT;
+          filter.filterType = FilterType.PDFForm;
 
-        const files = filterByFolder(res.files, folderId, sec);
-        apiExhausted.current = res.files.length < PAGE_COUNT;
-        const total = apiExhausted.current ? files.length : files.length + 1;
-        formsListStore.setItems(files, total);
-        currentPage.current = 0;
-        requestThumbnails(files);
+          const res = await api.files.getFolder(
+            folderId,
+            filter,
+            controller.signal,
+          );
 
-        if (res.current?.security) {
-          formsSettingsStore.setFolderSecurity(res.current.security);
+          if (controller.signal.aborted) return;
+
+          const files = filterByFolder(res.files, folderId);
+          apiExhausted.current = res.files.length < PAGE_COUNT;
+          const total = apiExhausted.current
+            ? files.length
+            : files.length + 1;
+          formsListStore.setFolders([]);
+          formsListStore.setItems(files, total);
+          currentPage.current = 0;
+          requestThumbnails(files);
+
+          if (res.current?.security) {
+            formsSettingsStore.setFolderSecurity(res.current.security);
+          }
         }
       } catch {
         if (controller.signal.aborted) return;
+        formsListStore.setFolders([]);
         formsListStore.setItems([], 0);
         currentPage.current = 0;
         apiExhausted.current = true;
@@ -140,7 +229,15 @@ export default function useFormsData() {
         }
       }
     },
-    [activeSection, getFolderId, formsListStore, formsSettingsStore],
+    [
+      activeSection,
+      completedFolder,
+      getFolderId,
+      fetchCompletedFolders,
+      fetchCompletedSubfolder,
+      formsListStore,
+      formsSettingsStore,
+    ],
   );
 
   const fetchMore = useCallback(async () => {
@@ -171,7 +268,7 @@ export default function useFormsData() {
 
         if (controller.signal.aborted) return;
 
-        fetched = filterByFolder(res.files, folderId, activeSection);
+        fetched = filterByFolder(res.files, folderId);
         apiExhausted.current = res.files.length < PAGE_COUNT;
       }
 
@@ -185,7 +282,7 @@ export default function useFormsData() {
     } catch {
       // aborted or network error — ignore
     }
-  }, [getFolderId, formsListStore, activeSection]);
+  }, [getFolderId, formsListStore]);
 
   return { fetchSection, fetchMore };
 }

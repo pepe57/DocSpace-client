@@ -29,7 +29,7 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import type { TFile } from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { FormsSection } from "@/types/forms";
 
@@ -39,6 +39,8 @@ class FormsNavigationStore {
   activeSection: FormsSection = FormsSection.MyForms;
   editingFile: TFile | null = null;
   editorAction: EditorAction = "fill";
+  /** The subfolder currently open inside Completed Forms (null = root level showing folder tiles). */
+  completedFolder: TFolder | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -46,6 +48,15 @@ class FormsNavigationStore {
 
   setActiveSection = (section: FormsSection) => {
     this.activeSection = section;
+    this.completedFolder = null;
+  };
+
+  openCompletedFolder = (folder: TFolder) => {
+    this.completedFolder = folder;
+  };
+
+  goBackToCompletedRoot = () => {
+    this.completedFolder = null;
   };
 
   openEditor = (file: TFile, action: EditorAction = "fill") => {

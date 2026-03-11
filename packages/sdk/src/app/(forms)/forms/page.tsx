@@ -42,7 +42,6 @@ import { getDefaultProvider } from "@/api/ai";
 import {
   MY_FORMS_FOLDER_HEADER,
   FORMS_TO_FILL_FOLDER_HEADER,
-  COMPLETED_FORMS_FOLDER_HEADER,
   REQUEST_TOKEN_HEADER,
   ROOM_ID_HEADER,
   PAGE_COUNT,
@@ -63,10 +62,6 @@ export default async function Forms({
     hdrs.get(MY_FORMS_FOLDER_HEADER) || params.myFormsFolderId || "";
   const formsToFillFolderId =
     hdrs.get(FORMS_TO_FILL_FOLDER_HEADER) || params.formsToFillFolderId || "";
-  const completedFormsFolderId =
-    hdrs.get(COMPLETED_FORMS_FOLDER_HEADER) ||
-    params.completedFormsFolderId ||
-    "";
   const requestToken =
     hdrs.get(REQUEST_TOKEN_HEADER) || params.requestToken || "";
 
@@ -104,7 +99,6 @@ export default async function Forms({
       roomId={roomId}
       myFormsFolderId={myFormsFolderId}
       formsToFillFolderId={formsToFillFolderId}
-      completedFormsFolderId={completedFormsFolderId}
       requestToken={requestToken}
       authToken={authToken}
       filesSettings={filesSettings!}

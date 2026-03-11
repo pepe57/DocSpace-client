@@ -73,7 +73,7 @@ export default function useFolderActions() {
       case FormsSection.FormsToFill:
         return formsSettingsStore.formsToFillFolderId;
       case FormsSection.CompletedForms:
-        return formsSettingsStore.completedFormsFolderId;
+        return "";
       default:
         return formsSettingsStore.myFormsFolderId;
     }
