@@ -61,9 +61,11 @@ const Settings = () => {
 
     const abortController = new AbortController();
 
-    getRoomMembers(roomId, {}, abortController.signal).then((res) => {
-      setMembers(res.items);
-    });
+    getRoomMembers(roomId, {}, abortController.signal)
+      .then((res) => {
+        setMembers(res.items);
+      })
+      .catch(() => {});
 
     return () => {
       abortController.abort();

@@ -143,7 +143,9 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
       defaultProvider?.defaultModel &&
       newModels.some((m) => m.modelId === defaultProvider.defaultModel);
     setSelectedModelId(
-      hasDefault ? defaultProvider!.defaultModel : (newModels[0]?.modelId ?? null),
+      hasDefault
+        ? defaultProvider!.defaultModel
+        : (newModels[0]?.modelId ?? null),
     );
   };
 
