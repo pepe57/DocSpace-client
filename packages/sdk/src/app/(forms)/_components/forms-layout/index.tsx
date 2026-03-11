@@ -54,8 +54,7 @@ import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import FormsSidebar from "../sidebar";
 import FormsGrid from "../forms-grid";
 import FormsEditor from "../forms-editor";
-import SettingsButton from "../settings-button";
-import SettingsPanel from "../settings-panel";
+import Settings from "../settings";
 import AiChatPanel from "../ai-chat-panel";
 import AiChatButton from "../ai-chat-button";
 
@@ -82,6 +81,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const [isSectionLoading, setIsSectionLoading] = React.useState(false);
 
   const isMyForms = activeSection === FormsSection.MyForms;
+  const isSettings = activeSection === FormsSection.Settings;
   const isEditing = Boolean(editingFile);
 
   React.useEffect(() => {
@@ -92,9 +92,16 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
 
   React.useEffect(() => {
     if (prevSection.current !== activeSection) {
+      prevSection.current = activeSection;
+
+      if (activeSection === FormsSection.Settings) {
+        setContentVisible(true);
+        setIsSectionLoading(false);
+        return;
+      }
+
       setContentVisible(false);
       setIsSectionLoading(true);
-      prevSection.current = activeSection;
 
       const currentFetchId = ++fetchIdRef.current;
 
@@ -127,6 +134,8 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
         return t("Common:FormsToFill");
       case FormsSection.CompletedForms:
         return t("Common:CompletedForms");
+      case FormsSection.Settings:
+        return t("Common:Settings");
       default:
         return "";
     }
@@ -171,6 +180,50 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   }, [t, onChooseFromPersonal, onCreateFromDocx, onCreateFromTemplate]);
 
   const renderHeader = () => {
+    if (isSettings) {
+      return (
+        <div className={styles.headerRow}>
+          <div className={styles.headerNavigation}>
+            <Navigation
+              showText
+              isRootFolder
+              canCreate={false}
+              title={getSectionTitle()}
+              rootRoomTitle=""
+              isDesktop={currentDeviceType === DeviceType.desktop}
+              isFrame
+              navigationItems={[]}
+              getContextOptionsPlus={() => []}
+              getContextOptionsFolder={() => []}
+              onClickFolder={() => {}}
+              isTrashFolder={false}
+              isEmptyPage={false}
+              isEmptyFilesList={false}
+              onBackToParentFolder={() => {}}
+              showRootFolderTitle={false}
+              withLogo=""
+              burgerLogo=""
+              withMenu={false}
+              currentDeviceType={currentDeviceType}
+              titleIcon=""
+              titleIconTooltip=""
+              showNavigationButton={false}
+              isCurrentFolderInfo={false}
+              showTitle
+              isPublicRoom={false}
+              isRoom={false}
+              isInfoPanelVisible={false}
+              toggleInfoPanel={() => {}}
+              onLogoClick={() => {}}
+              hideInfoPanel={() => {}}
+              clearTrash={() => {}}
+              showFolderInfo={() => {}}
+            />
+          </div>
+        </div>
+      );
+    }
+
     if (isEditing) {
       return (
         <div className={styles.headerEditing}>
@@ -254,7 +307,6 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
           />
         </div>
         <AiChatButton />
-        <SettingsButton />
       </div>
     );
   };
@@ -262,6 +314,10 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const renderBody = () => {
     if (isEditing) {
       return <FormsEditor />;
+    }
+
+    if (activeSection === FormsSection.Settings) {
+      return <Settings />;
     }
 
     if (isSectionLoading) {
@@ -288,7 +344,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
         withBodyScroll={!isEditing}
         withoutFooter={isEditing}
         settingsStudio={false}
-        viewAs="tile"
+        viewAs={isSettings ? "settings" : "tile"}
         isEmptyPage={!isEditing && items.length === 0}
         currentDeviceType={currentDeviceType}
       >
@@ -296,7 +352,6 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
         <Section.SectionBody>{renderBody()}</Section.SectionBody>
       </Section>
       <AiChatPanel />
-      <SettingsPanel />
     </div>
   );
 };

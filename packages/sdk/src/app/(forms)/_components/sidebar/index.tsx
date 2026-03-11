@@ -26,6 +26,7 @@
 
 "use client";
 
+import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -36,15 +37,19 @@ import styles from "./FormsSidebar.module.scss";
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 
 import { FormsSection } from "@/types/forms";
 
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
+import { useFormsUserStore } from "../../_store/FormsUserStore";
 import SidebarNavItem from "./SidebarNavItem";
 
 const FormsSidebar = () => {
   const { t } = useTranslation(["Common"]);
   const { activeSection, setActiveSection } = useFormsNavigationStore();
+  const { user } = useFormsUserStore();
+  const showSettings = user?.isOwner || user?.isAdmin;
 
   const sections = [
     {
@@ -64,10 +69,14 @@ const FormsSidebar = () => {
     },
   ];
 
+  const onSettingsClick = React.useCallback(() => {
+    setActiveSection(FormsSection.Settings);
+  }, [setActiveSection]);
+
   return (
     <div
       id="article-container"
-      className={articleStyles.article}
+      className={`${articleStyles.article} ${styles.articleFlex}`}
       data-show-text="true"
       data-open="true"
       data-with-main-button="false"
@@ -88,6 +97,17 @@ const FormsSidebar = () => {
           />
         ))}
       </Scrollbar>
+      {showSettings && (
+        <div className={styles.navBottom}>
+          <SidebarNavItem
+            id="forms-nav-settings"
+            label={t("Common:Settings")}
+            icon={SettingsReactSvgUrl}
+            isActive={activeSection === FormsSection.Settings}
+            onClick={onSettingsClick}
+          />
+        </div>
+      )}
     </div>
   );
 };

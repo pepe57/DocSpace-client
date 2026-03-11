@@ -33,6 +33,7 @@ import type {
   TFilesSettings,
   TGetFolder,
 } from "@docspace/shared/api/files/types";
+import type { TUser } from "@docspace/shared/api/people/types";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { setAuthToken } from "@docspace/shared/api/client";
 
@@ -42,6 +43,7 @@ import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsListStore } from "../_store/FormsListStore";
+import { useFormsUserStore } from "../_store/FormsUserStore";
 import FormsLayout from "../_components/forms-layout";
 
 type FormsPageProps = {
@@ -53,6 +55,7 @@ type FormsPageProps = {
   authToken: string;
   filesSettings: TFilesSettings;
   initialFolderData?: TGetFolder;
+  user?: TUser;
 };
 
 function FormsPage({
@@ -64,11 +67,13 @@ function FormsPage({
   authToken,
   filesSettings,
   initialFolderData,
+  user,
 }: FormsPageProps) {
   useSDKConfig();
 
   const formsSettingsStore = useFormsSettingsStore();
   const formsListStore = useFormsListStore();
+  const formsUserStore = useFormsUserStore();
   const filesSettingsStore = useFilesSettingsStore();
   const settingsStore = useSettingsStore();
   const [isReady, setIsReady] = React.useState(false);
@@ -95,6 +100,12 @@ function FormsPage({
   React.useEffect(() => {
     filesSettingsStore.setFilesSettings(filesSettings);
   }, [filesSettings, filesSettingsStore]);
+
+  React.useEffect(() => {
+    if (user) {
+      formsUserStore.setUser(user);
+    }
+  }, [user, formsUserStore]);
 
   React.useEffect(() => {
     settingsStore.setFilesViewAs("tile");
