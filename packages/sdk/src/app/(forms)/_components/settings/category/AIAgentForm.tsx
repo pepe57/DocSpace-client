@@ -26,11 +26,22 @@
 
 "use client";
 
+import { useCallback, useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+
+import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
+import {
+  getProviders,
+  getModels,
+  updateDefaultProvider,
+} from "@docspace/shared/api/ai";
 
 import { useFormsAiAgentStore } from "../../../_store/FormsAiAgentStore";
 
@@ -42,7 +53,132 @@ type AIAgentFormProps = {
 
 const AIAgentForm = ({ inline }: AIAgentFormProps) => {
   const { t } = useTranslation(["Common"]);
-  const { aiAgentEnabled, setAiAgentEnabled } = useFormsAiAgentStore();
+  const { aiAgentEnabled, setAiAgentEnabled, defaultProvider } =
+    useFormsAiAgentStore();
+  const store = useFormsAiAgentStore();
+
+  const [providers, setProviders] = useState<TAiProvider[]>([]);
+  const [models, setModels] = useState<TModel[]>([]);
+  const [isModelsLoading, setIsModelsLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const [selectedProviderId, setSelectedProviderId] = useState<number | null>(
+    defaultProvider?.providerId ?? null,
+  );
+  const [selectedModelId, setSelectedModelId] = useState<string | null>(
+    defaultProvider?.defaultModel ?? null,
+  );
+
+  const hasDefaultProvider = !!defaultProvider;
+
+  const isProviderChanged = selectedProviderId !== defaultProvider?.providerId;
+  const isModelChanged = selectedModelId !== defaultProvider?.defaultModel;
+  const hasChanges = isProviderChanged || isModelChanged;
+
+  useEffect(() => {
+    getProviders()
+      .then((items) => setProviders(items))
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (defaultProvider) {
+      setSelectedProviderId(defaultProvider.providerId);
+      setSelectedModelId(defaultProvider.defaultModel);
+    }
+  }, [defaultProvider]);
+
+  const fetchModels = useCallback(async (providerId: number) => {
+    setIsModelsLoading(true);
+    try {
+      const result = await getModels(providerId);
+      setModels(result);
+      return result;
+    } catch {
+      setModels([]);
+      return [];
+    } finally {
+      setIsModelsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (defaultProvider?.providerId) {
+      fetchModels(defaultProvider.providerId);
+    }
+  }, [defaultProvider?.providerId, fetchModels]);
+
+  const providerOptions: TOption[] = providers.map((p) => ({
+    key: p.id,
+    label: p.title,
+  }));
+
+  const modelOptions: TOption[] = models.map((m) => ({
+    key: m.modelId,
+    label: m.modelId,
+  }));
+
+  const selectedProviderOption: TOption = providers.length
+    ? (providerOptions.find((o) => o.key === selectedProviderId) ??
+      providerOptions[0])
+    : {
+        key: defaultProvider?.providerId ?? "-1",
+        label: defaultProvider?.providerTitle ?? "",
+      };
+
+  const selectedModelOption: TOption = models.length
+    ? (modelOptions.find((o) => o.key === selectedModelId) ?? modelOptions[0])
+    : {
+        key: defaultProvider?.defaultModel ?? "-1",
+        label: defaultProvider?.defaultModel ?? t("Common:NoModelsFound"),
+      };
+
+  const onSelectProvider = async (option: TOption) => {
+    if (option.key === selectedProviderId) return;
+
+    setSelectedProviderId(option.key as number);
+
+    const newModels = await fetchModels(option.key as number);
+    const hasDefault =
+      defaultProvider?.defaultModel &&
+      newModels.some((m) => m.modelId === defaultProvider.defaultModel);
+    setSelectedModelId(
+      hasDefault ? defaultProvider!.defaultModel : (newModels[0]?.modelId ?? null),
+    );
+  };
+
+  const onSelectModel = (option: TOption) => {
+    if (option.key === selectedModelId) return;
+    setSelectedModelId(option.key as string);
+  };
+
+  const onSave = async () => {
+    if (!selectedProviderId || !selectedModelId) return;
+
+    setIsSaving(true);
+    try {
+      const updated = await updateDefaultProvider({
+        providerId: selectedProviderId,
+        defaultModel: selectedModelId,
+      });
+      store.setDefaultProvider(updated);
+    } catch {
+      // ignore
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const onCancel = () => {
+    if (!defaultProvider) return;
+
+    setSelectedProviderId(defaultProvider.providerId);
+    setSelectedModelId(defaultProvider.defaultModel);
+
+    if (isProviderChanged) {
+      fetchModels(defaultProvider.providerId);
+    }
+  };
 
   return (
     <div className={inline ? styles.inlineBody : styles.panelBody}>
@@ -53,7 +189,8 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
           </Text>
           <ToggleButton
             className={styles.toggle}
-            isChecked={aiAgentEnabled}
+            isChecked={hasDefaultProvider || aiAgentEnabled}
+            isDisabled={hasDefaultProvider}
             onChange={() => setAiAgentEnabled(!aiAgentEnabled)}
           />
         </div>
@@ -61,6 +198,63 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
           {t("Common:AIAgentDescription")}
         </Text>
       </div>
+
+      {providers.length > 0 && (
+        <div className={styles.formBlock}>
+          <FieldContainer
+            labelVisible
+            isVertical
+            labelText={t("Common:AIProvider")}
+            removeMargin
+          >
+            <ComboBox
+              options={providerOptions}
+              selectedOption={selectedProviderOption}
+              displayArrow
+              onSelect={onSelectProvider}
+              displaySelectedOption
+              directionY="both"
+              dropDownMaxHeight={300}
+            />
+          </FieldContainer>
+
+          <FieldContainer
+            labelVisible
+            isVertical
+            labelText={t("Common:Model")}
+            removeMargin
+          >
+            <ComboBox
+              options={modelOptions}
+              selectedOption={selectedModelOption}
+              displayArrow
+              onSelect={onSelectModel}
+              displaySelectedOption
+              isDisabled={models.length === 0 && !defaultProvider}
+              directionY="both"
+              dropDownMaxHeight={300}
+            />
+          </FieldContainer>
+
+          <div className={styles.buttonWrapper}>
+            <Button
+              primary
+              size={ButtonSize.small}
+              label={t("Common:SaveButton")}
+              onClick={onSave}
+              isLoading={isSaving}
+              isDisabled={!hasChanges || isModelsLoading}
+              style={{ marginInlineEnd: "8px" }}
+            />
+            <Button
+              size={ButtonSize.small}
+              label={t("Common:CancelButton")}
+              onClick={onCancel}
+              isDisabled={!hasChanges || isModelsLoading}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

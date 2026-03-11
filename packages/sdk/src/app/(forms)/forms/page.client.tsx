@@ -34,6 +34,7 @@ import type {
   TGetFolder,
 } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
+import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
 import { createThumbnails } from "@docspace/shared/api/files";
 import { thumbnailStatuses } from "@docspace/shared/constants";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
@@ -46,6 +47,7 @@ import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsUserStore } from "../_store/FormsUserStore";
+import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import FormsLayout from "../_components/forms-layout";
 
 type FormsPageProps = {
@@ -58,6 +60,7 @@ type FormsPageProps = {
   filesSettings: TFilesSettings;
   initialFolderData?: TGetFolder;
   user?: TUser;
+  defaultProvider?: TDefaultProvider;
 };
 
 function FormsPage({
@@ -70,12 +73,14 @@ function FormsPage({
   filesSettings,
   initialFolderData,
   user,
+  defaultProvider,
 }: FormsPageProps) {
   useSDKConfig();
 
   const formsSettingsStore = useFormsSettingsStore();
   const formsListStore = useFormsListStore();
   const formsUserStore = useFormsUserStore();
+  const formsAiAgentStore = useFormsAiAgentStore();
   const filesSettingsStore = useFilesSettingsStore();
   const settingsStore = useSettingsStore();
   const [isReady, setIsReady] = React.useState(false);
@@ -108,6 +113,12 @@ function FormsPage({
       formsUserStore.setUser(user);
     }
   }, [user, formsUserStore]);
+
+  React.useEffect(() => {
+    if (defaultProvider) {
+      formsAiAgentStore.setDefaultProvider(defaultProvider);
+    }
+  }, [defaultProvider, formsAiAgentStore]);
 
   React.useEffect(() => {
     settingsStore.setFilesViewAs("tile");

@@ -33,10 +33,12 @@ import type {
   TGetFolder,
 } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
+import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
 
 import { getFilesSettings } from "@/api/files";
 import { getFormsFolder } from "@/api/forms";
 import { getSelf } from "@/api/people";
+import { getDefaultProvider } from "@/api/ai";
 import {
   MY_FORMS_FOLDER_HEADER,
   FORMS_TO_FILL_FOLDER_HEADER,
@@ -79,15 +81,22 @@ export default async function Forms({
   let filesSettings: TFilesSettings | undefined;
   let initialFolderData: TGetFolder | undefined;
   let user: TUser | undefined;
+  let defaultProvider: TDefaultProvider | undefined;
 
   if (myFormsFolderId) {
-    [filesSettings, initialFolderData, user] = await Promise.all([
-      getFilesSettings(),
-      getFormsFolder(myFormsFolderId, filter, requestToken),
-      getSelf(),
-    ]);
+    [filesSettings, initialFolderData, user, defaultProvider] =
+      await Promise.all([
+        getFilesSettings(),
+        getFormsFolder(myFormsFolderId, filter, requestToken),
+        getSelf(),
+        getDefaultProvider(),
+      ]);
   } else {
-    [filesSettings, user] = await Promise.all([getFilesSettings(), getSelf()]);
+    [filesSettings, user, defaultProvider] = await Promise.all([
+      getFilesSettings(),
+      getSelf(),
+      getDefaultProvider(),
+    ]);
   }
 
   return (
@@ -101,6 +110,7 @@ export default async function Forms({
       filesSettings={filesSettings!}
       initialFolderData={initialFolderData}
       user={user}
+      defaultProvider={defaultProvider}
     />
   );
 }

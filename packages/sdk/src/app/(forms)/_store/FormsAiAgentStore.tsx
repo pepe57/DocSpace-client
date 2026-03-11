@@ -30,6 +30,7 @@ import React from "react";
 import { makeAutoObservable, runInAction } from "mobx";
 
 import type { TAIRoomChatSettings } from "@docspace/shared/api/rooms/types";
+import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
 import { getAIAgent } from "@docspace/shared/api/ai";
 
 import {
@@ -51,12 +52,19 @@ class FormsAiAgentStore {
   // AI agent toggle
   aiAgentEnabled = false;
 
+  // Default AI provider (fetched server-side)
+  defaultProvider: TDefaultProvider | null = null;
+
   // Knowledge base sync
   isSyncingKB = false;
 
   constructor() {
     makeAutoObservable(this);
   }
+
+  setDefaultProvider = (provider: TDefaultProvider) => {
+    this.defaultProvider = provider;
+  };
 
   setAiAgentEnabled = (value: boolean) => {
     this.aiAgentEnabled = value;
