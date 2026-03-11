@@ -95,6 +95,7 @@ type TransactionHistoryProps = {
   formatDate?: (date: DateTime) => string;
   withoutHeader?: boolean;
   serviceName?: string;
+  headerTitle?: stirng;
 };
 
 const getTransactionType = (key: string) => {
@@ -196,6 +197,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     formatDate,
     withoutHeader,
     serviceName,
+    headerTitle,
   } = props;
 
   const { t } = useTranslation(["Payments", "Settings"]);
@@ -690,7 +692,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
             fontSize="16px"
             className={styles.transactionHistoryTitle}
           >
-            {t("TransactionHistory")}
+            {headerTitle ?? t("TransactionHistory")}
           </Text>
         )}
         {isMobile ? mobileFilter : null}

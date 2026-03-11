@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
@@ -40,97 +40,153 @@ import styles from "./BackupPage.module.scss";
 import { BACKUP_SERVICE } from "@docspace/shared/constants";
 import { DeviceType } from "@docspace/ui-kit/enums";
 
+import WalletInfo from "../../../shared/top-up-balance/sub-components/WalletInfo.tsx";
+import { setServiceState } from "@docspace/shared/api/portal";
+import { toastr } from "@docspace/ui-kit/components";
+import ConfirmationDialog from "../../sub-components/ConfirmationDialog";
+
 type BackupPageProps = {
-  walletBalance?: number;
   availableBackupsCount?: number;
-  backupPricePerUnit?: number;
-  isBackupEnabled?: boolean;
+  backupServicePrice?: number;
+  isBackupServiceOn?: boolean;
   formatWalletCurrency?: (amount?: number, fractionDigits?: number) => string;
-  onToggleBackup?: (enabled: boolean) => void;
+  changeServiceState?: (service: string) => void;
+  setServiceState?: (service: string, enabled: boolean) => void;
   currentDeviceType?: DeviceType;
+  isFreeTariff?: boolean;
 };
 
 const BackupPage: React.FC<BackupPageProps> = ({
-  walletBalance = 100,
-  availableBackupsCount = 8,
-  backupPricePerUnit = 12,
-  isBackupEnabled = true,
   formatWalletCurrency,
-  onToggleBackup,
+  availableBackupsCount = 0,
+  backupServicePrice = 0,
+  changeServiceState,
   currentDeviceType,
+  isBackupServiceOn,
+  isFreeTariff,
 }) => {
-  const { t } = useTranslation(["Payments", "Common"]);
+  const { t } = useTranslation(["Payments", "Services", "Common"]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
 
   const handleToggleChange = () => {
-    onToggleBackup?.(!isBackupEnabled);
+    setIsConfirmDialogVisible(true);
   };
 
-  const formattedBalance = formatWalletCurrency
-    ? formatWalletCurrency(walletBalance, 2)
-    : `$${walletBalance.toFixed(2)}`;
+  const onCloseConfirmDialog = () => {
+    setIsConfirmDialogVisible(false);
+  };
+
+  const onConfirm = async () => {
+    const raw = {
+      service: BACKUP_SERVICE,
+      enabled: !isBackupServiceOn,
+    };
+
+    setIsLoading(true);
+    setIsConfirmDialogVisible(false);
+    changeServiceState!(BACKUP_SERVICE);
+
+    try {
+      await setServiceState!(raw);
+    } catch (error) {
+      console.error(error);
+      toastr.error(t("Common:UnexpectedError"));
+      changeServiceState!(BACKUP_SERVICE);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const confirmationDialogContent = {
+    title: t("Common:Confirmation"),
+
+    body: !isBackupServiceOn
+      ? t("Services:EnableBackupConfirm", {
+          productName: t("Common:ProductName"),
+        })
+      : isFreeTariff
+        ? t("Services:DisableBackupConfirmWithoutQuota", {
+            productName: t("Common:ProductName"),
+          })
+        : t("Services:DisableBackupConfirm", {
+            productName: t("Common:ProductName"),
+          }),
+  };
+
+  const balance = formatWalletCurrency!();
 
   return (
     <div className={styles.container}>
-      {/* Toggle Section */}
       <ServiceToggleSection
-        isEnabled={isBackupEnabled}
+        isEnabled={isBackupServiceOn!}
         onToggle={handleToggleChange}
         title={t("Payments:Backup")}
         description={t("Payments:BackupDescription")}
+        isDisabled={isLoading}
       />
 
-      {/* Wallet Balance Card */}
-      <div className={styles.walletCard}>
-        <div className={styles.walletIcon}>
-          <WalletIcon />
-        </div>
-        <div className={styles.walletContent}>
-          <Text className={styles.walletTitle}>
-            {t("Payments:ProductNameWallet", {
-              productName: t("Common:ProductName"),
-            })}
-          </Text>
-          <Text className={styles.walletBalance}>
-            {t("Payments:Balance")}: {formattedBalance}
-          </Text>
-        </div>
-      </div>
+      <WalletInfo shortView withoutBackground balance={balance} />
 
-      {/* Available Backups Card */}
       <div className={styles.backupsCard}>
         <div className={styles.backupsHeader}>
-          <Text className={styles.backupsTitle}>
+          <Text fontWeight="700" fontSize="14px">
             {t("Payments:AvailableBackups")}
           </Text>
         </div>
 
         <div className={styles.backupsAmountContainer}>
-          <Text className={styles.backupsNumber}>{availableBackupsCount}</Text>
+          <Text fontSize="28px" fontWeight="700">
+            {availableBackupsCount}
+          </Text>
           <Text className={styles.backupsPriceText}>
             {t("Payments:PerBackupWithBracket", {
-              currency: `$${backupPricePerUnit}`,
+              currency: `$${backupServicePrice}`,
             })}
           </Text>
         </div>
       </div>
-
-      {/* Usage History */}
-      <div className={styles.usageHistorySection}>
+      <div>
         <TransactionHistory
-          withoutHeader={currentDeviceType !== DeviceType.mobile}
+          headerTitle={t("Services:UsageHistory")}
           serviceName={BACKUP_SERVICE}
         />
       </div>
+
+      {isConfirmDialogVisible ? (
+        <ConfirmationDialog
+          visible={isConfirmDialogVisible}
+          onClose={onCloseConfirmDialog}
+          onConfirm={onConfirm}
+          title={confirmationDialogContent.title}
+          bodyText={confirmationDialogContent.body}
+        />
+      ) : null}
     </div>
   );
 };
 
-export default inject(({ paymentStore, settingsStore }: TStore) => {
-  const { formatWalletCurrency, walletBalance } = paymentStore;
-  const { currentDeviceType } = settingsStore;
-  return {
-    walletBalance,
-    formatWalletCurrency,
-    currentDeviceType,
-  };
-})(observer(BackupPage));
+export default inject(
+  ({ paymentStore, settingsStore, currentQuotaStore }: TStore) => {
+    const {
+      formatWalletCurrency,
+      availableBackupsCount,
+      backupServicePrice,
+      changeServiceState,
+      isBackupServiceOn,
+    } = paymentStore;
+    const { currentDeviceType } = settingsStore;
+    const { isFreeTariff } = currentQuotaStore;
+
+    return {
+      formatWalletCurrency,
+      availableBackupsCount,
+      backupServicePrice,
+      currentDeviceType,
+      changeServiceState,
+      isBackupServiceOn,
+      isFreeTariff,
+    };
+  },
+)(observer(BackupPage));

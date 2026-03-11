@@ -39,14 +39,14 @@ import {
 import { setServiceState } from "@docspace/shared/api/portal";
 
 import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
-import TopUpModal from "SRC_DIR/components/panels/TopUpBalance/TopUpModal";
+import TopUpModal from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/shared/Top-up-balance/TopUpModal";
 
 import ServicesItems from "./ServicesItems";
 import ServicesLoader from "./ServicesLoader";
 import StoragePlanUpgrade from "./sub-components/AdditionalStorage/StoragePlanUpgrade";
 import StoragePlanCancel from "./sub-components/AdditionalStorage/StoragePlanCancel";
 import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModal";
-import BackupServiceDialog from "./pages/Backup/BackupServiceDialog";
+import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";
 import AIServiceDialog from "./pages/AITools/AIServiceDialog";
 import WebSearchDialog from "./sub-components/WebSearch/WebSearchDialog";

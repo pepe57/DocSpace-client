@@ -452,6 +452,12 @@ class PaymentStore {
     return this.servicesQuotasFeatures.get(AI_TOOLS)?.value;
   }
 
+  get availableBackupsCount() {
+    if (this.backupServicePrice === 0) return 0;
+    if (this.walletBalance === 0) return 0;
+    return Math.floor(this.walletBalance / this.backupServicePrice);
+  }
+
   formatWalletCurrency = (
     item: number | null = null,
     fractionDigits: number = 3,

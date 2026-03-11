@@ -378,7 +378,9 @@ const SectionHeaderContent = (props) => {
           arrayOfParams[0] &&
           (isMobile() ||
             window.location.href.indexOf("/javascript-sdk/") > -1 ||
-            window.location.href.indexOf("/ai-services") > -1) ? (
+            window.location.href.indexOf("/ai-services") > -1 ||
+            window.location.href.indexOf("/services/backup") > -1 ||
+            window.location.href.indexOf("disk-storage") > -1) ? (
             <IconButton
               iconName={ArrowPathReactSvgUrl}
               size="17"
