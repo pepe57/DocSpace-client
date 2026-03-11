@@ -39,7 +39,10 @@ import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.re
 
 const AiChatButton = () => {
   const { t } = useTranslation(["Common"]);
-  const { togglePanel } = useFormsAiAgentStore();
+  const { togglePanel, aiAgentEnabled, currentAgentId } =
+    useFormsAiAgentStore();
+
+  if (!aiAgentEnabled || !currentAgentId) return null;
 
   return (
     <IconButton

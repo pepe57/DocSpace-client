@@ -117,6 +117,10 @@ function FormsPage({
   }, [defaultProvider, formsAiAgentStore]);
 
   React.useEffect(() => {
+    // Mark as frame so axiosClient 401 handler does not redirect to login
+    if (!window.ClientConfig) window.ClientConfig = {} as NonNullable<typeof window.ClientConfig>;
+    window.ClientConfig.isFrame = true;
+
     settingsStore.setFilesViewAs("tile");
     const token = requestToken || authToken;
     if (token) {

@@ -30,6 +30,8 @@ import type { TOperation } from "@docspace/shared/api/files/types";
 import { FolderType } from "@docspace/shared/enums";
 
 const AGENT_STORAGE_KEY = "forms_ai_agent";
+const FOLDER_AGENTS_STORAGE_KEY = "forms_folder_agents";
+const AI_ENABLED_STORAGE_KEY = "forms_ai_enabled";
 
 /** Simple non-crypto hash to turn a long token into a short key. */
 export const tokenToHash = (token: string): string => {
@@ -47,6 +49,13 @@ export type AgentSettings = {
   knowledgeFolderId: number | null;
 };
 
+export type FolderAgentEntry = {
+  agentId: number;
+  knowledgeFolderId: number | null;
+};
+
+export type FolderAgentsMap = Record<number, FolderAgentEntry>;
+
 /**
  * Build a per-user storage key so that switching accounts on the
  * same browser does not leak agent configuration to another user.
@@ -57,6 +66,11 @@ const storageKey = (roomId: string | number, userHash?: string) =>
   userHash
     ? `${AGENT_STORAGE_KEY}_${userHash}_${roomId}`
     : `${AGENT_STORAGE_KEY}_${roomId}`;
+
+const folderAgentsKey = (roomId: string | number, userHash?: string) =>
+  userHash
+    ? `${FOLDER_AGENTS_STORAGE_KEY}_${userHash}_${roomId}`
+    : `${FOLDER_AGENTS_STORAGE_KEY}_${roomId}`;
 
 export const saveAgentSettings = (
   roomId: string | number,
@@ -85,15 +99,98 @@ export const clearAgentSettings = (
   localStorage.removeItem(storageKey(roomId, userHash));
 };
 
+// --- Per-folder agent mappings ---
+
+export const saveFolderAgentsMap = (
+  roomId: string | number,
+  map: FolderAgentsMap,
+  userHash?: string,
+) => {
+  localStorage.setItem(
+    folderAgentsKey(roomId, userHash),
+    JSON.stringify(map),
+  );
+};
+
+export const loadFolderAgentsMap = (
+  roomId: string | number,
+  userHash?: string,
+): FolderAgentsMap => {
+  try {
+    const val = localStorage.getItem(folderAgentsKey(roomId, userHash));
+    return val ? (JSON.parse(val) as FolderAgentsMap) : {};
+  } catch {
+    return {};
+  }
+};
+
+export const clearFolderAgentsMap = (
+  roomId: string | number,
+  userHash?: string,
+) => {
+  localStorage.removeItem(folderAgentsKey(roomId, userHash));
+};
+
+// --- AI enabled toggle persistence ---
+
+const aiEnabledKey = (roomId: string | number, userHash?: string) =>
+  userHash
+    ? `${AI_ENABLED_STORAGE_KEY}_${userHash}_${roomId}`
+    : `${AI_ENABLED_STORAGE_KEY}_${roomId}`;
+
+export const saveAiEnabled = (
+  roomId: string | number,
+  enabled: boolean,
+  userHash?: string,
+) => {
+  localStorage.setItem(aiEnabledKey(roomId, userHash), String(enabled));
+};
+
+export const loadAiEnabled = (
+  roomId: string | number,
+  userHash?: string,
+): boolean => {
+  return localStorage.getItem(aiEnabledKey(roomId, userHash)) === "true";
+};
+
+// --- Knowledge base helpers ---
+
 export const getKnowledgeFolderId = async (
   agentId: number,
 ): Promise<number | null> => {
   const res = (await request({
     method: "get",
     url: `/files/${agentId}`,
-  })) as { folders?: { id: number; type: number }[] };
+  })) as {
+    folders?: { id: number; type: number; title: string }[];
+    current?: { id: number; security?: Record<string, boolean> };
+  };
+
+  console.log(
+    "[FormsAI] getKnowledgeFolderId for agent",
+    agentId,
+    "folders:",
+    res?.folders?.map((f) => ({ id: f.id, type: f.type, title: f.title })),
+    "room security:",
+    res?.current?.security,
+  );
 
   const kbFolder = res?.folders?.find((f) => f.type === FolderType.Knowledge);
+
+  if (kbFolder) {
+    console.log(
+      "[FormsAI] Found Knowledge folder:",
+      kbFolder.id,
+      "title:",
+      kbFolder.title,
+    );
+  } else {
+    console.warn(
+      "[FormsAI] No Knowledge folder (type=32) found in agent room",
+      agentId,
+    );
+  }
+
   return kbFolder?.id ?? null;
 };
 
@@ -122,6 +219,13 @@ export const copyFilesToAgentRoom = async (
   destFolderId: number,
   fileIds: number[],
 ) => {
+  console.log(
+    "[FormsAI] copyFilesToAgentRoom: destFolderId =",
+    destFolderId,
+    "fileIds =",
+    fileIds,
+  );
+
   const ops = (await request({
     method: "put",
     url: "/files/fileops/copy",
