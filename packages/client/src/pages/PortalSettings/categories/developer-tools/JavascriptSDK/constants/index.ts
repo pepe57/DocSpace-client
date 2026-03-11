@@ -71,3 +71,11 @@ export const FILE_TYPE_EXTENSIONS = {
   archive: [".zip", ".rar", ".7z", ".tar", ".gz"],
   pdf: [".pdf"],
 };
+
+export const UNIT_MULTIPLIERS = {
+  kb: 1024,
+  mb: 1024 * 1024,
+  gb: 1024 * 1024 * 1024,
+} as const;
+
+export const UNIT_ORDER = ["kb", "mb", "gb"] as const;

@@ -375,6 +375,7 @@ const ModelSettings = ({
               onSelect={onSelectProvider}
               scaled
               scaledOptions
+              dropDownMaxHeight={providerOptions.length > 7 ? 300 : undefined}
               noBorder={false}
               className={classNames("ai-combobox provider-combobox", {
                 "has-error": !!error,

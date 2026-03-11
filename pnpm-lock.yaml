@@ -1112,6 +1112,9 @@ importers:
       react-i18next:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react-router:
+        specifier: 7.12.0
+        version: 7.12.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-svg:
         specifier: 16.1.34
         version: 16.1.34(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -3598,7 +3601,7 @@ packages:
     version: 3.6.0
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz':
-    resolution: {integrity: sha512-OB5sU4pBNrqe9w7Ixig9gink7Kp6a2qo7lYy57a60xlF8Rmifk+pxQVdK3YXexjjBQuxOz5aZz4moxkd2OmXLQ==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz}
+    resolution: {integrity: sha512-EF8EitO9CgQ9t31m7/EJUa8Y1PDXYXxf67P4QAiI99GdHIBXhN9Irc7KPIDuqhUjHXxZOoNHn3QhcBn22loUOA==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz}
     version: 2.1.0
     hasBin: true
 
