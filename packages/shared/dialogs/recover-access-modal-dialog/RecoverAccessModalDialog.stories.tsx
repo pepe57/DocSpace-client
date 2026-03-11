@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-import { StoryFn, Meta } from "@storybook/react";
+import { StoryFn, Meta } from "@storybook/react-webpack5";
 import RecoverAccessModalDialog from "./RecoverAccessModalDialog";
 import type { RecoverAccessModalDialogProps } from "./RecoverAccessModalDialog.types";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
