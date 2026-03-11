@@ -458,7 +458,14 @@ export const PluginComponent = inject(({ pluginStore }) => {
               });
             };
 
-            const { onClick, iconName, iconNode, iconClickName, iconHoverName, ...rest } = elementProps;
+            const {
+              onClick,
+              iconName,
+              iconNode,
+              iconClickName,
+              iconHoverName,
+              ...rest
+            } = elementProps;
 
             const icon = iconName
               ? getPluginIconUrl(pluginName, iconName)
@@ -468,8 +475,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
               ? getPluginIconUrl(pluginName, iconHoverName)
               : undefined;
 
-            const iconClick = iconClickName 
-              ? getPluginIconUrl(pluginName, iconHoverName)
+            const iconClick = iconClickName
+              ? getPluginIconUrl(pluginName, iconClickName)
               : undefined;
 
             // Render custom content if provided
@@ -488,11 +495,11 @@ export const PluginComponent = inject(({ pluginStore }) => {
               <>
                 <IconButton
                   {...rest}
-                      iconName={icon}
-                      iconHoverName={iconHover}
-                      iconClickName={iconClick}
-                      iconNode={customContentElement}
-                      onClick={onClickAction}
+                  iconName={icon}
+                  iconHoverName={iconHover}
+                  iconClickName={iconClick}
+                  iconNode={customContentElement}
+                  onClick={onClickAction}
                 />
               </>
             );
