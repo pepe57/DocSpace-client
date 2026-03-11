@@ -158,5 +158,4 @@ export type TFrameConfig = {
   withSubtitle?: boolean;
   myFormsFolderId?: string | number;
   formsToFillFolderId?: string | number;
-  completedFormsFolderId?: string | number;
 };

@@ -21,6 +21,10 @@
   min-width: 0;
 }
 
+.root :global([class*="Navigation_item"]:not([class*="itemWrapper"])) {
+  column-gap: 10px;
+}
+
 .loaderCenter {
   display: flex;
   align-items: center;

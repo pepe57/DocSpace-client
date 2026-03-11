@@ -54,7 +54,6 @@ type FormsPageProps = {
   roomId: string | number;
   myFormsFolderId: string | number;
   formsToFillFolderId: string | number;
-  completedFormsFolderId: string | number;
   requestToken: string;
   authToken: string;
   filesSettings: TFilesSettings;
@@ -67,7 +66,6 @@ function FormsPage({
   roomId,
   myFormsFolderId,
   formsToFillFolderId,
-  completedFormsFolderId,
   requestToken,
   authToken,
   filesSettings,
@@ -90,7 +88,6 @@ function FormsPage({
       roomId,
       myFormsFolderId,
       formsToFillFolderId,
-      completedFormsFolderId,
       requestToken,
     });
     formsSettingsStore.setFilesSettings(filesSettings);
@@ -98,7 +95,6 @@ function FormsPage({
     roomId,
     myFormsFolderId,
     formsToFillFolderId,
-    completedFormsFolderId,
     requestToken,
     filesSettings,
     formsSettingsStore,
