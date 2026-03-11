@@ -66,8 +66,6 @@
   "AIRoomDescription": "A versatile chat powered by your chosen text model. Use it to solve everyday tasks and collaborate on text documents, spreadsheets, and presentations. All files added to the room are automatically used as context during your conversations with the chat.",
   "AIRoomTitle": "AI Room",
   "EmptyFolder": "This folder is empty",
-  "AutoSyncKnowledge": "Auto-sync knowledge base",
-  "AutoSyncKnowledgeDescription": "Automatically add completed form submissions to the AI agent's knowledge base for context-aware responses.",
   "AIToolsHint": "AI tools and integrations",
   "AIWouldLikeToUseThisTool": "AI would like to use this tool",
   "Alert": "Alert",
@@ -202,6 +200,10 @@
   "ConnectMCPServers": "To use manage connection, you need to connect {{mcpServers}} inside room settings",
   "ConnectWebSearch": "To use {{webSearch}}, you need to connect it in the {{productName}} settings.",
   "Contacts": "Contacts",
+  "FormAdmins": "Form admins",
+  "FormAdminsDescription": "Users who have full access to manage this form and its settings.",
+  "FormManagers": "Form managers",
+  "FormManagersDescription": "Users who can view and manage form submissions.",
   "ContactUs": "For sales questions, contact us at",
   "ContainsSpecCharacter": "The title can't contain any of the following characters: *+:\"<>?|/",
   "Content": "Content",
@@ -1164,6 +1166,5 @@
   "CompletedForms": "Completed forms",
   "EmptyMyForms": "You don't have any forms yet. Create or upload a form to get started.",
   "EmptyFormsToFill": "There are no forms to fill at the moment.",
-  "EmptyCompletedForms": "There are no completed forms yet.",
-  "ErrorOccurred": "An error occurred"
+  "EmptyCompletedForms": "There are no completed forms yet."
 }

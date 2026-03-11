@@ -1,15 +1,26 @@
 @use "@docspace/ui-kit/styles/mixins";
 
-// Override scrollbar height from Article.module.scss which subtracts
-// 150px for header+profile. We only have a 16px spacer, no profile.
-.scrollbar {
-	height: calc(100% - 16px) !important;
+.articleFlex {
+	display: flex;
+	flex-direction: column;
+}
 
-	@include mixins.tablet {
-		height: calc(100% - 16px) !important;
-	}
+// Override scrollbar height from Article.module.scss which subtracts
+// 150px for header+profile. We only have a 16px spacer + navBottom, no profile.
+.scrollbar {
+	flex: 1;
+	min-height: 0;
 
 	@include mixins.mobile {
 		height: 100% !important;
+	}
+}
+
+.navBottom {
+	flex-shrink: 0;
+	padding: 8px 20px 16px;
+
+	@include mixins.tablet {
+		padding: 8px 8px;
 	}
 }

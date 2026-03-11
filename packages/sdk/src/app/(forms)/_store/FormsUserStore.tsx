@@ -24,9 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export enum FormsSection {
-  MyForms = "my-forms",
-  FormsToFill = "forms-to-fill",
-  CompletedForms = "completed-forms",
-  Settings = "settings",
+"use client";
+
+import React from "react";
+import { makeAutoObservable } from "mobx";
+
+import type { TUser } from "@docspace/shared/api/people/types";
+
+class FormsUserStore {
+  user: TUser | null = null;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  setUser = (user: TUser) => {
+    this.user = user;
+  };
 }
+
+export const FormsUserStoreContext = React.createContext<FormsUserStore>(
+  new FormsUserStore(),
+);
+
+export const FormsUserStoreContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const store = React.useMemo(() => new FormsUserStore(), []);
+  return (
+    <FormsUserStoreContext.Provider value={store}>
+      {children}
+    </FormsUserStoreContext.Provider>
+  );
+};
+
+export const useFormsUserStore = () => {
+  return React.useContext(FormsUserStoreContext);
+};

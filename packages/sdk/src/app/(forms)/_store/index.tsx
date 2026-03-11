@@ -44,6 +44,7 @@ import { FormsListStoreContextProvider } from "./FormsListStore";
 import { FormsSettingsStoreContextProvider } from "./FormsSettingsStore";
 import { FormsDbSettingsStoreContextProvider } from "./FormsDbSettingsStore";
 import { FormsAiAgentStoreContextProvider } from "./FormsAiAgentStore";
+import { FormsUserStoreContextProvider } from "./FormsUserStore";
 
 export const FormsStoreProviders = ({
   children,
@@ -62,15 +63,17 @@ export const FormsStoreProviders = ({
                     <DownloadDialogStoreContextProvider>
                       <ActiveItemsStoreContextProvider>
                         <FormsSettingsStoreContextProvider>
-                          <FormsDbSettingsStoreContextProvider>
-                            <FormsAiAgentStoreContextProvider>
-                              <FormsNavigationStoreContextProvider>
-                                <FormsListStoreContextProvider>
-                                  {children}
-                                </FormsListStoreContextProvider>
-                              </FormsNavigationStoreContextProvider>
-                            </FormsAiAgentStoreContextProvider>
-                          </FormsDbSettingsStoreContextProvider>
+                          <FormsUserStoreContextProvider>
+                            <FormsDbSettingsStoreContextProvider>
+                              <FormsAiAgentStoreContextProvider>
+                                <FormsNavigationStoreContextProvider>
+                                  <FormsListStoreContextProvider>
+                                    {children}
+                                  </FormsListStoreContextProvider>
+                                </FormsNavigationStoreContextProvider>
+                              </FormsAiAgentStoreContextProvider>
+                            </FormsDbSettingsStoreContextProvider>
+                          </FormsUserStoreContextProvider>
                         </FormsSettingsStoreContextProvider>
                       </ActiveItemsStoreContextProvider>
                     </DownloadDialogStoreContextProvider>

@@ -48,12 +48,19 @@ class FormsAiAgentStore {
   knowledgeFolderId: number | null = null;
   agentChatSettings: TAIRoomChatSettings | undefined = undefined;
 
+  // AI agent toggle
+  aiAgentEnabled = false;
+
   // Knowledge base sync
   isSyncingKB = false;
 
   constructor() {
     makeAutoObservable(this);
   }
+
+  setAiAgentEnabled = (value: boolean) => {
+    this.aiAgentEnabled = value;
+  };
 
   openPanel = () => {
     this.isPanelVisible = true;

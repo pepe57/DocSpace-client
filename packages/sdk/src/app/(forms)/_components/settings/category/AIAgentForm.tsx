@@ -24,87 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Wrapper — compensates for scroll-body padding-inline-end: 16px
-// Same pattern as EditLinkPanel: withoutPadding + extend right + own padding
-.panelBody {
-  margin-inline-end: -16px;
-  width: calc(100% + 16px);
-}
+"use client";
 
-// Category list
+import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
-.categoryList {
-  padding: 4px 16px 0;
-}
+import { Text } from "@docspace/ui-kit/components/text";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 
-.categoryItem {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 0;
-  cursor: pointer;
-  border-bottom: 1px solid var(--modal-dialog-header-border-color);
+import { useFormsAiAgentStore } from "../../../_store/FormsAiAgentStore";
 
-  &:last-child {
-    border-bottom: none;
-  }
+import styles from "./SettingsPanel.module.scss";
 
-  &:hover {
-    opacity: 0.85;
-  }
-}
+type AIAgentFormProps = {
+  inline?: boolean;
+};
 
-.categoryLabel {
-  flex: 1;
-  font-size: 15px;
-  font-weight: 600;
-}
+const AIAgentForm = ({ inline }: AIAgentFormProps) => {
+  const { t } = useTranslation(["Common"]);
+  const { aiAgentEnabled, setAiAgentEnabled } = useFormsAiAgentStore();
 
-// Connect database form
+  return (
+    <div className={inline ? styles.inlineBody : styles.panelBody}>
+      <div className={styles.toggleBlock}>
+        <div className={styles.toggleHeader}>
+          <Text fontSize="16px" fontWeight={700}>
+            {t("Common:EnableAIAgent")}
+          </Text>
+          <ToggleButton
+            className={styles.toggle}
+            isChecked={aiAgentEnabled}
+            onChange={() => setAiAgentEnabled(!aiAgentEnabled)}
+          />
+        </div>
+        <Text fontSize="12px" fontWeight={400}>
+          {t("Common:AIAgentDescription")}
+        </Text>
+      </div>
+    </div>
+  );
+};
 
-.toggleBlock {
-  padding: 12px 16px 16px;
-  border-bottom: 1px solid var(--modal-dialog-header-border-color);
-
-  .toggleHeader {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding-bottom: 4px;
-
-    .toggle {
-      margin-inline-start: auto;
-      align-self: center;
-      position: static !important;
-      gap: 0 !important;
-    }
-  }
-}
-
-.formBlock {
-  padding: 16px 16px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.fieldGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.agentRow {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  > :first-child {
-    flex: 1;
-    min-width: 0;
-  }
-}
-
-.testButtonWrapper {
-  padding-top: 4px;
-}
+export default observer(AIAgentForm);
