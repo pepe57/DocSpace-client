@@ -79,7 +79,6 @@ import {
   ReducedRightsDialog,
   SocialAuthWelcomeDialog,
   EditRoomGroupsDialog,
-  RoomGroupingDialog,
   AddRoomToGroupDialog,
   PauseSubmissionsDialog,
 } from "../dialogs";
@@ -198,7 +197,6 @@ const Panels = (props) => {
     setArrRoomGroups,
     setEditRoomGroupsDialogVisible,
     arrRoomGroups,
-    roomGroupingDialogVisible,
     addRoomToGroupDialogVisible,
     pauseSubmissionsDialogVisible,
   } = props;
@@ -507,9 +505,6 @@ const Panels = (props) => {
         arrRoomGroups={arrRoomGroups}
       />
     ),
-    roomGroupingDialogVisible && (
-      <RoomGroupingDialog key="room-grouping-dialog" />
-    ),
     addRoomToGroupDialogVisible && (
       <AddRoomToGroupDialog key="add-room-to-group-dialog" />
     ),
@@ -609,7 +604,6 @@ export default inject(
       getCovers,
       covers,
       setEditRoomGroupsDialogVisible,
-      roomGroupingDialogVisible,
       addRoomToGroupDialogVisible,
       pauseSubmissionsDialogVisible,
     } = dialogsStore;
@@ -752,7 +746,6 @@ export default inject(
       setArrRoomGroups,
       setEditRoomGroupsDialogVisible,
       arrRoomGroups,
-      roomGroupingDialogVisible,
       addRoomToGroupDialogVisible,
       pauseSubmissionsDialogVisible,
     };

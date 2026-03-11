@@ -1,0 +1,264 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+
+import { Text } from "@docspace/ui-kit/components/text";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+
+import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
+import {
+  getProviders,
+  getModels,
+  updateDefaultProvider,
+} from "@docspace/shared/api/ai";
+
+import { useFormsAiAgentStore } from "../../../_store/FormsAiAgentStore";
+
+import styles from "./SettingsPanel.module.scss";
+
+type AIAgentFormProps = {
+  inline?: boolean;
+};
+
+const AIAgentForm = ({ inline }: AIAgentFormProps) => {
+  const { t } = useTranslation(["Common"]);
+  const { aiAgentEnabled, setAiAgentEnabled, defaultProvider } =
+    useFormsAiAgentStore();
+  const store = useFormsAiAgentStore();
+
+  const [providers, setProviders] = useState<TAiProvider[]>([]);
+  const [models, setModels] = useState<TModel[]>([]);
+  const [isModelsLoading, setIsModelsLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const [selectedProviderId, setSelectedProviderId] = useState<number | null>(
+    defaultProvider?.providerId ?? null,
+  );
+  const [selectedModelId, setSelectedModelId] = useState<string | null>(
+    defaultProvider?.defaultModel ?? null,
+  );
+
+  const hasDefaultProvider = !!defaultProvider;
+
+  const isProviderChanged = selectedProviderId !== defaultProvider?.providerId;
+  const isModelChanged = selectedModelId !== defaultProvider?.defaultModel;
+  const hasChanges = isProviderChanged || isModelChanged;
+
+  useEffect(() => {
+    getProviders()
+      .then((items) => setProviders(items))
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (defaultProvider) {
+      setSelectedProviderId(defaultProvider.providerId);
+      setSelectedModelId(defaultProvider.defaultModel);
+    }
+  }, [defaultProvider]);
+
+  const fetchModels = useCallback(async (providerId: number) => {
+    setIsModelsLoading(true);
+    try {
+      const result = await getModels(providerId);
+      setModels(result);
+      return result;
+    } catch {
+      setModels([]);
+      return [];
+    } finally {
+      setIsModelsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (defaultProvider?.providerId) {
+      fetchModels(defaultProvider.providerId);
+    }
+  }, [defaultProvider?.providerId, fetchModels]);
+
+  const providerOptions: TOption[] = providers.map((p) => ({
+    key: p.id,
+    label: p.title,
+  }));
+
+  const modelOptions: TOption[] = models.map((m) => ({
+    key: m.modelId,
+    label: m.modelId,
+  }));
+
+  const selectedProviderOption: TOption = providers.length
+    ? (providerOptions.find((o) => o.key === selectedProviderId) ??
+      providerOptions[0])
+    : {
+        key: defaultProvider?.providerId ?? "-1",
+        label: defaultProvider?.providerTitle ?? "",
+      };
+
+  const selectedModelOption: TOption = models.length
+    ? (modelOptions.find((o) => o.key === selectedModelId) ?? modelOptions[0])
+    : {
+        key: defaultProvider?.defaultModel ?? "-1",
+        label: defaultProvider?.defaultModel ?? t("Common:NoModelsFound"),
+      };
+
+  const onSelectProvider = async (option: TOption) => {
+    if (option.key === selectedProviderId) return;
+
+    setSelectedProviderId(option.key as number);
+
+    const newModels = await fetchModels(option.key as number);
+    const hasDefault =
+      defaultProvider?.defaultModel &&
+      newModels.some((m) => m.modelId === defaultProvider.defaultModel);
+    setSelectedModelId(
+      hasDefault
+        ? defaultProvider!.defaultModel
+        : (newModels[0]?.modelId ?? null),
+    );
+  };
+
+  const onSelectModel = (option: TOption) => {
+    if (option.key === selectedModelId) return;
+    setSelectedModelId(option.key as string);
+  };
+
+  const onSave = async () => {
+    if (!selectedProviderId || !selectedModelId) return;
+
+    setIsSaving(true);
+    try {
+      const updated = await updateDefaultProvider({
+        providerId: selectedProviderId,
+        defaultModel: selectedModelId,
+      });
+      store.setDefaultProvider(updated);
+    } catch {
+      // ignore
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const onCancel = () => {
+    if (!defaultProvider) return;
+
+    setSelectedProviderId(defaultProvider.providerId);
+    setSelectedModelId(defaultProvider.defaultModel);
+
+    if (isProviderChanged) {
+      fetchModels(defaultProvider.providerId);
+    }
+  };
+
+  return (
+    <div className={inline ? styles.inlineBody : styles.panelBody}>
+      <div className={styles.toggleBlock}>
+        <div className={styles.toggleHeader}>
+          <Text fontSize="16px" fontWeight={700}>
+            {t("Common:EnableAIAgent")}
+          </Text>
+          <ToggleButton
+            className={styles.toggle}
+            isChecked={hasDefaultProvider || aiAgentEnabled}
+            isDisabled={hasDefaultProvider}
+            onChange={() => setAiAgentEnabled(!aiAgentEnabled)}
+          />
+        </div>
+        <Text fontSize="12px" fontWeight={400}>
+          {t("Common:AIAgentDescription")}
+        </Text>
+      </div>
+
+      {providers.length > 0 && (
+        <div className={styles.formBlock}>
+          <FieldContainer
+            labelVisible
+            isVertical
+            labelText={t("Common:AIProvider")}
+            removeMargin
+          >
+            <ComboBox
+              options={providerOptions}
+              selectedOption={selectedProviderOption}
+              displayArrow
+              onSelect={onSelectProvider}
+              displaySelectedOption
+              directionY="both"
+              dropDownMaxHeight={300}
+            />
+          </FieldContainer>
+
+          <FieldContainer
+            labelVisible
+            isVertical
+            labelText="Model"
+            removeMargin
+          >
+            <ComboBox
+              options={modelOptions}
+              selectedOption={selectedModelOption}
+              displayArrow
+              onSelect={onSelectModel}
+              displaySelectedOption
+              isDisabled={models.length === 0 && !defaultProvider}
+              directionY="both"
+              dropDownMaxHeight={300}
+            />
+          </FieldContainer>
+
+          <div className={styles.buttonWrapper}>
+            <Button
+              primary
+              size={ButtonSize.small}
+              label={t("Common:SaveButton")}
+              onClick={onSave}
+              isLoading={isSaving}
+              isDisabled={!hasChanges || isModelsLoading}
+              style={{ marginInlineEnd: "8px" }}
+            />
+            <Button
+              size={ButtonSize.small}
+              label={t("Common:CancelButton")}
+              onClick={onCancel}
+              isDisabled={!hasChanges || isModelsLoading}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default observer(AIAgentForm);

@@ -37,7 +37,11 @@ import "@docspace/shared/styles/theme.scss";
 
 import "@/styles/globals.scss";
 import { getColorTheme, getPortalCultures, getSettings } from "@/api/settings";
-import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
+import {
+	LOCALE_HEADER,
+	REQUEST_TOKEN_HEADER,
+	THEME_HEADER,
+} from "@/utils/constants";
 import Providers from "@/providers";
 import { getSelf } from "@/api/people";
 import Scripts from "@/components/Scripts";
@@ -129,6 +133,10 @@ export default async function RootLayout({
             colorTheme,
             locale,
             portalCultures,
+            authToken:
+              cookieStore.get("asc_auth_key")?.value ||
+              hdrs.get(REQUEST_TOKEN_HEADER) ||
+              undefined,
           }}
         >
           {children}
