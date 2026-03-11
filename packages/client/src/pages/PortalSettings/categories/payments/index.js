@@ -49,6 +49,7 @@ const PaymentsPage = (props) => {
     standalone,
     paymentStore,
     settingsStore,
+    servicesStore,
     clearAbortControllerArr,
   } = props;
   const [currentTabId, setCurrentTabId] = useState();
@@ -59,9 +60,10 @@ const PaymentsPage = (props) => {
   const defaultProps = createDefaultHookSettingsProps({
     paymentStore,
     settingsStore,
+    servicesStore,
   });
 
-  const { getWalletData, getPortalPaymentsData } = usePayments(
+  const { getWalletData, getPortalPaymentsData, getServicesData } = usePayments(
     defaultProps.payment,
   );
 
@@ -99,7 +101,7 @@ const PaymentsPage = (props) => {
       content: <Services />,
       onClick: async () => {
         clearAbortControllerArr();
-        await getWalletData();
+        await getServicesData();
       },
     },
   ];
@@ -133,15 +135,18 @@ const PaymentsPage = (props) => {
   );
 };
 
-export const Component = inject(({ settingsStore, paymentStore }) => {
-  const { standalone, currentDeviceType, clearAbortControllerArr } =
-    settingsStore;
+export const Component = inject(
+  ({ settingsStore, paymentStore, servicesStore }) => {
+    const { standalone, currentDeviceType, clearAbortControllerArr } =
+      settingsStore;
 
-  return {
-    standalone,
-    currentDeviceType,
-    paymentStore,
-    settingsStore,
-    clearAbortControllerArr,
-  };
-})(observer(PaymentsPage));
+    return {
+      standalone,
+      currentDeviceType,
+      paymentStore,
+      settingsStore,
+      clearAbortControllerArr,
+      servicesStore,
+    };
+  },
+)(observer(PaymentsPage));

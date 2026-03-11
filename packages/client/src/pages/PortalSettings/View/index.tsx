@@ -78,7 +78,7 @@ const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("backup")) return "backup-service";
   if (pathname.includes("disk-storage")) return "disk-storage";
   if (pathname.includes("ai-services")) return "ai-services";
-  if (pathname.includes("services")) return "services";
+
   if (pathname.includes("payments")) return "payments";
 
   if (pathname.includes("bonus")) return "bonus";
@@ -173,7 +173,7 @@ const View = ({
   const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
   const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
   const {
-    getServicesInitialValue,
+    // getServicesInitialValue,
     getAiServiceInitialValue,
     getBackupServiceInitialValue,
     getStorageServiceInitialValue,
@@ -298,9 +298,6 @@ const View = ({
           case "bonus":
             await standaloneInit(t);
             break;
-          case "services":
-            await getServicesInitialValue();
-            break;
 
           case "ai-services":
             await getAiServiceInitialValue();
@@ -354,7 +351,6 @@ const View = ({
       {currentView === "delete-data" ? <DeleteData /> : null}
       {currentView === "payments" ? <Payments /> : null}
       {currentView === "bonus" ? <Bonus /> : null}
-      {currentView === "services" ? <Services /> : null}
       {currentView === "ai-services" ? <AiPage /> : null}
       {currentView === "ai-settings" ? <AISettings /> : null}
       {currentView === "backup-service" ? <BackupPage /> : null}
