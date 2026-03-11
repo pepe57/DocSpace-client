@@ -127,10 +127,6 @@ class FormsAiAgentStore {
     results.forEach((r, i) => {
       if (r.status === "rejected") {
         failedIds.push(agentIds[i]);
-        console.warn(
-          `[FormsAI] failed to delete agent ${agentIds[i]}:`,
-          r.reason,
-        );
       }
     });
 
@@ -202,11 +198,6 @@ class FormsAiAgentStore {
     this._userHash = requestToken ? tokenToHash(requestToken) : undefined;
     this.folderAgentsMap = loadFolderAgentsMap(roomId, this._userHash);
     this.aiAgentEnabled = loadAiEnabled(roomId, this._userHash);
-    console.log("[FormsAI] initForRoom:", {
-      roomId,
-      aiAgentEnabled: this.aiAgentEnabled,
-      folderAgentsMap: { ...this.folderAgentsMap },
-    });
   };
 
   // --- Per-folder agent management ---
@@ -263,28 +254,11 @@ class FormsAiAgentStore {
           },
         }),
       });
-    } catch (e) {
-      console.error(
-        `[FormsAI] createAgent failed for ${folder.title}:`,
-        e,
-      );
+    } catch {
       return null;
     }
 
-    console.log(
-      "[FormsAI] Agent created:",
-      agent.id,
-      "title:",
-      agent.title,
-      "for folder:",
-      folder.id,
-      folder.title,
-    );
-
-    const kbFolderId = await getKnowledgeFolderId(agent.id).catch((e) => {
-      console.warn("[FormsAI] getKnowledgeFolderId failed:", e);
-      return null;
-    });
+    const kbFolderId = await getKnowledgeFolderId(agent.id).catch(() => null);
 
     const entry: FolderAgentEntry = {
       agentId: agent.id,
@@ -298,14 +272,6 @@ class FormsAiAgentStore {
 
     // Copy files to KB — best-effort, agent is already saved
     if (kbFolderId && files.length > 0) {
-      console.log(
-        "[FormsAI] Copying",
-        files.length,
-        "files to KB folder",
-        kbFolderId,
-        "for agent",
-        agent.id,
-      );
       try {
         await copyFilesToAgentRoom(
           kbFolderId,
@@ -316,25 +282,9 @@ class FormsAiAgentStore {
         if (kbFiles.length > 0) {
           await vectorizeFiles(kbFiles.map((f) => f.id));
         }
-        console.log("[FormsAI] KB sync complete for agent", agent.id);
-      } catch (e) {
-        console.warn(
-          "[FormsAI] KB sync failed for agent",
-          agent.id,
-          "kbFolderId:",
-          kbFolderId,
-          "fileIds:",
-          files.map((f) => f.id),
-          "error:",
-          e,
-        );
+      } catch {
+        // KB sync failed — agent is still saved, will retry on next sync
       }
-    } else if (!kbFolderId) {
-      console.warn(
-        "[FormsAI] No Knowledge folder found for agent",
-        agent.id,
-        "— skipping KB sync",
-      );
     }
 
     return entry;
@@ -442,17 +392,14 @@ class FormsAiAgentStore {
 
         // 5. Trigger vectorization for all KB files
         if (allKbFileIds.length > 0) {
-          await vectorizeFiles(allKbFileIds).catch((e) =>
-            console.warn("[FormsAI] vectorization failed:", e),
-          );
+          await vectorizeFiles(allKbFileIds).catch(() => {});
         }
       }
 
       runInAction(() => {
         this.isSyncingKB = false;
       });
-    } catch (e) {
-      console.error("[FormsAI] syncCompletedForms failed:", e);
+    } catch {
       runInAction(() => {
         this.isSyncingKB = false;
       });

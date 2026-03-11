@@ -36,6 +36,7 @@ import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
 import type { TFolder } from "@docspace/shared/api/files/types";
@@ -83,7 +84,6 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
     defaultProvider?.defaultModel ?? null,
   );
 
-  const hasDefaultProvider = !!defaultProvider;
   const isEnabled = aiAgentEnabled;
 
   const isProviderChanged = selectedProviderId !== defaultProvider?.providerId;
@@ -271,7 +271,7 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
 
   const toggleDisabled =
     isCheckingProviders ||
-    (!isEnabled && isCreatingAgents) ||
+    isCreatingAgents ||
     (!isEnabled && !aiProvidersAvailable);
 
   return (
@@ -298,7 +298,7 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
           </div>
         )}
         {!isCheckingProviders && !aiProvidersAvailable && (
-          <Text fontSize="12px" fontWeight={400} color="#A3A9AE">
+          <Text fontSize="12px" fontWeight={400} color={globalColors.gray}>
             {t("Common:AIProvidersNotAvailable")}
           </Text>
         )}
@@ -311,7 +311,7 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
         {!isCheckingProviders &&
           aiProvidersAvailable &&
           !vectorizationEnabled && (
-            <Text fontSize="12px" fontWeight={400} color="#F2675A">
+            <Text fontSize="12px" fontWeight={400} color={globalColors.mainRed}>
               {t("Common:KnowledgeBaseNotConfigured")}
             </Text>
           )}

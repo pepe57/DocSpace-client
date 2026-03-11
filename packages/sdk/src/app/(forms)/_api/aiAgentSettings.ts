@@ -29,7 +29,6 @@ import { getProgress } from "@docspace/shared/api/files";
 import type { TOperation } from "@docspace/shared/api/files/types";
 import { FolderType } from "@docspace/shared/enums";
 
-const AGENT_STORAGE_KEY = "forms_ai_agent";
 const FOLDER_AGENTS_STORAGE_KEY = "forms_folder_agents";
 const AI_ENABLED_STORAGE_KEY = "forms_ai_enabled";
 
@@ -42,13 +41,6 @@ export const tokenToHash = (token: string): string => {
   return (h >>> 0).toString(36);
 };
 
-export type AgentSettings = {
-  agentId: number | null;
-  agentName: string;
-  autoSyncKnowledge: boolean;
-  knowledgeFolderId: number | null;
-};
-
 export type FolderAgentEntry = {
   agentId: number;
   knowledgeFolderId: number | null;
@@ -56,48 +48,10 @@ export type FolderAgentEntry = {
 
 export type FolderAgentsMap = Record<number, FolderAgentEntry>;
 
-/**
- * Build a per-user storage key so that switching accounts on the
- * same browser does not leak agent configuration to another user.
- * `userHash` should be a stable, non-sensitive user identifier
- * (e.g. a short hash of the auth token or the numeric user ID).
- */
-const storageKey = (roomId: string | number, userHash?: string) =>
-  userHash
-    ? `${AGENT_STORAGE_KEY}_${userHash}_${roomId}`
-    : `${AGENT_STORAGE_KEY}_${roomId}`;
-
 const folderAgentsKey = (roomId: string | number, userHash?: string) =>
   userHash
     ? `${FOLDER_AGENTS_STORAGE_KEY}_${userHash}_${roomId}`
     : `${FOLDER_AGENTS_STORAGE_KEY}_${roomId}`;
-
-export const saveAgentSettings = (
-  roomId: string | number,
-  settings: AgentSettings,
-  userHash?: string,
-) => {
-  localStorage.setItem(storageKey(roomId, userHash), JSON.stringify(settings));
-};
-
-export const loadAgentSettings = (
-  roomId: string | number,
-  userHash?: string,
-): AgentSettings | null => {
-  try {
-    const val = localStorage.getItem(storageKey(roomId, userHash));
-    return val ? (JSON.parse(val) as AgentSettings) : null;
-  } catch {
-    return null;
-  }
-};
-
-export const clearAgentSettings = (
-  roomId: string | number,
-  userHash?: string,
-) => {
-  localStorage.removeItem(storageKey(roomId, userHash));
-};
 
 // --- Per-folder agent mappings ---
 
@@ -166,31 +120,7 @@ export const getKnowledgeFolderId = async (
     current?: { id: number; security?: Record<string, boolean> };
   };
 
-  console.log(
-    "[FormsAI] getKnowledgeFolderId for agent",
-    agentId,
-    "folders:",
-    res?.folders?.map((f) => ({ id: f.id, type: f.type, title: f.title })),
-    "room security:",
-    res?.current?.security,
-  );
-
   const kbFolder = res?.folders?.find((f) => f.type === FolderType.Knowledge);
-
-  if (kbFolder) {
-    console.log(
-      "[FormsAI] Found Knowledge folder:",
-      kbFolder.id,
-      "title:",
-      kbFolder.title,
-    );
-  } else {
-    console.warn(
-      "[FormsAI] No Knowledge folder (type=32) found in agent room",
-      agentId,
-    );
-  }
-
   return kbFolder?.id ?? null;
 };
 
@@ -219,13 +149,6 @@ export const copyFilesToAgentRoom = async (
   destFolderId: number,
   fileIds: number[],
 ) => {
-  console.log(
-    "[FormsAI] copyFilesToAgentRoom: destFolderId =",
-    destFolderId,
-    "fileIds =",
-    fileIds,
-  );
-
   const ops = (await request({
     method: "put",
     url: "/files/fileops/copy",
