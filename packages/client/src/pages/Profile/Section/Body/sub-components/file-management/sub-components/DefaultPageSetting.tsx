@@ -35,6 +35,7 @@ import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { EmployeeType, FolderType } from "@docspace/shared/enums";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
+import { isMobile } from "@docspace/shared/utils";
 
 type Props = {
   defaultFolderType?: SettingsStore["defaultFolderType"];
@@ -121,6 +122,7 @@ const StartPageSettingComponent = ({
         scaled={false}
         scaledOptions
         displaySelectedOption
+        isDefaultMode={!isMobile()}
       />
     </div>
   );
