@@ -83,8 +83,8 @@ const Settings = () => {
         content: <AIAgentForm inline />,
       },
       {
-        id: "contacts",
-        name: t("Common:Contacts"),
+        id: "access",
+        name: t("Common:Access"),
         content: (
           <ContactsForm
             inline
@@ -94,8 +94,8 @@ const Settings = () => {
         ),
       },
       {
-        id: "connect-database",
-        name: t("Common:ConnectDatabase"),
+        id: "collect-data",
+        name: t("Common:CollectData"),
         content: <ConnectDatabaseForm inline />,
       },
     ],
