@@ -441,7 +441,7 @@ const PortalSettingsRoutes = {
       element: <ViewComponent />,
     },
     {
-      path: "ai-services",
+      path: "services/ai-services",
       element: <ViewComponent />,
     },
     {
