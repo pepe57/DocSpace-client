@@ -28,9 +28,14 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 import {
+  COMPLETED_FORMS_FOLDER_HEADER,
   FILTER_HEADER,
+  FORMS_TO_FILL_FOLDER_HEADER,
   LOCALE_HEADER,
+  MY_FORMS_FOLDER_HEADER,
   PATHNAME_HEADER,
+  REQUEST_TOKEN_HEADER,
+  ROOM_ID_HEADER,
   SHARE_KEY_HEADER,
   THEME_HEADER,
 } from "@/utils/constants";
@@ -78,6 +83,28 @@ export async function proxy(request: NextRequest) {
   requestHeaders.set(THEME_HEADER, theme ?? "");
   requestHeaders.set(LOCALE_HEADER, locale ?? "");
   requestHeaders.set(SHARE_KEY_HEADER, shareKey ?? "");
+
+  if (request.nextUrl.pathname.includes("forms")) {
+    const roomId = searchParams.get("roomId") ?? "";
+    const myFormsFolderId = searchParams.get("myFormsFolderId") ?? "";
+    const formsToFillFolderId = searchParams.get("formsToFillFolderId") ?? "";
+    const completedFormsFolderId =
+      searchParams.get("completedFormsFolderId") ?? "";
+    const requestToken = searchParams.get("requestToken") ?? "";
+
+    requestHeaders.set(ROOM_ID_HEADER, roomId);
+    requestHeaders.set(MY_FORMS_FOLDER_HEADER, myFormsFolderId);
+    requestHeaders.set(FORMS_TO_FILL_FOLDER_HEADER, formsToFillFolderId);
+    requestHeaders.set(COMPLETED_FORMS_FOLDER_HEADER, completedFormsFolderId);
+    requestHeaders.set(REQUEST_TOKEN_HEADER, requestToken);
+    requestHeaders.set(FILTER_HEADER, searchParams.toString());
+
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
 
   if (request.nextUrl.pathname.includes("public-room")) {
     const validationResult = await handlePublicRoomValidation(
@@ -129,5 +156,6 @@ export const config = {
     "/file-selector",
     "/public-room",
     "/public-room/password",
+    "/forms",
   ],
 };
