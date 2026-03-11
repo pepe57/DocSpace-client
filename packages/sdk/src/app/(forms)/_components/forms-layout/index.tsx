@@ -107,14 +107,17 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   }, [roomId, requestToken, aiStore]);
 
   React.useEffect(() => {
-    if (prevSection.current !== activeSection) {
+    const sectionChanged = prevSection.current !== activeSection;
+    const folderChanged = prevCompletedFolder.current !== completedFolder;
+
+    if (sectionChanged || folderChanged) {
       prevSection.current = activeSection;
+      prevCompletedFolder.current = completedFolder;
 
       if (activeSection === FormsSection.Settings) {
         setContentVisible(true);
         setIsSectionLoading(false);
-		prevSection.current = activeSection;
-      	prevCompletedFolder.current = completedFolder;        return;
+        return;
       }
 
       setContentVisible(false);
@@ -364,7 +367,6 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
             />
           </div>
           <AiChatButton />
-          <SettingsButton />
         </div>
       );
     }
@@ -448,7 +450,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
         withoutFooter={isEditing}
         settingsStudio={false}
         viewAs={isSettings ? "settings" : "tile"}
-        isEmptyPage={!isEditing && items.length === 0}
+        isEmptyPage={!isEditing && items.length === 0 && folders.length === 0}
         currentDeviceType={currentDeviceType}
       >
         <Section.SectionHeader>{renderHeader()}</Section.SectionHeader>
