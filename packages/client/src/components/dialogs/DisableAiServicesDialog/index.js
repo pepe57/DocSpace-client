@@ -36,6 +36,7 @@ const DisableAiServicesDialog = ({
   onClose,
   onContinue,
   isLoading,
+  balance,
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -62,7 +63,12 @@ const DisableAiServicesDialog = ({
     >
       <ModalDialog.Header>{t("DisableAiServices")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text fontSize="13px" fontWeight={400} style={{ marginBottom: "12px" }}>
+        <Text
+          fontSize="13px"
+          fontWeight={400}
+          style={{ marginBottom: "22px" }}
+          lineHeight="20px"
+        >
           {t("DisableAiServicesDescription")}
         </Text>
         <Text fontSize="13px" fontWeight={400} as="div">
@@ -79,7 +85,7 @@ const DisableAiServicesDialog = ({
                 style={{
                   marginBottom: "0px",
                   fontSize: "13px",
-                  lineHeight: "20px",
+                  lineHeight: "18px",
                   paddingLeft: "0",
                 }}
               >
@@ -87,7 +93,7 @@ const DisableAiServicesDialog = ({
                   style={{
                     fontSize: "16px",
                     verticalAlign: "middle",
-                    marginRight: "8px",
+                    marginRight: "3px",
                   }}
                 >
                   •
@@ -101,7 +107,23 @@ const DisableAiServicesDialog = ({
             ))}
           </ul>
         </Text>
-        <Text fontSize="13px" fontWeight={400} style={{ marginTop: "16px" }}>
+        {balance && (
+          <Text fontSize="13px" fontWeight={400} style={{ marginTop: "16px" }}>
+            <Trans
+              t={t}
+              i18nKey="DisableAiServicesBalance"
+              values={{ balance }}
+              components={{
+                1: <strong key="balance-strong" />,
+              }}
+            />
+          </Text>
+        )}
+        <Text
+          fontSize="13px"
+          fontWeight={balance ? 700 : 400}
+          style={{ marginTop: "16px" }}
+        >
           {t("DisableAiServicesConfirm")}
         </Text>
       </ModalDialog.Body>
