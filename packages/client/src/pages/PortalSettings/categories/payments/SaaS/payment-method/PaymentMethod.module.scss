@@ -1,5 +1,6 @@
 .container {
   max-width: 660px;
+  width: 100%
 }
 
 
@@ -10,6 +11,12 @@
 .description {
   margin-bottom: 16px;
   color: #657077;
+}
+
+.payerInfoHeader{
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .cardRow {
@@ -24,6 +31,10 @@
   margin-bottom: 20px;
   height: 64px;
   box-sizing: border-box;
+    &.warningColor {
+    color: var(--warning-color);
+    border-color: var(--warning-color);
+  }
 }
 
 .iconButton {
@@ -37,15 +48,16 @@
   flex-shrink: 0;
 
   svg {
-rect {
-    fill: var(--color-scheme-main-buttons);
-    opacity: 0.1;
+    rect {
+      fill: var(--color-scheme-main-buttons);
+      opacity: 0.1;
   }
 
-  path {
-    fill: var(--color-scheme-main-buttons);
-    opacity: 1;
-  }
+    path {
+      fill: var(--color-scheme-main-buttons);
+      opacity: 1;
+    }
+
   }
 
 }
@@ -65,6 +77,10 @@ rect {
     height: 100%;
   }
 }
+.noPaymentDescription{
+margin-top:4px;
+margin-bottom: 20px;
+}
 
 .buttonWrapper {
   max-width: 320px;
@@ -72,13 +88,27 @@ rect {
 
 
  .tickedWrapper {
-  
     svg {
       width: 16px;
       height: 16px;
       path {
         fill: var(--payment-credit-color);
       }
-    }
+
+
+      
+      }
   
+
+       &.warningColor {
+           svg {
+          rect{
+              fill: var(--warning-color);
+          }
+
+          path {
+              fill: var(--warning-color);
+
+            }
+       }}
   }

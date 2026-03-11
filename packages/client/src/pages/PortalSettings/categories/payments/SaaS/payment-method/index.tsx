@@ -37,38 +37,67 @@ import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 
 import styles from "./PaymentMethod.module.scss";
 import PayerInformation from "../shared/payer-information";
+import { HelpButton } from "@docspace/ui-kit/components";
+import AttentionReactSvg from "PUBLIC_DIR/images/plugin.incompatible.react.svg";
+import classNames from "classnames";
+import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
 interface PaymentMethodProps {
-  paymentLink?: string;
-  isCardLinked?: boolean;
-}
-
-interface InjectedProps {
-  paymentStore?: {
-    paymentLink?: string;
-  };
+  walletCustomerStatusNotActive?: boolean;
+  accountLink?: string;
+  isAlreadyPaid: boolean;
+  isStripePortalAvailable: boolean;
+  walletCustomerEmail: string;
+  cardLinked: string;
 }
 
 const PaymentMethod: React.FC<PaymentMethodProps> = ({
-  paymentLink,
-  isCardLinked = true,
+  accountLink,
+  walletCustomerStatusNotActive,
+  isAlreadyPaid,
+  isStripePortalAvailable,
+  walletCustomerEmail,
+  cardLinked,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
-  const handleGoToStripe = () => {
-    if (paymentLink) {
-      window.open(paymentLink, "_blank");
-    } else {
-      toastr.error(t("Common:UnexpectedError"));
-    }
+  const goToStripePortal = () => {
+    accountLink
+      ? window.open(accountLink, "_blank")
+      : toastr.error(t("Common:UnexpectedError"));
   };
 
-  return (
-    <div className={styles.container}>
-      <Text fontSize="16px" fontWeight={700} lineHeight="22px">
-        {t("Payer")}
-      </Text>
+  const goLinkCard = () => {
+    cardLinked
+      ? window.open(cardLinked, "_self")
+      : toastr.error(t("Common:UnexpectedError"));
+  };
 
+  const renderTooltip = (
+    <HelpButton
+      className="payer-tooltip"
+      iconName={HelpReactSvgUrl}
+      style={{ height: "15px", margin: "0" }}
+      tooltipContent={
+        <>
+          <Text isBold>{t("Payer")}</Text>
+          <Text>
+            {t("PayerDescription", { productName: t("Common:ProductName") })}
+          </Text>
+        </>
+      }
+      dataTestId="payer_info_help_button"
+    />
+  );
+
+  const paymentMethod = (
+    <>
+      <div className={styles.payerInfoHeader}>
+        <Text fontSize="16px" fontWeight={700} lineHeight="22px">
+          {t("Payer")}
+        </Text>
+        {renderTooltip}
+      </div>
       <Text
         className={styles.description}
         fontSize="13px"
@@ -98,7 +127,11 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
         })}
       </Text>
 
-      <div className={styles.cardRow}>
+      <div
+        className={classNames(styles.cardRow, {
+          [styles.warningColor]: walletCustomerStatusNotActive,
+        })}
+      >
         <div className={styles.iconButton}>
           <CardIconUrl />
         </div>
@@ -109,30 +142,72 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
           </Text>
         </div>
 
-        {isCardLinked && (
-          <div className={styles.tickedWrapper}>
+        <div
+          className={classNames(styles.tickedWrapper, {
+            [styles.warningColor]: walletCustomerStatusNotActive,
+          })}
+        >
+          {walletCustomerStatusNotActive ? (
+            <AttentionReactSvg />
+          ) : (
             <CheckReactSvg />
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
+      {isAlreadyPaid && isStripePortalAvailable ? (
+        <div className={styles.buttonWrapper}>
+          <Button
+            label={t("GoToStripe")}
+            size={ButtonSize.small}
+            primary
+            onClick={goToStripePortal}
+            testId="go_to_stripe_button"
+          />
+        </div>
+      ) : null}
+    </>
+  );
+
+  const noPaymnetMethod = (
+    <div>
+      <Text fontSize="16px" fontWeight={700}>
+        {t("NoPaymnetMethod")}
+      </Text>
+      <Text className={styles.noPaymentDescription}>
+        {t("NoPaymentMethodDescription")}
+      </Text>
       <div className={styles.buttonWrapper}>
         <Button
-          label={t("GoToStripe")}
+          label={t("AddPaymentMethod")}
           size={ButtonSize.small}
           primary
-          onClick={handleGoToStripe}
+          onClick={goLinkCard}
           testId="go_to_stripe_button"
         />
       </div>
     </div>
   );
+
+  return (
+    <div className={styles.container}>
+      {walletCustomerEmail ? paymentMethod : noPaymnetMethod}
+    </div>
+  );
 };
 
-export default inject(({ paymentStore }: InjectedProps) => {
-  const { paymentLink } = paymentStore || {};
+export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
+  const { accountLink, isAlreadyPaid, isStripePortalAvailable, cardLinked } =
+    paymentStore;
+  const { walletCustomerStatusNotActive, walletCustomerEmail } =
+    currentTariffStatusStore;
 
   return {
-    paymentLink,
+    accountLink,
+    isAlreadyPaid,
+    isStripePortalAvailable,
+    walletCustomerStatusNotActive,
+    walletCustomerEmail: "",
+    cardLinked,
   };
 })(observer(PaymentMethod));

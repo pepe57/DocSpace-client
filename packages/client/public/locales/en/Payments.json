@@ -121,6 +121,8 @@
   "SelectContact": "Select contact",
   "ServiceConfigurationNotice": "This section is used to connect and configure the services. Please note, only the payer can make changes. Reach out to them for any updates.",
   "ServiceManagementUnavailable": "Service management is unavailable during the grace period, and no charges will apply to the services during this time. To regain full functionality, please upgrade to a {{planName}} plan.",
+  "NoPaymnetMethod": "No payment method linked",
+  "NoPaymentMethodDescription": "To start using paid services, please connect a payment card. The person who links the card will automatically be designated as the Payer for this account.",
   "StartingNextMonth": "Starting next month",
   "StartupSuggestion": "Do more with {{planName}} plan",
   "StartupTitle": "You are using free {{planName}} plan",

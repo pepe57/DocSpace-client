@@ -36,6 +36,7 @@ export type UsePaymentsProps = {
   initPaymentsStandalone?: PaymentStore["standaloneInit"];
   walletInit?: PaymentStore["walletInit"];
   servicesInit?: ServicesStore["servicesInit"];
+  paymentMethodInit?: PaymentStore["paymentMethodInit"];
   standalone?: SettingsStore["standalone"];
 };
 
@@ -44,6 +45,7 @@ const usePayments = ({
   walletInit,
   servicesInit,
   initPaymentsStandalone,
+  paymentMethodInit,
   standalone,
 }: UsePaymentsProps) => {
   const { t } = useTranslation(["Payments", "Common", "Settings"]);
@@ -57,13 +59,15 @@ const usePayments = ({
   }, [initPayments, t]);
 
   const getWalletData = useCallback(async () => {
-    console.log("getWalletData");
     await walletInit?.(t);
   }, [walletInit]);
 
   const getServicesData = useCallback(async () => {
-    console.log("getServicesData");
     await servicesInit?.(t);
+  }, [servicesInit]);
+
+  const getPaymentMethodData = useCallback(async () => {
+    await paymentMethodInit?.(t);
   }, [servicesInit]);
 
   const getPaymentsInitialValue = React.useCallback(async () => {
@@ -77,6 +81,9 @@ const usePayments = ({
     if (window.location.pathname.includes("services"))
       actions.push(getServicesData());
 
+    if (window.location.pathname.includes("payment-method"))
+      actions.push(getPaymentMethodData());
+
     await Promise.all(actions);
   }, [getPortalPaymentsData, getWalletData, getServicesData]);
 
@@ -85,6 +92,7 @@ const usePayments = ({
     getWalletData,
     getServicesData,
     getPaymentsInitialValue,
+    getPaymentMethodData,
   };
 };
 

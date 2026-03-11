@@ -63,9 +63,12 @@ const PaymentsPage = (props) => {
     servicesStore,
   });
 
-  const { getWalletData, getPortalPaymentsData, getServicesData } = usePayments(
-    defaultProps.payment,
-  );
+  const {
+    getWalletData,
+    getPortalPaymentsData,
+    getServicesData,
+    getPaymentMethodData,
+  } = usePayments(defaultProps.payment);
 
   const data = [
     {
@@ -80,10 +83,10 @@ const PaymentsPage = (props) => {
     {
       id: "payment-method",
       name: t("PaymentMethod"),
-      content: <Wallet />,
+      content: <PaymentMethod />,
       onClick: async () => {
         clearAbortControllerArr();
-        await getWalletData();
+        await getPaymentMethodData();
       },
     },
     {

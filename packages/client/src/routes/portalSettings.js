@@ -441,6 +441,10 @@ const PortalSettingsRoutes = {
       element: <ViewComponent />,
     },
     {
+      path: "payments/payment-method",
+      element: <ViewComponent />,
+    },
+    {
       path: "services/ai-services",
       element: <ViewComponent />,
     },

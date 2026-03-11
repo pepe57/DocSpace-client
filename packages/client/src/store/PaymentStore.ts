@@ -725,6 +725,37 @@ class PaymentStore {
     this.servicesQuotasFeatures.set(feature.id, featureWithPrice);
   };
 
+  paymentMethodInit = async (t: TTranslation) => {
+    const isRefresh = window.location.href.includes("complete=true");
+    try {
+      const requests = [];
+
+      await this.initWalletPayerAndBalance(isRefresh);
+
+      if (this.isAlreadyPaid) {
+        if (this.isStripePortalAvailable) {
+          requests.push(this.setPaymentAccount());
+
+          if (
+            this.isPayer &&
+            this.currentTariffStatusStore?.walletCustomerStatusNotActive
+          ) {
+            requests.push(this.fetchCardLinked());
+          }
+        }
+      } else {
+        requests.push(this.fetchCardLinked());
+      }
+
+      await Promise.all(requests);
+
+      this.setIsInitWalletPage(true);
+    } catch (error) {
+      toastr.error(t("Common:UnexpectedError"));
+      console.error(error);
+    }
+  };
+
   walletInit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
     if (!this.currentTariffStatusStore) return;

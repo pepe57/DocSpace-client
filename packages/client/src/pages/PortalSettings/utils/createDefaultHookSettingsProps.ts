@@ -193,6 +193,7 @@ export const createDefaultHookSettingsProps = ({
     initPaymentsStandalone: paymentStore?.standaloneInit,
     standalone: settingsStore?.standalone,
     servicesInit: servicesStore?.servicesInit,
+    paymentMethodInit: paymentStore?.paymentMethodInit,
   },
   services: {
     servicesInit: servicesStore?.servicesInit,

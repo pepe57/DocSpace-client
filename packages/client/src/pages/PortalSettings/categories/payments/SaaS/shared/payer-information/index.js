@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import styled from "styled-components";
 import { Text } from "@docspace/ui-kit/components/text";
 import { useTranslation, Trans } from "react-i18next";
@@ -145,23 +144,6 @@ const PayerInformation = ({
     setDisabled(false);
   };
 
-  const renderTooltip = (
-    <HelpButton
-      className="payer-tooltip"
-      iconName={HelpReactSvgUrl}
-      style={{ height: "15px", margin: "0" }}
-      tooltipContent={
-        <>
-          <Text isBold>{t("Payer")}</Text>
-          <Text>
-            {t("PayerDescription", { productName: t("Common:ProductName") })}
-          </Text>
-        </>
-      }
-      dataTestId="payer_info_help_button"
-    />
-  );
-
   const unknownPayerDescription = () => {
     const userNotFound = `${t("UserNotFoundMatchingEmail")} `;
 
@@ -240,20 +222,7 @@ const PayerInformation = ({
     </div>
   );
 
-  const payerInformation = isStripePortalAvailable ? (
-    <Link
-      noSelect
-      fontWeight={600}
-      className="payer-info_account-link"
-      tag="a"
-      target="_blank"
-      color="accent"
-      onClick={goToStripePortal}
-      dataTestId="stripe_customer_portal_link"
-    >
-      {t("StripeCustomerPortal")}
-    </Link>
-  ) : (
+  const payerInformation = (
     <Link
       fontWeight={600}
       href={`mailto:${email}`}
@@ -308,15 +277,7 @@ const PayerInformation = ({
       </div>
 
       <div className="payer-info_wrapper">
-        <div className="payer-info_description">
-          {payerName()}
-
-          <Text as="span" className="payer-info">
-            {` (${t("Payer")}) `}
-          </Text>
-
-          {renderTooltip}
-        </div>
+        <div className="payer-info_description">{payerName()}</div>
 
         {!payerInfo ? unknownPayerInformation : payerInformation}
       </div>
