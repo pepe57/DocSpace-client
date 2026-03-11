@@ -94,7 +94,7 @@ const Settings = () => {
       },
       {
         id: "payments",
-        name: t("Common:Payments"),
+        name: "Billing",
         content: (
           <div
             style={{
