@@ -113,7 +113,7 @@ const StartPageSettingComponent = ({
   return (
     <div className="default-page-setting">
       <Text lineHeight="20px" fontWeight={600}>
-        {t("FilesSettings:StartPageSettingTitle")}
+        {t("FilesSettings:DefaultHomepage")}
       </Text>
       <ComboBox
         options={startPageOptions}
