@@ -34,9 +34,9 @@ import { MemoryRouter } from "react-router";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
-import Chat from "@docspace/shared/components/chat";
-import useInitChats from "@docspace/shared/components/chat/hooks/useInitChats";
-import useToolsSettings from "@docspace/shared/components/chat/hooks/useToolsSettings";
+import Chat from "@docspace/ui-kit/ai-agent/chat";
+import useInitChats from "@docspace/ui-kit/ai-agent/chat/hooks/useInitChats";
+import useToolsSettings from "@docspace/ui-kit/ai-agent/chat/hooks/useToolsSettings";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
@@ -46,8 +46,6 @@ import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
 import styles from "./AiChatPanel.module.scss";
-
-const FOLDER_FORM_VALIDATION = /[\\/:*?"<>|]/;
 
 const AiChatPanel = () => {
   const { t } = useTranslation(["Common"]);
@@ -61,14 +59,14 @@ const AiChatPanel = () => {
   } = aiAgentStore;
   const { filesSettings } = useFormsSettingsStore();
 
-  // Use agent ID as roomId for chat — agents ARE rooms (TAgent = TRoom)
+  // Use agent ID for chat — agents ARE rooms (TAgent = TRoom)
   const agentRoomId = selectedAgentId ?? 0;
 
-  const initChats = useInitChats({ roomId: agentRoomId });
+  const initChats = useInitChats({ agentId: agentRoomId });
   const { initMessages, ...messagesSettings } = useInitMessagesSDK(agentRoomId);
 
   const toolsSettings = useToolsSettings({
-    roomId: agentRoomId,
+    agentId: agentRoomId,
     aiConfig: null,
     chatSettings: agentChatSettings,
   });
@@ -132,7 +130,7 @@ const AiChatPanel = () => {
       <div className={styles.chatBody}>
         <MemoryRouter>
           <Chat
-            roomId={agentRoomId}
+            agentId={agentRoomId}
             userAvatar=""
             selectedModel={agentChatSettings?.modelId ?? ""}
             getIcon={getIcon}
@@ -145,7 +143,6 @@ const AiChatPanel = () => {
             aiReady
             standalone
             getResultStorageId={getResultStorageId}
-            folderFormValidation={FOLDER_FORM_VALIDATION}
           />
         </MemoryRouter>
       </div>
