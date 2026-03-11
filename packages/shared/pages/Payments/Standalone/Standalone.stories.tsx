@@ -88,6 +88,12 @@ const defaultArgs: IPaymentsProps = {
     licenseTypeByUsers: false,
   },
   docspaceFaqUrl: "",
+  isLifetimeLicense: false,
+  isGracePeriod: false,
+  isNotPaidPeriod: false,
+  gracePeriodEndDate: "2025-07-11",
+  delayDaysCount: "30",
+  feedbackAndSupportUrl: "",
 };
 
 export const Enterprise: Story = {

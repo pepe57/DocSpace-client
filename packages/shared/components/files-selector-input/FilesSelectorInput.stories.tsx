@@ -25,7 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Meta, StoryObj } from "@storybook/react-webpack5";
-import { DeviceType } from "../../enums";
+import {
+  DeviceType,
+  SdkSortedByType,
+  SdkDateToAutoCleanUp,
+  SdkFilesSettingsDtoDefaultSharingAccessRightsEnum,
+} from "../../enums";
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 
 import { FilesSelectorInput } from "./index";
@@ -143,7 +148,7 @@ const mockFilesSelectorSettings = {
     canUploadFiles: true,
     canCreateFolders: true,
     automaticallyCleanUp: {
-      gap: 30,
+      gap: SdkDateToAutoCleanUp.ThirtyDays,
       isAutoCleanUp: false,
     },
     canSearchByContent: true,
@@ -151,8 +156,12 @@ const mockFilesSelectorSettings = {
     maxUploadThreadCount: 2,
     confirmDelete: true,
     convertNotify: true,
-    defaultOrder: { is_asc: true, property: 0 },
-    defaultSharingAccessRights: [0, 1, 2],
+    defaultOrder: { is_asc: true, property: SdkSortedByType.DateAndTime },
+    defaultSharingAccessRights: [
+      SdkFilesSettingsDtoDefaultSharingAccessRightsEnum.None,
+      SdkFilesSettingsDtoDefaultSharingAccessRightsEnum.ReadWrite,
+      SdkFilesSettingsDtoDefaultSharingAccessRightsEnum.Read,
+    ],
     downloadTarGz: true,
     enableThirdParty: true,
     externalShare: true,
