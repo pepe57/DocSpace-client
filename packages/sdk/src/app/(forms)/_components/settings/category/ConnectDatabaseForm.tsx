@@ -44,7 +44,12 @@ import {
   useFormsDbSettingsStore,
   type DatabaseType,
 } from "../../../_store/FormsDbSettingsStore";
-import { testDbConnection } from "../../../_api/dbSettings";
+import { useFormsSettingsStore } from "../../../_store/FormsSettingsStore";
+import {
+  testDbConnection,
+  saveDbConfig,
+  setRoomFormSettings,
+} from "../../../_api/dbSettings";
 
 import styles from "./SettingsPanel.module.scss";
 
@@ -60,6 +65,7 @@ type ConnectDatabaseFormProps = {
 const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
   const { t } = useTranslation(["Common"]);
   const store = useFormsDbSettingsStore();
+  const { roomId } = useFormsSettingsStore();
 
   const selectedDbType = React.useMemo(
     () =>
@@ -91,8 +97,63 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
     }
   }, [store, t]);
 
+  const onToggleXlsx = React.useCallback(async () => {
+    const newValue = !store.collectXlsx;
+    store.setCollectXlsx(newValue);
+    try {
+      await setRoomFormSettings(roomId, { saveFormAsXLSX: newValue });
+    } catch {
+      toastr.error(t("Common:SomethingWentWrong"));
+      store.setCollectXlsx(!newValue);
+    }
+  }, [store, roomId, t]);
+
+  const onToggleSendToDb = React.useCallback(async () => {
+    const newValue = !store.sendToDb;
+    store.setSendToDb(newValue);
+    if (!newValue) {
+      try {
+        await setRoomFormSettings(roomId, { sendFormToExternalDB: false });
+      } catch {
+        toastr.error(t("Common:SomethingWentWrong"));
+        store.setSendToDb(true);
+      }
+    }
+  }, [store, roomId, t]);
+
+  const onSave = React.useCallback(async () => {
+    store.setIsSaving(true);
+    try {
+      await Promise.all([
+        setRoomFormSettings(roomId, { sendFormToExternalDB: true }),
+        saveDbConfig(store.formData),
+      ]);
+      toastr.success(t("Common:ChangesSavedSuccessfully"));
+    } catch {
+      toastr.error(t("Common:SomethingWentWrong"));
+    } finally {
+      store.setIsSaving(false);
+    }
+  }, [store, roomId, t]);
+
   return (
     <div className={inline ? styles.inlineBody : styles.panelBody}>
+      <div className={styles.toggleBlock}>
+        <div className={styles.toggleHeader}>
+          <Text fontSize="16px" fontWeight={700}>
+            {t("Common:CollectResultsInXlsx")}
+          </Text>
+          <ToggleButton
+            className={styles.toggle}
+            isChecked={store.collectXlsx}
+            onChange={onToggleXlsx}
+          />
+        </div>
+        <Text fontSize="12px" fontWeight={400}>
+          {t("Common:CollectResultsInXlsxDescription")}
+        </Text>
+      </div>
+
       <div className={styles.toggleBlock}>
         <div className={styles.toggleHeader}>
           <Text fontSize="16px" fontWeight={700}>
@@ -101,7 +162,7 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
           <ToggleButton
             className={styles.toggle}
             isChecked={store.sendToDb}
-            onChange={() => store.setSendToDb(!store.sendToDb)}
+            onChange={onToggleSendToDb}
           />
         </div>
         <Text fontSize="12px" fontWeight={400}>
@@ -219,6 +280,17 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
               size={ButtonSize.normal}
               onClick={onTestConnection}
               isLoading={store.isTesting}
+              scale
+            />
+          </div>
+
+          <div className={styles.buttonWrapper}>
+            <Button
+              primary
+              size={ButtonSize.normal}
+              label={t("Common:SaveButton")}
+              onClick={onSave}
+              isLoading={store.isSaving}
               scale
             />
           </div>

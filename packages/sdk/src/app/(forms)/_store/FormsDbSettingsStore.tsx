@@ -29,7 +29,7 @@
 import React from "react";
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { loadDbConfig, loadRoomExternalDb } from "../_api/dbSettings";
+import { loadDbConfig, loadRoomFormSettings } from "../_api/dbSettings";
 import { loadAgentSettings, tokenToHash } from "../_api/aiAgentSettings";
 
 export type DatabaseType = "MySQL" | "PostgreSQL";
@@ -45,6 +45,7 @@ class FormsDbSettingsStore {
   isPanelVisible = false;
   currentLevel: SettingsLevel = "CategoryList";
 
+  collectXlsx = false;
   sendToDb = false;
 
   databaseType: DatabaseType = "MySQL";
@@ -81,9 +82,9 @@ class FormsDbSettingsStore {
 
   fetchConfig = async (roomId: string | number) => {
     try {
-      const [props, roomEnabled] = await Promise.all([
+      const [props, roomSettings] = await Promise.all([
         loadDbConfig(),
-        loadRoomExternalDb(roomId),
+        loadRoomFormSettings(roomId),
       ]);
 
       const agentSettings = loadAgentSettings(roomId, this.userHash);
@@ -92,7 +93,8 @@ class FormsDbSettingsStore {
         if (props) {
           this.loadFromConfig(props);
         }
-        this.sendToDb = roomEnabled;
+        this.sendToDb = roomSettings.sendFormToExternalDB;
+        this.collectXlsx = roomSettings.saveFormAsXLSX;
         if (agentSettings) {
           this.aiAgentEnabled = agentSettings.agentId != null;
           this.aiAgentId = agentSettings.agentId;
@@ -105,8 +107,14 @@ class FormsDbSettingsStore {
     }
   };
 
+  setCollectXlsx = (value: boolean) => {
+    this.collectXlsx = value;
+    if (value) this.sendToDb = false;
+  };
+
   setSendToDb = (value: boolean) => {
     this.sendToDb = value;
+    if (value) this.collectXlsx = false;
   };
 
   closePanel = () => {

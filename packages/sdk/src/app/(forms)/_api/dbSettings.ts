@@ -73,26 +73,49 @@ export const testDbConnection = (form: DbFormData) => {
   });
 };
 
-export const setRoomExternalDb = (
+export const setRoomFormSettings = (
   roomId: string | number,
-  enabled: boolean,
+  settings: {
+    sendFormToExternalDB?: boolean;
+    saveFormAsXLSX?: boolean;
+  },
 ) => {
   return request({
     method: "put",
     url: `/files/rooms/${roomId}`,
-    data: { SendFormToExternalDB: enabled },
+    data: {
+      ...(settings.sendFormToExternalDB !== undefined && {
+        SendFormToExternalDB: settings.sendFormToExternalDB,
+      }),
+      ...(settings.saveFormAsXLSX !== undefined && {
+        SaveFormAsXLSX: settings.saveFormAsXLSX,
+      }),
+    },
   });
 };
 
-export const loadRoomExternalDb = async (
+export const loadRoomFormSettings = async (
   roomId: string | number,
-): Promise<boolean> => {
-  const room = await request<{ sendFormToExternalDB?: boolean }>({
+): Promise<{ sendFormToExternalDB: boolean; saveFormAsXLSX: boolean }> => {
+  const room = await request<{
+    sendFormToExternalDB?: boolean;
+    saveFormAsXLSX?: boolean;
+  }>({
     method: "get",
     url: `/files/rooms/${roomId}`,
   });
 
-  return room?.sendFormToExternalDB ?? false;
+  return {
+    sendFormToExternalDB: room?.sendFormToExternalDB ?? false,
+    saveFormAsXLSX: room?.saveFormAsXLSX ?? false,
+  };
+};
+
+export const exportFileAsXlsx = (fileId: number | string) => {
+  return request<{ link: string }>({
+    method: "post",
+    url: `/files/file/${fileId}/xlsx`,
+  });
 };
 
 export const loadDbConfig = async (): Promise<ConsumerProp[] | null> => {
