@@ -42,10 +42,20 @@ type WalletInfoProps = {
   isBalanceInsufficient?: boolean;
   title?: string;
   iconUrl?: string;
+  shortView?: boolean;
+  withoutBackground?: boolean;
 };
 
 const WalletInfo = (props: WalletInfoProps) => {
-  const { balance, onTopUp, isBalanceInsufficient, title, iconUrl } = props;
+  const {
+    balance,
+    onTopUp,
+    isBalanceInsufficient,
+    title,
+    iconUrl,
+    shortView,
+    withoutBackground,
+  } = props;
   const { t } = useTranslation(["Payments", "Common"]);
 
   const keyProp = isBalanceInsufficient
@@ -53,7 +63,12 @@ const WalletInfo = (props: WalletInfoProps) => {
     : { tKey: "Balance" };
 
   return (
-    <div className={styles.walletInfoContainer}>
+    <div
+      className={classNames(styles.walletInfoContainer, {
+        [styles.shortView]: shortView,
+        [styles.withoutBackground]: withoutBackground,
+      })}
+    >
       <div className={styles.walletInfoIcon}>
         <ReactSVG src={iconUrl ?? WalletReactSvgUrl} />
       </div>

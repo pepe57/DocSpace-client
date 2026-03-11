@@ -36,7 +36,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 import Amount from "./sub-components/Amount";
 import TopUpButtons from "./sub-components/TopUpButtons";
-import { AmountProvider } from "../../../pages/PortalSettings/categories/payments/SaaS/wallet/context";
+import { AmountProvider } from "../../wallet/context";
 import styles from "./styles/TopUpModal.module.scss";
 
 import modalStyles from "./styles/TopUpAiModal.module.scss";
@@ -110,7 +110,7 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
   const isDisabled = (isLoading || walletCustomerStatusNotActive) ?? false;
 
   const onRedirect = () => {
-    navigate("/portal-settings/ai-services");
+    navigate("/portal-settings/services/ai-services");
 
     onClose(false);
   };

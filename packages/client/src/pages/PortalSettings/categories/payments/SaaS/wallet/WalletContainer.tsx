@@ -40,7 +40,7 @@ import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 import { finishRefreshingWithMinCycle } from "SRC_DIR/helpers/refreshing";
 
 import TransactionHistory from "../shared/transaction-history";
-import TopUpModal from "../../../../../../components/panels/TopUpBalance/TopUpModal";
+import TopUpModal from "../shared/Top-up-balance/TopUpModal";
 import WalletRefilledModal from "./WalletRefilledModal";
 import PayerInformation from "../shared/payer-information";
 import AutoPaymentInfo from "./sub-components/AutoPaymentInfo";

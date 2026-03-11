@@ -28,8 +28,8 @@ import { AI_TOOLS } from "@docspace/shared/constants";
 import { inject, observer } from "mobx-react";
 import { useState } from "react";
 
-import TopUpAiModal from "SRC_DIR/components/panels/TopUpBalance/TopUpAiModal";
-import TopUpModal from "SRC_DIR/components/panels/TopUpBalance/TopUpModal";
+import TopUpAiModal from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/shared/Top-up-balance/TopUpAiModal";
+import TopUpModal from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/shared/Top-up-balance/TopUpModal";
 
 type TopUpContainerTypes = {
   visible: boolean;

@@ -38,7 +38,7 @@ import PaymentMethod from "./sub-components/PaymentMethod";
 import Amount from "./sub-components/Amount";
 import TopUpButtons from "./sub-components/TopUpButtons";
 import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
-import { AmountProvider } from "../../../pages/PortalSettings/categories/payments/SaaS/wallet/context";
+import { AmountProvider } from "../../wallet/context";
 import styles from "./styles/TopUpModal.module.scss";
 import { saveDeposite } from "@docspace/shared/api/portal";
 import type { DateTime } from "luxon";

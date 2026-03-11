@@ -29,7 +29,7 @@ import modalStyles from "../styles/TopUpAiModal.module.scss";
 import WalletInfo from "./WalletInfo";
 import AiAgents from "PUBLIC_DIR/images/icons/16/ai-agents.svg?url";
 import { useTranslation } from "react-i18next";
-import { useAmountValue } from "../../../../pages/PortalSettings/categories/payments/SaaS/wallet/context";
+import { useAmountValue } from "../../../wallet/context";
 import { inject, observer } from "mobx-react";
 import React, { useEffect } from "react";
 
