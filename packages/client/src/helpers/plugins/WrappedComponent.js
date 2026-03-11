@@ -458,14 +458,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
               });
             };
 
-            const {
-              onClick,
-              iconName,
-              iconNode,
-              iconClickName,
-              iconHoverName,
-              ...rest
-            } = elementProps;
+            const { onClick, iconName, iconClickName, iconHoverName, ...rest } =
+              elementProps;
 
             const icon = iconName
               ? getPluginIconUrl(pluginName, iconName)
@@ -479,18 +473,6 @@ export const PluginComponent = inject(({ pluginStore }) => {
               ? getPluginIconUrl(pluginName, iconClickName)
               : undefined;
 
-            // Render custom content if provided
-            const customContentElement = iconNode ? (
-              <PluginComponent
-                key={`${pluginName}-iconbutton-custom-content`}
-                component={{
-                  component: PluginComponents.box,
-                  props: iconNode,
-                }}
-                pluginName={pluginName}
-              />
-            ) : null;
-
             return (
               <>
                 <IconButton
@@ -498,7 +480,6 @@ export const PluginComponent = inject(({ pluginStore }) => {
                   iconName={icon}
                   iconHoverName={iconHover}
                   iconClickName={iconClick}
-                  iconNode={customContentElement}
                   onClick={onClickAction}
                 />
               </>
