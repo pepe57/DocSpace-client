@@ -1165,6 +1165,8 @@
   "FolderSizeExceedsLimit": "The folder is too large. The maximum size is {{maxSize}}.",
   "FilesSizeExceedsLimit": "The files are too large. The maximum size is {{maxSize}}.",
   "FoldersSizeExceedsLimit": "The folders are too large. The maximum size is {{maxSize}}.",
+  "FileFormatNotAllowed": "This file can't be uploaded because its format isn't allowed.",
+  "FilesRejectedDueToFormat": "{{count}} files were rejected due to unsupported format.",
   "MyForms": "My forms",
   "FormsToFill": "Forms to fill",
   "CompletedForms": "Completed forms",
