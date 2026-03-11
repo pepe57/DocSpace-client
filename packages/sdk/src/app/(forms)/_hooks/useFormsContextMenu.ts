@@ -29,13 +29,12 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
-import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
-import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
+import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import BackupSvgUrl from "PUBLIC_DIR/images/icons/16/backup.svg?url";
 
 import type { TFile } from "@docspace/shared/api/files/types";
 
@@ -56,31 +55,31 @@ export type TFormsContextMenuItem = {
 export default function useFormsContextMenu() {
   const { t } = useTranslation(["Common"]);
   const { activeSection } = useFormsNavigationStore();
-  const { openForm, shareForm, deleteFromList, downloadFile, stopFilling } =
+  const { openForm, deleteFromList, downloadFile, startFilling, resetFilling } =
     useFormsActions({ t });
 
   const getContextMenuModel = useCallback(
     (file: TFile): TFormsContextMenuItem[] => {
       const model: TFormsContextMenuItem[] = [];
 
-      const canEditForm =
-        file.security?.EditForm && !file.startFilling && file.isForm;
+      const canEdit =
+        file.security?.Edit && file.viewAccessibility?.WebEdit;
       const canFillForm =
         file.security?.FillForms &&
         file.viewAccessibility?.WebRestrictedEditing;
-      const canShare = file.security?.CopyLink;
       const canDownload = file.security?.Download;
-      const canStopFilling = file.security?.StopFilling;
       const canDelete = file.security?.Delete;
+      const canStartFilling = file.security?.StartFilling;
+      const canResetFilling = file.security?.ResetFilling;
 
       switch (activeSection) {
         case FormsSection.MyForms: {
-          if (canEditForm) {
+          if (canEdit) {
             model.push({
-              id: "option_edit-form",
-              key: "edit-form",
+              id: "option_edit",
+              key: "edit",
               label: t("Common:EditButton"),
-              icon: AccessEditReactSvgUrl,
+              icon: PencilReactSvgUrl,
               onClick: () => openForm(file, "edit"),
               disabled: false,
             });
@@ -97,6 +96,28 @@ export default function useFormsContextMenu() {
             });
           }
 
+          if (canStartFilling) {
+            model.push({
+              id: "option_start-filling",
+              key: "start-filling",
+              label: t("Common:StartFilling"),
+              icon: FormFillRectSvgUrl,
+              onClick: () => startFilling(file),
+              disabled: false,
+            });
+          }
+
+          if (canResetFilling) {
+            model.push({
+              id: "option_reset-filling",
+              key: "reset-filling",
+              label: t("Common:ResetAndStartFilling"),
+              icon: BackupSvgUrl,
+              onClick: () => resetFilling(file),
+              disabled: false,
+            });
+          }
+
           model.push({
             id: "option_view",
             key: "view",
@@ -105,17 +126,6 @@ export default function useFormsContextMenu() {
             onClick: () => openForm(file, "view"),
             disabled: false,
           });
-
-          if (canShare) {
-            model.push({
-              id: "option_share",
-              key: "share",
-              label: t("Common:Share"),
-              icon: InvitationLinkReactSvgUrl,
-              onClick: () => shareForm(file.id),
-              disabled: false,
-            });
-          }
 
           if (canDownload) {
             model.push({
@@ -130,9 +140,9 @@ export default function useFormsContextMenu() {
 
           if (canDelete) {
             model.push({
-              id: "option_delete-from-list",
-              key: "delete-from-list",
-              label: t("Common:DeleteFromList"),
+              id: "option_delete",
+              key: "delete",
+              label: t("Common:Delete"),
               icon: RemoveReactSvgUrl,
               onClick: () => deleteFromList(file.id),
               disabled: false,
@@ -161,17 +171,6 @@ export default function useFormsContextMenu() {
             onClick: () => openForm(file, "view"),
             disabled: false,
           });
-
-          if (canStopFilling) {
-            model.push({
-              id: "option_stop-filling",
-              key: "stop-filling",
-              label: t("Common:StopFilling"),
-              icon: AccessNoneReactSvgUrl,
-              onClick: () => stopFilling(file.id),
-              disabled: false,
-            });
-          }
 
           if (canDownload) {
             model.push({
@@ -216,10 +215,10 @@ export default function useFormsContextMenu() {
       t,
       activeSection,
       openForm,
-      shareForm,
       deleteFromList,
       downloadFile,
-      stopFilling,
+      startFilling,
+      resetFilling,
     ],
   );
 

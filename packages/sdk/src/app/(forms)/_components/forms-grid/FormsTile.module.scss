@@ -1,0 +1,17 @@
+.tile {
+  [class*="iconContainer"] {
+    pointer-events: none;
+
+    &:hover {
+      background: transparent !important;
+
+      [class*="icon"] {
+        display: flex !important;
+      }
+    }
+  }
+
+  [class*="checkbox"] {
+    display: none !important;
+  }
+}
