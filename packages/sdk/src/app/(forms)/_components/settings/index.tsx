@@ -84,7 +84,7 @@ const Settings = () => {
       },
       {
         id: "access",
-        name: t("Common:Access"),
+        name: t("Common:AccessSettings"),
         content: (
           <ContactsForm
             inline
