@@ -29,7 +29,10 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import type { TFilesSettings } from "@docspace/shared/api/files/types";
+import type {
+  TFilesSettings,
+  TFolderSecurity,
+} from "@docspace/shared/api/files/types";
 
 type TFormsConfig = {
   roomId: string | number;
@@ -46,6 +49,7 @@ class FormsSettingsStore {
   completedFormsFolderId: string | number = "";
   requestToken: string = "";
   filesSettings: TFilesSettings | null = null;
+  folderSecurity: TFolderSecurity | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -61,6 +65,10 @@ class FormsSettingsStore {
 
   setFilesSettings = (settings: TFilesSettings) => {
     this.filesSettings = settings;
+  };
+
+  setFolderSecurity = (security: TFolderSecurity) => {
+    this.folderSecurity = security;
   };
 }
 

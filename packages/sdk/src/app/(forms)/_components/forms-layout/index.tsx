@@ -44,10 +44,9 @@ import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import useFormsData from "../../_hooks/useFormsData";
-import useNewFormActions from "../../_hooks/useNewFormActions";
-import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
-import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
-import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
+import useFolderActions from "../../_hooks/useFolderActions";
+import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 
@@ -58,6 +57,7 @@ import SettingsButton from "../settings-button";
 import SettingsPanel from "../settings-panel";
 import AiChatPanel from "../ai-chat-panel";
 import AiChatButton from "../ai-chat-button";
+import CreateFormDialog from "../create-form-dialog";
 
 import styles from "./FormsLayout.module.scss";
 
@@ -70,10 +70,17 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const { activeSection, editingFile, closeEditor } = useFormsNavigationStore();
   const formsListStore = useFormsListStore();
   const { items } = formsListStore;
-  const { roomId, requestToken } = useFormsSettingsStore();
+  const formsSettingsStore = useFormsSettingsStore();
+  const { roomId, requestToken } = formsSettingsStore;
   const { fetchSection, fetchMore } = useFormsData();
-  const { onChooseFromPersonal, onCreateFromDocx, onCreateFromTemplate } =
-    useNewFormActions();
+  const {
+    onUploadFiles,
+    onCreateBlankForm,
+    isCreateFormDialogVisible,
+    isCreatingForm,
+    onCloseCreateFormDialog,
+    onSaveCreateForm,
+  } = useFolderActions();
   const { currentDeviceType } = useDeviceType();
   const aiStore = useFormsAiAgentStore();
   const prevSection = React.useRef(activeSection);
@@ -145,30 +152,26 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   }, [isEditing, getSectionTitle]);
 
   const getContextOptionsPlus = React.useCallback(() => {
+    const security = formsSettingsStore.folderSecurity;
+    if (!security?.Create) return [];
+
     return [
       {
-        id: "choose-from-personal",
-        key: "choose-from-personal",
-        label: t("Common:ChooseFromPersonalFiles"),
-        icon: FormFileReactSvgUrl,
-        onClick: onChooseFromPersonal,
+        id: "upload-forms",
+        key: "upload-forms",
+        label: t("Common:UploadPDFForm"),
+        icon: ActionsUploadReactSvgUrl,
+        onClick: onUploadFiles,
       },
       {
-        id: "create-from-docx",
-        key: "create-from-docx",
-        label: t("Common:CreateFromDocx"),
-        icon: ActionsDocumentsReactSvgUrl,
-        onClick: onCreateFromDocx,
-      },
-      {
-        id: "create-from-template",
-        key: "create-from-template",
-        label: t("Common:CreateFromTemplate"),
-        icon: FormGalleryReactSvgUrl,
-        onClick: onCreateFromTemplate,
+        id: "create-blank-form",
+        key: "create-blank-form",
+        label: t("Common:NewPDFForm"),
+        icon: FormPlusReactSvgUrl,
+        onClick: onCreateBlankForm,
       },
     ];
-  }, [t, onChooseFromPersonal, onCreateFromDocx, onCreateFromTemplate]);
+  }, [formsSettingsStore.folderSecurity, t, onUploadFiles, onCreateBlankForm]);
 
   const renderHeader = () => {
     if (isEditing) {
@@ -297,6 +300,12 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
       </Section>
       <AiChatPanel />
       <SettingsPanel />
+      <CreateFormDialog
+        visible={isCreateFormDialogVisible}
+        isCreating={isCreatingForm}
+        onClose={onCloseCreateFormDialog}
+        onSave={onSaveCreateForm}
+      />
     </div>
   );
 };

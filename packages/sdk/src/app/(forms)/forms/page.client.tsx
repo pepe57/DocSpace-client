@@ -33,6 +33,8 @@ import type {
   TFilesSettings,
   TGetFolder,
 } from "@docspace/shared/api/files/types";
+import { createThumbnails } from "@docspace/shared/api/files";
+import { thumbnailStatuses } from "@docspace/shared/constants";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { setAuthToken } from "@docspace/shared/api/client";
 
@@ -112,8 +114,25 @@ function FormsPage({
         ? initialFolderData.files.filter((f) => f.folderId === id)
         : initialFolderData.files;
       formsListStore.setItems(files, files.length);
+
+      if (initialFolderData.current?.security) {
+        formsSettingsStore.setFolderSecurity(
+          initialFolderData.current.security,
+        );
+      }
+
+      const thumbIds = files
+        .filter(
+          (f) =>
+            typeof f.id !== "string" &&
+            f.thumbnailStatus === thumbnailStatuses.WAITING,
+        )
+        .map((f) => f.id);
+      if (thumbIds.length) {
+        createThumbnails(thumbIds).catch(() => {});
+      }
     }
-  }, [initialFolderData, formsListStore, myFormsFolderId]);
+  }, [initialFolderData, formsListStore, formsSettingsStore, myFormsFolderId]);
 
   React.useEffect(() => {
     setIsReady(true);

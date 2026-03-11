@@ -29,16 +29,32 @@
 import { useCallback, useRef } from "react";
 
 import api from "@docspace/shared/api";
+import { createThumbnails } from "@docspace/shared/api/files";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TFile } from "@docspace/shared/api/files/types";
+import { thumbnailStatuses } from "@docspace/shared/constants";
 import { FilterType } from "@docspace/shared/enums";
 
 import { PAGE_COUNT } from "@/utils/constants";
 import { FormsSection } from "@/types/forms";
 
-import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
+import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
+
+const requestThumbnails = (files: TFile[]) => {
+  const ids = files
+    .filter(
+      (f) =>
+        typeof f.id !== "string" &&
+        f.thumbnailStatus === thumbnailStatuses.WAITING,
+    )
+    .map((f) => f.id);
+
+  if (ids.length) {
+    createThumbnails(ids).catch(() => {});
+  }
+};
 
 const filterByFolder = (
   files: TFile[],
@@ -108,6 +124,11 @@ export default function useFormsData() {
         const total = apiExhausted.current ? files.length : files.length + 1;
         formsListStore.setItems(files, total);
         currentPage.current = 0;
+        requestThumbnails(files);
+
+        if (res.current?.security) {
+          formsSettingsStore.setFolderSecurity(res.current.security);
+        }
       } catch {
         if (controller.signal.aborted) return;
         formsListStore.setItems([], 0);
@@ -119,7 +140,7 @@ export default function useFormsData() {
         }
       }
     },
-    [activeSection, getFolderId, formsListStore],
+    [activeSection, getFolderId, formsListStore, formsSettingsStore],
   );
 
   const fetchMore = useCallback(async () => {
@@ -160,6 +181,7 @@ export default function useFormsData() {
         ? formsListStore.items.length + fetched.length
         : formsListStore.items.length + fetched.length + 1;
       formsListStore.appendItems(fetched, total);
+      requestThumbnails(fetched);
     } catch {
       // aborted or network error — ignore
     }
