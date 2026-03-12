@@ -39,7 +39,11 @@ import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import styles from "./FormsEditor.module.scss";
 
-const FormsEditor = () => {
+type FormsEditorProps = {
+  onNavigatedAway?: () => void;
+};
+
+const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
   const { t } = useTranslation(["Common"]);
   const { editingFile, editorAction, closeEditor, setActiveSection } =
     useFormsNavigationStore();
@@ -78,15 +82,30 @@ const FormsEditor = () => {
   const checkCompletedUrl = React.useCallback(() => {
     try {
       const href = iframeRef.current?.contentWindow?.location.href;
-      if (href?.includes("completed-form")) {
+      if (!href) return false;
+
+      if (href.includes("completed-form")) {
         handleFormCompleted();
+        return true;
+      }
+
+      // After the iframe has fully loaded the doceditor, detect if it
+      // navigates away (e.g. after "Start Filling" which redirects to
+      // /rooms/shared/filter).  In the SDK context we close the editor
+      // and let the parent refresh the forms list instead.
+      if (
+        isIframeLoaded &&
+        !href.includes("/doceditor") &&
+        !href.includes("about:blank")
+      ) {
+        onNavigatedAway?.();
         return true;
       }
     } catch {
       // cross-origin — ignore
     }
     return false;
-  }, [handleFormCompleted]);
+  }, [handleFormCompleted, isIframeLoaded, onNavigatedAway]);
 
   React.useEffect(() => {
     setIsIframeLoaded(false);
