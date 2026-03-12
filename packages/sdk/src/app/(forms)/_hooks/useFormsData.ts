@@ -71,6 +71,7 @@ export default function useFormsData() {
   const currentPage = useRef(0);
   const apiExhausted = useRef(false);
   const abortRef = useRef<AbortController | null>(null);
+  const fetchMoreAbortRef = useRef<AbortController | null>(null);
   const doneFolderIdRef = useRef<number | null>(null);
 
   const getFolderId = useCallback(
@@ -166,6 +167,7 @@ export default function useFormsData() {
   const fetchSection = useCallback(
     async (section?: FormsSection) => {
       abortRef.current?.abort();
+      fetchMoreAbortRef.current?.abort();
       const controller = new AbortController();
       abortRef.current = controller;
 
@@ -241,10 +243,11 @@ export default function useFormsData() {
   );
 
   const fetchMore = useCallback(async () => {
-    if (apiExhausted.current || abortRef.current?.signal.aborted) return;
+    if (apiExhausted.current) return;
 
+    fetchMoreAbortRef.current?.abort();
     const controller = new AbortController();
-    abortRef.current = controller;
+    fetchMoreAbortRef.current = controller;
 
     const folderId = getFolderId();
     if (!folderId) return;

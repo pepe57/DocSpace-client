@@ -100,9 +100,10 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const isInsideCompletedFolder =
     activeSection === FormsSection.CompletedForms && !!completedFolder;
 
+  // Initialize AI store with room context
   React.useEffect(() => {
     if (roomId) {
-      aiStore.loadAgentForRoom(roomId, requestToken);
+      aiStore.initForRoom(roomId, requestToken);
     }
   }, [roomId, requestToken, aiStore]);
 
@@ -131,17 +132,23 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
         setContentVisible(true);
         setIsSectionLoading(false);
 
-        // Sync completed forms to AI agent KB after data is loaded
+        // When entering a completed subfolder: set current folder and sync KB
         if (
           activeSection === FormsSection.CompletedForms &&
-          completedFolder &&
-          formsListStore.items.length > 0
+          completedFolder
         ) {
-          const files = formsListStore.items.map((f) => ({
-            id: f.id,
-            title: f.title,
-          }));
-          aiStore.syncCompletedForms(files);
+          aiStore.setCurrentFolder(completedFolder.id);
+
+          if (formsListStore.items.length > 0) {
+            const files = formsListStore.items.map((f) => ({
+              id: f.id,
+              title: f.title,
+            }));
+            aiStore.syncCompletedForms(files);
+          }
+        } else {
+          // Leaving completed subfolder — clear current folder
+          aiStore.setCurrentFolder(null);
         }
       });
     }
@@ -222,6 +229,11 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
       },
     ];
   }, [formsSettingsStore.folderSecurity, t, onUploadFiles, onCreateBlankForm]);
+
+  const handleEditorNavigatedAway = React.useCallback(() => {
+    closeEditor();
+    fetchSection();
+  }, [closeEditor, fetchSection]);
 
   const handleEditorBack = React.useCallback(() => {
     closeEditor();
@@ -418,7 +430,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
 
   const renderBody = () => {
     if (isEditing) {
-      return <FormsEditor />;
+      return <FormsEditor onNavigatedAway={handleEditorNavigatedAway} />;
     }
 
     if (activeSection === FormsSection.Settings) {

@@ -91,23 +91,46 @@ function FormsPage({
       requestToken,
     });
     formsSettingsStore.setFilesSettings(filesSettings);
-    filesSettingsStore.setFilesSettings(filesSettings);
-    settingsStore.setFilesViewAs("tile");
+  }, [
+    roomId,
+    myFormsFolderId,
+    formsToFillFolderId,
+    requestToken,
+    filesSettings,
+    formsSettingsStore,
+  ]);
 
+  React.useEffect(() => {
+    filesSettingsStore.setFilesSettings(filesSettings);
+  }, [filesSettings, filesSettingsStore]);
+
+  React.useEffect(() => {
     if (user) {
       formsUserStore.setUser(user);
     }
+  }, [user, formsUserStore]);
 
+  React.useEffect(() => {
     if (defaultProvider) {
       formsAiAgentStore.setDefaultProvider(defaultProvider);
     }
+  }, [defaultProvider, formsAiAgentStore]);
 
+  React.useEffect(() => {
+    // Mark as frame so axiosClient 401 handler does not redirect to login
+    if (!window.ClientConfig)
+      window.ClientConfig = {} as NonNullable<typeof window.ClientConfig>;
+    window.ClientConfig.isFrame = true;
+
+    settingsStore.setFilesViewAs("tile");
     const token = requestToken || authToken;
     if (token) {
       document.cookie = `asc_auth_key=${token}; path=/; SameSite=Lax`;
       setAuthToken(token);
     }
+  }, [settingsStore, requestToken, authToken]);
 
+  React.useEffect(() => {
     if (initialFolderData) {
       const id = Number(myFormsFolderId);
       const files = id
@@ -132,25 +155,11 @@ function FormsPage({
         createThumbnails(thumbIds).catch(() => {});
       }
     }
+  }, [initialFolderData, formsListStore, formsSettingsStore, myFormsFolderId]);
 
+  React.useEffect(() => {
     setIsReady(true);
-  }, [
-    roomId,
-    myFormsFolderId,
-    formsToFillFolderId,
-    requestToken,
-    authToken,
-    filesSettings,
-    initialFolderData,
-    user,
-    defaultProvider,
-    formsSettingsStore,
-    formsListStore,
-    formsUserStore,
-    formsAiAgentStore,
-    filesSettingsStore,
-    settingsStore,
-  ]);
+  }, []);
 
   if (!isReady) {
     return (
