@@ -30,7 +30,10 @@ import React from "react";
 import { makeAutoObservable, runInAction } from "mobx";
 
 import type { TAIRoomChatSettings } from "@docspace/shared/api/rooms/types";
-import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
+import type {
+  TAIConfig,
+  TDefaultProvider,
+} from "@docspace/shared/api/ai/types";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import {
   getAIAgent,
@@ -57,34 +60,19 @@ import {
 
 class FormsAiAgentStore {
   isPanelVisible = false;
-
-  // Per-folder agent mapping: completedFolderId → { agentId, knowledgeFolderId }
   folderAgentsMap: FolderAgentsMap = {};
-
-  // Current active folder agent (set when entering a completed subfolder)
   currentFolderId: number | null = null;
   agentChatSettings: TAIRoomChatSettings | undefined = undefined;
-
-  // AI agent toggle
   aiAgentEnabled = false;
-
-  // AI providers availability
   aiProvidersAvailable = false;
   isCheckingProviders = false;
-
-  // Knowledge base (vectorization) availability
   vectorizationEnabled = false;
-
-  // Default AI provider (fetched server-side)
+  aiConfig: TAIConfig | null = null;
   defaultProvider: TDefaultProvider | null = null;
-
-  // Knowledge base sync
   isSyncingKB = false;
-
-  // Bulk agent creation progress
   isCreatingAgents = false;
 
-  // Room context
+  private _folderVersion = 0;
   private _roomId: string | number = "";
   private _userHash: string | undefined = undefined;
 
@@ -101,13 +89,11 @@ class FormsAiAgentStore {
     saveAiEnabled(this._roomId, value, this._userHash);
   };
 
-  /** Disable AI agents: reset local state and delete agents on server. */
   disableAiAgents = async () => {
     const agentIds = Object.values(this.folderAgentsMap).map(
       (e) => e.agentId,
     );
 
-    // Reset UI state immediately so the user sees the toggle off
     runInAction(() => {
       this.aiAgentEnabled = false;
       this.isPanelVisible = false;
@@ -118,7 +104,6 @@ class FormsAiAgentStore {
       this.isCreatingAgents = false;
     });
 
-    // Delete agents on the server first, then persist to localStorage
     const results = await Promise.allSettled(
       agentIds.map((id) => deleteAIAgent(id)),
     );
@@ -131,8 +116,6 @@ class FormsAiAgentStore {
     });
 
     if (failedIds.length > 0) {
-      // Keep entries for agents that failed to delete so they can be
-      // retried on the next disable attempt instead of becoming orphans.
       const surviving: FolderAgentsMap = {};
       for (const [folderId, entry] of Object.entries(
         loadFolderAgentsMap(this._roomId, this._userHash),
@@ -165,8 +148,6 @@ class FormsAiAgentStore {
     this.isPanelVisible = !this.isPanelVisible;
   };
 
-  // --- AI Provider availability check ---
-
   checkAiAvailability = async () => {
     if (this.isCheckingProviders) return;
 
@@ -179,19 +160,19 @@ class FormsAiAgentStore {
 
       runInAction(() => {
         this.aiProvidersAvailable = providers.length > 0;
+        this.aiConfig = aiConfig ?? null;
         this.vectorizationEnabled = aiConfig?.vectorizationEnabled ?? false;
         this.isCheckingProviders = false;
       });
     } catch {
       runInAction(() => {
         this.aiProvidersAvailable = false;
+        this.aiConfig = null;
         this.vectorizationEnabled = false;
         this.isCheckingProviders = false;
       });
     }
   };
-
-  // --- Room initialization ---
 
   initForRoom = (roomId: string | number, requestToken?: string) => {
     this._roomId = roomId;
@@ -199,8 +180,6 @@ class FormsAiAgentStore {
     this.folderAgentsMap = loadFolderAgentsMap(roomId, this._userHash);
     this.aiAgentEnabled = loadAiEnabled(roomId, this._userHash);
   };
-
-  // --- Per-folder agent management ---
 
   get currentAgentId(): number | null {
     if (!this.currentFolderId) return null;
@@ -214,17 +193,16 @@ class FormsAiAgentStore {
     );
   }
 
-  /** Set the currently active completed folder and load its agent chat settings. */
   setCurrentFolder = async (folderId: number | null) => {
+    const version = ++this._folderVersion;
     this.currentFolderId = folderId;
     this.agentChatSettings = undefined;
 
     if (folderId) {
       const entry = this.folderAgentsMap[folderId];
       if (entry?.agentId) {
-        // Auto-open panel when entering a completed folder with an agent
         this.isPanelVisible = true;
-        await this.fetchAgentChatSettings(entry.agentId);
+        await this.fetchAgentChatSettings(entry.agentId, version);
       }
     } else {
       this.isPanelVisible = false;
@@ -237,7 +215,6 @@ class FormsAiAgentStore {
     }
   };
 
-  /** Create an AI agent for a single completed folder and copy its files to the KB. */
   createAgentForFolder = async (
     folder: TFolder,
     files: { id: number; title: string }[],
@@ -270,7 +247,6 @@ class FormsAiAgentStore {
       this.persistMap();
     });
 
-    // Copy files to KB — best-effort, agent is already saved
     if (kbFolderId && files.length > 0) {
       try {
         await copyFilesToAgentRoom(
@@ -283,14 +259,13 @@ class FormsAiAgentStore {
           await vectorizeFiles(kbFiles.map((f) => f.id));
         }
       } catch {
-        // KB sync failed — agent is still saved, will retry on next sync
+        // best-effort
       }
     }
 
     return entry;
   };
 
-  /** Check if an agent in the map still exists on the server. */
   private validateAgent = async (agentId: number): Promise<boolean> => {
     try {
       await getAIAgent(agentId);
@@ -300,11 +275,6 @@ class FormsAiAgentStore {
     }
   };
 
-  /**
-   * Create agents for all completed folders that don't have one yet.
-   * Called when the "Enable AI Agent" toggle is turned on.
-   * `foldersWithFiles` is an array of { folder, files } for each completed subfolder.
-   */
   ensureAgentsForFolders = async (
     foldersWithFiles: {
       folder: TFolder;
@@ -319,17 +289,14 @@ class FormsAiAgentStore {
 
     try {
       for (const { folder, files } of foldersWithFiles) {
-        // Stop if disabled mid-creation
         if (!this.aiAgentEnabled) break;
 
         const existing = this.folderAgentsMap[folder.id];
 
         if (existing) {
-          // Validate the agent still exists on the server
           const valid = await this.validateAgent(existing.agentId);
           if (valid) continue;
 
-          // Agent was deleted externally — remove stale entry
           runInAction(() => {
             const { [folder.id]: _, ...rest } = this.folderAgentsMap;
             this.folderAgentsMap = rest;
@@ -346,10 +313,14 @@ class FormsAiAgentStore {
     }
   };
 
-  fetchAgentChatSettings = async (agentId: number) => {
+  fetchAgentChatSettings = async (
+    agentId: number,
+    version?: number,
+  ) => {
     try {
       const agent = await getAIAgent(agentId);
       runInAction(() => {
+        if (version !== undefined && version !== this._folderVersion) return;
         this.agentChatSettings = agent.chatSettings;
       });
     } catch {
@@ -357,49 +328,47 @@ class FormsAiAgentStore {
     }
   };
 
-  // --- Knowledge base sync for current folder ---
-
   syncCompletedForms = async (files: { id: number; title: string }[]) => {
     const agentId = this.currentAgentId;
     const kbFolderId = this.currentKnowledgeFolderId;
+    const version = this._folderVersion;
 
     if (!agentId || !kbFolderId) return;
     if (files.length === 0) return;
     if (this.isSyncingKB) return;
+
+    const isStale = () => version !== this._folderVersion;
 
     try {
       runInAction(() => {
         this.isSyncingKB = true;
       });
 
-      // 1. Get existing files in KB to avoid duplicates
       const kbFiles = await getKnowledgeFiles(kbFolderId);
-      const kbTitles = new Set(kbFiles.map((f) => f.title));
+      if (isStale()) return;
 
-      // 2. Filter out files that are already in KB (by title)
+      const kbTitles = new Set(kbFiles.map((f) => f.title));
       const newFiles = files.filter((f) => !kbTitles.has(f.title));
 
       if (newFiles.length > 0) {
-        // 3. Copy new forms to KB folder (waits for completion)
         await copyFilesToAgentRoom(
           kbFolderId,
           newFiles.map((f) => f.id),
         );
+        if (isStale()) return;
 
-        // 4. Re-fetch KB files to get IDs of newly copied files
         const updatedKbFiles = await getKnowledgeFiles(kbFolderId);
+        if (isStale()) return;
+
         const allKbFileIds = updatedKbFiles.map((f) => f.id);
 
-        // 5. Trigger vectorization for all KB files
         if (allKbFileIds.length > 0) {
           await vectorizeFiles(allKbFileIds).catch(() => {});
         }
       }
-
-      runInAction(() => {
-        this.isSyncingKB = false;
-      });
     } catch {
+      // ignore
+    } finally {
       runInAction(() => {
         this.isSyncingKB = false;
       });

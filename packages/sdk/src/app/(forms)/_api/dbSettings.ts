@@ -57,18 +57,23 @@ export const saveDbConfig = (form: DbFormData) => {
   });
 };
 
+type TestDbResult = {
+  success: boolean;
+  error?: string;
+};
+
 export const testDbConnection = (form: DbFormData) => {
-  return request<boolean>({
+  return request<TestDbResult>({
     method: "post",
     url: "/settings/authservice/externaldb/test",
     data: {
       databaseType: form.databaseType.toLowerCase(),
-      host: form.host,
-      port: Number(form.port),
-      databaseName: form.databaseName,
-      user: form.user,
-      password: form.password,
-      useSsl: form.useSsl,
+      dbHost: form.host,
+      dbPort: Number(form.port),
+      dbName: form.databaseName,
+      dbUser: form.user,
+      dbPassword: form.password,
+      dbSsl: form.useSsl,
     },
   });
 };

@@ -58,10 +58,10 @@ const AiChatPanel = () => {
     isSyncing,
     currentAgentId,
     agentChatSettings,
+    aiConfig,
   } = aiAgentStore;
   const { filesSettings } = useFormsSettingsStore();
 
-  // Use the folder-specific agent ID as roomId for chat
   const agentRoomId = currentAgentId ?? 0;
 
   const initChats = useInitChats({ roomId: agentRoomId });
@@ -69,7 +69,7 @@ const AiChatPanel = () => {
 
   const toolsSettings = useToolsSettings({
     roomId: agentRoomId,
-    aiConfig: null,
+    aiConfig,
     chatSettings: agentChatSettings,
   });
 
@@ -91,9 +91,6 @@ const AiChatPanel = () => {
 
   const getResultStorageId = React.useCallback(() => null, []);
 
-  // Re-init chat data only when panel opens or agent changes.
-  // Init functions are intentionally omitted from deps to avoid
-  // re-fetching on every render (they are not referentially stable).
   React.useEffect(() => {
     if (isPanelVisible && agentRoomId) {
       initChats.fetchChats();
