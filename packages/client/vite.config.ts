@@ -374,8 +374,9 @@ const serveRootPublicPlugin = (): Plugin => {
 // ===========================================================================
 // Main Vite configuration
 // ===========================================================================
-export default defineConfig(({ mode }) => {
+export default defineConfig(async ({ mode }) => {
   const isProduction = mode === "production";
+  const isAnalyze = mode === "analyze";
 
   return {
     root: __dirname,
@@ -430,6 +431,11 @@ export default defineConfig(({ mode }) => {
       isProduction && bannerPlugin(),
       isProduction && copyLocalesPlugin(),
       isProduction && copyFontsPlugin(),
+      isAnalyze &&
+        (await import("rollup-plugin-visualizer")).visualizer({
+          open: true,
+          filename: "dist/stats.html",
+        }),
     ].filter(Boolean),
 
     css: {
