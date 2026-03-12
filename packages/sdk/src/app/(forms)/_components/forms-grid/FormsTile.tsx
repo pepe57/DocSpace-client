@@ -120,7 +120,7 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
           if (canEdit) return "edit" as const;
           return "view" as const;
         }
-        case FormsSection.FormsToFill: {
+        case FormsSection.InProgress: {
           const canFill =
             file.security?.FillForms &&
             file.viewAccessibility?.WebRestrictedEditing;

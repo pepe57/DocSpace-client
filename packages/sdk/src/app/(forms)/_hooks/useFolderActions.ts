@@ -65,13 +65,12 @@ export default function useFolderActions() {
   const getFolderId = useCallback(() => {
     switch (activeSection) {
       case FormsSection.MyForms:
-        return formsSettingsStore.myFormsFolderId;
-      case FormsSection.FormsToFill:
-        return formsSettingsStore.formsToFillFolderId;
+        return formsSettingsStore.roomId;
+      case FormsSection.InProgress:
       case FormsSection.CompletedForms:
         return "";
       default:
-        return formsSettingsStore.myFormsFolderId;
+        return formsSettingsStore.roomId;
     }
   }, [activeSection, formsSettingsStore]);
 
