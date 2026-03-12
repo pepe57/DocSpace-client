@@ -426,7 +426,6 @@
   "Form": "Obrazac",
   "FormDataCollection": "Prikupljanje podataka iz obrasca",
   "FormDataCollectionDescription": "Prikupite popunjene kopije obrasca i podatke iz njih u XLSX formatu za analizu odgovora u prostorijama za popunjavanje obrazaca.",
-  "FormFilingRoomInfo": "Otpremite PDF obrasce u sobu. Pozovite članove i goste da popune PDF obrazac. Pregledajte popunjene obrasce i analizirajte podatke koji se automatski prikupljaju u tabeli.",
   "FormFilingRoomTitle": "Prostorija za Popunjavanje Formulara",
   "FormRoom": "Obrazac soba",
   "Forms": "Obrasci",

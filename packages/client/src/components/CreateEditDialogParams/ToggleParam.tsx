@@ -55,6 +55,7 @@ type ToggleParamProps = {
   description: string;
   isChecked: boolean;
   onCheckedChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isDisabled?: boolean;
 };
 
 const ToggleParam = ({
@@ -62,6 +63,7 @@ const ToggleParam = ({
   title,
   description,
   isChecked,
+  isDisabled,
   onCheckedChange,
 }: ToggleParamProps) => {
   return (
@@ -78,6 +80,7 @@ const ToggleParam = ({
         isChecked={isChecked}
         onChange={onCheckedChange}
         dataTestId="create_edit_room_toggle"
+        isDisabled={isDisabled}
       />
     </StyledToggleParam>
   );

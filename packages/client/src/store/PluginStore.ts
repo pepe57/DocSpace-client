@@ -1064,8 +1064,7 @@ class PluginStore {
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
-    const storeId = this.selectedFolderStore.id;
-
+  
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
         ? value.usersType.includes(userRole)
@@ -1079,13 +1078,36 @@ class PluginStore {
 
       const newItems: IMainButtonItemClient[] = [];
 
+      const createMainButtonClickHandler = (
+        item: IMainButtonItem,
+        pluginName: string,
+      ) => {
+        return async () => {
+          const storeId = this.selectedFolderStore.id;
+          // Support both new onItemClick and deprecated onClick for backward compatibility
+          const onClickCallback = item.onItemClick || item.onClick;
+
+          if (!onClickCallback) return;
+
+          if (!storeId) return;
+
+          let message: IMessage | void;
+
+          if (item.onItemClick) {
+            message = await item.onItemClick(storeId);
+          } else {
+            message = await item.onClick?.(storeId as number);
+          }
+
+          this.dispatchMessage({ message, pluginName });
+        };
+      };
+
+      const storeId = this.selectedFolderStore.id;
+
       if (value.items && storeId) {
         value.items.forEach((i) => {
-          const onClick = async () => {
-            const message = await i.onClick?.(storeId);
-
-            this.dispatchMessage({ message, pluginName: plugin.name });
-          };
+          const onClick = createMainButtonClickHandler(i, plugin.name);
 
           const { items: _, ...rest } = i;
 
@@ -1098,16 +1120,10 @@ class PluginStore {
         });
       }
 
-      const onClick = async () => {
-        if (!value.onClick) return;
-        const currStoreId = this.selectedFolderStore.id;
-
-        if (!currStoreId) return;
-
-        const message = await value.onClick(currStoreId);
-
-        this.dispatchMessage({ message, pluginName: plugin.name });
-      };
+      const onClick = createMainButtonClickHandler(
+        value,
+        plugin.name,
+      );
 
       this.mainButtonItems.set(key, {
         ...value,

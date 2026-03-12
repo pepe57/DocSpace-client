@@ -458,6 +458,9 @@ importers:
       react-dom:
         specifier: 19.2.4
         version: 19.2.4(react@19.2.4)
+      react-hook-form:
+        specifier: ^7.71.2
+        version: 7.71.2(react@19.2.4)
       react-hotkeys-hook:
         specifier: 3.4.7
         version: 3.4.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -550,8 +553,8 @@ importers:
         specifier: 2.3.14
         version: 2.3.14
       '@onlyoffice/docspace-plugin-sdk':
-        specifier: file:onlyoffice-docspace-plugin-sdk-v2.1.0.tgz
-        version: file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz(@types/node@24.10.7)
+        specifier: file:onlyoffice-docspace-plugin-sdk-2.1.0.tgz
+        version: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz(@types/node@24.10.7)
       '@playwright/test':
         specifier: 1.58.1
         version: 1.58.1
@@ -3604,8 +3607,8 @@ packages:
     resolution: {integrity: sha512-Cgg11ZXTNKrsp8VwYB4HmkixD+xPJZk0fDaYksNIAyFGWDG1oxMk6NW9axclCcqDCUUVNRzg/MUyk4OL5MbsiA==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz}
     version: 3.6.0
 
-  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz':
-    resolution: {integrity: sha512-EF8EitO9CgQ9t31m7/EJUa8Y1PDXYXxf67P4QAiI99GdHIBXhN9Irc7KPIDuqhUjHXxZOoNHn3QhcBn22loUOA==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz}
+  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
+    resolution: {integrity: sha512-ny9tVcun0IPvJ2V4ZACXgCIjPTF3nkK6mhhu9kHrvhE1lm/Y12gMNa503LJYzOxZbqq+VoLpV/sZYxBi+tWXAw==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
     version: 2.1.0
     hasBin: true
 
@@ -8902,6 +8905,12 @@ packages:
     peerDependencies:
       react: '>=16.4.1'
 
+  react-hook-form@7.71.2:
+    resolution: {integrity: sha512-1CHvcDYzuRUNOflt4MOq3ZM46AronNJtQ1S7tnX6YN4y72qhgiUItpacZUAQ0TyWYci3yz1X+rXaSxiuEm86PA==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18 || ^19
+
   react-hotkeys-hook@3.4.7:
     resolution: {integrity: sha512-+bbPmhPAl6ns9VkXkNNyxlmCAIyDAcWbB76O4I0ntr3uWCRuIQf/aRLartUahe9chVMPj+OEzzfk3CQSjclUEQ==}
     peerDependencies:
@@ -12820,7 +12829,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-v2.1.0.tgz(@types/node@24.10.7)':
+  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz(@types/node@24.10.7)':
     dependencies:
       inquirer: 9.3.8(@types/node@24.10.7)
       jszip: 3.10.1
@@ -18933,6 +18942,10 @@ snapshots:
       prop-types: 15.8.1
       react: 19.2.4
       react-async-script: 1.2.0(react@19.2.4)
+
+  react-hook-form@7.71.2(react@19.2.4):
+    dependencies:
+      react: 19.2.4
 
   react-hotkeys-hook@3.4.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
