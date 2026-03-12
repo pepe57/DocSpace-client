@@ -252,6 +252,7 @@ declare global {
         string,
         { data: Record<string, string>; namespaces: string }
       >;
+      instance?: import("i18next").i18n;
     };
     timezone: string;
     snackbar?: object;
