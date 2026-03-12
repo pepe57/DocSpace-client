@@ -25,9 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
 import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 import DangerToastReactSvg from "@docspace/ui-kit/assets/danger.toast.react.svg";
 import { useLocalStorage } from "@docspace/shared/hooks/useLocalStorage";
@@ -76,9 +75,10 @@ const IntegrationBar = ({
         <div className={styles.barBody}>
           <span className={styles.barDescription}>{descriptionText}</span>
           <Link
-            href="/portal-settings/integration/third-party-services"
-            className={styles.barLink}
             color="accent"
+            type={LinkType.page}
+            className={styles.barLink}
+            href="/portal-settings/integration/third-party-services"
           >
             {t("GoToIntegrations")}
           </Link>
