@@ -41,9 +41,10 @@ import SettingsIcon from "PUBLIC_DIR/images/settings.react.svg";
 import TransactionHistory from "../../../shared/transaction-history";
 import styles from "./AdditionalStoragePage.module.scss";
 import { DISK_STORAGE } from "@docspace/shared/constants";
+import WalletInfo from "../../../shared/top-up-balance/sub-components/WalletInfo";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 
 type AdditionalStoragePageProps = {
-  walletBalance?: number;
   currentStoragePlanSize?: number;
   storagePricePerGB?: number;
   storageAutoRenewalDate?: string;

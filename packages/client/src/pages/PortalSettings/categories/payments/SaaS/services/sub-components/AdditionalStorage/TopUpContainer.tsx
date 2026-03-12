@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 
-import TopUpModal from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/shared/Top-up-balance/TopUpModal";
+import TopUpModal from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/shared/top-up-balance/TopUpModal";
 
 type TopUpContainerTypes = {
   isVisibleContainer: boolean;

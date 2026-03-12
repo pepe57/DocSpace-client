@@ -39,7 +39,7 @@ import {
 import { setServiceState } from "@docspace/shared/api/portal";
 
 import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
-import TopUpModal from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/shared/Top-up-balance/TopUpModal";
+import TopUpModal from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/shared/top-up-balance/TopUpModal";
 
 import ServicesItems from "./ServicesItems";
 import ServicesLoader from "./ServicesLoader";

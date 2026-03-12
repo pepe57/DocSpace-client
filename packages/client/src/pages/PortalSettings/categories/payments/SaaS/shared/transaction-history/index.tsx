@@ -95,7 +95,7 @@ type TransactionHistoryProps = {
   formatDate?: (date: DateTime) => string;
   withoutHeader?: boolean;
   serviceName?: string;
-  headerTitle?: stirng;
+  headerTitle?: string;
 };
 
 const getTransactionType = (key: string) => {

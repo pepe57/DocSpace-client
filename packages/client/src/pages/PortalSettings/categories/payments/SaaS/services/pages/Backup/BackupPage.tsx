@@ -27,20 +27,15 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
-
-import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
-import WalletIcon from "PUBLIC_DIR/images/access.comment.react.svg";
 
 import ServiceToggleSection from "../../sub-components/ServiceToggleSection";
 import TransactionHistory from "../../../shared/transaction-history";
 import styles from "./BackupPage.module.scss";
 import { BACKUP_SERVICE } from "@docspace/shared/constants";
 import { DeviceType } from "@docspace/ui-kit/enums";
-
-import WalletInfo from "../../../shared/top-up-balance/sub-components/WalletInfo.tsx";
+import WalletInfo from "../../../shared/top-up-balance/sub-components/WalletInfo";
 import { setServiceState } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/ui-kit/components";
 import ConfirmationDialog from "../../sub-components/ConfirmationDialog";
