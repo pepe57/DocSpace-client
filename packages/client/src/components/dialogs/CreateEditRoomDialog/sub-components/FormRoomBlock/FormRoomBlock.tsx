@@ -69,16 +69,16 @@ const FormRoomBlock = ({
     <div className={styles.formRoomBlock}>
       <ToggleParam
         id="save-form-as-xlsx"
-        title={t("CollectResultsInXlsx")}
-        description={t("CollectResultsInXlsxDescription")}
+        title={t("Common:CollectResultsInXlsx")}
+        description={t("Common:CollectResultsInXlsxDescription")}
         isChecked={roomParams.saveFormAsXLSX || false}
         onCheckedChange={onSaveFormAsXLSXChange}
       />
 
       <ToggleParam
         id="send-form-to-external-db"
-        title={t("ExportResultsToDatabase")}
-        description={t("ExportResultsToDatabaseDescription")}
+        title={t("Common:ExportResultsToDatabase")}
+        description={t("Common:ExportResultsToDatabaseDescription")}
         isChecked={roomParams.sendFormToExternalDB || false}
         onCheckedChange={onSendFormToExternalDBChange}
       />
