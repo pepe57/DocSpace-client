@@ -43,6 +43,10 @@ export default {
       control: "boolean",
       defaultValue: false,
     },
+    showLanguageName: {
+      control: "boolean",
+      defaultValue: false,
+    },
     selectedCulture: {
       control: "select",
       options: ["en-US", "de", "fr", "es", "it"],
@@ -84,4 +88,10 @@ export const WithoutBorder = Template.bind({});
 WithoutBorder.args = {
   ...Default.args,
   withBorder: false,
+};
+
+export const WithLanguageName = Template.bind({});
+WithLanguageName.args = {
+  ...Default.args,
+  showLanguageName: true,
 };

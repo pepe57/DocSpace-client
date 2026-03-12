@@ -56,4 +56,24 @@ describe("LanguageCombobox", () => {
     render(<LanguageCombobox {...defaultProps} />);
     expect(screen.getByTestId("language-combobox")).toHaveClass("test-class");
   });
+
+  it("renders with showLanguageName and applies withLanguageName class", () => {
+    render(<LanguageCombobox {...defaultProps} showLanguageName />);
+    const combobox = screen.getByTestId("language-combobox");
+    expect(combobox).toBeInTheDocument();
+    expect(combobox.className).toMatch(/withLanguageName/);
+  });
+
+  it("does not apply withLanguageName class by default", () => {
+    render(<LanguageCombobox {...defaultProps} />);
+    const combobox = screen.getByTestId("language-combobox");
+    expect(combobox.className).not.toMatch(/withLanguageName/);
+  });
+
+  it("returns null when selectedCulture is not in cultures", () => {
+    const { container } = render(
+      <LanguageCombobox {...defaultProps} selectedCulture="zh" />,
+    );
+    expect(container.firstChild).toBeNull();
+  });
 });
