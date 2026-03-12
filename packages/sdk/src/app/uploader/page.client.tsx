@@ -82,12 +82,15 @@ export default function UploaderClient({
     });
   }, []);
 
-  const handleUploadError = useCallback((data: { error: string }) => {
-    frameCallEvent({
-      event: "onUploadError",
-      data,
-    });
-  }, []);
+  const handleUploadError = useCallback(
+    (data: { error: string; rejectedFiles?: unknown[] }) => {
+      frameCallEvent({
+        event: "onUploadError",
+        data,
+      });
+    },
+    [],
+  );
 
   const getFolderUrl = (folderId: number) => {
     return `${window.location.origin}/rooms/personal/filter?folder=${folderId}`;
