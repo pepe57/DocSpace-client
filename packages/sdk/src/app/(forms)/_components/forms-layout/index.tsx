@@ -49,6 +49,7 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
+import { useFormsUserStore } from "../../_store/FormsUserStore";
 
 import FormsSidebar from "../sidebar";
 import FormsGrid from "../forms-grid";
@@ -78,7 +79,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const formsListStore = useFormsListStore();
   const { items, folders } = formsListStore;
   const formsSettingsStore = useFormsSettingsStore();
-  const { roomId, requestToken } = formsSettingsStore;
+  const { roomId } = formsSettingsStore;
   const { fetchSection, fetchMore } = useFormsData();
   const {
     onUploadFiles,
@@ -90,6 +91,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   } = useFolderActions();
   const { currentDeviceType } = useDeviceType();
   const aiStore = useFormsAiAgentStore();
+  const { user } = useFormsUserStore();
   const prevSection = React.useRef(activeSection);
   const prevCompletedFolder = React.useRef(completedFolder);
   const prevInProgressFolder = React.useRef(inProgressFolder);
@@ -107,10 +109,10 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const activeSubfolder = completedFolder ?? inProgressFolder;
 
   React.useEffect(() => {
-    if (roomId) {
-      aiStore.initForRoom(roomId, requestToken);
+    if (roomId && user?.id) {
+      aiStore.initForRoom(roomId, user.id);
     }
-  }, [roomId, requestToken, aiStore]);
+  }, [roomId, user?.id, aiStore]);
 
   React.useEffect(() => {
     const sectionChanged = prevSection.current !== activeSection;

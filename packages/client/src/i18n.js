@@ -95,6 +95,7 @@ newInstance
       window.i18n = { inLoad: [], loaded: {} };
     }
     window.i18n.t = newInstance.t.bind(newInstance);
+    window.i18n.instance = newInstance;
   });
 
 export default newInstance;

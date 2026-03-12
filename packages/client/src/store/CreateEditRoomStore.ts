@@ -272,6 +272,8 @@ class CreateEditRoomStore {
       prompt,
       providerId,
       modelId,
+      sendFormToExternalDB,
+      saveFormAsXLSX,
     } = newParams;
 
     const quotaLimit = quota || room.quotaLimit;
@@ -282,6 +284,9 @@ class CreateEditRoomStore {
     const isLifetimeChanged = !isEqual(lifetime, room.lifetime);
     const isOwnerChanged = roomOwner && roomOwner.id !== room.createdBy.id;
     const isWatermarkChanged = !isEqual(watermark, room.watermark);
+    const isSendFormToExternalDBChanged =
+      sendFormToExternalDB !== room.sendFormToExternalDB;
+    const isSaveFormAsXLSXChanged = saveFormAsXLSX !== room.saveFormAsXLSX;
 
     const tags = newParams.tags.map((tag) => tag.name);
     const prevTags = room.tags.sort();
@@ -289,6 +294,12 @@ class CreateEditRoomStore {
     const isTagsChanged = !isEqual(prevTags, currTags);
 
     const editRoomParams = {
+      ...(isSendFormToExternalDBChanged && {
+        sendFormToExternalDB,
+      }),
+      ...(isSaveFormAsXLSXChanged && {
+        saveFormAsXLSX,
+      }),
       ...(isTitleChanged && {
         title: title || t("Common:NewRoom"),
       }),

@@ -426,7 +426,6 @@
   "Form": "Formulario",
   "FormDataCollection": "Recopilación de datos de formularios",
   "FormDataCollectionDescription": "Recopile las copias de los formularios rellenados y los datos de los mismos en XLSX para analizar las respuestas en las salas para rellenar formularios.",
-  "FormFilingRoomInfo": "Cargue formularios PDF en la sala. Invite a miembros e invitados a rellenar un formulario PDF. Revise los formularios rellenados y analice los datos recopilados automáticamente en una hoja de cálculo.",
   "FormFilingRoomTitle": "Sala para rellenar formularios",
   "FormRoom": "Sala de formularios",
   "Forms": "Formularios",

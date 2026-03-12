@@ -109,6 +109,7 @@ const EmptyTrashDialogComponent = (props) => {
           onClick={onEmptyTrash}
           isLoading={isLoading}
           scale
+          testId="empty_trash_dialog_submit"
         />
         <Button
           id="empty-archive_delete-cancel"
@@ -118,6 +119,7 @@ const EmptyTrashDialogComponent = (props) => {
           onClick={onClose}
           isLoading={isLoading}
           scale
+          testId="empty_trash_dialog_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

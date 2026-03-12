@@ -44,7 +44,6 @@ import {
 } from "@docspace/shared/api/ai";
 
 import {
-  tokenToHash,
   copyFilesToAgentRoom,
   vectorizeFiles,
   getKnowledgeFiles,
@@ -74,7 +73,7 @@ class FormsAiAgentStore {
 
   private _folderVersion = 0;
   private _roomId: string | number = "";
-  private _userHash: string | undefined = undefined;
+  private _userKey: string | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
@@ -86,7 +85,7 @@ class FormsAiAgentStore {
 
   setAiAgentEnabled = (value: boolean) => {
     this.aiAgentEnabled = value;
-    saveAiEnabled(this._roomId, value, this._userHash);
+    saveAiEnabled(this._roomId, value, this._userKey);
   };
 
   disableAiAgents = async () => {
@@ -118,7 +117,7 @@ class FormsAiAgentStore {
     if (failedIds.length > 0) {
       const surviving: FolderAgentsMap = {};
       for (const [folderId, entry] of Object.entries(
-        loadFolderAgentsMap(this._roomId, this._userHash),
+        loadFolderAgentsMap(this._roomId, this._userKey),
       )) {
         if (failedIds.includes(entry.agentId)) {
           surviving[Number(folderId)] = entry;
@@ -128,12 +127,12 @@ class FormsAiAgentStore {
       runInAction(() => {
         this.folderAgentsMap = surviving;
       });
-      saveFolderAgentsMap(this._roomId, surviving, this._userHash);
+      saveFolderAgentsMap(this._roomId, surviving, this._userKey);
     } else {
-      clearFolderAgentsMap(this._roomId, this._userHash);
+      clearFolderAgentsMap(this._roomId, this._userKey);
     }
 
-    saveAiEnabled(this._roomId, false, this._userHash);
+    saveAiEnabled(this._roomId, false, this._userKey);
   };
 
   openPanel = () => {
@@ -174,11 +173,14 @@ class FormsAiAgentStore {
     }
   };
 
-  initForRoom = (roomId: string | number, requestToken?: string) => {
+  initForRoom = (
+    roomId: string | number,
+    userId?: string | number,
+  ) => {
     this._roomId = roomId;
-    this._userHash = requestToken ? tokenToHash(requestToken) : undefined;
-    this.folderAgentsMap = loadFolderAgentsMap(roomId, this._userHash);
-    this.aiAgentEnabled = loadAiEnabled(roomId, this._userHash);
+    this._userKey = userId ? String(userId) : undefined;
+    this.folderAgentsMap = loadFolderAgentsMap(roomId, this._userKey);
+    this.aiAgentEnabled = loadAiEnabled(roomId, this._userKey);
   };
 
   get currentAgentId(): number | null {
@@ -211,7 +213,7 @@ class FormsAiAgentStore {
 
   private persistMap = () => {
     if (this._roomId) {
-      saveFolderAgentsMap(this._roomId, this.folderAgentsMap, this._userHash);
+      saveFolderAgentsMap(this._roomId, this.folderAgentsMap, this._userKey);
     }
   };
 
