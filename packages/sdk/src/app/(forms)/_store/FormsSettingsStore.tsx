@@ -36,15 +36,11 @@ import type {
 
 type TFormsConfig = {
   roomId: string | number;
-  myFormsFolderId: string | number;
-  formsToFillFolderId: string | number;
   requestToken: string;
 };
 
 class FormsSettingsStore {
   roomId: string | number = "";
-  myFormsFolderId: string | number = "";
-  formsToFillFolderId: string | number = "";
   requestToken: string = "";
   filesSettings: TFilesSettings | null = null;
   folderSecurity: TFolderSecurity | null = null;
@@ -55,8 +51,6 @@ class FormsSettingsStore {
 
   setConfig = (config: TFormsConfig) => {
     this.roomId = config.roomId;
-    this.myFormsFolderId = config.myFormsFolderId;
-    this.formsToFillFolderId = config.formsToFillFolderId;
     this.requestToken = config.requestToken;
   };
 
@@ -70,7 +64,9 @@ class FormsSettingsStore {
 }
 
 export const FormsSettingsStoreContext =
-  React.createContext<FormsSettingsStore>(new FormsSettingsStore());
+  React.createContext<FormsSettingsStore>(
+    null as unknown as FormsSettingsStore,
+  );
 
 export const FormsSettingsStoreContextProvider = ({
   children,

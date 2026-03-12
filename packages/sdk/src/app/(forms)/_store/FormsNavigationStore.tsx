@@ -41,6 +41,8 @@ class FormsNavigationStore {
   editorAction: EditorAction = "fill";
   /** The subfolder currently open inside Completed Forms (null = root level showing folder tiles). */
   completedFolder: TFolder | null = null;
+  /** The subfolder currently open inside In Progress (null = root level showing folder tiles). */
+  inProgressFolder: TFolder | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -48,7 +50,10 @@ class FormsNavigationStore {
 
   setActiveSection = (section: FormsSection) => {
     this.activeSection = section;
+    this.editingFile = null;
+    this.editorAction = "fill";
     this.completedFolder = null;
+    this.inProgressFolder = null;
   };
 
   openCompletedFolder = (folder: TFolder) => {
@@ -57,6 +62,14 @@ class FormsNavigationStore {
 
   goBackToCompletedRoot = () => {
     this.completedFolder = null;
+  };
+
+  openInProgressFolder = (folder: TFolder) => {
+    this.inProgressFolder = folder;
+  };
+
+  goBackToInProgressRoot = () => {
+    this.inProgressFolder = null;
   };
 
   openEditor = (file: TFile, action: EditorAction = "fill") => {
@@ -71,7 +84,9 @@ class FormsNavigationStore {
 }
 
 export const FormsNavigationStoreContext =
-  React.createContext<FormsNavigationStore>(new FormsNavigationStore());
+  React.createContext<FormsNavigationStore>(
+    null as unknown as FormsNavigationStore,
+  );
 
 export const FormsNavigationStoreContextProvider = ({
   children,

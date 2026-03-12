@@ -65,19 +65,14 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     const params = new URLSearchParams();
     params.set("fileId", editingFile.id.toString());
     params.append("action", editorAction);
-    // Doceditor authenticates via the `share` query parameter on the
-    // initial HTTP request (cross-origin, no cookie access).
-    // referrerPolicy="no-referrer" on the iframe prevents the token
-    // from leaking via Referrer headers to third-party resources.
     if (requestToken) params.append("share", requestToken);
 
     return combineUrl(editorOrigin, `/doceditor?${params.toString()}`);
   }, [editingFile, editorAction, requestToken, editorOrigin]);
 
   const handleFormCompleted = React.useCallback(() => {
-    closeEditor();
     setActiveSection(FormsSection.CompletedForms);
-  }, [closeEditor, setActiveSection]);
+  }, [setActiveSection]);
 
   const checkCompletedUrl = React.useCallback(() => {
     try {
@@ -89,10 +84,6 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
         return true;
       }
 
-      // After the iframe has fully loaded the doceditor, detect if it
-      // navigates away (e.g. after "Start Filling" which redirects to
-      // /rooms/shared/filter).  In the SDK context we close the editor
-      // and let the parent refresh the forms list instead.
       if (
         isIframeLoaded &&
         !href.includes("/doceditor") &&
@@ -102,7 +93,7 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
         return true;
       }
     } catch {
-      // cross-origin — ignore
+      // ignore
     }
     return false;
   }, [handleFormCompleted, isIframeLoaded, onNavigatedAway]);
@@ -111,7 +102,6 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     setIsIframeLoaded(false);
   }, [editingFile?.id]);
 
-  // Fallback: poll iframe URL for same-origin completion page
   React.useEffect(() => {
     if (!editingFile) return;
 
@@ -119,7 +109,6 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     return () => clearInterval(interval);
   }, [editingFile, checkCompletedUrl]);
 
-  // Primary: listen for postMessage from doceditor
   React.useEffect(() => {
     if (!editingFile) return;
 
