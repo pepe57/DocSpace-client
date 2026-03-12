@@ -50,74 +50,81 @@ const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
   const fieldName = field.name;
   const stringValue = typeof value === "string" ? value : String(value);
 
-  return (
-    match(field)
-      .with({ type: "select" }, (selectField) => (
-        <div className={styles.fieldGroup}>
-          <Text className={styles.fieldLabel}>{selectField.title}</Text>
-          <ComboBox
-            options={selectField.options.map((opt) => ({
-              key: opt,
-              label: opt,
-            }))}
-            selectedOption={{
-              key: stringValue,
-              label: stringValue,
-            }}
-            onSelect={(option) => onChange(fieldName, String(option.key))}
-            scaled
+  return match(field)
+    .with({ type: "select" }, (selectField) => (
+      <div className={styles.fieldGroup}>
+        <Text className={styles.fieldLabel}>{selectField.title}</Text>
+        <ComboBox
+          options={selectField.options.map((opt) => ({
+            key: opt,
+            label: opt,
+          }))}
+          selectedOption={{
+            key: stringValue,
+            label: stringValue,
+          }}
+          onSelect={(option) => onChange(fieldName, String(option.key))}
+          scaled
+        />
+      </div>
+    ))
+    .with({ type: "password" }, (passwordField) => (
+      <div className={styles.fieldGroup}>
+        <Text as="label" htmlFor={fieldName} className={styles.fieldLabel}>
+          {passwordField.title}
+        </Text>
+        <PasswordInput
+          simpleView
+          id={fieldName}
+          inputValue={stringValue}
+          onChange={(e) => onChange(fieldName, e.target.value)}
+          placeholder={passwordField.title}
+          scale
+        />
+      </div>
+    ))
+    .with({ type: "toggle" }, (toggleField) => {
+      return (
+        <div className={styles.toggleField}>
+          <Checkbox
+            isChecked={Boolean(value)}
+            onChange={(e) => onChange(fieldName, e.target.checked)}
+            label={toggleField.title}
           />
         </div>
-      ))
-      .with({ type: "password" }, (passwordField) => (
-        <div className={styles.fieldGroup}>
-          <Text className={styles.fieldLabel}>{passwordField.title}</Text>
-          <PasswordInput
-            simpleView
-            inputValue={stringValue}
-            onChange={(e) => onChange(fieldName, e.target.value)}
-            placeholder={passwordField.title}
-            scale
-          />
-        </div>
-      ))
-      .with({ type: "toggle" }, (toggleField) => {
-        return (
-          <div className={styles.toggleField}>
-            <Checkbox
-              isChecked={Boolean(value)}
-              onChange={(e) => onChange(fieldName, e.target.checked)}
-              label={toggleField.title}
-            />
-          </div>
-        );
-      })
-      // .with({ type: "text", name: "dbPort" }, (textField) => (
-      //   <div className={styles.fieldGroup}>
-      //     <Text className={styles.fieldLabel}>{textField.title}</Text>
-      //     <TextInput
-      //       value={stringValue}
-      //       onChange={(e) => onChange(fieldName, e.target.valueAsNumber)}
-      //       placeholder={textField.title}
-      //       type={InputType.number}
-      //       scale
-      //     />
-      //   </div>
-      // ))
-      .with({ type: "text" }, (textField) => (
-        <div className={styles.fieldGroup}>
-          <Text className={styles.fieldLabel}>{textField.title}</Text>
-          <TextInput
-            value={stringValue}
-            onChange={(e) => onChange(fieldName, e.target.value)}
-            placeholder={textField.title}
-            type={InputType.text}
-            scale
-          />
-        </div>
-      ))
-      .exhaustive()
-  );
+      );
+    })
+    .with({ type: "number" }, (textField) => (
+      <div className={styles.fieldGroup}>
+        <Text as="label" htmlFor={fieldName} className={styles.fieldLabel}>
+          {textField.title}
+        </Text>
+        <TextInput
+          id={fieldName}
+          value={stringValue}
+          onChange={(e) => onChange(fieldName, e.target.valueAsNumber)}
+          placeholder={textField.title}
+          type={InputType.number}
+          scale
+        />
+      </div>
+    ))
+    .with({ type: "text" }, (textField) => (
+      <div className={styles.fieldGroup}>
+        <Text as="label" htmlFor={fieldName} className={styles.fieldLabel}>
+          {textField.title}
+        </Text>
+        <TextInput
+          id={fieldName}
+          value={stringValue}
+          onChange={(e) => onChange(fieldName, e.target.value)}
+          placeholder={textField.title}
+          type={InputType.text}
+          scale
+        />
+      </div>
+    ))
+    .exhaustive();
 };
 
 export default ExternalDbField;

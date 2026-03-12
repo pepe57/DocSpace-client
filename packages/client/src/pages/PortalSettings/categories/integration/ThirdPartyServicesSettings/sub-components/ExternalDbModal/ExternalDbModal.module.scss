@@ -62,7 +62,11 @@
     }
 
     input[type="number"] {
-      -webkit-appearance: none;
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
       -moz-appearance: textfield;
       appearance: none;
     }

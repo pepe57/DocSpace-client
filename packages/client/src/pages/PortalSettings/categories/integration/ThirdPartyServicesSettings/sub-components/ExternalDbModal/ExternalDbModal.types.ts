@@ -26,6 +26,11 @@
 
 export type DatabaseType = "mysql" | "sqlite";
 
+export type ConsumerPropNumber = {
+  type: "number";
+  value: number;
+};
+
 export interface ConsumerPropSelect {
   type: "select";
   value: string;
@@ -58,6 +63,7 @@ export type ConsumerProp = BaseConsumerProp &
     | ConsumerPropSelect
     | ConsumerPropText
     | ConsumerPropPassword
+    | ConsumerPropNumber
   );
 
 export interface SelectedConsumer {

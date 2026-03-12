@@ -76,6 +76,9 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
         .with({ type: P.union("text", "password") }, () => {
           defaults[name] = prop.value ?? "";
         })
+        .with({ type: "number" }, () => {
+          defaults[name] = Number(prop.value);
+        })
         .with({ type: "toggle" }, () => {
           defaults[name] = Boolean(prop.value);
         })
