@@ -36,13 +36,9 @@ import {
   uploadChunkParallel,
 } from "@docspace/shared/api/files";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { createChunks, runWithConcurrency } from "@docspace/ui-kit/uploader";
 
 import { FormsSection } from "@/types/forms";
-
-import {
-  createChunks,
-  runWithConcurrency,
-} from "../../uploader/_utils/upload";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import useFormsData from "./useFormsData";
@@ -85,8 +81,7 @@ export default function useFolderActions() {
       if (!folderId) return;
 
       const chunkSize =
-        formsSettingsStore.filesSettings?.chunkUploadSize ??
-        DEFAULT_CHUNK_SIZE;
+        formsSettingsStore.filesSettings?.chunkUploadSize ?? DEFAULT_CHUNK_SIZE;
       const maxThreads =
         formsSettingsStore.filesSettings?.maxUploadThreadCount ??
         DEFAULT_UPLOAD_THREADS;
@@ -94,7 +89,7 @@ export default function useFolderActions() {
       const fileArray = Array.from(files);
 
       try {
-        await runWithConcurrency(fileArray, 2, async (file) => {
+        await runWithConcurrency(fileArray, 2, async (file: File) => {
           const session = await startUploadSession(
             folderId,
             file.name,
@@ -107,14 +102,18 @@ export default function useFolderActions() {
 
           const chunks = createChunks(file, chunkSize);
 
-          await runWithConcurrency(chunks, maxThreads, async (chunk) => {
-            await uploadChunkParallel(
-              folderId,
-              session.id,
-              chunk.index,
-              chunk.data,
-            );
-          });
+          await runWithConcurrency(
+            chunks,
+            maxThreads,
+            async (chunk: { index: number; data: FormData; size: number }) => {
+              await uploadChunkParallel(
+                folderId,
+                session.id,
+                chunk.index,
+                chunk.data,
+              );
+            },
+          );
 
           await finalizeUploadSession(folderId, session.id);
         });
