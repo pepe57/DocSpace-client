@@ -48,6 +48,7 @@ import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsUserStore } from "../_store/FormsUserStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
+import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import FormsLayout from "../_components/forms-layout";
 
 type FormsPageProps = {
@@ -79,6 +80,7 @@ function FormsPage({
   const formsListStore = useFormsListStore();
   const formsUserStore = useFormsUserStore();
   const formsAiAgentStore = useFormsAiAgentStore();
+  const formsDbSettingsStore = useFormsDbSettingsStore();
   const filesSettingsStore = useFilesSettingsStore();
   const settingsStore = useSettingsStore();
   const [isReady, setIsReady] = React.useState(false);
@@ -121,6 +123,14 @@ function FormsPage({
         );
       }
 
+      const current = initialFolderData.current as Record<string, unknown>;
+      formsDbSettingsStore.setCollectXlsx(
+        Boolean(current.saveFormAsXLSX),
+      );
+      formsDbSettingsStore.setSendToDb(
+        Boolean(current.sendFormToExternalDB),
+      );
+
       const thumbIds = files
         .filter(
           (f) =>
@@ -148,6 +158,7 @@ function FormsPage({
     formsListStore,
     formsUserStore,
     formsAiAgentStore,
+    formsDbSettingsStore,
     filesSettingsStore,
     settingsStore,
   ]);
