@@ -118,6 +118,10 @@ export default function FilesSelectorClient({
 
   useDocumentTitle("FileSelector");
 
+  useEffect(() => {
+    frameCallEvent({ event: "onAppReady" });
+  }, []);
+
   const convertToEditorType = (type: FileType) => {
     switch (type) {
       case FileType.Document:
