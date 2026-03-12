@@ -26,29 +26,7 @@
 
 export type DatabaseType = "mysql" | "sqlite";
 
-export type ConsumerPropNumber = {
-  type: "number";
-  value: number;
-};
-
-export interface ConsumerPropSelect {
-  type: "select";
-  value: string;
-  options: string[];
-}
-export interface ConsumerPropText {
-  type: "text";
-  value: string;
-}
-
-export interface ConsumerPropPassword {
-  type: "password";
-  value: string;
-}
-export interface ConsumerPropToggle {
-  type: "toggle";
-  value: boolean;
-}
+export type ValueType = string | number | boolean;
 
 export type BaseConsumerProp = {
   name: string;
@@ -57,14 +35,38 @@ export type BaseConsumerProp = {
   dependsOnValue?: string;
 };
 
-export type ConsumerProp = BaseConsumerProp &
-  (
-    | ConsumerPropToggle
-    | ConsumerPropSelect
-    | ConsumerPropText
-    | ConsumerPropPassword
-    | ConsumerPropNumber
-  );
+export interface ConsumerPropNumber extends BaseConsumerProp {
+  type: "number";
+  value: number;
+}
+
+export interface ConsumerPropSelect extends BaseConsumerProp {
+  type: "select";
+  value: string;
+  options: string[];
+}
+
+export interface ConsumerPropText extends BaseConsumerProp {
+  type: "text";
+  value: string;
+}
+
+export interface ConsumerPropPassword extends BaseConsumerProp {
+  type: "password";
+  value: string;
+}
+
+export interface ConsumerPropToggle extends BaseConsumerProp {
+  type: "toggle";
+  value: boolean;
+}
+
+export type ConsumerProp =
+  | ConsumerPropToggle
+  | ConsumerPropSelect
+  | ConsumerPropText
+  | ConsumerPropPassword
+  | ConsumerPropNumber;
 
 export interface SelectedConsumer {
   name: string;
@@ -76,17 +78,14 @@ export interface SelectedConsumer {
   props: ConsumerProp[];
 }
 
-// Union type для формы с конкретными полями
-export type ExternalDbFormData = {
-  databaseType: "mysql" | "sqlite";
-  host?: string;
-  port?: string;
-  databaseName?: string;
-  user?: string;
-  password?: string;
-  useSsl?: boolean;
-  sqliteFilePath?: string;
-};
+export interface ExternalDbFieldProps {
+  field: ConsumerProp;
+  value: ValueType;
+  onChange: (name: string, value: ValueType) => void;
+}
+
+// Dynamic form data type that supports any field from consumer props
+export type ExternalDbFormData = Record<string, ValueType>;
 
 export interface SupportLinksProps {
   feedbackAndSupportUrl?: string;
@@ -95,8 +94,8 @@ export interface SupportLinksProps {
 
 export interface ExternalDbModalProps extends SupportLinksProps {
   visible: boolean;
-  onClose: () => void;
-  onSave: (data: Record<string, string | boolean>) => Promise<void>;
+  onClose: VoidFunction;
+  onSave: (data: Record<string, ValueType>) => Promise<void>;
   selectedConsumer: SelectedConsumer;
   isLoading?: boolean;
   t: (key: string, options?: Record<string, unknown>) => string;

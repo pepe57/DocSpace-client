@@ -29,8 +29,8 @@ import type { ConsumerProp, ExternalDbFormData } from "./ExternalDbModal.types";
 export const filterRelevantFields = (
   formData: ExternalDbFormData,
   visibleFields: ConsumerProp[],
-): Record<string, string | boolean> => {
-  const filtered: Record<string, string | boolean> = {};
+): ExternalDbFormData => {
+  const filtered: ExternalDbFormData = {};
 
   visibleFields.forEach((field) => {
     const value = formData[field.name as keyof ExternalDbFormData];

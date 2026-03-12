@@ -34,6 +34,8 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components";
+import { testExternalDbConnection } from "@docspace/shared/api/settings";
 
 import styles from "./ExternalDbModal.module.scss";
 import type {
@@ -43,12 +45,10 @@ import type {
 } from "./ExternalDbModal.types";
 import ExternalDbField from "./ExternalDbField";
 import SupportLinks from "./SupportLinks";
-import { testExternalDbConnection } from "@docspace/shared/api/settings";
 import {
   filterRelevantFields,
   getFieldValidationRules,
 } from "./ExternalDbField.utils";
-import { toastr } from "@docspace/ui-kit/components";
 
 const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
   visible,
@@ -63,7 +63,7 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
   const [connected, setConnected] = useState<boolean | null>(null);
   const [isTesting, setIsTesting] = useState<boolean>(false);
 
-  const getDefaultValues = useMemo((): Record<
+  const defaultValues = useMemo((): Record<
     string,
     string | boolean | number
   > => {
@@ -97,7 +97,7 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
     watch,
     formState: { isValid },
   } = useForm<ExternalDbFormData>({
-    defaultValues: getDefaultValues,
+    defaultValues,
     mode: "onChange",
   });
 
@@ -132,7 +132,6 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
       if (error) toastr.error(error);
       setConnected(success);
     } catch (error) {
-      console.error("Test connection error:", error);
       toastr.error(error as Error);
     } finally {
       setIsTesting(false);
@@ -144,7 +143,6 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
       const filteredData = filterRelevantFields(data, fieldsToRender);
       await onSave(filteredData);
     } catch (error) {
-      console.error("Save error:", error);
       toastr.error(error as Error);
     }
   };
@@ -176,7 +174,7 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
               render={({ field }) => (
                 <ExternalDbField
                   field={fieldConfig}
-                  value={field.value ?? ""}
+                  value={field.value}
                   onChange={(_, value) => field.onChange(value)}
                 />
               )}

@@ -31,16 +31,10 @@ import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { Text } from "@docspace/ui-kit/components/text";
-
-import styles from "./ExternalDbModal.module.scss";
-import { ConsumerProp } from "./ExternalDbModal.types";
 import { Checkbox } from "@docspace/ui-kit/components";
 
-interface ExternalDbFieldProps {
-  field: ConsumerProp;
-  value: string | boolean;
-  onChange: (name: string, value: string | boolean | number) => void;
-}
+import styles from "./ExternalDbModal.module.scss";
+import type { ExternalDbFieldProps } from "./ExternalDbModal.types";
 
 const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
   field,
@@ -48,7 +42,6 @@ const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
   onChange,
 }) => {
   const fieldName = field.name;
-  const stringValue = typeof value === "string" ? value : String(value);
 
   return match(field)
     .with({ type: "select" }, (selectField) => (
@@ -60,8 +53,8 @@ const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
             label: opt,
           }))}
           selectedOption={{
-            key: stringValue,
-            label: stringValue,
+            key: String(value),
+            label: String(value),
           }}
           onSelect={(option) => onChange(fieldName, String(option.key))}
           scaled
@@ -76,7 +69,7 @@ const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
         <PasswordInput
           simpleView
           id={fieldName}
-          inputValue={stringValue}
+          inputValue={String(value)}
           onChange={(e) => onChange(fieldName, e.target.value)}
           placeholder={passwordField.title}
           scale
@@ -101,7 +94,7 @@ const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
         </Text>
         <TextInput
           id={fieldName}
-          value={stringValue}
+          value={String(value)}
           onChange={(e) => onChange(fieldName, e.target.valueAsNumber)}
           placeholder={textField.title}
           type={InputType.number}
@@ -116,7 +109,7 @@ const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
         </Text>
         <TextInput
           id={fieldName}
-          value={stringValue}
+          value={String(value)}
           onChange={(e) => onChange(fieldName, e.target.value)}
           placeholder={textField.title}
           type={InputType.text}
