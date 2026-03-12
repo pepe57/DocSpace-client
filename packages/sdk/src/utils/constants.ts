@@ -35,10 +35,6 @@ export const PATHNAME_HEADER = "x-pathname";
 export const PUBLIC_ROOM_TITLE_HEADER = "x-public-room-title";
 
 export const ROOM_ID_HEADER = "x-sdk-config-room-id";
-export const MY_FORMS_FOLDER_HEADER = "x-sdk-config-my-forms-folder";
-export const FORMS_TO_FILL_FOLDER_HEADER = "x-sdk-config-forms-to-fill-folder";
-export const COMPLETED_FORMS_FOLDER_HEADER =
-  "x-sdk-config-completed-forms-folder";
 export const REQUEST_TOKEN_HEADER = "x-sdk-config-request-token";
 
 export const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;

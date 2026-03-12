@@ -39,7 +39,11 @@ import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import styles from "./FormsEditor.module.scss";
 
-const FormsEditor = () => {
+type FormsEditorProps = {
+  onNavigatedAway?: () => void;
+};
+
+const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
   const { t } = useTranslation(["Common"]);
   const { editingFile, editorAction, closeEditor, setActiveSection } =
     useFormsNavigationStore();
@@ -61,38 +65,43 @@ const FormsEditor = () => {
     const params = new URLSearchParams();
     params.set("fileId", editingFile.id.toString());
     params.append("action", editorAction);
-    // Doceditor authenticates via the `share` query parameter on the
-    // initial HTTP request (cross-origin, no cookie access).
-    // referrerPolicy="no-referrer" on the iframe prevents the token
-    // from leaking via Referrer headers to third-party resources.
     if (requestToken) params.append("share", requestToken);
 
     return combineUrl(editorOrigin, `/doceditor?${params.toString()}`);
   }, [editingFile, editorAction, requestToken, editorOrigin]);
 
   const handleFormCompleted = React.useCallback(() => {
-    closeEditor();
     setActiveSection(FormsSection.CompletedForms);
-  }, [closeEditor, setActiveSection]);
+  }, [setActiveSection]);
 
   const checkCompletedUrl = React.useCallback(() => {
     try {
       const href = iframeRef.current?.contentWindow?.location.href;
-      if (href?.includes("completed-form")) {
+      if (!href) return false;
+
+      if (href.includes("completed-form")) {
         handleFormCompleted();
         return true;
       }
+
+      if (
+        isIframeLoaded &&
+        !href.includes("/doceditor") &&
+        !href.includes("about:blank")
+      ) {
+        onNavigatedAway?.();
+        return true;
+      }
     } catch {
-      // cross-origin — ignore
+      // ignore
     }
     return false;
-  }, [handleFormCompleted]);
+  }, [handleFormCompleted, isIframeLoaded, onNavigatedAway]);
 
   React.useEffect(() => {
     setIsIframeLoaded(false);
   }, [editingFile?.id]);
 
-  // Fallback: poll iframe URL for same-origin completion page
   React.useEffect(() => {
     if (!editingFile) return;
 
@@ -100,7 +109,6 @@ const FormsEditor = () => {
     return () => clearInterval(interval);
   }, [editingFile, checkCompletedUrl]);
 
-  // Primary: listen for postMessage from doceditor
   React.useEffect(() => {
     if (!editingFile) return;
 

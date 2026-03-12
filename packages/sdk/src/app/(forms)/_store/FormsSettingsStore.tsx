@@ -29,23 +29,21 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import type { TFilesSettings } from "@docspace/shared/api/files/types";
+import type {
+  TFilesSettings,
+  TFolderSecurity,
+} from "@docspace/shared/api/files/types";
 
 type TFormsConfig = {
   roomId: string | number;
-  myFormsFolderId: string | number;
-  formsToFillFolderId: string | number;
-  completedFormsFolderId: string | number;
   requestToken: string;
 };
 
 class FormsSettingsStore {
   roomId: string | number = "";
-  myFormsFolderId: string | number = "";
-  formsToFillFolderId: string | number = "";
-  completedFormsFolderId: string | number = "";
   requestToken: string = "";
   filesSettings: TFilesSettings | null = null;
+  folderSecurity: TFolderSecurity | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -53,19 +51,22 @@ class FormsSettingsStore {
 
   setConfig = (config: TFormsConfig) => {
     this.roomId = config.roomId;
-    this.myFormsFolderId = config.myFormsFolderId;
-    this.formsToFillFolderId = config.formsToFillFolderId;
-    this.completedFormsFolderId = config.completedFormsFolderId;
     this.requestToken = config.requestToken;
   };
 
   setFilesSettings = (settings: TFilesSettings) => {
     this.filesSettings = settings;
   };
+
+  setFolderSecurity = (security: TFolderSecurity) => {
+    this.folderSecurity = security;
+  };
 }
 
 export const FormsSettingsStoreContext =
-  React.createContext<FormsSettingsStore>(new FormsSettingsStore());
+  React.createContext<FormsSettingsStore>(
+    null as unknown as FormsSettingsStore,
+  );
 
 export const FormsSettingsStoreContextProvider = ({
   children,

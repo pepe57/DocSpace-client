@@ -29,22 +29,22 @@
 import React from "react";
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { loadDbConfig, loadRoomExternalDb } from "../_api/dbSettings";
-import { loadAgentSettings, tokenToHash } from "../_api/aiAgentSettings";
+import { loadDbConfig, loadRoomFormSettings } from "../_api/dbSettings";
+import { tokenToHash } from "../_api/aiAgentSettings";
 
-export type DatabaseType = "MySQL" | "PostgreSQL";
+export type DatabaseType = "MySQL";
 
-export type SettingsLevel = "CategoryList" | "ConnectDatabase" | "AIAgent";
+export type SettingsLevel = "CategoryList" | "ConnectDatabase";
 
 const DEFAULT_PORTS: Record<DatabaseType, string> = {
   MySQL: "3306",
-  PostgreSQL: "5432",
 };
 
 class FormsDbSettingsStore {
   isPanelVisible = false;
   currentLevel: SettingsLevel = "CategoryList";
 
+  collectXlsx = false;
   sendToDb = false;
 
   databaseType: DatabaseType = "MySQL";
@@ -57,13 +57,6 @@ class FormsDbSettingsStore {
 
   isSaving = false;
   isTesting = false;
-
-  // AI Agent settings
-  aiAgentEnabled = false;
-  aiAgentId: number | null = null;
-  aiAgentName = "";
-  aiAutoSyncKnowledge = true;
-  isAgentSelectorVisible = false;
 
   // Per-user localStorage key suffix
   userHash: string | undefined = undefined;
@@ -81,28 +74,25 @@ class FormsDbSettingsStore {
 
   fetchConfig = async (roomId: string | number) => {
     try {
-      const [props, roomEnabled] = await Promise.all([
+      const [props, roomSettings] = await Promise.all([
         loadDbConfig(),
-        loadRoomExternalDb(roomId),
+        loadRoomFormSettings(roomId),
       ]);
-
-      const agentSettings = loadAgentSettings(roomId, this.userHash);
 
       runInAction(() => {
         if (props) {
           this.loadFromConfig(props);
         }
-        this.sendToDb = roomEnabled;
-        if (agentSettings) {
-          this.aiAgentEnabled = agentSettings.agentId != null;
-          this.aiAgentId = agentSettings.agentId;
-          this.aiAgentName = agentSettings.agentName;
-          this.aiAutoSyncKnowledge = agentSettings.autoSyncKnowledge;
-        }
+        this.sendToDb = roomSettings.sendFormToExternalDB;
+        this.collectXlsx = roomSettings.saveFormAsXLSX;
       });
     } catch {
       // ignore — use defaults
     }
+  };
+
+  setCollectXlsx = (value: boolean) => {
+    this.collectXlsx = value;
   };
 
   setSendToDb = (value: boolean) => {
@@ -155,38 +145,6 @@ class FormsDbSettingsStore {
     this.isTesting = value;
   };
 
-  setAiAgentEnabled = (value: boolean) => {
-    this.aiAgentEnabled = value;
-    if (value && !this.aiAgentId) {
-      this.isAgentSelectorVisible = true;
-    }
-    if (!value) {
-      this.aiAgentId = null;
-      this.aiAgentName = "";
-    }
-  };
-
-  setAiAgent = (id: number | null, name: string) => {
-    this.aiAgentId = id;
-    this.aiAgentName = name;
-    this.isAgentSelectorVisible = false;
-  };
-
-  openAgentSelector = () => {
-    this.isAgentSelectorVisible = true;
-  };
-
-  closeAgentSelector = () => {
-    this.isAgentSelectorVisible = false;
-    if (!this.aiAgentId) {
-      this.aiAgentEnabled = false;
-    }
-  };
-
-  setAiAutoSyncKnowledge = (value: boolean) => {
-    this.aiAutoSyncKnowledge = value;
-  };
-
   get formData() {
     return {
       databaseType: this.databaseType,
@@ -199,14 +157,6 @@ class FormsDbSettingsStore {
     };
   }
 
-  get aiAgentFormData() {
-    return {
-      agentId: this.aiAgentId,
-      agentName: this.aiAgentName,
-      autoSyncKnowledge: this.aiAutoSyncKnowledge,
-    };
-  }
-
   resetForm = () => {
     this.sendToDb = false;
     this.databaseType = "MySQL";
@@ -216,11 +166,6 @@ class FormsDbSettingsStore {
     this.user = "";
     this.password = "";
     this.useSsl = false;
-    this.aiAgentEnabled = false;
-    this.aiAgentId = null;
-    this.aiAgentName = "";
-    this.aiAutoSyncKnowledge = true;
-    this.isAgentSelectorVisible = false;
   };
 
   loadFromConfig = (props: { name: string; value: string }[]) => {
@@ -229,11 +174,7 @@ class FormsDbSettingsStore {
 
       switch (prop.name) {
         case "databaseType":
-          if (prop.value.toLowerCase() === "postgresql") {
-            this.databaseType = "PostgreSQL";
-          } else {
-            this.databaseType = "MySQL";
-          }
+          this.databaseType = "MySQL";
           break;
         case "dbHost":
           this.host = prop.value;
@@ -261,7 +202,9 @@ class FormsDbSettingsStore {
 }
 
 export const FormsDbSettingsStoreContext =
-  React.createContext<FormsDbSettingsStore>(new FormsDbSettingsStore());
+  React.createContext<FormsDbSettingsStore>(
+    null as unknown as FormsDbSettingsStore,
+  );
 
 export const FormsDbSettingsStoreContextProvider = ({
   children,

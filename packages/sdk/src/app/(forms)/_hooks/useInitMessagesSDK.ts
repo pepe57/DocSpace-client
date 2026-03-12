@@ -33,11 +33,14 @@ import type { TMessage } from "@docspace/shared/api/ai/types";
 
 const cacheChatId = new Map<string, string>();
 
+const cacheKey = (roomId: string | number) => `chat_${roomId}`;
+
 const useInitMessagesSDK = (roomId: string | number) => {
   const [messages, setMessages] = React.useState<TMessage[]>([]);
   const [chatId, setChatId] = React.useState("");
   const [total, setTotal] = React.useState(0);
   const activeRef = React.useRef(true);
+  const roomIdRef = React.useRef(roomId);
 
   React.useEffect(() => {
     activeRef.current = true;
@@ -51,20 +54,24 @@ const useInitMessagesSDK = (roomId: string | number) => {
     setMessages([]);
     setTotal(0);
     setChatId("");
-    cacheChatId.delete("chat");
   }, []);
 
   React.useEffect(() => {
-    if (!roomId) cacheChatId.delete("chat");
-  }, [roomId]);
+    roomIdRef.current = roomId;
+    if (!roomId) {
+      resetChat();
+    }
+  }, [roomId, resetChat]);
 
   React.useEffect(() => {
     const onCacheChat = (e: Event) => {
       const id = (e as CustomEvent<{ chatId: string }>).detail.chatId;
+      const key = cacheKey(roomIdRef.current);
 
       if (id) {
-        cacheChatId.set("chat", id);
+        cacheChatId.set(key, id);
       } else {
+        cacheChatId.delete(key);
         resetChat();
       }
     };
@@ -77,19 +84,19 @@ const useInitMessagesSDK = (roomId: string | number) => {
   }, [resetChat]);
 
   const initMessages = React.useCallback(async () => {
+    const currentRoomId = roomIdRef.current;
     try {
-      const currChatId = cacheChatId.get("chat");
+      const currChatId = cacheChatId.get(cacheKey(currentRoomId));
 
       if (!currChatId) {
         resetChat();
         return;
       }
 
-      cacheChatId.set("chat", currChatId);
-
       const { items, total: t } = await getChatMessages(currChatId, 0);
 
-      if (!activeRef.current) return;
+      if (!activeRef.current || roomIdRef.current !== currentRoomId)
+        return;
 
       const reversedItems = items.reverse();
 

@@ -28,9 +28,13 @@
 
 import { useCallback } from "react";
 
-import api from "@docspace/shared/api";
+import {
+  deleteFile,
+  formRoleMapping,
+  manageFormFilling,
+} from "@docspace/shared/api/files";
+import { FormFillingManageAction } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { copyShareLink } from "@docspace/shared/utils/copy";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TTranslation } from "@docspace/shared/types";
@@ -39,13 +43,17 @@ import type { EditorAction } from "../_store/FormsNavigationStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
+import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
+import useFormsData from "./useFormsData";
 
 type UseFormsActionsProps = { t: TTranslation };
 
 export default function useFormsActions({ t }: UseFormsActionsProps) {
   const { sdkConfig } = useSDKConfig();
   const { openEditor } = useFormsNavigationStore();
+  const formsListStore = useFormsListStore();
+  const { fetchSection } = useFormsData();
 
   const openForm = useCallback(
     (file: TFile, action: EditorAction = "edit") => {
@@ -62,39 +70,56 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
     [sdkConfig?.events?.onFileManagerClick, openEditor],
   );
 
-  const shareForm = useCallback(
-    async (fileId: number) => {
-      try {
-        const itemLink = await api.files.getFileLink(fileId);
-        copyShareLink(itemLink.sharedTo.shareLink);
-        toastr.success(t("Common:LinkCopySuccess"));
-      } catch {
-        toastr.error(t("Common:ErrorOccurred"));
-      }
+  const downloadFile = useCallback(
+    (fileId: number) => {
+      const url = `/filehandler.ashx?action=download&fileid=${fileId}`;
+      window.open(url, "_blank");
     },
-    [t],
+    [],
   );
 
-  const downloadFile = useCallback((fileId: number) => {
-    frameCallEvent({
-      event: "onDownloadFile",
-      data: { fileId },
-    });
-  }, []);
+  const deleteFromList = useCallback(
+    async (fileId: number) => {
+      try {
+        await deleteFile(fileId, false, true);
+        const newItems = formsListStore.items.filter((f) => f.id !== fileId);
+        formsListStore.setItems(newItems, newItems.length);
+      } catch {
+        toastr.error(t("Common:Error"));
+      }
+    },
+    [formsListStore, t],
+  );
 
-  const stopFilling = useCallback((fileId: number) => {
-    frameCallEvent({
-      event: "onStopFilling",
-      data: { fileId },
-    });
-  }, []);
+  const startFilling = useCallback(
+    async (file: TFile) => {
+      try {
+        await manageFormFilling(file.id, FormFillingManageAction.Start);
+        await fetchSection();
+      } catch {
+        toastr.error(t("Common:Error"));
+      }
+    },
+    [t, fetchSection],
+  );
 
-  const deleteFromList = useCallback((fileId: number) => {
-    frameCallEvent({
-      event: "onDeleteFromList",
-      data: { fileId },
-    });
-  }, []);
+  const resetFilling = useCallback(
+    async (file: TFile) => {
+      try {
+        await formRoleMapping({ formId: file.id, roles: [] });
+        await fetchSection();
+      } catch {
+        toastr.error(t("Common:Error"));
+      }
+    },
+    [t, fetchSection],
+  );
 
-  return { openForm, shareForm, downloadFile, stopFilling, deleteFromList };
+  return {
+    openForm,
+    downloadFile,
+    deleteFromList,
+    startFilling,
+    resetFilling,
+  };
 }

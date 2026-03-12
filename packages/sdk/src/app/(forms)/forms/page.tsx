@@ -32,13 +32,14 @@ import type {
   TFilesSettings,
   TGetFolder,
 } from "@docspace/shared/api/files/types";
+import type { TUser } from "@docspace/shared/api/people/types";
+import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
 
 import { getFilesSettings } from "@/api/files";
 import { getFormsFolder } from "@/api/forms";
+import { getSelf } from "@/api/people";
+import { getDefaultProvider } from "@/api/ai";
 import {
-  MY_FORMS_FOLDER_HEADER,
-  FORMS_TO_FILL_FOLDER_HEADER,
-  COMPLETED_FORMS_FOLDER_HEADER,
   REQUEST_TOKEN_HEADER,
   ROOM_ID_HEADER,
   PAGE_COUNT,
@@ -55,14 +56,6 @@ export default async function Forms({
   const params = await searchParams;
 
   const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
-  const myFormsFolderId =
-    hdrs.get(MY_FORMS_FOLDER_HEADER) || params.myFormsFolderId || "";
-  const formsToFillFolderId =
-    hdrs.get(FORMS_TO_FILL_FOLDER_HEADER) || params.formsToFillFolderId || "";
-  const completedFormsFolderId =
-    hdrs.get(COMPLETED_FORMS_FOLDER_HEADER) ||
-    params.completedFormsFolderId ||
-    "";
   const requestToken =
     hdrs.get(REQUEST_TOKEN_HEADER) || params.requestToken || "";
 
@@ -76,26 +69,34 @@ export default async function Forms({
 
   let filesSettings: TFilesSettings | undefined;
   let initialFolderData: TGetFolder | undefined;
+  let user: TUser | undefined;
+  let defaultProvider: TDefaultProvider | undefined;
 
-  if (myFormsFolderId) {
-    [filesSettings, initialFolderData] = await Promise.all([
-      getFilesSettings(),
-      getFormsFolder(myFormsFolderId, filter, requestToken),
-    ]);
+  if (roomId) {
+    [filesSettings, initialFolderData, user, defaultProvider] =
+      await Promise.all([
+        getFilesSettings(),
+        getFormsFolder(roomId, filter, requestToken),
+        getSelf(),
+        getDefaultProvider(),
+      ]);
   } else {
-    filesSettings = await getFilesSettings();
+    [filesSettings, user, defaultProvider] = await Promise.all([
+      getFilesSettings(),
+      getSelf(),
+      getDefaultProvider(),
+    ]);
   }
 
   return (
     <FormsPage
       roomId={roomId}
-      myFormsFolderId={myFormsFolderId}
-      formsToFillFolderId={formsToFillFolderId}
-      completedFormsFolderId={completedFormsFolderId}
       requestToken={requestToken}
       authToken={authToken}
       filesSettings={filesSettings!}
       initialFolderData={initialFolderData}
+      user={user}
+      defaultProvider={defaultProvider}
     />
   );
 }

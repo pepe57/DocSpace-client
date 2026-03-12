@@ -156,7 +156,4 @@ export type TFrameConfig = {
   withBreadCrumbs?: boolean;
   withSearch?: boolean;
   withSubtitle?: boolean;
-  myFormsFolderId?: string | number;
-  formsToFillFolderId?: string | number;
-  completedFormsFolderId?: string | number;
 };

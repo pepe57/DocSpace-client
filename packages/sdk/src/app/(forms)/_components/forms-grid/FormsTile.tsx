@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
@@ -47,6 +47,9 @@ import useFormsActions from "../../_hooks/useFormsActions";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
+import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import FormStatusBadge from "./FormStatusBadge";
+import styles from "./FormsTile.module.scss";
 
 type FormsTileProps = {
   item: TFileItem;
@@ -61,6 +64,39 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
   const { getContextMenuModel } = useFormsContextMenu();
   const { items } = useFormsListStore();
   const { activeSection } = useFormsNavigationStore();
+  const { requestToken } = useFormsSettingsStore();
+
+  const [blobThumbnail, setBlobThumbnail] = useState("");
+
+  useEffect(() => {
+    if (!item.thumbnailUrl || item.providerItem) return;
+
+    const url = item.thumbnailUrl.replace(/^https?:\/\/[^/]+/, "");
+    const headers: Record<string, string> = {};
+    if (requestToken) {
+      headers.Authorization = requestToken;
+    }
+
+    let revoked = false;
+    fetch(url, { headers, credentials: "include" })
+      .then((res) => {
+        if (!res.ok) throw new Error(`${res.status}`);
+        return res.blob();
+      })
+      .then((blob) => {
+        if (revoked) return;
+        setBlobThumbnail(URL.createObjectURL(blob));
+      })
+      .catch(() => {});
+
+    return () => {
+      revoked = true;
+      setBlobThumbnail((prev) => {
+        if (prev) URL.revokeObjectURL(prev);
+        return "";
+      });
+    };
+  }, [item.thumbnailUrl, item.providerItem, requestToken]);
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
 
@@ -78,13 +114,13 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
             file.security?.FillForms &&
             file.viewAccessibility?.WebRestrictedEditing;
           const canEdit =
-            file.security?.EditForm && !file.startFilling && file.isForm;
+            file.security?.Edit && file.viewAccessibility?.WebEdit;
 
           if (canFill) return "fill" as const;
           if (canEdit) return "edit" as const;
           return "view" as const;
         }
-        case FormsSection.FormsToFill: {
+        case FormsSection.InProgress: {
           const canFill =
             file.security?.FillForms &&
             file.viewAccessibility?.WebRestrictedEditing;
@@ -124,7 +160,7 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
   );
 
   return (
-    <div>
+    <div className={styles.tile}>
       <div className="files-item">
         <FileTile
           item={item}
@@ -140,12 +176,14 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
           getContextModel={() => contextModel}
           tileContextClick={() => {}}
           element={element}
-          badges={undefined}
+          badges={
+            originalFile ? (
+              <FormStatusBadge file={originalFile} />
+            ) : undefined
+          }
           thumbnailClick={openItem}
           temporaryIcon={temporaryIcon}
-          thumbnail={
-            !item.providerItem && item.thumbnailUrl ? item.thumbnailUrl : ""
-          }
+          thumbnail={blobThumbnail}
           contentElement={undefined}
           forwardRef={tileRef}
         >

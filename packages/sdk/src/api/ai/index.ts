@@ -24,87 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Wrapper — compensates for scroll-body padding-inline-end: 16px
-// Same pattern as EditLinkPanel: withoutPadding + extend right + own padding
-.panelBody {
-  margin-inline-end: -16px;
-  width: calc(100% + 16px);
-}
+import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
+import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
+import { logger } from "@/../logger.mjs";
 
-// Category list
+export async function getDefaultProvider(): Promise<
+  TDefaultProvider | undefined
+> {
+  logger.debug("Start GET /ai/providers/default");
 
-.categoryList {
-  padding: 4px 16px 0;
-}
+  try {
+    const [req] = await createRequest(
+      ["/ai/providers/default"],
+      [["", ""]],
+      "GET",
+    );
+    const res = await fetch(req, { next: { revalidate: 300 } });
 
-.categoryItem {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 0;
-  cursor: pointer;
-  border-bottom: 1px solid var(--modal-dialog-header-border-color);
-
-  &:last-child {
-    border-bottom: none;
-  }
-
-  &:hover {
-    opacity: 0.85;
-  }
-}
-
-.categoryLabel {
-  flex: 1;
-  font-size: 15px;
-  font-weight: 600;
-}
-
-// Connect database form
-
-.toggleBlock {
-  padding: 12px 16px 16px;
-  border-bottom: 1px solid var(--modal-dialog-header-border-color);
-
-  .toggleHeader {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding-bottom: 4px;
-
-    .toggle {
-      margin-inline-start: auto;
-      align-self: center;
-      position: static !important;
-      gap: 0 !important;
+    if (!res.ok) {
+      logger.error(`GET /ai/providers/default failed: ${res.status}`);
+      return;
     }
+
+    const json = await res.json();
+
+    return json.response as TDefaultProvider;
+  } catch (error) {
+    logger.error(`Error in getDefaultProvider: ${error}`);
   }
-}
-
-.formBlock {
-  padding: 16px 16px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.fieldGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.agentRow {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  > :first-child {
-    flex: 1;
-    min-width: 0;
-  }
-}
-
-.testButtonWrapper {
-  padding-top: 4px;
 }

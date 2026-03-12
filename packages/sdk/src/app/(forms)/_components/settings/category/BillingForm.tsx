@@ -24,39 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type {
-  TFileWithOptionalPath,
-  TFileWithOptionalEmptyDir,
-} from "../_types";
+"use client";
 
-export const normalizePath = (path: string) => path.replace(/^\/+/, "").trim();
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-export const isHiddenFilePath = (path: string) => /(^|\/)\.[^\/\.]/g.test(path);
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
-export const getDirPathFromFilePath = (filePath: string) => {
-  const normalized = normalizePath(filePath);
+import styles from "./SettingsPanel.module.scss";
 
-  if (!normalized) return "";
+const PAYMENTS_PATH = "/portal-settings/payments/portal-payments";
 
-  if (normalized.endsWith("/")) {
-    return normalized.replace(/\/+$/, "");
-  }
+const BillingForm = () => {
+  const { t } = useTranslation(["Common"]);
+  const onOpenBilling = React.useCallback(() => {
+    const url = `${window.location.origin}${PAYMENTS_PATH}`;
+    window.open(url, "_blank");
+  }, []);
 
-  const parts = normalized.split("/");
-  if (parts.length <= 1) return "";
-
-  return parts.slice(0, -1).join("/");
+  return (
+    <div className={styles.billingWrapper}>
+      <Text fontSize="22px" fontWeight={600}>
+        Work in progress
+      </Text>
+      <Button
+        primary
+        size={ButtonSize.normal}
+        label={t("Common:OpenBilling")}
+        onClick={onOpenBilling}
+      />
+    </div>
+  );
 };
 
-export const getPathSegments = (dirPath: string) =>
-  normalizePath(dirPath).split("/").filter(Boolean);
-
-export const getFilePath = (file: File) => {
-  const f = file as TFileWithOptionalPath;
-  return typeof f.path === "string" && f.path.length > 0 ? f.path : file.name;
-};
-
-export const isEmptyDirectoryFile = (file: File) => {
-  const f = file as TFileWithOptionalEmptyDir;
-  return f.isEmptyDirectory === true;
-};
+export default BillingForm;

@@ -90,12 +90,14 @@ const DisconnectAccountDialog = ({
 					scale
 					primary
 					onClick={onClickDisconnect}
+					testId="disconnect_account_dialog_submit"
 				/>
 				<Button
 					label={t("Common:CancelButton")}
 					size={ButtonSize.normal}
 					scale
 					onClick={onClose}
+					testId="disconnect_account_dialog_cancel"
 				/>
 			</ModalDialog.Footer>
 		</ModalDialog>

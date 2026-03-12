@@ -24,10 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type TFileWithParentFolderId = File & { parentFolderId?: number };
+"use client";
 
-export type TFileWithOptionalPath = File & { path?: string };
-export type TFileWithOptionalEmptyDir = File & { isEmptyDirectory?: boolean };
-export type TFileWithOptionalLastModifiedDate = File & {
-  lastModifiedDate?: unknown;
+import React from "react";
+import { makeAutoObservable } from "mobx";
+
+import type { TUser } from "@docspace/shared/api/people/types";
+
+class FormsUserStore {
+  user: TUser | null = null;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  setUser = (user: TUser) => {
+    this.user = user;
+  };
+}
+
+export const FormsUserStoreContext = React.createContext<FormsUserStore>(
+  new FormsUserStore(),
+);
+
+export const FormsUserStoreContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const store = React.useMemo(() => new FormsUserStore(), []);
+  return (
+    <FormsUserStoreContext.Provider value={store}>
+      {children}
+    </FormsUserStoreContext.Provider>
+  );
+};
+
+export const useFormsUserStore = () => {
+  return React.useContext(FormsUserStoreContext);
 };

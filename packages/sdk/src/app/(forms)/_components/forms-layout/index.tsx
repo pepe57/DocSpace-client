@@ -44,20 +44,20 @@ import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import useFormsData from "../../_hooks/useFormsData";
-import useNewFormActions from "../../_hooks/useNewFormActions";
-import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
-import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
-import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
+import useFolderActions from "../../_hooks/useFolderActions";
+import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
+import { useFormsUserStore } from "../../_store/FormsUserStore";
 
 import FormsSidebar from "../sidebar";
 import FormsGrid from "../forms-grid";
 import FormsEditor from "../forms-editor";
-import SettingsButton from "../settings-button";
-import SettingsPanel from "../settings-panel";
+import Settings from "../settings";
 import AiChatPanel from "../ai-chat-panel";
 import AiChatButton from "../ai-chat-button";
+import CreateFormDialog from "../create-form-dialog";
 
 import styles from "./FormsLayout.module.scss";
 
@@ -67,110 +67,278 @@ type FormsLayoutProps = {
 
 const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const { t } = useTranslation(["Common"]);
-  const { activeSection, editingFile, closeEditor } = useFormsNavigationStore();
+  const {
+    activeSection,
+    editingFile,
+    closeEditor,
+    completedFolder,
+    goBackToCompletedRoot,
+    inProgressFolder,
+    goBackToInProgressRoot,
+  } = useFormsNavigationStore();
   const formsListStore = useFormsListStore();
-  const { items } = formsListStore;
-  const { roomId, requestToken } = useFormsSettingsStore();
+  const { items, folders } = formsListStore;
+  const formsSettingsStore = useFormsSettingsStore();
+  const { roomId } = formsSettingsStore;
   const { fetchSection, fetchMore } = useFormsData();
-  const { onChooseFromPersonal, onCreateFromDocx, onCreateFromTemplate } =
-    useNewFormActions();
+  const {
+    onUploadFiles,
+    onCreateBlankForm,
+    isCreateFormDialogVisible,
+    isCreatingForm,
+    onCloseCreateFormDialog,
+    onSaveCreateForm,
+  } = useFolderActions();
   const { currentDeviceType } = useDeviceType();
   const aiStore = useFormsAiAgentStore();
+  const { user } = useFormsUserStore();
   const prevSection = React.useRef(activeSection);
+  const prevCompletedFolder = React.useRef(completedFolder);
+  const prevInProgressFolder = React.useRef(inProgressFolder);
   const fetchIdRef = React.useRef(0);
   const [contentVisible, setContentVisible] = React.useState(true);
   const [isSectionLoading, setIsSectionLoading] = React.useState(false);
 
   const isMyForms = activeSection === FormsSection.MyForms;
+  const isSettings = activeSection === FormsSection.Settings;
   const isEditing = Boolean(editingFile);
+  const isInsideCompletedFolder =
+    activeSection === FormsSection.CompletedForms && !!completedFolder;
+  const isInsideInProgressFolder =
+    activeSection === FormsSection.InProgress && !!inProgressFolder;
+  const activeSubfolder = completedFolder ?? inProgressFolder;
 
   React.useEffect(() => {
-    if (roomId) {
-      aiStore.loadAgentForRoom(roomId, requestToken);
+    if (roomId && user?.id) {
+      aiStore.initForRoom(roomId, user.id);
     }
-  }, [roomId, requestToken, aiStore]);
+  }, [roomId, user?.id, aiStore]);
 
   React.useEffect(() => {
-    if (prevSection.current !== activeSection) {
+    const sectionChanged = prevSection.current !== activeSection;
+    const folderChanged = prevCompletedFolder.current !== completedFolder;
+    const inProgressFolderChanged =
+      prevInProgressFolder.current !== inProgressFolder;
+
+    if (sectionChanged || folderChanged || inProgressFolderChanged) {
+      prevSection.current = activeSection;
+      prevCompletedFolder.current = completedFolder;
+      prevInProgressFolder.current = inProgressFolder;
+
+      if (activeSection === FormsSection.Settings) {
+        setContentVisible(true);
+        setIsSectionLoading(false);
+        return;
+      }
+
       setContentVisible(false);
       setIsSectionLoading(true);
-      prevSection.current = activeSection;
 
       const currentFetchId = ++fetchIdRef.current;
 
-      fetchSection(activeSection).then(() => {
+      fetchSection(activeSection).then(async () => {
         if (currentFetchId !== fetchIdRef.current) return;
 
         setContentVisible(true);
         setIsSectionLoading(false);
 
-        // Sync completed forms to AI agent KB after data is loaded
         if (
           activeSection === FormsSection.CompletedForms &&
-          formsListStore.items.length > 0
+          completedFolder
         ) {
-          const files = formsListStore.items.map((f) => ({
-            id: f.id,
-            title: f.title,
-          }));
-          aiStore.syncCompletedForms(files);
+          await aiStore.setCurrentFolder(completedFolder.id);
+          if (currentFetchId !== fetchIdRef.current) return;
+
+          if (formsListStore.items.length > 0) {
+            const files = formsListStore.items.map((f) => ({
+              id: f.id,
+              title: f.title,
+            }));
+            aiStore.syncCompletedForms(files);
+          }
+        } else {
+          aiStore.setCurrentFolder(null);
         }
       });
     }
-  }, [activeSection, fetchSection, formsListStore, aiStore]);
+  }, [
+    activeSection,
+    completedFolder,
+    inProgressFolder,
+    fetchSection,
+    formsListStore,
+    aiStore,
+  ]);
 
   const getSectionTitle = React.useCallback(() => {
     switch (activeSection) {
       case FormsSection.MyForms:
         return t("Common:MyForms");
-      case FormsSection.FormsToFill:
-        return t("Common:FormsToFill");
+      case FormsSection.InProgress:
+        return t("Common:InProgress");
       case FormsSection.CompletedForms:
         return t("Common:CompletedForms");
+      case FormsSection.Settings:
+        return t("Common:Settings");
       default:
         return "";
     }
   }, [activeSection, t]);
 
   const navigationItems = React.useMemo(() => {
-    if (!isEditing) return [];
+    if (isEditing && activeSubfolder) {
+      const isCompleted =
+        activeSection === FormsSection.CompletedForms;
+      return [
+        {
+          id: `folder-${activeSubfolder.id}`,
+          title: activeSubfolder.title,
+          isRootRoom: false,
+        },
+        {
+          id: isCompleted ? "completed-root" : "in-progress-root",
+          title: isCompleted
+            ? t("Common:CompletedForms")
+            : t("Common:InProgress"),
+          isRootRoom: true,
+        },
+      ];
+    }
 
-    return [
-      {
-        id: "home",
-        title: getSectionTitle(),
-        isRootRoom: true,
-      },
-    ];
-  }, [isEditing, getSectionTitle]);
+    if (isEditing) {
+      return [
+        {
+          id: "home",
+          title: getSectionTitle(),
+          isRootRoom: true,
+        },
+      ];
+    }
+
+    if (isInsideCompletedFolder) {
+      return [
+        {
+          id: "completed-root",
+          title: t("Common:CompletedForms"),
+          isRootRoom: true,
+        },
+      ];
+    }
+
+    if (isInsideInProgressFolder) {
+      return [
+        {
+          id: "in-progress-root",
+          title: t("Common:InProgress"),
+          isRootRoom: true,
+        },
+      ];
+    }
+
+    return [];
+  }, [
+    isEditing,
+    activeSection,
+    activeSubfolder,
+    isInsideCompletedFolder,
+    isInsideInProgressFolder,
+    getSectionTitle,
+    t,
+  ]);
 
   const getContextOptionsPlus = React.useCallback(() => {
+    const security = formsSettingsStore.folderSecurity;
+    if (!security?.Create) return [];
+
     return [
       {
-        id: "choose-from-personal",
-        key: "choose-from-personal",
-        label: t("Common:ChooseFromPersonalFiles"),
-        icon: FormFileReactSvgUrl,
-        onClick: onChooseFromPersonal,
+        id: "upload-forms",
+        key: "upload-forms",
+        label: t("Common:UploadPDFForm"),
+        icon: ActionsUploadReactSvgUrl,
+        onClick: onUploadFiles,
       },
       {
-        id: "create-from-docx",
-        key: "create-from-docx",
-        label: t("Common:CreateFromDocx"),
-        icon: ActionsDocumentsReactSvgUrl,
-        onClick: onCreateFromDocx,
-      },
-      {
-        id: "create-from-template",
-        key: "create-from-template",
-        label: t("Common:CreateFromTemplate"),
-        icon: FormGalleryReactSvgUrl,
-        onClick: onCreateFromTemplate,
+        id: "create-blank-form",
+        key: "create-blank-form",
+        label: t("Common:NewPDFForm"),
+        icon: FormPlusReactSvgUrl,
+        onClick: onCreateBlankForm,
       },
     ];
-  }, [t, onChooseFromPersonal, onCreateFromDocx, onCreateFromTemplate]);
+  }, [formsSettingsStore.folderSecurity, t, onUploadFiles, onCreateBlankForm]);
+
+  const handleEditorNavigatedAway = React.useCallback(() => {
+    closeEditor();
+    fetchSection();
+  }, [closeEditor, fetchSection]);
+
+  const handleEditorBack = React.useCallback(() => {
+    closeEditor();
+  }, [closeEditor]);
+
+  const handleEditorBreadcrumbClick = React.useCallback(
+    (itemId?: string | number) => {
+      if (itemId === "completed-root") {
+        closeEditor();
+        goBackToCompletedRoot();
+        return;
+      }
+      if (itemId === "in-progress-root") {
+        closeEditor();
+        goBackToInProgressRoot();
+        return;
+      }
+      closeEditor();
+    },
+    [closeEditor, goBackToCompletedRoot, goBackToInProgressRoot],
+  );
 
   const renderHeader = () => {
+    if (isSettings) {
+      return (
+        <div className={styles.headerRow}>
+          <div className={styles.headerNavigation}>
+            <Navigation
+              showText
+              isRootFolder
+              canCreate={false}
+              title={getSectionTitle()}
+              rootRoomTitle=""
+              isDesktop={currentDeviceType === DeviceType.desktop}
+              isFrame
+              navigationItems={[]}
+              getContextOptionsPlus={() => []}
+              getContextOptionsFolder={() => []}
+              onClickFolder={() => {}}
+              isTrashFolder={false}
+              isEmptyPage={false}
+              isEmptyFilesList={false}
+              onBackToParentFolder={() => {}}
+              showRootFolderTitle={false}
+              withLogo=""
+              burgerLogo=""
+              withMenu={false}
+              currentDeviceType={currentDeviceType}
+              titleIcon=""
+              titleIconTooltip=""
+              showNavigationButton={false}
+              isCurrentFolderInfo={false}
+              showTitle
+              isPublicRoom={false}
+              isRoom={false}
+              isInfoPanelVisible={false}
+              toggleInfoPanel={() => {}}
+              onLogoClick={() => {}}
+              hideInfoPanel={() => {}}
+              clearTrash={() => {}}
+              showFolderInfo={() => {}}
+            />
+          </div>
+        </div>
+      );
+    }
+
     if (isEditing) {
       return (
         <div className={styles.headerEditing}>
@@ -185,11 +353,11 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
             navigationItems={navigationItems}
             getContextOptionsPlus={() => []}
             getContextOptionsFolder={() => []}
-            onClickFolder={() => closeEditor()}
+            onClickFolder={handleEditorBreadcrumbClick}
             isTrashFolder={false}
             isEmptyPage={false}
             isEmptyFilesList={false}
-            onBackToParentFolder={() => closeEditor()}
+            onBackToParentFolder={handleEditorBack}
             showRootFolderTitle={false}
             withLogo=""
             burgerLogo=""
@@ -213,6 +381,95 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
       );
     }
 
+    if (isInsideCompletedFolder) {
+      return (
+        <div className={styles.headerRow}>
+          <div className={styles.headerNavigation}>
+            <Navigation
+              showText
+              isRootFolder={false}
+              canCreate={false}
+              title={completedFolder?.title || ""}
+              rootRoomTitle=""
+              isDesktop={currentDeviceType === DeviceType.desktop}
+              isFrame
+              navigationItems={navigationItems}
+              getContextOptionsPlus={() => []}
+              getContextOptionsFolder={() => []}
+              onClickFolder={() => goBackToCompletedRoot()}
+              isTrashFolder={false}
+              isEmptyPage={items.length === 0}
+              isEmptyFilesList={items.length === 0}
+              onBackToParentFolder={() => goBackToCompletedRoot()}
+              showRootFolderTitle={false}
+              withLogo=""
+              burgerLogo=""
+              withMenu={false}
+              currentDeviceType={currentDeviceType}
+              titleIcon=""
+              titleIconTooltip=""
+              showNavigationButton={false}
+              isCurrentFolderInfo={false}
+              showTitle
+              isPublicRoom={false}
+              isRoom={false}
+              isInfoPanelVisible={false}
+              toggleInfoPanel={() => {}}
+              onLogoClick={() => {}}
+              hideInfoPanel={() => {}}
+              clearTrash={() => {}}
+              showFolderInfo={() => {}}
+            />
+          </div>
+          <AiChatButton />
+        </div>
+      );
+    }
+
+    if (isInsideInProgressFolder) {
+      return (
+        <div className={styles.headerRow}>
+          <div className={styles.headerNavigation}>
+            <Navigation
+              showText
+              isRootFolder={false}
+              canCreate={false}
+              title={inProgressFolder?.title || ""}
+              rootRoomTitle=""
+              isDesktop={currentDeviceType === DeviceType.desktop}
+              isFrame
+              navigationItems={navigationItems}
+              getContextOptionsPlus={() => []}
+              getContextOptionsFolder={() => []}
+              onClickFolder={() => goBackToInProgressRoot()}
+              isTrashFolder={false}
+              isEmptyPage={items.length === 0}
+              isEmptyFilesList={items.length === 0}
+              onBackToParentFolder={() => goBackToInProgressRoot()}
+              showRootFolderTitle={false}
+              withLogo=""
+              burgerLogo=""
+              withMenu={false}
+              currentDeviceType={currentDeviceType}
+              titleIcon=""
+              titleIconTooltip=""
+              showNavigationButton={false}
+              isCurrentFolderInfo={false}
+              showTitle
+              isPublicRoom={false}
+              isRoom={false}
+              isInfoPanelVisible={false}
+              toggleInfoPanel={() => {}}
+              onLogoClick={() => {}}
+              hideInfoPanel={() => {}}
+              clearTrash={() => {}}
+              showFolderInfo={() => {}}
+            />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className={styles.headerRow}>
         <div className={styles.headerNavigation}>
@@ -230,8 +487,8 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
             getContextOptionsFolder={() => []}
             onClickFolder={() => {}}
             isTrashFolder={false}
-            isEmptyPage={items.length === 0}
-            isEmptyFilesList={items.length === 0}
+            isEmptyPage={items.length === 0 && folders.length === 0}
+            isEmptyFilesList={items.length === 0 && folders.length === 0}
             onBackToParentFolder={() => {}}
             showRootFolderTitle={false}
             withLogo=""
@@ -254,22 +511,21 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
           />
         </div>
         <AiChatButton />
-        <SettingsButton />
       </div>
     );
   };
 
   const renderBody = () => {
     if (isEditing) {
-      return <FormsEditor />;
+      return <FormsEditor onNavigatedAway={handleEditorNavigatedAway} />;
+    }
+
+    if (activeSection === FormsSection.Settings) {
+      return <Settings />;
     }
 
     if (isSectionLoading) {
-      return (
-        <div className={styles.loaderCenter}>
-          <Loader type={LoaderTypes.track} size="40px" />
-        </div>
-      );
+      return null;
     }
 
     return (
@@ -281,22 +537,39 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     );
   };
 
+  const showLoaderOverlay =
+    isSectionLoading && !isEditing && !isSettings;
+
   return (
     <div className={styles.root}>
       <FormsSidebar />
-      <Section
-        withBodyScroll={!isEditing}
-        withoutFooter={isEditing}
-        settingsStudio={false}
-        viewAs="tile"
-        isEmptyPage={!isEditing && items.length === 0}
-        currentDeviceType={currentDeviceType}
-      >
-        <Section.SectionHeader>{renderHeader()}</Section.SectionHeader>
-        <Section.SectionBody>{renderBody()}</Section.SectionBody>
-      </Section>
+      <div className={styles.sectionArea}>
+        <Section
+          withBodyScroll={!isEditing}
+          withoutFooter={isEditing}
+          settingsStudio={false}
+          viewAs={isSettings ? "settings" : "tile"}
+          isEmptyPage={
+            !isEditing && items.length === 0 && folders.length === 0
+          }
+          currentDeviceType={currentDeviceType}
+        >
+          <Section.SectionHeader>{renderHeader()}</Section.SectionHeader>
+          <Section.SectionBody>{renderBody()}</Section.SectionBody>
+        </Section>
+        {showLoaderOverlay && (
+          <div className={styles.loaderOverlay}>
+            <Loader type={LoaderTypes.track} size="40px" />
+          </div>
+        )}
+      </div>
       <AiChatPanel />
-      <SettingsPanel />
+      <CreateFormDialog
+        visible={isCreateFormDialogVisible}
+        isCreating={isCreatingForm}
+        onClose={onCloseCreateFormDialog}
+        onSave={onSaveCreateForm}
+      />
     </div>
   );
 };
