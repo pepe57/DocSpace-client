@@ -79,6 +79,7 @@ export const enum SocketEvents {
   ChaneFolderAccessRights = "s:change-access-rights-folder",
   ExportChat = "s:export-chat",
   QuotaExceeded = "s:quota_exceeded",
+  ChangeWebPlugin = "s:change-web-plugin",
 }
 
 /**
@@ -329,6 +330,10 @@ export type TListenEventCallbackMap = {
       room: string;
       scope: "room" | "user" | "tenant";
     };
+  }) => void;
+  [SocketEvents.ChangeWebPlugin]: (data: {
+    webPluginName: string;
+    enabled: boolean;
   }) => void;
 };
 
