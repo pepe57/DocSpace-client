@@ -60,10 +60,7 @@ export const saveFolderAgentsMap = (
   map: FolderAgentsMap,
   userHash?: string,
 ) => {
-  localStorage.setItem(
-    folderAgentsKey(roomId, userHash),
-    JSON.stringify(map),
-  );
+  localStorage.setItem(folderAgentsKey(roomId, userHash), JSON.stringify(map));
 };
 
 export const loadFolderAgentsMap = (

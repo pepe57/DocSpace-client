@@ -104,11 +104,7 @@ export const SettingsStoreContextProvider = ({
   initData: TSettingsStoreInitData;
 }) => {
   const store = React.useMemo(() => new SettingsStore(initData), [initData]);
-  return (
-    <SettingsStoreContext value={store}>
-      {children}
-    </SettingsStoreContext>
-  );
+  return <SettingsStoreContext value={store}>{children}</SettingsStoreContext>;
 };
 
 export const useSettingsStore = () => {
