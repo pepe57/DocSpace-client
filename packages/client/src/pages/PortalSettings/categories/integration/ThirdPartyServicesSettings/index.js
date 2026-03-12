@@ -44,6 +44,7 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
+import ExternalDbModal from "./sub-components/ExternalDbModal";
 
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
 
@@ -167,6 +168,19 @@ class ThirdPartyServices extends React.Component {
     setSelectedConsumer(e.currentTarget.dataset.consumer);
   };
 
+  handleSaveExternalDb = async (data) => {
+    const { updateConsumerProps, selectedConsumer } = this.props;
+
+    await updateConsumerProps({
+      name: selectedConsumer.name,
+      props: Object.entries(data).map(([name, value]) => ({
+        name,
+        value,
+      })),
+    });
+    this.onModalClose();
+  };
+
   render() {
     const {
       t,
@@ -181,6 +195,9 @@ class ThirdPartyServices extends React.Component {
       logoText,
       tReady,
       standalone,
+      selectedConsumer,
+      feedbackAndSupportUrl,
+      portalSettingsUrl,
     } = this.props;
     const { dialogVisible, isLoading } = this.state;
     const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
@@ -307,15 +324,28 @@ class ThirdPartyServices extends React.Component {
           </RootContainer>
         )}
         {dialogVisible ? (
-          <ConsumerModalDialog
-            t={t}
-            i18n={i18n}
-            dialogVisible={dialogVisible}
-            isLoading={isLoading}
-            onModalClose={onModalClose}
-            onChangeLoading={onChangeLoading}
-            updateConsumerProps={updateConsumerProps}
-          />
+          selectedConsumer?.name === "externaldb" ? (
+            <ExternalDbModal
+              visible={dialogVisible}
+              onClose={onModalClose}
+              onSave={this.handleSaveExternalDb}
+              selectedConsumer={selectedConsumer}
+              isLoading={isLoading}
+              t={t}
+              feedbackAndSupportUrl={feedbackAndSupportUrl}
+              portalSettingsUrl={portalSettingsUrl}
+            />
+          ) : (
+            <ConsumerModalDialog
+              t={t}
+              i18n={i18n}
+              dialogVisible={dialogVisible}
+              isLoading={isLoading}
+              onModalClose={onModalClose}
+              onChangeLoading={onChangeLoading}
+              updateConsumerProps={updateConsumerProps}
+            />
+          )
         ) : null}
       </>
     );
@@ -329,6 +359,7 @@ ThirdPartyServices.propTypes = {
   integrationSettingsUrl: PropTypes.string,
   updateConsumerProps: PropTypes.func.isRequired,
   setSelectedConsumer: PropTypes.func.isRequired,
+  selectedConsumer: PropTypes.object,
 };
 
 export default inject(({ setup, settingsStore, currentQuotaStore }) => {
@@ -339,6 +370,8 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     companyInfoSettingsData,
     logoText,
     standalone,
+    feedbackAndSupportUrl,
+    portalSettingsUrl,
   } = settingsStore;
   const {
     integration,
@@ -347,7 +380,7 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     fetchAndSetConsumers,
     openThirdPartyModal,
   } = setup;
-  const { consumers } = integration;
+  const { consumers, selectedConsumer } = integration;
   const { isThirdPartyAvailable } = currentQuotaStore;
 
   return {
@@ -363,5 +396,8 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     logoText,
     openThirdPartyModal,
     standalone,
+    selectedConsumer,
+    feedbackAndSupportUrl,
+    portalSettingsUrl,
   };
 })(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));
