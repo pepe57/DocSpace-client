@@ -37,39 +37,30 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import type { TGetIcon } from "@/app/(docspace)/_hooks/useItemIcon";
 
-import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
-
 import styles from "./FormsTile.module.scss";
 
-type FolderTileItem = {
-  id: number;
-  title: string;
-  isFolder: true;
-  contextOptions: string[];
-};
-
-type CompletedFolderTileProps = {
-  item: FolderTileItem;
+type SubFolderTileProps = {
   folder: TFolder;
   getIcon: TGetIcon;
+  onOpenFolder: (folder: TFolder) => void;
 };
 
-const CompletedFolderTile = ({
+const SubFolderTile = ({
   folder,
   getIcon,
-}: CompletedFolderTileProps) => {
+  onOpenFolder,
+}: SubFolderTileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const { isBase } = useTheme();
-  const { openCompletedFolder } = useFormsNavigationStore();
 
   const folderIcon = getIcon(undefined, 32);
 
   const openFolder = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
-      openCompletedFolder(folder);
+      onOpenFolder(folder);
     },
-    [folder, openCompletedFolder],
+    [folder, onOpenFolder],
   );
 
   const folderItem = useMemo(
@@ -115,7 +106,7 @@ const CompletedFolderTile = ({
           inProgress={false}
           isEdit={false}
           showHotkeyBorder={false}
-          onSelect={() => openCompletedFolder(folder)}
+          onSelect={() => onOpenFolder(folder)}
           element={element}
           temporaryIcon={folderIcon}
           forwardRef={tileRef}
@@ -127,4 +118,4 @@ const CompletedFolderTile = ({
   );
 };
 
-export default CompletedFolderTile;
+export default SubFolderTile;

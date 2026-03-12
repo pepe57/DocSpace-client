@@ -60,10 +60,7 @@ export const saveFolderAgentsMap = (
   map: FolderAgentsMap,
   userHash?: string,
 ) => {
-  localStorage.setItem(
-    folderAgentsKey(roomId, userHash),
-    JSON.stringify(map),
-  );
+  localStorage.setItem(folderAgentsKey(roomId, userHash), JSON.stringify(map));
 };
 
 export const loadFolderAgentsMap = (
@@ -124,10 +121,16 @@ export const getKnowledgeFolderId = async (
   return kbFolder?.id ?? null;
 };
 
-const pollOperation = async (opId: string, maxAttempts = 30) => {
+const pollOperation = async (
+  opId: string,
+  signal?: AbortSignal,
+  maxAttempts = 30,
+) => {
   let misses = 0;
   for (let i = 0; i < maxAttempts; i++) {
+    if (signal?.aborted) return;
     await new Promise((r) => setTimeout(r, 1000));
+    if (signal?.aborted) return;
     const ops = await getProgress(opId);
     const op = ops?.find((o: TOperation) => o.id === opId);
     if (!op) {
@@ -148,6 +151,7 @@ const pollOperation = async (opId: string, maxAttempts = 30) => {
 export const copyFilesToAgentRoom = async (
   destFolderId: number,
   fileIds: number[],
+  signal?: AbortSignal,
 ) => {
   const ops = (await request({
     method: "put",
@@ -164,7 +168,7 @@ export const copyFilesToAgentRoom = async (
 
   // Wait for copy to finish
   if (ops?.[0]?.id && !ops[0].finished) {
-    await pollOperation(ops[0].id);
+    await pollOperation(ops[0].id, signal);
   }
 };
 
