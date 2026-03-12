@@ -106,7 +106,6 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     activeSection === FormsSection.InProgress && !!inProgressFolder;
   const activeSubfolder = completedFolder ?? inProgressFolder;
 
-  // Initialize AI store with room context
   React.useEffect(() => {
     if (roomId) {
       aiStore.initForRoom(roomId, requestToken);
@@ -135,18 +134,18 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
 
       const currentFetchId = ++fetchIdRef.current;
 
-      fetchSection(activeSection).then(() => {
+      fetchSection(activeSection).then(async () => {
         if (currentFetchId !== fetchIdRef.current) return;
 
         setContentVisible(true);
         setIsSectionLoading(false);
 
-        // When entering a completed subfolder: set current folder and sync KB
         if (
           activeSection === FormsSection.CompletedForms &&
           completedFolder
         ) {
-          aiStore.setCurrentFolder(completedFolder.id);
+          await aiStore.setCurrentFolder(completedFolder.id);
+          if (currentFetchId !== fetchIdRef.current) return;
 
           if (formsListStore.items.length > 0) {
             const files = formsListStore.items.map((f) => ({
@@ -156,7 +155,6 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
             aiStore.syncCompletedForms(files);
           }
         } else {
-          // Leaving completed subfolder — clear current folder
           aiStore.setCurrentFolder(null);
         }
       });
