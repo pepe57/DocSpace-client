@@ -1173,9 +1173,8 @@
   "FileFormatNotAllowed": "This file can't be uploaded because its format isn't allowed.",
   "FilesRejectedDueToFormat": "{{count}} files were rejected due to unsupported format.",
   "MyForms": "My forms",
-  "FormsToFill": "Forms to fill",
   "CompletedForms": "Completed forms",
   "EmptyMyForms": "You don't have any forms yet. Create or upload a form to get started.",
-  "EmptyFormsToFill": "There are no forms to fill at the moment.",
+  "EmptyInProgressForms": "There are no forms in progress at the moment.",
   "EmptyCompletedForms": "There are no completed forms yet."
 }

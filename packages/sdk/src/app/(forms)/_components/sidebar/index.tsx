@@ -58,8 +58,8 @@ const FormsSidebar = () => {
       icon: FormFileReactSvgUrl,
     },
     {
-      key: FormsSection.FormsToFill,
-      label: t("Common:FormsToFill"),
+      key: FormsSection.InProgress,
+      label: t("Common:InProgress"),
       icon: FormFillRectSvgUrl,
     },
     {

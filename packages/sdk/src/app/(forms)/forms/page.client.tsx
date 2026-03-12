@@ -53,8 +53,6 @@ import FormsLayout from "../_components/forms-layout";
 
 type FormsPageProps = {
   roomId: string | number;
-  myFormsFolderId: string | number;
-  formsToFillFolderId: string | number;
   requestToken: string;
   authToken: string;
   filesSettings: TFilesSettings;
@@ -65,8 +63,6 @@ type FormsPageProps = {
 
 function FormsPage({
   roomId,
-  myFormsFolderId,
-  formsToFillFolderId,
   requestToken,
   authToken,
   filesSettings,
@@ -88,19 +84,10 @@ function FormsPage({
   React.useEffect(() => {
     formsSettingsStore.setConfig({
       roomId,
-      myFormsFolderId,
-      formsToFillFolderId,
       requestToken,
     });
     formsSettingsStore.setFilesSettings(filesSettings);
-  }, [
-    roomId,
-    myFormsFolderId,
-    formsToFillFolderId,
-    requestToken,
-    filesSettings,
-    formsSettingsStore,
-  ]);
+  }, [roomId, requestToken, filesSettings, formsSettingsStore]);
 
   React.useEffect(() => {
     filesSettingsStore.setFilesSettings(filesSettings);
@@ -141,7 +128,7 @@ function FormsPage({
 
   React.useEffect(() => {
     if (initialFolderData) {
-      const id = Number(myFormsFolderId);
+      const id = Number(roomId);
       const files = id
         ? initialFolderData.files.filter((f) => f.folderId === id)
         : initialFolderData.files;
@@ -168,7 +155,7 @@ function FormsPage({
         createThumbnails(thumbIds).catch(() => {});
       }
     }
-  }, [initialFolderData, formsListStore, formsSettingsStore, myFormsFolderId]);
+  }, [initialFolderData, formsListStore, formsSettingsStore, roomId]);
 
   React.useEffect(() => {
     setIsReady(true);
