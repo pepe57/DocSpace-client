@@ -195,6 +195,12 @@ const htmlTransformPlugin = (): Plugin => ({
         .replace(
           /%VITE_CONFIG_HASH%/g,
           fileHash(path.join(publicScriptsDir, "config.json")),
+        )
+        .replace(
+          /%VITE_FONTS_CSS_HASH%/g,
+          fileHash(
+            path.resolve(__dirname, "../../public/css/fonts.css"),
+          ),
         );
 
       // In dev mode, use absolute URLs so modules load from Vite, not the proxy
