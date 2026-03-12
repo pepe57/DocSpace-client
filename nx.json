@@ -56,6 +56,7 @@
     }
   },
   "defaultBase": "develop",
+  "parallel": 2,
   "tui": {
     "enabled": false
   }
