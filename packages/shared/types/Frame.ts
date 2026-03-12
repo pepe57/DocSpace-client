@@ -34,7 +34,8 @@ export type TFrameMode =
   | "viewer"
   | "room-selector"
   | "file-selector"
-  | "system";
+  | "system"
+  | "forms";
 
 export type TFrameSelectorType =
   | "roomsOnly"
@@ -155,4 +156,6 @@ export type TFrameConfig = {
   withBreadCrumbs?: boolean;
   withSearch?: boolean;
   withSubtitle?: boolean;
+  myFormsFolderId?: string | number;
+  formsToFillFolderId?: string | number;
 };

@@ -136,6 +136,26 @@ const nextConfig = {
       );
     }
 
+    // Fix CSS Modules: change mode from "pure" to "local" so that
+    // ui-kit .module.scss files with :global blocks compile correctly.
+    for (const rule of config.module.rules) {
+      if (rule?.oneOf) {
+        for (const oneOfRule of rule.oneOf) {
+          if (Array.isArray(oneOfRule?.use)) {
+            for (const loader of oneOfRule.use) {
+              if (
+                typeof loader === "object" &&
+                loader.loader?.includes("css-loader") &&
+                loader.options?.modules?.mode === "pure"
+              ) {
+                loader.options.modules.mode = "local";
+              }
+            }
+          }
+        }
+      }
+    }
+
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),
