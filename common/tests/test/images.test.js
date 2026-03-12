@@ -307,7 +307,43 @@ describe("Image Tests", () => {
     expect(i, message).toBe(0);
   });
 
-  it("ClientAndUiKitImagesNameConsistencyTest: Verify that identical images (by MD5 hash) have the same name in Client and UI-Kit.", () => {
+  it("WrongImagesImportTest: Verify that image imports in the codebase follow the correct import paths and conventions.", () => {
+    const wrongImportImages = [
+      `"/static/images`,
+      `"/images`,
+      `"static/images`,
+      `"images/`,
+    ];
+
+    let message = "Found wrong images import in the code.\r\n\r\n";
+    let k = 0;
+    allFiles.forEach((file) => {
+      if (file.path.indexOf("browserDetector.js") > -1) {
+        return;
+      }
+
+      const data = fileContentsCache.get(file.path);
+      if (!data) return;
+
+      wrongImportImages.forEach((i) => {
+        const idx = data.indexOf(i);
+
+        if (
+          idx > 0 &&
+          file.fileName.indexOf("webpack") === -1 &&
+          data[idx - 1] !== "(" &&
+          file.path.indexOf(".html") === -1 &&
+          file.path.indexOf("storybook-static") === -1
+        ) {
+          message += `${++k}. ${file.path} \r\n`;
+        }
+      });
+    });
+
+    expect(k, message).toBe(0);
+  });
+
+    it("ClientAndUiKitImagesNameConsistencyTest: Verify that identical images (by MD5 hash) have the same name in Client and UI-Kit.", () => {
     const uiKitImgs = allImgs.filter((i) => i.path.includes(convertPathToOS("/libs/ui-kit/")));
     const clientImgs = allImgs.filter((i) => !i.path.includes(convertPathToOS("/libs/ui-kit/")));
 
@@ -406,42 +442,6 @@ describe("Image Tests", () => {
         message += `  UI-Kit MD5: ${uiMatch.md5Hash} (${uiMatch.path})\r\n`;
         message += `  Client MD5: ${pImg.md5Hash} (${pImg.path})\r\n\r\n`;
       }
-    });
-
-    expect(k, message).toBe(0);
-  });
-
-  it("WrongImagesImportTest: Verify that image imports in the codebase follow the correct import paths and conventions.", () => {
-    const wrongImportImages = [
-      `"/static/images`,
-      `"/images`,
-      `"static/images`,
-      `"images/`,
-    ];
-
-    let message = "Found wrong images import in the code.\r\n\r\n";
-    let k = 0;
-    allFiles.forEach((file) => {
-      if (file.path.indexOf("browserDetector.js") > -1) {
-        return;
-      }
-
-      const data = fileContentsCache.get(file.path);
-      if (!data) return;
-
-      wrongImportImages.forEach((i) => {
-        const idx = data.indexOf(i);
-
-        if (
-          idx > 0 &&
-          file.fileName.indexOf("webpack") === -1 &&
-          data[idx - 1] !== "(" &&
-          file.path.indexOf(".html") === -1 &&
-          file.path.indexOf("storybook-static") === -1
-        ) {
-          message += `${++k}. ${file.path} \r\n`;
-        }
-      });
     });
 
     expect(k, message).toBe(0);
