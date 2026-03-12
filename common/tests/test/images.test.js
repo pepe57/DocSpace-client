@@ -307,6 +307,42 @@ describe("Image Tests", () => {
     expect(i, message).toBe(0);
   });
 
+  it("ClientAndUiKitImagesNameConsistencyTest: Verify that identical images (by MD5 hash) have the same name in Client and UI-Kit.", () => {
+    const uiKitImgs = allImgs.filter((i) => i.path.includes(convertPathToOS("/libs/ui-kit/")));
+    const clientImgs = allImgs.filter((i) => !i.path.includes(convertPathToOS("/libs/ui-kit/")));
+
+    const uiKitMd5Map = new Map();
+    uiKitImgs.forEach((i) => {
+      if (!uiKitMd5Map.has(i.md5Hash)) uiKitMd5Map.set(i.md5Hash, []);
+      uiKitMd5Map.get(i.md5Hash).push(i);
+    });
+
+    let message = "Found identical images (by MD5) with different names in Client vs UI-Kit.\r\n\r\n";
+    let k = 0;
+
+    clientImgs.forEach((pImg) => {
+      const uiMatches = uiKitMd5Map.get(pImg.md5Hash);
+      if (uiMatches) {
+        uiMatches.forEach((uiImg) => {
+          if (uiImg.fileName !== pImg.fileName) {
+            if (
+              uiImg.path.includes(convertPathToOS("/logo/")) ||
+              pImg.path.includes(convertPathToOS("/logo/")) ||
+              uiImg.path.includes("phoneFlags") ||
+              pImg.path.includes("phoneFlags")
+            ) return;
+
+            message += `${++k}. MD5: ${pImg.md5Hash}\r\n`;
+            message += `  UI-Kit: ${uiImg.fileName} (${uiImg.path})\r\n`;
+            message += `  Client: ${pImg.fileName} (${pImg.path})\r\n\r\n`;
+          }
+        });
+      }
+    });
+
+    expect(k, message).toBe(0);
+  });
+
   it("ClientAndUiKitImagesPathConsistencyTest: Verify that identical images (name + md5) are stored in identical directory structures in Client and UI-Kit.", () => {
     const uiKitImgs = allImgs.filter((i) => i.path.includes(convertPathToOS("/libs/ui-kit/")));
     const clientImgs = allImgs.filter((i) => !i.path.includes(convertPathToOS("/libs/ui-kit/")));
@@ -340,7 +376,7 @@ describe("Image Tests", () => {
     expect(k, message).toBe(0);
   });
 
-  it("ClientAndUiKitImagesContentConsistencyTest: Verify that images in identical directory structures are completely identical in Client and UI-Kit.", () => {
+  it("ClientAndUiKitImagesContentConsistencyTest: Verify that images in identical directory structures are identical by MD5 hash in Client and UI-Kit.", () => {
     const uiKitImgs = allImgs.filter((i) => i.path.includes(convertPathToOS("/libs/ui-kit/")));
     const clientImgs = allImgs.filter((i) => !i.path.includes(convertPathToOS("/libs/ui-kit/")));
 
