@@ -39,5 +39,10 @@
   "UserName": "User Name",
   "ViewerInfo": "Viewer info",
   "WatermarkPreview": "Watermark Preview",
-  "WatermarkPreviewHelp": "This image preview roughly shows how the watermark will be displayed in your files."
+  "WatermarkPreviewHelp": "This image preview roughly shows how the watermark will be displayed in your files.",
+  "NeedMoreIntegrations": "Need more integrations?",
+  "NeedMoreIntegrationsDescription": "Use webhooks to send data to your own system, or connect forms to thousands of services via Zapier.",
+  "GoToIntegrations": "Go to Integrations",
+  "NoDatabaseConnections": "No database connections configured",
+  "ConfigureDatabaseConnection": "Configure database connection in Integration → Third-party services"
 }

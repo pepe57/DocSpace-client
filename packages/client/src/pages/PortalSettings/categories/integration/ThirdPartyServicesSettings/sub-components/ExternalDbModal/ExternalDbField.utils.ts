@@ -24,66 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled from "styled-components";
+import type { ConsumerProp, ExternalDbFormData } from "./ExternalDbModal.types";
 
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+export const filterRelevantFields = (
+  formData: ExternalDbFormData,
+  visibleFields: ConsumerProp[],
+): ExternalDbFormData => {
+  const filtered: ExternalDbFormData = {};
 
-import { StyledParam } from "./StyledParam";
+  visibleFields.forEach((field) => {
+    const value = formData[field.name as keyof ExternalDbFormData];
 
-const StyledToggleParam = styled(StyledParam)`
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 8px;
-  box-sizing: border-box;
-  max-width: 100%;
+    if (value !== undefined && value !== null && value !== "") {
+      filtered[field.name] = value;
+    } else if (field.type === "toggle") {
+      filtered[field.name] = value ?? false;
+    }
+  });
 
-  .set_room_params-info-description {
-    box-sizing: border-box;
-    max-width: 100%;
-  }
-
-  .set_room_params-toggle {
-    width: 28px;
-    min-width: 28px;
-  }
-`;
-
-type ToggleParamProps = {
-  id: string;
-  title: string;
-  description: string;
-  isChecked: boolean;
-  onCheckedChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  isDisabled?: boolean;
+  return filtered;
 };
 
-const ToggleParam = ({
-  id,
-  title,
-  description,
-  isChecked,
-  isDisabled,
-  onCheckedChange,
-}: ToggleParamProps) => {
-  return (
-    <StyledToggleParam>
-      <div className="set_room_params-info">
-        <div className="set_room_params-info-title">
-          <div className="set_room_params-info-title-text">{title}</div>
-        </div>
-        <div className="set_room_params-info-description">{description}</div>
-      </div>
-      <ToggleButton
-        id={id}
-        className="set_room_params-toggle"
-        isChecked={isChecked}
-        onChange={onCheckedChange}
-        dataTestId="create_edit_room_toggle"
-        isDisabled={isDisabled}
-      />
-    </StyledToggleParam>
-  );
+export const isFieldRequired = (field: ConsumerProp): boolean => {
+  if (field.type === "toggle") {
+    return false;
+  }
+  return true;
 };
 
-export default ToggleParam;
+export const getFieldValidationRules = (
+  field: ConsumerProp,
+  t: (key: string) => string,
+) => {
+  const rules: Record<string, unknown> = {
+    required: isFieldRequired(field) ? t("Common:RequiredField") : false,
+  };
+
+  return rules;
+};
