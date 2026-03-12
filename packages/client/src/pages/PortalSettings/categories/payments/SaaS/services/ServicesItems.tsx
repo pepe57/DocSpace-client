@@ -94,6 +94,8 @@ type ServicesItemsProps = {
   walletCustomerInfo?: { displayName?: string } | null;
   walletCustomerEmail?: string | null;
   wasFirstAiServiceTopUp?: boolean;
+  availableBackupsCount?: number;
+  isBackupServiceOn?: boolean;
 };
 
 const ServicesItems: React.FC<ServicesItemsProps> = ({
@@ -121,6 +123,8 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
   walletCustomerInfo,
   walletCustomerEmail,
   wasFirstAiServiceTopUp,
+  availableBackupsCount,
+  isBackupServiceOn,
 }) => {
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
   const { t } = useServicesActions();
@@ -164,39 +168,71 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
     onClick?.(id!);
   };
 
-  const textTooltip = () => {
-    return (
-      <>
-        <Text fontWeight={600} fontSize="12px">
-          {t("StorageUpgradeMessage", {
-            fromSize: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
-            toSize: `${nextStoragePlanSize} ${t("Common:Gigabyte")}`,
-          })}
-        </Text>
-        <Text fontSize="12px">
-          {nextStoragePlanSize === 0
-            ? t("SubscriptionAutoCancellation", {
-                finalDate: storageExpiryDate,
-              })
-            : t("SubscriptionAutoRenewed", {
-                finalDate: storageExpiryDate,
-              })}
-        </Text>
-      </>
-    );
-  };
+  const textTooltip = (
+    <>
+      <Text fontWeight={600} fontSize="12px">
+        {t("StorageUpgradeMessage", {
+          fromSize: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+          toSize: `${nextStoragePlanSize} ${t("Common:Gigabyte")}`,
+        })}
+      </Text>
+      <Text fontSize="12px">
+        {nextStoragePlanSize === 0
+          ? t("SubscriptionAutoCancellation", {
+              finalDate: storageExpiryDate,
+            })
+          : t("SubscriptionAutoRenewed", {
+              finalDate: storageExpiryDate,
+            })}
+      </Text>
+    </>
+  );
 
   const priceDescription = (id: string, priceValue?: number) => {
+    console.log("id", id);
     switch (id) {
       case TOTAL_SIZE:
+        if (hasScheduledStorageChange) {
+          return t("ChangeShedule");
+        }
+
+        if (!hasScheduledStorageChange && currentStoragePlanSize! > 0) {
+          return t("CurrentPaymentMonth", {
+            price: formatWalletCurrency!(
+              calculateTotalPrice(
+                currentStoragePlanSize!,
+                storagePriceIncrement!,
+              ),
+              2,
+            ),
+            size: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+          });
+        }
+
         return t("PerStorage", {
           currency: formatWalletCurrency!(storagePriceIncrement!, 2),
           amount: getConvertedSize(t, storageSizeIncrement || 0),
         });
+
       case BACKUP_SERVICE:
+        if (
+          isBackupServiceOn &&
+          availableBackupsCount &&
+          availableBackupsCount === 0
+        ) {
+          return t("Services:BackupsNotAvailable");
+        }
+
+        if (isBackupServiceOn) {
+          return t("Services:BackupsAvailable", {
+            currency: formatWalletCurrency!(priceValue!, 2),
+          });
+        }
+
         return t("PerBackup", {
           currency: formatWalletCurrency!(priceValue!, 2),
         });
+
       case AI_TOOLS:
         return t("Services:AIPricingBilledPerUsage");
       default:
@@ -233,6 +269,26 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
       >
         {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
           if (!item.title || !item.image) return null;
+
+          if (item.id === BACKUP_SERVICE) {
+            return (
+              <ServiceCard
+                key={item.id}
+                cardDisabled={isDisabled}
+                toggleDisabled={isDisabled}
+                priceTitle={item.priceTitle}
+                id={item.id}
+                image={item.image}
+                isEnabled={item.value}
+                serviceTitle={item.title}
+                onClick={handleClick}
+                onToggle={handleToggle}
+                priceDescription={priceDescription(item.id, item.price.value)}
+                tooltip={isDisabled ? permissionTooltipText : undefined}
+                isWarningColor={availableBackupsCount === 0}
+              />
+            );
+          }
 
           if (item.id === AI_TOOLS) {
             return (
@@ -306,51 +362,9 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 image={item.image}
                 isEnabled={hasStorageSubscription}
                 tooltip={isDisabled ? permissionTooltipText : undefined}
-              >
-                {hasScheduledStorageChange ? (
-                  <div
-                    className={classNames(styles.additionalInfo, {
-                      [styles.warningColor]: true,
-                    })}
-                    data-tooltip-id="serviceTooltip"
-                  >
-                    <InfoIcon />
-                    <Text fontWeight={600} fontSize="12px">
-                      {t("ChangeShedule")}
-                    </Text>
-                    <Tooltip
-                      id="serviceTooltip"
-                      place="bottom"
-                      maxWidth="300px"
-                      float
-                      getContent={textTooltip}
-                      dataTestId="service_change_shedule_tooltip"
-                    />
-                  </div>
-                ) : null}
-
-                {!hasScheduledStorageChange && currentStoragePlanSize! > 0 ? (
-                  <div
-                    className={classNames(styles.additionalInfo, {
-                      [styles.greenColor]: true,
-                    })}
-                  >
-                    <CheckIcon />
-                    <Text>
-                      {t("CurrentPaymentMonth", {
-                        price: formatWalletCurrency!(
-                          calculateTotalPrice(
-                            currentStoragePlanSize!,
-                            storagePriceIncrement!,
-                          ),
-                          2,
-                        ),
-                        size: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
-                      })}
-                    </Text>
-                  </div>
-                ) : null}
-              </ServiceCard>
+                priceTooltip={textTooltip}
+                isWarningColor={hasScheduledStorageChange}
+              />
             );
           }
 
@@ -392,6 +406,8 @@ export default inject(
       storageSizeIncrement,
       storagePriceIncrement,
       formatWalletCurrency,
+      availableBackupsCount,
+      isBackupServiceOn,
     } = paymentStore;
 
     const {
@@ -439,6 +455,8 @@ export default inject(
       walletCustomerInfo,
       walletCustomerEmail,
       wasFirstAiServiceTopUp,
+      availableBackupsCount,
+      isBackupServiceOn,
     };
   },
 )(observer(ServicesItems));

@@ -57,6 +57,8 @@
   "DisableBackupConfirm": "Disabling the Backup service will prevent {{productName}} administrators from creating backups. If Auto Backup is enabled, it will remain active within the free quota, but once the quota is fully utilized, it will be permanently deactivated. Are you sure you want to continue?",
   "DisableBackupConfirmWithoutQuota": "Disabling the Backup service will prevent {{productName}} administrators from creating backups. If Auto Backup is enabled, it will be deactivated. Are you sure you want to continue?",
   "UsageHistory": "Usage history",
+  "BackupsAvailable": "Backups available — {{currency}} per backup",
+  "BackupsNotAvailable": "Backups unavailable — top up wallet",
   "EnableAIDescription": "AI usage is billed from your prepaid balance. If the balance is too low, AI requests will not be processed.",
   "EnableAItools": "Enable AI tools ({{currency}} per token)",
   "EnableAItoolsDescription": "Use AI-powered features while working in {{organizationName}} {{productName}} by adding funds to your wallet",

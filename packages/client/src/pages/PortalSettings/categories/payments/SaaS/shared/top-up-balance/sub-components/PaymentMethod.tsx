@@ -33,8 +33,6 @@ import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
-import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
-import CrossReactSvg from "PUBLIC_DIR/images/icons/16/cross.react.svg";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
 
 import styles from "../styles/PaymentMethod.module.scss";

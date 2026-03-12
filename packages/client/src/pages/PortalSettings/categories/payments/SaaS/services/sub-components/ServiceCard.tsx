@@ -31,6 +31,8 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import styles from "../styles/AdditionalStorage.module.scss";
 
+import CheckIcon from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
+import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg";
 interface ServiceCardProps {
   onClick: (e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>) => void;
   onToggle: (e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>) => void;
@@ -44,6 +46,10 @@ interface ServiceCardProps {
   cardDisabled?: boolean;
   isEnabled?: boolean;
   tooltip?: React.ReactNode;
+  isWarningColor?: boolean;
+  isErrorColor?: boolean;
+  isInactiveColor?: boolean;
+  priceTooltip?: React.ReactNode;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
@@ -59,6 +65,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   serviceTitle,
   priceDescription,
   tooltip,
+  isWarningColor,
+  isErrorColor,
+  isInactiveColor,
+  priceTooltip,
 }) => {
   const tooltipId = tooltip ? `serviceCardTooltip_${id}` : undefined;
 
@@ -115,9 +125,34 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           {children}
 
           <div className={styles.priceContainer}>
-            <Text fontSize="12px" fontWeight={600}>
-              {priceDescription}
-            </Text>
+            <div
+              className={classNames(styles.additionalInfo, {
+                [styles.warningColor]: isWarningColor,
+                [styles.isErrorColor]: isErrorColor,
+                [styles.greenColor]:
+                  isEnabled &&
+                  !isWarningColor &&
+                  !isInactiveColor &&
+                  !isErrorColor,
+                [styles.inactiveColor]: isInactiveColor,
+              })}
+              {...(priceTooltip && { "data-tooltip-id": "serviceTooltip" })}
+            >
+              {isWarningColor ? <InfoIcon /> : isEnabled ? <CheckIcon /> : null}
+              <Text fontWeight={600} fontSize="12px">
+                {priceDescription}
+              </Text>
+              {priceTooltip ? (
+                <Tooltip
+                  id="serviceTooltip"
+                  place="bottom"
+                  maxWidth="300px"
+                  float
+                  getContent={() => priceTooltip}
+                  dataTestId="service_change_shedule_tooltip"
+                />
+              ) : null}
+            </div>
           </div>
         </div>
       </div>
