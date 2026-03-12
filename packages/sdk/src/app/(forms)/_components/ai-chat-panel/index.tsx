@@ -56,13 +56,13 @@ const AiChatPanel = () => {
     isPanelVisible,
     closePanel,
     isSyncing,
-    selectedAgentId,
+    currentAgentId,
     agentChatSettings,
   } = aiAgentStore;
   const { filesSettings } = useFormsSettingsStore();
 
-  // Use agent ID as roomId for chat — agents ARE rooms (TAgent = TRoom)
-  const agentRoomId = selectedAgentId ?? 0;
+  // Use the folder-specific agent ID as roomId for chat
+  const agentRoomId = currentAgentId ?? 0;
 
   const initChats = useInitChats({ roomId: agentRoomId });
   const { initMessages, ...messagesSettings } = useInitMessagesSDK(agentRoomId);
@@ -102,7 +102,7 @@ const AiChatPanel = () => {
     }
   }, [isPanelVisible, agentRoomId]);
 
-  if (!isPanelVisible) return null;
+  if (!isPanelVisible || !agentRoomId) return null;
 
   return (
     <div className={styles.chatPanel}>

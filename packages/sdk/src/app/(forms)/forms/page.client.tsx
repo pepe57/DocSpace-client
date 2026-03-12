@@ -30,8 +30,8 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import type {
-  TFilesSettings,
-  TGetFolder,
+	TFilesSettings,
+	TGetFolder,
 } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
@@ -52,134 +52,138 @@ import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import FormsLayout from "../_components/forms-layout";
 
 type FormsPageProps = {
-  roomId: string | number;
-  myFormsFolderId: string | number;
-  formsToFillFolderId: string | number;
-  requestToken: string;
-  authToken: string;
-  filesSettings: TFilesSettings;
-  initialFolderData?: TGetFolder;
-  user?: TUser;
-  defaultProvider?: TDefaultProvider;
+	roomId: string | number;
+	myFormsFolderId: string | number;
+	formsToFillFolderId: string | number;
+	requestToken: string;
+	authToken: string;
+	filesSettings: TFilesSettings;
+	initialFolderData?: TGetFolder;
+	user?: TUser;
+	defaultProvider?: TDefaultProvider;
 };
 
 function FormsPage({
-  roomId,
-  myFormsFolderId,
-  formsToFillFolderId,
-  requestToken,
-  authToken,
-  filesSettings,
-  initialFolderData,
-  user,
-  defaultProvider,
+	roomId,
+	myFormsFolderId,
+	formsToFillFolderId,
+	requestToken,
+	authToken,
+	filesSettings,
+	initialFolderData,
+	user,
+	defaultProvider,
 }: FormsPageProps) {
-  useSDKConfig();
+	useSDKConfig();
 
-  const formsSettingsStore = useFormsSettingsStore();
-  const formsListStore = useFormsListStore();
-  const formsUserStore = useFormsUserStore();
-  const formsAiAgentStore = useFormsAiAgentStore();
-  const formsDbSettingsStore = useFormsDbSettingsStore();
-  const filesSettingsStore = useFilesSettingsStore();
-  const settingsStore = useSettingsStore();
-  const [isReady, setIsReady] = React.useState(false);
+	const formsSettingsStore = useFormsSettingsStore();
+	const formsListStore = useFormsListStore();
+	const formsUserStore = useFormsUserStore();
+	const formsAiAgentStore = useFormsAiAgentStore();
+	const formsDbSettingsStore = useFormsDbSettingsStore();
+	const filesSettingsStore = useFilesSettingsStore();
+	const settingsStore = useSettingsStore();
+	const [isReady, setIsReady] = React.useState(false);
 
-  React.useEffect(() => {
-    formsSettingsStore.setConfig({
-      roomId,
-      myFormsFolderId,
-      formsToFillFolderId,
-      requestToken,
-    });
-    formsSettingsStore.setFilesSettings(filesSettings);
-    filesSettingsStore.setFilesSettings(filesSettings);
-    settingsStore.setFilesViewAs("tile");
+	React.useEffect(() => {
+		formsSettingsStore.setConfig({
+			roomId,
+			myFormsFolderId,
+			formsToFillFolderId,
+			requestToken,
+		});
+		formsSettingsStore.setFilesSettings(filesSettings);
+	}, [
+		roomId,
+		myFormsFolderId,
+		formsToFillFolderId,
+		requestToken,
+		filesSettings,
+		formsSettingsStore,
+	]);
 
-    if (user) {
-      formsUserStore.setUser(user);
-    }
+	React.useEffect(() => {
+		filesSettingsStore.setFilesSettings(filesSettings);
+	}, [filesSettings, filesSettingsStore]);
 
-    if (defaultProvider) {
-      formsAiAgentStore.setDefaultProvider(defaultProvider);
-    }
+	React.useEffect(() => {
+		if (user) {
+			formsUserStore.setUser(user);
+		}
+	}, [user, formsUserStore]);
 
-    const token = requestToken || authToken;
-    if (token) {
-      document.cookie = `asc_auth_key=${token}; path=/; SameSite=Lax`;
-      setAuthToken(token);
-    }
+	React.useEffect(() => {
+		if (defaultProvider) {
+			formsAiAgentStore.setDefaultProvider(defaultProvider);
+		}
+	}, [defaultProvider, formsAiAgentStore]);
 
-    if (initialFolderData) {
-      const id = Number(myFormsFolderId);
-      const files = id
-        ? initialFolderData.files.filter((f) => f.folderId === id)
-        : initialFolderData.files;
-      formsListStore.setItems(files, files.length);
+	React.useEffect(() => {
+		// Mark as frame so axiosClient 401 handler does not redirect to login
+		if (!window.ClientConfig)
+			window.ClientConfig = {} as NonNullable<typeof window.ClientConfig>;
+		window.ClientConfig.isFrame = true;
 
-      if (initialFolderData.current?.security) {
-        formsSettingsStore.setFolderSecurity(
-          initialFolderData.current.security,
-        );
-      }
+		settingsStore.setFilesViewAs("tile");
+		const token = requestToken || authToken;
+		if (token) {
+			document.cookie = `asc_auth_key=${token}; path=/; SameSite=Lax`;
+			setAuthToken(token);
+		}
+	}, [settingsStore, requestToken, authToken]);
 
-      const current = initialFolderData.current as Record<string, unknown>;
-      formsDbSettingsStore.setCollectXlsx(
-        Boolean(current.saveFormAsXLSX),
-      );
-      formsDbSettingsStore.setSendToDb(
-        Boolean(current.sendFormToExternalDB),
-      );
+	React.useEffect(() => {
+		if (initialFolderData) {
+			const id = Number(myFormsFolderId);
+			const files = id
+				? initialFolderData.files.filter((f) => f.folderId === id)
+				: initialFolderData.files;
+			formsListStore.setItems(files, files.length);
 
-      const thumbIds = files
-        .filter(
-          (f) =>
-            typeof f.id !== "string" &&
-            f.thumbnailStatus === thumbnailStatuses.WAITING,
-        )
-        .map((f) => f.id);
-      if (thumbIds.length) {
-        createThumbnails(thumbIds).catch(() => {});
-      }
-    }
+			if (initialFolderData.current?.security) {
+				formsSettingsStore.setFolderSecurity(
+					initialFolderData.current.security,
+				);
+			}
 
-    setIsReady(true);
-  }, [
-    roomId,
-    myFormsFolderId,
-    formsToFillFolderId,
-    requestToken,
-    authToken,
-    filesSettings,
-    initialFolderData,
-    user,
-    defaultProvider,
-    formsSettingsStore,
-    formsListStore,
-    formsUserStore,
-    formsAiAgentStore,
-    formsDbSettingsStore,
-    filesSettingsStore,
-    settingsStore,
-  ]);
+			const current = initialFolderData.current as Record<string, unknown>;
+			formsDbSettingsStore.setCollectXlsx(Boolean(current.saveFormAsXLSX));
+			formsDbSettingsStore.setSendToDb(Boolean(current.sendFormToExternalDB));
 
-  if (!isReady) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-          height: "100%",
-        }}
-      >
-        <Loader type={LoaderTypes.track} size="40px" />
-      </div>
-    );
-  }
+			const thumbIds = files
+				.filter(
+					(f) =>
+						typeof f.id !== "string" &&
+						f.thumbnailStatus === thumbnailStatuses.WAITING,
+				)
+				.map((f) => f.id);
+			if (thumbIds.length) {
+				createThumbnails(thumbIds).catch(() => {});
+			}
+		}
+	}, [initialFolderData, formsListStore, formsSettingsStore, myFormsFolderId]);
 
-  return <FormsLayout filesSettings={filesSettings} />;
+	React.useEffect(() => {
+		setIsReady(true);
+	}, []);
+
+	if (!isReady) {
+		return (
+			<div
+				style={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+					width: "100%",
+					height: "100%",
+				}}
+			>
+				<Loader type={LoaderTypes.track} size="40px" />
+			</div>
+		);
+	}
+
+	return <FormsLayout filesSettings={filesSettings} />;
 }
 
 export default observer(FormsPage);

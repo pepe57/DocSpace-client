@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
@@ -281,6 +281,38 @@ export default function UploaderClient({
     [t, uploadFiles],
   );
 
+  const onDropRejected = useCallback(
+    (fileRejections: { file: File; errors: { code: string; message: string }[] }[]) => {
+      if (fileRejections.length === 0) return;
+
+      const isMultiple = baseConfig?.isMultipleUpload ?? true;
+
+      if (isMultiple) {
+        toastr.error(
+          t("Common:FilesRejectedDueToFormat", { count: fileRejections.length }),
+        );
+      } else {
+        toastr.error(t("Common:FileFormatNotAllowed"));
+      }
+
+      const rejectedFiles = fileRejections.map((rejection) => ({
+        fileName: rejection.file.name,
+        fileSize: rejection.file.size,
+        fileType: rejection.file.type,
+        errors: rejection.errors,
+      }));
+
+      frameCallEvent({
+        event: "onUploadError",
+        data: {
+          error: "Files rejected due to unsupported format",
+          rejectedFiles,
+        },
+      });
+    },
+    [t, baseConfig?.isMultipleUpload],
+  );
+
   const getSecondaryText = () => {
     if (baseConfig?.secondaryText) {
       return baseConfig.secondaryText;
@@ -312,6 +344,7 @@ export default function UploaderClient({
         toastr.warning(t("Common:SingleUploadWarning"));
       }}
       onDrop={onDrop}
+      onDropRejected={onDropRejected}
       accept={accept}
       getFilesFromEvent={getFilesFromEvent}
       linkMainText={baseConfig?.linkMainText ?? t("Common:Upload")}
