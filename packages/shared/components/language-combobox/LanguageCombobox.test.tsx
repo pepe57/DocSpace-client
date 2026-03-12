@@ -30,7 +30,13 @@ import { LanguageCombobox } from "./LanguageCombobox";
 
 // Mock react-i18next
 vi.mock("react-i18next", () => ({
-  useTranslation: () => ({ i18n: { language: "en" }, t: (key: string) => key }),
+  useTranslation: () => ({
+    i18n: {
+      language: "en",
+      getFixedT: () => (key: string) => key,
+    },
+    t: (key: string) => key,
+  }),
 }));
 
 const mockOnSelectLanguage = vi.fn();
