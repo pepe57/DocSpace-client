@@ -38,6 +38,28 @@ let allImgs = [];
 let allFiles = [];
 let fileContentsCache = new Map();
 
+/**
+ * Analyzes a group of images to find duplication rule violations.
+ * A 1:1 mirror between the 'ui-kit' and the rest of the 'project' is allowed.
+ * Violations occur if there are multiple duplicates within the same space (ui-kit or project).
+ * 
+ * @param {Array} val - Array of image objects with path and md5Hash
+ * @returns {Array} - List of files that violate the duplication rules
+ */
+const getDuplicateViolations = (val) => {
+  const uiKit = val.filter((i) => i.path.includes(convertPathToOS("/libs/ui-kit/")));
+  const project = val.filter((i) => !i.path.includes(convertPathToOS("/libs/ui-kit/")));
+
+  // 1:1 mirror is allowed
+  if (uiKit.length <= 1 && project.length <= 1) return [];
+
+  const offending = [];
+  if (uiKit.length > 1) offending.push(...uiKit);
+  if (project.length > 1) offending.push(...project);
+
+  return offending;
+};
+
 beforeAll(() => {
   console.log(`Base path = ${BASE_DIR}`);
 
@@ -60,7 +82,7 @@ beforeAll(() => {
     "locales"
   ];
 
-  const workspaces = getWorkSpaces({ excludeUiKit: true });
+  const workspaces = getWorkSpaces();
   workspaces.push(path.resolve(BASE_DIR, "public"));
   const filesPattern = /\.(js|jsx|ts|tsx|html|css|scss|saas|json)$/i;
   const files = workspaces.flatMap((wsPath) => {
@@ -172,7 +194,8 @@ describe("Image Tests", () => {
     let i = 0;
 
     uniqueImg.forEach((value, key) => {
-      if (value.length > 1) {
+      const offending = getDuplicateViolations(value);
+      if (offending.length > 0) {
         let skip = false;
         if (
           value[0].path.includes(convertPathToOS("/logo/")) ||
@@ -182,7 +205,7 @@ describe("Image Tests", () => {
         }
         if (skip) return;
         message += `${++i}. ${key}:\r\n`;
-        value.forEach(
+        offending.forEach(
           (v) =>
             (message += `${v.path}\r\n`)
         );
@@ -217,17 +240,18 @@ describe("Image Tests", () => {
     let message = "Found images with different name but equal MD5.\r\n\r\n";
     let i = 0;
     uniqueImg.forEach((value, key) => {
+      const offending = getDuplicateViolations(value);
+      if (offending.length === 0) return;
+
       if (
         value[0].path.includes(convertPathToOS("/logo/")) ||
         value[0].path.includes("phoneFlags")
       )
         return;
 
-      if (value.length > 1) {
-        message += `${++i}. ${key}:\r\n`;
-        value.forEach((v) => (message += `${v.path}\r\n`));
-        message += "\r\n";
-      }
+      message += `${++i}. ${key}:\r\n`;
+      offending.forEach((v) => (message += `${v.path}\r\n`));
+      message += "\r\n";
     });
 
     expect(i, message).toBe(0);
@@ -261,7 +285,8 @@ describe("Image Tests", () => {
     let message = "Found images with equal MD5 and equal name.\r\n\r\n";
     let i = 0;
     uniqueImg.forEach((value, key) => {
-      if (value.length > 1) {
+      const offending = getDuplicateViolations(value);
+      if (offending.length > 0) {
         let skipLogo = false;
         if (value[0].path.includes(convertPathToOS("/logo/"))) {
           skipLogo = true;
@@ -274,7 +299,7 @@ describe("Image Tests", () => {
         if (skipLogo) return;
 
         message += `${++i}. ${key}:\r\n`;
-        value.forEach((v) => (message += `${v.path} \r\n`));
+        offending.forEach((v) => (message += `${v.path} \r\n`));
         message += "\r\n";
       }
     });
