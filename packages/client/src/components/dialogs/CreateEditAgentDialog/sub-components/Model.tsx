@@ -381,6 +381,7 @@ const ModelSettings = ({
                 "has-error": !!error,
               })}
               displaySelectedOption
+              dataTestId="create_agent_provider_combobox"
             />
           </FieldContainer>
         )}
@@ -399,6 +400,7 @@ const ModelSettings = ({
             displaySelectedOption
             dropDownClassName="not-selectable"
             isDisabled={!!error}
+            dataTestId="create_agent_model_combobox"
           />
         )}
       </div>
