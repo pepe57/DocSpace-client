@@ -185,7 +185,11 @@ const staticUrlPlugin = (): Plugin => {
 const htmlTransformPlugin = (): Plugin => ({
   name: "html-transform",
   transformIndexHtml: {
-    order: "pre",
+    // "post" order so we run AFTER Vite injects /@vite/client and
+    // @vitejs/plugin-react injects the /@react-refresh preamble.
+    // This lets us rewrite all module URLs to absolute Vite origin,
+    // preventing split module identity when served through a proxy.
+    order: "post",
     handler(html, ctx) {
       html = html
         .replace(
@@ -203,7 +207,13 @@ const htmlTransformPlugin = (): Plugin => ({
           ),
         );
 
-      // In dev mode, use absolute URLs so modules load from Vite, not the proxy
+      // In dev mode, rewrite ALL module URLs to use absolute Vite origin.
+      // When the page is served through a proxy (e.g. nginx on :8092),
+      // relative imports like /@vite/client and /@react-refresh resolve
+      // to the proxy origin, while bootstrap.js loads from Vite directly.
+      // This creates two separate /@react-refresh module instances —
+      // the preamble hooks register on one, but components register on
+      // the other, breaking React Fast Refresh.
       if (ctx.server) {
         const serverConfig = ctx.server.config.server;
         const host =
@@ -213,10 +223,19 @@ const htmlTransformPlugin = (): Plugin => ({
             : "localhost");
         const port = serverConfig.port || 5001;
         const viteOrigin = `http://${host}:${port}`;
-        html = html.replace(
-          'src="/src/bootstrap.js"',
-          `src="${viteOrigin}/src/bootstrap.js"`,
-        );
+        html = html
+          .replace(
+            'src="/src/bootstrap.js"',
+            `src="${viteOrigin}/src/bootstrap.js"`,
+          )
+          .replace(
+            'src="/@vite/client"',
+            `src="${viteOrigin}/@vite/client"`,
+          )
+          .replace(
+            / from\s+"\/(@react-refresh)"/g,
+            ` from "${viteOrigin}/$1"`,
+          );
       }
 
       return html;
