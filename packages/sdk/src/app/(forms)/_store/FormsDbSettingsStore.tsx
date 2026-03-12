@@ -32,13 +32,12 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { loadDbConfig, loadRoomFormSettings } from "../_api/dbSettings";
 import { tokenToHash } from "../_api/aiAgentSettings";
 
-export type DatabaseType = "MySQL" | "PostgreSQL";
+export type DatabaseType = "MySQL";
 
 export type SettingsLevel = "CategoryList" | "ConnectDatabase";
 
 const DEFAULT_PORTS: Record<DatabaseType, string> = {
   MySQL: "3306",
-  PostgreSQL: "5432",
 };
 
 class FormsDbSettingsStore {
@@ -94,12 +93,10 @@ class FormsDbSettingsStore {
 
   setCollectXlsx = (value: boolean) => {
     this.collectXlsx = value;
-    if (value) this.sendToDb = false;
   };
 
   setSendToDb = (value: boolean) => {
     this.sendToDb = value;
-    if (value) this.collectXlsx = false;
   };
 
   closePanel = () => {
@@ -177,11 +174,7 @@ class FormsDbSettingsStore {
 
       switch (prop.name) {
         case "databaseType":
-          if (prop.value.toLowerCase() === "postgresql") {
-            this.databaseType = "PostgreSQL";
-          } else {
-            this.databaseType = "MySQL";
-          }
+          this.databaseType = "MySQL";
           break;
         case "dbHost":
           this.host = prop.value;
