@@ -43,6 +43,7 @@ import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog/
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -160,7 +161,38 @@ class PluginStore {
     this.userStore = userStore;
 
     makeAutoObservable(this);
+
+    // Subscribe to plugin state changes via WebSocket
+    this.initSocketListeners();
   }
+
+  initSocketListeners = () => {
+    SocketHelper?.on(
+      SocketEvents.ChangeWebPlugin,
+      this.handlePluginStateChange,
+    );
+  };
+
+  handlePluginStateChange = (data: {
+    webPluginName: string;
+    enabled: boolean;
+  }) => {
+    const { webPluginName, enabled } = data;
+
+    runInAction(() => {
+      const plugin = this.plugins.find((p) => p.name === webPluginName);
+
+      if (!plugin) return;
+
+      plugin.enabled = enabled;
+
+      if (enabled) {
+        this.activatePlugin(webPluginName);
+      } else {
+        this.deactivatePlugin(webPluginName);
+      }
+    });
+  };
 
   dispatchMessage = ({
     message,
