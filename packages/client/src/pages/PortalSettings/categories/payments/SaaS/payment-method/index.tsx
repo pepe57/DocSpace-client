@@ -165,6 +165,8 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
             testId="go_to_stripe_button"
           />
         </div>
+      ) : walletCustomerStatusNotActive ? (
+        <Text className={styles.reachOutPayer}>{t("ReachOutPayer")}</Text>
       ) : null}
     </>
   );
@@ -207,7 +209,7 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     isAlreadyPaid,
     isStripePortalAvailable,
     walletCustomerStatusNotActive,
-    walletCustomerEmail: "",
+    walletCustomerEmail,
     cardLinked,
   };
 })(observer(PaymentMethod));

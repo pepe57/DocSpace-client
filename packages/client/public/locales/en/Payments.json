@@ -17,6 +17,7 @@
   "AvailableBackups": "Available backups",
   "AvailableLimit": "<1>Available limit under current plan:</1> {{amount}}",
   "Backup": "Backup",
+  "ReachOutPayer": "To link a new card, please reach out to the payer",
   "BackupDescription": "Create backup files to protect your data. Backups can be created manually or automatically.",
   "Balance": "Balance: <1>{{balance}}</1>",
   "BalanceInsufficient": "Balance: <1>{{balance}}</1> | Insufficient funds",
