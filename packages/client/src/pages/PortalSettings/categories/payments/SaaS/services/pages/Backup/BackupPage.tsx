@@ -117,7 +117,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
       <ServiceToggleSection
         isEnabled={isBackupServiceOn!}
         onToggle={handleToggleChange}
-        title={t("Payments:Backup")}
+        title={t("Common:Backup")}
         description={t("Payments:BackupDescription")}
         isDisabled={isLoading}
       />

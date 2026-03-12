@@ -34,8 +34,6 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import ServiceToggleSection from "../../sub-components/ServiceToggleSection";
 
-import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
-import WalletIcon from "PUBLIC_DIR/images/web.search.svg";
 import SettingsIcon from "PUBLIC_DIR/images/settings.react.svg";
 
 import TransactionHistory from "../../../shared/transaction-history";
@@ -52,10 +50,11 @@ type AdditionalStoragePageProps = {
   formatWalletCurrency?: (amount?: number, fractionDigits?: number) => string;
   onToggleStorage?: (enabled: boolean) => void;
   onIncreaseStorage?: () => void;
+  storagePriceIncrement?: number;
+  storageSizeIncrement?: number;
 };
 
 const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
-  walletBalance = 100,
   currentStoragePlanSize = 600,
   storagePricePerGB = 0.14,
   storageAutoRenewalDate = "May 5, 2025",
@@ -63,13 +62,10 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   formatWalletCurrency,
   onToggleStorage,
   onIncreaseStorage,
+  storagePriceIncrement,
+  storageSizeIncrement,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
-  // const navigate = useNavigate();
-
-  // const handleBackClick = () => {
-  //   navigate(-1);
-  // };
 
   const handleToggleChange = () => {
     onToggleStorage?.(!isStorageEnabled);
@@ -80,12 +76,12 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   };
 
   const monthlyPrice = currentStoragePlanSize * storagePricePerGB;
-  const formattedBalance = formatWalletCurrency
-    ? formatWalletCurrency(walletBalance, 2)
-    : `$${walletBalance.toFixed(2)}`;
+
   const formattedPrice = formatWalletCurrency
     ? formatWalletCurrency(monthlyPrice, 2)
     : `$${monthlyPrice.toFixed(2)}`;
+
+  const balance = formatWalletCurrency!();
 
   return (
     <div className={styles.container}>
@@ -94,31 +90,20 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
         isEnabled={isStorageEnabled}
         onToggle={handleToggleChange}
         title={t("Payments:AdditionalDiskStorage")}
-        priceText={`$${storagePricePerGB.toFixed(2)} ${t("Payments:PerStorage", { amount: "1 GB" })}`}
+        priceText={t("PerStorage", {
+          currency: formatWalletCurrency!(storagePriceIncrement!, 2),
+          amount: getConvertedSize(t, storageSizeIncrement || 0),
+        })}
         description={t("Payments:AdjustStorageToExactAmount")}
       />
 
       {/* Wallet Balance Card */}
-      <div className={styles.walletCard}>
-        <div className={styles.walletIcon}>
-          <WalletIcon />
-        </div>
-        <div className={styles.walletContent}>
-          <Text className={styles.walletTitle}>
-            {t("Payments:ProductNameWallet", {
-              productName: t("Common:ProductName"),
-            })}
-          </Text>
-          <Text className={styles.walletBalance}>
-            {t("Payments:Balance")}: {formattedBalance}
-          </Text>
-        </div>
-      </div>
+      <WalletInfo shortView withoutBackground balance={balance} />
 
       {/* Current Subscription Card */}
       <div className={styles.subscriptionCard}>
         <div className={styles.subscriptionHeader}>
-          <Text className={styles.subscriptionTitle}>
+          <Text fontWeight={700} fontSize="14px">
             {t("Payments:CurrentSubscription")}
           </Text>
           <div className={styles.settingsIcon}>
@@ -127,7 +112,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
         </div>
 
         <div className={styles.priceContainer}>
-          <Text className={styles.priceText}>
+          <Text fontWeight={700}>
             <span className={styles.mainPrice}>{formattedPrice}</span>
             <span className={styles.perMonth}>/month</span>{" "}
             <span className={styles.storage}>
@@ -162,7 +147,12 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
 };
 
 export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
-  const { formatWalletCurrency, walletBalance } = paymentStore;
+  const {
+    formatWalletCurrency,
+    walletBalance,
+    storagePriceIncrement,
+    storageSizeIncrement,
+  } = paymentStore;
   const { currentStoragePlanSize, storageExpiryDate } =
     currentTariffStatusStore;
 
@@ -171,5 +161,7 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     currentStoragePlanSize,
     formatWalletCurrency,
     storageAutoRenewalDate: storageExpiryDate,
+    storagePriceIncrement,
+    storageSizeIncrement,
   };
 })(observer(AdditionalStoragePage));
