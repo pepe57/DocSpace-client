@@ -46,6 +46,8 @@ import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
 import ExternalDbModal from "./sub-components/ExternalDbModal";
 
+const EXTERNAL_DB_CONSUMER_NAME = "externaldb";
+
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
 
 const RootContainer = styled.div`
@@ -324,7 +326,7 @@ class ThirdPartyServices extends React.Component {
           </RootContainer>
         )}
         {dialogVisible ? (
-          selectedConsumer?.name === "externaldb" ? (
+          selectedConsumer?.name === EXTERNAL_DB_CONSUMER_NAME ? (
             <ExternalDbModal
               visible={dialogVisible}
               onClose={onModalClose}
