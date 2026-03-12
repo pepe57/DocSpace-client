@@ -307,6 +307,74 @@ describe("Image Tests", () => {
     expect(i, message).toBe(0);
   });
 
+  it("ClientAndUiKitImagesPathConsistencyTest: Verify that identical images (name + md5) are stored in identical directory structures in Client and UI-Kit.", () => {
+    const uiKitImgs = allImgs.filter((i) => i.path.includes(convertPathToOS("/libs/ui-kit/")));
+    const clientImgs = allImgs.filter((i) => !i.path.includes(convertPathToOS("/libs/ui-kit/")));
+
+    const getRelativePath = (fullPath, isUiKit) => {
+      const marker = isUiKit ? convertPathToOS("/libs/ui-kit/assets/") : convertPathToOS("/public/images/");
+      const index = fullPath.indexOf(marker);
+      if (index === -1) return null;
+      return fullPath.substring(index + marker.length);
+    };
+
+    let message = "Found identical images with different relative paths in Client vs UI-Kit.\r\n\r\n";
+    let k = 0;
+
+    clientImgs.forEach((pImg) => {
+      const pRel = getRelativePath(pImg.path, false);
+      if (!pRel) return;
+
+      const identicalInUiKit = uiKitImgs.filter((ui) => ui.md5Hash === pImg.md5Hash && ui.fileName === pImg.fileName);
+      
+      identicalInUiKit.forEach((uiImg) => {
+        const uiRel = getRelativePath(uiImg.path, true);
+        if (uiRel && uiRel !== pRel) {
+          message += `${++k}. ${pImg.fileName}:\r\n`;
+          message += `  UI-Kit Rel: ${uiRel} (${uiImg.path})\r\n`;
+          message += `  Client Rel: ${pRel} (${pImg.path})\r\n\r\n`;
+        }
+      });
+    });
+
+    expect(k, message).toBe(0);
+  });
+
+  it("ClientAndUiKitImagesContentConsistencyTest: Verify that images in identical directory structures are completely identical in Client and UI-Kit.", () => {
+    const uiKitImgs = allImgs.filter((i) => i.path.includes(convertPathToOS("/libs/ui-kit/")));
+    const clientImgs = allImgs.filter((i) => !i.path.includes(convertPathToOS("/libs/ui-kit/")));
+
+    const getRelativePath = (fullPath, isUiKit) => {
+      const marker = isUiKit ? convertPathToOS("/libs/ui-kit/assets/") : convertPathToOS("/public/images/");
+      const index = fullPath.indexOf(marker);
+      if (index === -1) return null;
+      return fullPath.substring(index + marker.length);
+    };
+
+    const uiKitPathMap = new Map();
+    uiKitImgs.forEach((i) => {
+      const rel = getRelativePath(i.path, true);
+      if (rel) uiKitPathMap.set(rel, i);
+    });
+
+    let message = "Found images in identical paths that have different content in Client vs UI-Kit.\r\n\r\n";
+    let k = 0;
+
+    clientImgs.forEach((pImg) => {
+      const pRel = getRelativePath(pImg.path, false);
+      if (!pRel) return;
+
+      const uiMatch = uiKitPathMap.get(pRel);
+      if (uiMatch && uiMatch.md5Hash !== pImg.md5Hash) {
+        message += `${++k}. ${pRel}:\r\n`;
+        message += `  UI-Kit MD5: ${uiMatch.md5Hash} (${uiMatch.path})\r\n`;
+        message += `  Client MD5: ${pImg.md5Hash} (${pImg.path})\r\n\r\n`;
+      }
+    });
+
+    expect(k, message).toBe(0);
+  });
+
   it("WrongImagesImportTest: Verify that image imports in the codebase follow the correct import paths and conventions.", () => {
     const wrongImportImages = [
       `"/static/images`,
