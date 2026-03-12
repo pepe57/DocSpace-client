@@ -175,7 +175,7 @@ class ThirdPartyServices extends React.Component {
       name: selectedConsumer.name,
       props: Object.entries(data).map(([name, value]) => ({
         name,
-        value,
+        value: String(value),
       })),
     });
     this.onModalClose();
