@@ -627,7 +627,7 @@ class FilesTableHeader extends React.Component {
       authorTrashColumnIsEnabled,
       createdTrashColumnIsEnabled,
       erasureColumnIsEnabled,
-      enable: sizeTrashColumnIsEnabled,
+      sizeTrashColumnIsEnabled,
       typeTrashColumnIsEnabled,
     } = this.props;
 

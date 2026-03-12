@@ -77,6 +77,9 @@ export type TFileSecurity = {
   SubmitToFormGallery: boolean;
   StopFilling?: boolean;
   ResetFilling?: boolean;
+  StartFilling?: boolean;
+  FillingStatus?: boolean;
+  OpenForm?: boolean;
   EditForm: boolean;
   Comment: boolean;
   CreateRoomFrom: boolean;

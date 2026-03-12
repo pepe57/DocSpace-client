@@ -52,11 +52,13 @@ const Scripts = () => {
             })
             .then((config) => {
               window.ClientConfig = {
+                ...window.ClientConfig,
                 ...config,
               };
             })
             .catch((e) => {
               window.ClientConfig = {
+                ...window.ClientConfig,
                 errorOnLoad: e,
               };
               console.error("Failed to load config:", e);

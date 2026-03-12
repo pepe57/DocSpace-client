@@ -42,6 +42,17 @@ const Scripts = () => {
       <Script id="portal-config" strategy="beforeInteractive">
         {`
           console.log("It's DocEditor INIT");
+
+          // Mark as frame when loaded with a share/key token so the
+          // axiosClient 401 handler does not redirect to login.
+          (function() {
+            var sp = new URLSearchParams(window.location.search);
+            if (sp.has("share") || sp.has("key")) {
+              window.ClientConfig = window.ClientConfig || {};
+              window.ClientConfig.isFrame = true;
+            }
+          })();
+
           fetch("/static/scripts/config.json?hash=${configHash}")
             .then((response) => {
               if (!response.ok) {
@@ -51,6 +62,7 @@ const Scripts = () => {
             })
             .then((config) => {
               window.ClientConfig = {
+                ...window.ClientConfig,
                 ...config,
               };
 
@@ -65,8 +77,9 @@ const Scripts = () => {
               }
             })
             .catch((e) => {
-              console.error(e);
+              console.error("Failed to load config:", e);
               window.ClientConfig = {
+                ...window.ClientConfig,
                 errorOnLoad: e,
               };
             });

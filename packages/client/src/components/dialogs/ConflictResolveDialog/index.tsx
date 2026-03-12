@@ -34,383 +34,383 @@ import { ConflictResolveType, RoomsType } from "@docspace/shared/enums";
 import type { TFile } from "@docspace/shared/api/files/types";
 
 import {
-	ConflictResolveDialogProps,
-	TActiveItem,
+  ConflictResolveDialogProps,
+  TActiveItem,
 } from "./ConflictResolveDialog.types";
 
 const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
-	const {
-		visible,
-		setConflictResolveDialogVisible,
-		conflictResolveDialogData,
-		items,
-		itemOperationToFolder,
-		activeFiles,
-		activeFolders,
-		setActiveFiles,
-		setActiveFolders,
-		updateActiveFiles,
-		updateActiveFolders,
-		setSelected,
-		setMoveToPanelVisible,
-		setRestorePanelVisible,
-		setCopyPanelVisible,
-		setRestoreAllPanelVisible,
-		setMoveToPublicRoomVisible,
-		conflictDialogUploadHandler,
-		openFileAction,
-		isFileDialog,
-		isFolderDialog,
-		files,
-		folders,
-		cancelUploadAction,
-		setFillPDFDialogData,
-		setIsShareFormData,
-		setAssignRolesDialogData,
-	} = props;
+  const {
+    visible,
+    setConflictResolveDialogVisible,
+    conflictResolveDialogData,
+    items,
+    itemOperationToFolder,
+    activeFiles,
+    activeFolders,
+    setActiveFiles,
+    setActiveFolders,
+    updateActiveFiles,
+    updateActiveFolders,
+    setSelected,
+    setMoveToPanelVisible,
+    setRestorePanelVisible,
+    setCopyPanelVisible,
+    setRestoreAllPanelVisible,
+    setMoveToPublicRoomVisible,
+    conflictDialogUploadHandler,
+    openFileAction,
+    isFileDialog,
+    isFolderDialog,
+    files,
+    folders,
+    cancelUploadAction,
+    setFillPDFDialogData,
+    setIsShareFormData,
+    setAssignRolesDialogData,
+  } = props;
 
-	const { t, ready } = useTranslation(["Common"]);
+  const { t, ready } = useTranslation(["Common"]);
 
-	const {
-		destFolderId,
-		folderIds,
-		fileIds,
-		deleteAfter,
-		isCopy,
-		translations,
-		isUploadConflict,
-		selectedFolder,
-		fromShareCollectSelector,
-		createDefineRoomType,
-		destFolderInfo,
-		toFillOut,
-	} = conflictResolveDialogData;
+  const {
+    destFolderId,
+    folderIds,
+    fileIds,
+    deleteAfter,
+    isCopy,
+    translations,
+    isUploadConflict,
+    selectedFolder,
+    fromShareCollectSelector,
+    createDefineRoomType,
+    destFolderInfo,
+    toFillOut,
+  } = conflictResolveDialogData;
 
-	const onClose = () => {
-		setMoveToPublicRoomVisible(false);
-		setConflictResolveDialogVisible(false);
-	};
-	const onClosePanels = () => {
-		setConflictResolveDialogVisible(false);
-		setMoveToPanelVisible(false);
-		setRestorePanelVisible(false);
-		setCopyPanelVisible(false);
-		setRestoreAllPanelVisible(false);
-		setMoveToPublicRoomVisible(false);
-		setFillPDFDialogData(false);
-		setIsShareFormData({ visible: false });
-	};
+  const onClose = () => {
+    setMoveToPublicRoomVisible(false);
+    setConflictResolveDialogVisible(false);
+  };
+  const onClosePanels = () => {
+    setConflictResolveDialogVisible(false);
+    setMoveToPanelVisible(false);
+    setRestorePanelVisible(false);
+    setCopyPanelVisible(false);
+    setRestoreAllPanelVisible(false);
+    setMoveToPublicRoomVisible(false);
+    setFillPDFDialogData(false);
+    setIsShareFormData({ visible: false });
+  };
 
-	const differenceArray = (
-		activeItems: TActiveItem[],
-		ids: (number | string)[],
-	) => {
-		return activeItems.filter((item) => {
-			const itemId =
-				typeof item !== "number" && typeof item !== "string" && "id" in item
-					? item.id
-					: item;
+  const differenceArray = (
+    activeItems: TActiveItem[],
+    ids: (number | string)[],
+  ) => {
+    return activeItems.filter((item) => {
+      const itemId =
+        typeof item !== "number" && typeof item !== "string" && "id" in item
+          ? item.id
+          : item;
 
-			return !ids.includes(itemId);
-		});
-	};
+      return !ids.includes(itemId);
+    });
+  };
 
-	const onCloseDialog = () => {
-		const newActiveFiles = differenceArray(activeFiles, fileIds);
-		const newActiveFolder = differenceArray(activeFolders, folderIds);
+  const onCloseDialog = () => {
+    const newActiveFiles = differenceArray(activeFiles, fileIds);
+    const newActiveFolder = differenceArray(activeFolders, folderIds);
 
-		setActiveFiles(newActiveFiles);
-		setActiveFolders(newActiveFolder);
-		onClose();
-	};
+    setActiveFiles(newActiveFiles);
+    setActiveFolders(newActiveFolder);
+    onClose();
+  };
 
-	const onAcceptType = async (conflictResolveType: ConflictResolveType) => {
-		let newFileIds = fileIds;
-		let newFolderIds = folderIds;
-		let newActiveFiles = activeFiles;
-		let newActiveFolders = activeFolders;
-		if (conflictResolveType === ConflictResolveType.Skip) {
-			files.forEach((file) => {
-				newFileIds = newFileIds.filter((x) => x !== file.id);
-				newActiveFiles = newActiveFiles.filter((f) => f.id !== file.id);
-			});
-			folders.forEach((folder) => {
-				newFolderIds = newFolderIds.filter((x) => x !== folder.id);
-				newActiveFolders = newActiveFolders.filter((f) => f.id !== folder.id);
-			});
-		}
+  const onAcceptType = async (conflictResolveType: ConflictResolveType) => {
+    let newFileIds = fileIds;
+    let newFolderIds = folderIds;
+    let newActiveFiles = activeFiles;
+    let newActiveFolders = activeFolders;
+    if (conflictResolveType === ConflictResolveType.Skip) {
+      files.forEach((file) => {
+        newFileIds = newFileIds.filter((x) => x !== file.id);
+        newActiveFiles = newActiveFiles.filter((f) => f.id !== file.id);
+      });
+      folders.forEach((folder) => {
+        newFolderIds = newFolderIds.filter((x) => x !== folder.id);
+        newActiveFolders = newActiveFolders.filter((f) => f.id !== folder.id);
+      });
+    }
 
-		updateActiveFiles(newActiveFiles);
-		updateActiveFolders(newActiveFiles);
-		if (!newFolderIds.length && !newFileIds.length) {
-			setSelected("none");
-			onClosePanels();
-			return;
-		}
+    updateActiveFiles(newActiveFiles);
+    updateActiveFolders(newActiveFiles);
+    if (!newFolderIds.length && !newFileIds.length) {
+      setSelected("none");
+      onClosePanels();
+      return;
+    }
 
-		const data = {
-			destFolderId,
-			destFolderInfo,
-			folderIds,
-			fileIds: newFileIds,
-			conflictResolveType,
-			deleteAfter,
-			isCopy,
-			translations,
-			itemsCount: items.length,
-			...(items.length === 1 && {
-				title: items[0].title,
-				isFolder: items[0].isFolder,
-			}),
-			toFillOut,
-		};
+    const data = {
+      destFolderId,
+      destFolderInfo,
+      folderIds,
+      fileIds: newFileIds,
+      conflictResolveType,
+      deleteAfter,
+      isCopy,
+      translations,
+      itemsCount: items.length,
+      ...(items.length === 1 && {
+        title: items[0].title,
+        isFolder: items[0].isFolder,
+      }),
+      toFillOut,
+    };
 
-		setSelected("none");
-		onClosePanels();
-		try {
-			if (fromShareCollectSelector) {
-				openFileAction(selectedFolder, t);
-			}
+    setSelected("none");
+    onClosePanels();
+    try {
+      if (fromShareCollectSelector) {
+        openFileAction(selectedFolder, t);
+      }
 
-			sessionStorage.setItem("filesSelectorPath", `${destFolderId}`);
-			const result = await itemOperationToFolder(data);
+      sessionStorage.setItem("filesSelectorPath", `${destFolderId}`);
+      const result = await itemOperationToFolder(data);
 
-			if (
-				result &&
-				selectedFolder &&
-				fromShareCollectSelector &&
-				result.files?.length === 1 &&
-				createDefineRoomType === RoomsType.VirtualDataRoom
-			) {
-				const [resultFile] = result.files;
-				setAssignRolesDialogData(true, selectedFolder.title, resultFile);
-			}
-		} catch (error: unknown) {
-			console.error(error);
-		}
-	};
+      if (
+        result &&
+        selectedFolder &&
+        fromShareCollectSelector &&
+        result.files?.length === 1 &&
+        createDefineRoomType === RoomsType.VirtualDataRoom
+      ) {
+        const [resultFile] = result.files;
+        setAssignRolesDialogData(true, selectedFolder.title, resultFile);
+      }
+    } catch (error: unknown) {
+      console.error(error);
+    }
+  };
 
-	const onAcceptUploadType = async (
-		conflictResolveType: ConflictResolveType,
-	) => {
-		let data = conflictResolveDialogData.newUploadData;
+  const onAcceptUploadType = async (
+    conflictResolveType: ConflictResolveType,
+  ) => {
+    let data = conflictResolveDialogData.newUploadData;
 
-		if (conflictResolveType === ConflictResolveType.Skip) {
-			setSelected("none");
-			cancelUploadAction();
-			onClosePanels();
-			return;
-		}
+    if (conflictResolveType === ConflictResolveType.Skip) {
+      setSelected("none");
+      cancelUploadAction();
+      onClosePanels();
+      return;
+    }
 
-		let filesSize = 0;
-		const newFiles = [];
+    let filesSize = 0;
+    const newFiles = [];
 
-		for (let i = 0; i < data.files.length; i += 1) {
-			// @ts-expect-error need rewrite stores to typescript for fix this
-			if (!items.includes(data.files[i].file.name)) {
-				filesSize += +data.files[i].file.size;
-				newFiles.push(data.files[i]);
-			}
-		}
+    for (let i = 0; i < data.files.length; i += 1) {
+      // @ts-expect-error need rewrite stores to typescript for fix this
+      if (!items.includes(data.files[i].file.name)) {
+        filesSize += +data.files[i].file.size;
+        newFiles.push(data.files[i]);
+      }
+    }
 
-		data = { ...data, files: newFiles, filesSize };
+    data = { ...data, files: newFiles, filesSize };
 
-		setSelected("none");
-		onClosePanels();
+    setSelected("none");
+    onClosePanels();
 
-		if (data.files.length === 0) return;
-		try {
-			conflictDialogUploadHandler(
-				data,
-				t,
-				conflictResolveType === ConflictResolveType.Duplicate,
-			);
-		} catch (error) {
-			const message = (error as { message: string }).message
-				? ((error as { message: string }).message as TData)
-				: (error as string);
-			toastr.error(message);
-		}
-	};
+    if (data.files.length === 0) return;
+    try {
+      conflictDialogUploadHandler(
+        data,
+        t,
+        conflictResolveType === ConflictResolveType.Duplicate,
+      );
+    } catch (error) {
+      const message = (error as { message: string }).message
+        ? ((error as { message: string }).message as TData)
+        : (error as string);
+      toastr.error(message);
+    }
+  };
 
-	const getMessageText = () => {
-		const singleFileMessage = (
-			<Trans
-				t={t}
-				ns="Common"
-				i18nKey="FileActionRequired"
-				values={{ fileName: items[0].title }}
-				components={{ 1: <span className="bold truncate" /> }}
-			/>
-		);
+  const getMessageText = () => {
+    const singleFileMessage = (
+      <Trans
+        t={t}
+        ns="Common"
+        i18nKey="FileActionRequired"
+        values={{ fileName: items[0].title }}
+        components={{ 1: <span className="bold truncate" /> }}
+      />
+    );
 
-		const singleFolderMessage = (
-			<Trans
-				t={t}
-				ns="Common"
-				i18nKey="FolderActionRequired"
-				values={{ folderName: items[0].title }}
-				components={{ 1: <span className="bold" /> }}
-			/>
-		);
+    const singleFolderMessage = (
+      <Trans
+        t={t}
+        ns="Common"
+        i18nKey="FolderActionRequired"
+        values={{ folderName: items[0].title }}
+        components={{ 1: <span className="bold" /> }}
+      />
+    );
 
-		return isFileDialog
-			? items.length === 1
-				? singleFileMessage
-				: t("Common:FilesAlreadyContains")
-			: isFolderDialog
-				? items.length === 1
-					? singleFolderMessage
-					: t("Common:FoldersAlreadyContains")
-				: t("Common:FilesAndFoldersAlreadyContains");
-	};
+    return isFileDialog
+      ? items.length === 1
+        ? singleFileMessage
+        : t("Common:FilesAlreadyContains")
+      : isFolderDialog
+        ? items.length === 1
+          ? singleFolderMessage
+          : t("Common:FoldersAlreadyContains")
+        : t("Common:FilesAndFoldersAlreadyContains");
+  };
 
-	const getOverwriteTitle = () => {
-		return isFileDialog
-			? t("Common:OverwriteTitle")
-			: isFolderDialog
-				? t("Common:MergeFolders")
-				: t("Common:MergeAndOverwrite");
-	};
+  const getOverwriteTitle = () => {
+    return isFileDialog
+      ? t("Common:OverwriteTitle")
+      : isFolderDialog
+        ? t("Common:MergeFolders")
+        : t("Common:MergeAndOverwrite");
+  };
 
-	const getOverwriteDescription = () => {
-		return isFileDialog
-			? t("Common:OverwriteDescription")
-			: isFolderDialog
-				? t("Common:MergeFoldersDescription")
-				: t("Common:MultiplyOverwrite");
-	};
+  const getOverwriteDescription = () => {
+    return isFileDialog
+      ? t("Common:OverwriteDescription")
+      : isFolderDialog
+        ? t("Common:MergeFoldersDescription")
+        : t("Common:MultiplyOverwrite");
+  };
 
-	const getDuplicateTitle = () => {
-		return isFileDialog
-			? t("Common:CreateFileCopy")
-			: isFolderDialog
-				? t("Common:CopyAndKeepBothFolders")
-				: t("Common:CopyAndKeepAll");
-	};
-	const getDuplicateDescription = () => {
-		return isFileDialog
-			? t("Common:CreateDescription")
-			: isFolderDialog
-				? t("Common:CreateFolderDescription")
-				: t("Common:FoldersAndFilesWillBeCopied");
-	};
-	const getSkipDescription = () => {
-		return isFileDialog
-			? t("Common:SkipDescription")
-			: isFolderDialog
-				? t("Common:SkipFolderDescription")
-				: t("Common:FilesAndFolderWillNotBeCopied");
-	};
+  const getDuplicateTitle = () => {
+    return isFileDialog
+      ? t("Common:CreateFileCopy")
+      : isFolderDialog
+        ? t("Common:CopyAndKeepBothFolders")
+        : t("Common:CopyAndKeepAll");
+  };
+  const getDuplicateDescription = () => {
+    return isFileDialog
+      ? t("Common:CreateDescription")
+      : isFolderDialog
+        ? t("Common:CreateFolderDescription")
+        : t("Common:FoldersAndFilesWillBeCopied");
+  };
+  const getSkipDescription = () => {
+    return isFileDialog
+      ? t("Common:SkipDescription")
+      : isFolderDialog
+        ? t("Common:SkipFolderDescription")
+        : t("Common:FilesAndFolderWillNotBeCopied");
+  };
 
-	const onCloseConflictDialog = () => {
-		if (isUploadConflict) {
-			cancelUploadAction();
-			onClose();
-		} else onCloseDialog();
-	};
+  const onCloseConflictDialog = () => {
+    if (isUploadConflict) {
+      cancelUploadAction();
+      onClose();
+    } else onCloseDialog();
+  };
 
-	const messageText = getMessageText();
-	const overwriteTitle = getOverwriteTitle();
-	const overwriteDescription = getOverwriteDescription();
-	const duplicateTitle = getDuplicateTitle();
-	const duplicateDescription = getDuplicateDescription();
-	const skipDescription = getSkipDescription();
+  const messageText = getMessageText();
+  const overwriteTitle = getOverwriteTitle();
+  const overwriteDescription = getOverwriteDescription();
+  const duplicateTitle = getDuplicateTitle();
+  const duplicateDescription = getDuplicateDescription();
+  const skipDescription = getSkipDescription();
 
-	return (
-		<ConflictResolve
-			visible={visible}
-			headerLabel={t("Common:ActionRequired")}
-			isLoading={!ready}
-			onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}
-			onClose={onCloseConflictDialog}
-			cancelButtonLabel={t("CancelButton")}
-			submitButtonLabel={t("OKButton")}
-			messageText={messageText}
-			selectActionText={t("Common:ConflictResolveSelectAction")}
-			overwriteTitle={overwriteTitle}
-			overwriteDescription={overwriteDescription}
-			duplicateTitle={duplicateTitle}
-			duplicateDescription={duplicateDescription}
-			skipTitle={t("Common:SkipTitle")}
-			skipDescription={skipDescription}
-		/>
-	);
+  return (
+    <ConflictResolve
+      visible={visible}
+      headerLabel={t("Common:ActionRequired")}
+      isLoading={!ready}
+      onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}
+      onClose={onCloseConflictDialog}
+      cancelButtonLabel={t("CancelButton")}
+      submitButtonLabel={t("OKButton")}
+      messageText={messageText}
+      selectActionText={t("Common:ConflictResolveSelectAction")}
+      overwriteTitle={overwriteTitle}
+      overwriteDescription={overwriteDescription}
+      duplicateTitle={duplicateTitle}
+      duplicateDescription={duplicateDescription}
+      skipTitle={t("Common:SkipTitle")}
+      skipDescription={skipDescription}
+    />
+  );
 };
 
 export default inject<TStore>(
-	({ dialogsStore, uploadDataStore, filesStore, filesActionsStore }) => {
-		const {
-			conflictResolveDialogVisible: visible,
-			setConflictResolveDialogVisible,
-			conflictResolveDialogData,
-			conflictResolveDialogItems: items,
-			setMoveToPanelVisible,
-			setRestorePanelVisible,
-			setRestoreAllPanelVisible,
-			setCopyPanelVisible,
-			setMoveToPublicRoomVisible,
-			setFillPDFDialogData,
-			setIsShareFormData,
-			setAssignRolesDialogData,
-		} = dialogsStore;
+  ({ dialogsStore, uploadDataStore, filesStore, filesActionsStore }) => {
+    const {
+      conflictResolveDialogVisible: visible,
+      setConflictResolveDialogVisible,
+      conflictResolveDialogData,
+      conflictResolveDialogItems: items,
+      setMoveToPanelVisible,
+      setRestorePanelVisible,
+      setRestoreAllPanelVisible,
+      setCopyPanelVisible,
+      setMoveToPublicRoomVisible,
+      setFillPDFDialogData,
+      setIsShareFormData,
+      setAssignRolesDialogData,
+    } = dialogsStore;
 
-		const { openFileAction } = filesActionsStore;
+    const { openFileAction } = filesActionsStore;
 
-		const {
-			itemOperationToFolder,
-			conflictDialogUploadHandler,
-			cancelUploadAction,
-		} = uploadDataStore;
-		const {
-			activeFiles,
-			activeFolders,
-			setActiveFiles,
-			setActiveFolders,
-			updateActiveFiles,
-			updateActiveFolders,
-			setSelected,
-		} = filesStore;
+    const {
+      itemOperationToFolder,
+      conflictDialogUploadHandler,
+      cancelUploadAction,
+    } = uploadDataStore;
+    const {
+      activeFiles,
+      activeFolders,
+      setActiveFiles,
+      setActiveFolders,
+      updateActiveFiles,
+      updateActiveFolders,
+      setSelected,
+    } = filesStore;
 
-		const files = items
-			? (items as TFile[]).filter((f: TFile) => {
-					return f.isFile || f.fileExst || f.contentLength;
-				})
-			: [];
-		const folders = items
-			? (items as TFile[]).filter((f: TFile) => {
-					return !f.fileExst && !f.contentLength && !f.isFile;
-				})
-			: [];
+    const files = items
+      ? (items as TFile[]).filter((f: TFile) => {
+          return f.isFile || f.fileExst || f.contentLength;
+        })
+      : [];
+    const folders = items
+      ? (items as TFile[]).filter((f: TFile) => {
+          return !f.fileExst && !f.contentLength && !f.isFile;
+        })
+      : [];
 
-		return {
-			items,
-			visible,
-			conflictResolveDialogData,
-			setConflictResolveDialogVisible,
-			itemOperationToFolder,
-			activeFiles,
-			activeFolders,
-			setActiveFiles,
-			setActiveFolders,
-			updateActiveFiles,
-			updateActiveFolders,
-			setSelected,
-			setMoveToPanelVisible,
-			setRestorePanelVisible,
-			setRestoreAllPanelVisible,
-			setCopyPanelVisible,
-			setMoveToPublicRoomVisible,
-			conflictDialogUploadHandler,
-			openFileAction,
-			files,
-			folders,
-			isFileDialog: !folders.length,
-			isFolderDialog: !files.length,
-			cancelUploadAction,
-			setFillPDFDialogData,
-			setIsShareFormData,
-			setAssignRolesDialogData,
-		};
-	},
+    return {
+      items,
+      visible,
+      conflictResolveDialogData,
+      setConflictResolveDialogVisible,
+      itemOperationToFolder,
+      activeFiles,
+      activeFolders,
+      setActiveFiles,
+      setActiveFolders,
+      updateActiveFiles,
+      updateActiveFolders,
+      setSelected,
+      setMoveToPanelVisible,
+      setRestorePanelVisible,
+      setRestoreAllPanelVisible,
+      setCopyPanelVisible,
+      setMoveToPublicRoomVisible,
+      conflictDialogUploadHandler,
+      openFileAction,
+      files,
+      folders,
+      isFileDialog: !folders.length,
+      isFolderDialog: !files.length,
+      cancelUploadAction,
+      setFillPDFDialogData,
+      setIsShareFormData,
+      setAssignRolesDialogData,
+    };
+  },
 )(observer(ConflictResolveDialog));

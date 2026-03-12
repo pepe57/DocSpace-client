@@ -61,6 +61,7 @@ export const getI18NInstance = (lng: string) => {
       window.i18n = { inLoad: [], loaded: {} };
     }
     window.i18n.t = i18n.t.bind(i18n);
+    window.i18n.instance = i18n;
   }
 
   return i18n;
