@@ -209,7 +209,9 @@ class FormsDbSettingsStore {
 }
 
 export const FormsDbSettingsStoreContext =
-  React.createContext<FormsDbSettingsStore>(new FormsDbSettingsStore());
+  React.createContext<FormsDbSettingsStore>(
+    null as unknown as FormsDbSettingsStore,
+  );
 
 export const FormsDbSettingsStoreContextProvider = ({
   children,

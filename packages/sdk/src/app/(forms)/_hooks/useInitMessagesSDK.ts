@@ -44,6 +44,7 @@ const useInitMessagesSDK = (roomId: string | number) => {
 
     return () => {
       activeRef.current = false;
+      cacheChatId.delete("chat");
     };
   }, []);
 

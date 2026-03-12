@@ -71,7 +71,9 @@ class FormsNavigationStore {
 }
 
 export const FormsNavigationStoreContext =
-  React.createContext<FormsNavigationStore>(new FormsNavigationStore());
+  React.createContext<FormsNavigationStore>(
+    null as unknown as FormsNavigationStore,
+  );
 
 export const FormsNavigationStoreContextProvider = ({
   children,

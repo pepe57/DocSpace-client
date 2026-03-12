@@ -120,6 +120,7 @@ function FormsPage({
     // Mark as frame so axiosClient 401 handler does not redirect to login
     if (!window.ClientConfig)
       window.ClientConfig = {} as NonNullable<typeof window.ClientConfig>;
+    const prevIsFrame = window.ClientConfig.isFrame;
     window.ClientConfig.isFrame = true;
 
     settingsStore.setFilesViewAs("tile");
@@ -128,6 +129,12 @@ function FormsPage({
       document.cookie = `asc_auth_key=${token}; path=/; SameSite=Lax`;
       setAuthToken(token);
     }
+
+    return () => {
+      if (window.ClientConfig) {
+        window.ClientConfig.isFrame = prevIsFrame;
+      }
+    };
   }, [settingsStore, requestToken, authToken]);
 
   React.useEffect(() => {

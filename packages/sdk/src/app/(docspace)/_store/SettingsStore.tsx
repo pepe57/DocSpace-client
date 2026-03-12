@@ -93,7 +93,7 @@ class SettingsStore {
 }
 
 export const SettingsStoreContext = React.createContext<SettingsStore>(
-  new SettingsStore(),
+  null as unknown as SettingsStore,
 );
 
 export const SettingsStoreContextProvider = ({
@@ -103,8 +103,9 @@ export const SettingsStoreContextProvider = ({
   children: React.ReactNode;
   initData: TSettingsStoreInitData;
 }) => {
+  const store = React.useMemo(() => new SettingsStore(initData), [initData]);
   return (
-    <SettingsStoreContext value={new SettingsStore(initData)}>
+    <SettingsStoreContext value={store}>
       {children}
     </SettingsStoreContext>
   );
