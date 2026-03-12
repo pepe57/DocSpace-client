@@ -338,6 +338,9 @@ const serveRootPublicPlugin = (): Plugin => {
         }
         const filePath = path.join(rootPublicDir, urlPath);
 
+        // Prevent path traversal outside rootPublicDir
+        if (!filePath.startsWith(rootPublicDir)) return next();
+
         if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
           const ext = path.extname(filePath);
           const mimeTypes: Record<string, string> = {
@@ -395,6 +398,7 @@ export default defineConfig(({ mode }) => {
     define: {
       VERSION: JSON.stringify(pkg.version),
       BUILD_AT: JSON.stringify(getBuildDate()),
+      "process.env.NODE_ENV": JSON.stringify(mode),
     },
 
     plugins: [
@@ -443,14 +447,18 @@ export default defineConfig(({ mode }) => {
                     "@docspace/ui-kit",
                     path.resolve(__dirname, "../../libs/ui-kit"),
                   );
-                  return new URL(`file://${resolved}`);
+                  return new URL(
+                    `file:///${resolved.split(path.sep).join("/")}`,
+                  );
                 }
                 if (url.startsWith("@docspace/shared")) {
                   const resolved = url.replace(
                     "@docspace/shared",
                     path.resolve(__dirname, "../shared"),
                   );
-                  return new URL(`file://${resolved}`);
+                  return new URL(
+                    `file:///${resolved.split(path.sep).join("/")}`,
+                  );
                 }
                 return null;
               },
