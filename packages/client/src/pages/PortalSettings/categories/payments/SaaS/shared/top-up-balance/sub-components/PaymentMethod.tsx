@@ -38,6 +38,7 @@ import CrossReactSvg from "PUBLIC_DIR/images/icons/16/cross.react.svg";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
 
 import styles from "../styles/PaymentMethod.module.scss";
+import { CardInformation } from "../../card-information";
 
 type PaymentMethodProps = {
   confirmActionType?: string | null;
@@ -106,9 +107,33 @@ const PaymentMethod = (props: PaymentMethodProps) => {
   return (
     <div className={styles.addPaymentMethod}>
       <div className={styles.paymentMethodDescription}>
-        <Text isBold fontSize="16px">
-          {t("PaymentMethod")}
-        </Text>
+        <div className={styles.paymentMethodTitle}>
+          <Text isBold fontSize="16px">
+            {t("PaymentMethod")}
+          </Text>
+          {walletCustomerEmail ? (
+            <Link
+              fontWeight={600}
+              onClick={
+                isDisabled || isLoading
+                  ? undefined
+                  : walletCustomerStatusNotActive
+                    ? goLinkCard
+                    : goStripeAccount
+              }
+              textDecoration="underline"
+              dataTestId="payment_method_link"
+              className={classNames({
+                [styles.disabledLink]: isDisabled || isLoading,
+              })}
+            >
+              {walletCustomerStatusNotActive
+                ? t("AddPaymentMethod")
+                : t("GoToStripe")}
+            </Link>
+          ) : null}
+        </div>
+
         {!walletCustomerEmail ? (
           <Text fontSize="12px" className={styles.noPayment}>
             {t("YouHaveNotAddedAnyPayment")}
@@ -116,37 +141,7 @@ const PaymentMethod = (props: PaymentMethodProps) => {
         ) : null}
       </div>
       {walletCustomerEmail ? (
-        <div
-          className={classNames(styles.cardLinked, {
-            [styles.cardLinkDisabled]: isDisabled,
-            [styles.warningColor]: walletCustomerStatusNotActive,
-          })}
-        >
-          <div className={styles.tickedWrapper}>
-            {walletCustomerStatusNotActive ? (
-              <CrossReactSvg />
-            ) : (
-              <CheckReactSvg />
-            )}
-            <Text fontWeight={600} fontSize="14px">
-              {walletCustomerStatusNotActive
-                ? t("CardUnlinked")
-                : t("CardLinked")}
-            </Text>
-          </div>
-          <Link
-            fontWeight={600}
-            onClick={
-              walletCustomerStatusNotActive ? goLinkCard : goStripeAccount
-            }
-            textDecoration="underline dashed"
-            dataTestId="payment_method_link"
-          >
-            {walletCustomerStatusNotActive
-              ? t("AddPaymentMethod")
-              : t("GoToStripe")}
-          </Link>
-        </div>
+        <CardInformation scale />
       ) : (
         <div className={styles.addPaymentMethodContainer}>
           <AddButton

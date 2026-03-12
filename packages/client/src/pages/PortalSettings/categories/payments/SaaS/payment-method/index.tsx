@@ -32,15 +32,12 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
-import CardIconUrl from "PUBLIC_DIR/images/icons/16/card.react.svg";
-import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
-
 import styles from "./PaymentMethod.module.scss";
 import PayerInformation from "../shared/payer-information";
 import { HelpButton } from "@docspace/ui-kit/components";
-import AttentionReactSvg from "PUBLIC_DIR/images/plugin.incompatible.react.svg";
-import classNames from "classnames";
+
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
+import { CardInformation } from "../shared/card-information";
 
 interface PaymentMethodProps {
   walletCustomerStatusNotActive?: boolean;
@@ -98,12 +95,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
         </Text>
         {renderTooltip}
       </div>
-      <Text
-        className={styles.description}
-        fontSize="13px"
-        fontWeight={400}
-        lineHeight="20px"
-      >
+      <Text className={styles.description} lineHeight="20px">
         {t("PayerResponsibleForBilling")}
       </Text>
 
@@ -116,44 +108,13 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
         </Text>
       </div>
 
-      <Text
-        className={styles.description}
-        fontSize="13px"
-        fontWeight={400}
-        lineHeight="20px"
-      >
+      <Text className={styles.description} lineHeight="20px">
         {t("PaymentMethodDescription", {
           productName: t("Common:ProductName"),
         })}
       </Text>
 
-      <div
-        className={classNames(styles.cardRow, {
-          [styles.warningColor]: walletCustomerStatusNotActive,
-        })}
-      >
-        <div className={styles.iconButton}>
-          <CardIconUrl />
-        </div>
-
-        <div className={styles.cardContent}>
-          <Text fontSize="14px" fontWeight={600} lineHeight="16px">
-            {t("CardLinked")}
-          </Text>
-        </div>
-
-        <div
-          className={classNames(styles.tickedWrapper, {
-            [styles.warningColor]: walletCustomerStatusNotActive,
-          })}
-        >
-          {walletCustomerStatusNotActive ? (
-            <AttentionReactSvg />
-          ) : (
-            <CheckReactSvg />
-          )}
-        </div>
-      </div>
+      <CardInformation />
 
       {isAlreadyPaid && isStripePortalAvailable ? (
         <div className={styles.buttonWrapper}>

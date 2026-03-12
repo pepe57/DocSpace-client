@@ -10,7 +10,6 @@
 
 .description {
   margin-bottom: 16px;
-  color: #657077;
 }
 
 .payerInfoHeader{
@@ -19,64 +18,6 @@
   gap: 8px;
 }
 
-.cardRow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 24px 16px;
-  background: #ffffff;
-  border: 1px solid #dfe2e3;
-  border-radius: 6px;
-  max-width: 320px;
-  margin-bottom: 20px;
-  height: 64px;
-  box-sizing: border-box;
-    &.warningColor {
-    color: var(--warning-color);
-    border-color: var(--warning-color);
-  }
-}
-
-.iconButton {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  flex-shrink: 0;
-
-  svg {
-    rect {
-      fill: var(--color-scheme-main-buttons);
-      opacity: 0.1;
-  }
-
-    path {
-      fill: var(--color-scheme-main-buttons);
-      opacity: 1;
-    }
-
-  }
-
-}
-
-.cardContent {
-  flex: 1;
-  min-width: 0;
-}
-
-.checkIcon {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
 .noPaymentDescription{
 margin-top:4px;
 margin-bottom: 20px;
@@ -91,28 +32,3 @@ margin-top: -12px;
 color: var(--warning-color)
 }
 
- .tickedWrapper {
-    svg {
-      width: 16px;
-      height: 16px;
-      path {
-        fill: var(--payment-credit-color);
-      }
-
-
-      
-      }
-  
-
-       &.warningColor {
-           svg {
-          rect{
-              fill: var(--warning-color);
-          }
-
-          path {
-              fill: var(--warning-color);
-
-            }
-       }}
-  }
