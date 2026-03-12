@@ -59,6 +59,8 @@ import {
   sdkSource,
   sdkVersion,
   FILE_TYPE_EXTENSIONS,
+  UNIT_MULTIPLIERS,
+  UNIT_ORDER,
 } from "../constants";
 
 import {
@@ -94,6 +96,25 @@ const Uploader = (props) => {
   ];
 
   const defaultSizeUnit = fileSizeUnits[1];
+
+  const toBytes = (value, unit) => {
+    const num = Number.parseInt(value, 10);
+    if (!num || num <= 0) return 0;
+    return num * (UNIT_MULTIPLIERS[unit] || 0);
+  };
+
+  const totalAvailableUnits = useMemo(() => {
+    const minIndex = UNIT_ORDER.indexOf(perFileSize.unit);
+    return fileSizeUnits.filter((u) => UNIT_ORDER.indexOf(u.key) >= minIndex);
+  }, [perFileSize.unit, t]);
+
+  const sizeError = useMemo(() => {
+    const perBytes = toBytes(perFileSize.value, perFileSize.unit);
+    const totalBytes = toBytes(totalSize.value, totalSize.unit);
+
+    if (!perBytes || !totalBytes) return false;
+    return totalBytes < perBytes;
+  }, [perFileSize, totalSize]);
 
   const uploadModeOptions = [
     {
@@ -474,6 +495,7 @@ const Uploader = (props) => {
               setConfig={setConfig}
               tabIndex={7}
               dataTestId="max_file_size"
+              onSizeChange={setPerFileSize}
             />
 
             {config.isMultipleUpload && (
@@ -487,6 +509,10 @@ const Uploader = (props) => {
                 setConfig={setConfig}
                 tabIndex={8}
                 dataTestId="max_total_upload_size"
+                onSizeChange={setTotalSize}
+                availableUnits={totalAvailableUnits}
+                hasError={sizeError}
+                errorMessage={t("TotalSizeMustBeGreater")}
               />
             )}
           </ControlsSection>

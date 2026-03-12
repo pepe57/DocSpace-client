@@ -148,5 +148,6 @@
   "MaximumFolderSizeDescription": "Folder larger than this size won't be uploaded.",
   "MaximumFilesSizeDescription": "Files larger than this size won't be uploaded.",
   "MaximumFoldersSizeDescription": "Folders larger than this size won't be uploaded.",
-  "MaximumTotalUploadSizeDescription": "Limits the total size of all files uploaded at once. If the total exceeds the limit, the upload will not start."
+  "MaximumTotalUploadSizeDescription": "Limits the total size of all files uploaded at once. If the total exceeds the limit, the upload will not start.",
+  "TotalSizeMustBeGreater": "Total upload size must be greater than or equal to the per-file size limit."
 }
