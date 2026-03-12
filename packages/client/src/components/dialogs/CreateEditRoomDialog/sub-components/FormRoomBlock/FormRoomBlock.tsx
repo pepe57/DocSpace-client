@@ -73,6 +73,7 @@ const FormRoomBlock = ({
         description={t("Common:CollectResultsInXlsxDescription")}
         isChecked={roomParams.saveFormAsXLSX || false}
         onCheckedChange={onSaveFormAsXLSXChange}
+        isDisabled={isDisabled}
       />
 
       <ToggleParam
@@ -81,6 +82,7 @@ const FormRoomBlock = ({
         description={t("Common:ExportResultsToDatabaseDescription")}
         isChecked={roomParams.sendFormToExternalDB || false}
         onCheckedChange={onSendFormToExternalDBChange}
+        isDisabled={isDisabled}
       />
 
       <IntegrationBar t={t} hasDatabaseConnection={hasDatabaseConnection} />
