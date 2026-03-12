@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useEventLog } from "../sub-components/useEventLog";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -89,6 +89,8 @@ const Uploader = (props) => {
   const [source, onSetSource] = useState(sdkSource.Package);
   const [uploadMode, setUploadMode] = useState("files");
   const [uploadQuantity, setUploadQuantity] = useState("single");
+  const [perFileSize, setPerFileSize] = useState({ value: "25", unit: "mb" });
+  const [totalSize, setTotalSize] = useState({ value: "100", unit: "mb" });
   const fileSizeUnits = [
     { key: "kb", label: t("Common:Kilobyte") },
     { key: "mb", label: t("Common:Megabyte") },
@@ -239,7 +241,10 @@ const Uploader = (props) => {
 
   const sdkScriptUrl = getSdkScriptUrl(version);
 
-  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
+  const sdk = useMemo(
+    () => (fromPackage ? new SDK() : window.DocSpace.SDK),
+    [fromPackage],
+  );
 
   const destroyFrame = () => {
     sdk?.frames[config.frameId]?.destroyFrame();

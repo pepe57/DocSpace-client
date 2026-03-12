@@ -167,9 +167,11 @@ const Arrow = styled.span.attrs(injectDefaultTheme)`
 
 const EventData = styled.span.attrs(injectDefaultTheme)`
   color: ${(p) => p.theme.sdkPresets.secondaryColor};
-  white-space: pre;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1;
   padding-right: 12px;
 `;
 
@@ -238,8 +240,11 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
 
   useEffect(() => {
     const el = scrollerRef.current;
-    if (el) el.scrollTop = el.scrollHeight;
-  }, [events]);
+    if (!el) return;
+    const isAtBottom =
+      el.scrollHeight - el.scrollTop - el.clientHeight < 40;
+    if (isAtBottom) el.scrollTop = el.scrollHeight;
+  }, [displayedEvents]);
 
   useEffect(() => {
     if (events.length === 0) setExpandedIds(new Set());

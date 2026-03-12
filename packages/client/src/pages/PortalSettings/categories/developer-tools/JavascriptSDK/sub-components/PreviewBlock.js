@@ -114,7 +114,7 @@ export const PreviewBlock = ({
         type={TabsTypes.Secondary}
         onSelect={(e) => {
           setSelectedItemId(e.id);
-          loadCurrentFrame(e);
+          if (e.id === "preview") loadCurrentFrame(e);
         }}
         items={dataTabs}
         isLoading={!ready}

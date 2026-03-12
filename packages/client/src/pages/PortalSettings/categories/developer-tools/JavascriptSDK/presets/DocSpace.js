@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useEventLog } from "../sub-components/useEventLog";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -124,7 +124,10 @@ const DocSpace = (props) => {
 
   const sdkScriptUrl = getSdkScriptUrl(version);
 
-  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
+  const sdk = useMemo(
+    () => (fromPackage ? new SDK() : window.DocSpace.SDK),
+    [fromPackage],
+  );
 
   const destroyFrame = () => {
     sdk?.frames[config.frameId]?.destroyFrame();
@@ -158,7 +161,7 @@ const DocSpace = (props) => {
     return () => {
       destroyFrame();
     };
-  });
+  }, [config]);
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
