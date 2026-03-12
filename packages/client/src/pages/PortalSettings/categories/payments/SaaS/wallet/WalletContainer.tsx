@@ -42,7 +42,6 @@ import { finishRefreshingWithMinCycle } from "SRC_DIR/helpers/refreshing";
 import TransactionHistory from "../shared/transaction-history";
 import TopUpModal from "../shared/top-up-balance/TopUpModal";
 import WalletRefilledModal from "./WalletRefilledModal";
-import PayerInformation from "../shared/payer-information";
 import AutoPaymentInfo from "./sub-components/AutoPaymentInfo";
 import styles from "./styles/Wallet.module.scss";
 import BalanceAmount from "../shared/balance-amount";
@@ -151,20 +150,6 @@ const Wallet = (props: WalletProps) => {
         </Link>
       ) : null}
 
-      {isCardLinkedToPortal ? (
-        <PayerInformation
-          theme={undefined}
-          user={undefined}
-          accountLink={undefined}
-          payerInfo={undefined}
-          email={undefined}
-          isNotPaidPeriod={undefined}
-          isStripePortalAvailable={undefined}
-          style={{
-            marginTop: "18px",
-          }}
-        />
-      ) : null}
       <div className={styles.balanceWrapper}>
         <BalanceAmount
           title={t("BalanceText")}
