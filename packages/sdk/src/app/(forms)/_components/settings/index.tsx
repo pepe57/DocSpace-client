@@ -38,13 +38,14 @@ import type { RoomMember } from "@docspace/shared/api/rooms/types";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 
 import AIAgentForm from "./category/AIAgentForm";
+import BillingForm from "./category/BillingForm";
 import ConnectDatabaseForm from "./category/ConnectDatabaseForm";
 import ContactsForm from "./category/ContactsForm";
 
 const Settings = () => {
   const { t } = useTranslation(["Common"]);
   const { roomId } = useFormsSettingsStore();
-  const [selectedTabId, setSelectedTabId] = React.useState("connect-database");
+  const [selectedTabId, setSelectedTabId] = React.useState("payments");
   const [members, setMembers] = React.useState<RoomMember[]>([]);
 
   const fetchMembers = React.useCallback(() => {
@@ -60,9 +61,11 @@ const Settings = () => {
 
     const abortController = new AbortController();
 
-    getRoomMembers(roomId, {}, abortController.signal).then((res) => {
-      setMembers(res.items);
-    });
+    getRoomMembers(roomId, {}, abortController.signal)
+      .then((res) => {
+        setMembers(res.items);
+      })
+      .catch(() => {});
 
     return () => {
       abortController.abort();
@@ -72,9 +75,9 @@ const Settings = () => {
   const tabs: TTabItem[] = React.useMemo(
     () => [
       {
-        id: "connect-database",
-        name: t("Common:ConnectDatabase"),
-        content: <ConnectDatabaseForm inline />,
+        id: "payments",
+        name: "Billing",
+        content: <BillingForm />,
       },
       {
         id: "ai-agent",
@@ -82,8 +85,8 @@ const Settings = () => {
         content: <AIAgentForm inline />,
       },
       {
-        id: "contacts",
-        name: t("Common:Contacts"),
+        id: "access",
+        name: t("Common:AccessSettings"),
         content: (
           <ContactsForm
             inline
@@ -93,23 +96,9 @@ const Settings = () => {
         ),
       },
       {
-        id: "payments",
-        name: "Billing",
-        content: (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "300px",
-              paddingTop: "16px",
-              fontSize: "32px",
-              fontWeight: 700,
-            }}
-          >
-            Work in progress
-          </div>
-        ),
+        id: "collect-data",
+        name: t("Common:CollectData"),
+        content: <ConnectDatabaseForm inline />,
       },
     ],
     [t, members, fetchMembers],

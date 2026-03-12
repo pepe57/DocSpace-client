@@ -28,7 +28,6 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
 
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
 import { useIsServer } from "@docspace/shared/hooks/useIsServer";
@@ -38,9 +37,14 @@ import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useItemList from "@/app/(docspace)/_hooks/useItemList";
 import InfiniteGrid from "@/app/(docspace)/(files)/_components/tile-view/sub-components/infinite-grid/InfiniteGrid";
 
+import { FormsSection } from "@/types/forms";
+
 import { useFormsListStore } from "../../_store/FormsListStore";
+import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import FormsEmpty from "../forms-empty";
 import FormsTile from "./FormsTile";
+import SubFolderTile from "./SubFolderTile";
+import styles from "./FormsTile.module.scss";
 
 type FormsGridProps = {
   filesSettings: TFilesSettings;
@@ -48,21 +52,56 @@ type FormsGridProps = {
 };
 
 const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
-  const { t } = useTranslation();
   const isServer = useIsServer();
-  const { items, hasMore, isLoading } = useFormsListStore();
+  const { items, folders, hasMore, isLoading } = useFormsListStore();
+  const {
+    activeSection,
+    completedFolder,
+    inProgressFolder,
+    openCompletedFolder,
+    openInProgressFolder,
+  } = useFormsNavigationStore();
   const { getIcon } = useItemIcon({ filesSettings });
   const { convertFileToItem } = useItemList({
     getIcon,
   });
+
+  const isCompletedRoot =
+    activeSection === FormsSection.CompletedForms && !completedFolder;
+  const isInProgressRoot =
+    activeSection === FormsSection.InProgress && !inProgressFolder;
+  const isFoldersRoot = isCompletedRoot || isInProgressRoot;
 
   const fileItems = React.useMemo(
     () => items.map((file: TFile) => convertFileToItem(file)),
     [items, convertFileToItem],
   );
 
-  if (isLoading && items.length === 0) {
+  if (isLoading && items.length === 0 && folders.length === 0) {
     return null;
+  }
+
+  if (isFoldersRoot) {
+    if (folders.length === 0) {
+      return <FormsEmpty />;
+    }
+
+    const onOpenFolder = isCompletedRoot
+      ? openCompletedFolder
+      : openInProgressFolder;
+
+    return (
+      <div className={styles.foldersGrid}>
+        {folders.map((folder) => (
+          <SubFolderTile
+            key={`folder_${folder.id}`}
+            folder={folder}
+            getIcon={getIcon}
+            onOpenFolder={onOpenFolder}
+          />
+        ))}
+      </div>
+    );
   }
 
   if (items.length === 0) {
@@ -83,8 +122,6 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
           {children}
         </InfiniteGrid>
       )}
-      headingFolders={t("Common:Folders")}
-      headingFiles={t("Common:Files")}
     >
       {fileItems.map((item) => (
         <FormsTile key={`file_${item.id}`} item={item} getIcon={getIcon} />

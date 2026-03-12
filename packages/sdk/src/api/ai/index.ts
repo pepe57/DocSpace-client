@@ -24,39 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type {
-  TFileWithOptionalPath,
-  TFileWithOptionalEmptyDir,
-} from "../_types";
+import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
+import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
+import { logger } from "@/../logger.mjs";
 
-export const normalizePath = (path: string) => path.replace(/^\/+/, "").trim();
+export async function getDefaultProvider(): Promise<
+  TDefaultProvider | undefined
+> {
+  logger.debug("Start GET /ai/providers/default");
 
-export const isHiddenFilePath = (path: string) => /(^|\/)\.[^\/\.]/g.test(path);
+  try {
+    const [req] = await createRequest(
+      ["/ai/providers/default"],
+      [["", ""]],
+      "GET",
+    );
+    const res = await fetch(req, { next: { revalidate: 300 } });
 
-export const getDirPathFromFilePath = (filePath: string) => {
-  const normalized = normalizePath(filePath);
+    if (!res.ok) {
+      logger.error(`GET /ai/providers/default failed: ${res.status}`);
+      return;
+    }
 
-  if (!normalized) return "";
+    const json = await res.json();
 
-  if (normalized.endsWith("/")) {
-    return normalized.replace(/\/+$/, "");
+    return json.response as TDefaultProvider;
+  } catch (error) {
+    logger.error(`Error in getDefaultProvider: ${error}`);
   }
-
-  const parts = normalized.split("/");
-  if (parts.length <= 1) return "";
-
-  return parts.slice(0, -1).join("/");
-};
-
-export const getPathSegments = (dirPath: string) =>
-  normalizePath(dirPath).split("/").filter(Boolean);
-
-export const getFilePath = (file: File) => {
-  const f = file as TFileWithOptionalPath;
-  return typeof f.path === "string" && f.path.length > 0 ? f.path : file.name;
-};
-
-export const isEmptyDirectoryFile = (file: File) => {
-  const f = file as TFileWithOptionalEmptyDir;
-  return f.isEmptyDirectory === true;
-};
+}

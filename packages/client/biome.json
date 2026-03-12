@@ -1,6 +1,8 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.3.14/schema.json",
-  "extends": ["../shared/biome.json"],
+  "extends": [
+    "../shared/biome.json"
+  ],
   "files": {
     "includes": [
       "**",
@@ -28,7 +30,9 @@
   },
   "overrides": [
     {
-      "includes": ["__tests__/fixtures/**"],
+      "includes": [
+        "__tests__/fixtures/**"
+      ],
       "linter": {
         "rules": {
           "correctness": {
