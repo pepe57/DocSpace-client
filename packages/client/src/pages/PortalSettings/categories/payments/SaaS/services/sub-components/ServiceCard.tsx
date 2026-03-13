@@ -50,6 +50,7 @@ interface ServiceCardProps {
   isErrorColor?: boolean;
   isInactiveColor?: boolean;
   priceTooltip?: React.ReactNode;
+  icon?: React.ReactNode;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
@@ -69,6 +70,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   isErrorColor,
   isInactiveColor,
   priceTooltip,
+  icon,
 }) => {
   const tooltipId = tooltip ? `serviceCardTooltip_${id}` : undefined;
 
@@ -138,7 +140,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
               })}
               {...(priceTooltip && { "data-tooltip-id": "serviceTooltip" })}
             >
-              {isWarningColor ? <InfoIcon /> : isEnabled ? <CheckIcon /> : null}
+              {icon ? (
+                icon
+              ) : isWarningColor || isErrorColor ? (
+                <InfoIcon />
+              ) : isEnabled ? (
+                <CheckIcon />
+              ) : null}
               <Text fontWeight={600} fontSize="12px">
                 {priceDescription}
               </Text>

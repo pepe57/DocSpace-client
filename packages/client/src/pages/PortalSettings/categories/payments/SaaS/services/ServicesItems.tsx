@@ -33,7 +33,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import {
   AI_TOOLS,
   BACKUP_SERVICE,
-  TOTAL_SIZE,
+  DISK_STORAGE,
 } from "@docspace/shared/constants";
 import {
   calculateTotalPrice,
@@ -50,6 +50,7 @@ import styles from "./styles/AdditionalStorage.module.scss";
 import { useServicesActions } from "./hooks/useServicesActions";
 import PayerInformation from "../shared/payer-information";
 import ServiceCard from "./sub-components/ServiceCard";
+import { DISK_SPACE } from "@docspace/shared/pages/backup/restore-backup/RestoreBackup.constants";
 
 interface ServiceQuotaFeature {
   title: string;
@@ -59,6 +60,7 @@ interface ServiceQuotaFeature {
   enabled?: boolean;
   cancellation?: boolean;
   value: boolean;
+  serviceName: string;
   price: {
     value: number;
     currencySymbol: string;
@@ -188,10 +190,13 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
     </>
   );
 
-  const priceDescription = (id: string, priceValue?: number) => {
-    console.log("id", id);
-    switch (id) {
-      case TOTAL_SIZE:
+  const priceDescription = (
+    serviceName: string,
+    priceValue?: number,
+    enabled?: boolean,
+  ) => {
+    switch (serviceName) {
+      case DISK_STORAGE:
         if (hasScheduledStorageChange) {
           return t("ChangeShedule");
         }
@@ -234,6 +239,18 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
         });
 
       case AI_TOOLS:
+        if (aiServiceBalance && aiServiceBalance > 0 && !enabled) {
+          return t("Services:AIPricingAvailableCredits", {
+            price: formatAiServiceCurrency!(),
+          });
+        }
+
+        if (isAiServiceLowBalance) {
+          return t("Services:AIPricingAvailableCreditsLowBalance", {
+            price: formatAiServiceCurrency!(),
+          });
+        }
+
         return t("Services:AIPricingBilledPerUsage");
       default:
         return "";
@@ -269,28 +286,31 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
       >
         {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
           if (!item.title || !item.image) return null;
-
-          if (item.id === BACKUP_SERVICE) {
+          console.log("item", item.serviceName);
+          if (item.serviceName === BACKUP_SERVICE) {
             return (
               <ServiceCard
                 key={item.id}
                 cardDisabled={isDisabled}
                 toggleDisabled={isDisabled}
                 priceTitle={item.priceTitle}
-                id={item.id}
+                id={item.serviceName}
                 image={item.image}
                 isEnabled={item.value}
                 serviceTitle={item.title}
                 onClick={handleClick}
                 onToggle={handleToggle}
-                priceDescription={priceDescription(item.id, item.price.value)}
+                priceDescription={priceDescription(
+                  item.serviceName,
+                  item.price.value,
+                )}
                 tooltip={isDisabled ? permissionTooltipText : undefined}
                 isWarningColor={availableBackupsCount === 0}
               />
             );
           }
 
-          if (item.id === AI_TOOLS) {
+          if (item.serviceName === AI_TOOLS) {
             return (
               <ServiceCard
                 key={item.id}
@@ -299,52 +319,26 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 onClick={handleClick}
                 onToggle={handleToggle}
                 serviceTitle={item.title}
-                priceDescription={priceDescription(item.id)}
+                priceDescription={priceDescription(
+                  item.serviceName,
+                  0,
+                  item.value,
+                )}
                 priceTitle={item.priceTitle}
-                id={item.id}
+                id={item.serviceName}
                 image={item.image}
                 isEnabled={item.value}
                 tooltip={isDisabled ? permissionTooltipText : undefined}
-              >
-                {isAiServiceLowBalance ? (
-                  <div
-                    className={classNames(styles.additionalInfo, {
-                      [styles.warningColor]: item.value,
-                      [styles.inactiveColor]: !item.value,
-                    })}
-                    data-tooltip-id="serviceTooltip"
-                  >
-                    <InfoIcon />
-                    <Text fontWeight={600} fontSize="12px">
-                      {t("Services:AIPricingAvailableCreditsLowBalance", {
-                        price: formatAiServiceCurrency!(),
-                      })}
-                    </Text>
-                  </div>
-                ) : null}
-
-                {aiServiceBalance &&
-                aiServiceBalance > 0 &&
-                !isAiServiceLowBalance ? (
-                  <div
-                    className={classNames(styles.additionalInfo, {
-                      [styles.greenColor]: item.value,
-                      [styles.inactiveColor]: !item.value,
-                    })}
-                  >
-                    <PriceIcon />
-                    <Text>
-                      {t("Services:AIPricingAvailableCredits", {
-                        price: formatAiServiceCurrency!(),
-                      })}
-                    </Text>
-                  </div>
-                ) : null}
-              </ServiceCard>
+                isInactiveColor={
+                  aiServiceBalance ? aiServiceBalance > 0 && !item.value : false
+                }
+                isErrorColor={isAiServiceLowBalance}
+                icon={<PriceIcon />}
+              />
             );
           }
 
-          if (item.id === TOTAL_SIZE) {
+          if (item.serviceName === DISK_STORAGE) {
             const eventDisabled =
               isGracePeriod || isDisabled || hasScheduledStorageChange;
 
@@ -356,9 +350,9 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 onClick={handleClick}
                 onToggle={handleToggle}
                 serviceTitle={item.title}
-                priceDescription={priceDescription(item.id)}
+                priceDescription={priceDescription(item.serviceName)}
                 priceTitle={item.priceTitle}
-                id={item.id}
+                id={item.serviceName}
                 image={item.image}
                 isEnabled={hasStorageSubscription}
                 tooltip={isDisabled ? permissionTooltipText : undefined}
@@ -367,23 +361,6 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
               />
             );
           }
-
-          return (
-            <ServiceCard
-              key={item.id}
-              cardDisabled={isDisabled}
-              toggleDisabled={isDisabled}
-              priceTitle={item.priceTitle}
-              id={item.id}
-              image={item.image}
-              isEnabled={item.value}
-              serviceTitle={item.title}
-              onClick={handleClick}
-              onToggle={handleToggle}
-              priceDescription={priceDescription(item.id, item.price.value)}
-              tooltip={isDisabled ? permissionTooltipText : undefined}
-            />
-          );
         })}
       </div>
     </div>

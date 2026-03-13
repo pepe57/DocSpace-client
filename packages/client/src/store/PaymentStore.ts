@@ -85,6 +85,7 @@ type TServiceFeatureWithPrice = TNumericPaymentFeature & {
     value: number;
     currencySymbol?: string;
   };
+  serviceName?: string;
 };
 
 class PaymentStore {
@@ -625,8 +626,6 @@ class PaymentStore {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
 
-  fetchServicesQuota = (serviceName: string = "") => {};
-
   handleServicesQuotas = async () => {
     // temporary solution, should be in the service store
 
@@ -642,11 +641,12 @@ class PaymentStore {
       return {
         ...feature,
         price: service.price,
+        serviceName: service.serviceName,
       };
     });
 
     this.servicesQuotasFeatures = new Map(
-      quotas.map((feature) => [feature.id, feature]),
+      quotas.map((feature) => [feature.serviceName || "", feature]),
     );
 
     return res;

@@ -33,7 +33,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   AI_TOOLS,
   BACKUP_SERVICE,
-  TOTAL_SIZE,
+  DISK_STORAGE,
   WEB_SEARCH,
 } from "@docspace/shared/constants";
 import { setServiceState } from "@docspace/shared/api/portal";
@@ -72,7 +72,7 @@ const Services = (props: InjectedProps) => {
   } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [dialogVisibility, setDialogVisibility] = useState({
-    [TOTAL_SIZE]: false,
+    [DISK_STORAGE]: false,
     [BACKUP_SERVICE]: false,
     [AI_TOOLS]: false,
     [WEB_SEARCH]: false,
@@ -112,8 +112,8 @@ const Services = (props: InjectedProps) => {
   useEffect(() => {
     if (!isVisibleWalletSettings || !isInitServicesPage) return;
 
-    if (confirmActionType === TOTAL_SIZE) {
-      updateDialogVisibility(TOTAL_SIZE, isVisibleWalletSettings);
+    if (confirmActionType === DISK_STORAGE) {
+      updateDialogVisibility(DISK_STORAGE, isVisibleWalletSettings);
     } else if (confirmActionType === AI_TOOLS) {
       setIsAiServiceTopUpVisible(true);
       updateDialogVisibility(AI_TOOLS, isVisibleWalletSettings);
@@ -129,7 +129,7 @@ const Services = (props: InjectedProps) => {
 
   useEffect(() => {
     if (openDialog) {
-      updateDialogVisibility(TOTAL_SIZE, openDialog);
+      updateDialogVisibility(DISK_STORAGE, openDialog);
       setPreviousValue(previousStoragePlanSize);
       navigate(location.pathname, { replace: true });
     }
@@ -213,7 +213,7 @@ const Services = (props: InjectedProps) => {
 
     // return;
 
-    if (id === TOTAL_SIZE && isGracePeriod) {
+    if (id === DISK_STORAGE && isGracePeriod) {
       setIsGracePeriodModalVisible(true);
       return;
     }
@@ -232,7 +232,7 @@ const Services = (props: InjectedProps) => {
   };
 
   const onClose = () => {
-    updateDialogVisibility(TOTAL_SIZE, false);
+    updateDialogVisibility(DISK_STORAGE, false);
   };
 
   const onCloseStorageCancell = () => {
@@ -244,12 +244,12 @@ const Services = (props: InjectedProps) => {
 
     setIsCurrentConfirmState(currentEnabled);
 
-    if (id === TOTAL_SIZE) {
+    if (id === DISK_STORAGE) {
       if (currentEnabled) {
         setIsStorageCancellation(true);
         return;
       }
-      updateDialogVisibility(TOTAL_SIZE, true);
+      updateDialogVisibility(DISK_STORAGE, true);
 
       return;
     }
@@ -264,7 +264,7 @@ const Services = (props: InjectedProps) => {
       return;
     }
 
-    if (id !== TOTAL_SIZE) {
+    if (id !== DISK_STORAGE) {
       if (dialogVisibility[id as keyof typeof dialogVisibility]) {
         previousDialogRef.current = true;
       }
@@ -381,9 +381,9 @@ const Services = (props: InjectedProps) => {
           visible={isShowStorageTariffDeactivatedModal}
         />
       ) : null}
-      {dialogVisibility[TOTAL_SIZE] ? (
+      {dialogVisibility[DISK_STORAGE] ? (
         <StoragePlanUpgrade
-          visible={dialogVisibility[TOTAL_SIZE]}
+          visible={dialogVisibility[DISK_STORAGE]}
           onClose={onClose}
           previousValue={previousValue}
         />
