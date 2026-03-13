@@ -1,5 +1,9 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
 import { dirname, join } from "path";
+import { createRequire } from "module";
 import remarkGfm from "remark-gfm";
+
+const require = createRequire(import.meta.url);
 
 /** @type { import('@storybook/react-webpack5').StorybookConfig } */
 export default {
@@ -12,11 +16,8 @@ export default {
   staticDirs: ["../../../public", "../__mocks__/storybook"],
 
   addons: [
-    getAbsolutePath("@storybook/addon-links"),
-    getAbsolutePath("@storybook/addon-essentials"),
-    getAbsolutePath("@storybook/addon-designs"),
     {
-      name: "@storybook/addon-docs",
+      name: getAbsolutePath("@storybook/addon-docs"),
       options: {
         configureJSX: true,
         babelOptions: {
@@ -36,7 +37,7 @@ export default {
         },
       },
     },
-    getAbsolutePath("storybook-dark-mode"),
+    getAbsolutePath("@vueless/storybook-dark-mode"),
     getAbsolutePath("@storybook/addon-webpack5-compiler-babel"),
   ],
 
@@ -69,6 +70,18 @@ export default {
       propFilter: (prop) =>
         prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
     },
+  },
+
+  webpackFinal: async (config) => {
+    config.resolve = config.resolve || {};
+
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      path: require.resolve("path-browserify"),
+    };
+
+    return config;
   },
 };
 
