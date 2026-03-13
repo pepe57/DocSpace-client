@@ -324,7 +324,7 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
       vite:
-        specifier: ^6.1.0
+        specifier: ^6.4.1
         version: 6.4.1(@types/node@24.10.7)(sass@1.79.6)(terser@5.46.0)(yaml@2.8.2)
       vite-plugin-svgr:
         specifier: ^4.5.0
