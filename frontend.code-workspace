@@ -346,6 +346,16 @@
             "tooltip": "🛠️ Start the \"update e2e screenshots (client)\" task"
           },
           {
+            "label": "Client E2E dev docker",
+            "task": "Test | Test e2e docker dev (client)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Client E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (client)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (client)\" task"
+          },
+          {
             "label": "Client E2E clear docker",
             "task": "Test | Test e2e docker clear (client)",
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
@@ -374,6 +384,16 @@
             "label": "Login E2E update screenshots",
             "task": "Test | Test e2e docker update-screenshots (login)",
             "tooltip": "🛠️ Start the \"update e2e screenshots (login)\" task"
+          },
+          {
+            "label": "Login E2E dev docker",
+            "task": "Test | Test e2e docker dev (login)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Login E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (login)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (login)\" task"
           },
           {
             "label": "Login E2E clear docker",
@@ -406,6 +426,16 @@
             "tooltip": "🛠️ Start the \"update e2e screenshots (SDK)\" task"
           },
           {
+            "label": "SDK E2E dev docker",
+            "task": "Test | Test e2e docker dev (SDK)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "SDK E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (SDK)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (SDK)\" task"
+          },
+          {
             "label": "SDK E2E clear docker",
             "task": "Test | Test e2e docker clear (SDK)",
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
@@ -436,6 +466,16 @@
             "tooltip": "🛠️ Start the \"update e2e screenshots (management)\" task"
           },
           {
+            "label": "Management E2E dev docker",
+            "task": "Test | Test e2e docker dev (management)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Management E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (management)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (management)\" task"
+          },
+          {
             "label": "Management E2E clear docker",
             "task": "Test | Test e2e docker clear (management)",
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
@@ -464,6 +504,16 @@
             "label": "Editor E2E update screenshots",
             "task": "Test | Test e2e docker update-screenshots (editor)",
             "tooltip": "🛠️ Start the \"update e2e screenshots (editor)\" task"
+          },
+          {
+            "label": "Editor E2E dev docker",
+            "task": "Test | Test e2e docker dev (editor)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Editor E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (editor)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (editor)\" task"
           },
           {
             "label": "Editor E2E clear docker",

@@ -331,6 +331,7 @@ describe("Image Tests", () => {
         if (
           idx > 0 &&
           file.fileName.indexOf("webpack") === -1 &&
+          file.fileName.indexOf("vite.config") === -1 &&
           data[idx - 1] !== "(" &&
           file.path.indexOf(".html") === -1 &&
           file.path.indexOf("storybook-static") === -1

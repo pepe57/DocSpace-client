@@ -54,35 +54,9 @@ const CodeBlock = ({ config, scriptUrl, theme }) => {
   const configWithoutEvents = { ...config };
   delete configWithoutEvents.events;
 
-  const eventsString = config.events
-    ? `\t"events": {\n${Object.entries(config.events)
-        .map(([key, fn]) => {
-          if (fn === null) return `\t\t"${key}": null`;
-
-          const fnStr = fn.toString();
-          let formattedFn = fnStr;
-
-          if (fnStr.startsWith("function")) {
-            const match = fnStr.match(/^function\s*\w*\s*(\([^)]*\))/);
-            if (match) {
-              const params = match[1];
-              const body = fnStr.slice(fnStr.indexOf("{"));
-              formattedFn = `${params} => ${body}`;
-            }
-          }
-
-          return `\t\t"${key}": ${formattedFn}`;
-        })
-        .join(",\n")}\n\t}`
-    : null;
-
   const configString = JSON.stringify(configWithoutEvents, null, "\t");
-  const lastCommaIndex = configString.lastIndexOf("\n}");
-  const configWithEvents = eventsString
-    ? configString.slice(0, lastCommaIndex) + ",\n" + eventsString + "\n}"
-    : configString;
 
-  const codeString = `const config = ${configWithEvents}\n\nconst script = document.createElement("script");\n\nscript.setAttribute("src", "${scriptUrl}");\nscript.onload = () => window.DocSpace.SDK.init(config);\n\ndocument.body.appendChild(script);`;
+  const codeString = `const config = ${configString}\n\nconst script = document.createElement("script");\n\nscript.setAttribute("src", "${scriptUrl}");\nscript.onload = () => window.DocSpace.SDK.init(config);\n\ndocument.body.appendChild(script);`;
 
   const extensions = [javascript({ jsx: true }), EditorView.lineWrapping];
 

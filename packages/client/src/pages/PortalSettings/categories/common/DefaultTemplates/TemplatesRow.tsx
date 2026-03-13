@@ -215,6 +215,7 @@ const TemplatesRow = ({
       <ContextMenuButton
         className={styles.contextMenuButton}
         directionX="left"
+        directionY="both"
         getData={getOptions}
       />
       {isSelectorVisible ? (
