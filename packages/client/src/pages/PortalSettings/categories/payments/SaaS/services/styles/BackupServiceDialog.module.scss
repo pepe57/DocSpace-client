@@ -20,8 +20,6 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-
-  margin-top: 20px;
 }
 
 .stepMainRow {
@@ -97,6 +95,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: fit-content;
 }
 
 .balanceLabel {
@@ -303,7 +302,6 @@
  display: flex;
   align-items: center;
   gap: 8px;
- 
 
   rect {
     fill: var(--color-scheme-main-buttons);
@@ -542,11 +540,77 @@
 }
 
 .closeFooter {
-
   width: 100%;
   display: flex;
   gap: 8px;
 
+}
+
+
+.transfer {
+  display: grid;
+  grid-template-columns: auto 16px auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 10px 20px;
+}
+
+.label {
+  font-size: 14px;
+
+}
+
+.from {
+  grid-column: 1;
+}
+
+.to {
+  grid-column: 3;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+    rect {
+    fill: var(--color-scheme-main-buttons);
+
+  }
+
+  path {
+    fill: var(--color-scheme-main-buttons);
+
+  }
+}
+
+.icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-scheme-main-buttons);
+  opacity: 0.1;
+  border-radius: inherit;
+}
+
+.icon > * {
+  position: relative;
+}
+
+.arrow {
+  display: flex;
+  justify-content: center;
 }
 
 @media (max-width: 420px) {

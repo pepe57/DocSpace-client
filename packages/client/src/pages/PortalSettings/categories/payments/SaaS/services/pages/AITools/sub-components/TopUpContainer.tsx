@@ -34,18 +34,20 @@ import TopUpModal from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/sh
 type TopUpContainerTypes = {
   visible: boolean;
   onCloseTopUpModal: () => void;
-  onBackClick: () => void;
   featureCountData?: number;
   isTopUpVisible?: boolean;
+  onPricingBillingClick: () => void;
+  onGetStartedClick: () => void;
 };
 
 const TopUpContainer = (props: TopUpContainerTypes) => {
   const {
     visible,
     onCloseTopUpModal,
-    onBackClick,
     featureCountData,
     isTopUpVisible,
+    onPricingBillingClick,
+    onGetStartedClick,
   } = props;
 
   const [walletTopUpModalVisible, setWalletTopUpModalVisible] =
@@ -86,15 +88,12 @@ const TopUpContainer = (props: TopUpContainerTypes) => {
     />
   ) : visible ? (
     <TopUpAiModal
+      onPricingBillingClick={onPricingBillingClick}
+      onGetStartedClick={onGetStartedClick}
       onTopUpBalance={onTopUpBalance}
       onAmountDifferenceChange={onAmountDifferenceChange}
       visible={visible}
       onClose={onCloseTopUpModal}
-      headerProps={{
-        isBackButton: true,
-        onBackClick: onBackClick,
-        onCloseClick: onCloseTopUpModal,
-      }}
       initialAmount={selectedAmount > 0 ? selectedAmount.toString() : ""}
     />
   ) : null;

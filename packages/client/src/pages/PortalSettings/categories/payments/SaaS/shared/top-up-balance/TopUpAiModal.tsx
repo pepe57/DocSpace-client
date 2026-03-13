@@ -47,9 +47,12 @@ import { useNavigate } from "react-router";
 import FromWalletToAi from "./sub-components/FromWalletToAi";
 import { AI_TOOLS } from "@docspace/shared/constants";
 import { DateTime } from "luxon";
+import { Link } from "@docspace/ui-kit/components";
 
 type TopUpAiModalProps = {
   onTopUpBalance: () => void;
+  onPricingBillingClick: () => void;
+  onGetStartedClick: () => void;
   onAmountDifferenceChange?: (diff: number, amount: number) => void;
   visible: boolean;
   currency?: string;
@@ -100,6 +103,8 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
     onAmountDifferenceChange,
     initialAmount,
     logoText,
+    onPricingBillingClick,
+    onGetStartedClick,
   } = props;
 
   const { t } = useTranslation(["Payments", "Services", "Common"]);
@@ -133,10 +138,23 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
         withBodyScroll
       >
         <ModalDialog.Header>
-          {t("TopUpAi", { organizationName: logoText })}
+          {t("AddCreditsToAI", { organizationName: logoText })}
         </ModalDialog.Header>
         <ModalDialog.Body>
           <div className={styles.modalBody}>
+            <Text className={modalStyles.description}>
+              {t("Services:CreditsFromWalletDescription")}
+            </Text>
+
+            <Link
+              onClick={onGetStartedClick}
+              textDecoration="underline dotted"
+              color="accent"
+              fontWeight={600}
+            >
+              {t("Services:HowDoesItWork")}
+            </Link>
+
             <FromWalletToAi
               onTopUpBalance={onTopUpBalance}
               onAmountDifferenceChange={onAmountDifferenceChange}
@@ -155,6 +173,16 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
             <Text fontSize="12px" className={modalStyles.helperText}>
               {t("Payments:AICreditsHelper")}
             </Text>
+
+            <Link
+              className={modalStyles.pricingBillingLink}
+              onClick={onPricingBillingClick}
+              textDecoration="underline dotted"
+              color="accent"
+              fontWeight={600}
+            >
+              {t("Services:AIPricingAndBilling")}
+            </Link>
           </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>

@@ -88,9 +88,7 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
 }) => {
   const { t } = useTranslation(["Services", "Common", "Payments"]);
 
-  const [view, setView] = useState<DialogView>(
-    isTopUpVisible ? "top-up" : "get-started",
-  );
+  const [view, setView] = useState<DialogView>("get-started");
 
   const onTopUpClick = () => {
     setView("top-up");
@@ -109,12 +107,13 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
       <TopUpContainer
         visible={view === "top-up"}
         onCloseTopUpModal={onClose}
-        onBackClick={onGetStartedClick}
+        onGetStartedClick={onGetStartedClick}
         isTopUpVisible={isTopUpVisible}
+        onPricingBillingClick={onPricingBillingClick}
       />
     ) : view === "pricing" ? (
       <PricingBillingBody
-        onBack={onGetStartedClick}
+        onBack={onTopUpClick}
         visible={view === "pricing"}
         onClose={onClose}
         onTopUpClick={onTopUpClick}
@@ -128,10 +127,13 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
       displayType={ModalDialogType.aside}
       withBodyScroll
       containerVisible={view !== "get-started"}
+      isBackButton
+      onBackClick={onTopUpClick}
+      onCloseClick={onClose}
     >
       <ModalDialog.Container>{container}</ModalDialog.Container>
       <ModalDialog.Header>
-        {t("Services:OrganizationAI", { organizationName: logoText })}
+        {t("Services:HowAiWorks", { organizationName: logoText })}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.dialogBody}>

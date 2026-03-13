@@ -16,9 +16,10 @@ import ErrorIcon from "PUBLIC_DIR/images/icons/32/ai-error.svg";
 import AiTokensIcon from "PUBLIC_DIR/images/icons/32/ai-tokens.svg";
 import AiVectorizationIcon from "PUBLIC_DIR/images/icons/32/ai-vectorization.svg";
 import AiSearchIcon from "PUBLIC_DIR/images/icons/32/ai-search.svg";
-
+import RightArrowIcon from "PUBLIC_DIR/images/icons/16/right.arrow.react.svg";
 import styles from "../../../styles/BackupServiceDialog.module.scss";
-
+import PriceBackground from "PUBLIC_DIR/images/icons/16/price.react.svg";
+import AiSvg from "PUBLIC_DIR/images/icons/16/AI.svg";
 interface ServiceOption {
   id: string;
   title: string;
@@ -92,8 +93,6 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
 
   return (
     <>
-      <Text className={styles.getStartedTitle}>{t("AIGetStartedTitle")}</Text>
-
       <div className={styles.getStartedSteps}>
         <div className={styles.stepMainRow}>
           <div className={styles.stepNumber}>1</div>
@@ -111,20 +110,40 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
 
         <div className={styles.stepConnectorSolid}>
           <div className={styles.stepConnectorContent}>
-            <Text className={styles.balanceLabel}>
-              {t("AIGetStartedCurrentBalance")}
-            </Text>
-            <div className={styles.balanceAmount}>
-              <span className={styles.balanceAmountMajor}>$0</span>
-              <span className={styles.balanceAmountMinor}>.00</span>
-            </div>
-            <div className={styles.topUpButtonWrapper}>
-              <Button
-                label={t("Payments:TopUpBalance")}
-                size={ButtonSize.small}
-                onClick={onTopUpClick}
-                primary
-              />
+            <div className={styles.transfer}>
+              <div className={styles.from}>
+                <Text fontWeight={600} fontSize={"12px"}>
+                  {t("Payments:TopUpFrom")}
+                </Text>
+              </div>
+              <div></div>
+              <div className={styles.to}>
+                <Text fontWeight={600} fontSize={"12px"}>
+                  {t("Payments:TopUpTo")}
+                </Text>
+              </div>
+
+              <div className={styles.item}>
+                <div className={styles.icon}>
+                  <PriceBackground />
+                </div>
+                <Text fontWeight={600} fontSize={"12px"}>
+                  {t("WalletBalance")}
+                </Text>
+              </div>
+
+              <div className={styles.arrow}>
+                <RightArrowIcon />
+              </div>
+
+              <div className={styles.item}>
+                <div className={styles.icon}>
+                  <AiSvg />
+                </div>
+                <Text fontWeight={600} fontSize={"12px"}>
+                  {t("AIBalance")}
+                </Text>
+              </div>
             </div>
           </div>
         </div>
