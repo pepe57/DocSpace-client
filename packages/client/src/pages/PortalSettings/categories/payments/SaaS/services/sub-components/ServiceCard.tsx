@@ -130,7 +130,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             <div
               className={classNames(styles.additionalInfo, {
                 [styles.warningColor]: isWarningColor,
-                [styles.isErrorColor]: isErrorColor,
+                [styles.errorColor]: !isInactiveColor && isErrorColor,
                 [styles.greenColor]:
                   isEnabled &&
                   !isWarningColor &&

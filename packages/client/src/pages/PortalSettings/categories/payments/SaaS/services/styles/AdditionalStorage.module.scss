@@ -155,6 +155,15 @@
       }
     }
   }
+  
+   &.errorColor {
+    color: var(--payment-error-color);
+    svg {
+      path {
+        fill: var(--payment-error-color);
+      }
+    }
+  }
 }
 
 .spacer {
