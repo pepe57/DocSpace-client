@@ -20,6 +20,9 @@ import RightArrowIcon from "PUBLIC_DIR/images/icons/16/right.arrow.react.svg";
 import styles from "../../../styles/BackupServiceDialog.module.scss";
 import PriceBackground from "PUBLIC_DIR/images/icons/16/price.react.svg";
 import AiSvg from "PUBLIC_DIR/images/icons/16/AI.svg";
+import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components";
+import { observer, inject } from "mobx-react";
+
 interface ServiceOption {
   id: string;
   title: string;
@@ -29,12 +32,18 @@ interface ServiceOption {
 
 interface GetStartedBodyProps {
   onPricingBillingClick: () => void;
-  onTopUpClick: () => void;
+  visible: boolean;
+  onClose: () => void;
+  onBack: () => void;
+  logoText?: string;
 }
 
 const GetStartedBody: React.FC<GetStartedBodyProps> = ({
   onPricingBillingClick,
-  onTopUpClick,
+  visible,
+  onClose,
+  onBack,
+  logoText,
 }) => {
   const { t } = useTranslation(["Services", "Payments", "Common"]);
 
@@ -92,160 +101,182 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
   ];
 
   return (
-    <>
-      <div className={styles.getStartedSteps}>
-        <div className={styles.stepMainRow}>
-          <div className={styles.stepNumber}>1</div>
-          <div className={styles.stepText}>
-            <Text className={styles.stepTitleText}>
-              {t("AIGetStartedStep1Title")}
-            </Text>
-            <Text fontSize="12px" lineHeight="16px">
-              {t("AIGetStartedStep1Description", {
-                productName: t("Common:ProductName"),
-              })}
-            </Text>
+    <ModalDialog
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.aside}
+      isBackButton
+      onBackClick={onBack}
+      onCloseClick={onClose}
+      withBodyScroll
+    >
+      <ModalDialog.Header>
+        {t("Payments:AddCreditsToAI", { organizationName: logoText })}
+      </ModalDialog.Header>
+      <ModalDialog.Body>
+        <div className={styles.getStartedSteps}>
+          <div className={styles.stepMainRow}>
+            <div className={styles.stepNumber}>1</div>
+            <div className={styles.stepText}>
+              <Text className={styles.stepTitleText}>
+                {t("AIGetStartedStep1Title")}
+              </Text>
+              <Text fontSize="12px" lineHeight="16px">
+                {t("AIGetStartedStep1Description", {
+                  productName: t("Common:ProductName"),
+                })}
+              </Text>
+            </div>
           </div>
-        </div>
 
-        <div className={styles.stepConnectorSolid}>
-          <div className={styles.stepConnectorContent}>
-            <div className={styles.transfer}>
-              <div className={styles.from}>
-                <Text fontWeight={600} fontSize={"12px"}>
-                  {t("Payments:TopUpFrom")}
-                </Text>
-              </div>
-              <div></div>
-              <div className={styles.to}>
-                <Text fontWeight={600} fontSize={"12px"}>
-                  {t("Payments:TopUpTo")}
-                </Text>
-              </div>
-
-              <div className={styles.item}>
-                <div className={styles.icon}>
-                  <PriceBackground />
+          <div className={styles.stepConnectorSolid}>
+            <div className={styles.stepConnectorContent}>
+              <div className={styles.transfer}>
+                <div className={styles.from}>
+                  <Text fontWeight={600} fontSize={"12px"}>
+                    {t("Payments:TopUpFrom")}
+                  </Text>
                 </div>
-                <Text fontWeight={600} fontSize={"12px"}>
-                  {t("WalletBalance")}
-                </Text>
-              </div>
-
-              <div className={styles.arrow}>
-                <RightArrowIcon />
-              </div>
-
-              <div className={styles.item}>
-                <div className={styles.icon}>
-                  <AiSvg />
+                <div></div>
+                <div className={styles.to}>
+                  <Text fontWeight={600} fontSize={"12px"}>
+                    {t("Payments:TopUpTo")}
+                  </Text>
                 </div>
-                <Text fontWeight={600} fontSize={"12px"}>
-                  {t("AIBalance")}
-                </Text>
+
+                <div className={styles.item}>
+                  <div className={styles.icon}>
+                    <PriceBackground />
+                  </div>
+                  <Text fontWeight={600} fontSize={"12px"}>
+                    {t("WalletBalance")}
+                  </Text>
+                </div>
+
+                <div className={styles.arrow}>
+                  <RightArrowIcon />
+                </div>
+
+                <div className={styles.item}>
+                  <div className={styles.icon}>
+                    <AiSvg />
+                  </div>
+                  <Text fontWeight={600} fontSize={"12px"}>
+                    {t("AIBalance")}
+                  </Text>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className={styles.stepMainRow}>
-          <div className={styles.stepNumber}>2</div>
-          <div className={styles.stepText}>
-            <Text className={styles.stepTitleText}>
-              {t("AIGetStartedStep2Title")}
-            </Text>
-            <Text fontSize="12px" lineHeight="16px">
-              {t("AIGetStartedStep2Description")}
-            </Text>
-          </div>
-        </div>
-
-        <div className={styles.stepConnectorDashed}>
-          <div className={styles.featureTilesGrid}>
-            {serviceOptions.slice(0, 8).map((service) => (
-              <div key={service.id} className={styles.featureTile}>
-                <div className={styles.featureTileIcon}>{service.icon}</div>
-                <Text fontSize="12px" fontWeight={600}>
-                  {service.title}
-                </Text>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className={styles.stepMainRow}>
-          <div className={styles.stepNumber}>3</div>
-          <div className={styles.stepText}>
-            <Text className={styles.stepTitleText}>
-              {t("AIGetStartedStep3Title")}
-            </Text>
-            <Text fontSize="12px" lineHeight="16px">
-              {t("AIGetStartedStep3Description")}
-            </Text>
-          </div>
-        </div>
-
-        <div className={styles.stepConnectorDashed}>
-          <div className={styles.payForSection}>
-            <Text fontSize="12px" fontWeight={700}>
-              {t("AIWhatYouPayForTitle")}
-            </Text>
-
-            <div className={styles.payForList}>
-              <div className={styles.payForItem}>
-                <div className={styles.featureTileIcon}>
-                  <AiTokensIcon />
-                </div>
-                <Text fontSize="12px" fontWeight={600}>
-                  {t("AIWhatYouPayForTokens")}
-                </Text>
-              </div>
-
-              <div className={styles.payForItem}>
-                <div className={styles.featureTileIcon}>
-                  <AiVectorizationIcon />
-                </div>
-                <Text fontSize="12px" fontWeight={600} as="span">
-                  <Trans
-                    t={t}
-                    ns="Services"
-                    i18nKey="AIWhatYouPayForVectorization"
-                    components={{
-                      1: (
-                        <Text
-                          fontSize="12px"
-                          as="span"
-                          className={styles.payForItemTextMuted}
-                        />
-                      ),
-                    }}
-                  />
-                </Text>
-              </div>
-
-              <div className={styles.payForItem}>
-                <div className={styles.featureTileIcon}>
-                  <AiSearchIcon />
-                </div>
-                <Text fontSize="12px" fontWeight={600}>
-                  {t("AIWhatYouPayForWebSearch")}
-                </Text>
-              </div>
+          <div className={styles.stepMainRow}>
+            <div className={styles.stepNumber}>2</div>
+            <div className={styles.stepText}>
+              <Text className={styles.stepTitleText}>
+                {t("AIGetStartedStep2Title")}
+              </Text>
+              <Text fontSize="12px" lineHeight="16px">
+                {t("AIGetStartedStep2Description")}
+              </Text>
             </div>
+          </div>
 
-            <Link
-              className={styles.pricingBillingLink}
-              onClick={onPricingBillingClick}
-              textDecoration="underline dotted"
-              color="accent"
-            >
-              <Text>{t("AIPricingAndBilling")}</Text>
-            </Link>
+          <div className={styles.stepConnectorDashed}>
+            <div className={styles.featureTilesGrid}>
+              {serviceOptions.slice(0, 8).map((service) => (
+                <div key={service.id} className={styles.featureTile}>
+                  <div className={styles.featureTileIcon}>{service.icon}</div>
+                  <Text fontSize="12px" fontWeight={600}>
+                    {service.title}
+                  </Text>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.stepMainRow}>
+            <div className={styles.stepNumber}>3</div>
+            <div className={styles.stepText}>
+              <Text className={styles.stepTitleText}>
+                {t("AIGetStartedStep3Title")}
+              </Text>
+              <Text fontSize="12px" lineHeight="16px">
+                {t("AIGetStartedStep3Description")}
+              </Text>
+            </div>
+          </div>
+
+          <div className={styles.stepConnectorDashed}>
+            <div className={styles.payForSection}>
+              <Text fontSize="12px" fontWeight={700}>
+                {t("AIWhatYouPayForTitle")}
+              </Text>
+
+              <div className={styles.payForList}>
+                <div className={styles.payForItem}>
+                  <div className={styles.featureTileIcon}>
+                    <AiTokensIcon />
+                  </div>
+                  <Text fontSize="12px" fontWeight={600}>
+                    {t("AIWhatYouPayForTokens")}
+                  </Text>
+                </div>
+
+                <div className={styles.payForItem}>
+                  <div className={styles.featureTileIcon}>
+                    <AiVectorizationIcon />
+                  </div>
+                  <Text fontSize="12px" fontWeight={600} as="span">
+                    <Trans
+                      t={t}
+                      ns="Services"
+                      i18nKey="AIWhatYouPayForVectorization"
+                      components={{
+                        1: (
+                          <Text
+                            fontSize="12px"
+                            as="span"
+                            className={styles.payForItemTextMuted}
+                          />
+                        ),
+                      }}
+                    />
+                  </Text>
+                </div>
+
+                <div className={styles.payForItem}>
+                  <div className={styles.featureTileIcon}>
+                    <AiSearchIcon />
+                  </div>
+                  <Text fontSize="12px" fontWeight={600}>
+                    {t("AIWhatYouPayForWebSearch")}
+                  </Text>
+                </div>
+              </div>
+
+              <Link
+                className={styles.pricingBillingLink}
+                onClick={onPricingBillingClick}
+                textDecoration="underline dotted"
+                color="accent"
+              >
+                <Text>{t("AIPricingAndBilling")}</Text>
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
-    </>
+      </ModalDialog.Body>
+    </ModalDialog>
   );
 };
 
-export default GetStartedBody;
+export default inject(({ paymentStore, settingsStore }: TStore) => {
+  const { formatWalletCurrency } = paymentStore;
+  const { logoText } = settingsStore;
+  return {
+    isEnabled: true,
+
+    formatWalletCurrency,
+    logoText,
+  };
+})(observer(GetStartedBody));

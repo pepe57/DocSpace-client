@@ -57,16 +57,17 @@ type TopUpAiModalProps = {
   visible: boolean;
   currency?: string;
   fetchTransactionHistory?: (
-    startDate: DateTime | null,
-    endDate: DateTime | null,
-    credit: boolean,
-    debit: boolean,
+    startDate?: DateTime | null,
+    endDate?: DateTime | null,
+    credit?: boolean,
+    debit?: boolean,
     participantName?: string,
+    serviceName?: string,
   ) => Promise<void>;
   walletCustomerEmail?: boolean;
   fetchBalance?: () => Promise<void>;
   fetchAiServiceBalance?: () => Promise<void>;
-  onClose: (isTopUp: boolean) => void;
+
   cardLinked?: string;
   accountLink?: string;
   isEditAutoPayment?: boolean;
@@ -79,132 +80,75 @@ type TopUpAiModalProps = {
   reccomendedAmount?: string;
   amount?: string;
   walletCustomerStatusNotActive?: boolean;
-  walletBalance?: number;
+
   formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
-  initialAmount?: string;
   logoText?: string;
+  isLoading?: boolean;
 };
 
 const TopUpAiModal = (props: TopUpAiModalProps) => {
   const {
-    visible,
-    currency = "",
-    fetchTransactionHistory,
     walletCustomerEmail,
-    fetchBalance,
-    fetchAiServiceBalance,
-    onClose,
-    headerProps,
     reccomendedAmount,
     walletCustomerStatusNotActive,
     formatWalletCurrency,
-    walletBalance,
     onTopUpBalance,
     onAmountDifferenceChange,
-    initialAmount,
     logoText,
     onPricingBillingClick,
     onGetStartedClick,
+    isLoading,
   } = props;
 
   const { t } = useTranslation(["Payments", "Services", "Common"]);
-  const navigate = useNavigate();
-
-  const [isLoading, setIsLoading] = useState(false);
 
   const isDisabled = (isLoading || walletCustomerStatusNotActive) ?? false;
 
-  const onRedirect = () => {
-    navigate("/portal-settings/services/ai-services");
-
-    onClose(false);
-  };
-
-  const onCloseGlobal = () => {
-    onClose(false);
-  };
-
-  const onFetchHistory = async () => {
-    await fetchTransactionHistory?.(null, null, true, true, AI_TOOLS);
-  };
-
   return (
-    <AmountProvider initialAmount={reccomendedAmount || initialAmount}>
-      <ModalDialog
-        visible={visible}
-        onClose={onCloseGlobal}
-        displayType={ModalDialogType.aside}
-        {...headerProps}
-        withBodyScroll
+    <>
+      <Text className={modalStyles.description}>
+        {t("Services:CreditsFromWalletDescription", {
+          organizationName: logoText,
+        })}
+      </Text>
+
+      <Link
+        onClick={onGetStartedClick}
+        textDecoration="underline dotted"
+        color="accent"
+        fontWeight={600}
       >
-        <ModalDialog.Header>
-          {t("AddCreditsToAI", { organizationName: logoText })}
-        </ModalDialog.Header>
-        <ModalDialog.Body>
-          <div className={styles.modalBody}>
-            <Text className={modalStyles.description}>
-              {t("Services:CreditsFromWalletDescription", {
-                organizationName: logoText,
-              })}
-            </Text>
+        {t("Services:HowDoesItWork")}
+      </Link>
 
-            <Link
-              onClick={onGetStartedClick}
-              textDecoration="underline dotted"
-              color="accent"
-              fontWeight={600}
-            >
-              {t("Services:HowDoesItWork")}
-            </Link>
+      <FromWalletToAi
+        onTopUpBalance={onTopUpBalance}
+        onAmountDifferenceChange={onAmountDifferenceChange}
+      />
 
-            <FromWalletToAi
-              onTopUpBalance={onTopUpBalance}
-              onAmountDifferenceChange={onAmountDifferenceChange}
-            />
+      <Amount
+        formatWalletCurrency={formatWalletCurrency}
+        walletCustomerEmail={walletCustomerEmail}
+        isDisabled={isDisabled}
+        walletCustomerStatusNotActive={walletCustomerStatusNotActive}
+        reccomendedAmount={reccomendedAmount}
+        minValue={"10"}
+      />
 
-            <Amount
-              formatWalletCurrency={formatWalletCurrency}
-              walletCustomerEmail={walletCustomerEmail}
-              isDisabled={isDisabled}
-              walletCustomerStatusNotActive={walletCustomerStatusNotActive}
-              reccomendedAmount={reccomendedAmount}
-              minValue={"10"}
-              maxValue={walletBalance?.toString()}
-            />
+      <Text fontSize="12px" className={modalStyles.helperText}>
+        {t("Payments:AICreditsHelper")}
+      </Text>
 
-            <Text fontSize="12px" className={modalStyles.helperText}>
-              {t("Payments:AICreditsHelper")}
-            </Text>
-
-            <Link
-              className={modalStyles.pricingBillingLink}
-              onClick={onPricingBillingClick}
-              textDecoration="underline dotted"
-              color="accent"
-              fontWeight={600}
-            >
-              {t("Services:AIPricingAndBilling")}
-            </Link>
-          </div>
-        </ModalDialog.Body>
-        <ModalDialog.Footer>
-          <TopUpButtons
-            currency={currency}
-            fetchBalance={fetchBalance}
-            fetchServiceBalance={fetchAiServiceBalance}
-            fetchTransactionHistory={onFetchHistory}
-            onClose={onClose}
-            walletCustomerEmail={walletCustomerEmail}
-            setIsLoading={setIsLoading}
-            isLoading={isLoading}
-            walletCustomerStatusNotActive={walletCustomerStatusNotActive}
-            onTopUpBalance={buyWalletService}
-            serviceName={AI_TOOLS}
-            afterTopUp={onRedirect}
-          />
-        </ModalDialog.Footer>
-      </ModalDialog>
-    </AmountProvider>
+      <Link
+        className={modalStyles.pricingBillingLink}
+        onClick={onPricingBillingClick}
+        textDecoration="underline dotted"
+        color="accent"
+        fontWeight={600}
+      >
+        {t("Services:AIPricingAndBilling")}
+      </Link>
+    </>
   );
 };
 
@@ -223,7 +167,6 @@ export default inject(
       walletCodeCurrency,
       wasFirstTopUp,
       formatWalletCurrency,
-      walletBalance,
     } = paymentStore;
     const { formatAiServiceCurrency, fetchAiServiceBalance } = servicesStore;
 
@@ -243,7 +186,7 @@ export default inject(
       formatWalletCurrency,
       logoText,
       formatAiServiceCurrency,
-      walletBalance,
+
       fetchAiServiceBalance,
     };
   },

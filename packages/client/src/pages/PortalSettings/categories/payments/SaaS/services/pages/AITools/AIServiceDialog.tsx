@@ -64,31 +64,60 @@ import styles from "../../styles/BackupServiceDialog.module.scss";
 import GetStartedBody from "./sub-components/GetStartedBody";
 import PricingBillingBody from "./sub-components/PricingBillingBody";
 import TopUpContainer from "./sub-components/TopUpContainer";
+import { DateTime } from "luxon";
+import { useNavigate } from "react-router";
+import { AI_TOOLS } from "@docspace/shared/constants";
+import TopUpButtons from "../../../shared/top-up-balance/sub-components/TopUpButtons";
 
+import { buyWalletService } from "@docspace/shared/api/portal";
+import TopUpAiModal from "../../../shared/top-up-balance/TopUpAiModal";
+import TopUpModal from "../../../shared/top-up-balance/TopUpModal";
+import { AmountProvider } from "../../../wallet/context";
 interface AIServiceDialogProps {
   visible: boolean;
   onClose: () => void;
-  onToggle: (id: string, enabled: boolean) => void;
   isEnabled?: boolean;
   formatWalletCurrency?: (
     item: number | null,
     fractionDigits: number,
   ) => string;
+  fetchTransactionHistory?: (
+    startDate?: DateTime | null,
+    endDate?: DateTime | null,
+    credit?: boolean,
+    debit?: boolean,
+    participantName?: string,
+    serviceName?: string,
+  ) => Promise<void>;
+  fetchBalance?: () => Promise<void>;
   logoText?: string;
   isTopUpVisible?: boolean;
 }
 
-type DialogView = "get-started" | "pricing" | "top-up";
+type DialogView = "get-started" | "pricing" | "top-up" | "top-up-wallet";
 
 const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
   visible,
   onClose,
   logoText,
-  isTopUpVisible,
+  fetchTransactionHistory,
+  fetchBalance,
+  fetchAiServiceBalance,
+  walletCustomerEmail,
+  walletCustomerStatusNotActive,
+  currency,
+  featureCountData,
 }) => {
   const { t } = useTranslation(["Services", "Common", "Payments"]);
 
-  const [view, setView] = useState<DialogView>("get-started");
+  const [view, setView] = useState<DialogView>("top-up");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [recommendedAmount, setRecommendedAmount] = useState<number>(0);
+  const [selectedAmount, setSelectedAmount] = useState<number>(
+    featureCountData ?? 0,
+  );
+
+  const navigate = useNavigate();
 
   const onTopUpClick = () => {
     setView("top-up");
@@ -102,14 +131,59 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
     setView("pricing");
   };
 
+  const onFetchHistory = async () => {
+    await fetchTransactionHistory?.(null, null, true, true, AI_TOOLS);
+  };
+
+  const onRedirect = () => {
+    if (
+      !window.location.pathname.includes(
+        "/portal-settings/services/ai-services",
+      )
+    ) {
+      console.log("window.location.href", window.location.href);
+      navigate("/portal-settings/services/ai-services");
+    }
+
+    onClose();
+  };
+
+  const onTopUpBalance = () => {
+    setView("top-up-wallet");
+  };
+
+  const onAmountDifferenceChange = (diff: number, amount: number) => {
+    setRecommendedAmount(diff);
+    setSelectedAmount(amount);
+  };
+
+  const onBackWalletClick = () => {
+    setView("top-up");
+  };
+
   const container =
-    view === "top-up" ? (
-      <TopUpContainer
-        visible={view === "top-up"}
-        onCloseTopUpModal={onClose}
-        onGetStartedClick={onGetStartedClick}
-        isTopUpVisible={isTopUpVisible}
+    view === "top-up-wallet" ? (
+      <TopUpModal
+        visible={view === "top-up-wallet"}
+        onClose={onBackWalletClick}
+        afterTopUp={onBackWalletClick}
+        headerProps={{
+          isBackButton: true,
+          onBackClick: onBackWalletClick,
+          onCloseClick: onClose,
+        }}
+        {...(recommendedAmount > 0 && {
+          reccomendedAmount: recommendedAmount.toString(),
+          amount: selectedAmount.toString(),
+        })}
+        serviceName={AI_TOOLS}
+      />
+    ) : view === "get-started" ? (
+      <GetStartedBody
         onPricingBillingClick={onPricingBillingClick}
+        visible={view === "get-started"}
+        onClose={onClose}
+        onBack={onTopUpClick}
       />
     ) : view === "pricing" ? (
       <PricingBillingBody
@@ -120,64 +194,84 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
       />
     ) : null;
 
+  const initialAmount = selectedAmount > 0 ? selectedAmount.toString() : "";
+
   return (
-    <ModalDialog
-      visible={visible}
-      onClose={onClose}
-      displayType={ModalDialogType.aside}
-      withBodyScroll
-      containerVisible={view !== "get-started"}
-      isBackButton
-      onBackClick={onTopUpClick}
-      onCloseClick={onClose}
-    >
-      <ModalDialog.Container>{container}</ModalDialog.Container>
-      <ModalDialog.Header>
-        {t("Services:HowAiWorks", { organizationName: logoText })}
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        <div className={styles.dialogBody}>
-          <GetStartedBody
-            onPricingBillingClick={onPricingBillingClick}
-            onTopUpClick={onTopUpClick}
+    <AmountProvider initialAmount={initialAmount}>
+      <ModalDialog
+        visible={visible}
+        onClose={onClose}
+        displayType={ModalDialogType.aside}
+        withBodyScroll
+        containerVisible={view !== "top-up"}
+      >
+        <ModalDialog.Container>{container}</ModalDialog.Container>
+        <ModalDialog.Header>
+          {t("Payments:AddCreditsToAI", { organizationName: logoText })}
+        </ModalDialog.Header>
+        <ModalDialog.Body>
+          <div className={styles.dialogBody}>
+            <TopUpAiModal
+              onPricingBillingClick={onPricingBillingClick}
+              onGetStartedClick={onGetStartedClick}
+              onTopUpBalance={onTopUpBalance}
+              onAmountDifferenceChange={onAmountDifferenceChange}
+              visible={visible}
+              onClose={onClose}
+            />
+          </div>
+        </ModalDialog.Body>
+        <ModalDialog.Footer>
+          <TopUpButtons
+            currency={currency}
+            fetchBalance={fetchBalance}
+            fetchServiceBalance={fetchAiServiceBalance}
+            fetchTransactionHistory={onFetchHistory}
+            onClose={onClose}
+            walletCustomerEmail={walletCustomerEmail}
+            setIsLoading={setIsLoading}
+            isLoading={isLoading}
+            walletCustomerStatusNotActive={walletCustomerStatusNotActive}
+            onTopUpBalance={buyWalletService}
+            serviceName={AI_TOOLS}
+            afterTopUp={onRedirect}
           />
-        </div>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <div className={styles.closeFooter}>
-          <Button
-            key="OkButton"
-            label={t("Payments:TopUp")}
-            size={ButtonSize.normal}
-            primary
-            scale
-            isDisabled={false}
-            onClick={onTopUpClick}
-            isLoading={false}
-            testId="top_up_button"
-          />
-          <Button
-            key="CancelButton"
-            label={t("Common:CancelButton")}
-            size={ButtonSize.normal}
-            scale
-            onClick={onClose}
-            isDisabled={false}
-            testId="cancel_top_up_button"
-          />
-        </div>
-      </ModalDialog.Footer>
-    </ModalDialog>
+        </ModalDialog.Footer>
+      </ModalDialog>
+    </AmountProvider>
   );
 };
 
-export default inject(({ paymentStore, settingsStore }: TStore) => {
-  const { formatWalletCurrency } = paymentStore;
-  const { logoText } = settingsStore;
-  return {
-    isEnabled: true,
+export default inject(
+  ({
+    paymentStore,
+    settingsStore,
+    servicesStore,
+    currentTariffStatusStore,
+  }: TStore) => {
+    const {
+      formatWalletCurrency,
+      fetchTransactionHistory,
+      fetchBalance,
+      walletCodeCurrency,
+    } = paymentStore;
+    const { logoText } = settingsStore;
 
-    formatWalletCurrency,
-    logoText,
-  };
-})(observer(AIServiceDialog));
+    const { fetchAiServiceBalance, featureCountData } = servicesStore;
+    const { walletCustomerStatusNotActive, walletCustomerEmail } =
+      currentTariffStatusStore;
+
+    return {
+      isEnabled: true,
+      currency: walletCodeCurrency,
+      formatWalletCurrency,
+      logoText,
+      fetchTransactionHistory,
+      fetchBalance,
+      fetchAiServiceBalance,
+      walletCustomerEmail,
+      walletCustomerStatusNotActive,
+      featureCountData,
+    };
+  },
+)(observer(AIServiceDialog));
