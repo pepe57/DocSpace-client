@@ -26,17 +26,17 @@
 
 import Script from "next/script";
 
-import runtime from "../../../runtime.json";
+import { getStaticHash } from "@docspace/shared/utils/static-hash";
 
-const hashDate = runtime?.date;
+const browserDetectorHash = getStaticHash("browserDetector.js");
+const configHash = getStaticHash("config.json");
 
 const Scripts = () => {
   return (
     <>
       <Script
         id="browser-detector"
-        // strategy="beforeInteractive"
-        src={`/static/scripts/browserDetector.js?hash=${runtime?.checksums?.["browserDetector.js"] ?? hashDate}`}
+        src={`/static/scripts/browserDetector.js?hash=${browserDetectorHash}`}
       />
 
       <Script id="portal-config" strategy="beforeInteractive">
@@ -53,7 +53,7 @@ const Scripts = () => {
             }
           })();
 
-          fetch("/static/scripts/config.json?hash=${runtime?.checksums["config.json"] ?? hashDate}")
+          fetch("/static/scripts/config.json?hash=${configHash}")
             .then((response) => {
               if (!response.ok) {
                 throw new Error("HTTP error " + response.status);

@@ -93,7 +93,7 @@ export const CodeToInsert = ({
 				{t("NPMCodeConfigStep")}
 			</Text>
 			<Textarea
-				value={JSON.stringify(config)}
+				value={JSON.stringify({ ...config, events: undefined })}
 				heightTextArea={118}
 				isReadOnly
 				enableCopy

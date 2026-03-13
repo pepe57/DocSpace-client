@@ -67,9 +67,6 @@ COPY public/ ./public/
 COPY libs/ui-kit/ ./libs/ui-kit/
 
 
-# Run before-build script (packages/runtime.json)
-RUN pnpm run before-build
-
 # Build translations for all packages in single layer
 RUN pnpm --filter @docspace/client run build:translations && \
     pnpm --filter @docspace/login run build:translations && \
