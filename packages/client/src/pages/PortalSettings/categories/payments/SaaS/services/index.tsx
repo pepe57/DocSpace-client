@@ -31,9 +31,9 @@ import { useLocation, useNavigate } from "react-router";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import {
-  AI_TOOLS,
+  AI_ENUM,
   BACKUP_SERVICE,
-  DISK_STORAGE,
+  TOTAL_SIZE,
   WEB_SEARCH,
 } from "@docspace/shared/constants";
 import { setServiceState } from "@docspace/shared/api/portal";
@@ -72,9 +72,9 @@ const Services = (props: InjectedProps) => {
   } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [dialogVisibility, setDialogVisibility] = useState({
-    [DISK_STORAGE]: false,
+    [TOTAL_SIZE]: false,
     [BACKUP_SERVICE]: false,
-    [AI_TOOLS]: false,
+    [AI_ENUM]: false,
     [WEB_SEARCH]: false,
   });
 
@@ -112,11 +112,11 @@ const Services = (props: InjectedProps) => {
   useEffect(() => {
     if (!isVisibleWalletSettings || !isInitServicesPage) return;
 
-    if (confirmActionType === DISK_STORAGE) {
-      updateDialogVisibility(DISK_STORAGE, isVisibleWalletSettings);
-    } else if (confirmActionType === AI_TOOLS) {
+    if (confirmActionType === TOTAL_SIZE) {
+      updateDialogVisibility(TOTAL_SIZE, isVisibleWalletSettings);
+    } else if (confirmActionType === AI_ENUM) {
       setIsAiServiceTopUpVisible(true);
-      updateDialogVisibility(AI_TOOLS, isVisibleWalletSettings);
+      updateDialogVisibility(AI_ENUM, isVisibleWalletSettings);
     } else {
       setIsTopUpBalanceVisible(true);
     }
@@ -129,7 +129,7 @@ const Services = (props: InjectedProps) => {
 
   useEffect(() => {
     if (openDialog) {
-      updateDialogVisibility(DISK_STORAGE, openDialog);
+      updateDialogVisibility(TOTAL_SIZE, openDialog);
       setPreviousValue(previousStoragePlanSize);
       navigate(location.pathname, { replace: true });
     }
@@ -156,7 +156,7 @@ const Services = (props: InjectedProps) => {
               productName: t("Common:ProductName"),
             }),
     },
-    [AI_TOOLS]: {
+    [AI_ENUM]: {
       title: t("Common:Confirmation"),
       body: isCurrentConfirmState
         ? [
@@ -213,12 +213,12 @@ const Services = (props: InjectedProps) => {
 
     // return;
 
-    if (id === DISK_STORAGE && isGracePeriod) {
+    if (id === TOTAL_SIZE && isGracePeriod) {
       setIsGracePeriodModalVisible(true);
       return;
     }
 
-    if (id === AI_TOOLS && wasFirstAiServiceTopUp) {
+    if (id === AI_ENUM && wasFirstAiServiceTopUp) {
       navigate("/portal-settings/services/ai-services");
       return;
     }
@@ -232,7 +232,7 @@ const Services = (props: InjectedProps) => {
   };
 
   const onClose = () => {
-    updateDialogVisibility(DISK_STORAGE, false);
+    updateDialogVisibility(TOTAL_SIZE, false);
   };
 
   const onCloseStorageCancell = () => {
@@ -244,18 +244,18 @@ const Services = (props: InjectedProps) => {
 
     setIsCurrentConfirmState(currentEnabled);
 
-    if (id === DISK_STORAGE) {
+    if (id === TOTAL_SIZE) {
       if (currentEnabled) {
         setIsStorageCancellation(true);
         return;
       }
-      updateDialogVisibility(DISK_STORAGE, true);
+      updateDialogVisibility(TOTAL_SIZE, true);
 
       return;
     }
 
-    if (id === AI_TOOLS && !wasFirstAiServiceTopUp) {
-      updateDialogVisibility(AI_TOOLS, true);
+    if (id === AI_ENUM && !wasFirstAiServiceTopUp) {
+      updateDialogVisibility(AI_ENUM, true);
       return;
     }
 
@@ -264,13 +264,13 @@ const Services = (props: InjectedProps) => {
       return;
     }
 
-    if (id !== DISK_STORAGE) {
+    if (id !== TOTAL_SIZE) {
       if (dialogVisibility[id as keyof typeof dialogVisibility]) {
         previousDialogRef.current = true;
       }
     }
 
-    if (!currentEnabled || id === BACKUP_SERVICE || id === AI_TOOLS)
+    if (!currentEnabled || id === BACKUP_SERVICE || id === AI_ENUM)
       setIsConfirmDialogVisible(true);
     else {
       const raw = {
@@ -299,7 +299,7 @@ const Services = (props: InjectedProps) => {
   };
 
   const onCloseAiService = () => {
-    updateDialogVisibility(AI_TOOLS, false);
+    updateDialogVisibility(AI_ENUM, false);
   };
 
   const onCloseWebSearch = () => {
@@ -336,7 +336,7 @@ const Services = (props: InjectedProps) => {
       if (confirmActionType === BACKUP_SERVICE) {
         return t("Services:BackupServiceEnabled");
       }
-      if (confirmActionType === AI_TOOLS) {
+      if (confirmActionType === AI_ENUM) {
         return t("Services:AIToolsEnabled");
       }
       if (confirmActionType === WEB_SEARCH) {
@@ -381,9 +381,9 @@ const Services = (props: InjectedProps) => {
           visible={isShowStorageTariffDeactivatedModal}
         />
       ) : null}
-      {dialogVisibility[DISK_STORAGE] ? (
+      {dialogVisibility[TOTAL_SIZE] ? (
         <StoragePlanUpgrade
-          visible={dialogVisibility[DISK_STORAGE]}
+          visible={dialogVisibility[TOTAL_SIZE]}
           onClose={onClose}
           previousValue={previousValue}
         />
@@ -407,11 +407,10 @@ const Services = (props: InjectedProps) => {
           onToggle={onToggle}
         />
       ) : null}
-      {dialogVisibility[AI_TOOLS] ? (
+      {dialogVisibility[AI_ENUM] ? (
         <AIServiceDialog
-          visible={dialogVisibility[AI_TOOLS]}
+          visible={dialogVisibility[AI_ENUM]}
           onClose={onCloseAiService}
-          onToggle={onToggle}
           isTopUpVisible={isAiServiceTopUpVisible}
         />
       ) : null}

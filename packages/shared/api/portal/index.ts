@@ -317,7 +317,7 @@ export async function getServiceQuota(
 ) {
   const res = (await request({
     method: "get",
-    url: `/portal/payment/walletservice?serviceName=${serviceName}`,
+    url: `/portal/payment/walletservice?service=${serviceName}`,
     signal,
   })) as TPaymentQuota;
 

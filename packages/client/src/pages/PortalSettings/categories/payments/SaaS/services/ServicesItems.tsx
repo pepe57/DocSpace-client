@@ -31,9 +31,11 @@ import { Trans } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import {
+  AI_ENUM,
   AI_TOOLS,
   BACKUP_SERVICE,
   DISK_STORAGE,
+  TOTAL_SIZE,
 } from "@docspace/shared/constants";
 import {
   calculateTotalPrice,
@@ -196,7 +198,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
     enabled?: boolean,
   ) => {
     switch (serviceName) {
-      case DISK_STORAGE:
+      case TOTAL_SIZE:
         if (hasScheduledStorageChange) {
           return t("ChangeShedule");
         }
@@ -238,15 +240,15 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
           currency: formatWalletCurrency!(priceValue!, 2),
         });
 
-      case AI_TOOLS:
-        if (aiServiceBalance && aiServiceBalance > 0 && !enabled) {
-          return t("Services:AIPricingAvailableCredits", {
+      case AI_ENUM:
+        if (isAiServiceLowBalance) {
+          return t("Services:AIPricingAvailableCreditsLowBalance", {
             price: formatAiServiceCurrency!(),
           });
         }
 
-        if (isAiServiceLowBalance) {
-          return t("Services:AIPricingAvailableCreditsLowBalance", {
+        if (aiServiceBalance && aiServiceBalance > 0) {
+          return t("Services:AIPricingAvailableCredits", {
             price: formatAiServiceCurrency!(),
           });
         }
@@ -294,7 +296,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 cardDisabled={isDisabled}
                 toggleDisabled={isDisabled}
                 priceTitle={item.priceTitle}
-                id={item.serviceName}
+                id={item.id}
                 image={item.image}
                 isEnabled={item.value}
                 serviceTitle={item.title}
@@ -319,13 +321,9 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 onClick={handleClick}
                 onToggle={handleToggle}
                 serviceTitle={item.title}
-                priceDescription={priceDescription(
-                  item.serviceName,
-                  0,
-                  item.value,
-                )}
+                priceDescription={priceDescription(item.id, 0, item.value)}
                 priceTitle={item.priceTitle}
-                id={item.serviceName}
+                id={item.id}
                 image={item.image}
                 isEnabled={item.value}
                 tooltip={isDisabled ? permissionTooltipText : undefined}
@@ -350,9 +348,9 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 onClick={handleClick}
                 onToggle={handleToggle}
                 serviceTitle={item.title}
-                priceDescription={priceDescription(item.serviceName)}
+                priceDescription={priceDescription(item.id)}
                 priceTitle={item.priceTitle}
-                id={item.serviceName}
+                id={item.id}
                 image={item.image}
                 isEnabled={hasStorageSubscription}
                 tooltip={isDisabled ? permissionTooltipText : undefined}

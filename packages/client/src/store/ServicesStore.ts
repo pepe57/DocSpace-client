@@ -45,7 +45,7 @@ import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/wallet/utils";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
-import { AI_TOOLS, BACKUP_SERVICE } from "@docspace/shared/constants";
+import { AI_ENUM, AI_TOOLS, BACKUP_SERVICE } from "@docspace/shared/constants";
 
 type TAiToolsChatPrice = {
   prompt: number;
@@ -417,7 +417,11 @@ class ServicesStore {
     this.featureCountData = featureCountData;
   };
 
-  aiServicesinit = async (t: TTranslation, serviceName: string) => {
+  aiServicesinit = async (
+    t: TTranslation,
+    serviceName: string,
+    serviceEnum?: string,
+  ) => {
     const isRefresh = window.location.href.includes("complete=true");
 
     this.setIsInitAiPage(false);
@@ -430,7 +434,7 @@ class ServicesStore {
 
     try {
       const requests = [
-        setServiceQuota(serviceName),
+        setServiceQuota(serviceEnum ?? serviceName),
         fetchTransactionHistory(null, null, true, true, "", serviceName),
         initWalletPayerAndBalance(isRefresh),
       ];

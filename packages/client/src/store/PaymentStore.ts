@@ -65,6 +65,7 @@ import {
 } from "@docspace/shared/api/portal/types";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import {
+  AI_ENUM,
   AI_TOOLS,
   BACKUP_SERVICE,
   STORAGE_TARIFF_DEACTIVATED,
@@ -449,7 +450,7 @@ class PaymentStore {
   }
 
   get isAiToolsServiceOn() {
-    return this.servicesQuotasFeatures.get(AI_TOOLS)?.value;
+    return this.servicesQuotasFeatures.get(AI_ENUM)?.value;
   }
 
   get availableBackupsCount() {
@@ -644,8 +645,9 @@ class PaymentStore {
       };
     });
 
+    console.log("quotas", quotas);
     this.servicesQuotasFeatures = new Map(
-      quotas.map((feature) => [feature.serviceName || "", feature]),
+      quotas.map((feature) => [feature.id, feature]),
     );
 
     return res;
@@ -721,7 +723,10 @@ class PaymentStore {
       price: service.price,
     } as TServiceFeatureWithPrice;
 
-    this.servicesQuotasFeatures.set(feature.id, featureWithPrice);
+    this.servicesQuotasFeatures.set(
+      service.features[0].id.toString(),
+      featureWithPrice,
+    );
   };
 
   paymentMethodInit = async (t: TTranslation) => {

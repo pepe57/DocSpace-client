@@ -80,11 +80,12 @@ type TransactionHistoryProps = {
   getStartTransactionDate?: () => string;
   getEndTransactionDate?: () => string;
   fetchTransactionHistory?: (
-    startDate: DateTime | null,
-    endDate: DateTime | null,
-    credit: boolean,
-    debit: boolean,
+    startDate?: DateTime | null,
+    endDate?: DateTime | null,
+    credit?: boolean,
+    debit?: boolean,
     participantName?: string,
+    serviceName?: string,
   ) => Promise<void>;
   openOnNewPage?: boolean;
   userId?: string;

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
+  AI_ENUM,
   AI_TOOLS,
   BACKUP_SERVICE,
   DISK_STORAGE,
@@ -53,9 +54,9 @@ const useServices = ({ servicesInit, aiServicesinit }: UseServicesProps) => {
   }, [servicesInit]);
 
   const getServiceData = useCallback(
-    async (serviceName: string) => {
+    async (serviceName: string, serviceEnum?: string) => {
       try {
-        await aiServicesinit?.(t, serviceName);
+        await aiServicesinit?.(t, serviceName, serviceEnum);
       } catch (error) {
         console.error(error);
         toastr.error(t("Common:UnexpectedError"));
@@ -85,7 +86,7 @@ const useServices = ({ servicesInit, aiServicesinit }: UseServicesProps) => {
     const actions = [];
 
     if (window.location.pathname.includes("ai-services"))
-      actions.push(getServiceData(AI_TOOLS));
+      actions.push(getServiceData(AI_TOOLS, AI_ENUM));
 
     await Promise.all(actions);
   }, [getServiceData]);
