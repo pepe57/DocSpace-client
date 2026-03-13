@@ -659,7 +659,7 @@ export function getLoginLink(token: string, code: string) {
 
 const FRAME_NAME = "frameDocSpace";
 
-const getFrameId = () => {
+export const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
 };
 
