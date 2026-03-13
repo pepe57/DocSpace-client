@@ -220,7 +220,7 @@ test.describe("AI agents", () => {
 
     expect(inputValue).toBe(inputName);
 
-    const instructionInput = page.getByTestId("textarea");
+    const instructionInput = page.getByTestId("create_agent_instructions_textarea");
 
     const instructionValue = "Instruction for AI agent";
 
