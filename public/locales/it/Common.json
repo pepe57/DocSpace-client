@@ -426,7 +426,6 @@
   "Form": "Modulo",
   "FormDataCollection": " Raccolta dati del modulo",
   "FormDataCollectionDescription": " Raccogli le copie completate del modulo e i dati da esse in formato XLSX per analizzare le risposte nelle stanze di Compilazione modulo.",
-  "FormFilingRoomInfo": "Carica moduli PDF nella stanza. Invitate i membri e gli ospiti a compilare un modulo PDF. Esamina i moduli compilati e analizza i dati raccolti automaticamente in un foglio di calcolo.",
   "FormFilingRoomTitle": "Stanza per la compilazione moduli",
   "FormRoom": "Stanza dei moduli",
   "Forms": "Moduli",

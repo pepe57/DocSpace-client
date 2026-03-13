@@ -151,7 +151,7 @@ export default function useFormsContextMenu() {
           break;
         }
 
-        case FormsSection.FormsToFill: {
+        case FormsSection.InProgress: {
           if (canFillForm) {
             model.push({
               id: "option_fill-form",

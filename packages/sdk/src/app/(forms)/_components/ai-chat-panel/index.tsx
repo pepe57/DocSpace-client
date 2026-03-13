@@ -54,20 +54,20 @@ const AiChatPanel = () => {
     isPanelVisible,
     closePanel,
     isSyncing,
-    selectedAgentId,
+    currentAgentId,
     agentChatSettings,
+    aiConfig,
   } = aiAgentStore;
   const { filesSettings } = useFormsSettingsStore();
 
-  // Use agent ID for chat — agents ARE rooms (TAgent = TRoom)
-  const agentRoomId = selectedAgentId ?? 0;
+  const agentRoomId = currentAgentId ?? 0;
 
   const initChats = useInitChats({ agentId: agentRoomId });
   const { initMessages, ...messagesSettings } = useInitMessagesSDK(agentRoomId);
 
   const toolsSettings = useToolsSettings({
     agentId: agentRoomId,
-    aiConfig: null,
+    aiConfig,
     chatSettings: agentChatSettings,
   });
 
@@ -89,9 +89,6 @@ const AiChatPanel = () => {
 
   const getResultStorageId = React.useCallback(() => null, []);
 
-  // Re-init chat data only when panel opens or agent changes.
-  // Init functions are intentionally omitted from deps to avoid
-  // re-fetching on every render (they are not referentially stable).
   React.useEffect(() => {
     if (isPanelVisible && agentRoomId) {
       initChats.fetchChats();
@@ -100,7 +97,7 @@ const AiChatPanel = () => {
     }
   }, [isPanelVisible, agentRoomId]);
 
-  if (!isPanelVisible) return null;
+  if (!isPanelVisible || !agentRoomId) return null;
 
   return (
     <div className={styles.chatPanel}>

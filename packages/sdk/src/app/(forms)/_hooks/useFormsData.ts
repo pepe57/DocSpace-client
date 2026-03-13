@@ -67,35 +67,43 @@ const filterByFolder = (
 export default function useFormsData() {
   const formsSettingsStore = useFormsSettingsStore();
   const formsListStore = useFormsListStore();
-  const { activeSection, completedFolder } = useFormsNavigationStore();
+  const { activeSection, completedFolder, inProgressFolder } =
+    useFormsNavigationStore();
   const currentPage = useRef(0);
   const apiExhausted = useRef(false);
   const abortRef = useRef<AbortController | null>(null);
+  const fetchMoreAbortRef = useRef<AbortController | null>(null);
   const doneFolderIdRef = useRef<number | null>(null);
+  const inProgressFolderIdRef = useRef<number | null>(null);
 
   const getFolderId = useCallback(
     (section?: FormsSection) => {
       const sec = section ?? activeSection;
       switch (sec) {
         case FormsSection.MyForms:
-          return formsSettingsStore.myFormsFolderId;
-        case FormsSection.FormsToFill:
-          return formsSettingsStore.formsToFillFolderId;
+          return formsSettingsStore.roomId;
+        case FormsSection.InProgress:
+          return (
+            inProgressFolder?.id ?? inProgressFolderIdRef.current ?? ""
+          );
         case FormsSection.CompletedForms:
           return completedFolder?.id ?? doneFolderIdRef.current ?? "";
         default:
-          return formsSettingsStore.myFormsFolderId;
+          return formsSettingsStore.roomId;
       }
     },
-    [activeSection, formsSettingsStore, completedFolder],
+    [activeSection, formsSettingsStore, completedFolder, inProgressFolder],
   );
 
-  const fetchCompletedFolders = useCallback(
-    async (signal: AbortSignal) => {
+  const fetchVirtualFolders = useCallback(
+    async (
+      signal: AbortSignal,
+      virtualFolderType: FolderType,
+      folderIdRef: React.RefObject<number | null>,
+    ) => {
       const roomId = formsSettingsStore.roomId;
       if (!roomId) return;
 
-      // Fetch room contents to find the Done virtual folder
       const roomFilter = FilesFilter.getDefault();
       roomFilter.page = 0;
       roomFilter.pageCount = PAGE_COUNT;
@@ -108,25 +116,24 @@ export default function useFormsData() {
 
       if (signal.aborted) return;
 
-      const doneFolder = roomRes.folders.find(
-        (f) => f.type === FolderType.Done,
+      const virtualFolder = roomRes.folders.find(
+        (f) => f.type === virtualFolderType,
       );
 
-      if (!doneFolder) {
+      if (!virtualFolder) {
         formsListStore.setFolders([]);
         formsListStore.setItems([], 0);
         return;
       }
 
-      doneFolderIdRef.current = doneFolder.id;
+      folderIdRef.current = virtualFolder.id;
 
-      // Fetch Done folder contents to get SubFolderDone entries
       const filter = FilesFilter.getDefault();
       filter.page = 0;
       filter.pageCount = PAGE_COUNT;
 
       const res = await api.files.getFolder(
-        doneFolder.id,
+        virtualFolder.id,
         filter,
         signal,
       );
@@ -139,7 +146,7 @@ export default function useFormsData() {
     [formsSettingsStore, formsListStore],
   );
 
-  const fetchCompletedSubfolder = useCallback(
+  const fetchSubfolder = useCallback(
     async (folderId: number, signal: AbortSignal) => {
       const filter = FilesFilter.getDefault();
       filter.page = 0;
@@ -166,6 +173,7 @@ export default function useFormsData() {
   const fetchSection = useCallback(
     async (section?: FormsSection) => {
       abortRef.current?.abort();
+      fetchMoreAbortRef.current?.abort();
       const controller = new AbortController();
       abortRef.current = controller;
 
@@ -177,12 +185,28 @@ export default function useFormsData() {
       try {
         if (sec === FormsSection.CompletedForms) {
           if (completedFolder) {
-            await fetchCompletedSubfolder(
-              completedFolder.id,
+            await fetchSubfolder(completedFolder.id, controller.signal);
+          } else {
+            await fetchVirtualFolders(
+              controller.signal,
+              FolderType.Done,
+              doneFolderIdRef,
+            );
+          }
+
+          if (controller.signal.aborted) return;
+        } else if (sec === FormsSection.InProgress) {
+          if (inProgressFolder) {
+            await fetchSubfolder(
+              inProgressFolder.id,
               controller.signal,
             );
           } else {
-            await fetchCompletedFolders(controller.signal);
+            await fetchVirtualFolders(
+              controller.signal,
+              FolderType.InProgress,
+              inProgressFolderIdRef,
+            );
           }
 
           if (controller.signal.aborted) return;
@@ -232,19 +256,21 @@ export default function useFormsData() {
     [
       activeSection,
       completedFolder,
+      inProgressFolder,
       getFolderId,
-      fetchCompletedFolders,
-      fetchCompletedSubfolder,
+      fetchVirtualFolders,
+      fetchSubfolder,
       formsListStore,
       formsSettingsStore,
     ],
   );
 
   const fetchMore = useCallback(async () => {
-    if (apiExhausted.current || abortRef.current?.signal.aborted) return;
+    if (apiExhausted.current) return;
 
+    fetchMoreAbortRef.current?.abort();
     const controller = new AbortController();
-    abortRef.current = controller;
+    fetchMoreAbortRef.current = controller;
 
     const folderId = getFolderId();
     if (!folderId) return;

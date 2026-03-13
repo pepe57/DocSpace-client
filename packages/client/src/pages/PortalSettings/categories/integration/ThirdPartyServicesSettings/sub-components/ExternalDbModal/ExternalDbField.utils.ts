@@ -24,42 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const runWithConcurrency = async <T>(
-  items: T[],
-  concurrency: number,
-  worker: (item: T) => Promise<void>,
-) => {
-  const limit = Math.max(1, concurrency);
-  let cursor = 0;
+import type { ConsumerProp, ExternalDbFormData } from "./ExternalDbModal.types";
 
-  const runners = Array.from({ length: Math.min(limit, items.length) }).map(
-    async () => {
-      while (cursor < items.length) {
-        const current = cursor;
-        cursor += 1;
-        await worker(items[current]);
-      }
-    },
-  );
+export const filterRelevantFields = (
+  formData: ExternalDbFormData,
+  visibleFields: ConsumerProp[],
+): ExternalDbFormData => {
+  const filtered: ExternalDbFormData = {};
 
-  await Promise.all(runners);
+  visibleFields.forEach((field) => {
+    const value = formData[field.name as keyof ExternalDbFormData];
+
+    if (value !== undefined && value !== null && value !== "") {
+      filtered[field.name] = value;
+    } else if (field.type === "toggle") {
+      filtered[field.name] = value ?? false;
+    }
+  });
+
+  return filtered;
 };
 
-export const createChunks = (file: File, chunkSize: number) => {
-  const safeChunkSize = Math.max(1, chunkSize);
-  const chunks = file.size === 0 ? 1 : Math.ceil(file.size / safeChunkSize);
-  const items: Array<{ index: number; data: FormData; size: number }> = [];
-
-  for (let i = 0; i < chunks; i++) {
-    const offset = i * safeChunkSize;
-    const end = Math.min(file.size, offset + safeChunkSize);
-    const part = file.slice(offset, end);
-
-    const fd = new FormData();
-    fd.append("file", part);
-
-    items.push({ index: i + 1, data: fd, size: end - offset });
+export const isFieldRequired = (field: ConsumerProp): boolean => {
+  if (field.type === "toggle") {
+    return false;
   }
+  return true;
+};
 
-  return items;
+export const getFieldValidationRules = (
+  field: ConsumerProp,
+  t: (key: string) => string,
+) => {
+  const rules: Record<string, unknown> = {
+    required: isFieldRequired(field) ? t("Common:RequiredField") : false,
+  };
+
+  return rules;
 };

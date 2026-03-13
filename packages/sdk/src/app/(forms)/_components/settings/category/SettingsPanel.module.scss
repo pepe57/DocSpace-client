@@ -145,6 +145,13 @@
   flex-direction: column;
 }
 
+.statusRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 8px;
+}
+
 // Billing
 
 .billingWrapper {

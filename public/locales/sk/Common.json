@@ -426,7 +426,6 @@
   "Form": "Formulár",
   "FormDataCollection": "Zber údajov z formulárov",
   "FormDataCollectionDescription": "Zozbierajte vyplnené kópie formulárov a dáta z nich do formátu XLSX na analýzu odpovedí v miestnostiach na vyplňovanie formulárov.",
-  "FormFilingRoomInfo": "Nahrávanie PDF formulárov do miestnosti. Pozvite členov a hostí, aby vyplnili PDF formulár. Prezrite si vyplnené formuláre a analyzujte údaje automaticky zozbierané v tabuľke.",
   "FormFilingRoomTitle": "Miestnosť na vyplnenie formulárov",
   "FormRoom": "Miestnosť s formulármi",
   "Forms": "Formuláre",

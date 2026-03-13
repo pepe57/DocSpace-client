@@ -53,10 +53,7 @@ import {
 
 import styles from "./SettingsPanel.module.scss";
 
-const DB_TYPE_OPTIONS: TOption[] = [
-  { key: "MySQL", label: "MySQL" },
-  { key: "PostgreSQL", label: "PostgreSQL" },
-];
+const DB_TYPE_OPTIONS: TOption[] = [{ key: "MySQL", label: "MySQL" }];
 
 type ConnectDatabaseFormProps = {
   inline?: boolean;
@@ -66,6 +63,12 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
   const { t } = useTranslation(["Common"]);
   const store = useFormsDbSettingsStore();
   const { roomId } = useFormsSettingsStore();
+
+  React.useEffect(() => {
+    if (inline && roomId) {
+      store.fetchConfig(roomId);
+    }
+  }, [inline, roomId, store]);
 
   const selectedDbType = React.useMemo(
     () =>
@@ -85,10 +88,10 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
     store.setIsTesting(true);
     try {
       const result = await testDbConnection(store.formData);
-      if (result) {
+      if (result?.success) {
         toastr.success(t("Common:ConnectionSuccessful"));
       } else {
-        toastr.error(t("Common:ConnectionFailed"));
+        toastr.error(result?.error || t("Common:ConnectionFailed"));
       }
     } catch {
       toastr.error(t("Common:ConnectionFailed"));
@@ -111,13 +114,18 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
   const onToggleSendToDb = React.useCallback(async () => {
     const newValue = !store.sendToDb;
     store.setSendToDb(newValue);
-    if (!newValue) {
-      try {
-        await setRoomFormSettings(roomId, { sendFormToExternalDB: false });
-      } catch {
-        toastr.error(t("Common:SomethingWentWrong"));
-        store.setSendToDb(true);
+    try {
+      if (newValue && store.host) {
+        await Promise.all([
+          setRoomFormSettings(roomId, { sendFormToExternalDB: true }),
+          saveDbConfig(store.formData),
+        ]);
+      } else {
+        await setRoomFormSettings(roomId, { sendFormToExternalDB: newValue });
       }
+    } catch {
+      toastr.error(t("Common:SomethingWentWrong"));
+      store.setSendToDb(!newValue);
     }
   }, [store, roomId, t]);
 
@@ -157,7 +165,7 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
       <div className={styles.toggleBlock}>
         <div className={styles.toggleHeader}>
           <Text fontSize="16px" fontWeight={700}>
-            {t("Common:SaveFormDataToDatabase")}
+            {t("Common:ExportResultsToDatabase")}
           </Text>
           <ToggleButton
             className={styles.toggle}
@@ -166,7 +174,7 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
           />
         </div>
         <Text fontSize="12px" fontWeight={400}>
-          {t("Common:ConnectDatabaseDescription")}
+          {t("Common:ExportResultsToDatabaseDescription")}
         </Text>
       </div>
 

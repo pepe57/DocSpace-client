@@ -49,6 +49,7 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
+import { useFormsUserStore } from "../../_store/FormsUserStore";
 
 import FormsSidebar from "../sidebar";
 import FormsGrid from "../forms-grid";
@@ -72,11 +73,13 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     closeEditor,
     completedFolder,
     goBackToCompletedRoot,
+    inProgressFolder,
+    goBackToInProgressRoot,
   } = useFormsNavigationStore();
   const formsListStore = useFormsListStore();
   const { items, folders } = formsListStore;
   const formsSettingsStore = useFormsSettingsStore();
-  const { roomId, requestToken } = formsSettingsStore;
+  const { roomId } = formsSettingsStore;
   const { fetchSection, fetchMore } = useFormsData();
   const {
     onUploadFiles,
@@ -88,8 +91,10 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   } = useFolderActions();
   const { currentDeviceType } = useDeviceType();
   const aiStore = useFormsAiAgentStore();
+  const { user } = useFormsUserStore();
   const prevSection = React.useRef(activeSection);
   const prevCompletedFolder = React.useRef(completedFolder);
+  const prevInProgressFolder = React.useRef(inProgressFolder);
   const fetchIdRef = React.useRef(0);
   const [contentVisible, setContentVisible] = React.useState(true);
   const [isSectionLoading, setIsSectionLoading] = React.useState(false);
@@ -99,20 +104,26 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const isEditing = Boolean(editingFile);
   const isInsideCompletedFolder =
     activeSection === FormsSection.CompletedForms && !!completedFolder;
+  const isInsideInProgressFolder =
+    activeSection === FormsSection.InProgress && !!inProgressFolder;
+  const activeSubfolder = completedFolder ?? inProgressFolder;
 
   React.useEffect(() => {
-    if (roomId) {
-      aiStore.loadAgentForRoom(roomId, requestToken);
+    if (roomId && user?.id) {
+      aiStore.initForRoom(roomId, user.id);
     }
-  }, [roomId, requestToken, aiStore]);
+  }, [roomId, user?.id, aiStore]);
 
   React.useEffect(() => {
     const sectionChanged = prevSection.current !== activeSection;
     const folderChanged = prevCompletedFolder.current !== completedFolder;
+    const inProgressFolderChanged =
+      prevInProgressFolder.current !== inProgressFolder;
 
-    if (sectionChanged || folderChanged) {
+    if (sectionChanged || folderChanged || inProgressFolderChanged) {
       prevSection.current = activeSection;
       prevCompletedFolder.current = completedFolder;
+      prevInProgressFolder.current = inProgressFolder;
 
       if (activeSection === FormsSection.Settings) {
         setContentVisible(true);
@@ -125,34 +136,46 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
 
       const currentFetchId = ++fetchIdRef.current;
 
-      fetchSection(activeSection).then(() => {
+      fetchSection(activeSection).then(async () => {
         if (currentFetchId !== fetchIdRef.current) return;
 
         setContentVisible(true);
         setIsSectionLoading(false);
 
-        // Sync completed forms to AI agent KB after data is loaded
         if (
           activeSection === FormsSection.CompletedForms &&
-          completedFolder &&
-          formsListStore.items.length > 0
+          completedFolder
         ) {
-          const files = formsListStore.items.map((f) => ({
-            id: f.id,
-            title: f.title,
-          }));
-          aiStore.syncCompletedForms(files);
+          await aiStore.setCurrentFolder(completedFolder.id);
+          if (currentFetchId !== fetchIdRef.current) return;
+
+          if (formsListStore.items.length > 0) {
+            const files = formsListStore.items.map((f) => ({
+              id: f.id,
+              title: f.title,
+            }));
+            aiStore.syncCompletedForms(files);
+          }
+        } else {
+          aiStore.setCurrentFolder(null);
         }
       });
     }
-  }, [activeSection, completedFolder, fetchSection, formsListStore, aiStore]);
+  }, [
+    activeSection,
+    completedFolder,
+    inProgressFolder,
+    fetchSection,
+    formsListStore,
+    aiStore,
+  ]);
 
   const getSectionTitle = React.useCallback(() => {
     switch (activeSection) {
       case FormsSection.MyForms:
         return t("Common:MyForms");
-      case FormsSection.FormsToFill:
-        return t("Common:FormsToFill");
+      case FormsSection.InProgress:
+        return t("Common:InProgress");
       case FormsSection.CompletedForms:
         return t("Common:CompletedForms");
       case FormsSection.Settings:
@@ -163,16 +186,20 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   }, [activeSection, t]);
 
   const navigationItems = React.useMemo(() => {
-    if (isEditing && completedFolder) {
+    if (isEditing && activeSubfolder) {
+      const isCompleted =
+        activeSection === FormsSection.CompletedForms;
       return [
         {
-          id: `folder-${completedFolder.id}`,
-          title: completedFolder.title,
+          id: `folder-${activeSubfolder.id}`,
+          title: activeSubfolder.title,
           isRootRoom: false,
         },
         {
-          id: "completed-root",
-          title: t("Common:CompletedForms"),
+          id: isCompleted ? "completed-root" : "in-progress-root",
+          title: isCompleted
+            ? t("Common:CompletedForms")
+            : t("Common:InProgress"),
           isRootRoom: true,
         },
       ];
@@ -198,8 +225,26 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
       ];
     }
 
+    if (isInsideInProgressFolder) {
+      return [
+        {
+          id: "in-progress-root",
+          title: t("Common:InProgress"),
+          isRootRoom: true,
+        },
+      ];
+    }
+
     return [];
-  }, [isEditing, completedFolder, isInsideCompletedFolder, getSectionTitle, t]);
+  }, [
+    isEditing,
+    activeSection,
+    activeSubfolder,
+    isInsideCompletedFolder,
+    isInsideInProgressFolder,
+    getSectionTitle,
+    t,
+  ]);
 
   const getContextOptionsPlus = React.useCallback(() => {
     const security = formsSettingsStore.folderSecurity;
@@ -223,6 +268,11 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     ];
   }, [formsSettingsStore.folderSecurity, t, onUploadFiles, onCreateBlankForm]);
 
+  const handleEditorNavigatedAway = React.useCallback(() => {
+    closeEditor();
+    fetchSection();
+  }, [closeEditor, fetchSection]);
+
   const handleEditorBack = React.useCallback(() => {
     closeEditor();
   }, [closeEditor]);
@@ -234,9 +284,14 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
         goBackToCompletedRoot();
         return;
       }
+      if (itemId === "in-progress-root") {
+        closeEditor();
+        goBackToInProgressRoot();
+        return;
+      }
       closeEditor();
     },
-    [closeEditor, goBackToCompletedRoot],
+    [closeEditor, goBackToCompletedRoot, goBackToInProgressRoot],
   );
 
   const renderHeader = () => {
@@ -371,6 +426,50 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
       );
     }
 
+    if (isInsideInProgressFolder) {
+      return (
+        <div className={styles.headerRow}>
+          <div className={styles.headerNavigation}>
+            <Navigation
+              showText
+              isRootFolder={false}
+              canCreate={false}
+              title={inProgressFolder?.title || ""}
+              rootRoomTitle=""
+              isDesktop={currentDeviceType === DeviceType.desktop}
+              isFrame
+              navigationItems={navigationItems}
+              getContextOptionsPlus={() => []}
+              getContextOptionsFolder={() => []}
+              onClickFolder={() => goBackToInProgressRoot()}
+              isTrashFolder={false}
+              isEmptyPage={items.length === 0}
+              isEmptyFilesList={items.length === 0}
+              onBackToParentFolder={() => goBackToInProgressRoot()}
+              showRootFolderTitle={false}
+              withLogo=""
+              burgerLogo=""
+              withMenu={false}
+              currentDeviceType={currentDeviceType}
+              titleIcon=""
+              titleIconTooltip=""
+              showNavigationButton={false}
+              isCurrentFolderInfo={false}
+              showTitle
+              isPublicRoom={false}
+              isRoom={false}
+              isInfoPanelVisible={false}
+              toggleInfoPanel={() => {}}
+              onLogoClick={() => {}}
+              hideInfoPanel={() => {}}
+              clearTrash={() => {}}
+              showFolderInfo={() => {}}
+            />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className={styles.headerRow}>
         <div className={styles.headerNavigation}>
@@ -418,7 +517,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
 
   const renderBody = () => {
     if (isEditing) {
-      return <FormsEditor />;
+      return <FormsEditor onNavigatedAway={handleEditorNavigatedAway} />;
     }
 
     if (activeSection === FormsSection.Settings) {
@@ -426,11 +525,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     }
 
     if (isSectionLoading) {
-      return (
-        <div className={styles.loaderCenter}>
-          <Loader type={LoaderTypes.track} size="40px" />
-        </div>
-      );
+      return null;
     }
 
     return (
@@ -442,20 +537,32 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     );
   };
 
+  const showLoaderOverlay =
+    isSectionLoading && !isEditing && !isSettings;
+
   return (
     <div className={styles.root}>
       <FormsSidebar />
-      <Section
-        withBodyScroll={!isEditing}
-        withoutFooter={isEditing}
-        settingsStudio={false}
-        viewAs={isSettings ? "settings" : "tile"}
-        isEmptyPage={!isEditing && items.length === 0 && folders.length === 0}
-        currentDeviceType={currentDeviceType}
-      >
-        <Section.SectionHeader>{renderHeader()}</Section.SectionHeader>
-        <Section.SectionBody>{renderBody()}</Section.SectionBody>
-      </Section>
+      <div className={styles.sectionArea}>
+        <Section
+          withBodyScroll={!isEditing}
+          withoutFooter={isEditing}
+          settingsStudio={false}
+          viewAs={isSettings ? "settings" : "tile"}
+          isEmptyPage={
+            !isEditing && items.length === 0 && folders.length === 0
+          }
+          currentDeviceType={currentDeviceType}
+        >
+          <Section.SectionHeader>{renderHeader()}</Section.SectionHeader>
+          <Section.SectionBody>{renderBody()}</Section.SectionBody>
+        </Section>
+        {showLoaderOverlay && (
+          <div className={styles.loaderOverlay}>
+            <Loader type={LoaderTypes.track} size="40px" />
+          </div>
+        )}
+      </div>
       <AiChatPanel />
       <CreateFormDialog
         visible={isCreateFormDialogVisible}

@@ -426,7 +426,6 @@
   "Form": "Form",
   "FormDataCollection": "Form verisi toplama",
   "FormDataCollectionDescription": "Form Doldurma odalarındaki yanıtları analiz etmek için doldurulan form kopyalarını ve verilerini XLSX'te toplayın.",
-  "FormFilingRoomInfo": "PDF formlarını odaya yükleyin. Üyeleri ve misafirleri PDF formu doldurmaya davet edin. Doldurulan formları inceleyin ve bir elektronik tabloda otomatik olarak toplanan verileri analiz edin.",
   "FormFilingRoomTitle": "Form Doldurma Odası",
   "FormRoom": "Form odası",
   "Forms": "Formlar",
