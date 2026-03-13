@@ -41,7 +41,7 @@ import { CardInformation } from "../../card-information";
 type PaymentMethodProps = {
   confirmActionType?: string | null;
   fetchCardLinked?: (url: string) => void;
-  walletCustomerEmail: boolean;
+  walletCustomerEmail: string;
   cardLinked: string;
   accountLink: string;
   isDisabled: boolean;

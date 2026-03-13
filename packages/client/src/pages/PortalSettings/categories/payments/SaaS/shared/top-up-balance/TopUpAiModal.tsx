@@ -64,7 +64,7 @@ type TopUpAiModalProps = {
     participantName?: string,
     serviceName?: string,
   ) => Promise<void>;
-  walletCustomerEmail?: boolean;
+  walletCustomerEmail?: string;
   fetchBalance?: () => Promise<void>;
   fetchAiServiceBalance?: () => Promise<void>;
 

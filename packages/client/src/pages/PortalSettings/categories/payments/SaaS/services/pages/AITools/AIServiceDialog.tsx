@@ -57,13 +57,12 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import styles from "../../styles/BackupServiceDialog.module.scss";
 
 import GetStartedBody from "./sub-components/GetStartedBody";
 import PricingBillingBody from "./sub-components/PricingBillingBody";
-import TopUpContainer from "./sub-components/TopUpContainer";
+
 import { DateTime } from "luxon";
 import { useNavigate } from "react-router";
 import { AI_TOOLS } from "@docspace/shared/constants";
@@ -92,6 +91,11 @@ interface AIServiceDialogProps {
   fetchBalance?: () => Promise<void>;
   logoText?: string;
   isTopUpVisible?: boolean;
+  fetchAiServiceBalance?: () => Promise<void>;
+  walletCustomerEmail?: string;
+  walletCustomerStatusNotActive?: boolean;
+  currency?: string;
+  featureCountData?: number;
 }
 
 type DialogView = "get-started" | "pricing" | "top-up" | "top-up-wallet";
@@ -217,18 +221,17 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
               onTopUpBalance={onTopUpBalance}
               onAmountDifferenceChange={onAmountDifferenceChange}
               visible={visible}
-              onClose={onClose}
             />
           </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <TopUpButtons
-            currency={currency}
+            currency={currency!}
             fetchBalance={fetchBalance}
             fetchServiceBalance={fetchAiServiceBalance}
             fetchTransactionHistory={onFetchHistory}
             onClose={onClose}
-            walletCustomerEmail={walletCustomerEmail}
+            walletCustomerEmail={walletCustomerEmail || ""}
             setIsLoading={setIsLoading}
             isLoading={isLoading}
             walletCustomerStatusNotActive={walletCustomerStatusNotActive}

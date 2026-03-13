@@ -47,7 +47,6 @@ type BackupPageProps = {
   formatWalletCurrency?: (amount?: number, fractionDigits?: number) => string;
   changeServiceState?: (service: string) => void;
   setServiceState?: (service: string, enabled: boolean) => void;
-  currentDeviceType?: DeviceType;
   isFreeTariff?: boolean;
 };
 
@@ -56,7 +55,6 @@ const BackupPage: React.FC<BackupPageProps> = ({
   availableBackupsCount = 0,
   backupServicePrice = 0,
   changeServiceState,
-  currentDeviceType,
   isBackupServiceOn,
   isFreeTariff,
 }) => {
@@ -171,14 +169,13 @@ export default inject(
       changeServiceState,
       isBackupServiceOn,
     } = paymentStore;
-    const { currentDeviceType } = settingsStore;
+
     const { isFreeTariff } = currentQuotaStore;
 
     return {
       formatWalletCurrency,
       availableBackupsCount,
       backupServicePrice,
-      currentDeviceType,
       changeServiceState,
       isBackupServiceOn,
       isFreeTariff,

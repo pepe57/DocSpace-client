@@ -39,7 +39,7 @@ import { FieldContainer } from "@docspace/ui-kit/components";
 
 type AmountProps = {
   isDisabled: boolean;
-  walletCustomerEmail?: boolean;
+  walletCustomerEmail?: string;
   walletCustomerStatusNotActive?: boolean;
   reccomendedAmount?: string;
   formatWalletCurrency?: (item: number, fractionDigits?: number) => string;

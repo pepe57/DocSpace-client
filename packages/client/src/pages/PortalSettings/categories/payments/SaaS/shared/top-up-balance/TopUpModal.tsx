@@ -55,7 +55,7 @@ type TopUpModalProps = {
     participantName?: string,
     serviceName?: string,
   ) => Promise<void>;
-  walletCustomerEmail?: boolean;
+  walletCustomerEmail?: string;
   fetchBalance?: () => Promise<void>;
   onClose: (isTopUp: boolean) => void;
   language?: string;
@@ -133,7 +133,7 @@ const TopUpModal = (props: TopUpModalProps) => {
 
             <Amount
               formatWalletCurrency={formatWalletCurrency}
-              walletCustomerEmail={walletCustomerEmail}
+              walletCustomerEmail={walletCustomerEmail!}
               isDisabled={(isLoading || walletCustomerStatusNotActive) ?? false}
               walletCustomerStatusNotActive={walletCustomerStatusNotActive}
               reccomendedAmount={reccomendedAmount}

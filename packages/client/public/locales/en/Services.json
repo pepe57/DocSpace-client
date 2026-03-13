@@ -48,7 +48,6 @@
   "BackupRoomDescription": "Save a backup to a selected room or the {{sectionName}} section. Use existing rooms or create a new one.",
   "BackupServiceEnabled": "Backup service successfully enabled.",
   "ChatBot": "ChatBot",
-  "HowAiWorks": "How AI service works",
   "ChatBotDescription": "Interact with an AI assistant directly in your editors — ask questions, get suggestions, or speed up your workflow.",
   "ConnectService": "Connect the service <1>here</1> to enable backup features",
   "ContactToPayer": "Contact the Payer (<1>{{email}}</1>) to connect the backup service.",

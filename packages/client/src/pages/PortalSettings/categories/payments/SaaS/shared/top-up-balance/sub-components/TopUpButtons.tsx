@@ -50,9 +50,10 @@ interface TopUpButtonsProps {
     credit: boolean,
     debit: boolean,
     participantName?: string,
+    serviceName?: string,
   ) => Promise<void>;
   onClose: (isTopUp: boolean) => void;
-  walletCustomerEmail?: boolean;
+  walletCustomerEmail?: string;
   walletCustomerStatusNotActive?: boolean;
   onTopUpBalance: (amount: number, currency: string) => Promise<string>;
   serviceName?: string;
