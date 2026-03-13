@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en" translate="no">
   <head>
     <meta charset="utf-8" />
@@ -8,10 +8,6 @@
     />
     <meta name="theme-color" content="#000000" />
     <meta name="google" content="notranslate" />
-    <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-    -->
     <link
       id="favicon"
       rel="icon"
@@ -21,19 +17,14 @@
     <link rel="mask-icon" href="/logo.ashx?logotype=3" />
     <link rel="apple-touch-icon" sizes="32x32" href="/logo.ashx?logotype=3" />
 
+    <link rel="stylesheet" href="/static/css/fonts.css?hash=%DOCSPACE_FONTS_CSS_HASH%" />
     <link rel="manifest" href="/manifest.json" />
-    <!-- Tell the browser it's a PWA -->
-    <!-- <meta name="mobile-web-app-capable" content="yes" /> -->
-    <!-- Tell iOS it's a PWA -->
-    <!-- <meta name="apple-mobile-web-app-capable" content="yes" /> -->
 
     <meta name="react-apple-itunes-app" content="app-id=944896972" />
     <meta
       name="react-google-play-app"
       content="app-id=com.onlyoffice.documents"
     />
-
-    <!-- <%= htmlWebpackPlugin.options.custom %> -->
 
     <style type="text/css">
       body {
@@ -51,26 +42,17 @@
         -webkit-font-smoothing: antialiased;
       }
     </style>
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>ONLYOFFICE</title>
   </head>
   <body ondragstart="return false">
     <noscript> You need to enable JavaScript to run this app. </noscript>
 
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `pnpm start`.
-      To create a production bundle, use `pnpm build`.
-    -->
-    <script src="<%= htmlWebpackPlugin.options.browserDetectorUrl %>"></script>
+    <script src="/static/scripts/browserDetector.js?hash=%DOCSPACE_BROWSER_DETECTOR_HASH%"></script>
     <script>
       console.log("It's WEB CLIENT INIT");
-      fetch("<%= htmlWebpackPlugin.options.configUrl %>")
+      fetch("/static/scripts/config.json?hash=%DOCSPACE_CONFIG_HASH%")
         .then((response) => {
           if (!response.ok) {
             throw new Error("HTTP error " + response.status);
@@ -90,8 +72,6 @@
               requestClose: true,
             };
           }
-
-          //console.log({ ClientConfig: window.ClientConfig });
         })
         .catch((e) => {
           console.error(e);
@@ -100,5 +80,6 @@
           };
         });
     </script>
+    <script type="module" src="/src/bootstrap.js"></script>
   </body>
 </html>

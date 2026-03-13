@@ -24,58 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-const { join } = require("path");
-const { readdirSync, readFileSync, writeFileSync } = require("fs");
-const crypto = require("crypto");
+import { join } from "path";
+import { readFileSync } from "fs";
+import { createHash } from "crypto";
 
-function generateChecksum(str, algorithm, encoding) {
-  return crypto
-    .createHash(algorithm || "md5")
-    .update(str, "utf8")
-    .digest(encoding || "hex");
-}
+const publicScriptsDir = join(__dirname, "../../../public/scripts");
 
-const dstPath = join(__dirname, "../../packages", "runtime.json");
-const scriptsDir = join(__dirname, "../../public/scripts");
+const cache = new Map<string, string>();
 
-const getFileList = (dirName) => {
-  let files = [];
+export function getStaticHash(fileName: string): string {
+  if (cache.has(fileName)) return cache.get(fileName)!;
 
-  const items = readdirSync(dirName, { withFileTypes: true });
-
-  for (const item of items) {
-    if (item.name == ".DS_Store") continue;
-
-    if (item.isDirectory()) {
-      files = [...files, ...getFileList(join(dirName, item.name))];
-    } else {
-      files.push({ path: join(dirName, item.name), name: item.name });
-    }
-  }
-
-  return files;
-};
-
-const files = getFileList(scriptsDir);
-
-const date = new Date();
-const dateString = `${date.getFullYear()}${
-  date.getMonth() + 1
-}${date.getDate()}_${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
-
-const data = {
-  date: dateString,
-  checksums: {},
-};
-
-files.forEach((file) => {
   try {
-    let content = readFileSync(file.path);
-    let checksum = generateChecksum(content);
-    data.checksums[file.name] = checksum;
-  } catch (e) {
-    console.error("Unable to generateChecksum file ", file.path, e);
+    const content = readFileSync(join(publicScriptsDir, fileName));
+    const hash = createHash("md5").update(content).digest("hex");
+    cache.set(fileName, hash);
+    return hash;
+  } catch {
+    return "";
   }
-});
-
-writeFileSync(dstPath, JSON.stringify(data, null, 2));
+}

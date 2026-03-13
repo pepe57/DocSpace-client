@@ -1573,9 +1573,13 @@ class FilesStore {
 
       if (fileType === "file") {
         if (this.activeFiles.findIndex((f) => f.id == id) === -1) {
-          newSelections.push(
-            this.filesList.find((f) => f.id == id && !f.isFolder),
+          const selectableFile = this.filesList.find(
+            (f) => f.id == id && !f.isFolder,
           );
+
+          if (selectableFile) {
+            newSelections.push(selectableFile);
+          }
         }
       } else if (this.activeFolders.findIndex((f) => f.id == id) === -1) {
         const selectableFolder = this.filesList.find(
