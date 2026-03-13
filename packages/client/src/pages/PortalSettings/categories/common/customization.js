@@ -150,9 +150,10 @@ const Customization = (props) => {
           <StyledSettingsSeparator />
           <AdManagement />
           <StyledSettingsSeparator />
-          <AiServicesManagement />
         </>
       ) : null}
+      <StyledSettingsSeparator />
+      <AiServicesManagement />
     </StyledComponent>
   );
 };
