@@ -193,15 +193,15 @@ const htmlTransformPlugin = (): Plugin => ({
     handler(html, ctx) {
       html = html
         .replace(
-          /%VITE_BROWSER_DETECTOR_HASH%/g,
+          /%DOCSPACE_BROWSER_DETECTOR_HASH%/g,
           fileHash(path.join(publicScriptsDir, "browserDetector.js")),
         )
         .replace(
-          /%VITE_CONFIG_HASH%/g,
+          /%DOCSPACE_CONFIG_HASH%/g,
           fileHash(path.join(publicScriptsDir, "config.json")),
         )
         .replace(
-          /%VITE_FONTS_CSS_HASH%/g,
+          /%DOCSPACE_FONTS_CSS_HASH%/g,
           fileHash(
             path.resolve(__dirname, "../../public/css/fonts.css"),
           ),
