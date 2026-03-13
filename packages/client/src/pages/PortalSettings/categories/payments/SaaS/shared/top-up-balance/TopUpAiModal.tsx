@@ -143,7 +143,9 @@ const TopUpAiModal = (props: TopUpAiModalProps) => {
         <ModalDialog.Body>
           <div className={styles.modalBody}>
             <Text className={modalStyles.description}>
-              {t("Services:CreditsFromWalletDescription")}
+              {t("Services:CreditsFromWalletDescription", {
+                organizationName: logoText,
+              })}
             </Text>
 
             <Link

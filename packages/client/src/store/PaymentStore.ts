@@ -85,7 +85,6 @@ type TServiceFeatureWithPrice = TNumericPaymentFeature & {
     value: number;
     currencySymbol?: string;
   };
-  serviceName?: string;
 };
 
 class PaymentStore {

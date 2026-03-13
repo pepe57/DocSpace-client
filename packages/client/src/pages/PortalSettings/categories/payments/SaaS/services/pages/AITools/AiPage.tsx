@@ -295,7 +295,8 @@ const AiPage = (props: AiPageProps) => {
       <TopUpContainer
         visible={isTopUpVisible}
         onCloseTopUpModal={onCloseTopUp}
-        onBackClick={onCloseTopUp}
+        onPricingBillingClick={onOpenPricingBilling}
+        onGetStartedClick={onOpenTopUp}
       />
       <div className={styles.toggleSection}>
         <ServiceToggleSection
