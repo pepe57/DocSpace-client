@@ -25,18 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import PropTypes from "prop-types";
 import { Trans, useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import { Button } from "@docspace/ui-kit/components/button";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
 
-const DisableAiServicesDialog = ({
+const DisableAiServicesDialogComponent = ({
   visible,
   onClose,
   onContinue,
   isLoading,
-  balance,
+  isAiToolsServiceOn = false,
+  aiServiceBalance = 0,
+  aiServiceCodeCurrency = "USD",
+  formatAiServiceCurrency = (amount) => `${amount}`,
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -107,12 +112,18 @@ const DisableAiServicesDialog = ({
             ))}
           </ul>
         </Text>
-        {balance && (
+        {isAiToolsServiceOn && (
           <Text fontSize="13px" fontWeight={400} style={{ marginTop: "16px" }}>
             <Trans
               t={t}
               i18nKey="DisableAiServicesBalance"
-              values={{ balance }}
+              values={{
+                balance: formatAiServiceCurrency(
+                  aiServiceBalance,
+                  3,
+                  aiServiceCodeCurrency,
+                ),
+              }}
               components={{
                 1: <strong key="balance-strong" />,
               }}
@@ -121,7 +132,7 @@ const DisableAiServicesDialog = ({
         )}
         <Text
           fontSize="13px"
-          fontWeight={balance ? 700 : 400}
+          fontWeight={isAiToolsServiceOn ? 700 : 400}
           style={{ marginTop: "16px" }}
         >
           {t("DisableAiServicesConfirm")}
@@ -149,5 +160,29 @@ const DisableAiServicesDialog = ({
     </ModalDialog>
   );
 };
+
+DisableAiServicesDialogComponent.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onContinue: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  isAiToolsServiceOn: PropTypes.bool,
+  aiServiceBalance: PropTypes.number,
+  aiServiceCodeCurrency: PropTypes.string,
+  formatAiServiceCurrency: PropTypes.func,
+};
+
+const DisableAiServicesDialog = inject(({ servicesStore, paymentStore }) => {
+  const { aiServiceBalance, aiServiceCodeCurrency, formatAiServiceCurrency } =
+    servicesStore;
+  const { isAiToolsServiceOn } = paymentStore;
+
+  return {
+    isAiToolsServiceOn,
+    aiServiceBalance,
+    aiServiceCodeCurrency,
+    formatAiServiceCurrency,
+  };
+})(observer(DisableAiServicesDialogComponent));
 
 export default DisableAiServicesDialog;

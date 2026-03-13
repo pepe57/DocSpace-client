@@ -60,6 +60,8 @@ interface AiServicesManagementProps {
   aiServicesManagementUrl?: string;
   currentColorScheme?: SettingsStore["currentColorScheme"];
   fetchTreeFolders: TreeFoldersStore["fetchTreeFolders"];
+  handleServicesQuotas: (serviceName?: string) => Promise<any>;
+  fetchAiServiceBalance: () => Promise<void>;
 }
 
 const AiServicesManagementComponent = ({
@@ -74,6 +76,8 @@ const AiServicesManagementComponent = ({
   aiServicesManagementUrl,
   currentColorScheme,
   fetchTreeFolders,
+  handleServicesQuotas,
+  fetchAiServiceBalance,
 }: AiServicesManagementProps) => {
   const { t, ready } = useTranslation(["Settings", "Common", "AISettings"]);
   const navigate = useNavigate();
@@ -144,7 +148,15 @@ const AiServicesManagementComponent = ({
 
   const onSave = async () => {
     if (type === 0) {
-      setShowDisableDialog(true);
+      try {
+        await Promise.all([
+          handleServicesQuotas("aitools"),
+          fetchAiServiceBalance(),
+        ]);
+        setShowDisableDialog(true);
+      } catch (e) {
+        toastr.error(e as string);
+      }
       return;
     }
 
@@ -262,14 +274,19 @@ const AiServicesManagementComponent = ({
         onClose={onCancelDisable}
         onContinue={onConfirmDisable}
         isLoading={isSaving}
-        balance="$0.325"
       />
     </div>
   );
 };
 
 export const AiServicesManagement = inject<TStore>(
-  ({ settingsStore, common, treeFoldersStore }) => {
+  ({
+    settingsStore,
+    common,
+    treeFoldersStore,
+    paymentStore,
+    servicesStore,
+  }) => {
     const {
       aiServicesEnabled,
       setAiServicesEnabled,
@@ -278,6 +295,8 @@ export const AiServicesManagement = inject<TStore>(
     } = settingsStore;
     const { isLoaded, initSettings, setIsLoadedAiServicesManagement } = common;
     const { fetchTreeFolders } = treeFoldersStore;
+    const { handleServicesQuotas } = paymentStore;
+    const { fetchAiServiceBalance } = servicesStore;
     const isMobileView = deviceType === DeviceType.mobile;
     return {
       isMobileView,
@@ -292,6 +311,8 @@ export const AiServicesManagement = inject<TStore>(
       },
       common,
       fetchTreeFolders,
+      handleServicesQuotas,
+      fetchAiServiceBalance,
     };
   },
 )(withLoading(observer(AiServicesManagementComponent)));
