@@ -8,7 +8,7 @@
     "build:translations": "node scripts/buildTranslations.js",
     "clean": "shx rm -rf dist",
     "deploy": "shx --silent mkdir -p ../../../publish/web/client && shx cp -r dist/* ../../../publish/web/client",
-    "start": "vite",
+    "start": "vite --host",
     "start-prod": "serve dist -s -p 5001",
     "analyze": "vite build --mode analyze",
     "test:build": "cross-env PORT=5110 E2E_TEST=true pnpm run build:translations && pnpm run build",
