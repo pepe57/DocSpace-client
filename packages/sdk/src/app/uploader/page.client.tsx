@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { Uploader } from "@docspace/ui-kit/uploader";
@@ -34,7 +34,7 @@ import type {
   UploadProgressData,
   UploaderFilesSettings,
 } from "@docspace/ui-kit/uploader/Uploader.types";
-import { frameCallEvent } from "@docspace/shared/utils/common";
+import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
@@ -67,6 +67,10 @@ export default function UploaderClient({
 }: UploaderClientProps) {
   useSDKConfig();
   useDocumentTitle("Uploader");
+
+  useEffect(() => {
+    frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
+  }, []);
 
   const handleUploadProgress = useCallback((data: UploadProgressData) => {
     frameCallEvent({
