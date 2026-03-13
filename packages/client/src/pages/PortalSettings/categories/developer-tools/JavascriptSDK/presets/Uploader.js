@@ -75,6 +75,13 @@ import {
 } from "./StyledPresets";
 
 const UPLOADER_EVENT_TYPES = [
+  "onAppReady",
+  "onAppError",
+  "onAuthSuccess",
+  "onSignOut",
+  "onNoAccess",
+  "onNotFound",
+  "onContentReady",
   "onUploadSuccess",
   "onUploadError",
   "onUploadProgress",
@@ -231,6 +238,13 @@ const Uploader = (props) => {
     maxPerUploadSize: "25mb",
     maxTotalUploadSize: "100mb",
     events: {
+      onAppReady: () => {},
+      onAppError: () => {},
+      onAuthSuccess: () => {},
+      onSignOut: () => {},
+      onNoAccess: () => {},
+      onNotFound: () => {},
+      onContentReady: () => {},
       onUploadSuccess: () => {},
       onUploadError: () => {},
       onUploadProgress: () => {},

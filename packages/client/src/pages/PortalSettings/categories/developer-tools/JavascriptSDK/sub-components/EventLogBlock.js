@@ -205,8 +205,8 @@ const formatTime = (date) => {
   return `${h}:${m}:${s}`;
 };
 
-const formatCompact = (data) => {
-  if (data === undefined || data === null) return "";
+const formatCompact = (data, voidLabel) => {
+  if (data === undefined || data === null) return voidLabel;
   try {
     const str = JSON.stringify(data);
     return str.length > 120 ? `${str.slice(0, 120)}\u2026` : str;
@@ -334,7 +334,7 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
                   </Gutter>
                   <EventName>{entry.event}</EventName>
                   <Arrow>→</Arrow>
-                  <EventData>{formatCompact(entry.data)}</EventData>
+                  <EventData>{formatCompact(entry.data, t("VoidReturn"))}</EventData>
                 </LogEntry>
                 {expanded && (
                   <ExpandedRow>

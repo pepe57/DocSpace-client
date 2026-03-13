@@ -93,6 +93,7 @@ const SIMPLE_ROOM_EVENT_TYPES = [
   "onContentReady",
   "onEditorCloseCallback",
   "onEditorOpen",
+  "onDownload",
   "onFileManagerClick",
 ];
 
@@ -141,6 +142,7 @@ const SimpleRoom = (props) => {
       onContentReady: () => {},
       onEditorCloseCallback: () => {},
       onEditorOpen: () => {},
+      onDownload: () => {},
       onFileManagerClick: () => {},
     },
   });

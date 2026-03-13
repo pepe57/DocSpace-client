@@ -30,7 +30,7 @@ import React, { useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import FilesSelector from "@docspace/ui-kit/selectors/Files";
-import { frameCallEvent } from "@docspace/shared/utils/common";
+import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 import {
   DeviceType,
   FolderType,
@@ -119,7 +119,7 @@ export default function FilesSelectorClient({
   useDocumentTitle("FileSelector");
 
   useEffect(() => {
-    frameCallEvent({ event: "onAppReady" });
+    frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
   }, []);
 
   const convertToEditorType = (type: FileType) => {
