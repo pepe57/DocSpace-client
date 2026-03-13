@@ -31,10 +31,13 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { Link } from "@docspace/ui-kit/components/link";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { DropDownItem } from "@docspace/ui-kit/components/drop-down-item";
+import copy from "copy-to-clipboard";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
-const GUTTER_WIDTH = 80;
+const GUTTER_WIDTH = 62;
 
 const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
   max-width: 800px;
@@ -59,7 +62,7 @@ const Header = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 8px 8px 16px;
+  padding: 8px;
   border-bottom: 1px solid ${(p) => p.theme.plugins.borderColor};
   background-color: ${(p) =>
     p.theme.isBase ? globalColors.grayLight : globalColors.grayDarkMid};
@@ -137,7 +140,6 @@ const Gutter = styled.span.attrs(injectDefaultTheme)`
   align-self: stretch;
   font-size: 12px;
   color: ${(p) => (p.theme.isBase ? globalColors.gray : globalColors.grayDark)};
-  border-right: 1px solid ${(p) => p.theme.plugins.borderColor};
   white-space: nowrap;
   ${NoUserSelect}
 `;
@@ -176,26 +178,26 @@ const EventData = styled.span.attrs(injectDefaultTheme)`
 `;
 
 const ExpandedRow = styled.div.attrs(injectDefaultTheme)`
-  display: flex;
+  position: relative;
   border-top: 1px solid ${(p) => p.theme.plugins.borderColor};
 `;
 
-const ExpandedGutter = styled.div.attrs(injectDefaultTheme)`
-  flex-shrink: 0;
-  width: ${GUTTER_WIDTH}px;
-  border-right: 1px solid ${(p) => p.theme.plugins.borderColor};
+const CopyButton = styled.div`
+  position: absolute;
+  top: 8px;
+  right: 8px;
 `;
 
 const ExpandedContent = styled.pre.attrs(injectDefaultTheme)`
   margin: 0;
-  padding: 6px 12px;
+  padding: 6px 8px;
+  padding-right: 28px;
   font-family: inherit;
   font-size: 13px;
   line-height: 20px;
   color: ${(p) => p.theme.sdkPresets.secondaryColor};
   white-space: pre-wrap;
   word-break: break-all;
-  flex: 1;
 `;
 
 const formatTime = (date) => {
@@ -338,10 +340,19 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
                 </LogEntry>
                 {expanded && (
                   <ExpandedRow>
-                    <ExpandedGutter />
                     <ExpandedContent>
                       {formatExpanded(entry.data)}
                     </ExpandedContent>
+                    <CopyButton>
+                      <IconButton
+                        size={16}
+                        iconName={CopyReactSvgUrl}
+                        onClick={() => {
+                          copy(formatExpanded(entry.data));
+                          toastr.success(t("Common:Copy"));
+                        }}
+                      />
+                    </CopyButton>
                   </ExpandedRow>
                 )}
               </div>
