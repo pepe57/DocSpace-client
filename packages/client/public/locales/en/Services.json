@@ -73,7 +73,7 @@
   "ImageGeneration": "Image generation",
   "ImageGenerationDescription": "Design original images and illustrations using AI for your documents.",
   "InputCurrency": "Input ({{currency}}/1M)",
-  "LastTopUp": "Last top-up: <1>{{currency}}</1> on {{date}}.",
+  "LastTopUp": "<1>Last top-up</1>: <2>{{currency}}</2> on {{date}}.",
   "LowBalance": "Low credit balance. Add credits to ensure uninterrupted service.",
   "ModelSettings": "Model settings",
   "OCR": "OCR",

@@ -340,13 +340,26 @@ const AiPage = (props: AiPageProps) => {
       </div>
       <div className={styles.lastTopUpRow}>
         {aiServiceLastCreditAmount ? (
-          <Text className={styles.lastTopUpLabel} fontWeight={600}>
+          <Text className={styles.lastTopUpLabel}>
             <Trans
               t={t}
               ns="Services"
               i18nKey="LastTopUp"
               components={{
-                1: <Text fontWeight={600} as="span" />,
+                1: (
+                  <Text
+                    fontWeight={600}
+                    as="span"
+                    className={styles.lastTopUpLabel}
+                  />
+                ),
+                2: (
+                  <Text
+                    fontWeight={600}
+                    as="span"
+                    className={styles.lastTopUpValue}
+                  />
+                ),
               }}
               values={{
                 currency: formatAiServiceCurrency!(
