@@ -26,7 +26,7 @@
 
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { DateTime } from "luxon";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import { useTranslation } from "react-i18next";
 
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";

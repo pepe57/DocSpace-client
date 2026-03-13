@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-import { Meta, StoryObj } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { action } from "storybook/actions";
 import ReportDialog from ".";
 import { Button } from "@docspace/ui-kit/components/button";
 import { DeviceType } from "../../enums";

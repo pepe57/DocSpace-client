@@ -344,6 +344,8 @@ class SettingsStore {
 
   aiConfig: Nullable<TAIConfig> = null;
 
+  externalDbEnabled: boolean = false;
+
   constructor() {
     makeAutoObservable(this);
   }

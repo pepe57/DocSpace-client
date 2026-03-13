@@ -27,7 +27,7 @@
  */
 
 import React from "react";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import { useTranslation } from "react-i18next";
 
 import type { TPublicRoomPassword } from "../../../api/rooms/types";

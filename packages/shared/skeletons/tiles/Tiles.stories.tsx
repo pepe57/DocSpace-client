@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react-webpack5";
 import { TilesSkeleton } from "./Tiles";
 import { TileSkeleton } from "./Tile";
 import type { TilesSkeletonProps, TileSkeletonProps } from "./Tiles.types";

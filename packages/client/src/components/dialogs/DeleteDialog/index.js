@@ -268,6 +268,7 @@ const DeleteDialogComponent = (props) => {
                   ? t("DeleteTemplateWarning")
                   : t("DeleteRoomWarning")
             }
+            dataTestId="delete_warning_checkbox"
             isChecked={isChecked}
             onChange={() => setIsChecked(!isChecked)}
           />

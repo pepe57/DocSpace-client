@@ -1,0 +1,55 @@
+.root {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.headerEditing {
+  flex: 0 1 auto;
+}
+
+.headerRow {
+  flex: 0 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.headerNavigation {
+  flex: 1;
+  min-width: 0;
+}
+
+.root :global([class*="Navigation_item"]:not([class*="itemWrapper"])) {
+  column-gap: 10px;
+}
+
+.sectionArea {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.loaderOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contentFadeIn {
+  opacity: 1;
+}
+
+.contentHidden {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}

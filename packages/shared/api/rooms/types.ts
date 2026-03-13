@@ -134,6 +134,8 @@ export type TRoom = {
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;
   path?: TPathParts[];
+  sendFormToExternalDB?: boolean;
+  saveFormAsXLSX?: boolean;
 };
 
 export type TGetRooms = {

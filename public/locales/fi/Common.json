@@ -426,7 +426,6 @@
   "Form": "Lomake",
   "FormDataCollection": "Lomaketietojen kerääminen",
   "FormDataCollectionDescription": "Kerää täytetyt lomakekopiot ja tiedot niistä XLSX-tiedostoon vastausten analysoimiseksi lomakkeiden täyttöhuoneissa.",
-  "FormFilingRoomInfo": "Lataa PDF-lomakkeita huoneeseen. Kutsu jäseniä ja vieraita täyttämään PDF-lomake. Katsele täydennettyjä lomakkeita ja analysoi taulukkoon kerättyä tietoa automaattisesti.",
   "FormFilingRoomTitle": "Lomakkeen täyttöhuone",
   "FormRoom": "Lomakehuone",
   "Forms": "Lomakkeet",

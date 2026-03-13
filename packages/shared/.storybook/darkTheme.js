@@ -1,4 +1,4 @@
-import { create } from "@storybook/theming/create";
+import { create } from "storybook/theming/create";
 import Logo from "../../../public/images/logo/dark_lightsmall.svg?url";
 import { globalColors } from "@docspace/ui-kit/providers/theme";
 
