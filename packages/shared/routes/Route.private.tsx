@@ -307,7 +307,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     }
 
     if (requireAIServices && !aiServicesEnabled) {
-      return <Navigate replace to="/rooms/shared" />;
+      return <Navigate replace to="/error/404" />;
     }
 
     if (isAccountsPage) {
