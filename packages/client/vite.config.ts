@@ -182,66 +182,93 @@ const staticUrlPlugin = (): Plugin => {
 // rewrite the module entry point to use an absolute Vite URL so the browser
 // loads ES modules directly from the Vite dev server instead of the proxy.
 // ---------------------------------------------------------------------------
-const htmlTransformPlugin = (): Plugin => ({
-  name: "html-transform",
-  transformIndexHtml: {
-    // "post" order so we run AFTER Vite injects /@vite/client and
-    // @vitejs/plugin-react injects the /@react-refresh preamble.
-    // This lets us rewrite all module URLs to absolute Vite origin,
-    // preventing split module identity when served through a proxy.
-    order: "post",
-    handler(html, ctx) {
-      html = html
-        .replace(
-          /%DOCSPACE_BROWSER_DETECTOR_HASH%/g,
-          fileHash(path.join(publicScriptsDir, "browserDetector.js")),
-        )
-        .replace(
-          /%DOCSPACE_CONFIG_HASH%/g,
-          fileHash(path.join(publicScriptsDir, "config.json")),
-        )
-        .replace(
-          /%DOCSPACE_FONTS_CSS_HASH%/g,
-          fileHash(
-            path.resolve(__dirname, "../../public/css/fonts.css"),
-          ),
-        );
+const htmlTransformPlugin = (): Plugin => {
+  // Captured from the incoming request so transformIndexHtml can build
+  // absolute Vite URLs that work regardless of which host the browser uses.
+  let currentRequestHost = "localhost";
 
-      // In dev mode, rewrite ALL module URLs to use absolute Vite origin.
-      // When the page is served through a proxy (e.g. nginx on :8092),
-      // relative imports like /@vite/client and /@react-refresh resolve
-      // to the proxy origin, while bootstrap.js loads from Vite directly.
-      // This creates two separate /@react-refresh module instances —
-      // the preamble hooks register on one, but components register on
-      // the other, breaking React Fast Refresh.
-      if (ctx.server) {
-        const serverConfig = ctx.server.config.server;
-        const host =
-          process.env.VITE_DEV_HOST ||
-          (typeof serverConfig.host === "string"
-            ? serverConfig.host
-            : "localhost");
-        const port = serverConfig.port || 5001;
-        const viteOrigin = `http://${host}:${port}`;
+  return {
+    name: "html-transform",
+
+    configureServer(server) {
+      // Runs BEFORE Vite's internal HTML middleware, so the host is
+      // already captured by the time transformIndexHtml fires.
+      server.middlewares.use((req, _res, next) => {
+        const prevHost = currentRequestHost;
+        if (req.headers.host) {
+          currentRequestHost = req.headers.host.split(":")[0];
+        }
+        console.log(
+          `[html-transform] request: ${req.method} ${req.url} | ` +
+            `Host header: ${req.headers.host} | ` +
+            `resolved host: ${currentRequestHost}` +
+            (prevHost !== currentRequestHost
+              ? ` (changed from ${prevHost})`
+              : ""),
+        );
+        next();
+      });
+    },
+
+    transformIndexHtml: {
+      // "post" order so we run AFTER Vite injects /@vite/client and
+      // @vitejs/plugin-react injects the /@react-refresh preamble.
+      // This lets us rewrite all module URLs to absolute Vite origin,
+      // preventing split module identity when served through a proxy.
+      order: "post",
+      handler(html, ctx) {
         html = html
           .replace(
-            'src="/src/bootstrap.js"',
-            `src="${viteOrigin}/src/bootstrap.js"`,
+            /%DOCSPACE_BROWSER_DETECTOR_HASH%/g,
+            fileHash(path.join(publicScriptsDir, "browserDetector.js")),
           )
           .replace(
-            'src="/@vite/client"',
-            `src="${viteOrigin}/@vite/client"`,
+            /%DOCSPACE_CONFIG_HASH%/g,
+            fileHash(path.join(publicScriptsDir, "config.json")),
           )
           .replace(
-            / from\s+"\/(@react-refresh)"/g,
-            ` from "${viteOrigin}/$1"`,
+            /%DOCSPACE_FONTS_CSS_HASH%/g,
+            fileHash(
+              path.resolve(__dirname, "../../public/css/fonts.css"),
+            ),
           );
-      }
 
-      return html;
+        // In dev mode, rewrite ALL module URLs to use absolute Vite origin.
+        // When the page is served through a proxy (e.g. nginx on :8092),
+        // relative imports like /@vite/client and /@react-refresh resolve
+        // to the proxy origin, while bootstrap.js loads from Vite directly.
+        // This creates two separate /@react-refresh module instances —
+        // the preamble hooks register on one, but components register on
+        // the other, breaking React Fast Refresh.
+        if (ctx.server) {
+          const port = ctx.server.config.server.port || 5001;
+          const host = process.env.VITE_DEV_HOST || currentRequestHost;
+          const viteOrigin = `http://${host}:${port}`;
+          console.log(
+            `[html-transform] rewriting module URLs → ${viteOrigin} ` +
+              `(VITE_DEV_HOST=${process.env.VITE_DEV_HOST || "(not set)"}, ` +
+              `requestHost=${currentRequestHost})`,
+          );
+          html = html
+            .replace(
+              'src="/src/bootstrap.js"',
+              `src="${viteOrigin}/src/bootstrap.js"`,
+            )
+            .replace(
+              'src="/@vite/client"',
+              `src="${viteOrigin}/@vite/client"`,
+            )
+            .replace(
+              / from\s+"\/(@react-refresh)"/g,
+              ` from "${viteOrigin}/$1"`,
+            );
+        }
+
+        return html;
+      },
     },
-  },
-});
+  };
+};
 
 // ---------------------------------------------------------------------------
 // Custom plugin: add copyright banner to JS/CSS output (production only)
@@ -494,14 +521,16 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
     },
 
     server: {
+      host: true,
       port: parseInt(process.env.PORT || "5001"),
       strictPort: true,
       cors: true,
       // Allow the page loaded from the backend proxy (e.g. :8092) to connect
-      // to Vite's WebSocket for HMR
+      // to Vite's WebSocket for HMR.  Don't set hmr.host — the HMR client
+      // will use the page's hostname, so it works for both localhost and
+      // remote access.  clientPort tells it which port to connect to.
       hmr: {
-        host: "localhost",
-        port: parseInt(process.env.PORT || "5001"),
+        clientPort: parseInt(process.env.PORT || "5001"),
         protocol: "ws",
       },
       headers: {
