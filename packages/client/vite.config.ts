@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { defineConfig, type Plugin, transformWithEsbuild } from "vite";
+import { defineConfig, type Plugin, type UserConfig, transformWithEsbuild } from "vite";
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 import path from "path";
@@ -393,7 +393,7 @@ const serveRootPublicPlugin = (): Plugin => {
 // ===========================================================================
 // Main Vite configuration
 // ===========================================================================
-export default defineConfig(async ({ mode }) => {
+export default defineConfig(async ({ mode }): Promise<UserConfig> => {
   const isProduction = mode === "production";
   const isAnalyze = mode === "analyze";
 
@@ -531,7 +531,7 @@ export default defineConfig(async ({ mode }) => {
       // data-URI which breaks this detection.
       assetsInlineLimit: 0,
       rollupOptions: {
-        onwarn(warning, warn) {
+        onwarn(warning: { code?: string; message?: string; id?: string }, warn: Function) {
           // react-virtualized ships a Flow directive that Rollup doesn't understand
           if (warning.code === "MODULE_LEVEL_DIRECTIVE") return;
           // sjcl optionally imports Node "crypto" for PRNG seeding;
@@ -557,14 +557,14 @@ export default defineConfig(async ({ mode }) => {
         output: {
           entryFileNames: "static/js/[name].[hash].bundle.js",
           chunkFileNames: "static/js/[name].[hash].js",
-          assetFileNames: (assetInfo) => {
+          assetFileNames: (assetInfo: { names?: string[] }) => {
             const name = assetInfo.names?.[0] || "";
             if (name.endsWith(".css")) {
               return "static/styles/[name].[hash][extname]";
             }
             return "static/[name].[hash][extname]";
           },
-          manualChunks(id) {
+          manualChunks(id: string) {
             if (id.includes("node_modules")) {
               if (id.includes("firebase")) return "vendor-firebase";
               if (id.includes("mobx")) return "vendor-mobx";

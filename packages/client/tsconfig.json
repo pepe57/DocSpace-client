@@ -1,7 +1,7 @@
 {
   "extends": "../shared/tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./",
+    "rootDir": "../../",
     "baseUrl": "./",
     "jsx": "react-jsx",
     "paths": {
