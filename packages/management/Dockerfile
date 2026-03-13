@@ -26,8 +26,6 @@ RUN npm uninstall -g playwright playwright-core @playwright/test
 
 RUN cd /app/packages/management && pnpm exec playwright install chromium --with-deps
 
-RUN pnpm run before-build
-
 RUN pnpm --filter @docspace/management run build:translations
 
 WORKDIR /app/packages/management
