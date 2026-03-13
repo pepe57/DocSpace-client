@@ -5,12 +5,10 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@types/react': 19.2.10
-  '@types/react-dom': 19.2.3
-  nth-check: 2.1.1
-  '@isaacs/brace-expansion': 5.0.1
   pnpm: ^10.28.2
   on-headers: ^1.1.0
+  '@types/react': 19.2.10
+  '@types/react-dom': 19.2.3
   '@smithy/config-resolver': 4.4.6
   diff: 4.0.4
   lodash: 4.17.23
@@ -21,7 +19,6 @@ overrides:
   qs: '>=6.14.2'
   node-fetch: '>=2.6.7'
   ajv: '>=8.18.0'
-  file-loader>schema-utils: ^4.3.3
   fast-xml-parser: '>=5.3.6'
   minimatch: '>=10.2.1'
   serialize-javascript: '>=7.0.3'
@@ -419,9 +416,6 @@ importers:
       mobx-react:
         specifier: 7.6.0
         version: 7.6.0(mobx@6.13.5)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      msw:
-        specifier: ^2.12.7
-        version: 2.12.10(@types/node@24.10.7)(typescript@5.9.3)
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
@@ -503,6 +497,9 @@ importers:
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
+      use-resize-observer:
+        specifier: 9.1.0
+        version: 9.1.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       utif:
         specifier: 3.1.0
         version: 3.1.0
@@ -561,6 +558,9 @@ importers:
       cross-env:
         specifier: ^10.1.0
         version: 10.1.0
+      msw:
+        specifier: ^2.12.7
+        version: 2.12.10(@types/node@24.10.7)(typescript@5.9.3)
       rollup-plugin-visualizer:
         specifier: ^7.0.1
         version: 7.0.1(rollup@4.59.0)
@@ -576,9 +576,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      use-resize-observer:
-        specifier: 9.1.0
-        version: 9.1.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       vite:
         specifier: ^6.4.1
         version: 6.4.1(@types/node@24.10.7)(sass@1.79.6)(terser@5.46.0)(yaml@2.8.2)

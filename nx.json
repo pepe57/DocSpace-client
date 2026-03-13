@@ -36,7 +36,8 @@
     "test:build": {
       "cache": true,
       "outputs": [
-        "{projectRoot}/.next"
+        "{projectRoot}/.next",
+        "{projectRoot}/dist"
       ]
     },
     "test": {
