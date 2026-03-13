@@ -574,6 +574,9 @@ export async function getTransactionHistory(
   if (serviceName) {
     params.serviceName = serviceName;
   }
+  if (serviceName === AI_SERVICE) {
+    params.writeOffServiceQuota = true;
+  }
 
   const options = {
     method: "get",
