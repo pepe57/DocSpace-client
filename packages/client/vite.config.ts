@@ -194,18 +194,9 @@ const htmlTransformPlugin = (): Plugin => {
       // Runs BEFORE Vite's internal HTML middleware, so the host is
       // already captured by the time transformIndexHtml fires.
       server.middlewares.use((req, _res, next) => {
-        const prevHost = currentRequestHost;
         if (req.headers.host) {
           currentRequestHost = req.headers.host.split(":")[0];
         }
-        console.log(
-          `[html-transform] request: ${req.method} ${req.url} | ` +
-            `Host header: ${req.headers.host} | ` +
-            `resolved host: ${currentRequestHost}` +
-            (prevHost !== currentRequestHost
-              ? ` (changed from ${prevHost})`
-              : ""),
-        );
         next();
       });
     },
@@ -244,11 +235,6 @@ const htmlTransformPlugin = (): Plugin => {
           const port = ctx.server.config.server.port || 5001;
           const host = process.env.VITE_DEV_HOST || currentRequestHost;
           const viteOrigin = `http://${host}:${port}`;
-          console.log(
-            `[html-transform] rewriting module URLs → ${viteOrigin} ` +
-              `(VITE_DEV_HOST=${process.env.VITE_DEV_HOST || "(not set)"}, ` +
-              `requestHost=${currentRequestHost})`,
-          );
           html = html
             .replace(
               'src="/src/bootstrap.js"',
