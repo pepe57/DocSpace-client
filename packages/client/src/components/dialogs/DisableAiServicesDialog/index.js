@@ -48,9 +48,15 @@ const DisableAiServicesDialogComponent = ({
   const effects = [
     {
       key: "DisableAiServicesEffect1",
-      values: { productName: t("Common:ProductName") },
+      values: {
+        productName: t("Common:ProductName"),
+        aiSettings: t("AISettings"),
+      },
     },
-    { key: "DisableAiServicesEffect2" },
+    {
+      key: "DisableAiServicesEffect2",
+      values: { aiServices: t("Common:AIServices") },
+    },
     {
       key: "DisableAiServicesEffect3",
       values: { aiAgents: t("Common:AIAgents") },
@@ -66,7 +72,11 @@ const DisableAiServicesDialogComponent = ({
       autoMaxHeight
       data-testid="disable_ai_services_dialog"
     >
-      <ModalDialog.Header>{t("DisableAiServices")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("DisableAiServices", {
+          aiServices: t("Common:AIServices"),
+        })}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <Text
           fontSize="13px"
@@ -74,7 +84,9 @@ const DisableAiServicesDialogComponent = ({
           style={{ marginBottom: "22px" }}
           lineHeight="20px"
         >
-          {t("DisableAiServicesDescription")}
+          {t("DisableAiServicesDescription", {
+            organizationName: t("Common:OrganizationName"),
+          })}
         </Text>
         <Text fontSize="13px" fontWeight={400} as="div">
           <ul
@@ -123,6 +135,7 @@ const DisableAiServicesDialogComponent = ({
                   3,
                   aiServiceCodeCurrency,
                 ),
+                aiServices: t("Common:AIServices"),
               }}
               components={{
                 1: <strong key="balance-strong" />,
@@ -135,7 +148,9 @@ const DisableAiServicesDialogComponent = ({
           fontWeight={isAiToolsServiceOn ? 700 : 400}
           style={{ marginTop: "16px" }}
         >
-          {t("DisableAiServicesConfirm")}
+          {t("DisableAiServicesConfirm", {
+            aiServices: t("Common:AIServices"),
+          })}
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>

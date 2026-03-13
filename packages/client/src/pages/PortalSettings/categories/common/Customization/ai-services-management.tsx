@@ -60,7 +60,7 @@ interface AiServicesManagementProps {
   aiServicesManagementUrl?: string;
   currentColorScheme?: SettingsStore["currentColorScheme"];
   fetchTreeFolders: TreeFoldersStore["fetchTreeFolders"];
-  handleServicesQuotas: (serviceName?: string) => Promise<any>;
+  handleServicesQuotas: (serviceName?: string) => Promise<unknown>;
   fetchAiServiceBalance: () => Promise<void>;
 }
 
@@ -208,7 +208,9 @@ const AiServicesManagementComponent = ({
     <div className={styles.wrapper}>
       {!isMobileView ? (
         <Text fontSize="16px" fontWeight={700}>
-          {t("AiServicesManagement")}
+          {t("AiServicesManagement", {
+            aiServices: t("Common:AIServices"),
+          })}
         </Text>
       ) : null}
       <Text className="category-item-description" fontSize="13px">
@@ -216,6 +218,8 @@ const AiServicesManagementComponent = ({
           productName: t("Common:ProductName"),
           aiAgents: t("Common:AIAgents"),
           aiSettings: t("AISettings"),
+          aiServices: t("Common:AIServices"),
+          organizationName: t("Common:OrganizationName"),
         })}
       </Text>
       {aiServicesManagementUrl ? (

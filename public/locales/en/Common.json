@@ -66,6 +66,7 @@
   "AIProvider": "AI provider",
   "AIRoomDescription": "A versatile chat powered by your chosen text model. Use it to solve everyday tasks and collaborate on text documents, spreadsheets, and presentations. All files added to the room are automatically used as context during your conversations with the chat.",
   "AIRoomTitle": "AI Room",
+  "AIServices": "AI services",
   "EmptyFolder": "This folder is empty",
   "AIToolsHint": "AI tools and integrations",
   "AIWouldLikeToUseThisTool": "AI would like to use this tool",
