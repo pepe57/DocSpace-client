@@ -34,7 +34,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
 import { Link } from "@docspace/ui-kit/components/link";
 
-import { AI_TOOLS } from "@docspace/shared/constants";
+import { AI_ENUM, AI_TOOLS } from "@docspace/shared/constants";
 import { DeviceType } from "@docspace/shared/enums";
 
 import TransactionHistory from "../../../shared/transaction-history";
@@ -43,7 +43,7 @@ import PayerInformation from "../../../shared/payer-information";
 import ServiceToggleSection from "../../sub-components/ServiceToggleSection";
 import { finishRefreshingWithMinCycle } from "SRC_DIR/helpers/refreshing";
 
-import ConfirmationDialog from "../../../../../../../../components/ConfirmWrapper";
+import ConfirmationDialog from "../../sub-components/ConfirmationDialog";
 
 import PricingBillingBody from "./sub-components/PricingBillingBody";
 import TopUpContainer from "./sub-components/TopUpContainer";
@@ -57,6 +57,8 @@ import {
 } from "@docspace/ui-kit/utils/date";
 import { setServiceState } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/ui-kit/components";
+import AIServiceDialog from "./AIServiceDialog";
+import WalletInfo from "../../../shared/top-up-balance/sub-components/WalletInfo";
 
 type AiPageProps = {
   aiServiceCodeCurrency?: string;
@@ -91,13 +93,13 @@ type AiPageProps = {
   isPayer?: boolean;
   currentDeviceType?: string;
   wasFirstAiServiceTopUp?: boolean;
+  formatWalletCurrency?: () => string;
 };
 
 const AiPage = (props: AiPageProps) => {
   const {
     isAiToolsServiceOn = false,
     changeServiceState,
-    onTopUpClick,
     onPricingBillingClick,
     aiServiceBalance,
     aiServiceCodeCurrency,
@@ -116,6 +118,7 @@ const AiPage = (props: AiPageProps) => {
     isPayer,
     currentDeviceType,
     wasFirstAiServiceTopUp,
+    formatWalletCurrency,
   } = props;
 
   const { t } = useTranslation("Services");
@@ -168,18 +171,18 @@ const AiPage = (props: AiPageProps) => {
     setIsConfirmDialogVisible(false);
 
     const raw = {
-      service: AI_TOOLS,
+      service: AI_ENUM,
       enabled: !isAiToolsServiceOn,
     };
 
-    changeServiceState?.(AI_TOOLS);
+    changeServiceState?.(AI_ENUM);
 
     try {
       const result = await setServiceState(raw);
 
       if (!result) {
         toastr.error(t("Common:UnexpectedError"));
-        changeServiceState?.(AI_TOOLS);
+        changeServiceState?.(AI_ENUM);
         return;
       }
 
@@ -187,7 +190,7 @@ const AiPage = (props: AiPageProps) => {
     } catch (error) {
       console.error(error);
       toastr.error(t("Common:UnexpectedError"));
-      changeServiceState?.(AI_TOOLS);
+      changeServiceState?.(AI_ENUM);
     }
   };
 
@@ -237,9 +240,6 @@ const AiPage = (props: AiPageProps) => {
   };
 
   const onOpenTopUp = () => {
-    onTopUpClick?.();
-    setIsPricingBillingVisible(false);
-
     if (!isAiToolsServiceOn) {
       setIsTopUpConfirmVisible(true);
       return;
@@ -283,6 +283,8 @@ const AiPage = (props: AiPageProps) => {
 
   if (!isInitAiPage || !wasFirstAiServiceTopUp) return <AiPageLoader />;
 
+  const balance = formatWalletCurrency!();
+
   return (
     <div className={styles.container}>
       <PricingBillingBody
@@ -292,12 +294,10 @@ const AiPage = (props: AiPageProps) => {
         withoutFooter
       />
 
-      <TopUpContainer
-        visible={isTopUpVisible}
-        onCloseTopUpModal={onCloseTopUp}
-        onPricingBillingClick={onOpenPricingBilling}
-        onGetStartedClick={onOpenTopUp}
-      />
+      {isTopUpVisible ? (
+        <AIServiceDialog visible={isTopUpVisible} onClose={onCloseTopUp} />
+      ) : null}
+
       <div className={styles.toggleSection}>
         <ServiceToggleSection
           isEnabled={isAiToolsServiceOn}
@@ -307,13 +307,11 @@ const AiPage = (props: AiPageProps) => {
           testId="service-ai-toggle-button"
           isDisabled={isDisabled}
         />
-        <div className={styles.payerSection}>
-          {/* @ts-expect-error all props are injected via MobX inject() */}
-          {isDisabled ? <PayerInformation /> : null}
-        </div>
+
+        <WalletInfo shortView withoutBackground balance={balance} />
 
         {isAiToolsServiceOn && isAiServiceLowBalance ? (
-          <Text fontSize="15px" fontWeight={700} className={styles.lowBalance}>
+          <Text fontSize="15px" fontWeight={600} className={styles.lowBalance}>
             {t("LowBalance")}
           </Text>
         ) : null}
@@ -428,6 +426,7 @@ export default inject(
       isAiToolsServiceOn,
       cardLinkedOnFreeTariff,
       isPayer,
+      formatWalletCurrency,
     } = paymentStore;
     const { logoText, currentDeviceType } = settingsStore;
     const { language } = authStore;
@@ -444,6 +443,7 @@ export default inject(
       wasFirstAiServiceTopUp,
     } = servicesStore;
     const { isFreeTariff } = currentQuotaStore;
+
     return {
       aiServiceBalance,
       aiServiceCodeCurrency,
@@ -464,6 +464,7 @@ export default inject(
       isFreeTariff,
       currentDeviceType,
       wasFirstAiServiceTopUp,
+      formatWalletCurrency,
     };
   },
 )(observer(AiPage));
