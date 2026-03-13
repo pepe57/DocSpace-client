@@ -165,7 +165,7 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
       <div className={styles.toggleBlock}>
         <div className={styles.toggleHeader}>
           <Text fontSize="16px" fontWeight={700}>
-            {t("Common:SaveFormDataToDatabase")}
+            {t("Common:ExportResultsToDatabase")}
           </Text>
           <ToggleButton
             className={styles.toggle}
@@ -174,7 +174,7 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
           />
         </div>
         <Text fontSize="12px" fontWeight={400}>
-          {t("Common:ConnectDatabaseDescription")}
+          {t("Common:ExportResultsToDatabaseDescription")}
         </Text>
       </div>
 

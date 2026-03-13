@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { DocsContainer as BaseContainer } from "@storybook/blocks";
-import { addons } from "@storybook/preview-api";
+import { DocsContainer as BaseContainer } from "@storybook/addon-docs/blocks";
+import { addons } from "storybook/preview-api";
 import darkTheme from "./darkTheme";
 import lightTheme from "./lightTheme";
 
