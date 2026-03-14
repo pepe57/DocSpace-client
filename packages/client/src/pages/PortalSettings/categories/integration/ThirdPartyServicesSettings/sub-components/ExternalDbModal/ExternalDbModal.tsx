@@ -73,14 +73,14 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
       const name = prop.name;
 
       match(prop)
-        .with({ type: P.union("text", "password") }, () => {
-          defaults[name] = prop.value ?? "";
+        .with({ type: P.union("text", "password") }, ({ value }) => {
+          defaults[name] = value ?? "";
         })
-        .with({ type: "number" }, () => {
-          defaults[name] = Number(prop.value);
+        .with({ type: "number" }, ({ value }) => {
+          defaults[name] = value;
         })
-        .with({ type: "toggle" }, () => {
-          defaults[name] = Boolean(prop.value);
+        .with({ type: "toggle" }, ({ value }) => {
+          defaults[name] = Boolean(value);
         })
         .with({ type: "select" }, ({ value, options }) => {
           defaults[name] = String(value || options[0]);
