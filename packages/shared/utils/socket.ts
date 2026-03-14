@@ -27,9 +27,10 @@
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 
-import { TUser } from "../api/people/types";
-import { TGroup } from "../api/groups/types";
-import { TFile } from "../api/files/types";
+import type { TUser } from "../api/people/types";
+import type { TGroup } from "../api/groups/types";
+import type { TFile } from "../api/files/types";
+import type { TSettings } from "../api/settings/types";
 
 import { addLog } from ".";
 
@@ -79,6 +80,7 @@ export const enum SocketEvents {
   ChaneFolderAccessRights = "s:change-access-rights-folder",
   ExportChat = "s:export-chat",
   QuotaExceeded = "s:quota_exceeded",
+  ExternalDbSettings = "s:external-db-settings",
 }
 
 /**
@@ -95,6 +97,7 @@ export const enum SocketCommands {
   StorageEncryption = "storage-encryption",
   SubscribeInSpaces = "subscribeInSpaces",
   UnsubscribeInSpaces = "unsubscribeInSpaces",
+  SubscribeExternalDbSettings = "external-db-settings",
 }
 
 /**
@@ -330,6 +333,7 @@ export type TListenEventCallbackMap = {
       scope: "room" | "user" | "tenant";
     };
   }) => void;
+  [SocketEvents.ExternalDbSettings]: (data: Partial<TSettings>) => void;
 };
 
 /**

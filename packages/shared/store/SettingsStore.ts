@@ -83,7 +83,7 @@ import {
 } from "../utils/common";
 import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 import FirebaseHelper from "../utils/firebase";
-import SocketHelper from "../utils/socket";
+import SocketHelper, { SocketCommands, SocketEvents } from "../utils/socket";
 
 const themes = {
   Dark,
@@ -348,7 +348,17 @@ class SettingsStore {
 
   constructor() {
     makeAutoObservable(this);
+
+    this.wsExternalDbSettings();
   }
+
+  wsExternalDbSettings = () => {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: SocketCommands.SubscribeExternalDbSettings,
+    });
+
+    SocketHelper?.on(SocketEvents.ExternalDbSettings, this.setSettings);
+  };
 
   clearAbortControllerArr = () => {
     this.abortControllerArr.forEach((controller) => {
@@ -944,16 +954,12 @@ class SettingsStore {
 
   setCulture = (culture: string) => (this.culture = culture);
 
-  getSettings = async () => {
-    const settings: Nullable<TSettings> = await api.settings.getSettings(true);
-
-    if (!settings) return;
-
+  setSettings = (settings: Partial<TSettings>) => {
     Object.keys(settings).forEach((forEachKey) => {
       const key = forEachKey as keyof TSettings;
 
       if (key in this && settings) {
-        if (key === "socketUrl") {
+        if (key === "socketUrl" && settings[key]) {
           this.setSocketUrl(settings[key]);
           return;
         }
@@ -964,7 +970,7 @@ class SettingsStore {
           if (settings?.wizardToken) return;
           const language = getCookie(LANGUAGE);
           if (!language || language === "undefined") {
-            setCookie(LANGUAGE, settings[key], {
+            setCookie(LANGUAGE, settings[key]!, {
               "max-age": COOKIE_EXPIRATION_YEAR,
             });
           }
@@ -973,6 +979,14 @@ class SettingsStore {
         this.setValue("hashSettings", settings[key]);
       }
     });
+  };
+
+  getSettings = async () => {
+    const settings: Nullable<TSettings> = await api.settings.getSettings(true);
+
+    if (!settings) return;
+
+    this.setSettings(settings);
 
     this.setGreetingSettings(settings.greetingSettings);
 
