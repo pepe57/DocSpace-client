@@ -24,9 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import isNil from "lodash/isNil";
+import isEqual from "lodash/isEqual";
 import { match, P } from "ts-pattern";
-import React, { useCallback, useMemo, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import React, { useMemo, useState } from "react";
+import { useForm, Controller, useWatch } from "react-hook-form";
 
 import {
   ModalDialog,
@@ -41,13 +43,13 @@ import styles from "./ExternalDbModal.module.scss";
 import type {
   ExternalDbModalProps,
   ExternalDbFormData,
-  ConsumerProp,
 } from "./ExternalDbModal.types";
 import ExternalDbField from "./ExternalDbField";
 import SupportLinks from "./SupportLinks";
 import {
   filterRelevantFields,
   getFieldValidationRules,
+  isFieldVisible,
 } from "./ExternalDbField.utils";
 
 const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
@@ -63,11 +65,8 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
   const [connected, setConnected] = useState<boolean | null>(null);
   const [isTesting, setIsTesting] = useState<boolean>(false);
 
-  const defaultValues = useMemo((): Record<
-    string,
-    string | boolean | number
-  > => {
-    const defaults: Record<string, string | boolean | number> = {};
+  const defaultValues = useMemo((): ExternalDbFormData => {
+    const defaults: ExternalDbFormData = {};
 
     selectedConsumer.props.forEach((prop) => {
       const name = prop.name;
@@ -91,6 +90,12 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
     return defaults;
   }, [selectedConsumer]);
 
+  const [fieldsToRender, setFieldsToRender] = useState(() =>
+    selectedConsumer.props.filter((field) =>
+      isFieldVisible(field, defaultValues),
+    ),
+  );
+
   const {
     control,
     handleSubmit,
@@ -101,27 +106,22 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
     mode: "onChange",
   });
 
-  const formValues = watch();
+  useWatch({
+    control,
+    compute: (fieldValues) => {
+      if (!isNil(connected)) setConnected(null);
 
-  const isFieldVisible = useCallback(
-    (field: ConsumerProp): boolean => {
-      if (!field.dependsOn || !field.dependsOnValue) {
-        return true;
-      }
-      return (
-        formValues[field.dependsOn as keyof ExternalDbFormData] ===
-        field.dependsOnValue
+      const visibleFields = selectedConsumer.props.filter((field) =>
+        isFieldVisible(field, fieldValues),
       );
+
+      if (!isEqual(fieldsToRender, visibleFields)) {
+        setFieldsToRender(visibleFields);
+      }
     },
-    [formValues],
-  );
+  });
 
-  const fieldsToRender = useMemo(
-    () => selectedConsumer.props.filter(isFieldVisible),
-    [selectedConsumer, isFieldVisible],
-  );
-
-  const handleTestConnection = async (): Promise<void> => {
+  const handleTestConnection = async (): Promise<boolean> => {
     try {
       setIsTesting(true);
       const formData = watch();
@@ -131,8 +131,12 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
 
       if (error) toastr.error(error);
       setConnected(success);
+
+      return success;
     } catch (error) {
       toastr.error(error as Error);
+      setConnected(false);
+      return false;
     } finally {
       setIsTesting(false);
     }
@@ -141,6 +145,9 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
   const onSubmit = async (data: ExternalDbFormData): Promise<void> => {
     try {
       const filteredData = filterRelevantFields(data, fieldsToRender);
+      const success = await handleTestConnection();
+      if (!success) return;
+
       await onSave(filteredData);
     } catch (error) {
       toastr.error(error as Error);
