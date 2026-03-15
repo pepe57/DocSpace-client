@@ -224,7 +224,6 @@ const BackupPage: React.FC<BackupPageProps> = ({
       ) : null}
       <div>
         <TransactionHistory
-          headerTitle={t("Services:UsageHistory")}
           serviceName={BACKUP_SERVICE}
         />
       </div>
