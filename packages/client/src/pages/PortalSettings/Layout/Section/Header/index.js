@@ -221,10 +221,16 @@ const SectionHeaderContent = (props) => {
 
     const arrayOfParams = getArrayOfParams();
 
-    const isAiServicesPage = arrayOfParams[0] === "ai-services";
+    const serviceSubPageHeaders = {
+      "ai-services": "Services:OrganizationAI",
+      "backup": "Common:Backup",
+      "disk-storage": "Payments:AdditionalDiskStorage",
+    };
 
-    if (isAiServicesPage) {
-      const header = "Services:OrganizationAI";
+    const serviceSubPageHeader = serviceSubPageHeaders[arrayOfParams[1]];
+
+    if (serviceSubPageHeader) {
+      const header = serviceSubPageHeader;
       const isCategoryOrHeader = false;
 
       header !== state.header && setState((val) => ({ ...val, header }));
@@ -513,6 +519,7 @@ export default inject(
       "OAuth",
       "Ldap",
       "Services",
+      "Payments",
     ])(observer(SectionHeaderContent)),
   ),
 );
