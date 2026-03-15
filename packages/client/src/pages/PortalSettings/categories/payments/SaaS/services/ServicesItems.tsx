@@ -260,26 +260,13 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
   };
 
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <Text className={styles.storageDescription}>
         {isPayer || !isCardLinkedToPortal
           ? t("ConnectAndConfigureServices")
           : t("ServiceConfigurationNotice")}
       </Text>
-      {isCardLinkedToPortal ? (
-        <div className={styles.payerContainer}>
-          <PayerInformation
-            style={undefined}
-            theme={undefined}
-            user={undefined}
-            accountLink={undefined}
-            payerInfo={undefined}
-            email={undefined}
-            isNotPaidPeriod={undefined}
-            isStripePortalAvailable={undefined}
-          />
-        </div>
-      ) : null}
+
       <div
         className={classNames(styles.servicesWrapper, {
           [styles.servicesWrapperMobile]: isMobile,
