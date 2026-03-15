@@ -224,7 +224,6 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
       case BACKUP_SERVICE:
         if (
           isBackupServiceOn &&
-          availableBackupsCount &&
           availableBackupsCount === 0
         ) {
           return t("Services:BackupsNotAvailable");
