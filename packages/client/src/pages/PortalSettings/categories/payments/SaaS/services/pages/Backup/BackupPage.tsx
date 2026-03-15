@@ -51,9 +51,9 @@ type BackupPageProps = {
   changeServiceState?: (service: string) => void;
   setServiceState?: (service: string, enabled: boolean) => void;
   isFreeTariff?: boolean;
-  isBackupPaid?: boolean,
-  maxFreeBackups?: number,
-  usedBackupsCount?: number,
+  isBackupPaid?: boolean;
+  maxFreeBackups?: number;
+  usedBackupsCount?: number;
 };
 
 const BackupPage: React.FC<BackupPageProps> = ({
@@ -144,7 +144,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
         shortView
         withoutBackground
         balance={balance}
-        onTopUp={isLowBalance? onTopUp : undefined }
+        onTopUp={isLowBalance ? onTopUp : undefined}
       />
 
       {isLowBalance ? (
@@ -156,50 +156,49 @@ const BackupPage: React.FC<BackupPageProps> = ({
       <div className={styles.backupsCard}>
         <div className={styles.backupsHeader}>
           <Text fontWeight="700" fontSize="14px">
-            {t("Payments:AvailableBackups")}
+            {!isBackupPaid && !isBackupServiceOn
+              ? t("Services:PaidBackupDisabled")
+              : t("Payments:AvailableBackups")}
           </Text>
         </div>
+
         {isBackupPaid ? (
-          <>
-            <div className={styles.freeBackupsAmountContainer}>
-              <div className={styles.backupsCount}>
-                <Text fontSize="28px" fontWeight="700">
-                  {usedBackupsCount}
-                </Text>{" "}
-                <Text fontSize="20px" fontWeight="700">
-                  /{maxFreeBackups}
-                </Text>
-              </div>
-              <Text className={styles.grayText}>
-                {t("Services:FreeMonthly")}
+          <div className={styles.freeBackupsAmountContainer}>
+            <div className={styles.backupsCount}>
+              <Text fontSize="28px" fontWeight="700">
+                {usedBackupsCount}
+              </Text>{" "}
+              <Text fontSize="20px" fontWeight="700">
+                /{maxFreeBackups}
               </Text>
             </div>
-            {isBackupServiceOn ? (
-              <>
-                <div className={styles.divider} />
-                <div className={styles.backupsAmountContainer}>
-                  <Text fontSize="28px" fontWeight="700">
-                    {availableBackupsCount}
-                  </Text>
-                  <Text className={styles.grayText}>
-                    {t("Payments:PerBackupWithBracket", {
-                      currency: `$${backupServicePrice}`,
-                    })}
-                  </Text>
-                </div>
-              </>
-            ) : (
-              <Button
-                className={styles.backupButton}
-                size={ButtonSize.small}
-                label={t("Services:EnablePaidBackups")}
-                onClick={handleToggleChange}
-                primary
-                scale
-              />
-            )}
-          </>
+            <Text className={styles.grayText}>{t("Services:FreeMonthly")}</Text>
+          </div>
         ) : null}
+        {isBackupServiceOn ? (
+          <>
+            {isBackupPaid ? <div className={styles.divider} /> : null}
+            <div className={styles.backupsAmountContainer}>
+              <Text fontSize="28px" fontWeight="700">
+                {availableBackupsCount}
+              </Text>
+              <Text className={styles.grayText}>
+                {t("Payments:PerBackupWithBracket", {
+                  currency: `$${backupServicePrice}`,
+                })}
+              </Text>
+            </div>
+          </>
+        ) : (
+          <Button
+            className={styles.backupButton}
+            size={ButtonSize.small}
+            label={t("Services:EnablePaidBackups")}
+            onClick={handleToggleChange}
+            primary
+            scale
+          />
+        )}
       </div>
       {isBackupPaid ? (
         <Text className={styles.backupPaidInfo}>
@@ -223,9 +222,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
         </Text>
       ) : null}
       <div>
-        <TransactionHistory
-          serviceName={BACKUP_SERVICE}
-        />
+        <TransactionHistory serviceName={BACKUP_SERVICE} />
       </div>
 
       {isConfirmDialogVisible ? (
@@ -237,7 +234,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
           bodyText={confirmationDialogContent.body}
         />
       ) : null}
-      
+
       {isTopUpVisible ? (
         <TopUpModal visible={isTopUpVisible} onClose={onCloseTopUpModal} />
       ) : null}
