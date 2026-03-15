@@ -12,6 +12,8 @@
   "AIModelListTitle": "Model list",
   "AIBalance": "AI balance",
   "WalletBalance": "Wallet balance",
+  "FreeMonthly": "(free monthly)",
+  "FreeBackupsRenewsDate": "Free backups are used first. Renews <1>on {{date}}</1>",
   "AIModelPrice": "{{inputPrice}}/M input tokens | {{outputPrice}}/M output tokens",
   "AIModelsIntro": "Pick the right model for your task — from budget-friendly to advanced. <1>OpenRouter pricing</1> shown. A 20% service fee applies to usage.",
   "AIPricingAdditionalFeaturesTitle": "Additional features",

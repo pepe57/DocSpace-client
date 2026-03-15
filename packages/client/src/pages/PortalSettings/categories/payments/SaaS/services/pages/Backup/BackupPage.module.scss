@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+
 
 }
 
@@ -36,6 +36,10 @@
   border-radius: 6px;
   max-width: 320px;
   box-sizing: border-box;
+  margin-top:16px;
+}
+.backupPaidInfo{
+  margin-top:12px;
 }
 
 .backupsHeader {
@@ -46,17 +50,28 @@
 .backupsAmountContainer {
   display: flex;
   gap: 8px;
-  align-items: flex-end;
-
+align-items: baseline;
 }
 
+.backupsCount{
+    display: flex;
+    align-items: baseline;
+}
+.freeBackupsAmountContainer {
+  display: flex;
+  gap: 8px;
+align-items: baseline;
+}
+
+.divider {
+  border-bottom: 1px solid var(--aside-header-border-color);
+}
+
+.grayText{
+  color: var(--quantity-picker-additional-title)
+}
 
 .backupsPriceText {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 20px;
-
   padding-bottom: 4px;
 }
 

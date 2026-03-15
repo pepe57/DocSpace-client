@@ -41,6 +41,7 @@ import {
   setAiModelRestrictions,
   getServiceQuotaBalance,
 } from "@docspace/shared/api/portal";
+import { getBackupsCount } from "@docspace/shared/api/backup";
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/wallet/utils";
@@ -118,6 +119,8 @@ class ServicesStore {
   aiToolsBalance: TBalance = null;
 
   aiToolsPrices: TAiToolsPrices | null = null;
+
+  usedBackupsCount: number = 0;
 
   aiModelAvailabilityMap: Map<string, boolean> = new Map();
 
@@ -391,6 +394,26 @@ class ServicesStore {
     }
   };
 
+  fetchBackupsCount = async () => {
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
+    try {
+      const res = await getBackupsCount(
+        undefined,
+        undefined,
+        abortController.signal,
+      );
+
+      if (!res) return;
+
+      this.usedBackupsCount = res;
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
+    }
+  };
+
   // handleServicesQuotas = async () => { // temp in payment store because of storage tariff deeactivation
   //   const res = await getServicesQuotas();
 
@@ -445,6 +468,10 @@ class ServicesStore {
           this.fetchAiServiceBalance(),
           this.fetchAiModelAvailabilitySettings(),
         );
+      }
+
+      if (serviceName === BACKUP_SERVICE) {
+        requests.push(this.fetchBackupsCount());
       }
 
       await Promise.all(requests);

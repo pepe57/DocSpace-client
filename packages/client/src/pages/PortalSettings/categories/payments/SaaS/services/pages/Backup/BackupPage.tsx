@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
@@ -37,6 +37,7 @@ import { BACKUP_SERVICE } from "@docspace/shared/constants";
 import { DeviceType } from "@docspace/ui-kit/enums";
 import WalletInfo from "../../../shared/top-up-balance/sub-components/WalletInfo";
 import { setServiceState } from "@docspace/shared/api/portal";
+import { now, formatDateLocalized } from "@docspace/ui-kit/utils/date";
 import { toastr } from "@docspace/ui-kit/components";
 import ConfirmationDialog from "../../sub-components/ConfirmationDialog";
 
@@ -57,6 +58,9 @@ const BackupPage: React.FC<BackupPageProps> = ({
   changeServiceState,
   isBackupServiceOn,
   isFreeTariff,
+  isBackupPaid,
+  maxFreeBackups,
+  usedBackupsCount,
 }) => {
   const { t } = useTranslation(["Payments", "Services", "Common"]);
 
@@ -128,18 +132,57 @@ const BackupPage: React.FC<BackupPageProps> = ({
             {t("Payments:AvailableBackups")}
           </Text>
         </div>
+        {isBackupPaid ? (
+          <>
+            <div className={styles.freeBackupsAmountContainer}>
+              <div className={styles.backupsCount}>
+                <Text fontSize="28px" fontWeight="700">
+                  {usedBackupsCount}
+                </Text>{" "}
+                <Text fontSize="20px" fontWeight="700">
+                  /{maxFreeBackups}
+                </Text>
+              </div>
+              <Text className={styles.grayText}>
+                {t("Services:FreeMonthly")}
+              </Text>
+            </div>
+            <div className={styles.divider} />
+          </>
+        ) : null}
 
         <div className={styles.backupsAmountContainer}>
           <Text fontSize="28px" fontWeight="700">
             {availableBackupsCount}
           </Text>
-          <Text className={styles.backupsPriceText}>
+          <Text className={styles.grayText}>
             {t("Payments:PerBackupWithBracket", {
               currency: `$${backupServicePrice}`,
             })}
           </Text>
         </div>
       </div>
+      {isBackupPaid ? (
+        <Text className={styles.backupPaidInfo}>
+          <Trans
+            t={t}
+            ns="Services"
+            i18nKey="FreeBackupsRenewsDate"
+            values={{
+              date: formatDateLocalized(
+                now()
+                  .setZone(window.timezone)
+                  .startOf("month")
+                  .plus({ months: 1 }),
+                "DATE_MED",
+              ),
+            }}
+            components={{
+              1: <Text fontWeight="600" as="span" />,
+            }}
+          />
+        </Text>
+      ) : null}
       <div>
         <TransactionHistory
           headerTitle={t("Services:UsageHistory")}
@@ -161,7 +204,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
 };
 
 export default inject(
-  ({ paymentStore, settingsStore, currentQuotaStore }: TStore) => {
+  ({ paymentStore, servicesStore, currentQuotaStore }: TStore) => {
     const {
       formatWalletCurrency,
       availableBackupsCount,
@@ -170,7 +213,8 @@ export default inject(
       isBackupServiceOn,
     } = paymentStore;
 
-    const { isFreeTariff } = currentQuotaStore;
+    const { isFreeTariff, isBackupPaid, maxFreeBackups } = currentQuotaStore;
+    const { usedBackupsCount } = servicesStore;
 
     return {
       formatWalletCurrency,
@@ -179,6 +223,9 @@ export default inject(
       changeServiceState,
       isBackupServiceOn,
       isFreeTariff,
+      isBackupPaid,
+      maxFreeBackups,
+      usedBackupsCount,
     };
   },
 )(observer(BackupPage));
