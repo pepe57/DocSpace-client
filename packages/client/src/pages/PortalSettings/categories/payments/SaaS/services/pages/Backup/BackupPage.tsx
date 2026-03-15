@@ -29,6 +29,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import ServiceToggleSection from "../../sub-components/ServiceToggleSection";
 import TransactionHistory from "../../../shared/transaction-history";
@@ -40,6 +41,7 @@ import { setServiceState } from "@docspace/shared/api/portal";
 import { now, formatDateLocalized } from "@docspace/ui-kit/utils/date";
 import { toastr } from "@docspace/ui-kit/components";
 import ConfirmationDialog from "../../sub-components/ConfirmationDialog";
+import TopUpModal from "../../../shared/top-up-balance/TopUpModal";
 
 type BackupPageProps = {
   availableBackupsCount?: number;
@@ -49,6 +51,9 @@ type BackupPageProps = {
   changeServiceState?: (service: string) => void;
   setServiceState?: (service: string, enabled: boolean) => void;
   isFreeTariff?: boolean;
+  isBackupPaid?: boolean,
+  maxFreeBackups?: number,
+  usedBackupsCount?: number,
 };
 
 const BackupPage: React.FC<BackupPageProps> = ({
@@ -66,6 +71,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
 
   const [isLoading, setIsLoading] = useState(false);
   const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
+  const [isTopUpVisible, setIsTopUpVisible] = useState(false);
 
   const handleToggleChange = () => {
     setIsConfirmDialogVisible(true);
@@ -112,7 +118,17 @@ const BackupPage: React.FC<BackupPageProps> = ({
           }),
   };
 
+  const onTopUp = () => {
+    setIsTopUpVisible(true);
+  };
+
+  const onCloseTopUpModal = () => {
+    setIsTopUpVisible(false);
+  };
+
   const balance = formatWalletCurrency!();
+
+  const isLowBalance = isBackupServiceOn && availableBackupsCount === 0;
 
   return (
     <div className={styles.container}>
@@ -124,7 +140,18 @@ const BackupPage: React.FC<BackupPageProps> = ({
         isDisabled={isLoading}
       />
 
-      <WalletInfo shortView withoutBackground balance={balance} />
+      <WalletInfo
+        shortView
+        withoutBackground
+        balance={balance}
+        onTopUp={isLowBalance? onTopUp : undefined }
+      />
+
+      {isLowBalance ? (
+        <Text className={styles.lowBalance} fontSize="15px" fontWeight={600}>
+          {t("Services:NeedTopUpWallet")}
+        </Text>
+      ) : null}
 
       <div className={styles.backupsCard}>
         <div className={styles.backupsHeader}>
@@ -147,20 +174,32 @@ const BackupPage: React.FC<BackupPageProps> = ({
                 {t("Services:FreeMonthly")}
               </Text>
             </div>
-            <div className={styles.divider} />
+            {isBackupServiceOn ? (
+              <>
+                <div className={styles.divider} />
+                <div className={styles.backupsAmountContainer}>
+                  <Text fontSize="28px" fontWeight="700">
+                    {availableBackupsCount}
+                  </Text>
+                  <Text className={styles.grayText}>
+                    {t("Payments:PerBackupWithBracket", {
+                      currency: `$${backupServicePrice}`,
+                    })}
+                  </Text>
+                </div>
+              </>
+            ) : (
+              <Button
+                className={styles.backupButton}
+                size={ButtonSize.small}
+                label={t("Services:EnablePaidBackups")}
+                onClick={handleToggleChange}
+                primary
+                scale
+              />
+            )}
           </>
         ) : null}
-
-        <div className={styles.backupsAmountContainer}>
-          <Text fontSize="28px" fontWeight="700">
-            {availableBackupsCount}
-          </Text>
-          <Text className={styles.grayText}>
-            {t("Payments:PerBackupWithBracket", {
-              currency: `$${backupServicePrice}`,
-            })}
-          </Text>
-        </div>
       </div>
       {isBackupPaid ? (
         <Text className={styles.backupPaidInfo}>
@@ -198,6 +237,10 @@ const BackupPage: React.FC<BackupPageProps> = ({
           title={confirmationDialogContent.title}
           bodyText={confirmationDialogContent.body}
         />
+      ) : null}
+      
+      {isTopUpVisible ? (
+        <TopUpModal visible={isTopUpVisible} onClose={onCloseTopUpModal} />
       ) : null}
     </div>
   );
