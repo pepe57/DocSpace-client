@@ -1,5 +1,4 @@
 {
-  "AITools": "KI-Tools",
   "AIToolsEnabled": "KI-Tools erfolgreich aktiviert",
   "AndMore": "Und vieles mehr!",
   "AutomaticBackupDescription": "Richten Sie geplante Backups für kontinuierlichen Datenschutz ohne manuelle Eingriffe ein.",
@@ -11,8 +10,6 @@
   "ContactToPayer": "Kontaktieren Sie den Zahler (<1>{{email}}</1>), um den Backup-Dienst zu verbinden.",
   "DisableBackupConfirm": "Das Deaktivieren des Backup-Dienstes verhindert, dass {{productName}}-Administratoren Backups erstellen. Wenn Auto Backup aktiviert ist, bleibt es innerhalb der kostenlosen Kontingent aktiv, aber sobald das Kontingent vollständig genutzt ist, wird es dauerhaft deaktiviert. Sind Sie sicher, dass Sie fortfahren möchten?",
   "DisableBackupConfirmWithoutQuota": "Das Deaktivieren des Backup-Dienstes verhindert, dass {{productName}}-Administratoren Backups erstellen. Wenn Auto Backup aktiviert ist, wird es deaktiviert. Sind Sie sicher, dass Sie fortfahren möchten?",
-  "EnableAItools": "KI-Tools aktivieren ({{currency}} pro Token)",
-  "EnableAItoolsDescription": "Nutzen Sie KI-gestützte Funktionen bei der Arbeit in {{organizationName}} {{productName}}, indem Sie Ihrem Wallet Guthaben hinzufügen.",
   "EnableBackupConfirm": "Durch die Aktivierung des Backup-Dienstes können alle {{productName}}-Administratoren jederzeit Backups erstellen, solange das Guthaben im Wallet ausreicht. Möchten Sie wirklich fortfahren?",
   "ErrorChecking": "Fehlerprüfung",
   "ErrorCheckingDescription": "Korrigieren Sie Tipp- und Grammatikfehler, um die Textqualität zu verbessern.",

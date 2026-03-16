@@ -1,5 +1,4 @@
 {
-  "AITools": "Narzędzia AI",
   "AIToolsEnabled": "Usługa narzędzi AI włączona pomyślnie.",
   "AndMore": "A więcej!",
   "AutomaticBackupDescription": "Skonfiguruj zaplanowane kopie zapasowe w celu zapewnienia ciągłej ochrony danych bez ręcznych działań.",
@@ -11,8 +10,6 @@
   "ContactToPayer": "Skontaktuj się z Płatnikiem (<1>{{email}}</1>) aby połączyć usługę kopii zapasowych.",
   "DisableBackupConfirm": "Wyłączenie usługi Kopia Zapasowa uniemożliwi administratorom {{productName}} tworzenie kopii zapasowych. Jeśli włączono automatyczną kopię zapasową, pozostanie ona aktywna w ramach darmowego limitu, ale po jego wyczerpaniu zostanie trwale dezaktywowana. Czy chcesz kontynuować?",
   "DisableBackupConfirmWithoutQuota": "Wyłączenie usługi Kopia zapasowa uniemożliwi administratorom {{productName}} tworzenie kopii zapasowych. Jeśli włączono automatyczne tworzenie kopii zapasowych, zostanie ono wyłączone. Czy chcesz kontynuować?",
-  "EnableAItools": "Włącz narzędzia AI ({{currency}} za token)",
-  "EnableAItoolsDescription": "Korzystaj z funkcji opartych na sztucznej inteligencji podczas pracy w {{organizationName}} {{productName}} poprzez doładowanie portfela.",
   "EnableBackupConfirm": "Włączenie usługi kopii zapasowych pozwoli wszystkim administratorom {{productName}} tworzyć kopie zapasowe w dowolnym momencie, o ile saldo portfela jest wystarczające. Czy na pewno chcesz kontynuować?",
   "ErrorChecking": "Sprawdzanie błędów",
   "ErrorCheckingDescription": "Popraw błędy ortograficzne i gramatyczne, aby poprawić jakość tekstu.",

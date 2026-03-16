@@ -1,5 +1,4 @@
 {
-  "AITools": "Công cụ AI",
   "AIToolsEnabled": "Các công cụ hỗ trợ AI đã được kích hoạt thành công.",
   "AndMore": "Và còn nữa!",
   "AutomaticBackupDescription": "Thiết lập sao lưu theo lịch trình để bảo vệ dữ liệu liên tục mà không cần các thao tác thủ công.",
@@ -11,8 +10,6 @@
   "ContactToPayer": "Liên hệ với Bên thanh toán (<1>{{email}}</1>) để kết nối dịch vụ sao lưu.",
   "DisableBackupConfirm": "Tắt dịch vụ Sao lưu sẽ ngăn chặn các quản trị viên {{productName}} tạo các bản sao lưu. Nếu Auto Backup được bật, nó sẽ vẫn hoạt động trong hạn ngạch miễn phí, nhưng khi hạn ngạch được sử dụng hết, nó sẽ bị tắt vĩnh viễn. Bạn có chắc chắn muốn tiếp tục?",
   "DisableBackupConfirmWithoutQuota": "Tắt dịch vụ Sao lưu sẽ ngăn chặn các quản trị viên {{productName}} tạo các bản sao lưu. Nếu Auto Backup được bật, nó sẽ bị tắt. Bạn có chắc chắn muốn tiếp tục không?",
-  "EnableAItools": "Bật công cụ AI ({{currency}} mỗi token)",
-  "EnableAItoolsDescription": "Sử dụng các tính năng hỗ trợ bởi AI khi làm việc trong {{organizationName}} {{productName}} bằng cách nạp tiền vào ví của bạn.",
   "EnableBackupConfirm": "Kích hoạt dịch vụ Sao lưu sẽ cho phép tất cả người quản trị {{productName}} tạo bản sao lưu bất cứ lúc nào, miễn là số dư ví đủ. Bạn có chắc chắn muốn tiếp tục không?",
   "ErrorChecking": "Kiểm tra lỗi",
   "ErrorCheckingDescription": "Sửa lỗi chính tả và lỗi ngữ pháp để nâng cao chất lượng văn bản.",

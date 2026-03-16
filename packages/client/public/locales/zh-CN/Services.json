@@ -1,5 +1,4 @@
 {
-  "AITools": "AI 工具",
   "AIToolsEnabled": "AI 工具服务已成功启用。",
   "AndMore": "还有更多！",
   "AutomaticBackupDescription": "设置定时备份，无需手动操作，即可持续保护数据安全。",
@@ -11,8 +10,6 @@
   "ContactToPayer": "请联系付款人 (<1>{{email}}</1>) 关联备份服务。",
   "DisableBackupConfirm": "禁用备份服务后，{{productName}}管理员将无法创建备份。若已启用自动备份，该功能将在免费额度内继续保持运行，但免费额度用尽后将永久停止服务。确定要继续吗？",
   "DisableBackupConfirmWithoutQuota": "禁用备份服务后，{{productName}}管理员将无法创建备份。若已启用自动备份，该功能将被立即停用。确定要继续吗？",
-  "EnableAItools": "启用 AI 工具（每token {{currency}}）",
-  "EnableAItoolsDescription": "通过向钱包充值，在{{organizationName}} {{productName}}中工作时使用 AI 功能",
   "EnableBackupConfirm": "启用备份服务后，所有 {{productName}} 管理员均可随时创建备份（需钱包余额充足）。是否确认继续？",
   "ErrorChecking": "错误检查",
   "ErrorCheckingDescription": "纠正拼写和语法错误，提升文本质量。",

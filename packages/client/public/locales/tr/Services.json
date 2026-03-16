@@ -1,5 +1,4 @@
 {
-  "AITools": "Yapay zeka araçları",
   "AIToolsEnabled": "AI araçları hizmeti başarıyla etkinleştirildi.",
   "AndMore": "Ve daha fazlası!",
   "AutomaticBackupDescription": "Manuel müdahaleler olmadan sürekli veri koruması için planlı yedeklemeler ayarlayın.",
@@ -11,8 +10,6 @@
   "ContactToPayer": "Ödeme Yapanı (<1>{{email}}</1>) ile yedek hizmeti bağlamak için iletişime geçin.",
   "DisableBackupConfirm": "Yedekleme hizmetini devre dışı bırakmak, {{productName}} yöneticilerinin yedekleme oluşturmasını engelleyecektir. Otomatik Yedekleme etkinse, ücretsiz kotada aktif kalmaya devam edecektir, ancak kota tamamen kullanıldığında kalıcı olarak devre dışı bırakılacaktır. Devam etmek istediğinizden emin misiniz?",
   "DisableBackupConfirmWithoutQuota": "Yedekleme hizmetini devre dışı bırakmak, {{productName}} yöneticilerinin yedekleme oluşturmasını engelleyecektir. Otomatik Yedekleme etkinse, devre dışı bırakılacaktır. Devam etmek istediğinizden emin misiniz?",
-  "EnableAItools": "AI araçlarını etkinleştirin ({{currency}} bir token başına)",
-  "EnableAItoolsDescription": "{{organizationName}} {{productName}}'de çalışırken yapay zeka destekli özelliklerden yararlanmak için cüzdanınıza para ekleyin",
   "EnableBackupConfirm": "Yedekleme hizmetini etkinleştirmek, cüzdan bakiyesi yeterli olduğu sürece tüm {{productName}} yöneticilerinin istediği zaman yedek oluşturmasına izin verecektir. Devam etmek istediğinizden emin misiniz?",
   "ErrorChecking": "Hata denetimi",
   "ErrorCheckingDescription": "Yazı kalitesini artırmak için yazım ve dilbilgisi hatalarını düzeltin.",

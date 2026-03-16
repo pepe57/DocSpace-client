@@ -1,5 +1,4 @@
 {
-  "AITools": "AIツール",
   "AIToolsEnabled": "AIツールサービスが正常に有効化されました。",
   "AndMore": "などなど！",
   "AutomaticBackupDescription": "手動操作なしで継続的なデータ保護のために、スケジュールされたバックアップを設定します。",
@@ -11,8 +10,6 @@
   "ContactToPayer": "バックアップサービスを接続するために、支払者（<1>{{email}}</1>）に連絡してください。",
   "DisableBackupConfirm": "バックアップサービスを無効にすると、{{productName}} 管理者がバックアップを作成できなくなります。自動バックアップが有効になっている場合、無料の割り当て内で引き続き有効ですが、割り当てが完全に利用されると、永久に無効になります。続行しますか？",
   "DisableBackupConfirmWithoutQuota": "バックアップ サービスを無効にすると、{{productName}} 管理者がバックアップを作成できなくなります。自動バックアップが有効になっている場合は、無効になります。続行しますか？",
-  "EnableAItools": "AIツールを有効にする（トークンあたり{{currency}}）",
-  "EnableAItoolsDescription": "{{organizationName}}の{{productName}}で作業中にAI機能を利用するには、ウォレットに資金を追加してください",
   "EnableBackupConfirm": "バックアップサービスを有効にすると、すべての {{productName}} 管理者がウォレットの残高が十分な限り、いつでもバックアップを作成できるようになります。本当に続行してもよろしいですか？",
   "ErrorChecking": "エラーチェック",
   "ErrorCheckingDescription": "誤字脱字や文法上の誤りを修正し、文章の質を高める。",

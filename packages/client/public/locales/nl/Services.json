@@ -1,5 +1,4 @@
 {
-  "AITools": "AI-tools",
   "AIToolsEnabled": "AI-tools service succesvol ingeschakeld.",
   "AndMore": "En meer!",
   "AutomaticBackupDescription": "Stel geplande back-ups in voor continue gegevensbescherming zonder handmatige acties.",
@@ -11,8 +10,6 @@
   "ContactToPayer": "Contact de Betaler (<1>{{email}}</1>) om de back-upservice te verbinden.",
   "DisableBackupConfirm": "Het uitschakelen van de Backup-service voorkomt dat {{productName}}-beheerders back-ups maken. Als Auto Backup is ingeschakeld, blijft deze actief binnen de gratis quota, maar zodra de quota volledig is benut, wordt deze permanent gedeactiveerd. Ben je zeker dat je verder wilt gaan?",
   "DisableBackupConfirmWithoutQuota": "Het uitschakelen van de Backup service voorkomt dat {{productName}} beheerders back-ups maken. Als Auto Backup is ingeschakeld, wordt deze uitgeschakeld. Ben je zeker dat je wilt doorgaan?",
-  "EnableAItools": "Schakel AI-tools in ({{currency}} per token)",
-  "EnableAItoolsDescription": "Maak gebruik van AI-gestuurde functies terwijl u werkt in {{organizationName}} {{productName}} door geld op uw portemonnee te zetten",
   "EnableBackupConfirm": "Het inschakelen van de Backup service stelt alle {{productName}} beheerders in staat om op elk moment back-ups te maken, zolang het wallet-saldo voldoende is. Ben je zeker dat je verder wilt gaan?",
   "ErrorChecking": "Foutcontrole",
   "ErrorCheckingDescription": "Correcteer spelfouten en grammaticale fouten om de tekstkwaliteit te verbeteren.",

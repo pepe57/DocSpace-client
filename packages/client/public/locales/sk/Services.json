@@ -1,5 +1,4 @@
 {
-  "AITools": "AI nástroje",
   "AIToolsEnabled": "Služba nástrojov AI bola úspešne povolená.",
   "AndMore": "A ešte!",
   "AutomaticBackupDescription": "Nastavte si pravidelné zálohy pre nepretržité zabezpečenie dát bez manuálnych zásahov.",
@@ -11,8 +10,6 @@
   "ContactToPayer": "Kontaktujte platiteľa (<1>{{email}}</1>) na pripojenie záložnej služby.",
   "DisableBackupConfirm": "Vypnutie služby Zálohovanie zabráni administrátorom {{productName}} vo vytváraní záloh. Ak je povolená automatická záloha, zostane aktívna v rámci bezplatného miesta, ale po jeho úplnom využití bude trvale deaktivovaná. Ste si istí, že chcete pokračovať?",
   "DisableBackupConfirmWithoutQuota": "Vypnutie služby Zálohovanie zabráni administrátorom {{productName}} vo vytváraní záloh. Ak je povolená automatická záloha, bude deaktivovaná. Ste si istí, že chcete pokračovať?",
-  "EnableAItools": "Zapnúť AI nástroje ({{currency}} na token)",
-  "EnableAItoolsDescription": "Využívajte funkcie poháňané umelou inteligenciou pri práci v {{organizationName}} {{productName}} tým, že pridáte prostriedky do svojej peňaženky.",
   "EnableBackupConfirm": "Aktivácia služby Zálohovanie umožní všetkým administrátorom {{productName}} vytvárať zálohy kedykoľvek, pokiaľ bude dostatočný zostatok na peňaženke. Ste si istí, že chcete pokračovať?",
   "ErrorChecking": "Kontrola chýb",
   "ErrorCheckingDescription": "Oprav chyby a gramatické nedostatky s cieľom zlepšiť kvalitu textu.",

@@ -1,5 +1,4 @@
 {
-  "AITools": "Strumenti AI",
   "AIToolsEnabled": "Servizio strumenti AI abilitato con successo.",
   "AndMore": "E altro ancora!",
   "AutomaticBackupDescription": "Imposta backup programmati per la protezione continua dei dati senza interventi manuali.",
@@ -11,8 +10,6 @@
   "ContactToPayer": "Contatta il pagatore (<1>{{email}}</1>) per collegare il servizio di backup.",
   "DisableBackupConfirm": "La disattivazione del servizio di Backup impedirà agli amministratori di {{productName}} di creare backup. Se il Backup automatico è abilitato, rimarrà attivo entro la quota gratuita, ma una volta che la quota sarà completamente utilizzata, verrà disattivato in modo permanente. Sei sicuro di voler continuare?",
   "DisableBackupConfirmWithoutQuota": "La disattivazione del servizio di Backup impedirà agli amministratori di {{productName}} di creare backup. Se il Backup automatico è abilitato, verrà disattivato. Sei sicuro di voler continuare?",
-  "EnableAItools": "Abilita strumenti AI ({{currency}} per token)",
-  "EnableAItoolsDescription": "Utilizza funzionalità basate su AI mentre lavori in {{organizationName}} {{productName}} aggiungendo fondi al tuo wallet",
   "EnableBackupConfirm": "L’attivazione del servizio di backup permetterà a tutti gli amministratori di {{productName}} di creare backup in qualsiasi momento, purché il saldo del portafoglio sia sufficiente. Sei sicuro di voler continuare?",
   "ErrorChecking": "Controllo errori",
   "ErrorCheckingDescription": "Correggi refusi ed errori grammaticali per migliorare la qualità del testo.",

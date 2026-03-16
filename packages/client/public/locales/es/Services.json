@@ -1,5 +1,4 @@
 {
-  "AITools": "Herramientas de IA",
   "AIToolsEnabled": "Servicio de herramientas de IA habilitado correctamente.",
   "AndMore": "¡Y mucho más!",
   "AutomaticBackupDescription": "Configure copias de seguridad programadas para una protección continua de los datos sin necesidad de realizar acciones manuales.",
@@ -11,8 +10,6 @@
   "ContactToPayer": "Póngase en contacto con el pagador (<1>{{email}}</1>) para conectar el servicio de copia de seguridad.",
   "DisableBackupConfirm": "Deshabilitar el servicio de Copia de Seguridad evitará que los administradores de {{productName}} creen copias de seguridad. Si la Copia de Seguridad Automática está habilitada, permanecerá activa dentro de la cuota gratuita, pero una vez que la cuota se haya utilizado por completo, se desactivará de forma permanente. ¿Está seguro de que desea continuar?",
   "DisableBackupConfirmWithoutQuota": "Deshabilitar el servicio de Copia de seguridad evitará que los administradores de {{productName}} creen copias de seguridad. Si la Copia de seguridad automática está habilitada, se desactivará. ¿Está seguro de que desea continuar?",
-  "EnableAItools": "Habilitar herramientas de IA ({{currency}} por token)",
-  "EnableAItoolsDescription": "Utilice las funciones basadas en IA mientras trabaja en {{organizationName}} {{productName}} añadiendo fondos a su monedero",
   "EnableBackupConfirm": "Al habilitar el servicio de copia de seguridad, todos los administradores de {{productName}} podrán crear copias de seguridad en cualquier momento, siempre que el saldo del monedero sea suficiente. ¿Está seguro de que desea continuar?",
   "ErrorChecking": "Comprobación de errores",
   "ErrorCheckingDescription": "Corrija las erratas y los errores gramaticales para mejorar la calidad del texto.",

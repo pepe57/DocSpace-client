@@ -1,5 +1,4 @@
 {
-  "AITools": "Instrumente de IA",
   "AIToolsEnabled": "Instrumente de IA au fost activate cu succes.",
   "AndMore": "Și nu numai!",
   "AutomaticBackupDescription": "Configurați copierea de rezervă programată pentru protecția continuă a datelor fără manipulări manuale.",
@@ -11,8 +10,6 @@
   "ContactToPayer": "Contactați Plătitorul (<1>{{email}}</1>) pentru a conecta serviciul de copiere de rezervă.",
   "DisableBackupConfirm": "Dezactivarea serviciului de copiere de rezervă nu va permite administratorilor ale {{productName}} să creeze copii de rezervă. Dacă copiera de rezervă automată este activată, aceasta va rămâne activă în limita cotei de stocare disponibile, dar odată ce limita de stocare este atinsă, copiera de rezervă va fi dezactivată permanent. Sigur doriţi să continuați?",
   "DisableBackupConfirmWithoutQuota": "Dezactivarea serviciului de copiere de rezervă nu va permite administratorilor ale {{productName}} să creeze copii de rezervă. Dacă copiera de rezervă automată este activată, aceasta va fi dezactivată. Sigur doriţi să continuați?",
-  "EnableAItools": "Activarea instrumentelor de IA ({{currency}} pentru un token)",
-  "EnableAItoolsDescription": "Alimentați portofelul dvs pentru a folosi funcții de IA în timp ce lucrați în {{organizationName}} {{productName}}.",
   "EnableBackupConfirm": "Activarea serviciului de copiere de rezervă va permite tuturor administratorilor {{productName}} să creeze copii de rezervă oricând, atâta timp cât există soldul portofelului suficient. Sigur doriţi să continuați?",
   "ErrorChecking": "Verificare greșeli",
   "ErrorCheckingDescription": "Corectați greșelile de ortografie și de gramatică pentru a îmbunătăţi calitatea textului.",

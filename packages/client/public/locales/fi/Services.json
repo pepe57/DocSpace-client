@@ -1,5 +1,4 @@
 {
-  "AITools": "AI-työkalut",
   "AIToolsEnabled": "AI-työkalupalvelu otettu onnistuneesti käyttöön.",
   "AndMore": "Ja lisää!",
   "AutomaticBackupDescription": "Ota ajoitetut varmuuskopiot käyttöön jatkuvan datan suojauksen takaamiseksi ilman manuaalisia toimia.",
@@ -11,8 +10,6 @@
   "ContactToPayer": "Ota yhteyttä maksajaan (<1>{{email}}</1>) liittääksesi varmuuskopiointipalvelu.",
   "DisableBackupConfirm": "Varmuuskopiointipalvelun poistaminen käytöstä estää {{productName}}-järjestelmänvalvojia luomasta varmuuskopioita. Jos automaattinen varmuuskopiointi on käytössä, se pysyy aktiivisena ilmaisen kiintiön rajoissa, mutta kun kiintiö on täynnä, se poistetaan pysyvästi käytöstä. Haluatko varmasti jatkaa?",
   "DisableBackupConfirmWithoutQuota": "Varmuuskopiointipalvelun poistaminen käytöstä estää {{productName}}-järjestelmänvalvojia luomasta varmuuskopioita. Jos automaattinen varmuuskopiointi on käytössä, se poistetaan käytöstä. Haluatko varmasti jatkaa?",
-  "EnableAItools": "Ota tekoälytyökalut käyttöön ({{currency}} per token)",
-  "EnableAItoolsDescription": "Käytä tekoälyominaisuuksia työskennellessäsi {{organizationName}} {{productName}} -ympäristössä lisäämällä varoja lompakkoosi.",
   "EnableBackupConfirm": "Varmuuskopiointipalvelun ottaminen käyttöön sallii kaikkien {{productName}}-järjestelmänvalvojien luoda varmuuskopioita milloin tahansa, kunhan lompakon saldo on riittävä. Haluatko varmasti jatkaa?",
   "ErrorChecking": "Virheiden tarkistus",
   "ErrorCheckingDescription": "Korjaa kirjoitusvirheet ja kielioppivirheet tekstin laadun parantamiseksi.",

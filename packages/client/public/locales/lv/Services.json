@@ -1,5 +1,4 @@
 {
-  "AITools": "MI rīki",
   "AIToolsEnabled": "MI rīku pakalpojums veiksmīgi aktivizēts.",
   "AndMore": "Un vēl!",
   "AutomaticBackupDescription": "Iestatiet plānotos dublējumus pastāvīgai datu aizsardzībai bez manuālām darbībām.",
@@ -11,8 +10,6 @@
   "ContactToPayer": "Sazinieties ar apmaksātāju (<1>{{email}}</1>), lai pieslēgtu rezerves pakalpojumu.",
   "DisableBackupConfirm": "Atspējojot Backup pakalpojumu, {{productName}} administratori nevarēs veidot dublējumus. Ja ir ieslēgts Auto Backup, tas paliks aktīvs bezmaksas kvotas ietvaros, bet, kad kvota būs pilnībā izlietota, tas tiks pastāvīgi atspējots. Vai esat pārliecināts, ka vēlaties turpināt?",
   "DisableBackupConfirmWithoutQuota": "Atvienojot Backup pakalpojumu, {{productName}} administratori nevarēs veidot dublējumus. Ja ir ieslēgts Auto Backup, tas tiks atslēgts. Vai esat pārliecināts, ka vēlaties turpināt?",
-  "EnableAItools": "Iespējojiet MI rīkus ({{currency}} par marķieri)",
-  "EnableAItoolsDescription": "Izmantojiet AI iespējas, strādājot {{organizationName}} {{productName}}, pievienojot līdzekļus savā maksājumu kontā",
   "EnableBackupConfirm": "Iespējot Backup pakalpojums ļaus visiem {{productName}} administratoriem veidot rezerves kopijas jebkurā laikā, kamēr mokaņa ir pietiekama. Vai Jūs vēlaties turpināt?",
   "ErrorChecking": "Kļūdu pārbaude",
   "ErrorCheckingDescription": "Izlabojiet kļūdas pareizrakstībā un gramatikā, lai uzlabotu teksta kvalitāti.",

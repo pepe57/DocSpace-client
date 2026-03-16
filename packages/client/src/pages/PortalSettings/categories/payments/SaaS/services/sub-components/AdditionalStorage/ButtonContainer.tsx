@@ -51,7 +51,7 @@ interface ButtonContainerProps {
   storageExpiryDate?: string;
   totalPrice?: number;
   isDisabled?: boolean;
-  hasStorageSubscription?: number;
+  currentStoragePlanSize?: number;
 }
 
 const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {

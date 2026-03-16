@@ -1,5 +1,4 @@
 {
-  "AITools": "Ferramentas de IA",
   "AIToolsEnabled": "Ferramentas de IA ativadas com sucesso.",
   "AndMore": "E mais!",
   "AutomaticBackupDescription": "Configure backups agendados para proteção contínua de dados sem ações manuais.",
@@ -11,8 +10,6 @@
   "ContactToPayer": "Contacte o Pagador (<1>{{email}}</1>) para conectar o serviço de backup.",
   "DisableBackupConfirm": "Desativar o serviço de Backup impedirá que os administradores do {{productName}} criem backups. Se o Backup Automático estiver ativado, ele permanecerá ativo dentro da cota gratuita, mas, uma vez que a cota for totalmente utilizada, ele será permanentemente desativado. Tem certeza de que deseja continuar?",
   "DisableBackupConfirmWithoutQuota": "Desativar o serviço de Backup impedirá que os administradores do {{productName}} criem backups. Se o Backup Automático estiver ativado, ele será desativado. Tem certeza de que deseja continuar?",
-  "EnableAItools": "Habilitar ferramentas de IA ({{currency}} por token)",
-  "EnableAItoolsDescription": "Use os recursos alimentados por IA enquanto trabalha no {{organizationName}} {{productName}} adicionando fundos à sua carteira.",
   "EnableBackupConfirm": "Habilitar o serviço de Backup permitirá que todos os administradores do {{productName}} criem backups a qualquer momento, desde que o saldo da carteira seja suficiente. Tem certeza de que deseja continuar?",
   "ErrorChecking": "Verificação de erros",
   "ErrorCheckingDescription": "Corrija erros de digitação e gramaticais para melhorar a qualidade do texto.",
