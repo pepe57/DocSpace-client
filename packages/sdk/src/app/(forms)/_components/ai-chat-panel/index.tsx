@@ -34,9 +34,9 @@ import { MemoryRouter } from "react-router";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
-import Chat from "@docspace/shared/components/chat";
-import useInitChats from "@docspace/shared/components/chat/hooks/useInitChats";
-import useToolsSettings from "@docspace/shared/components/chat/hooks/useToolsSettings";
+import Chat from "@docspace/ui-kit/ai-agent/chat";
+import useInitChats from "@docspace/ui-kit/ai-agent/chat/hooks/useInitChats";
+import useToolsSettings from "@docspace/ui-kit/ai-agent/chat/hooks/useToolsSettings";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
@@ -47,8 +47,6 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
 import styles from "./AiChatPanel.module.scss";
 
-const FOLDER_FORM_VALIDATION = /[\\/:*?"<>|]/;
-
 const AiChatPanel = () => {
   const { t } = useTranslation(["Common"]);
   const aiAgentStore = useFormsAiAgentStore();
@@ -56,20 +54,20 @@ const AiChatPanel = () => {
     isPanelVisible,
     closePanel,
     isSyncing,
-    selectedAgentId,
+    currentAgentId,
     agentChatSettings,
+    aiConfig,
   } = aiAgentStore;
-  const { filesSettings } = useFormsSettingsStore();
+  const { filesSettings, hasManagementAccess } = useFormsSettingsStore();
 
-  // Use agent ID as roomId for chat — agents ARE rooms (TAgent = TRoom)
-  const agentRoomId = selectedAgentId ?? 0;
+  const agentRoomId = currentAgentId ?? 0;
 
-  const initChats = useInitChats({ roomId: agentRoomId });
+  const initChats = useInitChats({ agentId: agentRoomId });
   const { initMessages, ...messagesSettings } = useInitMessagesSDK(agentRoomId);
 
   const toolsSettings = useToolsSettings({
-    roomId: agentRoomId,
-    aiConfig: null,
+    agentId: agentRoomId,
+    aiConfig,
     chatSettings: agentChatSettings,
   });
 
@@ -91,9 +89,6 @@ const AiChatPanel = () => {
 
   const getResultStorageId = React.useCallback(() => null, []);
 
-  // Re-init chat data only when panel opens or agent changes.
-  // Init functions are intentionally omitted from deps to avoid
-  // re-fetching on every render (they are not referentially stable).
   React.useEffect(() => {
     if (isPanelVisible && agentRoomId) {
       initChats.fetchChats();
@@ -102,7 +97,7 @@ const AiChatPanel = () => {
     }
   }, [isPanelVisible, agentRoomId]);
 
-  if (!isPanelVisible) return null;
+  if (!isPanelVisible || !agentRoomId || !hasManagementAccess) return null;
 
   return (
     <div className={styles.chatPanel}>
@@ -132,7 +127,7 @@ const AiChatPanel = () => {
       <div className={styles.chatBody}>
         <MemoryRouter>
           <Chat
-            roomId={agentRoomId}
+            agentId={agentRoomId}
             userAvatar=""
             selectedModel={agentChatSettings?.modelId ?? ""}
             getIcon={getIcon}
@@ -145,7 +140,6 @@ const AiChatPanel = () => {
             aiReady
             standalone
             getResultStorageId={getResultStorageId}
-            folderFormValidation={FOLDER_FORM_VALIDATION}
           />
         </MemoryRouter>
       </div>

@@ -44,7 +44,7 @@ import {
   aiServersDeleteHandler,
   aiServersAvailableHandler,
 } from "./servers";
-import { aiChatHandler, aiChatPutHandler } from "./chat";
+import { aiChatHandler, aiChatPutHandler, aiChatDeleteHandler } from "./chat";
 import {
   aiChatMessagesExportHandler,
   aiChatMessagesHandler,
@@ -76,6 +76,7 @@ export {
   aiServersAvailableHandler,
   aiChatHandler,
   aiChatPutHandler,
+  aiChatDeleteHandler,
   aiChatMessagesExportHandler,
   aiChatMessagesHandler,
   aiMessagesExportHandler,
@@ -110,6 +111,7 @@ export const aiHandlers = (port: string) => [
   aiChatMessagesHandler(port),
   aiChatHandler(port),
   aiChatPutHandler(port),
+  aiChatDeleteHandler(port),
   aiMessagesExportHandler(port),
   aiProvidersAvailableHandler(port),
   aiRoomsChatsHandler(port),

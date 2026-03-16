@@ -624,32 +624,6 @@ export function assign(
   obj[keyPath[lastKeyIndex]] = value;
 }
 
-export function getOAuthToken(
-  tokenGetterWin: Window | string | null,
-): Promise<string> {
-  return new Promise((resolve, reject) => {
-    localStorage.removeItem("code");
-    const interval: ReturnType<typeof setInterval> = setInterval(() => {
-      try {
-        const code = localStorage.getItem("code");
-        if (typeof tokenGetterWin !== "string") {
-          if (code) {
-            localStorage.removeItem("code");
-            clearInterval(interval);
-            resolve(code);
-          } else if (tokenGetterWin?.closed) {
-            clearInterval(interval);
-            reject();
-          }
-        }
-      } catch (e) {
-        clearInterval(interval);
-        reject(e);
-      }
-    }, 500);
-  });
-}
-
 export function getLoginLink(token: string, code: string) {
   return combineUrl(
     window.ClientConfig?.proxy?.url,
@@ -659,7 +633,7 @@ export function getLoginLink(token: string, code: string) {
 
 const FRAME_NAME = "frameDocSpace";
 
-const getFrameId = () => {
+export const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
 };
 

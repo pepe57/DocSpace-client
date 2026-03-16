@@ -35,15 +35,22 @@ import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
+import type { TFolder } from "@docspace/shared/api/files/types";
 import {
   getProviders,
   getModels,
   updateDefaultProvider,
 } from "@docspace/shared/api/ai";
+import api from "@docspace/shared/api";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { FilterType, FolderType } from "@docspace/shared/enums";
 
 import { useFormsAiAgentStore } from "../../../_store/FormsAiAgentStore";
+import { useFormsSettingsStore } from "../../../_store/FormsSettingsStore";
 
 import styles from "./SettingsPanel.module.scss";
 
@@ -53,9 +60,17 @@ type AIAgentFormProps = {
 
 const AIAgentForm = ({ inline }: AIAgentFormProps) => {
   const { t } = useTranslation(["Common"]);
-  const { aiAgentEnabled, setAiAgentEnabled, defaultProvider } =
-    useFormsAiAgentStore();
   const store = useFormsAiAgentStore();
+  const {
+    aiAgentEnabled,
+    setAiAgentEnabled,
+    defaultProvider,
+    aiProvidersAvailable,
+    isCheckingProviders,
+    isCreatingAgents,
+    vectorizationEnabled,
+  } = store;
+  const { roomId } = useFormsSettingsStore();
 
   const [providers, setProviders] = useState<TAiProvider[]>([]);
   const [models, setModels] = useState<TModel[]>([]);
@@ -69,17 +84,24 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
     defaultProvider?.defaultModel ?? null,
   );
 
-  const hasDefaultProvider = !!defaultProvider;
+  const isEnabled = aiAgentEnabled;
 
   const isProviderChanged = selectedProviderId !== defaultProvider?.providerId;
   const isModelChanged = selectedModelId !== defaultProvider?.defaultModel;
   const hasChanges = isProviderChanged || isModelChanged;
 
+  // Check AI availability when settings page opens
   useEffect(() => {
-    getProviders()
-      .then((items) => setProviders(items))
-      .catch(() => {});
-  }, []);
+    store.checkAiAvailability();
+  }, [store]);
+
+  useEffect(() => {
+    if (aiProvidersAvailable) {
+      getProviders()
+        .then((items) => setProviders(items))
+        .catch(() => {});
+    }
+  }, [aiProvidersAvailable]);
 
   useEffect(() => {
     if (defaultProvider) {
@@ -143,7 +165,9 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
       defaultProvider?.defaultModel &&
       newModels.some((m) => m.modelId === defaultProvider.defaultModel);
     setSelectedModelId(
-      hasDefault ? defaultProvider!.defaultModel : (newModels[0]?.modelId ?? null),
+      hasDefault
+        ? defaultProvider!.defaultModel
+        : (newModels[0]?.modelId ?? null),
     );
   };
 
@@ -151,6 +175,71 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
     if (option.key === selectedModelId) return;
     setSelectedModelId(option.key as string);
   };
+
+  const fetchCompletedFoldersWithFiles = useCallback(async () => {
+    if (!roomId) return [];
+
+    const roomFilter = FilesFilter.getDefault();
+    roomFilter.page = 0;
+    roomFilter.pageCount = 100;
+
+    const roomRes = await api.files.getFolder(roomId, roomFilter);
+    const doneFolder = roomRes.folders.find(
+      (f: TFolder) => f.type === FolderType.Done,
+    );
+    if (!doneFolder) return [];
+
+    const doneFilter = FilesFilter.getDefault();
+    doneFilter.page = 0;
+    doneFilter.pageCount = 100;
+
+    const doneRes = await api.files.getFolder(doneFolder.id, doneFilter);
+    const subFolders: TFolder[] = doneRes.folders;
+
+    const results: {
+      folder: TFolder;
+      files: { id: number; title: string }[];
+    }[] = [];
+
+    for (const folder of subFolders) {
+      const fileFilter = FilesFilter.getDefault();
+      fileFilter.page = 0;
+      fileFilter.pageCount = 100;
+      fileFilter.filterType = FilterType.PDFForm;
+
+      try {
+        const folderRes = await api.files.getFolder(folder.id, fileFilter);
+        results.push({
+          folder,
+          files: folderRes.files.map((f: { id: number; title: string }) => ({
+            id: f.id,
+            title: f.title,
+          })),
+        });
+      } catch {
+        results.push({ folder, files: [] });
+      }
+    }
+
+    return results;
+  }, [roomId]);
+
+  const onToggleAiAgent = useCallback(async () => {
+    if (isEnabled) {
+      await store.disableAiAgents();
+    } else {
+      try {
+        setAiAgentEnabled(true);
+        const foldersWithFiles = await fetchCompletedFoldersWithFiles();
+        if (foldersWithFiles.length > 0) {
+          store.ensureAgentsForFolders(foldersWithFiles);
+        }
+      } catch {
+        // Rollback on failure
+        setAiAgentEnabled(false);
+      }
+    }
+  }, [isEnabled, setAiAgentEnabled, fetchCompletedFoldersWithFiles, store]);
 
   const onSave = async () => {
     if (!selectedProviderId || !selectedModelId) return;
@@ -180,6 +269,11 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
     }
   };
 
+  const toggleDisabled =
+    isCheckingProviders ||
+    isCreatingAgents ||
+    (!isEnabled && !aiProvidersAvailable);
+
   return (
     <div className={inline ? styles.inlineBody : styles.panelBody}>
       <div className={styles.toggleBlock}>
@@ -189,17 +283,41 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
           </Text>
           <ToggleButton
             className={styles.toggle}
-            isChecked={hasDefaultProvider || aiAgentEnabled}
-            isDisabled={hasDefaultProvider}
-            onChange={() => setAiAgentEnabled(!aiAgentEnabled)}
+            isChecked={isEnabled}
+            isDisabled={toggleDisabled}
+            onChange={onToggleAiAgent}
           />
         </div>
         <Text fontSize="12px" fontWeight={400}>
           {t("Common:AIAgentDescription")}
         </Text>
+        {isCheckingProviders && (
+          <div className={styles.statusRow}>
+            <Loader type={LoaderTypes.track} size="16px" />
+            <Text fontSize="12px">{t("Common:CheckingAIProviders")}</Text>
+          </div>
+        )}
+        {!isCheckingProviders && !aiProvidersAvailable && (
+          <Text fontSize="12px" fontWeight={400} color={globalColors.gray}>
+            {t("Common:AIProvidersNotAvailable")}
+          </Text>
+        )}
+        {isCreatingAgents && (
+          <div className={styles.statusRow}>
+            <Loader type={LoaderTypes.track} size="16px" />
+            <Text fontSize="12px">{t("Common:CreatingAIAgents")}</Text>
+          </div>
+        )}
+        {!isCheckingProviders &&
+          aiProvidersAvailable &&
+          !vectorizationEnabled && (
+            <Text fontSize="12px" fontWeight={400} color={globalColors.mainRed}>
+              {t("Common:KnowledgeBaseNotConfigured")}
+            </Text>
+          )}
       </div>
 
-      {providers.length > 0 && (
+      {providers.length > 0 && aiProvidersAvailable && isEnabled && (
         <div className={styles.formBlock}>
           <FieldContainer
             labelVisible

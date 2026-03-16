@@ -84,7 +84,7 @@ const Providers = ({ children, contextData }: TProviders) => {
     getCookie("asc_auth_key") || contextData.authToken || "";
 
   return (
-    <ApiProvider url={apiUrl} apiKey={apiKey}>
+    <ApiProvider url={apiUrl} apiKey={apiKey} initSocket={false}>
       <TranslationProvider
         settings={settings as TTranslationProvider["settings"]}
         user={user as TTranslationProvider["user"]}

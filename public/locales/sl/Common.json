@@ -426,7 +426,6 @@
   "Form": "Obrazec",
   "FormDataCollection": "Zbiranje podatkov iz obrazcev",
   "FormDataCollectionDescription": "Zberite izpolnjene kopije obrazcev in podatke iz njih v datoteko XLSX za analizo odgovorov v sobah za izpolnjevanje obrazcev.",
-  "FormFilingRoomInfo": "Naložite PDF obrazce v sobo. Povabite člane in goste, da izpolnijo PDF obrazec. Pregledujte izpolnjene obrazce in analizirajte samodejno zbrane podatke v preglednici.",
   "FormFilingRoomTitle": "Soba za izpolnjevanje obrazcev",
   "FormRoom": "Soba obrazcev",
   "Forms": "Obrazci",
@@ -1055,5 +1054,9 @@
   "YourTurn": "Vi ste na vrsti",
   "Upload": "Naloži",
   "Open": "Odpri",
-  "Quantity": "Količina"
+  "Quantity": "Količina",
+  "YourTurn": "Vi ste na vrsti",
+  "DeleteAIAgentChatTitle": "Izbrisiti klepetal?",
+  "DeleteAIChatDescription": "Brišete <strong>{{chatName}}<1>.</1></strong>\n Vse objave in zgodovina klepeta bodo trajno izbrisane in jih ne bo mogoče obnoviti.",
+  "DeleteForeverButton": "Izbriši za vedno"
 }

@@ -54,8 +54,8 @@ const FormsEmpty = () => {
     switch (activeSection) {
       case FormsSection.MyForms:
         return t("Common:EmptyMyForms");
-      case FormsSection.FormsToFill:
-        return t("Common:EmptyFormsToFill");
+      case FormsSection.InProgress:
+        return t("Common:EmptyInProgressForms");
       case FormsSection.CompletedForms:
         return t("Common:EmptyCompletedForms");
       default:

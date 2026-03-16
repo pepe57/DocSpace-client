@@ -426,7 +426,6 @@
   "Form": "Formular",
   "FormDataCollection": "Mbledhja e të dhënave të formularit",
   "FormDataCollectionDescription": "Mblidhni kopjet e formularëve të plotësuar dhe të dhënat prej tyre nl format XLSX për të analizuar përgjigjet në formular",
-  "FormFilingRoomInfo": "Ngarkoni formularët PDF në dhomë. Ftoni anëtarët dhe të ftuarit të plotësojnë një formular PDF. Rishikoni formularët e plotësuar dhe analizoni të dhënat e mbledhura automatikisht në një spreadsheet.",
   "FormFilingRoomTitle": "Dhoma e plotësimit të formularit",
   "FormRoom": "Forma dhomë",
   "Forms": "Format",
@@ -1055,5 +1054,9 @@
   "YourTurn": "Radha jote",
   "Upload": "Ngarkoni",
   "Open": "Hapni",
-  "Quantity": "Sasia"
+  "Quantity": "Sasia",
+  "YourTurn": "Radha jote",
+  "DeleteAIAgentChatTitle": "Fshir chat?",
+  "DeleteAIChatDescription": "Po për të shlyer <strong>{{chatName}}<1>.</1></strong>\n Të gjitha mesazhet dhe historia e bisedës do të hiqen përgjithimisht dhe nuk mund të rivendosen.",
+  "DeleteForeverButton": "Fshini përgjithmonë"
 }

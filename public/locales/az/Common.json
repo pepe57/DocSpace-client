@@ -426,7 +426,6 @@
   "Form": "Forma",
   "FormDataCollection": "Form məlumatların toplanması",
   "FormDataCollectionDescription": "Doldurma otaqlarında cavabları təhlil etmək üçün tamamlanmış forma nüsxələrini və onlardan məlumatları XLSX-ə toplayın.",
-  "FormFilingRoomInfo": "PDF formalarını otağa yükləyin. Üzv və qonaqları PDF formasını doldurmağa dəvət edin. Tamamlanmış formaları nəzərdən keçirin və elektron cədvəldə avtomatik toplanan məlumatları təhlil edin.",
   "FormFilingRoomTitle": "Forma Doldurma Otağı",
   "FormRoom": "Forma otağı",
   "Forms": "Anketlər",
@@ -1055,5 +1054,9 @@
   "YourTurn": "Sizin növbəniz",
   "Upload": "Yüklə",
   "Open": "Açmaq",
-  "Quantity": "Miqdar"
+  "Quantity": "Miqdar",
+  "YourTurn": "Sizin növbəniz",
+  "DeleteAIAgentChatTitle": "Söhbəti sil?",
+  "DeleteAIChatDescription": "Yarıma <strong>{{chatName}}<1>.</1></strong> silməyə hazırlaşırsınız.\nBütün mesajlar və söhbət tarixçəsi daimi şəkildə silinəcək və bərpa edilə bilməyəcəkdir.",
+  "DeleteForeverButton": "Həmişəlik sil"
 }

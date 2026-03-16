@@ -48,12 +48,11 @@ import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsUserStore } from "../_store/FormsUserStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
+import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import FormsLayout from "../_components/forms-layout";
 
 type FormsPageProps = {
   roomId: string | number;
-  myFormsFolderId: string | number;
-  formsToFillFolderId: string | number;
   requestToken: string;
   authToken: string;
   filesSettings: TFilesSettings;
@@ -64,8 +63,6 @@ type FormsPageProps = {
 
 function FormsPage({
   roomId,
-  myFormsFolderId,
-  formsToFillFolderId,
   requestToken,
   authToken,
   filesSettings,
@@ -79,6 +76,7 @@ function FormsPage({
   const formsListStore = useFormsListStore();
   const formsUserStore = useFormsUserStore();
   const formsAiAgentStore = useFormsAiAgentStore();
+  const formsDbSettingsStore = useFormsDbSettingsStore();
   const filesSettingsStore = useFilesSettingsStore();
   const settingsStore = useSettingsStore();
   const [isReady, setIsReady] = React.useState(false);
@@ -86,19 +84,10 @@ function FormsPage({
   React.useEffect(() => {
     formsSettingsStore.setConfig({
       roomId,
-      myFormsFolderId,
-      formsToFillFolderId,
       requestToken,
     });
     formsSettingsStore.setFilesSettings(filesSettings);
-  }, [
-    roomId,
-    myFormsFolderId,
-    formsToFillFolderId,
-    requestToken,
-    filesSettings,
-    formsSettingsStore,
-  ]);
+  }, [roomId, requestToken, filesSettings, formsSettingsStore]);
 
   React.useEffect(() => {
     filesSettingsStore.setFilesSettings(filesSettings);
@@ -117,17 +106,29 @@ function FormsPage({
   }, [defaultProvider, formsAiAgentStore]);
 
   React.useEffect(() => {
+    // Mark as frame so axiosClient 401 handler does not redirect to login
+    if (!window.ClientConfig)
+      window.ClientConfig = {} as NonNullable<typeof window.ClientConfig>;
+    const prevIsFrame = window.ClientConfig.isFrame;
+    window.ClientConfig.isFrame = true;
+
     settingsStore.setFilesViewAs("tile");
     const token = requestToken || authToken;
     if (token) {
       document.cookie = `asc_auth_key=${token}; path=/; SameSite=Lax`;
       setAuthToken(token);
     }
+
+    return () => {
+      if (window.ClientConfig) {
+        window.ClientConfig.isFrame = prevIsFrame;
+      }
+    };
   }, [settingsStore, requestToken, authToken]);
 
   React.useEffect(() => {
     if (initialFolderData) {
-      const id = Number(myFormsFolderId);
+      const id = Number(roomId);
       const files = id
         ? initialFolderData.files.filter((f) => f.folderId === id)
         : initialFolderData.files;
@@ -138,6 +139,14 @@ function FormsPage({
           initialFolderData.current.security,
         );
       }
+
+      if (initialFolderData.current?.access !== undefined) {
+        formsSettingsStore.setUserAccess(initialFolderData.current.access);
+      }
+
+      const current = initialFolderData.current as Record<string, unknown>;
+      formsDbSettingsStore.setCollectXlsx(Boolean(current.saveFormAsXLSX));
+      formsDbSettingsStore.setSendToDb(Boolean(current.sendFormToExternalDB));
 
       const thumbIds = files
         .filter(
@@ -150,7 +159,7 @@ function FormsPage({
         createThumbnails(thumbIds).catch(() => {});
       }
     }
-  }, [initialFolderData, formsListStore, formsSettingsStore, myFormsFolderId]);
+  }, [initialFolderData, formsListStore, formsSettingsStore, roomId]);
 
   React.useEffect(() => {
     setIsReady(true);

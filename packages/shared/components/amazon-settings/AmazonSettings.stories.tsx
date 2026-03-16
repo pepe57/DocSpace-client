@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import { useTranslation } from "react-i18next";
-import { fn } from "@storybook/test";
+import { fn } from "storybook/test";
 
 import AmazonSettings from "./AmazonSettings";
 import { AmazonSettingsProps } from "./AmazonSettings.types";

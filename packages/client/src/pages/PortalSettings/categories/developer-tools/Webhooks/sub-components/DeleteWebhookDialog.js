@@ -80,7 +80,7 @@ export const DeleteWebhookDialog = ({
         <Footer>
           <Button
             id="delete-forever-button"
-            label={t("EmptyTrashDialog:DeleteForeverButton")}
+            label={t("Common:DeleteForeverButton")}
             size="normal"
             primary
             onClick={handleDeleteClick}

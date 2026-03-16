@@ -118,7 +118,7 @@ import {
   connectedCloudsTypeTitleTranslation,
   removeOptions,
 } from "SRC_DIR/helpers/filesUtils";
-import { getOAuthToken } from "@docspace/shared/utils/common";
+import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import {
   RoomsType,
   Events,

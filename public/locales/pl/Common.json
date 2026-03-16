@@ -426,7 +426,6 @@
   "Form": "Formularz",
   "FormDataCollection": "Zbieranie danych formularza",
   "FormDataCollectionDescription": "Zbierz skopiowane formularze i dane z nich do formatu XLSX w celu analizy odpowiedzi w pomieszczeniach do wypełniania formularzy.",
-  "FormFilingRoomInfo": "Prześlij formularze PDF do pokoju. Zaproś członków i gości do wypełnienia formularza PDF. Sprawdź wypełnione formularze i przeanalizuj dane automatycznie zebrane w arkuszu kalkulacyjnym.",
   "FormFilingRoomTitle": "Pokój do wypełniania formularzy",
   "FormRoom": "Pokój z formularzami",
   "Forms": "Formularze",
@@ -1055,5 +1054,9 @@
   "YourTurn": "Twoja kolej",
   "Upload": "Wgraj",
   "Open": "Otwórz",
-  "Quantity": "Ilość"
+  "Quantity": "Ilość",
+  "YourTurn": "Twoja kolej",
+  "DeleteAIAgentChatTitle": "Usuń czat?",
+  "DeleteAIChatDescription": "Oznaczysz do usunięcia <strong>{{chatName}}<1>.</1></strong>\n Wszystkie wiadomości i historia czatu zostaną trwale usunięte i nie można ich odzyskać.",
+  "DeleteForeverButton": "Usuń na zawsze"
 }

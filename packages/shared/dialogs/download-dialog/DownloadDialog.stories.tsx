@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react-webpack5";
 
 import { Button } from "@docspace/ui-kit/components/button";
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";

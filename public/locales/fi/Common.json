@@ -426,7 +426,6 @@
   "Form": "Lomake",
   "FormDataCollection": "Lomaketietojen kerääminen",
   "FormDataCollectionDescription": "Kerää täytetyt lomakekopiot ja tiedot niistä XLSX-tiedostoon vastausten analysoimiseksi lomakkeiden täyttöhuoneissa.",
-  "FormFilingRoomInfo": "Lataa PDF-lomakkeita huoneeseen. Kutsu jäseniä ja vieraita täyttämään PDF-lomake. Katsele täydennettyjä lomakkeita ja analysoi taulukkoon kerättyä tietoa automaattisesti.",
   "FormFilingRoomTitle": "Lomakkeen täyttöhuone",
   "FormRoom": "Lomakehuone",
   "Forms": "Lomakkeet",
@@ -1055,5 +1054,9 @@
   "YourTurn": "Sinun vuorosi",
   "Upload": "Lataa",
   "Open": "Avaa",
-  "Quantity": "Määrä"
+  "Quantity": "Määrä",
+  "YourTurn": "Sinun vuorosi",
+  "DeleteAIAgentChatTitle": "Poista keskustelu?",
+  "DeleteAIChatDescription": "Olet aikeissa poistaa <strong>{{chatName}}<1>.</1></strong>\n Kaikki viestit ja chat-historia poistetaan pysyvästi, eikä niitä voida palauttaa.",
+  "DeleteForeverButton": "Poista pysyvästi"
 }

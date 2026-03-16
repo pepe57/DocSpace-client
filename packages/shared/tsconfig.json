@@ -115,8 +115,6 @@
     "types/**/*.d.ts"
   ],
   "exclude": [
-    "**/*.stories.tsx",
-    "**/*.stories.ts",
     "vitest.config.ts"
   ]
 }

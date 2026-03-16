@@ -34,7 +34,7 @@ import { getBackupProgressInfo } from "../../../utils/common";
 import SocketHelper, {
   SocketEvents,
   TSocketListener,
-} from "../../../utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";

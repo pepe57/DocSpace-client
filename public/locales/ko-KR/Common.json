@@ -426,7 +426,6 @@
   "Form": "양식",
   "FormDataCollection": "양식 데이터 수집",
   "FormDataCollectionDescription": "완료된 서식 사본과 데이터를 XLSX 형식으로 수집하여 Form Filling 룸에서 응답을 분석합니다.",
-  "FormFilingRoomInfo": "PDF 양식을 룸에 업로드하세요. 멤버와 게스트를 초대하여 PDF 양식을 작성하도록 하세요. 완성된 양식을 검토하고 스프레드시트에서 자동으로 수집된 데이터를 분석하세요.",
   "FormFilingRoomTitle": "양식 작성 룸에서",
   "FormRoom": "양식 방",
   "Forms": "양식",
@@ -1055,5 +1054,9 @@
   "YourTurn": "고객님의 차례입니다",
   "Upload": "업로드",
   "Open": "열기",
-  "Quantity": "수량"
+  "Quantity": "수량",
+  "YourTurn": "고객님의 차례입니다",
+  "DeleteAIAgentChatTitle": "채팅 삭제하시겠습니까?",
+  "DeleteAIChatDescription": "<strong>{{chatName}}<1>.</1></strong> 삭제하시려고 합니다.\n 모든 메시지와 채팅 기록이 영구적으로 삭제되며 복구할 수 없습니다.",
+  "DeleteForeverButton": "영구 삭제"
 }

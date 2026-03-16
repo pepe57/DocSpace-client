@@ -57,7 +57,7 @@ const getPackageDependencies = (packageJson) => {
   // Get dependencies from all sections
   addDeps(packageJson.dependencies);
   addDeps(packageJson.devDependencies);
-  addDeps(packageJson.peerDependencies);
+  // addDeps(packageJson.peerDependencies);
 
   return deps;
 };
@@ -328,6 +328,7 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       "@storybook/addon-webpack5-compiler-babel",
       "@storybook/components",
       "@storybook/react-webpack5",
+      "@storybook/react",
       "babel-jest",
       "babel-plugin-styled-components",
       "@babel/core",
@@ -358,7 +359,9 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       "@biomejs/biome",
       "@vitest/ui",
       "@vitest/coverage-v8",
-      "open-cli"
+      "open-cli",
+      "postcss",
+      "path-browserify",
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));

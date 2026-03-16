@@ -73,9 +73,6 @@ COPY packages/shared/ ./packages/shared/
 COPY public/ ./public/
 COPY libs/ui-kit/ ./libs/ui-kit/
 
-# Run before-build script (packages/runtime.json)
-RUN pnpm run before-build
-
 # Run build:translations
 RUN pnpm --filter @docspace/sdk run build:translations
 

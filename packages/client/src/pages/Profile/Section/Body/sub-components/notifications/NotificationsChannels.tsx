@@ -33,7 +33,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 
 import ConnectAccountDialog from "SRC_DIR/components/dialogs/ConnectAccountDialog";
 import DisconnectAccountDialog from "SRC_DIR/components/dialogs/DisconnectAccountDialog";

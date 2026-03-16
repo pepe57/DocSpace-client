@@ -373,6 +373,7 @@ const SectionHeaderContent = (props) => {
               label={label}
               data-key={key}
               onClick={onSelect}
+              truncateText
             />
           );
         })}

@@ -41,9 +41,10 @@ import { FormsSection } from "@/types/forms";
 
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
+import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
 import FormsEmpty from "../forms-empty";
 import FormsTile from "./FormsTile";
-import CompletedFolderTile from "./CompletedFolderTile";
+import SubFolderTile from "./SubFolderTile";
 import styles from "./FormsTile.module.scss";
 
 type FormsGridProps = {
@@ -54,14 +55,24 @@ type FormsGridProps = {
 const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
   const isServer = useIsServer();
   const { items, folders, hasMore, isLoading } = useFormsListStore();
-  const { activeSection, completedFolder } = useFormsNavigationStore();
+  const {
+    activeSection,
+    completedFolder,
+    inProgressFolder,
+    openCompletedFolder,
+    openInProgressFolder,
+  } = useFormsNavigationStore();
   const { getIcon } = useItemIcon({ filesSettings });
   const { convertFileToItem } = useItemList({
     getIcon,
   });
+  const { getFolderContextMenuModel } = useFormsContextMenu();
 
   const isCompletedRoot =
     activeSection === FormsSection.CompletedForms && !completedFolder;
+  const isInProgressRoot =
+    activeSection === FormsSection.InProgress && !inProgressFolder;
+  const isFoldersRoot = isCompletedRoot || isInProgressRoot;
 
   const fileItems = React.useMemo(
     () => items.map((file: TFile) => convertFileToItem(file)),
@@ -72,24 +83,24 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     return null;
   }
 
-  if (isCompletedRoot) {
+  if (isFoldersRoot) {
     if (folders.length === 0) {
       return <FormsEmpty />;
     }
 
+    const onOpenFolder = isCompletedRoot
+      ? openCompletedFolder
+      : openInProgressFolder;
+
     return (
       <div className={styles.foldersGrid}>
         {folders.map((folder) => (
-          <CompletedFolderTile
+          <SubFolderTile
             key={`folder_${folder.id}`}
-            item={{
-              id: folder.id,
-              title: folder.title,
-              isFolder: true,
-              contextOptions: [],
-            }}
             folder={folder}
             getIcon={getIcon}
+            onOpenFolder={onOpenFolder}
+            contextOptions={getFolderContextMenuModel(folder)}
           />
         ))}
       </div>

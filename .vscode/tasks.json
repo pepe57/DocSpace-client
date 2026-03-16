@@ -939,6 +939,36 @@
       }
     },
     {
+      "label": "Test | Test e2e docker dev (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev update-screenshots (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:dev:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Test e2e docker clear (client)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:clear",
@@ -1002,6 +1032,36 @@
       "label": "Test | Test e2e docker update-screenshots (login)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev (login)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/login",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev update-screenshots (login)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:dev:update-screenshots",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1089,6 +1149,36 @@
       }
     },
     {
+      "label": "Test | Test e2e docker dev (SDK)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/sdk",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev update-screenshots (SDK)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:dev:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Test e2e docker clear (SDK)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:clear",
@@ -1164,6 +1254,36 @@
       }
     },
     {
+      "label": "Test | Test e2e docker dev (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/management",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev update-screenshots (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:dev:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Test e2e docker clear (management)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:clear",
@@ -1227,6 +1347,36 @@
       "label": "Test | Test e2e docker update-screenshots (editor)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev (editor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/doceditor",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev update-screenshots (editor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:dev:update-screenshots",
       "group": {
         "kind": "build",
         "isDefault": true

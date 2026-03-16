@@ -426,7 +426,6 @@
   "Form": "Formulář",
   "FormDataCollection": "Sběr dat formulářů",
   "FormDataCollectionDescription": "Shromážděte vyplněné kopie formulářů a data z nich do souboru XLSX pro analýzu odpovědí v místnostech pro vyplňování formulářů.",
-  "FormFilingRoomInfo": "Nahrajte PDF formuláře do místnosti. Vyzvěte členy a hosty, k vyplnění PDF formuláře. Prohlédněte si vyplněné formuláře a analyzujte automaticky shromážděná data v tabulce.",
   "FormFilingRoomTitle": "Místnost pro vyplňování formulářů",
   "FormRoom": "Místnost s formuláři",
   "Forms": "Formuláře",
@@ -1055,5 +1054,9 @@
   "YourTurn": "Jste na řadě",
   "Upload": "Nahrát",
   "Open": "Otevřít",
-  "Quantity": "Množství"
+  "Quantity": "Množství",
+  "YourTurn": "Jste na řadě",
+  "DeleteAIAgentChatTitle": "Smazat chat?",
+  "DeleteAIChatDescription": "Mazat se chystáte <strong>{{chatName}}<1>.</1></strong>\n Všechny zprávy a historie chatu budou trvale smazány a nelze je obnovit.",
+  "DeleteForeverButton": "Smazat navždy"
 }
