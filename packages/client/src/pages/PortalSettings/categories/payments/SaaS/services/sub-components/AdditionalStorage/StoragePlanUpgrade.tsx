@@ -304,9 +304,11 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value;
+    const { value, validity } = e.target;
 
-    onChangeNumber(val);
+    if(!validity.valid) return;
+
+    onChangeNumber(value);
     setIsWaiting(true);
   };
 
@@ -386,6 +388,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
                   isDisabled={!!hasScheduledStorageChange || isLoading}
                   isAutoFocussed
                   hasError={hasMinError}
+                  pattern="^(?!^0(?:\.\d{0,2})?$)\d+(?:\.\d{0,2})?$"
                   scale
                 />
               </FieldContainer>
