@@ -36,6 +36,7 @@ import {
 } from "@docspace/ui-kit/components/context-menu";
 
 import ServiceToggleSection from "../../sub-components/ServiceToggleSection";
+import BalanceAmount from "../../../shared/balance-amount";
 
 import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg";
 import PencilIcon from "PUBLIC_DIR/images/pencil.react.svg?url";
@@ -70,6 +71,7 @@ type AdditionalStoragePageProps = {
   fetchPortalTariff?: () => Promise<void>;
   fetchBalance?: () => Promise<void>;
   hasScheduledStorageChange?: number;
+  walletCodeCurrency?: string;
 };
 
 const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
@@ -85,6 +87,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   fetchBalance,
   hasScheduledStorageChange,
   fetchTransactionHistory,
+  walletCodeCurrency,
 }) => {
   const { t } = useTranslation(["Payments", "Common", "Services"]);
   const contextMenuRef = useRef<ContextMenuRefType>(null);
@@ -201,11 +204,26 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
         </div>
 
         <div className={styles.priceContainer}>
-          <Text fontWeight={700}>
-            {t("PriceSizePerMonth", {
-              price: formatWalletCurrency!(monthlyPrice, 2),
-              size: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
-            })}
+          <BalanceAmount
+            amount={monthlyPrice}
+            currency={walletCodeCurrency}
+            showRefresh={false}
+            withoutMargin
+            mainFontSize="28px"
+            fractionFontSize="20px"
+          />
+          <Text fontWeight={700} fontSize="20px">
+            <Trans
+              t={t}
+              ns="Payments"
+              i18nKey="SizePerMonth"
+              values={{
+                size: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+              }}
+              components={{
+                1: <Text as="span" fontSize="20px" className={styles.sizeText} fontWeight={700}/>,
+              }}
+            />
           </Text>
         </div>
 
@@ -278,6 +296,7 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     storageSizeIncrement,
     fetchBalance,
     fetchTransactionHistory,
+    walletCodeCurrency,
   } = paymentStore;
   const {
     currentStoragePlanSize,
@@ -299,5 +318,6 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     fetchBalance,
     hasScheduledStorageChange,
     fetchTransactionHistory,
+    walletCodeCurrency,
   };
 })(observer(AdditionalStoragePage));

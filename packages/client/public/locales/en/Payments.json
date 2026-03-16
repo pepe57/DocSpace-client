@@ -48,7 +48,7 @@
   "CurrencyPerMonth": "{{currency}}/month",
   "CurrentBalance": "Current balance: <1>{{balance}}</1>",
   "CurrentPaymentMonth": "Current payment: {{price}}/month ({{size}})",
-  "PriceSizePerMonth": "{{price}}/month ({{size}})",
+  "SizePerMonth": "/month <1>({{size}})</1>",
   "CurrentSubscription": "Current subscription",
   "Debit": "Debit",
   "DelayedPayment": "Delayed payment of the {{planName}} plan dated {{date}}",

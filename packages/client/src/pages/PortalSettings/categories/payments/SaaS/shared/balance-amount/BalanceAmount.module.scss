@@ -3,6 +3,10 @@
     align-items: baseline;
     gap: 0;
     margin: 12px 0 16px 0;
+
+    &.withoutMargin {
+      margin: 0;
+    }
   }
 
  .headerContainer {
@@ -50,10 +54,10 @@
 .literal,
 .currency {
   font-weight: 700;
-  font-size: 44px;
+  font-size: var(--balance-main-font-size, 44px);
 }
 
 .fraction {
   font-weight: 700;
-  font-size: 28px;
+  font-size: var(--balance-fraction-font-size, 28px);
 }

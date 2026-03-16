@@ -25,6 +25,9 @@ type BalanceAmountProps = {
   language?: string;
   maximumFractionDigits?: number;
   className?: string;
+  withoutMargin?: boolean;
+  mainFontSize?: string;
+  fractionFontSize?: string;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -47,6 +50,9 @@ const BalanceAmount = (props: BalanceAmountProps) => {
     language = "en",
     maximumFractionDigits = 3,
     className,
+    withoutMargin = false,
+    mainFontSize,
+    fractionFontSize,
   } = props;
 
   const tokens: BalanceAmountToken[] = useMemo(() => {
@@ -89,7 +95,13 @@ const BalanceAmount = (props: BalanceAmountProps) => {
         </div>
       ) : null}
 
-      <div className={styles.balanceAmountContainer}>
+      <div
+        className={classNames(styles.balanceAmountContainer, { [styles.withoutMargin]: withoutMargin })}
+        style={{
+          ...(mainFontSize && { "--balance-main-font-size": mainFontSize } as React.CSSProperties),
+          ...(fractionFontSize && { "--balance-fraction-font-size": fractionFontSize } as React.CSSProperties),
+        }}
+      >
         {tokens.map((token) => (
           <Text
             key={`${token.type}-${token.value}`}
