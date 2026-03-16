@@ -38,7 +38,7 @@ vi.mock("../../utils/useClickOutside", () => ({
   useClickOutside: vi.fn(),
 }));
 
-vi.mock("../../hooks/useIsMobile", () => ({
+vi.mock("@docspace/ui-kit/hooks/use-is-mobile", () => ({
   useIsMobile: vi.fn(() => false),
 }));
 
@@ -186,7 +186,7 @@ describe("<TagManagementPopup />", () => {
   });
 
   it("handles mobile view correctly", async () => {
-    const useIsMobile = await import("../../hooks/useIsMobile");
+    const useIsMobile = await import("@docspace/ui-kit/hooks/use-is-mobile");
     vi.spyOn(useIsMobile, "useIsMobile").mockReturnValue(true);
 
     vi.spyOn(useTagsQueryModule, "useTagsQuery").mockReturnValue({

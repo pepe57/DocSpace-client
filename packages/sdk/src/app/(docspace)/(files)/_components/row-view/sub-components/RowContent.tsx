@@ -37,7 +37,7 @@ import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FilesRowContent } from "@docspace/shared/components/files-row";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
-import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { SortByFieldName } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 

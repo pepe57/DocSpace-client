@@ -34,7 +34,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 import { Encoder } from "@docspace/ui-kit/utils/encoder";
 
-import { getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import styles from "../../styles/TransactionHistory.module.scss";
 import { accountingLedgersFormat, getServiceQuantity } from "../../utils";
 

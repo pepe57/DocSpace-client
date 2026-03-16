@@ -44,7 +44,7 @@ import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Secti
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 
 import config from "../../../../../package.json";
 

@@ -26,53 +26,23 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React from "react";
 
-import { MessageToolCallProps } from "../../../../../Chat.types";
+import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+import { useEffect, useRef } from "react";
 
-import styles from "../../../ChatMessageBody.module.scss";
+export const useScroll = () => {
+  const isMobile = useIsMobile();
+  const scrollRef = useRef<HTMLElement | null>(null);
 
-import { ToolCallConfirmDialog } from "./ToolCallConfirmDialog";
-import { ToolCall } from "./ToolCall";
-import { ToolCallPlacement, ToolCallStatus } from "./ToolCall.enum";
+  useEffect(() => {
+    const scrollId = isMobile ? "customScrollBar" : "sectionScroll";
 
-const ToolCallMessage = ({ content }: MessageToolCallProps) => {
-  const [needConfirmation, setNeedConfirmation] = React.useState(
-    () => !!content.managed,
-  );
-
-  const hideConfirmDialog = () => setNeedConfirmation(false);
-
-  const hasError = !!content.result?.error;
-
-  const toolCallStatus: ToolCallStatus = needConfirmation
-    ? ToolCallStatus.Confirmation
-    : !content.result
-      ? ToolCallStatus.Loading
-      : hasError
-        ? ToolCallStatus.Failed
-        : ToolCallStatus.Finished;
-
-  // cancel confirmation after timeout
-  React.useEffect(() => {
-    if (needConfirmation && !content.managed) {
-      setNeedConfirmation(false);
+    const scrollElement = document.querySelector(
+      `#${scrollId} .scroll-wrapper > .scroller`,
+    );
+    if (scrollElement) {
+      scrollRef.current = scrollElement as HTMLElement;
     }
-  }, [content.managed, needConfirmation]);
-
-  return (
-    <div className={styles.toolCallMessage}>
-      <ToolCall
-        content={content}
-        status={toolCallStatus}
-        placement={ToolCallPlacement.Message}
-      />
-
-      {needConfirmation ? (
-        <ToolCallConfirmDialog content={content} onClose={hideConfirmDialog} />
-      ) : null}
-    </div>
-  );
+  }, [isMobile]);
+  return scrollRef;
 };
-
-export default ToolCallMessage;

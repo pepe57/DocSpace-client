@@ -26,6 +26,22 @@
 
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
+
+import SocketHelper, {
+  SocketCommands,
+  SocketCommandsRoomParts,
+  SocketEvents,
+} from "@docspace/ui-kit/utils/socket";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import {
+  Base,
+  Dark,
+  type TColorScheme,
+} from "@docspace/ui-kit/providers/theme";
+import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
+import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+
 import api from "../api";
 import type { TAIConfig } from "../api/ai/types";
 import type { TApiKey } from "../api/api-keys/types";
@@ -50,8 +66,7 @@ import type {
   TTimeZone,
   TVersionBuild,
 } from "../api/settings/types";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
+
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import {
   DeepLinkType,
@@ -62,15 +77,11 @@ import {
 } from "../enums";
 import { version } from "../package.json";
 import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
-import {
-  Base,
-  Dark,
-  type TColorScheme,
-} from "@docspace/ui-kit/providers/theme";
+
 import type { Nullable } from "../types";
 import type { TFrameConfig } from "../types/Frame";
+
 import { size as deviceSize, getDeviceTypeByWidth, isTablet } from "../utils";
-import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import {
   frameCallEvent,
@@ -80,13 +91,7 @@ import {
   isPublicRoom,
   openUrl,
 } from "../utils/common";
-import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 import FirebaseHelper from "../utils/firebase";
-import SocketHelper, {
-  SocketCommands,
-  SocketCommandsRoomParts,
-  SocketEvents,
-} from "../utils/socket";
 
 const themes = {
   Dark,

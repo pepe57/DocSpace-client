@@ -1054,5 +1054,9 @@
   "YourTurn": "Ձեր հերթն է",
   "Upload": "Վերբեռնել",
   "Open": "Բաց",
-  "Quantity": "Քանակ"
+  "Quantity": "Քանակ",
+  "YourTurn": "Ձեր հերթն է",
+  "DeleteAIAgentChatTitle": "Հեռացնել զրույցը։",
+  "DeleteAIChatDescription": "Դուք այժմ ջնջելու եք <strong>{{chatName}}<1>.</1></strong>։\nԲոլոր հաղորդագրություններն ու չափաբանության պատմությունը կջնջվեն մշտականօրինաբար և չեն կարող վերականգնվել։",
+  "DeleteForeverButton": "Ջնջել ընդմիշտ"
 }

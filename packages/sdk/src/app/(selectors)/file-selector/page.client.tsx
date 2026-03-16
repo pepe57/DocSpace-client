@@ -41,7 +41,7 @@ import { getFileLink } from "@docspace/shared/api/files";
 import type { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import type { Nullable } from "@docspace/shared/types";
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper from "@docspace/ui-kit/utils/socket";
 import type {
   TFile,
   TFilesSettings,

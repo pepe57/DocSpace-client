@@ -1054,5 +1054,9 @@
   "YourTurn": "Jetzt sind Sie dran",
   "Upload": "Hochladen",
   "Open": "Öffnen",
-  "Quantity": "Menge"
+  "Quantity": "Menge",
+  "YourTurn": "Jetzt sind Sie dran",
+  "DeleteAIAgentChatTitle": "Chat löschen?",
+  "DeleteAIChatDescription": "Sie sind im Begriff, <strong>{{chatName}}<1>.</1></strong> zu löschen. Alle Nachrichten und der gesamte Chatverlauf werden endgültig gelöscht und können nicht wiederhergestellt werden.\n",
+  "DeleteForeverButton": "permanent löschen"
 }

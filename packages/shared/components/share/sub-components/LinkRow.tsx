@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 import LinkIcon from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 
 import { RowSkeleton } from "../../../skeletons/share";
-import { useIsMobile } from "../../../hooks/useIsMobile";
+import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 import type { TFileLink } from "../../../api/files/types";
 
 import type { TOption } from "@docspace/ui-kit/components/combobox";

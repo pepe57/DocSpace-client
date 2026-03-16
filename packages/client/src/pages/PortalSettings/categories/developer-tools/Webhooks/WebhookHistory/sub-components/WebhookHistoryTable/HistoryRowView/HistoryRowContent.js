@@ -32,7 +32,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { RowContent } from "@docspace/ui-kit/components/rows";
 
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 
 import StatusBadge from "../../../../sub-components/StatusBadge";
 

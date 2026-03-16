@@ -1054,5 +1054,9 @@
   "YourTurn": "고객님의 차례입니다",
   "Upload": "업로드",
   "Open": "열기",
-  "Quantity": "수량"
+  "Quantity": "수량",
+  "YourTurn": "고객님의 차례입니다",
+  "DeleteAIAgentChatTitle": "채팅 삭제하시겠습니까?",
+  "DeleteAIChatDescription": "<strong>{{chatName}}<1>.</1></strong> 삭제하시려고 합니다.\n 모든 메시지와 채팅 기록이 영구적으로 삭제되며 복구할 수 없습니다.",
+  "DeleteForeverButton": "영구 삭제"
 }
