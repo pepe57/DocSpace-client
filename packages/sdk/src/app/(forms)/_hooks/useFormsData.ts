@@ -41,6 +41,7 @@ import { FormsSection } from "@/types/forms";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
+import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 
 const requestThumbnails = (files: TFile[]) => {
   const ids = files
@@ -67,6 +68,7 @@ const filterByFolder = (
 export default function useFormsData() {
   const formsSettingsStore = useFormsSettingsStore();
   const formsListStore = useFormsListStore();
+  const aiStore = useFormsAiAgentStore();
   const { activeSection, completedFolder, inProgressFolder } =
     useFormsNavigationStore();
   const currentPage = useRef(0);
@@ -128,6 +130,10 @@ export default function useFormsData() {
 
       folderIdRef.current = virtualFolder.id;
 
+      if (virtualFolderType === FolderType.Done) {
+        aiStore.setDoneFolderId(virtualFolder.id);
+      }
+
       const filter = FilesFilter.getDefault();
       filter.page = 0;
       filter.pageCount = PAGE_COUNT;
@@ -143,7 +149,7 @@ export default function useFormsData() {
       formsListStore.setFolders(res.folders);
       formsListStore.setItems([], 0);
     },
-    [formsSettingsStore, formsListStore],
+    [formsSettingsStore, formsListStore, aiStore],
   );
 
   const fetchSubfolder = useCallback(
