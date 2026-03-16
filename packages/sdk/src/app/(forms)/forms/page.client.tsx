@@ -140,6 +140,10 @@ function FormsPage({
         );
       }
 
+      if (initialFolderData.current?.access !== undefined) {
+        formsSettingsStore.setUserAccess(initialFolderData.current.access);
+      }
+
       const current = initialFolderData.current as Record<string, unknown>;
       formsDbSettingsStore.setCollectXlsx(Boolean(current.saveFormAsXLSX));
       formsDbSettingsStore.setSendToDb(Boolean(current.sendFormToExternalDB));
