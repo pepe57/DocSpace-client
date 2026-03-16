@@ -1054,5 +1054,9 @@
   "YourTurn": "Vi ste na vrsti",
   "Upload": "Naloži",
   "Open": "Odpri",
-  "Quantity": "Količina"
+  "Quantity": "Količina",
+  "YourTurn": "Vi ste na vrsti",
+  "DeleteAIAgentChatTitle": "Izbrisiti klepetal?",
+  "DeleteAIChatDescription": "Brišete <strong>{{chatName}}<1>.</1></strong>\n Vse objave in zgodovina klepeta bodo trajno izbrisane in jih ne bo mogoče obnoviti.",
+  "DeleteForeverButton": "Izbriši za vedno"
 }

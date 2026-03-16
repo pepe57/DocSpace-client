@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { ScopeList } from "@docspace/shared/utils/oauth/scope-list";
-import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";

@@ -56,7 +56,8 @@ beforeAll(() => {
     "node_modules",
     ".meta",
     "coverage",
-    "vitest"
+    "vitest",
+    "storybook-helpers",
   ];
 
   const excludePatterns = [

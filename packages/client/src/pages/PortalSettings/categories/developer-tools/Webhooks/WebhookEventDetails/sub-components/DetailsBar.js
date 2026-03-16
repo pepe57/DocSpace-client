@@ -33,8 +33,8 @@ import { Text } from "@docspace/ui-kit/components/text";
 import {
   mobile,
   injectDefaultTheme,
-  getCorrectDate,
 } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 
 import StatusBadge from "../../sub-components/StatusBadge";
 import { getTriggerTranslate } from "../../Webhooks.helpers";

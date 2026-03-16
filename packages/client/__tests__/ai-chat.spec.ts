@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { FileDtoInteger } from "@docspace/ui-kit/types";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
-import { TFile } from "@docspace/shared/api/files/types";
 import {
   settingsHandler,
   TypeSettings,
@@ -45,9 +45,11 @@ import {
   agentFolderInfoHandler,
   agentFolderResultStorageHandler,
   aiChatPutHandler,
+  aiChatDeleteHandler,
   aiChatMessagesExportHandler,
   favoritesHandler,
   aiRoomsChatsStreamHandler,
+  aiMessagesExportHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { SearchArea } from "@docspace/shared/enums";
 
@@ -90,7 +92,7 @@ test.describe("AI chat", () => {
 
       await expect(page.getByTestId("chat-container")).toBeVisible();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-default-empty.png",
@@ -121,7 +123,7 @@ test.describe("AI chat", () => {
       const emptyView = page.getByTestId("empty-view");
       await expect(emptyView).toBeVisible();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-ai-not-ready-no-chats-admin.png",
@@ -159,7 +161,7 @@ test.describe("AI chat", () => {
       const emptyView = page.getByTestId("empty-view");
       await expect(emptyView).toBeVisible();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-ai-not-ready-with-chats-admin.png",
@@ -212,7 +214,7 @@ test.describe("AI chat", () => {
         page.getByTestId("chat-input-attachment-button"),
       ).toHaveAttribute("aria-disabled", "true");
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-with-info-block-ai-not-ready-admin.png",
@@ -242,7 +244,7 @@ test.describe("AI chat", () => {
       await expect(page.getByTestId("user-message")).toBeVisible();
       await expect(page.getByTestId("ai-message")).toBeVisible();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-with-user-and-ai-messages.png",
@@ -271,7 +273,7 @@ test.describe("AI chat", () => {
 
       await expect(page.getByTestId("ai-message")).toBeVisible();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-ai-message-base-elements.png",
@@ -300,7 +302,7 @@ test.describe("AI chat", () => {
 
       await expect(page.getByTestId("ai-message")).toBeVisible();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-ai-message-code-block.png",
@@ -329,7 +331,7 @@ test.describe("AI chat", () => {
 
       await expect(page.getByTestId("ai-message")).toBeVisible();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-ai-message-table.png",
@@ -361,7 +363,7 @@ test.describe("AI chat", () => {
 
       await toolCallHeader.click();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-ai-message-web-search.png",
@@ -393,7 +395,7 @@ test.describe("AI chat", () => {
 
       await toolCallHeader.click();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-ai-message-web-search-error.png",
@@ -423,7 +425,7 @@ test.describe("AI chat", () => {
       const toolCallHeader = page.getByTestId("tool-call-header");
       await expect(toolCallHeader).toBeVisible();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-ai-message-web-crawling.png",
@@ -455,7 +457,7 @@ test.describe("AI chat", () => {
 
       await toolCallHeader.click();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-ai-message-web-crawling-error.png",
@@ -487,7 +489,7 @@ test.describe("AI chat", () => {
 
       await toolCallHeader.click();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-ai-message-knowledge-search.png",
@@ -519,7 +521,7 @@ test.describe("AI chat", () => {
 
       await toolCallHeader.click();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-ai-message-knowledge-search-error.png",
@@ -551,7 +553,7 @@ test.describe("AI chat", () => {
 
       await toolCallHeader.click();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-ai-message-mcp-tool.png",
@@ -580,7 +582,7 @@ test.describe("AI chat", () => {
 
       await expect(page.getByTestId("ai-message").last()).toBeInViewport();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-scroll-bottom.png",
@@ -619,7 +621,7 @@ test.describe("AI chat", () => {
       const warningToast = page.getByTestId("toast-content");
       await expect(warningToast).toBeVisible();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-viewer-redirect-result-storage.png",
@@ -692,6 +694,7 @@ test.describe("AI chat", () => {
         agentFolderChatHandler(TEST_PORT),
         aiChatMessagesHandler(TEST_PORT),
         aiChatHandler(TEST_PORT),
+        aiChatDeleteHandler(TEST_PORT),
       );
       await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
@@ -731,13 +734,13 @@ test.describe("AI chat", () => {
       const dialog = page.getByRole("dialog");
       await expect(dialog).toBeVisible();
 
-      const confirmButton = dialog.getByTestId("delete_dialog_modal_submit");
+      const confirmButton = dialog.getByTestId("delete-chat-confirm-button");
       await confirmButton.click();
 
       await selectChat.click();
       await expect(selectChatDropdown).toBeVisible();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-after-delete-chat.png",
@@ -879,7 +882,7 @@ test.describe("AI chat", () => {
           title: "Lorem ipsum",
           version: 1,
           versionGroup: 1,
-        } as TFile,
+        } as FileDtoInteger,
       });
 
       await expect(page.getByTestId("toast-content")).toContainText(
@@ -900,7 +903,7 @@ test.describe("AI chat", () => {
         aiRoomsServersHandler(TEST_PORT),
         aiRoomsChatsHandler(TEST_PORT),
         agentFolderChatHandler(TEST_PORT),
-        aiChatMessagesExportHandler(TEST_PORT),
+        aiMessagesExportHandler(TEST_PORT),
         aiChatMessagesHandler(TEST_PORT),
         aiChatHandler(TEST_PORT),
       );
@@ -935,7 +938,7 @@ test.describe("AI chat", () => {
           title: "Test message",
           version: 1,
           versionGroup: 1,
-        } as TFile,
+        } as FileDtoInteger,
       });
 
       await expect(page.getByTestId("toast-content")).toContainText(
@@ -1006,7 +1009,7 @@ test.describe("AI chat", () => {
       const toggleButton = webSearchItem.getByTestId("toggle-button");
       await toggleButton.hover();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-with-disabled-web-search-tooltip-admin.png",
@@ -1061,7 +1064,7 @@ test.describe("AI chat", () => {
       const filesListItem = page.getByTestId("files-list-item");
       await expect(filesListItem).toBeVisible();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-with-attached-files.png",
@@ -1126,7 +1129,7 @@ test.describe("AI chat", () => {
 
       await expect(page.getByTestId("ai-message")).toBeVisible();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-send-message-with-file.png",
@@ -1170,7 +1173,7 @@ test.describe("AI chat", () => {
 
       await toolCallHeader.click();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-tool-call-confirm-dialog.png",
@@ -1235,7 +1238,7 @@ test.describe("AI chat", () => {
       const chatTab = page.getByTestId("chat_tab");
       await chatTab.click();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-switch-tab-save-state.png",
@@ -1297,7 +1300,7 @@ test.describe("AI chat", () => {
       await expect(containerLoader).toBeVisible();
       await containerLoader.waitFor({ state: "hidden" });
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-reload-page-save-state.png",
@@ -1335,7 +1338,7 @@ test.describe("AI chat", () => {
       const emptyView = page.getByTestId("empty-view");
       await expect(emptyView).toBeVisible();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-ai-not-ready-no-chats-user.png",
@@ -1367,7 +1370,7 @@ test.describe("AI chat", () => {
       const emptyView = page.getByTestId("empty-view");
       await expect(emptyView).toBeVisible();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-ai-not-ready-with-chats-user.png",
@@ -1415,7 +1418,7 @@ test.describe("AI chat", () => {
         page.getByTestId("chat-input-attachment-button"),
       ).toHaveAttribute("aria-disabled", "true");
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-with-info-block-ai-not-ready-user.png",
@@ -1452,7 +1455,7 @@ test.describe("AI chat", () => {
       const toggleButton = webSearchItem.getByTestId("toggle-button");
       await toggleButton.hover();
 
-      await expectScreenshot(page,[
+      await expectScreenshot(page, [
         "desktop",
         "ai-chat",
         "ai-chat-with-disabled-web-search-tooltip-user.png",

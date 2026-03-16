@@ -1054,5 +1054,9 @@
   "YourTurn": "轮到您了",
   "Upload": "上传",
   "Open": "打开",
-  "Quantity": "数量"
+  "Quantity": "数量",
+  "YourTurn": "轮到您了",
+  "DeleteAIAgentChatTitle": "删除聊天？",
+  "DeleteAIChatDescription": "您将要删除<strong>{{chatName}}<1>.</1></strong>\n所有消息和聊天记录将被永久删除，且无法恢复。",
+  "DeleteForeverButton": "永久删除"
 }

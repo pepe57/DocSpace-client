@@ -1054,5 +1054,9 @@
   "YourTurn": "Ваш ред",
   "Upload": "Отпреми",
   "Open": "Отвори",
-  "Quantity": "Колиčina"
+  "Quantity": "Колиčina",
+  "YourTurn": "Ваш ред",
+  "DeleteAIAgentChatTitle": "Обрисати чат?",
+  "DeleteAIChatDescription": "Бришем <strong>{{chatName}}<1>.</1></strong> Све поруке и историја ћаскања биће трајно обрисане и неће моћи да буду враћене.",
+  "DeleteForeverButton": "Обриши заувек"
 }
