@@ -81,7 +81,7 @@ const CurrentSubscription: React.FC<CurrentSubscriptionProps> = ({
           </div>
         </div>
         <Text fontSize="12px" className={styles.renewalInfo}>
-          {t("SubscriptionAutoRenewed", { finalDate: storageExpiryDate })}
+          {t("SubscriptionAutoRenewedOn", { finalDate: storageExpiryDate })}
         </Text>
       </div>
     </div>

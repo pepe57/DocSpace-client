@@ -135,6 +135,7 @@
   "StorageUsed": "<1>Storage used:</1> {{amount}}",
   "SubscriptionAutoCancellation": "Subscription will be automatically canceled on {{finalDate}}",
   "SubscriptionAutoRenewed": "Subscription will be automatically renewed on {{finalDate}} with updated pricing and specifications.",
+  "SubscriptionAutoRenewedOn": "Subscription will be automatically renewed on {{finalDate}}",
   "SubscriptionAutoRenewedWithUpdate": "Subscription will be automatically renewed <1>on {{finalDate}}</1> with updated pricing and specifications — <1>{{price}}/month ({{amount}})</1>",
   "SubscriptionCancellation": "Subscription cancellation",
   "SubscriptionWillBeAutomaticallyRenewed": "Subscription will be automatically renewed <1>on {{finalDate}}</1>",
