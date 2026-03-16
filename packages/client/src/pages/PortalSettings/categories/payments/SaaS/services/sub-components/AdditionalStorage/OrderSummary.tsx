@@ -33,6 +33,8 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { now, formatDateLocalized } from "@docspace/ui-kit/utils/date";
 
 import { calcalateWalletPayment } from "@docspace/shared/api/portal";
 
@@ -140,6 +142,26 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   const isExceedingStorageLimit = isExceedingPlanLimit(amount);
   const isNewSubscription = !currentStoragePlanSize;
 
+  const tooltipText = () => (
+    <>
+      <Text as="span">
+        {daysUntilStorageExpiry === 0
+          ? t("Payments:PartialPaymentNoDate", {
+              storageUnit: t("Common:Gigabyte"),
+            })
+          : t("Payments:PartialPaymentWithDate", {
+              startDate: formatDateLocalized(
+                now().setZone(window.timezone),
+                "DATE_MED",
+              ),
+              endDate: storageExpiryDate,
+              storageUnit: t("Common:Gigabyte"),
+            })}
+      </Text>{" "}
+      <Text as="span">{t("Payments:PartialPaymentDescription")}</Text>
+    </>
+  );
+
   const additionalStorage = calculateDifference(
     amount,
     currentStoragePlanSize!,
@@ -237,13 +259,34 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
           ) : null}
           <div className={styles.divider} />
           <div className={styles.summaryRow}>
-            <Text fontWeight="600" fontSize="14px" className={styles.rowLabel}>
-              {isExceedingStorageLimit
-                ? t("Payments:StorageUponRequest", {
-                    amount: `${maxStorageLimit} ${t("Common:Gigabyte")}`,
-                  })
-                : t("TotalDueToday")}
-            </Text>
+            {isExceedingStorageLimit ? (
+              <Text
+                fontWeight="600"
+                fontSize="14px"
+                className={styles.rowLabel}
+              >
+                {t("Payments:StorageUponRequest", {
+                  amount: `${maxStorageLimit} ${t("Common:Gigabyte")}`,
+                })}
+              </Text>
+            ) : (
+              <div
+                className={classNames(styles.rowLabel, styles.planInfoHeader)}
+              >
+                <Text fontWeight="600" fontSize="14px">
+                  {t("TotalDueToday")}
+                </Text>
+                {isUpgradeStoragePlan && !isNewSubscription && (
+                  <HelpButton
+                    size={12}
+                    offsetRight={0}
+                    place={isRTL ? "left" : "right"}
+                    tooltipContent={tooltipText()}
+                    dataTestId="total_due_today_help_button"
+                  />
+                )}
+              </div>
+            )}
             {!isExceedingStorageLimit ? (
               <div className={styles.rowValue}>
                 {isUpgradeStoragePlan && isPriceLoading ? (

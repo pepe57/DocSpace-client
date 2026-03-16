@@ -79,6 +79,13 @@
   width: 100%;
 }
 
+.planInfoHeader {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
 .balanceInfo {
   color: var(--payment-dialog-text);
     margin-right: 0;
