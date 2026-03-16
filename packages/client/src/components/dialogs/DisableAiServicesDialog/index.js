@@ -45,25 +45,6 @@ const DisableAiServicesDialogComponent = ({
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
-  const effects = [
-    {
-      key: "DisableAiServicesEffect1",
-      values: {
-        productName: t("Common:ProductName"),
-        aiSettings: t("AISettings"),
-      },
-    },
-    {
-      key: "DisableAiServicesEffect2",
-      values: { aiServices: t("Common:AIServices") },
-    },
-    {
-      key: "DisableAiServicesEffect3",
-      values: { aiAgents: t("Common:AIAgents") },
-    },
-    { key: "DisableAiServicesEffect4" },
-  ];
-
   return (
     <ModalDialog
       visible={visible}
@@ -96,32 +77,89 @@ const DisableAiServicesDialogComponent = ({
               listStyleType: "none",
             }}
           >
-            {effects.map((effect, index) => (
-              <li
-                key={index}
+            <li
+              style={{
+                marginBottom: "0px",
+                fontSize: "13px",
+                lineHeight: "18px",
+                paddingLeft: "0",
+              }}
+            >
+              <span
                 style={{
-                  marginBottom: "0px",
-                  fontSize: "13px",
-                  lineHeight: "18px",
-                  paddingLeft: "0",
+                  fontSize: "16px",
+                  verticalAlign: "middle",
+                  marginRight: "3px",
                 }}
               >
-                <span
-                  style={{
-                    fontSize: "16px",
-                    verticalAlign: "middle",
-                    marginRight: "3px",
-                  }}
-                >
-                  •
-                </span>
-                {effect.values ? (
-                  <Trans t={t} i18nKey={effect.key} values={effect.values} />
-                ) : (
-                  t(effect.key)
-                )}
-              </li>
-            ))}
+                •
+              </span>
+              {t("DisableAiServicesEffect1", {
+                productName: t("Common:ProductName"),
+                aiSettings: t("AISettings"),
+              })}
+            </li>
+            <li
+              style={{
+                marginBottom: "0px",
+                fontSize: "13px",
+                lineHeight: "18px",
+                paddingLeft: "0",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "16px",
+                  verticalAlign: "middle",
+                  marginRight: "3px",
+                }}
+              >
+                •
+              </span>
+              {t("DisableAiServicesEffect2", {
+                aiServices: t("Common:AIServices"),
+              })}
+            </li>
+            <li
+              style={{
+                marginBottom: "0px",
+                fontSize: "13px",
+                lineHeight: "18px",
+                paddingLeft: "0",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "16px",
+                  verticalAlign: "middle",
+                  marginRight: "3px",
+                }}
+              >
+                •
+              </span>
+              {t("DisableAiServicesEffect3", {
+                aiAgents: t("Common:AIAgents"),
+              })}
+            </li>
+            <li
+              style={{
+                marginBottom: "0px",
+                fontSize: "13px",
+                lineHeight: "18px",
+                paddingLeft: "0",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "16px",
+                  verticalAlign: "middle",
+                  marginRight: "3px",
+                }}
+              >
+                •
+              </span>
+              {t("DisableAiServicesEffect4")}
+            </li>
           </ul>
         </Text>
         {isAiToolsServiceOn && (
@@ -157,7 +195,7 @@ const DisableAiServicesDialogComponent = ({
         <Button
           primary
           size="normal"
-          label={t("Common:Continue")}
+          label={t("Common:ContinueButton")}
           scale
           onClick={onContinue}
           isLoading={isLoading}
