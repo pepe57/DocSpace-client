@@ -278,6 +278,8 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         } else {
           waitingForTariff(isCancellation);
         }
+
+        onClose();
       } catch (e) {
         toastr.error(e as Error);
         setIsLoading(false);
