@@ -60,9 +60,11 @@
 }
 
 .warningBlock {
-  background-color: var(--payment-background-color);
+  background-color: var(--payment-backgroud-color-warning);
   padding: 16px;
   margin: 4px 0;
+  max-width: 660px;
+  border-radius: 6px;
   
   .warningTitle {
     display: flex;

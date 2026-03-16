@@ -1510,6 +1510,7 @@
 
 .light {
   --payment-background-color: #{$gray-light};
+  --payment-backgroud-color-warning: #{$gray-light};
   --payment-text-color: #{$light-gray-dark};
   --payment-credit-color: #{$light-status-positive};
   --payment-icon-background: #{$gray-light-mid};
@@ -1529,6 +1530,7 @@
 
 .dark {
   --payment-background-color: #{$light-dark-gray-hover};
+  --payment-backgroud-color-warning: #{$dark-gray-light};
   --payment-text-color: #{$dark-gray-dark};
   --payment-credit-color: #{$dark-status-positive};
   --payment-icon-background: #{$gray-dark-mid};

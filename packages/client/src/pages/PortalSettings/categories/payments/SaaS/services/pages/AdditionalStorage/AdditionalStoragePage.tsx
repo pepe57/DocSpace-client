@@ -186,7 +186,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
       <WalletInfo shortView withoutBackground balance={balance} />
 
       {isScheduled ? (
-        <div style={{ marginTop: 4 }}>
+        <div style={{ marginTop: 16 }}>
           <StorageWarning
             title={warningTitle}
             onCancelChange={handleCancelChange}

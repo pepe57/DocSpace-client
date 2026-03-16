@@ -58,9 +58,13 @@ const StorageWarning: React.FC<StorageWarningProps> = ({
     <div className={styles.warningBlock}>
       <div className={styles.warningTitle}>
         <InfoIcon />
-        <Text fontWeight={600} className={styles.warningColor}>
-          {title ?? t("Important")}
-        </Text>
+        {title ? (
+          <Text fontWeight={600} className={styles.warningColor}>
+            {title}
+          </Text>
+        ) : (
+          <Text fontWeight={600}>{t("Important")}</Text>
+        )}
       </div>
 
       <Text>
