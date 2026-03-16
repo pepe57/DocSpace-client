@@ -48,7 +48,7 @@ import StoragePlanCancel from "./sub-components/AdditionalStorage/StoragePlanCan
 import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModal";
 // import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";
-import AIServiceDialog from "./pages/AITools/AIServiceDialog";
+import AIServiceDialog from "./sub-components/AIService/AIServiceDialog";
 // import WebSearchDialog from "./sub-components/WebSearch/WebSearchDialog";
 
 const Services = (props: InjectedProps) => {
@@ -76,7 +76,6 @@ const Services = (props: InjectedProps) => {
     [TOTAL_SIZE]: false,
     [BACKUP_SERVICE]: false,
     [AI_ENUM]: false,
-    [WEB_SEARCH]: false,
   });
 
   const updateDialogVisibility = useCallback(
@@ -191,11 +190,7 @@ const Services = (props: InjectedProps) => {
             />,
             t("Common:WantToContinue"),
           ],
-    },
-    [WEB_SEARCH]: {
-      title: t("Common:Confirmation"),
-      body: "Temp Web Search Description Text",
-    },
+    }
   };
 
   const getDialogContent = (actionType: string | null) => {
@@ -306,16 +301,8 @@ const Services = (props: InjectedProps) => {
     setIsGracePeriodModalVisible(false);
   };
 
-  const onCloseBackup = () => {
-    updateDialogVisibility(BACKUP_SERVICE, false);
-  };
-
   const onCloseAiService = () => {
     updateDialogVisibility(AI_ENUM, false);
-  };
-
-  const onCloseWebSearch = () => {
-    updateDialogVisibility(WEB_SEARCH, false);
   };
 
   const onCloseConfirmDialog = () => {
@@ -359,11 +346,6 @@ return;
       }
       if (confirmActionType === AI_ENUM) {
         return t("Services:AIToolsEnabled");
-      }
-      if (confirmActionType === WEB_SEARCH) {
-        return t("Services:WebSearchEnabled", {
-          webSearch: t("Common:WebSearchAI"),
-        });
       }
     };
 
@@ -421,13 +403,6 @@ return;
           onClose={onCloseGracePeriodModal}
         />
       ) : null}
-      {/* {dialogVisibility[BACKUP_SERVICE] ? (
-        <BackupServiceDialog
-          visible={dialogVisibility[BACKUP_SERVICE]}
-          onClose={onCloseBackup}
-          onToggle={onToggle}
-        />
-      ) : null} */}
       {dialogVisibility[AI_ENUM] ? (
         <AIServiceDialog
           visible={dialogVisibility[AI_ENUM]}
@@ -435,13 +410,6 @@ return;
           isTopUpVisible={isAiServiceTopUpVisible}
         />
       ) : null}
-      {/* {dialogVisibility[WEB_SEARCH] ? (
-        <WebSearchDialog
-          visible={dialogVisibility[WEB_SEARCH]}
-          onClose={onCloseWebSearch}
-          onToggle={onToggle}
-        />
-      ) : null} */}
       {isConfirmDialogVisible && confirmActionType ? (
         <ConfirmationDialog
           visible={isConfirmDialogVisible}

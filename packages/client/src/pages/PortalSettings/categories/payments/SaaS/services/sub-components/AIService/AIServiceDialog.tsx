@@ -60,8 +60,8 @@ import {
 
 import styles from "../../styles/BackupServiceDialog.module.scss";
 
-import GetStartedBody from "./sub-components/GetStartedBody";
-import PricingBillingBody from "./sub-components/PricingBillingBody";
+import GetStartedBody from "./GetStartedBody";
+import PricingBillingBody from "./PricingBillingBody";
 
 import { DateTime } from "luxon";
 import { useNavigate } from "react-router";

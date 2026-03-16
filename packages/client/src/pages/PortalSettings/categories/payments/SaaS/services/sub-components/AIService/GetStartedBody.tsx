@@ -1,7 +1,7 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 
@@ -17,7 +17,7 @@ import AiTokensIcon from "PUBLIC_DIR/images/icons/32/ai-tokens.svg";
 import AiVectorizationIcon from "PUBLIC_DIR/images/icons/32/ai-vectorization.svg";
 import AiSearchIcon from "PUBLIC_DIR/images/icons/32/ai-search.svg";
 import RightArrowIcon from "PUBLIC_DIR/images/icons/16/right.arrow.react.svg";
-import styles from "../../../styles/BackupServiceDialog.module.scss";
+import styles from "../../styles/BackupServiceDialog.module.scss";
 import PriceBackground from "PUBLIC_DIR/images/icons/16/price.react.svg";
 import AiSvg from "PUBLIC_DIR/images/icons/16/AI.svg";
 import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components";

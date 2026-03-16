@@ -8,7 +8,7 @@ import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import InputTokensIcon from "PUBLIC_DIR/images/icons/16/input-tokens.svg";
 import OutputTokensIcon from "PUBLIC_DIR/images/icons/16/output-tokens.svg";
 
-import styles from "../../../styles/BackupServiceDialog.module.scss";
+import styles from "../../styles/BackupServiceDialog.module.scss";
 import type { TAiToolsPrices } from "SRC_DIR/store/ServicesStore";
 import {
   Button,
