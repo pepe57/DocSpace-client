@@ -418,45 +418,44 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
             isPaymentBlocked={isPaymentBlocked}
             isDisabled={isWaiting}
           />
-        </Mo
+        </ModalDialog.Footer>
       </ModalDialog>
-    </PaymentProvide
+    </PaymentProvider>
   );
 };
 
-
-  ({ paymentStore, cur
+export default inject(
+  ({ paymentStore, currentTariffStatusStore, servicesStore }: TStore) => {
     const {
-      fetch
-      hasStorageSubscrip
+      fetchPortalTariff,
+      hasStorageSubscription,
       currentStoragePlanSize,
-      hasScheduledStorageChan
+      hasScheduledStorageChange,
       storageExpiryDate,
-    } = currentTariffSta
+    } = currentTariffStatusStore;
 
-
+    const { fetchBalance, storagePriceIncrement, formatWalletCurrency } =
       paymentStore;
     const {
-      isVis
+      isVisibleWalletSettings,
       partialUpgradeFee,
       featureCountData,
-      setPartialUpgrade
+      setPartialUpgradeFee,
     } = servicesStore;
 
-
-      hasSto
+    return {
+      hasStorageSubscription,
       currentStoragePlanSize,
       fetchPortalTariff,
       fetchBalance,
-      storagePriceI
-      isVisibleWalletSetting
+      storagePriceIncrement,
+      isVisibleWalletSettings,
       partialUpgradeFee,
       featureCountData,
-      setPartialUpgrade
-      hasScheduledStorageCh
+      setPartialUpgradeFee,
+      hasScheduledStorageChange,
       storageExpiryDate,
-      formatWalletCurren
+      formatWalletCurrency,
     };
   },
-)(ob
-
+)(observer(StoragePlanUpgrade));
