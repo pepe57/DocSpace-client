@@ -60,6 +60,7 @@ type OrderSummaryProps = {
   partialUpgradeFee?: number;
   totalPrice?: number;
   reccomendedAmount?: number;
+  hasMinError?: boolean;
 };
 
 const OrderSummary: React.FC<OrderSummaryProps> = ({

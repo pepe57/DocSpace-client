@@ -72,6 +72,8 @@ type StorageDialogProps = {
   hasScheduledStorageChange?: number;
   previousValue?: number;
   storageExpiryDate?: string;
+  formatWalletCurrency?: (amount?: number, fractionDigits?: number) => string;
+  walletBalance?: number;
 };
 
 const MAX_ATTEMPTS = 30;
@@ -92,7 +94,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   hasScheduledStorageChange,
   previousValue = 0,
   formatWalletCurrency,
-  walletBalance,
+  walletBalance = 0,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<string>(
@@ -128,17 +130,16 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     isPlanDowngrade,
   } = useServicesActions();
 
-  const isExceedingStorageLimit = isExceedingPlanLimit(debouncedAmount);
-  const isCurrentStoragePlan = isCurrentPlan(debouncedAmount);
+  const isExceedingStorageLimit = isExceedingPlanLimit(+debouncedAmount);
+  const isCurrentStoragePlan = isCurrentPlan(+debouncedAmount);
   const totalPrice = calculateTotalPrice(
-    debouncedAmount,
+    +debouncedAmount,
     storagePriceIncrement!,
   );
 
-  const isUpgradeStoragePlan = isPlanUpgrade(debouncedAmount);
-  const isDowngradeStoragePlan = isPlanDowngrade(debouncedAmount);
-  const hasMinError =
-    Number(debouncedAmount) > 0 && Number(debouncedAmount) < MIN_VALUE;
+  const isUpgradeStoragePlan = isPlanUpgrade(+debouncedAmount);
+  const isDowngradeStoragePlan = isPlanDowngrade(+debouncedAmount);
+  const hasMinError = +debouncedAmount > 0 && +debouncedAmount < MIN_VALUE;
   const newStorageSizeOnUpgrade =
     isUpgradeStoragePlan && currentStoragePlanSize! > 0;
 
@@ -146,9 +147,9 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     ? isWalletBalanceInsufficient(partialUpgradeFee!)
     : isWalletBalanceInsufficient(totalPrice);
 
-  const buttonMainTitle = buttonTitle(debouncedAmount);
+  const buttonMainTitle = buttonTitle(+debouncedAmount);
   const isPaymentBlocked =
-    !hasScheduledStorageChange && amount < MIN_VALUE && amount !== 0;
+    !hasScheduledStorageChange && +amount < MIN_VALUE && amount !== "";
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const isWaitingRef = useRef(false);
@@ -181,7 +182,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     if (isUpgradeStoragePlan) onCloseDialog();
 
     if (isCancellation || !isUpgradeStoragePlan)
-      setAmount(currentStoragePlanSize!);
+      setAmount(String(currentStoragePlanSize ?? ""));
 
     if (intervalRef.current) {
       toastr.success(t("StorageCapacityUpdated"));
@@ -207,7 +208,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
     const updated = isCancellation
       ? !walletQuotas[0]?.nextQuantity
-      : walletQuantity === amountRef.current;
+      : walletQuantity === +amountRef.current;
 
     return updated;
   };
@@ -256,7 +257,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
       setIsLoading(true);
 
-      const amountValue = amountRef.current;
+      const amountValue = +amountRef.current;
       const difference = calculateDifferenceBetweenPlan(amountValue);
       const productType = isUpgradeStoragePlan && !isCancellation ? 1 : 0;
       const quantity = isUpgradeStoragePlan ? difference : amountValue;
@@ -298,7 +299,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     setIsVisibleContainer(true);
   }, []);
 
-  const onChangeNumber = (value: number) => {
+  const onChangeNumber = (value: string) => {
     setAmount(value);
   };
 
@@ -317,7 +318,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     <TopUpContainer
       isVisibleContainer={isVisibleContainer}
       onCloseTopUpModal={onCloseTopUpModal}
-      amount={amount}
+      amount={+amount}
       initialAmount={reccomendedAmount}
     />
   ) : null;
@@ -417,7 +418,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
               {(!isCurrentStoragePlan && debouncedAmount && !hasMinError) ||
               !currentStoragePlanSize ? (
                 <OrderSummary
-                  amount={debouncedAmount}
+                  amount={+debouncedAmount}
                   totalPrice={totalPrice}
                   isUpgradeStoragePlan={isUpgradeStoragePlan}
                   isDowngradeStoragePlan={isDowngradeStoragePlan}

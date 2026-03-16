@@ -50,6 +50,7 @@ import {
   calculateTotalPrice,
   getConvertedSize,
 } from "@docspace/shared/utils/common";
+import type { DateTime } from "luxon";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import StoragePlanUpgrade from "../../sub-components/AdditionalStorage/StoragePlanUpgrade";
@@ -72,6 +73,15 @@ type AdditionalStoragePageProps = {
   fetchBalance?: () => Promise<void>;
   hasScheduledStorageChange?: number;
   walletCodeCurrency?: string;
+  fetchTransactionHistory?: (
+    startDate: DateTime | null,
+    endDate: DateTime | null,
+    credit?: boolean,
+    debit?: boolean,
+    participantName?: string,
+    serviceName?: string,
+  ) => Promise<void>;
+  previousStoragePlanSize?: number;
 };
 
 const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
@@ -80,7 +90,6 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   storageExpiryDate = "",
   isStorageEnabled = true,
   formatWalletCurrency,
-  onToggleStorage,
   storagePriceIncrement,
   storageSizeIncrement,
   fetchPortalTariff,

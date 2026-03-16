@@ -48,6 +48,10 @@ interface ButtonContainerProps {
   isDowngradeStoragePlan?: boolean;
   isPaymentBlocked?: boolean;
   formatWalletCurrency?: (amount?: number, fractionDigits?: number) => string;
+  storageExpiryDate?: string;
+  totalPrice?: number;
+  isDisabled?: boolean;
+  currentStoragePlanSize?: number;
 }
 
 const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
@@ -65,7 +69,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     hasStorageSubscription,
     isPaymentBlocked,
     storageExpiryDate,
-    totalPrice,
+    totalPrice = 0,
     formatWalletCurrency,
     isDisabled,
     currentStoragePlanSize,
