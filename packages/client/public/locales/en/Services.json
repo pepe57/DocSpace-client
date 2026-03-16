@@ -77,6 +77,7 @@
   "FreeBackupsPerMonth": "Free backups: {{value}}/{{maxValue}} per current month.",
   "FreeBackupsRenewsDate": "Free backups are used first. Renews <1>on {{date}}</1>",
   "FreeMonthly": "(free monthly)",
+  "SubscriptionDeactivated": "Subscription deactivated — non-payment",
   "HowDoesItWork": "How does it work?",
   "ImageGeneration": "Image generation",
   "ImageGenerationDescription": "Design original images and illustrations using AI for your documents.",

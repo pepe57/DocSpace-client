@@ -100,6 +100,7 @@ type ServicesItemsProps = {
   wasFirstAiServiceTopUp?: boolean;
   availableBackupsCount?: number;
   isBackupServiceOn?: boolean;
+  previousStoragePlanSize?:boolean;
 };
 
 const ServicesItems: React.FC<ServicesItemsProps> = ({
@@ -129,6 +130,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
   wasFirstAiServiceTopUp,
   availableBackupsCount,
   isBackupServiceOn,
+  previousStoragePlanSize
 }) => {
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
   const { t } = useServicesActions();
@@ -199,6 +201,11 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
   ) => {
     switch (serviceName) {
       case TOTAL_SIZE:
+
+      if(previousStoragePlanSize) {
+        return t("Services:SubscriptionDeactivated")
+      }
+
         if (hasScheduledStorageChange) {
           return t("ChangeShedule");
         }
@@ -273,8 +280,11 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
         })}
       >
         {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
+
+       
           if (!item.title || !item.image) return null;
-          console.log("item", item.serviceName);
+
+       
           if (item.serviceName === BACKUP_SERVICE) {
             return (
               <ServiceCard
@@ -342,6 +352,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 tooltip={isDisabled ? permissionTooltipText : undefined}
                 priceTooltip={hasScheduledStorageChange ? textTooltip : undefined}
                 isWarningColor={hasScheduledStorageChange}
+                isErrorColor={previousStoragePlanSize}
               />
             );
           }
@@ -386,6 +397,7 @@ export default inject(
       nextStoragePlanSize,
       storageExpiryDate,
       hasStorageSubscription,
+      previousStoragePlanSize
     } = currentTariffStatusStore;
 
     const { isFreeTariff } = currentQuotaStore;
@@ -418,6 +430,7 @@ export default inject(
       wasFirstAiServiceTopUp,
       availableBackupsCount,
       isBackupServiceOn,
+      previousStoragePlanSize
     };
   },
 )(observer(ServicesItems));
