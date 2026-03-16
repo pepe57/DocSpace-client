@@ -43,6 +43,10 @@ import styles from "../../styles/OrderSummary.module.scss";
 import { calculateDifference } from "../../hooks/resourceUtils";
 import classNames from "classnames";
 
+const getDirectionalText = (isRTL: boolean) => {
+  return isRTL ? `>1` : `<1`;
+};
+
 type OrderSummaryProps = {
   amount: number;
   currentStoragePlanSize?: number;
@@ -143,11 +147,12 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   const remainingBalance = partialUpgradeFee
     ? walletBalance - partialUpgradeFee
     : walletBalance - totalPrice;
-  const daysDisplay = Duration.fromObject(
-    { days: daysUntilStorageExpiry ?? 0 },
-    { locale: language },
-  ).toHuman();
-
+  const daysDisplay = daysUntilStorageExpiry
+    ? Duration.fromObject(
+        { days: daysUntilStorageExpiry },
+        { locale: language },
+      ).toHuman()
+    : getDirectionalText(isRTL);
 
   return (
     <div className={styles.orderSummaryWrapper}>
@@ -261,7 +266,8 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
             ) : null}
           </div>
         </div>
-        {!isExceedingStorageLimit && !isDowngradeStoragePlan &&
+        {!isExceedingStorageLimit &&
+        !isDowngradeStoragePlan &&
         !isPriceLoading &&
         amount &&
         !hasMinError ? (
@@ -286,7 +292,12 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
 };
 
 export default inject(
-  ({ paymentStore, currentTariffStatusStore, servicesStore, authStore }: TStore) => {
+  ({
+    paymentStore,
+    currentTariffStatusStore,
+    servicesStore,
+    authStore,
+  }: TStore) => {
     const { formatWalletCurrency, storagePriceIncrement, walletBalance } =
       paymentStore;
     const { language } = authStore;
