@@ -42,6 +42,7 @@ type StorageWarningProps = {
   title?: string;
   onCancelChange?: () => void;
   isCancelLoading?: boolean;
+  style?: React.CSSProperties;
 };
 
 const StorageWarning: React.FC<StorageWarningProps> = ({
@@ -49,13 +50,14 @@ const StorageWarning: React.FC<StorageWarningProps> = ({
   title,
   onCancelChange,
   isCancelLoading,
+  style,
 }) => {
   const { t } = useServicesActions();
 
   const isCancellationMode = !!onCancelChange;
 
   return (
-    <div className={styles.warningBlock}>
+    <div className={styles.warningBlock} style={style}>
       <div className={styles.warningTitle}>
         <InfoIcon />
         {title ? (

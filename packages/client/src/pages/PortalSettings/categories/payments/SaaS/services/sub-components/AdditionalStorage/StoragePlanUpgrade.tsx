@@ -429,7 +429,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
             </div>
             {isDowngradeStoragePlan && debouncedAmount && !hasMinError ? (
               <div className={styles.warningContainer}>
-                <StorageWarning />
+                <StorageWarning style={{ marginBottom: 16 }} />
               </div>
             ) : null}
           </div>
