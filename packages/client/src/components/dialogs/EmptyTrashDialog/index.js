@@ -103,7 +103,7 @@ const EmptyTrashDialogComponent = (props) => {
         <Button
           id="empty-archive_delete-submit"
           key="OKButton"
-          label={t("DeleteForeverButton")}
+          label={t("Common:DeleteForeverButton")}
           size="normal"
           primary
           onClick={onEmptyTrash}

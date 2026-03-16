@@ -44,7 +44,7 @@ import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Link } from "@docspace/ui-kit/components/link";
-import { getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";

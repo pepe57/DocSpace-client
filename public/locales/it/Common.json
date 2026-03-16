@@ -1054,5 +1054,9 @@
   "YourTurn": "Il tuo turno",
   "Upload": "Carica",
   "Open": "Apri",
-  "Quantity": "Quantità"
+  "Quantity": "Quantità",
+  "YourTurn": "Il tuo turno",
+  "DeleteAIAgentChatTitle": "Elimina chat?",
+  "DeleteAIChatDescription": "Sta per eliminare <strong>{{chatName}}<1>.</1></strong>\n Tutti i messaggi e la cronologia della chat verranno rimossi definitivamente e non potranno essere ripristinati.",
+  "DeleteForeverButton": "Eliminare per sempre"
 }

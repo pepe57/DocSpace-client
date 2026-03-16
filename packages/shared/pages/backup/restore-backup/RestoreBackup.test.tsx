@@ -15,7 +15,7 @@ import {
   mockConnectedAccount,
 } from "../mockData";
 
-vi.mock("@docspace/shared/utils/socket", () => ({
+vi.mock("@docspace/ui-kit/utils/socket", () => ({
   default: {
     on: vi.fn(),
     off: vi.fn(),

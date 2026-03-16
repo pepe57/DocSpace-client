@@ -27,7 +27,10 @@
 import isNil from "lodash/isNil";
 import { makeAutoObservable, runInAction } from "mobx";
 
-import SocketHelper, { SocketEvents, TOptSocket } from "../utils/socket";
+import SocketHelper, {
+  SocketEvents,
+  TOptSocket,
+} from "@docspace/ui-kit/utils/socket";
 
 import api from "../api";
 import { setWithCredentialsStatus } from "../api/client";

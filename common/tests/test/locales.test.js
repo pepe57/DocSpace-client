@@ -90,6 +90,7 @@ beforeAll(() => {
 		"node_modules",
 		".meta",
 		"scripts",
+    "storybook-helpers",
 	];
 
 	const translations = workspaces.flatMap((wsPath) => {

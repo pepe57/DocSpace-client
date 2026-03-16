@@ -42,7 +42,7 @@ import {
   TextInput,
 } from "@docspace/ui-kit/components/text-input";
 
-import { useIsMobile } from "../../hooks/useIsMobile";
+import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 
 import { useTagManagement } from "./TagManagement.provider";
 import {

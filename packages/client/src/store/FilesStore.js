@@ -45,7 +45,7 @@ import {
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 
 import {
   isLockedSharedRoom,
