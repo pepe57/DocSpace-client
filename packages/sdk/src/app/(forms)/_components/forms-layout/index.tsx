@@ -80,6 +80,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const { items, folders } = formsListStore;
   const formsSettingsStore = useFormsSettingsStore();
   const { roomId } = formsSettingsStore;
+  const { isFormFiller } = formsSettingsStore;
   const { fetchSection, fetchMore } = useFormsData();
   const {
     onUploadFiles,
@@ -100,6 +101,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const [isSectionLoading, setIsSectionLoading] = React.useState(false);
 
   const isMyForms = activeSection === FormsSection.MyForms;
+  const canCreateForms = isMyForms && !isFormFiller;
   const isSettings = activeSection === FormsSection.Settings;
   const isEditing = Boolean(editingFile);
   const isInsideCompletedFolder =
@@ -476,8 +478,8 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
           <Navigation
             showText
             isRootFolder
-            canCreate={isMyForms}
-            isPlusButtonVisible={isMyForms}
+            canCreate={canCreateForms}
+            isPlusButtonVisible={canCreateForms}
             title={getSectionTitle()}
             rootRoomTitle=""
             isDesktop={currentDeviceType === DeviceType.desktop}
