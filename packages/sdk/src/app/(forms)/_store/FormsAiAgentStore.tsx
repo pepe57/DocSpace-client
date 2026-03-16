@@ -174,7 +174,7 @@ class FormsAiAgentStore {
   private _checkPromise: Promise<void> | null = null;
 
   checkAiAvailability = async () => {
-    if (this._checkPromise) {
+    if (this._checkPromise !== null) {
       await this._checkPromise;
       return;
     }
