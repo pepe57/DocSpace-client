@@ -67,10 +67,10 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     storageExpiryDate,
     totalPrice,
     formatWalletCurrency,
+    isDisabled,
   } = props;
 
   const { t } = useServicesActions();
-  const { isWaitingCalculation } = usePaymentContext();
 
   return (
     <div className={styles.buttonWrapper}>
@@ -94,9 +94,9 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
           primary
           scale
           onClick={isExceedingStorageLimit ? onSendRequest : onBuy}
-          isLoading={isLoading || isWaitingCalculation}
+          isLoading={isLoading}
           isDisabled={
-            isPaymentBlocked
+            isDisabled || isPaymentBlocked
               ? true
               : !isExceedingStorageLimit && !isDowngradeStoragePlan
                 ? (!hasStorageSubscription && isNullAmount) ||

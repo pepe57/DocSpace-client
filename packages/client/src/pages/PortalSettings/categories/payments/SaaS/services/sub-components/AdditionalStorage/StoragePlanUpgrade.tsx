@@ -101,6 +101,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   );
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isWaiting, setIsWaiting] = useState(false);
   const [isVisibleContainer, setIsVisibleContainer] = useState(
     isVisibleWalletSettings,
   );
@@ -108,7 +109,9 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const [debouncedAmount, setDebouncedAmount] = useState(amount);
 
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedAmount(amount), 1000);
+    const timer = setTimeout(() => {
+      setDebouncedAmount(amount), setIsWaiting(false);
+    }, 1000);
     return () => clearTimeout(timer);
   }, [amount]);
 
@@ -294,6 +297,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     const val = e.target.value;
 
     onChangeNumber(val);
+    setIsWaiting(true);
   };
 
   const onCloseTopUpModal = () => {
@@ -412,45 +416,47 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
             isPaymentBlockedByBalance={isPaymentBlockedByBalance}
             isDowngradeStoragePlan={isDowngradeStoragePlan}
             isPaymentBlocked={isPaymentBlocked}
+            isDisabled={isWaiting}
           />
-        </ModalDialog.Footer>
+        </Mo
       </ModalDialog>
-    </PaymentProvider>
+    </PaymentProvide
   );
 };
 
-export default inject(
-  ({ paymentStore, currentTariffStatusStore, servicesStore }: TStore) => {
-    const {
-      fetchPortalTariff,
-      hasStorageSubscription,
-      currentStoragePlanSize,
-      hasScheduledStorageChange,
-      storageExpiryDate,
-    } = currentTariffStatusStore;
 
-    const { fetchBalance, storagePriceIncrement, formatWalletCurrency } =
+  ({ paymentStore, cur
+    const {
+      fetch
+      hasStorageSubscrip
+      currentStoragePlanSize,
+      hasScheduledStorageChan
+      storageExpiryDate,
+    } = currentTariffSta
+
+
       paymentStore;
     const {
-      isVisibleWalletSettings,
+      isVis
       partialUpgradeFee,
       featureCountData,
-      setPartialUpgradeFee,
+      setPartialUpgrade
     } = servicesStore;
 
-    return {
-      hasStorageSubscription,
+
+      hasSto
       currentStoragePlanSize,
       fetchPortalTariff,
       fetchBalance,
-      storagePriceIncrement,
-      isVisibleWalletSettings,
+      storagePriceI
+      isVisibleWalletSetting
       partialUpgradeFee,
       featureCountData,
-      setPartialUpgradeFee,
-      hasScheduledStorageChange,
+      setPartialUpgrade
+      hasScheduledStorageCh
       storageExpiryDate,
-      formatWalletCurrency,
+      formatWalletCurren
     };
   },
-)(observer(StoragePlanUpgrade));
+)(ob
+
