@@ -25,7 +25,8 @@ overrides:
   immutable: '>=5.1.5'
   '@svgr/plugin-svgo>svgo': ~3.3.3
   postcss-svgo>svgo: '>=4.0.1'
-  file-type: '>=21.3.1'
+  file-type: '>=21.3.2'
+  flatted: '>=3.4.0'
 
 importers:
 
@@ -5752,8 +5753,8 @@ packages:
   file-stream-rotator@0.6.1:
     resolution: {integrity: sha512-u+dBid4PvZw17PmDeRcNOtCP9CCK/9lRN2w+r1xIS7yOL9JFrIBKTvrYsxT4P0pGtThYTn++QS5ChHaUov3+zQ==}
 
-  file-type@21.3.1:
-    resolution: {integrity: sha512-SrzXX46I/zsRDjTb82eucsGg0ODq2NpGDp4HcsFKApPy8P8vACjpJRDoGGMfEzhFC0ry61ajd7f72J3603anBA==}
+  file-type@21.3.2:
+    resolution: {integrity: sha512-DLkUvGwep3poOV2wpzbHCOnSKGk1LzyXTv+aHFgN2VFl96wnp8YA9YjO2qPzg5PuL8q/SW9Pdi6WTkYOIh995w==}
     engines: {node: '>=20'}
 
   filing-cabinet@5.1.0:
@@ -5791,9 +5792,6 @@ packages:
   flat@5.0.2:
     resolution: {integrity: sha512-b6suED+5/3rTpUBdG1gupIl8MPFCAMA0QXwmljLhvCUKcUvdE4gWky9zpuGCcXHOsz4J9wPGNWq6OKpmIzz3hQ==}
     hasBin: true
-
-  flatted@3.3.3:
-    resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
 
   flatted@3.4.0:
     resolution: {integrity: sha512-kC6Bb+ooptOIvWj5B63EQWkF0FEnNjV2ZNkLMLZRDDduIiWeFF4iKnslwhiWxjAdbg4NzTNo6h0qLuvFrcx+Sw==}
@@ -13968,7 +13966,7 @@ snapshots:
     dependencies:
       moment: 2.30.1
 
-  file-type@21.3.1:
+  file-type@21.3.2:
     dependencies:
       '@tokenizer/inflate': 0.4.1
       strtok3: 10.3.4
@@ -14048,13 +14046,11 @@ snapshots:
 
   flat-cache@3.2.0:
     dependencies:
-      flatted: 3.3.3
+      flatted: 3.4.0
       keyv: 4.5.4
       rimraf: 3.0.2
 
   flat@5.0.2: {}
-
-  flatted@3.3.3: {}
 
   flatted@3.4.0: {}
 
@@ -15502,7 +15498,7 @@ snapshots:
 
   open-cli@8.0.0:
     dependencies:
-      file-type: 21.3.1
+      file-type: 21.3.2
       get-stdin: 9.0.0
       meow: 12.1.1
       open: 10.2.0
