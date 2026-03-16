@@ -261,7 +261,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
             ) : null}
           </div>
         </div>
-        {!isDowngradeStoragePlan &&
+        {!isExceedingStorageLimit && !isDowngradeStoragePlan &&
         !isPriceLoading &&
         amount &&
         !hasMinError ? (

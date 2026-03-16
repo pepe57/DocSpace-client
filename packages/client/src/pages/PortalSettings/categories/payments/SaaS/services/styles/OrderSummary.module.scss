@@ -54,7 +54,8 @@
 .summaryRow {
   display: flex;
   gap: 16px;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .rowLabel {
@@ -64,9 +65,7 @@
 }
 
 .rowValue {
-
   line-height: 16px;
-  white-space: nowrap;
 }
 
 .rowSubtext {
