@@ -1054,5 +1054,9 @@
   "YourTurn": "Sizin növbəniz",
   "Upload": "Yüklə",
   "Open": "Açmaq",
-  "Quantity": "Miqdar"
+  "Quantity": "Miqdar",
+  "YourTurn": "Sizin növbəniz",
+  "DeleteAIAgentChatTitle": "Söhbəti sil?",
+  "DeleteAIChatDescription": "Yarıma <strong>{{chatName}}<1>.</1></strong> silməyə hazırlaşırsınız.\nBütün mesajlar və söhbət tarixçəsi daimi şəkildə silinəcək və bərpa edilə bilməyəcəkdir.",
+  "DeleteForeverButton": "Həmişəlik sil"
 }

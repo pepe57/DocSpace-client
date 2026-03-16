@@ -56,9 +56,9 @@ import {
 import {
   createPasswordHash,
   getLoginLink,
-  getOAuthToken,
   toUrlParams,
 } from "@docspace/shared/utils/common";
+import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { setCookie } from "@docspace/ui-kit/utils/cookie";
 import { ButtonKeys } from "@docspace/shared/enums";
 import { TValidate } from "@docspace/ui-kit/components/email-input";

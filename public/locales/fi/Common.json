@@ -1054,5 +1054,9 @@
   "YourTurn": "Sinun vuorosi",
   "Upload": "Lataa",
   "Open": "Avaa",
-  "Quantity": "Määrä"
+  "Quantity": "Määrä",
+  "YourTurn": "Sinun vuorosi",
+  "DeleteAIAgentChatTitle": "Poista keskustelu?",
+  "DeleteAIChatDescription": "Olet aikeissa poistaa <strong>{{chatName}}<1>.</1></strong>\n Kaikki viestit ja chat-historia poistetaan pysyvästi, eikä niitä voida palauttaa.",
+  "DeleteForeverButton": "Poista pysyvästi"
 }

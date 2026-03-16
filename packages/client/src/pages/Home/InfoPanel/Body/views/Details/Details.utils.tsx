@@ -28,8 +28,7 @@ import React from "react";
 import { decode } from "he";
 import type { TFunction } from "i18next";
 
-import { getCorrectDate } from "@docspace/shared/utils";
-
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 

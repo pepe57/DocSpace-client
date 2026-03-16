@@ -1055,5 +1055,9 @@
   "YourTurn": "Ваша очередь",
   "Upload": "Загрузить",
   "Open": "Открыть",
-  "Quantity": "Количество"
+  "Quantity": "Количество",
+  "YourTurn": "Ваша очередь",
+  "DeleteAIAgentChatTitle": "Удалить чат?",
+  "DeleteAIChatDescription": "Вы собираетесь удалить <strong>{{chatName}}<1>.</1></strong>  Все сообщения и история чата будут удалены без возможности восстановления.",
+  "DeleteForeverButton": "Удалить навсегда"
 }

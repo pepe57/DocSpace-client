@@ -26,7 +26,26 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-export const CHAT_LIST_MAX_HEIGHT = 224;
-export const CHAT_LIST_WIDTH = 280;
-export const CHAT_LIST_ROW_HEIGHT_DESKTOP = 32;
-export const CHAT_LIST_ROW_HEIGHT_TABLET_AND_MOBILE = 36;
+import BoxDarkSvgUrl from "PUBLIC_DIR/images/thirdparties/box.dark.svg?url";
+import BoxSvgUrl from "PUBLIC_DIR/images/thirdparties/box.svg?url";
+
+import GitHubDarkSvgUrl from "PUBLIC_DIR/images/thirdparties/github.dark.react.svg?url";
+import GitHubLightSvgUrl from "PUBLIC_DIR/images/thirdparties/github.light.react.svg?url";
+
+import { ServerType } from "../../api/ai/enums";
+
+export const getServerIconUrl = (type: ServerType, isBase: boolean) => {
+  switch (type) {
+    case ServerType.Custom:
+      return null;
+    case ServerType.Portal:
+      return "/logo.ashx?logotype=3";
+    case ServerType.GitHub:
+      if (isBase) return GitHubLightSvgUrl;
+      return GitHubDarkSvgUrl;
+    case ServerType.Box:
+      return isBase ? BoxSvgUrl : BoxDarkSvgUrl;
+    default:
+      return null;
+  }
+};
