@@ -86,6 +86,7 @@ type TServiceFeatureWithPrice = TNumericPaymentFeature & {
     value: number;
     currencySymbol?: string;
   };
+  serviceName?: string;
 };
 
 class PaymentStore {
@@ -645,7 +646,7 @@ class PaymentStore {
       };
     });
 
-    console.log("quotas", quotas);
+
     this.servicesQuotasFeatures = new Map(
       quotas.map((feature) => [feature.id, feature]),
     );
@@ -721,12 +722,18 @@ class PaymentStore {
     const featureWithPrice = {
       ...feature,
       price: service.price,
+      serviceName: service.serviceName,
     } as TServiceFeatureWithPrice;
 
-    this.servicesQuotasFeatures.set(
-      service.features[0].id.toString(),
-      featureWithPrice,
-    );
+    const existingEntry = Array.from(
+      this.servicesQuotasFeatures.entries(),
+    ).find(([, value]) => (value as TServiceFeatureWithPrice).serviceName === service.serviceName);
+
+    const key = existingEntry
+      ? existingEntry[0]
+      : service.features[0].id.toString();
+
+    this.servicesQuotasFeatures.set(key, featureWithPrice);
   };
 
   paymentMethodInit = async (t: TTranslation) => {
