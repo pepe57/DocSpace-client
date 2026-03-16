@@ -469,6 +469,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         dataTestId="user_agreement_checkbox"
       />
       <ButtonContainer
+        standalone={standalone}
         setErrorInformation={setErrorInformation}
         isConfirmed={checkboxState.confirmation}
         isNotification={checkboxState.notification}
