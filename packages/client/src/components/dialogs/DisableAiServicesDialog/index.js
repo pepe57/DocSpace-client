@@ -45,6 +45,20 @@ const DisableAiServicesDialogComponent = ({
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
+  const effects = [
+    t("DisableAiServicesEffect1", {
+      productName: t("Common:ProductName"),
+      aiSettings: t("AISettings"),
+    }),
+    t("DisableAiServicesEffect2", {
+      aiServices: t("Common:AIServices"),
+    }),
+    t("DisableAiServicesEffect3", {
+      aiAgents: t("Common:AIAgents"),
+    }),
+    t("DisableAiServicesEffect4"),
+  ];
+
   return (
     <ModalDialog
       visible={visible}
@@ -77,89 +91,28 @@ const DisableAiServicesDialogComponent = ({
               listStyleType: "none",
             }}
           >
-            <li
-              style={{
-                marginBottom: "0px",
-                fontSize: "13px",
-                lineHeight: "18px",
-                paddingLeft: "0",
-              }}
-            >
-              <span
+            {effects.map((effect, index) => (
+              <li
+                key={index}
                 style={{
-                  fontSize: "16px",
-                  verticalAlign: "middle",
-                  marginRight: "3px",
+                  marginBottom: "0px",
+                  fontSize: "13px",
+                  lineHeight: "18px",
+                  paddingLeft: "0",
                 }}
               >
-                •
-              </span>
-              {t("DisableAiServicesEffect1", {
-                productName: t("Common:ProductName"),
-                aiSettings: t("AISettings"),
-              })}
-            </li>
-            <li
-              style={{
-                marginBottom: "0px",
-                fontSize: "13px",
-                lineHeight: "18px",
-                paddingLeft: "0",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "16px",
-                  verticalAlign: "middle",
-                  marginRight: "3px",
-                }}
-              >
-                •
-              </span>
-              {t("DisableAiServicesEffect2", {
-                aiServices: t("Common:AIServices"),
-              })}
-            </li>
-            <li
-              style={{
-                marginBottom: "0px",
-                fontSize: "13px",
-                lineHeight: "18px",
-                paddingLeft: "0",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "16px",
-                  verticalAlign: "middle",
-                  marginRight: "3px",
-                }}
-              >
-                •
-              </span>
-              {t("DisableAiServicesEffect3", {
-                aiAgents: t("Common:AIAgents"),
-              })}
-            </li>
-            <li
-              style={{
-                marginBottom: "0px",
-                fontSize: "13px",
-                lineHeight: "18px",
-                paddingLeft: "0",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "16px",
-                  verticalAlign: "middle",
-                  marginRight: "3px",
-                }}
-              >
-                •
-              </span>
-              {t("DisableAiServicesEffect4")}
-            </li>
+                <span
+                  style={{
+                    fontSize: "16px",
+                    verticalAlign: "middle",
+                    marginRight: "3px",
+                  }}
+                >
+                  •
+                </span>
+                {effect}
+              </li>
+            ))}
           </ul>
         </Text>
         {isAiToolsServiceOn && (
