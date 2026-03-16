@@ -236,7 +236,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
       ) : null}
 
       {isTopUpVisible ? (
-        <TopUpModal visible={isTopUpVisible} onClose={onCloseTopUpModal} />
+        <TopUpModal visible={isTopUpVisible} onClose={onCloseTopUpModal} serviceName={BACKUP_SERVICE}/>
       ) : null}
     </div>
   );
