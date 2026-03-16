@@ -74,7 +74,10 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
 
   return (
     <div className={styles.buttonWrapper}>
-      {!isCurrentStoragePlan && !isNullAmount ? (
+      {!isCurrentStoragePlan &&
+      !isNullAmount &&
+      !isExceedingStorageLimit &&
+      totalPrice > 0 ? (
         <Text>
           {t("Services:NextMonthBillDate", {
             currency: formatWalletCurrency!(totalPrice, 2),

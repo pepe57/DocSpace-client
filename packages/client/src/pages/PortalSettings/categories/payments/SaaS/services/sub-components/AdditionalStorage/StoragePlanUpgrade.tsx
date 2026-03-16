@@ -30,6 +30,7 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { TextInput, InputType } from "@docspace/ui-kit/components/text-input";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
 import {
   ModalDialog,
@@ -130,6 +131,8 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
   const isUpgradeStoragePlan = isPlanUpgrade(debouncedAmount);
   const isDowngradeStoragePlan = isPlanDowngrade(debouncedAmount);
+  const hasMinError =
+    Number(debouncedAmount) > 0 && Number(debouncedAmount) < MIN_VALUE;
   const newStorageSizeOnUpgrade =
     isUpgradeStoragePlan && currentStoragePlanSize! > 0;
 
@@ -343,29 +346,43 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
                   storageUnit: t("Common:Gigabyte"),
                 })}
               </Text>
-              <TextInput
-                className={styles.storageInput}
-                value={amount}
-                type={InputType.text}
-                onChange={handleInputChange}
-                onFocus={(e) => e.target.select()}
-                isDisabled={!!hasScheduledStorageChange || isLoading}
-                isAutoFocussed
-                scale
-              />
-              <Text>
-                {t("PerStorage", {
-                  currency: formatWalletCurrency!(storagePriceIncrement!, 2),
-                  amount: `1 ${t("Common:Gigabyte")}`,
-                })}
-              </Text>
+              <FieldContainer
+                isVertical
+                errorMessage={
+                  hasMinError
+                    ? t("MinCurrency", {
+                        currency: `${MIN_VALUE} ${t("Common:Gigabyte")}`,
+                      })
+                    : ""
+                }
+                hasError={hasMinError}
+              >
+                <TextInput
+                  className={styles.storageInput}
+                  value={amount}
+                  type={InputType.text}
+                  onChange={handleInputChange}
+                  onFocus={(e) => e.target.select()}
+                  isDisabled={!!hasScheduledStorageChange || isLoading}
+                  isAutoFocussed
+                  hasError={hasMinError}
+                  scale
+                />
+              </FieldContainer>
+              {!hasMinError ? (
+                <Text className={styles.perStorageInfo}>
+                  {t("PerStorage", {
+                    currency: formatWalletCurrency!(storagePriceIncrement!, 2),
+                    amount: `1 ${t("Common:Gigabyte")}`,
+                  })}
+                </Text>
+              ) : null}
             </div>
             <div className={styles.dialogBodyContent}>
               {hasStorageSubscription && currentStoragePlanSize ? (
                 <CurrentSubscription />
               ) : null}
-
-              {!isCurrentStoragePlan && debouncedAmount ? (
+              {!isCurrentStoragePlan && debouncedAmount && !hasMinError ? (
                 <OrderSummary
                   amount={debouncedAmount}
                   totalPrice={totalPrice}
@@ -374,7 +391,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
                 />
               ) : null}
             </div>
-            {isDowngradeStoragePlan && debouncedAmount ? (
+            {isDowngradeStoragePlan && debouncedAmount && !hasMinError ? (
               <div className={styles.warningContainer}>
                 <StorageWarning />
               </div>

@@ -77,7 +77,11 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   const { t } = useTranslation(["Services", "Payments", "Common"]);
   const { isRTL } = useInterfaceDirection();
   const { setIsWaitingCalculation } = usePaymentContext();
-  const { calculateDifferenceBetweenPlan } = useServicesActions();
+  const {
+    calculateDifferenceBetweenPlan,
+    isExceedingPlanLimit,
+    maxStorageLimit,
+  } = useServicesActions();
 
   const [isPriceLoading, setIsPriceLoading] = useState(false);
 
@@ -125,6 +129,8 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
     };
   }, []);
 
+  const isExceedingStorageLimit = isExceedingPlanLimit(amount);
+
   const additionalStorage = calculateDifference(
     amount,
     currentStoragePlanSize!,
@@ -146,21 +152,29 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
             <Text fontWeight="600" fontSize="14px" className={styles.rowValue}>
               {t("Payments:StorageUpgradeMessage", {
                 fromSize: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
-                toSize: `${amount} ${t("Common:Gigabyte")}`,
+                toSize: isExceedingStorageLimit
+                  ? `${maxStorageLimit}+ ${t("Common:Gigabyte")}`
+                  : `${amount} ${t("Common:Gigabyte")}`,
               })}
             </Text>
           </div>
-          <div className={styles.summaryRow}>
-            <Text fontSize="14px" className={styles.rowLabel}>
-              {isDowngradeStoragePlan
-                ? t("ReducedStorage")
-                : t("AdditionalStorageInfo")}
-            </Text>
-            <Text fontWeight="600" fontSize="14px" className={styles.rowValue}>
-              {isDowngradeStoragePlan ? "-" : "+"}
-              {additionalStorage} {t("Common:Gigabyte")}
-            </Text>
-          </div>
+          {!isExceedingStorageLimit ? (
+            <div className={styles.summaryRow}>
+              <Text fontSize="14px" className={styles.rowLabel}>
+                {isDowngradeStoragePlan
+                  ? t("ReducedStorage")
+                  : t("AdditionalStorageInfo")}
+              </Text>
+              <Text
+                fontWeight="600"
+                fontSize="14px"
+                className={styles.rowValue}
+              >
+                {isDowngradeStoragePlan ? "-" : "+"}
+                {additionalStorage} {t("Common:Gigabyte")}
+              </Text>
+            </div>
+          ) : null}
           <div className={styles.summaryRow}>
             <Text fontSize="14px" className={styles.rowLabel}>
               {t("PricePerGB")}
@@ -169,46 +183,62 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
               {formatWalletCurrency!(storagePriceIncrement, 2)}
             </Text>
           </div>
-          <div className={styles.summaryRow}>
-            <Text fontSize="14px" className={styles.rowLabel}>
-              {isDowngradeStoragePlan
-                ? t("EffectiveDate")
-                : t("RemainingPeriod")}
-            </Text>
-            <Text fontWeight="600" fontSize="14px" className={styles.rowValue}>
-              {isDowngradeStoragePlan ? (
-                storageExpiryDate
-              ) : (
-                <>
-                  {daysDisplay} {t("Days")}{" "}
-                  <Text as="span" fontSize="14px" className={styles.rowSubtext}>
-                    ({t("UntilDate", { date: storageExpiryDate })})
-                  </Text>
-                </>
-              )}
-            </Text>
-          </div>
+          {!isExceedingStorageLimit ? (
+            <div className={styles.summaryRow}>
+              <Text fontSize="14px" className={styles.rowLabel}>
+                {isDowngradeStoragePlan
+                  ? t("EffectiveDate")
+                  : t("RemainingPeriod")}
+              </Text>
+              <Text
+                fontWeight="600"
+                fontSize="14px"
+                className={styles.rowValue}
+              >
+                {isDowngradeStoragePlan ? (
+                  storageExpiryDate
+                ) : (
+                  <>
+                    {daysDisplay} {t("Days")}{" "}
+                    <Text
+                      as="span"
+                      fontSize="14px"
+                      className={styles.rowSubtext}
+                    >
+                      ({t("UntilDate", { date: storageExpiryDate })})
+                    </Text>
+                  </>
+                )}
+              </Text>
+            </div>
+          ) : null}
           <div className={styles.divider} />
           <div className={styles.summaryRow}>
             <Text fontWeight="600" fontSize="14px" className={styles.rowLabel}>
-              {t("TotalDueToday")}
+              {isExceedingStorageLimit
+                ? t("Payments:StorageUponRequest", {
+                    amount: `${maxStorageLimit} ${t("Common:Gigabyte")}`,
+                  })
+                : t("TotalDueToday")}
             </Text>
-            <div className={styles.rowValue}>
-              {isUpgradeStoragePlan && isPriceLoading ? (
-                <Loader color="" size="20px" type={LoaderTypes.track} />
-              ) : (
-                <Text fontWeight="600" fontSize="14px">
-                  {formatWalletCurrency!(
-                    isDowngradeStoragePlan
-                      ? 0
-                      : isUpgradeStoragePlan
-                        ? partialUpgradeFee!
-                        : totalPrice,
-                    2,
-                  )}
-                </Text>
-              )}
-            </div>
+            {!isExceedingStorageLimit ? (
+              <div className={styles.rowValue}>
+                {isUpgradeStoragePlan && isPriceLoading ? (
+                  <Loader color="" size="20px" type={LoaderTypes.track} />
+                ) : (
+                  <Text fontWeight="600" fontSize="14px">
+                    {formatWalletCurrency!(
+                      isDowngradeStoragePlan
+                        ? 0
+                        : isUpgradeStoragePlan
+                          ? partialUpgradeFee!
+                          : totalPrice,
+                      2,
+                    )}
+                  </Text>
+                )}
+              </div>
+            ) : null}
           </div>
         </div>
         {isUpgradeStoragePlan && !isPriceLoading && remainingBalance >= 0 ? (
