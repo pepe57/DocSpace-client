@@ -44,7 +44,6 @@
   "CurrentPaymentMonth": "Mevcut ödeme: {{price}}/ay ({{size}})",
   "Debit": "Borç",
   "DelayedPayment": "{{date}} tarihli {{planName}} planının gecikmiş ödemesi",
-  "DiskStorage": "Disk depolama",
   "Downgrade": "Aşağıya çekme",
   "DowngradeNow": "Şimdi eski sürüme geç",
   "DueToday": "Bugün teslim",

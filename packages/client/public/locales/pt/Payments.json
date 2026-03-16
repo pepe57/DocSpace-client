@@ -44,7 +44,6 @@
   "CurrentPaymentMonth": "Pagamento atual: {{price}}/mês ({{size}})",
   "Debit": "Débito",
   "DelayedPayment": "Pagamento em atraso no plano {{planName}} data do plano {{date}}",
-  "DiskStorage": "Armazenamento em disco",
   "Downgrade": "Downgrade",
   "DowngradeNow": "Diminuir agora",
   "DueToday": "Prazo hoje",

@@ -44,7 +44,6 @@
   "CurrentPaymentMonth": "当前付款：{{price}}/月 ({{size}})",
   "Debit": "借记",
   "DelayedPayment": "{{planName}}版本延迟付款日期{{date}}",
-  "DiskStorage": "磁盘存储",
   "Downgrade": "降级",
   "DowngradeNow": "立即降级",
   "DueToday": "今日到期",

@@ -44,7 +44,6 @@
   "CurrentPaymentMonth": "Aktuálna platba: {{price}}/mesiac ({{size}})",
   "Debit": "Debet",
   "DelayedPayment": "Oneskorená platba za plán {{planName}} zo dňa {{date}}",
-  "DiskStorage": "Diskovú pamäť",
   "Downgrade": "Zníženie verzie",
   "DowngradeNow": "Prejsť na nižšiu verziu",
   "DueToday": "Dôležité dnes",

@@ -44,7 +44,6 @@
   "CurrentPaymentMonth": "Huidige betaling: {{price}}/maand ({{size}})",
   "Debit": "Debet",
   "DelayedPayment": "Uitgestelde betaling van het {{planName}} plan op {{date}}",
-  "DiskStorage": "Schijfopslag",
   "Downgrade": "Downgrade",
   "DowngradeNow": "Nu downgraden",
   "DueToday": "Vandaag ingeleverd",

@@ -44,7 +44,6 @@
   "CurrentPaymentMonth": "현재 결제: {{price}}/월 ({{size}})",
   "Debit": "직불",
   "DelayedPayment": "{{date}} 날짜의 {{planName}} 요금제 지불 지연",
-  "DiskStorage": "디스크 저장 공간",
   "Downgrade": "다운그레이드",
   "DowngradeNow": "지금 다운그레이드",
   "DueToday": "오늘까지",

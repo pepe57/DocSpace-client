@@ -44,7 +44,6 @@
   "CurrentPaymentMonth": "Pašreizējā maksājuma summa: {{price}}/mēnesī ({{size}})",
   "Debit": "Debets",
   "DelayedPayment": "Novēlots {{planName}} plāna maksājums datēts {{date}}",
-  "DiskStorage": "Diska krātuve",
   "Downgrade": "Atgrādiens",
   "DowngradeNow": "Pazemināt tagad",
   "DueToday": "Termiņš šodien",

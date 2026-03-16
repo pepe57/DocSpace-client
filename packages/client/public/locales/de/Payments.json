@@ -44,7 +44,6 @@
   "CurrentPaymentMonth": "Aktueller Betrag: {{price}}/Monat ({{size}})",
   "Debit": "Lastschrift",
   "DelayedPayment": "Aufgehaltene Bezahlung des {{planName}}-Plans vom {{date}}",
-  "DiskStorage": "Speicherplatz",
   "Downgrade": "Herabstufen",
   "DowngradeNow": "Jetzt herabstufen",
   "DueToday": "Heute fällig",

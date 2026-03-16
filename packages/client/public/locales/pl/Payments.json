@@ -44,7 +44,6 @@
   "CurrentPaymentMonth": "Aktualna płatność: {{price}}/miesiąc ({{size}})",
   "Debit": "Debet",
   "DelayedPayment": "Opóźniona płatność dla planu {{planName}} z dnia {{date}}",
-  "DiskStorage": "Pamięć dyskowa",
   "Downgrade": "Degradacja",
   "DowngradeNow": "Zmień plan na tańszy teraz",
   "DueToday": "Zadanie do oddania dzisiaj",

@@ -44,7 +44,6 @@
   "CurrentPaymentMonth": "Trenutno plaćanje: {{price}}/mesečno ({{size}})",
   "Debit": "Zaduženje",
   "DelayedPayment": "Zakasnelo plaćanje {{planName}} plana datiranog {{date}}",
-  "DiskStorage": "Skladišni prostor",
   "Downgrade": "Smanjenje paketa",
   "DowngradeNow": "Smanji nivo sada",
   "DueToday": "Dospelo danas",
