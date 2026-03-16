@@ -62,6 +62,8 @@
 .warningBlock {
   background-color: var(--payment-background-color);
   padding: 16px;
+  margin: 4px 0;
+  
   .warningTitle {
     display: flex;
     gap: 8px;
@@ -73,6 +75,36 @@
         fill: var(--payment-warning-color);
       }
     }
+  }
+
+  .warningColor{
+    color:var(--payment-warning-color);
+  }
+
+ 
+}
+
+.cancelChangeLink {
+  color: var(--link-color);
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 4px;
+  display: inline-block;
+}
+
+.cancelChangeRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.loaderContainer {
+  display: flex;
+  align-items: center;
+
+  .refreshLoader {
+    height: 16px;
   }
 }
 .planInfoContainer {

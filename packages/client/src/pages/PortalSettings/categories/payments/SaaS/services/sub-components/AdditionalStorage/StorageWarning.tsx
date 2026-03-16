@@ -31,31 +31,67 @@ import { inject, observer } from "mobx-react";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg";
 
 import { Text } from "@docspace/ui-kit/components/text";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import styles from "../../styles/StorageSummary.module.scss";
 import { useServicesActions } from "../../hooks/useServicesActions";
+import { Link } from "@docspace/ui-kit/components";
 
 type StorageWarningProps = {
   currentStoragePlanSize?: number;
+  title?: string;
+  onCancelChange?: () => void;
+  isCancelLoading?: boolean;
 };
 
 const StorageWarning: React.FC<StorageWarningProps> = ({
   currentStoragePlanSize,
+  title,
+  onCancelChange,
+  isCancelLoading,
 }) => {
   const { t } = useServicesActions();
+
+  const isCancellationMode = !!onCancelChange;
 
   return (
     <div className={styles.warningBlock}>
       <div className={styles.warningTitle}>
         <InfoIcon />
-        <Text fontWeight={600}>{t("Important")}</Text>
+        <Text fontWeight={600} className={styles.warningColor}>
+          {title ?? t("Important")}
+        </Text>
       </div>
+
       <Text>
         {t("Warning", {
           amount: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
           storageUnit: t("Common:Gigabyte"),
         })}
       </Text>
+
+      {isCancellationMode ? (
+        <div className={styles.cancelChangeRow}>
+          <Link
+            textDecoration="underline dashed"
+            onClick={isCancelLoading ? () => {} : onCancelChange}
+            fontWeight={600}
+            color="accent"
+          >
+            {t("Services:CancelChange")}
+          </Link>
+          {isCancelLoading ? (
+            <div className={styles.loaderContainer}>
+              <Loader
+                color=""
+                size="16px"
+                type={LoaderTypes.track}
+                className={styles.refreshLoader}
+              />
+            </div>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   );
 };

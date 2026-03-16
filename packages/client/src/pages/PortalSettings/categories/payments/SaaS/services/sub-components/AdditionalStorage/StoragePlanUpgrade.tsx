@@ -92,12 +92,15 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   hasScheduledStorageChange,
   previousValue = 0,
   formatWalletCurrency,
+  walletBalance,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<string>(
     isVisibleWalletSettings
       ? featureCountData.toString()
-      : previousValue.toString() || "",
+      : previousValue > 0
+        ? previousValue.toString()
+        : "",
   );
 
   const [isLoading, setIsLoading] = useState(false);
@@ -149,6 +152,10 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const isWaitingRef = useRef(false);
+
+  const reccomendedAmount = isPaymentBlockedByBalance
+    ? Math.ceil(partialUpgradeFee! - walletBalance)
+    : 0;
 
   const amountRef = useRef(amount);
   useEffect(() => {
@@ -309,6 +316,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
       isVisibleContainer={isVisibleContainer}
       onCloseTopUpModal={onCloseTopUpModal}
       amount={amount}
+      initialAmount={reccomendedAmount}
     />
   ) : null;
 
@@ -434,8 +442,12 @@ export default inject(
       storageExpiryDate,
     } = currentTariffStatusStore;
 
-    const { fetchBalance, storagePriceIncrement, formatWalletCurrency } =
-      paymentStore;
+    const {
+      fetchBalance,
+      storagePriceIncrement,
+      formatWalletCurrency,
+      walletBalance,
+    } = paymentStore;
     const {
       isVisibleWalletSettings,
       partialUpgradeFee,
@@ -456,6 +468,7 @@ export default inject(
       hasScheduledStorageChange,
       storageExpiryDate,
       formatWalletCurrency,
+      walletBalance,
     };
   },
 )(observer(StoragePlanUpgrade));

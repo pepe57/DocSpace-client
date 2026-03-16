@@ -29,6 +29,7 @@ import {
   AI_TOOLS,
   BACKUP_SERVICE,
   DISK_STORAGE,
+  STORAGE_ENUM,
 } from "@docspace/shared/constants";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import React, { useCallback } from "react";
@@ -104,7 +105,7 @@ const useServices = ({ servicesInit, aiServicesinit }: UseServicesProps) => {
     const actions = [];
 
     if (window.location.pathname.includes("services/disk-storage"))
-      actions.push(getServiceData(DISK_STORAGE));
+      actions.push(getServiceData(DISK_STORAGE, STORAGE_ENUM));
 
     await Promise.all(actions);
   }, [getServiceData]);

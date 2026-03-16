@@ -24,70 +24,143 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
+import React, { useState, useRef } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-// import { useNavigate } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import {
+  ContextMenu,
+  type ContextMenuRefType,
+} from "@docspace/ui-kit/components/context-menu";
 
 import ServiceToggleSection from "../../sub-components/ServiceToggleSection";
 
-import SettingsIcon from "PUBLIC_DIR/images/settings.react.svg";
+import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg";
+import PencilIcon from "PUBLIC_DIR/images/pencil.react.svg?url";
+import RemoveSessionIcon from "PUBLIC_DIR/images/remove.session.svg?url";
 
 import TransactionHistory from "../../../shared/transaction-history";
 import styles from "./AdditionalStoragePage.module.scss";
 import { DISK_STORAGE } from "@docspace/shared/constants";
 import WalletInfo from "../../../shared/top-up-balance/sub-components/WalletInfo";
-import { getConvertedSize } from "@docspace/shared/utils/common";
+import {
+  calculateTotalPrice,
+  getConvertedSize,
+} from "@docspace/shared/utils/common";
+import { updateWalletPayment } from "@docspace/shared/api/portal";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import StoragePlanUpgrade from "../../sub-components/AdditionalStorage/StoragePlanUpgrade";
+import StoragePlanCancel from "../../sub-components/AdditionalStorage/StoragePlanCancel";
+import StorageWarning from "../../sub-components/AdditionalStorage/StorageWarning";
+import { useServicesActions } from "../../hooks/useServicesActions";
 
 type AdditionalStoragePageProps = {
   currentStoragePlanSize?: number;
+  nextStoragePlanSize?: number;
   storagePricePerGB?: number;
-  storageAutoRenewalDate?: string;
+  storageExpiryDate?: string;
   isStorageEnabled?: boolean;
   formatWalletCurrency?: (amount?: number, fractionDigits?: number) => string;
   onToggleStorage?: (enabled: boolean) => void;
   onIncreaseStorage?: () => void;
   storagePriceIncrement?: number;
   storageSizeIncrement?: number;
+  fetchPortalTariff?: () => Promise<void>;
+  fetchBalance?: () => Promise<void>;
+  hasScheduledStorageChange?: number;
 };
 
 const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   currentStoragePlanSize = 600,
-  storagePricePerGB = 0.14,
-  storageAutoRenewalDate = "May 5, 2025",
+  nextStoragePlanSize,
+  storageExpiryDate = "",
   isStorageEnabled = true,
   formatWalletCurrency,
   onToggleStorage,
-  onIncreaseStorage,
   storagePriceIncrement,
   storageSizeIncrement,
+  fetchPortalTariff,
+  fetchBalance,
+  hasScheduledStorageChange,
+  fetchTransactionHistory,
 }) => {
-  const { t } = useTranslation(["Payments", "Common"]);
+  const { t } = useTranslation(["Payments", "Common", "Services"]);
+  const contextMenuRef = useRef<ContextMenuRefType>(null);
+  const [isStorageDialogVisible, setIsStorageDialogVisible] = useState(false);
+  const [isCancelDialogVisible, setIsCancelDialogVisible] = useState(false);
+  const [isCancelLoading, setIsCancelLoading] = useState(false);
+
+  const { isStorageCancellation } = useServicesActions();
+
+  const isScheduled = !!hasScheduledStorageChange;
+  const isDowngrade = isScheduled && !isStorageCancellation();
+
+  const warningTitle = isStorageCancellation()
+    ? t("Services:CancellationScheduled", {
+        fromSize: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+        toSize: `${nextStoragePlanSize ?? 0} ${t("Common:Gigabyte")}`,
+      })
+    : t("Services:DowngradeScheduled", {
+        fromSize: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+        toSize: `${nextStoragePlanSize ?? 0} ${t("Common:Gigabyte")}`,
+      });
 
   const handleToggleChange = () => {
-    onToggleStorage?.(!isStorageEnabled);
+    if (isStorageEnabled) setIsCancelDialogVisible(true);
+    else setIsStorageDialogVisible(true);
   };
 
-  const handleIncreaseStorage = () => {
-    onIncreaseStorage?.();
+  const handleCancelChange = async () => {
+    setIsCancelLoading(true);
+    try {
+      const res = await updateWalletPayment(null, 0);
+      if (res === false) throw new Error(t("Common:UnexpectedError"));
+      await Promise.all([
+        fetchPortalTariff?.(),
+        fetchBalance?.(),
+        fetchTransactionHistory?.(null, null, true, true, "", DISK_STORAGE),
+      ]);
+
+      toastr.success(t("StorageCapacityUpdated"));
+    } catch (e) {
+      toastr.error(e as unknown as string);
+    } finally {
+      setIsCancelLoading(false);
+    }
   };
 
-  const monthlyPrice = currentStoragePlanSize * storagePricePerGB;
-
-  const formattedPrice = formatWalletCurrency
-    ? formatWalletCurrency(monthlyPrice, 2)
-    : `$${monthlyPrice.toFixed(2)}`;
-
+  const monthlyPrice = calculateTotalPrice(
+    currentStoragePlanSize,
+    storagePriceIncrement!,
+  );
   const balance = formatWalletCurrency!();
+
+  const contextMenuItems = [
+    {
+      key: "edit",
+      label: t("Services:EditSubscription"),
+      icon: PencilIcon,
+      onClick: () => setIsStorageDialogVisible(true),
+    },
+    {
+      key: "cancel",
+      label: t("Services:CancelSubscription"),
+      icon: RemoveSessionIcon,
+      onClick: () => setIsCancelDialogVisible(true),
+    },
+  ];
+
+  const keyProp = isScheduled
+    ? { tKey: "SubscriptionAutoCancellation" }
+    : { tKey: "SubscriptionWillBeAutomaticallyRenewed" };
 
   return (
     <div className={styles.container}>
-      {/* Toggle Section */}
       <ServiceToggleSection
         isEnabled={isStorageEnabled}
+        isDisabled={isScheduled}
         onToggle={handleToggleChange}
         title={t("Payments:AdditionalDiskStorage")}
         priceText={t("PerStorage", {
@@ -97,51 +170,102 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
         description={t("Payments:AdjustStorageToExactAmount")}
       />
 
-      {/* Wallet Balance Card */}
       <WalletInfo shortView withoutBackground balance={balance} />
 
-      {/* Current Subscription Card */}
+      {isScheduled ? (
+        <div style={{ marginTop: 4 }}>
+          <StorageWarning
+            title={warningTitle}
+            onCancelChange={handleCancelChange}
+            isCancelLoading={isCancelLoading}
+          />
+        </div>
+      ) : null}
+
       <div className={styles.subscriptionCard}>
         <div className={styles.subscriptionHeader}>
           <Text fontWeight={700} fontSize="14px">
             {t("Payments:CurrentSubscription")}
           </Text>
-          <div className={styles.settingsIcon}>
-            <SettingsIcon />
-          </div>
+          {isScheduled ? null : (
+            <>
+              <div
+                className={styles.settingsIcon}
+                onClick={(e) => contextMenuRef.current?.show(e)}
+              >
+                <SettingsIcon />
+              </div>
+              <ContextMenu ref={contextMenuRef} model={contextMenuItems} />
+            </>
+          )}
         </div>
 
         <div className={styles.priceContainer}>
           <Text fontWeight={700}>
-            <span className={styles.mainPrice}>{formattedPrice}</span>
-            <span className={styles.perMonth}>/month</span>{" "}
-            <span className={styles.storage}>
-              ({currentStoragePlanSize} {t("Common:Gigabyte")})
-            </span>
+            {t("PriceSizePerMonth", {
+              price: formatWalletCurrency!(monthlyPrice, 2),
+              size: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+            })}
           </Text>
         </div>
 
-        <Button
-          className={styles.increaseButton}
-          label={t("Payments:IncreaseStorage")}
-          size={ButtonSize.small}
-          primary
-          onClick={handleIncreaseStorage}
-        />
+        {isScheduled ? null : (
+          <Button
+            className={styles.increaseButton}
+            label={t("Payments:IncreaseStorage")}
+            size={ButtonSize.small}
+            primary
+            onClick={() => setIsStorageDialogVisible(true)}
+          />
+        )}
       </div>
 
-      {/* Auto Renewal Text */}
       <Text className={styles.renewalText}>
-        {t("Payments:SubscriptionWillBeAutomaticallyRenewed")}{" "}
-        <span className={styles.renewalDate}>
-          {t("Payments:OnDate", { date: storageAutoRenewalDate })}
-        </span>
+        {isDowngrade ? (
+          <Trans
+            t={t}
+            ns="Payments"
+            i18nKey={"SubscriptionAutoRenewedWithUpdate"}
+            values={{
+              finalDate: storageExpiryDate,
+              price: formatWalletCurrency!(monthlyPrice, 2),
+              amount: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+            }}
+            components={{
+              1: <Text fontWeight="600" as="span" />,
+            }}
+          />
+        ) : (
+          <Trans
+            t={t}
+            ns="Payments"
+            i18nKey={keyProp.tKey}
+            values={{
+              finalDate: storageExpiryDate,
+            }}
+            components={{
+              1: <Text fontWeight="600" as="span" />,
+            }}
+          />
+        )}
       </Text>
 
-      {/* Transaction History */}
       <div className={styles.transactionSection}>
         <TransactionHistory serviceName={DISK_STORAGE} />
       </div>
+
+      {isStorageDialogVisible ? (
+        <StoragePlanUpgrade
+          visible={isStorageDialogVisible}
+          onClose={() => setIsStorageDialogVisible(false)}
+        />
+      ) : null}
+      {isCancelDialogVisible ? (
+        <StoragePlanCancel
+          visible={isCancelDialogVisible}
+          onClose={() => setIsCancelDialogVisible(false)}
+        />
+      ) : null}
     </div>
   );
 };
@@ -152,16 +276,28 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     walletBalance,
     storagePriceIncrement,
     storageSizeIncrement,
+    fetchBalance,
+    fetchTransactionHistory,
   } = paymentStore;
-  const { currentStoragePlanSize, storageExpiryDate } =
-    currentTariffStatusStore;
+  const {
+    currentStoragePlanSize,
+    nextStoragePlanSize,
+    storageExpiryDate,
+    fetchPortalTariff,
+    hasScheduledStorageChange,
+  } = currentTariffStatusStore;
 
   return {
     walletBalance,
     currentStoragePlanSize,
+    nextStoragePlanSize,
     formatWalletCurrency,
-    storageAutoRenewalDate: storageExpiryDate,
+    storageExpiryDate,
     storagePriceIncrement,
     storageSizeIncrement,
+    fetchPortalTariff,
+    fetchBalance,
+    hasScheduledStorageChange,
+    fetchTransactionHistory,
   };
 })(observer(AdditionalStoragePage));

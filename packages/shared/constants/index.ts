@@ -48,6 +48,7 @@ export const YEAR_KEY = "year";
 export const BACKUP_SERVICE = "backup";
 export const AI_TOOLS = "ai-tools";
 export const AI_ENUM = "aitools";
+export const STORAGE_ENUM = "storage";
 export const DISK_STORAGE = "disk-storage";
 export const WEB_SEARCH = "websearch";
 export const FREE_BACKUP = "free_backup";

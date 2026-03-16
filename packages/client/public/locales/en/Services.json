@@ -12,6 +12,8 @@
   "AIModelListTitle": "Model list",
   "AIBalance": "AI balance",
   "WalletBalance": "Wallet balance",
+  "EditSubscription": "Edit subscription",
+  "CancelSubscription": "Cancel subscription",
   "FreeMonthly": "(free monthly)",
   "NeedTopUpWallet": "Your wallet has insufficient funds. Please top up your wallet.",
   "FreeBackupsRenewsDate": "Free backups are used first. Renews <1>on {{date}}</1>",
@@ -108,5 +110,8 @@
   "ThirdPartyStorageDescription": "Use third-party services to store your backups. Ideal for connecting external cloud storage platforms.",
   "TopUpCredits": "Top up credits",
   "Usage": "Usage",
-  "WebSearchEnabled": "AI {{webSearch}} service successfully enabled."
+  "WebSearchEnabled": "AI {{webSearch}} service successfully enabled.",
+  "CancellationScheduled": "Change scheduled: Subscription cancellation, {{fromSize}} → {{toSize}}",
+  "DowngradeScheduled": "Change scheduled: Downgrade storage, {{fromSize}} → {{toSize}}",
+  "CancelChange": "Cancel change"
 }

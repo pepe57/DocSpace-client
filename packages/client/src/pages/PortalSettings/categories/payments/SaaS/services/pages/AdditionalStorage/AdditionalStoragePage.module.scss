@@ -1,8 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  max-width: 661px;
 }
 
 .header {
@@ -19,8 +17,9 @@
   padding: 12px;
   border: 1px solid var(--border-service-color);
   border-radius: 6px;
-
+box-sizing: border-box;
   max-width: 320px;
+  margin: 16px 0 12px 0 ;
 }
 
 .subscriptionHeader {

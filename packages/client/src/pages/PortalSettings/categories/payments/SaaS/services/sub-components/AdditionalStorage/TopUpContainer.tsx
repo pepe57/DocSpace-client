@@ -36,8 +36,16 @@ type TopUpContainerTypes = {
 };
 
 const TopUpContainer = (props: TopUpContainerTypes) => {
-  const { isVisibleContainer, onCloseTopUpModal, reccomendedAmount, amount } =
-    props;
+  const {
+    isVisibleContainer,
+    onCloseTopUpModal,
+    reccomendedAmount,
+    amount,
+    initialAmount,
+  } = props;
+
+  const reccomended = initialAmount ?? reccomendedAmount;
+
   return isVisibleContainer ? (
     <TopUpModal
       visible={isVisibleContainer}
@@ -47,8 +55,8 @@ const TopUpContainer = (props: TopUpContainerTypes) => {
         onBackClick: onCloseTopUpModal,
         onCloseClick: onCloseTopUpModal,
       }}
-      {...(reccomendedAmount! > 0 && {
-        reccomendedAmount: reccomendedAmount!.toString(),
+      {...(reccomended > 0 && {
+        reccomendedAmount: reccomended.toString(),
         amount: amount!.toString(),
       })}
     />
