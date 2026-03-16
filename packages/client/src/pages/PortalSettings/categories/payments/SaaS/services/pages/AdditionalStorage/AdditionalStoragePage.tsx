@@ -300,7 +300,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
             <Trans
               t={t}
               ns="Payments"
-              i18nKey={"SubscriptionAutoRenewedWithUpdate"}
+              i18nKey="SubscriptionAutoRenewedWithUpdate"
               values={{
                 finalDate: storageExpiryDate,
                 price: formatWalletCurrency!(monthlyPrice, 2),

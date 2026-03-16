@@ -50,7 +50,6 @@
   "BackupServiceEnabled": "Backup service successfully enabled.",
   "BackupsNotAvailable": "Backups unavailable — top up wallet",
   "BuyStorage": "Buy storage",
-  "CancelChange": "Cancel change",
   "CancellationScheduled": "Change scheduled: Subscription cancellation, {{fromSize}} → {{toSize}}",
   "CancelSubscription": "Cancel subscription",
   "ChatBot": "ChatBot",

@@ -82,7 +82,7 @@ const StorageWarning: React.FC<StorageWarningProps> = ({
             fontWeight={600}
             color="accent"
           >
-            {t("Services:CancelChange")}
+            {t("Payments:CancelChange")}
           </Link>
           {isCancelLoading ? (
             <div className={styles.loaderContainer}>

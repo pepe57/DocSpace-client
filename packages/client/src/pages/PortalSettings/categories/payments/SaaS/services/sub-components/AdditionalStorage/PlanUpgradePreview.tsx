@@ -86,7 +86,10 @@ const PlanUpgradePreview: React.FC<PlanUpgradePreviewProps> = (props) => {
           {daysUntilStorageExpiry === 0
             ? t("PartialPaymentNoDate", { storageUnit: t("Common:Gigabyte") })
             : t("PartialPaymentWithDate", {
-                startDate: formatDateLocalized(now().setZone(window.timezone), "DATE_MED"),
+                startDate: formatDateLocalized(
+                  now().setZone(window.timezone),
+                  "DATE_MED",
+                ),
                 endDate: storageExpiryDate,
                 storageUnit: t("Common:Gigabyte"),
               })}

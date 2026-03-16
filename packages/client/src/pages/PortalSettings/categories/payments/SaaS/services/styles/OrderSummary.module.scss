@@ -69,7 +69,7 @@
 }
 
 .rowSubtext {
-  color: #a3a9ae;
+  color: var(--payment-dialog-text);
   font-weight: 400;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .balanceInfo {
-  color: #a3a9ae;
+  color: var(--payment-dialog-text);
     margin-right: 0;
     margin-left: auto;
 

@@ -73,11 +73,7 @@ const CurrentSubscription: React.FC<CurrentSubscriptionProps> = ({
             </div>
           </div>
           <div className={styles.priceInfo}>
-            <Text
-              fontWeight="600"
-              fontSize="14px"
-
-            >
+            <Text fontWeight="600" fontSize="14px">
               {t("CurrencyPerMonth", {
                 currency: formatWalletCurrency!(totalPrice, 2),
               })}

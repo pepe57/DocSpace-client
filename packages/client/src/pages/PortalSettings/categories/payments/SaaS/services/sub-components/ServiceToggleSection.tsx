@@ -73,11 +73,7 @@ const ServiceToggleSection: React.FC<ServiceToggleSectionProps> = ({
             </>
           ) : null}
         </div>
-        {description ? (
-          <Text fontSize="12px" >
-            {description}
-          </Text>
-        ) : null}
+        {description ? <Text fontSize="12px">{description}</Text> : null}
       </div>
     </div>
   );

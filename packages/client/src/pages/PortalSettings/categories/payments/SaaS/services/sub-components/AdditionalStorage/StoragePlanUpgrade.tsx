@@ -70,7 +70,7 @@ type StorageDialogProps = {
   featureCountData?: number;
   setPartialUpgradeFee?: (value: number) => void;
   hasScheduledStorageChange?: number;
-  previousValue?: number;
+  previousValue?: string;
   storageExpiryDate?: string;
   formatWalletCurrency?: (amount?: number, fractionDigits?: number) => string;
   walletBalance?: number;
@@ -92,7 +92,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   featureCountData = 0,
   setPartialUpgradeFee,
   hasScheduledStorageChange,
-  previousValue = 0,
+  previousValue = "",
   formatWalletCurrency,
   walletBalance = 0,
 }) => {
@@ -100,8 +100,8 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const [amount, setAmount] = useState<string>(
     isVisibleWalletSettings
       ? featureCountData.toString()
-      : previousValue > 0
-        ? previousValue.toString()
+      : previousValue
+        ? previousValue
         : "",
   );
 
