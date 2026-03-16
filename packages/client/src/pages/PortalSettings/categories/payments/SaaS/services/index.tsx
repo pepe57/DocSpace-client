@@ -97,7 +97,7 @@ const Services = (props: InjectedProps) => {
   const [isStorageCancelattion, setIsStorageCancellation] = useState(false);
   const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
     useState(false);
-  const [previousValue, setPreviousValue] = useState(0);
+  const [previousValue, setPreviousValue] = useState("");
 
   const [isTopUpBalanceVisible, setIsTopUpBalanceVisible] = useState(false);
 
@@ -130,7 +130,7 @@ const Services = (props: InjectedProps) => {
   useEffect(() => {
     if (openDialog) {
       updateDialogVisibility(TOTAL_SIZE, openDialog);
-      setPreviousValue(previousStoragePlanSize);
+      setPreviousValue(previousStoragePlanSize.toString());
       navigate(location.pathname, { replace: true });
     }
   }, [openDialog, updateDialogVisibility]);

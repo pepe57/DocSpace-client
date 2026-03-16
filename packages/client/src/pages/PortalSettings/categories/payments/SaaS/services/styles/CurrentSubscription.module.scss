@@ -24,75 +24,66 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.dialogBody {
+.currentSubscriptionWrapper {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  gap: 16px;
+  margin:20px 0;
+}
 
+
+
+.subscriptionCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.subscriptionContent {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: #f8f9f9;
+  border-radius: 6px;
 }
 
 .storageInfo {
   display: flex;
-  min-height: 40px;
-  background: var(--payment-background-color);
-  margin-bottom: 24px;
-  flex-wrap: wrap;
-  margin-top: 14px;
-  padding: 12px 16px;
-  box-sizing: border-box;
-  border-radius: 6px;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
 }
 
-.totalContainer {
-  margin-top: auto;
-  margin-bottom: 12px;
-}
-
-.currentTariffCount {
-  display: inline;
-}
-
-.moreStorage {
-  color: var(--payment-text-color);
-}
-
-.currentPayment,
-.currentPaymentWrapper {
-  margin-bottom: 8px;
-}
-
-.monthPayment {
-  color: var(--payment-dialog-text);
-}
-
-.cancelDialog {
-  margin-bottom: 16px;
-  user-select: none;
-}
-
-.selectionAmount {
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-bottom: 20px;
-}
-
-.buttonWrapper {
-   display: flex;
-  gap: inherit;
-  flex-direction: column;
-  width: 100%;
-}
-
-.warningContainer{
-  margin-top: auto;
-}
-
-.buttonContainer {
-  gap: inherit;
+.storageIcon {
+  width: 16px;
+  height: 16px;
   display: flex;
-  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.storageInput{
-  margin:4px 0;
+.storageDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.storageName {
+  color: #333;
+  line-height: 16px;
+}
+
+.priceInfo {
+  display: flex;
+  align-items: center;
+}
+
+.priceAmount {
+  color: #333;
+  line-height: 16px;
+}
+
+.renewalInfo {
+  color: #a3a9ae;
 }

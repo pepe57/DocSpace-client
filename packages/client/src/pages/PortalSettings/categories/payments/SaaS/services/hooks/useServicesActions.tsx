@@ -61,18 +61,23 @@ export const useServicesActions = () => {
   const isPlanUpgrade = (quantity: number, type = "storage") => {
     const plan = type === "storage" ? currentStoragePlanSize : 0;
 
-    return isUpgrade(quantity, plan);
+    return isUpgrade(+quantity, plan);
   };
 
   const isPlanDowngrade = (quantity: number, type = "storage") => {
+    if(!quantity) return false;
+    
     const plan = type === "storage" ? currentStoragePlanSize : 0;
-    return isDowngrade(quantity, plan);
+ 
+    return isDowngrade(+quantity, plan);
   };
 
   const isCurrentPlan = (quantity: number, type = "storage") => {
     const plan = type === "storage" ? currentStoragePlanSize : 0;
     const hasSub = type === "storage" ? hasStorageSubscription : false;
-    return isSamePlan(quantity, hasSub, plan);
+
+
+    return isSamePlan(+quantity, hasSub, plan);
   };
 
   const calculateDifferenceBetweenPlan = (

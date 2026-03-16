@@ -28,6 +28,9 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
+import { Text } from "@docspace/ui-kit/components/text";
+import { TextInput, InputType } from "@docspace/ui-kit/components/text-input";
+
 import {
   ModalDialog,
   ModalDialogType,
@@ -40,14 +43,16 @@ import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
 import SalesDepartmentRequestDialog from "SRC_DIR/components/dialogs/SalesDepartmentRequestDialog";
 
 import styles from "../../styles/index.module.scss";
-import StorageSummary from "./StorageSummary";
+
 import { useServicesActions } from "../../hooks/useServicesActions";
 import { PaymentProvider } from "../../context/PaymentContext";
 import ButtonContainer from "./ButtonContainer";
-import StorageInformation from "./StorageInformation";
+
+import CurrentSubscription from "./CurrentSubscription";
+import OrderSummary from "./OrderSummary";
 import WalletContainer from "./WalletContainer";
 import TopUpContainer from "./TopUpContainer";
-import SelectionAmount from "./SelectionAmount";
+import StorageWarning from "./StorageWarning";
 
 type StorageDialogProps = {
   visible: boolean;
@@ -65,6 +70,7 @@ type StorageDialogProps = {
   setPartialUpgradeFee?: (value: number) => void;
   hasScheduledStorageChange?: number;
   previousValue?: number;
+  storageExpiryDate?: string;
 };
 
 const MAX_ATTEMPTS = 30;
@@ -84,13 +90,15 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   setPartialUpgradeFee,
   hasScheduledStorageChange,
   previousValue = 0,
+  formatWalletCurrency,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
-  const [amount, setAmount] = useState<number>(
+  const [amount, setAmount] = useState<string>(
     isVisibleWalletSettings
-      ? featureCountData
-      : previousValue || currentStoragePlanSize,
+      ? featureCountData.toString()
+      : previousValue.toString() || "",
   );
+
   const [isLoading, setIsLoading] = useState(false);
   const [isVisibleContainer, setIsVisibleContainer] = useState(
     isVisibleWalletSettings,
@@ -258,11 +266,6 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     [handleStoragePlanChange],
   );
 
-  const onCancelChange = useCallback(
-    () => handleStoragePlanChange(true),
-    [handleStoragePlanChange],
-  );
-
   const onSendRequest = useCallback(() => {
     setIsRequestDialog(true);
   }, []);
@@ -273,6 +276,12 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
   const onChangeNumber = (value: number) => {
     setAmount(value);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+
+    onChangeNumber(val);
   };
 
   const onCloseTopUpModal = () => {
@@ -307,48 +316,65 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         withBodyScroll
       >
         <ModalDialog.Container>{container}</ModalDialog.Container>
-        <ModalDialog.Header>{t("DiskStorage")}</ModalDialog.Header>
+        <ModalDialog.Header>{t("IncreaseStorage")}</ModalDialog.Header>
         <ModalDialog.Body>
           <div className={styles.dialogBody}>
-            <StorageInformation />
-
-            <SelectionAmount
-              amount={amount}
-              onChangeNumber={onChangeNumber}
-              isLoading={isLoading}
+            <WalletContainer
+              onTopUp={onTopUpClick}
               isPaymentBlockedByBalance={isPaymentBlockedByBalance}
-              totalPrice={totalPrice}
-              newStorageSizeOnUpgrade={newStorageSizeOnUpgrade}
-              isUpgradeStoragePlan={isUpgradeStoragePlan}
+              isExceedingStorageLimit={isExceedingStorageLimit}
+              isCurrentStoragePlan={isCurrentStoragePlan}
+              isDowngradeStoragePlan={isDowngradeStoragePlan}
+              isLoading={isLoading}
             />
 
-            {!isPaymentBlocked && (amount || hasStorageSubscription) ? (
-              <div className={styles.totalContainer}>
-                <StorageSummary
+            <div className={styles.inputSection}>
+              <Text fontWeight={600}>
+                {t("Services:NewTotalStorage", {
+                  storageUnit: t("Common:Gigabyte"),
+                })}
+              </Text>
+              <TextInput
+                className={styles.storageInput}
+                value={amount}
+                type={InputType.text}
+                onChange={handleInputChange}
+                onFocus={(e) => e.target.select()}
+                isDisabled={!!hasScheduledStorageChange || isLoading}
+                isAutoFocussed
+                scale
+              />
+              <Text>
+                {t("PerStorage", {
+                  currency: formatWalletCurrency!(storagePriceIncrement!, 2),
+                  amount: `1 ${t("Common:Gigabyte")}`,
+                })}
+              </Text>
+            </div>
+            <div className={styles.dialogBodyContent}>
+              {hasStorageSubscription && currentStoragePlanSize ? (
+                <CurrentSubscription />
+              ) : null}
+
+              {!isCurrentStoragePlan && amount ? (
+                <OrderSummary
                   amount={amount}
                   totalPrice={totalPrice}
-                  isExceedingStorageLimit={isExceedingStorageLimit}
-                  isCurrentStoragePlan={isCurrentStoragePlan}
-                  onCancelChange={onCancelChange}
                   isUpgradeStoragePlan={isUpgradeStoragePlan}
+                  isDowngradeStoragePlan={isDowngradeStoragePlan}
                 />
+              ) : null}
+            </div>
+            {isDowngradeStoragePlan ? (
+              <div className={styles.warningContainer}>
+                <StorageWarning />
               </div>
-            ) : null}
-
-            {!isPaymentBlocked && (amount || hasStorageSubscription) ? (
-              <WalletContainer
-                onTopUp={onTopUpClick}
-                isPaymentBlockedByBalance={isPaymentBlockedByBalance}
-                isExceedingStorageLimit={isExceedingStorageLimit}
-                isCurrentStoragePlan={isCurrentStoragePlan}
-                isDowngradeStoragePlan={isDowngradeStoragePlan}
-                isLoading={isLoading}
-              />
             ) : null}
           </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <ButtonContainer
+            totalPrice={totalPrice}
             title={buttonMainTitle}
             isCurrentStoragePlan={isCurrentStoragePlan}
             isExceedingStorageLimit={isExceedingStorageLimit}
@@ -356,7 +382,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
             isLoading={isLoading}
             onBuy={onBuy}
             onSendRequest={onSendRequest}
-            isNullAmount={amount === 0}
+            isNullAmount={amount === "0" || amount === ""}
             isPaymentBlockedByBalance={isPaymentBlockedByBalance}
             isDowngradeStoragePlan={isDowngradeStoragePlan}
             isPaymentBlocked={isPaymentBlocked}
@@ -374,9 +400,11 @@ export default inject(
       hasStorageSubscription,
       currentStoragePlanSize,
       hasScheduledStorageChange,
+      storageExpiryDate,
     } = currentTariffStatusStore;
 
-    const { fetchBalance, storagePriceIncrement } = paymentStore;
+    const { fetchBalance, storagePriceIncrement, formatWalletCurrency } =
+      paymentStore;
     const {
       isVisibleWalletSettings,
       partialUpgradeFee,
@@ -395,6 +423,8 @@ export default inject(
       featureCountData,
       setPartialUpgradeFee,
       hasScheduledStorageChange,
+      storageExpiryDate,
+      formatWalletCurrency,
     };
   },
 )(observer(StoragePlanUpgrade));

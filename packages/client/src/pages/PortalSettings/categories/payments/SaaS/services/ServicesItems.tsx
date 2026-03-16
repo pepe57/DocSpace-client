@@ -340,7 +340,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 image={item.image}
                 isEnabled={hasStorageSubscription}
                 tooltip={isDisabled ? permissionTooltipText : undefined}
-                priceTooltip={textTooltip}
+                priceTooltip={hasScheduledStorageChange ? textTooltip : undefined}
                 isWarningColor={hasScheduledStorageChange}
               />
             );

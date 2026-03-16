@@ -32,6 +32,8 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { useServicesActions } from "../../hooks/useServicesActions";
 import { usePaymentContext } from "../../context/PaymentContext";
 
+import styles from "../../styles/index.module.scss";
+import { Text } from "@docspace/ui-kit/components";
 interface ButtonContainerProps {
   onClose: () => void;
   onBuy: () => void;
@@ -45,6 +47,7 @@ interface ButtonContainerProps {
   hasStorageSubscription?: boolean;
   isDowngradeStoragePlan?: boolean;
   isPaymentBlocked?: boolean;
+  formatWalletCurrency?: (amount?: number, fractionDigits?: number) => string;
 }
 
 const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
@@ -61,49 +64,67 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     isDowngradeStoragePlan,
     hasStorageSubscription,
     isPaymentBlocked,
+    storageExpiryDate,
+    totalPrice,
+    formatWalletCurrency
   } = props;
 
   const { t } = useServicesActions();
   const { isWaitingCalculation } = usePaymentContext();
 
   return (
-    <>
-      <Button
-        key="OkButton"
-        label={title}
-        size={ButtonSize.normal}
-        primary
-        scale
-        onClick={isExceedingStorageLimit ? onSendRequest : onBuy}
-        isLoading={isLoading || isWaitingCalculation}
-        isDisabled={
-          isPaymentBlocked
-            ? true
-            : !isExceedingStorageLimit && !isDowngradeStoragePlan
-              ? (!hasStorageSubscription && isNullAmount) ||
-                isPaymentBlockedByBalance ||
-                isCurrentStoragePlan
-              : false
-        }
-        testId="storage_plan_upgrade_ok_button"
-      />
-      <Button
-        key="CancelButton"
-        label={t("Common:CancelButton")}
-        size={ButtonSize.normal}
-        scale
-        onClick={onClose}
-        isDisabled={isLoading}
-        testId="storage_plan_upgrade_cancel_button"
-      />
-    </>
+    <div className={styles.buttonWrapper}>
+      {!isCurrentStoragePlan && !isNullAmount ? (
+        <Text>
+          {t("Services:NextMonthBillDate", {
+            currency: formatWalletCurrency!(totalPrice, 2),
+            date: storageExpiryDate,
+          })}
+        </Text>
+      ) : null}
+
+      <div className={styles.buttonContainer}>
+        <Button
+          key="OkButton"
+          label={title}
+          size={ButtonSize.normal}
+          primary
+          scale
+          onClick={isExceedingStorageLimit ? onSendRequest : onBuy}
+          isLoading={isLoading || isWaitingCalculation}
+          isDisabled={
+            isPaymentBlocked
+              ? true
+              : !isExceedingStorageLimit && !isDowngradeStoragePlan
+                ? (!hasStorageSubscription && isNullAmount) ||
+                  isPaymentBlockedByBalance ||
+                  isCurrentStoragePlan
+                : false
+          }
+          testId="storage_plan_upgrade_ok_button"
+        />
+        <Button
+          key="CancelButton"
+          label={t("Common:CancelButton")}
+          size={ButtonSize.normal}
+          scale
+          onClick={onClose}
+          isDisabled={isLoading}
+          testId="storage_plan_upgrade_cancel_button"
+        />
+      </div>
+    </div>
   );
 };
 
-export default inject(({ currentTariffStatusStore }: TStore) => {
-  const { hasStorageSubscription } = currentTariffStatusStore;
-
+export default inject(({ currentTariffStatusStore, paymentStore }: TStore) => {
+  const { hasStorageSubscription, storageExpiryDate } =
+    currentTariffStatusStore;
+ const { formatWalletCurrency,  } =
+      paymentStore;
   return {
     hasStorageSubscription,
+    storageExpiryDate,
+    formatWalletCurrency
   };
 })(observer(ButtonContainer));

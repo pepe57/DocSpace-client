@@ -58,9 +58,9 @@ const WalletContainer = (props: WalletContainerProps) => {
   if (hasScheduledStorageChange) return null;
 
   const isBalanceInsufficient =
+    !isCurrentStoragePlan &&
     isPaymentBlockedByBalance &&
     !isLoading &&
-    !isCurrentStoragePlan &&
     !isDowngradeStoragePlan &&
     !isExceedingStorageLimit;
 
@@ -69,7 +69,7 @@ const WalletContainer = (props: WalletContainerProps) => {
       <WalletInfo
         balance={formatWalletCurrency!()}
         isBalanceInsufficient={isBalanceInsufficient}
-        {...(!isWaitingCalculation && { onTopUp })}
+        {...(isBalanceInsufficient && !isWaitingCalculation && { onTopUp })}
       />
     </div>
   );
