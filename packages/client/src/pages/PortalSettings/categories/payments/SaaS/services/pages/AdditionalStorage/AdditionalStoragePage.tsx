@@ -56,6 +56,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import StoragePlanUpgrade from "../../sub-components/AdditionalStorage/StoragePlanUpgrade";
 import StoragePlanCancel from "../../sub-components/AdditionalStorage/StoragePlanCancel";
 import StorageWarning from "../../sub-components/AdditionalStorage/StorageWarning";
+import GracePeriodModal from "../../sub-components/AdditionalStorage/GracePeriodModal";
 import { useServicesActions } from "../../hooks/useServicesActions";
 
 type AdditionalStoragePageProps = {
@@ -82,6 +83,7 @@ type AdditionalStoragePageProps = {
     serviceName?: string,
   ) => Promise<void>;
   previousStoragePlanSize?: number;
+  isGracePeriod?: boolean;
 };
 
 const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
@@ -98,12 +100,31 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   fetchTransactionHistory,
   walletCodeCurrency,
   previousStoragePlanSize,
+  isGracePeriod,
 }) => {
   const { t } = useTranslation(["Payments", "Common", "Services"]);
   const contextMenuRef = useRef<ContextMenuRefType>(null);
   const [isStorageDialogVisible, setIsStorageDialogVisible] = useState(false);
   const [isCancelDialogVisible, setIsCancelDialogVisible] = useState(false);
   const [isCancelLoading, setIsCancelLoading] = useState(false);
+  const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
+    useState(false);
+
+  const openUpgradeDialog = () => {
+    if (isGracePeriod) {
+      setIsGracePeriodModalVisible(true);
+      return;
+    }
+    setIsStorageDialogVisible(true);
+  };
+
+  const openCancelDialog = () => {
+    if (isGracePeriod) {
+      setIsGracePeriodModalVisible(true);
+      return;
+    }
+    setIsCancelDialogVisible(true);
+  };
 
   const { isStorageCancellation } = useServicesActions();
 
@@ -121,8 +142,8 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
       });
 
   const handleToggleChange = () => {
-    if (isStorageEnabled) setIsCancelDialogVisible(true);
-    else setIsStorageDialogVisible(true);
+    if (isStorageEnabled) openCancelDialog();
+    else openUpgradeDialog();
   };
 
   const handleCancelChange = async () => {
@@ -144,6 +165,16 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
     }
   };
 
+  const onCloseUpgradeStorage = () => {
+    setIsStorageDialogVisible(false);
+  };
+  const onCloseCancelStorage = () => {
+    setIsCancelDialogVisible(false);
+  };
+
+  const onCloseGracePeriod = () => {
+    setIsGracePeriodModalVisible(false);
+  };
   const monthlyPrice = calculateTotalPrice(
     currentStoragePlanSize,
     storagePriceIncrement!,
@@ -155,13 +186,13 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
       key: "edit",
       label: t("Services:EditSubscription"),
       icon: PencilIcon,
-      onClick: () => setIsStorageDialogVisible(true),
+      onClick: openUpgradeDialog,
     },
     {
       key: "cancel",
       label: t("Services:CancelSubscription"),
       icon: RemoveSessionIcon,
-      onClick: () => setIsCancelDialogVisible(true),
+      onClick: openCancelDialog,
     },
   ];
 
@@ -258,7 +289,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
             }
             size={ButtonSize.small}
             primary
-            onClick={() => setIsStorageDialogVisible(true)}
+            onClick={openUpgradeDialog}
           />
         )}
       </div>
@@ -302,13 +333,19 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
       {isStorageDialogVisible ? (
         <StoragePlanUpgrade
           visible={isStorageDialogVisible}
-          onClose={() => setIsStorageDialogVisible(false)}
+          onClose={onCloseUpgradeStorage}
         />
       ) : null}
       {isCancelDialogVisible ? (
         <StoragePlanCancel
           visible={isCancelDialogVisible}
-          onClose={() => setIsCancelDialogVisible(false)}
+          onClose={onCloseCancelStorage}
+        />
+      ) : null}
+      {isGracePeriodModalVisible ? (
+        <GracePeriodModal
+          visible={isGracePeriodModalVisible}
+          onClose={onCloseGracePeriod}
         />
       ) : null}
     </div>
@@ -332,6 +369,7 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     fetchPortalTariff,
     hasScheduledStorageChange,
     previousStoragePlanSize,
+    isGracePeriod,
   } = currentTariffStatusStore;
 
   return {
@@ -348,5 +386,6 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     fetchTransactionHistory,
     walletCodeCurrency,
     previousStoragePlanSize,
+    isGracePeriod,
   };
 })(observer(AdditionalStoragePage));

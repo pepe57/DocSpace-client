@@ -69,6 +69,7 @@ const Services = (props: InjectedProps) => {
     wasFirstAiServiceTopUp,
     logoText,
     formatAiServiceCurrency,
+    currentStoragePlanSize
   } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [dialogVisibility, setDialogVisibility] = useState({
@@ -209,9 +210,10 @@ const Services = (props: InjectedProps) => {
   const onClick = (id: string) => {
     setConfirmActionType(id);
 
-    // navigate("/portal-settings/services/disk-storage");
-
-    // return;
+    if (id === TOTAL_SIZE && currentStoragePlanSize) {
+      navigate("/portal-settings/services/disk-storage");
+      return;
+    }
 
     if (id === TOTAL_SIZE && isGracePeriod) {
       setIsGracePeriodModalVisible(true);
@@ -245,6 +247,10 @@ const Services = (props: InjectedProps) => {
     setIsCurrentConfirmState(currentEnabled);
 
     if (id === TOTAL_SIZE) {
+      if (isGracePeriod) {
+        setIsGracePeriodModalVisible(true);
+        return;
+      }
       if (currentEnabled) {
         setIsStorageCancellation(true);
         return;
@@ -458,7 +464,8 @@ const mapStoreToProps = ({
     wasFirstAiServiceTopUp,
     formatAiServiceCurrency,
   } = servicesStore;
-  const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
+  const { isGracePeriod, previousStoragePlanSize, currentStoragePlanSize } =
+    currentTariffStatusStore;
   const { isFreeTariff } = currentQuotaStore;
   const {
     isShowStorageTariffDeactivatedModal,
@@ -474,6 +481,7 @@ const mapStoreToProps = ({
     isShowStorageTariffDeactivatedModal,
     isGracePeriod,
     previousStoragePlanSize,
+    currentStoragePlanSize,
     changeServiceState,
     isCardLinkedToPortal,
     setConfirmActionType,
