@@ -1054,5 +1054,9 @@
   "YourTurn": "Ваш ред",
   "Upload": "Качи",
   "Open": "Отвори",
-  "Quantity": "Количество"
+  "Quantity": "Количество",
+  "YourTurn": "Ваш ред",
+  "DeleteAIAgentChatTitle": "Изтриване на чата?",
+  "DeleteAIChatDescription": "Ще изтриете <strong>{{chatName}}<1>.</1></strong>\n Всички съобщения и история на чата ще бъдат трайно премахнати и не могат да бъдат възстановени.",
+  "DeleteForeverButton": "Изтрий завинаги"
 }

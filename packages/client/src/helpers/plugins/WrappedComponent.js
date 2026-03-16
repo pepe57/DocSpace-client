@@ -38,6 +38,7 @@ import { Button } from "@docspace/ui-kit/components/button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import { PluginComponents } from "./enums";
 import { borderToStyle, messageActions } from "./utils";
@@ -474,7 +475,6 @@ export const PluginComponent = inject(({ pluginStore }) => {
               : undefined;
 
             return (
-              <>
                 <IconButton
                   {...rest}
                   iconName={icon}
@@ -482,7 +482,43 @@ export const PluginComponent = inject(({ pluginStore }) => {
                   iconClickName={iconClick}
                   onClick={onClickAction}
                 />
-              </>
+            );
+          }
+
+          case PluginComponents.link: {
+            const onClickAction = async () => {
+              if (!elementProps.onClick) return;
+
+              const message = await elementProps.onClick();
+
+              messageActions({
+                message,
+                setElementProps,
+                pluginName,
+                setSettingsPluginDialogVisible,
+                setCurrentSettingsDialogPlugin,
+                updatePluginStatus,
+                updatePropsContext,
+                setPluginDialogVisible,
+                setPluginDialogProps,
+                updateContextMenuItems,
+                updateInfoPanelItems,
+                updateMainButtonItems,
+                updateProfileMenuItems,
+                updateEventListenerItems,
+                updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
+              });
+            };
+
+            return (
+                <Link 
+                  {...elementProps} 
+                  onClick={onClickAction}
+                >
+                  {elementProps.text}
+                </Link>
             );
           }
 

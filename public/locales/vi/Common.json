@@ -1054,5 +1054,9 @@
   "YourTurn": "Phiên của bạn",
   "Upload": "Tải lên",
   "Open": "Mở",
-  "Quantity": "Số lượng"
+  "Quantity": "Số lượng",
+  "YourTurn": "Phiên của bạn",
+  "DeleteAIAgentChatTitle": "Xóa cuộc trò chuyện?",
+  "DeleteAIChatDescription": "Bạn sắp xóa <strong>{{chatName}}<1>.</1></strong>\n Tất cả tin nhắn và lịch sử trò chuyện sẽ bị xóa vĩnh viễn và không thể khôi phục.",
+  "DeleteForeverButton": "Xóa vĩnh viễn"
 }

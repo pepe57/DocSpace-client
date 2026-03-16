@@ -71,10 +71,7 @@ const skipForbiddenKeys = [
 beforeAll(() => {
 	console.log(`Base path = ${BASE_DIR}`);
 
-	workspaces = [
-		...getWorkSpaces(),
-		path.resolve(BASE_DIR, path.join("libs", "ui-kit")),
-	];
+	workspaces = getWorkSpaces();
 
 	const excludeDirs = [
 		".nx",
@@ -93,6 +90,7 @@ beforeAll(() => {
 		"node_modules",
 		".meta",
 		"scripts",
+    "storybook-helpers",
 	];
 
 	const translations = workspaces.flatMap((wsPath) => {

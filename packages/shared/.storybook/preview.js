@@ -1,6 +1,6 @@
 import * as React from "react";
-import { MINIMAL_VIEWPORTS } from "@storybook/addon-viewport";
-import { useDarkMode } from "storybook-dark-mode";
+import { MINIMAL_VIEWPORTS } from "storybook/viewport";
+import { useDarkMode } from "@vueless/storybook-dark-mode";
 import { I18nextProvider } from "react-i18next";
 import { initialize, mswLoader } from "msw-storybook-addon";
 import { Base, Dark } from "@docspace/ui-kit/providers/theme";
@@ -14,6 +14,7 @@ import darkTheme from "./darkTheme";
 import "./styles/StorybookGlobalStyles.scss";
 import i18n from "./i18n";
 import enCommon from "../../../public/locales/en/Common.json";
+import ApiProvider from "@docspace/ui-kit/providers/api/ApiProvider";
 
 document.cookie = "asc_language=en";
 
@@ -41,14 +42,14 @@ initialize({
 const preview = {
   globalTypes,
   parameters: {
-    backgrounds: { disable: true },
+    backgrounds: { disabled: true },
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: { expanded: true },
     docs: {
       container: DocsContainer,
     },
     viewport: {
-      viewports: MINIMAL_VIEWPORTS,
+      options: MINIMAL_VIEWPORTS,
     },
     previewTabs: {
       "storybook/docs/panel": {
@@ -71,9 +72,11 @@ const preview = {
       const interfaceDirection = context.globals.direction;
 
       return (
-        <ThemeWrapper theme={{ ...theme, interfaceDirection }}>
-          <Story />
-        </ThemeWrapper>
+        <ApiProvider url={window.location.origin} apiKey="">
+          <ThemeWrapper theme={{ ...theme, interfaceDirection }}>
+            <Story />
+          </ThemeWrapper>
+        </ApiProvider>
       );
     },
   ],

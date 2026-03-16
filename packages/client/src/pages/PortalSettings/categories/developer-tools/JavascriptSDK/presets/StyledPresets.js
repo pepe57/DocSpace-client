@@ -377,6 +377,14 @@ export const SelectedItemsContainer = styled.div`
   flex-wrap: wrap;
 `;
 
+export const PreviewColumn = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+`;
+
 export const CodeWrapper = styled.div`
   display: flex;
   flex-direction: column;

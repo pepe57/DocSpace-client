@@ -1054,5 +1054,9 @@
   "YourTurn": "Ste na rade",
   "Upload": "Nahrať",
   "Open": "Otvoriť",
-  "Quantity": "Množstvo"
+  "Quantity": "Množstvo",
+  "YourTurn": "Ste na rade",
+  "DeleteAIAgentChatTitle": "Zmazať chat?",
+  "DeleteAIChatDescription": "Mazanie <strong>{{chatName}}<1>.</1></strong>\n Všetky správy a história chatu budú trvale odstránené a nebude možné ich obnoviť.",
+  "DeleteForeverButton": "Odstrániť navždy"
 }

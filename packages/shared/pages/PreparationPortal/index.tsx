@@ -29,7 +29,7 @@ import classNames from "classnames";
 
 import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
 import { Text } from "@docspace/ui-kit/components/text";
-import SocketHelper, { SocketEvents } from "../../utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
 import { getRestoreProgress } from "../../api/portal";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
 import { PreparationPortalProgress } from "@docspace/ui-kit/components/progress-bar";

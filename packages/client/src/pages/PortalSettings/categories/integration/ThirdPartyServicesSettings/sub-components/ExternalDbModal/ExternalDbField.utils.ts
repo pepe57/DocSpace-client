@@ -62,3 +62,16 @@ export const getFieldValidationRules = (
 
   return rules;
 };
+
+export const isFieldVisible = (
+  field: ConsumerProp,
+  formValues: ExternalDbFormData,
+): boolean => {
+  if (!field.dependsOn || !field.dependsOnValue) {
+    return true;
+  }
+  return (
+    formValues[field.dependsOn as keyof ExternalDbFormData] ===
+    field.dependsOnValue
+  );
+};

@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
-import SocketHelper, { SocketCommands } from "../../../../../utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   ModalDialog,
   ModalDialogType,

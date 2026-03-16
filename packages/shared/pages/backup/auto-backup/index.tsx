@@ -44,7 +44,7 @@ import StatusMessage from "@docspace/ui-kit/components/status-message";
 import SocketHelper, {
   SocketEvents,
   type TSocketListener,
-} from "../../../utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 import { getBackupProgressInfo } from "../../../utils/common";
 import { useStateCallback } from "../../../hooks/useStateCallback";
 import type { Nullable, Option } from "../../../types";

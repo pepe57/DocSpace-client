@@ -1054,5 +1054,9 @@
   "YourTurn": "Sıra sizde",
   "Upload": "Yükle",
   "Open": "Aç",
-  "Quantity": "Miktar"
+  "Quantity": "Miktar",
+  "YourTurn": "Sıra sizde",
+  "DeleteAIAgentChatTitle": "Sohbeti sil?",
+  "DeleteAIChatDescription": "<strong>{{chatName}}<1>.</1></strong> silmek üzeresiniz.\nTüm mesajlar ve sohbet geçmişi kalıcı olarak silinecek ve geri yüklenemeyecektir.",
+  "DeleteForeverButton": "Kalıcı olarak sil"
 }

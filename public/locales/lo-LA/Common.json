@@ -1054,5 +1054,9 @@
   "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
   "Upload": "ອັບໂຫລດ",
   "Open": "ເປີດ",
-  "Quantity": "ປະລິमाण"
+  "Quantity": "ປະລິमाण",
+  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
+  "DeleteAIAgentChatTitle": "ລຶບການສົນທະນາບໍ?",
+  "DeleteAIChatDescription": "ທ່ານກຳລັງຈະລຶບ <strong>{{chatName}}<1>.</1></strong>\nຂໍ້ຄວາມ ແລະ ປະຫວັດການສົນທະນາທັງໝົດຈະຖືກລຶບອອກຢ່າງຖາວອນ ແລະ ບໍ່ສາມາດກູ້ຄືນໄດ້.",
+  "DeleteForeverButton": "ລືບອອກເລີຍ"
 }

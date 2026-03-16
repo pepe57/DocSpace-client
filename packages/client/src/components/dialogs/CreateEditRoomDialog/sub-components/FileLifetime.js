@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { capitalize } from "lodash";
+import capitalize from "lodash/capitalize";
 import { Text } from "@docspace/ui-kit/components/text";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";

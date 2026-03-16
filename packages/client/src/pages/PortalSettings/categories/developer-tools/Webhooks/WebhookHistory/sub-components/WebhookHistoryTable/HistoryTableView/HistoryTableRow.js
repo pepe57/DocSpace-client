@@ -40,7 +40,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
-import { getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 

@@ -36,7 +36,7 @@ import { toast as toastify } from "react-toastify";
 import SocketHelper, {
   SocketEvents,
   SocketCommands,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 import { Portal } from "@docspace/ui-kit/components/portal";
 import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";

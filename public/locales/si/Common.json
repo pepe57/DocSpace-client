@@ -1054,5 +1054,9 @@
   "YourTurn": "ඔබේ වාරය.",
   "Upload": "උඩුගත",
   "Open": "අරින්න",
-  "Quantity": "ප්‍රමාණය"
+  "Quantity": "ප්‍රමාණය",
+  "YourTurn": "ඔබේ වාරය.",
+  "DeleteAIAgentChatTitle": "කතාබහ මකන්නද?",
+  "DeleteAIChatDescription": "ඔබ <strong>{{chatName}}<1>.</1></strong> මකා දැමීමට ආසන්නයි සියලුම පණිවිඩ සහ කතාබස් ඉතිහාසය ස්ථිරවම ඉවත් කරනු ලබන අතර ප්‍රතිසාධනය කළ නොහැක.",
+  "DeleteForeverButton": "සදහටම මකන්න"
 }
