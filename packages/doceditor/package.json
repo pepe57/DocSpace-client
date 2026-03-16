@@ -20,8 +20,8 @@
     "test:e2e:ui": "pnpm run test:build && pnpm exec playwright test --ui",
     "lint": "biome lint ./src",
     "lint:fix": "biome lint --write ./src",
-    "format": "biome check ./src",
-    "format:fix": "biome check --write ./src",
+    "format": "prettier --check ./src",
+    "format:fix": "prettier --write ./src",
     "tsc": "tsc",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx cp -r .next/standalone/* ../../../publish/web/editor && shx --silent mkdir -p ../../../publish/web/editor/packages/doceditor/.next/static && shx cp -r .next/static/* ../../../publish/web/editor/packages/doceditor/.next/static && shx cp -f server.prod.js ../../../publish/web/editor/server.js"
@@ -51,6 +51,7 @@
   "devDependencies": {
     "@babel/core": "7.25.8",
     "@biomejs/biome": "2.3.14",
+    "prettier": "^3.8.1",
     "@next/bundle-analyzer": "16.1.6",
     "@playwright/test": "1.58.1",
     "@svgr/webpack": "8.1.0",

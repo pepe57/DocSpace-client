@@ -31,6 +31,7 @@ import { FolderType } from "@docspace/shared/enums";
 
 const FOLDER_AGENTS_STORAGE_KEY = "forms_folder_agents";
 const AI_ENABLED_STORAGE_KEY = "forms_ai_enabled";
+const USER_DISABLED_STORAGE_KEY = "forms_ai_user_disabled";
 
 /** Simple non-crypto hash to turn a long token into a short key. */
 export const tokenToHash = (token: string): string => {
@@ -102,6 +103,30 @@ export const loadAiEnabled = (
   userHash?: string,
 ): boolean => {
   return localStorage.getItem(aiEnabledKey(roomId, userHash)) === "true";
+};
+
+// --- User explicitly disabled persistence ---
+
+const userDisabledKey = (roomId: string | number, userHash?: string) =>
+  userHash
+    ? `${USER_DISABLED_STORAGE_KEY}_${userHash}_${roomId}`
+    : `${USER_DISABLED_STORAGE_KEY}_${roomId}`;
+
+export const saveUserExplicitlyDisabled = (
+  roomId: string | number,
+  disabled: boolean,
+  userHash?: string,
+) => {
+  localStorage.setItem(userDisabledKey(roomId, userHash), String(disabled));
+};
+
+export const loadUserExplicitlyDisabled = (
+  roomId: string | number,
+  userHash?: string,
+): boolean => {
+  return (
+    localStorage.getItem(userDisabledKey(roomId, userHash)) === "true"
+  );
 };
 
 // --- Knowledge base helpers ---

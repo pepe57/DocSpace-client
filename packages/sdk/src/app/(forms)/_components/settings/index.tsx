@@ -36,6 +36,7 @@ import { getRoomMembers } from "@docspace/shared/api/rooms";
 import type { RoomMember } from "@docspace/shared/api/rooms/types";
 
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 
 import AIAgentForm from "./category/AIAgentForm";
 import BillingForm from "./category/BillingForm";
@@ -45,6 +46,7 @@ import ContactsForm from "./category/ContactsForm";
 const Settings = () => {
   const { t } = useTranslation(["Common"]);
   const { roomId } = useFormsSettingsStore();
+  const aiStore = useFormsAiAgentStore();
   const [selectedTabId, setSelectedTabId] = React.useState("payments");
   const [members, setMembers] = React.useState<RoomMember[]>([]);
 
@@ -53,8 +55,13 @@ const Settings = () => {
 
     getRoomMembers(roomId, {}).then((res) => {
       setMembers(res.items);
+
+      // Sync agent members when access list changes
+      if (aiStore.aiAgentEnabled) {
+        aiStore.syncAllAgentMembers();
+      }
     });
-  }, [roomId]);
+  }, [roomId, aiStore]);
 
   React.useEffect(() => {
     if (!roomId) return;

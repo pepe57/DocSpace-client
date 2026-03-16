@@ -59,6 +59,7 @@ type FormsPageProps = {
   initialFolderData?: TGetFolder;
   user?: TUser;
   defaultProvider?: TDefaultProvider;
+  socketUrl: string;
 };
 
 function FormsPage({
@@ -69,6 +70,7 @@ function FormsPage({
   initialFolderData,
   user,
   defaultProvider,
+  socketUrl,
 }: FormsPageProps) {
   useSDKConfig();
 
@@ -85,9 +87,10 @@ function FormsPage({
     formsSettingsStore.setConfig({
       roomId,
       requestToken,
+      socketUrl,
     });
     formsSettingsStore.setFilesSettings(filesSettings);
-  }, [roomId, requestToken, filesSettings, formsSettingsStore]);
+  }, [roomId, requestToken, socketUrl, filesSettings, formsSettingsStore]);
 
   React.useEffect(() => {
     filesSettingsStore.setFilesSettings(filesSettings);
@@ -138,6 +141,10 @@ function FormsPage({
         formsSettingsStore.setFolderSecurity(
           initialFolderData.current.security,
         );
+      }
+
+      if (initialFolderData.current?.access !== undefined) {
+        formsSettingsStore.setUserAccess(initialFolderData.current.access);
       }
 
       const current = initialFolderData.current as Record<string, unknown>;

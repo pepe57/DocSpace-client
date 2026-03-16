@@ -30,6 +30,9 @@ import { useCallback } from "react";
 
 import {
   deleteFile,
+  deleteFolder as deleteFolderApi,
+  downloadFiles,
+  getProgress,
   formRoleMapping,
   manageFormFilling,
 } from "@docspace/shared/api/files";
@@ -91,6 +94,48 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
     [formsListStore, t],
   );
 
+  const downloadFolder = useCallback(
+    async (folderId: number) => {
+      try {
+        const ops = await downloadFiles([], [folderId], "");
+        const opId = ops[0]?.id;
+        if (!opId) return;
+
+        const poll = async (): Promise<string | null> => {
+          for (let i = 0; i < 60; i++) {
+            const progress = await getProgress(opId);
+            const op = progress[0];
+            if (op?.error) throw new Error(op.error);
+            if (op?.finished && op?.url) return op.url;
+            await new Promise((r) => setTimeout(r, 1000));
+          }
+          return null;
+        };
+
+        const url = await poll();
+        if (url) window.open(url, "_blank");
+      } catch {
+        toastr.error(t("Common:Error"));
+      }
+    },
+    [t],
+  );
+
+  const deleteFolderFromList = useCallback(
+    async (folderId: number) => {
+      try {
+        await deleteFolderApi(folderId, false, true);
+        const newFolders = formsListStore.folders.filter(
+          (f) => f.id !== folderId,
+        );
+        formsListStore.setFolders(newFolders);
+      } catch {
+        toastr.error(t("Common:Error"));
+      }
+    },
+    [formsListStore, t],
+  );
+
   const startFilling = useCallback(
     async (file: TFile) => {
       try {
@@ -118,7 +163,9 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
   return {
     openForm,
     downloadFile,
+    downloadFolder,
     deleteFromList,
+    deleteFolderFromList,
     startFilling,
     resetFilling,
   };

@@ -24,54 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { ConsumerProp, ExternalDbFormData } from "./ExternalDbModal.types";
+"use client";
 
-export const filterRelevantFields = (
-  formData: ExternalDbFormData,
-  visibleFields: ConsumerProp[],
-): ExternalDbFormData => {
-  const filtered: ExternalDbFormData = {};
+import { useEffect, useRef } from "react";
 
-  visibleFields.forEach((field) => {
-    const value = formData[field.name as keyof ExternalDbFormData];
+import SocketHelper, {
+  SocketCommands,
+} from "@docspace/ui-kit/utils/socket";
 
-    if (value !== undefined && value !== null && value !== "") {
-      filtered[field.name] = value;
-    } else if (field.type === "toggle") {
-      filtered[field.name] = value ?? false;
-    }
-  });
+export default function useFormsSocket(
+  socketUrl: string,
+  folderIds: (string | number)[],
+) {
+  const isInit = useRef(false);
 
-  return filtered;
-};
+  useEffect(() => {
+    if (!socketUrl || isInit.current) return;
 
-export const isFieldRequired = (field: ConsumerProp): boolean => {
-  if (field.type === "toggle") {
-    return false;
-  }
-  return true;
-};
+    isInit.current = true;
+    SocketHelper?.connect(socketUrl, "");
+  }, [socketUrl]);
 
-export const getFieldValidationRules = (
-  field: ConsumerProp,
-  t: (key: string) => string,
-) => {
-  const rules: Record<string, unknown> = {
-    required: isFieldRequired(field) ? t("Common:RequiredField") : false,
-  };
+  // Stable key for deps — avoids re-running on same set of IDs
+  const idsKey = folderIds.filter(Boolean).join(",");
 
-  return rules;
-};
+  useEffect(() => {
+    if (!socketUrl || !idsKey) return;
 
-export const isFieldVisible = (
-  field: ConsumerProp,
-  formValues: ExternalDbFormData,
-): boolean => {
-  if (!field.dependsOn || !field.dependsOnValue) {
-    return true;
-  }
-  return (
-    formValues[field.dependsOn as keyof ExternalDbFormData] ===
-    field.dependsOnValue
-  );
-};
+    const roomParts = idsKey.split(",").map((id) => `DIR-${id}`);
+    SocketHelper?.emit(SocketCommands.Subscribe, { roomParts });
+
+    return () => {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, { roomParts });
+    };
+  }, [socketUrl, idsKey]);
+}

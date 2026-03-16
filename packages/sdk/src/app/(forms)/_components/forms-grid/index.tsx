@@ -41,6 +41,7 @@ import { FormsSection } from "@/types/forms";
 
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
+import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
 import FormsEmpty from "../forms-empty";
 import FormsTile from "./FormsTile";
 import SubFolderTile from "./SubFolderTile";
@@ -65,6 +66,7 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
   const { convertFileToItem } = useItemList({
     getIcon,
   });
+  const { getFolderContextMenuModel } = useFormsContextMenu();
 
   const isCompletedRoot =
     activeSection === FormsSection.CompletedForms && !completedFolder;
@@ -98,6 +100,7 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
             folder={folder}
             getIcon={getIcon}
             onOpenFolder={onOpenFolder}
+            contextOptions={getFolderContextMenuModel(folder)}
           />
         ))}
       </div>
