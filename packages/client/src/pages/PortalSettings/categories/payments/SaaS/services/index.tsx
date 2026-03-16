@@ -211,7 +211,7 @@ const Services = (props: InjectedProps) => {
     setConfirmActionType(id);
 
     if (id === TOTAL_SIZE && currentStoragePlanSize) {
-      navigate("/portal-settings/services/disk-storage");
+      navigate("/portal-settings/payments/services/disk-storage");
       return;
     }
 
@@ -221,12 +221,12 @@ const Services = (props: InjectedProps) => {
     }
 
     if (id === AI_ENUM && wasFirstAiServiceTopUp) {
-      navigate("/portal-settings/services/ai-services");
+      navigate("/portal-settings/payments/services/ai-services");
       return;
     }
 
     if (id === BACKUP_SERVICE) {
-      navigate("/portal-settings/services/backup");
+      navigate("/portal-settings/payments/services/backup");
       return;
     }
 

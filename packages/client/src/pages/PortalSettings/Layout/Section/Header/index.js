@@ -227,7 +227,9 @@ const SectionHeaderContent = (props) => {
       "disk-storage": "Payments:AdditionalDiskStorage",
     };
 
-    const serviceSubPageHeader = serviceSubPageHeaders[arrayOfParams[1]];
+    let number = 1;
+    if ( window.location.href.indexOf("disk-storage")) number=2
+    const serviceSubPageHeader = serviceSubPageHeaders[arrayOfParams[number]];
 
     if (serviceSubPageHeader) {
       const header = serviceSubPageHeader;
@@ -282,6 +284,16 @@ const SectionHeaderContent = (props) => {
   ]);
 
   const onBackToParent = () => {
+    const isServicesSubPage =
+      location.pathname.includes("/services/disk-storage") ||
+      location.pathname.includes("/services/backup") ||
+      location.pathname.includes("/services/ai-services");
+
+    if (isServicesSubPage && location.key === "default") {
+      navigate("/portal-settings/payments/services");
+      return;
+    }
+
     navigate(-1);
   };
 

@@ -249,10 +249,19 @@ const View = ({
         const isSameSectionClick =
           previousPath && !isMainSectionChanged && currentPath === previousPath;
 
+        const view = getViewFromPathname(currentPath);
+
+        // Handles sub-page navigation within "payments" (e.g. /payments/services → /payments/services/disk-storage).
+        // TODO: consider making this generic — check `view !== currentView` for all sections.
+        const isPaymentsSubPageChange =
+          !isMainSectionChanged &&
+          previousPath?.includes("payments") &&
+          view !== currentView;
+
         prevPathRef.current = currentPath;
 
-        // Only proceed with data loading if it's a main section change
-        if (!isMainSectionChanged && !isSameSectionClick) {
+        // Only proceed with data loading if it's a main section change or a view change within payments sub-pages
+        if (!isMainSectionChanged && !isSameSectionClick && !isPaymentsSubPageChange) {
           if (requestId === activeRequestIdRef.current) {
             setIsLoading(false);
           }
@@ -262,7 +271,6 @@ const View = ({
         clearAbortControllerArrRef.current();
 
         setIsLoading(true);
-        const view = getViewFromPathname(currentPath);
 
         switch (view) {
           case "customization":
@@ -337,7 +345,6 @@ const View = ({
     getView();
   }, [location]);
 
-  console.log("currentView", currentView);
   return (
     <LoaderWrapper isLoading={isLoading}>
       {currentView === "customization" ? <Customization /> : null}
