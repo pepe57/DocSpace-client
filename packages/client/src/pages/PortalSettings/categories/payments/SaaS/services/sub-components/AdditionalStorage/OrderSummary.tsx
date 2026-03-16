@@ -65,6 +65,7 @@ type OrderSummaryProps = {
   reccomendedAmount?: number;
   hasMinError?: boolean;
   language?: string;
+  hasStorageSubscription?:boolean
 };
 
 const OrderSummary: React.FC<OrderSummaryProps> = ({
@@ -83,6 +84,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   reccomendedAmount,
   hasMinError,
   language = "en",
+  hasStorageSubscription
 }) => {
   const { t } = useTranslation(["Services", "Payments", "Common"]);
   const { isRTL } = useInterfaceDirection();
@@ -98,8 +100,10 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const controllerRef = useRef<AbortController | null>(null);
 
+    const isNewSubscription = !hasStorageSubscription;
+
   useEffect(() => {
-    if (!isUpgradeStoragePlan) return;
+    if (isNewSubscription) return;
 
     setIsPriceLoading(true);
     setIsWaitingCalculation(true);
@@ -140,7 +144,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   }, []);
 
   const isExceedingStorageLimit = isExceedingPlanLimit(amount);
-  const isNewSubscription = !currentStoragePlanSize;
+
 
   const tooltipText = () => (
     <>
@@ -294,13 +298,12 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                 ) : (
                   <Text fontWeight="600" fontSize="14px">
                     {formatWalletCurrency!(
-                      isNewSubscription && !amount
+                      !amount
                         ? 0
-                        : isDowngradeStoragePlan
+                        : isNewSubscription ? totalPrice : isDowngradeStoragePlan
                           ? 0
-                          : isUpgradeStoragePlan
-                            ? partialUpgradeFee!
-                            : totalPrice,
+                          :partialUpgradeFee!,
+                
                       2,
                     )}
                   </Text>
@@ -348,6 +351,7 @@ export default inject(
       currentStoragePlanSize,
       storageExpiryDate,
       daysUntilStorageExpiry,
+      hasStorageSubscription
     } = currentTariffStatusStore;
     const { setPartialUpgradeFee, partialUpgradeFee } = servicesStore;
 
@@ -360,7 +364,7 @@ export default inject(
       daysUntilStorageExpiry,
       setPartialUpgradeFee,
       partialUpgradeFee,
-      language,
+      language,hasStorageSubscription
     };
   },
 )(observer(OrderSummary));

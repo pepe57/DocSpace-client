@@ -159,7 +159,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const isWaitingRef = useRef(false);
 
   const reccomendedAmount = isPaymentBlockedByBalance
-    ? isUpgradeStoragePlan
+    ? hasStorageSubscription && isUpgradeStoragePlan 
       ? Math.ceil(partialUpgradeFee! - walletBalance)
       : Math.ceil(totalPrice - walletBalance)
     : 0;
