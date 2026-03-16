@@ -33,8 +33,7 @@
 }
 
 .sectionTitle {
-  color: #333;
-  line-height: 22px;
+  margin-top:16px;
 }
 
 .summaryCard {
@@ -85,4 +84,8 @@
   color: #a3a9ae;
     margin-right: 0;
     margin-left: auto;
+
+     &.warningColor {
+    color: var(--warning-color);
+  }
 }

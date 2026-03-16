@@ -88,6 +88,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   hasScheduledStorageChange,
   fetchTransactionHistory,
   walletCodeCurrency,
+  previousStoragePlanSize,
 }) => {
   const { t } = useTranslation(["Payments", "Common", "Services"]);
   const contextMenuRef = useRef<ContextMenuRefType>(null);
@@ -188,9 +189,11 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
       <div className={styles.subscriptionCard}>
         <div className={styles.subscriptionHeader}>
           <Text fontWeight={700} fontSize="14px">
-            {t("Payments:CurrentSubscription")}
+            {previousStoragePlanSize
+              ? t("Services:NoActiveSubscription")
+              : t("Payments:CurrentSubscription")}
           </Text>
-          {isScheduled ? null : (
+          {isScheduled || previousStoragePlanSize ? null : (
             <>
               <div
                 className={styles.settingsIcon}
@@ -203,34 +206,47 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
           )}
         </div>
 
-        <div className={styles.priceContainer}>
-          <BalanceAmount
-            amount={monthlyPrice}
-            currency={walletCodeCurrency}
-            showRefresh={false}
-            withoutMargin
-            mainFontSize="28px"
-            fractionFontSize="20px"
-          />
-          <Text fontWeight={700} fontSize="20px">
-            <Trans
-              t={t}
-              ns="Payments"
-              i18nKey="SizePerMonth"
-              values={{
-                size: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
-              }}
-              components={{
-                1: <Text as="span" fontSize="20px" className={styles.sizeText} fontWeight={700}/>,
-              }}
+        {currentStoragePlanSize ? (
+          <div className={styles.priceContainer}>
+            <BalanceAmount
+              amount={monthlyPrice}
+              currency={walletCodeCurrency}
+              showRefresh={false}
+              withoutMargin
+              mainFontSize="28px"
+              fractionFontSize="20px"
             />
-          </Text>
-        </div>
+            <Text fontWeight={700} fontSize="20px">
+              <Trans
+                t={t}
+                ns="Payments"
+                i18nKey="SizePerMonth"
+                values={{
+                  size: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+                }}
+                components={{
+                  1: (
+                    <Text
+                      as="span"
+                      fontSize="20px"
+                      className={styles.sizeText}
+                      fontWeight={700}
+                    />
+                  ),
+                }}
+              />
+            </Text>
+          </div>
+        ) : null}
 
         {isScheduled ? null : (
           <Button
             className={styles.increaseButton}
-            label={t("Payments:IncreaseStorage")}
+            label={
+              previousStoragePlanSize
+                ? t("Services:BuyStorage")
+                : t("Payments:IncreaseStorage")
+            }
             size={ButtonSize.small}
             primary
             onClick={() => setIsStorageDialogVisible(true)}
@@ -238,35 +254,37 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
         )}
       </div>
 
-      <Text className={styles.renewalText}>
-        {isDowngrade ? (
-          <Trans
-            t={t}
-            ns="Payments"
-            i18nKey={"SubscriptionAutoRenewedWithUpdate"}
-            values={{
-              finalDate: storageExpiryDate,
-              price: formatWalletCurrency!(monthlyPrice, 2),
-              amount: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
-            }}
-            components={{
-              1: <Text fontWeight="600" as="span" />,
-            }}
-          />
-        ) : (
-          <Trans
-            t={t}
-            ns="Payments"
-            i18nKey={keyProp.tKey}
-            values={{
-              finalDate: storageExpiryDate,
-            }}
-            components={{
-              1: <Text fontWeight="600" as="span" />,
-            }}
-          />
-        )}
-      </Text>
+      {currentStoragePlanSize ? (
+        <Text className={styles.renewalText}>
+          {isDowngrade ? (
+            <Trans
+              t={t}
+              ns="Payments"
+              i18nKey={"SubscriptionAutoRenewedWithUpdate"}
+              values={{
+                finalDate: storageExpiryDate,
+                price: formatWalletCurrency!(monthlyPrice, 2),
+                amount: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+              }}
+              components={{
+                1: <Text fontWeight="600" as="span" />,
+              }}
+            />
+          ) : (
+            <Trans
+              t={t}
+              ns="Payments"
+              i18nKey={keyProp.tKey}
+              values={{
+                finalDate: storageExpiryDate,
+              }}
+              components={{
+                1: <Text fontWeight="600" as="span" />,
+              }}
+            />
+          )}
+        </Text>
+      ) : null}
 
       <div className={styles.transactionSection}>
         <TransactionHistory serviceName={DISK_STORAGE} />
@@ -304,6 +322,7 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     storageExpiryDate,
     fetchPortalTariff,
     hasScheduledStorageChange,
+    previousStoragePlanSize,
   } = currentTariffStatusStore;
 
   return {
@@ -319,5 +338,6 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     hasScheduledStorageChange,
     fetchTransactionHistory,
     walletCodeCurrency,
+    previousStoragePlanSize,
   };
 })(observer(AdditionalStoragePage));

@@ -40,6 +40,7 @@ import { usePaymentContext } from "../../context/PaymentContext";
 
 import styles from "../../styles/OrderSummary.module.scss";
 import { calculateDifference } from "../../hooks/resourceUtils";
+import classNames from "classnames";
 
 const getDirectionalText = (isRTL: boolean) => {
   return isRTL ? `>1` : `<1`;
@@ -58,6 +59,7 @@ type OrderSummaryProps = {
   setPartialUpgradeFee?: (value: number) => void;
   partialUpgradeFee?: number;
   totalPrice?: number;
+  reccomendedAmount?: number;
 };
 
 const OrderSummary: React.FC<OrderSummaryProps> = ({
@@ -73,6 +75,8 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   setPartialUpgradeFee,
   partialUpgradeFee,
   isDowngradeStoragePlan,
+  reccomendedAmount,
+  hasMinError,
 }) => {
   const { t } = useTranslation(["Services", "Payments", "Common"]);
   const { isRTL } = useInterfaceDirection();
@@ -130,14 +134,18 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   }, []);
 
   const isExceedingStorageLimit = isExceedingPlanLimit(amount);
+  const isNewSubscription = !currentStoragePlanSize;
 
   const additionalStorage = calculateDifference(
     amount,
     currentStoragePlanSize!,
   );
-  const remainingBalance = walletBalance - partialUpgradeFee!;
+  const remainingBalance = partialUpgradeFee
+    ? walletBalance - partialUpgradeFee
+    : walletBalance - totalPrice;
   const daysDisplay = daysUntilStorageExpiry || getDirectionalText(isRTL);
 
+  console.log("reccomendedAmount", reccomendedAmount);
   return (
     <div className={styles.orderSummaryWrapper}>
       <Text fontWeight="700" fontSize="16px" className={styles.sectionTitle}>
@@ -145,19 +153,25 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
       </Text>
       <div className={styles.summaryCard}>
         <div className={styles.summaryContent}>
-          <div className={styles.summaryRow}>
-            <Text fontSize="14px" className={styles.rowLabel}>
-              {t("StorageUpgrade")}
-            </Text>
-            <Text fontWeight="600" fontSize="14px" className={styles.rowValue}>
-              {t("Payments:StorageUpgradeMessage", {
-                fromSize: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
-                toSize: isExceedingStorageLimit
-                  ? `${maxStorageLimit}+ ${t("Common:Gigabyte")}`
-                  : `${amount} ${t("Common:Gigabyte")}`,
-              })}
-            </Text>
-          </div>
+          {!isNewSubscription ? (
+            <div className={styles.summaryRow}>
+              <Text fontSize="14px" className={styles.rowLabel}>
+                {t("StorageUpgrade")}
+              </Text>
+              <Text
+                fontWeight="600"
+                fontSize="14px"
+                className={styles.rowValue}
+              >
+                {t("Payments:StorageUpgradeMessage", {
+                  fromSize: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+                  toSize: isExceedingStorageLimit
+                    ? `${maxStorageLimit}+ ${t("Common:Gigabyte")}`
+                    : `${amount} ${t("Common:Gigabyte")}`,
+                })}
+              </Text>
+            </div>
+          ) : null}
           {!isExceedingStorageLimit ? (
             <div className={styles.summaryRow}>
               <Text fontSize="14px" className={styles.rowLabel}>
@@ -170,8 +184,9 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                 fontSize="14px"
                 className={styles.rowValue}
               >
-                {isDowngradeStoragePlan ? "-" : "+"}
-                {additionalStorage} {t("Common:Gigabyte")}
+                {isNewSubscription && !amount
+                  ? `0 ${t("Common:Gigabyte")}`
+                  : `${isDowngradeStoragePlan ? "-" : isNewSubscription ? "" : "+"}${additionalStorage} ${t("Common:Gigabyte")}`}
               </Text>
             </div>
           ) : null}
@@ -183,7 +198,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
               {formatWalletCurrency!(storagePriceIncrement, 2)}
             </Text>
           </div>
-          {!isExceedingStorageLimit ? (
+          {!isExceedingStorageLimit && !isNewSubscription ? (
             <div className={styles.summaryRow}>
               <Text fontSize="14px" className={styles.rowLabel}>
                 {isDowngradeStoragePlan
@@ -199,7 +214,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                   storageExpiryDate
                 ) : (
                   <>
-                    {daysDisplay} {t("Days")}{" "}
+                    {daysDisplay}
                     <Text
                       as="span"
                       fontSize="14px"
@@ -228,11 +243,13 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                 ) : (
                   <Text fontWeight="600" fontSize="14px">
                     {formatWalletCurrency!(
-                      isDowngradeStoragePlan
+                      isNewSubscription && !amount
                         ? 0
-                        : isUpgradeStoragePlan
-                          ? partialUpgradeFee!
-                          : totalPrice,
+                        : isDowngradeStoragePlan
+                          ? 0
+                          : isUpgradeStoragePlan
+                            ? partialUpgradeFee!
+                            : totalPrice,
                       2,
                     )}
                   </Text>
@@ -241,11 +258,23 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
             ) : null}
           </div>
         </div>
-        {isUpgradeStoragePlan && !isPriceLoading && remainingBalance >= 0 ? (
-          <Text fontSize="12px" className={styles.balanceInfo}>
-            {t("RemainingBalanceAfterPurchase", {
-              currency: formatWalletCurrency!(remainingBalance, 2),
+        {!isDowngradeStoragePlan &&
+        !isPriceLoading &&
+        amount &&
+        !hasMinError ? (
+          <Text
+            fontSize="12px"
+            className={classNames(styles.balanceInfo, {
+              [styles.warningColor]: reccomendedAmount,
             })}
+          >
+            {reccomendedAmount
+              ? t("WalletTopUpRequired", {
+                  currency: formatWalletCurrency!(reccomendedAmount, 2),
+                })
+              : t("RemainingBalanceAfterPurchase", {
+                  currency: formatWalletCurrency!(remainingBalance, 2),
+                })}
           </Text>
         ) : null}
       </div>

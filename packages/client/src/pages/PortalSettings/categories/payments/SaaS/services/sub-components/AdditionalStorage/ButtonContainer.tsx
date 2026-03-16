@@ -68,13 +68,15 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     totalPrice,
     formatWalletCurrency,
     isDisabled,
+    currentStoragePlanSize,
   } = props;
 
   const { t } = useServicesActions();
 
   return (
     <div className={styles.buttonWrapper}>
-      {!isCurrentStoragePlan &&
+      {currentStoragePlanSize &&
+      !isCurrentStoragePlan &&
       !isNullAmount &&
       !isExceedingStorageLimit &&
       totalPrice > 0 ? (

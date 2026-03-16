@@ -125,11 +125,13 @@ class CurrentTariffStatusStore {
   }
 
   get currentStoragePlanSize() {
+    return 0
     if (!this.hasStorageSubscription || !this.walletQuotas[0]) return 0;
     return this.walletQuotas[0].quantity || 0;
   }
 
   get previousStoragePlanSize() {
+    return 56;
     if (!this.hasPreviousStorageSubscription || !this.previousWalletQuota[0])
       return 0;
     return this.previousWalletQuota[0].quantity || 0;

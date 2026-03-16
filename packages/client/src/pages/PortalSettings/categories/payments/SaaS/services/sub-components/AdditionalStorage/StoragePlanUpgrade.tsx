@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
@@ -154,7 +154,9 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const isWaitingRef = useRef(false);
 
   const reccomendedAmount = isPaymentBlockedByBalance
-    ? Math.ceil(partialUpgradeFee! - walletBalance)
+    ? isUpgradeStoragePlan
+      ? Math.ceil(partialUpgradeFee! - walletBalance)
+      : Math.ceil(totalPrice - walletBalance)
     : 0;
 
   const amountRef = useRef(amount);
@@ -354,9 +356,13 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
             <div className={styles.inputSection}>
               <Text fontWeight={600}>
-                {t("Services:NewTotalStorage", {
-                  storageUnit: t("Common:Gigabyte"),
-                })}
+                {!currentStoragePlanSize
+                  ? t("Services:AmoutWithStorageUnit", {
+                      storageUnit: t("Common:Gigabyte"),
+                    })
+                  : t("Services:NewTotalStorage", {
+                      storageUnit: t("Common:Gigabyte"),
+                    })}
               </Text>
               <FieldContainer
                 isVertical
@@ -368,6 +374,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
                     : ""
                 }
                 hasError={hasMinError}
+                removeMargin
               >
                 <TextInput
                   className={styles.storageInput}
@@ -382,11 +389,24 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
                 />
               </FieldContainer>
               {!hasMinError ? (
-                <Text className={styles.perStorageInfo}>
-                  {t("PerStorage", {
-                    currency: formatWalletCurrency!(storagePriceIncrement!, 2),
-                    amount: `1 ${t("Common:Gigabyte")}`,
-                  })}
+                <Text className={styles.perStorageInfo} fontSize="12px">
+                  <Trans
+                    t={t}
+                    ns="Payments"
+                    i18nKey="PerStorageWitnMinValue"
+                    values={{
+                      currency: formatWalletCurrency!(
+                        storagePriceIncrement!,
+                        2,
+                      ),
+                      amount: `1 ${t("Common:Gigabyte")}`,
+                      minValue: MIN_VALUE,
+                      storageUnit: t("Common:Gigabyte"),
+                    }}
+                    components={{
+                      1: <Text as="span" fontSize="12px" fontWeight={600} />,
+                    }}
+                  />
                 </Text>
               ) : null}
             </div>
@@ -394,12 +414,15 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
               {hasStorageSubscription && currentStoragePlanSize ? (
                 <CurrentSubscription />
               ) : null}
-              {!isCurrentStoragePlan && debouncedAmount && !hasMinError ? (
+              {(!isCurrentStoragePlan && debouncedAmount && !hasMinError) ||
+              !currentStoragePlanSize ? (
                 <OrderSummary
                   amount={debouncedAmount}
                   totalPrice={totalPrice}
                   isUpgradeStoragePlan={isUpgradeStoragePlan}
                   isDowngradeStoragePlan={isDowngradeStoragePlan}
+                  reccomendedAmount={reccomendedAmount}
+                  hasMinError={hasMinError}
                 />
               ) : null}
             </div>
@@ -412,6 +435,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <ButtonContainer
+            currentStoragePlanSize={currentStoragePlanSize}
             totalPrice={totalPrice}
             title={buttonMainTitle}
             isCurrentStoragePlan={isCurrentStoragePlan}
