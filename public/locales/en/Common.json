@@ -429,6 +429,7 @@
   "ExpiredLink": "Expired link",
   "ExtendedThinking": "Extended thinking",
   "ExtendedThinkingNotSupported": "This option is not supported by the currently selected AI model for this chat.",
+  "ExtendedThinkingIncreasedCosts": "This model uses advanced reasoning, which may increase costs",
   "ExternalLink": "External link",
   "Favorites": "Favorites",
   "FeeAppliesToEachBackup": "Please note: A fee applies to each backup",
