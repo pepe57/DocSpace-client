@@ -40,6 +40,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
 import { calculateTotalPrice } from "@docspace/shared/utils/common";
 import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
+import { useNavigate } from "react-router";
 
 import SalesDepartmentRequestDialog from "SRC_DIR/components/dialogs/SalesDepartmentRequestDialog";
 
@@ -112,6 +113,9 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   );
   const [isRequestDialog, setIsRequestDialog] = useState(false);
   const [debouncedAmount, setDebouncedAmount] = useState(amount);
+
+
+    const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -263,6 +267,8 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
       const quantity = isUpgradeStoragePlan ? difference : amountValue;
       const value = isCancellation ? null : quantity;
 
+      const isNewSubscription = !hasStorageSubscription;
+
       try {
         const res = await updateWalletPayment(value, productType);
 
@@ -279,6 +285,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
           waitingForTariff(isCancellation);
         }
 
+        if(isNewSubscription) navigate("/portal-settings/payments/services/disk-storage");
         onClose();
       } catch (e) {
         toastr.error(e as Error);
@@ -361,7 +368,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
             <div className={styles.inputSection}>
               <Text fontWeight={600}>
-                {!currentStoragePlanSize
+                {!hasStorageSubscription
                   ? t("Services:AmoutWithStorageUnit", {
                       storageUnit: t("Common:Gigabyte"),
                     })
@@ -421,7 +428,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
                 <CurrentSubscription />
               ) : null}
               {(!isCurrentStoragePlan && debouncedAmount && !hasMinError) ||
-              !currentStoragePlanSize ? (
+              !hasStorageSubscription ? (
                 <OrderSummary
                   amount={+debouncedAmount}
                   totalPrice={totalPrice}
@@ -441,7 +448,6 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <ButtonContainer
-            currentStoragePlanSize={currentStoragePlanSize}
             totalPrice={totalPrice}
             title={buttonMainTitle}
             isCurrentStoragePlan={isCurrentStoragePlan}

@@ -46,10 +46,10 @@ import ServicesLoader from "./ServicesLoader";
 import StoragePlanUpgrade from "./sub-components/AdditionalStorage/StoragePlanUpgrade";
 import StoragePlanCancel from "./sub-components/AdditionalStorage/StoragePlanCancel";
 import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModal";
-import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
+// import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";
 import AIServiceDialog from "./pages/AITools/AIServiceDialog";
-import WebSearchDialog from "./sub-components/WebSearch/WebSearchDialog";
+// import WebSearchDialog from "./sub-components/WebSearch/WebSearchDialog";
 
 const Services = (props: InjectedProps) => {
   const {
@@ -225,9 +225,15 @@ const Services = (props: InjectedProps) => {
       return;
     }
 
-    if (id === BACKUP_SERVICE) {
+    if (id === BACKUP_SERVICE && isCardLinkedToPortal) {
       navigate("/portal-settings/payments/services/backup");
       return;
+    }
+
+    if(id === BACKUP_SERVICE && !isCardLinkedToPortal){
+       setConfirmActionType(id);
+       setIsConfirmDialogVisible(true);
+       return;
     }
 
     updateDialogVisibility(id as keyof typeof dialogVisibility, true);
@@ -265,10 +271,10 @@ const Services = (props: InjectedProps) => {
       return;
     }
 
-    if (!currentEnabled && !isCardLinkedToPortal) {
-      setIsTopUpBalanceVisible(true);
-      return;
-    }
+    // if (!currentEnabled && !isCardLinkedToPortal) {
+    //   setIsTopUpBalanceVisible(true);
+    //   return;
+    // }
 
     if (id !== TOTAL_SIZE) {
       if (dialogVisibility[id as keyof typeof dialogVisibility]) {
@@ -330,12 +336,21 @@ const Services = (props: InjectedProps) => {
   const onConfirm = async () => {
     if (!confirmActionType) return;
 
-    const raw = {
+
+
+
+       const raw = {
       service: confirmActionType,
       enabled: !isCurrentConfirmState,
     };
 
     setIsConfirmDialogVisible(false);
+
+        if(confirmActionType === BACKUP_SERVICE && !isCardLinkedToPortal) {
+setIsTopUpBalanceVisible(true);
+return;
+    }
+    
     changeServiceState(confirmActionType);
 
     const getSuccessMessage = () => {
@@ -406,13 +421,13 @@ const Services = (props: InjectedProps) => {
           onClose={onCloseGracePeriodModal}
         />
       ) : null}
-      {dialogVisibility[BACKUP_SERVICE] ? (
+      {/* {dialogVisibility[BACKUP_SERVICE] ? (
         <BackupServiceDialog
           visible={dialogVisibility[BACKUP_SERVICE]}
           onClose={onCloseBackup}
           onToggle={onToggle}
         />
-      ) : null}
+      ) : null} */}
       {dialogVisibility[AI_ENUM] ? (
         <AIServiceDialog
           visible={dialogVisibility[AI_ENUM]}
@@ -420,13 +435,13 @@ const Services = (props: InjectedProps) => {
           isTopUpVisible={isAiServiceTopUpVisible}
         />
       ) : null}
-      {dialogVisibility[WEB_SEARCH] ? (
+      {/* {dialogVisibility[WEB_SEARCH] ? (
         <WebSearchDialog
           visible={dialogVisibility[WEB_SEARCH]}
           onClose={onCloseWebSearch}
           onToggle={onToggle}
         />
-      ) : null}
+      ) : null} */}
       {isConfirmDialogVisible && confirmActionType ? (
         <ConfirmationDialog
           visible={isConfirmDialogVisible}

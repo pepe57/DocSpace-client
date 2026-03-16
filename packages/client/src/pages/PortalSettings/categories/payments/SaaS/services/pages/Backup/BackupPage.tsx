@@ -156,13 +156,13 @@ const BackupPage: React.FC<BackupPageProps> = ({
       <div className={styles.backupsCard}>
         <div className={styles.backupsHeader}>
           <Text fontWeight="700" fontSize="14px">
-            {!isBackupPaid && !isBackupServiceOn
+            {isFreeTariff && !isBackupServiceOn
               ? t("Services:PaidBackupDisabled")
               : t("Payments:AvailableBackups")}
           </Text>
         </div>
 
-        {isBackupPaid ? (
+        {!isFreeTariff  ? (
           <div className={styles.freeBackupsAmountContainer}>
             <div className={styles.backupsCount}>
               <Text fontSize="28px" fontWeight="700">
@@ -177,7 +177,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
         ) : null}
         {isBackupServiceOn ? (
           <>
-            {isBackupPaid ? <div className={styles.divider} /> : null}
+            {!isFreeTariff  ? <div className={styles.divider} /> : null}
             <div className={styles.backupsAmountContainer}>
               <Text fontSize="28px" fontWeight="700">
                 {availableBackupsCount}

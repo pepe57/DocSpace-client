@@ -96,6 +96,7 @@ interface AIServiceDialogProps {
   walletCustomerStatusNotActive?: boolean;
   currency?: string;
   featureCountData?: number;
+  wasFirstAiServiceTopUp?:boolean;
 }
 
 type DialogView = "get-started" | "pricing" | "top-up" | "top-up-wallet";
@@ -111,6 +112,7 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
   walletCustomerStatusNotActive,
   currency,
   featureCountData,
+  wasFirstAiServiceTopUp
 }) => {
   const { t } = useTranslation(["Services", "Common", "Payments"]);
 
@@ -141,13 +143,10 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
 
   const onRedirect = () => {
     if (
-      !window.location.pathname.includes(
-        "/portal-settings/services/ai-services",
-      )
-    ) {
-      console.log("window.location.href", window.location.href);
-      navigate("/portal-settings/services/ai-services");
-    }
+      !wasFirstAiServiceTopUp
+    ) 
+      navigate("/portal-settings/payments/services/ai-services");
+    
 
     onClose();
   };
@@ -260,7 +259,7 @@ export default inject(
     } = paymentStore;
     const { logoText } = settingsStore;
 
-    const { fetchAiServiceBalance, featureCountData } = servicesStore;
+    const { fetchAiServiceBalance, featureCountData , wasFirstAiServiceTopUp} = servicesStore;
     const { walletCustomerStatusNotActive, walletCustomerEmail } =
       currentTariffStatusStore;
 
@@ -275,6 +274,7 @@ export default inject(
       walletCustomerEmail,
       walletCustomerStatusNotActive,
       featureCountData,
+      wasFirstAiServiceTopUp
     };
   },
 )(observer(AIServiceDialog));

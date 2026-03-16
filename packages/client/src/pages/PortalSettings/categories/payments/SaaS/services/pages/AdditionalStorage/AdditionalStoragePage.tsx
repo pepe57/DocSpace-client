@@ -84,13 +84,14 @@ type AdditionalStoragePageProps = {
   ) => Promise<void>;
   previousStoragePlanSize?: number;
   isGracePeriod?: boolean;
+  hasStorageSubscription?:boolean
 };
 
 const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   currentStoragePlanSize = 600,
   nextStoragePlanSize,
   storageExpiryDate = "",
-  isStorageEnabled = true,
+  hasStorageSubscription = false,
   formatWalletCurrency,
   storagePriceIncrement,
   storageSizeIncrement,
@@ -142,7 +143,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
       });
 
   const handleToggleChange = () => {
-    if (isStorageEnabled) openCancelDialog();
+    if (hasStorageSubscription) openCancelDialog();
     else openUpgradeDialog();
   };
 
@@ -203,7 +204,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   return (
     <div className={styles.container}>
       <ServiceToggleSection
-        isEnabled={isStorageEnabled}
+        isEnabled={hasStorageSubscription}
         isDisabled={isScheduled}
         onToggle={handleToggleChange}
         title={t("Payments:AdditionalDiskStorage")}
@@ -370,6 +371,7 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     hasScheduledStorageChange,
     previousStoragePlanSize,
     isGracePeriod,
+    hasStorageSubscription
   } = currentTariffStatusStore;
 
   return {
@@ -387,5 +389,6 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     walletCodeCurrency,
     previousStoragePlanSize,
     isGracePeriod,
+    hasStorageSubscription
   };
 })(observer(AdditionalStoragePage));

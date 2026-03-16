@@ -281,7 +281,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
       >
         {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
 
-       
+       console.log("item",item)
           if (!item.title || !item.image) return null;
 
        
@@ -303,7 +303,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                   item.price.value,
                 )}
                 tooltip={isDisabled ? permissionTooltipText : undefined}
-                isWarningColor={availableBackupsCount === 0}
+                isWarningColor={item.value && walletCustomerEmail ? availableBackupsCount === 0 : false}
               />
             );
           }
