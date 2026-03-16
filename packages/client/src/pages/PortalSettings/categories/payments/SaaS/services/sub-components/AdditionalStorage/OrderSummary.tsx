@@ -27,6 +27,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { Duration } from "luxon";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
@@ -41,10 +42,6 @@ import { usePaymentContext } from "../../context/PaymentContext";
 import styles from "../../styles/OrderSummary.module.scss";
 import { calculateDifference } from "../../hooks/resourceUtils";
 import classNames from "classnames";
-
-const getDirectionalText = (isRTL: boolean) => {
-  return isRTL ? `>1` : `<1`;
-};
 
 type OrderSummaryProps = {
   amount: number;
@@ -61,6 +58,7 @@ type OrderSummaryProps = {
   totalPrice?: number;
   reccomendedAmount?: number;
   hasMinError?: boolean;
+  language?: string;
 };
 
 const OrderSummary: React.FC<OrderSummaryProps> = ({
@@ -78,6 +76,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   isDowngradeStoragePlan,
   reccomendedAmount,
   hasMinError,
+  language = "en",
 }) => {
   const { t } = useTranslation(["Services", "Payments", "Common"]);
   const { isRTL } = useInterfaceDirection();
@@ -144,9 +143,12 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   const remainingBalance = partialUpgradeFee
     ? walletBalance - partialUpgradeFee
     : walletBalance - totalPrice;
-  const daysDisplay = daysUntilStorageExpiry || getDirectionalText(isRTL);
+  const daysDisplay = Duration.fromObject(
+    { days: daysUntilStorageExpiry ?? 0 },
+    { locale: language },
+  ).toHuman();
 
-  console.log("reccomendedAmount", reccomendedAmount);
+
   return (
     <div className={styles.orderSummaryWrapper}>
       <Text fontWeight="700" fontSize="16px" className={styles.sectionTitle}>
@@ -215,7 +217,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                   storageExpiryDate
                 ) : (
                   <>
-                    {daysDisplay}
+                    {daysDisplay}{" "}
                     <Text
                       as="span"
                       fontSize="14px"
@@ -284,9 +286,10 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
 };
 
 export default inject(
-  ({ paymentStore, currentTariffStatusStore, servicesStore }: TStore) => {
+  ({ paymentStore, currentTariffStatusStore, servicesStore, authStore }: TStore) => {
     const { formatWalletCurrency, storagePriceIncrement, walletBalance } =
       paymentStore;
+    const { language } = authStore;
     const {
       currentStoragePlanSize,
       storageExpiryDate,
@@ -303,6 +306,7 @@ export default inject(
       daysUntilStorageExpiry,
       setPartialUpgradeFee,
       partialUpgradeFee,
+      language,
     };
   },
 )(observer(OrderSummary));

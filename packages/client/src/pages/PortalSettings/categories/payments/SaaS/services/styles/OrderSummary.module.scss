@@ -47,7 +47,7 @@
   flex-direction: column;
   gap: 12px;
   padding: 12px;
-  background: #f8f9f9;
+  background: var(--payment-background-color);
   border-radius: 6px;
 }
 
@@ -59,12 +59,12 @@
 
 .rowLabel {
   flex: 1;
-  color: #333;
+
   line-height: 16px;
 }
 
 .rowValue {
-  color: #333;
+
   line-height: 16px;
   white-space: nowrap;
 }
@@ -76,7 +76,7 @@
 
 .divider {
   height: 1px;
-  background: #dfe2e3;
+  background:  var(--aside-header-border-color);
   width: 100%;
 }
 
@@ -89,3 +89,5 @@
     color: var(--warning-color);
   }
 }
+
+
