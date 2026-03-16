@@ -11,8 +11,8 @@
     "analyze": "cross-env ANALYZE=true next build --webpack",
     "lint": "biome lint ./src ./__tests__",
     "lint:fix": "biome lint --write ./src ./__tests__",
-    "format": "biome check ./src ./__tests__",
-    "format:fix": "biome check --write ./src ./__tests__",
+    "format": "prettier --check ./src ./__tests__",
+    "format:fix": "prettier --write ./src ./__tests__",
     "tsc": "tsc",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/login && shx cp -r .next/standalone/* ../../../publish/web/login && shx --silent mkdir -p ../../../publish/web/login/packages/login/.next/static && shx cp -r .next/static/* ../../../publish/web/login/packages/login/.next/static && shx cp -f server.prod.js ../../../publish/web/login/server.js",
@@ -53,6 +53,7 @@
   "devDependencies": {
     "@babel/core": "7.25.8",
     "@biomejs/biome": "2.3.14",
+    "prettier": "^3.8.1",
     "@next/bundle-analyzer": "16.1.6",
     "@playwright/test": "1.58.1",
     "@svgr/webpack": "8.1.0",
