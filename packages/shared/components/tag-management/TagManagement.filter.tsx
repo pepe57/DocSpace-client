@@ -57,6 +57,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     tags,
     setTags,
     filteredTags,
+    access: { canSearch },
   } = useTagManagement();
   const createTag = useCreateTagMutation(roomId);
 
@@ -119,18 +120,22 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
 
   return (
     <>
-      <TextInput
-        scale
-        autoFocus
-        withBorder={false}
-        value={inputValue}
-        type={InputType.text}
-        className={styles.input}
-        onChange={onChangeSearchValue}
-        placeholder={t("Common:AddTag")}
-        onKeyDown={handleKeyDown}
-      />
-      <hr className={styles.divider} />
+      {canSearch ? (
+        <>
+          <TextInput
+            scale
+            autoFocus
+            withBorder={false}
+            value={inputValue}
+            type={InputType.text}
+            className={styles.input}
+            onChange={onChangeSearchValue}
+            placeholder={t("Common:AddTag")}
+            onKeyDown={handleKeyDown}
+          />
+          <hr className={styles.divider} />
+        </>
+      ) : null}
       {showCreateTag ? (
         <Text
           as="div"

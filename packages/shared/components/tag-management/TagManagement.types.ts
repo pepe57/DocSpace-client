@@ -24,9 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { ShareAccessRights } from "../../enums";
 import type { TagClickEvent, TagType } from "@docspace/ui-kit/components/tag";
 
+export type AccessTagManagement = {
+  canRemove?: boolean;
+  canCreate?: boolean;
+  canSearch?: boolean;
+  canEdit?: boolean;
+  canBindTag?: boolean;
+};
 export interface TagManagementPopupProps {
   tags: Array<TagType | string>;
   roomId: string | number;
@@ -37,11 +43,7 @@ export interface TagManagementPopupProps {
   onEditTag?: (oldLabel: string, newLabel: string) => Promise<void>;
   onDeleteTag?: (label: string) => Promise<void>;
 
-  canRemove?: boolean;
-  canCreate?: boolean;
-  canSearch?: boolean;
-  canEdit?: boolean;
-  canBindTag?: boolean;
+  access: AccessTagManagement;
 }
 
 export type TTag = {
@@ -53,12 +55,7 @@ export interface TagManagementProviderProps {
   children: React.ReactNode;
   fetchedTags: string[];
   roomTags: Array<TagType | string>;
-
-  canRemove?: boolean;
-  canCreate?: boolean;
-  canSearch?: boolean;
-  canEdit?: boolean;
-  canBindTag?: boolean;
+  access: AccessTagManagement;
 }
 export interface ITagManagementStateContext {
   tags: TTag[];
@@ -70,11 +67,7 @@ export interface ITagManagementStateContext {
   setSearchValue: (value: string) => void;
   clearSearch: () => void;
 
-  canRemove?: boolean;
-  canCreate?: boolean;
-  canSearch?: boolean;
-  canEdit?: boolean;
-  canBindTag?: boolean;
+  access: AccessTagManagement;
 }
 
 export interface TagManagementContextValue extends ITagManagementStateContext {}
@@ -100,9 +93,8 @@ export interface TagManagementProps {
   id: string | number;
   tags: Array<TagType | string>;
   columnCount: number;
-  access: ShareAccessRights;
-  isActive: boolean;
   className?: string;
-  isAdmin: boolean;
+  isActive?: boolean;
   onSelectTag: (tag: TagClickEvent) => void;
+  access: AccessTagManagement;
 }

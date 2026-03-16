@@ -68,8 +68,13 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   onEditTag,
 }) => {
   const isMobile = useIsMobile();
-  const { filteredTags, tags, setTags, canEdit, canRemove, canBindTag } =
-    useTagManagement();
+  const {
+    filteredTags,
+    tags,
+    setTags,
+    access: { canEdit, canRemove, canBindTag },
+  } = useTagManagement();
+  
   const removeTag = useRemoveTagMutation();
   const addTagToRoom = useCreateTagMutation(roomId);
   const updateTag = useUpdateTag(roomId);

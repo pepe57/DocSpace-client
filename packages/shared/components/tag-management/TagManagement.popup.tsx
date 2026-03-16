@@ -64,13 +64,7 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   anchor,
   onSelectTag,
   tags: roomTags,
-
-  canCreate = false,
-  canRemove = false,
-  canSearch = false,
-  canEdit = false,
-  canBindTag = false,
-
+  access,
   onDeleteTag,
   onEditTag,
 }) => {
@@ -133,11 +127,7 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
           <TagManagementProvider
             fetchedTags={fetchedTags ?? []}
             roomTags={roomTags}
-            canRemove={canRemove}
-            canCreate={canCreate}
-            canSearch={canSearch}
-            canEdit={canEdit}
-            canBindTag={canBindTag}
+            access={access}
           >
             <TagManagementFilter roomId={roomId} />
             <TagManagementContent

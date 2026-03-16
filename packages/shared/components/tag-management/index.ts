@@ -25,3 +25,4 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export { TagManagement } from "./TagManagement";
+export { AccessTagManagement as SecurityTagManagement } from "./TagManagement.types";
