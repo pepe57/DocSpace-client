@@ -26,6 +26,22 @@
 
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
+
+import SocketHelper, {
+  SocketCommands,
+  SocketCommandsRoomParts,
+  SocketEvents,
+} from "@docspace/ui-kit/utils/socket";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import {
+  Base,
+  Dark,
+  type TColorScheme,
+} from "@docspace/ui-kit/providers/theme";
+import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
+import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+
 import api from "../api";
 import type { TAIConfig } from "../api/ai/types";
 import type { TApiKey } from "../api/api-keys/types";
@@ -50,8 +66,7 @@ import type {
   TTimeZone,
   TVersionBuild,
 } from "../api/settings/types";
-import { toastr, type TData } from "@docspace/ui-kit/components/toast";
-import { ThemeKeys } from "@docspace/ui-kit/enums";
+
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import {
   DeepLinkType,
@@ -62,17 +77,12 @@ import {
 } from "../enums";
 import { version } from "../package.json";
 import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
-import {
-  Base,
-  Dark,
-  type TColorScheme,
-} from "@docspace/ui-kit/providers/theme";
+
 import type { Nullable } from "../types";
 import type { TFrameConfig } from "../types/Frame";
+
 import { size as deviceSize, getDeviceTypeByWidth, isTablet } from "../utils";
-import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
-import { combineUrl } from "../utils/combineUrl";
 import {
   frameCallEvent,
   getShowText,
@@ -81,9 +91,7 @@ import {
   isPublicRoom,
   openUrl,
 } from "../utils/common";
-import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 import FirebaseHelper from "../utils/firebase";
-import SocketHelper from "@docspace/ui-kit/utils/socket";
 
 const themes = {
   Dark,
@@ -348,7 +356,17 @@ class SettingsStore {
 
   constructor() {
     makeAutoObservable(this);
+
+    this.wsExternalDbSettings();
   }
+
+  wsExternalDbSettings = () => {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: SocketCommandsRoomParts.ExternalDbSettings,
+    });
+
+    SocketHelper?.on(SocketEvents.ExternalDbSettings, this.setSettings);
+  };
 
   clearAbortControllerArr = () => {
     this.abortControllerArr.forEach((controller) => {
@@ -944,16 +962,12 @@ class SettingsStore {
 
   setCulture = (culture: string) => (this.culture = culture);
 
-  getSettings = async () => {
-    const settings: Nullable<TSettings> = await api.settings.getSettings(true);
-
-    if (!settings) return;
-
+  setSettings = (settings: Partial<TSettings>) => {
     Object.keys(settings).forEach((forEachKey) => {
       const key = forEachKey as keyof TSettings;
 
       if (key in this && settings) {
-        if (key === "socketUrl") {
+        if (key === "socketUrl" && settings[key]) {
           this.setSocketUrl(settings[key]);
           return;
         }
@@ -964,7 +978,7 @@ class SettingsStore {
           if (settings?.wizardToken) return;
           const language = getCookie(LANGUAGE);
           if (!language || language === "undefined") {
-            setCookie(LANGUAGE, settings[key], {
+            setCookie(LANGUAGE, settings[key]!, {
               "max-age": COOKIE_EXPIRATION_YEAR,
             });
           }
@@ -973,6 +987,14 @@ class SettingsStore {
         this.setValue("hashSettings", settings[key]);
       }
     });
+  };
+
+  getSettings = async () => {
+    const settings: Nullable<TSettings> = await api.settings.getSettings(true);
+
+    if (!settings) return;
+
+    this.setSettings(settings);
 
     this.setGreetingSettings(settings.greetingSettings);
 
