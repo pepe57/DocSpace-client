@@ -34,6 +34,12 @@ import type { TSettings } from "../api/settings/types";
 
 import { addLog } from ".";
 
+export const enum SocketCommandsRoomParts {
+  ExternalDbSettings = "external-db-settings",
+  StorageEncryption = "storage-encryption",
+  Restore = "restore",
+}
+
 /**
  * Enum representing various socket events used in the application.
  * These events are used for communication between the client and server.
@@ -97,7 +103,6 @@ export const enum SocketCommands {
   StorageEncryption = "storage-encryption",
   SubscribeInSpaces = "subscribeInSpaces",
   UnsubscribeInSpaces = "unsubscribeInSpaces",
-  SubscribeExternalDbSettings = "external-db-settings",
 }
 
 /**

@@ -72,7 +72,6 @@ import type { TFrameConfig } from "../types/Frame";
 import { size as deviceSize, getDeviceTypeByWidth, isTablet } from "../utils";
 import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
-import { combineUrl } from "../utils/combineUrl";
 import {
   frameCallEvent,
   getShowText,
@@ -83,7 +82,11 @@ import {
 } from "../utils/common";
 import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 import FirebaseHelper from "../utils/firebase";
-import SocketHelper, { SocketCommands, SocketEvents } from "../utils/socket";
+import SocketHelper, {
+  SocketCommands,
+  SocketCommandsRoomParts,
+  SocketEvents,
+} from "../utils/socket";
 
 const themes = {
   Dark,
@@ -354,7 +357,7 @@ class SettingsStore {
 
   wsExternalDbSettings = () => {
     SocketHelper?.emit(SocketCommands.Subscribe, {
-      roomParts: SocketCommands.SubscribeExternalDbSettings,
+      roomParts: SocketCommandsRoomParts.ExternalDbSettings,
     });
 
     SocketHelper?.on(SocketEvents.ExternalDbSettings, this.setSettings);
