@@ -66,7 +66,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     isPaymentBlocked,
     storageExpiryDate,
     totalPrice,
-    formatWalletCurrency
+    formatWalletCurrency,
   } = props;
 
   const { t } = useServicesActions();
@@ -120,11 +120,10 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
 export default inject(({ currentTariffStatusStore, paymentStore }: TStore) => {
   const { hasStorageSubscription, storageExpiryDate } =
     currentTariffStatusStore;
- const { formatWalletCurrency,  } =
-      paymentStore;
+  const { formatWalletCurrency } = paymentStore;
   return {
     hasStorageSubscription,
     storageExpiryDate,
-    formatWalletCurrency
+    formatWalletCurrency,
   };
 })(observer(ButtonContainer));

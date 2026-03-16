@@ -104,6 +104,12 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     isVisibleWalletSettings,
   );
   const [isRequestDialog, setIsRequestDialog] = useState(false);
+  const [debouncedAmount, setDebouncedAmount] = useState(amount);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedAmount(amount), 1000);
+    return () => clearTimeout(timer);
+  }, [amount]);
 
   const {
     isExceedingPlanLimit,
@@ -115,12 +121,15 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     isPlanDowngrade,
   } = useServicesActions();
 
-  const isExceedingStorageLimit = isExceedingPlanLimit(amount);
-  const isCurrentStoragePlan = isCurrentPlan(amount);
-  const totalPrice = calculateTotalPrice(amount, storagePriceIncrement!);
+  const isExceedingStorageLimit = isExceedingPlanLimit(debouncedAmount);
+  const isCurrentStoragePlan = isCurrentPlan(debouncedAmount);
+  const totalPrice = calculateTotalPrice(
+    debouncedAmount,
+    storagePriceIncrement!,
+  );
 
-  const isUpgradeStoragePlan = isPlanUpgrade(amount);
-  const isDowngradeStoragePlan = isPlanDowngrade(amount);
+  const isUpgradeStoragePlan = isPlanUpgrade(debouncedAmount);
+  const isDowngradeStoragePlan = isPlanDowngrade(debouncedAmount);
   const newStorageSizeOnUpgrade =
     isUpgradeStoragePlan && currentStoragePlanSize! > 0;
 
@@ -128,7 +137,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     ? isWalletBalanceInsufficient(partialUpgradeFee!)
     : isWalletBalanceInsufficient(totalPrice);
 
-  const buttonMainTitle = buttonTitle(amount);
+  const buttonMainTitle = buttonTitle(debouncedAmount);
   const isPaymentBlocked =
     !hasScheduledStorageChange && amount < MIN_VALUE && amount !== 0;
 
@@ -356,16 +365,16 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
                 <CurrentSubscription />
               ) : null}
 
-              {!isCurrentStoragePlan && amount ? (
+              {!isCurrentStoragePlan && debouncedAmount ? (
                 <OrderSummary
-                  amount={amount}
+                  amount={debouncedAmount}
                   totalPrice={totalPrice}
                   isUpgradeStoragePlan={isUpgradeStoragePlan}
                   isDowngradeStoragePlan={isDowngradeStoragePlan}
                 />
               ) : null}
             </div>
-            {isDowngradeStoragePlan ? (
+            {isDowngradeStoragePlan && debouncedAmount ? (
               <div className={styles.warningContainer}>
                 <StorageWarning />
               </div>
