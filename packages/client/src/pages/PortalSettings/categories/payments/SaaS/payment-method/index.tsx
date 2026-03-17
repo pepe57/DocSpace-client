@@ -33,6 +33,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import styles from "./PaymentMethod.module.scss";
+import PaymentMethodLoader from "./PaymentMethodLoader";
 import PayerInformation from "../shared/payer-information";
 import { HelpButton } from "@docspace/ui-kit/components";
 
@@ -46,6 +47,7 @@ interface PaymentMethodProps {
   isStripePortalAvailable: boolean;
   walletCustomerEmail: string;
   cardLinked: string;
+  isPaymentMethodInit?: boolean;
 }
 
 const PaymentMethod: React.FC<PaymentMethodProps> = ({
@@ -55,8 +57,11 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
   isStripePortalAvailable,
   walletCustomerEmail,
   cardLinked,
+  isPaymentMethodInit,
 }) => {
-  const { t } = useTranslation(["Payments", "Common"]);
+  const { t, ready } = useTranslation(["Payments", "Common"]);
+
+  if (!isPaymentMethodInit || !ready) return <PaymentMethodLoader />;
 
   const goToStripePortal = () => {
     accountLink
@@ -160,8 +165,13 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
 };
 
 export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
-  const { accountLink, isAlreadyPaid, isStripePortalAvailable, cardLinked } =
-    paymentStore;
+  const {
+    accountLink,
+    isAlreadyPaid,
+    isStripePortalAvailable,
+    cardLinked,
+    isPaymentMethodInit,
+  } = paymentStore;
   const { walletCustomerStatusNotActive, walletCustomerEmail } =
     currentTariffStatusStore;
 
@@ -172,5 +182,6 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     walletCustomerStatusNotActive,
     walletCustomerEmail,
     cardLinked,
+    isPaymentMethodInit,
   };
 })(observer(PaymentMethod));

@@ -141,6 +141,8 @@ class PaymentStore {
 
   isInitWalletPage = false;
 
+  isPaymentMethodInit = false;
+  
   balance: TBalance = 0;
 
   previousBalance: TBalance = 0;
@@ -360,6 +362,10 @@ class PaymentStore {
 
   setIsInitWalletPage = (value: boolean) => {
     this.isInitWalletPage = value;
+  };
+
+  setPaymentMethodInit = (value: boolean) => {
+    this.isPaymentMethodInit = value;
   };
 
   get isAutoPaymentExist() {
@@ -750,6 +756,8 @@ class PaymentStore {
     try {
       const requests = [];
 
+      this.setPaymentMethodInit(false);
+
       await this.initWalletPayerAndBalance(isRefresh);
 
       if (this.isAlreadyPaid) {
@@ -769,7 +777,7 @@ class PaymentStore {
 
       await Promise.all(requests);
 
-      this.setIsInitWalletPage(true);
+      this.setPaymentMethodInit(true);
     } catch (error) {
       toastr.error(t("Common:UnexpectedError"));
       console.error(error);
