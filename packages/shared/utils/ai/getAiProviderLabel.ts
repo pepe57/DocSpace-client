@@ -26,6 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { TTranslation } from "types";
 import { ProviderType } from "../../api/ai/enums";
 
 const OPENAI_LABEL = "OpenAI";
@@ -37,7 +38,7 @@ const DEEPSEEK_LABEL = "DeepSeek";
 const XAI_LABEL = "xAI";
 const GOOGLE_LABEL = "Google AI";
 
-export const getAiProviderLabel = (type: ProviderType) => {
+export const getAiProviderLabel = (type: ProviderType, t?: TTranslation) => {
   switch (type) {
     case ProviderType.OpenAi:
       return OPENAI_LABEL;
@@ -55,6 +56,8 @@ export const getAiProviderLabel = (type: ProviderType) => {
       return XAI_LABEL;
     case ProviderType.Google:
       return GOOGLE_LABEL;
+     case ProviderType.PortalAi:
+      return t ? t("AISettings:BuilInAiService") : "" 
     default:
       return "";
   }

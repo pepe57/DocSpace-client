@@ -32,13 +32,19 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
 import type { TAiProvider } from "@docspace/shared/api/ai/types";
 import { ProviderType } from "@docspace/shared/api/ai/enums";
-import { getAiProviderIcon, getAiProviderLabel } from "@docspace/shared/utils";
+import {
+  getAiProviderIcon,
+  getAiProviderLabel,
+  getLogoUrl,
+} from "@docspace/shared/utils";
 
 import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 
 import { AiTile } from "../sub-components/ai-tile";
 import styles from "../AISettings.module.scss";
+import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
+import { useTheme } from "@docspace/ui-kit/context";
 
 type AiProviderTileProps = {
   item: TAiProvider;
@@ -57,8 +63,10 @@ export const AiProviderTile = ({
 }: AiProviderTileProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
 
-  const icon = getAiProviderIcon(item.type) ?? "";
-  const companyLabel = getAiProviderLabel(item.type);
+  const { isBase } = useTheme();
+
+  const icon = getAiProviderIcon(item.type, isBase) ?? "";
+  const companyLabel = getAiProviderLabel(item.type, t);
 
   const getContextOptions = () => {
     return [
@@ -115,3 +123,4 @@ export const AiProviderTile = ({
     </AiTile>
   );
 };
+
