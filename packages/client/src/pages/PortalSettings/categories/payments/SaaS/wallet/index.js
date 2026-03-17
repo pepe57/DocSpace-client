@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 
-import TransactionHistoryLoader from "./sub-components/TransactionHistoryLoader";
+import TransactionHistoryLoader from "../shared/transaction-history/sub-components/TransactionHistoryLoader";
 import WalletContainer from "./WalletContainer";
 
 const Wallet = (props) => {

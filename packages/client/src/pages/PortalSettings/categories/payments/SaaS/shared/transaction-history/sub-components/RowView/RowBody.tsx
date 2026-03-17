@@ -37,7 +37,7 @@ import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import { getCorrectDate } from "@docspace/shared/utils";
 
 import styles from "../../styles/TransactionHistory.module.scss";
-import { accountingLedgersFormat, getServiceQuantity } from "../../utils";
+import { accountingLedgersFormat, getServiceQuantity } from "../../../../wallet/utils";
 
 type TransactionRowViewProps = {
   transaction: TTransactionCollection;
