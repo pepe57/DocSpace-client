@@ -179,6 +179,7 @@ const Services = (props: InjectedProps) => {
               organizationName: logoText,
             }),
             <Trans
+              key="Payments"
               ns="Payments"
               i18nKey="CurrentBalance"
               t={t}
