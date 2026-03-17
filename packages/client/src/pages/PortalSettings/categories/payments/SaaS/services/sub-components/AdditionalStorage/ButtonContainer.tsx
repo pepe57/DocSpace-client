@@ -41,11 +41,9 @@ interface ButtonContainerProps {
   title: string;
   isLoading: boolean;
   isExceedingStorageLimit: boolean;
-  isNullAmount: boolean;
   isPaymentBlockedByBalance: boolean;
   isCurrentStoragePlan?: boolean;
   hasStorageSubscription?: boolean;
-  isDowngradeStoragePlan?: boolean;
   isPaymentBlocked?: boolean;
   formatWalletCurrency?: (amount?: number, fractionDigits?: number) => string;
   storageExpiryDate?: string;
@@ -59,13 +57,11 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     isExceedingStorageLimit,
     onClose,
     isLoading,
-    isNullAmount,
     onBuy,
     onSendRequest,
     title,
     isPaymentBlockedByBalance,
     isCurrentStoragePlan,
-    isDowngradeStoragePlan,
     hasStorageSubscription,
     isPaymentBlocked,
     storageExpiryDate,
@@ -75,12 +71,13 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
   } = props;
 
   const { t } = useServicesActions();
+  const { isWaitingCalculation } = usePaymentContext();
 
   return (
     <div className={styles.buttonWrapper}>
       {hasStorageSubscription &&
       !isCurrentStoragePlan &&
-      !isNullAmount &&
+      !isPaymentBlocked &&
       !isExceedingStorageLimit &&
       totalPrice > 0 ? (
         <Text>
@@ -99,15 +96,11 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
           primary
           scale
           onClick={isExceedingStorageLimit ? onSendRequest : onBuy}
-          isLoading={isLoading}
+          isLoading={isLoading || isWaitingCalculation || isDisabled}
           isDisabled={
-            isDisabled || isPaymentBlocked
-              ? true
-              : !isExceedingStorageLimit && !isDowngradeStoragePlan
-                ? (!hasStorageSubscription && isNullAmount) ||
-                  isPaymentBlockedByBalance ||
-                  isCurrentStoragePlan
-                : false
+            isPaymentBlocked ||
+            isPaymentBlockedByBalance ||
+            isCurrentStoragePlan
           }
           testId="storage_plan_upgrade_ok_button"
         />

@@ -65,7 +65,7 @@ type OrderSummaryProps = {
   reccomendedAmount?: number;
   hasMinError?: boolean;
   language?: string;
-  hasStorageSubscription?:boolean
+  hasStorageSubscription?: boolean;
 };
 
 const OrderSummary: React.FC<OrderSummaryProps> = ({
@@ -84,7 +84,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   reccomendedAmount,
   hasMinError,
   language = "en",
-  hasStorageSubscription
+  hasStorageSubscription,
 }) => {
   const { t } = useTranslation(["Services", "Payments", "Common"]);
   const { isRTL } = useInterfaceDirection();
@@ -100,10 +100,10 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const controllerRef = useRef<AbortController | null>(null);
 
-    const isNewSubscription = !hasStorageSubscription;
+  const isNewSubscription = !hasStorageSubscription;
 
   useEffect(() => {
-    if (isNewSubscription) return;
+    if (isNewSubscription || isDowngradeStoragePlan) return;
 
     setIsPriceLoading(true);
     setIsWaitingCalculation(true);
@@ -144,7 +144,6 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   }, []);
 
   const isExceedingStorageLimit = isExceedingPlanLimit(amount);
-
 
   const tooltipText = () => (
     <>
@@ -294,16 +293,23 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
             {!isExceedingStorageLimit ? (
               <div className={styles.rowValue}>
                 {isUpgradeStoragePlan && isPriceLoading ? (
-                  <Loader color="" size="20px" type={LoaderTypes.track} />
+                  <Loader
+                    color=""
+                    size="16px"
+                    type={LoaderTypes.track}
+                    style={{ height: "16px" }}
+                  />
                 ) : (
                   <Text fontWeight="600" fontSize="14px">
                     {formatWalletCurrency!(
                       !amount
                         ? 0
-                        : isNewSubscription ? totalPrice : isDowngradeStoragePlan
-                          ? 0
-                          :partialUpgradeFee!,
-                
+                        : isNewSubscription
+                          ? totalPrice
+                          : isDowngradeStoragePlan
+                            ? 0
+                            : partialUpgradeFee!,
+
                       2,
                     )}
                   </Text>
@@ -351,7 +357,7 @@ export default inject(
       currentStoragePlanSize,
       storageExpiryDate,
       daysUntilStorageExpiry,
-      hasStorageSubscription
+      hasStorageSubscription,
     } = currentTariffStatusStore;
     const { setPartialUpgradeFee, partialUpgradeFee } = servicesStore;
 
@@ -364,7 +370,8 @@ export default inject(
       daysUntilStorageExpiry,
       setPartialUpgradeFee,
       partialUpgradeFee,
-      language,hasStorageSubscription
+      language,
+      hasStorageSubscription,
     };
   },
 )(observer(OrderSummary));

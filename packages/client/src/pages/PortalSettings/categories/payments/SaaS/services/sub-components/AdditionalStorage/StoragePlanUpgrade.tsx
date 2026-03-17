@@ -114,8 +114,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const [isRequestDialog, setIsRequestDialog] = useState(false);
   const [debouncedAmount, setDebouncedAmount] = useState(amount);
 
-
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -147,19 +146,21 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const newStorageSizeOnUpgrade =
     isUpgradeStoragePlan && currentStoragePlanSize! > 0;
 
-  const isPaymentBlockedByBalance = newStorageSizeOnUpgrade
-    ? isWalletBalanceInsufficient(partialUpgradeFee!)
-    : isWalletBalanceInsufficient(totalPrice);
+  const isPaymentBlockedByBalance = isDowngradeStoragePlan
+    ? false
+    : newStorageSizeOnUpgrade
+      ? isWalletBalanceInsufficient(partialUpgradeFee!)
+      : isWalletBalanceInsufficient(totalPrice);
 
   const buttonMainTitle = buttonTitle(+debouncedAmount);
   const isPaymentBlocked =
-    !hasScheduledStorageChange && +amount < MIN_VALUE && amount !== "";
+    !hasScheduledStorageChange && +amount < MIN_VALUE && amount === "";
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const isWaitingRef = useRef(false);
 
   const reccomendedAmount = isPaymentBlockedByBalance
-    ? hasStorageSubscription && isUpgradeStoragePlan 
+    ? hasStorageSubscription && isUpgradeStoragePlan
       ? Math.ceil(partialUpgradeFee! - walletBalance)
       : Math.ceil(totalPrice - walletBalance)
     : 0;
@@ -276,6 +277,9 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
           throw new Error(t("Common:UnexpectedError"));
         }
 
+        if (isNewSubscription)
+          navigate("/portal-settings/payments/services/disk-storage");
+
         if (isUpgradeStoragePlan) fetchBalance!();
         const { walletQuotas } = await fetchPortalTariff!(true);
 
@@ -285,7 +289,6 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
           waitingForTariff(isCancellation);
         }
 
-        if(isNewSubscription) navigate("/portal-settings/payments/services/disk-storage");
         onClose();
       } catch (e) {
         toastr.error(e as Error);
@@ -315,7 +318,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, validity } = e.target;
 
-    if(!validity.valid) return;
+    if (!validity.valid) return;
 
     onChangeNumber(value);
     setIsWaiting(true);
@@ -354,7 +357,11 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         withBodyScroll
       >
         <ModalDialog.Container>{container}</ModalDialog.Container>
-        <ModalDialog.Header>{t("IncreaseStorage")}</ModalDialog.Header>
+        <ModalDialog.Header>
+          {hasStorageSubscription
+            ? t("Services:EditSubscription")
+            : t("Services:AdditionalDiskStorage")}
+        </ModalDialog.Header>
         <ModalDialog.Body>
           <div className={styles.dialogBody}>
             <WalletContainer
@@ -364,6 +371,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
               isCurrentStoragePlan={isCurrentStoragePlan}
               isDowngradeStoragePlan={isDowngradeStoragePlan}
               isLoading={isLoading}
+              hasMinError={hasMinError}
             />
 
             <div className={styles.inputSection}>
@@ -456,9 +464,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
             isLoading={isLoading}
             onBuy={onBuy}
             onSendRequest={onSendRequest}
-            isNullAmount={amount === "0" || amount === ""}
             isPaymentBlockedByBalance={isPaymentBlockedByBalance}
-            isDowngradeStoragePlan={isDowngradeStoragePlan}
             isPaymentBlocked={isPaymentBlocked}
             isDisabled={isWaiting}
           />

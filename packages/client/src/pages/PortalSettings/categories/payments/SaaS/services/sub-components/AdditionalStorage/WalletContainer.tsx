@@ -39,6 +39,7 @@ type WalletContainerProps = {
   isDowngradeStoragePlan: boolean;
   isLoading: boolean;
   formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
+  hasMinError:boolean
 };
 
 const WalletContainer = (props: WalletContainerProps) => {
@@ -51,6 +52,7 @@ const WalletContainer = (props: WalletContainerProps) => {
     isDowngradeStoragePlan,
     isLoading,
     formatWalletCurrency,
+    hasMinError
   } = props;
 
   const { isWaitingCalculation } = usePaymentContext();
@@ -62,7 +64,7 @@ const WalletContainer = (props: WalletContainerProps) => {
     isPaymentBlockedByBalance &&
     !isLoading &&
     !isDowngradeStoragePlan &&
-    !isExceedingStorageLimit;
+    !isExceedingStorageLimit && !hasMinError;
 
   return (
     <div className={styles.walletContainer}>
