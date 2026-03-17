@@ -120,7 +120,11 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
               <Text className={styles.stepTitleText}>
                 {t("AIGetStartedStep1Title")}
               </Text>
-              <Text fontSize="12px" lineHeight="16px">
+              <Text
+                fontSize="12px"
+                lineHeight="16px"
+                className={styles.stepDescription}
+              >
                 {t("AIGetStartedStep1Description", {
                   productName: t("Common:ProductName"),
                   organizationName: logoText,
@@ -175,7 +179,11 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
               <Text className={styles.stepTitleText}>
                 {t("AIGetStartedStep2Title")}
               </Text>
-              <Text fontSize="12px" lineHeight="16px">
+              <Text
+                fontSize="12px"
+                lineHeight="16px"
+                className={styles.stepDescription}
+              >
                 {t("AIGetStartedStep2Description")}
               </Text>
             </div>
@@ -200,7 +208,11 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
               <Text className={styles.stepTitleText}>
                 {t("AIGetStartedStep3Title")}
               </Text>
-              <Text fontSize="12px" lineHeight="16px">
+              <Text
+                fontSize="12px"
+                lineHeight="16px"
+                className={styles.stepDescription}
+              >
                 {t("AIGetStartedStep3Description")}
               </Text>
             </div>
