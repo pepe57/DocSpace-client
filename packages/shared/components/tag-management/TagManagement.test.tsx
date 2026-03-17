@@ -57,6 +57,7 @@ const defaultProps: TagManagementPopupProps = {
   onClose: vi.fn(),
   onSelectTag: vi.fn(),
   anchor: { current: document.createElement("div") },
+  access: { canCreate: false, canSearch: true },
 };
 
 const renderWithQueryClient = (
@@ -125,9 +126,8 @@ describe("<TagManagementPopup />", () => {
 
   it("calls onClose when clicking outside", async () => {
     const onClose = vi.fn();
-    const useClickOutside = await import(
-      "@docspace/ui-kit/utils/use-click-outside"
-    );
+    const useClickOutside =
+      await import("@docspace/ui-kit/utils/use-click-outside");
     const mockUseClickOutside = vi.spyOn(useClickOutside, "useClickOutside");
 
     vi.spyOn(useTagsQueryModule, "useTagsQuery").mockReturnValue({
