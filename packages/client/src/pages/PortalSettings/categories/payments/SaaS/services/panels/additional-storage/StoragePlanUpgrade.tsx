@@ -118,7 +118,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setDebouncedAmount(amount), setIsWaiting(false);
+      (setDebouncedAmount(amount), setIsWaiting(false));
     }, 1000);
     return () => clearTimeout(timer);
   }, [amount]);
@@ -154,7 +154,8 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
   const buttonMainTitle = buttonTitle(+debouncedAmount);
   const isPaymentBlocked =
-    !hasScheduledStorageChange && +amount < MIN_VALUE && amount === "";
+    (!hasScheduledStorageChange && +amount < MIN_VALUE && amount === "") ||
+    +amount < MIN_VALUE;
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const isWaitingRef = useRef(false);
@@ -514,3 +515,4 @@ export default inject(
     };
   },
 )(observer(StoragePlanUpgrade));
+
