@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Pagamento atual: {{price}}/mês ({{size}})",
   "Debit": "Débito",
   "DelayedPayment": "Pagamento em atraso no plano {{planName}} data do plano {{date}}",
-  "Downgrade": "Downgrade",
   "DowngradeNow": "Diminuir agora",
   "DueToday": "Prazo hoje",
   "EnterAmount": "Insira um valor inteiro...",

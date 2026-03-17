@@ -1,8 +1,6 @@
 {
   "AIToolsEnabled": "Služba nástrojů AI byla úspěšně povolena.",
   "AndMore": "A více!",
-  "AutomaticBackupDescription": "Nastavte si plánované zálohy pro nepřetržitou ochranu dat bez manuálních zásahů.",
-  "BackupRoomDescription": "Uložte zálohu do vybrané místnosti nebo sekce {{sectionName}}. Použijte existující místnosti nebo vytvořte novou.",
   "BackupServiceEnabled": "Zálohovací služba byla úspěšně povolena.",
   "ChatBot": "ChatBot",
   "ChatBotDescription": "Interagujte s AI asistentem přímo ve svých editorech — ptejte se na otázky, získejte návrhy nebo zrychlete svůj pracovní postup.",
@@ -20,7 +18,6 @@
   "OCRDescription": "Rozpoznávejte a extrahujte text z naskenovaných PDF a obrázků.",
   "Summarization": "Shrnutí",
   "SummarizationDescription": "Rychle generujte shrnutí dokumentů, abyste ušetřili čas a soustředili se na klíčové body.",
-  "TemporaryDescription": "Vytvořte zálohu uloženou v sekci „Záloha“. K dispozici ke stažení do 24 hodin po vytvoření.",
   "TextGeneration": "Generování textu",
   "TextGenerationDescription": "Vytvořte unikátní obsah, jako jsou články, dopisy nebo marketingové materiály, během několika minut přímo v editoru.",
   "TextTranslation": "Textový překlad",

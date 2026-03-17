@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "현재 결제: {{price}}/월 ({{size}})",
   "Debit": "직불",
   "DelayedPayment": "{{date}} 날짜의 {{planName}} 요금제 지불 지연",
-  "Downgrade": "다운그레이드",
   "DowngradeNow": "지금 다운그레이드",
   "DueToday": "오늘까지",
   "EnterAmount": "정수 금액을 입력하세요...",

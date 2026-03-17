@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Τρέχουσα πληρωμή: {{price}}/μήνα ({{size}})",
   "Debit": "Χρέωση",
   "DelayedPayment": "Καθυστερημένη πληρωμή του προγράμματος {{planName}} με ημερομηνία {{date}}",
-  "Downgrade": "Υποβάθμιση",
   "DowngradeNow": "Υποβάθμιση τώρα",
   "DueToday": "Λήγει σήμερα",
   "EnterAmount": "Εισάγετε ένα ακέραιο ποσό...",

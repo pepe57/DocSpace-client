@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "ການຈ່າຍເງິນປັດຈຸບັນ: {{price}}/ເດືອນ ({{size}})",
   "Debit": "ເບືອນ໑້ານ",
   "DelayedPayment": "ການຈ່າຍເງິນຊ້າຂອງແຜນ {{planName}} ລົງວັນທີ {{date}}",
-  "Downgrade": "ລົບຖອນລະດັບ",
   "DowngradeNow": "ດາວເກຣດດຽວນີ້",
   "DueToday": "ໝວດມື້ນີ້",
   "EnterAmount": "ໃສ່ຕົວເລກຈໍານວນເຕັມ...",

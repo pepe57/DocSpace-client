@@ -1,8 +1,6 @@
 {
   "AIToolsEnabled": "AIツールサービスが正常に有効化されました。",
   "AndMore": "などなど！",
-  "AutomaticBackupDescription": "手動操作なしで継続的なデータ保護のために、スケジュールされたバックアップを設定します。",
-  "BackupRoomDescription": "選択したルームまたは{{sectionName}}セクションにバックアップを保存します。既存のルームを使用するか、新しいルームを作成してください。",
   "BackupServiceEnabled": "バックアップサービスが正常に有効になりました。",
   "ChatBot": "ChatBot",
   "ChatBotDescription": "エディター内で直接AIアシスタントとやり取りできます。質問をしたり、提案を受けたり、ワークフローを高速化したりできます。",
@@ -20,7 +18,6 @@
   "OCRDescription": "スキャンしたPDFや画像からテキストを認識・抽出する。",
   "Summarization": "要約生成",
   "SummarizationDescription": "文書要約を素早く生成し、時間を節約して要点に集中する。",
-  "TemporaryDescription": "「バックアップ」セクションに保存されるバックアップを作成します。作成後24時間以内にダウンロード可能です。",
   "TextGeneration": "テキスト生成",
   "TextGenerationDescription": "記事、手紙、マーケティング資料などのユニークなコンテンツを、エディター内でわずか数分で作成する。",
   "TextTranslation": "テキスト翻訳",

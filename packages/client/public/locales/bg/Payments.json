@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Текущо плащане: {{price}}/месец ({{size}})",
   "Debit": "Дебит",
   "DelayedPayment": "Забавено плащане на {{planName}} плана с дата {{date}}",
-  "Downgrade": "Намаляване на версията",
   "DowngradeNow": "Понижаване сега",
   "DueToday": "Пазено за днес",
   "EnterAmount": "Въведете цяло число...",

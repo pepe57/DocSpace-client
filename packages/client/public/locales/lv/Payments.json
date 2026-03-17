@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Pašreizējā maksājuma summa: {{price}}/mēnesī ({{size}})",
   "Debit": "Debets",
   "DelayedPayment": "Novēlots {{planName}} plāna maksājums datēts {{date}}",
-  "Downgrade": "Atgrādiens",
   "DowngradeNow": "Pazemināt tagad",
   "DueToday": "Termiņš šodien",
   "EnterAmount": "Ievadiet veselu skaitli...",

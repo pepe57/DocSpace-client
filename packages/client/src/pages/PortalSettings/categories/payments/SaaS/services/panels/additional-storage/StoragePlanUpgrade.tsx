@@ -360,7 +360,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         <ModalDialog.Header>
           {hasStorageSubscription
             ? t("Services:EditSubscription")
-            : t("Services:AdditionalDiskStorage")}
+            : t("AdditionalDiskStorage")}
         </ModalDialog.Header>
         <ModalDialog.Body>
           <div className={styles.dialogBody}>

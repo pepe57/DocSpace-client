@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "الدفع الحالي: {{price}}/شهر ({{size}})",
   "Debit": "مدين",
   "DelayedPayment": "تأجيل دفع الخطة {{planName}} المؤرخة في {{date}}.",
-  "Downgrade": "تخفيض الإصدار",
   "DowngradeNow": "الرجوع إلى إصدار سابق الآن",
   "DueToday": "مستحق اليوم",
   "EnterAmount": "أدخل مبلغًا صحيحًا...",

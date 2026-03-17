@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Trenutno plačilo: {{price}}/mesec ({{size}})",
   "Debit": "Debet",
   "DelayedPayment": "Zamuda pri plačilu paketa {{planName}} z datumom {{date}}",
-  "Downgrade": "Razselitev",
   "DowngradeNow": "Degradiraj zdaj",
   "DueToday": "Rok za oddajo je danes.",
   "EnterAmount": "Vnesite celo količino...",

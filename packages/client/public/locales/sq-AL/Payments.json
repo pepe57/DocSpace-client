@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Pagesa aktuale: {{price}}/muaj ({{size}})",
   "Debit": "Debit",
   "DelayedPayment": "Pagesa e vonuar e planit të {{planName}} datë {{date}}",
-  "Downgrade": "Ulje",
   "DowngradeNow": "Uluni më poshtë tani",
   "DueToday": "Afati sot",
   "EnterAmount": "Fut një shumë të plotë...",

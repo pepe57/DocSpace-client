@@ -1,8 +1,6 @@
 {
   "AIToolsEnabled": "Các công cụ hỗ trợ AI đã được kích hoạt thành công.",
   "AndMore": "Và còn nữa!",
-  "AutomaticBackupDescription": "Thiết lập sao lưu theo lịch trình để bảo vệ dữ liệu liên tục mà không cần các thao tác thủ công.",
-  "BackupRoomDescription": "Lưu bản sao lưu vào phòng đã chọn hoặc phần {{sectionName}}. Sử dụng các phòng hiện có hoặc tạo một phòng mới.",
   "BackupServiceEnabled": "Đã kích hoạt thành công dịch vụ sao lưu.",
   "ChatBot": "ChatBot",
   "ChatBotDescription": "Tương tác với trợ lý AI trực tiếp trong trình chỉnh sửa của bạn — đặt câu hỏi, nhận gợi ý hoặc tăng tốc quy trình làm việc.",
@@ -20,7 +18,6 @@
   "OCRDescription": "Nhận diện và trích xuất văn bản từ các tệp PDF và hình ảnh đã quét.",
   "Summarization": "Tóm tắt",
   "SummarizationDescription": "Nhanh chóng tạo bản tóm tắt tài liệu để tiết kiệm thời gian và tập trung vào các điểm chính.",
-  "TemporaryDescription": "Tạo bản sao lưu được lưu trong phần “Sao lưu”. Có sẵn để tải xuống trong vòng 24 giờ sau khi tạo.",
   "TextGeneration": "Tạo văn bản",
   "TextGenerationDescription": "Tạo nội dung độc đáo như bài viết, thư hoặc tài liệu tiếp thị chỉ trong vài phút, ngay trong trình soạn thảo.",
   "TextTranslation": "Dịch văn bản",

@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Ընթացիկ վճարում՝ {{price}}/ամիս ({{size}})",
   "Debit": "Դեբետային",
   "DelayedPayment": "{{planName}} -ի հետաձգված վճարումը պլանը թվագրված է{{date}}",
-  "Downgrade": "Իջեցնել",
   "DowngradeNow": "Տարբերակի իջեցում հիմա",
   "DueToday": "Վերջնաժամկետն այսօր է",
   "EnterAmount": "Մուտքագրեք ամբողջ թիվ...",

@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Текущий платёж: {{price}}/месяц ({{size}})",
   "Debit": "Дебет",
   "DelayedPayment": "Просроченная оплата {{planName}} плана от {{date}}",
-  "Downgrade": "Понизить",
   "DowngradeNow": "Понизить прямо сейчас",
   "DueToday": "Оплатить сегодня",
   "EnterAmount": "Введите целую сумму...",

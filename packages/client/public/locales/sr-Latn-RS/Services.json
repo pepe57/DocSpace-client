@@ -1,8 +1,6 @@
 {
   "AIToolsEnabled": "Usluga AI alata je uspešno omogućena.",
   "AndMore": "Dodajte više",
-  "AutomaticBackupDescription": "Podesi zakazane bekape za kontinuiranu zaštitu podataka bez ručnih radnji.",
-  "BackupRoomDescription": "Sačuvaj bekap u izabranu sobu ili u {{sectionName}} odeljak. Koristi postojeće sobe ili kreiraj novu.",
   "BackupServiceEnabled": "Servis za bekap je uspešno omogućen.",
   "ChatBot": "ChatBot",
   "ChatBotDescription": "Interagujte sa pomoćnikom veštačke inteligencije direktno u svojim urednicima — postavljajte pitanja, dobijajte predloge ili ubrzajte tok posla.",
@@ -20,7 +18,6 @@
   "OCRDescription": "Prepoznajte i izdvojite tekst iz skeniranih PDF-ova i slika.",
   "Summarization": "Sažimanje",
   "SummarizationDescription": "Brzo generišite sažetke dokumenata da biste uštedeli vreme i fokusirali se na ključne tačke.",
-  "TemporaryDescription": "Kreiraj bekap sačuvan u odeljku \"Backup\". Dostupan za preuzimanje u roku od 24 sata nakon kreiranja.",
   "TextGeneration": "Generisanje teksta",
   "TextGenerationDescription": "Kreirajte jedinstven sadržaj poput članaka, pisama ili marketinških materijala za nekoliko minuta, direktno u uređivaču.",
   "TextTranslation": "Prevod teksta",

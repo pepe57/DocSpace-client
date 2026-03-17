@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Aktueller Betrag: {{price}}/Monat ({{size}})",
   "Debit": "Lastschrift",
   "DelayedPayment": "Aufgehaltene Bezahlung des {{planName}}-Plans vom {{date}}",
-  "Downgrade": "Herabstufen",
   "DowngradeNow": "Jetzt herabstufen",
   "DueToday": "Heute fällig",
   "EnterAmount": "Geben Sie einen ganzzahligen Betrag ein ...",

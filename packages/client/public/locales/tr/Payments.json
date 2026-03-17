@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Mevcut ödeme: {{price}}/ay ({{size}})",
   "Debit": "Borç",
   "DelayedPayment": "{{date}} tarihli {{planName}} planının gecikmiş ödemesi",
-  "Downgrade": "Aşağıya çekme",
   "DowngradeNow": "Şimdi eski sürüme geç",
   "DueToday": "Bugün teslim",
   "EnterAmount": "Bir tam sayı miktarı girin...",

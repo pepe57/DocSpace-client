@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "වත්මන් ගෙවීම: {{price}}/මසකට ({{size}})",
   "Debit": "ණය",
   "DelayedPayment": "{{date}} වන {{planName}} සැලසුමට ගෙවීම ප්‍රමාදයි",
-  "Downgrade": "අඩුපාඩු කිරීම",
   "DowngradeNow": "පහත හෙළන්න",
   "DueToday": "இදින අවසන්",
   "EnterAmount": "පූර්ණ සංඛ්‍යාවක් ඇතුළත් කරන්න...",

@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "現在の支払い: {{price}}/月 ({{size}})",
   "Debit": "引き落とし",
   "DelayedPayment": "{{planName}}プランの{{date}}までのお支払いを確認できませんでした",
-  "Downgrade": "ダウングレード",
   "DowngradeNow": "今すぐダウングレードする",
   "DueToday": "お支払い期限が本日です",
   "EnterAmount": "整数の金額を入力してください...",

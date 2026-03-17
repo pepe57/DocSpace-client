@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Huidige betaling: {{price}}/maand ({{size}})",
   "Debit": "Debet",
   "DelayedPayment": "Uitgestelde betaling van het {{planName}} plan op {{date}}",
-  "Downgrade": "Downgrade",
   "DowngradeNow": "Nu downgraden",
   "DueToday": "Vandaag ingeleverd",
   "EnterAmount": "Voer een geheel getalbedrag in...",

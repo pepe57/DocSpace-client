@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Aktuální platba: {{price}}/měsíc ({{size}})",
   "Debit": "Debet",
   "DelayedPayment": "Opožděná platba tarifu {{planName}} ze dne {{date}}",
-  "Downgrade": "Downgrade",
   "DowngradeNow": "Snížit úroveň nyní",
   "DueToday": "Zralé dnes",
   "EnterAmount": "Zadejte celočíselnou částku...",

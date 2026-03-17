@@ -1,8 +1,6 @@
 {
   "AIToolsEnabled": "Serviço de ferramentas de IA ativado com sucesso.",
   "AndMore": "E muito mais!",
-  "AutomaticBackupDescription": "Configure backups agendados para proteção contínua de dados sem ações manuais.",
-  "BackupRoomDescription": "Salve um backup em uma sala selecionada ou na seção {{sectionName}}. Use salas existentes ou crie uma nova.",
   "BackupServiceEnabled": "Serviço de backup habilitado com sucesso.",
   "ChatBot": "ChatBot",
   "ChatBotDescription": "Interaja com um assistente de IA diretamente em seus editores — faça perguntas, obtenha sugestões ou acelere seu fluxo de trabalho.",
@@ -20,7 +18,6 @@
   "OCRDescription": "Reconheça e extraia texto de PDFs digitalizados e imagens.",
   "Summarization": "Resumo",
   "SummarizationDescription": "Gere rapidamente resumos de documentos para economizar tempo e se concentrar nos pontos principais.",
-  "TemporaryDescription": "Crie um backup armazenado na seção \"Backup\". Disponível para download em até 24 horas após a criação.",
   "TextGeneration": "Geração de texto",
   "TextGenerationDescription": "Crie conteúdo exclusivo, como artigos, cartas ou materiais de marketing, em poucos minutos, diretamente no editor.",
   "TextTranslation": "Tradução de textos",

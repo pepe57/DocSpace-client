@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Nykyinen maksu: {{price}}/kk ({{size}})",
   "Debit": "Veloittaa",
   "DelayedPayment": "{{planName}} maksu myöhässä ohjelman päiväys {{date}}",
-  "Downgrade": "Alaspäin päivittäminen",
   "DowngradeNow": "Alenna ohjelman tasoa nyt",
   "DueToday": "Erääntynyt tänään",
   "EnterAmount": "Syötä kokonaislukumäärä...",

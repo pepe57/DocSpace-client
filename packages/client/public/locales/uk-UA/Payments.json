@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Поточний платіж: {{price}}/місяць ({{size}})",
   "Debit": "Дебет",
   "DelayedPayment": "Затримка платежу за планом {{planName}} від {{date}}",
-  "Downgrade": "Зменшення версії",
   "DowngradeNow": "Знизити зараз",
   "DueToday": "Терміново сьогодні",
   "EnterAmount": "Введіть ціле число...",

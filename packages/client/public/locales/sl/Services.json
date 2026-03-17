@@ -1,8 +1,6 @@
 {
   "AIToolsEnabled": "Orodja umetne inteligence so bila uspešno omogočena.",
   "AndMore": "In več!",
-  "AutomaticBackupDescription": "Nastavite urnik rezervnih kopij za stalno zaščito podatkov brez ročnih posegov.",
-  "BackupRoomDescription": "Shranjevanje varnostne kopije v izbrano sobo ali odsek {{sectionName}}. Uporabite obstoječe sobe ali ustvarite novo.",
   "BackupServiceEnabled": "Storitev varnostnega kopiranja je bila uspešno omogočena.",
   "ChatBot": "Klepetalni robot",
   "ChatBotDescription": "Komunicirajte z asistentskim AI neposredno v vaših urejevalnikih – zastavljajte vprašanja, pridobivajte predloge ali pospešujte svoj delovni tok.",
@@ -20,7 +18,6 @@
   "OCRDescription": "Prepoznajte in izvlecite besedilo iz skeniranih PDF-jev in slik.",
   "Summarization": "Povzetek",
   "SummarizationDescription": "Hitro ustvarite povzetke dokumentov, da prihranite čas in se osredotočite na ključne točke.",
-  "TemporaryDescription": "Ustvarite varnostno kopijo, shranjeno v razdelku \"Varnostne kopije\". Na voljo za prenos v 24 urah po ustvaritvi.",
   "TextGeneration": "Generiranje besedila",
   "TextGenerationDescription": "Ustvarite edinstveno vsebino, kot so članki, pisma ali marketinški materiali, v nekaj minutah, neposredno v urejevalniku.",
   "TextTranslation": "Besedilni prevod",

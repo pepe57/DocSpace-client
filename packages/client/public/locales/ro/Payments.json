@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Plata actuală: {{price}}/lună ({{size}})",
   "Debit": "Debitare",
   "DelayedPayment": "Plata abonament {{planName}} cu întârziere din {{date}}",
-  "Downgrade": "Retrogradare",
   "DowngradeNow": "Retrogradează acum",
   "DueToday": "Scadență astăzi",
   "EnterAmount": "Introduceți o valoare întreagă...",

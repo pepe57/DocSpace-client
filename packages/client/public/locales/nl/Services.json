@@ -1,8 +1,6 @@
 {
   "AIToolsEnabled": "AI-tools service succesvol ingeschakeld.",
   "AndMore": "En meer!",
-  "AutomaticBackupDescription": "Stel geplande back-ups in voor continue gegevensbescherming zonder handmatige acties.",
-  "BackupRoomDescription": "Sla een back-up op naar een geselecteerde ruimte of de {{sectionName}} sectie. Gebruik bestaande ruimtes of maak er een nieuwe aan.",
   "BackupServiceEnabled": "Back-upservice succesvol ingeschakeld.",
   "ChatBot": "ChatBot",
   "ChatBotDescription": "Interacteer direct met een AI-assistent in uw editors — stel vragen, krijg suggesties of versnel uw workflow.",
@@ -20,7 +18,6 @@
   "OCRDescription": "Erken en extraheer tekst uit gescande PDF's en afbeeldingen.",
   "Summarization": "Samenvatting",
   "SummarizationDescription": "Genereer snel samenvattingen van documenten om tijd te besparen en u te concentreren op de belangrijkste punten.",
-  "TemporaryDescription": "Maak een back-up opgeslagen in de sectie \"Back-up\". Beschikbaar om te downloaden binnen 24 uur na creatie.",
   "TextGeneration": "Tekstgeneratie",
   "TextGenerationDescription": "Maak unieke content zoals artikelen, brieven of marketingmaterialen in enkele minuten, direct in de editor.",
   "TextTranslation": "Tekstvertaling",

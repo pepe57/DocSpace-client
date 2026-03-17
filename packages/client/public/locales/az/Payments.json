@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Mövcud ödəniş: {{price}}/ay ({{size}})",
   "Debit": "Debet",
   "DelayedPayment": "{{date}} tarixli {{planName}} planının vaxtı keçmiş ödənişi",
-  "Downgrade": "Nazil etmək",
   "DowngradeNow": "İndi səviyyəni salın",
   "DueToday": "Bugün çatdırılmalı",
   "EnterAmount": "Ədəd məbləği daxil edin...",

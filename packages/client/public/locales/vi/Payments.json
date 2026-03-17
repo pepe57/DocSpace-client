@@ -43,7 +43,6 @@
   "CurrentPaymentMonth": "Thanh toán hiện tại: {{price}}/tháng ({{size}})",
   "Debit": "Nợ",
   "DelayedPayment": "Chậm thanh toán gói kế hoạch {{planName}} {{date}} ngày",
-  "Downgrade": "Hạ cấp",
   "DowngradeNow": "Hạ cấp ngay",
   "DueToday": "Hạn chót hôm nay",
   "EnterAmount": "Nhập một số nguyên...",

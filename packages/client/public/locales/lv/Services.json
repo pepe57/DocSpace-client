@@ -1,8 +1,6 @@
 {
   "AIToolsEnabled": "MI rīku pakalpojums veiksmīgi aktivizēts.",
   "AndMore": "Un vēl!",
-  "AutomaticBackupDescription": "Iestatiet plānotos dublējumus pastāvīgai datu aizsardzībai bez manuālām darbībām.",
-  "BackupRoomDescription": "Saglabājiet rezerves kopiju izvēlētā telpā vai {{sectionName}} sadaļā. Izmantojiet esošās telpas vai izveidojiet jaunu.",
   "BackupServiceEnabled": "Rezerves pakalpojums veiksmīgi aktivēts.",
   "ChatBot": "Čatbots",
   "ChatBotDescription": "Komunicējiet ar MI asistentu tieši savos redaktoros — uzdodiet jautājumus, saņemiet ieteikumus vai paātriniet savu darba plūsmu.",
@@ -20,7 +18,6 @@
   "OCRDescription": "Atpazīstiet un izvilciet tekstu no skenētu PDF failu un attēlu.",
   "Summarization": "Kopsavilkums",
   "SummarizationDescription": "Ātri ģenerējiet dokumentu kopsavilkumus, lai ietaupītu laiku un koncentrētos uz galvenajiem punktiem.",
-  "TemporaryDescription": "Izveidojiet rezerves kopiju, kas atrodas sadaļā \"Dublēšana\". Pieejama lejupielāde 24 stundu laikā pēc izveidošanas.",
   "TextGeneration": "Teksta ģenerēšana",
   "TextGenerationDescription": "Izveidojiet unikālu saturu, piemēram, rakstus, vēstules vai mārketinga materiālus, dažu minūšu laikā, tieši redaktorā.",
   "TextTranslation": "Teksta tulkošana",
