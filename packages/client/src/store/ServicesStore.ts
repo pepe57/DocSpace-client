@@ -104,7 +104,7 @@ class ServicesStore {
 
   isInitServicesPage = false;
 
-  isInitAiPage = false;
+  isInitServicesData = false;
 
   isVisibleWalletSettings = false;
 
@@ -263,8 +263,8 @@ class ServicesStore {
     this.isInitServicesPage = isInitServicesPage;
   };
 
-  setIsInitAiPage = (isInitAiPage: boolean) => {
-    this.isInitAiPage = isInitAiPage;
+  setIsInitServiceData = (isInitServicesData: boolean) => {
+    this.isInitServicesData = isInitServicesData;
   };
 
   fetchAiPrices = async () => {
@@ -447,19 +447,26 @@ class ServicesStore {
   ) => {
     const isRefresh = window.location.href.includes("complete=true");
 
-    this.setIsInitAiPage(false);
+    this.setIsInitServiceData(false);
+
+    if (!this.paymentStore || !this.currentTariffStatusStore) return;
 
     const {
       fetchTransactionHistory,
       initWalletPayerAndBalance,
       setServiceQuota,
-    } = this.paymentStore!;
+      fetchCardLinked,
+    } = this.paymentStore;
+
+    const { fetchPortalTariff, walletCustomerStatusNotActive } =
+      this.currentTariffStatusStore;
 
     try {
       const requests = [
         setServiceQuota(serviceEnum ?? serviceName),
         fetchTransactionHistory(null, null, true, true, "", serviceName),
         initWalletPayerAndBalance(isRefresh),
+        fetchPortalTariff(),
       ];
 
       if (serviceName === AI_TOOLS) {
@@ -474,12 +481,30 @@ class ServicesStore {
         requests.push(this.fetchBackupsCount());
       }
 
+      this.setIsInitServiceData(true);
       await Promise.all(requests);
+
+      if (this.paymentStore.isAlreadyPaid) {
+        if (this.paymentStore.isStripePortalAvailable) {
+          requests.push(this.paymentStore.setPaymentAccount());
+
+          if (this.paymentStore!.isPayer && walletCustomerStatusNotActive) {
+            requests.push(fetchCardLinked());
+          }
+
+          if (
+            this.paymentStore.isShowStorageTariffDeactivated() &&
+            this.paymentStore.isPayer
+          ) {
+            this.paymentStore.setIsShowTariffDeactivatedModal(true);
+          }
+        }
+
+        requests.push(this.paymentStore.fetchAutoPayments());
+      }
     } catch (error) {
       console.error(error);
       toastr.error(t("Common:UnexpectedError"));
-    } finally {
-      this.setIsInitAiPage(true);
     }
   };
 

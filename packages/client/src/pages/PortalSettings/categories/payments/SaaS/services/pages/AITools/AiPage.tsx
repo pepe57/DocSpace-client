@@ -87,7 +87,7 @@ type AiPageProps = {
   ) => string;
   aiServiceLastCreditDate?: string;
   isAiServiceLowBalance?: boolean;
-  isInitAiPage?: boolean;
+  isInitServicesData?: boolean;
   cardLinkedOnFreeTariff?: boolean;
   isFreeTariff?: boolean;
   isPayer?: boolean;
@@ -112,7 +112,7 @@ const AiPage = (props: AiPageProps) => {
     aiServiceLastCreditDate,
     language,
     isAiServiceLowBalance,
-    isInitAiPage,
+    isInitServicesData,
     cardLinkedOnFreeTariff,
     isFreeTariff,
     isPayer,
@@ -135,10 +135,10 @@ const AiPage = (props: AiPageProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isInitAiPage && !wasFirstAiServiceTopUp) {
+    if (isInitServicesData && !wasFirstAiServiceTopUp) {
       navigate("/portal-settings/payments/services");
     }
-  }, [isInitAiPage, wasFirstAiServiceTopUp]);
+  }, [isInitServicesData, wasFirstAiServiceTopUp]);
 
   const onRefresh = async () => {
     if (isRefreshing) return;
@@ -281,7 +281,7 @@ const AiPage = (props: AiPageProps) => {
     },
   ];
 
-  if (!isInitAiPage || !wasFirstAiServiceTopUp) return <AiPageLoader />;
+  if (!isInitServicesData || !wasFirstAiServiceTopUp) return <AiPageLoader />;
 
   const balance = formatWalletCurrency!();
 
@@ -452,7 +452,7 @@ export default inject(
       formatAiServiceCurrency,
       aiServiceLastCreditDate,
       isAiServiceLowBalance,
-      isInitAiPage,
+      isInitServicesData,
       wasFirstAiServiceTopUp,
     } = servicesStore;
     const { isFreeTariff } = currentQuotaStore;
@@ -471,7 +471,7 @@ export default inject(
       isAiServiceLowBalance,
       changeServiceState,
       isAiToolsServiceOn,
-      isInitAiPage,
+      isInitServicesData,
       cardLinkedOnFreeTariff,
       isPayer,
       isFreeTariff,

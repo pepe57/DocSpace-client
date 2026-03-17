@@ -84,7 +84,8 @@ type AdditionalStoragePageProps = {
   ) => Promise<void>;
   previousStoragePlanSize?: number;
   isGracePeriod?: boolean;
-  hasStorageSubscription?:boolean
+  hasStorageSubscription?: boolean;
+  isInitServicesData?: boolean;
 };
 
 const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
@@ -102,14 +103,16 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   walletCodeCurrency,
   previousStoragePlanSize,
   isGracePeriod,
+  isInitServicesData,
 }) => {
-  const { t } = useTranslation(["Payments", "Common", "Services"]);
+  const { t, ready } = useTranslation(["Payments", "Common", "Services"]);
   const contextMenuRef = useRef<ContextMenuRefType>(null);
   const [isStorageDialogVisible, setIsStorageDialogVisible] = useState(false);
   const [isCancelDialogVisible, setIsCancelDialogVisible] = useState(false);
   const [isCancelLoading, setIsCancelLoading] = useState(false);
   const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
     useState(false);
+  const shouldShowLoader = !isInitServicesData || !ready;
 
   const openUpgradeDialog = () => {
     if (isGracePeriod) {
@@ -200,6 +203,8 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   const keyProp = isScheduled
     ? { tKey: "SubscriptionAutoCancellation" }
     : { tKey: "SubscriptionWillBeAutomaticallyRenewed" };
+
+  if (shouldShowLoader) return;
 
   return (
     <div className={styles.container}>
@@ -353,42 +358,45 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   );
 };
 
-export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
-  const {
-    formatWalletCurrency,
-    walletBalance,
-    storagePriceIncrement,
-    storageSizeIncrement,
-    fetchBalance,
-    fetchTransactionHistory,
-    walletCodeCurrency,
-  } = paymentStore;
-  const {
-    currentStoragePlanSize,
-    nextStoragePlanSize,
-    storageExpiryDate,
-    fetchPortalTariff,
-    hasScheduledStorageChange,
-    previousStoragePlanSize,
-    isGracePeriod,
-    hasStorageSubscription
-  } = currentTariffStatusStore;
-
-  return {
-    walletBalance,
-    currentStoragePlanSize,
-    nextStoragePlanSize,
-    formatWalletCurrency,
-    storageExpiryDate,
-    storagePriceIncrement,
-    storageSizeIncrement,
-    fetchPortalTariff,
-    fetchBalance,
-    hasScheduledStorageChange,
-    fetchTransactionHistory,
-    walletCodeCurrency,
-    previousStoragePlanSize,
-    isGracePeriod,
-    hasStorageSubscription
-  };
-})(observer(AdditionalStoragePage));
+export default inject(
+  ({ paymentStore, currentTariffStatusStore, servicesStore }: TStore) => {
+    const {
+      formatWalletCurrency,
+      walletBalance,
+      storagePriceIncrement,
+      storageSizeIncrement,
+      fetchBalance,
+      fetchTransactionHistory,
+      walletCodeCurrency,
+    } = paymentStore;
+    const {
+      currentStoragePlanSize,
+      nextStoragePlanSize,
+      storageExpiryDate,
+      fetchPortalTariff,
+      hasScheduledStorageChange,
+      previousStoragePlanSize,
+      isGracePeriod,
+      hasStorageSubscription,
+    } = currentTariffStatusStore;
+    const { isInitServicesData } = servicesStore;
+    return {
+      walletBalance,
+      currentStoragePlanSize,
+      nextStoragePlanSize,
+      formatWalletCurrency,
+      storageExpiryDate,
+      storagePriceIncrement,
+      storageSizeIncrement,
+      fetchPortalTariff,
+      fetchBalance,
+      hasScheduledStorageChange,
+      fetchTransactionHistory,
+      walletCodeCurrency,
+      previousStoragePlanSize,
+      isGracePeriod,
+      hasStorageSubscription,
+      isInitServicesData,
+    };
+  },
+)(observer(AdditionalStoragePage));

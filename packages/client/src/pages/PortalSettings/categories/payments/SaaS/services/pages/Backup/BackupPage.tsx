@@ -51,9 +51,9 @@ type BackupPageProps = {
   changeServiceState?: (service: string) => void;
   setServiceState?: (service: string, enabled: boolean) => void;
   isFreeTariff?: boolean;
-  isBackupPaid?: boolean;
   maxFreeBackups?: number;
   usedBackupsCount?: number;
+  isInitServicesData?: boolean;
 };
 
 const BackupPage: React.FC<BackupPageProps> = ({
@@ -63,15 +63,17 @@ const BackupPage: React.FC<BackupPageProps> = ({
   changeServiceState,
   isBackupServiceOn,
   isFreeTariff,
-  isBackupPaid,
   maxFreeBackups,
   usedBackupsCount,
+  isInitServicesData,
 }) => {
-  const { t } = useTranslation(["Payments", "Services", "Common"]);
+  const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
   const [isTopUpVisible, setIsTopUpVisible] = useState(false);
+
+  const shouldShowLoader = !isInitServicesData || !ready;
 
   const handleToggleChange = () => {
     setIsConfirmDialogVisible(true);
@@ -130,6 +132,8 @@ const BackupPage: React.FC<BackupPageProps> = ({
 
   const isLowBalance = isBackupServiceOn && availableBackupsCount === 0;
 
+  if (shouldShowLoader) return;
+
   return (
     <div className={styles.container}>
       <ServiceToggleSection
@@ -162,7 +166,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
           </Text>
         </div>
 
-        {!isFreeTariff  ? (
+        {!isFreeTariff ? (
           <div className={styles.freeBackupsAmountContainer}>
             <div className={styles.backupsCount}>
               <Text fontSize="28px" fontWeight="700">
@@ -177,7 +181,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
         ) : null}
         {isBackupServiceOn ? (
           <>
-            {!isFreeTariff  ? <div className={styles.divider} /> : null}
+            {!isFreeTariff ? <div className={styles.divider} /> : null}
             <div className={styles.backupsAmountContainer}>
               <Text fontSize="28px" fontWeight="700">
                 {availableBackupsCount}
@@ -200,7 +204,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
           />
         )}
       </div>
-      {isBackupPaid ? (
+      {!isFreeTariff ? (
         <Text className={styles.backupPaidInfo}>
           <Trans
             t={t}
@@ -236,7 +240,11 @@ const BackupPage: React.FC<BackupPageProps> = ({
       ) : null}
 
       {isTopUpVisible ? (
-        <TopUpModal visible={isTopUpVisible} onClose={onCloseTopUpModal} serviceName={BACKUP_SERVICE}/>
+        <TopUpModal
+          visible={isTopUpVisible}
+          onClose={onCloseTopUpModal}
+          serviceName={BACKUP_SERVICE}
+        />
       ) : null}
     </div>
   );
@@ -253,7 +261,7 @@ export default inject(
     } = paymentStore;
 
     const { isFreeTariff, isBackupPaid, maxFreeBackups } = currentQuotaStore;
-    const { usedBackupsCount } = servicesStore;
+    const { usedBackupsCount, isInitServicesData } = servicesStore;
 
     return {
       formatWalletCurrency,
@@ -265,6 +273,7 @@ export default inject(
       isBackupPaid,
       maxFreeBackups,
       usedBackupsCount,
+      isInitServicesData,
     };
   },
 )(observer(BackupPage));
