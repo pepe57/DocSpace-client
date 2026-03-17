@@ -46,7 +46,7 @@ import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
 import { Component as Services } from "../categories/payments/SaaS/services";
 import { Component as AISettings } from "../categories/ai-settings";
-import AiPage from "../categories/payments/SaaS/services/pages/AITools/AiPage";
+import AiPage from "../categories/payments/SaaS/services/pages/ai-tools/AiPage";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
@@ -61,8 +61,8 @@ import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
-import BackupPage from "../categories/payments/SaaS/services/pages/Backup/BackupPage";
-import AdditionalStoragePage from "../categories/payments/SaaS/services/pages/AdditionalStorage/AdditionalStoragePage";
+import BackupPage from "../categories/payments/SaaS/services/pages/backup/BackupPage";
+import AdditionalStoragePage from "../categories/payments/SaaS/services/pages/additional-storage/AdditionalStoragePage";
 
 const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("customization")) return "customization";
