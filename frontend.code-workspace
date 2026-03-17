@@ -62,6 +62,11 @@
             "tooltip": "🛠️ Start the \"backend aspire SAAS\" task"
           },
           {
+            "label": "Apire : run SAAS - full",
+            "task": "Backend | run SAAS - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire SAAS - full\" task"
+          },
+          {
             "label": "Apire : clear Docker artifacts",
             "task": "Backend | clear Aspire (Docker)",
             "tooltip": "🛠️ Start the \"backend aspire clear Docker\" task"
