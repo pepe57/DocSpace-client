@@ -74,7 +74,7 @@ const SaaSPage = ({
   }, []);
 
   useEffect(() => {
-    setDocumentTitle(t("Common:PaymentsTitle"));
+    setDocumentTitle(t("Common:Billing"));
   }, [ready]);
 
   return shouldShowLoader && showPortalSettingsLoader ? (

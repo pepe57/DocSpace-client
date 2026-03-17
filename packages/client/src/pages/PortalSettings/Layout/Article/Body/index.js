@@ -222,7 +222,7 @@ const ArticleBodyContent = (props) => {
       case "Backup":
         return t("Common:Backup");
       case "Common:PaymentsTitle":
-        return t("Common:PaymentsTitle");
+        return standalone ? t("Common:PaymentsTitle") : t("Common:Billing");
       case "ManagementCategoryDataManagement":
         return t("ManagementCategoryDataManagement");
       case "LdapSettings":

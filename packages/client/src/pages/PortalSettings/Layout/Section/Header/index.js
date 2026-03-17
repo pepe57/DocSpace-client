@@ -367,7 +367,7 @@ const SectionHeaderContent = (props) => {
                 organizationName: logoText,
               })
             : t("DataImport")
-      : t(header, {
+      : !standalone ? t("Billing"): t(header, {
           organizationName: logoText,
           license: t("Common:EnterpriseLicense"),
           productName: t("Common:ProductName"),
