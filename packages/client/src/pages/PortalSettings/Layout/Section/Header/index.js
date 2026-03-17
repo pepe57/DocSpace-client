@@ -356,6 +356,8 @@ const SectionHeaderContent = (props) => {
         },
       ];
 
+  const isPaymentPage =  window.location.href.indexOf("portal-settings/payments/portal-payments") !== -1;
+
   const translatedHeader =
     header === IMPORT_HEADER_CONST
       ? workspace === "GoogleWorkspace"
@@ -367,7 +369,9 @@ const SectionHeaderContent = (props) => {
                 organizationName: logoText,
               })
             : t("DataImport")
-      : !standalone ? t("Billing"): t(header, {
+      : !standalone && isPaymentPage  
+        ? t("Billing") 
+        : t(header, {
           organizationName: logoText,
           license: t("Common:EnterpriseLicense"),
           productName: t("Common:ProductName"),

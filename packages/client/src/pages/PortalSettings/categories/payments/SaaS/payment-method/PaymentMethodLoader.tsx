@@ -12,7 +12,7 @@ const PaymentMethodLoader: React.FC = () => {
       </div>
 
       <RectangleSkeleton
-        width="400px"
+        width="100%"
         height="16px"
         borderRadius="3px"
         className={styles.description}
@@ -30,7 +30,7 @@ const PaymentMethodLoader: React.FC = () => {
       </div>
 
       <RectangleSkeleton
-        width="400px"
+        width="100%"
         height="16px"
         borderRadius="3px"
         className={styles.description}
