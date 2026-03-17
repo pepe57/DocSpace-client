@@ -98,7 +98,6 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
         toastr.error(error);
       },
     });
-    setTags(updatedTags);
   }, [searchValue, tags, clearSearch, createTag, setTags, showCreateTag]);
 
   const handleKeyDown = useCallback(

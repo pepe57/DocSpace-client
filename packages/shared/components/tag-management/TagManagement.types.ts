@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TagClickEvent, TagType } from "@docspace/ui-kit/components/tag";
+import type { EDIT_TAG_FORM_NAME } from "./TagManagement.constants";
 
 export type AccessTagManagement = {
   canRemove?: boolean;
@@ -70,7 +71,7 @@ export interface ITagManagementStateContext {
   access: AccessTagManagement;
 }
 
-export interface TagManagementContextValue extends ITagManagementStateContext {}
+export type TagManagementContextValue = ITagManagementStateContext
 
 export interface UpdateTagNameParams {
   oldLabel: string;
@@ -97,4 +98,8 @@ export interface TagManagementProps {
   isActive?: boolean;
   onSelectTag: (tag: TagClickEvent) => void;
   access: AccessTagManagement;
+}
+
+export interface FormValues {
+  [EDIT_TAG_FORM_NAME]: string;
 }

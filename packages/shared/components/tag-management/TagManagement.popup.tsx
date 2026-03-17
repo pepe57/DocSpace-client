@@ -131,10 +131,10 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
           >
             <TagManagementFilter roomId={roomId} />
             <TagManagementContent
-              onSelectTag={onSelectTag}
               roomId={roomId}
-              onDeleteTag={onDeleteTag}
               onEditTag={onEditTag}
+              onDeleteTag={onDeleteTag}
+              onSelectTag={onSelectTag}
             />
           </TagManagementProvider>
         ))

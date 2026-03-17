@@ -94,6 +94,7 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
       showCreateTag,
       clearSearch,
       access,
+      tags,
     ],
   );
 
