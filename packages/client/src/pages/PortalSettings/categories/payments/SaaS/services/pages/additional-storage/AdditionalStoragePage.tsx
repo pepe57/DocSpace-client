@@ -87,6 +87,7 @@ type AdditionalStoragePageProps = {
   isGracePeriod?: boolean;
   hasStorageSubscription?: boolean;
   isInitServicesData?: boolean;
+  storageServiceName?: string;
 };
 
 const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
@@ -105,6 +106,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   previousStoragePlanSize,
   isGracePeriod,
   isInitServicesData,
+  storageServiceName,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common", "Services"]);
   const contextMenuRef = useRef<ContextMenuRefType>(null);
@@ -334,7 +336,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
       ) : null}
 
       <div className={styles.transactionSection}>
-        <TransactionHistory serviceName={DISK_STORAGE} />
+        <TransactionHistory serviceName={storageServiceName ?? DISK_STORAGE} />
       </div>
 
       {isStorageDialogVisible ? (
@@ -369,6 +371,7 @@ export default inject(
       fetchBalance,
       fetchTransactionHistory,
       walletCodeCurrency,
+      storageServiceName,
     } = paymentStore;
     const {
       currentStoragePlanSize,
@@ -398,6 +401,7 @@ export default inject(
       isGracePeriod,
       hasStorageSubscription,
       isInitServicesData,
+      storageServiceName,
     };
   },
 )(observer(AdditionalStoragePage));

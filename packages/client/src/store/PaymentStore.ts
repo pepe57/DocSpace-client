@@ -429,6 +429,13 @@ class PaymentStore {
     );
   }
 
+  get storageServiceName() {
+    return (
+      (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TServiceFeatureWithPrice)
+        ?.serviceName
+    );
+  }
+
   get backupServicePrice() {
     return (
       (
@@ -734,6 +741,8 @@ class PaymentStore {
       : service.features[0].id.toString();
 
     this.servicesQuotasFeatures.set(key, featureWithPrice);
+
+    return service.serviceName;
   };
 
   paymentMethodInit = async (t: TTranslation) => {

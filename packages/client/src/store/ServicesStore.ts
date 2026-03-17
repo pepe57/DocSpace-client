@@ -46,7 +46,7 @@ import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/wallet/utils";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
-import { AI_ENUM, AI_TOOLS, BACKUP_SERVICE } from "@docspace/shared/constants";
+import { AI_ENUM, AI_TOOLS, BACKUP_SERVICE, STORAGE_ENUM } from "@docspace/shared/constants";
 
 type TAiToolsChatPrice = {
   prompt: number;
@@ -462,9 +462,22 @@ class ServicesStore {
       this.currentTariffStatusStore;
 
     try {
+      let resolvedServiceName = serviceName;
+
+      if (serviceEnum === STORAGE_ENUM) {
+        resolvedServiceName =
+          (await setServiceQuota(serviceEnum)) ?? serviceName;
+      }
+
+
+      const serviceQuotaRequest =
+        serviceEnum !== STORAGE_ENUM
+          ? [setServiceQuota(serviceEnum ?? serviceName)]
+          : [];
+
       const requests = [
-        setServiceQuota(serviceEnum ?? serviceName),
-        fetchTransactionHistory(null, null, true, true, "", serviceName),
+        ...serviceQuotaRequest,
+        fetchTransactionHistory(null, null, true, true, "", resolvedServiceName),
         initWalletPayerAndBalance(isRefresh),
         fetchPortalTariff(),
       ];
