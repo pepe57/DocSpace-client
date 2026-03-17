@@ -179,7 +179,7 @@ export const TagManagement: FC<TagManagementProps> = ({
     <>
       <Tags
         tags={tags}
-        id={id.toString()}
+        id={id?.toString()}
         columnCount={columnCount}
         onSelectTag={onSelectTag}
         optionTagRef={anchorRef}
@@ -227,3 +227,4 @@ export const TagManagement: FC<TagManagementProps> = ({
     </>
   );
 };
+
