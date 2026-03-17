@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+
+import { toAbsoluteUrl } from "../../../utils/index";
 import { Text } from "@docspace/ui-kit/components/text";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -118,7 +120,7 @@ const PayerInformation = ({
   const [isDisabled, setDisabled] = useState(false);
   const goToStripePortal = () => {
     accountLink
-      ? window.open(accountLink, "_blank")
+      ? window.open(toAbsoluteUrl(accountLink), "_blank")
       : toastr.error(t("Common:UnexpectedError"));
   };
 

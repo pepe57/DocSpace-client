@@ -28,6 +28,8 @@ import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 
+import { toAbsoluteUrl } from "../../utils/index";
+
 import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
@@ -128,7 +130,7 @@ const Wallet = (props: WalletProps) => {
 
   const goLinkCard = () => {
     cardLinked
-      ? window.open(cardLinked, "_self")
+      ? window.open(toAbsoluteUrl(cardLinked), "_self")
       : toastr.error(t("Common:UnexpectedError"));
   };
 
@@ -288,3 +290,4 @@ export default inject(
     };
   },
 )(observer(Wallet));
+

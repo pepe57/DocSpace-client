@@ -26,6 +26,8 @@
 
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import { toAbsoluteUrl } from "../../../../utils/index";
 import classNames from "classnames";
 import { inject, observer } from "mobx-react";
 
@@ -92,13 +94,13 @@ const PaymentMethod = (props: PaymentMethodProps) => {
 
   const goLinkCard = () => {
     cardLinked
-      ? window.open(cardLinked, "_self")
+      ? window.open(toAbsoluteUrl(cardLinked), "_self")
       : toastr.error(t("Common:UnexpectedError"));
   };
 
   const goStripeAccount = () => {
     accountLink
-      ? window.open(accountLink, "_blank")
+      ? window.open(toAbsoluteUrl(accountLink), "_blank")
       : toastr.error(t("Common:UnexpectedError"));
   };
 
@@ -139,7 +141,7 @@ const PaymentMethod = (props: PaymentMethodProps) => {
         ) : null}
       </div>
       {walletCustomerEmail ? (
-        <CardInformation scale withoutMargin/>
+        <CardInformation scale withoutMargin />
       ) : (
         <div className={styles.addPaymentMethodContainer}>
           <AddButton
@@ -160,3 +162,4 @@ export default inject(({ paymentStore, servicesStore }: TStore) => {
   const { confirmActionType } = servicesStore;
   return { confirmActionType, fetchCardLinked };
 })(observer(PaymentMethod));
+
