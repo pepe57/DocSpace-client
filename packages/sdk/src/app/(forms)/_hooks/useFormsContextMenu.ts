@@ -35,12 +35,14 @@ import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import BackupSvgUrl from "PUBLIC_DIR/images/icons/16/backup.svg?url";
+import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/ai-agents.svg?url";
 
-import type { TFile } from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { FormsSection } from "@/types/forms";
 
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
+import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import useFormsActions from "./useFormsActions";
 
 export type TFormsContextMenuItem = {
@@ -55,22 +57,35 @@ export type TFormsContextMenuItem = {
 export default function useFormsContextMenu() {
   const { t } = useTranslation(["Common"]);
   const { activeSection } = useFormsNavigationStore();
-  const { openForm, deleteFromList, downloadFile, startFilling, resetFilling } =
-    useFormsActions({ t });
+  const { openPanelWithAgent, askFromDBAgentId } = useFormsAiAgentStore();
+
+  const {
+    openForm,
+    deleteFromList,
+    downloadFile,
+    startFilling,
+    resetFilling,
+    downloadFolder,
+    deleteFolderFromList,
+  } = useFormsActions({ t });
 
   const getContextMenuModel = useCallback(
     (file: TFile): TFormsContextMenuItem[] => {
       const model: TFormsContextMenuItem[] = [];
 
+      const isPreparing = file.isFillingPreparing;
       const canEdit =
-        file.security?.Edit && file.viewAccessibility?.WebEdit;
+        !isPreparing &&
+        file.security?.Edit &&
+        file.viewAccessibility?.WebEdit;
       const canFillForm =
+        !isPreparing &&
         file.security?.FillForms &&
         file.viewAccessibility?.WebRestrictedEditing;
       const canDownload = file.security?.Download;
       const canDelete = file.security?.Delete;
-      const canStartFilling = file.security?.StartFilling;
-      const canResetFilling = file.security?.ResetFilling;
+      const canStartFilling = !isPreparing && file.security?.StartFilling;
+      const canResetFilling = !isPreparing && file.security?.ResetFilling;
 
       switch (activeSection) {
         case FormsSection.MyForms: {
@@ -94,6 +109,17 @@ export default function useFormsContextMenu() {
               onClick: () => openForm(file, "fill"),
               disabled: false,
             });
+
+            if (askFromDBAgentId) {
+              model.push({
+                id: "option_ask-from-db",
+                key: "ask-from-db",
+                label: "Ask from DB",
+                icon: AiAgentsReactSvgUrl,
+                onClick: () => openPanelWithAgent(askFromDBAgentId, file),
+                disabled: false,
+              });
+            }
           }
 
           if (canStartFilling) {
@@ -219,8 +245,41 @@ export default function useFormsContextMenu() {
       downloadFile,
       startFilling,
       resetFilling,
+      openPanelWithAgent,
+      askFromDBAgentId,
     ],
   );
 
-  return { getContextMenuModel };
+  const getFolderContextMenuModel = useCallback(
+    (folder: TFolder): TFormsContextMenuItem[] => {
+      const model: TFormsContextMenuItem[] = [];
+
+      if (folder.security?.Download) {
+        model.push({
+          id: "option_download-folder",
+          key: "download-folder",
+          label: t("Common:Download"),
+          icon: DownloadReactSvgUrl,
+          onClick: () => downloadFolder(folder.id),
+          disabled: false,
+        });
+      }
+
+      if (folder.security?.Delete) {
+        model.push({
+          id: "option_delete-folder",
+          key: "delete-folder",
+          label: t("Common:Delete"),
+          icon: RemoveReactSvgUrl,
+          onClick: () => deleteFolderFromList(folder.id),
+          disabled: false,
+        });
+      }
+
+      return model;
+    },
+    [t, downloadFolder, deleteFolderFromList],
+  );
+
+  return { getContextMenuModel, getFolderContextMenuModel };
 }
