@@ -426,7 +426,6 @@
   "Form": "Formulaire",
   "FormDataCollection": "Collecte de données de formulaires",
   "FormDataCollectionDescription": "Collectez les copies des formulaires remplis et les données qu'ils contiennent dans un fichier XLSX pour analyser les réponses dans les salles de remplissage de formulaires.",
-  "FormFilingRoomInfo": "Téléchargez des formulaires PDF dans la salle. Invitez les membres et les invités à remplir un formulaire PDF. Examinez les formulaires remplis et analysez les données collectées automatiquement dans une feuille de calcul.",
   "FormFilingRoomTitle": "Salle de remplissage de formulaires",
   "FormRoom": "Salles de remplissages de formulaires",
   "Forms": "Formulaires",
@@ -1055,5 +1054,9 @@
   "YourTurn": "Votre tour",
   "Upload": "Télécharger",
   "Open": "Ouvrir",
-  "Quantity": "Quantité"
+  "Quantity": "Quantité",
+  "YourTurn": "Votre tour",
+  "DeleteAIAgentChatTitle": "Supprimer le chat ?",
+  "DeleteAIChatDescription": "Vous êtes sur le point de supprimer <strong>{{chatName}}<1>.</1></strong> Tous les messages et l'historique du chat seront définitivement supprimés et ne pourront pas être restaurés.",
+  "DeleteForeverButton": "Supprimer définitivement"
 }

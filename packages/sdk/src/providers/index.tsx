@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import { Toast } from "@docspace/ui-kit/components/toast";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type {
@@ -55,6 +57,7 @@ export type TContextData = {
   colorTheme: TGetColorTheme | undefined;
   locale?: string;
   portalCultures: string[];
+  authToken?: string;
 };
 
 export type TProviders = {
@@ -77,10 +80,11 @@ const Providers = ({ children, contextData }: TProviders) => {
     contextData;
 
   const apiUrl = getApiUrl();
-  const apiKey = getCookie("asc_auth_key") || "";
+  const apiKey =
+    getCookie("asc_auth_key") || contextData.authToken || "";
 
   return (
-    <ApiProvider url={apiUrl} apiKey={apiKey}>
+    <ApiProvider url={apiUrl} apiKey={apiKey} initSocket={false}>
       <TranslationProvider
         settings={settings as TTranslationProvider["settings"]}
         user={user as TTranslationProvider["user"]}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react-webpack5";
 import { useTranslation } from "react-i18next";
 import ShareSkeleton from "./index";
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";

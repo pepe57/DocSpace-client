@@ -426,7 +426,6 @@
   "Form": "Formulário",
   "FormDataCollection": "Coleta de dados do formulário",
   "FormDataCollectionDescription": "Reúna as cópias preenchidas do formulário e os dados deles em XLSX para analisar as respostas nas salas de preenchimento de formulários.",
-  "FormFilingRoomInfo": "Carregue formulários PDF na sala. Convide membros e convidados a preencher um formulário PDF. Revise formulários preenchidos e analise os dados coletados automaticamente em uma planilha.",
   "FormFilingRoomTitle": "Sala de preenchimento de formulários",
   "FormRoom": "Sala de formulário",
   "Forms": "Formulários",
@@ -1055,5 +1054,9 @@
   "YourTurn": "A sua vez",
   "Upload": "Carregar",
   "Open": "Abrir",
-  "Quantity": "Quantidade"
+  "Quantity": "Quantidade",
+  "YourTurn": "A sua vez",
+  "DeleteAIAgentChatTitle": "Apagar chat?",
+  "DeleteAIChatDescription": "Você está prestes a excluir <strong>{{chatName}}<1>.</1></strong>\n Todas as mensagens e histórico do chat serão removidos permanentemente e não poderão ser restaurados.",
+  "DeleteForeverButton": "Eliminar para sempre"
 }

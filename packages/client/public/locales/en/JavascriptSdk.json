@@ -40,6 +40,7 @@
   "ElementCalledAfterClicking": "The element will be called after clicking",
   "ElementItself": "The element itself",
   "EmbedCodeSuccessfullyCopied": "Embed code successfully copied to clipboard",
+  "EventLog": "Event Log",
   "EnterCount": "Enter count",
   "EnterHeight": "Enter height",
   "EnterId": "Enter ID",
@@ -79,6 +80,7 @@
   "Menu": "Left menu",
   "MenuDescription": "You can disable the left menu if users don't need to navigate to other sections.",
   "MobileOnly": "only mobile devices",
+  "NoEventsYet": "No events yet.",
   "NPMCodeConfigStep": "Create config object with required parameters:",
   "NPMCodeCreateStep": "Create HTML element with id from config and insert it inside document body for place SDK frame:",
   "NPMCodeDescription": "NPM package description",
@@ -146,5 +148,7 @@
   "MaximumFolderSizeDescription": "Folder larger than this size won't be uploaded.",
   "MaximumFilesSizeDescription": "Files larger than this size won't be uploaded.",
   "MaximumFoldersSizeDescription": "Folders larger than this size won't be uploaded.",
-  "MaximumTotalUploadSizeDescription": "Limits the total size of all files uploaded at once. If the total exceeds the limit, the upload will not start."
+  "MaximumTotalUploadSizeDescription": "Limits the total size of all files uploaded at once. If the total exceeds the limit, the upload will not start.",
+  "TotalSizeMustBeGreater": "Total upload size must be greater than or equal to the per-file size limit.",
+  "VoidReturn": "Void"
 }

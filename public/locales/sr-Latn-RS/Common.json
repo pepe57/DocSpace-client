@@ -426,7 +426,6 @@
   "Form": "Obrazac",
   "FormDataCollection": "Prikupljanje podataka iz obrasca",
   "FormDataCollectionDescription": "Prikupite popunjene kopije obrasca i podatke iz njih u XLSX formatu za analizu odgovora u prostorijama za popunjavanje obrazaca.",
-  "FormFilingRoomInfo": "Otpremite PDF obrasce u sobu. Pozovite članove i goste da popune PDF obrazac. Pregledajte popunjene obrasce i analizirajte podatke koji se automatski prikupljaju u tabeli.",
   "FormFilingRoomTitle": "Prostorija za Popunjavanje Formulara",
   "FormRoom": "Obrazac soba",
   "Forms": "Obrasci",
@@ -1055,5 +1054,9 @@
   "YourTurn": "Vaš red",
   "Upload": "Otpremi",
   "Open": "Otvori",
-  "Quantity": "Količina"
+  "Quantity": "Količina",
+  "YourTurn": "Vaš red",
+  "DeleteAIAgentChatTitle": "Briši čat?",
+  "DeleteAIChatDescription": "Brišem <strong>{{chatName}}<1>.</1></strong>\nSve poruke i istorija chata biće trajno obrisane i neće moći da budu vraćene.",
+  "DeleteForeverButton": "Obriši zauvek"
 }

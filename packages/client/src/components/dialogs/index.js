@@ -77,7 +77,6 @@ import DisconnectAccountDialog from "./DisconnectAccountDialog";
 import CreateAgentDialog from "./CreateEditAgentDialog/CreateAgentDialog";
 import ResetTemplateDialog from "./ResetTemplateDialog";
 import EditRoomGroupsDialog from "./EditRoomGroupsDialog";
-import RoomGroupingDialog from "./RoomGroupingDialog";
 import AddRoomToGroupDialog from "./AddRoomToGroupDialog";
 import PauseSubmissionsDialog from "./PauseSubmissionsDialog";
 
@@ -135,7 +134,6 @@ export {
   CreateAgentDialog,
   ResetTemplateDialog,
   EditRoomGroupsDialog,
-  RoomGroupingDialog,
   AddRoomToGroupDialog,
   PauseSubmissionsDialog,
 };

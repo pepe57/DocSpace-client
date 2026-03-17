@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react-webpack5";
 import { SocialButtonsGroup } from "./index";
 import type { SocialButtonProps } from "./SocialButtonsGroup.types";
 

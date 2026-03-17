@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { I18nextProvider } from "react-i18next";
-import type { Decorator } from "@storybook/react";
+import type { Decorator } from "@storybook/react-webpack5";
 
 import i18n from "../i18n";
 

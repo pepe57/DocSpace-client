@@ -426,7 +426,6 @@
   "Form": "Biểu mẫu",
   "FormDataCollection": "Thu thập dữ liệu mẫu",
   "FormDataCollectionDescription": "Thu thập các bản sao mẫu đã hoàn thành và dữ liệu từ chúng vào XLSX để phân tích các phản hồi trong phòng Điền Mẫu.",
-  "FormFilingRoomInfo": "Tải biểu mẫu PDF lên phòng. Mời thành viên và khách điền vào biểu mẫu PDF. Xem lại các biểu mẫu đã hoàn thành và phân tích dữ liệu được thu thập tự động trong bảng tính.",
   "FormFilingRoomTitle": "Phòng Điền Biểu mẫu",
   "FormRoom": "Phòng biểu mẫu",
   "Forms": "Các Biểu mẫu",
@@ -1055,5 +1054,9 @@
   "YourTurn": "Phiên của bạn",
   "Upload": "Tải lên",
   "Open": "Mở",
-  "Quantity": "Số lượng"
+  "Quantity": "Số lượng",
+  "YourTurn": "Phiên của bạn",
+  "DeleteAIAgentChatTitle": "Xóa cuộc trò chuyện?",
+  "DeleteAIChatDescription": "Bạn sắp xóa <strong>{{chatName}}<1>.</1></strong>\n Tất cả tin nhắn và lịch sử trò chuyện sẽ bị xóa vĩnh viễn và không thể khôi phục.",
+  "DeleteForeverButton": "Xóa vĩnh viễn"
 }

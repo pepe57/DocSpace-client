@@ -375,11 +375,13 @@ const ModelSettings = ({
               onSelect={onSelectProvider}
               scaled
               scaledOptions
+              dropDownMaxHeight={providerOptions.length > 7 ? 300 : undefined}
               noBorder={false}
               className={classNames("ai-combobox provider-combobox", {
                 "has-error": !!error,
               })}
               displaySelectedOption
+              dataTestId="create_agent_provider_combobox"
             />
           </FieldContainer>
         )}
@@ -398,6 +400,7 @@ const ModelSettings = ({
             displaySelectedOption
             dropDownClassName="not-selectable"
             isDisabled={!!error}
+            dataTestId="create_agent_model_combobox"
           />
         )}
       </div>

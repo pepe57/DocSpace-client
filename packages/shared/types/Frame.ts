@@ -34,7 +34,8 @@ export type TFrameMode =
   | "viewer"
   | "room-selector"
   | "file-selector"
-  | "system";
+  | "system"
+  | "forms";
 
 export type TFrameSelectorType =
   | "roomsOnly"

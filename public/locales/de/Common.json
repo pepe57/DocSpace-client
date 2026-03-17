@@ -426,7 +426,6 @@
   "Form": "Formular",
   "FormDataCollection": "Formulardatenerfassung",
   "FormDataCollectionDescription": "Sammeln Sie die ausgefüllten Formularkopien und Daten daraus in XLSX, um die Antworten in Formularausfüllräumen zu analysieren.",
-  "FormFilingRoomInfo": "Laden Sie PDF-Formulare in den Raum hoch. Laden Sie Mitglieder und Gäste ein, ein PDF-Formular auszufüllen. Überprüfen Sie ausgefüllte Formulare und analysieren Sie automatisch erfasste Daten in einer Tabelle.",
   "FormFilingRoomTitle": "Räume zum Formularausfüllen",
   "FormRoom": "Formularraum",
   "Forms": "Formulare",
@@ -1055,5 +1054,9 @@
   "YourTurn": "Jetzt sind Sie dran",
   "Upload": "Hochladen",
   "Open": "Öffnen",
-  "Quantity": "Menge"
+  "Quantity": "Menge",
+  "YourTurn": "Jetzt sind Sie dran",
+  "DeleteAIAgentChatTitle": "Chat löschen?",
+  "DeleteAIChatDescription": "Sie sind im Begriff, <strong>{{chatName}}<1>.</1></strong> zu löschen. Alle Nachrichten und der gesamte Chatverlauf werden endgültig gelöscht und können nicht wiederhergestellt werden.\n",
+  "DeleteForeverButton": "permanent löschen"
 }

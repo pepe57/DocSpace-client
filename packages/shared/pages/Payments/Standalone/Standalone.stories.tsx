@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-webpack5";
 import { StandalonePage } from "./index";
 import { IPaymentsProps } from "./Standalone.types";
 
@@ -88,6 +88,12 @@ const defaultArgs: IPaymentsProps = {
     licenseTypeByUsers: false,
   },
   docspaceFaqUrl: "",
+  isLifetimeLicense: false,
+  isGracePeriod: false,
+  isNotPaidPeriod: false,
+  gracePeriodEndDate: "2025-07-11",
+  delayDaysCount: "30",
+  feedbackAndSupportUrl: "",
 };
 
 export const Enterprise: Story = {

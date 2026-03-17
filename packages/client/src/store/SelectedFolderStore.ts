@@ -27,7 +27,7 @@
 import { makeAutoObservable } from "mobx";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   FolderType,
   RoomsType,
@@ -195,6 +195,9 @@ class SelectedFolderStore {
 
   parentShared: boolean = false;
 
+  sendFormToExternalDB: boolean = false;
+  saveFormAsXLSX: boolean = false;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -266,6 +269,8 @@ class SelectedFolderStore {
       isRoomStorageQuotaExceeded: this.isRoomStorageQuotaExceeded,
       roomUsedSpace: this.roomUsedSpace,
       roomQuotaLimit: this.roomQuotaLimit,
+      sendFormToExternalDB: this.sendFormToExternalDB,
+      saveFormAsXLSX: this.saveFormAsXLSX,
     };
   };
 
@@ -327,6 +332,8 @@ class SelectedFolderStore {
     this.parentShared = false;
     this.ownedBy = null;
     this.sharedBy = null;
+    this.sendFormToExternalDB = false;
+    this.saveFormAsXLSX = false;
   };
 
   setFilesCount = (filesCount: number) => {

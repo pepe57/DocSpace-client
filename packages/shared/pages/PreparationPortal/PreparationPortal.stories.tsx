@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-webpack5";
 import { PreparationPortal } from ".";
 
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";

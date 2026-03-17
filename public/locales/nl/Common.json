@@ -426,7 +426,6 @@
   "Form": "Formulier",
   "FormDataCollection": "Form data verzameling",
   "FormDataCollectionDescription": "Verzamelen van kopieën van de ingevulde formulieren en de daaruit geëxtraheerde gegevens in XLSX om de antwoorden in de formulierenkamers te analyseren.",
-  "FormFilingRoomInfo": "PDF formulieren uploaden naar de kamer. Nodig leden en gasten uit om een PDF formulier in te vullen. Controleer ingevulde formulieren en analyseer automatisch verzamelde gegevens in een spreadsheet.",
   "FormFilingRoomTitle": "Kamer voor het invullen van formulieren",
   "FormRoom": "Formulier kamer",
   "Forms": "Formulieren",
@@ -1055,5 +1054,9 @@
   "YourTurn": "Uw beurt",
   "Upload": "Uploaden",
   "Open": "Open",
-  "Quantity": "Hoeveelheid"
+  "Quantity": "Hoeveelheid",
+  "YourTurn": "Uw beurt",
+  "DeleteAIAgentChatTitle": "Chat wissen?",
+  "DeleteAIChatDescription": "U gaat <strong>{{chatName}}<1>.</1></strong> verwijderen.\nAlle berichten en chatgeschiedenis worden permanent verwijderd en kunnen niet worden hersteld.",
+  "DeleteForeverButton": "Voor altijd verwijderen"
 }
