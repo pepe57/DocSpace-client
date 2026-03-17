@@ -53,10 +53,10 @@ import {
 import type { DateTime } from "luxon";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import StoragePlanUpgrade from "../../sub-components/AdditionalStorage/StoragePlanUpgrade";
-import StoragePlanCancel from "../../sub-components/AdditionalStorage/StoragePlanCancel";
-import StorageWarning from "../../sub-components/AdditionalStorage/StorageWarning";
-import GracePeriodModal from "../../sub-components/AdditionalStorage/GracePeriodModal";
+import StoragePlanUpgrade from "../../panels/AdditionalStorage/StoragePlanUpgrade";
+import StoragePlanCancel from "../../panels/AdditionalStorage/StoragePlanCancel";
+import StorageWarning from "../../panels/AdditionalStorage/StorageWarning";
+import GracePeriodModal from "../../panels/AdditionalStorage/GracePeriodModal";
 import { useServicesActions } from "../../hooks/useServicesActions";
 
 type AdditionalStoragePageProps = {

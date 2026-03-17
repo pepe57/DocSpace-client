@@ -45,7 +45,7 @@ import { finishRefreshingWithMinCycle } from "SRC_DIR/helpers/refreshing";
 
 import ConfirmationDialog from "../../sub-components/ConfirmationDialog";
 
-import PricingBillingBody from "../../sub-components/AIService/PricingBillingBody";
+import PricingBillingBody from "../../panels/AIService/PricingBillingBody";
 
 import ModelSettingsTable from "./sub-components/ModelSettingsTable";
 import AiPageLoader from "./AiPageLoader";
@@ -57,7 +57,7 @@ import {
 } from "@docspace/ui-kit/utils/date";
 import { setServiceState } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/ui-kit/components";
-import AIServiceDialog from "../../sub-components/AIService/AIServiceDialog";
+import AIServiceDialog from "../../panels/AIService/AIServiceDialog";
 import WalletInfo from "../../../shared/top-up-balance/sub-components/WalletInfo";
 
 type AiPageProps = {
