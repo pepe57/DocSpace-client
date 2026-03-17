@@ -10,7 +10,6 @@
       "!**/vitest/reports",
       "!**/node_modules",
       "!**/dist",
-      "!**/storybook-static",
       "!**/.git",
       "!**/.nx",
       "!**/.vscode"

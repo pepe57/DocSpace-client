@@ -982,24 +982,15 @@ importers:
       cross-env:
         specifier: ^10.1.0
         version: 10.1.0
-      css-loader:
-        specifier: 6.11.0
-        version: 6.11.0(webpack@5.105.4)
       css-minimizer-webpack-plugin:
         specifier: ^7.0.4
         version: 7.0.4(webpack@5.105.4)
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
-      sass-loader:
-        specifier: 16.0.5
-        version: 16.0.5(sass@1.97.3)(webpack@5.105.4)
       shx:
         specifier: 0.4.0
         version: 0.4.0
-      style-loader:
-        specifier: 3.3.4
-        version: 3.3.4(webpack@5.105.4)
       terser-webpack-plugin:
         specifier: 5.3.16
         version: 5.3.16(webpack@5.105.4)
@@ -13570,19 +13561,6 @@ snapshots:
     optionalDependencies:
       webpack: 5.105.4(esbuild@0.27.4)
 
-  css-loader@6.11.0(webpack@5.105.4):
-    dependencies:
-      icss-utils: 5.1.0(postcss@8.5.8)
-      postcss: 8.5.8
-      postcss-modules-extract-imports: 3.1.0(postcss@8.5.8)
-      postcss-modules-local-by-default: 4.2.0(postcss@8.5.8)
-      postcss-modules-scope: 3.2.1(postcss@8.5.8)
-      postcss-modules-values: 4.0.0(postcss@8.5.8)
-      postcss-value-parser: 4.2.0
-      semver: 7.7.4
-    optionalDependencies:
-      webpack: 5.105.4
-
   css-loader@7.1.4(webpack@5.105.4(esbuild@0.27.4)):
     dependencies:
       icss-utils: 5.1.0(postcss@8.5.8)
@@ -16987,13 +16965,6 @@ snapshots:
       sass: 1.79.6
       webpack: 5.105.4(esbuild@0.27.4)
 
-  sass-loader@16.0.5(sass@1.97.3)(webpack@5.105.4):
-    dependencies:
-      neo-async: 2.6.2
-    optionalDependencies:
-      sass: 1.97.3
-      webpack: 5.105.4
-
   sass-lookup@6.1.1:
     dependencies:
       commander: 12.1.0
@@ -17304,10 +17275,6 @@ snapshots:
   style-loader@3.3.4(webpack@5.105.4(esbuild@0.27.4)):
     dependencies:
       webpack: 5.105.4(esbuild@0.27.4)
-
-  style-loader@3.3.4(webpack@5.105.4):
-    dependencies:
-      webpack: 5.105.4
 
   style-loader@4.0.0(webpack@5.105.4(esbuild@0.27.4)):
     dependencies:
