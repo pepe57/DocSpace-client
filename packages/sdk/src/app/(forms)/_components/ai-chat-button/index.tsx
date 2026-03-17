@@ -32,17 +32,26 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
+import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 
 import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 
 const AiChatButton = () => {
   const { t } = useTranslation(["Common"]);
-  const { togglePanel, aiAgentEnabled, currentAgentId } =
+  const { togglePanel, aiAgentEnabled, currentAgentId, isPreparingAgent } =
     useFormsAiAgentStore();
+  const { hasManagementAccess } = useFormsSettingsStore();
 
-  if (!aiAgentEnabled || !currentAgentId) return null;
+  if (!aiAgentEnabled || !hasManagementAccess) return null;
+
+  if (isPreparingAgent) {
+    return <Loader type={LoaderTypes.track} size="16px" />;
+  }
+
+  if (!currentAgentId) return null;
 
   return (
     <IconButton

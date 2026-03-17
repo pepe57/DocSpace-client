@@ -59,7 +59,7 @@ const AiChatPanel = () => {
     aiConfig,
     pendingAttachmentFile,
   } = aiAgentStore;
-  const { filesSettings } = useFormsSettingsStore();
+  const { filesSettings, hasManagementAccess } = useFormsSettingsStore();
 
   const agentRoomId = currentAgentId ?? 0;
 
@@ -116,7 +116,7 @@ const AiChatPanel = () => {
     }
   }, [isPanelVisible, agentRoomId]);
 
-  if (!isPanelVisible || !agentRoomId) return null;
+  if (!isPanelVisible || !agentRoomId || !hasManagementAccess) return null;
 
   return (
     <div className={styles.chatPanel}>

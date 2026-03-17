@@ -36,6 +36,7 @@ import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import type { TGetIcon } from "@/app/(docspace)/_hooks/useItemIcon";
+import type { TFormsContextMenuItem } from "../../_hooks/useFormsContextMenu";
 
 import styles from "./FormsTile.module.scss";
 
@@ -43,12 +44,14 @@ type SubFolderTileProps = {
   folder: TFolder;
   getIcon: TGetIcon;
   onOpenFolder: (folder: TFolder) => void;
+  contextOptions: TFormsContextMenuItem[];
 };
 
 const SubFolderTile = ({
   folder,
   getIcon,
   onOpenFolder,
+  contextOptions,
 }: SubFolderTileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const { isBase } = useTheme();
@@ -68,7 +71,7 @@ const SubFolderTile = ({
       id: folder.id,
       title: folder.title,
       isFolder: true as const,
-      contextOptions: [],
+      contextOptions: [] as string[],
     }),
     [folder.id, folder.title],
   );
@@ -100,7 +103,9 @@ const SubFolderTile = ({
       <div className="files-item">
         <FolderTile
           item={folderItem}
-          contextOptions={[]}
+          contextOptions={contextOptions}
+          getContextModel={() => contextOptions}
+          tileContextClick={() => {}}
           checked={false}
           isActive={false}
           inProgress={false}

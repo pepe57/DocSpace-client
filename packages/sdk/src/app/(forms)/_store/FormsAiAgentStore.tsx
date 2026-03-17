@@ -43,6 +43,18 @@ import {
   deleteAIAgent,
 } from "@docspace/shared/api/ai";
 
+import api from "@docspace/shared/api";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import {
+  FilterType,
+  FolderType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
+import {
+  getRoomMembers,
+  updateRoomMemberRole,
+} from "@docspace/shared/api/rooms";
+
 import {
   copyFilesToAgentRoom,
   vectorizeFiles,
@@ -55,6 +67,8 @@ import {
   loadAiEnabled,
   loadAskFromDBAgentId,
   saveAskFromDBAgentId,
+  saveUserExplicitlyDisabled,
+  loadUserExplicitlyDisabled,
   type FolderAgentsMap,
   type FolderAgentEntry,
 } from "../_api/aiAgentSettings";
@@ -75,10 +89,14 @@ class FormsAiAgentStore {
   defaultProvider: TDefaultProvider | null = null;
   isSyncingKB = false;
   isCreatingAgents = false;
+  isPreparingAgent = false;
+  userExplicitlyDisabled = false;
+  doneFolderId: number | null = null;
 
   private _folderVersion = 0;
   private _roomId: string | number = "";
   private _userKey: string | undefined = undefined;
+  private _pendingCreations = new Set<number>();
 
   constructor() {
     makeAutoObservable(this);
@@ -91,15 +109,18 @@ class FormsAiAgentStore {
   setAiAgentEnabled = (value: boolean) => {
     this.aiAgentEnabled = value;
     saveAiEnabled(this._roomId, value, this._userKey);
+    if (value) {
+      this.userExplicitlyDisabled = false;
+      saveUserExplicitlyDisabled(this._roomId, false, this._userKey);
+    }
   };
 
   disableAiAgents = async () => {
-    const agentIds = Object.values(this.folderAgentsMap).map(
-      (e) => e.agentId,
-    );
+    const agentIds = Object.values(this.folderAgentsMap).map((e) => e.agentId);
 
     runInAction(() => {
       this.aiAgentEnabled = false;
+      this.userExplicitlyDisabled = true;
       this.isPanelVisible = false;
       this.currentFolderId = null;
       this.agentChatSettings = undefined;
@@ -107,6 +128,7 @@ class FormsAiAgentStore {
       this.isSyncingKB = false;
       this.isCreatingAgents = false;
     });
+    saveUserExplicitlyDisabled(this._roomId, true, this._userKey);
 
     const results = await Promise.allSettled(
       agentIds.map((id) => deleteAIAgent(id)),
@@ -156,45 +178,62 @@ class FormsAiAgentStore {
     this.pendingAttachmentFile = null;
   };
 
+  setPreparingAgent = (value: boolean) => {
+    this.isPreparingAgent = value;
+  };
+
   togglePanel = () => {
     this.isPanelVisible = !this.isPanelVisible;
   };
 
+  private _checkPromise: Promise<void> | null = null;
+
   checkAiAvailability = async () => {
-    if (this.isCheckingProviders) return;
+    if (this._checkPromise !== null) {
+      await this._checkPromise;
+      return;
+    }
 
     this.isCheckingProviders = true;
-    try {
-      const [providers, aiConfig] = await Promise.all([
-        getProviders().catch(() => []),
-        getAIConfig().catch(() => null),
-      ]);
 
-      runInAction(() => {
-        this.aiProvidersAvailable = providers.length > 0;
-        this.aiConfig = aiConfig ?? null;
-        this.vectorizationEnabled = aiConfig?.vectorizationEnabled ?? false;
-        this.isCheckingProviders = false;
-      });
-    } catch {
-      runInAction(() => {
-        this.aiProvidersAvailable = false;
-        this.aiConfig = null;
-        this.vectorizationEnabled = false;
-        this.isCheckingProviders = false;
-      });
-    }
+    const work = (async () => {
+      try {
+        const [providers, aiConfig] = await Promise.all([
+          getProviders().catch(() => []),
+          getAIConfig().catch(() => null),
+        ]);
+
+        runInAction(() => {
+          this.aiProvidersAvailable = providers.length > 0;
+          this.aiConfig = aiConfig ?? null;
+          this.vectorizationEnabled = aiConfig?.vectorizationEnabled ?? false;
+          this.isCheckingProviders = false;
+        });
+      } catch {
+        runInAction(() => {
+          this.aiProvidersAvailable = false;
+          this.aiConfig = null;
+          this.vectorizationEnabled = false;
+          this.isCheckingProviders = false;
+        });
+      }
+    })();
+
+    this._checkPromise = work;
+    await work;
+    this._checkPromise = null;
   };
 
-  initForRoom = (
-    roomId: string | number,
-    userId?: string | number,
-  ) => {
+  initForRoom = (roomId: string | number, userId?: string | number) => {
     this._roomId = roomId;
     this._userKey = userId ? String(userId) : undefined;
     this.folderAgentsMap = loadFolderAgentsMap(roomId, this._userKey);
     this.aiAgentEnabled = loadAiEnabled(roomId, this._userKey);
     this.initAskFromDBAgent();
+    this.userExplicitlyDisabled = loadUserExplicitlyDisabled(
+      roomId,
+      this._userKey,
+    );
   };
 
   private initAskFromDBAgent = async () => {
@@ -225,6 +264,10 @@ class FormsAiAgentStore {
     } catch {
       // best-effort
     }
+  };
+
+  setDoneFolderId = (id: number | null) => {
+    this.doneFolderId = id;
   };
 
   get currentAgentId(): number | null {
@@ -263,54 +306,70 @@ class FormsAiAgentStore {
   };
 
   createAgentForFolder = async (
-    folder: TFolder,
+    folder: { id: number; title: string },
     files: { id: number; title: string }[],
   ): Promise<FolderAgentEntry | null> => {
-    let agent;
+    if (this.folderAgentsMap[folder.id]) return this.folderAgentsMap[folder.id];
+    if (this._pendingCreations.has(folder.id)) return null;
+    this._pendingCreations.add(folder.id);
+
     try {
-      agent = await createAIAgent({
-        title: folder.title,
-        attachDefaultTools: true,
-        ...(this.defaultProvider && {
-          chatSettings: {
-            providerId: this.defaultProvider.providerId,
-            modelId: this.defaultProvider.defaultModel,
-          },
-        }),
-      });
-    } catch {
-      return null;
-    }
-
-    const kbFolderId = await getKnowledgeFolderId(agent.id).catch(() => null);
-
-    const entry: FolderAgentEntry = {
-      agentId: agent.id,
-      knowledgeFolderId: kbFolderId,
-    };
-
-    runInAction(() => {
-      this.folderAgentsMap = { ...this.folderAgentsMap, [folder.id]: entry };
-      this.persistMap();
-    });
-
-    if (kbFolderId && files.length > 0) {
+      let agent;
       try {
-        await copyFilesToAgentRoom(
-          kbFolderId,
-          files.map((f) => f.id),
-        );
-
-        const kbFiles = await getKnowledgeFiles(kbFolderId);
-        if (kbFiles.length > 0) {
-          await vectorizeFiles(kbFiles.map((f) => f.id));
-        }
+        agent = await createAIAgent({
+          title: folder.title,
+          attachDefaultTools: true,
+          ...(this.defaultProvider && {
+            chatSettings: {
+              providerId: this.defaultProvider.providerId,
+              modelId: this.defaultProvider.defaultModel,
+            },
+          }),
+        });
       } catch {
-        // best-effort
+        return null;
       }
-    }
 
-    return entry;
+      const kbFolderId = await getKnowledgeFolderId(agent.id).catch(() => null);
+
+      const entry: FolderAgentEntry = {
+        agentId: agent.id,
+        knowledgeFolderId: kbFolderId,
+      };
+
+      runInAction(() => {
+        this.folderAgentsMap = {
+          ...this.folderAgentsMap,
+          [folder.id]: entry,
+        };
+        this.persistMap();
+      });
+
+      // Sync room members → agent members + copy files to KB in parallel
+      const tasks: Promise<unknown>[] = [this.syncAgentMembers(agent.id)];
+
+      if (kbFolderId && files.length > 0) {
+        tasks.push(
+          copyFilesToAgentRoom(
+            kbFolderId,
+            files.map((f) => f.id),
+          )
+            .then(() => getKnowledgeFiles(kbFolderId))
+            .then((kbFiles) => {
+              if (kbFiles.length > 0) {
+                return vectorizeFiles(kbFiles.map((f) => f.id));
+              }
+            })
+            .catch(() => {}),
+        );
+      }
+
+      await Promise.allSettled(tasks);
+
+      return entry;
+    } finally {
+      this._pendingCreations.delete(folder.id);
+    }
   };
 
   private validateAgent = async (agentId: number): Promise<boolean> => {
@@ -360,10 +419,7 @@ class FormsAiAgentStore {
     }
   };
 
-  fetchAgentChatSettings = async (
-    agentId: number,
-    version?: number,
-  ) => {
+  fetchAgentChatSettings = async (agentId: number, version?: number) => {
     try {
       const agent = await getAIAgent(agentId);
       runInAction(() => {
@@ -425,6 +481,240 @@ class FormsAiAgentStore {
   get isSyncing() {
     return this.isSyncingKB;
   }
+
+  syncFolderFiles = async (
+    folderId: number,
+    files: { id: number; title: string }[],
+  ) => {
+    const entry = this.folderAgentsMap[folderId];
+    if (!entry?.agentId || !entry?.knowledgeFolderId) return;
+    if (files.length === 0) return;
+
+    try {
+      const kbFiles = await getKnowledgeFiles(entry.knowledgeFolderId);
+      const kbTitles = new Set(kbFiles.map((f) => f.title));
+      const newFiles = files.filter((f) => !kbTitles.has(f.title));
+
+      if (newFiles.length > 0) {
+        await copyFilesToAgentRoom(
+          entry.knowledgeFolderId,
+          newFiles.map((f) => f.id),
+        );
+
+        const updatedKbFiles = await getKnowledgeFiles(entry.knowledgeFolderId);
+        if (updatedKbFiles.length > 0) {
+          await vectorizeFiles(updatedKbFiles.map((f) => f.id)).catch(() => {});
+        }
+      }
+    } catch {
+      // best-effort
+    }
+  };
+
+  private fetchDoneFoldersWithFiles = async () => {
+    if (!this._roomId) return [];
+
+    const roomFilter = FilesFilter.getDefault();
+    roomFilter.page = 0;
+    roomFilter.pageCount = 100;
+
+    const roomRes = await api.files.getFolder(this._roomId, roomFilter);
+    const doneFolder = roomRes.folders.find(
+      (f: TFolder) => f.type === FolderType.Done,
+    );
+    if (!doneFolder) return [];
+
+    runInAction(() => {
+      this.doneFolderId = doneFolder.id;
+    });
+
+    const doneFilter = FilesFilter.getDefault();
+    doneFilter.page = 0;
+    doneFilter.pageCount = 100;
+
+    const doneRes = await api.files.getFolder(doneFolder.id, doneFilter);
+    const subFolders: TFolder[] = doneRes.folders;
+
+    const results: {
+      folder: TFolder;
+      files: { id: number; title: string }[];
+    }[] = [];
+
+    for (const folder of subFolders) {
+      const fileFilter = FilesFilter.getDefault();
+      fileFilter.page = 0;
+      fileFilter.pageCount = 100;
+      fileFilter.filterType = FilterType.PDFForm;
+
+      try {
+        const folderRes = await api.files.getFolder(folder.id, fileFilter);
+        results.push({
+          folder,
+          files: folderRes.files.map((f: { id: number; title: string }) => ({
+            id: f.id,
+            title: f.title,
+          })),
+        });
+      } catch {
+        results.push({ folder, files: [] });
+      }
+    }
+
+    return results;
+  };
+
+  private static MEMBER_ACCESS = new Set([
+    ShareAccessRights.None, // Owner
+    ShareAccessRights.FullAccess,
+    ShareAccessRights.RoomManager,
+    ShareAccessRights.Collaborator,
+    ShareAccessRights.Editing,
+  ]);
+
+  syncAgentMembers = async (agentId: number) => {
+    if (!this._roomId) return;
+
+    try {
+      const [roomRes, agentRes] = await Promise.all([
+        getRoomMembers(this._roomId, { count: 100 }),
+        getRoomMembers(agentId, { count: 100 }),
+      ]);
+
+      const roomUserIds = new Map<string, number>();
+      for (const m of roomRes.items) {
+        if (
+          FormsAiAgentStore.MEMBER_ACCESS.has(m.access) &&
+          "id" in m.sharedTo
+        ) {
+          roomUserIds.set(String(m.sharedTo.id), m.access);
+        }
+      }
+
+      const agentUserIds = new Set<string>();
+      for (const m of agentRes.items) {
+        if ("id" in m.sharedTo) {
+          agentUserIds.add(String(m.sharedTo.id));
+        }
+      }
+
+      // Add room members missing from agent
+      // None (0) = owner in room API, but 0 = "remove" in share API → map to FullAccess
+      const toAdd = [...roomUserIds.keys()].filter(
+        (id) => !agentUserIds.has(id),
+      );
+      if (toAdd.length > 0) {
+        await updateRoomMemberRole(agentId, {
+          invitations: toAdd.map((id) => ({
+            id,
+            access:
+              roomUserIds.get(id) === ShareAccessRights.None
+                ? ShareAccessRights.FullAccess
+                : (roomUserIds.get(id) ?? ShareAccessRights.RoomManager),
+          })),
+          notify: false,
+          sharingMessage: "",
+        });
+      }
+
+      // Remove agent members no longer in room
+      const toRemove = agentRes.items.filter(
+        (m) =>
+          !m.isOwner &&
+          "id" in m.sharedTo &&
+          !roomUserIds.has(String(m.sharedTo.id)),
+      );
+      if (toRemove.length > 0) {
+        await updateRoomMemberRole(agentId, {
+          invitations: toRemove.map((m) => ({
+            id: String(m.sharedTo.id),
+            access: ShareAccessRights.None,
+          })),
+          notify: false,
+          sharingMessage: "",
+        });
+      }
+    } catch {
+      // best-effort
+    }
+  };
+
+  syncAllAgentMembers = async () => {
+    const entries = Object.values(this.folderAgentsMap);
+    if (entries.length === 0) return;
+
+    await Promise.allSettled(
+      entries.map((e) => this.syncAgentMembers(e.agentId)),
+    );
+  };
+
+  autoEnableIfAvailable = async () => {
+    if (this.userExplicitlyDisabled) return;
+
+    // AI already enabled — ensure agents exist for all Done subfolders
+    if (this.aiAgentEnabled) {
+      if (Object.keys(this.folderAgentsMap).length === 0) {
+        try {
+          const foldersWithFiles = await this.fetchDoneFoldersWithFiles();
+          if (foldersWithFiles.length > 0) {
+            await this.ensureAgentsForFolders(foldersWithFiles);
+          }
+        } catch {
+          // best-effort
+        }
+      }
+      return;
+    }
+
+    await this.checkAiAvailability();
+
+    if (!this.aiProvidersAvailable || !this.vectorizationEnabled) return;
+
+    runInAction(() => {
+      this.aiAgentEnabled = true;
+    });
+    saveAiEnabled(this._roomId, true, this._userKey);
+
+    try {
+      const foldersWithFiles = await this.fetchDoneFoldersWithFiles();
+      if (foldersWithFiles.length > 0) {
+        await this.ensureAgentsForFolders(foldersWithFiles);
+      }
+    } catch {
+      // best-effort — agents will be created on next event
+    }
+  };
+
+  ensureAgentForNewFolder = async (folder: {
+    id: number;
+    title: string;
+    parentId: number;
+  }) => {
+    if (!this.aiAgentEnabled) return;
+
+    // Fast path: doneFolderId is known
+    if (this.doneFolderId) {
+      if (
+        folder.parentId === this.doneFolderId &&
+        !this.folderAgentsMap[folder.id]
+      ) {
+        await this.createAgentForFolder(
+          { id: folder.id, title: folder.title },
+          [],
+        );
+      }
+      return;
+    }
+
+    // doneFolderId unknown — discover Done folder and ensure agents for all subfolders
+    try {
+      const foldersWithFiles = await this.fetchDoneFoldersWithFiles();
+      if (foldersWithFiles.length > 0) {
+        await this.ensureAgentsForFolders(foldersWithFiles);
+      }
+    } catch {
+      // best-effort
+    }
+  };
 }
 
 export const FormsAiAgentStoreContext = React.createContext<FormsAiAgentStore>(
