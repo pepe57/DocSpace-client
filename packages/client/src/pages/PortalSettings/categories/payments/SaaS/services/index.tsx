@@ -92,7 +92,7 @@ const Services = (props: InjectedProps) => {
 
   const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
   const [isCurrentConfirmState, setIsCurrentConfirmState] = useState(false);
-  const [isStorageCancelattion, setIsStorageCancellation] = useState(false);
+  const [isStorageCancellation, setIsStorageCancellation] = useState(false);
   const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
     useState(false);
   const [previousValue, setPreviousValue] = useState("");
@@ -388,9 +388,9 @@ const Services = (props: InjectedProps) => {
           previousValue={previousValue}
         />
       ) : null}
-      {isStorageCancelattion ? (
+      {isStorageCancellation ? (
         <StoragePlanCancel
-          visible={isStorageCancelattion}
+          visible={isStorageCancellation}
           onClose={onCloseStorageCancell}
         />
       ) : null}
