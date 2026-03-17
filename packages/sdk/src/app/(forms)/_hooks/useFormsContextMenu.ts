@@ -73,15 +73,19 @@ export default function useFormsContextMenu() {
     (file: TFile): TFormsContextMenuItem[] => {
       const model: TFormsContextMenuItem[] = [];
 
+      const isPreparing = file.isFillingPreparing;
       const canEdit =
-        file.security?.Edit && file.viewAccessibility?.WebEdit;
+        !isPreparing &&
+        file.security?.Edit &&
+        file.viewAccessibility?.WebEdit;
       const canFillForm =
+        !isPreparing &&
         file.security?.FillForms &&
         file.viewAccessibility?.WebRestrictedEditing;
       const canDownload = file.security?.Download;
       const canDelete = file.security?.Delete;
-      const canStartFilling = file.security?.StartFilling;
-      const canResetFilling = file.security?.ResetFilling;
+      const canStartFilling = !isPreparing && file.security?.StartFilling;
+      const canResetFilling = !isPreparing && file.security?.ResetFilling;
 
       switch (activeSection) {
         case FormsSection.MyForms: {

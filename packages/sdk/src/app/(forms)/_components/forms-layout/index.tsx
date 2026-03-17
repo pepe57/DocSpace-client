@@ -105,7 +105,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     return [...ids];
   }, [roomId, aiStore.doneFolderId, aiStore.folderAgentsMap]);
 
-  useFormsSocket(socketUrl, socketFolderIds);
+  useFormsSocket(socketUrl, socketFolderIds, fetchSection);
   useFormEventHooks(aiStore, socketUrl);
 
   const prevSection = React.useRef(activeSection);
@@ -308,10 +308,17 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     ];
   }, [formsSettingsStore.folderSecurity, t, onUploadFiles, onCreateBlankForm]);
 
+  const prevEditingFile = React.useRef(editingFile);
+  React.useEffect(() => {
+    if (prevEditingFile.current && !editingFile) {
+      fetchSection();
+    }
+    prevEditingFile.current = editingFile;
+  }, [editingFile, fetchSection]);
+
   const handleEditorNavigatedAway = React.useCallback(() => {
     closeEditor();
-    fetchSection();
-  }, [closeEditor, fetchSection]);
+  }, [closeEditor]);
 
   const handleEditorBack = React.useCallback(() => {
     closeEditor();
