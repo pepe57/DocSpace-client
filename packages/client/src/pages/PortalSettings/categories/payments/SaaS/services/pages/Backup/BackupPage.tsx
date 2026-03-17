@@ -229,7 +229,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
         </Text>
       ) : null}
       <div>
-        <TransactionHistory serviceName={BACKUP_SERVICE} />
+        <TransactionHistory serviceName={BACKUP_SERVICE} hideTypeFilter />
       </div>
 
       {isConfirmDialogVisible ? (
