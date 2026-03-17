@@ -28,15 +28,15 @@ import React from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import classNames from "classnames";
 
-import styles from "../styles/TransactionHistory.module.scss";
-import TableLoader from "./TableLoader";
+import styles from "../shared/transaction-history/styles/TransactionHistory.module.scss";
+import TableLoader from "../shared/transaction-history/sub-components/TableLoader";
 
-type TransactionHistoryLoaderProps = {
+type WalletLoaderProps = {
   isMobile?: boolean;
   isTablet?: boolean;
 };
 
-const TransactionHistoryLoader: React.FC<TransactionHistoryLoaderProps> = ({
+const WalletLoader: React.FC<WalletLoaderProps> = ({
   isMobile,
   isTablet,
 }) => {
@@ -137,4 +137,4 @@ const TransactionHistoryLoader: React.FC<TransactionHistoryLoaderProps> = ({
   );
 };
 
-export default TransactionHistoryLoader;
+export default WalletLoader;

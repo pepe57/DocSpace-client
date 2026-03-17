@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 
-import TransactionHistoryLoader from "../shared/transaction-history/sub-components/TransactionHistoryLoader";
+import WalletLoader from "./WalletLoader";
 import WalletContainer from "./WalletContainer";
 
 const Wallet = (props) => {
@@ -57,7 +57,7 @@ const Wallet = (props) => {
   }, []);
 
   return shouldShowLoader && showPortalSettingsLoader ? (
-    <TransactionHistoryLoader />
+    <WalletLoader />
   ) : (
     <>
       <WalletContainer t={t} />
