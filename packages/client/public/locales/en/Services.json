@@ -12,6 +12,7 @@
   "AIGetStartedStep3Title": "Pay only for what you use",
   "AIModel": "Model",
   "AIModelListTitle": "Model list",
+  "LessThanOneDay": "<1 day",
   "AIModelPrice": "{{inputPrice}}/M input tokens | {{outputPrice}}/M output tokens",
   "AIModelsIntro": "Pick the right model for your task — from budget-friendly to advanced. <1>OpenRouter pricing</1> shown. A 20% service fee applies to usage.",
   "AIPricingAdditionalFeaturesTitle": "Additional features",
