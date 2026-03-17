@@ -1454,6 +1454,8 @@
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
+
+  --ai-settings-description:#{$gray};
 }
 
 .dark {
@@ -1486,6 +1488,8 @@
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
+
+  --ai-settings-description: #{$gray-dark};
 }
 
 .rtl {
