@@ -79,7 +79,9 @@ const RestoreConfirmModal = ({
             fontWeight={600}
             className={styles.restoreBackupConfirmText}
           >
-            {t("Common:RestoreBackupConfirmBoldText")}
+            {t("Common:RestoreBackupConfirmBoldText", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
           <Text as="p" className={styles.restoreBackupConfirmText}>
             {t("Common:RestoreBackupConfirmReplaceText")}

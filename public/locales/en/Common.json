@@ -839,7 +839,7 @@
   "Restore": "Restore",
   "RestoreBackup": "Restore",
   "RestoreBackupConfirmTitle": "Restore backup",
-  "RestoreBackupConfirmBoldText": "You are about to restore DocSpace from a backup file.",
+  "RestoreBackupConfirmBoldText": "You are about to restore {{productName}} from a backup file.",
   "RestoreBackupConfirmReplaceText": "This process will completely replace all current data, including the owner, users, and settings.",
   "RestoreBackupConfirmAccessText": "If your account is not included in the backup file, you will lose access. Please ensure you are restoring the correct backup file, as this action cannot be undone.",
   "RestoreBackupConfirmAcknowledge": "I acknowledge that all current data will be overwritten.",

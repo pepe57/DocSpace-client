@@ -19,9 +19,13 @@ vi.mock("@docspace/ui-kit/utils/socket", () => ({
   default: {
     on: vi.fn(),
     off: vi.fn(),
+    emit: vi.fn(),
   },
   SocketEvents: {
     BackupProgress: "BACKUP_PROGRESS",
+  },
+  SocketCommands: {
+    RestoreBackup: "RESTORE_BACKUP",
   },
 }));
 
