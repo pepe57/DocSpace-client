@@ -314,6 +314,7 @@ const DefaultProviderComponent = ({
             displaySelectedOption
             hideMobileView={false}
             isDefaultMode
+            dropDownClassName={styles.modelDropdown}
           />
         </FieldContainer>
 
