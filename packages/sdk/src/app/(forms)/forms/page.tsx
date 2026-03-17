@@ -39,6 +39,7 @@ import { getFilesSettings } from "@/api/files";
 import { getFormsFolder } from "@/api/forms";
 import { getSelf } from "@/api/people";
 import { getDefaultProvider } from "@/api/ai";
+import { getSettings } from "@/api/settings";
 import {
   REQUEST_TOKEN_HEADER,
   ROOM_ID_HEADER,
@@ -71,21 +72,36 @@ export default async function Forms({
   let initialFolderData: TGetFolder | undefined;
   let user: TUser | undefined;
   let defaultProvider: TDefaultProvider | undefined;
+  let socketUrl = "";
 
   if (roomId) {
-    [filesSettings, initialFolderData, user, defaultProvider] =
-      await Promise.all([
-        getFilesSettings(),
-        getFormsFolder(roomId, filter, requestToken),
-        getSelf(),
-        getDefaultProvider(),
-      ]);
+    const [fs, fd, u, dp, portalSettings] = await Promise.all([
+      getFilesSettings(),
+      getFormsFolder(roomId, filter, requestToken),
+      getSelf(),
+      getDefaultProvider(),
+      getSettings().catch(() => undefined),
+    ]);
+    filesSettings = fs;
+    initialFolderData = fd;
+    user = u;
+    defaultProvider = dp;
+    if (portalSettings && typeof portalSettings !== "string") {
+      socketUrl = portalSettings.socketUrl ?? "";
+    }
   } else {
-    [filesSettings, user, defaultProvider] = await Promise.all([
+    const [fs, u, dp, portalSettings] = await Promise.all([
       getFilesSettings(),
       getSelf(),
       getDefaultProvider(),
+      getSettings().catch(() => undefined),
     ]);
+    filesSettings = fs;
+    user = u;
+    defaultProvider = dp;
+    if (portalSettings && typeof portalSettings !== "string") {
+      socketUrl = portalSettings.socketUrl ?? "";
+    }
   }
 
   return (
@@ -97,6 +113,7 @@ export default async function Forms({
       initialFolderData={initialFolderData}
       user={user}
       defaultProvider={defaultProvider}
+      socketUrl={socketUrl}
     />
   );
 }

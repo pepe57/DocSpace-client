@@ -39,11 +39,13 @@ import type {
 type TFormsConfig = {
   roomId: string | number;
   requestToken: string;
+  socketUrl?: string;
 };
 
 class FormsSettingsStore {
   roomId: string | number = "";
   requestToken: string = "";
+  socketUrl: string = "";
   filesSettings: TFilesSettings | null = null;
   folderSecurity: TFolderSecurity | null = null;
   userAccess: ShareAccessRights | null = null;
@@ -55,6 +57,7 @@ class FormsSettingsStore {
   setConfig = (config: TFormsConfig) => {
     this.roomId = config.roomId;
     this.requestToken = config.requestToken;
+    this.socketUrl = config.socketUrl ?? "";
   };
 
   setFilesSettings = (settings: TFilesSettings) => {
@@ -71,9 +74,11 @@ class FormsSettingsStore {
 
   get hasManagementAccess(): boolean {
     return [
+      ShareAccessRights.None, // Owner — server returns 0 for room owner
       ShareAccessRights.FullAccess,
       ShareAccessRights.RoomManager,
       ShareAccessRights.Collaborator,
+      ShareAccessRights.Editing,
     ].includes(this.userAccess as ShareAccessRights);
   }
 
