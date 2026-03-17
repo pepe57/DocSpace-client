@@ -311,7 +311,6 @@ const DefaultProviderComponent = ({
             directionY="both"
             dropDownMaxHeight={260}
             isNoFixedHeightOptions
-            disableScrollbarPadding
             displaySelectedOption
             hideMobileView={false}
             isDefaultMode
