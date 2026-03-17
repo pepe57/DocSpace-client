@@ -56,8 +56,6 @@
   "GoToStripe": "Перейдіть до Stripe",
   "GracePeriodActivatedDescription": "Протягом пільгового періоду адміністратори не можуть створювати нові кімнати та додавати нових користувачів. Після закінчення пільгового періоду {{productName}} стане недоступним до моменту здійснення платежу.",
   "GracePeriodActivatedInfo": "Пільговий період діє <1>з {{fromDate}} до {{byDate}}</1> (залишилося днів: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "Ваша підписка залишається активною, але рекомендується вибрати нового платника, який отримає доступ до параметрів підписки в {{productName}}.",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "Ваша підписка залишається активною, але рекомендується зв’язатися з власником {{productName}}, щоб вибрати нового платника.",
   "InvalidEmailWithoutActiveSubscription": "Рекомендуємо вибрати нового платника, який отримає доступ до параметрів підписки в {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Рекомендуємо зв’язатися з власником {{productName}}, щоб вибрати нового платника.",
   "LinkNewCard": "Щоб прив’язати нову картку, будь ласка, перейдіть за цим посиланням.",

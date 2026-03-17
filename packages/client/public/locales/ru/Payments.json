@@ -56,8 +56,6 @@
   "GoToStripe": "Перейти в Stripe",
   "GracePeriodActivatedDescription": "В течение льготного периода администраторы не могут создавать новые комнаты и добавлять новых пользователей. По истечении льготного периода {{productName}} станет недоступным до тех пор, пока не будет произведен платеж.",
   "GracePeriodActivatedInfo": "Льготный период действует <1>с {{fromDate}} по {{byDate}}</1> (дней осталось: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "Ваша подписка остается активной, но мы рекомендуем выбрать нового плательщика, который получит доступ к настройкам подписки в {{productName}}.",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "Ваша подписка остается активной, но мы рекомендуем связаться с владельцем {{productName}}, чтобы выбрать нового плательщика.",
   "InvalidEmailWithoutActiveSubscription": "Мы рекомендуем выбрать нового плательщика, который получит доступ к настройкам подписки в {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Мы рекомендуем связаться с владельцем {{productName}} для выбора нового плательщика.",
   "LinkNewCard": "Чтобы привязать новую карту, пожалуйста, перейдите по этой ссылке.",

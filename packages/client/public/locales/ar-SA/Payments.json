@@ -56,8 +56,6 @@
   "GoToStripe": "اذهب إلى Stripe",
   "GracePeriodActivatedDescription": "خلال فترة السماح (فترة السماح المؤقتة)، لا يُسمح للمسؤولين بإنشاء غرف جديدة أو إضافة مستخدمين جدد. بعد انتهاء تاريخ استحقاق فترة السماح المؤقتة، سيتم جعل {{productName}} غير متوفر حتى يتم سداد الدفعة.",
   "GracePeriodActivatedInfo": "فترة السماح سارية <1> من {{fromDate}} إلى {{byDate}} </1> (الأيام المتبقية: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "اشتراكك ما زال نشطًا، ولكن نوصي باختيار طريقة دفع جديد يحصل على وصول إلى إعدادات الاشتراك في {{productName}}.",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "اشتراكك ما زال نشطًا، ولكن نوصي بالاتصال بمالك {{productName}} لاختيار دافع جديد.",
   "InvalidEmailWithoutActiveSubscription": "نوصي باختيار دافع جديد يمكنه الوصول إلى إعدادات الاشتراك في {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "نوصي بالاتصال بمالك {{productName}} لاختيار دافع جديد.",
   "LinkNewCard": "لربط بطاقة جديدة، يرجى اتباع هذا الرابط.",

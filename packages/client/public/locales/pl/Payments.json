@@ -56,8 +56,6 @@
   "GoToStripe": "Przejdź do Stripe'a",
   "GracePeriodActivatedDescription": "W okresie prolongaty administratorzy nie mogą tworzyć nowych pokoi ani dodawać nowych użytkowników. Po upływie okresu prolongaty oprogramowanie {{productName}} stanie się niedostępne do momentu dokonania płatności.",
   "GracePeriodActivatedInfo": "Okres prolongaty obowiązuje <1>od  {{fromDate}} do {{byDate}}</1> (pozostało dni: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "Twoja subskrypcja nadal jest aktywna, ale zalecamy wybrać nowego Płatnika, który będzie miał dostęp do ustawień subskrypcji w {{productName}}.",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "Twoja subskrypcja nadal jest aktywna, ale zalecamy skontaktować się z właścicielem {{productName}}, aby wybrać nowego Płatnika.",
   "InvalidEmailWithoutActiveSubscription": "Zalecamy wybrać nowego Płatnika, który będzie miał dostęp do ustawień subskrypcji w {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Zalecamy skontaktować się z właścicielem {{productName}}, aby wybrać nowego Płatnika.",
   "LinkNewCard": "Aby połączyć nową kartę, przejdź do tego linku.",

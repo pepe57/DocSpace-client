@@ -56,8 +56,6 @@
   "GoToStripe": "Shkoni në Stripe",
   "GracePeriodActivatedDescription": "Gjatë periudhës së faljes, administratorët nuk mund të krijojnë dhoma të reja dhe të shtojnë përdorues të rinj. Pas datës së afatit të periudhës së hirit, {{productName}} do të bëhet i padisponueshëm derisa të kryhet pagesa.",
   "GracePeriodActivatedInfo": "Periudha e faljes është efektive <1>nga {{fromDate}} deri në {{byDate}}</1> (ditët e mbetura: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "Abonimi juaj mbetet aktiv, por ju rekomandojmë të zgjidhni një pagues të ri i cili do të ketë qasje te cilësimet e abonimit në {{productName}}.",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "Abonimi juaj mbetet aktiv, por ju rekomandojmë të kontaktoni pronarin e {{productName}} për të zgjedhur një pagues të ri.",
   "InvalidEmailWithoutActiveSubscription": "Ne rekomandojmë zgjedhjen e një paguesi të ri i cili ka qasje te cilësimet e abonimit në {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Rekomandojmë të kontaktoni zotëruesin e {{productName}} për të zgjedhur një pagues të ri.",
   "LinkNewCard": "Për të lidhur një kartë të re, ju lutem ndiqni këtë lidhje.",

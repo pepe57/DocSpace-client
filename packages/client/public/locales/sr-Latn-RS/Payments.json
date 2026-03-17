@@ -56,8 +56,6 @@
   "GoToStripe": "Idi na Stripe",
   "GracePeriodActivatedDescription": "Tokom grejs perioda, administratori ne mogu da prave nove prostorije i dodaju nove korisnike. Nakon isteka grejs perioda, {{productName}} će postati nedostupan dok se ne izvrši uplata.",
   "GracePeriodActivatedInfo": "Grejs period važi <1>from {{fromDate}} do {{byDate}}</1> (preostali dani: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "Vaša pretplata ostaje aktivna, ali preporučujemo da odaberete novog Platioca koji ima pristup podešavanjima pretplate u {{productName}}-u.",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "Vaša pretplata ostaje aktivna, ali preporučujemo da kontaktirate {{productName}} vlasnika da odaberete novog Platioca.",
   "InvalidEmailWithoutActiveSubscription": "Preporučujemo da izaberete novog Platioca koji dobija pristup podešavanjima pretplate u {{productName}}-u.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Preporučujemo da kontaktirate vlasnika {{productName}}-a da biste izabrali novog Platioca.",
   "LinkNewCard": "Da biste povezali novu karticu, pratite ovaj link.",

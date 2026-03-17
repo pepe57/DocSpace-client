@@ -56,8 +56,6 @@
   "GoToStripe": "Stripe'a gidin.",
   "GracePeriodActivatedDescription": "Ödemesiz dönem süresi boyunca, yöneticiler yeni odalar oluşturamaz ve yeni kullanıcılar ekleyemez. Ödemesiz dönemin bitiş tarihinden sonra, ödeme yapılana kadar {{productName}} kullanılamayacaktır.",
   "GracePeriodActivatedInfo": "Ödemesiz dönem <1>{{fromDate}} ile {{byDate}}</1> arasında geçerlidir (kalan gün sayısı: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "Aboneliğiniz etkin kalır fakat {{productName}}'te abonelik ayarlarına erişebilecek yeni bir Ödeme Yapan kişi seçmenizi tavsiye ederiz.",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "Aboneliğiniz etkin kalır fakat yeni bir Ödeme Yapan seçmek için {{productName}} sahibiyle iletişime geçmenizi öneririz.",
   "InvalidEmailWithoutActiveSubscription": "{{productName}}'te abonelik ayarlarına erişimi olan yeni bir Ödeme Yapan seçmenizi öneririz.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Yeni bir Ödeme Yapan seçmek için {{productName}} sahibiyle iletişime geçmenizi öneririz.",
   "LinkNewCard": "Yeni bir kartı bağlamak için lütfen bu bağlantıyı takip edin.",

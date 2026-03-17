@@ -1,4 +1,5 @@
 {
+  "ActivateServiceToAllow": "Activate this service to allow paid backups using your wallet balance",
   "AddCreditsToEnableAI": "Adding credits will automatically enable {{organizationName}} AI and make models available to all users. Continue?",
   "AdditionalStorageInfo": "Additional storage",
   "AIAgentsDescription": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an {{mcpServer}}.",
@@ -65,12 +66,10 @@
   "EnableAIDescription": "AI usage is billed from your prepaid balance. If the balance is too low, AI requests will not be processed.",
   "EnableBackupConfirm": "Enabling the Backup service will allow all {{productName}} administrators to create backups anytime, as long as the wallet balance is sufficient. Are you sure you want to continue?",
   "EnableOrganizationAI": "Enable {{organizationName}} AI",
-  "EnablePaidBackups": "Enable paid backups",
   "ErrorChecking": "Error checking",
   "ErrorCheckingDescription": "Correct typos and grammar mistakes to enhance text quality.",
   "FreeBackupsPerMonth": "Free backups: {{value}}/{{maxValue}} per current month.",
   "FreeBackupsRenewsDate": "Free backups are used first. Will be automatically renewed <1>on {{date}}</1>",
-  "ActivateServiceToAllow": "Activate this service to allow paid backups using your wallet balance",
   "FreeMonthly": "(free monthly)",
   "HowDoesItWork": "How does it work?",
   "ImageGeneration": "Image generation",

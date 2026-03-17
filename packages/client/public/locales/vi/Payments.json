@@ -56,8 +56,6 @@
   "GoToStripe": "Đến Stripe",
   "GracePeriodActivatedDescription": "Trong thời gian ân hạn, quản trị viên không thể tạo phòng mới và thêm người dùng mới. Sau ngày hết hạn thanh toán của thời gian ân hạn, {{productName}} sẽ không khả dụng cho đến khi thanh toán được thực hiện.",
   "GracePeriodActivatedInfo": "Thời gian gia hạn có hiệu lực <1>từ {{fromDate}} đến {{byDate}}</1> (số ngày còn: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "Gói dịch vụ đăng ký của bạn vẫn hiệu lực, nhưng chúng tôi khuyên bạn nên chọn một Người trả phí mới có quyền truy cập vào cài đặt đăng ký trong {{productName}}.",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "Gói dịch vụ đăng ký của bạn vẫn hiệu lực, nhưng chúng tôi khuyên bạn nên liên hệ với chủ sở hữu {{productName}} để chọn Người trả phí mới.",
   "InvalidEmailWithoutActiveSubscription": "Chúng tôi khuyên bạn nên chọn một Người trả phí mới có quyền truy cập vào cài đặt đăng ký trong {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Chúng tôi khuyên bạn nên liên hệ với chủ sở hữu {{productName}} để chọn Người trả phí mới.",
   "LinkNewCard": "Để liên kết một thẻ mới, vui lòng làm theo liên kết này.",

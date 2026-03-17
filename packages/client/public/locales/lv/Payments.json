@@ -56,8 +56,6 @@
   "GoToStripe": "Перейти в Stripe",
   "GracePeriodActivatedDescription": "Pagarinājuma periodā administratori nevar izveidot jaunas telpas un pievienot jaunus lietotājus. Pēc pagarinājuma perioda beigu datuma {{productName}} nebūs pieejams, kamēr nebūs veikts maksājums.",
   "GracePeriodActivatedInfo": "Pagarinājuma periods ir spēkā no <1> {{fromDate}} līdz {{byDate}}</1> (atlikušas dienas: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "Jūsu abonements joprojām ir aktīvs, bet mēs iesakām izvēlēties jaunu maksātāju, kurš saņems piekļuvi abonēšanas iestatījumiem {{productName}}.",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "Jūsu abonements joprojām ir aktīvs, bet mēs iesakām sazināties ar {{productName}} īpašnieku, lai izvēlētos jaunu maksātāju.",
   "InvalidEmailWithoutActiveSubscription": "Mēs iesakām izvēlēties jaunu maksātāju, kurš saņem piekļuvi abonēšanas iestatījumiem {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Mēs iesakām sazināties ar {{productName}} īpašnieku, lai izvēlētos jaunu maksātāju.",
   "LinkNewCard": "Lai saistītu jaunu karti, lūdzu, sekojiet šai saitei.",
