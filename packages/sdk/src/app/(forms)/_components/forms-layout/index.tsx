@@ -82,7 +82,6 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const { items, folders } = formsListStore;
   const formsSettingsStore = useFormsSettingsStore();
   const { roomId, socketUrl } = formsSettingsStore;
-  const { isFormFiller } = formsSettingsStore;
   const { fetchSection, fetchMore } = useFormsData();
   const {
     onUploadFiles,
@@ -117,7 +116,8 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const [isSectionLoading, setIsSectionLoading] = React.useState(false);
 
   const isMyForms = activeSection === FormsSection.MyForms;
-  const canCreateForms = isMyForms && !isFormFiller;
+  const canCreateForms =
+    isMyForms && !!formsSettingsStore.folderSecurity?.Create;
   const isSettings = activeSection === FormsSection.Settings;
   const isEditing = Boolean(editingFile);
   const isInsideCompletedFolder =
