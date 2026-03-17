@@ -46,10 +46,8 @@ import ServicesLoader from "./ServicesLoader";
 import StoragePlanUpgrade from "./panels/additional-storage/StoragePlanUpgrade";
 import StoragePlanCancel from "./panels/additional-storage/StoragePlanCancel";
 import GracePeriodModal from "./panels/additional-storage/GracePeriodModal";
-// import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";
 import AIServiceDialog from "./panels/ai-service/AIServiceDialog";
-// import WebSearchDialog from "./sub-components/WebSearch/WebSearchDialog";
 
 const Services = (props: InjectedProps) => {
   const {
@@ -181,7 +179,7 @@ const Services = (props: InjectedProps) => {
               organizationName: logoText,
             }),
             <Trans
-              key="Payments"
+              ns="Payments"
               i18nKey="CurrentBalance"
               t={t}
               values={{ balance: formatAiServiceCurrency!() }}
@@ -482,3 +480,4 @@ type InjectedProps = ReturnType<typeof mapStoreToProps>;
 export const Component = inject(mapStoreToProps)(
   observer(Services),
 ) as unknown as React.ComponentType;
+

@@ -82,7 +82,7 @@
   "NewUsersWillExceedMembersLimit": "Adding new paid users is not possible since the limit is reached for the number of admins included in your current plan.",
   "NoFindingsFound": "No findings found",
   "NoPaymentMethodDescription": "To start using paid services, please connect a payment card. The person who links the card will automatically be designated as the Payer for this account.",
-  "NoPaymnetMethod": "No payment method linked",
+  "NoPaymentMethod": "No payment method linked",
   "NotPossibleRoomRestoring": "Restoring this room is not possible since the limit is reached for the number of rooms included in your current plan.",
   "NoTransactionsFilter": "No transactions match this filter. Try another or remove the filter to view all transactions.",
   "NoWalletTransaction": "No transactions yet",

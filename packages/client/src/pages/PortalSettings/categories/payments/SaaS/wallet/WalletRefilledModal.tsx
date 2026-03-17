@@ -108,6 +108,7 @@ const WalletRefilledModal = (props: WalletRefilledModalProps) => {
             <br />
             <Text as="span">
               <Trans
+                ns="Payments"
                 i18nKey="CurrentBalance"
                 t={t}
                 values={{ balance: formattedBalance }}
@@ -179,3 +180,4 @@ export default inject(({ paymentStore }: TStore) => {
     formatWalletCurrency,
   };
 })(observer(WalletRefilledModal));
+

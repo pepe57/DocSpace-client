@@ -140,7 +140,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
   const noPaymnetMethod = (
     <div>
       <Text fontSize="16px" fontWeight={700}>
-        {t("NoPaymnetMethod")}
+        {t("NoPaymentMethod")}
       </Text>
       <Text className={styles.noPaymentDescription}>
         {t("NoPaymentMethodDescription")}
@@ -185,3 +185,4 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     isPaymentMethodInit,
   };
 })(observer(PaymentMethod));
+
