@@ -44,6 +44,10 @@
   &.scale {
    max-width: 100%;
   }
+
+  &.withoutMargin{
+   margin-bottom: 0px;
+  }
 }
 
 .cardContent {

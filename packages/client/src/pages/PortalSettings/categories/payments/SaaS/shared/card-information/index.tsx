@@ -35,11 +35,13 @@ import { inject, observer } from "mobx-react";
 
 type CardInfoComponentProps = {
   scale?: boolean;
+  withoutMargin?: boolean;
 } & InjectedProps;
 
 const CardInfoComponent = ({
   walletCustomerStatusNotActive,
   scale,
+  withoutMargin
 }: CardInfoComponentProps) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
@@ -48,6 +50,7 @@ const CardInfoComponent = ({
       className={classNames(styles.cardRow, {
         [styles.warningColor]: walletCustomerStatusNotActive,
         [styles.scale]: scale,
+        [styles.withoutMargin]:withoutMargin
       })}
     >
       <div className={styles.iconButton}>
@@ -87,4 +90,4 @@ type InjectedProps = ReturnType<typeof mapStoreToProps>;
 
 export const CardInformation = inject(mapStoreToProps)(
   observer(CardInfoComponent),
-) as unknown as React.ComponentType<{ scale?: boolean }>;
+) as unknown as React.ComponentType<{ scale?: boolean, withoutMargin?: boolean }>;

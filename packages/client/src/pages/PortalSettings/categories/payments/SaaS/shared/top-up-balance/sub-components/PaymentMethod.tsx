@@ -139,7 +139,7 @@ const PaymentMethod = (props: PaymentMethodProps) => {
         ) : null}
       </div>
       {walletCustomerEmail ? (
-        <CardInformation scale />
+        <CardInformation scale withoutMargin/>
       ) : (
         <div className={styles.addPaymentMethodContainer}>
           <AddButton
