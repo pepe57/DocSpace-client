@@ -231,6 +231,27 @@
       }
     },
     {
+      "label": "Backend | run DE development (Aspire)",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; SKIP_CLIENT=true dotnet run --launch-profile development",
+      "type": "shell",
+      "options": {
+        "env": {
+          "APP_EDITION": "developer",
+          "SKIP_CLIENT": "true"
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Backend | rebuild DE",
       "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -f -e developer",
       "type": "shell",

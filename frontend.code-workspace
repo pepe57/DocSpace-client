@@ -42,37 +42,42 @@
         "label": "Server (Aspire)",
         "tasks": [
           {
-            "label": "Apire : run CE (Community Edition)",
+            "label": "Aspire : run CE (Community Edition)",
             "task": "Backend | run CE (Aspire)",
             "tooltip": "🛠️ Start the \"backend aspire CE\" task"
           },
           {
-            "label": "Apire : run EE (Enterprise Edition)",
+            "label": "Aspire : run EE (Enterprise Edition)",
             "task": "Backend | run EE (Aspire)",
             "tooltip": "🛠️ Start the \"backend aspire EE\" task"
           },
           {
-            "label": "Apire : run DE (Developer Edition)",
+            "label": "Aspire : run DE (Developer Edition)",
             "task": "Backend | run DE (Aspire)",
             "tooltip": "🛠️ Start the \"backend aspire DE\" task"
           },
           {
-            "label": "Apire : run SAAS",
+            "label": "Aspire : run DE (Developer Edition) development",
+            "task": "Backend | run DE development (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire DE development profile (SKIP_CLIENT)\" task"
+          },
+          {
+            "label": "Aspire : run SAAS",
             "task": "Backend | run SAAS (Aspire)",
             "tooltip": "🛠️ Start the \"backend aspire SAAS\" task"
           },
           {
-            "label": "Apire : run SAAS - full",
+            "label": "Aspire : run SAAS - full",
             "task": "Backend | run SAAS - full (Aspire)",
             "tooltip": "🛠️ Start the \"backend aspire SAAS - full\" task"
           },
           {
-            "label": "Apire : clear Docker artifacts",
+            "label": "Aspire : clear Docker artifacts",
             "task": "Backend | clear Aspire (Docker)",
             "tooltip": "🛠️ Start the \"backend aspire clear Docker\" task"
           }
         ],
-        "tooltip": "🛠️ Server tasks (Apire)"
+        "tooltip": "🛠️ Server tasks (Aspire)"
       },
       {
         "label": "Server",
@@ -630,7 +635,7 @@
       "editor.defaultFormatter": "biomejs.biome"
     },
     "[typescriptreact]": {
-      "editor.defaultFormatter": "biomejs.biome"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "editor.codeActionsOnSave": {
       "source.organizeImports.biome": "never",

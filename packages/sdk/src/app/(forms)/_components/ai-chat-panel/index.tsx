@@ -57,6 +57,7 @@ const AiChatPanel = () => {
     currentAgentId,
     agentChatSettings,
     aiConfig,
+    pendingAttachmentFile,
   } = aiAgentStore;
   const { filesSettings, hasManagementAccess } = useFormsSettingsStore();
 
@@ -81,13 +82,31 @@ const AiChatPanel = () => {
     [getIconRaw],
   );
 
-  const [attachmentFile, setAttachmentFile] = React.useState(null);
+  const [attachmentFile, setAttachmentFile] = React.useState<Partial<
+    import("@docspace/ui-kit/types").TFile
+  > | null>(null);
+
+  React.useEffect(() => {
+    if (pendingAttachmentFile) {
+      setAttachmentFile(
+        pendingAttachmentFile as Partial<
+          import("@docspace/ui-kit/types").TFile
+        >,
+      );
+    }
+  }, [pendingAttachmentFile]);
 
   const clearAttachmentFile = React.useCallback(() => {
     setAttachmentFile(null);
   }, []);
 
   const getResultStorageId = React.useCallback(() => null, []);
+
+  const emptyScreenText = React.useMemo(() => {
+    if (!pendingAttachmentFile?.title) return undefined;
+    const name = pendingAttachmentFile.title.replace(/\.[^.]+$/, "");
+    return `Ask anything about "${name}" using the submitted data`;
+  }, [pendingAttachmentFile?.title]);
 
   React.useEffect(() => {
     if (isPanelVisible && agentRoomId) {
@@ -134,6 +153,8 @@ const AiChatPanel = () => {
             isLoading={false}
             attachmentFile={attachmentFile}
             clearAttachmentFile={clearAttachmentFile}
+            hideAttachments={!!pendingAttachmentFile}
+            emptyScreenText={emptyScreenText}
             toolsSettings={toolsSettings}
             initChats={initChats}
             messagesSettings={messagesSettings}
