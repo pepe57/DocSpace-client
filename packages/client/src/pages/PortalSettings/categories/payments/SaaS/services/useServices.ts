@@ -39,10 +39,10 @@ import ServicesStore from "SRC_DIR/store/ServicesStore";
 
 export type UseServicesProps = {
   servicesInit?: ServicesStore["servicesInit"];
-  aiServicesinit?: ServicesStore["aiServicesinit"];
+  initServiceData?: ServicesStore["initServiceData"];
 };
 
-const useServices = ({ servicesInit, aiServicesinit }: UseServicesProps) => {
+const useServices = ({ servicesInit, initServiceData }: UseServicesProps) => {
   const { t } = useTranslation(["Payments", "Services", "Common"]);
 
   const getServicesData = useCallback(async () => {
@@ -57,64 +57,41 @@ const useServices = ({ servicesInit, aiServicesinit }: UseServicesProps) => {
   const getServiceData = useCallback(
     async (serviceName: string, serviceEnum?: string) => {
       try {
-        await aiServicesinit?.(t, serviceName, serviceEnum);
+        await initServiceData?.(t, serviceName, serviceEnum);
       } catch (error) {
         console.error(error);
         toastr.error(t("Common:UnexpectedError"));
       }
     },
-    [aiServicesinit],
+    [initServiceData],
   );
 
-  // const getBackupServicesData = useCallback(async () => {
-  //   try {
-  //     await aiServicesinit?.(t, BACKUP_SERVICE);
-  //   } catch (error) {
-  //     console.error(error);
-  //     toastr.error(t("Common:UnexpectedError"));
-  //   }
-  // }, [aiServicesinit]);
-
   const getServicesInitialValue = React.useCallback(async () => {
-    const actions = [];
-    if (window.location.pathname.includes("services"))
+    const { pathname } = window.location;
+    const actions: Promise<void>[] = [];
+
+    if (
+      pathname.includes("services") &&
+      !pathname.includes("ai-services") &&
+      !pathname.includes("backup") &&
+      !pathname.includes("disk-storage")
+    )
       actions.push(getServicesData());
 
-    await Promise.all(actions);
-  }, [getServicesData]);
-
-  const getAiServiceInitialValue = React.useCallback(async () => {
-    const actions = [];
-
-    if (window.location.pathname.includes("ai-services"))
+    if (pathname.includes("ai-services"))
       actions.push(getServiceData(AI_TOOLS, AI_ENUM));
 
-    await Promise.all(actions);
-  }, [getServiceData]);
-
-  const getBackupServiceInitialValue = React.useCallback(async () => {
-    const actions = [];
-
-    if (window.location.pathname.includes("services/backup"))
+    if (pathname.includes("backup"))
       actions.push(getServiceData(BACKUP_SERVICE));
 
-    await Promise.all(actions);
-  }, [getServiceData]);
-
-  const getStorageServiceInitialValue = React.useCallback(async () => {
-    const actions = [];
-
-    if (window.location.pathname.includes("services/disk-storage"))
+    if (pathname.includes("disk-storage"))
       actions.push(getServiceData(DISK_STORAGE, STORAGE_ENUM));
 
     await Promise.all(actions);
-  }, [getServiceData]);
+  }, [getServicesData, getServiceData]);
 
   return {
     getServicesInitialValue,
-    getAiServiceInitialValue,
-    getBackupServiceInitialValue,
-    getStorageServiceInitialValue,
   };
 };
 

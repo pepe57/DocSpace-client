@@ -440,7 +440,7 @@ class ServicesStore {
     this.featureCountData = featureCountData;
   };
 
-  aiServicesinit = async (
+  initServiceData = async (
     t: TTranslation,
     serviceName: string,
     serviceEnum?: string,

@@ -197,6 +197,6 @@ export const createDefaultHookSettingsProps = ({
   },
   services: {
     servicesInit: servicesStore?.servicesInit,
-    aiServicesinit: servicesStore?.aiServicesinit,
+    initServiceData: servicesStore?.initServiceData,
   },
 });
