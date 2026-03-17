@@ -205,7 +205,10 @@ const Services = (props: InjectedProps) => {
   const onClick = (id: string) => {
     setConfirmActionType(id);
 
-    if (id === TOTAL_SIZE && currentStoragePlanSize) {
+    if (
+      id === TOTAL_SIZE &&
+      (currentStoragePlanSize || previousStoragePlanSize)
+    ) {
       navigate("/portal-settings/payments/services/disk-storage");
       return;
     }
