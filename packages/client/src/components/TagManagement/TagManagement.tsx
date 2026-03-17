@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import { ShareAccessRights } from "@docspace/ui-kit/enums";
 
 import {
-  type SecurityTagManagement,
+  AccessTagManagement,
   TagManagement as TagManagementShared,
 } from "@docspace/shared/components/tag-management";
 
@@ -63,7 +63,7 @@ const TagManagement: FC<TagManagementWrapperProps> = ({
       canCreate,
       canBindTag,
       canSearch: true,
-    } satisfies SecurityTagManagement;
+    } satisfies AccessTagManagement;
   }, [roomAccess, isAdmin, isArchiveFolder]);
 
   return <TagManagementShared {...props} access={access} />;
