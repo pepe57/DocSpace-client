@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { TTranslation } from "types";
+import { TTranslation } from "../../types";
 import { ProviderType } from "../../api/ai/enums";
 
 const OPENAI_LABEL = "OpenAI";

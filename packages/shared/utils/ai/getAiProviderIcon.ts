@@ -36,7 +36,7 @@ import TogetherAiSvgUrl from "PUBLIC_DIR/images/ai-providers/together_ai.svg?url
 import XaiSvgUrl from "PUBLIC_DIR/images/ai-providers/xai.svg?url";
 
 import { ProviderType } from "../../api/ai/enums";
-import { getLogoUrl } from "../../utils";
+import { getLogoUrl } from "../common";
 import { WhiteLabelLogoType } from "../../enums";
 
 
