@@ -34,7 +34,7 @@ import type {
   TAIConfig,
   TDefaultProvider,
 } from "@docspace/shared/api/ai/types";
-import type { TFolder } from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import {
   getAIAgent,
   getProviders,
@@ -45,7 +45,11 @@ import {
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { FilterType, FolderType, ShareAccessRights } from "@docspace/shared/enums";
+import {
+  FilterType,
+  FolderType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import {
   getRoomMembers,
   updateRoomMemberRole,
@@ -61,6 +65,8 @@ import {
   clearFolderAgentsMap,
   saveAiEnabled,
   loadAiEnabled,
+  loadAskFromDBAgentId,
+  saveAskFromDBAgentId,
   saveUserExplicitlyDisabled,
   loadUserExplicitlyDisabled,
   type FolderAgentsMap,
@@ -69,6 +75,9 @@ import {
 
 class FormsAiAgentStore {
   isPanelVisible = false;
+  overrideAgentId: number | null = null;
+  pendingAttachmentFile: Partial<TFile> | null = null;
+  askFromDBAgentId: number | null = null;
   folderAgentsMap: FolderAgentsMap = {};
   currentFolderId: number | null = null;
   agentChatSettings: TAIRoomChatSettings | undefined = undefined;
@@ -107,9 +116,7 @@ class FormsAiAgentStore {
   };
 
   disableAiAgents = async () => {
-    const agentIds = Object.values(this.folderAgentsMap).map(
-      (e) => e.agentId,
-    );
+    const agentIds = Object.values(this.folderAgentsMap).map((e) => e.agentId);
 
     runInAction(() => {
       this.aiAgentEnabled = false;
@@ -159,8 +166,16 @@ class FormsAiAgentStore {
     this.isPanelVisible = true;
   };
 
+  openPanelWithAgent = (agentId: number, file?: Partial<TFile>) => {
+    this.overrideAgentId = agentId;
+    this.pendingAttachmentFile = file ?? null;
+    this.isPanelVisible = true;
+  };
+
   closePanel = () => {
     this.isPanelVisible = false;
+    this.overrideAgentId = null;
+    this.pendingAttachmentFile = null;
   };
 
   setPreparingAgent = (value: boolean) => {
@@ -209,18 +224,46 @@ class FormsAiAgentStore {
     this._checkPromise = null;
   };
 
-  initForRoom = (
-    roomId: string | number,
-    userId?: string | number,
-  ) => {
+  initForRoom = (roomId: string | number, userId?: string | number) => {
     this._roomId = roomId;
     this._userKey = userId ? String(userId) : undefined;
     this.folderAgentsMap = loadFolderAgentsMap(roomId, this._userKey);
     this.aiAgentEnabled = loadAiEnabled(roomId, this._userKey);
+    this.initAskFromDBAgent();
     this.userExplicitlyDisabled = loadUserExplicitlyDisabled(
       roomId,
       this._userKey,
     );
+  };
+
+  private initAskFromDBAgent = async () => {
+    const saved = loadAskFromDBAgentId(this._roomId, this._userKey);
+    if (saved) {
+      runInAction(() => {
+        this.askFromDBAgentId = saved;
+      });
+      return;
+    }
+
+    try {
+      const agent = await createAIAgent({
+        title: "Ask from DB",
+        attachDefaultTools: true,
+        ...(this.defaultProvider && {
+          chatSettings: {
+            providerId: this.defaultProvider.providerId,
+            modelId: this.defaultProvider.defaultModel,
+          },
+        }),
+      });
+
+      saveAskFromDBAgentId(this._roomId, agent.id, this._userKey);
+      runInAction(() => {
+        this.askFromDBAgentId = agent.id;
+      });
+    } catch {
+      // best-effort
+    }
   };
 
   setDoneFolderId = (id: number | null) => {
@@ -228,6 +271,7 @@ class FormsAiAgentStore {
   };
 
   get currentAgentId(): number | null {
+    if (this.overrideAgentId) return this.overrideAgentId;
     if (!this.currentFolderId) return null;
     return this.folderAgentsMap[this.currentFolderId]?.agentId ?? null;
   }
@@ -286,9 +330,7 @@ class FormsAiAgentStore {
         return null;
       }
 
-      const kbFolderId = await getKnowledgeFolderId(agent.id).catch(
-        () => null,
-      );
+      const kbFolderId = await getKnowledgeFolderId(agent.id).catch(() => null);
 
       const entry: FolderAgentEntry = {
         agentId: agent.id,
@@ -377,10 +419,7 @@ class FormsAiAgentStore {
     }
   };
 
-  fetchAgentChatSettings = async (
-    agentId: number,
-    version?: number,
-  ) => {
+  fetchAgentChatSettings = async (agentId: number, version?: number) => {
     try {
       const agent = await getAIAgent(agentId);
       runInAction(() => {
@@ -462,13 +501,9 @@ class FormsAiAgentStore {
           newFiles.map((f) => f.id),
         );
 
-        const updatedKbFiles = await getKnowledgeFiles(
-          entry.knowledgeFolderId,
-        );
+        const updatedKbFiles = await getKnowledgeFiles(entry.knowledgeFolderId);
         if (updatedKbFiles.length > 0) {
-          await vectorizeFiles(updatedKbFiles.map((f) => f.id)).catch(
-            () => {},
-          );
+          await vectorizeFiles(updatedKbFiles.map((f) => f.id)).catch(() => {});
         }
       }
     } catch {
@@ -515,12 +550,10 @@ class FormsAiAgentStore {
         const folderRes = await api.files.getFolder(folder.id, fileFilter);
         results.push({
           folder,
-          files: folderRes.files.map(
-            (f: { id: number; title: string }) => ({
-              id: f.id,
-              title: f.title,
-            }),
-          ),
+          files: folderRes.files.map((f: { id: number; title: string }) => ({
+            id: f.id,
+            title: f.title,
+          })),
         });
       } catch {
         results.push({ folder, files: [] });
@@ -651,9 +684,11 @@ class FormsAiAgentStore {
     }
   };
 
-  ensureAgentForNewFolder = async (
-    folder: { id: number; title: string; parentId: number },
-  ) => {
+  ensureAgentForNewFolder = async (folder: {
+    id: number;
+    title: string;
+    parentId: number;
+  }) => {
     if (!this.aiAgentEnabled) return;
 
     // Fast path: doneFolderId is known
