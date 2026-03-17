@@ -57,6 +57,7 @@ import StoragePlanUpgrade from "../../panels/additional-storage/StoragePlanUpgra
 import StoragePlanCancel from "../../panels/additional-storage/StoragePlanCancel";
 import StorageWarning from "../../panels/additional-storage/StorageWarning";
 import GracePeriodModal from "../../panels/additional-storage/GracePeriodModal";
+import AdditionalStoragePageLoader from "./AdditionalStoragePageLoader";
 import { useServicesActions } from "../../hooks/useServicesActions";
 
 type AdditionalStoragePageProps = {
@@ -204,7 +205,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
     ? { tKey: "SubscriptionAutoCancellation" }
     : { tKey: "SubscriptionWillBeAutomaticallyRenewed" };
 
-  if (shouldShowLoader) return;
+  if (shouldShowLoader) return <AdditionalStoragePageLoader />;
 
   return (
     <div className={styles.container}>
