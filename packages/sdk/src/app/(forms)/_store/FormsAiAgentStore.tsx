@@ -34,7 +34,7 @@ import type {
   TAIConfig,
   TDefaultProvider,
 } from "@docspace/shared/api/ai/types";
-import type { TFolder } from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import {
   getAIAgent,
   getProviders,
@@ -53,12 +53,17 @@ import {
   clearFolderAgentsMap,
   saveAiEnabled,
   loadAiEnabled,
+  loadAskFromDBAgentId,
+  saveAskFromDBAgentId,
   type FolderAgentsMap,
   type FolderAgentEntry,
 } from "../_api/aiAgentSettings";
 
 class FormsAiAgentStore {
   isPanelVisible = false;
+  overrideAgentId: number | null = null;
+  pendingAttachmentFile: Partial<TFile> | null = null;
+  askFromDBAgentId: number | null = null;
   folderAgentsMap: FolderAgentsMap = {};
   currentFolderId: number | null = null;
   agentChatSettings: TAIRoomChatSettings | undefined = undefined;
@@ -139,8 +144,16 @@ class FormsAiAgentStore {
     this.isPanelVisible = true;
   };
 
+  openPanelWithAgent = (agentId: number, file?: Partial<TFile>) => {
+    this.overrideAgentId = agentId;
+    this.pendingAttachmentFile = file ?? null;
+    this.isPanelVisible = true;
+  };
+
   closePanel = () => {
     this.isPanelVisible = false;
+    this.overrideAgentId = null;
+    this.pendingAttachmentFile = null;
   };
 
   togglePanel = () => {
@@ -181,9 +194,41 @@ class FormsAiAgentStore {
     this._userKey = userId ? String(userId) : undefined;
     this.folderAgentsMap = loadFolderAgentsMap(roomId, this._userKey);
     this.aiAgentEnabled = loadAiEnabled(roomId, this._userKey);
+    this.initAskFromDBAgent();
+  };
+
+  private initAskFromDBAgent = async () => {
+    const saved = loadAskFromDBAgentId(this._roomId, this._userKey);
+    if (saved) {
+      runInAction(() => {
+        this.askFromDBAgentId = saved;
+      });
+      return;
+    }
+
+    try {
+      const agent = await createAIAgent({
+        title: "Ask from DB",
+        attachDefaultTools: true,
+        ...(this.defaultProvider && {
+          chatSettings: {
+            providerId: this.defaultProvider.providerId,
+            modelId: this.defaultProvider.defaultModel,
+          },
+        }),
+      });
+
+      saveAskFromDBAgentId(this._roomId, agent.id, this._userKey);
+      runInAction(() => {
+        this.askFromDBAgentId = agent.id;
+      });
+    } catch {
+      // best-effort
+    }
   };
 
   get currentAgentId(): number | null {
+    if (this.overrideAgentId) return this.overrideAgentId;
     if (!this.currentFolderId) return null;
     return this.folderAgentsMap[this.currentFolderId]?.agentId ?? null;
   }

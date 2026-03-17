@@ -35,12 +35,14 @@ import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import BackupSvgUrl from "PUBLIC_DIR/images/icons/16/backup.svg?url";
+import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/ai-agents.svg?url";
 
 import type { TFile } from "@docspace/shared/api/files/types";
 
 import { FormsSection } from "@/types/forms";
 
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
+import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import useFormsActions from "./useFormsActions";
 
 export type TFormsContextMenuItem = {
@@ -55,6 +57,7 @@ export type TFormsContextMenuItem = {
 export default function useFormsContextMenu() {
   const { t } = useTranslation(["Common"]);
   const { activeSection } = useFormsNavigationStore();
+  const { openPanelWithAgent, askFromDBAgentId } = useFormsAiAgentStore();
   const { openForm, deleteFromList, downloadFile, startFilling, resetFilling } =
     useFormsActions({ t });
 
@@ -94,6 +97,17 @@ export default function useFormsContextMenu() {
               onClick: () => openForm(file, "fill"),
               disabled: false,
             });
+
+            if (askFromDBAgentId) {
+              model.push({
+                id: "option_ask-from-db",
+                key: "ask-from-db",
+                label: "Ask from DB",
+                icon: AiAgentsReactSvgUrl,
+                onClick: () => openPanelWithAgent(askFromDBAgentId, file),
+                disabled: false,
+              });
+            }
           }
 
           if (canStartFilling) {
@@ -219,6 +233,8 @@ export default function useFormsContextMenu() {
       downloadFile,
       startFilling,
       resetFilling,
+      openPanelWithAgent,
+      askFromDBAgentId,
     ],
   );
 

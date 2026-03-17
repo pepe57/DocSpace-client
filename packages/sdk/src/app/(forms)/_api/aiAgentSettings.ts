@@ -31,6 +31,7 @@ import { FolderType } from "@docspace/shared/enums";
 
 const FOLDER_AGENTS_STORAGE_KEY = "forms_folder_agents";
 const AI_ENABLED_STORAGE_KEY = "forms_ai_enabled";
+const ASK_FROM_DB_AGENT_KEY = "askFromDBAgent";
 
 /** Simple non-crypto hash to turn a long token into a short key. */
 export const tokenToHash = (token: string): string => {
@@ -102,6 +103,31 @@ export const loadAiEnabled = (
   userHash?: string,
 ): boolean => {
   return localStorage.getItem(aiEnabledKey(roomId, userHash)) === "true";
+};
+
+// --- Ask from DB agent persistence ---
+
+const askFromDBAgentKey = (roomId: string | number, userHash?: string) =>
+  userHash
+    ? `${ASK_FROM_DB_AGENT_KEY}_${userHash}_${roomId}`
+    : `${ASK_FROM_DB_AGENT_KEY}_${roomId}`;
+
+export const saveAskFromDBAgentId = (
+  roomId: string | number,
+  agentId: number,
+  userHash?: string,
+) => {
+  localStorage.setItem(askFromDBAgentKey(roomId, userHash), String(agentId));
+};
+
+export const loadAskFromDBAgentId = (
+  roomId: string | number,
+  userHash?: string,
+): number | null => {
+  const val = localStorage.getItem(askFromDBAgentKey(roomId, userHash));
+  if (!val) return null;
+  const parsed = Number(val);
+  return Number.isFinite(parsed) ? parsed : null;
 };
 
 // --- Knowledge base helpers ---
