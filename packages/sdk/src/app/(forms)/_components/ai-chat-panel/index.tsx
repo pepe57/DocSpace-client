@@ -57,6 +57,7 @@ const AiChatPanel = () => {
     currentAgentId,
     agentChatSettings,
     aiConfig,
+    pendingAttachmentFile,
   } = aiAgentStore;
   const { filesSettings, hasManagementAccess } = useFormsSettingsStore();
 
@@ -81,13 +82,58 @@ const AiChatPanel = () => {
     [getIconRaw],
   );
 
-  const [attachmentFile, setAttachmentFile] = React.useState(null);
+  const [attachmentFile, setAttachmentFile] = React.useState<Partial<
+    import("@docspace/ui-kit/types").TFile
+  > | null>(null);
+
+  React.useEffect(() => {
+    if (pendingAttachmentFile) {
+      setAttachmentFile(
+        pendingAttachmentFile as Partial<
+          import("@docspace/ui-kit/types").TFile
+        >,
+      );
+    }
+  }, [pendingAttachmentFile]);
 
   const clearAttachmentFile = React.useCallback(() => {
     setAttachmentFile(null);
   }, []);
 
   const getResultStorageId = React.useCallback(() => null, []);
+
+  const isAskFromDB = !!pendingAttachmentFile;
+
+  const emptyScreenText = React.useMemo(() => {
+    if (!pendingAttachmentFile?.title) return undefined;
+    const name = pendingAttachmentFile.title.replace(/\.[^.]+$/, "");
+    return `Ask anything about "${name}" using the submitted data`;
+  }, [pendingAttachmentFile?.title]);
+
+  const askFromDBSamples = React.useMemo(
+    () =>
+      pendingAttachmentFile?.title
+        ? [
+            {
+              title: "Total submissions",
+              prompt: `How many times has the form "${pendingAttachmentFile.title}" been submitted?`,
+            },
+            {
+              title: "Recent responses",
+              prompt: `Show me the most recent submissions for "${pendingAttachmentFile.title}"`,
+            },
+            {
+              title: "Who filled it out",
+              prompt: `List all people who have filled out the form "${pendingAttachmentFile.title}"`,
+            },
+            {
+              title: "Summary",
+              prompt: `Give me a brief summary of all collected data from "${pendingAttachmentFile.title}"`,
+            },
+          ]
+        : undefined,
+    [pendingAttachmentFile?.title],
+  );
 
   React.useEffect(() => {
     if (isPanelVisible && agentRoomId) {
@@ -134,6 +180,10 @@ const AiChatPanel = () => {
             isLoading={false}
             attachmentFile={attachmentFile}
             clearAttachmentFile={clearAttachmentFile}
+            hideAttachments={isAskFromDB}
+            emptyScreenText={emptyScreenText}
+            withSamples={isAskFromDB}
+            samples={askFromDBSamples}
             toolsSettings={toolsSettings}
             initChats={initChats}
             messagesSettings={messagesSettings}

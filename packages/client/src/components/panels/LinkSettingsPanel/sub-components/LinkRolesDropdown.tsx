@@ -103,6 +103,8 @@ const LinkRolesDropdown = ({
     };
   }, [isOpen, heightList]);
 
+  const isMobileView = isMobile();
+
   return (
     <div className={styles.linkRolesDropdown} data-testid="link-roles-dropdown">
       <div
@@ -131,18 +133,19 @@ const LinkRolesDropdown = ({
           size={16}
         />
       </div>
-      {isMobile() ? (
+      <Backdrop
+        visible={isOpen}
+        onClick={() => setIsOpen(false)}
+        withBackground={!isMobileView}
+        withoutBackground={!isMobileView}
+        isAside
+        zIndex={isMobileView ? 450 : 400}
+      />
+      {isMobileView ? (
         <Portal
           visible
           element={
             <>
-              <Backdrop
-                visible={isOpen}
-                onClick={() => setIsOpen(false)}
-                withBackground
-                isAside
-                zIndex={450}
-              />
               <div
                 className={classNames(
                   styles.linkRolesDropdownMobileContainer,
