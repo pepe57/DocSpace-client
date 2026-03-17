@@ -61,7 +61,7 @@ import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
-import BackupPage from "../categories/payments/SaaS/services/pages/backup/BackupPage";
+import BackupPage from "../categories/payments/SaaS/services/pages/Backup/BackupPage";
 import AdditionalStoragePage from "../categories/payments/SaaS/services/pages/additional-storage/AdditionalStoragePage";
 
 const getViewFromPathname = (pathname: string): TView => {
