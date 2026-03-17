@@ -137,13 +137,21 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
             <div className={styles.stepConnectorContent}>
               <div className={styles.transfer}>
                 <div className={styles.from}>
-                  <Text fontWeight={600} fontSize={"12px"}>
+                  <Text
+                    fontWeight={600}
+                    fontSize={"12px"}
+                    className={styles.payForItemTextMuted}
+                  >
                     {t("Payments:TopUpFrom")}
                   </Text>
                 </div>
                 <div></div>
                 <div className={styles.to}>
-                  <Text fontWeight={600} fontSize={"12px"}>
+                  <Text
+                    fontWeight={600}
+                    fontSize={"12px"}
+                    className={styles.payForItemTextMuted}
+                  >
                     {t("Payments:TopUpTo")}
                   </Text>
                 </div>
