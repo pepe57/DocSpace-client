@@ -33,6 +33,7 @@ import { Badge } from "@docspace/ui-kit/components/badge";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { FileFillingFormStatus } from "@docspace/shared/enums";
 import { FILLING_FORM_STATUS_COLORS } from "@docspace/shared/constants";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import {
   getFillingStatusLabel,
   getFillingStatusTitle,
@@ -48,7 +49,26 @@ type FormStatusBadgeProps = {
 const FormStatusBadge = ({ file }: FormStatusBadgeProps) => {
   const { t } = useTranslation(["Common"]);
 
-  if (file.formFillingStatus) {
+  if (file.isFillingPreparing) {
+    return (
+      <div className="badges">
+        <Badge
+          noHover
+          isVersionBadge
+          backgroundColor={globalColors.gray}
+          color={globalColors.white}
+          label={t("Common:Preparing")}
+          title={t("Common:Preparing")}
+          borderRadius="50px"
+          fontSize="9px"
+          fontWeight={800}
+          maxWidth="max-content"
+        />
+      </div>
+    );
+  }
+
+  if (file.formFillingStatus && !file.isFillingPreparing) {
     const label = getFillingStatusLabel(file.formFillingStatus, t);
     const title = getFillingStatusTitle(file.formFillingStatus, t);
     const color = FILLING_FORM_STATUS_COLORS[file.formFillingStatus];
