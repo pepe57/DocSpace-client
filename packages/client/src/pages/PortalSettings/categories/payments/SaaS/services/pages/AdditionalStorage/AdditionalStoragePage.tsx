@@ -286,7 +286,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
             label={
               previousStoragePlanSize
                 ? t("Services:BuyStorage")
-                : t("Payments:IncreaseStorage")
+                : t("Services:EditSubscription")
             }
             size={ButtonSize.small}
             primary

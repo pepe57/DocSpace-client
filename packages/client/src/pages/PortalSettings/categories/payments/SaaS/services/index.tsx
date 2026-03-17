@@ -69,7 +69,7 @@ const Services = (props: InjectedProps) => {
     wasFirstAiServiceTopUp,
     logoText,
     formatAiServiceCurrency,
-    currentStoragePlanSize
+    currentStoragePlanSize,
   } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [dialogVisibility, setDialogVisibility] = useState({
@@ -103,6 +103,7 @@ const Services = (props: InjectedProps) => {
 
   const [isAiServiceTopUpVisible, setIsAiServiceTopUpVisible] = useState(false);
   const shouldShowLoader = !isInitServicesPage || !ready;
+
   const location = useLocation();
   const navigate = useNavigate();
   const { openDialog } = location.state || {};
@@ -190,7 +191,7 @@ const Services = (props: InjectedProps) => {
             />,
             t("Common:WantToContinue"),
           ],
-    }
+    },
   };
 
   const getDialogContent = (actionType: string | null) => {
@@ -225,10 +226,10 @@ const Services = (props: InjectedProps) => {
       return;
     }
 
-    if(id === BACKUP_SERVICE && !isCardLinkedToPortal){
-       setConfirmActionType(id);
-       setIsConfirmDialogVisible(true);
-       return;
+    if (id === BACKUP_SERVICE && !isCardLinkedToPortal) {
+      setConfirmActionType(id);
+      setIsConfirmDialogVisible(true);
+      return;
     }
 
     updateDialogVisibility(id as keyof typeof dialogVisibility, true);
@@ -323,21 +324,18 @@ const Services = (props: InjectedProps) => {
   const onConfirm = async () => {
     if (!confirmActionType) return;
 
-
-
-
-       const raw = {
+    const raw = {
       service: confirmActionType,
       enabled: !isCurrentConfirmState,
     };
 
     setIsConfirmDialogVisible(false);
 
-        if(confirmActionType === BACKUP_SERVICE && !isCardLinkedToPortal) {
-setIsTopUpBalanceVisible(true);
-return;
+    if (confirmActionType === BACKUP_SERVICE && !isCardLinkedToPortal) {
+      setIsTopUpBalanceVisible(true);
+      return;
     }
-    
+
     changeServiceState(confirmActionType);
 
     const getSuccessMessage = () => {

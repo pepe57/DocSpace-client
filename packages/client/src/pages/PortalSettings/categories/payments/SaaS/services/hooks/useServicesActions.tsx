@@ -61,23 +61,22 @@ export const useServicesActions = () => {
   const isPlanUpgrade = (quantity: number, type = "storage") => {
     const plan = type === "storage" ? currentStoragePlanSize : 0;
 
-    if(!currentStoragePlanSize) return true;
+    if (!currentStoragePlanSize) return true;
 
     return isUpgrade(+quantity, plan);
   };
 
   const isPlanDowngrade = (quantity: number, type = "storage") => {
-    if(!quantity) return false;
-    
+    if (!quantity) return false;
+
     const plan = type === "storage" ? currentStoragePlanSize : 0;
- 
+
     return isDowngrade(+quantity, plan);
   };
 
   const isCurrentPlan = (quantity: number, type = "storage") => {
     const plan = type === "storage" ? currentStoragePlanSize : 0;
     const hasSub = type === "storage" ? hasStorageSubscription : false;
-
 
     return isSamePlan(+quantity, hasSub, plan);
   };
@@ -110,9 +109,7 @@ export const useServicesActions = () => {
 
     if (!hasSubscription) return t("Buy");
 
-    if (isPlanUpgrade(quantity) || isCurrentPlan(quantity)) return t("Upgrade");
-
-    return t("Downgrade");
+    return t("Upgrade");
   };
 
   return {
