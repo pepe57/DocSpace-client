@@ -129,6 +129,7 @@ export const loadAskFromDBAgentId = (
   if (!val) return null;
   const parsed = Number(val);
   return Number.isFinite(parsed) ? parsed : null;
+}
 // --- User explicitly disabled persistence ---
 
 const userDisabledKey = (roomId: string | number, userHash?: string) =>
