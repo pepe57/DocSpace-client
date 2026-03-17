@@ -1,7 +1,6 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 
@@ -124,6 +123,7 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
               <Text fontSize="12px" lineHeight="16px">
                 {t("AIGetStartedStep1Description", {
                   productName: t("Common:ProductName"),
+                  organizationName: logoText,
                 })}
               </Text>
             </div>
@@ -280,3 +280,4 @@ export default inject(({ paymentStore, settingsStore }: TStore) => {
     logoText,
   };
 })(observer(GetStartedBody));
+

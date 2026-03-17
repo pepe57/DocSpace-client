@@ -148,10 +148,10 @@ const PayerInformation = ({
     const userNotFound = `${t("UserNotFoundMatchingEmail")} `;
 
     let invalidEmailDescription = user.isOwner
-      ? t("InvalidEmailWithActiveSubscription", {
+      ? t("UnknownPayerForOwner", {
           productName: t("Common:ProductName"),
         })
-      : t("InvalidEmailWithActiveSubscriptionForAdmin", {
+      : t("UnknownPayerForAdmin", {
           productName: t("Common:ProductName"),
         });
 

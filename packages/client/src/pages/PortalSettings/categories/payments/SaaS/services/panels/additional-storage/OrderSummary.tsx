@@ -189,7 +189,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
           {!isNewSubscription ? (
             <div className={styles.summaryRow}>
               <Text fontSize="14px" className={styles.rowLabel}>
-                {t("StorageUpgrade")}
+                {t("StorageAdjustment")}
               </Text>
               <Text
                 fontWeight="600"
@@ -375,3 +375,4 @@ export default inject(
     };
   },
 )(observer(OrderSummary));
+

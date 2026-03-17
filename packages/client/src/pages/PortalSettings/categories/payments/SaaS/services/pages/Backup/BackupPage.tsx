@@ -144,20 +144,17 @@ const BackupPage: React.FC<BackupPageProps> = ({
         description={t("Payments:BackupDescription")}
         isDisabled={isLoading}
       />
-
       <WalletInfo
         shortView
         withoutBackground
         balance={balance}
         onTopUp={isLowBalance ? onTopUp : undefined}
       />
-
       {isLowBalance ? (
         <Text className={styles.lowBalance} fontSize="15px" fontWeight={600}>
           {t("Services:NeedTopUpWallet")}
         </Text>
       ) : null}
-
       <div className={styles.backupsCard}>
         <div className={styles.backupsHeader}>
           <Text fontWeight="700" fontSize="14px">
@@ -198,7 +195,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
           <Button
             className={styles.backupButton}
             size={ButtonSize.small}
-            label={t("Services:EnablePaidBackups")}
+            label={t("Common:Enable")}
             onClick={handleToggleChange}
             primary
             scale
@@ -226,6 +223,11 @@ const BackupPage: React.FC<BackupPageProps> = ({
           />
         </Text>
       ) : null}
+      {isFreeTariff && !isBackupServiceOn ? (
+        <Text className={styles.backupPaidInfo}>
+          {t("Services:ActivateServiceToAllow")}
+        </Text>
+      ) : null}
       <div>
         <TransactionHistory serviceName={BACKUP_SERVICE} />
       </div>
@@ -239,7 +241,6 @@ const BackupPage: React.FC<BackupPageProps> = ({
           bodyText={confirmationDialogContent.body}
         />
       ) : null}
-
       {isTopUpVisible ? (
         <TopUpModal
           visible={isTopUpVisible}
@@ -278,3 +279,4 @@ export default inject(
     };
   },
 )(observer(BackupPage));
+
