@@ -42,6 +42,7 @@ import { now, formatDateLocalized } from "@docspace/ui-kit/utils/date";
 import { toastr } from "@docspace/ui-kit/components";
 import ConfirmationDialog from "../../sub-components/ConfirmationDialog";
 import TopUpModal from "../../../shared/top-up-balance/TopUpModal";
+import BackupPageLoader from "./BackupPageLoader";
 
 type BackupPageProps = {
   availableBackupsCount?: number;
@@ -132,7 +133,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
 
   const isLowBalance = isBackupServiceOn && availableBackupsCount === 0;
 
-  if (shouldShowLoader) return;
+  if (shouldShowLoader) return <BackupPageLoader />;
 
   return (
     <div className={styles.container}>
