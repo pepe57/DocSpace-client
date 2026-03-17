@@ -43,12 +43,12 @@ import TopUpModal from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/sh
 
 import ServicesItems from "./ServicesItems";
 import ServicesLoader from "./ServicesLoader";
-import StoragePlanUpgrade from "./panels/AdditionalStorage/StoragePlanUpgrade";
-import StoragePlanCancel from "./panels/AdditionalStorage/StoragePlanCancel";
-import GracePeriodModal from "./panels/AdditionalStorage/GracePeriodModal";
+import StoragePlanUpgrade from "./panels/additional-storage/StoragePlanUpgrade";
+import StoragePlanCancel from "./panels/additional-storage/StoragePlanCancel";
+import GracePeriodModal from "./panels/additional-storage/GracePeriodModal";
 // import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";
-import AIServiceDialog from "./panels/AIService/AIServiceDialog";
+import AIServiceDialog from "./panels/ai-service/AIServiceDialog";
 // import WebSearchDialog from "./sub-components/WebSearch/WebSearchDialog";
 
 const Services = (props: InjectedProps) => {
