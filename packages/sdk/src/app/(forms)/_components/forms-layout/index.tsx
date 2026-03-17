@@ -50,6 +50,8 @@ import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import { useFormsUserStore } from "../../_store/FormsUserStore";
+import useFormsSocket from "../../_hooks/useFormsSocket";
+import useFormEventHooks from "../../_hooks/useFormEventHooks";
 
 import FormsSidebar from "../sidebar";
 import FormsGrid from "../forms-grid";
@@ -79,7 +81,8 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const formsListStore = useFormsListStore();
   const { items, folders } = formsListStore;
   const formsSettingsStore = useFormsSettingsStore();
-  const { roomId } = formsSettingsStore;
+  const { roomId, socketUrl } = formsSettingsStore;
+  const { isFormFiller } = formsSettingsStore;
   const { fetchSection, fetchMore } = useFormsData();
   const {
     onUploadFiles,
@@ -92,6 +95,20 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const { currentDeviceType } = useDeviceType();
   const aiStore = useFormsAiAgentStore();
   const { user } = useFormsUserStore();
+
+  const socketFolderIds = React.useMemo(() => {
+    const ids = new Set<string>();
+    if (roomId) ids.add(String(roomId));
+    if (aiStore.doneFolderId) ids.add(String(aiStore.doneFolderId));
+    for (const key of Object.keys(aiStore.folderAgentsMap)) {
+      ids.add(key);
+    }
+    return [...ids];
+  }, [roomId, aiStore.doneFolderId, aiStore.folderAgentsMap]);
+
+  useFormsSocket(socketUrl, socketFolderIds);
+  useFormEventHooks(aiStore, socketUrl);
+
   const prevSection = React.useRef(activeSection);
   const prevCompletedFolder = React.useRef(completedFolder);
   const prevInProgressFolder = React.useRef(inProgressFolder);
@@ -100,6 +117,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const [isSectionLoading, setIsSectionLoading] = React.useState(false);
 
   const isMyForms = activeSection === FormsSection.MyForms;
+  const canCreateForms = isMyForms && !isFormFiller;
   const isSettings = activeSection === FormsSection.Settings;
   const isEditing = Boolean(editingFile);
   const isInsideCompletedFolder =
@@ -111,6 +129,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   React.useEffect(() => {
     if (roomId && user?.id) {
       aiStore.initForRoom(roomId, user.id);
+      aiStore.autoEnableIfAvailable();
     }
   }, [roomId, user?.id, aiStore]);
 
@@ -136,30 +155,51 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
 
       const currentFetchId = ++fetchIdRef.current;
 
-      fetchSection(activeSection).then(async () => {
-        if (currentFetchId !== fetchIdRef.current) return;
-
-        setContentVisible(true);
-        setIsSectionLoading(false);
-
-        if (
-          activeSection === FormsSection.CompletedForms &&
-          completedFolder
-        ) {
-          await aiStore.setCurrentFolder(completedFolder.id);
+      fetchSection(activeSection)
+        .then(async () => {
           if (currentFetchId !== fetchIdRef.current) return;
 
-          if (formsListStore.items.length > 0) {
+          setContentVisible(true);
+          setIsSectionLoading(false);
+
+          if (
+            activeSection === FormsSection.CompletedForms &&
+            completedFolder
+          ) {
+            await aiStore.setCurrentFolder(completedFolder.id);
+            if (currentFetchId !== fetchIdRef.current) return;
+
             const files = formsListStore.items.map((f) => ({
               id: f.id,
               title: f.title,
             }));
-            aiStore.syncCompletedForms(files);
+
+            // No agent for this folder yet — create one
+            if (aiStore.aiAgentEnabled && !aiStore.currentAgentId) {
+              aiStore.setPreparingAgent(true);
+              try {
+                const entry = await aiStore.createAgentForFolder(
+                  { id: completedFolder.id, title: completedFolder.title },
+                  files,
+                );
+                if (currentFetchId !== fetchIdRef.current) return;
+                if (entry) {
+                  await aiStore.setCurrentFolder(completedFolder.id);
+                  if (currentFetchId !== fetchIdRef.current) return;
+                }
+              } finally {
+                aiStore.setPreparingAgent(false);
+              }
+            }
+
+            if (files.length > 0) {
+              aiStore.syncCompletedForms(files);
+            }
+          } else {
+            aiStore.setCurrentFolder(null);
           }
-        } else {
-          aiStore.setCurrentFolder(null);
-        }
-      });
+        })
+        .catch(() => {});
     }
   }, [
     activeSection,
@@ -476,8 +516,8 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
           <Navigation
             showText
             isRootFolder
-            canCreate={isMyForms}
-            isPlusButtonVisible={isMyForms}
+            canCreate={canCreateForms}
+            isPlusButtonVisible={canCreateForms}
             title={getSectionTitle()}
             rootRoomTitle=""
             isDesktop={currentDeviceType === DeviceType.desktop}

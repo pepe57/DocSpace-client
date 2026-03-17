@@ -29,6 +29,8 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
+import { ShareAccessRights } from "@docspace/ui-kit/enums";
+
 import type {
   TFilesSettings,
   TFolderSecurity,
@@ -37,13 +39,16 @@ import type {
 type TFormsConfig = {
   roomId: string | number;
   requestToken: string;
+  socketUrl?: string;
 };
 
 class FormsSettingsStore {
   roomId: string | number = "";
   requestToken: string = "";
+  socketUrl: string = "";
   filesSettings: TFilesSettings | null = null;
   folderSecurity: TFolderSecurity | null = null;
+  userAccess: ShareAccessRights | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -52,6 +57,7 @@ class FormsSettingsStore {
   setConfig = (config: TFormsConfig) => {
     this.roomId = config.roomId;
     this.requestToken = config.requestToken;
+    this.socketUrl = config.socketUrl ?? "";
   };
 
   setFilesSettings = (settings: TFilesSettings) => {
@@ -61,6 +67,24 @@ class FormsSettingsStore {
   setFolderSecurity = (security: TFolderSecurity) => {
     this.folderSecurity = security;
   };
+
+  setUserAccess = (access: ShareAccessRights) => {
+    this.userAccess = access;
+  };
+
+  get hasManagementAccess(): boolean {
+    return [
+      ShareAccessRights.None, // Owner — server returns 0 for room owner
+      ShareAccessRights.FullAccess,
+      ShareAccessRights.RoomManager,
+      ShareAccessRights.Collaborator,
+      ShareAccessRights.Editing,
+    ].includes(this.userAccess as ShareAccessRights);
+  }
+
+  get isFormFiller(): boolean {
+    return this.userAccess === ShareAccessRights.FormFilling;
+  }
 }
 
 export const FormsSettingsStoreContext =
