@@ -29,18 +29,14 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { MemoryRouter } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import Chat from "@docspace/ui-kit/ai-agent/chat";
-import useInitChats from "@docspace/ui-kit/ai-agent/chat/hooks/useInitChats";
-import useToolsSettings from "@docspace/ui-kit/ai-agent/chat/hooks/useToolsSettings";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-import useInitMessagesSDK from "../../_hooks/useInitMessagesSDK";
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
@@ -55,22 +51,11 @@ const AiChatPanel = () => {
     closePanel,
     isSyncing,
     currentAgentId,
-    agentChatSettings,
-    aiConfig,
     pendingAttachmentFile,
   } = aiAgentStore;
   const { filesSettings, hasManagementAccess } = useFormsSettingsStore();
 
   const agentRoomId = currentAgentId ?? 0;
-
-  const initChats = useInitChats({ agentId: agentRoomId });
-  const { initMessages, ...messagesSettings } = useInitMessagesSDK(agentRoomId);
-
-  const toolsSettings = useToolsSettings({
-    agentId: agentRoomId,
-    aiConfig,
-    chatSettings: agentChatSettings,
-  });
 
   const { getIcon: getIconRaw } = useItemIcon({
     filesSettings: filesSettings!,
@@ -102,19 +87,38 @@ const AiChatPanel = () => {
 
   const getResultStorageId = React.useCallback(() => null, []);
 
+  const isAskFromDB = !!pendingAttachmentFile;
+
   const emptyScreenText = React.useMemo(() => {
     if (!pendingAttachmentFile?.title) return undefined;
     const name = pendingAttachmentFile.title.replace(/\.[^.]+$/, "");
     return `Ask anything about "${name}" using the submitted data`;
   }, [pendingAttachmentFile?.title]);
 
-  React.useEffect(() => {
-    if (isPanelVisible && agentRoomId) {
-      initChats.fetchChats();
-      initMessages();
-      toolsSettings.initTools();
-    }
-  }, [isPanelVisible, agentRoomId]);
+  const askFromDBSamples = React.useMemo(
+    () =>
+      pendingAttachmentFile?.title
+        ? [
+            {
+              title: "Total submissions",
+              prompt: `How many times has the form "${pendingAttachmentFile.title}" been submitted?`,
+            },
+            {
+              title: "Recent responses",
+              prompt: `Show me the most recent submissions for "${pendingAttachmentFile.title}"`,
+            },
+            {
+              title: "Who filled it out",
+              prompt: `List all people who have filled out the form "${pendingAttachmentFile.title}"`,
+            },
+            {
+              title: "Summary",
+              prompt: `Give me a brief summary of all collected data from "${pendingAttachmentFile.title}"`,
+            },
+          ]
+        : undefined,
+    [pendingAttachmentFile?.title],
+  );
 
   if (!isPanelVisible || !agentRoomId || !hasManagementAccess) return null;
 
@@ -144,25 +148,19 @@ const AiChatPanel = () => {
       ) : null}
 
       <div className={styles.chatBody}>
-        <MemoryRouter>
-          <Chat
-            agentId={agentRoomId}
-            userAvatar=""
-            selectedModel={agentChatSettings?.modelId ?? ""}
-            getIcon={getIcon}
-            isLoading={false}
-            attachmentFile={attachmentFile}
-            clearAttachmentFile={clearAttachmentFile}
-            hideAttachments={!!pendingAttachmentFile}
-            emptyScreenText={emptyScreenText}
-            toolsSettings={toolsSettings}
-            initChats={initChats}
-            messagesSettings={messagesSettings}
-            aiReady
-            standalone
-            getResultStorageId={getResultStorageId}
-          />
-        </MemoryRouter>
+        <Chat
+          agentId={agentRoomId}
+          selectedModel=""
+          getIcon={getIcon}
+          attachmentFile={attachmentFile}
+          clearAttachmentFile={clearAttachmentFile}
+          hideAttachments={isAskFromDB}
+          emptyScreenText={emptyScreenText}
+          withSamples={isAskFromDB}
+          samples={askFromDBSamples}
+          standalone
+          getResultStorageId={getResultStorageId}
+        />
       </div>
     </div>
   );
