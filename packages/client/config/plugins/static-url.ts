@@ -42,7 +42,7 @@ import { fileHash, rootDir } from "../utils";
 //   import X from "ASSETS_DIR/locales/ru/File.json?url";
 //     → const X = "/locales/ru/File.json?hash=<md5>";
 //   import Y from "PUBLIC_DIR/images/icons/16/icon.svg?url";
-//     → const Y = "/static/images/icons/16/icon.svg?hash=<md5>";
+//     → const Y = /static/images/icons/16/icon.svg?hash=<md5>  (with /static prefix for non-JSON)
 //
 // PUBLIC_DIR non-JSON files get a /static/ prefix (nginx serves root
 // public/ at /static/).  JSON translation files skip the prefix because
