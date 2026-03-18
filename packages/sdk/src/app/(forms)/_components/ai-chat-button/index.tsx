@@ -41,11 +41,16 @@ import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.re
 
 const AiChatButton = () => {
   const { t } = useTranslation(["Common"]);
-  const { togglePanel, aiAgentEnabled, currentAgentId, isPreparingAgent } =
-    useFormsAiAgentStore();
+  const {
+    togglePanel,
+    aiAgentEnabled,
+    currentAgentId,
+    isPreparingAgent,
+    isPanelVisible,
+  } = useFormsAiAgentStore();
   const { hasManagementAccess } = useFormsSettingsStore();
 
-  if (!aiAgentEnabled || !hasManagementAccess) return null;
+  if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible) return null;
 
   if (isPreparingAgent) {
     return <Loader type={LoaderTypes.track} size="16px" />;
