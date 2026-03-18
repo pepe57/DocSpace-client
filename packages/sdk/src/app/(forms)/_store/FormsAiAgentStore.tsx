@@ -191,6 +191,11 @@ class FormsAiAgentStore {
     this.pendingAttachmentFile = null;
   };
 
+  clearOverride = () => {
+    this.overrideAgentId = null;
+    this.pendingAttachmentFile = null;
+  };
+
   setPreparingAgent = (value: boolean) => {
     this.isPreparingAgent = value;
   };
