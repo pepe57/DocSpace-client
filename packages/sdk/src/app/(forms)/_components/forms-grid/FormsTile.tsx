@@ -67,36 +67,49 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
   const { requestToken } = useFormsSettingsStore();
 
   const [blobThumbnail, setBlobThumbnail] = useState("");
+  const loadedUrlRef = useRef("");
 
   useEffect(() => {
     if (!item.thumbnailUrl || item.providerItem) return;
 
     const url = item.thumbnailUrl.replace(/^https?:\/\/[^/]+/, "");
+
+    if (loadedUrlRef.current === url) return;
+
     const headers: Record<string, string> = {};
     if (requestToken) {
       headers.Authorization = requestToken;
     }
 
-    let revoked = false;
+    let cancelled = false;
     fetch(url, { headers, credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error(`${res.status}`);
         return res.blob();
       })
       .then((blob) => {
-        if (revoked) return;
-        setBlobThumbnail(URL.createObjectURL(blob));
+        if (cancelled) return;
+        loadedUrlRef.current = url;
+        setBlobThumbnail((prev) => {
+          if (prev) URL.revokeObjectURL(prev);
+          return URL.createObjectURL(blob);
+        });
       })
       .catch(() => {});
 
     return () => {
-      revoked = true;
+      cancelled = true;
+    };
+  }, [item.thumbnailUrl, item.providerItem, requestToken]);
+
+  useEffect(() => {
+    return () => {
       setBlobThumbnail((prev) => {
         if (prev) URL.revokeObjectURL(prev);
         return "";
       });
     };
-  }, [item.thumbnailUrl, item.providerItem, requestToken]);
+  }, []);
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
 
@@ -108,6 +121,8 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
 
   const getDefaultAction = React.useCallback(
     (file: TFile) => {
+      if (file.isFillingPreparing) return "view" as const;
+
       switch (activeSection) {
         case FormsSection.MyForms: {
           const canFill =

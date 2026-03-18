@@ -48,8 +48,11 @@ import useFolderActions from "../../_hooks/useFolderActions";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
 
+import { MIN_SECTION_WIDTH } from "../../_api/aiAgentSettings";
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import { useFormsUserStore } from "../../_store/FormsUserStore";
+import useFormsSocket from "../../_hooks/useFormsSocket";
+import useFormEventHooks from "../../_hooks/useFormEventHooks";
 
 import FormsSidebar from "../sidebar";
 import FormsGrid from "../forms-grid";
@@ -60,6 +63,8 @@ import AiChatButton from "../ai-chat-button";
 import CreateFormDialog from "../create-form-dialog";
 
 import styles from "./FormsLayout.module.scss";
+
+const noop = async () => {};
 
 type FormsLayoutProps = {
   filesSettings: TFilesSettings;
@@ -79,8 +84,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const formsListStore = useFormsListStore();
   const { items, folders } = formsListStore;
   const formsSettingsStore = useFormsSettingsStore();
-  const { roomId } = formsSettingsStore;
-  const { isFormFiller } = formsSettingsStore;
+  const { roomId, socketUrl } = formsSettingsStore;
   const { fetchSection, fetchMore } = useFormsData();
   const {
     onUploadFiles,
@@ -93,6 +97,27 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const { currentDeviceType } = useDeviceType();
   const aiStore = useFormsAiAgentStore();
   const { user } = useFormsUserStore();
+
+  const socketFolderIds = React.useMemo(() => {
+    const ids = new Set<string>();
+    if (roomId) ids.add(String(roomId));
+    if (completedFolder) ids.add(String(completedFolder.id));
+    if (inProgressFolder) ids.add(String(inProgressFolder.id));
+    if (aiStore.doneFolderId) ids.add(String(aiStore.doneFolderId));
+    for (const key of Object.keys(aiStore.folderAgentsMap)) {
+      ids.add(key);
+    }
+    return [...ids];
+  }, [roomId, completedFolder, inProgressFolder, aiStore.doneFolderId, aiStore.folderAgentsMap]);
+
+  const socketFileIds = React.useMemo(
+    () => items.map((f) => f.id),
+    [items],
+  );
+
+  useFormsSocket(socketUrl, socketFolderIds, socketFileIds, fetchSection);
+  useFormEventHooks(aiStore, socketUrl);
+
   const prevSection = React.useRef(activeSection);
   const prevCompletedFolder = React.useRef(completedFolder);
   const prevInProgressFolder = React.useRef(inProgressFolder);
@@ -101,7 +126,8 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const [isSectionLoading, setIsSectionLoading] = React.useState(false);
 
   const isMyForms = activeSection === FormsSection.MyForms;
-  const canCreateForms = isMyForms && !isFormFiller;
+  const canCreateForms =
+    isMyForms && !!formsSettingsStore.folderSecurity?.Create;
   const isSettings = activeSection === FormsSection.Settings;
   const isEditing = Boolean(editingFile);
   const isInsideCompletedFolder =
@@ -113,6 +139,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   React.useEffect(() => {
     if (roomId && user?.id) {
       aiStore.initForRoom(roomId, user.id);
+      aiStore.autoEnableIfAvailable();
     }
   }, [roomId, user?.id, aiStore]);
 
@@ -138,30 +165,51 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
 
       const currentFetchId = ++fetchIdRef.current;
 
-      fetchSection(activeSection).then(async () => {
-        if (currentFetchId !== fetchIdRef.current) return;
-
-        setContentVisible(true);
-        setIsSectionLoading(false);
-
-        if (
-          activeSection === FormsSection.CompletedForms &&
-          completedFolder
-        ) {
-          await aiStore.setCurrentFolder(completedFolder.id);
+      fetchSection(activeSection)
+        .then(async () => {
           if (currentFetchId !== fetchIdRef.current) return;
 
-          if (formsListStore.items.length > 0) {
+          setContentVisible(true);
+          setIsSectionLoading(false);
+
+          if (
+            activeSection === FormsSection.CompletedForms &&
+            completedFolder
+          ) {
+            await aiStore.setCurrentFolder(completedFolder.id);
+            if (currentFetchId !== fetchIdRef.current) return;
+
             const files = formsListStore.items.map((f) => ({
               id: f.id,
               title: f.title,
             }));
-            aiStore.syncCompletedForms(files);
+
+            // No agent for this folder yet — create one
+            if (aiStore.aiAgentEnabled && !aiStore.currentAgentId) {
+              aiStore.setPreparingAgent(true);
+              try {
+                const entry = await aiStore.createAgentForFolder(
+                  { id: completedFolder.id, title: completedFolder.title },
+                  files,
+                );
+                if (currentFetchId !== fetchIdRef.current) return;
+                if (entry) {
+                  await aiStore.setCurrentFolder(completedFolder.id);
+                  if (currentFetchId !== fetchIdRef.current) return;
+                }
+              } finally {
+                aiStore.setPreparingAgent(false);
+              }
+            }
+
+            if (files.length > 0) {
+              aiStore.syncCompletedForms(files);
+            }
+          } else {
+            aiStore.setCurrentFolder(null);
           }
-        } else {
-          aiStore.setCurrentFolder(null);
-        }
-      });
+        })
+        .catch(() => {});
     }
   }, [
     activeSection,
@@ -270,10 +318,17 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     ];
   }, [formsSettingsStore.folderSecurity, t, onUploadFiles, onCreateBlankForm]);
 
+  const prevEditingFile = React.useRef(editingFile);
+  React.useEffect(() => {
+    if (prevEditingFile.current && !editingFile) {
+      fetchSection();
+    }
+    prevEditingFile.current = editingFile;
+  }, [editingFile, fetchSection]);
+
   const handleEditorNavigatedAway = React.useCallback(() => {
     closeEditor();
-    fetchSection();
-  }, [closeEditor, fetchSection]);
+  }, [closeEditor]);
 
   const handleEditorBack = React.useCallback(() => {
     closeEditor();
@@ -517,6 +572,14 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     );
   };
 
+  const rootRef = React.useRef<HTMLDivElement>(null);
+
+  const showGrid =
+    !isEditing &&
+    !isSectionLoading &&
+    activeSection !== FormsSection.Settings &&
+    contentVisible;
+
   const renderBody = () => {
     if (isEditing) {
       return <FormsEditor onNavigatedAway={handleEditorNavigatedAway} />;
@@ -526,25 +589,24 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
       return <Settings />;
     }
 
-    if (isSectionLoading) {
-      return null;
-    }
-
-    return (
-      <div
-        className={contentVisible ? styles.contentFadeIn : styles.contentHidden}
-      >
-        <FormsGrid filesSettings={filesSettings} fetchMore={fetchMore} />
-      </div>
-    );
+    return null;
   };
 
   const showLoaderOverlay =
     isSectionLoading && !isEditing && !isSettings;
 
+  const chatPanel = <AiChatPanel rootRef={rootRef} />;
+
   return (
-    <div className={styles.root}>
+    <div
+      className={styles.root}
+      ref={rootRef}
+      style={
+        { "--min-section-width": `${MIN_SECTION_WIDTH}px` } as React.CSSProperties
+      }
+    >
       <FormsSidebar />
+      {aiStore.panelPosition === "left" && chatPanel}
       <div className={styles.sectionArea}>
         <Section
           withBodyScroll={!isEditing}
@@ -557,7 +619,15 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
           currentDeviceType={currentDeviceType}
         >
           <Section.SectionHeader>{renderHeader()}</Section.SectionHeader>
-          <Section.SectionBody>{renderBody()}</Section.SectionBody>
+          <Section.SectionBody>
+            {renderBody()}
+            <div style={{ display: showGrid ? undefined : "none" }}>
+              <FormsGrid
+                filesSettings={filesSettings}
+                fetchMore={showGrid ? fetchMore : noop}
+              />
+            </div>
+          </Section.SectionBody>
         </Section>
         {showLoaderOverlay && (
           <div className={styles.loaderOverlay}>
@@ -565,7 +635,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
           </div>
         )}
       </div>
-      <AiChatPanel />
+      {aiStore.panelPosition === "right" && chatPanel}
       <CreateFormDialog
         visible={isCreateFormDialogVisible}
         isCreating={isCreatingForm}
