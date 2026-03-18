@@ -46,7 +46,12 @@ import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/wallet/utils";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
-import { AI_ENUM, AI_TOOLS, BACKUP_SERVICE, STORAGE_ENUM } from "@docspace/shared/constants";
+import {
+  AI_ENUM,
+  AI_TOOLS,
+  BACKUP_SERVICE,
+  STORAGE_ENUM,
+} from "@docspace/shared/constants";
 
 type TAiToolsChatPrice = {
   prompt: number;
@@ -469,7 +474,6 @@ class ServicesStore {
           (await setServiceQuota(serviceEnum)) ?? serviceName;
       }
 
-
       const serviceQuotaRequest =
         serviceEnum !== STORAGE_ENUM
           ? [setServiceQuota(serviceEnum ?? serviceName)]
@@ -477,9 +481,16 @@ class ServicesStore {
 
       const requests = [
         ...serviceQuotaRequest,
-        fetchTransactionHistory(null, null, true, true, "", resolvedServiceName),
+        fetchTransactionHistory(
+          null,
+          null,
+          true,
+          true,
+          "",
+          resolvedServiceName,
+        ),
         initWalletPayerAndBalance(isRefresh),
-        fetchPortalTariff(),
+        fetchPortalTariff(isRefresh),
       ];
 
       if (serviceName === AI_TOOLS) {
@@ -494,9 +505,7 @@ class ServicesStore {
         requests.push(this.fetchBackupsCount());
       }
 
-
       await Promise.all(requests);
-
 
       if (this.paymentStore.isAlreadyPaid) {
         if (this.paymentStore.isStripePortalAvailable) {
@@ -617,3 +626,4 @@ class ServicesStore {
 }
 
 export default ServicesStore;
+

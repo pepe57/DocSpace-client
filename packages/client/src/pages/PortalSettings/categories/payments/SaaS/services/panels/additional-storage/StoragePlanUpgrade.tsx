@@ -276,11 +276,17 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
           throw new Error(t("Common:UnexpectedError"));
         }
 
-        if (isNewSubscription)
-          navigate("/portal-settings/payments/services/disk-storage");
+        if (isNewSubscription) {
+          navigate(
+            "/portal-settings/payments/services/disk-storage?complete=true",
+          );
+          return;
+        }
 
         if (isUpgradeStoragePlan) fetchBalance!();
         const { walletQuotas } = await fetchPortalTariff!(true);
+
+        if (!walletQuotas) return;
 
         if (isUpdatedTariff(walletQuotas, isCancellation)) {
           resetIntervalSuccess(isCancellation);
