@@ -356,7 +356,9 @@ const SectionHeaderContent = (props) => {
         },
       ];
 
-  const isPaymentPage =  window.location.href.indexOf("portal-settings/payments/portal-payments") !== -1;
+  const isPaymentPage =
+    window.location.href.includes("portal-settings/payments/") &&
+    !window.location.href.includes("portal-settings/payments/services/");
 
   const translatedHeader =
     header === IMPORT_HEADER_CONST
