@@ -40,10 +40,16 @@ import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
+import LoginReactSvgUrl from "PUBLIC_DIR/images/icons/16/login.react.svg?url";
 
+import ResizeHandle from "./ResizeHandle";
 import styles from "./AiChatPanel.module.scss";
 
-const AiChatPanel = () => {
+type AiChatPanelProps = {
+  rootRef: React.RefObject<HTMLDivElement | null>;
+};
+
+const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
   const { t } = useTranslation(["Common"]);
   const aiAgentStore = useFormsAiAgentStore();
   const {
@@ -52,8 +58,14 @@ const AiChatPanel = () => {
     isSyncing,
     currentAgentId,
     pendingAttachmentFile,
+    panelPosition,
+    panelWidth,
+    setPanelPosition,
+    setPanelWidth,
   } = aiAgentStore;
   const { filesSettings, hasManagementAccess } = useFormsSettingsStore();
+
+  const panelRef = React.useRef<HTMLDivElement>(null);
 
   const agentRoomId = currentAgentId ?? 0;
 
@@ -120,10 +132,32 @@ const AiChatPanel = () => {
     [pendingAttachmentFile?.title],
   );
 
+  const handleResizeEnd = React.useCallback(
+    (width: number) => {
+      setPanelWidth(width);
+    },
+    [setPanelWidth],
+  );
+
+  const handleTogglePosition = React.useCallback(() => {
+    setPanelPosition(panelPosition === "left" ? "right" : "left");
+  }, [panelPosition, setPanelPosition]);
+
   if (!isPanelVisible || !agentRoomId || !hasManagementAccess) return null;
 
   return (
-    <div className={styles.chatPanel}>
+    <div
+      ref={panelRef}
+      className={styles.chatPanel}
+      data-position={panelPosition}
+      style={{ width: panelWidth }}
+    >
+      <ResizeHandle
+        position={panelPosition}
+        panelRef={panelRef}
+        rootRef={rootRef}
+        onResizeEnd={handleResizeEnd}
+      />
       <div className={styles.chatHeader}>
         <div className={styles.headerTitle}>
           <Text fontSize="16px" fontWeight={700}>
@@ -131,6 +165,19 @@ const AiChatPanel = () => {
           </Text>
         </div>
         <div className={styles.headerActions}>
+          <IconButton
+            iconName={LoginReactSvgUrl}
+            size={16}
+            className={
+              panelPosition === "right" ? styles.positionIconFlipped : undefined
+            }
+            onClick={handleTogglePosition}
+            title={
+              panelPosition === "right"
+                ? t("Common:MovePanelLeft")
+                : t("Common:MovePanelRight")
+            }
+          />
           <IconButton
             iconName={CrossReactSvgUrl}
             size={17}
@@ -140,7 +187,7 @@ const AiChatPanel = () => {
       </div>
 
       {isSyncing ? (
-        <div className={styles.syncBanner}>
+        <div className={styles.syncBanner} role="status" aria-live="polite">
           <Text fontSize="12px" className={styles.syncText}>
             {t("Common:SyncingKnowledgeBase")}
           </Text>

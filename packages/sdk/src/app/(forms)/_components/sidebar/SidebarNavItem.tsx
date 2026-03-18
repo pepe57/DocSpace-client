@@ -34,6 +34,7 @@ type SidebarNavItemProps = {
   icon: string;
   isActive: boolean;
   onClick: () => void;
+  showText?: boolean;
 };
 
 const SidebarNavItem = ({
@@ -42,13 +43,14 @@ const SidebarNavItem = ({
   icon,
   isActive,
   onClick,
+  showText = true,
 }: SidebarNavItemProps) => {
   return (
     <ArticleItemPure
       id={id}
       text={label}
       icon={icon}
-      showText
+      showText={showText}
       isActive={isActive}
       onClick={onClick}
       linkData={{ path: "", state: {} }}
