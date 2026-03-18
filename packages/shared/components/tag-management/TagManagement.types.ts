@@ -100,7 +100,7 @@ export interface TagManagementProps {
   isActive?: boolean;
   onSelectTag: (tag: TagClickEvent) => void;
   access: AccessTagManagement;
-  roomName:string
+  roomName: string
 }
 
 export interface FormValues {

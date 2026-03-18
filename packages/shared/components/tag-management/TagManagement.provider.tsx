@@ -89,7 +89,6 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
       access,
     }),
     [
-      fetchedTags,
       searchValue,
       deferredSearchValue,
       filteredTags,

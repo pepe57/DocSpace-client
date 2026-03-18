@@ -89,13 +89,16 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
 
   const toggleChecked = useCallback(
     (label: string) => {
+      const originalTags = [...tags];
       const updatedTags = [...tags];
       const tagIndex = updatedTags.findIndex((tag) => tag.label === label);
 
       if (tagIndex === -1) return;
-      const checked = !updatedTags[tagIndex].checked;
 
-      updatedTags[tagIndex].checked = checked;
+      updatedTags[tagIndex] = {
+        ...updatedTags[tagIndex],
+        checked: !updatedTags[tagIndex].checked,
+      };
 
       updateTag.mutate(updatedTags[tagIndex], {
         onSuccess: () => {
@@ -104,10 +107,11 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
         onError: (error) => {
           toastr.error(error);
           console.error("Failed to update room tags:", error);
+          setTags(originalTags);
         },
       });
     },
-    [tags],
+    [tags, updateTag],
   );
 
   const handleEdit = useCallback(
@@ -116,7 +120,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
 
       setValue(EDIT_TAG_FORM_NAME, tags[index].label);
     },
-    [tags],
+    [tags, setValue],
   );
 
   const cancelEdit = useCallback(() => {
