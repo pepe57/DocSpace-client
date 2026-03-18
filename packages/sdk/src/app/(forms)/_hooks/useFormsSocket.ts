@@ -88,7 +88,7 @@ export default function useFormsSocket(
   const handleModifyRoom = useCallback((opt?: TOptSocket) => {
     if (!opt?.cmd) return;
 
-    if (opt.cmd === "create-form") {
+    if ((opt.cmd as string) === "create-form") {
       onFilesUpdatedRef.current?.();
     }
   }, []);
