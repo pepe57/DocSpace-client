@@ -121,7 +121,6 @@
   "TransactionPeriod": "فترة المعاملات",
   "TransactionsLimit": "تعرض الصفحة آخر 25 معاملة للفترة المحددة. يتوفر سجل المعاملات الكامل عبر الزر \"{{buttonName}}\".",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "ترقية",
   "UpgradeNow": "قم بالترقية الآن",
   "UpgradePlan": "قم بالترقية إلى خطة جديدة",
   "UserNotFound": "المستخدم <1> {{email}} </1> غير موجود.",

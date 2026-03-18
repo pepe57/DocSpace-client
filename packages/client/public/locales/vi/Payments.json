@@ -121,7 +121,6 @@
   "TransactionPeriod": "Thời gian giao dịch",
   "TransactionsLimit": "Trang hiển thị 25 giao dịch gần nhất cho khoảng thời gian đã chọn. Lịch sử giao dịch đầy đủ có sẵn thông qua nút \"{{buttonName}}\".",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "Nâng cấp",
   "UpgradeNow": "Nâng cấp ngay",
   "UpgradePlan": "Nâng cấp gói dịch vụ",
   "UserNotFound": "Không tìm thấy người dùng<1>{{email}}</1>.",

@@ -121,7 +121,6 @@
   "TransactionPeriod": "Transakcijas periods",
   "TransactionsLimit": "Lapa parāda pēdējās 25 darījumu reģistrēšanas ziņas izvēlētajā periodā. Pilnais darījumu reģistrs ir pieejams, izmantojot \"{{buttonName}}\" pogu.",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "Atjaunināt",
   "UpgradeNow": "Atjaunot tagad",
   "UpgradePlan": "Jaunināt plānu",
   "UserNotFound": "Lietotājs <1>{{email}}</1> nav atrasts.",

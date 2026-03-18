@@ -121,7 +121,6 @@
   "TransactionPeriod": "Transactieperiode",
   "TransactionsLimit": "De pagina toont de laatste 25 transacties voor de geselecteerde periode. De volledige transactiehistorie is beschikbaar via de \"{{buttonName}}\" knop.",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "Upgraden",
   "UpgradeNow": "Upgrade nu",
   "UpgradePlan": "Upgrade plan",
   "UserNotFound": "Gebruiker <1>{{email}}</1> is niet gevonden.",

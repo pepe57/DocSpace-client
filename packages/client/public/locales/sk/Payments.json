@@ -121,7 +121,6 @@
   "TransactionPeriod": "Obdobie transakcie",
   "TransactionsLimit": "Stránka zobrazuje posledných 25 transakcií za vybrané obdobie. Úplná história transakcií je dostupná cez tlačidlo \"{{buttonName}}\".",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "Aktualizácia",
   "UpgradeNow": "Aktualizovať teraz",
   "UpgradePlan": "Aktualizovať plán",
   "UserNotFound": "Používateľ <1>{{email}}</1> sa nenašiel.",

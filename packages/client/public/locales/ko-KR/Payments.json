@@ -121,7 +121,6 @@
   "TransactionPeriod": "거래 기간",
   "TransactionsLimit": "선택한 기간 동안의 최근 25건 거래 내역이 표시됩니다. 전체 거래 내역은 \"{{buttonName}}\" 버튼을 통해 이용할 수 있습니다.",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "업그레이드",
   "UpgradeNow": "지금 업그레이드",
   "UpgradePlan": "요금제 업그레이드",
   "UserNotFound": "<1>{{email}}</1> 사용자를 찾지 못했습니다.",

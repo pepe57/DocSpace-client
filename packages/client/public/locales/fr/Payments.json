@@ -121,7 +121,6 @@
   "TransactionPeriod": "Période de transaction",
   "TransactionsLimit": "La page affiche les 25 dernières transactions pour la période sélectionnée. L'historique complet des transactions est disponible via le bouton \"{{buttonName}}\".",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "Améliorer",
   "UpgradeNow": "Mettre à jour maintenant",
   "UpgradePlan": "Mettre à jour le plan tarifaire",
   "UserNotFound": "L’utilisateur <1>{{email}}</1> est introuvable.",

@@ -121,7 +121,6 @@
   "TransactionPeriod": "Period transakcija",
   "TransactionsLimit": "Stranica prikazuje poslednjih 25 transakcija za izabrani period. Kompletna istorija transakcija je dostupna putem dugmeta \"{{buttonName}}\".",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "Nadogradnja",
   "UpgradeNow": "Nadogradi sada",
   "UpgradePlan": "Plan nadogradnje",
   "UserNotFound": "Korisnik <1>{{email}}</1> nije pronađen.",

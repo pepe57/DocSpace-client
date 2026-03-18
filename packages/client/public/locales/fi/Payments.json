@@ -121,7 +121,6 @@
   "TransactionPeriod": "Tapahtumajakso",
   "TransactionsLimit": "Sivu näyttää viimeiset 25 tapahtumaa valitulle ajanjaksolle. Koko tapahtumahistoria on saatavilla \"{{buttonName}}\"-painikkeen kautta.",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "Päivitä",
   "UpgradeNow": "Päivitä nyt",
   "UpgradePlan": "Päivitä ohjelma",
   "UserNotFound": "Käyttäjän <1>{{email}}</1> ei löydy.",

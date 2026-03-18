@@ -121,7 +121,6 @@
   "TransactionPeriod": "ໄລຍະເວລາລໍາລຽງ",
   "TransactionsLimit": "ຫນ້າສະແດງ 25 ທຸລະກໍາສຸດທ້າຍສໍາລັບໄລຍະເວລາທີ່ເລືອກ. ປະຫວັດທຸລະກໍາເຕັມແມ່ນມີໃຫ້ນຳໃຊ້ຜ່ານປຸ່ມ \"{{buttonName}}\".",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "ຍົກລະດັບ",
   "UpgradeNow": "ອັບເກຣດດຽວນີ້",
   "UpgradePlan": "ແຜນການຍົກລະດັບ",
   "UserNotFound": "ບໍ່ພົບຜູ້ໃຊ້ <1>{{email}}</1>.",
