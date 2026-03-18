@@ -25,6 +25,10 @@
   column-gap: 10px;
 }
 
+.root :global(.articleItemText) {
+  font-weight: 600;
+}
+
 .sectionArea {
   position: relative;
   flex-grow: 1;
