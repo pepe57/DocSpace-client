@@ -235,19 +235,21 @@ const htmlTransformPlugin = (): Plugin => {
           const port = ctx.server.config.server.port || 5001;
           const host = process.env.VITE_DEV_HOST || currentRequestHost;
           const viteOrigin = `http://${host}:${port}`;
-          html = html
-            .replace(
-              'src="/src/bootstrap.js"',
-              `src="${viteOrigin}/src/bootstrap.js"`,
-            )
-            .replace(
-              'src="/@vite/client"',
-              `src="${viteOrigin}/@vite/client"`,
-            )
-            .replace(
-              / from\s+"\/(@react-refresh)"/g,
-              ` from "${viteOrigin}/$1"`,
-            );
+          // Rewrite all module <script> src attributes that start with "/"
+          // to use the absolute Vite origin.  This must handle the optional
+          // ?t=<timestamp> query that Vite's devHtmlHook appends after HMR
+          // invalidation — an exact string match would stop working after
+          // the first hot-update because the URL gains a query string.
+          html = html.replace(
+            /(<script\b[^>]*\btype\s*=\s*["']module["'][^>]*\bsrc\s*=\s*["'])(\/[^"']*)(["'])/g,
+            `$1${viteOrigin}$2$3`,
+          );
+          // Rewrite import-from specifiers in inline module scripts
+          // (e.g. the React-refresh preamble injected by @vitejs/plugin-react)
+          html = html.replace(
+            /( from\s+["'])(\/[^"']+)(["'])/g,
+            `$1${viteOrigin}$2$3`,
+          );
         }
 
         return html;

@@ -145,6 +145,7 @@ export type TFile = {
   isFolder?: boolean;
   formFillingStatus?: FileFillingFormStatus;
   startFilling?: boolean;
+  isFillingPreparing?: boolean;
   fileEntryType: number;
   hasDraft?: boolean;
   order?: string;

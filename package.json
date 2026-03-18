@@ -32,16 +32,18 @@
     "format": "pnpm nx run-many -t format -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
     "format:fix": "pnpm nx run-many -t format:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
     "tsc": "pnpm nx run-many -t tsc @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
-    "prepare": "node -e \"if (!process.env.CI) { try { require('child_process').execSync('git --version', {stdio: 'ignore'}); require('child_process').execSync('lefthook install', {stdio: 'inherit'}); } catch (e) { console.error('Lefthook installation skipped:', e.message); } }\" && npm --prefix ./common/tests ci"
+    "prepare": "node -e \"if (!process.env.CI) { try { require('child_process').execSync('git --version', {stdio: 'ignore'}); require('child_process').execSync('lefthook install', {stdio: 'inherit'}); } catch (e) { console.error('Lefthook installation skipped:', e.message); } }\" && npm --prefix ./common/tests ci",
+    "update-ui-kit-lock": "mv pnpm-workspace.yaml pnpm-workspace.yaml.bak && cd libs/ui-kit && pnpm install --lockfile-only; cd ../.. && mv pnpm-workspace.yaml.bak pnpm-workspace.yaml"
   },
   "devDependencies": {
     "@types/node": "24.10.7",
     "@types/react-text-mask": "5.4.14",
     "babel-plugin-react-compiler": "^1.0.0",
     "he": "1.2.0",
-    "lefthook": "^2.0.16",
+    "lefthook": "^2.1.4",
     "madge": "8.0.0",
     "nx": "22.4.5",
+    "prettier": "^3.8.1",
     "react": "19.2.4",
     "shx": "0.4.0",
     "terser": "5.46.0",

@@ -26,17 +26,22 @@
 
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import SocketHelper, {
   SocketCommands,
+  SocketEvents,
+  type TOptSocket,
 } from "@docspace/ui-kit/utils/socket";
 
 export default function useFormsSocket(
   socketUrl: string,
   folderIds: (string | number)[],
+  onFilesUpdated?: () => void,
 ) {
   const isInit = useRef(false);
+  const onFilesUpdatedRef = useRef(onFilesUpdated);
+  onFilesUpdatedRef.current = onFilesUpdated;
 
   useEffect(() => {
     if (!socketUrl || isInit.current) return;
@@ -58,4 +63,28 @@ export default function useFormsSocket(
       SocketHelper?.emit(SocketCommands.Unsubscribe, { roomParts });
     };
   }, [socketUrl, idsKey]);
+
+  const handleModifyFolder = useCallback((opt?: TOptSocket) => {
+    if (!opt?.cmd || !opt?.type) return;
+
+    if (opt.type === "file" && (opt.cmd === "update" || opt.cmd === "create" || opt.cmd === "delete")) {
+      onFilesUpdatedRef.current?.();
+    }
+  }, []);
+
+  const handleStopEdit = useCallback(() => {
+    onFilesUpdatedRef.current?.();
+  }, []);
+
+  useEffect(() => {
+    if (!socketUrl) return;
+
+    SocketHelper?.on(SocketEvents.ModifyFolder, handleModifyFolder);
+    SocketHelper?.on(SocketEvents.StopEditFile, handleStopEdit);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.ModifyFolder, handleModifyFolder);
+      SocketHelper?.off(SocketEvents.StopEditFile, handleStopEdit);
+    };
+  }, [socketUrl, handleModifyFolder, handleStopEdit]);
 }

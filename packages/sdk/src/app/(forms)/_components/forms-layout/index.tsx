@@ -48,6 +48,7 @@ import useFolderActions from "../../_hooks/useFolderActions";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
 
+import { MIN_SECTION_WIDTH } from "../../_api/aiAgentSettings";
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import { useFormsUserStore } from "../../_store/FormsUserStore";
 import useFormsSocket from "../../_hooks/useFormsSocket";
@@ -62,6 +63,8 @@ import AiChatButton from "../ai-chat-button";
 import CreateFormDialog from "../create-form-dialog";
 
 import styles from "./FormsLayout.module.scss";
+
+const noop = async () => {};
 
 type FormsLayoutProps = {
   filesSettings: TFilesSettings;
@@ -82,7 +85,6 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const { items, folders } = formsListStore;
   const formsSettingsStore = useFormsSettingsStore();
   const { roomId, socketUrl } = formsSettingsStore;
-  const { isFormFiller } = formsSettingsStore;
   const { fetchSection, fetchMore } = useFormsData();
   const {
     onUploadFiles,
@@ -106,7 +108,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     return [...ids];
   }, [roomId, aiStore.doneFolderId, aiStore.folderAgentsMap]);
 
-  useFormsSocket(socketUrl, socketFolderIds);
+  useFormsSocket(socketUrl, socketFolderIds, fetchSection);
   useFormEventHooks(aiStore, socketUrl);
 
   const prevSection = React.useRef(activeSection);
@@ -117,7 +119,8 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const [isSectionLoading, setIsSectionLoading] = React.useState(false);
 
   const isMyForms = activeSection === FormsSection.MyForms;
-  const canCreateForms = isMyForms && !isFormFiller;
+  const canCreateForms =
+    isMyForms && !!formsSettingsStore.folderSecurity?.Create;
   const isSettings = activeSection === FormsSection.Settings;
   const isEditing = Boolean(editingFile);
   const isInsideCompletedFolder =
@@ -308,10 +311,17 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     ];
   }, [formsSettingsStore.folderSecurity, t, onUploadFiles, onCreateBlankForm]);
 
+  const prevEditingFile = React.useRef(editingFile);
+  React.useEffect(() => {
+    if (prevEditingFile.current && !editingFile) {
+      fetchSection();
+    }
+    prevEditingFile.current = editingFile;
+  }, [editingFile, fetchSection]);
+
   const handleEditorNavigatedAway = React.useCallback(() => {
     closeEditor();
-    fetchSection();
-  }, [closeEditor, fetchSection]);
+  }, [closeEditor]);
 
   const handleEditorBack = React.useCallback(() => {
     closeEditor();
@@ -555,6 +565,14 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     );
   };
 
+  const rootRef = React.useRef<HTMLDivElement>(null);
+
+  const showGrid =
+    !isEditing &&
+    !isSectionLoading &&
+    activeSection !== FormsSection.Settings &&
+    contentVisible;
+
   const renderBody = () => {
     if (isEditing) {
       return <FormsEditor onNavigatedAway={handleEditorNavigatedAway} />;
@@ -564,25 +582,24 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
       return <Settings />;
     }
 
-    if (isSectionLoading) {
-      return null;
-    }
-
-    return (
-      <div
-        className={contentVisible ? styles.contentFadeIn : styles.contentHidden}
-      >
-        <FormsGrid filesSettings={filesSettings} fetchMore={fetchMore} />
-      </div>
-    );
+    return null;
   };
 
   const showLoaderOverlay =
     isSectionLoading && !isEditing && !isSettings;
 
+  const chatPanel = <AiChatPanel rootRef={rootRef} />;
+
   return (
-    <div className={styles.root}>
+    <div
+      className={styles.root}
+      ref={rootRef}
+      style={
+        { "--min-section-width": `${MIN_SECTION_WIDTH}px` } as React.CSSProperties
+      }
+    >
       <FormsSidebar />
+      {aiStore.panelPosition === "left" && chatPanel}
       <div className={styles.sectionArea}>
         <Section
           withBodyScroll={!isEditing}
@@ -595,7 +612,15 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
           currentDeviceType={currentDeviceType}
         >
           <Section.SectionHeader>{renderHeader()}</Section.SectionHeader>
-          <Section.SectionBody>{renderBody()}</Section.SectionBody>
+          <Section.SectionBody>
+            {renderBody()}
+            <div style={{ display: showGrid ? undefined : "none" }}>
+              <FormsGrid
+                filesSettings={filesSettings}
+                fetchMore={showGrid ? fetchMore : noop}
+              />
+            </div>
+          </Section.SectionBody>
         </Section>
         {showLoaderOverlay && (
           <div className={styles.loaderOverlay}>
@@ -603,7 +628,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
           </div>
         )}
       </div>
-      <AiChatPanel />
+      {aiStore.panelPosition === "right" && chatPanel}
       <CreateFormDialog
         visible={isCreateFormDialogVisible}
         isCreating={isCreatingForm}
