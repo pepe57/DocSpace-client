@@ -160,7 +160,6 @@ const PureHome = (props) => {
     dropTargetPreview,
     setDropTargetPreview,
     selectedFolderTitle,
-    selectedFolderChatSettings,
     clearDropPreviewLocation,
     canCreateSecurity,
     startDropPreview,
