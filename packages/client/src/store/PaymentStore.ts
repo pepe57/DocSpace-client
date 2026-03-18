@@ -775,6 +775,11 @@ class PaymentStore {
         requests.push(this.fetchCardLinked());
       }
 
+      if (this.isShowStorageTariffDeactivated() && this.isPayer) {
+        this.setIsShowTariffDeactivatedModal(true);
+        requests.push(this.handleServicesQuotas());
+      }
+
       await Promise.all(requests);
 
       this.setPaymentMethodInit(true);
