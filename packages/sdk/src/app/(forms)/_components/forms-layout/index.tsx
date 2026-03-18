@@ -82,7 +82,6 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const { items, folders } = formsListStore;
   const formsSettingsStore = useFormsSettingsStore();
   const { roomId, socketUrl } = formsSettingsStore;
-  const { isFormFiller } = formsSettingsStore;
   const { fetchSection, fetchMore } = useFormsData();
   const {
     onUploadFiles,
@@ -106,7 +105,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     return [...ids];
   }, [roomId, aiStore.doneFolderId, aiStore.folderAgentsMap]);
 
-  useFormsSocket(socketUrl, socketFolderIds);
+  useFormsSocket(socketUrl, socketFolderIds, fetchSection);
   useFormEventHooks(aiStore, socketUrl);
 
   const prevSection = React.useRef(activeSection);
@@ -117,7 +116,8 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const [isSectionLoading, setIsSectionLoading] = React.useState(false);
 
   const isMyForms = activeSection === FormsSection.MyForms;
-  const canCreateForms = isMyForms && !isFormFiller;
+  const canCreateForms =
+    isMyForms && !!formsSettingsStore.folderSecurity?.Create;
   const isSettings = activeSection === FormsSection.Settings;
   const isEditing = Boolean(editingFile);
   const isInsideCompletedFolder =
@@ -308,10 +308,17 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     ];
   }, [formsSettingsStore.folderSecurity, t, onUploadFiles, onCreateBlankForm]);
 
+  const prevEditingFile = React.useRef(editingFile);
+  React.useEffect(() => {
+    if (prevEditingFile.current && !editingFile) {
+      fetchSection();
+    }
+    prevEditingFile.current = editingFile;
+  }, [editingFile, fetchSection]);
+
   const handleEditorNavigatedAway = React.useCallback(() => {
     closeEditor();
-    fetchSection();
-  }, [closeEditor, fetchSection]);
+  }, [closeEditor]);
 
   const handleEditorBack = React.useCallback(() => {
     closeEditor();

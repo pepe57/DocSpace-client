@@ -56,8 +56,6 @@
   "GoToStripe": "Prejdite na Stripe",
   "GracePeriodActivatedDescription": "Počas doby odkladu platby nemôžu administrátori vytvárať nové miestnosti ani pridávať nových používateľov. Po uplynutí doby odkladu platby bude {{productName}} nedostupný až do zaplatenia.",
   "GracePeriodActivatedInfo": "Doba odkladu platby bude aktívna <1>od {{fromDate}} do {{byDate}}</1> (zostávajúce dni: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "Vaše predplatné zostáva aktívne, ale odporúčame vybrať nového platiteľa, ktorý bude mať prístup k nastaveniam predplatného v {{productName}}.",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "Vaše predplatné zostáva aktívne, ale odporúčame vám kontaktovať vlastníka {{productName}} a vybrať nového platcu.",
   "InvalidEmailWithoutActiveSubscription": "Odporúčame vybrať nového platiteľa, ktorý bude mať prístup k nastaveniam predplatného v {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Odporúčame vám kontaktovať vlastníka {{productName}} pred výberom nového platiteľa.",
   "LinkNewCard": "Na pripojenie novej karty, prosím, postupujte podľa tohto odkaz.",

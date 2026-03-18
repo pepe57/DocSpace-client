@@ -124,8 +124,6 @@
   --article-item-dnd-bg-color: #{$dnd-color};
   --article-item-dnd-hover-bg-color: #{$dnd-hover-color};
 
-  --story-wrapper-bg-color: #{$gray-light};
-
   --aside-bg-color: #{$white};
 
   --aside-custom-z-index: unset;
@@ -357,8 +355,6 @@
   --article-item-trash-icon-fill: #{$gray-dark};
   --article-item-dnd-bg-color: #{$dnd-dark-color};
   --article-item-dnd-hover-bg-color: #{$dnd-dark-hover};
-
-  --story-wrapper-bg-color: #{$dark-gray-light};
 
   --aside-bg-color: #{$black};
 
@@ -1454,6 +1450,8 @@
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
+
+  --ai-settings-description:#{$gray};
 }
 
 .dark {
@@ -1486,6 +1484,8 @@
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
+
+  --ai-settings-description: #{$gray-dark};
 }
 
 .rtl {

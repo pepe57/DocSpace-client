@@ -56,6 +56,7 @@ type FilterPanelProps = {
   isChanged: boolean;
   clearFilter: () => void;
   shouldShowClearButton: boolean;
+  hideTypeFilter?: boolean;
 };
 
 const FilterPanel = ({
@@ -72,6 +73,7 @@ const FilterPanel = ({
   isChanged,
   clearFilter,
   shouldShowClearButton,
+  hideTypeFilter,
 }: FilterPanelProps) => {
   const { t } = useTranslation(["Payments", "Settings"]);
   return (
@@ -97,25 +99,29 @@ const FilterPanel = ({
       <ModalDialog.Header>{t("Filter")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.filterDialogContent}>
-          <div className={styles.filterDialogSection}>
-            <Text fontWeight={600} fontSize="15px">
-              {t("Common:Type")}
-            </Text>
-            <ComboBox
-              options={typeOfHistoty}
-              selectedOption={selectedType}
-              onSelect={onSelectType}
-              directionY="both"
-              noBorder={false}
-              dropDownMaxHeight={300}
-              showDisabledItems
-              size={ComboBoxSize.content}
-              scaled
-              dataTestId="transaction_type_combobox"
-              dropDownTestId="transaction_type_dropdown"
-            />
-          </div>
-          <div className={styles.filterDialogDivider} />
+          {!hideTypeFilter ? (
+            <>
+              <div className={styles.filterDialogSection}>
+                <Text fontWeight={600} fontSize="15px">
+                  {t("Common:Type")}
+                </Text>
+                <ComboBox
+                  options={typeOfHistoty}
+                  selectedOption={selectedType}
+                  onSelect={onSelectType}
+                  directionY="both"
+                  noBorder={false}
+                  dropDownMaxHeight={300}
+                  showDisabledItems
+                  size={ComboBoxSize.content}
+                  scaled
+                  dataTestId="transaction_type_combobox"
+                  dropDownTestId="transaction_type_dropdown"
+                />
+              </div>
+              <div className={styles.filterDialogDivider} />
+            </>
+          ) : null}
           <div className={styles.filterDialogSection}>
             <Text fontWeight={600} fontSize="15px">
               {t("TransactionPeriod")}

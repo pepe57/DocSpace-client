@@ -56,8 +56,6 @@
   "GoToStripe": "Zum Stripe gehen",
   "GracePeriodActivatedDescription": "Während der bezahlten Frist können Administratoren keine neuen Räume erstellen und keine neuen Benutzer hinzufügen. Nach dem Fälligkeitsdatum der bezahlten Frist wird {{productName}} nicht mehr verfügbar sein, bis die Zahlung erfolgt ist.",
   "GracePeriodActivatedInfo": "Die bezahlte Frist gilt <1>vom {{fromDate}} bis {{byDate}}</1> (Tage übrig: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "Ihr Abonnement bleibt aktiv, aber wir empfehlen, einen neuen Zahler zu wählen, der Zugang zu den Abonnementeinstellungen in {{productName}} erhält.",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "Ihr Abonnement bleibt aktiv, aber wir empfehlen Ihnen, den {{productName}}-Eigentümer zu kontaktieren, um einen neuen Zahler zu wählen.",
   "InvalidEmailWithoutActiveSubscription": "Wir empfehlen, einen neuen Payer zu wählen, der Zugriff auf die Abonnementeinstellungen in {{productName}} erhält.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Wir empfehlen, den {{productName}}-Eigentümer zu kontaktieren, um einen neuen Zahler zu wählen.",
   "LinkNewCard": "Um eine neue Karte zu verknüpfen, folgen Sie bitte diesem Link.",

@@ -494,8 +494,9 @@ class ServicesStore {
         requests.push(this.fetchBackupsCount());
       }
 
-      this.setIsInitServiceData(true);
+
       await Promise.all(requests);
+
 
       if (this.paymentStore.isAlreadyPaid) {
         if (this.paymentStore.isStripePortalAvailable) {
@@ -515,6 +516,8 @@ class ServicesStore {
 
         requests.push(this.paymentStore.fetchAutoPayments());
       }
+
+      this.setIsInitServiceData(true);
     } catch (error) {
       console.error(error);
       toastr.error(t("Common:UnexpectedError"));

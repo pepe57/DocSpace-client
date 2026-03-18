@@ -108,6 +108,8 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
 
   const getDefaultAction = React.useCallback(
     (file: TFile) => {
+      if (file.isFillingPreparing) return "view" as const;
+
       switch (activeSection) {
         case FormsSection.MyForms: {
           const canFill =

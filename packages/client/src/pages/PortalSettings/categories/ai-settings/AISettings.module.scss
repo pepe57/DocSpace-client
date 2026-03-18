@@ -131,3 +131,23 @@
     border-color: var(--input-error-border);
   }
 }
+
+.modelOption {
+  display: flex;
+  flex-direction: column;
+}
+
+.modelLabel{
+  height: 20px;
+}
+.modelDescription {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ai-settings-description);
+}
+
+.modelDropdown {
+  :global(.scroll-body) {
+    padding-inline-end: 0 !important;
+  }
+}

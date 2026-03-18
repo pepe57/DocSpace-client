@@ -56,8 +56,6 @@
   "GoToStripe": "ໄປ Stripe ໄດ້",
   "GracePeriodActivatedDescription": "ໃນລະຫວ່າງໄລຍະເວລາຜ່ອນຜັນ, ຜູ້ເບິ່ງແຍງບໍ່ສາມາດສ້າງຫ້ອງໃໝ່ ແລະເພີ່ມຜູ້ໃຊ້ໃໝ່ໄດ້. ຫຼັງຈາກຄົບກຳນົດໄລຍະເວລາຜ່ອນຜັນ, {{productName}} ຈະບໍ່ສາມາດໃຊ້ໄດ້ຈົນກວ່າຈະມີການຈ່າຍເງິນ.",
   "GracePeriodActivatedInfo": "ໄລຍະເວລາຜ່ອນຜັນມີຜົນ <1>ຈາກ {{fromDate}} ຫາ {{byDate}}</1> (ມື້ທີ່ຍັງເຫຼືອ: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "ການສະໝັກໃຊ້ຂອງທ່ານຍັງຄົງມີຢູ່, ແຕ່ພວກເຮົາແນະນຳໃຫ້ເລືອກຜູ້ຈ່າຍເງິນໃໝ່ທີ່ເຂົ້າເຖິງການຕັ້ງຄ່າການສະໝັກໃຊ້ໃນ {{productName}} .",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "ການສະໝັກໃຊ້ຂອງທ່ານຍັງຄົງມີຢູ່, ແຕ່ພວກເຮົາແນະນຳໃຫ້ຕິດຕໍ່ ເຈົ້າຂອງ {{productName}} ເພື່ອເລືອກຜູ້ຈ່າຍເງິນໃໝ່.",
   "InvalidEmailWithoutActiveSubscription": "ພວກເຮົາແນະນຳໃຫ້ເລືອກຜູ້ຈ່າຍເງິນໃໝ່ທີ່ເຂົ້າເຖິງການຕັ້ງຄ່າການສະໝັກໃຊ້ໃນ {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "ພວກເຮົາແນະນຳໃຫ້ຕິດຕໍ່ ເຈົ້າຂອງ {{productName}} ເພື່ອເລືອກຜູ້ຈ່າຍເງິນໃໝ່.",
   "LinkNewCard": "ເພື່ອເຊື່ອມຕໍ່ບັດໃໝ່, ກະລຸນາເຂົ້າໄປທີ່ລິ້ງນີ້.",

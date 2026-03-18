@@ -34,7 +34,11 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Heading } from "@docspace/ui-kit/components/heading";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
+<<<<<<< HEAD
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+=======
+import { DropDownItem } from "@docspace/ui-kit/components/drop-down-item";
+>>>>>>> 1f78ff77ac1ddc9e28b206e2ab42f5133800ce36
 
 import { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
 import { ProviderType } from "@docspace/shared/api/ai/enums";
@@ -43,6 +47,7 @@ import { TTranslation } from "@docspace/shared/types";
 import styles from "../AISettings.module.scss";
 import { inject, observer } from "mobx-react";
 import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import ServicesStore from "SRC_DIR/store/ServicesStore";
 import classNames from "classnames";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
@@ -57,6 +62,7 @@ type DefaultProviderProps = {
   defaultProviderModelsError?: AISettingsStore["defaultProviderModelsError"];
   defaultProviderInitied?: AISettingsStore["defaultProviderInitied"];
   aiConfig?: SettingsStore["aiConfig"];
+  formatAiModelsCurrency?: ServicesStore["formatAiModelsCurrency"];
 };
 
 const getSelectedProviderOption = (
@@ -80,6 +86,7 @@ const DefaultProviderComponent = ({
   changeDefaultProvider,
   defaultProviderModelsError,
   defaultProviderInitied,
+  formatAiModelsCurrency,
 }: DefaultProviderProps) => {
   const getSelectedModelOption = (
     t: TTranslation,
@@ -98,6 +105,7 @@ const DefaultProviderComponent = ({
     };
   };
 
+<<<<<<< HEAD
   const { t } = useTranslation(["Common", "AISettings"]);
   const tooltipId = useId();
 
@@ -112,6 +120,9 @@ const DefaultProviderComponent = ({
     </Text>
   );
 
+=======
+  const { t } = useTranslation(["Common", "AISettings", "Services"]);
+>>>>>>> 1f78ff77ac1ddc9e28b206e2ab42f5133800ce36
   const [selectedProviderId, setSelectedProviderId] = useState<number | null>(
     defaultProvider?.providerId || null,
   );
@@ -133,12 +144,41 @@ const DefaultProviderComponent = ({
     );
   };
 
-  const getModelOptions = () => {
+  const getModelAdvancedOptions = () => {
+    if (!defaultProviderModels?.length) return undefined;
+
     return (
-      defaultProviderModels?.map((m) => ({
-        key: m.modelId,
-        label: aiConfig?.modelAliases?.[m.modelId] || m.modelId,
-      })) || []
+      <div style={{ display: "contents" }}>
+        {defaultProviderModels.map((m) => {
+          const label = aiConfig?.modelAliases?.[m.modelId] || m.modelId;
+          const isSelected = m.modelId === selectedModelId;
+          const safeFormat = (v: number) =>
+            formatAiModelsCurrency ? formatAiModelsCurrency(v) : String(v);
+          const priceLabel =
+            m.price != null
+              ? t("Services:AIModelPrice", {
+                  inputPrice: safeFormat(m.price.prompt),
+                  outputPrice: safeFormat(m.price.completion),
+                })
+              : null;
+
+          return (
+            <DropDownItem
+              key={m.modelId}
+              isSelected={isSelected}
+              isActive={isSelected}
+              onClick={() => onSelectModel({ key: m.modelId, label })}
+            >
+              <div className={styles.modelOption}>
+                <Text className={styles.modelLabel}>{label}</Text>
+                {priceLabel ? (
+                  <Text className={styles.modelDescription}>{priceLabel}</Text>
+                ) : null}
+              </div>
+            </DropDownItem>
+          );
+        })}
+      </div>
     );
   };
 
@@ -241,6 +281,7 @@ const DefaultProviderComponent = ({
           lineHeight="22px"
           fontSize="16px"
         >
+<<<<<<< HEAD
           {t("AISettings:DefaultProviderTitle")}
         </Heading>
         <Text className={styles.description} lineHeight="20px">
@@ -250,6 +291,50 @@ const DefaultProviderComponent = ({
             productName: t("Common:ProductName"),
           })}
         </Text>
+=======
+          <ComboBox
+            className={classNames({
+              [styles.hasError]: !!defaultProviderModelsError,
+            })}
+            options={getProviderOptions()}
+            selectedOption={selectedProviderOption}
+            displayArrow
+            onSelect={onSelectProvider}
+            displaySelectedOption
+            dataTestId="default-provider-combobox"
+            dropDownTestId="default-provider-dropdown"
+            directionY="both"
+            dropDownMaxHeight={300}
+          />
+        </FieldContainer>
+        <FieldContainer
+          labelVisible
+          isVertical
+          labelText={t("AISettings:Model")}
+          removeMargin
+        >
+          <ComboBox
+            onSelect={() => {}}
+            options={[]}
+            advancedOptions={getModelAdvancedOptions()}
+            advancedOptionsCount={defaultProviderModels?.length ?? 0}
+            selectedOption={selectedModelOption}
+            displayArrow
+            scaledOptions
+            dataTestId="default-model-combobox"
+            dropDownTestId="default-model-dropdown"
+            isLoading={isDefaultProviderModelsLoading}
+            isDisabled={!defaultProviderModels}
+            directionY="both"
+            dropDownMaxHeight={260}
+            isNoFixedHeightOptions
+            displaySelectedOption
+            hideMobileView={false}
+            isDefaultMode
+            dropDownClassName={styles.modelDropdown}
+          />
+        </FieldContainer>
+>>>>>>> 1f78ff77ac1ddc9e28b206e2ab42f5133800ce36
 
         <div className={styles.defaultProviderForm}>
           <FieldContainer
@@ -333,17 +418,21 @@ const DefaultProviderComponent = ({
   );
 };
 
-export const DefaultProvider = inject(({ aiSettingsStore }: TStore) => {
-  return {
-    defaultProviderModels: aiSettingsStore.defaultProviderModels,
-    defaultProvider: aiSettingsStore.defaultProvider,
-    setDefaultProvider: aiSettingsStore.setDefaultProvider,
-    aiProviders: aiSettingsStore.aiProviders,
-    fetchDefaultProviderModels: aiSettingsStore.fetchDefaultProviderModels,
-    isDefaultProviderModelsLoading:
-      aiSettingsStore.isDefaultProviderModelsLoading,
-    changeDefaultProvider: aiSettingsStore.changeDefaultProvider,
-    defaultProviderModelsError: aiSettingsStore.defaultProviderModelsError,
-    defaultProviderInitied: aiSettingsStore.defaultProviderInitied,
-  };
-})(observer(DefaultProviderComponent));
+export const DefaultProvider = inject(
+  ({ aiSettingsStore, servicesStore }: TStore) => {
+    return {
+      defaultProviderModels: aiSettingsStore.defaultProviderModels,
+      defaultProvider: aiSettingsStore.defaultProvider,
+      setDefaultProvider: aiSettingsStore.setDefaultProvider,
+      aiProviders: aiSettingsStore.aiProviders,
+      fetchDefaultProviderModels: aiSettingsStore.fetchDefaultProviderModels,
+      isDefaultProviderModelsLoading:
+        aiSettingsStore.isDefaultProviderModelsLoading,
+      changeDefaultProvider: aiSettingsStore.changeDefaultProvider,
+      defaultProviderModelsError: aiSettingsStore.defaultProviderModelsError,
+      defaultProviderInitied: aiSettingsStore.defaultProviderInitied,
+      formatAiModelsCurrency: servicesStore.formatAiModelsCurrency,
+    };
+  },
+)(observer(DefaultProviderComponent));
+

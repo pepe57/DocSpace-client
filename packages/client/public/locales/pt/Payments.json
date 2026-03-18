@@ -56,8 +56,6 @@
   "GoToStripe": "Vá para o Stripe",
   "GracePeriodActivatedDescription": "Durante o período de tolerância, os administradores não podem criar salas novas e adicionar novos utilizadores. Assim que o período de tolerância terminar, o {{productName}} ficará indisponível até que o pagamento seja efetuado.",
   "GracePeriodActivatedInfo": "O período de tolerância <1>começa a {{fromDate}} e termina a {{byDate}}</1> (dias restantes: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "A sua subscrição continua ativa, mas recomendamos escolher um novo Pagador que tenha acesso às configurações da subscrição no {{productName}}.",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "A sua subscrição continua ativa, mas recomendamos contactar o proprietário do {{productName}} e escolher um novo Pagador.",
   "InvalidEmailWithoutActiveSubscription": "Recomendamos escolher um novo Pagador que tenha acesso às configurações relativas à subscrição no {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "A sua subscrição continua ativa, mas recomendamos contactar o proprietário do {{productName}} e escolher um novo Pagador.",
   "LinkNewCard": "Para vincular um novo cartão, por favor, siga este link.",

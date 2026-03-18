@@ -270,6 +270,7 @@ const AiPage = (props: AiPageProps) => {
           <TransactionHistory
             withoutHeader={currentDeviceType !== DeviceType.mobile}
             serviceName={AI_TOOLS}
+            hideTypeFilter
           />
         </div>
       ),

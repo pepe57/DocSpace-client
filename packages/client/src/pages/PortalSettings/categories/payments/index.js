@@ -73,7 +73,7 @@ const PaymentsPage = (props) => {
   const data = [
     {
       id: "portal-payments",
-      name: t("MainTariffPlan"),
+      name: t("PortalTariffPlan", { productName: t("Common:ProductName") }),
       content: <PaymentsSaaS />,
       onClick: async () => {
         clearAbortControllerArr();

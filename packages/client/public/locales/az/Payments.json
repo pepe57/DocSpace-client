@@ -56,8 +56,6 @@
   "GoToStripe": "Stripe-ə keçin",
   "GracePeriodActivatedDescription": "Güzəşt müddətində adminlər yeni otaqlar yarada və yeni istifadəçilər əlavə edə bilməzlər. Güzəşt müddəti bitdikdən sonra ödəniş edilənə qədər {{productName}} əlçatan olmayacaq.",
   "GracePeriodActivatedInfo": "Güzəşt müddəti <1>{{fromDate}} tarixindən {{byDate}}</1> tarixinədək tətbiq olunur (qalan günlər: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "Abunəliyiniz aktiv olaraq qalacaq, lakin {{productName}}-də abunəlik parametrlərinə daxil ola biləcək yeni Ödəyici seçməyinizi tövsiyə edirik.",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "Abunəliyiniz aktiv olaraq qalacaq, lakin yeni Ödəyici seçmək üçün {{productName}} sahibi ilə əlaqə saxlamağı tövsiyə edirik.",
   "InvalidEmailWithoutActiveSubscription": "{{productName}}-də abunəlik parametrlərinə çıxışı olan yeni Ödəyici seçməyi tövsiyə edirik.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Yeni Ödəyici seçmək üçün {{productName}} sahibi ilə əlaqə saxlamağı tövsiyə edirik.",
   "LinkNewCard": "Yeni kartı əlaqələndirmək üçün bu linki izləyin.",

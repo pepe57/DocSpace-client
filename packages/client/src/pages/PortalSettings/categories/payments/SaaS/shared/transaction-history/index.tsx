@@ -97,6 +97,7 @@ type TransactionHistoryProps = {
   withoutHeader?: boolean;
   serviceName?: string;
   headerTitle?: string;
+  hideTypeFilter?: boolean;
 };
 
 const getTransactionType = (key: string) => {
@@ -199,6 +200,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     withoutHeader,
     serviceName,
     headerTitle,
+    hideTypeFilter,
   } = props;
 
   const { t } = useTranslation(["Payments", "Settings"]);
@@ -616,21 +618,23 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
   const filterCombobox = (
     <div className={styles.transactionHistoryCombobox}>
-      <ComboBox
-        className={styles.transactionTypeCombobox}
-        tabIndex={1}
-        options={typeOfHistoty}
-        selectedOption={selectedType}
-        onSelect={onSelectType}
-        directionY="both"
-        noBorder={false}
-        dropDownMaxHeight={300}
-        showDisabledItems
-        size={ComboBoxSize.content}
-        scaled={false}
-        dataTestId="transaction_type_combobox"
-        dropDownTestId="transaction_type_dropdown"
-      />
+      {!hideTypeFilter ? (
+        <ComboBox
+          className={styles.transactionTypeCombobox}
+          tabIndex={1}
+          options={typeOfHistoty}
+          selectedOption={selectedType}
+          onSelect={onSelectType}
+          directionY="both"
+          noBorder={false}
+          dropDownMaxHeight={300}
+          showDisabledItems
+          size={ComboBoxSize.content}
+          scaled={false}
+          dataTestId="transaction_type_combobox"
+          dropDownTestId="transaction_type_dropdown"
+        />
+      ) : null}
       {datesComponent}
       {contactSelector}
       {shouldShowClearButton ? (
@@ -756,6 +760,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               : selectedType
           }
           onSelectType={onSelectType}
+          hideTypeFilter={hideTypeFilter}
           onApplyFilter={onApplyFilter}
           isChanged={isChanged}
           clearFilter={onClearFilter}

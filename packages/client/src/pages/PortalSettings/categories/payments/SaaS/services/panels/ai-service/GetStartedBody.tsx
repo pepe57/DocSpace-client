@@ -1,7 +1,6 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 
@@ -121,9 +120,14 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
               <Text className={styles.stepTitleText}>
                 {t("AIGetStartedStep1Title")}
               </Text>
-              <Text fontSize="12px" lineHeight="16px">
+              <Text
+                fontSize="12px"
+                lineHeight="16px"
+                className={styles.stepDescription}
+              >
                 {t("AIGetStartedStep1Description", {
                   productName: t("Common:ProductName"),
+                  organizationName: logoText,
                 })}
               </Text>
             </div>
@@ -133,13 +137,21 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
             <div className={styles.stepConnectorContent}>
               <div className={styles.transfer}>
                 <div className={styles.from}>
-                  <Text fontWeight={600} fontSize={"12px"}>
+                  <Text
+                    fontWeight={600}
+                    fontSize={"12px"}
+                    className={styles.payForItemTextMuted}
+                  >
                     {t("Payments:TopUpFrom")}
                   </Text>
                 </div>
                 <div></div>
                 <div className={styles.to}>
-                  <Text fontWeight={600} fontSize={"12px"}>
+                  <Text
+                    fontWeight={600}
+                    fontSize={"12px"}
+                    className={styles.payForItemTextMuted}
+                  >
                     {t("Payments:TopUpTo")}
                   </Text>
                 </div>
@@ -175,7 +187,11 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
               <Text className={styles.stepTitleText}>
                 {t("AIGetStartedStep2Title")}
               </Text>
-              <Text fontSize="12px" lineHeight="16px">
+              <Text
+                fontSize="12px"
+                lineHeight="16px"
+                className={styles.stepDescription}
+              >
                 {t("AIGetStartedStep2Description")}
               </Text>
             </div>
@@ -200,7 +216,11 @@ const GetStartedBody: React.FC<GetStartedBodyProps> = ({
               <Text className={styles.stepTitleText}>
                 {t("AIGetStartedStep3Title")}
               </Text>
-              <Text fontSize="12px" lineHeight="16px">
+              <Text
+                fontSize="12px"
+                lineHeight="16px"
+                className={styles.stepDescription}
+              >
                 {t("AIGetStartedStep3Description")}
               </Text>
             </div>
@@ -280,3 +300,4 @@ export default inject(({ paymentStore, settingsStore }: TStore) => {
     logoText,
   };
 })(observer(GetStartedBody));
+

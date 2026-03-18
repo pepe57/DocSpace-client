@@ -336,7 +336,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
       ) : null}
 
       <div className={styles.transactionSection}>
-        <TransactionHistory serviceName={storageServiceName ?? DISK_STORAGE} />
+        <TransactionHistory serviceName={storageServiceName ?? DISK_STORAGE} hideTypeFilter />
       </div>
 
       {isStorageDialogVisible ? (

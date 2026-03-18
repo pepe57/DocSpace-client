@@ -45,10 +45,6 @@ import styles from "../../styles/OrderSummary.module.scss";
 import { calculateDifference } from "../../hooks/resourceUtils";
 import classNames from "classnames";
 
-const getDirectionalText = (isRTL: boolean) => {
-  return isRTL ? `>1` : `<1`;
-};
-
 type OrderSummaryProps = {
   amount: number;
   currentStoragePlanSize?: number;
@@ -177,7 +173,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
         { days: daysUntilStorageExpiry },
         { locale: language },
       ).toHuman()
-    : getDirectionalText(isRTL);
+    : t("Services:LessThanOneDay");
 
   return (
     <div className={styles.orderSummaryWrapper}>
@@ -189,7 +185,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
           {!isNewSubscription ? (
             <div className={styles.summaryRow}>
               <Text fontSize="14px" className={styles.rowLabel}>
-                {t("StorageUpgrade")}
+                {t("StorageAdjustment")}
               </Text>
               <Text
                 fontWeight="600"
@@ -375,3 +371,4 @@ export default inject(
     };
   },
 )(observer(OrderSummary));
+

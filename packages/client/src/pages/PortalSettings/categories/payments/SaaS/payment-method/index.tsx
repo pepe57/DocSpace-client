@@ -32,6 +32,8 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
+import { toAbsoluteUrl } from "../../utils/index";
+
 import styles from "./PaymentMethod.module.scss";
 import PaymentMethodLoader from "./PaymentMethodLoader";
 import PayerInformation from "../shared/payer-information";
@@ -65,13 +67,13 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
 
   const goToStripePortal = () => {
     accountLink
-      ? window.open(accountLink, "_blank")
+      ? window.open(toAbsoluteUrl(accountLink), "_blank")
       : toastr.error(t("Common:UnexpectedError"));
   };
 
   const goLinkCard = () => {
     cardLinked
-      ? window.open(cardLinked, "_self")
+      ? window.open(toAbsoluteUrl(cardLinked), "_self")
       : toastr.error(t("Common:UnexpectedError"));
   };
 

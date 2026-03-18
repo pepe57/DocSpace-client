@@ -614,6 +614,10 @@
   justify-content: center;
 }
 
+.stepDescription{
+  color: var(--payment-text-color)
+}
+
 @media (max-width: 420px) {
   .billingCardsRow {
     grid-template-columns: 1fr;

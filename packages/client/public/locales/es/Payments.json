@@ -56,8 +56,6 @@
   "GoToStripe": "Ir a Stripe",
   "GracePeriodActivatedDescription": "Durante el periodo de gracia, los administradores no pueden crear nuevas salas ni añadir nuevos usuarios. Tras la fecha de vencimiento del periodo de gracia, {{productName}} dejará de estar disponible hasta que se realice el pago.",
   "GracePeriodActivatedInfo": "El periodo de gracia es válido <1>desde {{fromDate}} hasta {{byDate}}</1> (días restantes: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "Su suscripción permanece activa, pero le recomendamos que elija un nuevo Pagador que tenga acceso a la configuración de la suscripción en {{productName}}.",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "Su suscripción permanece activa, pero le recomendamos que se ponga en contacto con el propietario de {{productName}} para elegir un nuevo Pagador.",
   "InvalidEmailWithoutActiveSubscription": "Recomendamos elegir un nuevo Pagador que tenga acceso a la configuración de la suscripción en {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Recomendamos ponerse en contacto con el propietario de {{productName}} para elegir un nuevo Pagador.",
   "LinkNewCard": "Para vincular una nueva tarjeta, siga este enlace.",

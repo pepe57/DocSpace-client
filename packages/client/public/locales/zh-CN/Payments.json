@@ -56,8 +56,6 @@
   "GoToStripe": "前往Stripe",
   "GracePeriodActivatedDescription": "在宽限期内，管理员无法创建新房间和添加新用户。宽限期截止后，{{productName}}将不可用，直到付款完成。",
   "GracePeriodActivatedInfo": "宽限期将于 <1>{{fromDate}} 至 {{byDate}}</1> 间生效（剩余天数：{{delayDaysCount}}）。",
-  "InvalidEmailWithActiveSubscription": "您的订阅仍然有效，但我们建议您选择一位可以访问{{productName}}中订阅设置的新付款人。",
-  "InvalidEmailWithActiveSubscriptionForAdmin": "您的订阅仍然有效，但我们建议您联系{{productName}}所有者以选择新的付款人。",
   "InvalidEmailWithoutActiveSubscription": "我们建议您选择一位可以访问{{productName}}中订阅设置的新付款人。",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "我们建议您联系{{productName}}所有者以选择新的付款人。",
   "LinkNewCard": "关联新卡，请点击此链接。",
