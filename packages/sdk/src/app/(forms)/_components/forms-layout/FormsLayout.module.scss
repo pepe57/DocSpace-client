@@ -30,8 +30,28 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  min-width: 0;
+  min-width: var(--min-section-width, 400px);
   overflow: hidden;
+
+  @media (max-width: 1023.9px) {
+    min-width: 280px;
+  }
+
+  @media (max-width: 600px) {
+    min-width: 0;
+  }
+}
+
+.root[data-resizing="true"] {
+  user-select: none;
+
+  .sectionArea iframe {
+    pointer-events: none;
+  }
+}
+
+.root[data-resizing="true"] [data-position] {
+  transition: none;
 }
 
 .loaderOverlay {

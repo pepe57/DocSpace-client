@@ -16,5 +16,6 @@
     "target": "esnext",
     "types": ["vite/client"]
   },
-  "include": ["**/*.ts", "**/*.tsx", "types/**/*.d.ts", "vite.config.ts"]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
 }
