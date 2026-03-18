@@ -131,7 +131,7 @@ const DefaultProviderComponent = ({
           (p) => p.type !== ProviderType.PortalAi,
         );
 
-        return fallback?.id || null;
+        return fallback?.id || providerId;
       }
     }
 
