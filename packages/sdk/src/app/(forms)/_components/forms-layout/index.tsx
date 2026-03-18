@@ -296,6 +296,19 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     t,
   ]);
 
+  const navDropdownMinWidth = React.useMemo(() => {
+    if (!navigationItems.length) return 0;
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return 0;
+    ctx.font = '600 13px "Open Sans", sans-serif';
+    let max = 0;
+    for (const item of navigationItems) {
+      max = Math.max(max, ctx.measureText(item.title).width);
+    }
+    return Math.ceil(max + 67);
+  }, [navigationItems]);
+
   const getContextOptionsPlus = React.useCallback(() => {
     const security = formsSettingsStore.folderSecurity;
     if (!security?.Create) return [];
@@ -607,7 +620,14 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     >
       <FormsSidebar />
       {aiStore.panelPosition === "left" && chatPanel}
-      <div className={styles.sectionArea}>
+      <div
+        className={styles.sectionArea}
+        style={
+          navDropdownMinWidth
+            ? ({ "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties)
+            : undefined
+        }
+      >
         <Section
           withBodyScroll={!isEditing}
           withoutFooter={isEditing}
