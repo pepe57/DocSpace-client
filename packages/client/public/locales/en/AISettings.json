@@ -62,11 +62,6 @@
   "WebSearchDisabledSuccess": "{{webSearch}} successfully disabled",
   "WebSearchEnabledSuccess": "{{webSearch}} successfully enabled",
   "WebSearchKeyDescription": "Enter the API key obtained from your {{webSearch}} provider",
-<<<<<<< HEAD
   "WebSearchKeyHiddenDescription": "The API key is displayed only once upon saving and is then hidden for security purposes.",
   "PortalAiDisabledTooltip": "To use ONLYOFFICE AI provider, make sure to connect an AI service first."
 }
-=======
-  "WebSearchKeyHiddenDescription": "The API key is displayed only once upon saving and is then hidden for security purposes."
-}
->>>>>>> 1f78ff77ac1ddc9e28b206e2ab42f5133800ce36

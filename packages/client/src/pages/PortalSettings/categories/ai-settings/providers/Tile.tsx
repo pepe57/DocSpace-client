@@ -65,15 +65,8 @@ export const AiProviderTile = ({
 }: AiProviderTileProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
 
-<<<<<<< HEAD
   const icon = getAiProviderIcon(item.type) ?? "";
   const companyLabel = getAiProviderLabel(item.type, t, enabled);
-=======
-  const { isBase } = useTheme();
-
-  const icon = getAiProviderIcon(item.type, isBase) ?? "";
-  const companyLabel = getAiProviderLabel(item.type, t);
->>>>>>> 1f78ff77ac1ddc9e28b206e2ab42f5133800ce36
 
   const getContextOptions = () => {
     return [

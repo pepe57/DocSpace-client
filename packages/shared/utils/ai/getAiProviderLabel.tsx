@@ -26,15 +26,11 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-<<<<<<< HEAD:packages/shared/utils/ai/getAiProviderLabel.tsx
 import { Trans } from "react-i18next";
 import type { TFunction } from "i18next";
 
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
-=======
-import { TTranslation } from "../../types";
->>>>>>> 1f78ff77ac1ddc9e28b206e2ab42f5133800ce36:packages/shared/utils/ai/getAiProviderLabel.ts
 import { ProviderType } from "../../api/ai/enums";
 
 const SERVICES_URL = "/portal-settings/payments/services";
@@ -52,15 +48,11 @@ const DEEPSEEK_LABEL = "DeepSeek";
 const XAI_LABEL = "xAI";
 const GOOGLE_LABEL = "Google AI";
 
-<<<<<<< HEAD:packages/shared/utils/ai/getAiProviderLabel.tsx
 export const getAiProviderLabel = (
   type: ProviderType,
   t?: TFunction,
   enabled?: boolean,
 ): React.ReactNode => {
-=======
-export const getAiProviderLabel = (type: ProviderType, t?: TTranslation) => {
->>>>>>> 1f78ff77ac1ddc9e28b206e2ab42f5133800ce36:packages/shared/utils/ai/getAiProviderLabel.ts
   switch (type) {
     case ProviderType.OpenAi:
       return OPENAI_LABEL;
@@ -78,7 +70,6 @@ export const getAiProviderLabel = (type: ProviderType, t?: TTranslation) => {
       return XAI_LABEL;
     case ProviderType.Google:
       return GOOGLE_LABEL;
-<<<<<<< HEAD:packages/shared/utils/ai/getAiProviderLabel.tsx
     case ProviderType.PortalAi:
       return enabled ? (
         (t?.("Common:BuiltInAIService") ?? "")
@@ -98,11 +89,10 @@ export const getAiProviderLabel = (type: ProviderType, t?: TTranslation) => {
           }}
         />
       );
-=======
-     case ProviderType.PortalAi:
-      return t ? t("AISettings:BuilInAiService") : "" 
->>>>>>> 1f78ff77ac1ddc9e28b206e2ab42f5133800ce36:packages/shared/utils/ai/getAiProviderLabel.ts
+    case ProviderType.PortalAi:
+      return t ? t("AISettings:BuilInAiService") : "";
     default:
       return "";
   }
 };
+
