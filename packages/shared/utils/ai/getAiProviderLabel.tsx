@@ -89,8 +89,6 @@ export const getAiProviderLabel = (
           }}
         />
       );
-    case ProviderType.PortalAi:
-      return t ? t("AISettings:BuilInAiService") : "";
     default:
       return "";
   }
