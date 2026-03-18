@@ -129,6 +129,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
         onChange={onChangeSearchValue}
         placeholder={t("Common:AddTag")}
         onKeyDown={handleKeyDown}
+        testId="add_tag_input"
       />
       <hr className={styles.divider} />
       {showCreateTag ? (
@@ -148,6 +149,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
             tag={deferredSearchValue}
             label={deferredSearchValue}
             onClick={handleCreateTag}
+            dataTestId="create_tag_button"
           />
         </Text>
       ) : null}
