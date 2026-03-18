@@ -55,7 +55,10 @@ export const getAiProviderIcon = (type: ProviderType) => {
       return XaiSvgUrl;
     case ProviderType.Google:
       return GoogleSvgUrl;
+    case ProviderType.PortalAi:
+      return "/logo.ashx?logotype=3";
     default:
-      return null;
+      return "/logo.ashx?logotype=3";
   }
 };
+

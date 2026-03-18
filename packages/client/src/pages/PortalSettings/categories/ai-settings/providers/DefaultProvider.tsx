@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
@@ -34,8 +34,10 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Heading } from "@docspace/ui-kit/components/heading";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
+import { ProviderType } from "@docspace/shared/api/ai/enums";
 import { TTranslation } from "@docspace/shared/types";
 
 import styles from "../AISettings.module.scss";
@@ -97,6 +99,19 @@ const DefaultProviderComponent = ({
   };
 
   const { t } = useTranslation(["Common", "AISettings"]);
+  const tooltipId = useId();
+
+  const isOnlySystemProvider =
+    aiProviders?.length === 1 &&
+    aiProviders[0].type === ProviderType.PortalAi;
+  const isDisabled = isOnlySystemProvider && !aiConfig?.systemAiEnabled;
+
+  const getTooltipContent = () => (
+    <Text fontSize="12px" lineHeight="16px">
+      {t("AISettings:PortalAiDisabledTooltip")}
+    </Text>
+  );
+
   const [selectedProviderId, setSelectedProviderId] = useState<number | null>(
     defaultProvider?.providerId || null,
   );
@@ -214,92 +229,107 @@ const DefaultProviderComponent = ({
   ]);
 
   return (
-    <div className={styles.defaultProvider}>
-      <Heading
-        className={styles.heading}
-        level={3}
-        fontWeight={700}
-        lineHeight="22px"
-        fontSize="16px"
+    <>
+      <div
+        className={styles.defaultProvider}
+        data-tooltip-id={isDisabled ? tooltipId : undefined}
       >
-        {t("AISettings:DefaultProviderTitle")}
-      </Heading>
-      <Text className={styles.description} lineHeight="20px">
-        {t("AISettings:DefaultProviderDescription", {
-          aiProvider: t("Common:AIProvider"),
-          aiAgents: t("Common:AIAgents"),
-          productName: t("Common:ProductName"),
-        })}
-      </Text>
-
-      <div className={styles.defaultProviderForm}>
-        <FieldContainer
-          labelVisible
-          isVertical
-          labelText={t("AISettings:Provider")}
-          removeMargin
-          hasError={!!defaultProviderModelsError}
-          errorMessage={defaultProviderModelsError || ""}
-          errorMessageWidth="100%"
+        <Heading
+          className={styles.heading}
+          level={3}
+          fontWeight={700}
+          lineHeight="22px"
+          fontSize="16px"
         >
-          <ComboBox
-            className={classNames({
-              [styles.hasError]: !!defaultProviderModelsError,
-            })}
-            options={getProviderOptions()}
-            selectedOption={selectedProviderOption}
-            displayArrow
-            onSelect={onSelectProvider}
-            displaySelectedOption
-            dataTestId="default-provider-combobox"
-            dropDownTestId="default-provider-dropdown"
-            directionY="both"
-            dropDownMaxHeight={300}
-          />
-        </FieldContainer>
-        <FieldContainer
-          labelVisible
-          isVertical
-          labelText={t("AISettings:Model")}
-          removeMargin
-        >
-          <ComboBox
-            options={getModelOptions()}
-            selectedOption={selectedModelOption}
-            displayArrow
-            onSelect={onSelectModel}
-            displaySelectedOption
-            dataTestId="default-model-combobox"
-            dropDownTestId="default-model-dropdown"
-            isLoading={isDefaultProviderModelsLoading}
-            isDisabled={!defaultProviderModels}
-            directionY="both"
-            dropDownMaxHeight={300}
-          />
-        </FieldContainer>
+          {t("AISettings:DefaultProviderTitle")}
+        </Heading>
+        <Text className={styles.description} lineHeight="20px">
+          {t("AISettings:DefaultProviderDescription", {
+            aiProvider: t("Common:AIProvider"),
+            aiAgents: t("Common:AIAgents"),
+            productName: t("Common:ProductName"),
+          })}
+        </Text>
 
-        <div className={styles.defaultProviderFormButtons}>
-          <Button
-            primary
-            size={ButtonSize.small}
-            label={t("Common:SaveButton")}
-            scale={false}
-            onClick={onSave}
-            isLoading={isSaveRequestRunning}
-            isDisabled={isSaveDisabled}
-            testId="default-provider-save-button"
-          />
-          <Button
-            size={ButtonSize.small}
-            label={t("Common:CancelButton")}
-            scale={false}
-            onClick={onCancel}
-            isDisabled={isCancelDisabled}
-            testId="default-provider-cancel-button"
-          />
+        <div className={styles.defaultProviderForm}>
+          <FieldContainer
+            labelVisible
+            isVertical
+            labelText={t("AISettings:Provider")}
+            removeMargin
+            hasError={!!defaultProviderModelsError}
+            errorMessage={defaultProviderModelsError || ""}
+            errorMessageWidth="100%"
+          >
+            <ComboBox
+              className={classNames({
+                [styles.hasError]: !!defaultProviderModelsError,
+              })}
+              options={getProviderOptions()}
+              selectedOption={selectedProviderOption}
+              displayArrow
+              onSelect={onSelectProvider}
+              displaySelectedOption
+              isDisabled={isDisabled}
+              dataTestId="default-provider-combobox"
+              dropDownTestId="default-provider-dropdown"
+              directionY="both"
+              dropDownMaxHeight={300}
+            />
+          </FieldContainer>
+          <FieldContainer
+            labelVisible
+            isVertical
+            labelText={t("AISettings:Model")}
+            removeMargin
+          >
+            <ComboBox
+              options={getModelOptions()}
+              selectedOption={selectedModelOption}
+              displayArrow
+              onSelect={onSelectModel}
+              displaySelectedOption
+              dataTestId="default-model-combobox"
+              dropDownTestId="default-model-dropdown"
+              isLoading={isDefaultProviderModelsLoading}
+              isDisabled={isDisabled || !defaultProviderModels}
+              directionY="both"
+              dropDownMaxHeight={300}
+            />
+          </FieldContainer>
+
+          <div className={styles.defaultProviderFormButtons}>
+            <Button
+              primary
+              size={ButtonSize.small}
+              label={t("Common:SaveButton")}
+              scale={false}
+              onClick={onSave}
+              isLoading={isSaveRequestRunning}
+              isDisabled={isDisabled || isSaveDisabled}
+              testId="default-provider-save-button"
+            />
+            <Button
+              size={ButtonSize.small}
+              label={t("Common:CancelButton")}
+              scale={false}
+              onClick={onCancel}
+              isDisabled={isDisabled || isCancelDisabled}
+              testId="default-provider-cancel-button"
+            />
+          </div>
         </div>
       </div>
-    </div>
+      {isDisabled ? (
+        <Tooltip
+          id={tooltipId}
+          place="bottom"
+          offset={10}
+          float
+          getContent={getTooltipContent}
+        />
+      ) : null}
+    </>
   );
 };
 

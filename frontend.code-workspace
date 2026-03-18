@@ -36,7 +36,6 @@
   "settings": {
     "window.zoomLevel": 0,
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "biomejs.biome",
     "VsCodeTaskButtons.tasks": [
       {
         "label": "Server (Aspire)",
@@ -639,10 +638,13 @@
     "javascript.format.enable": true,
     "typescript.format.enable": true,
     "[javascript]": {
-      "editor.defaultFormatter": "biomejs.biome"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescript]": {
-      "editor.defaultFormatter": "biomejs.biome"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescriptreact]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"

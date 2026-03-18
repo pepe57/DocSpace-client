@@ -26,7 +26,18 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { Trans } from "react-i18next";
+import type { TFunction } from "i18next";
+
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+
 import { ProviderType } from "../../api/ai/enums";
+
+const SERVICES_URL = "/portal-settings/payments/services";
+
+const onServicesClick = () => {
+  window.DocSpace.navigate(SERVICES_URL);
+};
 
 const OPENAI_LABEL = "OpenAI";
 const TOGETHER_AI_LABEL = "TogetherAI";
@@ -37,7 +48,11 @@ const DEEPSEEK_LABEL = "DeepSeek";
 const XAI_LABEL = "xAI";
 const GOOGLE_LABEL = "Google AI";
 
-export const getAiProviderLabel = (type: ProviderType) => {
+export const getAiProviderLabel = (
+  type: ProviderType,
+  t?: TFunction,
+  enabled?: boolean,
+): React.ReactNode => {
   switch (type) {
     case ProviderType.OpenAi:
       return OPENAI_LABEL;
@@ -55,6 +70,25 @@ export const getAiProviderLabel = (type: ProviderType) => {
       return XAI_LABEL;
     case ProviderType.Google:
       return GOOGLE_LABEL;
+    case ProviderType.PortalAi:
+      return enabled ? (
+        (t?.("Common:BuiltInAIService") ?? "")
+      ) : (
+        <Trans
+          t={t}
+          i18nKey="Common:BuiltInAIServiceDisabled"
+          components={{
+            1: (
+              <Link
+                type={LinkType.action}
+                color="accent"
+                isHovered
+                onClick={onServicesClick}
+              />
+            ),
+          }}
+        />
+      );
     default:
       return "";
   }

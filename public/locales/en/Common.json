@@ -1180,5 +1180,7 @@
   "CompletedForms": "Completed forms",
   "EmptyMyForms": "You don't have any forms yet. Create or upload a form to get started.",
   "EmptyInProgressForms": "There are no forms in progress at the moment.",
-  "EmptyCompletedForms": "There are no completed forms yet."
+  "EmptyCompletedForms": "There are no completed forms yet.",
+  "BuiltInAIService": "Built-in AI service",
+  "BuiltInAIServiceDisabled": "Built-in AI service, enabled on the <1>Services</1> page"
 }
