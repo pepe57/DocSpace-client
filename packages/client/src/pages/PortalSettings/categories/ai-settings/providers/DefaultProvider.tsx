@@ -183,6 +183,10 @@ const DefaultProviderComponent = ({
           externalLinkPath: isProviderDisabled
             ? "/portal-settings/payments/services"
             : undefined,
+          onExternalLinkClick: isProviderDisabled
+            ? () =>
+                window.DocSpace?.navigate("/portal-settings/payments/services")
+            : undefined,
         };
       }) || []
     );

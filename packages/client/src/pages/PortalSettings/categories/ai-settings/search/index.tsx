@@ -151,6 +151,10 @@ const SearchComponent = ({
         externalLinkPath: isSystemProviderDisabled
           ? "/portal-settings/payments/services"
           : undefined,
+        onExternalLinkClick: isSystemProviderDisabled
+          ? () =>
+              window.DocSpace?.navigate("/portal-settings/payments/services")
+          : undefined,
       });
     }
 
