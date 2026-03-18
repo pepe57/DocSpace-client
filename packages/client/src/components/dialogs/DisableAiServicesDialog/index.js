@@ -56,7 +56,6 @@ const DisableAiServicesDialogComponent = ({
     t("DisableAiServicesEffect3", {
       aiAgents: t("Common:AIAgents"),
     }),
-    t("DisableAiServicesEffect4"),
   ];
 
   return (
@@ -116,7 +115,7 @@ const DisableAiServicesDialogComponent = ({
           </ul>
         </Text>
         {isAiToolsServiceOn && (
-          <Text fontSize="13px" fontWeight={400} style={{ marginTop: "16px" }}>
+          <Text fontSize="13px" fontWeight={400} style={{ marginTop: "26px" }}>
             <Trans
               t={t}
               i18nKey="DisableAiServicesBalance"
@@ -137,7 +136,7 @@ const DisableAiServicesDialogComponent = ({
         <Text
           fontSize="13px"
           fontWeight={isAiToolsServiceOn ? 700 : 400}
-          style={{ marginTop: "16px" }}
+          style={{ marginTop: "26px" }}
         >
           {t("DisableAiServicesConfirm", {
             aiServices: t("Common:AIServices"),
