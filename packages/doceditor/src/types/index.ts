@@ -292,6 +292,7 @@ export type EditorProps = {
   onSDKRequestReferenceSource?: (event: object) => void;
   onOpenRoleMappingPanel?: (roles: TFormRole[]) => void;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
+  disconnectUsers?: () => Promise<void>;
   onStartFilling?: VoidFunction;
 };
 
@@ -420,6 +421,7 @@ export interface UseEventsProps {
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   openShareFormDialog?: VoidFunction;
   onOpenRoleMappingPanel?: (roles: TFormRole[]) => void;
+  disconnectUsers?: () => Promise<void>;
 }
 
 export interface UseInitProps {
@@ -461,7 +463,7 @@ export type TDocEditor = {
   setHistoryData?: (obj: THistoryData) => void;
   setActionLink: (link: string) => void;
   setUsers?: ({ c, users }: { c: string; users: TSharedUsers[] }) => void;
-  startFilling?: VoidFunction;
+  startFilling?: (start?: boolean) => void;
   requestRoles?: VoidFunction;
   setFavorite?: (favorite: boolean) => void;
   createConnector?: () => TEditorConnector;
