@@ -97,7 +97,7 @@ class FormsAiAgentStore {
   isPreparingAgent = false;
   userExplicitlyDisabled = false;
   doneFolderId: number | null = null;
-  panelPosition: PanelPosition = "right";
+  panelPosition: PanelPosition = "left";
   panelWidth = 360;
 
   private _folderVersion = 0;
