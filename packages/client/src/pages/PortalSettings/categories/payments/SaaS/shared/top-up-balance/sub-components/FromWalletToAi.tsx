@@ -57,7 +57,7 @@ const FromWalletToAi = (props: IFromWalletToAi) => {
   } = props;
   const { t } = useTranslation(["Payments", "Services", "Common"]);
   const aiServiceBalanceValue = formatAiServiceCurrency!();
-  const { amount } = useAmountValue();
+  const { amount, setIsBalanceInsufficient } = useAmountValue();
   const balanceValue = formatWalletCurrency!();
 
   const amountNumber = Number(amount);
@@ -73,6 +73,10 @@ const FromWalletToAi = (props: IFromWalletToAi) => {
     !walletCustomerEmail ||
     walletBalanceNumber === 0 ||
     amountNumber > walletBalanceNumber;
+
+  useEffect(() => {
+    setIsBalanceInsufficient(isBalanceInsufficient);
+  }, [isBalanceInsufficient]);
 
   return (
     <div className={modalStyles.transferSection}>
@@ -123,3 +127,4 @@ export default inject(
     };
   },
 )(observer(FromWalletToAi));
+

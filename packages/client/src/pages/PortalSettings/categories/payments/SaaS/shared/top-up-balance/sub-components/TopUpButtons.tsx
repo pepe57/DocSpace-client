@@ -80,12 +80,13 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
 }) => {
   const { t } = useTranslation(["Payments", "Services", "Common"]);
 
-  const { amount, hasError } = useAmountValue();
+  const { amount, isBalanceInsufficient, hasError } = useAmountValue();
 
   const isButtonDisabled =
     walletCustomerStatusNotActive ||
     !amount ||
     !walletCustomerEmail ||
+    isBalanceInsufficient ||
     hasError;
 
   const onTopUp = async () => {
@@ -161,3 +162,4 @@ export default inject(({ settingsStore, paymentStore }: TStore) => {
     handleServicesQuotas,
   };
 })(observer(TopUpButtons));
+

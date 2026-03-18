@@ -31,6 +31,8 @@ const AmountContext = createContext<{
   setAmount: React.Dispatch<React.SetStateAction<string>>;
   hasError: boolean;
   setHasError: React.Dispatch<React.SetStateAction<boolean>>;
+  isBalanceInsufficient: boolean;
+  setIsBalanceInsufficient: React.Dispatch<React.SetStateAction<boolean>>;
 } | null>(null);
 
 export const useAmountValue = () => {
@@ -47,9 +49,17 @@ export const AmountProvider: React.FC<{
 }> = ({ children, initialAmount = "" }) => {
   const [amount, setAmount] = useState<string>(initialAmount);
   const [hasError, setHasError] = useState(false);
+  const [isBalanceInsufficient, setIsBalanceInsufficient] = useState(false);
   const value = useMemo(
-    () => ({ amount, setAmount, hasError, setHasError }),
-    [amount],
+    () => ({
+      amount,
+      setAmount,
+      hasError,
+      setHasError,
+      isBalanceInsufficient,
+      setIsBalanceInsufficient,
+    }),
+    [amount, hasError, isBalanceInsufficient],
   );
 
   return (
