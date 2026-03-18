@@ -352,7 +352,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
         <StoragePlanUpgrade
           visible={isStorageDialogVisible}
           onClose={onCloseUpgradeStorage}
-          previousValue={previousStoragePlanSize?.toString()}
+          {...(previousStoragePlanSize && { previousValue: previousStoragePlanSize.toString() })}
         />
       ) : null}
       {isCancelDialogVisible ? (

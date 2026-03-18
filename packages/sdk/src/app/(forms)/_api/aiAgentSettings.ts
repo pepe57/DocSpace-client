@@ -279,7 +279,7 @@ export const savePanelPosition = (
 
 export const loadPanelPosition = (userHash?: string): PanelPosition => {
   const val = localStorage.getItem(panelPositionKey(userHash));
-  return val === "left" ? "left" : "right";
+  return val === "right" ? "right" : "left";
 };
 
 // --- Knowledge base helpers ---
