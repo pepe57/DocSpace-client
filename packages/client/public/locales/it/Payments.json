@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Per prima cosa devi aggiungere un metodo di pagamento",
   "ForDays": "per {{count}} giorni",
   "FromTo": "Dal <1>{{fromDate}}</1> al <2>{{toDate}}</2>",
-  "GoToPayments": "Vai ai pagamenti",
   "GoToService": "Vai al servizio",
   "GoToStripe": "Vai su Stripe",
   "GracePeriodActivatedDescription": "Durante il periodo di prova, gli amministratori non possono creare nuove stanze e aggiungere nuovi utenti. Dopo la data di scadenza del periodo di prova, {{productName}} non sarà più disponibile fino a quando non verrà effettuato il pagamento.",

@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Öncelikle bir ödeme yöntemi eklemeniz gerekiyor",
   "ForDays": "günlerdir: {{count}}",
   "FromTo": "<1>{{fromDate}}</1>’den <2>{{toDate}}</2>’ye",
-  "GoToPayments": "Ödemelere Git",
   "GoToService": "Servise git",
   "GoToStripe": "Stripe'a gidin.",
   "GracePeriodActivatedDescription": "Ödemesiz dönem süresi boyunca, yöneticiler yeni odalar oluşturamaz ve yeni kullanıcılar ekleyemez. Ödemesiz dönemin bitiş tarihinden sonra, ödeme yapılana kadar {{productName}} kullanılamayacaktır.",

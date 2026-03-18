@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Nejprve musíte přidat platební metodu.",
   "ForDays": "pro dny: {{count}}",
   "FromTo": "Od <1>{{fromDate}}</1> do <2>{{toDate}}</2>",
-  "GoToPayments": "Přejít do plateb",
   "GoToService": "Přejít do služby",
   "GoToStripe": "Přejděte na Stripe",
   "GracePeriodActivatedDescription": "Během období odkladu nemohou správci vytvářet nové místnosti a přidávat nové uživatele. Po uplynutí doby odkladu platby se {{productName}} stane nedostupným, dokud nebude provedena platba.",

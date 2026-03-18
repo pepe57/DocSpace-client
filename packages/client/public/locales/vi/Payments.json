@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Đầu tiên, bạn cần thêm một phương thức thanh toán.",
   "ForDays": "trong {{count}} ngày:",
   "FromTo": "Từ <1>{{fromDate}}</1> đến <2>{{toDate}}</2>",
-  "GoToPayments": "Thanh toán",
   "GoToService": "Đến dịch vụ",
   "GoToStripe": "Đến Stripe",
   "GracePeriodActivatedDescription": "Trong thời gian ân hạn, quản trị viên không thể tạo phòng mới và thêm người dùng mới. Sau ngày hết hạn thanh toán của thời gian ân hạn, {{productName}} sẽ không khả dụng cho đến khi thanh toán được thực hiện.",

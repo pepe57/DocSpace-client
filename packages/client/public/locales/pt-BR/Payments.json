@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Primeiro, você precisa adicionar uma forma de pagamento",
   "ForDays": "para dias: {{count}}",
   "FromTo": "De <1>{{fromDate}}</1> a <2>{{toDate}}</2>",
-  "GoToPayments": "Acesse Pagamentos",
   "GoToService": "Ir para o serviço",
   "GoToStripe": "Acesse o Stripe",
   "GracePeriodActivatedDescription": "Durante o período de cortesia, os administradores não podem criar novas salas e adicionar novos usuários. Após a data de vencimento do período de carência, o {{productName}} ficará indisponível até que o pagamento seja efetuado.",

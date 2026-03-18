@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "පළමුවෙන්ම ඔබට ගෙවුම් ක්‍රමයක් එක් කරන්න අවශ්‍යයි.",
   "ForDays": "දින කිහිනය: {{count}}",
   "FromTo": "<1>{{fromDate}}</1> සිට <2>{{toDate}}</2>",
-  "GoToPayments": "ගෙවීම් වෙත යන්න",
   "GoToService": "සේවාවට යන්න",
   "GoToStripe": "Stripe වෙත යන්න.",
   "GracePeriodActivatedDescription": "සහන කාලය අතරතුර, පරිපාලකයින්ට නව කාමර සෑදීමට සහ නව පරිශ්‍රීලකයින් එක් කිරීමට නොහැකිය. සහන කාල සීමාවේ අවසාන දිනය පසු වූ විට, ගෙවීම සිදු කරන තෙක් {{productName}} අවහිර වී තිබෙනු ඇත.",

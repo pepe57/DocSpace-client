@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Najprej morate dodati način plačila.",
   "ForDays": "za dneve: {{count}}",
   "FromTo": "Od <1>{{fromDate}}</1> do <2>{{toDate}}</2>",
-  "GoToPayments": "Plačila",
   "GoToService": "Pojdite v storitev",
   "GoToStripe": "Pojdite na Stripe",
   "GracePeriodActivatedDescription": "V prehodnem obdobju skrbniki ne morejo ustvarjati novih sob in dodajati novih uporabnikov. Po datumu zapadlosti bo {{productName}} postal nedosegljiv, dokler plačilo ni izvedeno.",

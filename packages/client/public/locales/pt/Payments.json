@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Primeiro, você precisa adicionar um método de pagamento.",
   "ForDays": "for days: {{count}}",
   "FromTo": "De <1>{{fromDate}}</1> a <2>{{toDate}}</2>",
-  "GoToPayments": "Ir para Pagamentos",
   "GoToService": "Acesse o serviço",
   "GoToStripe": "Vá para o Stripe",
   "GracePeriodActivatedDescription": "Durante o período de tolerância, os administradores não podem criar salas novas e adicionar novos utilizadores. Assim que o período de tolerância terminar, o {{productName}} ficará indisponível até que o pagamento seja efetuado.",

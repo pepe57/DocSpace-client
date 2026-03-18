@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "您需要先添加支付方式",
   "ForDays": "计费周期：{{count}}天",
   "FromTo": "从<1>{{fromDate}}</1>至<2>{{toDate}}</2>",
-  "GoToPayments": "前往付款",
   "GoToService": "前往服务",
   "GoToStripe": "前往Stripe",
   "GracePeriodActivatedDescription": "在宽限期内，管理员无法创建新房间和添加新用户。宽限期截止后，{{productName}}将不可用，直到付款完成。",

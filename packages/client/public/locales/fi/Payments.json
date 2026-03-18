@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Ensin sinun täytyy lisätä maksutapa",
   "ForDays": "päivää: {{count}}",
   "FromTo": "Alkaen <1>{{fromDate}}</1> loppuun <2>{{toDate}}</2>",
-  "GoToPayments": "Maksuihin",
   "GoToService": "Siirry palveluun",
   "GoToStripe": "Siirry Stripeen",
   "GracePeriodActivatedDescription": "Lisäajan aikana, järjestelmänvalvojat eivät voi luoda uusia huoneita tai lisätä uusia käyttäjiä. Lisäajan eräpäivän jälkeen {{productName}}-a ei voi enää käyttää ennen kuin maksu on suoritettu.",
