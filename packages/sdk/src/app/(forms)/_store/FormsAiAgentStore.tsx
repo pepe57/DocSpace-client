@@ -97,7 +97,7 @@ class FormsAiAgentStore {
   isPreparingAgent = false;
   userExplicitlyDisabled = false;
   doneFolderId: number | null = null;
-  panelPosition: PanelPosition = "right";
+  panelPosition: PanelPosition = "left";
   panelWidth = 360;
 
   private _folderVersion = 0;
@@ -187,6 +187,11 @@ class FormsAiAgentStore {
 
   closePanel = () => {
     this.isPanelVisible = false;
+    this.overrideAgentId = null;
+    this.pendingAttachmentFile = null;
+  };
+
+  clearOverride = () => {
     this.overrideAgentId = null;
     this.pendingAttachmentFile = null;
   };
