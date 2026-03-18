@@ -121,7 +121,6 @@
   "TransactionPeriod": "Okres transakcji",
   "TransactionsLimit": "Strona wyświetla 25 ostatnich transakcji dla wybranego okresu. Pełna historia transakcji jest dostępna za pomocą przycisku \"{{buttonName}}\".",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "Aktualizacja",
   "UpgradeNow": "Uaktualnij teraz",
   "UpgradePlan": "Uaktualnij plan",
   "UserNotFound": "Nie znaleziono użytkownika <1>{{email}}</1>.",

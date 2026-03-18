@@ -121,7 +121,6 @@
   "TransactionPeriod": "Perioada operațiilor",
   "TransactionsLimit": "În această pagină sunt afișate cele mai recente 25 de operații pentru perioada selectată. Pentru un istoric complet al operațiunilor apăsați pe butonul \"{{buttonName}}\".",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "Face upgrade",
   "UpgradeNow": "Upgrade acum",
   "UpgradePlan": "Actualizare abonament",
   "UserNotFound": "Utilizatorul <1>{{email}}</1> nu a fost găsit.",

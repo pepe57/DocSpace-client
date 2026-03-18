@@ -147,7 +147,6 @@
   "UnitCount": "{{unit}}: {{count}}",
   "UnknownPayerForAdmin": "We couldn’t find a contact matching the Stripe email. Billing and services will continue to work, but we recommend contacting the {{productName}} owner to assign a new Payer.",
   "UnknownPayerForOwner": "We couldn’t find a contact matching the Stripe email. Your billing and services will continue to work, but we recommend assigning a new Payer to manage billing settings in {{productName}}.",
-  "Upgrade": "Upgrade",
   "UpgradeNow": "Upgrade now",
   "UpgradePlan": "Upgrade plan",
   "UserNotFound": "User <1>{{email}}</1> is not found.",

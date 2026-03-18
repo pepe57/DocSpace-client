@@ -45,11 +45,26 @@ import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsUserStore } from "../../_store/FormsUserStore";
 import SidebarNavItem from "./SidebarNavItem";
 
+const SHOW_SIDEBAR_TEXT_KEY = "forms_showSidebarText";
+
 const FormsSidebar = () => {
   const { t } = useTranslation(["Common"]);
   const { activeSection, setActiveSection } = useFormsNavigationStore();
   const { user } = useFormsUserStore();
   const showSettings = user?.isOwner || user?.isAdmin;
+
+  const [showText, setShowText] = React.useState(() => {
+    const saved = localStorage.getItem(SHOW_SIDEBAR_TEXT_KEY);
+    return saved !== "false";
+  });
+
+  const toggleShowText = React.useCallback(() => {
+    setShowText((prev) => {
+      const next = !prev;
+      localStorage.setItem(SHOW_SIDEBAR_TEXT_KEY, String(next));
+      return next;
+    });
+  }, []);
 
   const sections = [
     {
@@ -77,7 +92,7 @@ const FormsSidebar = () => {
     <div
       id="article-container"
       className={`${articleStyles.article} ${styles.articleFlex}`}
-      data-show-text="true"
+      data-show-text={showText ? "true" : "false"}
       data-open="true"
       data-with-main-button="false"
     >
@@ -94,6 +109,7 @@ const FormsSidebar = () => {
             icon={section.icon}
             isActive={activeSection === section.key}
             onClick={() => setActiveSection(section.key)}
+            showText={showText}
           />
         ))}
       </Scrollbar>
@@ -105,9 +121,23 @@ const FormsSidebar = () => {
             icon={SettingsReactSvgUrl}
             isActive={activeSection === FormsSection.Settings}
             onClick={onSettingsClick}
+            showText={showText}
           />
         </div>
       )}
+      <div
+        className={styles.borderToggle}
+        onClick={toggleShowText}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toggleShowText();
+          }
+        }}
+        title={showText ? t("Common:HideArticleMenu") : t("Common:ShowArticleMenu")}
+      />
     </div>
   );
 };

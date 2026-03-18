@@ -129,7 +129,6 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     calculateDifferenceBetweenPlan,
     isWalletBalanceInsufficient,
     isPlanUpgrade,
-    buttonTitle,
     isPlanDowngrade,
   } = useServicesActions();
 
@@ -152,7 +151,6 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
       ? isWalletBalanceInsufficient(partialUpgradeFee!)
       : isWalletBalanceInsufficient(totalPrice);
 
-  const buttonMainTitle = buttonTitle(+debouncedAmount);
   const isPaymentBlocked =
     (!hasScheduledStorageChange && +amount < MIN_VALUE && amount === "") ||
     +amount < MIN_VALUE;
@@ -458,7 +456,6 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         <ModalDialog.Footer>
           <ButtonContainer
             totalPrice={totalPrice}
-            title={buttonMainTitle}
             isCurrentStoragePlan={isCurrentStoragePlan}
             isExceedingStorageLimit={isExceedingStorageLimit}
             onClose={onCloseDialog}

@@ -121,7 +121,6 @@
   "TransactionPeriod": "Obdobje transakcij",
   "TransactionsLimit": "Na strani so prikazane zadnje 25 transakcij za izbrani časovni obseg. Celotna zgodovina transakcij je na voljo preko gumba \"{{buttonName}}\".",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "Nadgradnja",
   "UpgradeNow": "Nadgradi zdaj",
   "UpgradePlan": "Načrt nadgradnje",
   "UserNotFound": "Uporabnik <1>{{email}}</1> ni najden.",

@@ -121,7 +121,6 @@
   "TransactionPeriod": "Periodo delle transazioni",
   "TransactionsLimit": "La pagina mostra le ultime 25 transazioni per il periodo selezionato. L'intera cronologia delle transazioni è disponibile tramite il pulsante \"{{buttonName}}\".",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "Upgrade",
   "UpgradeNow": "Aggiorna ora",
   "UpgradePlan": "Aggiorna il piano",
   "UserNotFound": "L’utente <1>{{email}}</1> non è stato trovato.",

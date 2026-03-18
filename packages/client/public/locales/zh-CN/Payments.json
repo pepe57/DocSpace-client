@@ -121,7 +121,6 @@
   "TransactionPeriod": "交易周期",
   "TransactionsLimit": "该页面显示选定期间内的最近25笔交易。完整的交易记录可通过“{{buttonName}}”按钮查看。",
   "UnitCount": "{{unit}}: {{count}}",
-  "Upgrade": "升级",
   "UpgradeNow": "立即升级",
   "UpgradePlan": "升级版本",
   "UserNotFound": "未找到用户 <1>{{email}}</1>。",

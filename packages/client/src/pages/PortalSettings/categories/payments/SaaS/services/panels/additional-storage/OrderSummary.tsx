@@ -213,7 +213,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                 fontSize="14px"
                 className={styles.rowValue}
               >
-                {isNewSubscription && !amount
+                {(isNewSubscription && !amount) || hasMinError
                   ? `0 ${t("Common:Gigabyte")}`
                   : `${isDowngradeStoragePlan ? "-" : isNewSubscription ? "" : "+"}${additionalStorage} ${t("Common:Gigabyte")}`}
               </Text>
@@ -298,7 +298,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                 ) : (
                   <Text fontWeight="600" fontSize="14px">
                     {formatWalletCurrency!(
-                      !amount
+                      !amount || hasMinError
                         ? 0
                         : isNewSubscription
                           ? totalPrice

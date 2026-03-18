@@ -3,10 +3,14 @@
 .articleFlex {
 	display: flex;
 	flex-direction: column;
+	border-inline-end: none !important;
+
+	&:global([data-show-text="false"]) {
+		min-width: 80px !important;
+		max-width: 80px !important;
+	}
 }
 
-// Override scrollbar height from Article.module.scss which subtracts
-// 150px for header+profile. We only have a 16px spacer + navBottom, no profile.
 .scrollbar {
 	flex: 1;
 	min-height: 0;
@@ -20,7 +24,54 @@
 	flex-shrink: 0;
 	padding: 8px 20px 16px;
 
+	:global(#article-container[data-show-text="false"]) & {
+		padding: 8px 12px 16px;
+	}
+
 	@include mixins.tablet {
 		padding: 8px 8px;
+	}
+}
+
+.borderToggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	inset-inline-end: -4px;
+	width: 8px;
+	cursor: pointer;
+	z-index: 1;
+
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		left: 50%;
+		transform: translateX(-50%);
+		background: var(--info-panel-border);
+		transition: width 0.15s, background-color 0.15s;
+	}
+
+	&:hover::after,
+	&:active::after {
+		width: 3px;
+		background-color: var(--text-secondary);
+		border-radius: 2px;
+	}
+
+	&:focus-visible {
+		outline: none;
+
+		&::after {
+			width: 3px;
+			background-color: var(--text-secondary);
+			border-radius: 2px;
+		}
+	}
+
+	@include mixins.mobile {
+		display: none;
 	}
 }

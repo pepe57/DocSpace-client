@@ -93,25 +93,6 @@ export const useServicesActions = () => {
     return hasScheduledStorageChange && nextStoragePlanSize === 0;
   };
 
-  const buttonTitle = (quantity: number, type: string = "storage"): string => {
-    if (isExceedingPlanLimit(quantity)) return t("Common:SendRequest");
-
-    let hasSubscription;
-
-    switch (type) {
-      case "storage":
-        hasSubscription = hasStorageSubscription;
-        break;
-      default:
-        hasSubscription = false;
-        break;
-    }
-
-    if (!hasSubscription) return t("Buy");
-
-    return t("Upgrade");
-  };
-
   return {
     t,
     maxStorageLimit,
@@ -122,6 +103,6 @@ export const useServicesActions = () => {
     isCurrentPlan,
     isPlanDowngrade,
     calculateDifferenceBetweenPlan,
-    buttonTitle,
   };
 };
+
