@@ -155,6 +155,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
       prevInProgressFolder.current = inProgressFolder;
 
       if (activeSection === FormsSection.Settings) {
+        aiStore.closePanel();
         setContentVisible(true);
         setIsSectionLoading(false);
         return;
