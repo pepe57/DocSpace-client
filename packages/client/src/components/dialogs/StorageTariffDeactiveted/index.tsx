@@ -158,7 +158,7 @@ const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
       <ModalDialog.Footer>
         <Button
           className="send-button"
-          label={t("Services:BuyStorage")}
+          label={onOpenPanel ? t("Services:BuyStorage") : t("GoToService")}
           size={ButtonSize.normal}
           primary
           onClick={onClick}
