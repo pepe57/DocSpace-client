@@ -101,14 +101,21 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const socketFolderIds = React.useMemo(() => {
     const ids = new Set<string>();
     if (roomId) ids.add(String(roomId));
+    if (completedFolder) ids.add(String(completedFolder.id));
+    if (inProgressFolder) ids.add(String(inProgressFolder.id));
     if (aiStore.doneFolderId) ids.add(String(aiStore.doneFolderId));
     for (const key of Object.keys(aiStore.folderAgentsMap)) {
       ids.add(key);
     }
     return [...ids];
-  }, [roomId, aiStore.doneFolderId, aiStore.folderAgentsMap]);
+  }, [roomId, completedFolder, inProgressFolder, aiStore.doneFolderId, aiStore.folderAgentsMap]);
 
-  useFormsSocket(socketUrl, socketFolderIds, fetchSection);
+  const socketFileIds = React.useMemo(
+    () => items.map((f) => f.id),
+    [items],
+  );
+
+  useFormsSocket(socketUrl, socketFolderIds, socketFileIds, fetchSection);
   useFormEventHooks(aiStore, socketUrl);
 
   const prevSection = React.useRef(activeSection);
