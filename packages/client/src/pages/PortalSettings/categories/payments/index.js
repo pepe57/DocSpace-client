@@ -55,7 +55,7 @@ const PaymentsPage = (props) => {
   const [currentTabId, setCurrentTabId] = useState();
   const location = useLocation();
   const navigate = useNavigate();
-  const { t } = useTranslation(["Payments"]);
+  const { t } = useTranslation(["Payments", "Settings"]);
 
   const defaultProps = createDefaultHookSettingsProps({
     paymentStore,
@@ -100,7 +100,7 @@ const PaymentsPage = (props) => {
     },
     {
       id: "services",
-      name: t("Services"),
+      name: t("Settings:Services"),
       content: <Services />,
       onClick: async () => {
         clearAbortControllerArr();
@@ -153,3 +153,4 @@ export const Component = inject(
     };
   },
 )(observer(PaymentsPage));
+
