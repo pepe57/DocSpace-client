@@ -53,6 +53,7 @@ import {
 import type { DateTime } from "luxon";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 import StoragePlanUpgrade from "../../panels/additional-storage/StoragePlanUpgrade";
 import StoragePlanCancel from "../../panels/additional-storage/StoragePlanCancel";
 import StorageWarning from "../../panels/additional-storage/StorageWarning";
@@ -88,6 +89,7 @@ type AdditionalStoragePageProps = {
   hasStorageSubscription?: boolean;
   isInitServicesData?: boolean;
   storageServiceName?: string;
+  isShowStorageTariffDeactivatedModal?: boolean;
 };
 
 const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
@@ -107,6 +109,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   isGracePeriod,
   isInitServicesData,
   storageServiceName,
+  isShowStorageTariffDeactivatedModal,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common", "Services"]);
   const contextMenuRef = useRef<ContextMenuRefType>(null);
@@ -339,10 +342,17 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
         <TransactionHistory serviceName={storageServiceName ?? DISK_STORAGE} hideTypeFilter />
       </div>
 
+      {isShowStorageTariffDeactivatedModal ? (
+        <StorageTariffDeactiveted
+          visible={isShowStorageTariffDeactivatedModal}
+          onOpenPanel={() => setIsStorageDialogVisible(true)}
+        />
+      ) : null}
       {isStorageDialogVisible ? (
         <StoragePlanUpgrade
           visible={isStorageDialogVisible}
           onClose={onCloseUpgradeStorage}
+          previousValue={previousStoragePlanSize?.toString()}
         />
       ) : null}
       {isCancelDialogVisible ? (
@@ -372,6 +382,7 @@ export default inject(
       fetchTransactionHistory,
       walletCodeCurrency,
       storageServiceName,
+      isShowStorageTariffDeactivatedModal,
     } = paymentStore;
     const {
       currentStoragePlanSize,
@@ -402,6 +413,7 @@ export default inject(
       hasStorageSubscription,
       isInitServicesData,
       storageServiceName,
+      isShowStorageTariffDeactivatedModal,
     };
   },
 )(observer(AdditionalStoragePage));

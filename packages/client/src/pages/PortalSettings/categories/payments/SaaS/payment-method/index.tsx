@@ -32,6 +32,8 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
+import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
+
 import { toAbsoluteUrl } from "../../utils/index";
 
 import styles from "./PaymentMethod.module.scss";
@@ -50,6 +52,7 @@ interface PaymentMethodProps {
   walletCustomerEmail: string;
   cardLinked: string;
   isPaymentMethodInit?: boolean;
+  isShowStorageTariffDeactivatedModal?: boolean;
 }
 
 const PaymentMethod: React.FC<PaymentMethodProps> = ({
@@ -60,6 +63,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
   walletCustomerEmail,
   cardLinked,
   isPaymentMethodInit,
+  isShowStorageTariffDeactivatedModal,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common"]);
 
@@ -162,6 +166,11 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
   return (
     <div className={styles.container}>
       {walletCustomerEmail ? paymentMethod : noPaymnetMethod}
+      {isShowStorageTariffDeactivatedModal ? (
+        <StorageTariffDeactiveted
+          visible={isShowStorageTariffDeactivatedModal}
+        />
+      ) : null}
     </div>
   );
 };
@@ -173,11 +182,13 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     isStripePortalAvailable,
     cardLinked,
     isPaymentMethodInit,
+    isShowStorageTariffDeactivatedModal,
   } = paymentStore;
   const { walletCustomerStatusNotActive, walletCustomerEmail } =
     currentTariffStatusStore;
 
   return {
+    isShowStorageTariffDeactivatedModal,
     accountLink,
     isAlreadyPaid,
     isStripePortalAvailable,
