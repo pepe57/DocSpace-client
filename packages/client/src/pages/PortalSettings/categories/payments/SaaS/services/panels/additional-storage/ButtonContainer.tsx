@@ -38,7 +38,6 @@ interface ButtonContainerProps {
   onClose: () => void;
   onBuy: () => void;
   onSendRequest: () => void;
-  title: string;
   isLoading: boolean;
   isExceedingStorageLimit: boolean;
   isPaymentBlockedByBalance: boolean;
@@ -59,7 +58,6 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     isLoading,
     onBuy,
     onSendRequest,
-    title,
     isPaymentBlockedByBalance,
     isCurrentStoragePlan,
     hasStorageSubscription,
@@ -72,6 +70,12 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
 
   const { t } = useServicesActions();
   const { isWaitingCalculation } = usePaymentContext();
+
+  const title = !hasStorageSubscription
+    ? t("Buy")
+    : isExceedingStorageLimit
+      ? t("Common:SendRequest")
+      : t("Common:Update");
 
   return (
     <div className={styles.buttonWrapper}>
@@ -128,3 +132,4 @@ export default inject(({ currentTariffStatusStore, paymentStore }: TStore) => {
     formatWalletCurrency,
   };
 })(observer(ButtonContainer));
+
