@@ -68,6 +68,8 @@ const Services = (props: InjectedProps) => {
     logoText,
     formatAiServiceCurrency,
     currentStoragePlanSize,
+    getAIConfig,
+    fetchAIProviders,
   } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [dialogVisibility, setDialogVisibility] = useState({
@@ -359,6 +361,10 @@ const Services = (props: InjectedProps) => {
       }
 
       if (!isCurrentConfirmState) toastr.success(getSuccessMessage());
+
+      if (confirmActionType === AI_ENUM) {
+        await Promise.all([getAIConfig?.(), fetchAIProviders?.()]);
+      }
     } catch (error) {
       console.error(error);
       toastr.error(t("Common:UnexpectedError"));
@@ -436,6 +442,7 @@ const mapStoreToProps = ({
   clientLoadingStore,
   currentQuotaStore,
   settingsStore,
+  aiSettingsStore,
 }: TStore) => {
   const {
     isInitServicesPage,
@@ -457,7 +464,7 @@ const mapStoreToProps = ({
   } = paymentStore;
 
   const { showPortalSettingsLoader } = clientLoadingStore;
-  const { logoText } = settingsStore;
+  const { logoText, getAIConfig } = settingsStore;
   return {
     isInitServicesPage,
     isVisibleWalletSettings,
@@ -476,6 +483,8 @@ const mapStoreToProps = ({
     wasFirstAiServiceTopUp,
     logoText,
     formatAiServiceCurrency,
+    getAIConfig,
+    fetchAIProviders: aiSettingsStore.fetchAIProviders,
   };
 };
 
