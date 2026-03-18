@@ -105,6 +105,7 @@
   "PreviousPlan": "<1>Previous plan:</1> {{amount}} <2>({{price}}/month)</2>",
   "PriceCalculation": "Calculate your price",
   "ProductNameWallet": "{{productName}} Wallet",
+  "OnlyPayerCanManageServices": "Only the Payer can manage services. <1>Learn more</1>",
   "ReachOutPayer": "To link a new card, please reach out to the payer",
   "RecommendedTopUpAmount": "Recommended top-up amount: {{amount}}",
   "RemainingDays": "The remaining days of the billing cycle: {{count}}",
