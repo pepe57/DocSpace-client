@@ -69,7 +69,6 @@ const Services = (props: InjectedProps) => {
     formatAiServiceCurrency,
     currentStoragePlanSize,
     getAIConfig,
-    fetchAIProviders,
   } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [dialogVisibility, setDialogVisibility] = useState({
@@ -363,7 +362,7 @@ const Services = (props: InjectedProps) => {
       if (!isCurrentConfirmState) toastr.success(getSuccessMessage());
 
       if (confirmActionType === AI_ENUM) {
-        await Promise.all([getAIConfig?.(), fetchAIProviders?.()]);
+        await getAIConfig?.();
       }
     } catch (error) {
       console.error(error);
@@ -442,7 +441,6 @@ const mapStoreToProps = ({
   clientLoadingStore,
   currentQuotaStore,
   settingsStore,
-  aiSettingsStore,
 }: TStore) => {
   const {
     isInitServicesPage,
@@ -484,7 +482,6 @@ const mapStoreToProps = ({
     logoText,
     formatAiServiceCurrency,
     getAIConfig,
-    fetchAIProviders: aiSettingsStore.fetchAIProviders,
   };
 };
 

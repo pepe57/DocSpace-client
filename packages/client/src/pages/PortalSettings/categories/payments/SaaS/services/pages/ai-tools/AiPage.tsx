@@ -95,7 +95,6 @@ type AiPageProps = {
   wasFirstAiServiceTopUp?: boolean;
   formatWalletCurrency?: () => string;
   getAIConfig?: () => Promise<void>;
-  fetchAIProviders?: () => Promise<void>;
 };
 
 const AiPage = (props: AiPageProps) => {
@@ -122,7 +121,6 @@ const AiPage = (props: AiPageProps) => {
     wasFirstAiServiceTopUp,
     formatWalletCurrency,
     getAIConfig,
-    fetchAIProviders,
   } = props;
 
   const { t } = useTranslation("Services");
@@ -192,7 +190,7 @@ const AiPage = (props: AiPageProps) => {
 
       if (!isAiToolsServiceOn) toastr.success(t("Services:AIToolsEnabled"));
 
-      await Promise.all([getAIConfig?.(), fetchAIProviders?.()]);
+      await getAIConfig?.();
     } catch (error) {
       console.error(error);
       toastr.error(t("Common:UnexpectedError"));
@@ -439,7 +437,6 @@ export default inject(
     settingsStore,
     authStore,
     currentQuotaStore,
-    aiSettingsStore,
   }: TStore) => {
     const {
       fetchTransactionHistory,
@@ -487,7 +484,6 @@ export default inject(
       wasFirstAiServiceTopUp,
       formatWalletCurrency,
       getAIConfig,
-      fetchAIProviders: aiSettingsStore.fetchAIProviders,
     };
   },
 )(observer(AiPage));
