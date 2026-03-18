@@ -105,6 +105,9 @@ const DefaultProviderComponent = ({
   const { t } = useTranslation(["Common", "AISettings", "Services"]);
   const tooltipId = useId();
 
+  const hasSystemProvider = aiProviders?.some(
+    (p) => p.type === ProviderType.PortalAi,
+  );
   const isOnlySystemProvider =
     aiProviders?.length === 1 && aiProviders[0].type === ProviderType.PortalAi;
   const isDisabled = isOnlySystemProvider && !aiConfig?.systemAiEnabled;
@@ -115,23 +118,83 @@ const DefaultProviderComponent = ({
     </Text>
   );
 
+  const getInitialProviderId = () => {
+    const providerId = defaultProvider?.providerId || null;
+
+    if (providerId && !aiConfig?.systemAiEnabled && aiProviders) {
+      const current = aiProviders.find((p) => p.id === providerId);
+
+      if (current?.type === ProviderType.PortalAi) {
+        const fallback = aiProviders.find(
+          (p) => p.type !== ProviderType.PortalAi,
+        );
+
+        return fallback?.id || null;
+      }
+    }
+
+    return providerId;
+  };
+
+  const initialProviderId = getInitialProviderId();
+  const needsFallback = initialProviderId !== defaultProvider?.providerId;
+
   const [selectedProviderId, setSelectedProviderId] = useState<number | null>(
-    defaultProvider?.providerId || null,
+    initialProviderId,
   );
   const [selectedModelId, setSelectedModelId] = useState<string | null>(
-    defaultProvider?.defaultModel || null,
+    needsFallback ? null : defaultProvider?.defaultModel || null,
   );
   const [isSaveRequestRunning, setIsSaveRequestRunning] = useState(false);
   const prevDefaultProviderInitiedRef = useRef(defaultProviderInitied);
+  const fallbackFetchedRef = useRef(false);
+
+  useEffect(() => {
+    if (needsFallback && initialProviderId && !fallbackFetchedRef.current) {
+      fallbackFetchedRef.current = true;
+      fetchDefaultProviderModels?.(initialProviderId);
+    }
+  }, [needsFallback, initialProviderId, fetchDefaultProviderModels]);
+
+  useEffect(() => {
+    if (needsFallback && !selectedModelId && defaultProviderModels?.length) {
+      setSelectedModelId(defaultProviderModels[0].modelId);
+    }
+  }, [needsFallback, selectedModelId, defaultProviderModels]);
 
   const isProviderChanged = selectedProviderId !== defaultProvider?.providerId;
   const isModelChanged = selectedModelId !== defaultProvider?.defaultModel;
 
   const getProviderOptions = () => {
     return (
-      aiProviders?.map((p) => ({
-        key: p.id,
-        label: p.title,
+      aiProviders?.map((p) => {
+        const isProviderDisabled =
+          p.type === ProviderType.PortalAi && !aiConfig?.systemAiEnabled;
+
+        return {
+          key: p.id,
+          label: isProviderDisabled
+            ? `${p.title} (${t("Common:ActivationRequired")})`
+            : p.title,
+          disabled: isProviderDisabled,
+          withExternalLink: isProviderDisabled,
+          externalLinkPath: isProviderDisabled
+            ? "/portal-settings/payments/services"
+            : undefined,
+        };
+      }) || []
+    );
+  };
+
+  const isSystemProviderSelected = aiProviders?.some(
+    (p) => p.id === selectedProviderId && p.type === ProviderType.PortalAi,
+  );
+
+  const getModelOptions = () => {
+    return (
+      defaultProviderModels?.map((m) => ({
+        key: m.modelId,
+        label: aiConfig?.modelAliases?.[m.modelId] || m.modelId,
       })) || []
     );
   };
@@ -247,8 +310,15 @@ const DefaultProviderComponent = ({
       prevDefaultProviderInitiedRef.current === false;
 
     if (isNewInit) {
-      setSelectedProviderId(defaultProvider?.providerId || null);
-      setSelectedModelId(defaultProvider?.defaultModel || null);
+      const providerId = getInitialProviderId();
+      const isFallback = providerId !== defaultProvider?.providerId;
+
+      setSelectedProviderId(providerId);
+      setSelectedModelId(isFallback ? null : defaultProvider?.defaultModel || null);
+
+      if (isFallback && providerId) {
+        fetchDefaultProviderModels?.(providerId);
+      }
     }
 
     prevDefaultProviderInitiedRef.current = defaultProviderInitied;
@@ -257,6 +327,7 @@ const DefaultProviderComponent = ({
     aiProviders,
     defaultProvider,
     defaultProviderModels,
+    aiConfig?.systemAiEnabled,
     t,
   ]);
 
@@ -298,6 +369,8 @@ const DefaultProviderComponent = ({
                 [styles.hasError]: !!defaultProviderModelsError,
               })}
               options={getProviderOptions()}
+              showDisabledItems
+              scaledOptions={hasSystemProvider}
               selectedOption={selectedProviderOption}
               displayArrow
               onSelect={onSelectProvider}
@@ -315,26 +388,42 @@ const DefaultProviderComponent = ({
             labelText={t("AISettings:Model")}
             removeMargin
           >
-            <ComboBox
-              onSelect={() => {}}
-              options={[]}
-              advancedOptions={getModelAdvancedOptions()}
-              advancedOptionsCount={defaultProviderModels?.length ?? 0}
-              selectedOption={selectedModelOption}
-              displayArrow
-              scaledOptions
-              dataTestId="default-model-combobox"
-              dropDownTestId="default-model-dropdown"
-              isLoading={isDefaultProviderModelsLoading}
-              isDisabled={isDisabled || !defaultProviderModels}
-              directionY="both"
-              dropDownMaxHeight={260}
-              isNoFixedHeightOptions
-              displaySelectedOption
-              hideMobileView={false}
-              isDefaultMode
-              dropDownClassName={styles.modelDropdown}
-            />
+            {isSystemProviderSelected ? (
+              <ComboBox
+                onSelect={() => {}}
+                options={[]}
+                advancedOptions={getModelAdvancedOptions()}
+                advancedOptionsCount={defaultProviderModels?.length ?? 0}
+                selectedOption={selectedModelOption}
+                displayArrow
+                scaledOptions
+                dataTestId="default-model-combobox"
+                dropDownTestId="default-model-dropdown"
+                isLoading={isDefaultProviderModelsLoading}
+                isDisabled={isDisabled || !defaultProviderModels}
+                directionY="both"
+                dropDownMaxHeight={260}
+                isNoFixedHeightOptions
+                displaySelectedOption
+                hideMobileView={false}
+                isDefaultMode
+                dropDownClassName={styles.modelDropdown}
+              />
+            ) : (
+              <ComboBox
+                options={getModelOptions()}
+                selectedOption={selectedModelOption}
+                displayArrow
+                onSelect={onSelectModel}
+                displaySelectedOption
+                dataTestId="default-model-combobox"
+                dropDownTestId="default-model-dropdown"
+                isLoading={isDefaultProviderModelsLoading}
+                isDisabled={isDisabled || !defaultProviderModels}
+                directionY="both"
+                dropDownMaxHeight={300}
+              />
+            )}
           </FieldContainer>
 
           <div className={styles.defaultProviderFormButtons}>
