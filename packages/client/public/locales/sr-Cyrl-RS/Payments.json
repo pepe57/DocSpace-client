@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Прво морате додати начин плаћања",
   "ForDays": "за дана: {{count}}",
   "FromTo": "Од <1>{{fromDate}}</1> до <2>{{toDate}}</2>",
-  "GoToPayments": "Иди на Плаћања",
   "GoToService": "Иди на услугу",
   "GoToStripe": "Иди на Stripe",
   "GracePeriodActivatedDescription": "Током грејс периода, администратори не могу да праве нове просторије и додају нове кориснике. Након истека грејс периода, {{productName}} ц́е постати недоступан док се не изврши уплата.",

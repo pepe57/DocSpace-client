@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Zuerst müssen Sie eine Zahlungsmethode hinzufügen",
   "ForDays": "für Tage: {{count}}",
   "FromTo": "Von <1>{{fromDate}}</1> Bis <2>{{toDate}}</2>",
-  "GoToPayments": "Zu Zahlungen",
   "GoToService": "Zu den Diensten",
   "GoToStripe": "Zum Stripe gehen",
   "GracePeriodActivatedDescription": "Während der bezahlten Frist können Administratoren keine neuen Räume erstellen und keine neuen Benutzer hinzufügen. Nach dem Fälligkeitsdatum der bezahlten Frist wird {{productName}} nicht mehr verfügbar sein, bis die Zahlung erfolgt ist.",

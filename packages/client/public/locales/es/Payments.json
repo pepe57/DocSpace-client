@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Primero debe añadir un método de pago",
   "ForDays": "para días: {{count}}",
   "FromTo": "De <1>{{fromDate}}</1> a <2>{{toDate}}</2>",
-  "GoToPayments": "Ir a Pagos",
   "GoToService": "Ir al servicio",
   "GoToStripe": "Ir a Stripe",
   "GracePeriodActivatedDescription": "Durante el periodo de gracia, los administradores no pueden crear nuevas salas ni añadir nuevos usuarios. Tras la fecha de vencimiento del periodo de gracia, {{productName}} dejará de estar disponible hasta que se realice el pago.",

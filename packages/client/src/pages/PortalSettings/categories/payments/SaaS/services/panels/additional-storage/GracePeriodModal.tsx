@@ -100,7 +100,7 @@ const GracePeriodModal: React.FC<GracePeriodModalProps> = ({
       <ModalDialog.Footer>
         <Button
           key="OkButton"
-          label={t("GoToPayments")}
+          label={t("GoToTariffPlan")}
           size={ButtonSize.normal}
           primary
           onClick={onClick}
@@ -133,3 +133,4 @@ export default inject(
     };
   },
 )(observer(GracePeriodModal));
+

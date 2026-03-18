@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Əvvəl siz ödəniş vasitəsi əlavə etməlisiniz.",
   "ForDays": "günlər: {{count}}",
   "FromTo": "<1>{{fromDate}}</1> ilə <2>{{toDate}}</2> arasında",
-  "GoToPayments": "Ödənişlərə keçid",
   "GoToService": "Servisə keçid edin",
   "GoToStripe": "Stripe-ə keçin",
   "GracePeriodActivatedDescription": "Güzəşt müddətində adminlər yeni otaqlar yarada və yeni istifadəçilər əlavə edə bilməzlər. Güzəşt müddəti bitdikdən sonra ödəniş edilənə qədər {{productName}} əlçatan olmayacaq.",

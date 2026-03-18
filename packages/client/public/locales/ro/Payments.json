@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Mai întâi adăugați o metodă de plată",
   "ForDays": "timp de: {{count}} zile",
   "FromTo": "De la <1>{{fromDate}}</1> până la <2>{{toDate}}</2>",
-  "GoToPayments": "Acces Plăți",
   "GoToService": "Acces serviciu",
   "GoToStripe": "Acces spre Stripe",
   "GracePeriodActivatedDescription": "În perioadă de graţie, administratorii nu pot crea sălile noi şi ajuta utilizatorii noi. După perioada de graţie, {{productName}} va deveni indisponibil până la efectuarea plăţii.",

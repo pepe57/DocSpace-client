@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Prvo morate dodati način plaćanja",
   "ForDays": "za dana: {{count}}",
   "FromTo": "Od <1>{{fromDate}}</1> do <2>{{toDate}}</2>",
-  "GoToPayments": "Idi na Plaćanja",
   "GoToService": "Idi na uslugu",
   "GoToStripe": "Idi na Stripe",
   "GracePeriodActivatedDescription": "Tokom grejs perioda, administratori ne mogu da prave nove prostorije i dodaju nove korisnike. Nakon isteka grejs perioda, {{productName}} će postati nedostupan dok se ne izvrši uplata.",

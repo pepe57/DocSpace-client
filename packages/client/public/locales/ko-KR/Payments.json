@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "먼저 결제 수단을 추가해야 합니다.",
   "ForDays": "며칠 동안: {{count}}",
   "FromTo": "<1>{{fromDate}}</1>부터 <2>{{toDate}}</2>까지",
-  "GoToPayments": "결제하기",
   "GoToService": "서비스로 이동",
   "GoToStripe": "Stripe로 이동하세요.",
   "GracePeriodActivatedDescription": "유예 기간 동안 관리자는 새 방을 만들거나 새 사용자를 추가할 수 없습니다. 유예 기간이 지나면 결제할 때까지 {{productName}}를 사용할 수 없습니다.",

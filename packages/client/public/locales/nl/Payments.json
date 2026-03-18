@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "Eerst moet u een betaalmethode toevoegen",
   "ForDays": "for dagen: {{count}}",
   "FromTo": "Van <1>{{fromDate}}</1> tot <2>{{toDate}}</2>",
-  "GoToPayments": "Ga naar Betalingen",
   "GoToService": "Ga naar service",
   "GoToStripe": "Ga naar Stripe",
   "GracePeriodActivatedDescription": "Tijdens de wachtperiode kunnen beheerders geen nieuwe ruimtes aanmaken en geen nieuwe gebruikers toevoegen. Na de vervaldatum van de wachtperiode wordt {{productName}} onbeschikbaar totdat de betaling is verricht.",

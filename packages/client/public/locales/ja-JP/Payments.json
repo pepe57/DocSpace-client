@@ -51,7 +51,6 @@
   "FirstAddPaymentMethod": "お支払い方法をご登録ください。",
   "ForDays": "利用期間：{{count}}",
   "FromTo": "<1>{{fromDate}}</1> から <2>{{toDate}}</2> まで",
-  "GoToPayments": "お支払いへ移動",
   "GoToService": "サービスへ移動",
   "GoToStripe": "Stripeに移動",
   "GracePeriodActivatedDescription": "猶予期間中は、管理者は新しいルームの作成と新しいユーザーの追加ができません。猶予期間の期限を過ぎると、お支払いが完了するまで{{productName}}はご利用いただけません。",
