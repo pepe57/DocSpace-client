@@ -25,6 +25,10 @@
   column-gap: 10px;
 }
 
+.root :global(.articleItemText) {
+  font-weight: 600;
+}
+
 .sectionArea {
   position: relative;
   flex-grow: 1;
@@ -32,6 +36,14 @@
   flex-direction: column;
   min-width: var(--min-section-width, 400px);
   overflow: hidden;
+
+  :global(.section-sticky-container) {
+    margin-inline-end: 0;
+  }
+
+  :global([class*="Navigation_box"]) {
+    min-width: var(--nav-dropdown-min-width, auto);
+  }
 
   @media (max-width: 1023.9px) {
     min-width: 280px;
