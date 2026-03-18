@@ -55,6 +55,7 @@ export const TagManagement: FC<TagManagementProps> = ({
   isActive,
   className,
   access,
+  roomName,
 }) => {
   const {
     isModalOpen,
@@ -181,6 +182,7 @@ export const TagManagement: FC<TagManagementProps> = ({
           access={access}
           onClose={onClose}
           anchor={anchorRef}
+          roomName={roomName}
           onSelectTag={onSelectTag}
           onEditTag={confirmEditTag}
           onDeleteTag={confirmDeleteTag}
@@ -210,4 +212,3 @@ export const TagManagement: FC<TagManagementProps> = ({
     </>
   );
 };
-

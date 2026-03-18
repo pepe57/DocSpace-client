@@ -54,17 +54,19 @@ const TagManagement: FC<TagManagementWrapperProps> = ({
 
     const canEdit = isAdmin && !isArchiveFolder;
     const canRemove = isAdmin && !isArchiveFolder;
+
     const canCreate =
       (isAdmin || isRoomOwner || isRoomManager) && !isArchiveFolder;
-    const canBindTag =
-      (isRoomManager || isAdmin || isRoomOwner) && !isArchiveFolder;
+
+    const canBindTag = canCreate;
+    const canSearch = canCreate;
 
     return {
       canEdit,
       canRemove,
       canCreate,
       canBindTag,
-      canSearch: true,
+      canSearch,
     } satisfies AccessTagManagement;
   }, [roomAccess, isAdmin, isArchiveFolder]);
 

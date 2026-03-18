@@ -30,7 +30,7 @@ import React, {
   useState,
   useEffect,
 } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 
@@ -46,6 +46,7 @@ import styles from "./TagManagement.module.scss";
 
 export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
   roomId,
+  roomName,
 }) => {
   const { t } = useTranslation("Common");
   const {
@@ -116,6 +117,22 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     },
     [handleCreateTag, clearSearch],
   );
+
+  if (!canSearch && !showCreateTag) {
+    return (
+      <Text className={styles.text} fontSize="12px" lineHeight="16px" noSelect>
+        <Trans
+          t={t}
+          ns="Common"
+          i18nKey="RoomTags"
+          values={{ roomName }}
+          components={{
+            bold: <strong key="room-name" className={styles.roomName} />,
+          }}
+        />
+      </Text>
+    );
+  }
 
   return (
     <>

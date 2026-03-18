@@ -58,6 +58,7 @@ const defaultProps: TagManagementPopupProps = {
   onSelectTag: vi.fn(),
   anchor: { current: document.createElement("div") },
   access: { canCreate: false, canSearch: true },
+  roomName: "Test Room",
 };
 
 const renderWithQueryClient = (

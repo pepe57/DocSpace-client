@@ -67,6 +67,7 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   access,
   onDeleteTag,
   onEditTag,
+  roomName,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -129,7 +130,7 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
             roomTags={roomTags}
             access={access}
           >
-            <TagManagementFilter roomId={roomId} />
+            <TagManagementFilter roomId={roomId} roomName={roomName} />
             <TagManagementContent
               roomId={roomId}
               onEditTag={onEditTag}

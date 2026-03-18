@@ -49,6 +49,8 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
   fetchedTags,
   access,
 }) => {
+  const canCreate = access.canCreate || false;
+
   const [searchValue, setSearchValue] = useState("");
   const deferredSearchValue = useDeferredValue(searchValue);
 
@@ -64,11 +66,11 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
     const filtered = searchFilter(tags, search);
 
     const showCreateTag = Boolean(
-      access.canCreate && filtered.every((tag) => tag.label.trim() !== search),
+      canCreate && filtered.every((tag) => tag.label.trim() !== search),
     );
 
     return [filtered, showCreateTag];
-  }, [tags, deferredSearchValue, access.canCreate]);
+  }, [tags, deferredSearchValue, canCreate]);
 
   const clearSearch = useCallback(() => {
     setSearchValue("");
