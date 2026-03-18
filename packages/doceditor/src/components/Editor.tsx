@@ -87,6 +87,7 @@ const Editor = ({
   onOpenRoleMappingPanel,
   setFillingStatusDialogVisible,
   openShareFormDialog,
+  disconnectUsers,
   onStartFilling,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
@@ -138,6 +139,7 @@ const Editor = ({
     onOpenRoleMappingPanel,
     shareKey,
     generationToolCallState,
+    disconnectUsers,
   });
 
   useInit({
