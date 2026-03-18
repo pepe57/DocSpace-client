@@ -4,7 +4,6 @@
   "AddMoreHeaders": "Add more headers",
   "AIProviderSettingDescription": "Connect your own AI service to unlock advanced features in {{productName}}. Once added, it will be accessible to all users in {{aiChats}}.",
   "APIKey": "API Key",
-  "BuilInAiService": "Built-in AI service",
   "ConnectProductToYourDataAndTools": "Connect {{productName}} to your data and tools.",
   "CustomMCPListTitle": "Custom",
   "DefaultProviderTitle": "Default provider",
@@ -63,5 +62,5 @@
   "WebSearchEnabledSuccess": "{{webSearch}} successfully enabled",
   "WebSearchKeyDescription": "Enter the API key obtained from your {{webSearch}} provider",
   "WebSearchKeyHiddenDescription": "The API key is displayed only once upon saving and is then hidden for security purposes.",
-  "PortalAiDisabledTooltip": "To use ONLYOFFICE AI provider, make sure to connect an AI service first."
+  "PortalAiDisabledTooltip": "To use {{productName}} AI provider, make sure to connect an AI service first."
 }

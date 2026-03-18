@@ -114,7 +114,9 @@ const DefaultProviderComponent = ({
 
   const getTooltipContent = () => (
     <Text fontSize="12px" lineHeight="16px">
-      {t("AISettings:PortalAiDisabledTooltip")}
+      {t("AISettings:PortalAiDisabledTooltip", {
+        productName: t("Common:ProductName"),
+      })}
     </Text>
   );
 
