@@ -184,7 +184,7 @@ test.describe("Room grouping", () => {
       await expect(dialog).toBeVisible();
 
       // Click the grouping toggle to disable grouping
-      const toggle = dialog.getByTestId("toggle-button");
+      const toggle = dialog.getByTestId("toggle_room_groups_button");
       await expect(toggle).toBeVisible();
       await toggle.click();
 
@@ -232,7 +232,8 @@ test.describe("Room grouping", () => {
       await expect(dialog).toBeVisible();
 
       // Toggle off
-      const toggle = dialog.getByTestId("toggle-button");
+      const toggle = dialog.getByTestId("toggle_room_groups_button");
+      await expect(toggle).toBeVisible();
       await toggle.click();
 
       // Click Cancel
@@ -272,7 +273,8 @@ test.describe("Room grouping", () => {
       await expect(dialog).toBeVisible();
 
       // Toggle off grouping
-      const toggle = dialog.getByTestId("toggle-button");
+      const toggle = dialog.getByTestId("toggle_room_groups_button");
+      await expect(toggle).toBeVisible();
       await toggle.click();
 
       // Screenshot: Groups should appear disabled/grayed out
@@ -407,10 +409,8 @@ test.describe("Room grouping", () => {
       const groupTagsRow = page.locator('[class*="rowGroupingRooms"]');
       await expect(groupTagsRow).toBeVisible();
 
-      // "All Rooms" tag should be visible
-      const allRoomsTag = groupTagsRow
-        .locator('[data-testid="selected-item"]')
-        .first();
+      // "All Rooms" tag should be visible (not in measure container)
+      const allRoomsTag = groupTagsRow.getByTestId("all_rooms_tags_measure");
       await expect(allRoomsTag).toBeVisible();
 
       // Screenshot: Filter area with group tags row visible
@@ -441,8 +441,9 @@ test.describe("Room grouping", () => {
       await expect(groupTagsRow).toBeVisible();
 
       // Click on a group tag (second tag, after "All Rooms")
-      const groupTags = groupTagsRow.locator('[data-testid="selected-item"]');
-      const secondTag = groupTags.nth(1);
+      await page.getByTestId("all_rooms_tags_measure").waitFor({ state: "visible" });
+      const groupTags = page.locator('[data-testid^="room_group_tag_"]');
+      const secondTag = groupTags.first();
 
       if (await secondTag.isVisible()) {
         await secondTag.click();
@@ -475,10 +476,8 @@ test.describe("Room grouping", () => {
       const groupTagsRow = page.locator('[class*="rowGroupingRooms"]');
       await expect(groupTagsRow).toBeVisible();
 
-      // The first tag (All Rooms) should have the active state
-      const allRoomsTag = groupTagsRow
-        .locator('[data-testid="selected-item"]')
-        .first();
+      // The first tag (All Rooms) should have the active state (not in measure container)
+      const allRoomsTag = page.getByTestId("all_rooms_tags_measure");
       await expect(allRoomsTag).toBeVisible();
       await expect(allRoomsTag).toHaveAttribute("class", /isActive/);
     });
@@ -523,6 +522,8 @@ test.describe("Room grouping", () => {
 
       const groupTagsRow = page.locator('[class*="rowGroupingRooms"]');
       await expect(groupTagsRow).toBeVisible();
+
+      await page.getByTestId("create_group_tag").waitFor({ state: "visible" });
 
       // Screenshot: Tags row with Create group button (no groups)
       await expect(page).toHaveScreenshot([
@@ -635,7 +636,7 @@ test.describe("Room grouping", () => {
       await expect(dialog).toBeVisible();
 
       // Click "Create a new group" button
-      const createButton = dialog.getByTestId("selector-add-button");
+      const createButton = dialog.getByTestId("create_new_group_button");
       await expect(createButton).toBeVisible();
       await createButton.click();
 
@@ -680,7 +681,7 @@ test.describe("Room grouping", () => {
       await expect(dialog).toBeVisible();
 
       // Click "Create a new group"
-      const createButton = dialog.getByTestId("selector-add-button");
+      const createButton = dialog.getByTestId("create_new_group_button");
       await expect(createButton).toBeVisible();
       await createButton.click();
 
@@ -734,11 +735,12 @@ test.describe("Room grouping", () => {
       await expect(dialog).toBeVisible();
 
       // Toggle off grouping
-      const toggle = dialog.getByTestId("toggle-button");
+      const toggle = dialog.getByTestId("toggle_room_groups_button");
+      await expect(toggle).toBeVisible();
       await toggle.click();
 
       // The "Create a new group" button should be disabled
-      const createButton = dialog.locator('[class*="selectorAddButton"]');
+      const createButton = dialog.getByTestId("create_new_group_button");
       await expect(createButton).toBeVisible();
 
       // Screenshot: Create new group button disabled when grouping is off

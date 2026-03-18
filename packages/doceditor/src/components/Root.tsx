@@ -52,6 +52,7 @@ import { useShareFormDialog } from "@/hooks/useShareFormDialog";
 import useAssignRolesDialog from "@/hooks/useAssignRolesDialog";
 import useChangeLinkTypeDialog from "@/hooks/useChangeLinkTypeDialog";
 import { FolderType } from "@docspace/shared/enums";
+import { useDisconnectUsers } from "@/hooks/useDisconnectUsers";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
 import FillingStatusDialog from "./filling-status-dialog";
 import Editor from "./Editor";
@@ -229,15 +230,16 @@ const Root = ({
     onSDKRequestSharingSettings,
   } = useShareDialog(config, openShareFormDialog, fileInfo?.rootFolderType);
 
+  const { disconnectUsers, onStartFilling } = useDisconnectUsers();
+
   const {
     roles,
-    onStartFilling,
     inviteUserToRoom,
     roleMappingPanelVisible,
     setRoleMappingPanelVisible,
     onOpenRoleMappingPanel,
     onSubmitFormRoleMapping,
-  } = useRoleMappingPanel(fileInfo, roomId);
+  } = useRoleMappingPanel(fileInfo, roomId, disconnectUsers);
 
   useUpdateSearchParamId(fileId, hash);
   const {
@@ -362,6 +364,7 @@ const Root = ({
           onOpenRoleMappingPanel={onOpenRoleMappingPanel}
           setFillingStatusDialogVisible={setFillingStatusDialogVisible}
           openShareFormDialog={openShareFormDialog}
+          disconnectUsers={disconnectUsers}
           onStartFilling={onStartFilling}
         />
       ) : null}
