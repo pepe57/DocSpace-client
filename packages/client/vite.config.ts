@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { defineConfig, type Plugin, type UserConfig, transformWithEsbuild } from "vite";
+import { defineConfig, type Plugin, type UserConfig, transformWithOxc } from "vite";
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 import path from "path";
@@ -71,12 +71,12 @@ const jsxInJsPlugin = (): Plugin => ({
   name: "jsx-in-js",
   enforce: "pre",
   config() {
+    // Vite 8 uses Rolldown for dep scanning. Tell Rolldown to parse .js
+    // files as JSX — the Rolldown equivalent of esbuild's loader[".js"]="jsx".
     return {
       optimizeDeps: {
-        esbuildOptions: {
-          loader: {
-            ".js": "jsx",
-          },
+        rolldownOptions: {
+          moduleTypes: { ".js": "jsx" },
         },
       },
     };
@@ -88,10 +88,9 @@ const jsxInJsPlugin = (): Plugin => ({
     // but not plain comparison operators (a < b).
     if (!/(<\/|<[A-Za-z])/.test(code)) return null;
 
-    return transformWithEsbuild(code, id, {
-      loader: "jsx",
-      jsx: "automatic",
-      jsxImportSource: "react",
+    return transformWithOxc(code, id, {
+      lang: "jsx",
+      jsx: { runtime: "automatic", importSource: "react" },
     });
   },
 });
@@ -478,7 +477,6 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
       },
       preprocessorOptions: {
         scss: {
-          api: "modern-compiler",
           importers: [
             {
               findFileUrl(url: string) {
@@ -548,7 +546,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
       // data-URI which breaks this detection.
       assetsInlineLimit: 0,
       rollupOptions: {
-        onwarn(warning: { code?: string; message?: string; id?: string }, warn: Function) {
+        onwarn(warning, warn) {
           // react-virtualized ships a Flow directive that Rollup doesn't understand
           if (warning.code === "MODULE_LEVEL_DIRECTIVE") return;
           // sjcl optionally imports Node "crypto" for PRNG seeding;
@@ -574,8 +572,9 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
         output: {
           entryFileNames: "static/js/[name].[hash].bundle.js",
           chunkFileNames: "static/js/[name].[hash].js",
-          assetFileNames: (assetInfo: { names?: string[] }) => {
-            const name = assetInfo.names?.[0] || "";
+          assetFileNames: (assetInfo: { name?: string; names?: string[] }) => {
+            // Rolldown (Vite 8) uses `name: string`; Rollup used `names: string[]`
+            const name = assetInfo.name ?? assetInfo.names?.[0] ?? "";
             if (name.endsWith(".css")) {
               return "static/styles/[name].[hash][extname]";
             }
