@@ -30,13 +30,13 @@
  * Compares a design image against a live page screenshot and highlights differences.
  *
  * Before using this script:
- * 1. Install dependencies:  npm install dotenv playwright pixelmatch pngjs
- *    (also run: npx playwright install chromium)
+ * 1. Install dependencies:  npm install && npx playwright install chromium
  * 2. Copy .env.example to .env and fill in your values:
  *    - ASC_AUTH_KEY  — auth cookie
  *    - TARGET_URL    — full URL of the page to compare
+ *    - BANNER_KEYS   — (optional) JSON array of banner keys to suppress
  * 3. Export the frame from Figma and place it into the ./images/ folder as design.png.
- * 4. Run:  node compare.js
+ * 4. Run:  npm run compare
  *
  * Output files (saved to ./images/):
  *   - page.png  — screenshot of the live page
@@ -56,6 +56,10 @@ const IMAGES_DIR = path.resolve(__dirname, "images");
 
 const ASC_AUTH_KEY = process.env.ASC_AUTH_KEY;
 const TARGET_URL = process.env.TARGET_URL;
+const DEFAULT_BANNER_KEYS = ["user-quota-limit", "confirm-email", "Docs_9_3"];
+const BANNER_KEYS = process.env.BANNER_KEYS
+  ? JSON.parse(process.env.BANNER_KEYS)
+  : DEFAULT_BANNER_KEYS;
 
 function validateConfig() {
   if (!ASC_AUTH_KEY) {
@@ -65,7 +69,9 @@ function validateConfig() {
   }
 
   if (!TARGET_URL) {
-    console.log("TARGET_URL may not be configured.");
+    console.log("TARGET_URL is not set!");
+    console.log("Copy .env.example to .env and fill in your values.\n");
+    process.exit(1);
   }
 
   const designPath = path.join(IMAGES_DIR, "design.png");
@@ -113,13 +119,10 @@ async function run() {
   // First open the page to set localStorage
   await page.goto(TARGET_URL, { waitUntil: "domcontentloaded" });
 
-  // Set localStorage to hide the banner
-  await page.evaluate(() => {
-    localStorage.setItem(
-      "barClose",
-      JSON.stringify(["user-quota-limit", "confirm-email", "Docs_9_3"]),
-    );
-  });
+  // Set localStorage to hide banners
+  await page.evaluate((keys) => {
+    localStorage.setItem("barClose", JSON.stringify(keys));
+  }, BANNER_KEYS);
 
   try {
     await page.goto(TARGET_URL, { waitUntil: "networkidle" });
