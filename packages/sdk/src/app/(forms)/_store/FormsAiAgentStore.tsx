@@ -69,8 +69,13 @@ import {
   saveAskFromDBAgentId,
   saveUserExplicitlyDisabled,
   loadUserExplicitlyDisabled,
+  savePanelWidth,
+  loadPanelWidth,
+  savePanelPosition,
+  loadPanelPosition,
   type FolderAgentsMap,
   type FolderAgentEntry,
+  type PanelPosition,
 } from "../_api/aiAgentSettings";
 
 class FormsAiAgentStore {
@@ -92,6 +97,8 @@ class FormsAiAgentStore {
   isPreparingAgent = false;
   userExplicitlyDisabled = false;
   doneFolderId: number | null = null;
+  panelPosition: PanelPosition = "right";
+  panelWidth = 360;
 
   private _folderVersion = 0;
   private _roomId: string | number = "";
@@ -99,7 +106,13 @@ class FormsAiAgentStore {
   private _pendingCreations = new Set<number>();
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      _checkPromise: false,
+      _folderVersion: false,
+      _roomId: false,
+      _userKey: false,
+      _pendingCreations: false,
+    } as Record<string, false>);
   }
 
   setDefaultProvider = (provider: TDefaultProvider) => {
@@ -183,7 +196,23 @@ class FormsAiAgentStore {
   };
 
   togglePanel = () => {
-    this.isPanelVisible = !this.isPanelVisible;
+    if (this.isPanelVisible) {
+      this.closePanel();
+    } else {
+      this.isPanelVisible = true;
+    }
+  };
+
+  setPanelPosition = (position: PanelPosition) => {
+    this.panelPosition = position;
+    savePanelPosition(position, this._userKey);
+  };
+
+  setPanelWidth = (width: number) => {
+    this.panelWidth = width;
+    if (this._roomId) {
+      savePanelWidth(this._roomId, width, this._userKey);
+    }
   };
 
   private _checkPromise: Promise<void> | null = null;
@@ -234,6 +263,11 @@ class FormsAiAgentStore {
       roomId,
       this._userKey,
     );
+    this.panelPosition = loadPanelPosition(this._userKey);
+    const savedWidth = loadPanelWidth(roomId, this._userKey);
+    if (savedWidth !== null) {
+      this.panelWidth = savedWidth;
+    }
   };
 
   private initAskFromDBAgent = async () => {
@@ -289,13 +323,15 @@ class FormsAiAgentStore {
     this.agentChatSettings = undefined;
 
     if (folderId) {
+      this.overrideAgentId = null;
+      this.pendingAttachmentFile = null;
       const entry = this.folderAgentsMap[folderId];
       if (entry?.agentId) {
         this.isPanelVisible = true;
         await this.fetchAgentChatSettings(entry.agentId, version);
       }
     } else {
-      this.isPanelVisible = false;
+      this.closePanel();
     }
   };
 
