@@ -51,6 +51,7 @@ type AiProviderTileProps = {
   onDeleteClick: (id: TAiProvider["id"]) => void;
   onSettingsClick: (provider: TAiProvider) => void;
   isAvailable?: boolean;
+  enabled?: boolean;
   dataTestId?: string;
 };
 
@@ -59,14 +60,13 @@ export const AiProviderTile = ({
   onDeleteClick,
   onSettingsClick,
   isAvailable = true,
+  enabled = true,
   dataTestId = "ai-provider-tile",
 }: AiProviderTileProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
 
-  const { isBase } = useTheme();
-
-  const icon = getAiProviderIcon(item.type, isBase) ?? "";
-  const companyLabel = getAiProviderLabel(item.type, t);
+  const icon = getAiProviderIcon(item.type) ?? "";
+  const companyLabel = getAiProviderLabel(item.type, t, enabled);
 
   const getContextOptions = () => {
     return [
@@ -113,10 +113,10 @@ export const AiProviderTile = ({
       </AiTile.Header>
 
       <AiTile.Body>
-        <Text lineHeight="20px" truncate>
+        <Text lineHeight="20px" className={styles.truncate2Lines}>
           {companyLabel}
         </Text>
-        <Text lineHeight="20px" truncate>
+        <Text lineHeight="20px" className={styles.truncate2Lines}>
           {item.url}
         </Text>
       </AiTile.Body>

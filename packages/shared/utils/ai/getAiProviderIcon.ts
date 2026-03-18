@@ -39,9 +39,7 @@ import { ProviderType } from "../../api/ai/enums";
 import { getLogoUrl } from "../common";
 import { WhiteLabelLogoType } from "../../enums";
 
-
 export const getAiProviderIcon = (type: ProviderType, isBase?: boolean) => {
- 
   switch (type) {
     case ProviderType.Anthropic:
       return AnthropicSvgUrl;
@@ -60,14 +58,9 @@ export const getAiProviderIcon = (type: ProviderType, isBase?: boolean) => {
     case ProviderType.Google:
       return GoogleSvgUrl;
     case ProviderType.PortalAi:
-      return getLogoUrl(
-        WhiteLabelLogoType.LeftMenu,
-        !isBase,
-        false,
-        "",
-        true,
-      );
+      return "/logo.ashx?logotype=3";
     default:
-      return null;
+      return "/logo.ashx?logotype=3";
   }
 };
+
