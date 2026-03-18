@@ -25,7 +25,7 @@
   &:hover::after,
   &:active::after {
     width: 3px;
-    background-color: var(--text-secondary, #a3a9ae);
+    background-color: var(--text-secondary);
     border-radius: 2px;
   }
 
@@ -34,7 +34,7 @@
 
     &::after {
       width: 3px;
-      background-color: var(--text-secondary, #a3a9ae);
+      background-color: var(--text-secondary);
       border-radius: 2px;
     }
   }
@@ -53,7 +53,7 @@
     width: 3px;
     height: 3px;
     border-radius: 50%;
-    background: var(--text-secondary, #a3a9ae);
+    background: var(--text-secondary);
   }
 
   &:hover .gripDots,
