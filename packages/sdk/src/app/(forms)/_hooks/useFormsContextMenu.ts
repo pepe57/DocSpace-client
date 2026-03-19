@@ -43,6 +43,7 @@ import { FormsSection } from "@/types/forms";
 
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
+import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import useFormsActions from "./useFormsActions";
 
 export type TFormsContextMenuItem = {
@@ -58,6 +59,7 @@ export default function useFormsContextMenu() {
   const { t } = useTranslation(["Common"]);
   const { activeSection } = useFormsNavigationStore();
   const { openPanelWithAgent, askFromDBAgentId } = useFormsAiAgentStore();
+  const { hasManagementAccess } = useFormsSettingsStore();
 
   const {
     openForm,
@@ -110,7 +112,7 @@ export default function useFormsContextMenu() {
               disabled: false,
             });
 
-            if (askFromDBAgentId) {
+            if (askFromDBAgentId && hasManagementAccess) {
               model.push({
                 id: "option_ask-from-db",
                 key: "ask-from-db",
@@ -247,6 +249,7 @@ export default function useFormsContextMenu() {
       resetFilling,
       openPanelWithAgent,
       askFromDBAgentId,
+      hasManagementAccess,
     ],
   );
 
