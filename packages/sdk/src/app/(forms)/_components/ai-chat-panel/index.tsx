@@ -32,6 +32,7 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import Chat from "@docspace/ui-kit/ai-agent/chat";
 
@@ -163,6 +164,14 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
           <Text fontSize="16px" fontWeight={700}>
             {t("Common:AIAgent")}
           </Text>
+          {isSyncing && (
+            <span
+              title={t("Common:SyncingKnowledgeBase")}
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <Loader type={LoaderTypes.track} size="16px" />
+            </span>
+          )}
         </div>
         <div className={styles.headerActions}>
           <IconButton
@@ -185,14 +194,6 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
           />
         </div>
       </div>
-
-      {isSyncing ? (
-        <div className={styles.syncBanner} role="status" aria-live="polite">
-          <Text fontSize="12px" className={styles.syncText}>
-            {t("Common:SyncingKnowledgeBase")}
-          </Text>
-        </div>
-      ) : null}
 
       <div className={styles.chatBody}>
         <Chat
