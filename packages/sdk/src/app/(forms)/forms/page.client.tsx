@@ -103,10 +103,10 @@ function FormsPage({
   }, [user, formsUserStore]);
 
   React.useEffect(() => {
-    if (defaultProvider && formsSettingsStore.hasManagementAccess) {
+    if (defaultProvider) {
       formsAiAgentStore.setDefaultProvider(defaultProvider);
     }
-  }, [defaultProvider, formsAiAgentStore, formsSettingsStore.hasManagementAccess]);
+  }, [defaultProvider, formsAiAgentStore]);
 
   React.useEffect(() => {
     // Mark as frame so axiosClient 401 handler does not redirect to login
