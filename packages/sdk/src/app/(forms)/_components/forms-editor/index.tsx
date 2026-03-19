@@ -73,6 +73,7 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     const params = new URLSearchParams();
     params.set("fileId", editingFile.id.toString());
     params.append("action", editorAction);
+    params.append("editorGoBack", "event");
     if (requestToken) params.append("share", requestToken);
 
     return combineUrl(editorOrigin, `/doceditor?${params.toString()}`);
@@ -149,16 +150,26 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     const onMessage = (event: MessageEvent) => {
       if (event.origin !== editorOrigin) return;
 
+      let data = event.data;
+      if (typeof data === "string") {
+        try {
+          data = JSON.parse(data);
+        } catch {
+          // use raw string
+        }
+      }
+
       if (
-        event.data?.type === "onRequestClose" ||
-        event.data === "close-editor"
+        data?.type === "onRequestClose" ||
+        data === "close-editor" ||
+        data?.eventReturnData?.event === "onEditorCloseCallback"
       ) {
         closeEditor();
       }
 
       if (
-        event.data?.type === "onFormComplete" ||
-        event.data === "completed-form"
+        data?.type === "onFormComplete" ||
+        data === "completed-form"
       ) {
         handleFormCompleted();
       }
