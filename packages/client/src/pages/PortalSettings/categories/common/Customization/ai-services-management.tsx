@@ -36,7 +36,7 @@ import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, FolderType } from "@docspace/shared/enums";
 import { setAiAccessSettings } from "@docspace/shared/api/settings";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import CommonStore from "SRC_DIR/store/CommonStore";
@@ -62,6 +62,8 @@ interface AiServicesManagementProps {
   fetchTreeFolders: TreeFoldersStore["fetchTreeFolders"];
   handleServicesQuotas: (serviceName?: string) => Promise<unknown>;
   fetchAiServiceBalance: () => Promise<void>;
+  defaultFolderType: SettingsStore["defaultFolderType"];
+  updateDefaultFolderType: SettingsStore["updateDefaultFolderType"];
 }
 
 const AiServicesManagementComponent = ({
@@ -78,6 +80,8 @@ const AiServicesManagementComponent = ({
   fetchTreeFolders,
   handleServicesQuotas,
   fetchAiServiceBalance,
+  defaultFolderType,
+  updateDefaultFolderType,
 }: AiServicesManagementProps) => {
   const { t, ready } = useTranslation(["Settings", "Common", "AISettings"]);
   const navigate = useNavigate();
@@ -181,6 +185,11 @@ const AiServicesManagementComponent = ({
       setIsSaving(true);
       await setAiAccessSettings(false);
       setAiServicesEnabled(false);
+
+      if (defaultFolderType === FolderType.AIAgents) {
+        await updateDefaultFolderType(FolderType.Rooms);
+      }
+
       await fetchTreeFolders();
       setShowReminder(false);
       setShowDisableDialog(false);
@@ -298,6 +307,8 @@ export const AiServicesManagement = inject<TStore>(
       deviceType,
       currentColorScheme,
       aiServicesManagementUrl,
+      defaultFolderType,
+      updateDefaultFolderType,
     } = settingsStore;
     const { isLoaded, initSettings, setIsLoadedAiServicesManagement } = common;
     const { fetchTreeFolders } = treeFoldersStore;
@@ -319,6 +330,8 @@ export const AiServicesManagement = inject<TStore>(
       fetchTreeFolders,
       handleServicesQuotas,
       fetchAiServiceBalance,
+      defaultFolderType,
+      updateDefaultFolderType,
     };
   },
 )(withLoading(observer(AiServicesManagementComponent)));
