@@ -6,8 +6,8 @@
   height: 48px;
   border-radius: 50%;
   border: none;
-  background: var(--color-scheme-main-buttons, #4781d1);
-  color: var(--color-scheme-text-buttons, #fff);
+  background: var(--color-scheme-main-buttons);
+  color: var(--color-scheme-text-buttons);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -45,7 +45,7 @@
     }
 
     path {
-      fill: var(--color-scheme-text-buttons, #fff);
+      fill: var(--color-scheme-text-buttons);
     }
   }
 }
