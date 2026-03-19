@@ -342,7 +342,6 @@ class SettingsStore {
 
   displayBanners: boolean = false;
 
-  aiServicesManagementUrl?: string;
 
   aiServicesEnabled: boolean = true;
 
@@ -417,6 +416,12 @@ class SettingsStore {
 
   get helpCenterEntries() {
     return this.externalResources?.helpcenter?.entries;
+  }
+
+  get aiServicesManagementUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.aiservicesmanagement
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.aiservicesmanagement}`
+      : this.helpCenterDomain;
   }
 
   get apiDomain() {

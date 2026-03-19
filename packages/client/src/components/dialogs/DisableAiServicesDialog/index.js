@@ -46,16 +46,25 @@ const DisableAiServicesDialogComponent = ({
   const { t } = useTranslation(["Settings", "Common"]);
 
   const effects = [
-    t("DisableAiServicesEffect1", {
-      productName: t("Common:ProductName"),
-      aiSettings: t("AISettings"),
-    }),
-    t("DisableAiServicesEffect2", {
-      aiServices: t("Common:AIServices"),
-    }),
-    t("DisableAiServicesEffect3", {
-      aiAgents: t("Common:AIAgents"),
-    }),
+    {
+      key: "DisableAiServicesEffect1",
+      text: t("DisableAiServicesEffect1", {
+        productName: t("Common:ProductName"),
+        aiSettings: t("AISettings"),
+      }),
+    },
+    {
+      key: "DisableAiServicesEffect2",
+      text: t("DisableAiServicesEffect2", {
+        aiServices: t("Common:AIServices"),
+      }),
+    },
+    {
+      key: "DisableAiServicesEffect3",
+      text: t("DisableAiServicesEffect3", {
+        aiAgents: t("Common:AIAgents"),
+      }),
+    },
   ];
 
   return (
@@ -90,9 +99,9 @@ const DisableAiServicesDialogComponent = ({
               listStyleType: "none",
             }}
           >
-            {effects.map((effect, index) => (
+            {effects.map((effect) => (
               <li
-                key={index}
+                key={effect.key}
                 style={{
                   marginBottom: "0px",
                   fontSize: "13px",
@@ -109,7 +118,7 @@ const DisableAiServicesDialogComponent = ({
                 >
                   •
                 </span>
-                {effect}
+                {effect.text}
               </li>
             ))}
           </ul>

@@ -83,7 +83,7 @@ const AiServicesManagementComponent = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [type, setType] = useState(1);
+  const [type, setType] = useState(true);
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [showDisableDialog, setShowDisableDialog] = useState(false);
@@ -101,28 +101,21 @@ const AiServicesManagementComponent = ({
   const getSettings = () => {
     const defaultValue =
       aiServicesEnabled !== null && aiServicesEnabled !== undefined
-        ? Number(aiServicesEnabled)
-        : 1;
+        ? aiServicesEnabled
+        : true;
     setType(defaultValue);
-  };
-
-  const checkWidth = () => {
-    if (!isMobileView && location.pathname.includes("ai-services-management")) {
-      navigate("/portal-settings/customization/general");
-    }
   };
 
   useEffect(() => {
     if (isMobileView) getCommonInitialValue();
-  }, [isMobileView]);
+  }, [isMobileView, getCommonInitialValue]);
 
   useEffect(() => {
     if (isLoadedSetting) setIsLoadedAiServicesManagement(isLoadedSetting);
   }, [isLoadedSetting]);
 
   useEffect(() => {
-    const currentValue = Number(aiServicesEnabled);
-    if (currentValue === type) {
+    if (aiServicesEnabled === type) {
       setShowReminder(false);
     } else {
       setShowReminder(true);
@@ -130,10 +123,18 @@ const AiServicesManagementComponent = ({
   }, [type, aiServicesEnabled]);
 
   useEffect(() => {
+    const checkWidth = () => {
+      if (
+        !isMobileView &&
+        location.pathname.includes("ai-services-management")
+      ) {
+        navigate("/portal-settings/customization/general");
+      }
+    };
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
-  }, []);
+  }, [isMobileView, location.pathname, navigate]);
 
   useEffect(() => {
     if (aiServicesEnabled === null || aiServicesEnabled === undefined) return;
@@ -141,13 +142,14 @@ const AiServicesManagementComponent = ({
   }, [aiServicesEnabled]);
 
   const onSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (type !== Number(e.target.value)) {
-      setType(Number(e.target.value));
+    const newValue = e.target.value === "true";
+    if (type !== newValue) {
+      setType(newValue);
     }
   };
 
   const onSave = async () => {
-    if (type === 0) {
+    if (type === false) {
       try {
         await Promise.all([
           handleServicesQuotas("aitools"),
@@ -162,8 +164,8 @@ const AiServicesManagementComponent = ({
 
     try {
       setIsSaving(true);
-      await setAiAccessSettings(Boolean(type));
-      setAiServicesEnabled(Boolean(type));
+      await setAiAccessSettings(type);
+      setAiServicesEnabled(type);
       await fetchTreeFolders();
       setShowReminder(false);
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
@@ -191,14 +193,13 @@ const AiServicesManagementComponent = ({
   };
 
   const onCancelDisable = () => {
-    setType(Number(aiServicesEnabled));
+    setType(aiServicesEnabled);
     setShowDisableDialog(false);
     setShowReminder(false);
   };
 
   const onCancel = () => {
-    const defaultType = Number(aiServicesEnabled);
-    setType(defaultType);
+    setType(aiServicesEnabled);
     setShowReminder(false);
   };
 
@@ -246,17 +247,17 @@ const AiServicesManagementComponent = ({
           {
             id: "enable",
             label: t("Common:Enable"),
-            value: 1,
+            value: "true",
             dataTestId: "ai_services_management_enable",
           },
           {
             id: "disabled",
             label: t("Common:Disable"),
-            value: 0,
+            value: "false",
             dataTestId: "ai_services_management_disabled",
           },
         ]}
-        selected={type}
+        selected={type.toString()}
         onClick={onSelect}
       />
       <SaveCancelButtons
@@ -296,6 +297,7 @@ export const AiServicesManagement = inject<TStore>(
       setAiServicesEnabled,
       deviceType,
       currentColorScheme,
+      aiServicesManagementUrl,
     } = settingsStore;
     const { isLoaded, initSettings, setIsLoadedAiServicesManagement } = common;
     const { fetchTreeFolders } = treeFoldersStore;
@@ -308,7 +310,7 @@ export const AiServicesManagement = inject<TStore>(
       setAiServicesEnabled,
       isLoaded,
       setIsLoadedAiServicesManagement,
-      aiServicesManagementUrl: settingsStore.aiServicesManagementUrl,
+      aiServicesManagementUrl,
       currentColorScheme,
       loadBaseInfo: async (page: string) => {
         await initSettings(page);

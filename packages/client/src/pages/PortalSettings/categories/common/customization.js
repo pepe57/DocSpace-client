@@ -149,7 +149,6 @@ const Customization = (props) => {
         <>
           <StyledSettingsSeparator />
           <AdManagement />
-          <StyledSettingsSeparator />
         </>
       ) : null}
       <StyledSettingsSeparator />

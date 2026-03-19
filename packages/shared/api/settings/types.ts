@@ -236,6 +236,7 @@ export type THelpCenterEntries = {
   mcpserverssettings: string;
   websearchsettings: string;
   knowledgesettings: string;
+  aiservicesmanagement: string;
   documentService: string;
 };
 
