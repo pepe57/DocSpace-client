@@ -501,7 +501,6 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
               showFolderInfo={() => {}}
             />
           </div>
-          <AiChatButton />
         </div>
       );
     }
@@ -590,7 +589,6 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
             showFolderInfo={() => {}}
           />
         </div>
-        <AiChatButton />
       </div>
     );
   };
@@ -664,6 +662,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
             <Loader type={LoaderTypes.track} size="40px" />
           </div>
         )}
+        <AiChatButton />
       </div>
       {aiStore.panelPosition === "right" && chatPanel}
       <CreateFormDialog
