@@ -160,7 +160,6 @@ const PureHome = (props) => {
     dropTargetPreview,
     setDropTargetPreview,
     selectedFolderTitle,
-    selectedFolderChatSettings,
     clearDropPreviewLocation,
     canCreateSecurity,
     startDropPreview,
@@ -457,9 +456,7 @@ const PureHome = (props) => {
   }, [shouldRenderSectionFilter, isChangePageRequestRunning]);
 
   const isDisabledKnowledge =
-    !aiConfig?.vectorizationEnabled &&
-    !selectedFolderChatSettings?.internal &&
-    currentTab === "knowledge";
+    !aiConfig?.vectorizationEnabled && currentTab === "knowledge";
 
   const isErrorAvailable =
     isErrorRoomNotAvailable || isErrorAIAgentNotAvailable;
@@ -851,3 +848,4 @@ export const Component = inject(
     };
   },
 )(observer(Home));
+
