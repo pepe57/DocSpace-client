@@ -25,7 +25,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px;
+  height: 69px;
+  padding-inline: 16px;
+  box-sizing: border-box;
   border-bottom: 1px solid var(--modal-dialog-header-border-color);
   flex-shrink: 0;
 

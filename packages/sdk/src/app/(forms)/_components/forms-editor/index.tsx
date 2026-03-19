@@ -30,6 +30,9 @@ import { observer } from "mobx-react";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+import api from "@docspace/shared/api";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { FolderType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
@@ -45,9 +48,14 @@ type FormsEditorProps = {
 
 const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
   const { t } = useTranslation(["Common"]);
-  const { editingFile, editorAction, closeEditor, setActiveSection } =
-    useFormsNavigationStore();
-  const { requestToken } = useFormsSettingsStore();
+  const {
+    editingFile,
+    editorAction,
+    closeEditor,
+    setActiveSection,
+    openCompletedFolder,
+  } = useFormsNavigationStore();
+  const { roomId, requestToken } = useFormsSettingsStore();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const [isIframeLoaded, setIsIframeLoaded] = React.useState(false);
 
@@ -70,9 +78,35 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     return combineUrl(editorOrigin, `/doceditor?${params.toString()}`);
   }, [editingFile, editorAction, requestToken, editorOrigin]);
 
-  const handleFormCompleted = React.useCallback(() => {
+  const handleFormCompleted = React.useCallback(async () => {
+    const formTitle = editingFile?.title?.replace(/\.pdf$/i, "");
+
     setActiveSection(FormsSection.CompletedForms);
-  }, [setActiveSection]);
+
+    if (!roomId || !formTitle) return;
+
+    try {
+      const filter = FilesFilter.getDefault();
+      const roomRes = await api.files.getFolder(roomId, filter);
+      const doneFolder = roomRes.folders.find(
+        (f) => f.type === FolderType.Done,
+      );
+
+      if (!doneFolder) return;
+
+      const doneRes = await api.files.getFolder(doneFolder.id, filter);
+      const subfolder =
+        doneRes.folders.find(
+          (f) => f.title.replace(/\.pdf$/i, "") === formTitle,
+        ) ?? doneRes.folders[0];
+
+      if (subfolder) {
+        openCompletedFolder(subfolder);
+      }
+    } catch {
+      // Already at CompletedForms root — nothing to do
+    }
+  }, [roomId, editingFile?.title, setActiveSection, openCompletedFolder]);
 
   const checkCompletedUrl = React.useCallback(() => {
     try {

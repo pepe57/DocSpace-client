@@ -101,14 +101,21 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const socketFolderIds = React.useMemo(() => {
     const ids = new Set<string>();
     if (roomId) ids.add(String(roomId));
+    if (completedFolder) ids.add(String(completedFolder.id));
+    if (inProgressFolder) ids.add(String(inProgressFolder.id));
     if (aiStore.doneFolderId) ids.add(String(aiStore.doneFolderId));
     for (const key of Object.keys(aiStore.folderAgentsMap)) {
       ids.add(key);
     }
     return [...ids];
-  }, [roomId, aiStore.doneFolderId, aiStore.folderAgentsMap]);
+  }, [roomId, completedFolder, inProgressFolder, aiStore.doneFolderId, aiStore.folderAgentsMap]);
 
-  useFormsSocket(socketUrl, socketFolderIds, fetchSection);
+  const socketFileIds = React.useMemo(
+    () => items.map((f) => f.id),
+    [items],
+  );
+
+  useFormsSocket(socketUrl, socketFolderIds, socketFileIds, fetchSection);
   useFormEventHooks(aiStore, socketUrl);
 
   const prevSection = React.useRef(activeSection);
@@ -147,7 +154,10 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
       prevCompletedFolder.current = completedFolder;
       prevInProgressFolder.current = inProgressFolder;
 
+      aiStore.clearOverride();
+
       if (activeSection === FormsSection.Settings) {
+        aiStore.closePanel();
         setContentVisible(true);
         setIsSectionLoading(false);
         return;
@@ -288,6 +298,19 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     getSectionTitle,
     t,
   ]);
+
+  const navDropdownMinWidth = React.useMemo(() => {
+    if (!navigationItems.length) return 0;
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return 0;
+    ctx.font = '600 13px "Open Sans", sans-serif';
+    let max = 0;
+    for (const item of navigationItems) {
+      max = Math.max(max, ctx.measureText(item.title).width);
+    }
+    return Math.ceil(max + 67);
+  }, [navigationItems]);
 
   const getContextOptionsPlus = React.useCallback(() => {
     const security = formsSettingsStore.folderSecurity;
@@ -600,7 +623,14 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
     >
       <FormsSidebar />
       {aiStore.panelPosition === "left" && chatPanel}
-      <div className={styles.sectionArea}>
+      <div
+        className={styles.sectionArea}
+        style={
+          navDropdownMinWidth
+            ? ({ "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties)
+            : undefined
+        }
+      >
         <Section
           withBodyScroll={!isEditing}
           withoutFooter={isEditing}

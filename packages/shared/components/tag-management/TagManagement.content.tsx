@@ -217,6 +217,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                 isDisabled={!canBindTag}
                 className={styles.checkbox}
                 onChange={() => toggleChecked(tag.label)}
+                dataTestId={`tag_checkbox_${tag.label}`}
               />
               {editingIndex === index ? (
                 <>
@@ -240,6 +241,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                         onKeyDown={editTagHandleKey}
                         className={styles.editInput}
                         hasError={!!fieldState.error}
+                        testId="edit_tag_input"
                       />
                     )}
                   />
@@ -249,12 +251,14 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                       iconName={CheckIconURL}
                       className={styles.checkIcon}
                       onClick={handleSubmit(confirmEdit)}
+                      dataTestId="confirm_edit_button"
                     />
                     <IconButton
                       size={ICON_SIZE}
                       onClick={cancelEdit}
                       className={styles.crossIcon}
                       iconName={CrossIconReactSvgUrl}
+                      dataTestId="cancel_edit_button"
                     />
                   </div>
                 </>
@@ -265,6 +269,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                     tag={tag.label}
                     onClick={onSelectTag}
                     className={styles.tag}
+                    dataTestId={`tag_item_${tag.label}`}
                   />
                   {canEdit ? (
                     <IconButton
@@ -272,6 +277,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                       className={styles.editIcon}
                       iconName={AccessEditReactSvgUrl}
                       onClick={() => handleEdit(index)}
+                      dataTestId={`edit_tag_button_${tag.label}`}
                     />
                   ) : null}
                   {canRemove && (
@@ -280,6 +286,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                       iconName={TrashReactSvgUrl}
                       className={styles.deleteIcon}
                       onClick={() => deleteTag(tag.label)}
+                      dataTestId={`delete_tag_button_${tag.label}`}
                     />
                   )}
                 </>
