@@ -41,7 +41,7 @@ import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
-import LoginReactSvgUrl from "PUBLIC_DIR/images/icons/16/login.react.svg?url";
+import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 
 import ResizeHandle from "./ResizeHandle";
 import styles from "./AiChatPanel.module.scss";
@@ -175,13 +175,14 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
         </div>
         <div className={styles.headerActions}>
           <IconButton
-            iconName={LoginReactSvgUrl}
+            iconName={LogoutReactSvgUrl}
             size={16}
             className={
               panelPosition === "right" ? styles.positionIconFlipped : undefined
             }
             onClick={handleTogglePosition}
-            title={
+            tooltipId="move-panel-tooltip"
+            tooltipContent={
               panelPosition === "right"
                 ? t("Common:MovePanelLeft")
                 : t("Common:MovePanelRight")
@@ -191,6 +192,8 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
             iconName={CrossReactSvgUrl}
             size={17}
             onClick={closePanel}
+            tooltipId="close-panel-tooltip"
+            tooltipContent={t("Common:CloseButton")}
           />
         </div>
       </div>
