@@ -281,6 +281,8 @@ class FormsAiAgentStore {
       runInAction(() => {
         this.askFromDBAgentId = saved;
       });
+      // Ensure current user has access to the agent
+      this.syncAgentMembers(saved).catch(() => {});
       return;
     }
 
@@ -300,6 +302,7 @@ class FormsAiAgentStore {
       runInAction(() => {
         this.askFromDBAgentId = agent.id;
       });
+      await this.syncAgentMembers(agent.id);
     } catch {
       // best-effort
     }
