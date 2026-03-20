@@ -97,7 +97,7 @@ const PasswordChangeForm = ({
     }
 
     try {
-      const hash = await createPasswordHash(password, passwordHash);
+      const hash = createPasswordHash(password, passwordHash);
 
       await changePassword(uid, hash, confirmHeader);
       setIsLoading(false);
@@ -194,3 +194,4 @@ const PasswordChangeForm = ({
 };
 
 export default PasswordChangeForm;
+

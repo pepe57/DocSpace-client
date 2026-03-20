@@ -415,7 +415,7 @@ const LoginForm = ({
     setIsLoading(true);
 
     const hash = !isLdapLoginChecked
-      ? await createPasswordHash(pass, hashSettings)
+      ? createPasswordHash(pass, hashSettings)
       : undefined;
 
     const pwd = isLdapLoginChecked ? pass : undefined;
@@ -696,3 +696,4 @@ const LoginForm = ({
 };
 
 export default LoginForm;
+
