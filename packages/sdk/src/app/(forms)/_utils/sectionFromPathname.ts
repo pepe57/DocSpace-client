@@ -26,40 +26,45 @@
 
 "use client";
 
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { FormsSection } from "@/types/forms";
 
-const TILE_COUNT = 8;
+const SDK_BASE_PATH = "/sdk";
+const FORMS_PREFIX = "/forms/";
 
-export default function Loading() {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "16px",
-        padding: "16px",
-        width: "100%",
-        boxSizing: "border-box",
-      }}
-    >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fill, minmax(clamp(216px, 13.4vw, 360px), 1fr))",
-          gap: "16px",
-        }}
-      >
-        {Array.from({ length: TILE_COUNT }, (_, i) => (
-          <RectangleSkeleton
-            key={i}
-            width="100%"
-            height="220px"
-            borderRadius="12px"
-            animate
-          />
-        ))}
-      </div>
-    </div>
-  );
+/**
+ * Maps a URL pathname to the corresponding FormsSection enum value.
+ *
+ * Handles both plain pathnames ("/forms/my-forms") and pathnames that include
+ * the SDK base path ("/sdk/forms/in-progress"). Falls back to
+ * FormsSection.MyForms when no segment matches a known section.
+ */
+export function sectionFromPathname(pathname: string): FormsSection {
+  const normalized = pathname.startsWith(SDK_BASE_PATH)
+    ? pathname.slice(SDK_BASE_PATH.length)
+    : pathname;
+
+  const formsIndex = normalized.indexOf(FORMS_PREFIX);
+
+  if (formsIndex === -1) return FormsSection.MyForms;
+
+  const segment = normalized.slice(formsIndex + FORMS_PREFIX.length).split("/")[0];
+
+  const sections: Record<string, FormsSection> = {
+    [FormsSection.MyForms]: FormsSection.MyForms,
+    [FormsSection.InProgress]: FormsSection.InProgress,
+    [FormsSection.CompletedForms]: FormsSection.CompletedForms,
+    [FormsSection.Settings]: FormsSection.Settings,
+  };
+
+  return sections[segment] ?? FormsSection.MyForms;
+}
+
+/**
+ * Returns the path segment for a given FormsSection, without a basePath
+ * prefix (Next.js adds the configured basePath automatically).
+ *
+ * Example: FormsSection.MyForms → "/forms/my-forms"
+ */
+export function sectionToPath(section: FormsSection): string {
+  return `${FORMS_PREFIX.slice(0, -1)}/${section}`;
 }

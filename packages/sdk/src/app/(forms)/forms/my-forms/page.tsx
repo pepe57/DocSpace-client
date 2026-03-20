@@ -24,42 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { cookies, headers } from "next/headers";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { FilterType } from "@docspace/shared/enums";
+import { getFormsFolder } from "@/api/forms";
+import { ROOM_ID_HEADER, PAGE_COUNT } from "@/utils/constants";
+import MyFormsPage from "./page.client";
 
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+export default async function MyForms({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string }>;
+}) {
+  const hdrs = await headers();
+  const params = await searchParams;
+  const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
 
-const TILE_COUNT = 8;
+  if (!roomId) {
+    return <MyFormsPage roomId="" />;
+  }
 
-export default function Loading() {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "16px",
-        padding: "16px",
-        width: "100%",
-        boxSizing: "border-box",
-      }}
-    >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fill, minmax(clamp(216px, 13.4vw, 360px), 1fr))",
-          gap: "16px",
-        }}
-      >
-        {Array.from({ length: TILE_COUNT }, (_, i) => (
-          <RectangleSkeleton
-            key={i}
-            width="100%"
-            height="220px"
-            borderRadius="12px"
-            animate
-          />
-        ))}
-      </div>
-    </div>
+  const filter = FilesFilter.getDefault();
+  filter.pageCount = PAGE_COUNT;
+  filter.filterType = FilterType.PDFForm;
+
+  const folderData = await getFormsFolder(roomId, filter).catch(
+    () => undefined,
   );
+
+  return <MyFormsPage roomId={roomId} initialFolderData={folderData} />;
 }

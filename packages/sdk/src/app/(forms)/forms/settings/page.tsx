@@ -26,40 +26,8 @@
 
 "use client";
 
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import Settings from "../../_components/settings";
 
-const TILE_COUNT = 8;
-
-export default function Loading() {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "16px",
-        padding: "16px",
-        width: "100%",
-        boxSizing: "border-box",
-      }}
-    >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fill, minmax(clamp(216px, 13.4vw, 360px), 1fr))",
-          gap: "16px",
-        }}
-      >
-        {Array.from({ length: TILE_COUNT }, (_, i) => (
-          <RectangleSkeleton
-            key={i}
-            width="100%"
-            height="220px"
-            borderRadius="12px"
-            animate
-          />
-        ))}
-      </div>
-    </div>
-  );
+export default function SettingsPage() {
+  return <Settings />;
 }

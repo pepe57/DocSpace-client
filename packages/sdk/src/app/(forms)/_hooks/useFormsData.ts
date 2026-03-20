@@ -27,6 +27,7 @@
 "use client";
 
 import { useCallback, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 import api from "@docspace/shared/api";
 import { createThumbnails } from "@docspace/shared/api/files";
@@ -42,6 +43,7 @@ import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
+import { sectionFromPathname } from "../_utils/sectionFromPathname";
 
 const requestThumbnails = (files: TFile[]) => {
   const ids = files
@@ -69,8 +71,9 @@ export default function useFormsData() {
   const formsSettingsStore = useFormsSettingsStore();
   const formsListStore = useFormsListStore();
   const aiStore = useFormsAiAgentStore();
-  const { activeSection, completedFolder, inProgressFolder } =
-    useFormsNavigationStore();
+  const pathname = usePathname();
+  const activeSection = sectionFromPathname(pathname);
+  const { completedFolder, inProgressFolder } = useFormsNavigationStore();
   const currentPage = useRef(0);
   const apiExhausted = useRef(false);
   const abortRef = useRef<AbortController | null>(null);
@@ -94,7 +97,7 @@ export default function useFormsData() {
           return formsSettingsStore.roomId;
       }
     },
-    [activeSection, formsSettingsStore, completedFolder, inProgressFolder],
+    [pathname, formsSettingsStore, completedFolder, inProgressFolder],
   );
 
   const fetchVirtualFolders = useCallback(
@@ -260,7 +263,7 @@ export default function useFormsData() {
       }
     },
     [
-      activeSection,
+      pathname,
       completedFolder,
       inProgressFolder,
       getFolderId,
@@ -316,5 +319,5 @@ export default function useFormsData() {
     }
   }, [getFolderId, formsListStore]);
 
-  return { fetchSection, fetchMore };
+  return { fetchSection, fetchMore, fetchSubfolder };
 }

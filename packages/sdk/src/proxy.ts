@@ -147,5 +147,6 @@ export const config = {
     "/public-room",
     "/public-room/password",
     "/forms",
+    "/forms/:path*",
   ],
 };

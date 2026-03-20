@@ -26,40 +26,29 @@
 
 "use client";
 
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { useEffect } from "react";
 
-const TILE_COUNT = 8;
+export default function useEditorGuard(isEditing: boolean): void {
+  useEffect(() => {
+    if (!isEditing) return;
 
-export default function Loading() {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "16px",
-        padding: "16px",
-        width: "100%",
-        boxSizing: "border-box",
-      }}
-    >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fill, minmax(clamp(216px, 13.4vw, 360px), 1fr))",
-          gap: "16px",
-        }}
-      >
-        {Array.from({ length: TILE_COUNT }, (_, i) => (
-          <RectangleSkeleton
-            key={i}
-            width="100%"
-            height="220px"
-            borderRadius="12px"
-            animate
-          />
-        ))}
-      </div>
-    </div>
-  );
+    const handleBeforeUnload = (event: BeforeUnloadEvent): void => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+
+    const handlePopState = (): void => {
+      history.pushState(null, "", window.location.href);
+    };
+
+    history.pushState(null, "", window.location.href);
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [isEditing]);
 }

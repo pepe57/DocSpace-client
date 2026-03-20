@@ -29,6 +29,7 @@
 import { observer } from "mobx-react";
 import { runInAction } from "mobx";
 import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
@@ -39,9 +40,11 @@ import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import { FormsSection } from "@/types/forms";
 
+import { sectionToPath } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
+import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import styles from "./FormsEditor.module.scss";
 
 type FormsEditorProps = {
@@ -50,15 +53,19 @@ type FormsEditorProps = {
 
 const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
   const { t } = useTranslation(["Common"]);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const roomIdRef = React.useRef(searchParams.get("roomId") ?? "");
+  roomIdRef.current = searchParams.get("roomId") ?? "";
   const {
     editingFile,
     editorAction,
     closeEditor,
-    setActiveSection,
     openCompletedFolder,
   } = useFormsNavigationStore();
   const { roomId, requestToken } = useFormsSettingsStore();
   const formsListStore = useFormsListStore();
+  const aiStore = useFormsAiAgentStore();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const [isIframeLoaded, setIsIframeLoaded] = React.useState(false);
   const [isCompleting, setIsCompleting] = React.useState(false);
@@ -90,7 +97,10 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     setIsCompleting(true);
 
     if (!roomId || !formTitle) {
-      setActiveSection(FormsSection.CompletedForms);
+      router.replace(
+        sectionToPath(FormsSection.CompletedForms) +
+          (roomIdRef.current ? `?roomId=${roomIdRef.current}` : ""),
+      );
       setIsCompleting(false);
       return;
     }
@@ -111,6 +121,11 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
           continue;
         }
 
+        // Persist doneFolderId immediately so socket subscriptions and the AI
+        // store are wired up even when the SSR page couldn't find the Done
+        // folder at request time (EC9: virtualFolderId was undefined).
+        aiStore.setDoneFolderId(doneFolder.id);
+
         const doneRes = await api.files.getFolder(doneFolder.id, filter);
         const subfolder = doneRes.folders.find(
           (f) => f.title.replace(/\.pdf$/i, "") === formTitle,
@@ -120,9 +135,18 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
           runInAction(() => {
             formsListStore.setItems([], 0);
             formsListStore.setFolders([]);
-            setActiveSection(FormsSection.CompletedForms);
             openCompletedFolder(subfolder);
           });
+          // closeEditor() must be called explicitly here because the layout's
+          // pathname-change effect only fires when the URL changes. When the user
+          // is already on /forms/completed-forms the router.replace below is a
+          // no-op and the layout effect never runs, leaving editingFile non-null
+          // and FormsEditor mounted instead of CompletedPage (EC2, EC3).
+          closeEditor();
+          router.replace(
+            sectionToPath(FormsSection.CompletedForms) +
+              (roomIdRef.current ? `?roomId=${roomIdRef.current}` : ""),
+          );
           setIsCompleting(false);
           return;
         }
@@ -134,14 +158,19 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     }
 
     // Fallback: navigate to CompletedForms root
-    setActiveSection(FormsSection.CompletedForms);
+    router.replace(
+      sectionToPath(FormsSection.CompletedForms) +
+        (roomIdRef.current ? `?roomId=${roomIdRef.current}` : ""),
+    );
     setIsCompleting(false);
   }, [
     roomId,
     editingFile?.title,
     formsListStore,
-    setActiveSection,
+    aiStore,
+    router,
     openCompletedFolder,
+    closeEditor,
   ]);
 
   const checkCompletedUrl = React.useCallback(() => {

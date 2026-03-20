@@ -24,42 +24,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { headers } from "next/headers";
 
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { FolderType } from "@docspace/shared/enums";
 
-const TILE_COUNT = 8;
+import { getFormsFolder } from "@/api/forms";
+import { ROOM_ID_HEADER, PAGE_COUNT } from "@/utils/constants";
 
-export default function Loading() {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "16px",
-        padding: "16px",
-        width: "100%",
-        boxSizing: "border-box",
-      }}
-    >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fill, minmax(clamp(216px, 13.4vw, 360px), 1fr))",
-          gap: "16px",
-        }}
-      >
-        {Array.from({ length: TILE_COUNT }, (_, i) => (
-          <RectangleSkeleton
-            key={i}
-            width="100%"
-            height="220px"
-            borderRadius="12px"
-            animate
-          />
-        ))}
-      </div>
-    </div>
-  );
+import InProgressPage from "./page.client";
+
+export default async function InProgress({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string }>;
+}) {
+  const hdrs = await headers();
+  const params = await searchParams;
+  const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
+
+  if (!roomId) {
+    return <InProgressPage folders={[]} />;
+  }
+
+  const filter = FilesFilter.getDefault();
+  filter.pageCount = PAGE_COUNT;
+
+  try {
+    const roomData = await getFormsFolder(roomId, filter);
+    const virtualFolder = roomData?.folders.find(
+      (f) => f.type === FolderType.InProgress,
+    );
+
+    if (!virtualFolder) {
+      return <InProgressPage folders={[]} />;
+    }
+
+    const subFilter = FilesFilter.getDefault();
+    subFilter.pageCount = PAGE_COUNT;
+    const folderData = await getFormsFolder(virtualFolder.id, subFilter);
+
+    return (
+      <InProgressPage
+        folders={folderData?.folders ?? []}
+        virtualFolderId={virtualFolder.id}
+      />
+    );
+  } catch {
+    return <InProgressPage folders={[]} />;
+  }
 }

@@ -28,6 +28,7 @@
 
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { usePathname } from "next/navigation";
 
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
@@ -41,10 +42,10 @@ import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { FormsSection } from "@/types/forms";
 
-import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import useFormsActions from "./useFormsActions";
+import { sectionFromPathname } from "../_utils/sectionFromPathname";
 
 export type TFormsContextMenuItem = {
   id: string;
@@ -57,7 +58,8 @@ export type TFormsContextMenuItem = {
 
 export default function useFormsContextMenu() {
   const { t } = useTranslation(["Common"]);
-  const { activeSection } = useFormsNavigationStore();
+  const pathname = usePathname();
+  const activeSection = sectionFromPathname(pathname);
   const { openPanelWithAgent, askFromDBAgentId } = useFormsAiAgentStore();
   const { hasManagementAccess } = useFormsSettingsStore();
 

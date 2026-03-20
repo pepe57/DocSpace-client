@@ -59,6 +59,13 @@ class FormsListStore {
     this.isLoading = value;
   };
 
+  reset = () => {
+    this.items = [];
+    this.folders = [];
+    this.total = 0;
+    this.isLoading = false;
+  };
+
   get hasMore(): boolean {
     return this.items.length < this.total;
   }

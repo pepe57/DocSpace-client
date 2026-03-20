@@ -29,6 +29,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
+import { usePathname } from "next/navigation";
 
 import { FileTile } from "@docspace/ui-kit/components/tiles/file-tile";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
@@ -46,8 +47,8 @@ import { FormsSection } from "@/types/forms";
 import useFormsActions from "../../_hooks/useFormsActions";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
 import { useFormsListStore } from "../../_store/FormsListStore";
-import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import FormStatusBadge from "./FormStatusBadge";
 import styles from "./FormsTile.module.scss";
 
@@ -63,7 +64,8 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
   const { openForm } = useFormsActions({ t });
   const { getContextMenuModel } = useFormsContextMenu();
   const { items } = useFormsListStore();
-  const { activeSection } = useFormsNavigationStore();
+  const pathname = usePathname();
+  const activeSection = sectionFromPathname(pathname);
   const { requestToken } = useFormsSettingsStore();
 
   const [blobThumbnail, setBlobThumbnail] = useState("");

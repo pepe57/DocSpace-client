@@ -28,6 +28,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import { usePathname } from "next/navigation";
 
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
 
@@ -36,6 +37,7 @@ import useItemList from "@/app/(docspace)/_hooks/useItemList";
 
 import { FormsSection } from "@/types/forms";
 
+import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
@@ -51,8 +53,9 @@ type FormsGridProps = {
 
 const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
   const { items, folders, hasMore, isLoading } = useFormsListStore();
+  const pathname = usePathname();
+  const activeSection = sectionFromPathname(pathname);
   const {
-    activeSection,
     completedFolder,
     inProgressFolder,
     openCompletedFolder,
