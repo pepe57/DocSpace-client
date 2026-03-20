@@ -203,7 +203,7 @@ class MediaViewerDataStore {
     // Call plugin navigation callback if plugin viewer is active
     if (this.isPluginViewerActive) {
       const { pluginMediaViewerProps, dispatchMessage } = this.pluginStore;
-      
+
       if (pluginMediaViewerProps?.navigation?.onNext) {
         const pluginName = pluginMediaViewerProps.pluginName;
         const message = await pluginMediaViewerProps.navigation.onNext();
@@ -220,19 +220,21 @@ class MediaViewerDataStore {
     if (!isNullOrUndefined(targetFile)) setBufferSelection(targetFile);
 
     const fileId = this.playlist[postionIndex].fileId;
-    
+
     // Call plugin file change callback if plugin viewer is active
     if (this.isPluginViewerActive) {
       const { pluginMediaViewerProps, dispatchMessage } = this.pluginStore;
-      
+
       if (pluginMediaViewerProps?.navigation?.onFileChange) {
         const pluginName = pluginMediaViewerProps.pluginName;
-        const message = await pluginMediaViewerProps.navigation.onFileChange(fileId);
-        
+        const message = await pluginMediaViewerProps.navigation.onFileChange({
+          fileId,
+        });
+
         dispatchMessage({ message, pluginName });
       }
     }
-    
+
     this.setCurrentId(fileId);
     this.changeUrl(fileId);
   };
@@ -249,7 +251,7 @@ class MediaViewerDataStore {
     // Call plugin navigation callback if plugin viewer is active
     if (this.isPluginViewerActive) {
       const { pluginMediaViewerProps, dispatchMessage } = this.pluginStore;
-      
+
       if (pluginMediaViewerProps?.navigation?.onPrevious) {
         const pluginName = pluginMediaViewerProps.pluginName;
         const message = await pluginMediaViewerProps.navigation.onPrevious();
@@ -267,20 +269,21 @@ class MediaViewerDataStore {
     if (!isNullOrUndefined(targetFile)) setBufferSelection(targetFile);
 
     const fileId = this.playlist[currentPlaylistPos].fileId;
-    
+
     // Call plugin file change callback if plugin viewer is active
     if (this.isPluginViewerActive) {
       const { pluginMediaViewerProps, dispatchMessage } = this.pluginStore;
-      
+
       if (pluginMediaViewerProps?.navigation?.onFileChange) {
         const pluginName = pluginMediaViewerProps.pluginName;
-        const message = await pluginMediaViewerProps.navigation.
-        onFileChange(fileId);
+        const message = await pluginMediaViewerProps.navigation.onFileChange({
+          fileId,
+        });
 
         dispatchMessage({ message, pluginName });
       }
     }
-    
+
     this.setCurrentId(fileId);
     this.changeUrl(fileId);
   };
@@ -292,18 +295,15 @@ class MediaViewerDataStore {
   get isPluginViewerActive() {
     return (
       this.pluginStore?.pluginMediaViewerVisible &&
-      !!this.pluginStore?.pluginMediaViewerProps    
+      !!this.pluginStore?.pluginMediaViewerProps
     );
   }
 
   filterFilesByPluginCriteria = (files) => {
     if (!this.isPluginViewerActive) return files;
 
-    const { 
-      pluginMediaViewerProps,
-      getCurrentDevice,
-      getUserType
-     } = this.pluginStore;
+    const { pluginMediaViewerProps, getCurrentDevice, getUserType } =
+      this.pluginStore;
 
     const playlistFilter = pluginMediaViewerProps?.playlistFilter;
 
@@ -315,7 +315,7 @@ class MediaViewerDataStore {
       // Check extension filter
       if (filesExsts && filesExsts.length > 0) {
         const normalizedAllowed = filesExsts.map((ext) =>
-          ext.startsWith(".") ? ext.toLowerCase() : `.${ext.toLowerCase()}`
+          ext.startsWith(".") ? ext.toLowerCase() : `.${ext.toLowerCase()}`,
         );
 
         if (!normalizedAllowed.includes(file.fileExst.toLowerCase())) {
@@ -336,7 +336,7 @@ class MediaViewerDataStore {
         }
       }
 
-        // Check user type
+      // Check user type
       if (usersTypes && usersTypes.length > 0) {
         const currentUserType = getUserType();
         if (!usersTypes.includes(currentUserType)) {
@@ -369,7 +369,7 @@ class MediaViewerDataStore {
   get playlist() {
     const { files } = this.filesStore;
 
-    let filesList = [...files];
+    const filesList = [...files];
 
     // Apply plugin filter if plugin viewer is active
     if (this.isPluginViewerActive) {
@@ -388,7 +388,7 @@ class MediaViewerDataStore {
         };
       });
     }
-    
+
     const playlist = [];
     const itemsWithoutThumb = [];
     let id = 0;
@@ -473,3 +473,4 @@ class MediaViewerDataStore {
 }
 
 export default MediaViewerDataStore;
+
