@@ -162,7 +162,7 @@ const ArticleBodyContent = (props) => {
       }
 
       if (location.pathname.includes("bonus")) {
-        setSelectedKeys(["12-0"]);
+        setSelectedKeys(["11-0"]);
       }
     }
   }, [
@@ -391,3 +391,4 @@ export default inject(
     ),
   ),
 );
+
