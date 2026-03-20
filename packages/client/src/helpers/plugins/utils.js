@@ -67,6 +67,8 @@ export const messageActions = ({
   updateArticleButtonItems,
   updateCreateDialogProps,
   updatePlugin,
+  setPluginMediaViewerVisible,
+  setPluginMediaViewerProps,
 }) => {
   if (!message || !message.actions || message.actions.length === 0) return;
 
@@ -295,6 +297,31 @@ export const messageActions = ({
             setRoomsView(`info_plugin-${message.infoPanelTab}`);
         }
 
+        break;
+
+      case PluginActions.showMediaViewer:
+        console.log(PluginActions.showMediaViewer)
+        if (message.mediaViewerProps) {
+          setPluginMediaViewerVisible?.(true);
+          setPluginMediaViewerProps?.({
+            ...message.mediaViewerProps,
+            pluginName,
+          });
+        }
+        break;
+
+      case PluginActions.closeMediaViewer:
+        setPluginMediaViewerVisible?.(false);
+        setPluginMediaViewerProps?.(null);
+        break;
+
+      case PluginActions.updateMediaViewer:
+        if (message.mediaViewerProps) {
+          setPluginMediaViewerProps?.({
+            ...message.mediaViewerProps,
+            pluginName,
+          });
+        }
         break;
       default:
         break;
