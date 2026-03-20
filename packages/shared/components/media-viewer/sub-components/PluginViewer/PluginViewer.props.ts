@@ -1,4 +1,4 @@
-type PluginViewerProps = {
+export type PluginViewerProps = {
   pluginViewerContent: React.ReactNode;
   handleMaskClick: () => void;
   onNext?: () => void;
