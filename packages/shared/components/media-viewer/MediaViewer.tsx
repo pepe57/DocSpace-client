@@ -389,7 +389,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     };
   });
 
-  const { src, title: currentTitle, fileId } = playlist[playlistPos];
+  const { src, title: currentTitle, fileId } = playlist[playlistPos] || {};
 
   useEffect(() => {
     if (!isNullOrUndefined(fileId) && currentFileId !== fileId) {
