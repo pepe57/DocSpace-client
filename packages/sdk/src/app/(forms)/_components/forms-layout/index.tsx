@@ -616,8 +616,6 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const showLoaderOverlay =
     isSectionLoading && !isEditing && !isSettings;
 
-  const chatPanel = <AiChatPanel rootRef={rootRef} />;
-
   return (
     <div
       className={styles.root}
@@ -627,7 +625,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
       }
     >
       <FormsSidebar />
-      {aiStore.panelPosition === "left" && chatPanel}
+      <AiChatPanel rootRef={rootRef} />
       <div
         className={styles.sectionArea}
         style={
@@ -664,7 +662,6 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
         )}
         <AiChatButton />
       </div>
-      {aiStore.panelPosition === "right" && chatPanel}
       <CreateFormDialog
         visible={isCreateFormDialogVisible}
         isCreating={isCreatingForm}
