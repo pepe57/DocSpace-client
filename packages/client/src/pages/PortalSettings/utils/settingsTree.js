@@ -821,3 +821,4 @@ export const settingsTreeFull = [
     link: "statistics",
   },
 ];
+
