@@ -61,6 +61,7 @@ import Settings from "../settings";
 import AiChatPanel from "../ai-chat-panel";
 import AiChatButton from "../ai-chat-button";
 import CreateFormDialog from "../create-form-dialog";
+import MobileStub from "../mobile-stub";
 
 import styles from "./FormsLayout.module.scss";
 
@@ -616,8 +617,6 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
   const showLoaderOverlay =
     isSectionLoading && !isEditing && !isSettings;
 
-  const chatPanel = <AiChatPanel rootRef={rootRef} />;
-
   return (
     <div
       className={styles.root}
@@ -626,8 +625,9 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
         { "--min-section-width": `${MIN_SECTION_WIDTH}px` } as React.CSSProperties
       }
     >
+      <MobileStub />
       <FormsSidebar />
-      {aiStore.panelPosition === "left" && chatPanel}
+      <AiChatPanel rootRef={rootRef} />
       <div
         className={styles.sectionArea}
         style={
@@ -664,7 +664,6 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
         )}
         <AiChatButton />
       </div>
-      {aiStore.panelPosition === "right" && chatPanel}
       <CreateFormDialog
         visible={isCreateFormDialogVisible}
         isCreating={isCreatingForm}

@@ -178,7 +178,7 @@ const StyledComponent = styled.div.attrs(injectDefaultTheme)`
 
   .color-badge rect {
     fill: ${(props) =>
-      props.themePreview === "Dark" && props.selectThemeId === 7
+      props.themePreview === "Dark"
         ? globalColors.white
         : props.colorPreview} !important;
   }
@@ -405,7 +405,7 @@ const StyledMobilePreview = styled.div`
 
   .color-badge rect {
     fill: ${(props) =>
-      props.themePreview === "Dark" && props.selectThemeId === 7
+      props.themePreview === "Dark"
         ? globalColors.white
         : props.colorPreview} !important;
   }
@@ -568,9 +568,7 @@ const StyledMobilePreview = styled.div`
 
   .color-badge rect {
     fill: ${({ themePreview, selectThemeId, colorPreview }) =>
-      themePreview === "Dark" && selectThemeId === 7
-        ? globalColors.white
-        : colorPreview} !important;
+      themePreview === "Dark" ? globalColors.white : colorPreview} !important;
   }
   .section-badge {
     padding-inline-end: 12px;

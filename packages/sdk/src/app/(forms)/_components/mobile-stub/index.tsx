@@ -26,57 +26,32 @@
 
 "use client";
 
-import React from "react";
-import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
-import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
-import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
-import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import DefaultFolderDark from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.dark.svg";
+import DefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.light.svg";
 
-import { ReactSVG } from "react-svg";
+import styles from "./MobileStub.module.scss";
 
-import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
-
-import styles from "./AiChatButton.module.scss";
-
-const AiChatButton = () => {
+const MobileStub = () => {
   const { t } = useTranslation(["Common"]);
-  const {
-    togglePanel,
-    aiAgentEnabled,
-    currentAgentId,
-    isPreparingAgent,
-    isPanelVisible,
-    panelPosition,
-  } = useFormsAiAgentStore();
-  const { editingFile } = useFormsNavigationStore();
-  const { hasManagementAccess } = useFormsSettingsStore();
+  const { isBase } = useTheme();
 
-  if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible || editingFile)
-    return null;
-
-  if (isPreparingAgent) return null;
-
-  if (!currentAgentId) return null;
+  const Icon = isBase ? DefaultFolderLight : DefaultFolderDark;
 
   return (
-    <>
-      <button
-        type="button"
-        className={styles.floatingButton}
-        data-position={panelPosition}
-        onClick={togglePanel}
-        data-tooltip-id="ai-chat-fab-tooltip"
-        data-tooltip-content={t("Common:AIChatButton")}
-      >
-        <ReactSVG src={AiAgentsReactSvgUrl} className={styles.icon} />
-      </button>
-      <Tooltip id="ai-chat-fab-tooltip" place="top" float />
-    </>
+    <div className={styles.mobileStub}>
+      <div className={styles.icon}>
+        <Icon />
+      </div>
+      <div className={styles.title}>{t("Common:FormsMobileStubTitle")}</div>
+      <div className={styles.description}>
+        {t("Common:FormsMobileStubDescription")}
+      </div>
+    </div>
   );
 };
 
-export default observer(AiChatButton);
+export default MobileStub;
