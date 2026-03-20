@@ -295,8 +295,7 @@ const FilesMediaViewer = (props) => {
     if (
       playlist.length === 0 &&
       aiPlaylistImages.length === 0 &&
-      isOpenMediaViewer &&
-      !isPluginViewerVisible
+      isOpenMediaViewer
     ) {
       onMediaViewerClose();
     }
@@ -308,11 +307,9 @@ const FilesMediaViewer = (props) => {
     isPluginViewerVisible,
   ]);
 
-  const shouldShowMediaViewer = visible || isPluginViewerVisible;
-
 
   return (
-    shouldShowMediaViewer && (
+    visible && (
       <Portal
         visible
         element={
@@ -321,7 +318,7 @@ const FilesMediaViewer = (props) => {
               t={t}
               files={files}
               getIcon={getIcon}
-              visible={shouldShowMediaViewer}
+              visible={visible}
               autoPlay={autoPlay}
               playlist={aiPlaylistImages.length ? aiPlaylistImages : playlist}
               prevMedia={prevMedia}
@@ -457,7 +454,7 @@ export default inject(
       dispatchMessage,
     } = pluginStore;
 
-    const isPluginViewerActive = pluginMediaViewerVisible && !!pluginMediaViewerProps;
+    const isPluginViewerVisible = pluginMediaViewerVisible && !!pluginMediaViewerProps;
 
     return {
       files,
@@ -467,8 +464,8 @@ export default inject(
       nextMedia,
       prevMedia,
       userAccess,
-      isOpenMediaViewer: visible,
-      visible: isPluginViewerActive || ((playlist.length > 0 || aiPlaylistImages.length > 0) && visible),
+      isOpenMediaViewer: visible || isPluginViewerVisible,
+      visible: (playlist.length > 0 || aiPlaylistImages.length > 0) && visible || isPluginViewerVisible,
       currentMediaFileId,
       deleteItemAction,
       setMediaViewerData,
