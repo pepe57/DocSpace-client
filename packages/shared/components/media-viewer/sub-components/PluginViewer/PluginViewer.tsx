@@ -2,6 +2,7 @@ import { useGesture } from "@use-gesture/react";
 import { useSpring, animated } from "@react-spring/web";
 import React, { useRef } from "react";
 import styles from "./PluginViewer.module.scss";
+import { PluginViewerProps } from "./PluginViewer.props";
 
 export const PluginViewer = ({
   pluginViewerContent,
@@ -13,7 +14,6 @@ export const PluginViewer = ({
   devices,
 }: PluginViewerProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const contentWrapperRef = useRef<HTMLDivElement>(null);
 
   const { isDesktop } = devices || { isDesktop: true };
 
@@ -37,7 +37,10 @@ export const PluginViewer = ({
         }
 
         api.start({
-          x: (isFirstItem && mdx > 0) || (isLastItem && mdx < 0) ? style.x.get() : dx,
+          x:
+            (isFirstItem && mdx > 0) || (isLastItem && mdx < 0)
+              ? style.x.get()
+              : dx,
           y: dy >= memoLet ? dy : style.y.get(),
           opacity: mdy > 0 ? Math.max(1 - mdy / 120, 0) : style.opacity.get(),
           immediate: true,
@@ -61,7 +64,6 @@ export const PluginViewer = ({
         }
 
         if (shouldGoNext || shouldGoPrev) {
-
           // Animate back to center before navigation
           api.start({
             x: 0,
@@ -90,7 +92,7 @@ export const PluginViewer = ({
         axis: "lock",
       },
       target: containerRef,
-    }
+    },
   );
 
   const AnimatedDiv = animated("div");
@@ -105,11 +107,7 @@ export const PluginViewer = ({
         }
       }}
     >
-      <AnimatedDiv style={style}>
-        <div ref={contentWrapperRef} style={{ width: "100%", height: "100%" }}>
-          {pluginViewerContent}
-        </div>
-      </AnimatedDiv>
+      <AnimatedDiv style={style}>{pluginViewerContent}</AnimatedDiv>
     </div>
   );
 };
