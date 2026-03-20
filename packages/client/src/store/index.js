@@ -386,7 +386,7 @@ const editGroupStore = new EditGroupStore(peopleStore);
 
 const brandingStore = new BrandingStore(settingsStore);
 
-const aiSettingsStore = new AISettingsStore();
+const aiSettingsStore = new AISettingsStore(settingsStore);
 
 const defaultTemplatesStore = new DefaultTemplatesStore();
 

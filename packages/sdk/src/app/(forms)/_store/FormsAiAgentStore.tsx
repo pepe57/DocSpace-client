@@ -97,7 +97,7 @@ class FormsAiAgentStore {
   isPreparingAgent = false;
   userExplicitlyDisabled = false;
   doneFolderId: number | null = null;
-  panelPosition: PanelPosition = "right";
+  panelPosition: PanelPosition = "left";
   panelWidth = 360;
 
   private _folderVersion = 0;
@@ -191,6 +191,11 @@ class FormsAiAgentStore {
     this.pendingAttachmentFile = null;
   };
 
+  clearOverride = () => {
+    this.overrideAgentId = null;
+    this.pendingAttachmentFile = null;
+  };
+
   setPreparingAgent = (value: boolean) => {
     this.isPreparingAgent = value;
   };
@@ -276,6 +281,8 @@ class FormsAiAgentStore {
       runInAction(() => {
         this.askFromDBAgentId = saved;
       });
+      // Ensure current user has access to the agent
+      this.syncAgentMembers(saved).catch(() => {});
       return;
     }
 
@@ -295,6 +302,7 @@ class FormsAiAgentStore {
       runInAction(() => {
         this.askFromDBAgentId = agent.id;
       });
+      await this.syncAgentMembers(agent.id);
     } catch {
       // best-effort
     }
