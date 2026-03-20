@@ -300,7 +300,6 @@ export const messageActions = ({
         break;
 
       case PluginActions.showMediaViewer:
-        console.log(PluginActions.showMediaViewer)
         if (message.mediaViewerProps) {
           setPluginMediaViewerVisible?.(true);
           setPluginMediaViewerProps?.({
@@ -365,3 +364,4 @@ export function borderToStyle(border = {}) {
     ...(radius ? { borderRadius: radius } : {}),
   };
 }
+
