@@ -47,7 +47,6 @@
   "AgentOwner": "智能体所有者",
   "AIAgents": "AI 智能体",
   "AICanMakeMistakes": "AI 可能会出错。请仔细检查回复。",
-  "AIChatInput": "与 AI 对话",
   "AIChatOfferHelp": "我能帮您什么？",
   "AIDisabledInfoBlockAdminSaasDescription": "AI 当前已关闭，这意味着此智能体无法处理对话或任务。要恢复完整功能，请在{{productName}}设置中启用 AI 功能。",
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI 当前已关闭，这意味着此智能体无法处理对话或任务。连接您自己的 AI 服务以解锁{{productName}}中的高级功能。",
@@ -1055,7 +1054,6 @@
   "Upload": "上传",
   "Open": "打开",
   "Quantity": "数量",
-  "YourTurn": "轮到您了",
   "DeleteAIAgentChatTitle": "删除聊天？",
   "DeleteAIChatDescription": "您将要删除<strong>{{chatName}}<1>.</1></strong>\n所有消息和聊天记录将被永久删除，且无法恢复。",
   "DeleteForeverButton": "永久删除"

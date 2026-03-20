@@ -47,7 +47,6 @@
   "AgentOwner": "Agentin omistaja",
   "AIAgents": "AI-agentit",
   "AICanMakeMistakes": "AI voi tehdä virheitä. Tarkista vastaukset vielä kerran.",
-  "AIChatInput": "Keskustele tekoälyn kanssa",
   "AIChatOfferHelp": "Miten voin auttaa?",
   "AIDisabledInfoBlockAdminSaasDescription": "Teknologian tekoälyominaisuudet ovat tällä hetkellä pois käytöstä, mikä tarkoittaa, että tämä agentti ei voi käsitellä keskusteluja tai tehtäviä. Palauttaaksesi täyden toiminnallisuuden, ota tekoälyominaisuudet käyttöön {{productName}}-asetuksissa.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI-ominaisuudet ovat tällä hetkellä pois päältä, mikä tarkoittaa, että tämä agentti ei voi käsitellä keskusteluja tai tehtäviä. Yhdistä oma AI-palvelusi avataksesi edistyneitä ominaisuuksia {{productName}}-palvelussa.",
@@ -1055,7 +1054,6 @@
   "Upload": "Lataa",
   "Open": "Avaa",
   "Quantity": "Määrä",
-  "YourTurn": "Sinun vuorosi",
   "DeleteAIAgentChatTitle": "Poista keskustelu?",
   "DeleteAIChatDescription": "Olet aikeissa poistaa <strong>{{chatName}}<1>.</1></strong>\n Kaikki viestit ja chat-historia poistetaan pysyvästi, eikä niitä voida palauttaa.",
   "DeleteForeverButton": "Poista pysyvästi"

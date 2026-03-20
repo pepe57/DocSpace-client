@@ -47,7 +47,6 @@
   "AgentOwner": "Propietario del agente",
   "AIAgents": "Agentes de IA",
   "AICanMakeMistakes": "La IA puede cometer errores. Por favor, compruebe las respuestas debidamente. ",
-  "AIChatInput": "Chatear con la IA",
   "AIChatOfferHelp": "¿En qué puedo ayudarle? ",
   "AIDisabledInfoBlockAdminSaasDescription": "Las capacidades de IA están actualmente desactivadas, lo que significa que este agente no puede procesar chats ni tareas. Para restaurar la funcionalidad completa, active las funciones de IA en los ajustes de {{productName}}.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "Las capacidades de IA están actualmente desactivadas, lo que significa que este agente no puede procesar chats ni tareas. Conecte su propio servicio de IA para desbloquear funciones avanzadas en {{productName}}.",
@@ -1055,7 +1054,6 @@
   "Upload": "Cargar",
   "Open": "Abrir",
   "Quantity": "Cantidad",
-  "YourTurn": "Su turno",
   "DeleteAIAgentChatTitle": "¿Eliminar el chat?",
   "DeleteAIChatDescription": "Está a punto de eliminar <strong>{{chatName}}<1>.</1></strong> Todos los mensajes y el historial del chat se eliminarán de forma permanente y no se podrán restaurar.",
   "DeleteForeverButton": "Eliminar para siempre"

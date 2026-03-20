@@ -47,7 +47,6 @@
   "AgentOwner": "Agent sahibi",
   "AIAgents": "Süni intellekt agentləri",
   "AICanMakeMistakes": "Süni intellekt səhvlər edə bilər. Cavabları iki dəfə yoxlayın.",
-  "AIChatInput": "Süni intellektlə söhbət",
   "AIChatOfferHelp": "Səni nə bacarıram?",
   "AIDisabledInfoBlockAdminSaasDescription": "Süni İntellekt (SI) funksiyaları hazırda söndürülmüşdür, bu da agentin söhbətləri və tapşırıqları işləyə bilmədiyini deməkdir. Tam funksionaliyyəti bərpa etmək üçün {{productName}} parametrlərində SI xüsusiyyətlərini aktiv edin.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "Süni intellekt funksiyaları hazırda söndürülmüşdür, bu da agentin söhbətləri və tapşırıqları işləməyə bilməsi deməkdir. İnqadarı açmaq üçün öz SI xidmətinizi {{productName}} ilə qoşun.",
@@ -1055,7 +1054,6 @@
   "Upload": "Yüklə",
   "Open": "Açmaq",
   "Quantity": "Miqdar",
-  "YourTurn": "Sizin növbəniz",
   "DeleteAIAgentChatTitle": "Söhbəti sil?",
   "DeleteAIChatDescription": "Yarıma <strong>{{chatName}}<1>.</1></strong> silməyə hazırlaşırsınız.\nBütün mesajlar və söhbət tarixçəsi daimi şəkildə silinəcək və bərpa edilə bilməyəcəkdir.",
   "DeleteForeverButton": "Həmişəlik sil"

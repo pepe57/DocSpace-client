@@ -47,7 +47,6 @@
   "AgentOwner": "Aģenta īpašnieks",
   "AIAgents": "MI aģenti",
   "AICanMakeMistakes": "MI var pieļaut kļūdas. Lūdzu, dubultpārbaudiet atbildes.",
-  "AIChatInput": "Tērzējiet ar mākslīgo intelektu",
   "AIChatOfferHelp": "Kā es varu palīdzēt?",
   "AIDisabledInfoBlockAdminSaasDescription": "MI iespējas šobrīd ir izslēgtas, kas nozīmē, ka šis aģents nevar apstrādāt sarunas vai uzdevumus. Lai atjaunotu pilnu funkcionalitāti, iespējojiet AI funkcijas {{productName}} iestatējumos.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "MI iespējas šobrīd ir izslēgtas, kas nozīmē, ka šis aģents nevar apstrādāt sarunas vai uzdevumus. Pievienojiet savu AI pakalpojumu, lai atbloķētu papildu funkcijas {{productName}}.",
@@ -1055,7 +1054,6 @@
   "Upload": "Augšupielādēt",
   "Open": "Atvērt",
   "Quantity": "Kvantitāte",
-  "YourTurn": "Jūsu kārta",
   "DeleteAIAgentChatTitle": "Dzēst sarunu?",
   "DeleteAIChatDescription": "Jūs gatavojaties dzēst <strong>{{chatName}}<1>.</1></strong>\n Visi ziņojumi un tērzēšanas vēsture tiks neatgriežami izdzēsta un to nevarēs atjaunot.",
   "DeleteForeverButton": "Dzēst uz visiem laikiem"
