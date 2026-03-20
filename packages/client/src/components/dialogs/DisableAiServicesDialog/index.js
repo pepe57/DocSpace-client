@@ -33,6 +33,8 @@ import { Button } from "@docspace/ui-kit/components/button";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
 
+import styles from "./DisableAiServicesDialog.module.scss";
+
 const DisableAiServicesDialogComponent = ({
   visible,
   onClose,
@@ -45,26 +47,17 @@ const DisableAiServicesDialogComponent = ({
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
+  const effectVars = {
+    productName: t("Common:ProductName"),
+    aiSettings: t("AISettings"),
+    aiServices: t("Common:AIServices"),
+    aiAgents: t("Common:AIAgents"),
+  };
+
   const effects = [
-    {
-      key: "DisableAiServicesEffect1",
-      text: t("DisableAiServicesEffect1", {
-        productName: t("Common:ProductName"),
-        aiSettings: t("AISettings"),
-      }),
-    },
-    {
-      key: "DisableAiServicesEffect2",
-      text: t("DisableAiServicesEffect2", {
-        aiServices: t("Common:AIServices"),
-      }),
-    },
-    {
-      key: "DisableAiServicesEffect3",
-      text: t("DisableAiServicesEffect3", {
-        aiAgents: t("Common:AIAgents"),
-      }),
-    },
+    t("DisableAiServicesSettingsHidden", effectVars),
+    t("DisableAiServicesServicesDisabled", effectVars),
+    t("DisableAiServicesAgentsDisabled", effectVars),
   ];
 
   return (
@@ -84,7 +77,7 @@ const DisableAiServicesDialogComponent = ({
         <Text
           fontSize="13px"
           fontWeight={400}
-          style={{ marginBottom: "22px" }}
+          className={styles.description}
           lineHeight="20px"
         >
           {t("DisableAiServicesDescription", {
@@ -92,39 +85,19 @@ const DisableAiServicesDialogComponent = ({
           })}
         </Text>
         <Text fontSize="13px" fontWeight={400} as="div">
-          <ul
-            style={{
-              margin: "0",
-              paddingLeft: "0px",
-              listStyleType: "none",
-            }}
-          >
-            {effects.map((effect) => (
-              <li
-                key={effect.key}
-                style={{
-                  marginBottom: "0px",
-                  fontSize: "13px",
-                  lineHeight: "18px",
-                  paddingLeft: "0",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "16px",
-                    verticalAlign: "middle",
-                    marginRight: "3px",
-                  }}
-                >
+          <ul className={styles.effectsList}>
+            {effects.map((text) => (
+              <li key={text} className={styles.effectItem}>
+                <span className={styles.effectBullet}>
                   •
                 </span>
-                {effect.text}
+                {text}
               </li>
             ))}
           </ul>
         </Text>
         {isAiToolsServiceOn && (
-          <Text fontSize="13px" fontWeight={400} style={{ marginTop: "26px" }}>
+          <Text fontSize="13px" fontWeight={400} className={styles.balance}>
             <Trans
               t={t}
               i18nKey="DisableAiServicesBalance"
@@ -145,7 +118,7 @@ const DisableAiServicesDialogComponent = ({
         <Text
           fontSize="13px"
           fontWeight={isAiToolsServiceOn ? 700 : 400}
-          style={{ marginTop: "26px" }}
+          className={styles.confirm}
         >
           {t("DisableAiServicesConfirm", {
             aiServices: t("Common:AIServices"),
