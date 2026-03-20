@@ -311,7 +311,7 @@ importers:
         version: 10.0.7(storybook@10.2.19(@testing-library/dom@10.4.0)(prettier@3.8.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
       jsdom:
         specifier: ^27.4.0
-        version: 27.4.0
+        version: 27.4.0(@noble/hashes@2.0.1)
       lefthook:
         specifier: ^2.1.4
         version: 2.1.4
@@ -362,7 +362,7 @@ importers:
         version: 4.5.0(rollup@4.59.0)(typescript@5.9.3)(vite@8.0.0(@types/node@24.10.7)(esbuild@0.27.4)(sass@1.79.6)(terser@5.46.1)(yaml@2.8.2))
       vitest:
         specifier: 4.1.0
-        version: 4.1.0(@types/node@24.10.7)(@vitest/ui@4.1.0)(jsdom@27.4.0)(msw@2.12.13(@types/node@24.10.7)(typescript@5.9.3))(vite@8.0.0(@types/node@24.10.7)(esbuild@0.27.4)(sass@1.79.6)(terser@5.46.1)(yaml@2.8.2))
+        version: 4.1.0(@types/node@24.10.7)(@vitest/ui@4.1.0)(jsdom@27.4.0(@noble/hashes@2.0.1))(msw@2.12.13(@types/node@24.10.7)(typescript@5.9.3))(vite@8.0.0(@types/node@24.10.7)(esbuild@0.27.4)(sass@1.79.6)(terser@5.46.1)(yaml@2.8.2))
 
   packages/client:
     dependencies:
@@ -1127,6 +1127,9 @@ importers:
       '@hcaptcha/react-hcaptcha':
         specifier: 1.11.0
         version: 1.11.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@noble/hashes':
+        specifier: ^2.0.1
+        version: 2.0.1
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1355,7 +1358,7 @@ importers:
         version: 3.0.0
       jsdom:
         specifier: ^27.4.0
-        version: 27.4.0
+        version: 27.4.0(@noble/hashes@2.0.1)
       msw:
         specifier: ^2.12.13
         version: 2.12.13(@types/node@24.10.7)(typescript@5.9.3)
@@ -1391,7 +1394,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 4.1.0
-        version: 4.1.0(@types/node@24.10.7)(@vitest/ui@4.1.0)(jsdom@27.4.0)(msw@2.12.13(@types/node@24.10.7)(typescript@5.9.3))(vite@8.0.0(@types/node@24.10.7)(esbuild@0.27.4)(sass@1.79.6)(terser@5.46.1)(yaml@2.8.2))
+        version: 4.1.0(@types/node@24.10.7)(@vitest/ui@4.1.0)(jsdom@27.4.0(@noble/hashes@2.0.1))(msw@2.12.13(@types/node@24.10.7)(typescript@5.9.3))(vite@8.0.0(@types/node@24.10.7)(esbuild@0.27.4)(sass@1.79.6)(terser@5.46.1)(yaml@2.8.2))
 
 packages:
 
@@ -3067,6 +3070,10 @@ packages:
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
+
+  '@noble/hashes@2.0.1':
+    resolution: {integrity: sha512-XlOlEbQcE9fmuXxrVTXCTlG2nlRXa9Rj3rr5Ue/+tX+nmkgbX720YHh0VR3hBF9xDvwnb8D2shVGOwNx+ulArw==}
+    engines: {node: '>= 20.19.0'}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -10196,7 +10203,9 @@ snapshots:
   '@esbuild/win32-x64@0.27.4':
     optional: true
 
-  '@exodus/bytes@1.15.0': {}
+  '@exodus/bytes@1.15.0(@noble/hashes@2.0.1)':
+    optionalDependencies:
+      '@noble/hashes': 2.0.1
 
   '@firebase/analytics-compat@0.2.17(@firebase/app-compat@0.2.48)(@firebase/app@0.10.18)':
     dependencies:
@@ -10858,6 +10867,8 @@ snapshots:
 
   '@next/swc-win32-x64-msvc@16.1.7':
     optional: true
+
+  '@noble/hashes@2.0.1': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -12147,7 +12158,7 @@ snapshots:
       obug: 2.1.1
       std-env: 4.0.0
       tinyrainbow: 3.1.0
-      vitest: 4.1.0(@types/node@24.10.7)(@vitest/ui@4.1.0)(jsdom@27.4.0)(msw@2.12.13(@types/node@24.10.7)(typescript@5.9.3))(vite@8.0.0(@types/node@24.10.7)(esbuild@0.27.4)(sass@1.79.6)(terser@5.46.1)(yaml@2.8.2))
+      vitest: 4.1.0(@types/node@24.10.7)(@vitest/ui@4.1.0)(jsdom@27.4.0(@noble/hashes@2.0.1))(msw@2.12.13(@types/node@24.10.7)(typescript@5.9.3))(vite@8.0.0(@types/node@24.10.7)(esbuild@0.27.4)(sass@1.79.6)(terser@5.46.1)(yaml@2.8.2))
 
   '@vitest/expect@3.2.4':
     dependencies:
@@ -12210,7 +12221,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.15
       tinyrainbow: 3.1.0
-      vitest: 4.1.0(@types/node@24.10.7)(@vitest/ui@4.1.0)(jsdom@27.4.0)(msw@2.12.13(@types/node@24.10.7)(typescript@5.9.3))(vite@8.0.0(@types/node@24.10.7)(esbuild@0.27.4)(sass@1.79.6)(terser@5.46.1)(yaml@2.8.2))
+      vitest: 4.1.0(@types/node@24.10.7)(@vitest/ui@4.1.0)(jsdom@27.4.0(@noble/hashes@2.0.1))(msw@2.12.13(@types/node@24.10.7)(typescript@5.9.3))(vite@8.0.0(@types/node@24.10.7)(esbuild@0.27.4)(sass@1.79.6)(terser@5.46.1)(yaml@2.8.2))
 
   '@vitest/utils@3.2.4':
     dependencies:
@@ -13699,9 +13710,9 @@ snapshots:
 
   hotkeys-js@3.9.4: {}
 
-  html-encoding-sniffer@6.0.0:
+  html-encoding-sniffer@6.0.0(@noble/hashes@2.0.1):
     dependencies:
-      '@exodus/bytes': 1.15.0
+      '@exodus/bytes': 1.15.0(@noble/hashes@2.0.1)
     transitivePeerDependencies:
       - '@noble/hashes'
 
@@ -13939,15 +13950,15 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  jsdom@27.4.0:
+  jsdom@27.4.0(@noble/hashes@2.0.1):
     dependencies:
       '@acemir/cssom': 0.9.31
       '@asamuzakjp/dom-selector': 6.8.1
-      '@exodus/bytes': 1.15.0
+      '@exodus/bytes': 1.15.0(@noble/hashes@2.0.1)
       cssstyle: 5.3.7
       data-urls: 6.0.1
       decimal.js: 10.6.0
-      html-encoding-sniffer: 6.0.0
+      html-encoding-sniffer: 6.0.0(@noble/hashes@2.0.1)
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
       is-potential-custom-element-name: 1.0.1
@@ -16731,7 +16742,7 @@ snapshots:
       terser: 5.46.1
       yaml: 2.8.2
 
-  vitest@4.1.0(@types/node@24.10.7)(@vitest/ui@4.1.0)(jsdom@27.4.0)(msw@2.12.13(@types/node@24.10.7)(typescript@5.9.3))(vite@8.0.0(@types/node@24.10.7)(esbuild@0.27.4)(sass@1.79.6)(terser@5.46.1)(yaml@2.8.2)):
+  vitest@4.1.0(@types/node@24.10.7)(@vitest/ui@4.1.0)(jsdom@27.4.0(@noble/hashes@2.0.1))(msw@2.12.13(@types/node@24.10.7)(typescript@5.9.3))(vite@8.0.0(@types/node@24.10.7)(esbuild@0.27.4)(sass@1.79.6)(terser@5.46.1)(yaml@2.8.2)):
     dependencies:
       '@vitest/expect': 4.1.0
       '@vitest/mocker': 4.1.0(msw@2.12.13(@types/node@24.10.7)(typescript@5.9.3))(vite@8.0.0(@types/node@24.10.7)(esbuild@0.27.4)(sass@1.79.6)(terser@5.46.1)(yaml@2.8.2))
@@ -16756,7 +16767,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 24.10.7
       '@vitest/ui': 4.1.0(vitest@4.1.0)
-      jsdom: 27.4.0
+      jsdom: 27.4.0(@noble/hashes@2.0.1)
     transitivePeerDependencies:
       - msw
 
