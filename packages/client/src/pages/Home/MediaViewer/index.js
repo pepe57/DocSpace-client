@@ -30,11 +30,12 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 import queryString from "query-string";
 
-import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { UrlActionType } from "@docspace/shared/enums";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 import { Portal } from "@docspace/ui-kit/components/portal";
+import { usePlugin } from "./hooks/usePlugin";
+
 const FilesMediaViewer = (props) => {
   const {
     t,
@@ -86,7 +87,6 @@ const FilesMediaViewer = (props) => {
     activeFolders,
     onClickDownloadAs,
     setActiveFiles,
-    pluginContextMenuItems,
     isOpenMediaViewer,
     currentDeviceType,
     changeUrl,
@@ -95,10 +95,31 @@ const FilesMediaViewer = (props) => {
     openUrl,
     autoPlay,
     aiPlaylistImages,
+    pluginMediaViewerVisible,
+    pluginMediaViewerProps,
+    pluginContextMenuItemsList,
+    getContextMenuKeysByType,
+    dispatchMessage,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Plugin logic
+  const {
+    isPluginViewerVisible,
+    handlePluginClose,
+    pluginContent,
+    pluginContextMenuItems,
+  } = usePlugin({
+    pluginMediaViewerVisible,
+    pluginMediaViewerProps,
+    contextMenuItemsList: pluginContextMenuItemsList,
+    getContextMenuKeysByType,
+    currentMediaFileId,
+    playlist,
+    dispatchMessage,
+  });
 
   useEffect(() => {
     if (previewFile) {
@@ -217,6 +238,12 @@ const FilesMediaViewer = (props) => {
   );
 
   const onMediaViewerClose = useCallback(async () => {
+
+    if (isPluginViewerVisible) {
+      await handlePluginClose()
+      return;
+    }
+
     if (isPreview) {
       setIsPreview(false);
       resetUrl();
@@ -261,64 +288,76 @@ const FilesMediaViewer = (props) => {
     setToPreviewFile,
     setMediaViewerData,
     setBufferSelection,
+    handlePluginClose,
   ]);
 
   useEffect(() => {
     if (
       playlist.length === 0 &&
       aiPlaylistImages.length === 0 &&
-      isOpenMediaViewer
-    )
+      isOpenMediaViewer &&
+      !isPluginViewerVisible
+    ) {
       onMediaViewerClose();
+    }
   }, [
     isOpenMediaViewer,
     onMediaViewerClose,
     playlist.length,
     aiPlaylistImages.length,
+    isPluginViewerVisible,
   ]);
 
+  const shouldShowMediaViewer = visible || isPluginViewerVisible;
+
+
   return (
-    visible && (
+    shouldShowMediaViewer && (
       <Portal
         visible
         element={
-          <MediaViewer
-            t={t}
-            files={files}
-            getIcon={getIcon}
-            visible={visible}
-            autoPlay={autoPlay}
-            playlist={aiPlaylistImages.length ? aiPlaylistImages : playlist}
-            prevMedia={prevMedia}
-            nextMedia={nextMedia}
-            onCopyLink={onCopyLink}
-            userAccess={userAccess}
-            onChangeUrl={onChangeUrl}
-            isPreviewFile={firstLoad}
-            onDuplicate={onDuplicate}
-            onMoveAction={onMoveAction}
-            onCopyAction={onCopyAction}
-            onClose={onMediaViewerClose}
-            onDelete={onDeleteMediaFile}
-            onClickRename={onClickRename}
-            onClickDelete={onClickDelete}
-            setActiveFiles={setActiveFiles}
-            archiveRoomsId={archiveRoomsId}
-            onPreviewClick={onPreviewClick}
-            onDownload={onDownloadMediaFile}
-            onClickLinkEdit={onClickLinkEdit}
-            onClickDownload={onClickDownload}
-            onShowInfoPanel={onShowInfoPanel}
-            playlistPos={currentPostionIndex}
-            currentFileId={currentMediaFileId ?? aiPlaylistImages[0]?.fileId}
-            onClickDownloadAs={onClickDownloadAs}
-            currentDeviceType={currentDeviceType}
-            extsImagePreviewed={extsImagePreviewed}
-            setBufferSelection={setBufferSelection}
-            onEmptyPlaylistError={onMediaViewerClose}
-            deleteDialogVisible={deleteDialogVisible}
-            pluginContextMenuItems={pluginContextMenuItems}
-          />
+          <>
+            <MediaViewer
+              t={t}
+              files={files}
+              getIcon={getIcon}
+              visible={shouldShowMediaViewer}
+              autoPlay={autoPlay}
+              playlist={aiPlaylistImages.length ? aiPlaylistImages : playlist}
+              prevMedia={prevMedia}
+              nextMedia={nextMedia}
+              onCopyLink={onCopyLink}
+              userAccess={userAccess}
+              onChangeUrl={onChangeUrl}
+              isPreviewFile={firstLoad}
+              onDuplicate={onDuplicate}
+              onMoveAction={onMoveAction}
+              onCopyAction={onCopyAction}
+              onClose={onMediaViewerClose}
+              onDelete={onDeleteMediaFile}
+              onClickRename={onClickRename}
+              onClickDelete={onClickDelete}
+              setActiveFiles={setActiveFiles}
+              archiveRoomsId={archiveRoomsId}
+              onPreviewClick={onPreviewClick}
+              onDownload={onDownloadMediaFile}
+              onClickLinkEdit={onClickLinkEdit}
+              onClickDownload={onClickDownload}
+              onShowInfoPanel={onShowInfoPanel}
+              playlistPos={currentPostionIndex}
+              currentFileId={currentMediaFileId ?? aiPlaylistImages[0]?.fileId}
+              onClickDownloadAs={onClickDownloadAs}
+              currentDeviceType={currentDeviceType}
+              extsImagePreviewed={extsImagePreviewed}
+              setBufferSelection={setBufferSelection}
+              onEmptyPlaylistError={onMediaViewerClose}
+              deleteDialogVisible={deleteDialogVisible}
+              pluginContextMenuItems={pluginContextMenuItems}
+              pluginViewerContent={pluginContent}
+              pluginFileId={pluginMediaViewerProps?.fileId}
+              pluginTitle={pluginMediaViewerProps?.title}
+            />
+          </>
         }
       />
     )
@@ -387,6 +426,7 @@ export default inject(
       changeUrl,
       autoPlay,
     } = mediaViewerDataStore;
+    
     const { deleteItemAction } = filesActionsStore;
     const { getIcon, extsImagePreviewed, extsMediaPreviewed } =
       filesSettingsStore;
@@ -407,40 +447,17 @@ export default inject(
       onCopyLink,
     } = contextOptionsStore;
 
-    const { contextMenuItemsList, getContextMenuKeysByType } = pluginStore;
+    const { 
+      contextMenuItemsList, 
+      getContextMenuKeysByType,
+      pluginMediaViewerVisible,
+      pluginMediaViewerProps,
+      setPluginMediaViewerVisible,
+      setPluginMediaViewerProps,
+      dispatchMessage,
+    } = pluginStore;
 
-    const item = playlist.find((p) => p.fileId === currentMediaFileId);
-
-    const fileExst = item?.fileExst;
-
-    const pluginContextMenuKeys = [
-      ...(getContextMenuKeysByType(PluginFileType.image, fileExst) || []),
-      ...(getContextMenuKeysByType(PluginFileType.video, fileExst) || []),
-    ];
-
-    const pluginContextMenuItems = [];
-
-    contextMenuItemsList?.forEach(({ value }) => {
-      if (pluginContextMenuKeys.includes(value.key)) {
-        if (value.items && value.items.length > 0) {
-          const processedOptionValues = [];
-
-          value.items.forEach((nestedItem) => {
-            if (pluginContextMenuKeys.includes(nestedItem.key)) {
-              processedOptionValues.push(nestedItem);
-            }
-          });
-
-          if (processedOptionValues.length > 0) {
-            pluginContextMenuItems.push(...processedOptionValues);
-          }
-        }
-
-        if (!value.items) {
-          pluginContextMenuItems.push(value);
-        }
-      }
-    });
+    const isPluginViewerActive = pluginMediaViewerVisible && !!pluginMediaViewerProps;
 
     return {
       files,
@@ -451,7 +468,7 @@ export default inject(
       prevMedia,
       userAccess,
       isOpenMediaViewer: visible,
-      visible: (playlist.length > 0 || aiPlaylistImages.length > 0) && visible,
+      visible: isPluginViewerActive || ((playlist.length > 0 || aiPlaylistImages.length > 0) && visible),
       currentMediaFileId,
       deleteItemAction,
       setMediaViewerData,
@@ -492,13 +509,19 @@ export default inject(
       activeFiles,
       activeFolders,
       setActiveFiles,
-      pluginContextMenuItems,
       currentDeviceType,
       changeUrl,
       fetchPublicRoom,
       isPublicRoom,
       openUrl,
       aiPlaylistImages,
+      pluginMediaViewerVisible,
+      pluginMediaViewerProps,
+      setPluginMediaViewerVisible,
+      setPluginMediaViewerProps,
+      pluginContextMenuItemsList: contextMenuItemsList,
+      getContextMenuKeysByType,
+      dispatchMessage,
     };
   },
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));
