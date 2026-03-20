@@ -75,8 +75,8 @@ export type TDomainValidator = {
 };
 
 export type TPasswordHash = {
-  size: boolean;
-  iterations: boolean;
+  size: number;
+  iterations: number;
   salt: string;
 };
 
