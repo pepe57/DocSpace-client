@@ -31,6 +31,7 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
 import styles from "./FormsSidebar.module.scss";
 
@@ -136,8 +137,10 @@ const FormsSidebar = () => {
             toggleShowText();
           }
         }}
-        title={showText ? t("Common:HideArticleMenu") : t("Common:ShowArticleMenu")}
+        data-tooltip-id="sidebar-toggle-tooltip"
+        data-tooltip-content={showText ? t("Common:HideArticleMenu") : t("Common:ShowArticleMenu")}
       />
+      <Tooltip id="sidebar-toggle-tooltip" place="right" float />
     </div>
   );
 };

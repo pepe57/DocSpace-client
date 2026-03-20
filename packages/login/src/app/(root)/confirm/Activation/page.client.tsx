@@ -137,7 +137,7 @@ const ActivateUserForm = ({
       return;
     }
 
-    const hash = createPasswordHash(password, passwordHash);
+    const hash = await createPasswordHash(password, passwordHash);
 
     const loginData = {
       userName: confirmLinkResult.email ?? "",
