@@ -35,6 +35,8 @@ import {
 import { isMobile } from "react-device-detect";
 import type { I18nextProviderProps } from "react-i18next";
 import resizeImage from "resize-image";
+import { pbkdf2 } from "@noble/hashes/pbkdf2.js";
+import { sha256 } from "@noble/hashes/sha2.js";
 
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
 import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
@@ -125,7 +127,7 @@ export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
     : i18n.changeLanguage("en");
 }
 
-export async function createPasswordHash(
+export function createPasswordHash(
   password: string,
   hashSettings?: TPasswordHash,
 ) {
@@ -146,20 +148,12 @@ export async function createPasswordHash(
   const { size, iterations, salt } = hashSettings;
 
   const enc = new TextEncoder();
-  const keyMaterial = await crypto.subtle.importKey(
-    "raw",
-    enc.encode(password),
-    "PBKDF2",
-    false,
-    ["deriveBits"],
-  );
-  const derivedBits = await crypto.subtle.deriveBits(
-    { name: "PBKDF2", hash: "SHA-256", salt: enc.encode(salt), iterations },
-    keyMaterial,
-    size,
-  );
+  const derivedBytes = pbkdf2(sha256, enc.encode(password), enc.encode(salt), {
+    c: iterations,
+    dkLen: size / 8,
+  });
 
-  return Array.from(new Uint8Array(derivedBits))
+  return Array.from(derivedBytes)
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
 }
