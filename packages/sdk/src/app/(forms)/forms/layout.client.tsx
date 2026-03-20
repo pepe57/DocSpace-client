@@ -28,7 +28,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import Section from "@docspace/ui-kit/components/section";
 import { setAuthToken } from "@docspace/shared/api/client";
@@ -36,7 +36,7 @@ import { setAuthToken } from "@docspace/shared/api/client";
 import useDeviceType from "@/hooks/useDeviceType";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { FormsSection } from "@/types/forms";
-import { sectionFromPathname } from "../_utils/sectionFromPathname";
+import { sectionFromPathname, sectionToPath } from "../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
@@ -82,6 +82,8 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const { roomId, socketUrl, hasManagementAccess } = formsSettingsStore;
   const { items, folders } = useFormsListStore();
   const { currentDeviceType } = useDeviceType();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
 
@@ -178,13 +180,32 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     }
   }, [pathname, completedFolder, inProgressFolder, activeSection, hasManagementAccess, aiStore]);
 
+  // Refresh list after manual editor close (not form completion)
   const prevEditingFile = React.useRef(editingFile);
   React.useEffect(() => {
-    if (prevEditingFile.current && !editingFile) {
+    if (prevEditingFile.current && !editingFile && !completedFolder) {
       fetchSection();
     }
     prevEditingFile.current = editingFile;
-  }, [editingFile, fetchSection]);
+  }, [editingFile, fetchSection, completedFolder]);
+
+  // Form completion: when completedFolder is set while editor is still open,
+  // close the editor and navigate to completed-forms FROM the layout
+  // (avoids race condition of closeEditor unmounting FormsEditor before router.replace)
+  const prevCompletedForFormCompletion = React.useRef(completedFolder);
+  React.useEffect(() => {
+    const prev = prevCompletedForFormCompletion.current;
+    prevCompletedForFormCompletion.current = completedFolder;
+
+    if (completedFolder && !prev && editingFile) {
+      // Form was just completed: completedFolder went from null to non-null while editing
+      closeEditor();
+      const roomId = searchParams.get("roomId") ?? "";
+      router.replace(
+        `${sectionToPath(FormsSection.CompletedForms)}${roomId ? `?roomId=${roomId}` : ""}`,
+      );
+    }
+  }, [completedFolder, editingFile, closeEditor, router, searchParams]);
 
   const {
     isCreateFormDialogVisible,

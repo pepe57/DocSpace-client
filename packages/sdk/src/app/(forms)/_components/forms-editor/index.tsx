@@ -137,16 +137,9 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
             formsListStore.setFolders([]);
             openCompletedFolder(subfolder);
           });
-          // closeEditor() must be called explicitly here because the layout's
-          // pathname-change effect only fires when the URL changes. When the user
-          // is already on /forms/completed-forms the router.replace below is a
-          // no-op and the layout effect never runs, leaving editingFile non-null
-          // and FormsEditor mounted instead of CompletedPage (EC2, EC3).
-          closeEditor();
-          router.replace(
-            sectionToPath(FormsSection.CompletedForms) +
-              (roomIdRef.current ? `?roomId=${roomIdRef.current}` : ""),
-          );
+          // Layout's form-completion effect detects completedFolder going
+          // from null → non-null while editing, and handles closeEditor +
+          // router.replace — no race condition with component unmount.
           setIsCompleting(false);
           return;
         }

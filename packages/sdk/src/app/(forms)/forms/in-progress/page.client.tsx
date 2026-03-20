@@ -49,12 +49,13 @@ const InProgressPage = ({ folders, virtualFolderId }: InProgressPageProps) => {
     useFormsNavigationStore();
   const { fetchSection, fetchMore, fetchSubfolder } = useFormsData();
 
-  // Initialize root folder list from server data
+  // Initialize root folder list from server data (skip if subfolder pre-set)
   React.useEffect(() => {
-    formsListStore.reset();
-    goBackToInProgressRoot();
-    formsListStore.setFolders(folders);
-    formsListStore.setItems([], 0);
+    if (!inProgressFolder) {
+      formsListStore.reset();
+      formsListStore.setFolders(folders);
+      formsListStore.setItems([], 0);
+    }
   }, [folders]);
 
   // Trap the browser Back button while inside a subfolder so that pressing
