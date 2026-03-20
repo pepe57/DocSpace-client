@@ -84,6 +84,7 @@
   "NeedTopUpWallet": "Your wallet has insufficient funds. Please top up your wallet.",
   "NewTotalStorage": "New total storage ({{storageUnit}})",
   "NextMonthBillDate": "Your next monthly bill will be {{currency}} starting from {{date}}",
+  "NewMonthlyPrice": "New monthly price",
   "NoActiveSubscription": "No active subscription",
   "OCR": "OCR",
   "OCRDescription": "Recognize and extract text from scanned PDFs and images.",

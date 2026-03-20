@@ -227,6 +227,22 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
               {formatWalletCurrency!(storagePriceIncrement, 2)}
             </Text>
           </div>
+          {isDowngradeStoragePlan &&
+          !isExceedingStorageLimit &&
+          !isNewSubscription ? (
+            <div className={styles.summaryRow}>
+              <Text fontSize="14px" className={styles.rowLabel}>
+                {t("Services:NewMonthlyPrice")}
+              </Text>
+              <Text
+                fontWeight="600"
+                fontSize="14px"
+                className={styles.rowValue}
+              >
+                {formatWalletCurrency!(totalPrice, 2)}
+              </Text>
+            </div>
+          ) : null}
           {!isExceedingStorageLimit && !isNewSubscription ? (
             <div className={styles.summaryRow}>
               <Text fontSize="14px" className={styles.rowLabel}>

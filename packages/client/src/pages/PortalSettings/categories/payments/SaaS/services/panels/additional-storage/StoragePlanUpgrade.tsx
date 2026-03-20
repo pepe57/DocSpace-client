@@ -461,6 +461,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <ButtonContainer
+            isDowngradeStoragePlan={isDowngradeStoragePlan}
             totalPrice={totalPrice}
             isCurrentStoragePlan={isCurrentStoragePlan}
             isExceedingStorageLimit={isExceedingStorageLimit}
