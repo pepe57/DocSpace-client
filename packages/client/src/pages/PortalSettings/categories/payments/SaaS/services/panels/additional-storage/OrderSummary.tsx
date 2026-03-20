@@ -73,7 +73,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   formatWalletCurrency,
   totalPrice = 0,
   isUpgradeStoragePlan,
-  daysUntilStorageExpiry,
+  daysUntilStorageExpiry = 0,
   setPartialUpgradeFee,
   partialUpgradeFee,
   isDowngradeStoragePlan,
@@ -168,12 +168,13 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   const remainingBalance = partialUpgradeFee
     ? walletBalance - partialUpgradeFee
     : walletBalance - totalPrice;
-  const daysDisplay = daysUntilStorageExpiry
-    ? Duration.fromObject(
-        { days: daysUntilStorageExpiry },
-        { locale: language },
-      ).toHuman()
-    : t("Services:LessThanOneDay");
+  const daysDisplay =
+    daysUntilStorageExpiry > 0
+      ? Duration.fromObject(
+          { days: daysUntilStorageExpiry },
+          { locale: language },
+        ).toHuman()
+      : t("Services:LessThanOneDay");
 
   return (
     <div className={styles.orderSummaryWrapper}>
