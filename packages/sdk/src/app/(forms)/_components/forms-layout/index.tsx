@@ -61,6 +61,7 @@ import Settings from "../settings";
 import AiChatPanel from "../ai-chat-panel";
 import AiChatButton from "../ai-chat-button";
 import CreateFormDialog from "../create-form-dialog";
+import MobileStub from "../mobile-stub";
 
 import styles from "./FormsLayout.module.scss";
 
@@ -624,6 +625,7 @@ const FormsLayout = ({ filesSettings }: FormsLayoutProps) => {
         { "--min-section-width": `${MIN_SECTION_WIDTH}px` } as React.CSSProperties
       }
     >
+      <MobileStub />
       <FormsSidebar />
       <AiChatPanel rootRef={rootRef} />
       <div
