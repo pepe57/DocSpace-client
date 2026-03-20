@@ -178,7 +178,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
 
   return (
     <div className={styles.orderSummaryWrapper}>
-      <Text fontWeight="700" fontSize="16px" className={styles.sectionTitle}>
+      <Text fontWeight="700" fontSize="16px">
         {t("OrderSummary")}
       </Text>
       <div className={styles.summaryCard}>
