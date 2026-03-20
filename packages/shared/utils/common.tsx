@@ -34,7 +34,6 @@ import {
 } from "@docspace/ui-kit/utils/date";
 import { isMobile } from "react-device-detect";
 import type { I18nextProviderProps } from "react-i18next";
-import sjcl from "sjcl";
 import resizeImage from "resize-image";
 
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
@@ -126,7 +125,7 @@ export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
     : i18n.changeLanguage("en");
 }
 
-export function createPasswordHash(
+export async function createPasswordHash(
   password: string,
   hashSettings?: TPasswordHash,
 ) {
@@ -146,11 +145,23 @@ export function createPasswordHash(
 
   const { size, iterations, salt } = hashSettings;
 
-  let bits = sjcl.misc.pbkdf2(password, salt, iterations);
-  bits = bits.slice(0, size / 32);
-  const hash = sjcl.codec.hex.fromBits(bits);
+  const enc = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw",
+    enc.encode(password),
+    "PBKDF2",
+    false,
+    ["deriveBits"],
+  );
+  const derivedBits = await crypto.subtle.deriveBits(
+    { name: "PBKDF2", hash: "SHA-256", salt: enc.encode(salt), iterations },
+    keyMaterial,
+    size,
+  );
 
-  return hash;
+  return Array.from(new Uint8Array(derivedBits))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
 }
 
 export const isPublicRoom = () => {

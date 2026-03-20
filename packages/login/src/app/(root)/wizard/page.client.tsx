@@ -281,7 +281,7 @@ function WizardForm(props: WizardFormProps) {
 
     const emailTrim = email.trim();
     const analytics = true;
-    const hash = createPasswordHash(password, passwordHash);
+    const hash = await createPasswordHash(password, passwordHash);
     const amiId = instanceId.trim();
 
     try {
