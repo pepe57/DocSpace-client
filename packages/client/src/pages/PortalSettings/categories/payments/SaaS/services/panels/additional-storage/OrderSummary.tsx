@@ -169,7 +169,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
     ? walletBalance - partialUpgradeFee
     : walletBalance - totalPrice;
   const daysDisplay =
-    daysUntilStorageExpiry > 0
+    daysUntilStorageExpiry > 1
       ? Duration.fromObject(
           { days: daysUntilStorageExpiry },
           { locale: language },
