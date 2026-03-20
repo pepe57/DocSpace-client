@@ -24,56 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import path from "path";
+import type { UserConfig } from "vite";
+import { rootDir } from "./utils";
 
-import React from "react";
-import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
-
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-
-import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
-import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-
-import { ReactSVG } from "react-svg";
-
-import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
-
-import styles from "./AiChatButton.module.scss";
-
-const AiChatButton = () => {
-  const { t } = useTranslation(["Common"]);
-  const {
-    togglePanel,
-    aiAgentEnabled,
-    currentAgentId,
-    isPreparingAgent,
-    isPanelVisible,
-    panelPosition,
-  } = useFormsAiAgentStore();
-  const { hasManagementAccess } = useFormsSettingsStore();
-
-  if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible) return null;
-
-  if (isPreparingAgent) return null;
-
-  if (!currentAgentId) return null;
-
-  return (
-    <>
-      <button
-        type="button"
-        className={styles.floatingButton}
-        data-position={panelPosition}
-        onClick={togglePanel}
-        data-tooltip-id="ai-chat-fab-tooltip"
-        data-tooltip-content={t("Common:AIChatButton")}
-      >
-        <ReactSVG src={AiAgentsReactSvgUrl} className={styles.icon} />
-      </button>
-      <Tooltip id="ai-chat-fab-tooltip" place="top" float />
-    </>
-  );
+export const css: UserConfig["css"] = {
+  modules: {
+    generateScopedName: "[name]__[local]--[hash:base64:5]",
+  },
+  preprocessorOptions: {
+    scss: {
+      importers: [
+        {
+          findFileUrl(url: string) {
+            if (url.startsWith("@docspace/ui-kit")) {
+              const resolved = url.replace(
+                "@docspace/ui-kit",
+                path.resolve(rootDir, "../../libs/ui-kit"),
+              );
+              return new URL(
+                `file:///${resolved.split(path.sep).join("/")}`,
+              );
+            }
+            if (url.startsWith("@docspace/shared")) {
+              const resolved = url.replace(
+                "@docspace/shared",
+                path.resolve(rootDir, "../shared"),
+              );
+              return new URL(
+                `file:///${resolved.split(path.sep).join("/")}`,
+              );
+            }
+            return null;
+          },
+        },
+      ],
+    },
+  },
 };
-
-export default observer(AiChatButton);

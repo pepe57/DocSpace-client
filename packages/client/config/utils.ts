@@ -24,56 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import path from "path";
+import fs from "fs";
+import crypto from "crypto";
 
-import React from "react";
-import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+// rootDir = packages/client/ (parent of this file's directory: packages/client/config/)
+export const rootDir = path.resolve(__dirname, "..");
 
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-
-import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
-import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-
-import { ReactSVG } from "react-svg";
-
-import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
-
-import styles from "./AiChatButton.module.scss";
-
-const AiChatButton = () => {
-  const { t } = useTranslation(["Common"]);
-  const {
-    togglePanel,
-    aiAgentEnabled,
-    currentAgentId,
-    isPreparingAgent,
-    isPanelVisible,
-    panelPosition,
-  } = useFormsAiAgentStore();
-  const { hasManagementAccess } = useFormsSettingsStore();
-
-  if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible) return null;
-
-  if (isPreparingAgent) return null;
-
-  if (!currentAgentId) return null;
-
-  return (
-    <>
-      <button
-        type="button"
-        className={styles.floatingButton}
-        data-position={panelPosition}
-        onClick={togglePanel}
-        data-tooltip-id="ai-chat-fab-tooltip"
-        data-tooltip-content={t("Common:AIChatButton")}
-      >
-        <ReactSVG src={AiAgentsReactSvgUrl} className={styles.icon} />
-      </button>
-      <Tooltip id="ai-chat-fab-tooltip" place="top" float />
-    </>
-  );
+export const fileHash = (filePath: string): string => {
+  try {
+    const content = fs.readFileSync(filePath);
+    return crypto.createHash("md5").update(content).digest("hex");
+  } catch {
+    return "";
+  }
 };
 
-export default observer(AiChatButton);
+export const publicScriptsDir = path.resolve(
+  rootDir,
+  "../../public/scripts",
+);
+
+export const pkg = JSON.parse(
+  fs.readFileSync(path.resolve(rootDir, "package.json"), "utf-8"),
+);
+
+export const getBuildDate = () => {
+  const today = new Date();
+  return `${today.toISOString().split(".")[0]}Z`;
+};
+
+export const getBuildYear = () => new Date().getFullYear();
+
+export const banner = `/*
+* (c) Copyright Ascensio System SIA 2009-${getBuildYear()}. All rights reserved
+*
+* https://www.onlyoffice.com/
+*
+* Version: ${pkg.version} (build at: ${getBuildDate()})
+*/`;

@@ -24,56 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { type Plugin } from "vite";
+import path from "path";
+import fs from "fs";
+import { rootDir } from "../utils";
 
-import React from "react";
-import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+// ---------------------------------------------------------------------------
+// Custom plugin: copy and minify locale JSON files to dist/ (production build)
+// Replaces Webpack's CopyPlugin with minifyJson transform.
+// ---------------------------------------------------------------------------
+function copyAndMinifyLocales(src: string, dest: string) {
+  if (!fs.existsSync(src)) return;
+  fs.mkdirSync(dest, { recursive: true });
+  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    if (entry.isDirectory()) {
+      copyAndMinifyLocales(srcPath, destPath);
+    } else if (entry.name.endsWith(".json")) {
+      try {
+        const content = JSON.parse(fs.readFileSync(srcPath, "utf-8"));
+        fs.writeFileSync(destPath, JSON.stringify(content), "utf-8");
+      } catch {
+        fs.copyFileSync(srcPath, destPath);
+      }
+    }
+  }
+}
 
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-
-import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
-import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-
-import { ReactSVG } from "react-svg";
-
-import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
-
-import styles from "./AiChatButton.module.scss";
-
-const AiChatButton = () => {
-  const { t } = useTranslation(["Common"]);
-  const {
-    togglePanel,
-    aiAgentEnabled,
-    currentAgentId,
-    isPreparingAgent,
-    isPanelVisible,
-    panelPosition,
-  } = useFormsAiAgentStore();
-  const { hasManagementAccess } = useFormsSettingsStore();
-
-  if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible) return null;
-
-  if (isPreparingAgent) return null;
-
-  if (!currentAgentId) return null;
-
-  return (
-    <>
-      <button
-        type="button"
-        className={styles.floatingButton}
-        data-position={panelPosition}
-        onClick={togglePanel}
-        data-tooltip-id="ai-chat-fab-tooltip"
-        data-tooltip-content={t("Common:AIChatButton")}
-      >
-        <ReactSVG src={AiAgentsReactSvgUrl} className={styles.icon} />
-      </button>
-      <Tooltip id="ai-chat-fab-tooltip" place="top" float />
-    </>
-  );
-};
-
-export default observer(AiChatButton);
+export const copyLocalesPlugin = (): Plugin => ({
+  name: "copy-locales",
+  closeBundle() {
+    const srcDir = path.resolve(rootDir, "public/locales");
+    const destDir = path.resolve(rootDir, "dist/locales");
+    copyAndMinifyLocales(srcDir, destDir);
+  },
+});

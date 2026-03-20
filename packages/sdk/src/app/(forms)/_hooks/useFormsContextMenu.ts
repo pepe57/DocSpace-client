@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
-import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import BackupSvgUrl from "PUBLIC_DIR/images/icons/16/backup.svg?url";
@@ -43,6 +43,7 @@ import { FormsSection } from "@/types/forms";
 
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
+import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import useFormsActions from "./useFormsActions";
 
 export type TFormsContextMenuItem = {
@@ -58,6 +59,7 @@ export default function useFormsContextMenu() {
   const { t } = useTranslation(["Common"]);
   const { activeSection } = useFormsNavigationStore();
   const { openPanelWithAgent, askFromDBAgentId } = useFormsAiAgentStore();
+  const { hasManagementAccess } = useFormsSettingsStore();
 
   const {
     openForm,
@@ -110,7 +112,7 @@ export default function useFormsContextMenu() {
               disabled: false,
             });
 
-            if (askFromDBAgentId) {
+            if (askFromDBAgentId && hasManagementAccess) {
               model.push({
                 id: "option_ask-from-db",
                 key: "ask-from-db",
@@ -169,7 +171,7 @@ export default function useFormsContextMenu() {
               id: "option_delete",
               key: "delete",
               label: t("Common:Delete"),
-              icon: RemoveReactSvgUrl,
+              icon: TrashReactSvgUrl,
               onClick: () => deleteFromList(file.id),
               disabled: false,
             });
@@ -247,6 +249,7 @@ export default function useFormsContextMenu() {
       resetFilling,
       openPanelWithAgent,
       askFromDBAgentId,
+      hasManagementAccess,
     ],
   );
 
@@ -270,7 +273,7 @@ export default function useFormsContextMenu() {
           id: "option_delete-folder",
           key: "delete-folder",
           label: t("Common:Delete"),
-          icon: RemoveReactSvgUrl,
+          icon: TrashReactSvgUrl,
           onClick: () => deleteFolderFromList(folder.id),
           disabled: false,
         });

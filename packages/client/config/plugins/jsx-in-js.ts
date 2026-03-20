@@ -24,56 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { type Plugin, transformWithOxc } from "vite";
 
-import React from "react";
-import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+// ---------------------------------------------------------------------------
+// Custom plugin: transform JSX in .js files via esbuild.
+// The project was ejected from CRA where Babel processed all .js files with
+// JSX support. Vite/Rollup only handles JSX in .jsx/.tsx files by default.
+// This plugin pre-transforms .js files containing JSX before Rollup parses them.
+// ---------------------------------------------------------------------------
+export const jsxInJsPlugin = (): Plugin => ({
+  name: "jsx-in-js",
+  enforce: "pre",
+  config() {
+    // Vite 8 uses Rolldown for dep scanning. Tell Rolldown to parse .js
+    // files as JSX — the Rolldown equivalent of esbuild's loader[".js"]="jsx".
+    return {
+      optimizeDeps: {
+        rolldownOptions: {
+          moduleTypes: { ".js": "jsx" },
+        },
+      },
+    };
+  },
+  async transform(code, id) {
+    if (!id.endsWith(".js") || id.includes("node_modules")) return null;
+    // Quick check: skip files that clearly don't contain JSX.
+    // Match opening JSX tags (<Component, <div) or closing tags (</),
+    // but not plain comparison operators (a < b).
+    if (!/(<\/|<[A-Za-z])/.test(code)) return null;
 
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-
-import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
-import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-
-import { ReactSVG } from "react-svg";
-
-import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
-
-import styles from "./AiChatButton.module.scss";
-
-const AiChatButton = () => {
-  const { t } = useTranslation(["Common"]);
-  const {
-    togglePanel,
-    aiAgentEnabled,
-    currentAgentId,
-    isPreparingAgent,
-    isPanelVisible,
-    panelPosition,
-  } = useFormsAiAgentStore();
-  const { hasManagementAccess } = useFormsSettingsStore();
-
-  if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible) return null;
-
-  if (isPreparingAgent) return null;
-
-  if (!currentAgentId) return null;
-
-  return (
-    <>
-      <button
-        type="button"
-        className={styles.floatingButton}
-        data-position={panelPosition}
-        onClick={togglePanel}
-        data-tooltip-id="ai-chat-fab-tooltip"
-        data-tooltip-content={t("Common:AIChatButton")}
-      >
-        <ReactSVG src={AiAgentsReactSvgUrl} className={styles.icon} />
-      </button>
-      <Tooltip id="ai-chat-fab-tooltip" place="top" float />
-    </>
-  );
-};
-
-export default observer(AiChatButton);
+    return transformWithOxc(code, id, {
+      lang: "jsx",
+      jsx: { runtime: "automatic", importSource: "react" },
+    });
+  },
+});

@@ -24,56 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import path from "path";
+import type { UserConfig } from "vite";
+import { rootDir } from "./utils";
 
-import React from "react";
-import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
-
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-
-import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
-import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-
-import { ReactSVG } from "react-svg";
-
-import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
-
-import styles from "./AiChatButton.module.scss";
-
-const AiChatButton = () => {
-  const { t } = useTranslation(["Common"]);
-  const {
-    togglePanel,
-    aiAgentEnabled,
-    currentAgentId,
-    isPreparingAgent,
-    isPanelVisible,
-    panelPosition,
-  } = useFormsAiAgentStore();
-  const { hasManagementAccess } = useFormsSettingsStore();
-
-  if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible) return null;
-
-  if (isPreparingAgent) return null;
-
-  if (!currentAgentId) return null;
-
-  return (
-    <>
-      <button
-        type="button"
-        className={styles.floatingButton}
-        data-position={panelPosition}
-        onClick={togglePanel}
-        data-tooltip-id="ai-chat-fab-tooltip"
-        data-tooltip-content={t("Common:AIChatButton")}
-      >
-        <ReactSVG src={AiAgentsReactSvgUrl} className={styles.icon} />
-      </button>
-      <Tooltip id="ai-chat-fab-tooltip" place="top" float />
-    </>
-  );
+export const server: UserConfig["server"] = {
+  host: true,
+  port: parseInt(process.env.PORT || "5001"),
+  strictPort: true,
+  cors: true,
+  // Allow the page loaded from the backend proxy (e.g. :8092) to connect
+  // to Vite's WebSocket for HMR.  Don't set hmr.host — the HMR client
+  // will use the page's hostname, so it works for both localhost and
+  // remote access.  clientPort tells it which port to connect to.
+  hmr: {
+    clientPort: parseInt(process.env.PORT || "5001"),
+    protocol: "ws",
+  },
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods":
+      "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+    "Access-Control-Allow-Headers":
+      "X-Requested-With, content-type, Authorization",
+  },
+  fs: {
+    allow: [
+      path.resolve(rootDir, "../../public"),
+      path.resolve(rootDir, "../shared"),
+      path.resolve(rootDir, "../../libs"),
+      path.resolve(rootDir),
+    ],
+  },
 };
-
-export default observer(AiChatButton);
