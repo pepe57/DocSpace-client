@@ -63,7 +63,6 @@ export const usePlugin = ({
     [pluginMediaViewerVisible, pluginMediaViewerProps],
   );
 
-
   const isLoaded = useRef(false);
 
   const handlePluginClose = useCallback(async () => {
@@ -76,7 +75,6 @@ export const usePlugin = ({
 
     dispatchMessage({ message, pluginName });
   }, [pluginMediaViewerProps, isPluginViewerVisible, dispatchMessage]);
-
 
   const onLoad = useCallback(async () => {
     if (pluginMediaViewerProps?.onLoad && currentMediaFileId) {
@@ -96,7 +94,11 @@ export const usePlugin = ({
       return;
     }
 
-    if (!isLoaded.current && pluginMediaViewerProps?.onLoad && currentMediaFileId) {
+    if (
+      !isLoaded.current &&
+      pluginMediaViewerProps?.onLoad &&
+      currentMediaFileId
+    ) {
       isLoaded.current = true;
       onLoad();
     }
@@ -136,9 +138,9 @@ export const usePlugin = ({
     contextMenuItemsList?.forEach(({ value }) => {
       if (pluginContextMenuKeys.includes(value.key)) {
         if (value.items && value.items.length > 0) {
-          const processedOptionValues: any[] = [];
+          const processedOptionValues: IContextMenuItemClient[] = [];
 
-          value.items.forEach((nestedItem: any) => {
+          value.items.forEach((nestedItem: IContextMenuItemClient) => {
             if (pluginContextMenuKeys.includes(nestedItem.key)) {
               processedOptionValues.push(nestedItem);
             }
