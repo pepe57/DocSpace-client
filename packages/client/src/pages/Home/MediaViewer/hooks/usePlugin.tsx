@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useEffectEvent, useMemo, useRef } from "react";
 import {
   PluginFileType,
   PluginComponents,
@@ -37,7 +37,7 @@ import {
   NumberOrString,
   PlaylistType,
 } from "@docspace/shared/components/media-viewer/MediaViewer.types";
-import { IContextMenuItemClient } from 'SRC_DIR/helpers/plugins/types'
+import { IContextMenuItemClient } from "SRC_DIR/helpers/plugins/types";
 
 interface UsePluginProps {
   pluginMediaViewerVisible: PluginStore["pluginMediaViewerVisible"];
@@ -63,6 +63,9 @@ export const usePlugin = ({
     [pluginMediaViewerVisible, pluginMediaViewerProps],
   );
 
+
+  const isLoaded = useRef(false);
+
   const handlePluginClose = useCallback(async () => {
     if (!isPluginViewerVisible || !pluginMediaViewerProps?.onClose) {
       return null;
@@ -73,6 +76,31 @@ export const usePlugin = ({
 
     dispatchMessage({ message, pluginName });
   }, [pluginMediaViewerProps, isPluginViewerVisible, dispatchMessage]);
+
+
+  const onLoad = useCallback(async () => {
+    if (pluginMediaViewerProps?.onLoad && currentMediaFileId) {
+      const message = await pluginMediaViewerProps.onLoad({
+        fileId: currentMediaFileId,
+      });
+      dispatchMessage({
+        message,
+        pluginName: pluginMediaViewerProps.pluginName,
+      });
+    }
+  }, [pluginMediaViewerProps, currentMediaFileId, dispatchMessage]);
+
+  useEffect(() => {
+    if (!isPluginViewerVisible) {
+      isLoaded.current = false;
+      return;
+    }
+
+    if (!isLoaded.current && pluginMediaViewerProps?.onLoad && currentMediaFileId) {
+      isLoaded.current = true;
+      onLoad();
+    }
+  }, [isPluginViewerVisible, onLoad]);
 
   // Get plugin viewer content component
   const pluginContent = useMemo(() => {
