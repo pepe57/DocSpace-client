@@ -143,7 +143,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
             autoFocus
             withBorder={false}
             value={inputValue}
-            type={InputType.text}
+            type={InputType.search}
             className={styles.input}
             onChange={onChangeSearchValue}
             placeholder={t("Common:AddTag")}
