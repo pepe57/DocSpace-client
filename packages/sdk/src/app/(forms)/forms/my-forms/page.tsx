@@ -24,33 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { cookies, headers } from "next/headers";
-import FilesFilter from "@docspace/shared/api/files/filter";
-import { FilterType } from "@docspace/shared/enums";
-import { getFormsFolder } from "@/api/forms";
-import { ROOM_ID_HEADER, PAGE_COUNT } from "@/utils/constants";
-import MyFormsPage from "./page.client";
+"use client";
 
-export default async function MyForms({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string }>;
-}) {
-  const hdrs = await headers();
-  const params = await searchParams;
-  const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
-
-  if (!roomId) {
-    return <MyFormsPage roomId="" />;
-  }
-
-  const filter = FilesFilter.getDefault();
-  filter.pageCount = PAGE_COUNT;
-  filter.filterType = FilterType.PDFForm;
-
-  const folderData = await getFormsFolder(roomId, filter).catch(
-    () => undefined,
-  );
-
-  return <MyFormsPage roomId={roomId} initialFolderData={folderData} />;
-}
+export { default } from "./page.client";

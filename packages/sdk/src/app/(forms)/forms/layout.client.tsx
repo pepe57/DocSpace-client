@@ -31,6 +31,8 @@ import { observer } from "mobx-react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import Section from "@docspace/ui-kit/components/section";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
 
 import useDeviceType from "@/hooks/useDeviceType";
@@ -66,7 +68,7 @@ type FormsShellProps = {
 
 const FormsShell = ({ commonData, children }: FormsShellProps) => {
   useSDKConfig();
-  useInitCommonStores(commonData);
+  const isReady = useInitCommonStores(commonData);
 
   const {
     editingFile,
@@ -80,7 +82,8 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const { user } = useFormsUserStore();
   const formsSettingsStore = useFormsSettingsStore();
   const { roomId, socketUrl, hasManagementAccess } = formsSettingsStore;
-  const { items, folders } = useFormsListStore();
+  const formsListStore = useFormsListStore();
+  const { items, folders, isLoading } = formsListStore;
   const { currentDeviceType } = useDeviceType();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -128,6 +131,14 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
 
   useEditorGuard(isEditing);
 
+  const prevIsLoading = React.useRef(isLoading);
+  React.useEffect(() => {
+    if (prevIsLoading.current && !isLoading) {
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+    }
+    prevIsLoading.current = isLoading;
+  }, [isLoading]);
+
   // AI agent init for room
   React.useEffect(() => {
     if (roomId && user?.id && hasManagementAccess) {
@@ -140,7 +151,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const prevPathname = React.useRef(pathname);
   const prevCompletedFolderShell = React.useRef(completedFolder);
   const prevInProgressFolderShell = React.useRef(inProgressFolder);
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const prevSection = sectionFromPathname(prevPathname.current);
     const sectionChanged = prevPathname.current !== pathname;
     const folderChanged =
@@ -160,6 +171,16 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         goBackToInProgressRoot();
       }
       closeEditor();
+
+      if (activeSection === FormsSection.Settings) {
+        setTimeout(() => {
+          window.dispatchEvent(
+            new CustomEvent(AnimationEvents.END_ANIMATION),
+          );
+        }, 0);
+      } else {
+        formsListStore.setIsLoading(true);
+      }
     }
 
     if (sectionChanged || folderChanged) {
@@ -178,7 +199,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         aiStore.setCurrentFolder(null);
       }
     }
-  }, [pathname, completedFolder, inProgressFolder, activeSection, hasManagementAccess, aiStore]);
+  }, [pathname, completedFolder, inProgressFolder, activeSection, hasManagementAccess, aiStore, formsListStore]);
 
   // Refresh list after manual editor close (not form completion)
   const prevEditingFile = React.useRef(editingFile);
@@ -197,7 +218,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     const prev = prevCompletedForFormCompletion.current;
     prevCompletedForFormCompletion.current = completedFolder;
 
-    if (completedFolder && !prev && editingFile) {
+    if (completedFolder && completedFolder !== prev && editingFile) {
       // Form was just completed: completedFolder went from null to non-null while editing
       closeEditor();
       const roomId = searchParams.get("roomId") ?? "";
@@ -221,6 +242,22 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const rootRef = React.useRef<HTMLDivElement>(null);
   const isSettings = activeSection === FormsSection.Settings;
 
+  if (!isReady) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        <Loader type={LoaderTypes.dualRing} size="40px" />
+      </div>
+    );
+  }
+
   return (
     <div
       className={styles.root}
@@ -239,7 +276,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           settingsStudio={false}
           viewAs={isSettings ? "settings" : "tile"}
           isEmptyPage={
-            !isEditing && items.length === 0 && folders.length === 0
+            !isEditing && !isLoading && items.length === 0 && folders.length === 0
           }
           currentDeviceType={currentDeviceType}
         >

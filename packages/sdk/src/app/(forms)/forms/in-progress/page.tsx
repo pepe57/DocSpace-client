@@ -24,53 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { headers } from "next/headers";
+"use client";
 
-import FilesFilter from "@docspace/shared/api/files/filter";
-import { FolderType } from "@docspace/shared/enums";
-
-import { getFormsFolder } from "@/api/forms";
-import { ROOM_ID_HEADER, PAGE_COUNT } from "@/utils/constants";
-
-import InProgressPage from "./page.client";
-
-export default async function InProgress({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string }>;
-}) {
-  const hdrs = await headers();
-  const params = await searchParams;
-  const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
-
-  if (!roomId) {
-    return <InProgressPage folders={[]} />;
-  }
-
-  const filter = FilesFilter.getDefault();
-  filter.pageCount = PAGE_COUNT;
-
-  try {
-    const roomData = await getFormsFolder(roomId, filter);
-    const virtualFolder = roomData?.folders.find(
-      (f) => f.type === FolderType.InProgress,
-    );
-
-    if (!virtualFolder) {
-      return <InProgressPage folders={[]} />;
-    }
-
-    const subFilter = FilesFilter.getDefault();
-    subFilter.pageCount = PAGE_COUNT;
-    const folderData = await getFormsFolder(virtualFolder.id, subFilter);
-
-    return (
-      <InProgressPage
-        folders={folderData?.folders ?? []}
-        virtualFolderId={virtualFolder.id}
-      />
-    );
-  } catch {
-    return <InProgressPage folders={[]} />;
-  }
-}
+export { default } from "./page.client";

@@ -49,6 +49,7 @@ class FormsSettingsStore {
   filesSettings: TFilesSettings | null = null;
   folderSecurity: TFolderSecurity | null = null;
   userAccess: ShareAccessRights | null = null;
+  inProgressFolderId: number | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
@@ -70,6 +71,10 @@ class FormsSettingsStore {
 
   setUserAccess = (access: ShareAccessRights) => {
     this.userAccess = access;
+  };
+
+  setInProgressFolderId = (id: number | undefined) => {
+    this.inProgressFolderId = id;
   };
 
   get hasManagementAccess(): boolean {

@@ -27,7 +27,7 @@
 import { headers, cookies } from "next/headers";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { FilterType } from "@docspace/shared/enums";
+import { FilterType, FolderType } from "@docspace/shared/enums";
 
 import { getFilesSettings } from "@/api/files";
 import { getFormsFolder } from "@/api/forms";
@@ -77,6 +77,17 @@ export default async function FormsServerLayout({
   const roomAccess = roomData?.current?.access;
   const roomCurrent = roomData?.current as Record<string, unknown> | undefined;
 
+  const doneFolderId = roomData?.folders?.find(
+    (f) => f.type === FolderType.Done,
+  )?.id;
+  const inProgressFolderId = roomData?.folders?.find(
+    (f) => f.type === FolderType.InProgress,
+  )?.id;
+
+  // Initial my-forms files for first-mount hydration (avoids extra client fetch)
+  const initialFiles = roomData?.files;
+  const initialTotal = roomData?.total;
+
   return (
     <FormsShell
       commonData={{
@@ -90,6 +101,10 @@ export default async function FormsServerLayout({
         roomAccess,
         saveFormAsXLSX: Boolean(roomCurrent?.saveFormAsXLSX),
         sendFormToExternalDB: Boolean(roomCurrent?.sendFormToExternalDB),
+        doneFolderId,
+        inProgressFolderId,
+        initialFiles,
+        initialTotal,
       }}
     >
       {children}

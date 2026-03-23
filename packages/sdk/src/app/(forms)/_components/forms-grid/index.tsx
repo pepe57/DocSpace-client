@@ -31,6 +31,7 @@ import { observer } from "mobx-react";
 import { usePathname } from "next/navigation";
 
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useItemList from "@/app/(docspace)/_hooks/useItemList";
@@ -106,19 +107,32 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     return () => observer.disconnect();
   }, [hasMore, items.length]);
 
-  if (isLoading && items.length === 0 && folders.length === 0) {
-    return null;
+  const hasFolders = folders.length > 0;
+  const hasItems = items.length > 0;
+
+  if (!hasFolders && !hasItems) {
+    if (isLoading) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <Loader type={LoaderTypes.dualRing} size="40px" />
+        </div>
+      );
+    }
+    return <FormsEmpty />;
   }
 
-  if (isFoldersRoot) {
-    if (folders.length === 0) {
-      return <FormsEmpty />;
-    }
-
+  if ((isFoldersRoot || !hasItems) && hasFolders) {
     const onOpenFolder = isCompletedRoot
       ? openCompletedFolder
       : openInProgressFolder;
-
     return (
       <div className={styles.foldersGrid}>
         {folders.map((folder) => (
@@ -134,20 +148,20 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     );
   }
 
-  if (items.length === 0) {
-    return <FormsEmpty />;
+  if (hasItems) {
+    return (
+      <>
+        <div className={styles.filesGrid}>
+          {fileItems.map((item) => (
+            <FormsTile key={`file_${item.id}`} item={item} getIcon={getIcon} />
+          ))}
+        </div>
+        {hasMore && <div ref={sentinelRef} style={{ height: 1 }} />}
+      </>
+    );
   }
 
-  return (
-    <>
-      <div className={styles.filesGrid}>
-        {fileItems.map((item) => (
-          <FormsTile key={`file_${item.id}`} item={item} getIcon={getIcon} />
-        ))}
-      </div>
-      {hasMore && <div ref={sentinelRef} style={{ height: 1 }} />}
-    </>
-  );
+  return isLoading ? null : <FormsEmpty />;
 };
 
 export default observer(FormsGrid);

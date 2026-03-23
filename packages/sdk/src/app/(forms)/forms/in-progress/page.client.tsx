@@ -29,40 +29,32 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-import type { TFolder } from "@docspace/shared/api/files/types";
+import { FormsSection } from "@/types/forms";
 
-import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import useFormsData from "../../_hooks/useFormsData";
 import FormsGrid from "../../_components/forms-grid";
 
-type InProgressPageProps = {
-  folders: TFolder[];
-  virtualFolderId?: number;
-};
-
-const InProgressPage = ({ folders, virtualFolderId }: InProgressPageProps) => {
-  const formsListStore = useFormsListStore();
+const InProgressPage = () => {
   const formsSettingsStore = useFormsSettingsStore();
-  const { inProgressFolder, goBackToInProgressRoot } =
+  const { editingFile, inProgressFolder, goBackToInProgressRoot } =
     useFormsNavigationStore();
   const { fetchSection, fetchMore, fetchSubfolder } = useFormsData();
 
-  // Initialize root folder list from server data (skip if subfolder pre-set)
+  // Initialize: fetch in-progress root (skip if subfolder pre-set)
   React.useEffect(() => {
     if (!inProgressFolder) {
-      formsListStore.reset();
-      formsListStore.setFolders(folders);
-      formsListStore.setItems([], 0);
+      fetchSection(FormsSection.InProgress);
     }
-  }, [folders]);
+  }, []);
 
   // Trap the browser Back button while inside a subfolder so that pressing
   // Back returns to the in-progress root instead of exiting the section
   // entirely (EC10). Mirrors the useEditorGuard pattern.
+  // Disabled while editor is open — useEditorGuard handles Back during editing.
   React.useEffect(() => {
-    if (!inProgressFolder) return;
+    if (!inProgressFolder || editingFile) return;
 
     const handlePopState = () => {
       history.pushState(null, "", window.location.href);
@@ -75,7 +67,7 @@ const InProgressPage = ({ folders, virtualFolderId }: InProgressPageProps) => {
     return () => {
       window.removeEventListener("popstate", handlePopState);
     };
-  }, [inProgressFolder, goBackToInProgressRoot]);
+  }, [inProgressFolder, editingFile, goBackToInProgressRoot]);
 
   // Fetch subfolder files or restore root folders on navigation
   const prevInProgressFolder = React.useRef(inProgressFolder);
@@ -84,7 +76,7 @@ const InProgressPage = ({ folders, virtualFolderId }: InProgressPageProps) => {
     prevInProgressFolder.current = inProgressFolder;
 
     if (inProgressFolder && inProgressFolder !== prev) {
-      // Entered a subfolder → fetch its files
+      // Entered a subfolder -> fetch its files
       const controller = new AbortController();
       fetchSubfolder(inProgressFolder.id, controller.signal).catch(() => {});
       return () => controller.abort();
@@ -92,9 +84,9 @@ const InProgressPage = ({ folders, virtualFolderId }: InProgressPageProps) => {
 
     if (!inProgressFolder && prev) {
       // Fetch fresh virtual folder list (not stale server prop)
-      fetchSection();
+      fetchSection(FormsSection.InProgress);
     }
-  }, [inProgressFolder]);
+  }, [inProgressFolder, fetchSubfolder, fetchSection]);
 
   return (
     <FormsGrid

@@ -35,7 +35,7 @@ class FormsListStore {
   items: TFile[] = [];
   folders: TFolder[] = [];
   total: number = 0;
-  isLoading: boolean = false;
+  isLoading: boolean = true;
 
   constructor() {
     makeAutoObservable(this);

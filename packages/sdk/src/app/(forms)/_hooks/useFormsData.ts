@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
 import api from "@docspace/shared/api";
@@ -81,6 +81,13 @@ export default function useFormsData() {
   const doneFolderIdRef = useRef<number | null>(null);
   const inProgressFolderIdRef = useRef<number | null>(null);
 
+  useEffect(() => {
+    return () => {
+      abortRef.current?.abort();
+      fetchMoreAbortRef.current?.abort();
+    };
+  }, []);
+
   const getFolderId = useCallback(
     (section?: FormsSection) => {
       const sec = section ?? activeSection;
@@ -89,15 +96,23 @@ export default function useFormsData() {
           return formsSettingsStore.roomId;
         case FormsSection.InProgress:
           return (
-            inProgressFolder?.id ?? inProgressFolderIdRef.current ?? ""
+            inProgressFolder?.id ??
+            formsSettingsStore.inProgressFolderId ??
+            inProgressFolderIdRef.current ??
+            ""
           );
         case FormsSection.CompletedForms:
-          return completedFolder?.id ?? doneFolderIdRef.current ?? "";
+          return (
+            completedFolder?.id ??
+            aiStore.doneFolderId ??
+            doneFolderIdRef.current ??
+            ""
+          );
         default:
           return formsSettingsStore.roomId;
       }
     },
-    [pathname, formsSettingsStore, completedFolder, inProgressFolder],
+    [pathname, formsSettingsStore, completedFolder, inProgressFolder, aiStore],
   );
 
   const fetchVirtualFolders = useCallback(
@@ -109,32 +124,48 @@ export default function useFormsData() {
       const roomId = formsSettingsStore.roomId;
       if (!roomId) return;
 
-      const roomFilter = FilesFilter.getDefault();
-      roomFilter.page = 0;
-      roomFilter.pageCount = PAGE_COUNT;
+      // Use cached virtual folder IDs when available to skip room fetch
+      const cachedId =
+        virtualFolderType === FolderType.Done
+          ? aiStore.doneFolderId
+          : virtualFolderType === FolderType.InProgress
+            ? formsSettingsStore.inProgressFolderId
+            : undefined;
 
-      const roomRes = await api.files.getFolder(
-        roomId,
-        roomFilter,
-        signal,
-      );
+      let virtualFolderId = cachedId ?? undefined;
 
-      if (signal.aborted) return;
+      if (!virtualFolderId) {
+        const roomFilter = FilesFilter.getDefault();
+        roomFilter.page = 0;
+        roomFilter.pageCount = PAGE_COUNT;
 
-      const virtualFolder = roomRes.folders.find(
-        (f) => f.type === virtualFolderType,
-      );
+        const roomRes = await api.files.getFolder(
+          roomId,
+          roomFilter,
+          signal,
+        );
 
-      if (!virtualFolder) {
-        formsListStore.setFolders([]);
-        formsListStore.setItems([], 0);
-        return;
-      }
+        if (signal.aborted) return;
 
-      folderIdRef.current = virtualFolder.id;
+        const virtualFolder = roomRes.folders.find(
+          (f) => f.type === virtualFolderType,
+        );
 
-      if (virtualFolderType === FolderType.Done) {
-        aiStore.setDoneFolderId(virtualFolder.id);
+        if (!virtualFolder) {
+          formsListStore.setFolders([]);
+          formsListStore.setItems([], 0);
+          return;
+        }
+
+        virtualFolderId = virtualFolder.id;
+        folderIdRef.current = virtualFolder.id;
+
+        if (virtualFolderType === FolderType.Done) {
+          aiStore.setDoneFolderId(virtualFolder.id);
+        }
+        if (virtualFolderType === FolderType.InProgress) {
+          formsSettingsStore.setInProgressFolderId(virtualFolder.id);
+        }
       }
 
       const filter = FilesFilter.getDefault();
@@ -142,7 +173,7 @@ export default function useFormsData() {
       filter.pageCount = PAGE_COUNT;
 
       const res = await api.files.getFolder(
-        virtualFolder.id,
+        virtualFolderId,
         filter,
         signal,
       );
@@ -157,24 +188,31 @@ export default function useFormsData() {
 
   const fetchSubfolder = useCallback(
     async (folderId: number, signal: AbortSignal) => {
-      const filter = FilesFilter.getDefault();
-      filter.page = 0;
-      filter.pageCount = PAGE_COUNT;
-      filter.filterType = FilterType.PDFForm;
+      formsListStore.setIsLoading(true);
+      try {
+        const filter = FilesFilter.getDefault();
+        filter.page = 0;
+        filter.pageCount = PAGE_COUNT;
+        filter.filterType = FilterType.PDFForm;
 
-      const res = await api.files.getFolder(folderId, filter, signal);
+        const res = await api.files.getFolder(folderId, filter, signal);
 
-      if (signal.aborted) return;
+        if (signal.aborted) return;
 
-      const files = res.files;
-      apiExhausted.current = res.files.length < PAGE_COUNT;
-      const total = apiExhausted.current
-        ? files.length
-        : files.length + 1;
-      formsListStore.setFolders([]);
-      formsListStore.setItems(files, total);
-      currentPage.current = 0;
-      requestThumbnails(files);
+        const files = res.files;
+        apiExhausted.current = res.files.length < PAGE_COUNT;
+        const total = apiExhausted.current
+          ? files.length
+          : files.length + 1;
+        formsListStore.setFolders([]);
+        formsListStore.setItems(files, total);
+        currentPage.current = 0;
+        requestThumbnails(files);
+      } finally {
+        if (!signal.aborted) {
+          formsListStore.setIsLoading(false);
+        }
+      }
     },
     [formsListStore],
   );

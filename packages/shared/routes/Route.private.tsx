@@ -272,7 +272,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         return <Navigate replace to="/management/bonus" />;
       if (isBonusPageUnavailable)
         return <Navigate replace to="/management/payments" />;
-      console.log("here");
       return children;
     }
 

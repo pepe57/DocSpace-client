@@ -26,9 +26,10 @@
 
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 import type {
+  TFile,
   TFilesSettings,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
@@ -43,6 +44,7 @@ import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsUserStore } from "../_store/FormsUserStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
+import { useFormsListStore } from "../_store/FormsListStore";
 
 export type CommonData = {
   roomId: string | number;
@@ -54,17 +56,27 @@ export type CommonData = {
   roomAccess?: ShareAccessRights;
   saveFormAsXLSX?: boolean;
   sendFormToExternalDB?: boolean;
+  doneFolderId?: number;
+  inProgressFolderId?: number;
+  initialFiles?: TFile[];
+  initialTotal?: number;
 };
 
-export default function useInitCommonStores(commonData: CommonData) {
+export default function useInitCommonStores(commonData: CommonData): boolean {
   const formsSettingsStore = useFormsSettingsStore();
   const formsUserStore = useFormsUserStore();
   const formsAiAgentStore = useFormsAiAgentStore();
   const formsDbSettingsStore = useFormsDbSettingsStore();
+  const formsListStore = useFormsListStore();
   const filesSettingsStore = useFilesSettingsStore();
   const settingsStore = useSettingsStore();
+  const [isReady, setIsReady] = useState(false);
 
-  useEffect(() => {
+  // useLayoutEffect runs synchronously BEFORE child useEffects, guaranteeing
+  // that MobX stores are populated before page components check them.
+  // This is critical: React fires child effects before parent effects,
+  // so a regular useEffect here would run AFTER MyFormsPage's mount effect.
+  useLayoutEffect(() => {
     formsSettingsStore.setConfig({
       roomId: commonData.roomId,
       requestToken: "",
@@ -91,6 +103,30 @@ export default function useInitCommonStores(commonData: CommonData) {
       formsAiAgentStore.setDefaultProvider(commonData.defaultProvider);
     }
 
+    // Pre-cache virtual folder IDs so pages don't need extra SSR fetches
+    if (commonData.doneFolderId) {
+      formsAiAgentStore.setDoneFolderId(commonData.doneFolderId);
+    }
+    if (commonData.inProgressFolderId) {
+      formsSettingsStore.setInProgressFolderId(commonData.inProgressFolderId);
+    }
+
+    // Hydrate initial my-forms file list from layout SSR (first load only)
+    if (commonData.initialFiles) {
+      const roomId = Number(commonData.roomId);
+      const files = roomId
+        ? commonData.initialFiles.filter((f) => f.folderId === roomId)
+        : commonData.initialFiles;
+      formsListStore.setItems(files, commonData.initialTotal ?? files.length);
+      formsListStore.setFolders([]);
+      formsListStore.setIsLoading(false);
+    }
+
+    setIsReady(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- init once on mount; commonData is stable server-provided object
+  }, []);
+
+  useEffect(() => {
     if (!window.ClientConfig) {
       window.ClientConfig = {} as NonNullable<typeof window.ClientConfig>;
     }
@@ -107,4 +143,6 @@ export default function useInitCommonStores(commonData: CommonData) {
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps -- init once on mount; commonData is stable server-provided object
   }, []);
+
+  return isReady;
 }

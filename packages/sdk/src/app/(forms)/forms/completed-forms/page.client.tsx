@@ -29,7 +29,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-import type { TFolder } from "@docspace/shared/api/files/types";
+import { FormsSection } from "@/types/forms";
 
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
@@ -38,40 +38,28 @@ import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import useFormsData from "../../_hooks/useFormsData";
 import FormsGrid from "../../_components/forms-grid";
 
-type CompletedPageProps = {
-  folders: TFolder[];
-  virtualFolderId?: number;
-};
-
-const CompletedPage = ({ folders, virtualFolderId }: CompletedPageProps) => {
+const CompletedPage = () => {
   const formsListStore = useFormsListStore();
   const formsSettingsStore = useFormsSettingsStore();
   const { hasManagementAccess } = formsSettingsStore;
-  const { completedFolder, goBackToCompletedRoot } =
+  const { editingFile, completedFolder, goBackToCompletedRoot } =
     useFormsNavigationStore();
   const aiStore = useFormsAiAgentStore();
   const { fetchSection, fetchMore, fetchSubfolder } = useFormsData();
 
-  // Initialize: set doneFolderId and show root folders (skip if subfolder pre-set)
+  // Initialize: fetch completed-forms root (skip if subfolder pre-set)
   React.useEffect(() => {
-    if (virtualFolderId) {
-      aiStore.setDoneFolderId(virtualFolderId);
-    }
-
-    // If completedFolder is pre-set (from handleFormCompleted), skip root init —
-    // the subfolder effect below will load the correct data
     if (!completedFolder) {
-      formsListStore.reset();
-      formsListStore.setFolders(folders);
-      formsListStore.setItems([], 0);
+      fetchSection(FormsSection.CompletedForms);
     }
-  }, [folders, virtualFolderId]);
+  }, []);
 
   // Trap the browser Back button while inside a subfolder so that pressing
   // Back returns to the completed-forms root instead of exiting the section
   // entirely (EC10). Mirrors the useEditorGuard pattern.
+  // Disabled while editor is open — useEditorGuard handles Back during editing.
   React.useEffect(() => {
-    if (!completedFolder) return;
+    if (!completedFolder || editingFile) return;
 
     const handlePopState = () => {
       history.pushState(null, "", window.location.href);
@@ -84,12 +72,14 @@ const CompletedPage = ({ folders, virtualFolderId }: CompletedPageProps) => {
     return () => {
       window.removeEventListener("popstate", handlePopState);
     };
-  }, [completedFolder, goBackToCompletedRoot]);
+  }, [completedFolder, editingFile, goBackToCompletedRoot]);
 
   // Fetch subfolder files + AI agent setup when entering a completed folder
   // Use SENTINEL so pre-set completedFolder on mount is detected as "new"
   const UNSET = React.useRef({});
-  const prevCompletedFolder = React.useRef<typeof completedFolder | object>(UNSET.current);
+  const prevCompletedFolder = React.useRef<typeof completedFolder | object>(
+    UNSET.current,
+  );
   const fetchIdRef = React.useRef(0);
   React.useEffect(() => {
     const prev = prevCompletedFolder.current;
@@ -102,7 +92,11 @@ const CompletedPage = ({ folders, virtualFolderId }: CompletedPageProps) => {
       (async () => {
         try {
           await fetchSubfolder(completedFolder.id, controller.signal);
-          if (controller.signal.aborted || currentFetchId !== fetchIdRef.current) return;
+          if (
+            controller.signal.aborted ||
+            currentFetchId !== fetchIdRef.current
+          )
+            return;
 
           if (hasManagementAccess) {
             await aiStore.setCurrentFolder(completedFolder.id);
@@ -144,13 +138,20 @@ const CompletedPage = ({ folders, virtualFolderId }: CompletedPageProps) => {
 
     if (!completedFolder && prev && prev !== UNSET.current) {
       // Fetch fresh virtual folder list (not stale server prop)
-      fetchSection();
+      fetchSection(FormsSection.CompletedForms);
 
       if (hasManagementAccess) {
         aiStore.setCurrentFolder(null);
       }
     }
-  }, [completedFolder, folders]);
+  }, [
+    completedFolder,
+    fetchSubfolder,
+    fetchSection,
+    hasManagementAccess,
+    aiStore,
+    formsListStore,
+  ]);
 
   return (
     <FormsGrid
