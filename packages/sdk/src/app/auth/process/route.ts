@@ -51,7 +51,19 @@ export async function GET(request: NextRequest) {
     }
 
     const data = await res.json();
-    const { userId, docSpaceToken } = data;
+    const { userId, docSpaceToken, docSpaceUrl } = data;
+
+    if (docSpaceUrl && redirectUrl) {
+      const serverOrigin = new URL(redirectUrl).origin;
+      const callbackOrigin = new URL(docSpaceUrl).origin;
+
+      if (serverOrigin !== callbackOrigin) {
+        return NextResponse.json(
+          { error: "docSpaceUrl origin mismatch" },
+          { status: 403 },
+        );
+      }
+    }
 
     if (!docSpaceToken) {
       return NextResponse.json(
@@ -78,3 +90,4 @@ export async function GET(request: NextRequest) {
     );
   }
 }
+

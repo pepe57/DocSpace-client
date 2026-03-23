@@ -48,3 +48,4 @@ export default async function AuthPage({
 
   return <AuthClient callback={callback} redirectUrl={redirectUrl} />;
 }
+

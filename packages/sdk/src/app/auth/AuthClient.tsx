@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 export default function AuthClient({
@@ -36,18 +36,41 @@ export default function AuthClient({
   callback: string;
   redirectUrl: string | null;
 }) {
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     const processParams = new URLSearchParams({ callback });
     if (redirectUrl) processParams.set("redirectUrl", redirectUrl);
 
     fetch(`/sdk/auth/process?${processParams}`)
-      .then((res) => res.json())
+      .then((res) => {
+        return res.json();
+      })
       .then((data) => {
         if (data.redirectUrl) {
           window.location.href = data.redirectUrl;
         }
+      })
+      .catch((err: unknown) => {
+        setError(err instanceof Error ? err.message : "Authentication failed");
       });
   }, [callback, redirectUrl]);
+
+  if (error) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        {error}
+      </div>
+    );
+  }
 
   return (
     <div
@@ -63,3 +86,4 @@ export default function AuthClient({
     </div>
   );
 }
+
