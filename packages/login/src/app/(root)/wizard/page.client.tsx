@@ -199,7 +199,7 @@ function WizardForm(props: WizardFormProps) {
   const onTimezoneSelect = (timezone: TOption) => {
     setSelectedTimezone({
       key: timezone.key,
-      label: timezone.label ?? "",
+      label: (timezone.label as string) ?? "",
     });
     setTimezoneForUnauthorized(timezone.key.toString());
   };
@@ -561,3 +561,4 @@ function WizardForm(props: WizardFormProps) {
 }
 
 export default WizardForm;
+

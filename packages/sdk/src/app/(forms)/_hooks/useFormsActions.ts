@@ -46,6 +46,7 @@ import type { EditorAction } from "../_store/FormsNavigationStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
+import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import useFormsData from "./useFormsData";
@@ -55,6 +56,7 @@ type UseFormsActionsProps = { t: TTranslation };
 export default function useFormsActions({ t }: UseFormsActionsProps) {
   const { sdkConfig } = useSDKConfig();
   const { openEditor } = useFormsNavigationStore();
+  const { closePanel } = useFormsAiAgentStore();
   const formsListStore = useFormsListStore();
   const { fetchSection } = useFormsData();
 
@@ -68,9 +70,10 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         return;
       }
 
+      closePanel();
       openEditor(file, action);
     },
-    [sdkConfig?.events?.onFileManagerClick, openEditor],
+    [sdkConfig?.events?.onFileManagerClick, closePanel, openEditor],
   );
 
   const downloadFile = useCallback(
