@@ -24,47 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { PropsWithChildren } from "react";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import AuthClient from "./AuthClient";
 
-import type { AuthStore } from "../store/AuthStore";
-import type { UserStore } from "../store/UserStore";
-import type { SettingsStore } from "../store/SettingsStore";
-import type { CurrentTariffStatusStore } from "../store/CurrentTariffStatusStore";
+export default async function AuthPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ callback?: string; redirectUrl?: string }>;
+}) {
+  const { callback, redirectUrl = null } = await searchParams;
 
-export interface PrivateRouteProps
-  extends PropsWithChildren,
-    Pick<AuthStore, "isAuthenticated" | "isLoaded" | "isAdmin" | "isLogout">,
-    Pick<
-      SettingsStore,
-      | "wizardCompleted"
-      | "tenantStatus"
-      | "isPortalDeactivate"
-      | "enablePortalRename"
-      | "limitedAccessSpace"
-      | "baseDomain"
-      | "displayAbout"
-      | "limitedAccessDevToolsForUsers"
-      | "aiServicesEnabled"
-    >,
-    Pick<CurrentTariffStatusStore, "isNotPaidPeriod">,
-    Pick<UserStore, "user"> {
-  restricted?: boolean;
-  withManager?: boolean;
-  withCollaborator?: boolean;
-  identityServerEnabled?: boolean;
-  isCommunity?: boolean;
-  isEnterprise?: boolean;
-  standalone: boolean;
-  requireAIServices?: boolean;
+  if (!callback) {
+    return <div>Missing callback parameter</div>;
+  }
+
+  const cookieStore = await cookies();
+  const hasAuth = !!cookieStore.get("asc_auth_key");
+
+  if (hasAuth && redirectUrl) {
+    redirect(redirectUrl);
+  }
+
+  return <AuthClient callback={callback} redirectUrl={redirectUrl} />;
 }
 
-export interface PublicRouteProps
-  extends PropsWithChildren,
-    Pick<AuthStore, "isAuthenticated">,
-    Pick<
-      SettingsStore,
-      | "wizardCompleted"
-      | "tenantStatus"
-      | "isPortalDeactivate"
-      | "isFirstLoaded"
-    > {}

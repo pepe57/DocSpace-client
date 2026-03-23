@@ -38,13 +38,11 @@ import type {
 
 type TFormsConfig = {
   roomId: string | number;
-  requestToken: string;
   socketUrl?: string;
 };
 
 class FormsSettingsStore {
   roomId: string | number = "";
-  requestToken: string = "";
   socketUrl: string = "";
   filesSettings: TFilesSettings | null = null;
   folderSecurity: TFolderSecurity | null = null;
@@ -56,7 +54,6 @@ class FormsSettingsStore {
 
   setConfig = (config: TFormsConfig) => {
     this.roomId = config.roomId;
-    this.requestToken = config.requestToken;
     this.socketUrl = config.socketUrl ?? "";
   };
 

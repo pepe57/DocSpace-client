@@ -47,7 +47,6 @@ import useFormsActions from "../../_hooks/useFormsActions";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
-import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import FormStatusBadge from "./FormStatusBadge";
 import styles from "./FormsTile.module.scss";
 
@@ -64,8 +63,6 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
   const { getContextMenuModel } = useFormsContextMenu();
   const { items } = useFormsListStore();
   const { activeSection } = useFormsNavigationStore();
-  const { requestToken } = useFormsSettingsStore();
-
   const [blobThumbnail, setBlobThumbnail] = useState("");
   const loadedUrlRef = useRef("");
 
@@ -76,13 +73,8 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
 
     if (loadedUrlRef.current === url) return;
 
-    const headers: Record<string, string> = {};
-    if (requestToken) {
-      headers.Authorization = requestToken;
-    }
-
     let cancelled = false;
-    fetch(url, { headers, credentials: "include" })
+    fetch(url, { credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error(`${res.status}`);
         return res.blob();
@@ -100,7 +92,7 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
     return () => {
       cancelled = true;
     };
-  }, [item.thumbnailUrl, item.providerItem, requestToken]);
+  }, [item.thumbnailUrl, item.providerItem]);
 
   useEffect(() => {
     return () => {
