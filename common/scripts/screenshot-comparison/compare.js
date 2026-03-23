@@ -25,154 +25,479 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /**
- * Screenshot Comparison Tool
+ * Interactive Screenshot Comparison Tool
  *
- * Compares a design image against a live page screenshot and highlights differences.
+ * Opens a Playwright browser with a control panel and an iframe where you can
+ * navigate DocSpace, open modals / panels / tooltips, load a Figma design via
+ * drag-and-drop, select a comparison area, and see the pixel-diff result
+ * right inside the browser.
  *
  * Before using this script:
  * 1. Install dependencies:  npm install && npx playwright install chromium
- * 2. Copy .env.example to .env and fill in your values:
- *    - ASC_AUTH_KEY  — auth cookie
- *    - TARGET_URL    — full URL of the page to compare
- *    - BANNER_KEYS   — (optional) JSON array of banner keys to suppress
- * 3. Export the frame from Figma and place it into the ./images/ folder as design.png.
- * 4. Run:  npm run compare
+ * 2. Run:  npm run compare
+ *
+ * No .env or configuration is needed — everything is done interactively.
  *
  * Output files (saved to ./images/):
- *   - page.png  — screenshot of the live page
+ *   - page.png  — screenshot of the captured area
  *   - diff.png  — visual diff highlighting mismatched pixels
  */
 
 const path = require("path");
-
-require("dotenv").config({ path: path.resolve(__dirname, ".env") });
-
-const { chromium } = require("playwright");
+const http = require("http");
 const fs = require("fs");
+const { chromium } = require("playwright");
 const pixelmatch = require("pixelmatch").default;
 const PNG = require("pngjs").PNG;
 
 const IMAGES_DIR = path.resolve(__dirname, "images");
+const UI_PATH = path.resolve(__dirname, "ui.html");
 
-const ASC_AUTH_KEY = process.env.ASC_AUTH_KEY;
-const TARGET_URL = process.env.TARGET_URL;
-const DEFAULT_BANNER_KEYS = ["user-quota-limit", "confirm-email", "Docs_9_3"];
-const BANNER_KEYS = process.env.BANNER_KEYS
-  ? JSON.parse(process.env.BANNER_KEYS)
-  : DEFAULT_BANNER_KEYS;
+// ───────────────────── helpers ─────────────────────
 
-function validateConfig() {
-  if (!ASC_AUTH_KEY) {
-    console.log("ASC_AUTH_KEY is not set!");
-    console.log("Copy .env.example to .env and fill in your auth cookie.\n");
-    process.exit(1);
+/**
+ * Resize a PNG image to the target dimensions using bilinear interpolation.
+ * Returns a new PNG object with the resized data.
+ */
+function resizeImage(src, targetW, targetH) {
+  const dst = new PNG({ width: targetW, height: targetH });
+  const srcW = src.width;
+  const srcH = src.height;
+  const xRatio = srcW / targetW;
+  const yRatio = srcH / targetH;
+
+  for (let y = 0; y < targetH; y++) {
+    const srcY = y * yRatio;
+    const y0 = Math.floor(srcY);
+    const y1 = Math.min(y0 + 1, srcH - 1);
+    const yLerp = srcY - y0;
+
+    for (let x = 0; x < targetW; x++) {
+      const srcX = x * xRatio;
+      const x0 = Math.floor(srcX);
+      const x1 = Math.min(x0 + 1, srcW - 1);
+      const xLerp = srcX - x0;
+
+      const i00 = (y0 * srcW + x0) * 4;
+      const i10 = (y0 * srcW + x1) * 4;
+      const i01 = (y1 * srcW + x0) * 4;
+      const i11 = (y1 * srcW + x1) * 4;
+      const di = (y * targetW + x) * 4;
+
+      for (let c = 0; c < 4; c++) {
+        const top = src.data[i00 + c] * (1 - xLerp) + src.data[i10 + c] * xLerp;
+        const bot = src.data[i01 + c] * (1 - xLerp) + src.data[i11 + c] * xLerp;
+        dst.data[di + c] = Math.round(top * (1 - yLerp) + bot * yLerp);
+      }
+    }
   }
 
-  if (!TARGET_URL) {
-    console.log("TARGET_URL is not set!");
-    console.log("Copy .env.example to .env and fill in your values.\n");
-    process.exit(1);
-  }
-
-  const designPath = path.join(IMAGES_DIR, "design.png");
-  if (!fs.existsSync(designPath)) {
-    console.log("File images/design.png not found!");
-    process.exit(1);
-  }
+  return dst;
 }
 
+/**
+ * Scale an image proportionally to cover the target size, then crop to fit.
+ * Preserves aspect ratio — no stretching / distortion.
+ * Crops from top-left (natural alignment for web pages).
+ */
+function fitAndCrop(src, targetW, targetH) {
+  const scaleX = targetW / src.width;
+  const scaleY = targetH / src.height;
+  const scale = Math.max(scaleX, scaleY);
+
+  const scaledW = Math.round(src.width * scale);
+  const scaledH = Math.round(src.height * scale);
+
+  const scaled = resizeImage(src, scaledW, scaledH);
+
+  // Crop: horizontally from center, vertically from top
+  const cropX = Math.floor((scaledW - targetW) / 2);
+  const cropY = 0;
+
+  const out = new PNG({ width: targetW, height: targetH });
+
+  for (let y = 0; y < targetH; y++) {
+    for (let x = 0; x < targetW; x++) {
+      const si = ((y + cropY) * scaledW + (x + cropX)) * 4;
+      const di = (y * targetW + x) * 4;
+      out.data[di] = scaled.data[si];
+      out.data[di + 1] = scaled.data[si + 1];
+      out.data[di + 2] = scaled.data[si + 2];
+      out.data[di + 3] = scaled.data[si + 3];
+    }
+  }
+
+  return out;
+}
+
+/**
+ * Blend two images with 50 % opacity to produce an "overlap" view.
+ * Both images must have identical dimensions.
+ */
+function createOverlapImage(imgA, imgB, width, height) {
+  const out = new PNG({ width, height });
+
+  for (let i = 0; i < imgA.data.length; i += 4) {
+    out.data[i] = (imgA.data[i] + imgB.data[i]) >> 1;
+    out.data[i + 1] = (imgA.data[i + 1] + imgB.data[i + 1]) >> 1;
+    out.data[i + 2] = (imgA.data[i + 2] + imgB.data[i + 2]) >> 1;
+    out.data[i + 3] = 255;
+  }
+
+  return PNG.sync.write(out);
+}
+
+// ───────────────────── main ────────────────────────
+
 async function run() {
-  console.log("Starting screenshot comparison...\n");
+  if (!fs.existsSync(IMAGES_DIR)) {
+    fs.mkdirSync(IMAGES_DIR, { recursive: true });
+  }
 
-  validateConfig();
+  if (!fs.existsSync(UI_PATH)) {
+    console.error("ui.html not found next to compare.js");
+    process.exit(1);
+  }
 
-  const designPath = path.join(IMAGES_DIR, "design.png");
-  const pagePath = path.join(IMAGES_DIR, "page.png");
-  const diffPath = path.join(IMAGES_DIR, "diff.png");
-
-  // Read dimensions from design.png
-  const designImage = PNG.sync.read(fs.readFileSync(designPath));
-  const { width, height } = designImage;
-  console.log(`Size of design.png: ${width}x${height}`);
-
-  const browser = await chromium.launch();
-  const context = await browser.newContext({
-    viewport: { width, height },
+  // Serve ui.html on a local port
+  const server = http.createServer((req, res) => {
+    if (req.url === "/") {
+      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+      res.end(fs.readFileSync(UI_PATH, "utf-8"));
+    } else {
+      res.writeHead(404);
+      res.end("Not found");
+    }
   });
 
-  // Extract domain from TARGET_URL for cookie
-  const urlObj = new URL(TARGET_URL);
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  const port = server.address().port;
+  const uiUrl = `http://127.0.0.1:${port}`;
 
-  await context.addCookies([
-    {
-      name: "asc_auth_key",
-      value: ASC_AUTH_KEY,
-      domain: urlObj.hostname,
-      path: "/",
-      httpOnly: true,
-      secure: urlObj.protocol === "https:",
-    },
-  ]);
+  console.log("Launching browser...\n");
+
+  const browser = await chromium.launch({
+    headless: false,
+    args: [
+      "--start-maximized",
+      "--disable-web-security",
+      "--disable-features=IsolateOrigins,site-per-process",
+    ],
+  });
+
+  const context = await browser.newContext({
+    viewport: null,
+  });
+
+  // Strip X-Frame-Options / CSP so DocSpace loads inside the iframe
+  await context.route("**/*", async (route) => {
+    try {
+      const response = await route.fetch();
+      const headers = { ...response.headers() };
+      delete headers["x-frame-options"];
+      delete headers["content-security-policy"];
+      delete headers["content-security-policy-report-only"];
+      await route.fulfill({ response, headers });
+    } catch {
+      await route.continue();
+    }
+  });
 
   const page = await context.newPage();
 
-  // First open the page to set localStorage
-  await page.goto(TARGET_URL, { waitUntil: "domcontentloaded" });
+  // Forward browser console.error to the Node terminal
+  page.on("console", (msg) => {
+    if (msg.type() === "error") {
+      console.error("[browser]", msg.text());
+    }
+  });
 
-  // Set localStorage to hide banners
-  await page.evaluate((keys) => {
-    localStorage.setItem("barClose", JSON.stringify(keys));
-  }, BANNER_KEYS);
+  // ── Expose: save design file to images/design.png ──
 
-  try {
-    await page.goto(TARGET_URL, { waitUntil: "networkidle" });
-  } catch (err) {
-    console.log("Failed to open the page");
-    console.log("Make sure the server is running and TARGET_URL is correct.\n");
-    await browser.close();
-    process.exit(1);
-  }
+  await page.exposeFunction("__saveDesign", async (designBase64) => {
+    try {
+      const buffer = Buffer.from(designBase64, "base64");
+      const designPath = path.join(IMAGES_DIR, "design.png");
+      fs.writeFileSync(designPath, buffer);
+      console.log("Design saved to images/design.png");
+      return JSON.stringify({ success: true });
+    } catch (err) {
+      console.error("Failed to save design:", err.message);
+      return JSON.stringify({ error: err.message });
+    }
+  });
 
-  await page.screenshot({ path: pagePath });
-  await browser.close();
+  // ── Expose: take a screenshot ──
+  // Mode A (no clip): separate context with exact viewport — for full-page comparison
+  // Mode B (with clip): direct iframe screenshot — for modals, tooltips, panels
 
-  const img2 = PNG.sync.read(fs.readFileSync(pagePath));
+  await page.exposeFunction("__takeScreenshot", async (argsJSON) => {
+    const args = argsJSON ? JSON.parse(argsJSON) : {};
+    const clip = args.clip || null;
+    const designW = args.designWidth || null;
+    const designH = args.designHeight || null;
 
-  const diff = new PNG({ width, height });
+    // ─── Mode B: direct iframe screenshot (Select Area — captures modals) ───
 
-  const diffPixels = pixelmatch(
-    designImage.data,
-    img2.data,
-    diff.data,
-    width,
-    height,
-    { threshold: 0.1 },
+    if (clip) {
+      const iframeEl = await page.$("#docspace-iframe");
+      if (!iframeEl) {
+        return JSON.stringify({ error: "Iframe element not found" });
+      }
+
+      const box = await iframeEl.boundingBox();
+      if (!box) {
+        return JSON.stringify({ error: "Cannot determine iframe position" });
+      }
+
+      const dpr = await page.evaluate(() => window.devicePixelRatio || 1);
+
+      // Hide UI overlays while screenshotting
+      await page.evaluate(() => {
+        const panel = document.getElementById("comparison-panel");
+        const overlay = document.getElementById("selection-overlay");
+        const selBox = document.getElementById("selection-box");
+        const resultPanel = document.getElementById("result-panel");
+        if (panel) panel.style.visibility = "hidden";
+        if (overlay) overlay.style.display = "none";
+        if (selBox) selBox.style.display = "none";
+        if (resultPanel) resultPanel.style.visibility = "hidden";
+      });
+
+      await page.waitForTimeout(60);
+
+      const screenshotClip = {
+        x: box.x + clip.x,
+        y: box.y + clip.y,
+        width: clip.width,
+        height: clip.height,
+      };
+
+      const rawBuffer = await page.screenshot({ clip: screenshotClip });
+
+      // Restore UI
+      await page.evaluate(() => {
+        const panel = document.getElementById("comparison-panel");
+        const resultPanel = document.getElementById("result-panel");
+        if (panel) panel.style.visibility = "visible";
+        if (resultPanel) resultPanel.style.visibility = "visible";
+      });
+
+      // Normalize to 1x if on a HiDPI / Retina display
+      let finalBuffer = rawBuffer;
+      let outW = Math.round(clip.width);
+      let outH = Math.round(clip.height);
+
+      if (dpr > 1) {
+        const rawImg = PNG.sync.read(rawBuffer);
+        const targetW = Math.round(rawImg.width / dpr);
+        const targetH = Math.round(rawImg.height / dpr);
+        console.log(
+          `DPR=${dpr}: normalizing ${rawImg.width}×${rawImg.height} → ${targetW}×${targetH}`,
+        );
+        const resized = resizeImage(rawImg, targetW, targetH);
+        finalBuffer = PNG.sync.write(resized);
+        outW = targetW;
+        outH = targetH;
+      }
+
+      const pagePath = path.join(IMAGES_DIR, "page.png");
+      fs.writeFileSync(pagePath, finalBuffer);
+
+      return JSON.stringify({
+        base64: finalBuffer.toString("base64"),
+        width: outW,
+        height: outH,
+      });
+    }
+
+    // ─── Mode A: CDP viewport override (captures current state incl. modals) ───
+
+    if (!designW || !designH) {
+      return JSON.stringify({ error: "Design dimensions are required" });
+    }
+
+    const PANEL_H = 48;
+    const vpW = designW;
+    const vpH = designH + PANEL_H;
+
+    console.log(`CDP override: ${vpW}×${vpH} (design ${designW}×${designH})`);
+
+    const cdp = await page.context().newCDPSession(page);
+
+    try {
+      // Override viewport via CDP (bypasses Playwright viewport state)
+      await cdp.send("Emulation.setDeviceMetricsOverride", {
+        width: vpW,
+        height: vpH,
+        deviceScaleFactor: 1,
+        mobile: false,
+      });
+
+      // Hide UI overlays
+      await page.evaluate(() => {
+        const panel = document.getElementById("comparison-panel");
+        const overlay = document.getElementById("selection-overlay");
+        const selBox = document.getElementById("selection-box");
+        const resultPanel = document.getElementById("result-panel");
+        if (panel) panel.style.visibility = "hidden";
+        if (overlay) overlay.style.display = "none";
+        if (selBox) selBox.style.display = "none";
+        if (resultPanel) resultPanel.style.visibility = "hidden";
+      });
+
+      // Wait for page to re-layout at the new viewport
+      await page.waitForTimeout(800);
+
+      // Get iframe bounds at the new viewport size
+      const iframeBox = await page.evaluate(() => {
+        const iframe = document.getElementById("docspace-iframe");
+        if (!iframe) return null;
+        const rect = iframe.getBoundingClientRect();
+        return {
+          x: rect.x,
+          y: rect.y,
+          width: rect.width,
+          height: rect.height,
+        };
+      });
+
+      if (!iframeBox) {
+        return JSON.stringify({ error: "Iframe element not found" });
+      }
+
+      // Take screenshot via CDP with clip to iframe area
+      const { data } = await cdp.send("Page.captureScreenshot", {
+        format: "png",
+        clip: {
+          x: iframeBox.x,
+          y: iframeBox.y,
+          width: iframeBox.width,
+          height: iframeBox.height,
+          scale: 1,
+        },
+      });
+
+      const buffer = Buffer.from(data, "base64");
+      const img = PNG.sync.read(buffer);
+
+      console.log(`Screenshot saved: ${img.width}×${img.height}`);
+
+      const pagePath = path.join(IMAGES_DIR, "page.png");
+      fs.writeFileSync(pagePath, buffer);
+
+      return JSON.stringify({
+        base64: data,
+        width: img.width,
+        height: img.height,
+      });
+    } catch (err) {
+      return JSON.stringify({ error: "Screenshot failed: " + err.message });
+    } finally {
+      // Clear viewport override — restore natural window-following behavior
+      await cdp.send("Emulation.clearDeviceMetricsOverride");
+
+      // Restore UI
+      await page.evaluate(() => {
+        const panel = document.getElementById("comparison-panel");
+        const resultPanel = document.getElementById("result-panel");
+        if (panel) panel.style.visibility = "visible";
+        if (resultPanel) resultPanel.style.visibility = "visible";
+      });
+
+      // Force full reflow so page re-renders at actual window size
+      await page.evaluate(() => {
+        document.documentElement.style.display = "none";
+        void document.documentElement.offsetHeight;
+        document.documentElement.style.display = "";
+      });
+
+      await cdp.detach();
+    }
+  });
+
+  // ── Expose: run pixelmatch comparison ──
+
+  await page.exposeFunction(
+    "__runComparison",
+    async (designBase64, screenshotBase64) => {
+      const designImg = PNG.sync.read(Buffer.from(designBase64, "base64"));
+      let pageImg = PNG.sync.read(Buffer.from(screenshotBase64, "base64"));
+
+      let resizedFrom = null;
+
+      if (
+        designImg.width !== pageImg.width ||
+        designImg.height !== pageImg.height
+      ) {
+        resizedFrom = `${pageImg.width}×${pageImg.height}`;
+        console.log(
+          `Auto-fit: screenshot ${resizedFrom} → ${designImg.width}×${designImg.height} (scale + crop)`,
+        );
+        pageImg = fitAndCrop(pageImg, designImg.width, designImg.height);
+      }
+
+      const { width, height } = designImg;
+      const diff = new PNG({ width, height });
+
+      const diffPixels = pixelmatch(
+        designImg.data,
+        pageImg.data,
+        diff.data,
+        width,
+        height,
+        { threshold: 0.1 },
+      );
+
+      const diffBuffer = PNG.sync.write(diff);
+      fs.writeFileSync(path.join(IMAGES_DIR, "diff.png"), diffBuffer);
+
+      const overlapBuffer = createOverlapImage(
+        designImg,
+        pageImg,
+        width,
+        height,
+      );
+
+      const totalPixels = width * height;
+      const diffPercent = ((diffPixels / totalPixels) * 100).toFixed(2);
+
+      console.log(
+        `Comparison: ${width}×${height}, diff ${diffPercent}% (${diffPixels.toLocaleString()} px)`,
+      );
+
+      return JSON.stringify({
+        diffBase64: diffBuffer.toString("base64"),
+        overlapBase64: overlapBuffer.toString("base64"),
+        width,
+        height,
+        totalPixels,
+        diffPixels,
+        diffPercent,
+        resizedFrom,
+      });
+    },
   );
 
-  fs.writeFileSync(diffPath, PNG.sync.write(diff));
+  // ── Open the UI ──
 
-  const totalPixels = width * height;
-  const diffPercent = ((diffPixels / totalPixels) * 100).toFixed(2);
+  await page.goto(uiUrl);
 
-  console.log("\nResults:");
-  console.log("─".repeat(40));
-  console.log(`Size:              ${width}x${height}`);
-  console.log(`Total pixels:      ${totalPixels.toLocaleString()}`);
-  console.log(`Differences:       ${diffPixels.toLocaleString()}`);
-  console.log(`Diff percentage:   ${diffPercent}%`);
-  console.log("─".repeat(40));
+  console.log("Screenshot comparison tool is ready.");
+  console.log(
+    "Enter a DocSpace URL in the browser, load a design, and compare.\n",
+  );
+  console.log("Close the browser window to exit.\n");
 
-  if (parseFloat(diffPercent) > 1) {
-    console.log("\nLayout mismatch detected");
-    console.log(`Check ${diffPath} to visualize the differences\n`);
-    process.exit(1);
-  } else {
-    console.log("\nLayout matches design");
-    console.log("Differences are within acceptable range (< 1%)\n");
-  }
+  // Keep running until the browser is closed
+  await new Promise((resolve) => browser.on("disconnected", resolve));
+
+  server.close();
+  console.log("Browser closed. Goodbye.");
 }
 
 run().catch((err) => {
   console.error("Error:", err.message);
   process.exit(1);
 });
+
