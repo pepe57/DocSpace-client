@@ -309,7 +309,7 @@
   height: 24px;
   flex-shrink: 0;
 
-  div {
+  .iconsContainer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -387,7 +387,7 @@
   border: 1px solid var(--aside-header-border-color);
   border-radius: 4px;
 
-  div {
+  .iconsContainer {
     display: flex;
     align-items: center;
     justify-content: center;

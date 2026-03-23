@@ -15,12 +15,12 @@
   justify-content: center;
   flex: 0 0 auto;
   border: 1px solid var(--aside-header-border-color);
+}
 
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.iconsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   svg {
     width: 20px;
