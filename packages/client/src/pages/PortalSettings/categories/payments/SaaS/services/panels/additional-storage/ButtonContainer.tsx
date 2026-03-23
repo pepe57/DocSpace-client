@@ -103,6 +103,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
           primary
           scale
           onClick={isExceedingStorageLimit ? onSendRequest : onBuy}
+          isLoading={isLoading}
           isDisabled={
             isPaymentBlocked ||
             isPaymentBlockedByBalance ||
