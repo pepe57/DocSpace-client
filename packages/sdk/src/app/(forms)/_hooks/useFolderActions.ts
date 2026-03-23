@@ -121,8 +121,7 @@ export default function useFolderActions() {
 
         await fetchSection(activeSection);
       } catch (error) {
-        toastr.error(t("Common:Error"));
-        console.error("Upload failed:", error);
+        toastr.error(error as string);
       }
     },
     [getFolderId, formsSettingsStore, fetchSection, activeSection, t],
@@ -174,8 +173,7 @@ export default function useFolderActions() {
         setIsCreateFormDialogVisible(false);
         await fetchSection(activeSection);
       } catch (error) {
-        toastr.error(t("Common:Error"));
-        console.error("Create form failed:", error);
+        toastr.error(error as string);
       } finally {
         setIsCreatingForm(false);
       }

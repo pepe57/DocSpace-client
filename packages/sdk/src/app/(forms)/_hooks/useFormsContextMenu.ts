@@ -256,8 +256,19 @@ export default function useFormsContextMenu() {
   );
 
   const getFolderContextMenuModel = useCallback(
-    (folder: TFolder): TFormsContextMenuItem[] => {
+    (folder: TFolder, onOpen?: () => void): TFormsContextMenuItem[] => {
       const model: TFormsContextMenuItem[] = [];
+
+      if (onOpen) {
+        model.push({
+          id: "option_open-folder",
+          key: "open-folder",
+          label: t("Common:Open"),
+          icon: EyeReactSvgUrl,
+          onClick: onOpen,
+          disabled: false,
+        });
+      }
 
       if (folder.security?.Download) {
         model.push({

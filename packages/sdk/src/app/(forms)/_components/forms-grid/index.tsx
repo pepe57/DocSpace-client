@@ -125,7 +125,9 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
             folder={folder}
             getIcon={getIcon}
             onOpenFolder={onOpenFolder}
-            contextOptions={getFolderContextMenuModel(folder)}
+            contextOptions={getFolderContextMenuModel(folder, () =>
+              onOpenFolder(folder),
+            )}
           />
         ))}
       </div>
