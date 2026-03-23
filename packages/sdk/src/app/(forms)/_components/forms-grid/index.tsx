@@ -30,12 +30,9 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
-import { useIsServer } from "@docspace/shared/hooks/useIsServer";
-import { TileContainer } from "@docspace/ui-kit/components/tiles/tile-container";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useItemList from "@/app/(docspace)/_hooks/useItemList";
-import InfiniteGrid from "@/app/(docspace)/(files)/_components/tile-view/sub-components/infinite-grid/InfiniteGrid";
 
 import { FormsSection } from "@/types/forms";
 
@@ -53,7 +50,6 @@ type FormsGridProps = {
 };
 
 const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
-  const isServer = useIsServer();
   const { items, folders, hasMore, isLoading } = useFormsListStore();
   const {
     activeSection,
@@ -78,6 +74,34 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     () => items.map((file: TFile) => convertFileToItem(file)),
     [items, convertFileToItem],
   );
+
+  const sentinelRef = React.useRef<HTMLDivElement>(null);
+  const fetchMoreRef = React.useRef(fetchMore);
+  fetchMoreRef.current = fetchMore;
+
+  React.useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel || !hasMore) return;
+
+    const scroller = document.querySelector(
+      "#sectionScroll .scroll-wrapper > .scroller",
+    );
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          fetchMoreRef.current();
+        }
+      },
+      {
+        root: scroller ?? null,
+        rootMargin: "200px",
+      },
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [hasMore, items.length]);
 
   if (isLoading && items.length === 0 && folders.length === 0) {
     return null;
@@ -112,24 +136,14 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
   }
 
   return (
-    <TileContainer
-      className="tile-container"
-      useReactWindow={!isServer}
-      infiniteGrid={({ children }) => (
-        <InfiniteGrid
-          fetchMoreFiles={fetchMore}
-          hasMoreFiles={hasMore}
-          currentFolderId=""
-          filesLength={fileItems.length}
-        >
-          {children}
-        </InfiniteGrid>
-      )}
-    >
-      {fileItems.map((item) => (
-        <FormsTile key={`file_${item.id}`} item={item} getIcon={getIcon} />
-      ))}
-    </TileContainer>
+    <>
+      <div className={styles.filesGrid}>
+        {fileItems.map((item) => (
+          <FormsTile key={`file_${item.id}`} item={item} getIcon={getIcon} />
+        ))}
+      </div>
+      {hasMore && <div ref={sentinelRef} style={{ height: 1 }} />}
+    </>
   );
 };
 
