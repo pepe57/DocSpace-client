@@ -55,7 +55,7 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     setActiveSection,
     openCompletedFolder,
   } = useFormsNavigationStore();
-  const { roomId, requestToken } = useFormsSettingsStore();
+  const { roomId } = useFormsSettingsStore();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const [isIframeLoaded, setIsIframeLoaded] = React.useState(false);
 
@@ -73,10 +73,9 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     const params = new URLSearchParams();
     params.set("fileId", editingFile.id.toString());
     params.append("action", editorAction);
-    if (requestToken) params.append("share", requestToken);
 
     return combineUrl(editorOrigin, `/doceditor?${params.toString()}`);
-  }, [editingFile, editorAction, requestToken, editorOrigin]);
+  }, [editingFile, editorAction, editorOrigin]);
 
   const handleFormCompleted = React.useCallback(async () => {
     const formTitle = editingFile?.title?.replace(/\.pdf$/i, "");

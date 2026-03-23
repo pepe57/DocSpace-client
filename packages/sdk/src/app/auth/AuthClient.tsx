@@ -24,93 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// @ts-nocheck
+"use client";
 
-import { request, setWithCredentialsStatus } from "../client";
+import { useEffect } from "react";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
-export function login(
-  userName,
-  passwordHash,
-  password,
-  session,
-  recaptchaResponse,
-  recaptchaType,
-  culture,
-) {
-  const data = {
-    userName,
-    passwordHash,
-    password,
-    session,
-    recaptchaResponse,
-    recaptchaType,
-    culture,
-  };
+export default function AuthClient({
+  callback,
+  redirectUrl,
+}: {
+  callback: string;
+  redirectUrl: string | null;
+}) {
+  useEffect(() => {
+    const processParams = new URLSearchParams({ callback });
+    if (redirectUrl) processParams.set("redirectUrl", redirectUrl);
 
-  return request({
-    method: "post",
-    url: "/authentication",
-    skipLogout: true,
-    data,
-  });
+    fetch(`/sdk/auth/process?${processParams}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.redirectUrl) {
+          window.location.href = data.redirectUrl;
+        }
+      });
+  }, [callback, redirectUrl]);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <Loader type={LoaderTypes.track} size="40px" />
+    </div>
+  );
 }
-
-export function thirdPartyLogin(SerializedProfile, culture) {
-  return request({
-    method: "post",
-    url: "authentication",
-    skipLogout: true,
-    data: { SerializedProfile, culture },
-  });
-}
-
-export function logout() {
-  return request({
-    method: "post",
-    url: "/authentication/logout",
-  });
-}
-
-export function checkConfirmLink(data) {
-  return request({
-    method: "post",
-    url: "/authentication/confirm",
-    data,
-  });
-}
-
-export function checkIsAuthenticated() {
-  return request({
-    method: "get",
-    url: "/authentication",
-    withCredentials: true,
-  }).then((state) => {
-    setWithCredentialsStatus(state);
-    return state;
-  });
-}
-
-export function loginWithTfaCode(userName, passwordHash, code) {
-  const data = {
-    userName,
-    passwordHash,
-    code,
-  };
-
-  return request({
-    method: "post",
-    url: `/authentication/${code}`,
-    skipLogout: true,
-    data,
-  });
-}
-
-export function loginWithConfirmKey(data) {
-  return request({
-    method: "post",
-    url: `/authentication`,
-    skipLogout: true,
-    data,
-  });
-}
-

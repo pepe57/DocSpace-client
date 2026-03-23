@@ -24,93 +24,57 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// @ts-nocheck
+import { NextRequest, NextResponse } from "next/server";
 
-import { request, setWithCredentialsStatus } from "../client";
+export async function GET(request: NextRequest) {
+  const { searchParams } = request.nextUrl;
+  const callback = searchParams.get("callback");
+  const redirectUrl = searchParams.get("redirectUrl");
 
-export function login(
-  userName,
-  passwordHash,
-  password,
-  session,
-  recaptchaResponse,
-  recaptchaType,
-  culture,
-) {
-  const data = {
-    userName,
-    passwordHash,
-    password,
-    session,
-    recaptchaResponse,
-    recaptchaType,
-    culture,
-  };
+  if (!callback) {
+    return NextResponse.json(
+      { error: "Missing callback parameter" },
+      { status: 400 },
+    );
+  }
 
-  return request({
-    method: "post",
-    url: "/authentication",
-    skipLogout: true,
-    data,
-  });
+  try {
+    const callbackUrl = new URL(callback);
+
+    const res = await fetch(callbackUrl.toString());
+
+    if (!res.ok) {
+      return NextResponse.json(
+        { error: "Callback request failed", status: res.status },
+        { status: 502 },
+      );
+    }
+
+    const data = await res.json();
+    const { userId, docSpaceToken } = data;
+
+    if (!docSpaceToken) {
+      return NextResponse.json(
+        { error: "Missing docSpaceToken in callback response" },
+        { status: 502 },
+      );
+    }
+
+    const response = NextResponse.json({ userId, redirectUrl });
+
+    response.cookies.set("asc_auth_key", docSpaceToken, {
+      httpOnly: true,
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365,
+      sameSite: "none",
+      secure: true,
+    });
+
+    return response;
+  } catch {
+    return NextResponse.json(
+      { error: "Invalid callback URL or request failed" },
+      { status: 400 },
+    );
+  }
 }
-
-export function thirdPartyLogin(SerializedProfile, culture) {
-  return request({
-    method: "post",
-    url: "authentication",
-    skipLogout: true,
-    data: { SerializedProfile, culture },
-  });
-}
-
-export function logout() {
-  return request({
-    method: "post",
-    url: "/authentication/logout",
-  });
-}
-
-export function checkConfirmLink(data) {
-  return request({
-    method: "post",
-    url: "/authentication/confirm",
-    data,
-  });
-}
-
-export function checkIsAuthenticated() {
-  return request({
-    method: "get",
-    url: "/authentication",
-    withCredentials: true,
-  }).then((state) => {
-    setWithCredentialsStatus(state);
-    return state;
-  });
-}
-
-export function loginWithTfaCode(userName, passwordHash, code) {
-  const data = {
-    userName,
-    passwordHash,
-    code,
-  };
-
-  return request({
-    method: "post",
-    url: `/authentication/${code}`,
-    skipLogout: true,
-    data,
-  });
-}
-
-export function loginWithConfirmKey(data) {
-  return request({
-    method: "post",
-    url: `/authentication`,
-    skipLogout: true,
-    data,
-  });
-}
-
