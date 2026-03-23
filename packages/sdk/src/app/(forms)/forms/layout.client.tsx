@@ -135,12 +135,17 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   useEditorGuard(isEditing);
 
   const prevIsLoading = React.useRef(isLoading);
+  const pendingEditorClose = React.useRef(false);
   React.useEffect(() => {
     if (prevIsLoading.current && !isLoading) {
       window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+      if (pendingEditorClose.current) {
+        pendingEditorClose.current = false;
+        closeEditor();
+      }
     }
     prevIsLoading.current = isLoading;
-  }, [isLoading]);
+  }, [isLoading, closeEditor]);
 
   // AI agent init for room
   React.useEffect(() => {
@@ -173,9 +178,16 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       if (prevSection === FormsSection.InProgress) {
         goBackToInProgressRoot();
       }
-      closeEditor();
+
+      if (editingFile) {
+        pendingEditorClose.current = true;
+      } else {
+        closeEditor();
+      }
 
       if (activeSection === FormsSection.Settings) {
+        pendingEditorClose.current = false;
+        closeEditor();
         setTimeout(() => {
           window.dispatchEvent(
             new CustomEvent(AnimationEvents.END_ANIMATION),
