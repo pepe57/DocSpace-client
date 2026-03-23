@@ -38,7 +38,6 @@ import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
 import { createThumbnails } from "@docspace/shared/api/files";
 import { thumbnailStatuses } from "@docspace/shared/constants";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { setAuthToken } from "@docspace/shared/api/client";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
@@ -53,8 +52,6 @@ import FormsLayout from "../_components/forms-layout";
 
 type FormsPageProps = {
   roomId: string | number;
-  requestToken: string;
-  authToken: string;
   filesSettings: TFilesSettings;
   initialFolderData?: TGetFolder;
   user?: TUser;
@@ -64,8 +61,6 @@ type FormsPageProps = {
 
 function FormsPage({
   roomId,
-  requestToken,
-  authToken,
   filesSettings,
   initialFolderData,
   user,
@@ -86,11 +81,10 @@ function FormsPage({
   React.useEffect(() => {
     formsSettingsStore.setConfig({
       roomId,
-      requestToken,
       socketUrl,
     });
     formsSettingsStore.setFilesSettings(filesSettings);
-  }, [roomId, requestToken, socketUrl, filesSettings, formsSettingsStore]);
+  }, [roomId, socketUrl, filesSettings, formsSettingsStore]);
 
   React.useEffect(() => {
     filesSettingsStore.setFilesSettings(filesSettings);
@@ -116,18 +110,13 @@ function FormsPage({
     window.ClientConfig.isFrame = true;
 
     settingsStore.setFilesViewAs("tile");
-    const token = requestToken || authToken;
-    if (token) {
-      document.cookie = `asc_auth_key=${token}; path=/; SameSite=Lax`;
-      setAuthToken(token);
-    }
 
     return () => {
       if (window.ClientConfig) {
         window.ClientConfig.isFrame = prevIsFrame;
       }
     };
-  }, [settingsStore, requestToken, authToken]);
+  }, [settingsStore]);
 
   React.useEffect(() => {
     if (initialFolderData) {

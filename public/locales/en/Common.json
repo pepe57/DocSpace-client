@@ -67,6 +67,7 @@
   "AIProvidersNotAvailable": "AI providers are not configured on this portal. Contact your administrator.",
   "AIRoomDescription": "A versatile chat powered by your chosen text model. Use it to solve everyday tasks and collaborate on text documents, spreadsheets, and presentations. All files added to the room are automatically used as context during your conversations with the chat.",
   "AIRoomTitle": "AI Room",
+  "AIServices": "AI services",
   "AIToolsHint": "AI tools and integrations",
   "AIWouldLikeToUseThisTool": "AI would like to use this tool",
   "Alert": "Alert",

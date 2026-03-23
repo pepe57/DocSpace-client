@@ -24,47 +24,66 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { PropsWithChildren } from "react";
+"use client";
 
-import type { AuthStore } from "../store/AuthStore";
-import type { UserStore } from "../store/UserStore";
-import type { SettingsStore } from "../store/SettingsStore";
-import type { CurrentTariffStatusStore } from "../store/CurrentTariffStatusStore";
+import { useEffect, useState } from "react";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
-export interface PrivateRouteProps
-  extends PropsWithChildren,
-    Pick<AuthStore, "isAuthenticated" | "isLoaded" | "isAdmin" | "isLogout">,
-    Pick<
-      SettingsStore,
-      | "wizardCompleted"
-      | "tenantStatus"
-      | "isPortalDeactivate"
-      | "enablePortalRename"
-      | "limitedAccessSpace"
-      | "baseDomain"
-      | "displayAbout"
-      | "limitedAccessDevToolsForUsers"
-      | "aiServicesEnabled"
-    >,
-    Pick<CurrentTariffStatusStore, "isNotPaidPeriod">,
-    Pick<UserStore, "user"> {
-  restricted?: boolean;
-  withManager?: boolean;
-  withCollaborator?: boolean;
-  identityServerEnabled?: boolean;
-  isCommunity?: boolean;
-  isEnterprise?: boolean;
-  standalone: boolean;
-  requireAIServices?: boolean;
+export default function AuthClient({
+  callback,
+  redirectUrl,
+}: {
+  callback: string;
+  redirectUrl: string | null;
+}) {
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const processParams = new URLSearchParams({ callback });
+    if (redirectUrl) processParams.set("redirectUrl", redirectUrl);
+
+    fetch(`/sdk/auth/process?${processParams}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data.redirectUrl) {
+          window.location.href = data.redirectUrl;
+        }
+      })
+      .catch((err: unknown) => {
+        setError(err instanceof Error ? err.message : "Authentication failed");
+      });
+  }, [callback, redirectUrl]);
+
+  if (error) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        {error}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <Loader type={LoaderTypes.track} size="40px" />
+    </div>
+  );
 }
 
-export interface PublicRouteProps
-  extends PropsWithChildren,
-    Pick<AuthStore, "isAuthenticated">,
-    Pick<
-      SettingsStore,
-      | "wizardCompleted"
-      | "tenantStatus"
-      | "isPortalDeactivate"
-      | "isFirstLoaded"
-    > {}
