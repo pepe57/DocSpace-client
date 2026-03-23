@@ -236,6 +236,7 @@ const FilesMediaViewer = (props) => {
   const onMediaViewerClose = useCallback(async () => {
     if (pluginMediaViewerVisible) {
       await handlePluginClose();
+      setMediaViewerData({ visible: false, id: null });
       return;
     }
 
@@ -300,7 +301,6 @@ const FilesMediaViewer = (props) => {
     onMediaViewerClose,
     playlist.length,
     aiPlaylistImages.length,
-    isPluginViewerVisible,
   ]);
 
   return (
