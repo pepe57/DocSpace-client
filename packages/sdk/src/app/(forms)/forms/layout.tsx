@@ -34,7 +34,7 @@ import { getFormsFolder } from "@/api/forms";
 import { getSelf } from "@/api/people";
 import { getDefaultProvider } from "@/api/ai";
 import { getSettings } from "@/api/settings";
-import { ROOM_ID_HEADER, PAGE_COUNT } from "@/utils/constants";
+import { ROOM_ID_HEADER, PATHNAME_HEADER, PAGE_COUNT } from "@/utils/constants";
 
 import FormsShell from "./layout.client";
 
@@ -48,6 +48,14 @@ export default async function FormsServerLayout({
 
   const roomId = hdrs.get(ROOM_ID_HEADER) || "";
   const authToken = cookieStore.get("asc_auth_key")?.value || "";
+  const pathname = hdrs.get(PATHNAME_HEADER) ?? "";
+
+  // Room data (security, access, virtual folders) is always needed.
+  // File list is only useful for my-forms initial hydration.
+  const isMyFormsRoute =
+    pathname.endsWith("/my-forms") ||
+    pathname.endsWith("/forms") ||
+    pathname.endsWith("/forms/");
 
   const [filesSettings, user, defaultProvider, portalSettings, roomData] =
     await Promise.all([
@@ -84,9 +92,10 @@ export default async function FormsServerLayout({
     (f) => f.type === FolderType.InProgress,
   )?.id;
 
-  // Initial my-forms files for first-mount hydration (avoids extra client fetch)
-  const initialFiles = roomData?.files;
-  const initialTotal = roomData?.total;
+  // Initial my-forms files for first-mount hydration (avoids extra client fetch).
+  // Only pass files for my-forms route — other sections don't use them.
+  const initialFiles = isMyFormsRoute ? roomData?.files : undefined;
+  const initialTotal = isMyFormsRoute ? roomData?.total : undefined;
 
   return (
     <FormsShell

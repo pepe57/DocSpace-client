@@ -42,6 +42,7 @@ const MyFormsPage = () => {
   const { fetchSection, fetchMore } = useFormsData();
 
   React.useEffect(() => {
+    // Skip fetch if store already has data from layout SSR hydration
     if (formsListStore.items.length > 0 && !formsListStore.isLoading) return;
     fetchSection(FormsSection.MyForms);
   }, []);

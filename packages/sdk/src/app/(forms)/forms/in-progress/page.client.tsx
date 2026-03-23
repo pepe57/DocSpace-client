@@ -42,17 +42,17 @@ const InProgressPage = () => {
     useFormsNavigationStore();
   const { fetchSection, fetchMore, fetchSubfolder } = useFormsData();
 
-  // Initialize: fetch in-progress root (skip if subfolder pre-set)
+  // Fetch root folders when inProgressFolder is null (initial mount + back from subfolder).
+  // Only inProgressFolder in deps — fetchSection ref changes must not trigger re-runs.
+  const fetchSectionRef = React.useRef(fetchSection);
+  fetchSectionRef.current = fetchSection;
   React.useEffect(() => {
-    if (!inProgressFolder) {
-      fetchSection(FormsSection.InProgress);
-    }
-  }, []);
+    if (inProgressFolder) return;
+    fetchSectionRef.current(FormsSection.InProgress);
+  }, [inProgressFolder]);
 
-  // Trap the browser Back button while inside a subfolder so that pressing
-  // Back returns to the in-progress root instead of exiting the section
-  // entirely (EC10). Mirrors the useEditorGuard pattern.
-  // Disabled while editor is open — useEditorGuard handles Back during editing.
+  // Trap the browser Back button while inside a subfolder.
+  // Disabled when editing — useEditorGuard takes priority.
   React.useEffect(() => {
     if (!inProgressFolder || editingFile) return;
 
@@ -69,24 +69,15 @@ const InProgressPage = () => {
     };
   }, [inProgressFolder, editingFile, goBackToInProgressRoot]);
 
-  // Fetch subfolder files or restore root folders on navigation
-  const prevInProgressFolder = React.useRef(inProgressFolder);
+  // Fetch subfolder files when inProgressFolder is set
   React.useEffect(() => {
-    const prev = prevInProgressFolder.current;
-    prevInProgressFolder.current = inProgressFolder;
+    if (!inProgressFolder) return;
 
-    if (inProgressFolder && inProgressFolder !== prev) {
-      // Entered a subfolder -> fetch its files
-      const controller = new AbortController();
-      fetchSubfolder(inProgressFolder.id, controller.signal).catch(() => {});
-      return () => controller.abort();
-    }
+    const controller = new AbortController();
+    fetchSubfolder(inProgressFolder.id, controller.signal).catch(() => {});
 
-    if (!inProgressFolder && prev) {
-      // Fetch fresh virtual folder list (not stale server prop)
-      fetchSection(FormsSection.InProgress);
-    }
-  }, [inProgressFolder, fetchSubfolder, fetchSection]);
+    return () => controller.abort();
+  }, [inProgressFolder, fetchSubfolder]);
 
   return (
     <FormsGrid

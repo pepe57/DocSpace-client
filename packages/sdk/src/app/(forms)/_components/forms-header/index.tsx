@@ -41,13 +41,17 @@ import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-import useFolderActions from "../../_hooks/useFolderActions";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
 
 import styles from "../forms-layout/FormsLayout.module.scss";
 
-const FormsHeader = () => {
+type FormsHeaderProps = {
+  onUploadFiles: () => void;
+  onCreateBlankForm: () => void;
+};
+
+const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
@@ -64,7 +68,6 @@ const FormsHeader = () => {
   const { items, folders } = useFormsListStore();
   const formsSettingsStore = useFormsSettingsStore();
   const { currentDeviceType } = useDeviceType();
-  const { onUploadFiles, onCreateBlankForm } = useFolderActions();
 
   const isMyForms = activeSection === FormsSection.MyForms;
   const canCreateForms = isMyForms && !!formsSettingsStore.folderSecurity?.Create;
@@ -151,17 +154,21 @@ const FormsHeader = () => {
     t,
   ]);
 
-  const navDropdownMinWidth = React.useMemo(() => {
-    if (!navigationItems.length) return 0;
+  const [navDropdownMinWidth, setNavDropdownMinWidth] = React.useState(0);
+  React.useEffect(() => {
+    if (!navigationItems.length) {
+      setNavDropdownMinWidth(0);
+      return;
+    }
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
-    if (!ctx) return 0;
+    if (!ctx) return;
     ctx.font = '600 13px "Open Sans", sans-serif';
     let max = 0;
     for (const item of navigationItems) {
       max = Math.max(max, ctx.measureText(item.title).width);
     }
-    return Math.ceil(max + 67);
+    setNavDropdownMinWidth(Math.ceil(max + 67));
   }, [navigationItems]);
 
   const getContextOptionsPlus = React.useCallback(() => {

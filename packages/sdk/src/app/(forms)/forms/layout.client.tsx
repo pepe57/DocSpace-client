@@ -90,10 +90,13 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
 
+  const authTokenSet = React.useRef(false);
   React.useEffect(() => {
     const token = commonData.authToken;
-    if (token) {
-      document.cookie = `asc_auth_key=${token}; path=/; SameSite=Lax`;
+    if (token && !authTokenSet.current) {
+      authTokenSet.current = true;
+      const secure = window.location.protocol === "https:" ? "; Secure" : "";
+      document.cookie = `asc_auth_key=${token}; path=/; SameSite=Lax${secure}`;
       setAuthToken(token);
     }
   }, [commonData.authToken]);
@@ -192,7 +195,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         aiStore.closePanel();
       }
 
+      // Only reset AI folder context on actual section changes, not on
+      // intermediate folder changes (e.g., form completion sets completedFolder
+      // while still on my-forms — the router hasn't navigated yet).
       if (
+        sectionChanged &&
         activeSection !== FormsSection.CompletedForms &&
         hasManagementAccess
       ) {
@@ -229,6 +236,8 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   }, [completedFolder, editingFile, closeEditor, router, searchParams]);
 
   const {
+    onUploadFiles,
+    onCreateBlankForm,
     isCreateFormDialogVisible,
     isCreatingForm,
     onCloseCreateFormDialog,
@@ -281,7 +290,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           currentDeviceType={currentDeviceType}
         >
           <Section.SectionHeader>
-            <FormsHeader />
+            <FormsHeader
+              onUploadFiles={onUploadFiles}
+              onCreateBlankForm={onCreateBlankForm}
+            />
           </Section.SectionHeader>
           <Section.SectionBody>
             {isEditing && (

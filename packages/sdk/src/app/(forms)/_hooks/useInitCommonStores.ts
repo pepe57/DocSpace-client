@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import type {
   TFile,
@@ -71,12 +71,16 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
   const filesSettingsStore = useFilesSettingsStore();
   const settingsStore = useSettingsStore();
   const [isReady, setIsReady] = useState(false);
+  const initialised = useRef(false);
 
   // useLayoutEffect runs synchronously BEFORE child useEffects, guaranteeing
   // that MobX stores are populated before page components check them.
   // This is critical: React fires child effects before parent effects,
   // so a regular useEffect here would run AFTER MyFormsPage's mount effect.
   useLayoutEffect(() => {
+    if (initialised.current) return;
+    initialised.current = true;
+
     formsSettingsStore.setConfig({
       roomId: commonData.roomId,
       socketUrl: commonData.socketUrl,
@@ -122,7 +126,6 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
     }
 
     setIsReady(true);
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- init once on mount; commonData is stable server-provided object
   }, []);
 
   useEffect(() => {
@@ -140,8 +143,7 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
         window.ClientConfig.isFrame = prevIsFrame;
       }
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- init once on mount; commonData is stable server-provided object
-  }, []);
+  }, [settingsStore]);
 
   return isReady;
 }

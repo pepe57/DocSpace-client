@@ -41,10 +41,12 @@ import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
 import { FormsSection } from "@/types/forms";
 
 import { sectionFromPathname, sectionToPath } from "../../_utils/sectionFromPathname";
+import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsUserStore } from "../../_store/FormsUserStore";
 import SidebarNavItem from "./SidebarNavItem";
 
@@ -56,6 +58,14 @@ const FormsSidebar = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const activeSection = sectionFromPathname(pathname);
+  const {
+    editingFile,
+    completedFolder,
+    inProgressFolder,
+    closeEditor,
+    goBackToCompletedRoot,
+    goBackToInProgressRoot,
+  } = useFormsNavigationStore();
   const { user } = useFormsUserStore();
   const showSettings = user?.isOwner || user?.isAdmin;
 
@@ -93,9 +103,13 @@ const FormsSidebar = () => {
   ];
 
   const onSettingsClick = React.useCallback(() => {
+    if (activeSection === FormsSection.Settings) {
+      setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
+      return;
+    }
     const roomId = searchParams.get("roomId") ?? "";
     router.replace(`${sectionToPath(FormsSection.Settings)}${roomId ? `?roomId=${roomId}` : ""}`);
-  }, [router, searchParams]);
+  }, [router, searchParams, activeSection]);
 
   return (
     <div
@@ -118,6 +132,26 @@ const FormsSidebar = () => {
             icon={section.icon}
             isActive={activeSection === section.key}
             onClick={() => {
+              if (activeSection === section.key) {
+                // Already on this section — return to root if inside subfolder/editor
+                let handled = false;
+                if (editingFile) {
+                  closeEditor();
+                  handled = true;
+                }
+                if (section.key === FormsSection.CompletedForms && completedFolder) {
+                  goBackToCompletedRoot();
+                  handled = true;
+                }
+                if (section.key === FormsSection.InProgress && inProgressFolder) {
+                  goBackToInProgressRoot();
+                  handled = true;
+                }
+                if (!handled) {
+                  setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
+                }
+                return;
+              }
               const roomId = searchParams.get("roomId") ?? "";
               router.replace(`${sectionToPath(section.key)}${roomId ? `?roomId=${roomId}` : ""}`);
             }}

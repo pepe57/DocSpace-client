@@ -28,35 +28,29 @@
 
 import { FormsSection } from "@/types/forms";
 
-const SDK_BASE_PATH = "/sdk";
 const FORMS_PREFIX = "/forms/";
+
+const SECTION_MAP: Record<string, FormsSection> = {
+  [FormsSection.MyForms]: FormsSection.MyForms,
+  [FormsSection.InProgress]: FormsSection.InProgress,
+  [FormsSection.CompletedForms]: FormsSection.CompletedForms,
+  [FormsSection.Settings]: FormsSection.Settings,
+};
 
 /**
  * Maps a URL pathname to the corresponding FormsSection enum value.
  *
- * Handles both plain pathnames ("/forms/my-forms") and pathnames that include
- * the SDK base path ("/sdk/forms/in-progress"). Falls back to
- * FormsSection.MyForms when no segment matches a known section.
+ * usePathname() in Next.js App Router returns the path without basePath,
+ * so "/sdk" prefix stripping is not needed.
  */
 export function sectionFromPathname(pathname: string): FormsSection {
-  const normalized = pathname.startsWith(SDK_BASE_PATH)
-    ? pathname.slice(SDK_BASE_PATH.length)
-    : pathname;
-
-  const formsIndex = normalized.indexOf(FORMS_PREFIX);
+  const formsIndex = pathname.indexOf(FORMS_PREFIX);
 
   if (formsIndex === -1) return FormsSection.MyForms;
 
-  const segment = normalized.slice(formsIndex + FORMS_PREFIX.length).split("/")[0];
+  const segment = pathname.slice(formsIndex + FORMS_PREFIX.length).split("/")[0];
 
-  const sections: Record<string, FormsSection> = {
-    [FormsSection.MyForms]: FormsSection.MyForms,
-    [FormsSection.InProgress]: FormsSection.InProgress,
-    [FormsSection.CompletedForms]: FormsSection.CompletedForms,
-    [FormsSection.Settings]: FormsSection.Settings,
-  };
-
-  return sections[segment] ?? FormsSection.MyForms;
+  return SECTION_MAP[segment] ?? FormsSection.MyForms;
 }
 
 /**

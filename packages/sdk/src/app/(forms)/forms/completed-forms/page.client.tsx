@@ -47,17 +47,24 @@ const CompletedPage = () => {
   const aiStore = useFormsAiAgentStore();
   const { fetchSection, fetchMore, fetchSubfolder } = useFormsData();
 
-  // Initialize: fetch completed-forms root (skip if subfolder pre-set)
+  // Fetch root folders when completedFolder is null (initial mount + back from subfolder).
+  // Only completedFolder in deps — fetchSection ref changes must not trigger re-runs
+  // (e.g., when arriving from form completion with completedFolder pre-set).
+  const fetchSectionRef = React.useRef(fetchSection);
+  fetchSectionRef.current = fetchSection;
+  const aiStoreRef = React.useRef(aiStore);
+  aiStoreRef.current = aiStore;
   React.useEffect(() => {
-    if (!completedFolder) {
-      fetchSection(FormsSection.CompletedForms);
-    }
-  }, []);
+    if (completedFolder) return;
+    fetchSectionRef.current(FormsSection.CompletedForms);
 
-  // Trap the browser Back button while inside a subfolder so that pressing
-  // Back returns to the completed-forms root instead of exiting the section
-  // entirely (EC10). Mirrors the useEditorGuard pattern.
-  // Disabled while editor is open — useEditorGuard handles Back during editing.
+    if (hasManagementAccess) {
+      aiStoreRef.current.setCurrentFolder(null);
+    }
+  }, [completedFolder, hasManagementAccess]);
+
+  // Trap the browser Back button while inside a subfolder.
+  // Disabled when editing — useEditorGuard takes priority.
   React.useEffect(() => {
     if (!completedFolder || editingFile) return;
 
@@ -74,84 +81,60 @@ const CompletedPage = () => {
     };
   }, [completedFolder, editingFile, goBackToCompletedRoot]);
 
-  // Fetch subfolder files + AI agent setup when entering a completed folder
-  // Use SENTINEL so pre-set completedFolder on mount is detected as "new"
-  const UNSET = React.useRef({});
-  const prevCompletedFolder = React.useRef<typeof completedFolder | object>(
-    UNSET.current,
-  );
+  // Fetch subfolder files + AI agent setup when completedFolder is set
   const fetchIdRef = React.useRef(0);
   React.useEffect(() => {
-    const prev = prevCompletedFolder.current;
-    prevCompletedFolder.current = completedFolder;
+    if (!completedFolder) return;
 
-    if (completedFolder && completedFolder !== prev) {
-      const controller = new AbortController();
-      const currentFetchId = ++fetchIdRef.current;
+    const controller = new AbortController();
+    const currentFetchId = ++fetchIdRef.current;
 
-      (async () => {
-        try {
-          await fetchSubfolder(completedFolder.id, controller.signal);
-          if (
-            controller.signal.aborted ||
-            currentFetchId !== fetchIdRef.current
-          )
-            return;
+    (async () => {
+      try {
+        await fetchSubfolder(completedFolder.id, controller.signal);
+        if (
+          controller.signal.aborted ||
+          currentFetchId !== fetchIdRef.current
+        )
+          return;
 
-          if (hasManagementAccess) {
-            await aiStore.setCurrentFolder(completedFolder.id);
-            if (currentFetchId !== fetchIdRef.current) return;
+        if (hasManagementAccess) {
+          await aiStore.setCurrentFolder(completedFolder.id);
+          if (currentFetchId !== fetchIdRef.current) return;
 
-            const files = formsListStore.items.map((f) => ({
-              id: f.id,
-              title: f.title,
-            }));
+          const files = formsListStore.items.map((f) => ({
+            id: f.id,
+            title: f.title,
+          }));
 
-            if (aiStore.aiAgentEnabled && !aiStore.currentAgentId) {
-              aiStore.setPreparingAgent(true);
-              try {
-                const entry = await aiStore.createAgentForFolder(
-                  { id: completedFolder.id, title: completedFolder.title },
-                  files,
-                );
+          if (aiStore.aiAgentEnabled && !aiStore.currentAgentId) {
+            aiStore.setPreparingAgent(true);
+            try {
+              const entry = await aiStore.createAgentForFolder(
+                { id: completedFolder.id, title: completedFolder.title },
+                files,
+              );
+              if (currentFetchId !== fetchIdRef.current) return;
+              if (entry) {
+                await aiStore.setCurrentFolder(completedFolder.id);
                 if (currentFetchId !== fetchIdRef.current) return;
-                if (entry) {
-                  await aiStore.setCurrentFolder(completedFolder.id);
-                  if (currentFetchId !== fetchIdRef.current) return;
-                }
-              } finally {
-                aiStore.setPreparingAgent(false);
               }
-            }
-
-            if (files.length > 0) {
-              aiStore.syncCompletedForms(files);
+            } finally {
+              aiStore.setPreparingAgent(false);
             }
           }
-        } catch {
-          // Aborted or network error — ignore
+
+          if (files.length > 0) {
+            aiStore.syncCompletedForms(files);
+          }
         }
-      })();
-
-      return () => controller.abort();
-    }
-
-    if (!completedFolder && prev && prev !== UNSET.current) {
-      // Fetch fresh virtual folder list (not stale server prop)
-      fetchSection(FormsSection.CompletedForms);
-
-      if (hasManagementAccess) {
-        aiStore.setCurrentFolder(null);
+      } catch {
+        // Aborted or network error — ignore
       }
-    }
-  }, [
-    completedFolder,
-    fetchSubfolder,
-    fetchSection,
-    hasManagementAccess,
-    aiStore,
-    formsListStore,
-  ]);
+    })();
+
+    return () => controller.abort();
+  }, [completedFolder, fetchSubfolder, hasManagementAccess, aiStore, formsListStore]);
 
   return (
     <FormsGrid
