@@ -45,6 +45,8 @@ import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { sectionFromPathname } from "../_utils/sectionFromPathname";
 
+const FORMS_PAGE_COUNT = 25;
+
 const requestThumbnails = (files: TFile[]) => {
   const ids = files
     .filter(
@@ -192,7 +194,7 @@ export default function useFormsData() {
       try {
         const filter = FilesFilter.getDefault();
         filter.page = 0;
-        filter.pageCount = PAGE_COUNT;
+        filter.pageCount = FORMS_PAGE_COUNT;
         filter.filterType = FilterType.PDFForm;
 
         const res = await api.files.getFolder(folderId, filter, signal);
@@ -200,7 +202,7 @@ export default function useFormsData() {
         if (signal.aborted) return;
 
         const files = res.files;
-        apiExhausted.current = res.files.length < PAGE_COUNT;
+        apiExhausted.current = res.files.length < FORMS_PAGE_COUNT;
         const total = apiExhausted.current
           ? files.length
           : files.length + 1;
@@ -263,7 +265,7 @@ export default function useFormsData() {
 
           const filter = FilesFilter.getDefault();
           filter.page = 0;
-          filter.pageCount = PAGE_COUNT;
+          filter.pageCount = FORMS_PAGE_COUNT;
           filter.filterType = FilterType.PDFForm;
 
           const res = await api.files.getFolder(
@@ -275,7 +277,7 @@ export default function useFormsData() {
           if (controller.signal.aborted) return;
 
           const files = filterByFolder(res.files, folderId);
-          apiExhausted.current = res.files.length < PAGE_COUNT;
+          apiExhausted.current = res.files.length < FORMS_PAGE_COUNT;
           const total = apiExhausted.current
             ? files.length
             : files.length + 1;
@@ -330,7 +332,7 @@ export default function useFormsData() {
 
         const filter = FilesFilter.getDefault();
         filter.page = currentPage.current;
-        filter.pageCount = PAGE_COUNT;
+        filter.pageCount = FORMS_PAGE_COUNT;
         filter.filterType = FilterType.PDFForm;
 
         const res = await api.files.getFolder(
@@ -342,7 +344,7 @@ export default function useFormsData() {
         if (controller.signal.aborted) return;
 
         fetched = filterByFolder(res.files, folderId);
-        apiExhausted.current = res.files.length < PAGE_COUNT;
+        apiExhausted.current = res.files.length < FORMS_PAGE_COUNT;
       }
 
       if (controller.signal.aborted) return;

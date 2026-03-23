@@ -34,7 +34,7 @@ import { getFormsFolder } from "@/api/forms";
 import { getSelf } from "@/api/people";
 import { getDefaultProvider } from "@/api/ai";
 import { getSettings } from "@/api/settings";
-import { ROOM_ID_HEADER, PATHNAME_HEADER, PAGE_COUNT } from "@/utils/constants";
+import { ROOM_ID_HEADER, PATHNAME_HEADER } from "@/utils/constants";
 
 import FormsShell from "./layout.client";
 
@@ -68,7 +68,7 @@ export default async function FormsServerLayout({
             roomId,
             (() => {
               const f = FilesFilter.getDefault();
-              f.pageCount = PAGE_COUNT;
+              f.pageCount = 25;
               f.filterType = FilterType.PDFForm;
               return f;
             })(),
