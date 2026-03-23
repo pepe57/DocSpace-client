@@ -63,7 +63,7 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     closeEditor,
     openCompletedFolder,
   } = useFormsNavigationStore();
-  const { roomId, requestToken } = useFormsSettingsStore();
+  const { roomId } = useFormsSettingsStore();
   const formsListStore = useFormsListStore();
   const aiStore = useFormsAiAgentStore();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
@@ -85,10 +85,9 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     params.set("fileId", editingFile.id.toString());
     params.append("action", editorAction);
     params.append("editorGoBack", "event");
-    if (requestToken) params.append("share", requestToken);
 
     return combineUrl(editorOrigin, `/doceditor?${params.toString()}`);
-  }, [editingFile, editorAction, requestToken, editorOrigin]);
+  }, [editingFile, editorAction, editorOrigin]);
 
   const handleFormCompleted = React.useCallback(async () => {
     const formTitle = editingFile?.title?.replace(/\.pdf$/i, "");
@@ -224,10 +223,7 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
         closeEditor();
       }
 
-      if (
-        data?.type === "onFormComplete" ||
-        data === "completed-form"
-      ) {
+      if (data?.type === "onFormComplete" || data === "completed-form") {
         handleFormCompleted();
       }
     };

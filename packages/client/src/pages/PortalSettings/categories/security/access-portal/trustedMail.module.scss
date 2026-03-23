@@ -24,47 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { PropsWithChildren } from "react";
-
-import type { AuthStore } from "../store/AuthStore";
-import type { UserStore } from "../store/UserStore";
-import type { SettingsStore } from "../store/SettingsStore";
-import type { CurrentTariffStatusStore } from "../store/CurrentTariffStatusStore";
-
-export interface PrivateRouteProps
-  extends PropsWithChildren,
-    Pick<AuthStore, "isAuthenticated" | "isLoaded" | "isAdmin" | "isLogout">,
-    Pick<
-      SettingsStore,
-      | "wizardCompleted"
-      | "tenantStatus"
-      | "isPortalDeactivate"
-      | "enablePortalRename"
-      | "limitedAccessSpace"
-      | "baseDomain"
-      | "displayAbout"
-      | "limitedAccessDevToolsForUsers"
-      | "aiServicesEnabled"
-    >,
-    Pick<CurrentTariffStatusStore, "isNotPaidPeriod">,
-    Pick<UserStore, "user"> {
-  restricted?: boolean;
-  withManager?: boolean;
-  withCollaborator?: boolean;
-  identityServerEnabled?: boolean;
-  isCommunity?: boolean;
-  isEnterprise?: boolean;
-  standalone: boolean;
-  requireAIServices?: boolean;
+.container {
+  width: 100%;
 }
 
-export interface PublicRouteProps
-  extends PropsWithChildren,
-    Pick<AuthStore, "isAuthenticated">,
-    Pick<
-      SettingsStore,
-      | "wizardCompleted"
-      | "tenantStatus"
-      | "isPortalDeactivate"
-      | "isFirstLoaded"
-    > {}
+.box {
+  margin-bottom: 11px;
+}
+
+.saveCancelButtons {
+  margin-top: 24px;
+}

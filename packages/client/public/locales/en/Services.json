@@ -68,6 +68,7 @@
   "EnableOrganizationAI": "Enable {{organizationName}} AI",
   "ErrorChecking": "Error checking",
   "ErrorCheckingDescription": "Correct typos and grammar mistakes to enhance text quality.",
+  "EnablePaidBackup": "Enable paid backup",
   "FreeBackupsPerMonth": "Free backups: {{value}}/{{maxValue}} per current month.",
   "FreeBackupsRenewsDate": "Free backups are used first. Will be automatically renewed <1>on {{date}}</1>",
   "FreeMonthly": "(free monthly)",

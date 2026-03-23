@@ -78,13 +78,8 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
 
     if (loadedUrlRef.current === url) return;
 
-    const headers: Record<string, string> = {};
-    if (requestToken) {
-      headers.Authorization = requestToken;
-    }
-
     let cancelled = false;
-    fetch(url, { headers, credentials: "include" })
+    fetch(url, { credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error(`${res.status}`);
         return res.blob();
@@ -102,7 +97,7 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
     return () => {
       cancelled = true;
     };
-  }, [item.thumbnailUrl, item.providerItem, requestToken]);
+  }, [item.thumbnailUrl, item.providerItem]);
 
   useEffect(() => {
     return () => {
