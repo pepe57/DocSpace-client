@@ -377,6 +377,7 @@ const SectionHeaderContent = (props) => {
           organizationName: logoText,
           license: t("Common:EnterpriseLicense"),
           productName: t("Common:ProductName"),
+          aiServices: t("Common:AIServices"),
         });
 
   // console.log(translatedHeader, header);
