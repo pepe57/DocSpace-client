@@ -278,9 +278,12 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         }
 
         if (isNewSubscription) {
-          navigate(
-            "/portal-settings/payments/services/disk-storage?complete=true",
-          );
+          const targetPath =
+            "/portal-settings/payments/services/disk-storage?complete=true";
+
+          if (!window.location.pathname.includes("/disk-storage")) {
+            navigate(targetPath);
+          }
           return;
         }
 
