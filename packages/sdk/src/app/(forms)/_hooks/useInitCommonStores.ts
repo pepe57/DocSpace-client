@@ -79,7 +79,6 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
   useLayoutEffect(() => {
     formsSettingsStore.setConfig({
       roomId: commonData.roomId,
-      requestToken: "",
       socketUrl: commonData.socketUrl,
     });
     formsSettingsStore.setFilesSettings(commonData.filesSettings);

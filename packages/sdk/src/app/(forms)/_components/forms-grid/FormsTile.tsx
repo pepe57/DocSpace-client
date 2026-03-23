@@ -47,7 +47,6 @@ import { FormsSection } from "@/types/forms";
 import useFormsActions from "../../_hooks/useFormsActions";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
 import { useFormsListStore } from "../../_store/FormsListStore";
-import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import FormStatusBadge from "./FormStatusBadge";
 import styles from "./FormsTile.module.scss";
@@ -66,8 +65,6 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
   const { items } = useFormsListStore();
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
-  const { requestToken } = useFormsSettingsStore();
-
   const [blobThumbnail, setBlobThumbnail] = useState("");
   const loadedUrlRef = useRef("");
 
