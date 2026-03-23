@@ -60,6 +60,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     limitedAccessDevToolsForUsers,
     standalone,
+    requireAIServices,
+    aiServicesEnabled,
   } = props;
 
   const location = useLocation();
@@ -272,7 +274,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         return <Navigate replace to="/management/bonus" />;
       if (isBonusPageUnavailable)
         return <Navigate replace to="/management/payments" />;
-      console.log("here");
       return children;
     }
 
@@ -303,6 +304,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (isDeveloperToolsPage) {
       if (user?.isVisitor || (limitedAccessDevToolsForUsers && !user?.isAdmin))
         return <Navigate replace to="/error/403" />;
+    }
+
+    if (requireAIServices && !aiServicesEnabled) {
+      return <Navigate replace to="/error/404" />;
     }
 
     if (isAccountsPage) {

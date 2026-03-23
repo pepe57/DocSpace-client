@@ -195,7 +195,11 @@ const BackupPage: React.FC<BackupPageProps> = ({
           <Button
             className={styles.backupButton}
             size={ButtonSize.small}
-            label={t("Common:Enable")}
+            label={
+              !isFreeTariff
+                ? t("Services:EnablePaidBackup")
+                : t("Common:Enable")
+            }
             onClick={handleToggleChange}
             primary
             scale
