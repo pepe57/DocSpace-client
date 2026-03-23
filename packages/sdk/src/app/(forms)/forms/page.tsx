@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { headers, cookies } from "next/headers";
+import { headers } from "next/headers";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FilterType } from "@docspace/shared/enums";
@@ -51,8 +51,6 @@ export default async function Forms({
 }) {
   const hdrs = await headers();
   const params = await searchParams;
-  const cookieStore = await cookies();
-
   const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
 
   const filter = FilesFilter.getDefault();
