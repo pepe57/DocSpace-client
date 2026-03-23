@@ -34,7 +34,7 @@ import { UrlActionType } from "@docspace/shared/enums";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 import { Portal } from "@docspace/ui-kit/components/portal";
-import { usePlugin } from "./hooks/usePlugin";
+import { usePlugin } from "./Hooks/usePlugin";
 
 const FilesMediaViewer = (props) => {
   const {
@@ -106,20 +106,16 @@ const FilesMediaViewer = (props) => {
   const location = useLocation();
 
   // Plugin logic
-  const {
-    isPluginViewerVisible,
-    handlePluginClose,
-    pluginContent,
-    pluginContextMenuItems,
-  } = usePlugin({
-    pluginMediaViewerVisible,
-    pluginMediaViewerProps,
-    contextMenuItemsList: pluginContextMenuItemsList,
-    getContextMenuKeysByType,
-    currentMediaFileId,
-    playlist,
-    dispatchMessage,
-  });
+  const { handlePluginClose, pluginContent, pluginContextMenuItems } =
+    usePlugin({
+      pluginMediaViewerVisible,
+      pluginMediaViewerProps,
+      contextMenuItemsList: pluginContextMenuItemsList,
+      getContextMenuKeysByType,
+      currentMediaFileId,
+      playlist,
+      dispatchMessage,
+    });
 
   useEffect(() => {
     if (previewFile) {
@@ -238,9 +234,8 @@ const FilesMediaViewer = (props) => {
   );
 
   const onMediaViewerClose = useCallback(async () => {
-
-    if (isPluginViewerVisible) {
-      await handlePluginClose()
+    if (pluginMediaViewerVisible) {
+      await handlePluginClose();
       return;
     }
 
@@ -289,6 +284,7 @@ const FilesMediaViewer = (props) => {
     setMediaViewerData,
     setBufferSelection,
     handlePluginClose,
+    pluginMediaViewerVisible,
   ]);
 
   useEffect(() => {
@@ -306,7 +302,6 @@ const FilesMediaViewer = (props) => {
     aiPlaylistImages.length,
     isPluginViewerVisible,
   ]);
-
 
   return (
     visible && (
@@ -423,7 +418,7 @@ export default inject(
       changeUrl,
       autoPlay,
     } = mediaViewerDataStore;
-    
+
     const { deleteItemAction } = filesActionsStore;
     const { getIcon, extsImagePreviewed, extsMediaPreviewed } =
       filesSettingsStore;
@@ -444,8 +439,8 @@ export default inject(
       onCopyLink,
     } = contextOptionsStore;
 
-    const { 
-      contextMenuItemsList, 
+    const {
+      contextMenuItemsList,
       getContextMenuKeysByType,
       pluginMediaViewerVisible,
       pluginMediaViewerProps,
@@ -454,7 +449,8 @@ export default inject(
       dispatchMessage,
     } = pluginStore;
 
-    const isPluginViewerVisible = pluginMediaViewerVisible && !!pluginMediaViewerProps;
+    const isPluginViewerVisible =
+      pluginMediaViewerVisible && !!pluginMediaViewerProps;
 
     return {
       files,
@@ -465,7 +461,9 @@ export default inject(
       prevMedia,
       userAccess,
       isOpenMediaViewer: visible || isPluginViewerVisible,
-      visible: (playlist.length > 0 || aiPlaylistImages.length > 0) && visible || isPluginViewerVisible,
+      visible:
+        ((playlist.length > 0 || aiPlaylistImages.length > 0) && visible) ||
+        isPluginViewerVisible,
       currentMediaFileId,
       deleteItemAction,
       setMediaViewerData,
@@ -512,7 +510,7 @@ export default inject(
       isPublicRoom,
       openUrl,
       aiPlaylistImages,
-      pluginMediaViewerVisible,
+      pluginMediaViewerVisible: isPluginViewerVisible,
       pluginMediaViewerProps,
       setPluginMediaViewerVisible,
       setPluginMediaViewerProps,
@@ -522,3 +520,4 @@ export default inject(
     };
   },
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));
+

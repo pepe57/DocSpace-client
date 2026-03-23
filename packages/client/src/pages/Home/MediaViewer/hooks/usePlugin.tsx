@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useCallback, useEffect, useEffectEvent, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import {
   PluginFileType,
   PluginComponents,
@@ -58,15 +58,10 @@ export const usePlugin = ({
   currentMediaFileId,
   playlist,
 }: UsePluginProps) => {
-  const isPluginViewerVisible = useMemo(
-    () => pluginMediaViewerVisible && !!pluginMediaViewerProps,
-    [pluginMediaViewerVisible, pluginMediaViewerProps],
-  );
-
   const isLoaded = useRef(false);
 
   const handlePluginClose = useCallback(async () => {
-    if (!isPluginViewerVisible || !pluginMediaViewerProps?.onClose) {
+    if (!pluginMediaViewerVisible || !pluginMediaViewerProps?.onClose) {
       return null;
     }
 
@@ -74,13 +69,14 @@ export const usePlugin = ({
     const message = await pluginMediaViewerProps.onClose();
 
     dispatchMessage({ message, pluginName });
-  }, [pluginMediaViewerProps, isPluginViewerVisible, dispatchMessage]);
+  }, [pluginMediaViewerProps, pluginMediaViewerVisible, dispatchMessage]);
 
   const onLoad = useCallback(async () => {
     if (pluginMediaViewerProps?.onLoad && currentMediaFileId) {
       const message = await pluginMediaViewerProps.onLoad({
         fileId: currentMediaFileId,
       });
+
       dispatchMessage({
         message,
         pluginName: pluginMediaViewerProps.pluginName,
@@ -89,7 +85,7 @@ export const usePlugin = ({
   }, [pluginMediaViewerProps, currentMediaFileId, dispatchMessage]);
 
   useEffect(() => {
-    if (!isPluginViewerVisible) {
+    if (!pluginMediaViewerVisible) {
       isLoaded.current = false;
       return;
     }
@@ -102,11 +98,11 @@ export const usePlugin = ({
       isLoaded.current = true;
       onLoad();
     }
-  }, [isPluginViewerVisible, onLoad]);
+  }, [pluginMediaViewerVisible, onLoad]);
 
   // Get plugin viewer content component
   const pluginContent = useMemo(() => {
-    if (!isPluginViewerVisible) return null;
+    if (!pluginMediaViewerVisible) return null;
 
     return (
       <WrappedComponent
@@ -121,7 +117,7 @@ export const usePlugin = ({
         setSaveButtonProps={undefined}
       />
     );
-  }, [isPluginViewerVisible, pluginMediaViewerProps]);
+  }, [pluginMediaViewerVisible, pluginMediaViewerProps]);
 
   // Get plugin context menu items
   const pluginContextMenuItems = useMemo(() => {
@@ -166,7 +162,6 @@ export const usePlugin = ({
   ]);
 
   return {
-    isPluginViewerVisible,
     handlePluginClose,
     pluginContent,
     pluginContextMenuItems,

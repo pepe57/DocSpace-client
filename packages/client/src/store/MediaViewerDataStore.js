@@ -302,7 +302,7 @@ class MediaViewerDataStore {
   filterFilesByPluginCriteria = (files) => {
     if (!this.isPluginViewerActive) return files;
 
-    const { pluginMediaViewerProps, getCurrentDevice, getUserType } =
+    const { pluginMediaViewerProps, getCurrentDevice, getUserRole } =
       this.pluginStore;
 
     const playlistFilter = pluginMediaViewerProps?.playlistFilter;
@@ -338,7 +338,7 @@ class MediaViewerDataStore {
 
       // Check user type
       if (usersTypes && usersTypes.length > 0) {
-        const currentUserType = getUserType();
+        const currentUserType = getUserRole();
         if (!usersTypes.includes(currentUserType)) {
           return false;
         }
