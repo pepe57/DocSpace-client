@@ -280,7 +280,7 @@ export default inject(
       isBackupServiceOn,
     } = paymentStore;
 
-    const { isFreeTariff, isBackupPaid, maxFreeBackups } = currentQuotaStore;
+    const { isFreeTariff, maxFreeBackups } = currentQuotaStore;
     const { usedBackupsCount, isInitServicesData } = servicesStore;
 
     return {
@@ -290,7 +290,6 @@ export default inject(
       changeServiceState,
       isBackupServiceOn,
       isFreeTariff,
-      isBackupPaid,
       maxFreeBackups,
       usedBackupsCount,
       isInitServicesData,
