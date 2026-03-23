@@ -100,7 +100,7 @@ type ServicesItemsProps = {
   wasFirstAiServiceTopUp?: boolean;
   availableBackupsCount?: number;
   isBackupServiceOn?: boolean;
-  previousStoragePlanSize?:boolean;
+  previousStoragePlanSize?: boolean;
 };
 
 const ServicesItems: React.FC<ServicesItemsProps> = ({
@@ -130,7 +130,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
   wasFirstAiServiceTopUp,
   availableBackupsCount,
   isBackupServiceOn,
-  previousStoragePlanSize
+  previousStoragePlanSize,
 }) => {
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
   const { t } = useServicesActions();
@@ -201,10 +201,9 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
   ) => {
     switch (serviceName) {
       case TOTAL_SIZE:
-
-      if(previousStoragePlanSize) {
-        return t("Services:SubscriptionDeactivated")
-      }
+        if (previousStoragePlanSize) {
+          return t("Services:SubscriptionDeactivated");
+        }
 
         if (hasScheduledStorageChange) {
           return t("ChangeShedule");
@@ -229,10 +228,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
         });
 
       case BACKUP_SERVICE:
-        if (
-          isBackupServiceOn &&
-          availableBackupsCount === 0
-        ) {
+        if (isBackupServiceOn && availableBackupsCount === 0) {
           return t("Services:BackupsNotAvailable");
         }
 
@@ -280,11 +276,8 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
         })}
       >
         {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
-
-       console.log("item",item)
           if (!item.title || !item.image) return null;
 
-       
           if (item.serviceName === BACKUP_SERVICE) {
             return (
               <ServiceCard
@@ -303,7 +296,11 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                   item.price.value,
                 )}
                 tooltip={isDisabled ? permissionTooltipText : undefined}
-                isWarningColor={item.value && walletCustomerEmail ? availableBackupsCount === 0 : false}
+                isWarningColor={
+                  item.value && walletCustomerEmail
+                    ? availableBackupsCount === 0
+                    : false
+                }
               />
             );
           }
@@ -350,7 +347,9 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 image={item.image}
                 isEnabled={hasStorageSubscription}
                 tooltip={isDisabled ? permissionTooltipText : undefined}
-                priceTooltip={hasScheduledStorageChange ? textTooltip : undefined}
+                priceTooltip={
+                  hasScheduledStorageChange ? textTooltip : undefined
+                }
                 isWarningColor={hasScheduledStorageChange}
                 isErrorColor={previousStoragePlanSize}
               />
@@ -397,7 +396,7 @@ export default inject(
       nextStoragePlanSize,
       storageExpiryDate,
       hasStorageSubscription,
-      previousStoragePlanSize
+      previousStoragePlanSize,
     } = currentTariffStatusStore;
 
     const { isFreeTariff } = currentQuotaStore;
@@ -430,7 +429,8 @@ export default inject(
       wasFirstAiServiceTopUp,
       availableBackupsCount,
       isBackupServiceOn,
-      previousStoragePlanSize
+      previousStoragePlanSize,
     };
   },
 )(observer(ServicesItems));
+
