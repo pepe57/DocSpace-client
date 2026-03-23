@@ -443,7 +443,6 @@ export default inject(
     const {
       contextMenuItemsList,
       getContextMenuKeysByType,
-      pluginMediaViewerVisible,
       pluginMediaViewerProps,
       setPluginMediaViewerVisible,
       setPluginMediaViewerProps,
