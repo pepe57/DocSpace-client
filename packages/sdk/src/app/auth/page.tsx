@@ -24,93 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// @ts-nocheck
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import AuthClient from "./AuthClient";
 
-import { request, setWithCredentialsStatus } from "../client";
+export default async function AuthPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ callback?: string; redirectUrl?: string }>;
+}) {
+  const { callback, redirectUrl = null } = await searchParams;
 
-export function login(
-  userName,
-  passwordHash,
-  password,
-  session,
-  recaptchaResponse,
-  recaptchaType,
-  culture,
-) {
-  const data = {
-    userName,
-    passwordHash,
-    password,
-    session,
-    recaptchaResponse,
-    recaptchaType,
-    culture,
-  };
+  if (!callback) {
+    return <div>Missing callback parameter</div>;
+  }
 
-  return request({
-    method: "post",
-    url: "/authentication",
-    skipLogout: true,
-    data,
-  });
-}
+  const cookieStore = await cookies();
+  const hasAuth = !!cookieStore.get("asc_auth_key");
 
-export function thirdPartyLogin(SerializedProfile, culture) {
-  return request({
-    method: "post",
-    url: "authentication",
-    skipLogout: true,
-    data: { SerializedProfile, culture },
-  });
-}
+  if (hasAuth && redirectUrl) {
+    redirect(redirectUrl);
+  }
 
-export function logout() {
-  return request({
-    method: "post",
-    url: "/authentication/logout",
-  });
-}
-
-export function checkConfirmLink(data) {
-  return request({
-    method: "post",
-    url: "/authentication/confirm",
-    data,
-  });
-}
-
-export function checkIsAuthenticated() {
-  return request({
-    method: "get",
-    url: "/authentication",
-    withCredentials: true,
-  }).then((state) => {
-    setWithCredentialsStatus(state);
-    return state;
-  });
-}
-
-export function loginWithTfaCode(userName, passwordHash, code) {
-  const data = {
-    userName,
-    passwordHash,
-    code,
-  };
-
-  return request({
-    method: "post",
-    url: `/authentication/${code}`,
-    skipLogout: true,
-    data,
-  });
-}
-
-export function loginWithConfirmKey(data) {
-  return request({
-    method: "post",
-    url: `/authentication`,
-    skipLogout: true,
-    data,
-  });
+  return <AuthClient callback={callback} redirectUrl={redirectUrl} />;
 }
 
