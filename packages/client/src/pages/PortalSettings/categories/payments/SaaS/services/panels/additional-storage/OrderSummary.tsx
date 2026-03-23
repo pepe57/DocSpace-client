@@ -62,6 +62,7 @@ type OrderSummaryProps = {
   hasMinError?: boolean;
   language?: string;
   hasStorageSubscription?: boolean;
+  isExceedingStorageLimit?: boolean;
 };
 
 const OrderSummary: React.FC<OrderSummaryProps> = ({
@@ -81,15 +82,13 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   hasMinError,
   language = "en",
   hasStorageSubscription,
+  isExceedingStorageLimit,
 }) => {
   const { t } = useTranslation(["Services", "Payments", "Common"]);
   const { isRTL } = useInterfaceDirection();
   const { setIsWaitingCalculation } = usePaymentContext();
-  const {
-    calculateDifferenceBetweenPlan,
-    isExceedingPlanLimit,
-    maxStorageLimit,
-  } = useServicesActions();
+  const { calculateDifferenceBetweenPlan, maxStorageLimit } =
+    useServicesActions();
 
   const [isPriceLoading, setIsPriceLoading] = useState(false);
 
@@ -99,6 +98,8 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   const isNewSubscription = !hasStorageSubscription;
 
   useEffect(() => {
+    if (isExceedingStorageLimit) return;
+
     if (isNewSubscription || isDowngradeStoragePlan) return;
 
     setIsPriceLoading(true);
@@ -138,8 +139,6 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
       setIsWaitingCalculation(false);
     };
   }, []);
-
-  const isExceedingStorageLimit = isExceedingPlanLimit(amount);
 
   const tooltipText = () => (
     <>

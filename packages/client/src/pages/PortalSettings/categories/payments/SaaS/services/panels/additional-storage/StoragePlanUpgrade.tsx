@@ -145,11 +145,12 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const newStorageSizeOnUpgrade =
     isUpgradeStoragePlan && currentStoragePlanSize! > 0;
 
-  const isPaymentBlockedByBalance = isDowngradeStoragePlan
-    ? false
-    : newStorageSizeOnUpgrade
-      ? isWalletBalanceInsufficient(partialUpgradeFee!)
-      : isWalletBalanceInsufficient(totalPrice);
+  const isPaymentBlockedByBalance =
+    isDowngradeStoragePlan || isExceedingStorageLimit
+      ? false
+      : newStorageSizeOnUpgrade
+        ? isWalletBalanceInsufficient(partialUpgradeFee!)
+        : isWalletBalanceInsufficient(totalPrice);
 
   const isPaymentBlocked =
     (!hasScheduledStorageChange && +amount < MIN_VALUE && amount === "") ||
@@ -449,6 +450,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
                   isDowngradeStoragePlan={isDowngradeStoragePlan}
                   reccomendedAmount={reccomendedAmount}
                   hasMinError={hasMinError}
+                  isExceedingStorageLimit={isExceedingStorageLimit}
                 />
               ) : null}
             </div>
