@@ -39,7 +39,10 @@ import {
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
 import { calculateTotalPrice } from "@docspace/shared/utils/common";
-import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
+import {
+  STORAGE_DEACTIVATION_VISITED,
+  STORAGE_TARIFF_DEACTIVATED,
+} from "@docspace/shared/constants";
 import { useNavigate } from "react-router";
 
 import SalesDepartmentRequestDialog from "SRC_DIR/components/dialogs/SalesDepartmentRequestDialog";
@@ -197,6 +200,10 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
     if (localStorage.getItem(STORAGE_TARIFF_DEACTIVATED) !== null) {
       localStorage.removeItem(STORAGE_TARIFF_DEACTIVATED);
+    }
+
+    if (localStorage.getItem(STORAGE_DEACTIVATION_VISITED) !== null) {
+      localStorage.removeItem(STORAGE_DEACTIVATION_VISITED);
     }
 
     setIsLoading(false);

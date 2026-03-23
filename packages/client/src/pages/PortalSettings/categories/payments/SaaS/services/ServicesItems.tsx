@@ -101,6 +101,7 @@ type ServicesItemsProps = {
   availableBackupsCount?: number;
   isBackupServiceOn?: boolean;
   previousStoragePlanSize?: boolean;
+  isStorageDeactivationVisited?: boolean;
 };
 
 const ServicesItems: React.FC<ServicesItemsProps> = ({
@@ -131,6 +132,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
   availableBackupsCount,
   isBackupServiceOn,
   previousStoragePlanSize,
+  isStorageDeactivationVisited,
 }) => {
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
   const { t } = useServicesActions();
@@ -201,7 +203,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
   ) => {
     switch (serviceName) {
       case TOTAL_SIZE:
-        if (previousStoragePlanSize) {
+        if (previousStoragePlanSize && !isStorageDeactivationVisited) {
           return t("Services:SubscriptionDeactivated");
         }
 
@@ -351,7 +353,9 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                   hasScheduledStorageChange ? textTooltip : undefined
                 }
                 isWarningColor={hasScheduledStorageChange}
-                isErrorColor={previousStoragePlanSize}
+                isErrorColor={
+                  previousStoragePlanSize && !isStorageDeactivationVisited
+                }
               />
             );
           }
@@ -379,6 +383,7 @@ export default inject(
       formatWalletCurrency,
       availableBackupsCount,
       isBackupServiceOn,
+      isStorageDeactivationVisited,
     } = paymentStore;
 
     const {
@@ -430,6 +435,7 @@ export default inject(
       availableBackupsCount,
       isBackupServiceOn,
       previousStoragePlanSize,
+      isStorageDeactivationVisited,
     };
   },
 )(observer(ServicesItems));
