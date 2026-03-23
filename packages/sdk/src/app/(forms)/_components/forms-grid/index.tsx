@@ -31,7 +31,6 @@ import { observer } from "mobx-react";
 import { usePathname } from "next/navigation";
 
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useItemList from "@/app/(docspace)/_hooks/useItemList";
@@ -111,22 +110,7 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
   const hasItems = items.length > 0;
 
   if (!hasFolders && !hasItems) {
-    if (isLoading) {
-      return (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          <Loader type={LoaderTypes.dualRing} size="40px" />
-        </div>
-      );
-    }
-    return <FormsEmpty />;
+    return isLoading ? null : <FormsEmpty />;
   }
 
   if ((isFoldersRoot || !hasItems) && hasFolders) {
