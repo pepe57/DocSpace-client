@@ -45,6 +45,7 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 
 import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+import { FUNCTION_EMPTY } from "@docspace/ui-kit/constants";
 
 import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementFilter } from "./TagManagement.filter";
@@ -74,7 +75,7 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
 
   const isMobile = useIsMobile();
   useClickOutside(isMobile ? modalRef : ref, onClose, EVENT_OPTIONS);
-  useEventListener("resize", onClose);
+  useEventListener("resize", isMobile ? FUNCTION_EMPTY : onClose);
 
   useCloseOnAnchorCovered({
     anchorRef: anchor,
