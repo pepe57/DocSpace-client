@@ -417,6 +417,7 @@ export default inject(
       prevMedia,
       changeUrl,
       autoPlay,
+      isPluginViewerActive,
     } = mediaViewerDataStore;
 
     const { deleteItemAction } = filesActionsStore;
@@ -449,9 +450,6 @@ export default inject(
       dispatchMessage,
     } = pluginStore;
 
-    const isPluginViewerVisible =
-      pluginMediaViewerVisible && !!pluginMediaViewerProps;
-
     return {
       files,
       autoPlay,
@@ -460,10 +458,10 @@ export default inject(
       nextMedia,
       prevMedia,
       userAccess,
-      isOpenMediaViewer: visible || isPluginViewerVisible,
+      isOpenMediaViewer: visible || isPluginViewerActive,
       visible:
         ((playlist.length > 0 || aiPlaylistImages.length > 0) && visible) ||
-        isPluginViewerVisible,
+        isPluginViewerActive,
       currentMediaFileId,
       deleteItemAction,
       setMediaViewerData,
@@ -510,7 +508,7 @@ export default inject(
       isPublicRoom,
       openUrl,
       aiPlaylistImages,
-      pluginMediaViewerVisible: isPluginViewerVisible,
+      pluginMediaViewerVisible: isPluginViewerActive,
       pluginMediaViewerProps,
       setPluginMediaViewerVisible,
       setPluginMediaViewerProps,
