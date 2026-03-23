@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { headers, cookies } from "next/headers";
+import { headers } from "next/headers";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FilterType } from "@docspace/shared/enums";
@@ -40,11 +40,7 @@ import { getFormsFolder } from "@/api/forms";
 import { getSelf } from "@/api/people";
 import { getDefaultProvider } from "@/api/ai";
 import { getSettings } from "@/api/settings";
-import {
-  REQUEST_TOKEN_HEADER,
-  ROOM_ID_HEADER,
-  PAGE_COUNT,
-} from "@/utils/constants";
+import { ROOM_ID_HEADER, PAGE_COUNT } from "@/utils/constants";
 
 import FormsPage from "./page.client";
 
@@ -55,14 +51,7 @@ export default async function Forms({
 }) {
   const hdrs = await headers();
   const params = await searchParams;
-
   const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
-  const requestToken =
-    hdrs.get(REQUEST_TOKEN_HEADER) || params.requestToken || "";
-
-  // Read httpOnly cookie server-side for AI API auth
-  const cookieStore = await cookies();
-  const authToken = cookieStore.get("asc_auth_key")?.value || "";
 
   const filter = FilesFilter.getDefault();
   filter.pageCount = PAGE_COUNT;
@@ -77,7 +66,7 @@ export default async function Forms({
   if (roomId) {
     const [fs, fd, u, dp, portalSettings] = await Promise.all([
       getFilesSettings(),
-      getFormsFolder(roomId, filter, requestToken),
+      getFormsFolder(roomId, filter),
       getSelf(),
       getDefaultProvider(),
       getSettings().catch(() => undefined),
@@ -107,8 +96,6 @@ export default async function Forms({
   return (
     <FormsPage
       roomId={roomId}
-      requestToken={requestToken}
-      authToken={authToken}
       filesSettings={filesSettings!}
       initialFolderData={initialFolderData}
       user={user}

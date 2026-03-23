@@ -3,7 +3,7 @@
   "content": "AI settings",
   "content_en_sha1_hash": "6dcf51d7630d6e48c2162d10dfcc2c61485912c7",
   "created_at": "2025-10-27T16:14:27.398Z",
-  "updated_at": "2025-10-27T18:01:18.754Z",
+  "updated_at": "2026-03-20T09:07:45.558Z",
   "comment": {
     "text": "This key displays the label for AI-related settings within the Portal Settings section, likely as a menu item or heading. It refers to configurations or options related to artificial intelligence functionality within the application. Translators should ensure the term \"AI\" is appropriate for the target audience.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 249,
+      "line_number": 242,
       "context": "case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n default:\n throw new Error(\"Unexpected translation key\");\n }\n };",
       "module": "/packages/client"
     },

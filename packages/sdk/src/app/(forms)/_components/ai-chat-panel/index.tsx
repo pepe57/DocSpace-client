@@ -32,6 +32,7 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import Chat from "@docspace/ui-kit/ai-agent/chat";
 
@@ -40,7 +41,7 @@ import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
-import LoginReactSvgUrl from "PUBLIC_DIR/images/icons/16/login.react.svg?url";
+import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 
 import ResizeHandle from "./ResizeHandle";
 import styles from "./AiChatPanel.module.scss";
@@ -163,16 +164,25 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
           <Text fontSize="16px" fontWeight={700}>
             {t("Common:AIAgent")}
           </Text>
+          {isSyncing && (
+            <span
+              title={t("Common:SyncingKnowledgeBase")}
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <Loader type={LoaderTypes.track} size="16px" />
+            </span>
+          )}
         </div>
         <div className={styles.headerActions}>
           <IconButton
-            iconName={LoginReactSvgUrl}
+            iconName={LogoutReactSvgUrl}
             size={16}
             className={
               panelPosition === "right" ? styles.positionIconFlipped : undefined
             }
             onClick={handleTogglePosition}
-            title={
+            tooltipId="move-panel-tooltip"
+            tooltipContent={
               panelPosition === "right"
                 ? t("Common:MovePanelLeft")
                 : t("Common:MovePanelRight")
@@ -182,17 +192,11 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
             iconName={CrossReactSvgUrl}
             size={17}
             onClick={closePanel}
+            tooltipId="close-panel-tooltip"
+            tooltipContent={t("Common:CloseButton")}
           />
         </div>
       </div>
-
-      {isSyncing ? (
-        <div className={styles.syncBanner} role="status" aria-live="polite">
-          <Text fontSize="12px" className={styles.syncText}>
-            {t("Common:SyncingKnowledgeBase")}
-          </Text>
-        </div>
-      ) : null}
 
       <div className={styles.chatBody}>
         <Chat
