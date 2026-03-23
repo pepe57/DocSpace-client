@@ -41,11 +41,13 @@ const MyFormsPage = () => {
   const formsSettingsStore = useFormsSettingsStore();
   const { fetchSection, fetchMore } = useFormsData();
 
+  const fetchSectionRef = React.useRef(fetchSection);
+  fetchSectionRef.current = fetchSection;
+
   React.useEffect(() => {
-    // Skip fetch if store already has data from layout SSR hydration
     if (formsListStore.items.length > 0 && !formsListStore.isLoading) return;
-    fetchSection(FormsSection.MyForms);
-  }, []);
+    fetchSectionRef.current(FormsSection.MyForms);
+  }, [formsListStore]);
 
   return (
     <FormsGrid
