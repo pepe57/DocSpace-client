@@ -92,6 +92,13 @@ export const settingsTree = [
             link: "ad-management",
             tKey: "AdManagement",
           },
+          {
+            id: "portal-settings_catalog-ai-services-management",
+            key: "0-0-6",
+            icon: "",
+            link: "ai-services-management",
+            tKey: "AiServicesManagement",
+          },
         ],
       },
       {
@@ -687,7 +694,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-portal-bonus",
-        key: "12-0",
+        key: "11-0",
         icon: "",
         link: "",
         tKey: "Common:FreeAccessToLicensedVersion",
@@ -821,3 +828,4 @@ export const settingsTreeFull = [
     link: "statistics",
   },
 ];
+

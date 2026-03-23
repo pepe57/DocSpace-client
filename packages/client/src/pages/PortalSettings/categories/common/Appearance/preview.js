@@ -33,8 +33,6 @@ import ButtonPlusIcon from "PUBLIC_DIR/images/actions.button.plus.react.svg";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
-import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import {
   StyledComponent,
   StyledFloatingButton,
@@ -44,7 +42,6 @@ import {
 
 const Preview = (props) => {
   const {
-    appliedColorAccent,
     previewAccent,
     themePreview,
     selectThemeId,
@@ -68,24 +65,9 @@ const Preview = (props) => {
     }
   };
 
-  const getSettings = () => {
-    const selectColorAccent = getFromSessionStorage("selectColorAccent");
-    saveToSessionStorage("defaultColorAccent", appliedColorAccent);
-
-    if (selectColorAccent) {
-      setColorPreview(selectColorAccent);
-    } else {
-      setColorPreview(appliedColorAccent);
-    }
-  };
-
   useEffect(() => {
-    getSettings();
+    setColorPreview(previewAccent);
   }, [previewAccent]);
-
-  useEffect(() => {
-    saveToSessionStorage("selectColorAccent", colorPreview);
-  }, [colorPreview]);
 
   useLayoutEffect(() => {
     onCheckView();

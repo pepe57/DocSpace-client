@@ -60,6 +60,7 @@ const ArticleBodyContent = (props) => {
     isProfileLoading,
     currentColorScheme,
     baseDomain,
+    aiServicesEnabled,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -162,7 +163,7 @@ const ArticleBodyContent = (props) => {
       }
 
       if (location.pathname.includes("bonus")) {
-        setSelectedKeys(["12-0"]);
+        setSelectedKeys(["11-0"]);
       }
     }
   }, [
@@ -250,8 +251,12 @@ const ArticleBodyContent = (props) => {
 
     let resultTree = [...settingsTree];
 
+    if (!aiServicesEnabled) {
+      resultTree = resultTree.filter((e) => e.tKey !== "AISettings");
+    }
+
     if (isNotPaidPeriod) {
-      resultTree = [...settingsTree].filter((e) => {
+      resultTree = resultTree.filter((e) => {
         return (
           e.tKey === "Backup" ||
           e.tKey === "Common:PaymentsTitle" ||
@@ -360,6 +365,7 @@ export default inject(
       limitedAccessSpace,
       currentColorScheme,
       baseDomain,
+      aiServicesEnabled,
     } = settingsStore;
 
     const isProfileLoading =
@@ -382,6 +388,7 @@ export default inject(
       limitedAccessSpace,
       currentColorScheme,
       baseDomain,
+      aiServicesEnabled,
     };
   },
 )(
@@ -391,3 +398,4 @@ export default inject(
     ),
   ),
 );
+
