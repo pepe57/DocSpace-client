@@ -154,7 +154,9 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
       // Build breadcrumbs: Library > language > ...subfolders (reversed for Navigation component)
       const crumbs: { id: string | number; title: string; isRootRoom: boolean }[] = [];
 
-      // Subfolder path (reversed — Navigation expects deepest-first)
+      // Skip folderPath[last] — it is the current folder shown as the page
+      // title, not a breadcrumb. Remaining ancestors are added deepest-first
+      // (Navigation component expects this order).
       for (let i = libraryNav.folderPath.length - 2; i >= 0; i--) {
         const f = libraryNav.folderPath[i];
         crumbs.push({ id: f.id, title: f.title, isRootRoom: false });
