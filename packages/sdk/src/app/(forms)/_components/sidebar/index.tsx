@@ -69,7 +69,9 @@ const FormsSidebar = () => {
     goBackToCompletedRoot,
     goBackToInProgressRoot,
   } = useFormsNavigationStore();
-  const { hasLibrary } = useFormsSettingsStore();
+  const formsSettingsStore = useFormsSettingsStore();
+  const { hasLibrary } = formsSettingsStore;
+  const showLibrary = hasLibrary && !!formsSettingsStore.folderSecurity?.Create;
   const libraryNav = useLibraryNavigationStore();
   const { user } = useFormsUserStore();
   const showSettings = user?.isOwner || user?.isAdmin;
@@ -134,35 +136,6 @@ const FormsSidebar = () => {
         className={`article-body__scrollbar ${styles.scrollbar}`}
         scrollClass="article-scroller"
       >
-        {hasLibrary && (
-          <>
-            <SidebarNavItem
-              id="forms-nav-library"
-              label={t("Common:Library")}
-              icon={TemplateGalleryReactSvgUrl}
-              isActive={activeSection === FormsSection.Library}
-              onClick={() => {
-                if (activeSection === FormsSection.Library) {
-                  if (libraryNav.depth > 0) {
-                    libraryNav.reset();
-                  } else {
-                    setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
-                  }
-                  return;
-                }
-                const params = new URLSearchParams();
-                const rid = searchParams.get("roomId") ?? "";
-                const lid = searchParams.get("libraryId") ?? "";
-                if (rid) params.set("roomId", rid);
-                if (lid) params.set("libraryId", lid);
-                const qs = params.toString();
-                router.replace(`${sectionToPath(FormsSection.Library)}${qs ? `?${qs}` : ""}`);
-              }}
-              showText={showText}
-            />
-            <div style={{ height: "12px", flexShrink: 0 }} />
-          </>
-        )}
         {sections.map((section) => (
           <SidebarNavItem
             key={section.key}
@@ -202,6 +175,35 @@ const FormsSidebar = () => {
             showText={showText}
           />
         ))}
+        {showLibrary && (
+          <>
+            <div style={{ height: "12px", flexShrink: 0 }} />
+            <SidebarNavItem
+              id="forms-nav-library"
+              label={t("Common:Library")}
+              icon={TemplateGalleryReactSvgUrl}
+              isActive={activeSection === FormsSection.Library}
+              onClick={() => {
+                if (activeSection === FormsSection.Library) {
+                  if (libraryNav.depth > 0) {
+                    libraryNav.reset();
+                  } else {
+                    setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
+                  }
+                  return;
+                }
+                const params = new URLSearchParams();
+                const rid = searchParams.get("roomId") ?? "";
+                const lid = searchParams.get("libraryId") ?? "";
+                if (rid) params.set("roomId", rid);
+                if (lid) params.set("libraryId", lid);
+                const qs = params.toString();
+                router.replace(`${sectionToPath(FormsSection.Library)}${qs ? `?${qs}` : ""}`);
+              }}
+              showText={showText}
+            />
+          </>
+        )}
       </Scrollbar>
       {showSettings && (
         <div className={styles.navBottom}>

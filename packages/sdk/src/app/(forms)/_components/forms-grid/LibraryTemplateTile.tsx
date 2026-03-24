@@ -38,7 +38,6 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { copyToFolder } from "@docspace/shared/api/files";
 import type { TFile } from "@docspace/shared/api/files/types";
 import { ConflictResolveType } from "@docspace/shared/enums";
-import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import type { TFileItem } from "@/app/(docspace)/_hooks/useItemList";
@@ -67,7 +66,6 @@ const LibraryTemplateTile = ({
   const { filesSettings } = useFilesSettingsStore();
   const { roomId, libraryId } = useFormsSettingsStore();
   const [isCopying, setIsCopying] = useState(false);
-  const unmountedRef = useRef(false);
 
   const thumbUrl = item.thumbnailUrl
     ? item.thumbnailUrl.replace(/^https?:\/\/[^/]+/, "")
@@ -101,13 +99,6 @@ const LibraryTemplateTile = ({
     };
   }, [thumbUrl, item.providerItem]);
 
-  useEffect(() => {
-    unmountedRef.current = false;
-    return () => {
-      unmountedRef.current = true;
-    };
-  }, []);
-
   const handleUseTemplate = useCallback(
     async (e: React.MouseEvent) => {
       e.stopPropagation();
@@ -130,42 +121,15 @@ const LibraryTemplateTile = ({
           return;
         }
 
-        // Poll until the server finishes the async copy operation
-        if (op && !op.finished) {
-          const MAX_ATTEMPTS = 60;
-          let finished = false;
-          let attempts = 0;
-
-          while (!finished && attempts < MAX_ATTEMPTS) {
-            if (unmountedRef.current) return;
-            attempts += 1;
-
-            const progressItem = await getOperationProgress(
-              op.id,
-              t("Common:Error"),
-              true,
-            );
-            if (unmountedRef.current) return;
-
-            if (progressItem?.error) {
-              toastr.error(progressItem.error);
-              return;
-            }
-            finished = progressItem?.finished ?? true;
-          }
-
-          if (!finished) {
-            toastr.error(t("Common:Error"));
-            return;
-          }
-        }
-
+        // Navigate immediately — no polling needed. MyForms page will
+        // fetch fresh data on mount, and the socket will push real-time
+        // updates once the server finishes the copy operation.
         const params = new URLSearchParams();
         if (roomId) params.set("roomId", String(roomId));
-        if (libraryId)
-          params.set("libraryId", String(libraryId));
+        if (libraryId) params.set("libraryId", String(libraryId));
         const qs = params.toString();
-        router.replace(
+
+        router.push(
           `${sectionToPath(FormsSection.MyForms)}${qs ? `?${qs}` : ""}`,
         );
       } catch (error) {
@@ -174,7 +138,7 @@ const LibraryTemplateTile = ({
         setIsCopying(false);
       }
     },
-    [isCopying, roomId, libraryId, file.id, router, t],
+    [isCopying, roomId, libraryId, file.id, router],
   );
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
