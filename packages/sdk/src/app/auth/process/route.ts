@@ -72,6 +72,16 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    if (docSpaceToken === "empty") {
+      const loginUrl = new URL("/login");
+
+      if (redirectUrl) {
+        loginUrl.searchParams.set("referenceUrl", redirectUrl);
+      }
+
+      return NextResponse.redirect(loginUrl);
+    }
+
     const response = NextResponse.json({ userId, redirectUrl });
 
     response.cookies.set("asc_auth_key", docSpaceToken, {
