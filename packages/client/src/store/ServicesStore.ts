@@ -44,7 +44,7 @@ import {
 import { getBackupsCount } from "@docspace/shared/api/backup";
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/wallet/utils";
+import { formatterCurrencyWithoutTranction } from "@docspace/ui-kit/payments/wallet/utils";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import {
   AI_ENUM,

@@ -44,9 +44,9 @@ import { Component as DeleteData } from "../categories/delete-data";
 import { Component as StorageManagement } from "../categories/storage-management";
 import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
-import { Component as Services } from "../categories/payments/SaaS/services";
+import { PaymentServicesList as Services } from "@docspace/ui-kit/payments";
 import { Component as AISettings } from "../categories/ai-settings";
-import AiPage from "../categories/payments/SaaS/services/pages/ai-tools/AiPage";
+import { default as AiPage } from "@docspace/ui-kit/payments/services/pages/ai-tools/AiPage";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
@@ -56,13 +56,13 @@ import useDeleteData from "../categories/delete-data/useDeleteData";
 import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
 import usePayments from "../categories/payments/usePayments";
-import useServices from "../categories/payments/SaaS/services/useServices";
+import useServices from "@docspace/ui-kit/payments/services/useServices";
 import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
-import BackupPage from "../categories/payments/SaaS/services/pages/backup/BackupPage";
-import AdditionalStoragePage from "../categories/payments/SaaS/services/pages/additional-storage/AdditionalStoragePage";
+import { default as BackupPage } from "@docspace/ui-kit/payments/services/pages/backup/BackupPage";
+import { default as AdditionalStoragePage } from "@docspace/ui-kit/payments/services/pages/additional-storage/AdditionalStoragePage";
 
 const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("customization")) return "customization";

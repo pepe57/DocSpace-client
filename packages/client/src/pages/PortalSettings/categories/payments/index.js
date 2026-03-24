@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Tabs } from "@docspace/ui-kit/components/tabs";
@@ -35,76 +35,73 @@ import { isManagement } from "@docspace/shared/utils/common";
 
 import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
-import PaymentsSaaS from "./SaaS/main-tariff";
-import Wallet from "./SaaS/wallet";
-import PaymentMethod from "./SaaS/payment-method";
-import usePayments from "./usePayments";
-import { Component as Services } from "./SaaS/services";
-
-import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
+import {
+  PaymentDashboard as PaymentsSaaS,
+  PaymentWallet as Wallet,
+  PaymentMethod,
+  PaymentServicesList as Services,
+  PaymentsRoot,
+} from "@docspace/ui-kit/payments";
 
 const PaymentsPage = (props) => {
   const {
     currentDeviceType,
     standalone,
-    paymentStore,
     settingsStore,
-    servicesStore,
     clearAbortControllerArr,
+    language,
   } = props;
   const [currentTabId, setCurrentTabId] = useState();
   const location = useLocation();
   const navigate = useNavigate();
-  const { t } = useTranslation(["Payments", "Settings"]);
+  const { t } = useTranslation(["Payments", "Settings", "Common"]);
 
-  const defaultProps = createDefaultHookSettingsProps({
-    paymentStore,
-    settingsStore,
-    servicesStore,
-  });
-
-  const {
-    getWalletData,
-    getPortalPaymentsData,
-    getServicesData,
-    getPaymentMethodData,
-  } = usePayments(defaultProps.payment);
+  const paymentConfig = useMemo(
+    () => ({
+      language,
+      theme: settingsStore?.theme,
+      expandArticle: settingsStore?.expandArticle,
+      logoText: settingsStore?.logoText,
+    }),
+    [
+      language,
+      settingsStore?.theme,
+      settingsStore?.expandArticle,
+      settingsStore?.logoText,
+    ],
+  );
 
   const data = [
     {
       id: "portal-payments",
       name: t("PortalTariffPlan", { productName: t("Common:ProductName") }),
       content: <PaymentsSaaS />,
-      onClick: async () => {
+      onClick: () => {
         clearAbortControllerArr();
-        await getPortalPaymentsData();
       },
     },
     {
       id: "payment-method",
       name: t("PaymentMethod"),
       content: <PaymentMethod />,
-      onClick: async () => {
+      onClick: () => {
         clearAbortControllerArr();
-        await getPaymentMethodData();
       },
     },
     {
       id: "wallet",
       name: t("Wallet"),
       content: <Wallet />,
-      onClick: async () => {
+      onClick: () => {
         clearAbortControllerArr();
-        await getWalletData();
       },
     },
     {
       id: "services",
       name: t("Settings:Services"),
       content: <Services />,
-      onClick: async () => {
+      onClick: () => {
         clearAbortControllerArr();
-        await getServicesData();
       },
     },
   ];
@@ -128,29 +125,29 @@ const PaymentsPage = (props) => {
   if (standalone) return <PaymentsEnterprise />;
 
   return (
-    <Tabs
-      items={data}
-      selectedItemId={currentTabId}
-      onSelect={(e) => onSelect(e)}
-      stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
-      withAnimation
-    />
+    <PaymentsRoot config={paymentConfig}>
+      <Tabs
+        items={data}
+        selectedItemId={currentTabId}
+        onSelect={(e) => onSelect(e)}
+        stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+        withAnimation
+      />
+    </PaymentsRoot>
   );
 };
 
 export const Component = inject(
-  ({ settingsStore, paymentStore, servicesStore }) => {
+  ({ settingsStore, authStore }) => {
     const { standalone, currentDeviceType, clearAbortControllerArr } =
       settingsStore;
 
     return {
       standalone,
       currentDeviceType,
-      paymentStore,
       settingsStore,
       clearAbortControllerArr,
-      servicesStore,
+      language: authStore?.language,
     };
   },
 )(observer(PaymentsPage));
-
