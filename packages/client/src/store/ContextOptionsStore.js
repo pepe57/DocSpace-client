@@ -2408,7 +2408,7 @@ class ContextOptionsStore {
       {
         id: "option_change-room-owner",
         key: "change-room-owner",
-        label: t("Files:ChangeTheRoomOwner"),
+        label: t("Files:ChangeRoomOwner"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: isAIAgent,
@@ -2432,9 +2432,9 @@ class ContextOptionsStore {
         onClick: () => this.onSetUpCustomFilter(item, t),
         disabled: Boolean(
           !isRoomAdmin &&
-            item.customFilterEnabled &&
-            item.customFilterEnabledBy &&
-            item.customFilterEnabledBy !== this.userStore?.user?.displayName,
+          item.customFilterEnabled &&
+          item.customFilterEnabledBy &&
+          item.customFilterEnabledBy !== this.userStore?.user?.displayName,
         ),
       },
       {
