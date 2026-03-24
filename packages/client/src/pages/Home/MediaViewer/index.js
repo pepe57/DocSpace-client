@@ -34,7 +34,7 @@ import { UrlActionType } from "@docspace/shared/enums";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 import { Portal } from "@docspace/ui-kit/components/portal";
-import { usePlugin } from "./Hooks/usePlugin";
+import { usePlugin } from "./hooks/usePlugin";
 
 const FilesMediaViewer = (props) => {
   const {
