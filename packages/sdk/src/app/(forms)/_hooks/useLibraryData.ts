@@ -73,6 +73,8 @@ export default function useLibraryData() {
     };
   }, []);
 
+  // Store refs are stable (created once per context via useMemo), so the
+  // callback is effectively created once. Consumer uses fetchRef pattern.
   const fetchLibrarySection = useCallback(async () => {
     abortRef.current?.abort();
     fetchMoreAbortRef.current?.abort();
@@ -90,52 +92,30 @@ export default function useLibraryData() {
       return;
     }
 
-    // Determine which folder to fetch:
     // Level 0 → library room root; Level 1+ → currentFolder
     const folderId = libraryNav.currentFolder?.id ?? libraryId;
 
     try {
-      // First, probe the folder to check whether it contains subfolders.
-      // Use a small page count — we only need to know if folders exist.
-      const probeFilter = FilesFilter.getDefault();
-      probeFilter.page = 0;
-      probeFilter.pageCount = LIBRARY_PAGE_COUNT;
+      const filter = FilesFilter.getDefault();
+      filter.page = 0;
+      filter.pageCount = PAGE_COUNT;
 
       const res = await api.files.getFolder(
         folderId,
-        probeFilter,
+        filter,
         controller.signal,
       );
 
       if (controller.signal.aborted) return;
 
-      const hasFolders = res.folders.length > 0;
-      const hasFiles = res.files.length > 0;
-
-      if (hasFolders) {
-        // Show folders — fetch the full set if the probe didn't get them all
-        if (res.folders.length >= LIBRARY_PAGE_COUNT) {
-          const fullFilter = FilesFilter.getDefault();
-          fullFilter.page = 0;
-          fullFilter.pageCount = PAGE_COUNT;
-
-          const fullRes = await api.files.getFolder(
-            folderId,
-            fullFilter,
-            controller.signal,
-          );
-
-          if (controller.signal.aborted) return;
-
-          formsListStore.setFolders(fullRes.folders);
-        } else {
-          formsListStore.setFolders(res.folders);
-        }
+      if (res.folders.length > 0) {
+        // Folder level — show subfolders (no pagination needed)
+        formsListStore.setFolders(res.folders);
         formsListStore.setItems([], 0);
-      } else if (hasFiles) {
+      } else if (res.files.length > 0) {
         // Leaf level — show template files with pagination
         const files = res.files;
-        apiExhausted.current = files.length < LIBRARY_PAGE_COUNT;
+        apiExhausted.current = files.length < PAGE_COUNT;
         const total = apiExhausted.current
           ? files.length
           : files.length + 1;
@@ -144,7 +124,6 @@ export default function useLibraryData() {
         currentPage.current = 0;
         requestThumbnails(files);
       } else {
-        // Empty folder
         formsListStore.setFolders([]);
         formsListStore.setItems([], 0);
       }
