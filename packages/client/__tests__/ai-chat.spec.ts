@@ -403,6 +403,40 @@ test.describe("AI chat", () => {
       ]);
     });
 
+    test("should render ai message with think block", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT, "thinkBlock"),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const thinkTitle = page.getByTestId("think-title");
+      await expect(thinkTitle).toBeVisible();
+      await expect(page.getByTestId("think-finished-icon")).toBeVisible();
+      await expect(page.getByTestId("think-content")).not.toBeVisible();
+
+      await thinkTitle.click();
+
+      await expectScreenshot(page, [
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-message-think-block.png",
+      ]);
+    });
+
     test("should render ai message with web crawling tool", async ({
       page,
       mockRequest,
