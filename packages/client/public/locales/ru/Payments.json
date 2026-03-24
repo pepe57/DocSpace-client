@@ -64,7 +64,7 @@
   "GoToTariffPlan": "Перейти к тарифному плану",
   "GracePeriodActivatedDescription": "В течение льготного периода администраторы не могут создавать новые комнаты и добавлять новых пользователей. По истечении льготного периода {{productName}} станет недоступным до тех пор, пока не будет произведен платеж.",
   "GracePeriodActivatedInfo": "Льготный период действует <1>с {{fromDate}} по {{byDate}}</1> (дней осталось: {{delayDaysCount}}).",
-  "GracePeriodActive": "Льготный период действует с {{fromDate}} по {{byDate}} (осталось дней: {{delayDaysCount}}).",
+  "GracePeriodActive": "Льготный период действует <1>с {{fromDate}} по {{byDate}}</1> (осталось дней: {{delayDaysCount}}).",
   "InvalidEmailWithoutActiveSubscription": "Мы рекомендуем выбрать нового плательщика, который получит доступ к настройкам подписки в {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Мы рекомендуем связаться с владельцем {{productName}} для выбора нового плательщика.",
   "LicenseExpired": "Невозможно добавить новых пользователей и создать новые комнаты. Срок действия лицензии истек.",
