@@ -26,40 +26,49 @@
 
 "use client";
 
-import { FormsSection } from "@/types/forms";
+import React from "react";
+import { observer } from "mobx-react";
 
-const FORMS_PREFIX = "/forms/";
+import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import { useLibraryNavigationStore } from "../../_store/LibraryNavigationStore";
+import useLibraryData from "../../_hooks/useLibraryData";
+import FormsGrid from "../../_components/forms-grid";
 
-const SECTION_MAP: Record<string, FormsSection> = {
-  [FormsSection.MyForms]: FormsSection.MyForms,
-  [FormsSection.Library]: FormsSection.Library,
-  [FormsSection.InProgress]: FormsSection.InProgress,
-  [FormsSection.CompletedForms]: FormsSection.CompletedForms,
-  [FormsSection.Settings]: FormsSection.Settings,
+const LibraryPage = () => {
+  const formsSettingsStore = useFormsSettingsStore();
+  const libraryNav = useLibraryNavigationStore();
+  const { fetchLibrarySection, fetchMore } = useLibraryData();
+
+  // Fetch when navigation changes (language selected, subfolder opened/closed)
+  const fetchRef = React.useRef(fetchLibrarySection);
+  fetchRef.current = fetchLibrarySection;
+  React.useEffect(() => {
+    fetchRef.current();
+  }, [libraryNav.languageFolder, libraryNav.folderPath.length]);
+
+  // Back button trap: navigate up levels instead of leaving the page
+  React.useEffect(() => {
+    if (libraryNav.depth === 0) return;
+
+    const handlePopState = () => {
+      history.pushState(null, "", window.location.href);
+      libraryNav.goBack();
+    };
+
+    history.pushState(null, "", window.location.href);
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [libraryNav.depth, libraryNav]);
+
+  return (
+    <FormsGrid
+      filesSettings={formsSettingsStore.filesSettings!}
+      fetchMore={fetchMore}
+    />
+  );
 };
 
-/**
- * Maps a URL pathname to the corresponding FormsSection enum value.
- *
- * usePathname() in Next.js App Router returns the path without basePath,
- * so "/sdk" prefix stripping is not needed.
- */
-export function sectionFromPathname(pathname: string): FormsSection {
-  const formsIndex = pathname.indexOf(FORMS_PREFIX);
-
-  if (formsIndex === -1) return FormsSection.MyForms;
-
-  const segment = pathname.slice(formsIndex + FORMS_PREFIX.length).split("/")[0];
-
-  return SECTION_MAP[segment] ?? FormsSection.MyForms;
-}
-
-/**
- * Returns the path segment for a given FormsSection, without a basePath
- * prefix (Next.js adds the configured basePath automatically).
- *
- * Example: FormsSection.MyForms → "/forms/my-forms"
- */
-export function sectionToPath(section: FormsSection): string {
-  return `${FORMS_PREFIX.slice(0, -1)}/${section}`;
-}
+export default observer(LibraryPage);

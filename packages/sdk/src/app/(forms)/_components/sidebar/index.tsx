@@ -38,6 +38,7 @@ import styles from "./FormsSidebar.module.scss";
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
+import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
@@ -47,6 +48,8 @@ import { FormsSection } from "@/types/forms";
 
 import { sectionFromPathname, sectionToPath } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
+import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import { useLibraryNavigationStore } from "../../_store/LibraryNavigationStore";
 import { useFormsUserStore } from "../../_store/FormsUserStore";
 import SidebarNavItem from "./SidebarNavItem";
 
@@ -66,6 +69,8 @@ const FormsSidebar = () => {
     goBackToCompletedRoot,
     goBackToInProgressRoot,
   } = useFormsNavigationStore();
+  const { hasLibrary } = useFormsSettingsStore();
+  const libraryNav = useLibraryNavigationStore();
   const { user } = useFormsUserStore();
   const showSettings = user?.isOwner || user?.isAdmin;
 
@@ -107,8 +112,13 @@ const FormsSidebar = () => {
       setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
       return;
     }
-    const roomId = searchParams.get("roomId") ?? "";
-    router.replace(`${sectionToPath(FormsSection.Settings)}${roomId ? `?roomId=${roomId}` : ""}`);
+    const params = new URLSearchParams();
+    const rid = searchParams.get("roomId") ?? "";
+    const lid = searchParams.get("libraryId") ?? "";
+    if (rid) params.set("roomId", rid);
+    if (lid) params.set("libraryId", lid);
+    const qs = params.toString();
+    router.replace(`${sectionToPath(FormsSection.Settings)}${qs ? `?${qs}` : ""}`);
   }, [router, searchParams, activeSection]);
 
   return (
@@ -124,6 +134,35 @@ const FormsSidebar = () => {
         className={`article-body__scrollbar ${styles.scrollbar}`}
         scrollClass="article-scroller"
       >
+        {hasLibrary && (
+          <>
+            <SidebarNavItem
+              id="forms-nav-library"
+              label={t("Common:Library")}
+              icon={TemplateGalleryReactSvgUrl}
+              isActive={activeSection === FormsSection.Library}
+              onClick={() => {
+                if (activeSection === FormsSection.Library) {
+                  if (libraryNav.depth > 0) {
+                    libraryNav.reset();
+                  } else {
+                    setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
+                  }
+                  return;
+                }
+                const params = new URLSearchParams();
+                const rid = searchParams.get("roomId") ?? "";
+                const lid = searchParams.get("libraryId") ?? "";
+                if (rid) params.set("roomId", rid);
+                if (lid) params.set("libraryId", lid);
+                const qs = params.toString();
+                router.replace(`${sectionToPath(FormsSection.Library)}${qs ? `?${qs}` : ""}`);
+              }}
+              showText={showText}
+            />
+            <div style={{ height: "12px", flexShrink: 0 }} />
+          </>
+        )}
         {sections.map((section) => (
           <SidebarNavItem
             key={section.key}
@@ -152,8 +191,13 @@ const FormsSidebar = () => {
                 }
                 return;
               }
-              const roomId = searchParams.get("roomId") ?? "";
-              router.replace(`${sectionToPath(section.key)}${roomId ? `?roomId=${roomId}` : ""}`);
+              const params = new URLSearchParams();
+              const rid = searchParams.get("roomId") ?? "";
+              const lid = searchParams.get("libraryId") ?? "";
+              if (rid) params.set("roomId", rid);
+              if (lid) params.set("libraryId", lid);
+              const qs = params.toString();
+              router.replace(`${sectionToPath(section.key)}${qs ? `?${qs}` : ""}`);
             }}
             showText={showText}
           />
