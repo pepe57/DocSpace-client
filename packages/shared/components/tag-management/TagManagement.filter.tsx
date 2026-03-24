@@ -36,7 +36,11 @@ import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 
 import { Tag } from "@docspace/ui-kit/components/tag";
 import { Text } from "@docspace/ui-kit/components/text";
-import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/ui-kit/components/text-input";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useTagManagement } from "./TagManagement.provider";
@@ -143,6 +147,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
             autoFocus
             withBorder={false}
             value={inputValue}
+            size={InputSize.base}
             type={InputType.search}
             className={styles.input}
             onChange={onChangeSearchValue}
