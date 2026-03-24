@@ -31,6 +31,22 @@ import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_AI_ROOMS_CHATS_CONFIG = "ai/rooms/*/chats/config";
 
+const successDefault = {
+  response: {
+    webSearchEnabled: false,
+    reasoningEffort: null,
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_CONFIG}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 const successWebSearchEnabled = {
   response: {
     webSearchEnabled: true,
@@ -70,19 +86,21 @@ const successPut = {
 };
 
 export const aiRoomsChatsConfigResolver = (
-  type: "default" | "thinkingEnabled" = "default",
+  type: "default" | "webSearchEnabled" | "thinkingEnabled" = "default",
 ) => {
   switch (type) {
+    case "webSearchEnabled":
+      return new Response(JSON.stringify(successWebSearchEnabled));
     case "thinkingEnabled":
       return new Response(JSON.stringify(successThinkingEnabled));
     case "default":
-      return new Response(JSON.stringify(successWebSearchEnabled));
+      return new Response(JSON.stringify(successDefault));
   }
 };
 
 export const aiRoomsChatsConfigHandler = (
   port: string,
-  type: "default" | "thinkingEnabled" = "default",
+  type: "default" | "webSearchEnabled" | "thinkingEnabled" = "default",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_CONFIG}`,

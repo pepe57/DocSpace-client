@@ -955,7 +955,7 @@ test.describe("AI chat", () => {
       baseUrl,
     }) => {
       mockRequest.use(
-        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsChatsConfigHandler(TEST_PORT, "webSearchEnabled"),
         aiRoomsServersHandler(TEST_PORT),
         aiRoomsChatsHandler(TEST_PORT),
         agentFolderChatHandler(TEST_PORT),
