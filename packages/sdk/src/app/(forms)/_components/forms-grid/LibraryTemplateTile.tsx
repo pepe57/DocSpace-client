@@ -174,7 +174,7 @@ const LibraryTemplateTile = ({
         setIsCopying(false);
       }
     },
-    [isCopying, roomId, libraryId, file.id, router],
+    [isCopying, roomId, libraryId, file.id, router, t],
   );
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
