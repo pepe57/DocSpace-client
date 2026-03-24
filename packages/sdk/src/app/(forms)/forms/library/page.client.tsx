@@ -46,16 +46,35 @@ const LibraryPage = () => {
     fetchRef.current();
   }, [libraryNav.languageFolder, libraryNav.folderPath.length]);
 
-  // Back button trap: navigate up levels instead of leaving the page
+  // Back button trap: intercept browser Back to navigate up folder levels.
+  // Push a single history entry when entering depth > 0, then re-push on
+  // each popstate to keep the trap active. No extra entries are added on
+  // deeper navigation — the single sentinel is reused.
+  // Back button trap: intercept browser Back to navigate up folder levels.
+  // Push a single sentinel history entry on 0→1 transition. The popstate
+  // handler re-pushes it while depth > 1 and consumes it on 1→0.
+  const prevDepthRef = React.useRef(0);
   React.useEffect(() => {
-    if (libraryNav.depth === 0) return;
+    const depth = libraryNav.depth;
+    const prevDepth = prevDepthRef.current;
+    prevDepthRef.current = depth;
+
+    // Entered a subfolder from root — push one sentinel entry
+    if (depth > 0 && prevDepth === 0) {
+      history.pushState({ libraryTrap: true }, "", window.location.href);
+    }
+
+    if (depth === 0) return;
 
     const handlePopState = () => {
-      history.pushState(null, "", window.location.href);
+      // Going from depth 2+ → still inside subfolders, keep the trap
+      if (libraryNav.depth > 1) {
+        history.pushState({ libraryTrap: true }, "", window.location.href);
+      }
+      // depth 1 → 0: sentinel is consumed by this popstate, no re-push needed
       libraryNav.goBack();
     };
 
-    history.pushState(null, "", window.location.href);
     window.addEventListener("popstate", handlePopState);
 
     return () => {

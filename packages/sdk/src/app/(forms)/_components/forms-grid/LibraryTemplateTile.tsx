@@ -56,8 +56,6 @@ type LibraryTemplateTileProps = {
   getIcon: TGetIcon;
 };
 
-const thumbnailCache = new Map<string, string>();
-
 const LibraryTemplateTile = ({
   item,
   file,
@@ -69,23 +67,19 @@ const LibraryTemplateTile = ({
   const { filesSettings } = useFilesSettingsStore();
   const { roomId, libraryId } = useFormsSettingsStore();
   const [isCopying, setIsCopying] = useState(false);
+  const unmountedRef = useRef(false);
 
   const thumbUrl = item.thumbnailUrl
     ? item.thumbnailUrl.replace(/^https?:\/\/[^/]+/, "")
     : "";
-  const [blobThumbnail, setBlobThumbnail] = useState(
-    () => (thumbUrl && thumbnailCache.get(thumbUrl)) || "",
-  );
+  const [blobThumbnail, setBlobThumbnail] = useState("");
 
   useEffect(() => {
     if (!thumbUrl || item.providerItem) return;
 
-    if (thumbnailCache.has(thumbUrl)) {
-      setBlobThumbnail(thumbnailCache.get(thumbUrl)!);
-      return;
-    }
-
     let cancelled = false;
+    let blobUrl = "";
+
     fetch(thumbUrl, { credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error(`${res.status}`);
@@ -93,20 +87,24 @@ const LibraryTemplateTile = ({
       })
       .then((blob) => {
         if (cancelled) return;
-        const blobUrl = URL.createObjectURL(blob);
-        thumbnailCache.set(thumbUrl, blobUrl);
+        blobUrl = URL.createObjectURL(blob);
         setBlobThumbnail(blobUrl);
       })
       .catch(() => {});
 
     return () => {
       cancelled = true;
+      if (blobUrl) {
+        URL.revokeObjectURL(blobUrl);
+      }
+      setBlobThumbnail("");
     };
   }, [thumbUrl, item.providerItem]);
 
   useEffect(() => {
+    unmountedRef.current = false;
     return () => {
-      setBlobThumbnail("");
+      unmountedRef.current = true;
     };
   }, []);
 
@@ -134,18 +132,31 @@ const LibraryTemplateTile = ({
 
         // Poll until the server finishes the async copy operation
         if (op && !op.finished) {
+          const MAX_ATTEMPTS = 60;
           let finished = false;
-          while (!finished) {
-            const item = await getOperationProgress(
+          let attempts = 0;
+
+          while (!finished && attempts < MAX_ATTEMPTS) {
+            if (unmountedRef.current) return;
+            attempts += 1;
+
+            const progressItem = await getOperationProgress(
               op.id,
               t("Common:Error"),
               true,
             );
-            if (item?.error) {
-              toastr.error(item.error);
+            if (unmountedRef.current) return;
+
+            if (progressItem?.error) {
+              toastr.error(progressItem.error);
               return;
             }
-            finished = item?.finished ?? true;
+            finished = progressItem?.finished ?? true;
+          }
+
+          if (!finished) {
+            toastr.error(t("Common:Error"));
+            return;
           }
         }
 
