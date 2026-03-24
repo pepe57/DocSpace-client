@@ -140,7 +140,21 @@ const BackupPage: React.FC<BackupPageProps> = ({
       <ServiceToggleSection
         isEnabled={isBackupServiceOn!}
         onToggle={handleToggleChange}
-        title={t("Common:Backup")}
+        title={
+          <Text fontSize="12px" fontWeight={400}>
+            <Trans
+              t={t}
+              ns="Payments"
+              i18nKey="BackupTitle"
+              values={{
+                currency: formatWalletCurrency!(backupServicePrice, 2),
+              }}
+              components={{
+                1: <Text as="span" fontSize="13px" fontWeight={600} />,
+              }}
+            />
+          </Text>
+        }
         description={t("Payments:BackupDescription")}
         isDisabled={isLoading}
       />
@@ -185,8 +199,8 @@ const BackupPage: React.FC<BackupPageProps> = ({
                 {availableBackupsCount}
               </Text>
               <Text className={styles.grayText}>
-                {t("Payments:PerBackupWithBracket", {
-                  currency: `$${backupServicePrice}`,
+                {t("Payments:CurrencyPerBackup", {
+                  currency: formatWalletCurrency!(backupServicePrice, 2),
                 })}
               </Text>
             </div>
@@ -195,7 +209,11 @@ const BackupPage: React.FC<BackupPageProps> = ({
           <Button
             className={styles.backupButton}
             size={ButtonSize.small}
-            label={t("Common:Enable")}
+            label={
+              !isFreeTariff
+                ? t("Services:EnablePaidBackup")
+                : t("Common:Enable")
+            }
             onClick={handleToggleChange}
             primary
             scale
@@ -262,7 +280,7 @@ export default inject(
       isBackupServiceOn,
     } = paymentStore;
 
-    const { isFreeTariff, isBackupPaid, maxFreeBackups } = currentQuotaStore;
+    const { isFreeTariff, maxFreeBackups } = currentQuotaStore;
     const { usedBackupsCount, isInitServicesData } = servicesStore;
 
     return {
@@ -272,7 +290,6 @@ export default inject(
       changeServiceState,
       isBackupServiceOn,
       isFreeTariff,
-      isBackupPaid,
       maxFreeBackups,
       usedBackupsCount,
       isInitServicesData,
