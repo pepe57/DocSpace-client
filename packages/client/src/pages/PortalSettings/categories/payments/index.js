@@ -50,6 +50,7 @@ const PaymentsPage = (props) => {
     settingsStore,
     clearAbortControllerArr,
     language,
+    paymentUser,
   } = props;
   const [currentTabId, setCurrentTabId] = useState();
   const location = useLocation();
@@ -62,12 +63,14 @@ const PaymentsPage = (props) => {
       theme: settingsStore?.theme,
       expandArticle: settingsStore?.expandArticle,
       logoText: settingsStore?.logoText,
+      user: paymentUser,
     }),
     [
       language,
       settingsStore?.theme,
       settingsStore?.expandArticle,
       settingsStore?.logoText,
+      paymentUser,
     ],
   );
 
@@ -137,17 +140,23 @@ const PaymentsPage = (props) => {
   );
 };
 
-export const Component = inject(
-  ({ settingsStore, authStore }) => {
-    const { standalone, currentDeviceType, clearAbortControllerArr } =
-      settingsStore;
+export const Component = inject(({ settingsStore, authStore, userStore }) => {
+  const { standalone, currentDeviceType, clearAbortControllerArr } =
+    settingsStore;
 
-    return {
-      standalone,
-      currentDeviceType,
-      settingsStore,
-      clearAbortControllerArr,
-      language: authStore?.language,
-    };
-  },
-)(observer(PaymentsPage));
+  return {
+    standalone,
+    currentDeviceType,
+    settingsStore,
+    clearAbortControllerArr,
+    language: authStore?.language,
+    paymentUser: userStore?.user
+      ? {
+          id: userStore.user.id,
+          email: userStore.user.email,
+          isOwner: userStore.user.isOwner,
+        }
+      : undefined,
+  };
+})(observer(PaymentsPage));
+
