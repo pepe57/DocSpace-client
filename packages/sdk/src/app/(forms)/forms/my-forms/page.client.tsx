@@ -24,18 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { redirect } from "next/navigation";
-import { headers } from "next/headers";
-import { ROOM_ID_HEADER } from "@/utils/constants";
+"use client";
 
-export default async function FormsRoot({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string }>;
-}) {
-  const hdrs = await headers();
-  const params = await searchParams;
-  const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
+import React from "react";
+import { observer } from "mobx-react";
 
-  redirect(`/forms/my-forms${roomId ? `?roomId=${roomId}` : ""}`);
-}
+import { FormsSection } from "@/types/forms";
+
+import { useFormsListStore } from "../../_store/FormsListStore";
+import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import useFormsData from "../../_hooks/useFormsData";
+import FormsGrid from "../../_components/forms-grid";
+
+const MyFormsPage = () => {
+  const formsListStore = useFormsListStore();
+  const formsSettingsStore = useFormsSettingsStore();
+  const { fetchSection, fetchMore } = useFormsData();
+
+  const fetchSectionRef = React.useRef(fetchSection);
+  fetchSectionRef.current = fetchSection;
+
+  React.useEffect(() => {
+    if (formsListStore.items.length > 0 && !formsListStore.isLoading) return;
+    fetchSectionRef.current(FormsSection.MyForms);
+  }, [formsListStore]);
+
+  return (
+    <FormsGrid
+      filesSettings={formsSettingsStore.filesSettings!}
+      fetchMore={fetchMore}
+    />
+  );
+};
+
+export default observer(MyFormsPage);

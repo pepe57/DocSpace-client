@@ -24,18 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { redirect } from "next/navigation";
-import { headers } from "next/headers";
-import { ROOM_ID_HEADER } from "@/utils/constants";
+"use client";
 
-export default async function FormsRoot({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string }>;
-}) {
-  const hdrs = await headers();
-  const params = await searchParams;
-  const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
+import { useEffect } from "react";
 
-  redirect(`/forms/my-forms${roomId ? `?roomId=${roomId}` : ""}`);
+export default function useEditorGuard(isEditing: boolean): void {
+  useEffect(() => {
+    if (!isEditing) return;
+
+    const handleBeforeUnload = (event: BeforeUnloadEvent): void => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+
+    const handlePopState = (): void => {
+      history.pushState(null, "", window.location.href);
+    };
+
+    history.pushState(null, "", window.location.href);
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [isEditing]);
 }

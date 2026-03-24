@@ -24,18 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { redirect } from "next/navigation";
-import { headers } from "next/headers";
-import { ROOM_ID_HEADER } from "@/utils/constants";
+"use client";
 
-export default async function FormsRoot({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string }>;
-}) {
-  const hdrs = await headers();
-  const params = await searchParams;
-  const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
+import { FormsSection } from "@/types/forms";
 
-  redirect(`/forms/my-forms${roomId ? `?roomId=${roomId}` : ""}`);
+const FORMS_PREFIX = "/forms/";
+
+const SECTION_MAP: Record<string, FormsSection> = {
+  [FormsSection.MyForms]: FormsSection.MyForms,
+  [FormsSection.InProgress]: FormsSection.InProgress,
+  [FormsSection.CompletedForms]: FormsSection.CompletedForms,
+  [FormsSection.Settings]: FormsSection.Settings,
+};
+
+/**
+ * Maps a URL pathname to the corresponding FormsSection enum value.
+ *
+ * usePathname() in Next.js App Router returns the path without basePath,
+ * so "/sdk" prefix stripping is not needed.
+ */
+export function sectionFromPathname(pathname: string): FormsSection {
+  const formsIndex = pathname.indexOf(FORMS_PREFIX);
+
+  if (formsIndex === -1) return FormsSection.MyForms;
+
+  const segment = pathname.slice(formsIndex + FORMS_PREFIX.length).split("/")[0];
+
+  return SECTION_MAP[segment] ?? FormsSection.MyForms;
+}
+
+/**
+ * Returns the path segment for a given FormsSection, without a basePath
+ * prefix (Next.js adds the configured basePath automatically).
+ *
+ * Example: FormsSection.MyForms → "/forms/my-forms"
+ */
+export function sectionToPath(section: FormsSection): string {
+  return `${FORMS_PREFIX.slice(0, -1)}/${section}`;
 }
