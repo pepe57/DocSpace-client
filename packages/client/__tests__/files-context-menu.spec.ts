@@ -32,6 +32,7 @@ import {
   myHandler,
   rootHandler,
   filesSettingsHandler,
+  webPluginsHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
