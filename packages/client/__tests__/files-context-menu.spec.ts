@@ -398,4 +398,76 @@ test.describe("My documents context menu", () => {
       "files-context-menu_media-more.png",
     ]);
   });
+
+  test("DOCX Document menu with plugin in More options", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithPlugins),
+      webPluginsHandler(TEST_PORT, "withData"),
+    );
+
+    await page.route(/\/plugins\/test-plugin-one\/assets\//, (route) => {
+      route.fulfill({
+        contentType: "image/svg+xml",
+        body: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect width="16" height="16" rx="2" fill="#657077"/></svg>',
+      });
+    });
+
+    await page.route("**/plugins/test-plugin-one/plugin.js", (route) => {
+      route.fulfill({
+        contentType: "text/javascript",
+        body: `
+          window.Plugins = window.Plugins || {};
+          window.Plugins.Testpluginone = {
+            getContextMenuItems: function () {
+              return new Map([
+                [
+                  "plugin-test-action",
+                  {
+                    key: "plugin-test-action",
+                    label: "Test Plugin Action",
+                    icon: "plugin-icon.png",
+                    fileType: ["file"],
+                    onItemClick: async function (id) {},
+                  },
+                ],
+              ]);
+            },
+          };
+        `,
+      });
+    });
+
+    const pluginLoadedPromise = page.waitForResponse(
+      "**/plugins/test-plugin-one/plugin.js",
+    );
+
+    await page.goto(`${baseUrl}/rooms/personal/filter?folder=12764`);
+
+    const table = page.getByTestId("table-body");
+    await expect(table).toBeVisible();
+
+    await pluginLoadedPromise;
+
+    const folderItem = table.getByTestId("table-row-3");
+    const contextMenuButton = folderItem
+      .getByTestId("context-menu-button")
+      .first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
+
+    const moreMenu = page.getByTestId("option_info");
+    await moreMenu.hover();
+    await expect(moreMenu).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "context-menu",
+      "files-context-menu_docx-plugin-more.png",
+    ]);
+  });
 });
