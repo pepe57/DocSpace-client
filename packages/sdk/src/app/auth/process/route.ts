@@ -73,7 +73,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (portalToken === "empty") {
-      const loginUrl = new URL("/login");
+      const loginUrl = new URL("/login", redirectUrl || request.nextUrl.origin);
 
       if (redirectUrl) {
         loginUrl.searchParams.set("referenceUrl", redirectUrl);
