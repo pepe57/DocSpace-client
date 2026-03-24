@@ -2432,9 +2432,9 @@ class ContextOptionsStore {
         onClick: () => this.onSetUpCustomFilter(item, t),
         disabled: Boolean(
           !isRoomAdmin &&
-            item.customFilterEnabled &&
-            item.customFilterEnabledBy &&
-            item.customFilterEnabledBy !== this.userStore?.user?.displayName,
+          item.customFilterEnabled &&
+          item.customFilterEnabledBy &&
+          item.customFilterEnabledBy !== this.userStore?.user?.displayName,
         ),
       },
       {
@@ -2651,9 +2651,30 @@ class ContextOptionsStore {
 
     const pluginItems = this.onLoadPlugins(item);
 
-    if (pluginItems.length > 0) {
-      if (pluginItems.length === 1) {
-        const plugin = pluginItems[0];
+    // TODO: remove it option in feature needs for test
+    const PLUGIN_SHOW_MEDIA_VIEWER_KEY = "plugin-show-media-viewer";
+
+    const mediaViewerPluginItem = pluginItems.find(
+      (plug) => plug.key === PLUGIN_SHOW_MEDIA_VIEWER_KEY,
+    );
+    const regularPluginItems = pluginItems.filter(
+      (plug) => plug.key !== PLUGIN_SHOW_MEDIA_VIEWER_KEY,
+    );
+
+    if (mediaViewerPluginItem) {
+      options.push({
+        id: `option_${mediaViewerPluginItem.key}`,
+        key: mediaViewerPluginItem.key,
+        label: mediaViewerPluginItem.label,
+        icon: mediaViewerPluginItem.icon,
+        disabled: false,
+        onClick: mediaViewerPluginItem.onClick,
+      });
+    }
+
+    if (regularPluginItems.length > 0) {
+      if (regularPluginItems.length === 1) {
+        const plugin = regularPluginItems[0];
         options.splice(1, 0, {
           id: `option_${plugin.key}`,
           key: plugin.key,
@@ -2670,7 +2691,7 @@ class ContextOptionsStore {
           label: t("Common:Actions"),
           icon: PluginActionsSvgUrl,
           disabled: false,
-          items: this.onLoadPlugins(item),
+          items: regularPluginItems,
         });
       }
     }
@@ -2789,7 +2810,7 @@ class ContextOptionsStore {
             { key: "show-info" },
             { key: "embedding-settings" },
           ],
-          pluginItems.map((plug) => {
+          regularPluginItems.map((plug) => {
             return { key: plug.key };
           }),
         ],
@@ -2875,6 +2896,7 @@ class ContextOptionsStore {
               "start-filling",
               "vectorization",
               "preview",
+              PLUGIN_SHOW_MEDIA_VIEWER_KEY,
               "mark-read",
               "open-location",
             ],
@@ -3644,3 +3666,4 @@ class ContextOptionsStore {
 }
 
 export default ContextOptionsStore;
+
