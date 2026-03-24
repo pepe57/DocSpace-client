@@ -27,6 +27,7 @@
 import { match } from "ts-pattern";
 import { createPortal } from "react-dom";
 import React, { useLayoutEffect, useRef } from "react";
+import { isTablet } from "react-device-detect";
 import {
   computePosition,
   autoUpdate,
@@ -45,7 +46,6 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 
 import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
-import { FUNCTION_EMPTY } from "@docspace/ui-kit/constants";
 
 import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementFilter } from "./TagManagement.filter";
@@ -75,7 +75,9 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
 
   const isMobile = useIsMobile();
   useClickOutside(isMobile ? modalRef : ref, onClose, EVENT_OPTIONS);
-  useEventListener("resize", isMobile ? FUNCTION_EMPTY : onClose);
+  useEventListener("resize", onClose, undefined, {
+    enabled: !isMobile && !isTablet,
+  });
 
   useCloseOnAnchorCovered({
     anchorRef: anchor,
