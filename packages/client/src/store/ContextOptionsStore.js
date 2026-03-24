@@ -2712,10 +2712,7 @@ class ContextOptionsStore {
       [{ key: "change-room-owner" }, { key: "change-agent-owner" }],
     ];
 
-    if (
-      !(showInfoOption && showVersionHistoryOption) &&
-      pluginItems.length > 0
-    ) {
+    if (pluginItems.length > 0) {
       moreOptionsItemKeys.push(pluginItems.map((p) => ({ key: p.key })));
     }
 
