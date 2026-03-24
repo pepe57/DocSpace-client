@@ -31,9 +31,10 @@ import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_AI_ROOMS_CHATS_CONFIG = "ai/rooms/*/chats/config";
 
-const successAllEnabled = {
+const successWebSearchEnabled = {
   response: {
     webSearchEnabled: true,
+    reasoningEffort: null,
   },
   count: 1,
   links: [
@@ -46,13 +47,52 @@ const successAllEnabled = {
   statusCode: 200,
 };
 
-export const aiRoomsChatsConfigResolver = () => {
-  return new Response(JSON.stringify(successAllEnabled));
+const successThinkingEnabled = {
+  response: {
+    webSearchEnabled: false,
+    reasoningEffort: 2,
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_CONFIG}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
-export const aiRoomsChatsConfigHandler = (port: string) => {
+const successPut = {
+  response: {},
+  status: 0,
+  statusCode: 200,
+};
+
+export const aiRoomsChatsConfigResolver = (
+  type: "default" | "thinkingEnabled" = "default",
+) => {
+  switch (type) {
+    case "thinkingEnabled":
+      return new Response(JSON.stringify(successThinkingEnabled));
+    case "default":
+      return new Response(JSON.stringify(successWebSearchEnabled));
+  }
+};
+
+export const aiRoomsChatsConfigHandler = (
+  port: string,
+  type: "default" | "thinkingEnabled" = "default",
+) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_CONFIG}`,
-    () => aiRoomsChatsConfigResolver(),
+    () => aiRoomsChatsConfigResolver(type),
+  );
+};
+
+export const aiRoomsChatsConfigPutHandler = (port: string) => {
+  return http.put(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_CONFIG}`,
+    () => new Response(JSON.stringify(successPut)),
   );
 };
