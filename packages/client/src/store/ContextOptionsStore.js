@@ -2652,9 +2652,8 @@ class ContextOptionsStore {
     const pluginItems = this.onLoadPlugins(item);
 
     if (pluginItems.length > 0) {
-      if (pluginItems.length === 1) {
-        const plugin = pluginItems[0];
-        options.splice(1, 0, {
+      pluginItems.forEach((plugin) => {
+        options.push({
           id: `option_${plugin.key}`,
           key: plugin.key,
           label: plugin.label,
@@ -2663,16 +2662,7 @@ class ContextOptionsStore {
           onClick: plugin.onClick,
           items: plugin.items,
         });
-      } else {
-        options.splice(1, 0, {
-          id: "option_plugin-actions",
-          key: "plugin_actions",
-          label: t("Common:Actions"),
-          icon: PluginActionsSvgUrl,
-          disabled: false,
-          items: this.onLoadPlugins(item),
-        });
-      }
+      });
     }
 
     const { isCollaborator } = this.userStore?.user || {
@@ -2702,23 +2692,39 @@ class ContextOptionsStore {
       }
     }
 
+    const showInfoOption = newOptions.find(
+      (option) => option.key === "show-info",
+    );
+    const showVersionHistoryOption = newOptions.find(
+      (option) => option.key === "show-version-history",
+    );
+
+    const moreOptionsItemKeys = [
+      [
+        { key: "save-as-template" },
+        { key: "duplicate-room" },
+        { key: "download" },
+        { key: "room-info" },
+        { key: "embedding-settings" },
+        { key: "reconnect-storage" },
+        { key: "export-room-index" },
+      ],
+      [{ key: "change-room-owner" }, { key: "change-agent-owner" }],
+    ];
+
+    if (
+      !(showInfoOption && showVersionHistoryOption) &&
+      pluginItems.length > 0
+    ) {
+      moreOptionsItemKeys.push(pluginItems.map((p) => ({ key: p.key })));
+    }
+
     const menuGroupsConfig = [
       {
         groupKey: "more-options",
         groupLabel: t("Common:MoreOptions"),
         groupIcon: DotsHorizontalUrl,
-        itemKeys: [
-          [
-            { key: "save-as-template" },
-            { key: "duplicate-room" },
-            { key: "download" },
-            { key: "room-info" },
-            { key: "embedding-settings" },
-            { key: "reconnect-storage" },
-            { key: "export-room-index" },
-          ],
-          [{ key: "change-room-owner" }, { key: "change-agent-owner" }],
-        ],
+        itemKeys: moreOptionsItemKeys,
         needsGrouping: true,
         minItemsCount,
       },
@@ -2770,13 +2776,6 @@ class ContextOptionsStore {
         minItemsCount: 1,
       });
     }
-
-    const showInfoOption = newOptions.find(
-      (option) => option.key === "show-info",
-    );
-    const showVersionHistoryOption = newOptions.find(
-      (option) => option.key === "show-version-history",
-    );
 
     if (showInfoOption && showVersionHistoryOption) {
       menuGroupsConfig.push({
