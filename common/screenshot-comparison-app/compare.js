@@ -24,29 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/**
- * Interactive Screenshot Comparison Tool
- *
- * Opens a Playwright browser with a control panel and an iframe where you can
- * navigate DocSpace, open modals / panels / tooltips, load a Figma design,
- * select a comparison area, and see the pixel-diff result
- * right inside the browser.
- *
- * Before using this script:
- * 1. Install dependencies:  npm install && npx playwright install chromium
- * 2. Run:  npm run compare
- *
- * Important:
- *   - Export Figma designs at 1x scale. The tool takes screenshots
- *     at 1x (deviceScaleFactor=1) and normalizes HiDPI captures to 1x.
- *   - Browser zoom must be 100% (Cmd+0 / Ctrl+0). Non-standard zoom
- *     distorts the CSS-to-pixel ratio and produces inaccurate screenshots.
- *
- * Output files (saved to ./images/):
- *   - page.png  — screenshot of the captured area
- *   - diff.png  — visual diff highlighting mismatched pixels
- */
-
 const path = require("path");
 const http = require("http");
 const fs = require("fs");
