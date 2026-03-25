@@ -38,7 +38,6 @@ import {
 
 import { useClickOutside } from "@docspace/ui-kit/utils/use-click-outside";
 import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
-import { useCloseOnAnchorCovered } from "@docspace/ui-kit/hooks/useCloseOnAnchorCovered";
 
 import {
   ModalDialog,
@@ -77,12 +76,6 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   useClickOutside(isMobile ? modalRef : ref, onClose, EVENT_OPTIONS);
   useEventListener("resize", onClose, undefined, {
     enabled: !isMobile && !isTablet,
-  });
-
-  useCloseOnAnchorCovered({
-    anchorRef: anchor,
-    onClose,
-    enabled: !isMobile,
   });
 
   const { data: fetchedTags, status } = useTagsQuery();

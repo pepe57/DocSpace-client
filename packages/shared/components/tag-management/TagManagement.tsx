@@ -32,6 +32,7 @@ import { Tags } from "@docspace/ui-kit/components/tags";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
 import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+import { useCloseOnAnchorCovered } from "@docspace/ui-kit/hooks/useCloseOnAnchorCovered";
 
 import { useIsTable } from "../../hooks/useIsTable";
 
@@ -157,6 +158,13 @@ export const TagManagement: FC<TagManagementProps> = ({
 
   const isTableView = useIsTable();
   const isMobileView = useIsMobile();
+
+  useCloseOnAnchorCovered({
+    anchorRef,
+    onClose,
+    enabled:
+      !isMobileView && !isDeleteModalOpen && !isModalOpen && showTagManagement,
+  });
 
   const isMobile = isTableView || isMobileView || isMobileDevice;
 
