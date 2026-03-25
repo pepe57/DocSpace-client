@@ -85,7 +85,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
 
   const updateTag = useUpdateTag(roomId);
 
-  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [editingLabel, setEditingLabel] = useState<string | null>(null);
 
   const toggleChecked = useCallback(
     (label: string) => {
@@ -115,25 +115,25 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   );
 
   const handleEdit = useCallback(
-    (index: number) => {
-      setEditingIndex(index);
+    (label: string) => {
+      setEditingLabel(label);
 
-      setValue(EDIT_TAG_FORM_NAME, tags[index].label);
+      setValue(EDIT_TAG_FORM_NAME, label);
     },
     [tags, setValue],
   );
 
   const cancelEdit = useCallback(() => {
-    setEditingIndex(null);
+    setEditingLabel(null);
     resetField(EDIT_TAG_FORM_NAME);
   }, [resetField]);
 
   const confirmEdit = useCallback(
     async (submitValue: FormValues) => {
-      if (editingIndex === null) return;
+      if (editingLabel === null) return;
 
       const newLabel = submitValue[EDIT_TAG_FORM_NAME].trim();
-      const oldLabel = tags[editingIndex].label;
+      const oldLabel = editingLabel;
 
       if (newLabel === oldLabel) {
         return cancelEdit();
@@ -159,7 +159,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
         console.error("Failed to update tag name:", error);
       }
     },
-    [editingIndex, tags, cancelEdit, onEditTag],
+    [editingLabel, tags, cancelEdit, onEditTag],
   );
 
   const deleteTag = useCallback(
@@ -209,7 +209,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   return (
     <div className={styles.wrapperList} style={style}>
       <Scrollbar fixedSize className={styles.scrollbar}>
-        {filteredTags.map((tag, index) => {
+        {filteredTags.map((tag) => {
           return (
             <div key={tag.label} className={styles.row}>
               <Checkbox
@@ -219,7 +219,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                 onChange={() => toggleChecked(tag.label)}
                 dataTestId={`tag_checkbox_${tag.label}`}
               />
-              {editingIndex === index ? (
+              {editingLabel === tag.label ? (
                 <>
                   <Controller
                     name={EDIT_TAG_FORM_NAME}
@@ -276,7 +276,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                       size={ICON_SIZE}
                       className={styles.editIcon}
                       iconName={AccessEditReactSvgUrl}
-                      onClick={() => handleEdit(index)}
+                      onClick={() => handleEdit(tag.label)}
                       dataTestId={`edit_tag_button_${tag.label}`}
                     />
                   ) : null}
