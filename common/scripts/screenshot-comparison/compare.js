@@ -114,7 +114,7 @@ function fitAndCrop(src, targetW, targetH) {
 
   const scaled = resizeImage(src, scaledW, scaledH);
 
-  const cropX = Math.floor((scaledW - targetW) / 2);
+  const cropX = 0;
   const out = new PNG({ width: targetW, height: targetH });
 
   for (let y = 0; y < targetH; y++) {
@@ -160,11 +160,12 @@ async function run() {
     process.exit(1);
   }
 
-  // Serve ui.html on a local port
+  const uiHtml = fs.readFileSync(UI_PATH, "utf-8");
+
   const server = http.createServer((req, res) => {
     if (req.url === "/") {
       res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-      res.end(fs.readFileSync(UI_PATH, "utf-8"));
+      res.end(uiHtml);
     } else {
       res.writeHead(404);
       res.end("Not found");
@@ -445,6 +446,14 @@ async function run() {
 
   // Open the UI
   await page.goto(uiUrl);
+
+  const cleanup = () => {
+    server.close();
+    browser.close().catch(() => {});
+  };
+
+  process.on("SIGINT", cleanup);
+  process.on("SIGTERM", cleanup);
 
   await new Promise((resolve) => browser.on("disconnected", resolve));
   server.close();

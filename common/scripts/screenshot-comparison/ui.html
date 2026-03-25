@@ -574,8 +574,8 @@
       });
 
       async function loadDesignFile(file) {
-        if (!file.type.startsWith("image/")) {
-          setStatus("Please drop a PNG image");
+        if (file.type !== "image/png") {
+          setError("Only PNG files are supported");
           return;
         }
         const reader = new FileReader();
@@ -586,11 +586,11 @@
           updateButtons();
           setStatus("Design loaded — select area or compare");
 
-          // Save to images/design.png for AI analysis
           try {
-            await window.__saveDesign(designBase64);
+            const result = JSON.parse(await window.__saveDesign(designBase64));
+            if (result.error) setError("Failed to save design: " + result.error);
           } catch (err) {
-            console.error("Failed to save design:", err);
+            setError("Failed to save design: " + err.message);
           }
         };
         reader.readAsDataURL(file);
@@ -630,7 +630,9 @@
         if (e.key === "Escape" && selectionMode) exitSelectionMode();
       });
 
-      let sx, sy, dragging;
+      let sx = null,
+        sy = null,
+        dragging = false;
 
       selOverlay.addEventListener("mousedown", (e) => {
         sx = e.clientX;
@@ -706,16 +708,17 @@
       compareBtn.addEventListener("click", async () => {
         if (!designBase64) return;
 
-        // Warn if browser zoom is not 100%
-        const isRetina = window.devicePixelRatio >= 1.5;
-        const expectedDPR = isRetina ? 2 : 1;
-        const effectiveZoom = Math.round(
-          (window.devicePixelRatio / expectedDPR) * 100,
-        );
-        if (effectiveZoom !== 100) {
+        // Warn if browser zoom is not 100%.
+        // Standard DPR values: 1 (normal), 2 (Retina/HiDPI), 3 (ultra-HiDPI).
+        // Non-integer DPR indicates active browser zoom.
+        const dpr = window.devicePixelRatio;
+        const isStandardDPR = [1, 2, 3].some((d) => Math.abs(dpr - d) < 0.05);
+        if (!isStandardDPR) {
+          const nearest = Math.round(dpr);
+          const zoomPercent = Math.round((dpr / (nearest || 1)) * 100);
           setError(
-            "Browser zoom is " +
-              effectiveZoom +
+            "Browser zoom is ~" +
+              zoomPercent +
               "%. Set it to 100% (Cmd+0 / Ctrl+0) for accurate comparison.",
           );
           return;
