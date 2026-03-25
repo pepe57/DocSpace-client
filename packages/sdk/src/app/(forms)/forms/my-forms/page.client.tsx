@@ -24,52 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+"use client";
 
-import { tablet, mobile } from "@docspace/shared/utils";
-import { Heading } from "@docspace/ui-kit/components/heading";
+import React from "react";
+import { observer } from "mobx-react";
 
-const StyledHeadline = styled(Heading)`
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 24px;
-  margin-inline-start: 18px;
+import { FormsSection } from "@/types/forms";
 
-  @media ${tablet} {
-    font-size: 21px;
-    line-height: 28px;
-  }
-`;
+import { useFormsListStore } from "../../_store/FormsListStore";
+import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import useFormsData from "../../_hooks/useFormsData";
+import FormsGrid from "../../_components/forms-grid";
 
-const StyledContainer = styled.div`
-  width: 100%;
-  height: 32px;
-  display: flex;
+const MyFormsPage = () => {
+  const formsListStore = useFormsListStore();
+  const formsSettingsStore = useFormsSettingsStore();
+  const { fetchSection, fetchMore } = useFormsData();
 
-  align-items: center;
+  const fetchSectionRef = React.useRef(fetchSection);
+  fetchSectionRef.current = fetchSection;
 
-  .public-room-header_separator {
-    margin-block: 0;
-    margin-inline: 15px 16px;
-    border-inline-start: ${(props) => props.theme.publicRoom.border};
-    height: 21px;
-  }
+  React.useEffect(() => {
+    if (formsListStore.items.length > 0 && !formsListStore.isLoading) return;
+    fetchSectionRef.current(FormsSection.MyForms);
+  }, [formsListStore]);
 
-  @media ${tablet} {
-    width: 100%;
-    padding: 16px 0 0px;
-  }
+  return (
+    <FormsGrid
+      filesSettings={formsSettingsStore.filesSettings!}
+      fetchMore={fetchMore}
+    />
+  );
+};
 
-  @media ${mobile} {
-    width: 100%;
-    padding: 12px 0 0;
-  }
-`;
-
-const StyledToast = styled.div`
-  .public-toast_link {
-    color: ${(props) => props.theme.publicRoom.linkColor} !important;
-  }
-`;
-
-export { StyledHeadline, StyledContainer, StyledToast };
+export default observer(MyFormsPage);

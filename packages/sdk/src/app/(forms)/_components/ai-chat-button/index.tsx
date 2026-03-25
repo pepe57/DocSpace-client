@@ -33,6 +33,7 @@ import { useTranslation } from "react-i18next";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
+import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 
 import { ReactSVG } from "react-svg";
@@ -51,9 +52,11 @@ const AiChatButton = () => {
     isPanelVisible,
     panelPosition,
   } = useFormsAiAgentStore();
+  const { editingFile } = useFormsNavigationStore();
   const { hasManagementAccess } = useFormsSettingsStore();
 
-  if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible) return null;
+  if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible || editingFile)
+    return null;
 
   if (isPreparingAgent) return null;
 
