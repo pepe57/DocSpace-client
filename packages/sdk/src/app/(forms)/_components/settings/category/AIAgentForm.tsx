@@ -339,7 +339,7 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
           <FieldContainer
             labelVisible
             isVertical
-            labelText={t("Common:AIModel")}
+            labelText={t("Common:AIAgentModel")}
             removeMargin
           >
             <ComboBox
