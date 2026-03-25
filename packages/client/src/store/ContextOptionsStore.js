@@ -2713,10 +2713,6 @@ class ContextOptionsStore {
       [{ key: "change-room-owner" }, { key: "change-agent-owner" }],
     ];
 
-    if (pluginItems.length > 0) {
-      moreOptionsItemKeys.push(pluginItems.map((p) => ({ key: p.key })));
-    }
-
     const menuGroupsConfig = [
       {
         groupKey: "more-options",
@@ -2786,9 +2782,6 @@ class ContextOptionsStore {
             { key: "show-info" },
             { key: "embedding-settings" },
           ],
-          pluginItems.map((plug) => {
-            return { key: plug.key };
-          }),
         ],
         needsGrouping: true,
         minItemsCount: 1,
@@ -2844,6 +2837,48 @@ class ContextOptionsStore {
             })();
 
       resultOptions.splice(insertIndex, 0, ...menuGroups);
+    }
+
+    if (pluginItems.length > 0) {
+      const pluginKeys = pluginItems.map((p) => p.key);
+      const ungroupedPlugins = resultOptions.filter((o) =>
+        pluginKeys.includes(o.key),
+      );
+
+      if (ungroupedPlugins.length > 0) {
+        for (let i = resultOptions.length - 1; i >= 0; i--) {
+          if (pluginKeys.includes(resultOptions[i].key))
+            resultOptions.splice(i, 1);
+        }
+
+        const moreOptionsGroup =
+          resultOptions.find((o) => o.key === "more-options") ||
+          resultOptions.find((o) => o.key === "info");
+        if (moreOptionsGroup) {
+          moreOptionsGroup.items.push(
+            { key: "separator-before-plugins", isSeparator: true },
+          );
+          ungroupedPlugins.forEach((p) => moreOptionsGroup.items.push(p));
+        } else {
+          const externalLinkIdx = resultOptions.findIndex(
+            (o) => o.key === "external-link",
+          );
+          const roomMembersLinkIdx = resultOptions.findIndex(
+            (o) => o.key === "link-for-room-members",
+          );
+          const menuIdx =
+            externalLinkIdx !== -1 ? externalLinkIdx : roomMembersLinkIdx;
+          const pluginInsertIdx = menuIdx !== -1 ? menuIdx + 1 : 1;
+
+          resultOptions.splice(pluginInsertIdx, 0, {
+            id: "option_more-options",
+            key: "more-options",
+            label: t("Common:MoreOptions"),
+            icon: DotsHorizontalUrl,
+            items: ungroupedPlugins,
+          });
+        }
+      }
     }
 
     const downloadGroupIndex = resultOptions.findIndex(
