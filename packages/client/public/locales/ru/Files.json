@@ -138,7 +138,7 @@
   "NewInRoom": "Новое в комнате",
   "NewInRooms": "Новое в комнатах",
   "NoAccessRoomTitle": "Извините, у вас нет доступа к этой комнате.",
-  "NoAccessSectionTitle": "Извините, у вас нет доступа к этому разделу",
+  "NoAccessSectionTitle": "К сожалению, у вас нет доступа к этому разделу",
   "NoExternalLinks": "Нет внешних ссылок",
   "OpenCreatedTemplate": "Открыть созданный шаблон",
   "OpenedViaLink": "Открыто по ссылке: доступ <strong>\"{{access}}\"</strong>.",
