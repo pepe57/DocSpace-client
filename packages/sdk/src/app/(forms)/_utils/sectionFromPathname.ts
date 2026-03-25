@@ -32,6 +32,7 @@ const FORMS_PREFIX = "/forms/";
 
 const SECTION_MAP: Record<string, FormsSection> = {
   [FormsSection.MyForms]: FormsSection.MyForms,
+  [FormsSection.Library]: FormsSection.Library,
   [FormsSection.InProgress]: FormsSection.InProgress,
   [FormsSection.CompletedForms]: FormsSection.CompletedForms,
   [FormsSection.Settings]: FormsSection.Settings,

@@ -1202,6 +1202,9 @@ importers:
       react-google-recaptcha:
         specifier: 3.1.0
         version: 3.1.0(react@19.2.4)
+      react-hook-form:
+        specifier: ^7.71.2
+        version: 7.71.2(react@19.2.4)
       react-i18next:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -3146,7 +3149,7 @@ packages:
     version: 3.6.0
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
-    resolution: {integrity: sha512-jE2KmQbWWsiNdaluMqLy/eN6VJG4nnBaDmo98/dR3XS1LfjW0+MrHUT0hGTQPC5AhTDIJCwisxsCzNrhHdqgng==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
+    resolution: {integrity: sha512-Zuv1poJ5277rCJvq95fkDwCazeghyDACewJqL1IylyrMczphveAPZ89IkRcMQTxmarEfjHC+YQ7Vggm2dFwUng==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
     version: 2.1.0
     hasBin: true
 
