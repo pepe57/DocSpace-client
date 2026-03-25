@@ -49,5 +49,5 @@ common/translation-app/backend/src/scripts/form/output
 **/next-env.d.ts
 test-results
 
-common/scripts/screenshot-comparison/.env
-common/scripts/screenshot-comparison/images/*.png
+common/screenshot-comparison-app/.env
+common/screenshot-comparison-app/images/*.png
