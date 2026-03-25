@@ -2149,7 +2149,7 @@ class ContextOptionsStore {
         onClick: () => this.onCopyLink(item, t),
         disabled: item.isTemplate
           ? false
-          : item.canShare ||
+          : (!item.isRoom && item.canShare) ||
             (isPublicRoomType && hasShareLinkRights) ||
             Boolean(
               item.external && (item.isLinkExpired || item.passwordProtected),
