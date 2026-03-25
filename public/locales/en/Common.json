@@ -99,6 +99,7 @@
   "ArchivingData": "Archiving data",
   "AskAboutFormData": "Ask anything about \"{{name}}\" using the submitted data",
   "AskAI": "Ask AI",
+  "AskFromDB": "Ask from DB",
   "Assign": "Assign",
   "AssignRecipients": "Assign recipients",
   "AssignRecipientsDescription": "The form was successfully submitted to {{roomName}}. Assign recipient roles to the chosen users to enable form filling. Do you want to proceed now or get back to it later?",

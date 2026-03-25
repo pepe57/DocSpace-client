@@ -71,9 +71,8 @@ class FormsListStore {
   }
 }
 
-export const FormsListStoreContext = React.createContext<FormsListStore>(
-  new FormsListStore(),
-);
+export const FormsListStoreContext =
+  React.createContext<FormsListStore | null>(null);
 
 export const FormsListStoreContextProvider = ({
   children,
@@ -89,5 +88,10 @@ export const FormsListStoreContextProvider = ({
 };
 
 export const useFormsListStore = () => {
-  return React.useContext(FormsListStoreContext);
+  const store = React.useContext(FormsListStoreContext);
+  if (!store)
+    throw new Error(
+      "useFormsListStore must be used within FormsListStoreContextProvider",
+    );
+  return store;
 };

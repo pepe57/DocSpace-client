@@ -794,9 +794,8 @@ class FormsAiAgentStore {
   };
 }
 
-export const FormsAiAgentStoreContext = React.createContext<FormsAiAgentStore>(
-  new FormsAiAgentStore(),
-);
+export const FormsAiAgentStoreContext =
+  React.createContext<FormsAiAgentStore | null>(null);
 
 export const FormsAiAgentStoreContextProvider = ({
   children,
@@ -812,5 +811,10 @@ export const FormsAiAgentStoreContextProvider = ({
 };
 
 export const useFormsAiAgentStore = () => {
-  return React.useContext(FormsAiAgentStoreContext);
+  const store = React.useContext(FormsAiAgentStoreContext);
+  if (!store)
+    throw new Error(
+      "useFormsAiAgentStore must be used within FormsAiAgentStoreContextProvider",
+    );
+  return store;
 };
