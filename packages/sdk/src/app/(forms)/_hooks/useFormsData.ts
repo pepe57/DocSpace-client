@@ -354,8 +354,10 @@ export default function useFormsData() {
         : formsListStore.items.length + fetched.length + 1;
       formsListStore.appendItems(fetched, total);
       requestThumbnails(fetched);
-    } catch {
-      // aborted or network error — ignore
+    } catch (error) {
+      if (!controller.signal.aborted && error instanceof Error) {
+        console.error("Forms fetchMore failed:", error.message);
+      }
     }
   }, [getFolderId, formsListStore]);
 

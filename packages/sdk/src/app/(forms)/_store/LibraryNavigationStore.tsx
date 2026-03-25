@@ -108,9 +108,7 @@ class LibraryNavigationStore {
 }
 
 export const LibraryNavigationStoreContext =
-  React.createContext<LibraryNavigationStore>(
-    null as unknown as LibraryNavigationStore,
-  );
+  React.createContext<LibraryNavigationStore | null>(null);
 
 export const LibraryNavigationStoreContextProvider = ({
   children,
@@ -126,5 +124,10 @@ export const LibraryNavigationStoreContextProvider = ({
 };
 
 export const useLibraryNavigationStore = () => {
-  return React.useContext(LibraryNavigationStoreContext);
+  const store = React.useContext(LibraryNavigationStoreContext);
+  if (!store)
+    throw new Error(
+      "useLibraryNavigationStore must be used within LibraryNavigationStoreContextProvider",
+    );
+  return store;
 };

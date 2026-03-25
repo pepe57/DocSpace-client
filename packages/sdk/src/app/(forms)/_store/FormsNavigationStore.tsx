@@ -73,9 +73,7 @@ class FormsNavigationStore {
 }
 
 export const FormsNavigationStoreContext =
-  React.createContext<FormsNavigationStore>(
-    null as unknown as FormsNavigationStore,
-  );
+  React.createContext<FormsNavigationStore | null>(null);
 
 export const FormsNavigationStoreContextProvider = ({
   children,
@@ -91,5 +89,10 @@ export const FormsNavigationStoreContextProvider = ({
 };
 
 export const useFormsNavigationStore = () => {
-  return React.useContext(FormsNavigationStoreContext);
+  const store = React.useContext(FormsNavigationStoreContext);
+  if (!store)
+    throw new Error(
+      "useFormsNavigationStore must be used within FormsNavigationStoreContextProvider",
+    );
+  return store;
 };

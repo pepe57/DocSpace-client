@@ -160,7 +160,7 @@ const ContactsForm = ({
             access,
           })),
           notify: true,
-          message: "Invitation message",
+          message: t("Common:InvitationMessage"),
         }),
       ];
 
