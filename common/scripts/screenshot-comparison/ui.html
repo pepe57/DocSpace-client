@@ -25,6 +25,7 @@
  content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
+ 
 <!doctype html>
 <html lang="en">
   <head>
@@ -237,32 +238,6 @@
         font-size: 14px;
       }
 
-      /* ─── Drop zone highlight ─── */
-
-      #drop-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 20000;
-        background: rgba(35, 134, 54, 0.12);
-        border: 3px dashed #238636;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        pointer-events: none;
-      }
-      #drop-overlay.visible {
-        display: flex;
-      }
-      #drop-overlay span {
-        padding: 12px 28px;
-        background: #161b22;
-        border: 1px solid #238636;
-        border-radius: 10px;
-        color: #58a6ff;
-        font-size: 15px;
-        font-weight: 500;
-      }
-
       /* ─── Selection overlay ─── */
 
       #selection-overlay {
@@ -460,9 +435,6 @@
         Log in, navigate to the page you need, open a modal or panel — then load
         a Figma design and compare.
       </p>
-      <p style="font-size: 12px; color: #484f58">
-        You can also drag & drop a PNG design file anywhere on this window.
-      </p>
     </div>
 
     <!-- DocSpace iframe -->
@@ -473,9 +445,6 @@
       <span id="error-toast-text"></span>
       <button id="error-toast-close">✕</button>
     </div>
-
-    <!-- Drag & drop overlay -->
-    <div id="drop-overlay"><span>Drop design PNG here</span></div>
 
     <!-- Selection layer -->
     <div id="selection-overlay"></div>
@@ -535,7 +504,6 @@
       const compareBtn = $("compare-btn");
       const resultBtn = $("result-btn");
       const statusText = $("status-text");
-      const dropOverlay = $("drop-overlay");
       const selOverlay = $("selection-overlay");
       const selBox = $("selection-box");
       const selSizeLabel = $("selection-size-label");
@@ -627,30 +595,6 @@
         };
         reader.readAsDataURL(file);
       }
-
-      // Drag & drop anywhere
-      let dragCounter = 0;
-      document.addEventListener("dragenter", (e) => {
-        e.preventDefault();
-        dragCounter++;
-        dropOverlay.classList.add("visible");
-      });
-      document.addEventListener("dragleave", (e) => {
-        e.preventDefault();
-        dragCounter--;
-        if (dragCounter <= 0) {
-          dragCounter = 0;
-          dropOverlay.classList.remove("visible");
-        }
-      });
-      document.addEventListener("dragover", (e) => e.preventDefault());
-      document.addEventListener("drop", (e) => {
-        e.preventDefault();
-        dragCounter = 0;
-        dropOverlay.classList.remove("visible");
-        const file = e.dataTransfer.files[0];
-        if (file) loadDesignFile(file);
-      });
 
       /* ═══════════════════ Area Selection ═══════════════════ */
 
@@ -761,6 +705,21 @@
 
       compareBtn.addEventListener("click", async () => {
         if (!designBase64) return;
+
+        // Warn if browser zoom is not 100%
+        const isRetina = window.devicePixelRatio >= 1.5;
+        const expectedDPR = isRetina ? 2 : 1;
+        const effectiveZoom = Math.round(
+          (window.devicePixelRatio / expectedDPR) * 100,
+        );
+        if (effectiveZoom !== 100) {
+          setError(
+            "Browser zoom is " +
+              effectiveZoom +
+              "%. Set it to 100% (Cmd+0 / Ctrl+0) for accurate comparison.",
+          );
+          return;
+        }
 
         compareBtn.disabled = true;
         setStatus("Taking screenshot...");
