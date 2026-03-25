@@ -199,6 +199,8 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           );
         }, 0);
       } else {
+        formsListStore.setItems([], 0);
+        formsListStore.setFolders([]);
         formsListStore.setIsLoading(true);
       }
     }
