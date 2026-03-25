@@ -15,6 +15,23 @@ Results are saved to `./images/`: `page.png`, `diff.png`.
 
 ## Setup and run
 
+### Mac / Linux
+
+```bash
+cd common/screenshot-comparison-app
+chmod +x run.screenshot-comparison.sh
+./run.screenshot-comparison.sh
+```
+
+### Windows
+
+```cmd
+cd common\screenshot-comparison-app
+run.screenshot-comparison.bat
+```
+
+### Manual
+
 ```bash
 cd common/screenshot-comparison-app
 npm install
