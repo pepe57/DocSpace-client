@@ -37,7 +37,7 @@ import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { TConnectingStorage } from "@docspace/shared/api/files/types";
-import { getOAuthToken } from "@docspace/shared/utils/common";
+import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 
 import {
 	THIRD_PARTY_SERVICES_URL,

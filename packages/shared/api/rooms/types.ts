@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TLogo } from "@docspace/ui-kit/types";
+import type { TAIRoomChatSettings } from "@docspace/ui-kit/types/ai";
 
 import type { TFile, TFolder, TShareSettings } from "../files/types";
 import type {
@@ -42,6 +43,8 @@ import type {
 } from "../../types";
 import type { TUser } from "../people/types";
 import type { TGroup } from "../groups/types";
+
+export type { TAIRoomChatSettings };
 
 export type TRoomSecurity = {
   ChangeOwner: boolean;
@@ -85,13 +88,6 @@ export type TWatermark = {
   scale?: number;
   image?: File | string;
   isImage?: boolean;
-};
-
-export type TAIRoomChatSettings = {
-  prompt: string;
-  providerId: number;
-  modelId: string;
-  internal: boolean;
 };
 
 export type TRoom = {
@@ -138,6 +134,8 @@ export type TRoom = {
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;
   path?: TPathParts[];
+  sendFormToExternalDB?: boolean;
+  saveFormAsXLSX?: boolean;
 };
 
 export type TGetRooms = {

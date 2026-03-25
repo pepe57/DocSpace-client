@@ -45,7 +45,7 @@ import {
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 
 import {
   isLockedSharedRoom,
@@ -1573,9 +1573,13 @@ class FilesStore {
 
       if (fileType === "file") {
         if (this.activeFiles.findIndex((f) => f.id == id) === -1) {
-          newSelections.push(
-            this.filesList.find((f) => f.id == id && !f.isFolder),
+          const selectableFile = this.filesList.find(
+            (f) => f.id == id && !f.isFolder,
           );
+
+          if (selectableFile) {
+            newSelections.push(selectableFile);
+          }
         }
       } else if (this.activeFolders.findIndex((f) => f.id == id) === -1) {
         const selectableFolder = this.filesList.find(
@@ -2387,21 +2391,6 @@ class FilesStore {
             }
 
             this.setCreatedItem(null);
-          }
-
-          // Show room grouping dialog if >= 10 rooms and not shown before
-          const isRoomsFolderByType =
-            data.current.rootFolderType === FolderType.Rooms &&
-            !data.current.parentId;
-          if (
-            isRoomsFolderByType &&
-            data.total >= 10 &&
-            !this.filesSettingsStore.organizeRoomsGrouping &&
-            this.dialogsStore?.setRoomGroupingDialogVisible
-          ) {
-            const dialogShown = localStorage.getItem("roomGroupingDialogShown");
-            if (!dialogShown)
-              this.dialogsStore.setRoomGroupingDialogVisible(true);
           }
 
           runInAction(() => {

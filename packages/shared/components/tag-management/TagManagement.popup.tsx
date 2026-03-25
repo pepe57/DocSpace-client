@@ -37,13 +37,14 @@ import {
 
 import { useClickOutside } from "@docspace/ui-kit/utils/use-click-outside";
 import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
+import { useCloseOnAnchorCovered } from "@docspace/ui-kit/hooks/useCloseOnAnchorCovered";
 
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 
-import { useIsMobile } from "../../hooks/useIsMobile";
+import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 
 import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementFilter } from "./TagManagement.filter";
@@ -80,6 +81,13 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   useClickOutside(isMobile ? modalRef : ref, onClose, EVENT_OPTIONS);
   useEventListener("resize", onClose);
 
+  useCloseOnAnchorCovered({
+    anchorRef: anchor,
+    popupRef: ref,
+    onClose,
+    enabled: !isMobile,
+  });
+
   const { data: fetchedTags, status } = useTagsQuery();
 
   useLayoutEffect(() => {
@@ -101,10 +109,10 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
           shift(),
         ],
       }).then(({ x, y }) => {
-        if (ref.current) {
-          ref.current.style.left = `${x}px`;
-          ref.current.style.top = `${y}px`;
-        }
+        if (!ref.current) return;
+
+        ref.current.style.left = `${x}px`;
+        ref.current.style.top = `${y}px`;
       });
     });
 

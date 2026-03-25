@@ -101,6 +101,9 @@ const ClientForm = ({
   });
 
   const [errorFields, setErrorFields] = React.useState<string[]>([]);
+  const [serverErrorFields, setServerErrorFields] = React.useState<string[]>(
+    [],
+  );
   const [requiredErrorFields, setRequiredErrorFields] = React.useState<
     string[]
   >([]);
@@ -167,7 +170,33 @@ const ClientForm = ({
 
       onCancelClick();
     } catch (e) {
-      toastr.error(e as unknown as TData);
+      const err = e as TData & { response?: { data?: { detail?: string } } };
+      const detail = err?.response?.data?.detail;
+
+      if (detail) {
+        const serverFieldMap: Partial<Record<string, keyof IClientReqDTO>> = {
+          "website url is expected to be passed as url": "website_url",
+          "terms url is expected to be passed as url": "terms_url",
+          "policy url is expected to be passed as url": "policy_url",
+          "client name length is expected to be between 3 and 256 characters":
+            "name",
+        };
+
+        const fieldsFromServer = detail
+          .split(", ")
+          .map((msg) => serverFieldMap[msg])
+          .filter((field): field is keyof IClientReqDTO => !!field);
+
+        if (fieldsFromServer.length > 0) {
+          setServerErrorFields(fieldsFromServer as string[]);
+        } else {
+          toastr.error(detail as unknown as TData);
+        }
+      } else {
+        toastr.error(e as unknown as TData);
+      }
+
+      setIsRequestRunning(false);
     }
   };
 
@@ -180,6 +209,7 @@ const ClientForm = ({
     value: string | boolean,
     remove?: boolean,
   ) => {
+    setServerErrorFields((s) => s.filter((f) => f !== name));
     setForm((val) => {
       if (!(name in val)) return val;
 
@@ -394,6 +424,11 @@ const ClientForm = ({
 
   const isValid = compareAndValidate();
 
+  const allErrorFields = [
+    ...errorFields,
+    ...serverErrorFields.filter((f) => !errorFields.includes(f)),
+  ];
+
   return (
     <>
       <StyledContainer>
@@ -414,7 +449,7 @@ const ClientForm = ({
               // isPublic={form.is_public}
               changeValue={onChangeForm}
               isEdit={isEdit}
-              errorFields={errorFields}
+              errorFields={allErrorFields}
               requiredErrorFields={requiredErrorFields}
               onBlur={onBlur}
             />
@@ -448,7 +483,7 @@ const ClientForm = ({
               termsUrlValue={form.terms_url}
               changeValue={onChangeForm}
               isEdit={isEdit}
-              errorFields={errorFields}
+              errorFields={allErrorFields}
               requiredErrorFields={requiredErrorFields}
               onBlur={onBlur}
             />

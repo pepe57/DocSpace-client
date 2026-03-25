@@ -161,12 +161,6 @@ class DialogsStore {
 
   isRoomDelete = false;
 
-  isAIAgentChatDelete = {
-    visible: false,
-    itemName: "",
-    onDeleteAction: () => {},
-  };
-
   convertItem = null;
 
   formCreationInfo = null;
@@ -347,8 +341,6 @@ class DialogsStore {
 
   openInCreateMode = false;
 
-  roomGroupingDialogVisible = false;
-
   addRoomToGroupDialogVisible = false;
 
   addRoomToGroupId = null;
@@ -402,10 +394,6 @@ class DialogsStore {
       file:
         file === null ? null : (file ?? this.aiAgentSelectorDialogProps.file),
     };
-  };
-
-  setIsAIAgentChatDelete = ({ visible, itemName, onDeleteAction }) => {
-    this.isAIAgentChatDelete = { visible, itemName, onDeleteAction };
   };
 
   setEditRoomDialogProps = (props) => {
@@ -1144,10 +1132,6 @@ class DialogsStore {
     this.editRoomGroupsDialogVisible = visible;
     this.createGroupFromRoomIds = roomIds;
     this.openInCreateMode = openInCreateMode;
-  };
-
-  setRoomGroupingDialogVisible = (visible) => {
-    this.roomGroupingDialogVisible = visible;
   };
 
   setAddRoomToGroupDialogVisible = (visible, groupId = null) => {

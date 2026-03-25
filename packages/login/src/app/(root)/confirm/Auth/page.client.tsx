@@ -52,7 +52,7 @@ const AuthHandler = () => {
   const [authorized, setAuthorized] = useState(false);
 
   const { linkData, confirmLinkResult } = useContext(ConfirmRouteContext);
-  const { key = "" } = linkData;
+  const { key = "", first = "" } = linkData;
   const { email = "" } = confirmLinkResult;
 
   const referenceUrl = searchParams?.get("referenceUrl");
@@ -72,11 +72,17 @@ const AuthHandler = () => {
 
         replaced.current = true;
 
+        const confirmData: { Email: string; Key: string; First?: boolean } = {
+          Email: email,
+          Key: key,
+        };
+
+        if (first === "true") {
+          confirmData.First = true;
+        }
+
         const res = await loginWithConfirmKey({
-          ConfirmData: {
-            Email: email,
-            Key: key,
-          },
+          ConfirmData: confirmData,
         });
 
         frameCallEvent({ event: "onAuthSuccess" });

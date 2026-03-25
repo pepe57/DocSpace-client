@@ -27,7 +27,10 @@
 import isNil from "lodash/isNil";
 import { makeAutoObservable, runInAction } from "mobx";
 
-import SocketHelper, { SocketEvents, TOptSocket } from "../utils/socket";
+import SocketHelper, {
+  SocketEvents,
+  TOptSocket,
+} from "@docspace/ui-kit/utils/socket";
 
 import api from "../api";
 import { setWithCredentialsStatus } from "../api/client";
@@ -257,7 +260,8 @@ class AuthStore {
     if (
       window.location.search === "?complete=true" &&
       !window.location.href.includes("wallet") &&
-      !window.location.href.includes("services")
+      !window.location.href.includes("services") &&
+      !window.location.href.includes("payment-method")
     ) {
       window.history.replaceState({}, document.title, window.location.pathname);
       refresh = true;
@@ -527,3 +531,4 @@ class AuthStore {
 }
 
 export { AuthStore };
+

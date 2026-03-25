@@ -36,38 +36,57 @@
   "settings": {
     "window.zoomLevel": 0,
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "biomejs.biome",
     "VsCodeTaskButtons.tasks": [
       {
         "label": "Server (Aspire)",
         "tasks": [
           {
-            "label": "Apire : run CE (Community Edition)",
+            "label": "Aspire : run CE (Community Edition) - frontend-dev",
             "task": "Backend | run CE (Aspire)",
             "tooltip": "🛠️ Start the \"backend aspire CE\" task"
           },
           {
-            "label": "Apire : run EE (Enterprise Edition)",
+            "label": "Aspire : run CE (Community Edition) - development",
+            "task": "Backend | run CE - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire CE\" task"
+          },
+          {
+            "label": "Aspire : run EE (Enterprise Edition) - frontend-dev",
             "task": "Backend | run EE (Aspire)",
             "tooltip": "🛠️ Start the \"backend aspire EE\" task"
           },
           {
-            "label": "Apire : run DE (Developer Edition)",
+            "label": "Aspire : run EE (Enterprise Edition) - development",
+            "task": "Backend | run EE - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire EE\" task"
+          },
+          {
+            "label": "Aspire : run DE (Developer Edition) - frontend-dev",
             "task": "Backend | run DE (Aspire)",
             "tooltip": "🛠️ Start the \"backend aspire DE\" task"
           },
           {
-            "label": "Apire : run SAAS",
+            "label": "Aspire : run DE (Developer Edition) - development",
+            "task": "Backend | run DE - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire DE development profile (SKIP_CLIENT)\" task"
+          },
+          {
+            "label": "Aspire : run SAAS - frontend-dev",
             "task": "Backend | run SAAS (Aspire)",
             "tooltip": "🛠️ Start the \"backend aspire SAAS\" task"
           },
           {
-            "label": "Apire : clear Docker artifacts",
+            "label": "Aspire : run SAAS - development",
+            "task": "Backend | run SAAS - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire SAAS - full\" task"
+          },
+          {
+            "label": "Aspire : clear Docker artifacts",
             "task": "Backend | clear Aspire (Docker)",
             "tooltip": "🛠️ Start the \"backend aspire clear Docker\" task"
           }
         ],
-        "tooltip": "🛠️ Server tasks (Apire)"
+        "tooltip": "🛠️ Server tasks (Aspire)"
       },
       {
         "label": "Server",
@@ -224,6 +243,11 @@
             "tooltip": "🛠️ Start the \"frontend start\" task"
           },
           {
+            "label": "Start:sdk",
+            "task": "Frontend | start:sdk",
+            "tooltip": "🛠️ Start the \"frontend sdk start\" task"
+          },
+          {
             "label": "Start prod",
             "task": "Frontend | start-prod",
             "tooltip": "🛠️ Start the \"frontend start production\" task"
@@ -232,6 +256,11 @@
             "label": "Start prod:lite",
             "task": "Frontend | start-prod:lite",
             "tooltip": "🛠️ Start the \"frontend start production\" task"
+          },
+          {
+            "label": "Start prod:sdk",
+            "task": "Frontend | start-prod:sdk",
+            "tooltip": "🛠️ Start the \"frontend sdk start production\" task"
           },
           {
             "label": "Deploy",
@@ -346,6 +375,16 @@
             "tooltip": "🛠️ Start the \"update e2e screenshots (client)\" task"
           },
           {
+            "label": "Client E2E dev docker",
+            "task": "Test | Test e2e docker dev (client)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Client E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (client)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (client)\" task"
+          },
+          {
             "label": "Client E2E clear docker",
             "task": "Test | Test e2e docker clear (client)",
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
@@ -374,6 +413,16 @@
             "label": "Login E2E update screenshots",
             "task": "Test | Test e2e docker update-screenshots (login)",
             "tooltip": "🛠️ Start the \"update e2e screenshots (login)\" task"
+          },
+          {
+            "label": "Login E2E dev docker",
+            "task": "Test | Test e2e docker dev (login)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Login E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (login)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (login)\" task"
           },
           {
             "label": "Login E2E clear docker",
@@ -406,6 +455,16 @@
             "tooltip": "🛠️ Start the \"update e2e screenshots (SDK)\" task"
           },
           {
+            "label": "SDK E2E dev docker",
+            "task": "Test | Test e2e docker dev (SDK)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "SDK E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (SDK)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (SDK)\" task"
+          },
+          {
             "label": "SDK E2E clear docker",
             "task": "Test | Test e2e docker clear (SDK)",
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
@@ -436,6 +495,16 @@
             "tooltip": "🛠️ Start the \"update e2e screenshots (management)\" task"
           },
           {
+            "label": "Management E2E dev docker",
+            "task": "Test | Test e2e docker dev (management)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Management E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (management)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (management)\" task"
+          },
+          {
             "label": "Management E2E clear docker",
             "task": "Test | Test e2e docker clear (management)",
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
@@ -464,6 +533,16 @@
             "label": "Editor E2E update screenshots",
             "task": "Test | Test e2e docker update-screenshots (editor)",
             "tooltip": "🛠️ Start the \"update e2e screenshots (editor)\" task"
+          },
+          {
+            "label": "Editor E2E dev docker",
+            "task": "Test | Test e2e docker dev (editor)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Editor E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (editor)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (editor)\" task"
           },
           {
             "label": "Editor E2E clear docker",
@@ -569,13 +648,16 @@
     "javascript.format.enable": true,
     "typescript.format.enable": true,
     "[javascript]": {
-      "editor.defaultFormatter": "biomejs.biome"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescript]": {
-      "editor.defaultFormatter": "biomejs.biome"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescriptreact]": {
-      "editor.defaultFormatter": "biomejs.biome"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "editor.codeActionsOnSave": {
       "source.organizeImports.biome": "never",

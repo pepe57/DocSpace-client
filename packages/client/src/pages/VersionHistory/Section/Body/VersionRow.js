@@ -38,10 +38,10 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Textarea } from "@docspace/ui-kit/components/textarea";
 import { Button } from "@docspace/ui-kit/components/button";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
-import { getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { Encoder } from "@docspace/shared/utils/encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import { UrlActionType } from "@docspace/shared/enums";
 import {
   MAX_FILE_COMMENT_LENGTH,

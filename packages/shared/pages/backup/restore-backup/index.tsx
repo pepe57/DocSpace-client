@@ -34,7 +34,7 @@ import { getBackupProgressInfo } from "../../../utils/common";
 import SocketHelper, {
   SocketEvents,
   TSocketListener,
-} from "../../../utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
@@ -469,6 +469,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         dataTestId="user_agreement_checkbox"
       />
       <ButtonContainer
+        standalone={standalone}
         setErrorInformation={setErrorInformation}
         isConfirmed={checkboxState.confirmation}
         isNotification={checkboxState.notification}

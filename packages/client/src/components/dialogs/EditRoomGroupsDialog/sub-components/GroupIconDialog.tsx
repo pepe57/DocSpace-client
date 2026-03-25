@@ -195,6 +195,7 @@ const GroupIconDialog = ({
         }
 
         toastr.error(message);
+        onCloseEditRoomGroupsDialog();
       } finally {
         setIsLoading(false);
       }
@@ -255,6 +256,7 @@ const GroupIconDialog = ({
             isAutoFocussed
             maxLength={128}
             onChange={onChangeGroupName}
+            testId="enter_group_name_input"
           />
         </div>
         <div className={styles.roomLogoCoverContainer}>
@@ -278,6 +280,7 @@ const GroupIconDialog = ({
           onClick={handleSubmit}
           isDisabled={!groupName.trim()}
           isLoading={isLoading}
+          testId="submit_group_icon_button"
         />
         <Button
           scale
@@ -286,6 +289,7 @@ const GroupIconDialog = ({
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}
           isDisabled={isLoading}
+          testId="cancel_group_icon_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

@@ -124,8 +124,6 @@
   --article-item-dnd-bg-color: #{$dnd-color};
   --article-item-dnd-hover-bg-color: #{$dnd-hover-color};
 
-  --story-wrapper-bg-color: #{$gray-light};
-
   --aside-bg-color: #{$white};
 
   --aside-custom-z-index: unset;
@@ -357,8 +355,6 @@
   --article-item-trash-icon-fill: #{$gray-dark};
   --article-item-dnd-bg-color: #{$dnd-dark-color};
   --article-item-dnd-hover-bg-color: #{$dnd-dark-hover};
-
-  --story-wrapper-bg-color: #{$dark-gray-light};
 
   --aside-bg-color: #{$black};
 
@@ -773,10 +769,6 @@
   --room-type-display-item-description-text: #{$gray-text};
 }
 
-.light {
-
-}
-
 .dark {
   --row-content-side-info-min-width: 160px;
   --row-content-side-info-margin: 0 6px;
@@ -792,7 +784,6 @@
 }
 
 .light {
-
   --row-content-side-info-min-width: 160px;
   --row-content-side-info-margin: 0 6px;
   --row-content-side-info-width: 160px;
@@ -1042,7 +1033,6 @@
   --catalog-profile-background: #{$light-dark-gray-hover};
   --catalog-profile-border-top: 1px solid #{$gray-dark-strong};
 }
-
 
 .light {
   --body-info-border-color: #{$gray-light-mid};
@@ -1460,6 +1450,8 @@
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
+
+  --ai-settings-description:#{$gray};
 }
 
 .dark {
@@ -1492,6 +1484,8 @@
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
+
+  --ai-settings-description: #{$gray-dark};
 }
 
 .rtl {
@@ -1516,6 +1510,7 @@
 
 .light {
   --payment-background-color: #{$gray-light};
+  --payment-backgroud-color-warning: #{$gray-light};
   --payment-text-color: #{$light-gray-dark};
   --payment-credit-color: #{$light-status-positive};
   --payment-icon-background: #{$gray-light-mid};
@@ -1525,16 +1520,18 @@
   --payment-contact-container-text-color: #{$gray};
   --payment-contact-container-link-color: #{$light-gray-dark};
   --payment-inactive-color: #{$gray};
+  --payment-error-color: #{$light-error-status};
   --warning-color: #{$light-error-status};
   --background-service-color: #{$light-gray-hover};
   --border-service-color: #{$gray-light-mid};
   --services-additional-info: #{$gray};
-    --services-link-color: #{$gray};
+  --services-link-color: #{$gray};
 }
 
 .dark {
   --payment-background-color: #{$light-dark-gray-hover};
-  --payment-text-color: #{$dark-gray-dark}; 
+  --payment-backgroud-color-warning: #{$dark-gray-light};
+  --payment-text-color: #{$dark-gray-dark};
   --payment-credit-color: #{$dark-status-positive};
   --payment-icon-background: #{$gray-dark-mid};
   --payment-icon-color: #{$dark-gray-dark};
@@ -1543,6 +1540,7 @@
   --payment-contact-container-text-color: #{$dark-gray-dark};
   --payment-contact-container-link-color: #{$gray-dark};
   --payment-inactive-color: #{$gray-dark};
+  --payment-error-color: #{$dark-error-status};
   --warning-color: #{$dark-error-status};
   --background-service-color: #{$light-dark-gray-hover};
   --border-service-color: #{$gray-dark-strong};
@@ -2493,7 +2491,7 @@
 .dark {
   --invite-panel-dropdown-separator: 1px solid #{$gray-dark-strong};
 
-  --files-panel-border-bottom: 1px solid #{$gray-light-mid};
+  --files-panel-border-bottom: 1px solid #{$gray-dark-strong};
   --files-panel-invite-text-color: #{$gray-dark};
 
   --invite-panel-icon-color: #{$gray-dark};

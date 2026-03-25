@@ -115,6 +115,7 @@ const useEditorEvents = ({
   setFillingStatusDialogVisible,
   openShareFormDialog,
   onOpenRoleMappingPanel,
+  disconnectUsers,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
 
@@ -930,6 +931,8 @@ const useEditorEvents = ({
         })
         .with(StartFillingMode.StartFillingRoomForm, async () => {
           await manageFormFilling(fileInfo!.id, FormFillingManageAction.Start);
+
+          await disconnectUsers?.();
 
           sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(fileInfo));
 

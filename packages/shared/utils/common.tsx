@@ -27,11 +27,16 @@
 import type { Location } from "react-router";
 import find from "lodash/find";
 import { findWindows } from "windows-iana";
-import { parseToDateTime, startOf, dateDiffAbs } from "@docspace/ui-kit/utils/date";
+import {
+  parseToDateTime,
+  startOf,
+  dateDiffAbs,
+} from "@docspace/ui-kit/utils/date";
 import { isMobile } from "react-device-detect";
 import type { I18nextProviderProps } from "react-i18next";
-import sjcl from "sjcl";
 import resizeImage from "resize-image";
+import { pbkdf2 } from "@noble/hashes/pbkdf2.js";
+import { sha256 } from "@noble/hashes/sha2.js";
 
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
 import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
@@ -93,7 +98,7 @@ import {
 } from "../api/settings/types";
 import { TopLoaderService } from "@docspace/ui-kit/components/top-loading-indicator";
 
-import { Encoder } from "./encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 import { checkIsSSR } from "@docspace/ui-kit/utils/device";
@@ -142,11 +147,15 @@ export function createPasswordHash(
 
   const { size, iterations, salt } = hashSettings;
 
-  let bits = sjcl.misc.pbkdf2(password, salt, iterations);
-  bits = bits.slice(0, size / 32);
-  const hash = sjcl.codec.hex.fromBits(bits);
+  const enc = new TextEncoder();
+  const derivedBytes = pbkdf2(sha256, enc.encode(password), enc.encode(salt), {
+    c: iterations,
+    dkLen: size / 8,
+  });
 
-  return hash;
+  return Array.from(derivedBytes)
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
 }
 
 export const isPublicRoom = () => {
@@ -620,32 +629,6 @@ export function assign(
   obj[keyPath[lastKeyIndex]] = value;
 }
 
-export function getOAuthToken(
-  tokenGetterWin: Window | string | null,
-): Promise<string> {
-  return new Promise((resolve, reject) => {
-    localStorage.removeItem("code");
-    const interval: ReturnType<typeof setInterval> = setInterval(() => {
-      try {
-        const code = localStorage.getItem("code");
-        if (typeof tokenGetterWin !== "string") {
-          if (code) {
-            localStorage.removeItem("code");
-            clearInterval(interval);
-            resolve(code);
-          } else if (tokenGetterWin?.closed) {
-            clearInterval(interval);
-            reject();
-          }
-        }
-      } catch (e) {
-        clearInterval(interval);
-        reject(e);
-      }
-    }, 500);
-  });
-}
-
 export function getLoginLink(token: string, code: string) {
   return combineUrl(
     window.ClientConfig?.proxy?.url,
@@ -655,7 +638,7 @@ export function getLoginLink(token: string, code: string) {
 
 const FRAME_NAME = "frameDocSpace";
 
-const getFrameId = () => {
+export const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
 };
 
@@ -710,7 +693,11 @@ export const getSizeFromBytes = (bytes: number, power: number) => {
   return truncateToTwo;
 };
 
-export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
+export const getConvertedSize = (
+  t: (key: string) => string,
+  bytes: number,
+  withoutSizeName: boolean = false,
+) => {
   let power = 0;
   let resultSize = bytes;
 
@@ -731,6 +718,8 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
     resultSize = getSizeFromBytes(bytes, power);
   }
 
+  if (withoutSizeName) return `${resultSize}`;
+
   return `${resultSize} ${sizeNames[power]}`;
 };
 
@@ -739,9 +728,10 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
 export const getConvertedQuota = (
   t: (key: string) => string,
   bytes: number,
+  withoutSizeName: boolean = false,
 ) => {
   if (bytes === -1) return t("Common:Unlimited");
-  return getConvertedSize(t, bytes);
+  return getConvertedSize(t, bytes, withoutSizeName);
 };
 
 export const getSpaceQuotaAsText = (

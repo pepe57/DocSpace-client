@@ -29,8 +29,8 @@ import type { Metadata } from "next";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
 import {
-	getDirectionByLanguage,
-	getFontFamilyDependingOnLanguage,
+  getDirectionByLanguage,
+  getFontFamilyDependingOnLanguage,
 } from "@docspace/ui-kit/providers/theme/rtl-utils";
 
 import "@docspace/shared/styles/theme.scss";
@@ -129,6 +129,8 @@ export default async function RootLayout({
             colorTheme,
             locale,
             portalCultures,
+            authToken:
+              cookieStore.get("asc_auth_key")?.value || undefined,
           }}
         >
           {children}
@@ -138,3 +140,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

@@ -81,7 +81,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
 
   const handleCreateTag = useCallback(async () => {
     const trimmedValue = searchValue.trim();
-    if (trimmedValue.length === 0) return;
+    if (trimmedValue.length === 0 || !showCreateTag) return;
 
     const newTag: TTag = { label: trimmedValue, checked: true };
     const updatedTags = [newTag, ...tags];
@@ -98,7 +98,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
       },
     });
     setTags(updatedTags);
-  }, [searchValue, tags, clearSearch, createTag, setTags]);
+  }, [searchValue, tags, clearSearch, createTag, setTags, showCreateTag]);
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -129,6 +129,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
         onChange={onChangeSearchValue}
         placeholder={t("Common:AddTag")}
         onKeyDown={handleKeyDown}
+        testId="add_tag_input"
       />
       <hr className={styles.divider} />
       {showCreateTag ? (
@@ -148,6 +149,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
             tag={deferredSearchValue}
             label={deferredSearchValue}
             onClick={handleCreateTag}
+            dataTestId="create_tag_button"
           />
         </Text>
       ) : null}
