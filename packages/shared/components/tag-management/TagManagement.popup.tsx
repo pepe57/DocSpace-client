@@ -83,7 +83,6 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
 
   useCloseOnAnchorCovered({
     anchorRef: anchor,
-    popupRef: ref,
     onClose,
     enabled: !isMobile,
   });
