@@ -200,12 +200,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             new CustomEvent(AnimationEvents.END_ANIMATION),
           );
         }, 0);
-      } else {
-        formsListStore.setSection(activeSection);
-        formsListStore.setItems([], 0);
-        formsListStore.setFolders([]);
-        formsListStore.setIsLoading(true);
       }
+      // Don't clear items/folders/isLoading here — keep old content visible
+      // until the new section's fetchSection replaces it (stale-while-revalidate).
+      // Each page component calls fetchSection on mount which will overwrite data.
     }
 
     if (sectionChanged || folderChanged) {

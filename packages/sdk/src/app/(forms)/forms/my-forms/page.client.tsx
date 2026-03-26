@@ -45,7 +45,14 @@ const MyFormsPage = () => {
   fetchSectionRef.current = fetchSection;
 
   React.useEffect(() => {
-    if (formsListStore.items.length > 0 && !formsListStore.isLoading) return;
+    // Skip fetch only if data already belongs to MyForms (SSR hydration).
+    // When navigating from another section, section differs — must fetch.
+    if (
+      formsListStore.section === FormsSection.MyForms &&
+      formsListStore.items.length > 0 &&
+      !formsListStore.isLoading
+    )
+      return;
     fetchSectionRef.current(FormsSection.MyForms);
   }, [formsListStore]);
 

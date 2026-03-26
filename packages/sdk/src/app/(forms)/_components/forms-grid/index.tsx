@@ -57,7 +57,7 @@ type FormsGridProps = {
 
 const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
   const formsListStore = useFormsListStore();
-  const { items, folders, hasMore, isLoading, section } = formsListStore;
+  const { items, folders, hasMore, isLoading } = formsListStore;
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
   const {
@@ -72,10 +72,6 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     getIcon,
   });
   const { getFolderContextMenuModel } = useFormsContextMenu();
-
-  // Guard: if the store data belongs to a different section, show skeletons
-  // to prevent transient renders with mismatched section/data.
-  const sectionMismatch = section !== null && section !== activeSection;
 
   const isCompletedRoot =
     activeSection === FormsSection.CompletedForms && !completedFolder;
@@ -145,22 +141,6 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
 
   const hasFolders = folders.length > 0;
   const hasItems = items.length > 0;
-
-  if (sectionMismatch) {
-    return (
-      <div className={styles.filesGrid}>
-        {Array.from({ length: columnsCountRef.current * 2 }, (_, i) => (
-          <RectangleSkeleton
-            key={`init_skeleton_${i}`}
-            width="100%"
-            height="220px"
-            borderRadius="12px"
-            animate
-          />
-        ))}
-      </div>
-    );
-  }
 
   if (!hasFolders && !hasItems) {
     if (isLoading) {
