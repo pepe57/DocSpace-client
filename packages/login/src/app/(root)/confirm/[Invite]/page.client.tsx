@@ -379,7 +379,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       return false;
     }
 
-    const hash = await createPasswordHash(password, passwordHash);
+    const hash = createPasswordHash(password, passwordHash);
 
     const fromInviteLink = !!(
       linkData.type === "LinkInvite" || linkData.type === "EmpInvite"
@@ -641,3 +641,4 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 };
 
 export default CreateUserForm;
+

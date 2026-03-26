@@ -46,6 +46,7 @@ import type { EditorAction } from "../_store/FormsNavigationStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
+import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import useFormsData from "./useFormsData";
@@ -55,6 +56,7 @@ type UseFormsActionsProps = { t: TTranslation };
 export default function useFormsActions({ t }: UseFormsActionsProps) {
   const { sdkConfig } = useSDKConfig();
   const { openEditor } = useFormsNavigationStore();
+  const { closePanel } = useFormsAiAgentStore();
   const formsListStore = useFormsListStore();
   const { fetchSection } = useFormsData();
 
@@ -68,9 +70,10 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         return;
       }
 
+      closePanel();
       openEditor(file, action);
     },
-    [sdkConfig?.events?.onFileManagerClick, openEditor],
+    [sdkConfig?.events?.onFileManagerClick, closePanel, openEditor],
   );
 
   const downloadFile = useCallback(
@@ -87,8 +90,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         await deleteFile(fileId, false, true);
         const newItems = formsListStore.items.filter((f) => f.id !== fileId);
         formsListStore.setItems(newItems, newItems.length);
-      } catch {
-        toastr.error(t("Common:Error"));
+      } catch (error) {
+        toastr.error(error as string);
       }
     },
     [formsListStore, t],
@@ -114,8 +117,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
 
         const url = await poll();
         if (url) window.open(url, "_blank");
-      } catch {
-        toastr.error(t("Common:Error"));
+      } catch (error) {
+        toastr.error(error as string);
       }
     },
     [t],
@@ -129,8 +132,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
           (f) => f.id !== folderId,
         );
         formsListStore.setFolders(newFolders);
-      } catch {
-        toastr.error(t("Common:Error"));
+      } catch (error) {
+        toastr.error(error as string);
       }
     },
     [formsListStore, t],
@@ -141,8 +144,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
       try {
         await manageFormFilling(file.id, FormFillingManageAction.Start);
         await fetchSection();
-      } catch {
-        toastr.error(t("Common:Error"));
+      } catch (error) {
+        toastr.error(error as string);
       }
     },
     [t, fetchSection],
@@ -153,8 +156,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
       try {
         await formRoleMapping({ formId: file.id, roles: [] });
         await fetchSection();
-      } catch {
-        toastr.error(t("Common:Error"));
+      } catch (error) {
+        toastr.error(error as string);
       }
     },
     [t, fetchSection],

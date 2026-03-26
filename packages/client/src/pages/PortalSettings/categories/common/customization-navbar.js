@@ -112,6 +112,20 @@ const CustomizationNavbar = ({
           onClickLink={onClickLink}
         />
       ) : null}
+      <CategoryItem
+        title={t("AiServicesManagement", {
+          aiServices: t("Common:AIServices"),
+        })}
+        subtitle={t("AiServicesManagementDescription", {
+          productName: t("Common:ProductName"),
+          organizationName: t("Common:OrganizationName"),
+          aiSettings: t("AISettings"),
+          aiAgents: t("Common:AIAgents"),
+          aiServices: t("Common:AIServices"),
+        })}
+        url="/portal-settings/customization/general/ai-services-management"
+        onClickLink={onClickLink}
+      />
     </StyledComponent>
   );
 };

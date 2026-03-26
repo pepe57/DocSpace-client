@@ -278,12 +278,15 @@ class FormsAiAgentStore {
   private initAskFromDBAgent = async () => {
     const saved = loadAskFromDBAgentId(this._roomId, this._userKey);
     if (saved) {
-      runInAction(() => {
-        this.askFromDBAgentId = saved;
-      });
-      // Ensure current user has access to the agent
-      this.syncAgentMembers(saved).catch(() => {});
-      return;
+      const valid = await this.validateAgent(saved);
+      if (valid) {
+        runInAction(() => {
+          this.askFromDBAgentId = saved;
+        });
+        this.syncAgentMembers(saved).catch(() => {});
+        return;
+      }
+      // Saved agent is stale — fall through to create a new one
     }
 
     try {
@@ -335,8 +338,16 @@ class FormsAiAgentStore {
       this.pendingAttachmentFile = null;
       const entry = this.folderAgentsMap[folderId];
       if (entry?.agentId) {
-        this.isPanelVisible = true;
-        await this.fetchAgentChatSettings(entry.agentId, version);
+        const valid = await this.validateAgent(entry.agentId);
+        if (version !== this._folderVersion) return;
+        if (valid) {
+          this.isPanelVisible = true;
+          await this.fetchAgentChatSettings(entry.agentId, version);
+        } else {
+          const { [folderId]: _, ...rest } = this.folderAgentsMap;
+          this.folderAgentsMap = rest;
+          this.persistMap();
+        }
       }
     } else {
       this.closePanel();

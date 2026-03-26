@@ -38,17 +38,18 @@ import type {
 
 type TFormsConfig = {
   roomId: string | number;
-  requestToken: string;
+  libraryId?: string | number;
   socketUrl?: string;
 };
 
 class FormsSettingsStore {
   roomId: string | number = "";
-  requestToken: string = "";
+  libraryId: string | number = "";
   socketUrl: string = "";
   filesSettings: TFilesSettings | null = null;
   folderSecurity: TFolderSecurity | null = null;
   userAccess: ShareAccessRights | null = null;
+  inProgressFolderId: number | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
@@ -56,9 +57,13 @@ class FormsSettingsStore {
 
   setConfig = (config: TFormsConfig) => {
     this.roomId = config.roomId;
-    this.requestToken = config.requestToken;
+    this.libraryId = config.libraryId ?? "";
     this.socketUrl = config.socketUrl ?? "";
   };
+
+  get hasLibrary(): boolean {
+    return !!this.libraryId;
+  }
 
   setFilesSettings = (settings: TFilesSettings) => {
     this.filesSettings = settings;
@@ -70,6 +75,10 @@ class FormsSettingsStore {
 
   setUserAccess = (access: ShareAccessRights) => {
     this.userAccess = access;
+  };
+
+  setInProgressFolderId = (id: number | undefined) => {
+    this.inProgressFolderId = id;
   };
 
   get hasManagementAccess(): boolean {
