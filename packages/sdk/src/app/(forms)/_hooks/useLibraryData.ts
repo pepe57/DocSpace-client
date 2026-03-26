@@ -99,7 +99,6 @@ export default function useLibraryData() {
       const filter = FilesFilter.getDefault();
       filter.page = 0;
       filter.pageCount = PAGE_COUNT;
-      filter.filterType = LIBRARY_FILTER_TYPE;
 
       const res = await api.files.getFolder(
         folderId,
