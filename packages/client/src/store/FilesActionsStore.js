@@ -1130,10 +1130,7 @@ class FilesActionStore {
           const currentFolderId = this.selectedFolderStore.id;
           if (items.includes(currentFolderId)) {
             const { rootFolderType } = this.selectedFolderStore;
-            const categoryType = getCategoryTypeByFolderType(
-              rootFolderType,
-              0,
-            );
+            const categoryType = getCategoryTypeByFolderType(rootFolderType, 0);
 
             if (categoryType === CategoryType.AIAgents) {
               this.moveToAIAgentsPage();
