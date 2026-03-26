@@ -1134,10 +1134,29 @@ class FilesActionStore {
               rootFolderType,
               0,
             );
+
+            const isAIAgents = categoryType === CategoryType.AIAgents;
             const path = getCategoryUrl(categoryType);
-            const filter = RoomsFilter.getDefault();
+            const filter = isAIAgents
+              ? RoomsFilter.getDefault(undefined, RoomSearchArea.AIAgents)
+              : RoomsFilter.getDefault();
+
+            const state = {
+              title:
+                (this.selectedFolderStore?.navigationPath &&
+                  this.selectedFolderStore?.navigationPath.length > 0 &&
+                  this.selectedFolderStore?.navigationPath[
+                    this.selectedFolderStore.navigationPath.length - 1
+                  ]?.title) ||
+                "",
+              isRoot: true,
+              isPublicRoomType: false,
+              rootFolderType,
+            };
+
             window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
               replace: true,
+              state,
             });
           }
         })
