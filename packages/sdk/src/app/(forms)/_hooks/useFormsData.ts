@@ -221,12 +221,18 @@ export default function useFormsData() {
 
   const fetchSection = useCallback(
     async (section?: FormsSection) => {
+      const sec = section ?? activeSection;
+
+      // Library uses its own data-fetching hook (useLibraryData).
+      // Settings doesn't display files.
+      // Prevent socket-triggered refreshes from overwriting store data.
+      if (sec === FormsSection.Library || sec === FormsSection.Settings)
+        return;
+
       abortRef.current?.abort();
       fetchMoreAbortRef.current?.abort();
       const controller = new AbortController();
       abortRef.current = controller;
-
-      const sec = section ?? activeSection;
 
       formsListStore.setSection(sec);
       formsListStore.setIsLoading(true);
