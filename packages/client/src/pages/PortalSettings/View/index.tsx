@@ -44,9 +44,7 @@ import { Component as DeleteData } from "../categories/delete-data";
 import { Component as StorageManagement } from "../categories/storage-management";
 import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
-import { PaymentServicesList as Services } from "@docspace/ui-kit/payments";
 import { Component as AISettings } from "../categories/ai-settings";
-import { default as AiPage } from "@docspace/ui-kit/payments/services/pages/ai-tools/AiPage";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
@@ -61,8 +59,7 @@ import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
-import { default as BackupPage } from "@docspace/ui-kit/payments/services/pages/backup/BackupPage";
-import { default as AdditionalStoragePage } from "@docspace/ui-kit/payments/services/pages/additional-storage/AdditionalStoragePage";
+import { Component as ServicesPage } from "../categories/payments/ServicesPage";
 
 const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("customization")) return "customization";
@@ -351,10 +348,12 @@ const View = ({
       {currentView === "delete-data" ? <DeleteData /> : null}
       {currentView === "payments" ? <Payments /> : null}
       {currentView === "bonus" ? <Bonus /> : null}
-      {currentView === "ai-services" ? <AiPage /> : null}
       {currentView === "ai-settings" ? <AISettings /> : null}
-      {currentView === "backup-service" ? <BackupPage /> : null}
-      {currentView === "disk-storage" ? <AdditionalStoragePage /> : null}
+      {currentView === "ai-services" ||
+      currentView === "backup-service" ||
+      currentView === "disk-storage" ? (
+        <ServicesPage />
+      ) : null}
     </LoaderWrapper>
   );
 };
