@@ -40,13 +40,13 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 
 import {
   getFilterType,
-  getSubjectFilter,
   getAuthorType,
   getRoomId,
   getSearchParams,
   getType,
   getProviderType,
   getSubjectId,
+  getSubjectOwnerId,
   getFilterContent,
   getTags,
   getQuotaFilter,
@@ -168,6 +168,7 @@ const SectionFilterContent = ({
       roomsFilter.filterValue ||
       roomsFilter.type ||
       roomsFilter.subjectId ||
+      roomsFilter.subjectOwnerId ||
       roomsFilter.provider ||
       roomsFilter.quotaFilter ||
       (roomsFilter.tags && roomsFilter.tags.length > 0) ||
@@ -178,6 +179,7 @@ const SectionFilterContent = ({
     roomsFilter.filterValue,
     roomsFilter.type,
     roomsFilter.subjectId,
+    roomsFilter.subjectOwnerId,
     roomsFilter.provider,
     roomsFilter.quotaFilter,
     roomsFilter.tags,
@@ -229,7 +231,7 @@ const SectionFilterContent = ({
 
         const subjectId = getSubjectId(data) || null;
 
-        const subjectFilter = getSubjectFilter(data) || null;
+        const subjectOwnerId = getSubjectOwnerId(data) || null;
 
         const providerType = getProviderType(data) || null;
         const tags = getTags(data) || null;
@@ -245,6 +247,7 @@ const SectionFilterContent = ({
 
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
+        newFilter.subjectOwnerId = null;
 
         newFilter.quotaFilter = quota;
 
@@ -254,10 +257,11 @@ const SectionFilterContent = ({
           if (subjectId === FilterKeys.me) {
             newFilter.subjectId = `${userId}`;
           }
+        }
 
-          newFilter.subjectFilter = subjectFilter?.toString()
-            ? subjectFilter.toString()
-            : FilterSubject.Member;
+        if (subjectOwnerId) {
+          newFilter.subjectOwnerId =
+            subjectOwnerId === FilterKeys.me ? `${userId}` : subjectOwnerId;
         }
 
         if (tags) {
@@ -284,7 +288,7 @@ const SectionFilterContent = ({
       } else if (isAIAgentsFolder) {
         const subjectId = getSubjectId(data) || null;
 
-        const subjectFilter = getSubjectFilter(data) || null;
+        const subjectOwnerId = getSubjectOwnerId(data) || null;
 
         const tags = getTags(data) || null;
 
@@ -294,6 +298,7 @@ const SectionFilterContent = ({
 
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
+        newFilter.subjectOwnerId = null;
 
         if (subjectId) {
           newFilter.subjectId = subjectId;
@@ -301,10 +306,11 @@ const SectionFilterContent = ({
           if (subjectId === FilterKeys.me) {
             newFilter.subjectId = `${userId}`;
           }
+        }
 
-          newFilter.subjectFilter = subjectFilter?.toString()
-            ? subjectFilter.toString()
-            : FilterSubject.Member;
+        if (subjectOwnerId) {
+          newFilter.subjectOwnerId =
+            subjectOwnerId === FilterKeys.me ? `${userId}` : subjectOwnerId;
         }
 
         if (tags) {
@@ -658,6 +664,20 @@ const SectionFilterContent = ({
         }
       }
 
+      if (roomsFilter.subjectOwnerId) {
+        const owner = await getUser(roomsFilter.subjectOwnerId);
+        const isMe = userId === roomsFilter.subjectOwnerId;
+
+        const label = isMe ? t("Common:MeLabel") : owner.displayName;
+
+        filterValues.push({
+          key: isMe ? FilterKeys.me : roomsFilter.subjectOwnerId,
+          group: FilterGroups.roomFilterOwner,
+          label,
+          selectedLabel: `${t("Common:Owner")}: ${label}`,
+        });
+      }
+
       if (roomsFilter.type) {
         const key = +roomsFilter.type;
 
@@ -730,6 +750,20 @@ const SectionFilterContent = ({
         } else {
           filterValues.push(subject);
         }
+      }
+
+      if (roomsFilter.subjectOwnerId) {
+        const owner = await getUser(roomsFilter.subjectOwnerId);
+        const isMe = userId === roomsFilter.subjectOwnerId;
+
+        const label = isMe ? t("Common:MeLabel") : owner.displayName;
+
+        filterValues.push({
+          key: isMe ? FilterKeys.me : roomsFilter.subjectOwnerId,
+          group: FilterGroups.roomFilterOwner,
+          label,
+          selectedLabel: `${t("Common:Owner")}: ${label}`,
+        });
       }
 
       if (roomsFilter?.tags?.length > 0) {
@@ -862,6 +896,7 @@ const SectionFilterContent = ({
     roomsFilter.type,
     roomsFilter.subjectId,
     roomsFilter.subjectFilter,
+    roomsFilter.subjectOwnerId,
     roomsFilter.tags,
     roomsFilter.tags?.length,
     roomsFilter.excludeSubject,
@@ -1218,7 +1253,7 @@ const SectionFilterContent = ({
         id: "filter_author-other",
         key: FilterKeys.other,
         group: FilterGroups.roomFilterSubject,
-        label: t("Common:Select"),
+        label: t("Common:SelectAction"),
       });
     }
 
@@ -1250,7 +1285,7 @@ const SectionFilterContent = ({
         id: "filter_owner-other",
         key: FilterKeys.other,
         group: FilterGroups.roomFilterOwner,
-        label: t("Common:Select"),
+        label: t("Common:SelectAction"),
       });
     }
 
@@ -1634,13 +1669,11 @@ const SectionFilterContent = ({
         if (group === FilterGroups.roomFilterSubject) {
           newFilter.subjectId = null;
           newFilter.excludeSubject = false;
-          newFilter.filterSubject = null;
+          newFilter.subjectFilter = null;
         }
 
         if (group === FilterGroups.roomFilterOwner) {
-          newFilter.subjectId = null;
-          newFilter.excludeSubject = false;
-          newFilter.filterSubject = null;
+          newFilter.subjectOwnerId = null;
         }
 
         if (group === FilterGroups.roomFilterTags) {
@@ -1685,13 +1718,11 @@ const SectionFilterContent = ({
         if (group === FilterGroups.roomFilterSubject) {
           newFilter.subjectId = null;
           newFilter.excludeSubject = false;
-          newFilter.filterSubject = null;
+          newFilter.subjectFilter = null;
         }
 
         if (group === FilterGroups.roomFilterOwner) {
-          newFilter.subjectId = null;
-          newFilter.excludeSubject = false;
-          newFilter.filterSubject = null;
+          newFilter.subjectOwnerId = null;
         }
 
         if (group === FilterGroups.roomFilterTags) {
