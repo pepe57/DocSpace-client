@@ -101,9 +101,9 @@ const ClientForm = ({
   });
 
   const [errorFields, setErrorFields] = React.useState<string[]>([]);
-  const [serverErrorFields, setServerErrorFields] = React.useState<string[]>(
-    [],
-  );
+  const [serverFieldErrors, setServerFieldErrors] = React.useState<
+    Record<string, string>
+  >({});
   const [requiredErrorFields, setRequiredErrorFields] = React.useState<
     string[]
   >([]);
@@ -170,28 +170,18 @@ const ClientForm = ({
 
       onCancelClick();
     } catch (e) {
-      const err = e as TData & { response?: { data?: { detail?: string } } };
-      const detail = err?.response?.data?.detail;
-
-      if (detail) {
-        const serverFieldMap: Partial<Record<string, keyof IClientReqDTO>> = {
-          "website url is expected to be passed as url": "website_url",
-          "terms url is expected to be passed as url": "terms_url",
-          "policy url is expected to be passed as url": "policy_url",
-          "client name length is expected to be between 3 and 256 characters":
-            "name",
-        };
-
-        const fieldsFromServer = detail
-          .split(", ")
-          .map((msg) => serverFieldMap[msg])
-          .filter((field): field is keyof IClientReqDTO => !!field);
-
-        if (fieldsFromServer.length > 0) {
-          setServerErrorFields(fieldsFromServer as string[]);
-        } else {
-          toastr.error(detail as unknown as TData);
+      const serverErrors = (
+        e as {
+          response?: { data?: { errors?: { field: string; code: string }[] } };
         }
+      )?.response?.data?.errors;
+
+      if (serverErrors && serverErrors.length > 0) {
+        setServerFieldErrors(
+          Object.fromEntries(
+            serverErrors.map((item) => [item.field, item.code]),
+          ),
+        );
       } else {
         toastr.error(e as unknown as TData);
       }
@@ -209,7 +199,11 @@ const ClientForm = ({
     value: string | boolean,
     remove?: boolean,
   ) => {
-    setServerErrorFields((s) => s.filter((f) => f !== name));
+    setServerFieldErrors((s) => {
+      const next = { ...s };
+      delete next[name];
+      return next;
+    });
     setForm((val) => {
       if (!(name in val)) return val;
 
@@ -426,7 +420,7 @@ const ClientForm = ({
 
   const allErrorFields = [
     ...errorFields,
-    ...serverErrorFields.filter((f) => !errorFields.includes(f)),
+    ...Object.keys(serverFieldErrors).filter((f) => !errorFields.includes(f)),
   ];
 
   return (
@@ -450,6 +444,7 @@ const ClientForm = ({
               changeValue={onChangeForm}
               isEdit={isEdit}
               errorFields={allErrorFields}
+              serverFieldErrors={serverFieldErrors}
               requiredErrorFields={requiredErrorFields}
               onBlur={onBlur}
             />
