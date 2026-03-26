@@ -145,7 +145,6 @@ const FormsSidebar = () => {
             isActive={activeSection === section.key}
             onClick={() => {
               if (activeSection === section.key) {
-                // Already on this section — return to root if inside subfolder/editor
                 let handled = false;
                 if (editingFile) {
                   closeEditor();

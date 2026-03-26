@@ -36,9 +36,7 @@ export type EditorAction = "view" | "edit" | "fill";
 class FormsNavigationStore {
   editingFile: TFile | null = null;
   editorAction: EditorAction = "fill";
-  /** The subfolder currently open inside Completed Forms (null = root level showing folder tiles). */
   completedFolder: TFolder | null = null;
-  /** The subfolder currently open inside In Progress (null = root level showing folder tiles). */
   inProgressFolder: TFolder | null = null;
 
   constructor() {

@@ -151,18 +151,13 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     }
 
     if (isInsideLibrary) {
-      // Build breadcrumbs: Library > language > ...subfolders (reversed for Navigation component)
       const crumbs: { id: string | number; title: string; isRootRoom: boolean }[] = [];
 
-      // Skip folderPath[last] — it is the current folder shown as the page
-      // title, not a breadcrumb. Remaining ancestors are added deepest-first
-      // (Navigation component expects this order).
       for (let i = libraryNav.folderPath.length - 2; i >= 0; i--) {
         const f = libraryNav.folderPath[i];
         crumbs.push({ id: f.id, title: f.title, isRootRoom: false });
       }
 
-      // Language folder
       if (libraryNav.languageFolder) {
         crumbs.push({
           id: libraryNav.languageFolder.id,
@@ -171,7 +166,6 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
         });
       }
 
-      // Library root
       crumbs.push({
         id: "library-root",
         title: t("Common:Library"),

@@ -42,8 +42,6 @@ const InProgressPage = () => {
     useFormsNavigationStore();
   const { fetchSection, fetchMore, fetchSubfolder } = useFormsDataContext();
 
-  // Fetch root folders when inProgressFolder is null (initial mount + back from subfolder).
-  // Only inProgressFolder in deps — fetchSection ref changes must not trigger re-runs.
   const fetchSectionRef = React.useRef(fetchSection);
   fetchSectionRef.current = fetchSection;
   React.useEffect(() => {
@@ -51,8 +49,6 @@ const InProgressPage = () => {
     fetchSectionRef.current(FormsSection.InProgress);
   }, [inProgressFolder]);
 
-  // Trap the browser Back button while inside a subfolder.
-  // Disabled when editing — useEditorGuard takes priority.
   React.useEffect(() => {
     if (!inProgressFolder || editingFile) return;
 
@@ -69,7 +65,6 @@ const InProgressPage = () => {
     };
   }, [inProgressFolder, editingFile, goBackToInProgressRoot]);
 
-  // Fetch subfolder files when inProgressFolder is set
   React.useEffect(() => {
     if (!inProgressFolder) return;
 

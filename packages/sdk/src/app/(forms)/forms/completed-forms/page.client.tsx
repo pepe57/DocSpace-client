@@ -47,9 +47,6 @@ const CompletedPage = () => {
   const aiStore = useFormsAiAgentStore();
   const { fetchSection, fetchMore, fetchSubfolder } = useFormsDataContext();
 
-  // Fetch root folders when completedFolder is null (initial mount + back from subfolder).
-  // Only completedFolder in deps — fetchSection ref changes must not trigger re-runs
-  // (e.g., when arriving from form completion with completedFolder pre-set).
   const fetchSectionRef = React.useRef(fetchSection);
   fetchSectionRef.current = fetchSection;
   const aiStoreRef = React.useRef(aiStore);
@@ -63,8 +60,6 @@ const CompletedPage = () => {
     }
   }, [completedFolder, hasManagementAccess]);
 
-  // Trap the browser Back button while inside a subfolder.
-  // Disabled when editing — useEditorGuard takes priority.
   React.useEffect(() => {
     if (!completedFolder || editingFile) return;
 
@@ -81,7 +76,6 @@ const CompletedPage = () => {
     };
   }, [completedFolder, editingFile, goBackToCompletedRoot]);
 
-  // Fetch subfolder files + AI agent setup when completedFolder is set
   const fetchIdRef = React.useRef(0);
   React.useEffect(() => {
     if (!completedFolder) return;
@@ -129,7 +123,6 @@ const CompletedPage = () => {
           }
         }
       } catch {
-        // Aborted or network error — ignore
       }
     })();
 

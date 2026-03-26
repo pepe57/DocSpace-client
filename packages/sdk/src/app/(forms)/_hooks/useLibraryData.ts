@@ -74,8 +74,6 @@ export default function useLibraryData() {
     };
   }, []);
 
-  // Store refs are stable (created once per context via useMemo), so the
-  // callback is effectively created once. Consumer uses fetchRef pattern.
   const fetchLibrarySection = useCallback(async () => {
     abortRef.current?.abort();
     fetchMoreAbortRef.current?.abort();
@@ -94,7 +92,6 @@ export default function useLibraryData() {
       return;
     }
 
-    // Level 0 → library room root; Level 1+ → currentFolder
     const folderId = libraryNav.currentFolder?.id ?? libraryId;
 
     try {
@@ -111,11 +108,9 @@ export default function useLibraryData() {
       if (controller.signal.aborted) return;
 
       if (res.folders.length > 0) {
-        // Folder level — show subfolders (no pagination needed)
         formsListStore.setFolders(res.folders);
         formsListStore.setItems([], 0);
       } else if (res.files.length > 0) {
-        // Leaf level — show template files with pagination
         const files = res.files;
         apiExhausted.current = files.length < PAGE_COUNT;
         const total = apiExhausted.current
@@ -176,9 +171,7 @@ export default function useLibraryData() {
         : formsListStore.items.length + fetched.length + 1;
       formsListStore.appendItems(fetched, total);
       requestThumbnails(fetched);
-    } catch {
-      // aborted or network error — ignore
-    }
+    } catch {}
   }, [formsListStore, libraryNav]);
 
   return { fetchLibrarySection, fetchMore };

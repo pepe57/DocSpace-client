@@ -75,10 +75,6 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
   const [isReady, setIsReady] = useState(false);
   const initialised = useRef(false);
 
-  // useLayoutEffect runs synchronously BEFORE child useEffects, guaranteeing
-  // that MobX stores are populated before page components check them.
-  // This is critical: React fires child effects before parent effects,
-  // so a regular useEffect here would run AFTER MyFormsPage's mount effect.
   useLayoutEffect(() => {
     if (initialised.current) return;
     initialised.current = true;
@@ -109,7 +105,6 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
       formsAiAgentStore.setDefaultProvider(commonData.defaultProvider);
     }
 
-    // Pre-cache virtual folder IDs so pages don't need extra SSR fetches
     if (commonData.doneFolderId) {
       formsAiAgentStore.setDoneFolderId(commonData.doneFolderId);
     }
@@ -117,7 +112,6 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
       formsSettingsStore.setInProgressFolderId(commonData.inProgressFolderId);
     }
 
-    // Hydrate initial my-forms file list from layout SSR (first load only)
     if (commonData.initialFiles) {
       const roomId = Number(commonData.roomId);
       const files = roomId

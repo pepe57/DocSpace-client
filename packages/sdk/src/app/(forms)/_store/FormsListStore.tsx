@@ -39,7 +39,6 @@ class FormsListStore {
   total: number = 0;
   isLoading: boolean = true;
 
-  /** Which section currently owns the data in this store. */
   section: FormsSection | null = null;
 
   constructor() {

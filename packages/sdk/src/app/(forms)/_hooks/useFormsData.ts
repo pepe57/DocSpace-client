@@ -126,7 +126,6 @@ export default function useFormsData() {
       const roomId = formsSettingsStore.roomId;
       if (!roomId) return;
 
-      // Use cached virtual folder IDs when available to skip room fetch
       const cachedId =
         virtualFolderType === FolderType.Done
           ? aiStore.doneFolderId
@@ -223,9 +222,6 @@ export default function useFormsData() {
     async (section?: FormsSection) => {
       const sec = section ?? activeSection;
 
-      // Library uses its own data-fetching hook (useLibraryData).
-      // Settings doesn't display files.
-      // Prevent socket-triggered refreshes from overwriting store data.
       if (sec === FormsSection.Library || sec === FormsSection.Settings)
         return;
 

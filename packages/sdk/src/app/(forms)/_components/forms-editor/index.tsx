@@ -96,7 +96,6 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
 
     const formTitle = editingFile?.title?.replace(/\.pdf$/i, "");
 
-    // Hide iframe and show loader while we wait for the completed folder
     setIsCompleting(true);
 
     if (!roomId || !formTitle) {
@@ -125,9 +124,6 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
           continue;
         }
 
-        // Persist doneFolderId immediately so socket subscriptions and the AI
-        // store are wired up even when the SSR page couldn't find the Done
-        // folder at request time (EC9: virtualFolderId was undefined).
         aiStore.setDoneFolderId(doneFolder.id);
 
         const doneRes = await api.files.getFolder(doneFolder.id, filter);
@@ -142,12 +138,6 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
             formsListStore.setIsLoading(true);
             openCompletedFolder(subfolder);
           });
-          // Layout's form-completion effect detects completedFolder going
-          // from null → non-null while editing, and handles closeEditor +
-          // router.replace — no race condition with component unmount.
-          // Don't reset isCompleting — the component unmounts when the
-          // layout effect calls closeEditor(). Resetting here would
-          // briefly re-create the iframe for one frame.
           return;
         }
 
