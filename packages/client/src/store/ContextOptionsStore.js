@@ -2908,7 +2908,6 @@ class ContextOptionsStore {
               "start-filling",
               "vectorization",
               "preview",
-              PLUGIN_SHOW_MEDIA_VIEWER_KEY,
               "mark-read",
               "open-location",
             ],
