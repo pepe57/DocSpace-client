@@ -45,6 +45,7 @@ import type { TGetIcon } from "@/app/(docspace)/_hooks/useItemIcon";
 import TileContent from "@/app/(docspace)/(files)/_components/tile-view/sub-components/TileContent";
 import { FormsSection } from "@/types/forms";
 import { sectionToPath } from "../../_utils/sectionFromPathname";
+import { getThumbnail, setThumbnail } from "../../_utils/thumbnailCache";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 
 import styles from "./FormsTile.module.scss";
@@ -70,13 +71,20 @@ const LibraryTemplateTile = ({
   const thumbUrl = item.thumbnailUrl
     ? item.thumbnailUrl.replace(/^https?:\/\/[^/]+/, "")
     : "";
-  const [blobThumbnail, setBlobThumbnail] = useState("");
+  const [blobThumbnail, setBlobThumbnail] = useState(
+    () => (thumbUrl && getThumbnail(thumbUrl)) || "",
+  );
 
   useEffect(() => {
     if (!thumbUrl || item.providerItem) return;
 
+    const cached = getThumbnail(thumbUrl);
+    if (cached) {
+      setBlobThumbnail(cached);
+      return;
+    }
+
     let cancelled = false;
-    let blobUrl = "";
 
     fetch(thumbUrl, { credentials: "include" })
       .then((res) => {
@@ -85,17 +93,14 @@ const LibraryTemplateTile = ({
       })
       .then((blob) => {
         if (cancelled) return;
-        blobUrl = URL.createObjectURL(blob);
+        const blobUrl = URL.createObjectURL(blob);
+        setThumbnail(thumbUrl, blobUrl);
         setBlobThumbnail(blobUrl);
       })
       .catch(() => {});
 
     return () => {
       cancelled = true;
-      if (blobUrl) {
-        URL.revokeObjectURL(blobUrl);
-      }
-      setBlobThumbnail("");
     };
   }, [thumbUrl, item.providerItem]);
 
