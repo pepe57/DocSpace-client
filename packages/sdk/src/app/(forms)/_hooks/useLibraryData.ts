@@ -36,6 +36,7 @@ import { thumbnailStatuses } from "@docspace/shared/constants";
 import { FilterType } from "@docspace/shared/enums";
 
 import { PAGE_COUNT } from "@/utils/constants";
+import { FormsSection } from "@/types/forms";
 
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
@@ -81,6 +82,7 @@ export default function useLibraryData() {
     const controller = new AbortController();
     abortRef.current = controller;
 
+    formsListStore.setSection(FormsSection.Library);
     formsListStore.setIsLoading(true);
     apiExhausted.current = false;
 

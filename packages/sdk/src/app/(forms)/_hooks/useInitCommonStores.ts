@@ -36,6 +36,7 @@ import type {
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
 import { ShareAccessRights } from "@docspace/ui-kit/enums";
+import { FormsSection } from "@/types/forms";
 
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
@@ -122,6 +123,7 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
       const files = roomId
         ? commonData.initialFiles.filter((f) => f.folderId === roomId)
         : commonData.initialFiles;
+      formsListStore.setSection(FormsSection.MyForms);
       formsListStore.setItems(files, commonData.initialTotal ?? files.length);
       formsListStore.setFolders([]);
       formsListStore.setIsLoading(false);

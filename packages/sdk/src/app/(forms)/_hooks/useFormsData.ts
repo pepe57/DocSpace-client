@@ -226,10 +226,11 @@ export default function useFormsData() {
       const controller = new AbortController();
       abortRef.current = controller;
 
+      const sec = section ?? activeSection;
+
+      formsListStore.setSection(sec);
       formsListStore.setIsLoading(true);
       apiExhausted.current = false;
-
-      const sec = section ?? activeSection;
 
       try {
         if (sec === FormsSection.CompletedForms) {

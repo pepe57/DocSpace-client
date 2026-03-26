@@ -26,35 +26,25 @@
 
 "use client";
 
-import React from "react";
-import { observer } from "mobx-react";
+import { createContext, useContext } from "react";
 
-import { FormsSection } from "@/types/forms";
+import type { FormsSection } from "@/types/forms";
 
-import { useFormsListStore } from "../../_store/FormsListStore";
-import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-import { useFormsDataContext } from "../../_context/FormsDataContext";
-import FormsGrid from "../../_components/forms-grid";
-
-const MyFormsPage = () => {
-  const formsListStore = useFormsListStore();
-  const formsSettingsStore = useFormsSettingsStore();
-  const { fetchSection, fetchMore } = useFormsDataContext();
-
-  const fetchSectionRef = React.useRef(fetchSection);
-  fetchSectionRef.current = fetchSection;
-
-  React.useEffect(() => {
-    if (formsListStore.items.length > 0 && !formsListStore.isLoading) return;
-    fetchSectionRef.current(FormsSection.MyForms);
-  }, [formsListStore]);
-
-  return (
-    <FormsGrid
-      filesSettings={formsSettingsStore.filesSettings!}
-      fetchMore={fetchMore}
-    />
-  );
+export type FormsDataApi = {
+  fetchSection: (section?: FormsSection) => Promise<void>;
+  fetchMore: () => Promise<void>;
+  fetchSubfolder: (folderId: number, signal: AbortSignal) => Promise<void>;
 };
 
-export default observer(MyFormsPage);
+const FormsDataContext = createContext<FormsDataApi | null>(null);
+
+export const FormsDataProvider = FormsDataContext.Provider;
+
+export const useFormsDataContext = () => {
+  const ctx = useContext(FormsDataContext);
+  if (!ctx)
+    throw new Error(
+      "useFormsDataContext must be used within FormsDataProvider",
+    );
+  return ctx;
+};

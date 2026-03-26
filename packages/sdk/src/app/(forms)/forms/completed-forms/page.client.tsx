@@ -35,7 +35,7 @@ import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
-import useFormsData from "../../_hooks/useFormsData";
+import { useFormsDataContext } from "../../_context/FormsDataContext";
 import FormsGrid from "../../_components/forms-grid";
 
 const CompletedPage = () => {
@@ -45,7 +45,7 @@ const CompletedPage = () => {
   const { editingFile, completedFolder, goBackToCompletedRoot } =
     useFormsNavigationStore();
   const aiStore = useFormsAiAgentStore();
-  const { fetchSection, fetchMore, fetchSubfolder } = useFormsData();
+  const { fetchSection, fetchMore, fetchSubfolder } = useFormsDataContext();
 
   // Fetch root folders when completedFolder is null (initial mount + back from subfolder).
   // Only completedFolder in deps — fetchSection ref changes must not trigger re-runs

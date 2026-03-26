@@ -47,6 +47,7 @@ import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsUserStore } from "../_store/FormsUserStore";
 import useInitCommonStores, { type CommonData } from "../_hooks/useInitCommonStores";
 import useFormsData from "../_hooks/useFormsData";
+import { FormsDataProvider } from "../_context/FormsDataContext";
 import useFolderActions from "../_hooks/useFolderActions";
 import useFormsSocket from "../_hooks/useFormsSocket";
 import useFormEventHooks from "../_hooks/useFormEventHooks";
@@ -126,7 +127,8 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     [items],
   );
 
-  const { fetchSection } = useFormsData();
+  const formsData = useFormsData();
+  const { fetchSection, fetchMore, fetchSubfolder } = formsData;
 
   useFormsSocket(socketUrl, socketFolderIds, socketFileIds, fetchSection);
   useFormEventHooks(hasManagementAccess ? aiStore : null, socketUrl);
@@ -199,6 +201,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           );
         }, 0);
       } else {
+        formsListStore.setSection(activeSection);
         formsListStore.setItems([], 0);
         formsListStore.setFolders([]);
         formsListStore.setIsLoading(true);
@@ -268,6 +271,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     onSaveCreateForm,
   } = useFolderActions();
 
+  const formsDataValue = React.useMemo(
+    () => ({ fetchSection, fetchMore, fetchSubfolder }),
+    [fetchSection, fetchMore, fetchSubfolder],
+  );
+
   const handleEditorNavigatedAway = React.useCallback(() => {
     closeEditor();
   }, [closeEditor]);
@@ -323,9 +331,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             {isEditing && (
               <FormsEditor onNavigatedAway={handleEditorNavigatedAway} />
             )}
-            <div style={{ display: isEditing ? "none" : undefined }}>
-              {children}
-            </div>
+            <FormsDataProvider value={formsDataValue}>
+              <div style={{ display: isEditing ? "none" : undefined }}>
+                {children}
+              </div>
+            </FormsDataProvider>
           </Section.SectionBody>
         </Section>
         <AiChatButton />

@@ -33,14 +33,14 @@ import { FormsSection } from "@/types/forms";
 
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-import useFormsData from "../../_hooks/useFormsData";
+import { useFormsDataContext } from "../../_context/FormsDataContext";
 import FormsGrid from "../../_components/forms-grid";
 
 const InProgressPage = () => {
   const formsSettingsStore = useFormsSettingsStore();
   const { editingFile, inProgressFolder, goBackToInProgressRoot } =
     useFormsNavigationStore();
-  const { fetchSection, fetchMore, fetchSubfolder } = useFormsData();
+  const { fetchSection, fetchMore, fetchSubfolder } = useFormsDataContext();
 
   // Fetch root folders when inProgressFolder is null (initial mount + back from subfolder).
   // Only inProgressFolder in deps — fetchSection ref changes must not trigger re-runs.

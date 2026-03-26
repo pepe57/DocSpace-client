@@ -31,11 +31,16 @@ import { makeAutoObservable } from "mobx";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
+import type { FormsSection } from "@/types/forms";
+
 class FormsListStore {
   items: TFile[] = [];
   folders: TFolder[] = [];
   total: number = 0;
   isLoading: boolean = true;
+
+  /** Which section currently owns the data in this store. */
+  section: FormsSection | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -59,11 +64,16 @@ class FormsListStore {
     this.isLoading = value;
   };
 
+  setSection = (section: FormsSection | null) => {
+    this.section = section;
+  };
+
   reset = () => {
     this.items = [];
     this.folders = [];
     this.total = 0;
     this.isLoading = false;
+    this.section = null;
   };
 
   get hasMore(): boolean {
