@@ -139,12 +139,15 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
           runInAction(() => {
             formsListStore.setItems([], 0);
             formsListStore.setFolders([]);
+            formsListStore.setIsLoading(true);
             openCompletedFolder(subfolder);
           });
           // Layout's form-completion effect detects completedFolder going
           // from null → non-null while editing, and handles closeEditor +
           // router.replace — no race condition with component unmount.
-          setIsCompleting(false);
+          // Don't reset isCompleting — the component unmounts when the
+          // layout effect calls closeEditor(). Resetting here would
+          // briefly re-create the iframe for one frame.
           return;
         }
 
