@@ -1118,15 +1118,29 @@ class FilesActionStore {
             operationId,
           });
         })
-        .then(() =>
+        .then(() => {
           toastr.success(
             translations?.successRemoveTemplate
               ? translations.successRemoveTemplate
               : items.length > 1
                 ? translations?.successRemoveRooms
                 : translations?.successRemoveRoom,
-          ),
-        )
+          );
+
+          const currentFolderId = this.selectedFolderStore.id;
+          if (items.includes(currentFolderId)) {
+            const { rootFolderType } = this.selectedFolderStore;
+            const categoryType = getCategoryTypeByFolderType(
+              rootFolderType,
+              0,
+            );
+            const path = getCategoryUrl(categoryType);
+            const filter = RoomsFilter.getDefault();
+            window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
+              replace: true,
+            });
+          }
+        })
         .finally(() => {
           this.setGroupMenuBlocked(false);
           setSecondaryProgressBarData({
