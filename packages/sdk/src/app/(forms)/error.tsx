@@ -24,32 +24,55 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
-import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
-import { logger } from "@/../logger.mjs";
+"use client";
 
-export async function getDefaultProvider(): Promise<
-  TDefaultProvider | undefined
-> {
-  logger.debug("Start GET /ai/providers/default");
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-  try {
-    const [req] = await createRequest(
-      ["/ai/providers/default"],
-      [["", ""]],
-      "GET",
-    );
-    const res = await fetch(req, { next: { revalidate: 900 } });
+const containerStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100%",
+  height: "100%",
+  gap: "16px",
+  fontFamily: "'Open Sans', sans-serif",
+  color: "var(--text-color)",
+};
 
-    if (!res.ok) {
-      logger.error(`GET /ai/providers/default failed: ${res.status}`);
-      return;
-    }
+const buttonStyle: React.CSSProperties = {
+  padding: "8px 24px",
+  border: "1px solid var(--checkbox-border-color)",
+  borderRadius: "6px",
+  backgroundColor: "var(--button-background-base)",
+  cursor: "pointer",
+  fontSize: "14px",
+  lineHeight: "20px",
+  color: "var(--text-color)",
+};
 
-    const json = await res.json();
+export default function FormsError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  const { t } = useTranslation("Common");
 
-    return json.response as TDefaultProvider;
-  } catch (error) {
-    logger.error(`Error in getDefaultProvider: ${error}`);
-  }
+  useEffect(() => {
+    console.error("Forms error boundary caught:", error);
+  }, [error]);
+
+  return (
+    <div style={containerStyle}>
+      <p style={{ margin: 0, fontSize: "14px" }}>
+        {t("Common:SomethingWentWrong")}
+      </p>
+      <button type="button" style={buttonStyle} onClick={reset}>
+        {t("Common:TryAgain")}
+      </button>
+    </div>
+  );
 }

@@ -46,6 +46,7 @@ import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { sectionFromPathname } from "../_utils/sectionFromPathname";
 
 const FORMS_PAGE_COUNT = 25;
+const MAX_FETCH_MORE_ITERATIONS = 5;
 
 const requestThumbnails = (files: TFile[]) => {
   const ids = files
@@ -329,8 +330,10 @@ export default function useFormsData() {
 
     try {
       let fetched: TFile[] = [];
+      let iterations = 0;
 
-      while (!apiExhausted.current && fetched.length === 0) {
+      while (!apiExhausted.current && fetched.length === 0 && iterations < MAX_FETCH_MORE_ITERATIONS) {
+        iterations += 1;
         currentPage.current += 1;
 
         const filter = FilesFilter.getDefault();

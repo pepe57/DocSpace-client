@@ -42,6 +42,8 @@ import {
 
 import FormsShell from "./layout.client";
 
+export const dynamic = "force-dynamic";
+
 export default async function FormsServerLayout({
   children,
 }: {

@@ -42,6 +42,7 @@ import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useLibraryNavigationStore } from "../_store/LibraryNavigationStore";
 
+const LIBRARY_FILTER_TYPE = FilterType.PDFForm;
 const LIBRARY_PAGE_COUNT = 25;
 
 const requestThumbnails = (files: TFile[]) => {
@@ -98,6 +99,7 @@ export default function useLibraryData() {
       const filter = FilesFilter.getDefault();
       filter.page = 0;
       filter.pageCount = PAGE_COUNT;
+      filter.filterType = LIBRARY_FILTER_TYPE;
 
       const res = await api.files.getFolder(
         folderId,
@@ -153,7 +155,7 @@ export default function useLibraryData() {
       const filter = FilesFilter.getDefault();
       filter.page = currentPage.current;
       filter.pageCount = LIBRARY_PAGE_COUNT;
-      filter.filterType = FilterType.PDFForm;
+      filter.filterType = LIBRARY_FILTER_TYPE;
 
       const res = await api.files.getFolder(
         folderId,

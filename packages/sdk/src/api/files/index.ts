@@ -52,7 +52,7 @@ export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
 	try {
 		const [req] = await createRequest([`/files/settings`], [["", ""]], "GET");
 
-		const res = await fetch(req, { next: { revalidate: 300 } });
+		const res = await fetch(req, { next: { revalidate: 900 } });
 
 		if (!res.ok) {
 			logger.error(`GET /files/settings failed: ${res.status}`);
