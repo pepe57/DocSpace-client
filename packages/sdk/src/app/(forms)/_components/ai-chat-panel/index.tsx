@@ -29,25 +29,29 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { MemoryRouter } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import Chat from "@docspace/ui-kit/ai-agent/chat";
-import useInitChats from "@docspace/ui-kit/ai-agent/chat/hooks/useInitChats";
-import useToolsSettings from "@docspace/ui-kit/ai-agent/chat/hooks/useToolsSettings";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
+import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-import useInitMessagesSDK from "../../_hooks/useInitMessagesSDK";
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
+import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 
+import ResizeHandle from "./ResizeHandle";
 import styles from "./AiChatPanel.module.scss";
 
-const AiChatPanel = () => {
+type AiChatPanelProps = {
+  rootRef: React.RefObject<HTMLDivElement | null>;
+};
+
+const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
   const { t } = useTranslation(["Common"]);
   const aiAgentStore = useFormsAiAgentStore();
   const {
@@ -55,21 +59,18 @@ const AiChatPanel = () => {
     closePanel,
     isSyncing,
     currentAgentId,
-    agentChatSettings,
-    aiConfig,
+    pendingAttachmentFile,
+    panelPosition,
+    panelWidth,
+    setPanelPosition,
+    setPanelWidth,
   } = aiAgentStore;
   const { filesSettings, hasManagementAccess } = useFormsSettingsStore();
+  const { editingFile } = useFormsNavigationStore();
+
+  const panelRef = React.useRef<HTMLDivElement>(null);
 
   const agentRoomId = currentAgentId ?? 0;
-
-  const initChats = useInitChats({ agentId: agentRoomId });
-  const { initMessages, ...messagesSettings } = useInitMessagesSDK(agentRoomId);
-
-  const toolsSettings = useToolsSettings({
-    agentId: agentRoomId,
-    aiConfig,
-    chatSettings: agentChatSettings,
-  });
 
   const { getIcon: getIconRaw } = useItemIcon({
     filesSettings: filesSettings!,
@@ -81,7 +82,19 @@ const AiChatPanel = () => {
     [getIconRaw],
   );
 
-  const [attachmentFile, setAttachmentFile] = React.useState(null);
+  const [attachmentFile, setAttachmentFile] = React.useState<Partial<
+    import("@docspace/ui-kit/types").TFile
+  > | null>(null);
+
+  React.useEffect(() => {
+    if (pendingAttachmentFile) {
+      setAttachmentFile(
+        pendingAttachmentFile as Partial<
+          import("@docspace/ui-kit/types").TFile
+        >,
+      );
+    }
+  }, [pendingAttachmentFile]);
 
   const clearAttachmentFile = React.useCallback(() => {
     setAttachmentFile(null);
@@ -89,59 +102,119 @@ const AiChatPanel = () => {
 
   const getResultStorageId = React.useCallback(() => null, []);
 
-  React.useEffect(() => {
-    if (isPanelVisible && agentRoomId) {
-      initChats.fetchChats();
-      initMessages();
-      toolsSettings.initTools();
-    }
-  }, [isPanelVisible, agentRoomId]);
+  const isAskFromDB = !!pendingAttachmentFile;
 
-  if (!isPanelVisible || !agentRoomId || !hasManagementAccess) return null;
+  const emptyScreenText = React.useMemo(() => {
+    if (!pendingAttachmentFile?.title) return undefined;
+    const name = pendingAttachmentFile.title.replace(/\.[^.]+$/, "");
+    return `Ask anything about "${name}" using the submitted data`;
+  }, [pendingAttachmentFile?.title]);
+
+  const askFromDBSamples = React.useMemo(
+    () =>
+      pendingAttachmentFile?.title
+        ? [
+            {
+              title: "Total submissions",
+              prompt: `How many times has the form "${pendingAttachmentFile.title}" been submitted?`,
+            },
+            {
+              title: "Recent responses",
+              prompt: `Show me the most recent submissions for "${pendingAttachmentFile.title}"`,
+            },
+            {
+              title: "Who filled it out",
+              prompt: `List all people who have filled out the form "${pendingAttachmentFile.title}"`,
+            },
+            {
+              title: "Summary",
+              prompt: `Give me a brief summary of all collected data from "${pendingAttachmentFile.title}"`,
+            },
+          ]
+        : undefined,
+    [pendingAttachmentFile?.title],
+  );
+
+  const handleResizeEnd = React.useCallback(
+    (width: number) => {
+      setPanelWidth(width);
+    },
+    [setPanelWidth],
+  );
+
+  const handleTogglePosition = React.useCallback(() => {
+    setPanelPosition(panelPosition === "left" ? "right" : "left");
+  }, [panelPosition, setPanelPosition]);
+
+  if (!isPanelVisible || !agentRoomId || !hasManagementAccess || editingFile)
+    return null;
 
   return (
-    <div className={styles.chatPanel}>
+    <div
+      ref={panelRef}
+      className={styles.chatPanel}
+      data-position={panelPosition}
+      style={{ width: panelWidth }}
+    >
+      <ResizeHandle
+        position={panelPosition}
+        panelRef={panelRef}
+        rootRef={rootRef}
+        onResizeEnd={handleResizeEnd}
+      />
       <div className={styles.chatHeader}>
         <div className={styles.headerTitle}>
           <Text fontSize="16px" fontWeight={700}>
             {t("Common:AIAgent")}
           </Text>
+          {isSyncing && (
+            <span
+              title={t("Common:SyncingKnowledgeBase")}
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <Loader type={LoaderTypes.track} size="16px" />
+            </span>
+          )}
         </div>
         <div className={styles.headerActions}>
+          <IconButton
+            iconName={LogoutReactSvgUrl}
+            size={16}
+            className={
+              panelPosition === "right" ? styles.positionIconFlipped : undefined
+            }
+            onClick={handleTogglePosition}
+            tooltipId="move-panel-tooltip"
+            tooltipContent={
+              panelPosition === "right"
+                ? t("Common:MovePanelLeft")
+                : t("Common:MovePanelRight")
+            }
+          />
           <IconButton
             iconName={CrossReactSvgUrl}
             size={17}
             onClick={closePanel}
+            tooltipId="close-panel-tooltip"
+            tooltipContent={t("Common:CloseButton")}
           />
         </div>
       </div>
 
-      {isSyncing ? (
-        <div className={styles.syncBanner}>
-          <Text fontSize="12px" className={styles.syncText}>
-            {t("Common:SyncingKnowledgeBase")}
-          </Text>
-        </div>
-      ) : null}
-
       <div className={styles.chatBody}>
-        <MemoryRouter>
-          <Chat
-            agentId={agentRoomId}
-            userAvatar=""
-            selectedModel={agentChatSettings?.modelId ?? ""}
-            getIcon={getIcon}
-            isLoading={false}
-            attachmentFile={attachmentFile}
-            clearAttachmentFile={clearAttachmentFile}
-            toolsSettings={toolsSettings}
-            initChats={initChats}
-            messagesSettings={messagesSettings}
-            aiReady
-            standalone
-            getResultStorageId={getResultStorageId}
-          />
-        </MemoryRouter>
+        <Chat
+          agentId={agentRoomId}
+          selectedModel=""
+          getIcon={getIcon}
+          attachmentFile={attachmentFile}
+          clearAttachmentFile={clearAttachmentFile}
+          hideAttachments={isAskFromDB}
+          emptyScreenText={emptyScreenText}
+          withSamples={isAskFromDB}
+          samples={askFromDBSamples}
+          standalone
+          getResultStorageId={getResultStorageId}
+        />
       </div>
     </div>
   );

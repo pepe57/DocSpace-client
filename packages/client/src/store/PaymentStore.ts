@@ -65,9 +65,11 @@ import {
 } from "@docspace/shared/api/portal/types";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import {
+  AI_ENUM,
   AI_TOOLS,
   BACKUP_SERVICE,
   STORAGE_TARIFF_DEACTIVATED,
+  STORAGE_DEACTIVATION_VISITED,
   WEB_SEARCH,
 } from "@docspace/shared/constants";
 import type { DateTime } from "luxon";
@@ -85,6 +87,7 @@ type TServiceFeatureWithPrice = TNumericPaymentFeature & {
     value: number;
     currencySymbol?: string;
   };
+  serviceName?: string;
 };
 
 class PaymentStore {
@@ -139,6 +142,8 @@ class PaymentStore {
 
   isInitWalletPage = false;
 
+  isPaymentMethodInit = false;
+
   balance: TBalance = 0;
 
   previousBalance: TBalance = 0;
@@ -171,6 +176,8 @@ class PaymentStore {
   servicesQuotas: TPaymentQuota | null = null; // temporary solution, should be in the service store
 
   isShowStorageTariffDeactivatedModal = false;
+
+  isStorageDeactivationVisited = false;
 
   reccomendedAmount = "";
 
@@ -360,6 +367,10 @@ class PaymentStore {
     this.isInitWalletPage = value;
   };
 
+  setPaymentMethodInit = (value: boolean) => {
+    this.isPaymentMethodInit = value;
+  };
+
   get isAutoPaymentExist() {
     return this.autoPayments?.enabled;
   }
@@ -427,6 +438,12 @@ class PaymentStore {
     );
   }
 
+  get storageServiceName() {
+    return (
+      this.servicesQuotasFeatures.get(TOTAL_SIZE) as TServiceFeatureWithPrice
+    )?.serviceName;
+  }
+
   get backupServicePrice() {
     return (
       (
@@ -449,7 +466,13 @@ class PaymentStore {
   }
 
   get isAiToolsServiceOn() {
-    return this.servicesQuotasFeatures.get(AI_TOOLS)?.value;
+    return this.servicesQuotasFeatures.get(AI_ENUM)?.value;
+  }
+
+  get availableBackupsCount() {
+    if (this.backupServicePrice === 0) return 0;
+    if (this.walletBalance === 0) return 0;
+    return Math.floor(this.walletBalance / this.backupServicePrice);
   }
 
   formatWalletCurrency = (
@@ -619,13 +642,13 @@ class PaymentStore {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
 
-  handleServicesQuotas = async (serviceName: string = "") => {
+  handleServicesQuotas = async () => {
     // temporary solution, should be in the service store
 
     const abortController = new AbortController();
     this.settingsStore?.addAbortControllers(abortController);
 
-    const res = await getServicesQuotas(serviceName, abortController.signal);
+    const res = await getServicesQuotas(abortController.signal);
 
     if (!res) return;
 
@@ -634,6 +657,7 @@ class PaymentStore {
       return {
         ...feature,
         price: service.price,
+        serviceName: service.serviceName,
       };
     });
 
@@ -665,6 +689,12 @@ class PaymentStore {
 
   setIsShowTariffDeactivatedModal = (value: boolean) => {
     this.isShowStorageTariffDeactivatedModal = value;
+  };
+
+  setStorageDeactivationVisited = (value: boolean) => {
+    this.isStorageDeactivationVisited = value;
+
+    localStorage.setItem(STORAGE_DEACTIVATION_VISITED, "true");
   };
 
   setPaymentAccount = async () => {
@@ -712,9 +742,61 @@ class PaymentStore {
     const featureWithPrice = {
       ...feature,
       price: service.price,
+      serviceName: service.serviceName,
     } as TServiceFeatureWithPrice;
 
-    this.servicesQuotasFeatures.set(feature.id, featureWithPrice);
+    const existingEntry = Array.from(
+      this.servicesQuotasFeatures.entries(),
+    ).find(
+      ([, value]) =>
+        (value as TServiceFeatureWithPrice).serviceName === service.serviceName,
+    );
+
+    const key = existingEntry
+      ? existingEntry[0]
+      : service.features[0].id.toString();
+
+    this.servicesQuotasFeatures.set(key, featureWithPrice);
+
+    return service.serviceName;
+  };
+
+  paymentMethodInit = async (t: TTranslation) => {
+    const isRefresh = window.location.href.includes("complete=true");
+    try {
+      const requests = [];
+
+      this.setPaymentMethodInit(false);
+
+      await this.initWalletPayerAndBalance(isRefresh);
+
+      if (this.isAlreadyPaid) {
+        if (this.isStripePortalAvailable) {
+          requests.push(this.setPaymentAccount());
+
+          if (
+            this.isPayer &&
+            this.currentTariffStatusStore?.walletCustomerStatusNotActive
+          ) {
+            requests.push(this.fetchCardLinked());
+          }
+        }
+      } else {
+        requests.push(this.fetchCardLinked());
+      }
+
+      if (this.isShowStorageTariffDeactivated() && this.isPayer) {
+        this.setIsShowTariffDeactivatedModal(true);
+        requests.push(this.handleServicesQuotas());
+      }
+
+      await Promise.all(requests);
+
+      this.setPaymentMethodInit(true);
+    } catch (error) {
+      toastr.error(t("Common:UnexpectedError"));
+      console.error(error);
+    }
   };
 
   walletInit = async (t: TTranslation) => {
@@ -1133,3 +1215,4 @@ class PaymentStore {
 }
 
 export default PaymentStore;
+

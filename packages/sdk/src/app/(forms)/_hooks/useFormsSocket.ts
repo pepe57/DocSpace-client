@@ -26,17 +26,23 @@
 
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import SocketHelper, {
   SocketCommands,
+  SocketEvents,
+  type TOptSocket,
 } from "@docspace/ui-kit/utils/socket";
 
 export default function useFormsSocket(
   socketUrl: string,
   folderIds: (string | number)[],
+  fileIds: (string | number)[],
+  onFilesUpdated?: () => void,
 ) {
   const isInit = useRef(false);
+  const onFilesUpdatedRef = useRef(onFilesUpdated);
+  onFilesUpdatedRef.current = onFilesUpdated;
 
   useEffect(() => {
     if (!socketUrl || isInit.current) return;
@@ -45,17 +51,69 @@ export default function useFormsSocket(
     SocketHelper?.connect(socketUrl, "");
   }, [socketUrl]);
 
-  // Stable key for deps — avoids re-running on same set of IDs
-  const idsKey = folderIds.filter(Boolean).join(",");
+  const folderIdsKey = folderIds.filter(Boolean).join(",");
 
   useEffect(() => {
-    if (!socketUrl || !idsKey) return;
+    if (!socketUrl || !folderIdsKey) return;
 
-    const roomParts = idsKey.split(",").map((id) => `DIR-${id}`);
-    SocketHelper?.emit(SocketCommands.Subscribe, { roomParts });
+    const roomParts = folderIdsKey.split(",").map((id) => `DIR-${id}`);
+    SocketHelper?.emit(SocketCommands.Subscribe, { roomParts, individual: true });
 
     return () => {
-      SocketHelper?.emit(SocketCommands.Unsubscribe, { roomParts });
+      SocketHelper?.emit(SocketCommands.Unsubscribe, { roomParts, individual: true });
     };
-  }, [socketUrl, idsKey]);
+  }, [socketUrl, folderIdsKey]);
+
+  const fileIdsKey = fileIds.filter(Boolean).join(",");
+
+  useEffect(() => {
+    if (!socketUrl || !fileIdsKey) return;
+
+    const roomParts = fileIdsKey.split(",").map((id) => `FILE-${id}`);
+    SocketHelper?.emit(SocketCommands.Subscribe, { roomParts, individual: true });
+
+    return () => {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, { roomParts, individual: true });
+    };
+  }, [socketUrl, fileIdsKey]);
+
+  const handleModifyFolder = useCallback((opt?: TOptSocket) => {
+    if (!opt?.cmd || !opt?.type) return;
+
+    if (opt.cmd === "create" || opt.cmd === "update" || opt.cmd === "delete") {
+      onFilesUpdatedRef.current?.();
+    }
+  }, []);
+
+  const handleModifyRoom = useCallback((opt?: TOptSocket) => {
+    if (!opt?.cmd) return;
+
+    if ((opt.cmd as string) === "create-form") {
+      onFilesUpdatedRef.current?.();
+    }
+  }, []);
+
+  const handleStartEdit = useCallback(() => {
+    onFilesUpdatedRef.current?.();
+  }, []);
+
+  const handleStopEdit = useCallback(() => {
+    onFilesUpdatedRef.current?.();
+  }, []);
+
+  useEffect(() => {
+    if (!socketUrl) return;
+
+    SocketHelper?.on(SocketEvents.ModifyFolder, handleModifyFolder);
+    SocketHelper?.on(SocketEvents.ModifyRoom, handleModifyRoom);
+    SocketHelper?.on(SocketEvents.StartEditFile, handleStartEdit);
+    SocketHelper?.on(SocketEvents.StopEditFile, handleStopEdit);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.ModifyFolder, handleModifyFolder);
+      SocketHelper?.off(SocketEvents.ModifyRoom, handleModifyRoom);
+      SocketHelper?.off(SocketEvents.StartEditFile, handleStartEdit);
+      SocketHelper?.off(SocketEvents.StopEditFile, handleStopEdit);
+    };
+  }, [socketUrl, handleModifyFolder, handleModifyRoom, handleStartEdit, handleStopEdit]);
 }

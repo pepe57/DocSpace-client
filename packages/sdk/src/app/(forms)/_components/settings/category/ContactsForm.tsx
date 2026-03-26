@@ -227,6 +227,7 @@ const ContactsForm = ({
                     iconName={CrossReactSvgUrl}
                     size={12}
                     onClick={() => onRemoveMember(String(user.id), true)}
+                    title={t("Common:Remove")}
                   />
                 )}
               </div>
@@ -279,6 +280,7 @@ const ContactsForm = ({
                     iconName={CrossReactSvgUrl}
                     size={12}
                     onClick={() => onRemoveMember(String(user.id))}
+                    title={t("Common:Remove")}
                   />
                 )}
               </div>

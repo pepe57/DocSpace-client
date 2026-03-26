@@ -31,7 +31,10 @@ import { FolderType } from "@docspace/shared/enums";
 
 const FOLDER_AGENTS_STORAGE_KEY = "forms_folder_agents";
 const AI_ENABLED_STORAGE_KEY = "forms_ai_enabled";
+const ASK_FROM_DB_AGENT_KEY = "askFromDBAgent";
 const USER_DISABLED_STORAGE_KEY = "forms_ai_user_disabled";
+const PANEL_WIDTH_STORAGE_KEY = "forms_chat_panel_width";
+const PANEL_POSITION_STORAGE_KEY = "forms_chat_panel_position";
 
 /** Simple non-crypto hash to turn a long token into a short key. */
 export const tokenToHash = (token: string): string => {
@@ -105,6 +108,30 @@ export const loadAiEnabled = (
   return localStorage.getItem(aiEnabledKey(roomId, userHash)) === "true";
 };
 
+// --- Ask from DB agent persistence ---
+
+const askFromDBAgentKey = (roomId: string | number, userHash?: string) =>
+  userHash
+    ? `${ASK_FROM_DB_AGENT_KEY}_${userHash}_${roomId}`
+    : `${ASK_FROM_DB_AGENT_KEY}_${roomId}`;
+
+export const saveAskFromDBAgentId = (
+  roomId: string | number,
+  agentId: number,
+  userHash?: string,
+) => {
+  localStorage.setItem(askFromDBAgentKey(roomId, userHash), String(agentId));
+};
+
+export const loadAskFromDBAgentId = (
+  roomId: string | number,
+  userHash?: string,
+): number | null => {
+  const val = localStorage.getItem(askFromDBAgentKey(roomId, userHash));
+  if (!val) return null;
+  const parsed = Number(val);
+  return Number.isFinite(parsed) ? parsed : null;
+}
 // --- User explicitly disabled persistence ---
 
 const userDisabledKey = (roomId: string | number, userHash?: string) =>
@@ -204,6 +231,58 @@ export const vectorizeFiles = async (fileIds: number[]) => {
     data: { files: fileIds },
   });
 };
+
+// --- Chat panel layout constants ---
+
+export const PANEL_MIN_WIDTH = 300;
+export const PANEL_MAX_WIDTH = 600;
+export const MIN_SECTION_WIDTH = 400;
+
+// --- Chat panel preferences ---
+
+export type PanelPosition = "left" | "right";
+
+const panelWidthKey = (roomId: string | number, userHash?: string) =>
+  userHash
+    ? `${PANEL_WIDTH_STORAGE_KEY}_${userHash}_${roomId}`
+    : `${PANEL_WIDTH_STORAGE_KEY}_${roomId}`;
+
+const panelPositionKey = (userHash?: string) =>
+  userHash
+    ? `${PANEL_POSITION_STORAGE_KEY}_${userHash}`
+    : PANEL_POSITION_STORAGE_KEY;
+
+export const savePanelWidth = (
+  roomId: string | number,
+  width: number,
+  userHash?: string,
+) => {
+  localStorage.setItem(panelWidthKey(roomId, userHash), String(width));
+};
+
+export const loadPanelWidth = (
+  roomId: string | number,
+  userHash?: string,
+): number | null => {
+  const val = localStorage.getItem(panelWidthKey(roomId, userHash));
+  if (!val) return null;
+  const parsed = Number(val);
+  return Number.isFinite(parsed) ? parsed : null;
+};
+
+export const savePanelPosition = (
+  position: PanelPosition,
+  userHash?: string,
+) => {
+  localStorage.setItem(panelPositionKey(userHash), position);
+};
+
+export const loadPanelPosition = (userHash?: string): PanelPosition => {
+  const val = localStorage.getItem(panelPositionKey(userHash));
+  return val === "right" ? "right" : "left";
+};
+
+// --- Knowledge base helpers ---
 
 type KnowledgeFile = { id: number; title: string };
 
