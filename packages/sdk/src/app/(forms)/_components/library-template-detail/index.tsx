@@ -231,19 +231,31 @@ const LibraryTemplateDetail = () => {
                 <span className={styles.metaValue}>{updatedDate}</span>
               </div>
             )}
-            <div className={styles.metaItem}>
-              <span className={styles.metaLabel}>
-                {t("Common:LibraryTemplateFormat")}
-              </span>
-              <span className={styles.metaValue}>PDF</span>
-            </div>
-            {templateIsFile && template.pureContentLength && (
+            {templateIsFile && template.fileExst && (
+              <div className={styles.metaItem}>
+                <span className={styles.metaLabel}>
+                  {t("Common:LibraryTemplateFormat")}
+                </span>
+                <span className={styles.metaValue}>
+                  {template.fileExst.replace(".", "").toUpperCase()}
+                </span>
+              </div>
+            )}
+            {!templateIsFile && (
+              <div className={styles.metaItem}>
+                <span className={styles.metaLabel}>
+                  {t("Common:LibraryTemplateFormat")}
+                </span>
+                <span className={styles.metaValue}>PDF</span>
+              </div>
+            )}
+            {templateIsFile && template.contentLength && (
               <div className={styles.metaItem}>
                 <span className={styles.metaLabel}>
                   {t("Common:LibraryTemplateSize")}
                 </span>
                 <span className={styles.metaValue}>
-                  {t("Common:LibraryTemplatePage", { count: 1 })}
+                  {template.contentLength}
                 </span>
               </div>
             )}
