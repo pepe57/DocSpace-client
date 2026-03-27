@@ -2855,9 +2855,10 @@ class ContextOptionsStore {
           resultOptions.find((o) => o.key === "more-options") ||
           resultOptions.find((o) => o.key === "info");
         if (moreOptionsGroup) {
-          moreOptionsGroup.items.push(
-            { key: "separator-before-plugins", isSeparator: true },
-          );
+          moreOptionsGroup.items.push({
+            key: "separator-before-plugins",
+            isSeparator: true,
+          });
           ungroupedPlugins.forEach((p) => moreOptionsGroup.items.push(p));
         } else {
           const externalLinkIdx = resultOptions.findIndex(
@@ -3676,3 +3677,4 @@ class ContextOptionsStore {
 }
 
 export default ContextOptionsStore;
+
