@@ -50,6 +50,7 @@ import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
 import { ShareContext } from "../../../../_contexts/ShareContext";
 import { DeleteContext } from "../../../../_contexts/DeleteContext";
+import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
 import { generateFilesItemValue } from "../../../_utils";
 
 import { RowContent } from "./RowContent";
@@ -80,11 +81,16 @@ const Row = observer(
     const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
     const onShareClick = React.useContext(ShareContext);
     const deleteCtx = React.useContext(DeleteContext);
+    const fileOpsCtx = React.useContext(FileOperationsContext);
 
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
       onShareClick: onShareClick ?? undefined,
       onDeleteClick: deleteCtx?.deleteItem,
+      onCopyClick: fileOpsCtx?.copyItem,
+      onMoveClick: fileOpsCtx?.moveItem,
+      onDuplicateClick: fileOpsCtx?.duplicateItem,
+      onRestoreClick: fileOpsCtx?.restoreItem,
     });
 
     const element = (

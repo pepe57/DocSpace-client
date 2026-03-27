@@ -29,6 +29,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 import type {
   TFile,
   TFilesSettings,
@@ -37,6 +38,15 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TPathParts } from "@docspace/shared/types";
 import { FolderType, DeviceType } from "@docspace/shared/enums";
+import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import type {
+  FilesSelectorProps,
+  FolderDtoInteger,
+  TSelectedFileInfo,
+  FileEntryDtoIntegerAllOfSecurity,
+} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
@@ -51,6 +61,7 @@ import List from "@/app/(docspace)/(files)/_components/list";
 import { OpenFileContext } from "@/app/(docspace)/_contexts/OpenFileContext";
 import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
+import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
 import type { TFileItem, TFolderItem } from "@/app/(docspace)/_hooks/useItemList";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -60,6 +71,8 @@ import DocsMainButton from "../main-button";
 import { useInfoPanelStore } from "../../_store/InfoPanelStore";
 import useDocsActions from "../../_hooks/useDocsActions";
 import useTrashActions from "../../_hooks/useTrashActions";
+import useFileOperations from "../../_hooks/useFileOperations";
+import type { SelectorMode } from "../../_hooks/useFileOperations";
 import DocsSidebar from "../sidebar";
 import DropZone from "../drop-zone";
 import DeleteDialog from "../delete-dialog";
@@ -78,6 +91,12 @@ type DocsLayoutProps = {
   filesFilter: string;
 };
 
+const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {
+  if (mode === "copy") return t("Common:CopyHere");
+  if (mode === "move") return t("Common:MoveHere");
+  return t("Common:RestoreHere");
+};
+
 const DocsLayoutInner = observer(({
   folders,
   files,
@@ -88,6 +107,7 @@ const DocsLayoutInner = observer(({
   portalSettings,
   filesFilter,
 }: DocsLayoutProps) => {
+  const { t } = useTranslation(["Common"]);
   const { isEmptyList } = useSettingsStore();
   const { rootFolderType } = useFilesListStore();
   const { currentDeviceType } = useSidebar();
@@ -96,7 +116,6 @@ const DocsLayoutInner = observer(({
 
   const isMyDocuments = rootFolderType === FolderType.USER;
   const showMobileButton = currentDeviceType !== DeviceType.desktop && isMyDocuments;
-
 
   const { uploadFilesToFolder } = useDocsActions();
   const {
@@ -110,9 +129,48 @@ const DocsLayoutInner = observer(({
     confirmDelete,
   } = useTrashActions();
 
+  const {
+    selectorDialogVisible,
+    selectorMode,
+    foldersTree,
+    selectorInitData,
+    disabledItems,
+    operationProgress,
+    requestCopy,
+    requestCopyItems,
+    requestMove,
+    requestMoveItems,
+    requestRestore,
+    requestRestoreItems,
+    requestDuplicate,
+    closeSelectorDialog,
+    confirmOperation,
+  } = useFileOperations();
+
   const deleteHandler = React.useMemo(
     () => ({ deleteItem: requestDeleteItem, deleteItems: requestDelete }),
     [requestDeleteItem, requestDelete],
+  );
+
+  const fileOperationsHandler = React.useMemo(
+    () => ({
+      copyItem: requestCopy,
+      moveItem: requestMove,
+      duplicateItem: requestDuplicate,
+      restoreItem: requestRestore,
+      copyItems: requestCopyItems,
+      moveItems: requestMoveItems,
+      restoreItems: requestRestoreItems,
+    }),
+    [
+      requestCopy,
+      requestCopyItems,
+      requestMove,
+      requestMoveItems,
+      requestDuplicate,
+      requestRestore,
+      requestRestoreItems,
+    ],
   );
 
   const openFileHandler = React.useCallback(
@@ -133,6 +191,7 @@ const DocsLayoutInner = observer(({
     <OpenFileContext.Provider value={openFileHandler}>
       <ShareContext.Provider value={shareHandler}>
         <DeleteContext.Provider value={deleteHandler}>
+        <FileOperationsContext.Provider value={fileOperationsHandler}>
         <div className={styles.root}>
           <DocsSidebar />
           <DropZone onFilesDropped={uploadFilesToFolder} disabled={!isMyDocuments}>
@@ -176,7 +235,91 @@ const DocsLayoutInner = observer(({
             onClose={closeDeleteDialog}
             onConfirm={confirmDelete}
           />
+          {selectorDialogVisible && selectorInitData && (
+            <FilesSelector
+              isPanelVisible={selectorDialogVisible}
+              embedded={false}
+              currentDeviceType={DeviceType.desktop}
+              currentFolderId={selectorInitData.currentFolderId}
+              rootFolderType={
+                selectorInitData.rootFolderType as unknown as Parameters<
+                  typeof FilesSelector
+                >[0]["rootFolderType"]
+              }
+              treeFolders={
+                (foldersTree ?? []) as unknown as FolderDtoInteger[]
+              }
+              filesSettings={
+                filesSettings as unknown as NonNullable<
+                  FilesSelectorProps["filesSettings"]
+                >
+              }
+              isUserOnly={selectorMode !== "restore"}
+              isRoomsOnly={false}
+              isThirdParty={false}
+              openRoot={selectorMode === "restore"}
+              withInit
+              initItems={
+                selectorInitData.items as unknown as FolderDtoInteger[]
+              }
+              initBreadCrumbs={selectorInitData.breadCrumbs}
+              initSelectedItemType="files"
+              initSelectedItemId={selectorInitData.currentFolderId}
+              initSearchValue={null}
+              initTotal={selectorInitData.total}
+              initHasNextPage={selectorInitData.hasNextPage}
+              submitButtonLabel={getSubmitLabel(selectorMode, t)}
+              cancelButtonLabel={t("Common:CancelButton")}
+              withCancelButton
+              withBreadCrumbs
+              withSearch
+              withCreate={false}
+              withFooterInput={false}
+              withFooterCheckbox={false}
+              withoutBackButton
+              footerInputHeader=""
+              currentFooterInputValue=""
+              footerCheckboxLabel=""
+              descriptionText=""
+              disabledItems={disabledItems}
+              getFilesArchiveError={() => ""}
+              getIsDisabled={(
+                isFirstLoad: boolean,
+                _isSelectedParentFolder: boolean,
+                _selectedItemId:
+                  | string
+                  | number
+                  | undefined,
+                _selectedItemType:
+                  | "rooms"
+                  | "files"
+                  | "agents"
+                  | undefined,
+                isRoot: boolean,
+              ) => isFirstLoad || isRoot}
+              onCancel={closeSelectorDialog}
+              onSubmit={(
+                selectedItemId:
+                  | string
+                  | number
+                  | undefined,
+              ) => {
+                if (selectedItemId !== undefined) {
+                  confirmOperation(selectedItemId as number);
+                }
+              }}
+            />
+          )}
+          {operationProgress && (
+            <FloatingButton
+              icon={operationProgress.icon}
+              percent={operationProgress.percent}
+              completed={operationProgress.completed}
+              alert={operationProgress.alert}
+            />
+          )}
         </div>
+        </FileOperationsContext.Provider>
         </DeleteContext.Provider>
       </ShareContext.Provider>
     </OpenFileContext.Provider>

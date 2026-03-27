@@ -17,6 +17,9 @@ import FavoritesFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import ShareSvgUrl from "PUBLIC_DIR/images/icons/12/share.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
+import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
+import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
@@ -32,6 +35,13 @@ type UseContextMenuModelProps = {
   onShareClick?: (item: TFileItem | TFolderItem) => void;
   onDeleteClick?: (item: TFileItem | TFolderItem) => void;
   onDeleteSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
+  onCopyClick?: (item: TFileItem | TFolderItem) => void;
+  onMoveClick?: (item: TFileItem | TFolderItem) => void;
+  onDuplicateClick?: (item: TFileItem | TFolderItem) => void;
+  onRestoreClick?: (item: TFileItem | TFolderItem) => void;
+  onCopySelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
+  onMoveSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
+  onRestoreSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
 };
 
 export default function useContextMenuModel({
@@ -39,6 +49,13 @@ export default function useContextMenuModel({
   onShareClick,
   onDeleteClick,
   onDeleteSelectedClick,
+  onCopyClick,
+  onMoveClick,
+  onDuplicateClick,
+  onRestoreClick,
+  onCopySelectedClick,
+  onMoveSelectedClick,
+  onRestoreSelectedClick,
 }: UseContextMenuModelProps) {
   const { t } = useTranslation(["Common"]);
 
@@ -257,6 +274,62 @@ export default function useContextMenuModel({
     [t, onShareClick],
   );
 
+  const getCopyItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      return {
+        id: "option_copy",
+        key: "copy",
+        label: t("Common:Copy"),
+        icon: CopyReactSvgUrl,
+        onClick: () => onCopyClick?.(i),
+        disabled: !onCopyClick,
+      };
+    },
+    [t, onCopyClick],
+  );
+
+  const getDuplicateItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      return {
+        id: "option_duplicate",
+        key: "duplicate",
+        label: t("Common:Duplicate"),
+        icon: DuplicateReactSvgUrl,
+        onClick: () => onDuplicateClick?.(i),
+        disabled: !onDuplicateClick,
+      };
+    },
+    [t, onDuplicateClick],
+  );
+
+  const getMoveToItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      return {
+        id: "option_move-to",
+        key: "move-to",
+        label: t("Common:MoveTo"),
+        icon: MoveReactSvgUrl,
+        onClick: () => onMoveClick?.(i),
+        disabled: !onMoveClick,
+      };
+    },
+    [t, onMoveClick],
+  );
+
+  const getRestoreItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      return {
+        id: "option_restore",
+        key: "restore",
+        label: t("Common:Restore"),
+        icon: MoveReactSvgUrl,
+        onClick: () => onRestoreClick?.(i),
+        disabled: !onRestoreClick,
+      };
+    },
+    [t, onRestoreClick],
+  );
+
   const getDeleteItem = useCallback(
     (i: TFileItem | TFolderItem) => {
       return {
@@ -271,6 +344,50 @@ export default function useContextMenuModel({
     [t, onDeleteClick],
   );
 
+  const getGroupCopyItem = useCallback(() => {
+    const canCopy = filesSelectionStore.selection.every(
+      (i) => i.security.Copy,
+    );
+    return {
+      id: "option_copy",
+      key: "copy",
+      label: t("Common:Copy"),
+      icon: CopyReactSvgUrl,
+      onClick: () => {
+        onCopySelectedClick?.(filesSelectionStore.selection);
+      },
+      disabled: !onCopySelectedClick || !canCopy,
+    };
+  }, [t, onCopySelectedClick, filesSelectionStore.selection]);
+
+  const getGroupMoveItem = useCallback(() => {
+    const canMove = filesSelectionStore.selection.every(
+      (i) => i.security.Move,
+    );
+    return {
+      id: "option_move-to",
+      key: "move-to",
+      label: t("Common:MoveTo"),
+      icon: MoveReactSvgUrl,
+      onClick: () => {
+        onMoveSelectedClick?.(filesSelectionStore.selection);
+      },
+      disabled: !onMoveSelectedClick || !canMove,
+    };
+  }, [t, onMoveSelectedClick, filesSelectionStore.selection]);
+
+  const getGroupRestoreItem = useCallback(() => {
+    return {
+      id: "option_restore",
+      key: "restore",
+      label: t("Common:Restore"),
+      icon: MoveReactSvgUrl,
+      onClick: () => {
+        onRestoreSelectedClick?.(filesSelectionStore.selection);
+      },
+      disabled: !onRestoreSelectedClick,
+    };
+  }, [t, onRestoreSelectedClick, filesSelectionStore.selection]);
 
   const getGroupDeleteItem = useCallback(() => {
     const canDelete = filesSelectionStore.selection.every(
@@ -299,12 +416,24 @@ export default function useContextMenuModel({
       items.push(getDownloadAsItem());
     }
 
+    if (onCopySelectedClick) {
+      items.push(getGroupCopyItem());
+    }
+
+    if (onMoveSelectedClick) {
+      items.push(getGroupMoveItem());
+    }
+
+    if (onRestoreSelectedClick) {
+      items.push(getGroupRestoreItem());
+    }
+
     if (onDeleteSelectedClick) {
       items.push(getGroupDeleteItem());
     }
 
     return items;
-  }, [filesSelectionStore.selection, getDownloadAsItem, getDownloadItem, getGroupDeleteItem, onDeleteSelectedClick]);
+  }, [filesSelectionStore.selection, getDownloadAsItem, getDownloadItem, getGroupCopyItem, getGroupMoveItem, getGroupRestoreItem, getGroupDeleteItem, onCopySelectedClick, onMoveSelectedClick, onRestoreSelectedClick, onDeleteSelectedClick]);
 
   const getHeaderContextMenuModel = useCallback(() => {
     const base = getGroupContextMenuModel();
@@ -414,6 +543,18 @@ export default function useContextMenuModel({
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromRecent))
         model.push(getRemoveFromRecentItem(item as TFileItem));
 
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.copy))
+        model.push(getCopyItem(item!));
+
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.duplicate))
+        model.push(getDuplicateItem(item!));
+
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.moveTo))
+        model.push(getMoveToItem(item!));
+
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.restore))
+        model.push(getRestoreItem(item!));
+
       if (
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.delete) ||
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.deletePermanently)
@@ -438,6 +579,10 @@ export default function useContextMenuModel({
       getRemoveFromFavoritesItem,
       getRemoveFromRecentItem,
       getShareItem,
+      getCopyItem,
+      getDuplicateItem,
+      getMoveToItem,
+      getRestoreItem,
       getDeleteItem,
       getHeaderContextMenuModel,
       getGroupContextMenuModel,

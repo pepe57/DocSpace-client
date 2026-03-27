@@ -82,6 +82,14 @@ export default function useItemContextMenu({
       model.add(AVAILABLE_CONTEXT_ITEMS.removeFromRecent);
     }
 
+    if (isTrashSection) {
+      model.add(AVAILABLE_CONTEXT_ITEMS.restore);
+    } else {
+      if (file.security.Copy) model.add(AVAILABLE_CONTEXT_ITEMS.copy);
+      if (file.security.Duplicate) model.add(AVAILABLE_CONTEXT_ITEMS.duplicate);
+      if (file.security.Move) model.add(AVAILABLE_CONTEXT_ITEMS.moveTo);
+    }
+
     if (file.security.Delete) {
       if (isTrashSection) {
         model.add(AVAILABLE_CONTEXT_ITEMS.deletePermanently);
@@ -106,6 +114,15 @@ export default function useItemContextMenu({
       items.push(AVAILABLE_CONTEXT_ITEMS.removeFromFavorites);
     } else {
       items.push(AVAILABLE_CONTEXT_ITEMS.markAsFavorite);
+    }
+
+    if (isTrashSection) {
+      items.push(AVAILABLE_CONTEXT_ITEMS.restore);
+    } else {
+      if (folder.security.Copy) items.push(AVAILABLE_CONTEXT_ITEMS.copy);
+      if (folder.security.Duplicate)
+        items.push(AVAILABLE_CONTEXT_ITEMS.duplicate);
+      if (folder.security.Move) items.push(AVAILABLE_CONTEXT_ITEMS.moveTo);
     }
 
     if (folder.security.Delete) {

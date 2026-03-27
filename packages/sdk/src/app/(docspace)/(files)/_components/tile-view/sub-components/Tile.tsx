@@ -56,6 +56,7 @@ import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
+import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
 
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import type { TileProps } from "../TileView.types";
@@ -94,10 +95,15 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const { openFolder } = useFolderActions({ t });
   const onShareClick = React.useContext(ShareContext);
   const deleteCtx = React.useContext(DeleteContext);
+  const fileOpsCtx = React.useContext(FileOperationsContext);
   const { getContextMenuModel } = useContextMenuModel({
     item: observableItem,
     onShareClick: onShareClick ?? undefined,
     onDeleteClick: deleteCtx?.deleteItem,
+    onCopyClick: fileOpsCtx?.copyItem,
+    onMoveClick: fileOpsCtx?.moveItem,
+    onDuplicateClick: fileOpsCtx?.duplicateItem,
+    onRestoreClick: fileOpsCtx?.restoreItem,
   });
   const { downloadAction } = useDownloadActions();
   const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
