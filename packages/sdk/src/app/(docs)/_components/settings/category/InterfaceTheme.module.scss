@@ -24,62 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
-
-import React from "react";
-import { makeAutoObservable } from "mobx";
-
-import { FolderType } from "@docspace/shared/enums";
-
-import { TFileItem, TFolderItem } from "../_hooks/useItemList";
-
-class FilesListStore {
-  items: (TFileItem | TFolderItem)[] = [];
-  rootFolderType: FolderType | null = null;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  setItems = (items?: (TFileItem | TFolderItem)[]) => {
-    this.items = items || [];
-  };
-
-  setRootFolderType = (type: FolderType) => {
-    this.rootFolderType = type;
-  };
-
-  updateItemFavorite = (id: number | string, isFavorite: boolean) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item) item.isFavorite = isFavorite;
-  };
-
-  removeItem = (id: number | string) => {
-    this.items = this.items.filter((i) => i.id !== id);
-  };
-
-  get itemsCount() {
-    return this.items.length;
-  }
+.interfaceTheme {
+  width: 100%;
+  max-width: 660px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-export const FilesListStoreContext = React.createContext<FilesListStore>(
-  new FilesListStore(),
-);
+.systemThemeCheckbox {
+  display: inline-flex;
+}
 
-export const FilesListStoreContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FilesListStore(), []);
-  return (
-    <FilesListStoreContext.Provider value={store}>
-      {children}
-    </FilesListStoreContext.Provider>
-  );
-};
-
-export const useFilesListStore = () => {
-  return React.useContext(FilesListStoreContext);
-};
+.systemThemeDescription {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  padding-inline-start: 24px;
+  max-width: 295px;
+  color: var(--profile-theme-preview-description);
+}

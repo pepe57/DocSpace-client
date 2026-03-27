@@ -26,60 +26,27 @@
 
 "use client";
 
-import React from "react";
-import { makeAutoObservable } from "mobx";
+import type { TFilesSettings } from "@docspace/shared/api/files/types";
+import type { TSettings } from "@docspace/shared/api/settings/types";
+import type { TUser } from "@docspace/shared/api/people/types";
 
-import { FolderType } from "@docspace/shared/enums";
+import { useDocsPageInit } from "../../_hooks/useDocsPageInit";
+import DocsSettingsLayout from "../../_components/settings/DocsSettingsLayout";
 
-import { TFileItem, TFolderItem } from "../_hooks/useItemList";
+type DocsSettingsPageProps = {
+  authToken: string;
+  filesSettings: TFilesSettings;
+  portalSettings: TSettings;
+  user?: TUser;
+};
 
-class FilesListStore {
-  items: (TFileItem | TFolderItem)[] = [];
-  rootFolderType: FolderType | null = null;
+export default function DocsSettingsPage({
+  authToken,
+  filesSettings,
+  portalSettings,
+  user,
+}: DocsSettingsPageProps) {
+  useDocsPageInit({ authToken, filesSettings, portalSettings, user });
 
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  setItems = (items?: (TFileItem | TFolderItem)[]) => {
-    this.items = items || [];
-  };
-
-  setRootFolderType = (type: FolderType) => {
-    this.rootFolderType = type;
-  };
-
-  updateItemFavorite = (id: number | string, isFavorite: boolean) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item) item.isFavorite = isFavorite;
-  };
-
-  removeItem = (id: number | string) => {
-    this.items = this.items.filter((i) => i.id !== id);
-  };
-
-  get itemsCount() {
-    return this.items.length;
-  }
+  return <DocsSettingsLayout />;
 }
-
-export const FilesListStoreContext = React.createContext<FilesListStore>(
-  new FilesListStore(),
-);
-
-export const FilesListStoreContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FilesListStore(), []);
-  return (
-    <FilesListStoreContext.Provider value={store}>
-      {children}
-    </FilesListStoreContext.Provider>
-  );
-};
-
-export const useFilesListStore = () => {
-  return React.useContext(FilesListStoreContext);
-};

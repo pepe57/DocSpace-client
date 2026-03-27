@@ -26,60 +26,36 @@
 
 "use client";
 
-import React from "react";
-import { makeAutoObservable } from "mobx";
+import { ArticleItemPure } from "@docspace/ui-kit/components/article/item/ArticleItem";
 
-import { FolderType } from "@docspace/shared/enums";
+type SidebarNavItemProps = {
+  id: string;
+  label: string;
+  icon: string;
+  isActive: boolean;
+  onClick: () => void;
+  showText?: boolean;
+};
 
-import { TFileItem, TFolderItem } from "../_hooks/useItemList";
-
-class FilesListStore {
-  items: (TFileItem | TFolderItem)[] = [];
-  rootFolderType: FolderType | null = null;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  setItems = (items?: (TFileItem | TFolderItem)[]) => {
-    this.items = items || [];
-  };
-
-  setRootFolderType = (type: FolderType) => {
-    this.rootFolderType = type;
-  };
-
-  updateItemFavorite = (id: number | string, isFavorite: boolean) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item) item.isFavorite = isFavorite;
-  };
-
-  removeItem = (id: number | string) => {
-    this.items = this.items.filter((i) => i.id !== id);
-  };
-
-  get itemsCount() {
-    return this.items.length;
-  }
-}
-
-export const FilesListStoreContext = React.createContext<FilesListStore>(
-  new FilesListStore(),
-);
-
-export const FilesListStoreContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FilesListStore(), []);
+const SidebarNavItem = ({
+  id,
+  label,
+  icon,
+  isActive,
+  onClick,
+  showText = true,
+}: SidebarNavItemProps) => {
   return (
-    <FilesListStoreContext.Provider value={store}>
-      {children}
-    </FilesListStoreContext.Provider>
+    <ArticleItemPure
+      id={id}
+      text={label}
+      icon={icon}
+      showText={showText}
+      isActive={isActive}
+      onClick={onClick}
+      linkData={{ path: "", state: {} }}
+    />
   );
 };
 
-export const useFilesListStore = () => {
-  return React.useContext(FilesListStoreContext);
-};
+export default SidebarNavItem;

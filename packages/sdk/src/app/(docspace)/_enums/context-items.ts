@@ -11,4 +11,11 @@ export enum AVAILABLE_CONTEXT_ITEMS {
   copyLink = "link-for-room-members",
   download = "download",
   downloadAs = "download-as",
+  markAsFavorite = "mark-as-favorite",
+  removeFromFavorites = "remove-from-favorites",
+  removeFromRecent = "remove-from-recent",
+  share = "share",
+  delete = "delete",
+  deletePermanently = "delete-permanently",
+  restore = "restore",
 }

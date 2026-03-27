@@ -29,57 +29,48 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import { FolderType } from "@docspace/shared/enums";
+import type { TUser } from "@docspace/shared/api/people/types";
 
-import { TFileItem, TFolderItem } from "../_hooks/useItemList";
-
-class FilesListStore {
-  items: (TFileItem | TFolderItem)[] = [];
-  rootFolderType: FolderType | null = null;
+class DocsUserStore {
+  user: TUser | null = null;
+  cultures: string[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setItems = (items?: (TFileItem | TFolderItem)[]) => {
-    this.items = items || [];
+  setUser = (user: TUser) => {
+    this.user = user;
   };
 
-  setRootFolderType = (type: FolderType) => {
-    this.rootFolderType = type;
+  setCultures = (cultures: string[]) => {
+    this.cultures = cultures;
   };
-
-  updateItemFavorite = (id: number | string, isFavorite: boolean) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item) item.isFavorite = isFavorite;
-  };
-
-  removeItem = (id: number | string) => {
-    this.items = this.items.filter((i) => i.id !== id);
-  };
-
-  get itemsCount() {
-    return this.items.length;
-  }
 }
 
-export const FilesListStoreContext = React.createContext<FilesListStore>(
-  new FilesListStore(),
+export const DocsUserStoreContext = React.createContext<DocsUserStore>(
+  null as unknown as DocsUserStore,
 );
 
-export const FilesListStoreContextProvider = ({
+export const DocsUserStoreContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const store = React.useMemo(() => new FilesListStore(), []);
+  const store = React.useMemo(() => new DocsUserStore(), []);
   return (
-    <FilesListStoreContext.Provider value={store}>
+    <DocsUserStoreContext.Provider value={store}>
       {children}
-    </FilesListStoreContext.Provider>
+    </DocsUserStoreContext.Provider>
   );
 };
 
-export const useFilesListStore = () => {
-  return React.useContext(FilesListStoreContext);
+export const useDocsUserStore = () => {
+  const store = React.useContext(DocsUserStoreContext);
+  if (!store) {
+    throw new Error(
+      "useDocsUserStore must be used within a DocsUserStoreContextProvider",
+    );
+  }
+  return store;
 };

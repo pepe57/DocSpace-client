@@ -29,57 +29,51 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import { FolderType } from "@docspace/shared/enums";
+import type {
+  TFilesSettings,
+  TFolderSecurity,
+} from "@docspace/shared/api/files/types";
 
-import { TFileItem, TFolderItem } from "../_hooks/useItemList";
-
-class FilesListStore {
-  items: (TFileItem | TFolderItem)[] = [];
-  rootFolderType: FolderType | null = null;
+class DocsSettingsStore {
+  filesSettings: TFilesSettings | null = null;
+  folderSecurity: TFolderSecurity | null = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setItems = (items?: (TFileItem | TFolderItem)[]) => {
-    this.items = items || [];
+  setFilesSettings = (settings: TFilesSettings) => {
+    this.filesSettings = settings;
   };
 
-  setRootFolderType = (type: FolderType) => {
-    this.rootFolderType = type;
+  setFolderSecurity = (security: TFolderSecurity) => {
+    this.folderSecurity = security;
   };
-
-  updateItemFavorite = (id: number | string, isFavorite: boolean) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item) item.isFavorite = isFavorite;
-  };
-
-  removeItem = (id: number | string) => {
-    this.items = this.items.filter((i) => i.id !== id);
-  };
-
-  get itemsCount() {
-    return this.items.length;
-  }
 }
 
-export const FilesListStoreContext = React.createContext<FilesListStore>(
-  new FilesListStore(),
+export const DocsSettingsStoreContext = React.createContext<DocsSettingsStore>(
+  null as unknown as DocsSettingsStore,
 );
 
-export const FilesListStoreContextProvider = ({
+export const DocsSettingsStoreContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const store = React.useMemo(() => new FilesListStore(), []);
+  const store = React.useMemo(() => new DocsSettingsStore(), []);
   return (
-    <FilesListStoreContext.Provider value={store}>
+    <DocsSettingsStoreContext.Provider value={store}>
       {children}
-    </FilesListStoreContext.Provider>
+    </DocsSettingsStoreContext.Provider>
   );
 };
 
-export const useFilesListStore = () => {
-  return React.useContext(FilesListStoreContext);
+export const useDocsSettingsStore = () => {
+  const store = React.useContext(DocsSettingsStoreContext);
+  if (!store) {
+    throw new Error(
+      "useDocsSettingsStore must be used within a DocsSettingsStoreContextProvider",
+    );
+  }
+  return store;
 };

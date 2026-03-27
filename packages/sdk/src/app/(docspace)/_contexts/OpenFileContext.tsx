@@ -27,59 +27,13 @@
 "use client";
 
 import React from "react";
-import { makeAutoObservable } from "mobx";
 
-import { FolderType } from "@docspace/shared/enums";
+import type { TFileItem } from "@/app/(docspace)/_hooks/useItemList";
 
-import { TFileItem, TFolderItem } from "../_hooks/useItemList";
-
-class FilesListStore {
-  items: (TFileItem | TFolderItem)[] = [];
-  rootFolderType: FolderType | null = null;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  setItems = (items?: (TFileItem | TFolderItem)[]) => {
-    this.items = items || [];
-  };
-
-  setRootFolderType = (type: FolderType) => {
-    this.rootFolderType = type;
-  };
-
-  updateItemFavorite = (id: number | string, isFavorite: boolean) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item) item.isFavorite = isFavorite;
-  };
-
-  removeItem = (id: number | string) => {
-    this.items = this.items.filter((i) => i.id !== id);
-  };
-
-  get itemsCount() {
-    return this.items.length;
-  }
-}
-
-export const FilesListStoreContext = React.createContext<FilesListStore>(
-  new FilesListStore(),
-);
-
-export const FilesListStoreContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FilesListStore(), []);
-  return (
-    <FilesListStoreContext.Provider value={store}>
-      {children}
-    </FilesListStoreContext.Provider>
-  );
-};
-
-export const useFilesListStore = () => {
-  return React.useContext(FilesListStoreContext);
-};
+/**
+ * Provides an optional override for file opening behavior.
+ * When set, clicking a file calls this handler instead of window.open.
+ */
+export const OpenFileContext = React.createContext<
+  ((file: TFileItem) => void) | null
+>(null);

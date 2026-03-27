@@ -27,59 +27,52 @@
 "use client";
 
 import React from "react";
-import { makeAutoObservable } from "mobx";
+import { useTranslation } from "react-i18next";
 
-import { FolderType } from "@docspace/shared/enums";
+import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
 
-import { TFileItem, TFolderItem } from "../_hooks/useItemList";
+import BillingForm from "./category/BillingForm";
+import FileManagement from "./category/FileManagement";
+import InterfaceTheme from "./category/InterfaceTheme";
 
-class FilesListStore {
-  items: (TFileItem | TFolderItem)[] = [];
-  rootFolderType: FolderType | null = null;
+const Settings = () => {
+  const { t } = useTranslation(["Common", "Profile"]);
+  const [selectedTabId, setSelectedTabId] = React.useState("billing");
 
-  constructor() {
-    makeAutoObservable(this);
-  }
+  const tabs: TTabItem[] = React.useMemo(
+    () => [
+      {
+        id: "billing",
+        name: "Billing",
+        content: <BillingForm />,
+      },
+      {
+        id: "file-management",
+        name: t("Common:FileManagement"),
+        content: <FileManagement />,
+      },
+      {
+        id: "interface-theme",
+        name: t("Profile:InterfaceTheme"),
+        content: <InterfaceTheme />,
+      },
+    ],
+    [t],
+  );
 
-  setItems = (items?: (TFileItem | TFolderItem)[]) => {
-    this.items = items || [];
-  };
+  const onSelect = React.useCallback((tab: TTabItem) => {
+    setSelectedTabId(tab.id);
+  }, []);
 
-  setRootFolderType = (type: FolderType) => {
-    this.rootFolderType = type;
-  };
-
-  updateItemFavorite = (id: number | string, isFavorite: boolean) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item) item.isFavorite = isFavorite;
-  };
-
-  removeItem = (id: number | string) => {
-    this.items = this.items.filter((i) => i.id !== id);
-  };
-
-  get itemsCount() {
-    return this.items.length;
-  }
-}
-
-export const FilesListStoreContext = React.createContext<FilesListStore>(
-  new FilesListStore(),
-);
-
-export const FilesListStoreContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FilesListStore(), []);
   return (
-    <FilesListStoreContext.Provider value={store}>
-      {children}
-    </FilesListStoreContext.Provider>
+    <div>
+      <Tabs
+        items={tabs}
+        selectedItemId={selectedTabId}
+        onSelect={onSelect}
+      />
+    </div>
   );
 };
 
-export const useFilesListStore = () => {
-  return React.useContext(FilesListStoreContext);
-};
+export default Settings;

@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { FileStatus } from "@docspace/shared/enums";
@@ -38,15 +38,34 @@ import useItemContextMenu from "./useItemContextMenu";
 
 type useItemListProps = {
   shareKey?: string;
+  isFavoritesSection?: boolean;
+  isRecentSection?: boolean;
+  isTrashSection?: boolean;
 
   getIcon: ReturnType<typeof useItemIcon>["getIcon"];
 };
 
-export default function useItemList({ shareKey, getIcon }: useItemListProps) {
-  const { getFilesContextMenu, getFoldersContextMenu } = useItemContextMenu();
+export default function useItemList({
+  shareKey,
+  getIcon,
+  isFavoritesSection,
+  isRecentSection,
+  isTrashSection,
+}: useItemListProps) {
+  const { getFilesContextMenu, getFoldersContextMenu } = useItemContextMenu({
+    isFavoritesSection,
+    isRecentSection,
+    isTrashSection,
+  });
+
+  const getFilesContextMenuRef = useRef(getFilesContextMenu);
+  getFilesContextMenuRef.current = getFilesContextMenu;
 
   const convertFileToItem = useCallback(
-    (file: TFile) => {
+    (
+      file: TFile,
+      overrides?: { isRecentSection?: boolean; isFavoritesSection?: boolean },
+    ) => {
       const canOpenPlayer =
         file.viewAccessibility?.CanConvert || file.viewAccessibility.MediaView;
       const needConvert = file.viewAccessibility?.MustConvert;
@@ -68,7 +87,9 @@ export default function useItemList({ shareKey, getIcon }: useItemListProps) {
 
       const isForm = file.fileExst === ".oform";
 
-      const contextOptions = getFilesContextMenu(file);
+      const contextOptions = overrides
+        ? getFilesContextMenuRef.current(file, overrides)
+        : getFilesContextMenuRef.current(file);
 
       return {
         ...file,
@@ -83,7 +104,7 @@ export default function useItemList({ shareKey, getIcon }: useItemListProps) {
         contextOptions,
       };
     },
-    [getIcon, getFilesContextMenu, shareKey],
+    [getIcon, shareKey],
   );
 
   const convertFolderToItem = useCallback(
@@ -94,7 +115,7 @@ export default function useItemList({ shareKey, getIcon }: useItemListProps) {
 
       const icon = getIcon();
 
-      const contextOptions = getFoldersContextMenu();
+      const contextOptions = getFoldersContextMenu(folder);
 
       return { ...folder, isFolder, folderUrl, icon, contextOptions };
     },

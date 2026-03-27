@@ -24,62 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { cookies } from "next/headers";
 
-import React from "react";
-import { makeAutoObservable } from "mobx";
+import type { TViewAs } from "@docspace/shared/types";
 
-import { FolderType } from "@docspace/shared/enums";
+import { DocsStoreProviders } from "./_store";
 
-import { TFileItem, TFolderItem } from "../_hooks/useItemList";
-
-class FilesListStore {
-  items: (TFileItem | TFolderItem)[] = [];
-  rootFolderType: FolderType | null = null;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  setItems = (items?: (TFileItem | TFolderItem)[]) => {
-    this.items = items || [];
-  };
-
-  setRootFolderType = (type: FolderType) => {
-    this.rootFolderType = type;
-  };
-
-  updateItemFavorite = (id: number | string, isFavorite: boolean) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item) item.isFavorite = isFavorite;
-  };
-
-  removeItem = (id: number | string) => {
-    this.items = this.items.filter((i) => i.id !== id);
-  };
-
-  get itemsCount() {
-    return this.items.length;
-  }
-}
-
-export const FilesListStoreContext = React.createContext<FilesListStore>(
-  new FilesListStore(),
-);
-
-export const FilesListStoreContextProvider = ({
+export default async function DocsLayout({
   children,
 }: {
   children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FilesListStore(), []);
-  return (
-    <FilesListStoreContext.Provider value={store}>
-      {children}
-    </FilesListStoreContext.Provider>
-  );
-};
+}) {
+  const cookieStore = await cookies();
+  const initViewAs = (cookieStore.get("viewAs")?.value || "row") as TViewAs;
 
-export const useFilesListStore = () => {
-  return React.useContext(FilesListStoreContext);
-};
+  return (
+    <main style={{ width: "100%", height: "100%" }}>
+      <DocsStoreProviders initViewAs={initViewAs}>
+        {children}
+      </DocsStoreProviders>
+    </main>
+  );
+}

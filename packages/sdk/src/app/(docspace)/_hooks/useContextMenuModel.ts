@@ -12,6 +12,11 @@ import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?u
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
+import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
+import FavoritesFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
+import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+import ShareSvgUrl from "PUBLIC_DIR/images/icons/12/share.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
@@ -20,13 +25,20 @@ import { TFileItem, TFolderItem } from "./useItemList";
 import useFolderActions from "./useFolderActions";
 import useFilesActions from "./useFilesActions";
 import useDownloadActions from "./useDownloadActions";
+import useFavoritesActions from "./useFavoritesActions";
 
 type UseContextMenuModelProps = {
   item?: TFileItem | TFolderItem;
+  onShareClick?: (item: TFileItem | TFolderItem) => void;
+  onDeleteClick?: (item: TFileItem | TFolderItem) => void;
+  onDeleteSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
 };
 
 export default function useContextMenuModel({
   item,
+  onShareClick,
+  onDeleteClick,
+  onDeleteSelectedClick,
 }: UseContextMenuModelProps) {
   const { t } = useTranslation(["Common"]);
 
@@ -35,6 +47,8 @@ export default function useContextMenuModel({
   const { openFolder, copyFolderLink } = useFolderActions({ t });
   const { openFile, copyFileLink } = useFilesActions({ t });
   const { downloadAction, downloadAsAction } = useDownloadActions();
+  const { markAsFavorite, removeFromFavorites, removeFromRecent } =
+    useFavoritesActions({ t });
 
   const getSelectItem = useCallback(
     (i: TFileItem | TFolderItem) => {
@@ -187,6 +201,93 @@ export default function useContextMenuModel({
     [openFile, t],
   );
 
+  const getMarkAsFavoriteItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      return {
+        id: "option_mark-as-favorite",
+        key: "mark-as-favorite",
+        label: t("Files:MarkAsFavorite"),
+        icon: FavoritesReactSvgUrl,
+        onClick: () => markAsFavorite(i),
+        disabled: false,
+      };
+    },
+    [t, markAsFavorite],
+  );
+
+  const getRemoveFromFavoritesItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      return {
+        id: "option_remove-from-favorites",
+        key: "remove-from-favorites",
+        label: t("Common:RemoveFromFavorites"),
+        icon: FavoritesFillReactSvgUrl,
+        onClick: () => removeFromFavorites(i),
+        disabled: false,
+      };
+    },
+    [t, removeFromFavorites],
+  );
+
+  const getRemoveFromRecentItem = useCallback(
+    (i: TFileItem) => {
+      return {
+        id: "option_remove-from-recent",
+        key: "remove-from-recent",
+        label: t("Common:RemoveFromList"),
+        icon: RemoveOutlineSvgUrl,
+        onClick: () => removeFromRecent(i),
+        disabled: false,
+      };
+    },
+    [t, removeFromRecent],
+  );
+
+  const getShareItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      return {
+        id: "option_share",
+        key: "share",
+        label: t("Common:Share"),
+        icon: ShareSvgUrl,
+        onClick: () => onShareClick?.(i),
+        disabled: !onShareClick,
+      };
+    },
+    [t, onShareClick],
+  );
+
+  const getDeleteItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      return {
+        id: "option_delete",
+        key: "delete",
+        label: t("Common:Delete"),
+        icon: TrashReactSvgUrl,
+        onClick: () => onDeleteClick?.(i),
+        disabled: !onDeleteClick,
+      };
+    },
+    [t, onDeleteClick],
+  );
+
+
+  const getGroupDeleteItem = useCallback(() => {
+    const canDelete = filesSelectionStore.selection.every(
+      (i) => i.security.Delete,
+    );
+    return {
+      id: "option_delete",
+      key: "delete",
+      label: t("Common:Delete"),
+      icon: TrashReactSvgUrl,
+      onClick: () => {
+        onDeleteSelectedClick?.(filesSelectionStore.selection);
+      },
+      disabled: !onDeleteSelectedClick || !canDelete,
+    };
+  }, [t, onDeleteSelectedClick, filesSelectionStore.selection]);
+
   const getGroupContextMenuModel = useCallback(() => {
     const items = [];
 
@@ -198,11 +299,34 @@ export default function useContextMenuModel({
       items.push(getDownloadAsItem());
     }
 
+    if (onDeleteSelectedClick) {
+      items.push(getGroupDeleteItem());
+    }
+
     return items;
-  }, [filesSelectionStore.selection, getDownloadAsItem, getDownloadItem]);
+  }, [filesSelectionStore.selection, getDownloadAsItem, getDownloadItem, getGroupDeleteItem, onDeleteSelectedClick]);
 
   const getHeaderContextMenuModel = useCallback(() => {
-    return getGroupContextMenuModel().map((i) => ({
+    const base = getGroupContextMenuModel();
+
+    const singleFile =
+      filesSelectionStore.selection.length === 1 &&
+      !filesSelectionStore.selection[0].isFolder
+        ? (filesSelectionStore.selection[0] as TFileItem)
+        : null;
+
+    if (singleFile) {
+      const favItem = singleFile.isFavorite
+        ? getRemoveFromFavoritesItem(singleFile)
+        : getMarkAsFavoriteItem(singleFile);
+      base.push(favItem);
+
+      if (singleFile.contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromRecent)) {
+        base.push(getRemoveFromRecentItem(singleFile));
+      }
+    }
+
+    return base.map((i) => ({
       iconUrl: i.icon,
       label: i.label,
       title: i.label,
@@ -216,7 +340,13 @@ export default function useContextMenuModel({
       id: i.key,
       key: i.key,
     }));
-  }, [getGroupContextMenuModel]);
+  }, [
+    getGroupContextMenuModel,
+    getMarkAsFavoriteItem,
+    getRemoveFromFavoritesItem,
+    getRemoveFromRecentItem,
+    filesSelectionStore.selection,
+  ]);
 
   const getContextMenuModel = useCallback(
     (skipSelect: boolean = false) => {
@@ -227,12 +357,11 @@ export default function useContextMenuModel({
       const { contextOptions } = item!;
 
       if (!skipSelect) {
-        if (filesSelectionStore.selection.length) {
-          if (filesSelectionStore.isCheckedItem(item!))
-            return getGroupContextMenuModel();
-
-          filesSelectionStore.setSelection();
-          filesSelectionStore.setBufferSelection(item!);
+        if (
+          filesSelectionStore.selection.length &&
+          filesSelectionStore.isCheckedItem(item!)
+        ) {
+          return getGroupContextMenuModel();
         }
       }
 
@@ -259,6 +388,9 @@ export default function useContextMenuModel({
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.preview))
         model.push(getPreviewItem(item as TFileItem));
 
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.share))
+        model.push(getShareItem(item!));
+
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.copyLink))
         model.push(getLinkForRoomMembersItem(item!));
 
@@ -267,6 +399,26 @@ export default function useContextMenuModel({
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.downloadAs))
         model.push(getDownloadAsItem());
+
+      if (
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.markAsFavorite) ||
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromFavorites)
+      ) {
+        if (item!.isFavorite) {
+          model.push(getRemoveFromFavoritesItem(item!));
+        } else {
+          model.push(getMarkAsFavoriteItem(item!));
+        }
+      }
+
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromRecent))
+        model.push(getRemoveFromRecentItem(item as TFileItem));
+
+      if (
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.delete) ||
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.deletePermanently)
+      )
+        model.push(getDeleteItem(item!));
 
       return model;
     },
@@ -282,6 +434,11 @@ export default function useContextMenuModel({
       getLinkForRoomMembersItem,
       getDownloadItem,
       getDownloadAsItem,
+      getMarkAsFavoriteItem,
+      getRemoveFromFavoritesItem,
+      getRemoveFromRecentItem,
+      getShareItem,
+      getDeleteItem,
       getHeaderContextMenuModel,
       getGroupContextMenuModel,
 

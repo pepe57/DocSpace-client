@@ -26,60 +26,56 @@
 
 "use client";
 
-import React from "react";
-import { makeAutoObservable } from "mobx";
+import { useCallback, useEffect, useRef } from "react";
 
-import { FolderType } from "@docspace/shared/enums";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+  type TOptSocket,
+} from "@docspace/ui-kit/utils/socket";
 
-import { TFileItem, TFolderItem } from "../_hooks/useItemList";
+export default function useFilesSocket(
+  socketUrl: string,
+  folderId: string | number,
+  onFilesUpdated?: () => void,
+) {
+  const isInit = useRef(false);
+  const onFilesUpdatedRef = useRef(onFilesUpdated);
+  onFilesUpdatedRef.current = onFilesUpdated;
 
-class FilesListStore {
-  items: (TFileItem | TFolderItem)[] = [];
-  rootFolderType: FolderType | null = null;
+  useEffect(() => {
+    if (!socketUrl || isInit.current) return;
 
-  constructor() {
-    makeAutoObservable(this);
-  }
+    isInit.current = true;
+    SocketHelper?.connect(socketUrl, "");
+  }, [socketUrl]);
 
-  setItems = (items?: (TFileItem | TFolderItem)[]) => {
-    this.items = items || [];
-  };
+  useEffect(() => {
+    if (!socketUrl || !folderId) return;
 
-  setRootFolderType = (type: FolderType) => {
-    this.rootFolderType = type;
-  };
+    const roomParts = [`DIR-${folderId}`];
+    SocketHelper?.emit(SocketCommands.Subscribe, { roomParts, individual: true });
 
-  updateItemFavorite = (id: number | string, isFavorite: boolean) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item) item.isFavorite = isFavorite;
-  };
+    return () => {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, { roomParts, individual: true });
+    };
+  }, [socketUrl, folderId]);
 
-  removeItem = (id: number | string) => {
-    this.items = this.items.filter((i) => i.id !== id);
-  };
+  const handleModifyFolder = useCallback((opt?: TOptSocket) => {
+    if (!opt?.cmd) return;
 
-  get itemsCount() {
-    return this.items.length;
-  }
+    if (opt.cmd === "create" || opt.cmd === "update" || opt.cmd === "delete") {
+      onFilesUpdatedRef.current?.();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!socketUrl) return;
+
+    SocketHelper?.on(SocketEvents.ModifyFolder, handleModifyFolder);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.ModifyFolder, handleModifyFolder);
+    };
+  }, [socketUrl, handleModifyFolder]);
 }
-
-export const FilesListStoreContext = React.createContext<FilesListStore>(
-  new FilesListStore(),
-);
-
-export const FilesListStoreContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FilesListStore(), []);
-  return (
-    <FilesListStoreContext.Provider value={store}>
-      {children}
-    </FilesListStoreContext.Provider>
-  );
-};
-
-export const useFilesListStore = () => {
-  return React.useContext(FilesListStoreContext);
-};

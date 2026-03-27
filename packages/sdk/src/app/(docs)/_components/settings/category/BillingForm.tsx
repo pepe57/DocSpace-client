@@ -27,59 +27,35 @@
 "use client";
 
 import React from "react";
-import { makeAutoObservable } from "mobx";
+import { useTranslation } from "react-i18next";
 
-import { FolderType } from "@docspace/shared/enums";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
-import { TFileItem, TFolderItem } from "../_hooks/useItemList";
+import styles from "./SettingsPanel.module.scss";
 
-class FilesListStore {
-  items: (TFileItem | TFolderItem)[] = [];
-  rootFolderType: FolderType | null = null;
+const PAYMENTS_PATH = "/portal-settings/payments/portal-payments";
 
-  constructor() {
-    makeAutoObservable(this);
-  }
+const BillingForm = () => {
+  const { t } = useTranslation(["Common"]);
+  const onOpenBilling = React.useCallback(() => {
+    const url = `${window.location.origin}${PAYMENTS_PATH}`;
+    window.open(url, "_blank");
+  }, []);
 
-  setItems = (items?: (TFileItem | TFolderItem)[]) => {
-    this.items = items || [];
-  };
-
-  setRootFolderType = (type: FolderType) => {
-    this.rootFolderType = type;
-  };
-
-  updateItemFavorite = (id: number | string, isFavorite: boolean) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item) item.isFavorite = isFavorite;
-  };
-
-  removeItem = (id: number | string) => {
-    this.items = this.items.filter((i) => i.id !== id);
-  };
-
-  get itemsCount() {
-    return this.items.length;
-  }
-}
-
-export const FilesListStoreContext = React.createContext<FilesListStore>(
-  new FilesListStore(),
-);
-
-export const FilesListStoreContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FilesListStore(), []);
   return (
-    <FilesListStoreContext.Provider value={store}>
-      {children}
-    </FilesListStoreContext.Provider>
+    <div className={styles.billingWrapper}>
+      <Text fontSize="22px" fontWeight={600}>
+        Work in progress
+      </Text>
+      <Button
+        primary
+        size={ButtonSize.normal}
+        label={t("Common:OpenBilling")}
+        onClick={onOpenBilling}
+      />
+    </div>
   );
 };
 
-export const useFilesListStore = () => {
-  return React.useContext(FilesListStoreContext);
-};
+export default BillingForm;

@@ -29,17 +29,20 @@ import { usePathname, useSearchParams } from "next/navigation";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { FolderType } from "@docspace/shared/enums";
 
 import { PAGE_COUNT } from "@/utils/constants";
 
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useItemList, {
   TFolderItem,
   TFileItem,
 } from "@/app/(docspace)/_hooks/useItemList";
+import useFilesSocket from "@/app/(docspace)/_hooks/useFilesSocket";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import RowView from "../row-view";
@@ -65,8 +68,10 @@ const List = ({
   const pathname = usePathname();
 
   const { setIsEmptyList, filesViewAs } = useSettingsStore();
-  const { setItems } = useFilesListStore();
+  const filesListStore = useFilesListStore();
+  const { setItems, setRootFolderType } = filesListStore;
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
+  const navigationStore = useNavigationStore();
 
   useResetSelectionClick({ setSelection, setBufferSelection });
 
@@ -74,9 +79,16 @@ const List = ({
     filesSettings,
   });
 
+  const rootFolderType = filesListStore.rootFolderType ?? current.rootFolderType;
+  const rootFolderTypeRef = React.useRef(rootFolderType);
+  rootFolderTypeRef.current = rootFolderType;
+
   const { convertFileToItem, convertFolderToItem } = useItemList({
     getIcon,
     shareKey,
+    isFavoritesSection: rootFolderType === FolderType.Favorites,
+    isRecentSection: rootFolderType === FolderType.Recent,
+    isTrashSection: rootFolderType === FolderType.TRASH,
   });
 
   const [filter, setFilter] = React.useState<FilesFilter>(
@@ -92,16 +104,95 @@ const List = ({
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(
     filesList.length < total,
   );
+  const [currentFolderId, setCurrentFolderId] = React.useState<
+    string | number
+  >(current.id);
 
   const requestRunning = React.useRef(false);
   const isInit = React.useRef(false);
   const fetchMoreAbortRef = React.useRef<AbortController | null>(null);
+  const fetchFolderAbortRef = React.useRef<AbortController | null>(null);
 
   React.useEffect(() => {
     return () => {
       fetchMoreAbortRef.current?.abort();
+      fetchFolderAbortRef.current?.abort();
     };
   }, []);
+
+  const fetchCurrentFolder = React.useCallback(async () => {
+    if (requestRunning.current) return;
+
+    fetchFolderAbortRef.current?.abort();
+    const controller = new AbortController();
+    fetchFolderAbortRef.current = controller;
+
+    requestRunning.current = true;
+    const newFilter = FilesFilter.getFilter(window.location)!;
+
+    newFilter.page = 0;
+    newFilter.pageCount = PAGE_COUNT;
+
+    try {
+      const res = await api.files.getFolder(
+        newFilter.folder,
+        newFilter,
+        controller.signal,
+        shareKey,
+      );
+
+      if (controller.signal.aborted) return;
+
+      const {
+        files: newFiles,
+        folders: newFolders,
+        total: newTotal,
+        current: newCurrent,
+      } = res;
+
+      if (newCurrent?.id) {
+        setCurrentFolderId(newCurrent.id);
+      }
+
+      if (newCurrent?.title) {
+        navigationStore.setCurrentTitle(newCurrent.title);
+      }
+
+      if (newCurrent?.rootFolderType != null) {
+        setRootFolderType(newCurrent.rootFolderType);
+        rootFolderTypeRef.current = newCurrent.rootFolderType;
+      }
+
+      const newItems = [
+        ...newFolders.map(convertFolderToItem),
+        ...newFiles.map((file) =>
+          convertFileToItem(file, {
+            isRecentSection: rootFolderTypeRef.current === FolderType.Recent,
+            isFavoritesSection: rootFolderTypeRef.current === FolderType.Favorites,
+          }),
+        ),
+      ];
+
+      setIsEmptyList(newItems.length === 0);
+
+      setFilesList(newItems);
+      setTotal(newTotal);
+      setHasNextPage(newTotal > newItems.length);
+      setFilter(newFilter);
+    } catch (e) {
+      if (!controller.signal.aborted) throw e;
+    } finally {
+      requestRunning.current = false;
+    }
+  }, [
+    shareKey,
+    setIsEmptyList,
+    convertFolderToItem,
+    convertFileToItem,
+    navigationStore,
+    setCurrentFolderId,
+    setRootFolderType,
+  ]);
 
   const fetchMoreFiles = React.useCallback(async () => {
     if (!hasNextPage || requestRunning.current) return;
@@ -126,9 +217,13 @@ const List = ({
 
       const { files: newFiles, folders: newFolders, total: newTotal } = res;
 
+      const sectionOverrides = {
+        isRecentSection: rootFolderTypeRef.current === FolderType.Recent,
+        isFavoritesSection: rootFolderTypeRef.current === FolderType.Favorites,
+      };
       const newItems = [
         ...newFolders.map(convertFolderToItem),
-        ...newFiles.map(convertFileToItem),
+        ...newFiles.map((f) => convertFileToItem(f, sectionOverrides)),
       ];
 
       let hasNext = false;
@@ -156,63 +251,26 @@ const List = ({
       return;
     }
 
-    const controller = new AbortController();
+    fetchCurrentFolder();
+  }, [searchParams, fetchCurrentFolder]);
 
-    const fetchFolder = async () => {
-      requestRunning.current = true;
-      const newFilter = FilesFilter.getFilter(window.location)!;
-
-      newFilter.page = 0;
-      newFilter.pageCount = PAGE_COUNT;
-
-      try {
-        const res = await api.files.getFolder(
-          newFilter.folder,
-          newFilter,
-          controller.signal,
-          shareKey,
-        );
-
-        if (controller.signal.aborted) return;
-
-        const { files: newFiles, folders: newFolders, total: newTotal } = res;
-
-        const newItems = [
-          ...newFolders.map(convertFolderToItem),
-          ...newFiles.map(convertFileToItem),
-        ];
-
-        setIsEmptyList(newItems.length === 0);
-
-        setFilesList(newItems);
-        setTotal(newTotal);
-        setHasNextPage(newTotal > newItems.length);
-        setFilter(newFilter);
-      } catch (e) {
-        if (!controller.signal.aborted) throw e;
-      } finally {
-        requestRunning.current = false;
-      }
-    };
-
-    fetchFolder();
-
-    return () => {
-      controller.abort();
-    };
-  }, [
-    searchParams,
-    shareKey,
-    setIsEmptyList,
-    convertFolderToItem,
-    convertFileToItem,
-  ]);
+  useFilesSocket(
+    portalSettings.socketUrl ?? "",
+    currentFolderId,
+    fetchCurrentFolder,
+  );
 
   React.useEffect(() => {
     setItems(filesList);
   }, [filesList, setItems]);
 
-  if (filesList.length === 0) {
+  React.useEffect(() => {
+    setRootFolderType(current.rootFolderType);
+  }, [current.rootFolderType, setRootFolderType]);
+
+  const visibleItems = filesListStore.items.length > 0 ? filesListStore.items : filesList;
+
+  if (visibleItems.length === 0) {
     return (
       <EmptyView
         current={current}
@@ -225,17 +283,17 @@ const List = ({
 
   return filesViewAs === "tile" ? (
     <TileView
-      items={filesList}
+      items={visibleItems}
       currentFolderId={filter.folder}
       hasMoreFiles={hasNextPage}
       fetchMoreFiles={fetchMoreFiles}
-      filesLength={filesList.length}
+      filesLength={visibleItems.length}
       getIcon={getIcon}
     />
   ) : (
     <RowView
       total={total}
-      items={filesList}
+      items={visibleItems}
       hasMoreFiles={hasNextPage}
       filterSortBy={filter.sortBy}
       timezone={timezone}

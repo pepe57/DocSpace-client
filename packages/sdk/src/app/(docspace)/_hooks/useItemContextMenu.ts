@@ -1,11 +1,26 @@
 import { useCallback } from "react";
 
-import { TFile } from "@docspace/shared/api/files/types";
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
 
-export default function useItemContextMenu() {
-  const getFilesContextMenu = useCallback((file: TFile) => {
+type UseItemContextMenuProps = {
+  isFavoritesSection?: boolean;
+  isRecentSection?: boolean;
+  isTrashSection?: boolean;
+};
+
+export default function useItemContextMenu({
+  isFavoritesSection = false,
+  isRecentSection = false,
+  isTrashSection = false,
+}: UseItemContextMenuProps = {}) {
+  const getFilesContextMenu = useCallback((
+    file: TFile,
+    overrides?: { isRecentSection?: boolean; isFavoritesSection?: boolean },
+  ) => {
+    const effectiveIsRecentSection = overrides?.isRecentSection ?? isRecentSection;
+    const effectiveIsFavoritesSection = overrides?.isFavoritesSection ?? isFavoritesSection;
     const model = new Set([
       AVAILABLE_CONTEXT_ITEMS.select,
       AVAILABLE_CONTEXT_ITEMS.fillForm,
@@ -18,6 +33,7 @@ export default function useItemContextMenu() {
       AVAILABLE_CONTEXT_ITEMS.copyLink,
       AVAILABLE_CONTEXT_ITEMS.download,
       AVAILABLE_CONTEXT_ITEMS.downloadAs,
+      AVAILABLE_CONTEXT_ITEMS.share,
     ]);
 
     const isPdf = file.fileExst === ".pdf";
@@ -54,17 +70,54 @@ export default function useItemContextMenu() {
       model.delete(AVAILABLE_CONTEXT_ITEMS.edit);
     }
 
-    return Array.from(model);
-  }, []);
+    if (!file.canShare) model.delete(AVAILABLE_CONTEXT_ITEMS.share);
 
-  const getFoldersContextMenu = useCallback(() => {
-    return [
+    if (effectiveIsFavoritesSection || file.isFavorite) {
+      model.add(AVAILABLE_CONTEXT_ITEMS.removeFromFavorites);
+    } else {
+      model.add(AVAILABLE_CONTEXT_ITEMS.markAsFavorite);
+    }
+
+    if (effectiveIsRecentSection) {
+      model.add(AVAILABLE_CONTEXT_ITEMS.removeFromRecent);
+    }
+
+    if (file.security.Delete) {
+      if (isTrashSection) {
+        model.add(AVAILABLE_CONTEXT_ITEMS.deletePermanently);
+      } else {
+        model.add(AVAILABLE_CONTEXT_ITEMS.delete);
+      }
+    }
+
+    return Array.from(model);
+  }, [isFavoritesSection, isRecentSection, isTrashSection]);
+
+  const getFoldersContextMenu = useCallback((folder: TFolder) => {
+    const items = [
       AVAILABLE_CONTEXT_ITEMS.select,
       AVAILABLE_CONTEXT_ITEMS.open,
+      AVAILABLE_CONTEXT_ITEMS.share,
       AVAILABLE_CONTEXT_ITEMS.copyLink,
       AVAILABLE_CONTEXT_ITEMS.download,
     ];
-  }, []);
+
+    if (folder.isFavorite) {
+      items.push(AVAILABLE_CONTEXT_ITEMS.removeFromFavorites);
+    } else {
+      items.push(AVAILABLE_CONTEXT_ITEMS.markAsFavorite);
+    }
+
+    if (folder.security.Delete) {
+      if (isTrashSection) {
+        items.push(AVAILABLE_CONTEXT_ITEMS.deletePermanently);
+      } else {
+        items.push(AVAILABLE_CONTEXT_ITEMS.delete);
+      }
+    }
+
+    return items;
+  }, [isTrashSection]);
 
   return { getFilesContextMenu, getFoldersContextMenu };
 }

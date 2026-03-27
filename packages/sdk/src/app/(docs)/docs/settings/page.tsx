@@ -24,62 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { cookies } from "next/headers";
 
-import React from "react";
-import { makeAutoObservable } from "mobx";
+import type { TSettings } from "@docspace/shared/api/settings/types";
 
-import { FolderType } from "@docspace/shared/enums";
+import { getFilesSettings } from "@/api/files";
+import { getSettings } from "@/api/settings";
+import { getSelf } from "@/api/people";
 
-import { TFileItem, TFolderItem } from "../_hooks/useItemList";
+import DocsSettingsPage from "./page.client";
 
-class FilesListStore {
-  items: (TFileItem | TFolderItem)[] = [];
-  rootFolderType: FolderType | null = null;
+export default async function DocsSettings() {
+  const cookieStore = await cookies();
+  const authToken = cookieStore.get("asc_auth_key")?.value || "";
 
-  constructor() {
-    makeAutoObservable(this);
+  let filesSettings;
+  let portalSettings;
+  let user;
+
+  try {
+    [filesSettings, portalSettings, user] = await Promise.all([
+      getFilesSettings(),
+      getSettings(),
+      getSelf(),
+    ]);
+  } catch (error) {
+    throw new Error(
+      `Failed to load settings page data: ${error instanceof Error ? error.message : String(error)}`,
+    );
   }
 
-  setItems = (items?: (TFileItem | TFolderItem)[]) => {
-    this.items = items || [];
-  };
-
-  setRootFolderType = (type: FolderType) => {
-    this.rootFolderType = type;
-  };
-
-  updateItemFavorite = (id: number | string, isFavorite: boolean) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item) item.isFavorite = isFavorite;
-  };
-
-  removeItem = (id: number | string) => {
-    this.items = this.items.filter((i) => i.id !== id);
-  };
-
-  get itemsCount() {
-    return this.items.length;
+  if (!filesSettings || !portalSettings) {
+    throw new Error("Failed to load required settings");
   }
-}
 
-export const FilesListStoreContext = React.createContext<FilesListStore>(
-  new FilesListStore(),
-);
-
-export const FilesListStoreContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FilesListStore(), []);
   return (
-    <FilesListStoreContext.Provider value={store}>
-      {children}
-    </FilesListStoreContext.Provider>
+    <DocsSettingsPage
+      authToken={authToken}
+      filesSettings={filesSettings}
+      portalSettings={portalSettings as TSettings}
+      user={user}
+    />
   );
-};
-
-export const useFilesListStore = () => {
-  return React.useContext(FilesListStoreContext);
-};
+}

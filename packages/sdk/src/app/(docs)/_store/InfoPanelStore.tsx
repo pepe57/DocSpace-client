@@ -27,59 +27,79 @@
 "use client";
 
 import React from "react";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, toJS } from "mobx";
 
-import { FolderType } from "@docspace/shared/enums";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type { LinkParamsType } from "@docspace/shared/types";
 
-import { TFileItem, TFolderItem } from "../_hooks/useItemList";
+class InfoPanelStore {
+  isVisible: boolean = false;
+  selection: TFile | TFolder | null = null;
+  shareChanged: boolean = false;
 
-class FilesListStore {
-  items: (TFileItem | TFolderItem)[] = [];
-  rootFolderType: FolderType | null = null;
+  editLinkPanelIsVisible: boolean = false;
+  linkParams: LinkParamsType | null = null;
+  embeddingPanelData: { visible: boolean; item?: TFile | TFolder } | null =
+    null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setItems = (items?: (TFileItem | TFolderItem)[]) => {
-    this.items = items || [];
+  open = (item: TFile | TFolder) => {
+    this.selection = toJS(item);
+    this.isVisible = true;
   };
 
-  setRootFolderType = (type: FolderType) => {
-    this.rootFolderType = type;
+  close = () => {
+    this.isVisible = false;
+    this.selection = null;
+    this.shareChanged = false;
   };
 
-  updateItemFavorite = (id: number | string, isFavorite: boolean) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item) item.isFavorite = isFavorite;
+  setShareChanged = (changed: boolean) => {
+    this.shareChanged = changed;
   };
 
-  removeItem = (id: number | string) => {
-    this.items = this.items.filter((i) => i.id !== id);
+  setEditLinkPanelIsVisible = (visible: boolean) => {
+    this.editLinkPanelIsVisible = visible;
   };
 
-  get itemsCount() {
-    return this.items.length;
-  }
+  setLinkParams = (params: LinkParamsType | null) => {
+    this.linkParams = params;
+  };
+
+  setEmbeddingPanelData = (data: {
+    visible: boolean;
+    item?: TFile | TFolder;
+  }) => {
+    this.embeddingPanelData = data;
+  };
 }
 
-export const FilesListStoreContext = React.createContext<FilesListStore>(
-  new FilesListStore(),
+export const InfoPanelStoreContext = React.createContext<InfoPanelStore>(
+  null as unknown as InfoPanelStore,
 );
 
-export const FilesListStoreContextProvider = ({
+export const InfoPanelStoreContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const store = React.useMemo(() => new FilesListStore(), []);
+  const store = React.useMemo(() => new InfoPanelStore(), []);
   return (
-    <FilesListStoreContext.Provider value={store}>
+    <InfoPanelStoreContext.Provider value={store}>
       {children}
-    </FilesListStoreContext.Provider>
+    </InfoPanelStoreContext.Provider>
   );
 };
 
-export const useFilesListStore = () => {
-  return React.useContext(FilesListStoreContext);
+export const useInfoPanelStore = () => {
+  const store = React.useContext(InfoPanelStoreContext);
+  if (!store) {
+    throw new Error(
+      "useInfoPanelStore must be used within an InfoPanelStoreContextProvider",
+    );
+  }
+  return store;
 };
