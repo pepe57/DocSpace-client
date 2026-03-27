@@ -1211,6 +1211,24 @@ class ContextOptionsStore {
     return pluginItems;
   };
 
+  placePlugins(result, pluginItems) {
+    const newResult = [...result];
+    const placementPlugins = pluginItems.filter((p) => p.placement);
+
+    placementPlugins.forEach((option) => {
+      if (option.placement === "top") {
+        newResult.splice(0, 0, option);
+      }
+
+      if (option.placement === "topLast") {
+        const firstSepIdx = newResult.findIndex((o) => o.isSeparator);
+        const insertAt = firstSepIdx !== -1 ? firstSepIdx : newResult.length;
+        newResult.splice(insertAt, 0, option);
+      }
+    });
+    return newResult;
+  }
+
   onClickInviteUsers = (roomId, roomType) => {
     const { isGracePeriod } = this.currentTariffStatusStore;
 
@@ -2980,21 +2998,9 @@ class ContextOptionsStore {
       });
 
       // Insert plugin items according to their placement
-      const placementPlugins = pluginItems.filter((p) => p.placement);
+      const newResult = this.placePlugins(result, pluginItems);
 
-      placementPlugins.forEach((option) => {
-        if (option.placement === "top") {
-          result.splice(0, 0, option);
-        }
-
-        if (option.placement === "topLast") {
-          const firstSepIdx = result.findIndex((o) => o.isSeparator);
-          const insertAt = firstSepIdx !== -1 ? firstSepIdx : result.length;
-          result.splice(insertAt, 0, option);
-        }
-      });
-
-      return trimSeparator(result);
+      return trimSeparator(newResult);
     }
 
     if (downloadGroupIndex !== -1 && moveIndex !== -1) {
@@ -3013,7 +3019,9 @@ class ContextOptionsStore {
       }
     }
 
-    return trimSeparator(resultOptions);
+    const newResult = this.placePlugins(resultOptions, pluginItems);
+
+    return trimSeparator(newResult);
   };
 
   getGroupContextOptions = (t) => {
