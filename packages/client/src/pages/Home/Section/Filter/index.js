@@ -1274,14 +1274,14 @@ const SectionFilterContent = ({
       },
       {
         id: "filter_owner-user",
-        key: FilterKeys.other,
+        key: FilterKeys.user,
         group: FilterGroups.roomFilterOwner,
         displaySelectorType: "link",
       },
     ];
 
     if (!isCollaborator && !isVisitor) {
-      subjectOptions.push({
+      ownerOptions.push({
         id: "filter_owner-other",
         key: FilterKeys.other,
         group: FilterGroups.roomFilterOwner,
