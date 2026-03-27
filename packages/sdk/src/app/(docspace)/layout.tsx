@@ -27,7 +27,6 @@ import { cookies, headers } from "next/headers";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { TFilesSettings, TGetFolder } from "@docspace/shared/api/files/types";
-import type { TUser } from "@docspace/shared/api/people/types";
 import type { TViewAs } from "@docspace/shared/types";
 
 import {
@@ -37,7 +36,6 @@ import {
   SHARE_KEY_HEADER,
 } from "@/utils/constants";
 import { getFilesSettings, getFolder } from "@/api/files";
-import { getSelf } from "@/api/people";
 
 import { Layout } from "./_components/layout";
 import { SectionWrapper as Section } from "./_components/section";
@@ -48,7 +46,6 @@ import { Filter, FilterProps } from "./_components/filter";
 import { DeviceTypeObserver } from "./_components/DeviceTypeObserver";
 import Dialogs from "./_components/dialogs";
 import RootScrollbar from "./_components/RootScrollbar";
-import DocspaceShell from "./_components/docspace-shell";
 
 export default async function DocspaceLayout({
   children,
@@ -69,7 +66,7 @@ export default async function DocspaceLayout({
     shareKey,
   } as FilterProps;
 
-  const actions: unknown[] = [getFilesSettings(), getSelf()];
+  const actions: unknown[] = [getFilesSettings()];
 
   if (filter) {
     const pathname = hdrs.get(PATHNAME_HEADER) ?? "";
@@ -84,9 +81,8 @@ export default async function DocspaceLayout({
     actions.push(getFolder(filesFilter.folder, filesFilter));
   }
 
-  const [filesSettings, self, folderList] = (await Promise.all(actions)) as [
+  const [filesSettings, folderList] = (await Promise.all(actions)) as [
     TFilesSettings,
-    TUser | undefined,
     TGetFolder,
   ];
 
@@ -99,25 +95,23 @@ export default async function DocspaceLayout({
   return (
     <main style={{ width: "100%", height: "100%" }}>
       <Layout initSettingsStoreData={{ viewAs: initViewAs }}>
-        <DocspaceShell user={self}>
-          <RootScrollbar>
-            <Section
-              sectionHeaderContent={
-                <Header {...navigationProps} />
-              }
-              sectionFilterContent={<Filter {...filterProps} />}
-              sectionBodyContent={children}
-              isEmptyPage={folders.length === 0 ? files.length === 0 : false}
-              filesFilter={filter!}
-            />
-            <SelectionArea />
-            <FilesMediaViewer
-              filesSettings={filesSettings as TFilesSettings}
-            />
-            <DeviceTypeObserver />
-            <Dialogs />
-          </RootScrollbar>
-        </DocspaceShell>
+        <RootScrollbar>
+          <Section
+            sectionHeaderContent={
+              <Header {...navigationProps} />
+            }
+            sectionFilterContent={<Filter {...filterProps} />}
+            sectionBodyContent={children}
+            isEmptyPage={folders.length === 0 ? files.length === 0 : false}
+            filesFilter={filter!}
+          />
+          <SelectionArea />
+          <FilesMediaViewer
+            filesSettings={filesSettings as TFilesSettings}
+          />
+          <DeviceTypeObserver />
+          <Dialogs />
+        </RootScrollbar>
       </Layout>
     </main>
   );

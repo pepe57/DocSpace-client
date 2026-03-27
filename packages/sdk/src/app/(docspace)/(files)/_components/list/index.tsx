@@ -98,7 +98,7 @@ const List = ({
     } as Location)!,
   );
   const [filesList, setFilesList] = React.useState<(TFolderItem | TFileItem)[]>(
-    [...folders.map(convertFolderToItem), ...files.map(convertFileToItem)],
+    [...folders.map(convertFolderToItem), ...files.map((file) => convertFileToItem(file))],
   );
   const [total, setTotal] = React.useState<number>(totalProp);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(

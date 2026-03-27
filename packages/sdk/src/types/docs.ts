@@ -37,4 +37,5 @@ export const DOCS_SECTION_FOLDER_ALIAS: Record<DocsSection, string> = {
   [DocsSection.Favorites]: "@favorites",
   [DocsSection.Recent]: "@recent",
   [DocsSection.Trash]: "@trash",
+  [DocsSection.Settings]: "@settings",
 };
