@@ -24,48 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { getFolderInfo } from "@/api/files";
+import { LibraryBreadcrumbProvider } from "../../../_components/library-breadcrumb/LibraryBreadcrumbContext";
 
-import React from "react";
+export const dynamic = "force-dynamic";
 
-import type { TFolder } from "@docspace/shared/api/files/types";
+export default async function LibraryLangLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ langId: string }>;
+}) {
+  const { langId } = await params;
 
-import type { CategoryData, CategoryItem } from "../../_hooks/useLibraryLandingData";
-import HeroSection from "./HeroSection";
-import StatsBar from "./StatsBar";
-import CategoryList from "./CategoryList";
-import styles from "./LibraryLanding.module.scss";
+  let langTitle = "";
+  try {
+    const folderInfo = await getFolderInfo(langId);
+    langTitle = folderInfo.title;
+  } catch {
+    // Fallback: title will be empty, breadcrumbs will show ID
+  }
 
-type LibraryLandingPageProps = {
-  folders: TFolder[];
-  categories: CategoryData[];
-  totalTemplatesCount: number;
-  countriesCount: number;
-  language: string;
-  onClickItem: (item: CategoryItem, category: TFolder) => void;
-};
-
-const LibraryLandingPage = ({
-  folders,
-  categories,
-  totalTemplatesCount,
-  countriesCount,
-  language,
-  onClickItem,
-}: LibraryLandingPageProps) => {
   return (
-    <div className={styles.root}>
-      <HeroSection templatesCount={totalTemplatesCount} language={language} />
-
-      <StatsBar
-        templatesCount={totalTemplatesCount}
-        countriesCount={countriesCount}
-        language={language}
-      />
-
-      <CategoryList categories={categories} onClickItem={onClickItem} />
-    </div>
+    <LibraryBreadcrumbProvider langId={langId} langTitle={langTitle}>
+      {children}
+    </LibraryBreadcrumbProvider>
   );
-};
-
-export default LibraryLandingPage;
+}

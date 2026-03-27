@@ -26,46 +26,50 @@
 
 "use client";
 
-import React from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 
-import type { TFolder } from "@docspace/shared/api/files/types";
-
-import type { CategoryData, CategoryItem } from "../../_hooks/useLibraryLandingData";
-import HeroSection from "./HeroSection";
-import StatsBar from "./StatsBar";
-import CategoryList from "./CategoryList";
-import styles from "./LibraryLanding.module.scss";
-
-type LibraryLandingPageProps = {
-  folders: TFolder[];
-  categories: CategoryData[];
-  totalTemplatesCount: number;
-  countriesCount: number;
-  language: string;
-  onClickItem: (item: CategoryItem, category: TFolder) => void;
+type BreadcrumbData = {
+  langId: string;
+  langTitle: string;
+  categoryId: string;
+  categoryTitle: string;
+  setCategoryInfo: (id: string, title: string) => void;
 };
 
-const LibraryLandingPage = ({
-  folders,
-  categories,
-  totalTemplatesCount,
-  countriesCount,
-  language,
-  onClickItem,
-}: LibraryLandingPageProps) => {
-  return (
-    <div className={styles.root}>
-      <HeroSection templatesCount={totalTemplatesCount} language={language} />
+const LibraryBreadcrumbContext = createContext<BreadcrumbData | null>(null);
 
-      <StatsBar
-        templatesCount={totalTemplatesCount}
-        countriesCount={countriesCount}
-        language={language}
-      />
+export function LibraryBreadcrumbProvider({
+  children,
+  langId,
+  langTitle,
+}: {
+  children: React.ReactNode;
+  langId: string;
+  langTitle: string;
+}) {
+  const [categoryId, setCategoryId] = useState("");
+  const [categoryTitle, setCategoryTitle] = useState("");
 
-      <CategoryList categories={categories} onClickItem={onClickItem} />
-    </div>
+  const setCategoryInfo = React.useCallback(
+    (id: string, title: string) => {
+      setCategoryId(id);
+      setCategoryTitle(title);
+    },
+    [],
   );
-};
 
-export default LibraryLandingPage;
+  const value = useMemo(
+    () => ({ langId, langTitle, categoryId, categoryTitle, setCategoryInfo }),
+    [langId, langTitle, categoryId, categoryTitle, setCategoryInfo],
+  );
+
+  return (
+    <LibraryBreadcrumbContext.Provider value={value}>
+      {children}
+    </LibraryBreadcrumbContext.Provider>
+  );
+}
+
+export function useLibraryBreadcrumb() {
+  return useContext(LibraryBreadcrumbContext);
+}

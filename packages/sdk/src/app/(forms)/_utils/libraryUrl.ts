@@ -24,48 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
-
-import React from "react";
-
-import type { TFolder } from "@docspace/shared/api/files/types";
-
-import type { CategoryData, CategoryItem } from "../../_hooks/useLibraryLandingData";
-import HeroSection from "./HeroSection";
-import StatsBar from "./StatsBar";
-import CategoryList from "./CategoryList";
-import styles from "./LibraryLanding.module.scss";
-
-type LibraryLandingPageProps = {
-  folders: TFolder[];
-  categories: CategoryData[];
-  totalTemplatesCount: number;
-  countriesCount: number;
-  language: string;
-  onClickItem: (item: CategoryItem, category: TFolder) => void;
+type LibraryUrlOptions = {
+  langId?: number | string;
+  categoryId?: number | string;
+  templateId?: number | string;
+  templateType?: "file" | "folder";
+  roomId?: number | string;
+  libraryId?: number | string;
 };
 
-const LibraryLandingPage = ({
-  folders,
-  categories,
-  totalTemplatesCount,
-  countriesCount,
-  language,
-  onClickItem,
-}: LibraryLandingPageProps) => {
-  return (
-    <div className={styles.root}>
-      <HeroSection templatesCount={totalTemplatesCount} language={language} />
+export function libraryUrl(opts: LibraryUrlOptions = {}): string {
+  let path = "/forms/library";
 
-      <StatsBar
-        templatesCount={totalTemplatesCount}
-        countriesCount={countriesCount}
-        language={language}
-      />
+  if (opts.langId) {
+    path += `/${opts.langId}`;
 
-      <CategoryList categories={categories} onClickItem={onClickItem} />
-    </div>
-  );
-};
+    if (opts.categoryId) {
+      path += `/${opts.categoryId}`;
 
-export default LibraryLandingPage;
+      if (opts.templateId) {
+        path += `/template/${opts.templateId}`;
+      }
+    }
+  }
+
+  const params = new URLSearchParams();
+  if (opts.roomId) params.set("roomId", String(opts.roomId));
+  if (opts.libraryId) params.set("libraryId", String(opts.libraryId));
+  if (opts.templateId && opts.templateType) {
+    params.set("type", opts.templateType);
+  }
+
+  const qs = params.toString();
+  return qs ? `${path}?${qs}` : path;
+}

@@ -40,7 +40,7 @@ import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { FormsSection } from "@/types/forms";
 import { sectionFromPathname, sectionToPath } from "../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
-import { useLibraryNavigationStore } from "../_store/LibraryNavigationStore";
+// LibraryNavigationStore removed — library uses URL routing now
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
@@ -79,7 +79,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     goBackToCompletedRoot,
     goBackToInProgressRoot,
   } = useFormsNavigationStore();
-  const libraryNav = useLibraryNavigationStore();
+  // libraryNav removed — library uses URL routing now
   const aiStore = useFormsAiAgentStore();
   const { user } = useFormsUserStore();
   const formsSettingsStore = useFormsSettingsStore();
@@ -177,19 +177,25 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       if (prevSection === FormsSection.InProgress) {
         goBackToInProgressRoot();
       }
-      if (prevSection === FormsSection.Library) {
-        libraryNav.reset();
-      }
+      // Library navigation state is now URL-based — no reset needed
 
       if (editingFile) {
+        // Clear stale data so skeletons show while new section loads
+        formsListStore.setItems([], 0);
+        formsListStore.setFolders([]);
+        formsListStore.setIsLoading(true);
         pendingEditorClose.current = true;
       } else {
         closeEditor();
       }
 
-      if (activeSection === FormsSection.Settings) {
+      if (
+        activeSection === FormsSection.Settings ||
+        activeSection === FormsSection.Library
+      ) {
         pendingEditorClose.current = false;
         closeEditor();
+        formsListStore.setIsLoading(false);
         setTimeout(() => {
           window.dispatchEvent(
             new CustomEvent(AnimationEvents.END_ANIMATION),

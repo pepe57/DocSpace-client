@@ -29,9 +29,10 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import Navigation from "@docspace/ui-kit/components/navigation";
+import api from "@docspace/shared/api";
 import { DeviceType } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
@@ -39,9 +40,10 @@ import { FormsSection } from "@/types/forms";
 
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
-import { useLibraryNavigationStore } from "../../_store/LibraryNavigationStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import { useLibraryParams } from "../../_hooks/useLibraryParams";
+import { libraryUrl } from "../../_utils/libraryUrl";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
 
@@ -66,7 +68,34 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     goBackToInProgressRoot,
   } = useFormsNavigationStore();
 
-  const libraryNav = useLibraryNavigationStore();
+  const router = useRouter();
+  const libParams = useLibraryParams();
+
+  // Fetch folder titles for library breadcrumbs (header is outside route layout providers)
+  const [libLangTitle, setLibLangTitle] = React.useState("");
+  const [libCategoryTitle, setLibCategoryTitle] = React.useState("");
+
+  React.useEffect(() => {
+    if (!libParams.langId) {
+      setLibLangTitle("");
+      return;
+    }
+    api.files
+      .getFolderInfo(libParams.langId)
+      .then((info) => setLibLangTitle(info.title))
+      .catch(() => setLibLangTitle(String(libParams.langId)));
+  }, [libParams.langId]);
+
+  React.useEffect(() => {
+    if (!libParams.categoryId) {
+      setLibCategoryTitle("");
+      return;
+    }
+    api.files
+      .getFolderInfo(libParams.categoryId)
+      .then((info) => setLibCategoryTitle(info.title))
+      .catch(() => setLibCategoryTitle(String(libParams.categoryId)));
+  }, [libParams.categoryId]);
 
   const { items, folders } = useFormsListStore();
   const formsSettingsStore = useFormsSettingsStore();
@@ -81,7 +110,7 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     activeSection === FormsSection.CompletedForms && !!completedFolder;
   const isInsideInProgressFolder =
     activeSection === FormsSection.InProgress && !!inProgressFolder;
-  const isInsideLibrary = isLibrary && libraryNav.depth > 0;
+  const isInsideLibrary = isLibrary && libParams.depth > 0;
   const activeSubfolder = completedFolder ?? inProgressFolder;
 
   const getSectionTitle = React.useCallback(() => {
@@ -153,21 +182,20 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     if (isInsideLibrary) {
       const crumbs: { id: string | number; title: string; isRootRoom: boolean }[] = [];
 
-      // When template selected: show ALL folders in path (category is the current title)
-      // When browsing folders: skip the deepest (it's the Navigation title)
-      const startIdx = libraryNav.selectedTemplate
-        ? libraryNav.folderPath.length - 1
-        : libraryNav.folderPath.length - 2;
-
-      for (let i = startIdx; i >= 0; i--) {
-        const f = libraryNav.folderPath[i];
-        crumbs.push({ id: f.id, title: f.title, isRootRoom: false });
+      // Category breadcrumb (when at Level 2+ or template detail)
+      if (libParams.categoryId && libCategoryTitle) {
+        crumbs.push({
+          id: `category-${libParams.categoryId}`,
+          title: libCategoryTitle,
+          isRootRoom: false,
+        });
       }
 
-      if (libraryNav.languageFolder) {
+      // Language breadcrumb
+      if (libParams.langId) {
         crumbs.push({
-          id: libraryNav.languageFolder.id,
-          title: libraryNav.languageFolder.title,
+          id: `lang-${libParams.langId}`,
+          title: libLangTitle || String(libParams.langId),
           isRootRoom: false,
         });
       }
@@ -189,10 +217,11 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     isInsideCompletedFolder,
     isInsideInProgressFolder,
     isInsideLibrary,
-    libraryNav,
-    libraryNav.selectedTemplate,
-    libraryNav.selectedCategory,
-    libraryNav.folderPath,
+    libParams.langId,
+    libParams.categoryId,
+    libParams.templateId,
+    libLangTitle,
+    libCategoryTitle,
     getSectionTitle,
     t,
   ]);
@@ -261,12 +290,32 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     (itemId?: string | number) => {
       if (itemId === undefined) return;
 
-      if (libraryNav.selectedTemplate) {
-        libraryNav.clearTemplate();
+      const rid = libParams.roomId || undefined;
+      const lid = libParams.libraryId || undefined;
+
+      if (itemId === "library-root") {
+        router.push(libraryUrl({ roomId: rid, libraryId: lid }));
+        return;
       }
-      libraryNav.goToFolder(itemId);
+      if (typeof itemId === "string" && itemId.startsWith("lang-")) {
+        const langId = itemId.replace("lang-", "");
+        router.push(libraryUrl({ langId, roomId: rid, libraryId: lid }));
+        return;
+      }
+      if (typeof itemId === "string" && itemId.startsWith("category-")) {
+        const categoryId = itemId.replace("category-", "");
+        router.push(
+          libraryUrl({
+            langId: libParams.langId ?? undefined,
+            categoryId,
+            roomId: rid,
+            libraryId: lid,
+          }),
+        );
+        return;
+      }
     },
-    [libraryNav],
+    [libParams, router],
   );
 
   if (isSettings) {
@@ -453,9 +502,16 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
   }
 
   if (isInsideLibrary) {
-    const libraryTitle = libraryNav.selectedTemplate
-      ? libraryNav.selectedTemplate.title.replace(/\.pdf$/i, "")
-      : libraryNav.currentFolder?.title || "";
+    // Derive title from URL depth
+    let libraryTitle = "";
+    if (libParams.hasTemplate) {
+      // Will be set by the template page — for now use category title or breadcrumb
+      libraryTitle = libCategoryTitle || "";
+    } else if (libParams.categoryId) {
+      libraryTitle = libCategoryTitle || "";
+    } else {
+      libraryTitle = libLangTitle || "";
+    }
 
     return (
       <div
@@ -478,7 +534,7 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
             isTrashFolder={false}
             isEmptyPage={items.length === 0 && folders.length === 0}
             isEmptyFilesList={items.length === 0 && folders.length === 0}
-            onBackToParentFolder={() => libraryNav.goBack()}
+            onBackToParentFolder={() => router.back()}
             showRootFolderTitle={false}
             withLogo=""
             burgerLogo=""

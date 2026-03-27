@@ -26,46 +26,4 @@
 
 "use client";
 
-import React from "react";
-
-import type { TFolder } from "@docspace/shared/api/files/types";
-
-import type { CategoryData, CategoryItem } from "../../_hooks/useLibraryLandingData";
-import HeroSection from "./HeroSection";
-import StatsBar from "./StatsBar";
-import CategoryList from "./CategoryList";
-import styles from "./LibraryLanding.module.scss";
-
-type LibraryLandingPageProps = {
-  folders: TFolder[];
-  categories: CategoryData[];
-  totalTemplatesCount: number;
-  countriesCount: number;
-  language: string;
-  onClickItem: (item: CategoryItem, category: TFolder) => void;
-};
-
-const LibraryLandingPage = ({
-  folders,
-  categories,
-  totalTemplatesCount,
-  countriesCount,
-  language,
-  onClickItem,
-}: LibraryLandingPageProps) => {
-  return (
-    <div className={styles.root}>
-      <HeroSection templatesCount={totalTemplatesCount} language={language} />
-
-      <StatsBar
-        templatesCount={totalTemplatesCount}
-        countriesCount={countriesCount}
-        language={language}
-      />
-
-      <CategoryList categories={categories} onClickItem={onClickItem} />
-    </div>
-  );
-};
-
-export default LibraryLandingPage;
+export { default } from "./page.client";

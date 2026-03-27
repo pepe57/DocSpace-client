@@ -26,46 +26,39 @@
 
 "use client";
 
-import React from "react";
+import { useParams, useSearchParams } from "next/navigation";
 
-import type { TFolder } from "@docspace/shared/api/files/types";
-
-import type { CategoryData, CategoryItem } from "../../_hooks/useLibraryLandingData";
-import HeroSection from "./HeroSection";
-import StatsBar from "./StatsBar";
-import CategoryList from "./CategoryList";
-import styles from "./LibraryLanding.module.scss";
-
-type LibraryLandingPageProps = {
-  folders: TFolder[];
-  categories: CategoryData[];
-  totalTemplatesCount: number;
-  countriesCount: number;
-  language: string;
-  onClickItem: (item: CategoryItem, category: TFolder) => void;
+type LibraryRouteParams = {
+  langId?: string;
+  categoryId?: string;
+  templateId?: string;
 };
 
-const LibraryLandingPage = ({
-  folders,
-  categories,
-  totalTemplatesCount,
-  countriesCount,
-  language,
-  onClickItem,
-}: LibraryLandingPageProps) => {
-  return (
-    <div className={styles.root}>
-      <HeroSection templatesCount={totalTemplatesCount} language={language} />
+export function useLibraryParams() {
+  const params = useParams<LibraryRouteParams>();
+  const searchParams = useSearchParams();
 
-      <StatsBar
-        templatesCount={totalTemplatesCount}
-        countriesCount={countriesCount}
-        language={language}
-      />
+  const langId = params.langId ? Number(params.langId) : null;
+  const categoryId = params.categoryId ? Number(params.categoryId) : null;
+  const templateId = params.templateId ? Number(params.templateId) : null;
+  const templateType = searchParams.get("type") as "file" | "folder" | null;
 
-      <CategoryList categories={categories} onClickItem={onClickItem} />
-    </div>
-  );
-};
+  const roomId = searchParams.get("roomId") ?? "";
+  const libraryId = searchParams.get("libraryId") ?? "";
 
-export default LibraryLandingPage;
+  const depth = langId ? (categoryId ? (templateId ? 3 : 2) : 1) : 0;
+  const isLanguageLevel = !langId;
+  const hasTemplate = !!templateId;
+
+  return {
+    langId,
+    categoryId,
+    templateId,
+    templateType,
+    roomId,
+    libraryId,
+    depth,
+    isLanguageLevel,
+    hasTemplate,
+  };
+}

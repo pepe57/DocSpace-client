@@ -30,7 +30,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import { usePathname } from "next/navigation";
 
-import type { TFile, TFilesSettings, TFolder } from "@docspace/shared/api/files/types";
+import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
@@ -41,15 +41,9 @@ import { FormsSection } from "@/types/forms";
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
-import { useLibraryNavigationStore } from "../../_store/LibraryNavigationStore";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
 import FormsEmpty from "../forms-empty";
-import LibraryLandingPage from "../library-landing";
-import LibraryTemplateDetail from "../library-template-detail";
-import LibraryCategoryListView from "./LibraryCategoryListView";
 import FormsTile from "./FormsTile";
-import LibraryCountryList from "./LibraryCountryList";
-import LibraryTemplateTile from "./LibraryTemplateTile";
 import SubFolderTile from "./SubFolderTile";
 import styles from "./FormsTile.module.scss";
 
@@ -69,7 +63,6 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     openCompletedFolder,
     openInProgressFolder,
   } = useFormsNavigationStore();
-  const libraryNav = useLibraryNavigationStore();
   const { getIcon } = useItemIcon({ filesSettings });
   const { convertFileToItem } = useItemList({
     getIcon,
@@ -80,27 +73,6 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     activeSection === FormsSection.CompletedForms && !completedFolder;
   const isInProgressRoot =
     activeSection === FormsSection.InProgress && !inProgressFolder;
-  const isLibrary = activeSection === FormsSection.Library;
-  const isLibraryLanguageLevel = isLibrary && libraryNav.isLanguageLevel;
-  const isLibraryLanding = isLibrary && libraryNav.depth === 1 && !libraryNav.selectedTemplate && folders.length > 0;
-  const isLibraryCategoryView = isLibrary && libraryNav.depth > 1 && !libraryNav.selectedTemplate;
-  const isLibraryFolderLevel = isLibrary && !libraryNav.isLanguageLevel && folders.length > 0;
-  const isLibraryTemplateLevel = isLibrary && !libraryNav.isLanguageLevel && items.length > 0 && folders.length === 0;
-
-  // Auto-select first file when entering a library category folder (only on fresh load)
-  const prevLoadingRef = React.useRef(false);
-  React.useEffect(() => {
-    const wasLoading = prevLoadingRef.current;
-    prevLoadingRef.current = isLoading;
-
-    // Only trigger when loading just finished (true → false)
-    if (!wasLoading || isLoading) return;
-    if (!isLibraryCategoryView) return;
-    const folder = libraryNav.currentFolder;
-    if (items.length > 0 && folder) {
-      libraryNav.selectTemplate(items[0], folder);
-    }
-  }, [isLibraryCategoryView, isLoading, items, libraryNav]);
 
   const fileItems = React.useMemo(
     () => items.map((file: TFile) => convertFileToItem(file)),
@@ -181,40 +153,8 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     return <FormsEmpty />;
   }
 
-  if (isLibraryLanguageLevel && hasFolders) {
-    return (
-      <LibraryCountryList
-        folders={folders}
-        onOpenFolder={libraryNav.openLanguageFolder}
-      />
-    );
-  }
-
-  if (isLibrary && libraryNav.selectedTemplate) {
-    return <LibraryTemplateDetail />;
-  }
-
-  if (isLibraryCategoryView) {
-    const allItems = [
-      ...folders.map((f) => ({ id: f.id, title: f.title, original: f as TFile | TFolder, type: "folder" as const })),
-      ...items.map((f) => ({ id: f.id, title: f.title.replace(/\.pdf$/i, ""), original: f as TFile | TFolder, type: "file" as const })),
-    ];
-    return (
-      <LibraryCategoryListView
-        items={allItems}
-        onClickItem={(item) => {
-          const currentFolder = libraryNav.currentFolder;
-          if (currentFolder) {
-            libraryNav.selectTemplate(item.original, currentFolder);
-          }
-        }}
-      />
-    );
-  }
-
-  if (isLibraryLanding && hasFolders) {
-    return <LibraryLandingPage folders={folders} />;
-  }
+  // Library views are now handled by dedicated route pages under /forms/library/[langId]/...
+  // FormsGrid only handles MyForms, InProgress, CompletedForms sections
 
   if (((isCompletedRoot || isInProgressRoot) || !hasItems) && hasFolders) {
     const onOpenFolder = isCompletedRoot
@@ -234,37 +174,6 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
           />
         ))}
       </div>
-    );
-  }
-
-  if (isLibraryTemplateLevel && hasItems) {
-    return (
-      <>
-        <div className={styles.filesGrid} ref={gridRef}>
-          {fileItems.map((item) => {
-            const originalFile = items.find((f) => f.id === item.id);
-            return originalFile ? (
-              <LibraryTemplateTile
-                key={`file_${item.id}`}
-                item={item}
-                file={originalFile}
-                getIcon={getIcon}
-              />
-            ) : null;
-          })}
-          {hasMore &&
-            Array.from({ length: skeletonCount }, (_, i) => (
-              <RectangleSkeleton
-                key={`skeleton_${i}`}
-                width="100%"
-                height="220px"
-                borderRadius="12px"
-                animate
-              />
-            ))}
-        </div>
-        {hasMore && <div ref={sentinelRef} style={{ height: 1 }} />}
-      </>
     );
   }
 

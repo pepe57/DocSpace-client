@@ -26,69 +26,82 @@
 
 "use client";
 
-import React from "react";
-import { observer } from "mobx-react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
+import api from "@docspace/shared/api";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import type { TFolder } from "@docspace/shared/api/files/types";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-import { useLibraryNavigationStore } from "../../_store/LibraryNavigationStore";
-import useLibraryData from "../../_hooks/useLibraryData";
-import FormsGrid from "../../_components/forms-grid";
+import { libraryUrl } from "../../_utils/libraryUrl";
+import LibraryCountryList from "../../_components/forms-grid/LibraryCountryList";
 
 const LibraryPage = () => {
-  const formsSettingsStore = useFormsSettingsStore();
-  const libraryNav = useLibraryNavigationStore();
-  const { fetchLibrarySection, fetchMore } = useLibraryData();
+  const router = useRouter();
+  const { libraryId, roomId } = useFormsSettingsStore();
+  const [folders, setFolders] = useState<TFolder[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchRef = React.useRef(fetchLibrarySection);
-  fetchRef.current = fetchLibrarySection;
-  React.useEffect(() => {
-    fetchRef.current();
-  }, [libraryNav.languageFolder, libraryNav.folderPath.length]);
-
-  const prevDepthRef = React.useRef(0);
-  const prevHadTemplateRef = React.useRef(false);
-  React.useEffect(() => {
-    const depth = libraryNav.depth;
-    const prevDepth = prevDepthRef.current;
-    const hasTemplate = !!libraryNav.selectedTemplate;
-    const hadTemplate = prevHadTemplateRef.current;
-    prevDepthRef.current = depth;
-    prevHadTemplateRef.current = hasTemplate;
-
-    if (depth > 0 && prevDepth === 0) {
-      history.pushState({ libraryTrap: true }, "", window.location.href);
+  useEffect(() => {
+    if (!libraryId) {
+      setIsLoading(false);
+      return;
     }
 
-    if (hasTemplate && !hadTemplate) {
-      history.pushState({ libraryTrap: true }, "", window.location.href);
-    }
+    const controller = new AbortController();
+    setIsLoading(true);
 
-    if (depth === 0) return;
+    const filter = FilesFilter.getDefault();
+    filter.page = 0;
+    filter.pageCount = 100;
 
-    const handlePopState = () => {
-      const hadTemplate = !!libraryNav.selectedTemplate;
-      libraryNav.goBack();
+    api.files
+      .getFolder(libraryId, filter, controller.signal)
+      .then((res) => {
+        if (!controller.signal.aborted) {
+          setFolders(res.folders);
+          setIsLoading(false);
+        }
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) {
+          setFolders([]);
+          setIsLoading(false);
+        }
+      });
 
-      // Re-push trap if we're still inside the library after going back
-      // (depth > 0 after goBack, or we just cleared a template but stayed at depth 1)
-      if (libraryNav.depth > 0 && (libraryNav.depth > 1 || hadTemplate)) {
-        history.pushState({ libraryTrap: true }, "", window.location.href);
-      }
-    };
+    return () => controller.abort();
+  }, [libraryId]);
 
-    window.addEventListener("popstate", handlePopState);
+  const handleOpenFolder = useCallback(
+    (folder: TFolder) => {
+      router.push(
+        libraryUrl({
+          langId: folder.id,
+          roomId: roomId || undefined,
+          libraryId: libraryId || undefined,
+        }),
+      );
+    },
+    [roomId, libraryId, router],
+  );
 
-    return () => {
-      window.removeEventListener("popstate", handlePopState);
-    };
-  }, [libraryNav.depth, libraryNav.selectedTemplate, libraryNav]);
+  if (isLoading) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16, paddingTop: 32 }}>
+        <RectangleSkeleton width="320px" height="200px" borderRadius="8px" animate />
+        <RectangleSkeleton width="240px" height="24px" borderRadius="4px" animate />
+      </div>
+    );
+  }
+
+  if (folders.length === 0) return null;
 
   return (
-    <FormsGrid
-      filesSettings={formsSettingsStore.filesSettings!}
-      fetchMore={fetchMore}
-    />
+    <LibraryCountryList folders={folders} onOpenFolder={handleOpenFolder} />
   );
 };
 
-export default observer(LibraryPage);
+export default LibraryPage;
