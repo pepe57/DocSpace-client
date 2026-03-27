@@ -161,6 +161,8 @@
   "ChangeLogoButton": "Change Logo",
   "ChangeQuota": "Change quota",
   "ChangesSavedSuccessfully": "Changes saved successfully",
+  "ChooseYourCountry": "Choose your country",
+  "ChooseYourCountryDescription": "Discover a fast and easy way to get your legal documents",
   "ChangeUserPermissions": "Change user permissions to the invited people or <1>upgrade your tariff plan</1>.",
   "ChatExported": "Chat <1>{{title}}</1> exported to file: <2>{{fileName}}</2>",
   "ChatHistory": "Chat history",

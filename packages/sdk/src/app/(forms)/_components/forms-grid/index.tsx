@@ -45,7 +45,7 @@ import { useLibraryNavigationStore } from "../../_store/LibraryNavigationStore";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
 import FormsEmpty from "../forms-empty";
 import FormsTile from "./FormsTile";
-import LibraryFolderCard from "./LibraryFolderCard";
+import LibraryCountryList from "./LibraryCountryList";
 import LibraryTemplateTile from "./LibraryTemplateTile";
 import SubFolderTile from "./SubFolderTile";
 import styles from "./FormsTile.module.scss";
@@ -163,16 +163,10 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
 
   if (isLibraryLanguageLevel && hasFolders) {
     return (
-      <div className={styles.foldersGrid}>
-        {folders.map((folder) => (
-          <LibraryFolderCard
-            key={`folder_${folder.id}`}
-            folder={folder}
-            getIcon={getIcon}
-            onOpenFolder={libraryNav.openLanguageFolder}
-          />
-        ))}
-      </div>
+      <LibraryCountryList
+        folders={folders}
+        onOpenFolder={libraryNav.openLanguageFolder}
+      />
     );
   }
 
