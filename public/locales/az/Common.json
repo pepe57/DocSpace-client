@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Sisteminiz bunu etdikdə açıq və qaranlıq temalar arasında avtomatik keçid edin.",
   "OriginalCopy": "Faylın nüsxəsini orijinal formatda da yadda saxla",
   "TrashMoveConfirmation": "{{sectionName}} bölməsinə əşyaları köçürdükdə bildiriş göstər",
-  "DisplayFileExtension": "Fayl adının yanında fayl uzantısını göstərin"
+  "DisplayFileExtension": "Fayl adının yanında fayl uzantısını göstərin",
+  "MarkedAsFavorite": "Çox istifadə olunan siyahısına əlavə olundu",
+  "UploadFiles": "Faylları yüklə",
+  "UploadFolder": "Qolvuğu yüklə"
 }

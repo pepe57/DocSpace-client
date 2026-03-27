@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Prepínajte medzi svetlými a tmavými témami automaticky, keď tak urobí váš systém.",
   "OriginalCopy": "Uložte kópiu súboru aj v pôvodnom formáte",
   "TrashMoveConfirmation": "Zobraziť upozornenie pri presúvaní položiek do {{sectionName}}",
-  "DisplayFileExtension": "Zobrazenie prípony súboru vedľa jeho názvu"
+  "DisplayFileExtension": "Zobrazenie prípony súboru vedľa jeho názvu",
+  "MarkedAsFavorite": "Pridané k obľúbeným",
+  "UploadFiles": "Nahrať súbory",
+  "UploadFolder": "Nahrať priečinok"
 }

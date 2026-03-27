@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Comutați automat între tema luminoasă şi întunecată în funcţie de setări sistem.",
   "OriginalCopy": "Salvează copia și în formatul original",
   "TrashMoveConfirmation": "Afișează notificare la mutarea elementelor în {{sectionName}}",
-  "DisplayFileExtension": "Afișează extensia fișierului de lângă numele fișierului"
+  "DisplayFileExtension": "Afișează extensia fișierului de lângă numele fișierului",
+  "MarkedAsFavorite": "Adăugat la preferințe",
+  "UploadFiles": "Încarcă fișiere",
+  "UploadFolder": "Încarcă dosarul"
 }

@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Automatski menjaj između svetlih i tamnih tema kada tvoj sistem to radi.",
   "OriginalCopy": "Sačuvaj kopiju datoteke u originalnom formatu takođe",
   "TrashMoveConfirmation": "Prikaži obaveštenje kada se stavke premeštaju u {{sectionName}}",
-  "DisplayFileExtension": "Prikaz ekstenzije fajla pored imena fajla"
+  "DisplayFileExtension": "Prikaz ekstenzije fajla pored imena fajla",
+  "MarkedAsFavorite": "Dodato u omiljeno",
+  "UploadFiles": "Otpremi datoteke",
+  "UploadFolder": "Otpremi folder"
 }

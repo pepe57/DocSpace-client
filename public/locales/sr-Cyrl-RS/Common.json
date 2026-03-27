@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Аутоматски мењај између светлих и тамних тема када твој систем то ради.",
   "OriginalCopy": "Сачувај копију датотеке у оригиналном формату такође",
   "TrashMoveConfirmation": "Прикажи обавештење када се ставке премештају у {{sectionName}}",
-  "DisplayFileExtension": "Приказ екстензије фајла поред имена фајла"
+  "DisplayFileExtension": "Приказ екстензије фајла поред имена фајла",
+  "MarkedAsFavorite": "Додато у омиљено",
+  "UploadFiles": "Отпреми датотеке",
+  "UploadFolder": "Отпреми фолдер"
 }

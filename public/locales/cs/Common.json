@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Automatické přepínání mezi světlými a tmavými motivy v souladu s vaším systémem.",
   "OriginalCopy": "Uložit kopii souboru i v původním formátu",
   "TrashMoveConfirmation": "Zobrazit upozornění při přesouvání položek do {{sectionName}}",
-  "DisplayFileExtension": "Zobrazení přípony souboru vedle názvu souboru"
+  "DisplayFileExtension": "Zobrazení přípony souboru vedle názvu souboru",
+  "MarkedAsFavorite": "Přidáno k oblíbeným",
+  "UploadFiles": "Nahrát soubory",
+  "UploadFolder": "Nahrát složku"
 }

@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Passage automatique d’un thème clair à un thème sombre lorsque votre système le fait.",
   "OriginalCopy": "Sauvegarder également la copie du fichier dans le format original.",
   "TrashMoveConfirmation": "Afficher une notification lors du déplacement d'éléments vers {{sectionName}}",
-  "DisplayFileExtension": "Afficher l'extension du fichier à côté du nom du fichier"
+  "DisplayFileExtension": "Afficher l'extension du fichier à côté du nom du fichier",
+  "MarkedAsFavorite": "Ajouté aux favoris",
+  "UploadFiles": "Télécharger les fichiers",
+  "UploadFolder": "Télécharger le dossier"
 }

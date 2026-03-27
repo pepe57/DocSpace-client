@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Vaihda automaattisesti vaalean ja tumman teeman välillä, kun systeemisi tekee niin.",
   "OriginalCopy": "Tallenna kopio tiedostosta myös alkuperäisessä muodossa",
   "TrashMoveConfirmation": "Näytä ilmoitus, kun siirretään kohteita {{sectionName}}-osioon",
-  "DisplayFileExtension": "Näytä tiedostopääte tiedostonimen perässä "
+  "DisplayFileExtension": "Näytä tiedostopääte tiedostonimen perässä ",
+  "MarkedAsFavorite": "Lisätty suosikkeihin",
+  "UploadFiles": "Lataa tiedostoja",
+  "UploadFolder": "Lataa kansio"
 }

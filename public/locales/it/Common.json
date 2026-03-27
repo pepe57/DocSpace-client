@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Passare automaticamente dal tema chiaro a quello scuro quando lo fa il tuo sistema.",
   "OriginalCopy": "Salva anche la copia del file in formato originale",
   "TrashMoveConfirmation": "Mostra una notifica quando sposti elementi in {{sectionName}}",
-  "DisplayFileExtension": "Mostra l’estensione del file vicino al nome del file"
+  "DisplayFileExtension": "Mostra l’estensione del file vicino al nome del file",
+  "MarkedAsFavorite": "Aggiungi ai favoriti",
+  "UploadFiles": "Carica file",
+  "UploadFolder": "Caricare cartella"
 }

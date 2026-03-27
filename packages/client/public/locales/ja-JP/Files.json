@@ -106,7 +106,6 @@
   "LinkSuccessfullyCreatedAndCopied": "リンクが正常に作成され、クリップボードにコピーされました",
   "MarkAsRevision": "修正マーク",
   "MarkAsVersion": "バージョンとしてマークする",
-  "MarkedAsFavorite": "お気に入りに追加",
   "MarkingRead": "マークが読み取られました",
   "MarkRead": "既読にする",
   "MeAndGroups": "私とグループ（{{ groupsCount }}）",

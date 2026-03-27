@@ -311,6 +311,8 @@
   "DeleteAIAgentChatTitle": "Delete chat?",
   "DeleteAIChatDescription": "You are about to delete <strong>{{chatName}}<1>.</1></strong>\n All messages and chat history will be permanently removed and cannot be restored.",
   "DeleteForeverButton": "Delete forever",
+  "DeleteItemForever": "This item will be permanently deleted. Are you sure?",
+  "DeleteItemsForever": "These {{itemCount}} items will be permanently deleted. Are you sure?",
   "DeletePermanently": "Delete permanently",
   "DeletePortal": "Delete {{productName}}",
   "DeleteRoom": "Delete room",
@@ -686,6 +688,8 @@
   "MoveToOperation": "Moving",
   "MoveToPublicRoom": "This room and all its contents are available to anyone with the link. Do you want to continue?",
   "MoveToSection": "Move to {{sectionName}}",
+  "MoveToTrashItem": "This item will be moved to Trash.",
+  "MoveToTrashItems": "These {{itemCount}} items will be moved to Trash.",
   "MultiplyOverwrite": "Several folders will be merged into one, files will be overwritten with the version update",
   "MyDocuments": "My documents",
   "MyForms": "My forms",
@@ -1212,5 +1216,8 @@
   "SystemThemeDescription": "Automatically switch between light and dark themes when your system does.",
   "OriginalCopy": "Save the file copy in the original format as well",
   "TrashMoveConfirmation": "Display notification when moving items to {{sectionName}}",
-  "DisplayFileExtension": "Display file extension next to file name"
+  "DisplayFileExtension": "Display file extension next to file name",
+  "MarkedAsFavorite": "Added to favorites",
+  "UploadFiles": "Upload files",
+  "UploadFolder": "Upload folder"
 }

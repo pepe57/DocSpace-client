@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Schakelt automatisch tussen lichte en donkere thema's wanneer uw systeem dat doet.",
   "OriginalCopy": "Bewaar de bestandskopie ook in het oorspronkelijke formaat",
   "TrashMoveConfirmation": "Toon melding bij het verplaatsen van items naar {{sectionName}}",
-  "DisplayFileExtension": "Bestandsextensie naast bestandsnaam weergeven"
+  "DisplayFileExtension": "Bestandsextensie naast bestandsnaam weergeven",
+  "MarkedAsFavorite": "Toegevoegd aan favorieten",
+  "UploadFiles": "Upload bestanden",
+  "UploadFolder": "Upload map"
 }

@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Automātiski pārslēdzieties starp gaišiem un tumšiem dizainiem, kad to dara sistēma.",
   "OriginalCopy": "Saglabājiet faila kopiju arī sākotnējā formātā",
   "TrashMoveConfirmation": "Parādīt paziņojumu, pārvietojot vienumus uz {{sectionName}}",
-  "DisplayFileExtension": "Rādīt faila paplašinājumu blakus faila nosaukumam"
+  "DisplayFileExtension": "Rādīt faila paplašinājumu blakus faila nosaukumam",
+  "MarkedAsFavorite": "Pievienots izlasei",
+  "UploadFiles": "Augšupielādējiet failus",
+  "UploadFolder": "Augšupielādēt mapi"
 }

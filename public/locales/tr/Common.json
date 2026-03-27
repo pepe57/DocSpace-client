@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Sisteminiz geçiş yaptığında açık ve koyu temalar arasında otomatik olarak geçiş yapın.",
   "OriginalCopy": "Dosya kopyasını da orijinal türünde kaydet",
   "TrashMoveConfirmation": "{{sectionName}}'e öğe taşırken bildirim göster",
-  "DisplayFileExtension": "Dosya adının yanında dosya uzantısını görüntüle"
+  "DisplayFileExtension": "Dosya adının yanında dosya uzantısını görüntüle",
+  "MarkedAsFavorite": "Favorilere eklendi",
+  "UploadFiles": "Dosya yükle",
+  "UploadFolder": "Klasör yükle"
 }

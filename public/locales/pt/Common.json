@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Alterne entre o tema claro e escuro quando o seu sistema o fizer.",
   "OriginalCopy": "Guardar a cópia do ficheiro também no formato original",
   "TrashMoveConfirmation": "Mostrar notificação ao mover itens para {{sectionName}}",
-  "DisplayFileExtension": "Exibir extensão de arquivo ao lado do nome do arquivo"
+  "DisplayFileExtension": "Exibir extensão de arquivo ao lado do nome do arquivo",
+  "MarkedAsFavorite": "Adicionar ao favoritos",
+  "UploadFiles": "Carregar ficheiros",
+  "UploadFolder": "Carregar pasta"
 }

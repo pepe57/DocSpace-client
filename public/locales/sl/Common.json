@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Samodejno preklapljajte med svetlimi in temnimi temami, ko to počne vaš sistem.",
   "OriginalCopy": "Kopijo datoteke shranite tudi v izvirni obliki",
   "TrashMoveConfirmation": "Prikaži obvestilo ob premiku elementov v {{sectionName}}.",
-  "DisplayFileExtension": "Prikaži pripono datoteke poleg imena datoteke"
+  "DisplayFileExtension": "Prikaži pripono datoteke poleg imena datoteke",
+  "MarkedAsFavorite": "Dodano med priljubljene",
+  "UploadFiles": "Naloži datoteke",
+  "UploadFolder": "Naloži mapo"
 }

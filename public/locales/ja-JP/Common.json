@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "システムの動作に合わせて、ライトテーマとダークテーマを自動で切り替えます。",
   "OriginalCopy": "コピーしたファイルをオリジナルの形式にも保存する",
   "TrashMoveConfirmation": "アイテムを {{sectionName}} に移動するときに通知を表示する",
-  "DisplayFileExtension": "ファイル名の隣にファイル拡張子を表示する"
+  "DisplayFileExtension": "ファイル名の隣にファイル拡張子を表示する",
+  "MarkedAsFavorite": "お気に入りに追加",
+  "UploadFiles": "ファイルのアップロード",
+  "UploadFolder": "フォルダのアップロード"
 }

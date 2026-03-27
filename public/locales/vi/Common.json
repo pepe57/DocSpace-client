@@ -1066,5 +1066,8 @@
   "SystemThemeDescription": "Tự động chuyển đổi giữa các chế độ sáng và tối khi hệ thống của bạn hoạt động.",
   "OriginalCopy": "Lưu cả bản sao của tệp ở định dạng gốc",
   "TrashMoveConfirmation": "Hiển thị thông báo khi di chuyển các mục đến {{sectionName}}",
-  "DisplayFileExtension": "Hiển thị phần mở rộng tập tin bên cạnh tên tập tin"
+  "DisplayFileExtension": "Hiển thị phần mở rộng tập tin bên cạnh tên tập tin",
+  "MarkedAsFavorite": "Đã thêm vào mục yêu thích",
+  "UploadFiles": "Tải tệp lên",
+  "UploadFolder": "Tải thư mục lên"
 }
