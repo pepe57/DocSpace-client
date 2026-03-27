@@ -34,7 +34,8 @@ import {
 } from "../api/settings";
 
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
-import { EmployeeType, PortalFeaturesLimitations } from "../enums";
+import { EmployeeType } from "../enums";
+import { PortalFeaturesLimitations } from "@docspace/ui-kit/enums";
 import api from "../api";
 import {
   TPaymentFeature,
