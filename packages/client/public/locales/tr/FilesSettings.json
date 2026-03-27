@@ -1,7 +1,4 @@
 {
   "CancellaionNotification": "İptal bildirimini bir daha gösterme",
-  "DisplayFileExtension": "Dosya adının yanında dosya uzantısını görüntüle",
-  "OpenSameTab": "Aynı sekmede {{organizationName}} düzenleyicisini açın",
-  "OriginalCopy": "Dosya kopyasını da orijinal türünde kaydet",
-  "TrashMoveConfirmation": "{{sectionName}}'e öğe taşırken bildirim göster"
+  "OpenSameTab": "Aynı sekmede {{organizationName}} düzenleyicisini açın"
 }

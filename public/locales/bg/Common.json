@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "Имате незапазени промени",
   "YourCurrentDomain": "Вашият текущ домейн",
   "YourLogo": "Вашето лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "MarkAsFavorite": "Маркирай като любим",
+  "RemoveFromFavorites": "Премахни от любими",
+  "RemovedFromFavorites": "Премахнат от любими",
+  "FileManagement": "Управление на файлове",
+  "InterfaceTheme": "Тема на интерфейса",
+  "SystemTheme": "Използвайте системна тема",
+  "SystemThemeDescription": "Автоматично превключване между светли и тъмни теми, в съответствие със системата ви.",
+  "OriginalCopy": "Запази копието на файла и в оригиналния формат",
+  "TrashMoveConfirmation": "Показвай известие при преместване на елементи в {{sectionName}}",
+  "DisplayFileExtension": "Покажи файловото разширение до името на файла"
 }

@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "您有未保存的变更",
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
-  "YourTurn": "轮到您了"
+  "YourTurn": "轮到您了",
+  "MarkAsFavorite": "标记为收藏",
+  "RemoveFromFavorites": "从收藏中移除",
+  "RemovedFromFavorites": "已从收藏中删除",
+  "FileManagement": "文件管理",
+  "InterfaceTheme": "界面主题",
+  "SystemTheme": "使用系统主题",
+  "SystemThemeDescription": "根据系统状态切换浅色和深色主题。",
+  "OriginalCopy": "以原始格式保存文件副本",
+  "TrashMoveConfirmation": "将项目移至{{sectionName}}时显示通知",
+  "DisplayFileExtension": "在文件名称旁显示文件扩展名"
 }

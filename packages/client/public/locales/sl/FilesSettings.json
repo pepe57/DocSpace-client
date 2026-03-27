@@ -1,7 +1,4 @@
 {
   "CancellaionNotification": "Ne prikaži več obvestila o preklicu",
-  "DisplayFileExtension": "Prikaži pripono datoteke poleg imena datoteke",
-  "OpenSameTab": "Odpri urejevalnik {{organizationName}} v istem zavihku",
-  "OriginalCopy": "Kopijo datoteke shranite tudi v izvirni obliki",
-  "TrashMoveConfirmation": "Prikaži obvestilo ob premiku elementov v {{sectionName}}."
+  "OpenSameTab": "Odpri urejevalnik {{organizationName}} v istem zavihku"
 }

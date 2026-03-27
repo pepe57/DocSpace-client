@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej"
+  "YourTurn": "Twoja kolej",
+  "MarkAsFavorite": "Dodaj do ulubionych",
+  "RemoveFromFavorites": "Usuń z ulubionych",
+  "RemovedFromFavorites": "Usunięto z ulubionych",
+  "FileManagement": "Zarządzanie plikami",
+  "InterfaceTheme": "Motyw interfejsu",
+  "SystemTheme": "Użyj motywu systemowego",
+  "SystemThemeDescription": "Automatycznie przełączaj się między jasnym i ciemnym motywem, kiedy robi to Twój system.",
+  "OriginalCopy": "Zapisuj również kopię pliku w oryginalnym formacie",
+  "TrashMoveConfirmation": "Wyświetlaj powiadomienie przy przenoszeniu elementów do {{sectionName}}",
+  "DisplayFileExtension": "Wyświetlaj rozszerzenie pliku obok nazwy pliku"
 }

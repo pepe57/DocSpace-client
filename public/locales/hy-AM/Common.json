@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "Դուք չպահված փոփոխություններ ունեք",
   "YourCurrentDomain": "Ձեր ընթացիկ տիրույթը",
   "YourLogo": "Ձեր լոգոն",
-  "YourTurn": "Ձեր հերթն է"
+  "YourTurn": "Ձեր հերթն է",
+  "MarkAsFavorite": "Նշել որպես ընտրյալ",
+  "RemoveFromFavorites": "Հեռացնել ընտրյալներից",
+  "RemovedFromFavorites": "Հեռացված է ընտրյալներից",
+  "FileManagement": "Ֆայլերի կառավարում",
+  "InterfaceTheme": "Միջերեսի ոճ",
+  "SystemTheme": "Օգտագործեք համակարգի ոճը",
+  "SystemThemeDescription": "Ավտոմատ կերպով անցեք բաց և մուգ ոճերի միջև, երբ ձեր համակարգը դա անում է:",
+  "OriginalCopy": "Պահպանել ֆայլի պատճենը նաև բնօրինակ ձևաչափով",
+  "TrashMoveConfirmation": "Ցուցադրել ծանուցումը՝ տարրերը {{sectionName}} տեղափոխելիս",
+  "DisplayFileExtension": "Ցուցադրել ֆայլի ընդլայնումը ֆայլի անվան կողքին"
 }

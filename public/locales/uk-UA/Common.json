@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "У вас є незбережені зміни",
   "YourCurrentDomain": "Ваш поточний домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша черга"
+  "YourTurn": "Ваша черга",
+  "MarkAsFavorite": "Додати до вподобань",
+  "RemoveFromFavorites": "Видалити з вподобань",
+  "RemovedFromFavorites": "Видалено з вподобань",
+  "FileManagement": "Керування файлами",
+  "InterfaceTheme": "Тема інтерфейсу",
+  "SystemTheme": "Використовувати системну тему",
+  "SystemThemeDescription": "Автоматично перемикайтеся між світлою та темною темами, коли це робить ваша система.",
+  "OriginalCopy": "Також зберігати копію файлу в оригінальному форматі",
+  "TrashMoveConfirmation": "Показувати сповіщення при переміщенні елементів до {{sectionName}}",
+  "DisplayFileExtension": "Показувати розширення файлу поряд з ім'ям файлу"
 }

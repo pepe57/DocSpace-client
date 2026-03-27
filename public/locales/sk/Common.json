@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "Máte neuložené zmeny",
   "YourCurrentDomain": "Vaša aktuálna doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Ste na rade"
+  "YourTurn": "Ste na rade",
+  "MarkAsFavorite": "Označiť ako obľúbené",
+  "RemoveFromFavorites": "Odstrániť z obľúbených",
+  "RemovedFromFavorites": "Odstránené z obľúbených",
+  "FileManagement": "Spravovanie súborov",
+  "InterfaceTheme": "Vzhľad prostredia",
+  "SystemTheme": "Použiť tému systému",
+  "SystemThemeDescription": "Prepínajte medzi svetlými a tmavými témami automaticky, keď tak urobí váš systém.",
+  "OriginalCopy": "Uložte kópiu súboru aj v pôvodnom formáte",
+  "TrashMoveConfirmation": "Zobraziť upozornenie pri presúvaní položiek do {{sectionName}}",
+  "DisplayFileExtension": "Zobrazenie prípony súboru vedľa jeho názvu"
 }

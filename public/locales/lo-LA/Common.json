@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "ທ່ານມີການປ່ຽນແປງທີ່ຍັງບໍ່ໄດ້ບັນທຶກ",
   "YourCurrentDomain": "ໂດເມນປັດຈຸບັນຂອງທ່ານ",
   "YourLogo": "ໂລໂກ້ຂອງທ່ານ",
-  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ"
+  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
+  "MarkAsFavorite": "ຫມາຍດາວເອກະສານ",
+  "RemoveFromFavorites": "ລຶບອອກຈາກລາຍການທີ່ມັກ",
+  "RemovedFromFavorites": "ລຶບອອກຈາກລາຍການທີ່ມັກແລ້ວ",
+  "FileManagement": "ການຈັດການໄຟລ໌",
+  "InterfaceTheme": "ການໂຕ້ຕອບ ຫົວ​ຂໍ້",
+  "SystemTheme": "ໃຊ້ ລະບົບ ຫົວຂໍ້",
+  "SystemThemeDescription": "ສະຫຼັບລະຫວ່າງຮູບແບບສີສັນແຈ້ງ ແລະມືດໂດຍອັດຕະໂນມັດເມື່ອລະບົບຂອງເຈົ້າປ່ຽນ.",
+  "OriginalCopy": "ບັນທຶກໄຟລ໌ສຳເນົາໄວ້ໃນຮູບແບບຕົ້ນສະບັບເຊັ່ນດຽວກັນ",
+  "TrashMoveConfirmation": "ສະແດງການແຈ້ງເຕືອນເມື່ອຍ້າຍລາຍການໄປ {{sectionName}}",
+  "DisplayFileExtension": "ສະແດງນາມສະກຸນໄຟລ໌ຕໍ່ໄປກັບຊື່ໄຟລ໌"
 }

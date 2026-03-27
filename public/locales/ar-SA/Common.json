@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "لقد قمت بعدم حفظ التغييرات",
   "YourCurrentDomain": "النطاق الحالي الخاص بك",
   "YourLogo": "شعاركم",
-  "YourTurn": "دوركم الآن"
+  "YourTurn": "دوركم الآن",
+  "MarkAsFavorite": "وضع علامة كمفضلة",
+  "RemoveFromFavorites": "قم بإزالته من المفضلة",
+  "RemovedFromFavorites": "تمت إزالته من المفضلة",
+  "FileManagement": "إدارة الملف",
+  "InterfaceTheme": "واجهة المستخدم",
+  "SystemTheme": "استخدم قالب النظام",
+  "SystemThemeDescription": "قم بالتبديل تلقائيًا بين القوالب الفاتحة والداكنة عندما يقوم نظامك بذلك.",
+  "OriginalCopy": "احفظ نسخة الملف بالتنسيق الأصلي أيضًا",
+  "TrashMoveConfirmation": "عرض إشعار عند نقل العناصر إلى {{sectionName}}",
+  "DisplayFileExtension": "عرض امتداد الملف بجوار اسم الملف"
 }

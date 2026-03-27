@@ -1202,5 +1202,15 @@
   "YourFurtherEditsNotSaved": "Your further edits may not be saved.",
   "YourLogo": "Your logo",
   "YourTurn": "Your turn",
-  "RoomTags": "<bold>{{roomName}}</bold> room tags"
+  "RoomTags": "<bold>{{roomName}}</bold> room tags",
+  "MarkAsFavorite": "Mark as favorite",
+  "RemoveFromFavorites": "Remove from favorites",
+  "RemovedFromFavorites": "Removed from favorites",
+  "FileManagement": "File management",
+  "InterfaceTheme": "Interface theme",
+  "SystemTheme": "Use system theme",
+  "SystemThemeDescription": "Automatically switch between light and dark themes when your system does.",
+  "OriginalCopy": "Save the file copy in the original format as well",
+  "TrashMoveConfirmation": "Display notification when moving items to {{sectionName}}",
+  "DisplayFileExtension": "Display file extension next to file name"
 }

@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
-  "YourTurn": "Sizin növbəniz"
+  "YourTurn": "Sizin növbəniz",
+  "MarkAsFavorite": "Favorit kimi işarələ",
+  "RemoveFromFavorites": "Favoritlərdən sil",
+  "RemovedFromFavorites": "Favoritlərdən sil",
+  "FileManagement": "Fayl idarəetməsi",
+  "InterfaceTheme": "İnterfeys mövzusu",
+  "SystemTheme": "Sistem temasından istifadə edin",
+  "SystemThemeDescription": "Sisteminiz bunu etdikdə açıq və qaranlıq temalar arasında avtomatik keçid edin.",
+  "OriginalCopy": "Faylın nüsxəsini orijinal formatda da yadda saxla",
+  "TrashMoveConfirmation": "{{sectionName}} bölməsinə əşyaları köçürdükdə bildiriş göstər",
+  "DisplayFileExtension": "Fayl adının yanında fayl uzantısını göstərin"
 }

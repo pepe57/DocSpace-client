@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "저장하지 않은 변경 사항이 있습니다",
   "YourCurrentDomain": "내 현재 도메인",
   "YourLogo": "로고",
-  "YourTurn": "고객님의 차례입니다"
+  "YourTurn": "고객님의 차례입니다",
+  "MarkAsFavorite": "즐겨 찾기로 표시",
+  "RemoveFromFavorites": "즐겨 찾기에서 제거",
+  "RemovedFromFavorites": "즐겨 찾기에서 제거되었습니다",
+  "FileManagement": "파일 관리",
+  "InterfaceTheme": "인터페이스 테마",
+  "SystemTheme": "시스템 테마 사용",
+  "SystemThemeDescription": "시스템이 전환할 때 라이트 테마와 다크 테마 간이 자동으로 전환됩니다.",
+  "OriginalCopy": "파일 복사본을 원본 형식으로도 저장",
+  "TrashMoveConfirmation": "{{sectionName}}으로 아이템을 이동할 때 알림 표시",
+  "DisplayFileExtension": "파일 이름 옆에 파일 확장자를 표시하세요"
 }

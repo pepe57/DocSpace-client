@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
-  "YourTurn": "Vi ste na vrsti"
+  "YourTurn": "Vi ste na vrsti",
+  "MarkAsFavorite": "Označi kot priljubljeno",
+  "RemoveFromFavorites": "Odstrani iz priljubljenih",
+  "RemovedFromFavorites": "Odstranjeno iz priljubljenih",
+  "FileManagement": "Upravljanje datotek",
+  "InterfaceTheme": "Tema vmesnika",
+  "SystemTheme": "Uporabi sistemsko temo",
+  "SystemThemeDescription": "Samodejno preklapljajte med svetlimi in temnimi temami, ko to počne vaš sistem.",
+  "OriginalCopy": "Kopijo datoteke shranite tudi v izvirni obliki",
+  "TrashMoveConfirmation": "Prikaži obvestilo ob premiku elementov v {{sectionName}}.",
+  "DisplayFileExtension": "Prikaži pripono datoteke poleg imena datoteke"
 }

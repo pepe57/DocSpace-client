@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "MarkAsFavorite": "Đánh dấu là yêu thích",
+  "RemoveFromFavorites": "Xóa khỏi danh sách yêu thích",
+  "RemovedFromFavorites": "Đã xóa khỏi mục yêu thích",
+  "FileManagement": "Quản lý tập tin",
+  "InterfaceTheme": "Chủ đề giao diện\"",
+  "SystemTheme": "Sử dụng chủ đề hệ thống",
+  "SystemThemeDescription": "Tự động chuyển đổi giữa các chế độ sáng và tối khi hệ thống của bạn hoạt động.",
+  "OriginalCopy": "Lưu cả bản sao của tệp ở định dạng gốc",
+  "TrashMoveConfirmation": "Hiển thị thông báo khi di chuyển các mục đến {{sectionName}}",
+  "DisplayFileExtension": "Hiển thị phần mở rộng tập tin bên cạnh tên tập tin"
 }

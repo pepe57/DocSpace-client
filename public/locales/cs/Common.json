@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "Máte neuložené změny",
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Jste na řadě"
+  "YourTurn": "Jste na řadě",
+  "MarkAsFavorite": "Označit jako oblíbené",
+  "RemoveFromFavorites": "Odebrat z oblíbených",
+  "RemovedFromFavorites": "Odstraněno z oblíbených položek",
+  "FileManagement": "Správa souborů",
+  "InterfaceTheme": "Vzhled prostředí",
+  "SystemTheme": "Použít systémový motiv",
+  "SystemThemeDescription": "Automatické přepínání mezi světlými a tmavými motivy v souladu s vaším systémem.",
+  "OriginalCopy": "Uložit kopii souboru i v původním formátu",
+  "TrashMoveConfirmation": "Zobrazit upozornění při přesouvání položek do {{sectionName}}",
+  "DisplayFileExtension": "Zobrazení přípony souboru vedle názvu souboru"
 }

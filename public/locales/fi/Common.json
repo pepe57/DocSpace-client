@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi"
+  "YourTurn": "Sinun vuorosi",
+  "MarkAsFavorite": "Merkitse suosikiksi",
+  "RemoveFromFavorites": "Poista suosikeista",
+  "RemovedFromFavorites": "Poistettu suosikeista",
+  "FileManagement": "Tiedostojen hallinta",
+  "InterfaceTheme": "Käyttöliittymän teema",
+  "SystemTheme": "Käytä järjestelmän teemaa",
+  "SystemThemeDescription": "Vaihda automaattisesti vaalean ja tumman teeman välillä, kun systeemisi tekee niin.",
+  "OriginalCopy": "Tallenna kopio tiedostosta myös alkuperäisessä muodossa",
+  "TrashMoveConfirmation": "Näytä ilmoitus, kun siirretään kohteita {{sectionName}}-osioon",
+  "DisplayFileExtension": "Näytä tiedostopääte tiedostonimen perässä "
 }

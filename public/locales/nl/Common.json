@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
-  "YourTurn": "Uw beurt"
+  "YourTurn": "Uw beurt",
+  "MarkAsFavorite": "Markeer als favoriet",
+  "RemoveFromFavorites": "Verwijderd uit favorieten",
+  "RemovedFromFavorites": "Verwijderd uit favorieten",
+  "FileManagement": "Bestandsbeheer",
+  "InterfaceTheme": "Interface thema",
+  "SystemTheme": "Gebruik systeemthema",
+  "SystemThemeDescription": "Schakelt automatisch tussen lichte en donkere thema's wanneer uw systeem dat doet.",
+  "OriginalCopy": "Bewaar de bestandskopie ook in het oorspronkelijke formaat",
+  "TrashMoveConfirmation": "Toon melding bij het verplaatsen van items naar {{sectionName}}",
+  "DisplayFileExtension": "Bestandsextensie naast bestandsnaam weergeven"
 }

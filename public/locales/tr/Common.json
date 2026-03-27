@@ -1056,5 +1056,15 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "MarkAsFavorite": "Favori olarak işaretle",
+  "RemoveFromFavorites": "Favorilerden kaldır",
+  "RemovedFromFavorites": "Favorilerden kaldırıldı",
+  "FileManagement": "Dosya yönetimi",
+  "InterfaceTheme": "Arayüz teması",
+  "SystemTheme": "Sistem temasını kullan",
+  "SystemThemeDescription": "Sisteminiz geçiş yaptığında açık ve koyu temalar arasında otomatik olarak geçiş yapın.",
+  "OriginalCopy": "Dosya kopyasını da orijinal türünde kaydet",
+  "TrashMoveConfirmation": "{{sectionName}}'e öğe taşırken bildirim göster",
+  "DisplayFileExtension": "Dosya adının yanında dosya uzantısını görüntüle"
 }
