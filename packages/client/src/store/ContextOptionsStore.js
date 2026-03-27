@@ -1178,6 +1178,7 @@ class ContextOptionsStore {
             label: value.label,
             icon: value.icon,
             onClick,
+            placement: value.placement,
           };
 
           const processedItems = [];
@@ -2841,24 +2842,26 @@ class ContextOptionsStore {
 
     if (pluginItems.length > 0) {
       const pluginKeys = pluginItems.map((p) => p.key);
-      const ungroupedPlugins = resultOptions.filter((o) =>
-        pluginKeys.includes(o.key),
-      );
 
-      if (ungroupedPlugins.length > 0) {
-        for (let i = resultOptions.length - 1; i >= 0; i--) {
-          if (pluginKeys.includes(resultOptions[i].key))
-            resultOptions.splice(i, 1);
-        }
+      // Remove all plugin items from resultOptions first
+      for (let i = resultOptions.length - 1; i >= 0; i--) {
+        if (pluginKeys.includes(resultOptions[i].key))
+          resultOptions.splice(i, 1);
+      }
 
+      const defaultPlugins = pluginItems.filter((p) => !p.placement);
+
+      // default — existing "more-options" logic unchanged
+      if (defaultPlugins.length > 0) {
         const moreOptionsGroup =
           resultOptions.find((o) => o.key === "more-options") ||
           resultOptions.find((o) => o.key === "info");
         if (moreOptionsGroup) {
-          moreOptionsGroup.items.push(
-            { key: "separator-before-plugins", isSeparator: true },
-          );
-          ungroupedPlugins.forEach((p) => moreOptionsGroup.items.push(p));
+          moreOptionsGroup.items.push({
+            key: "separator-before-plugins",
+            isSeparator: true,
+          });
+          defaultPlugins.forEach((p) => moreOptionsGroup.items.push(p));
         } else {
           const externalLinkIdx = resultOptions.findIndex(
             (o) => o.key === "external-link",
@@ -2875,7 +2878,7 @@ class ContextOptionsStore {
             key: "more-options",
             label: t("Common:MoreOptions"),
             icon: DotsHorizontalUrl,
-            items: ungroupedPlugins,
+            items: defaultPlugins,
           });
         }
       }
@@ -2935,6 +2938,7 @@ class ContextOptionsStore {
 
       groups.forEach((group) => {
         const groupItems = [];
+
         group.forEach((key) => {
           const option = items.find((opt) => opt.key === key);
           if (option) groupItems.push(option);
@@ -2972,6 +2976,21 @@ class ContextOptionsStore {
             });
           }
           result.push(option);
+        }
+      });
+
+      // Insert plugin items according to their placement
+      const placementPlugins = pluginItems.filter((p) => p.placement);
+
+      placementPlugins.forEach((option) => {
+        if (option.placement === "top") {
+          result.splice(0, 0, option);
+        }
+
+        if (option.placement === "topLast") {
+          const firstSepIdx = result.findIndex((o) => o.isSeparator);
+          const insertAt = firstSepIdx !== -1 ? firstSepIdx : result.length;
+          result.splice(insertAt, 0, option);
         }
       });
 
@@ -3629,7 +3648,6 @@ class ContextOptionsStore {
             uploadFiles,
             showUploadFolder ? uploadFolder : null,
           ];
-
     if (
       !isAIAgents() &&
       mainButtonItemsList &&
@@ -3658,7 +3676,6 @@ class ContextOptionsStore {
 
     return options;
   };
-
   getModel = (item, t) => {
     const { selection } = this.filesStore;
 
@@ -3676,3 +3693,4 @@ class ContextOptionsStore {
 }
 
 export default ContextOptionsStore;
+
