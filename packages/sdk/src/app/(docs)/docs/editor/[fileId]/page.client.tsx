@@ -28,7 +28,6 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { useTranslation } from "react-i18next";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
@@ -40,7 +39,6 @@ type EditorPageProps = {
 };
 
 export default function EditorPage({ fileId }: EditorPageProps) {
-  const { t } = useTranslation(["Common"]);
   const router = useRouter();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const [isReady, setIsReady] = React.useState(false);
