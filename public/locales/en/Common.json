@@ -622,8 +622,6 @@
   "LibraryTemplateFormat": "Format",
   "LibraryTemplateSize": "Size",
   "LibraryTemplateLastRevision": "Last revision",
-  "LibraryTemplatePage": "{{count}} page",
-  "LibraryTemplatePage_plural": "{{count}} pages",
   "LibraryTemplateAbout": "About this template",
   "LibraryTemplateAboutText": "This is a ready-made form template that you can use as a starting point for your document. Pick it, customize the fields to match your needs, then share it for filling. Completed forms are saved to My Forms where you can review, download, or process them with AI agents.",
   "LibraryTemplateHowTo": "How to use this template",

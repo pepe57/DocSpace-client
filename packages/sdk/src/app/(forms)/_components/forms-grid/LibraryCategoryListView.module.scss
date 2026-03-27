@@ -20,7 +20,7 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background-color: var(--color-primary, #4781d1);
+    background-color: var(--color-scheme-main-accent, rgb(71, 129, 209));
   }
 }
 
@@ -28,7 +28,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  color: var(--color-primary, #4781d1);
+  color: var(--color-scheme-main-accent, rgb(71, 129, 209));
   text-decoration: none;
 
   &:hover {

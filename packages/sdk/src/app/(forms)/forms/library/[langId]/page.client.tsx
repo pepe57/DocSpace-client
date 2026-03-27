@@ -31,7 +31,7 @@ import { useRouter } from "next/navigation";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import type { TFolder } from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { useLibraryParams } from "../../../_hooks/useLibraryParams";
 import useLibraryLandingData from "../../../_hooks/useLibraryLandingData";
@@ -111,7 +111,7 @@ const LibraryLandingRoute = () => {
   }, [langId]);
 
   const handleClickItem = useCallback(
-    (item: { type: string; original: TFolder | any; id: number | string }, category: TFolder) => {
+    (item: { type: string; original: TFile | TFolder; id: number | string }, category: TFolder) => {
       if (item.type === "file") {
         // File: open template detail directly
         router.push(
@@ -150,6 +150,9 @@ const LibraryLandingRoute = () => {
       totalTemplatesCount={totalTemplatesCount}
       countriesCount={countriesCount}
       language={language}
+      langId={langId}
+      roomId={roomId}
+      libraryId={libraryId}
       onClickItem={handleClickItem}
     />
   );

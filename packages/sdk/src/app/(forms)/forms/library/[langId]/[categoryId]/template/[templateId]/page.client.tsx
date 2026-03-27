@@ -240,15 +240,15 @@ const LibraryTemplateRoute = () => {
       <div className={styles.content}>
         <div className={styles.leftColumn}>
           <div className={styles.preview}>
-            {blobThumbnail ? (
-              <img
-                className={styles.thumbnail}
-                src={blobThumbnail}
-                alt={title}
-                draggable={false}
-              />
-            ) : (
-              <div className={styles.thumbnailPlaceholder} />
+            {blobThumbnail
+              ? // biome-ignore lint/performance/noImgElement: blob URL not supported by next/image
+                (<img
+                  className={styles.thumbnail}
+                  src={blobThumbnail}
+                  alt={title}
+                  draggable={false}
+                />)
+              : (<div className={styles.thumbnailPlaceholder} />
             )}
           </div>
 

@@ -72,6 +72,7 @@ const LibraryCountryList = ({
 
   return (
     <div className={styles.root}>
+      {/* biome-ignore lint/performance/noImgElement: static SVG via ?url import */}
       <img
         className={styles.mapImage}
         src={WorldMapUrl}
@@ -94,16 +95,16 @@ const LibraryCountryList = ({
               role="button"
               tabIndex={0}
             >
-              {flagUrl ? (
-                <img
-                  className={styles.flagIcon}
-                  src={flagUrl}
-                  alt=""
-                  draggable={false}
-                />
-              ) : (
-                <div className={styles.flagIcon} />
-              )}
+              {flagUrl
+                ? // biome-ignore lint/performance/noImgElement: static SVG flag icon
+                  (<img
+                    className={styles.flagIcon}
+                    src={flagUrl}
+                    alt=""
+                    draggable={false}
+                  />)
+                : (<div className={styles.flagIcon} />)
+              }
               <span className={styles.countryName}>{folder.title}</span>
             </div>
           );

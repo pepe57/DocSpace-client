@@ -64,7 +64,8 @@ export default function useLibraryLandingData(folders: TFolder[]) {
       folders.map((folder) => ({ folder, items: [], isLoading: true })),
     );
 
-    folders.forEach(async (folder, idx) => {
+    for (const [idx, folder] of folders.entries()) {
+      void (async () => {
       try {
         const filter = FilesFilter.getDefault();
         filter.page = 0;
@@ -110,7 +111,8 @@ export default function useLibraryLandingData(folders: TFolder[]) {
           ),
         );
       }
-    });
+      })();
+    }
 
     return () => controller.abort();
   }, [folderIds]); // eslint-disable-line react-hooks/exhaustive-deps

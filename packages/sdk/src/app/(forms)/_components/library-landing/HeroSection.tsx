@@ -31,14 +31,24 @@ import { useTranslation } from "react-i18next";
 
 import HeroIllustrationUrl from "PUBLIC_DIR/images/library-hero.react.svg?url";
 
+import HeroSearchBar from "./HeroSearchBar";
 import styles from "./LibraryLanding.module.scss";
 
 type HeroSectionProps = {
   templatesCount: number;
   language: string;
+  langId: number | null;
+  roomId?: string;
+  libraryId?: string;
 };
 
-const HeroSection = ({ templatesCount, language }: HeroSectionProps) => {
+const HeroSection = ({
+  templatesCount,
+  language,
+  langId,
+  roomId,
+  libraryId,
+}: HeroSectionProps) => {
   const { t } = useTranslation("Common");
 
   const steps = [
@@ -63,7 +73,10 @@ const HeroSection = ({ templatesCount, language }: HeroSectionProps) => {
         {t("Common:LibraryHeroDescription")}
       </p>
 
+      <HeroSearchBar langId={langId} roomId={roomId} libraryId={libraryId} />
+
       <div className={styles.heroContent}>
+        {/* biome-ignore lint/performance/noImgElement: static SVG via ?url import */}
         <img
           className={styles.heroIllustration}
           src={HeroIllustrationUrl}

@@ -42,6 +42,9 @@ type LibraryLandingPageProps = {
   totalTemplatesCount: number;
   countriesCount: number;
   language: string;
+  langId: number | null;
+  roomId?: string;
+  libraryId?: string;
   onClickItem: (item: CategoryItem, category: TFolder) => void;
 };
 
@@ -51,11 +54,20 @@ const LibraryLandingPage = ({
   totalTemplatesCount,
   countriesCount,
   language,
+  langId,
+  roomId,
+  libraryId,
   onClickItem,
 }: LibraryLandingPageProps) => {
   return (
     <div className={styles.root}>
-      <HeroSection templatesCount={totalTemplatesCount} language={language} />
+      <HeroSection
+        templatesCount={totalTemplatesCount}
+        language={language}
+        langId={langId}
+        roomId={roomId}
+        libraryId={libraryId}
+      />
 
       <StatsBar
         templatesCount={totalTemplatesCount}

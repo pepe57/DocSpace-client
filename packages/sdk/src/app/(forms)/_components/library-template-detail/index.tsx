@@ -56,7 +56,6 @@ const LibraryTemplateDetail = () => {
   const { roomId, libraryId } = useFormsSettingsStore();
 
   const template = libraryNav.selectedTemplate;
-  const category = libraryNav.selectedCategory;
   const templateIsFile = isFile(template);
 
   const [isCopying, setIsCopying] = useState(false);
@@ -158,16 +157,16 @@ const LibraryTemplateDetail = () => {
         {/* Left column: preview + how it works */}
         <div className={styles.leftColumn}>
           <div className={styles.preview}>
-            {blobThumbnail ? (
-              <img
-                className={styles.thumbnail}
-                src={blobThumbnail}
-                alt={title}
-                draggable={false}
-              />
-            ) : (
-              <div className={styles.thumbnailPlaceholder} />
-            )}
+            {blobThumbnail
+              ? // biome-ignore lint/performance/noImgElement: blob URL not supported by next/image
+                (<img
+                  className={styles.thumbnail}
+                  src={blobThumbnail}
+                  alt={title}
+                  draggable={false}
+                />)
+              : (<div className={styles.thumbnailPlaceholder} />)
+            }
           </div>
 
           <div className={styles.howItWorks}>
