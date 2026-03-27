@@ -44,6 +44,8 @@ import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useLibraryNavigationStore } from "../../_store/LibraryNavigationStore";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
 import FormsEmpty from "../forms-empty";
+import LibraryLandingPage from "../library-landing";
+import LibraryTemplateDetail from "../library-template-detail";
 import FormsTile from "./FormsTile";
 import LibraryCountryList from "./LibraryCountryList";
 import LibraryTemplateTile from "./LibraryTemplateTile";
@@ -170,20 +172,12 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     );
   }
 
+  if (isLibrary && libraryNav.selectedTemplate) {
+    return <LibraryTemplateDetail />;
+  }
+
   if (isLibraryFolderLevel && hasFolders) {
-    return (
-      <div className={styles.foldersGrid}>
-        {folders.map((folder) => (
-          <SubFolderTile
-            key={`folder_${folder.id}`}
-            folder={folder}
-            getIcon={getIcon}
-            onOpenFolder={libraryNav.openSubFolder}
-            contextOptions={[]}
-          />
-        ))}
-      </div>
-    );
+    return <LibraryLandingPage folders={folders} />;
   }
 
   if (((isCompletedRoot || isInProgressRoot) || !hasItems) && hasFolders) {

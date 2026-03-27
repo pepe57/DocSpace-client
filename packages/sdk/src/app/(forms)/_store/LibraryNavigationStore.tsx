@@ -29,22 +29,47 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import type { TFolder } from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 class LibraryNavigationStore {
   /** Level 0 selection: the language/country folder */
   languageFolder: TFolder | null = null;
   /** Breadcrumb trail of subfolders after the language (arbitrary depth) */
   folderPath: TFolder[] = [];
+  /** Total number of language/country folders at root level */
+  countriesCount = 0;
+  /** Currently selected template for detail view */
+  selectedTemplate: TFile | null = null;
+  /** Category folder of the selected template */
+  selectedCategory: TFolder | null = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
+  /** Store the total number of language folders (called once at Level 0) */
+  setCountriesCount = (count: number) => {
+    this.countriesCount = count;
+  };
+
+  /** Select a template for the detail view */
+  selectTemplate = (file: TFile, category: TFolder) => {
+    this.selectedTemplate = file;
+    this.selectedCategory = category;
+  };
+
+  /** Clear the selected template, return to landing */
+  clearTemplate = () => {
+    this.selectedTemplate = null;
+    this.selectedCategory = null;
+  };
+
   /** Select a language at Level 0 */
   openLanguageFolder = (folder: TFolder) => {
     this.languageFolder = folder;
     this.folderPath = [];
+    this.selectedTemplate = null;
+    this.selectedCategory = null;
   };
 
   /** Navigate into a subfolder (any depth) */
@@ -54,6 +79,11 @@ class LibraryNavigationStore {
 
   /** Go back one level */
   goBack = () => {
+    if (this.selectedTemplate) {
+      this.selectedTemplate = null;
+      this.selectedCategory = null;
+      return;
+    }
     if (this.folderPath.length > 0) {
       this.folderPath = this.folderPath.slice(0, -1);
     } else {
@@ -85,6 +115,8 @@ class LibraryNavigationStore {
   reset = () => {
     this.languageFolder = null;
     this.folderPath = [];
+    this.selectedTemplate = null;
+    this.selectedCategory = null;
   };
 
   /** 0 = language selection, 1+ = inside language folder tree */

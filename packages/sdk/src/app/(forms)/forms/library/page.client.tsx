@@ -46,22 +46,34 @@ const LibraryPage = () => {
   }, [libraryNav.languageFolder, libraryNav.folderPath.length]);
 
   const prevDepthRef = React.useRef(0);
+  const prevHadTemplateRef = React.useRef(false);
   React.useEffect(() => {
     const depth = libraryNav.depth;
     const prevDepth = prevDepthRef.current;
+    const hasTemplate = !!libraryNav.selectedTemplate;
+    const hadTemplate = prevHadTemplateRef.current;
     prevDepthRef.current = depth;
+    prevHadTemplateRef.current = hasTemplate;
 
     if (depth > 0 && prevDepth === 0) {
+      history.pushState({ libraryTrap: true }, "", window.location.href);
+    }
+
+    if (hasTemplate && !hadTemplate) {
       history.pushState({ libraryTrap: true }, "", window.location.href);
     }
 
     if (depth === 0) return;
 
     const handlePopState = () => {
-      if (libraryNav.depth > 1) {
+      const hadTemplate = !!libraryNav.selectedTemplate;
+      libraryNav.goBack();
+
+      // Re-push trap if we're still inside the library after going back
+      // (depth > 0 after goBack, or we just cleared a template but stayed at depth 1)
+      if (libraryNav.depth > 0 && (libraryNav.depth > 1 || hadTemplate)) {
         history.pushState({ libraryTrap: true }, "", window.location.href);
       }
-      libraryNav.goBack();
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -69,7 +81,7 @@ const LibraryPage = () => {
     return () => {
       window.removeEventListener("popstate", handlePopState);
     };
-  }, [libraryNav.depth, libraryNav]);
+  }, [libraryNav.depth, libraryNav.selectedTemplate, libraryNav]);
 
   return (
     <FormsGrid

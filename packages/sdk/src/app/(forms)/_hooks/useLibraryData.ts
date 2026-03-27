@@ -109,6 +109,9 @@ export default function useLibraryData() {
       if (controller.signal.aborted) return;
 
       if (res.folders.length > 0) {
+        if (libraryNav.isLanguageLevel) {
+          libraryNav.setCountriesCount(res.folders.length);
+        }
         formsListStore.setFolders(res.folders);
         formsListStore.setItems([], 0);
       } else if (res.files.length > 0) {
