@@ -108,12 +108,12 @@ const InterfaceTheme = observer(() => {
         <Checkbox
           className={styles.systemThemeCheckbox}
           value={ThemeKeys.SystemStr}
-          label={t("Profile:SystemTheme")}
+          label={t("Common:SystemTheme")}
           isChecked={isSystemTheme}
           onChange={onChangeSystemTheme}
         />
         <Text as="div" className={styles.systemThemeDescription}>
-          {t("Profile:SystemThemeDescription")}
+          {t("Common:SystemThemeDescription")}
         </Text>
       </div>
       <RadioButtonGroup

@@ -53,7 +53,7 @@ const Settings = () => {
       },
       {
         id: "interface-theme",
-        name: t("Profile:InterfaceTheme"),
+        name: t("Common:InterfaceTheme"),
         content: <InterfaceTheme />,
       },
     ],

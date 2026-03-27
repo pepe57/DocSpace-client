@@ -45,7 +45,7 @@ import { useDocsSettingsStore } from "../../../_store/DocsSettingsStore";
 import styles from "./FileManagement.module.scss";
 
 const FileManagement = observer(() => {
-  const { t } = useTranslation(["FilesSettings", "Common"]);
+  const { t } = useTranslation("Common");
   const docsSettingsStore = useDocsSettingsStore();
   const settings = docsSettingsStore.filesSettings;
 

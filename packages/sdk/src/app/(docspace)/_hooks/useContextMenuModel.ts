@@ -206,7 +206,7 @@ export default function useContextMenuModel({
       return {
         id: "option_mark-as-favorite",
         key: "mark-as-favorite",
-        label: t("Files:MarkAsFavorite"),
+        label: t("Common:MarkAsFavorite"),
         icon: FavoritesReactSvgUrl,
         onClick: () => markAsFavorite(i),
         disabled: false,
