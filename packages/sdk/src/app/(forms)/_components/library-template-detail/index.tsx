@@ -45,20 +45,25 @@ import { useLibraryNavigationStore } from "../../_store/LibraryNavigationStore";
 
 import styles from "./LibraryTemplateDetail.module.scss";
 
+const isFile = (item: unknown): item is TFile =>
+  !!item && typeof item === "object" && "fileExst" in item;
+
 const LibraryTemplateDetail = () => {
   const { t } = useTranslation("Common");
   const router = useRouter();
   const libraryNav = useLibraryNavigationStore();
   const { roomId, libraryId } = useFormsSettingsStore();
 
-  const file = libraryNav.selectedTemplate;
+  const template = libraryNav.selectedTemplate;
   const category = libraryNav.selectedCategory;
+  const templateIsFile = isFile(template);
 
   const [isCopying, setIsCopying] = useState(false);
 
-  const thumbUrl = file?.thumbnailUrl
-    ? file.thumbnailUrl.replace(/^https?:\/\/[^/]+/, "")
-    : "";
+  const thumbUrl =
+    templateIsFile && template.thumbnailUrl
+      ? template.thumbnailUrl.replace(/^https?:\/\/[^/]+/, "")
+      : "";
   const [blobThumbnail, setBlobThumbnail] = useState(
     () => (thumbUrl && getThumbnail(thumbUrl)) || "",
   );
@@ -93,14 +98,23 @@ const LibraryTemplateDetail = () => {
   }, [thumbUrl]);
 
   const handleUseTemplate = useCallback(async () => {
-    if (isCopying || !roomId || !file) return;
+    if (!template) return;
+
+    // For folders: navigate into the folder to see its contents
+    if (!templateIsFile) {
+      libraryNav.clearTemplate();
+      libraryNav.openSubFolder(template as TFolder);
+      return;
+    }
+
+    if (isCopying || !roomId) return;
 
     setIsCopying(true);
     try {
       const operations = await copyToFolder(
         Number(roomId),
         [],
-        [file.id as number],
+        [template.id as number],
         ConflictResolveType.Duplicate,
         false,
       );
@@ -124,46 +138,116 @@ const LibraryTemplateDetail = () => {
     } finally {
       setIsCopying(false);
     }
-  }, [isCopying, roomId, libraryId, file, router]);
+  }, [template, templateIsFile, isCopying, roomId, libraryId, libraryNav, router]);
 
   const handleBack = useCallback(() => {
     libraryNav.clearTemplate();
   }, [libraryNav]);
 
-  if (!file) return null;
+  if (!template) return null;
 
-  const title = file.title.replace(/\.pdf$/i, "");
+  const title = template.title.replace(/\.pdf$/i, "");
+  const updatedDate = template.updated
+    ? new Date(template.updated).toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      })
+    : "";
 
   return (
     <div className={styles.root}>
-      <button
-        type="button"
-        className={styles.backButton}
-        onClick={handleBack}
-      >
-        &larr; {category?.title ?? t("Common:Library")}
-      </button>
-
       <div className={styles.content}>
-        <div className={styles.preview}>
-          {blobThumbnail ? (
-            <img
-              className={styles.thumbnail}
-              src={blobThumbnail}
-              alt={title}
-              draggable={false}
-            />
-          ) : (
-            <div className={styles.thumbnailPlaceholder} />
-          )}
+        {/* Left column: preview + how it works */}
+        <div className={styles.leftColumn}>
+          <div className={styles.preview}>
+            {blobThumbnail ? (
+              <img
+                className={styles.thumbnail}
+                src={blobThumbnail}
+                alt={title}
+                draggable={false}
+              />
+            ) : (
+              <div className={styles.thumbnailPlaceholder} />
+            )}
+          </div>
+
+          <div className={styles.howItWorks}>
+            <h3 className={styles.sectionTitle}>
+              {t("Common:LibraryHowItWorks")}
+            </h3>
+            <ol className={styles.stepsList}>
+              <li className={styles.stepItem}>
+                <span className={styles.stepNumber}>1</span>
+                <div>
+                  <div className={styles.stepTitle}>
+                    {t("Common:LibraryStep1Title")}
+                  </div>
+                  <div className={styles.stepDesc}>
+                    {t("Common:LibraryStep1Desc", {
+                      count: 0,
+                      language: "",
+                    }).replace(/ 0 | in $/, "")}
+                  </div>
+                </div>
+              </li>
+              <li className={styles.stepItem}>
+                <span className={styles.stepNumber}>2</span>
+                <div>
+                  <div className={styles.stepTitle}>
+                    {t("Common:LibraryStep2Title")}
+                  </div>
+                  <div className={styles.stepDesc}>
+                    {t("Common:LibraryStep2Desc")}
+                  </div>
+                </div>
+              </li>
+              <li className={styles.stepItem}>
+                <span className={styles.stepNumber}>3</span>
+                <div>
+                  <div className={styles.stepTitle}>
+                    {t("Common:LibraryStep3Title")}
+                  </div>
+                  <div className={styles.stepDesc}>
+                    {t("Common:LibraryStep3Desc")}
+                  </div>
+                </div>
+              </li>
+            </ol>
+          </div>
         </div>
 
-        <div className={styles.info}>
+        {/* Right column: info + description */}
+        <div className={styles.rightColumn}>
           <h1 className={styles.title}>{title}</h1>
 
-          <p className={styles.meta}>
-            {category?.title}
-          </p>
+          <div className={styles.metaRow}>
+            {updatedDate && (
+              <div className={styles.metaItem}>
+                <span className={styles.metaLabel}>
+                  {t("Common:LibraryTemplateLastRevision")}
+                </span>
+                <span className={styles.metaValue}>{updatedDate}</span>
+              </div>
+            )}
+            <div className={styles.metaItem}>
+              <span className={styles.metaLabel}>
+                {t("Common:LibraryTemplateFormat")}
+              </span>
+              <span className={styles.metaValue}>PDF</span>
+            </div>
+            {templateIsFile && template.pureContentLength && (
+              <div className={styles.metaItem}>
+                <span className={styles.metaLabel}>
+                  {t("Common:LibraryTemplateSize")}
+                </span>
+                <span className={styles.metaValue}>
+                  {t("Common:LibraryTemplatePage", { count: 1 })}
+                </span>
+              </div>
+            )}
+          </div>
 
           <Button
             className={styles.useButton}
@@ -178,6 +262,24 @@ const LibraryTemplateDetail = () => {
             isLoading={isCopying}
             primary
           />
+
+          <div className={styles.description}>
+            <h3 className={styles.sectionTitle}>
+              {t("Common:LibraryTemplateAbout")}
+            </h3>
+            <p className={styles.descriptionText}>
+              {t("Common:LibraryTemplateAboutText")}
+            </p>
+          </div>
+
+          <div className={styles.description}>
+            <h3 className={styles.sectionTitle}>
+              {t("Common:LibraryTemplateHowTo")}
+            </h3>
+            <p className={styles.descriptionText}>
+              {t("Common:LibraryTemplateHowToText")}
+            </p>
+          </div>
         </div>
       </div>
     </div>

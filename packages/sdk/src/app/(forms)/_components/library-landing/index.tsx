@@ -29,7 +29,7 @@
 import React, { useCallback } from "react";
 import { observer } from "mobx-react";
 
-import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type { TFolder } from "@docspace/shared/api/files/types";
 
 import type { CategoryItem } from "../../_hooks/useLibraryLandingData";
 import { useLibraryNavigationStore } from "../../_store/LibraryNavigationStore";
@@ -52,10 +52,14 @@ const LibraryLandingPage = ({ folders }: LibraryLandingPageProps) => {
 
   const handleClickItem = useCallback(
     (item: CategoryItem, category: TFolder) => {
-      if (item.type === "folder") {
-        libraryNav.openSubFolder(item.original as TFolder);
+      if (item.type === "file") {
+        // File: go into category and show template detail
+        libraryNav.openSubFolder(category);
+        libraryNav.selectTemplate(item.original, category);
       } else {
-        libraryNav.selectTemplate(item.original as TFile, category);
+        // Folder: navigate into category + subfolder, auto-select will happen in FormsGrid
+        libraryNav.openSubFolder(category);
+        libraryNav.openSubFolder(item.original as TFolder);
       }
     },
     [libraryNav],

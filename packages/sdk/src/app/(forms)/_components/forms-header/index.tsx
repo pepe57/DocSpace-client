@@ -153,7 +153,13 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     if (isInsideLibrary) {
       const crumbs: { id: string | number; title: string; isRootRoom: boolean }[] = [];
 
-      for (let i = libraryNav.folderPath.length - 2; i >= 0; i--) {
+      // When template selected: show ALL folders in path (category is the current title)
+      // When browsing folders: skip the deepest (it's the Navigation title)
+      const startIdx = libraryNav.selectedTemplate
+        ? libraryNav.folderPath.length - 1
+        : libraryNav.folderPath.length - 2;
+
+      for (let i = startIdx; i >= 0; i--) {
         const f = libraryNav.folderPath[i];
         crumbs.push({ id: f.id, title: f.title, isRootRoom: false });
       }
@@ -184,6 +190,9 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     isInsideInProgressFolder,
     isInsideLibrary,
     libraryNav,
+    libraryNav.selectedTemplate,
+    libraryNav.selectedCategory,
+    libraryNav.folderPath,
     getSectionTitle,
     t,
   ]);
@@ -250,9 +259,12 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
 
   const handleLibraryBreadcrumbClick = React.useCallback(
     (itemId?: string | number) => {
-      if (itemId !== undefined) {
-        libraryNav.goToFolder(itemId);
+      if (itemId === undefined) return;
+
+      if (libraryNav.selectedTemplate) {
+        libraryNav.clearTemplate();
       }
+      libraryNav.goToFolder(itemId);
     },
     [libraryNav],
   );
@@ -441,7 +453,9 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
   }
 
   if (isInsideLibrary) {
-    const libraryTitle = libraryNav.currentFolder?.title || "";
+    const libraryTitle = libraryNav.selectedTemplate
+      ? libraryNav.selectedTemplate.title.replace(/\.pdf$/i, "")
+      : libraryNav.currentFolder?.title || "";
 
     return (
       <div

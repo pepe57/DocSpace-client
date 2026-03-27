@@ -38,8 +38,8 @@ class LibraryNavigationStore {
   folderPath: TFolder[] = [];
   /** Total number of language/country folders at root level */
   countriesCount = 0;
-  /** Currently selected template for detail view */
-  selectedTemplate: TFile | null = null;
+  /** Currently selected template for detail view (can be a file or a folder) */
+  selectedTemplate: TFile | TFolder | null = null;
   /** Category folder of the selected template */
   selectedCategory: TFolder | null = null;
 
@@ -52,9 +52,9 @@ class LibraryNavigationStore {
     this.countriesCount = count;
   };
 
-  /** Select a template for the detail view */
-  selectTemplate = (file: TFile, category: TFolder) => {
-    this.selectedTemplate = file;
+  /** Select a template for the detail view (accepts file or folder) */
+  selectTemplate = (item: TFile | TFolder, category: TFolder) => {
+    this.selectedTemplate = item;
     this.selectedCategory = category;
   };
 

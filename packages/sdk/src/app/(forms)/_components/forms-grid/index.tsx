@@ -30,7 +30,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import { usePathname } from "next/navigation";
 
-import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
+import type { TFile, TFilesSettings, TFolder } from "@docspace/shared/api/files/types";
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
@@ -46,6 +46,7 @@ import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
 import FormsEmpty from "../forms-empty";
 import LibraryLandingPage from "../library-landing";
 import LibraryTemplateDetail from "../library-template-detail";
+import LibraryCategoryListView from "./LibraryCategoryListView";
 import FormsTile from "./FormsTile";
 import LibraryCountryList from "./LibraryCountryList";
 import LibraryTemplateTile from "./LibraryTemplateTile";
@@ -81,8 +82,24 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     activeSection === FormsSection.InProgress && !inProgressFolder;
   const isLibrary = activeSection === FormsSection.Library;
   const isLibraryLanguageLevel = isLibrary && libraryNav.isLanguageLevel;
+  const isLibraryLanding = isLibrary && libraryNav.depth === 1 && !libraryNav.selectedTemplate && folders.length > 0;
+  const isLibraryCategoryView = isLibrary && libraryNav.depth > 1 && !libraryNav.selectedTemplate;
   const isLibraryFolderLevel = isLibrary && !libraryNav.isLanguageLevel && folders.length > 0;
   const isLibraryTemplateLevel = isLibrary && !libraryNav.isLanguageLevel && items.length > 0 && folders.length === 0;
+
+  // Auto-select first file when entering a library category folder (only on fresh load)
+  const prevLoadingRef = React.useRef(false);
+  React.useEffect(() => {
+    const wasLoading = prevLoadingRef.current;
+    prevLoadingRef.current = isLoading;
+
+    // Only trigger when loading just finished (true → false)
+    if (!wasLoading || isLoading) return;
+    if (!isLibraryCategoryView) return;
+    if (items.length > 0) {
+      libraryNav.selectTemplate(items[0], libraryNav.currentFolder!);
+    }
+  }, [isLibraryCategoryView, isLoading, items, libraryNav]);
 
   const fileItems = React.useMemo(
     () => items.map((file: TFile) => convertFileToItem(file)),
@@ -176,7 +193,25 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     return <LibraryTemplateDetail />;
   }
 
-  if (isLibraryFolderLevel && hasFolders) {
+  if (isLibraryCategoryView) {
+    const allItems = [
+      ...folders.map((f) => ({ id: f.id, title: f.title, original: f as TFile | TFolder, type: "folder" as const })),
+      ...items.map((f) => ({ id: f.id, title: f.title.replace(/\.pdf$/i, ""), original: f as TFile | TFolder, type: "file" as const })),
+    ];
+    return (
+      <LibraryCategoryListView
+        items={allItems}
+        onClickItem={(item) => {
+          libraryNav.selectTemplate(
+            item.original,
+            libraryNav.currentFolder!,
+          );
+        }}
+      />
+    );
+  }
+
+  if (isLibraryLanding && hasFolders) {
     return <LibraryLandingPage folders={folders} />;
   }
 
