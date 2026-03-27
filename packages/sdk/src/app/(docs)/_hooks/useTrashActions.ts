@@ -33,6 +33,7 @@ import { FolderType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import type {
   TFileItem,
   TFolderItem,
@@ -40,6 +41,7 @@ import type {
 
 export default function useTrashActions() {
   const filesListStore = useFilesListStore();
+  const filesSelectionStore = useFilesSelectionStore();
 
   const isTrash = filesListStore.rootFolderType === FolderType.TRASH;
 
@@ -86,6 +88,7 @@ export default function useTrashActions() {
       for (const item of pendingDeleteItems) {
         filesListStore.removeItem(item.id);
       }
+      filesSelectionStore.setSelection();
       setDeleteDialogVisible(false);
       setPendingDeleteItems([]);
     } catch (error) {
@@ -93,7 +96,7 @@ export default function useTrashActions() {
     } finally {
       setIsDeleting(false);
     }
-  }, [isTrash, filesListStore, pendingDeleteItems]);
+  }, [isTrash, filesListStore, filesSelectionStore, pendingDeleteItems]);
 
   return {
     isTrash,
