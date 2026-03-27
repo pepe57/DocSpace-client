@@ -53,18 +53,12 @@ const DeleteDialog = ({
   const { t } = useTranslation(["Common"]);
 
   const message = isTrash
-    ? t("Common:DeletePermanentlyMessage", {
-        defaultValue:
-          itemCount === 1
-            ? "This item will be permanently deleted. Are you sure?"
-            : `These ${itemCount} items will be permanently deleted. Are you sure?`,
-      })
-    : t("Common:MoveToTrashMessage", {
-        defaultValue:
-          itemCount === 1
-            ? "This item will be moved to Trash."
-            : `These ${itemCount} items will be moved to Trash.`,
-      });
+    ? itemCount === 1
+      ? t("Common:DeleteItemForever")
+      : t("Common:DeleteItemsForever", { itemCount })
+    : itemCount === 1
+      ? t("Common:MoveToTrashItem")
+      : t("Common:MoveToTrashItems", { itemCount });
 
   return (
     <ModalDialog visible={visible} onClose={onClose} autoMaxHeight>

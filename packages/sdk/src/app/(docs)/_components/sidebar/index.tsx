@@ -131,7 +131,7 @@ const DocsSidebar = () => {
       },
       {
         key: DocsSection.Trash,
-        label: t("Common:Trash"),
+        label: t("Common:TrashSection"),
         icon: CatalogTrashReactSvgUrl,
       },
     ],

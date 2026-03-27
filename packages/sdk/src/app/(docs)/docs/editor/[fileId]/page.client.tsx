@@ -107,7 +107,6 @@ export default function EditorPage({ fileId }: EditorPageProps) {
         onLoad={onIframeLoad}
         className={isReady ? styles.editorIframe : styles.editorIframeHidden}
         allow="autoplay; camera; microphone; display-capture; clipboard-write"
-        title={t("Common:DocEditor")}
       />
     </div>
   );
