@@ -84,6 +84,7 @@ const PluginFilesSelector = ({
     submitButtonLabel,
     isRoomsOnly,
     isMultiSelect,
+    filterParam,
   } = selectorProps;
 
   const onLoadEvent = useEffectEvent(async () => {
@@ -234,7 +235,8 @@ const PluginFilesSelector = ({
       isMultiSelect={!!isMultiSelect}
       renderInPortal
       {...headerProps}
-      withoutBackButton={Boolean(headerBackButtonProps.withoutBackButton)}
+      withoutBackButton={false}
+      filterParam={filterParam}
     />
   );
 };
