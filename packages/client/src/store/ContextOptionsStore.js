@@ -1178,6 +1178,7 @@ class ContextOptionsStore {
             label: value.label,
             icon: value.icon,
             onClick,
+            placement: value.placement,
           };
 
           const processedItems = [];
@@ -1209,6 +1210,24 @@ class ContextOptionsStore {
 
     return pluginItems;
   };
+
+  placePlugins(result, pluginItems) {
+    const newResult = [...result];
+    const placementPlugins = pluginItems.filter((p) => p.placement);
+
+    placementPlugins.forEach((option) => {
+      if (option.placement === "top") {
+        newResult.splice(0, 0, option);
+      }
+
+      if (option.placement === "topLast") {
+        const firstSepIdx = newResult.findIndex((o) => o.isSeparator);
+        const insertAt = firstSepIdx !== -1 ? firstSepIdx : newResult.length;
+        newResult.splice(insertAt, 0, option);
+      }
+    });
+    return newResult;
+  }
 
   onClickInviteUsers = (roomId, roomType) => {
     const { isGracePeriod } = this.currentTariffStatusStore;
@@ -2841,16 +2860,17 @@ class ContextOptionsStore {
 
     if (pluginItems.length > 0) {
       const pluginKeys = pluginItems.map((p) => p.key);
-      const ungroupedPlugins = resultOptions.filter((o) =>
-        pluginKeys.includes(o.key),
-      );
 
-      if (ungroupedPlugins.length > 0) {
-        for (let i = resultOptions.length - 1; i >= 0; i--) {
-          if (pluginKeys.includes(resultOptions[i].key))
-            resultOptions.splice(i, 1);
-        }
+      // Remove all plugin items from resultOptions first
+      for (let i = resultOptions.length - 1; i >= 0; i--) {
+        if (pluginKeys.includes(resultOptions[i].key))
+          resultOptions.splice(i, 1);
+      }
 
+      const defaultPlugins = pluginItems.filter((p) => !p.placement);
+
+      // default — existing "more-options" logic unchanged
+      if (defaultPlugins.length > 0) {
         const moreOptionsGroup =
           resultOptions.find((o) => o.key === "more-options") ||
           resultOptions.find((o) => o.key === "info");
@@ -2859,7 +2879,7 @@ class ContextOptionsStore {
             key: "separator-before-plugins",
             isSeparator: true,
           });
-          ungroupedPlugins.forEach((p) => moreOptionsGroup.items.push(p));
+          defaultPlugins.forEach((p) => moreOptionsGroup.items.push(p));
         } else {
           const externalLinkIdx = resultOptions.findIndex(
             (o) => o.key === "external-link",
@@ -2876,7 +2896,7 @@ class ContextOptionsStore {
             key: "more-options",
             label: t("Common:MoreOptions"),
             icon: DotsHorizontalUrl,
-            items: ungroupedPlugins,
+            items: defaultPlugins,
           });
         }
       }
@@ -2936,6 +2956,7 @@ class ContextOptionsStore {
 
       groups.forEach((group) => {
         const groupItems = [];
+
         group.forEach((key) => {
           const option = items.find((opt) => opt.key === key);
           if (option) groupItems.push(option);
@@ -2976,7 +2997,10 @@ class ContextOptionsStore {
         }
       });
 
-      return trimSeparator(result);
+      // Insert plugin items according to their placement
+      const newResult = this.placePlugins(result, pluginItems);
+
+      return trimSeparator(newResult);
     }
 
     if (downloadGroupIndex !== -1 && moveIndex !== -1) {
@@ -2995,7 +3019,9 @@ class ContextOptionsStore {
       }
     }
 
-    return trimSeparator(resultOptions);
+    const newResult = this.placePlugins(resultOptions, pluginItems);
+
+    return trimSeparator(newResult);
   };
 
   getGroupContextOptions = (t) => {
@@ -3630,7 +3656,6 @@ class ContextOptionsStore {
             uploadFiles,
             showUploadFolder ? uploadFolder : null,
           ];
-
     if (
       !isAIAgents() &&
       mainButtonItemsList &&
@@ -3659,7 +3684,6 @@ class ContextOptionsStore {
 
     return options;
   };
-
   getModel = (item, t) => {
     const { selection } = this.filesStore;
 
@@ -3677,4 +3701,3 @@ class ContextOptionsStore {
 }
 
 export default ContextOptionsStore;
-
