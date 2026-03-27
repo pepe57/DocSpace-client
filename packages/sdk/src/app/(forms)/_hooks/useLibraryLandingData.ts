@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -48,6 +48,12 @@ export type CategoryData = {
 export default function useLibraryLandingData(folders: TFolder[]) {
   const [categories, setCategories] = useState<CategoryData[]>([]);
   const abortRef = useRef<AbortController | null>(null);
+
+  // Stabilize dependency — only re-fetch when folder IDs actually change
+  const folderIds = useMemo(
+    () => folders.map((f) => f.id).join(","),
+    [folders],
+  );
 
   useEffect(() => {
     abortRef.current?.abort();
@@ -107,7 +113,7 @@ export default function useLibraryLandingData(folders: TFolder[]) {
     });
 
     return () => controller.abort();
-  }, [folders]);
+  }, [folderIds]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const totalTemplatesCount = folders.reduce(
     (sum, f) => sum + (f.filesCount ?? 0),

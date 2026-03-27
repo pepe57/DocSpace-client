@@ -35,6 +35,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { copyToFolder } from "@docspace/shared/api/files";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { ConflictResolveType } from "@docspace/shared/enums";
 
 import { FormsSection } from "@/types/forms";
@@ -140,10 +141,6 @@ const LibraryTemplateDetail = () => {
     }
   }, [template, templateIsFile, isCopying, roomId, libraryId, libraryNav, router]);
 
-  const handleBack = useCallback(() => {
-    libraryNav.clearTemplate();
-  }, [libraryNav]);
-
   if (!template) return null;
 
   const title = template.title.replace(/\.pdf$/i, "");
@@ -185,10 +182,7 @@ const LibraryTemplateDetail = () => {
                     {t("Common:LibraryStep1Title")}
                   </div>
                   <div className={styles.stepDesc}>
-                    {t("Common:LibraryStep1Desc", {
-                      count: 0,
-                      language: "",
-                    }).replace(/ 0 | in $/, "")}
+                    {t("Common:LibraryStep1DescShort")}
                   </div>
                 </div>
               </li>

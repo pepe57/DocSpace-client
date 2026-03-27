@@ -609,6 +609,7 @@
   "LibraryHowItWorks": "How does it work?",
   "LibraryStep1Title": "Choose a template",
   "LibraryStep1Desc": "Browse {{count}} templates available in {{language}}",
+  "LibraryStep1DescShort": "Browse available templates in the library",
   "LibraryStep2Title": "Edit and fill in",
   "LibraryStep2Desc": "Customize the template and share it for filling",
   "LibraryStep3Title": "Collect and analyze",

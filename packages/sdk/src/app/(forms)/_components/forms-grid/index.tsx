@@ -96,8 +96,9 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     // Only trigger when loading just finished (true → false)
     if (!wasLoading || isLoading) return;
     if (!isLibraryCategoryView) return;
-    if (items.length > 0) {
-      libraryNav.selectTemplate(items[0], libraryNav.currentFolder!);
+    const folder = libraryNav.currentFolder;
+    if (items.length > 0 && folder) {
+      libraryNav.selectTemplate(items[0], folder);
     }
   }, [isLibraryCategoryView, isLoading, items, libraryNav]);
 
@@ -202,10 +203,10 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
       <LibraryCategoryListView
         items={allItems}
         onClickItem={(item) => {
-          libraryNav.selectTemplate(
-            item.original,
-            libraryNav.currentFolder!,
-          );
+          const currentFolder = libraryNav.currentFolder;
+          if (currentFolder) {
+            libraryNav.selectTemplate(item.original, currentFolder);
+          }
         }}
       />
     );
