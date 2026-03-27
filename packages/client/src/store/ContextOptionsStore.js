@@ -3531,14 +3531,14 @@ class ContextOptionsStore {
 
     const uploadFiles = {
       key: "upload-files",
-      label: t("Article:UploadFiles"),
+      label: t("Common:UploadFiles"),
       onClick: () => this.onUploadAction("file"),
       icon: ActionsUploadReactSvgUrl,
     };
 
     const uploadFolder = {
       key: "upload-folder",
-      label: t("Article:UploadFolder"),
+      label: t("Common:UploadFolder"),
       onClick: () => this.onUploadAction("folder"),
       icon: ActionsUploadReactSvgUrl,
     };
