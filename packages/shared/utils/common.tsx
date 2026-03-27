@@ -688,7 +688,7 @@ export {
   formatCurrencyValue,
 } from "@docspace/ui-kit/payments/utils/common";
 
-//
+import { getConvertedSize } from "@docspace/ui-kit/payments/utils/common";
 
 export const getConvertedQuota = (
   t: (key: string) => string,
