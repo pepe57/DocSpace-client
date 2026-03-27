@@ -71,7 +71,7 @@ import {
   STORAGE_TARIFF_DEACTIVATED,
   STORAGE_DEACTIVATION_VISITED,
   WEB_SEARCH,
-} from "@docspace/shared/constants";
+} from "@docspace/ui-kit/payments/constants";
 import type { DateTime } from "luxon";
 import {
   now,

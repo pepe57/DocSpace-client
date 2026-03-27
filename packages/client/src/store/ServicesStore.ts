@@ -51,7 +51,7 @@ import {
   AI_TOOLS,
   BACKUP_SERVICE,
   STORAGE_ENUM,
-} from "@docspace/shared/constants";
+} from "@docspace/ui-kit/payments/constants";
 
 type TAiToolsChatPrice = {
   prompt: number;

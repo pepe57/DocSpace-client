@@ -41,7 +41,7 @@ import {
 } from "./types";
 import { Nullable } from "../../types";
 import { Encoder } from "@docspace/ui-kit/utils/encoder";
-import { AI_TOOLS } from "../../constants";
+import { AI_TOOLS } from "@docspace/ui-kit/payments/constants";
 
 const baseURL = "/apisystem";
 

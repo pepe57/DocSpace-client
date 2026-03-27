@@ -33,7 +33,7 @@ import {
   TPaymentQuota,
   TBooleanPaymentFeature,
 } from "../api/portal/types";
-import { MANAGER, TOTAL_SIZE, YEAR_KEY } from "../constants";
+import { MANAGER, TOTAL_SIZE, YEAR_KEY } from "@docspace/ui-kit/payments/constants";
 import { Nullable } from "../types";
 import { CurrentQuotasStore } from "./CurrentQuotaStore";
 import { SettingsStore } from "./SettingsStore";

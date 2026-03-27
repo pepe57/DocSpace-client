@@ -39,7 +39,7 @@ import {
   calculateTotalPrice,
   getConvertedSize,
 } from "@docspace/shared/utils/common";
-import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
+import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/ui-kit/payments/constants";
 
 import styles from "./StorageTariff.module.scss";
 
