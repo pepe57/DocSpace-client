@@ -604,7 +604,6 @@
   "LicenseGracePeriodActivatedInfo": "The grace period is active <1>from {{fromDate}} to {{byDate}}</1> (days remaining: <2>{{delayDaysCount}}</2>). During this time, admins are not able to create new rooms or add new users. Once the grace period ends, {{productName}} will become unavailable until a new license is activated.",
   "LicenseHasExpiredGracePeriodStartedOn": "License has expired. Grace period started on <1>{{date}}</1>",
   "LightTheme": "Light theme",
-  "Library": "Library",
   "LibraryHeroTitle": "Create documents from ready-made templates",
   "LibraryHeroDescription": "Pick a template, edit and fill it in, then collect and analyze responses with AI agents",
   "LibraryHowItWorks": "How does it work?",
