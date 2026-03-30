@@ -28,6 +28,7 @@
 
 import type { TooltipRenderProps } from "react-joyride";
 
+import { ReactSVG } from "react-svg";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
 import styles from "./TourTooltip.module.scss";
@@ -50,7 +51,7 @@ export default function TourTooltip({
   return (
     <div {...tooltipProps} className={styles.tooltip} onClick={stopPropagation} onMouseDown={stopPropagation}>
       <button className={styles.close} {...closeProps}>
-        <img src={CrossReactSvgUrl} alt={closeProps.title} width={16} height={16} />
+        <ReactSVG src={CrossReactSvgUrl} />
       </button>
 
       {step.title && <div className={styles.title}>{step.title}</div>}

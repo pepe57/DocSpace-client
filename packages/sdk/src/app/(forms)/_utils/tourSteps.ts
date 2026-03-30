@@ -39,35 +39,6 @@ export type TourStepCallbacks = {
   navigate: (path: string) => void;
 };
 
-function simulateClick(el: HTMLElement) {
-  const rect = el.getBoundingClientRect();
-  const event = new MouseEvent("click", {
-    bubbles: true,
-    cancelable: true,
-    clientX: rect.left + rect.width / 2,
-    clientY: rect.top + rect.height / 2,
-    button: 0,
-    view: window,
-  });
-  el.dispatchEvent(event);
-}
-
-function openPlusMenu(): Promise<void> {
-  if (document.querySelector("#upload-forms")) return Promise.resolve();
-
-  const iconBtn = document.querySelector(
-    '[data-testid="plus-button"] [data-testid="icon-button"]',
-  ) as HTMLElement | null;
-
-  if (iconBtn) {
-    simulateClick(iconBtn);
-  }
-
-  return waitForElement("#upload-forms", 3000)
-    .then(() => {})
-    .catch(() => {});
-}
-
 function openContextMenu(): Promise<void> {
   // Find the first tile and right-click it to open context menu
   const tile = document.querySelector('[data-testid="tile"]') as HTMLElement | null;

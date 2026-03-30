@@ -37,6 +37,7 @@ import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
+import AiFormsTutorialUrl from "PUBLIC_DIR/images/aiforms.tutorial.mp4?url";
 
 import styles from "./WelcomeTourDialog.module.scss";
 
@@ -101,7 +102,7 @@ export default function WelcomeTourDialog({
                 playsInline
               >
                 <source
-                  src="/static/images/aiforms.tutorial.mp4"
+                  src={AiFormsTutorialUrl}
                   type="video/mp4"
                 />
               </video>
