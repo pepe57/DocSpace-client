@@ -37,7 +37,7 @@ import {
   InputType,
 } from "@docspace/ui-kit/components/text-input";
 
-export type CreateFileDialogType = "docx" | "xlsx" | "pptx" | "folder";
+export type CreateFileDialogType = "docx" | "xlsx" | "pptx" | "pdf" | "folder";
 
 type CreateFileDialogProps = {
   visible: boolean;
@@ -51,6 +51,7 @@ const TITLE_KEYS: Record<CreateFileDialogType, string> = {
   docx: "Common:Document",
   xlsx: "Common:Spreadsheet",
   pptx: "Common:Presentation",
+  pdf: "Common:NewPDFForm",
   folder: "Common:Folder",
 };
 
@@ -58,6 +59,7 @@ const DEFAULT_NAMES: Record<CreateFileDialogType, string> = {
   docx: "New document",
   xlsx: "New spreadsheet",
   pptx: "New presentation",
+  pdf: "New form",
   folder: "New folder",
 };
 

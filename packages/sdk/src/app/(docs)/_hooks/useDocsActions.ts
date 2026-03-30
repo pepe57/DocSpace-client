@@ -30,7 +30,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import {
-  createFile,
   createFolder,
   startUploadSession,
   uploadChunkParallel,
@@ -57,6 +56,8 @@ const getDefaultFileName = (
       return t("Common:NewSpreadsheet");
     case "pptx":
       return t("Common:NewPresentation");
+    case "pdf":
+      return t("Common:NewPDFForm");
     case "folder":
       return t("Common:NewFolder");
   }
@@ -75,7 +76,7 @@ export default function useDocsActions() {
   const inputFolderRef = useRef<HTMLInputElement | null>(null);
 
   const [dialogVisible, setDialogVisible] = useState(false);
-  const [dialogType, setDialogType] = useState<CreateFileDialogType>("docx");
+  const [dialogType, setDialogType] = useState<CreateFileDialogType>("folder");
   const [isCreating, setIsCreating] = useState(false);
 
   useEffect(() => {
@@ -95,39 +96,35 @@ export default function useDocsActions() {
     return navigationStore.currentFolderId;
   }, [navigationStore]);
 
-  const createWithDefaultName = useCallback(
-    async (type: CreateFileDialogType) => {
+  const openCreateDialog = useCallback(
+    (type: CreateFileDialogType) => {
       const folderId = getFolderId();
       if (!folderId) return;
 
-      setIsCreating(true);
-      try {
+      if (type !== "folder") {
         const name = getDefaultFileName(type, t);
-        if (type === "folder") {
-          await createFolder(folderId, name);
-        } else {
-          await createFile(folderId, `${name}.${type}`);
-        }
-        router.refresh();
-      } catch (error) {
-        toastr.error(error instanceof Error ? error.message : String(error));
-      } finally {
-        setIsCreating(false);
-      }
-    },
-    [getFolderId, t, router],
-  );
-
-  const openCreateDialog = useCallback(
-    (type: CreateFileDialogType) => {
-      if (filesSettings?.keepNewFileName) {
-        createWithDefaultName(type);
+        router.push(
+          `/docs/editor/create?parentId=${folderId}&fileTitle=${encodeURIComponent(`${name}.${type}`)}`,
+        );
         return;
       }
+
+      if (filesSettings?.keepNewFileName) {
+        const name = getDefaultFileName(type, t);
+        setIsCreating(true);
+        createFolder(folderId, name)
+          .then(() => router.refresh())
+          .catch((error: unknown) => {
+            toastr.error(error instanceof Error ? error.message : String(error));
+          })
+          .finally(() => setIsCreating(false));
+        return;
+      }
+
       setDialogType(type);
       setDialogVisible(true);
     },
-    [filesSettings?.keepNewFileName, createWithDefaultName],
+    [getFolderId, t, filesSettings?.keepNewFileName, router],
   );
 
   const closeCreateDialog = useCallback(() => {
@@ -141,11 +138,7 @@ export default function useDocsActions() {
 
       setIsCreating(true);
       try {
-        if (dialogType === "folder") {
-          await createFolder(folderId, name);
-        } else {
-          await createFile(folderId, `${name}.${dialogType}`);
-        }
+        await createFolder(folderId, name);
         setDialogVisible(false);
         router.refresh();
       } catch (error) {
@@ -154,7 +147,7 @@ export default function useDocsActions() {
         setIsCreating(false);
       }
     },
-    [getFolderId, dialogType, router],
+    [getFolderId, router],
   );
 
   const uploadFilesToFolder = useCallback(

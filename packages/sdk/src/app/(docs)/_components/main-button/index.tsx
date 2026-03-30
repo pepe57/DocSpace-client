@@ -37,6 +37,7 @@ import type { ActionOption, ButtonOption } from "@docspace/ui-kit/components/mai
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
+import FormBlankReactSvgUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 
@@ -102,6 +103,13 @@ const DocsMainButton = ({ mode, isDisabled }: DocsMainButtonProps) => {
         onClick: () => openCreateDialog("pptx"),
       },
       {
+        id: "actions_new-form",
+        key: "pdf",
+        label: t("Common:NewPDFForm"),
+        icon: FormBlankReactSvgUrl,
+        onClick: () => openCreateDialog("pdf"),
+      },
+      {
         id: "actions_new-folder",
         key: "new-folder",
         label: t("Common:Folder"),
@@ -149,6 +157,12 @@ const DocsMainButton = ({ mode, isDisabled }: DocsMainButtonProps) => {
         label: t("Common:Presentation"),
         icon: ActionsPresentationReactSvgUrl,
         onClick: () => openCreateDialog("pptx"),
+      },
+      {
+        key: "pdf",
+        label: t("Common:NewPDFForm"),
+        icon: FormBlankReactSvgUrl,
+        onClick: () => openCreateDialog("pdf"),
       },
       {
         key: "new-folder",
