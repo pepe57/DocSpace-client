@@ -46,10 +46,10 @@ class FormsTourStore {
     this.tourCompleted = localStorage.getItem(TOUR_COMPLETED_KEY) === "true";
   };
 
-  startTour = (isEmpty = false) => {
+  startTour = () => {
     this.isRunning = true;
     this.stepIndex = 0;
-    this.showMockItems = isEmpty;
+    this.showMockItems = true;
     this.forceShowAiChat = true;
   };
 

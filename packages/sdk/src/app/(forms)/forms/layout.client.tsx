@@ -341,33 +341,25 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
 
   // Inject mock data when navigating between sections during tour
   React.useEffect(() => {
-    if (!tourStore.isRunning || !tourStore.showMockItems) return;
+    if (!tourStore.isRunning) return;
 
-    const injectMockData = () => {
-      if (activeSection === FormsSection.CompletedForms) {
-        if (completedFolder) {
-          // Inside a completed folder — show submitted files
-          formsListStore.setFolders([]);
-          formsListStore.setItems(createMockCompletedFiles(completedFolder.title), 5);
-          formsListStore.setIsLoading(false);
-        } else {
-          formsListStore.setFolders(createMockFormFolders());
-          formsListStore.setItems([], 0);
-          formsListStore.setIsLoading(false);
-        }
-      } else if (activeSection === FormsSection.InProgress) {
+    if (activeSection === FormsSection.CompletedForms) {
+      if (completedFolder) {
+        formsListStore.setFolders([]);
+        formsListStore.setItems(createMockCompletedFiles(completedFolder.title), 5);
+      } else {
         formsListStore.setFolders(createMockFormFolders());
         formsListStore.setItems([], 0);
-        formsListStore.setIsLoading(false);
-      } else if (activeSection === FormsSection.MyForms) {
-        formsListStore.setFolders([]);
-        formsListStore.setItems(createMockFormFiles(), 10);
-        formsListStore.setIsLoading(false);
       }
-    };
-
-    injectMockData();
-  }, [activeSection, completedFolder, tourStore.isRunning, tourStore.showMockItems, formsListStore]);
+    } else if (activeSection === FormsSection.InProgress) {
+      formsListStore.setFolders(createMockFormFolders());
+      formsListStore.setItems([], 0);
+    } else if (activeSection === FormsSection.MyForms) {
+      formsListStore.setFolders([]);
+      formsListStore.setItems(createMockFormFiles(), 10);
+    }
+    formsListStore.setIsLoading(false);
+  }, [activeSection, completedFolder, tourStore.isRunning, formsListStore]);
 
   const rootRef = React.useRef<HTMLDivElement>(null);
   const isSettings = activeSection === FormsSection.Settings;
@@ -439,11 +431,9 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         visible={showWelcome}
         onStart={() => {
           setShowWelcome(false);
-          const isEmpty = items.length === 0 && folders.length === 0;
-          if (isEmpty) {
-            formsListStore.setItems(createMockFormFiles(), 10);
-            formsListStore.setIsLoading(false);
-          }
+          formsListStore.setFolders([]);
+          formsListStore.setItems(createMockFormFiles(), 10);
+          formsListStore.setIsLoading(false);
           // Ensure AI features are visible during tour
           runInAction(() => {
             if (!aiStore.askFromDBAgentId) {
@@ -455,7 +445,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
               formsSettingsStore.userAccess = ShareAccessRights.RoomManager;
             }
           });
-          tourStore.startTour(isEmpty);
+          tourStore.startTour();
         }}
         onSkip={() => {
           setShowWelcome(false);
