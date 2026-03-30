@@ -40,10 +40,11 @@ class FormsTourStore {
 
   constructor() {
     makeAutoObservable(this);
-    this.tourCompleted =
-      typeof window !== "undefined" &&
-      localStorage.getItem(TOUR_COMPLETED_KEY) === "true";
   }
+
+  hydrate = () => {
+    this.tourCompleted = localStorage.getItem(TOUR_COMPLETED_KEY) === "true";
+  };
 
   startTour = (isEmpty = false) => {
     this.isRunning = true;
@@ -86,6 +87,9 @@ export const FormsTourStoreContextProvider = ({
   children: React.ReactNode;
 }) => {
   const store = React.useMemo(() => new FormsTourStore(), []);
+  React.useEffect(() => {
+    store.hydrate();
+  }, [store]);
   return (
     <FormsTourStoreContext.Provider value={store}>
       {children}

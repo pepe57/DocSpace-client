@@ -170,7 +170,7 @@ export function createMockFormFolders(): TFolder[] {
         id: -(i + 200),
         parentId: 0,
         title: title.replace(".pdf", ""),
-        filesCount: Math.floor(Math.random() * 5) + 1,
+        filesCount: (i % 5) + 1,
         foldersCount: 0,
         new: 0,
         mute: false,

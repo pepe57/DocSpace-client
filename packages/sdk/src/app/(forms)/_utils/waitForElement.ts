@@ -24,6 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+type Waiter = {
+  selector: string;
+  resolve: (el: Element) => void;
+  reject: (err: Error) => void;
+  timer: ReturnType<typeof setTimeout>;
+};
+
+const waiters: Waiter[] = [];
+let sharedObserver: MutationObserver | null = null;
+
+function checkWaiters() {
+  for (let i = waiters.length - 1; i >= 0; i--) {
+    const w = waiters[i];
+    const el = document.querySelector(w.selector);
+    if (el) {
+      clearTimeout(w.timer);
+      waiters.splice(i, 1);
+      w.resolve(el);
+    }
+  }
+
+  if (waiters.length === 0 && sharedObserver) {
+    sharedObserver.disconnect();
+    sharedObserver = null;
+  }
+}
+
+function ensureObserver() {
+  if (sharedObserver) return;
+  sharedObserver = new MutationObserver(checkWaiters);
+  sharedObserver.observe(document.body, { childList: true, subtree: true });
+}
+
 export function waitForElement(
   selector: string,
   timeout = 10000,
@@ -35,19 +68,17 @@ export function waitForElement(
       return;
     }
 
-    const observer = new MutationObserver(() => {
-      const found = document.querySelector(selector);
-      if (found) {
-        observer.disconnect();
-        resolve(found);
+    const timer = setTimeout(() => {
+      const idx = waiters.findIndex((w) => w.timer === timer);
+      if (idx !== -1) waiters.splice(idx, 1);
+      if (waiters.length === 0 && sharedObserver) {
+        sharedObserver.disconnect();
+        sharedObserver = null;
       }
-    });
-
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    setTimeout(() => {
-      observer.disconnect();
       reject(new Error(`Timeout waiting for element: ${selector}`));
     }, timeout);
+
+    waiters.push({ selector, resolve, reject, timer });
+    ensureObserver();
   });
 }

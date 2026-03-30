@@ -29,6 +29,7 @@
 import type { TooltipRenderProps } from "react-joyride";
 
 import { ReactSVG } from "react-svg";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
 import styles from "./TourTooltip.module.scss";
@@ -63,14 +64,19 @@ export default function TourTooltip({
         </span>
         <div className={styles.buttons}>
           {index > 0 && (
-            <button className={styles.buttonBack} {...backProps}>
-              {backProps.title}
-            </button>
+            <Button
+              label={backProps.title}
+              size={ButtonSize.extraSmall}
+              onClick={backProps.onClick}
+            />
           )}
           {continuous && (
-            <button className={styles.buttonPrimary} {...primaryProps}>
-              {primaryProps.title}
-            </button>
+            <Button
+              label={primaryProps.title}
+              size={ButtonSize.extraSmall}
+              primary
+              onClick={primaryProps.onClick}
+            />
           )}
         </div>
       </div>

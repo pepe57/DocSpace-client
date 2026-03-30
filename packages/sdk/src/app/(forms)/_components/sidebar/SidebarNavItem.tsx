@@ -48,7 +48,6 @@ const SidebarNavItem = ({
   return (
     <div id={id}>
       <ArticleItemPure
-        id={id}
         text={label}
         icon={icon}
         showText={showText}

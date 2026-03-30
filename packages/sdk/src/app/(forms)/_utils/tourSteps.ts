@@ -176,7 +176,7 @@ export function getTourSteps(t: TFunction, callbacks?: TourStepCallbacks): Step[
         "Common:TourBilling",
         "Manage your subscription plan and payment details for this forms room.",
       ),
-      title: "Billing",
+      title: t("Common:Billing", "Billing"),
       data: { page: "/forms/settings/billing" } satisfies TourStepData,
       skipBeacon: true,
       before: async () => {

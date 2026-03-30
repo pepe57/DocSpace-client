@@ -29,6 +29,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import { observer } from "mobx-react";
+import { runInAction } from "mobx";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import Section from "@docspace/ui-kit/components/section";
@@ -324,14 +325,16 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         formsListStore.reset();
         fetchSection();
       }
-      if (savedAskFromDBAgentId.current !== null) {
-        aiStore.askFromDBAgentId = savedAskFromDBAgentId.current;
-        savedAskFromDBAgentId.current = null;
-      }
-      if (savedUserAccess.current !== null) {
-        formsSettingsStore.userAccess = savedUserAccess.current;
-        savedUserAccess.current = null;
-      }
+      runInAction(() => {
+        if (savedAskFromDBAgentId.current !== null) {
+          aiStore.askFromDBAgentId = savedAskFromDBAgentId.current;
+          savedAskFromDBAgentId.current = null;
+        }
+        if (savedUserAccess.current !== null) {
+          formsSettingsStore.userAccess = savedUserAccess.current;
+          savedUserAccess.current = null;
+        }
+      });
     }
     prevTourRunning.current = tourStore.isRunning;
   }, [tourStore.isRunning, tourStore.showMockItems, formsListStore, fetchSection, aiStore, formsSettingsStore]);
@@ -364,22 +367,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     };
 
     injectMockData();
-
-    // Keep re-injecting whenever real fetches overwrite our mock data
-    const interval = setInterval(() => {
-      if (!tourStore.isRunning || !tourStore.showMockItems) {
-        clearInterval(interval);
-        return;
-      }
-      const hasMock =
-        formsListStore.items.some((f) => f.id < 0) ||
-        formsListStore.folders.some((f) => f.id < 0);
-      if (!hasMock) {
-        injectMockData();
-      }
-    }, 200);
-
-    return () => clearInterval(interval);
   }, [activeSection, completedFolder, tourStore.isRunning, tourStore.showMockItems, formsListStore]);
 
   const rootRef = React.useRef<HTMLDivElement>(null);
@@ -458,14 +445,16 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             formsListStore.setIsLoading(false);
           }
           // Ensure AI features are visible during tour
-          if (!aiStore.askFromDBAgentId) {
-            savedAskFromDBAgentId.current = aiStore.askFromDBAgentId;
-            aiStore.askFromDBAgentId = -999;
-          }
-          if (!hasManagementAccess) {
-            savedUserAccess.current = formsSettingsStore.userAccess as number;
-            formsSettingsStore.userAccess = ShareAccessRights.RoomManager;
-          }
+          runInAction(() => {
+            if (!aiStore.askFromDBAgentId) {
+              savedAskFromDBAgentId.current = aiStore.askFromDBAgentId;
+              aiStore.askFromDBAgentId = -999;
+            }
+            if (!hasManagementAccess) {
+              savedUserAccess.current = formsSettingsStore.userAccess as number;
+              formsSettingsStore.userAccess = ShareAccessRights.RoomManager;
+            }
+          });
           tourStore.startTour(isEmpty);
         }}
         onSkip={() => {

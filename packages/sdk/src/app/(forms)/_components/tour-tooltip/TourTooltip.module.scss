@@ -60,33 +60,3 @@
   gap: 8px;
 }
 
-.buttonBack {
-  background: none;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 3px;
-  color: colors.$white;
-  cursor: pointer;
-  font-size: 13px;
-  line-height: 20px;
-  padding: 4px 16px;
-
-  &:hover {
-    border-color: rgba(255, 255, 255, 0.5);
-  }
-}
-
-.buttonPrimary {
-  background-color: var(--color-scheme-main-accent);
-  border: none;
-  border-radius: 3px;
-  color: colors.$white;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 20px;
-  padding: 4px 16px;
-
-  &:hover {
-    background-color: var(--color-scheme-main-accent-hover);
-  }
-}

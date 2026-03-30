@@ -156,28 +156,17 @@ export default function useFormsTour() {
       tourStore.setStepIndex(nextIndex);
     });
 
-    const navigateToMyForms = () => {
-      const sp = searchParamsRef.current;
-      const params = new URLSearchParams();
-      const rid = sp.get("roomId") ?? "";
-      const lid = sp.get("libraryId") ?? "";
-      if (rid) params.set("roomId", rid);
-      if (lid) params.set("libraryId", lid);
-      const qs = params.toString();
-      router.replace(`/forms/my-forms${qs ? `?${qs}` : ""}`);
-    };
-
     const unsubEnd = on(EVENTS.TOUR_END, () => {
       dismissContextMenu();
       tourStore.completeTour();
-      navigateToMyForms();
+      tourCallbacks.navigate("/forms/my-forms");
     });
 
     const unsubStatus = on(EVENTS.TOUR_STATUS, (data) => {
       if (data.status === STATUS.SKIPPED) {
         dismissContextMenu();
         tourStore.completeTour();
-        navigateToMyForms();
+        tourCallbacks.navigate("/forms/my-forms");
       }
     });
 
@@ -187,7 +176,7 @@ export default function useFormsTour() {
       unsubEnd();
       unsubStatus();
     };
-  }, [on, router, tourStore, navStore]);
+  }, [on, router, tourStore, navStore, tourCallbacks]);
 
   return { Tour, controls, state };
 }
