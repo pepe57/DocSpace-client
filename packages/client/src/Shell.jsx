@@ -632,7 +632,7 @@ const ShellWrapper = inject(
       userId: userStore?.user?.id,
       userLoginEventId: userStore?.user?.loginEventId,
       isOwner: userStore?.user?.isOwner,
-      isAdmin: userStore?.user?.isAdmin,
+      isAdmin: userStore?.user?.isAdmin || userStore?.user?.isOwner,
       isGuest: userStore?.user?.isVisitor,
       registrationDate: userStore?.user?.registrationDate,
 
