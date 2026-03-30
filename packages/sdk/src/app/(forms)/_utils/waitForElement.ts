@@ -24,40 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
-
-import React from "react";
-import { useTranslation } from "react-i18next";
-
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-
-import styles from "./SettingsPanel.module.scss";
-
-const PAYMENTS_PATH = "/portal-settings/payments/portal-payments";
-
-const BillingForm = () => {
-  const { t } = useTranslation(["Common"]);
-  const onOpenBilling = React.useCallback(() => {
-    const url = `${window.location.origin}${PAYMENTS_PATH}`;
-    window.open(url, "_blank");
-  }, []);
-
-  return (
-    <div className={styles.billingWrapper}>
-      <Text fontSize="22px" fontWeight={600}>
-        {t("Common:WorkInProgress")}
-      </Text>
-      <Button
-        primary
-        size={ButtonSize.normal}
-        label={t("Common:OpenBilling")}
-        onClick={onOpenBilling}
-        scale={false}
-      />
-    </div>
-  );
+type Waiter = {
+  selector: string;
+  resolve: (el: Element) => void;
+  reject: (err: Error) => void;
+  timer: ReturnType<typeof setTimeout>;
 };
 
-export default BillingForm;
+const waiters: Waiter[] = [];
+let sharedObserver: MutationObserver | null = null;
 
+function checkWaiters() {
+  for (let i = waiters.length - 1; i >= 0; i--) {
+    const w = waiters[i];
+    const el = document.querySelector(w.selector);
+    if (el) {
+      clearTimeout(w.timer);
+      waiters.splice(i, 1);
+      w.resolve(el);
+    }
+  }
+
+  if (waiters.length === 0 && sharedObserver) {
+    sharedObserver.disconnect();
+    sharedObserver = null;
+  }
+}
+
+function ensureObserver() {
+  if (sharedObserver) return;
+  sharedObserver = new MutationObserver(checkWaiters);
+  sharedObserver.observe(document.body, { childList: true, subtree: true });
+}
+
+export function waitForElement(
+  selector: string,
+  timeout = 10000,
+): Promise<Element> {
+  return new Promise((resolve, reject) => {
+    const el = document.querySelector(selector);
+    if (el) {
+      resolve(el);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      const idx = waiters.findIndex((w) => w.timer === timer);
+      if (idx !== -1) waiters.splice(idx, 1);
+      if (waiters.length === 0 && sharedObserver) {
+        sharedObserver.disconnect();
+        sharedObserver = null;
+      }
+      reject(new Error(`Timeout waiting for element: ${selector}`));
+    }, timeout);
+
+    waiters.push({ selector, resolve, reject, timer });
+    ensureObserver();
+  });
+}

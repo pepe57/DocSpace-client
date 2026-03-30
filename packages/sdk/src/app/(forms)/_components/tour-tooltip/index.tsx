@@ -26,38 +26,60 @@
 
 "use client";
 
-import React from "react";
-import { useTranslation } from "react-i18next";
+import type { TooltipRenderProps } from "react-joyride";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import { ReactSVG } from "react-svg";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
-import styles from "./SettingsPanel.module.scss";
+import styles from "./TourTooltip.module.scss";
 
-const PAYMENTS_PATH = "/portal-settings/payments/portal-payments";
-
-const BillingForm = () => {
-  const { t } = useTranslation(["Common"]);
-  const onOpenBilling = React.useCallback(() => {
-    const url = `${window.location.origin}${PAYMENTS_PATH}`;
-    window.open(url, "_blank");
-  }, []);
+export default function TourTooltip({
+  continuous,
+  index,
+  step,
+  size,
+  isLastStep,
+  backProps,
+  closeProps,
+  primaryProps,
+  tooltipProps,
+}: TooltipRenderProps) {
+  const stopPropagation = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
 
   return (
-    <div className={styles.billingWrapper}>
-      <Text fontSize="22px" fontWeight={600}>
-        {t("Common:WorkInProgress")}
-      </Text>
-      <Button
-        primary
-        size={ButtonSize.normal}
-        label={t("Common:OpenBilling")}
-        onClick={onOpenBilling}
-        scale={false}
-      />
+    <div {...tooltipProps} className={styles.tooltip} onClick={stopPropagation} onMouseDown={stopPropagation}>
+      <button className={styles.close} {...closeProps}>
+        <ReactSVG src={CrossReactSvgUrl} />
+      </button>
+
+      {step.title && <div className={styles.title}>{step.title}</div>}
+      {step.content && <div className={styles.content}>{step.content}</div>}
+
+      <div className={styles.footer}>
+        <span className={styles.progress}>
+          {index + 1} / {size}
+        </span>
+        <div className={styles.buttons}>
+          {index > 0 && (
+            <Button
+              label={backProps.title}
+              size={ButtonSize.extraSmall}
+              onClick={backProps.onClick}
+            />
+          )}
+          {continuous && (
+            <Button
+              label={primaryProps.title}
+              size={ButtonSize.extraSmall}
+              primary
+              onClick={primaryProps.onClick}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
-};
-
-export default BillingForm;
-
+}

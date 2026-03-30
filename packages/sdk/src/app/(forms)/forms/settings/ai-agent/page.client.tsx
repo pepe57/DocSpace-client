@@ -27,37 +27,28 @@
 "use client";
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import AIAgentForm from "../../../_components/settings/category/AIAgentForm";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+class AiAgentErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
+  state = { hasError: false };
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  render() {
+    if (this.state.hasError) return null;
+    return this.props.children;
+  }
+}
 
-import styles from "./SettingsPanel.module.scss";
-
-const PAYMENTS_PATH = "/portal-settings/payments/portal-payments";
-
-const BillingForm = () => {
-  const { t } = useTranslation(["Common"]);
-  const onOpenBilling = React.useCallback(() => {
-    const url = `${window.location.origin}${PAYMENTS_PATH}`;
-    window.open(url, "_blank");
-  }, []);
-
+export default function AiAgentPage() {
   return (
-    <div className={styles.billingWrapper}>
-      <Text fontSize="22px" fontWeight={600}>
-        {t("Common:WorkInProgress")}
-      </Text>
-      <Button
-        primary
-        size={ButtonSize.normal}
-        label={t("Common:OpenBilling")}
-        onClick={onOpenBilling}
-        scale={false}
-      />
+    <div data-tour="settings-ai-agent">
+      <AiAgentErrorBoundary>
+        <AIAgentForm inline />
+      </AiAgentErrorBoundary>
     </div>
   );
-};
-
-export default BillingForm;
-
+}

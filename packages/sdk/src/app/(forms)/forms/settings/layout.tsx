@@ -24,40 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import SettingsShell from "./layout.client";
 
-import React from "react";
-import { useTranslation } from "react-i18next";
-
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-
-import styles from "./SettingsPanel.module.scss";
-
-const PAYMENTS_PATH = "/portal-settings/payments/portal-payments";
-
-const BillingForm = () => {
-  const { t } = useTranslation(["Common"]);
-  const onOpenBilling = React.useCallback(() => {
-    const url = `${window.location.origin}${PAYMENTS_PATH}`;
-    window.open(url, "_blank");
-  }, []);
-
-  return (
-    <div className={styles.billingWrapper}>
-      <Text fontSize="22px" fontWeight={600}>
-        {t("Common:WorkInProgress")}
-      </Text>
-      <Button
-        primary
-        size={ButtonSize.normal}
-        label={t("Common:OpenBilling")}
-        onClick={onOpenBilling}
-        scale={false}
-      />
-    </div>
-  );
-};
-
-export default BillingForm;
-
+export default function SettingsLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <SettingsShell>{children}</SettingsShell>;
+}
