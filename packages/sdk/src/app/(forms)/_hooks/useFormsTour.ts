@@ -30,6 +30,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useJoyride, EVENTS, STATUS, ACTIONS } from "react-joyride";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { useFormsTourStore } from "../_store/FormsTourStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
@@ -93,7 +94,7 @@ export default function useFormsTour() {
     scrollToFirstStep: true,
     tooltipComponent: TourTooltip,
     options: {
-      arrowColor: "#333333",
+      arrowColor: globalColors.black,
       arrowBase: 18,
       arrowSize: 8,
       overlayColor: "rgba(0, 0, 0, 0.5)",

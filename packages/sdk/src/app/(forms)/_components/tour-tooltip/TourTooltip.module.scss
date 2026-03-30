@@ -1,25 +1,14 @@
+@use "@docspace/ui-kit/styles/variables/colors";
+
 .tooltip {
-  background-color: var(--tooltip-bg-color, #333333);
+  background-color: colors.$black;
   border-radius: 6px;
-  color: var(--tooltip-text-color, #ffffff);
+  color: colors.$white;
   padding: 16px;
   max-width: 340px;
   min-width: 240px;
   position: relative;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
-
-  --tooltip-bg-color: #333333;
-  --tooltip-text-color: #ffffff;
-
-  :global([data-theme="dark"]) & {
-    --tooltip-bg-color: #333333;
-    --tooltip-text-color: #ffffff;
-  }
-
-  :global([data-theme="light"]) & {
-    --tooltip-bg-color: #f7f7f7;
-    --tooltip-text-color: #333333;
-  }
 }
 
 .close {
@@ -75,7 +64,7 @@
   background: none;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 3px;
-  color: var(--tooltip-text-color, #ffffff);
+  color: colors.$white;
   cursor: pointer;
   font-size: 13px;
   line-height: 20px;
@@ -87,10 +76,10 @@
 }
 
 .buttonPrimary {
-  background-color: var(--color-scheme-main-accent, #4781d1);
+  background-color: var(--color-scheme-main-accent);
   border: none;
   border-radius: 3px;
-  color: #ffffff;
+  color: colors.$white;
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
@@ -98,6 +87,6 @@
   padding: 4px 16px;
 
   &:hover {
-    background-color: var(--color-scheme-main-accent-hover, #5a8fd9);
+    background-color: var(--color-scheme-main-accent-hover);
   }
 }

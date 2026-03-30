@@ -47,35 +47,11 @@ type WelcomeTourDialogProps = {
   onSkip: () => void;
 };
 
-const features = [
-  {
-    icon: FormFileReactSvgUrl,
-    titleKey: "Common:WelcomeFeature1Title",
-    titleDefault: "Smart Form Creation",
-    descKey: "Common:WelcomeFeature1",
-    descDefault: "Create PDF forms from templates or scratch",
-  },
-  {
-    icon: FormFillRectSvgUrl,
-    titleKey: "Common:WelcomeFeature2Title",
-    titleDefault: "Real-time Tracking",
-    descKey: "Common:WelcomeFeature2",
-    descDefault: "Monitor progress and submissions instantly",
-  },
-  {
-    icon: AiAgentsReactSvgUrl,
-    titleKey: "Common:WelcomeFeature3Title",
-    titleDefault: "AI Processing",
-    descKey: "Common:WelcomeFeature3",
-    descDefault: "Automatically analyze and process responses",
-  },
-  {
-    icon: DownloadReactSvgUrl,
-    titleKey: "Common:WelcomeFeature4Title",
-    titleDefault: "Data Integration",
-    descKey: "Common:WelcomeFeature4",
-    descDefault: "Export results directly to your systems",
-  },
+const featureIcons = [
+  FormFileReactSvgUrl,
+  FormFillRectSvgUrl,
+  AiAgentsReactSvgUrl,
+  DownloadReactSvgUrl,
 ];
 
 export default function WelcomeTourDialog({
@@ -108,21 +84,42 @@ export default function WelcomeTourDialog({
               </video>
             </div>
             <div className={styles.featuresList}>
-              {features.map((feature) => (
-                <div key={feature.titleKey} className={styles.featureCard}>
-                  <div className={styles.featureIcon}>
-                    <ReactSVG src={feature.icon} />
-                  </div>
-                  <div className={styles.featureText}>
-                    <Text fontWeight={600} fontSize="13px">
-                      {t(feature.titleKey, feature.titleDefault)}
-                    </Text>
-                    <Text fontSize="12px" className={styles.featureDesc}>
-                      {t(feature.descKey, feature.descDefault)}
-                    </Text>
-                  </div>
+              <div className={styles.featureCard}>
+                <div className={styles.featureIcon}>
+                  <ReactSVG src={featureIcons[0]} />
                 </div>
-              ))}
+                <div className={styles.featureText}>
+                  <Text fontWeight={600} fontSize="13px">{t("Common:WelcomeFeature1Title", "Smart Form Creation")}</Text>
+                  <Text fontSize="12px" className={styles.featureDesc}>{t("Common:WelcomeFeature1", "Create PDF forms from templates or scratch")}</Text>
+                </div>
+              </div>
+              <div className={styles.featureCard}>
+                <div className={styles.featureIcon}>
+                  <ReactSVG src={featureIcons[1]} />
+                </div>
+                <div className={styles.featureText}>
+                  <Text fontWeight={600} fontSize="13px">{t("Common:WelcomeFeature2Title", "Real-time Tracking")}</Text>
+                  <Text fontSize="12px" className={styles.featureDesc}>{t("Common:WelcomeFeature2", "Monitor progress and submissions instantly")}</Text>
+                </div>
+              </div>
+              <div className={styles.featureCard}>
+                <div className={styles.featureIcon}>
+                  <ReactSVG src={featureIcons[2]} />
+                </div>
+                <div className={styles.featureText}>
+                  <Text fontWeight={600} fontSize="13px">{t("Common:WelcomeFeature3Title", "AI Processing")}</Text>
+                  <Text fontSize="12px" className={styles.featureDesc}>{t("Common:WelcomeFeature3", "Automatically analyze and process responses")}</Text>
+                </div>
+              </div>
+              <div className={styles.featureCard}>
+                <div className={styles.featureIcon}>
+                  <ReactSVG src={featureIcons[3]} />
+                </div>
+                <div className={styles.featureText}>
+                  <Text fontWeight={600} fontSize="13px">{t("Common:WelcomeFeature4Title", "Data Integration")}</Text>
+                  <Text fontSize="12px" className={styles.featureDesc}>{t("Common:WelcomeFeature4", "Export results directly to your systems")}</Text>
+                </div>
+              </div>
             </div>
           </div>
         </div>
