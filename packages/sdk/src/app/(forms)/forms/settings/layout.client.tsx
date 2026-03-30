@@ -76,13 +76,16 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
   const fetchMembers = React.useCallback(() => {
     if (!roomId) return;
 
-    getRoomMembers(roomId, {}).then((res) => {
-      setMembers(res.items);
+    getRoomMembers(roomId, {})
+      .then((res) => {
+        setMembers(res.items);
 
-      if (aiStore.aiAgentEnabled) {
-        aiStore.syncAllAgentMembers();
-      }
-    });
+        // Sync agent members when access list changes
+        if (aiStore.aiAgentEnabled) {
+          aiStore.syncAllAgentMembers();
+        }
+      })
+      .catch(() => {});
   }, [roomId, aiStore]);
 
   React.useEffect(() => {
@@ -110,7 +113,7 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
     () => [
       {
         id: SettingsSubSection.Billing,
-        name: "Billing",
+        name: t("Common:Billing"),
         content: null,
       },
       {

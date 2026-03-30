@@ -53,7 +53,7 @@ import {
 } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-import { useLibraryNavigationStore } from "../../_store/LibraryNavigationStore";
+import { libraryUrl } from "../../_utils/libraryUrl";
 import { useFormsUserStore } from "../../_store/FormsUserStore";
 import SidebarNavItem from "./SidebarNavItem";
 
@@ -76,7 +76,7 @@ const FormsSidebar = () => {
   const formsSettingsStore = useFormsSettingsStore();
   const { hasLibrary } = formsSettingsStore;
   const showLibrary = hasLibrary && !!formsSettingsStore.folderSecurity?.Create;
-  const libraryNav = useLibraryNavigationStore();
+  // Library navigation is URL-based now
   const { user } = useFormsUserStore();
   const showSettings = user?.isOwner || user?.isAdmin;
 
@@ -149,7 +149,6 @@ const FormsSidebar = () => {
             isActive={activeSection === section.key}
             onClick={() => {
               if (activeSection === section.key) {
-                // Already on this section — return to root if inside subfolder/editor
                 let handled = false;
                 if (editingFile) {
                   closeEditor();
@@ -189,11 +188,10 @@ const FormsSidebar = () => {
               isActive={activeSection === FormsSection.Library}
               onClick={() => {
                 if (activeSection === FormsSection.Library) {
-                  if (libraryNav.depth > 0) {
-                    libraryNav.reset();
-                  } else {
-                    setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
-                  }
+                  // Navigate to library root (country list)
+                  const rid = searchParams.get("roomId") ?? "";
+                  const lid = searchParams.get("libraryId") ?? "";
+                  router.push(libraryUrl({ roomId: rid || undefined, libraryId: lid || undefined }));
                   return;
                 }
                 const params = new URLSearchParams();
