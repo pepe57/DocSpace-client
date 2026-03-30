@@ -93,6 +93,7 @@ function contextMenuStep(
   title: string,
   content: string,
   page: string,
+  callbacks?: TourStepCallbacks,
 ): Step {
   return {
     target: `#${targetId}`,
@@ -101,6 +102,8 @@ function contextMenuStep(
     data: { page } satisfies TourStepData,
     skipBeacon: true,
     before: async () => {
+      callbacks?.navigate(page);
+      await waitForElement('[data-tour="forms-grid"]', 3000).catch(() => {});
       if (!document.querySelector(`#${targetId}`)) {
         await openContextMenu();
       }
@@ -133,63 +136,7 @@ export function getTourSteps(t: TFunction, callbacks?: TourStepCallbacks): Step[
       data: { page: "/forms/my-forms" } satisfies TourStepData,
       skipBeacon: true,
     },
-    // 3. Plus menu — Upload
-    {
-      target: "#upload-forms",
-      content: t(
-        "Common:TourUploadForms",
-        "Upload PDF forms from your device to start collecting data right away.",
-      ),
-      title: t("Common:UploadPDFForm", "Upload PDF form"),
-      data: { page: "/forms/my-forms" } satisfies TourStepData,
-      skipBeacon: true,
-      before: () => openPlusMenu(),
-    },
-    // 4. Plus menu — Create blank form
-    {
-      target: "#create-blank-form",
-      content: t(
-        "Common:TourCreateForm",
-        "Create a new blank PDF form and design it with the built-in editor.",
-      ),
-      title: t("Common:NewPDFForm", "New PDF form"),
-      data: { page: "/forms/my-forms" } satisfies TourStepData,
-      skipBeacon: true,
-      before: () => openPlusMenu(),
-    },
-    // 5. Forms grid
-    {
-      target: '[data-tour="forms-grid"]',
-      content: t(
-        "Common:TourFormsGrid",
-        "Your forms appear here as cards. Click on a form to open it for editing or filling.",
-      ),
-      title: t("Common:TourFormsGridTitle", "Forms overview"),
-      data: { page: "/forms/my-forms" } satisfies TourStepData,
-      skipBeacon: true,
-      before: () => waitForElement('[data-tour="forms-grid"]').then(() => {}),
-    },
-    // 6. Context menu — Edit
-    contextMenuStep(
-      "option_edit",
-      t("Common:EditButton", "Edit"),
-      t(
-        "Common:TourCtxEdit",
-        "Open the form in the editor to modify fields, layout, and structure.",
-      ),
-      "/forms/my-forms",
-    ),
-    // Context menu — Fill Form
-    contextMenuStep(
-      "option_fill-form",
-      t("Common:TourCtxFillTitle", "Fill Form"),
-      t(
-        "Common:TourCtxFill",
-        "Open the form to fill it out. Completed data will be saved automatically.",
-      ),
-      "/forms/my-forms",
-    ),
-    // Context menu — Ask from DB
+    // 3. Context menu — Ask from DB
     contextMenuStep(
       "option_ask-from-db",
       t("Common:TourCtxAskFromDBTitle", "Ask from DB"),
@@ -198,58 +145,9 @@ export function getTourSteps(t: TFunction, callbacks?: TourStepCallbacks): Step[
         "Chat with the AI agent about this form using data from a connected database.",
       ),
       "/forms/my-forms",
+      callbacks,
     ),
-    // Context menu — Start Filling
-    contextMenuStep(
-      "option_start-filling",
-      t("Common:TourCtxStartFillingTitle", "Start Filling"),
-      t(
-        "Common:TourCtxStartFilling",
-        "Distribute the form to assigned users so they can begin filling it out.",
-      ),
-      "/forms/my-forms",
-    ),
-    // Context menu — Reset Filling
-    contextMenuStep(
-      "option_reset-filling",
-      t("Common:TourCtxResetFillingTitle", "Reset Filling"),
-      t(
-        "Common:TourCtxResetFilling",
-        "Clear all current submissions and reassign the form for a fresh round of filling.",
-      ),
-      "/forms/my-forms",
-    ),
-    // Context menu — View
-    contextMenuStep(
-      "option_view",
-      t("Common:TourCtxViewTitle", "View"),
-      t(
-        "Common:TourCtxView",
-        "Preview the form in read-only mode without making any changes.",
-      ),
-      "/forms/my-forms",
-    ),
-    // Context menu — Download
-    contextMenuStep(
-      "option_download",
-      t("Common:Download", "Download"),
-      t(
-        "Common:TourCtxDownload",
-        "Download the form as a PDF file to your device.",
-      ),
-      "/forms/my-forms",
-    ),
-    // Context menu — Delete
-    contextMenuStep(
-      "option_delete",
-      t("Common:Delete", "Delete"),
-      t(
-        "Common:TourCtxDelete",
-        "Remove the form from your workspace.",
-      ),
-      "/forms/my-forms",
-    ),
-    // In Progress sidebar
+    // 6. In Progress sidebar
     {
       target: "#forms-nav-in-progress",
       content: t(
@@ -271,12 +169,12 @@ export function getTourSteps(t: TFunction, callbacks?: TourStepCallbacks): Step[
       data: { page: "/forms/completed-forms" } satisfies TourStepData,
       skipBeacon: true,
     },
-    // Inside completed folder
+    // Inside completed folder + AI Chat
     {
       target: '[data-tour="forms-grid"]',
       content: t(
         "Common:TourCompletedFolder",
-        "Each completed file is named with a number, the submitter's name, and the submission date. You can view or download any submission.",
+        "Each completed file is named with a number, the submitter's name, and the submission date. Use the AI Chat button to ask questions or get summaries about submissions.",
       ),
       title: t("Common:TourCompletedFolderTitle", "Completed submissions"),
       data: {
@@ -289,33 +187,15 @@ export function getTourSteps(t: TFunction, callbacks?: TourStepCallbacks): Step[
         await waitForElement('[data-tour="forms-grid"]');
       },
     },
-    // AI Chat button
+    // Library sidebar
     {
-      target: '[data-tour="ai-chat-button"]',
+      target: "#forms-nav-library",
       content: t(
-        "Common:TourAiChat",
-        "Chat with the AI agent about completed submissions in this folder. Ask questions, get summaries, or request analysis.",
+        "Common:TourLibrary",
+        "Browse ready-made form templates. Pick a template to quickly create a new form without starting from scratch.",
       ),
-      title: t("Common:TourAiChatTitle", "AI Chat"),
-      data: {
-        page: "/forms/completed-forms",
-        openCompletedFolder: true,
-      } satisfies TourStepData,
-      skipBeacon: true,
-      before: async () => {
-        callbacks?.openCompletedFolder();
-        await waitForElement('[data-tour="ai-chat-button"]');
-      },
-    },
-    // Settings sidebar
-    {
-      target: "#forms-nav-settings",
-      content: t(
-        "Common:TourSettings",
-        "Configure billing, access permissions, AI agent, and data collection for your forms room.",
-      ),
-      title: t("Common:Settings"),
-      data: { page: "/forms/settings/billing" } satisfies TourStepData,
+      title: t("Common:Library"),
+      data: { page: "/forms/library" } satisfies TourStepData,
       skipBeacon: true,
     },
     // Settings — Billing

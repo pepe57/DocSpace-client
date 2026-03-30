@@ -178,37 +178,6 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     );
   }
 
-  if (isLibraryTemplateLevel && hasItems) {
-    return (
-      <>
-        <div className={styles.filesGrid} ref={gridRef} data-tour="forms-grid">
-          {fileItems.map((item) => {
-            const originalFile = items.find((f) => f.id === item.id);
-            return originalFile ? (
-              <LibraryTemplateTile
-                key={`file_${item.id}`}
-                item={item}
-                file={originalFile}
-                getIcon={getIcon}
-              />
-            ) : null;
-          })}
-          {hasMore &&
-            Array.from({ length: skeletonCount }, (_, i) => (
-              <RectangleSkeleton
-                key={`skeleton_${i}`}
-                width="100%"
-                height="220px"
-                borderRadius="12px"
-                animate
-              />
-            ))}
-        </div>
-        {hasMore && <div ref={sentinelRef} style={{ height: 1 }} />}
-      </>
-    );
-  }
-
   if (hasItems) {
     return (
       <>

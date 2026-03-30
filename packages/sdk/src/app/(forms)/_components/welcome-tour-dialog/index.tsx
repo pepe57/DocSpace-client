@@ -27,10 +27,16 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
 
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
+
+import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
+import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
+import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 
 import styles from "./WelcomeTourDialog.module.scss";
 
@@ -40,6 +46,37 @@ type WelcomeTourDialogProps = {
   onSkip: () => void;
 };
 
+const features = [
+  {
+    icon: FormFileReactSvgUrl,
+    titleKey: "Common:WelcomeFeature1Title",
+    titleDefault: "Smart Form Creation",
+    descKey: "Common:WelcomeFeature1",
+    descDefault: "Create PDF forms from templates or scratch",
+  },
+  {
+    icon: FormFillRectSvgUrl,
+    titleKey: "Common:WelcomeFeature2Title",
+    titleDefault: "Real-time Tracking",
+    descKey: "Common:WelcomeFeature2",
+    descDefault: "Monitor progress and submissions instantly",
+  },
+  {
+    icon: AiAgentsReactSvgUrl,
+    titleKey: "Common:WelcomeFeature3Title",
+    titleDefault: "AI Processing",
+    descKey: "Common:WelcomeFeature3",
+    descDefault: "Automatically analyze and process responses",
+  },
+  {
+    icon: DownloadReactSvgUrl,
+    titleKey: "Common:WelcomeFeature4Title",
+    titleDefault: "Data Integration",
+    descKey: "Common:WelcomeFeature4",
+    descDefault: "Export results directly to your systems",
+  },
+];
+
 export default function WelcomeTourDialog({
   visible,
   onStart,
@@ -48,62 +85,57 @@ export default function WelcomeTourDialog({
   const { t } = useTranslation(["Common"]);
 
   return (
-    <ModalDialog visible={visible} onClose={onSkip} autoMaxHeight isLarge>
+    <ModalDialog visible={visible} onClose={onSkip} autoMaxHeight autoMaxWidth isLarge isHuge>
       <ModalDialog.Header>
         {t("Common:WelcomeToAIForms", "Welcome to AI Forms")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.body}>
-          <Text className={styles.description}>
-            {t(
-              "Common:WelcomeDescription",
-              "AI Forms helps you create, distribute, and collect form submissions — all in one place.",
-            )}
-          </Text>
-          <ul className={styles.features}>
-            <li>
-              {t(
-                "Common:WelcomeFeature1",
-                "Create and manage PDF forms from templates or scratch",
-              )}
-            </li>
-            <li>
-              {t(
-                "Common:WelcomeFeature2",
-                "Track form progress and completed submissions",
-              )}
-            </li>
-            <li>
-              {t(
-                "Common:WelcomeFeature3",
-                "Use AI agent to automate form processing",
-              )}
-            </li>
-            <li>
-              {t(
-                "Common:WelcomeFeature4",
-                "Collect data and export results to a database",
-              )}
-            </li>
-          </ul>
-          <Text className={styles.question}>
-            {t(
-              "Common:WelcomeTourQuestion",
-              "Would you like a quick tour of the interface?",
-            )}
-          </Text>
+          <div className={styles.content}>
+            <div className={styles.videoContainer}>
+              <video
+                className={styles.video}
+                autoPlay
+                loop
+                muted
+                playsInline
+              >
+                <source
+                  src="/static/images/aiforms.tutorial.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+            <div className={styles.featuresList}>
+              {features.map((feature) => (
+                <div key={feature.titleKey} className={styles.featureCard}>
+                  <div className={styles.featureIcon}>
+                    <ReactSVG src={feature.icon} />
+                  </div>
+                  <div className={styles.featureText}>
+                    <Text fontWeight={600} fontSize="13px">
+                      {t(feature.titleKey, feature.titleDefault)}
+                    </Text>
+                    <Text fontSize="12px" className={styles.featureDesc}>
+                      {t(feature.descKey, feature.descDefault)}
+                    </Text>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          label={t("Common:WelcomeStart", "Start")}
+          label={t("Common:WelcomeStartTour", "Take a tour")}
           size={ButtonSize.normal}
           primary
           scale
           onClick={onStart}
         />
         <Button
-          label={t("Common:Skip", "Skip")}
+          label={t("Common:WelcomeStartUsing", "Start using")}
           size={ButtonSize.normal}
           scale
           onClick={onSkip}

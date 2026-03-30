@@ -197,20 +197,8 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           goBackToInProgressRoot();
         }
 
-        if (editingFile) {
-          formsListStore.setItems([], 0);
-          formsListStore.setFolders([]);
-          formsListStore.setIsLoading(true);
-          pendingEditorClose.current = true;
-        } else {
-          closeEditor();
-        }
-
-        if (
-          activeSection === FormsSection.Settings ||
-          activeSection === FormsSection.Library
-        ) {
-          pendingEditorClose.current = false;
+        if (tourStore.showMockItems) {
+          // During tour: skip data clearing, just fire animation
           closeEditor();
           formsListStore.setIsLoading(false);
           setTimeout(() => {
@@ -218,12 +206,35 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
               new CustomEvent(AnimationEvents.END_ANIMATION),
             );
           }, 0);
-        }
+        } else {
+          if (editingFile) {
+            formsListStore.setItems([], 0);
+            formsListStore.setFolders([]);
+            formsListStore.setIsLoading(true);
+            pendingEditorClose.current = true;
+          } else {
+            closeEditor();
+          }
 
-        if (prevSection === FormsSection.Settings) {
-          formsListStore.setItems([], 0);
-          formsListStore.setFolders([]);
-          formsListStore.setIsLoading(true);
+          if (
+            activeSection === FormsSection.Settings ||
+            activeSection === FormsSection.Library
+          ) {
+            pendingEditorClose.current = false;
+            closeEditor();
+            formsListStore.setIsLoading(false);
+            setTimeout(() => {
+              window.dispatchEvent(
+                new CustomEvent(AnimationEvents.END_ANIMATION),
+              );
+            }, 0);
+          }
+
+          if (prevSection === FormsSection.Settings) {
+            formsListStore.setItems([], 0);
+            formsListStore.setFolders([]);
+            formsListStore.setIsLoading(true);
+          }
         }
       }
     }
