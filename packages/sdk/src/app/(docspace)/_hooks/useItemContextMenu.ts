@@ -8,12 +8,14 @@ type UseItemContextMenuProps = {
   isFavoritesSection?: boolean;
   isRecentSection?: boolean;
   isTrashSection?: boolean;
+  isDocsSection?: boolean;
 };
 
 export default function useItemContextMenu({
   isFavoritesSection = false,
   isRecentSection = false,
   isTrashSection = false,
+  isDocsSection = false,
 }: UseItemContextMenuProps = {}) {
   const getFilesContextMenu = useCallback((
     file: TFile,
@@ -30,10 +32,10 @@ export default function useItemContextMenu({
       AVAILABLE_CONTEXT_ITEMS.openPDF,
       AVAILABLE_CONTEXT_ITEMS.view,
       AVAILABLE_CONTEXT_ITEMS.pdfView,
-      AVAILABLE_CONTEXT_ITEMS.copyLink,
+      ...(isDocsSection ? [AVAILABLE_CONTEXT_ITEMS.copyLink] : []),
       AVAILABLE_CONTEXT_ITEMS.download,
       AVAILABLE_CONTEXT_ITEMS.downloadAs,
-      AVAILABLE_CONTEXT_ITEMS.share,
+      ...(isDocsSection ? [AVAILABLE_CONTEXT_ITEMS.share] : []),
     ]);
 
     const isPdf = file.fileExst === ".pdf";
@@ -99,14 +101,13 @@ export default function useItemContextMenu({
     }
 
     return Array.from(model);
-  }, [isFavoritesSection, isRecentSection, isTrashSection]);
+  }, [isFavoritesSection, isRecentSection, isTrashSection, isDocsSection]);
 
   const getFoldersContextMenu = useCallback((folder: TFolder) => {
     const items = [
       AVAILABLE_CONTEXT_ITEMS.select,
       AVAILABLE_CONTEXT_ITEMS.open,
-      AVAILABLE_CONTEXT_ITEMS.share,
-      AVAILABLE_CONTEXT_ITEMS.copyLink,
+      ...(isDocsSection ? [AVAILABLE_CONTEXT_ITEMS.share, AVAILABLE_CONTEXT_ITEMS.copyLink] : []),
       AVAILABLE_CONTEXT_ITEMS.download,
     ];
 
@@ -134,7 +135,7 @@ export default function useItemContextMenu({
     }
 
     return items;
-  }, [isTrashSection]);
+  }, [isTrashSection, isDocsSection]);
 
   return { getFilesContextMenu, getFoldersContextMenu };
 }
