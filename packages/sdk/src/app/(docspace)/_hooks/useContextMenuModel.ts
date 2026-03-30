@@ -445,13 +445,24 @@ export default function useContextMenuModel({
         : null;
 
     if (singleFile) {
+      // Pull delete out so we can put it last
+      const deleteIndex = base.findLastIndex(
+        (i) => i.key === "delete" || i.key === "delete-permanently",
+      );
+      const deleteItem = deleteIndex >= 0 ? base.splice(deleteIndex, 1)[0] : null;
+
       const favItem = singleFile.isFavorite
         ? getRemoveFromFavoritesItem(singleFile)
         : getMarkAsFavoriteItem(singleFile);
+
       base.push(favItem);
 
       if (singleFile.contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromRecent)) {
         base.push(getRemoveFromRecentItem(singleFile));
+      }
+
+      if (deleteItem) {
+        base.push(deleteItem);
       }
     }
 
@@ -529,6 +540,18 @@ export default function useContextMenuModel({
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.downloadAs))
         model.push(getDownloadAsItem());
 
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.moveTo))
+        model.push(getMoveToItem(item!));
+
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.copy))
+        model.push(getCopyItem(item!));
+
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.duplicate))
+        model.push(getDuplicateItem(item!));
+
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.restore))
+        model.push(getRestoreItem(item!));
+
       if (
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.markAsFavorite) ||
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromFavorites)
@@ -542,18 +565,6 @@ export default function useContextMenuModel({
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromRecent))
         model.push(getRemoveFromRecentItem(item as TFileItem));
-
-      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.copy))
-        model.push(getCopyItem(item!));
-
-      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.duplicate))
-        model.push(getDuplicateItem(item!));
-
-      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.moveTo))
-        model.push(getMoveToItem(item!));
-
-      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.restore))
-        model.push(getRestoreItem(item!));
 
       if (
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.delete) ||
