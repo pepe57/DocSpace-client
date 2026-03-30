@@ -614,7 +614,7 @@ export default inject<TStore>(
 			linkParams,
 			setLinkParams,
 			fetchExternalLinks,
-			isAdmin: user?.isAdmin,
+			isAdmin: user?.isAdmin || user?.isOwner,
 		};
 	},
 )(
