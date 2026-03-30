@@ -35,7 +35,9 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { useFormsTourStore } from "../_store/FormsTourStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsListStore } from "../_store/FormsListStore";
-import { getTourSteps, type TourStepData, type TourStepCallbacks } from "../_utils/tourSteps";
+import { getTourSteps, type TourStepData, type TourStepCallbacks, type TourStepFlags } from "../_utils/tourSteps";
+import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
+import { useFormsUserStore } from "../_store/FormsUserStore";
 import { createMockFormFolders, createMockCompletedFiles } from "../_utils/mockFormFiles";
 import TourTooltip from "../_components/tour-tooltip";
 
@@ -43,6 +45,8 @@ export default function useFormsTour() {
   const tourStore = useFormsTourStore();
   const navStore = useFormsNavigationStore();
   const formsListStore = useFormsListStore();
+  const formsSettingsStore = useFormsSettingsStore();
+  const { user } = useFormsUserStore();
   const router = useRouter();
   const pathname = usePathname();
   const pathnameRef = useRef(pathname);
@@ -84,7 +88,20 @@ export default function useFormsTour() {
     [navStore, tourStore, formsListStore, router],
   );
 
-  const steps = useMemo(() => getTourSteps(t, tourCallbacks), [t, tourCallbacks]);
+  const canCreate = !!formsSettingsStore.folderSecurity?.Create;
+  const showLibrary =
+    formsSettingsStore.hasLibrary && canCreate;
+  const showSettings = !!(user?.isOwner || user?.isAdmin);
+
+  const tourFlags = useMemo<TourStepFlags>(
+    () => ({ canCreate, showLibrary, showSettings }),
+    [canCreate, showLibrary, showSettings],
+  );
+
+  const steps = useMemo(
+    () => getTourSteps(t, tourCallbacks, tourFlags),
+    [t, tourCallbacks, tourFlags],
+  );
 
   const { controls, on, state, Tour } = useJoyride({
     continuous: true,

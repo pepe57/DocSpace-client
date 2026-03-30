@@ -39,6 +39,12 @@ export type TourStepCallbacks = {
   navigate: (path: string) => void;
 };
 
+export type TourStepFlags = {
+  canCreate: boolean;
+  showLibrary: boolean;
+  showSettings: boolean;
+};
+
 function openContextMenu(): Promise<void> {
   // Find the first tile and right-click it to open context menu
   const tile = document.querySelector('[data-testid="tile"]') as HTMLElement | null;
@@ -83,9 +89,16 @@ function contextMenuStep(
   };
 }
 
-export function getTourSteps(t: TFunction, callbacks?: TourStepCallbacks): Step[] {
+export function getTourSteps(
+  t: TFunction,
+  callbacks?: TourStepCallbacks,
+  flags?: TourStepFlags,
+): Step[] {
+  const { canCreate = true, showLibrary = true, showSettings = true } =
+    flags ?? {};
+
   return [
-    // 1. My Forms sidebar
+    // My Forms sidebar — always
     {
       target: "#forms-nav-my-forms",
       content: t(
@@ -96,8 +109,8 @@ export function getTourSteps(t: TFunction, callbacks?: TourStepCallbacks): Step[
       data: { page: "/forms/my-forms" } satisfies TourStepData,
       skipBeacon: true,
     },
-    // 2. Plus button
-    {
+    // Plus button — only with Create permission
+    canCreate && {
       target: '[data-testid="plus-button"]',
       content: t(
         "Common:TourPlusButton",
@@ -107,17 +120,18 @@ export function getTourSteps(t: TFunction, callbacks?: TourStepCallbacks): Step[
       data: { page: "/forms/my-forms" } satisfies TourStepData,
       skipBeacon: true,
     },
-    // 3. Context menu — Ask from DB
-    contextMenuStep(
-      "option_ask-from-db",
-      t("Common:TourCtxAskFromDBTitle", "Ask from DB"),
-      t(
-        "Common:TourCtxAskFromDB",
-        "Chat with the AI agent about this form using data from a connected database.",
+    // Context menu — Ask from DB — only with Create permission
+    canCreate &&
+      contextMenuStep(
+        "option_ask-from-db",
+        t("Common:TourCtxAskFromDBTitle", "Ask from DB"),
+        t(
+          "Common:TourCtxAskFromDB",
+          "Chat with the AI agent about this form using data from a connected database.",
+        ),
+        "/forms/my-forms",
+        callbacks,
       ),
-      "/forms/my-forms",
-      callbacks,
-    ),
     // 6. In Progress sidebar
     {
       target: "#forms-nav-in-progress",
@@ -158,8 +172,8 @@ export function getTourSteps(t: TFunction, callbacks?: TourStepCallbacks): Step[
         await waitForElement('[data-tour="forms-grid"]');
       },
     },
-    // Library sidebar
-    {
+    // Library sidebar — only if visible
+    showLibrary && {
       target: "#forms-nav-library",
       content: t(
         "Common:TourLibrary",
@@ -169,8 +183,8 @@ export function getTourSteps(t: TFunction, callbacks?: TourStepCallbacks): Step[
       data: { page: "/forms/library" } satisfies TourStepData,
       skipBeacon: true,
     },
-    // Settings — Billing
-    {
+    // Settings — Billing — only for Owner/Admin
+    showSettings && {
       target: '[data-tour="settings-billing"]',
       content: t(
         "Common:TourBilling",
@@ -184,8 +198,8 @@ export function getTourSteps(t: TFunction, callbacks?: TourStepCallbacks): Step[
         await waitForElement('[data-tour="settings-billing"]');
       },
     },
-    // Settings — AI Agent
-    {
+    // Settings — AI Agent — only for Owner/Admin
+    showSettings && {
       target: '[data-tour="settings-ai-agent"]',
       content: t(
         "Common:TourAiAgent",
@@ -199,8 +213,8 @@ export function getTourSteps(t: TFunction, callbacks?: TourStepCallbacks): Step[
         await waitForElement('[data-tour="settings-ai-agent"]');
       },
     },
-    // Settings — Access
-    {
+    // Settings — Access — only for Owner/Admin
+    showSettings && {
       target: '[data-tour="settings-access"]',
       content: t(
         "Common:TourAccess",
@@ -214,8 +228,8 @@ export function getTourSteps(t: TFunction, callbacks?: TourStepCallbacks): Step[
         await waitForElement('[data-tour="settings-access"]');
       },
     },
-    // Settings — Collect Data
-    {
+    // Settings — Collect Data — only for Owner/Admin
+    showSettings && {
       target: '[data-tour="settings-collect-data"]',
       content: t(
         "Common:TourCollectData",
@@ -229,5 +243,5 @@ export function getTourSteps(t: TFunction, callbacks?: TourStepCallbacks): Step[
         await waitForElement('[data-tour="settings-collect-data"]');
       },
     },
-  ];
+  ].filter(Boolean) as Step[];
 }
