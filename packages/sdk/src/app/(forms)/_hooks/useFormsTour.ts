@@ -115,6 +115,7 @@ export default function useFormsTour() {
       arrowBase: 18,
       arrowSize: 8,
       overlayColor: "rgba(0, 0, 0, 0.5)",
+      overlayClickAction: "close",
       zIndex: 10000,
     },
     locale: {
@@ -168,6 +169,12 @@ export default function useFormsTour() {
     });
 
     const unsubAfter = on(EVENTS.STEP_AFTER, (data) => {
+      if (data.action === ACTIONS.CLOSE) {
+        dismissContextMenu();
+        tourStore.completeTour();
+        tourCallbacks.navigate("/forms/my-forms");
+        return;
+      }
       const nextIndex =
         data.index + (data.action === ACTIONS.PREV ? -1 : 1);
       tourStore.setStepIndex(nextIndex);
