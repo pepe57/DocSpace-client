@@ -1,0 +1,24 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.description {
+  line-height: 20px;
+}
+
+.features {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.question {
+  font-weight: 600;
+  line-height: 20px;
+}

@@ -24,19 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export enum FormsSection {
-  MyForms = "my-forms",
-  Library = "library",
-  InProgress = "in-progress",
-  CompletedForms = "completed-forms",
-  Settings = "settings",
-}
+"use client";
 
-export enum SettingsSubSection {
-  Billing = "billing",
-  AiAgent = "ai-agent",
-  Access = "access",
-  CollectData = "collect-data",
-}
+import BillingForm from "../../../_components/settings/category/BillingForm";
 
-export const DEFAULT_SETTINGS_SUBSECTION = SettingsSubSection.Billing;
+export default function BillingPage() {
+  return (
+    <div data-tour="settings-billing">
+      <BillingForm />
+    </div>
+  );
+}

@@ -24,19 +24,55 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export enum FormsSection {
-  MyForms = "my-forms",
-  Library = "library",
-  InProgress = "in-progress",
-  CompletedForms = "completed-forms",
-  Settings = "settings",
-}
+"use client";
 
-export enum SettingsSubSection {
-  Billing = "billing",
-  AiAgent = "ai-agent",
-  Access = "access",
-  CollectData = "collect-data",
-}
+import type { TooltipRenderProps } from "react-joyride";
 
-export const DEFAULT_SETTINGS_SUBSECTION = SettingsSubSection.Billing;
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
+
+import styles from "./TourTooltip.module.scss";
+
+export default function TourTooltip({
+  continuous,
+  index,
+  step,
+  size,
+  isLastStep,
+  backProps,
+  closeProps,
+  primaryProps,
+  tooltipProps,
+}: TooltipRenderProps) {
+  const stopPropagation = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
+  return (
+    <div {...tooltipProps} className={styles.tooltip} onClick={stopPropagation} onMouseDown={stopPropagation}>
+      <button className={styles.close} {...closeProps}>
+        <img src={CrossReactSvgUrl} alt={closeProps.title} width={16} height={16} />
+      </button>
+
+      {step.title && <div className={styles.title}>{step.title}</div>}
+      {step.content && <div className={styles.content}>{step.content}</div>}
+
+      <div className={styles.footer}>
+        <span className={styles.progress}>
+          {index + 1} / {size}
+        </span>
+        <div className={styles.buttons}>
+          {index > 0 && (
+            <button className={styles.buttonBack} {...backProps}>
+              {backProps.title}
+            </button>
+          )}
+          {continuous && (
+            <button className={styles.buttonPrimary} {...primaryProps}>
+              {primaryProps.title}
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

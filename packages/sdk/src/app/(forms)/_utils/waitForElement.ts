@@ -24,19 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export enum FormsSection {
-  MyForms = "my-forms",
-  Library = "library",
-  InProgress = "in-progress",
-  CompletedForms = "completed-forms",
-  Settings = "settings",
-}
+export function waitForElement(
+  selector: string,
+  timeout = 10000,
+): Promise<Element> {
+  return new Promise((resolve, reject) => {
+    const el = document.querySelector(selector);
+    if (el) {
+      resolve(el);
+      return;
+    }
 
-export enum SettingsSubSection {
-  Billing = "billing",
-  AiAgent = "ai-agent",
-  Access = "access",
-  CollectData = "collect-data",
-}
+    const observer = new MutationObserver(() => {
+      const found = document.querySelector(selector);
+      if (found) {
+        observer.disconnect();
+        resolve(found);
+      }
+    });
 
-export const DEFAULT_SETTINGS_SUBSECTION = SettingsSubSection.Billing;
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    setTimeout(() => {
+      observer.disconnect();
+      reject(new Error(`Timeout waiting for element: ${selector}`));
+    }, timeout);
+  });
+}
