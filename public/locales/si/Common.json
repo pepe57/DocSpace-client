@@ -1056,5 +1056,7 @@
   "YouHaveUnsavedChanges": "ඔබ සතුව නොසුරැකි වෙනස්කම් ඇත",
   "YourCurrentDomain": "ඔබගේ වත්මන් වසම",
   "YourLogo": "ඔබේ ලාංචනය",
-  "YourTurn": "ඔබේ වාරය."
+  "YourTurn": "ඔබේ වාරය.",
+  "AccessSettings": "ප්‍රවේශයන්",
+  "ActivateTariffLicenseExpired": "ඔබගේ බලපත්‍රය {{date}} දින කල් ඉකුත් විය."
 }

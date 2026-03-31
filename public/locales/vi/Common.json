@@ -1056,5 +1056,7 @@
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "AccessSettings": "Quyền truy cập",
+  "ActivateTariffLicenseExpired": "Giấy phép của bạn đã hết hạn vào {{date}}"
 }

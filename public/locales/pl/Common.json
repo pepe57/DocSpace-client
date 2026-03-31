@@ -1056,5 +1056,7 @@
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej"
+  "YourTurn": "Twoja kolej",
+  "AccessSettings": "Dostępy",
+  "ActivateTariffLicenseExpired": "Twój licencja wygasła {{date}}."
 }
