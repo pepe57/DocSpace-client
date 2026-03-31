@@ -70,7 +70,7 @@ type HeroSearchBarProps = {
 const HeroSearchBar = ({ langId, roomId, libraryId }: HeroSearchBarProps) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
-  const { results, isLoading, hasMore, query, search, clear } =
+  const { results, isLoading, query, search, clear } =
     useLibrarySearch(langId);
   const [inputValue, setInputValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -182,11 +182,6 @@ const HeroSearchBar = ({ langId, roomId, libraryId }: HeroSearchBarProps) => {
                   {highlightMatch(result.title, query)}
                 </div>
               ))}
-              {hasMore && (
-                <div className={styles.searchMoreResults}>
-                  {t("Common:ShowMore")}
-                </div>
-              )}
             </>
           )}
         </div>
