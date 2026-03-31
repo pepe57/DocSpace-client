@@ -1267,5 +1267,6 @@
   "WelcomeStartTour": "Take a tour",
   "WelcomeStartUsing": "Start using",
   "WelcomeToAIForms": "Welcome to AI Forms",
-  "UpdateXlsxData": "Update XLSX data"
+  "UpdateXlsxData": "Update XLSX data",
+  "SpreadsheetUpdated": "The spreadsheet for {{formName}} is updated based on all completed copies"
 }

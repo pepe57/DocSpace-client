@@ -138,6 +138,8 @@ import {
   getFolderLink,
   manageFormFilling,
   removeSharedFolderOrFile,
+  updateXlsxFile,
+  updateXlsxFolder,
 } from "@docspace/shared/api/files";
 
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
@@ -149,6 +151,7 @@ import {
 } from "@docspace/shared/constants";
 import {
   isFile as isFileUtil,
+  isFolder,
   isFolder as isFolderUtil,
   isRoom as isRoomUtil,
 } from "@docspace/shared/utils/typeGuards";
@@ -1592,8 +1595,19 @@ class ContextOptionsStore {
     downloadAction("", selectedFolder).catch((err) => toastr.error(err));
   };
 
-  onUpdateXlsxData = (item) => {
-    // Implementation for updating XLSX data
+  onUpdateXlsxData = async (item, t) => {
+    try {
+      const api = isFolder(item) ? updateXlsxFolder : updateXlsxFile;
+
+      const form = await api(item.id);
+
+      if (!form) return;
+
+      toastr.success(t("Common:SpreadsheetUpdated", { formName: form.title }));
+    } catch (error) {
+      toastr.error(error);
+      console.error(error);
+    }
   };
 
   createMenuGroup = (options, groupConfig, t) => {
@@ -2041,7 +2055,7 @@ class ContextOptionsStore {
         key: "update-xlsx-data",
         label: t("Common:UpdateXlsxData"),
         icon: spreadsheetUrl,
-        onClick: () => this.onUpdateXlsxData(item),
+        onClick: () => this.onUpdateXlsxData(item, t),
         disabled: false,
       },
       {

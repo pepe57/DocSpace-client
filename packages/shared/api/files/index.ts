@@ -29,6 +29,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import type { DateTime } from "luxon";
 
+import type { TFile } from "@docspace/ui-kit/types";
+
 import {
   ConflictResolveType,
   FolderType,
@@ -51,7 +53,6 @@ import {
   TDocServiceLocation,
   TEditDiff,
   TEditHistory,
-  TFile,
   TFileLink,
   TFilesSettings,
   TFilesUsedSpace,
@@ -1993,4 +1994,18 @@ export async function setOrganizeGrouping(set: boolean) {
   });
 
   return res as boolean;
+}
+
+export async function updateXlsxFile(fileId: string | number) {
+  return request<TFile>({
+    method: "POST",
+    url: `/files/file/${fileId}/xlsx`,
+  });
+}
+
+export async function updateXlsxFolder(folderId: string | number) {
+  return request<TFile>({
+    method: "POST",
+    url: `/files/folder/${folderId}/xlsx`,
+  });
 }

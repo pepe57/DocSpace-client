@@ -2848,6 +2848,10 @@ class FilesStore {
         ]);
       }
 
+      if (!item.security?.UpdateXlsx) {
+        fileOptions = removeOptions(fileOptions, ["update-xlsx-data"]);
+      }
+
       if (this.publicRoomStore.isPublicRoom) {
         fileOptions = removeOptions(fileOptions, [
           "separator0",
@@ -3469,6 +3473,10 @@ class FilesStore {
 
     if (item.external && item.isLinkExpired) {
       folderOptions = ["select", "separator0", "remove-shared-folder-or-file"];
+    }
+
+    if (!item.security?.UpdateXlsx) {
+      folderOptions = removeOptions(folderOptions, ["update-xlsx-data"]);
     }
 
     if (!isSharedWithMeFolderSection) {
