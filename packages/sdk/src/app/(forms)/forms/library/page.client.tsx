@@ -91,12 +91,14 @@ const LibraryPage = () => {
   if (isLoading) {
     return (
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 32, width: "100%" }}>
-        <RectangleSkeleton width="320px" height="180px" borderRadius="8px" animate />
+        <div style={{ width: "100%", maxWidth: 320 }}>
+          <RectangleSkeleton width="100%" height="200px" borderRadius="8px" animate />
+        </div>
         <div style={{ marginTop: 32 }}>
-          <RectangleSkeleton width="280px" height="30px" borderRadius="4px" animate />
+          <RectangleSkeleton width="min(280px, 70vw)" height="30px" borderRadius="4px" animate />
         </div>
         <div style={{ marginTop: 12 }}>
-          <RectangleSkeleton width="360px" height="22px" borderRadius="4px" animate />
+          <RectangleSkeleton width="min(340px, 80vw)" height="22px" borderRadius="4px" animate />
         </div>
         <div style={{
           display: "grid",
@@ -107,7 +109,10 @@ const LibraryPage = () => {
           marginTop: 40,
         }}>
           {Array.from({ length: 8 }, (_, i) => (
-            <RectangleSkeleton key={i} width="100%" height="52px" borderRadius="8px" animate />
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 12, padding: "14px 16px" }}>
+              <RectangleSkeleton width="32px" height="24px" borderRadius="3px" animate />
+              <RectangleSkeleton width="80px" height="22px" borderRadius="4px" animate />
+            </div>
           ))}
         </div>
       </div>
