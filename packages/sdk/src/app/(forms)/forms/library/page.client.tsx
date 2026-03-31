@@ -90,9 +90,26 @@ const LibraryPage = () => {
 
   if (isLoading) {
     return (
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16, paddingTop: 32 }}>
-        <RectangleSkeleton width="320px" height="200px" borderRadius="8px" animate />
-        <RectangleSkeleton width="240px" height="24px" borderRadius="4px" animate />
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 32, width: "100%" }}>
+        <RectangleSkeleton width="320px" height="180px" borderRadius="8px" animate />
+        <div style={{ marginTop: 32 }}>
+          <RectangleSkeleton width="280px" height="30px" borderRadius="4px" animate />
+        </div>
+        <div style={{ marginTop: 12 }}>
+          <RectangleSkeleton width="360px" height="22px" borderRadius="4px" animate />
+        </div>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "12px 16px",
+          width: "100%",
+          maxWidth: 960,
+          marginTop: 40,
+        }}>
+          {Array.from({ length: 8 }, (_, i) => (
+            <RectangleSkeleton key={i} width="100%" height="52px" borderRadius="8px" animate />
+          ))}
+        </div>
       </div>
     );
   }

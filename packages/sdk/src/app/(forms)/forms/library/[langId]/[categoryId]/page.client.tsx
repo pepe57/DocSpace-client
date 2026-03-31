@@ -32,6 +32,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import { useLibraryParams } from "../../../../_hooks/useLibraryParams";
 import { libraryUrl } from "../../../../_utils/libraryUrl";
@@ -129,7 +130,15 @@ const LibraryCategoryRoute = () => {
     [langId, categoryId, roomId, libraryId, router],
   );
 
-  if (isLoading) return null;
+  if (isLoading) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 480 }}>
+        {Array.from({ length: 6 }, (_, i) => (
+          <RectangleSkeleton key={i} width="240px" height="20px" borderRadius="4px" animate />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <LibraryCategoryListView items={items} onClickItem={handleClickItem} />

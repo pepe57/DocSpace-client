@@ -29,6 +29,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -224,7 +225,25 @@ const LibraryTemplateRoute = () => {
     router,
   ]);
 
-  if (isLoading || !template) return null;
+  if (isLoading || !template) {
+    return (
+      <div style={{ display: "flex", gap: 56, paddingTop: 8, width: "100%" }}>
+        <div style={{ flexShrink: 0, width: 420, display: "flex", flexDirection: "column", gap: 40 }}>
+          <RectangleSkeleton width="100%" height="594px" borderRadius="4px" animate />
+        </div>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 24 }}>
+          <RectangleSkeleton width="80%" height="40px" borderRadius="4px" animate />
+          <div style={{ display: "flex", gap: 40 }}>
+            <RectangleSkeleton width="120px" height="46px" borderRadius="4px" animate />
+            <RectangleSkeleton width="80px" height="46px" borderRadius="4px" animate />
+            <RectangleSkeleton width="80px" height="46px" borderRadius="4px" animate />
+          </div>
+          <RectangleSkeleton width="160px" height="40px" borderRadius="4px" animate />
+          <RectangleSkeleton width="100%" height="120px" borderRadius="4px" animate />
+        </div>
+      </div>
+    );
+  }
 
   const title = template.title.replace(/\.pdf$/i, "");
   const updatedDate = template.updated
