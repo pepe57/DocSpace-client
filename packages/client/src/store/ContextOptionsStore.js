@@ -85,6 +85,7 @@ import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
+import spreadsheetUrl from "PUBLIC_DIR/images/icons/16/spreadsheet.svg?url";
 import DotsHorizontalUrl from "PUBLIC_DIR/images/icons/16/dots-horizontal.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
@@ -1591,6 +1592,10 @@ class ContextOptionsStore {
     downloadAction("", selectedFolder).catch((err) => toastr.error(err));
   };
 
+  onUpdateXlsxData = (item) => {
+    // Implementation for updating XLSX data
+  };
+
   createMenuGroup = (options, groupConfig, t) => {
     const {
       groupKey,
@@ -2030,6 +2035,14 @@ class ContextOptionsStore {
           !this.treeFoldersStore.isFavoritesFolder &&
           !this.treeFoldersStore.isRecentFolder &&
           Boolean(item.external && item.isLinkExpired),
+      },
+      {
+        id: "option_update_xlsx_data",
+        key: "update-xlsx-data",
+        label: t("Common:UpdateXlsxData"),
+        icon: spreadsheetUrl,
+        onClick: () => this.onUpdateXlsxData(item),
+        disabled: false,
       },
       {
         id: "option_fill-form",
@@ -2507,7 +2520,10 @@ class ContextOptionsStore {
         label: t("Common:RemoveFromList"),
         icon: CircleCrossSvgUrl,
         onClick: () => this.onRemoveSharedFilesOrFolder([item]),
-        disabled: this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner || !item.external,
+        disabled:
+          this.userStore?.user?.isAdmin ||
+          this.userStore?.user?.isOwner ||
+          !item.external,
       },
       {
         id: "option_download-as",
@@ -2913,7 +2929,14 @@ class ContextOptionsStore {
       const groups = item.isFolder
         ? [
             ["select", "open", "mark-read", "open-location"],
-            ["share", "move", "copy-to", "download", "rename"],
+            [
+              "update-xlsx-data",
+              "share",
+              "move",
+              "copy-to",
+              "download",
+              "rename",
+            ],
             ["mark-as-favorite", "show-info"],
             ["restore"],
             ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
@@ -2933,7 +2956,15 @@ class ContextOptionsStore {
             ],
             ["filling-status", "reset-and-start-filling"],
             ["ask-ai"],
-            ["share", "move", "copy-to", "download", "edit-index", "rename"],
+            [
+              "update-xlsx-data",
+              "share",
+              "move",
+              "copy-to",
+              "download",
+              "edit-index",
+              "rename",
+            ],
             [
               "mark-as-favorite",
               "block-unblock-version",
