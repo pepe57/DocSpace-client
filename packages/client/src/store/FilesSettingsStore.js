@@ -169,6 +169,16 @@ class FilesSettingsStore {
 
   extsFilesVectorized = [];
 
+  externalShare = true;
+
+  defaultShareLinkInternal = false;
+
+  externalShareApplyToDocuments = true;
+
+  externalShareApplyToRooms = true;
+
+  blockExistingLinksOnRestrict = true;
+
   documentServiceLocation = null;
 
   constructor(
@@ -268,6 +278,16 @@ class FilesSettingsStore {
 
   setFilesSetting = (setting, val) => {
     this[setting] = val;
+  };
+
+  setAccessControlSettings = async (settings) => {
+    const res = await api.files.setAccessControlSettings(settings);
+    this.externalShare = res.externalShare;
+    this.defaultShareLinkInternal = res.defaultShareLinkInternal;
+    this.externalShareApplyToDocuments = res.externalShareApplyToDocuments;
+    this.externalShareApplyToRooms = res.externalShareApplyToRooms;
+    this.blockExistingLinksOnRestrict = res.blockExistingLinksOnRestrict;
+    return res;
   };
 
   setStoreOriginal = (data, setting) =>
