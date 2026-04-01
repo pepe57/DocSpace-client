@@ -32,7 +32,7 @@ import { useRouter } from "next/navigation";
 
 import { SearchInput } from "@docspace/ui-kit/components/search-input";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import useLibrarySearch, {
   type SearchResult,
@@ -70,7 +70,7 @@ type HeroSearchBarProps = {
 const HeroSearchBar = ({ langId, roomId, libraryId }: HeroSearchBarProps) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
-  const { results, isLoading, hasMore, query, search, clear } =
+  const { results, isLoading, query, search, clear } =
     useLibrarySearch(langId);
   const [inputValue, setInputValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -160,15 +160,7 @@ const HeroSearchBar = ({ langId, roomId, libraryId }: HeroSearchBarProps) => {
         <div className={styles.searchDropdown}>
           {isLoading ? (
             <div className={styles.searchLoading}>
-              {Array.from({ length: 3 }, (_, i) => (
-                <RectangleSkeleton
-                  key={i}
-                  width="80%"
-                  height="16px"
-                  borderRadius="4px"
-                  animate
-                />
-              ))}
+              <Loader type={LoaderTypes.dualRing} size="32px" />
             </div>
           ) : results.length === 0 ? (
             <div className={styles.searchNoResults}>
@@ -190,11 +182,6 @@ const HeroSearchBar = ({ langId, roomId, libraryId }: HeroSearchBarProps) => {
                   {highlightMatch(result.title, query)}
                 </div>
               ))}
-              {hasMore && (
-                <div className={styles.searchMoreResults}>
-                  {t("Common:ShowMore")}
-                </div>
-              )}
             </>
           )}
         </div>

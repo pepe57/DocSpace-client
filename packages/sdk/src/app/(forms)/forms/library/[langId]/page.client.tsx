@@ -32,6 +32,7 @@ import { useRouter } from "next/navigation";
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import { useLibraryParams } from "../../../_hooks/useLibraryParams";
 import useLibraryLandingData from "../../../_hooks/useLibraryLandingData";
@@ -140,7 +141,25 @@ const LibraryLandingRoute = () => {
   );
 
   if (isLoading || folders.length === 0) {
-    return null; // FormsGrid skeleton will handle loading via parent
+    return (
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", maxWidth: 800, margin: "0 auto", paddingTop: 24, paddingInline: 24, gap: 48, boxSizing: "border-box" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, width: "100%", maxWidth: 600 }}>
+          <RectangleSkeleton width="100%" height="30px" borderRadius="4px" animate />
+          <div style={{ width: "70%" }}>
+            <RectangleSkeleton width="100%" height="22px" borderRadius="4px" animate />
+          </div>
+          <div style={{ marginTop: 20, width: "100%" }}>
+            <RectangleSkeleton width="100%" height="48px" borderRadius="8px" animate />
+          </div>
+        </div>
+        <RectangleSkeleton width="100%" height="120px" borderRadius="12px" animate />
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, width: "100%" }}>
+          {Array.from({ length: 4 }, (_, i) => (
+            <RectangleSkeleton key={i} width="100%" height="160px" borderRadius="6px" animate />
+          ))}
+        </div>
+      </div>
+    );
   }
 
   return (
