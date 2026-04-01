@@ -36,6 +36,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 type InjectedProps = {
   isPayer?: boolean;
+  isPayerInfoLoaded?: boolean;
   walletCustomerEmail?: string;
   cardLinkedOnNonProfit?: boolean;
   cardLinkedOnFreeTariff?: boolean;
@@ -49,6 +50,7 @@ type InjectedProps = {
 
 const Warning = ({
   isPayer,
+  isPayerInfoLoaded,
   walletCustomerEmail,
   cardLinkedOnNonProfit,
   cardLinkedOnFreeTariff,
@@ -196,6 +198,8 @@ const Warning = ({
     if (warningText) setWarningText("");
   }, [isBackupRoute]);
 
+  if (isPaymentsServiceRoute && !isPayerInfoLoaded) return null;
+
   if (isPaymentsServiceRoute && !isPayer) {
     return (
       <WarningComponent
@@ -238,12 +242,14 @@ export default inject(
       cardLinkedOnFreeTariff,
       isBackupServiceOn,
     } = paymentStore;
-    const { walletCustomerEmail, isNotPaidPeriod } = currentTariffStatusStore;
+    const { walletCustomerEmail, isNotPaidPeriod, isPayerInfoLoaded } =
+      currentTariffStatusStore;
     const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
     const { backupsCount, isInited } = backup;
-
+    console.log("isPayer", isPayer);
     return {
       isPayer,
+      isPayerInfoLoaded,
       walletCustomerEmail,
       cardLinkedOnNonProfit,
       cardLinkedOnFreeTariff,

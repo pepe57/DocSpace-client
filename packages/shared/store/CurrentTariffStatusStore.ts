@@ -69,6 +69,8 @@ class CurrentTariffStatusStore {
     payer: null,
   };
 
+  isPayerInfoLoaded = false;
+
   constructor(userStore: UserStore, settingsStore: SettingsStore) {
     makeAutoObservable(this);
 
@@ -149,10 +151,14 @@ class CurrentTariffStatusStore {
   get storageExpiryDate() {
     if (!this.storageSubscriptionExpiryDate) return "";
 
-    return formatDateLocalized(this.storageSubscriptionExpiryDate, "DATE_FULL", {
-      locale: this.language,
-      timezone: getAppTimezone(),
-    });
+    return formatDateLocalized(
+      this.storageSubscriptionExpiryDate,
+      "DATE_FULL",
+      {
+        locale: this.language,
+        timezone: getAppTimezone(),
+      },
+    );
   }
 
   get daysUntilStorageExpiry() {
@@ -263,11 +269,8 @@ class CurrentTariffStatusStore {
   }
 
   fetchPayerInfo = async (isRefresh?: boolean) => {
-    const abortController = new AbortController();
-    this.settingsStore.addAbortControllers(abortController);
-
     try {
-      const res = await getWalletPayer(isRefresh, abortController.signal);
+      const res = await getWalletPayer(isRefresh);
 
       if (!res) return;
 
@@ -275,11 +278,10 @@ class CurrentTariffStatusStore {
 
       return res;
     } catch (e) {
-      if (axios.isCancel(e)) {
-        return;
-      }
       console.error(e);
       throw e;
+    } finally {
+      this.isPayerInfoLoaded = true;
     }
   };
 
@@ -330,3 +332,4 @@ class CurrentTariffStatusStore {
 }
 
 export { CurrentTariffStatusStore };
+
