@@ -165,8 +165,7 @@ const useDeveloperTools = ({
 
     if (window.location.pathname.includes("api-keys"))
       actions.push(getKeysData());
-
-    if (window.location.pathname.includes("api")) {
+    else if (window.location.pathname.includes("/api")) {
       await waitForTranslations();
       return;
     }

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState, useRef } from "react";
-import { Outlet, useParams, useLocation } from "react-router";
+import { Outlet, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 
 import Section from "@docspace/ui-kit/components/section";
@@ -56,7 +56,6 @@ const getSection = (pathname: string) => {
 
 const DeveloperToolsWrapperComponent = observer(
   ({ settingsStore, webhooksStore, oauthStore }: WrapperProps) => {
-    const { id, eventId } = useParams();
     const location = useLocation();
     const [isLoading, setIsLoading] = useState(true);
     const prevSectionRef = useRef<string>("");
@@ -108,11 +107,16 @@ const DeveloperToolsWrapperComponent = observer(
       }
     }, [isLoading]);
 
-    const webhookHistoryPath = `/developer-tools/webhooks/${id}`;
-    const webhookDetailsPath = `/developer-tools/webhooks/${id}/${eventId}`;
-    const oauthCreatePath = `/developer-tools/oauth/create`;
-    const oauthEditPath = `/developer-tools/oauth/${id}`;
-    const currentPath = window.location.pathname;
+    const currentPath = location.pathname;
+    const segments = currentPath.split("/").filter(Boolean);
+    // segments: ["developer-tools", section, ...rest]
+    const section = segments[1] ?? "";
+    const depth = segments.length;
+
+    const isWebhookHistory = section === "webhooks" && depth === 3;
+    const isWebhookDetails = section === "webhooks" && depth === 4;
+    const isOAuthForm = section === "oauth" && depth === 3;
+    const isOAuthEdit = isOAuthForm && !currentPath.endsWith("/create");
 
     return (
       <PrivateRoute>
@@ -124,13 +128,12 @@ const DeveloperToolsWrapperComponent = observer(
             settingsStudio
           >
             <Section.SectionHeader>
-              {currentPath === webhookHistoryPath ? (
+              {isWebhookHistory ? (
                 <HistoryHeader />
-              ) : currentPath === webhookDetailsPath ? (
+              ) : isWebhookDetails ? (
                 <DetailsNavigationHeader />
-              ) : currentPath === oauthCreatePath ||
-                currentPath === oauthEditPath ? (
-                <OAuthSectionHeader isEdit={currentPath === oauthEditPath} />
+              ) : isOAuthForm ? (
+                <OAuthSectionHeader isEdit={isOAuthEdit} />
               ) : (
                 <DeveloperToolsHeader />
               )}

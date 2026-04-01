@@ -110,7 +110,7 @@ const DeveloperToolsHeader = () => {
       {showBackButton ? (
         <IconButton
           iconName={ArrowPathReactSvgUrl}
-          size="17"
+          size={17}
           isFill
           onClick={onBackToParent}
           className="arrow-button"
