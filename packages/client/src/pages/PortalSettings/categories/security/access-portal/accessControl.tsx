@@ -252,7 +252,7 @@ const AccessControl = ({
     },
     {
       id: "default-link-type-docspace",
-      label: t("Settings:DefaultLinkTypeDocSpace", {
+      label: t("Settings:DefaultLinkTypeInternal", {
         productName: t("Common:ProductName"),
       }),
       value: "true",
