@@ -123,11 +123,7 @@ const ClientForm = ({
   }, [clientSecretProps, setClientSecretProps]);
 
   const onCancelClick = () => {
-    if (location.pathname.includes("portal-settings")) {
-      navigate("/portal-settings/developer-tools/oauth");
-    } else {
-      navigate("/developer-tools/oauth");
-    }
+    navigate("/developer-tools/oauth");
   };
 
   const onSaveClick = async () => {

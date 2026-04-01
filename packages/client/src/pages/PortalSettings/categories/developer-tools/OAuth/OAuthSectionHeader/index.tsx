@@ -45,10 +45,7 @@ const OAuthSectionHeader = ({ isEdit }: { isEdit: boolean }) => {
 	const location = useLocation();
 
 	const onBack = () => {
-		const path = location.pathname.includes("/portal-settings")
-			? "/portal-settings"
-			: "";
-		navigate(`${path}/developer-tools/oauth`);
+		navigate("/developer-tools/oauth");
 	};
 
 	if (!ready) return <LoaderSectionHeader />;

@@ -107,10 +107,7 @@ const DetailsNavigationHeader = () => {
   const location = useLocation();
 
   const onBack = () => {
-    const path = location.pathname.includes("/portal-settings")
-      ? "/portal-settings"
-      : "";
-    navigate(`${path}/developer-tools/webhooks/${id}`);
+    navigate(`/developer-tools/webhooks/${id}`);
   };
 
   const handleRetryEvent = async () => {
