@@ -33,6 +33,7 @@ import { default as AiPage } from "@docspace/ui-kit/payments/services/pages/ai-t
 import { default as BackupPage } from "@docspace/ui-kit/payments/services/pages/backup/BackupPage";
 import { default as AdditionalStoragePage } from "@docspace/ui-kit/payments/services/pages/additional-storage/AdditionalStoragePage";
 import type { TPaymentUser } from "@docspace/ui-kit/payments/types";
+import { PAYMENT_ROUTES } from "./utils";
 
 interface ServicesPageProps {
   language?: string;
@@ -60,13 +61,7 @@ const ServicesPage = (props: ServicesPageProps) => {
       language,
       logoText,
       user,
-      routes: {
-        portalPayments: `/portal-settings/payments/portal-payments`,
-        services: `/portal-settings/payments/services`,
-        aiServices: `/portal-settings/payments/services/ai-services`,
-        backup: `/portal-settings/payments/services/backup`,
-        diskStorage: `/portal-settings/payments/services/disk-storage`,
-      },
+      routes: PAYMENT_ROUTES,
     }),
     [language, logoText, user],
   );

@@ -32,6 +32,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Tabs } from "@docspace/ui-kit/components/tabs";
 import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { isManagement } from "@docspace/shared/utils/common";
+import { PAYMENT_ROUTES } from "./utils";
 
 import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
@@ -66,13 +67,7 @@ const PaymentsPage = (props) => {
       language,
       logoText,
       user,
-      routes: {
-        portalPayments: `/portal-settings/payments/portal-payments`,
-        services: `/portal-settings/payments/services`,
-        aiServices: `/portal-settings/payments/services/ai-services`,
-        backup: `/portal-settings/payments/services/backup`,
-        diskStorage: `/portal-settings/payments/services/disk-storage`,
-      },
+      routes: PAYMENT_ROUTES,
     }),
     [language, logoText, user],
   );
