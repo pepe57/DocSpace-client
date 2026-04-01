@@ -1058,5 +1058,20 @@
   "YourLogo": "Ваш лого",
   "YourTurn": "Ваш ред",
   "AccessSettings": "Приступи",
-  "ActivateTariffLicenseExpired": "Ваша лиценца истекла {{date}}"
+  "ActivateTariffLicenseExpired": "Ваша лиценца истекла {{date}}",
+  "AddTag": "Додајте ознаку",
+  "AgentInfo": "Информације о агенту",
+  "AIAgent": "ВИ агент",
+  "AIAgentDescription": "Омогући алат за вештачку интелигенцију који може одговарати на питања о завршеним пријавама.",
+  "AIAgentSpaceQuotaExceeded": "Прекошена квота простора за {{aiAgent}} ({{size}}).",
+  "AIChatButton": "ВИ Чат",
+  "AskAnyQuestion": "Поставите било којо питање или опишите шта вам је потребно.",
+  "AIChats": "ВИ чатови",
+  "AllRooms": "Све собе",
+  "AM": "АМ",
+  "Billing": "Наплата",
+  "ChooseYourCountry": "Изаберите земљу",
+  "ChooseYourCountryDescription": "Изаберите језик да бисте прегледали доступне шаблоне образаца",
+  "CollectData": "Прикупи податке",
+  "CollectResultsInXlsx": "Прикупити резултате у XLSX"
 }

@@ -1058,5 +1058,20 @@
   "YourLogo": "Logo của bạn",
   "YourTurn": "Phiên của bạn",
   "AccessSettings": "Quyền truy cập",
-  "ActivateTariffLicenseExpired": "Giấy phép của bạn đã hết hạn vào {{date}}"
+  "ActivateTariffLicenseExpired": "Giấy phép của bạn đã hết hạn vào {{date}}",
+  "AddTag": "Thêm một thẻ",
+  "AgentInfo": "Thông tin đại lý",
+  "AIAgent": "Đại lý AI",
+  "AIAgentDescription": "Cho phép trợ lý AI có thể trả lời các câu hỏi về các bản gửi đã hoàn thành.",
+  "AIAgentSpaceQuotaExceeded": "{{aiAgent}} đã vượt quá hạn ngạch dung lượng ({{size}}).",
+  "AIChatButton": "Trò chuyện AI",
+  "AskAnyQuestion": "Hỏi bất kỳ câu hỏi nào hoặc mô tả những gì bạn cần.",
+  "AIChats": "Trò chuyện AI",
+  "AllRooms": "Tất cả các phòng",
+  "AM": "AM",
+  "Billing": "Thanh toán",
+  "ChooseYourCountry": "Chọn quốc gia của bạn",
+  "ChooseYourCountryDescription": "Chọn một ngôn ngữ để xem các mẫu biểu mẫu có sẵn.",
+  "CollectData": "Thu thập dữ liệu",
+  "CollectResultsInXlsx": "Thu thập kết quả trong XLSX"
 }

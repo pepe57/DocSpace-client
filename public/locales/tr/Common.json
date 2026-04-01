@@ -1058,5 +1058,20 @@
   "YourLogo": "Logonuz",
   "YourTurn": "Sıra sizde",
   "AccessSettings": "Erişimler",
-  "ActivateTariffLicenseExpired": "Lisansınız {{date}} tarihinde sona erdi."
+  "ActivateTariffLicenseExpired": "Lisansınız {{date}} tarihinde sona erdi.",
+  "AddTag": "Bir etiket ekle",
+  "AgentInfo": "Ajan bilgisi",
+  "AIAgent": "AI ajanı",
+  "AIAgentDescription": "Tamamlanmış form gönderimleri hakkında soruları yanıtlayabilen yapay zeka asistanını etkinleştirin.",
+  "AIAgentSpaceQuotaExceeded": "{{aiAgent}} alan kotası aşıldı ({{size}}).",
+  "AIChatButton": "Yapay Zeka Sohbeti",
+  "AskAnyQuestion": "Herhangi bir soru sorun veya neye ihtiyacınız olduğunu açıklayın",
+  "AIChats": "Yapay zeka sohbetleri",
+  "AllRooms": "Tüm odalar",
+  "AM": "ÖS",
+  "Billing": "Fatura",
+  "ChooseYourCountry": "Ülkenizi seçin",
+  "ChooseYourCountryDescription": "İlgili form şablonlarını görüntülemek için bir dil seçin",
+  "CollectData": "Veri topla",
+  "CollectResultsInXlsx": "Sonuçları XLSX'te toplayın"
 }

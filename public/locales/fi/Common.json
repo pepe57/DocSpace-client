@@ -1058,5 +1058,20 @@
   "YourLogo": "Logosi",
   "YourTurn": "Sinun vuorosi",
   "AccessSettings": "Oikeudet",
-  "ActivateTariffLicenseExpired": "Lisenssisi on vanhentunut {{date}}."
+  "ActivateTariffLicenseExpired": "Lisenssisi on vanhentunut {{date}}.",
+  "AddTag": "Lisää tunniste",
+  "AgentInfo": "Agentin tiedot",
+  "AIAgent": "AI-agentti",
+  "AIAgentDescription": "Ota käyttöön AI-avustaja, joka voi vastata kysymyksiin täytetyistä lomakelähetyksistä.",
+  "AIAgentSpaceQuotaExceeded": "{{aiAgent}}-tilan kiintiö on ylitetty ({{size}}).",
+  "AIChatButton": "AI-keskustelu",
+  "AskAnyQuestion": "Kysy mitä tahansa kysymystä tai kuvaile, mitä tarvitset.",
+  "AIChats": "AI-keskustelut",
+  "AllRooms": "Kaikki huoneet",
+  "AM": "AM",
+  "Billing": "Laskutus",
+  "ChooseYourCountry": "Valitse maasi",
+  "ChooseYourCountryDescription": "Valitse kieli, jotta voit selata saatavilla olevia lomapäinetyyppejä",
+  "CollectData": "Kerää dataa",
+  "CollectResultsInXlsx": "Kerää tulokset XLSX-tiedostoon"
 }

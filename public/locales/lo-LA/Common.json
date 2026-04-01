@@ -1058,5 +1058,20 @@
   "YourLogo": "ໂລໂກ້ຂອງທ່ານ",
   "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
   "AccessSettings": "ເຂົ້າ​ເຖິງ",
-  "ActivateTariffLicenseExpired": "ໃບອະນຸຍາດຂອງທ່ານໝົດອາຍຸໃນວັນທີ {{date}}"
+  "ActivateTariffLicenseExpired": "ໃບອະນຸຍາດຂອງທ່ານໝົດອາຍຸໃນວັນທີ {{date}}",
+  "AddTag": "ເພີ່ມแท็ก",
+  "AgentInfo": "ຂໍ້ມູນຕົວແທນ",
+  "AIAgent": "ຕົວແທນ AI",
+  "AIAgentDescription": "ເປີດໃຊ້ຜູ້ຊ່ວຍ AI ທີ່ສາມາດຕອບຄຳຖາມກ່ຽວກັບການສະນີ້ນສົ່ງແບບຟອມທີ່ສໍາເລັດແລ້ວໄດ້។",
+  "AIAgentSpaceQuotaExceeded": "ໂຄຕ້າພື້ນທີ່ {{aiAgent}} ເກີນແລ້ວ ({{size}}).",
+  "AIChatButton": "ການສົນທະນາດ້ວຍ AI",
+  "AskAnyQuestion": "ຖາມຄຳຖາມໃດໆ ຫຼື ອະທິບາຍວ່າທ່ານຕ້ອງການຫຍັງ",
+  "AIChats": "ການສົນທະນາ AI",
+  "AllRooms": "ຫ້ອງທັງໝົດ",
+  "AM": "ກ່ອນທ່ຽງ",
+  "Billing": "ການເງິນ",
+  "ChooseYourCountry": "ເລືອກປະເທດຂອງເຈົ້າ",
+  "ChooseYourCountryDescription": "ເລືອກພາສາເພື່ອເບິ່ງແມ່ແບບແບບຟອມທີ່ມີຢູ່",
+  "CollectData": "ເຕົ້າໂຮນຂໍ້ມູນ",
+  "CollectResultsInXlsx": "ເຕົ້າໂຮນຜົນໄດ້ຮັບໃນ XLSX"
 }

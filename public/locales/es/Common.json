@@ -1058,5 +1058,20 @@
   "YourLogo": "Su logotipo",
   "YourTurn": "Su turno",
   "AccessSettings": "Accesos",
-  "ActivateTariffLicenseExpired": "Su licencia expiró el {{date}}"
+  "ActivateTariffLicenseExpired": "Su licencia expiró el {{date}}",
+  "AddTag": "Añade una etiqueta",
+  "AgentInfo": "Información del agente",
+  "AIAgent": "Agente de IA",
+  "AIAgentDescription": "Habilitar asistente de IA que pueda responder preguntas sobre envíos de formularios completados.",
+  "AIAgentSpaceQuotaExceeded": "Se ha superado la cuota de espacio de {{aiAgent}} ({{size}}).",
+  "AIChatButton": "Chat de IA",
+  "AskAnyQuestion": "Haz cualquier pregunta o describe lo que necesitas.",
+  "AIChats": "Chats de IA",
+  "AllRooms": "Todas las salas",
+  "AM": "AM",
+  "Billing": "Facturación",
+  "ChooseYourCountry": "Elige tu país",
+  "ChooseYourCountryDescription": "Seleccione un idioma para ver las plantillas de formulario disponibles.",
+  "CollectData": "Recopilar datos",
+  "CollectResultsInXlsx": "Recopilar resultados en XLSX"
 }

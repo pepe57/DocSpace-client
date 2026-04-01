@@ -1058,5 +1058,20 @@
   "YourLogo": "Logo-ul dvs",
   "YourTurn": "Acum e rândul dvs.",
   "AccessSettings": "Accese",
-  "ActivateTariffLicenseExpired": "Licența dumneavoastră a expirat în {{date}}."
+  "ActivateTariffLicenseExpired": "Licența dumneavoastră a expirat în {{date}}.",
+  "AddTag": "Adaugă o etichetă",
+  "AgentInfo": "Informații agent",
+  "AIAgent": "Agent IA",
+  "AIAgentDescription": "Activează asistentul IA care poate răspunde la întrebări despre depunerile de formulare finalizate.",
+  "AIAgentSpaceQuotaExceeded": "Depășirea cotei de spațiu {{aiAgent}} ({{size}}).",
+  "AIChatButton": "Chat IA",
+  "AskAnyQuestion": "Întreabă orice întrebare sau descrie ce ai nevoie.",
+  "AIChats": "Chat-uri IA",
+  "AllRooms": "Toate săli",
+  "AM": "AM",
+  "Billing": "Facturare",
+  "ChooseYourCountry": "Alegeți țara dumneavoastră",
+  "ChooseYourCountryDescription": "Selectați o limbă pentru a vizualiza șabloanele de formulare disponibile.",
+  "CollectData": "Colectează date",
+  "CollectResultsInXlsx": "Colectează rezultatele în XLSX"
 }

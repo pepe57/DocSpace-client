@@ -1058,5 +1058,20 @@
   "YourLogo": "Il tuo logo",
   "YourTurn": "Il tuo turno",
   "AccessSettings": "Accessi",
-  "ActivateTariffLicenseExpired": "La sua licenza è scaduta il {{date}}."
+  "ActivateTariffLicenseExpired": "La sua licenza è scaduta il {{date}}.",
+  "AddTag": "Aggiungi un tag",
+  "AgentInfo": "Informazioni sull'agente",
+  "AIAgent": "Agente AI",
+  "AIAgentDescription": "Abilita l'assistente AI che può rispondere alle domande sui moduli compilati.",
+  "AIAgentSpaceQuotaExceeded": "La quota dello spazio di {{aiAgent}} è stata superata ({{size}}).",
+  "AIChatButton": "Chat AI",
+  "AskAnyQuestion": "Chiedi qualsiasi domanda o descrivi cosa ti serve.",
+  "AIChats": "Chat AI",
+  "AllRooms": "Tutte le stanze",
+  "AM": "AM",
+  "Billing": "Fatturazione",
+  "ChooseYourCountry": "Scegli il tuo paese",
+  "ChooseYourCountryDescription": "Seleziona una lingua per visualizzare i modelli di moduli disponibili.",
+  "CollectData": "Raccogli dati",
+  "CollectResultsInXlsx": "Raccogli i risultati in XLSX"
 }

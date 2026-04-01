@@ -1058,5 +1058,20 @@
   "YourLogo": "Jūsu logotips",
   "YourTurn": "Jūsu kārta",
   "AccessSettings": "Piekļuves",
-  "ActivateTariffLicenseExpired": "Jūsu licence ir beidzusi derību {{date}} datumā."
+  "ActivateTariffLicenseExpired": "Jūsu licence ir beidzusi derību {{date}} datumā.",
+  "AddTag": "Pievienojiet tagu",
+  "AgentInfo": "Aģenta informācija",
+  "AIAgent": "MI aģents",
+  "AIAgentDescription": "Iespējojiet MI asistentu, kas var atbildēt uz jautājumiem par aizpildītiem veidžu iesniegumiem.",
+  "AIAgentSpaceQuotaExceeded": "{{aiAgent}} vietas kvota pārsniegta ({{size}}).",
+  "AIChatButton": "AI Čat",
+  "AskAnyQuestion": "Uzvāciet jebkuru jautājumu vai aprakstiet, kas jums nepieciešams.",
+  "AIChats": "MI čati",
+  "AllRooms": "Visas telpas",
+  "AM": "AM",
+  "Billing": "Rēķinu",
+  "ChooseYourCountry": "Izvēliet savu valsti",
+  "ChooseYourCountryDescription": "Izvēlieties valodu, lai apskatītu pieejamos veidņu paraugu veidņus.",
+  "CollectData": "Savāc datiem",
+  "CollectResultsInXlsx": "Savāc rezultātus XLSX formātā"
 }

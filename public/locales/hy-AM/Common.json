@@ -1058,5 +1058,20 @@
   "YourLogo": "Ձեր լոգոն",
   "YourTurn": "Ձեր հերթն է",
   "AccessSettings": "Մուտքի իրավունքներ",
-  "ActivateTariffLicenseExpired": "Ձեր լիցենզիայի ժամկետը լրացել է {{date}}-ին"
+  "ActivateTariffLicenseExpired": "Ձեր լիցենզիայի ժամկետը լրացել է {{date}}-ին",
+  "AddTag": "Ավելացնել պիտակ",
+  "AgentInfo": "Գործակալի տեղեկատվություն",
+  "AIAgent": "ԱԲ գործակալ",
+  "AIAgentDescription": "Միացնել ԱԲ օգնականը, որը կարող է պատասխանել հարցերին լրացված ձևաթղթերի ներկայացումների վերաբերյալ։",
+  "AIAgentSpaceQuotaExceeded": "{{aiAgent}} տեղը սպառվել է ({{size}}).",
+  "AIChatButton": "ԱԲ Չաթ",
+  "AskAnyQuestion": "Կարո՞ղ ես դրսևորել ցանկացած հարց կամ նկարագրել ո՞րն է անհրաժեշտը:",
+  "AIChats": "ԱԲ Չաթեր",
+  "AllRooms": "Բոլոր ավերագրերը",
+  "AM": "AM",
+  "Billing": "Հաշվագրություն",
+  "ChooseYourCountry": "Ընտրեք ձեր երկիրը։",
+  "ChooseYourCountryDescription": "Լեզու ընտրեք ձեզ հասանելի ձևաչափի նմուշներ դիտելու համար:",
+  "CollectData": "Հավաքել տվյալներ",
+  "CollectResultsInXlsx": "Հավաքել արդյունքները XLSX ֆայլում։"
 }

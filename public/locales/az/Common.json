@@ -1058,5 +1058,20 @@
   "YourLogo": "Loqonuz",
   "YourTurn": "Sizin növbəniz",
   "AccessSettings": "Girişlər",
-  "ActivateTariffLicenseExpired": "Lisenziyanız {{date}} tarixində bitdi."
+  "ActivateTariffLicenseExpired": "Lisenziyanız {{date}} tarixində bitdi.",
+  "AddTag": "Etiket əlavə edin",
+  "AgentInfo": "Agentin məlumatları",
+  "AIAgent": "AI agenti",
+  "AIAgentDescription": "Tamamlama form təqdimatları ilə bağlı suallara cavab verə bilən AI köməkçisini aktiv edin.",
+  "AIAgentSpaceQuotaExceeded": "{{aiAgent}} məkan kvotasını aşdı ({{size}}).",
+  "AIChatButton": "AI Çat",
+  "AskAnyQuestion": "Hər hansı bir sual verin və ya nəyə ehtiyacınız olduğunu təsvir edin.",
+  "AIChats": "Süni İntellekt söhbətləri",
+  "AllRooms": "Bütün otaqlar",
+  "AM": "AM",
+  "Billing": "Ödəniş",
+  "ChooseYourCountry": "Ölkənizi seçin",
+  "ChooseYourCountryDescription": "Müstəvi form şablonları üçün nəzərdə tutulan dilini seçin",
+  "CollectData": "Məlumatları topla",
+  "CollectResultsInXlsx": "Nəticələri XLSX formatında topla"
 }

@@ -1058,5 +1058,20 @@
   "YourLogo": "O seu logótipo",
   "YourTurn": "A sua vez",
   "AccessSettings": "Acessos",
-  "ActivateTariffLicenseExpired": "Sua licença expirou em {{date}}."
+  "ActivateTariffLicenseExpired": "Sua licença expirou em {{date}}.",
+  "AddTag": "Adicionar etiqueta",
+  "AgentInfo": "Informações do agente",
+  "AIAgent": "Agente de IA",
+  "AIAgentDescription": "Habilitar assistente de IA que pode responder a perguntas sobre envios de formulários concluídos.",
+  "AIAgentSpaceQuotaExceeded": "Cota de espaço do {{aiAgent}} excedida ({{size}}).",
+  "AIChatButton": "Chat de IA",
+  "AskAnyQuestion": "Pergunte qualquer questão ou descreva o que você precisa.",
+  "AIChats": "Chats de IA",
+  "AllRooms": "Todos os salas",
+  "AM": "AM",
+  "Billing": "Faturamento",
+  "ChooseYourCountry": "Escolha o seu país",
+  "ChooseYourCountryDescription": "Selecione um idioma para visualizar os modelos de formulário disponíveis.",
+  "CollectData": "Coletar dados",
+  "CollectResultsInXlsx": "Colete os resultados em XLSX"
 }

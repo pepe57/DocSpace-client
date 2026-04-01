@@ -1058,5 +1058,20 @@
   "YourLogo": "Uw logo",
   "YourTurn": "Uw beurt",
   "AccessSettings": "Toegang tot",
-  "ActivateTariffLicenseExpired": "Uw licentie is verlopen op {{date}}"
+  "ActivateTariffLicenseExpired": "Uw licentie is verlopen op {{date}}",
+  "AddTag": "Een tag toevoegen",
+  "AgentInfo": "Agent informatie",
+  "AIAgent": "AI agent",
+  "AIAgentDescription": "Schakel de AI-assistent in die vragen kan beantwoorden over voltooide formulierinzendingen.",
+  "AIAgentSpaceQuotaExceeded": "{{aiAgent}} opslagruimte overschreden ({{size}}).",
+  "AIChatButton": "AI Chat",
+  "AskAnyQuestion": "Stel elke vraag of beschrijf wat je nodig hebt.",
+  "AIChats": "AI-chats",
+  "AllRooms": "Alle kamers",
+  "AM": "AM",
+  "Billing": "Facturering",
+  "ChooseYourCountry": "Kies uw land",
+  "ChooseYourCountryDescription": "Select een taal om de beschikbare formulier templates te bekijken",
+  "CollectData": "Verzamel data",
+  "CollectResultsInXlsx": "Verzamel resultaten in XLSX"
 }

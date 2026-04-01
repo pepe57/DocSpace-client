@@ -1058,5 +1058,20 @@
   "YourLogo": "Vaše logo",
   "YourTurn": "Ste na rade",
   "AccessSettings": "Prístupy",
-  "ActivateTariffLicenseExpired": "Vaša licencia vypršala {{date}}."
+  "ActivateTariffLicenseExpired": "Vaša licencia vypršala {{date}}.",
+  "AddTag": "Pridať štítok",
+  "AgentInfo": "Informácie o agentovi",
+  "AIAgent": "AI agent",
+  "AIAgentDescription": "Zapnúť AI asistenta, ktorý dokáže odpovedať na otázky týkajúce sa dokončených odovzdávaní formulárov.",
+  "AIAgentSpaceQuotaExceeded": "{{aiAgent}} prekročila limit úložného priestoru ({{size}}).",
+  "AIChatButton": "AI Chat",
+  "AskAnyQuestion": "Zadajte akúkoľvek otázku alebo popíšte, čo potrebujete.",
+  "AIChats": "AI chaty",
+  "AllRooms": "Všetky miestnosti",
+  "AM": "AM",
+  "Billing": "Fakturácia",
+  "ChooseYourCountry": "Vyberte si krajinu",
+  "ChooseYourCountryDescription": "Vyberte jazyk na prezeranie dostupných šablón formulárov.",
+  "CollectData": "Zozbierajte dáta",
+  "CollectResultsInXlsx": "Zozbierajte výsledky do XLSX"
 }
