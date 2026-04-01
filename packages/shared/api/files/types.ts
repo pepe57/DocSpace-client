@@ -32,6 +32,7 @@ import type {
   TPathParts,
 } from "../../types";
 import type {
+  DistributedTaskStatus,
   EmployeeActivationStatus,
   EmployeeStatus,
   FileFillingFormStatus,
@@ -523,4 +524,14 @@ export type TDefaultTemplate = {
   fileTitle?: string;
   fileSize?: number;
   viewUrl?: string;
+};
+
+export type UpdateXlsxResponse = {
+  form: TFile;
+  task: {
+    id: string;
+    percentage: number;
+    isCompleted: boolean;
+    status: DistributedTaskStatus;
+  };
 };

@@ -49,7 +49,7 @@ import { request } from "../client";
 import { SHARED_MEMBERS_COUNT } from "../../constants";
 
 import FilesFilter from "./filter";
-import {
+import type {
   TDocServiceLocation,
   TEditDiff,
   TEditHistory,
@@ -77,7 +77,9 @@ import {
   TFileFillingFormStatus,
   TShareToUser,
   TDefaultTemplate,
+  UpdateXlsxResponse,
 } from "./types";
+
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
 
 export async function openEdit(
@@ -1997,15 +1999,22 @@ export async function setOrganizeGrouping(set: boolean) {
 }
 
 export async function updateXlsxFile(fileId: string | number) {
-  return request<TFile>({
+  return request<UpdateXlsxResponse>({
     method: "POST",
     url: `/files/file/${fileId}/xlsx`,
   });
 }
 
 export async function updateXlsxFolder(folderId: string | number) {
-  return request<TFile>({
+  return request<UpdateXlsxResponse>({
     method: "POST",
     url: `/files/folder/${folderId}/xlsx`,
+  });
+}
+
+export async function getProgressXlsx(itemId: string | number) {
+  return request<UpdateXlsxResponse["task"]>({
+    method: "GET",
+    url: `/files/file/${itemId}/xlsx`,
   });
 }
