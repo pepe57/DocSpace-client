@@ -1056,5 +1056,7 @@
   "YouHaveUnsavedChanges": "Imate nesačuvane promene",
   "YourCurrentDomain": "Vaš trenutni domen",
   "YourLogo": "Vaš logo",
-  "YourTurn": "Vaš red"
+  "YourTurn": "Vaš red",
+  "AccessSettings": "Pristupi",
+  "ActivateTariffLicenseExpired": "Vaša licenca istekla je {{date}}."
 }

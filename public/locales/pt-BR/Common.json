@@ -1056,5 +1056,7 @@
   "YouHaveUnsavedChanges": "Você tem mudanças não salvas",
   "YourCurrentDomain": "Seu domínio atual",
   "YourLogo": "Seu logotipo",
-  "YourTurn": "Sua vez"
+  "YourTurn": "Sua vez",
+  "AccessSettings": "Acessos",
+  "ActivateTariffLicenseExpired": "Sua licença expirou em {{date}}"
 }
