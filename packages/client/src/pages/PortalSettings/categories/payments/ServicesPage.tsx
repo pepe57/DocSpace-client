@@ -54,7 +54,7 @@ const ServicesPage = (props: ServicesPageProps) => {
   const location = useLocation();
   useEffect(() => {
     fetchPayerInfo?.();
-  }, []);
+  }, [fetchPayerInfo]);
 
   const paymentConfig = useMemo(
     () => ({
