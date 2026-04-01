@@ -104,7 +104,6 @@ const DetailsNavigationHeader = () => {
 
   const { t } = useTranslation(["Webhooks", "Common"]);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const onBack = () => {
     navigate(`/developer-tools/webhooks/${id}`);

@@ -192,7 +192,6 @@ const HistoryHeader = (props) => {
     setRetryPendingTrue,
   } = props;
   const navigate = useNavigate();
-  const location = useLocation();
 
   const onBack = () => {
     navigate("/developer-tools/webhooks");

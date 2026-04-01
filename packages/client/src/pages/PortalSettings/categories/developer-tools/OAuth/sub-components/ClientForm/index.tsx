@@ -72,7 +72,6 @@ const ClientForm = ({
   setJwtToken,
 }: ClientFormProps) => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isRequestRunning, setIsRequestRunning] =

@@ -42,7 +42,6 @@ const OAuthSectionHeader = ({ isEdit }: { isEdit: boolean }) => {
 	const { t, ready } = useTranslation(["OAuth"]);
 
 	const navigate = useNavigate();
-	const location = useLocation();
 
 	const onBack = () => {
 		navigate("/developer-tools/oauth");
