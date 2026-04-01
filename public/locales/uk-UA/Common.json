@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "Оберіть свою країну",
   "ChooseYourCountryDescription": "Виберіть мову, щоб переглянути доступні шаблони форм.",
   "CollectData": "Збирати дані",
-  "CollectResultsInXlsx": "Збирати результати в XLSX"
+  "CollectResultsInXlsx": "Збирати результати в XLSX",
+  "AnyFiles": "Будь-які файли",
+  "ChooseAIAgent": "Оберіть {{aiAgent}}",
+  "CompletedForms": "Заповнені форми",
+  "Connected": "Підключено",
+  "ConnectionFailed": "Помилка підключення",
+  "ConnectionSuccessful": "Підключення успішне",
+  "CopyingTemplate": "Копіювання...",
+  "DatabaseHost": "Хост",
+  "DatabaseName": "Назва бази даних",
+  "DatabasePort": "Порт",
+  "DomainAlreadyAdded": "Цей домен вже додано.",
+  "DropzoneFilesSecondary": "або перетягніть файли сюди",
+  "DropzoneFolderSecondary": "або перетягніть сюди папку",
+  "DropzoneFoldersSecondary": "або перетягніть сюди папки"
 }

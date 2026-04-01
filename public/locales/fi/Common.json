@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "Valitse maasi",
   "ChooseYourCountryDescription": "Valitse kieli, jotta voit selata saatavilla olevia lomapäinetyyppejä",
   "CollectData": "Kerää dataa",
-  "CollectResultsInXlsx": "Kerää tulokset XLSX-tiedostoon"
+  "CollectResultsInXlsx": "Kerää tulokset XLSX-tiedostoon",
+  "AnyFiles": "Kaikki tiedostot",
+  "ChooseAIAgent": "Valitse {{aiAgent}}",
+  "CompletedForms": "Valmiit lomakkeet",
+  "Connected": "Yhdistetty",
+  "ConnectionFailed": "Yhteysvirhe",
+  "ConnectionSuccessful": "Yhteys onnistui",
+  "CopyingTemplate": "Kopiointi…",
+  "DatabaseHost": "Palvelin",
+  "DatabaseName": "Tietokannan nimi",
+  "DatabasePort": "Portti",
+  "DomainAlreadyAdded": "Tämä verkkotunnus on jo lisätty",
+  "DropzoneFilesSecondary": "tai pudota tiedostoja tänne",
+  "DropzoneFolderSecondary": "tai pudota kansio tänne",
+  "DropzoneFoldersSecondary": "tai vedä kansiot tähän"
 }

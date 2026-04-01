@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "Vyberte si zemi.",
   "ChooseYourCountryDescription": "Vyberte jazyk pro zobrazení dostupných šablon formulářů.",
   "CollectData": "Sběr dat",
-  "CollectResultsInXlsx": "Shromáždit výsledky do XLSX"
+  "CollectResultsInXlsx": "Shromáždit výsledky do XLSX",
+  "AnyFiles": "Jakékoliv soubory",
+  "ChooseAIAgent": "Vyberte {{aiAgent}}.",
+  "CompletedForms": "Vyplněné formuláře",
+  "Connected": "Připojené",
+  "ConnectionFailed": "Připojení se nezdařilo",
+  "ConnectionSuccessful": "Připojení úspěšné",
+  "CopyingTemplate": "Kopírování...",
+  "DatabaseHost": "Hostitel",
+  "DatabaseName": "Název databáze",
+  "DatabasePort": "Port",
+  "DomainAlreadyAdded": "Tato doména již byla přidána.",
+  "DropzoneFilesSecondary": "nebo sem vložte soubory",
+  "DropzoneFolderSecondary": "nebo sem přetáhněte složku",
+  "DropzoneFoldersSecondary": "nebo sem přetáhněte složky"
 }

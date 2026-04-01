@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "اختر بلدك",
   "ChooseYourCountryDescription": "اختر لغة لتصفح قوالب النماذج المتاحة",
   "CollectData": "اجمع البيانات",
-  "CollectResultsInXlsx": "اجمع النتائج في ملف XLSX"
+  "CollectResultsInXlsx": "اجمع النتائج في ملف XLSX",
+  "AnyFiles": "أي ملفات",
+  "ChooseAIAgent": "اختر {{aiAgent}}",
+  "CompletedForms": "نماذج مكتملة",
+  "Connected": "متصل",
+  "ConnectionFailed": "فشل الاتصال",
+  "ConnectionSuccessful": "تم الاتصال بنجاح",
+  "CopyingTemplate": "جارٍ النسخ...",
+  "DatabaseHost": "المستضيف",
+  "DatabaseName": "اسم قاعدة البيانات",
+  "DatabasePort": "مرفأ",
+  "DomainAlreadyAdded": "تم إضافة هذا النطاق بالفعل",
+  "DropzoneFilesSecondary": "أو قم بإسقاط الملفات هنا",
+  "DropzoneFolderSecondary": "أو قم بإسقاط المجلد هنا",
+  "DropzoneFoldersSecondary": "أو قم بإسقاط المجلدات هنا"
 }

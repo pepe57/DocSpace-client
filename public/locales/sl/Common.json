@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "Izberite svojo državo",
   "ChooseYourCountryDescription": "Izberite jezik za ogled razpoložljivih predlog za obrazce",
   "CollectData": "Zbiraj podatke",
-  "CollectResultsInXlsx": "Zberite rezultate v datoteki XLSX"
+  "CollectResultsInXlsx": "Zberite rezultate v datoteki XLSX",
+  "AnyFiles": "Nobene datoteke",
+  "ChooseAIAgent": "Izberite {{aiAgent}}.",
+  "CompletedForms": "Izpolnjeni obrazci",
+  "Connected": "Povezano",
+  "ConnectionFailed": "Povezava ni uspela",
+  "ConnectionSuccessful": "Povezava uspešna",
+  "CopyingTemplate": "Kopiranje...",
+  "DatabaseHost": "Gostitelj",
+  "DatabaseName": "Ime podatoteke",
+  "DatabasePort": "Vrata",
+  "DomainAlreadyAdded": "Ta domena je že bila dodana.",
+  "DropzoneFilesSecondary": "ali povlecite datoteke sem",
+  "DropzoneFolderSecondary": "ali spustite mapo tukaj",
+  "DropzoneFoldersSecondary": "ali povlecite mape sem"
 }

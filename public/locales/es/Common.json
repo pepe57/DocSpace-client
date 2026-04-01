@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "Elige tu país",
   "ChooseYourCountryDescription": "Seleccione un idioma para ver las plantillas de formulario disponibles.",
   "CollectData": "Recopilar datos",
-  "CollectResultsInXlsx": "Recopilar resultados en XLSX"
+  "CollectResultsInXlsx": "Recopilar resultados en XLSX",
+  "AnyFiles": "Cualquier archivo",
+  "ChooseAIAgent": "Elige un {{aiAgent}}",
+  "CompletedForms": "Formularios completados",
+  "Connected": "Conectado",
+  "ConnectionFailed": "Conexión fallida",
+  "ConnectionSuccessful": "Conexión exitosa",
+  "CopyingTemplate": "Copiando...",
+  "DatabaseHost": "Host",
+  "DatabaseName": "Nombre de la base de datos",
+  "DatabasePort": "Puerto",
+  "DomainAlreadyAdded": "Este dominio ya ha sido añadido.",
+  "DropzoneFilesSecondary": "o deja caer archivos aquí",
+  "DropzoneFolderSecondary": "or deja caer la carpeta aquí",
+  "DropzoneFoldersSecondary": "or deja caer carpetas aquí"
 }

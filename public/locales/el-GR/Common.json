@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "Επιλέξτε τη χώρα σας",
   "ChooseYourCountryDescription": "Επιλέξτε μια γλώσσα για να περιηγηθείτε στα διαθέσιμα πρότυπα φορμών",
   "CollectData": "Συλλέξτε δεδομένα",
-  "CollectResultsInXlsx": "Συγκέντρωση αποτελεσμάτων σε XLSX"
+  "CollectResultsInXlsx": "Συγκέντρωση αποτελεσμάτων σε XLSX",
+  "AnyFiles": "Οποιαδήποτε αρχεία",
+  "ChooseAIAgent": "Επιλέξτε ένα {{aiAgent}}",
+  "CompletedForms": "Ολοκληρωμένα έντυπα",
+  "Connected": "Συνδεδεμένο",
+  "ConnectionFailed": "Αποτυχημένη σύνδεση",
+  "ConnectionSuccessful": "Επιτυχής σύνδεση",
+  "CopyingTemplate": "Αντιγραφή...",
+  "DatabaseHost": "Κεντρικός υπολογιστής",
+  "DatabaseName": "Όνομα βάσης δεδομένων",
+  "DatabasePort": "Θύρα",
+  "DomainAlreadyAdded": "Αυτός ο τομέας έχει ήδη προστεθεί",
+  "DropzoneFilesSecondary": "ή ρίξτε αρχεία εδώ",
+  "DropzoneFolderSecondary": "ή αποθέστε τον φάκελο εδώ",
+  "DropzoneFoldersSecondary": "ή σύρετε φακέλους εδώ"
 }
