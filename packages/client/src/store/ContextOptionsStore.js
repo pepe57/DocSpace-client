@@ -120,6 +120,7 @@ import {
   removeOptions,
 } from "SRC_DIR/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
+import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
 import {
   RoomsType,
   Events,
@@ -136,6 +137,7 @@ import {
   formRoleMapping,
   getFileLink,
   getFolderLink,
+  getProgressXlsx,
   manageFormFilling,
   removeSharedFolderOrFile,
   updateXlsxFile,
@@ -1597,17 +1599,59 @@ class ContextOptionsStore {
 
   onUpdateXlsxData = async (item, t) => {
     try {
+      const { clearSecondaryProgressData } =
+        this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
+
       const api = isFolder(item) ? updateXlsxFolder : updateXlsxFile;
+      const response = await api(item.id);
 
-      const form = await api(item.id);
+      if (!response) return;
 
-      if (!form) return;
+      const { form, task } = response;
+
+      if (!task.isCompleted) {
+        await this.pollXlsxProgress(form.id, task.id).catch((error) => {
+          clearSecondaryProgressData(task.id, OPERATIONS_NAME.other);
+          return Promise.reject(error);
+        });
+      }
 
       toastr.success(t("Common:SpreadsheetUpdated", { formName: form.title }));
     } catch (error) {
       toastr.error(error);
       console.error(error);
     }
+  };
+
+  pollXlsxProgress = (itemId, taskId) => {
+    const { setSecondaryProgressBarData } =
+      this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
+
+    const basePayload = {
+      operationId: taskId,
+      operation: OPERATIONS_NAME.other,
+    };
+
+    setSecondaryProgressBarData({ ...basePayload, percent: 0 });
+
+    return new Promise((resolve, reject) => {
+      const poll = () => {
+        getProgressXlsx(itemId)
+          .then((res) => {
+            setSecondaryProgressBarData({
+              ...basePayload,
+              percent: res?.percentage ?? 100,
+              completed: res?.isCompleted ?? true,
+            });
+
+            if (res.isCompleted) resolve(res);
+            else setTimeout(poll, 1000);
+          })
+          .catch(reject);
+      };
+
+      setTimeout(poll, 1000);
+    });
   };
 
   createMenuGroup = (options, groupConfig, t) => {
