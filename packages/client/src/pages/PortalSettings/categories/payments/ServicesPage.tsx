@@ -44,6 +44,13 @@ const ServicesPage = (props) => {
       expandArticle: settingsStore?.expandArticle,
       logoText: settingsStore?.logoText,
       user: paymentUser,
+      routes: {
+        portalPayments: `/portal-settings/payments/portal-payments`,
+        services: `/portal-settings/payments/services`,
+        aiServices: `/portal-settings/payments/services/ai-services`,
+        backup: `/portal-settings/payments/services/backup`,
+        diskStorage: `/portal-settings/payments/services/disk-storage`,
+      },
     }),
     [
       language,
