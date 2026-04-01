@@ -38,15 +38,18 @@ import type {
 
 type TFormsConfig = {
   roomId: string | number;
+  libraryId?: string | number;
   socketUrl?: string;
 };
 
 class FormsSettingsStore {
   roomId: string | number = "";
+  libraryId: string | number = "";
   socketUrl: string = "";
   filesSettings: TFilesSettings | null = null;
   folderSecurity: TFolderSecurity | null = null;
   userAccess: ShareAccessRights | null = null;
+  inProgressFolderId: number | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
@@ -54,8 +57,13 @@ class FormsSettingsStore {
 
   setConfig = (config: TFormsConfig) => {
     this.roomId = config.roomId;
+    this.libraryId = config.libraryId ?? "";
     this.socketUrl = config.socketUrl ?? "";
   };
+
+  get hasLibrary(): boolean {
+    return !!this.libraryId;
+  }
 
   setFilesSettings = (settings: TFilesSettings) => {
     this.filesSettings = settings;
@@ -67,6 +75,10 @@ class FormsSettingsStore {
 
   setUserAccess = (access: ShareAccessRights) => {
     this.userAccess = access;
+  };
+
+  setInProgressFolderId = (id: number | undefined) => {
+    this.inProgressFolderId = id;
   };
 
   get hasManagementAccess(): boolean {
@@ -85,9 +97,7 @@ class FormsSettingsStore {
 }
 
 export const FormsSettingsStoreContext =
-  React.createContext<FormsSettingsStore>(
-    null as unknown as FormsSettingsStore,
-  );
+  React.createContext<FormsSettingsStore | null>(null);
 
 export const FormsSettingsStoreContextProvider = ({
   children,
@@ -103,5 +113,10 @@ export const FormsSettingsStoreContextProvider = ({
 };
 
 export const useFormsSettingsStore = () => {
-  return React.useContext(FormsSettingsStoreContext);
+  const store = React.useContext(FormsSettingsStoreContext);
+  if (!store)
+    throw new Error(
+      "useFormsSettingsStore must be used within FormsSettingsStoreContextProvider",
+    );
+  return store;
 };

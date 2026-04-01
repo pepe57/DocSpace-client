@@ -29,6 +29,7 @@
 import { observer } from "mobx-react";
 import { runInAction } from "mobx";
 import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
@@ -39,9 +40,11 @@ import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import { FormsSection } from "@/types/forms";
 
+import { sectionToPath } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
+import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import styles from "./FormsEditor.module.scss";
 
 type FormsEditorProps = {
@@ -50,18 +53,23 @@ type FormsEditorProps = {
 
 const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
   const { t } = useTranslation(["Common"]);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const roomIdRef = React.useRef(searchParams.get("roomId") ?? "");
+  roomIdRef.current = searchParams.get("roomId") ?? "";
   const {
     editingFile,
     editorAction,
     closeEditor,
-    setActiveSection,
     openCompletedFolder,
   } = useFormsNavigationStore();
   const { roomId } = useFormsSettingsStore();
   const formsListStore = useFormsListStore();
+  const aiStore = useFormsAiAgentStore();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const [isIframeLoaded, setIsIframeLoaded] = React.useState(false);
   const [isCompleting, setIsCompleting] = React.useState(false);
+  const completionStarted = React.useRef(false);
 
   const editorOrigin = React.useMemo(
     () =>
@@ -83,13 +91,19 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
   }, [editingFile, editorAction, editorOrigin]);
 
   const handleFormCompleted = React.useCallback(async () => {
+    if (completionStarted.current) return;
+    completionStarted.current = true;
+
     const formTitle = editingFile?.title?.replace(/\.pdf$/i, "");
 
-    // Hide iframe and show loader while we wait for the completed folder
     setIsCompleting(true);
 
     if (!roomId || !formTitle) {
-      setActiveSection(FormsSection.CompletedForms);
+      closeEditor();
+      router.replace(
+        sectionToPath(FormsSection.CompletedForms) +
+          (roomIdRef.current ? `?roomId=${roomIdRef.current}` : ""),
+      );
       setIsCompleting(false);
       return;
     }
@@ -110,6 +124,8 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
           continue;
         }
 
+        aiStore.setDoneFolderId(doneFolder.id);
+
         const doneRes = await api.files.getFolder(doneFolder.id, filter);
         const subfolder = doneRes.folders.find(
           (f) => f.title.replace(/\.pdf$/i, "") === formTitle,
@@ -119,10 +135,9 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
           runInAction(() => {
             formsListStore.setItems([], 0);
             formsListStore.setFolders([]);
-            setActiveSection(FormsSection.CompletedForms);
+            formsListStore.setIsLoading(true);
             openCompletedFolder(subfolder);
           });
-          setIsCompleting(false);
           return;
         }
 
@@ -133,14 +148,20 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     }
 
     // Fallback: navigate to CompletedForms root
-    setActiveSection(FormsSection.CompletedForms);
+    closeEditor();
+    router.replace(
+      sectionToPath(FormsSection.CompletedForms) +
+        (roomIdRef.current ? `?roomId=${roomIdRef.current}` : ""),
+    );
     setIsCompleting(false);
   }, [
     roomId,
     editingFile?.title,
     formsListStore,
-    setActiveSection,
+    aiStore,
+    router,
     openCompletedFolder,
+    closeEditor,
   ]);
 
   const checkCompletedUrl = React.useCallback(() => {
@@ -169,6 +190,7 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
 
   React.useEffect(() => {
     setIsIframeLoaded(false);
+    completionStarted.current = false;
   }, [editingFile?.id]);
 
   React.useEffect(() => {
