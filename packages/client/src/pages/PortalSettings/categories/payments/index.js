@@ -54,6 +54,10 @@ const PaymentsPage = (props) => {
   } = props;
   const [currentTabId, setCurrentTabId] = useState();
   const location = useLocation();
+  const tabIds = ["portal-payments", "payment-method", "wallet", "services"];
+  const [currentTabId, setCurrentTabId] = useState(
+    () => tabIds.find((id) => location.pathname.includes(id)) || tabIds[0],
+  );
   const navigate = useNavigate();
   const { t } = useTranslation(["Payments", "Settings", "Common"]);
 
