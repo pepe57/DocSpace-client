@@ -54,7 +54,6 @@ import useDeleteData from "../categories/delete-data/useDeleteData";
 import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
 import usePayments from "../categories/payments/usePayments";
-import useServices from "@docspace/ui-kit/payments/services/useServices";
 import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
@@ -107,7 +106,6 @@ const View = ({
   ldapStore,
   common,
   paymentStore,
-  servicesStore,
   currentTariffStatusStore,
   defaultTemplatesStore,
 
@@ -152,7 +150,6 @@ const View = ({
     ldapStore,
     common,
     paymentStore,
-    servicesStore,
     currentTariffStatusStore,
     defaultTemplatesStore,
   });
@@ -169,7 +166,7 @@ const View = ({
   );
   const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
   const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
-  const { getServicesInitialValue } = useServices(defaultProps.services);
+
   const { getAiSettingsInitialValue } = useAiSettings({
     fetchAIProviders,
     initDefaultProvider,
@@ -303,12 +300,6 @@ const View = ({
             await standaloneInit(t);
             break;
 
-          case "ai-services":
-          case "backup-service":
-          case "disk-storage":
-            await getServicesInitialValue();
-            break;
-
           case "ai-settings":
             await getAiSettingsInitialValue();
             break;
@@ -378,7 +369,6 @@ export const ViewComponent = inject(
     storageManagement,
     ldapStore,
     paymentStore,
-    servicesStore,
     currentTariffStatusStore,
     aiSettingsStore,
     defaultTemplatesStore,
@@ -419,7 +409,6 @@ export const ViewComponent = inject(
       ldapStore,
       common,
       paymentStore,
-      servicesStore,
       currentTariffStatusStore,
       ssoFormStore: ssoStore,
       defaultTemplatesStore,
