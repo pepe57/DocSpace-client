@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Hiển thị phần mở rộng tập tin bên cạnh tên tập tin",
   "MarkedAsFavorite": "Đã thêm vào mục yêu thích",
   "UploadFiles": "Tải tệp lên",
-  "UploadFolder": "Tải thư mục lên"
+  "UploadFolder": "Tải thư mục lên",
+  "AccessSettings": "Quyền truy cập",
+  "ActivateTariffLicenseExpired": "Giấy phép của bạn đã hết hạn vào {{date}}"
 }

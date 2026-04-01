@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "ファイル名の隣にファイル拡張子を表示する",
   "MarkedAsFavorite": "お気に入りに追加",
   "UploadFiles": "ファイルのアップロード",
-  "UploadFolder": "フォルダのアップロード"
+  "UploadFolder": "フォルダのアップロード",
+  "AccessSettings": "アクセス",
+  "ActivateTariffLicenseExpired": "ライセンスは{{date}}に期限切れとなりました。"
 }

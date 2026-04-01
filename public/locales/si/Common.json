@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "ගොනු නාමයට අමතරව ගොනු ආකාරයද පෙන්වන්න",
   "MarkedAsFavorite": "ප්‍රියතමයන්ට දමන්න",
   "UploadFiles": "ගොනු දමන්න",
-  "UploadFolder": "බහාලුමක් දමන්න"
+  "UploadFolder": "බහාලුමක් දමන්න",
+  "AccessSettings": "ප්‍රවේශයන්",
+  "ActivateTariffLicenseExpired": "ඔබගේ බලපත්‍රය {{date}} දින කල් ඉකුත් විය."
 }

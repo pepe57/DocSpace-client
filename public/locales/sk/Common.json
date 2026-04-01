@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Zobrazenie prípony súboru vedľa jeho názvu",
   "MarkedAsFavorite": "Pridané k obľúbeným",
   "UploadFiles": "Nahrať súbory",
-  "UploadFolder": "Nahrať priečinok"
+  "UploadFolder": "Nahrať priečinok",
+  "AccessSettings": "Prístupy",
+  "ActivateTariffLicenseExpired": "Vaša licencia vypršala {{date}}."
 }

@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Покажи файловото разширение до името на файла",
   "MarkedAsFavorite": "Добавен в любими",
   "UploadFiles": "Качи файлове",
-  "UploadFolder": "Качи папка"
+  "UploadFolder": "Качи папка",
+  "AccessSettings": "Достъпи",
+  "ActivateTariffLicenseExpired": "Вашият лиценз изтече на {{date}}."
 }

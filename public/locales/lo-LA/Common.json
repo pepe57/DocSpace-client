@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "ສະແດງນາມສະກຸນໄຟລ໌ຕໍ່ໄປກັບຊື່ໄຟລ໌",
   "MarkedAsFavorite": "ເພີ່ມໃນລາຍການໂປດ",
   "UploadFiles": "ອັບໂຫລດຟາຍ",
-  "UploadFolder": "ອັບໂຫລດ ໂຟຣເດີ"
+  "UploadFolder": "ອັບໂຫລດ ໂຟຣເດີ",
+  "AccessSettings": "ເຂົ້າ​ເຖິງ",
+  "ActivateTariffLicenseExpired": "ໃບອະນຸຍາດຂອງທ່ານໝົດອາຍຸໃນວັນທີ {{date}}"
 }

@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Shfaqni zgjerimin e skedarit pranë emrit të skedarit\"",
   "MarkedAsFavorite": "Shtuar te të preferuarat",
   "UploadFiles": "Ngarkoni skedarët",
-  "UploadFolder": "Ngarkoni dosjen"
+  "UploadFolder": "Ngarkoni dosjen",
+  "AccessSettings": "Paksesimet",
+  "ActivateTariffLicenseExpired": "Licenca juaj ka skaduar më {{date}}."
 }

@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Afișează extensia fișierului de lângă numele fișierului",
   "MarkedAsFavorite": "Adăugat la preferințe",
   "UploadFiles": "Încarcă fișiere",
-  "UploadFolder": "Încarcă dosarul"
+  "UploadFolder": "Încarcă dosarul",
+  "AccessSettings": "Accese",
+  "ActivateTariffLicenseExpired": "Licența dumneavoastră a expirat în {{date}}."
 }

@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "파일 이름 옆에 파일 확장자를 표시하세요",
   "MarkedAsFavorite": "즐겨 찾기에 추가되었습니다",
   "UploadFiles": "파일 업로드",
-  "UploadFolder": "폴더 업로드"
+  "UploadFolder": "폴더 업로드",
+  "AccessSettings": "액세스",
+  "ActivateTariffLicenseExpired": "라이선스가 {{date}}에 만료되었습니다."
 }

@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Ցուցադրել ֆայլի ընդլայնումը ֆայլի անվան կողքին",
   "MarkedAsFavorite": "Ավելացվեց ընտրյալների մեջ",
   "UploadFiles": "Վերբեռնել ֆայլեր",
-  "UploadFolder": "Վերբեռնման պանակ"
+  "UploadFolder": "Վերբեռնման պանակ",
+  "AccessSettings": "Մուտքի իրավունքներ",
+  "ActivateTariffLicenseExpired": "Ձեր լիցենզիայի ժամկետը լրացել է {{date}}-ին"
 }

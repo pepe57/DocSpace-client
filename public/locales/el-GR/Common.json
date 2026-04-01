@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Εμφάνιση της επέκτασης αρχείου δίπλα στο όνομα του αρχείου",
   "MarkedAsFavorite": "Προστέθηκε στα αγαπημένα",
   "UploadFiles": "Μεταφόρτωση αρχεία",
-  "UploadFolder": "Μεταφόρτωση φάκελο"
+  "UploadFolder": "Μεταφόρτωση φάκελο",
+  "AccessSettings": "Προσβάσεις",
+  "ActivateTariffLicenseExpired": "Η άδειά σας έληξε στις {{date}}."
 }

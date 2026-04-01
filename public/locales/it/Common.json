@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Mostra l’estensione del file vicino al nome del file",
   "MarkedAsFavorite": "Aggiungi ai favoriti",
   "UploadFiles": "Carica file",
-  "UploadFolder": "Caricare cartella"
+  "UploadFolder": "Caricare cartella",
+  "AccessSettings": "Accessi",
+  "ActivateTariffLicenseExpired": "La sua licenza è scaduta il {{date}}."
 }

@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Bestandsextensie naast bestandsnaam weergeven",
   "MarkedAsFavorite": "Toegevoegd aan favorieten",
   "UploadFiles": "Upload bestanden",
-  "UploadFolder": "Upload map"
+  "UploadFolder": "Upload map",
+  "AccessSettings": "Toegang tot",
+  "ActivateTariffLicenseExpired": "Uw licentie is verlopen op {{date}}"
 }

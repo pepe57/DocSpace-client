@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "在文件名称旁显示文件扩展名",
   "MarkedAsFavorite": "已添加至收藏",
   "UploadFiles": "上传文件",
-  "UploadFolder": "上传文件夹"
+  "UploadFolder": "上传文件夹",
+  "AccessSettings": "访问",
+  "ActivateTariffLicenseExpired": "您的许可证已于 {{date}} 到期。"
 }

@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Prikaži pripono datoteke poleg imena datoteke",
   "MarkedAsFavorite": "Dodano med priljubljene",
   "UploadFiles": "Naloži datoteke",
-  "UploadFolder": "Naloži mapo"
+  "UploadFolder": "Naloži mapo",
+  "AccessSettings": "Dostopi",
+  "ActivateTariffLicenseExpired": "Vaša licenca je potekla {{date}}."
 }

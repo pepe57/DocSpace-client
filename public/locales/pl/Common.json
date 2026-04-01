@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Wyświetlaj rozszerzenie pliku obok nazwy pliku",
   "MarkedAsFavorite": "Dodano do ulubionych",
   "UploadFiles": "Wgraj pliki",
-  "UploadFolder": "Wgraj folder"
+  "UploadFolder": "Wgraj folder",
+  "AccessSettings": "Dostępy",
+  "ActivateTariffLicenseExpired": "Twój licencja wygasła {{date}}."
 }

@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Rādīt faila paplašinājumu blakus faila nosaukumam",
   "MarkedAsFavorite": "Pievienots izlasei",
   "UploadFiles": "Augšupielādējiet failus",
-  "UploadFolder": "Augšupielādēt mapi"
+  "UploadFolder": "Augšupielādēt mapi",
+  "AccessSettings": "Piekļuves",
+  "ActivateTariffLicenseExpired": "Jūsu licence ir beidzusi derību {{date}} datumā."
 }

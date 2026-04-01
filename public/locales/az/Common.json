@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Fayl adının yanında fayl uzantısını göstərin",
   "MarkedAsFavorite": "Çox istifadə olunan siyahısına əlavə olundu",
   "UploadFiles": "Faylları yüklə",
-  "UploadFolder": "Qolvuğu yüklə"
+  "UploadFolder": "Qolvuğu yüklə",
+  "AccessSettings": "Girişlər",
+  "ActivateTariffLicenseExpired": "Lisenziyanız {{date}} tarixində bitdi."
 }

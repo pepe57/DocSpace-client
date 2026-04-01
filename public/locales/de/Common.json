@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Dateierweiterung neben dem Dateinamen anzeigen",
   "MarkedAsFavorite": "Zu Favoriten hinzugefügt",
   "UploadFiles": "Dateien hochladen",
-  "UploadFolder": "Ordner hochladen"
+  "UploadFolder": "Ordner hochladen",
+  "AccessSettings": "Zugriffe",
+  "ActivateTariffLicenseExpired": "Ihre Lizenz ist am {{date}} abgelaufen."
 }

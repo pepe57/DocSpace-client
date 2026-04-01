@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "عرض امتداد الملف بجوار اسم الملف",
   "MarkedAsFavorite": "تمت الإضافة إلى المفضلة",
   "UploadFiles": "رفع الملفات",
-  "UploadFolder": "رفع مجلد"
+  "UploadFolder": "رفع مجلد",
+  "AccessSettings": "الصلاحيات",
+  "ActivateTariffLicenseExpired": "انتهت صلاحية ترخيصك في {{date}}"
 }

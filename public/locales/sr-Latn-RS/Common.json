@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Prikaz ekstenzije fajla pored imena fajla",
   "MarkedAsFavorite": "Dodato u omiljeno",
   "UploadFiles": "Otpremi datoteke",
-  "UploadFolder": "Otpremi folder"
+  "UploadFolder": "Otpremi folder",
+  "AccessSettings": "Pristupi",
+  "ActivateTariffLicenseExpired": "Vaša licenca istekla je {{date}}."
 }

@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Показувати розширення файлу поряд з ім'ям файлу",
   "MarkedAsFavorite": "Додано до вподобань",
   "UploadFiles": "Передати файли",
-  "UploadFolder": "Передати папку"
+  "UploadFolder": "Передати папку",
+  "AccessSettings": "Доступи",
+  "ActivateTariffLicenseExpired": "Ваш ліценз закінчився {{date}}."
 }

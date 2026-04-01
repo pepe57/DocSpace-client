@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Afficher l'extension du fichier à côté du nom du fichier",
   "MarkedAsFavorite": "Ajouté aux favoris",
   "UploadFiles": "Télécharger les fichiers",
-  "UploadFolder": "Télécharger le dossier"
+  "UploadFolder": "Télécharger le dossier",
+  "AccessSettings": "Accès",
+  "ActivateTariffLicenseExpired": "Votre licence a expiré le {{date}}."
 }

@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Dosya adının yanında dosya uzantısını görüntüle",
   "MarkedAsFavorite": "Favorilere eklendi",
   "UploadFiles": "Dosya yükle",
-  "UploadFolder": "Klasör yükle"
+  "UploadFolder": "Klasör yükle",
+  "AccessSettings": "Erişimler",
+  "ActivateTariffLicenseExpired": "Lisansınız {{date}} tarihinde sona erdi."
 }

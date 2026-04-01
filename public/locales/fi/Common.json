@@ -1069,5 +1069,7 @@
   "DisplayFileExtension": "Näytä tiedostopääte tiedostonimen perässä ",
   "MarkedAsFavorite": "Lisätty suosikkeihin",
   "UploadFiles": "Lataa tiedostoja",
-  "UploadFolder": "Lataa kansio"
+  "UploadFolder": "Lataa kansio",
+  "AccessSettings": "Oikeudet",
+  "ActivateTariffLicenseExpired": "Lisenssisi on vanhentunut {{date}}."
 }
