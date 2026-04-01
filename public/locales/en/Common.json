@@ -1541,5 +1541,9 @@
   "YourName": "Your name",
   "YourPrice": "Your price",
   "YourTurn": "Your turn",
-  "YouWillBeContacted": "The sales team will contact you after creating the request."
+  "YouWillBeContacted": "The sales team will contact you after creating the request.",
+  "RoomTags": "<bold>{{roomName}}</bold> room tags",
+  "BlockedByAdmin": "Blocked by admin",
+  "ExternalLinksDisabledByAdmin": "External links are disabled by your administrator.",
+  "LinkBlockedByAdminWarning": "This link is blocked by admin and won't work for external users"
 }
