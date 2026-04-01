@@ -25,25 +25,41 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router";
 
 import { PaymentsRoot } from "@docspace/ui-kit/payments";
 import { default as AiPage } from "@docspace/ui-kit/payments/services/pages/ai-tools/AiPage";
 import { default as BackupPage } from "@docspace/ui-kit/payments/services/pages/backup/BackupPage";
 import { default as AdditionalStoragePage } from "@docspace/ui-kit/payments/services/pages/additional-storage/AdditionalStoragePage";
+import type { TPaymentUser } from "@docspace/ui-kit/payments/types";
 
-const ServicesPage = (props) => {
-  const { settingsStore, language, paymentUser } = props;
+interface ServicesPageProps {
+  language?: string;
+  logoText?: string;
+  user?: TPaymentUser;
+  getAIConfig?: () => Promise<void>;
+  fetchPayerInfo?: () => Promise<void>;
+}
+
+const ServicesPage = (props: ServicesPageProps) => {
+  const {
+    language = "en",
+    logoText,
+    user,
+    getAIConfig,
+    fetchPayerInfo,
+  } = props;
   const location = useLocation();
+  useEffect(() => {
+    fetchPayerInfo?.();
+  }, []);
 
   const paymentConfig = useMemo(
     () => ({
       language,
-      theme: settingsStore?.theme,
-      expandArticle: settingsStore?.expandArticle,
-      logoText: settingsStore?.logoText,
-      user: paymentUser,
+      logoText,
+      user,
       routes: {
         portalPayments: `/portal-settings/payments/portal-payments`,
         services: `/portal-settings/payments/services`,
@@ -52,36 +68,47 @@ const ServicesPage = (props) => {
         diskStorage: `/portal-settings/payments/services/disk-storage`,
       },
     }),
-    [
-      language,
-      settingsStore?.theme,
-      settingsStore?.expandArticle,
-      settingsStore?.logoText,
-      paymentUser,
-    ],
+    [language, logoText, user],
   );
 
   const pathname = location.pathname;
 
   return (
     <PaymentsRoot config={paymentConfig}>
-      {pathname.includes("ai-services") ? <AiPage /> : null}
+      {pathname.includes("ai-services") ? (
+        <AiPage getAIConfig={getAIConfig} />
+      ) : null}
       {pathname.includes("backup") ? <BackupPage /> : null}
       {pathname.includes("disk-storage") ? <AdditionalStoragePage /> : null}
     </PaymentsRoot>
   );
 };
 
-export const Component = inject(({ settingsStore, authStore, userStore }) => {
-  return {
+export const Component = inject(
+  ({
     settingsStore,
-    language: authStore?.language,
-    paymentUser: userStore?.user
-      ? {
-          id: userStore.user.id,
-          email: userStore.user.email,
-          isOwner: userStore.user.isOwner,
-        }
-      : undefined,
-  };
-})(observer(ServicesPage));
+    authStore,
+    userStore,
+    currentTariffStatusStore,
+  }: TStore) => {
+    const { language } = authStore;
+    const { user } = userStore;
+    const { logoText, getAIConfig } = settingsStore;
+    const { fetchPayerInfo } = currentTariffStatusStore;
+
+    return {
+      language,
+      logoText,
+      getAIConfig,
+      fetchPayerInfo,
+      user: user
+        ? {
+            id: user.id,
+            email: user.email,
+            isOwner: user.isOwner,
+          }
+        : undefined,
+    };
+  },
+)(observer(ServicesPage));
+

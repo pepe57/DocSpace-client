@@ -47,12 +47,12 @@ const PaymentsPage = (props) => {
   const {
     currentDeviceType,
     standalone,
-    settingsStore,
     clearAbortControllerArr,
     language,
-    paymentUser,
+    user,
+    logoText,
+    getAIConfig,
   } = props;
-  const [currentTabId, setCurrentTabId] = useState();
   const location = useLocation();
   const tabIds = ["portal-payments", "payment-method", "wallet", "services"];
   const [currentTabId, setCurrentTabId] = useState(
@@ -64,10 +64,8 @@ const PaymentsPage = (props) => {
   const paymentConfig = useMemo(
     () => ({
       language,
-      theme: settingsStore?.theme,
-      expandArticle: settingsStore?.expandArticle,
-      logoText: settingsStore?.logoText,
-      user: paymentUser,
+      logoText,
+      user,
       routes: {
         portalPayments: `/portal-settings/payments/portal-payments`,
         services: `/portal-settings/payments/services`,
@@ -76,13 +74,7 @@ const PaymentsPage = (props) => {
         diskStorage: `/portal-settings/payments/services/disk-storage`,
       },
     }),
-    [
-      language,
-      settingsStore?.theme,
-      settingsStore?.expandArticle,
-      settingsStore?.logoText,
-      paymentUser,
-    ],
+    [language, logoText, user],
   );
 
   const data = [
@@ -113,7 +105,7 @@ const PaymentsPage = (props) => {
     {
       id: "services",
       name: t("Settings:Services"),
-      content: <Services />,
+      content: <Services getAIConfig={getAIConfig} />,
       onClick: () => {
         clearAbortControllerArr();
       },
@@ -152,20 +144,28 @@ const PaymentsPage = (props) => {
 };
 
 export const Component = inject(({ settingsStore, authStore, userStore }) => {
-  const { standalone, currentDeviceType, clearAbortControllerArr } =
-    settingsStore;
+  const {
+    standalone,
+    currentDeviceType,
+    clearAbortControllerArr,
+    logoText,
+    getAIConfig,
+  } = settingsStore;
+
+  const { user } = userStore;
 
   return {
     standalone,
     currentDeviceType,
-    settingsStore,
     clearAbortControllerArr,
+    logoText,
+    getAIConfig,
     language: authStore?.language,
-    paymentUser: userStore?.user
+    user: user
       ? {
-          id: userStore.user.id,
-          email: userStore.user.email,
-          isOwner: userStore.user.isOwner,
+          id: user.id,
+          email: user.email,
+          isOwner: user.isOwner,
         }
       : undefined,
   };
