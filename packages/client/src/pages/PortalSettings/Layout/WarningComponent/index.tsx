@@ -246,7 +246,6 @@ export default inject(
       currentTariffStatusStore;
     const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
     const { backupsCount, isInited } = backup;
-    console.log("isPayer", isPayer);
     return {
       isPayer,
       isPayerInfoLoaded,
