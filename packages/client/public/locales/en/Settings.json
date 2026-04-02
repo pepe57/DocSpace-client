@@ -324,5 +324,5 @@
   "RegisterApp": "Register app",
   "ApiKeysCardDescription": "Create and manage all API keys for your {{organizationName}} {{productName}}.",
   "CreateKey": "Create key",
-  "Main": "Main"
+  "Overview": "Overview"
 }

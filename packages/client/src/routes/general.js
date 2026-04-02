@@ -96,14 +96,14 @@ export const generalClientRoutes = [
         index: true,
         Component: () => (
           <Navigate
-            to="main"
+            to="overview"
             state={window.DocSpace?.location?.state}
             replace
           />
         ),
       },
       {
-        path: "main",
+        path: "overview",
         lazy: () =>
           import(
             "SRC_DIR/pages/PortalSettings/categories/developer-tools/Main"

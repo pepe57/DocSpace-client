@@ -43,11 +43,11 @@ interface IDeveloperToolsItem {
 
 const items = [
   {
-    id: "devtools-main",
-    path: "/developer-tools/main",
-    pageType: PageType.devToolsMain,
-    // t("Settings:Main") - already translated in the parent component
-    translationKey: "Settings:Main",
+    id: "devtools-overview",
+    path: "/developer-tools/overview",
+    pageType: PageType.devToolsOverview,
+    // t("Settings:Overview") - already translated in the parent component
+    translationKey: "Settings:Overview",
   },
   {
     id: "devtools-javascript-sdk",

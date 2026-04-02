@@ -598,7 +598,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "developer-tools",
-      element: <Navigate to="/developer-tools/main" replace />,
+      element: <Navigate to="/developer-tools/overview" replace />,
     },
     {
       path: "developer-tools/*",
