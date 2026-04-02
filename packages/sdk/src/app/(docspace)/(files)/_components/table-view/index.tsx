@@ -52,13 +52,56 @@ const TableView = ({
   items,
   hasMoreFiles,
   filterSortBy,
+  filterSortOrder,
+  onSort,
   timezone,
   displayFileExtension,
   fetchMoreFiles,
 }: TableViewProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "Files"]);
   const isSSR = useIsServer();
   const containerRef = React.useRef<HTMLDivElement>(null);
+
+  const onColumnSort = React.useCallback(
+    (sortBy: string) => {
+      if (filterSortBy === sortBy) {
+        const newDirection = filterSortOrder === "ascending" ? "desc" : "asc";
+        onSort(sortBy, newDirection);
+      } else {
+        onSort(sortBy, filterSortOrder === "ascending" ? "asc" : "desc");
+      }
+    },
+    [filterSortBy, filterSortOrder, onSort],
+  );
+
+  const [columnState, setColumnState] = React.useState<Record<string, boolean>>(() => {
+    try {
+      const stored = localStorage.getItem(`${COLUMN_STORAGE_NAME}_enabled`);
+      if (stored) return JSON.parse(stored);
+    } catch {}
+    return { Modified: true, Size: true, Type: true };
+  });
+
+  const onColumnChange = React.useCallback(
+    (key: string) => {
+      setColumnState((prev) => {
+        const next = { ...prev, [key]: !prev[key] };
+        try {
+          localStorage.setItem(
+            `${COLUMN_STORAGE_NAME}_enabled`,
+            JSON.stringify(next),
+          );
+        } catch {}
+        return next;
+      });
+    },
+    [],
+  );
+
+  const lastColumn = React.useMemo(() => {
+    const orderedKeys = ["Type", "Size", "Modified", "Name"];
+    return orderedKeys.find((key) => key === "Name" || columnState[key] !== false) ?? "Name";
+  }, [columnState]);
 
   const columns: TTableColumn[] = React.useMemo(
     () => [
@@ -70,30 +113,37 @@ const TableView = ({
         resizable: true,
         default: true,
         minWidth: 210,
+        onClick: onColumnSort,
       },
       {
         key: "Modified",
         title: t("Common:LastModifiedDate"),
         sortBy: SortByFieldName.ModifiedDate,
-        enable: true,
+        enable: columnState.Modified !== false,
         resizable: true,
+        onClick: onColumnSort,
+        onChange: onColumnChange,
       },
       {
         key: "Size",
         title: t("Common:Size"),
         sortBy: SortByFieldName.Size,
-        enable: true,
+        enable: columnState.Size !== false,
         resizable: true,
+        onClick: onColumnSort,
+        onChange: onColumnChange,
       },
       {
         key: "Type",
         title: t("Common:Type"),
         sortBy: SortByFieldName.Type,
-        enable: true,
+        enable: columnState.Type !== false,
         resizable: true,
+        onClick: onColumnSort,
+        onChange: onColumnChange,
       },
     ],
-    [t],
+    [t, onColumnSort, onColumnChange, columnState],
   );
 
   return (
@@ -110,9 +160,10 @@ const TableView = ({
         sectionWidth={0}
         useReactWindow={!isSSR}
         sortBy={filterSortBy ?? undefined}
-        sorted
+        sorted={filterSortOrder === "descending"}
         sortingVisible
-        showSettings={false}
+        showSettings
+        settingsTitle={t("Files:TableSettingsTitle")}
       />
       <TableBody
         columnStorageName={COLUMN_STORAGE_NAME}
@@ -131,6 +182,7 @@ const TableView = ({
             item={item}
             timezone={timezone}
             displayFileExtension={displayFileExtension}
+            lastColumn={lastColumn}
           />
         ))}
       </TableBody>

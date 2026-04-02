@@ -27,6 +27,7 @@
  */
 
 @use "@docspace/ui-kit/styles/mixins";
+@use "@docspace/ui-kit/styles/variables/colors";
 
 .tableViewContainer {
   :global {
@@ -34,7 +35,13 @@
       justify-content: flex-end;
     }
 
-    .table-row-selected {
+    .table-row-selected,
+    .table-container_row:hover {
+      .table-container_cell {
+        cursor: pointer;
+        background: var(--sdk-table-row-bg-active) !important;
+      }
+
       .table-container_file-name-cell {
         margin-inline-start: -24px;
         padding-inline-start: 24px;
@@ -55,20 +62,77 @@
         }
       }
     }
+
+    .table-container_element-wrapper,
+    .table-container_row-loader {
+      min-width: 40px;
+      margin-inline-start: -20px;
+      padding-inline-start: 20px;
+    }
+
+    .table-container_element-container {
+      width: 32px;
+      min-width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .table-container_row-checkbox {
+      width: 12px;
+    }
+
+    .ReactVirtualized__Grid__innerScrollContainer {
+      padding-bottom: 1px;
+    }
+
+    // Non-bold column header titles
+    .header-container-text {
+      font-weight: 400 !important;
+    }
+
+    // Quick buttons visibility: shared link always visible, unshared on hover
+    .create-share-link {
+      display: none;
+    }
+
+    .link-shared {
+      display: flex;
+    }
+
+    .table-container_row:hover,
+    .table-row-selected {
+      .create-share-link {
+        display: flex !important;
+      }
+    }
   }
-}
 
-.nameCell {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  overflow: hidden;
-}
+  :global(.light) & {
+    --sdk-table-row-bg-active: #{colors.$light-gray-hover};
+    --sdk-table-element-wrapper-border-image: linear-gradient(
+      to right,
+      #{colors.$white} 20px,
+      #{colors.$gray-light-mid} 20px
+    );
+  }
 
-.nameCellIcon {
-  flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  :global(.dark) & {
+    --sdk-table-row-bg-active: #{colors.$light-dark-gray-hover};
+    --sdk-table-element-wrapper-border-image: linear-gradient(
+      to right,
+      #{colors.$black} 20px,
+      #{colors.$gray-dark-strong} 20px
+    );
+  }
+
+  :global {
+    .table-container_element-wrapper {
+      border-image-slice: 1;
+      border-image-source: var(--sdk-table-element-wrapper-border-image);
+    }
+  }
 }
 
 .nameCellText {
@@ -78,6 +142,9 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 13px;
+  margin-inline-start: 12px;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .nameCellExst {
@@ -92,4 +159,35 @@
   font-size: 12px;
   white-space: nowrap;
   text-overflow: ellipsis;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.quickButtonsContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-shrink: 0;
+  margin-inline-start: auto;
+
+  :global(.badges) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  :global(.badge) {
+    padding: 12px 8px;
+  }
+
+  :global(.favorite) {
+    margin-top: 1px;
+  }
+}
+
+// Last cell hosting quick buttons: allow badges to overflow
+.lastCell {
+  overflow: visible !important;
+  z-index: 1;
+  position: relative;
 }

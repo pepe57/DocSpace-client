@@ -313,6 +313,17 @@ const List = ({
         items={visibleItems}
         hasMoreFiles={hasNextPage}
         filterSortBy={filter.sortBy}
+        filterSortOrder={filter.sortOrder ?? "ascending"}
+        onSort={(sortBy, sortDirection) => {
+          const newFilter = filter.clone();
+          newFilter.sortBy = sortBy as typeof filter.sortBy;
+          newFilter.sortOrder =
+            sortDirection === "desc" ? "descending" : "ascending";
+          newFilter.page = 0;
+          newFilter.pageCount = PAGE_COUNT;
+          setFilter(newFilter);
+          window.history.pushState(null, "", `?${newFilter.toUrlParams()}`);
+        }}
         timezone={timezone}
         displayFileExtension={displayFileExtension}
         fetchMoreFiles={fetchMoreFiles}

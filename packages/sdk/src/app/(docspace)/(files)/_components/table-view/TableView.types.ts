@@ -35,6 +35,7 @@ export type TableViewRowProps = {
   timezone: string;
   displayFileExtension: boolean;
   hideColumns?: boolean;
+  lastColumn: string;
 };
 
 export type TableViewProps = {
@@ -42,6 +43,8 @@ export type TableViewProps = {
   items: (TFolderItem | TFileItem)[];
   hasMoreFiles: boolean;
   filterSortBy: Nullable<TSortBy>;
+  filterSortOrder: string;
+  onSort: (sortBy: string, sortDirection: string) => void;
   timezone: string;
   displayFileExtension: boolean;
   fetchMoreFiles: (params: IndexRange) => Promise<void>;

@@ -34,13 +34,16 @@ import classNames from "classnames";
 import { TableRow } from "@docspace/ui-kit/components/table";
 import { TableCell } from "@docspace/ui-kit/components/table";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
+import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
+import useFavoritesActions from "@/app/(docspace)/_hooks/useFavoritesActions";
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
 import { ShareContext } from "../../../../_contexts/ShareContext";
 import { DeleteContext } from "../../../../_contexts/DeleteContext";
@@ -52,7 +55,7 @@ import type { TableViewRowProps } from "../TableView.types";
 import styles from "../TableView.module.scss";
 
 const TableViewRow = observer(
-  ({ item, index, timezone, displayFileExtension }: TableViewRowProps) => {
+  ({ item, index, timezone, displayFileExtension, lastColumn }: TableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
 
@@ -62,6 +65,7 @@ const TableViewRow = observer(
     const { t, i18n } = useTranslation(["Common"]);
     const { openFile } = useFilesActions({ t });
     const { openFolder } = useFolderActions({ t });
+    const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
     const onShareClick = React.useContext(ShareContext);
     const deleteCtx = React.useContext(DeleteContext);
     const fileOpsCtx = React.useContext(FileOperationsContext);
@@ -94,6 +98,14 @@ const TableViewRow = observer(
     const fileType =
       "fileType" in item ? getFileTypeName(item.fileType, t) : t("Common:Folder");
 
+    const onCheckboxChange = React.useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.stopPropagation();
+        filesSelectionStore.addSelection(item);
+      },
+      [filesSelectionStore, item],
+    );
+
     const onRowClick = React.useCallback(() => {
       filesSelectionStore.setSelection([]);
       filesSelectionStore.setBufferSelection(item);
@@ -119,11 +131,41 @@ const TableViewRow = observer(
       [item, openFolder, openFile],
     );
 
+    const onClickFavorite = React.useCallback(() => {
+      if (observableItem.isFavorite) {
+        removeFromFavorites(observableItem);
+      } else {
+        markAsFavorite(observableItem);
+      }
+    }, [observableItem, markAsFavorite, removeFromFavorites]);
+
+    const handleShareClick = React.useCallback(() => {
+      onShareClick?.(observableItem);
+    }, [onShareClick, observableItem]);
+
+    // Spread observable item to create a new object reference when MobX
+    // properties change, so that QuickButtons memo(fast-deep-equal) detects
+    // the update (same proxy ref would short-circuit to true).
+    const itemSnapshot = { ...observableItem };
+
+    const quickButtonsNode = (
+      <div className={styles.quickButtonsContainer}>
+        <QuickButtons
+          t={t}
+          item={itemSnapshot}
+          viewAs="table"
+          onClickFavorite={onClickFavorite}
+          onClickShare={onShareClick ? handleShareClick : undefined}
+          openShareTab={onShareClick ? handleShareClick : undefined}
+        />
+      </div>
+    );
+
     const contextMenuModel = getContextMenuModel(true);
 
     return (
       <TableRow
-        className={classNames("files-item", {
+        className={classNames({
           "table-row-selected": isChecked,
         })}
         checked={isChecked}
@@ -131,38 +173,52 @@ const TableViewRow = observer(
         getContextModel={getContextMenuModel}
         onClick={onRowClick}
         onDoubleClick={onRowDoubleClick}
-        selectionProp={{ className: "table-container_file-name-cell", value }}
+        selectionProp={{ className: classNames("files-item", "table-container_file-name-cell"), value }}
         fileContextClick={(isRightClick?: boolean) => {
           if (isRightClick && filesSelectionStore.selection.length > 1) return;
           filesSelectionStore.setSelection([]);
           filesSelectionStore.setBufferSelection(item);
         }}
       >
-        <TableCell className="table-container_file-name-cell">
-          <div className={styles.nameCell}>
-            <div className={styles.nameCellIcon}>
+        <TableCell
+          className="table-container_file-name-cell table-container_element-wrapper"
+          hasAccess
+          checked={isChecked}
+        >
+          <div className="table-container_element-container" onClick={(e) => e.stopPropagation()}>
+            <div className="table-container_element">
               <RoomIcon
                 logo={item.icon}
                 title={item.title}
                 showDefault={false}
               />
             </div>
-            <span className={styles.nameCellText} onClick={onNameClick}>
-              {titleWithoutExt}
-              {displayFileExtension && "fileExst" in item ? (
-                <span className={styles.nameCellExst}>{item.fileExst}</span>
-              ) : null}
-            </span>
+            <Checkbox
+              className="table-container_row-checkbox"
+              onChange={onCheckboxChange}
+              isChecked={isChecked}
+              title={t("Common:TitleSelectFile")}
+            />
           </div>
+          <span className={styles.nameCellText} onClick={onNameClick}>
+            {titleWithoutExt}
+            {displayFileExtension && "fileExst" in item ? (
+              <span className={styles.nameCellExst}>{item.fileExst}</span>
+            ) : null}
+          </span>
+          {lastColumn === "Name" ? quickButtonsNode : null}
         </TableCell>
-        <TableCell>
+        <TableCell className={lastColumn === "Modified" ? styles.lastCell : undefined}>
           <span className={styles.secondaryCell}>{modifiedDate}</span>
+          {lastColumn === "Modified" ? quickButtonsNode : null}
         </TableCell>
-        <TableCell>
+        <TableCell className={lastColumn === "Size" ? styles.lastCell : undefined}>
           <span className={styles.secondaryCell}>{fileSize}</span>
+          {lastColumn === "Size" ? quickButtonsNode : null}
         </TableCell>
-        <TableCell>
+        <TableCell className={lastColumn === "Type" ? styles.lastCell : undefined}>
           <span className={styles.secondaryCell}>{fileType}</span>
+          {lastColumn === "Type" ? quickButtonsNode : null}
         </TableCell>
       </TableRow>
     );
