@@ -171,7 +171,6 @@ const LOADER_TIMER = 500;
 let loadingTime;
 let timer;
 
-
 const systemFolders = [
   FolderType.InProgress,
   FolderType.Done,
@@ -1596,7 +1595,7 @@ class ContextOptionsStore {
     downloadAction("", selectedFolder).catch((err) => toastr.error(err));
   };
 
-  onUpdateXlsxData = async (item, t) => {
+  onSyncXlsxData = async (item, t) => {
     const { clearSecondaryProgressData, setSecondaryProgressBarData } =
       this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
 
@@ -2079,9 +2078,9 @@ class ContextOptionsStore {
       {
         id: "option_update_xlsx_data",
         key: "update-xlsx-data",
-        label: t("Common:UpdateXlsxData"),
+        label: t("Common:SyncXlsxData"),
         icon: spreadsheetUrl,
-        onClick: () => this.onUpdateXlsxData(item, t),
+        onClick: () => this.onSyncXlsxData(item, t),
         disabled: false,
       },
       {
