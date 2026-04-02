@@ -69,7 +69,7 @@ const getTitle = (pathname: string, t: (key: string) => string): string => {
     if (key) return t(key);
   }
   if (pathname.includes("/developer-tools/javascript-sdk"))
-    return t("JavascriptSdk:JavascriptSdk");
+    return t("Settings:EmbedSDK");
   if (pathname.includes("/developer-tools/plugin-sdk"))
     return t("WebPlugins:PluginSDK");
   if (pathname.includes("/developer-tools/webhooks")) return t("Webhooks:Webhooks");
