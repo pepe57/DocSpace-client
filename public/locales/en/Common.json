@@ -155,6 +155,7 @@
   "CancelButton": "Cancel",
   "CancelCurrentProcess": "Do you want to cancel the current process?",
   "CancelDownload": "Cancel download",
+  "CanceledOperation": "{{operationName}}: Canceled",
   "CancelUpload": "The upload has been interrupted. Some files have not been uploaded.",
   "CancelUploadingProcess": "Do you want to cancel uploading?",
   "CannotGuaranteeSecurity": "We cannot guarantee the security or privacy practices of third-party integrations.",
