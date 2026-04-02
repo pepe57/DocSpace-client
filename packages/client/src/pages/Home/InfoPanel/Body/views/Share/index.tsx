@@ -47,10 +47,13 @@ interface ExternalShareProps {
   infoPanelSelection?: ShareProps["infoPanelSelection"];
   fileLinkProps?: ShareProps["fileLinkProps"];
   members?: ShareProps["members"];
+  isExternalShareRestricted?: boolean;
 }
 
-interface WrapperShareProps
-  extends Omit<ShareProps, "onAddUser" | "onClickGroup"> {
+interface WrapperShareProps extends Omit<
+  ShareProps,
+  "onAddUser" | "onClickGroup"
+> {
   setEditMembersGroup: (group: TGroup) => void;
   setEditGroupMembersDialogVisible: (visible: boolean) => void;
 }
@@ -79,40 +82,46 @@ const WrapperShare: FC<WrapperShareProps> = (props) => {
   return <Share {...props} onAddUser={onAddUser} onClickGroup={onClickGroup} />;
 };
 
-export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
-  const selfId = userStore.user?.id ?? "";
+export default inject<TStore>(
+  ({ infoPanelStore, userStore, dialogsStore, filesSettingsStore }) => {
+    const selfId = userStore.user?.id ?? "";
 
-  const {
-    setLinkParams,
-    setEditLinkPanelIsVisible,
-    setEmbeddingPanelData,
-    setIsShareFormData,
+    const {
+      setLinkParams,
+      setEditLinkPanelIsVisible,
+      setEmbeddingPanelData,
+      setIsShareFormData,
 
-    setEditMembersGroup,
-    setEditGroupMembersDialogVisible,
-  } = dialogsStore;
+      setEditMembersGroup,
+      setEditGroupMembersDialogVisible,
+    } = dialogsStore;
 
-  const {
-    setView,
+    const {
+      setView,
 
-    shareChanged,
-    setShareChanged,
-    setIsScrollLocked,
-  } = infoPanelStore;
+      shareChanged,
+      setShareChanged,
+      setIsScrollLocked,
+    } = infoPanelStore;
 
-  return {
-    setView,
+    const isExternalShareRestricted = true || !filesSettingsStore.externalShare;
 
-    shareChanged,
-    setShareChanged,
-    selfId,
-    setIsScrollLocked,
-    setLinkParams,
-    setEditLinkPanelIsVisible,
-    setEmbeddingPanelData,
-    onOpenPanel: setIsShareFormData,
+    return {
+      setView,
 
-    setEditMembersGroup,
-    setEditGroupMembersDialogVisible,
-  };
-})(observer(WrapperShare as FC<ExternalShareProps>));
+      shareChanged,
+      setShareChanged,
+      selfId,
+      setIsScrollLocked,
+      setLinkParams,
+      setEditLinkPanelIsVisible,
+      setEmbeddingPanelData,
+      onOpenPanel: setIsShareFormData,
+
+      setEditMembersGroup,
+      setEditGroupMembersDialogVisible,
+
+      isExternalShareRestricted,
+    };
+  },
+)(observer(WrapperShare as FC<ExternalShareProps>));
