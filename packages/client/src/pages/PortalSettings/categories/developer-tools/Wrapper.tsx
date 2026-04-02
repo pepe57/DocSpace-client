@@ -117,7 +117,6 @@ const DeveloperToolsWrapperComponent = observer(
     const isWebhookDetails = section === "webhooks" && depth === 4;
     const isOAuthForm = section === "oauth" && depth === 3;
     const isOAuthEdit = isOAuthForm && !currentPath.endsWith("/create");
-    const isMainPage = section === "main";
 
     return (
       <PrivateRoute>
@@ -129,9 +128,7 @@ const DeveloperToolsWrapperComponent = observer(
             settingsStudio
           >
             <Section.SectionHeader>
-              {isMainPage ? (
-                <div />
-              ) : isWebhookHistory ? (
+              {isWebhookHistory ? (
                 <HistoryHeader />
               ) : isWebhookDetails ? (
                 <DetailsNavigationHeader />

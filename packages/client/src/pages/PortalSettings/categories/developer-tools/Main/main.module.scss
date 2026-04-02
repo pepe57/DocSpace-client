@@ -1,8 +1,20 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+
 .main {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    margin-top: 80px;
+
+    @include mixins.tablet {
+        margin-top: 48px;
+    }
+
+    @include mixins.mobile {
+        margin-top: 16px;
+    }
 }
 
 .header {
@@ -74,4 +86,9 @@
             fill: var(--accent-main);
         }
     }
+}
+
+:global(.section-sticky-container),
+:global(.section-header) {
+    display: none !important;
 }
