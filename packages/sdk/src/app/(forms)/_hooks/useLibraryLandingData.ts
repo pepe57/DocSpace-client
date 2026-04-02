@@ -101,22 +101,29 @@ export default function useLibraryLandingData(folders: TFolder[]) {
           ),
         ];
 
-        const thumbFilter = FilesFilter.getDefault();
-        thumbFilter.page = 0;
-        thumbFilter.pageCount = 100;
-        thumbFilter.withSubfolders = true;
-        thumbFilter.filterType = FilterType.PDFForm;
+        const thumbIds = res.files
+          .filter((f) => typeof f.id === "number" && f.thumbnailStatus !== thumbnailStatuses.CREATED)
+          .map((f) => f.id as number);
+        if (thumbIds.length) createThumbnails(thumbIds).catch(() => {});
 
-        api.files
-          .getFolder(folder.id, thumbFilter, controller.signal)
-          .then((thumbRes) => {
-            if (controller.signal.aborted) return;
-            const ids = thumbRes.files
-              .filter((f) => typeof f.id === "number" && f.thumbnailStatus !== thumbnailStatuses.CREATED)
-              .map((f) => f.id as number);
-            if (ids.length) createThumbnails(ids).catch(() => {});
-          })
-          .catch(() => {});
+        if (res.folders.length > 0) {
+          const thumbFilter = FilesFilter.getDefault();
+          thumbFilter.page = 0;
+          thumbFilter.pageCount = 100;
+          thumbFilter.withSubfolders = true;
+          thumbFilter.filterType = FilterType.PDFForm;
+
+          api.files
+            .getFolder(folder.id, thumbFilter, controller.signal)
+            .then((thumbRes) => {
+              if (controller.signal.aborted) return;
+              const ids = thumbRes.files
+                .filter((f) => typeof f.id === "number" && f.thumbnailStatus !== thumbnailStatuses.CREATED)
+                .map((f) => f.id as number);
+              if (ids.length) createThumbnails(ids).catch(() => {});
+            })
+            .catch(() => {});
+        }
 
         setCategories((prev) =>
           prev.map((cat, i) =>
