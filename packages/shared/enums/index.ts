@@ -206,7 +206,6 @@ export const enum PageType {
   integration = "integration",
   developerTools = "developerTools",
   devToolsMain = "devToolsMain",
-  devToolsApi = "devToolsApi",
   devToolsJavascriptSdk = "devToolsJavascriptSdk",
   devToolsPluginSdk = "devToolsPluginSdk",
   devToolsWebhooks = "devToolsWebhooks",
