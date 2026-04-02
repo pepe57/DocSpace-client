@@ -38,12 +38,14 @@ import { useLibraryParams } from "../../../_hooks/useLibraryParams";
 import useLibraryLandingData from "../../../_hooks/useLibraryLandingData";
 import { libraryUrl } from "../../../_utils/libraryUrl";
 import { useFormsSettingsStore } from "../../../_store/FormsSettingsStore";
+import { useLibraryBreadcrumb } from "../../../_components/library-breadcrumb/LibraryBreadcrumbContext";
 import LibraryLandingPage from "../../../_components/library-landing";
 
 const LibraryLandingRoute = () => {
   const router = useRouter();
   const { langId, roomId, libraryId } = useLibraryParams();
   const formsSettingsStore = useFormsSettingsStore();
+  const breadcrumb = useLibraryBreadcrumb();
   const [folders, setFolders] = useState<TFolder[]>([]);
   const [countriesCount, setCountriesCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -101,20 +103,9 @@ const LibraryLandingRoute = () => {
 
   const { categories, totalTemplatesCount } = useLibraryLandingData(folders);
 
-  // Fetch language title for display
-  const [language, setLanguage] = useState("");
-  useEffect(() => {
-    if (!langId) return;
-    api.files
-      .getFolderInfo(langId)
-      .then((info) => setLanguage(info.title))
-      .catch(() => {});
-  }, [langId]);
-
   const handleClickItem = useCallback(
-    (item: { type: string; original: TFile | TFolder; id: number | string }, category: TFolder) => {
+    async (item: { type: string; original: TFile | TFolder; id: number | string }, category: TFolder) => {
       if (item.type === "file") {
-        // File: open template detail directly
         router.push(
           libraryUrl({
             langId: langId ?? undefined,
@@ -125,17 +116,57 @@ const LibraryLandingRoute = () => {
             libraryId: libraryId || undefined,
           }),
         );
-      } else {
-        // Folder: navigate into it — auto-open first form inside
-        const url = libraryUrl({
+        return;
+      }
+
+      try {
+        const filter = FilesFilter.getDefault();
+        filter.page = 0;
+        filter.pageCount = 1;
+
+        const res = await api.files.getFolder(item.id, filter);
+        const firstFile = res.files[0];
+        const firstFolder = res.folders[0];
+
+        if (firstFile) {
+          router.push(
+            libraryUrl({
+              langId: langId ?? undefined,
+              categoryId: item.id,
+              templateId: firstFile.id,
+              templateType: "file",
+              roomId: roomId || undefined,
+              libraryId: libraryId || undefined,
+            }),
+          );
+          return;
+        }
+
+        if (firstFolder) {
+          router.push(
+            libraryUrl({
+              langId: langId ?? undefined,
+              categoryId: item.id,
+              templateId: firstFolder.id,
+              templateType: "folder",
+              roomId: roomId || undefined,
+              libraryId: libraryId || undefined,
+            }),
+          );
+          return;
+        }
+      } catch {
+        // ignore
+      }
+
+      router.push(
+        libraryUrl({
           langId: langId ?? undefined,
           categoryId: item.id,
           roomId: roomId || undefined,
           libraryId: libraryId || undefined,
-        });
-        const sep = url.includes("?") ? "&" : "?";
-        router.push(`${url}${sep}autoOpen=1`);
-      }
+        }),
+      );
     },
     [langId, roomId, libraryId, router],
   );
@@ -168,7 +199,7 @@ const LibraryLandingRoute = () => {
       categories={categories}
       totalTemplatesCount={totalTemplatesCount}
       countriesCount={countriesCount}
-      language={language}
+      language={breadcrumb?.langTitle ?? ""}
       langId={langId}
       roomId={roomId}
       libraryId={libraryId}
