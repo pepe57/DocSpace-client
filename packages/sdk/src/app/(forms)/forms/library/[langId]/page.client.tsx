@@ -38,12 +38,14 @@ import { useLibraryParams } from "../../../_hooks/useLibraryParams";
 import useLibraryLandingData from "../../../_hooks/useLibraryLandingData";
 import { libraryUrl } from "../../../_utils/libraryUrl";
 import { useFormsSettingsStore } from "../../../_store/FormsSettingsStore";
+import { useLibraryBreadcrumb } from "../../../_components/library-breadcrumb/LibraryBreadcrumbContext";
 import LibraryLandingPage from "../../../_components/library-landing";
 
 const LibraryLandingRoute = () => {
   const router = useRouter();
   const { langId, roomId, libraryId } = useLibraryParams();
   const formsSettingsStore = useFormsSettingsStore();
+  const breadcrumb = useLibraryBreadcrumb();
   const [folders, setFolders] = useState<TFolder[]>([]);
   const [countriesCount, setCountriesCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -100,16 +102,6 @@ const LibraryLandingRoute = () => {
   }, [formsSettingsStore.libraryId]);
 
   const { categories, totalTemplatesCount } = useLibraryLandingData(folders);
-
-  // Fetch language title for display
-  const [language, setLanguage] = useState("");
-  useEffect(() => {
-    if (!langId) return;
-    api.files
-      .getFolderInfo(langId)
-      .then((info) => setLanguage(info.title))
-      .catch(() => {});
-  }, [langId]);
 
   const handleClickItem = useCallback(
     async (item: { type: string; original: TFile | TFolder; id: number | string }, category: TFolder) => {
@@ -207,7 +199,7 @@ const LibraryLandingRoute = () => {
       categories={categories}
       totalTemplatesCount={totalTemplatesCount}
       countriesCount={countriesCount}
-      language={language}
+      language={breadcrumb?.langTitle ?? ""}
       langId={langId}
       roomId={roomId}
       libraryId={libraryId}
