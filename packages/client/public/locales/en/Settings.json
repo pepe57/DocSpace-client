@@ -97,6 +97,7 @@
   "DeveloperToolsAccess": "Developer Tools section",
   "DeveloperToolsAccessDescription": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the owner and {{productName}} administrators only, select Disable and click Save button.",
   "DeveloperToolsAccessMobileDescription": "This setting allows you to make the Developer Tools section visible to all users except guests.",
+  "DeveloperToolsDescription": "Integrate, extend, and automate ONLYOFFICE DocSpace using our full suite of developer tools — from REST API and JavaScript SDK to webhooks and OAuth apps. Choose a tool below to get started.",
   "DisableAiServices": "Disable {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} will be hidden for all users (interaction history will remain preserved).",
   "DisableAiServicesBalance": "Your remaining balance (<1>{{balance}}</1>) will stay in your account and will be available for use if you choose to re-enable {{aiServices}} in the future.",
@@ -314,5 +315,17 @@
   "WantToCancelUpload": "Do you want to cancel the upload?",
   "WantToContinue": "Do you want to continue or change the user storage quota?",
   "WhiteLabelSubtitle": "Upload logos with a transparent background (PNG, SVG, JPG) for light and dark themes, or generate one instantly by entering your Your logo below.",
-  "WithoutEmailHint": "You don’t have users without emails. Please proceed to the next step."
+  "WithoutEmailHint": "You don’t have users without emails. Please proceed to the next step.",
+  "RestAPI": "REST API",
+  "RestAPIDescription": "Create your own productivity platform based on {{organizationName}} {{productName}} and collaborate on documents with teams, clients, and partners.",
+  "EmbedSDK": "Embed SDK",
+  "EmbedSDKDescription": "Embed the whole DocSpace or its part into your web interface.",
+  "StartEmbedding": "Start embedding",
+  "PluginDescription": "Extend your {{productName}} functionality, connect third-party services or enhance the existing user experience.",
+  "WebhooksDescription": "Perform custom actions on the side of any application or website you are using based on various events in {{organizationName}} {{productName}}.",
+  "OAuthDescription": "Use the {{organizationName}} {{productName}} API for authorization and actions like file access and more.",
+  "RegisterApp": "Register app",
+  "ApiKeysCardDescription": "Create and manage all API keys for your {{organizationName}} {{productName}}.",
+  "CreateKey": "Create key",
+  "Main": "Main"
 }
