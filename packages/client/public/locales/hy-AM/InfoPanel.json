@@ -99,5 +99,8 @@
   "UserFileUpdated": "Ֆայլը թարմացվել է:",
   "Users": "Օգտատերեր",
   "Versions": "Տարբերակներ",
-  "LastUpdateInfo": "Վերջին թարմացում"
+  "LastUpdateInfo": "Վերջին թարմացում",
+  "AIAgentsEmptyScreenTent": "Տեսեք {{aiAgents}}-ի մանրամասները այստեղ",
+  "NoAgent": "Չկա {{aiAgent}}",
+  "RoomChangeOwner": "Սենակի տերը փոխվեց։"
 }

@@ -99,5 +99,8 @@
   "UserFileUpdated": "ເອກະສານຖືກປັບປຸງແລ້ວ.",
   "Users": "ຜູ້ໃຊ້",
   "Versions": "ຮຸ່ນ",
-  "LastUpdateInfo": "ອັບເດດລ່າສຸດ"
+  "LastUpdateInfo": "ອັບເດດລ່າສຸດ",
+  "AIAgentsEmptyScreenTent": "ເບິ່ງລາຍລະອຽດຂອງ {{aiAgents}} ທີ່ນີ້",
+  "NoAgent": "ບໍ່ມີ {{aiAgent}}",
+  "RoomChangeOwner": "ເຈົ້າຂອງຫ້ອງປ່ຽນແປງ."
 }

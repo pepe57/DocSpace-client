@@ -100,5 +100,7 @@
   "Users": "Потребители",
   "Versions": "Версии",
   "LastUpdateInfo": "Последна актуализация",
-  "RoomChangeOwner": "Собственикът на стаята беше променен."
+  "RoomChangeOwner": "Собственикът на стаята беше променен.",
+  "AIAgentsEmptyScreenTent": "Вижте подробности за {{aiAgents}} тук",
+  "NoAgent": "Няма {{aiAgent}}"
 }

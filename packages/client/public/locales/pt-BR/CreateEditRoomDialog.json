@@ -39,5 +39,6 @@
   "UserName": "Nome do usuário",
   "ViewerInfo": "Informações do visualizador",
   "WatermarkPreview": "Visualização da marca d'água",
-  "WatermarkPreviewHelp": "Esta visualização da imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos."
+  "WatermarkPreviewHelp": "Esta visualização da imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos.",
+  "ConfigureDatabaseConnection": "Configure a conexão com o banco de dados em Integração → Serviços de terceiros"
 }

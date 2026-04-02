@@ -99,5 +99,8 @@
   "UserFileUpdated": "Fails ir atjaunināts.",
   "Users": "Lietotāji",
   "Versions": "Versijas",
-  "LastUpdateInfo": "Pēdējais atjauninājums"
+  "LastUpdateInfo": "Pēdējais atjauninājums",
+  "AIAgentsEmptyScreenTent": "Skatīt {{aiAgents}} detaļas šeit",
+  "NoAgent": "Nav {{aiAgent}}",
+  "RoomChangeOwner": "Īpašnieks telpā mainīts."
 }
