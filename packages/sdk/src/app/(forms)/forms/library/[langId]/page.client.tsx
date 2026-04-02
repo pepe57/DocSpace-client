@@ -112,9 +112,8 @@ const LibraryLandingRoute = () => {
   }, [langId]);
 
   const handleClickItem = useCallback(
-    (item: { type: string; original: TFile | TFolder; id: number | string }, category: TFolder) => {
+    async (item: { type: string; original: TFile | TFolder; id: number | string }, category: TFolder) => {
       if (item.type === "file") {
-        // File: open template detail directly
         router.push(
           libraryUrl({
             langId: langId ?? undefined,
@@ -125,17 +124,57 @@ const LibraryLandingRoute = () => {
             libraryId: libraryId || undefined,
           }),
         );
-      } else {
-        // Folder: navigate into it — auto-open first form inside
-        const url = libraryUrl({
+        return;
+      }
+
+      try {
+        const filter = FilesFilter.getDefault();
+        filter.page = 0;
+        filter.pageCount = 1;
+
+        const res = await api.files.getFolder(item.id, filter);
+        const firstFile = res.files[0];
+        const firstFolder = res.folders[0];
+
+        if (firstFile) {
+          router.push(
+            libraryUrl({
+              langId: langId ?? undefined,
+              categoryId: item.id,
+              templateId: firstFile.id,
+              templateType: "file",
+              roomId: roomId || undefined,
+              libraryId: libraryId || undefined,
+            }),
+          );
+          return;
+        }
+
+        if (firstFolder) {
+          router.push(
+            libraryUrl({
+              langId: langId ?? undefined,
+              categoryId: item.id,
+              templateId: firstFolder.id,
+              templateType: "folder",
+              roomId: roomId || undefined,
+              libraryId: libraryId || undefined,
+            }),
+          );
+          return;
+        }
+      } catch {
+        // ignore
+      }
+
+      router.push(
+        libraryUrl({
           langId: langId ?? undefined,
           categoryId: item.id,
           roomId: roomId || undefined,
           libraryId: libraryId || undefined,
-        });
-        const sep = url.includes("?") ? "&" : "?";
-        router.push(`${url}${sep}autoOpen=1`);
-      }
+        }),
+      );
     },
     [langId, roomId, libraryId, router],
   );

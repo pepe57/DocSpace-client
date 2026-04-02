@@ -85,10 +85,6 @@ const LibraryCategoryRoute = () => {
           })),
         ];
 
-        setItems(listItems);
-        setIsLoading(false);
-
-        // Auto-open first file when navigating from landing page
         if (autoOpen && !autoOpenDone.current && listItems.length > 0) {
           autoOpenDone.current = true;
           const first = listItems[0];
@@ -102,7 +98,11 @@ const LibraryCategoryRoute = () => {
               libraryId: libraryId || undefined,
             }),
           );
+          return;
         }
+
+        setItems(listItems);
+        setIsLoading(false);
       })
       .catch(() => {
         if (!controller.signal.aborted) {
