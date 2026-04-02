@@ -28,6 +28,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { getLoginLink } from "@docspace/shared/utils/common";
@@ -184,7 +185,7 @@ export default function AuthClient({
           fillRule="evenodd"
           clipRule="evenodd"
           d="M3 4C3 1.79086 4.79086 0 7 0C9.20914 0 11 1.79086 11 4V6H12C13.1046 6 14 6.89543 14 8V14C14 15.1046 13.1046 16 12 16H2C0.89543 16 0 15.1046 0 14V8C0 6.89543 0.895431 6 2 6H3V4ZM9 4V6H5V4C5 2.89543 5.89543 2 7 2C8.10457 2 9 2.89543 9 4ZM2 8V14H12V8H2ZM7 13C8.10457 13 9 12.1046 9 11C9 9.89543 8.10457 9 7 9C5.89543 9 5 9.89543 5 11C5 12.1046 5.89543 13 7 13Z"
-          fill="#A3A9AE"
+          fill={globalColors.gray}
         />
       </svg>
       <div
@@ -199,7 +200,7 @@ export default function AuthClient({
       <div
         style={{
           fontSize: "13px",
-          color: "#A3A9AE",
+          color: globalColors.gray,
           textAlign: "center",
           marginBottom: "8px",
         }}
