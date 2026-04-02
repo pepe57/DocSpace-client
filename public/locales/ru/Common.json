@@ -1213,5 +1213,8 @@
   "DisplayFileExtension": "Отображать расширение файла рядом с именем файла",
   "MarkedAsFavorite": "Добавлено в избранное",
   "UploadFiles": "Загрузить файлы",
-  "UploadFolder": "Загрузить папку"
+  "UploadFolder": "Загрузить папку",
+  "AskAnyQuestion": "Задайте любой вопрос или опишите, что вам нужно.",
+  "ChooseYourCountry": "Выберите свою страну",
+  "ChooseYourCountryDescription": "Выберите язык для просмотра доступных шаблонов форм"
 }
