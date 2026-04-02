@@ -137,11 +137,8 @@ import {
   formRoleMapping,
   getFileLink,
   getFolderLink,
-  getProgressXlsx,
   manageFormFilling,
   removeSharedFolderOrFile,
-  updateXlsxFile,
-  updateXlsxFolder,
 } from "@docspace/shared/api/files";
 
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
@@ -167,11 +164,13 @@ import {
   showInfoPanel,
 } from "SRC_DIR/helpers/info-panel";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 
 const LOADER_TIMER = 500;
 let loadingTime;
 let timer;
+
 
 const systemFolders = [
   FolderType.InProgress,
@@ -1598,21 +1597,35 @@ class ContextOptionsStore {
   };
 
   onUpdateXlsxData = async (item, t) => {
-    try {
-      const { clearSecondaryProgressData } =
-        this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
+    const { clearSecondaryProgressData, setSecondaryProgressBarData } =
+      this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
 
-      const api = isFolder(item) ? updateXlsxFolder : updateXlsxFile;
-      const response = await api(item.id);
+    try {
+      const response = await XlsxUpdateService.start(item.id, isFolder(item));
 
       if (!response) return;
 
       const { form, task } = response;
 
-      if (!task.isCompleted) {
-        await this.pollXlsxProgress(form.id, task.id).catch((error) => {
+      if (task.isCompleted) {
+        XlsxUpdateService.assertTaskSucceeded(task);
+      } else {
+        const basePayload = {
+          operationId: task.id,
+          operation: OPERATIONS_NAME.other,
+        };
+
+        setSecondaryProgressBarData({ ...basePayload, percent: 0 });
+
+        await XlsxUpdateService.poll(form.id, task.id, (progress) => {
+          setSecondaryProgressBarData({
+            ...basePayload,
+            percent: progress?.percentage ?? 100,
+            completed: progress?.isCompleted ?? true,
+          });
+        }).catch((error) => {
           clearSecondaryProgressData(task.id, OPERATIONS_NAME.other);
-          return Promise.reject(error);
+          throw error;
         });
       }
 
@@ -1621,37 +1634,6 @@ class ContextOptionsStore {
       toastr.error(error);
       console.error(error);
     }
-  };
-
-  pollXlsxProgress = (itemId, taskId) => {
-    const { setSecondaryProgressBarData } =
-      this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
-
-    const basePayload = {
-      operationId: taskId,
-      operation: OPERATIONS_NAME.other,
-    };
-
-    setSecondaryProgressBarData({ ...basePayload, percent: 0 });
-
-    return new Promise((resolve, reject) => {
-      const poll = () => {
-        getProgressXlsx(itemId)
-          .then((res) => {
-            setSecondaryProgressBarData({
-              ...basePayload,
-              percent: res?.percentage ?? 100,
-              completed: res?.isCompleted ?? true,
-            });
-
-            if (res.isCompleted) resolve(res);
-            else setTimeout(poll, 1000);
-          })
-          .catch(reject);
-      };
-
-      setTimeout(poll, 1000);
-    });
   };
 
   createMenuGroup = (options, groupConfig, t) => {

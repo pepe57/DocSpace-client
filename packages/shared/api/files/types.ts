@@ -533,5 +533,6 @@ export type UpdateXlsxResponse = {
     percentage: number;
     isCompleted: boolean;
     status: DistributedTaskStatus;
+    error: string;
   };
 };
