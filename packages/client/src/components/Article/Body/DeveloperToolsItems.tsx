@@ -46,6 +46,7 @@ const items = [
     id: "devtools-main",
     path: "/developer-tools/main",
     pageType: PageType.devToolsMain,
+    // t("Settings:Main") - already translated in the parent component
     translationKey: "Settings:Main",
   },
   {

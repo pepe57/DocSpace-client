@@ -60,7 +60,7 @@ const Main = (props: { apiBasicLink: string }) => {
       <div className={styles.main}>
         <div className={styles.header}>
           <Text fontSize="23px" fontWeight={700} lineHeight="28px">{t("Common:DeveloperTools")}</Text>
-          <Text fontSize="13px" fontWeight={400} lineHeight="20px">{t("Settings:DeveloperToolsDescription")}</Text>
+          <Text fontSize="13px" fontWeight={400} lineHeight="20px">{t("Settings:DeveloperToolsDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })}</Text>
         </div>
         <div className={styles.grid}>
           <Card 
