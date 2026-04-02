@@ -72,13 +72,13 @@ const DocsSidebar = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const isSettings = pathname === "/docs/settings";
+  const isSettings = pathname === "/personal-files/settings";
   const showMainButton = currentDeviceType === DeviceType.desktop;
   const isMainButtonDisabled = isSettings || activeSection !== DocsSection.MyDocuments;
 
   const handleSectionClick = React.useCallback(
     (section: DocsSection) => {
-      if (section === activeSection && pathname === "/docs") return;
+      if (section === activeSection && pathname === "/personal-files") return;
 
       const folderAlias = DOCS_SECTION_FOLDER_ALIAS[section];
       const filter = FilesFilter.getDefault();
@@ -92,10 +92,10 @@ const DocsSidebar = () => {
 
       const filterUrl = `?${filter.toUrlParams()}`;
 
-      if (pathname !== "/docs") {
-        router.push(`/docs${filterUrl}`);
+      if (pathname !== "/personal-files") {
+        router.push(`/personal-files${filterUrl}`);
       } else {
-        router.replace(`/docs${filterUrl}`);
+        router.replace(`/personal-files${filterUrl}`);
       }
     },
     [
@@ -109,7 +109,7 @@ const DocsSidebar = () => {
 
   const onSettingsClick = React.useCallback(() => {
     if (isSettings) return;
-    router.push("/docs/settings");
+    router.push("/personal-files/settings");
   }, [router, isSettings]);
 
   const sections = React.useMemo(

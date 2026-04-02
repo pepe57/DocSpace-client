@@ -175,7 +175,7 @@ const DocsLayoutInner = observer(({
 
   const openFileHandler = React.useCallback(
     (file: TFileItem) => {
-      router.push(`/docs/editor/${file.id}`);
+      router.push(`/personal-files/editor/${file.id}`);
     },
     [router],
   );

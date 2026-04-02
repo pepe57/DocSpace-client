@@ -32,17 +32,13 @@ import { useRouter } from "next/navigation";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
-import styles from "../[fileId]/EditorPage.module.scss";
+import styles from "./EditorPage.module.scss";
 
-type CreateEditorPageProps = {
-  parentId: string;
-  fileTitle: string;
+type EditorPageProps = {
+  fileId: string;
 };
 
-export default function CreateEditorPage({
-  parentId,
-  fileTitle,
-}: CreateEditorPageProps) {
+export default function EditorPage({ fileId }: EditorPageProps) {
   const router = useRouter();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const [isReady, setIsReady] = React.useState(false);
@@ -57,12 +53,11 @@ export default function CreateEditorPage({
 
   const editorUrl = React.useMemo(() => {
     const params = new URLSearchParams();
-    params.set("parentId", parentId);
-    params.set("fileTitle", fileTitle);
+    params.set("fileId", fileId);
     params.set("editorGoBack", "event");
 
-    return combineUrl(editorOrigin, `/doceditor/create?${params.toString()}`);
-  }, [parentId, fileTitle, editorOrigin]);
+    return combineUrl(editorOrigin, `/doceditor?${params.toString()}`);
+  }, [fileId, editorOrigin]);
 
   React.useEffect(() => {
     const onMessage = (event: MessageEvent) => {
@@ -85,7 +80,7 @@ export default function CreateEditorPage({
         (data?.type === "onEventReturn" &&
           data?.eventReturnData?.event === "onEditorCloseCallback")
       ) {
-        router.back();
+        router.replace("/personal-files");
       }
     };
 

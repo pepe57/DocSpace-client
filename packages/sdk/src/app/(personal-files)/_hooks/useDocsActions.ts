@@ -104,7 +104,7 @@ export default function useDocsActions() {
       if (type !== "folder") {
         const name = getDefaultFileName(type, t);
         router.push(
-          `/docs/editor/create?parentId=${folderId}&fileTitle=${encodeURIComponent(`${name}.${type}`)}`,
+          `/personal-files/editor/create?parentId=${folderId}&fileTitle=${encodeURIComponent(`${name}.${type}`)}`,
         );
         return;
       }

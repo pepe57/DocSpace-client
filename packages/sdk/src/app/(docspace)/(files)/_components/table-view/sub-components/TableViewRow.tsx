@@ -107,6 +107,18 @@ const TableViewRow = observer(
       }
     }, [item, openFolder, openFile]);
 
+    const onNameClick = React.useCallback(
+      (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (item.isFolder) {
+          openFolder(item.id, item.title);
+        } else {
+          openFile(item);
+        }
+      },
+      [item, openFolder, openFile],
+    );
+
     const contextMenuModel = getContextMenuModel(true);
 
     return (
@@ -135,7 +147,7 @@ const TableViewRow = observer(
                 showDefault={false}
               />
             </div>
-            <span className={styles.nameCellText}>
+            <span className={styles.nameCellText} onClick={onNameClick}>
               {titleWithoutExt}
               {displayFileExtension && "fileExst" in item ? (
                 <span className={styles.nameCellExst}>{item.fileExst}</span>
