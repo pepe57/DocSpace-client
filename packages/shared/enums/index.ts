@@ -205,7 +205,7 @@ export const enum PageType {
   restore = "restore",
   integration = "integration",
   developerTools = "developerTools",
-  devToolsMain = "devToolsMain",
+  devToolsOverview = "devToolsOverview",
   devToolsJavascriptSdk = "devToolsJavascriptSdk",
   devToolsPluginSdk = "devToolsPluginSdk",
   devToolsWebhooks = "devToolsWebhooks",
