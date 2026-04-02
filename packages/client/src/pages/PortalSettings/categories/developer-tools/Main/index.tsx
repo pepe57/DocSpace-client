@@ -33,18 +33,22 @@ import KeySvg from "PUBLIC_DIR/images/icons/16/catalog.devtools-api-keys.react.s
 
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { globalColors } from "@docspace/ui-kit/providers";
+
+import ConfirmWrapper from "SRC_DIR/components/ConfirmWrapper";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import Card from "./card";
 
 import styles from "./main.module.scss";
 
-const Main = () => {
+const Main = (props: { apiBasicLink: string }) => {
   const { t, ready } = useTranslation(["Common", "Settings", "JavascriptSdk", "WebPlugins", "Webhooks", "OAuth"]);
-
+  const { apiBasicLink } = props;
+  
   useEffect(() => {
     if (ready) setDocumentTitle(t("Common:DeveloperTools"));
   }, [ready]);
@@ -52,63 +56,72 @@ const Main = () => {
   if (!ready) return null;
 
   return (
-    <div className={styles.main}>
-      <div className={styles.header}>
-        <Text fontSize="23px" fontWeight={700} lineHeight="28px">{t("Common:DeveloperTools")}</Text>
-        <Text fontSize="13px" fontWeight={400} lineHeight="20px">{t("Settings:DeveloperToolsDescription")}</Text>
+    <ConfirmWrapper height="100%">
+      <div className={styles.main}>
+        <div className={styles.header}>
+          <Text fontSize="23px" fontWeight={700} lineHeight="28px">{t("Common:DeveloperTools")}</Text>
+          <Text fontSize="13px" fontWeight={400} lineHeight="20px">{t("Settings:DeveloperToolsDescription")}</Text>
+        </div>
+        <div className={styles.grid}>
+          <Card 
+            icon={<DevToolsSvg />} 
+            title={t("Settings:RestAPI")} 
+            description={t("Settings:RestAPIDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })} 
+            url={apiBasicLink}
+            color={globalColors.lightBlueMain}
+            linkTitle={t("Common:LearnMore")} 
+            isBlank
+          />
+          <Card 
+            icon={<EmbedSvg />} 
+            title={t("Settings:EmbedSDK")} 
+            description={t("Settings:EmbedSDKDescription", { productName: t("Common:ProductName") })} 
+            url="/developer-tools/javascript-sdk" 
+            color={globalColors.mainOrange}
+            linkTitle={t("Settings:StartEmbedding")} 
+          />
+          <Card 
+            icon={<PluginSvg />} 
+            title={t("WebPlugins:PluginSDK")} 
+            description={t("Settings:PluginDescription", { productName: t("Common:ProductName") })} 
+            url="/developer-tools/plugin-sdk" 
+            color={globalColors.secondGreen}
+            linkTitle={t("Common:ReadInstructions")} 
+          />
+          <Card 
+            icon={<WebhookSvg />} 
+            title={t("Webhooks:Webhooks")} 
+            description={t("Settings:WebhooksDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })} 
+            url="/developer-tools/webhooks" 
+            color={globalColors.mainRed}
+            linkTitle={t("Webhooks:CreateWebhook")} 
+          />
+          <Card 
+            icon={<OAuthSvg />} 
+            title={t("OAuth:OAuth")} 
+            description={t("Settings:OAuthDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })} 
+            url="/developer-tools/oauth" 
+            color={globalColors.purple}
+            linkTitle={t("Settings:RegisterApp")} 
+          />
+          <Card 
+            icon={<KeySvg />} 
+            title={t("Settings:ApiKeys")} 
+            description={t("Settings:ApiKeysCardDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })} 
+            url="/developer-tools/api-keys" 
+            color={globalColors.lightGrayDark}
+            linkTitle={t("Settings:CreateKey")} 
+          />
+        </div>
       </div>
-      <div className={styles.grid}>
-        <Card 
-          icon={<DevToolsSvg />} 
-          title={t("Settings:RestAPI")} 
-          description={t("Settings:RestAPIDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })} 
-          url="#" 
-          color={globalColors.lightBlueMain}
-          linkTitle={t("Common:LearnMore")} 
-        />
-        <Card 
-          icon={<EmbedSvg />} 
-          title={t("Settings:EmbedSDK")} 
-          description={t("Settings:EmbedSDKDescription", { productName: t("Common:ProductName") })} 
-          url="#" 
-          color={globalColors.mainOrange}
-          linkTitle={t("Settings:StartEmbedding")} 
-        />
-        <Card 
-          icon={<PluginSvg />} 
-          title={t("WebPlugins:PluginSDK")} 
-          description={t("Settings:PluginDescription", { productName: t("Common:ProductName") })} 
-          url="#" 
-          color={globalColors.secondGreen}
-          linkTitle={t("Common:ReadInstructions")} 
-        />
-        <Card 
-          icon={<WebhookSvg />} 
-          title={t("Webhooks:Webhooks")} 
-          description={t("Settings:WebhooksDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })} 
-          url="#" 
-          color={globalColors.mainRed}
-          linkTitle={t("Webhooks:CreateWebhook")} 
-        />
-        <Card 
-          icon={<OAuthSvg />} 
-          title={t("OAuth:OAuth")} 
-          description={t("Settings:OAuthDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })} 
-          url="#" 
-          color={globalColors.purple}
-          linkTitle={t("Settings:RegisterApp")} 
-        />
-        <Card 
-          icon={<KeySvg />} 
-          title={t("Settings:ApiKeys")} 
-          description={t("Settings:ApiKeysCardDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })} 
-          url="#" 
-          color={globalColors.lightGrayDark}
-          linkTitle={t("Settings:CreateKey")} 
-        />
-      </div>
-    </div>
+    </ConfirmWrapper>
   );
 };
 
-export default Main;
+export default inject(({ settingsStore }: TStore) => {
+  const { apiBasicLink } = settingsStore;
+
+  return {
+    apiBasicLink,
+  };
+})(observer(Main));

@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg";
+import { useNavigate } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 import styles from './main.module.scss';
 
@@ -38,9 +39,20 @@ type CardProps = {
     linkTitle: string;
     color: string;
     icon: React.ReactNode;
+    isBlank?: boolean;
 }
 
-const Card = ({ title, description, url, linkTitle, color, icon }: CardProps) => {
+const Card = ({ title, description, url, linkTitle, color, icon, isBlank = false }: CardProps) => {
+    const navigate = useNavigate();
+
+    const onClickLink = () => {
+        if (isBlank) {
+            window.open(url, '_blank');
+        } else {
+            navigate(url);
+        }
+    }
+    
     return (
         <div className={styles.card}>
             <div
@@ -58,9 +70,8 @@ const Card = ({ title, description, url, linkTitle, color, icon }: CardProps) =>
             <hr className={styles.cardDivider} />
             <Link 
                 className={styles.cardLink} 
-                href={url} 
+                onClick={onClickLink}
                 color="accent" 
-                target={LinkTarget.blank} 
                 type={LinkType.page} 
                 fontSize="14px" 
                 fontWeight={600}
