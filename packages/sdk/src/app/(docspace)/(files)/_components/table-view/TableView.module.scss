@@ -46,8 +46,9 @@
       }
     }
 
-    .table-row-selected + .table-row-selected {
+    .table-row-selected+.table-row-selected {
       .table-row {
+
         .table-container_file-name-cell,
         .table-container_row-context-menu-wrapper {
           border-image-slice: 1;
@@ -80,14 +81,14 @@
 }
 
 .nameCellExst {
-  color: var(--files-section-table-view-exst-color, #a3a9ae);
+  color: var(--files-section-table-view-exst-color);
 }
 
 .secondaryCell {
   display: flex;
   align-items: center;
   overflow: hidden;
-  color: var(--files-section-table-view-exst-color, #a3a9ae);
+  color: var(--files-section-table-view-exst-color);
   font-size: 12px;
   white-space: nowrap;
   text-overflow: ellipsis;

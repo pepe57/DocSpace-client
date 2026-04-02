@@ -174,6 +174,7 @@ const Row = observer(
             key={item.id}
             checked={isChecked}
             mode="modern"
+            withoutBorder
             isIndexEditingMode={false}
             folderCategory={false}
             isActive={false}
