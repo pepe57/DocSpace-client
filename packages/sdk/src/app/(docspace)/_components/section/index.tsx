@@ -77,7 +77,7 @@ export const SectionWrapper = observer(
       <Section
         withBodyScroll
         settingsStudio={false}
-        viewAs="row"
+        viewAs={settingsStore.filesViewAs || "row"}
         isEmptyPage={isEmptyList}
         currentDeviceType={currentDeviceType}
       >

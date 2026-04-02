@@ -29,7 +29,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { FolderType } from "@docspace/shared/enums";
+import { DeviceType, FolderType } from "@docspace/shared/enums";
 
 import { PAGE_COUNT } from "@/utils/constants";
 
@@ -47,6 +47,7 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import RowView from "../row-view";
 import TileView from "../tile-view";
+import TableView from "../table-view";
 import EmptyView from "../empty-view";
 
 import { ListProps } from "./List.types";
@@ -67,13 +68,23 @@ const List = ({
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const { setIsEmptyList, filesViewAs } = useSettingsStore();
+  const { setIsEmptyList, filesViewAs, setFilesViewAs, currentDeviceType } =
+    useSettingsStore();
   const filesListStore = useFilesListStore();
   const { setItems, setRootFolderType } = filesListStore;
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
   const navigationStore = useNavigationStore();
 
   useResetSelectionClick({ setSelection, setBufferSelection });
+
+  React.useEffect(() => {
+    if (filesViewAs !== "table" && filesViewAs !== "row") return;
+
+    const isDesktop = currentDeviceType === DeviceType.desktop;
+
+    if (isDesktop && filesViewAs === "row") setFilesViewAs("table");
+    else if (!isDesktop && filesViewAs === "table") setFilesViewAs("row");
+  }, [currentDeviceType, filesViewAs, setFilesViewAs]);
 
   const { getIcon } = useItemIcon({
     filesSettings,
@@ -282,16 +293,34 @@ const List = ({
     );
   }
 
-  return filesViewAs === "tile" ? (
-    <TileView
-      items={visibleItems}
-      currentFolderId={filter.folder}
-      hasMoreFiles={hasNextPage}
-      fetchMoreFiles={fetchMoreFiles}
-      filesLength={visibleItems.length}
-      getIcon={getIcon}
-    />
-  ) : (
+  if (filesViewAs === "tile") {
+    return (
+      <TileView
+        items={visibleItems}
+        currentFolderId={filter.folder}
+        hasMoreFiles={hasNextPage}
+        fetchMoreFiles={fetchMoreFiles}
+        filesLength={visibleItems.length}
+        getIcon={getIcon}
+      />
+    );
+  }
+
+  if (filesViewAs === "table") {
+    return (
+      <TableView
+        total={total}
+        items={visibleItems}
+        hasMoreFiles={hasNextPage}
+        filterSortBy={filter.sortBy}
+        timezone={timezone}
+        displayFileExtension={displayFileExtension}
+        fetchMoreFiles={fetchMoreFiles}
+      />
+    );
+  }
+
+  return (
     <RowView
       total={total}
       items={visibleItems}
