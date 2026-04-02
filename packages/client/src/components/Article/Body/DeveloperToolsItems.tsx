@@ -43,6 +43,12 @@ interface IDeveloperToolsItem {
 
 const items = [
   {
+    id: "devtools-main",
+    path: "/developer-tools/main",
+    pageType: PageType.devToolsMain,
+    translationKey: "Settings:Main",
+  },
+  {
     id: "devtools-api",
     path: "/developer-tools/api",
     pageType: PageType.devToolsApi,
@@ -52,7 +58,7 @@ const items = [
     id: "devtools-javascript-sdk",
     path: "/developer-tools/javascript-sdk",
     pageType: PageType.devToolsJavascriptSdk,
-    translationKey: "JavascriptSdk:JavascriptSdk",
+    translationKey: "Settings:EmbedSDK",
   },
   {
     id: "devtools-plugin-sdk",

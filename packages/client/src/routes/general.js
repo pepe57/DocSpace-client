@@ -96,11 +96,18 @@ export const generalClientRoutes = [
         index: true,
         Component: () => (
           <Navigate
-            to="api"
+            to="main"
             state={window.DocSpace?.location?.state}
             replace
           />
         ),
+      },
+      {
+        path: "main",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/developer-tools/Main"
+          ).then((m) => ({ Component: m.default })),
       },
       {
         path: "api",
