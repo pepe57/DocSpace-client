@@ -30,6 +30,8 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 
+import api from "@docspace/shared/api";
+import FilesFilter from "@docspace/shared/api/files/filter";
 import { SearchInput } from "@docspace/ui-kit/components/search-input";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
@@ -115,7 +117,7 @@ const HeroSearchBar = ({ langId, roomId, libraryId }: HeroSearchBarProps) => {
   }, []);
 
   const handleSelectResult = useCallback(
-    (result: SearchResult) => {
+    async (result: SearchResult) => {
       setIsOpen(false);
       setInputValue("");
       clear();
@@ -131,15 +133,58 @@ const HeroSearchBar = ({ langId, roomId, libraryId }: HeroSearchBarProps) => {
             libraryId: libraryId || undefined,
           }),
         );
-      } else {
-        const url = libraryUrl({
+        return;
+      }
+
+      const folderId = result.folderId || result.id;
+      try {
+        const filter = FilesFilter.getDefault();
+        filter.page = 0;
+        filter.pageCount = 1;
+
+        const res = await api.files.getFolder(folderId, filter);
+        const firstFile = res.files[0];
+        const firstFolder = res.folders[0];
+
+        if (firstFile) {
+          router.push(
+            libraryUrl({
+              langId: langId ?? undefined,
+              categoryId: folderId,
+              templateId: firstFile.id,
+              templateType: "file",
+              roomId: roomId || undefined,
+              libraryId: libraryId || undefined,
+            }),
+          );
+          return;
+        }
+
+        if (firstFolder) {
+          router.push(
+            libraryUrl({
+              langId: langId ?? undefined,
+              categoryId: folderId,
+              templateId: firstFolder.id,
+              templateType: "folder",
+              roomId: roomId || undefined,
+              libraryId: libraryId || undefined,
+            }),
+          );
+          return;
+        }
+      } catch {
+        // ignore
+      }
+
+      router.push(
+        libraryUrl({
           langId: langId ?? undefined,
-          categoryId: result.folderId || result.id,
+          categoryId: folderId,
           roomId: roomId || undefined,
           libraryId: libraryId || undefined,
-        });
-        router.push(`${url}${url.includes("?") ? "&" : "?"}autoOpen=1`);
-      }
+        }),
+      );
     },
     [langId, roomId, libraryId, router, clear],
   );
