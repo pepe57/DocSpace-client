@@ -110,13 +110,6 @@ export const generalClientRoutes = [
           ).then((m) => ({ Component: m.default })),
       },
       {
-        path: "api",
-        lazy: () =>
-          import(
-            "SRC_DIR/pages/PortalSettings/categories/developer-tools/Api"
-          ).then((m) => ({ Component: m.default })),
-      },
-      {
         path: "api-keys",
         lazy: () =>
           import(

@@ -63,7 +63,6 @@ const sdkPresetTitles: Record<string, string> = {
 
 const getTitle = (pathname: string, t: (key: string) => string): string => {
   if (pathname.includes("/developer-tools/api-keys")) return t("Settings:ApiKeys");
-  if (pathname.includes("/developer-tools/api")) return t("Settings:Api");
   if (pathname.includes("/developer-tools/javascript-sdk/")) {
     const slug = pathname.split("/developer-tools/javascript-sdk/")[1]?.replace(/\/$/, "");
     const key = sdkPresetTitles[slug];

@@ -49,12 +49,6 @@ const items = [
     translationKey: "Settings:Main",
   },
   {
-    id: "devtools-api",
-    path: "/developer-tools/api",
-    pageType: PageType.devToolsApi,
-    translationKey: "Settings:Api",
-  },
-  {
     id: "devtools-javascript-sdk",
     path: "/developer-tools/javascript-sdk",
     pageType: PageType.devToolsJavascriptSdk,
@@ -121,7 +115,7 @@ const DeveloperToolsItems = ({
         const isActive =
           location.pathname === item.path ||
           location.pathname.startsWith(`${item.path}/`);
-        const isLast = index === visibleItems.length - 1;
+        const isFirstChild = index === 0;
         const title = t(item.translationKey);
 
         return (
@@ -137,7 +131,7 @@ const DeveloperToolsItems = ({
             folderId={item.id}
             LinkRouter={Link}
             withAnimation={!isMobileView}
-            isEndOfBlock={isLast}
+            isEndOfBlock={isFirstChild}
           />
         );
       })}
