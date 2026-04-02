@@ -92,6 +92,7 @@ export type LinkRowProps = {
 
   isShareLink?: boolean;
   hideLinkTypeSelector?: boolean;
+  isExternalShareRestricted?: boolean;
 } & (
   | {
       isRoomsLink?: undefined | false;
@@ -117,6 +118,7 @@ export type ExpiredComboBoxProps = {
 
 export type ShareProps = {
   infoPanelSelection: TFile | TFolder;
+  isExternalShareRestricted?: boolean;
   setEmbeddingPanelData?: (value: {
     visible: boolean;
     item?: TFile | TFolder;
@@ -157,6 +159,7 @@ export interface LinkTitleProps {
 
   isLoaded?: boolean;
   disabledCopy?: boolean;
+  isBlockedByAdmin?: boolean;
 }
 
 export type TCopyShareLinkOptions = {
@@ -197,6 +200,7 @@ export interface UseShareProps {
   fileLinkProps?: TLink[];
   setView?: (view: string) => void;
   setIsScrollLocked?: (isScrollLocked: boolean) => void;
+  isExternalShareRestricted?: boolean;
   onOpenPanel?: (options: {
     visible: boolean;
     updateAccessLink: () => Promise<void>;

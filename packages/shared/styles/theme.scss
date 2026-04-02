@@ -785,6 +785,7 @@
   --info-panel-border: #{$gray-light-mid};
   --info-panel-avatar-color: #{$gray-text};
   --info-panel-link-expired: #{$gray};
+  --info-panel-link-blocked: #{$light-status-warning};
   --info-panel-links-color: #{$light-blue-main};
   --info-panel-links-primary-color: #{$gray-text};
   --info-panel-members-create-link: #{$black};
@@ -797,6 +798,7 @@
   --info-panel-border: #{$gray-dark-strong};
   --info-panel-avatar-color: #{$gray};
   --info-panel-link-expired: #{$gray};
+  --info-panel-link-blocked: #{$light-status-warning};
   --info-panel-links-color: #{$light-blue-main};
   --info-panel-links-primary-color: #{$dark-gray-dark};
   --info-panel-members-create-link: #{$gray-dark};
@@ -1431,7 +1433,7 @@
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
 
-  --ai-settings-description:#{$gray};
+  --ai-settings-description: #{$gray};
 }
 
 .dark {

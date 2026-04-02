@@ -69,6 +69,7 @@ const Share = (props: ShareProps) => {
     onClickGroup,
     disabledSharedUser: disabledSharedUserProp,
     hideLinkTypeSelector,
+    isExternalShareRestricted,
   } = props;
 
   // HACK: Hide share option for rooms — remove after implementation is ready
@@ -99,6 +100,7 @@ const Share = (props: ShareProps) => {
     setView,
     shareChanged,
     hideLinkTypeSelector,
+    isExternalShareRestricted,
   });
 
   const links = getLinkElements();
