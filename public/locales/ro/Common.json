@@ -785,7 +785,7 @@
   "RoleContentCreatorDescription": "Creatori de conținut pot crea și modifica fişiere în sală, dar nu pot gestiona utilizatorii sau accesa setările.",
   "RoleEditorDescription": "Operaţii cu fişiere existente: vizualizare, editare, completare formulare, revizuire, comentare.",
   "RoleForLink": "Rol pentru link-ul",
-  "RoleFormFiller": "Form filler",
+  "RoleFormFiller": "Completator de formulare",
   "RoleFormFillerDescription": "Operaţii cu fişiere existente: vizualizare, completare formulare, revizuire, comentare.",
   "RoleFormFillerFormRoomDescription": "Completator de formulare poate completa formulare și poate afișa numai formularele sale completate/în curs de completare din foldere Formulare completate și În curs de completare.",
   "RolePowerUserFormRoomDescription": "Avansați pot încărca formulare în sala și sunt oferite acces complet la foldere Formulare completate și În curs de completare.",
