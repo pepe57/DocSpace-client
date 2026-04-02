@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "ඔබේ රට තෝදන්න",
   "ChooseYourCountryDescription": "ලබා ගත හැකි පෝරම සැකිලි පිරික්සීමට භාෂාවක් තෝරන්න.",
   "CollectData": "දත්ත රැස් කරන්න",
-  "CollectResultsInXlsx": "එක්ස්සෙල් (XLSX) ගොනුවේ ප්‍රතිඵල රැස් කරන්න."
+  "CollectResultsInXlsx": "එක්ස්සෙල් (XLSX) ගොනුවේ ප්‍රතිඵල රැස් කරන්න.",
+  "AnyFiles": "ඕනෑම ගොනු",
+  "ChooseAIAgent": "{{aiAgent}} එකක් තෝරන්න",
+  "CompletedForms": "සම්පූර්ණ කරන ලද ආකෘති පත්‍ර",
+  "Connected": "සම්බන්ධයි",
+  "ConnectionFailed": "සම්බන්ධතාවය අසාර්ථක විය",
+  "ConnectionSuccessful": "සම්බන්ධතාවය සාර්ථකයි",
+  "CopyingTemplate": "පිටපත් කරමින්...",
+  "DatabaseHost": "සත්කාරකය",
+  "DatabaseName": "දත්ත සමුදායේ නම",
+  "DatabasePort": "වරාය",
+  "DomainAlreadyAdded": "මෙම වසම දැනටමත් එකතු කර ඇත",
+  "DropzoneFilesSecondary": "නැතහොත් ගොනු මෙහි දමන්න",
+  "DropzoneFolderSecondary": "නැතහොත් ෆෝල්ඩර මෙහි දමන්න",
+  "DropzoneFoldersSecondary": "නැතහොත් ෆෝල්ඩර මෙහි දමන්න"
 }

@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "Изаберите земљу",
   "ChooseYourCountryDescription": "Изаберите језик да бисте прегледали доступне шаблоне образаца",
   "CollectData": "Прикупи податке",
-  "CollectResultsInXlsx": "Прикупити резултате у XLSX"
+  "CollectResultsInXlsx": "Прикупити резултате у XLSX",
+  "AnyFiles": "Било које датотеке",
+  "ChooseAIAgent": "Изаберите {{aiAgent}}",
+  "CompletedForms": "Завршени формулари",
+  "Connected": "Повезано",
+  "ConnectionFailed": "Повезани неуспешно",
+  "ConnectionSuccessful": "Успешна повезаност",
+  "CopyingTemplate": "Копирање...",
+  "DatabaseHost": "Хост",
+  "DatabaseName": "Име базе података",
+  "DatabasePort": "Порт",
+  "DomainAlreadyAdded": "Овај домен је већ додат.",
+  "DropzoneFilesSecondary": "или испустите датотеке овде",
+  "DropzoneFolderSecondary": "или испустите фасциклу овде",
+  "DropzoneFoldersSecondary": "или превуците фолдере овде"
 }

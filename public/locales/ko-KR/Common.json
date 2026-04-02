@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "국가 선택",
   "ChooseYourCountryDescription": "사용 가능한 양식 템플릿을 보려면 언어를 선택하세요.",
   "CollectData": "데이터 수집하기",
-  "CollectResultsInXlsx": "XLSX 파일에 결과 수집"
+  "CollectResultsInXlsx": "XLSX 파일에 결과 수집",
+  "AnyFiles": "파일",
+  "ChooseAIAgent": "{{aiAgent}}을 선택하세요",
+  "CompletedForms": "완료된 양식들",
+  "Connected": "연결됨",
+  "ConnectionFailed": "연결에 실패했습니다.",
+  "ConnectionSuccessful": "연결 성공",
+  "CopyingTemplate": "복사 중...",
+  "DatabaseHost": "호스트",
+  "DatabaseName": "데이터베이스 이름",
+  "DatabasePort": "항구",
+  "DomainAlreadyAdded": "이 도메인은 이미 추가되었습니다.",
+  "DropzoneFilesSecondary": "또 파일을 여기로 드래그하세요",
+  "DropzoneFolderSecondary": "또는 폴더를 여기로 드래그하세요",
+  "DropzoneFoldersSecondary": "또는 폴더를 여기로 드래그하세요"
 }

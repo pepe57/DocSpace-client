@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "Ölkənizi seçin",
   "ChooseYourCountryDescription": "Müstəvi form şablonları üçün nəzərdə tutulan dilini seçin",
   "CollectData": "Məlumatları topla",
-  "CollectResultsInXlsx": "Nəticələri XLSX formatında topla"
+  "CollectResultsInXlsx": "Nəticələri XLSX formatında topla",
+  "AnyFiles": "Hər hansı fayllar",
+  "ChooseAIAgent": "{{aiAgent}} seçim edin",
+  "CompletedForms": "Bağlanan formalar",
+  "Connected": "Bağlı",
+  "ConnectionFailed": "Bağlantı xətası",
+  "ConnectionSuccessful": "Bağlantı uğurlu oldu",
+  "CopyingTemplate": "Kopyalama...",
+  "DatabaseHost": "Ev sahibi",
+  "DatabaseName": "Verilənlər bazasının adı",
+  "DatabasePort": "Port",
+  "DomainAlreadyAdded": "Bu domen artıq əlavə edilib.",
+  "DropzoneFilesSecondary": "və ya faylları buraya atın",
+  "DropzoneFolderSecondary": "və ya qovluğu bura atın",
+  "DropzoneFoldersSecondary": "və ya qovluqları buraya sürükləyin"
 }

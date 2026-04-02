@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "国を選択してください",
   "ChooseYourCountryDescription": "利用可能なフォームテンプレートを参照するには、言語を選択してください。",
   "CollectData": "データ収集",
-  "CollectResultsInXlsx": "結果をXLSXに収集する。"
+  "CollectResultsInXlsx": "結果をXLSXに収集する。",
+  "AnyFiles": "任意のファイル",
+  "ChooseAIAgent": "{{aiAgent}} を選択してください。",
+  "CompletedForms": "完了したフォーム",
+  "Connected": "つながっている",
+  "ConnectionFailed": "接続に失敗しました",
+  "ConnectionSuccessful": "接続成功",
+  "CopyingTemplate": "コピー中...",
+  "DatabaseHost": "ホスト",
+  "DatabaseName": "データベース名",
+  "DatabasePort": "港",
+  "DomainAlreadyAdded": "このドメインはすでに登録済みです。",
+  "DropzoneFilesSecondary": "またはここにファイルをドロップしてください",
+  "DropzoneFolderSecondary": "またはここにフォルダをドロップしてください",
+  "DropzoneFoldersSecondary": "またはここにフォルダをドロップしてください"
 }

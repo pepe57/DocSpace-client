@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "Alegeți țara dumneavoastră",
   "ChooseYourCountryDescription": "Selectați o limbă pentru a vizualiza șabloanele de formulare disponibile.",
   "CollectData": "Colectează date",
-  "CollectResultsInXlsx": "Colectează rezultatele în XLSX"
+  "CollectResultsInXlsx": "Colectează rezultatele în XLSX",
+  "AnyFiles": "Orice fișiere",
+  "ChooseAIAgent": "Alege un {{aiAgent}}",
+  "CompletedForms": "Formulare completate",
+  "Connected": "Conectat",
+  "ConnectionFailed": "Conexiune eșuată",
+  "ConnectionSuccessful": "Conexiune reușită",
+  "CopyingTemplate": "Copiere...",
+  "DatabaseHost": "Gazdă",
+  "DatabaseName": "Numele bazei de date",
+  "DatabasePort": "Port",
+  "DomainAlreadyAdded": "Acest domeniu a fost deja adăugat.",
+  "DropzoneFilesSecondary": "sau trageți fișierele aici",
+  "DropzoneFolderSecondary": "sau trage folderul aici",
+  "DropzoneFoldersSecondary": "sau trageți folderele aici"
 }

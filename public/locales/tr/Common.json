@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "Ülkenizi seçin",
   "ChooseYourCountryDescription": "İlgili form şablonlarını görüntülemek için bir dil seçin",
   "CollectData": "Veri topla",
-  "CollectResultsInXlsx": "Sonuçları XLSX'te toplayın"
+  "CollectResultsInXlsx": "Sonuçları XLSX'te toplayın",
+  "AnyFiles": "Herhangi dosyalar",
+  "ChooseAIAgent": "Bir {{aiAgent}} seçin",
+  "CompletedForms": "Doldurulmuş formlar",
+  "Connected": "Bağlı",
+  "ConnectionFailed": "Bağlantı başarısız oldu",
+  "ConnectionSuccessful": "Bağlantı başarılı",
+  "CopyingTemplate": "Kopyalanıyor...",
+  "DatabaseHost": "Sunucu",
+  "DatabaseName": "Veritabanı adı",
+  "DatabasePort": "Port",
+  "DomainAlreadyAdded": "Bu alan zaten eklenmiş.",
+  "DropzoneFilesSecondary": "veya dosyaları buraya bırakın",
+  "DropzoneFolderSecondary": "veya klasörü buraya bırakın",
+  "DropzoneFoldersSecondary": "veya klasörleri buraya bırakın"
 }

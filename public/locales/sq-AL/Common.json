@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "Zgjidhni vendin tuaj",
   "ChooseYourCountryDescription": "Zgjidhni një gjuhë për të naviguar modelet e formave të disponueshme",
   "CollectData": "Mbledhë donja",
-  "CollectResultsInXlsx": "Mbledhni rezultatet në XLSX"
+  "CollectResultsInXlsx": "Mbledhni rezultatet në XLSX",
+  "AnyFiles": "Ndërsa skedarë",
+  "ChooseAIAgent": "Zgjidh një {{aiAgent}}",
+  "CompletedForms": "Formularë të plotësuar",
+  "Connected": "Lidhje",
+  "ConnectionFailed": "Lidhja dështoi",
+  "ConnectionSuccessful": "Lidhja kryesore",
+  "CopyingTemplate": "Kopjimi...",
+  "DatabaseHost": "Pritës",
+  "DatabaseName": "Emri i bazës së dhënave",
+  "DatabasePort": "Port",
+  "DomainAlreadyAdded": "Ky domain është tashmë shtuar.",
+  "DropzoneFilesSecondary": "or hidhni fajlle këtu",
+  "DropzoneFolderSecondary": "ose hidhni dosjen këtu",
+  "DropzoneFoldersSecondary": "ose hidhni dosjet këtu"
 }

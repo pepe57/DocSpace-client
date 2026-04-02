@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "Chọn quốc gia của bạn",
   "ChooseYourCountryDescription": "Chọn một ngôn ngữ để xem các mẫu biểu mẫu có sẵn.",
   "CollectData": "Thu thập dữ liệu",
-  "CollectResultsInXlsx": "Thu thập kết quả trong XLSX"
+  "CollectResultsInXlsx": "Thu thập kết quả trong XLSX",
+  "AnyFiles": "Bất kỳ tệp nào",
+  "ChooseAIAgent": "Chọn một {{aiAgent}}",
+  "CompletedForms": "Mẫu đã hoàn thành",
+  "Connected": "Kết nối",
+  "ConnectionFailed": "Kết nối không thành công",
+  "ConnectionSuccessful": "Kết nối thành công",
+  "CopyingTemplate": "Đang sao chép...",
+  "DatabaseHost": "Host",
+  "DatabaseName": "Tên cơ sở dữ liệu",
+  "DatabasePort": "Cảng",
+  "DomainAlreadyAdded": "Miền này đã được thêm vào rồi.",
+  "DropzoneFilesSecondary": "hoặc thả các tệp ở đây",
+  "DropzoneFolderSecondary": "hoặc thả thư mục tại đây",
+  "DropzoneFoldersSecondary": "hoặc thả các thư mục ở đây"
 }

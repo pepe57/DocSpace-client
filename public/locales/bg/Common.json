@@ -1073,5 +1073,19 @@
   "ChooseYourCountry": "Изберете вашата държава",
   "ChooseYourCountryDescription": "Изберете език, за да разгледате наличните шаблони за формуляри.",
   "CollectData": "Събиране на данни",
-  "CollectResultsInXlsx": "Събиране на резултатите в XLSX"
+  "CollectResultsInXlsx": "Събиране на резултатите в XLSX",
+  "AnyFiles": "Всички файлове",
+  "ChooseAIAgent": "Изберете {{aiAgent}}",
+  "CompletedForms": "Попълнени формуляри",
+  "Connected": "Свързани",
+  "ConnectionFailed": "Връзката не бе успешна",
+  "ConnectionSuccessful": "Успешна връзка",
+  "CopyingTemplate": "Копиране...",
+  "DatabaseHost": "Хост",
+  "DatabaseName": "Име на базата данни",
+  "DatabasePort": "Порт",
+  "DomainAlreadyAdded": "Този домейн вече е добавен.",
+  "DropzoneFilesSecondary": "или пуснете файлове тук",
+  "DropzoneFolderSecondary": "или пуснете папка тук",
+  "DropzoneFoldersSecondary": "или пуснете папките тук"
 }
