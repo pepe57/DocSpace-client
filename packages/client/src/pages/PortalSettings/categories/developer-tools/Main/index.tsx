@@ -53,6 +53,16 @@ const Main = (props: { apiBasicLink: string }) => {
     if (ready) setDocumentTitle(t("Common:DeveloperTools"));
   }, [ready]);
 
+  useEffect(() => {
+    const elements = document.querySelectorAll<HTMLElement>(
+      ".section-sticky-container, .section-header",
+    );
+    elements.forEach((el) => (el.style.display = "none"));
+    return () => {
+      elements.forEach((el) => (el.style.display = ""));
+    };
+  }, []);
+
   if (!ready) return null;
 
   return (
