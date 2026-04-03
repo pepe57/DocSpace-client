@@ -1599,6 +1599,9 @@ class ContextOptionsStore {
     const { clearSecondaryProgressData, setSecondaryProgressBarData } =
       this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
 
+    // TODO: Temporary workaround until backend implementation is ready
+    const isUpdate = true;
+
     try {
       const response = await XlsxUpdateService.start(item.id, isFolder(item));
 
@@ -1628,7 +1631,14 @@ class ContextOptionsStore {
         });
       }
 
-      toastr.success(t("Common:SpreadsheetUpdated", { formName: form.title }));
+      toastr.success(
+        t(
+          isUpdate
+            ? "Common:SpreadsheetUpdated"
+            : "Common:SpreadsheetGenerated",
+          { formName: form.title },
+        ),
+      );
     } catch (error) {
       toastr.error(error);
       console.error(error);
@@ -2076,7 +2086,7 @@ class ContextOptionsStore {
           Boolean(item.external && item.isLinkExpired),
       },
       {
-        id: "option_update_xlsx_data",
+        id: "option_sync_xlsx_data",
         key: "update-xlsx-data",
         label: t("Common:SyncXlsxData"),
         icon: spreadsheetUrl,

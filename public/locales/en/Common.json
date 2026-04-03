@@ -1271,5 +1271,6 @@
   "WelcomeStartUsing": "Start using",
   "WelcomeToAIForms": "Welcome to AI Forms",
   "SyncXlsxData": "Sync responses to XLSX",
-  "SpreadsheetUpdated": "The spreadsheet for {{formName}} is updated based on all completed copies"
+  "SpreadsheetUpdated": "The spreadsheet for {{formName}} is updated based on all completed copies",
+  "SpreadsheetGenerated": "The spreadsheet for {{formName}} is generated based on all completed copies"
 }
