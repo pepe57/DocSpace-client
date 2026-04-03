@@ -98,5 +98,9 @@
   "SubmenuHistory": "التاريخ",
   "UserFileUpdated": "تم تحديث الملف.",
   "Users": "المستخدمين",
-  "Versions": "إصدارات"
+  "Versions": "إصدارات",
+  "LastUpdateInfo": "آخر تحديث",
+  "AIAgentsEmptyScreenTent": "راجع تفاصيل {{aiAgents}} هنا",
+  "NoAgent": "لا يوجد {{aiAgent}}",
+  "RoomChangeOwner": "تم تغيير مالك الغرفة."
 }

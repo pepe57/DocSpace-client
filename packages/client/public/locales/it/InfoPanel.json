@@ -98,5 +98,9 @@
   "SubmenuHistory": "Cronologia",
   "UserFileUpdated": "File aggiornato.",
   "Users": "Utenti",
-  "Versions": "Versioni"
+  "Versions": "Versioni",
+  "LastUpdateInfo": "Ultimo aggiornamento",
+  "AIAgentsEmptyScreenTent": "Visualizza i dettagli di {{aiAgents}} qui",
+  "NoAgent": "Nessun {{aiAgent}}",
+  "RoomChangeOwner": "Il proprietario della stanza è stato modificato."
 }

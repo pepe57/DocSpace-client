@@ -1,4 +1,9 @@
 {
   "CancellaionNotification": "Ləğvetmə bildirişini yenidən göstərməyin",
-  "OpenSameTab": "Eyni tabda {{organizationName}} redaktorunu açın"
+  "DisplayFileExtension": "Fayl adının yanında fayl uzantısını göstərin",
+  "OpenSameTab": "Eyni tabda {{organizationName}} redaktorunu açın",
+  "OriginalCopy": "Faylın nüsxəsini orijinal formatda da yadda saxla",
+  "TrashMoveConfirmation": "{{sectionName}} bölməsinə əşyaları köçürdükdə bildiriş göstər",
+  "DefaultHomepage": "Standart Ana Səhifə",
+  "GroupByRooms": "Otaqlar üzrə qruplaşdır"
 }

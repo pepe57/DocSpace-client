@@ -98,5 +98,9 @@
   "SubmenuHistory": "Historia",
   "UserFileUpdated": "Tiedosto päivitetty.",
   "Users": "Käyttäjät",
-  "Versions": "Versiot"
+  "Versions": "Versiot",
+  "LastUpdateInfo": "Viimeisin päivitys",
+  "AIAgentsEmptyScreenTent": "Katso {{aiAgents}} tiedot täältä",
+  "NoAgent": "Ei {{aiAgent}}ia",
+  "RoomChangeOwner": "Huoneen omistaja vaihtui."
 }

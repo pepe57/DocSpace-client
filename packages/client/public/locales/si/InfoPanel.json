@@ -98,5 +98,9 @@
   "SubmenuHistory": "ඉතිහාසය",
   "UserFileUpdated": "ප්‍රමාදයට පත්වුණි.",
   "Users": "පරිශ්‍රීලකයින්",
-  "Versions": "අනුවාද"
+  "Versions": "අනුවාද",
+  "LastUpdateInfo": "අවසන් යාවත්කාලීන කිරීම",
+  "AIAgentsEmptyScreenTent": "{{aiAgents}} විස්තර මෙතැනින් බලන්න",
+  "NoAgent": "{{aiAgent}} නැත",
+  "RoomChangeOwner": "කාමර හිමිකරු වෙනස් විය."
 }

@@ -98,5 +98,9 @@
   "SubmenuHistory": "Історія",
   "UserFileUpdated": "Файл оновлено.",
   "Users": "Користувачі",
-  "Versions": "Версії"
+  "Versions": "Версії",
+  "LastUpdateInfo": "Останнє оновлення",
+  "AIAgentsEmptyScreenTent": "Перегляньте деталі щодо {{aiAgents}} тут",
+  "NoAgent": "Немає {{aiAgent}}",
+  "RoomChangeOwner": "Власник кімнати змінено."
 }

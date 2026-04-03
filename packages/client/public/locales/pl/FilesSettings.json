@@ -1,4 +1,9 @@
 {
   "CancellaionNotification": "Nie wyświetlaj ponownie powiadomienia o anulowaniu",
-  "OpenSameTab": "Otwórz edytor {{organizationName}} w tej samej karcie"
+  "DisplayFileExtension": "Wyświetlaj rozszerzenie pliku obok nazwy pliku",
+  "OpenSameTab": "Otwórz edytor {{organizationName}} w tej samej karcie",
+  "OriginalCopy": "Zapisuj również kopię pliku w oryginalnym formacie",
+  "TrashMoveConfirmation": "Wyświetlaj powiadomienie przy przenoszeniu elementów do {{sectionName}}",
+  "DefaultHomepage": "Domyślna strona główna",
+  "GroupByRooms": "Grupuj według pokoi"
 }
