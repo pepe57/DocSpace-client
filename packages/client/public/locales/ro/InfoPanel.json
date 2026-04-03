@@ -99,5 +99,8 @@
   "UserFileUpdated": "Fişier actualizat.",
   "Users": "Utilizatori",
   "Versions": "Versiuni",
-  "LastUpdateInfo": "Ultima actualizare"
+  "LastUpdateInfo": "Ultima actualizare",
+  "AIAgentsEmptyScreenTent": "Vezi detalii despre {{aiAgents}} aici",
+  "NoAgent": "Niciun {{aiAgent}}",
+  "RoomChangeOwner": "Proprietarul sălii a fost schimbat."
 }

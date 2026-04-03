@@ -99,5 +99,8 @@
   "UserFileUpdated": "Datei aktualisiert.",
   "Users": "Benutzer",
   "Versions": "Versionen",
-  "LastUpdateInfo": "Letzter Stand"
+  "LastUpdateInfo": "Letzter Stand",
+  "AIAgentsEmptyScreenTent": "Details zu {{aiAgents}} finden Sie hier",
+  "NoAgent": "Kein {{aiAgent}}",
+  "RoomChangeOwner": "Besitzer des Raums geändert."
 }
