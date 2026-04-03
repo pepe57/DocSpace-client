@@ -543,14 +543,23 @@ Your comment should be informative and helpful for translators who need to under
       `Generating enhanced comment for key: ${key} using model: ${model}`,
     );
 
-    const { response } = await ollamaClient.generate({
-      model,
-      prompt,
-      stream: false,
-      options: {
-        temperature: 0.2, // Slightly creative but mostly factual
-      },
-    });
+    const timeoutMs = ollamaConfig.requestTimeout;
+    const { response } = await Promise.race([
+      ollamaClient.generate({
+        model,
+        prompt,
+        stream: false,
+        options: {
+          temperature: 0.2, // Slightly creative but mostly factual
+        },
+      }),
+      new Promise((_, reject) =>
+        setTimeout(
+          () => reject(new Error(`Ollama request timed out after ${timeoutMs}ms`)),
+          timeoutMs
+        )
+      ),
+    ]);
 
     // Clean up the response - remove any extraneous formatting
     const cleanedResponse = response

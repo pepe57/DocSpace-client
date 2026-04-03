@@ -4,6 +4,18 @@ const { Ollama } = require("ollama");
 
 // Add debugger to help diagnose connection issues
 const DEBUG = true;
+
+/**
+ * Wraps a promise with a timeout rejection
+ * @param {Promise} promise
+ * @param {number} ms - timeout in milliseconds
+ */
+function withTimeout(promise, ms) {
+  const timeout = new Promise((_, reject) =>
+    setTimeout(() => reject(new Error(`Ollama request timed out after ${ms}ms`)), ms)
+  );
+  return Promise.race([promise, timeout]);
+}
 function debug(...args) {
   if (DEBUG) console.log("[OLLAMA DEBUG]", ...args);
 }
@@ -746,15 +758,18 @@ ${text}`;
     // Generate translation using ollama client
     debug("Sending translation request...");
 
-    const { response } = await ollamaClient.generate({
-      model,
-      prompt,
-      stream: false,
-      options: {
-        temperature: 0, // Lower temperature for more accurate translations
-        num_ctx: 8192,
-      },
-    });
+    const { response } = await withTimeout(
+      ollamaClient.generate({
+        model,
+        prompt,
+        stream: false,
+        options: {
+          temperature: 0, // Lower temperature for more accurate translations
+          num_ctx: 8192,
+        },
+      }),
+      ollamaConfig.requestTimeout
+    );
 
     if (response.trim() === "NO_TRANSLATION") {
       throw new Error("Translation not available");
@@ -821,17 +836,18 @@ async function validateTranslation(
     // Generate validation using chat API with system role for better instruction following
     debug("Sending validation request...");
 
-    const { message } = await ollamaClient.chat({
-      model,
-      messages: [
-        {
-          role: "system",
-          content: `You are a professional software localization validator for ONLYOFFICE DocSpace UI strings.
+    const { message } = await withTimeout(
+      ollamaClient.chat({
+        model,
+        messages: [
+          {
+            role: "system",
+            content: `You are a professional software localization validator for ONLYOFFICE DocSpace UI strings.
 Respond only with valid JSON. Never add markdown, explanations, or text outside the JSON object.`,
-        },
-        {
-          role: "user",
-          content: `Validate this UI string translation.
+          },
+          {
+            role: "user",
+            content: `Validate this UI string translation.
 
 Source (${sourceInfo.name}): "${sourceText}"
 Translation (${targetInfo.name}): "${targetText}"
@@ -848,14 +864,16 @@ Respond with this JSON only:
   "suggestions": ["corrected text if needed"],
   "rating": 1 to 5
 }`,
+          },
+        ],
+        stream: false,
+        options: {
+          temperature: 0, // Lower temperature for more consistent analysis
+          num_ctx: 8192,
         },
-      ],
-      stream: false,
-      options: {
-        temperature: 0, // Lower temperature for more consistent analysis
-        num_ctx: 8192,
-      },
-    });
+      }),
+      ollamaConfig.requestTimeout
+    );
 
     const response = message.content;
 
