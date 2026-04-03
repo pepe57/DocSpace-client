@@ -125,7 +125,6 @@
   "UserNotFoundMatchingEmail": "We konden de gebruiker met de overeenkomende Stripe e-mail niet vinden.",
   "UsersQuotaAlmostExhausted": "Het aantal betaalde gebruikers is bijna opgebruikt.",
   "Wallet": "Portemonnee",
-  "WalletDescription": "De {{productName}} Wallet stelt u in staat om eenvoudig opslagruimte aan te schaffen. Voeg fondsen toe aan uw wallet en selecteer de services die u nodig heeft in het Services-gedeelte om te beginnen.",
   "WalletRefilled": "Portemonnee bijgevuld",
   "WalletToppedUp": "Portemonnee succesvol bijgewerkt",
   "WantToCancelStoragePlan": "Weet u zeker dat u uw aanvullende opslagabonnement wilt opzeggen?",

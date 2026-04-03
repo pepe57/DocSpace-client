@@ -125,7 +125,6 @@
   "UserNotFoundMatchingEmail": "Nous n’avons pas trouvé l’utilisateur avec l’e-mail Stripe correspondant.",
   "UsersQuotaAlmostExhausted": "Le quota d'utilisateurs payants est presque épuisé.",
   "Wallet": "Wallet",
-  "WalletDescription": "Le {{productName}} Wallet vous permet d'acheter facilement de l'espace de stockage. Ajoutez des fonds à votre wallet et sélectionnez les services dont vous avez besoin dans la section Services pour commencer.",
   "WalletRefilled": "Wallet rechargé",
   "WalletToppedUp": "Wallet a été rechargé avec succès",
   "WantToCancelStoragePlan": "Souhaitez-vous vraiment annuler votre abonnement à l'espace de stockage supplémentaire ?",

@@ -125,7 +125,6 @@
   "UserNotFoundMatchingEmail": "我们无法找到与Stripe电子邮件匹配的用户。",
   "UsersQuotaAlmostExhausted": "有料ユーザーのストレージ容量が残りわずかです。",
   "Wallet": "ウォレット",
-  "WalletDescription": "{{productName}} ウォレットを使用すると、ストレージ容量や AI ツールを簡単に購入できます。ウォレットに資金を追加し、[サービス] セクションで必要なサービスを選択して、ご利用を開始してください。",
   "WalletRefilled": "ウォレットがチャージされました",
   "WalletToppedUp": "ウォレットのチャージが完了しました",
   "WantToCancelStoragePlan": "追加ストレージのサブスクリプションをキャンセルしてもよろしいですか？",

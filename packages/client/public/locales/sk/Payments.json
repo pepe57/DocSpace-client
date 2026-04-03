@@ -125,7 +125,6 @@
   "UserNotFoundMatchingEmail": "Nepodarilo sa nám nájsť používateľa so zodpovedajúcou e-mailovou adresou Stripe.",
   "UsersQuotaAlmostExhausted": "Kvóta platených používateľov je takmer vyčerpaná.",
   "Wallet": "Peňaženka",
-  "WalletDescription": "{{productName}} peňaženka vám umožňuje jednoducho nakupovať úložný priestor. Pridajte prostriedky do svojej peňaženky a vyberte si služby, ktoré potrebujete v sekcii Služby, aby ste začali.",
   "WalletRefilled": "Peniaze na účte doplnené",
   "WalletToppedUp": "Peniaze boli úspešne doplnené na účet.",
   "WantToCancelStoragePlan": "Ste si istý, že chcete zrušiť svoje predplatné dodatočného úložiska?",

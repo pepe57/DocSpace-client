@@ -125,7 +125,6 @@
   "UserNotFoundMatchingEmail": "Não foi possível encontrar o utilizador com o email de Stripe correspondente.",
   "UsersQuotaAlmostExhausted": "A quota de utilizadores pagos está quase esgotada.",
   "Wallet": "Carteira",
-  "WalletDescription": "A Carteira {{productName}} permite que você compre facilmente espaço de armazenamento. Adicione fundos à sua carteira e selecione os serviços que você precisa na seção Serviços para começar.",
   "WalletRefilled": "Carteira recarregada",
   "WalletToppedUp": "A carteira foi recarregada com sucesso.",
   "WantToCancelStoragePlan": "Você tem certeza que deseja cancelar sua assinatura de armazenamento adicional?",

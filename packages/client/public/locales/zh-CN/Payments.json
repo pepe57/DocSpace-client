@@ -125,7 +125,6 @@
   "UserNotFoundMatchingEmail": "我们无法找到与Stripe电子邮件匹配的用户。",
   "UsersQuotaAlmostExhausted": "付费用户配额已几乎用完。",
   "Wallet": "钱包",
-  "WalletDescription": "通过{{productName}}钱包，您可以轻松购买存储空间。请先为钱包充值，然后在服务板块选择所需服务即可开始使用。",
   "WalletRefilled": "钱包已充值",
   "WalletToppedUp": "钱包充值成功",
   "WantToCancelStoragePlan": "您确定要取消额外存储空间订阅吗？",

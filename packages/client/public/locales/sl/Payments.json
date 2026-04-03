@@ -125,7 +125,6 @@
   "UserNotFoundMatchingEmail": "Nismo našli uporabnika z ujemajočim se Stripe e-mail naslovom.",
   "UsersQuotaAlmostExhausted": "Kvota plačljivih uporabnikov je skoraj dosežena.",
   "Wallet": "Denarnica",
-  "WalletDescription": "Denarnica {{productName}} vam omogoča enostavno nakup prostora za shranjevanje. Dodajte sredstva v denarnico in izberite storitve, ki jih potrebujete v razdelku Storitve, da začnete.",
   "WalletRefilled": "Denarnica napolnjena",
   "WalletToppedUp": "Denarnica je bila uspešno napolnjena",
   "WantToCancelStoragePlan": "Ali ste prepričani, da želite prekiniti naročilo za dodatno shranjevanje?",
