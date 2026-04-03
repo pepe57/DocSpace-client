@@ -57,5 +57,8 @@
   "UploadFromPortalTitle": "{{productName}} kaynağından yükleyin",
   "UploadPDFFormOptionDescription": "{{productName}} içinde bulunan hazır bir PDF formunu seçin ve odaya yükleyin.",
   "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz",
-  "EmptyAIAgentsTitle": "{{aiAgent}}’ınızı oluşturun"
+  "EmptyAIAgentsTitle": "{{aiAgent}}’ınızı oluşturun",
+  "CreateAIAgentDescription": "İlk {{aiAgent}}'inizi oluşturmaya başlayın",
+  "EmptyAIAgentsAIDisabledDescription": "Bu bölüm, kullanıcıların {{aiAgents}} ile — belgeleri ve diğer görevleri yönetmek için akıllı asistanlarla — çalışmasına olanak tanır.\nBunları kullanmaya başlamak için, AI özellik hizmeti {{productName}} yöneticiniz tarafından etkinleştirilmelidir.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "{{aiAgents}} oluşturmak ve kullanmak için cüzdanınızı bağlayın ve {{productName}} ayarlarında AI özelliklerini etkinleştirin. İşlem tamamlandıktan sonra {{aiAgents}} ile çalışabilir ve ekibinizle işbirliği yapabilirsiniz."
 }

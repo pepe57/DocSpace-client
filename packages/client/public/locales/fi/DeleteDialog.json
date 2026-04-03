@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "Nämä kohteet poistetaan pysyvästi 30 päivän kuluttua.",
   "ItemsPermanentlyDeleted": "Nämä kohteet poistetaan pysyvästi {{trashSection}}-osiosta.",
   "removeFromListDescription": "Olet aikeissa poistaa <1>{{title}}</1> luettelosta. Oletko varma, että haluat jatkaa?",
-  "removeFromListDescriptionPlural": "Olet poistamassa <1>kohteita ({{count}})</1> luettelosta. Oletko varma, että haluat jatkaa?"
+  "removeFromListDescriptionPlural": "Olet poistamassa <1>kohteita ({{count}})</1> luettelosta. Oletko varma, että haluat jatkaa?",
+  "DeleteRooms": "Valitut <strong>huoneet ({{count}})</strong> poistetaan pysyvästi. Kaikki data ja käyttäjien pääsy menetetään.",
+  "DeleteRoomsTitle": "Poistetaanko tämä huone?"
 }

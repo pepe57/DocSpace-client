@@ -57,5 +57,8 @@
   "UploadFromPortalTitle": "Carica da {{productName}}",
   "UploadPDFFormOptionDescription": "Seleziona un modulo PDF pronto disponibile in {{productName}} e caricalo nella stanza.",
   "VirtualDataRoomEmptyTitle": "Benvenuto nella Virtual Data Room",
-  "EmptyAIAgentsTitle": "Crea il tuo {{aiAgent}}"
+  "EmptyAIAgentsTitle": "Crea il tuo {{aiAgent}}",
+  "CreateAIAgentDescription": "Inizia a creare il tuo primo {{aiAgent}}",
+  "EmptyAIAgentsAIDisabledDescription": "Questa sezione consente agli utenti di lavorare con {{aiAgents}} — assistenti intelligenti per la gestione di documenti e altre attività.\nPer iniziare a utilizzarli, il servizio funzionalità AI deve essere abilitato dall'amministratore {{productName}}.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Per creare e utilizzare {{aiAgents}}, connetti il tuo wallet e abilita il servizio di funzionalità AI nelle impostazioni di {{productName}}. Una volta completato, potrai lavorare con {{aiAgents}} e collaborare con il tuo team."
 }

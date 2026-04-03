@@ -57,5 +57,8 @@
   "UploadFromPortalTitle": "{{productName}} dan yükləyin",
   "UploadPDFFormOptionDescription": "{{productName}}-də mövcud olan hazır PDF formasını seçin və onu otağa yükləyin.",
   "VirtualDataRoomEmptyTitle": "Virtual Məlumat Otağına xoş gəlmisiniz",
-  "EmptyAIAgentsTitle": "{{aiAgent}}-inizi yaradın"
+  "EmptyAIAgentsTitle": "{{aiAgent}}-inizi yaradın",
+  "CreateAIAgentDescription": "İlk {{aiAgent}}-inizi qurmağa başlayın",
+  "EmptyAIAgentsAIDisabledDescription": "Bu bölmə istifadəçilərə {{aiAgents}} — sənədlərlə və digər tapşırıqlarla məşğul olmaq üçün ağıllı assistentlərlə işləməyə imkan verir.\nOnlardan istifadə etməyə başlamaq üçün, AI funksiyaları xidməti sizin {{productName}} administratorunuz tərəfindən aktivləşdirilməlidir.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "{{aiAgents}} yaratmaq və istifadə etmək üçün, pul qeydiyyatınızı bağlayın və {{productName}} parametrlərində AI funksiyalarının xidmətini aktivləşdirin. İş tamamlandıqdan sonra, {{aiAgents}} ilə işləyə biləcəksiniz və komandanızla əməkdaşlıq edə biləcəksiniz."
 }

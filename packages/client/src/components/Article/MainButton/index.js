@@ -197,22 +197,15 @@ const ArticleMainButtonContent = (props) => {
     window.dispatchEvent(event);
   }, [isWarningRoomsDialog]);
 
-  const onCreateAgent = React.useCallback(
-    () => {
-      // TODO: AI: Add quota if it needed
+  const onCreateAgent = React.useCallback(() => {
+    if (isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
+      return;
+    }
 
-      // if (isWarningRoomsDialog) {
-      //   setQuotaWarningDialogVisible(true);
-      //   return;
-      // }
-
-      const event = new Event(Events.AGENT_CREATE);
-      window.dispatchEvent(event);
-    },
-    [
-      // isWarningRoomsDialog
-    ],
-  );
+    const event = new Event(Events.AGENT_CREATE);
+    window.dispatchEvent(event);
+  }, [isWarningRoomsDialog]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
@@ -968,3 +961,4 @@ export default inject(
     "EmptyView",
   ])(observer(ArticleMainButtonContent)),
 );
+

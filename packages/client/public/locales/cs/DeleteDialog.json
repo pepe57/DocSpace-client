@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "Tyto položky budou trvale smazány za 30 dní.",
   "ItemsPermanentlyDeleted": "Tyto položky budou trvale odstraněny z {{trashSection}}.",
   "removeFromListDescription": "Odstraníte <1>{{title}}</1> ze seznamu. Jste si jistí, že chcete pokračovat?",
-  "removeFromListDescriptionPlural": "Odstraníte <1>položek ({{count}})</1>. Jste si jistí, že chcete pokračovat?"
+  "removeFromListDescriptionPlural": "Odstraníte <1>položek ({{count}})</1>. Jste si jistí, že chcete pokračovat?",
+  "DeleteRooms": "Vybrané <strong>místnosti ({{count}})</strong> budou trvale odstraněny. Všechna data a přístup uživatelů budou ztraceny.",
+  "DeleteRoomsTitle": "Smazat tuto místnost?"
 }

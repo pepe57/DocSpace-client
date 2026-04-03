@@ -57,5 +57,8 @@
   "UploadFromPortalTitle": "Lataa {{productName}}:sta",
   "UploadPDFFormOptionDescription": "Valitse valmis PDF-lomake, joka on {{productName}}:ssa ja lataa se huoneeseen.",
   "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen.",
-  "EmptyAIAgentsTitle": "Luo {{aiAgent}}-agenttisi"
+  "EmptyAIAgentsTitle": "Luo {{aiAgent}}-agenttisi",
+  "CreateAIAgentDescription": "Aloita ensimmäisen {{aiAgent}}in rakentaminen",
+  "EmptyAIAgentsAIDisabledDescription": "Tämä osio mahdollistaa käyttäjille työskentelyn {{aiAgents}}-agenttien kanssa – älykkäiden avustajien, jotka käsittelevät dokumentteja ja muita tehtäviä.\nAloittaaksesi niiden käytön, AI-ominaisuuksien palvelu on oltava käytössä {{productName}}-järjestelmänvalvojan toimesta.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Luodaksesi ja käyttääksesi {{aiAgents}}-agentteja, yhdistä lompakkosi ja ota käyttöön tekoälyominaisuuksien palvelu {{productName}}-asetuksissa. Kun se on valmis, voit työskennellä {{aiAgents}}-agenttien kanssa ja tehdä yhteistyötä tiimisi kanssa."
 }
