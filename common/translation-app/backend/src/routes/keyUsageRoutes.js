@@ -78,6 +78,57 @@ async function findMetadataFiles(key) {
 }
 
 /**
+ * Finds all metadata files across all projects
+ * @returns {Promise<Array<{project: string, namespace: string, key: string, metaPath: string, data: Object}>>}
+ */
+async function findAllMetadataFiles() {
+  const metadataFiles = [];
+  const projects = Object.keys(projectLocalesMap);
+
+  for (const project of projects) {
+    const localesPath = projectLocalesMap[project];
+    if (!localesPath) continue;
+
+    const projectPath = path.join(appRootPath, localesPath);
+    const metaDir = path.join(projectPath, ".meta");
+
+    if (!(await fs.pathExists(metaDir))) continue;
+
+    const namespaceDirs = await fs.readdir(metaDir);
+
+    for (const namespace of namespaceDirs) {
+      const namespacePath = path.join(metaDir, namespace);
+      if (!(await fs.stat(namespacePath)).isDirectory()) continue;
+
+      const namespacePathPattern = path
+        .join(namespacePath, "*.json")
+        .replace(/\\/g, "/");
+
+      const keyFiles = glob.sync(namespacePathPattern);
+
+      for (const keyFile of keyFiles) {
+        try {
+          const keyData = await fs.readJson(keyFile);
+          const keyPath = keyData.key_path || path.basename(keyFile, ".json");
+
+          metadataFiles.push({
+            project,
+            namespace,
+            key: keyPath,
+            metaPath: keyFile,
+            data: keyData,
+          });
+        } catch (error) {
+          console.error(`Error reading metadata file ${keyFile}:`, error);
+        }
+      }
+    }
+  }
+
+  return metadataFiles;
+}
+
+/**
  * Search for a specific key in the codebase
  * @param {string} key - The translation key to search for
  * @param {string} namespace - Optional namespace to restrict the search pattern
