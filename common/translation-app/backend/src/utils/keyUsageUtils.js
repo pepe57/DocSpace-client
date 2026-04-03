@@ -459,27 +459,7 @@ async function analyzeCodebase() {
 
 const { Ollama } = require("ollama");
 const { ollamaConfig } = require("../config/config");
-
-/**
- * Verify Ollama is available
- * @returns {Promise<boolean>} true if Ollama is available
- */
-async function verifyOllamaConnection() {
-  try {
-    const response = await fetch(`${ollamaConfig.apiUrl}/api/tags`);
-    if (!response.ok) {
-      console.log(
-        `Ollama connection failed: ${response.status} ${response.statusText}`,
-      );
-      return false;
-    }
-    const data = await response.json();
-    return true;
-  } catch (error) {
-    console.log(`Ollama connection error: ${error.message}`);
-    return false;
-  }
-}
+const { verifyOllamaConnection } = require("./ollamaUtils");
 
 /**
  * Generate an enhanced comment for a translation key using Ollama

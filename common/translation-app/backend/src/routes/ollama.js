@@ -1,45 +1,12 @@
 const { ollamaConfig } = require("../config/config");
 const fsUtils = require("../utils/fsUtils");
 const { Ollama } = require("ollama");
+const { verifyOllamaConnection, withTimeout } = require("../utils/ollamaUtils");
 
 // Add debugger to help diagnose connection issues
 const DEBUG = true;
-
-/**
- * Wraps a promise with a timeout rejection
- * @param {Promise} promise
- * @param {number} ms - timeout in milliseconds
- */
-function withTimeout(promise, ms) {
-  const timeout = new Promise((_, reject) =>
-    setTimeout(() => reject(new Error(`Ollama request timed out after ${ms}ms`)), ms)
-  );
-  return Promise.race([promise, timeout]);
-}
 function debug(...args) {
   if (DEBUG) console.log("[OLLAMA DEBUG]", ...args);
-}
-
-// Helper to verify Ollama connection
-async function verifyOllamaConnection() {
-  debug(`Verifying Ollama connection to ${ollamaConfig.apiUrl}`);
-  try {
-    const response = await fetch(`${ollamaConfig.apiUrl}/api/tags`);
-    if (!response.ok) {
-      debug(
-        `Ollama connection failed: ${response.status} ${response.statusText}`
-      );
-      return false;
-    }
-    const data = await response.json();
-    debug(
-      `Ollama connection successful, found ${data.models?.length || 0} models`
-    );
-    return true;
-  } catch (error) {
-    debug(`Ollama connection error: ${error.message}`);
-    return false;
-  }
 }
 
 /**
