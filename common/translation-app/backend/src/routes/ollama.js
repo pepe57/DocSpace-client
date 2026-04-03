@@ -708,23 +708,20 @@ async function translateText(text, sourceLanguage, targetLanguage, model) {
   // Please maintain any formatting, placeholders (like {{variable}}), and HTML tags if present.
   // Return only the translated text without any commentary or explanations.\n\n${text}`;
 
-  const prompt = `# You are a professional translator.
+  const prompt = `You are a professional software localization specialist for ONLYOFFICE DocSpace, a document collaboration platform.
 
-## Task: Translate from ${sourceInfo.name} to ${targetInfo.name}
+Translate the UI string below from ${sourceInfo.name} to ${targetInfo.name}.
+${targetInfo.isRightToLeft ? "The target language is written right-to-left (RTL).\n" : ""}
+Rules:
+- Use formal/professional tone appropriate for business software UI
+- Preserve all i18next interpolations exactly as-is: {{variable}}, {{variable, modifier}}, <N>text</N>
+- Preserve all HTML tags and attributes
+- Preserve line breaks and whitespace structure
+- Never add explanations, notes, or alternative translations
+- If the string is a proper noun, brand name, or technical term with no equivalent, keep it in the original language
+- If translation is impossible, respond with exactly: NO_TRANSLATION
 
-### Rules:
-${
-  targetInfo.isRightToLeft
-    ? "- Note that the target language is written right-to-left."
-    : ""
-}
-- Preserve all formatting
-- Keep {{variables}} unchanged
-- Keep HTML tags intact
-- Return only the translation
-- If you don't know the translation, return "NO_TRANSLATION"
-
-### Text to translate:
+String to translate:
 ${text}`;
 
   try {
@@ -755,10 +752,11 @@ ${text}`;
       stream: false,
       options: {
         temperature: 0, // Lower temperature for more accurate translations
+        num_ctx: 8192,
       },
     });
 
-    if (response === "NO_TRANSLATION") {
+    if (response.trim() === "NO_TRANSLATION") {
       throw new Error("Translation not available");
     }
 
@@ -807,28 +805,6 @@ async function validateTranslation(
     const sourceInfo = getLanguageInfo(sourceLanguage);
     const targetInfo = getLanguageInfo(targetLanguage);
 
-    // Create a detailed prompt for validation
-    const prompt = `You are a professional translation validator.
-
-Source language: ${sourceInfo.name}
-Target language: ${targetInfo.name}
-
-Source text: "${sourceText}"
-Translated text: "${targetText}"
-
-Your task is to analyze if the translation is accurate and identify any errors.
-
-Provide your response in this exact JSON format with no extra text:
-{
-  "isValid": true/false,
-  "errors": [{ "type": "error_type", "message": "detailed error description" }],
-  "suggestions": ["suggested correction if there are errors"],
-  "rating": 1-5 score of translation quality
-}
-
-Error types can be: "missing_content", "mistranslation", "grammar", "style", "cultural_context".
-Keep your analysis concise and precise.`;
-
     // Verify Ollama connection
     const isConnected = await verifyOllamaConnection();
     if (!isConnected) {
@@ -842,22 +818,55 @@ Keep your analysis concise and precise.`;
     // Create Ollama client
     const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
 
-    // Generate validation using ollama client
+    // Generate validation using chat API with system role for better instruction following
     debug("Sending validation request...");
 
-    const { response } = await ollamaClient.generate({
+    const { message } = await ollamaClient.chat({
       model,
-      prompt,
+      messages: [
+        {
+          role: "system",
+          content: `You are a professional software localization validator for ONLYOFFICE DocSpace UI strings.
+Respond only with valid JSON. Never add markdown, explanations, or text outside the JSON object.`,
+        },
+        {
+          role: "user",
+          content: `Validate this UI string translation.
+
+Source (${sourceInfo.name}): "${sourceText}"
+Translation (${targetInfo.name}): "${targetText}"
+
+Rules for validation:
+- i18next patterns like {{variable}}, <N>text</N> must be preserved unchanged
+- Proper nouns and brand names may remain untranslated — this is acceptable
+- Evaluate meaning accuracy, grammar, and UI appropriateness
+
+Respond with this JSON only:
+{
+  "isValid": true or false,
+  "errors": [{ "type": "missing_content|mistranslation|grammar|style|cultural_context|placeholder_mismatch", "message": "description" }],
+  "suggestions": ["corrected text if needed"],
+  "rating": 1 to 5
+}`,
+        },
+      ],
       stream: false,
       options: {
         temperature: 0, // Lower temperature for more consistent analysis
+        num_ctx: 8192,
       },
     });
 
+    const response = message.content;
+
     // Parse the JSON response
     try {
-      // Extract JSON from the response (in case there's any extra text)
-      const jsonMatch = response.match(/\{[\s\S]*\}/);
+      // Strip markdown code fences if present, then extract JSON object
+      const cleaned = response
+        .replace(/^```(?:json)?\s*/i, "")
+        .replace(/\s*```$/, "")
+        .trim();
+      const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
       if (!jsonMatch) {
         throw new Error("Invalid JSON format in response");
       }
