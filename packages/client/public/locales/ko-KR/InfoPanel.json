@@ -98,5 +98,9 @@
   "SubmenuHistory": "기록",
   "UserFileUpdated": "파일이 업데이트되었습니다. 역할",
   "Users": "사용자",
-  "Versions": "버전"
+  "Versions": "버전",
+  "LastUpdateInfo": "최종 업데이트",
+  "AIAgentsEmptyScreenTent": "여기에서 {{aiAgents}} 세부 정보를 확인하세요.",
+  "NoAgent": "No {{aiAgent}}",
+  "RoomChangeOwner": "방 주인이 변경되었습니다."
 }

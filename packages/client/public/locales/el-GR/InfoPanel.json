@@ -98,5 +98,9 @@
   "SubmenuHistory": "Ιστορικό",
   "UserFileUpdated": "Το αρχείο ενημερώθηκε.",
   "Users": "Χρήστες",
-  "Versions": "Εκδόσεις"
+  "Versions": "Εκδόσεις",
+  "LastUpdateInfo": "Τελευταία ενημέρωση",
+  "AIAgentsEmptyScreenTent": "Δείτε τις λεπτομέρειες των {{aiAgents}} εδώ",
+  "NoAgent": "Κανένας {{aiAgent}}",
+  "RoomChangeOwner": "Ο ιδιοκτήτης του δωματίου άλλαξε."
 }

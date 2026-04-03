@@ -41,7 +41,7 @@ import { Layout } from "./_components/layout";
 import { SectionWrapper as Section } from "./_components/section";
 import FilesMediaViewer from "./_components/FilesMediaViewer";
 import SelectionArea from "./_components/selection-area";
-import Header, { HeaderProps } from "./_components/header";
+import Header, { type HeaderProps } from "./_components/header";
 import { Filter, FilterProps } from "./_components/filter";
 import { DeviceTypeObserver } from "./_components/DeviceTypeObserver";
 import Dialogs from "./_components/dialogs";
@@ -81,7 +81,10 @@ export default async function DocspaceLayout({
     actions.push(getFolder(filesFilter.folder, filesFilter));
   }
 
-  const [filesSettings, folderList] = await Promise.all(actions);
+  const [filesSettings, folderList] = (await Promise.all(actions)) as [
+    TFilesSettings,
+    TGetFolder,
+  ];
 
   const { current, pathParts, folders, files } = folderList as TGetFolder;
 
@@ -94,14 +97,18 @@ export default async function DocspaceLayout({
       <Layout initSettingsStoreData={{ viewAs: initViewAs }}>
         <RootScrollbar>
           <Section
-            sectionHeaderContent={<Header {...navigationProps} />}
+            sectionHeaderContent={
+              <Header {...navigationProps} />
+            }
             sectionFilterContent={<Filter {...filterProps} />}
             sectionBodyContent={children}
             isEmptyPage={folders.length === 0 ? files.length === 0 : false}
             filesFilter={filter!}
           />
           <SelectionArea />
-          <FilesMediaViewer filesSettings={filesSettings as TFilesSettings} />
+          <FilesMediaViewer
+            filesSettings={filesSettings as TFilesSettings}
+          />
           <DeviceTypeObserver />
           <Dialogs />
         </RootScrollbar>

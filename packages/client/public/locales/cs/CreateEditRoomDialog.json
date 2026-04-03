@@ -39,5 +39,6 @@
   "UserName": "Uživatelské jméno",
   "ViewerInfo": "Informace o prohlížeči",
   "WatermarkPreview": "Náhled vodoznaku",
-  "WatermarkPreviewHelp": "Tento náhled obrázku zhruba ukazuje, jak se vodoznak zobrazí ve vašich souborech."
+  "WatermarkPreviewHelp": "Tento náhled obrázku zhruba ukazuje, jak se vodoznak zobrazí ve vašich souborech.",
+  "ConfigureDatabaseConnection": "Konfigurujte připojení k databázi v Integrace → Třetí strany"
 }

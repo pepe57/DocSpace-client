@@ -98,5 +98,9 @@
   "SubmenuHistory": "Geçmiş",
   "UserFileUpdated": "Dosya güncellendi.",
   "Users": "Kullanıcılar",
-  "Versions": "Sürümler"
+  "Versions": "Sürümler",
+  "LastUpdateInfo": "Son güncelleme",
+  "AIAgentsEmptyScreenTent": "Buradaki {{aiAgents}} detaylarını görün",
+  "NoAgent": "Hayır {{aiAgent}}",
+  "RoomChangeOwner": "Oda sahibi değişti."
 }
