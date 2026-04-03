@@ -520,6 +520,21 @@ async function routes(fastify, options) {
         .send({ success: false, error: "model and jobId are required" });
     }
 
+    // Resolve target languages: "all" expands to every non-source language
+    let targetLanguages;
+    if (targetLanguage === "all") {
+      try {
+        const allLangs = await fsUtils.getAvailableLanguages(projectName);
+        targetLanguages = allLangs.filter((l) => l !== sourceLanguage);
+      } catch (err) {
+        return reply
+          .code(404)
+          .send({ success: false, error: "Project not found" });
+      }
+    } else {
+      targetLanguages = [targetLanguage];
+    }
+
     // Get all namespaces for the source language
     let namespaces;
     try {
@@ -536,122 +551,134 @@ async function routes(fastify, options) {
         .send({ success: false, error: "No namespaces found for this project" });
     }
 
-    // Pre-load all namespace data and count missing keys
-    const namespaceQueue = [];
-    let totalKeys = 0;
-
+    // Pre-load source translations once, then build per-language queues
+    const sourceByNamespace = {};
     for (const namespace of namespaces) {
-      const sourceTranslations = await fsUtils.readTranslationFile(
+      const src = await fsUtils.readTranslationFile(
         projectName,
         sourceLanguage,
         namespace
       );
-      if (!sourceTranslations) continue;
-
-      const targetTranslations =
-        (await fsUtils.readTranslationFile(
-          projectName,
-          targetLanguage,
-          namespace
-        )) || {};
-
-      const flatSource = flattenObject(sourceTranslations);
-      const flatTarget = flattenObject(targetTranslations);
-      const missingKeys = Object.keys(flatSource).filter(
-        (k) => typeof flatSource[k] === "string" && !flatTarget[k]
-      );
-
-      if (missingKeys.length > 0) {
-        namespaceQueue.push({
-          namespace,
-          sourceTranslations,
-          targetTranslations,
-          missingKeys,
-        });
-        totalKeys += missingKeys.length;
-      }
+      if (src) sourceByNamespace[namespace] = src;
     }
 
-    // Register job and respond immediately so the client isn't blocked
+    // Count total keys across all languages
+    let totalKeys = 0;
+    const langQueues = {};
+    for (const lang of targetLanguages) {
+      const queue = [];
+      for (const namespace of namespaces) {
+        const src = sourceByNamespace[namespace];
+        if (!src) continue;
+
+        const tgt =
+          (await fsUtils.readTranslationFile(projectName, lang, namespace)) ||
+          {};
+        const flatSrc = flattenObject(src);
+        const flatTgt = flattenObject(tgt);
+        const missingKeys = Object.keys(flatSrc).filter(
+          (k) => typeof flatSrc[k] === "string" && !flatTgt[k]
+        );
+
+        if (missingKeys.length > 0) {
+          queue.push({ namespace, sourceTranslations: src, targetTranslations: tgt, missingKeys });
+          totalKeys += missingKeys.length;
+        }
+      }
+      langQueues[lang] = queue;
+    }
+
+    // Register job and respond immediately
     activeJobs.set(jobId, { cancelled: false });
 
     reply.send({
       success: true,
       message: "Project translation started",
-      data: { jobId, totalKeys, namespaceCount: namespaceQueue.length },
+      data: { jobId, totalKeys, languageCount: targetLanguages.length },
     });
 
     fastify.io.emit("project-translation:started", {
       jobId,
       projectName,
       targetLanguage,
+      targetLanguages,
       totalKeys,
-      namespaceCount: namespaceQueue.length,
+      languageCount: targetLanguages.length,
     });
 
     let completedKeys = 0;
 
     try {
-      for (const { namespace, sourceTranslations, targetTranslations, missingKeys } of namespaceQueue) {
+      for (const lang of targetLanguages) {
         if (activeJobs.get(jobId)?.cancelled) break;
 
-        fastify.io.emit("project-translation:namespace-start", {
+        fastify.io.emit("project-translation:language-start", {
           jobId,
           projectName,
-          namespace,
-          namespaceKeys: missingKeys.length,
+          currentLanguage: lang,
+          totalKeys,
         });
 
-        for (const keyPath of missingKeys) {
+        for (const { namespace, sourceTranslations, targetTranslations, missingKeys } of langQueues[lang]) {
           if (activeJobs.get(jobId)?.cancelled) break;
 
-          // Resolve source text from nested object
-          const keyParts = keyPath.split(".");
-          let sourceText = sourceTranslations;
-          for (const part of keyParts) {
-            sourceText = sourceText?.[part];
-          }
-          if (typeof sourceText !== "string") continue;
+          fastify.io.emit("project-translation:namespace-start", {
+            jobId,
+            projectName,
+            currentLanguage: lang,
+            namespace,
+            namespaceKeys: missingKeys.length,
+          });
 
-          try {
-            const translatedText = await translateText(
-              sourceText,
-              sourceLanguage,
-              targetLanguage,
-              model
-            );
+          for (const keyPath of missingKeys) {
+            if (activeJobs.get(jobId)?.cancelled) break;
 
-            // Write into target object
-            let cursor = targetTranslations;
-            for (let i = 0; i < keyParts.length - 1; i++) {
-              if (!cursor[keyParts[i]]) cursor[keyParts[i]] = {};
-              cursor = cursor[keyParts[i]];
+            const keyParts = keyPath.split(".");
+            let sourceText = sourceTranslations;
+            for (const part of keyParts) {
+              sourceText = sourceText?.[part];
             }
-            cursor[keyParts[keyParts.length - 1]] = translatedText;
+            if (typeof sourceText !== "string") continue;
 
-            completedKeys++;
-            fastify.io.emit("project-translation:progress", {
-              jobId,
-              projectName,
-              namespace,
-              currentKey: keyPath,
-              completedKeys,
-              totalKeys,
-            });
-          } catch (err) {
-            fastify.log.error(
-              `project-translation: failed on ${namespace}/${keyPath}: ${err.message}`
-            );
+            try {
+              const translatedText = await translateText(
+                sourceText,
+                sourceLanguage,
+                lang,
+                model
+              );
+
+              let cursor = targetTranslations;
+              for (let i = 0; i < keyParts.length - 1; i++) {
+                if (!cursor[keyParts[i]]) cursor[keyParts[i]] = {};
+                cursor = cursor[keyParts[i]];
+              }
+              cursor[keyParts[keyParts.length - 1]] = translatedText;
+
+              completedKeys++;
+              fastify.io.emit("project-translation:progress", {
+                jobId,
+                projectName,
+                currentLanguage: lang,
+                namespace,
+                currentKey: keyPath,
+                completedKeys,
+                totalKeys,
+              });
+            } catch (err) {
+              fastify.log.error(
+                `project-translation: failed on ${lang}/${namespace}/${keyPath}: ${err.message}`
+              );
+            }
           }
-        }
 
-        // Save namespace progress even if partially done
-        await fsUtils.writeTranslationFile(
-          projectName,
-          targetLanguage,
-          namespace,
-          targetTranslations
-        );
+          await fsUtils.writeTranslationFile(
+            projectName,
+            lang,
+            namespace,
+            targetTranslations
+          );
+        }
       }
 
       const wasCancelled = activeJobs.get(jobId)?.cancelled;

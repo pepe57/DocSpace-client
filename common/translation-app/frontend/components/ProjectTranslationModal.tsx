@@ -19,6 +19,7 @@ interface Progress {
   totalKeys: number;
   currentKey?: string;
   namespace?: string;
+  currentLanguage?: string;
   stopped?: boolean;
   error?: string;
 }
@@ -65,7 +66,7 @@ const ProjectTranslationModal: React.FC<ProjectTranslationModalProps> = ({
         const allLangs: string[] = langsRes.data?.data?.languages || [];
         const targets = allLangs.filter((l) => l !== sourceLanguage);
         setLanguages(targets);
-        setTargetLanguage(targets[0] || "");
+        setTargetLanguage("all");
       } catch {
         // ignore — user will see empty dropdowns
       } finally {
@@ -93,6 +94,7 @@ const ProjectTranslationModal: React.FC<ProjectTranslationModalProps> = ({
         totalKeys: data.totalKeys,
         currentKey: data.currentKey,
         namespace: data.namespace,
+        currentLanguage: data.currentLanguage,
       });
     };
 
@@ -208,6 +210,8 @@ const ProjectTranslationModal: React.FC<ProjectTranslationModalProps> = ({
                   onChange={(e) => setTargetLanguage(e.target.value)}
                   className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-primary-500"
                 >
+                  <option value="all">All languages ({languages.length})</option>
+                  <option disabled value="">──────────────</option>
                   {languages.map((l) => (
                     <option key={l} value={l}>{l}</option>
                   ))}
@@ -245,7 +249,11 @@ const ProjectTranslationModal: React.FC<ProjectTranslationModalProps> = ({
             <span>
               <span className="font-medium text-primary-600 dark:text-primary-400">{sourceLanguage}</span>
               <span className="mx-2">→</span>
-              <span className="font-medium text-primary-600 dark:text-primary-400">{targetLanguage}</span>
+              <span className="font-medium text-primary-600 dark:text-primary-400">
+                {targetLanguage === "all"
+                  ? (progress.currentLanguage ?? "all languages")
+                  : targetLanguage}
+              </span>
             </span>
             <span>{percentage}%</span>
           </div>
@@ -317,7 +325,9 @@ const ProjectTranslationModal: React.FC<ProjectTranslationModalProps> = ({
               <p className="font-medium mb-1">Translation complete</p>
               <p className="text-xs">
                 {progress.completedKeys} keys translated into{" "}
-                <span className="font-medium">{targetLanguage}</span>.
+                <span className="font-medium">
+                  {targetLanguage === "all" ? "all languages" : targetLanguage}
+                </span>.
               </p>
             </div>
           )}
