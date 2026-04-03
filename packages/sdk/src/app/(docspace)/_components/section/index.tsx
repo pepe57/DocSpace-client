@@ -31,6 +31,7 @@ import { observer } from "mobx-react";
 import { useSearchParams } from "next/navigation";
 
 import Section from "@docspace/ui-kit/components/section";
+import type { TViewAs } from "@docspace/ui-kit/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useSettingsStore } from "../../_store/SettingsStore";
@@ -45,7 +46,7 @@ type SectionProps = {
 
   showFilter?: boolean;
   showHeader?: boolean;
-  viewAs?: string;
+  viewAs?: TViewAs;
 };
 
 export const SectionWrapper = observer(
