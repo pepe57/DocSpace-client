@@ -65,6 +65,7 @@ const DocsSettingsLayoutInner = observer(() => {
             isEmptyPage={false}
             filesFilter=""
             showFilter={false}
+            viewAs="settings"
           />
           <DeviceTypeObserver />
           <Dialogs />

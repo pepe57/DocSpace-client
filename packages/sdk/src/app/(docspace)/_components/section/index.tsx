@@ -45,6 +45,7 @@ type SectionProps = {
 
   showFilter?: boolean;
   showHeader?: boolean;
+  viewAs?: string;
 };
 
 export const SectionWrapper = observer(
@@ -55,6 +56,7 @@ export const SectionWrapper = observer(
     isEmptyPage,
     filesFilter,
     showFilter = true,
+    viewAs,
   }: SectionProps) => {
     const searchParams = useSearchParams();
 
@@ -77,7 +79,7 @@ export const SectionWrapper = observer(
       <Section
         withBodyScroll
         settingsStudio={false}
-        viewAs={settingsStore.filesViewAs || "row"}
+        viewAs={viewAs ?? settingsStore.filesViewAs ?? "row"}
         isEmptyPage={isEmptyList}
         currentDeviceType={currentDeviceType}
       >
