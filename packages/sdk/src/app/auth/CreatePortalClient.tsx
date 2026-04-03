@@ -53,11 +53,11 @@ export default function CreatePortalClient() {
           createApiKey({ name: "nextcloud-integration" }),
           createRoom({
             title: "Form Filling Room",
-            type: RoomsType.FormRoom,
+            roomType: RoomsType.FormRoom,
           }),
           createRoom({
             title: "Library",
-            type: RoomsType.CustomRoom,
+            roomType: RoomsType.CustomRoom,
           }),
         ]);
 
@@ -137,3 +137,4 @@ export default function CreatePortalClient() {
     </div>
   );
 }
+
