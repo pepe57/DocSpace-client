@@ -41,7 +41,7 @@ type CardInfoComponentProps = {
 const CardInfoComponent = ({
   walletCustomerStatusNotActive,
   scale,
-  withoutMargin
+  withoutMargin,
 }: CardInfoComponentProps) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
@@ -50,7 +50,7 @@ const CardInfoComponent = ({
       className={classNames(styles.cardRow, {
         [styles.warningColor]: walletCustomerStatusNotActive,
         [styles.scale]: scale,
-        [styles.withoutMargin]:withoutMargin
+        [styles.withoutMargin]: withoutMargin,
       })}
     >
       <div className={styles.iconButton}>
@@ -59,7 +59,7 @@ const CardInfoComponent = ({
 
       <div className={styles.cardContent}>
         <Text fontSize="14px" fontWeight={600} lineHeight="16px">
-          {t("CardLinked")}
+          {walletCustomerStatusNotActive ? t("CardUnlinked") : t("CardLinked")}
         </Text>
       </div>
 
@@ -90,4 +90,8 @@ type InjectedProps = ReturnType<typeof mapStoreToProps>;
 
 export const CardInformation = inject(mapStoreToProps)(
   observer(CardInfoComponent),
-) as unknown as React.ComponentType<{ scale?: boolean, withoutMargin?: boolean }>;
+) as unknown as React.ComponentType<{
+  scale?: boolean;
+  withoutMargin?: boolean;
+}>;
+
