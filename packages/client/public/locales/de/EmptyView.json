@@ -57,5 +57,8 @@
   "UploadFromPortalTitle": "Von {{productName}} hochladen",
   "UploadPDFFormOptionDescription": "Wählen Sie ein fertiges PDF-Formular, das in {{productName}} verfügbar ist, und laden Sie es in den Raum hoch.",
   "VirtualDataRoomEmptyTitle": "Willkommen im virtuellen Datenraum",
-  "EmptyAIAgentsTitle": "Erstellen Sie Ihren {{aiAgent}}"
+  "EmptyAIAgentsTitle": "Erstellen Sie Ihren {{aiAgent}}",
+  "CreateAIAgentDescription": "Beginnen Sie mit der Erstellung Ihres ersten {{aiAgent}}",
+  "EmptyAIAgentsAIDisabledDescription": "Dieser Abschnitt ermöglicht es Benutzern, mit {{aiAgents}} zu arbeiten — intelligenten Assistenten für die Verarbeitung von Dokumenten und anderen Aufgaben.\nUm sie nutzen zu können, muss der KI-Funktionsdienst von Ihrem {{productName}}-Administrator aktiviert werden.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Um {{aiAgents}} zu erstellen und zu verwenden, verbinden Sie Ihre Wallet und aktivieren Sie den KI-Funktionsdienst in den {{productName}}-Einstellungen. Sobald dies erledigt ist, können Sie mit {{aiAgents}} arbeiten und mit Ihrem Team zusammenarbeiten."
 }

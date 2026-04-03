@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "Questi elementi saranno eliminati definitivamente tra 30 giorni.",
   "ItemsPermanentlyDeleted": "Questi elementi saranno rimossi definitivamente dal {{trashSection}}.",
   "removeFromListDescription": "Stai per rimuovere <1>{{title}}</1> dall’elenco. Sei sicuro di voler continuare?",
-  "removeFromListDescriptionPlural": "Stai per rimuovere <1>elementi ({{count}})</1> dall’elenco. Sei sicuro di voler continuare?"
+  "removeFromListDescriptionPlural": "Stai per rimuovere <1>elementi ({{count}})</1> dall’elenco. Sei sicuro di voler continuare?",
+  "DeleteRooms": "Le <strong>stanze selezionate ({{count}})</strong> verranno eliminate definitivamente. Tutti i dati e l'accesso degli utenti andranno persi.",
+  "DeleteRoomsTitle": "Eliminare questa stanza?"
 }

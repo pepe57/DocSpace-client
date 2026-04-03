@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "سيتم حذف هذه العناصر نهائيًا في غضون 30 يومًا. ",
   "ItemsPermanentlyDeleted": "سيتم حذف هذه العناصر نهائيًا من {{trashSection}}.",
   "removeFromListDescription": "أنتم على وشك إزالة <1>{{title}}</1> من القائمة. هل أنتم متأكدون من رغبتكم في المتابعة؟",
-  "removeFromListDescriptionPlural": "أنتم على وشك إزالة <1>عناصر ({{count}})</1> من القائمة. هل أنتم متأكدون من رغبتكم في المتابعة؟"
+  "removeFromListDescriptionPlural": "أنتم على وشك إزالة <1>عناصر ({{count}})</1> من القائمة. هل أنتم متأكدون من رغبتكم في المتابعة؟",
+  "DeleteRooms": "سيتم حذف <strong>الغرف المحددة ({{count}})</strong> بشكل دائم. سيتم فقدان جميع البيانات وإمكانية وصول المستخدمين.",
+  "DeleteRoomsTitle": "هل تحذف هذه الغرفة؟"
 }

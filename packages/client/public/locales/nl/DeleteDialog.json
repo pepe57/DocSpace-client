@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "Deze items worden over 30 dagen permanent verwijderd.",
   "ItemsPermanentlyDeleted": "Deze items worden permanent verwijderd uit {{trashSection}}.",
   "removeFromListDescription": "U bent op het punt om <1>{{title}}</1> uit de lijst te verwijderen. Bent u zeker dat u verder wilt gaan?",
-  "removeFromListDescriptionPlural": "U gaat <1>items ({{count}})</1> uit de lijst verwijderen. Bent u zeker dat u verder wilt gaan?"
+  "removeFromListDescriptionPlural": "U gaat <1>items ({{count}})</1> uit de lijst verwijderen. Bent u zeker dat u verder wilt gaan?",
+  "DeleteRooms": "De geselecteerde <strong>kamers ({{count}})</strong> worden permanent verwijderd. Alle data en gebruikers toegang zullen verloren gaan.",
+  "DeleteRoomsTitle": "Deze kamer verwijderen?"
 }

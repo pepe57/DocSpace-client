@@ -57,5 +57,8 @@
   "UploadFromPortalTitle": "Télécharger à partir de {{productName}}",
   "UploadPDFFormOptionDescription": "Sélectionnez un formulaire PDF prêt à l'emploi disponible dans {{productName}} et téléchargez-le dans la salle.",
   "VirtualDataRoomEmptyTitle": "Bienvenue dans la salle de données virtuelle",
-  "EmptyAIAgentsTitle": "Créez votre {{aiAgent}}"
+  "EmptyAIAgentsTitle": "Créez votre {{aiAgent}}",
+  "CreateAIAgentDescription": "Commencez à créer votre premier {{aiAgent}}",
+  "EmptyAIAgentsAIDisabledDescription": "Cette section permet aux utilisateurs de travailler avec les {{aiAgents}} — assistants intelligents pour gérer les documents et autres tâches.\nPour commencer à les utiliser, le service de fonctionnalités IA doit être activé par votre administrateur {{productName}}.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Pour créer et utiliser les {{aiAgents}}, connectez votre portefeuille et activez le service de fonctionnalités IA dans les paramètres de {{productName}}. Une fois cela terminé, vous pourrez travailler avec les {{aiAgents}} et collaborer avec votre équipe."
 }

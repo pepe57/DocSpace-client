@@ -57,5 +57,8 @@
   "UploadFromPortalTitle": "Передати з {{productName}}",
   "UploadPDFFormOptionDescription": "Виберіть готову PDF-форму, доступну в {{productName}}, і передайте її до кімнати.",
   "VirtualDataRoomEmptyTitle": "Ласкаво просимо до віртуальної кімнати даних",
-  "EmptyAIAgentsTitle": "Створіть свого {{aiAgent}}"
+  "EmptyAIAgentsTitle": "Створіть свого {{aiAgent}}",
+  "CreateAIAgentDescription": "Почніть створювати свого першого {{aiAgent}}",
+  "EmptyAIAgentsAIDisabledDescription": "Цей розділ дозволяє користувачам працювати з {{aiAgents}} — розумними помічниками для обробки документів та інших завдань. \nЩоб почати їх використовувати, службу функцій AІ має бути активовано вашим {{productName}} адміністратором.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Щоб створити та використовувати {{aiAgents}}, підключіть свій гаманець та увімкніть сервіс AI-функцій у налаштуваннях {{productName}}. Після цього ви зможете працювати з {{aiAgents}} та співпрацювати зі своєю командою."
 }
