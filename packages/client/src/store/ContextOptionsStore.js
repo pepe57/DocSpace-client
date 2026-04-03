@@ -1631,13 +1631,12 @@ class ContextOptionsStore {
         });
       }
 
+      const messageVar = { formName: form.title };
+
       toastr.success(
-        t(
-          isUpdate
-            ? "Common:SpreadsheetUpdated"
-            : "Common:SpreadsheetGenerated",
-          { formName: form.title },
-        ),
+        isUpdate
+          ? t("Common:SpreadsheetUpdated", messageVar)
+          : t("Common:SpreadsheetGenerated", messageVar),
       );
     } catch (error) {
       toastr.error(error);
