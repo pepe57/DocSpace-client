@@ -16,7 +16,7 @@ const {
 } = require("../config/config");
 const axios = require("axios");
 
-const MODEL = process.env.OLLAMA_MODEL || "gemma3:12b";
+const MODEL = process.env.OLLAMA_MODEL || "gemma4:26b";
 const REQUEST_TIMEOUT_MS =
   Number.parseInt(process.env.OLLAMA_TIMEOUT_MS, 10) || 90000; // default 90s timeout
 
@@ -47,7 +47,7 @@ async function generateBasicComment(keyPath, content, usages) {
   // Skip if no usages or content is empty
   if (!usages || usages.length === 0 || !content) {
     console.log(
-      `Skipping comment generation for ${keyPath}: insufficient data`
+      `Skipping comment generation for ${keyPath}: insufficient data`,
     );
     return null;
   }
@@ -81,7 +81,7 @@ async function generateBasicComment(keyPath, content, usages) {
 ${processedUsages
   .map(
     (u) =>
-      `  - **File:** ${u.file_path}\n    **Line:** ${u.line_number}\n    **Context:** ${u.context}`
+      `  - **File:** ${u.file_path}\n    **Line:** ${u.line_number}\n    **Context:** ${u.context}`,
   )
   .join("\n")}
 
@@ -107,7 +107,7 @@ Based on this information, please write a short, clear description of what this 
       console.log(
         `Generating comment for ${keyPath} (attempt ${
           retries + 1
-        }/${maxRetries})`
+        }/${maxRetries})`,
       );
 
       // Call Ollama API with timeout
@@ -123,7 +123,7 @@ Based on this information, please write a short, clear description of what this 
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       // Return the generated comment
@@ -131,7 +131,7 @@ Based on this information, please write a short, clear description of what this 
         return response.data.response.trim();
       } else {
         throw new Error(
-          `Unexpected Ollama response format: ${JSON.stringify(response.data)}`
+          `Unexpected Ollama response format: ${JSON.stringify(response.data)}`,
         );
       }
     } catch (error) {
@@ -141,7 +141,7 @@ Based on this information, please write a short, clear description of what this 
       // Log the error
       console.error(
         `Error calling Ollama (attempt ${retries}/${maxRetries}):`,
-        error.message
+        error.message,
       );
 
       // If it's a socket hang up or timeout, wait before retrying
@@ -152,10 +152,10 @@ Based on this information, please write a short, clear description of what this 
         error.message.includes("timeout")
       ) {
         console.log(
-          `Network error detected. Waiting before retry... ${error.message}`
+          `Network error detected. Waiting before retry... ${error.message}`,
         );
         console.log(
-          `ollama api url: '${ollamaConfig.apiUrl}' model: '${MODEL}'`
+          `ollama api url: '${ollamaConfig.apiUrl}' model: '${MODEL}'`,
         );
         console.log(`prompt: ${prompt}`);
         // Wait for a few seconds before retrying (increasing with each retry)
@@ -169,7 +169,7 @@ Based on this information, please write a short, clear description of what this 
 
   console.error(
     `Failed to generate comment for ${keyPath} after ${maxRetries} attempts:`,
-    lastError ? lastError.message : "Unknown error"
+    lastError ? lastError.message : "Unknown error",
   );
   return null;
 }
@@ -227,7 +227,7 @@ async function generateAutoComment(projectName) {
 
     // Process all translation files in the base language
     const metaNamespaceDirs = (await fs.readdir(metaDir)).filter(
-      (dir) => dir !== ".DS_Store"
+      (dir) => dir !== ".DS_Store",
     );
 
     for (const namespace of metaNamespaceDirs) {
@@ -267,14 +267,14 @@ async function generateAutoComment(projectName) {
 
           // Show progress information
           console.log(
-            `Processing key: ${keyPath} (${processedCount}/${keyFiles.length} in ${namespace})`
+            `Processing key: ${keyPath} (${processedCount}/${keyFiles.length} in ${namespace})`,
           );
 
           if (!keyMeta.comment || keyMeta.comment.text === "") {
             const comment = await generateBasicComment(
               keyPath,
               keyMeta.content,
-              keyMeta.usage
+              keyMeta.usage,
             );
 
             if (comment && comment !== "") {
@@ -324,7 +324,7 @@ async function generateAutoComment(projectName) {
   } catch (error) {
     console.error(
       `Error generating metadata for project ${projectName} (current namespace: ${currentNamespace}):`,
-      error
+      error,
     );
     stats.errors.push({
       type: "project",
@@ -347,7 +347,7 @@ async function generateAutoComment(projectName) {
 async function generateAutoCommentsMetadata() {
   const projects = Object.keys(projectLocalesMap);
   console.log(
-    `Generating metadata for ${projects.length} projects: ${projects.join(", ")}`
+    `Generating metadata for ${projects.length} projects: ${projects.join(", ")}`,
   );
 
   const overallStats = {
@@ -403,7 +403,7 @@ async function generateAutoCommentsMetadata() {
             overallStats.namespaces[namespace].skippedKeys +=
               nsStats.skippedKeys || 0;
             overallStats.namespaces[namespace].errors += nsStats.errors || 0;
-          }
+          },
         );
       }
 
@@ -412,9 +412,9 @@ async function generateAutoCommentsMetadata() {
         Object.entries(projectStats.namespaces).forEach(
           ([namespace, nsStats]) => {
             console.log(
-              `  - ${namespace}: ${nsStats.totalKeys || 0} keys (${nsStats.updatedComments || 0} comments generated)`
+              `  - ${namespace}: ${nsStats.totalKeys || 0} keys (${nsStats.updatedComments || 0} comments generated)`,
             );
-          }
+          },
         );
       }
     } catch (error) {
@@ -455,14 +455,14 @@ generateAutoCommentsMetadata()
     console.log("\n=== Auto Comments Generation Summary ===");
     console.log(`Duration: ${durationMin} minutes, ${durationSec} seconds`);
     console.log(
-      `Processed ${stats.totalNamespaces} namespaces with ${stats.totalKeys} total keys`
+      `Processed ${stats.totalNamespaces} namespaces with ${stats.totalKeys} total keys`,
     );
     console.log(`Comments generated: ${stats.updatedComments || 0} keys`);
     console.log(`Skipped: ${stats.skippedKeys || 0} keys`);
 
     if (stats.errors && stats.errors.length > 0) {
       console.log(
-        `\nWARNING: Encountered ${stats.errors.length} errors during processing`
+        `\nWARNING: Encountered ${stats.errors.length} errors during processing`,
       );
     }
 
@@ -473,7 +473,7 @@ generateAutoCommentsMetadata()
         console.log(
           `  ${namespace}: ${nsStats.updatedComments || 0}/${
             nsStats.totalKeys || 0
-          } comments generated`
+          } comments generated`,
         );
       }
     });
@@ -490,3 +490,4 @@ generateAutoCommentsMetadata()
     console.error("Error generating auto comments:", error);
     process.exit(1);
   });
+
