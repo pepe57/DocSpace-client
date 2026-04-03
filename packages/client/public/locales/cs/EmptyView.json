@@ -57,5 +57,8 @@
   "UploadFromPortalTitle": "Nahrát z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte připravený PDF formulář dostupný v {{productName}} a nahrajte jej do místnosti.",
   "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti",
-  "EmptyAIAgentsTitle": "Vytvořte si svého {{aiAgent}}"
+  "EmptyAIAgentsTitle": "Vytvořte si svého {{aiAgent}}",
+  "CreateAIAgentDescription": "Začněte vytvářet svého prvního {{aiAgent}}",
+  "EmptyAIAgentsAIDisabledDescription": "Tato sekce umožňuje uživatelům pracovat s {{aiAgents}} – chytrými asistenty pro zpracování dokumentů a další úkoly. \nPro jejich používání musí být služba AI funkcí povolena administrátorem {{productName}}.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Pro vytvoření a používání {{aiAgents}} připojte svou peněženku a povolte službu AI funkcí v nastavení {{productName}}. Jakmile to bude hotovo, budete moci pracovat s {{aiAgents}} a spolupracovat se svým týmem."
 }

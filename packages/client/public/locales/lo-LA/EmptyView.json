@@ -57,5 +57,8 @@
   "UploadFromPortalTitle": "ດາວໂຫຼດຈາກ {{productName}}",
   "UploadPDFFormOptionDescription": "ເລືອກແບບຟອມ PDF ທີ່ກະກຽມໄວ້ແລ້ວໃນ {{productName}} ແລະອັບໂຫຼດມັນໃສ່ຫ້ອງ.",
   "VirtualDataRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຂໍ້ມູນດິຈິຕອນ",
-  "EmptyAIAgentsTitle": "ສ້າງ{{aiAgent}}ຂອງເຈົ້າເອງ"
+  "EmptyAIAgentsTitle": "ສ້າງ{{aiAgent}}ຂອງເຈົ້າເອງ",
+  "CreateAIAgentDescription": "ເລີ່ມຕົ້ນສ້າງ {{aiAgent}} ທຳອິດຂອງເຈົ້າ",
+  "EmptyAIAgentsAIDisabledDescription": "ພາກນີ້ຊ່ວຍໃຫ້ຜູ້ໃຊ້ສາມາດເຮັດວຽກກັບ {{aiAgents}} — ຜູ້ຊ່ວຍອັດສະລິຍະສຳລັບການຈັດການເອກະສານ ແລະ ໜ້າວຽກອື່ນໆ.\nເພື່ອເລີ່ມຕົ້ນໃຊ້ພວກມັນ, ການບໍລິການຄຸນສົມບັດ AI ຕ້ອງໄດ້ເປີດໃຊ້ໂດຍຜູ້ເບິ່ງແຍງລະບົບ {{productName}} ຂອງທ່ານ.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "ເພື່ອສ້າງ ແລະ ນຳໃຊ້ {{aiAgents}}, ໃຫ້ເຊື່ອມຕໍ່ກະເປົາເງິນຂອງທ່ານ ແລະ ເປີດໃຊ້ບໍລິການຄຸນສົມບັດ AI ໃນການຕັ້ງຄ່າ {{productName}}. ເມື່ອມັນສຳເລັດແລ້ວ, ທ່ານຈະສາມາດເຮັດວຽກກັບ {{aiAgents}} ແລະ ຮ່ວມມືກັບທີມງານຂອງທ່ານໄດ້."
 }

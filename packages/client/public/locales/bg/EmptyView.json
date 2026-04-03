@@ -57,5 +57,8 @@
   "UploadFromPortalTitle": "Качете от {{productName}}",
   "UploadPDFFormOptionDescription": "Изберете готов PDF формуляр, наличен в {{productName}}, и го качете в стаята.",
   "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни",
-  "EmptyAIAgentsTitle": "Създайте вашия {{aiAgent}}"
+  "EmptyAIAgentsTitle": "Създайте вашия {{aiAgent}}",
+  "CreateAIAgentDescription": "Започнете да изграждате първия си {{aiAgent}}",
+  "EmptyAIAgentsAIDisabledDescription": "Този раздел позволява на потребителите да работят с {{aiAgents}} — интелигентни асистенти за обработка на документи и други задачи.\nЗа да започнете да ги използвате, услугата за AI функции трябва да бъде активирана от вашия {{productName}} администратор.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "За да създадете и използвате {{aiAgents}}, свържете своя портфейл и активирайте услугата за AI функции в настройките на {{productName}}. След като това бъде направено, ще можете да работите с {{aiAgents}} и да си сътрудничите с вашия екип."
 }

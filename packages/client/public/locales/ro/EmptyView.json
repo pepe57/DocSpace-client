@@ -57,5 +57,8 @@
   "UploadFromPortalTitle": "Încărcare de pe {{productName}}",
   "UploadPDFFormOptionDescription": "Selectați un formular PDF existent de pe {{productName}} și încărcați-l în sala.",
   "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date",
-  "EmptyAIAgentsTitle": "Creează-ți {{aiAgent}}"
+  "EmptyAIAgentsTitle": "Creează-ți {{aiAgent}}",
+  "CreateAIAgentDescription": "Începe să construiești primul tău {{aiAgent}}",
+  "EmptyAIAgentsAIDisabledDescription": "Această secțiune permite utilizatorilor să lucreze cu {{aiAgents}} — asistenți inteligenți pentru gestionarea documentelor și a altor sarcini.\nPentru a începe să îi utilizați, serviciul de funcții IA trebuie activat de administratorul {{productName}}.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Pentru a crea și utiliza {{aiAgents}}, conectează-ți portofelul și activează serviciul de funcții IA în setările {{productName}}. Odată ce este finalizat, vei putea lucra cu {{aiAgents}} și colabora cu echipa ta."
 }
