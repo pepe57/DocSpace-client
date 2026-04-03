@@ -64,10 +64,16 @@ export class XlsxUpdateService {
     itemId: number,
     taskId: string,
     onProgress: (task: XlsxTask) => void,
+    maxAttempts = 120,
   ): Promise<XlsxTask> {
+    let attempts = 0;
+
     const step: (seed: XlsxTask) => Promise<XlsxTask> = pipe(
       delay(1000),
-      () => getProgressXlsx(itemId) as Promise<XlsxTask>,
+      () => {
+        if (++attempts > maxAttempts) throw new Error("XLSX update timed out");
+        return getProgressXlsx(itemId) as Promise<XlsxTask>;
+      },
       (task: XlsxTask) => {
         onProgress(task);
         return task;
