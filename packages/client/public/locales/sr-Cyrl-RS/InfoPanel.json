@@ -99,5 +99,8 @@
   "UserFileUpdated": "Датотека ажурирана.",
   "Users": "Корисници",
   "Versions": "Верзије",
-  "LastUpdateInfo": "Последње ажурирање"
+  "LastUpdateInfo": "Последње ажурирање",
+  "AIAgentsEmptyScreenTent": "Погледајте детаље о {{aiAgents}} овде",
+  "NoAgent": "Нема {{aiAgent}}",
+  "RoomChangeOwner": "Соба је промењен власник."
 }

@@ -99,5 +99,8 @@
   "UserFileUpdated": "Súbor aktualizovaný.",
   "Users": "Používatelia",
   "Versions": "Verzie",
-  "LastUpdateInfo": "Posledná aktualizácia"
+  "LastUpdateInfo": "Posledná aktualizácia",
+  "AIAgentsEmptyScreenTent": "Pozrite si podrobnosti o {{aiAgents}} tu",
+  "NoAgent": "Žiadny {{aiAgent}}",
+  "RoomChangeOwner": "Vlastník miestnosti bol zmenený."
 }

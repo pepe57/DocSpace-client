@@ -39,5 +39,6 @@
   "UserName": "Kullanıcı Adı",
   "ViewerInfo": "Görüntüleyici bilgisi",
   "WatermarkPreview": "Filigran Ön izlemesi",
-  "WatermarkPreviewHelp": "Bu görüntü ön izlemesi, filigranın dosyalarınızda nasıl görüntüleneceğini kabaca gösterir."
+  "WatermarkPreviewHelp": "Bu görüntü ön izlemesi, filigranın dosyalarınızda nasıl görüntüleneceğini kabaca gösterir.",
+  "ConfigureDatabaseConnection": "Entegrasyon → Üçüncü taraf hizmetlerinde veritabanı bağlantısını yapılandırın"
 }

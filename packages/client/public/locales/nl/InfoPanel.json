@@ -99,5 +99,8 @@
   "UserFileUpdated": "Bestand bijgewerkt.",
   "Users": "Gebruikers",
   "Versions": "Versies",
-  "LastUpdateInfo": "Laatste update"
+  "LastUpdateInfo": "Laatste update",
+  "AIAgentsEmptyScreenTent": "Bekijk hier de details van {{aiAgents}}",
+  "NoAgent": "Nee {{aiAgent}}",
+  "RoomChangeOwner": "Kamer eigenaar gewijzigd."
 }

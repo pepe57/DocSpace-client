@@ -99,5 +99,8 @@
   "UserFileUpdated": "تم تحديث الملف.",
   "Users": "المستخدمين",
   "Versions": "إصدارات",
-  "LastUpdateInfo": "آخر تحديث"
+  "LastUpdateInfo": "آخر تحديث",
+  "AIAgentsEmptyScreenTent": "راجع تفاصيل {{aiAgents}} هنا",
+  "NoAgent": "لا يوجد {{aiAgent}}",
+  "RoomChangeOwner": "تم تغيير مالك الغرفة."
 }

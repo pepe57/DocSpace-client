@@ -99,5 +99,8 @@
   "UserFileUpdated": "ファイルが更新されました。",
   "Users": "ユーザー",
   "Versions": "バージョン",
-  "LastUpdateInfo": "最終更新日"
+  "LastUpdateInfo": "最終更新日",
+  "AIAgentsEmptyScreenTent": "ここに{{aiAgents}}の詳細をご覧ください。",
+  "NoAgent": "いいえ {{aiAgent}}",
+  "RoomChangeOwner": "ルームのオーナーが変更されました。"
 }

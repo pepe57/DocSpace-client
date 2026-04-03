@@ -39,5 +39,6 @@
   "UserName": "İstifadəçi Adı",
   "ViewerInfo": "İzləyici məlumatı",
   "WatermarkPreview": "Su nişanı önizləməsi",
-  "WatermarkPreviewHelp": "Bu şəkil önizləməsi su nişanının fayllarınızda necə görünəcəyini təxmini göstərir."
+  "WatermarkPreviewHelp": "Bu şəkil önizləməsi su nişanının fayllarınızda necə görünəcəyini təxmini göstərir.",
+  "ConfigureDatabaseConnection": "İnteqrasiya → Üçüncü tərəf xidmətlərində verilənlər bazası bağlantısını konfiqurasiya edin"
 }

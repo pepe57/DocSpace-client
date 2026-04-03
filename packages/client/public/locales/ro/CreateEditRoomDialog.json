@@ -39,5 +39,6 @@
   "UserName": "Nume de utilizator",
   "ViewerInfo": "Detalii Vizualizator",
   "WatermarkPreview": "Previzualizare incripționare",
-  "WatermarkPreviewHelp": "Previzualizarea imaginii arată cum aproximativ  va fi afișată incripționarea în fișierele dvs."
+  "WatermarkPreviewHelp": "Previzualizarea imaginii arată cum aproximativ  va fi afișată incripționarea în fișierele dvs.",
+  "ConfigureDatabaseConnection": "Configurează conexiunea la baza de date în Integrare → Servicii terțe"
 }

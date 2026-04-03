@@ -99,5 +99,8 @@
   "UserFileUpdated": "Файл оновлено.",
   "Users": "Користувачі",
   "Versions": "Версії",
-  "LastUpdateInfo": "Останнє оновлення"
+  "LastUpdateInfo": "Останнє оновлення",
+  "AIAgentsEmptyScreenTent": "Перегляньте деталі щодо {{aiAgents}} тут",
+  "NoAgent": "Немає {{aiAgent}}",
+  "RoomChangeOwner": "Власник кімнати змінено."
 }

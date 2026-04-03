@@ -99,5 +99,8 @@
   "UserFileUpdated": "Tiedosto päivitetty.",
   "Users": "Käyttäjät",
   "Versions": "Versiot",
-  "LastUpdateInfo": "Viimeisin päivitys"
+  "LastUpdateInfo": "Viimeisin päivitys",
+  "AIAgentsEmptyScreenTent": "Katso {{aiAgents}} tiedot täältä",
+  "NoAgent": "Ei {{aiAgent}}ia",
+  "RoomChangeOwner": "Huoneen omistaja vaihtui."
 }

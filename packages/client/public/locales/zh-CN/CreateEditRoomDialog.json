@@ -39,5 +39,6 @@
   "UserName": "用户名称",
   "ViewerInfo": "查看者信息",
   "WatermarkPreview": "水印预览",
-  "WatermarkPreviewHelp": "此图像预览将大致展示水印在您的文件中的显示效果"
+  "WatermarkPreviewHelp": "此图像预览将大致展示水印在您的文件中的显示效果",
+  "ConfigureDatabaseConnection": "配置数据库连接，在集成 → 第三方服务中"
 }
