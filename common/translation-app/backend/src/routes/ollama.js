@@ -9,6 +9,9 @@ function debug(...args) {
   if (DEBUG) console.log("[OLLAMA DEBUG]", ...args);
 }
 
+// Active project translation jobs: jobId -> { cancelled: boolean }
+const activeJobs = new Map();
+
 /**
  * Ollama integration route handler
  * @param {FastifyInstance} fastify - Fastify instance
@@ -504,6 +507,198 @@ async function routes(fastify, options) {
         details: error.message,
       });
     }
+  });
+
+  // Translate all untranslated keys in every namespace of a project
+  fastify.post("/translate/project", async (request, reply) => {
+    const { projectName, sourceLanguage, targetLanguage, model, jobId } =
+      request.body;
+
+    if (!model || !jobId) {
+      return reply
+        .code(400)
+        .send({ success: false, error: "model and jobId are required" });
+    }
+
+    // Get all namespaces for the source language
+    let namespaces;
+    try {
+      namespaces = await fsUtils.getNamespaces(projectName, sourceLanguage);
+    } catch (err) {
+      return reply
+        .code(404)
+        .send({ success: false, error: "Project or language not found" });
+    }
+
+    if (!namespaces || namespaces.length === 0) {
+      return reply
+        .code(404)
+        .send({ success: false, error: "No namespaces found for this project" });
+    }
+
+    // Pre-load all namespace data and count missing keys
+    const namespaceQueue = [];
+    let totalKeys = 0;
+
+    for (const namespace of namespaces) {
+      const sourceTranslations = await fsUtils.readTranslationFile(
+        projectName,
+        sourceLanguage,
+        namespace
+      );
+      if (!sourceTranslations) continue;
+
+      const targetTranslations =
+        (await fsUtils.readTranslationFile(
+          projectName,
+          targetLanguage,
+          namespace
+        )) || {};
+
+      const flatSource = flattenObject(sourceTranslations);
+      const flatTarget = flattenObject(targetTranslations);
+      const missingKeys = Object.keys(flatSource).filter(
+        (k) => typeof flatSource[k] === "string" && !flatTarget[k]
+      );
+
+      if (missingKeys.length > 0) {
+        namespaceQueue.push({
+          namespace,
+          sourceTranslations,
+          targetTranslations,
+          missingKeys,
+        });
+        totalKeys += missingKeys.length;
+      }
+    }
+
+    // Register job and respond immediately so the client isn't blocked
+    activeJobs.set(jobId, { cancelled: false });
+
+    reply.send({
+      success: true,
+      message: "Project translation started",
+      data: { jobId, totalKeys, namespaceCount: namespaceQueue.length },
+    });
+
+    fastify.io.emit("project-translation:started", {
+      jobId,
+      projectName,
+      targetLanguage,
+      totalKeys,
+      namespaceCount: namespaceQueue.length,
+    });
+
+    let completedKeys = 0;
+
+    try {
+      for (const { namespace, sourceTranslations, targetTranslations, missingKeys } of namespaceQueue) {
+        if (activeJobs.get(jobId)?.cancelled) break;
+
+        fastify.io.emit("project-translation:namespace-start", {
+          jobId,
+          projectName,
+          namespace,
+          namespaceKeys: missingKeys.length,
+        });
+
+        for (const keyPath of missingKeys) {
+          if (activeJobs.get(jobId)?.cancelled) break;
+
+          // Resolve source text from nested object
+          const keyParts = keyPath.split(".");
+          let sourceText = sourceTranslations;
+          for (const part of keyParts) {
+            sourceText = sourceText?.[part];
+          }
+          if (typeof sourceText !== "string") continue;
+
+          try {
+            const translatedText = await translateText(
+              sourceText,
+              sourceLanguage,
+              targetLanguage,
+              model
+            );
+
+            // Write into target object
+            let cursor = targetTranslations;
+            for (let i = 0; i < keyParts.length - 1; i++) {
+              if (!cursor[keyParts[i]]) cursor[keyParts[i]] = {};
+              cursor = cursor[keyParts[i]];
+            }
+            cursor[keyParts[keyParts.length - 1]] = translatedText;
+
+            completedKeys++;
+            fastify.io.emit("project-translation:progress", {
+              jobId,
+              projectName,
+              namespace,
+              currentKey: keyPath,
+              completedKeys,
+              totalKeys,
+            });
+          } catch (err) {
+            fastify.log.error(
+              `project-translation: failed on ${namespace}/${keyPath}: ${err.message}`
+            );
+          }
+        }
+
+        // Save namespace progress even if partially done
+        await fsUtils.writeTranslationFile(
+          projectName,
+          targetLanguage,
+          namespace,
+          targetTranslations
+        );
+      }
+
+      const wasCancelled = activeJobs.get(jobId)?.cancelled;
+      activeJobs.delete(jobId);
+
+      if (wasCancelled) {
+        fastify.io.emit("project-translation:stopped", {
+          jobId,
+          projectName,
+          completedKeys,
+          totalKeys,
+        });
+      } else {
+        fastify.io.emit("project-translation:completed", {
+          jobId,
+          projectName,
+          completedKeys,
+          totalKeys,
+        });
+      }
+    } catch (error) {
+      activeJobs.delete(jobId);
+      fastify.log.error(error);
+      fastify.io.emit("project-translation:error", {
+        jobId,
+        projectName,
+        error: error.message,
+      });
+    }
+  });
+
+  // Stop an active project translation
+  fastify.post("/translate/project/stop", async (request, reply) => {
+    const { jobId } = request.body;
+
+    if (!jobId) {
+      return reply
+        .code(400)
+        .send({ success: false, error: "jobId is required" });
+    }
+
+    const job = activeJobs.get(jobId);
+    if (job) {
+      job.cancelled = true;
+    }
+
+    return { success: true };
   });
 }
 
