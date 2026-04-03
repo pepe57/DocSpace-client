@@ -19,7 +19,6 @@
   "BringCreditBackUpTo": "残高を次の金額までチャージする：",
   "BusinessExpired": "{{planName}}プランは{{date}}で期限切れとなりました。",
   "BusinessFinalDateInfo": "サブスクリプションは、価格と仕様を更新して{{finalDate}}日に自動更新されます。Stripeカスタマーポータルでキャンセルまたは請求先情報を変更することができます。",
-  "BusinessPlanPaymentOverdue": "新規ユーザーの追加や新規ルームの作成ができません。{{planName}}プランの支払い期限を過ぎています。",
   "BusinessRequestDescription": "{{peopleNumber}}人以上の管理者がいる料金プランは、リクエストに応じてのみご利用いただけます。",
   "BusinessSuggestion": "{{planName}}のプランをカスタマイズする",
   "BusinessTitle": "{{planName}}プランをご利用いただいています。",

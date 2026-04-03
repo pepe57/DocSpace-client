@@ -19,7 +19,6 @@
   "BringCreditBackUpTo": "Dostať kredit späť na",
   "BusinessExpired": "Platnosť vášho plánu {{planName}} vypršala dňa {{date}}",
   "BusinessFinalDateInfo": "Predplatné bude automaticky obnovené dňa {{finalDate}} s aktualizovanými cenami a špecifikáciami. Môžete ho zrušiť alebo zmeniť svoje fakturačné údaje na zákazníckom portáli Stripe.",
-  "BusinessPlanPaymentOverdue": "Nie je možné pridávať nových používateľov a vytvárať nové miestnosti. Splátka plánu {{planName}} je po splatnosti.",
   "BusinessRequestDescription": "Cenové plány s viac ako {{peopleNumber}} administrátormi sú dostupné len na požiadanie.",
   "BusinessSuggestion": "Prispôsobte si svoj plán {{planName}}",
   "BusinessTitle": "Používate plán {{planName}}",

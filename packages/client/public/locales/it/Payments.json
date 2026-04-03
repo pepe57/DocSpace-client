@@ -19,7 +19,6 @@
   "BringCreditBackUpTo": "Porta il credito fino a",
   "BusinessExpired": "Il tuo piano {{planName}} è scaduto il {{date}}",
   "BusinessFinalDateInfo": "L’abbonamento si rinnoverà automaticamente il giorno {{finalDate}} con prezzi e specifiche aggiornati. Puoi annullarlo o modificare i tuoi dati di fatturazione sul tuo portale clienti Stripe.",
-  "BusinessPlanPaymentOverdue": "Impossibile aggiungere nuovi utenti e creare nuove stanze. Pagamento del piano {{planName}} è scaduto.",
   "BusinessRequestDescription": "I piani tariffari con più {{peopleNumber}} amministratori sono disponibili solo su richiesta.",
   "BusinessSuggestion": "Personalizza il tuo piano {{planName}}",
   "BusinessTitle": "Stai utilizzando il piano {{planName}}",

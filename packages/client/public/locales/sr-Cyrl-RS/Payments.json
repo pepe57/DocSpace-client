@@ -19,7 +19,6 @@
   "BringCreditBackUpTo": "Довести кредит назад на",
   "BusinessExpired": "Ваш {{planName}} план је истекао {{date}}",
   "BusinessFinalDateInfo": "Претплата ц́е бити аутоматски обновљена {{finalDate}} са ажурираним ценама и спецификацијама. Можете га отказати или променити своје податке за наплату на вашем Stripe корисничком порталу.",
-  "BusinessPlanPaymentOverdue": "Није могуће додати нове кориснике и креирати нове собе. Наплата за план {{planName}} је каснила.",
   "BusinessRequestDescription": "Планови цена са више администратора ({{peopleNumber}}) доступни су само на захтев.",
   "BusinessSuggestion": "Прилагоди свој {{planName}} план",
   "BusinessTitle": "Користи {{planName}} план",

@@ -19,7 +19,6 @@
   "BringCreditBackUpTo": "Riktheni kredinë në",
   "BusinessExpired": "Plani juaj i {{planName}} ka skaduar më {{date}}",
   "BusinessFinalDateInfo": "Abonimi do të rinovohet automatikisht më {{finalDate}} me çmimet dhe specifikimet e përditësuara. Mund ta anuloni ose të ndryshoni informacionin tuaj të faturimit në portalin tuaj të klientëve Stripe.",
-  "BusinessPlanPaymentOverdue": "Nuk mund të shtohen përdorues të rinj dhe të krijohen dhoma të reja. Plani i pagesës së {{planName}} është i vonuar.",
   "BusinessRequestDescription": "Planet e çmimeve me më shumë administratorë të {{peopleNumber}} janë të disponueshme vetëm sipas kërkesës.",
   "BusinessSuggestion": "Personalizojeni planin tuaj {{planName}}",
   "BusinessTitle": "Po përdorni planin {{planName}}",

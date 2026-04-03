@@ -19,7 +19,6 @@
   "BringCreditBackUpTo": "Alimentarea contului cu suma",
   "BusinessExpired": "Abonamentul dvs {{planName}} a expirat la {{date}}",
   "BusinessFinalDateInfo": "Abonamentul va fi reînnoit automat la {{finalDate}} la preţuri şi cu specificaţii aplicabile după actualizarea. Puteţi să anulaţi sau să schimbaţi informaţiile de facturare pe portalul dvs. de client Stripe.",
-  "BusinessPlanPaymentOverdue": "Imposibil de adăugat utilizatori noi şi de creat săli noi. Restanță de plată abonament {{planName}}.",
   "BusinessRequestDescription": "Abonamente cu mai mult de {{peopleNumber}} administratori sunt disponibile doar la cerere.",
   "BusinessSuggestion": "Gestionați abonamentul dvs {{planName}}",
   "BusinessTitle": "Utilizaţi abonamentul {{planName}}",

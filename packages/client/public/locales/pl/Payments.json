@@ -19,7 +19,6 @@
   "BringCreditBackUpTo": "Przywróć zdolność kredytową do",
   "BusinessExpired": "Twój plan {{planName}} wygasł {{date}}",
   "BusinessFinalDateInfo": "Subskrypcja zostanie automatycznie odnowiona {{finalDate}} po aktualnej cenie i z aktualnymi specyfikacjami. Możesz ją anulować lub zmienić dane rozliczeniowe na swoim koncie w portalu klienta Stripe.",
-  "BusinessPlanPaymentOverdue": "Nie można dodać nowych użytkowników ani utworzyć nowych pokoi. Zaległa płatność za plan {{planName}}.",
   "BusinessRequestDescription": "Plany cenowe z większą liczbą administratorów (ponad {{peopleNumber}}) są dostępne wyłącznie na życzenie.",
   "BusinessSuggestion": "Dostosuj swój plan {{planName}}",
   "BusinessTitle": "Korzystasz z planu {{planName}}",
