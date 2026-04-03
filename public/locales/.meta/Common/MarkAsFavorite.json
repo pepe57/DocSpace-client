@@ -1,19 +1,25 @@
 {
-  "key_path": "FileManagement",
-  "content": "File management",
-  "content_en_sha1_hash": "5cdd155bb48d903d911fae98b21437d3fcd9e39d",
-  "created_at": "2025-05-19T21:30:53.358Z",
-  "updated_at": "2025-12-15T14:04:23.997Z",
+  "key_path": "MarkAsFavorite",
+  "content": "Mark as favorite",
+  "content_en_sha1_hash": "a8e7d773cec432feb41d1356e6bfdd0f356ffc17",
+  "created_at": "2026-04-03T21:51:34.648Z",
+  "updated_at": "2026-04-03T21:54:15.083Z",
   "comment": {
-    "text": "This translation key is used to display \"File management\" as a label on a profile section, likely in a file upload or download process. It appears in the \"/packages/client/src/pages/Profile/Section/Body/index.js\" file at line 42.",
+    "text": "This key is used as the label for an option within a context menu, allowing users to mark a specific item as a favorite.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:53.343Z"
+    "updated_at": "2026-04-03T21:54:15.083Z"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/index.tsx",
-      "line_number": 54,
-      "context": "import TelegramStore from \"SRC_DIR/store/TelegramStore\";\n \n import MainProfile from \"./sub-components/main-profile\";\n import LoginContent from \"./sub-components/login\";\n import Notifications from \"./sub-components/notifications\";\n import FileManagement from \"./sub-components/file-management\";\n import InterfaceTheme from \"./sub-components/interface-theme\";\n import AuthorizedApps from \"./sub-components/authorized-apps\";\n import useProfileBody from \"./useProfileBody\";\n import styles from \"./body.module.scss\";",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2491,
+      "context": "disabled: false,\n },\n {\n id: \"option_mark-as-favorite\",\n key: \"mark-as-favorite\",\n label: t(\"Common:MarkAsFavorite\"),\n icon: FavoritesReactSvgUrl,\n onClick: () => this.onClickFavorite(\"mark\", [item], t),\n disabled: false,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2491,
+      "context": "disabled: false,\n },\n {\n id: \"option_mark-as-favorite\",\n key: \"mark-as-favorite\",\n label: t(\"Common:MarkAsFavorite\"),\n icon: FavoritesReactSvgUrl,\n onClick: () => this.onClickFavorite(\"mark\", [item], t),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }
   ],
@@ -163,6 +169,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

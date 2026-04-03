@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2026-03-31T15:18:45.839Z",
+  "updated_at": "2026-04-03T21:51:40.981Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 317,
+      "line_number": 310,
       "context": "const uploadFromDocSpace = {\n id: \"actions_upload-from-docspace\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromPortal\", { productName: t(\"Common:ProductName\") }),\n key: \"actions_upload-from-docspace\",\n disabled: false,\n onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 317,
+      "line_number": 310,
       "context": "const uploadFromDocSpace = {\n id: \"actions_upload-from-docspace\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromPortal\", { productName: t(\"Common:ProductName\") }),\n key: \"actions_upload-from-docspace\",\n disabled: false,\n onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),\n };",
       "module": "/packages/client"
     },
@@ -294,13 +294,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 46,
+      "line_number": 53,
       "context": "t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"\n values={{\n userType: t(\"Common:Guest\"),\n productName: t(\"Common:ProductName\"),\n adminName,\n }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n <Text style={{ marginTop: \"16px\" }}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 46,
+      "line_number": 53,
       "context": "t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"\n values={{\n userType: t(\"Common:Guest\"),\n productName: t(\"Common:ProductName\"),\n adminName,\n }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n <Text style={{ marginTop: \"16px\" }}>",
       "module": "/packages/client"
     },
@@ -965,12 +965,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Api/index.js",
-      "line_number": 98,
-      "context": "onClick={() => window.open(apiBasicLink, \"_blank\")}\n scale={currentDeviceType === DeviceType.mobile}\n />\n }\n descriptionText={t(\"ApiPageDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n headerText={t(\"ApiPageHeader\")}\n imageAlt={t(\"ApiPageHeader\")}\n imageSrc={imgSrc}",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
       "line_number": 157,
       "context": "withEmptyScreen: !!error,\n })}\n >\n <Text lineHeight=\"20px\" className={styles.apiKeysText}>\n {t(\"Settings:ApiKeysDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text\n className={classNames(\n styles.apiKeysText,",
@@ -1082,6 +1076,48 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/MainElementParameter.js",
       "line_number": 138,
       "context": "<Label className=\"label\" text={t(\"ButtonText\")} />\n <TextInput\n scale\n onChange={setButtonText}\n placeholder={t(\"SelectToPortal\", {\n productName: t(\"Common:ProductName\"),\n })}\n value={buttonValue}\n tabIndex={3}\n testId=\"button_mode_text_input\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
       "module": "/packages/client"
     },
     {
@@ -1338,8 +1374,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/wallet/WalletContainer.tsx",
-      "line_number": 140,
-      "context": "};\n \n return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n {t(\"WalletDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n \n {walletHelpUrl ? (\n <Link\n textDecoration=\"underline\"",
+      "line_number": 141,
+      "context": "return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n {t(\"WalletSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n {walletHelpUrl ? (\n <Link",
       "module": "/packages/client"
     },
     {
@@ -1494,13 +1530,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 207,
+      "line_number": 203,
       "context": "case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 207,
+      "line_number": 203,
       "context": "case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":",
       "module": "/packages/client"
     },
@@ -1568,12 +1604,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
       "line_number": 40,
       "context": "switch (stepIndex) {\n case 1:\n return t(\"Settings:SelectFileDescriptionGoogle\");\n case 2:\n return t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n });\n case 3:\n return isTypeSelectEmpty ? (\n <>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 576,
-      "context": "{\n id: \"portal-settings_catalog-javascript-sdk_portal\",\n key: \"8-1-6\",\n icon: \"\",\n link: \"docspace\",\n tKey: \"Common:ProductName\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_uploader\",\n key: \"8-1-7\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {
@@ -1656,7 +1686,7 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 330,
+      "line_number": 347,
       "context": "const barConfig = {\n parentElementId: \"main-bar\",\n headerText: t(\"Attention\"),\n text: `${t(\"BarMaintenanceDescription\", {\n targetDate,\n productName: `${logoText} ${t(\"Common:ProductName\")}`,\n })} ${t(\"BarMaintenanceDisclaimer\")}`,\n isMaintenance: true,\n onAction: () => {\n setMaintenanceExist(false);\n setSnackbarExist(false);",
       "module": "/packages/client"
     },

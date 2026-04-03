@@ -1,0 +1,28 @@
+{
+  "key_path": "CanceledOperation",
+  "content": "{{operationName}}: Canceled",
+  "content_en_sha1_hash": "e89489515717da332643277264650a70aa8da454",
+  "created_at": "2026-04-03T21:51:26.317Z",
+  "updated_at": "2026-04-03T21:55:25.912Z",
+  "comment": {
+    "text": "Displays a status message in the progress bar indicating that a specific operation (e.g., \"Uploading\") has been canceled. The text dynamically includes the name of the operation followed by a colon and the word \"Canceled.\"",
+    "is_auto": true,
+    "updated_at": "2026-04-03T21:55:25.912Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/UploadDataStore.js",
+      "line_number": 307,
+      "context": "this.primaryProgressDataStore.setPrimaryProgressBarData({\n operation: OPERATIONS_NAME.upload,\n completed: true,\n canceled: true,\n alert: true,\n label: i18n.t(\"Common:CanceledOperation\", {\n operationName: i18n.t(\"Files:Uploading\"),\n }),\n });\n \n toastr.info(i18n.t(\"Common:CancelUpload\"));",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

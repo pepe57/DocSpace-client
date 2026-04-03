@@ -3,7 +3,7 @@
   "content": "Close",
   "content_en_sha1_hash": "bbfa773e5a63a5ea58c9b6207e608ca0120e592a",
   "created_at": "2025-05-19T21:30:43.485Z",
-  "updated_at": "2026-03-20T09:07:45.476Z",
+  "updated_at": "2026-04-03T21:51:41.011Z",
   "comment": {
     "text": "This translation key is used for the label \"Close\", which represents a button that closes a dialog or modal window, found in various places such as buttons, dialogs, and modals.",
     "is_auto": true,
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 346,
+      "line_number": 351,
       "context": "testId=\"backup_list_restore_button\"\n />\n <Button\n className=\"close\"\n size={ButtonSize.normal}\n label={t(\"Common:CloseButton\")}\n onClick={onModalClose}\n testId=\"backup_list_close_button\"\n />\n </div>\n </div>",
       "module": "/packages/shared"
     }
