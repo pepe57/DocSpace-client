@@ -26,6 +26,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useTheme } from "styled-components";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
 
@@ -34,6 +35,7 @@ import { Consumer } from "@docspace/ui-kit/utils";
 
 import NoTransactionsIcon from "PUBLIC_DIR/images/no.transactions.react.svg";
 import NoTransactionsFilterIcon from "PUBLIC_DIR/images/no.transactions.filter.react.svg";
+import NoTransactionsFilterDarkIcon from "PUBLIC_DIR/images/no.transactions.filter.dark.theme.react.svg";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
@@ -55,6 +57,8 @@ const TransactionBody = ({
   hasAppliedDateFilter,
   isTransactionHistoryExist,
 }: TransactionHistoryProps) => {
+  const theme = useTheme();
+
   useViewEffect({
     view: viewAs!,
     setView: setViewAs!,
@@ -63,10 +67,10 @@ const TransactionBody = ({
 
   const { t } = useTranslation(["Payments", "Settings"]);
 
-  const icon = hasAppliedDateFilter ? (
+  const filterIcon = theme.isBase ? (
     <NoTransactionsFilterIcon />
   ) : (
-    <NoTransactionsIcon />
+    <NoTransactionsFilterDarkIcon />
   );
 
   const title = hasAppliedDateFilter
@@ -78,7 +82,7 @@ const TransactionBody = ({
 
   const emptyView = (
     <EmptyView
-      icon={icon}
+      icon={filterIcon}
       title={title}
       description={description}
       options={null}
@@ -109,3 +113,4 @@ export default inject(({ setup, settingsStore }: TStore) => {
     currentDeviceType,
   };
 })(observer(TransactionBody));
+

@@ -130,10 +130,16 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
       {isAlreadyPaid && isStripePortalAvailable ? (
         <div className={styles.buttonWrapper}>
           <Button
-            label={t("GoToStripe")}
+            label={
+              walletCustomerStatusNotActive
+                ? t("AddPaymentMethod")
+                : t("GoToStripe")
+            }
             size={ButtonSize.small}
             primary
-            onClick={goToStripePortal}
+            onClick={
+              walletCustomerStatusNotActive ? goLinkCard : goToStripePortal
+            }
             testId="go_to_stripe_button"
           />
         </div>

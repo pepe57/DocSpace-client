@@ -32,6 +32,7 @@ import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 
 import { getColorTheme } from "@/api/settings";
 import AuthClient from "./AuthClient";
+import CreatePortalClient from "./CreatePortalClient";
 
 export default async function AuthPage({
   searchParams,
@@ -48,7 +49,7 @@ export default async function AuthPage({
   const cookieStore = await cookies();
   const hasAuth = !!cookieStore.get("asc_auth_key");
 
-  if (hasAuth && redirectURL) {
+  if (hasAuth && redirectURL && providerName !== "createPortal") {
     redirect(redirectURL);
   }
 
@@ -82,13 +83,17 @@ export default async function AuthPage({
         }}
       >
         <FormWrapper id="auth-form">
-          <AuthClient
-            providerName={providerName}
-            redirectURL={redirectURL ?? null}
-            inviteKey={key ?? null}
-            emplType={emplType ?? null}
-            confirmHeader={confirmHeader}
-          />
+          {providerName === "createPortal" ? (
+            <CreatePortalClient />
+          ) : (
+            <AuthClient
+              providerName={providerName}
+              redirectURL={redirectURL ?? null}
+              inviteKey={key ?? null}
+              emplType={emplType ?? null}
+              confirmHeader={confirmHeader}
+            />
+          )}
         </FormWrapper>
       </div>
     </div>

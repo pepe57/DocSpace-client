@@ -113,7 +113,7 @@ const InviteQuotaWarningDialog = (props) => {
       <Text fontWeight={700}>
         {standalone
           ? t("LicenseExpired")
-          : t("BusinessPlanPaymentOverdue", {
+          : t("PlanPaymentOverdue", {
               planName: currentTariffPlanTitle,
             })}
       </Text>
@@ -228,3 +228,4 @@ export default inject(
     };
   },
 )(observer(withTranslation(["Payments", "Common"])(InviteQuotaWarningDialog)));
+
