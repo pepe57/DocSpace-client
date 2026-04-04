@@ -3,7 +3,7 @@
   "content": "Webhook details",
   "content_en_sha1_hash": "fab9b0a82d59909c30061f70e790f5909f513155",
   "created_at": "2025-05-19T21:30:49.870Z",
-  "updated_at": "2025-05-24T02:05:09.142Z",
+  "updated_at": "2026-04-03T21:51:41.091Z",
   "comment": {
     "text": "This translation key is used for the label of a dropdown menu that displays details about webhooks. It appears in a table view within the Webhook History section and contains the text \"Webhook details\" when displayed as an option.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader.js",
-      "line_number": 132,
+      "line_number": 128,
       "context": "isFill\n onClick={onBack}\n className=\"arrow-button\"\n />\n <Heading type=\"content\" truncate className=\"headline\">\n {t(\"WebhookDetails\")}\n </Heading>\n </div>\n \n <IconButton\n className=\"retry\"",
       "module": "/packages/client"
     },

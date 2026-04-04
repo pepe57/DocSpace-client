@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2026-03-31T15:18:45.868Z",
+  "updated_at": "2026-04-03T21:51:41.002Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete\" on a button in a file editor component, specifically within an avatar cropper. It appears as a button's text and title, allowing users to confirm deletion of an image.",
     "is_auto": true,
@@ -264,7 +264,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
-      "line_number": 403,
+      "line_number": 404,
       "context": "key: \"delete-link-separator\",\n isSeparator: true,\n },\n {\n key: \"delete-link-key\",\n label: link.canRevoke ? t(\"Common:RevokeLink\") : t(\"Common:Delete\"),\n icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,\n onClick: () => removeLink(link),\n },\n ];\n };",
       "module": "/packages/shared"
     },

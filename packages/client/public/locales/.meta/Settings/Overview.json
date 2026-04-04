@@ -1,0 +1,28 @@
+{
+  "key_path": "Overview",
+  "content": "Overview",
+  "content_en_sha1_hash": "0efc2e6be4c23b9a513d7ce0dcff8ed80e8912e7",
+  "created_at": "2026-04-03T21:51:36.622Z",
+  "updated_at": "2026-04-03T21:59:32.057Z",
+  "comment": {
+    "text": "This label is used for a navigation item within the Developer Tools menu. It identifies the link that directs users to the developer tools overview page.",
+    "is_auto": true,
+    "updated_at": "2026-04-03T21:59:32.057Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/Body/DeveloperToolsItems.tsx",
+      "line_number": 49,
+      "context": "const items = [\n {\n id: \"devtools-overview\",\n path: \"/developer-tools/overview\",\n pageType: PageType.devToolsOverview,\n // t(\"Settings:Overview\") - already translated in the parent component\n translationKey: \"Settings:Overview\",\n },\n {\n id: \"devtools-javascript-sdk\",\n path: \"/developer-tools/javascript-sdk\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

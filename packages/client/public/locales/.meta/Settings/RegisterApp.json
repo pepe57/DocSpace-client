@@ -1,0 +1,28 @@
+{
+  "key_path": "RegisterApp",
+  "content": "Register app",
+  "content_en_sha1_hash": "d377a3cb1713d903c61de93c2313f56ca7857d84",
+  "created_at": "2026-04-03T21:51:36.610Z",
+  "updated_at": "2026-04-03T21:58:40.335Z",
+  "comment": {
+    "text": "This text serves as the title for a card or link within the Developer Tools section of the Portal Settings. It refers to the action of registering a new application for OAuth integration.",
+    "is_auto": true,
+    "updated_at": "2026-04-03T21:58:40.335Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 115,
+      "context": "icon={<OAuthSvg />}\n title={t(\"OAuth:OAuth\")}\n description={t(\"Settings:OAuthDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/oauth\"\n color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />\n <Card\n icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

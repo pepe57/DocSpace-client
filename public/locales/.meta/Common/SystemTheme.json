@@ -2,18 +2,18 @@
   "key_path": "SystemTheme",
   "content": "Use system theme",
   "content_en_sha1_hash": "b416b727b7b81cc355879b99623709aaf02f49bb",
-  "created_at": "2025-05-19T21:30:53.388Z",
-  "updated_at": "2026-02-19T13:36:32.969Z",
+  "created_at": "2026-04-03T21:51:34.685Z",
+  "updated_at": "2026-04-03T21:53:02.141Z",
   "comment": {
-    "text": "This translation key is used for the \"Use system theme\" option on a user preference interface. It instructs users to apply the system's default theme settings.",
+    "text": "This text is an option in the interface theme settings, appearing as a selectable choice in a radio button group or checkbox. It allows users to set the application theme to automatically match their operating system's light or dark mode settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:48.842Z"
+    "updated_at": "2026-04-03T21:53:02.141Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.tsx",
-      "line_number": 110,
-      "context": "const isSystemTheme = currentTheme === ThemeKeys.SystemStr;\n const systemThemeValue = getSystemTheme();\n \n const systemThemeLabel = isDesktopClient\n ? t(\"Profile:DesktopTheme\")\n : t(\"Profile:SystemTheme\");\n const systemThemeDescriptionLabel = isDesktopClient\n ? t(\"Profile:DesktopThemeDescription\")\n : t(\"Profile:SystemThemeDescription\");\n \n return (",
+      "line_number": 36,
+      "context": "import { Text } from \"@docspace/ui-kit/components/text\";\n import { Checkbox } from \"@docspace/ui-kit/components/checkbox\";\n import { RadioButtonGroup } from \"@docspace/ui-kit/components/radio-button-group\";\n import { toastr } from \"@docspace/ui-kit/components/toast\";\n import { ThemeKeys } from \"@docspace/shared/enums\";\n import { getSystemTheme } from \"@docspace/ui-kit/utils/get-system-theme\";\n import { getEditorTheme } from \"@docspace/shared/utils/common\";\n import { hideLoader, showLoader } from \"@docspace/shared/utils/common\";\n import { TColorScheme } from \"@docspace/ui-kit/providers/theme/themes\";\n \n import ThemePreview from \"./ThemePreview\";",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"استخدم قالب النظام\" while understandable, is not the most natural or precise translation of 'Use system theme'. 'قالب' typically refers to a template or mold, rather than the system's overall visual theme. A more accurate translation would convey the idea of adopting the system's appearance.",
-          "suggestion": "استخدم مظهر النظام"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -57,13 +51,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Wie im System' doesn't accurately convey the meaning of 'Use system theme'. It translates to 'Like in the system' which implies following the system's appearance rather than utilizing it. A more appropriate translation would emphasize adopting the system's theme.",
-          "suggestion": "Systemthema verwenden"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -105,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation 'システムテーマのように' translates to 'like system theme' which doesn't accurately convey the meaning of 'Use system theme'. It implies a comparison rather than a directive to adopt the system theme.",
-          "suggestion": "システムテーマを使用する (Shisutemu teema o shiyou suru) - This translates to 'Use system theme'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -123,25 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ໃຊ້ ລະບົບ ຫົວຂໍ້' while containing the correct words, doesn't quite capture the nuance of 'Use system theme'. A more accurate translation would convey the action of adopting or utilizing the system's theme.",
-          "suggestion": "ນໍາໃຊ້ ຫົວຂໍ້ ລະບົບ (Nam sai hua tho rabop)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Izmantot sistēmas dizainu\" is understandable, \"dizains\" (design) isn't the most accurate translation of \"theme\" in this context. A better translation would convey the idea of a visual appearance or style.",
-          "suggestion": "Izmantot sistēmas tēmu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Utilizare temă de sistem\" is a literal translation but sounds unnatural in Romanian. A more natural phrasing would be 'Folosește tema sistemului' or 'Aplică tema sistemului'.",
-          "suggestion": "Folosește tema sistemului"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -199,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

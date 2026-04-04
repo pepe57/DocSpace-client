@@ -1,6 +1,7 @@
 const { ollamaConfig } = require("../config/config");
 const fsUtils = require("../utils/fsUtils");
 const { Ollama } = require("ollama");
+const { verifyOllamaConnection, withTimeout } = require("../utils/ollamaUtils");
 
 // Add debugger to help diagnose connection issues
 const DEBUG = true;
@@ -8,27 +9,8 @@ function debug(...args) {
   if (DEBUG) console.log("[OLLAMA DEBUG]", ...args);
 }
 
-// Helper to verify Ollama connection
-async function verifyOllamaConnection() {
-  debug(`Verifying Ollama connection to ${ollamaConfig.apiUrl}`);
-  try {
-    const response = await fetch(`${ollamaConfig.apiUrl}/api/tags`);
-    if (!response.ok) {
-      debug(
-        `Ollama connection failed: ${response.status} ${response.statusText}`
-      );
-      return false;
-    }
-    const data = await response.json();
-    debug(
-      `Ollama connection successful, found ${data.models?.length || 0} models`
-    );
-    return true;
-  } catch (error) {
-    debug(`Ollama connection error: ${error.message}`);
-    return false;
-  }
-}
+// Active project translation jobs: jobId -> { cancelled: boolean }
+const activeJobs = new Map();
 
 /**
  * Ollama integration route handler
@@ -526,6 +508,225 @@ async function routes(fastify, options) {
       });
     }
   });
+
+  // Translate all untranslated keys in every namespace of a project
+  fastify.post("/translate/project", async (request, reply) => {
+    const { projectName, sourceLanguage, targetLanguage, model, jobId } =
+      request.body;
+
+    if (!model || !jobId) {
+      return reply
+        .code(400)
+        .send({ success: false, error: "model and jobId are required" });
+    }
+
+    // Resolve target languages: "all" expands to every non-source language
+    let targetLanguages;
+    if (targetLanguage === "all") {
+      try {
+        const allLangs = await fsUtils.getAvailableLanguages(projectName);
+        targetLanguages = allLangs.filter((l) => l !== sourceLanguage);
+      } catch (err) {
+        return reply
+          .code(404)
+          .send({ success: false, error: "Project not found" });
+      }
+    } else {
+      targetLanguages = [targetLanguage];
+    }
+
+    // Get all namespaces for the source language
+    let namespaces;
+    try {
+      namespaces = await fsUtils.getNamespaces(projectName, sourceLanguage);
+    } catch (err) {
+      return reply
+        .code(404)
+        .send({ success: false, error: "Project or language not found" });
+    }
+
+    if (!namespaces || namespaces.length === 0) {
+      return reply
+        .code(404)
+        .send({ success: false, error: "No namespaces found for this project" });
+    }
+
+    // Pre-load source translations once, then build per-language queues
+    const sourceByNamespace = {};
+    for (const namespace of namespaces) {
+      const src = await fsUtils.readTranslationFile(
+        projectName,
+        sourceLanguage,
+        namespace
+      );
+      if (src) sourceByNamespace[namespace] = src;
+    }
+
+    // Count total keys across all languages
+    let totalKeys = 0;
+    const langQueues = {};
+    for (const lang of targetLanguages) {
+      const queue = [];
+      for (const namespace of namespaces) {
+        const src = sourceByNamespace[namespace];
+        if (!src) continue;
+
+        const tgt =
+          (await fsUtils.readTranslationFile(projectName, lang, namespace)) ||
+          {};
+        const flatSrc = flattenObject(src);
+        const flatTgt = flattenObject(tgt);
+        const missingKeys = Object.keys(flatSrc).filter(
+          (k) => typeof flatSrc[k] === "string" && !flatTgt[k]
+        );
+
+        if (missingKeys.length > 0) {
+          queue.push({ namespace, sourceTranslations: src, targetTranslations: tgt, missingKeys });
+          totalKeys += missingKeys.length;
+        }
+      }
+      langQueues[lang] = queue;
+    }
+
+    // Register job and respond immediately
+    activeJobs.set(jobId, { cancelled: false });
+
+    reply.send({
+      success: true,
+      message: "Project translation started",
+      data: { jobId, totalKeys, languageCount: targetLanguages.length },
+    });
+
+    fastify.io.emit("project-translation:started", {
+      jobId,
+      projectName,
+      targetLanguage,
+      targetLanguages,
+      totalKeys,
+      languageCount: targetLanguages.length,
+    });
+
+    let completedKeys = 0;
+
+    try {
+      for (const lang of targetLanguages) {
+        if (activeJobs.get(jobId)?.cancelled) break;
+
+        fastify.io.emit("project-translation:language-start", {
+          jobId,
+          projectName,
+          currentLanguage: lang,
+          totalKeys,
+        });
+
+        for (const { namespace, sourceTranslations, targetTranslations, missingKeys } of langQueues[lang]) {
+          if (activeJobs.get(jobId)?.cancelled) break;
+
+          fastify.io.emit("project-translation:namespace-start", {
+            jobId,
+            projectName,
+            currentLanguage: lang,
+            namespace,
+            namespaceKeys: missingKeys.length,
+          });
+
+          for (const keyPath of missingKeys) {
+            if (activeJobs.get(jobId)?.cancelled) break;
+
+            const keyParts = keyPath.split(".");
+            let sourceText = sourceTranslations;
+            for (const part of keyParts) {
+              sourceText = sourceText?.[part];
+            }
+            if (typeof sourceText !== "string") continue;
+
+            try {
+              const translatedText = await translateText(
+                sourceText,
+                sourceLanguage,
+                lang,
+                model
+              );
+
+              let cursor = targetTranslations;
+              for (let i = 0; i < keyParts.length - 1; i++) {
+                if (!cursor[keyParts[i]]) cursor[keyParts[i]] = {};
+                cursor = cursor[keyParts[i]];
+              }
+              cursor[keyParts[keyParts.length - 1]] = translatedText;
+
+              completedKeys++;
+              fastify.io.emit("project-translation:progress", {
+                jobId,
+                projectName,
+                currentLanguage: lang,
+                namespace,
+                currentKey: keyPath,
+                completedKeys,
+                totalKeys,
+              });
+            } catch (err) {
+              fastify.log.error(
+                `project-translation: failed on ${lang}/${namespace}/${keyPath}: ${err.message}`
+              );
+            }
+          }
+
+          await fsUtils.writeTranslationFile(
+            projectName,
+            lang,
+            namespace,
+            targetTranslations
+          );
+        }
+      }
+
+      const wasCancelled = activeJobs.get(jobId)?.cancelled;
+      activeJobs.delete(jobId);
+
+      if (wasCancelled) {
+        fastify.io.emit("project-translation:stopped", {
+          jobId,
+          projectName,
+          completedKeys,
+          totalKeys,
+        });
+      } else {
+        fastify.io.emit("project-translation:completed", {
+          jobId,
+          projectName,
+          completedKeys,
+          totalKeys,
+        });
+      }
+    } catch (error) {
+      activeJobs.delete(jobId);
+      fastify.log.error(error);
+      fastify.io.emit("project-translation:error", {
+        jobId,
+        projectName,
+        error: error.message,
+      });
+    }
+  });
+
+  // Stop an active project translation
+  fastify.post("/translate/project/stop", async (request, reply) => {
+    const { jobId } = request.body;
+
+    if (!jobId) {
+      return reply
+        .code(400)
+        .send({ success: false, error: "jobId is required" });
+    }
+
+    const job = activeJobs.get(jobId);
+    if (job) {
+      job.cancelled = true;
+    }
+
+    return { success: true };
+  });
 }
 
 /**
@@ -708,23 +909,20 @@ async function translateText(text, sourceLanguage, targetLanguage, model) {
   // Please maintain any formatting, placeholders (like {{variable}}), and HTML tags if present.
   // Return only the translated text without any commentary or explanations.\n\n${text}`;
 
-  const prompt = `# You are a professional translator.
+  const prompt = `You are a professional software localization specialist for ONLYOFFICE DocSpace, a document collaboration platform.
 
-## Task: Translate from ${sourceInfo.name} to ${targetInfo.name}
+Translate the UI string below from ${sourceInfo.name} to ${targetInfo.name}.
+${targetInfo.isRightToLeft ? "The target language is written right-to-left (RTL).\n" : ""}
+Rules:
+- Use formal/professional tone appropriate for business software UI
+- Preserve all i18next interpolations exactly as-is: {{variable}}, {{variable, modifier}}, <N>text</N>
+- Preserve all HTML tags and attributes
+- Preserve line breaks and whitespace structure
+- Never add explanations, notes, or alternative translations
+- If the string is a proper noun, brand name, or technical term with no equivalent, keep it in the original language
+- If translation is impossible, respond with exactly: NO_TRANSLATION
 
-### Rules:
-${
-  targetInfo.isRightToLeft
-    ? "- Note that the target language is written right-to-left."
-    : ""
-}
-- Preserve all formatting
-- Keep {{variables}} unchanged
-- Keep HTML tags intact
-- Return only the translation
-- If you don't know the translation, return "NO_TRANSLATION"
-
-### Text to translate:
+String to translate:
 ${text}`;
 
   try {
@@ -749,16 +947,20 @@ ${text}`;
     // Generate translation using ollama client
     debug("Sending translation request...");
 
-    const { response } = await ollamaClient.generate({
-      model,
-      prompt,
-      stream: false,
-      options: {
-        temperature: 0, // Lower temperature for more accurate translations
-      },
-    });
+    const { response } = await withTimeout(
+      ollamaClient.generate({
+        model,
+        prompt,
+        stream: false,
+        options: {
+          temperature: 0, // Lower temperature for more accurate translations
+          num_ctx: 8192,
+        },
+      }),
+      ollamaConfig.requestTimeout
+    );
 
-    if (response === "NO_TRANSLATION") {
+    if (response.trim() === "NO_TRANSLATION") {
       throw new Error("Translation not available");
     }
 
@@ -807,28 +1009,6 @@ async function validateTranslation(
     const sourceInfo = getLanguageInfo(sourceLanguage);
     const targetInfo = getLanguageInfo(targetLanguage);
 
-    // Create a detailed prompt for validation
-    const prompt = `You are a professional translation validator.
-
-Source language: ${sourceInfo.name}
-Target language: ${targetInfo.name}
-
-Source text: "${sourceText}"
-Translated text: "${targetText}"
-
-Your task is to analyze if the translation is accurate and identify any errors.
-
-Provide your response in this exact JSON format with no extra text:
-{
-  "isValid": true/false,
-  "errors": [{ "type": "error_type", "message": "detailed error description" }],
-  "suggestions": ["suggested correction if there are errors"],
-  "rating": 1-5 score of translation quality
-}
-
-Error types can be: "missing_content", "mistranslation", "grammar", "style", "cultural_context".
-Keep your analysis concise and precise.`;
-
     // Verify Ollama connection
     const isConnected = await verifyOllamaConnection();
     if (!isConnected) {
@@ -842,22 +1022,58 @@ Keep your analysis concise and precise.`;
     // Create Ollama client
     const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
 
-    // Generate validation using ollama client
+    // Generate validation using chat API with system role for better instruction following
     debug("Sending validation request...");
 
-    const { response } = await ollamaClient.generate({
-      model,
-      prompt,
-      stream: false,
-      options: {
-        temperature: 0, // Lower temperature for more consistent analysis
-      },
-    });
+    const { message } = await withTimeout(
+      ollamaClient.chat({
+        model,
+        messages: [
+          {
+            role: "system",
+            content: `You are a professional software localization validator for ONLYOFFICE DocSpace UI strings.
+Respond only with valid JSON. Never add markdown, explanations, or text outside the JSON object.`,
+          },
+          {
+            role: "user",
+            content: `Validate this UI string translation.
+
+Source (${sourceInfo.name}): "${sourceText}"
+Translation (${targetInfo.name}): "${targetText}"
+
+Rules for validation:
+- i18next patterns like {{variable}}, <N>text</N> must be preserved unchanged
+- Proper nouns and brand names may remain untranslated — this is acceptable
+- Evaluate meaning accuracy, grammar, and UI appropriateness
+
+Respond with this JSON only:
+{
+  "isValid": true or false,
+  "errors": [{ "type": "missing_content|mistranslation|grammar|style|cultural_context|placeholder_mismatch", "message": "description" }],
+  "suggestions": ["corrected text if needed"],
+  "rating": 1 to 5
+}`,
+          },
+        ],
+        stream: false,
+        options: {
+          temperature: 0, // Lower temperature for more consistent analysis
+          num_ctx: 8192,
+        },
+      }),
+      ollamaConfig.requestTimeout
+    );
+
+    const response = message.content;
 
     // Parse the JSON response
     try {
-      // Extract JSON from the response (in case there's any extra text)
-      const jsonMatch = response.match(/\{[\s\S]*\}/);
+      // Strip markdown code fences if present, then extract JSON object
+      const cleaned = response
+        .replace(/^```(?:json)?\s*/i, "")
+        .replace(/\s*```$/, "")
+        .trim();
+      const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
       if (!jsonMatch) {
         throw new Error("Invalid JSON format in response");
       }
