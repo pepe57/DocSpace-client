@@ -16,7 +16,7 @@ const {
 } = require("../config/config");
 const axios = require("axios");
 
-const MODEL = process.env.OLLAMA_MODEL || "gemma4:26b";
+const MODEL = process.env.OLLAMA_MODEL || "gemma4:latest";
 const REQUEST_TIMEOUT_MS =
   Number.parseInt(process.env.OLLAMA_TIMEOUT_MS, 10) || 90000; // default 90s timeout
 
