@@ -930,8 +930,14 @@ Your task is to translate UI strings from ${sourceInfo.name} to ${targetInfo.nam
 ${targetInfo.isRightToLeft ? "The target language is written right-to-left (RTL).\n" : ""}
 Rules:
 - Use formal/professional tone appropriate for business software UI
-- Preserve all i18next interpolations exactly as-is: {{variable}}, {{variable, modifier}}, <N>text</N>
-- Preserve all HTML tags and attributes
+- Preserve all i18next interpolations exactly as-is: {{variable}}, {{variable, modifier}}
+- Numbered tags like <0>, <1>, </0>, </1> are React Trans component slots.
+  Rules for Trans tags:
+  • Translate only the text between the opening and closing tag
+  • Place </N> immediately after the translated content that corresponds to the original closing tag position — do not extend the tag to cover more of the sentence
+  • Never drop, merge, or move a closing tag
+  • Example: "Click <1>here</1> to continue" → "Klicken Sie <1>hier</1>, um fortzufahren" (not "Klicken Sie <1>hier, um fortzufahren</1>")
+- Copy all other HTML tags character-for-character — do not add, remove, or modify any tag names or attributes. Never replace a tag with whitespace or punctuation. Example: "First line.<br/>Second line." must stay as "Первая строка.<br/>Вторая строка." — not "Первая строка. Вторая строка."
 - Preserve line breaks and whitespace structure
 - Respond with the translation only — no explanations, notes, or alternatives
 - If the string is a proper noun, brand name, or technical term with no equivalent, keep it in the original language
@@ -984,7 +990,6 @@ Rules:
           stream: true,
           options: {
             temperature: 0.1, // 0 causes infinite thinking loops in reasoning models
-            num_predict: 500, // translations are short; cap to prevent runaway generation
           },
         }),
         signal: abortController.signal,
@@ -1027,6 +1032,8 @@ Rules:
       clearTimeout(timeoutId);
     }
 
+    debug(`Raw model response:\n${fullResponse}\n`);
+
     // Log thinking tokens if the model supports chain-of-thought (e.g. gemma4, qwen3, deepseek-r1)
     const thinkMatch = fullResponse.match(/<think>([\s\S]*?)<\/think>/i);
     if (thinkMatch) {
@@ -1039,8 +1046,14 @@ Rules:
       .replace(/<think>[\s\S]*/gi, "")            // incomplete: <think>... (no closing tag)
       .trim();
 
-    if (cleanedResponse === "NO_TRANSLATION" || !cleanedResponse) {
-      return null; // model declined to translate — not an error
+    debug(`Cleaned response:\n${cleanedResponse}\n`);
+
+    if (cleanedResponse === "NO_TRANSLATION") {
+      return null; // model explicitly declined — caller should fall back to source text
+    }
+
+    if (!cleanedResponse) {
+      throw new Error("Model returned empty response");
     }
 
     return cleanedResponse;
