@@ -104,7 +104,7 @@ async function routes(fastify, options) {
         targetText,
         sourceLanguage,
         targetLanguage,
-        model
+        model,
       );
 
       // Send notification that validation is completed
@@ -152,13 +152,13 @@ async function routes(fastify, options) {
       const sourceTranslations = await fsUtils.readTranslationFile(
         projectName,
         sourceLanguage,
-        namespace
+        namespace,
       );
 
       const targetTranslations = await fsUtils.readTranslationFile(
         projectName,
         targetLanguage,
-        namespace
+        namespace,
       );
 
       if (!sourceTranslations) {
@@ -187,7 +187,7 @@ async function routes(fastify, options) {
             typeof flattenedSource[key] === "string" &&
             typeof flattenedTarget[key] === "string" &&
             flattenedSource[key] &&
-            flattenedTarget[key]
+            flattenedTarget[key],
         )
         .slice(0, maxKeys);
 
@@ -219,7 +219,7 @@ async function routes(fastify, options) {
             targetText,
             sourceLanguage,
             targetLanguage,
-            model
+            model,
           );
 
           results[key] = validationResult;
@@ -312,7 +312,7 @@ async function routes(fastify, options) {
       const sourceTranslations = await fsUtils.readTranslationFile(
         projectName,
         sourceLanguage,
-        namespace
+        namespace,
       );
 
       if (!sourceTranslations) {
@@ -353,15 +353,18 @@ async function routes(fastify, options) {
         sourceText,
         sourceLanguage,
         targetLanguage,
-        model
+        model,
       );
+
+      // Model declined to translate (NO_TRANSLATION) — fall back to source text
+      const finalText = translatedText ?? sourceText;
 
       // Update the translation file
       const targetTranslations =
         (await fsUtils.readTranslationFile(
           projectName,
           targetLanguage,
-          namespace
+          namespace,
         )) || {};
 
       // Update the key in the target translations
@@ -375,14 +378,14 @@ async function routes(fastify, options) {
       }
 
       const finalKey = keyParts[keyParts.length - 1];
-      current[finalKey] = translatedText;
+      current[finalKey] = finalText;
 
       // Save the updated translation file
       const success = await fsUtils.writeTranslationFile(
         projectName,
         targetLanguage,
         namespace,
-        targetTranslations
+        targetTranslations,
       );
 
       if (!success) {
@@ -397,14 +400,14 @@ async function routes(fastify, options) {
         targetLanguage,
         namespace,
         key,
-        value: translatedText,
+        value: finalText,
       });
 
       return {
         success: true,
         data: {
           sourceText,
-          translatedText,
+          translatedText: finalText,
         },
       };
     } catch (error) {
@@ -434,7 +437,7 @@ async function routes(fastify, options) {
       const sourceTranslations = await fsUtils.readTranslationFile(
         projectName,
         sourceLanguage,
-        namespace
+        namespace,
       );
 
       if (!sourceTranslations) {
@@ -448,7 +451,7 @@ async function routes(fastify, options) {
         (await fsUtils.readTranslationFile(
           projectName,
           targetLanguage,
-          namespace
+          namespace,
         )) || {};
 
       // Start translation process asynchronously
@@ -479,7 +482,7 @@ async function routes(fastify, options) {
         targetTranslations,
         model,
         "", // Start with empty key prefix
-        0 // Start counter at 0
+        0, // Start counter at 0
       );
 
       // Save the final translations
@@ -487,7 +490,7 @@ async function routes(fastify, options) {
         projectName,
         targetLanguage,
         namespace,
-        targetTranslations
+        targetTranslations,
       );
 
       if (!ok) {
@@ -548,7 +551,10 @@ async function routes(fastify, options) {
     if (!namespaces || namespaces.length === 0) {
       return reply
         .code(404)
-        .send({ success: false, error: "No namespaces found for this project" });
+        .send({
+          success: false,
+          error: "No namespaces found for this project",
+        });
     }
 
     // Pre-load source translations once, then build per-language queues
@@ -557,7 +563,7 @@ async function routes(fastify, options) {
       const src = await fsUtils.readTranslationFile(
         projectName,
         sourceLanguage,
-        namespace
+        namespace,
       );
       if (src) sourceByNamespace[namespace] = src;
     }
@@ -577,11 +583,16 @@ async function routes(fastify, options) {
         const flatSrc = flattenObject(src);
         const flatTgt = flattenObject(tgt);
         const missingKeys = Object.keys(flatSrc).filter(
-          (k) => typeof flatSrc[k] === "string" && !flatTgt[k]
+          (k) => typeof flatSrc[k] === "string" && !flatTgt[k],
         );
 
         if (missingKeys.length > 0) {
-          queue.push({ namespace, sourceTranslations: src, targetTranslations: tgt, missingKeys });
+          queue.push({
+            namespace,
+            sourceTranslations: src,
+            targetTranslations: tgt,
+            missingKeys,
+          });
           totalKeys += missingKeys.length;
         }
       }
@@ -619,7 +630,12 @@ async function routes(fastify, options) {
           totalKeys,
         });
 
-        for (const { namespace, sourceTranslations, targetTranslations, missingKeys } of langQueues[lang]) {
+        for (const {
+          namespace,
+          sourceTranslations,
+          targetTranslations,
+          missingKeys,
+        } of langQueues[lang]) {
           if (activeJobs.get(jobId)?.cancelled) break;
 
           fastify.io.emit("project-translation:namespace-start", {
@@ -645,7 +661,7 @@ async function routes(fastify, options) {
                 sourceText,
                 sourceLanguage,
                 lang,
-                model
+                model,
               );
 
               let cursor = targetTranslations;
@@ -667,7 +683,7 @@ async function routes(fastify, options) {
               });
             } catch (err) {
               fastify.log.error(
-                `project-translation: failed on ${lang}/${namespace}/${keyPath}: ${err.message}`
+                `project-translation: failed on ${lang}/${namespace}/${keyPath}: ${err.message}`,
               );
             }
           }
@@ -676,7 +692,7 @@ async function routes(fastify, options) {
             projectName,
             lang,
             namespace,
-            targetTranslations
+            targetTranslations,
           );
         }
       }
@@ -742,7 +758,7 @@ async function translateNestedKeys(
   targetObj,
   model,
   prefix,
-  counter
+  counter,
 ) {
   for (const [key, value] of Object.entries(sourceObj)) {
     const fullKey = prefix ? `${prefix}.${key}` : key;
@@ -764,7 +780,7 @@ async function translateNestedKeys(
           value,
           sourceLanguage,
           targetLanguage,
-          model
+          model,
         );
 
         // Set the translated text in the target object
@@ -783,7 +799,7 @@ async function translateNestedKeys(
         current[finalKey] = translatedText;
       } catch (error) {
         fastify.log.error(
-          `Failed to translate key ${fullKey}: ${error.message}`
+          `Failed to translate key ${fullKey}: ${error.message}`,
         );
         // Continue with other keys even if one fails
       }
@@ -804,7 +820,7 @@ async function translateNestedKeys(
         targetObj[key],
         model,
         fullKey,
-        counter
+        counter,
       );
     }
   }
@@ -909,21 +925,19 @@ async function translateText(text, sourceLanguage, targetLanguage, model) {
   // Please maintain any formatting, placeholders (like {{variable}}), and HTML tags if present.
   // Return only the translated text without any commentary or explanations.\n\n${text}`;
 
-  const prompt = `You are a professional software localization specialist for ONLYOFFICE DocSpace, a document collaboration platform.
-
-Translate the UI string below from ${sourceInfo.name} to ${targetInfo.name}.
+  const systemPrompt = `You are a professional software localization specialist for ONLYOFFICE DocSpace, a document collaboration platform.
+Your task is to translate UI strings from ${sourceInfo.name} to ${targetInfo.name}.
 ${targetInfo.isRightToLeft ? "The target language is written right-to-left (RTL).\n" : ""}
 Rules:
 - Use formal/professional tone appropriate for business software UI
 - Preserve all i18next interpolations exactly as-is: {{variable}}, {{variable, modifier}}, <N>text</N>
 - Preserve all HTML tags and attributes
 - Preserve line breaks and whitespace structure
-- Never add explanations, notes, or alternative translations
+- Respond with the translation only — no explanations, notes, or alternatives
 - If the string is a proper noun, brand name, or technical term with no equivalent, keep it in the original language
-- If translation is impossible, respond with exactly: NO_TRANSLATION
+- If translation is impossible, respond with exactly: NO_TRANSLATION`;
 
-String to translate:
-${text}`;
+  const userPrompt = text;
 
   try {
     // First verify Ollama connection
@@ -934,44 +948,110 @@ ${text}`;
 
     // Configure Ollama API settings
     debug(
-      `Connecting to Ollama API at: ${ollamaConfig.apiUrl} for translation`
+      `Connecting to Ollama API at: ${ollamaConfig.apiUrl} for translation`,
     );
     debug(`Using model: ${model}`);
     debug(
-      `Translating text of length ${text.length} from ${sourceInfo.name} (${sourceLanguage}) to ${targetInfo.name} (${targetLanguage})`
+      `Translating text of length ${text.length} from ${sourceInfo.name} (${sourceLanguage}) to ${targetInfo.name} (${targetLanguage})`,
     );
 
-    // Create a new Ollama client instance
-    const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
+    // Generate translation using streaming.
+    // The timeout applies only to the first token (covers model cold-start / loading).
+    // Subsequent tokens stream in quickly once generation begins.
+    debug(`System prompt:\n${systemPrompt}\n\nUser prompt:\n${userPrompt}\n`);
+    debug("Sending translation request (streaming)...");
 
-    // Generate translation using ollama client
-    debug("Sending translation request...");
-
-    const { response } = await withTimeout(
-      ollamaClient.generate({
-        model,
-        prompt,
-        stream: false,
-        options: {
-          temperature: 0, // Lower temperature for more accurate translations
-          num_ctx: 8192,
-        },
-      }),
-      ollamaConfig.requestTimeout
+    // Use raw fetch → /api/chat to completely bypass the Ollama JS library.
+    // Gives us full control over timeouts via AbortController.
+    debug("Step 1: sending fetch to /api/chat...");
+    const abortController = new AbortController();
+    const timeoutId = setTimeout(
+      () => abortController.abort(new Error(`Timed out after ${ollamaConfig.requestTimeout}ms`)),
+      ollamaConfig.requestTimeout,
     );
 
-    if (response.trim() === "NO_TRANSLATION") {
-      throw new Error("Translation not available");
+    let fullResponse = "";
+    try {
+      const httpResponse = await fetch(`${ollamaConfig.apiUrl}/api/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model,
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: userPrompt },
+          ],
+          stream: true,
+          options: {
+            temperature: 0.1, // 0 causes infinite thinking loops in reasoning models
+            num_predict: 500, // translations are short; cap to prevent runaway generation
+          },
+        }),
+        signal: abortController.signal,
+      });
+
+      debug(`Step 2: HTTP ${httpResponse.status}, reading stream...`);
+
+      if (!httpResponse.ok) {
+        throw new Error(`Ollama HTTP error: ${httpResponse.status} ${httpResponse.statusText}`);
+      }
+
+      const reader = httpResponse.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      let tokenCount = 0;
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() ?? "";
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          try {
+            const data = JSON.parse(line);
+            const token = data.message?.content ?? "";
+            if (token) {
+              if (tokenCount === 0) debug("Step 3: first token received");
+              tokenCount++;
+              fullResponse += token;
+            }
+          } catch {
+            // skip malformed NDJSON lines
+          }
+        }
+      }
+      debug(`Step 4: stream done, ${tokenCount} tokens collected`);
+    } finally {
+      clearTimeout(timeoutId);
     }
 
-    return response.trim();
+    // Log thinking tokens if the model supports chain-of-thought (e.g. gemma4, qwen3, deepseek-r1)
+    const thinkMatch = fullResponse.match(/<think>([\s\S]*?)<\/think>/i);
+    if (thinkMatch) {
+      debug(`Model thinking:\n${thinkMatch[1].trim()}`);
+    }
+
+    // Strip thinking tokens — both complete blocks and truncated ones (hit num_predict limit)
+    const cleanedResponse = fullResponse
+      .replace(/<think>[\s\S]*?<\/think>/gi, "") // complete: <think>...</think>
+      .replace(/<think>[\s\S]*/gi, "")            // incomplete: <think>... (no closing tag)
+      .trim();
+
+    if (cleanedResponse === "NO_TRANSLATION" || !cleanedResponse) {
+      return null; // model declined to translate — not an error
+    }
+
+    return cleanedResponse;
   } catch (error) {
     debug("Translation error details:", {
       message: error.message,
       name: error.name,
       code: error.code,
       stack: error.stack,
-      prompt,
+      systemPrompt,
+      userPrompt,
     });
 
     console.error("Translation error:", error);
@@ -1002,7 +1082,7 @@ async function validateTranslation(
   targetText,
   sourceLanguage,
   targetLanguage,
-  model
+  model,
 ) {
   try {
     // Get language information for better context
@@ -1061,7 +1141,7 @@ Respond with this JSON only:
           num_ctx: 8192,
         },
       }),
-      ollamaConfig.requestTimeout
+      ollamaConfig.requestTimeout,
     );
 
     const response = message.content;
@@ -1121,3 +1201,4 @@ Respond with this JSON only:
 }
 
 module.exports = routes;
+
