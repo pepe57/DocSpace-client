@@ -40,5 +40,9 @@
   "ViewerInfo": "معلومات العارض",
   "WatermarkPreview": "معاينة العلامة المائية",
   "WatermarkPreviewHelp": "تظهر هذه المعاينة تقريبًا كيف ستبدو العلامة المائية في ملفاتك.",
-  "ConfigureDatabaseConnection": "تكوين اتصال قاعدة البيانات في التكامل ← خدمات الطرف الثالث"
+  "ConfigureDatabaseConnection": "تكوين اتصال قاعدة البيانات في التكامل ← خدمات الطرف الثالث",
+  "GoToIntegrations": "الانتقال إلى التكاملات",
+  "NeedMoreIntegrations": "هل تحتاج إلى المزيد من التكاملات؟",
+  "NeedMoreIntegrationsDescription": "استخدم الـ webhooks لإرسال البيانات إلى نظامك الخاص، أو ربط النماذج بآلاف الخدمات عبر Zapier.",
+  "NoDatabaseConnections": "لم يتم تهيئة أي اتصالات بقاعدة البيانات"
 }

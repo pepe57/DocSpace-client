@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} bylo úspěšně připojeno jako notifikační kanál. Nyní tam budete dostávat aktualizace.",
   "SuccessDisconnected": "{{serviceName}} bylo úspěšně odpojeno jako notifikační kanál. Tam nebudou odesílány žádné další notifikace.",
   "UsefulTips": "Užitečné tipy pro {{productName}}",
-  "UsefulTipsDescription": "Získejte užitečné příručky o {{productName}}"
+  "UsefulTipsDescription": "Získejte užitečné příručky o {{productName}}",
+  "ActionsWithFilesDescription": "Znacení zvýrazní aktivitu souborů — nahrání, úpravy nebo sdílení — v sekcích {{rooms}}, {{shared}}, {{documents}} a {{aiAgents}}.",
+  "RoomsActivityDescription": "Získejte okamžité e-mailové upozornění na nové sdílené soubory/složky a aktivitu uvnitř vašich {{rooms}} a {{aiAgents}}.",
+  "RoomUpdateNotify": "Sdílený obsah, {{rooms}} a aktivita {{aiAgents}}"
 }

@@ -8,5 +8,7 @@
   "ViewAllTemplates": "Alle Vorlagen ansehen",
   "ErrorViewHeader": "Die Galerie ist vorübergehend nicht verfügbar",
   "SelectTemplate": "Vorlage auswählen",
-  "UploadGallery": "In die Galerie hochladen"
+  "UploadGallery": "In die Galerie hochladen",
+  "GalleryTitle": "{{organizationName}} Vorlagen-Galerie",
+  "SubmitToGalleryDialogMainInfo": "Reichen Sie Ihre Vorlage in die öffentliche Galerie ein, damit andere sie in ihrer Arbeit verwenden können. Sobald die Vorlage die Moderation bestanden hat, werden Sie über Ihren Beitrag benachrichtigt und belohnt."
 }

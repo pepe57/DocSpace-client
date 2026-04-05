@@ -40,5 +40,9 @@
   "ViewerInfo": "Katsojan tiedot",
   "WatermarkPreview": "Vesileiman esikatselu",
   "WatermarkPreviewHelp": "Tämä esikatselu näyttää karkeasti kuinka vesileima näytetään tiedostoissasi.",
-  "ConfigureDatabaseConnection": "Määritä tietokantayhteys kohdassa Integraatio → Kolmannen osapuolen palvelut"
+  "ConfigureDatabaseConnection": "Määritä tietokantayhteys kohdassa Integraatio → Kolmannen osapuolen palvelut",
+  "GoToIntegrations": "Siirry integraatioihin",
+  "NeedMoreIntegrations": "Tarvitsetko lisää integraatioita?",
+  "NeedMoreIntegrationsDescription": "Käytä webhooks-tekniikkaa lähettämään tiedot omalle järjestelmällesi, tai yhdistä lomakkeet tuhansiin palveluihin Zapierin kautta.",
+  "NoDatabaseConnections": "Ei määritettyjä tietokantayhteyksiä"
 }

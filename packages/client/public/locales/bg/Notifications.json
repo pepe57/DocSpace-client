@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} беше успешно свързан като канал за известия. Сега ще получавате актуализации там.",
   "SuccessDisconnected": "{{serviceName}} беше успешно премахнат като канал за известия. Известия вече няма да се изпращат там.",
   "UsefulTips": "Полезни съвети за {{productName}}",
-  "UsefulTipsDescription": "Поучавайте полезни напътствия за {{productName}}"
+  "UsefulTipsDescription": "Поучавайте полезни напътствия за {{productName}}",
+  "ActionsWithFilesDescription": "Бейджве ще показват активността на файловете — качвания, редактиране или споделяния — в секциите {{rooms}}, {{shared}}, {{documents}} и {{aiAgents}}.",
+  "RoomsActivityDescription": "Получавайте незабавни известия по имейл за нови споделени файлове/доки и активност в вашите {{rooms}} и {{aiAgents}}.",
+  "RoomUpdateNotify": "Сподеян съдържание, {{rooms}} и активност на {{aiAgents}}"
 }

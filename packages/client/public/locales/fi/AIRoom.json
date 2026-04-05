@@ -14,5 +14,18 @@
   "ResponseQualityNode": "<1>Huomautus:</1> Vastausten laatu voi vaihdella mallista riippuen; parempien tulosten saavuttamiseksi suositellaan uusia malleja.",
   "ResultStorage": "Tulosten tallennus",
   "UploadFilesDevice": "Lataa tiedostoja henkilökohtaiselta laitteeltasi",
-  "UploadFilesPortal": "Lataa tiedostoja osiosta {{sectionNameFirst}} tai {{sectionNameSecond}}"
+  "UploadFilesPortal": "Lataa tiedostoja osiosta {{sectionNameFirst}} tai {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "Olet <strong>vain katselu</strong> tilassa tälle {{aiAgent}}. Voit nähdä {{aiChat}}-aktiviteetin tulokset muilta käyttäjiltä.",
+  "CreateChatDescription": "Siirry {{aiChat}}-välilehdelle aloittaaksesi.",
+  "EmptyKnowledgeDescription": "Tähän ladatut tiedostot indeksoidaan ja niitä käytetään kontekstina {{aiChat}}-välilehdellä. Lisää tiedostoja (enintään 10 MB kukin) esittääksesi AI-kysymyksiä, luodaksesi sisältöä tai yhteistyöhön tiedon kanssa.",
+  "EmptyResultsDescription": "Tiedostot, jotka luodaan {{aiChat}} kohdassa, näkyvät täällä automaattisesti. Kun luot sisältöä, aloitat chatin tai lähetät tuloksella varustetun viestin, tulos tallennetaan tähän osioon.",
+  "EmptyResultsViewerDescription": "Näet {{aiChat}}-aktiviteetin tulokset muilta käyttäjiltä täällä, kun ne tulevat saataville.",
+  "InstructionsDescriptionAgent": "Kuvaile, miten {{aiAgent}} pitäisi käyttäytyä ja vastata. Määrittele sen rooli, sävy ja päätehtävät.",
+  "Knowledge": "Tietokanta",
+  "KnowledgeUnavailableDescription": "Tietopankki on tällä hetkellä poissa käytöstä. Semanttisen haun ja asiakirjojen käsittelyn aktivointiin {{aiAgents}} varten, määritä upotukset-palveluntarjoaja {{productName}} asetuksissa.",
+  "KnowledgeUnavailableDescriptionUser": "Tietopankki on tällä hetkellä poissa käytöstä. Semanttisen haun ja asiakirjojen käsittelyn aktivoimiseksi {{aiAgents}} -kohdalle, ota yhteyttä {{productName}}-yläpitäjääsi määrittääksesi upotukset-palveluntarjoajan.",
+  "MCPDescriptionServers": "Käytä ylläpitäjän yhdistämiä {{mcpServers}} parantamaan chat-kokemusta tekoälyn (AI) avulla. {{mcpServers}} voi auttaa tietojen poiminnassa, yhteenvetoissa, älyehdotuksissa jne.",
+  "Model": "{{aiProvider}} ja malli",
+  "ModelDescription": "Valitse {{aiProvider}} ja malli, jota käytetään tämän huoneen chateissa. Tämä asetus on pakollinen ja koskee kaikkia osallistujia.",
+  "NoAccessAIAgentTitle": "Valitettavasti sinulla ei ole pääsyä tähän {{aiAgent}}"
 }

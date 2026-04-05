@@ -8,5 +8,7 @@
   "ViewAllTemplates": "Näytä kaikki mallit",
   "ErrorViewHeader": "Galleria on toistaiseksi poissa käytöstä.",
   "SelectTemplate": "Valitse malli",
-  "UploadGallery": "Lähetä Galleriaan"
+  "UploadGallery": "Lähetä Galleriaan",
+  "GalleryTitle": "{{organizationName}} Malligalleria",
+  "SubmitToGalleryDialogMainInfo": "Lähetä mallipohjasi julkiseen galleriaan, jotta muut voivat käyttää sitä työssään. Kun mallipohja on läpäissyt moderoinnin, ilmoitamme sinulle ja palkitsemme panoksestasi."
 }

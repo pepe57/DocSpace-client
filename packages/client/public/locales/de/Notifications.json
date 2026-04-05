@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} wurde erfolgreich als Benachrichtigungskanal verbunden. Sie erhalten nun Updates darüber.",
   "SuccessDisconnected": "{{serviceName}} wurde erfolgreich als Benachrichtigungskanal getrennt. Benachrichtigungen werden dort nicht mehr gesendet.",
   "UsefulTips": "Nützliche {{productName}}-Tipps",
-  "UsefulTipsDescription": "Erhalten Sie nützliche Anleitungen zu {{productName}}"
+  "UsefulTipsDescription": "Erhalten Sie nützliche Anleitungen zu {{productName}}",
+  "ActionsWithFilesDescription": "Badges zeigen die Dateiakтивность – Uploads, Bearbeitungen oder Freigaben – in den Bereichen {{rooms}}, {{shared}}, {{documents}} und {{aiAgents}} an.",
+  "RoomsActivityDescription": "Erhalten Sie sofortige E-Mail-Benachrichtigungen über neue freigegebene Dateien/Ordner und Aktivitäten innerhalb Ihrer {{rooms}} und {{aiAgents}}.",
+  "RoomUpdateNotify": "Geteilte Inhalte, {{rooms}} und {{aiAgents}}-Aktivität"
 }

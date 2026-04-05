@@ -14,5 +14,18 @@
   "ResponseQualityNode": "<1>Nota:</1> La calidad de la respuesta puede variar según el modelo; se recomiendan los modelos más nuevos para obtener mejores resultados.",
   "ResultStorage": "Almacenamiento de resultados",
   "UploadFilesDevice": "Suba archivos desde su dispositivo personal",
-  "UploadFilesPortal": "Subir archivos de {{sectionNameFirst}} o {{sectionNameSecond}}"
+  "UploadFilesPortal": "Subir archivos de {{sectionNameFirst}} o {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "Está en modo <strong>solo lectura</strong> para este {{aiAgent}}. Puede ver los resultados de la actividad de {{aiChat}} de otros usuarios.",
+  "CreateChatDescription": "Dirígete a la pestaña {{aiChat}} para empezar.",
+  "EmptyKnowledgeDescription": "Los archivos subidos aquí serán indexados y utilizados como contexto en la pestaña {{aiChat}}. Añada archivos (hasta 10 MB cada uno) para hacer preguntas a la IA, generar contenido o colaborar con información.",
+  "EmptyResultsDescription": "Los archivos generados en {{aiChat}} aparecerán aquí automáticamente. Cada vez que genere contenido, inicie un chat o envíe un mensaje con resultados, el resultado se guardará en esta sección.",
+  "EmptyResultsViewerDescription": "Verá los resultados de la actividad de {{aiChat}} de otros usuarios aquí una vez que estén disponibles.",
+  "InstructionsDescriptionAgent": "Describa cómo debe comportarse y responder {{aiAgent}}. Defina su rol, tono y tareas principales.",
+  "Knowledge": "Base de conocimientos",
+  "KnowledgeUnavailableDescription": "La base de conocimiento está actualmente deshabilitada. Para activar la búsqueda semántica y el procesamiento de documentos para sus {{aiAgents}}, por favor, configure el proveedor de embeddings en la configuración de {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "La base de conocimiento está actualmente deshabilitada. Para activar la búsqueda semántica y el procesamiento de documentos para {{aiAgents}}, por favor, contacte al administrador de {{productName}} para configurar el proveedor de incrustaciones.",
+  "MCPDescriptionServers": "Utilice {{mcpServers}} conectado por el administrador para mejorar la experiencia de chat con IA. {{mcpServers}} puede ayudar con la extracción de datos, resúmenes, sugerencias inteligentes, etc.",
+  "Model": "{{aiProvider}} y modelo",
+  "ModelDescription": "Seleccione el {{aiProvider}} y el modelo a utilizar en los chats de esta sala. Esta configuración es obligatoria y se aplica a todos los participantes.",
+  "NoAccessAIAgentTitle": "Lo sentimos, no tiene acceso a este {{aiAgent}}"
 }

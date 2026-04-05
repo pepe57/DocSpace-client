@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} on yhdistetty onnistuneesti ilmoituskanavana. Saat sieltä nyt päivityksiä.",
   "SuccessDisconnected": "{{serviceName}} onnistui irrottamaan ilmoituskanavana. Ilmoituksia ei enää lähetetä sinne.",
   "UsefulTips": "Hyödylliset {{productName}}-vinkit",
-  "UsefulTipsDescription": "Saa hyödyllisiä oppaita {{productName}}-sta"
+  "UsefulTipsDescription": "Saa hyödyllisiä oppaita {{productName}}-sta",
+  "ActionsWithFilesDescription": "Tunnisteet korostavat tiedostojen toimintaa — lataukset, muokkaukset tai jaetut tiedostot — kaikilla {{rooms}}, {{shared}}, {{documents}} ja {{aiAgents}} -osioilla.",
+  "RoomsActivityDescription": "Saat välittömästi sähköposti-ilmoituksia uusista jaetuista tiedostoista/kansioista ja aktiviteetista {{rooms}}:ssa ja {{aiAgents}}:ssä.",
+  "RoomUpdateNotify": "Yhteinen sisältö, {{rooms}} ja {{aiAgents}} aktiviteetti"
 }

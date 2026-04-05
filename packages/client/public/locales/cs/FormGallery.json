@@ -8,5 +8,7 @@
   "ViewAllTemplates": "Zobrazit všechny šablony",
   "ErrorViewHeader": "Galerie je dočasně nedostupná.",
   "SelectTemplate": "Vyberte šablonu",
-  "UploadGallery": "Nahrát do Galerie"
+  "UploadGallery": "Nahrát do Galerie",
+  "GalleryTitle": "{{organizationName}} Galerie šablon",
+  "SubmitToGalleryDialogMainInfo": "Odešlete svou šablonu do veřejné galerie, aby ji ostatní mohli použít ve své práci. Jakmile šablona projde moderací, upozorníme vás a odměníme vás za váš přínos."
 }

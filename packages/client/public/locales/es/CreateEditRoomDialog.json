@@ -40,5 +40,9 @@
   "ViewerInfo": "Información del visor",
   "WatermarkPreview": "Vista previa de la marca de agua",
   "WatermarkPreviewHelp": "Esta vista previa de la imagen muestra aproximadamente cómo se mostrará la marca de agua en sus archivos.",
-  "ConfigureDatabaseConnection": "Configure la conexión a la base de datos en Integración → Servicios de terceros"
+  "ConfigureDatabaseConnection": "Configure la conexión a la base de datos en Integración → Servicios de terceros",
+  "GoToIntegrations": "Ir a Integraciones",
+  "NeedMoreIntegrations": "¿Necesitas más integraciones?",
+  "NeedMoreIntegrationsDescription": "Use webhooks para enviar datos a su propio sistema, o conecte formularios a miles de servicios a través de Zapier.",
+  "NoDatabaseConnections": "No hay conexiones a base de datos configuradas"
 }

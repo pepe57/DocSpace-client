@@ -40,5 +40,9 @@
   "ViewerInfo": "Betrachter-Info",
   "WatermarkPreview": "Wasserzeichen-Vorschau",
   "WatermarkPreviewHelp": "Diese Bildvorschau zeigt ungefähr, wie das Wasserzeichen in Ihren Dateien angezeigt wird.",
-  "ConfigureDatabaseConnection": "Datenbankverbindung in Integration → Dienste von Drittanbietern konfigurieren"
+  "ConfigureDatabaseConnection": "Datenbankverbindung in Integration → Dienste von Drittanbietern konfigurieren",
+  "GoToIntegrations": "Zu Integrationen",
+  "NeedMoreIntegrations": "Brauchen Sie mehr Integrationen?",
+  "NeedMoreIntegrationsDescription": "Nutzen Sie Webhooks, um Daten an Ihr eigenes System zu senden, oder verbinden Sie Formulare mit Tausenden von Diensten über Zapier.",
+  "NoDatabaseConnections": "Keine Datenbankverbindungen konfiguriert"
 }

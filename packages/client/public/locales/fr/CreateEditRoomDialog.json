@@ -40,5 +40,9 @@
   "ViewerInfo": "Informations sur le lecteur",
   "WatermarkPreview": "Aperçu du filigrane",
   "WatermarkPreviewHelp": "Cet image avec l'aperçu montre approximativement comment le filigrane s'affichera dans vos fichiers.",
-  "ConfigureDatabaseConnection": "Configurer la connexion à la base de données dans Intégration → Services tiers"
+  "ConfigureDatabaseConnection": "Configurer la connexion à la base de données dans Intégration → Services tiers",
+  "GoToIntegrations": "Aller à Intégrations",
+  "NeedMoreIntegrations": "Besoin de plus d'intégrations ?",
+  "NeedMoreIntegrationsDescription": "Utilisez des webhooks pour envoyer des données à votre propre système, ou connectez des formulaires à des milliers de services via Zapier.",
+  "NoDatabaseConnections": "Aucune connexion à la base de données configurée"
 }

@@ -60,5 +60,9 @@
   "EmptyAIAgentsTitle": "Luo {{aiAgent}}-agenttisi",
   "CreateAIAgentDescription": "Aloita ensimmäisen {{aiAgent}}in rakentaminen",
   "EmptyAIAgentsAIDisabledDescription": "Tämä osio mahdollistaa käyttäjille työskentelyn {{aiAgents}}-agenttien kanssa – älykkäiden avustajien, jotka käsittelevät dokumentteja ja muita tehtäviä.\nAloittaaksesi niiden käytön, AI-ominaisuuksien palvelu on oltava käytössä {{productName}}-järjestelmänvalvojan toimesta.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Luodaksesi ja käyttääksesi {{aiAgents}}-agentteja, yhdistä lompakkosi ja ota käyttöön tekoälyominaisuuksien palvelu {{productName}}-asetuksissa. Kun se on valmis, voit työskennellä {{aiAgents}}-agenttien kanssa ja tehdä yhteistyötä tiimisi kanssa."
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Luodaksesi ja käyttääksesi {{aiAgents}}-agentteja, yhdistä lompakkosi ja ota käyttöön tekoälyominaisuuksien palvelu {{productName}}-asetuksissa. Kun se on valmis, voit työskennellä {{aiAgents}}-agenttien kanssa ja tehdä yhteistyötä tiimisi kanssa.",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} ei ole vielä saatavilla",
+  "EmptyAIAgentsAIEnabledUserDescription": "Kun tiimisi kutsuu sinut yhteistyöhön, {{aiAgents}} ilmestyy tähän, valmiina auttamaan asiakirjoissa, tietopohjassa ja arjen tehtävissä.",
+  "EmptyAIAgentsDescription": "Määritä henkilökohtainen avustaja tiimillesi lisäämällä tietopankin, valitsemalla ihanteellisen mallin ja yhdistämällä {{mcpServer}}:n. Kutsu kollegasi yhteistyöhön ja hyödynnä agentin chat-ominaisuudet parhaiten.",
+  "EmptyAIAgentsUserTitle": "Ei {{aiAgents}} saatavilla vielä"
 }

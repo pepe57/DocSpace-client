@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} συνδέθηκε επιτυχώς ως κανάλι ειδοποιήσεων. Θα λαμβάνετε πλέον ενημερώσεις εκεί.",
   "SuccessDisconnected": "Το {{serviceName}} έχει αποσυνδεθεί επιτυχώς ως κανάλι ειδοποιήσεων. Οι ειδοποιήσεις δεν θα αποστέλλονται εκεί πλέον.",
   "UsefulTips": "Χρήσιμες συμβουλές {{productName}}",
-  "UsefulTipsDescription": "Αποκτήστε χρήσιμους οδηγούς σχετικά με το {{productName}}"
+  "UsefulTipsDescription": "Αποκτήστε χρήσιμους οδηγούς σχετικά με το {{productName}}",
+  "ActionsWithFilesDescription": "Τα Badges θα τονίζουν την δραστηριότητα των αρχείων — αναρτήσεις, επεξεργασίες ή κοινοποιήσεις — σε όλες τις ενότητες {{rooms}}, {{shared}}, {{documents}}, και {{aiAgents}}.",
+  "RoomsActivityDescription": "Λάβετε άμεσες ειδοποιήσεις μέσω email για νέα κοινόχρηστα αρχεία/φάκελες και δραστηριότητα μέσα στους {{rooms}} και {{aiAgents}} σας.",
+  "RoomUpdateNotify": "Κοινό περιεχόμενο, {{rooms}} και {{aiAgents}} δραστηριότητα"
 }

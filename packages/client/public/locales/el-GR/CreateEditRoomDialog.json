@@ -40,5 +40,9 @@
   "ViewerInfo": "Πληροφορίες θεατή",
   "WatermarkPreview": "Προεπισκόπηση υδατογραφήματος",
   "WatermarkPreviewHelp": "Αυτή η προεπισκόπηση εικόνας δείχνει περίπου πώς θα εμφανίζεται το υδατογράφημα στα αρχεία σας.",
-  "ConfigureDatabaseConnection": "Ρυθμίστε τη σύνδεση βάσης δεδομένων στο Integration → Υπηρεσίες τρίτων"
+  "ConfigureDatabaseConnection": "Ρυθμίστε τη σύνδεση βάσης δεδομένων στο Integration → Υπηρεσίες τρίτων",
+  "GoToIntegrations": "Πλοήγιση στις Ενσωματώσεις",
+  "NeedMoreIntegrations": "Χρειάζεστε περισσότερες ενσωματώσεις;",
+  "NeedMoreIntegrationsDescription": "Χρησιμοποιήστε webhooks για να στείλετε δεδομένα στο δικό σας σύστημα, ή συνδέστε φόρμες με χιλιάδες υπηρεσίες μέσω Zapier.",
+  "NoDatabaseConnections": "Δεν είναι ρυθμισμένες συνδέσεις βάσης δεδομένων"
 }

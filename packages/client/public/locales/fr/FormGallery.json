@@ -8,5 +8,7 @@
   "ViewAllTemplates": "Afficher tous les formulaires",
   "ErrorViewHeader": "La galerie est temporairement indisponible",
   "SelectTemplate": "Sélectionner un modèle",
-  "UploadGallery": "Télécharger dans la Galerie"
+  "UploadGallery": "Télécharger dans la Galerie",
+  "GalleryTitle": "{{organizationName}} Galerie de modèles",
+  "SubmitToGalleryDialogMainInfo": "Soumettez votre modèle à la galerie publique pour que d'autres puissent l'utiliser dans leur travail. Une fois que le modèle aura passé la modération, vous serez notifié et récompensé pour votre contribution."
 }

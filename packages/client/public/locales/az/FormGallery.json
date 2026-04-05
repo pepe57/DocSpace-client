@@ -8,5 +8,7 @@
   "ViewAllTemplates": "Bütün şablonlara baxın",
   "ErrorViewHeader": "Qalereya müvəqqəti olaraq əlçatmazdır",
   "SelectTemplate": "Şablon Seçin",
-  "UploadGallery": "Qalereyə yükləyin"
+  "UploadGallery": "Qalereyə yükləyin",
+  "GalleryTitle": "{{organizationName}} Şablon Qalereyası",
+  "SubmitToGalleryDialogMainInfo": "Şablonunuzu digərlərinin işlərində istifadə etməsi üçün ictimai qalereyaya təqdim edin. Şablon nəzarət prosesindən keçdikdən sonra, töhfənizə görə sizə bildiriş veriləcək və mükafatlandırılacaqsınız."
 }

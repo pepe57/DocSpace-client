@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} bildiriş kanalı kimi uğurla qoşulub. İndidən buraya yeniliklər gələcək.",
   "SuccessDisconnected": "{{serviceName}} bildiriş kanalı kimi uğurla əlaqədən kəsilmişdir. Bildirişlər oraya göndərilməyəcəkdir.",
   "UsefulTips": "Faydalı {{productName}} məsləhətləri",
-  "UsefulTipsDescription": "{{productName}}-də faydalı təlimatlar əldə edin"
+  "UsefulTipsDescription": "{{productName}}-də faydalı təlimatlar əldə edin",
+  "ActionsWithFilesDescription": "Nişanlar fayl fəaliyyətini — yükləmələr, redaktələr və ya paylaşmalar — {{rooms}}, {{shared}}, {{documents}}, və {{aiAgents}} bölmələri boyunca vurğulayacaq.",
+  "RoomsActivityDescription": "Sizin {{rooms}} və {{aiAgents}} daxilindəki yeni paylaşılmış fayllar/qovluqlar və fəaliyyət haqqında anında e-poçt bildirişləri alın.",
+  "RoomUpdateNotify": "Paylaşılan məzmun, {{rooms}} və {{aiAgents}} fəaliyyəti"
 }

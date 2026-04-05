@@ -40,5 +40,9 @@
   "ViewerInfo": "Informace o prohlížeči",
   "WatermarkPreview": "Náhled vodoznaku",
   "WatermarkPreviewHelp": "Tento náhled obrázku zhruba ukazuje, jak se vodoznak zobrazí ve vašich souborech.",
-  "ConfigureDatabaseConnection": "Konfigurujte připojení k databázi v Integrace → Třetí strany"
+  "ConfigureDatabaseConnection": "Konfigurujte připojení k databázi v Integrace → Třetí strany",
+  "GoToIntegrations": "Přejít do integrací",
+  "NeedMoreIntegrations": "Potřebujete více integrací?",
+  "NeedMoreIntegrationsDescription": "Použijte webhooks k odesílání dat do vašeho vlastního systému nebo připojte formuláře k tisícům služeb přes Zapier.",
+  "NoDatabaseConnections": "Žádné připojení k databázi není nakonfigurováno"
 }

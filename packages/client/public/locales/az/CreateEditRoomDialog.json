@@ -40,5 +40,9 @@
   "ViewerInfo": "İzləyici məlumatı",
   "WatermarkPreview": "Su nişanı önizləməsi",
   "WatermarkPreviewHelp": "Bu şəkil önizləməsi su nişanının fayllarınızda necə görünəcəyini təxmini göstərir.",
-  "ConfigureDatabaseConnection": "İnteqrasiya → Üçüncü tərəf xidmətlərində verilənlər bazası bağlantısını konfiqurasiya edin"
+  "ConfigureDatabaseConnection": "İnteqrasiya → Üçüncü tərəf xidmətlərində verilənlər bazası bağlantısını konfiqurasiya edin",
+  "GoToIntegrations": "İnteqrasiyalara keçin",
+  "NeedMoreIntegrations": "Daha çox inteqrasiyaya ehtiyacınız var?",
+  "NeedMoreIntegrationsDescription": "Webhooks vasitəsilə məlumatı öz sisteminizə göndərin, və ya formları Zapier vasitəsilə minlərlə xidmətə bağlayın.",
+  "NoDatabaseConnections": "Verilənlər bazası bağlantıları konfiqurasiya edilməmişdir"
 }
