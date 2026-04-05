@@ -1284,5 +1284,7 @@
   "YourCurrentDomain": "Вашият текущ домейн",
   "YourFurtherEditsNotSaved": "Можете да не запазите допълнителните си редакции.",
   "YourLogo": "Вашето лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "FolderSizeExceedsLimit": "Поката е твърде голяма. Максималният размер е {{maxSize}}.",
+  "FoldersSizeExceedsLimit": "По\"]}ката е твърде голяма. Максималният размер е {{maxSize}}."
 }

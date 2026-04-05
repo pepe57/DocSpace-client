@@ -1285,5 +1285,6 @@
   "YourCurrentDomain": "Twoja obecna domena",
   "YourFurtherEditsNotSaved": "Dalsze zmiany mogą nie zostać zapisane.",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej"
+  "YourTurn": "Twoja kolej",
+  "RoleAIAgentManagerDescription": "Menedżerowie agentów mogą zarządzać przypisanym {{aiAgent}}, zapraszać nowych użytkowników i przypisywać role niższych poziomów.\nMogą korzystać z czatu, przesyłać pliki wiedzy, pracować z Result storage oraz zarządzać ustawieniami czatu."
 }
