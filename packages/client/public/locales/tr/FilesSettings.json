@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "İptal bildirimini bir daha gösterme",
-  "OpenSameTab": "Aynı sekmede {{organizationName}} düzenleyicisini açın",
   "DefaultHomepage": "Varsayılan Ana Sayfa",
-  "GroupByRooms": "Odalara göre gruplandır"
+  "GroupByRooms": "Odalara göre gruplandır",
+  "OpenSameTab": "Aynı sekmede {{organizationName}} düzenleyicisini açın"
 }

@@ -1,9 +1,14 @@
 {
+  "AddAIProvider": "Adicione {{aiProvider}}",
+  "AddMCPServer": "Adicione {{mcpServer}}",
   "AddMoreHeaders": "Adicione mais cabeçalhos",
   "APIKey": "Chave da API",
   "ConnectProductToYourDataAndTools": "Conecte {{productName}} aos seus dados e ferramentas.",
   "CustomMCPListTitle": "Personalizadas",
+  "DefaultProviderSetSuccess": "Provedor padrão configurado com sucesso",
+  "DefaultProviderTitle": "Fornecedor padrão",
   "DeleteImage": "Apagar imagem",
+  "DeleteProvider": "Delete {{aiProvider}}",
   "DeleteProviderDescription": "Excluir este provedor revogará o acesso para todos os usuários e suas configurações serão apagadas permanentemente.\nPara usar o provedor novamente, você precisará configurá-lo do zero.",
   "DeleteServer": "Excluir servidor",
   "DeleteServerDescription": "A exclusão deste servidor irá revogar o acesso para todos os usuários, e suas configurações serão apagadas permanentemente.\nPara usar o servidor novamente, você precisará configurá-lo do zero.",
@@ -21,6 +26,8 @@
   "KnowledgeKeyDescription": "Insira a chave da API obtida do seu provedor de base de conhecimento",
   "MCPServerAdvancedSettingsHint": "Use este seção para passar cabeçalhos HTTP adicionais, como tokens de autorização.",
   "MCPServerDescriptionHint": "Escreva uma breve explicação do propósito da integração.",
+  "MCPUnavailableError": "{{mcpServer}} está indisponível",
+  "Model": "Modelo",
   "Provider": "Fornecedor",
   "ProviderKey": "Chave",
   "ProviderNameInputHint": "Use qualquer nome que seja conveniente para você identificar esta conexão",
@@ -35,12 +42,5 @@
   "ServerUpdatedSuccess": "Servidor atualizado com sucesso",
   "ServiceIcon": "Ícone de serviço",
   "SystemMCPListTitle": "Sistema",
-  "WebSearchKeyHiddenDescription": "A chave da API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança.",
-  "AddAIProvider": "Adicione {{aiProvider}}",
-  "AddMCPServer": "Adicione {{mcpServer}}",
-  "DefaultProviderSetSuccess": "Provedor padrão configurado com sucesso",
-  "DefaultProviderTitle": "Fornecedor padrão",
-  "DeleteProvider": "Delete {{aiProvider}}",
-  "MCPUnavailableError": "{{mcpServer}} está indisponível",
-  "Model": "Modelo"
+  "WebSearchKeyHiddenDescription": "A chave da API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança."
 }

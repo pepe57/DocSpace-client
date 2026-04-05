@@ -1,9 +1,14 @@
 {
+  "AddAIProvider": "{{aiProvider}} එක් කරන්න",
+  "AddMCPServer": "{{mcpServer}} එක් කරන්න",
   "AddMoreHeaders": "තවත් ශීර්ෂ එකතු කරන්න",
   "APIKey": "API යතුර",
   "ConnectProductToYourDataAndTools": "{{productName}} ඔබගේ දත්ත සහ මෙවලම් වෙත සම්බන්ධ කරන්න.",
   "CustomMCPListTitle": "අභිරුචි",
+  "DefaultProviderSetSuccess": "පෙරනිමි සැපයුම්කරු සාර්ථකව සකසා ඇත",
+  "DefaultProviderTitle": "පෙරනිමි සැපයුම්කරු",
   "DeleteImage": "රූපය මකන්න",
+  "DeleteProvider": "{{aiProvider}} මකන්න",
   "DeleteProviderDescription": "මෙම සැපයුම්කරු මකා දැමීමෙන් සියලුම පරිශීලකයින් සඳහා ප්‍රවේශය අවලංගු වන අතර, එහි සැකසුම් ස්ථිරවම මැකෙනු ඇත.\nනැවත සැපයුම්කරු භාවිතා කිරීමට, ඔබ එය මුල සිටම සැකසිය යුතුය.",
   "DeleteServer": "සේවාදායකය මකන්න",
   "DeleteServerDescription": "මෙම සේවාදායකය මකා දැමීමෙන් සියලුම පරිශීලකයින් සඳහා ප්‍රවේශය අවලංගු වන අතර, එහි සැකසුම් ස්ථිරවම මැකෙනු ඇත.\nසේවාදායකය නැවත භාවිතා කිරීමට, ඔබ එය මුල සිටම සැකසිය යුතුය.",
@@ -21,6 +26,8 @@
   "KnowledgeKeyDescription": "ඔබගේ දැනුම් පදනම් සැපයුම්කරුගෙන් ලබාගත් API යතුර ඇතුළත් කරන්න",
   "MCPServerAdvancedSettingsHint": "අවසර ටෝකන වැනි අමතර HTTP ශීර්ෂයන් සම්මත කිරීමට මෙම කොටස භාවිතා කරන්න.",
   "MCPServerDescriptionHint": "ඒකාබද්ධ කිරීමේ අරමුණ පිළිබඳ කෙටි පැහැදිලි කිරීමක් ලියන්න.",
+  "MCPUnavailableError": "{{mcpServer}} ලබා ගත නොහැක",
+  "Model": "ආකෘතිය",
   "Provider": "සපයන්නා",
   "ProviderKey": "යතුර",
   "ProviderNameInputHint": "මෙම සම්බන්ධතාවය හඳුනා ගැනීමට ඔබට පහසු ඕනෑම නමක් භාවිතා කරන්න.",
@@ -35,12 +42,5 @@
   "ServerUpdatedSuccess": "සේවාදායකය සාර්ථකව යාවත්කාලීන කරන ලදී",
   "ServiceIcon": "සේවා නිරූපකය",
   "SystemMCPListTitle": "පද්ධතිය",
-  "WebSearchKeyHiddenDescription": "සුරැකීමෙන් පසු API යතුර එක් වරක් පමණක් දර්ශනය වන අතර පසුව ආරක්ෂක අරමුණු සඳහා සඟවනු ලැබේ.",
-  "AddAIProvider": "{{aiProvider}} එක් කරන්න",
-  "AddMCPServer": "{{mcpServer}} එක් කරන්න",
-  "DefaultProviderSetSuccess": "පෙරනිමි සැපයුම්කරු සාර්ථකව සකසා ඇත",
-  "DefaultProviderTitle": "පෙරනිමි සැපයුම්කරු",
-  "DeleteProvider": "{{aiProvider}} මකන්න",
-  "MCPUnavailableError": "{{mcpServer}} ලබා ගත නොහැක",
-  "Model": "ආකෘතිය"
+  "WebSearchKeyHiddenDescription": "සුරැකීමෙන් පසු API යතුර එක් වරක් පමණක් දර්ශනය වන අතර පසුව ආරක්ෂක අරමුණු සඳහා සඟවනු ලැබේ."
 }

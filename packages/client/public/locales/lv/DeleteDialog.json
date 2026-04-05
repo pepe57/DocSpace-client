@@ -16,6 +16,8 @@
   "DeleteItemForever": "Jūs gatavojaties dzēst <strong>{{name}}</strong>.",
   "DeleteItemsSharedNote": "Ņemiet vērā: ja tos kopīgojāt ar kādu personu, tas kļūs nepieejams.",
   "DeleteRoom": "Istaba <strong>\"{{roomName}}\"</strong> tiks izdzēsta pavisam. Visi dati un lietotāju piekļuves tiks zaudēti.",
+  "DeleteRooms": "Atlasītās <strong>telpas ({{count}})</strong> tiks neatgriezeniski dzēstas. Visi dati un lietotāju piekļuve tiks zaudēta.",
+  "DeleteRoomsTitle": "Vai dzēst šo telpu?",
   "DeleteRoomTitle": "Dzēst šo istabu?",
   "DeleteRoomWarning": "Es saprotu sekmes un vēlos dzēst istabu.",
   "DeleteTemplate": "Vai tiešām vēlaties dzēst veidnes telpu <1>«{{templateName}}»</1>? Veidni nevar atjaunot.",
@@ -32,7 +34,5 @@
   "ItemsDeletedAfter": "Šie objekti tiks neatgriežami dzēsti 30 dienu laikā.",
   "ItemsPermanentlyDeleted": "Šie priekšmeti tiks pastāvīgi izņemti no {{trashSection}}.",
   "removeFromListDescription": "Jūs gatavojaties izdzēst <1>{{title}}</1> no saraksta. Vai esat pārliecināts, ka vēlaties turpināt?",
-  "removeFromListDescriptionPlural": "Jūs gatavojaties izdzēst <1>vienumus ({{count}})</1> no saraksta. Vai esat pārliecināts, ka vēlaties turpināt?",
-  "DeleteRooms": "Atlasītās <strong>telpas ({{count}})</strong> tiks neatgriezeniski dzēstas. Visi dati un lietotāju piekļuve tiks zaudēta.",
-  "DeleteRoomsTitle": "Vai dzēst šo telpu?"
+  "removeFromListDescriptionPlural": "Jūs gatavojaties izdzēst <1>vienumus ({{count}})</1> no saraksta. Vai esat pārliecināts, ka vēlaties turpināt?"
 }

@@ -1,9 +1,14 @@
 {
+  "AddAIProvider": "Додајте {{aiProvider}}",
+  "AddMCPServer": "Додајте {{mcpServer}}",
   "AddMoreHeaders": "Додајте још заглавља",
   "APIKey": "API кључ",
   "ConnectProductToYourDataAndTools": "Повежите {{productName}} са својим подацима и алаткама.",
   "CustomMCPListTitle": "Прилагођено",
+  "DefaultProviderSetSuccess": "Подразумевани провајдер успешно подешен",
+  "DefaultProviderTitle": "Подразумевани провајдер",
   "DeleteImage": "Обришите слику",
+  "DeleteProvider": "Избриши {{aiProvider}}",
   "DeleteProviderDescription": "Брисањем овог добављача биће укинут приступ за све кориснике, а његова подешавања биће трајно избрисана. Да бисте поново користили овог добављача, мораћете да га подесите од почетка.",
   "DeleteServer": "Обришите сервер",
   "DeleteServerDescription": "Брисањем овог сервера ће се опозвати приступ свим корисницима, а његова подешавања ће бити трајно избрисана.\n Да бисте поново користили сервер, мораћете да га подесите од нуле.",
@@ -21,6 +26,8 @@
   "KnowledgeKeyDescription": "Унесите API кључ добијен од вашег провајдера базе знања",
   "MCPServerAdvancedSettingsHint": "Овај одељак вам омогућава да проследите додатне HTTP заглавља, као што су ауторизациони токени.",
   "MCPServerDescriptionHint": "Напишите кратко објашњење сврхе интеграције",
+  "MCPUnavailableError": "{{mcpServer}} је недоступан",
+  "Model": "Модел",
   "Provider": "Провајдер",
   "ProviderKey": "Кључ",
   "ProviderNameInputHint": "Користите било које име које вам одговара за идентификацију ове конекције",
@@ -35,12 +42,5 @@
   "ServerUpdatedSuccess": "Сервер успешно ажуриран",
   "ServiceIcon": "Икона услуге",
   "SystemMCPListTitle": "Систем",
-  "WebSearchKeyHiddenDescription": "API кључ се приказује само једном након чувања, а затим је скривен из безбедносних разлога.",
-  "AddAIProvider": "Додајте {{aiProvider}}",
-  "AddMCPServer": "Додајте {{mcpServer}}",
-  "DefaultProviderSetSuccess": "Подразумевани провајдер успешно подешен",
-  "DefaultProviderTitle": "Подразумевани провајдер",
-  "DeleteProvider": "Избриши {{aiProvider}}",
-  "MCPUnavailableError": "{{mcpServer}} је недоступан",
-  "Model": "Модел"
+  "WebSearchKeyHiddenDescription": "API кључ се приказује само једном након чувања, а затим је скривен из безбедносних разлога."
 }

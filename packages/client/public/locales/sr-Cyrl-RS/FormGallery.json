@@ -3,10 +3,10 @@
   "EmptyFormGalleryScreenDescription": "Нема резултата који одговарају вашем упиту",
   "ErrorViewDescription": "Молимо вас покушајте поново касније",
   "ErrorViewDescriptionNetworkError": "Изгледа да нема интернет везе",
-  "SuggestChanges": "Предложи промене",
-  "TemplateInfo": "Инфо за шаблон",
-  "ViewAllTemplates": "Прегледај све шаблоне",
   "ErrorViewHeader": "Галерија је привремено недоступна",
   "SelectTemplate": "Изаберите шаблон",
-  "UploadGallery": "Пошаљите у Галерију"
+  "SuggestChanges": "Предложи промене",
+  "TemplateInfo": "Инфо за шаблон",
+  "UploadGallery": "Пошаљите у Галерију",
+  "ViewAllTemplates": "Прегледај све шаблоне"
 }

@@ -1,9 +1,14 @@
 {
+  "AddAIProvider": "Pridajte {{aiProvider}}",
+  "AddMCPServer": "Pridaj {{mcpServer}}",
   "AddMoreHeaders": "Pridať ďalšie nadpisy",
   "APIKey": "API kľúč",
   "ConnectProductToYourDataAndTools": "Pripojte {{productName}} k svojim dátam a nástrojom.",
   "CustomMCPListTitle": "Vlastné",
+  "DefaultProviderSetSuccess": "Predvolený poskytovateľ bol úspešne nastavený.",
+  "DefaultProviderTitle": "Predvolený poskytovateľ",
   "DeleteImage": "Vymazať obrázok",
+  "DeleteProvider": "Vymaž {{aiProvider}}",
   "DeleteProviderDescription": "Zmazanie tohto poskytovateľa zruší prístup pre všetkých používateľov a jeho nastavenia budú nenávratne vymazané.\n Ak chcete poskytovateľa použiť znova, budete ho musieť nastaviť od začiatku.",
   "DeleteServer": "Vymazať server",
   "DeleteServerDescription": "Zmazanie tohto servera zruší prístup pre všetkých používateľov a jeho nastavenia budú trvale vymazané.\n Ak chcete server znova použiť, budete ho musieť nastaviť odznova.",
@@ -21,6 +26,8 @@
   "KnowledgeKeyDescription": "Zadajte API kľúč získaný od vášho poskytovateľa znalostnej bázy.",
   "MCPServerAdvancedSettingsHint": "Použite túto sekciu na prenos ďalších HTTP hlavičiek, ako sú autorizačné tokeny.",
   "MCPServerDescriptionHint": "Vysvetlite stručne účel integrácie.",
+  "MCPUnavailableError": "{{mcpServer}} je nedostupný",
+  "Model": "Model",
   "Provider": "Poskytovateľ",
   "ProviderKey": "Kľúč",
   "ProviderNameInputHint": "Použite akékoľvek meno, ktoré je pre vás vhodné na identifikáciu tohto pripojenia.",
@@ -35,12 +42,5 @@
   "ServerUpdatedSuccess": "Server bol úspešne aktualizovaný.",
   "ServiceIcon": "Ikona služby",
   "SystemMCPListTitle": "Systém",
-  "WebSearchKeyHiddenDescription": "Kľúč API sa zobrazí len raz pri uložení a následne je skrytý z dôvodu bezpečnosti.",
-  "AddAIProvider": "Pridajte {{aiProvider}}",
-  "AddMCPServer": "Pridaj {{mcpServer}}",
-  "DefaultProviderSetSuccess": "Predvolený poskytovateľ bol úspešne nastavený.",
-  "DefaultProviderTitle": "Predvolený poskytovateľ",
-  "DeleteProvider": "Vymaž {{aiProvider}}",
-  "MCPUnavailableError": "{{mcpServer}} je nedostupný",
-  "Model": "Model"
+  "WebSearchKeyHiddenDescription": "Kľúč API sa zobrazí len raz pri uložení a následne je skrytý z dôvodu bezpečnosti."
 }

@@ -3,10 +3,10 @@
   "EmptyFormGalleryScreenDescription": "Nuk u gjend asnjë rezultat që përputhet me pyetjen tuaj",
   "ErrorViewDescription": "Ju lutem provojeni përsëri më vonë",
   "ErrorViewDescriptionNetworkError": "Shkruan se nuk ka lidhje me internet.",
-  "SuggestChanges": "Sugjeroni ndryshime",
-  "TemplateInfo": "Info shablloni",
-  "ViewAllTemplates": "Shikoni të gjitha shabllonet",
   "ErrorViewHeader": "Galeria është përkohësisht e padisponueshme",
   "SelectTemplate": "Zgjidhni shabllon",
-  "UploadGallery": "Ngarko në Galeri"
+  "SuggestChanges": "Sugjeroni ndryshime",
+  "TemplateInfo": "Info shablloni",
+  "UploadGallery": "Ngarko në Galeri",
+  "ViewAllTemplates": "Shikoni të gjitha shabllonet"
 }

@@ -1,9 +1,14 @@
 {
+  "AddAIProvider": "{{aiProvider}}'i ekle",
+  "AddMCPServer": "{{mcpServer}}'i ekle",
   "AddMoreHeaders": "Daha fazla başlık ekleyin",
   "APIKey": "API Anahtarı",
   "ConnectProductToYourDataAndTools": "{{productName}}'i veri ve araçlarınıza bağlayın.",
   "CustomMCPListTitle": "Özel",
+  "DefaultProviderSetSuccess": "Varsayılan sağlayıcı başarıyla ayarlandı",
+  "DefaultProviderTitle": "Varsayılan sağlayıcı",
   "DeleteImage": "Resmi sil",
+  "DeleteProvider": "{{aiProvider}}'ı sil",
   "DeleteProviderDescription": "Bu sağlayıcıyı silmek, tüm kullanıcıların erişimini iptal edecek ve ayarlarını kalıcı olarak silecektir.\nSağlayıcıyı tekrar kullanmak için, sıfırdan yeniden yapılandırmanız gerekecektir.",
   "DeleteServer": "Sunucuyu sil",
   "DeleteServerDescription": "Bu sunucuyu silmek, tüm kullanıcıların erişimini iptal edecek ve ayarlarını kalıcı olarak silecektir.\nSunucuyu tekrar kullanmak için, sıfırdan kurmanız gerekecektir.",
@@ -21,6 +26,8 @@
   "KnowledgeKeyDescription": "Bilgi tabanı sağlayıcınızdan aldığınız API anahtarını girin.",
   "MCPServerAdvancedSettingsHint": "Bu bölümü, yetkilendirme belirteçleri gibi ek HTTP başlıkları iletmek için kullanın.",
   "MCPServerDescriptionHint": "Entegrasyonun amacını kısaca açıklayın",
+  "MCPUnavailableError": "{{mcpServer}} kullanılamıyor",
+  "Model": "Model",
   "Provider": "Sağlayıcı",
   "ProviderKey": "Anahtar",
   "ProviderNameInputHint": "Bu bağlantıyı tanımlamak için size uygun herhangi bir isim kullanın",
@@ -35,12 +42,5 @@
   "ServerUpdatedSuccess": "Sunucu başarıyla güncellendi",
   "ServiceIcon": "Hizmet simgesi",
   "SystemMCPListTitle": "Sistem",
-  "WebSearchKeyHiddenDescription": "API anahtarı yalnızca kaydetme sırasında bir kez görüntülenir ve ardından güvenlik nedeniyle gizlenir.",
-  "AddAIProvider": "{{aiProvider}}'i ekle",
-  "AddMCPServer": "{{mcpServer}}'i ekle",
-  "DefaultProviderSetSuccess": "Varsayılan sağlayıcı başarıyla ayarlandı",
-  "DefaultProviderTitle": "Varsayılan sağlayıcı",
-  "DeleteProvider": "{{aiProvider}}'ı sil",
-  "MCPUnavailableError": "{{mcpServer}} kullanılamıyor",
-  "Model": "Model"
+  "WebSearchKeyHiddenDescription": "API anahtarı yalnızca kaydetme sırasında bir kez görüntülenir ve ardından güvenlik nedeniyle gizlenir."
 }

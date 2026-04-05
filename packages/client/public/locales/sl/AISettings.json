@@ -1,9 +1,14 @@
 {
+  "AddAIProvider": "Dodaj {{aiProvider}}",
+  "AddMCPServer": "Dodaj {{mcpServer}}",
   "AddMoreHeaders": "Dodaj več naslovov",
   "APIKey": "API Ključ",
   "ConnectProductToYourDataAndTools": "Povežite {{productName}} z vašimi podatki in orodji.",
   "CustomMCPListTitle": "Prilagojene",
+  "DefaultProviderSetSuccess": "Privzeti ponudnik uspešno nastavljen",
+  "DefaultProviderTitle": "Privzeti ponudnik",
   "DeleteImage": "Izbriši sliko",
+  "DeleteProvider": "Izbriši {{aiProvider}}",
   "DeleteProviderDescription": "Izbris tega ponudnika bo preklical dostop za vse uporabnike, in njegove nastavitve bodo trajno izbrisane.\n Če želite ponovno uporabiti ponudnika, ga boste morali ponovno nastaviti od začetka.",
   "DeleteServer": "Izbriši strežnik",
   "DeleteServerDescription": "Izbris tega strežnika bo preklical dostop za vse uporabnike, in njegove nastavitve bodo trajno izbrisane.\n Če želite ponovno uporabiti strežnik, ga boste morali ponovno nastaviti od začetka.",
@@ -21,6 +26,8 @@
   "KnowledgeKeyDescription": "Vnesite ključ API, pridobljen od ponudnika vaše baze znanja.",
   "MCPServerAdvancedSettingsHint": "Uporabite ta razdelek za pošiljanje dodatnih HTTP glavic, kot so avtorizacijski žetoni.",
   "MCPServerDescriptionHint": "Napišite kratek opis namena integracije.",
+  "MCPUnavailableError": "{{mcpServer}} ni na voljo",
+  "Model": "Model",
   "Provider": "Ponudnik",
   "ProviderKey": "Kluč",
   "ProviderNameInputHint": "Uporabite poljubno ime, ki je za vas priročno za prepoznavo te povezave.",
@@ -35,12 +42,5 @@
   "ServerUpdatedSuccess": "Server posodobljen uspešno",
   "ServiceIcon": "Ikona storitve",
   "SystemMCPListTitle": "Sistem",
-  "WebSearchKeyHiddenDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit iz varnostnih razlogov.",
-  "AddAIProvider": "Dodaj {{aiProvider}}",
-  "AddMCPServer": "Dodaj {{mcpServer}}",
-  "DefaultProviderSetSuccess": "Privzeti ponudnik uspešno nastavljen",
-  "DefaultProviderTitle": "Privzeti ponudnik",
-  "DeleteProvider": "Izbriši {{aiProvider}}",
-  "MCPUnavailableError": "{{mcpServer}} ni na voljo",
-  "Model": "Model"
+  "WebSearchKeyHiddenDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit iz varnostnih razlogov."
 }

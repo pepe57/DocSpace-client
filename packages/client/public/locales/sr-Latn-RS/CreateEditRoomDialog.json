@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Automatsko indeksiranje",
   "AutomaticIndexingDescription": "Omogućite automatsko indeksiranje za indeksiranje fajlova i fascikli prema serijskom broju. Sortiranje po broju će biti postavljeno kao podrazumevano za sve korisnike.",
   "ChooseRoomType": "Izaberi tip sobe",
+  "ConfigureDatabaseConnection": "Konfigurišite konekciju sa bazom podataka u Integracije → Usluge trećih strana",
   "CreateRoomConfirmation": "Želite li da nastavite bez povezivanja memorijskog prostora?\nIzabrali ste opciju skladištenja treće strane koja još uvek nije povezana. Ako nastavite bez povezivanja usluge, ova opcija neće biti dodata.",
   "CreateRoomWatermarksConfirmation": "Niste postavili vodeni žig koji će se primeniti na dokumente u ovoj sobi. Uvek možete dodati vodeni žig u postavkama uređivanja sobe. Nastaviti bez vodenog žiga?",
   "CreateTagOption": "Kreiraj tag",
@@ -39,6 +40,5 @@
   "UserName": "Korisničko ime",
   "ViewerInfo": "Informacije o pregledatelju",
   "WatermarkPreview": "Pregled vodenog žiga",
-  "WatermarkPreviewHelp": "Ova slika prikazuje kako će vodeni žig izgledati u vašim fajlovima.",
-  "ConfigureDatabaseConnection": "Konfigurišite konekciju sa bazom podataka u Integracije → Usluge trećih strana"
+  "WatermarkPreviewHelp": "Ova slika prikazuje kako će vodeni žig izgledati u vašim fajlovima."
 }

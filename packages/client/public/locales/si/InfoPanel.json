@@ -2,6 +2,7 @@
   "AddedRoomTags": "ටැග් එකතු කරන ලදි.",
   "Administration": "පරිපාලනය",
   "AgentRenamed": "නියෝජිතයා <1>«{{oldRoomTitle}}»</1><2>«{{roomTitle}}»</2> ලෙස නැවත නම් කරන ලදී",
+  "AIAgentsEmptyScreenTent": "{{aiAgents}} විස්තර මෙතැනින් බලන්න",
   "AndMoreLabel": "සහ <1>තවත් {{count}}</1>",
   "CreationDate": "සෑදූ දිනය",
   "Data": "දත්ත",
@@ -60,11 +61,14 @@
   "IndexChanged": "ඉන්ඩෙක්ස් වෙනස් විය.",
   "ItemsSelected": "අථක සෑදිණි",
   "LastModifiedBy": "අවසාන සංශෝධනය",
+  "LastUpdateInfo": "අවසන් යාවත්කාලීන කිරීම",
   "LifetimeEnds": "ආයු කාලය අවසන් වේ",
   "MembersEmptyScreenText": "මෙසේ සාමාජික විස්තර බලන්න:",
+  "NoAgent": "{{aiAgent}} නැත",
   "NoRecordsFound": "වාර්තා කිසිවක් හමු නොවීය.",
   "Properties": "ගුණාංග",
   "Resolution": "විභේදනය",
+  "RoomChangeOwner": "කාමර හිමිකරු වෙනස් විය.",
   "RoomCreateUserCount": "පරිශීලකයින් එකතු කරන ලදි ({{count}}).",
   "RoomDenyDownloadDisabled": "බාගත කිරීම සහ කොපිරී කිරීම අවරෝධයකින් තොරව",
   "RoomDenyDownloadEnabled": "බාගැනීම සහ පිටපත් කිරීම සීමා කර ඇත",
@@ -98,9 +102,5 @@
   "SubmenuHistory": "ඉතිහාසය",
   "UserFileUpdated": "ප්‍රමාදයට පත්වුණි.",
   "Users": "පරිශ්‍රීලකයින්",
-  "Versions": "අනුවාද",
-  "LastUpdateInfo": "අවසන් යාවත්කාලීන කිරීම",
-  "AIAgentsEmptyScreenTent": "{{aiAgents}} විස්තර මෙතැනින් බලන්න",
-  "NoAgent": "{{aiAgent}} නැත",
-  "RoomChangeOwner": "කාමර හිමිකරු වෙනස් විය."
+  "Versions": "අනුවාද"
 }

@@ -3,10 +3,10 @@
   "EmptyFormGalleryScreenDescription": "Ni bilo mogoče najti rezultatov, ki bi ustrezali vaši poizvedbi",
   "ErrorViewDescription": "Prosimo, poskusite kasneje",
   "ErrorViewDescriptionNetworkError": "Zdi se, da interneta ni na voljo",
-  "SuggestChanges": "Predlagaj spremembe",
-  "TemplateInfo": "Informacije o predlogi",
-  "ViewAllTemplates": "Poglej vse predloge",
   "ErrorViewHeader": "Galerija je trenutno nedostopna.",
   "SelectTemplate": "Izberi predlogo",
-  "UploadGallery": "Naložite v Galerijo"
+  "SuggestChanges": "Predlagaj spremembe",
+  "TemplateInfo": "Informacije o predlogi",
+  "UploadGallery": "Naložite v Galerijo",
+  "ViewAllTemplates": "Poglej vse predloge"
 }

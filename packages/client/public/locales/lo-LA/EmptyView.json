@@ -2,6 +2,7 @@
   "CollaborationRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຮ່ວມມື",
   "CollaboratorEmptyTitle": "ຫ້ອງນັ້ນຫວ່າງເປົ່າ.",
   "CreateAIAgent": "ສ້າງຕົວແທນໃໝ່",
+  "CreateAIAgentDescription": "ເລີ່ມຕົ້ນສ້າງ {{aiAgent}} ທຳອິດຂອງເຈົ້າ",
   "CreateDocument": "ສ້າງເອກະສານໃໝ່",
   "CreateDocumentDescription": "ໃຊ້ປະໂຫຍດຈາກຟັງຊັນການປະສົມສຽງຄໍາທີ່ມີຂອບເຂດວັດຂື້ນ.",
   "CreateForm": "ສ້າງແບບຟອມ PDF ໃໝ່",
@@ -16,7 +17,10 @@
   "CreateSpreadsheetDescription": "ດໍາເນີນການຄຳນວນທີ່ຖືກຕ້ອງດ້ວຍຄວາມພະຍາຍາດໜ້ອຍສຸດ.",
   "CustomRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຄຸສຕຳ້!",
   "DefaultFolderDescription": "ວາງເອກະສານໄວ້ທີ່ນີ້ຫຼືສ້າງເອກະສານໃໝ່",
+  "EmptyAIAgentsAIDisabledDescription": "ພາກນີ້ຊ່ວຍໃຫ້ຜູ້ໃຊ້ສາມາດເຮັດວຽກກັບ {{aiAgents}} — ຜູ້ຊ່ວຍອັດສະລິຍະສຳລັບການຈັດການເອກະສານ ແລະ ໜ້າວຽກອື່ນໆ.\nເພື່ອເລີ່ມຕົ້ນໃຊ້ພວກມັນ, ການບໍລິການຄຸນສົມບັດ AI ຕ້ອງໄດ້ເປີດໃຊ້ໂດຍຜູ້ເບິ່ງແຍງລະບົບ {{productName}} ຂອງທ່ານ.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "ເພື່ອສ້າງ ແລະ ນຳໃຊ້ {{aiAgents}}, ໃຫ້ເຊື່ອມຕໍ່ກະເປົາເງິນຂອງທ່ານ ແລະ ເປີດໃຊ້ບໍລິການຄຸນສົມບັດ AI ໃນການຕັ້ງຄ່າ {{productName}}. ເມື່ອມັນສຳເລັດແລ້ວ, ທ່ານຈະສາມາດເຮັດວຽກກັບ {{aiAgents}} ແລະ ຮ່ວມມືກັບທີມງານຂອງທ່ານໄດ້.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "ເຊື່ອມຕໍ່ກະເປົາເງິນຂອງທ່ານ ແລະ ເປີດໃຊ້ຄຸນສົມບັດ AI",
+  "EmptyAIAgentsTitle": "ສ້າງ{{aiAgent}}ຂອງເຈົ້າເອງ",
   "EmptyDescription": "ເລີ່ມຕົ້ນດ້ວຍການກະດຳທີ່ດ່ວນ:",
   "EmptyFavoritesDescription": "ຕິດດາວໄຟລ໌ ແລະໂຟນເດີ້ຕ່າງໆເພື່ອຮັກສາໃຫ້ເຂົາເຈົ້າເຂົ້າເຖິງໄດ້ງ່າຍ ແລະຢູ່ໃນການເຂົ້າເຖິງ.",
   "EmptyFavoritesTitle": "ບໍ່ມີລາຍການທີ່ມັກເທື່ອ",
@@ -56,9 +60,5 @@
   "UploadDevicePDFFormOptionTitle": "ອັບໂຫຼດຈາກເຄື່ອງມື",
   "UploadFromPortalTitle": "ດາວໂຫຼດຈາກ {{productName}}",
   "UploadPDFFormOptionDescription": "ເລືອກແບບຟອມ PDF ທີ່ກະກຽມໄວ້ແລ້ວໃນ {{productName}} ແລະອັບໂຫຼດມັນໃສ່ຫ້ອງ.",
-  "VirtualDataRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຂໍ້ມູນດິຈິຕອນ",
-  "EmptyAIAgentsTitle": "ສ້າງ{{aiAgent}}ຂອງເຈົ້າເອງ",
-  "CreateAIAgentDescription": "ເລີ່ມຕົ້ນສ້າງ {{aiAgent}} ທຳອິດຂອງເຈົ້າ",
-  "EmptyAIAgentsAIDisabledDescription": "ພາກນີ້ຊ່ວຍໃຫ້ຜູ້ໃຊ້ສາມາດເຮັດວຽກກັບ {{aiAgents}} — ຜູ້ຊ່ວຍອັດສະລິຍະສຳລັບການຈັດການເອກະສານ ແລະ ໜ້າວຽກອື່ນໆ.\nເພື່ອເລີ່ມຕົ້ນໃຊ້ພວກມັນ, ການບໍລິການຄຸນສົມບັດ AI ຕ້ອງໄດ້ເປີດໃຊ້ໂດຍຜູ້ເບິ່ງແຍງລະບົບ {{productName}} ຂອງທ່ານ.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "ເພື່ອສ້າງ ແລະ ນຳໃຊ້ {{aiAgents}}, ໃຫ້ເຊື່ອມຕໍ່ກະເປົາເງິນຂອງທ່ານ ແລະ ເປີດໃຊ້ບໍລິການຄຸນສົມບັດ AI ໃນການຕັ້ງຄ່າ {{productName}}. ເມື່ອມັນສຳເລັດແລ້ວ, ທ່ານຈະສາມາດເຮັດວຽກກັບ {{aiAgents}} ແລະ ຮ່ວມມືກັບທີມງານຂອງທ່ານໄດ້."
+  "VirtualDataRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຂໍ້ມູນດິຈິຕອນ"
 }

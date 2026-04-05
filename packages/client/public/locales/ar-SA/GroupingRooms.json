@@ -17,7 +17,7 @@
   "RemoveFromGroup": "إزالة من المجموعة",
   "RemoveGroup": "إزالة المجموعة",
   "RemoveGroupConfirmation": "أنت على وشك حذف مجموعة من الغرف. هل أنت متأكد من رغبتك في المتابعة؟",
-  "RemoveGroupInfo": "سيتم عرض الغرف المضمنة في المجموعة ضمن قسم <strong class=\"... \">جميع الغرف</strong>.",
+  "RemoveGroupInfo": "سيتم عرض الغرف المضمنة في المجموعة في قسم <strong>جميع الغرف</strong>.",
   "RoomAddedToGroup": "تمت إضافة الغرفة المحددة إلى <1>{{groupName}}</1>.",
   "RoomGrouping": "تجميع الغرف",
   "RoomGroupingDisabled": "تجميع الغرف معطّل",

@@ -16,6 +16,8 @@
   "DeleteItemForever": "Oznaczysz do usunięcia <strong>{{name}}</strong>.",
   "DeleteItemsSharedNote": "Należy pamiętać, że jeśli zostały komuś udostępnione, staną się niedostępne.",
   "DeleteRoom": "Pokój <strong>{{roomName}}</strong> zostanie trwale usunięty. Wszystkie dane i uprawnienia użytkowników zostaną utracone.",
+  "DeleteRooms": "Wybrane <strong>pokoje ({{count}})</strong> zostaną trwale usunięte. Wszystkie dane i dostęp użytkowników zostaną utracone.",
+  "DeleteRoomsTitle": "Czy usunąć ten pokój?",
   "DeleteRoomTitle": "Usunąć ten pokój?",
   "DeleteRoomWarning": "Rozumiem konsekwencje i chcę usunąć pokój.",
   "DeleteTemplate": "Czy na pewno chcesz usunąć szablon pokoju <1>„{{templateName}}”</1>? Szablon nie może zostać przywrócony.",
@@ -32,7 +34,5 @@
   "ItemsDeletedAfter": "Te elementy zostaną trwale usunięte za 30 dni.",
   "ItemsPermanentlyDeleted": "Te elementy zostaną trwale usunięte z {{trashSection}}.",
   "removeFromListDescription": "Oznaczysz do usunięcia z listy <1>{{title}}</1>. Czy chcesz kontynuować?",
-  "removeFromListDescriptionPlural": "Oznaczysz do usunięcia <1>pozycję/pozycje ({{count}})</1>. Czy chcesz kontynuować?",
-  "DeleteRooms": "Wybrane <strong>pokoje ({{count}})</strong> zostaną trwale usunięte. Wszystkie dane i dostęp użytkowników zostaną utracone.",
-  "DeleteRoomsTitle": "Czy usunąć ten pokój?"
+  "removeFromListDescriptionPlural": "Oznaczysz do usunięcia <1>pozycję/pozycje ({{count}})</1>. Czy chcesz kontynuować?"
 }

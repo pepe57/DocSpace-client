@@ -1,9 +1,14 @@
 {
+  "AddAIProvider": "添加 {{aiProvider}}",
+  "AddMCPServer": "添加 {{mcpServer}}",
   "AddMoreHeaders": "添加更多标头",
   "APIKey": "API 密钥",
   "ConnectProductToYourDataAndTools": "将{{productName}}连接到您的数据和工具。",
   "CustomMCPListTitle": "自定义",
+  "DefaultProviderSetSuccess": "默认提供商已成功设置",
+  "DefaultProviderTitle": "默认提供商",
   "DeleteImage": "删除图片",
+  "DeleteProvider": "删除 {{aiProvider}}",
   "DeleteProviderDescription": "删除此服务提供商将撤销所有用户的访问权限，其设置将被永久清除。\n如需再次使用此服务提供商，您需要从头开始重新设置。",
   "DeleteServer": "删除服务器",
   "DeleteServerDescription": "删除此服务器将撤销所有用户的访问权限，其设置将被永久清除。\n如需再次使用该服务器，您需要从头开始重新设置。",
@@ -21,6 +26,8 @@
   "KnowledgeKeyDescription": "输入从知识库提供商处获得的 API 密钥",
   "MCPServerAdvancedSettingsHint": "用此部分传递其他 HTTP 标头，例如授权令牌。",
   "MCPServerDescriptionHint": "简要解释说明集成的用途",
+  "MCPUnavailableError": "{{mcpServer}} 服务器不可用",
+  "Model": "模型",
   "Provider": "提供商",
   "ProviderKey": "密钥",
   "ProviderNameInputHint": "使用任何方便您标识此连接的名称",
@@ -35,12 +42,5 @@
   "ServerUpdatedSuccess": "服务器更新成功",
   "ServiceIcon": "服务图标",
   "SystemMCPListTitle": "系统",
-  "WebSearchKeyHiddenDescription": "API 密钥仅在保存时显示一次，随后出于安全目的将被隐藏。",
-  "AddAIProvider": "添加 {{aiProvider}}",
-  "AddMCPServer": "添加 {{mcpServer}}",
-  "DefaultProviderSetSuccess": "默认提供商已成功设置",
-  "DefaultProviderTitle": "默认提供商",
-  "DeleteProvider": "删除 {{aiProvider}}",
-  "MCPUnavailableError": "{{mcpServer}} 服务器不可用",
-  "Model": "模型"
+  "WebSearchKeyHiddenDescription": "API 密钥仅在保存时显示一次，随后出于安全目的将被隐藏。"
 }

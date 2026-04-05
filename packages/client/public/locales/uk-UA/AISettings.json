@@ -1,9 +1,14 @@
 {
+  "AddAIProvider": "Додайте {{aiProvider}}",
+  "AddMCPServer": "Додайте {{mcpServer}}",
   "AddMoreHeaders": "Додайте більше заголовків",
   "APIKey": "Ключ API",
   "ConnectProductToYourDataAndTools": "Підключіть {{productName}} до ваших даних та інструментів.",
   "CustomMCPListTitle": "Користувацькі",
+  "DefaultProviderSetSuccess": "Постачальника за замовчуванням успішно встановлено",
+  "DefaultProviderTitle": "Постачальник за замовчуванням",
   "DeleteImage": "Видалити зображення",
+  "DeleteProvider": "Видалити {{aiProvider}}",
   "DeleteProviderDescription": "Видалення цього провайдера скасує доступ для всіх користувачів, і його налаштування будуть безповоротно видалені.\nЩоб знову використовувати провайдера, вам потрібно буде налаштувати його з нуля.",
   "DeleteServer": "Видалити сервер",
   "DeleteServerDescription": "Видалення цього сервера скасує доступ для всіх користувачів, а його налаштування будуть остаточно видалені.\nЩоб знову використовувати сервер, вам потрібно буде налаштувати його з нуля.",
@@ -21,6 +26,8 @@
   "KnowledgeKeyDescription": "Введіть API-ключ, отриманий від вашого постачальника бази знань.",
   "MCPServerAdvancedSettingsHint": "Використовуйте цю секцію для передачі додаткових HTTP заголовків, наприклад, токенів авторизації.",
   "MCPServerDescriptionHint": "Напишіть короткий опис призначення інтеграції.",
+  "MCPUnavailableError": "{{mcpServer}} недоступний",
+  "Model": "Модель",
   "Provider": "Постачальник",
   "ProviderKey": "Ключ",
   "ProviderNameInputHint": "Використайте будь-яке ім'я, яке вам зручно використовувати для ідентифікації цього з'єднання.",
@@ -35,12 +42,5 @@
   "ServerUpdatedSuccess": "Сервер успішно оновлено",
   "ServiceIcon": "Іконка сервісу",
   "SystemMCPListTitle": "Система",
-  "WebSearchKeyHiddenDescription": "Ключ API відображається лише один раз під час збереження, після чого він прихований з міркувань безпеки.",
-  "AddAIProvider": "Додайте {{aiProvider}}",
-  "AddMCPServer": "Додайте {{mcpServer}}",
-  "DefaultProviderSetSuccess": "Постачальника за замовчуванням успішно встановлено",
-  "DefaultProviderTitle": "Постачальник за замовчуванням",
-  "DeleteProvider": "Видалити {{aiProvider}}",
-  "MCPUnavailableError": "{{mcpServer}} недоступний",
-  "Model": "Модель"
+  "WebSearchKeyHiddenDescription": "Ключ API відображається лише один раз під час збереження, після чого він прихований з міркувань безпеки."
 }

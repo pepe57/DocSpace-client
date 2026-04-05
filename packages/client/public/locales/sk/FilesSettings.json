@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Nezobrazovať znova oznámenie o zrušení",
-  "OpenSameTab": "Otvorte redaktor {{organizationName}} v tej istej záložke",
   "DefaultHomepage": "Predvolená domovská stránka",
-  "GroupByRooms": "Zoskupiť podľa miestností"
+  "GroupByRooms": "Zoskupiť podľa miestností",
+  "OpenSameTab": "Otvorte redaktor {{organizationName}} v tej istej záložke"
 }

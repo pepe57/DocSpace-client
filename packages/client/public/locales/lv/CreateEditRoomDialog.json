@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Automātiskā indeksēšana",
   "AutomaticIndexingDescription": "Iespējojiet automātisku indeksēšanu indeksa failiem un mapēm pēc sērijas numura. Kārtošana pēc numura tiks iestatīta kā noklusējums visiem lietotājiem.",
   "ChooseRoomType": "Izvēlieties telpas tipu",
+  "ConfigureDatabaseConnection": "Konfigurējiet datubāzes savienojumu Integrācija → Trešo pušu pakalpojumi",
   "CreateRoomConfirmation": "Vai turpināt, neizveidojot savienojumu ar krātuvi?\nEsat atlasījis trešās puses krātuves opciju, kas vēl nav pievienota. Ja turpināsiet, nepievienojot pakalpojumu, šī opcija netiks pievienota.",
   "CreateRoomWatermarksConfirmation": "Jūs neesat iestatījis ūdenszīmi, kas jāpiemēro šīs telpas dokumentiem. Jūs vienmēr varat pievienot ūdenszīmi telpas rediģēšanas iestatījumos. Vai turpināt bez ūdenszīmes?",
   "CreateTagOption": "Izveidot birku",
@@ -39,6 +40,5 @@
   "UserName": "Lietotājvārds",
   "ViewerInfo": "Informācija par skatītāju",
   "WatermarkPreview": "Ūdenszīmes priekšskatījums",
-  "WatermarkPreviewHelp": "Šis attēla priekšskatījums aptuveni parāda, kā ūdenszīme tiks parādīta jūsu failos.",
-  "ConfigureDatabaseConnection": "Konfigurējiet datubāzes savienojumu Integrācija → Trešo pušu pakalpojumi"
+  "WatermarkPreviewHelp": "Šis attēla priekšskatījums aptuveni parāda, kā ūdenszīme tiks parādīta jūsu failos."
 }

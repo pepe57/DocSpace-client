@@ -1,9 +1,14 @@
 {
+  "AddAIProvider": "Shtoni {{aiProvider}}",
+  "AddMCPServer": "Shtoni {{mcpServer}}",
   "AddMoreHeaders": "Shto më shumë tituj",
   "APIKey": "Çelësi API",
   "ConnectProductToYourDataAndTools": "Lidh {{productName}} me të dhënat dhe mjetet e tua.",
   "CustomMCPListTitle": "Personalizuar",
+  "DefaultProviderSetSuccess": "Ofruesi i parazgjedhur u caktua me sukses",
+  "DefaultProviderTitle": "Ofruesi i parazgjedhur",
   "DeleteImage": "Fshij imazhin",
+  "DeleteProvider": "Fshi {{aiProvider}}",
   "DeleteProviderDescription": "Fshirja e këtij ofruesi do të anulojë qasjen për të gjithë përdoruesit dhe cilësimet e tij do të fshihen përgjithmonë. Për ta përdorur përsëri ofruesin, do t'ju duhet ta konfiguroni nga e para.",
   "DeleteServer": "Fshij serverin",
   "DeleteServerDescription": "Fshirja e këtij serveri do të anulojë aksesin për të gjithë përdoruesit dhe cilësimet e tij do të fshihen përgjithmonë.\nPër ta përdorur përsëri serverin, do t'ju duhet ta konfiguroni nga e para.",
@@ -21,6 +26,8 @@
   "KnowledgeKeyDescription": "Futni çelësin API të marrë nga ofruesi i bazës së njohurive.",
   "MCPServerAdvancedSettingsHint": "Përdorni këtë seksion për të kaluar headers shtesë HTTP, si tokena autorizimi.",
   "MCPServerDescriptionHint": "Shkruani një shpjegim të shkurtër për qëllimin e integrimit.",
+  "MCPUnavailableError": "{{mcpServer}} është i papashtërshëm",
+  "Model": "Model",
   "Provider": "Ofruesi",
   "ProviderKey": "Çelësi",
   "ProviderNameInputHint": "Përdorni një emër që është i përshtatshëm për të identifikuar këtë lidhje.",
@@ -35,12 +42,5 @@
   "ServerUpdatedSuccess": "Serveri u përditësua me sukses.",
   "ServiceIcon": "Ikona e shërbimit",
   "SystemMCPListTitle": "Sistemi",
-  "WebSearchKeyHiddenDescription": "Çelësi API shfaqet vetëm një herë pas ruajtjes dhe më pas fshihet për qëllime sigurie.",
-  "AddAIProvider": "Shtoni {{aiProvider}}",
-  "AddMCPServer": "Shtoni {{mcpServer}}",
-  "DefaultProviderSetSuccess": "Ofruesi i parazgjedhur u caktua me sukses",
-  "DefaultProviderTitle": "Ofruesi i parazgjedhur",
-  "DeleteProvider": "Fshi {{aiProvider}}",
-  "MCPUnavailableError": "{{mcpServer}} është i papashtërshëm",
-  "Model": "Model"
+  "WebSearchKeyHiddenDescription": "Çelësi API shfaqet vetëm një herë pas ruajtjes dhe më pas fshihet për qëllime sigurie."
 }

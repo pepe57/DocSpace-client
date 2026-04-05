@@ -17,7 +17,7 @@
   "RemoveFromGroup": "Odstranit z skupiny",
   "RemoveGroup": "Odstranit skupinu",
   "RemoveGroupConfirmation": "Jste na pokraji smazání skupiny místností. Jste si jisti, že chcete pokračovat?",
-  "RemoveGroupInfo": "Pokojí zahrnuté v skupině budou zobrazeny v sekci <strong class=\"text-primary\">All Rooms</strong class=\"text-primary\">.",
+  "RemoveGroupInfo": "Pokojí zahrnuté v skupině budou zobrazeny v sekci <strong>Všechny pokoje</strong>.",
   "RoomAddedToGroup": "Vybraná místnost byla přidána do <1>{{groupName}}</1>.",
   "RoomGrouping": "Skupování místností",
   "RoomGroupingDisabled": "Skupování místností je zakázáno",

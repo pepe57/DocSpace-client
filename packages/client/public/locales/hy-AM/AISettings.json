@@ -1,9 +1,14 @@
 {
+  "AddAIProvider": "Ավելացրեք {{aiProvider}}",
+  "AddMCPServer": "Հավելել {{mcpServer}}",
   "AddMoreHeaders": "Ավելացնել ավելի շատ վերնագրեր",
   "APIKey": "API բանալի",
   "ConnectProductToYourDataAndTools": "Միացրեք {{productName}}-ը ձեր տվյալների և գործիքների հետ։",
   "CustomMCPListTitle": "Հարմարեցված",
+  "DefaultProviderSetSuccess": "Լռելյայն մատակարարը հաջողությամբ սահմանվեց",
+  "DefaultProviderTitle": "Լռելյայն մատակարար",
   "DeleteImage": "Ջնջել նկարը",
+  "DeleteProvider": "Ջնջել {{aiProvider}}-ը",
   "DeleteProviderDescription": "Այս պրովայդերը ջնջելը կզրկի բոլոր օգտատերերի մուտքը, և դրա կարգավորումները ընդմիշտ կջնջվեն: Պրովայդերը կրկին օգտագործելու համար դուք պետք է այն կարգավորեք զրոյից:",
   "DeleteServer": "Ջնջել սերվերը",
   "DeleteServerDescription": "Այս սերվերը ջնջելը կզրկի բոլոր օգտատերերի մուտքը, և դրա կարգավորումները ընդմիշտ կջնջվեն։\n Սերվերը կրկին օգտագործելու համար դուք պետք է այն կարգավորեք զրոյից։",
@@ -21,6 +26,8 @@
   "KnowledgeKeyDescription": "Մուտքագրեք ձեր գիտելիքների բազայի մատակարարից ստացված API բանալին",
   "MCPServerAdvancedSettingsHint": "Օգտագործեք այս բաժինը՝ լրացուցիչ HTTP վերնագրեր, ինչպիսիք են լիազորման տոկենները, փոխանցելու համար։",
   "MCPServerDescriptionHint": "Գրեք ինտեգրման նպատակի համառոտ բացատրությունը",
+  "MCPUnavailableError": "{{mcpServer}}-ը անհասանելի է",
+  "Model": "Մոդել",
   "Provider": "Պրովայդեր",
   "ProviderKey": "Բանալի",
   "ProviderNameInputHint": "Օգտագործեք ցանկացած անուն, որը ձեզ համար հարմար է՝ այս կապը նույնականացնելու համար",
@@ -35,12 +42,5 @@
   "ServerUpdatedSuccess": "Սերվերը հաջողությամբ թարմացված է",
   "ServiceIcon": "Սերվերի նշան",
   "SystemMCPListTitle": "Սիստեմ",
-  "WebSearchKeyHiddenDescription": "API բանալին պահպանվելուց հետո ցուցադրվում է միայն մեկ անգամ, ապա թաքցվում է անվտանգության նկատառումներից ելնելով։",
-  "AddAIProvider": "Ավելացրեք {{aiProvider}}",
-  "AddMCPServer": "Հավելել {{mcpServer}}",
-  "DefaultProviderSetSuccess": "Լռելյայն մատակարարը հաջողությամբ սահմանվեց",
-  "DefaultProviderTitle": "Լռելյայն մատակարար",
-  "DeleteProvider": "Ջնջել {{aiProvider}}-ը",
-  "MCPUnavailableError": "{{mcpServer}}-ը անհասանելի է",
-  "Model": "Մոդել"
+  "WebSearchKeyHiddenDescription": "API բանալին պահպանվելուց հետո ցուցադրվում է միայն մեկ անգամ, ապա թաքցվում է անվտանգության նկատառումներից ելնելով։"
 }

@@ -1,9 +1,14 @@
 {
+  "AddAIProvider": "Thêm {{aiProvider}}",
+  "AddMCPServer": "Thêm {{mcpServer}}",
   "AddMoreHeaders": "Thêm các tiêu đề khác",
   "APIKey": "Khóa API",
   "ConnectProductToYourDataAndTools": "Kết nối {{productName}} với dữ liệu và các công cụ của bạn.",
   "CustomMCPListTitle": "Tùy chỉnh",
+  "DefaultProviderSetSuccess": "Đã thiết lập nhà cung cấp mặc định thành công",
+  "DefaultProviderTitle": "Nhà cung cấp mặc định",
   "DeleteImage": "Xóa ảnh",
+  "DeleteProvider": "Xóa {{aiProvider}}",
   "DeleteProviderDescription": "Xóa nhà cung cấp này sẽ thu hồi quyền truy cập của tất cả người dùng và các cài đặt của nó sẽ bị xóa vĩnh viễn.\nĐể sử dụng lại nhà cung cấp này, bạn sẽ cần thiết lập lại từ đầu.",
   "DeleteServer": "Xóa máy chủ",
   "DeleteServerDescription": "Xóa máy chủ này sẽ thu hồi quyền truy cập của tất cả người dùng và các cài đặt của nó sẽ bị xóa vĩnh viễn.\nĐể sử dụng lại máy chủ, bạn sẽ cần thiết lập lại nó từ đầu.",
@@ -21,6 +26,8 @@
   "KnowledgeKeyDescription": "Nhập khóa API đã lấy được từ nhà cung cấp cơ sở kiến thức của bạn.",
   "MCPServerAdvancedSettingsHint": "Sử dụng phần này để truyền các tiêu đề HTTP bổ sung, như các mã thông báo xác thực.",
   "MCPServerDescriptionHint": "Viết một giải thích ngắn gọn về mục đích của tích hợp này.",
+  "MCPUnavailableError": "Máy chủ {{mcpServer}} không khả dụng",
+  "Model": "Mô hình",
   "Provider": "Nhà cung cấp",
   "ProviderKey": "Chìa khóa",
   "ProviderNameInputHint": "Sử dụng bất kỳ tên nào tiện lợi để bạn xác định kết nối này.",
@@ -35,12 +42,5 @@
   "ServerUpdatedSuccess": "Đã cập nhật máy chủ thành công",
   "ServiceIcon": "Biểu tượng dịch vụ",
   "SystemMCPListTitle": "Hệ thống",
-  "WebSearchKeyHiddenDescription": "API key chỉ hiển thị một lần khi lưu và sau đó sẽ bị ẩn để đảm bảo an toàn.",
-  "AddAIProvider": "Thêm {{aiProvider}}",
-  "AddMCPServer": "Thêm {{mcpServer}}",
-  "DefaultProviderSetSuccess": "Đã thiết lập nhà cung cấp mặc định thành công",
-  "DefaultProviderTitle": "Nhà cung cấp mặc định",
-  "DeleteProvider": "Xóa {{aiProvider}}",
-  "MCPUnavailableError": "Máy chủ {{mcpServer}} không khả dụng",
-  "Model": "Mô hình"
+  "WebSearchKeyHiddenDescription": "API key chỉ hiển thị một lần khi lưu và sau đó sẽ bị ẩn để đảm bảo an toàn."
 }

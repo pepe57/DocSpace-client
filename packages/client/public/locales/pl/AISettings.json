@@ -1,9 +1,14 @@
 {
+  "AddAIProvider": "Dodaj {{aiProvider}}",
+  "AddMCPServer": "Dodaj {{mcpServer}}",
   "AddMoreHeaders": "Dodaj więcej nagłówków",
   "APIKey": "Klucz API",
   "ConnectProductToYourDataAndTools": "Połącz {{productName}} z Twoimi danymi i narzędziami.",
   "CustomMCPListTitle": "Niestandardowe",
+  "DefaultProviderSetSuccess": "Domyślny dostawca został pomyślnie ustawiony",
+  "DefaultProviderTitle": "Domyślny dostawca",
   "DeleteImage": "Usuń obraz",
+  "DeleteProvider": "Usuń {{aiProvider}}",
   "DeleteProviderDescription": "Usunięcie tego dostawcy spowoduje unieważnienie dostępu dla wszystkich użytkowników, a jego ustawienia zostaną trwale usunięte.\nAby ponownie użyć tego dostawcy, konieczne będzie jego ponowne skonfigurowanie od podstaw.",
   "DeleteServer": "Usuń serwer",
   "DeleteServerDescription": "Usunięcie tego serwera spowoduje unieważnienie dostępu dla wszystkich użytkowników, a jego ustawienia zostaną trwale usunięte.\nAby ponownie użyć tego serwera, konieczne będzie jego skonfigurowanie od nowa.",
@@ -21,6 +26,8 @@
   "KnowledgeKeyDescription": "Wprowadź klucz API uzyskany od dostawcy bazy wiedzy.",
   "MCPServerAdvancedSettingsHint": "Użyj tej sekcji, aby przekazywać dodatkowe nagłówki HTTP, takie jak tokeny autoryzacyjne.",
   "MCPServerDescriptionHint": "Napisz krótkie wyjaśnienie celu integracji.",
+  "MCPUnavailableError": "Serwer {{mcpServer}} jest niedostępny",
+  "Model": "Model",
   "Provider": "Dostawca",
   "ProviderKey": "Klucz",
   "ProviderNameInputHint": "Użyj dowolnej nazwy, która będzie dla Ciebie wygodna, aby zidentyfikować to połączenie.",
@@ -35,12 +42,5 @@
   "ServerUpdatedSuccess": "Serwer został zaktualizowany pomyślnie",
   "ServiceIcon": "Ikona usługi",
   "SystemMCPListTitle": "System",
-  "WebSearchKeyHiddenDescription": "Klucz API jest wyświetlany tylko raz podczas zapisywania, a następnie jest ukrywany ze względów bezpieczeństwa.",
-  "AddAIProvider": "Dodaj {{aiProvider}}",
-  "AddMCPServer": "Dodaj {{mcpServer}}",
-  "DefaultProviderSetSuccess": "Domyślny dostawca został pomyślnie ustawiony",
-  "DefaultProviderTitle": "Domyślny dostawca",
-  "DeleteProvider": "Usuń {{aiProvider}}",
-  "MCPUnavailableError": "Serwer {{mcpServer}} jest niedostępny",
-  "Model": "Model"
+  "WebSearchKeyHiddenDescription": "Klucz API jest wyświetlany tylko raz podczas zapisywania, a następnie jest ukrywany ze względów bezpieczeństwa."
 }

@@ -1,9 +1,14 @@
 {
+  "AddAIProvider": "Adaugă {{aiProvider}}",
+  "AddMCPServer": "Adaugă {{mcpServer}}",
   "AddMoreHeaders": "Adăugare mai multe antete",
   "APIKey": "Cheie API",
   "ConnectProductToYourDataAndTools": "Conectați {{productName}} la datele și instrumentele dvs.",
   "CustomMCPListTitle": "Particularizare",
+  "DefaultProviderSetSuccess": "Furnizorul implicit a fost setat cu succes.",
+  "DefaultProviderTitle": "Furnizor implicit",
   "DeleteImage": "Ștergere imagine",
+  "DeleteProvider": "Șterge {{aiProvider}}",
   "DeleteProviderDescription": "După ștergerea furnizorului, accesul truturor utilizatorilor va fi revocat, iar setările furnizorului vor fi șterse definitiv.\nPentru a utiliza furnizorul din nou, setarea trebuie repetată de la zero.",
   "DeleteServer": "Ștergere server",
   "DeleteServerDescription": "După ştergerea serverului, accesul truturor utilizatorilor va fi revocat, iar setările furnizorului vor fi șterse definitiv.\n Pentru a utiliza serverul din nou, setarea trebuie repetată de la zero.",
@@ -21,6 +26,8 @@
   "KnowledgeKeyDescription": "Introduceți cheia API oferită de furnizorul bazei de cunoștințe",
   "MCPServerAdvancedSettingsHint": "Utilizați această secțiune pentru a transmite antete HTTP suplimentare, cum ar fi token-uri de autorizare.",
   "MCPServerDescriptionHint": "Scrieți o scurtă explicație despre scopul integrării.",
+  "MCPUnavailableError": "Serverul {{mcpServer}} nu este disponibil",
+  "Model": "Model",
   "Provider": "Furnizor",
   "ProviderKey": "Cheie",
   "ProviderNameInputHint": "Folosiți orice nume care vă este convenabil pentru identificarea acestei conexiuni",
@@ -35,12 +42,5 @@
   "ServerUpdatedSuccess": "Serverul a fost actualizat cu succes",
   "ServiceIcon": "Pictogramă Serviciu",
   "SystemMCPListTitle": "Sistem",
-  "WebSearchKeyHiddenDescription": "Cheia API se afișează o singură dată la salvare și este ascunsă ulterior din motive de securitate.",
-  "AddAIProvider": "Adaugă {{aiProvider}}",
-  "AddMCPServer": "Adaugă {{mcpServer}}",
-  "DefaultProviderSetSuccess": "Furnizorul implicit a fost setat cu succes.",
-  "DefaultProviderTitle": "Furnizor implicit",
-  "DeleteProvider": "Șterge {{aiProvider}}",
-  "MCPUnavailableError": "Serverul {{mcpServer}} nu este disponibil",
-  "Model": "Model"
+  "WebSearchKeyHiddenDescription": "Cheia API se afișează o singură dată la salvare și este ascunsă ulterior din motive de securitate."
 }

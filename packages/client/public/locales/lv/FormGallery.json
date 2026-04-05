@@ -3,10 +3,10 @@
   "EmptyFormGalleryScreenDescription": "Nevarēja atrast jūsu vaicājumam atbilstošus rezultātus",
   "ErrorViewDescription": "Mēģiniet vēlreiz vēlāk",
   "ErrorViewDescriptionNetworkError": "Šķiet, nav pieejams interneta savienojums.",
-  "SuggestChanges": "Ieteikt izmaiņas",
-  "TemplateInfo": "Informācija par veidni",
-  "ViewAllTemplates": "Skatīt visas veidnes",
   "ErrorViewHeader": "Galerija ir īslaicīgi pieejama.",
   "SelectTemplate": "Izvēlieties veidni",
-  "UploadGallery": "Augšupielādēt Galerijā"
+  "SuggestChanges": "Ieteikt izmaiņas",
+  "TemplateInfo": "Informācija par veidni",
+  "UploadGallery": "Augšupielādēt Galerijā",
+  "ViewAllTemplates": "Skatīt visas veidnes"
 }

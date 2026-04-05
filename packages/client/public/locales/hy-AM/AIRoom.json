@@ -1,4 +1,5 @@
 {
+  "AgentInViewModeWarning": "Դուք գտնվում եք այս {{aiAgent}}-ի համար <strong>view-only</strong> ռեժիմում։ Դուք կարող եք տեսնել այլ օգտատերերի {{aiChat}} գործունեության արդյունքները։",
   "AIAgentAccessRedirectNote": "Դուք կվերահուշվեք {{sectionName}} բաժնում 5 վայրկյանում։",
   "AIChat": "ԱԲ-Չատ",
   "AIInstructions": "ԱԲ հրահանգներ",
@@ -14,6 +15,5 @@
   "ResponseQualityNode": "<1>Նշում.</1> Պատասխանի որակը կարող է տարբեր լինել մոդելից կախված, լավագույն արդյունքների համար խորհուրդ է տրվում ավելի նոր մոդելներ։",
   "ResultStorage": "Արդյունքների պահպանում",
   "UploadFilesDevice": "Վերբեռնեք ֆայլեր ձեր անձնական սարքից",
-  "UploadFilesPortal": "Բեռնեք ֆայլեր {{sectionNameFirst}} կամ {{sectionNameSecond}} կայքերից",
-  "AgentInViewModeWarning": "Դուք գտնվում եք այս {{aiAgent}}-ի համար <strong>view-only</strong> ռեժիմում։ Դուք կարող եք տեսնել այլ օգտատերերի {{aiChat}} գործունեության արդյունքները։"
+  "UploadFilesPortal": "Բեռնեք ֆայլեր {{sectionNameFirst}} կամ {{sectionNameSecond}} կայքերից"
 }

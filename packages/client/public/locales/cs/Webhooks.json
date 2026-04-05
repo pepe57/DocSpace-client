@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "AI Agent vytvořen",
+  "AgentDeleted": "AI Agent smazán",
+  "AgentUpdated": "AI Agent aktualizován",
   "Before": "Před",
   "CreateWebhook": "Vytvoření webhooku",
   "DeleteHint": "Webhook bude trvale odstraněn.\nTuto akci nelze vrátit zpět.",
@@ -33,6 +36,9 @@
   "FolderRestored": "Obnovení složky",
   "FolderTrashed": "Složka zlikvidována",
   "FolderUpdated": "Aktualizace složky",
+  "FormFilledOut": "Vyplněný formulář",
+  "FormStopped": "Forma zastavena",
+  "FormSubmit": "Odesláno",
   "From": "Odesilatel",
   "Generate": "Generovat",
   "GroupCreated": "Vytvořená skupina",
@@ -89,11 +95,5 @@
   "WebhookRemoved": "Odstranění webhooku",
   "Webhooks": "Webové háčky",
   "WebhooksGuide": "Průvodce webovými háčky",
-  "WebhooksInfo": "Pomocí webhooků můžete provádět vlastní akce na straně jakékoli aplikace nebo webové stránky, kterou používáte, na základě různých událostí v aplikaci {{organizationName}} {{productName}}.\nZde můžete vytvářet a spravovat všechny své webové háčky, konfigurovat je a procházet historii všech webhooků a kontrolovat jejich výkonnost.",
-  "AgentCreated": "AI Agent vytvořen",
-  "AgentDeleted": "AI Agent smazán",
-  "AgentUpdated": "AI Agent aktualizován",
-  "FormFilledOut": "Vyplněný formulář",
-  "FormStopped": "Forma zastavena",
-  "FormSubmit": "Odesláno"
+  "WebhooksInfo": "Pomocí webhooků můžete provádět vlastní akce na straně jakékoli aplikace nebo webové stránky, kterou používáte, na základě různých událostí v aplikaci {{organizationName}} {{productName}}.\nZde můžete vytvářet a spravovat všechny své webové háčky, konfigurovat je a procházet historii všech webhooků a kontrolovat jejich výkonnost."
 }

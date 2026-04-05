@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "AI Agent luotu",
+  "AgentDeleted": "Poistettu tekoälyagentti",
+  "AgentUpdated": "AI Agent päivitetty",
   "Before": "Ennen",
   "CreateWebhook": "Luo webhook",
   "DeleteHint": "Webhook poistetaan pysyvästi.\nEt voi peruuttaa tätä toimintoa.",
@@ -33,6 +36,9 @@
   "FolderRestored": "Kansio palautettu",
   "FolderTrashed": "Kansio siirretty roskakoriin",
   "FolderUpdated": "Kansio päivitetty",
+  "FormFilledOut": "Lomake täytetty",
+  "FormStopped": "Lomake pysähtyi",
+  "FormSubmit": "Lomake lähetetty",
   "From": "Alkaen",
   "Generate": "Luo",
   "GroupCreated": "Ryhmä luotu",
@@ -89,11 +95,5 @@
   "WebhookRemoved": "Webhook poistettu",
   "Webhooks": "Webhookit",
   "WebhooksGuide": "Webhooks-opas",
-  "WebhooksInfo": "Webhookien avulla voit  suorittaa mukautettuja toimintoja millä tahansa sovelluksella tai verkkosivulla {{organizationName}} {{productName}}:n tapahtumien perusteella.\nTässä voit luoda ja hallita kaikkia webhookeja, määrittää ne ja selata kaikkien webhookien historiaa tarkastaaksesi niiden suoritusta.",
-  "AgentCreated": "AI Agent luotu",
-  "AgentDeleted": "Poistettu tekoälyagentti",
-  "AgentUpdated": "AI Agent päivitetty",
-  "FormFilledOut": "Lomake täytetty",
-  "FormStopped": "Lomake pysähtyi",
-  "FormSubmit": "Lomake lähetetty"
+  "WebhooksInfo": "Webhookien avulla voit  suorittaa mukautettuja toimintoja millä tahansa sovelluksella tai verkkosivulla {{organizationName}} {{productName}}:n tapahtumien perusteella.\nTässä voit luoda ja hallita kaikkia webhookeja, määrittää ne ja selata kaikkien webhookien historiaa tarkastaaksesi niiden suoritusta."
 }

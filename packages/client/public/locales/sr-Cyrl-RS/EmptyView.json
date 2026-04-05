@@ -2,6 +2,7 @@
   "CollaborationRoomEmptyTitle": "Добродошли у Колаборативну собу",
   "CollaboratorEmptyTitle": "Просторија је празна.",
   "CreateAIAgent": "Креирајте новог агента",
+  "CreateAIAgentDescription": "Почните да градите свог првог {{aiAgent}}",
   "CreateDocument": "Креирајте нови документ",
   "CreateDocumentDescription": "Искористите широке могућности за обраду текста.",
   "CreateForm": "Креирајте нови PDF образац",
@@ -16,7 +17,10 @@
   "CreateSpreadsheetDescription": "Обављајте прецизне калкулације уз минималан труд.",
   "CustomRoomEmptyTitle": "Добродошли на Прилагођену просторију",
   "DefaultFolderDescription": "Повуците фајлове овде или креирајте нове.",
+  "EmptyAIAgentsAIDisabledDescription": "Ова секција омогућава корисницима да раде са {{aiAgents}} — паметним асистентима за обраду докумената и других задатака. \nДа бисте почели да их користите, сервис за ВИ функције мора бити омогућен од стране {{productName}} администратора.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Да бисте креирали и користили {{aiAgents}}, повежите свој новчаник и укључите ВИ функције у подешавањима {{productName}}. Када то завршите, моћи ћете да радите са {{aiAgents}} и сарађујете са својим тимом.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Повежите свој новчаник и омогућите ВИ функције",
+  "EmptyAIAgentsTitle": "Креирајте свог {{aiAgent}}",
   "EmptyDescription": "Започни са брзим радњама:",
   "EmptyFavoritesDescription": "Означи фајлове и фолдере звездицом да их задржиш лако доступним и при руци.",
   "EmptyFavoritesTitle": "Још нема омиљених",
@@ -56,9 +60,5 @@
   "UploadDevicePDFFormOptionTitle": "Отпреми са уређаја",
   "UploadFromPortalTitle": "Отпреми из {{productName}}",
   "UploadPDFFormOptionDescription": "Одаберите спреман PDF формулар доступан у {{productName}} и отпремите га у просторију.",
-  "VirtualDataRoomEmptyTitle": "Добродошли у Виртуелну собу за податке",
-  "EmptyAIAgentsTitle": "Креирајте свог {{aiAgent}}",
-  "CreateAIAgentDescription": "Почните да градите свог првог {{aiAgent}}",
-  "EmptyAIAgentsAIDisabledDescription": "Ова секција омогућава корисницима да раде са {{aiAgents}} — паметним асистентима за обраду докумената и других задатака. \nДа бисте почели да их користите, сервис за ВИ функције мора бити омогућен од стране {{productName}} администратора.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Да бисте креирали и користили {{aiAgents}}, повежите свој новчаник и укључите ВИ функције у подешавањима {{productName}}. Када то завршите, моћи ћете да радите са {{aiAgents}} и сарађујете са својим тимом."
+  "VirtualDataRoomEmptyTitle": "Добродошли у Виртуелну собу за податке"
 }
