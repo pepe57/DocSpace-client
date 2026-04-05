@@ -75,10 +75,20 @@ async function testRunnerRoutes(fastify) {
         return new Promise((resolve, reject) => {
           console.log(`Executing in ${workDir}: ${command} ${args.join(" ")}`);
 
+          // Ensure node_modules/.bin is in PATH so locally-installed binaries
+          // (vitest, cross-env, etc.) are found on all platforms including Windows.
+          const binPath = path.join(workDir, "node_modules", ".bin");
+          const pathSep = process.platform === "win32" ? ";" : ":";
+          const env = {
+            ...process.env,
+            PATH: `${binPath}${pathSep}${process.env.PATH || ""}`,
+          };
+
           const proc = spawn(command, args, {
             cwd: workDir,
             shell: true,
             stdio: "pipe",
+            env,
           });
 
           let stdout = "";
