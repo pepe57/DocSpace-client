@@ -87,7 +87,7 @@
   "NoWalletTransactionDescription": "Once you start using the wallet, the payment history will be displayed here.",
   "NumberOfRoomsAccordingToTariff": "Number of rooms according to your tariff plan: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Number of admins according to your tariff plan: {{currentValue}}/{{maxValue}}",
-  "OnlyPayerCanManageServices": "Only the Payer can manage services. <1>Learn more</1>",
+  "OnlyPayerCanManageSection": "Only the Payer can manage this section. <1>Learn more</1>",
   "OnlyPortalAdminsShown": "Only {{productName}} admins are shown here",
   "PartialPaymentDescription": "Moving forward, the full amount will be charged once per billing cycle on your regular billing date.",
   "PartialPaymentNoDate": "Today, you're only paying for the selected amount of {{storageUnit}} for the remaining days until your billing date.",
