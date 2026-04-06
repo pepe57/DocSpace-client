@@ -42,6 +42,9 @@ export const SDKConfigProvider: React.FC<{ children: React.ReactNode }> = ({
             setSdkConfig(data);
             res = data;
             break;
+          case "navigateSection":
+          case "setCustomActions":
+            return;
           default:
             res = "Wrong method for this mode";
         }

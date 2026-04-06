@@ -76,9 +76,8 @@ type ServicesItemsProps = {
   storageSizeIncrement?: number;
   onClick?: (id: string) => void;
   storagePriceIncrement?: number;
+  isServiceActionDisabled?: boolean;
   isPayer?: boolean;
-  cardLinkedOnFreeTariff?: boolean;
-  isFreeTariff?: boolean;
   currentStoragePlanSize?: number;
   nextStoragePlanSize?: number;
   storageExpiryDate?: string;
@@ -109,9 +108,8 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
   storageSizeIncrement,
   onClick,
   storagePriceIncrement,
-  cardLinkedOnFreeTariff,
-  isFreeTariff,
   isPayer,
+  isServiceActionDisabled,
   onToggle,
   currentStoragePlanSize,
   nextStoragePlanSize,
@@ -134,7 +132,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
   previousStoragePlanSize,
   isStorageDeactivationVisited,
 }) => {
-  const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
+  const isDisabled = isServiceActionDisabled;
   const { t } = useServicesActions();
 
   const permissionTooltipText = (
@@ -284,7 +282,6 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
             return (
               <ServiceCard
                 key={item.id}
-                cardDisabled={isDisabled}
                 toggleDisabled={isDisabled}
                 priceTitle={item.priceTitle}
                 id={item.id}
@@ -311,8 +308,12 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
             return (
               <ServiceCard
                 key={item.id}
+                cardDisabled={
+                  isCardLinkedToPortal
+                    ? !wasFirstAiServiceTopUp && !isPayer
+                    : false
+                }
                 toggleDisabled={isDisabled}
-                cardDisabled={wasFirstAiServiceTopUp ? false : isDisabled}
                 onClick={handleClick}
                 onToggle={handleToggle}
                 serviceTitle={item.title}
@@ -338,7 +339,9 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
             return (
               <ServiceCard
                 key={item.id}
-                cardDisabled={isDisabled}
+                cardDisabled={
+                  isCardLinkedToPortal ? !hasStorageSubscription : false
+                }
                 toggleDisabled={!!eventDisabled}
                 onClick={handleClick}
                 onToggle={handleToggle}
@@ -374,7 +377,7 @@ export default inject(
     servicesStore,
   }: TStore) => {
     const {
-      cardLinkedOnFreeTariff,
+      isServiceActionDisabled,
       isPayer,
       isCardLinkedToPortal,
       servicesQuotasFeatures,
@@ -404,7 +407,6 @@ export default inject(
       previousStoragePlanSize,
     } = currentTariffStatusStore;
 
-    const { isFreeTariff } = currentQuotaStore;
     const { currentDeviceType } = settingsStore;
     const isMobile = currentDeviceType === DeviceType.mobile;
     const isTablet = currentDeviceType === DeviceType.tablet;
@@ -412,9 +414,8 @@ export default inject(
     return {
       servicesQuotasFeatures,
       storageSizeIncrement,
+      isServiceActionDisabled,
       isPayer,
-      cardLinkedOnFreeTariff,
-      isFreeTariff,
       storagePriceIncrement,
       currentStoragePlanSize,
       hasStorageSubscription,

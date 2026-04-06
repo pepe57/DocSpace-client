@@ -34,7 +34,6 @@ import {
   AI_ENUM,
   BACKUP_SERVICE,
   TOTAL_SIZE,
-  WEB_SEARCH,
 } from "@docspace/shared/constants";
 import { setServiceState } from "@docspace/shared/api/portal";
 
@@ -69,6 +68,7 @@ const Services = (props: InjectedProps) => {
     formatAiServiceCurrency,
     currentStoragePlanSize,
     getAIConfig,
+    isServiceActionDisabled,
   } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [dialogVisibility, setDialogVisibility] = useState({
@@ -219,9 +219,13 @@ const Services = (props: InjectedProps) => {
       return;
     }
 
-    if (id === AI_ENUM && wasFirstAiServiceTopUp) {
-      navigate("/portal-settings/payments/services/ai-services");
-      return;
+    if (id === AI_ENUM) {
+      if (isServiceActionDisabled && !wasFirstAiServiceTopUp) return;
+
+      if (wasFirstAiServiceTopUp) {
+        navigate("/portal-settings/payments/services/ai-services");
+        return;
+      }
     }
 
     if (id === BACKUP_SERVICE && isCardLinkedToPortal) {
@@ -266,6 +270,8 @@ const Services = (props: InjectedProps) => {
     }
 
     if (id === AI_ENUM && !wasFirstAiServiceTopUp) {
+      if (isServiceActionDisabled) return;
+
       updateDialogVisibility(AI_ENUM, true);
       return;
     }
@@ -459,6 +465,7 @@ const mapStoreToProps = ({
     isShowStorageTariffDeactivatedModal,
     changeServiceState,
     isCardLinkedToPortal,
+    isServiceActionDisabled,
   } = paymentStore;
 
   const { showPortalSettingsLoader } = clientLoadingStore;
@@ -482,6 +489,7 @@ const mapStoreToProps = ({
     logoText,
     formatAiServiceCurrency,
     getAIConfig,
+    isServiceActionDisabled,
   };
 };
 

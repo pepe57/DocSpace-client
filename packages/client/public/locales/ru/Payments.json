@@ -87,7 +87,6 @@
   "NoWalletTransactionDescription": "Как только вы начнете использовать кошелек, история платежей будет отображаться здесь.",
   "NumberOfRoomsAccordingToTariff": "Количество комнат в соответствии с вашим тарифным планом: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Количество администраторов в соответствии с вашим тарифным планом: {{currentValue}}/{{maxValue}}",
-  "OnlyPayerCanManageServices": "Управлять сервисами может только плательщик. <1>Подробнее</1>",
   "OnlyPortalAdminsShown": "Здесь отображаются только администраторы {{productName}}",
   "PartialPaymentDescription": "В дальнейшем вся сумма будет списываться один раз за каждый расчетный период в обычную дату списания.",
   "PartialPaymentNoDate": "Сегодня вы платите только за выбранный объем {{storageUnit}} на оставшиеся дни до даты платежа.",

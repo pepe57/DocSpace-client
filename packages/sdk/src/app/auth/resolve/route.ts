@@ -24,39 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export enum FormsSection {
-  MyForms = "my-forms",
-  Library = "library",
-  InProgress = "in-progress",
-  CompletedForms = "completed-forms",
-  Settings = "settings",
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(request: NextRequest) {
+  const { searchParams } = request.nextUrl;
+  const url = searchParams.get("url");
+
+  if (!url) {
+    return NextResponse.json(
+      { error: "Missing url parameter" },
+      { status: 400 },
+    );
+  }
+
+  try {
+    const res = await fetch(url, { redirect: "manual" });
+
+    const location = res.headers.get("location");
+
+    if (!location) {
+      return NextResponse.json(
+        { error: "No redirect location found" },
+        { status: 502 },
+      );
+    }
+
+    const locationUrl = new URL(location);
+    const key = locationUrl.searchParams.get("key");
+    const emplType = locationUrl.searchParams.get("emplType");
+
+    if (!key) {
+      return NextResponse.json(
+        { error: "Missing key in redirect URL" },
+        { status: 502 },
+      );
+    }
+
+    return NextResponse.json({ key, emplType });
+  } catch {
+    return NextResponse.json(
+      { error: "Failed to resolve redirect" },
+      { status: 500 },
+    );
+  }
 }
-
-export enum SettingsSubSection {
-  Billing = "billing",
-  AiAgent = "ai-agent",
-  Access = "access",
-  CollectData = "collect-data",
-}
-
-export const DEFAULT_SETTINGS_SUBSECTION = SettingsSubSection.Billing;
-
-export type CustomContextMenuAction = {
-  key: string;
-  label: string;
-  icon?: string;
-  section?: FormsSection[];
-};
-
-export type CustomActionsConfig = {
-  contextMenu?: {
-    file?: CustomContextMenuAction[];
-    folder?: CustomContextMenuAction[];
-  };
-};
-
-export type CustomActionEventData = {
-  action: string;
-  type: "file" | "folder";
-  item: object;
-};

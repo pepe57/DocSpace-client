@@ -36,12 +36,13 @@ import Section from "@docspace/ui-kit/components/section";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
+import { frameCallbackData, frameCallEvent } from "@docspace/shared/utils/common";
 import { ShareAccessRights } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
-import { FormsSection } from "@/types/forms";
-import { sectionFromPathname, sectionToPath } from "../_utils/sectionFromPathname";
+import { FormsSection, DEFAULT_SETTINGS_SUBSECTION, type CustomActionsConfig } from "@/types/forms";
+import { sectionFromPathname, sectionToPath, settingsSubSectionToPath } from "../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 // LibraryNavigationStore removed — library uses URL routing now
 import { useFormsListStore } from "../_store/FormsListStore";
@@ -57,6 +58,7 @@ import useFormEventHooks from "../_hooks/useFormEventHooks";
 import useEditorGuard from "../_hooks/useEditorGuard";
 import { MIN_SECTION_WIDTH } from "../_api/aiAgentSettings";
 import { useFormsTourStore } from "../_store/FormsTourStore";
+import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
 import useFormsTour from "../_hooks/useFormsTour";
 import FormsSidebar from "../_components/sidebar";
 import FormsEditor from "../_components/forms-editor";
@@ -75,7 +77,7 @@ type FormsShellProps = {
 };
 
 const FormsShell = ({ commonData, children }: FormsShellProps) => {
-  useSDKConfig();
+  const { sdkConfig } = useSDKConfig();
   const isReady = useInitCommonStores(commonData);
 
   const {
@@ -94,11 +96,17 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const formsListStore = useFormsListStore();
   const { items, folders, isLoading } = formsListStore;
   const tourStore = useFormsTourStore();
+  const customActionsStore = useFormsCustomActionsStore();
   const { currentDeviceType } = useDeviceType();
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
+
+  const initialShowMenu = React.useRef(
+    searchParams.get("showMenu") !== "false",
+  );
+  const showMenu = initialShowMenu.current && sdkConfig?.showMenu !== false;
 
   const authTokenSet = React.useRef(false);
   React.useEffect(() => {
@@ -110,6 +118,62 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       setAuthToken(token);
     }
   }, [commonData.authToken]);
+
+  const appReadySent = React.useRef(false);
+  React.useEffect(() => {
+    if (isReady && !appReadySent.current) {
+      appReadySent.current = true;
+      frameCallEvent({ event: "onAppReady", data: {} });
+    }
+  }, [isReady]);
+
+  React.useEffect(() => {
+    const handler = (e: MessageEvent) => {
+      let eventData;
+      try {
+        eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+      } catch {
+        return;
+      }
+
+      const methodName = eventData?.data?.methodName;
+      const data = eventData?.data?.data;
+
+      switch (methodName) {
+        case "navigateSection": {
+          const section = data?.section as string;
+          if (!section) return;
+
+          const validSections = Object.values(FormsSection) as string[];
+          if (!validSections.includes(section)) return;
+
+          const params = new URLSearchParams();
+          const rid = searchParams.get("roomId") ?? "";
+          const lid = searchParams.get("libraryId") ?? "";
+          if (rid) params.set("roomId", rid);
+          if (lid) params.set("libraryId", lid);
+          const qs = params.toString();
+
+          if (section === FormsSection.Settings) {
+            router.replace(`${settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION)}${qs ? `?${qs}` : ""}`);
+          } else {
+            router.replace(`${sectionToPath(section as FormsSection)}${qs ? `?${qs}` : ""}`);
+          }
+
+          frameCallbackData({ section });
+          break;
+        }
+        case "setCustomActions": {
+          if (data) customActionsStore.setActions(data as CustomActionsConfig);
+          frameCallbackData(data);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, [router, searchParams, customActionsStore]);
 
   const socketFolderIds = React.useMemo(() => {
     const ids = new Set<string>();
@@ -308,15 +372,16 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   // Show welcome dialog on first visit
   const [showWelcome, setShowWelcome] = React.useState(false);
   React.useEffect(() => {
-    if (isReady && !tourStore.tourCompleted) {
+    if (isReady && !tourStore.tourCompleted && showMenu) {
       setShowWelcome(true);
     }
-  }, [isReady, tourStore.tourCompleted]);
+  }, [isReady, tourStore.tourCompleted, showMenu]);
 
   // Clean up mock data when tour ends
   const prevTourRunning = React.useRef(tourStore.isRunning);
   const savedUserAccess = React.useRef<number | null>(null);
   const savedAskFromDBAgentId = React.useRef<number | null>(null);
+  const savedAiAgentEnabled = React.useRef<boolean | null>(null);
   React.useEffect(() => {
     if (prevTourRunning.current && !tourStore.isRunning) {
       // Tour just ended — restore original state
@@ -325,6 +390,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         fetchSection();
       }
       runInAction(() => {
+        if (savedAiAgentEnabled.current !== null) {
+          aiStore.aiAgentEnabled = savedAiAgentEnabled.current;
+          savedAiAgentEnabled.current = null;
+        }
         if (savedAskFromDBAgentId.current !== null) {
           aiStore.askFromDBAgentId = savedAskFromDBAgentId.current;
           savedAskFromDBAgentId.current = null;
@@ -388,7 +457,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       }
     >
       <MobileStub />
-      <FormsSidebar />
+      {showMenu && <FormsSidebar />}
       <AiChatPanel rootRef={rootRef} />
       <div className={styles.sectionArea}>
         <Section
@@ -435,6 +504,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           formsListStore.setIsLoading(false);
           // Ensure AI features are visible during tour
           runInAction(() => {
+            if (!aiStore.aiAgentEnabled) {
+              savedAiAgentEnabled.current = aiStore.aiAgentEnabled;
+              aiStore.aiAgentEnabled = true;
+            }
             if (!aiStore.askFromDBAgentId) {
               savedAskFromDBAgentId.current = aiStore.askFromDBAgentId;
               aiStore.askFromDBAgentId = -999;
