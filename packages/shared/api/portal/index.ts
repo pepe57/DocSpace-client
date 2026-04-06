@@ -558,7 +558,6 @@ export async function getTransactionHistory(
   serviceName: string = "",
   signal?: AbortSignal,
 ) {
- //debugger
   const params = {
     startDate,
     endDate,
@@ -647,6 +646,10 @@ export async function startTransactionHistoryReport(
 
   if (serviceName) {
     data.serviceName = serviceName;
+  }
+
+  if (serviceName === AI_TOOLS) {
+    data.writeOffServiceQuota = true;
   }
 
   const options = {
@@ -767,3 +770,4 @@ export const setAiModelRestrictions = async (
     signal,
   });
 };
+
