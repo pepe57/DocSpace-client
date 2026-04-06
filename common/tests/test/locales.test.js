@@ -750,13 +750,53 @@ describe("Locales Tests", () => {
     expect(errorsCount, message).toBe(0);
   });
 
-  it("WrongScriptTest: Verify that sr-Cyrl-RS translations do not contain Latin Serbian script characters (š, č, ć, ž, đ).", () => {
-    // These characters are specific to Serbian Latin and have no place in Cyrillic translations.
-    // Their presence indicates the AI translator used the wrong script.
-    const latinSerbianPattern = /[šŠčČćĆžŽđĐ]/;
+  it("WrongScriptTest: Verify that sr-Cyrl-RS translations are written in Cyrillic script.", () => {
+    // Serbian Cyrillic (Вуковица) alphabet:
+    // А Б В Г Д Ђ Е Ж З И Ј К Л Љ М Н Њ О П Р С Т Ћ У Ф Х Ц Ч Џ Ш (and lowercase)
+    //
+    // Algorithm:
+    // 1. Strip {{variables}} and <html/react tags> — these are always Latin and that is correct.
+    // 2. If at least one Cyrillic letter (U+0400–U+04FF) remains → the translation is OK.
+    //    English brand names, OS names, technical terms are allowed alongside Cyrillic text.
+    // 3. If NO Cyrillic at all → check whether the stripped value equals the same key's value
+    //    in any other language.  If it matches → the value is intentionally unchanged
+    //    (product name, social-provider name, OS name, etc.) → OK.
+    // 4. No Cyrillic AND no match in other languages → wrong-script translation → flag it.
+
+    // Build cross-language lookup once: "namespace|key" → { language: rawValue }
+    const crossLangMap = new Map();
+    translationFiles.forEach((file) => {
+      file.translations.forEach((t) => {
+        const mapKey = `${file.namespace}|${t.key}`;
+        if (!crossLangMap.has(mapKey)) crossLangMap.set(mapKey, {});
+        crossLangMap.get(mapKey)[file.language] = t.value;
+      });
+    });
+
+    function stripMarkup(text) {
+      return text
+        .replace(/\{\{[^}]+\}\}/g, "") // {{variables}}
+        .replace(/<[^>]*>/g, "");       // <html> / <0> react trans tags
+    }
+
+    function hasCyrillic(text) {
+      return /[\u0400-\u04FF]/.test(stripMarkup(text));
+    }
+
+    function matchesOtherLanguage(namespace, key, value) {
+      const langs = crossLangMap.get(`${namespace}|${key}`) || {};
+      const stripped = stripMarkup(value).trim();
+      if (!stripped) return true; // nothing left after stripping — skip
+      return Object.entries(langs).some(([lang, otherVal]) => {
+        // Exclude Serbian variants — sr-Latn-RS is also Latin Serbian, matching against
+        // it would produce false negatives (untranslated Latin text appears "intentional").
+        if (lang === "sr-Cyrl-RS" || lang === "sr-Latn-RS") return false;
+        return stripMarkup(otherVal || "").trim() === stripped;
+      });
+    }
 
     let message =
-      "Next keys in sr-Cyrl-RS contain Latin Serbian script characters (š, č, ć, ž, đ):\r\n\r\n";
+      "Next keys in sr-Cyrl-RS contain no Cyrillic letters (wrong script):\r\n\r\n";
     let errorsCount = 0;
     let i = 0;
     const wrongKeys = [];
@@ -768,11 +808,12 @@ describe("Locales Tests", () => {
     cyrillicFiles.forEach((cyrillicFile) => {
       cyrillicFile.translations.forEach((translation) => {
         if (!translation.value) return;
-        if (!latinSerbianPattern.test(translation.value)) return;
+        if (hasCyrillic(translation.value)) return; // ✓ has Cyrillic
+        if (matchesOtherLanguage(cyrillicFile.namespace, translation.key, translation.value)) return; // ✓ intentional
 
         message +=
           `${++i}. path='${cyrillicFile.path}' key='${translation.key}'\r\n` +
-          `  Value: '${translation.value.substring(0, 100)}'\r\n\r\n`;
+          `  Value: '${translation.value.substring(0, 150)}'\r\n\r\n`;
         errorsCount++;
         wrongKeys.push({ path: cyrillicFile.path, key: translation.key });
       });
