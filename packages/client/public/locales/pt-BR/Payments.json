@@ -164,5 +164,6 @@
   "TopUpTo": "Para",
   "UnknownPayerForAdmin": "Não foi possível encontrar um contato correspondente ao e-mail do Stripe. A cobrança e os serviços continuarão funcionando, mas recomendamos entrar em contato com o proprietário do {{productName}} para atribuir um novo Pagador.",
   "UnknownPayerForOwner": "Não foi possível encontrar um contato correspondente ao e-mail do Stripe. Sua cobrança e serviços continuarão funcionando, mas recomendamos atribuir um Pagador novo para gerenciar as configurações de cobrança em {{productName}}.",
-  "WalletSectionDescription": "A Carteira {{productName}} permite que você compre facilmente serviços como armazenamento, ferramentas de IA e backups. Adicione fundos e selecione os serviços de que você precisa para começar."
+  "WalletSectionDescription": "A Carteira {{productName}} permite que você compre facilmente serviços como armazenamento, ferramentas de IA e backups. Adicione fundos e selecione os serviços de que você precisa para começar.",
+  "OnlyPayerCanManageSection": "Apenas o Pagador pode gerenciar esta seção. <1>Saiba mais</1>"
 }

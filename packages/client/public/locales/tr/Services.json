@@ -112,5 +112,6 @@
   "UntilDate": "{{date}} tarihine kadar",
   "Usage": "Kullanım",
   "WalletBalance": "Cüzdan bakiyesi",
-  "WalletTopUpRequired": "Yükleme gerekiyor: {{currency}}"
+  "WalletTopUpRequired": "Yükleme gerekiyor: {{currency}}",
+  "LastTopUp": "<1>Son yükleme</1>: <2>{{currency}}</2> tarihinde {{date}}."
 }

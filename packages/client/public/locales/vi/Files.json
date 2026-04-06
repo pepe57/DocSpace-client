@@ -221,5 +221,7 @@
   "RemovedFromRecent": "Đã xóa khỏi mục gần đây",
   "UserLimitDescription": "Thiết lập số lượng người dùng có thể tham gia qua liên kết mời này.",
   "UsersJoined": "Người dùng đã tham gia:",
-  "ValidUntil": "Có giá trị đến:"
+  "ValidUntil": "Có giá trị đến:",
+  "AIAgentsUnpinned": "{{aiAgents}} không ghim",
+  "AIAgentUnpinned": "{{aiAgent}} không ghim"
 }

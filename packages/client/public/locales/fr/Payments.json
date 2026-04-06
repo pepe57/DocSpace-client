@@ -164,5 +164,6 @@
   "WouldYouLikeToEnableAutoTopUps": "Souhaitez-vous activer les rechargements automatiques pour que votre solde ne soit jamais épuisé ?",
   "YouHaveNotAddedAnyPayment": "Vous n'avez ajouté aucun paiement",
   "YourCurrentPlan": "<1>Votre plan actuel :</1> {{amount}} <2>({{price}}/mois)</2>",
-  "YourPrice": "Votre prix"
+  "YourPrice": "Votre prix",
+  "OnlyPayerCanManageSection": "Seul le payeur peut gérer cette section. <1>En savoir plus</1>"
 }

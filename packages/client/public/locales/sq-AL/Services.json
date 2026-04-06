@@ -112,5 +112,6 @@
   "UntilDate": "deri {{date}}",
   "Usage": "Përdorim",
   "WalletBalance": "Bilanci i portofolit",
-  "WalletTopUpRequired": "Krijoni top-up: {{currency}}"
+  "WalletTopUpRequired": "Krijoni top-up: {{currency}}",
+  "AIToolsDescription": "<strong style=\"font-size: 1.1em;\"><span style=\"font-weight: bold;\"><span style=\"color: #007bff;\">{{organizationName}}</span></span></strong> AI do të bëjë modelët AI të ofruar nga {{organizationName}} të disponuesh për të gjithë përdoruesit e {{productName}}."
 }

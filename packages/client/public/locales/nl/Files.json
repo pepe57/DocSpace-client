@@ -221,5 +221,7 @@
   "RemovedFromRecent": "Verwijderd uit recent",
   "UserLimitDescription": "Definieer het aantal gebruikers dat via deze uitnodigingslink kan deelnemen.",
   "UsersJoined": "Gebruikers zijn toegevoegd:",
-  "ValidUntil": "Geldig tot:"
+  "ValidUntil": "Geldig tot:",
+  "AIAgentsUnpinned": "{{aiAgents}} niet vastgepind",
+  "AIAgentUnpinned": "{{aiAgent}} niet vastgepind"
 }

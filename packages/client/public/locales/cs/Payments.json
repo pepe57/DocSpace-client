@@ -164,5 +164,6 @@
   "WouldYouLikeToEnableAutoTopUps": "Chtěli byste povolit automatické doplňování, aby váš zůstatek nikdy nevystačil?",
   "YouHaveNotAddedAnyPayment": "Nevložili jste žádnou platbu.",
   "YourCurrentPlan": "<1>Váš aktuální tarif:</1> {{amount}} <2>({{price}}/měsíc)</2>",
-  "YourPrice": "Vaše cena"
+  "YourPrice": "Vaše cena",
+  "OnlyPayerCanManageSection": "Pouze platitel může spravovat tuto sekci. <1>Zjistit více</1>"
 }

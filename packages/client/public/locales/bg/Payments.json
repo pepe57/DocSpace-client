@@ -164,5 +164,6 @@
   "WouldYouLikeToEnableAutoTopUps": "Искате ли да активирате автоматични презареждания, за да не ви свърши балансът?",
   "YouHaveNotAddedAnyPayment": "Нямате добавени плащания.",
   "YourCurrentPlan": "<1>Вашият текущ план:</1> {{amount}} <2>({{price}}/месец)</2>",
-  "YourPrice": "Вашата цена"
+  "YourPrice": "Вашата цена",
+  "OnlyPayerCanManageSection": "Только Платежника може да управлява тази секция. <1>Научете повече</1>"
 }

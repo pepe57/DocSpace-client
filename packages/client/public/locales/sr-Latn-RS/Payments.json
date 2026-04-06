@@ -164,5 +164,6 @@
   "TopUpTo": "Ka",
   "UnknownPayerForAdmin": "Nismo pronašli kontakt koji odgovara Stripe e-mail adresi. Naplata i usluge će nastaviti da funkcionišu, ali preporučujemo da kontaktirate vlasnika {{productName}} kako biste dodelili novog plaćenika.",
   "UnknownPayerForOwner": "Nismo pronašli kontakt koji odgovara Stripe e-mailu. Vaše naplata i usluge će nastaviti da funkcionišu, ali preporučujemo dodeljivanje novog Payer-a za upravljanje podešavanjima naplate u {{productName}}.",
-  "WalletSectionDescription": "{{productName}} Novčanik vam omogućava lako kupovinu usluga kao što su skladištenje, AI alati i rezervne kopije. Dodajte sredstva i izaberite usluge kojima vam je potrebno da počnete."
+  "WalletSectionDescription": "{{productName}} Novčanik vam omogućava lako kupovinu usluga kao što su skladištenje, AI alati i rezervne kopije. Dodajte sredstva i izaberite usluge kojima vam je potrebno da počnete.",
+  "OnlyPayerCanManageSection": "Samo Payer može upravljati ovim odeljkom. <1>Saznajte više</1>"
 }

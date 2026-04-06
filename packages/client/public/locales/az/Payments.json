@@ -164,5 +164,6 @@
   "WouldYouLikeToEnableAutoTopUps": "Balansınızın tükənməməsi üçün avtomatik doldurma aktiv etmək istərdiniz?",
   "YouHaveNotAddedAnyPayment": "Ödəniş əlavə etməmisiniz.",
   "YourCurrentPlan": "<1>Hazırda olan planınız:</1> {{amount}} <2>({{price}}/ay)</2>",
-  "YourPrice": "Qiymətiniz"
+  "YourPrice": "Qiymətiniz",
+  "OnlyPayerCanManageSection": "Yalnız Ödəyən bu bölməni idarə edə bilər. <1>Daha çox öyrənin</1>"
 }

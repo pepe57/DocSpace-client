@@ -61,5 +61,6 @@
   "ToUseAddProvider": "要使用 {{value}}，请先连接至少一个 {{aiProvider}}。",
   "WebSearchDisabledSuccess": "{{webSearch}} 已成功禁用",
   "WebSearchEnabledSuccess": "{{webSearch}} 已成功启用",
-  "WebSearchKeyDescription": "输入从您的 {{webSearch}} 提供商处获取的 API 密钥"
+  "WebSearchKeyDescription": "输入从您的 {{webSearch}} 提供商处获取的 API 密钥",
+  "MCPSettingsDescription": "本部分允许您在房间内管理用于 {{aiChats}} 的 {{mcpServers}}。您可以启用系统 {{mcpServers}} 或添加自定义的服务器以满足贵公司的需求。启用后，这些服务器将可供其他用户执行任务时访问。"
 }

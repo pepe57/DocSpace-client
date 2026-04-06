@@ -162,5 +162,8 @@
   "TopUpTo": "Do",
   "UnknownPayerForAdmin": "Nepodľa našich záznamov sme nenašli kontakt zodpovedajúci e-mailu Stripe. Faktúrovanie a služby budú fungovať ďalej, ale odporúčame kontaktovať vlastníka {{productName}} na pridelenie nového platiteľa.",
   "UnknownPayerForOwner": "Nepodľa e-mailu Stripe sme nenašli kontakt. Vaše fakturácie a služby budú fungovať ďalej, ale odporúčame priradiť nového platiteľa na správu nastavení fakturácie v {{productName}}.",
-  "WalletSectionDescription": "Portfél {{productName}} vám umožňuje ľahko zakúpiť služby ako úložisko, AI nástroje a zálohovanie. Pridajte fondy a vyberte služby, ktoré potrebujete, aby ste sa začali."
+  "WalletSectionDescription": "Portfél {{productName}} vám umožňuje ľahko zakúpiť služby ako úložisko, AI nástroje a zálohovanie. Pridajte fondy a vyberte služby, ktoré potrebujete, aby ste sa začali.",
+  "OnlyPayerCanManageSection": "Pouze platiteľ môže spravovať túto sekciu. <1>Zistiť viac</1>",
+  "PaymentMethodDescription": "Karty platby spojené so vašou {{productName}} peňaženkou",
+  "ChooseNewPayerOrRefrashData": "<1>Vyberte nového platobníka</1> alebo <2>Obnovte údaje</2>"
 }

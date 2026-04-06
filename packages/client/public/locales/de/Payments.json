@@ -164,5 +164,6 @@
   "WouldYouLikeToEnableAutoTopUps": "Möchten Sie automatische Aufladungen aktivieren, damit Ihr Kontostand nie aufgebraucht ist?",
   "YouHaveNotAddedAnyPayment": "Sie haben keine Zahlung hinzugefügt",
   "YourCurrentPlan": "<1>Ihr aktueller Plan:</1> {{amount}} <2>({{price}}/Monat)</2>",
-  "YourPrice": "Ihr Preis"
+  "YourPrice": "Ihr Preis",
+  "OnlyPayerCanManageSection": "Nur der Zahler kann diesen Abschnitt verwalten. <1>Mehr erfahren</1>"
 }

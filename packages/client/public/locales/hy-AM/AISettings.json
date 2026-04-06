@@ -61,5 +61,6 @@
   "SearchEngine": "{{webSearch}} ძ движок",
   "ToUseAddProvider": "{{value}} օգտագործելու համար, համոզվեք, որ նախքան, միացված է առնվազն մեկ {{aiProvider}}։",
   "WebSearchDisabledSuccess": "{{webSearch}} հաջողությամբ անջատվեց",
-  "WebSearchKeyDescription": "Մուտքագրեք ձեր {{webSearch}} մատակարարից ստացված API բանալին։"
+  "WebSearchKeyDescription": "Մուտքագրեք ձեր {{webSearch}} մատակարարից ստացված API բանալին։",
+  "WebSearchEnabledSuccess": "{{webSearch}} հաջողությամբ միացված է"
 }

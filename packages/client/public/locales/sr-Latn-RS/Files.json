@@ -222,5 +222,6 @@
   "RemovedFromRecent": "Uklonjeno iz nedavnih",
   "UserLimitDescription": "Definišite broj korisnika koji mogu pristupiti putem ovog linka za pozivnicu.",
   "UsersJoined": "Korisnici su se pridružili:",
-  "ValidUntil": "Važi do:"
+  "ValidUntil": "Važi do:",
+  "AIAgentsUnpinned": "{{aiAgents}} otkopčeno"
 }

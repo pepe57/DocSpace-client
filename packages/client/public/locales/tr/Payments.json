@@ -164,5 +164,6 @@
   "TopUpTo": "—e/a",
   "UnknownPayerForAdmin": "Stripe e-postasıyla eşleşen bir kişi bulamadık. Faturalandırma ve hizmetler çalışmaya devam edecek, ancak yeni bir Ödeme Yapan atamak için {{productName}} sahibine ulaşmanızı öneririz.",
   "UnknownPayerForOwner": "Stripe e-postasıyla eşleşen bir kişi bulamadık. Faturalandırma ve hizmetleriniz çalışmaya devam edecek, ancak {{productName}}'de faturalandırma ayarlarını yönetmek için yeni bir Ödeme Sahibi atamanızı öneririz.",
-  "WalletSectionDescription": "{{productName}} Cüzdanı, depolama, Yapay Zeka araçları ve yedeklemeler gibi hizmetleri kolayca satın almanızı sağlar. Fon ekleyin ve başlamak için ihtiyacınız olan hizmetleri seçin."
+  "WalletSectionDescription": "{{productName}} Cüzdanı, depolama, Yapay Zeka araçları ve yedeklemeler gibi hizmetleri kolayca satın almanızı sağlar. Fon ekleyin ve başlamak için ihtiyacınız olan hizmetleri seçin.",
+  "OnlyPayerCanManageSection": "Bu bölümü yalnızca Payer yönetebilir. <1>Daha fazla bilgi edinin</1>"
 }

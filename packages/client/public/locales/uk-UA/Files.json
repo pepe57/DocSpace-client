@@ -221,5 +221,7 @@
   "RemovedFromRecent": "Видалено з нещодавніх",
   "UserLimitDescription": "Визначте кількість користувачів, які можуть приєднатися за цим посиланням запрошення.",
   "UsersJoined": "Користувачі приєдналися:",
-  "ValidUntil": "Дійсно до:"
+  "ValidUntil": "Дійсно до:",
+  "AIAgentsUnpinned": "{{aiAgents}} незакріплені",
+  "AIAgentUnpinned": "{{aiAgent}} відкріплено"
 }

@@ -221,5 +221,7 @@
   "RemovedFromRecent": "Usunięte z ostatnich",
   "UserLimitDescription": "Zdefiniuj liczbę użytkowników, którzy mogą dołączyć za pomocą tego linku zaproszenia.",
   "UsersJoined": "Użytkownicy dołączyli:",
-  "ValidUntil": "Ważne do:"
+  "ValidUntil": "Ważne do:",
+  "AIAgentsUnpinned": "{{aiAgents}} nieprzypięte",
+  "AIAgentUnpinned": "{{aiAgent}} odpięty"
 }

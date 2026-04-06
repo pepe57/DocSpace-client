@@ -1,5 +1,8 @@
 {
-  "DeleteTag": "Brisanje oznake",
-  "EditTag": "Uredi tag",
-  "RemoveTag": "<1>{{tag}}</1> oznaka je uklonjena."
+  "ChangesToTag": "Промене и на овом тагу ће утицати на све собе где се користи.",
+  "DeleteTagCannotBeUndone": "Ова акција не може бити поништена.",
+  "DeleteTagConfirmation": "Брисање овог тага ће га уклонити из свих соба где се користи.",
+  "DeleteTag": "Обрисати ознаку",
+  "EditTag": "Уреди тег",
+  "RemoveTag": "<1>{{tag}}</1> тег је уклоњен."
 }

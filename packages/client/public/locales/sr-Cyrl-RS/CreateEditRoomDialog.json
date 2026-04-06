@@ -41,7 +41,8 @@
   "ViewerInfo": "Информације о прегледатељу",
   "WatermarkPreview": "Преглед воденог жига",
   "WatermarkPreviewHelp": "Ова слика приказује како ће водени жиг изгледати у вашим фајловима.",
-  "GoToIntegrations": "Idite na Integracije",
   "NeedMoreIntegrations": "Треба више интеграција?",
-  "NoDatabaseConnections": "Nije konfigurisano nikakvo povezivanje sa bazom podataka"
+  "NeedMoreIntegrationsDescription": "Користите вебхукове за слање података у ваш систем, или повежите форме на хиљаде услуга преко Zapier-а.",
+  "GoToIntegrations": "Пређите на Интеграције",
+  "NoDatabaseConnections": "Нема конфигурисаних веза са базама података"
 }

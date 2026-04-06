@@ -61,5 +61,6 @@
   "ToUseAddProvider": "Per utilizzare {{value}}, assicuratevi di connettere prima almeno un {{aiProvider}}.",
   "WebSearchDisabledSuccess": "{{webSearch}} disabilitato con successo",
   "WebSearchEnabledSuccess": "{{webSearch}} abilitato con successo",
-  "WebSearchKeyDescription": "Inserisci la chiave API ottenuta dal tuo provider {{webSearch}}"
+  "WebSearchKeyDescription": "Inserisci la chiave API ottenuta dal tuo provider {{webSearch}}",
+  "DefaultProviderDescription": "Seleziona il provider {{aiProvider}} e il modello predefiniti per tutte le funzionalità di {{productName}} ({{aiAgents}}, editor di documenti, ecc.)."
 }

@@ -164,5 +164,6 @@
   "WouldYouLikeToEnableAutoTopUps": "هل ترغب في تفعيل عمليات إعادة الشحن التلقائي حتى لا ينفد رصيدك؟",
   "YouHaveNotAddedAnyPayment": "لم تقم بإضافة أي دفعة",
   "YourCurrentPlan": "<1>خطة الاشتراك الحالية:</1> {{amount}} <2>({{price}}/الشهر)</2>",
-  "YourPrice": "سعرك"
+  "YourPrice": "سعرك",
+  "OnlyPayerCanManageSection": "يمكن للمُسدِّد فقط إدارة هذا القسم. <1>اعرف المزيد</1>"
 }

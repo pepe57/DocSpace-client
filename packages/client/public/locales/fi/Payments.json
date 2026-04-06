@@ -164,5 +164,6 @@
   "YouHaveNotAddedAnyPayment": "Et ole lisännyt maksua",
   "YourCurrentPlan": "<1>Nykyinen suunnitelmasi:</1> {{amount}} <2>({{price}}/kk)</2>",
   "YourPrice": "Hintasi",
-  "TopUpTo": "Kohti"
+  "TopUpTo": "Kohti",
+  "OnlyPayerCanManageSection": "Vain maksaja voi hallita tätä osiota. <1>Lue lisää</1>"
 }

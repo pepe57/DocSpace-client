@@ -163,5 +163,7 @@
   "TopUpTo": "Uz",
   "UnknownPayerForAdmin": "Mums nevar atrast kontaktu, kas atbilst Stripe e-pochai. Fakturācija un pakalpojumi turpinās darboties, bet mēs iesaka piekontaktēt ar {{productName}} īpašnieku, lai apdraudzītu jaunu maksātāju.",
   "UnknownPayerForOwner": "Mums nevar atrast kontaktu, kas atbilst Stripe e-pochai. Jūsu fakturācija un pakalpojumi turpinās darboties, bet mēs iesaka iestatīt jaunu maksātāju, lai pārvaldītu fakturāciju iestatījumus {{productName}}.",
-  "WalletSectionDescription": "{{productName}} Celsme ļauj jums vienkārši iegādāties pakalpojumus, piemēram, uzglabāšanu, AI rīkus un atsargojumus. Pievienojiet līdzekļus un izvēlieties pakalpojumus, kas jums ir nepieciešami, lai sākt."
+  "WalletSectionDescription": "{{productName}} Celsme ļauj jums vienkārši iegādāties pakalpojumus, piemēram, uzglabāšanu, AI rīkus un atsargojumus. Pievienojiet līdzekļus un izvēlieties pakalpojumus, kas jums ir nepieciešami, lai sākt.",
+  "CurrencyPerBackup": "({{currency}} par atsargā)",
+  "OnlyPayerCanManageSection": "Tikai maksātājs var pārvaldīt šo sadaļu. <1>Uzzināt vairāk</1>"
 }

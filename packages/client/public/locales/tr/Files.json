@@ -222,5 +222,6 @@
   "RemovedFromRecent": "Son kullanılanlardan kaldırıldı",
   "UserLimitDescription": "Bu davet bağlantısı aracılığıyla katılabilecek kullanıcı sayısını tanımlayın.",
   "UsersJoined": "Kullanıcılar katıldı:",
-  "ValidUntil": "Geçerli tarih:"
+  "ValidUntil": "Geçerli tarih:",
+  "AIAgentUnpinned": "{{aiAgent}} sabitleştirilmedi"
 }
