@@ -40,5 +40,9 @@
   "UserName": "Tên người dùng",
   "ViewerInfo": "Thông tin người xem",
   "WatermarkPreview": "Xem trước watermark",
-  "WatermarkPreviewHelp": "Bản xem trước hình ảnh này cho thấy gần đúng cách watermark sẽ được hiển thị trong các tập tin của bạn."
+  "WatermarkPreviewHelp": "Bản xem trước hình ảnh này cho thấy gần đúng cách watermark sẽ được hiển thị trong các tập tin của bạn.",
+  "GoToIntegrations": "Truy cập Tích hợp",
+  "NeedMoreIntegrations": "Cần thêm tích hợp nào không?",
+  "NeedMoreIntegrationsDescription": "Sử dụng webhook để gửi dữ liệu đến hệ thống của riêng bạn, hoặc kết nối biểu mẫu với hàng nghìn dịch vụ thông qua Zapier.",
+  "NoDatabaseConnections": "Chưa cấu hình kết nối cơ sở dữ liệu"
 }

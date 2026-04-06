@@ -40,5 +40,9 @@
   "UserName": "ຊື່ຜູ້ໃຊ້",
   "ViewerInfo": "ຂໍ້ມູນຜູ້ຊົມ",
   "WatermarkPreview": "ຕົວຢ່າງໝຶກໄມ້",
-  "WatermarkPreviewHelp": "ຮູບຕົວຢ່າງນີ້ ຈະສະແດງໃຫ້ເຫັນໂດຍປະມານວ່າ ຕົວໄວກໍ້າ (watermark) ຈະຖືກສະແດງແນວໃດໃນເອກະສານຂອງທ່ານ។"
+  "WatermarkPreviewHelp": "ຮູບຕົວຢ່າງນີ້ ຈະສະແດງໃຫ້ເຫັນໂດຍປະມານວ່າ ຕົວໄວກໍ້າ (watermark) ຈະຖືກສະແດງແນວໃດໃນເອກະສານຂອງທ່ານ។",
+  "GoToIntegrations": "ໄປທີ່ການເຊື່ອມຕໍ່",
+  "NeedMoreIntegrations": "ຕ້ອງການການເຊື່ອມຕໍ່ຫຼາຍກວ່ານີ້ບໍ?",
+  "NeedMoreIntegrationsDescription": "ໃຊ້ webhooks ເພື່ອສົ່ງຂໍ້ມູນໄປຫາລະບົບຂອງທ່ານເອງ, ຫຼືເຊື່ອມຕໍ່ແບບຟອມກັບບໍລິການຫຼາຍພັນແຫ່ງຜ່ານ Zapier.",
+  "NoDatabaseConnections": "ບໍ່ໄດ້ກຳນົດການເຊື່ອມຕໍ່ຖານຂໍ້ມູນ"
 }

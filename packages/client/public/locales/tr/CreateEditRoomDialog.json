@@ -40,5 +40,9 @@
   "UserName": "Kullanıcı Adı",
   "ViewerInfo": "Görüntüleyici bilgisi",
   "WatermarkPreview": "Filigran Ön izlemesi",
-  "WatermarkPreviewHelp": "Bu görüntü ön izlemesi, filigranın dosyalarınızda nasıl görüntüleneceğini kabaca gösterir."
+  "WatermarkPreviewHelp": "Bu görüntü ön izlemesi, filigranın dosyalarınızda nasıl görüntüleneceğini kabaca gösterir.",
+  "GoToIntegrations": "Entegrasyonlara Git",
+  "NeedMoreIntegrations": "Daha fazla entegrasyona ihtiyacınız var mı?",
+  "NeedMoreIntegrationsDescription": "Web kancaları kullanarak verileri kendi sisteminize gönderebilir veya Zapier aracılığıyla binlerce hizmete formu bağlayabilirsiniz.",
+  "NoDatabaseConnections": "Veritabanı bağlantısı yapılandırılmadı"
 }

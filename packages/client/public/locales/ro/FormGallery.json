@@ -8,5 +8,7 @@
   "SuggestChanges": "Propuneri privind modificări",
   "TemplateInfo": "Informații despre șablon",
   "UploadGallery": "Încarcă în Galerie",
-  "ViewAllTemplates": "Afișează toate șabloanele"
+  "ViewAllTemplates": "Afișează toate șabloanele",
+  "GalleryTitle": "Galerie de șabloane {{organizationName}}",
+  "SubmitToGalleryDialogMainInfo": "Trimiteți șablonul în galeria publică pentru ca alții să îl folosească în munca lor. După ce șablonul trece de moderare, veți fi notificat și răsplătit pentru contribuția dumneavoastră."
 }

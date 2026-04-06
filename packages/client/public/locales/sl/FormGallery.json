@@ -8,5 +8,7 @@
   "SuggestChanges": "Predlagaj spremembe",
   "TemplateInfo": "Informacije o predlogi",
   "UploadGallery": "Naložite v Galerijo",
-  "ViewAllTemplates": "Poglej vse predloge"
+  "ViewAllTemplates": "Poglej vse predloge",
+  "GalleryTitle": "Galerija predlogov {{organizationName}}",
+  "SubmitToGalleryDialogMainInfo": "Pošljite svoj predložak v javno galerijo, da ga drugi lahko uporabijo v svojem delu. Ko preide predložak revizijo, vas bomo obvestili in nagradili za vaš prispevek."
 }

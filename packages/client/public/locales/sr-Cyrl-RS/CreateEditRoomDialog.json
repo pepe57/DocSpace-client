@@ -40,5 +40,9 @@
   "UserName": "Корисничко име",
   "ViewerInfo": "Информације о прегледатељу",
   "WatermarkPreview": "Преглед воденог жига",
-  "WatermarkPreviewHelp": "Ова слика приказује како ће водени жиг изгледати у вашим фајловима."
+  "WatermarkPreviewHelp": "Ова слика приказује како ће водени жиг изгледати у вашим фајловима.",
+  "GoToIntegrations": "Idite na Integracije",
+  "NeedMoreIntegrations": "Треба више интеграција?",
+  "NeedMoreIntegrationsDescription": "Koristite webhook-ove za slanje podataka u svoj sistem, ili povežite forme sa hiljadama servisa putem Zapiera.",
+  "NoDatabaseConnections": "Nije konfigurisano nikakvo povezivanje sa bazom podataka"
 }

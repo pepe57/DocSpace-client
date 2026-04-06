@@ -60,5 +60,9 @@
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükleyin",
   "UploadFromPortalTitle": "{{productName}} kaynağından yükleyin",
   "UploadPDFFormOptionDescription": "{{productName}} içinde bulunan hazır bir PDF formunu seçin ve odaya yükleyin.",
-  "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz"
+  "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} henüz mevcut değil",
+  "EmptyAIAgentsAIEnabledUserDescription": "Ekibiniz sizi işbirliğine davet ettiğinde, {{aiAgents}} burada belirecek ve belgeler, bilgi yönetimi ve günlük görevlerde size yardımcı olmaya hazır olacaktır.",
+  "EmptyAIAgentsDescription": "Ekibiniz için kişiselleştirilmiş bir asistan kurmak üzere bir bilgi tabanı ekleyin, ideal modeli seçin ve bir {{mcpServer}} bağlayın. Meslektaşlarınızı davet ederek işbirliği yapın ve ajanın sohbet özelliklerinden en iyi şekilde yararlanın.",
+  "EmptyAIAgentsUserTitle": "Henüz {{aiAgents}} mevcut değil"
 }

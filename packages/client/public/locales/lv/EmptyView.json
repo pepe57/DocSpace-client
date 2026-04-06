@@ -60,5 +60,9 @@
   "UploadDevicePDFFormOptionTitle": "Augšupielādēt no ierīces",
   "UploadFromPortalTitle": "Augšupielādēt no {{productName}}",
   "UploadPDFFormOptionDescription": "Izvēlieties gatavu PDF veidlapu, kas pieejama šeit: {{productName}}, un augšupielādējiet to telpā.",
-  "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā"
+  "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} vēl nav pieejami",
+  "EmptyAIAgentsAIEnabledUserDescription": "Kad jūsu komanda jūs vietoikīs sadarbībai, šeit parādīsies {{aiAgents}}, gatavi palīdzēt ar dokumentiem, zināšanu pārvaldību un ikdienas uzdevumiem.",
+  "EmptyAIAgentsDescription": "Izveidojiet personalizētu asistantu savai komandai, pievienojot zināšanu bāzi, izvēlot ideālo modeli un savienojot ar {{mcpServer}}. Ielietojiet savus kolēģus, lai sadarbotu un maksimāli izmantotu agenta sarunas spējas.",
+  "EmptyAIAgentsUserTitle": "Nopierdisi {{aiAgents}} pieejami"
 }

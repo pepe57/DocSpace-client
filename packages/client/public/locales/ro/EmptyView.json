@@ -60,5 +60,9 @@
   "UploadDevicePDFFormOptionTitle": "Încărcare de pe dispozitivul",
   "UploadFromPortalTitle": "Încărcare de pe {{productName}}",
   "UploadPDFFormOptionDescription": "Selectați un formular PDF existent de pe {{productName}} și încărcați-l în sala.",
-  "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date"
+  "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} nu sunt încă disponibile",
+  "EmptyAIAgentsAIEnabledUserDescription": "După ce echipa dumneavoastră vă invită să colaborați, {{aiAgents}} va apărea aici, pregătit să vă asiste cu documente, managementul cunoștințelor și sarcinile de zi cu zi.",
+  "EmptyAIAgentsDescription": "Configurați un asistent personalizat pentru echipa dumneavoastră adăugând o bază de cunoștințe, selectând modelul ideal și conectând un {{mcpServer}}. Invitați colegii să colaboreze și să maximizeze capacitățile de chat ale agentului.",
+  "EmptyAIAgentsUserTitle": "Nu există încă {{aiAgents}} disponibile"
 }

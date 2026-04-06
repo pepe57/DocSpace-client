@@ -8,5 +8,7 @@
   "SuggestChanges": "Suggerire modifiche",
   "TemplateInfo": "Informazioni sul modello",
   "UploadGallery": "Carica nella Galleria",
-  "ViewAllTemplates": "Visualizzare tutti i modelli"
+  "ViewAllTemplates": "Visualizzare tutti i modelli",
+  "GalleryTitle": "Galleria modelli di {{organizationName}}",
+  "SubmitToGalleryDialogMainInfo": "Invia il tuo modello alla galleria pubblica in modo che altri possano utilizzarlo nei loro lavori. Una volta che il modello supererà la moderazione, sarai avvisato e ricompensato per il tuo contributo."
 }

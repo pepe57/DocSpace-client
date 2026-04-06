@@ -60,5 +60,9 @@
   "UploadDevicePDFFormOptionTitle": "Naloži iz naprave",
   "UploadFromPortalTitle": "Naloži iz {{productName}}",
   "UploadPDFFormOptionDescription": "Izberi pripravljen PDF obrazec, ki je na voljo v {{productName}} in ga naloži v sobo.",
-  "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi"
+  "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} niso še na voljo",
+  "EmptyAIAgentsAIEnabledUserDescription": "Ko vas vaš ekipa povabi k sodelovanju, se bo tukaj pojavil {{aiAgents}}, pripravljen za pomoč pri dokumentih, upravljanju znanja in vsakodnevnih nalogah.",
+  "EmptyAIAgentsDescription": "Nastavite osebnega asistenta za svoj ekipo z dodajanjem zbirke znanja, izbiro idealnega modela in povezavo z {{mcpServer}}. Povabite kolege za sodelovanje in izkoristite klepnice asistenta.",
+  "EmptyAIAgentsUserTitle": "Ni še nobenih {{aiAgents}} na voljo"
 }

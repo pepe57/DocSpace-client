@@ -40,5 +40,9 @@
   "UserName": "Meno používateľa",
   "ViewerInfo": "Informácie o prehliadači",
   "WatermarkPreview": "Náhľad vodoznaku",
-  "WatermarkPreviewHelp": "Tento náhľad obrázku približne zobrazuje, ako sa vodoznak zobrazí vo vašich súboroch."
+  "WatermarkPreviewHelp": "Tento náhľad obrázku približne zobrazuje, ako sa vodoznak zobrazí vo vašich súboroch.",
+  "GoToIntegrations": "Prejsť na integrácie",
+  "NeedMoreIntegrations": "Potrebujete viac integrácií?",
+  "NeedMoreIntegrationsDescription": "Použite webhooks na odoslanie údajov do vlastného systému alebo pripojte formuláre k tisícom službami cez Zapier.",
+  "NoDatabaseConnections": "Nie je nakonfigurované žiadne pripojenie k databáze"
 }

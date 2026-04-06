@@ -40,5 +40,9 @@
   "UserName": "Nazwa użytkownika",
   "ViewerInfo": "Dane osoby przeglądającej",
   "WatermarkPreview": "Podgląd znaku wodnego",
-  "WatermarkPreviewHelp": "Niniejszy podgląd obrazu pokazuje mniej więcej, jak znak wodny będzie wyświetlany w Twoich plikach."
+  "WatermarkPreviewHelp": "Niniejszy podgląd obrazu pokazuje mniej więcej, jak znak wodny będzie wyświetlany w Twoich plikach.",
+  "GoToIntegrations": "Przejdź do integracji",
+  "NeedMoreIntegrations": "Potrzebujesz więcej integracji?",
+  "NeedMoreIntegrationsDescription": "Wykorzystaj webhooki do wysyłania danych do własnego systemu lub podłącz formularze do tysięcy usług za pośrednictwem Zapier.",
+  "NoDatabaseConnections": "Nie skonfigurowano połączeń z bazą danych"
 }

@@ -40,5 +40,9 @@
   "UserName": "사용자 이름",
   "ViewerInfo": "뷰어 정보",
   "WatermarkPreview": "워터마크 미리보기",
-  "WatermarkPreviewHelp": "이 이미지 미리보기는 워터마크가 파일에 어떻게 표시되는지 대략적으로 보여줍니다. "
+  "WatermarkPreviewHelp": "이 이미지 미리보기는 워터마크가 파일에 어떻게 표시되는지 대략적으로 보여줍니다. ",
+  "GoToIntegrations": "통합 기능으로 이동",
+  "NeedMoreIntegrations": "더 많은 통합이 필요하신가요?",
+  "NeedMoreIntegrationsDescription": "웹훅을 사용하여 데이터를 자체 시스템으로 전송하거나 Zapier를 통해 수천 개의 서비스에 양식을 연결하세요.",
+  "NoDatabaseConnections": "데이터베이스 연결이 구성되지 않았습니다"
 }

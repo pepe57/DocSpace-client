@@ -1,1 +1,8 @@
-{}
+{
+  "ChangesToTag": "Promene ovog taga će uticati na sve sobe gde se koristi.",
+  "DeleteTag": "Brisanje oznake",
+  "DeleteTagCannotBeUndone": "Ovaj radnji se ne može poništiti.",
+  "DeleteTagConfirmation": "Brisanje ovog oznake će je ukloniti iz svih soba gde je korišćena.",
+  "EditTag": "Uredi tag",
+  "RemoveTag": "<1>{{tag}}</1> oznaka je uklonjena."
+}

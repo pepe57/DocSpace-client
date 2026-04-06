@@ -8,5 +8,7 @@
   "SuggestChanges": "Değişiklik öner",
   "TemplateInfo": "Şablon bilgisi",
   "UploadGallery": "Galeride Yükle",
-  "ViewAllTemplates": "Tüm şablonları görüntüle"
+  "ViewAllTemplates": "Tüm şablonları görüntüle",
+  "GalleryTitle": "{{organizationName}} Şablon Galerisi",
+  "SubmitToGalleryDialogMainInfo": "Şablonunuzu genel galeriye göndererek başkalarının çalışmalarında kullanmasına izin verin. Şablon moderasyondan geçtiğinde, bilgilendirilecek ve katkınız için ödüllendirileceksiniz."
 }

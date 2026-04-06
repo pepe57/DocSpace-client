@@ -8,5 +8,7 @@
   "SuggestChanges": "Predloži promene",
   "TemplateInfo": "Info za šablon",
   "UploadGallery": "Pošaljite u Galeriju",
-  "ViewAllTemplates": "Pregledaj sve šablone"
+  "ViewAllTemplates": "Pregledaj sve šablone",
+  "GalleryTitle": "Galerija predložaka {{organizationName}}",
+  "SubmitToGalleryDialogMainInfo": "Pošaljite svoj predložak u javnu galeriju kako bi ga drugi mogli koristiti u svom radu. Nakon što prođe moderaciju, bićete obavešteni i nagrađeni za vaš doprinos."
 }

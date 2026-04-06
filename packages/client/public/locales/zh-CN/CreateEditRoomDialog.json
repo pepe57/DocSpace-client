@@ -40,5 +40,9 @@
   "UserName": "用户名称",
   "ViewerInfo": "查看者信息",
   "WatermarkPreview": "水印预览",
-  "WatermarkPreviewHelp": "此图像预览将大致展示水印在您的文件中的显示效果"
+  "WatermarkPreviewHelp": "此图像预览将大致展示水印在您的文件中的显示效果",
+  "GoToIntegrations": "前往集成",
+  "NeedMoreIntegrations": "需要更多集成吗？",
+  "NeedMoreIntegrationsDescription": "使用 Webhooks 将数据发送到您自己的系统，或通过 Zapier 将表单连接到数千个服务。",
+  "NoDatabaseConnections": "未配置数据库连接"
 }

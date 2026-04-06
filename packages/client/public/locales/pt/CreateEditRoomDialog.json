@@ -40,5 +40,9 @@
   "UserName": "Nome de Utilizador",
   "ViewerInfo": "Informações do visualizador",
   "WatermarkPreview": "Pré-visualização da marca d'água",
-  "WatermarkPreviewHelp": "Esta visualização de imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos."
+  "WatermarkPreviewHelp": "Esta visualização de imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos.",
+  "GoToIntegrations": "Ir para Integrações",
+  "NeedMoreIntegrations": "Precisa de mais integrações?",
+  "NeedMoreIntegrationsDescription": "Use webhooks para enviar dados para o seu próprio sistema ou conecte formulários a milhares de serviços via Zapier.",
+  "NoDatabaseConnections": "Nenhuma conexão de banco de dados configurada"
 }

@@ -60,5 +60,9 @@
   "UploadDevicePDFFormOptionTitle": "장치에서 업로드",
   "UploadFromPortalTitle": "{{productName}}에서 업로드",
   "UploadPDFFormOptionDescription": "{{productName}}에서 이용 가능한 PDF 양식을 선택하여 룸에 업로드하세요. ",
-  "VirtualDataRoomEmptyTitle": "가상 데이터 룸에 오신 것을 환영합니다"
+  "VirtualDataRoomEmptyTitle": "가상 데이터 룸에 오신 것을 환영합니다",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}}는 아직 사용할 수 없습니다",
+  "EmptyAIAgentsAIEnabledUserDescription": "팀에서 협업을 초대하면, {{aiAgents}}가 여기에 나타나 문서, 지식 관리 및 일상 업무를 지원할 준비가 될 것입니다.",
+  "EmptyAIAgentsDescription": "지식 기반을 추가하고, 이상적인 모델을 선택하고, {{mcpServer}}를 연결하여 팀을 위한 개인화된 비서를 설정하세요. 동료를 초대하여 협업하고 에이전트의 채팅 기능을 최대한 활용하세요.",
+  "EmptyAIAgentsUserTitle": "아직 {{aiAgents}}를 사용할 수 없습니다"
 }

@@ -8,5 +8,7 @@
   "SuggestChanges": "Sugjeroni ndryshime",
   "TemplateInfo": "Info shablloni",
   "UploadGallery": "Ngarko në Galeri",
-  "ViewAllTemplates": "Shikoni të gjitha shabllonet"
+  "ViewAllTemplates": "Shikoni të gjitha shabllonet",
+  "GalleryTitle": "<0>{{organizationName}}</0> Galeria e Shablloneve",
+  "SubmitToGalleryDialogMainInfo": "Dërgoni shabllonin tuaj në galerinë publike që të lejoni të përdorësojnë të tjerët në punën e tyre. Pasi shablloni të kalojë moderimin, do të jeni njoftuar dhe të shpëtonuar për kontributin tuaj."
 }

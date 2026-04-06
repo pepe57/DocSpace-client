@@ -60,5 +60,9 @@
   "UploadDevicePDFFormOptionTitle": "デバイスからのアップロード",
   "UploadFromPortalTitle": "{{productName}}からアップロード",
   "UploadPDFFormOptionDescription": "{{productName}}で利用可能なPDFフォームを選択し、ルームにアップロードする。",
-  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ"
+  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} はまだご利用いただけません",
+  "EmptyAIAgentsAIEnabledUserDescription": "チームがコラボレーションに招待すると、{{aiAgents}} がここに表示され、ドキュメント、ナレッジマネジメント、日常のタスクをサポートする準備が整います。",
+  "EmptyAIAgentsDescription": "ナレッジベースを追加し、最適なモデルを選択し、{{mcpServer}}を接続することで、チーム用のパーソナライズされたアシスタントを設定します。同僚を招待して共同作業を行い、エージェントのチャット機能を最大限に活用しましょう。",
+  "EmptyAIAgentsUserTitle": "{{aiAgents}} はまだ利用できません"
 }

@@ -60,5 +60,9 @@
   "UploadDevicePDFFormOptionTitle": "Վերբեռնել սարքից",
   "UploadFromPortalTitle": "Վերբեռնում {{productName}}-ից",
   "UploadPDFFormOptionDescription": "Ընտրել պատրաստ PDF ձևը, որը հասանելի է {{productName}}-ում և վերբեռնեք այն սենյակ:",
-  "VirtualDataRoomEmptyTitle": "Բարի գալուստ Վիրտուալ Տվյալների Սենյակ"
+  "VirtualDataRoomEmptyTitle": "Բարի գալուստ Վիրտուալ Տվյալների Սենյակ",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} դեռևս հասանելի չեն։",
+  "EmptyAIAgentsAIEnabledUserDescription": "Երբ ձեր թիմը հրավիրի ձեզ համագործակցել, {{aiAgents}} այստեղ կհայտնվի՝ պատրաստ օգնել փաստաթղթերով, գիտելիքների կառավարման և ամենօրյա առաջադրանքներով։",
+  "EmptyAIAgentsDescription": "Ձեր թիմի համար անհատական օգնական կազմակերպել՝ ավելացնելով գիտելիքների բազա, ընտրելով իդեալական մոդելը և միացնելով {{mcpServer}}-ը։ Հրավիրեք ձեր գործընկերներին համագործակցելու և առավելագույնս օգտվել գործակցի զրույցային հնարավորություններից։",
+  "EmptyAIAgentsUserTitle": "Դեռևս առկա չեն {{aiAgents}}"
 }

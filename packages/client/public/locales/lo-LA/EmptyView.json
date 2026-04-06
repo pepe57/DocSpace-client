@@ -60,5 +60,9 @@
   "UploadDevicePDFFormOptionTitle": "ອັບໂຫຼດຈາກເຄື່ອງມື",
   "UploadFromPortalTitle": "ດາວໂຫຼດຈາກ {{productName}}",
   "UploadPDFFormOptionDescription": "ເລືອກແບບຟອມ PDF ທີ່ກະກຽມໄວ້ແລ້ວໃນ {{productName}} ແລະອັບໂຫຼດມັນໃສ່ຫ້ອງ.",
-  "VirtualDataRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຂໍ້ມູນດິຈິຕອນ"
+  "VirtualDataRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຂໍ້ມູນດິຈິຕອນ",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} ຍັງບໍ່ທັນພ້ອມ",
+  "EmptyAIAgentsAIEnabledUserDescription": "ເມື່ອທີມງານຂອງທ່ານເຊີນໃຫ້ທ່ານຮ່ວມມື, {{aiAgents}} ຈະປາກົດຢູ່ທີ່ນີ້, ພ້ອມທີ່ຈະຊ່ວຍເຫຼືອໃນເອກະສານ, ການຄຸ້ມຄອງຄວາມຮູ້, ແລະ ວຽກງານປະຈຳວັນ.",
+  "EmptyAIAgentsDescription": "ສ້າງຜູ້ຊ່ວຍສ່ວນຕົວສຳລັບທີມຂອງທ່ານໂດຍການເພີ່ມຖານຄວາມຮູ້, ເລືອກຮູບແບບທີ່ເໝາະສົມ, ແລະເຊື່ອມຕໍ່ກັບ {{mcpServer}}. ເຊີນເພື່ອນຮ່ວມງານຂອງທ່ານມາຮ່ວມມື ແລະໃຊ້ປະໂຫຍດຈາກຄວາມສາມາດການສົນທະນາຂອງຕົວແທນໃຫ້ໄດ້ຫຼາຍທີ່ສຸດ.",
+  "EmptyAIAgentsUserTitle": "ຍັງບໍ່ມີ {{aiAgents}} ໃຫ້ໃຊ້ເທື່ອ"
 }

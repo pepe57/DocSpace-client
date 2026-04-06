@@ -164,5 +164,6 @@
   "WouldYouLikeToEnableAutoTopUps": "Haluaisitko ottaa automaattiset lisäykset käyttöön, jotta saldosi ei koskaan lopu?",
   "YouHaveNotAddedAnyPayment": "Et ole lisännyt maksua",
   "YourCurrentPlan": "<1>Nykyinen suunnitelmasi:</1> {{amount}} <2>({{price}}/kk)</2>",
-  "YourPrice": "Hintasi"
+  "YourPrice": "Hintasi",
+  "TopUpTo": "Kohti"
 }

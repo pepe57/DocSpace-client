@@ -8,5 +8,7 @@
   "SuggestChanges": "Ieteikt izmaiņas",
   "TemplateInfo": "Informācija par veidni",
   "UploadGallery": "Augšupielādēt Galerijā",
-  "ViewAllTemplates": "Skatīt visas veidnes"
+  "ViewAllTemplates": "Skatīt visas veidnes",
+  "GalleryTitle": "{{organizationName}} Šablonu galerija",
+  "SubmitToGalleryDialogMainInfo": "Iesniegiet savu šablonu publisajā galerijā, lai citi varētu izmantot to savā darbam. Pēc moderācijas apstiprināšanas jums paziņosim un atbalstīsiet par jūsu ieguldījumu."
 }

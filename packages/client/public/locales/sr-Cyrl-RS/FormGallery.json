@@ -8,5 +8,7 @@
   "SuggestChanges": "Предложи промене",
   "TemplateInfo": "Инфо за шаблон",
   "UploadGallery": "Пошаљите у Галерију",
-  "ViewAllTemplates": "Прегледај све шаблоне"
+  "ViewAllTemplates": "Прегледај све шаблоне",
+  "GalleryTitle": "Galerija predložaka {{organizationName}}",
+  "SubmitToGalleryDialogMainInfo": "Пошаљите свој шаблон у јавну галеницу да други користе у свом раду. Након што шаблон прође модерацију, биће вам послато обавештење и награђено за ваш допринос."
 }

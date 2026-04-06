@@ -40,5 +40,9 @@
   "UserName": "පරිශීලක නම",
   "ViewerInfo": "නරඹන්නාගේ තොරතුරු",
   "WatermarkPreview": "ජල සලකුණු පෙරදසුන",
-  "WatermarkPreviewHelp": "මෙම පෙරබිම් පරිනාමය ඔබට ඇති ෆයිල්වලදී ජල සලකුණු කරාදියි යන්නෙන් පහත දැක්වේ."
+  "WatermarkPreviewHelp": "මෙම පෙරබිම් පරිනාමය ඔබට ඇති ෆයිල්වලදී ජල සලකුණු කරාදියි යන්නෙන් පහත දැක්වේ.",
+  "GoToIntegrations": "අනුකලනය වෙත යන්න",
+  "NeedMoreIntegrations": "වඩා වැඩි ඒකාබද්ධ කිරීම් අවශ්‍යද?",
+  "NeedMoreIntegrationsDescription": "ඔබේම පද්ධතියට දත්ත යැවීමට webhooks භාවිතා කරන්න, නැතහොත් Zapier හරහා පෝරම දහස් ගණනක සේවාවන්ට සම්බන්ධ කරන්න.",
+  "NoDatabaseConnections": "දත්ත සමුදා සම්බන්ධතා වින්‍යාස කර නොමැත"
 }

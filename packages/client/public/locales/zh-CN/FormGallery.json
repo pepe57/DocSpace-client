@@ -8,5 +8,7 @@
   "SuggestChanges": "提出修改建议",
   "TemplateInfo": "模板信息",
   "UploadGallery": "上传到相册",
-  "ViewAllTemplates": "查看模板大全"
+  "ViewAllTemplates": "查看模板大全",
+  "GalleryTitle": "{{organizationName}} 模板库",
+  "SubmitToGalleryDialogMainInfo": "将您的模板提交到公共图库，让其他人可以在他们的工作中使用。模板通过审核后，您将收到通知并获得贡献奖励。"
 }

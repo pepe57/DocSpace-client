@@ -40,5 +40,9 @@
   "UserName": "Nome utente",
   "ViewerInfo": "Informzioni sul visualizzatore",
   "WatermarkPreview": "Anteprima della filigrana",
-  "WatermarkPreviewHelp": "Questa anteprima dell'immagine mostra approssimativamente come verrà visualizzata la filigrana nei tuo i file."
+  "WatermarkPreviewHelp": "Questa anteprima dell'immagine mostra approssimativamente come verrà visualizzata la filigrana nei tuo i file.",
+  "GoToIntegrations": "Vai a Integrazioni",
+  "NeedMoreIntegrations": "Hai bisogno di più integrazioni?",
+  "NeedMoreIntegrationsDescription": "Utilizza gli webhook per inviare dati al tuo sistema o collega i moduli a migliaia di servizi tramite Zapier.",
+  "NoDatabaseConnections": "Nessuna connessione al database configurata"
 }

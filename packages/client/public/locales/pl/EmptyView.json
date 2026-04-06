@@ -60,5 +60,9 @@
   "UploadDevicePDFFormOptionTitle": "Prześlij z urządzenia",
   "UploadFromPortalTitle": "Prześlij z {{productName}}",
   "UploadPDFFormOptionDescription": "Wybierz gotowy formularz PDF dostępny w {{productName}} i prześlij go do pokoju.",
-  "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych"
+  "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} nie są jeszcze dostępne",
+  "EmptyAIAgentsAIEnabledUserDescription": "Gdy Twój zespół zaprosi Cię do współpracy, {{aiAgents}} pojawi się tutaj i będzie gotowy do pomocy przy dokumentach, zarządzaniu wiedzą i codziennych zadaniach.",
+  "EmptyAIAgentsDescription": "Ustaw spersonalisanego asystenta dla swojego zespołu, dodając bazę wiedzy, wybierając idealny model i łącząc {{mcpServer}}. Zaproś swoich współpracowników do współpracy i zmaksymalizuj możliwości czatu agenta.",
+  "EmptyAIAgentsUserTitle": "Brak dostępnych {{aiAgents}}"
 }

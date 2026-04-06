@@ -40,5 +40,9 @@
   "UserName": "ユーザー名",
   "ViewerInfo": "閲覧者情報",
   "WatermarkPreview": "透かしのプレビュー",
-  "WatermarkPreviewHelp": "この画像プレビューは、ファイルに透かしがどのように表示されるかを大まかに示しています。"
+  "WatermarkPreviewHelp": "この画像プレビューは、ファイルに透かしがどのように表示されるかを大まかに示しています。",
+  "GoToIntegrations": "インテグレーションへ移動",
+  "NeedMoreIntegrations": "その他の統合が必要ですか？",
+  "NeedMoreIntegrationsDescription": "Webhookを使用してデータを独自のシステムに送信するか、Zapier経由で数千のサービスにフォームを接続します。",
+  "NoDatabaseConnections": "データベース接続が設定されていません"
 }

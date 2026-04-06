@@ -40,5 +40,9 @@
   "UserName": "Uporabniško ime",
   "ViewerInfo": "Informacije o ogledovalcu",
   "WatermarkPreview": "Predogled vodnega žiga",
-  "WatermarkPreviewHelp": "Ta predogled približno prikazuje, kako bo vodni žig prikazan v vaših datotekah."
+  "WatermarkPreviewHelp": "Ta predogled približno prikazuje, kako bo vodni žig prikazan v vaših datotekah.",
+  "GoToIntegrations": "Pojdite na Integracije",
+  "NeedMoreIntegrations": "Potrebujete več integracij?",
+  "NeedMoreIntegrationsDescription": "Uporabite webhooks za pošiljanje podatkov v vašo lastno sistemo ali povežite obrazce z tisoči storitev preko Zapier.",
+  "NoDatabaseConnections": "Ni konfiguriranih povezav z bazama podatkov"
 }
