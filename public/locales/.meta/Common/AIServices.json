@@ -3,7 +3,7 @@
   "content": "AI services",
   "content_en_sha1_hash": "7452369e2f15817a4414cc5653aa2101c5c608f4",
   "created_at": "2026-03-26T08:26:29.053Z",
-  "updated_at": "2026-03-26T08:27:20.141Z",
+  "updated_at": "2026-04-06T15:27:51.760Z",
   "comment": {
     "text": "This key translates the text \"AI services,\" which refers to the artificial intelligence features available within the application. It's used within the Disable AI Services dialog to label a specific AI-related setting. Translators should consider the general meaning of AI-powered functionalities.",
     "is_auto": true,
@@ -61,7 +61,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
       "line_number": 380,
-      "context": "? t(\"Billing\")\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n productName: t(\"Common:ProductName\"),\n aiServices: t(\"Common:AIServices\"),\n });\n \n // console.log(translatedHeader, header);\n \n return (",
+      "context": "? t(\"Common:Billing\")\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n productName: t(\"Common:ProductName\"),\n aiServices: t(\"Common:AIServices\"),\n });\n \n // console.log(translatedHeader, header);\n \n return (",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "API keys",
   "content_en_sha1_hash": "94fcf3c2dc0d96560fa470737eb39fb09d17ef08",
   "created_at": "2025-05-19T21:30:50.537Z",
-  "updated_at": "2026-04-03T21:51:41.071Z",
+  "updated_at": "2026-04-06T15:27:51.805Z",
   "comment": {
     "text": "The translation key \"ApiKeys\" refers to the label displayed on the API keys page, typically found in a developer tools section. It is used as the title of the page, and its content should reflect the purpose of this feature in the application. This text appears in the UI as part of the page header or title section.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 144,
+      "line_number": 147,
       "context": "}\n };\n \n useEffect(() => {\n if (ready) {\n setDocumentTitle(t(\"Settings:ApiKeys\"));\n }\n }, [ready]);\n \n return (\n <div className={styles.apiKeys}>",
       "module": "/packages/client"
     },
@@ -25,7 +25,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
       "line_number": 119,
-      "context": "color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />\n <Card\n icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/api-keys\"\n color={globalColors.lightGrayDark}\n linkTitle={t(\"Settings:CreateKey\")}\n />",
+      "context": "color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />\n <Card\n icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/api-keys?create=true\"\n color={globalColors.lightGrayDark}\n linkTitle={t(\"Settings:CreateKey\")}\n />",
       "module": "/packages/client"
     }
   ],

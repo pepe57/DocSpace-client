@@ -1,0 +1,28 @@
+{
+  "key_path": "OnlyPayerCanManageSection",
+  "content": "Only the Payer can manage this section. <1>Learn more</1>",
+  "content_en_sha1_hash": "fe612dca58b58fa5e0be1b13f61df9586158f854",
+  "created_at": "2026-04-06T15:27:47.649Z",
+  "updated_at": "2026-04-06T15:28:05.399Z",
+  "comment": {
+    "text": "This key displays a warning message in the Portal Settings area, informing the user that only the original Payer account holder has the permission to manage this section. It appears as the title of a warning component, and includes a link (\"Learn more\") for additional context.",
+    "is_auto": true,
+    "updated_at": "2026-04-06T15:28:05.399Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/WarningComponent/index.tsx",
+      "line_number": 216,
+      "context": "return (\n <WarningComponent\n title={\n <Trans\n t={t}\n i18nKey=\"OnlyPayerCanManageSection\"\n ns=\"Payments\"\n components={{\n 1: (\n <Link\n key=\"learn-more-link\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

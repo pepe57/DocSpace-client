@@ -15,17 +15,6 @@
   "ResultStorage": "Складиштење резултата",
   "UploadFilesDevice": "Отпремите датотеке са свог личног уређаја",
   "UploadFilesPortal": "Отпремите датотеке са {{sectionNameFirst}} или {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "На <strong>režim za pregled</strong> za ovaj {{aiAgent}}. Možete videti rezultate aktivnosti {{aiChat}} drugih korisnika.",
-  "CreateChatDescription": "Idite na karticu {{aiChat}} da započnete.",
-  "EmptyKnowledgeDescription": "<0>Datoteke koje se ovde učitaju biće indeksirane i korišćene kao kontekst u kartici {{aiChat}}. Dodajte datoteke (do 10 MB svaka) kako biste postavili pitanja AI-u, generisali sadržaj ili sarađivali na informacijama.</0>",
-  "EmptyResultsDescription": "<0>Datoteke generisane u {{aiChat}} će se pojaviti ovde automatski. Što god da generišete sadržaj, započnete razgovor ili pošaljete poruku sa izlazom, rezultat će biti sačuvan u ovom odeljku.</0>",
-  "EmptyResultsViewerDescription": "Videćete rezultate aktivnosti {{aiChat}} drugih korisnika ovde kada postanu dostupni.",
-  "InstructionsDescriptionAgent": "Opišite kako {{aiAgent}} treba da se ponaša i odgovara. Definišite njegovu ulogu, ton i glavne zadatke.",
   "Knowledge": "Baza znanja",
-  "KnowledgeUnavailableDescription": "Baza znanja je trenutno onemogućena. Da biste aktivirali semantički pretragu i obradu dokumenata za vaše {{aiAgents}}, molimo vas da konfigurišete provajdera ugrađivanja u podešavanjima {{productName}}.",
-  "KnowledgeUnavailableDescriptionUser": "Baza znanja je trenutno onemogućena. Da biste aktivirali semantički pretragu i obradu dokumenata za {{aiAgents}}, molimo vas da kontaktirate administratora vašeg {{productName}} kako biste konfigurisali provajdera ugrađivanja.",
-  "MCPDescriptionServers": "Koristite {{mcpServers}} koje je administrator povezao za poboljšanje iskustva chata sa AI. {{mcpServers}} mogu pomoći sa ekstrakcijom podataka, sažecima, pametnim predlozima itd.",
-  "Model": "{{aiProvider}} i model",
-  "ModelDescription": "Izaberite {{aiProvider}} i model koji će se koristiti u chatevima ovog prostora. Ova podešavanja su obavezna i primenjuju se na sve učesnike.",
-  "NoAccessAIAgentTitle": "Žao nam je, nemate pristup ovom {{aiAgent}}"
+  "Model": "{{aiProvider}} i model"
 }

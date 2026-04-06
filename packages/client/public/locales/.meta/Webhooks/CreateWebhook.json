@@ -3,7 +3,7 @@
   "content": "Create webhook",
   "content_en_sha1_hash": "0c6fc5026d56d964ea66aa3957a3688c0381fd3a",
   "created_at": "2025-05-19T21:30:49.678Z",
-  "updated_at": "2026-04-03T21:51:41.084Z",
+  "updated_at": "2026-04-06T15:27:51.817Z",
   "comment": {
     "text": "\"CreateWebhook\" is used to display a button label on mobile devices, prompting users to create a webhook in developer tools. The translation of this key will be displayed on the main wrapper element within the PortalSettings page's Webhooks component when viewed on smaller screens.",
     "is_auto": true,
@@ -13,24 +13,24 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
       "line_number": 107,
-      "context": "icon={<WebhookSvg />}\n title={t(\"Webhooks:Webhooks\")}\n description={t(\"Settings:WebhooksDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/webhooks\"\n color={globalColors.mainRed}\n linkTitle={t(\"Webhooks:CreateWebhook\")}\n />\n <Card\n icon={<OAuthSvg />}\n title={t(\"OAuth:OAuth\")}\n description={t(\"Settings:OAuthDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}",
+      "context": "icon={<WebhookSvg />}\n title={t(\"Webhooks:Webhooks\")}\n description={t(\"Settings:WebhooksDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/webhooks?create=true\"\n color={globalColors.mainRed}\n linkTitle={t(\"Webhooks:CreateWebhook\")}\n />\n <Card\n icon={<OAuthSvg />}\n title={t(\"OAuth:OAuth\")}\n description={t(\"Settings:OAuthDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/index.js",
-      "line_number": 137,
+      "line_number": 141,
       "context": ") : (\n <>\n {isMobile() ? (\n <ButtonSeating>\n <StyledCreateButton\n label={t(\"CreateWebhook\")}\n primary\n size=\"normal\"\n onClick={openCreateModal}\n testId=\"create_webhook_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/index.js",
-      "line_number": 137,
+      "line_number": 141,
       "context": ") : (\n <>\n {isMobile() ? (\n <ButtonSeating>\n <StyledCreateButton\n label={t(\"CreateWebhook\")}\n primary\n size=\"normal\"\n onClick={openCreateModal}\n testId=\"create_webhook_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/index.js",
-      "line_number": 137,
+      "line_number": 141,
       "context": ") : (\n <>\n {isMobile() ? (\n <ButtonSeating>\n <StyledCreateButton\n label={t(\"CreateWebhook\")}\n primary\n size=\"normal\"\n onClick={openCreateModal}\n testId=\"create_webhook_button\"\n />",
       "module": "/packages/client"
     }

@@ -750,6 +750,57 @@ describe("Locales Tests", () => {
     expect(errorsCount, message).toBe(0);
   });
 
+  it("WrongScriptTest: Verify that sr-Cyrl-RS translations do not contain Latin Serbian script characters (š, č, ć, ž, đ).", () => {
+    // These characters are specific to Serbian Latin and have no place in Cyrillic translations.
+    // Their presence indicates the AI translator used the wrong script.
+    const latinSerbianPattern = /[šŠčČćĆžŽđĐ]/;
+
+    let message =
+      "Next keys in sr-Cyrl-RS contain Latin Serbian script characters (š, č, ć, ž, đ):\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const wrongKeys = [];
+
+    const cyrillicFiles = translationFiles.filter(
+      (f) => f.language === "sr-Cyrl-RS",
+    );
+
+    cyrillicFiles.forEach((cyrillicFile) => {
+      cyrillicFile.translations.forEach((translation) => {
+        if (!translation.value) return;
+        if (!latinSerbianPattern.test(translation.value)) return;
+
+        message +=
+          `${++i}. path='${cyrillicFile.path}' key='${translation.key}'\r\n` +
+          `  Value: '${translation.value.substring(0, 100)}'\r\n\r\n`;
+        errorsCount++;
+        wrongKeys.push({ path: cyrillicFile.path, key: translation.key });
+      });
+    });
+
+    if (process.env.CLEAR_WRONG_VALUES === "true" && wrongKeys.length > 0) {
+      const fileUpdates = {};
+      wrongKeys.forEach(({ path, key }) => {
+        if (!fileUpdates[path]) fileUpdates[path] = [];
+        fileUpdates[path].push(key);
+      });
+
+      Object.entries(fileUpdates).forEach(([filePath, keys]) => {
+        const content = JSON.parse(fs.readFileSync(filePath, "utf8"));
+        keys.forEach((k) => {
+          delete content[k];
+        });
+        fs.writeFileSync(filePath, JSON.stringify(content, null, 2));
+      });
+
+      console.log(
+        `Deleted ${wrongKeys.length} wrong-script keys from sr-Cyrl-RS.`,
+      );
+    }
+
+    expect(errorsCount, message).toBe(0);
+  });
+
   it("ForbiddenValueElementsTest: Verify that certain forbidden values are not present in the translation strings across different languages.", () => {
     let message = `Next keys have forbidden values \`${forbiddenElements.join(
       ",",

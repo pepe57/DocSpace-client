@@ -12,8 +12,5 @@
   "SuccessConnected": "{{serviceName}} је успешно повезан као канал за обавештења. Сада ћеш тамо примати ажурирања.",
   "SuccessDisconnected": "{{serviceName}} је успешно искључен као канал за обавештења. Обавештења више неће бити слана тамо.",
   "UsefulTips": "Корисни {{productName}} савети",
-  "UsefulTipsDescription": "Добиј корисне водиче о {{productName}}-у",
-  "ActionsWithFilesDescription": "Badge će istaknuti aktivnosti fajlova — otpremanje, izmene ili deljenje — u sekcijama {{rooms}}, {{shared}}, {{documents}} i {{aiAgents}}.",
-  "RoomsActivityDescription": "Pristupite trenutnim e-mail obaveštenjima o novim podeljenim fajlovima/foldereima i aktivnosti unutar vaših {{rooms}} i {{aiAgents}}.",
-  "RoomUpdateNotify": "Podeljeni sadržaj, {{rooms}} i {{aiAgents}} aktivnosti"
+  "UsefulTipsDescription": "Добиј корисне водиче о {{productName}}-у"
 }

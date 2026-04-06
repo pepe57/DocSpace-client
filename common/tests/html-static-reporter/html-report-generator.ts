@@ -84,8 +84,8 @@ export class HtmlReportGenerator {
       <div class="clear-notice-icon">⚠</div>
       <div class="clear-notice-body">
         <strong>CLEAR_WRONG_VALUES mode was active</strong>
-        <p>Wrong values in translation files have been automatically cleared (set to empty string) for the following tests:
-          <em>WrongTranslationVariablesTest</em>, <em>WrongTranslationTagsTest</em>, <em>ForbiddenValueElementsTest</em>.
+        <p>Wrong values in translation files have been automatically cleared for the following tests:
+          <em>WrongTranslationVariablesTest</em>, <em>WrongTranslationTagsTest</em>, <em>WrongScriptTest</em>, <em>ForbiddenValueElementsTest</em>, <em>EmptyValueKeysTest</em>.
           The failed tests below show which keys were affected. Re-run the tests to verify the changes.</p>
       </div>
     </div>

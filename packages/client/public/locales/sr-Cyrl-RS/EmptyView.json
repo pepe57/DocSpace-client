@@ -60,9 +60,5 @@
   "UploadDevicePDFFormOptionTitle": "Отпреми са уређаја",
   "UploadFromPortalTitle": "Отпреми из {{productName}}",
   "UploadPDFFormOptionDescription": "Одаберите спреман PDF формулар доступан у {{productName}} и отпремите га у просторију.",
-  "VirtualDataRoomEmptyTitle": "Добродошли у Виртуелну собу за податке",
-  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} još nisu dostupni",
-  "EmptyAIAgentsAIEnabledUserDescription": "Nakon što vas vaš tim pozove za saradnju, {{aiAgents}} će se pojaviti ovde, spremni da pomognu sa dokumentima, upravljanjem znanjem i svakodnevnim zadacima.",
-  "EmptyAIAgentsDescription": "Podesite personalizovanog asistenta za vaš tim dodavanjem baze znanja, odabirom idealnog modela i povezivanjem {{mcpServer}}. Pozovite svoje kolege da sarađuju i maksimalno iskoriste mogućnosti ćaskanja agenta.",
-  "EmptyAIAgentsUserTitle": "Nema dostupnih {{aiAgents}} još"
+  "VirtualDataRoomEmptyTitle": "Добродошли у Виртуелну собу за податке"
 }
