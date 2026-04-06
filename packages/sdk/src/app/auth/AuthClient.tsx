@@ -208,18 +208,17 @@ export default function AuthClient({
         Sign in with {capitalizedProvider} to access the chat.
       </div>
       {error ? <div style={{ color: "red" }}>{error}</div> : null}
-      <Button
-        primary
-        size={ButtonSize.medium}
-        label={
-          isLoading
-            ? "Loading..."
-            : `Sign in with ${capitalizedProvider}`
-        }
-        isDisabled={isLoading}
-        isLoading={isLoading}
-        onClick={handleLogin}
-      />
+      <div style={{ minWidth: "250px" }}>
+        <Button
+          primary
+          scale
+          size={ButtonSize.medium}
+          label={`Sign in with ${capitalizedProvider}`}
+          isDisabled={isLoading}
+          isLoading={isLoading}
+          onClick={handleLogin}
+        />
+      </div>
     </div>
   );
 }

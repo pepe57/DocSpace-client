@@ -3,7 +3,7 @@
   "content": "AI settings",
   "content_en_sha1_hash": "6dcf51d7630d6e48c2162d10dfcc2c61485912c7",
   "created_at": "2025-10-27T16:14:27.398Z",
-  "updated_at": "2026-03-26T08:26:58.018Z",
+  "updated_at": "2026-04-03T21:51:41.022Z",
   "comment": {
     "text": "This key displays the label for AI-related settings within the Portal Settings section, likely as a menu item or heading. It refers to configurations or options related to artificial intelligence functionality within the application. Translators should ensure the term \"AI\" is appropriate for the target audience.",
     "is_auto": true,
@@ -30,37 +30,37 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 243,
+      "line_number": 237,
       "context": "case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n default:\n throw new Error(\"Unexpected translation key\");\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 412,
+      "line_number": 429,
       "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 412,
+      "line_number": 429,
       "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 412,
+      "line_number": 429,
       "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 412,
+      "line_number": 429,
       "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 412,
+      "line_number": 429,
       "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }

@@ -1,0 +1,21 @@
+{
+  "key_path": "MoveToTrashItem",
+  "content": "This item will be moved to Trash.",
+  "content_en_sha1_hash": "744540358335d035766a06b08199a0b6f13d73bb",
+  "created_at": "2026-04-03T21:51:30.645Z",
+  "updated_at": "2026-04-03T21:51:30.645Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "これらのアイテムは30日後に永久に削除されます。",
   "ItemsPermanentlyDeleted": "これらのアイテムは{{trashSection}}から永久に削除されます。",
   "removeFromListDescription": "<1>{{title}}</1> をリストから削除しようとしています。続行しますか？",
-  "removeFromListDescriptionPlural": "<1>{{count}}個のアイテム</1>をリストから削除しようとしています。続行しますか？"
+  "removeFromListDescriptionPlural": "<1>{{count}}個のアイテム</1>をリストから削除しようとしています。続行しますか？",
+  "DeleteRooms": "選択された<strong>部屋 ({{count}})</strong >は完全に削除されます。すべてのデータとユーザーアクセスは失われます。",
+  "DeleteRoomsTitle": "この部屋を削除しますか？"
 }

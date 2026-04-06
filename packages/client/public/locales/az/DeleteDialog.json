@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "Bu əşyalar 30 gün ərzində mərhum ediləcəkdir.",
   "ItemsPermanentlyDeleted": "Bu əşyalar {{trashSection}} bölməsindən daimi şəkildə silinəcəkdir.",
   "removeFromListDescription": "Siz siyahidan <1>{{title}}</1> silməyə hazırıqsınız. Davam etmək istəyirsinizmi?",
-  "removeFromListDescriptionPlural": "Siz siyahidan <1>1</1> ədəd ({{count}}) silməyə hazırıqsınız. Davam etmək istəyirsinizmi?"
+  "removeFromListDescriptionPlural": "Siz siyahidan <1>1</1> ədəd ({{count}}) silməyə hazırıqsınız. Davam etmək istəyirsinizmi?",
+  "DeleteRooms": "Seçilmiş <strong>otaqlar ({{count}})</strong> daimi olaraq silinəcək. Bütün məlumatlar və istifadəçi girişi itəcək.",
+  "DeleteRoomsTitle": "Bu otağı silmək istəyirsiniz?"
 }
