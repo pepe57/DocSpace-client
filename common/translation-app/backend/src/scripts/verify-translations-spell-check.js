@@ -16,7 +16,14 @@ const {
 } = require("../config/config");
 const axios = require("axios");
 const { translate } = require("@vitalets/google-translate-api");
-const { HttpsProxyAgent } = require("https-proxy-agent");
+// https-proxy-agent v8+ is ESM-only — load lazily with dynamic import()
+let _HttpsProxyAgent = null;
+async function getHttpsProxyAgent(url) {
+  if (!_HttpsProxyAgent) {
+    ({ HttpsProxyAgent: _HttpsProxyAgent } = await import("https-proxy-agent"));
+  }
+  return new _HttpsProxyAgent(url);
+}
 
 const MODEL = process.env.OLLAMA_SPELLCHECK_MODEL || "gemma3n:latest";
 const LANGUAGES_TO_CHECK = process.argv[2] ? process.argv[2].split(",") : null;
@@ -444,7 +451,7 @@ async function quickTranslationCheck(
       const fetchOptions = {};
 
       if (proxyUrl) {
-        fetchOptions.agent = new HttpsProxyAgent(proxyUrl);
+        fetchOptions.agent = await getHttpsProxyAgent(proxyUrl);
       }
 
       // Translate the foreign language back to English with timeout

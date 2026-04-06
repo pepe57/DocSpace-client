@@ -22,6 +22,7 @@ const AiDebugPanel: React.FC<AiDebugPanelProps> = ({ isOpen, onClose }) => {
   const [debug, setDebug] = useState<DebugState | null>(null);
   const [promptCollapsed, setPromptCollapsed] = useState(true);
   const [panelHeight, setPanelHeight] = useState(300);
+  const [isTranslating, setIsTranslating] = useState(false);
 
   const thinkingRef = useRef("");
   const responseRef = useRef("");
@@ -51,6 +52,7 @@ const AiDebugPanel: React.FC<AiDebugPanelProps> = ({ isOpen, onClose }) => {
       responseRef.current = "";
       promptTimestampRef.current = Date.now();
       setElapsed(0);
+      setIsTranslating(true);
       setDebug({
         systemPrompt: data.systemPrompt ?? "",
         userPrompt: data.userPrompt ?? "",
@@ -81,17 +83,31 @@ const AiDebugPanel: React.FC<AiDebugPanelProps> = ({ isOpen, onClose }) => {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = null;
       }
+      setIsTranslating(false);
       flushDebugText();
+    };
+
+    const onAborted = () => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+      setIsTranslating(false);
+      setDebug((prev) =>
+        prev ? { ...prev, responseText: prev.responseText + "\n\n[Aborted]" } : prev,
+      );
     };
 
     socket.on("translation:debug:prompt", onPrompt);
     socket.on("translation:debug:token", onToken);
     socket.on("translation:debug:result", onResult);
+    socket.on("translation:debug:aborted", onAborted);
 
     return () => {
       socket.off("translation:debug:prompt", onPrompt);
       socket.off("translation:debug:token", onToken);
       socket.off("translation:debug:result", onResult);
+      socket.off("translation:debug:aborted", onAborted);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [flushDebugText]);
@@ -173,6 +189,16 @@ const AiDebugPanel: React.FC<AiDebugPanelProps> = ({ isOpen, onClose }) => {
         )}
 
         <div className="ml-auto flex items-center gap-2">
+          {isTranslating && (
+            <button
+              onClick={() => getSocket().emit("translation:debug:stop")}
+              className="text-xs text-red-400 hover:text-red-200 px-2 py-0.5 rounded hover:bg-red-900/40 border border-red-800 flex items-center gap-1"
+              title="Abort current translation"
+            >
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
+              Stop
+            </button>
+          )}
           <button
             onClick={() => setDebug(null)}
             className="text-xs text-gray-500 hover:text-gray-300 px-2 py-0.5 rounded hover:bg-gray-800"

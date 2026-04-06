@@ -12,6 +12,19 @@ function debug(...args) {
 // Active project translation jobs: jobId -> { cancelled: boolean }
 const activeJobs = new Map();
 
+// The active ollama AbortableAsyncIterator — call .abort() to stop an in-flight stream.
+let currentOllamaStream = null;
+let userAbortRequested = false;
+
+function abortCurrentTranslation() {
+  console.log("[ABORT] abortCurrentTranslation called, stream:", !!currentOllamaStream);
+  if (currentOllamaStream) {
+    userAbortRequested = true;
+    currentOllamaStream.abort();
+    currentOllamaStream = null;
+  }
+}
+
 /**
  * Ollama integration route handler
  * @param {FastifyInstance} fastify - Fastify instance
@@ -1048,99 +1061,89 @@ Rules:
     // Emit prompts to UI debug panel before streaming starts
     debugEmit?.("translation:debug:prompt", { systemPrompt, userPrompt, targetLanguage, sourceLanguage });
 
-    // Use raw fetch → /api/chat to completely bypass the Ollama JS library.
-    // Gives us full control over timeouts via AbortController.
-    debug("Step 1: sending fetch to /api/chat...");
-    const abortController = new AbortController();
-    let activeTimeout = setTimeout(
-      () => abortController.abort(new Error(`First-token timeout after ${ollamaConfig.firstTokenTimeout}ms — model may still be loading or thinking`)),
-      ollamaConfig.firstTokenTimeout,
-    );
-    const resetInactivityTimer = () => {
+    // Use the ollama npm client with stream:true — returns an AbortableAsyncIterator.
+    // Calling stream.abort() properly cancels the underlying fetch + for-await loop.
+    debug("Step 1: creating ollama stream...");
+    const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
+
+    let activeTimeout = null;
+    const resetInactivityTimer = (stream) => {
       clearTimeout(activeTimeout);
-      activeTimeout = setTimeout(
-        () => abortController.abort(new Error(`Inactivity timeout after ${ollamaConfig.inactivityTimeout}ms`)),
-        ollamaConfig.inactivityTimeout,
-      );
+      activeTimeout = setTimeout(() => {
+        debug(`Inactivity timeout after ${ollamaConfig.inactivityTimeout}ms`);
+        stream.abort();
+      }, ollamaConfig.inactivityTimeout);
     };
 
     let fullResponse = "";
-    let fullThinking = ""; // collects native message.thinking tokens
+    let fullThinking = "";
+    let tokenCount = 0;
+    userAbortRequested = false;
+
+    let stream;
     try {
-      const httpResponse = await fetch(`${ollamaConfig.apiUrl}/api/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model,
-          messages: [
-            { role: "system", content: systemPrompt },
-            { role: "user", content: userPrompt },
-          ],
-          stream: true,
-          think: true, // Enable native Ollama thinking output (supported by gemma4, qwen3, deepseek-r1, etc.)
-          options: {
-            temperature: 0.1, // 0 causes infinite thinking loops in reasoning models
-          },
-        }),
-        signal: abortController.signal,
+      stream = await ollamaClient.chat({
+        model,
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt },
+        ],
+        stream: true,
+        think: true, // native thinking output (gemma4, qwen3, deepseek-r1, etc.)
+        options: {
+          temperature: 0.1,  // 0 causes infinite thinking loops in reasoning models
+          num_predict: 8192, // hard cap on total tokens (thinking + response) to prevent infinite loops
+        },
       });
+      debug("Step 2: stream created, waiting for tokens...");
 
-      debug(`Step 2: HTTP ${httpResponse.status}, reading stream...`);
+      currentOllamaStream = stream;
 
-      if (!httpResponse.ok) {
-        throw new Error(`Ollama HTTP error: ${httpResponse.status} ${httpResponse.statusText}`);
-      }
+      // First-token timeout: abort if model doesn't respond within limit
+      activeTimeout = setTimeout(() => {
+        debug(`First-token timeout after ${ollamaConfig.firstTokenTimeout}ms`);
+        stream.abort();
+      }, ollamaConfig.firstTokenTimeout);
 
-      const reader = httpResponse.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
-      let tokenCount = 0;
+      for await (const chunk of stream) {
+        // Ollama native thinking field (gemma4, qwen3, deepseek-r1 with think:true)
+        const thinkingToken = chunk.message?.thinking ?? "";
+        if (thinkingToken) {
+          if (tokenCount === 0) debug("Step 3: first thinking token received");
+          tokenCount++;
+          fullThinking += thinkingToken;
+          resetInactivityTimer(stream);
+          debugEmit?.("translation:debug:token", { token: thinkingToken, isThinking: true });
+        }
 
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split("\n");
-        buffer = lines.pop() ?? "";
-        for (const line of lines) {
-          if (!line.trim()) continue;
-          try {
-            const data = JSON.parse(line);
+        const token = chunk.message?.content ?? "";
+        if (token) {
+          if (tokenCount === 0) debug("Step 3: first content token received");
+          tokenCount++;
+          fullResponse += token;
+          resetInactivityTimer(stream);
 
-            // Ollama native thinking field (gemma4, qwen3, deepseek-r1 with think:true).
-            // Present only during the thinking phase; content is empty at the same time.
-            const thinkingToken = data.message?.thinking ?? "";
-            if (thinkingToken) {
-              if (tokenCount === 0) debug("Step 3: first thinking token received");
-              tokenCount++;
-              fullThinking += thinkingToken;
-              resetInactivityTimer();
-              debugEmit?.("translation:debug:token", { token: thinkingToken, isThinking: true });
-            }
-
-            const token = data.message?.content ?? "";
-            if (token) {
-              if (tokenCount === 0) debug("Step 3: first token received");
-              tokenCount++;
-              fullResponse += token;
-              resetInactivityTimer(); // got a token — extend the deadline
-
-              // Also handle <think> tags for models that inline thinking in content
-              const isInlineThinking = (() => {
-                const openCount = (fullResponse.match(/<think>/gi) || []).length;
-                const closeCount = (fullResponse.match(/<\/think>/gi) || []).length;
-                return openCount > closeCount;
-              })();
-              debugEmit?.("translation:debug:token", { token, isThinking: isInlineThinking });
-            }
-          } catch {
-            // skip malformed NDJSON lines
-          }
+          // Also handle <think> tags for models that inline thinking in content
+          const isInlineThinking = (() => {
+            const openCount = (fullResponse.match(/<think>/gi) || []).length;
+            const closeCount = (fullResponse.match(/<\/think>/gi) || []).length;
+            return openCount > closeCount;
+          })();
+          debugEmit?.("translation:debug:token", { token, isThinking: isInlineThinking });
         }
       }
       debug(`Step 4: stream done, ${tokenCount} tokens collected`);
+    } catch (streamError) {
+      if (userAbortRequested) {
+        userAbortRequested = false;
+        throw new Error("Aborted by user");
+      }
+      throw streamError;
     } finally {
       clearTimeout(activeTimeout);
+      if (currentOllamaStream === stream) {
+        currentOllamaStream = null;
+      }
     }
 
     debug(`Raw model response:\n${fullResponse}\n`);
@@ -1189,6 +1192,10 @@ Rules:
 
     return cleanedResponse;
   } catch (error) {
+    if (error.message === "Aborted by user") {
+      debugEmit?.("translation:debug:aborted", {});
+    }
+
     debug("Translation error details:", {
       message: error.message,
       name: error.name,
@@ -1204,25 +1211,53 @@ Rules:
 }
 
 /**
+ * Strip {{variables}} and HTML / React Trans tags from a translation string,
+ * leaving only the prose characters we want to validate.
+ */
+function stripMarkupForValidation(text) {
+  return text
+    .replace(/\{\{[^}]+\}\}/g, "") // {{variables}}
+    .replace(/<[^>]+>/g, "");       // <html> / <0> react trans tags
+}
+
+/**
  * Script validators: return true if the translation looks correct for the language.
  * Used after translation to decide whether a correction pass is needed.
+ *
+ * Each validator receives (translationText, sourceText) — sourceText is the
+ * original English string, used to distinguish intentionally-unchanged brand
+ * names / proper nouns from wrong-script translations.
  */
 const scriptValidators = {
-  "sr-Cyrl-RS": (text) => {
-    // Strip {{variables}}, HTML tags, brand-name words (all-caps), and numbers
-    // to focus only on the Serbian prose.
-    const stripped = text
-      .replace(/\{\{[^}]+\}\}/g, "")  // {{variables}}
-      .replace(/<[^>]+>/g, "")         // HTML / React tags
-      .replace(/\b[A-Z]{2,}\b/g, "")  // ALL-CAPS acronyms (URL, SDK, API…)
-      .replace(/[0-9%.,]/g, "");
+  // Algorithm (mirrors the test's WrongScriptTest):
+  // 1. Strip variables + tags from both texts.
+  // 2. If at least one Cyrillic letter (U+0400–U+04FF) is present → valid.
+  //    English brand names (Apple, Google, Windows…) may coexist with Cyrillic prose.
+  // 3. Latin Serbian diacritics (š/č/ć/ž/đ) always signal wrong script → invalid.
+  // 4. No Cyrillic at all:
+  //    a. If nothing meaningful remains (only punctuation/numbers) → valid.
+  //    b. If stripped translation equals stripped source → the model intentionally
+  //       kept the term unchanged (brand name, proper noun) → valid.
+  //    c. Any remaining Latin run ≥ 3 chars → wrong script → invalid.
+  "sr-Cyrl-RS": (text, sourceText = "") => {
+    const stripped = stripMarkupForValidation(text);
+    const strippedSrc = stripMarkupForValidation(sourceText);
 
-    // Latin Serbian diacritics are a sure sign of wrong script
+    // Step 2: Cyrillic present → valid
+    if (/[\u0400-\u04FF]/.test(stripped)) return true;
+
+    // Step 3: Latin Serbian diacritics → always wrong
     if (/[šŠčČćĆžŽđĐ]/.test(stripped)) return false;
 
-    // If there are Latin letters in what remains, that's also wrong
-    // (allow a–z only inside obvious loanwords — but for safety flag any Latin run ≥ 3 chars)
-    if (/[a-zA-Z]{3,}/.test(stripped)) return false;
+    // Step 4a: nothing meaningful left → valid
+    const prose = stripped.replace(/[0-9%.,!?;:()\-"'«»\s]/g, "");
+    if (!prose) return true;
+
+    // Step 4b: translation unchanged from source (brand name / proper noun) → valid
+    if (strippedSrc && stripped.trim() === strippedSrc.trim()) return true;
+
+    // Step 4c: Latin prose remaining → wrong script
+    if (/[a-zA-Z]{3,}/.test(stripped.replace(/\b[A-Z]{2,}\b/g, ""))) return false;
 
     return true;
   },
@@ -1234,7 +1269,7 @@ const scriptValidators = {
  */
 async function correctScriptIfNeeded(translation, sourceText, targetInfo, model) {
   const validator = scriptValidators[targetInfo.code];
-  if (!validator || validator(translation)) {
+  if (!validator || validator(translation, sourceText)) {
     return translation; // looks fine
   }
 
@@ -1323,7 +1358,7 @@ Provide the corrected translation using ONLY the correct script. Return the tran
     return null; // will stay untranslated — better than wrong-script text
   }
 
-  if (!validator(corrected)) {
+  if (!validator(corrected, sourceText)) {
     debug(`[script-check] correction still wrong script, returning null`);
     return null;
   }
@@ -1473,4 +1508,5 @@ Respond with this JSON only:
 }
 
 module.exports = routes;
+module.exports.abortCurrentTranslation = abortCurrentTranslation;
 
