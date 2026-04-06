@@ -40,7 +40,7 @@ export default async function AuthPage({
   searchParams: Promise<Record<string, string | undefined>>;
 }) {
   const params = await searchParams;
-  const { providerName, redirectURL, key, emplType } = params;
+  const { providerName, successRedirectURL, key, emplType } = params;
 
   if (!providerName) {
     return <div>Missing providerName parameter</div>;
@@ -49,8 +49,8 @@ export default async function AuthPage({
   const cookieStore = await cookies();
   const hasAuth = !!cookieStore.get("asc_auth_key");
 
-  if (hasAuth && redirectURL && providerName !== "createPortal") {
-    redirect(redirectURL);
+  if (hasAuth && successRedirectURL && providerName !== "createPortal") {
+    redirect(successRedirectURL);
   }
 
   const colorTheme = await getColorTheme();
@@ -88,7 +88,7 @@ export default async function AuthPage({
           ) : (
             <AuthClient
               providerName={providerName}
-              redirectURL={redirectURL ?? null}
+              successRedirectURL={successRedirectURL ?? null}
               inviteKey={key ?? null}
               emplType={emplType ?? null}
               confirmHeader={confirmHeader}

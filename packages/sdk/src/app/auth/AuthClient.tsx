@@ -38,13 +38,13 @@ import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 
 export default function AuthClient({
   providerName,
-  redirectURL,
+  successRedirectURL,
   inviteKey,
   emplType,
   confirmHeader,
 }: {
   providerName: string;
-  redirectURL: string | null;
+  successRedirectURL: string | null;
   inviteKey: string | null;
   emplType: string | null;
   confirmHeader: string;
@@ -103,14 +103,14 @@ export default function AuthClient({
           return;
         }
 
-        window.location.replace(redirectURL || "/");
+        window.location.replace(successRedirectURL || "/");
       } catch (e) {
         console.error(e);
         setError("Authentication failed");
         setIsLoading(false);
       }
     },
-    [redirectURL, inviteKey, emplType, confirmHeader],
+    [successRedirectURL, inviteKey, emplType, confirmHeader],
   );
 
   useEffect(() => {
