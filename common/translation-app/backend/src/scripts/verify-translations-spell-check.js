@@ -357,16 +357,17 @@ async function getNextProxy() {
     return PROXY_LIST.length > 0 ? PROXY_LIST[0] : null;
   }
 
-  // Round-robin through available proxies
-  const proxy = PROXY_LIST[currentProxyIndex];
-  currentProxyIndex = (currentProxyIndex + 1) % PROXY_LIST.length;
+  // Round-robin through available proxies, skipping failed ones
+  const startIndex = currentProxyIndex;
+  do {
+    const proxy = PROXY_LIST[currentProxyIndex];
+    currentProxyIndex = (currentProxyIndex + 1) % PROXY_LIST.length;
+    if (!failedProxies.has(PROXY_LIST.indexOf(proxy))) {
+      return proxy;
+    }
+  } while (currentProxyIndex !== startIndex);
 
-  // Skip failed proxies
-  if (failedProxies.has(currentProxyIndex - 1)) {
-    return await getNextProxy();
-  }
-
-  return proxy;
+  return null; // all proxies failed
 }
 
 /**
@@ -457,19 +458,17 @@ async function quickTranslationCheck(
 
       if (proxyUrl) {
         // Add timeout for proxy requests
+        let timeoutHandle;
         const timeoutPromise = new Promise((_, reject) => {
-          const timer = setTimeout(() => {
+          timeoutHandle = setTimeout(() => {
             reject(new Error("PROXY_TIMEOUT"));
           }, PROXY_TIMEOUT);
-          // Ensure timer is cleared
-          return timer;
         });
 
         try {
           result = await Promise.race([translatePromise, timeoutPromise]);
-        } catch (raceError) {
-          // Re-throw to be caught by outer catch
-          throw raceError;
+        } finally {
+          clearTimeout(timeoutHandle);
         }
       } else {
         result = await translatePromise;
@@ -556,10 +555,7 @@ async function quickTranslationCheck(
  * @returns {number} Similarity score between 0 and 1
  */
 function calculateSimilarity(str1, str2) {
-  const longer = str1.length > str2.length ? str1 : str2;
-  const shorter = str1.length > str2.length ? str2 : str1;
-
-  if (longer.length === 0) return 1.0;
+  if (str1.length === 0 && str2.length === 0) return 1.0;
 
   // Simple word-based comparison
   const words1 = new Set(str1.split(/\s+/));
@@ -1030,18 +1026,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
 
               // Save issues to CSV immediately
               for (const issue of issues) {
-                const issueData = {
-                  project: project,
-                  metadataFile: metadataFile,
-                  keyPath: keyPath,
-                  language: language,
-                  englishContent: englishContent,
-                  translatedContent: translatedContent,
-                  issueType: issue.type,
-                  description: issue.description,
-                  suggestion: issue.suggestion || "",
-                };
-                await appendIssueToTSV(
+                appendIssueToTSV(
                   tsvFilename,
                   project,
                   metadataFile,
@@ -1121,7 +1106,7 @@ function escapeTsvField(field) {
  * @param {string} translatedContent - Translated content
  * @param {Object} issue - Issue object
  */
-function appendIssueToTSV(
+function appendIssueToTSV( // sync — no async needed
   tsvFilename,
   project,
   metadataFile,
@@ -1258,6 +1243,7 @@ async function verifyAllTranslationsSpellCheck() {
     }
     if (skipUntilProject && project === skipUntilProject) {
       foundCheckpoint = true;
+      skipUntilProject = null; // clear so subsequent projects are not skipped
       console.log(` Resuming from project: ${project}`);
     }
 
