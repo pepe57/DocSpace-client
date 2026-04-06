@@ -40,7 +40,7 @@ export default async function AuthPage({
   searchParams: Promise<Record<string, string | undefined>>;
 }) {
   const params = await searchParams;
-  const { providerName, successRedirectURL, key, emplType } = params;
+  const { providerName, successRedirectURL, inviteKey, emplType } = params;
 
   if (!providerName) {
     return <div>Missing providerName parameter</div>;
@@ -56,9 +56,14 @@ export default async function AuthPage({
   const colorTheme = await getColorTheme();
   const bgPattern = getBgPattern(colorTheme?.selected);
 
-  const confirmHeader = new URLSearchParams(
+  const confirmParams = new URLSearchParams(
     params as Record<string, string>,
-  ).toString();
+  );
+  if (confirmParams.has("inviteKey")) {
+    confirmParams.set("key", confirmParams.get("inviteKey")!);
+    confirmParams.delete("inviteKey");
+  }
+  const confirmHeader = confirmParams.toString();
 
   return (
     <div style={{ width: "100%", height: "100vh" }}>
@@ -89,7 +94,7 @@ export default async function AuthPage({
             <AuthClient
               providerName={providerName}
               successRedirectURL={successRedirectURL ?? null}
-              inviteKey={key ?? null}
+              inviteKey={inviteKey ?? null}
               emplType={emplType ?? null}
               confirmHeader={confirmHeader}
             />
@@ -99,3 +104,4 @@ export default async function AuthPage({
     </div>
   );
 }
+
