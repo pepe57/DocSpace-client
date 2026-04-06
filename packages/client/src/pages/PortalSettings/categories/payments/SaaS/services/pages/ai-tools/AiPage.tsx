@@ -88,9 +88,7 @@ type AiPageProps = {
   aiServiceLastCreditDate?: string;
   isAiServiceLowBalance?: boolean;
   isInitServicesData?: boolean;
-  cardLinkedOnFreeTariff?: boolean;
-  isFreeTariff?: boolean;
-  isPayer?: boolean;
+  isServiceActionDisabled?: boolean;
   currentDeviceType?: string;
   wasFirstAiServiceTopUp?: boolean;
   formatWalletCurrency?: () => string;
@@ -114,9 +112,7 @@ const AiPage = (props: AiPageProps) => {
     language,
     isAiServiceLowBalance,
     isInitServicesData,
-    cardLinkedOnFreeTariff,
-    isFreeTariff,
-    isPayer,
+    isServiceActionDisabled,
     currentDeviceType,
     wasFirstAiServiceTopUp,
     formatWalletCurrency,
@@ -132,7 +128,7 @@ const AiPage = (props: AiPageProps) => {
   const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
   const [isTopUpConfirmVisible, setIsTopUpConfirmVisible] = useState(false);
 
-  const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
+  const isDisabled = isServiceActionDisabled;
 
   const navigate = useNavigate();
 
@@ -442,8 +438,7 @@ export default inject(
       fetchTransactionHistory,
       changeServiceState,
       isAiToolsServiceOn,
-      cardLinkedOnFreeTariff,
-      isPayer,
+      isServiceActionDisabled,
       formatWalletCurrency,
     } = paymentStore;
     const { logoText, currentDeviceType, getAIConfig } = settingsStore;
@@ -460,8 +455,6 @@ export default inject(
       isInitServicesData,
       wasFirstAiServiceTopUp,
     } = servicesStore;
-    const { isFreeTariff } = currentQuotaStore;
-
     return {
       aiServiceBalance,
       aiServiceCodeCurrency,
@@ -477,9 +470,7 @@ export default inject(
       changeServiceState,
       isAiToolsServiceOn,
       isInitServicesData,
-      cardLinkedOnFreeTariff,
-      isPayer,
-      isFreeTariff,
+      isServiceActionDisabled,
       currentDeviceType,
       wasFirstAiServiceTopUp,
       formatWalletCurrency,
