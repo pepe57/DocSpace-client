@@ -90,6 +90,14 @@ const Warning = ({
     typeof pathname === "string" &&
     pathname.includes("portal-settings/payments/services/");
 
+  const isPortalPaymentsRoute =
+    typeof pathname === "string" &&
+    pathname.includes("portal-settings/payments/portal-payments");
+
+  const isWalletRoute =
+    typeof pathname === "string" &&
+    pathname.includes("portal-settings/payments/wallet");
+
   React.useEffect(() => {
     if (!isBackupPaid || isNotPaidPeriod) return;
     if (!isBackupRoute || !isInited) return;
@@ -196,13 +204,16 @@ const Warning = ({
     if (warningText) setWarningText("");
   }, [isBackupRoute]);
 
-  if (isPaymentsServiceRoute && !isPayer) {
+  if (
+    (isPortalPaymentsRoute || isWalletRoute || isPaymentsServiceRoute) &&
+    !isPayer
+  ) {
     return (
       <WarningComponent
         title={
           <Trans
             t={t}
-            i18nKey="OnlyPayerCanManageServices"
+            i18nKey="OnlyPayerCanManageSection"
             ns="Payments"
             components={{
               1: (
