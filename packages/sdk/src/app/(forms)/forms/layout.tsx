@@ -65,7 +65,11 @@ export default async function FormsServerLayout({
     pathname.endsWith("/forms/");
 
   const filterHeader = hdrs.get(FILTER_HEADER) || "";
-  const providerName = new URLSearchParams(filterHeader).get("providerName") || "";
+  const filterParams = new URLSearchParams(filterHeader);
+  const providerName = filterParams.get("providerName") || "";
+  const inviteKey = filterParams.get("inviteKey") || "";
+  const emplType = filterParams.get("emplType") || "";
+  const successRedirectURL = filterParams.get("successRedirectURL") || "";
 
   const [filesSettings, user, defaultProvider, portalSettings, roomData] =
     await Promise.all([
@@ -95,7 +99,12 @@ export default async function FormsServerLayout({
 
     const authParams = new URLSearchParams();
     authParams.set("providerName", providerName);
-    authParams.set("successRedirectUrl", `${returnPath}${returnQs ? `?${returnQs}` : ""}`);
+    if (inviteKey) authParams.set("inviteKey", inviteKey);
+    if (emplType) authParams.set("emplType", emplType);
+    authParams.set(
+      "successRedirectURL",
+      successRedirectURL || `${returnPath}${returnQs ? `?${returnQs}` : ""}`,
+    );
 
     redirect(`/auth?${authParams.toString()}`);
   }
