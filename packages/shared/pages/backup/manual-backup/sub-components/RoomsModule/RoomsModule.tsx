@@ -138,11 +138,13 @@ const RoomsModule = ({
   const handleMakeCopy = async () => {
     try {
       setIsStartCopy(true);
-      await onMakeCopy(
-        selectedFolder,
-        Documents,
-        `${BackupStorageType.DocumentModuleType}`,
-      );
+
+      const type =
+        typeof selectedFolder === "string"
+          ? BackupStorageType.ResourcesModuleType
+          : BackupStorageType.DocumentModuleType;
+
+      await onMakeCopy(selectedFolder, Documents, `${type}`);
     } catch (error) {
       console.error(error);
       toastr.error(error as Error);
