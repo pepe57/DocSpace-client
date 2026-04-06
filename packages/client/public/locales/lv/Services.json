@@ -64,7 +64,7 @@
   "AIWhatYouPayForTitle": "Ko jūs maksājat",
   "AIWhatYouPayForTokens": "Ievietojuma un izvietojuma tokeni",
   "AIWhatYouPayForVectorization": "Vektoralizācija <1>(Ziņu baza)</1>",
-  "AIWhatYouPayForWebSearch": "",
+  "AIWhatYouPayForWebSearch": "Tīmekļa meklēšana",
   "AmoutWithStorageUnit": "Summa ({{storageUnit}})",
   "AvailableCredits": "Pieejami kredīti",
   "BackupsAvailable": "Ieglabāšanas kopijas pieejamas — {{currency}} par kopiju",

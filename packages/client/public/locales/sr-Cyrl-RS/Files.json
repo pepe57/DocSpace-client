@@ -219,7 +219,7 @@
   "LinkSettingsUsersLimitToast": "Registracija putem linka više nije dostupna jer je dostignit limit.",
   "LinkSettingsUsersLimitToastDescription": "Podesite ograničenje u podešavanjima ili kreirajte novi link za omogućavanje registracije novih korisnika.",
   "MaxNumber": "Maksimalan broj <1>(do {{usersCount}} korisnika)</1>",
-  "NoAccessSectionTitle": "Žao nam je, nemate pristup ovom odeljku",
+  "NoAccessSectionTitle": "Жао нам је, немате приступ овом одељку",
   "RemovedFromRecent": "Uklonjeno iz nedavnih",
   "UserLimitDescription": "Definišite broj korisnika koji mogu pristupiti putem ovog linka za pozivnicu.",
   "UsersJoined": "Korisnici su se pridružili:",

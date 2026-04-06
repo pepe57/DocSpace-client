@@ -219,7 +219,7 @@
   "LinkSettingsUsersLimitToast": "Reģistrācija caur saiti vairs nav pieejama, jo atgriežoties robeža.",
   "LinkSettingsUsersLimitToastDescription": "Pamaņojiet ierobežojumu iestatījumos vai izveidojiet jaunu saiti, lai ielādētu jaunu lietotāju reģistrācijas.",
   "MaxNumber": "Maksimais skaitlis <1>(līdz {{usersCount}} lietotājiem)</1>",
-  "NoAccessSectionTitle": "",
+  "NoAccessSectionTitle": "Atvainojiet, jums nav piekļuves šai sadaļai.",
   "RemovedFromRecent": "Noņemts no jaunākajiem",
   "UserLimitDescription": "Definējiet lietotāju skaitu, kas var pievienoties ar šo italošu saiti.",
   "UsersJoined": "Par lietotājiem pievienoti:",
