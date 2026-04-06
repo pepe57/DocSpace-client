@@ -14,41 +14,12 @@ const {
   projectLocalesMap,
   ollamaConfig,
 } = require("../config/config");
-const axios = require("axios");
-const { translate } = require("@vitalets/google-translate-api");
-// https-proxy-agent v8+ is ESM-only — load lazily with dynamic import()
-let _HttpsProxyAgent = null;
-async function getHttpsProxyAgent(url) {
-  if (!_HttpsProxyAgent) {
-    ({ HttpsProxyAgent: _HttpsProxyAgent } = await import("https-proxy-agent"));
-  }
-  return new _HttpsProxyAgent(url);
-}
+const { Ollama } = require("ollama");
+const { verifyOllamaConnection } = require("../utils/ollamaUtils");
 
-const MODEL = process.env.OLLAMA_SPELLCHECK_MODEL || "gemma3n:latest";
+const MODEL = process.env.OLLAMA_SPELLCHECK_MODEL || "gemma4:latest";
 const LANGUAGES_TO_CHECK = process.argv[2] ? process.argv[2].split(",") : null;
-const OLLAMA_TIMEOUT = parseInt(process.env.OLLAMA_TIMEOUT, 10) || 90000;
-const USE_GOOGLE_PRECHECK = process.env.USE_GOOGLE_PRECHECK === "true"; // Default false
-const SIMILARITY_THRESHOLD =
-  parseFloat(process.env.SIMILARITY_THRESHOLD) || 0.85; // 85% similarity
-const GOOGLE_TRANSLATE_DELAY =
-  parseInt(process.env.GOOGLE_TRANSLATE_DELAY, 10) || 100; // 100ms delay between requests
-const PROXY_TIMEOUT = parseInt(process.env.PROXY_TIMEOUT, 10) || 5000; // 5 seconds max for proxy request
-const PROXY_API_URL =
-  process.env.PROXY_API_URL ||
-  "https://proxylist.geonode.com/api/proxy-list?limit=500&page=1&sort_by=lastChecked&sort_type=desc&protocols=http%2Chttps";
-const PROXY_BLACKLIST_FILE = path.join(appRootPath, "proxy-blacklist.json");
 const CHECKPOINT_FILE = path.join(appRootPath, "verification-checkpoint.json");
-
-// Dynamic proxy list - will be loaded from API
-let PROXY_LIST = [];
-let currentProxyIndex = 0;
-const failedProxies = new Set();
-const proxyBlacklist = new Set(); // Persistent blacklist
-let useProxyMode = false; // Start without proxy, enable only on rate limit
-let lastDirectAttempt = 0; // Timestamp of last direct connection attempt
-let directConnectionAttempts = 0; // Counter for direct connection attempts
-const DIRECT_RETRY_INTERVAL = 60000; // Try direct connection every 60 seconds
 
 // Checkpoint data
 let checkpoint = {
@@ -101,29 +72,6 @@ const languageMap = {
   "uk-UA": "Ukrainian",
   vi: "Vietnamese",
 };
-
-/**
- * Checks if Ollama is running and available
- * @returns {Promise<boolean>} True if Ollama is running
- */
-async function isOllamaRunning() {
-  try {
-    const response = await axios.get(ollamaConfig.apiUrl + "/api/tags", {
-      timeout: 2000, // 2 second timeout
-    });
-    if (response.status === 200) {
-      console.log("Successfully connected to Ollama.");
-      return true;
-    }
-    console.log(
-      `Ollama connection check failed with status: ${response.status}`
-    );
-    return false;
-  } catch (error) {
-    console.log(`Ollama connection check failed: ${error.message}`);
-    return false;
-  }
-}
 
 /**
  * Load checkpoint from file
@@ -193,389 +141,6 @@ function clearCheckpoint() {
 }
 
 /**
- * Load proxy blacklist from file
- * @returns {Set<string>} Set of blacklisted proxy URLs
- */
-function loadProxyBlacklist() {
-  try {
-    if (fs.existsSync(PROXY_BLACKLIST_FILE)) {
-      const data = fs.readFileSync(PROXY_BLACKLIST_FILE, "utf8");
-      const blacklist = JSON.parse(data);
-      console.log(
-        `📋 Loaded ${blacklist.length} blacklisted proxies from file`
-      );
-      return new Set(blacklist);
-    }
-  } catch (error) {
-    console.warn(`⚠️  Failed to load proxy blacklist: ${error.message}`);
-  }
-  return new Set();
-}
-
-/**
- * Save proxy blacklist to file
- */
-function saveProxyBlacklist() {
-  try {
-    const blacklistArray = Array.from(proxyBlacklist);
-    fs.writeFileSync(
-      PROXY_BLACKLIST_FILE,
-      JSON.stringify(blacklistArray, null, 2),
-      "utf8"
-    );
-    console.log(
-      `💾 Saved ${blacklistArray.length} blacklisted proxies to file`
-    );
-  } catch (error) {
-    console.error(`❌ Failed to save proxy blacklist: ${error.message}`);
-  }
-}
-
-/**
- * Fetch fresh proxy list from API
- * @returns {Promise<Array>} Array of proxy URLs
- */
-async function fetchProxyList() {
-  try {
-    console.log("🔄 Fetching fresh proxy list from API...");
-    const response = await axios.get(PROXY_API_URL, { timeout: 10000 });
-
-    if (
-      response.data &&
-      response.data.data &&
-      Array.isArray(response.data.data)
-    ) {
-      const allProxies = response.data.data
-        .filter((proxy) => proxy.protocols && proxy.protocols.includes("http"))
-        .map((proxy) => {
-          const protocol = proxy.protocols.includes("https") ? "https" : "http";
-          return `${protocol}://${proxy.ip}:${proxy.port}`;
-        });
-
-      // Filter out blacklisted proxies
-      const proxies = allProxies.filter((proxy) => !proxyBlacklist.has(proxy));
-
-      const filtered = allProxies.length - proxies.length;
-      console.log(
-        `✅ Loaded ${proxies.length} fresh proxies (filtered ${filtered} blacklisted)`
-      );
-      return proxies;
-    }
-
-    console.warn("⚠️  Failed to parse proxy list from API");
-    return [];
-  } catch (error) {
-    console.error(`❌ Failed to fetch proxy list: ${error.message}`);
-    return [];
-  }
-}
-
-/**
- * Enable proxy mode when rate limit is hit
- */
-async function enableProxyMode() {
-  if (!useProxyMode) {
-    useProxyMode = true;
-    lastDirectAttempt = Date.now();
-    console.log("\n⚠️  Rate limit detected! Enabling proxy mode...");
-
-    // Fetch fresh proxy list if empty
-    if (PROXY_LIST.length === 0) {
-      PROXY_LIST = await fetchProxyList();
-
-      if (PROXY_LIST.length === 0) {
-        console.error("❌ No proxies available! Continuing without proxy...");
-        useProxyMode = false;
-        return;
-      }
-    }
-
-    console.log(
-      `📡 Available proxies: ${PROXY_LIST.length - failedProxies.size}/${
-        PROXY_LIST.length
-      }\n`
-    );
-  }
-}
-
-/**
- * Disable proxy mode when direct connection works again
- */
-function disableProxyMode() {
-  if (useProxyMode) {
-    useProxyMode = false;
-    console.log("\n✅ Rate limit lifted! Disabling proxy mode...\n");
-  }
-}
-
-/**
- * Check if we should try direct connection
- * @returns {boolean} True if should try direct
- */
-function shouldTryDirectConnection() {
-  if (!useProxyMode) {
-    return true; // Always use direct if not in proxy mode
-  }
-
-  const now = Date.now();
-  const timeSinceLastAttempt = now - lastDirectAttempt;
-
-  // Try direct connection every DIRECT_RETRY_INTERVAL
-  if (timeSinceLastAttempt >= DIRECT_RETRY_INTERVAL) {
-    lastDirectAttempt = now;
-    directConnectionAttempts++;
-    console.log(
-      `🔍 Attempting direct connection (attempt #${directConnectionAttempts})...`
-    );
-    return true;
-  }
-
-  return false;
-}
-
-/**
- * Get next working proxy from the list
- * @returns {Promise<string|null>} Proxy URL or null if proxy mode is disabled
- */
-async function getNextProxy() {
-  if (!useProxyMode || PROXY_LIST.length === 0) {
-    return null;
-  }
-
-  const availableProxies = PROXY_LIST.filter(
-    (_, index) => !failedProxies.has(index)
-  );
-
-  if (availableProxies.length === 0) {
-    // All proxies failed - try to fetch fresh list
-    console.log("⚠️  All proxies failed, fetching fresh list...");
-    failedProxies.clear();
-    currentProxyIndex = 0;
-
-    // Try to fetch new proxies
-    const newProxies = await fetchProxyList();
-    if (newProxies.length > 0) {
-      PROXY_LIST = newProxies;
-      console.log(`✅ Loaded ${PROXY_LIST.length} new proxies`);
-      return PROXY_LIST[0];
-    }
-
-    // If still no proxies, return first one from old list
-    return PROXY_LIST.length > 0 ? PROXY_LIST[0] : null;
-  }
-
-  // Round-robin through available proxies, skipping failed ones
-  const startIndex = currentProxyIndex;
-  do {
-    const proxy = PROXY_LIST[currentProxyIndex];
-    currentProxyIndex = (currentProxyIndex + 1) % PROXY_LIST.length;
-    if (!failedProxies.has(PROXY_LIST.indexOf(proxy))) {
-      return proxy;
-    }
-  } while (currentProxyIndex !== startIndex);
-
-  return null; // all proxies failed
-}
-
-/**
- * Mark proxy as failed
- * @param {string} proxyUrl - Proxy URL to mark as failed
- * @param {string} reason - Reason for failure
- */
-function markProxyAsFailed(proxyUrl, reason = "unknown") {
-  const index = PROXY_LIST.indexOf(proxyUrl);
-  if (index !== -1 && !failedProxies.has(index)) {
-    failedProxies.add(index);
-
-    // Add to persistent blacklist for certain errors
-    const permanentErrors = [
-      "ECONNREFUSED",
-      "ETIMEDOUT",
-      "timeout",
-      "ENOTFOUND",
-      "EHOSTUNREACH",
-    ];
-    if (permanentErrors.includes(reason) || reason.startsWith("slow:")) {
-      if (!proxyBlacklist.has(proxyUrl)) {
-        proxyBlacklist.add(proxyUrl);
-        // Save blacklist every 10 new entries to avoid too many writes
-        if (proxyBlacklist.size % 10 === 0) {
-          saveProxyBlacklist();
-        }
-      }
-    }
-
-    const remaining = PROXY_LIST.length - failedProxies.size;
-    console.log(
-      `❌ Proxy failed (${reason}): ${proxyUrl} | Remaining: ${remaining}/${PROXY_LIST.length}`
-    );
-  }
-}
-
-/**
- * Quick pre-check using Google Translate to see if translation is accurate
- * @param {string} translatedContent - The translated content
- * @param {string} englishContent - The English content
- * @param {string} language - The language code
- * @returns {Promise<boolean>} True if translation seems accurate, false otherwise
- */
-async function quickTranslationCheck(
-  translatedContent,
-  englishContent,
-  language
-) {
-  const maxRetries = 3;
-  let lastError = null;
-  let triedDirect = false;
-
-  for (let attempt = 0; attempt < maxRetries; attempt++) {
-    let proxyUrl = null;
-    const startTime = Date.now();
-    const tryDirect = shouldTryDirectConnection();
-
-    try {
-      // Add delay to avoid rate limiting (only when not using proxy)
-      if (!useProxyMode || tryDirect) {
-        await new Promise((resolve) =>
-          setTimeout(resolve, GOOGLE_TRANSLATE_DELAY)
-        );
-      }
-
-      // Get proxy only if proxy mode is enabled AND not trying direct
-      if (!tryDirect) {
-        proxyUrl = await getNextProxy();
-      } else {
-        triedDirect = true;
-      }
-
-      const fetchOptions = {};
-
-      if (proxyUrl) {
-        fetchOptions.agent = await getHttpsProxyAgent(proxyUrl);
-      }
-
-      // Translate the foreign language back to English with timeout
-      const translatePromise = translate(translatedContent, {
-        from: language,
-        to: "en",
-        fetchOptions,
-      });
-
-      let result;
-
-      if (proxyUrl) {
-        // Add timeout for proxy requests
-        let timeoutHandle;
-        const timeoutPromise = new Promise((_, reject) => {
-          timeoutHandle = setTimeout(() => {
-            reject(new Error("PROXY_TIMEOUT"));
-          }, PROXY_TIMEOUT);
-        });
-
-        try {
-          result = await Promise.race([translatePromise, timeoutPromise]);
-        } finally {
-          clearTimeout(timeoutHandle);
-        }
-      } else {
-        result = await translatePromise;
-      }
-
-      const requestTime = Date.now() - startTime;
-
-      // Mark slow proxies as failed
-      if (proxyUrl && requestTime > PROXY_TIMEOUT * 0.8) {
-        markProxyAsFailed(proxyUrl, `slow: ${requestTime}ms`);
-      }
-
-      const backTranslated = result.text.toLowerCase().trim();
-      const original = englishContent.toLowerCase().trim();
-
-      // Calculate simple similarity
-      const similarity = calculateSimilarity(backTranslated, original);
-
-      // If direct connection succeeded while in proxy mode, disable proxy mode
-      if (triedDirect && useProxyMode) {
-        disableProxyMode();
-      }
-
-      return similarity >= SIMILARITY_THRESHOLD;
-    } catch (error) {
-      lastError = error;
-
-      // Enable proxy mode on rate limit
-      if (error.message && error.message.includes("Too Many Requests")) {
-        // If we tried direct and got rate limited, stay in proxy mode
-        if (triedDirect) {
-          console.log(
-            "⚠️  Direct connection still rate limited, continuing with proxies"
-          );
-        }
-        await enableProxyMode();
-        // Retry immediately with proxy
-        continue;
-      }
-
-      // Mark proxy as failed if it was used
-      if (proxyUrl) {
-        if (error.message === "PROXY_TIMEOUT") {
-          markProxyAsFailed(proxyUrl, "timeout");
-        } else if (
-          error.code === "ECONNREFUSED" ||
-          error.code === "ETIMEDOUT"
-        ) {
-          markProxyAsFailed(proxyUrl, error.code);
-        } else if (error.code) {
-          markProxyAsFailed(proxyUrl, error.code);
-        } else {
-          // Unknown error with proxy
-          markProxyAsFailed(proxyUrl, "error");
-        }
-      }
-
-      // If it's the last attempt, log and return false
-      if (attempt === maxRetries - 1) {
-        if (error.message.includes("Too Many Requests")) {
-          console.warn(
-            `Google Translate rate limit reached for ${language}, falling back to Ollama`
-          );
-        } else {
-          console.warn(
-            `Google Translate failed for ${language} after ${maxRetries} attempts: ${error.message}`
-          );
-        }
-        return false;
-      }
-
-      // Wait a bit before retrying
-      await new Promise((resolve) => setTimeout(resolve, 300));
-    }
-  }
-
-  return false;
-}
-
-/**
- * Calculate similarity between two strings (0-1 scale)
- * @param {string} str1 - First string
- * @param {string} str2 - Second string
- * @returns {number} Similarity score between 0 and 1
- */
-function calculateSimilarity(str1, str2) {
-  if (str1.length === 0 && str2.length === 0) return 1.0;
-
-  // Simple word-based comparison
-  const words1 = new Set(str1.split(/\s+/));
-  const words2 = new Set(str2.split(/\s+/));
-
-  const intersection = new Set([...words1].filter((x) => words2.has(x)));
-  const union = new Set([...words1, ...words2]);
-
-  // Jaccard similarity
-  return intersection.size / union.size;
-}
-
-/**
  * Verifies a translation against the English version using Ollama with retry mechanism
  * @param {string} keyPath - The key path
  * @param {string} englishContent - The English content
@@ -589,46 +154,14 @@ async function verifyTranslation(
   englishContent,
   translatedContent,
   language,
-  progress = null
+  progress = null,
 ) {
   // Skip if content is empty
   if (!englishContent || !translatedContent) {
     console.log(
-      `Skipping verification for ${keyPath} in ${language}: insufficient data`
+      `Skipping verification for ${keyPath} in ${language}: insufficient data`,
     );
     return [];
-  }
-
-  // Quick pre-check with Google Translate if enabled
-  if (USE_GOOGLE_PRECHECK) {
-    const keyProgressStr =
-      progress && progress.keyIndex && progress.totalKeys
-        ? `[${progress.keyIndex}/${progress.totalKeys}] `
-        : "";
-    const langProgressStr = progress
-      ? ` [${progress.current}/${progress.total}]`
-      : "";
-
-    console.log(
-      `${keyProgressStr}Quick check for ${keyPath} in ${language}${langProgressStr}`
-    );
-
-    const isAccurate = await quickTranslationCheck(
-      translatedContent,
-      englishContent,
-      language
-    );
-
-    if (isAccurate) {
-      console.log(
-        `${keyProgressStr}✓ Translation seems accurate, skipping Ollama check for ${keyPath} in ${language}${langProgressStr}`
-      );
-      return [];
-    }
-
-    console.log(
-      `${keyProgressStr}⚠ Translation may have issues, proceeding with Ollama check for ${keyPath} in ${language}${langProgressStr}`
-    );
   }
 
   const languageName = languageMap[language] || language;
@@ -637,19 +170,26 @@ async function verifyTranslation(
   const prompt = `
 # Translation Verification Task
 
-You are a translation quality checker. Your ONLY task is to find CRITICAL translation errors.
+You are a translation quality checker for ONLYOFFICE DocSpace UI strings. Your ONLY task is to find CRITICAL translation errors.
 
 ## Content to verify:
 - **English:** "${englishContent}"
 - **${languageName}:** "${translatedContent}"
 
 ## Your task:
-Check if the ${languageName} translation accurately conveys the SAME MEANING as the English text.
+Check if the ${languageName} translation accurately conveys the SAME MEANING as the English text AND preserves all technical markup.
 
 ## Report ONLY these CRITICAL issues:
 1. **incorrect_translation** - Translation has completely wrong or opposite meaning
-2. **missing_content** - Important words or information are missing
-3. **wrong_language** - Text is in the wrong language
+2. **missing_content** - Important words or information are missing from the translation
+3. **wrong_language** - Text is in the wrong language or wrong script (e.g. Latin used where Cyrillic is required)
+4. **missing_variable** - One or more {{variable}} tokens from the English are absent or renamed in the translation
+5. **missing_tag** - One or more React Trans tags (<0>, </0>, <1>, </1>, etc.) or HTML tags (<br/>, <strong>, etc.) are dropped, added, or altered
+
+## Variable and tag rules (CRITICAL):
+- Every {{variable}} in the English MUST appear in the translation with identical spelling and braces. Count them — the translation must contain exactly the same number.
+- Every numbered React tag <N> / </N> must be present and matched in the translation.
+- All HTML tags must be copied character-for-character (tag name, attributes, order).
 
 ## DO NOT report:
 - Minor grammar improvements
@@ -657,18 +197,19 @@ Check if the ${languageName} translation accurately conveys the SAME MEANING as 
 - Alternative wording that means the same thing
 - Punctuation differences
 - Capitalization differences
+- Formal vs informal tone
 
 ## Response format:
 Return a JSON array. Each issue must have:
-- "type": One of: incorrect_translation, missing_content, wrong_language
+- "type": One of: incorrect_translation, missing_content, wrong_language, missing_variable, missing_tag
 - "description": Brief explanation of the critical error
 - "suggestion": Corrected translation
 
-If the translation correctly conveys the meaning, return an empty array [].
+If the translation correctly conveys the meaning and preserves all markup, return an empty array [].
 
-**IMPORTANT:** 
+**IMPORTANT:**
 - Respond with ONLY the JSON array
-- Be strict: only report CRITICAL errors that change meaning
+- Be strict: only report CRITICAL errors that change meaning or break markup
 - Do not escape [ ] brackets in strings
   `;
 
@@ -689,28 +230,77 @@ If the translation correctly conveys the meaning, return an empty array [].
       const retryStr =
         retries > 0 ? ` (attempt ${retries + 1}/${maxRetries})` : "";
       console.log(
-        `${keyProgressStr}Verifying translation for ${keyPath} in ${language}${langProgressStr}${retryStr}`
+        `${keyProgressStr}Verifying translation for ${keyPath} in ${language}${langProgressStr}${retryStr}`,
       );
 
-      // Call Ollama API with timeout
-      const response = await axios.post(
-        ollamaConfig.apiUrl + "/api/generate",
-        {
-          model: MODEL,
-          prompt: prompt,
-          stream: false,
+      // Call Ollama API with streaming + thinking output
+      const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
+      let activeTimeout = null;
+      const resetInactivityTimer = (stream) => {
+        clearTimeout(activeTimeout);
+        activeTimeout = setTimeout(() => {
+          stream.abort();
+        }, ollamaConfig.inactivityTimeout);
+      };
+
+      let fullResponse = "";
+      let fullThinking = "";
+      let tokenCount = 0;
+
+      const stream = await ollamaClient.generate({
+        model: MODEL,
+        prompt: prompt,
+        stream: true,
+        think: true,
+        options: {
+          temperature: 0.1,
+          num_predict: 8192,
         },
-        {
-          timeout: OLLAMA_TIMEOUT, // 90 second timeout
-          headers: {
-            "Content-Type": "application/json",
-          },
+      });
+
+      // First-token timeout: abort if model doesn't respond at all
+      activeTimeout = setTimeout(() => {
+        stream.abort();
+      }, ollamaConfig.firstTokenTimeout);
+
+      let thinkingStarted = false;
+      let responseStarted = false;
+
+      try {
+        for await (const chunk of stream) {
+          const thinkingToken = chunk.thinking ?? "";
+          if (thinkingToken) {
+            if (!thinkingStarted) {
+              process.stdout.write("  [think] ");
+              thinkingStarted = true;
+            }
+            tokenCount++;
+            fullThinking += thinkingToken;
+            process.stdout.write(thinkingToken);
+            resetInactivityTimer(stream);
+          }
+
+          const token = chunk.response ?? "";
+          if (token) {
+            if (!responseStarted) {
+              if (thinkingStarted) process.stdout.write("\n");
+              process.stdout.write("  [response] ");
+              responseStarted = true;
+            }
+            tokenCount++;
+            fullResponse += token;
+            process.stdout.write(token);
+            resetInactivityTimer(stream);
+          }
         }
-      );
+        if (thinkingStarted || responseStarted) process.stdout.write("\n");
+      } finally {
+        clearTimeout(activeTimeout);
+      }
 
       // Parse the response
-      if (response.data && response.data.response) {
-        const responseText = response.data.response.trim();
+      if (fullResponse) {
+        const responseText = fullResponse.trim();
         try {
           // Check if response is wrapped in markdown code blocks and extract the JSON
           let jsonText = responseText;
@@ -734,7 +324,7 @@ If the translation correctly conveys the meaning, return an empty array [].
           // Check if response is truncated or corrupted
           if (jsonText.includes(">]>]>]>]") || jsonText.length > 10000) {
             console.warn(
-              `Corrupted or truncated response for ${keyPath} in ${language}, skipping`
+              `Corrupted or truncated response for ${keyPath} in ${language}, skipping`,
             );
             return [];
           }
@@ -746,23 +336,28 @@ If the translation correctly conveys the meaning, return an empty array [].
           // Try to parse as JSON
           const issues = JSON.parse(jsonText);
           if (Array.isArray(issues)) {
+            if (issues.length === 0) {
+              console.log(`  ✓ OK`);
+            } else {
+              console.log(`  ✗ ${issues.length} issue(s): ${issues.map((i) => i.type).join(", ")}`);
+            }
             return issues;
           } else {
             console.warn(
-              `Unexpected response format for ${keyPath} in ${language}: not an array`
+              `Unexpected response format for ${keyPath} in ${language}: not an array`,
             );
             return [];
           }
         } catch (parseError) {
           console.warn(
-            `Failed to parse Ollama response as JSON for ${keyPath} in ${language}: ${parseError.message}`
+            `Failed to parse Ollama response as JSON for ${keyPath} in ${language}: ${parseError.message}`,
           );
           console.warn(`Response was: ${responseText.substring(0, 500)}...`);
           return [];
         }
       } else {
         throw new Error(
-          `Unexpected Ollama response format: ${JSON.stringify(response.data)}`
+          `Unexpected Ollama response format: ${JSON.stringify(response)}`,
         );
       }
     } catch (error) {
@@ -772,7 +367,7 @@ If the translation correctly conveys the meaning, return an empty array [].
       // Log the error
       console.error(
         `Error calling Ollama (attempt ${retries}/${maxRetries}):`,
-        error.message
+        error.message,
       );
 
       // If it's a socket hang up or timeout, wait before retrying
@@ -783,10 +378,10 @@ If the translation correctly conveys the meaning, return an empty array [].
         error.message.includes("timeout")
       ) {
         console.log(
-          `Network error detected. Waiting before retry... ${error.message}`
+          `Network error detected. Waiting before retry... ${error.message}`,
         );
         console.log(
-          `ollama api url: '${ollamaConfig.apiUrl}' model: '${MODEL}'`
+          `ollama api url: '${ollamaConfig.apiUrl}' model: '${MODEL}'`,
         );
         // Wait for a few seconds before retrying (increasing with each retry)
         await new Promise((resolve) => setTimeout(resolve, 2000 * retries));
@@ -799,7 +394,7 @@ If the translation correctly conveys the meaning, return an empty array [].
 
   console.error(
     `Failed to verify translation for ${keyPath} in ${language} after ${maxRetries} attempts:`,
-    lastError ? lastError.message : "Unknown error"
+    lastError ? lastError.message : "Unknown error",
   );
   return [];
 }
@@ -831,7 +426,7 @@ function getTranslationContent(translations, namespace, key, language) {
     return translations[language]?.[namespace]?.[key] || null;
   } catch (error) {
     console.error(
-      `Error reading translation for ${key} in ${language} from cache: ${error.message}`
+      `Error reading translation for ${key} in ${language} from cache: ${error.message}`,
     );
     return null;
   }
@@ -861,7 +456,7 @@ async function loadAllTranslations(projectPath, languages) {
           translations[lang][namespace] = await fs.readJson(filePath);
         } catch (error) {
           console.error(
-            `Error reading JSON file ${filePath}: ${error.message}`
+            `Error reading JSON file ${filePath}: ${error.message}`,
           );
         }
       }
@@ -906,7 +501,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
 
     const allLanguages = await getAvailableLanguages(projectPath);
     console.log(
-      `Found ${allLanguages.length} languages: ${allLanguages.join(", ")}`
+      `Found ${allLanguages.length} languages: ${allLanguages.join(", ")}`,
     );
 
     const languages = LANGUAGES_TO_CHECK
@@ -914,7 +509,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
       : allLanguages.filter((lang) => lang !== "en");
 
     console.log(
-      `Will check ${languages.length} languages: ${languages.join(", ")}`
+      `Will check ${languages.length} languages: ${languages.join(", ")}`,
     );
 
     languages.forEach((lang) => {
@@ -957,7 +552,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
           translations,
           namespace,
           key,
-          "en"
+          "en",
         );
         if (!englishContent) {
           console.log(`Skipping ${keyPath}: English content not found`);
@@ -986,7 +581,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
               translations,
               namespace,
               key,
-              language
+              language,
             );
             if (!translatedContent) {
               continue;
@@ -1004,7 +599,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
               englishContent,
               translatedContent,
               language,
-              progress
+              progress,
             );
 
             if (!metadata.languages) metadata.languages = {};
@@ -1028,7 +623,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
               stats.languages[language].updated++;
               stats.languages[language].issues += issues.length;
               console.log(
-                `Found ${issues.length} issues for ${keyPath} in ${language}`
+                `Found ${issues.length} issues for ${keyPath} in ${language}`,
               );
 
               // Save issues to CSV immediately
@@ -1041,14 +636,14 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
                   language,
                   englishContent,
                   translatedContent,
-                  issue
+                  issue,
                 );
                 counters.totalIssuesFound++;
               }
             }
           } catch (langError) {
             console.error(
-              `Error processing ${keyPath} for ${language}: ${langError.message}`
+              `Error processing ${keyPath} for ${language}: ${langError.message}`,
             );
             stats.errors.push({
               file: metadataFile,
@@ -1067,7 +662,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
         }
       } catch (fileError) {
         console.error(
-          `Error processing metadata file ${metadataFile}: ${fileError.message}`
+          `Error processing metadata file ${metadataFile}: ${fileError.message}`,
         );
         stats.errors.push({ file: metadataFile, error: fileError.message });
         // Save checkpoint on error
@@ -1081,7 +676,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
     return stats;
   } catch (error) {
     console.error(
-      `Error verifying translations for project ${project}: ${error.message}`
+      `Error verifying translations for project ${project}: ${error.message}`,
     );
     stats.errors.push({ project: project, error: error.message });
     stats.endTime = new Date();
@@ -1121,7 +716,7 @@ function appendIssueToTSV( // sync — no async needed
   language,
   englishContent,
   translatedContent,
-  issue
+  issue,
 ) {
   const tsvPath = path.join(appRootPath, tsvFilename);
   const row = [
@@ -1143,7 +738,7 @@ function appendIssueToTSV( // sync — no async needed
   checkpoint.lastMetadataFile = metadataFile;
   checkpoint.lastLanguage = language;
   checkpoint.processedKeys.add(
-    `${project}:${metadataFile}:${keyPath}:${language}`
+    `${project}:${metadataFile}:${keyPath}:${language}`,
   );
 }
 
@@ -1158,35 +753,13 @@ async function verifyAllTranslationsSpellCheck() {
   checkpoint = loadCheckpoint();
   const resuming = checkpoint.lastProject !== null;
 
-  // Load proxy blacklist at startup
-  proxyBlacklist.clear();
-  const loadedBlacklist = loadProxyBlacklist();
-  loadedBlacklist.forEach((proxy) => proxyBlacklist.add(proxy));
-
-  // console all variables
   console.log("OLLAMA_MODEL: ", MODEL);
-  console.log("OLLAMA_TIMEOUT: ", OLLAMA_TIMEOUT);
+
   console.log("LANGUAGES_TO_CHECK: ", LANGUAGES_TO_CHECK);
-  console.log("USE_GOOGLE_PRECHECK: ", USE_GOOGLE_PRECHECK);
-  console.log("SIMILARITY_THRESHOLD: ", SIMILARITY_THRESHOLD);
-  console.log("GOOGLE_TRANSLATE_DELAY: ", GOOGLE_TRANSLATE_DELAY, "ms");
-  console.log(
-    "PROXY_MODE: ",
-    useProxyMode ? "enabled" : "disabled (will enable on rate limit)"
-  );
-  console.log("PROXY_TIMEOUT: ", PROXY_TIMEOUT, "ms");
-  console.log("PROXY_API_URL: ", PROXY_API_URL);
-  console.log("PROXY_BLACKLIST_FILE: ", PROXY_BLACKLIST_FILE);
-  console.log("BLACKLISTED_PROXIES: ", proxyBlacklist.size);
   console.log("CHECKPOINT_FILE: ", CHECKPOINT_FILE);
   console.log("RESUMING: ", resuming ? "yes" : "no");
-  console.log(
-    "DIRECT_RETRY_INTERVAL: ",
-    DIRECT_RETRY_INTERVAL / 1000,
-    "seconds"
-  );
 
-  const ollamaRunning = await isOllamaRunning();
+  const ollamaRunning = await verifyOllamaConnection();
   if (!ollamaRunning) {
     console.error("Ollama is not running. Aborting verification process.");
     process.exit(1);
@@ -1259,7 +832,7 @@ async function verifyAllTranslationsSpellCheck() {
       const projectStats = await verifyTranslationsSpellCheck(
         project,
         tsvFilename,
-        counters
+        counters,
       );
 
       overallStats.projects[project] = projectStats;
@@ -1282,11 +855,11 @@ async function verifyAllTranslationsSpellCheck() {
           overallStats.languages[lang].processed += langStats.processed || 0;
           overallStats.languages[lang].updated += langStats.updated || 0;
           overallStats.languages[lang].issues += langStats.issues || 0;
-        }
+        },
       );
 
       overallStats.errors = overallStats.errors.concat(
-        projectStats.errors || []
+        projectStats.errors || [],
       );
     } catch (error) {
       console.error(`Error processing project ${project}: ${error.message}`);
@@ -1317,19 +890,13 @@ async function verifyAllTranslationsSpellCheck() {
 // Run the script if executed directly
 verifyAllTranslationsSpellCheck()
   .then((stats) => {
-    // Save final blacklist
-    if (proxyBlacklist.size > 0) {
-      saveProxyBlacklist();
-    }
-
     console.log("\n=== Verification Complete ===");
     console.log(`Total issues found: ${stats.updatedIssues}`);
     if (checkpoint.tsvFilename) {
       console.log(
-        `Results saved to: ${path.join(appRootPath, checkpoint.tsvFilename)}`
+        `Results saved to: ${path.join(appRootPath, checkpoint.tsvFilename)}`,
       );
     }
-    console.log(`Blacklisted proxies: ${proxyBlacklist.size}`);
     console.log("\nThank you for using the translation verification tool!");
 
     console.log("\n=== Translation Verification Complete ===\n");
@@ -1349,7 +916,7 @@ verifyAllTranslationsSpellCheck()
     console.log("\nLanguage Statistics:");
     Object.entries(stats.languages).forEach(([lang, langStats]) => {
       console.log(
-        `- ${lang}: Processed ${langStats.processed}, Updated ${langStats.updated}, Total Issues ${langStats.issues}`
+        `- ${lang}: Processed ${langStats.processed}, Updated ${langStats.updated}, Total Issues ${langStats.issues}`,
       );
     });
 
@@ -1358,7 +925,7 @@ verifyAllTranslationsSpellCheck()
       console.log("\nErrors:");
       stats.errors.slice(0, 10).forEach((error, index) => {
         console.log(
-          `${index + 1}. ${error.file || error.project}: ${error.error}`
+          `${index + 1}. ${error.file || error.project}: ${error.error}`,
         );
       });
 
@@ -1373,8 +940,9 @@ verifyAllTranslationsSpellCheck()
     console.error("\n=== Error During Verification ===");
     console.error(error);
     console.log(
-      "\n Checkpoint saved. You can resume by running the script again."
+      "\n Checkpoint saved. You can resume by running the script again.",
     );
     saveCheckpoint();
     process.exit(1);
   });
+

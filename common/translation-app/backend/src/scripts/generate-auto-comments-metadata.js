@@ -14,27 +14,12 @@ const {
   projectLocalesMap,
   ollamaConfig,
 } = require("../config/config");
-const axios = require("axios");
+const { Ollama } = require("ollama");
+const { verifyOllamaConnection } = require("../utils/ollamaUtils");
 
 const MODEL = process.env.OLLAMA_MODEL || "gemma4:latest";
 const REQUEST_TIMEOUT_MS =
   Number.parseInt(process.env.OLLAMA_TIMEOUT_MS, 10) || 90000; // default 90s timeout
-
-/**
- * Checks if Ollama is running and available
- * @returns {Promise<boolean>} True if Ollama is running
- */
-async function isOllamaRunning() {
-  try {
-    const response = await axios.get(ollamaConfig.apiUrl + "/api/tags", {
-      timeout: 2000, // 2 second timeout
-    });
-    return response.status === 200;
-  } catch (error) {
-    console.log("Ollama connection check failed:", error.message);
-    return false;
-  }
-}
 
 /**
  * Generates a comment for a translation key using Ollama with retry mechanism
@@ -53,7 +38,7 @@ async function generateBasicComment(keyPath, content, usages) {
   }
 
   // Check if Ollama is connected
-  const ollamaRunning = await isOllamaRunning();
+  const ollamaRunning = await verifyOllamaConnection();
   if (!ollamaRunning) {
     console.log("Ollama is not running. Skipping comment generation.");
     return null;
@@ -110,29 +95,71 @@ Based on this information, please write a short, clear description of what this 
         }/${maxRetries})`,
       );
 
-      // Call Ollama API with timeout
-      const response = await axios.post(
-        ollamaConfig.apiUrl + "/api/generate",
-        {
-          model: MODEL,
-          prompt: prompt,
-          stream: false,
-        },
-        {
-          timeout: REQUEST_TIMEOUT_MS,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-      );
+      // Call Ollama API with streaming + thinking output
+      const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
+      let activeTimeout = null;
+      const resetInactivityTimer = (stream) => {
+        clearTimeout(activeTimeout);
+        activeTimeout = setTimeout(() => {
+          stream.abort();
+        }, ollamaConfig.inactivityTimeout);
+      };
 
-      // Return the generated comment
-      if (response.data && response.data.response) {
-        return response.data.response.trim();
+      let fullResponse = "";
+      let fullThinking = "";
+      let thinkingStarted = false;
+      let responseStarted = false;
+
+      const stream = await ollamaClient.generate({
+        model: MODEL,
+        prompt: prompt,
+        stream: true,
+        think: true,
+        options: {
+          temperature: 0.1,
+          num_predict: 8192,
+        },
+      });
+
+      // First-token timeout: abort if model doesn't respond at all
+      activeTimeout = setTimeout(() => {
+        stream.abort();
+      }, ollamaConfig.firstTokenTimeout);
+
+      try {
+        for await (const chunk of stream) {
+          const thinkingToken = chunk.thinking ?? "";
+          if (thinkingToken) {
+            if (!thinkingStarted) {
+              process.stdout.write("  [think] ");
+              thinkingStarted = true;
+            }
+            fullThinking += thinkingToken;
+            process.stdout.write(thinkingToken);
+            resetInactivityTimer(stream);
+          }
+
+          const token = chunk.response ?? "";
+          if (token) {
+            if (!responseStarted) {
+              if (thinkingStarted) process.stdout.write("\n");
+              process.stdout.write("  [response] ");
+              responseStarted = true;
+            }
+            fullResponse += token;
+            process.stdout.write(token);
+            resetInactivityTimer(stream);
+          }
+        }
+        if (thinkingStarted || responseStarted) process.stdout.write("\n");
+      } finally {
+        clearTimeout(activeTimeout);
+      }
+
+      if (fullResponse) {
+        return fullResponse.trim();
       } else {
-        throw new Error(
-          `Unexpected Ollama response format: ${JSON.stringify(response.data)}`,
-        );
+        throw new Error("Ollama returned empty response");
       }
     } catch (error) {
       lastError = error;
