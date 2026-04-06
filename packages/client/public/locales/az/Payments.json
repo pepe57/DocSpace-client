@@ -87,7 +87,6 @@
   "NoWalletTransactionDescription": "Çənnabagınız qaiməni istifadə etməyə başlayacaqsınız, ödəniş tarixində buraya göstəriləcəkdir.",
   "NumberOfRoomsAccordingToTariff": "Tarif planınıza uyğun otaqların sayı: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Tarif planınıza uyğun olaraq administrator sayı: {{currentValue}}/{{maxValue}}",
-  "OnlyPayerCanManageServices": "Yalnız Ödəyən tərəf xidmətləri idarə edə bilər. <1>Daha çox öyrənin</1>",
   "OnlyPortalAdminsShown": "Yalnız {{productName}} adminləri burada göstərilir.",
   "PartialPaymentDescription": "Bundan sonra, tam məbləğ mühasibat dövrünün hər birində, müntəzəm hesablaşma tarixində bir dəfə hesablanacaq.",
   "PartialPaymentNoDate": "Bu gün, siz seçilmiş {{storageUnit}} miqdarının qalan günlərə qədərki müddətə ödənişini edirsiniz.",

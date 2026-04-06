@@ -87,7 +87,6 @@
   "NoWalletTransactionDescription": "Μόλις ξεκινήσετε να χρησιμοποιείτε το πορτοφόλι, το ιστορικό πληρωμών θα εμφανίζεται εδώ.",
   "NumberOfRoomsAccordingToTariff": "Αριθμός δωματίων σύμφωνα με το τιμολογιακό σας πρόγραμμα: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Αριθμός διαχειριστών σύμφωνα με το τιμολογιακό σας πρόγραμμα: {{currentValue}}/{{maxValue}}",
-  "OnlyPayerCanManageServices": "Μόνο ο Πληρωτής μπορεί να διαχειριστεί τις υπηρεσίες. <1>Περισσότερα</1>",
   "OnlyPortalAdminsShown": "Μόνο οι διαχειριστές του {{productName}} εμφανίζονται εδώ",
   "PartialPaymentDescription": "Προχωρώντας, το πλήρες ποσό θα χρεώνεται μία φορά ανά κύκλο χρέωσης, την τακτική ημερομηνία χρέωσης.",
   "PartialPaymentNoDate": "Σήμερα, πληρώνετε μόνο για τον επιλεγμένο όγκο {{storageUnit}} για τις υπόλοιπες ημέρες μέχρι την ημερομηνία τιμολόγησής σας.",

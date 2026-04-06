@@ -17,7 +17,6 @@
   "RemoveFromGroup": "グループから削除",
   "RemoveGroup": "グループを削除",
   "RemoveGroupConfirmation": "部屋のグループを削除します。続行してもよろしいですか？",
-  "RemoveGroupInfo": "グループに含まれる部屋は、「<strong id=\"all-rooms-title\">全ルーム</strong>」セクションに表示されます。",
   "RoomAddedToGroup": "選択された部屋が<1>{{groupName}}</1>に追加されました。",
   "RoomGrouping": "ルームのグループ化",
   "RoomGroupingDisabled": "ルームのグループ化は無効になっています",

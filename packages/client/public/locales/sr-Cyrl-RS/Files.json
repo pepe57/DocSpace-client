@@ -209,7 +209,6 @@
   "AIAgentPinLimitMessage": "Не можете pričvrstiti više од 10 {{aiAgents}} на врх. Ослободите неке које су тренутно pričвршћене.",
   "AIAgentPinned": "{{aiAgent}} pričvršćen",
   "AIAgentsPinned": "{{aiAgents}} fiksirano",
-  "AIAgentsUnpinned": "otkopčano",
   "AIAgentUnpinned": "{{aiAgent}} otkopiran",
   "ChangeRoomOwner": "Promena vlasnika sobe",
   "LinkSettingsExpiredToastDescription": "Povećajte period važenja u podešavanjima ili kreirajte novi link za omogućavanje novih registracija korisnika.",

@@ -87,7 +87,6 @@
   "NoWalletTransactionDescription": "بمجرد أن تبدأ في استخدام المحفظة، سيتم عرض سجل الدفعات هنا.",
   "NumberOfRoomsAccordingToTariff": "عدد الغرف وفقًا لخطة التعريف الخاصة بك: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "عدد المشرفين وفقًا لخطة التعريف الخاصة بك: {{currentValue}}/{{maxValue}}",
-  "OnlyPayerCanManageServices": "يمكن للدافع فقط إدارة الخدمات. <1>تعرّف على المزيد</1>",
   "OnlyPortalAdminsShown": "يظهر هنا مسؤولو {{productName}} فقط",
   "PartialPaymentDescription": "مستقبلاً، سيتم تحصيل المبلغ بالكامل مرة واحدة لكل دورة فوترة في تاريخ الفوترة المعتاد.",
   "PartialPaymentNoDate": "اليوم، أنت تدفع فقط مقابل {{storageUnit}} المحدد للفترة المتبقية حتى تاريخ الفوترة.",

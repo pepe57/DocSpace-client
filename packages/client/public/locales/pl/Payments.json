@@ -151,7 +151,6 @@
   "MinCurrency": "min {{currency}}",
   "NoPaymentMethod": "Brak powiążonej metody płatności",
   "NoPaymentMethodDescription": "Aby uzyskać dostęp do płatnych usług, należy połączyć kartę płatniczą. Osoba, która połączy kartę, zostanie automatycznie przypisana jako płatnik dla tego konta.",
-  "OnlyPayerCanManageServices": "Tylko płatnik może zarządzać usługami. <1>Dowiedz się więcej</1>",
   "PayerResponsibleForBilling": "Osoba odpowiedzialna za fakturowanie i płatności",
   "PaymentMethodDescription": "Karty płatnicze powiązane z Twoim portfelem {{productName}}",
   "PlanPaymentOverdue": "Nie można dodawać nowych użytkowników, tworzyć nowych pomieszczeń ani agentów AI. Opłata za plan {{planName}} jest zaległa.",

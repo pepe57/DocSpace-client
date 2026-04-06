@@ -151,7 +151,6 @@
   "MinCurrency": "<0>min {{currency}}</0>",
   "NoPaymentMethod": "Nije povezan način plaćanja",
   "NoPaymentMethodDescription": "Da biste pristupili plaćenim uslugama, molimo vas da povežete platnu karticu. Osoba koja poveže karticu automatski će biti dodeljena kao Platioca za ovaj nalog.",
-  "OnlyPayerCanManageServices": "Samo Payer može upravljati uslugama. <1>Saznajte više</1>",
   "PayerResponsibleForBilling": "Osoba odgovorna za fakturisanje i plaćanja",
   "PaymentMethodDescription": "<0>Kreditne kartice povezane sa vašim {{productName}} novčanikom</0>",
   "PlanPaymentOverdue": "Nije moguće dodati nove korisnike, kreirati nove sobe ili AI agente. Plaćanje za plan {{planName}} je u kašnjenju.",

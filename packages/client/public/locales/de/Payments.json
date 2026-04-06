@@ -87,7 +87,6 @@
   "NoWalletTransactionDescription": "Sobald Sie mit der Nutzung des Wallets beginnen, wird hier der Zahlungsverlauf angezeigt.",
   "NumberOfRoomsAccordingToTariff": "Anzahl der Räume gemäß Ihrem Tarifplan: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Anzahl Administratoren Ihrem Tarifplan: {{currentValue}}/{{maxValue}}",
-  "OnlyPayerCanManageServices": "Nur der Zahlungspflichtige kann Dienste verwalten. <1>Erfahren Sie mehr</1>",
   "OnlyPortalAdminsShown": "Hier werden nur {{productName}}-Administratoren angezeigt",
   "PartialPaymentDescription": "Ab sofort wird der volle Betrag einmal pro Abrechnungszeitraum an Ihrem regulären Abrechnungsdatum abgebucht.",
   "PartialPaymentNoDate": "Heute zahlen Sie nur für die ausgewählte Menge von {{storageUnit}} für die verbleibenden Tage bis zu Ihrem Rechnungsdatum.",

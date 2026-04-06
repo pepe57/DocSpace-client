@@ -87,7 +87,6 @@
   "NoWalletTransactionDescription": "След като започнете да използвате портфейла, историята на плащанията ще бъде показана тук.",
   "NumberOfRoomsAccordingToTariff": "Брой стаи според тарифния ви план: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Брой администратори според тарифния ви план: {{currentValue}}/{{maxValue}}",
-  "OnlyPayerCanManageServices": "Само Плащателят може да управлява услугите. <1>Научете повече</1>",
   "OnlyPortalAdminsShown": "Само {{productName}} администратори са показани тук.",
   "PartialPaymentDescription": "Оттук нататък, пълната сума ще бъде таксувана веднъж на всеки билов цикъл на редовната ви дата за фактуриране.",
   "PartialPaymentNoDate": "Днес плащате само за избрания размер на {{storageUnit}} за оставащите дни до датата на фактуриране.",

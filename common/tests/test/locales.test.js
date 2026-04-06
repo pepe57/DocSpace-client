@@ -556,6 +556,7 @@ describe("Locales Tests", () => {
 
     let i = 0;
     let errorsCount = 0;
+    const wrongVariableKeys = [];
 
     enWithVariables.forEach((enKeyWithVariables) => {
       otherLanguagesWithVariables.forEach((lng) => {
@@ -563,7 +564,7 @@ describe("Locales Tests", () => {
           (t) => t.key === enKeyWithVariables.key,
         );
 
-        if (!lngKey) {
+        if (!lngKey || !lngKey.value) {
           return;
         }
 
@@ -576,6 +577,7 @@ describe("Locales Tests", () => {
             `(en=${enKeyWithVariables.variables.length}|${lng.language}=${lngKey.variables.length})\r\n` +
             `'en': '${enKeyWithVariables.value}'\r\n'${lng.language}': '${lngKey.value}'\r\n\r\n`;
           errorsCount++;
+          wrongVariableKeys.push({ language: lng.language, key: lngKey.key });
         }
 
         if (
@@ -595,9 +597,45 @@ describe("Locales Tests", () => {
               ",",
             )}]\r\n\r\n`;
           errorsCount++;
+          wrongVariableKeys.push({ language: lng.language, key: lngKey.key });
         }
       });
     });
+
+    if (process.env.CLEAR_WRONG_VALUES === "true" && wrongVariableKeys.length > 0) {
+      const seen = new Set();
+      const uniqueWrongKeys = wrongVariableKeys.filter(({ language, key }) => {
+        const id = `${language}:${key}`;
+        if (seen.has(id)) return false;
+        seen.add(id);
+        return true;
+      });
+
+      const fileUpdates = {};
+      uniqueWrongKeys.forEach(({ language, key }) => {
+        const colonIndex = key.indexOf(":");
+        const namespace = key.substring(0, colonIndex);
+        const actualKey = key.substring(colonIndex + 1);
+        const translationFile = translationFiles.find(
+          (f) => f.language === language && f.namespace === namespace,
+        );
+        if (!translationFile) return;
+        if (!fileUpdates[translationFile.path]) {
+          fileUpdates[translationFile.path] = [];
+        }
+        fileUpdates[translationFile.path].push(actualKey);
+      });
+
+      Object.entries(fileUpdates).forEach(([filePath, keys]) => {
+        const content = JSON.parse(fs.readFileSync(filePath, "utf8"));
+        keys.forEach((k) => {
+          delete content[k];
+        });
+        fs.writeFileSync(filePath, JSON.stringify(content, null, 2));
+      });
+
+      console.log(`Cleared ${uniqueWrongKeys.length} wrong variable translation keys.`);
+    }
 
     expect(errorsCount, message).toBe(0);
   });
@@ -634,6 +672,7 @@ describe("Locales Tests", () => {
 
     let i = 0;
     let errorsCount = 0;
+    const wrongTagKeys = [];
 
     enWithTags.forEach((enKeyWithTags) => {
       otherLanguagesWithTags.forEach((lng) => {
@@ -641,7 +680,7 @@ describe("Locales Tests", () => {
           (t) => t.key === enKeyWithTags.key,
         );
 
-        if (!lngKey) {
+        if (!lngKey || !lngKey.value) {
           return;
         }
 
@@ -654,6 +693,7 @@ describe("Locales Tests", () => {
             `(en=${enKeyWithTags.tags.length}|${lng.language}=${lngKey.tags.length})\r\n` +
             `'en': '${enKeyWithTags.value}'\r\n'${lng.language}': '${lngKey.value}'\r\n\r\n`;
           errorsCount++;
+          wrongTagKeys.push({ language: lng.language, key: lngKey.key });
         }
 
         if (!lngKey.tags.every((v) => enKeyWithTags.tags.includes(v))) {
@@ -667,9 +707,45 @@ describe("Locales Tests", () => {
             )}]\r\n` +
             `'${lngKey.value}' Tags=[${lngKey.tags.join(",")}]\r\n\r\n`;
           errorsCount++;
+          wrongTagKeys.push({ language: lng.language, key: lngKey.key });
         }
       });
     });
+
+    if (process.env.CLEAR_WRONG_VALUES === "true" && wrongTagKeys.length > 0) {
+      const seen = new Set();
+      const uniqueWrongKeys = wrongTagKeys.filter(({ language, key }) => {
+        const id = `${language}:${key}`;
+        if (seen.has(id)) return false;
+        seen.add(id);
+        return true;
+      });
+
+      const fileUpdates = {};
+      uniqueWrongKeys.forEach(({ language, key }) => {
+        const colonIndex = key.indexOf(":");
+        const namespace = key.substring(0, colonIndex);
+        const actualKey = key.substring(colonIndex + 1);
+        const translationFile = translationFiles.find(
+          (f) => f.language === language && f.namespace === namespace,
+        );
+        if (!translationFile) return;
+        if (!fileUpdates[translationFile.path]) {
+          fileUpdates[translationFile.path] = [];
+        }
+        fileUpdates[translationFile.path].push(actualKey);
+      });
+
+      Object.entries(fileUpdates).forEach(([filePath, keys]) => {
+        const content = JSON.parse(fs.readFileSync(filePath, "utf8"));
+        keys.forEach((k) => {
+          delete content[k];
+        });
+        fs.writeFileSync(filePath, JSON.stringify(content, null, 2));
+      });
+
+      console.log(`Cleared ${uniqueWrongKeys.length} wrong tag translation keys.`);
+    }
 
     expect(errorsCount, message).toBe(0);
   });
@@ -706,6 +782,15 @@ describe("Locales Tests", () => {
         const keys = translationItems.map((t) => t.key);
 
         message += keys.join("\r\n") + "\r\n\r\n";
+
+        if (process.env.CLEAR_WRONG_VALUES === "true") {
+          const content = JSON.parse(fs.readFileSync(lng.path, "utf8"));
+          translationItems.forEach((t) => {
+            delete content[t.key];
+          });
+          fs.writeFileSync(lng.path, JSON.stringify(content, null, 2));
+          console.log(`Cleared ${translationItems.length} forbidden value keys in '${lng.path}'.`);
+        }
       });
     });
 
@@ -791,6 +876,15 @@ describe("Locales Tests", () => {
         const emptyKeys = emptyTranslationItems.map((t) => t.key);
 
         message += emptyKeys.join("\r\n") + "\r\n\r\n";
+
+        if (process.env.CLEAR_WRONG_VALUES === "true") {
+          const content = JSON.parse(fs.readFileSync(lng.path, "utf8"));
+          emptyTranslationItems.forEach((t) => {
+            delete content[t.key];
+          });
+          fs.writeFileSync(lng.path, JSON.stringify(content, null, 2));
+          console.log(`Deleted ${emptyTranslationItems.length} empty keys in '${lng.path}'.`);
+        }
       });
     });
 
@@ -809,6 +903,15 @@ describe("Locales Tests", () => {
       const emptyKeys = emptyTranslationItems.map((t) => t.key);
 
       message += emptyKeys.join("\r\n") + "\r\n\r\n";
+
+      if (process.env.CLEAR_WRONG_VALUES === "true") {
+        const content = JSON.parse(fs.readFileSync(lng.path, "utf8"));
+        emptyTranslationItems.forEach((t) => {
+          delete content[t.key];
+        });
+        fs.writeFileSync(lng.path, JSON.stringify(content, null, 2));
+        console.log(`Deleted ${emptyTranslationItems.length} empty keys in '${lng.path}'.`);
+      }
     });
 
     expect(exists, message).toBe(false);
@@ -1320,7 +1423,6 @@ describe("Locales Tests", () => {
         // Parse the key (it might have namespace or not)
         const keyParts = fullKey.split(":");
         const hasNamespace = keyParts.length > 1;
-        const namespace = hasNamespace ? keyParts[0] : null;
         const translationKey = hasNamespace ? keyParts[1] : keyParts[0];
 
         // Try to find the key in our map
@@ -1401,7 +1503,6 @@ describe("Locales Tests", () => {
         // Parse the key (it might have namespace or not)
         const keyParts = fullKey.split(":");
         const hasNamespace = keyParts.length > 1;
-        const namespace = hasNamespace ? keyParts[0] : null;
         const translationKey = hasNamespace ? keyParts[1] : keyParts[0];
 
         // Try to find the key in our map

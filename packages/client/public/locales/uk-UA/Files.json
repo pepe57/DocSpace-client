@@ -209,8 +209,6 @@
   "AIAgentPinLimitMessage": "Ви не можете закріпити більше ніж 10 {{aiAgents}} у верхній частині. Зніміть закріплення з деяких, які наразі закріплені.",
   "AIAgentPinned": "{{aiAgent}} закріплено",
   "AIAgentsPinned": "Закріплено {{aiAgents}}",
-  "AIAgentsUnpinned": "незакріплені",
-  "AIAgentUnpinned": "не закріплено",
   "ChangeRoomOwner": "Змінити власника кімнати",
   "LinkSettingsExpiredToastDescription": "Продовжіть термін дії в налаштуваннях або створіть нове посилання для активації реєстрації нових користувачів.",
   "LinkSettingsJoinedUsers": "Користувачі приєдналися за цим посиланням",

@@ -151,7 +151,6 @@
   "MinCurrency": "min {{currency}}",
   "NoPaymentMethod": "Ödeme yöntemi bağlı değil",
   "NoPaymentMethodDescription": "Ücretli hizmetlere erişmek için lütfen bir ödeme kartı bağlayın. Kartı bağlayan kişi otomatik olarak bu hesap için Ödeme Yapan (Payer) olarak atanacaktır.",
-  "OnlyPayerCanManageServices": "Yalnızca Ödeme Yapan Taraf hizmetleri yönetebilir. <1>Daha fazla bilgi edinin</1>",
   "PayerResponsibleForBilling": "Faturalama ve ödemelerden sorumlu kişi",
   "PaymentMethodDescription": "{{productName}} cüzdanınıza bağlı ödeme kartları",
   "PlanPaymentOverdue": "Yeni kullanıcı eklenemiyor, yeni oda oluşturulamıyor veya yapay zeka ajanı oluşturulamıyor. {{planName}} plan ödemesi gecikti.",

@@ -151,7 +151,6 @@
   "MinCurrency": "min {{currency}}",
   "NoPaymentMethod": "Nessun metodo di pagamento collegato",
   "NoPaymentMethodDescription": "Per accedere ai servizi a pagamento, si prega di collegare una carta di pagamento. La persona che collega la carta verrà automaticamente assegnata come Pagatore per questo account.",
-  "OnlyPayerCanManageServices": "Solo il pagatore può gestire i servizi. <1>Scopri di più</1>",
   "PayerResponsibleForBilling": "La persona responsabile della fatturazione e dei pagamenti",
   "PaymentMethodDescription": "Carte di pagamento collegate al tuo portafoglio {{productName}}",
   "PlanPaymentOverdue": "Non è possibile aggiungere nuovi utenti, creare nuove stanze o agenti AI. Pagamento del piano {{planName}} scaduto.",

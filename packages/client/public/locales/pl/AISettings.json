@@ -61,6 +61,5 @@
   "SearchEngine": "Silnik {{webSearch}}",
   "ToUseAddProvider": "Aby użyć {{value}}, upewnij się, że najpierw połączyłeś co najmniej jednego {{aiProvider}}.",
   "WebSearchDisabledSuccess": "{{webSearch}} pomyślnie wyłączony",
-  "WebSearchEnabledSuccess": "<webSearch> pomyślnie włączony",
   "WebSearchKeyDescription": "Wprowadź klucz API uzyskany od swojego dostawcy {{webSearch}}"
 }

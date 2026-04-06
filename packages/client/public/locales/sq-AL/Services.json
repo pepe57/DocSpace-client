@@ -60,7 +60,6 @@
   "AIPricingTokensTooltipInput": "<1>Tokene të hyrë</1> — Teksti dhe të dhënat që i dërgoni modeleve AI",
   "AIPricingTokensTooltipOutput": "<1>Tokene të dalë</1> — Përgjigjet dhe përmbajtja e gjeneruar nga AI.",
   "AIServiceToppedUp": "Shërbimi AI i {{organizationName}} u aktivizua me sukses.",
-  "AIToolsDescription": "<0>Ndërmarrja</0> AI do të bëjë modelët AI të ofruar nga <0>Ndërmarrja</0> të disponuesh për të gjithë përdoruesit e <0>Ndërmarrja</0> <0>Ndërmarrja</0>.",
   "AIWhatYouPayForTitle": "Çfarë paguani",
   "AIWhatYouPayForTokens": "Tokene të Inputit dhe Outputit",
   "AIWhatYouPayForVectorization": "Vektërizimi <1>(Bazë e dijes)</1>",

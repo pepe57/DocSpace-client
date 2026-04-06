@@ -766,6 +766,21 @@
       }
     },
     {
+      "label": "Test | Jest:translations:clear-wrong",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; CLEAR_WRONG_VALUES=true FIX_MOVED_KEYS=true npm run test:locales ; npm run open-report",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Jest:images",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:images ; npm run open-report",

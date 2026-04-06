@@ -319,6 +319,11 @@
             "tooltip": "🛠️ Start the \"Test | Jest:translations\" task"
           },
           {
+            "label": "Test translations: clear wrong values",
+            "task": "Test | Jest:translations:clear-wrong",
+            "tooltip": "🛠️ Run translation tests with CLEAR_WRONG_VALUES=true — clears bad variables, tags and forbidden values"
+          },
+          {
             "label": "Test images (common)",
             "task": "Test | Jest:images",
             "tooltip": "🛠️ Start the \"Test | Jest:images\" task"

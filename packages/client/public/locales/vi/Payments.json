@@ -151,7 +151,6 @@
   "MinCurrency": "Tối thiểu {{currency}}",
   "NoPaymentMethod": "Chưa liên kết phương thức thanh toán nào",
   "NoPaymentMethodDescription": "Để truy cập các dịch vụ trả phí, vui lòng liên kết một thẻ thanh toán. Người thực hiện kết nối thẻ sẽ tự động được chỉ định là Người thanh toán cho tài khoản này.",
-  "OnlyPayerCanManageServices": "Chỉ Bên Thanh toán mới có thể quản lý dịch vụ. <1>Tìm hiểu thêm</1>",
   "PayerResponsibleForBilling": "Người chịu trách nhiệm về thanh toán và hóa đơn",
   "PaymentMethodDescription": "Các thẻ thanh toán được liên kết với ví {{productName}} của bạn",
   "PlanPaymentOverdue": "Không thể thêm người dùng mới, tạo phòng mới hoặc tác nhân AI. Thanh toán gói {{planName}} quá hạn.",

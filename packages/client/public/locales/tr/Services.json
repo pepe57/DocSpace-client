@@ -87,7 +87,6 @@
   "HowDoesItWork": "Nasıl çalışır?",
   "InputCurrency": "{{currency}}/1M",
   "InsufficientPermissionsMessage": "Yeterli izniniz yok. Hizmetlere erişmek ve yapılandırmak için lütfen ödeme yapan kişiyle (<1>{{payerContact}}</1>) iletişime geçin.",
-  "LastTopUp": "<1>Son yükleme</1>: <2>{{currency}}</2> tarihinde.",
   "LessThanOneDay": "<1>gün</1>",
   "LowBalance": "Düşük kredi bakiyesi. Kesintisiz hizmet sağlamak için kredi ekleyin.",
   "ModelSettings": "Model ayarları",

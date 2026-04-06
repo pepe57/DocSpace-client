@@ -87,7 +87,6 @@
   "NoWalletTransactionDescription": "Una vez que empiece a utilizar el monedero, el historial de pagos se mostrará aquí.",
   "NumberOfRoomsAccordingToTariff": "Número de salas según su plan de tarifas: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Número de administradores según su plan de tarifas: {{currentValue}}/{{maxValue}}",
-  "OnlyPayerCanManageServices": "Solo el pagador puede gestionar los servicios. <1>Más información</1>",
   "OnlyPortalAdminsShown": "Aquí solo se muestran los administradores de {{productName}}",
   "PartialPaymentDescription": "En adelante, el importe total se cargará una vez por ciclo de facturación en la fecha de facturación habitual.",
   "PartialPaymentNoDate": "Hoy sólo pagará por la cantidad seleccionada de {{storageUnit}} durante los días restantes hasta la fecha de facturación.",

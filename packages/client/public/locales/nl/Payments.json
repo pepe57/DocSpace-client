@@ -151,7 +151,6 @@
   "MinCurrency": "min {{currency}}",
   "NoPaymentMethod": "Geen betaalmethode gekoppeld",
   "NoPaymentMethodDescription": "Om toegang te krijgen tot betaalde diensten, koppel alstublieft een betaalkaart. De persoon die de kaart koppelt, wordt automatisch aangewezen als de Betaler voor dit account.",
-  "OnlyPayerCanManageServices": "Alleen de betaler kan diensten beheren. <1>Lees meer</1>",
   "PayerResponsibleForBilling": "De persoon die verantwoordelijk is voor facturering en betalingen",
   "PaymentMethodDescription": "Betaalpassen gekoppeld aan uw {{productName}}-portemonnee",
   "PlanPaymentOverdue": "Kan geen nieuwe gebruikers, nieuwe ruimtes of AI-agenten toevoegen. Betaling voor het {{planName}}-abonnement is vervallen.",

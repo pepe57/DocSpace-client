@@ -87,7 +87,6 @@
   "NoWalletTransactionDescription": "Jakmile začnete používat peněženku, historie plateb se zobrazí zde.",
   "NumberOfRoomsAccordingToTariff": "Počet místností podle vašeho tarifního plánu: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Počet administrátorů podle vašeho tarifního plánu: {{currentValue}}/{{maxValue}}",
-  "OnlyPayerCanManageServices": "Pouze platitel může spravovat služby. <1>Zjistit více</1>",
   "OnlyPortalAdminsShown": "Pouze administrátoři {{productName}} jsou zde zobrazeni.",
   "PartialPaymentDescription": "Pokračováním bude plná částka účtována jednou za každý účetní cyklus ve vašem obvyklém termínu splatnosti.",
   "PartialPaymentNoDate": "Dnes platíte pouze za vybranou velikost {{storageUnit}} na zbývající dny do data splatnosti.",

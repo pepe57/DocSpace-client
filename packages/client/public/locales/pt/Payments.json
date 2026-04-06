@@ -151,7 +151,6 @@
   "MinCurrency": "min {{currency}}",
   "NoPaymentMethod": "Nenhum método de pagamento vinculado",
   "NoPaymentMethodDescription": "Para acessar serviços pagos, por favor, vincule um cartão de pagamento. A pessoa que vincular o cartão será automaticamente designada como Pagador desta conta.",
-  "OnlyPayerCanManageServices": "Somente o Pagador pode gerenciar serviços. <1>Saiba mais</1>",
   "PayerResponsibleForBilling": "A pessoa responsável por faturamento e pagamentos",
   "PaymentMethodDescription": "Cartões de pagamento vinculados à sua carteira {{productName}}",
   "PlanPaymentOverdue": "Não é possível adicionar novos usuários, criar novas salas ou agentes de IA. Pagamento do plano {{planName}} em atraso.",

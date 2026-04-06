@@ -87,7 +87,6 @@
   "NoWalletTransactionDescription": "Kun aloitat lompakon käyttö, maksuhistoria näkyy täällä.",
   "NumberOfRoomsAccordingToTariff": "Huoneiden määrä tilauksesi mukaan: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Pääkäyttäjien määrä tilauksesi mukaan: {{currentValue}}/{{maxValue}}",
-  "OnlyPayerCanManageServices": "Vain maksaja voi hallita palveluita. <1>Lue lisää</1>",
   "OnlyPortalAdminsShown": "Vain {{productName}}-ylläpitäjät näytetään täällä",
   "PartialPaymentDescription": "Tulevaisuudessa koko summa veloitetaan kerran laskutusjaksoissa tavanomaisena laskituspäivänä.",
   "PartialPaymentNoDate": "Tänään maksat vain valitsemasi määrän {{storageUnit}} -tilaa jäljellä olevilta päiviltä laskutuspäivään asti.",

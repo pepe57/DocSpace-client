@@ -151,7 +151,6 @@
   "MinCurrency": "{{currency}} の最小値",
   "NoPaymentMethod": "支払い方法がリンクされていません",
   "NoPaymentMethodDescription": "有料サービスにアクセスするには、支払いカードをリンクしてください。カードを接続したユーザーが、このアカウントの支払い担当者として自動的に設定されます。",
-  "OnlyPayerCanManageServices": "支払者のみがサービスを管理できます。<1>詳細はこちら</1>",
   "PayerResponsibleForBilling": "請求および支払い担当者",
   "PaymentMethodDescription": "{{productName}} ウォレットにリンクされている支払いカード",
   "PlanPaymentOverdue": "新しいユーザーを追加したり、新しいルームやAIエージェントを作成したりすることはできません。{{planName}}プランの支払いが期限を過ぎています。",

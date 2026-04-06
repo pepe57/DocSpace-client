@@ -209,8 +209,6 @@
   "AIAgentPinLimitMessage": "Nie można przypiąć więcej niż 10 {{aiAgents}} do góry. Odpięć niektórych, które są obecnie przypięte.",
   "AIAgentPinned": "Przypięty {{aiAgent}}",
   "AIAgentsPinned": "Przypięte {{aiAgents}}",
-  "AIAgentsUnpinned": "odpięte",
-  "AIAgentUnpinned": "odpięte",
   "ChangeRoomOwner": "Zmień właściciela pokoju",
   "LinkSettingsExpiredToastDescription": "Rozszerz okres ważności w ustawieniach lub utwórz nowy link, aby umożliwić rejestrację nowych użytkowników.",
   "LinkSettingsJoinedUsers": "Użytkownicy dołączyli za pomocą tego linku",

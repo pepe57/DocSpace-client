@@ -15,7 +15,6 @@
   "ResultStorage": "Armazenamento de resultados",
   "UploadFilesDevice": "Carregue arquivos a partir do seu dispositivo pessoal",
   "UploadFilesPortal": "Carregue arquivos de {{sectionNameFirst}} ou {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "Você está no modo <strongs>somente visualização</strongs> para este {{aiAgent}}. Você pode ver os resultados da atividade {{aiChat}} de outros usuários.",
   "CreateChatDescription": "Acesse a aba {{aiChat}} para começar.",
   "EmptyKnowledgeDescription": "Os arquivos carregados aqui serão indexados e usados como contexto na aba {{aiChat}}. Adicione arquivos (até 10 MB cada) para fazer perguntas à IA, gerar conteúdo ou colaborar com informações.",
   "EmptyResultsDescription": "Arquivos gerados em {{aiChat}} aparecerão aqui automaticamente. Sempre que você gerar conteúdo, iniciar um bate-papo ou enviar uma mensagem com saída, o resultado será salvo nesta seção.",

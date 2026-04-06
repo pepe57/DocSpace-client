@@ -151,7 +151,6 @@
   "MinCurrency": "min {{currency}}",
   "NoPaymentMethod": "Ni povezane metode plačila",
   "NoPaymentMethodDescription": "Za dostop do plačanih storitev prosim povezajte plačilno kartico. Osoba, ki poveže kartico, bo avtomatsko postavljena kot plačilnik za ta račun.",
-  "OnlyPayerCanManageServices": "Ležaj lahko upravlja storitve. <1>Več natančnega</1>",
   "PayerResponsibleForBilling": "Osoba, odgovorna za obračun in plačila",
   "PaymentMethodDescription": "Plačilne kartice, povezane z vašim {{productName}} denarnico",
   "PlanPaymentOverdue": "Nisem lahko dodal novih uporabnikov, ustvarjal novih sob ali agentov AI. Plačilo za plan {{planName}} je overdue.",

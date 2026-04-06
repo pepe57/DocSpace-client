@@ -151,7 +151,6 @@
   "MinCurrency": "min {{currency}}",
   "NoPaymentMethod": "Nuk ka metodë pagese të lidhur",
   "NoPaymentMethodDescription": "Për të aksesuar shërbimet e paguara, ju lutemi lidhni një kartë pagëshi. Personi që lidh kartën do të caktuar automatikisht si Pagesues për këtë llogari.",
-  "OnlyPayerCanManageServices": "Vetëm Pagesi mund të menaxhojë shërbimet. <1>Mësoni më shumë</1>",
   "PayerResponsibleForBilling": "Personi përgjegjës për fakturimin dhe pagesat",
   "PaymentMethodDescription": "Kartat e pagesave të lidhura me portofolin tuaj {{productName}}",
   "PlanPaymentOverdue": "Nuk mund të shtohen përdorues të rinj, të krijohen dhoma të reja apo agjentë AI. Pagesa e planit {{planName}} ka mbyllë kohën.",

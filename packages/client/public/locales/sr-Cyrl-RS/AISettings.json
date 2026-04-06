@@ -61,6 +61,5 @@
   "SearchEngine": "{{webSearch}} Претраживач",
   "ToUseAddProvider": "Da biste koristili {{value}}, prvo se uverite da ste povezali barem jedan {{aiProvider}}.",
   "WebSearchDisabledSuccess": "{{webSearch}} uspešno onemogućen",
-  "WebSearchEnabledSuccess": "<0>Uspešno omogućen</0>",
   "WebSearchKeyDescription": "Unesite API ključ dobijen od vašeg {{webSearch}} provajdera"
 }

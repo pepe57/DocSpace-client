@@ -209,8 +209,6 @@
   "AIAgentPinLimitMessage": "U kunt meer dan 10 {{aiAgents}} bovenaan pinnen. Pinneer enkele die momenteel zijn gepind.",
   "AIAgentPinned": "{{aiAgent}} vastgepind",
   "AIAgentsPinned": "{{aiAgents}} vastgepind",
-  "AIAgentsUnpinned": "niet vastgepind",
-  "AIAgentUnpinned": "niet vastgepind",
   "ChangeRoomOwner": "Wijzig de eigenaar van de ruimte",
   "LinkSettingsExpiredToastDescription": "Verleng de geldigheidsperiode in de instellingen of maak een nieuwe link aan om nieuwe gebruikersregistraties mogelijk te maken.",
   "LinkSettingsJoinedUsers": "Gebruikers zijn via deze link aangesloten",

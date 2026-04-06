@@ -49,7 +49,6 @@
   "KnowledgeSettingsDescription": "为 {{aiAgents}} 启用知识库。系统将使用 {{modelName}} 模型对您的文档进行索引，以支持通过数据进行问答搜索。此功能侧重于查找相关信息，但不生成摘要或执行全局分析。",
   "MCPProductDescription": "{{organizationName}} {{productName}} {{mcpServer}} 简化了人工智能驱动的工作流程，通过集成LLMs与外部系统，实现高效且安全的文档管理。",
   "MCPServerIntegrationURLHint": "输入您的服务提供的 {{mcpServer}} 地址",
-  "MCPSettingsDescription": "本部分允许您管理房间内的 {{aiChats}} 的 {{mcpServers}}。您可以启用系统 {{mcpServers}} 或添加自定义的 {{mcpServers}} 以满足贵公司的需求。启用后，这些服务器将可供其他用户用于其任务。",
   "PortalAiDisabledTooltip": "要使用 {{productName}} AI 提供商，请先连接一个 AI 服务。",
   "ProviderAddedSuccess": "{{aiProvider}} 添加成功",
   "ProviderKeyInputHint": "在您的 {{aiProvider}} 控制台中生成的 API 密钥",

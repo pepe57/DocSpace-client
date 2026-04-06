@@ -210,7 +210,6 @@
   "AIAgentPinned": "{{aiAgent}} sabitlendi",
   "AIAgentsPinned": "{{aiAgents}} sabitlendi",
   "AIAgentsUnpinned": "Sabitlenmemiş {{aiAgents}}",
-  "AIAgentUnpinned": "sabitlememiş",
   "ChangeRoomOwner": "Oda Sahibi Değiştir",
   "LinkSettingsExpiredToastDescription": "Geçerlilik süresini ayarlardan uzatın veya yeni kullanıcı kayıtlarını etkinleştirmek için yeni bir bağlantı oluşturun.",
   "LinkSettingsJoinedUsers": "Kullanıcılar bu bağlantı üzerinden katıldı",

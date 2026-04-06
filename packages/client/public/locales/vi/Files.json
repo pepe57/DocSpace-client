@@ -209,8 +209,6 @@
   "AIAgentPinLimitMessage": "Bạn không thể ghim quá 10 {{aiAgents}} lên đầu. Vui lòng bỏ ghim một số mục đang được ghim.",
   "AIAgentPinned": "{{aiAgent}} được ghim",
   "AIAgentsPinned": "Các tác nhân AI {{aiAgents}} được ghim",
-  "AIAgentsUnpinned": "bỏ ghim",
-  "AIAgentUnpinned": "Bỏ ghim",
   "ChangeRoomOwner": "Thay đổi Chủ sở hữu Phòng",
   "LinkSettingsExpiredToastDescription": "Mở rộng thời hạn hiệu lực trong cài đặt hoặc tạo liên kết mới để cho phép đăng ký người dùng mới.",
   "LinkSettingsJoinedUsers": "Người dùng đã tham gia qua liên kết này",

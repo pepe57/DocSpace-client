@@ -151,7 +151,6 @@
   "MinCurrency": "{{currency}} min",
   "NoPaymentMethod": "Nici o metodă de plată legată",
   "NoPaymentMethodDescription": "Pentru a accesa serviciile plătite, vă rugăm să atașați o card de plată. Persoana care conectează cardul va fi desemnată automat ca Plătitor pentru acest cont.",
-  "OnlyPayerCanManageServices": "Doar Plătitorul poate gestiona serviciile. <1>Află mai multe</1>",
   "PayerResponsibleForBilling": "Persoana responsabilă cu facturarea și plățile",
   "PaymentMethodDescription": "Cardurile de plată legate de portofelul dvs. {{productName}}",
   "PlanPaymentOverdue": "Nu puteți adăuga utilizatori noi, crea camere noi sau agenți AI. Pl-ul {{planName}} a depășit termenul de plată.",

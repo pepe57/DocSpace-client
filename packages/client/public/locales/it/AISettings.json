@@ -44,7 +44,6 @@
   "SystemMCPListTitle": "Sistema",
   "WebSearchKeyHiddenDescription": "La chiave API viene visualizzata solo una volta al momento del salvataggio e viene poi nascosta per motivi di sicurezza.",
   "AIProviderSettingDescription": "Collega il tuo servizio AI per sbloccare funzionalità avanzate in {{productName}}. Una volta aggiunto, sarà accessibile a tutti gli utenti in {{aiChats}}.",
-  "DefaultProviderDescription": "Selezionare il provider e il modello predefiniti per tutte le funzionalità di {{productName}} ({{aiAgents}}, editor di documenti, ecc.)",
   "DeleteDefaultProviderDescription": "<1>Questo {{aiProvider}} è attualmente impostato come predefinito.</1>\nLa sua eliminazione revocherà l'accesso per tutti gli utenti e le sue impostazioni verranno cancellate in modo permanente.\nVerrà impostato come predefinito un altro provider e potrà essere modificato in seguito nelle impostazioni.",
   "KnowledgeSettingsDescription": "Abilita una base di conoscenza per {{aiAgents}}. Il sistema indicizzerà i tuoi documenti utilizzando il modello {{modelName}} per supportare la ricerca basata su domande all'interno dei tuoi dati. Questa funzione si concentra sul trovare informazioni pertinenti ma non genera riassunti né esegue analisi globali.",
   "MCPProductDescription": "Il {{organizationName}} {{productName}} {{mcpServer}} ottimizza i flussi di lavoro guidati dall'IA, integrando i LLM con sistemi esterni per una gestione documentale efficiente e sicura.",
