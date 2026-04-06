@@ -114,12 +114,7 @@ export default function useFormsContextMenu() {
               data: {
                 action: action.key,
                 type,
-                item: {
-                  id: item.id,
-                  title: item.title,
-                  ...("fileExst" in item && { fileExst: item.fileExst }),
-                  ...("fileType" in item && { fileType: item.fileType }),
-                },
+                item,
               },
             });
           },

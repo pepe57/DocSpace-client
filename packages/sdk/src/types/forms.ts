@@ -58,10 +58,5 @@ export type CustomActionsConfig = {
 export type CustomActionEventData = {
   action: string;
   type: "file" | "folder";
-  item: {
-    id: number;
-    title: string;
-    fileExst?: string;
-    fileType?: number;
-  };
+  item: object;
 };
