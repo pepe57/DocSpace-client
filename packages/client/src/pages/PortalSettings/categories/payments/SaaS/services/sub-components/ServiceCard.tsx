@@ -83,6 +83,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       {...(!cardDisabled ? { onClick } : {})}
       data-testid={`storage_service_${id}`}
       data-id={id}
+      {...(cardDisabled && tooltipId ? { "data-tooltip-id": tooltipId } : {})}
     >
       <div className={styles.headerContainer}>
         <div className={styles.iconWrapper}>
