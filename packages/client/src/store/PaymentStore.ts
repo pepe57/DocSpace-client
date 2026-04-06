@@ -221,6 +221,12 @@ class PaymentStore {
     return user.email === walletCustomerEmail;
   }
 
+  get isServiceActionDisabled() {
+    if (this.isCardLinkedToPortal) return !this.isPayer;
+
+    return false;
+  }
+
   get isStripePortalAvailable() {
     if (!this.userStore) return;
 

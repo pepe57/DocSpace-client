@@ -36,12 +36,13 @@ import Section from "@docspace/ui-kit/components/section";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
+import { frameCallbackData } from "@docspace/shared/utils/common";
 import { ShareAccessRights } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
-import { FormsSection } from "@/types/forms";
-import { sectionFromPathname, sectionToPath } from "../_utils/sectionFromPathname";
+import { FormsSection, DEFAULT_SETTINGS_SUBSECTION } from "@/types/forms";
+import { sectionFromPathname, sectionToPath, settingsSubSectionToPath } from "../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 // LibraryNavigationStore removed — library uses URL routing now
 import { useFormsListStore } from "../_store/FormsListStore";
@@ -75,7 +76,7 @@ type FormsShellProps = {
 };
 
 const FormsShell = ({ commonData, children }: FormsShellProps) => {
-  useSDKConfig();
+  const { sdkConfig } = useSDKConfig();
   const isReady = useInitCommonStores(commonData);
 
   const {
@@ -100,6 +101,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
 
+  const initialShowMenu = React.useRef(
+    searchParams.get("showMenu") !== "false",
+  );
+  const showMenu = initialShowMenu.current && sdkConfig?.showMenu !== false;
+
   const authTokenSet = React.useRef(false);
   React.useEffect(() => {
     const token = commonData.authToken;
@@ -110,6 +116,43 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       setAuthToken(token);
     }
   }, [commonData.authToken]);
+
+  React.useEffect(() => {
+    const handler = (e: MessageEvent) => {
+      let eventData;
+      try {
+        eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+      } catch {
+        return;
+      }
+
+      if (eventData?.data?.methodName !== "navigateSection") return;
+
+      const section = eventData.data.data?.section as string;
+      if (!section) return;
+
+      const validSections = Object.values(FormsSection) as string[];
+      if (!validSections.includes(section)) return;
+
+      const params = new URLSearchParams();
+      const rid = searchParams.get("roomId") ?? "";
+      const lid = searchParams.get("libraryId") ?? "";
+      if (rid) params.set("roomId", rid);
+      if (lid) params.set("libraryId", lid);
+      const qs = params.toString();
+
+      if (section === FormsSection.Settings) {
+        router.replace(`${settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION)}${qs ? `?${qs}` : ""}`);
+      } else {
+        router.replace(`${sectionToPath(section as FormsSection)}${qs ? `?${qs}` : ""}`);
+      }
+
+      frameCallbackData({ section });
+    };
+
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, [router, searchParams]);
 
   const socketFolderIds = React.useMemo(() => {
     const ids = new Set<string>();
@@ -308,10 +351,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   // Show welcome dialog on first visit
   const [showWelcome, setShowWelcome] = React.useState(false);
   React.useEffect(() => {
-    if (isReady && !tourStore.tourCompleted) {
+    if (isReady && !tourStore.tourCompleted && showMenu) {
       setShowWelcome(true);
     }
-  }, [isReady, tourStore.tourCompleted]);
+  }, [isReady, tourStore.tourCompleted, showMenu]);
 
   // Clean up mock data when tour ends
   const prevTourRunning = React.useRef(tourStore.isRunning);
@@ -393,7 +436,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       }
     >
       <MobileStub />
-      <FormsSidebar />
+      {showMenu && <FormsSidebar />}
       <AiChatPanel rootRef={rootRef} />
       <div className={styles.sectionArea}>
         <Section

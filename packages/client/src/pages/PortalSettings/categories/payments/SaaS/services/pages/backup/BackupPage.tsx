@@ -55,6 +55,7 @@ type BackupPageProps = {
   maxFreeBackups?: number;
   usedBackupsCount?: number;
   isInitServicesData?: boolean;
+  isServiceActionDisabled?: boolean;
 };
 
 const BackupPage: React.FC<BackupPageProps> = ({
@@ -67,6 +68,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
   maxFreeBackups,
   usedBackupsCount,
   isInitServicesData,
+  isServiceActionDisabled,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
 
@@ -75,6 +77,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
   const [isTopUpVisible, setIsTopUpVisible] = useState(false);
 
   const shouldShowLoader = !isInitServicesData || !ready;
+  const isDisabled = isServiceActionDisabled;
 
   const handleToggleChange = () => {
     setIsConfirmDialogVisible(true);
@@ -156,13 +159,13 @@ const BackupPage: React.FC<BackupPageProps> = ({
           </Text>
         }
         description={t("Payments:BackupDescription")}
-        isDisabled={isLoading}
+        isDisabled={isDisabled || isLoading}
       />
       <WalletInfo
         shortView
         withoutBackground
         balance={balance}
-        onTopUp={isLowBalance ? onTopUp : undefined}
+        onTopUp={isLowBalance && !isDisabled ? onTopUp : undefined}
       />
       {isLowBalance ? (
         <Text className={styles.lowBalance} fontSize="15px" fontWeight={600}>
@@ -278,6 +281,7 @@ export default inject(
       backupServicePrice,
       changeServiceState,
       isBackupServiceOn,
+      isServiceActionDisabled,
     } = paymentStore;
 
     const { isFreeTariff, maxFreeBackups } = currentQuotaStore;
@@ -293,6 +297,7 @@ export default inject(
       maxFreeBackups,
       usedBackupsCount,
       isInitServicesData,
+      isServiceActionDisabled,
     };
   },
 )(observer(BackupPage));

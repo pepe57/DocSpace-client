@@ -250,7 +250,6 @@ class ServicesStore {
   }
 
   get wasFirstAiServiceTopUp() {
-    // return false;
     if (!this.aiToolsBalance) return false;
 
     return this.aiToolsBalance.subAccounts.length !== 0;
