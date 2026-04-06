@@ -350,12 +350,15 @@ async function routes(fastify, options) {
 
       // Translate with Ollama
       const keyContext = await readKeyContext(projectName, namespace, key);
+      const debugEmit = (event, data) =>
+        fastify.io.emit(event, { namespace, key, targetLanguage, ...data });
       const translatedText = await translateText(
         sourceText,
         sourceLanguage,
         targetLanguage,
         model,
         keyContext,
+        debugEmit,
       );
 
       // Model declined to translate (NO_TRANSLATION) — fall back to source text
@@ -660,12 +663,15 @@ async function routes(fastify, options) {
 
             try {
               const keyContext = await readKeyContext(projectName, namespace, keyPath);
+              const debugEmit = (event, data) =>
+                fastify.io.emit(event, { jobId, namespace, key: keyPath, targetLanguage: lang, ...data });
               const translatedText = await translateText(
                 sourceText,
                 sourceLanguage,
                 lang,
                 model,
                 keyContext,
+                debugEmit,
               );
 
               let cursor = targetTranslations;
@@ -953,8 +959,14 @@ async function readKeyContext(projectName, namespace, keyPath) {
 
 /**
  * Translate text using Ollama API
+ * @param {string} text - Source text to translate
+ * @param {string} sourceLanguage - Source language code
+ * @param {string} targetLanguage - Target language code
+ * @param {string} model - Ollama model name
+ * @param {object|null} keyContext - Optional key metadata (comment, usages)
+ * @param {function|null} debugEmit - Optional callback(event, data) for real-time debug streaming
  */
-async function translateText(text, sourceLanguage, targetLanguage, model, keyContext = null) {
+async function translateText(text, sourceLanguage, targetLanguage, model, keyContext = null, debugEmit = null) {
   // Get language information for better translation context
   const sourceInfo = getLanguageInfo(sourceLanguage);
   const targetInfo = getLanguageInfo(targetLanguage);
@@ -1033,6 +1045,9 @@ Rules:
     debug(`System prompt:\n${systemPrompt}\n\nUser prompt:\n${userPrompt}\n`);
     debug("Sending translation request (streaming)...");
 
+    // Emit prompts to UI debug panel before streaming starts
+    debugEmit?.("translation:debug:prompt", { systemPrompt, userPrompt, targetLanguage, sourceLanguage });
+
     // Use raw fetch → /api/chat to completely bypass the Ollama JS library.
     // Gives us full control over timeouts via AbortController.
     debug("Step 1: sending fetch to /api/chat...");
@@ -1050,6 +1065,7 @@ Rules:
     };
 
     let fullResponse = "";
+    let fullThinking = ""; // collects native message.thinking tokens
     try {
       const httpResponse = await fetch(`${ollamaConfig.apiUrl}/api/chat`, {
         method: "POST",
@@ -1061,6 +1077,7 @@ Rules:
             { role: "user", content: userPrompt },
           ],
           stream: true,
+          think: true, // Enable native Ollama thinking output (supported by gemma4, qwen3, deepseek-r1, etc.)
           options: {
             temperature: 0.1, // 0 causes infinite thinking loops in reasoning models
           },
@@ -1089,12 +1106,32 @@ Rules:
           if (!line.trim()) continue;
           try {
             const data = JSON.parse(line);
+
+            // Ollama native thinking field (gemma4, qwen3, deepseek-r1 with think:true).
+            // Present only during the thinking phase; content is empty at the same time.
+            const thinkingToken = data.message?.thinking ?? "";
+            if (thinkingToken) {
+              if (tokenCount === 0) debug("Step 3: first thinking token received");
+              tokenCount++;
+              fullThinking += thinkingToken;
+              resetInactivityTimer();
+              debugEmit?.("translation:debug:token", { token: thinkingToken, isThinking: true });
+            }
+
             const token = data.message?.content ?? "";
             if (token) {
               if (tokenCount === 0) debug("Step 3: first token received");
               tokenCount++;
               fullResponse += token;
               resetInactivityTimer(); // got a token — extend the deadline
+
+              // Also handle <think> tags for models that inline thinking in content
+              const isInlineThinking = (() => {
+                const openCount = (fullResponse.match(/<think>/gi) || []).length;
+                const closeCount = (fullResponse.match(/<\/think>/gi) || []).length;
+                return openCount > closeCount;
+              })();
+              debugEmit?.("translation:debug:token", { token, isThinking: isInlineThinking });
             }
           } catch {
             // skip malformed NDJSON lines
@@ -1108,10 +1145,11 @@ Rules:
 
     debug(`Raw model response:\n${fullResponse}\n`);
 
-    // Log thinking tokens if the model supports chain-of-thought (e.g. gemma4, qwen3, deepseek-r1)
+    // Collect thinking from both native field and inline <think> tags
     const thinkMatch = fullResponse.match(/<think>([\s\S]*?)<\/think>/i);
-    if (thinkMatch) {
-      debug(`Model thinking:\n${thinkMatch[1].trim()}`);
+    const thinkingText = fullThinking || (thinkMatch ? thinkMatch[1].trim() : null);
+    if (thinkingText) {
+      debug(`Model thinking:\n${thinkingText}`);
     }
 
     // Strip thinking tokens — both complete blocks and truncated ones (hit num_predict limit)
@@ -1121,6 +1159,12 @@ Rules:
       .trim();
 
     debug(`Cleaned response:\n${cleanedResponse}\n`);
+
+    // Emit final result to UI debug panel
+    debugEmit?.("translation:debug:result", {
+      result: cleanedResponse,
+      thinkingText: thinkingText ?? null,
+    });
 
     if (cleanedResponse === "NO_TRANSLATION") {
       return null; // model explicitly declined — caller should fall back to source text
