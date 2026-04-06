@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { headers, cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FilterType, FolderType } from "@docspace/shared/enums";
@@ -35,6 +36,7 @@ import { getSelf } from "@/api/people";
 import { getDefaultProvider } from "@/api/ai";
 import { getSettings } from "@/api/settings";
 import {
+  FILTER_HEADER,
   LIBRARY_ID_HEADER,
   ROOM_ID_HEADER,
   PATHNAME_HEADER,
@@ -62,6 +64,9 @@ export default async function FormsServerLayout({
     pathname.endsWith("/forms") ||
     pathname.endsWith("/forms/");
 
+  const filterHeader = hdrs.get(FILTER_HEADER) || "";
+  const providerName = new URLSearchParams(filterHeader).get("providerName") || "";
+
   const [filesSettings, user, defaultProvider, portalSettings, roomData] =
     await Promise.all([
       getFilesSettings(),
@@ -80,6 +85,20 @@ export default async function FormsServerLayout({
           ).catch(() => undefined)
         : undefined,
     ]);
+
+  if (!user && providerName) {
+    const returnPath = pathname || "/forms/my-forms";
+    const returnParams = new URLSearchParams();
+    if (roomId) returnParams.set("roomId", roomId);
+    if (libraryId) returnParams.set("libraryId", libraryId);
+    const returnQs = returnParams.toString();
+
+    const authParams = new URLSearchParams();
+    authParams.set("providerName", providerName);
+    authParams.set("successRedirectUrl", `${returnPath}${returnQs ? `?${returnQs}` : ""}`);
+
+    redirect(`/auth?${authParams.toString()}`);
+  }
 
   const socketUrl =
     portalSettings && typeof portalSettings !== "string"

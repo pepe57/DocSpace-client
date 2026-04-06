@@ -36,12 +36,12 @@ import Section from "@docspace/ui-kit/components/section";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
-import { frameCallbackData } from "@docspace/shared/utils/common";
+import { frameCallbackData, frameCallEvent } from "@docspace/shared/utils/common";
 import { ShareAccessRights } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
-import { FormsSection, DEFAULT_SETTINGS_SUBSECTION } from "@/types/forms";
+import { FormsSection, DEFAULT_SETTINGS_SUBSECTION, type CustomActionsConfig } from "@/types/forms";
 import { sectionFromPathname, sectionToPath, settingsSubSectionToPath } from "../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 // LibraryNavigationStore removed — library uses URL routing now
@@ -58,6 +58,7 @@ import useFormEventHooks from "../_hooks/useFormEventHooks";
 import useEditorGuard from "../_hooks/useEditorGuard";
 import { MIN_SECTION_WIDTH } from "../_api/aiAgentSettings";
 import { useFormsTourStore } from "../_store/FormsTourStore";
+import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
 import useFormsTour from "../_hooks/useFormsTour";
 import FormsSidebar from "../_components/sidebar";
 import FormsEditor from "../_components/forms-editor";
@@ -95,6 +96,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const formsListStore = useFormsListStore();
   const { items, folders, isLoading } = formsListStore;
   const tourStore = useFormsTourStore();
+  const customActionsStore = useFormsCustomActionsStore();
   const { currentDeviceType } = useDeviceType();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -117,6 +119,14 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     }
   }, [commonData.authToken]);
 
+  const appReadySent = React.useRef(false);
+  React.useEffect(() => {
+    if (isReady && !appReadySent.current) {
+      appReadySent.current = true;
+      frameCallEvent({ event: "onAppReady", data: {} });
+    }
+  }, [isReady]);
+
   React.useEffect(() => {
     const handler = (e: MessageEvent) => {
       let eventData;
@@ -126,33 +136,44 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         return;
       }
 
-      if (eventData?.data?.methodName !== "navigateSection") return;
+      const methodName = eventData?.data?.methodName;
+      const data = eventData?.data?.data;
 
-      const section = eventData.data.data?.section as string;
-      if (!section) return;
+      switch (methodName) {
+        case "navigateSection": {
+          const section = data?.section as string;
+          if (!section) return;
 
-      const validSections = Object.values(FormsSection) as string[];
-      if (!validSections.includes(section)) return;
+          const validSections = Object.values(FormsSection) as string[];
+          if (!validSections.includes(section)) return;
 
-      const params = new URLSearchParams();
-      const rid = searchParams.get("roomId") ?? "";
-      const lid = searchParams.get("libraryId") ?? "";
-      if (rid) params.set("roomId", rid);
-      if (lid) params.set("libraryId", lid);
-      const qs = params.toString();
+          const params = new URLSearchParams();
+          const rid = searchParams.get("roomId") ?? "";
+          const lid = searchParams.get("libraryId") ?? "";
+          if (rid) params.set("roomId", rid);
+          if (lid) params.set("libraryId", lid);
+          const qs = params.toString();
 
-      if (section === FormsSection.Settings) {
-        router.replace(`${settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION)}${qs ? `?${qs}` : ""}`);
-      } else {
-        router.replace(`${sectionToPath(section as FormsSection)}${qs ? `?${qs}` : ""}`);
+          if (section === FormsSection.Settings) {
+            router.replace(`${settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION)}${qs ? `?${qs}` : ""}`);
+          } else {
+            router.replace(`${sectionToPath(section as FormsSection)}${qs ? `?${qs}` : ""}`);
+          }
+
+          frameCallbackData({ section });
+          break;
+        }
+        case "setCustomActions": {
+          if (data) customActionsStore.setActions(data as CustomActionsConfig);
+          frameCallbackData(data);
+          break;
+        }
       }
-
-      frameCallbackData({ section });
     };
 
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
-  }, [router, searchParams]);
+  }, [router, searchParams, customActionsStore]);
 
   const socketFolderIds = React.useMemo(() => {
     const ids = new Set<string>();
