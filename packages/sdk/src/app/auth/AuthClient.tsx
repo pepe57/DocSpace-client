@@ -26,93 +26,31 @@
 
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { EmployeeType } from "@docspace/ui-kit/enums";
 import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { getLoginLink } from "@docspace/shared/utils/common";
 import { thirdPartyLogin } from "@docspace/shared/api/user";
 import { signupOAuth } from "@docspace/shared/api/people";
-import {
-  createInviteLink,
-  getInviteLink,
-} from "@docspace/shared/api/portal";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 
 export default function AuthClient({
   providerName,
-  successRedirectUrl,
+  redirectURL,
+  inviteKey,
+  emplType,
+  confirmHeader,
 }: {
   providerName: string;
-  successRedirectUrl: string | null;
+  redirectURL: string | null;
+  inviteKey: string | null;
+  emplType: string | null;
+  confirmHeader: string;
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  const inviteKeyRef = useRef<string | null>(null);
-  const emplTypeRef = useRef<string | null>(null);
-  const confirmHeaderRef = useRef<string | null>(null);
-
-  const inviteReadyRef = useRef<{
-    promise: Promise<void>;
-    resolve: () => void;
-  } | null>(null);
-
-  if (!inviteReadyRef.current) {
-    let resolveReady: () => void;
-    const promise = new Promise<void>((r) => {
-      resolveReady = r;
-    });
-    inviteReadyRef.current = { promise, resolve: resolveReady! };
-  }
-
-  // Resolve invite link in background
-  useEffect(() => {
-    const resolve = async () => {
-      try {
-        let shortLink: string;
-
-        try {
-          shortLink = (await createInviteLink({
-            employeeType: EmployeeType.User,
-          })) as unknown as string;
-        } catch {
-          shortLink = (await getInviteLink(
-            EmployeeType.User,
-          )) as unknown as string;
-        }
-
-        if (!shortLink) return;
-
-        const res = await fetch(
-          `/sdk/auth/resolve?url=${encodeURIComponent(shortLink)}`,
-        );
-
-        if (!res.ok) return;
-
-        const data = await res.json();
-
-        if (data.key) {
-          inviteKeyRef.current = data.key;
-          emplTypeRef.current = data.emplType ?? String(EmployeeType.User);
-
-          const params = new URLSearchParams();
-          params.set("type", "LinkInvite");
-          params.set("key", data.key);
-          params.set("emplType", emplTypeRef.current!);
-          confirmHeaderRef.current = params.toString();
-        }
-      } catch (e) {
-        console.error("Failed to resolve invite link:", e);
-      } finally {
-        inviteReadyRef.current?.resolve();
-      }
-    };
-
-    resolve();
-  }, []);
 
   const authCallback = useCallback(
     async (profile: string) => {
@@ -129,29 +67,20 @@ export default function AuthClient({
           };
         } catch (loginError) {
           const errorMessage =
-            (
-              loginError as {
-                response?: {
-                  data?: { error?: { message?: string } };
-                };
-              }
-            )?.response?.data?.error?.message || "";
+            (loginError as { response?: { data?: { error?: { message?: string } } } })
+              ?.response?.data?.error?.message || "";
 
           if (errorMessage === "user not found") {
-            await inviteReadyRef.current?.promise;
-
             const signupData: Record<string, string> = {
               SerializedProfile: profile,
             };
 
-            if (emplTypeRef.current)
-              signupData.EmployeeType = emplTypeRef.current;
-            if (inviteKeyRef.current)
-              signupData.Key = inviteKeyRef.current;
+            if (emplType) signupData.EmployeeType = emplType;
+            if (inviteKey) signupData.Key = inviteKey;
 
             await signupOAuth(
               signupData,
-              inviteKeyRef.current ? confirmHeaderRef.current : null,
+              inviteKey ? confirmHeader : null,
             );
 
             response = (await thirdPartyLogin(profile)) as {
@@ -174,14 +103,14 @@ export default function AuthClient({
           return;
         }
 
-        window.location.replace(successRedirectUrl || "/");
+        window.location.replace(redirectURL || "/");
       } catch (e) {
         console.error(e);
         setError("Authentication failed");
         setIsLoading(false);
       }
     },
-    [successRedirectUrl],
+    [redirectURL, inviteKey, emplType, confirmHeader],
   );
 
   useEffect(() => {
