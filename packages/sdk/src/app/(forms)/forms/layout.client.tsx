@@ -317,6 +317,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const prevTourRunning = React.useRef(tourStore.isRunning);
   const savedUserAccess = React.useRef<number | null>(null);
   const savedAskFromDBAgentId = React.useRef<number | null>(null);
+  const savedAiAgentEnabled = React.useRef<boolean | null>(null);
   React.useEffect(() => {
     if (prevTourRunning.current && !tourStore.isRunning) {
       // Tour just ended — restore original state
@@ -325,6 +326,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         fetchSection();
       }
       runInAction(() => {
+        if (savedAiAgentEnabled.current !== null) {
+          aiStore.aiAgentEnabled = savedAiAgentEnabled.current;
+          savedAiAgentEnabled.current = null;
+        }
         if (savedAskFromDBAgentId.current !== null) {
           aiStore.askFromDBAgentId = savedAskFromDBAgentId.current;
           savedAskFromDBAgentId.current = null;
@@ -435,6 +440,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           formsListStore.setIsLoading(false);
           // Ensure AI features are visible during tour
           runInAction(() => {
+            if (!aiStore.aiAgentEnabled) {
+              savedAiAgentEnabled.current = aiStore.aiAgentEnabled;
+              aiStore.aiAgentEnabled = true;
+            }
             if (!aiStore.askFromDBAgentId) {
               savedAskFromDBAgentId.current = aiStore.askFromDBAgentId;
               aiStore.askFromDBAgentId = -999;
