@@ -349,11 +349,13 @@ async function routes(fastify, options) {
       });
 
       // Translate with Ollama
+      const keyContext = await readKeyContext(projectName, namespace, key);
       const translatedText = await translateText(
         sourceText,
         sourceLanguage,
         targetLanguage,
         model,
+        keyContext,
       );
 
       // Model declined to translate (NO_TRANSLATION) — fall back to source text
@@ -657,11 +659,13 @@ async function routes(fastify, options) {
             if (typeof sourceText !== "string") continue;
 
             try {
+              const keyContext = await readKeyContext(projectName, namespace, keyPath);
               const translatedText = await translateText(
                 sourceText,
                 sourceLanguage,
                 lang,
                 model,
+                keyContext,
               );
 
               let cursor = targetTranslations;
@@ -776,11 +780,13 @@ async function translateNestedKeys(
 
       try {
         // Translate the text
+        const keyContext = await readKeyContext(projectName, namespace, fullKey);
         const translatedText = await translateText(
           value,
           sourceLanguage,
           targetLanguage,
           model,
+          keyContext,
         );
 
         // Set the translated text in the target object
@@ -834,7 +840,7 @@ async function translateNestedKeys(
 function countStringValues(obj) {
   let count = 0;
 
-  for (const [key, value] of Object.entries(obj)) {
+  for (const [, value] of Object.entries(obj)) {
     if (typeof value === "string") {
       count++;
     } else if (typeof value === "object" && value !== null) {
@@ -904,17 +910,51 @@ function getLanguageInfo(code) {
   const rtlLanguages = ["ar", "he", "fa", "ur"];
   const isRtl = rtlLanguages.some((rtlCode) => code.startsWith(rtlCode));
 
+  // Languages that require explicit script enforcement in the prompt.
+  // Without this, LLMs tend to produce the wrong writing system
+  // (e.g. translating sr-Cyrl-RS into Serbian Latin instead of Cyrillic).
+  const scriptWarnings = {
+    "sr-Cyrl-RS":
+      "Use CYRILLIC script exclusively. Every Serbian word MUST be written in Cyrillic letters (А, Б, В, Г, Д, Е...). " +
+      "NEVER use Latin Serbian characters: š, č, ć, ž, đ or any Latin letters for Serbian words. " +
+      "The only Latin characters allowed are: brand names, technical abbreviations (URL, API, SDK, etc.), and {{variables}}. " +
+      "Example — correct: «Жао нам је», wrong: «Žao nam je».",
+  };
+
   return {
     code,
     name: getLanguageName(code),
     isRightToLeft: isRtl,
+    scriptWarning: scriptWarnings[code] || null,
   };
+}
+
+/**
+ * Read the AI comment and usage context for a key from its .meta file.
+ * Returns null if no metadata exists.
+ */
+async function readKeyContext(projectName, namespace, keyPath) {
+  try {
+    const metadata = await fsUtils.findMetadataFile(projectName, namespace, keyPath);
+    if (!metadata?.data) return null;
+
+    const comment = metadata.data.comment?.text || null;
+    const usages = (metadata.data.usage || [])
+      .slice(0, 3) // limit to 3 usage examples to keep prompt concise
+      .map((u) => u.context?.trim())
+      .filter(Boolean);
+
+    if (!comment && usages.length === 0) return null;
+    return { comment, usages };
+  } catch {
+    return null;
+  }
 }
 
 /**
  * Translate text using Ollama API
  */
-async function translateText(text, sourceLanguage, targetLanguage, model) {
+async function translateText(text, sourceLanguage, targetLanguage, model, keyContext = null) {
   // Get language information for better translation context
   const sourceInfo = getLanguageInfo(sourceLanguage);
   const targetInfo = getLanguageInfo(targetLanguage);
@@ -927,23 +967,48 @@ async function translateText(text, sourceLanguage, targetLanguage, model) {
 
   const systemPrompt = `You are a professional software localization specialist for ONLYOFFICE DocSpace, a document collaboration platform.
 Your task is to translate UI strings from ${sourceInfo.name} to ${targetInfo.name}.
-${targetInfo.isRightToLeft ? "The target language is written right-to-left (RTL).\n" : ""}
+${targetInfo.isRightToLeft ? "The target language is written right-to-left (RTL).\n" : ""}${targetInfo.scriptWarning ? `CRITICAL SCRIPT REQUIREMENT: ${targetInfo.scriptWarning}\n` : ""}
 Rules:
-- Use formal/professional tone appropriate for business software UI
-- Preserve all i18next interpolations exactly as-is: {{variable}}, {{variable, modifier}}
-- Numbered tags like <0>, <1>, </0>, </1> are React Trans component slots.
-  Rules for Trans tags:
-  • Translate only the text between the opening and closing tag
-  • Place </N> immediately after the translated content that corresponds to the original closing tag position — do not extend the tag to cover more of the sentence
-  • Never drop, merge, or move a closing tag
-  • Example: "Click <1>here</1> to continue" → "Klicken Sie <1>hier</1>, um fortzufahren" (not "Klicken Sie <1>hier, um fortzufahren</1>")
-- Copy all other HTML tags character-for-character — do not add, remove, or modify any tag names or attributes. Never replace a tag with whitespace or punctuation. Example: "First line.<br/>Second line." must stay as "Первая строка.<br/>Вторая строка." — not "Первая строка. Вторая строка."
-- Preserve line breaks and whitespace structure
-- Respond with the translation only — no explanations, notes, or alternatives
-- If the string is a proper noun, brand name, or technical term with no equivalent, keep it in the original language
+
+## i18next interpolation variables {{...}}
+- CRITICAL: Every {{variable}} from the source MUST appear in the translation. Count them — the translation must contain exactly the same number of {{...}} tokens as the source.
+- Copy each {{variable}} token verbatim — same spelling, same case, same braces. NEVER translate the name inside the braces. NEVER convert to a different format.
+  ✓ Correct:   {{webSearch}}   {{productName}}   {{currency}}
+  ✗ Wrong:     <webSearch>     {$productName}     {{valūta}}   (translated name — forbidden)
+- When a {{variable}} starts the sentence in the source, keep it at the start of the translation too. Do NOT drop it or absorb it into the translated text.
+  ✓ Source:  "{{webSearch}} successfully enabled"
+  ✓ Translation must begin with {{webSearch}}, e.g. "{{webSearch}} pomyślnie włączony"
+  ✗ Wrong:   "pomyślnie włączony"  (variable dropped — forbidden)
+- Modifiers after comma are part of the token and must be preserved: {{count, number}} stays as {{count, number}}.
+
+## Numbered React Trans tags <N> </N>
+- Numbered tags like <0>, <1>, </0>, </1> are React component slots. Every opening tag <N> from the source must have a matching closing tag </N> in the translation, and vice versa.
+- Translate only the text between opening and closing tags. Place </N> right after the translated content for that slot — do not extend the tag to cover more of the sentence.
+  ✓ "Click <1>here</1> to continue" → "Klicken Sie <1>hier</1>, um fortzufahren"
+  ✗ "Klicken Sie <1>hier, um fortzufahren</1>"  (closing tag moved — forbidden)
+  ✗ "Klicken Sie hier, um fortzufahren"          (tags dropped — forbidden)
+- Never drop, merge, reorder, or add numbered tags.
+
+## Other HTML tags
+- Copy all HTML tags character-for-character — exact tag name, exact attributes (including their order and values), exact punctuation. Do NOT add, remove, or alter any attribute. Do NOT change the spelling of a tag name.
+  ✓ <strong>text</strong>  →  <strong>переведённый текст</strong>
+  ✗ <strongs>text</strongs>         (typo in tag name — forbidden)
+  ✗ <strong id="foo">text</strong>  (added attribute — forbidden)
+- Never replace a tag with whitespace or punctuation.
+  ✓ "First line.<br/>Second line." → "Первая строка.<br/>Вторая строка."
+  ✗ "Первая строка. Вторая строка."  (tag removed — forbidden)
+
+## General
+- Use formal/professional tone appropriate for business software UI.
+- Preserve line breaks and whitespace structure.
+- Respond with the translation only — no explanations, notes, or alternatives.
+- If the string is a proper noun, brand name, or technical term with no equivalent, keep it in the original language.
 - If translation is impossible, respond with exactly: NO_TRANSLATION`;
 
-  const userPrompt = text;
+  let userPrompt = text;
+  if (keyContext?.comment) {
+    userPrompt = `Context: ${keyContext.comment}\n\nTranslate:\n${text}`;
+  }
 
   try {
     // First verify Ollama connection
@@ -961,9 +1026,10 @@ Rules:
       `Translating text of length ${text.length} from ${sourceInfo.name} (${sourceLanguage}) to ${targetInfo.name} (${targetLanguage})`,
     );
 
-    // Generate translation using streaming.
-    // The timeout applies only to the first token (covers model cold-start / loading).
-    // Subsequent tokens stream in quickly once generation begins.
+    // Generate translation using streaming with two-phase timeouts:
+    //   Phase 1 — "first token": reasoning models (gemma4, qwen3, deepseek-r1) think silently
+    //             for minutes before emitting any output. We wait up to firstTokenTimeout.
+    //   Phase 2 — "inactivity": once tokens are flowing, a short gap means a stall/disconnect.
     debug(`System prompt:\n${systemPrompt}\n\nUser prompt:\n${userPrompt}\n`);
     debug("Sending translation request (streaming)...");
 
@@ -971,10 +1037,17 @@ Rules:
     // Gives us full control over timeouts via AbortController.
     debug("Step 1: sending fetch to /api/chat...");
     const abortController = new AbortController();
-    const timeoutId = setTimeout(
-      () => abortController.abort(new Error(`Timed out after ${ollamaConfig.requestTimeout}ms`)),
-      ollamaConfig.requestTimeout,
+    let activeTimeout = setTimeout(
+      () => abortController.abort(new Error(`First-token timeout after ${ollamaConfig.firstTokenTimeout}ms — model may still be loading or thinking`)),
+      ollamaConfig.firstTokenTimeout,
     );
+    const resetInactivityTimer = () => {
+      clearTimeout(activeTimeout);
+      activeTimeout = setTimeout(
+        () => abortController.abort(new Error(`Inactivity timeout after ${ollamaConfig.inactivityTimeout}ms`)),
+        ollamaConfig.inactivityTimeout,
+      );
+    };
 
     let fullResponse = "";
     try {
@@ -1021,6 +1094,7 @@ Rules:
               if (tokenCount === 0) debug("Step 3: first token received");
               tokenCount++;
               fullResponse += token;
+              resetInactivityTimer(); // got a token — extend the deadline
             }
           } catch {
             // skip malformed NDJSON lines
@@ -1029,7 +1103,7 @@ Rules:
       }
       debug(`Step 4: stream done, ${tokenCount} tokens collected`);
     } finally {
-      clearTimeout(timeoutId);
+      clearTimeout(activeTimeout);
     }
 
     debug(`Raw model response:\n${fullResponse}\n`);
@@ -1056,6 +1130,19 @@ Rules:
       throw new Error("Model returned empty response");
     }
 
+    // Post-translation script validation for languages with strict script requirements.
+    // Some models ignore the system prompt and produce the wrong writing system.
+    // When that happens we issue one correction request before giving up.
+    if (targetInfo.scriptWarning) {
+      const corrected = await correctScriptIfNeeded(
+        cleanedResponse,
+        text,
+        targetInfo,
+        model,
+      );
+      return corrected;
+    }
+
     return cleanedResponse;
   } catch (error) {
     debug("Translation error details:", {
@@ -1070,6 +1157,134 @@ Rules:
     console.error("Translation error:", error);
     throw error;
   }
+}
+
+/**
+ * Script validators: return true if the translation looks correct for the language.
+ * Used after translation to decide whether a correction pass is needed.
+ */
+const scriptValidators = {
+  "sr-Cyrl-RS": (text) => {
+    // Strip {{variables}}, HTML tags, brand-name words (all-caps), and numbers
+    // to focus only on the Serbian prose.
+    const stripped = text
+      .replace(/\{\{[^}]+\}\}/g, "")  // {{variables}}
+      .replace(/<[^>]+>/g, "")         // HTML / React tags
+      .replace(/\b[A-Z]{2,}\b/g, "")  // ALL-CAPS acronyms (URL, SDK, API…)
+      .replace(/[0-9%.,]/g, "");
+
+    // Latin Serbian diacritics are a sure sign of wrong script
+    if (/[šŠčČćĆžŽđĐ]/.test(stripped)) return false;
+
+    // If there are Latin letters in what remains, that's also wrong
+    // (allow a–z only inside obvious loanwords — but for safety flag any Latin run ≥ 3 chars)
+    if (/[a-zA-Z]{3,}/.test(stripped)) return false;
+
+    return true;
+  },
+};
+
+/**
+ * After getting a translation, verify it uses the correct writing system.
+ * If not, send one correction request to the model before giving up.
+ */
+async function correctScriptIfNeeded(translation, sourceText, targetInfo, model) {
+  const validator = scriptValidators[targetInfo.code];
+  if (!validator || validator(translation)) {
+    return translation; // looks fine
+  }
+
+  debug(`[script-check] ${targetInfo.code}: wrong script detected, requesting correction`);
+
+  const correctionPrompt = `The following text was supposed to be translated into ${targetInfo.name} but was written in the WRONG script (Latin instead of Cyrillic).
+
+CRITICAL: ${targetInfo.scriptWarning}
+
+Original source text:
+${sourceText}
+
+Wrong translation (DO NOT return this):
+${translation}
+
+Provide the corrected translation using ONLY the correct script. Return the translation text only — no explanations.`;
+
+  const abortController = new AbortController();
+  let inactivityTimer = setTimeout(
+    () => abortController.abort(new Error(`Correction inactivity timeout`)),
+    ollamaConfig.requestTimeout,
+  );
+  const resetInactivityTimer = () => {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(
+      () => abortController.abort(new Error(`Correction inactivity timeout`)),
+      ollamaConfig.requestTimeout,
+    );
+  };
+
+  let fullResponse = "";
+  try {
+    const httpResponse = await fetch(`${ollamaConfig.apiUrl}/api/chat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model,
+        messages: [{ role: "user", content: correctionPrompt }],
+        stream: true,
+        options: { temperature: 0.1 },
+      }),
+      signal: abortController.signal,
+    });
+
+    if (!httpResponse.ok) {
+      throw new Error(`Ollama HTTP error during correction: ${httpResponse.status}`);
+    }
+
+    const reader = httpResponse.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split("\n");
+      buffer = lines.pop() ?? "";
+      for (const line of lines) {
+        if (!line.trim()) continue;
+        try {
+          const data = JSON.parse(line);
+          const token = data.message?.content ?? "";
+          if (token) {
+            fullResponse += token;
+            resetInactivityTimer();
+          }
+        } catch {
+          // skip malformed lines
+        }
+      }
+    }
+  } finally {
+    clearTimeout(inactivityTimer);
+  }
+
+  const corrected = fullResponse
+    .replace(/<think>[\s\S]*?<\/think>/gi, "")
+    .replace(/<think>[\s\S]*/gi, "")
+    .trim();
+
+  debug(`[script-check] correction response:\n${corrected}`);
+
+  if (!corrected || corrected === "NO_TRANSLATION") {
+    debug(`[script-check] correction failed, returning null`);
+    return null; // will stay untranslated — better than wrong-script text
+  }
+
+  if (!validator(corrected)) {
+    debug(`[script-check] correction still wrong script, returning null`);
+    return null;
+  }
+
+  return corrected;
 }
 
 /**

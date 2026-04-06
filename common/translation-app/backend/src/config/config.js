@@ -31,7 +31,14 @@ const serverConfig = {
 // Ollama configuration
 const ollamaConfig = {
   apiUrl: process.env.OLLAMA_API_URL || "http://localhost:11434",
-  requestTimeout: parseInt(process.env.OLLAMA_TIMEOUT_MS || "120000", 10), // 2 min default
+  // How long to wait for the FIRST token (covers model cold-start + reasoning/thinking phase).
+  // Reasoning models (gemma4, qwen3, deepseek-r1) can think for minutes before emitting output.
+  firstTokenTimeout: parseInt(process.env.OLLAMA_FIRST_TOKEN_TIMEOUT_MS || "600000", 10), // 10 min default
+  // How long to wait between consecutive tokens once streaming has started.
+  // A gap here means the model stalled or the connection dropped.
+  inactivityTimeout: parseInt(process.env.OLLAMA_INACTIVITY_TIMEOUT_MS || "30000", 10), // 30 sec default
+  // Legacy alias kept for the spell-check script (uses OLLAMA_TIMEOUT)
+  requestTimeout: parseInt(process.env.OLLAMA_TIMEOUT_MS || "600000", 10),
 };
 
 // Translation configuration
