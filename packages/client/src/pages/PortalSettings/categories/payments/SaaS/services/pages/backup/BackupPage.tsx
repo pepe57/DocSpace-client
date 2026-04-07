@@ -218,6 +218,7 @@ const BackupPage: React.FC<BackupPageProps> = ({
                 : t("Common:Enable")
             }
             onClick={handleToggleChange}
+            isDisabled={isDisabled}
             primary
             scale
           />
