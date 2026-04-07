@@ -52,6 +52,7 @@ const PaymentsPage = (props) => {
     language,
     user,
     logoText,
+    walletHelpUrl,
     getAIConfig,
   } = props;
   const location = useLocation();
@@ -66,10 +67,11 @@ const PaymentsPage = (props) => {
     () => ({
       language,
       logoText,
+      walletHelpUrl,
       user,
       routes: PAYMENT_ROUTES,
     }),
-    [language, logoText, user],
+    [language, logoText, walletHelpUrl, user],
   );
 
   const data = [
@@ -144,6 +146,7 @@ export const Component = inject(({ settingsStore, authStore, userStore }) => {
     currentDeviceType,
     clearAbortControllerArr,
     logoText,
+    walletHelpUrl,
     getAIConfig,
   } = settingsStore;
 
@@ -154,6 +157,7 @@ export const Component = inject(({ settingsStore, authStore, userStore }) => {
     currentDeviceType,
     clearAbortControllerArr,
     logoText,
+    walletHelpUrl,
     getAIConfig,
     language: authStore?.language,
     user: user
