@@ -3,7 +3,7 @@
   "content": "Webhook settings",
   "content_en_sha1_hash": "e769d461d10615b7c28c4b55e1a206f828e583b7",
   "created_at": "2025-05-19T21:30:49.839Z",
-  "updated_at": "2026-04-06T15:27:51.825Z",
+  "updated_at": "2026-04-07T19:35:05.235Z",
   "comment": {
     "text": "This translation key is used for the title of a webhook settings dialog. It appears as the header of a modal window that allows users to manage their webhook settings and update existing webhooks.",
     "is_auto": true,
@@ -33,25 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'parametrleri' technically means 'parameters,' 'settings' implies a configuration interface. A more accurate translation might be 'Webhook təyinatları' or 'Webhook ayarları'.",
-          "suggestion": "Webhook təyinatları"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The term 'уеб кука' is a literal translation of 'webhook' and not the commonly used or accepted term in Bulgarian IT context. It sounds awkward and unprofessional.",
-          "suggestion": "Use the transliterated term 'уебхук' (webhook) or describe it as 'обратно известие' (reverse notification) depending on the target audience and context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -93,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Webhook կարգավորումներ' while technically accurate, might not be the most natural or idiomatic way to express 'Webhook settings' in Armenian. 'Կարգավորումներ' implies adjustments or configurations, which is generally correct, but a more direct and common translation could be explored.",
-          "suggestion": "Consider alternatives like 'Webhook գործունեություն' (Webhook activity/functionality) or 'Webhook-ի կարգավարում' (Webhook management) depending on the specific context and intended meaning.  Further context would help determine the best choice."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -129,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"Webhook\" is directly translated as \"Tīmekļa aizķeres\". While \"aizķere\" can mean a snag or hindrance, it doesn't accurately convey the meaning of a webhook (a web callback). A more appropriate translation would be closer to \"Web atgriezējziņa\" or \"Webpakaļsaite\".",
-          "suggestion": "Consider translating \"Webhook\" as \"Web atgriezējziņa\" or \"Webpakaļsaite\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -177,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Sinhala translation 'webhook සැකසුම්' contains a spelling error. 'සැකසුම්' is the correct form for 'settings'.",
-          "suggestion": "webhook සැකසුම්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'подешавања' is spelled correctly, but the proper spelling for 'settings' in this context could be 'поставке'. While 'подешавања' isn't *incorrect*, 'поставке' is more commonly used for configuration options.",
-          "suggestion": "Webhook поставке"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -231,13 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Cài đặt\" can mean \"settings,\" it more literally translates to \"installation.\" \"Webhook settings\" implies configuration options, not the process of installing a webhook.",
-          "suggestion": "Cấu hình Webhook"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,7 +3,7 @@
   "content": "Operation has been successfully completed.",
   "content_en_sha1_hash": "849e11257114c8c8bbc65cf054d9b6da983bcb6d",
   "created_at": "2025-05-19T21:30:49.214Z",
-  "updated_at": "2026-04-03T21:51:41.102Z",
+  "updated_at": "2026-04-07T19:35:05.023Z",
   "comment": {
     "text": "This translation key is used to display a success message when an operation is completed successfully. It appears as a toast notification after an operation is finished, typically in response to user actions such as saving settings or completing a process.",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The German translation 'Operation erfolgreich abgeschlossen wurde.' uses the passive voice incorrectly and sounds unnatural. The correct sentence structure would use a more active voice.",
-          "suggestion": "Operation wurde erfolgreich abgeschlossen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -93,13 +87,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Toiminto on valmis' can be interpreted as 'Operation is ready', it doesn't accurately convey the meaning of 'Operation has been successfully completed'. It lacks the emphasis on success.",
-          "suggestion": "Toiminto on suoritettu onnistuneesti."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -171,13 +159,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Operațiune terminată cu succes' is understandable, a more natural and precise translation of 'Operation has been successfully completed' in Romanian would be 'Operațiunea a fost finalizată cu succes'.  'Terminată' implies an ending, whereas 'finalizată' is more aligned with completion.",
-          "suggestion": "Operațiunea a fost finalizată cu succes"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

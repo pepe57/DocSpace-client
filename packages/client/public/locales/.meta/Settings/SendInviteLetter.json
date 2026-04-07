@@ -3,7 +3,7 @@
   "content": "Send invite letter",
   "content_en_sha1_hash": "72755e8fdfedd5113bd950ce2b3e632ee5bfce23",
   "created_at": "2025-05-19T21:30:52.606Z",
-  "updated_at": "2025-08-11T09:02:43.945Z",
+  "updated_at": "2026-04-07T19:35:05.210Z",
   "comment": {
     "text": "This translation key is used to display a button label that sends an invite letter. It appears on a checkbox within a UI component and is likely displayed in a portal settings page or similar context where user notifications are configured.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ආරාධනා පත්‍රය එවන්න\" is understandable, a more natural and accurate translation of \"Send invite letter\" would be \"නිundangන පත්‍රය යවන්න\" or \"නිundangන පත්‍රය යැවීමට\". \"එවන්න\" is generally used for sending something quickly or informally, while \"යවන්න\" or \"යැවීමට\" is more appropriate for formal correspondence like an invitation letter.",
-          "suggestion": "නිundangන පත්‍රය යවන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Send invite letter\" is more accurately translated as \"发送邀请函\" rather than \"发送邀请邮件\". '邮件' refers to email, while '邀请函' refers to a physical invitation letter.",
-          "suggestion": "发送邀请函"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Quota per user",
   "content_en_sha1_hash": "34fbae11ee29d4cda07c3fec52be82daaf84c7c0",
   "created_at": "2025-05-19T21:30:52.346Z",
-  "updated_at": "2026-04-03T21:51:41.133Z",
+  "updated_at": "2026-04-07T19:35:05.207Z",
   "comment": {
     "text": "The QuotaPerUser translation key is used to display the label \"Quota per user\" in the PortalSettings category. It appears on a mobile component that manages storage quotas and allows users to set their individual quota limits.",
     "is_auto": true,
@@ -63,18 +63,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"Quota\" is better translated as \"Kontingent\" in this context, as \"Quote\" refers to a direct quotation.",
-          "suggestion": "Kontingent pro Benutzer"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, \"Benutzer\" could be replaced with \"Nutzer\" which is more common and modern.",
-          "suggestion": "Kontingent pro Nutzer"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -104,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Քվոտա մեկ օգտագործողի համար\" is a very literal translation and sounds unnatural in Armenian. A more idiomatic translation would be something like \"Օգտագործողի համար տրվող քվոտա\" or \"Մեկ օգտագործողի համար քվոտա\" which convey the same meaning in a more natural way.",
-          "suggestion": "Օգտագործողի համար տրվող քվոտա or Մեկ օգտագործողի համար քվոտա"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -122,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ユーザーあたりの容量制限\" is technically correct, it's a bit literal and verbose for a settings key. A more natural and concise translation would be preferable.",
-          "suggestion": "ユーザー制限 (Yūzā Sekigen)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -158,13 +135,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Limit na użytkownika\" doesn't fully capture the meaning of \"Quota per user\". \"Quota\" implies a specific, allocated amount, which 'limit' doesn't entirely convey. A more accurate translation would consider options like \"Przydział na użytkownika\" or \"Limity dla użytkownika\".",
-          "suggestion": "Przydział na użytkownika"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -194,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පරිශ්‍රීලකයෙක්ට සලාකය\" does not accurately convey the meaning of \"Quota per user.\"  \"සලාකය\" means 'salary' or 'wage,' which is unrelated to quota.",
-          "suggestion": "A more accurate translation would be something like \"පරිශ්‍රමිකරුවෙකුට හිමි කොත\" (Parishramikaruwakata himi kota) which translates to \"Quota allocated to a user\" or \"පරිශ්‍රමිකරුවෙකු සඳහා වූ කොත\" (Parishramikaruwa satha gawath kota) which translates to 'Quota for a user'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

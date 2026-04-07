@@ -3,7 +3,7 @@
   "content": "We couldn’t find the user with the matching Stripe e-mail.",
   "content_en_sha1_hash": "60160aa846de84503c5bbb1f1aa6962502abe150",
   "created_at": "2025-05-19T21:30:53.750Z",
-  "updated_at": "2026-03-20T09:07:45.662Z",
+  "updated_at": "2026-04-07T19:35:05.175Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user's Stripe email cannot be matched to their account. It appears in a payment settings category, likely on a button or dialog related to payer information, informing users that they were not found based on their e-mail address.",
     "is_auto": true,
@@ -27,30 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Stripe e-mail' is translated literally. A more natural Arabic equivalent for 'Stripe email' would be something like 'بريد إلكتروني في سترب' (email on Stripe). While understandable, the current phrasing sounds somewhat awkward.",
-          "suggestion": "لم نتمكن من العثور على المستخدم الذي يحمل نفس بريد إلكتروني في سترب."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence could be slightly more fluid. The word order in Arabic often allows for more flexibility.",
-          "suggestion": "لم نتمكن من العثور على المستخدم ذي البريد الإلكتروني المطابق في سترب."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation could be more natural. While technically correct, it sounds slightly awkward in Azerbaijani. A more fluent phrasing would improve the user experience.",
-          "suggestion": "Hüquqi Stripe e-poçtu olan istifadəçini tapmadıq."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -62,18 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'matching Stripe e-mail' is not accurately translated. 'Stripe' is a proper noun and should remain in English, or have a more natural Czech equivalent if one exists. Simply using 'odpovídajícím e-mailem Stripe' sounds awkward.",
-          "suggestion": "Nepodařilo se nám najít uživatele s e-mailem z Stripe."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'e-mailem Stripe' reads oddly. It's better to integrate 'Stripe' into the flow of the sentence.",
-          "suggestion": "Nepodařilo se nám najít uživatele s e-mailem z Stripe."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -85,18 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Stripe e-mail' is a bit clunky in Greek. While technically correct, it could be improved for readability.",
-          "suggestion": "Δεν μπορέσαμε να βρούμε τον χρήστη με το e-mail που σχετίζεται με την Stripe."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'Stripe' in Greek should ideally follow the Greek capitalization rules. While technically acceptable as is, it's more conventional to capitalize it.",
-          "suggestion": "Δεν μπορέσαμε να βρούμε τον χρήστη με το αντίστοιχο e-mail της Stripe."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -108,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Käyttäjää vastaavalla Stripe-sähköpostilla ei löytynyt' is a bit literal and sounds unnatural in Finnish. A more natural phrasing would emphasize that the email address itself wasn't found.",
-          "suggestion": "Ei löytynyt käyttäjää tällä Stripe-sähköpostilla."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -126,18 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'էլ․' is an abbreviation. While understandable, it's more professional to write out the full word 'էլեկտրոնային' (elektronayin) or simply 'էլեկտրոնային հասցե' (elektronayin hasce).",
-          "suggestion": "Մենք չկարողացանք գտնել համապատասխան Stripe էլեկտրոնային հասցեով օգտվողին:"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, adding a space after the colon in 'էլ․ հասցեով' would improve readability.",
-          "suggestion": "Մենք չկարողացանք գտնել համապատասխան Stripe էլ․ հասցե ով օգտվողին:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -149,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation uses Chinese characters, not Japanese. It's a direct translation of the English into Chinese.",
-          "suggestion": "需要翻译成日语。例如：\"无法找到与 Stripe 电子邮件匹配的用户。\" (Nanoka stripe i-mēru ni mattesu yūzā o mitsukeru koto ga dekimasen.)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -167,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"matching Stripe e-mail\" is not directly translated. It should be more accurately reflected as 'ອີເມວ Stripe ທີ່ກົງກັນ' which implies the email belongs to Stripe.",
-          "suggestion": "ພວກເຮົາບໍ່ສາມາດຊອກຫາຜູ້ໃຊ້ທີ່ມີອີເມວ Stripe ທີ່ກົງກັນໄດ້."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -191,25 +123,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Nie udało się znaleźć użytkownika z pasującym adresem e-mail Stripe.' is technically correct but a more natural Polish phrasing would be preferable. The word 'pasującym' (matching) feels slightly awkward in this context.",
-          "suggestion": "Nie udało się znaleźć użytkownika z adresem e-mail Stripe."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'utilizador' is more common in European Portuguese. 'Usuário' is more common in Brazilian Portuguese. Since Stripe is used globally, using the more universally understood 'usuário' might be preferable. The original English doesn't specify a region, so a broader term would be better.",
-          "suggestion": "Não foi possível encontrar o usuário com o email de Stripe correspondente."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -221,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'potrivit' doesn't fully capture the meaning of 'matching' in this context. It implies 'suitable' rather than 'corresponding to'. A better translation would emphasize the correspondence between the email and the user’s Stripe account.",
-          "suggestion": "Nu s-a găsit utilizatorul cu adresa de e-mail Stripe corespunzătoare."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -239,25 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'අපට ස්ට්‍රයිප් වි-තැපෑලට ගැළපෙන පරිශ්‍රීලකයෙකු හමු නොවිණි.' is a literal translation and doesn't quite convey the intended meaning in a natural Sinhala way. 'Stripe e-mail' is awkwardly translated.",
-          "suggestion": "Consider a phrasing like 'අපට ස්ට්‍රයිප් හරහා භාවිතා කරන වි-තැපෑලට ගැළපෙන පරිශ්‍රීලකයෙකු හමු නොවිණි.' or 'ස්ට්‍රයිප් වි-තැපෑල භාවිතා කරන පරිශ්‍රීලකයා අපට සොයාගත නොහැකි.' which would be more natural."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Stripe e-mail' is awkwardly translated. A more natural Slovak phrasing would be 'e-mail Stripe'.",
-          "suggestion": "Nepodarilo sa nám nájsť používateľa so zodpovedajúcou e-mailovou adresou Stripe."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -269,25 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'емаил-ом' is a direct transliteration and not a natural Serbian word. The correct term for email is 'e-mail'.",
-          "suggestion": "емаил-ом should be е-mail-ом"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Serbian translation uses \"poklapajućim\" which implies 'matching' in the sense of 'coinciding'. While understandable, 'Stripe email-om' is more naturally expressed as 'Stripe email adresa'.",
-          "suggestion": "Nismo mogli da pronađemo korisnika sa poklapajućom Stripe email adresom."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -299,13 +189,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is technically correct but sounds unnatural. \"відповідною електронною адресою Stripe\" is a literal translation that doesn't flow well in Ukrainian. It would be more natural to say something like 'Stripe email address' or 'email address associated with Stripe'.",
-          "suggestion": "Нам не вдалося знайти користувача з email-адресою Stripe."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

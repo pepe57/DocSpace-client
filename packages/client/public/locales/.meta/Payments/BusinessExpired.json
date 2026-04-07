@@ -3,7 +3,7 @@
   "content": "Your {{planName}} plan has expired on {{date}}",
   "content_en_sha1_hash": "6c8025a25cfabe6bab942a3aef22352d0c2445c0",
   "created_at": "2025-05-19T21:30:53.652Z",
-  "updated_at": "2026-03-20T09:07:45.639Z",
+  "updated_at": "2026-04-07T19:35:05.170Z",
   "comment": {
     "text": "This translation key is used to display a message when a Business plan has expired. It appears in a payment-related setting on a client's account page, indicating that a specific plan has ended and must be reevaluated. The exact wording may vary based on the specific plan details.",
     "is_auto": true,
@@ -33,18 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses 'planınızın' which is possessive. It would be more natural to use a construction indicating that the plan *has* expired rather than belonging to something. Consider 'planınız bitdi'",
-          "suggestion": "planınız bitdi"
-        },
-        {
-          "type": "grammatical",
-          "description": "While 'başa çatıb' is grammatically correct, it's a bit formal for this context. A more common and natural phrasing would be to use a simpler verb.",
-          "suggestion": "planınızın {{date}} tarixində sona çatdı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -86,13 +75,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The French translation uses 'plan tarifaire' instead of a simpler 'plan'. While 'plan tarifaire' isn't incorrect, it's more formal and slightly verbose. Consider a more concise option.",
-          "suggestion": "Votre plan {{planName}} a expiré le {{date}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -110,30 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Japanese translation uses a period (。) at the end of the sentence. While grammatically correct, it's more common in Japanese to omit the trailing period in notifications or messages, especially within digital platforms. It creates a slightly more formal tone than likely intended.",
-          "suggestion": "Remove the trailing period (。) from the translation: \"{{planName}}プランは{{date}}で期限切れとなりました\" to \"{{planName}}プランは{{date}}で期限切れとなりました\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Your {{planName}} plan\" is not perfectly captured by \"{{planName}} 요금제\". 요금제 implies a subscription or fee plan, but \"plan\" in this context can be broader. A more accurate translation might include a possessive or clarifying phrase.",
-          "suggestion": "{{planName}} 구독 요금제가 {{date}}에 만료됩니다"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the direct translation might sound slightly unnatural in Korean. Adding a particle to soften the phrasing could improve readability.",
-          "suggestion": "{{planName}} 요금제가 {{date}}에 만료될 예정입니다"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -187,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'සැලසුම' (salusuma) translates to 'plan' or 'scheme' but in this context, it sounds a little formal. 'ක්‍රියාවලිය' (kriyawalaya) or 'වැඩසchema' (wedaschema) could be more appropriate depending on the specific meaning of 'plan'.",
-          "suggestion": "Consider using 'ඔබගේ {{planName}} ක්‍රියාවලිය' or 'ඔබගේ {{planName}} වැඩසchema ඉකුත් වී ඇත'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -211,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ваш {{planName}} план је истекао {{date}}' is a literal translation that doesn't fully convey the intended meaning in a natural Serbian way. A more idiomatic translation would be something like 'Ваш план {{planName}} је истекао {{date}}' or 'Истекао је Ваш план {{planName}} {{date}}'.",
-          "suggestion": "Истекао је Ваш план {{planName}} {{date}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -247,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term '版本' (banben - version) doesn't quite convey the meaning of 'plan' in this context. '版本' is more suitable for software versions. A better translation would be '订阅' (zhengfu - subscription) or '套餐' (taocan - package/plan).",
-          "suggestion": "您的{{planName}}订阅已于{{date}}过期"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Login History",
   "content_en_sha1_hash": "d755284b3b68f68fa53e1d95ff88d8d202c5bbc1",
   "created_at": "2025-05-19T21:30:51.828Z",
-  "updated_at": "2026-04-03T21:51:41.128Z",
+  "updated_at": "2026-04-07T19:35:05.203Z",
   "comment": {
     "text": "The \"LoginHistoryTitle\" translation key is used to display the title \"Login History\" in various parts of the application's UI. It appears on a category page and is also set as the document title when accessing login history data. Translators should ensure this phrase accurately reflects the content being displayed.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation \"قم بتسجيل الدخول\" translates to \"Log In\" or \"Sign In\", not \"Login History\". It doesn't convey the concept of a history.",
-          "suggestion": "سجل الدخول"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -57,13 +51,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'История на вход' is a literal translation of 'History of entry/input' rather than 'Login History'. A more accurate translation would be something like 'История на влизания' or 'История на потребителски сеанси'.",
-          "suggestion": "История на влизания"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {

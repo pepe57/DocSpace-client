@@ -3,7 +3,7 @@
   "content": "Folder copied",
   "content_en_sha1_hash": "643764d99bc0210701d64f7db763c2f2e3dedb99",
   "created_at": "2025-05-19T21:30:49.747Z",
-  "updated_at": "2025-05-24T02:24:32.439Z",
+  "updated_at": "2026-04-07T19:35:05.231Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -146,13 +146,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ෆෝල්ඩරය පිටපත් කරන ලදී.' is a literal translation of 'Folder copied'. While understandable, a more natural Sinhala phrasing would be preferred. 'පිටපත් කරන ලදී' implies copying, not necessarily a folder being copied. A better translation would emphasize the act of moving or creating a folder.",
-          "suggestion": "ෆෝල්ඩරය ගමන්කිරීම් / ෆෝල්ඩරය සාදාගන්නා ලදී."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -170,25 +164,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Фасцикла копирана\" is not the most natural or accurate translation of \"Folder copied.\" \"Фасцикла\" (fascikla) translates to 'folder' but sounds somewhat formal in this context. A more common and natural translation would be \"Премештена фасцикла\" or \"Копирана фасцикла\".",
-          "suggestion": "Премештена фасцикла"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Fascikla' is likely misspelled. The correct spelling is probably 'Foldera'.",
-          "suggestion": "Foldera"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

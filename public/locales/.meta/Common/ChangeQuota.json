@@ -3,7 +3,7 @@
   "content": "Change quota",
   "content_en_sha1_hash": "02de777a63ceae10d68258c04b8924d83239debc",
   "created_at": "2025-05-19T21:30:43.407Z",
-  "updated_at": "2026-02-19T13:36:32.292Z",
+  "updated_at": "2026-04-07T19:35:04.945Z",
   "comment": {
     "text": "\"Change quota\" is used as a button label and header title in a modal dialog to prompt user action of changing storage limits. It appears in two contexts: a warning quota dialog and a space quota settings dialog. The translation key should be used for situations where users need to edit or adjust their storage quotas.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation \"Quote ändern\" is not an accurate translation of \"Change quota\". \"Quote\" refers to a quotation, not a quota. A more accurate translation would depend on the context of 'quota', but options include 'Kontingent ändern', 'Änderung der Quote', or 'Kontingent anpassen'.",
-          "suggestion": "Kontingent ändern"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -135,13 +129,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '容量制限の変更' is a possible translation, it's quite literal and not the most natural way to say 'Change quota' in many contexts. 'Quota' often refers to a limit or allowance, and the best translation depends on the specific context. A more appropriate translation might be something like '割り当て変更' (wariate henko - allocation change) or '上限変更' (juugen henko - limit change) depending on what is being changed.",
-          "suggestion": "Consider '割り当て変更' (wariate henko) or '上限変更' (juugen henko) based on the intended meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -201,13 +189,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'සලාකය සංශෝධනය' does not accurately convey the meaning of 'Change quota'. 'සලාකය' (salakaya) translates to 'slice' or 'portion', which is not related to quota. 'සංශෝධනය' (sanshodhana) means 'amendment' or 'modification', which is closer, but still doesn't fully capture the meaning of 'change quota'.",
-          "suggestion": "A more accurate translation would depend on the specific context of 'quota'. Some possibilities include: 'කොටා වෙනස් කිරීම' (kota venas kiriwa - quota change), 'කොටා සංශෝධනය' (kota sanshodhana - quota amendment) or 'කොටා වැඩි කිරීම/ අඩු කිරීම' (kota wedi kiriwa / adu kiriwa - increase/decrease quota)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-03-31T15:18:45.981Z",
+  "updated_at": "2026-04-07T19:35:05.008Z",
   "comment": {
     "text": "The \"Rooms\" translation key is used to display the content \"Rooms\" in various parts of the user interface. This includes a file selector and a dialog box where it appears as a section title, providing context for users navigating room templates or reassigning data. It appears in UI elements such as buttons, text labels, and progress indicators.",
     "is_auto": true,
@@ -261,37 +261,19 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Miestností' is a valid Slovak word, it's the genitive plural form. 'Rooms' in English typically translates to 'izby' (nominative plural) or 'miestnosti' (nominative plural). The genitive form implies possession or relationship, which isn't suitable for a simple label like 'Rooms'.",
-          "suggestion": "miestnosti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Săli' is incorrect for 'Rooms'. The correct translation should be 'Sobě'. 'Săli' translates to 'Halls' or 'Rooms (as in meeting rooms)', whereas 'Sobě' is the general term for rooms.",
-          "suggestion": "Sobě"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Собе\" is not an accurate translation of \"Rooms\". \"Собе\" translates to \"Rooms\" in the plural, but the English term \"Rooms\" can also be singular. A more accurate translation, depending on context, might be \"Соба\" (singular) or \"Комнате\" (plural, more formal).",
-          "suggestion": "Consider \"Соба\" (singular) or \"Комнате\" (plural) depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

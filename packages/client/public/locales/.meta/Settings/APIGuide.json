@@ -3,7 +3,7 @@
   "content": "API Guide",
   "content_en_sha1_hash": "95bf0e870e2f1145571690754754b56cb523c59b",
   "created_at": "2025-05-19T21:30:50.490Z",
-  "updated_at": "2026-04-06T15:27:51.806Z",
+  "updated_at": "2026-04-07T19:35:05.188Z",
   "comment": {
     "text": "The \"APIGuide\" translation key is used to display the label for an API documentation button, which opens a new window to view API guide content when clicked. The label appears on a portal settings page, allowing users to access API documentation from within the application.",
     "is_auto": true,
@@ -27,18 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"دليل \"API\"\" is a literal transliteration of \"API\" rather than a natural Arabic equivalent for \"Guide\". While understandable, it's not ideal. It would be better to translate \"Guide\" explicitly.",
-          "suggestion": "دليل واجهة برمجة التطبيقات (Dali Wajihat Barmajat al-Tatbiqat)"
-        },
-        {
-          "type": "formatting",
-          "description": "The Arabic text is directly adjacent to the English abbreviation \"API\" with no separation. This can appear visually jarring and less professional.",
-          "suggestion": "دليل واجهة برمجة التطبيقات (API)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -92,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'API Օգնություն' uses 'Օգնություն' which translates to 'Help' rather than 'Guide'.  'Guide' implies a more comprehensive resource.",
-          "suggestion": "API Ցուցումներ (API Ts'umikner) - which means 'API Instructions' or API Ուղեցույց (API Ugeցuyց) - which means 'API Guide'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

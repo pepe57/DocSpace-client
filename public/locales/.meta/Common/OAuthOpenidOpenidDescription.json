@@ -3,7 +3,7 @@
   "content": "View your personal data",
   "content_en_sha1_hash": "0db0ed34f072a40f813c6ae1a47728048dd3a1e9",
   "created_at": "2025-05-19T21:30:47.028Z",
-  "updated_at": "2025-09-07T07:53:15.531Z",
+  "updated_at": "2026-04-07T19:35:04.990Z",
   "comment": {
     "text": "The translation key \"OAuthOpenidOpenidDescription\" is used to display a user-friendly message for viewing their personal data in an OAuth/OpenID context. It appears on a dialog or settings page related to profile management, where users can view and manage their identity information.",
     "is_auto": true,
@@ -123,13 +123,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Twoje dane osobowe' is a literal translation of 'your personal data' but doesn't quite convey the intended meaning of 'View your personal data'. It translates to 'Your personal data' which lacks the 'View' aspect of the original.",
-          "suggestion": "Przejrzyj swoje dane osobowe"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -177,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Прикажи своје личне податке' is a literal translation of 'View your personal data'. While understandable, a more natural and user-friendly phrasing in Serbian would be 'Погледајте своје личне податке' or 'Прегледајте своје личне податке'.",
-          "suggestion": "Погледајте своје личне податке"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
