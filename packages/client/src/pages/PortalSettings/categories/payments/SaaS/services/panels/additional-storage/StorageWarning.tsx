@@ -38,7 +38,7 @@ import { useServicesActions } from "../../hooks/useServicesActions";
 import { Link } from "@docspace/ui-kit/components";
 
 type StorageWarningProps = {
-  isDisabled: boolean;
+  isDisabled?: boolean;
   currentStoragePlanSize?: number;
   title?: string;
   onCancelChange?: () => void;
