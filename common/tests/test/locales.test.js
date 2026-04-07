@@ -1737,8 +1737,24 @@ describe("Locales Tests", () => {
     // Tags like "<strong >" or "< /strong>" will break rendering.
     // The WrongTranslationTagsTest normalizes whitespace before comparing,
     // so malformed tags slip through undetected. This test catches them directly.
+    // Exception: if the English source itself contains the same malformed tag, it's intentional.
     const tagRegex = /<\/?[a-zA-Z][^>]*\/?>/g;
     const malformedTagRegex = /\s+\/?>|<\s+/;
+
+    // Build set of malformed tags that exist in EN sources — these are intentional
+    const enMalformedByKey = {};
+    translationFiles
+      .filter((file) => file.language === "en")
+      .forEach((file) => {
+        file.translations.forEach((t) => {
+          if (!t.value) return;
+          const tags = t.value.match(tagRegex) || [];
+          const malformed = tags.filter((tag) => malformedTagRegex.test(tag));
+          if (malformed.length > 0) {
+            enMalformedByKey[`${file.namespace}:${t.key}`] = new Set(malformed);
+          }
+        });
+      });
 
     let message = "Next keys have malformed HTML/React tags (extra whitespace inside tag):\r\n\r\n";
     let errorsCount = 0;
@@ -1746,21 +1762,27 @@ describe("Locales Tests", () => {
     const malformedKeys = [];
 
     translationFiles.forEach((file) => {
-      if (file.language === "en") return; // English is the reference, skip
+      if (file.language === "en") return;
 
       file.translations.forEach((t) => {
         if (!t.value) return;
 
+        const fullKey = `${file.namespace}:${t.key}`;
+        const enAllowed = enMalformedByKey[fullKey];
+
         const tags = t.value.match(tagRegex) || [];
-        const malformed = tags.filter((tag) => malformedTagRegex.test(tag));
+        // Filter out tags that also appear malformed in the EN source
+        const malformed = tags.filter(
+          (tag) => malformedTagRegex.test(tag) && !(enAllowed && enAllowed.has(tag)),
+        );
 
         if (malformed.length > 0) {
           message +=
-            `${++i}. lng='${file.language}' key='${file.namespace}:${t.key}'\r\n` +
+            `${++i}. lng='${file.language}' key='${fullKey}'\r\n` +
             `  Malformed tag(s): ${malformed.join(", ")}\r\n` +
             `  Value: '${t.value.substring(0, 200)}'\r\n\r\n`;
           errorsCount++;
-          malformedKeys.push({ language: file.language, key: `${file.namespace}:${t.key}` });
+          malformedKeys.push({ language: file.language, key: fullKey });
         }
       });
     });
@@ -1838,11 +1860,25 @@ describe("Locales Tests", () => {
   });
 
   it("UnpairedBracketsTest: Verify that translations have balanced brackets and quotes.", () => {
-    const bracketPairs = [
+    // Simple pairs: count(open) must equal count(close)
+    const simplePairs = [
       ["(", ")"],
       ["[", "]"],
       ["\u00AB", "\u00BB"], // « »
-      ["\u201C", "\u201D"], // " "
+    ];
+
+    // Smart-quote groups: different languages use different combinations:
+    //   „..." (de, cs, bg, pl, ro, sk, sl, sr, hr) — U+201E opens, U+201C closes
+    //   "..." (en, fr, es, it, etc.) — U+201C opens, U+201D closes
+    //   „..." (de alt) — U+201E opens, U+201D closes
+    // Since U+201C can be either opener or closer depending on language,
+    // we simply check that the total count of all curly-quote chars is even
+    // (every open must have a matching close).
+    const quoteGroups = [
+      {
+        name: "\u201C\u201D\u201E",
+        chars: ["\u201C", "\u201D", "\u201E"], // " " „
+      },
     ];
 
     let message = "Next keys have unpaired brackets/quotes in translations:\r\n\r\n";
@@ -1854,7 +1890,8 @@ describe("Locales Tests", () => {
       file.translations.forEach((t) => {
         if (!t.value) return;
 
-        for (const [open, close] of bracketPairs) {
+        // Simple pairs
+        for (const [open, close] of simplePairs) {
           const openRe = new RegExp(`\\${open}`, "g");
           const closeRe = new RegExp(`\\${close}`, "g");
           const openCount = (t.value.match(openRe) || []).length;
@@ -1864,6 +1901,22 @@ describe("Locales Tests", () => {
             message +=
               `${++i}. lng='${file.language}' key='${file.namespace}:${t.key}'\r\n` +
               `  Unpaired "${open}${close}": ${openCount} open vs ${closeCount} close\r\n` +
+              `  Value: '${t.value.substring(0, 200)}'\r\n\r\n`;
+            errorsCount++;
+            unpairedKeys.push({ language: file.language, key: `${file.namespace}:${t.key}` });
+          }
+        }
+
+        // Smart-quote groups — total count must be even (paired)
+        for (const group of quoteGroups) {
+          let total = 0;
+          for (const ch of group.chars) {
+            total += (t.value.match(new RegExp(ch, "g")) || []).length;
+          }
+          if (total > 0 && total % 2 !== 0) {
+            message +=
+              `${++i}. lng='${file.language}' key='${file.namespace}:${t.key}'\r\n` +
+              `  Odd number of smart quotes (${group.name}): ${total} total (should be even)\r\n` +
               `  Value: '${t.value.substring(0, 200)}'\r\n\r\n`;
             errorsCount++;
             unpairedKeys.push({ language: file.language, key: `${file.namespace}:${t.key}` });
