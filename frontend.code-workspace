@@ -38,32 +38,6 @@
     "editor.formatOnSave": true,
     "VsCodeTaskButtons.tasks": [
       {
-        "label": "Tools",
-        "tasks": [
-          {
-            "label": "Translation App : Start (with metadata)",
-            "task": "Translation App | start",
-            "tooltip": "🌐 Start translation app (backend + frontend + generate metadata)"
-          },
-          {
-            "label": "Translation App : Start (skip meta)",
-            "task": "Translation App | start (skip meta)",
-            "tooltip": "⚡ Start translation app quickly — skip metadata generation"
-          },
-          {
-            "label": "──────────────────────",
-            "task": "separator",
-            "tooltip": ""
-          },
-          {
-            "label": "Screenshot Comparison : Start",
-            "task": "Screenshot Comparison | start",
-            "tooltip": "🖼️ Start screenshot comparison tool"
-          }
-        ],
-        "tooltip": "🛠️ Common tools"
-      },
-      {
         "label": "Server",
         "tasks": [
           {
@@ -515,6 +489,32 @@
             "tooltip": "🛠️ Remove unified E2E Docker image and volumes"
           },
         ]
+      },
+      {
+        "label": "Tools",
+        "tasks": [
+          {
+            "label": "Translation App : Start (with metadata)",
+            "task": "Translation App | start",
+            "tooltip": "🌐 Start translation app (backend + frontend + generate metadata)"
+          },
+          {
+            "label": "Translation App : Start (skip meta)",
+            "task": "Translation App | start (skip meta)",
+            "tooltip": "⚡ Start translation app quickly — skip metadata generation"
+          },
+          {
+            "label": "──────────────────────",
+            "task": "separator",
+            "tooltip": ""
+          },
+          {
+            "label": "Screenshot Comparison : Start",
+            "task": "Screenshot Comparison | start",
+            "tooltip": "🖼️ Start screenshot comparison tool"
+          }
+        ],
+        "tooltip": "🛠️ Common tools"
       }
     ],
     "licenser.author": "Ascensio System SIA",
