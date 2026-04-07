@@ -15,7 +15,6 @@
   "ResultStorage": "Resultaatopslag",
   "UploadFilesDevice": "Upload bestanden vanaf uw persoonlijke apparaat",
   "UploadFilesPortal": "Upload bestanden vanuit {{sectionNameFirst}} of {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "U bevindt zich in de <strong >alleen-lezen</strong > modus voor deze {{aiAgent}}. U kunt de resultaten van de {{aiChat}}-activiteit van andere gebruikers zien.",
   "CreateChatDescription": "Ga naar de {{aiChat}} tab om te beginnen.",
   "EmptyKnowledgeDescription": "Bestanden die hier worden geüpload, worden geïndexeerd en gebruikt als context in de {{aiChat}}-tab. Voeg bestanden toe (tot 10 MB elk) om vragen aan de AI te stellen, inhoud te genereren of samen te werken aan informatie.",
   "EmptyResultsDescription": "Bestanden gegenereerd in {{aiChat}} verschijnen hier automatisch. Wanneer u inhoud genereert, een chat start of een bericht met uitvoer verstuurt, wordt het resultaat in dit gedeelte opgeslagen.",
@@ -27,5 +26,6 @@
   "MCPDescriptionServers": "Gebruik {{mcpServers}} verbonden door de beheerder om de chatervaring met AI te verbeteren. {{mcpServers}} kan helpen met data-extractie, samenvattingen, slimme suggesties, enz.",
   "Model": "{{aiProvider}} en model",
   "ModelDescription": "Selecteer de {{aiProvider}} en het model dat in de chats van deze ruimte gebruikt moet worden. Deze instelling is verplicht en geldt voor alle deelnemers.",
-  "NoAccessAIAgentTitle": "Helaas heeft u geen toegang tot deze {{aiAgent}}"
+  "NoAccessAIAgentTitle": "Helaas heeft u geen toegang tot deze {{aiAgent}}",
+  "AgentInViewModeWarning": "U bevindt zich in de <strong>alleen-lezen</strong>-modus voor deze {{aiAgent}}. U kunt de resultaten van de {{aiChat}}-activiteit van andere gebruikers zien."
 }

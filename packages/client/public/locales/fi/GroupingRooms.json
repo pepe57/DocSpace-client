@@ -17,7 +17,6 @@
   "RemoveFromGroup": "Poista ryhmästä",
   "RemoveGroup": "Poista ryhmä",
   "RemoveGroupConfirmation": "Olet aike poistaa huonetuon. Oletko varma, että haluat jatkaa?",
-  "RemoveGroupInfo": "Ryhmään sisältyvät huoneet näytetään osiossa <strong >All Rooms</strong >.",
   "RoomAddedToGroup": "Valittu huone on lisätty <1>{{groupName}}</1>:een.",
   "RoomGrouping": "Huoneiden ryhmittely",
   "RoomGroupingDisabled": "Huoneiden ryhmittely on poistettu käytöstä",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "Voit ryhmitellä huoneet kansioihin ja vaihtaa niiden välillä helposti.",
   "RoomRemovedFromGroup": "Valittu huone on poistettu <1>{{groupName}}</1>:sta.",
   "RoomsAddedToGroup": "Valitut huoneet on lisätty <1>{{groupName}}</1>:een.",
-  "RoomsRemovedFromGroup": "Valitut huoneet on poistettu <1>{{groupName}}</1>:sta."
+  "RoomsRemovedFromGroup": "Valitut huoneet on poistettu <1>{{groupName}}</1>:sta.",
+  "RemoveGroupInfo": "Ryhmään kuuluvat huoneet näetään <strong>aikki huoneet</strong> -osiossa."
 }

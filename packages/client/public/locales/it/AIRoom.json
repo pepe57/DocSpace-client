@@ -15,7 +15,6 @@
   "ResultStorage": "Archiviazione risultati",
   "UploadFilesDevice": "Carica file dal tuo dispositivo personale",
   "UploadFilesPortal": "Carica file da {{sectionNameFirst}} o {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "Sei in modalità <strong >solo visualizzazione</strong > per questo {{aiAgent}}. Puoi vedere i risultati dell'attività {{aiChat}} di altri utenti.",
   "CreateChatDescription": "Vai alla scheda {{aiChat}} per iniziare.",
   "EmptyKnowledgeDescription": "I file caricati qui verranno indicizzati e utilizzati come contesto nella scheda {{aiChat}}. Aggiungete file (fino a 10 MB ciascuno) per porre domande all'IA, generare contenuti o collaborare su informazioni.",
   "EmptyResultsDescription": "I file generati in {{aiChat}} appariranno qui automaticamente. Ogni volta che genera contenuti, avvia una chat o invia un messaggio con un output, il risultato verrà salvato in questa sezione.",
@@ -27,5 +26,6 @@
   "MCPDescriptionServers": "Utilizza {{mcpServers}} collegati dall'amministratore per migliorare l'esperienza di chat con l'IA. {{mcpServers}} può assistere con l'estrazione di dati, riassunti, suggerimenti intelligenti, ecc.",
   "Model": "{{aiProvider}} e modello",
   "ModelDescription": "Seleziona il {{aiProvider}} e il modello da utilizzare nelle chat di questa stanza. Questa impostazione è obbligatoria e si applica a tutti i partecipanti.",
-  "NoAccessAIAgentTitle": "Mi dispiace, non hai accesso a {{aiAgent}}"
+  "NoAccessAIAgentTitle": "Mi dispiace, non hai accesso a {{aiAgent}}",
+  "AgentInViewModeWarning": "Sei in modalità <strong>sola lettura</strong> per questo {{aiAgent}}. Puoi vedere i risultati dell'attività di {{aiChat}} di altri utenti."
 }

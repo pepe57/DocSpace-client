@@ -1105,7 +1105,6 @@
   "StartFillingBarDescription": "Vyberte, kto vyplní polia pre každú rolou príjemcu v tomto formulári. Vyberte rolou príjemcu a priraďte ju členovi miestnosti.",
   "StartFillingBarHeader": "Ako funguje prideľovanie príjemcov",
   "StopFilling": "Ukončiť vyplňovanie",
-  "StopFillingBody": "Ste si istí, že chcete ukončiť vyplňovanie? Po zrušení nebude možné pokračovať vo vypĺňaní tohto formulára. Vyplňovanie formulára bude ukončené vo fáze, v ktorej sa práve nachádza. Súbor bude označený ako „Ukončený“.",
   "StopFillingTitle": "Ukončiť vyplňovanie?",
   "Stopped": "Ukončené",
   "Storage": "Úložisko",
@@ -1286,5 +1285,6 @@
   "YourCurrentDomain": "Vaša aktuálna doména",
   "YourFurtherEditsNotSaved": "Vaše ďalšie úpravy nemusí byť uložené.",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Ste na rade"
+  "YourTurn": "Ste na rade",
+  "StopFillingBody": "Niste si istý, že chcete prestať vypĺňať? Po zrušení nebude možné vypĺňanie tohto formulára obnoviť. Vypĺňanie formulára bude zastavené v aktuálnej fáze. Súbor bude označený ako „Zastavený“."
 }

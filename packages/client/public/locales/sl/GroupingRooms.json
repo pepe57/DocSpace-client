@@ -17,7 +17,6 @@
   "RemoveFromGroup": "Odstraniti iz skupine",
   "RemoveGroup": "Vplectic skupino",
   "RemoveGroupConfirmation": "Na želite izbrisati skupino sob. Ali ste preprimeni, da želite nadaljevati?",
-  "RemoveGroupInfo": "Sobniki, vključeni v skupino, bodo prikazani v razdelku <strong >Vsi sobišča</strong >.",
   "RoomAddedToGroup": "Izbrana soba je dodana v <1>{{groupName}}</1>.",
   "RoomGrouping": "Skupščina sob",
   "RoomGroupingDisabled": "Skupna namestitev je onemogočena",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "Shranjujte sobe v mapiranje in preklopite med njima zlahice.",
   "RoomRemovedFromGroup": "Izbrana soba je odstranjena iz <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Izbrane sobe so dodane v <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Izbrane sobe so bile odstranjene iz <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Izbrane sobe so bile odstranjene iz <1>{{groupName}}</1>.",
+  "RemoveGroupInfo": "Soby, vključene v skupino, bodo prikazane v razdelku <strong>Vse sobe</strong>."
 }

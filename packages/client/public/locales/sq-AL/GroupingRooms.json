@@ -17,7 +17,6 @@
   "RemoveFromGroup": "Heq nga grupi",
   "RemoveGroup": "Heq grupin",
   "RemoveGroupConfirmation": "Jeni gati të fshini një grup dhaturash. Jeni të sigurt se dëshironi të vazhdoni?",
-  "RemoveGroupInfo": "Shtoma e dhomenave në grupin do të shfaqet në seksionin <strong >Të Gjitha Dhomat</strong >.",
   "RoomAddedToGroup": "Dhoma e zgjedhur është shtuar në <1>{{groupName}}</1>.",
   "RoomGrouping": "Grupimi i dhomave",
   "RoomGroupingDisabled": "Grupimi i dhomave është i fiksuar",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "Ju mund të gruponi ambientet në dosje dhe të kaloni lehtësisht midiset e tyre.",
   "RoomRemovedFromGroup": "Dhoma e zgjedhur është hequr nga <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Dhoma të zgjedhura u shtoën në <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Dhomat e zgjedhura u janë hequr nga <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Dhomat e zgjedhura u janë hequr nga <1>{{groupName}}</1>.",
+  "RemoveGroupInfo": "Dhomat e përfshira në grup do të shfaqen në seksionin <strong>Të gjitha dhomat</strong>."
 }

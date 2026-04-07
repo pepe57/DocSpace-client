@@ -117,7 +117,6 @@
   "TabPlugins": "පේනු පටිත්ත",
   "ViewerDescription": "නිශ්චිත කාමරයක ගොනුවක් බැලීම සඳහා විවෘත කිරීමට ඉඩ දීමට නරඹනයක් කාවද්දන්න.",
   "AllowedFileTypes": "භාවිතා කරන්නන්ට උඩුගත කිරීමට ඉඩ ඇති ගොනු වර්ග තෝරන්න.",
-  "AvailableFileTypes": "ಲಭ್ಯವಿರುವ ಫೈಲ್ ಪ್ರಕಾರಗಳು",
   "CreateSampleUploader": "නිය mẫu Uploader embed එකක් සාදන්න",
   "DestinationFolderId": "ගමනාන්ත ෆෝල්ඩර ID",
   "EventLog": "සිදුවීම් ලොගය",
@@ -150,5 +149,6 @@
   "UploadFoldersDescription": "පරිශීලකයින්ට ඔවුන්ගේ ව්‍යුහය සමඟ සම්පූර්ණ ෆෝල්ඩර උඩුගත කළ හැකිය.",
   "UploadLimits": "අඩු සීමාවන්",
   "UploadMode": "අඩුගත කිරීමේ මාදිලිය",
-  "VoidReturn": "ශුන්‍ය"
+  "VoidReturn": "ශුන්‍ය",
+  "AvailableFileTypes": "ලබාගත හැකි ගොනු වර්ග"
 }

@@ -6,7 +6,6 @@
   "EmptyKnowledgeDescriptionActions": "Spróbuj wykonać te czynności, aby zacząć:",
   "EmptyKnowledgeTitle": "Jeszcze nie przesłano żadnych plików.",
   "EmptyResultsTitle": "Brak wyników na razie",
-  "InstructionsDescriptionAgentExample": "Przykład: „Jesteś asystentem PR AI, który pomaga w pisaniu i redagowaniu komunikatów prasowych. Zachowuj profesjonalny, pewny siebie i przyjazny mediom ton. Wyraźnie podkreślaj kluczowe przesłania, unikaj żargonu i utrzymuj tekst zwięzły i angażujący.”",
   "KnowledgeDescription": "Prześlij pliki z komputera lub {{productName}}, aby zapewnić lepszy kontekst dla rozmowy. Zwróć uwagę: część lub całość przesłanych treści może zostać ujawniona podczas rozmowy.",
   "KnowledgeSelectIn": "Wybierz w {{productName}}",
   "KnowledgeUnavailable": "Baza wiedzy niedostępna",
@@ -27,5 +26,6 @@
   "MCPDescriptionServers": "Wykorzystaj {{mcpServers}} podłączone przez administratora, aby ulepszyć doświadczenie czatu z AI. {{mcpServers}} może pomóc w ekstrakcji danych, podsumowaniach, inteligentnych sugestiach itp.",
   "Model": "{{aiProvider}} i model",
   "ModelDescription": "Wybierz {{aiProvider}} i model, które mają być używane w czatach tego pokoju. Ustawienie to jest obowiązkowe i dotyczy wszystkich uczestników.",
-  "NoAccessAIAgentTitle": "Przepraszam, nie ma Pan/Pani dostępu do {{aiAgent}}"
+  "NoAccessAIAgentTitle": "Przepraszam, nie ma Pan/Pani dostępu do {{aiAgent}}",
+  "InstructionsDescriptionAgentExample": "Przykład: „Jesteś asystentem PR AI, który pomaga pisać i edytować komunikaty prasowe. Zachowaj profesjonalny, pewny siebie i przyjazny dla mediów ton. Wyraźnie podkreślaj kluczowe przekazy, unikaj żargonu oraz dbaj o to, aby tekst był zwięzły i angażujący”."
 }

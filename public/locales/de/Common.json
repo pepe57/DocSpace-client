@@ -627,7 +627,6 @@
   "LibraryTemplateAboutText": "Dies ist eine vorgefertigte Formularvorlage, die Sie als Ausgangspunkt für Ihr Dokument verwenden können. Wählen Sie sie aus, passen Sie die Felder an Ihre Bedürfnisse an und teilen Sie sie dann zum Ausfüllen. Ausgefüllte Formulare werden in Meine Formulare gespeichert, wo Sie sie überprüfen, herunterladen oder mit KI-Agenten verarbeiten können.",
   "LibraryTemplateFormat": "Format",
   "LibraryTemplateHowTo": "So verwenden Sie diese Vorlage",
-  "LibraryTemplateHowToText": "Klicken Sie auf „Vorlage verwenden“, um eine Kopie in Meine Formulare hinzuzufügen. Von dort aus können Sie die Formularfelder bearbeiten, den Ausfüllablauf einrichten und es mit Empfängern teilen. Sobald es ausgefüllt ist, werden die Ergebnisse automatisch gesammelt.",
   "LibraryTemplateLastRevision": "Letzte Revision",
   "LibraryTemplateSize": "Größe",
   "LicenseExpired": "Die Lizenz ist abgelaufen",
@@ -1286,5 +1285,6 @@
   "YourFurtherEditsNotSaved": "Ihre weiteren Bearbeitungen können nicht gespeichert werden.",
   "YourLogo": "Ihr Logo",
   "YourTurn": "Jetzt sind Sie dran",
-  "PM": "PM"
+  "PM": "PM",
+  "LibraryTemplateHowToText": "Klicken Sie auf „Vorlage verwenden“, um eine Kopie zu „Meine Formulare“ hinzuzufügen. Von dort aus können Sie die Formularfelder bearbeiten, den Ausfüllprozess einrichten und das Formular mit Empfängern teilen. Sobald es ausgefüllt wurde, werden die Ergebnisse automatisch gesammelt."
 }

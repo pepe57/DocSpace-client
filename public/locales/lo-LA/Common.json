@@ -642,7 +642,6 @@
   "LinkAccessFile": "<1>{{accessType}}</1> ສາມາດ <3>{{accessRights}}</3>.",
   "LinkCopiedToClipboard": "ລິ້ງຄ໌ຖືກສໍາເນົາໃສ່ຄລິບບອດ",
   "LinkCopySuccess": "ລິ້ງໄດ້ຖືກສໍາເນົາໄປ clipboard",
-  "LinkCopySuccessWithCustomFilter": "ລິ້ງສູ່ເອກະສານທີ່ມີ <strong >ຕົວກຣອງທີ່ກຳນົດເອງ</strong > ຖືກສໍາເນົາສູ່ແຜ່ນກ໊ານຢ່າງສໍາເລັດ.",
   "LinkDoesNotExist": "ບໍ່ມີລິ້ງທີ່ເຈົ້າພະຍາຍາມເປີດ.",
   "LinkExpirationDate": "ໄຟລ໌ທີ່ແບ່ງປັນໂດຍລິ້ງຈະໝົດອາຍຸໃນ <1>{{date}}</1>",
   "LinkExpireAfter": "ລິ້ງນີ້ຈະໝົດອາຍຸ <1>{{date}}</1>",
@@ -1286,5 +1285,6 @@
   "YourCurrentDomain": "ໂດເມນປັດຈຸບັນຂອງທ່ານ",
   "YourFurtherEditsNotSaved": "ການແກ້ໄຂເພີ່ມເຕີມຂອງທ່ານອາດຈະບໍ່ສາມາດບັນທຶກໄດ້.",
   "YourLogo": "ໂລໂກ້ຂອງທ່ານ",
-  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ"
+  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
+  "LinkCopySuccessWithCustomFilter": "ລິ້ງໄປຫາໄຟລ໌ທີ່ເປີດໃຊ້ <strong>ຕົວຕອງກຳນົດເອງ</strong> ຖືກຄັດລອກໄປຍັງຄລິບບອດສຳເລັດແລ້ວ."
 }

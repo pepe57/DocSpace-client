@@ -81,7 +81,6 @@
   "WebhookCreated": "웹훅이 생성되었습니다",
   "WebhookDetails": "웹훅 세부 정보",
   "WebhookDisabled": "웹훅 비활성화됨",
-  "WebhookEditedSuccessfully": "Webhooks:WebhookEditedSuccessfully",
   "WebhookEnabled": "웹훅 활성화됨",
   "WebhookHistory": "웹훅 기록",
   "WebhookName": "웹훅 이름",
@@ -95,5 +94,6 @@
   "AgentUpdated": "AI 에이전트 업데이트됨",
   "FormFilledOut": "양식 작성 완료",
   "FormStopped": "양식 중지",
-  "FormSubmit": "제출됨"
+  "FormSubmit": "제출됨",
+  "WebhookEditedSuccessfully": "웹후크 설정이 성공적으로 수정되었습니다."
 }

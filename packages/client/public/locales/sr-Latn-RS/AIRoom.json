@@ -6,7 +6,6 @@
   "EmptyKnowledgeDescriptionActions": "Probajte ove radnje da biste započeli:",
   "EmptyKnowledgeTitle": "Još uvek nema otpremljenih datoteka",
   "EmptyResultsTitle": "Još nema rezultata",
-  "InstructionsDescriptionAgentExample": "Primer: „Vi ste AI PR asistent koji pomaže u pisanju i uređivanju saopštenja za medije. Održavajte profesionalan, samouveren i medijski prihvatljiv ton. Jasno istaknite ključne poruke, izbegavajte žargon i držite tekst konciznim i privlačnim.”",
   "KnowledgeDescription": "Otpremite datoteke sa svog računara ili sa {{productName}} da biste obezbedili bolji kontekst za ćaskanje. Napomena: deo ili ceo otpremljeni sadržaj može biti otkriven tokom razgovora.",
   "KnowledgeSelectIn": "Izaberite u {{productName}}",
   "KnowledgeUnavailable": "Baza znanja je nedostupna",
@@ -27,5 +26,6 @@
   "MCPDescriptionServers": "Koristite {{mcpServers}} koje je administrator povezao za poboljšanje chat iskustva sa AI. {{mcpServers}} mogu pomoći sa ekstrakcijom podataka, sažecima, pametnim predlozima itd.",
   "Model": "{{aiProvider}} i model",
   "ModelDescription": "Izaberite {{aiProvider}} i model koji će se koristiti u četovima ovog prostora. Ova podešavanja su obavezna i primenjuju se na sve učesnike.",
-  "NoAccessAIAgentTitle": "Žao nam je, nemate pristup ovom {{aiAgent}}"
+  "NoAccessAIAgentTitle": "Žao nam je, nemate pristup ovom {{aiAgent}}",
+  "InstructionsDescriptionAgentExample": "Primer: „Vi ste AI PR asistent koji pomaže u pisanju i uređivanju saopštenja za medije. Održavajte profesionalan, samouveren i medijski prikladan ton. Jasno istaknite ključne poruke, izbegavajte žargon i neka tekst bude koncizan i privlačan.“"
 }

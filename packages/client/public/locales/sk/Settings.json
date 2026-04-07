@@ -180,7 +180,6 @@
   "PortalDeletion": "Vymazanie {{productName}}",
   "PortalDeletionDescription": "Pomocou tejto možnosti natrvalo vymažete svoj priestor.",
   "PortalDeletionEmailSended": "Odkaz na potvrdenie operácie bol odoslaný na adresu {{ownerEmail}} (e-mailová adresa vlastníka priestoru).",
-  "PortalDeletionHelper": "Ak si myslíte, že priestor nebudete využívať a chceli by ste ho natrvalo vymazať, odošlite žiadosť kliknutím na tlačidlo „Vymazať“. Upozorňujeme, že nebudete môcť znova aktivovať svoj priestor ani obnoviť žiadne informácie, ktoré sú s ním spojené.",
   "PortalRenaming": "Premenovanie {{productName}}",
   "PortalRenamingDescriptionText": "Zmeňte adresu priestoru, ktorá sa zobrazuje vedľa {{ domain }}.",
   "PortalRenamingLabelText": "Nový názov priestoru",
@@ -324,5 +323,6 @@
   "SetDefaultAIAgentQuota": "Nastavte predvolenú kvótu úložného miesta pre {{aiAgents}} v tomto {{productName}}. Môže byť neskôr upravená v nastaveníach alebo prispôsobená individuálne pri vytváraní každého {{aiAgent}}.",
   "StartEmbedding": "Začať vloženie",
   "Top5AIAgents": "Top 5 {{aiAgents}} podľa využitia úložného miesta:",
-  "WebhooksDescription": "Vykonávajte vlastné akcie na bočnom panelu akéhokoľvek aplikácie alebo webovej stránky, na základe rôznych udalostí v {{organizationName}} {{productName}}."
+  "WebhooksDescription": "Vykonávajte vlastné akcie na bočnom panelu akéhokoľvek aplikácie alebo webovej stránky, na základe rôznych udalostí v {{organizationName}} {{productName}}.",
+  "PortalDeletionHelper": "Ak si myslíte, že priestor nebudete používať a chcete ho trvalo vymazať, odošlite svoju žiadosť pomocou tlačidla Vymazať. Majte prosím na pamäti, že svoj priestor už nebudete môcť znova aktivovať ani obnoviť žiadne s ním spojené informácie."
 }

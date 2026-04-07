@@ -15,7 +15,6 @@
   "ResultStorage": "Ruajtja e rezultateve",
   "UploadFilesDevice": "Ngarko skedarë nga pajisja jote personale",
   "UploadFilesPortal": "Ngarko skedarë nga {{sectionNameFirst}} ose {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "Jeni në modalitet <strong >pamje-vetëm</strong > për {{aiAgent}}. Ju mund të shihni rezultatet e aktivitetit {{aiChat}} nga përdorues të tjerë.",
   "CreateChatDescription": "Shkoni te tab-i {{aiChat}} për të filluar.",
   "EmptyKnowledgeDescription": "Skedarët e ngarkuar këtu do të indeksohen dhe do të përdoren si kontekst në tab-in {{aiChat}}. Shtoni skedarë (deri në 10 MB secili) për të bërë pyetje me AI, për të gjeneruar përmbajtje, ose për të bashkëpunuar mbi informacion.",
   "EmptyResultsDescription": "Skedarët e krijuar në {{aiChat}} do të shfaqen këtu automatikisht. Sa herë që gjeneroni përmbajtje, nisni një bisedë, ose dërgoni një mesazh me rezultat, rezultati do të ruhet në këtë seksion.",
@@ -27,5 +26,6 @@
   "MCPDescriptionServers": "Përdorni {{mcpServers}} të lidhur nga administratorit për të përmirësuar përvojën e bisedës me AI. {{mcpServers}} mund të ndihmojnë me nxjerrjen e të dhënave, përmbledhjet, sugjerimet e inteligjencës, etj.",
   "Model": "{{aiProvider}} dhe modeli",
   "ModelDescription": "Zgjidhni {{aiProvider}} dhe modelin që do të përdoren në bisedat e kësaj dhinformative. Kjo cilësim është i detyrueshëm dhe i zbatohet të gjithë pjesëmarrësve.",
-  "NoAccessAIAgentTitle": "Më vjen keq, ju nuk keni akses në {{aiAgent}}"
+  "NoAccessAIAgentTitle": "Më vjen keq, ju nuk keni akses në {{aiAgent}}",
+  "AgentInViewModeWarning": "Jeni në modalitetin <strong>vetëm për shikim</strong> për këtë {{aiAgent}}. Mund të shihni rezultatet e aktivitetit të {{aiChat}} nga përdoruesit e tjerë."
 }

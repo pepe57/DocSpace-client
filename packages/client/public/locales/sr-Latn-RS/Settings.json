@@ -126,7 +126,6 @@
   "ImportFromPortal": "Uvezi sa {{organizationName}} Workspace-a",
   "ImportProcessingDescription": "Migracija podataka je u toku. Molimo sačekajte.",
   "ImportSectionDescription": "Izaberite sekcije za uvoz. One će se pojaviti u odgovarajućim sekcijama {{productName}}-a.",
-  "ImportSectionDisabled": "Da biste uvezli {{importSectionName}}, prvo omogućite opciju „<1>{{sectionName}}</1>”.",
   "IncludedInBusiness": "Uključeno u Poslovni plan",
   "IntegrationRequest": "Nedostaje vam korisna integracija ili komponenta u {{organizationName}} {{productName}}-u? Ostavite zahtev našem timu i istražićemo to.",
   "InvitationSettings": "Podešavanja poziva",
@@ -324,5 +323,6 @@
   "SetDefaultAIAgentQuota": "Postavite podrazumevani kvotni prostor za {{aiAgents}} u ovom {{productName}}. To se može kasnije podesiti u podešavanjima ili prilagoditi pojedinačno prilikom kreiranja svakog {{aiAgent}}.",
   "StartEmbedding": "Pokrenite ugrađivanje",
   "Top5AIAgents": "Top 5 {{aiAgents}} po potrošnji prostora:",
-  "WebhooksDescription": "Izvršite prilagođene akcije sa strane bilo koje aplikacije ili veb-sajta koji koristite na osnovu različitih događaja u {{organizationName}} {{productName}}."
+  "WebhooksDescription": "Izvršite prilagođene akcije sa strane bilo koje aplikacije ili veb-sajta koji koristite na osnovu različitih događaja u {{organizationName}} {{productName}}.",
+  "ImportSectionDisabled": "Da biste uvezli {{importSectionName}}, prvo omogućite opciju \"<1>{{sectionName}}</1>\"."
 }

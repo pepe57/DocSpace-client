@@ -463,7 +463,6 @@
   "Favorites": "Sevimli",
   "FeeAppliesToEachBackup": "Xahiş edirik bildirin ki, hər bir ehtiyat nüsxəsi üçün ödəniş mövcuddur.",
   "FeedbackAndSupport": "Rəy və Dəstək",
-  "FileActionRequired": "Hədəfdə artıq «<1>{{fileName}}</1> adlı fayl var.",
   "FileAvailableViaParentFolderLinkDescription": "Bu fayl, üst səviyyə qatlamasından paylaşılan keçid vasitəsilə əldə edilə bilər, ancaq siz xüsusi icazə ilə xüsusi xarici keçid yarada bilərsiniz.",
   "FileAvailableViaParentFolderLinkTitle": "Validein qovluğun keçidi vasitəsilə fayl mövcuddur.",
   "FileCurrentlyEditedBy": "Faylı hazırda redaktə edən:",
@@ -494,7 +493,6 @@
   "Finish": "Bitirin",
   "FirstName": "Ad",
   "Folder": "Qovluq",
-  "FolderActionRequired": "Hədəfdə artıq «<1>{{folderName}}</1> adlı qovluq var.",
   "FolderAvailableViaParentFolderLinkDescription": "Bu qovşuq, üst qovşuq vasitəsilə paylaşılmış linklə əldə edilə bilər, lakin siz müəyyən icazətlə xüsusi xarici link yarada bilərsiniz.",
   "FolderAvailableViaParentFolderLinkTitle": "Qovluq valideyn qovluq linki vasitəsilə əlçatandır",
   "FolderInfo": "Qovluq məlumatı",
@@ -1286,5 +1284,7 @@
   "YourCurrentDomain": "Cari domen adınız",
   "YourFurtherEditsNotSaved": "Sizin əlavə redaktələriniz yadda saxlanılmaya bilər.",
   "YourLogo": "Loqonuz",
-  "YourTurn": "Sizin növbəniz"
+  "YourTurn": "Sizin növbəniz",
+  "FileActionRequired": "Hədəf qovluqda artıq «<1>{{fileName}}</1>» adlı fayl mövcuddur.",
+  "FolderActionRequired": "Təyinat yerində artıq «<1>{{folderName}}</1>» adlı qovluq mövcuddur."
 }

@@ -830,7 +830,6 @@
   "PerUserYear": "<1>{{price}}</1> පරිපාලකයාට වසරකට",
   "Petabyte": "පෙ.බ.",
   "Phone": "දුරකථනය",
-  "PluginDisabled": "Vtičnik onemogočen",
   "PluginEnabled": "Vtičnik omogočen",
   "Plugins": "පේනු",
   "PortalAdmin": "{{productName}} පරිපාලක",
@@ -1286,5 +1285,6 @@
   "YourFurtherEditsNotSaved": "ඔබගේ වැඩිදුර සංස්කරණ සුරැකිය නොහැකි විය හැකිය.",
   "YourLogo": "ඔබේ ලාංචනය",
   "YourTurn": "ඔබේ වාරය.",
-  "PM": "PM"
+  "PM": "PM",
+  "PluginDisabled": "ප්ලගිනය අක්‍රිය කර ඇත"
 }

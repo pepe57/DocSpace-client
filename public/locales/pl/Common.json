@@ -1104,7 +1104,6 @@
   "StartFillingBarDescription": "Wybierz, kto wypełni pola dla każdego odbiorcy na tym formularzu. Wybierz rolę odbiorcy i przypisz ją do członka zespołu.",
   "StartFillingBarHeader": "Jak działa przydzielanie odbiorców",
   "StopFilling": "Zatrzymaj wypełnianie",
-  "StopFillingBody": "Czy na pewno chcesz zatrzymać wypełnianie? Po anulowaniu nie będzie można wznowić wypełniania tego formularza. Wypełnianie formularza zostanie zatrzymane na bieżącym etapie. Plik zostanie oznaczony jako „Zatrzymany”.",
   "StopFillingTitle": "Zatrzymać wypełnianie?",
   "Stopped": "Zatrzymano",
   "Storage": "Pamięć",
@@ -1286,5 +1285,6 @@
   "YourFurtherEditsNotSaved": "Dalsze zmiany mogą nie zostać zapisane.",
   "YourLogo": "Twoje Logo",
   "YourTurn": "Twoja kolej",
-  "RoleAIAgentManagerDescription": "Menedżerowie agentów mogą zarządzać przypisanym {{aiAgent}}, zapraszać nowych użytkowników i przypisywać role niższych poziomów.\nMogą korzystać z czatu, przesyłać pliki wiedzy, pracować z Result storage oraz zarządzać ustawieniami czatu."
+  "RoleAIAgentManagerDescription": "Menedżerowie agentów mogą zarządzać przypisanym {{aiAgent}}, zapraszać nowych użytkowników i przypisywać role niższych poziomów.\nMogą korzystać z czatu, przesyłać pliki wiedzy, pracować z Result storage oraz zarządzać ustawieniami czatu.",
+  "StopFillingBody": "Czy na pewno chcesz przerwać wypełnianie? Po anulowaniu nie będzie można wznowić wypełniania tego formularza. Wypełnianie formularza zostanie przerwane na etapie, na którym się obecnie znajduje. Plik zostanie oznaczony jako „Przerwany”."
 }

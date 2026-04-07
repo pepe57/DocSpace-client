@@ -6,7 +6,6 @@
   "EmptyKnowledgeDescriptionActions": "Încercați aceste acțiuni pentru a începe:",
   "EmptyKnowledgeTitle": "Niciun fișier nu a fost deocamdată încărcat",
   "EmptyResultsTitle": "Deocamdată niciun rezultat",
-  "InstructionsDescriptionAgentExample": "Exemplu: “Sunteți un asistent IA pentru relații publice care ajută la redactarea și editarea comunicatelor de presă. Mențineți un ton profesionist, convingător și prietenos care este acceptabil pentru media. Evidențiați clar mesajele cheie, evitați jargonul și păstrați-vă limbajul concis și captivant.",
   "KnowledgeDescription": "Încărcați fișierele de pe calculatorul sau {{productName}} pentru a oferi contextul suplimentar chat-ului. Mențiune: o parte sau întregul conținut încărcat poate fi partajat în timpul conversației.",
   "KnowledgeSelectIn": "Selectare din {{productName}}",
   "KnowledgeUnavailable": "Baza de cunoștințe nu este disponibilă",
@@ -15,7 +14,6 @@
   "ResultStorage": "Stocare rezultate",
   "UploadFilesDevice": "Încărcați fișierele de pe diapozitivul dvs peronal",
   "UploadFilesPortal": "Încărcați fișierele din {{sectionNameFirst}} sau {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "Vă aflați în modul <strong >vizualizare doar</strong > pentru acest {{aiAgent}}. Puteți vedea rezultatele activității {{aiChat}} ale altor utilizatori.",
   "CreateChatDescription": "Accesați fila {{aiChat}} pentru a începe.",
   "EmptyKnowledgeDescription": "Fișierele încărcate aici vor fi indexate și folosite ca context în fila {{aiChat}}. Adăugați fișiere (până la 10 MB fiecare) pentru a pune întrebări AI, a genera conținut sau a colabora la informații.",
   "EmptyResultsDescription": "Fișierele generate în {{aiChat}} vor apărea aici automat. De fiecare dată când generați conținut, începeți o conversație sau trimiteți un mesaj cu rezultate, rezultatul va fi salvat în această secțiune.",
@@ -27,5 +25,7 @@
   "MCPDescriptionServers": "Folosiți {{mcpServers}} conectate de administrator pentru a îmbunătăți experiența de chat cu AI. {{mcpServers}} pot ajuta cu extracția de date, rezumate, sugestii inteligente etc.",
   "Model": "{{aiProvider}} și model",
   "ModelDescription": "Selectați {{aiProvider}} și modelul de utilizare în chat-urile din această cameră. Această setare este obligatorie și se aplică tuturor participanților.",
-  "NoAccessAIAgentTitle": "Îmi pare rău, nu aveți acces la {{aiAgent}}"
+  "NoAccessAIAgentTitle": "Îmi pare rău, nu aveți acces la {{aiAgent}}",
+  "InstructionsDescriptionAgentExample": "Exemplu: „Ești un asistent AI de PR care ajută la scrierea și editarea comunicatelor de presă. Menține un ton profesional, încrezător și adaptat pentru media. Evidențiază clar mesajele cheie, evită jargonul și menține textul concis și captivant.”",
+  "AgentInViewModeWarning": "You’re in <strong>view-only</strong> mode for this {{aiAgent}}. You can see the results of {{aiChat}} activity from other users."
 }

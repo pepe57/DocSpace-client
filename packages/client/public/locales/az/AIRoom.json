@@ -1,5 +1,4 @@
 {
-  "AgentInViewModeWarning": "Siz bu {{aiAgent}} üçün <strong >view-only</strong > rejimindəsiniz. Digər istifadəçilərin {{aiChat}} fəaliyyətinin nəticələrini görə bilərsiniz.",
   "AIAgentAccessRedirectNote": "5 saniyədən sonra siz {{sectionName}} bölməsinə avtomatik olaraq yönləndiriləcəksiniz.",
   "AIChat": "Süni İntellekt-Çat",
   "AIInstructions": "Süni İntellekt Təlimatları",
@@ -27,5 +26,6 @@
   "ResponseQualityNode": "<1>Qeyd:</1> Müxbirə görə cavabın keyfiyyəti dəyişə bilər; daha yaxşı nəticələr üçün daha yeni modellər tövsiyə edilir.",
   "ResultStorage": "Nəticə saxlanması",
   "UploadFilesDevice": "Şəxsi cihazınızdan faylları yükləyin",
-  "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin"
+  "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin",
+  "AgentInViewModeWarning": "Siz bu {{aiAgent}} üçün <strong>yalnız baxış</strong> rejimindəsiniz. Digər istifadəçilərin {{aiChat}} fəaliyyətinin nəticələrini görə bilərsiniz."
 }

@@ -126,7 +126,6 @@
   "ImportFromPortal": "Увези са {{organizationName}} Workspace-а",
   "ImportProcessingDescription": "Миграција података је у току. Молимо сачекајте.",
   "ImportSectionDescription": "Изаберите секције за увоз. Оне ће се појавити у одговарајућим секцијама {{productName}}-а.",
-  "ImportSectionDisabled": "Да бисте увезли {{importSectionName}}, прво омогућите опцију „<1>{{sectionName}}</1>”.",
   "IncludedInBusiness": "Укључено у Пословни план",
   "IntegrationRequest": "Недостаје вам корисна интеграција или компонента у {{organizationName}} {{productName}}-у? Оставите захтев нашем тиму и истражићемо то.",
   "InvitationSettings": "Поставке позива",
@@ -317,12 +316,13 @@
   "DisableAiServicesDescription": "Искључивањем {{organizationName}} AI, ступиће на снагу следеће промене:",
   "PluginDescription": "Проширите функционалност свог {{productName}}, повежите услуге трећих страна или унапредите постојеће корисничко искуство.",
   "ResetTemplateDescription": "Да ли сте сигурни да желите да вратите тренутно стање празног документа на његово почетно стање?\n Нећете моћи да поништите ову радњу.",
-  "SMTPSettingsDescription": "Подешавања SMTP-а су потребна за постављање имејл налога који ће се користити за слање обавештења са портала користећи ваш сопствени SMTP сервер уместо оног који користи {{organizationName}}. Молимо попуните сва поља и кликните на дугме „Сачувај“. Можете користити дугме „Пошаљи тест имејл“ како бисте проверили да ли су сва унета подешавања исправна и раде како треба.",
   "WebhooksDescription": "Извршавајте прилагођене радње у било којој апликацији или веб-сајту који користите на основу различитих догађаја у {{organizationName}} {{productName}}.",
   "DeveloperToolsDescription": "Integrate, extend, and automate {{organizationName}} {{productName}} using our full suite of developer tools — from REST API and Embed SDK to webhooks and OAuth apps. Choose a tool below to get started.",
   "BlankDocument": "Празни документ",
   "BlankForm": "Празни формулар",
   "BlankSpreadsheet": "Празна табела",
   "QuotaPerAIAgent": "Квота за {{aiAgent}}",
-  "RegisterApp": "Регистрирајте апликацију"
+  "RegisterApp": "Регистрирајте апликацију",
+  "SMTPSettingsDescription": "SMTP подешавања су потреб за подешавање имејл налога који ће користи за слање обавења са портала помоу вашег сопственог SMTP сервера уместо оног који {{organizationName}} користи. Молимо вас попуните сва поља и кликнете на дугме „Сачувај“. Можете користити дугме „Поша тест имејл“ да прове да ли сва унета подења исправна и да раде предвиђено",
+  "ImportSectionDisabled": "Да бисте увезли {{importSectionName}}, прво омогућите опцију „<1>{{sectionName}}</1>“."
 }

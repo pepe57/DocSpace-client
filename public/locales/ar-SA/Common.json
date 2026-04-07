@@ -592,7 +592,6 @@
   "Invited": "مدعو",
   "Inviter": "الداعي",
   "IpAlreadyAdded": "تمت إضافة عنوان IP هذا بالفعل",
-  "ItemsSuccessfullyUploaded": "العناصر التي تم تحميلها: {{count}})",
   "Kilobyte": "كيلو بايت",
   "KnowledgeBaseNotConfigured": "لم يتم تهيئة قاعدة المعرفة على هذه البوابة. يُرجى تفعيلها في إعدادات الذكاء الاصطناعي للبوابة لكي يتمكن الوكيل من تحليل النماذج المكتملة.",
   "KnowledgeSearch": "البحث في قاعدة المعرفة",
@@ -1286,5 +1285,6 @@
   "YourCurrentDomain": "النطاق الحالي الخاص بك",
   "YourFurtherEditsNotSaved": "قد لا يتم حفظ تعديلاتك الإضافية.",
   "YourLogo": "شعاركم",
-  "YourTurn": "دوركم الآن"
+  "YourTurn": "دوركم الآن",
+  "ItemsSuccessfullyUploaded": "العناصر التي تم تحميلها: {{count}}"
 }

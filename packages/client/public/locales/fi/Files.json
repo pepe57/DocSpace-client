@@ -89,7 +89,6 @@
   "ExportRoomIndexAlreadyInProgressError": "Huoneen indeksin vienti on jo käynnissä. Ole hyvä ja odota kunnes vienti on suoritettu aloittaaksesi uusi.",
   "FileDownloadingIsRestricted": "Tiedostojen lataus on rajoitettu tässä huoneessa.",
   "FileExportDestination": "Tiedosto <1>{{fileName}}</1> vietiin {{sectionName}}-osioon",
-  "FileRenamed": "Asiakirjan \"{{oldTitle}}\" nimeksi on muutettu \"{{newTitle}}”",
   "FilesMovedToTrashNotice": "Tiedostot siirretään {{sectionName}}-osioon.",
   "Filter": "Suodatin",
   "FinalizeVersion": "Viimeistele versio",
@@ -223,5 +222,6 @@
   "WillBeDeletedPermanently": "{{date}} poistetaan lopullisesti",
   "YouLeftTheAgent": "Olet jättänyt agentin.",
   "YouLeftTheRoom": "Olet poistunut huoneesta",
-  "YourUserTypeHasChanged": "{{productName}} :n pääkäyttäjä <1>{{adminName}}</1> on vaihtanut käyttäjätyypiksesi <1>“{{userType}}”</1>."
+  "YourUserTypeHasChanged": "{{productName}} :n pääkäyttäjä <1>{{adminName}}</1> on vaihtanut käyttäjätyypiksesi <1>“{{userType}}”</1>.",
+  "FileRenamed": "Asiakirja '{{oldTitle}}' on nimetty uudelleen muotoon '{{newTitle}}'"
 }

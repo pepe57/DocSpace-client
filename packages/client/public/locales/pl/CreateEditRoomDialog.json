@@ -32,7 +32,6 @@
   "StorageDescriptionAgent": "Przydział limitu przestrzeni dyskowej ustalany dla każdego agenta. Możesz zmienić tę wartość lub wyłączyć limit przestrzeni dyskowej.",
   "TagsPlaceholder": "Dodaj znacznik",
   "ThirdPartyStorageComboBoxPlaceholder": "Wybierz pamięć",
-  "ThirdPartyStorageNoStorageAlert": "Najpierw jednak musisz podłączyć odpowiednią usługę w sekcji „Integracja”. W przeciwnym razie połączenie będzie niemożliwe.",
   "ThirdPartyStoragePermanentSettingDescription": "Pliki są przechowywane w pamięci zewnętrznej {{thirdpartyTitle}}, w katalogu \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Aby podłączyć pamięć podmiotu trzeciego, musisz dodać odpowiednią usługę w sekcji Integracja, w ustawieniach {{productName}}. Skontaktuj się z właścicielem {{productName}} lub administratorem, aby włączyć integrację.",
   "UserEmail": "Adres e-mail użytkownika",
@@ -44,5 +43,6 @@
   "GoToIntegrations": "Przejdź do integracji",
   "NeedMoreIntegrations": "Potrzebujesz więcej integracji?",
   "NeedMoreIntegrationsDescription": "Wykorzystaj webhooki do wysyłania danych do własnego systemu lub podłącz formularze do tysięcy usług za pośrednictwem Zapier.",
-  "NoDatabaseConnections": "Nie skonfigurowano połączeń z bazą danych"
+  "NoDatabaseConnections": "Nie skonfigurowano połączeń z bazą danych",
+  "ThirdPartyStorageNoStorageAlert": "Najpierw należy połączyć odpowiednią usługę w sekcji „Integracje”. W przeciwnym razie połączenie nie będzie możliwe."
 }

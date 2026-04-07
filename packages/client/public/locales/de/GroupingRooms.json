@@ -17,7 +17,6 @@
   "RemoveFromGroup": "Aus Gruppe entfernen",
   "RemoveGroup": "Gruppe entfernen",
   "RemoveGroupConfirmation": "Sie sind dabei, eine Gruppe von Räumen zu löschen. Möchten Sie fortfahren?",
-  "RemoveGroupInfo": "Die Räume, die in die Gruppe aufgenommen wurden, werden im Abschnitt <strong >All Rooms</strong > angezeigt.",
   "RoomAddedToGroup": "Der ausgewählte Raum wurde zu <1>{{groupName}}</1> hinzugefügt.",
   "RoomGrouping": "Raumgruppenbildung",
   "RoomGroupingDisabled": "Räumengruppierung ist deaktiviert",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "Sie können Räume in Ordnern gruppieren und einfach zwischen ihnen wechseln.",
   "RoomRemovedFromGroup": "Der ausgewählte Raum wurde aus <1>{{groupName}}</1> entfernt.",
   "RoomsAddedToGroup": "Die ausgewählten Räume wurden zu <1>{{groupName}}</1> hinzugefügt.",
-  "RoomsRemovedFromGroup": "Die ausgewählten Räume wurden aus <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Die ausgewählten Räume wurden aus <1>{{groupName}}</1>.",
+  "RemoveGroupInfo": "Die in der Gruppe enthaltenen Räume werden im Bereich <strong>Alle Räume</strong> angezeigt."
 }

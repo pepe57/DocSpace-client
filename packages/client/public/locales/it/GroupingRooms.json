@@ -17,7 +17,6 @@
   "RemoveFromGroup": "Rimuovi dal gruppo",
   "RemoveGroup": "Rimuovi gruppo",
   "RemoveGroupConfirmation": "Stai per eliminare un gruppo di stanze. Sei sicuro di voler procedere?",
-  "RemoveGroupInfo": "Le stanze incluse nel gruppo verranno visualizzate nella sezione <strong >Tutte le stanze</strong >.",
   "RoomAddedToGroup": "La stanza selezionata è stata aggiunta a <1>{{groupName}}</1>.",
   "RoomGrouping": "Raggruppamento stanze",
   "RoomGroupingDisabled": "Il raggruppamento delle stanze è disabilitato",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "È possibile raggruppare le stanze in cartelle e passare facilmente tra di esse.",
   "RoomRemovedFromGroup": "La stanza selezionata è stata rimossa da <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Le stanze selezionate sono state aggiunte a <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Le stanze selezionate sono state rimosse da <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Le stanze selezionate sono state rimosse da <1>{{groupName}}</1>.",
+  "RemoveGroupInfo": "Le stanze incluse nel gruppo saranno visualizzate nella sezione <strong>Tutte le stanze</strong>."
 }

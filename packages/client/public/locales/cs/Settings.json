@@ -304,7 +304,6 @@
   "TwoFactorAuthMobileDescription": "Dvoufázové ověřování představuje bezpečnější způsob vstupu uživatelů do portálu. Po zadání přihlašovacích údajů bude muset uživatel zadat kód z SMS zprávy přijaté na mobilní telefon s číslem, které bylo zadáno při prvním přihlášení do portálu, nebo kód z autentizační aplikace.",
   "TwoFactorAuthSave": "Klikněte na tlačítko <strong>Uložit</strong> níže a přihlaste se.",
   "TypesAndPrivileges": "<1>Typy administrátorských účtů a jejich oprávnění</1> <br> <br> <2>Administrátor {{productName}}</2> <br> Konfigurace {{productName}}, vytváření a správa místností, možnost zvát a spravovat uživatele v {{productName}} a ve vitruálních místnostech, možnost spravovat přístupová práva. <br> <br> <3>Administrátor místností</3> <br> Správa a archivace místností, možnost pozvání a správy uživatelů. K místnosti lze přiřadit několik administrátorů. <br> <br> <4>User</4> <br> Users mohou vytvářet a upravovat soubory v místnosti, ale nemohou vytvářet místnosti, spravovat uživatele ani přístupová nastavení.",
-  "UnsupportedFilesDescription": "Některé záložní soubory nejsou podporovány. Kliknutím na „Zkontrolovat nepodporované soubory“ stáhnete seznam nepodporovaných položek.",
   "UpdatingStatistics": "Aktualizace statistik může trvat dlouho",
   "UploadBackupData": "Chcete-li zahájit migraci, nahrajte záložní kopii z požadované služby níže.",
   "UploadToServer": "Odeslání na server",
@@ -316,7 +315,6 @@
   "UsersAreRegistered": "Vybrali jste uživatele registrované ve vašem {{productName}} s již nastavenými rolemi. Přejděte k dalšímu kroku nebo se vraťte zpět a vyberte další uživatele.",
   "UsersFiles": "Soubory uživatele",
   "UsersQuotaLimit": "{{usersQuotaLimit}} pro uživatele",
-  "UsersSectionDescription": "Sekce „Uživatelé“ obsahuje uživatele, které jste vybrali v předchozím kroku. Ve výchozím nastavení je vždy povolena a nelze ji zrušit.",
   "UseSpecialChar": "Použijte speciální znaky",
   "UseUpperCase": "Použijte velká písmena",
   "WantToCancelDataImport": "Chcete zrušit import dat?",
@@ -324,5 +322,7 @@
   "WantToContinue": "Chcete pokračovat nebo změnit kvótu uživatelského úložiště?",
   "WebhooksDescription": "Vykonávejte vlastní akce v jakékoli aplikaci nebo na jakékoli webové stránce, které používáte, na základě různých událostí v {{organizationName}} {{productName}}.",
   "WhiteLabelSubtitle": "Zadejte název společnosti, nahrajte logo a přizpůsobte styl tak, aby odpovídal vaší značce.",
-  "WithoutEmailHint": "Bez e-mailů nemáte uživatele. Přejděte k dalšímu kroku."
+  "WithoutEmailHint": "Bez e-mailů nemáte uživatele. Přejděte k dalšímu kroku.",
+  "UnsupportedFilesDescription": "Některé zálohovací soubory podporovány. Klikte na „Zrolovatodporované souory“ a stáhněte si seznam nepodporovaných položek.",
+  "UsersSectionDescription": "Sekce „Uživatelé“ obsahuje uživatele, které jste vybrali v předchozím kroku. Ve výchozím nastavení je vždy zapnutá a nelze ji zrušit."
 }

@@ -86,7 +86,6 @@
   "FreeMonthly": "(безкоштовно щомісячно)",
   "HowDoesItWork": "Як це працює?",
   "InputCurrency": "{{currency}}/1М",
-  "InsufficientPermissionsMessage": "У вас недостатньо дозволів. Будь ласка, зверніться до платіжника (<1>{{payerContact}}</1>)), щоб отримати доступ та налаштувати сервіси.",
   "LastTopUp": "<1>Останнє поповнення</1>: <2>{{currency}}</2> на {{date}}.",
   "LessThanOneDay": "<1>день</1>",
   "LowBalance": "Низький баланс кредитів. Додайте кредити, щоб забезпечити безперебійну роботу.",
@@ -113,5 +112,6 @@
   "UntilDate": "до {{date}}",
   "Usage": "Використання",
   "WalletBalance": "Баланс гаманця",
-  "WalletTopUpRequired": "Потрібно поповнити: {{currency}}"
+  "WalletTopUpRequired": "Потрібно поповнити: {{currency}}",
+  "InsufficientPermissionsMessage": "У вас недостатньо прав. Будь ласка, зверніться до платника (<1>{{payerContact}}</1>), щоб отримати доступ до сервісів та налаштувати їх."
 }

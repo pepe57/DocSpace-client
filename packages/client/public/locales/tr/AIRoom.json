@@ -15,7 +15,6 @@
   "ResultStorage": "Sonuç depolama",
   "UploadFilesDevice": "Kişisel cihazınızdan dosyalar yükleyin",
   "UploadFilesPortal": "{{sectionNameFirst}} veya {{sectionNameSecond}}'den dosyalar yükleyin",
-  "AgentInViewModeWarning": "Bu {{aiAgent}} için <strong >salt okunur</strong > modundasınız. Diğer kullanıcılardan gelen {{aiChat}} etkinliklerinin sonuçlarını görebilirsiniz.",
   "CreateChatDescription": "Başlamak için {{aiChat}} sekmesine gidin.",
   "EmptyKnowledgeDescription": "Buraya yüklenen dosyalar dizine eklenecek ve {{aiChat}} sekmesinde bağlam olarak kullanılacaktır. Yapay zeka soruları sormak, içerik oluşturmak veya bilgiler üzerinde işbirliği yapmak için dosya ekleyin (her biri 10 MB'a kadar).",
   "EmptyResultsDescription": "{{aiChat}}'te oluşturulan dosyalar otomatik olarak burada görünecektir. İçerik oluşturduğunuzda, bir sohbet başlattığınızda veya çıktı içeren bir mesaj gönderdiğinizde, sonuç bu bölümde kaydedilecektir.",
@@ -27,5 +26,6 @@
   "MCPDescriptionServers": "Yönetici tarafından bağlanan {{mcpServers}} ile yapay zeka desteğiyle sohbet deneyiminizi geliştirin. {{mcpServers}} veri çıkarma, özetler, akıllı öneriler vb. konularında yardımcı olabilir.",
   "Model": "{{aiProvider}} ve model",
   "ModelDescription": "Bu odadaki sohbetlerde kullanılacak {{aiProvider}} ve modeli seçin. Bu ayar zorunludur ve tüm katılımcılar için geçerlidir.",
-  "NoAccessAIAgentTitle": "Üzgünüz, bu {{aiAgent}}'a erişiminiz yok."
+  "NoAccessAIAgentTitle": "Üzgünüz, bu {{aiAgent}}'a erişiminiz yok.",
+  "AgentInViewModeWarning": "Bu {{aiAgent}} için <strong>yalnızca görüntüleme</strong> modundasınız. Diğer kullanıcıların {{aiChat}} etkinlik sonuçlarını görebilirsiniz."
 }

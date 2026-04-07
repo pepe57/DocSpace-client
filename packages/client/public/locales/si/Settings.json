@@ -32,7 +32,6 @@
   "Appearance": "පෙනුම",
   "AuditSubheader": "ඔබගේ {{productName}} තුළ අඩංගු ඒකකවල (කාමර, අවකාශ, ගොනු ආදිය) පරිශ්‍රීලකයින් සිදු කරන ලද නවතම වෙනස්කම් (සෑදීම්, සංශෝධන, මකාදැමීම් ආදිය) ලැයිස්තුව හරහා පිරික්සීමට අනුකොටස ඔබට ඉඩ සලසයි.",
   "AuditTrailNav": "විගණන මඟ",
-  "AuthorizationKeysInfo": "Z Avtorizacijskimi ključi lahko povežete storitve tretjih oseb s svojim prostorom. Enostavno se prijavite z Facebook, Google ali LinkedIn. Dodajte Dropbox, OneDrive in druge račune za delo s tam shranjenimi datotekami.",
   "BackupCreatedError": "දෝෂයක් හටගෙන ඇත. ඔබගේ පරිපාලක අමතන්න.",
   "BackupFile": "උපස්ථ ගොනුව",
   "BackupFileUploading": "සේවාදායකයට උපස්ථ ගොනුව උඩුගත වෙමින් පවතී. කරුණාකර රැඳී සිටින්න.",
@@ -324,5 +323,6 @@
   "SetDefaultAIAgentQuota": "මෙම {{productName}} තුළ {{aiAgents}} සඳහා පෙරනිමි ගබඩා කෝටාව සකසන්න. එය පසුව සැකසීම් තුළ සකස් කළ හැකිය, නැතහොත් සෑම {{aiAgent}} එකක් නිර්මාණය කරන විට තනි තනිව අභිරුචිකරණය කළ හැකිය.",
   "StartEmbedding": "ඇතුළත් කිරීම ආරම්භ කරන්න",
   "Top5AIAgents": "ගබඩා භාවිතය අනුව ඉහළම {{aiAgents}} 5:",
-  "WebhooksDescription": "ඔබ භාවිතා කරන ඕනෑම යෙදුමක් හෝ වෙබ් අඩවියක, {{organizationName}} {{productName}} හි විවිධ සිදුවීම් මත පදනම්ව අභිරුචි ක්‍රියාකාරකම් සිදු කරන්න."
+  "WebhooksDescription": "ඔබ භාවිතා කරන ඕනෑම යෙදුමක් හෝ වෙබ් අඩවියක, {{organizationName}} {{productName}} හි විවිධ සිදුවීම් මත පදනම්ව අභිරුචි ක්‍රියාකාරකම් සිදු කරන්න.",
+  "AuthorizationKeysInfo": "අවසර ලබාදීමේ යතුරු (Authorization keys) භාවිතයෙන්, ඔබට ඔබේ අවකාශයට (space) තෙවන පාර්ශවීය සේවාවන් සම්බන්ධ කළ හැක. Facebook, Google හෝ LinkedIn හරහා පහසුවෙන් ඇතුළු වන්න. එහි ගබඩා කර ඇති ගොනු සමඟ වැඩ කිරීමට Dropbox, OneDrive සහ අනෙකුත් ගිණුම් එක් කරන්න."
 }

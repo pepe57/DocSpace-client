@@ -17,7 +17,6 @@
   "RemoveFromGroup": "Verwijderen uit groep",
   "RemoveGroup": "Verwijder groep",
   "RemoveGroupConfirmation": "U bent op het punt een groep kamers te verwijderen. Wilt u zeker weten dat u verder wilt gaan?",
-  "RemoveGroupInfo": "De kamers in de groep worden weergegeven in de sectie <strong >Alle kamers</strong >.",
   "RoomAddedToGroup": "De geselecteerde ruimte is toegevoegd aan <1>{{groupName}}</1>.",
   "RoomGrouping": "Kammergroepering",
   "RoomGroupingDisabled": "Kammergroepering is uitgeschakeld",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "U kunt kamers groeperen in mappen en eenvoudig daartussen schakelen.",
   "RoomRemovedFromGroup": "De geselecteerde ruimte is verwijderd uit <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "De geselecteerde kamers zijn toegevoegd aan <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "De geselecteerde kamers zijn verwijderd uit <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "De geselecteerde kamers zijn verwijderd uit <1>{{groupName}}</1>.",
+  "RemoveGroupInfo": "De kamers die in de groep zijn opgenomen, worden weergegeven in de sectie <strong>Alle kamers</strong>."
 }

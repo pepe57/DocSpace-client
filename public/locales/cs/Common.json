@@ -1104,7 +1104,6 @@
   "StartFillingBarDescription": "Vyberte, kdo vyplní pole pro každou roli příjemce v tomto formuláři. Vyberte roli příjemce a přiřaďte ji členovi místnosti.",
   "StartFillingBarHeader": "Jak funguje přiřazování příjemců",
   "StopFilling": "Přestat plnit",
-  "StopFillingBody": "Jste si jistí, že chcete přestat vyplňovat? Po zrušení nebude možné pokračovat ve vyplňování tohoto formuláře. Vyplňování formuláře bude zastaveno ve fázi, ve které se právě nachází. Soubor bude označen jako „Zastaveno“.",
   "StopFillingTitle": "Přestat vyplňovat?",
   "Stopped": "Zastaveno",
   "Storage": "Úložiště",
@@ -1286,5 +1285,6 @@
   "YourFurtherEditsNotSaved": "Vaše další úpravy nemusí být uloženy.",
   "YourLogo": "Vaše logo",
   "YourTurn": "Jste na řadě",
-  "PM": "PM"
+  "PM": "PM",
+  "StopFillingBody": "Opravdu chcete zastavit vyplňování? Po zrušení nebude možné vyplňování tohoto formuláře obnovit. Vyplňování formuláře bude zastaveno v aktuální fázi. Soubor bude označen jako „Zastaven“."
 }

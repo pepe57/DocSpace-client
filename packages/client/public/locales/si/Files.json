@@ -38,9 +38,7 @@
   "CreateTemplate": "පාඨමාලාව නිර්මාණය කරන්න",
   "CustomFilterDisable": "අභිරුචි පෙරහන අක්‍රීය කරන්න",
   "CustomFilterDisabled": "Prilagojen filter za izbrano datoteko onemogočen",
-  "CustomFilterEnable": "Omogoči Prilagojen filter",
   "CustomFilterEnabled": "Prilagojen filter za izbrano datoteko omogočen",
-  "CustomFilterEnableDiscription": "Prilagojen filter je omogočen za to tabelo. Uporabniki, ki so odprli datoteko, bodo lahko prilagodili prikaz podatkov v tabeli.",
   "DaysRemaining": "ඉතිරි දවස් ගණන: {{daysRemaining}}",
   "DeleteAgent": "නියෝජිතයා මකන්න",
   "DeleteLink": "සබැඳිය මකන්න",
@@ -223,5 +221,7 @@
   "RemovedFromRecent": "최근 ඒවායින් ඉවත් කරන ලදී",
   "UserLimitDescription": "මෙම ආරාධනා සබැඳිය හරහා සම්බන්ධ විය හැකි පරිශීලකයන් සංඛ්‍යාව නිර්වචනය කරන්න.",
   "UsersJoined": "භාවිතාකරුවන් එකතු විය:",
-  "ValidUntil": "හිමි වන තෙක්:"
+  "ValidUntil": "හිමි වන තෙක්:",
+  "CustomFilterEnable": "අභිමත පෙරහන සක්‍රිය කරන්න",
+  "CustomFilterEnableDiscription": "මෙ වගුව සඳහා අභියෝගිත පෙරහන (Custom) සක්‍රිය කර ඇත ගොුව විෘත පරිශීලකයින්ට වගුවේ දත්ත ප්‍රදර්ශනය පුද්ගලීකරණය කිරීමට හැකි වනු ඇත."
 }

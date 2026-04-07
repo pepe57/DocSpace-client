@@ -45,7 +45,6 @@
   "FolderMovedCount": "Dossiers déplacés ({{count}}).",
   "FolderRenamed": "Dossier renommé.",
   "FoldersTrashMoveCompleted": "Dossiers déplacés vers {{sectionName}}.",
-  "FoldersTrashMoveCompletedCount": "Dossiers déplacés vers {{sectionName}} ({{count}}.",
   "FormCompletelyFilled": "Formulaire entièrement complété.",
   "FormPartiallyFilled": "Partie du formulaire remplie.",
   "FormStartedToFill": "Remplissage commencé.",
@@ -102,5 +101,6 @@
   "SubmenuHistory": "Historique",
   "UserFileUpdated": "Fichier mis à jour.",
   "Users": "Utilisateurs",
-  "Versions": "Versions"
+  "Versions": "Versions",
+  "FoldersTrashMoveCompletedCount": "Dossiers déplacés vers {{sectionName}} ({{count}})."
 }

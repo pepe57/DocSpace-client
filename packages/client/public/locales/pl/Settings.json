@@ -232,7 +232,6 @@
   "SharedFilesAndFoldersDetails": "Współdzielone pliki i foldery",
   "SingleSignOn": "Logowanie jednokrotne (SSO)",
   "SMTPSettings": "Ustawienia SMTP",
-  "SMTPSettingsDescription": "Ustawienia SMTP są konieczne, aby skonfigurować konto e-mail, które będzie używane do wysyłania powiadomień z portalu za pośrednictwem Twojego własnego serwera SMTP, zamiast tego, którego używa {{organizationName}}. Uzupełnij wszystkie pola i kliknij przycisk „Zapisz”. Możesz użyć przycisku „Wyślij wiadomość testową”, aby upewnić się, że wprowadzone dane są poprawne i wszystko działa, jak powinno.",
   "StatisticDescription": "Tutaj możesz zobaczyć szczegółowe dane na temat wykorzystania pamięci w tym {{productName}}.",
   "Statistics": "Statystyki",
   "StorageManagement": "Zarządzanie pamięcią",
@@ -264,7 +263,6 @@
   "TwoFactorAuthMobileDescription": "Weryfikacja dwuetapowa to bezpieczniejszy sposób logowania dla użytkowników portalu. Po wpisaniu danych logowania użytkownik musi podać kod otrzymany we wiadomości SMS wysłanej na numer telefonu wskazany podczas pierwszego logowania w portalu lub kod z aplikacji uwierzytelniającej.",
   "TwoFactorAuthSave": "Aby zastosować wprowadzone zmiany, kliknij przycisk<strong>Zapisz</strong> u dołu sekcji.",
   "TypesAndPrivileges": "<1>Rodzaje kont administratora i ich uprawnienia</1> <br> <br> <2>Administrator {{productName}}</2><br>  Konfiguracja {{productName}}, tworzenie pokoi i administrowanie nimi, możliwość zapraszania użytkowników i zarządzania nimi w {{productName}} oraz wirtualnych pokojach, a także możliwość zarządzania prawami dostępu. <br> <br> <3>Administrator pokoju</3> <br> Administrowanie pokojem i archiwizowanie, zapraszanie użytkowników i zarządzanie nimi. Do pokoju można przypisać kilku administratorów. <br> <br> <4>Użytkownik</4> <br> Taki użytkownik może tworzyć i edytować pliki w pokoju, ale nie może tworzyć pokoi oraz zarządzać użytkownikami. Nie ma również dostępu do ustawień.",
-  "UnsupportedFilesDescription": "Niektóre pliki kopii zapasowych nie są obsługiwane. Kliknij „Sprawdź nieobsługiwane pliki”, aby pobrać listę nieobsługiwanych elementów",
   "UpdatingStatistics": "Zaktualizowanie statystyk może zająć trochę czasu",
   "UploadBackupData": "Prześlij kopię zapasową z wybranej usługi poniżej, aby rozpocząć migrację.",
   "UploadToServer": "Prześlij na serwer",
@@ -276,7 +274,6 @@
   "UsersAreRegistered": "Wybrano użytkowników zarejestrowanych w {{productName}} z ustawionymi już rolami. Przejdź do kolejnego kroku lub wróć, aby wybrać więcej użytkowników.",
   "UsersFiles": "Pliki użytkownika",
   "UsersQuotaLimit": "{{usersQuotaLimit}} dla użytkowników",
-  "UsersSectionDescription": "Sekcja „Użytkownicy” obejmuje użytkowników wybranych w poprzednim kroku. Domyślnie zawsze jest włączona i nie można jej odznaczyć.",
   "UseSpecialChar": "Użyj znaków specjalnych",
   "UseUpperCase": "Użyj wielkich liter",
   "WantToCancelDataImport": "Czy chcesz anulować import danych?",
@@ -324,5 +321,8 @@
   "SetDefaultAIAgentQuota": "Ustaw domyślny limit pamięci dla {{aiAgents}} w tym {{productName}}. Można go później dostosować w ustawieniach lub spersonalizować indywidualnie podczas tworzenia każdego {{aiAgent}}.",
   "StartEmbedding": "Rozpocznij osadzanie",
   "Top5AIAgents": "Top 5 {{aiAgents}} pod względem zużycia pamięci:",
-  "WebhooksDescription": "Wykonuj niestandardowe akcje po stronie dowolnej aplikacji lub witryny, której używasz, na podstawie różnych zdarzeń w {{organizationName}} {{productName}}."
+  "WebhooksDescription": "Wykonuj niestandardowe akcje po stronie dowolnej aplikacji lub witryny, której używasz, na podstawie różnych zdarzeń w {{organizationName}} {{productName}}.",
+  "UnsupportedFilesDescription": "Niektóre z plików kopii zapasowej nie są obsługiwane. Kliknij „Sprawdź nieobsługiwane pliki”, aby pobrać listę nieobsługiwanych elementów",
+  "UsersSectionDescription": "Sekcja „Ukownicy” zawiera użytkowników wybranych w poprzednim kroku. Domyślnie jest ona zawsze wona i nie można jej odznaczyć.",
+  "SMTPSettingsDescription": "Ustawienia SMTP są niezbędne do skonfigurowania konta e-mail, które będzie wykorzystywane do wysyłania powiadomień z portalu przy użyciu własnego serwera SMTP zamiast serwera używanego przez {{organizationName}}. Prosimy o wypełnienie wszystkich pól i kliknięcie przycisku „Zapisz”. Możesz użyć przycisku „Wyślij wiadomość testową”, aby sprawdzić, czy wszystkie wprowadzone ustawienia są poprawne i działają zgodnie z oczekiwaniami."
 }

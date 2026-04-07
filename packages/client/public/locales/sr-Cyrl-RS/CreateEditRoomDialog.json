@@ -32,7 +32,6 @@
   "StorageDescriptionAgent": "Подешена квота за складиштење по агенту. Можете променити ову вредност или искључити ограничење складиштења.",
   "TagsPlaceholder": "Додај таг",
   "ThirdPartyStorageComboBoxPlaceholder": "Одабери складиште",
-  "ThirdPartyStorageNoStorageAlert": "Пре тога, потребно је да повежете одговарајуц́у услугу у одељку „Интеграција“. У супротном, веза нец́е бити могуц́а.",
   "ThirdPartyStoragePermanentSettingDescription": "Датотеке се чувају у складишту трец́е стране {{thirdpartyTitle}} у \"{{thirdpartyFolderName}}\" фолдеру.\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Да бисте повезали складиште трец́е стране, потребно је да додате одговарајуц́у услугу у одељку Интеграција у подешавањима {{productName}}-а. Контактирајте власника или администратора {{productName}}-а да бисте омогуц́или интеграцију.",
   "UserEmail": "Кориснички Емаил",
@@ -44,5 +43,6 @@
   "NeedMoreIntegrations": "Треба више интеграција?",
   "NeedMoreIntegrationsDescription": "Користите вебхукове за слање података у ваш систем, или повежите форме на хиљаде услуга преко Zapier-а.",
   "GoToIntegrations": "Пређите на Интеграције",
-  "NoDatabaseConnections": "Нема конфигурисаних веза са базама података"
+  "NoDatabaseConnections": "Нема конфигурисаних веза са базама података",
+  "ThirdPartyStorageNoStorageAlert": "Преthодно је потребно да повежете одговарајући сервис у одељку „Интеграција“. У супротном, повезивање неће бити могуће."
 }
