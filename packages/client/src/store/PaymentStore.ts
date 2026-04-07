@@ -776,7 +776,7 @@ class PaymentStore {
 
       await this.initWalletPayerAndBalance(isRefresh);
 
-      if (this.isAlreadyPaid) {
+      if (this.isCardLinkedToPortal) {
         if (this.isStripePortalAvailable) {
           requests.push(this.setPaymentAccount());
 
@@ -823,7 +823,7 @@ class PaymentStore {
       await this.initWalletPayerAndBalance(isRefresh);
       this.previousBalance = this.balance;
 
-      if (this.isAlreadyPaid) {
+      if (this.isCardLinkedToPortal) {
         if (this.isStripePortalAvailable) {
           requests.push(this.setPaymentAccount());
 

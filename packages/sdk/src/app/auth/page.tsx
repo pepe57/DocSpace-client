@@ -40,7 +40,7 @@ export default async function AuthPage({
   searchParams: Promise<Record<string, string | undefined>>;
 }) {
   const params = await searchParams;
-  const { providerName, successRedirectUrl } = params;
+  const { providerName, successRedirectURL, inviteKey, emplType } = params;
 
   if (!providerName) {
     return <div>Missing providerName parameter</div>;
@@ -49,12 +49,21 @@ export default async function AuthPage({
   const cookieStore = await cookies();
   const hasAuth = !!cookieStore.get("asc_auth_key");
 
-  if (hasAuth && successRedirectUrl && providerName !== "createPortal") {
-    redirect(successRedirectUrl);
+  if (hasAuth && successRedirectURL && providerName !== "createPortal") {
+    redirect(successRedirectURL);
   }
 
   const colorTheme = await getColorTheme();
   const bgPattern = getBgPattern(colorTheme?.selected);
+
+  const confirmParams = new URLSearchParams(
+    params as Record<string, string>,
+  );
+  if (confirmParams.has("inviteKey")) {
+    confirmParams.set("key", confirmParams.get("inviteKey")!);
+    confirmParams.delete("inviteKey");
+  }
+  const confirmHeader = confirmParams.toString();
 
   return (
     <div style={{ width: "100%", height: "100vh" }}>
@@ -84,7 +93,10 @@ export default async function AuthPage({
           ) : (
             <AuthClient
               providerName={providerName}
-              successRedirectUrl={successRedirectUrl ?? null}
+              successRedirectURL={successRedirectURL ?? null}
+              inviteKey={inviteKey ?? null}
+              emplType={emplType ?? null}
+              confirmHeader={confirmHeader}
             />
           )}
         </FormWrapper>
@@ -92,3 +104,4 @@ export default async function AuthPage({
     </div>
   );
 }
+

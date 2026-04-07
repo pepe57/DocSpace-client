@@ -563,7 +563,7 @@ class ServicesStore {
 
       if (!quotas) throw new Error();
 
-      if (this.paymentStore!.isAlreadyPaid) {
+      if (this.paymentStore!.isCardLinkedToPortal) {
         if (this.paymentStore!.isStripePortalAvailable) {
           requests.push(setPaymentAccount());
 
