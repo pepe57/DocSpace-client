@@ -206,12 +206,12 @@ const Warning = ({
     if (warningText) setWarningText("");
   }, [isBackupRoute]);
 
-if (isPaymentsServiceRoute && !isPayerInfoLoaded) return null;
-
-if (
+  if (
     (isPortalPaymentsRoute || isWalletRoute || isPaymentsServiceRoute) &&
     !isPayer
   ) {
+    if (!isPayerInfoLoaded) return null;
+
     return (
       <WarningComponent
         title={
