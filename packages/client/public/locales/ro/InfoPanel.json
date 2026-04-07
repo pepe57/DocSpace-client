@@ -98,5 +98,9 @@
   "SubmenuHistory": "Istoric",
   "UserFileUpdated": "Fişier actualizat.",
   "Users": "Utilizatori",
-  "Versions": "Versiuni"
+  "Versions": "Versiuni",
+  "LastUpdateInfo": "Ultima actualizare",
+  "AIAgentsEmptyScreenTent": "Vezi detalii despre {{aiAgents}} aici",
+  "NoAgent": "Niciun {{aiAgent}}",
+  "RoomChangeOwner": "Proprietarul sălii a fost schimbat."
 }

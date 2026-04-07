@@ -98,5 +98,9 @@
   "SubmenuHistory": "Istorija",
   "UserFileUpdated": "Datoteka ažurirana.",
   "Users": "Korisnici",
-  "Versions": "Verzije"
+  "Versions": "Verzije",
+  "LastUpdateInfo": "Poslednje ažuriranje",
+  "AIAgentsEmptyScreenTent": "Pogledajte detalje o {{aiAgents}} ovde",
+  "NoAgent": "Nema {{aiAgent}}",
+  "RoomChangeOwner": "Vlasnik sobe je promenjen."
 }

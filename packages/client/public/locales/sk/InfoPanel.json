@@ -98,5 +98,9 @@
   "SubmenuHistory": "História",
   "UserFileUpdated": "Súbor aktualizovaný.",
   "Users": "Používatelia",
-  "Versions": "Verzie"
+  "Versions": "Verzie",
+  "LastUpdateInfo": "Posledná aktualizácia",
+  "AIAgentsEmptyScreenTent": "Pozrite si podrobnosti o {{aiAgents}} tu",
+  "NoAgent": "Žiadny {{aiAgent}}",
+  "RoomChangeOwner": "Vlastník miestnosti bol zmenený."
 }

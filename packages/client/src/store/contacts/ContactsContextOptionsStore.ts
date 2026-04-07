@@ -353,7 +353,7 @@ class ContactsConextOptionsStore {
       label: getUserTypeTranslation(EmployeeType.Admin, t),
       title: getUserTypeTranslation(EmployeeType.Admin, t),
       icon: isGuests ? PersonAdminReactSvgUrl : null,
-      badgeLabel: isGuests ? t("Common:Paid") : undefined,
+      badgeLabel: isGuests && !standalone ? t("Common:Paid") : undefined,
       isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.Admin,
@@ -368,7 +368,7 @@ class ContactsConextOptionsStore {
       label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       icon: isGuests ? PersonManagerReactSvgUrl : null,
-      badgeLabel: isGuests ? t("Common:Paid") : undefined,
+      badgeLabel: isGuests && !standalone? t("Common:Paid") : undefined,
       isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.RoomAdmin,
@@ -402,7 +402,7 @@ class ContactsConextOptionsStore {
       isActive: item ? isVisitor : userSelectionRole === EmployeeType.Guest,
     };
 
-    if (isUserAdmin) {
+    if (isUserAdmin || isUserOwner) {
       if (isUserOwner) {
         options.push(adminOption);
       }
@@ -681,7 +681,7 @@ class ContactsConextOptionsStore {
           ]
         : []),
 
-      ...(isAdmin
+      ...(isAdmin || isOwner
         ? [
             {
               id: "accounts-add_manager",

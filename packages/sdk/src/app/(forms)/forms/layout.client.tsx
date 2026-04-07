@@ -27,18 +27,22 @@
 "use client";
 
 import React from "react";
+import { createPortal } from "react-dom";
 import { observer } from "mobx-react";
+import { runInAction } from "mobx";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import Section from "@docspace/ui-kit/components/section";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
+import { frameCallbackData, frameCallEvent } from "@docspace/shared/utils/common";
+import { ShareAccessRights } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
-import { FormsSection } from "@/types/forms";
-import { sectionFromPathname, sectionToPath } from "../_utils/sectionFromPathname";
+import { FormsSection, DEFAULT_SETTINGS_SUBSECTION, type CustomActionsConfig } from "@/types/forms";
+import { sectionFromPathname, sectionToPath, settingsSubSectionToPath } from "../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 // LibraryNavigationStore removed — library uses URL routing now
 import { useFormsListStore } from "../_store/FormsListStore";
@@ -53,6 +57,9 @@ import useFormsSocket from "../_hooks/useFormsSocket";
 import useFormEventHooks from "../_hooks/useFormEventHooks";
 import useEditorGuard from "../_hooks/useEditorGuard";
 import { MIN_SECTION_WIDTH } from "../_api/aiAgentSettings";
+import { useFormsTourStore } from "../_store/FormsTourStore";
+import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
+import useFormsTour from "../_hooks/useFormsTour";
 import FormsSidebar from "../_components/sidebar";
 import FormsEditor from "../_components/forms-editor";
 import AiChatPanel from "../_components/ai-chat-panel";
@@ -60,6 +67,8 @@ import AiChatButton from "../_components/ai-chat-button";
 import CreateFormDialog from "../_components/create-form-dialog";
 import FormsHeader from "../_components/forms-header";
 import MobileStub from "../_components/mobile-stub";
+import WelcomeTourDialog from "../_components/welcome-tour-dialog";
+import { createMockFormFiles, createMockFormFolders, createMockCompletedFiles } from "../_utils/mockFormFiles";
 import styles from "../_components/forms-layout/FormsLayout.module.scss";
 
 type FormsShellProps = {
@@ -68,7 +77,7 @@ type FormsShellProps = {
 };
 
 const FormsShell = ({ commonData, children }: FormsShellProps) => {
-  useSDKConfig();
+  const { sdkConfig } = useSDKConfig();
   const isReady = useInitCommonStores(commonData);
 
   const {
@@ -86,11 +95,22 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const { roomId, socketUrl, hasManagementAccess } = formsSettingsStore;
   const formsListStore = useFormsListStore();
   const { items, folders, isLoading } = formsListStore;
+  const tourStore = useFormsTourStore();
+  const customActionsStore = useFormsCustomActionsStore();
   const { currentDeviceType } = useDeviceType();
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
+
+  const initialShowMenu = React.useRef(
+    searchParams.get("showMenu") !== "false",
+  );
+  const showMenu = initialShowMenu.current && sdkConfig?.showMenu !== false;
+
+  const uploadFilesDirectRef = React.useRef<(files: File[]) => Promise<void>>(
+    async () => {},
+  );
 
   const authTokenSet = React.useRef(false);
   React.useEffect(() => {
@@ -102,6 +122,99 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       setAuthToken(token);
     }
   }, [commonData.authToken]);
+
+  const appReadySent = React.useRef(false);
+  React.useEffect(() => {
+    if (isReady && !appReadySent.current) {
+      appReadySent.current = true;
+      frameCallEvent({ event: "onAppReady", data: {} });
+    }
+  }, [isReady]);
+
+  const prevSectionForEvent = React.useRef(activeSection);
+  React.useEffect(() => {
+    if (prevSectionForEvent.current !== activeSection) {
+      prevSectionForEvent.current = activeSection;
+      frameCallEvent({ event: "onNavigate", data: { section: activeSection } });
+    }
+  }, [activeSection]);
+
+  React.useEffect(() => {
+    const handler = (e: MessageEvent) => {
+      let eventData;
+      try {
+        eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+      } catch {
+        return;
+      }
+
+      if (
+        eventData?.type === "uploadFileData" &&
+        eventData?.buffer instanceof ArrayBuffer
+      ) {
+        const fileName = eventData.fileName as string;
+        const file = new File([eventData.buffer], fileName, {
+          lastModified: eventData.lastModified,
+        });
+        uploadFilesDirectRef
+          .current([file])
+          .then(() => {
+            frameCallEvent({
+              event: "onUploadSuccess",
+              data: { fileName, fileSize: file.size },
+            });
+          })
+          .catch((error: unknown) => {
+            frameCallEvent({
+              event: "onUploadError",
+              data: {
+                fileName,
+                message:
+                  error instanceof Error ? error.message : String(error),
+              },
+            });
+          });
+        return;
+      }
+
+      const methodName = eventData?.data?.methodName;
+      const data = eventData?.data?.data;
+
+      switch (methodName) {
+        case "navigateSection": {
+          const section = data?.section as string;
+          if (!section) return;
+
+          const validSections = Object.values(FormsSection) as string[];
+          if (!validSections.includes(section)) return;
+
+          const params = new URLSearchParams();
+          const rid = searchParams.get("roomId") ?? "";
+          const lid = searchParams.get("libraryId") ?? "";
+          if (rid) params.set("roomId", rid);
+          if (lid) params.set("libraryId", lid);
+          const qs = params.toString();
+
+          if (section === FormsSection.Settings) {
+            router.replace(`${settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION)}${qs ? `?${qs}` : ""}`);
+          } else {
+            router.replace(`${sectionToPath(section as FormsSection)}${qs ? `?${qs}` : ""}`);
+          }
+
+          frameCallbackData({ section });
+          break;
+        }
+        case "setCustomActions": {
+          if (data) customActionsStore.setActions(data as CustomActionsConfig);
+          frameCallbackData(data);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, [router, searchParams, customActionsStore]);
 
   const socketFolderIds = React.useMemo(() => {
     const ids = new Set<string>();
@@ -171,51 +284,73 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     prevInProgressFolderShell.current = inProgressFolder;
 
     if (sectionChanged) {
-      if (prevSection === FormsSection.CompletedForms) {
-        goBackToCompletedRoot();
-      }
-      if (prevSection === FormsSection.InProgress) {
-        goBackToInProgressRoot();
-      }
-      // Library navigation state is now URL-based — no reset needed
+      // Navigation within settings sub-pages should not trigger full section-change logic
+      const isSettingsInternalNav =
+        prevSection === FormsSection.Settings &&
+        activeSection === FormsSection.Settings;
 
-      if (editingFile) {
-        // Clear stale data so skeletons show while new section loads
-        formsListStore.setItems([], 0);
-        formsListStore.setFolders([]);
-        formsListStore.setIsLoading(true);
-        pendingEditorClose.current = true;
-      } else {
-        closeEditor();
-      }
-
-      if (
-        activeSection === FormsSection.Settings ||
-        activeSection === FormsSection.Library
-      ) {
-        pendingEditorClose.current = false;
-        closeEditor();
-        formsListStore.setIsLoading(false);
+      if (isSettingsInternalNav) {
         setTimeout(() => {
           window.dispatchEvent(
             new CustomEvent(AnimationEvents.END_ANIMATION),
           );
         }, 0);
-      }
+      } else {
+        if (prevSection === FormsSection.CompletedForms) {
+          goBackToCompletedRoot();
+        }
+        if (prevSection === FormsSection.InProgress) {
+          goBackToInProgressRoot();
+        }
 
-      if (prevSection === FormsSection.Settings) {
-        formsListStore.setItems([], 0);
-        formsListStore.setFolders([]);
-        formsListStore.setIsLoading(true);
+        if (tourStore.showMockItems) {
+          // During tour: skip data clearing, just fire animation
+          closeEditor();
+          formsListStore.setIsLoading(false);
+          setTimeout(() => {
+            window.dispatchEvent(
+              new CustomEvent(AnimationEvents.END_ANIMATION),
+            );
+          }, 0);
+        } else {
+          if (editingFile) {
+            formsListStore.setItems([], 0);
+            formsListStore.setFolders([]);
+            formsListStore.setIsLoading(true);
+            pendingEditorClose.current = true;
+          } else {
+            closeEditor();
+          }
+
+          if (
+            activeSection === FormsSection.Settings ||
+            activeSection === FormsSection.Library
+          ) {
+            pendingEditorClose.current = false;
+            closeEditor();
+            formsListStore.setIsLoading(false);
+            setTimeout(() => {
+              window.dispatchEvent(
+                new CustomEvent(AnimationEvents.END_ANIMATION),
+              );
+            }, 0);
+          }
+
+          if (prevSection === FormsSection.Settings) {
+            formsListStore.setItems([], 0);
+            formsListStore.setFolders([]);
+            formsListStore.setIsLoading(true);
+          }
+        }
       }
     }
 
     if (sectionChanged || folderChanged) {
-      if (hasManagementAccess) {
+      if (hasManagementAccess && !tourStore.isRunning) {
         aiStore.clearOverride();
       }
 
-      if (activeSection === FormsSection.Settings && hasManagementAccess) {
+      if (activeSection === FormsSection.Settings && hasManagementAccess && !tourStore.isRunning) {
         aiStore.closePanel();
       }
 
@@ -243,7 +378,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     prevCompletedForFormCompletion.current = completedFolder;
 
     if (completedFolder && completedFolder !== prev && editingFile) {
-      closeEditor();
       const params = new URLSearchParams();
       const rid = searchParams.get("roomId") ?? "";
       const lid = searchParams.get("libraryId") ?? "";
@@ -254,16 +388,18 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         `${sectionToPath(FormsSection.CompletedForms)}${qs ? `?${qs}` : ""}`,
       );
     }
-  }, [completedFolder, editingFile, closeEditor, router, searchParams]);
+  }, [completedFolder, editingFile, router, searchParams]);
 
   const {
     onUploadFiles,
+    uploadFilesToFolder,
     onCreateBlankForm,
     isCreateFormDialogVisible,
     isCreatingForm,
     onCloseCreateFormDialog,
     onSaveCreateForm,
-  } = useFolderActions();
+  } = useFolderActions(fetchSection);
+  uploadFilesDirectRef.current = uploadFilesToFolder;
 
   const formsDataValue = React.useMemo(
     () => ({ fetchSection, fetchMore, fetchSubfolder }),
@@ -273,6 +409,68 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const handleEditorNavigatedAway = React.useCallback(() => {
     closeEditor();
   }, [closeEditor]);
+
+  const { Tour } = useFormsTour();
+
+  // Show welcome dialog on first visit
+  const [showWelcome, setShowWelcome] = React.useState(false);
+  React.useEffect(() => {
+    if (isReady && !tourStore.tourCompleted && showMenu) {
+      setShowWelcome(true);
+    }
+  }, [isReady, tourStore.tourCompleted, showMenu]);
+
+  // Clean up mock data when tour ends
+  const prevTourRunning = React.useRef(tourStore.isRunning);
+  const savedUserAccess = React.useRef<number | null>(null);
+  const savedAskFromDBAgentId = React.useRef<number | null>(null);
+  const savedAiAgentEnabled = React.useRef<boolean | null>(null);
+  React.useEffect(() => {
+    if (prevTourRunning.current && !tourStore.isRunning) {
+      // Tour just ended — restore original state
+      if (tourStore.showMockItems === false) {
+        formsListStore.reset();
+        fetchSection();
+      }
+      runInAction(() => {
+        if (savedAiAgentEnabled.current !== null) {
+          aiStore.aiAgentEnabled = savedAiAgentEnabled.current;
+          savedAiAgentEnabled.current = null;
+        }
+        if (savedAskFromDBAgentId.current !== null) {
+          aiStore.askFromDBAgentId = savedAskFromDBAgentId.current;
+          savedAskFromDBAgentId.current = null;
+        }
+        if (savedUserAccess.current !== null) {
+          formsSettingsStore.userAccess = savedUserAccess.current;
+          savedUserAccess.current = null;
+        }
+      });
+    }
+    prevTourRunning.current = tourStore.isRunning;
+  }, [tourStore.isRunning, tourStore.showMockItems, formsListStore, fetchSection, aiStore, formsSettingsStore]);
+
+  // Inject mock data when navigating between sections during tour
+  React.useEffect(() => {
+    if (!tourStore.isRunning) return;
+
+    if (activeSection === FormsSection.CompletedForms) {
+      if (completedFolder) {
+        formsListStore.setFolders([]);
+        formsListStore.setItems(createMockCompletedFiles(completedFolder.title), 5);
+      } else {
+        formsListStore.setFolders(createMockFormFolders());
+        formsListStore.setItems([], 0);
+      }
+    } else if (activeSection === FormsSection.InProgress) {
+      formsListStore.setFolders(createMockFormFolders());
+      formsListStore.setItems([], 0);
+    } else if (activeSection === FormsSection.MyForms) {
+      formsListStore.setFolders([]);
+      formsListStore.setItems(createMockFormFiles(), 10);
+    }
+    formsListStore.setIsLoading(false);
+  }, [activeSection, completedFolder, tourStore.isRunning, formsListStore]);
 
   const rootRef = React.useRef<HTMLDivElement>(null);
   const isSettings = activeSection === FormsSection.Settings;
@@ -302,7 +500,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       }
     >
       <MobileStub />
-      <FormsSidebar />
+      {showMenu && <FormsSidebar />}
       <AiChatPanel rootRef={rootRef} />
       <div className={styles.sectionArea}>
         <Section
@@ -340,6 +538,36 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         onClose={onCloseCreateFormDialog}
         onSave={onSaveCreateForm}
       />
+      <WelcomeTourDialog
+        visible={showWelcome}
+        onStart={() => {
+          setShowWelcome(false);
+          formsListStore.setFolders([]);
+          formsListStore.setItems(createMockFormFiles(), 10);
+          formsListStore.setIsLoading(false);
+          // Ensure AI features are visible during tour
+          runInAction(() => {
+            if (!aiStore.aiAgentEnabled) {
+              savedAiAgentEnabled.current = aiStore.aiAgentEnabled;
+              aiStore.aiAgentEnabled = true;
+            }
+            if (!aiStore.askFromDBAgentId) {
+              savedAskFromDBAgentId.current = aiStore.askFromDBAgentId;
+              aiStore.askFromDBAgentId = -999;
+            }
+            if (!hasManagementAccess) {
+              savedUserAccess.current = formsSettingsStore.userAccess as number;
+              formsSettingsStore.userAccess = ShareAccessRights.RoomManager;
+            }
+          });
+          tourStore.startTour();
+        }}
+        onSkip={() => {
+          setShowWelcome(false);
+          tourStore.completeTour();
+        }}
+      />
+      {Tour && createPortal(Tour, document.body)}
     </div>
   );
 };

@@ -8,4 +8,5 @@ export type HeaderProps = {
   isEmptyList: boolean;
 
   showTitle?: boolean;
+  onBurgerClick?: () => void;
 };

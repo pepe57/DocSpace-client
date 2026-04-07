@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { headers, cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FilterType, FolderType } from "@docspace/shared/enums";
@@ -35,6 +36,7 @@ import { getSelf } from "@/api/people";
 import { getDefaultProvider } from "@/api/ai";
 import { getSettings } from "@/api/settings";
 import {
+  FILTER_HEADER,
   LIBRARY_ID_HEADER,
   ROOM_ID_HEADER,
   PATHNAME_HEADER,
@@ -62,6 +64,12 @@ export default async function FormsServerLayout({
     pathname.endsWith("/forms") ||
     pathname.endsWith("/forms/");
 
+  const filterHeader = hdrs.get(FILTER_HEADER) || "";
+  const filterParams = new URLSearchParams(filterHeader);
+  const providerName = filterParams.get("providerName") || "";
+  const inviteKey = filterParams.get("inviteKey") || "";
+  const emplType = filterParams.get("emplType") || "";
+
   const [filesSettings, user, defaultProvider, portalSettings, roomData] =
     await Promise.all([
       getFilesSettings(),
@@ -80,6 +88,27 @@ export default async function FormsServerLayout({
           ).catch(() => undefined)
         : undefined,
     ]);
+
+  if (!user && providerName) {
+    const proto = hdrs.get("x-forwarded-proto") || "https";
+    const host = hdrs.get("x-forwarded-host") || hdrs.get("host") || "";
+    const returnPath = pathname || "/forms/my-forms";
+    const returnParams = new URLSearchParams();
+    if (roomId) returnParams.set("roomId", roomId);
+    if (libraryId) returnParams.set("libraryId", libraryId);
+    const showMenu = filterParams.get("showMenu");
+    if (showMenu) returnParams.set("showMenu", showMenu);
+    const returnQs = returnParams.toString();
+    const successRedirectURL = `${proto}://${host}/sdk${returnPath}${returnQs ? `?${returnQs}` : ""}`;
+
+    const authParams = new URLSearchParams();
+    authParams.set("providerName", providerName);
+    if (inviteKey) authParams.set("inviteKey", inviteKey);
+    if (emplType) authParams.set("emplType", emplType);
+    authParams.set("successRedirectURL", successRedirectURL);
+
+    redirect(`/auth?${authParams.toString()}`);
+  }
 
   const socketUrl =
     portalSettings && typeof portalSettings !== "string"

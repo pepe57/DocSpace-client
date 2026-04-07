@@ -56,5 +56,9 @@
   "UploadDevicePDFFormOptionTitle": "デバイスからのアップロード",
   "UploadFromPortalTitle": "{{productName}}からアップロード",
   "UploadPDFFormOptionDescription": "{{productName}}で利用可能なPDFフォームを選択し、ルームにアップロードする。",
-  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ"
+  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ",
+  "EmptyAIAgentsTitle": "{{aiAgent}}を作成してください。",
+  "CreateAIAgentDescription": "最初の{{aiAgent}}の構築を開始しましょう。",
+  "EmptyAIAgentsAIDisabledDescription": "このセクションでは、ユーザーは{{aiAgents}} — ドキュメントやその他のタスクを処理するためのスマートアシスタント — を使用できます。\nそれらを使用するには、{{productName}}管理者によってAI機能サービスが有効になっている必要があります。",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "{{aiAgents}}を作成および使用するには、ウォレットを接続し、{{productName}}の設定でAI機能サービスを有効にしてください。完了すると、{{aiAgents}}を使用したり、チームと共同作業したりできるようになります。"
 }

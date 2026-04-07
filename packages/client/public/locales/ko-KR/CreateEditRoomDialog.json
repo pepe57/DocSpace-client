@@ -39,5 +39,6 @@
   "UserName": "사용자 이름",
   "ViewerInfo": "뷰어 정보",
   "WatermarkPreview": "워터마크 미리보기",
-  "WatermarkPreviewHelp": "이 이미지 미리보기는 워터마크가 파일에 어떻게 표시되는지 대략적으로 보여줍니다. "
+  "WatermarkPreviewHelp": "이 이미지 미리보기는 워터마크가 파일에 어떻게 표시되는지 대략적으로 보여줍니다. ",
+  "ConfigureDatabaseConnection": "통합 → 타사 서비스에서 데이터베이스 연결을 구성하세요."
 }

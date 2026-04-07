@@ -98,5 +98,9 @@
   "SubmenuHistory": "Histori",
   "UserFileUpdated": "Skedari u përditësua.",
   "Users": "Përdoruesit",
-  "Versions": "Versionet"
+  "Versions": "Versionet",
+  "LastUpdateInfo": "Përditësim i fundit",
+  "AIAgentsEmptyScreenTent": "Shikoni detajet e {{aiAgents}} këtu",
+  "NoAgent": "Asnjë {{aiAgent}}",
+  "RoomChangeOwner": "Pronari i dhomës u ndryshua."
 }

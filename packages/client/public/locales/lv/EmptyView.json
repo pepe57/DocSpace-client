@@ -56,5 +56,9 @@
   "UploadDevicePDFFormOptionTitle": "Augšupielādēt no ierīces",
   "UploadFromPortalTitle": "Augšupielādēt no {{productName}}",
   "UploadPDFFormOptionDescription": "Izvēlieties gatavu PDF veidlapu, kas pieejama šeit: {{productName}}, un augšupielādējiet to telpā.",
-  "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā"
+  "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā",
+  "EmptyAIAgentsTitle": "Izveido savu {{aiAgent}}",
+  "CreateAIAgentDescription": "Sāciet veidot savu pirmo {{aiAgent}}",
+  "EmptyAIAgentsAIDisabledDescription": "Šī sadaļa ļauj lietotājiem strādāt ar {{aiAgents}} — viedajiem asistentiem dokumentu un citu uzdevumu apstrādei.\nLai sāktu tos lietot, jūsu {{productName}} administratoram ir jāieslēdz MI funkciju pakalpojums.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Lai izveidotu un izmantotu {{aiAgents}}, savienojiet savu maku un aktivizējiet MI funkciju pakalpojumu {{productName}} iestatījumos. Kad tas būs izdarīts, jūs varēsiet strādāt ar {{aiAgents}} un sadarboties ar savu komandu."
 }

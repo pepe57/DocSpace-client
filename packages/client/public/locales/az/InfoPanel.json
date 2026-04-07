@@ -98,5 +98,9 @@
   "SubmenuHistory": "Tarixçə",
   "UserFileUpdated": "Fayl yeniləndi.",
   "Users": "İstifadəçilər",
-  "Versions": "Versiyalar"
+  "Versions": "Versiyalar",
+  "LastUpdateInfo": "Son yeniləmə",
+  "AIAgentsEmptyScreenTent": "Burada {{aiAgents}} detallarına baxın",
+  "NoAgent": "{{aiAgent}} yoxdur",
+  "RoomChangeOwner": "Otağın sahibi dəyişdi."
 }

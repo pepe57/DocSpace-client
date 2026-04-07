@@ -56,5 +56,9 @@
   "UploadDevicePDFFormOptionTitle": "تحميل من الجهاز",
   "UploadFromPortalTitle": "تحميل من {{productName}}",
   "UploadPDFFormOptionDescription": "حدد نموذج  PDFجاهزًا متاحًا في {{productName}} وقم بتحميله إلى الغرفة. ",
-  "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية"
+  "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية",
+  "EmptyAIAgentsTitle": "أنشئ {{aiAgent}} الخاص بك",
+  "CreateAIAgentDescription": "ابدأ في بناء أول {{aiAgent}} لديك",
+  "EmptyAIAgentsAIDisabledDescription": "يسمح هذا القسم للمستخدمين بالعمل مع {{aiAgents}} – المساعدون الذكيون لمعالجة المستندات والمهام الأخرى. \nلبدء استخدامهم، يجب تمكين خدمة ميزات الذكاء الاصطناعي بواسطة مسؤول {{productName}}.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "لإنشاء واستخدام {{aiAgents}}، قم بتوصيل محفظتك وتمكين خدمة ميزات الذكاء الاصطناعي في إعدادات {{productName}}. بمجرد الانتهاء من ذلك، ستتمكن من العمل مع {{aiAgents}} والتعاون مع فريقك."
 }

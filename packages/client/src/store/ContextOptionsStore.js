@@ -466,8 +466,8 @@ class ContextOptionsStore {
       .setFavoriteAction(action, items)
       .then(() =>
         action === "mark"
-          ? toastr.success(t("MarkedAsFavorite"))
-          : toastr.success(t("RemovedFromFavorites")),
+          ? toastr.success(t("Common:MarkedAsFavorite"))
+          : toastr.success(t("Common:RemovedFromFavorites")),
       )
       .catch((err) => toastr.error(err));
   };
@@ -1425,7 +1425,6 @@ class ContextOptionsStore {
   };
 
   onCreateTemplate = async () => {
-    this.oformsStore.setTemplateGalleryVisible(false);
     this.oformsStore.setIsVisibleInfoPanelTemplateGallery(false);
 
     const event = new Event(Events.CREATE);
@@ -2488,7 +2487,7 @@ class ContextOptionsStore {
       {
         id: "option_mark-as-favorite",
         key: "mark-as-favorite",
-        label: t("MarkAsFavorite"),
+        label: t("Common:MarkAsFavorite"),
         icon: FavoritesReactSvgUrl,
         onClick: () => this.onClickFavorite("mark", [item], t),
         disabled: false,
@@ -2507,7 +2506,7 @@ class ContextOptionsStore {
         label: t("Common:RemoveFromList"),
         icon: CircleCrossSvgUrl,
         onClick: () => this.onRemoveSharedFilesOrFolder([item]),
-        disabled: this.userStore?.user?.isAdmin || !item.external,
+        disabled: this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner || !item.external,
       },
       {
         id: "option_download-as",
@@ -2608,7 +2607,7 @@ class ContextOptionsStore {
       {
         id: "option_remove-from-favorites",
         key: "remove-from-favorites",
-        label: t("RemoveFromFavorites"),
+        label: t("Common:RemoveFromFavorites"),
         icon: FavoritesFillReactSvgUrl,
         onClick: () => this.onClickFavorite("remove", [item], t),
         disabled: false,
@@ -2697,7 +2696,7 @@ class ContextOptionsStore {
 
     let minItemsCount = 3;
     if (item.isAIAgent && item.inRoom) {
-      if (this.userStore?.user?.isAdmin) {
+      if (this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner) {
         if (
           item.access === ShareAccessRights.RoomManager ||
           item.access === ShareAccessRights.None
@@ -3558,14 +3557,14 @@ class ContextOptionsStore {
 
     const uploadFiles = {
       key: "upload-files",
-      label: t("Article:UploadFiles"),
+      label: t("Common:UploadFiles"),
       onClick: () => this.onUploadAction("file"),
       icon: ActionsUploadReactSvgUrl,
     };
 
     const uploadFolder = {
       key: "upload-folder",
-      label: t("Article:UploadFolder"),
+      label: t("Common:UploadFolder"),
       onClick: () => this.onUploadAction("folder"),
       icon: ActionsUploadReactSvgUrl,
     };

@@ -56,5 +56,9 @@
   "UploadDevicePDFFormOptionTitle": "从设备上传",
   "UploadFromPortalTitle": "从{{productName}}上传",
   "UploadPDFFormOptionDescription": "选择{{productName}}中可用的现成 PDF 表单并将其上传到房间。",
-  "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间"
+  "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间",
+  "EmptyAIAgentsTitle": "创建您的 {{aiAgent}}",
+  "CreateAIAgentDescription": "开始构建你的第一个{{aiAgent}}",
+  "EmptyAIAgentsAIDisabledDescription": "本部分允许用户使用 {{aiAgents}} — 用于处理文档和其他任务的智能助手。\n要开始使用它们，您的 {{productName}} 管理员必须启用 AI 功能服务。",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "要创建和使用 {{aiAgents}}，请连接您的钱包并在 {{productName}} 设置中启用 AI 功能服务。完成此操作后，您将能够使用 {{aiAgents}} 并与您的团队协作。"
 }

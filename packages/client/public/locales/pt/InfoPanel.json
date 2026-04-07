@@ -98,5 +98,9 @@
   "SubmenuHistory": "História",
   "UserFileUpdated": "Arquivo atualizado.",
   "Users": "Usuários",
-  "Versions": "Versões"
+  "Versions": "Versões",
+  "LastUpdateInfo": "Última atualização",
+  "AIAgentsEmptyScreenTent": "Veja os detalhes de {{aiAgents}} aqui",
+  "NoAgent": "Nenhum {{aiAgent}}",
+  "RoomChangeOwner": "Proprietário da sala alterado."
 }

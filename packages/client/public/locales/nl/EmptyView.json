@@ -56,5 +56,9 @@
   "UploadDevicePDFFormOptionTitle": "Uploaden vanaf apparaat",
   "UploadFromPortalTitle": "Uploaden van {{productName}}",
   "UploadPDFFormOptionDescription": "Selecteer een PDF formulier dat beschikbaar is in {{productName}} en upload het naar de kamer.",
-  "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer"
+  "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer",
+  "EmptyAIAgentsTitle": "Maak je {{aiAgent}} aan",
+  "CreateAIAgentDescription": "Begin met het bouwen van je eerste {{aiAgent}}",
+  "EmptyAIAgentsAIDisabledDescription": "Deze sectie stelt gebruikers in staat om met {{aiAgents}} te werken – slimme assistenten voor het verwerken van documenten en andere taken.\nOm ze te gaan gebruiken, moet de AI-functieservice worden ingeschakeld door uw {{productName}}-beheerder.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Om {{aiAgents}} te maken en te gebruiken, verbind je je portemonnee en activeer je de AI-functieservice in de {{productName}}-instellingen. Zodra dit is gedaan, kun je met {{aiAgents}} werken en samenwerken met je team."
 }

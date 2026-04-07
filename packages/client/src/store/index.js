@@ -104,6 +104,7 @@ const pluginStore = new PluginStore(
   settingsStore,
   selectedFolderStore,
   userStore,
+  currentTariffStatusStore,
 );
 
 const paymentStore = new PaymentStore(
@@ -461,3 +462,4 @@ const store = {
 };
 
 export default store;
+

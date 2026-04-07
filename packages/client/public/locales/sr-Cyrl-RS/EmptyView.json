@@ -56,5 +56,9 @@
   "UploadDevicePDFFormOptionTitle": "Отпреми са уређаја",
   "UploadFromPortalTitle": "Отпреми из {{productName}}",
   "UploadPDFFormOptionDescription": "Одаберите спреман PDF формулар доступан у {{productName}} и отпремите га у просторију.",
-  "VirtualDataRoomEmptyTitle": "Добродошли у Виртуелну собу за податке"
+  "VirtualDataRoomEmptyTitle": "Добродошли у Виртуелну собу за податке",
+  "EmptyAIAgentsTitle": "Креирајте свог {{aiAgent}}",
+  "CreateAIAgentDescription": "Почните да градите свог првог {{aiAgent}}",
+  "EmptyAIAgentsAIDisabledDescription": "Ова секција омогућава корисницима да раде са {{aiAgents}} — паметним асистентима за обраду докумената и других задатака. \nДа бисте почели да их користите, сервис за ВИ функције мора бити омогућен од стране {{productName}} администратора.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Да бисте креирали и користили {{aiAgents}}, повежите свој новчаник и укључите ВИ функције у подешавањима {{productName}}. Када то завршите, моћи ћете да радите са {{aiAgents}} и сарађујете са својим тимом."
 }

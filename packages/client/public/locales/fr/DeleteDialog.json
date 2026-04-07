@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "Ces éléments seront définitivement supprimés dans 30 jours.",
   "ItemsPermanentlyDeleted": "Ces éléments seront définitivement supprimés de la {{trashSection}}.",
   "removeFromListDescription": "Vous êtes sur le point de supprimer <1>{{title}}</1> de la liste. Souhaitez-vous vraiment continuer ?",
-  "removeFromListDescriptionPlural": "Vous êtes sur le point de supprimer <1>éléments ({{count}})</1> de la liste. Souhaitez-vous vraiment continuer ?"
+  "removeFromListDescriptionPlural": "Vous êtes sur le point de supprimer <1>éléments ({{count}})</1> de la liste. Souhaitez-vous vraiment continuer ?",
+  "DeleteRooms": "Les <strong>salles sélectionnées ({{count}})</strong> seront définitivement supprimées. Toutes les données et tous les accès utilisateurs seront perdus.",
+  "DeleteRoomsTitle": "Supprimer cette salle ?"
 }

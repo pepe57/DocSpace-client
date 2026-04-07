@@ -56,5 +56,9 @@
   "UploadDevicePDFFormOptionTitle": "Subir desde el dispositivo",
   "UploadFromPortalTitle": "Subir desde {{productName}}",
   "UploadPDFFormOptionDescription": "Seleccione un formulario PDF listo disponible en {{productName}} y cárguelo en la sala.",
-  "VirtualDataRoomEmptyTitle": "Bienvenido/a a la Sala de datos virtuales"
+  "VirtualDataRoomEmptyTitle": "Bienvenido/a a la Sala de datos virtuales",
+  "EmptyAIAgentsTitle": "Crea tu {{aiAgent}}",
+  "CreateAIAgentDescription": "Comienza a construir tu primer {{aiAgent}}",
+  "EmptyAIAgentsAIDisabledDescription": "Esta sección permite a los usuarios trabajar con {{aiAgents}} — asistentes inteligentes para gestionar documentos y otras tareas.\nPara empezar a utilizarlos, el servicio de funciones de IA debe estar habilitado por el administrador de {{productName}}.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Para crear y usar {{aiAgents}}, conecta tu billetera y habilita el servicio de funciones de IA en la configuración de {{productName}}. Una vez hecho esto, podrás trabajar con {{aiAgents}} y colaborar con tu equipo."
 }

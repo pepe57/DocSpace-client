@@ -3,7 +3,7 @@
   "content": "Webhook redelivered",
   "content_en_sha1_hash": "13d28a1ef0e6e6d4e990ba5202f4b9fd878de944",
   "created_at": "2025-05-19T21:30:49.883Z",
-  "updated_at": "2025-05-24T02:03:31.533Z",
+  "updated_at": "2026-04-03T21:51:41.091Z",
   "comment": {
     "text": "This translation key is used to display a success message when a webhook is successfully retried or redelivered. It appears in various UI elements, such as navigation headers and history tables, after an action related to webhooks has been completed.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader.js",
-      "line_number": 118,
-      "context": "navigate(`${path}/developer-tools/webhooks/${id}`);\n };\n \n const handleRetryEvent = async () => {\n await retryWebhook(eventId);\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n return (\n <HeaderContainer>\n <div className=\"headerNavigation\">",
+      "line_number": 114,
+      "context": "navigate(`/developer-tools/webhooks/${id}`);\n };\n \n const handleRetryEvent = async () => {\n await retryWebhook(eventId);\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n return (\n <HeaderContainer>\n <div className=\"headerNavigation\">",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader.js",
-      "line_number": 228,
+      "line_number": 224,
       "context": "await fetchHistoryItems({\n ...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(\n `${t(\"WebhookRedilivered\")}: ${checkedEventIds.length}`,\n <b>{t(\"Common:Done\")}</b>,\n );\n } catch (error) {\n console.error(error);\n toastr.error(error);",
       "module": "/packages/client"
     },

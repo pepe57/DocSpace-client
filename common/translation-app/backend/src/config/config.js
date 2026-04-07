@@ -31,6 +31,7 @@ const serverConfig = {
 // Ollama configuration
 const ollamaConfig = {
   apiUrl: process.env.OLLAMA_API_URL || "http://localhost:11434",
+  requestTimeout: parseInt(process.env.OLLAMA_TIMEOUT_MS || "120000", 10), // 2 min default
 };
 
 // Translation configuration

@@ -98,5 +98,9 @@
   "SubmenuHistory": "Lịch sử",
   "UserFileUpdated": "Tập tin đã được cập nhật. vai trò",
   "Users": "Người dùng",
-  "Versions": "Phiên Bản"
+  "Versions": "Phiên Bản",
+  "LastUpdateInfo": "Cập nhật lần cuối",
+  "AIAgentsEmptyScreenTent": "Xem chi tiết về {{aiAgents}} tại đây",
+  "NoAgent": "Không có {{aiAgent}}",
+  "RoomChangeOwner": "Chủ phòng đã thay đổi."
 }

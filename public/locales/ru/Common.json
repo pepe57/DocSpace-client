@@ -1200,5 +1200,21 @@
   "YourCurrentDomain": "Ваш текущий домен",
   "YourFurtherEditsNotSaved": "Ваши дальнейшие изменения могут не сохраниться.",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша очередь"
+  "YourTurn": "Ваша очередь",
+  "MarkAsFavorite": "Добавить в избранное",
+  "RemoveFromFavorites": "Удалить из избранного",
+  "RemovedFromFavorites": "Удалено из избранного",
+  "FileManagement": "Управление файлами",
+  "InterfaceTheme": "Тема интерфейса",
+  "SystemTheme": "Использовать тему системы",
+  "SystemThemeDescription": "Автоматически переключайтесь между светлой и темной темами, когда это делает ваша система.",
+  "OriginalCopy": "Сохранять также копию файла в исходном формате",
+  "TrashMoveConfirmation": "Отображать уведомление при перемещении элементов в раздел {{sectionName}}",
+  "DisplayFileExtension": "Отображать расширение файла рядом с именем файла",
+  "MarkedAsFavorite": "Добавлено в избранное",
+  "UploadFiles": "Загрузить файлы",
+  "UploadFolder": "Загрузить папку",
+  "AskAnyQuestion": "Задайте любой вопрос или опишите, что вам нужно.",
+  "ChooseYourCountry": "Выберите свою страну",
+  "ChooseYourCountryDescription": "Выберите язык для просмотра доступных шаблонов форм"
 }
