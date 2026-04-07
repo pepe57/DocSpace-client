@@ -36,20 +36,33 @@ import Section from "@docspace/ui-kit/components/section";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
-import { frameCallbackData, frameCallEvent } from "@docspace/shared/utils/common";
+import {
+  frameCallbackData,
+  frameCallEvent,
+} from "@docspace/shared/utils/common";
 import { ShareAccessRights } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
-import { FormsSection, DEFAULT_SETTINGS_SUBSECTION, type CustomActionsConfig } from "@/types/forms";
-import { sectionFromPathname, sectionToPath, settingsSubSectionToPath } from "../_utils/sectionFromPathname";
+import {
+  FormsSection,
+  DEFAULT_SETTINGS_SUBSECTION,
+  type CustomActionsConfig,
+} from "@/types/forms";
+import {
+  sectionFromPathname,
+  sectionToPath,
+  settingsSubSectionToPath,
+} from "../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 // LibraryNavigationStore removed — library uses URL routing now
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsUserStore } from "../_store/FormsUserStore";
-import useInitCommonStores, { type CommonData } from "../_hooks/useInitCommonStores";
+import useInitCommonStores, {
+  type CommonData,
+} from "../_hooks/useInitCommonStores";
 import useFormsData from "../_hooks/useFormsData";
 import { FormsDataProvider } from "../_context/FormsDataContext";
 import useFolderActions from "../_hooks/useFolderActions";
@@ -68,7 +81,11 @@ import CreateFormDialog from "../_components/create-form-dialog";
 import FormsHeader from "../_components/forms-header";
 import MobileStub from "../_components/mobile-stub";
 import WelcomeTourDialog from "../_components/welcome-tour-dialog";
-import { createMockFormFiles, createMockFormFolders, createMockCompletedFiles } from "../_utils/mockFormFiles";
+import {
+  createMockFormFiles,
+  createMockFormFolders,
+  createMockCompletedFiles,
+} from "../_utils/mockFormFiles";
 import styles from "../_components/forms-layout/FormsLayout.module.scss";
 
 type FormsShellProps = {
@@ -108,6 +125,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   );
   const showMenu = initialShowMenu.current && sdkConfig?.showMenu !== false;
 
+  const uploadFilesDirectRef = React.useRef<(files: File[]) => Promise<void>>(
+    async () => {},
+  );
+
   const authTokenSet = React.useRef(false);
   React.useEffect(() => {
     const token = commonData.authToken;
@@ -121,11 +142,20 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
 
   const appReadySent = React.useRef(false);
   React.useEffect(() => {
+    console.log(isReady, appReadySent.current);
     if (isReady && !appReadySent.current) {
       appReadySent.current = true;
       frameCallEvent({ event: "onAppReady", data: {} });
     }
   }, [isReady]);
+
+  const prevSectionForEvent = React.useRef(activeSection);
+  React.useEffect(() => {
+    if (prevSectionForEvent.current !== activeSection) {
+      prevSectionForEvent.current = activeSection;
+      frameCallEvent({ event: "onNavigate", data: { section: activeSection } });
+    }
+  }, [activeSection]);
 
   React.useEffect(() => {
     const handler = (e: MessageEvent) => {
@@ -133,6 +163,34 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       try {
         eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
       } catch {
+        return;
+      }
+
+      if (
+        eventData?.type === "uploadFileData" &&
+        eventData?.buffer instanceof ArrayBuffer
+      ) {
+        const fileName = eventData.fileName as string;
+        const file = new File([eventData.buffer], fileName, {
+          lastModified: eventData.lastModified,
+        });
+        uploadFilesDirectRef
+          .current([file])
+          .then(() => {
+            frameCallEvent({
+              event: "onUploadSuccess",
+              data: { fileName, fileSize: file.size },
+            });
+          })
+          .catch((error: unknown) => {
+            frameCallEvent({
+              event: "onUploadError",
+              data: {
+                fileName,
+                message: error instanceof Error ? error.message : String(error),
+              },
+            });
+          });
         return;
       }
 
@@ -155,9 +213,13 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           const qs = params.toString();
 
           if (section === FormsSection.Settings) {
-            router.replace(`${settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION)}${qs ? `?${qs}` : ""}`);
+            router.replace(
+              `${settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION)}${qs ? `?${qs}` : ""}`,
+            );
           } else {
-            router.replace(`${sectionToPath(section as FormsSection)}${qs ? `?${qs}` : ""}`);
+            router.replace(
+              `${sectionToPath(section as FormsSection)}${qs ? `?${qs}` : ""}`,
+            );
           }
 
           frameCallbackData({ section });
@@ -193,10 +255,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     aiStore.folderAgentsMap,
   ]);
 
-  const socketFileIds = React.useMemo(
-    () => items.map((f) => f.id),
-    [items],
-  );
+  const socketFileIds = React.useMemo(() => items.map((f) => f.id), [items]);
 
   const formsData = useFormsData();
   const { fetchSection, fetchMore, fetchSubfolder } = formsData;
@@ -250,9 +309,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
 
       if (isSettingsInternalNav) {
         setTimeout(() => {
-          window.dispatchEvent(
-            new CustomEvent(AnimationEvents.END_ANIMATION),
-          );
+          window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
         }, 0);
       } else {
         if (prevSection === FormsSection.CompletedForms) {
@@ -309,7 +366,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         aiStore.clearOverride();
       }
 
-      if (activeSection === FormsSection.Settings && hasManagementAccess && !tourStore.isRunning) {
+      if (
+        activeSection === FormsSection.Settings &&
+        hasManagementAccess &&
+        !tourStore.isRunning
+      ) {
         aiStore.closePanel();
       }
 
@@ -321,7 +382,15 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         aiStore.setCurrentFolder(null);
       }
     }
-  }, [pathname, completedFolder, inProgressFolder, activeSection, hasManagementAccess, aiStore, formsListStore]);
+  }, [
+    pathname,
+    completedFolder,
+    inProgressFolder,
+    activeSection,
+    hasManagementAccess,
+    aiStore,
+    formsListStore,
+  ]);
 
   const prevEditingFile = React.useRef(editingFile);
   React.useEffect(() => {
@@ -347,16 +416,18 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         `${sectionToPath(FormsSection.CompletedForms)}${qs ? `?${qs}` : ""}`,
       );
     }
-  }, [completedFolder, editingFile, closeEditor, router, searchParams]);
+  }, [completedFolder, editingFile, router, searchParams]);
 
   const {
     onUploadFiles,
+    uploadFilesToFolder,
     onCreateBlankForm,
     isCreateFormDialogVisible,
     isCreatingForm,
     onCloseCreateFormDialog,
     onSaveCreateForm,
-  } = useFolderActions();
+  } = useFolderActions(fetchSection);
+  uploadFilesDirectRef.current = uploadFilesToFolder;
 
   const formsDataValue = React.useMemo(
     () => ({ fetchSection, fetchMore, fetchSubfolder }),
@@ -405,7 +476,14 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       });
     }
     prevTourRunning.current = tourStore.isRunning;
-  }, [tourStore.isRunning, tourStore.showMockItems, formsListStore, fetchSection, aiStore, formsSettingsStore]);
+  }, [
+    tourStore.isRunning,
+    tourStore.showMockItems,
+    formsListStore,
+    fetchSection,
+    aiStore,
+    formsSettingsStore,
+  ]);
 
   // Inject mock data when navigating between sections during tour
   React.useEffect(() => {
@@ -414,7 +492,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     if (activeSection === FormsSection.CompletedForms) {
       if (completedFolder) {
         formsListStore.setFolders([]);
-        formsListStore.setItems(createMockCompletedFiles(completedFolder.title), 5);
+        formsListStore.setItems(
+          createMockCompletedFiles(completedFolder.title),
+          5,
+        );
       } else {
         formsListStore.setFolders(createMockFormFolders());
         formsListStore.setItems([], 0);
@@ -453,7 +534,9 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       className={styles.root}
       ref={rootRef}
       style={
-        { "--min-section-width": `${MIN_SECTION_WIDTH}px` } as React.CSSProperties
+        {
+          "--min-section-width": `${MIN_SECTION_WIDTH}px`,
+        } as React.CSSProperties
       }
     >
       <MobileStub />
@@ -466,7 +549,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           settingsStudio={false}
           viewAs={isSettings ? "settings" : "tile"}
           isEmptyPage={
-            !isEditing && !isLoading && items.length === 0 && folders.length === 0
+            !isEditing &&
+            !isLoading &&
+            items.length === 0 &&
+            folders.length === 0
           }
           currentDeviceType={currentDeviceType}
         >
@@ -530,3 +616,4 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
 };
 
 export default observer(FormsShell);
+

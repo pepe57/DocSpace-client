@@ -325,15 +325,24 @@ export default function useFormsData() {
     ],
   );
 
+  const isFetchingMore = useRef(false);
+
   const fetchMore = useCallback(async () => {
-    if (apiExhausted.current) return;
+    if (apiExhausted.current || isFetchingMore.current) return;
+
+    isFetchingMore.current = true;
 
     fetchMoreAbortRef.current?.abort();
     const controller = new AbortController();
     fetchMoreAbortRef.current = controller;
 
     const folderId = getFolderId();
-    if (!folderId) return;
+    if (!folderId) {
+      isFetchingMore.current = false;
+      return;
+    }
+
+    const savedPage = currentPage.current;
 
     try {
       let fetched: TFile[] = [];
@@ -370,9 +379,14 @@ export default function useFormsData() {
       formsListStore.appendItems(fetched, total);
       requestThumbnails(fetched);
     } catch (error) {
-      if (!controller.signal.aborted && error instanceof Error) {
-        console.error("Forms fetchMore failed:", error.message);
+      if (!controller.signal.aborted) {
+        currentPage.current = savedPage;
+        if (error instanceof Error) {
+          console.error("Forms fetchMore failed:", error.message);
+        }
       }
+    } finally {
+      isFetchingMore.current = false;
     }
   }, [getFolderId, formsListStore, isCompletedWithXlsx]);
 
