@@ -69,7 +69,6 @@ export default async function FormsServerLayout({
   const providerName = filterParams.get("providerName") || "";
   const inviteKey = filterParams.get("inviteKey") || "";
   const emplType = filterParams.get("emplType") || "";
-  const successRedirectURL = filterParams.get("successRedirectURL") || "";
 
   const [filesSettings, user, defaultProvider, portalSettings, roomData] =
     await Promise.all([
@@ -91,20 +90,22 @@ export default async function FormsServerLayout({
     ]);
 
   if (!user && providerName) {
+    const proto = hdrs.get("x-forwarded-proto") || "https";
+    const host = hdrs.get("x-forwarded-host") || hdrs.get("host") || "";
     const returnPath = pathname || "/forms/my-forms";
     const returnParams = new URLSearchParams();
     if (roomId) returnParams.set("roomId", roomId);
     if (libraryId) returnParams.set("libraryId", libraryId);
+    const showMenu = filterParams.get("showMenu");
+    if (showMenu) returnParams.set("showMenu", showMenu);
     const returnQs = returnParams.toString();
+    const successRedirectURL = `${proto}://${host}/sdk${returnPath}${returnQs ? `?${returnQs}` : ""}`;
 
     const authParams = new URLSearchParams();
     authParams.set("providerName", providerName);
     if (inviteKey) authParams.set("inviteKey", inviteKey);
     if (emplType) authParams.set("emplType", emplType);
-    authParams.set(
-      "successRedirectURL",
-      successRedirectURL || `${returnPath}${returnQs ? `?${returnQs}` : ""}`,
-    );
+    authParams.set("successRedirectURL", successRedirectURL);
 
     redirect(`/auth?${authParams.toString()}`);
   }

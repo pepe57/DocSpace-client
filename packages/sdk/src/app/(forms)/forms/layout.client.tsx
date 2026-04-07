@@ -108,6 +108,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   );
   const showMenu = initialShowMenu.current && sdkConfig?.showMenu !== false;
 
+  const uploadFilesDirectRef = React.useRef<(files: File[]) => Promise<void>>(
+    async () => {},
+  );
+
   const authTokenSet = React.useRef(false);
   React.useEffect(() => {
     const token = commonData.authToken;
@@ -127,12 +131,49 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     }
   }, [isReady]);
 
+  const prevSectionForEvent = React.useRef(activeSection);
+  React.useEffect(() => {
+    if (prevSectionForEvent.current !== activeSection) {
+      prevSectionForEvent.current = activeSection;
+      frameCallEvent({ event: "onNavigate", data: { section: activeSection } });
+    }
+  }, [activeSection]);
+
   React.useEffect(() => {
     const handler = (e: MessageEvent) => {
       let eventData;
       try {
         eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
       } catch {
+        return;
+      }
+
+      if (
+        eventData?.type === "uploadFileData" &&
+        eventData?.buffer instanceof ArrayBuffer
+      ) {
+        const fileName = eventData.fileName as string;
+        const file = new File([eventData.buffer], fileName, {
+          lastModified: eventData.lastModified,
+        });
+        uploadFilesDirectRef
+          .current([file])
+          .then(() => {
+            frameCallEvent({
+              event: "onUploadSuccess",
+              data: { fileName, fileSize: file.size },
+            });
+          })
+          .catch((error: unknown) => {
+            frameCallEvent({
+              event: "onUploadError",
+              data: {
+                fileName,
+                message:
+                  error instanceof Error ? error.message : String(error),
+              },
+            });
+          });
         return;
       }
 
@@ -347,16 +388,18 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         `${sectionToPath(FormsSection.CompletedForms)}${qs ? `?${qs}` : ""}`,
       );
     }
-  }, [completedFolder, editingFile, closeEditor, router, searchParams]);
+  }, [completedFolder, editingFile, router, searchParams]);
 
   const {
     onUploadFiles,
+    uploadFilesToFolder,
     onCreateBlankForm,
     isCreateFormDialogVisible,
     isCreatingForm,
     onCloseCreateFormDialog,
     onSaveCreateForm,
-  } = useFolderActions();
+  } = useFolderActions(fetchSection);
+  uploadFilesDirectRef.current = uploadFilesToFolder;
 
   const formsDataValue = React.useMemo(
     () => ({ fetchSection, fetchMore, fetchSubfolder }),

@@ -49,7 +49,7 @@ import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
-import useFormsData from "./useFormsData";
+import { useFormsDataContext } from "../_context/FormsDataContext";
 
 type UseFormsActionsProps = { t: TTranslation };
 
@@ -58,7 +58,7 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
   const { openEditor } = useFormsNavigationStore();
   const { closePanel } = useFormsAiAgentStore();
   const formsListStore = useFormsListStore();
-  const { fetchSection } = useFormsData();
+  const { fetchSection } = useFormsDataContext();
 
   const openForm = useCallback(
     (file: TFile, action: EditorAction = "edit") => {

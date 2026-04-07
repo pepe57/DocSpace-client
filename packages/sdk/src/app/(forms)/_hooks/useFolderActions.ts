@@ -42,17 +42,19 @@ import { usePathname } from "next/navigation";
 import { FormsSection } from "@/types/forms";
 import { sectionFromPathname } from "../_utils/sectionFromPathname";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
-import useFormsData from "./useFormsData";
+import type { FormsDataApi } from "../_context/FormsDataContext";
 
 const DEFAULT_CHUNK_SIZE = 10 * 1024 * 1024;
 const DEFAULT_UPLOAD_THREADS = 3;
 
-export default function useFolderActions() {
+export default function useFolderActions(
+  externalFetchSection?: FormsDataApi["fetchSection"],
+) {
   const { t } = useTranslation(["Common"]);
   const formsSettingsStore = useFormsSettingsStore();
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
-  const { fetchSection } = useFormsData();
+  const fetchSection = externalFetchSection!;
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -122,6 +124,7 @@ export default function useFolderActions() {
         await fetchSection(activeSection);
       } catch (error) {
         toastr.error(error as string);
+        throw error;
       }
     },
     [getFolderId, formsSettingsStore, fetchSection, activeSection, t],
@@ -142,7 +145,7 @@ export default function useFolderActions() {
 
     input.onchange = () => {
       if (input.files?.length) {
-        uploadFilesToFolder(input.files);
+        uploadFilesToFolder(input.files).catch(() => {});
       }
       input.value = "";
     };
@@ -183,6 +186,7 @@ export default function useFolderActions() {
 
   return {
     onUploadFiles,
+    uploadFilesToFolder,
     onCreateBlankForm,
     isCreateFormDialogVisible,
     isCreatingForm,
