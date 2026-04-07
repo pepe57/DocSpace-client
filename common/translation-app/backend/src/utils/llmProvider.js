@@ -8,7 +8,7 @@
  *   - Connection verification
  *
  * Provider is auto-detected from the model name:
- *   - Contains "/" → OpenRouter  (e.g. "google/gemma-3-27b-it")
+ *   - Contains "/" → OpenRouter  (e.g. "google/gemma-4-26b-a4b-it")
  *   - Otherwise   → Ollama      (e.g. "gemma4:latest")
  */
 
@@ -79,7 +79,7 @@ async function listOpenRouterModels() {
   }
   const data = await response.json();
   return (data.data || []).map((m) => ({
-    // "name" must be the model ID (e.g. "google/gemma-4-31b-it")
+    // "name" must be the model ID (e.g. "google/gemma-4-26b-a4b-it)
     // because the frontend passes model.name to the backend,
     // and isOpenRouterModel() detects the "/" to route to OpenRouter.
     id: m.id,
@@ -157,27 +157,24 @@ async function createOllamaStream(model, messages, options = {}) {
 async function createOpenRouterStream(model, messages, options = {}) {
   const controller = new AbortController();
 
-  const response = await fetch(
-    `${openRouterConfig.apiUrl}/chat/completions`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${openRouterConfig.apiKey}`,
-      },
-      body: JSON.stringify({
-        model,
-        messages,
-        temperature: options.temperature ?? 0.1,
-        max_tokens: options.maxTokens ?? 8192,
-        stream: true,
-        // Request extended thinking/reasoning output from models that support it.
-        // Models that don't support it will ignore this field.
-        include_reasoning: true,
-      }),
-      signal: controller.signal,
+  const response = await fetch(`${openRouterConfig.apiUrl}/chat/completions`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${openRouterConfig.apiKey}`,
     },
-  );
+    body: JSON.stringify({
+      model,
+      messages,
+      temperature: options.temperature ?? 0.1,
+      max_tokens: options.maxTokens ?? 8192,
+      stream: true,
+      // Request extended thinking/reasoning output from models that support it.
+      // Models that don't support it will ignore this field.
+      include_reasoning: true,
+    }),
+    signal: controller.signal,
+  });
 
   if (!response.ok) {
     const body = await response.text();
@@ -403,9 +400,7 @@ async function createRawStream(model, messages, options = {}) {
   });
 
   if (!response.ok) {
-    throw new Error(
-      `Ollama HTTP error during correction: ${response.status}`,
-    );
+    throw new Error(`Ollama HTTP error during correction: ${response.status}`);
   }
 
   return {
@@ -433,3 +428,4 @@ module.exports = {
   completionChat,
   createRawStream,
 };
+

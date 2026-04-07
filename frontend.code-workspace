@@ -504,6 +504,26 @@
             "tooltip": "⚡ Start translation app quickly — skip metadata generation"
           },
           {
+            "label": "Translation Stats",
+            "task": "Translation App | translation stats",
+            "tooltip": "📊 Show translation statistics (keys, coverage, size per language)"
+          },
+          {
+            "label": "Verify Translations (fast, no LLM)",
+            "task": "Translation App | verify translations (no LLM)",
+            "tooltip": "🔍 Run deterministic checks: variables, tags, scripts, brackets — instant"
+          },
+          {
+            "label": "Verify Translations (LLM)",
+            "task": "Translation App | verify translations (LLM)",
+            "tooltip": "🤖 Run full LLM-based spell-check verification (slow)"
+          },
+          {
+            "label": "Clear Meta Issues",
+            "task": "Translation App | clear meta issues",
+            "tooltip": "🗑️ Reset all ai_spell_check_issues in .meta files to empty"
+          },
+          {
             "label": "──────────────────────",
             "task": "separator",
             "tooltip": ""

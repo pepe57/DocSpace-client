@@ -1316,6 +1316,50 @@
         "focus": true,
         "close": false
       }
+    },
+    {
+      "label": "Translation App | translation stats",
+      "type": "shell",
+      "command": "node '${workspaceFolder}/common/scripts/translation-stats.js'",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | verify translations (no LLM)",
+      "type": "shell",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && node src/scripts/verify-translations-spell-check.js --no-llm",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | verify translations (LLM)",
+      "type": "shell",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && node src/scripts/verify-translations-spell-check.js",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | clear meta issues",
+      "type": "shell",
+      "command": "node '${workspaceFolder}/common/scripts/clear-meta-issues.js'",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
     }
   ]
 }

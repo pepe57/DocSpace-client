@@ -13,13 +13,27 @@ const {
   appRootPath,
   projectLocalesMap,
   ollamaConfig,
+  openRouterConfig,
 } = require("../config/config");
-const { Ollama } = require("ollama");
-const { verifyOllamaConnection } = require("../utils/ollamaUtils");
+const {
+  createStreamingChat,
+  verifyConnection,
+  isOpenRouterModel,
+  getProviderName,
+} = require("../utils/llmProvider");
+const { autoComment: autoCommentPrompt } = require("../prompts/auto-comment");
 
-const MODEL = process.env.OLLAMA_MODEL || "gemma4:latest";
-const REQUEST_TIMEOUT_MS =
-  Number.parseInt(process.env.OLLAMA_TIMEOUT_MS, 10) || 90000; // default 90s timeout
+// ─── CLI args ─────────────────────────────────────────────────────────────────
+
+const cliArgs = process.argv.slice(2);
+const modelArg = cliArgs.find((a) => a.startsWith("--model="));
+
+// Auto-detect model: explicit --model, or env, or OpenRouter default if key set, or Ollama default
+const MODEL = modelArg
+  ? modelArg.split("=").slice(1).join("=")
+  : process.env.OLLAMA_MODEL
+    || (openRouterConfig.apiKey ? openRouterConfig.model : null)
+    || "gemma4:latest";
 
 /**
  * Generates a comment for a translation key using Ollama with retry mechanism
@@ -37,50 +51,21 @@ async function generateBasicComment(keyPath, content, usages) {
     return null;
   }
 
-  // Check if Ollama is connected
-  const ollamaRunning = await verifyOllamaConnection();
-  if (!ollamaRunning) {
-    console.log("Ollama is not running. Skipping comment generation.");
+  // Check if provider is available
+  const providerReady = await verifyConnection(MODEL);
+  if (!providerReady) {
+    console.log(`${getProviderName(MODEL)} is not available. Skipping comment generation.`);
     return null;
   }
 
-  // Create prompt for Ollama - limit context to prevent request size issues
-  // Only use the first 3 usages to keep the prompt size reasonable
-  const limitedUsages = usages.slice(0, 3);
+  const prompt = autoCommentPrompt({ keyPath, content, usages });
 
-  // Truncate context to prevent extremely long prompts
-  const processedUsages = limitedUsages.map((u) => ({
-    ...u,
-    context: u.context
-      ? u.context.substring(0, 300) + (u.context.length > 300 ? "..." : "")
-      : "",
-  }));
-
-  const prompt = `
-# Translation Key Description Task
-
-## Context Information
-- **Key Name:** ${keyPath}
-- **English Content:** "${content}"
-- **Usage Contexts:**
-${processedUsages
-  .map(
-    (u) =>
-      `  - **File:** ${u.file_path}\n    **Line:** ${u.line_number}\n    **Context:** ${u.context}`,
-  )
-  .join("\n")}
-
-## Instructions
-You are a helpful assistant that creates concise descriptions for translation keys.
-Based on this information, please write a short, clear description of what this translation key is used for.
-
-- Keep it to 1-3 sentences
-- Explain the purpose of this text in the UI
-- Mention where it appears (button, dialog, etc.) if apparent
-- Provide context helpful for translators
-
-**Important:** Respond with ONLY the description, no additional text.
-  `;
+  const inactivityMs = isOpenRouterModel(MODEL)
+    ? (openRouterConfig.inactivityTimeout || 30000)
+    : ollamaConfig.inactivityTimeout;
+  const firstTokenMs = isOpenRouterModel(MODEL)
+    ? (openRouterConfig.firstTokenTimeout || 120000)
+    : ollamaConfig.firstTokenTimeout;
 
   // Retry configuration
   const maxRetries = 3;
@@ -90,65 +75,57 @@ Based on this information, please write a short, clear description of what this 
   while (retries < maxRetries) {
     try {
       console.log(
-        `Generating comment for ${keyPath} (attempt ${
-          retries + 1
-        }/${maxRetries})`,
+        `Generating comment for ${keyPath} (attempt ${retries + 1}/${maxRetries}) [${getProviderName(MODEL)}]`,
       );
 
-      // Call Ollama API with streaming + thinking output
-      const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
       let activeTimeout = null;
-      const resetInactivityTimer = (stream) => {
+      let contentStarted = false;
+
+      const chatResult = await createStreamingChat(MODEL, [
+        { role: "user", content: prompt },
+      ], {
+        temperature: 0.1,
+        maxTokens: 8192,
+        think: true,
+      });
+
+      const resetTimer = () => {
         clearTimeout(activeTimeout);
+        const ms = contentStarted ? inactivityMs : firstTokenMs;
         activeTimeout = setTimeout(() => {
-          stream.abort();
-        }, ollamaConfig.inactivityTimeout);
+          chatResult.abort();
+        }, ms);
       };
 
       let fullResponse = "";
-      let fullThinking = "";
       let thinkingStarted = false;
       let responseStarted = false;
 
-      const stream = await ollamaClient.generate({
-        model: MODEL,
-        prompt: prompt,
-        stream: true,
-        think: true,
-        options: {
-          temperature: 0.1,
-          num_predict: 8192,
-        },
-      });
-
-      // First-token timeout: abort if model doesn't respond at all
       activeTimeout = setTimeout(() => {
-        stream.abort();
-      }, ollamaConfig.firstTokenTimeout);
+        chatResult.abort();
+      }, firstTokenMs);
 
       try {
-        for await (const chunk of stream) {
-          const thinkingToken = chunk.thinking ?? "";
-          if (thinkingToken) {
+        for await (const chunk of chatResult.stream) {
+          if (chunk.thinking) {
             if (!thinkingStarted) {
               process.stdout.write("  [think] ");
               thinkingStarted = true;
             }
-            fullThinking += thinkingToken;
-            process.stdout.write(thinkingToken);
-            resetInactivityTimer(stream);
+            process.stdout.write(chunk.thinking);
+            resetTimer();
           }
 
-          const token = chunk.response ?? "";
-          if (token) {
+          if (chunk.content) {
             if (!responseStarted) {
               if (thinkingStarted) process.stdout.write("\n");
               process.stdout.write("  [response] ");
               responseStarted = true;
+              contentStarted = true;
             }
-            fullResponse += token;
-            process.stdout.write(token);
-            resetInactivityTimer(stream);
+            fullResponse += chunk.content;
+            process.stdout.write(chunk.content);
+            resetTimer();
           }
         }
         if (thinkingStarted || responseStarted) process.stdout.write("\n");
@@ -157,38 +134,35 @@ Based on this information, please write a short, clear description of what this 
       }
 
       if (fullResponse) {
-        return fullResponse.trim();
+        // Strip thinking tags if model inlined them
+        const cleaned = fullResponse
+          .replace(/<think>[\s\S]*?<\/think>/gi, "")
+          .replace(/<think>[\s\S]*/gi, "")
+          .trim();
+        return cleaned || null;
       } else {
-        throw new Error("Ollama returned empty response");
+        throw new Error("Model returned empty response");
       }
     } catch (error) {
       lastError = error;
       retries++;
 
-      // Log the error
       console.error(
-        `Error calling Ollama (attempt ${retries}/${maxRetries}):`,
+        `Error calling ${getProviderName(MODEL)} (attempt ${retries}/${maxRetries}):`,
         error.message,
       );
 
-      // If it's a socket hang up or timeout, wait before retrying
       if (
         error.code === "ECONNRESET" ||
         error.code === "ETIMEDOUT" ||
+        error.name === "AbortError" ||
         error.message.includes("socket hang up") ||
-        error.message.includes("timeout")
+        error.message.includes("timeout") ||
+        error.message.includes("aborted")
       ) {
-        console.log(
-          `Network error detected. Waiting before retry... ${error.message}`,
-        );
-        console.log(
-          `ollama api url: '${ollamaConfig.apiUrl}' model: '${MODEL}'`,
-        );
-        console.log(`prompt: ${prompt}`);
-        // Wait for a few seconds before retrying (increasing with each retry)
+        console.log(`Network error. Waiting before retry...`);
         await new Promise((resolve) => setTimeout(resolve, 2000 * retries));
       } else if (retries < maxRetries) {
-        // For other errors, wait a shorter time
         await new Promise((resolve) => setTimeout(resolve, 1000));
       }
     }
