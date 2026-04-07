@@ -56,9 +56,10 @@ export default async function AuthPage({
   const colorTheme = await getColorTheme();
   const bgPattern = getBgPattern(colorTheme?.selected);
 
-  const confirmParams = new URLSearchParams(
-    params as Record<string, string>,
-  );
+  const definedParams = Object.fromEntries(
+    Object.entries(params).filter(([, v]) => v !== undefined),
+  ) as Record<string, string>;
+  const confirmParams = new URLSearchParams(definedParams);
   if (confirmParams.has("inviteKey")) {
     confirmParams.set("key", confirmParams.get("inviteKey")!);
     confirmParams.delete("inviteKey");

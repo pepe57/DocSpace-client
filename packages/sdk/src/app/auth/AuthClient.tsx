@@ -103,7 +103,19 @@ export default function AuthClient({
           return;
         }
 
-        window.location.replace(successRedirectURL || "/");
+        const origin = window.location.origin;
+        const basePath = "/sdk";
+
+        let target: string;
+        if (!successRedirectURL) {
+          target = `${origin}${basePath}/`;
+        } else if (/^https?:\/\//.test(successRedirectURL)) {
+          target = successRedirectURL;
+        } else {
+          target = `${origin}${basePath}${successRedirectURL}`;
+        }
+
+        window.location.replace(target);
       } catch (e) {
         console.error(e);
         setError("Authentication failed");

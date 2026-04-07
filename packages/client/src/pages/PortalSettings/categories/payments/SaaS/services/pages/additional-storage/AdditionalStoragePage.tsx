@@ -91,6 +91,7 @@ type AdditionalStoragePageProps = {
   storageServiceName?: string;
   isShowStorageTariffDeactivatedModal?: boolean;
   setStorageDeactivationVisited?: (value: boolean) => void;
+  isServiceActionDisabled?: boolean;
 };
 
 const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
@@ -112,6 +113,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   storageServiceName,
   isShowStorageTariffDeactivatedModal,
   setStorageDeactivationVisited,
+  isServiceActionDisabled,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common", "Services"]);
   const contextMenuRef = useRef<ContextMenuRefType>(null);
@@ -121,6 +123,8 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
     useState(false);
   const shouldShowLoader = !isInitServicesData || !ready;
+
+  const isDisabled = isServiceActionDisabled!;
 
   useEffect(() => {
     if (previousStoragePlanSize) {
@@ -224,7 +228,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
     <div className={styles.container}>
       <ServiceToggleSection
         isEnabled={hasStorageSubscription}
-        isDisabled={isScheduled}
+        isDisabled={isDisabled || isScheduled}
         onToggle={handleToggleChange}
         title={t("Payments:AdditionalDiskStorage")}
         priceText={t("PerStorage", {
@@ -242,6 +246,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
             title={warningTitle}
             onCancelChange={handleCancelChange}
             isCancelLoading={isCancelLoading}
+            isDisabled={isDisabled}
           />
         </div>
       ) : null}
@@ -253,7 +258,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
               ? t("Services:NoActiveSubscription")
               : t("Payments:CurrentSubscription")}
           </Text>
-          {isScheduled || previousStoragePlanSize ? null : (
+          {isDisabled || isScheduled || previousStoragePlanSize ? null : (
             <>
               <div
                 className={styles.settingsIcon}
@@ -310,6 +315,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
             size={ButtonSize.small}
             primary
             onClick={openUpgradeDialog}
+            isDisabled={isDisabled}
           />
         )}
       </div>
@@ -347,7 +353,10 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
       ) : null}
 
       <div className={styles.transactionSection}>
-        <TransactionHistory serviceName={storageServiceName ?? DISK_STORAGE} hideTypeFilter />
+        <TransactionHistory
+          serviceName={storageServiceName ?? DISK_STORAGE}
+          hideTypeFilter
+        />
       </div>
 
       {isShowStorageTariffDeactivatedModal ? (
@@ -360,7 +369,9 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
         <StoragePlanUpgrade
           visible={isStorageDialogVisible}
           onClose={onCloseUpgradeStorage}
-          {...(previousStoragePlanSize && { previousValue: previousStoragePlanSize.toString() })}
+          {...(previousStoragePlanSize && {
+            previousValue: previousStoragePlanSize.toString(),
+          })}
         />
       ) : null}
       {isCancelDialogVisible ? (
@@ -392,6 +403,7 @@ export default inject(
       storageServiceName,
       isShowStorageTariffDeactivatedModal,
       setStorageDeactivationVisited,
+      isServiceActionDisabled,
     } = paymentStore;
     const {
       currentStoragePlanSize,
@@ -424,6 +436,8 @@ export default inject(
       storageServiceName,
       isShowStorageTariffDeactivatedModal,
       setStorageDeactivationVisited,
+      isServiceActionDisabled,
     };
   },
 )(observer(AdditionalStoragePage));
+
