@@ -3,7 +3,23 @@
  * Verify Language Translations and Update Spell Check Issues Metadata
  *
  * This script scans the locales directories, compares non-English translations with English ones,
- * and updates the ai_spell_check_issues field in the metadata files with issues found by Ollama.
+ * and updates the ai_spell_check_issues field in the metadata files with issues found by an LLM.
+ *
+ * Supports two providers:
+ *   --provider=ollama      (default) Use local Ollama instance
+ *   --provider=openrouter  Use OpenRouter API (requires OPENROUTER_API_KEY in .env)
+ *
+ * Usage:
+ *   node verify-translations-spell-check.js [languages] [--provider=ollama|openrouter]
+ *
+ * Options:
+ *   --no-llm                   Run only deterministic checks (no API calls, very fast)
+ *
+ * Examples:
+ *   node verify-translations-spell-check.js fr,de
+ *   node verify-translations-spell-check.js --provider=openrouter
+ *   node verify-translations-spell-check.js fr,de --provider=openrouter
+ *   node verify-translations-spell-check.js --no-llm
  */
 const fs = require("fs-extra");
 const { writeJsonWithConsistentEol } = require("../utils/fsUtils");
@@ -13,12 +29,33 @@ const {
   appRootPath,
   projectLocalesMap,
   ollamaConfig,
+  openRouterConfig,
 } = require("../config/config");
 const { Ollama } = require("ollama");
 const { verifyOllamaConnection } = require("../utils/ollamaUtils");
 
-const MODEL = process.env.OLLAMA_SPELLCHECK_MODEL || "gemma4:latest";
-const LANGUAGES_TO_CHECK = process.argv[2] ? process.argv[2].split(",") : null;
+// ─── CLI args ─────────────────────────────────────────────────────────────────
+
+const cliArgs = process.argv.slice(2);
+const providerArg = cliArgs.find((a) => a.startsWith("--provider="));
+const positionalArgs = cliArgs.filter((a) => !a.startsWith("--"));
+
+const NO_LLM = cliArgs.includes("--no-llm");
+
+// Auto-detect provider: use openrouter if key is set and no explicit --provider
+const PROVIDER = NO_LLM
+  ? "none"
+  : providerArg
+    ? providerArg.split("=")[1]
+    : openRouterConfig.apiKey
+      ? "openrouter"
+      : "ollama";
+
+const OLLAMA_MODEL = process.env.OLLAMA_SPELLCHECK_MODEL || "gemma4:latest";
+const OPENROUTER_MODEL = process.env.OPENROUTER_SPELLCHECK_MODEL || openRouterConfig.model;
+const MODEL = PROVIDER === "openrouter" ? OPENROUTER_MODEL : OLLAMA_MODEL;
+
+const LANGUAGES_TO_CHECK = positionalArgs[0] ? positionalArgs[0].split(",") : null;
 const CHECKPOINT_FILE = path.join(appRootPath, "verification-checkpoint.json");
 
 // Checkpoint data
@@ -140,13 +177,607 @@ function clearCheckpoint() {
   }
 }
 
+// ─── Provider: generate completion ────────────────────────────────────────────
+
 /**
- * Verifies a translation against the English version using Ollama with retry mechanism
+ * Generate a streaming completion via Ollama
+ * @param {string} prompt
+ * @returns {Promise<string>} The response text
+ */
+async function generateOllama(prompt) {
+  const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
+  let activeTimeout = null;
+  const resetInactivityTimer = (stream) => {
+    clearTimeout(activeTimeout);
+    activeTimeout = setTimeout(() => {
+      stream.abort();
+    }, ollamaConfig.inactivityTimeout);
+  };
+
+  let fullResponse = "";
+  let thinkingStarted = false;
+  let responseStarted = false;
+
+  const stream = await ollamaClient.generate({
+    model: MODEL,
+    prompt: prompt,
+    stream: true,
+    think: true,
+    options: {
+      temperature: 0.1,
+      num_predict: 8192,
+    },
+  });
+
+  activeTimeout = setTimeout(() => {
+    stream.abort();
+  }, ollamaConfig.firstTokenTimeout);
+
+  try {
+    for await (const chunk of stream) {
+      const thinkingToken = chunk.thinking ?? "";
+      if (thinkingToken) {
+        if (!thinkingStarted) {
+          process.stdout.write("  [think] ");
+          thinkingStarted = true;
+        }
+        process.stdout.write(thinkingToken);
+        resetInactivityTimer(stream);
+      }
+
+      const token = chunk.response ?? "";
+      if (token) {
+        if (!responseStarted) {
+          if (thinkingStarted) process.stdout.write("\n");
+          process.stdout.write("  [response] ");
+          responseStarted = true;
+        }
+        fullResponse += token;
+        process.stdout.write(token);
+        resetInactivityTimer(stream);
+      }
+    }
+    if (thinkingStarted || responseStarted) process.stdout.write("\n");
+  } finally {
+    clearTimeout(activeTimeout);
+  }
+
+  return fullResponse;
+}
+
+/**
+ * Generate a streaming completion via OpenRouter (OpenAI-compatible API)
+ * @param {string} prompt
+ * @returns {Promise<string>} The response text
+ */
+async function generateOpenRouter(prompt) {
+  const controller = new AbortController();
+  let activeTimeout = null;
+  const resetInactivityTimer = () => {
+    clearTimeout(activeTimeout);
+    activeTimeout = setTimeout(() => {
+      controller.abort();
+    }, openRouterConfig.inactivityTimeout);
+  };
+
+  // First-token timeout
+  activeTimeout = setTimeout(() => {
+    controller.abort();
+  }, openRouterConfig.firstTokenTimeout);
+
+  const response = await fetch(`${openRouterConfig.apiUrl}/chat/completions`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${openRouterConfig.apiKey}`,
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0.1,
+      max_tokens: 8192,
+      stream: true,
+    }),
+    signal: controller.signal,
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`OpenRouter API error ${response.status}: ${body}`);
+  }
+
+  let fullResponse = "";
+  let responseStarted = false;
+
+  // Parse SSE stream
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split("\n");
+      buffer = lines.pop(); // keep incomplete line in buffer
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || !trimmed.startsWith("data: ")) continue;
+        const data = trimmed.slice(6);
+        if (data === "[DONE]") continue;
+
+        try {
+          const parsed = JSON.parse(data);
+          const delta = parsed.choices?.[0]?.delta;
+          if (!delta) continue;
+
+          // Handle reasoning tokens (some OpenRouter models support this)
+          const reasoning = delta.reasoning || delta.reasoning_content || "";
+          if (reasoning) {
+            if (!responseStarted) {
+              process.stdout.write("  [think] ");
+            }
+            process.stdout.write(reasoning);
+            resetInactivityTimer();
+          }
+
+          const content = delta.content || "";
+          if (content) {
+            if (!responseStarted) {
+              process.stdout.write("  [response] ");
+              responseStarted = true;
+            }
+            fullResponse += content;
+            process.stdout.write(content);
+            resetInactivityTimer();
+          }
+        } catch {
+          // skip malformed SSE chunks
+        }
+      }
+    }
+    if (responseStarted) process.stdout.write("\n");
+  } finally {
+    clearTimeout(activeTimeout);
+  }
+
+  return fullResponse;
+}
+
+/**
+ * Generate completion using the active provider
+ * @param {string} prompt
+ * @returns {Promise<string>} The response text
+ */
+async function generateCompletion(prompt) {
+  if (PROVIDER === "openrouter") {
+    return generateOpenRouter(prompt);
+  }
+  return generateOllama(prompt);
+}
+
+/**
+ * Verify provider connectivity
+ * @returns {Promise<boolean>}
+ */
+async function verifyProviderConnection() {
+  if (PROVIDER === "openrouter") {
+    if (!openRouterConfig.apiKey) {
+      console.error("OPENROUTER_API_KEY is not set in .env");
+      return false;
+    }
+    try {
+      const response = await fetch(`${openRouterConfig.apiUrl}/models`, {
+        headers: { Authorization: `Bearer ${openRouterConfig.apiKey}` },
+      });
+      if (!response.ok) {
+        console.error(`OpenRouter connection failed: ${response.status} ${response.statusText}`);
+        return false;
+      }
+      return true;
+    } catch (error) {
+      console.error(`OpenRouter connection error: ${error.message}`);
+      return false;
+    }
+  }
+  return verifyOllamaConnection();
+}
+
+// ─── Key context from metadata ────────────────────────────────────────────────
+
+/**
+ * Extract context (comment + usage examples) from a metadata object.
+ * Mirrors readKeyContext() from ollama.js routes.
+ * @param {Object} metadata - Parsed .meta JSON
+ * @returns {Object|null} { comment, usages } or null if no context available
+ */
+function extractKeyContext(metadata) {
+  if (!metadata) return null;
+
+  const comment = metadata.comment?.text || null;
+  const usages = (metadata.usage || [])
+    .slice(0, 3) // limit to 3 usage examples to keep prompt concise
+    .map((u) => u.context?.trim())
+    .filter(Boolean);
+
+  if (!comment && usages.length === 0) return null;
+  return { comment, usages };
+}
+
+/**
+ * Build a context block string for inclusion in the verification prompt.
+ * @param {Object|null} keyContext - from extractKeyContext()
+ * @returns {string} Context block or empty string
+ */
+function formatContextBlock(keyContext) {
+  if (!keyContext) return "";
+
+  const parts = [];
+  if (keyContext.comment) {
+    parts.push(`**Context:** ${keyContext.comment}`);
+  }
+  if (keyContext.usages && keyContext.usages.length > 0) {
+    parts.push(`**Usage in code:**\n${keyContext.usages.map((u) => `- \`${u}\``).join("\n")}`);
+  }
+  return parts.join("\n");
+}
+
+// ─── Deterministic checks (no LLM) ───────────────────────────────────────────
+
+// Forbidden literal values in translations (should use {{productName}} etc.)
+// Mirrors ForbiddenValueElementsTest from locales.test.js
+const FORBIDDEN_ELEMENTS = ["ONLYOFFICE", "DOCSPACE"];
+const SKIP_FORBIDDEN_KEYS = new Set([
+  "OrganizationName", "ProductName", "ProductEditorsName",
+]);
+
+// Languages that use non-Latin primary scripts
+const NON_LATIN_LANGUAGES = new Set([
+  "ar-SA", "ja-JP", "zh-CN", "ko-KR", "hy-AM", "el-GR",
+  "lo-LA", "si", "uk-UA", "ru", "bg", "sr-Cyrl-RS",
+]);
+
+/**
+ * Extract all {{variable}} tokens from a string
+ * @param {string} text
+ * @returns {string[]} Sorted array of variable names
+ */
+function extractVariables(text) {
+  const matches = text.match(/\{\{[^}]+\}\}/g) || [];
+  return matches.sort();
+}
+
+/**
+ * Extract all React Trans tags (<0>, </0>, <1>, etc.) and HTML tags from a string
+ * @param {string} text
+ * @returns {string[]} Sorted array of tags
+ */
+function extractTags(text) {
+  const matches = text.match(/<\/?[a-zA-Z][^>]*\/?>/g) || [];
+  return matches.sort();
+}
+
+/**
+ * Extract all HTML entities (&nbsp;, &amp;, etc.) from a string
+ * @param {string} text
+ * @returns {string[]} Sorted array of entities
+ */
+function extractHtmlEntities(text) {
+  const matches = text.match(/&[a-zA-Z]+;/g) || [];
+  return matches.sort();
+}
+
+/**
+ * Check if a string contains at least one non-ASCII/non-punctuation character
+ * (i.e., at least one character from a non-Latin script)
+ * @param {string} text
+ * @returns {boolean}
+ */
+function hasNonLatinChars(text) {
+  // Strip variables, tags, numbers, punctuation, spaces — check if anything non-ASCII remains
+  const stripped = text
+    .replace(/\{\{[^}]+\}\}/g, "")
+    .replace(/<\/?[^>]+>/g, "")
+    .replace(/&[a-zA-Z]+;/g, "")
+    .replace(/[0-9\s\p{P}\p{S}]/gu, "");
+  // Check for characters outside basic Latin
+  return /[^\u0000-\u007F]/.test(stripped);
+}
+
+/**
+ * Run all deterministic checks on a single translation pair.
+ * Returns issues in the same format as LLM issues: { type, description, suggestion }
+ *
+ * @param {string} englishContent - English source text
+ * @param {string} translatedContent - Translated text
+ * @param {string} language - Language code
+ * @param {string} keyName - The bare key name (without namespace prefix)
+ * @returns {Array<Object>} Array of detected issues
+ */
+function runDeterministicChecks(englishContent, translatedContent, language, keyName = "") {
+  const issues = [];
+
+  // 1. Empty / whitespace-only translation
+  if (!translatedContent || !translatedContent.trim()) {
+    issues.push({
+      type: "empty_translation",
+      description: "Translation is empty or contains only whitespace",
+      suggestion: "",
+    });
+    return issues; // no point checking further
+  }
+
+  // 2. Missing {{variables}}
+  const enVars = extractVariables(englishContent);
+  const trVars = extractVariables(translatedContent);
+  if (enVars.length > 0 || trVars.length > 0) {
+    const missingVars = enVars.filter((v) => !trVars.includes(v));
+    const extraVars = trVars.filter((v) => !enVars.includes(v));
+    if (missingVars.length > 0) {
+      issues.push({
+        type: "missing_variable",
+        description: `Missing variable(s): ${missingVars.join(", ")}`,
+        suggestion: "",
+      });
+    }
+    if (extraVars.length > 0) {
+      issues.push({
+        type: "extra_variable",
+        description: `Extra variable(s) not in English: ${extraVars.join(", ")}`,
+        suggestion: "",
+      });
+    }
+  }
+
+  // 3. Missing/extra React & HTML tags
+  //    Normalize tags (collapse internal whitespace) for comparison,
+  //    but flag malformed tags with extra spaces separately.
+  const normalizeTag = (t) => t.replace(/\s+/g, " ").replace(/\s>/g, ">").replace(/\s\/>/g, "/>");
+  const enTags = extractTags(englishContent).map(normalizeTag);
+  const trTagsRaw = extractTags(translatedContent);
+  const trTags = trTagsRaw.map(normalizeTag);
+
+  if (enTags.length > 0 || trTags.length > 0) {
+    const missingTags = enTags.filter((t) => !trTags.includes(t));
+    const extraTags = trTags.filter((t) => !enTags.includes(t));
+    if (missingTags.length > 0) {
+      issues.push({
+        type: "missing_tag",
+        description: `Missing tag(s): ${missingTags.join(", ")}`,
+        suggestion: "",
+      });
+    }
+    if (extraTags.length > 0) {
+      issues.push({
+        type: "extra_tag",
+        description: `Extra tag(s) not in English: ${extraTags.join(", ")}`,
+        suggestion: "",
+      });
+    }
+  }
+
+  // 3b. Malformed tags — tags with internal whitespace (e.g., "<strong >" instead of "<strong>")
+  const malformedTags = trTagsRaw.filter((t) => /\s+\/?>/.test(t) || /<\s+/.test(t));
+  if (malformedTags.length > 0) {
+    issues.push({
+      type: "malformed_tag",
+      description: `Tag(s) with extra whitespace: ${malformedTags.join(", ")}`,
+      suggestion: malformedTags.map(normalizeTag).join(", "),
+    });
+  }
+
+  // 4. HTML entity mismatch
+  const enEntities = extractHtmlEntities(englishContent);
+  const trEntities = extractHtmlEntities(translatedContent);
+  if (enEntities.join(",") !== trEntities.join(",")) {
+    const missing = enEntities.filter((e) => !trEntities.includes(e));
+    const extra = trEntities.filter((e) => !enEntities.includes(e));
+    const parts = [];
+    if (missing.length) parts.push(`missing: ${missing.join(", ")}`);
+    if (extra.length) parts.push(`extra: ${extra.join(", ")}`);
+    if (parts.length > 0) {
+      issues.push({
+        type: "html_entity_mismatch",
+        description: `HTML entity mismatch — ${parts.join("; ")}`,
+        suggestion: "",
+      });
+    }
+  }
+
+  // 5. Suspicious length ratio (only for strings > 10 chars to avoid false positives on short labels)
+  //    CJK languages use fewer characters per concept, so use looser thresholds.
+  const CJK_LANGUAGES = new Set(["ja-JP", "zh-CN", "ko-KR"]);
+  const isCJK = CJK_LANGUAGES.has(language);
+  const minRatio = isCJK ? 0.05 : 0.15;
+  const maxRatio = isCJK ? 8 : 5;
+
+  if (englishContent.length > 10) {
+    const ratio = translatedContent.length / englishContent.length;
+    if (ratio > maxRatio) {
+      issues.push({
+        type: "suspicious_length",
+        description: `Translation is ${ratio.toFixed(1)}x longer than English (${translatedContent.length} vs ${englishContent.length} chars) — possibly duplicated text`,
+        suggestion: "",
+      });
+    } else if (ratio < minRatio) {
+      issues.push({
+        type: "suspicious_length",
+        description: `Translation is ${ratio.toFixed(2)}x the length of English (${translatedContent.length} vs ${englishContent.length} chars) — possibly truncated`,
+        suggestion: "",
+      });
+    }
+  }
+
+  // 6. Non-Latin script check — translation contains only ASCII for languages that should use other scripts
+  //    Skip if translation is identical to English (intentional: brand names, product names, etc.)
+  //    Require English text > 15 chars (after stripping markup) to avoid flagging short
+  //    terms, abbreviations, and proper nouns (e.g. "PDFs", "E-mail", "OAuth 2.0").
+  if (NON_LATIN_LANGUAGES.has(language) && englishContent !== translatedContent) {
+    const enTextOnly = englishContent
+      .replace(/\{\{[^}]+\}\}/g, "")
+      .replace(/<\/?[^>]+>/g, "")
+      .replace(/&[a-zA-Z]+;/g, "")
+      .trim();
+
+    if (enTextOnly.length > 15 && !hasNonLatinChars(translatedContent)) {
+      issues.push({
+        type: "wrong_script",
+        description: `Translation for ${language} contains only Latin/ASCII characters — likely untranslated`,
+        suggestion: "",
+      });
+    }
+  }
+
+  // 7. Trailing punctuation consistency
+  //    Only check structural punctuation (:) for all languages.
+  //    Period/exclamation checks only for Latin-script languages — many other
+  //    scripts (Arabic, CJK, etc.) have different sentence-ending conventions.
+  const LATIN_SCRIPT_LANGUAGES = new Set([
+    "de", "de-CH", "fr", "es", "es-MX", "it", "pt", "pt-BR",
+    "pl", "nl", "cs", "sk", "ro", "lv", "sl", "fi", "tr",
+    "sq-AL", "sr-Latn-RS", "az", "vi",
+  ]);
+
+  const enTrimmed = englishContent.trim();
+  const trTrimmed = translatedContent.trim();
+  if (enTrimmed.length > 20) {
+    const enEndChar = enTrimmed.slice(-1);
+    const trEndChar = trTrimmed.slice(-1);
+
+    // Colon check for all languages (structural, not stylistic)
+    if (enEndChar === ":" && trEndChar !== ":" && trEndChar !== "：") {
+      issues.push({
+        type: "punctuation_mismatch",
+        description: `English ends with ":" but translation ends with "${trEndChar}"`,
+        suggestion: "",
+      });
+    }
+
+    // Period/exclamation check only for Latin-script languages
+    if (LATIN_SCRIPT_LANGUAGES.has(language) && ".!".includes(enEndChar) && trEndChar !== enEndChar) {
+      const equivalentEnds = {
+        ".": ["."],
+        "!": ["!", "！"],
+      };
+      const allowed = equivalentEnds[enEndChar] || [enEndChar];
+      if (!allowed.includes(trEndChar)) {
+        issues.push({
+          type: "punctuation_mismatch",
+          description: `English ends with "${enEndChar}" but translation ends with "${trEndChar}"`,
+          suggestion: "",
+        });
+      }
+    }
+  }
+
+  // 8. Unpaired brackets/quotes
+  const bracketPairs = [
+    ["(", ")"],
+    ["[", "]"],
+    ["{", "}"],
+    ["\u00AB", "\u00BB"], // « »
+    ["\u201C", "\u201D"], // " "
+  ];
+  for (const [open, close] of bracketPairs) {
+    // Skip {{variable}} braces — they are checked separately
+    if (open === "{") continue;
+    const openCount = (translatedContent.match(new RegExp(`\\${open}`, "g")) || []).length;
+    const closeCount = (translatedContent.match(new RegExp(`\\${close}`, "g")) || []).length;
+    if (openCount !== closeCount) {
+      issues.push({
+        type: "unpaired_bracket",
+        description: `Unpaired "${open}${close}" in translation: ${openCount} open vs ${closeCount} close`,
+        suggestion: "",
+      });
+    }
+  }
+
+  // 9. Forbidden literal values (ONLYOFFICE, DOCSPACE) — should use {{productName}} etc.
+  //    Mirrors ForbiddenValueElementsTest from locales.test.js
+  if (!SKIP_FORBIDDEN_KEYS.has(keyName)) {
+    const upperTranslation = translatedContent.toUpperCase();
+    const found = FORBIDDEN_ELEMENTS.filter((el) => upperTranslation.includes(el));
+    if (found.length > 0) {
+      issues.push({
+        type: "forbidden_value",
+        description: `Translation contains hardcoded brand name(s): ${found.join(", ")} — should use a template variable like {{productName}}`,
+        suggestion: "",
+      });
+    }
+  }
+
+  return issues;
+}
+
+/**
+ * Check for orphan keys — keys present in a language file but missing from English.
+ * These are stale translations that should be removed.
+ * Mirrors NotFoundEnKey test from locales.test.js.
+ *
+ * @param {Object} enData - { namespace → { key → value } } for English
+ * @param {Object} langData - { namespace → { key → value } } for the target language
+ * @returns {Array<Object>} Array of { namespace, key } orphan entries
+ */
+function findOrphanKeys(enData, langData) {
+  const orphans = [];
+  for (const ns of Object.keys(langData)) {
+    const enNs = enData[ns] || {};
+    const langNs = langData[ns] || {};
+    for (const key of Object.keys(langNs)) {
+      if (!(key in enNs)) {
+        orphans.push({ namespace: ns, key });
+      }
+    }
+  }
+  return orphans;
+}
+
+// ─── Verification logic (LLM) ────────────────────────────────────────────────
+
+/**
+ * Extracts and parses JSON from LLM response text
+ * @param {string} responseText - Raw response text
+ * @returns {Array|null} Parsed array or null on failure
+ */
+function parseIssuesFromResponse(responseText) {
+  let jsonText = responseText.trim();
+
+  // Remove markdown code blocks if present
+  if (jsonText.startsWith("```")) {
+    const firstNewline = jsonText.indexOf("\n");
+    if (firstNewline !== -1) {
+      jsonText = jsonText.substring(firstNewline + 1);
+    }
+    const lastBackticks = jsonText.lastIndexOf("```");
+    if (lastBackticks !== -1) {
+      jsonText = jsonText.substring(0, lastBackticks);
+    }
+    jsonText = jsonText.trim();
+  }
+
+  // Check if response is truncated or corrupted
+  if (jsonText.includes(">]>]>]>]") || jsonText.length > 10000) {
+    return null;
+  }
+
+  // Fix improperly escaped brackets in strings
+  jsonText = jsonText.replace(/\\\[/g, "[").replace(/\\\]/g, "]");
+
+  const issues = JSON.parse(jsonText);
+  return Array.isArray(issues) ? issues : null;
+}
+
+/**
+ * Verifies a translation against the English version with retry mechanism
  * @param {string} keyPath - The key path
  * @param {string} englishContent - The English content
  * @param {string} translatedContent - The translated content
  * @param {string} language - The language code
  * @param {Object} progress - Progress tracking object with current, total, keyIndex, totalKeys
+ * @param {Object|null} keyContext - Context from metadata (comment + usages)
  * @returns {Promise<Array>} Array of identified issues
  */
 async function verifyTranslation(
@@ -155,6 +786,7 @@ async function verifyTranslation(
   translatedContent,
   language,
   progress = null,
+  keyContext = null,
 ) {
   // Skip if content is empty
   if (!englishContent || !translatedContent) {
@@ -166,7 +798,8 @@ async function verifyTranslation(
 
   const languageName = languageMap[language] || language;
 
-  // Create prompt for Ollama
+  const contextBlock = formatContextBlock(keyContext);
+
   const prompt = `
 # Translation Verification Task
 
@@ -175,6 +808,7 @@ You are a translation quality checker for ONLYOFFICE DocSpace UI strings. Your O
 ## Content to verify:
 - **English:** "${englishContent}"
 - **${languageName}:** "${translatedContent}"
+${contextBlock ? `\n## Additional context (from metadata):\n${contextBlock}\n` : ""}
 
 ## Your task:
 Check if the ${languageName} translation accurately conveys the SAME MEANING as the English text AND preserves all technical markup.
@@ -233,160 +867,61 @@ If the translation correctly conveys the meaning and preserves all markup, retur
         `${keyProgressStr}Verifying translation for ${keyPath} in ${language}${langProgressStr}${retryStr}`,
       );
 
-      // Call Ollama API with streaming + thinking output
-      const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
-      let activeTimeout = null;
-      const resetInactivityTimer = (stream) => {
-        clearTimeout(activeTimeout);
-        activeTimeout = setTimeout(() => {
-          stream.abort();
-        }, ollamaConfig.inactivityTimeout);
-      };
-
-      let fullResponse = "";
-      let fullThinking = "";
-      let tokenCount = 0;
-
-      const stream = await ollamaClient.generate({
-        model: MODEL,
-        prompt: prompt,
-        stream: true,
-        think: true,
-        options: {
-          temperature: 0.1,
-          num_predict: 8192,
-        },
-      });
-
-      // First-token timeout: abort if model doesn't respond at all
-      activeTimeout = setTimeout(() => {
-        stream.abort();
-      }, ollamaConfig.firstTokenTimeout);
-
-      let thinkingStarted = false;
-      let responseStarted = false;
-
-      try {
-        for await (const chunk of stream) {
-          const thinkingToken = chunk.thinking ?? "";
-          if (thinkingToken) {
-            if (!thinkingStarted) {
-              process.stdout.write("  [think] ");
-              thinkingStarted = true;
-            }
-            tokenCount++;
-            fullThinking += thinkingToken;
-            process.stdout.write(thinkingToken);
-            resetInactivityTimer(stream);
-          }
-
-          const token = chunk.response ?? "";
-          if (token) {
-            if (!responseStarted) {
-              if (thinkingStarted) process.stdout.write("\n");
-              process.stdout.write("  [response] ");
-              responseStarted = true;
-            }
-            tokenCount++;
-            fullResponse += token;
-            process.stdout.write(token);
-            resetInactivityTimer(stream);
-          }
-        }
-        if (thinkingStarted || responseStarted) process.stdout.write("\n");
-      } finally {
-        clearTimeout(activeTimeout);
-      }
+      const fullResponse = await generateCompletion(prompt);
 
       // Parse the response
       if (fullResponse) {
-        const responseText = fullResponse.trim();
         try {
-          // Check if response is wrapped in markdown code blocks and extract the JSON
-          let jsonText = responseText;
-
-          // Remove markdown code blocks if present
-          // Handle both ```json and ``` variants
-          if (jsonText.startsWith("```")) {
-            // Find the first newline after opening ```
-            const firstNewline = jsonText.indexOf("\n");
-            if (firstNewline !== -1) {
-              jsonText = jsonText.substring(firstNewline + 1);
-            }
-            // Remove closing ```
-            const lastBackticks = jsonText.lastIndexOf("```");
-            if (lastBackticks !== -1) {
-              jsonText = jsonText.substring(0, lastBackticks);
-            }
-            jsonText = jsonText.trim();
-          }
-
-          // Check if response is truncated or corrupted
-          if (jsonText.includes(">]>]>]>]") || jsonText.length > 10000) {
+          const issues = parseIssuesFromResponse(fullResponse);
+          if (issues === null) {
             console.warn(
-              `Corrupted or truncated response for ${keyPath} in ${language}, skipping`,
+              `Unexpected response format for ${keyPath} in ${language}`,
             );
             return [];
           }
-
-          // Clean up common JSON issues from LLM responses
-          // Fix improperly escaped brackets in strings
-          jsonText = jsonText.replace(/\\\[/g, "[").replace(/\\\]/g, "]");
-
-          // Try to parse as JSON
-          const issues = JSON.parse(jsonText);
-          if (Array.isArray(issues)) {
-            if (issues.length === 0) {
-              console.log(`  ✓ OK`);
-            } else {
-              console.log(`  ✗ ${issues.length} issue(s): ${issues.map((i) => i.type).join(", ")}`);
-            }
-            return issues;
+          if (issues.length === 0) {
+            console.log(`  ✓ OK`);
           } else {
-            console.warn(
-              `Unexpected response format for ${keyPath} in ${language}: not an array`,
-            );
-            return [];
+            console.log(`  ✗ ${issues.length} issue(s): ${issues.map((i) => i.type).join(", ")}`);
           }
+          return issues;
         } catch (parseError) {
           console.warn(
-            `Failed to parse Ollama response as JSON for ${keyPath} in ${language}: ${parseError.message}`,
+            `Failed to parse response as JSON for ${keyPath} in ${language}: ${parseError.message}`,
           );
-          console.warn(`Response was: ${responseText.substring(0, 500)}...`);
+          console.warn(`Response was: ${fullResponse.substring(0, 500)}...`);
           return [];
         }
       } else {
-        throw new Error(
-          `Unexpected Ollama response format: ${JSON.stringify(response)}`,
-        );
+        throw new Error("Empty response from model");
       }
     } catch (error) {
       lastError = error;
       retries++;
 
-      // Log the error
       console.error(
-        `Error calling Ollama (attempt ${retries}/${maxRetries}):`,
+        `Error calling ${PROVIDER} (attempt ${retries}/${maxRetries}):`,
         error.message,
       );
 
-      // If it's a socket hang up or timeout, wait before retrying
       if (
         error.code === "ECONNRESET" ||
         error.code === "ETIMEDOUT" ||
+        error.name === "AbortError" ||
         error.message.includes("socket hang up") ||
-        error.message.includes("timeout")
+        error.message.includes("timeout") ||
+        error.message.includes("aborted")
       ) {
         console.log(
           `Network error detected. Waiting before retry... ${error.message}`,
         );
-        console.log(
-          `ollama api url: '${ollamaConfig.apiUrl}' model: '${MODEL}'`,
-        );
-        // Wait for a few seconds before retrying (increasing with each retry)
+        if (PROVIDER === "ollama") {
+          console.log(`ollama api url: '${ollamaConfig.apiUrl}' model: '${MODEL}'`);
+        } else {
+          console.log(`openrouter api url: '${openRouterConfig.apiUrl}' model: '${MODEL}'`);
+        }
         await new Promise((resolve) => setTimeout(resolve, 2000 * retries));
       } else if (retries < maxRetries) {
-        // For other errors, wait a shorter time
         await new Promise((resolve) => setTimeout(resolve, 1000));
       }
     }
@@ -521,6 +1056,43 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
     const translations = await loadAllTranslations(projectPath, languages);
     console.log("Translation files loaded.");
 
+    // Phase 0: Orphan key detection — keys in translations that don't exist in English
+    const enData = translations["en"] || {};
+    for (const language of languages) {
+      const langData = translations[language] || {};
+      const orphans = findOrphanKeys(enData, langData);
+      if (orphans.length > 0) {
+        console.log(
+          `  [orphan] ${language}: ${orphans.length} key(s) not found in English`,
+        );
+        for (const { namespace, key: orphanKey } of orphans) {
+          const orphanKeyPath = `${namespace}:${orphanKey}`;
+          const issue = {
+            type: "orphan_key",
+            description: `Key "${orphanKey}" exists in ${language}/${namespace}.json but not in English — stale translation`,
+            suggestion: "Remove this key from the translation file",
+          };
+          appendIssueToTSV(
+            tsvFilename,
+            project,
+            `${projectPath}/.meta/${namespace}/${orphanKey}.json`,
+            orphanKeyPath,
+            language,
+            "",
+            translations[language]?.[namespace]?.[orphanKey] || "",
+            issue,
+          );
+          counters.totalIssuesFound++;
+          stats.updatedIssues++;
+          if (!stats.languages[language]) {
+            stats.languages[language] = { processed: 0, updated: 0, issues: 0 };
+          }
+          stats.languages[language].updated++;
+          stats.languages[language].issues++;
+        }
+      }
+    }
+
     const metaPattern = path
       .join(projectPath, ".meta", "**", "*.json")
       .replace(/\\/g, "/");
@@ -547,6 +1119,9 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
         const keyPath = `${namespace}:${key}`;
 
         const metadata = await fs.readJson(metadataFile);
+
+        // Extract context from metadata (comment + usage examples)
+        const keyContext = extractKeyContext(metadata);
 
         const englishContent = getTranslationContent(
           translations,
@@ -594,13 +1169,43 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
               totalKeys: metadataFiles.length,
             };
 
-            const issues = await verifyTranslation(
-              keyPath,
+            // Phase 1: deterministic checks (instant, no LLM)
+            const deterministicIssues = runDeterministicChecks(
               englishContent,
               translatedContent,
               language,
-              progress,
+              key,
             );
+
+            if (deterministicIssues.length > 0) {
+              console.log(
+                `  [static] ${deterministicIssues.length} issue(s): ${deterministicIssues.map((i) => i.type).join(", ")}`,
+              );
+            }
+
+            // Phase 2: LLM verification (skip if --no-llm or deterministic found critical structural issues)
+            const hasStructuralIssue = deterministicIssues.some((i) =>
+              ["empty_translation", "wrong_script"].includes(i.type),
+            );
+
+            let llmIssues = [];
+            if (!NO_LLM && !hasStructuralIssue) {
+              llmIssues = await verifyTranslation(
+                keyPath,
+                englishContent,
+                translatedContent,
+                language,
+                progress,
+                keyContext,
+              );
+            }
+
+            // Merge: deterministic issues that overlap with LLM types are deduplicated
+            const llmTypes = new Set(llmIssues.map((i) => i.type));
+            const uniqueDeterministic = deterministicIssues.filter(
+              (i) => !llmTypes.has(i.type),
+            );
+            const issues = [...uniqueDeterministic, ...llmIssues];
 
             if (!metadata.languages) metadata.languages = {};
             if (!metadata.languages[language]) {
@@ -753,16 +1358,18 @@ async function verifyAllTranslationsSpellCheck() {
   checkpoint = loadCheckpoint();
   const resuming = checkpoint.lastProject !== null;
 
-  console.log("OLLAMA_MODEL: ", MODEL);
-
+  console.log("PROVIDER: ", PROVIDER);
+  console.log("MODEL: ", MODEL);
   console.log("LANGUAGES_TO_CHECK: ", LANGUAGES_TO_CHECK);
   console.log("CHECKPOINT_FILE: ", CHECKPOINT_FILE);
   console.log("RESUMING: ", resuming ? "yes" : "no");
 
-  const ollamaRunning = await verifyOllamaConnection();
-  if (!ollamaRunning) {
-    console.error("Ollama is not running. Aborting verification process.");
-    process.exit(1);
+  if (!NO_LLM) {
+    const providerReady = await verifyProviderConnection();
+    if (!providerReady) {
+      console.error(`${PROVIDER} is not available. Aborting verification process.`);
+      process.exit(1);
+    }
   }
 
   // Use existing TSV file if resuming, otherwise create new one
