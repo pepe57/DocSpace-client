@@ -68,6 +68,61 @@ const skipForbiddenKeys = [
   "ProductEditorsName",
 ];
 
+/**
+ * Delete translation keys from JSON files when CLEAR_WRONG_VALUES=true.
+ * Accepts entries already resolved to { filePath, key }.
+ *
+ * @param {Array<{filePath: string, key: string}>} entries
+ * @param {string} label - Description for console output (e.g. "wrong variable keys")
+ */
+function clearWrongKeys(entries, label) {
+  if (process.env.CLEAR_WRONG_VALUES !== "true" || entries.length === 0) return;
+
+  const grouped = {};
+  entries.forEach(({ filePath, key }) => {
+    if (!grouped[filePath]) grouped[filePath] = [];
+    grouped[filePath].push(key);
+  });
+
+  let total = 0;
+  Object.entries(grouped).forEach(([fp, keys]) => {
+    const content = JSON.parse(fs.readFileSync(fp, "utf8"));
+    keys.forEach((k) => delete content[k]);
+    fs.writeFileSync(fp, JSON.stringify(content, null, 2));
+    total += keys.length;
+  });
+
+  console.log(`Cleared ${total} ${label}.`);
+}
+
+/**
+ * Resolve wrongKeys array of { language, key } (where key = "namespace:actualKey")
+ * into { filePath, key } entries suitable for clearWrongKeys().
+ * Deduplicates by language:key.
+ *
+ * @param {Array<{language: string, key: string}>} wrongKeys
+ * @returns {Array<{filePath: string, key: string}>}
+ */
+function resolveTranslationEntries(wrongKeys) {
+  const seen = new Set();
+  const entries = [];
+  wrongKeys.forEach(({ language, key }) => {
+    const id = `${language}:${key}`;
+    if (seen.has(id)) return;
+    seen.add(id);
+
+    const colonIndex = key.indexOf(":");
+    const namespace = key.substring(0, colonIndex);
+    const actualKey = key.substring(colonIndex + 1);
+    const translationFile = translationFiles.find(
+      (f) => f.language === language && f.namespace === namespace,
+    );
+    if (!translationFile) return;
+    entries.push({ filePath: translationFile.path, key: actualKey });
+  });
+  return entries;
+}
+
 beforeAll(() => {
   console.log(`Base path = ${BASE_DIR}`);
 
@@ -602,40 +657,10 @@ describe("Locales Tests", () => {
       });
     });
 
-    if (process.env.CLEAR_WRONG_VALUES === "true" && wrongVariableKeys.length > 0) {
-      const seen = new Set();
-      const uniqueWrongKeys = wrongVariableKeys.filter(({ language, key }) => {
-        const id = `${language}:${key}`;
-        if (seen.has(id)) return false;
-        seen.add(id);
-        return true;
-      });
-
-      const fileUpdates = {};
-      uniqueWrongKeys.forEach(({ language, key }) => {
-        const colonIndex = key.indexOf(":");
-        const namespace = key.substring(0, colonIndex);
-        const actualKey = key.substring(colonIndex + 1);
-        const translationFile = translationFiles.find(
-          (f) => f.language === language && f.namespace === namespace,
-        );
-        if (!translationFile) return;
-        if (!fileUpdates[translationFile.path]) {
-          fileUpdates[translationFile.path] = [];
-        }
-        fileUpdates[translationFile.path].push(actualKey);
-      });
-
-      Object.entries(fileUpdates).forEach(([filePath, keys]) => {
-        const content = JSON.parse(fs.readFileSync(filePath, "utf8"));
-        keys.forEach((k) => {
-          delete content[k];
-        });
-        fs.writeFileSync(filePath, JSON.stringify(content, null, 2));
-      });
-
-      console.log(`Cleared ${uniqueWrongKeys.length} wrong variable translation keys.`);
-    }
+    clearWrongKeys(
+      resolveTranslationEntries(wrongVariableKeys),
+      "wrong variable translation keys",
+    );
 
     expect(errorsCount, message).toBe(0);
   });
@@ -712,40 +737,10 @@ describe("Locales Tests", () => {
       });
     });
 
-    if (process.env.CLEAR_WRONG_VALUES === "true" && wrongTagKeys.length > 0) {
-      const seen = new Set();
-      const uniqueWrongKeys = wrongTagKeys.filter(({ language, key }) => {
-        const id = `${language}:${key}`;
-        if (seen.has(id)) return false;
-        seen.add(id);
-        return true;
-      });
-
-      const fileUpdates = {};
-      uniqueWrongKeys.forEach(({ language, key }) => {
-        const colonIndex = key.indexOf(":");
-        const namespace = key.substring(0, colonIndex);
-        const actualKey = key.substring(colonIndex + 1);
-        const translationFile = translationFiles.find(
-          (f) => f.language === language && f.namespace === namespace,
-        );
-        if (!translationFile) return;
-        if (!fileUpdates[translationFile.path]) {
-          fileUpdates[translationFile.path] = [];
-        }
-        fileUpdates[translationFile.path].push(actualKey);
-      });
-
-      Object.entries(fileUpdates).forEach(([filePath, keys]) => {
-        const content = JSON.parse(fs.readFileSync(filePath, "utf8"));
-        keys.forEach((k) => {
-          delete content[k];
-        });
-        fs.writeFileSync(filePath, JSON.stringify(content, null, 2));
-      });
-
-      console.log(`Cleared ${uniqueWrongKeys.length} wrong tag translation keys.`);
-    }
+    clearWrongKeys(
+      resolveTranslationEntries(wrongTagKeys),
+      "wrong tag translation keys",
+    );
 
     expect(errorsCount, message).toBe(0);
   });
@@ -819,25 +814,10 @@ describe("Locales Tests", () => {
       });
     });
 
-    if (process.env.CLEAR_WRONG_VALUES === "true" && wrongKeys.length > 0) {
-      const fileUpdates = {};
-      wrongKeys.forEach(({ path, key }) => {
-        if (!fileUpdates[path]) fileUpdates[path] = [];
-        fileUpdates[path].push(key);
-      });
-
-      Object.entries(fileUpdates).forEach(([filePath, keys]) => {
-        const content = JSON.parse(fs.readFileSync(filePath, "utf8"));
-        keys.forEach((k) => {
-          delete content[k];
-        });
-        fs.writeFileSync(filePath, JSON.stringify(content, null, 2));
-      });
-
-      console.log(
-        `Deleted ${wrongKeys.length} wrong-script keys from sr-Cyrl-RS.`,
-      );
-    }
+    clearWrongKeys(
+      wrongKeys.map(({ path: p, key: k }) => ({ filePath: p, key: k })),
+      "wrong-script keys from sr-Cyrl-RS",
+    );
 
     expect(errorsCount, message).toBe(0);
   });
@@ -849,6 +829,7 @@ describe("Locales Tests", () => {
 
     let exists = false;
     let i = 0;
+    const forbiddenEntries = [];
 
     moduleFolders.forEach((module) => {
       if (!module.availableLanguages || module.isCommon) return;
@@ -875,16 +856,13 @@ describe("Locales Tests", () => {
 
         message += keys.join("\r\n") + "\r\n\r\n";
 
-        if (process.env.CLEAR_WRONG_VALUES === "true") {
-          const content = JSON.parse(fs.readFileSync(lng.path, "utf8"));
-          translationItems.forEach((t) => {
-            delete content[t.key];
-          });
-          fs.writeFileSync(lng.path, JSON.stringify(content, null, 2));
-          console.log(`Cleared ${translationItems.length} forbidden value keys in '${lng.path}'.`);
-        }
+        translationItems.forEach((t) => {
+          forbiddenEntries.push({ filePath: lng.path, key: t.key });
+        });
       });
     });
+
+    clearWrongKeys(forbiddenEntries, "forbidden value keys");
 
     expect(exists, message).toBe(false);
   });
@@ -949,38 +927,9 @@ describe("Locales Tests", () => {
 
     let exists = false;
     let i = 0;
+    const emptyEntries = [];
 
-    moduleFolders.forEach((module) => {
-      if (!module.availableLanguages) return;
-
-      module.availableLanguages.forEach((lng) => {
-        const emptyTranslationItems = lng.translations.filter((f) => !f.value);
-
-        if (!emptyTranslationItems.length) return;
-
-        exists = true;
-
-        message +=
-          `${++i}. Language '${lng.language}' (Count: ${
-            emptyTranslationItems.length
-          }). Path '${lng.path}' ` + `Empty keys:\r\n\r\n`;
-
-        const emptyKeys = emptyTranslationItems.map((t) => t.key);
-
-        message += emptyKeys.join("\r\n") + "\r\n\r\n";
-
-        if (process.env.CLEAR_WRONG_VALUES === "true") {
-          const content = JSON.parse(fs.readFileSync(lng.path, "utf8"));
-          emptyTranslationItems.forEach((t) => {
-            delete content[t.key];
-          });
-          fs.writeFileSync(lng.path, JSON.stringify(content, null, 2));
-          console.log(`Deleted ${emptyTranslationItems.length} empty keys in '${lng.path}'.`);
-        }
-      });
-    });
-
-    commonTranslations.forEach((lng) => {
+    const collectEmptyKeys = (lng) => {
       const emptyTranslationItems = lng.translations.filter((f) => !f.value);
 
       if (!emptyTranslationItems.length) return;
@@ -996,15 +945,19 @@ describe("Locales Tests", () => {
 
       message += emptyKeys.join("\r\n") + "\r\n\r\n";
 
-      if (process.env.CLEAR_WRONG_VALUES === "true") {
-        const content = JSON.parse(fs.readFileSync(lng.path, "utf8"));
-        emptyTranslationItems.forEach((t) => {
-          delete content[t.key];
-        });
-        fs.writeFileSync(lng.path, JSON.stringify(content, null, 2));
-        console.log(`Deleted ${emptyTranslationItems.length} empty keys in '${lng.path}'.`);
-      }
+      emptyTranslationItems.forEach((t) => {
+        emptyEntries.push({ filePath: lng.path, key: t.key });
+      });
+    };
+
+    moduleFolders.forEach((module) => {
+      if (!module.availableLanguages) return;
+      module.availableLanguages.forEach(collectEmptyKeys);
     });
+
+    commonTranslations.forEach(collectEmptyKeys);
+
+    clearWrongKeys(emptyEntries, "empty translation keys");
 
     expect(exists, message).toBe(false);
   });
@@ -1778,6 +1731,251 @@ describe("Locales Tests", () => {
     }
 
     expect(uniqueEntries.length, message).toBe(0);
+  });
+
+  it("MalformedTagsTest: Verify that HTML/React tags in translations have no extra internal whitespace.", () => {
+    // Tags like "<strong >" or "< /strong>" will break rendering.
+    // The WrongTranslationTagsTest normalizes whitespace before comparing,
+    // so malformed tags slip through undetected. This test catches them directly.
+    const tagRegex = /<\/?[a-zA-Z][^>]*\/?>/g;
+    const malformedTagRegex = /\s+\/?>|<\s+/;
+
+    let message = "Next keys have malformed HTML/React tags (extra whitespace inside tag):\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const malformedKeys = [];
+
+    translationFiles.forEach((file) => {
+      if (file.language === "en") return; // English is the reference, skip
+
+      file.translations.forEach((t) => {
+        if (!t.value) return;
+
+        const tags = t.value.match(tagRegex) || [];
+        const malformed = tags.filter((tag) => malformedTagRegex.test(tag));
+
+        if (malformed.length > 0) {
+          message +=
+            `${++i}. lng='${file.language}' key='${file.namespace}:${t.key}'\r\n` +
+            `  Malformed tag(s): ${malformed.join(", ")}\r\n` +
+            `  Value: '${t.value.substring(0, 200)}'\r\n\r\n`;
+          errorsCount++;
+          malformedKeys.push({ language: file.language, key: `${file.namespace}:${t.key}` });
+        }
+      });
+    });
+
+    clearWrongKeys(
+      resolveTranslationEntries(malformedKeys),
+      "malformed tag translation keys",
+    );
+
+    expect(errorsCount, message).toBe(0);
+  });
+
+  it("HtmlEntityConsistencyTest: Verify that HTML entities (&nbsp;, &amp;, etc.) are consistent between English and other languages.", () => {
+    const entityRegex = /&[a-zA-Z]+;/g;
+
+    let message = "Next keys have mismatched HTML entities between English and translation:\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const entityMismatchKeys = [];
+
+    const groupedByLng = translationFiles.reduce((acc, t) => {
+      if (!acc[t.language]) acc[t.language] = [];
+      acc[t.language].push(
+        ...t.translations.map((k) => ({
+          key: `${t.namespace}:${k.key}`,
+          value: k.value,
+          language: t.language,
+          entities: (k.value.match(entityRegex) || []).sort(),
+        })),
+      );
+      return acc;
+    }, {});
+
+    const enWithEntities = (groupedByLng["en"] || []).filter(
+      (t) => t.entities.length > 0,
+    );
+
+    const otherLanguages = Object.keys(groupedByLng)
+      .filter((lang) => lang !== "en")
+      .map((lang) => ({
+        language: lang,
+        translations: groupedByLng[lang],
+      }));
+
+    enWithEntities.forEach((enKey) => {
+      otherLanguages.forEach((lng) => {
+        const lngKey = lng.translations.find((t) => t.key === enKey.key);
+        if (!lngKey || !lngKey.value) return;
+
+        const enStr = enKey.entities.join(",");
+        const lngStr = lngKey.entities.join(",");
+
+        if (enStr !== lngStr) {
+          const missing = enKey.entities.filter((e) => !lngKey.entities.includes(e));
+          const extra = lngKey.entities.filter((e) => !enKey.entities.includes(e));
+          const parts = [];
+          if (missing.length) parts.push(`missing: ${missing.join(", ")}`);
+          if (extra.length) parts.push(`extra: ${extra.join(", ")}`);
+
+          message +=
+            `${++i}. lng='${lng.language}' key='${lngKey.key}' — ${parts.join("; ")}\r\n` +
+            `  'en': '${enKey.value}'\r\n  '${lng.language}': '${lngKey.value}'\r\n\r\n`;
+          errorsCount++;
+          entityMismatchKeys.push({ language: lng.language, key: lngKey.key });
+        }
+      });
+    });
+
+    clearWrongKeys(
+      resolveTranslationEntries(entityMismatchKeys),
+      "entity mismatch translation keys",
+    );
+
+    expect(errorsCount, message).toBe(0);
+  });
+
+  it("UnpairedBracketsTest: Verify that translations have balanced brackets and quotes.", () => {
+    const bracketPairs = [
+      ["(", ")"],
+      ["[", "]"],
+      ["\u00AB", "\u00BB"], // « »
+      ["\u201C", "\u201D"], // " "
+    ];
+
+    let message = "Next keys have unpaired brackets/quotes in translations:\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const unpairedKeys = [];
+
+    translationFiles.forEach((file) => {
+      file.translations.forEach((t) => {
+        if (!t.value) return;
+
+        for (const [open, close] of bracketPairs) {
+          const openRe = new RegExp(`\\${open}`, "g");
+          const closeRe = new RegExp(`\\${close}`, "g");
+          const openCount = (t.value.match(openRe) || []).length;
+          const closeCount = (t.value.match(closeRe) || []).length;
+
+          if (openCount !== closeCount) {
+            message +=
+              `${++i}. lng='${file.language}' key='${file.namespace}:${t.key}'\r\n` +
+              `  Unpaired "${open}${close}": ${openCount} open vs ${closeCount} close\r\n` +
+              `  Value: '${t.value.substring(0, 200)}'\r\n\r\n`;
+            errorsCount++;
+            unpairedKeys.push({ language: file.language, key: `${file.namespace}:${t.key}` });
+          }
+        }
+      });
+    });
+
+    clearWrongKeys(
+      resolveTranslationEntries(unpairedKeys),
+      "unpaired bracket translation keys",
+    );
+
+    expect(errorsCount, message).toBe(0);
+  });
+
+  it("WrongScriptNonLatinTest: Verify that non-Latin language translations contain appropriate script characters.", () => {
+    // Extends WrongScriptTest (sr-Cyrl-RS only) to all languages with non-Latin scripts.
+    // If a translation is pure ASCII/Latin for a language that requires a different script,
+    // and the value differs from English, it's likely untranslated or in the wrong language.
+    const nonLatinLanguages = {
+      "ar-SA": /[\u0600-\u06FF]/,     // Arabic
+      "ja-JP": /[\u3040-\u30FF\u4E00-\u9FFF]/,  // Hiragana, Katakana, CJK
+      "zh-CN": /[\u4E00-\u9FFF]/,     // CJK Unified
+      "ko-KR": /[\uAC00-\uD7AF\u1100-\u11FF]/, // Hangul
+      "hy-AM": /[\u0530-\u058F]/,     // Armenian
+      "el-GR": /[\u0370-\u03FF]/,     // Greek
+      "lo-LA": /[\u0E80-\u0EFF]/,     // Lao
+      "si":    /[\u0D80-\u0DFF]/,     // Sinhala
+      "uk-UA": /[\u0400-\u04FF]/,     // Cyrillic
+      "ru":    /[\u0400-\u04FF]/,     // Cyrillic
+      "bg":    /[\u0400-\u04FF]/,     // Cyrillic
+      // sr-Cyrl-RS is covered by the dedicated WrongScriptTest
+    };
+
+    function stripMarkup(text) {
+      return text
+        .replace(/\{\{[^}]+\}\}/g, "")
+        .replace(/<[^>]*>/g, "")
+        .replace(/&[a-zA-Z]+;/g, "");
+    }
+
+    // Build cross-language lookup: "namespace|key" → { language: rawValue }
+    const crossLangMap = new Map();
+    translationFiles.forEach((file) => {
+      file.translations.forEach((t) => {
+        const mapKey = `${file.namespace}|${t.key}`;
+        if (!crossLangMap.has(mapKey)) crossLangMap.set(mapKey, {});
+        crossLangMap.get(mapKey)[file.language] = t.value;
+      });
+    });
+
+    function matchesEnglish(namespace, key, value) {
+      const langs = crossLangMap.get(`${namespace}|${key}`) || {};
+      const enVal = langs["en"];
+      if (!enVal) return false;
+      return value === enVal;
+    }
+
+    function matchesOtherLatinLanguage(namespace, key, value) {
+      const langs = crossLangMap.get(`${namespace}|${key}`) || {};
+      const stripped = stripMarkup(value).trim();
+      if (!stripped) return true;
+      // Check if any Latin-script language has the same value (intentional like brand names)
+      const latinLangs = ["en", "de", "fr", "es", "it", "pt", "pt-BR", "nl", "pl", "cs", "sk",
+        "ro", "lv", "sl", "fi", "tr", "sq-AL", "sr-Latn-RS", "az", "vi"];
+      return latinLangs.some((lang) => {
+        const otherVal = langs[lang];
+        return otherVal && stripMarkup(otherVal).trim() === stripped;
+      });
+    }
+
+    let message = "Next keys in non-Latin languages contain no expected script characters (wrong script):\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const wrongScriptKeys = [];
+
+    for (const [langCode, scriptRegex] of Object.entries(nonLatinLanguages)) {
+      const langFiles = translationFiles.filter((f) => f.language === langCode);
+
+      langFiles.forEach((file) => {
+        file.translations.forEach((t) => {
+          if (!t.value) return;
+
+          const stripped = stripMarkup(t.value).trim();
+          // Skip short values (brand names, abbreviations, etc.)
+          if (stripped.length <= 15) return;
+
+          // Has expected script characters — OK
+          if (scriptRegex.test(stripped)) return;
+
+          // Value is identical to English — intentional (brand name, product name, etc.)
+          if (matchesEnglish(file.namespace, t.key, t.value)) return;
+
+          // Value matches a Latin-script language — intentional
+          if (matchesOtherLatinLanguage(file.namespace, t.key, t.value)) return;
+
+          message +=
+            `${++i}. lng='${langCode}' key='${file.namespace}:${t.key}'\r\n` +
+            `  Value: '${t.value.substring(0, 150)}'\r\n\r\n`;
+          errorsCount++;
+          wrongScriptKeys.push({ language: langCode, key: `${file.namespace}:${t.key}` });
+        });
+      });
+    }
+
+    clearWrongKeys(
+      resolveTranslationEntries(wrongScriptKeys),
+      "wrong-script keys in non-Latin languages",
+    );
+
+    expect(errorsCount, message).toBe(0);
   });
 });
 
