@@ -38,6 +38,7 @@ import { useServicesActions } from "../../hooks/useServicesActions";
 import { Link } from "@docspace/ui-kit/components";
 
 type StorageWarningProps = {
+  isDisabled: boolean;
   currentStoragePlanSize?: number;
   title?: string;
   onCancelChange?: () => void;
@@ -51,6 +52,7 @@ const StorageWarning: React.FC<StorageWarningProps> = ({
   onCancelChange,
   isCancelLoading,
   style,
+  isDisabled,
 }) => {
   const { t } = useServicesActions();
 
@@ -76,7 +78,7 @@ const StorageWarning: React.FC<StorageWarningProps> = ({
         })}
       </Text>
 
-      {isCancellationMode ? (
+      {!isDisabled && isCancellationMode ? (
         <div className={styles.cancelChangeRow}>
           <Link
             textDecoration="underline dashed"
@@ -109,3 +111,4 @@ export default inject(({ currentTariffStatusStore }: TStore) => {
     currentStoragePlanSize,
   };
 })(observer(StorageWarning));
+
