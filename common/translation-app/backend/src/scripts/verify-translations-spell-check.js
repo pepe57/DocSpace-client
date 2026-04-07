@@ -679,7 +679,6 @@ function runDeterministicChecks(englishContent, translatedContent, language, key
     ["[", "]"],
     ["{", "}"],
     ["\u00AB", "\u00BB"], // « »
-    ["\u201C", "\u201D"], // " "
   ];
   for (const [open, close] of bracketPairs) {
     // Skip {{variable}} braces — they are checked separately
@@ -693,6 +692,20 @@ function runDeterministicChecks(englishContent, translatedContent, language, key
         suggestion: "",
       });
     }
+  }
+
+  // 8b. Smart-quote pairing: „ (U+201E), " (U+201C), " (U+201D) — total count must be even
+  //     Languages like de, cs, bg use „..." (U+201E + U+201C), en uses "..." (U+201C + U+201D)
+  const smartQuoteTotal =
+    (translatedContent.match(/\u201C/g) || []).length +
+    (translatedContent.match(/\u201D/g) || []).length +
+    (translatedContent.match(/\u201E/g) || []).length;
+  if (smartQuoteTotal > 0 && smartQuoteTotal % 2 !== 0) {
+    issues.push({
+      type: "unpaired_bracket",
+      description: `Odd number of smart quotes (\u201C\u201D\u201E): ${smartQuoteTotal} total (should be even)`,
+      suggestion: "",
+    });
   }
 
   // 9. Forbidden literal values (ONLYOFFICE, DOCSPACE) — should use {{productName}} etc.

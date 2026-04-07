@@ -1,7 +1,16 @@
 const { ollamaConfig } = require("../config/config");
 const fsUtils = require("../utils/fsUtils");
-const { Ollama } = require("ollama");
-const { verifyOllamaConnection, withTimeout } = require("../utils/ollamaUtils");
+const { verifyOllamaConnection } = require("../utils/ollamaUtils");
+const {
+  isOpenRouterModel,
+  getProviderName,
+  verifyConnection,
+  listOllamaModels,
+  listOpenRouterModels,
+  createStreamingChat,
+  completionChat,
+  createRawStream,
+} = require("../utils/llmProvider");
 
 // Add debugger to help diagnose connection issues
 const DEBUG = true;
@@ -31,46 +40,49 @@ function abortCurrentTranslation() {
  * @param {Object} options - Route options
  */
 async function routes(fastify, options) {
-  // Get available models from Ollama
+  // Get available models from Ollama and/or OpenRouter
   fastify.get("/models", async (request, reply) => {
     try {
-      debug(`Attempting to connect to Ollama API at: ${ollamaConfig.apiUrl}`);
+      const allModels = [];
 
-      // First verify connection using standard fetch
-      const isConnected = await verifyOllamaConnection();
-      if (!isConnected) {
+      // Try Ollama
+      try {
+        debug(`Attempting to connect to Ollama API at: ${ollamaConfig.apiUrl}`);
+        const isOllamaConnected = await verifyOllamaConnection();
+        if (isOllamaConnected) {
+          const ollamaModels = await listOllamaModels();
+          debug(`Ollama: retrieved ${ollamaModels.length} models`);
+          allModels.push(...ollamaModels);
+        } else {
+          debug("Ollama: not available");
+        }
+      } catch (error) {
+        debug(`Ollama error: ${error.message}`);
+      }
+
+      // Try OpenRouter
+      try {
+        const openRouterModels = await listOpenRouterModels();
+        debug(`OpenRouter: retrieved ${openRouterModels.length} models`);
+        allModels.push(...openRouterModels);
+      } catch (error) {
+        debug(`OpenRouter: ${error.message}`);
+      }
+
+      if (allModels.length === 0) {
         return reply.code(503).send({
           success: false,
-          error: "Ollama service is unavailable",
-          details: "Connection to Ollama API failed",
+          error: "No LLM providers available",
+          details: "Neither Ollama nor OpenRouter returned models",
         });
       }
 
-      debug("Creating ollama client");
-
-      // Create a new Ollama client instance
-      const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
-
-      debug("Ollama client created, requesting models list");
-      // Get models using ollama client with error handling
-      try {
-        const { models } = await ollamaClient.list();
-        debug(`Successfully retrieved ${models?.length || 0} models`);
-        return { success: true, data: models || [] };
-      } catch (clientError) {
-        debug(`Ollama client error: ${clientError.message}`);
-
-        // Fallback to direct fetch if client fails
-        debug("Falling back to direct fetch API call");
-        const response = await fetch(`${ollamaConfig.apiUrl}/api/tags`);
-        const data = await response.json();
-        return { success: true, data: data.models || [] };
-      }
+      return { success: true, data: allModels };
     } catch (error) {
       request.log.error(error);
       return reply.code(500).send({
         success: false,
-        error: "Failed to connect to Ollama API",
+        error: "Failed to list models",
         details: error.message,
       });
     }
@@ -1036,15 +1048,14 @@ Rules:
   }
 
   try {
-    // First verify Ollama connection
-    const isConnected = await verifyOllamaConnection();
+    // Verify provider connection
+    const isConnected = await verifyConnection(model);
     if (!isConnected) {
-      throw new Error("Ollama service is unavailable");
+      throw new Error(`${getProviderName(model)} service is unavailable`);
     }
 
-    // Configure Ollama API settings
     debug(
-      `Connecting to Ollama API at: ${ollamaConfig.apiUrl} for translation`,
+      `Connecting to ${getProviderName(model)} for translation`,
     );
     debug(`Using model: ${model}`);
     debug(
@@ -1061,18 +1072,25 @@ Rules:
     // Emit prompts to UI debug panel before streaming starts
     debugEmit?.("translation:debug:prompt", { systemPrompt, userPrompt, targetLanguage, sourceLanguage });
 
-    // Use the ollama npm client with stream:true — returns an AbortableAsyncIterator.
-    // Calling stream.abort() properly cancels the underlying fetch + for-await loop.
-    debug("Step 1: creating ollama stream...");
-    const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
+    // Create streaming chat via provider abstraction (Ollama or OpenRouter).
+    const providerName = getProviderName(model);
+    const inactivityMs = isOpenRouterModel(model)
+      ? (require("../config/config").openRouterConfig.inactivityTimeout)
+      : ollamaConfig.inactivityTimeout;
+    const firstTokenMs = isOpenRouterModel(model)
+      ? (require("../config/config").openRouterConfig.firstTokenTimeout)
+      : ollamaConfig.firstTokenTimeout;
+
+    debug(`Step 1: creating ${providerName} stream for model ${model}...`);
 
     let activeTimeout = null;
-    const resetInactivityTimer = (stream) => {
+    let abortFn = null;
+    const resetInactivityTimer = () => {
       clearTimeout(activeTimeout);
       activeTimeout = setTimeout(() => {
-        debug(`Inactivity timeout after ${ollamaConfig.inactivityTimeout}ms`);
-        stream.abort();
-      }, ollamaConfig.inactivityTimeout);
+        debug(`Inactivity timeout after ${inactivityMs}ms`);
+        abortFn?.();
+      }, inactivityMs);
     };
 
     let fullResponse = "";
@@ -1080,48 +1098,44 @@ Rules:
     let tokenCount = 0;
     userAbortRequested = false;
 
-    let stream;
     try {
-      stream = await ollamaClient.chat({
-        model,
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt },
-        ],
-        stream: true,
-        think: true, // native thinking output (gemma4, qwen3, deepseek-r1, etc.)
-        options: {
-          temperature: 0.1,  // 0 causes infinite thinking loops in reasoning models
-          num_predict: 8192, // hard cap on total tokens (thinking + response) to prevent infinite loops
-        },
+      const chatResult = await createStreamingChat(model, [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt },
+      ], {
+        temperature: 0.1,
+        maxTokens: 8192,
+        think: true,
       });
-      debug("Step 2: stream created, waiting for tokens...");
 
-      currentOllamaStream = stream;
+      abortFn = chatResult.abort;
+      // Track raw Ollama stream for external abort (stop button)
+      if (chatResult.raw) currentOllamaStream = chatResult.raw;
+
+      debug("Step 2: stream created, waiting for tokens...");
 
       // First-token timeout: abort if model doesn't respond within limit
       activeTimeout = setTimeout(() => {
-        debug(`First-token timeout after ${ollamaConfig.firstTokenTimeout}ms`);
-        stream.abort();
-      }, ollamaConfig.firstTokenTimeout);
+        debug(`First-token timeout after ${firstTokenMs}ms`);
+        abortFn?.();
+      }, firstTokenMs);
 
-      for await (const chunk of stream) {
-        // Ollama native thinking field (gemma4, qwen3, deepseek-r1 with think:true)
-        const thinkingToken = chunk.message?.thinking ?? "";
+      for await (const chunk of chatResult.stream) {
+        const thinkingToken = chunk.thinking || "";
         if (thinkingToken) {
           if (tokenCount === 0) debug("Step 3: first thinking token received");
           tokenCount++;
           fullThinking += thinkingToken;
-          resetInactivityTimer(stream);
+          resetInactivityTimer();
           debugEmit?.("translation:debug:token", { token: thinkingToken, isThinking: true });
         }
 
-        const token = chunk.message?.content ?? "";
+        const token = chunk.content || "";
         if (token) {
           if (tokenCount === 0) debug("Step 3: first content token received");
           tokenCount++;
           fullResponse += token;
-          resetInactivityTimer(stream);
+          resetInactivityTimer();
 
           // Also handle <think> tags for models that inline thinking in content
           const isInlineThinking = (() => {
@@ -1141,9 +1155,7 @@ Rules:
       throw streamError;
     } finally {
       clearTimeout(activeTimeout);
-      if (currentOllamaStream === stream) {
-        currentOllamaStream = null;
-      }
+      currentOllamaStream = null;
     }
 
     debug(`Raw model response:\n${fullResponse}\n`);
@@ -1177,12 +1189,68 @@ Rules:
       throw new Error("Model returned empty response");
     }
 
+    // ── Post-translation integrity checks & auto-fixes ───────────────────
+    let finalTranslation = cleanedResponse;
+
+    // 1. Normalize self-closing HTML tags: <br /> → <br/>, <hr /> → <hr/>
+    //    Only if the source text does NOT contain the spaced variant (it might be intentional).
+    //    Models often add a space before "/>", which breaks tag consistency tests.
+    if (!text.includes(" />")) {
+      finalTranslation = finalTranslation.replace(/<(\w+)\s+\/>/g, "<$1/>");
+    }
+
+    // 2. Verify {{variable}} integrity — every variable from source must be present
+    const srcVars = (text.match(/\{\{[^}]+\}\}/g) || []).sort();
+    const tgtVars = (finalTranslation.match(/\{\{[^}]+\}\}/g) || []).sort();
+    if (srcVars.length > 0 && srcVars.join(",") !== tgtVars.join(",")) {
+      debug(`[integrity] Variable mismatch! source=[${srcVars}] translation=[${tgtVars}]`);
+      // Attempt auto-repair: find misspelled or missing variables
+      let repaired = finalTranslation;
+      for (const srcVar of srcVars) {
+        if (!repaired.includes(srcVar)) {
+          // Try to find a close match (wrong case, extra/missing chars)
+          const varName = srcVar.replace(/^\{\{|\}\}$/g, "").replace(/, .+/, "");
+          const wrongPattern = new RegExp(
+            `\\{\\{\\s*${varName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\}?\\}?`,
+            "gi",
+          );
+          const wrongMatch = repaired.match(wrongPattern);
+          if (wrongMatch) {
+            debug(`[integrity] Repairing variable: "${wrongMatch[0]}" → "${srcVar}"`);
+            repaired = repaired.replace(wrongMatch[0], srcVar);
+          }
+        }
+      }
+      // If repair restored all variables, use it; otherwise reject translation
+      const repairedVars = (repaired.match(/\{\{[^}]+\}\}/g) || []).sort();
+      if (srcVars.join(",") === repairedVars.join(",")) {
+        debug("[integrity] Variable repair successful");
+        finalTranslation = repaired;
+      } else {
+        debug("[integrity] Variable repair failed — returning null (will keep source)");
+        return null;
+      }
+    }
+
+    // 3. Verify HTML/React tag integrity — tag count and names must match
+    const tagRegex = /<\/?[a-zA-Z][a-zA-Z0-9]*[^>]*\/?>/g;
+    const normalizeTag = (t) => t.replace(/\s+/g, " ").replace(/\s>/g, ">").replace(/\s\/>/g, "/>");
+    const srcTags = (text.match(tagRegex) || []).map(normalizeTag).sort();
+    const tgtTags = (finalTranslation.match(tagRegex) || []).map(normalizeTag).sort();
+    if (srcTags.length > 0 && srcTags.join(",") !== tgtTags.join(",")) {
+      debug(`[integrity] Tag mismatch! source=[${srcTags}] translation=[${tgtTags}]`);
+      // Reject translation — tag corruption is too risky to auto-repair
+      debug("[integrity] Returning null due to tag mismatch");
+      return null;
+    }
+
+    // ── Script validation ────────────────────────────────────────────────
     // Post-translation script validation for languages with strict script requirements.
     // Some models ignore the system prompt and produce the wrong writing system.
     // When that happens we issue one correction request before giving up.
     if (targetInfo.scriptWarning) {
       const corrected = await correctScriptIfNeeded(
-        cleanedResponse,
+        finalTranslation,
         text,
         targetInfo,
         model,
@@ -1190,7 +1258,7 @@ Rules:
       return corrected;
     }
 
-    return cleanedResponse;
+    return finalTranslation;
   } catch (error) {
     if (error.message === "Aborted by user") {
       debugEmit?.("translation:debug:aborted", {});
@@ -1288,37 +1356,29 @@ ${translation}
 Provide the corrected translation using ONLY the correct script. Return the translation text only — no explanations.`;
 
   const abortController = new AbortController();
+  const timeoutMs = isOpenRouterModel(model)
+    ? (require("../config/config").openRouterConfig.inactivityTimeout)
+    : ollamaConfig.requestTimeout;
   let inactivityTimer = setTimeout(
     () => abortController.abort(new Error(`Correction inactivity timeout`)),
-    ollamaConfig.requestTimeout,
+    timeoutMs,
   );
   const resetInactivityTimer = () => {
     clearTimeout(inactivityTimer);
     inactivityTimer = setTimeout(
       () => abortController.abort(new Error(`Correction inactivity timeout`)),
-      ollamaConfig.requestTimeout,
+      timeoutMs,
     );
   };
 
   let fullResponse = "";
   try {
-    const httpResponse = await fetch(`${ollamaConfig.apiUrl}/api/chat`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model,
-        messages: [{ role: "user", content: correctionPrompt }],
-        stream: true,
-        options: { temperature: 0.1 },
-      }),
-      signal: abortController.signal,
-    });
+    const { reader, parseToken } = await createRawStream(
+      model,
+      [{ role: "user", content: correctionPrompt }],
+      { abortController, temperature: 0.1 },
+    );
 
-    if (!httpResponse.ok) {
-      throw new Error(`Ollama HTTP error during correction: ${httpResponse.status}`);
-    }
-
-    const reader = httpResponse.body.getReader();
     const decoder = new TextDecoder();
     let buffer = "";
 
@@ -1329,16 +1389,10 @@ Provide the corrected translation using ONLY the correct script. Return the tran
       const lines = buffer.split("\n");
       buffer = lines.pop() ?? "";
       for (const line of lines) {
-        if (!line.trim()) continue;
-        try {
-          const data = JSON.parse(line);
-          const token = data.message?.content ?? "";
-          if (token) {
-            fullResponse += token;
-            resetInactivityTimer();
-          }
-        } catch {
-          // skip malformed lines
+        const token = parseToken(line);
+        if (token) {
+          fullResponse += token;
+          resetInactivityTimer();
         }
       }
     }
@@ -1396,34 +1450,26 @@ async function validateTranslation(
     const sourceInfo = getLanguageInfo(sourceLanguage);
     const targetInfo = getLanguageInfo(targetLanguage);
 
-    // Verify Ollama connection
-    const isConnected = await verifyOllamaConnection();
+    // Verify provider connection
+    const isConnected = await verifyConnection(model);
     if (!isConnected) {
-      throw new Error("Ollama service is unavailable");
+      throw new Error(`${getProviderName(model)} service is unavailable`);
     }
 
-    // Configure Ollama API
-    debug(`Connecting to Ollama API at: ${ollamaConfig.apiUrl} for validation`);
-    debug(`Using model: ${model}`);
-
-    // Create Ollama client
-    const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
-
-    // Generate validation using chat API with system role for better instruction following
+    debug(`Using ${getProviderName(model)} model: ${model} for validation`);
     debug("Sending validation request...");
 
-    const { message } = await withTimeout(
-      ollamaClient.chat({
-        model,
-        messages: [
-          {
-            role: "system",
-            content: `You are a professional software localization validator for ONLYOFFICE DocSpace UI strings.
+    const response = await completionChat(
+      model,
+      [
+        {
+          role: "system",
+          content: `You are a professional software localization validator for ONLYOFFICE DocSpace UI strings.
 Respond only with valid JSON. Never add markdown, explanations, or text outside the JSON object.`,
-          },
-          {
-            role: "user",
-            content: `Validate this UI string translation.
+        },
+        {
+          role: "user",
+          content: `Validate this UI string translation.
 
 Source (${sourceInfo.name}): "${sourceText}"
 Translation (${targetInfo.name}): "${targetText}"
@@ -1440,18 +1486,14 @@ Respond with this JSON only:
   "suggestions": ["corrected text if needed"],
   "rating": 1 to 5
 }`,
-          },
-        ],
-        stream: false,
-        options: {
-          temperature: 0, // Lower temperature for more consistent analysis
-          num_ctx: 8192,
         },
-      }),
-      ollamaConfig.requestTimeout,
+      ],
+      {
+        temperature: 0,
+        maxTokens: 8192,
+        timeout: ollamaConfig.requestTimeout,
+      },
     );
-
-    const response = message.content;
 
     // Parse the JSON response
     try {
