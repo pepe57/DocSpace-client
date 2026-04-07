@@ -128,7 +128,6 @@
   "SubscriptionAutoCancellation": "Η συνδρομή θα ακυρωθεί αυτόματα στις {{finalDate}}.",
   "SubscriptionAutoRenewed": "Η συνδρομή θα ανανεωθεί αυτόματα στις {{finalDate}} με ενημερωμένες τιμές και προδιαγραφές.",
   "SubscriptionAutoRenewedOn": "Η συνδρομή θα ανανεωθεί αυτόματα στις {{finalDate}}",
-  "SubscriptionAutoRenewedWithUpdate": "Η συνδρομή θα diperновηθεί αυτόματα <1>στις {{finalDate}}</1> με ενημερωμένες τιμές και προδιαγραφές — <1>{{price}}/month ({{amount}})</1>",
   "SubscriptionCancellation": "Ακύρωση συνδρομής",
   "SubscriptionWillBeAutomaticallyRenewed": "Συνδρομή θα dipernovithei αυτόματα <1>on {{finalDate}}</1>",
   "SwitchPlan": "Ετοιμάζεστε να μεταβείτε στο πρόγραμμα <1>{{planName}}</1>.",
@@ -165,5 +164,6 @@
   "YouHaveNotAddedAnyPayment": "Δεν έχετε προσθέσει καμία πληρωμή",
   "YourCurrentPlan": "<1>Το τρέχον πρόγραμμα σας:</1> {{amount}} <2>({{price}}/μήνα)</2>",
   "YourPrice": "Η τιμή σας",
-  "OnlyPayerCanManageSection": "Μόνο ο Πληρωτής μπορεί να διαχειριστεί αυτήν την ενότητα. <1>Περισσότερα</1>"
+  "OnlyPayerCanManageSection": "Μόνο ο Πληρωτής μπορεί να διαχειριστεί αυτήν την ενότητα. <1>Περισσότερα</1>",
+  "SubscriptionAutoRenewedWithUpdate": "Η συνδρομή θα ανανεωθεί αυτόματα <1>στις {{finalDate}}</1> με ενημερωμένες τιμές και προδιαγραφές — <1>{{price}}/μήνας ({{amount}})</1>"
 }

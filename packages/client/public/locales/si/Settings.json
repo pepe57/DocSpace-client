@@ -15,7 +15,6 @@
   "AdManagementDescription": "ඔබේ {{productName}} හි ප්‍රවර්ධන බැනර් පෙන්වනවාද යන්න තෝරන්න.",
   "Admins": "පරිපාලකයින්",
   "AdminsMessage": "පරිපාලක පණිවිඩ සැකසුම්",
-  "AdminsMessageMobileDescription": "පරිපාලක පණිවුඩ සැකසුම් යනු पोर्टल පරිපාලකයෙකු සම්බන්ධ කර ගැනීමට ඇති ක්‍රමයක් වේ.",
   "AdminsMessageSettingDescription": "පිවිසෙන පිටුවේ {{productName}} පරිපාලක සබඳතා ආකෘතිපත්‍රය පෙන්වීමට මෙම විකල්පය සබල කරන්න.",
   "AISettings": "AI සැකසුම්",
   "AllDomains": "ඕනෑම වසමක්",
@@ -147,7 +146,6 @@
   "LicenseLimitCounter": "බලපත්‍රයේ සීමාව පරිපාලකයින්:",
   "LicenseLimitDescription": "බලපත්‍රයේ සීමාව ගණනය වන්නේ {{productName}} හි දැනටමත් පවතින ගිණුම් සහ ඔබට ආයාත කිරීමට වුවමනා නව පරිශ්‍රීලකයින් අනුව වේ. ඔබ දැනටමත් {{productName}} ගිණුම් තිබෙන පරිශ්‍රීලකයින් ආයාත කළහොත් ඔවුන් නැවත ගණනය නොවේ. ඔබගේ {{productName}} බලපත්‍රය සඳහා උපරිම පරිශ්‍රීලකයින් {{maxLimit}} ක් ලද හැකිය.",
   "Lifetime": "ආයුකාලය (විනාඩි)",
-  "LimitThemesTooltip": "ඔබට අභිරුචි තේමා 𑇣 (3) ක් සෑදීමට හැකිය. නව එකක් සෑදීමට, කලින් සෑදූ තේමාවක් මකා දැමිය යුතුය.",
   "LoginHistoryCampaignHeader": "ඔබේ {{productName}} සුරක්ෂිත කරන්න",
   "LoginHistoryCampaignText": "ඔබගේ දත්ත ආරක්ෂා කර ඔබ සහ ඔබේ කණ්ඩායම විය හැකි අනවසරයෙන් ඇතුළුවීමේ තර්ජන වලින් ආරක්ෂා කරගන්න.",
   "LoginHistoryCampaignTitle": "ද්වි-සාධක සත්‍යාපනය සක්‍රීය කරන්න",
@@ -324,5 +322,7 @@
   "StartEmbedding": "ඇතුළත් කිරීම ආරම්භ කරන්න",
   "Top5AIAgents": "ගබඩා භාවිතය අනුව ඉහළම {{aiAgents}} 5:",
   "WebhooksDescription": "ඔබ භාවිතා කරන ඕනෑම යෙදුමක් හෝ වෙබ් අඩවියක, {{organizationName}} {{productName}} හි විවිධ සිදුවීම් මත පදනම්ව අභිරුචි ක්‍රියාකාරකම් සිදු කරන්න.",
-  "AuthorizationKeysInfo": "අවසර ලබාදීමේ යතුරු (Authorization keys) භාවිතයෙන්, ඔබට ඔබේ අවකාශයට (space) තෙවන පාර්ශවීය සේවාවන් සම්බන්ධ කළ හැක. Facebook, Google හෝ LinkedIn හරහා පහසුවෙන් ඇතුළු වන්න. එහි ගබඩා කර ඇති ගොනු සමඟ වැඩ කිරීමට Dropbox, OneDrive සහ අනෙකුත් ගිණුම් එක් කරන්න."
+  "AuthorizationKeysInfo": "අවසර ලබාදීමේ යතුරු (Authorization keys) භාවිතයෙන්, ඔබට ඔබේ අවකාශයට (space) තෙවන පාර්ශවීය සේවාවන් සම්බන්ධ කළ හැක. Facebook, Google හෝ LinkedIn හරහා පහසුවෙන් ඇතුළු වන්න. එහි ගබඩා කර ඇති ගොනු සමඟ වැඩ කිරීමට Dropbox, OneDrive සහ අනෙකුත් ගිණුම් එක් කරන්න.",
+  "AdminsMessageMobileDescription": "පරිපාලක පණවිඩ සැකසුම් යනු පෝටල් පරිපාලකවරයා සම්බන්ධ කර ගැනීමට ඇති ක්‍රමයකි.",
+  "LimitThemesTooltip": "ඔබට අභිමත තේමාවන් (custom themes) 3ක් පමණක් නිර්මාණය කළ හැක. අලුත් එකක් නිර්මාණය කිරීමට නම්, ඔබ පෙර නිර්මාණය කළ තේමාවන්ගෙන් එකක් මකා දැමිය යුතුය."
 }

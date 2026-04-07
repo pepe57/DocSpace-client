@@ -1,6 +1,5 @@
 {
   "About": "Giới thiệu",
-  "AboutCompanyEmailTitle": "email",
   "AboutCompanyTitle": "Giới thiệu về chương trình này",
   "AboutHeader": "Về chương trình này",
   "AccessDenied": "Truy cập bị từ chối",
@@ -1286,5 +1285,6 @@
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourFurtherEditsNotSaved": "Các chỉnh sửa tiếp theo của bạn có thể không được lưu.",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "AboutCompanyEmailTitle": "E-mail"
 }

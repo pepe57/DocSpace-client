@@ -1,6 +1,5 @@
 {
   "About": "Informații",
-  "AboutCompanyEmailTitle": "e-mail",
   "AboutCompanyTitle": "Despre aplicația",
   "AboutHeader": "Despre acest program",
   "AccessDenied": "Acces refuzat ",
@@ -387,7 +386,6 @@
   "EditUserInfo": "<1>Deja în curs de editare:</1> {{editingCount}}",
   "EditUserLimit": "<1>Limita maximă permisă:</1> {{limit}} utilizatori",
   "EditUserStatistics": "Statistici de utilizare",
-  "Email": "e-mail",
   "Embed": "Încorporare",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Integrați serviciul dvs. de AI propriu pentru a debloca funcționalități avansate în {{productName}}. Odată adăugat, acesta va fi accesibil tuturor utilizatorilor în {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} nu este încă disponibil",
@@ -1286,5 +1284,7 @@
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourFurtherEditsNotSaved": "Edițiile ulterioare pot fi fără salvare.",
   "YourLogo": "Logo-ul dvs",
-  "YourTurn": "Acum e rândul dvs."
+  "YourTurn": "Acum e rândul dvs.",
+  "AboutCompanyEmailTitle": "E-mail",
+  "Email": "Email"
 }

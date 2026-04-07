@@ -12,8 +12,6 @@
   "GroupHasBeenDeleted": "<0>කණ්ඩායම මකා දමා ඇත</0>",
   "GroupIcon": "<0>කණ්ඩායම් අයිකනය</0>",
   "GroupIsEmpty": "කණ්ඩායම හිස්ය",
-  "GroupName": "گروپ නාමය",
-  "ManageGroups": "گروپ කළමනාකරණය කරන්න",
   "RemoveFromGroup": "<0>කණ්ඩායමෙන් ඉවත් කරන්න</0>",
   "RemoveGroup": "<0>කණ්ඩායම ඉවත් කරන්න</0>",
   "RemoveGroupConfirmation": "ඔබ කාමර සමූහයක් මකා දැමීමට අදහස් කරයි. ඔබට ඉදචනය කිරීමට විශ්වාසද?",
@@ -25,5 +23,7 @@
   "RoomGroupingSettingDescription": "ඔබට කාමර ෆෝල්ඩර් වලට කණ්ඩායම් කර ඒවා අතර පහසුවෙන් මාරු විය හැකිය.",
   "RoomRemovedFromGroup": "තෝරාගත් කාමරය <1>{{groupName}}</1> වෙතින් ඉවත් කර ඇත.",
   "RoomsAddedToGroup": "තෝරාගත් කාමර <1>{{groupName}}</1> වෙත එකතු කර ඇත.",
-  "RoomsRemovedFromGroup": "තෝරාගත් කාමර <1>{{groupName}}</1> වෙතින් ඉවත් කර ඇත."
+  "RoomsRemovedFromGroup": "තෝරාගත් කාමර <1>{{groupName}}</1> වෙතින් ඉවත් කර ඇත.",
+  "GroupName": "කණ්ඩායම් නාමය",
+  "ManageGroups": "කණ්ඩායම් කළමනාකරණය කරන්න"
 }

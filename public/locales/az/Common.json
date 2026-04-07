@@ -1,6 +1,5 @@
 {
   "About": "Haqqında",
-  "AboutCompanyEmailTitle": "e-poçt",
   "AboutCompanyTitle": "Proqram haqqında",
   "AboutHeader": "Bu proqram haqqında",
   "AccessDenied": "Giriş qadağandır",
@@ -1286,5 +1285,6 @@
   "YourLogo": "Loqonuz",
   "YourTurn": "Sizin növbəniz",
   "FileActionRequired": "Hədəf qovluqda artıq «<1>{{fileName}}</1>» adlı fayl mövcuddur.",
-  "FolderActionRequired": "Təyinat yerində artıq «<1>{{folderName}}</1>» adlı qovluq mövcuddur."
+  "FolderActionRequired": "Təyinat yerində artıq «<1>{{folderName}}</1>» adlı qovluq mövcuddur.",
+  "AboutCompanyEmailTitle": "E-poçt"
 }

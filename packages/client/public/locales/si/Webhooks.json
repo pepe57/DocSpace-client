@@ -35,7 +35,6 @@
   "FolderUpdated": "ෆෝල්ඩරය යාවත්කාලීන කරන ලදී.",
   "From": "වෙතින්",
   "Generate": "උත්පාදනය",
-  "GroupCreated": "කුழு සාදා ගන්නා ලදි",
   "GroupDeleted": "පක්ෂය මකා දමා ඇත",
   "GroupUpdated": "පක්ෂය යාවත්කාලීන කරන ලදී",
   "IndividualEvents": "තනි සිදුවීම්",
@@ -95,5 +94,6 @@
   "AgentUpdated": "AI Agent යාවත්කාලීන කරන ලදී",
   "FormFilledOut": "සම්පූර්ණ කරන ලදී",
   "FormStopped": "පෝරමය නැවැත්වීය",
-  "FormSubmit": "පෝරමය ඉදිරිපත් කරන ලදී"
+  "FormSubmit": "පෝරමය ඉදිරිපත් කරන ලදී",
+  "GroupCreated": "කණ්ඩායම නිර්මාණය කරන ලදී"
 }

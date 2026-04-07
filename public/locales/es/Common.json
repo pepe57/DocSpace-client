@@ -1,6 +1,5 @@
 {
   "About": "Acerca de",
-  "AboutCompanyEmailTitle": "email",
   "AboutCompanyTitle": "Acerca del programa",
   "AboutHeader": "Acerca de este programa",
   "AccessDenied": "Acceso denegado ",
@@ -1286,5 +1285,6 @@
   "YourCurrentDomain": "Su dominio actual",
   "YourFurtherEditsNotSaved": "Sus ediciones adicionales podrían no guardarse.",
   "YourLogo": "Su logotipo",
-  "YourTurn": "Su turno"
+  "YourTurn": "Su turno",
+  "AboutCompanyEmailTitle": "Correo electrónico"
 }

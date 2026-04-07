@@ -1,6 +1,5 @@
 {
   "About": "O nas",
-  "AboutCompanyEmailTitle": "email",
   "AboutCompanyTitle": "O tem programu",
   "AboutHeader": "O tem programu",
   "AccessDenied": "Dostop je zavrnjen",
@@ -1286,5 +1285,6 @@
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourFurtherEditsNotSaved": "Vaše nadaljnje urejevanje morda ne bo shranjeno.",
   "YourLogo": "Vaš logotip",
-  "YourTurn": "Vi ste na vrsti"
+  "YourTurn": "Vi ste na vrsti",
+  "AboutCompanyEmailTitle": "E-pošta"
 }

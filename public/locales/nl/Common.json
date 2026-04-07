@@ -1,6 +1,5 @@
 {
   "About": "Over",
-  "AboutCompanyEmailTitle": "e-mail",
   "AboutCompanyTitle": "Over dit programma",
   "AboutHeader": "Over dit programma",
   "AccessDenied": "Toegang geweigerd",
@@ -1286,5 +1285,6 @@
   "YourFurtherEditsNotSaved": "Uw verdere wijzigingen kunnen niet worden opgeslagen.",
   "YourLogo": "Uw logo",
   "YourTurn": "Uw beurt",
-  "PM": "PM"
+  "PM": "PM",
+  "AboutCompanyEmailTitle": "E-mail"
 }

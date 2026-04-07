@@ -1,6 +1,5 @@
 {
   "About": "À propos",
-  "AboutCompanyEmailTitle": "e-mail",
   "AboutCompanyTitle": "À propos de ce programme",
   "AboutHeader": "À propos de ce programme",
   "AccessDenied": " Accès refusé",
@@ -234,7 +233,6 @@
   "CopyItem": "<2>{{title}}</2> copié avec succès dans <1>{{folderName}}</1>",
   "CopyLink": "Copier le lien",
   "CopyMessage": "Copier le message",
-  "CopyOperation": "copier",
   "CopyPassword": "Copier le mot de passe",
   "CopyPublicLink": "Copier le lien public",
   "CopySharedLink": "Copier le lien partagé",
@@ -731,7 +729,6 @@
   "MyForms": "Mes formulaires",
   "Name": "Nom",
   "NeedPassword": "Vous avez besoin d'un mot de passe pour accéder à la salle",
-  "New": "nouveau",
   "NewAgent": "Nouvel agent",
   "NewDocument": "Nouveau document",
   "NewFolder": "Nouveau dossier",
@@ -1286,5 +1283,8 @@
   "YourCurrentDomain": "Votre domaine actuel",
   "YourFurtherEditsNotSaved": "Vos modifications ultérieures pourraient ne pas être sauvegardées.",
   "YourLogo": "Votre logo",
-  "YourTurn": "Votre tour"
+  "YourTurn": "Votre tour",
+  "AboutCompanyEmailTitle": "E-mail",
+  "CopyOperation": "Copie en cours",
+  "New": "Nouveau"
 }

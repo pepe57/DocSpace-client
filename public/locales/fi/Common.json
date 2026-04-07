@@ -1,6 +1,5 @@
 {
   "About": "Tietoja",
-  "AboutCompanyEmailTitle": "sähköposti",
   "AboutCompanyTitle": "Tietoja tästä ohjelmasta",
   "AboutHeader": "Tietoja tästä ohjelmasta",
   "AccessDenied": "Pääsy evätty",
@@ -190,7 +189,6 @@
   "CollectResultsInXlsxDescription": "Lomakeiden tulosten automaattinen kerääminen taulukkolaskentaohjelmiin. Taulukkolaskentaohjelmat luodaan samaan kansioon, johon täytetyt lomakekopiot tallennetaan. Jokaiselle lomakkeelle luodaan erillinen XLSX-tiedosto. Jokainen rivi edustaa yhtä täytettyä lomaketta, ja sarakkeet vastaavat lomakekenttiä.",
   "Color": "Väri",
   "ComingSoon": "Tulossa pian",
-  "Comment": "kommentti",
   "Commentator": "Kommentaattori",
   "CommentDescriptionDocument": "Katselu, kommentointi.",
   "CommentDescriptionSpreadsheet": "Katselu, kommentointi.",
@@ -1286,5 +1284,7 @@
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourFurtherEditsNotSaved": "Voit olla, että myöhemmät muokkaukset eivät tallennu.",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi"
+  "YourTurn": "Sinun vuorosi",
+  "AboutCompanyEmailTitle": "Sähköposti",
+  "Comment": "Kommentoi"
 }

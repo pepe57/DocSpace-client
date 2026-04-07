@@ -1,6 +1,5 @@
 {
   "About": "Hakkında",
-  "AboutCompanyEmailTitle": "e-posta",
   "AboutCompanyTitle": "Bu program hakkında",
   "AboutHeader": "Bu program hakkında",
   "AccessDenied": "Erişim engellendi",
@@ -1286,5 +1285,6 @@
   "YourCurrentDomain": "Mevcut alanınız",
   "YourFurtherEditsNotSaved": "Yapacağınız ek düzenlemeler kaydedilmeyebilir.",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "AboutCompanyEmailTitle": "E-posta"
 }

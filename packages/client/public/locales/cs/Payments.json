@@ -21,7 +21,6 @@
   "BackupTitle": "<1>Zázeřík</1> ({{currency}} za 1 zázeřík)",
   "Balance": "Zůstatek: <1>{{balance}}</1>",
   "BalanceInsufficient": "Zůstatek: <1>{{balance}}</1> | Nedostatek prostředků",
-  "BalanceText": "rovnováha",
   "Benefits": "Výhody",
   "BringCreditBackUpTo": "Zvedněte kredit zpět na",
   "BusinessExpired": "Platnost vašeho tarifu {{planName}} vypršela dne {{date}}",
@@ -165,5 +164,6 @@
   "YouHaveNotAddedAnyPayment": "Nevložili jste žádnou platbu.",
   "YourCurrentPlan": "<1>Váš aktuální tarif:</1> {{amount}} <2>({{price}}/měsíc)</2>",
   "YourPrice": "Vaše cena",
-  "OnlyPayerCanManageSection": "Pouze platitel může spravovat tuto sekci. <1>Zjistit více</1>"
+  "OnlyPayerCanManageSection": "Pouze platitel může spravovat tuto sekci. <1>Zjistit více</1>",
+  "BalanceText": "Zůstatek"
 }

@@ -1,6 +1,5 @@
 {
   "About": "O nás",
-  "AboutCompanyEmailTitle": "email",
   "AboutCompanyTitle": "O tomto programu",
   "AboutHeader": "O tomto programu",
   "AccessDenied": "Přístup odepřen",
@@ -1286,5 +1285,6 @@
   "YourLogo": "Vaše logo",
   "YourTurn": "Jste na řadě",
   "PM": "PM",
-  "StopFillingBody": "Opravdu chcete zastavit vyplňování? Po zrušení nebude možné vyplňování tohoto formuláře obnovit. Vyplňování formuláře bude zastaveno v aktuální fázi. Soubor bude označen jako „Zastaven“."
+  "StopFillingBody": "Opravdu chcete zastavit vyplňování? Po zrušení nebude možné vyplňování tohoto formuláře obnovit. Vyplňování formuláře bude zastaveno v aktuální fázi. Soubor bude označen jako „Zastaven“.",
+  "AboutCompanyEmailTitle": "E-mail"
 }

@@ -211,7 +211,6 @@
   "AIAgentsPinned": "{{aiAgents}} կցված",
   "AIAgentsUnpinned": "{{aiAgents}} չմուտքագրված",
   "AIAgentUnpinned": "{{aiAgent}} չկցված",
-  "ChangeRoomOwner": "Փոփոխել Գրասենյակի Հար владелецը",
   "LinkSettingsExpiredToastDescription": "Ընդլայնեք վավերականության ժամկետը կարգավորումներում կամ ստեղծեք նոր հղում՝ նոր օգտատերների գրանցումները հնարավոր դարձնելու համար։",
   "LinkSettingsJoinedUsers": "Օգտատերերը միացել են այս հղման միջոցով",
   "LinkSettingsLimitDescription": "Այս սահմանը հասնելուց հետո հղման միջոցով գրանցումը անհասանելի կդառնա",
@@ -223,5 +222,6 @@
   "RemovedFromRecent": "Հեռացվել է վերջին թվից",
   "UserLimitDescription": "Սահմանեք այն օգտատակների թիվը, ովքան կարող են միանալ այս հրավիրման հղման միջոցով։",
   "UsersJoined": "Օգտատերներ միացան:",
-  "ValidUntil": "Ակտիվ մինչև:"
+  "ValidUntil": "Ակտիվ մինչև:",
+  "ChangeRoomOwner": "Փոխել սենյակի սեփականատիրոջը"
 }

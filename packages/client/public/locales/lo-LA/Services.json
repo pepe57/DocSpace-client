@@ -29,7 +29,6 @@
   "AdditionalStorageInfo": "ບ່ອນເກັບຂໍ້ມູນເພີ່ມເຕີມ",
   "AIAgentsDescription": "ສ້າງຜູ້ຊ່ວຍສ່ວນຕົວສຳລັບທີມຂອງທ່ານໂດຍການເພີ່ມຖານຄວາມຮູ້, ເລືອກຮູບແບບທີ່ເໝາະສົມ, ແລະເຊື່ອມຕໍ່ກັບ {{mcpServer}}.",
   "AIBalance": "AI ຄວາມສົມດຸນ",
-  "AIGetStartedStep1Description": "ໂອນເຄຣດິດຈາກກະເປ๋านເງິນ {{productName}} ຂອງທ່ານໄປຫາ {{organizationName}} AI. ຖ້າກະເປ๋านເງິນຂອງທ່ານຫວ່າງ, ກະລຸນາເຕີມເງິນກ່ອນ. ເຄຣດິດບໍ່ໝົດອາຍຸ.",
   "AIGetStartedStep1Title": "ເພີ່ມທຶນເຂົ້າບັນຊີ AI ຂອງທ່ານ",
   "AIGetStartedStep2Description": "ເມື່ອທ່ານເພີ່ມເຄຣດິດແລ້ວ, ຄຸນສົມບັດ AI ທັງໝົດຈະສາມາດໃຊ້ໄດ້ທັນທີ. ບໍ່ຈຳເປັນຕ້ອງຕັ້ງຄ່າເພີ່ມເຕີມ.",
   "AIGetStartedStep2Title": "ເຂົ້າເຖິງທຸກຄຸນສົມບັດ AI",
@@ -43,7 +42,6 @@
   "AIPricingAdditionalTooltipVectorization": "<1>ການປ່ຽນເປັນເວັກເຕີ</1> — ເອກະສານຈະຖືກປະມວນຜົນ ແລະ ສ້າງດັດຊະນີເມື່ອທ່ານອັບໂຫຼດມັນເຂົ້າໃນ Knowledge Base ໃນ AI agents.",
   "AIPricingAdditionalTooltipWebCrawling": "<1>ການຂຸດຄົ້ນເວັບ</1> — AI ເຂົ້າເບິ່ງ ແລະ ສະກັດເນື້ອຫາຈາກໜ້າເວັບສະເພາະເພື່ອວິເຄາະ ຫຼື ນຳໃຊ້ໃນຄຳຮ້ອງຂໍຂອງທ່ານ.",
   "AIPricingAdditionalTooltipWebSearch": "<1>ການຄົ້ນຫາໃນເວັບ</1> — AI ເອົາຂໍ້ມູນແບບສົດຈາກເວັບໄຊທ໌ເມື່ອຈຳເປັນສຳລັບຄຳຮ້ອງຂໍຂອງທ່ານ.",
-  "AIPricingAndBilling": "ລາຄາ ແລະ ການเรียกเก็บเงิน",
   "AIPricingAvailableCredits": "ເຄຣດິດທີ່ມີ: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "ເຄຣດິດທີ່ມີ: {{price}}. ຍອດເງິນຕໍ່າ",
   "AIPricingBilledPerUsage": "ການເກັບເງິນຕາມການນຳໃຊ້",
@@ -91,9 +89,7 @@
   "LessThanOneDay": "<1>ມື້</1>",
   "LowBalance": "ຍອດເຄຣດິດຕໍ່າ. ເພີ່ມເຄຣດິດເພື່ອຮັບປະກັນການບໍລິການບໍ່ຂັດຈັງຫວະ.",
   "ModelSettings": "ການຕັ້ງຄ່າ mô hình",
-  "NeedTopUpWallet": "ກະເປ๋าสตางค์ຂອງທ່ານມີເງິນບໍ່ພຽງພໍ. ກະລຸນາເຕີມເງິນເຂົ້າກະເປ๋าสตางค์ຂອງທ່ານ.",
   "NewMonthlyPrice": "ລາຄາປະຈຳເດືອນໃໝ່",
-  "NewTotalStorage": "סהມການເກັບຂໍ້ມູນທັງໝົດໃໝ່ ({{storageUnit}})",
   "NextMonthBillDate": "ໃບບິນປະຈຳເດືອນຕໍ່ໄປຂອງທ່ານຈະເລີ່ມຕົ້ນແຕ່ {{date}} ດ້ວຍຈຳນວນ {{currency}}",
   "NoActiveSubscription": "ບໍ່ມີການສະໝັກສະມາຊິກທີ່ເຄື່ອນໄຫວ",
   "OffOn": "ປິດ/ເປີດ",
@@ -113,5 +109,9 @@
   "UntilDate": "ຈົນຮອດ {{date}}",
   "Usage": "ການນຳໃຊ້",
   "WalletBalance": "ດຸນເງິນກະເປົ໋າ",
-  "WalletTopUpRequired": "ຕ້ອງການເຕີມ: {{currency}}"
+  "WalletTopUpRequired": "ຕ້ອງການເຕີມ: {{currency}}",
+  "AIGetStartedStep1Description": "ໂອນເຄຣດິດຈາກກະເປົ໋າ {{productName}} ຂອງທ່ານ ໄປຍັງ {{organizationName}} AI. ຖ້າກະເປົ໋າຂອງທ່ານວ່າງເປົ່າ, ກະລຸນາເຕີມເງິນກ່ອນ. ເຄຣດິດຈະບໍ່ມີວັນໝົດອາຍຸ.",
+  "AIPricingAndBilling": "ລາຄາ ແລະ ການຊຳລະເງິນ",
+  "NeedTopUpWallet": "ຍອດເງິນໃນກະເປົາຂອງທ່ານບໍ່ພຽງພໍ. ກະລຸນາເຕີມເງິນເຂົ້າໃນກະເປົາຂອງທ່ານ.",
+  "NewTotalStorage": "ພທີ່ຈັດເກັບຂໍ້ມູນທັງໝົດໃໝ່ ({{storageUnit}})"
 }

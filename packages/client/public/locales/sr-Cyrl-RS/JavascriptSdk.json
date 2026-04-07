@@ -118,7 +118,6 @@
   "ViewerDescription": "Уградите прегледач да бисте омогуц́или корисницима да отворе датотеку за гледање из одговарајуц́е собе.",
   "MultipleFolders": "Више папки",
   "SingleFile": "Један фајл",
-  "VoidReturn": "Praznina",
   "AllowedFileTypes": "Изберите коју врсту фајлова коју корисници могу да упуте.",
   "CreateSampleUploader": "Крeирaти прeмeр Uploader embed",
   "EventLog": "<strong style=\"font-size: 1.2em;\">Журнал догађаја</strong>",
@@ -148,7 +147,8 @@
   "MaximumTotalUploadSize": "Максимална укупна величина отпреме",
   "SelectDestinationFolder": "Изаберите фолдер у којем ће се сачувати отпремљени садржај.",
   "TotalSizeMustBeGreater": "Укупна величина отпремања мора бити већа од или једнака лимиту величине по датотеци.",
-  "SDKDescription": "Embed SDK allows you to embed the whole {{productName}} or its part into your web interface. Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually. To learn more about SDK, refer to the ",
   "AvailableFileTypes": "Доступни типови датотека",
-  "SingleFolder": "Један фолдер"
+  "SingleFolder": "Један фолдер",
+  "VoidReturn": "Празно",
+  "SDKDescription": "Embed SDK вам омогућава да уградите цео {{productName}} или његов део у ваш веб интерфејс. Одаберите готове режиме са предефинисаним параметрима или прилагођени режим како бисте га ручно конфигурисали. Да бисте сазнали више о SDK-у, обратите се за"
 }

@@ -1,5 +1,4 @@
 {
-  "ActivateServiceToAllow": "Ενεργοποιήστε αυτήν την υπηρεσία για να επιτρέψετε πληρωμένες δημιουργίες αντιγράφων ασφαλείας χρησιμοποιώντας την υπό残 του πορτοφύλλιό σας",
   "AddCreditsToEnableAI": "Η προσθήκη πιστώσεων θα ενεργοποιήσει αυτόματα το {{organizationName}} AI και θα κάνει τα μοντέλα διαθέσιμα σε όλους τους χρήστες. Συνεχίστε;",
   "AdditionalStorageInfo": "Επιπλέον αποθήκευση",
   "AIAgentsDescription": "Δημιουργήστε έναν εξατομικευμένο βοηθό για την ομάδα σας προσθέτοντας μια βάση γνώσης, επιλέγοντας το ιδανικό μοντέλο και συνδέοντας ένα {{mcpServer}}.",
@@ -15,7 +14,6 @@
   "AIModelPrice": "{{inputPrice}}/M tokens εισόδου | {{outputPrice}}/M tokens εξόδου",
   "AIModelsIntro": "Επιλέξτε το κατάλληλο μοντέλο για την εργασία σας — από οικονομικά φιλικό έως προηγμένο. <1>OpenRouter pricing</1> εμφανίζεται. Εφαρμόζεται μια προμήθεια υπηρεσιών 20% στην χρήση.",
   "AIPricingAdditionalFeaturesTitle": "Πρόσθετες λειτουργίες",
-  "AIPricingAdditionalTooltipVectorization": "<1>Βεქτοριοποίηση</1> — Τα έγγραφα επεξεργάζονται και καταχωρούνται όταν τα ανεβάζετε στη Knowledge Base σε AI agents.",
   "AIPricingAdditionalTooltipWebCrawling": "<1>Web crawling</1> — Η AI επισκέπτεται και εξάγει περιεχόμενο από συγκεκριμένες ιστοσελίδες για να το αναλύσει ή να το χρησιμοποιήσει στην αίτησή σας.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Αναζήτηση στο Web</1> — Το AI ανακτά πληροφορίες σε πραγματικό χρόνο από το web όταν χρειάζεται για την αίτησή σας.",
   "AIPricingAndBilling": "Τιμολόγηση & τιμολόγηση",
@@ -33,13 +31,11 @@
   "AIPricingPricePerTokens": "{{price}}*, <1>ανά token</1>",
   "AIPricingTokensTitle": "Τόκενς",
   "AIPricingTokensTooltipInput": "<1>Tokens εισόδου</1> — Κείμενο και δεδομένα που στέλνετε σε μοντέλα AI",
-  "AIPricingTokensTooltipOutput": "<1>Εκκảθη Tokens</1> — Δημιουργημένες απαντήσεις και περιεχόμενο από AI.",
   "AIServiceToppedUp": "Η υπηρεσία AI του {{organizationName}} ενεργοποιήθηκε επιτυχώς.",
   "AIToolsDescription": "Η ενεργοποίηση του AI της {{organizationName}} θα κάνει τα μοντέλα AI που παρέχονται από την {{organizationName}} διαθέσιμα σε όλους τους χρήστες {{productName}}.",
   "AIToolsEnabled": "Επιτυχής ενεργοποίηση υπηρεσίας εργαλείων τεχνητής νοημοσύνης.",
   "AIWhatYouPayForTitle": "Για αυτό που πληρώνετε",
   "AIWhatYouPayForTokens": "Tokens Εισόδου και Εξόδου",
-  "AIWhatYouPayForVectorization": "Βεქτοριοποίηση <1>(Βάση Γνώσης)</1>",
   "AIWhatYouPayForWebSearch": "Αναζήτηση στο Web",
   "AmoutWithStorageUnit": "Ποσό ({{storageUnit}})",
   "AndMore": "Και άλλα!",
@@ -88,7 +84,6 @@
   "NoActiveSubscription": "Δεν υπάρχει ενεργητική συνδρομή",
   "OCR": "OCR",
   "OCRDescription": "Αναγνωρίστε και εξάγετε κείμενο από σαρωμένες PDF και εικόνες.",
-  "OffOn": "Εν/Κε关",
   "OrderSummary": "Περίληψη Παραγγελίας",
   "OrganizationAI": "{{organizationName}} AI",
   "OutputCurrency": "Έξοδος ({{currency}}/1M)",
@@ -113,5 +108,10 @@
   "UntilDate": "μέχρι {{date}}",
   "Usage": "Χρήση",
   "WalletBalance": "Υπόλοιπο Πορτοφολιού",
-  "WalletTopUpRequired": "Απαιτείται συμπλήρωση: {{currency}}"
+  "WalletTopUpRequired": "Απαιτείται συμπλήρωση: {{currency}}",
+  "ActivateServiceToAllow": "Ενεργοποιήστε αυτήν την υπηρεσία για να επιτρέψετε τα πληρωμένα αντίγραφα ασφαλείας χρησιμοποιώντας το υπόλοιπο του πορτοφολιού σας",
+  "AIPricingAdditionalTooltipVectorization": "<1>Διανυσμοποίηση</1> — Τα έγγραφα επεξεργάζονται και indexάρονται όταν τα ανεβάζετε στη Βάση Γνώσεων στους AI agents.",
+  "AIPricingTokensTooltipOutput": "<1>Έξοδο tokens</1> — απαντήσεις και περιεχόμενο που δημιουργήθηκαν από το AI.",
+  "AIWhatYouPayForVectorization": "Διανυσμοποίηση <1>(Βάση γνώσεων)</1>",
+  "OffOn": "Απενεργοποίηση/Ενεργοποίηση"
 }
