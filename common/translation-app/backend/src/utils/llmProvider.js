@@ -171,6 +171,9 @@ async function createOpenRouterStream(model, messages, options = {}) {
         temperature: options.temperature ?? 0.1,
         max_tokens: options.maxTokens ?? 8192,
         stream: true,
+        // Request extended thinking/reasoning output from models that support it.
+        // Models that don't support it will ignore this field.
+        include_reasoning: true,
       }),
       signal: controller.signal,
     },

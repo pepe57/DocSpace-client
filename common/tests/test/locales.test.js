@@ -778,16 +778,16 @@ describe("Locales Tests", () => {
       return /[\u0400-\u04FF]/.test(stripMarkup(text));
     }
 
-    function matchesOtherLanguage(namespace, key, value) {
+    function matchesEnglish(namespace, key, value) {
       const langs = crossLangMap.get(`${namespace}|${key}`) || {};
+      const enVal = langs["en"];
+      if (!enVal) return false;
       const stripped = stripMarkup(value).trim();
       if (!stripped) return true; // nothing left after stripping — skip
-      return Object.entries(langs).some(([lang, otherVal]) => {
-        // Exclude Serbian variants — sr-Latn-RS is also Latin Serbian, matching against
-        // it would produce false negatives (untranslated Latin text appears "intentional").
-        if (lang === "sr-Cyrl-RS" || lang === "sr-Latn-RS") return false;
-        return stripMarkup(otherVal || "").trim() === stripped;
-      });
+      // Only English match is considered "intentional" (brand names, tech terms).
+      // Matching other languages (e.g. Slovenian) is NOT intentional —
+      // it means the model output Latin Serbian instead of Cyrillic.
+      return stripMarkup(enVal).trim() === stripped;
     }
 
     let message =
@@ -804,7 +804,7 @@ describe("Locales Tests", () => {
       cyrillicFile.translations.forEach((translation) => {
         if (!translation.value) return;
         if (hasCyrillic(translation.value)) return; // ✓ has Cyrillic
-        if (matchesOtherLanguage(cyrillicFile.namespace, translation.key, translation.value)) return; // ✓ intentional
+        if (matchesEnglish(cyrillicFile.namespace, translation.key, translation.value)) return; // ✓ intentional (same as EN = brand/tech term)
 
         message +=
           `${++i}. path='${cyrillicFile.path}' key='${translation.key}'\r\n` +
@@ -2026,6 +2026,243 @@ describe("Locales Tests", () => {
     clearWrongKeys(
       resolveTranslationEntries(wrongScriptKeys),
       "wrong-script keys in non-Latin languages",
+    );
+
+    expect(errorsCount, message).toBe(0);
+  });
+
+  it("ForeignScriptContaminationTest: Verify that translations do not contain characters from unrelated scripts.", () => {
+    // Each language has a set of ALLOWED Unicode script ranges.
+    // Any character outside ASCII + allowed ranges (after stripping markup) is contamination.
+    // For example, Bengali characters in lo-LA, or Khmer characters in lo-LA.
+    // This catches cases where the LLM outputs text in the completely wrong writing system.
+
+    const scriptRanges = {
+      "ar-SA":       [[0x0600, 0x06FF], [0x0750, 0x077F], [0xFB50, 0xFDFF], [0xFE70, 0xFEFF]], // Arabic
+      "ja-JP":       [[0x3000, 0x303F], [0x3040, 0x309F], [0x30A0, 0x30FF], [0x4E00, 0x9FFF], [0x3400, 0x4DBF], [0xFF00, 0xFFEF]], // CJK Symbols, Hiragana, Katakana, CJK, Fullwidth
+      "zh-CN":       [[0x3000, 0x303F], [0x4E00, 0x9FFF], [0x3400, 0x4DBF], [0xFF00, 0xFFEF]], // CJK Symbols, CJK, Fullwidth
+      "ko-KR":       [[0x3000, 0x303F], [0xAC00, 0xD7AF], [0x1100, 0x11FF], [0x3130, 0x318F], [0xFF00, 0xFFEF]], // CJK Symbols, Hangul, Fullwidth
+      "hy-AM":       [[0x0530, 0x058F], [0xFB00, 0xFB17]], // Armenian
+      "el-GR":       [[0x0370, 0x03FF], [0x1F00, 0x1FFF]], // Greek
+      "lo-LA":       [[0x0E80, 0x0EFF]], // Lao
+      "si":          [[0x0D80, 0x0DFF]], // Sinhala
+      "uk-UA":       [[0x0400, 0x04FF]], // Cyrillic
+      "ru":          [[0x0400, 0x04FF]], // Cyrillic
+      "bg":          [[0x0400, 0x04FF]], // Cyrillic
+      "sr-Cyrl-RS":  [[0x0400, 0x04FF]], // Cyrillic
+    };
+
+    // Common ranges allowed for ALL languages (Latin for markup/brands, general punctuation, etc.)
+    const commonAllowed = [
+      [0x0000, 0x007F],   // Basic Latin (ASCII)
+      [0x0080, 0x00FF],   // Latin-1 Supplement (accented chars in brand names)
+      [0x0100, 0x024F],   // Latin Extended-A/B
+      [0x0300, 0x036F],   // Combining Diacritical Marks
+      [0x2000, 0x206F],   // General Punctuation
+      [0x2070, 0x209F],   // Superscripts/Subscripts
+      [0x20A0, 0x20CF],   // Currency Symbols
+      [0x2100, 0x214F],   // Letterlike Symbols
+      [0x2190, 0x21FF],   // Arrows
+      [0x2200, 0x22FF],   // Mathematical
+      [0x25A0, 0x25FF],   // Geometric Shapes
+      [0x2600, 0x26FF],   // Misc Symbols
+      [0x2700, 0x27BF],   // Dingbats
+      [0xFE00, 0xFE0F],   // Variation Selectors
+      [0xFEFF, 0xFEFF],   // BOM
+      [0x200B, 0x200F],   // Zero-width chars
+      [0x00AB, 0x00BB],   // « »
+    ];
+
+    function isAllowed(cp, langRanges) {
+      for (const [lo, hi] of commonAllowed) {
+        if (cp >= lo && cp <= hi) return true;
+      }
+      for (const [lo, hi] of langRanges) {
+        if (cp >= lo && cp <= hi) return true;
+      }
+      return false;
+    }
+
+    function stripMarkup(text) {
+      return text
+        .replace(/\{\{[^}]+\}\}/g, "")
+        .replace(/<[^>]+>/g, "")
+        .replace(/&[a-zA-Z]+;/g, "");
+    }
+
+    let message = "Next keys contain characters from foreign/unrelated scripts:\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const foreignKeys = [];
+
+    for (const [langCode, ranges] of Object.entries(scriptRanges)) {
+      const langFiles = translationFiles.filter((f) => f.language === langCode);
+
+      langFiles.forEach((file) => {
+        file.translations.forEach((t) => {
+          if (!t.value) return;
+          // Skip Culture_ keys — they intentionally contain native script names
+          if (t.key.startsWith("Culture_")) return;
+
+          const stripped = stripMarkup(t.value);
+          const foreignChars = [];
+
+          for (const ch of stripped) {
+            const cp = ch.codePointAt(0);
+            if (cp > 0x7F && !isAllowed(cp, ranges)) {
+              foreignChars.push({ char: ch, code: `U+${cp.toString(16).toUpperCase().padStart(4, "0")}` });
+            }
+          }
+
+          if (foreignChars.length > 0) {
+            const uniqueScripts = [...new Set(foreignChars.map((f) => f.code))].slice(0, 5);
+            message +=
+              `${++i}. lng='${langCode}' key='${file.namespace}:${t.key}'\r\n` +
+              `  Foreign chars: ${uniqueScripts.join(", ")}\r\n` +
+              `  Value: '${t.value.substring(0, 150)}'\r\n\r\n`;
+            errorsCount++;
+            foreignKeys.push({ language: langCode, key: `${file.namespace}:${t.key}` });
+          }
+        });
+      });
+    }
+
+    clearWrongKeys(
+      resolveTranslationEntries(foreignKeys),
+      "foreign-script contaminated keys",
+    );
+
+    expect(errorsCount, message).toBe(0);
+  });
+
+  it("CapitalizationConsistencyTest: Verify that single-word translation keys have consistent capitalization with the English source.", () => {
+    // If the English value is a single word (or short label) starting with an uppercase letter,
+    // then translations in Latin-script languages should also start with uppercase.
+    // This catches issues like EN "Payer" → FR "payeur" (should be "Payeur").
+    //
+    // We only check Latin-script languages where capitalization rules are similar to English.
+    // We skip keys where the EN value is all-caps (abbreviations like "PDF", "API").
+
+    const latinLanguages = [
+      "de", "fr", "es", "it", "pt", "pt-BR", "nl", "pl", "cs", "sk",
+      "ro", "lv", "sl", "fi", "tr", "sq-AL", "sr-Latn-RS", "az", "vi",
+    ];
+
+    // Group translations by namespace:key across languages
+    const keyMap = new Map(); // "namespace|key" → { en: value, lang: { code: value } }
+    translationFiles.forEach((file) => {
+      file.translations.forEach((t) => {
+        const mapKey = `${file.namespace}|${t.key}`;
+        if (!keyMap.has(mapKey)) keyMap.set(mapKey, {});
+        keyMap.get(mapKey)[file.language] = t.value;
+      });
+    });
+
+    let message = "Next keys have capitalization inconsistency with English source:\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const wrongCapKeys = [];
+
+    keyMap.forEach((values, mapKey) => {
+      const enVal = values["en"];
+      if (!enVal) return;
+
+      // Only check single-word labels without variables or tags — these are UI terms/nouns
+      // that should keep capitalization consistent (e.g. "Payer", "Owner", "Settings").
+      // Multi-word phrases have language-specific capitalization rules and are skipped.
+      const hasMarkup = /\{\{|<[^>]/.test(enVal);
+      if (hasMarkup) return;
+
+      const stripped = enVal.trim();
+      const words = stripped.split(/\s+/);
+      if (words.length !== 1) return;
+
+      const word = words[0];
+      // Skip if all-caps (abbreviation like "PDF", "API")
+      if (word === word.toUpperCase() && word.length > 1) return;
+      // Must start with uppercase Latin letter
+      if (!/^[A-Z]/.test(word)) return;
+      // Skip very short words (1-2 chars) — too ambiguous
+      if (word.length <= 2) return;
+
+      for (const lang of latinLanguages) {
+        const lVal = values[lang];
+        if (!lVal) continue;
+
+        const lStripped = lVal.trim();
+        if (!lStripped) continue;
+        // Skip if translation is identical to EN (intentional — brand/term)
+        if (lStripped === stripped) continue;
+
+        const firstChar = lStripped[0];
+        // If EN starts uppercase and translation starts lowercase — flag it
+        if (firstChar === firstChar.toLowerCase() && firstChar !== firstChar.toUpperCase()) {
+          const [ns, key] = mapKey.split("|");
+          message +=
+            `${++i}. lng='${lang}' key='${ns}:${key}'\r\n` +
+            `  EN: '${enVal}' → ${lang}: '${lVal.substring(0, 80)}'\r\n\r\n`;
+          errorsCount++;
+          wrongCapKeys.push({ language: lang, key: `${ns}:${key}` });
+        }
+      }
+    });
+
+    clearWrongKeys(
+      resolveTranslationEntries(wrongCapKeys),
+      "capitalization-inconsistent translation keys",
+    );
+
+    expect(errorsCount, message).toBe(0);
+  });
+
+  it("UntranslatedKeysTest: Verify that non-English translations are not identical copies of the English source for long strings.", () => {
+    // If a translation value is identical to English and the text content (after stripping
+    // markup/variables) is longer than 40 characters, it's almost certainly untranslated.
+    // Short strings may legitimately match English (brand names, technical terms, abbreviations).
+    // Culture_ keys are excluded — they contain language names that may match across languages.
+
+    const stripMarkup = (text) =>
+      text.replace(/\{\{[^}]+\}\}/g, "").replace(/<[^>]+>/g, "").replace(/&[a-zA-Z]+;/g, "").trim();
+
+    // Build EN reference: namespace → { key → value }
+    const enByNsKey = {};
+    translationFiles
+      .filter((f) => f.language === "en")
+      .forEach((file) => {
+        file.translations.forEach((t) => {
+          enByNsKey[`${file.namespace}|${t.key}`] = t.value;
+        });
+      });
+
+    let message = "Next keys appear to be untranslated (identical to English source):\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const untranslatedKeys = [];
+
+    translationFiles.forEach((file) => {
+      if (file.language === "en") return;
+
+      file.translations.forEach((t) => {
+        if (!t.value) return;
+        if (t.key.startsWith("Culture_")) return;
+
+        const enVal = enByNsKey[`${file.namespace}|${t.key}`];
+        if (!enVal || t.value !== enVal) return;
+
+        const cleanLen = stripMarkup(enVal).length;
+        if (cleanLen <= 40) return; // short strings may be intentional
+
+        message +=
+          `${++i}. lng='${file.language}' key='${file.namespace}:${t.key}'\r\n` +
+          `  Value (${enVal.length} chars): '${enVal.substring(0, 120)}${enVal.length > 120 ? "..." : ""}'\r\n\r\n`;
+        errorsCount++;
+        untranslatedKeys.push({ language: file.language, key: `${file.namespace}:${t.key}` });
+      });
+    });
+
+    clearWrongKeys(
+      resolveTranslationEntries(untranslatedKeys),
+      "untranslated (EN-identical) keys",
     );
 
     expect(errorsCount, message).toBe(0);

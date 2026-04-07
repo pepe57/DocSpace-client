@@ -1,6 +1,7 @@
 const { ollamaConfig } = require("../config/config");
 const fsUtils = require("../utils/fsUtils");
 const { verifyOllamaConnection } = require("../utils/ollamaUtils");
+const prompts = require("../prompts/translation");
 const {
   isOpenRouterModel,
   getProviderName,
@@ -9,7 +10,6 @@ const {
   listOpenRouterModels,
   createStreamingChat,
   completionChat,
-  createRawStream,
 } = require("../utils/llmProvider");
 
 // Add debugger to help diagnose connection issues
@@ -377,7 +377,7 @@ async function routes(fastify, options) {
       const keyContext = await readKeyContext(projectName, namespace, key);
       const debugEmit = (event, data) =>
         fastify.io.emit(event, { namespace, key, targetLanguage, ...data });
-      const translatedText = await translateText(
+      const result = await translateText(
         sourceText,
         sourceLanguage,
         targetLanguage,
@@ -387,7 +387,8 @@ async function routes(fastify, options) {
       );
 
       // Model declined to translate (NO_TRANSLATION) — fall back to source text
-      const finalText = translatedText ?? sourceText;
+      const finalText = result.text ?? sourceText;
+      const warnings = result.warnings || [];
 
       // Update the translation file
       const targetTranslations =
@@ -424,6 +425,32 @@ async function routes(fastify, options) {
           .send({ success: false, error: "Failed to update translation file" });
       }
 
+      // Write integrity warnings to .meta file
+      if (warnings.length > 0) {
+        try {
+          const meta = await fsUtils.findMetadataFile(projectName, namespace, key);
+          if (meta) {
+            if (!meta.data.languages) meta.data.languages = {};
+            if (!meta.data.languages[targetLanguage]) {
+              meta.data.languages[targetLanguage] = {
+                ai_translated: true,
+                ai_model: model,
+                ai_spell_check_issues: [],
+                approved_at: null,
+              };
+            }
+            meta.data.languages[targetLanguage].ai_spell_check_issues = warnings;
+            meta.data.languages[targetLanguage].ai_translated = true;
+            meta.data.languages[targetLanguage].ai_model = model;
+            meta.data.updated_at = new Date().toISOString();
+            await fsUtils.writeJsonWithConsistentEol(meta.filePath, meta.data);
+            debug(`[meta] Wrote ${warnings.length} warning(s) for ${namespace}:${key} [${targetLanguage}]`);
+          }
+        } catch (metaError) {
+          debug(`[meta] Failed to write warnings: ${metaError.message}`);
+        }
+      }
+
       // Send notification that translation is completed
       fastify.io.emit("translation:completed", {
         projectName,
@@ -431,6 +458,7 @@ async function routes(fastify, options) {
         namespace,
         key,
         value: finalText,
+        warnings,
       });
 
       return {
@@ -438,6 +466,7 @@ async function routes(fastify, options) {
         data: {
           sourceText,
           translatedText: finalText,
+          warnings,
         },
       };
     } catch (error) {
@@ -690,7 +719,7 @@ async function routes(fastify, options) {
               const keyContext = await readKeyContext(projectName, namespace, keyPath);
               const debugEmit = (event, data) =>
                 fastify.io.emit(event, { jobId, namespace, key: keyPath, targetLanguage: lang, ...data });
-              const translatedText = await translateText(
+              const result = await translateText(
                 sourceText,
                 sourceLanguage,
                 lang,
@@ -699,12 +728,34 @@ async function routes(fastify, options) {
                 debugEmit,
               );
 
+              const translatedText = result.text ?? sourceText;
+
               let cursor = targetTranslations;
               for (let i = 0; i < keyParts.length - 1; i++) {
                 if (!cursor[keyParts[i]]) cursor[keyParts[i]] = {};
                 cursor = cursor[keyParts[i]];
               }
               cursor[keyParts[keyParts.length - 1]] = translatedText;
+
+              // Write warnings to .meta
+              if (result.warnings && result.warnings.length > 0) {
+                try {
+                  const meta = await fsUtils.findMetadataFile(projectName, namespace, keyPath);
+                  if (meta) {
+                    if (!meta.data.languages) meta.data.languages = {};
+                    if (!meta.data.languages[lang]) {
+                      meta.data.languages[lang] = { ai_translated: true, ai_model: model, ai_spell_check_issues: [], approved_at: null };
+                    }
+                    meta.data.languages[lang].ai_spell_check_issues = result.warnings;
+                    meta.data.languages[lang].ai_translated = true;
+                    meta.data.languages[lang].ai_model = model;
+                    meta.data.updated_at = new Date().toISOString();
+                    await fsUtils.writeJsonWithConsistentEol(meta.filePath, meta.data);
+                  }
+                } catch (metaErr) {
+                  debug(`[meta] Failed: ${metaErr.message}`);
+                }
+              }
 
               completedKeys++;
               fastify.io.emit("project-translation:progress", {
@@ -812,7 +863,7 @@ async function translateNestedKeys(
       try {
         // Translate the text
         const keyContext = await readKeyContext(projectName, namespace, fullKey);
-        const translatedText = await translateText(
+        const result = await translateText(
           value,
           sourceLanguage,
           targetLanguage,
@@ -833,7 +884,27 @@ async function translateNestedKeys(
         }
 
         const finalKey = keyParts[keyParts.length - 1];
-        current[finalKey] = translatedText;
+        current[finalKey] = result.text ?? value;
+
+        // Write warnings to .meta
+        if (result.warnings && result.warnings.length > 0) {
+          try {
+            const meta = await fsUtils.findMetadataFile(projectName, namespace, fullKey);
+            if (meta) {
+              if (!meta.data.languages) meta.data.languages = {};
+              if (!meta.data.languages[targetLanguage]) {
+                meta.data.languages[targetLanguage] = { ai_translated: true, ai_model: model, ai_spell_check_issues: [], approved_at: null };
+              }
+              meta.data.languages[targetLanguage].ai_spell_check_issues = result.warnings;
+              meta.data.languages[targetLanguage].ai_translated = true;
+              meta.data.languages[targetLanguage].ai_model = model;
+              meta.data.updated_at = new Date().toISOString();
+              await fsUtils.writeJsonWithConsistentEol(meta.filePath, meta.data);
+            }
+          } catch (metaErr) {
+            debug(`[meta] Failed: ${metaErr.message}`);
+          }
+        }
       } catch (error) {
         fastify.log.error(
           `Failed to translate key ${fullKey}: ${error.message}`,
@@ -943,13 +1014,32 @@ function getLanguageInfo(code) {
 
   // Languages that require explicit script enforcement in the prompt.
   // Without this, LLMs tend to produce the wrong writing system
-  // (e.g. translating sr-Cyrl-RS into Serbian Latin instead of Cyrillic).
+  // (e.g. translating sr-Cyrl-RS into Serbian Latin instead of Cyrillic,
+  //  or outputting Khmer/Bengali/Thai characters for Lao).
   const scriptWarnings = {
     "sr-Cyrl-RS":
       "Use CYRILLIC script exclusively. Every Serbian word MUST be written in Cyrillic letters (А, Б, В, Г, Д, Е...). " +
       "NEVER use Latin Serbian characters: š, č, ć, ž, đ or any Latin letters for Serbian words. " +
       "The only Latin characters allowed are: brand names, technical abbreviations (URL, API, SDK, etc.), and {{variables}}. " +
       "Example — correct: «Жао нам је», wrong: «Žao nam je».",
+    "lo-LA":
+      "Use ONLY Lao script (Unicode U+0E80–U+0EFF). " +
+      "NEVER output Khmer, Thai, Bengali, Devanagari, or any other Southeast Asian script. " +
+      "Lao and Thai look visually similar but use DIFFERENT Unicode blocks — use Lao only. " +
+      "Example Lao characters: ກ ຂ ຄ ງ ຈ ສ ຊ ຍ ດ ຕ ຖ ທ ນ ບ ປ ຜ ຝ ພ ຟ ມ ຢ ຣ ລ ວ ຫ ອ ຮ.",
+    si:
+      "Use ONLY Sinhala script (Unicode U+0D80–U+0DFF). " +
+      "NEVER output Kannada, Telugu, Tamil, Malayalam, or any other South Asian script. " +
+      "Example Sinhala characters: අ ආ ඇ ක ග ච ජ ට ඩ ණ ත ද න ප බ ම ය ර ල ව ශ ස හ.",
+    "hy-AM":
+      "Use ONLY Armenian script (Unicode U+0530–U+058F). " +
+      "NEVER output Georgian, Cyrillic, or Greek characters. " +
+      "Example Armenian characters: Ա Բ Գ Դ Ե Զ Է Ը Թ Ժ Ի Լ Խ Ծ Կ Հ Ձ Ղ Ճ Մ Յ Ն Շ Ո Չ.",
+    "el-GR":
+      "Use ONLY Greek script (Unicode U+0370–U+03FF). " +
+      "NEVER output Cyrillic, Latin, or CJK/Chinese characters for Greek words. " +
+      "Cyrillic and Greek have visually similar letters but are DIFFERENT scripts — use Greek only. " +
+      "Example — correct: «ποσόστωση», wrong: «配ότα» (contains Chinese character 配 — forbidden).",
   };
 
   return {
@@ -1002,50 +1092,8 @@ async function translateText(text, sourceLanguage, targetLanguage, model, keyCon
   // Please maintain any formatting, placeholders (like {{variable}}), and HTML tags if present.
   // Return only the translated text without any commentary or explanations.\n\n${text}`;
 
-  const systemPrompt = `You are a professional software localization specialist for ONLYOFFICE DocSpace, a document collaboration platform.
-Your task is to translate UI strings from ${sourceInfo.name} to ${targetInfo.name}.
-${targetInfo.isRightToLeft ? "The target language is written right-to-left (RTL).\n" : ""}${targetInfo.scriptWarning ? `CRITICAL SCRIPT REQUIREMENT: ${targetInfo.scriptWarning}\n` : ""}
-Rules:
-
-## i18next interpolation variables {{...}}
-- CRITICAL: Every {{variable}} from the source MUST appear in the translation. Count them — the translation must contain exactly the same number of {{...}} tokens as the source.
-- Copy each {{variable}} token verbatim — same spelling, same case, same braces. NEVER translate the name inside the braces. NEVER convert to a different format.
-  ✓ Correct:   {{webSearch}}   {{productName}}   {{currency}}
-  ✗ Wrong:     <webSearch>     {$productName}     {{valūta}}   (translated name — forbidden)
-- When a {{variable}} starts the sentence in the source, keep it at the start of the translation too. Do NOT drop it or absorb it into the translated text.
-  ✓ Source:  "{{webSearch}} successfully enabled"
-  ✓ Translation must begin with {{webSearch}}, e.g. "{{webSearch}} pomyślnie włączony"
-  ✗ Wrong:   "pomyślnie włączony"  (variable dropped — forbidden)
-- Modifiers after comma are part of the token and must be preserved: {{count, number}} stays as {{count, number}}.
-
-## Numbered React Trans tags <N> </N>
-- Numbered tags like <0>, <1>, </0>, </1> are React component slots. Every opening tag <N> from the source must have a matching closing tag </N> in the translation, and vice versa.
-- Translate only the text between opening and closing tags. Place </N> right after the translated content for that slot — do not extend the tag to cover more of the sentence.
-  ✓ "Click <1>here</1> to continue" → "Klicken Sie <1>hier</1>, um fortzufahren"
-  ✗ "Klicken Sie <1>hier, um fortzufahren</1>"  (closing tag moved — forbidden)
-  ✗ "Klicken Sie hier, um fortzufahren"          (tags dropped — forbidden)
-- Never drop, merge, reorder, or add numbered tags.
-
-## Other HTML tags
-- Copy all HTML tags character-for-character — exact tag name, exact attributes (including their order and values), exact punctuation. Do NOT add, remove, or alter any attribute. Do NOT change the spelling of a tag name.
-  ✓ <strong>text</strong>  →  <strong>переведённый текст</strong>
-  ✗ <strongs>text</strongs>         (typo in tag name — forbidden)
-  ✗ <strong id="foo">text</strong>  (added attribute — forbidden)
-- Never replace a tag with whitespace or punctuation.
-  ✓ "First line.<br/>Second line." → "Первая строка.<br/>Вторая строка."
-  ✗ "Первая строка. Вторая строка."  (tag removed — forbidden)
-
-## General
-- Use formal/professional tone appropriate for business software UI.
-- Preserve line breaks and whitespace structure.
-- Respond with the translation only — no explanations, notes, or alternatives.
-- If the string is a proper noun, brand name, or technical term with no equivalent, keep it in the original language.
-- If translation is impossible, respond with exactly: NO_TRANSLATION`;
-
-  let userPrompt = text;
-  if (keyContext?.comment) {
-    userPrompt = `Context: ${keyContext.comment}\n\nTranslate:\n${text}`;
-  }
+  const systemPrompt = prompts.translationSystem({ sourceInfo, targetInfo });
+  const userPrompt = prompts.translationUser({ text, keyContext });
 
   try {
     // Verify provider connection
@@ -1085,12 +1133,17 @@ Rules:
 
     let activeTimeout = null;
     let abortFn = null;
-    const resetInactivityTimer = () => {
+    let contentStarted = false; // true after first CONTENT token (not thinking)
+
+    // During thinking phase, use firstTokenTimeout (model may pause for long periods).
+    // After first content token arrives, switch to shorter inactivityTimeout.
+    const resetTimer = () => {
       clearTimeout(activeTimeout);
+      const ms = contentStarted ? inactivityMs : firstTokenMs;
       activeTimeout = setTimeout(() => {
-        debug(`Inactivity timeout after ${inactivityMs}ms`);
+        debug(`${contentStarted ? "Inactivity" : "First-content"} timeout after ${ms}ms`);
         abortFn?.();
-      }, inactivityMs);
+      }, ms);
     };
 
     let fullResponse = "";
@@ -1114,7 +1167,7 @@ Rules:
 
       debug("Step 2: stream created, waiting for tokens...");
 
-      // First-token timeout: abort if model doesn't respond within limit
+      // Start with firstTokenTimeout — covers cold-start + full reasoning phase
       activeTimeout = setTimeout(() => {
         debug(`First-token timeout after ${firstTokenMs}ms`);
         abortFn?.();
@@ -1126,16 +1179,21 @@ Rules:
           if (tokenCount === 0) debug("Step 3: first thinking token received");
           tokenCount++;
           fullThinking += thinkingToken;
-          resetInactivityTimer();
+          // Reset timer but stay on firstTokenMs — model is still reasoning
+          resetTimer();
           debugEmit?.("translation:debug:token", { token: thinkingToken, isThinking: true });
         }
 
         const token = chunk.content || "";
         if (token) {
-          if (tokenCount === 0) debug("Step 3: first content token received");
+          if (!contentStarted) {
+            debug("Step 3: first content token received — switching to inactivity timeout");
+            contentStarted = true;
+          }
           tokenCount++;
           fullResponse += token;
-          resetInactivityTimer();
+          // Now using inactivityMs — content should stream without long pauses
+          resetTimer();
 
           // Also handle <think> tags for models that inline thinking in content
           const isInlineThinking = (() => {
@@ -1143,6 +1201,12 @@ Rules:
             const closeCount = (fullResponse.match(/<\/think>/gi) || []).length;
             return openCount > closeCount;
           })();
+
+          // If inside inline <think> block, don't switch to short inactivity yet
+          if (isInlineThinking) {
+            contentStarted = false;
+          }
+
           debugEmit?.("translation:debug:token", { token, isThinking: isInlineThinking });
         }
       }
@@ -1182,83 +1246,124 @@ Rules:
     });
 
     if (cleanedResponse === "NO_TRANSLATION") {
-      return null; // model explicitly declined — caller should fall back to source text
+      return { text: null, warnings: [] }; // model explicitly declined
     }
 
     if (!cleanedResponse) {
       throw new Error("Model returned empty response");
     }
 
-    // ── Post-translation integrity checks & auto-fixes ───────────────────
+    // ── Post-translation auto-fixes (best-effort, never reject) ─────────
+    // Collect integrity warnings — will be saved to .meta by the caller
+    const integrityWarnings = [];
     let finalTranslation = cleanedResponse;
 
     // 1. Normalize self-closing HTML tags: <br /> → <br/>, <hr /> → <hr/>
     //    Only if the source text does NOT contain the spaced variant (it might be intentional).
-    //    Models often add a space before "/>", which breaks tag consistency tests.
     if (!text.includes(" />")) {
       finalTranslation = finalTranslation.replace(/<(\w+)\s+\/>/g, "<$1/>");
     }
 
-    // 2. Verify {{variable}} integrity — every variable from source must be present
+    // 2. Auto-repair {{variable}} typos (wrong case, missing braces, truncated name, etc.)
     const srcVars = (text.match(/\{\{[^}]+\}\}/g) || []).sort();
     const tgtVars = (finalTranslation.match(/\{\{[^}]+\}\}/g) || []).sort();
     if (srcVars.length > 0 && srcVars.join(",") !== tgtVars.join(",")) {
-      debug(`[integrity] Variable mismatch! source=[${srcVars}] translation=[${tgtVars}]`);
-      // Attempt auto-repair: find misspelled or missing variables
-      let repaired = finalTranslation;
+      debug(`[integrity] Variable mismatch — attempting repair. source=[${srcVars}] translation=[${tgtVars}]`);
       for (const srcVar of srcVars) {
-        if (!repaired.includes(srcVar)) {
-          // Try to find a close match (wrong case, extra/missing chars)
-          const varName = srcVar.replace(/^\{\{|\}\}$/g, "").replace(/, .+/, "");
-          const wrongPattern = new RegExp(
-            `\\{\\{\\s*${varName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\}?\\}?`,
-            "gi",
-          );
-          const wrongMatch = repaired.match(wrongPattern);
-          if (wrongMatch) {
-            debug(`[integrity] Repairing variable: "${wrongMatch[0]}" → "${srcVar}"`);
-            repaired = repaired.replace(wrongMatch[0], srcVar);
+        if (finalTranslation.includes(srcVar)) continue;
+
+        const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const varName = srcVar.replace(/^\{\{|\}\}$/g, "").replace(/, .+/, "");
+        let repaired = false;
+
+        // Level 1: full name with partial braces — {{varName}?, {{varName, {varName}}
+        const p1 = new RegExp(`\\{?\\{?\\s*${esc(varName)}\\s*\\}?\\}?`, "gi");
+        const m1 = finalTranslation.match(p1);
+        if (m1 && m1[0] !== srcVar) {
+          debug(`[integrity] L1 repair: "${m1[0]}" → "${srcVar}"`);
+          finalTranslation = finalTranslation.replace(m1[0], srcVar);
+          repaired = true;
+        }
+
+        // Level 2: truncated name — model kept only part of camelCase name
+        // e.g. {{productName}} became {{Name}} or {{product}}
+        if (!repaired) {
+          const parts = varName.split(/(?=[A-Z])/); // ["thirdparty", "Folder", "Name"]
+          for (let len = parts.length - 1; len >= 1; len--) {
+            const partial = parts.slice(-len).join("");  // try "FolderName", then "Name"
+            const p2 = new RegExp(`\\{\\{\\s*${esc(partial)}\\s*\\}\\}`, "gi");
+            const m2 = finalTranslation.match(p2);
+            if (m2) {
+              debug(`[integrity] L2 repair: "${m2[0]}" → "${srcVar}"`);
+              finalTranslation = finalTranslation.replace(m2[0], srcVar);
+              repaired = true;
+              break;
+            }
+          }
+        }
+
+        // Level 3: bare fragment without any braces — "thirdparty}}" or "FolderName"
+        if (!repaired) {
+          const p3 = new RegExp(`${esc(varName)}\\s*\\}?\\}?`, "gi");
+          const m3 = finalTranslation.match(p3);
+          if (m3) {
+            debug(`[integrity] L3 repair: "${m3[0]}" → "${srcVar}"`);
+            finalTranslation = finalTranslation.replace(m3[0], srcVar);
+            repaired = true;
           }
         }
       }
-      // If repair restored all variables, use it; otherwise reject translation
-      const repairedVars = (repaired.match(/\{\{[^}]+\}\}/g) || []).sort();
-      if (srcVars.join(",") === repairedVars.join(",")) {
-        debug("[integrity] Variable repair successful");
-        finalTranslation = repaired;
-      } else {
-        debug("[integrity] Variable repair failed — returning null (will keep source)");
-        return null;
+      const repairedVars = (finalTranslation.match(/\{\{[^}]+\}\}/g) || []).sort();
+      if (srcVars.join(",") !== repairedVars.join(",")) {
+        debug(`[integrity] Variable repair incomplete — saving as-is. expected=[${srcVars}] got=[${repairedVars}]`);
+        debugEmit?.("translation:debug:warning", { type: "variable_mismatch", expected: srcVars, actual: repairedVars });
+        integrityWarnings.push({ type: "variable_mismatch", description: `Expected variables ${srcVars.join(", ")} but got ${repairedVars.join(", ")}` });
       }
     }
 
-    // 3. Verify HTML/React tag integrity — tag count and names must match
+    // 3. Auto-repair broken HTML/React tags, then warn if still mismatched
     const tagRegex = /<\/?[a-zA-Z][a-zA-Z0-9]*[^>]*\/?>/g;
+    const brokenClosingTag = /<\/>/g; // models sometimes output </> instead of </strong> etc.
     const normalizeTag = (t) => t.replace(/\s+/g, " ").replace(/\s>/g, ">").replace(/\s\/>/g, "/>");
     const srcTags = (text.match(tagRegex) || []).map(normalizeTag).sort();
-    const tgtTags = (finalTranslation.match(tagRegex) || []).map(normalizeTag).sort();
+    let tgtTags = (finalTranslation.match(tagRegex) || []).map(normalizeTag).sort();
+
     if (srcTags.length > 0 && srcTags.join(",") !== tgtTags.join(",")) {
-      debug(`[integrity] Tag mismatch! source=[${srcTags}] translation=[${tgtTags}]`);
-      // Reject translation — tag corruption is too risky to auto-repair
-      debug("[integrity] Returning null due to tag mismatch");
-      return null;
+      // Try to fix </> → correct closing tag from source
+      if (brokenClosingTag.test(finalTranslation)) {
+        const srcClosingTags = srcTags.filter((t) => t.startsWith("</"));
+        const tgtClosingTags = tgtTags.filter((t) => t.startsWith("</"));
+        const missingClosing = srcClosingTags.filter((t) => !tgtClosingTags.includes(t));
+        if (missingClosing.length > 0) {
+          // Replace each </> with the corresponding missing closing tag
+          let repaired = finalTranslation;
+          for (const tag of missingClosing) {
+            repaired = repaired.replace("</>", tag);
+          }
+          debug(`[integrity] Repaired broken closing tags: </> → ${missingClosing.join(", ")}`);
+          finalTranslation = repaired;
+          tgtTags = (finalTranslation.match(tagRegex) || []).map(normalizeTag).sort();
+        }
+      }
+
+      if (srcTags.join(",") !== tgtTags.join(",")) {
+        debug(`[integrity] Tag mismatch — saving as-is. source=[${srcTags}] translation=[${tgtTags}]`);
+        debugEmit?.("translation:debug:warning", { type: "tag_mismatch", expected: srcTags, actual: tgtTags });
+        integrityWarnings.push({ type: "tag_mismatch", description: `Expected tags ${srcTags.join(", ")} but got ${tgtTags.join(", ")}` });
+      }
     }
 
-    // ── Script validation ────────────────────────────────────────────────
-    // Post-translation script validation for languages with strict script requirements.
-    // Some models ignore the system prompt and produce the wrong writing system.
-    // When that happens we issue one correction request before giving up.
+    // 4. Script validation — warn but never block
     if (targetInfo.scriptWarning) {
-      const corrected = await correctScriptIfNeeded(
-        finalTranslation,
-        text,
-        targetInfo,
-        model,
-      );
-      return corrected;
+      const validator = scriptValidators[targetInfo.code];
+      if (validator && !validator(finalTranslation, text)) {
+        debug(`[integrity] Wrong script detected for ${targetInfo.code} — saving as-is with warning`);
+        debugEmit?.("translation:debug:warning", { type: "wrong_script", language: targetInfo.code });
+        integrityWarnings.push({ type: "wrong_script", description: `Translation contains characters from wrong writing system for ${targetInfo.code}` });
+      }
     }
 
-    return finalTranslation;
+    return { text: finalTranslation, warnings: integrityWarnings };
   } catch (error) {
     if (error.message === "Aborted by user") {
       debugEmit?.("translation:debug:aborted", {});
@@ -1329,96 +1434,93 @@ const scriptValidators = {
 
     return true;
   },
+
+  // Lao: must contain Lao characters (U+0E80–U+0EFF), must NOT contain
+  // Khmer (U+1780–U+17FF), Thai (U+0E00–U+0E7F), Bengali (U+0980–U+09FF),
+  // Devanagari (U+0900–U+097F), or other South/Southeast Asian scripts.
+  "lo-LA": (text, sourceText = "") => {
+    const stripped = stripMarkupForValidation(text);
+    const strippedSrc = stripMarkupForValidation(sourceText);
+
+    // Nothing meaningful → valid
+    const prose = stripped.replace(/[0-9%.,!?;:()\-"'«»\s\u0000-\u007F]/g, "");
+    if (!prose) return true;
+
+    // Unchanged from source → valid (brand name)
+    if (strippedSrc && stripped.trim() === strippedSrc.trim()) return true;
+
+    // Must contain Lao
+    if (!/[\u0E80-\u0EFF]/.test(stripped)) return false;
+
+    // Must NOT contain foreign scripts
+    if (/[\u1780-\u17FF]/.test(stripped)) return false; // Khmer
+    if (/[\u0E00-\u0E7F]/.test(stripped)) return false; // Thai
+    if (/[\u0980-\u09FF]/.test(stripped)) return false; // Bengali
+    if (/[\u0900-\u097F]/.test(stripped)) return false; // Devanagari
+    if (/[\u0F00-\u0FFF]/.test(stripped)) return false; // Tibetan
+    if (/[\u1000-\u109F]/.test(stripped)) return false; // Myanmar
+
+    return true;
+  },
+
+  // Sinhala: must contain Sinhala characters (U+0D80–U+0DFF), must NOT contain
+  // Kannada, Telugu, Tamil, Malayalam, or other Indic scripts.
+  si: (text, sourceText = "") => {
+    const stripped = stripMarkupForValidation(text);
+    const strippedSrc = stripMarkupForValidation(sourceText);
+
+    const prose = stripped.replace(/[0-9%.,!?;:()\-"'«»\s\u0000-\u007F]/g, "");
+    if (!prose) return true;
+    if (strippedSrc && stripped.trim() === strippedSrc.trim()) return true;
+
+    if (!/[\u0D80-\u0DFF]/.test(stripped)) return false;
+
+    if (/[\u0C80-\u0CFF]/.test(stripped)) return false; // Kannada
+    if (/[\u0C00-\u0C7F]/.test(stripped)) return false; // Telugu
+    if (/[\u0B80-\u0BFF]/.test(stripped)) return false; // Tamil
+    if (/[\u0D00-\u0D7F]/.test(stripped)) return false; // Malayalam
+
+    return true;
+  },
+
+  // Armenian: must contain Armenian (U+0530–U+058F)
+  "hy-AM": (text, sourceText = "") => {
+    const stripped = stripMarkupForValidation(text);
+    const strippedSrc = stripMarkupForValidation(sourceText);
+
+    const prose = stripped.replace(/[0-9%.,!?;:()\-"'«»\s\u0000-\u007F]/g, "");
+    if (!prose) return true;
+    if (strippedSrc && stripped.trim() === strippedSrc.trim()) return true;
+
+    if (!/[\u0530-\u058F]/.test(stripped)) return false;
+
+    // Must NOT contain Georgian or Cyrillic
+    if (/[\u10A0-\u10FF]/.test(stripped)) return false; // Georgian
+    if (/[\u0400-\u04FF]/.test(stripped)) return false; // Cyrillic
+
+    return true;
+  },
+
+  // Greek: must contain Greek (U+0370–U+03FF)
+  "el-GR": (text, sourceText = "") => {
+    const stripped = stripMarkupForValidation(text);
+    const strippedSrc = stripMarkupForValidation(sourceText);
+
+    const prose = stripped.replace(/[0-9%.,!?;:()\-"'«»\s\u0000-\u007F]/g, "");
+    if (!prose) return true;
+    if (strippedSrc && stripped.trim() === strippedSrc.trim()) return true;
+
+    if (!/[\u0370-\u03FF]/.test(stripped)) return false;
+
+    // Must NOT contain Cyrillic (visually similar but wrong)
+    if (/[\u0400-\u04FF]/.test(stripped)) return false;
+
+    // Must NOT contain CJK ideographs (model hallucination)
+    if (/[\u4E00-\u9FFF]/.test(stripped)) return false;
+
+    return true;
+  },
 };
-
-/**
- * After getting a translation, verify it uses the correct writing system.
- * If not, send one correction request to the model before giving up.
- */
-async function correctScriptIfNeeded(translation, sourceText, targetInfo, model) {
-  const validator = scriptValidators[targetInfo.code];
-  if (!validator || validator(translation, sourceText)) {
-    return translation; // looks fine
-  }
-
-  debug(`[script-check] ${targetInfo.code}: wrong script detected, requesting correction`);
-
-  const correctionPrompt = `The following text was supposed to be translated into ${targetInfo.name} but was written in the WRONG script (Latin instead of Cyrillic).
-
-CRITICAL: ${targetInfo.scriptWarning}
-
-Original source text:
-${sourceText}
-
-Wrong translation (DO NOT return this):
-${translation}
-
-Provide the corrected translation using ONLY the correct script. Return the translation text only — no explanations.`;
-
-  const abortController = new AbortController();
-  const timeoutMs = isOpenRouterModel(model)
-    ? (require("../config/config").openRouterConfig.inactivityTimeout)
-    : ollamaConfig.requestTimeout;
-  let inactivityTimer = setTimeout(
-    () => abortController.abort(new Error(`Correction inactivity timeout`)),
-    timeoutMs,
-  );
-  const resetInactivityTimer = () => {
-    clearTimeout(inactivityTimer);
-    inactivityTimer = setTimeout(
-      () => abortController.abort(new Error(`Correction inactivity timeout`)),
-      timeoutMs,
-    );
-  };
-
-  let fullResponse = "";
-  try {
-    const { reader, parseToken } = await createRawStream(
-      model,
-      [{ role: "user", content: correctionPrompt }],
-      { abortController, temperature: 0.1 },
-    );
-
-    const decoder = new TextDecoder();
-    let buffer = "";
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split("\n");
-      buffer = lines.pop() ?? "";
-      for (const line of lines) {
-        const token = parseToken(line);
-        if (token) {
-          fullResponse += token;
-          resetInactivityTimer();
-        }
-      }
-    }
-  } finally {
-    clearTimeout(inactivityTimer);
-  }
-
-  const corrected = fullResponse
-    .replace(/<think>[\s\S]*?<\/think>/gi, "")
-    .replace(/<think>[\s\S]*/gi, "")
-    .trim();
-
-  debug(`[script-check] correction response:\n${corrected}`);
-
-  if (!corrected || corrected === "NO_TRANSLATION") {
-    debug(`[script-check] correction failed, returning null`);
-    return null; // will stay untranslated — better than wrong-script text
-  }
-
-  if (!validator(corrected, sourceText)) {
-    debug(`[script-check] correction still wrong script, returning null`);
-    return null;
-  }
-
-  return corrected;
-}
 
 /**
  * Helper to flatten a nested object with dot notation
@@ -1462,31 +1564,8 @@ async function validateTranslation(
     const response = await completionChat(
       model,
       [
-        {
-          role: "system",
-          content: `You are a professional software localization validator for ONLYOFFICE DocSpace UI strings.
-Respond only with valid JSON. Never add markdown, explanations, or text outside the JSON object.`,
-        },
-        {
-          role: "user",
-          content: `Validate this UI string translation.
-
-Source (${sourceInfo.name}): "${sourceText}"
-Translation (${targetInfo.name}): "${targetText}"
-
-Rules for validation:
-- i18next patterns like {{variable}}, <N>text</N> must be preserved unchanged
-- Proper nouns and brand names may remain untranslated — this is acceptable
-- Evaluate meaning accuracy, grammar, and UI appropriateness
-
-Respond with this JSON only:
-{
-  "isValid": true or false,
-  "errors": [{ "type": "missing_content|mistranslation|grammar|style|cultural_context|placeholder_mismatch", "message": "description" }],
-  "suggestions": ["corrected text if needed"],
-  "rating": 1 to 5
-}`,
-        },
+        { role: "system", content: prompts.validationSystem() },
+        { role: "user", content: prompts.validationUser({ sourceInfo, targetInfo, sourceText, targetText }) },
       ],
       {
         temperature: 0,
