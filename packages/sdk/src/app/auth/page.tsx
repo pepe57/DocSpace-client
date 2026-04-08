@@ -40,7 +40,7 @@ export default async function AuthPage({
   searchParams: Promise<Record<string, string | undefined>>;
 }) {
   const params = await searchParams;
-  const { providerName, successRedirectURL, inviteKey, emplType, uid } = params;
+  const { providerName, successRedirectURL, inviteKey, emplType } = params;
 
   if (!providerName) {
     return <div>Missing providerName parameter</div>;
@@ -97,7 +97,6 @@ export default async function AuthPage({
               successRedirectURL={successRedirectURL ?? null}
               inviteKey={inviteKey ?? null}
               emplType={emplType ?? null}
-              uid={uid ?? null}
               confirmHeader={confirmHeader}
             />
           )}
