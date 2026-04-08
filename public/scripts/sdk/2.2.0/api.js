@@ -26,6 +26,14 @@
   var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
   var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), setter ? setter.call(obj, value) : member.set(obj, value), value);
   var __privateMethod = (obj, member, method) => (__accessCheck(obj, member, "access private method"), method);
+  var __privateWrapper = (obj, member, setter, getter) => ({
+    set _(value) {
+      __privateSet(obj, member, value, setter);
+    },
+    get _() {
+      return __privateGet(obj, member, getter);
+    }
+  });
 
   // src/constants/index.ts
   var CSPApiUrl = "/api/2.0/security/csp";
@@ -151,7 +159,17 @@
       /** Fired when the editor is opened from the manager (via context menu, hotkeys, etc.). */
       onEditorOpen: null,
       /** Fired when a file row is clicked in the manager file list. */
-      onFileManagerClick: null
+      onFileManagerClick: null,
+      /** Fired when a file upload completes successfully. */
+      onUploadSuccess: null,
+      /** Fired when a file upload fails. */
+      onUploadError: null,
+      /** Fired on file upload progress update. */
+      onUploadProgress: null,
+      /** Fired when a custom context menu action is clicked in {@link SDKMode.Forms}. */
+      onCustomAction: null,
+      /** Fired when the user navigates to a different section in {@link SDKMode.Forms}. */
+      onNavigate: null
     }
   };
   var cspErrorText = "The current domain is not set in the Content Security Policy (CSP) settings.";
@@ -317,13 +335,26 @@
         const urlParams = customUrlSearchParams(uploaderConfig);
         return `/sdk/uploader${urlParams ? `?${urlParams}` : ""}`;
       }
+      case "forms" /* Forms */: {
+        const formsConfig = {
+          ...baseFrameOptions,
+          roomId: config2.id,
+          libraryId: config2.libraryId,
+          showMenu: config2.showMenu,
+          providerName: config2.providerName,
+          inviteKey: config2.inviteKey,
+          emplType: config2.emplType
+        };
+        const urlParams = customUrlSearchParams(formsConfig);
+        return `/sdk/forms/my-forms${urlParams ? `?${urlParams}` : ""}`;
+      }
       default:
         return config2.rootPath || "/";
     }
   };
 
   // src/instance/index.ts
-  var _isConnected, _callbacks, _tasks, _classNames, _createLoader, _createIframe, _SDKInstance_instances, setupCSPValidation_fn, _sendMessage, _onMessage, parseMessageData_fn, handleMethodResponse_fn, processEvent_fn, executeCommand_fn, handleError_fn, executeMethod_fn, prepareFrameConfig_fn, createContainer_fn, setupContainer_fn, setupIframe_fn, setupFrameEventHandlers_fn, assembleFrame_fn, registerFrame_fn, _getMethodPromise;
+  var _isConnected, _callbacks, _tasks, _classNames, _expectedOrigin, _uploadIdCounter, _pendingUploads, _createLoader, _createIframe, _SDKInstance_instances, setupCSPValidation_fn, _sendMessage, _onMessage, parseMessageData_fn, handleMethodResponse_fn, processEvent_fn, _allowedCommands, executeCommand_fn, handleError_fn, executeMethod_fn, prepareFrameConfig_fn, createContainer_fn, setupContainer_fn, setupIframe_fn, setupFrameEventHandlers_fn, assembleFrame_fn, registerFrame_fn, _getMethodPromise;
   var _SDKInstance = class _SDKInstance {
     constructor(config2) {
       __privateAdd(this, _SDKInstance_instances);
@@ -331,6 +362,9 @@
       __privateAdd(this, _callbacks, []);
       __privateAdd(this, _tasks, []);
       __privateAdd(this, _classNames, "");
+      __privateAdd(this, _expectedOrigin, "");
+      __privateAdd(this, _uploadIdCounter, 0);
+      __privateAdd(this, _pendingUploads, /* @__PURE__ */ new Map());
       /** The iframe configuration options. */
       __publicField(this, "config");
       /**
@@ -473,6 +507,7 @@
       __privateAdd(this, _onMessage, (e) => {
         try {
           if (typeof e.data !== "string") return;
+          if (!__privateGet(this, _expectedOrigin) || e.origin !== __privateGet(this, _expectedOrigin)) return;
           const data = __privateMethod(this, _SDKInstance_instances, parseMessageData_fn).call(this, e.data);
           if (data.frameId !== this.config.frameId) return;
           switch (data.type) {
@@ -607,6 +642,16 @@
      */
     initFrame(config2) {
       this.config = __privateMethod(this, _SDKInstance_instances, prepareFrameConfig_fn).call(this, config2);
+      try {
+        __privateSet(this, _expectedOrigin, new URL(this.config.src).origin);
+      } catch {
+        __privateSet(this, _expectedOrigin, "");
+      }
+      for (const [, pending] of __privateGet(this, _pendingUploads)) {
+        clearTimeout(pending.timer);
+        pending.reject(new Error("Frame reloaded"));
+      }
+      __privateGet(this, _pendingUploads).clear();
       const setupResult = __privateMethod(this, _SDKInstance_instances, createContainer_fn).call(this, this.config.frameId);
       if (!setupResult) return null;
       const { container, target } = setupResult;
@@ -661,6 +706,11 @@
       __privateSet(this, _isConnected, false);
       __privateSet(this, _callbacks, []);
       __privateSet(this, _tasks, []);
+      for (const [, pending] of __privateGet(this, _pendingUploads)) {
+        clearTimeout(pending.timer);
+        pending.reject(new Error("Frame destroyed"));
+      }
+      __privateGet(this, _pendingUploads).clear();
       const sdkFrames = (_b = (_a = window.DocSpace) == null ? void 0 : _a.SDK) == null ? void 0 : _b.frames;
       if (sdkFrames && frameId in sdkFrames) {
         delete sdkFrames[frameId];
@@ -691,6 +741,13 @@
      */
     setConfig(config2 = defaultConfig, reload = false) {
       this.config = { ...this.config, ...config2 };
+      if (config2.src) {
+        try {
+          __privateSet(this, _expectedOrigin, new URL(this.config.src).origin);
+        } catch {
+          __privateSet(this, _expectedOrigin, "");
+        }
+      }
       return __privateGet(this, _getMethodPromise).call(this, "setConfig" /* SetConfig */, this.config, reload);
     }
     /**
@@ -1251,11 +1308,158 @@
         data
       });
     }
+    /**
+     * Navigates the Forms frame to a specific section.
+     * Only works in {@link SDKMode.Forms} mode.
+     *
+     * @param section - Target section: `"my-forms"`, `"in-progress"`, `"completed-forms"`, `"library"`, or `"settings"`.
+     * @returns A promise that resolves when the navigation is complete.
+     *
+     * @example
+     * ```typescript
+     * await instance.navigateSection("completed-forms");
+     * ```
+     *
+     * @example
+     * Initialize Forms and navigate to the library section.
+     * ```typescript
+     * const forms = sdk.initForms({
+     *   frameId: 'ds-forms',
+     *   src: 'https://docspace.example.com',
+     *   id: 'room-42',
+     * });
+     * await forms.navigateSection("library");
+     * ```
+     */
+    navigateSection(section) {
+      if (this.config.mode !== "forms" /* Forms */) {
+        throw new Error("navigateSection is only available in Forms mode");
+      }
+      return __privateGet(this, _getMethodPromise).call(this, "navigateSection" /* NavigateSection */, { section });
+    }
+    /**
+     * Registers custom context menu actions for files and/or folders.
+     * Only works in {@link SDKMode.Forms} mode.
+     * When a custom action is clicked, {@link TFrameEvents.onCustomAction} fires with the action key and item data.
+     *
+     * @param config - Custom actions configuration. See {@link TCustomActionsConfig}.
+     * @returns A promise that resolves when actions are registered.
+     *
+     * @example
+     * ```typescript
+     * await instance.setCustomActions({
+     *   contextMenu: {
+     *     file: [
+     *       { key: "send-to-crm", label: "Send to CRM", icon: "https://example.com/icon.svg" },
+     *       { key: "export", label: "Export", section: ["completed-forms"] },
+     *     ],
+     *   },
+     * });
+     * ```
+     *
+     * @example
+     * Handle the custom action event on the host page.
+     * ```typescript
+     * const forms = sdk.initForms({
+     *   frameId: 'ds-forms',
+     *   src: 'https://docspace.example.com',
+     *   id: 'room-42',
+     *   events: {
+     *     onCustomAction: (data) => console.log('action:', data),
+     *   },
+     * });
+     * await forms.setCustomActions({
+     *   contextMenu: { file: [{ key: "approve", label: "Approve" }] },
+     * });
+     * ```
+     */
+    setCustomActions(config2) {
+      if (this.config.mode !== "forms" /* Forms */) {
+        throw new Error("setCustomActions is only available in Forms mode");
+      }
+      return __privateGet(this, _getMethodPromise).call(this, "setCustomActions" /* SetCustomActions */, config2);
+    }
+    /**
+     * Uploads a file into the current room.
+     * Only works in {@link SDKMode.Forms} mode.
+     * The file is transferred to the iframe via zero-copy ArrayBuffer and uploaded
+     * using the chunked upload API. The form list refreshes automatically when complete.
+     *
+     * @param file - The file to upload. Callers should validate type and size before calling.
+     * @returns A promise that resolves with upload result from the iframe,
+     *   or rejects if the iframe reports an error via `onUploadError`.
+     *
+     * @remarks
+     * The entire file is read into memory via `arrayBuffer()` before transfer.
+     * Callers should validate file size before invoking this method to avoid
+     * excessive memory usage on the host page. The server-side upload limit
+     * is configured in DocSpace and will reject files that exceed it.
+     *
+     * The ArrayBuffer is transferred to the iframe (zero-copy). After `upload()`
+     * returns, the buffer is neutered and cannot be reused.
+     *
+     * @example
+     * ```typescript
+     * const input = document.querySelector("input[type=file]");
+     * const file = input.files[0];
+     * const result = await instance.upload(file);
+     * ```
+     *
+     * @example
+     * Upload with error handling.
+     * ```typescript
+     * try {
+     *   await forms.upload(file);
+     *   console.log("Upload complete");
+     * } catch (err) {
+     *   console.error("Upload failed:", err.message);
+     * }
+     * ```
+     */
+    async upload(file) {
+      if (this.config.mode !== "forms" /* Forms */) {
+        throw new Error("upload is only available in Forms mode");
+      }
+      if (!__privateGet(this, _isConnected)) {
+        __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, { message: connectErrorText });
+        throw new Error(connectErrorText);
+      }
+      const { frameId, src } = this.config;
+      const iframe = document.getElementById(frameId);
+      if (!(iframe == null ? void 0 : iframe.contentWindow)) {
+        throw new Error("Frame not connected");
+      }
+      const buffer = await file.arrayBuffer();
+      const uploadId = ++__privateWrapper(this, _uploadIdCounter)._;
+      const uploadPromise = new Promise((resolve, reject) => {
+        const timer = setTimeout(() => {
+          __privateGet(this, _pendingUploads).delete(uploadId);
+          reject(new Error(`Upload timed out: ${file.name}`));
+        }, 12e4);
+        __privateGet(this, _pendingUploads).set(uploadId, { fileName: file.name, resolve, reject, timer });
+      });
+      iframe.contentWindow.postMessage(
+        {
+          frameId,
+          type: "uploadFileData" /* UploadFileData */,
+          fileName: file.name,
+          fileSize: file.size,
+          lastModified: file.lastModified,
+          buffer
+        },
+        src,
+        [buffer]
+      );
+      return uploadPromise;
+    }
   };
   _isConnected = new WeakMap();
   _callbacks = new WeakMap();
   _tasks = new WeakMap();
   _classNames = new WeakMap();
+  _expectedOrigin = new WeakMap();
+  _uploadIdCounter = new WeakMap();
+  _pendingUploads = new WeakMap();
   _createLoader = new WeakMap();
   _createIframe = new WeakMap();
   _SDKInstance_instances = new WeakSet();
@@ -1334,6 +1538,31 @@
     var _a;
     if (!(eventData == null ? void 0 : eventData.event)) return;
     const eventName = eventData.event;
+    if (__privateGet(this, _pendingUploads).size > 0 && (eventName === "onUploadSuccess" || eventName === "onUploadError")) {
+      const payload = eventData.data;
+      const fileName = payload == null ? void 0 : payload.fileName;
+      let matchedId;
+      if (fileName) {
+        for (const [id, entry] of __privateGet(this, _pendingUploads)) {
+          if (entry.fileName === fileName) {
+            matchedId = id;
+            break;
+          }
+        }
+      } else if (__privateGet(this, _pendingUploads).size > 0) {
+        matchedId = __privateGet(this, _pendingUploads).keys().next().value;
+      }
+      if (matchedId !== void 0) {
+        const pending = __privateGet(this, _pendingUploads).get(matchedId);
+        clearTimeout(pending.timer);
+        __privateGet(this, _pendingUploads).delete(matchedId);
+        if (eventName === "onUploadSuccess") {
+          pending.resolve(eventData.data || {});
+        } else {
+          pending.reject(new Error((payload == null ? void 0 : payload.message) || "Upload failed"));
+        }
+      }
+    }
     const handler = (_a = this.config.events) == null ? void 0 : _a[eventName];
     if (typeof handler === "function") {
       try {
@@ -1343,13 +1572,19 @@
       }
     }
   };
+  _allowedCommands = new WeakMap();
   /**
    * Executes commands received from the DocSpace iframe by invoking the corresponding SDK method.
+   * Only methods listed in {@link SDKInstance.#allowedCommands} are callable.
    *
    * @param data - The message data containing the command name and parameters.
    */
   executeCommand_fn = function(data) {
     if (!data.commandName) return;
+    if (!__privateGet(_SDKInstance, _allowedCommands).has(data.commandName)) {
+      console.warn("Blocked iframe command not in allowlist:", data.commandName);
+      return;
+    }
     const command = this[data.commandName];
     if (typeof command === "function") {
       command.call(this, data.commandData);
@@ -1398,6 +1633,12 @@
     const mergedConfig = { ...defaultConfig, ...this.config, ...config2 };
     if (mergedConfig.mode === "manager" || mergedConfig.mode === "system") {
       mergedConfig.noLoader = false;
+    }
+    if (mergedConfig.mode === "forms" /* Forms */) {
+      if (mergedConfig.showMenu === void 0) {
+        mergedConfig.showMenu = true;
+      }
+      mergedConfig.noLoader = true;
     }
     return mergedConfig;
   };
@@ -1521,6 +1762,11 @@
     templates: /* @__PURE__ */ new Map()
   });
   __publicField(_SDKInstance, "_iframeCache");
+  /** Methods the iframe is allowed to invoke via `onCallCommand`. */
+  __privateAdd(_SDKInstance, _allowedCommands, /* @__PURE__ */ new Set([
+    "setIsLoaded",
+    "setConfig"
+  ]));
   var SDKInstance = _SDKInstance;
 
   // src/sdk/index.ts
@@ -1761,6 +2007,30 @@
        * ```
        */
       __publicField(this, "initUploader", (config2) => this.init({ ...config2, mode: "uploader" /* Uploader */ }));
+      /**
+       * Initializes a frame in {@link SDKMode.Forms} mode — a forms gallery for the room specified by `id`.
+       * Forces `mode` to {@link SDKMode.Forms}. Sets `showMenu` to `true` by default.
+       *
+       * @param config - Frame configuration. See {@link TFrameConfig}.
+       * @returns The initialized {@link SDKInstance}.
+       *
+       * @example
+       * ```typescript
+       * import { SDK } from '@onlyoffice/docspace-sdk-js';
+       *
+       * const sdk = new SDK();
+       * const forms = sdk.initForms({
+       *   frameId: 'ds-forms',
+       *   src: 'https://docspace.example.com',
+       *   id: 'room-id',
+       *   showMenu: true,
+       *   events: {
+       *     onCustomAction: (data) => console.log('action:', data),
+       *   },
+       * });
+       * ```
+       */
+      __publicField(this, "initForms", (config2) => this.init({ ...config2, mode: "forms" /* Forms */, showMenu: config2.showMenu ?? true }));
     }
   };
 
