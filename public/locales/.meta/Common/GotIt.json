@@ -3,7 +3,7 @@
   "content": "Got it",
   "content_en_sha1_hash": "5b8027fa0e819719a62305a6b15f3f1c10769f7f",
   "created_at": "2025-05-19T21:30:45.641Z",
-  "updated_at": "2026-04-07T19:35:04.970Z",
+  "updated_at": "2026-04-08T08:09:26.967Z",
   "comment": {
     "text": "The \"GotIt\" translation key is used to display a confirmation button that indicates agreement or acceptance of information in UI elements such as buttons and dialogs. It is typically used in scenarios where the user needs to acknowledge understanding or accept terms, allowing them to proceed with the desired action. This text appears on primary buttons in dialog components and guidance sections.",
     "is_auto": true,
@@ -129,7 +129,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Apanhei' means 'I caught' (as in catching a ball or a disease) or 'I picked up'. In a UI context for a confirmation button, it does not convey 'I understand' or 'Understood'.",
+          "suggestion": "Entendi"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -159,7 +165,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Mám to' is a literal translation of 'I have it' or 'I got it' (as in 'I understand/possess it'), which sounds unnatural for a UI confirmation button in Slovak. In a UI context for acknowledging information, 'Rozumiem' or 'Rozumiem tomu' is the standard equivalent.",
+          "suggestion": "Rozumiem"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -199,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
