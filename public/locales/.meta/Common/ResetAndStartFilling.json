@@ -3,7 +3,7 @@
   "content": "Reset and start filling",
   "content_en_sha1_hash": "fa6a4c3b2b734af36fa7e82b2f344fd875383107",
   "created_at": "2025-05-19T21:30:47.883Z",
-  "updated_at": "2026-04-07T19:35:05.002Z",
+  "updated_at": "2026-04-08T01:26:43.119Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Reset and start filling\" in various UI elements. It appears on a button within a filling status panel, indicating an option to reset the filling process, and may also be referenced in a context options store where it enables or disables this functionality.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'վրացնել' (vratsnel) is a misspelling or incorrect word choice. It appears to be a typo for 'լրացնել' (lratsnel - to fill/complete). 'Վրացնել' is not a standard Armenian word in this context and likely stems from a confusion with 'վրաց' (Georgian) or a typo.",
+          "suggestion": "Վերակայել և սկսել լրացնել"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -159,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ප්‍රතිසංස්කරණය' (Prathisanskaranya) means 'reconstruction', 'editing', or 'restoration'. In the context of a UI button to 'Reset' a form or process, it is semantically incorrect. The correct term for 'Reset' in a technical/UI context is 'නැවත සැකසීම' (Nævatha sækasīma).",
+          "suggestion": "නැවත සැකසීම සහ පිරවීම ආරම්භ කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -205,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

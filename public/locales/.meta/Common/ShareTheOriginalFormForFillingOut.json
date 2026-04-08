@@ -3,7 +3,7 @@
   "content": "Share the original form for filling out.",
   "content_en_sha1_hash": "d89e20141550449ea8d0537fbc588e697483a8fe",
   "created_at": "2025-05-19T21:30:48.698Z",
-  "updated_at": "2026-04-07T19:35:05.014Z",
+  "updated_at": "2026-04-07T23:09:37.836Z",
   "comment": {
     "text": "The translation key \"ShareTheOriginalFormForFillingOut\" is used to describe a feature that allows users to share their original form content. This message appears in UI elements such as buttons or dialog boxes, guiding users on how to share the unedited form data, typically for collaborative editing purposes.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"i\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -87,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Կիսվել բնօրինակի ձևը' is grammatically incorrect and uses a literal translation of 'share' (Կիսվել) which in Armenian often implies 'to divide/split' rather than 'to distribute/share access'. Additionally, the case ending for 'form' is incorrect for the intended meaning.",
+          "suggestion": "Կիսել լրացման համար նախատեսված բնօրինակ ձևաթղթը"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -183,7 +195,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation uses the future tense ('Podelite' can be interpreted as 'You will share') or a command that sounds like a suggestion, whereas the English is an imperative instruction. More importantly, 'Podelite' is often used for 'Divide/Split' in certain contexts, though it works for 'Share'. However, the main issue is the grammatical mood; for a UI description, it should be an infinitive or a direct instruction. Most critically, 'Podelite' is the second person plural/polite imperative, but in UI strings for descriptions, it is better to use a neutral form or ensure it doesn't sound like a command to the user to perform the action right now, but rather a description of what the feature does.",
+          "suggestion": "Podeli originalni obrazac za popunjavanje."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -213,7 +231,13 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"m\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     }
   }

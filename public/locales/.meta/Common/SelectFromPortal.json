@@ -3,7 +3,7 @@
   "content": "Select from {{productName}}",
   "content_en_sha1_hash": "3365d131cf57bbe561f947df5ac7dcf4feb0ca97",
   "created_at": "2025-05-19T21:30:48.440Z",
-  "updated_at": "2026-04-07T19:35:05.010Z",
+  "updated_at": "2026-04-07T23:46:12.434Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to select from a portal. It appears when selecting files or actions in certain contexts and asks users to choose from a list of options related to a product named \"Product Name\".",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Spanish translation omits the preposition 'from' (de), changing the meaning from 'Select from {{productName}}' to 'Select {{productName}}'.",
+          "suggestion": "Seleccionar de {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -75,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The preposition 'de' is used incorrectly in French. 'Sélectionner de' implies selecting something out of a material or a source, whereas 'Select from [List/Portal]' should be 'Sélectionner dans [Portal]' or 'Sélectionner parmi [Portal]'.",
+          "suggestion": "Sélectionner dans {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'තෝදන්න' (thodanna) is a misspelling of 'තෝරන්න' (thoranna). 'තෝදන්න' is not a valid word for 'select' in Sinhala.",
+          "suggestion": "{{productName}} වෙතින් තෝරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,7 +183,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The preposition 'from' (iz) is missing, which changes the meaning from 'Select from [Product]' to 'Select [Product]'.",
+          "suggestion": "Izberi iz {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -177,7 +201,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_variable",
+          "description": "The variable {{productName}} has been modified with a suffix '-а' which breaks the exact matching requirement for the variable token.",
+          "suggestion": "Izaberite iz {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -199,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

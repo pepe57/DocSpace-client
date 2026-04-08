@@ -3,7 +3,7 @@
   "content": "Room space quota exceeded ({{size}}).",
   "content_en_sha1_hash": "606136070a50ade8aee4b2dfd310061b4b615d61",
   "created_at": "2025-05-19T21:30:48.282Z",
-  "updated_at": "2026-04-07T19:35:05.008Z",
+  "updated_at": "2026-04-08T00:08:49.431Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user's room space quota exceeds the limit. It typically appears on a file upload failure dialog or as part of an error notification in the FilesActionsStore.js application, indicating that the user has reached their storage space limit.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,13 +51,25 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -63,19 +81,37 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -87,7 +123,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -111,37 +153,73 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,13 +237,25 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -177,13 +267,25 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,10 +297,22 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

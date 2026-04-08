@@ -3,7 +3,7 @@
   "content": "Content creators can create and edit files in the room, but can't manage users, or access settings.",
   "content_en_sha1_hash": "b4f64217478f8374be46634b2bf16cd639a3dc2f",
   "created_at": "2025-05-19T21:30:48.002Z",
-  "updated_at": "2026-04-07T19:35:05.004Z",
+  "updated_at": "2026-04-08T00:52:00.346Z",
   "comment": {
     "text": "This translation key is used for a description that explains the permissions and limitations of a Content Creator role within a room, likely appearing in user interface elements such as a form or settings panel. The content creator can create and edit files but lacks access to managing users or accessing settings.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation adds 'd'accès' (access) to 'paramètres', which changes the meaning from 'access settings' to 'access settings' (as in settings for access), whereas the English implies the user cannot access the settings themselves.",
+          "suggestion": "Les créateurs de contenu peuvent créer et modifier des fichiers dans la salle, mais ne peuvent pas gérer les utilisateurs ou accéder aux paramètres."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -129,7 +135,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'utilizadors' is misspelled in Portuguese; the correct spelling is 'utilizadores'.",
+          "suggestion": "Os criadores de conteúdo podem criar e editar arquivos na sala, mas não podem gerenciar utilizadores ou acessar configurações."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -199,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

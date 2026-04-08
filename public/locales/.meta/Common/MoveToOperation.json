@@ -3,7 +3,7 @@
   "content": "Moving",
   "content_en_sha1_hash": "65cd4dd8114610f7bacc1f81bb9dd01a137f162f",
   "created_at": "2025-05-19T21:30:46.650Z",
-  "updated_at": "2026-04-07T19:35:04.986Z",
+  "updated_at": "2026-04-08T04:31:24.715Z",
   "comment": {
     "text": "The \"MoveToOperation\" translation key is used to display a label for an operation related to moving files in a user interface. It appears as part of a switch statement that determines which file action is being performed, such as moving or copying. Translators should replace this key with a localized string describing the specific file move action.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Přesouvám' is in the first-person singular present tense ('I am moving'), whereas the English 'Moving' in this UI context (a label for an operation) should be a noun or a gerund describing the action (e.g., 'Moving' or 'Move').",
+          "suggestion": "Přesouvání"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -87,7 +93,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation 'Sta spostando' is a continuous verb form (He/She/It is moving), whereas the English 'Moving' in this UI context refers to the name of the operation (Moving).",
+          "suggestion": "Spostamento"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -111,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian word 'Pārvieto' is a verb in the imperative or past tense (Move/Moved), whereas the English 'Moving' in this UI context (as part of an operation name) functions as a gerund/noun describing the action. A more accurate translation for a UI label describing the action 'Move' is 'Pārvietošana'.",
+          "suggestion": "Pārvietošana"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -129,7 +147,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'A mover' is a gerund/continuous form (meaning 'is moving' or 'to be moving') which is grammatically awkward for a UI label describing a file operation. In the context of a file action (Move/Copy/Download), the noun or infinitive form is required.",
+          "suggestion": "Mover"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -159,7 +183,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Presúva sa' is a verb phrase meaning 'It is moving' (intransitive/reflexive), whereas the English 'Moving' in this UI context refers to the name of the operation 'Move'.",
+          "suggestion": "Presúvanie"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -199,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

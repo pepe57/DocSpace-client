@@ -3,7 +3,7 @@
   "content": "Link removed",
   "content_en_sha1_hash": "5b7b933771d229e7398707824ee69dcd44727857",
   "created_at": "2025-05-19T21:30:46.208Z",
-  "updated_at": "2026-04-07T19:35:04.980Z",
+  "updated_at": "2026-04-08T05:32:41.198Z",
   "comment": {
     "text": "This translation key is used to display a success message when a link is removed from a shared content. It appears in a notification that pops up after clicking on the \"Remove\" option in a component. The text is intended to be brief and informative for users.",
     "is_auto": true,
@@ -205,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Are you sure you want to continue?",
   "content_en_sha1_hash": "8de6e73ba7b7e7a2c5f18e2bc38d0a44a17be1d3",
   "created_at": "2025-05-19T21:30:49.566Z",
-  "updated_at": "2026-04-07T19:35:05.034Z",
+  "updated_at": "2026-04-07T20:15:44.440Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when the user wants to delete or archive rooms. It asks the user to confirm their intention and appears in dialog boxes (e.g., ArchiveDialog and DeleteDialog) where room deletion or archiving decisions are made.",
     "is_auto": true,
@@ -279,7 +279,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Vietnamese translation 'Bạn có muốn tiếp tục?' means 'Do you want to continue?', missing the 'Are you sure' (confirmation) nuance required by the English source 'Are you sure you want to continue?'.",
+          "suggestion": "Bạn có chắc chắn muốn tiếp tục không?"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,7 +3,7 @@
   "content": "invite as guest",
   "content_en_sha1_hash": "4af13b83671f74562036c77dedfbc2b8b7a372cd",
   "created_at": "2025-05-19T21:30:45.973Z",
-  "updated_at": "2026-04-07T19:35:04.975Z",
+  "updated_at": "2026-04-08T06:32:43.243Z",
   "comment": {
     "text": "This translation key is used for a button label that invites users to \"invite as guest\" when adding an email. It appears in an invite panel, likely on a website or application where users can send emails to others. The translator should provide a neutral description of this action.",
     "is_auto": true,
@@ -199,6 +199,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '邀请为访客' is grammatically awkward in Chinese for a button label. It literally translates to 'Invite as a visitor/guest' in a way that sounds like a direct word-for-word conversion, which is unnatural. In UI contexts, '以访客身份邀请' or '作为访客邀请' is more standard, but more importantly, '邀请为访客' can be interpreted as 'Invite [someone] to become a guest' rather than the action of 'Inviting [someone] as a guest'.",
+          "suggestion": "以访客身份邀请"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

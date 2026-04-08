@@ -3,7 +3,7 @@
   "content": "{{productName}} users only",
   "content_en_sha1_hash": "0beea2f05fa9af55a0c63adb5ee8fc835cf3d5e9",
   "created_at": "2025-05-19T21:30:48.990Z",
-  "updated_at": "2026-04-07T19:35:05.019Z",
+  "updated_at": "2026-04-07T22:33:00.970Z",
   "comment": {
     "text": "This translation key is used to display a label indicating that a feature or action is restricted to space users only. It appears in a share component and is triggered by the \"SpaceUsersOnly\" internal property.",
     "is_auto": true,
@@ -159,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'පරිශ්‍රීලකයින්' is a misspelling of 'පරිශීලකයින්' (users). The current spelling is incorrect in Sinhala.",
+          "suggestion": "{{productName}} පරිශීලකයින් පමණි"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

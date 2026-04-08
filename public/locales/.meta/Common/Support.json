@@ -3,7 +3,7 @@
   "content": "Support",
   "content_en_sha1_hash": "f32d5a3b17e614297417cc279a7ec1cd02274d65",
   "created_at": "2025-05-19T21:30:49.224Z",
-  "updated_at": "2026-04-07T19:35:05.023Z",
+  "updated_at": "2026-04-07T22:10:14.583Z",
   "comment": {
     "text": "This translation key is used to display \"Support\" as a label for live chat widgets. It appears on the web widget settings page and will be displayed in both the launcher and chat sections. The translated version of this key should be used to provide support-related content to users.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '지원하다' is a verb meaning 'to support' or 'to sponsor'. In the context of a UI label for a chat widget, a noun form is required.",
+          "suggestion": "지원"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -117,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is identical to the English source, meaning the Latvian translation is missing and the English word is being used instead.",
+          "suggestion": "Atbalsts"
+        }
+      ],
       "approved_at": null
     },
     "nl": {

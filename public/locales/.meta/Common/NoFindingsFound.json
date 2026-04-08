@@ -3,7 +3,7 @@
   "content": "No findings",
   "content_en_sha1_hash": "ab5062b935491263fcc3318d6d8d558b82d2b044",
   "created_at": "2025-05-19T21:30:46.827Z",
-  "updated_at": "2026-04-07T19:35:04.987Z",
+  "updated_at": "2026-04-08T04:06:31.496Z",
   "comment": {
     "text": "This translation key is used to display the text \"No findings\" in a component that represents an empty state, likely appearing as part of a filter or search result. It provides a clear message when there are no relevant results found.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

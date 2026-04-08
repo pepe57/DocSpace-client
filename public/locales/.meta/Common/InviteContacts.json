@@ -3,7 +3,7 @@
   "content": "Invite contacts",
   "content_en_sha1_hash": "43f0bde391682834922b0b6b0e4c82714e94586e",
   "created_at": "2025-05-19T21:30:45.983Z",
-  "updated_at": "2026-04-07T19:35:04.976Z",
+  "updated_at": "2026-04-08T06:31:48.820Z",
   "comment": {
     "text": "The translation key \"InviteContacts\" is used to display the phrase \"Invite contacts\". It appears as a button label on a UI element, allowing users to add new contact information.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation uses the genitive case ('կոնտակտների'), which translates to 'Invite of contacts' or 'Invite contacts's', making it grammatically incorrect for a button label. It should use the accusative case to denote the object of the action.",
+          "suggestion": "Հրավիրել կոնտակտներ"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -211,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

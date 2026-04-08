@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2026-04-07T19:35:05.003Z",
+  "updated_at": "2026-04-08T01:24:54.853Z",
   "comment": {
     "text": "The translation key \"Restore\" is used to display a button label or header in various UI elements, such as buttons and dialogs. It indicates an action of recovering or returning a file or room to its original state. This translation key appears on screens like Restore Room Dialogs where users can restore a room.",
     "is_auto": true,
@@ -237,7 +237,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Restabilire' means 're-establishment' or 'reinstatement' (often used for connections, order, or status). For a UI button action to recover a file or room, 'Restaurare' is the correct technical term.",
+          "suggestion": "Restaurare"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -249,7 +255,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'ප්‍රත්‍යර්පණය' (Prathyarpanya) is a highly formal/academic term often used for 'restitution' or 'reimbursement' in legal or complex contexts. In a UI context for recovering a file or room, it sounds unnatural and overly complex. A more standard UI term for 'Restore' is 'පුනර්ස්ථාපනය කරන්න' or simply 'පුනර්ස්ථාපනය'.",
+          "suggestion": "පුනර්ස්ථාපනය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -279,7 +291,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish word 'Onar' means 'to repair' or 'to fix' (like repairing a broken object). In the context of recovering a file, room, or data to its original state, 'Geri Yükle' is the correct technical term for 'Restore'.",
+          "suggestion": "Geri Yükle"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -295,6 +313,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

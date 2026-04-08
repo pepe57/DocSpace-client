@@ -3,7 +3,7 @@
   "content": "Read instructions",
   "content_en_sha1_hash": "1b4f6403ea7b35ba0ee20f4a34678cc048a6f917",
   "created_at": "2025-05-19T21:30:47.714Z",
-  "updated_at": "2026-04-07T19:35:05.000Z",
+  "updated_at": "2026-04-08T01:52:29.324Z",
   "comment": {
     "text": "This translation key is used to display instructions to read plugin SDK documentation. It appears as a button label in a UI component, prompting users to access further information about a specific plugin or SDK element.",
     "is_auto": true,
@@ -205,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

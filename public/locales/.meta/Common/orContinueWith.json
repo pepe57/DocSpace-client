@@ -3,7 +3,7 @@
   "content": "or continue with",
   "content_en_sha1_hash": "a1aa5858e0e7bb74686ebe81912f61fc201800cb",
   "created_at": "2025-05-19T21:30:47.130Z",
-  "updated_at": "2026-04-07T19:35:05.036Z",
+  "updated_at": "2026-04-08T03:31:17.692Z",
   "comment": {
     "text": "This translation key is used for the label \"or continue with\" that appears in a social login flow. It prompts the user to either use their email address or proceed with the current authentication method. The text is commonly found on buttons or labels within login confirmation dialogs.",
     "is_auto": true,
@@ -99,13 +99,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation 'あるいは' (or/alternatively) only translates the conjunction 'or' and omits the verb phrase 'continue with', which is necessary to provide context for the social login buttons following the label.",
+          "suggestion": "または次で続行"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '또는 다음을 이용:' means 'or use the following:', which implies a list follows. The English 'or continue with' is a prepositional phrase used to introduce social login options. While similar in context, the Korean version adds a colon and a specific verb structure that changes the nuance from a connector to a command/instruction.",
+          "suggestion": "또는 다음으로 계속:"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -159,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'හෝ මෙය සමඟ ඉදිරියට' translates to 'or forward with this', which is grammatically incomplete and awkward in a UI context. It lacks the verb 'proceed' or 'continue' in a way that makes sense for a social login label.",
+          "suggestion": "හෝ මෙය මගින් ඉදිරියට යන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -205,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

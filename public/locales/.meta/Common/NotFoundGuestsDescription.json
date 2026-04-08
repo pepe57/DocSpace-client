@@ -3,7 +3,7 @@
   "content": "New guests will be added here once you invite them to the room.",
   "content_en_sha1_hash": "67fb4d9324338a8ac05bfb73179d010e43aecfd7",
   "created_at": "2025-05-19T21:30:46.881Z",
-  "updated_at": "2026-04-07T19:35:04.988Z",
+  "updated_at": "2026-04-08T03:59:56.192Z",
   "comment": {
     "text": "This translation key describes a message that appears on an empty screen when there are no invited guests to display. It is used in the \"Contacts\" section of the Home page and is displayed as a default message when no guests have been added yet.",
     "is_auto": true,
@@ -81,13 +81,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation incorrectly states 'invite them to the room' (նրանց սենյակ հրավիրեք) instead of 'invite them to the room' (նրանց սենյակ հրավիրեք - the word order/syntax makes it sound like 'invite them room'). More importantly, the Armenian phrasing 'նրանց սենյակ հրավիրեք' is grammatically awkward/incorrect for 'invite them to the room'. It should be 'նրանց սենյակ հրավիրելիս' or 'սենյակ հրավիրելիս նրանք կավելացվեն այստեղ'. However, the most critical error is the word order which makes the sentence sound like 'invite them room'.",
+          "suggestion": "Նոր հյուրեր կավելացվեն այստեղ, երբ նրանց հրավիրեք սենյակ:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"a\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -111,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation contains significant extra information not present in the English source text, describing sending guests and adding guests invited by others. This deviates from the single-sentence source.",
+          "suggestion": "Jauni viesi tiks pievienoti šeit, tiklīdz uzaicināsiet viņus uz telpu."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'invitați' (invited/guests) as a noun, but the grammatical agreement 'le invitați' (you invite them) refers to a masculine/mixed plural, whereas 'Noii invitați' is a slightly awkward phrasing for 'New guests'. More importantly, 'la sală' (to the hall/room) is a literal translation of 'room' that doesn't fit the digital context of a software 'room' (which should be 'camera' or 'spațiu'). However, the most critical error is the gender/number agreement: 'Noii invitați' (masculine) with 'le' is acceptable, but 'invitați' is often used as a verb; the term for guests should be 'oaspeți' or 'membri'.",
+          "suggestion": "Noii oaspeți vor fi adăugați aici imediat ce îi invitați în cameră."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation uses 'පහසුරම් දුන් පසු' (after giving facilities/amenities), which is a mistranslation of 'invite them'. The correct term for 'invite' in this context should be 'ආරාධනා කළ පසු'.",
+          "suggestion": "ඔබ ඔවුන්ව කාමරයට ආරාධනා කළ පසු නව ආගන්තුකයින් මෙහි එකතු කරනු ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

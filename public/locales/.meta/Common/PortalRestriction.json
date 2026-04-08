@@ -3,7 +3,7 @@
   "content": "Your IP address is not included in the list of allowed IP addresses to access this {{productName}}. Turn off a VPN if it's enabled and reload the page, or use another IP address to log in.",
   "content_en_sha1_hash": "7757cc59017d043dfa9a644e5a686d93b5f7d6da",
   "created_at": "2025-05-19T21:30:47.430Z",
-  "updated_at": "2026-04-07T19:35:04.996Z",
+  "updated_at": "2026-04-08T02:29:08.118Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user attempts to access a product with an IP address not in the list of allowed IP addresses. The message informs the user to turn off their VPN and reload the page or use another IP address to log in. It appears on an Access Restricted screen.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

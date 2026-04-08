@@ -3,7 +3,7 @@
   "content": "Merge and overwrite",
   "content_en_sha1_hash": "eb9c66da688e2f80d058216855946cdad7300b1b",
   "created_at": "2025-05-19T21:30:46.458Z",
-  "updated_at": "2026-04-07T19:35:04.984Z",
+  "updated_at": "2026-04-08T04:49:20.366Z",
   "comment": {
     "text": "The translation key \"MergeAndOverwrite\" is used to describe a merge and overwrite action in a conflict resolution dialog. This text appears as a title in a file-based merge dialog, instructing the user on what action they are about to take. It should be translated to convey a similar sense of merging content with an option to replace it.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'එදාට ඒකාබද්ධ කර පෙර ලිවීම' translates to 'Merge and overwrite on that day' or 'Merge and overwrite then'. The word 'එදාට' (on that day/then) is irrelevant and changes the meaning of the command.",
+          "suggestion": "ඒකාබද්ධ කර පෙර ලියන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

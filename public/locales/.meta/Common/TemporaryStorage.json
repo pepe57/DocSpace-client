@@ -3,7 +3,7 @@
   "content": "Temporary storage",
   "content_en_sha1_hash": "d90c9723bbf93c4c8895c55a1d770e8294c92b66",
   "created_at": "2025-05-26T07:15:48.746Z",
-  "updated_at": "2026-04-07T19:35:05.025Z",
+  "updated_at": "2026-04-07T22:00:38.712Z",
   "comment": {
     "text": "This translation key is used for the label \"Temporary storage\" which appears as a radio button option in a manual backup page. It should be translated to indicate temporary storage options or settings in this specific UI context.",
     "is_auto": true,

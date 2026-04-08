@@ -3,7 +3,7 @@
   "content": "Incorrect domain",
   "content_en_sha1_hash": "d609421cd522ec58b1c74e81fb0b0128cbebce7d",
   "created_at": "2025-05-19T21:30:45.845Z",
-  "updated_at": "2026-04-07T19:35:04.972Z",
+  "updated_at": "2026-04-08T06:57:03.439Z",
   "comment": {
     "text": "This translation key is used to display an error message indicating that a domain entered is incorrect. It is commonly displayed in a dialog or notification when a user attempts to access a trusted mail account with an invalid domain. The translated version of this message should appear next to \"Incorrect domain\" on the screen.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'τομέας' (sector/field) is used instead of 'domain' (internet domain name). In a technical context regarding email and network addresses, 'domain' should be translated as 'domain' (δοκιμή/δοκάν) or more commonly 'domain' transliterated or referred to as 'όνομα τομέα'. 'Τομέας' refers to a sector of an economy or a physical area.",
+          "suggestion": "Λανθασμένο domain"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -99,7 +105,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical gender error: 'Domaine' is a masculine noun in French, so the adjective should be 'incorrect' instead of the feminine 'incorrecte'.",
+          "suggestion": "Domaine incorrect"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -201,7 +213,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Netačan' means 'inaccurate' or 'unreliable' (often used for data or information), whereas 'Incorrect' in a technical validation context (like a domain name) should be translated as 'Pogrešan' (wrong/incorrect).",
+          "suggestion": "Pogrešan domen"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -223,6 +241,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

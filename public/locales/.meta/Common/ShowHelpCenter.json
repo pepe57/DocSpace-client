@@ -3,7 +3,7 @@
   "content": "Show link to Help Center",
   "content_en_sha1_hash": "f1caebab0b9dd55772001bc3d83522b321581b0b",
   "created_at": "2025-05-26T07:15:48.005Z",
-  "updated_at": "2026-04-07T19:35:05.015Z",
+  "updated_at": "2026-04-07T23:01:12.779Z",
   "comment": {
     "text": "The translation key \"ShowHelpCenter\" is used to display a label for a checkbox that toggles visibility of the Help Center link in the UI. It appears as a button option and is intended to provide users with easy access to support resources when the \"help enabled\" setting is turned on.",
     "is_auto": true,

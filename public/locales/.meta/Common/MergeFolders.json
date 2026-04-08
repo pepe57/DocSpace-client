@@ -3,7 +3,7 @@
   "content": "Merge folders",
   "content_en_sha1_hash": "439646bfda87b9202b75e3d4e4725a4a7226568f",
   "created_at": "2025-05-19T21:30:46.467Z",
-  "updated_at": "2026-04-07T19:35:04.984Z",
+  "updated_at": "2026-04-08T04:48:09.888Z",
   "comment": {
     "text": "Merge folders is used as a title in a folder merge dialog. It provides an alternative label when merging folders in conflict resolution. This key is typically displayed on a button or dialogue header.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Live chat",
   "content_en_sha1_hash": "842da2226a48bf90cb698d86187d01e615ca4b27",
   "created_at": "2025-05-19T21:30:46.235Z",
-  "updated_at": "2026-04-07T19:35:04.980Z",
+  "updated_at": "2026-04-08T05:27:47.417Z",
   "comment": {
     "text": "The translation key \"LiveChat\" is used to display the label and icon for a live chat feature in the user menu. When selected or hovered over, it triggers a live chat window (if available). The translated value should be used as the label for this feature.",
     "is_auto": true,
@@ -147,7 +147,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'Live' is missing from the translation. 'Чат' only means 'Chat', whereas the source specifies 'Live chat'.",
+          "suggestion": "Живой чат"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

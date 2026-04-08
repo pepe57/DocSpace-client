@@ -3,7 +3,7 @@
   "content": "Site",
   "content_en_sha1_hash": "5b6825d3c67a35898b7b65fd986a7fe6ca47771d",
   "created_at": "2025-05-19T21:30:57.076Z",
-  "updated_at": "2026-04-07T19:35:05.018Z",
+  "updated_at": "2026-04-07T22:51:27.244Z",
   "comment": {
     "text": "The \"Site\" translation key is used to display the content \"Site\" as a label on an About page element. It appears in a row of elements and is part of a larger UI component. Translators should replace this text with the target language equivalent to maintain site-specific information.",
     "is_auto": true,

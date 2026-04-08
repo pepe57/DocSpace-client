@@ -3,7 +3,7 @@
   "content": "Loading...",
   "content_en_sha1_hash": "b04ba49f848624bb97ab094a2631d2ad74913498",
   "created_at": "2025-05-19T21:30:46.280Z",
-  "updated_at": "2026-04-07T19:35:04.981Z",
+  "updated_at": "2026-04-08T05:21:47.390Z",
   "comment": {
     "text": "This translation key is used to display a loading message when an operation is in progress. It appears on various buttons, including confirm and continue buttons, as well as a registration form button, and is intended to provide visual feedback to the user that something is happening behind the scenes.",
     "is_auto": true,
@@ -123,7 +123,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation '更新中...' means 'Updating...' instead of 'Loading...'. While related, 'Loading' in a UI context (especially for buttons) is typically translated as '読み込み中...' or '処理中...'.",
+          "suggestion": "読み込み中..."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -229,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

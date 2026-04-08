@@ -3,7 +3,7 @@
   "content": "Form fillers can fill out forms and view only their completed/started forms within the Complete and In Process folders.",
   "content_en_sha1_hash": "feefe7fdf044fbc2fbabfaea05d182d09dbe37d8",
   "created_at": "2025-05-19T21:30:48.048Z",
-  "updated_at": "2026-04-07T19:35:05.005Z",
+  "updated_at": "2026-04-08T00:48:02.866Z",
   "comment": {
     "text": "Form fillers can view their completed and started forms within the Complete and In Process folders. This description is used to inform form fillers about the permissions they have in the Form Room. It appears in UI elements related to file access options.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses the singular 'النموذج' (the form) instead of the plural 'النماذج' (forms) when describing what fillers can fill out, which contradicts the English 'fill out forms'.",
+          "suggestion": "يمكن لمعبئي النماذج تعبئة النماذج وعرض النماذج المكتملة/التي بدأت فقط داخل مجلدات الاكتمال والمراحل الجارية."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -51,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of the folder names is logically incorrect. 'In Process' is translated as 'Im Nicht ausgefüllt' (In Not filled), which is the opposite of the intended meaning.",
+          "suggestion": "Benutzer, die Formulare ausfüllen, können in den Ordnern \"Abgeschlossen\" und \"In Bearbeitung\" nur ihre ausgefüllten/gestarteten Formulare anzeigen."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -87,7 +99,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Form fillers' is translated as 'I compilatori di moduli'. In Italian, 'compilatore' refers to a software compiler (programming). The correct term for a person filling out a form is 'compilatore' only in very specific contexts, but in UI/UX, 'chi compila i moduli' or 'utenti che compilano i moduli' is standard. However, more critically, 'compilatori' sounds like a technical tool rather than a user role.",
+          "suggestion": "Chi compila i moduli può compilare i moduli e visualizzare solo i moduli completati/iniziati nelle cartelle Completato e In corso."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -141,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Completator de formulare' is a literal, unnatural translation of 'Form fillers'. In Romanian UI context, this should be 'Persoanele care completează formularele' or similar to sound natural, but more importantly, the translation of the folder names 'Complete' and 'In Process' as 'Formulare completate' and 'În curs de completare' changes the specific UI labels which are likely fixed strings in the interface.",
+          "suggestion": "Persoanele care completează formularele pot completa formulare și pot vizualiza numai formularele completate/începute în folderele Complete și In Process."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -199,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

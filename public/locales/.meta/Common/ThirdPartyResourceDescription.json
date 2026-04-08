@@ -3,7 +3,7 @@
   "content": "Backup can be saved to your third-party account (Dropbox, Box.com, OneDrive or Google Drive). You need to connect your third-party account (Dropbox, Box.com, OneDrive or Google Drive) before you will be able to save your backup there.",
   "content_en_sha1_hash": "c0e812cbda982e696e4ea4d91c8c7d55b6033146",
   "created_at": "2025-05-26T07:15:48.804Z",
-  "updated_at": "2026-04-07T19:35:05.025Z",
+  "updated_at": "2026-04-07T21:51:35.704Z",
   "comment": {
     "text": "This translation key is used to describe third-party backup storage options. It informs users that they need to connect their third-party account to save backups there. This message appears in the UI on certain pages of the auto-backup and manual-backup processes, particularly when selecting a third-party storage type.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The second sentence in the Czech translation is incomplete. It ends abruptly after 'musíte účet třetí strany (Dropbox, Box.com, OneDrive nebo Disk Google)', missing the verb 'propojit' (to connect) which is essential to the meaning.",
+          "suggestion": "Zálohu lze uložit na účet třetí strany (Dropbox, Box.com, OneDrive nebo Disk Google). Předtím, než tam budete moci zálohu uložit, musíte účet třetí strany (Dropbox, Box.com, OneDrive nebo Disk Google) propojit."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -87,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'backup' is translated inconsistently. In the first sentence, it is 'Պահուստավորում' (the process of backing up), but in the second sentence, it is 'պահեստավորումը' (storage), which changes the meaning from 'saving your backup' to 'saving your storage'.",
+          "suggestion": "Պահուստավորումը կարող է պահպանվել ձեր երրորդ կողմի հաշվում (Dropbox, Box.com, OneDrive կամ Google Drive): Դուք պետք է միացնեք ձեր երրորդ կողմի հաշիվը (Dropbox, Box.com, OneDrive կամ Google Drive), նախքան Դուք կկարողանաք այնտեղ պահել Ձեր պահուստային պատճենը:"
+        }
+      ],
       "approved_at": null
     },
     "it": {

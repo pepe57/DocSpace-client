@@ -3,7 +3,7 @@
   "content": "Your turn",
   "content_en_sha1_hash": "8a4e60471b34b8af985c6dd2d93792af71788f57",
   "created_at": "2025-05-19T21:30:49.657Z",
-  "updated_at": "2026-04-07T19:35:05.036Z",
+  "updated_at": "2026-04-07T19:50:15.488Z",
   "comment": {
     "text": "\"This translation key displays the message 'Your turn' to indicate whose action is being requested or awaited. It is used in UI elements where a user's input or submission is required.\"",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເປັນຂອງເຈົ້າແລ້ວ' means 'It is already yours' (ownership), whereas the English 'Your turn' refers to a sequence of actions or a waiting state in a process.",
+          "suggestion": "ຮອດຕາເຈົ້າແລ້ວ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {

@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-04-07T19:35:05.008Z",
+  "updated_at": "2026-04-08T00:20:26.505Z",
   "comment": {
     "text": "The \"Rooms\" translation key is used to display the content \"Rooms\" in various parts of the user interface. This includes a file selector and a dialog box where it appears as a section title, providing context for users navigating room templates or reassigning data. It appears in UI elements such as buttons, text labels, and progress indicators.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Rooms' is plural, but the German translation 'Raum' is singular. Based on the code context (e.g., '{group.totalRooms} {t(\"Common:Rooms\")}', '!noRooms'), the UI expects a plural form.",
+          "suggestion": "Räume"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -261,19 +267,37 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Miestností' is in the genitive plural form, which is used after certain quantities or prepositions. For a UI label, section title, or standalone noun, the nominative plural 'Izby' or 'Miestnosti' should be used to ensure grammatical correctness in all contexts (e.g., as a header or a button).",
+          "suggestion": "Miestnosti"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Săli' uses a character 'ă' which is not part of the Slovenian alphabet (it is Romanian). The correct Slovenian word for 'Rooms' in a digital/software context is 'Sobe'.",
+          "suggestion": "Sobe"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Собе' is an incomplete word or a misspelling. In Serbian, the plural for 'Rooms' is 'Sobe' (Latin) or 'Собе' (Cyrillic). The provided translation 'Собе' is missing the correct vowel or is a truncated version of the word.",
+          "suggestion": "Собе"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -301,6 +325,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

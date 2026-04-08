@@ -3,7 +3,7 @@
   "content": "Skip",
   "content_en_sha1_hash": "3da474537ac378c616d6b301acc1674bc348cecd",
   "created_at": "2025-05-19T21:30:48.925Z",
-  "updated_at": "2026-04-07T19:35:05.018Z",
+  "updated_at": "2026-04-07T22:46:40.490Z",
   "comment": {
     "text": "The translation key \"SkipTitle\" is used to display a label for a \"Skip\" button in various dialogues and forms. It prompts the user to skip or cancel an action, allowing them to move on without making changes.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Atlamaq' is an infinitive verb (To skip). In UI buttons/labels, the imperative or a noun form is required to match the English 'Skip'.",
+          "suggestion": "Keç"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -87,7 +93,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "In the context of a UI button to bypass an action or cancel a step, 'Sauter' (to jump/leap) is semantically incorrect. 'Passer' or 'Ignorer' is the standard UI terminology for 'Skip'.",
+          "suggestion": "Passer"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {

@@ -3,7 +3,7 @@
   "content": "Room managers can manage the assigned rooms, invite new users and assign roles below their level.",
   "content_en_sha1_hash": "28087aa15e7b634a0bac2753dc18b692629d85a8",
   "created_at": "2025-05-19T21:30:48.123Z",
-  "updated_at": "2026-04-07T19:35:05.006Z",
+  "updated_at": "2026-04-08T00:38:23.495Z",
   "comment": {
     "text": "Room managers can manage rooms, invite new users, and assign roles below their level. This message is used to describe the capabilities of a room manager in the UI, likely appearing on an access options page or similar setting.",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text says 'Room managers', but the Latvian translation uses 'Administratori' (Administrators), which implies a higher or different role level.",
+          "suggestion": "Telpas vadītāji var pārvaldīt piešķirtās telpas, uzaicināt jaunus lietotājus un piešķirt lomas zem viņu līmeņa."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Room managers' is translated as 'Administratorii sălii', which refers to a physical room/hall. In the context of ONLYOFFICE DocSpace, 'Room' refers to a digital workspace/room, and 'Manager' is a role. 'Administratorii sălii' sounds like building administrators.",
+          "suggestion": "Managerii sălilor pot gestiona sălile atribuite, pot invita noi utilizatori și pot atribui roluri sub nivelul lor."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -199,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

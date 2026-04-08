@@ -3,7 +3,7 @@
   "content": "Third-party resource",
   "content_en_sha1_hash": "001907b089c0c5b90b1c10187b7bc68cca254fae",
   "created_at": "2025-05-26T07:15:48.793Z",
-  "updated_at": "2026-04-07T19:35:05.025Z",
+  "updated_at": "2026-04-07T21:53:16.366Z",
   "comment": {
     "text": "This translation key is used as a label for a radio button in a UI component, typically displayed on buttons or dialogs. It represents the term \"Third-party resource\" and appears to be associated with backup options, specifically in contexts related to third-party resources, auto-backup, and manual-backup pages.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation 'Archiviazione di terze parti' means 'Third-party storage', whereas the English source is 'Third-party resource'. In a UI context, 'resource' and 'storage' are distinct concepts.",
+          "suggestion": "Risorsa di terze parti"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -183,7 +189,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation 'Shranjevanje pri zunanjem ponudniku' means 'Saving to an external provider', which is a verb phrase/action. The English source 'Third-party resource' is a noun phrase describing a type of entity/resource. In a UI context (radio button label), the translation should name the resource type, not the action of saving.",
+          "suggestion": "Zunanji vir"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

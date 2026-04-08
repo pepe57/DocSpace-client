@@ -3,7 +3,7 @@
   "content": "Sign in with WeChat",
   "content_en_sha1_hash": "9044841df03cf83e460dec7b8fdfd51a25bf49e2",
   "created_at": "2025-09-09T10:39:43.472Z",
-  "updated_at": "2026-04-07T19:35:05.017Z",
+  "updated_at": "2026-04-07T22:56:58.717Z",
   "comment": {
     "text": "This key provides the text for a button or link that allows users to sign in or sign up using their WeChat account. It appears when the user is signing in (not signing up) and chooses WeChat as their authentication method. Translators should ensure the phrasing accurately reflects the action of signing in with WeChat.",
     "is_auto": true,
@@ -207,7 +207,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '解绑WeChat登录' means 'Unbind WeChat login', which is the opposite of the intended action 'Sign in with WeChat'.",
+          "suggestion": "使用WeChat登录"
+        }
+      ],
       "approved_at": null
     }
   }

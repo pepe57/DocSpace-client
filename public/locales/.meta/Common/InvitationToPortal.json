@@ -3,7 +3,7 @@
   "content": "<1>{{displayName}}</1> invites you to join the {{productName}} <1>{{spaceAddress}}</1> for secure document collaboration.",
   "content_en_sha1_hash": "516f637e20928aaf05537ea5e25558d4c52dc3d1",
   "created_at": "2025-05-19T21:30:45.945Z",
-  "updated_at": "2026-04-07T19:35:04.975Z",
+  "updated_at": "2026-04-08T06:35:37.164Z",
   "comment": {
     "text": "This translation key is used to display a welcome message when an invitation is sent to join a secure document collaboration space. It includes placeholders for the user's name and the product name, making it adaptable to different users and products. The text appears in a greeting component after a successful file upload or invitation creation.",
     "is_auto": true,
@@ -99,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The opening tag <1> in the Japanese translation contains an extra space before the variable: '<1> {{displayName}}</1>'. This can cause layout issues or unexpected spacing in the UI.",
+          "suggestion": "<1>{{displayName}}</1>さんは、安全なドキュメント共同作業をするように、あなたを{{productName}} <1>{{spaceAddress}}</1>に招待しています。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -147,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'asociați' (to associate/link) is used incorrectly in this context. In Romanian, when inviting someone to join a space or platform, 'să vă alăturați' (to join) is the correct semantic equivalent for 'to join'.",
+          "suggestion": "<1>{{displayName}}</1> vă invită să vă alăturați {{productName}} <1>{{spaceAddress}}</1> pentru colaborarea securizată asupra documentelor."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -165,7 +177,23 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_variable",
+          "description": "Missing variable(s): {{spaceAddress}}",
+          "suggestion": ""
+        },
+        {
+          "type": "extra_variable",
+          "description": "Extra variable(s) not in English: {{{spaceAddress}}",
+          "suggestion": ""
+        },
+        {
+          "type": "missing_tag",
+          "description": "The closing tag for the second React Trans tag is malformed. It uses triple braces '{{{spaceAddress}}' instead of the required closing tag '</1>' and correct variable syntax.",
+          "suggestion": "<1>{{displayName}}</1> vás pozýva, aby ste sa pripojili k priestoru {{productName}} <1>{{spaceAddress}}</1> na bezpečnú spoluprácu na dokumentoch."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -201,10 +229,22 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "There is an extra space inside the closing tag </1> in the Vietnamese translation: '<1>{{spaceAddress}} </1>'. This can cause rendering issues or unexpected spacing in the UI.",
+          "suggestion": "<1>{{displayName}}</1> mời bạn tham gia {{productName}} <1>{{spaceAddress}}</1> để cùng làm việc trên tài liệu một cách an toàn."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

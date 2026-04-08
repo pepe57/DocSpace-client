@@ -3,7 +3,7 @@
   "content": "Unsupported action. Please switch to the desktop mode to be able to edit PDFs or create PDF forms.",
   "content_en_sha1_hash": "38b34163571b050a0e177d79b00073163a6f1c1b",
   "created_at": "2025-05-19T21:30:46.558Z",
-  "updated_at": "2026-04-07T19:35:04.984Z",
+  "updated_at": "2026-04-08T04:43:49.348Z",
   "comment": {
     "text": "This translation key is used to display a message when attempting to edit or create PDFs on mobile devices. It appears as an info toast notification and instructs users to switch to desktop mode to enable these actions.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'κατάσταση εργασίας' (work mode) is used instead of 'desktop mode' (desktop/desktop mode). This changes the specific technical instruction provided to the user.",
+          "suggestion": "Μη υποστηριζόμενη ενέργεια. Μεταβείτε στην έκδοση για επι桌面 (desktop mode) για να μπορείτε να επεξεργαστείτε PDF ή να δημιουργήσετε φόρμες PDF."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -189,7 +195,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'පරිඝණක ක්‍රියාකාරිත්වයට' (computer functionality/activity) is used instead of 'desktop mode' (ඩෙස්ක්ටොප් මාදිලිය/mode), which changes the technical instruction from a specific browser setting to a vague concept of computer activity.",
+          "suggestion": "මෙවැනි ක්‍රියාවලියකට අපි සහායෝගය දක්වන්නේ නැත. PDF සංස්කරණය කිරීමට හෝ PDF ආකෘති නිර්මාණය කිරීමට නම් කරුණාකර ඩෙස්ක්ටොප් මාදිලියට (desktop mode) මාරු වන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -235,6 +247,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

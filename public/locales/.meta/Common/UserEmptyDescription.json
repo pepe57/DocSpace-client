@@ -3,7 +3,7 @@
   "content": "Files and folders uploaded by admins will appeared here.",
   "content_en_sha1_hash": "eccdca0f20c32ad17dffa7f5520072fef3017029",
   "created_at": "2025-05-19T21:30:49.465Z",
-  "updated_at": "2026-04-07T19:35:05.032Z",
+  "updated_at": "2026-04-07T20:39:31.667Z",
   "comment": {
     "text": "Files and folders uploaded by admins will appear here. This translation key is used to display a message in an admin interface, indicating the location where files and folders from administrators are displayed.",
     "is_auto": true,

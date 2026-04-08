@@ -3,7 +3,7 @@
   "content": "Room Name",
   "content_en_sha1_hash": "28f6f4be97a6c62741e786864902ca01f64e35dc",
   "created_at": "2025-05-19T21:30:48.218Z",
-  "updated_at": "2026-04-07T19:35:05.007Z",
+  "updated_at": "2026-04-08T00:23:55.656Z",
   "comment": {
     "text": "RoomName is used as a label for a room name field in a UI component, likely appearing in a dialogue or form. It provides a clear and descriptive title for users to enter a room name.",
     "is_auto": true,
@@ -171,7 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Назив' is grammatically incorrect in this context; 'Назив' is not a standard Serbian word for 'Name'. The correct noun is 'Име' or 'Назив' is a misspelling/incorrect form of 'Назив' (which doesn't exist) or 'Назив' (incorrectly used instead of 'Назив' or 'Назив'). More importantly, 'Назив собе' is grammatically broken; it should be 'Назив собе' (incorrect) or 'Име собе'. The current translation 'Назив собе' is nonsensical in Serbian.",
+          "suggestion": "Име собе"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

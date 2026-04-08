@@ -3,7 +3,7 @@
   "content": "Reviewer",
   "content_en_sha1_hash": "a74f16c11792da6a36979a58a1ba2b4333632f57",
   "created_at": "2025-05-19T21:30:48.086Z",
-  "updated_at": "2026-04-07T19:35:05.005Z",
+  "updated_at": "2026-04-08T00:42:38.220Z",
   "comment": {
     "text": "This translation key is used to display the role \"Reviewer\" in various contexts within the UI, including information panels and share helpers. It appears as a label or title, likely in buttons, dialogs, or form inputs, where it helps users understand their access level (Review) and role responsibilities.",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation 'レビュー用' means 'For review' (adjectival/purpose), whereas the English 'Reviewer' refers to a person/role. In the context of user roles and access rights, the translation should denote the person performing the action.",
+          "suggestion": "レビュアー"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -183,7 +189,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Preglednik' refers to a 'Viewer' (someone who looks at something) or a 'Browser' (software), whereas the context specifies a 'Reviewer' (someone who performs a review/audit). In the context of access rights and roles, 'Preglednik' is semantically incorrect.",
+          "suggestion": "Pregledovalec"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -217,6 +229,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '可审阅' means 'Reviewable' (an adjective describing a state), whereas the English 'Reviewer' refers to a person/role (a noun).",
+          "suggestion": "审阅者"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Rename",
   "content_en_sha1_hash": "d3f4cb898fbe0c7a7ac4f721438c4c26ad1a2513",
   "created_at": "2025-05-19T21:30:47.845Z",
-  "updated_at": "2026-04-07T19:35:05.002Z",
+  "updated_at": "2026-04-08T01:31:30.573Z",
   "comment": {
     "text": "The translation key \"Rename\" is used to display the label for renaming options on various UI elements, such as buttons and dialogs. It typically appears in contexts where user interaction with files or media items requires renaming, often alongside an icon representing a pencil or text editing action. This text helps to clearly communicate the purpose of the feature in different parts of the application.",
     "is_auto": true,
@@ -135,7 +135,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian word 'Pārdēvēt' means 'to resell' or 'to re-sell', which is completely different from the English 'Rename' (to change a name).",
+          "suggestion": "Pārnamedot"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -177,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'නම් කරන්න' (Nam karanna) means 'to name' or 'to call something by a name', which is grammatically a verb phrase. In a UI context for a button or menu item, 'Rename' should be translated as 'නම වෙනස් කරන්න' (Nama venas karanna) to accurately convey the action of changing an existing name.",
+          "suggestion": "නම වෙනස් කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -223,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

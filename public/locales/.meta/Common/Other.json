@@ -3,7 +3,7 @@
   "content": "Other",
   "content_en_sha1_hash": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
   "created_at": "2025-05-19T21:30:47.167Z",
-  "updated_at": "2026-04-07T19:35:04.992Z",
+  "updated_at": "2026-04-08T03:24:17.317Z",
   "comment": {
     "text": "This translation key is used to display the English content \"Other\" and its corresponding title \"Common:Other\", which appears in a download dialog as the label for an \"Other\" file option. The key is used to render a customizable message in the UI.",
     "is_auto": true,
@@ -141,7 +141,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Altă' is a feminine form of 'Other' and is grammatically incomplete when used as a standalone label. In Romanian, when 'Other' is used as a category label or a noun (as in 'Other files'), the correct neutral/masculine form is 'Altele' (plural) or 'Altul' (singular/abstract), but most commonly 'Altele' for file types. 'Altă' requires a feminine noun to follow it.",
+          "suggestion": "Altele"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

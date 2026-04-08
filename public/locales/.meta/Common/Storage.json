@@ -3,7 +3,7 @@
   "content": "Storage",
   "content_en_sha1_hash": "9e092dda4f0e27d0c7686ddd00272079e678b6e6",
   "created_at": "2025-05-19T21:30:49.092Z",
-  "updated_at": "2026-04-07T19:35:05.021Z",
+  "updated_at": "2026-04-07T22:20:25.130Z",
   "comment": {
     "text": "This translation key is used to display the content \"Storage\" in various places throughout the application, such as on a user's profile page or in an info panel. The text appears when displaying storage information and quotas for users. It provides context for translators to ensure consistency in language usage.",
     "is_auto": true,
@@ -117,7 +117,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "In the context of cloud storage, quotas, and file hosting, 'Muisti' (Memory/RAM) is incorrect. The correct term for digital storage space is 'Tallennustila'.",
+          "suggestion": "Tallennustila"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -171,19 +177,37 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish word 'Pamięć' typically refers to RAM (Random Access Memory) or human memory. In the context of cloud storage, quotas, and file hosting (as indicated by the metadata), 'Miejsce' or 'Miejsce na dane' is the correct term for disk/cloud storage capacity.",
+          "suggestion": "Miejsce"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Storage' is a noun referring to the space or capacity available. The Portuguese translation 'Armazenar' is a verb meaning 'to store'. In the context of user profiles and quotas, the noun 'Armazenamento' should be used.",
+          "suggestion": "Armazenamento"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Storage' is a noun referring to the space or capacity available. The Portuguese translation 'Armazenar' is a verb meaning 'to store'. In the context of quotas and info panels, the noun 'Armazenamento' should be used.",
+          "suggestion": "Armazenamento"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -213,7 +237,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian word 'Shranjevanje' means 'Saving' (the action of saving a file), whereas the English 'Storage' in this context refers to 'Storage space' or 'Capacity' (the place/amount where data is kept).",
+          "suggestion": "Shkratišče"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -225,7 +255,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "In the context of cloud storage, quotas, and digital space, 'Skladište' (warehouse/physical storage) is incorrect. The correct term for digital storage/capacity is 'Skladištenje' or 'Prostor'.",
+          "suggestion": "Skladištenje"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

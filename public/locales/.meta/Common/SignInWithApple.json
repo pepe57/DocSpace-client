@@ -3,7 +3,7 @@
   "content": "Sign in with Apple",
   "content_en_sha1_hash": "a5331c078a904d6fac5ef4352f021b442da8a2d4",
   "created_at": "2025-05-19T21:30:48.744Z",
-  "updated_at": "2026-04-07T19:35:05.016Z",
+  "updated_at": "2026-04-07T22:59:51.954Z",
   "comment": {
     "text": "This translation key represents the text used to describe the \"Sign in with Apple\" option on a sign-up form. It is displayed as a button or link, allowing users to select this authentication method. Translators should provide a clear and concise version of this phrase for different languages.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'تسجيل الدخول Apple' is grammatically incorrect and lacks the preposition 'with' (بواسطة/باستخدام), making it sound like 'Sign in Apple' rather than 'Sign in with Apple'.",
+          "suggestion": "تسجيل الدخول باستخدام Apple"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -201,7 +207,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '解绑Apple登录' means 'Unbind Apple login', which is the opposite of the intended action 'Sign in with Apple'.",
+          "suggestion": "使用 Apple 登录"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

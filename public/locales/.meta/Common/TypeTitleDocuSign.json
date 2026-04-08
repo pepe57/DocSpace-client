@@ -3,7 +3,7 @@
   "content": "DocuSign",
   "content_en_sha1_hash": "923f117faff3d4dd519ec3e37a498f0578a6384a",
   "created_at": "2025-05-26T07:15:48.961Z",
-  "updated_at": "2026-04-07T19:35:05.028Z",
+  "updated_at": "2026-04-07T21:00:15.085Z",
   "comment": {
     "text": "This translation key is used to display \"DocuSign\" as a file type label in the UI. It appears on buttons and dialogs related to handling files.",
     "is_auto": true,

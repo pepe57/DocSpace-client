@@ -3,7 +3,7 @@
   "content": "Your registration email address",
   "content_en_sha1_hash": "8cc0ae7ce8d6f84fb6f6364ece769b5cac5b2cd4",
   "created_at": "2025-05-19T21:30:47.781Z",
-  "updated_at": "2026-04-07T19:35:05.001Z",
+  "updated_at": "2026-04-08T01:40:19.032Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Your registration email address\" in various UI components, typically as a placeholder or label for an input field related to user registration. It appears in sales department request dialogs and modal dialogs for accessing portal services, prompting users to enter their registration email address.",
     "is_auto": true,
@@ -45,13 +45,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'address' (ünvan) is missing from the translation, making it 'Your registration email' instead of 'Your registration email address'.",
+          "suggestion": "Sizin qeydiyyat elektron poçt ünvanınız"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'address' (адрес) is missing from the Bulgarian translation, making it 'Your registration email' instead of 'Your registration email address'.",
+          "suggestion": "Вашият регистрационен имейл адрес"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -63,7 +75,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The German translation 'Ihr Registrierungsemail' translates to 'Your registration email', missing the word 'address' (Adresse). While often used interchangeably in casual speech, in a UI label context, 'email address' is more precise.",
+          "suggestion": "Ihre Registrierungs-E-Mail-Adresse"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -87,7 +105,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The possessive adjective 'Your' is missing from the translation, which changes the tone from a direct instruction/label to a generic noun phrase.",
+          "suggestion": "Votre adresse e-mail d'enregistrement"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -99,7 +123,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The gender of the noun 'email' is incorrect in Italian. 'Email' is feminine, so the possessive adjective 'Il tuo' (masculine) should be 'La tua' (feminine).",
+          "suggestion": "La tua email di registrazione"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -111,7 +141,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation '가입 이메일' (Registration email) omits the possessive 'Your', which is part of the source string 'Your registration email address'. While concise, it loses the specific nuance of the English source.",
+          "suggestion": "사용자의 가입 이메일 주소"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -129,7 +165,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'address' is missing from the Dutch translation, which changes the meaning from 'email address' to just 'email'.",
+          "suggestion": "Uw registratie e-mailadres"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,7 +183,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'address' (endereço) is missing from the translation, which changes the meaning from 'email address' to just 'registration email'.",
+          "suggestion": "O seu endereço de e-mail de registo"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -159,13 +207,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'address' (адрес) is missing from the Russian translation, which changes the meaning from 'email address' to just 'email'.",
+          "suggestion": "Ваш регистрационный адрес электронной почты"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'Your' is missing from the Sinhala translation, which changes the direct address of the label.",
+          "suggestion": "ඔබේ ලියාපදිංචි වි-තැපැල් ලිපිනය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -211,6 +271,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

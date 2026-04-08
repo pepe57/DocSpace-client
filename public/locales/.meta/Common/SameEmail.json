@@ -3,7 +3,7 @@
   "content": "You can't use the same email address",
   "content_en_sha1_hash": "f85d5552131bdd2fc625627ca72a0cb482f3e288",
   "created_at": "2025-05-19T21:30:48.291Z",
-  "updated_at": "2026-04-07T19:35:05.008Z",
+  "updated_at": "2026-04-08T00:05:52.162Z",
   "comment": {
     "text": "This translation key displays an error message indicating that a user cannot use the same email address. It is used in a change email dialog to inform users of a validation rule when attempting to send a new email.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation contains a grammatical error ('istifadəd edə') that makes the sentence nonsensical. The correct form is 'istifadə edə'.",
+          "suggestion": "Eyni elektron poçt ünvanından istifadə edə bilməzsiniz"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation contains a redundant repetition of the word 'adresă' ('adresă adresa'), which makes the sentence grammatically incorrect and awkward.",
+          "suggestion": "Nu puteți folosi aceeași adresă de e-mail"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -199,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

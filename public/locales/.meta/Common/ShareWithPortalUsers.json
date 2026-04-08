@@ -3,7 +3,7 @@
   "content": "Sharing with {{productName}} users",
   "content_en_sha1_hash": "fa06dae4b65dd82f0df19959cee1423e63f3cf26",
   "created_at": "2025-09-23T07:24:16.874Z",
-  "updated_at": "2026-04-07T19:35:05.015Z",
+  "updated_at": "2026-04-07T23:07:46.707Z",
   "comment": {
     "text": "This key displays text for a sharing option, indicating that the file will be shared with users of the {{productName}} product. It appears as part of a sharing dialog or form, likely as a button or option label. Translators should ensure the wording accurately conveys sharing access to the product's user base.",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Kopīgums' means 'a community' or 'a commonality' in Latvian, whereas the English 'Sharing' in this context refers to the action of sharing access. The correct verbal noun or gerund form should be used.",
+          "suggestion": "Dalīšanās ar {{productName}} lietotājiem"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -135,7 +141,18 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "extra_variable",
+          "description": "Extra variable(s) not in English: {{ productName }}",
+          "suggestion": ""
+        },
+        {
+          "type": "missing_variable",
+          "description": "The variable name in the Portuguese translation contains an extra space '{{ productName }}' compared to the English '{{productName}}'. This will cause a technical failure in the translation engine.",
+          "suggestion": "Compartilhando com usuários do {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "ro": {

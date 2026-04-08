@@ -3,7 +3,7 @@
   "content": "Filling was stopped by <1>{{userName}}</1>",
   "content_en_sha1_hash": "093cefe1472a16419b884b4d52a6896fc3d841fb",
   "created_at": "2025-05-19T21:30:45.782Z",
-  "updated_at": "2026-04-07T19:35:04.972Z",
+  "updated_at": "2026-04-08T07:03:42.728Z",
   "comment": {
     "text": "This translation key is used to display a message indicating when filling was stopped by a user. It typically appears in a UI element related to filling or process management, such as a history summary or report. The exact appearance depends on the surrounding context and usage in the application.",
     "is_auto": true,
@@ -195,10 +195,22 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "There is an extra space inside the closing tag </1> after the variable, which can cause layout issues or incorrect rendering of the strong component.",
+          "suggestion": "Việc điền thông tin đã bị dừng bởi <1>{{userName}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
