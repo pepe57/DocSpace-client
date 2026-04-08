@@ -34,7 +34,7 @@ export const FormsCustomActionsStoreContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [store] = React.useState(() => new FormsCustomActionsStore());
+  const store = React.useMemo(() => new FormsCustomActionsStore(), []);
   return (
     <FormsCustomActionsStoreContext.Provider value={store}>
       {children}

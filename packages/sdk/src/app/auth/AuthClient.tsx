@@ -65,31 +65,20 @@ export default function AuthClient({
             confirmUrl?: string;
             token?: unknown;
           };
-        } catch (loginError) {
-          const errorMessage =
-            (loginError as { response?: { data?: { error?: { message?: string } } } })
-              ?.response?.data?.error?.message || "";
+        } catch {
+          const signupData: Record<string, string> = {
+            SerializedProfile: profile,
+          };
 
-          if (errorMessage === "user not found") {
-            const signupData: Record<string, string> = {
-              SerializedProfile: profile,
-            };
+          if (emplType) signupData.EmployeeType = emplType;
+          if (inviteKey) signupData.Key = inviteKey;
 
-            if (emplType) signupData.EmployeeType = emplType;
-            if (inviteKey) signupData.Key = inviteKey;
+          await signupOAuth(signupData, inviteKey ? confirmHeader : null);
 
-            await signupOAuth(
-              signupData,
-              inviteKey ? confirmHeader : null,
-            );
-
-            response = (await thirdPartyLogin(profile)) as {
-              confirmUrl?: string;
-              token?: unknown;
-            };
-          } else {
-            throw loginError;
-          }
+          response = (await thirdPartyLogin(profile)) as {
+            confirmUrl?: string;
+            token?: unknown;
+          };
         }
 
         if (!response || (!response.token && !response.confirmUrl)) {
@@ -103,7 +92,19 @@ export default function AuthClient({
           return;
         }
 
-        window.location.replace(successRedirectURL || "/");
+        const origin = window.location.origin;
+        const basePath = "/sdk";
+
+        let target: string;
+        if (!successRedirectURL) {
+          target = `${origin}${basePath}/`;
+        } else if (/^https?:\/\//.test(successRedirectURL)) {
+          target = successRedirectURL;
+        } else {
+          target = `${origin}${basePath}${successRedirectURL}`;
+        }
+
+        window.location.replace(target);
       } catch (e) {
         console.error(e);
         setError("Authentication failed");
@@ -222,3 +223,4 @@ export default function AuthClient({
     </div>
   );
 }
+

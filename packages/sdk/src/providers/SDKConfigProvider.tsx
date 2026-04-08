@@ -11,6 +11,7 @@ import React, {
 import {
   frameCallbackData,
   frameCallCommand,
+  frameHandlePing,
 } from "@docspace/shared/utils/common";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 
@@ -29,8 +30,10 @@ export const SDKConfigProvider: React.FC<{ children: React.ReactNode }> = ({
       return;
     }
 
+    if (frameHandlePing(eventData)) return;
+
     if (eventData?.data) {
-      const { data, methodName } = eventData.data;
+      const { data, methodName, callId } = eventData.data;
 
       if (!methodName) return;
 
@@ -52,7 +55,7 @@ export const SDKConfigProvider: React.FC<{ children: React.ReactNode }> = ({
         res = err;
       }
 
-      frameCallbackData(res);
+      frameCallbackData(res, callId);
     }
   }, []);
 

@@ -642,12 +642,16 @@ export const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
 };
 
-export const frameCallbackData = (methodReturnData: unknown) => {
+export const frameCallbackData = (
+  methodReturnData: unknown,
+  callId?: number,
+) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onMethodReturn",
       frameId: getFrameId(),
       methodReturnData,
+      ...(callId !== undefined && { callId }),
     }),
     "*",
   );
@@ -677,6 +681,23 @@ export const frameCallCommand = (
     }),
     "*",
   );
+};
+
+export const frameHandlePing = (eventData: {
+  type?: string;
+  frameId?: string;
+}): boolean => {
+  if (eventData?.type === "ping") {
+    window.parent.postMessage(
+      JSON.stringify({
+        type: "pong",
+        frameId: getFrameId(),
+      }),
+      "*",
+    );
+    return true;
+  }
+  return false;
 };
 
 // Done in a similar way to server code
