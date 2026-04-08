@@ -39,6 +39,7 @@ import { setAuthToken } from "@docspace/shared/api/client";
 import {
   frameCallbackData,
   frameCallEvent,
+  frameHandlePing,
 } from "@docspace/shared/utils/common";
 import { ShareAccessRights } from "@docspace/shared/enums";
 
@@ -165,11 +166,14 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         return;
       }
 
+      if (frameHandlePing(eventData)) return;
+
       if (
         eventData?.type === "uploadFileData" &&
         eventData?.buffer instanceof ArrayBuffer
       ) {
         const fileName = eventData.fileName as string;
+        const uploadId = eventData.uploadId as number | undefined;
         const file = new File([eventData.buffer], fileName, {
           lastModified: eventData.lastModified,
         });
@@ -178,7 +182,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           .then(() => {
             frameCallEvent({
               event: "onUploadSuccess",
-              data: { fileName, fileSize: file.size },
+              data: {
+                fileName,
+                fileSize: file.size,
+                ...(uploadId !== undefined && { uploadId }),
+              },
             });
           })
           .catch((error: unknown) => {
@@ -187,6 +195,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
               data: {
                 fileName,
                 message: error instanceof Error ? error.message : String(error),
+                ...(uploadId !== undefined && { uploadId }),
               },
             });
           });
@@ -195,6 +204,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
 
       const methodName = eventData?.data?.methodName;
       const data = eventData?.data?.data;
+      const callId = eventData?.data?.callId;
 
       switch (methodName) {
         case "navigateSection": {
@@ -221,12 +231,12 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             );
           }
 
-          frameCallbackData({ section });
+          frameCallbackData({ section }, callId);
           break;
         }
         case "setCustomActions": {
           if (data) customActionsStore.setActions(data as CustomActionsConfig);
-          frameCallbackData(data);
+          frameCallbackData(data, callId);
           break;
         }
       }

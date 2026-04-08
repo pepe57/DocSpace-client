@@ -35,6 +35,7 @@ import {
   frameCallbackData,
   createPasswordHash,
   frameCallCommand,
+  frameHandlePing,
 } from "@docspace/shared/utils/common";
 import { getSelectFormatTranslation } from "@docspace/shared/utils";
 import { RoomsType } from "@docspace/shared/enums";
@@ -102,8 +103,10 @@ const Sdk = ({
   const handleMessage = async (e) => {
     const eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
 
+    if (frameHandlePing(eventData)) return;
+
     if (eventData.data) {
-      const { data, methodName } = eventData.data;
+      const { data, methodName, callId } = eventData.data;
 
       let res;
 
@@ -150,7 +153,7 @@ const Sdk = ({
       } catch (err) {
         res = err;
       }
-      frameCallbackData(res);
+      frameCallbackData(res, callId);
     }
   };
 
