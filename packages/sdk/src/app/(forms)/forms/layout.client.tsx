@@ -142,7 +142,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
 
   const appReadySent = React.useRef(false);
   React.useEffect(() => {
-    console.log(isReady, appReadySent.current);
     if (isReady && !appReadySent.current) {
       appReadySent.current = true;
       frameCallEvent({ event: "onAppReady", data: {} });
