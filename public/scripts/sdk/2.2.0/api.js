@@ -344,7 +344,8 @@
           showMenu: config2.showMenu,
           providerName: config2.providerName,
           inviteKey: config2.inviteKey,
-          emplType: config2.emplType
+          emplType: config2.emplType,
+          uid: config2.uid
         };
         const urlParams = customUrlSearchParams(formsConfig);
         return `/sdk/forms/my-forms${urlParams ? `?${urlParams}` : ""}`;
