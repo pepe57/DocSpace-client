@@ -16,7 +16,7 @@ export default function useFormPreparingToast(items: TFile[]) {
     for (const file of items) {
       if (file.isFillingPreparing) next.add(file.id);
       else if (prevRef.current.has(file.id)) {
-        toastr.success(`${file.title} — ${t("Common:ReadyToFillOut")}`);
+        toastr.success(t("Common:ReadyToFillOut"));
       }
     }
 
