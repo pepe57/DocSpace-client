@@ -1,0 +1,275 @@
+// -----------------------------------------------------------------------------
+// DESIGN TOKENS — Light
+// -----------------------------------------------------------------------------
+
+:root {
+  // Colors — Primary
+  --color-primary: #00679e;
+  --color-primary-hover: #3285b1;
+  --color-primary-element: #00679e;
+  --color-primary-element-hover: #00507a;
+  --color-primary-element-active: #005a8a;
+  --color-primary-element-text: #ffffff;
+  --color-primary-light: #e5eff5;
+  --color-primary-light-hover: #d9e3e8;
+  --color-primary-light-text: #00293f;
+
+  // Colors — Main
+  --color-main-background: #ffffff;
+  --color-main-text: #222222;
+  --color-text-maxcontrast: #767676;
+  --color-text-disabled: #b3b3b3;
+
+  // Colors — Background states
+  --color-background-hover: #f5f5f5;
+  --color-background-dark: #ededed;
+  --color-background-darker: #dbdbdb;
+
+  // Colors — Border
+  --color-border: #ededed;
+  --color-border-dark: #dbdbdb;
+  --color-border-maxcontrast: #7d7d7d;
+
+  // Colors — Status
+  --color-error-element: #c90000;
+  --color-success-element: #099f05;
+
+  // Typography
+  --font-face:
+    system-ui, -apple-system, "Segoe UI", Roboto, Oxygen-Sans, Cantarell,
+    Ubuntu, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --default-font-size: 15px;
+
+  // Border radius
+  --border-radius-element: 8px;
+  --border-radius-pill: 100px;
+  --border-radius-container: 12px;
+
+  // Backdrop
+  --backdrop-color: 0, 0, 0;
+}
+
+// -----------------------------------------------------------------------------
+// LIGHT THEME
+// -----------------------------------------------------------------------------
+
+body.light {
+  // ── Typography ─────────────────────────────────────────────────────────────
+  --font-family: var(--font-face);
+  --text-size: var(--default-font-size);
+  --text-weight: 400;
+  --button-text-weight: 700;
+
+  // ── Button (default / secondary) ───────────────────────────────────────────
+  --button-root-bg: var(--color-primary-light);
+  --button-root-color: var(--color-primary-light-text);
+  --button-root-border: transparent;
+  --button-root-border-radius: var(--border-radius-element);
+  --button-root-bg-hover: var(--color-primary-light-hover);
+  --button-root-bg-active: var(--color-primary-light-hover);
+  --button-root-bg-disabled: var(--color-primary-light);
+  --button-root-color-hover: var(--color-primary-light-text);
+  --button-root-border-hover: transparent;
+  --button-root-border-active: transparent;
+
+  // ── Button (primary) ───────────────────────────────────────────────────────
+  --button-primary-bg: var(--color-primary-element);
+  --button-primary-color: var(--color-primary-element-text);
+  --button-primary-border: transparent;
+  --button-root-border-radius: var(--border-radius-element);
+  --button-primary-bg-hover: var(--color-primary-element-hover);
+  --button-primary-bg-active: var(--color-primary-element-hover);
+  --button-primary-bg-disabled: var(--color-primary-element);
+  --button-primary-border-hover: transparent;
+  --button-primary-border-active: transparent;
+
+  // ── Tabs ───────────────────────────────────────────────────────────────────
+  --tabs-primary-text: var(--color-text-maxcontrast);
+  --tabs-primary-active-text: var(--color-main-text);
+  --tabs-primary-hover-text: var(--color-main-text);
+  --tabs-underline: var(--color-border);
+  --tabs-underline-radius: 0;
+
+  // ── TextInput / PasswordInput / SearchInput ────────────────────────────────
+  --text-input-bg: var(--color-main-background);
+  --text-input-border-color: var(--color-border-maxcontrast);
+  --text-input-color: var(--color-main-text);
+  --text-input-radius: var(--border-radius-element);
+  --input-border: 2px solid;
+  --text-input-border-hover: var(--color-border-maxcontrast);
+  --text-input-border-focus: var(--color-border-maxcontrast);
+
+  // ── ModalDialog ────────────────────────────────────────────────────────────
+  --modal-dialog-bg: var(--color-main-background);
+  --modal-dialog-color: var(--color-main-text);
+  --modal-dialog-backdrop: rgba(var(--backdrop-color), 0.5);
+  --modal-dialog-radius: var(--border-radius-container);
+
+  // ── ComboBox ───────────────────────────────────────────────────────────────
+  --combobox-bg: var(--color-main-background);
+  --combobox-radius: var(--border-radius-element);
+  --combobox-inner-padding: 0;
+  --combobox-border-color: var(--color-border-maxcontrast);
+  --combobox-hover-border-color: var(--color-border-maxcontrast);
+  --combobox-focus-border-color: var(--color-border-maxcontrast);
+
+  // ── ToggleButton ───────────────────────────────────────────────────────────
+  --toggle-button-checked-color: var(--color-primary-element);
+  --toggle-button-off-color: var(--color-text-maxcontrast);
+  --toggle-button-off-hover-color: var(--color-border-maxcontrast);
+
+  // ── Checkbox ───────────────────────────────────────────────────────────────
+  --checkbox-fill-color: var(--color-primary-element);
+  --checkbox-arrow-color: var(--color-primary-element-text);
+
+  // ── Tooltip ────────────────────────────────────────────────────────────────
+  --tooltip-bg: var(--color-main-text);
+  --tooltip-color: var(--color-main-background);
+
+  // ── Scrollbar ──────────────────────────────────────────────────────────────
+  --scrollbar-bg: var(--color-border-dark);
+  --scrollbar-bg-hover: var(--color-border-maxcontrast);
+
+  // ── IconButton ─────────────────────────────────────────────────────────────
+  --icon-button-color: var(--color-text-maxcontrast);
+  --icon-button-hover-color: var(--color-main-text);
+
+  // ── Badge ──────────────────────────────────────────────────────────────────
+  --badge-bg: var(--color-primary-element);
+
+  // ── Link ───────────────────────────────────────────────────────────────────
+  --link-color: var(--color-primary-element);
+
+  // ── Avatar ─────────────────────────────────────────────────────────────────
+  --avatar-bg: var(--color-background-dark);
+  --avatar-initials-bg: var(--color-primary-light);
+  --avatar-initials-color: var(--color-main-text);
+}
+
+// -----------------------------------------------------------------------------
+// DESIGN TOKENS — Dark
+// -----------------------------------------------------------------------------
+
+body.dark {
+  --color-primary: #1a8fd1;
+  --color-primary-hover: #3399d6;
+  --color-primary-element: #1a8fd1;
+  --color-primary-element-hover: #006aa3;
+  --color-primary-element-active: #005a8a;
+  --color-primary-element-text: #ffffff;
+  --color-primary-light: #1c2e3a;
+  --color-primary-light-hover: #243847;
+  --color-primary-light-text: #cce8f7;
+
+  --color-main-background: #1c1c1e;
+  --color-main-text: #f2f2f7;
+  --color-text-maxcontrast: #aeaeb2;
+  --color-text-disabled: #6c6c70;
+
+  --color-background-hover: #2c2c2e;
+  --color-background-dark: #3a3a3c;
+  --color-background-darker: #4a4a4e;
+
+  --color-border: #3a3a3c;
+  --color-border-dark: #4a4a4e;
+  --color-border-maxcontrast: #6c6c70;
+}
+
+// -----------------------------------------------------------------------------
+// DARK THEME (references dark tokens above)
+// -----------------------------------------------------------------------------
+
+body.dark {
+  // ── Typography ─────────────────────────────────────────────────────────────
+  --font-family: var(--font-face);
+  --text-size: var(--default-font-size);
+  --text-weight: 400;
+  --button-text-weight: 700;
+
+  // ── Button (default / secondary) ───────────────────────────────────────────
+  --button-root-bg: transparent;
+  --button-root-color: var(--color-main-text);
+  --button-root-border: 2px solid var(--color-border-dark);
+  --button-root-border-radius: var(--border-radius-pill);
+  --button-root-bg-hover: var(--color-background-hover);
+  --button-root-bg-active: var(--color-background-dark);
+  --button-root-bg-disabled: transparent;
+  --button-root-color-hover: var(--color-main-text);
+  --button-root-border-hover: 2px solid var(--color-border-dark);
+  --button-root-border-active: 2px solid var(--color-border-dark);
+
+  // ── Button (primary) ───────────────────────────────────────────────────────
+  --button-primary-bg: var(--color-primary-element);
+  --button-primary-color: var(--color-primary-element-text);
+  --button-primary-border: transparent;
+  --button-primary-bg-hover: var(--color-primary-element-hover);
+  --button-primary-bg-active: var(--color-primary-element-active);
+  --button-primary-bg-disabled: var(--color-primary-light);
+  --button-primary-border-hover: transparent;
+  --button-primary-border-active: transparent;
+
+  // ── Tabs ───────────────────────────────────────────────────────────────────
+  --tabs-primary-text: var(--color-text-maxcontrast);
+  --tabs-primary-active-text: var(--color-main-text);
+  --tabs-primary-hover-text: var(--color-main-text);
+  --tabs-underline: var(--color-primary-element);
+  --tabs-underline-radius: 0;
+
+  // ── TextInput / PasswordInput / SearchInput ────────────────────────────────
+  --text-input-bg: var(--color-main-background);
+  --text-input-border-color: var(--color-border-maxcontrast);
+  --text-input-color: var(--color-main-text);
+  --text-input-radius: var(--border-radius-element);
+  --input-border: 2px solid;
+  --text-input-border-hover: var(--color-primary-element);
+  --text-input-border-focus: var(--color-primary-element);
+
+  // ── ModalDialog ────────────────────────────────────────────────────────────
+  --modal-dialog-bg: var(--color-main-background);
+  --modal-dialog-color: var(--color-main-text);
+  --modal-dialog-backdrop: rgba(var(--backdrop-color), 0.7);
+  --modal-dialog-radius: var(--border-radius-container);
+
+  // ── ComboBox ───────────────────────────────────────────────────────────────
+  --combobox-bg: var(--color-main-background);
+  --combobox-radius: var(--border-radius-pill);
+  --combobox-inner-padding: 0;
+  --combobox-border-color: var(--color-border-maxcontrast);
+  --combobox-hover-border-color: var(--color-primary-element);
+  --combobox-focus-border-color: var(--color-primary-element);
+
+  // ── ToggleButton ───────────────────────────────────────────────────────────
+  --toggle-button-checked-color: var(--color-primary-element);
+  --toggle-button-off-color: var(--color-text-maxcontrast);
+  --toggle-button-off-hover-color: var(--color-border-maxcontrast);
+
+  // ── Checkbox ───────────────────────────────────────────────────────────────
+  --checkbox-fill-color: var(--color-primary-element);
+  --checkbox-arrow-color: var(--color-primary-element-text);
+
+  // ── Tooltip ────────────────────────────────────────────────────────────────
+  --tooltip-bg: var(--color-main-text);
+  --tooltip-color: var(--color-main-background);
+
+  // ── Scrollbar ──────────────────────────────────────────────────────────────
+  --scrollbar-bg: var(--color-border-dark);
+  --scrollbar-bg-hover: var(--color-border-maxcontrast);
+
+  // ── IconButton ─────────────────────────────────────────────────────────────
+  --icon-button-color: var(--color-text-maxcontrast);
+  --icon-button-hover-color: var(--color-main-text);
+
+  // ── Badge ──────────────────────────────────────────────────────────────────
+  --badge-bg: var(--color-primary-element);
+
+  // ── Link ───────────────────────────────────────────────────────────────────
+  --link-color: var(--color-primary-element);
+
+  // ── Avatar ─────────────────────────────────────────────────────────────────
+  --avatar-bg: var(--color-background-hover);
+  --avatar-initials-bg: var(--color-primary-light);
+  --avatar-initials-color: var(--color-main-text);
+}
+
+
