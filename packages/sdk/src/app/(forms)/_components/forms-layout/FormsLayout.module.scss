@@ -92,3 +92,16 @@
   opacity: 0;
   transition: opacity 0.15s ease;
 }
+
+.floatingButtonContainer {
+  position: absolute;
+  z-index: 300;
+  inset-inline-end: 24px;
+  bottom: 24px;
+
+  :global(.layout-progress-bar_wrapper) {
+    position: static;
+    width: fit-content;
+    height: fit-content;
+  }
+}

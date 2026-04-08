@@ -46,6 +46,14 @@ import type { FormsDataApi } from "../_context/FormsDataContext";
 
 const DEFAULT_CHUNK_SIZE = 10 * 1024 * 1024;
 const DEFAULT_UPLOAD_THREADS = 3;
+const COMPLETED_HIDE_DELAY = 2000;
+const ALERT_HIDE_DELAY = 3000;
+
+export type UploadProgress = {
+  percent: number;
+  completed: boolean;
+  alert: boolean;
+};
 
 export default function useFolderActions(
   externalFetchSection?: FormsDataApi["fetchSection"],
@@ -56,12 +64,19 @@ export default function useFolderActions(
   const activeSection = sectionFromPathname(pathname);
   const fetchSection = externalFetchSection!;
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<UploadProgress | null>(
+    null,
+  );
+  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     return () => {
       if (inputRef.current) {
         inputRef.current.remove();
         inputRef.current = null;
+      }
+      if (hideTimerRef.current) {
+        clearTimeout(hideTimerRef.current);
       }
     };
   }, []);
@@ -90,6 +105,15 @@ export default function useFolderActions(
         DEFAULT_UPLOAD_THREADS;
 
       const fileArray = Array.from(files);
+      const totalBytes = fileArray.reduce((sum, f) => sum + f.size, 0);
+      let uploadedBytes = 0;
+
+      if (hideTimerRef.current) {
+        clearTimeout(hideTimerRef.current);
+        hideTimerRef.current = null;
+      }
+
+      setUploadProgress({ percent: 0, completed: false, alert: false });
 
       try {
         await runWithConcurrency(fileArray, 2, async (file: File) => {
@@ -115,14 +139,35 @@ export default function useFolderActions(
                 chunk.index,
                 chunk.data,
               );
+
+              uploadedBytes += chunk.size;
+              const percent =
+                totalBytes > 0
+                  ? Math.round((uploadedBytes / totalBytes) * 100)
+                  : 100;
+              setUploadProgress({
+                percent,
+                completed: false,
+                alert: false,
+              });
             },
           );
 
           await finalizeUploadSession(folderId, session.id);
         });
 
+        setUploadProgress({ percent: 100, completed: true, alert: false });
+        hideTimerRef.current = setTimeout(() => {
+          setUploadProgress(null);
+        }, COMPLETED_HIDE_DELAY);
+
         await fetchSection(activeSection);
       } catch (error) {
+        setUploadProgress({ percent: 100, completed: false, alert: true });
+        hideTimerRef.current = setTimeout(() => {
+          setUploadProgress(null);
+        }, ALERT_HIDE_DELAY);
+
         toastr.error(error as string);
         throw error;
       }
@@ -187,6 +232,7 @@ export default function useFolderActions(
   return {
     onUploadFiles,
     uploadFilesToFolder,
+    uploadProgress,
     onCreateBlankForm,
     isCreateFormDialogVisible,
     isCreatingForm,
