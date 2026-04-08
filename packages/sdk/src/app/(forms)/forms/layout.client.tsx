@@ -74,7 +74,7 @@ import useFolderActions from "../_hooks/useFolderActions";
 import useFormsSocket from "../_hooks/useFormsSocket";
 import useFormEventHooks from "../_hooks/useFormEventHooks";
 import useEditorGuard from "../_hooks/useEditorGuard";
-import useFormPreparingToast from "../_hooks/useFormPreparingToast";
+
 import { MIN_SECTION_WIDTH } from "../_api/aiAgentSettings";
 import { useFormsTourStore } from "../_store/FormsTourStore";
 import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
@@ -276,7 +276,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
 
   useFormsSocket(socketUrl, socketFolderIds, socketFileIds, fetchSection);
   useFormEventHooks(hasManagementAccess ? aiStore : null, socketUrl);
-  useFormPreparingToast(items);
+
 
   const isEditing = Boolean(editingFile);
 
@@ -590,6 +590,16 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           </Section.SectionBody>
         </Section>
         <AiChatButton />
+        {uploadProgress && (
+          <div className={styles.floatingButtonContainer}>
+            <FloatingButton
+              icon={FloatingButtonIcons.upload}
+              percent={uploadProgress.percent}
+              completed={uploadProgress.completed}
+              alert={uploadProgress.alert}
+            />
+          </div>
+        )}
       </div>
       <CreateFormDialog
         visible={isCreateFormDialogVisible}
@@ -627,14 +637,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         }}
       />
       {Tour && createPortal(Tour, document.body)}
-      {uploadProgress && (
-        <FloatingButton
-          icon={FloatingButtonIcons.upload}
-          percent={uploadProgress.percent}
-          completed={uploadProgress.completed}
-          alert={uploadProgress.alert}
-        />
-      )}
     </div>
   );
 };
