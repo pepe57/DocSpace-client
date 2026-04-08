@@ -59,6 +59,17 @@ const MODEL = PROVIDER === "openrouter" ? OPENROUTER_MODEL : OLLAMA_MODEL;
 const LANGUAGES_TO_CHECK = positionalArgs[0] ? positionalArgs[0].split(",") : null;
 const CHECKPOINT_FILE = path.join(appRootPath, "verification-checkpoint.json");
 
+/**
+ * Convert an absolute metadata file path to a portable relative key.
+ * "/any/path/to/public/locales/.meta/Common/About.json" → ".meta/Common/About.json"
+ * "C:\\Users\\...\\public\\locales\\.meta\\Common\\About.json" → ".meta/Common/About.json"
+ */
+function toPortablePath(filePath) {
+  const normalized = filePath.replace(/\\/g, "/");
+  const metaIdx = normalized.lastIndexOf(".meta/");
+  return metaIdx !== -1 ? normalized.slice(metaIdx) : path.basename(filePath);
+}
+
 // Checkpoint data
 let checkpoint = {
   lastProject: null,
@@ -185,8 +196,41 @@ function clearCheckpoint() {
  * @param {string} prompt
  * @returns {Promise<string>} The response text
  */
+/**
+ * Detects when a model enters a repetition loop.
+ * Maintains a sliding window; when the same phrase repeats 3+ times, returns true.
+ */
+class RepetitionDetector {
+  constructor({ maxRepeats = 3, windowSize = 3000 } = {}) {
+    this.maxRepeats = maxRepeats;
+    this.windowSize = windowSize;
+    this.buffer = "";
+  }
+  feed(text) {
+    this.buffer += text;
+    if (this.buffer.length > this.windowSize) {
+      this.buffer = this.buffer.slice(-this.windowSize);
+    }
+    const buf = this.buffer;
+    if (buf.length < 100) return false;
+    for (const patLen of [150, 80, 40, 20]) {
+      if (buf.length < patLen * 2) continue;
+      const pattern = buf.slice(-patLen);
+      let count = 0;
+      let pos = 0;
+      while ((pos = buf.indexOf(pattern, pos)) !== -1) {
+        count++;
+        pos += patLen;
+      }
+      if (count >= this.maxRepeats) return true;
+    }
+    return false;
+  }
+}
+
 async function generateOllama(prompt) {
   const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
+  const loopDetector = new RepetitionDetector();
   let activeTimeout = null;
   const resetInactivityTimer = (stream) => {
     clearTimeout(activeTimeout);
@@ -236,6 +280,12 @@ async function generateOllama(prompt) {
         fullResponse += token;
         process.stdout.write(token);
         resetInactivityTimer(stream);
+
+        if (loopDetector.feed(token)) {
+          console.warn("\n  [ABORT] Repetition loop detected — stopping generation");
+          stream.abort();
+          break;
+        }
       }
     }
     if (thinkingStarted || responseStarted) process.stdout.write("\n");
@@ -253,6 +303,7 @@ async function generateOllama(prompt) {
  */
 async function generateOpenRouter(prompt) {
   const controller = new AbortController();
+  const loopDetector = new RepetitionDetector();
   let activeTimeout = null;
   const resetInactivityTimer = () => {
     clearTimeout(activeTimeout);
@@ -334,6 +385,12 @@ async function generateOpenRouter(prompt) {
             fullResponse += content;
             process.stdout.write(content);
             resetInactivityTimer();
+
+            if (loopDetector.feed(content)) {
+              console.warn("\n  [ABORT] Repetition loop detected — stopping generation");
+              controller.abort();
+              break;
+            }
           }
         } catch {
           // skip malformed SSE chunks
@@ -1072,17 +1129,29 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
     const metadataFiles = glob.sync(metaPattern);
     console.log(`Found ${metadataFiles.length} metadata files`);
 
-    // Skip files until we reach checkpoint if resuming
-    let skipUntilFile = resuming ? checkpoint.lastMetadataFile : null;
+    // Skip files until we reach checkpoint if resuming.
+    // Use basename for comparison — checkpoint may be from a different OS/machine
+    // with different absolute paths. basename (e.g. "Guest.json") is stable.
+    let skipUntilKey = resuming && checkpoint.lastMetadataFile
+      ? toPortablePath(checkpoint.lastMetadataFile)
+      : null;
+
+    // When resuming, also skip languages already done for the checkpoint key
+    let resumeAtLanguage = resuming ? checkpoint.lastLanguage : null;
+
+    let skippedKeys = 0;
 
     for (const metadataFile of metadataFiles) {
       // Skip files until checkpoint
-      if (skipUntilFile && metadataFile !== skipUntilFile) {
-        continue;
-      }
-      if (skipUntilFile && metadataFile === skipUntilFile) {
-        console.log(` Resuming from file: ${path.basename(metadataFile)}`);
-        skipUntilFile = null; // Found checkpoint, process from here
+      if (skipUntilKey) {
+        const currentKey = toPortablePath(metadataFile);
+        if (currentKey !== skipUntilKey) {
+          skippedKeys++;
+          continue;
+        }
+        console.log(` Resuming from file: ${currentKey} (skipped ${skippedKeys} already-processed keys)`);
+        stats.totalKeys = skippedKeys; // so progress counter continues from where we left off
+        skipUntilKey = null; // Found checkpoint, process from here
       }
 
       try {
@@ -1113,13 +1182,26 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
 
         let metadataUpdated = false;
 
+        // On the first key after resume, skip languages already processed
+        let skipLangsUntil = null;
+        if (resumeAtLanguage) {
+          skipLangsUntil = resumeAtLanguage;
+          resumeAtLanguage = null; // only for the first key
+        }
+
         for (let langIndex = 0; langIndex < languages.length; langIndex++) {
           const language = languages[langIndex];
+
+          // Skip already-processed languages for resumed key
+          if (skipLangsUntil) {
+            if (language !== skipLangsUntil) continue;
+            skipLangsUntil = null; // found it, process from here
+          }
 
           // Save checkpoint when starting new language
           if (checkpoint.lastLanguage !== language) {
             checkpoint.lastProject = project;
-            checkpoint.lastMetadataFile = metadataFile;
+            checkpoint.lastMetadataFile = toPortablePath(metadataFile);
             checkpoint.lastLanguage = language;
             saveCheckpoint();
           }
@@ -1297,9 +1379,15 @@ function appendIssueToTSV( // sync — no async needed
   issue,
 ) {
   const tsvPath = path.join(appRootPath, tsvFilename);
+  // Store relative path in TSV so the file is portable across machines
+  const relativeMetaFile = metadataFile.replace(/\\/g, "/");
+  const metaIdx = relativeMetaFile.lastIndexOf(".meta/");
+  const portableMetaPath = metaIdx !== -1
+    ? relativeMetaFile.slice(metaIdx)
+    : path.basename(metadataFile);
   const row = [
     project,
-    metadataFile,
+    portableMetaPath,
     keyPath,
     language,
     escapeTsvField(englishContent),
@@ -1313,10 +1401,10 @@ function appendIssueToTSV( // sync — no async needed
 
   // Update checkpoint (will be saved when language changes)
   checkpoint.lastProject = project;
-  checkpoint.lastMetadataFile = metadataFile;
+  checkpoint.lastMetadataFile = toPortablePath(metadataFile);
   checkpoint.lastLanguage = language;
   checkpoint.processedKeys.add(
-    `${project}:${metadataFile}:${keyPath}:${language}`,
+    `${project}:${toPortablePath(metadataFile)}:${keyPath}:${language}`,
   );
 }
 
@@ -1345,30 +1433,18 @@ async function verifyAllTranslationsSpellCheck() {
     }
   }
 
-  // Use existing TSV file if resuming, otherwise create new one
-  let tsvFilename;
-  if (resuming && checkpoint.tsvFilename) {
-    tsvFilename = checkpoint.tsvFilename;
-    console.log(` Resuming with existing TSV file: ${tsvFilename}`);
-  } else {
-    const timestamp = new Date()
-      .toISOString()
-      .replace(/[:.]/g, "-")
-      .slice(0, -5);
-    tsvFilename = `spell-check-issues-${timestamp}.tsv`;
-    checkpoint.tsvFilename = tsvFilename;
-    saveCheckpoint();
-  }
+  // Single TSV file — always append. Created with header if missing.
+  const tsvFilename = "spell-check-issues.tsv";
+  checkpoint.tsvFilename = tsvFilename;
   const tsvPath = path.join(appRootPath, tsvFilename);
 
-  // Only write header if file doesn't exist (new run)
   if (!fs.existsSync(tsvPath)) {
     const tsvHeader =
       "Project\tMetadata File\tKey\tLanguage\tEnglish Content\tTranslated Content\tIssue Type\tDescription\tSuggestion\n";
     fs.writeFileSync(tsvPath, tsvHeader, "utf8");
     console.log(` Created TSV file: ${tsvPath}`);
   } else {
-    console.log(` Continuing with existing TSV file: ${tsvPath}`);
+    console.log(` Appending to existing TSV file: ${tsvPath}`);
   }
   console.log("Issues will be saved incrementally as they are found.\n");
 
@@ -1454,12 +1530,10 @@ async function verifyAllTranslationsSpellCheck() {
   // Report final TSV status
   if (counters.totalIssuesFound > 0) {
     console.log(` Total issues saved to TSV: ${counters.totalIssuesFound}`);
-    console.log(` TSV file location: ${tsvPath}`);
   } else {
-    // Remove empty TSV file if no issues found
-    await fs.unlink(tsvPath).catch(() => {});
-    console.log("\nNo issues found - TSV file not created.");
+    console.log("\nNo new issues found in this run.");
   }
+  console.log(` TSV file: ${tsvPath}`);
 
   // Clear checkpoint on successful completion
   clearCheckpoint();
