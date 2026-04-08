@@ -37,7 +37,6 @@ import { isValidDate } from "../utils";
 import { getDaysLeft, getDaysRemaining, isAdmin } from "../utils/common";
 import {
   parseToDateTime,
-  dateDiff,
   formatDateLocalized,
   getAppTimezone,
   isAfter,
@@ -114,73 +113,10 @@ class CurrentTariffStatusStore {
     return this.portalTariffStatus ? this.portalTariffStatus.dueDate : null;
   }
 
-  get storageSubscriptionExpiryDate() {
-    return this.walletQuotas[0]?.dueDate;
-  }
-
-  get hasStorageSubscription() {
-    return this.walletQuotas?.length > 0;
-  }
-
-  get hasPreviousStorageSubscription() {
-    return this.previousWalletQuota?.length > 0;
-  }
-
-  get currentStoragePlanSize() {
-    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return 0;
-    return this.walletQuotas[0].quantity || 0;
-  }
-
-  get previousStoragePlanSize() {
-    if (!this.hasPreviousStorageSubscription || !this.previousWalletQuota[0])
-      return 0;
-    return this.previousWalletQuota[0].quantity || 0;
-  }
-
-  get hasScheduledStorageChange() {
-    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return false;
-
-    return (this.walletQuotas[0].nextQuantity ?? -1) >= 0;
-  }
-
-  get nextStoragePlanSize() {
-    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return undefined;
-    return this.walletQuotas[0].nextQuantity;
-  }
-
-  get storageExpiryDate() {
-    if (!this.storageSubscriptionExpiryDate) return "";
-
-    return formatDateLocalized(
-      this.storageSubscriptionExpiryDate,
-      "DATE_FULL",
-      {
-        locale: this.language,
-        timezone: getAppTimezone(),
-      },
-    );
-  }
-
-  get daysUntilStorageExpiry() {
-    if (!this.storageSubscriptionExpiryDate) return 0;
-
-    return Math.floor(
-      dateDiff(this.storageSubscriptionExpiryDate, now(), "days"),
-    );
-  }
-
   get delayDueDate() {
     return this.portalTariffStatus
       ? this.portalTariffStatus.delayDueDate
       : null;
-  }
-
-  get customerId() {
-    return this.portalTariffStatus?.customerId;
-  }
-
-  get portalStatus() {
-    return this.portalTariffStatus?.portalStatus;
   }
 
   get licenseDate() {
