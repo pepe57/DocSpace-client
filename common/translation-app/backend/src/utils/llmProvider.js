@@ -13,6 +13,56 @@
  */
 
 const { ollamaConfig, openRouterConfig } = require("../config/config");
+
+// ─── Repetition loop detector ─────────────────────────────────────────────────
+
+/**
+ * Detects when a model enters a repetition loop (e.g. "The correct translation is X.
+ * The correct translation is X. The correct translation is X. ...").
+ *
+ * Maintains a sliding window of recent text. When the same phrase repeats
+ * more than `maxRepeats` times, returns true.
+ */
+class RepetitionDetector {
+  constructor({ maxRepeats = 3, windowSize = 3000 } = {}) {
+    this.maxRepeats = maxRepeats;
+    this.windowSize = windowSize;
+    this.buffer = "";
+  }
+
+  /**
+   * Feed new text and check for loops.
+   * Looks for any substring of 15+ chars that appears maxRepeats+ times in the buffer.
+   * @param {string} text - New token(s)
+   * @returns {boolean} true if repetition loop detected
+   */
+  feed(text) {
+    this.buffer += text;
+    if (this.buffer.length > this.windowSize) {
+      this.buffer = this.buffer.slice(-this.windowSize);
+    }
+
+    const buf = this.buffer;
+    if (buf.length < 100) return false;
+
+    // Take the last N chars as candidate pattern, then count occurrences in buffer
+    for (const patLen of [150, 80, 40, 20]) {
+      if (buf.length < patLen * 2) continue;
+      const pattern = buf.slice(-patLen);
+
+      let count = 0;
+      let pos = 0;
+      while ((pos = buf.indexOf(pattern, pos)) !== -1) {
+        count++;
+        pos += patLen;
+      }
+
+      if (count >= this.maxRepeats) return true;
+    }
+
+    return false;
+  }
+}
 const { Ollama } = require("ollama");
 const { verifyOllamaConnection } = require("./ollamaUtils");
 
@@ -107,10 +157,35 @@ async function listOpenRouterModels() {
  * @returns {Promise<{stream: AsyncIterable<{content: string, thinking: string}>, abort: Function}>}
  */
 async function createStreamingChat(model, messages, options = {}) {
-  if (isOpenRouterModel(model)) {
-    return createOpenRouterStream(model, messages, options);
-  }
-  return createOllamaStream(model, messages, options);
+  const result = isOpenRouterModel(model)
+    ? await createOpenRouterStream(model, messages, options)
+    : await createOllamaStream(model, messages, options);
+
+  // Wrap stream with repetition loop detection.
+  // If the model enters a loop (same phrase repeated 4+ times), abort automatically.
+  const detector = new RepetitionDetector();
+  const innerStream = result.stream;
+
+  const guardedStream = {
+    [Symbol.asyncIterator]() {
+      const iterator = innerStream[Symbol.asyncIterator]();
+      return {
+        async next() {
+          const item = await iterator.next();
+          if (item.done) return item;
+          const { content, thinking } = item.value;
+          if (content && detector.feed(content)) {
+            console.warn("[llmProvider] Repetition loop detected — aborting stream");
+            result.abort();
+            return { done: true, value: undefined };
+          }
+          return item;
+        },
+      };
+    },
+  };
+
+  return { ...result, stream: guardedStream };
 }
 
 async function createOllamaStream(model, messages, options = {}) {
