@@ -41,12 +41,14 @@ export default function AuthClient({
   successRedirectURL,
   inviteKey,
   emplType,
+  uid,
   confirmHeader,
 }: {
   providerName: string;
   successRedirectURL: string | null;
   inviteKey: string | null;
   emplType: string | null;
+  uid: string | null;
   confirmHeader: string;
 }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -71,6 +73,7 @@ export default function AuthClient({
           };
 
           if (emplType) signupData.EmployeeType = emplType;
+          if (uid) signupData.Uid = uid;
           if (inviteKey) signupData.Key = inviteKey;
 
           await signupOAuth(signupData, inviteKey ? confirmHeader : null);
@@ -111,7 +114,7 @@ export default function AuthClient({
         setIsLoading(false);
       }
     },
-    [successRedirectURL, inviteKey, emplType, confirmHeader],
+    [successRedirectURL, inviteKey, emplType, uid, confirmHeader],
   );
 
   useEffect(() => {
