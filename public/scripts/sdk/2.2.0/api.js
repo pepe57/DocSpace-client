@@ -210,7 +210,8 @@
     }
   };
   var getCSPErrorBody = (src) => {
-    return `<body style=background:#f3f4f4><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300"rel=stylesheet><div style="display:flex;flex-direction:column;gap:80px;align-items:center;justify-content:flex-start;margin-top:60px;padding:0 30px"><div style=flex-shrink:0;position:relative><img src=${src}/static/images/logo/lightsmall.svg></div><div style=display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:flex-start;flex-shrink:0;position:relative><div style=flex-shrink:0;width:120px;height:100px;position:relative><img src=${src}/static/images/frame-error.svg></div><span style="color:#a3a9ae;text-align:center;font-family:Open Sans;font-size:14px;font-style:normal;font-weight:700;line-height:16px">${cspErrorText} Please add it via <a href=${src}/developer-tools/javascript-sdk style="color:#4781d1;text-align:center;font-family:Open Sans;font-size:14px;font-style:normal;font-weight:700;line-height:16px;text-decoration-line:underline"target=_blank>the Developer Tools section</a>.</span></div></div></body>`;
+    const safeSrc = src.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return `<body style="background:#f3f4f4"><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet"><div style="display:flex;flex-direction:column;gap:80px;align-items:center;justify-content:flex-start;margin-top:60px;padding:0 30px"><div style="flex-shrink:0;position:relative"><img src="${safeSrc}/static/images/logo/lightsmall.svg"></div><div style="display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:flex-start;flex-shrink:0;position:relative"><div style="flex-shrink:0;width:120px;height:100px;position:relative"><img src="${safeSrc}/static/images/frame-error.svg"></div><span style="color:#a3a9ae;text-align:center;font-family:Open Sans;font-size:14px;font-style:normal;font-weight:700;line-height:16px">${cspErrorText} Please add it via <a href="${safeSrc}/developer-tools/javascript-sdk" style="color:#4781d1;text-align:center;font-family:Open Sans;font-size:14px;font-style:normal;font-weight:700;line-height:16px;text-decoration-line:underline" target="_blank">the Developer Tools section</a>.</span></div></div></body>`;
   };
   var getLoaderStyle = (className) => {
     return `@keyframes rotate { 0%{ transform: rotate(-45deg); will-change: transform; } 15%{ transform: rotate(45deg); } 30%{ transform: rotate(135deg); } 45%{ transform: rotate(225deg); } 60%, 100%{ transform: rotate(315deg); } } .${className} { width: 74px; height: 74px; border: 4px solid rgba(51,51,51, 0.1); border-top-color: #333333; border-radius: 50%; transform: rotate(-45deg); position: relative; box-sizing: border-box; animation: 1s linear infinite rotate; will-change: transform; } @media (prefers-color-scheme: dark) { .${className} { border-color: rgba(204, 204, 204, 0.1); border-top-color: #CCCCCC; } } @media (prefers-reduced-motion: reduce) { .${className} { animation-duration: 1.5s; } }`;
@@ -354,7 +355,7 @@
   };
 
   // src/instance/index.ts
-  var _isConnected, _callbacks, _tasks, _classNames, _expectedOrigin, _uploadIdCounter, _pendingUploads, _createLoader, _createIframe, _SDKInstance_instances, setupCSPValidation_fn, _sendMessage, _onMessage, parseMessageData_fn, handleMethodResponse_fn, processEvent_fn, _allowedCommands, executeCommand_fn, handleError_fn, executeMethod_fn, prepareFrameConfig_fn, createContainer_fn, setupContainer_fn, setupIframe_fn, setupFrameEventHandlers_fn, assembleFrame_fn, registerFrame_fn, _getMethodPromise;
+  var _isConnected, _callbacks, _tasks, _classNames, _expectedOrigin, _iframe, _uploadIdCounter, _pendingUploads, _createLoader, _createIframe, _SDKInstance_instances, setupCSPValidation_fn, _sendMessage, _onMessage, parseMessageData_fn, handleMethodResponse_fn, drainNextTask_fn, createMethodTimer_fn, rejectAllPending_fn, processEvent_fn, _allowedCommands, executeCommand_fn, handleError_fn, executeMethod_fn, prepareFrameConfig_fn, createContainer_fn, setupContainer_fn, setupIframe_fn, setupFrameEventHandlers_fn, assembleFrame_fn, registerFrame_fn, _getMethodPromise;
   var _SDKInstance = class _SDKInstance {
     constructor(config2) {
       __privateAdd(this, _SDKInstance_instances);
@@ -363,6 +364,7 @@
       __privateAdd(this, _tasks, []);
       __privateAdd(this, _classNames, "");
       __privateAdd(this, _expectedOrigin, "");
+      __privateAdd(this, _iframe, null);
       __privateAdd(this, _uploadIdCounter, 0);
       __privateAdd(this, _pendingUploads, /* @__PURE__ */ new Map());
       /** The iframe configuration options. */
@@ -477,26 +479,27 @@
        * @param message - The message object to send to the iframe.
        */
       __privateAdd(this, _sendMessage, (message) => {
+        var _a;
         try {
           const { frameId, src } = this.config;
-          const iframe = document.getElementById(
-            frameId
-          );
-          if (!(iframe == null ? void 0 : iframe.contentWindow)) return;
+          if (!((_a = __privateGet(this, _iframe)) == null ? void 0 : _a.contentWindow)) return false;
           const messageEnvelope = {
             frameId,
             type: "",
             data: message
           };
-          iframe.contentWindow.postMessage(
-            JSON.stringify(
-              messageEnvelope,
-              (_, value) => typeof value === "function" ? value.toString() : value
-            ),
+          const isEditorExec = message.methodName === "executeInEditor" /* ExecuteInEditor */;
+          __privateGet(this, _iframe).contentWindow.postMessage(
+            JSON.stringify(messageEnvelope, (_, value) => {
+              if (typeof value !== "function") return value;
+              return isEditorExec ? value.toString() : true;
+            }),
             src
           );
+          return true;
         } catch (error) {
           __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, error);
+          return false;
         }
       });
       /**
@@ -509,7 +512,14 @@
           if (typeof e.data !== "string") return;
           if (!__privateGet(this, _expectedOrigin) || e.origin !== __privateGet(this, _expectedOrigin)) return;
           const data = __privateMethod(this, _SDKInstance_instances, parseMessageData_fn).call(this, e.data);
+          if (data.frameId === "error" && data.error) {
+            __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, data.error);
+            return;
+          }
           if (data.frameId !== this.config.frameId) return;
+          if (!__privateGet(this, _isConnected)) {
+            __privateSet(this, _isConnected, true);
+          }
           switch (data.type) {
             case "onMethodReturn" /* OnMethodReturn */:
               __privateMethod(this, _SDKInstance_instances, handleMethodResponse_fn).call(this, data);
@@ -542,14 +552,17 @@
        * @returns A promise that resolves to an object containing the result of the method execution, or the current configuration if reloaded.
        */
       __privateAdd(this, _getMethodPromise, (methodName, params = null, withReload = false) => {
-        return new Promise((resolve) => {
+        const promise = new Promise((resolve, reject) => {
           if (withReload) {
             this.initFrame(this.config);
             resolve(this.config);
           } else {
-            __privateMethod(this, _SDKInstance_instances, executeMethod_fn).call(this, methodName, params, (data) => resolve(data));
+            __privateMethod(this, _SDKInstance_instances, executeMethod_fn).call(this, methodName, params, resolve, reject);
           }
         });
+        promise.catch(() => {
+        });
+        return promise;
       });
       this.config = config2;
     }
@@ -647,6 +660,13 @@
       } catch {
         __privateSet(this, _expectedOrigin, "");
       }
+      __privateSet(this, _isConnected, false);
+      for (const entry of __privateGet(this, _callbacks)) {
+        if (entry.timer) clearTimeout(entry.timer);
+        entry.reject(new Error("Frame reloaded"));
+      }
+      __privateSet(this, _callbacks, []);
+      __privateSet(this, _tasks, []);
       for (const [, pending] of __privateGet(this, _pendingUploads)) {
         clearTimeout(pending.timer);
         pending.reject(new Error("Frame reloaded"));
@@ -656,6 +676,7 @@
       if (!setupResult) return null;
       const { container, target } = setupResult;
       const iframe = __privateMethod(this, _SDKInstance_instances, setupIframe_fn).call(this);
+      __privateSet(this, _iframe, iframe);
       __privateMethod(this, _SDKInstance_instances, setupFrameEventHandlers_fn).call(this, iframe);
       __privateMethod(this, _SDKInstance_instances, assembleFrame_fn).call(this, container, target, iframe);
       __privateMethod(this, _SDKInstance_instances, registerFrame_fn).call(this);
@@ -703,7 +724,18 @@
         }
       }
       window.removeEventListener("message", __privateGet(this, _onMessage));
+      __privateSet(this, _iframe, null);
+      const loaderClassName = `${frameId}-loader__element`;
+      const styleEl = _SDKInstance._loaderCache.style.get(loaderClassName);
+      if (styleEl == null ? void 0 : styleEl.parentNode) {
+        styleEl.parentNode.removeChild(styleEl);
+      }
+      _SDKInstance._loaderCache.style.delete(loaderClassName);
       __privateSet(this, _isConnected, false);
+      for (const entry of __privateGet(this, _callbacks)) {
+        if (entry.timer) clearTimeout(entry.timer);
+        entry.reject(new Error("Frame destroyed"));
+      }
       __privateSet(this, _callbacks, []);
       __privateSet(this, _tasks, []);
       for (const [, pending] of __privateGet(this, _pendingUploads)) {
@@ -769,7 +801,7 @@
      * ```
      */
     getConfig() {
-      return this.config;
+      return { ...this.config };
     }
     /**
      * Returns metadata about the folder currently open in the frame.
@@ -1417,6 +1449,7 @@
      * ```
      */
     async upload(file) {
+      var _a;
       if (this.config.mode !== "forms" /* Forms */) {
         throw new Error("upload is only available in Forms mode");
       }
@@ -1425,8 +1458,7 @@
         throw new Error(connectErrorText);
       }
       const { frameId, src } = this.config;
-      const iframe = document.getElementById(frameId);
-      if (!(iframe == null ? void 0 : iframe.contentWindow)) {
+      if (!((_a = __privateGet(this, _iframe)) == null ? void 0 : _a.contentWindow)) {
         throw new Error("Frame not connected");
       }
       const buffer = await file.arrayBuffer();
@@ -1438,7 +1470,7 @@
         }, 12e4);
         __privateGet(this, _pendingUploads).set(uploadId, { fileName: file.name, resolve, reject, timer });
       });
-      iframe.contentWindow.postMessage(
+      __privateGet(this, _iframe).contentWindow.postMessage(
         {
           frameId,
           type: "uploadFileData" /* UploadFileData */,
@@ -1458,6 +1490,7 @@
   _tasks = new WeakMap();
   _classNames = new WeakMap();
   _expectedOrigin = new WeakMap();
+  _iframe = new WeakMap();
   _uploadIdCounter = new WeakMap();
   _pendingUploads = new WeakMap();
   _createLoader = new WeakMap();
@@ -1517,17 +1550,59 @@
    * @param data - The message data containing the method response.
    */
   handleMethodResponse_fn = function(data) {
-    const callback = __privateGet(this, _callbacks).shift();
-    if (callback) {
+    const entry = __privateGet(this, _callbacks).shift();
+    if (entry) {
+      if (entry.timer) clearTimeout(entry.timer);
       try {
-        callback(data.methodReturnData || {});
+        entry.resolve(data.methodReturnData || {});
       } catch (error) {
         console.error("Error in callback execution:", error);
       }
     }
-    if (__privateGet(this, _tasks).length > 0) {
-      __privateGet(this, _sendMessage).call(this, __privateGet(this, _tasks).shift());
+    __privateMethod(this, _SDKInstance_instances, drainNextTask_fn).call(this);
+  };
+  /**
+   * Sends the next queued task and starts its timeout timer.
+   * @internal
+   */
+  drainNextTask_fn = function() {
+    if (__privateGet(this, _tasks).length === 0 || __privateGet(this, _callbacks).length === 0) return;
+    const nextTask = __privateGet(this, _tasks).shift();
+    const nextEntry = __privateGet(this, _callbacks)[0];
+    if (nextEntry) {
+      nextEntry.timer = __privateMethod(this, _SDKInstance_instances, createMethodTimer_fn).call(this, nextEntry);
     }
+    if (!__privateGet(this, _sendMessage).call(this, nextTask)) {
+      __privateMethod(this, _SDKInstance_instances, rejectAllPending_fn).call(this, "Frame disconnected");
+    }
+  };
+  /**
+   * Creates a timeout timer for an in-flight method call.
+   * @internal
+   */
+  createMethodTimer_fn = function(entry) {
+    return setTimeout(() => {
+      const idx = __privateGet(this, _callbacks).indexOf(entry);
+      if (idx !== -1) __privateGet(this, _callbacks).splice(idx, 1);
+      entry.reject(new Error("Method call timed out"));
+      __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, { message: "Method call timed out" });
+      __privateMethod(this, _SDKInstance_instances, drainNextTask_fn).call(this);
+    }, this.config.methodTimeout || 3e4);
+  };
+  /**
+   * Rejects all pending method callbacks and clears the queue.
+   * @internal
+   */
+  rejectAllPending_fn = function(reason) {
+    const entries = [...__privateGet(this, _callbacks)];
+    __privateSet(this, _callbacks, []);
+    __privateSet(this, _tasks, []);
+    for (const entry of entries) {
+      if (entry.timer) clearTimeout(entry.timer);
+      entry.reject(new Error(reason));
+    }
+    __privateSet(this, _isConnected, false);
+    __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, { message: reason });
   };
   /**
    * Processes event data received from the DocSpace iframe and dispatches it to the registered event handlers.
@@ -1610,17 +1685,25 @@
    * @param params - The parameters for the method, or null if none are required.
    * @param callback - The function called with the response data when execution completes.
    */
-  executeMethod_fn = function(methodName, params, callback) {
+  executeMethod_fn = function(methodName, params, resolve, reject) {
     if (!__privateGet(this, _isConnected) && methodName !== "setConfig" /* SetConfig */) {
       __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, { message: connectErrorText });
+      reject(new Error(connectErrorText));
       return;
     }
-    __privateGet(this, _callbacks).push(callback);
+    const entry = { resolve, reject, timer: null };
+    __privateGet(this, _callbacks).push(entry);
     const message = { type: "method", methodName, data: params };
     if (__privateGet(this, _callbacks).length > 1) {
       __privateGet(this, _tasks).push(message);
     } else {
-      __privateGet(this, _sendMessage).call(this, message);
+      entry.timer = __privateMethod(this, _SDKInstance_instances, createMethodTimer_fn).call(this, entry);
+      if (!__privateGet(this, _sendMessage).call(this, message)) {
+        __privateGet(this, _callbacks).pop();
+        if (entry.timer) clearTimeout(entry.timer);
+        __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, { message: connectErrorText });
+        reject(new Error(connectErrorText));
+      }
     }
   };
   /**

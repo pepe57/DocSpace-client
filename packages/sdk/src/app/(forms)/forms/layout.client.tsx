@@ -34,6 +34,10 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import Section from "@docspace/ui-kit/components/section";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import {
+  FloatingButton,
+  FloatingButtonIcons,
+} from "@docspace/ui-kit/components/floating-button";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
 import {
@@ -70,6 +74,7 @@ import useFolderActions from "../_hooks/useFolderActions";
 import useFormsSocket from "../_hooks/useFormsSocket";
 import useFormEventHooks from "../_hooks/useFormEventHooks";
 import useEditorGuard from "../_hooks/useEditorGuard";
+import useFormPreparingToast from "../_hooks/useFormPreparingToast";
 import { MIN_SECTION_WIDTH } from "../_api/aiAgentSettings";
 import { useFormsTourStore } from "../_store/FormsTourStore";
 import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
@@ -271,6 +276,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
 
   useFormsSocket(socketUrl, socketFolderIds, socketFileIds, fetchSection);
   useFormEventHooks(hasManagementAccess ? aiStore : null, socketUrl);
+  useFormPreparingToast(items);
 
   const isEditing = Boolean(editingFile);
 
@@ -430,6 +436,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const {
     onUploadFiles,
     uploadFilesToFolder,
+    uploadProgress,
     onCreateBlankForm,
     isCreateFormDialogVisible,
     isCreatingForm,
@@ -620,6 +627,14 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         }}
       />
       {Tour && createPortal(Tour, document.body)}
+      {uploadProgress && (
+        <FloatingButton
+          icon={FloatingButtonIcons.upload}
+          percent={uploadProgress.percent}
+          completed={uploadProgress.completed}
+          alert={uploadProgress.alert}
+        />
+      )}
     </div>
   );
 };
