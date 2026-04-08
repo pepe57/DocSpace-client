@@ -55,7 +55,7 @@ import {
   TLicenseQuota,
 } from "@docspace/shared/api/portal/types";
 
-import { AI_ENUM, BACKUP_SERVICE } from "@docspace/ui-kit/payments/constants";
+import { AI_ENUM, BACKUP_SERVICE } from "@docspace/ui-kit/billing/constants";
 import type { DateTime } from "luxon";
 import { formatDate as formatDateUtil } from "@docspace/ui-kit/utils/date";
 

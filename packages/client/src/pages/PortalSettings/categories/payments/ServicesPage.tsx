@@ -28,11 +28,11 @@ import { inject, observer } from "mobx-react";
 import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router";
 
-import { PaymentsRoot } from "@docspace/ui-kit/payments";
-import { default as AiPage } from "@docspace/ui-kit/payments/services/pages/ai-tools/AiPage";
-import { default as BackupPage } from "@docspace/ui-kit/payments/services/pages/backup/BackupPage";
-import { default as AdditionalStoragePage } from "@docspace/ui-kit/payments/services/pages/additional-storage/AdditionalStoragePage";
-import type { TPaymentUser } from "@docspace/ui-kit/payments/types";
+import { PaymentsRoot } from "@docspace/ui-kit/billing";
+import { default as AiPage } from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
+import { default as BackupPage } from "@docspace/ui-kit/billing/services/pages/backup/BackupPage";
+import { default as AdditionalStoragePage } from "@docspace/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
+import type { TPaymentUser } from "@docspace/ui-kit/billing/types";
 import { PAYMENT_ROUTES } from "./utils";
 
 interface ServicesPageProps {

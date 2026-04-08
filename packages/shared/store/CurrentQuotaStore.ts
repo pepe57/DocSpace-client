@@ -49,7 +49,7 @@ import {
   ROOM,
   YEAR_KEY,
   FREE_BACKUP,
-} from "@docspace/ui-kit/payments/constants";
+} from "@docspace/ui-kit/billing/constants";
 import {
   FILE_SIZE,
   USERS,

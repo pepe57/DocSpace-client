@@ -686,9 +686,9 @@ export {
   calculateTotalPrice,
   truncateNumberToFraction,
   formatCurrencyValue,
-} from "@docspace/ui-kit/payments/utils/common";
+} from "@docspace/ui-kit/billing/utils/common";
 
-import { getConvertedSize } from "@docspace/ui-kit/payments/utils/common";
+import { getConvertedSize } from "@docspace/ui-kit/billing/utils/common";
 
 export const getConvertedQuota = (
   t: (key: string) => string,

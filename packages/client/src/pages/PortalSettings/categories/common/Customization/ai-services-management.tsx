@@ -47,7 +47,7 @@ import LoaderCustomization from "../sub-components/loaderCustomization";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 import useCommon from "../useCommon";
 import DisableAiServicesDialog from "SRC_DIR/components/dialogs/DisableAiServicesDialog";
-import { AI_ENUM } from "@docspace/ui-kit/payments/constants";
+import { AI_ENUM } from "@docspace/ui-kit/billing/constants";
 
 interface AiServicesManagementProps {
   isMobileView: boolean;

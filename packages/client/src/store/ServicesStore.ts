@@ -44,14 +44,14 @@ import {
 import { getBackupsCount } from "@docspace/shared/api/backup";
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { formatterCurrencyWithoutTranction } from "@docspace/ui-kit/payments/wallet/utils";
+import { formatterCurrencyWithoutTranction } from "@docspace/ui-kit/billing/wallet/utils";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import {
   AI_ENUM,
   AI_TOOLS,
   BACKUP_SERVICE,
   STORAGE_ENUM,
-} from "@docspace/ui-kit/payments/constants";
+} from "@docspace/ui-kit/billing/constants";
 
 type TAiToolsChatPrice = {
   prompt: number;

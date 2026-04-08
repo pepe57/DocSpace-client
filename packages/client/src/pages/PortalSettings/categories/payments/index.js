@@ -42,7 +42,7 @@ import {
   PaymentMethod,
   PaymentServicesList as Services,
   PaymentsRoot,
-} from "@docspace/ui-kit/payments";
+} from "@docspace/ui-kit/billing";
 
 const PaymentsPage = (props) => {
   const {
