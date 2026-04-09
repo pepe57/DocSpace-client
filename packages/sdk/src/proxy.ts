@@ -97,7 +97,7 @@ export async function proxy(request: NextRequest) {
     });
   }
 
-  if (request.nextUrl.pathname.includes("chat")) {
+  if (request.nextUrl.pathname === "/chat") {
     const agentId = searchParams.get("agentId") ?? "";
 
     requestHeaders.set(AGENT_ID_HEADER, agentId);
