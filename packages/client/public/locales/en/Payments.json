@@ -71,6 +71,7 @@
   "LicenseExpired": "Cannot add new users and create new rooms. License has expired.",
   "LicenseGracePeriodInfo": "During this time, admins are not able to create new rooms or add new users. Once the grace period ends, {{productName}} will become unavailable until a new license is activated.",
   "LinkNewCard": "To link a new card, please follow this link.",
+  "LinkNewCardDescription": "Click the button below to link a new card",
   "LinkNewCardEmail": "To link a new card, please reach out to the payer <1>{{email}}</1>",
   "ListContacts": "List contacts",
   "ManagerTypesDescription": "Admin account types and their privileges",

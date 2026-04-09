@@ -27,7 +27,7 @@
 import styled from "styled-components";
 import { useParams } from "react-router";
 import { inject, observer } from "mobx-react";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import { RowContainer } from "@docspace/ui-kit/components/rows";

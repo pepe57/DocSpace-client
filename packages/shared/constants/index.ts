@@ -38,20 +38,9 @@ import { FileFillingFormStatus } from "../enums";
 export { LOADER_STYLE } from "@docspace/ui-kit/constants";
 
 export const TOAST_FOLDER_PUBLIC_KEY = "toast_folder_public_key";
-export const MANAGER = "manager";
-export const TOTAL_SIZE = "total_size";
 export const FILE_SIZE = "file_size";
-export const ROOM = "room";
 export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
-export const YEAR_KEY = "year";
-export const BACKUP_SERVICE = "backup";
-export const AI_TOOLS = "ai-tools";
-export const AI_ENUM = "aitools";
-export const STORAGE_ENUM = "storage";
-export const DISK_STORAGE = "disk-storage";
-export const WEB_SEARCH = "websearch";
-export const FREE_BACKUP = "free_backup";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
 export const PUBLIC_STORAGE_KEY = "public-auth";
@@ -226,8 +215,6 @@ export const thumbnailStatuses = {
 export const THIRD_PARTY_SERVICES_URL =
   "/portal-settings/integration/third-party-services?service=";
 
-export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";
-export const STORAGE_DEACTIVATION_VISITED = "storageDeactivationVisited";
 
 // any unicode letters are allowed, characters are prohibited
 export const BRAND_NAME_REGEX =

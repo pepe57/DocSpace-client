@@ -683,6 +683,15 @@ export const frameCallCommand = (
   );
 };
 
+export {
+  getPowerFromBytes,
+  getSizeFromBytes,
+  getConvertedSize,
+  calculateTotalPrice,
+  truncateNumberToFraction,
+  formatCurrencyValue,
+} from "@docspace/ui-kit/billing/utils/common";
+
 export const frameHandlePing = (eventData: {
   type?: string;
   frameId?: string;
@@ -700,51 +709,7 @@ export const frameHandlePing = (eventData: {
   return false;
 };
 
-// Done in a similar way to server code
-// https://github.com/ONLYOFFICE/DocSpace-server/blob/master/common/ASC.Common/Utils/CommonFileSizeComment.cs
-export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
-  const power = Math.floor(Math.log(bytes) / Math.log(1024));
-  return power <= maxPower ? power : maxPower;
-};
-
-export const getSizeFromBytes = (bytes: number, power: number) => {
-  const size = bytes / 1024 ** power;
-  const truncateToTwo = Math.trunc(size * 100) / 100;
-
-  return truncateToTwo;
-};
-
-export const getConvertedSize = (
-  t: (key: string) => string,
-  bytes: number,
-  withoutSizeName: boolean = false,
-) => {
-  let power = 0;
-  let resultSize = bytes;
-
-  const sizeNames = [
-    t("Common:Bytes"),
-    t("Common:Kilobyte"),
-    t("Common:Megabyte"),
-    t("Common:Gigabyte"),
-    t("Common:Terabyte"),
-    t("Common:Petabyte"),
-    t("Common:Exabyte"),
-  ];
-
-  if (bytes <= 0) return `${`0 ${t("Common:Bytes")}`}`;
-
-  if (bytes >= 1024) {
-    power = getPowerFromBytes(bytes, sizeNames.length - 1);
-    resultSize = getSizeFromBytes(bytes, power);
-  }
-
-  if (withoutSizeName) return `${resultSize}`;
-
-  return `${resultSize} ${sizeNames[power]}`;
-};
-
-//
+import { getConvertedSize } from "@docspace/ui-kit/billing/utils/common";
 
 export const getConvertedQuota = (
   t: (key: string) => string,
@@ -1486,41 +1451,6 @@ export const getSdkScriptUrl = (version: string) => {
     : "";
 };
 
-export const calculateTotalPrice = (
-  quantity: number,
-  unitPrice: number,
-): number => {
-  return Number((quantity * unitPrice).toFixed(2));
-};
-
-export const truncateNumberToFraction = (
-  value: number,
-  digits: number = 2,
-): string => {
-  const [intPart, fracPart = ""] = value.toString().split(".");
-  const truncated = fracPart.slice(0, digits).padEnd(digits, "0");
-  return `${intPart}.${truncated}`;
-};
-
-export const formatCurrencyValue = (
-  language: string,
-  amount: number,
-  currency: string,
-  fractionDigits: number = 3,
-) => {
-  const truncatedStr = truncateNumberToFraction(amount, fractionDigits);
-  const truncated = Number(truncatedStr);
-
-  const formatter = new Intl.NumberFormat(language, {
-    style: "currency",
-    currency,
-    minimumFractionDigits: fractionDigits,
-    maximumFractionDigits: fractionDigits,
-  });
-
-  return formatter.format(truncated);
-};
-
 export const insertEditorPreloadFrame = (docServiceUrl: string) => {
   if (
     !docServiceUrl ||
@@ -1656,3 +1586,4 @@ export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {
     return acc;
   }, initial);
 }
+

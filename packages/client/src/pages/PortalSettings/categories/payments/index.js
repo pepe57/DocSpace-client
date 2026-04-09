@@ -26,85 +26,85 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Tabs } from "@docspace/ui-kit/components/tabs";
 import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { isManagement } from "@docspace/shared/utils/common";
+import { PAYMENT_ROUTES } from "./utils";
 
 import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
-import PaymentsSaaS from "./SaaS/main-tariff";
-import Wallet from "./SaaS/wallet";
-import PaymentMethod from "./SaaS/payment-method";
-import usePayments from "./usePayments";
-import { Component as Services } from "./SaaS/services";
-
-import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
+import {
+  MainTariff,
+  Wallet,
+  PaymentMethod,
+  ServicesList,
+  BillingRoot,
+} from "@docspace/ui-kit/billing";
 
 const PaymentsPage = (props) => {
   const {
     currentDeviceType,
     standalone,
-    paymentStore,
-    settingsStore,
-    servicesStore,
     clearAbortControllerArr,
+    language,
+    user,
+    logoText,
+    walletHelpUrl,
+    getAIConfig,
   } = props;
-  const [currentTabId, setCurrentTabId] = useState();
   const location = useLocation();
+  const tabIds = ["portal-payments", "payment-method", "wallet", "services"];
+  const [currentTabId, setCurrentTabId] = useState(
+    () => tabIds.find((id) => location.pathname.includes(id)) || tabIds[0],
+  );
   const navigate = useNavigate();
-  const { t } = useTranslation(["Payments", "Settings"]);
+  const { t } = useTranslation(["Payments", "Settings", "Common"]);
 
-  const defaultProps = createDefaultHookSettingsProps({
-    paymentStore,
-    settingsStore,
-    servicesStore,
-  });
-
-  const {
-    getWalletData,
-    getPortalPaymentsData,
-    getServicesData,
-    getPaymentMethodData,
-  } = usePayments(defaultProps.payment);
+  const paymentConfig = useMemo(
+    () => ({
+      language,
+      logoText,
+      walletHelpUrl,
+      user,
+      routes: PAYMENT_ROUTES,
+    }),
+    [language, logoText, walletHelpUrl, user],
+  );
 
   const data = [
     {
       id: "portal-payments",
       name: t("PortalTariffPlan", { productName: t("Common:ProductName") }),
-      content: <PaymentsSaaS />,
-      onClick: async () => {
+      content: <MainTariff />,
+      onClick: () => {
         clearAbortControllerArr();
-        await getPortalPaymentsData();
       },
     },
     {
       id: "payment-method",
       name: t("PaymentMethod"),
       content: <PaymentMethod />,
-      onClick: async () => {
+      onClick: () => {
         clearAbortControllerArr();
-        await getPaymentMethodData();
       },
     },
     {
       id: "wallet",
       name: t("Wallet"),
       content: <Wallet />,
-      onClick: async () => {
+      onClick: () => {
         clearAbortControllerArr();
-        await getWalletData();
       },
     },
     {
       id: "services",
       name: t("Settings:Services"),
-      content: <Services />,
-      onClick: async () => {
+      content: <ServicesList getAIConfig={getAIConfig} />,
+      onClick: () => {
         clearAbortControllerArr();
-        await getServicesData();
       },
     },
   ];
@@ -128,29 +128,45 @@ const PaymentsPage = (props) => {
   if (standalone) return <PaymentsEnterprise />;
 
   return (
-    <Tabs
-      items={data}
-      selectedItemId={currentTabId}
-      onSelect={(e) => onSelect(e)}
-      stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
-      withAnimation
-    />
+    <BillingRoot config={paymentConfig}>
+      <Tabs
+        items={data}
+        selectedItemId={currentTabId}
+        onSelect={(e) => onSelect(e)}
+        stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+        withAnimation
+      />
+    </BillingRoot>
   );
 };
 
-export const Component = inject(
-  ({ settingsStore, paymentStore, servicesStore }) => {
-    const { standalone, currentDeviceType, clearAbortControllerArr } =
-      settingsStore;
+export const Component = inject(({ settingsStore, authStore, userStore }) => {
+  const {
+    standalone,
+    currentDeviceType,
+    clearAbortControllerArr,
+    logoText,
+    walletHelpUrl,
+    getAIConfig,
+  } = settingsStore;
 
-    return {
-      standalone,
-      currentDeviceType,
-      paymentStore,
-      settingsStore,
-      clearAbortControllerArr,
-      servicesStore,
-    };
-  },
-)(observer(PaymentsPage));
+  const { user } = userStore;
+
+  return {
+    standalone,
+    currentDeviceType,
+    clearAbortControllerArr,
+    logoText,
+    walletHelpUrl,
+    getAIConfig,
+    language: authStore?.language,
+    user: user
+      ? {
+          id: user.id,
+          email: user.email,
+          isOwner: user.isOwner,
+        }
+      : undefined,
+  };
+})(observer(PaymentsPage));
 
