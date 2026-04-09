@@ -183,7 +183,7 @@
   padding: 12px;
   border-radius: 10px;
   border: 1px solid var(--modal-dialog-header-border-color);
-  background-color: var(--color-background, #fff);
+  background-color: var(--color-background);
   cursor: pointer;
   opacity: 0.75;
   transition:
@@ -199,7 +199,7 @@
     background-color: color-mix(
       in srgb,
       var(--color-scheme-main-accent) 4%,
-      var(--color-background, #fff)
+      var(--color-background)
     );
   }
 
@@ -218,7 +218,7 @@
   background-color: color-mix(
     in srgb,
     var(--color-scheme-main-accent) 8%,
-    var(--color-background, #fff)
+    var(--color-background)
   );
 }
 
