@@ -3,7 +3,7 @@
   "content": "Sales department request",
   "content_en_sha1_hash": "0e3ac6e1bce337108997dca6f6f3b9a728a8e578",
   "created_at": "2025-05-19T21:30:53.281Z",
-  "updated_at": "2026-04-07T19:35:05.184Z",
+  "updated_at": "2026-04-09T06:46:04.524Z",
   "comment": {
     "text": "This translation key is used for the \"Sales department request\" text that appears in a dialogue box, specifically in the SalesDepartmentRequestDialog component where users can submit requests. The text is intended to provide clear context for the user's action.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation 'Anfrage zur Verkaufsabteilung' means 'Inquiry regarding/to the sales department', whereas the English 'Sales department request' implies a request being made BY or FOR the sales department (a request originating from or directed to the department as a subject). In the context of a dialog box for submitting requests, 'Anfrage der Verkaufsabteilung' or 'Verkaufsabteilungsanfrage' would be more accurate.",
+          "suggestion": "Anfrage der Verkaufsabteilung"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຄໍາ​ຮ້ອງ​ສະ​ຫມັກ' means 'application' or 'enrollment' (like applying for a job or a course), whereas the English 'request' in this context refers to a formal submission or inquiry (e.g., a service request).",
+          "suggestion": "ຄໍາ​ຮ້ອງ​ຂໍ​ຂອງ​ພະ​ແນກ​ການ​ຂາຍ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -199,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

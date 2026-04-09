@@ -3,7 +3,7 @@
   "content": "Private Key",
   "content_en_sha1_hash": "ade5ddaf2557ee93225fc565adbfe1ade3bae3a0",
   "created_at": "2025-05-19T21:30:50.121Z",
-  "updated_at": "2026-04-07T19:35:05.219Z",
+  "updated_at": "2026-04-08T23:10:01.966Z",
   "comment": {
     "text": "This translation key is used for the label \"Private Key\" in a modal window or dialog box where users can add and manage Single Sign-On certificates. It appears as a field name in the UI, prompting users to input their private key details.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Личен ключ' translates to 'Personal key'. In a cryptographic/SSO context, 'Private Key' must be translated as 'Частен ключ'.",
+          "suggestion": "Частен ключ"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -117,7 +123,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation 'Privé Sleute' is grammatically incorrect and incomplete; 'Sleute' is not a valid word in Dutch. The correct term for 'Key' in this context is 'sleutel'.",
+          "suggestion": "Privésleutel"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -195,10 +207,22 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "In the context of SSO certificates and cryptography, 'Private Key' refers to a specific cryptographic component. 'Mã bí mật' translates to 'Secret code', which is too generic and technically inaccurate for a private key field.",
+          "suggestion": "Khóa riêng tư"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

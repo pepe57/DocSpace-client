@@ -3,7 +3,7 @@
   "content": "Changes will be applied after the confirmation via email.",
   "content_en_sha1_hash": "059370ea0ddcef692f1b1ed25c98607d7d0b27d0",
   "created_at": "2025-05-19T21:30:50.287Z",
-  "updated_at": "2026-04-07T19:35:05.189Z",
+  "updated_at": "2026-04-09T04:36:17.853Z",
   "comment": {
     "text": "This translation key is used for the confirmation text displayed when a user confirms changing the owner of access rights via email. It will appear in a modal dialog footer to inform the user about the process after confirming.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation adds 'məktubundan' (from the letter), which changes the meaning to 'after the confirmation letter via email' instead of 'after confirmation via email'. This makes the sentence redundant and slightly unnatural.",
+          "suggestion": "Dəyişikliklər e-poçt vasitəsilə təsdiqləndikdən sonra tətbiq olunacaq."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'confirmarea e-mailului' means 'confirmation of the email' (confirming the email itself), whereas the English 'confirmation via email' means the confirmation process happens through the medium of email.",
+          "suggestion": "Modificările vor fi aplicate după confirmarea prin e-mail."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,7 +171,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'potvrdení e-mailu' means 'confirmation of the email' (confirming the email itself), whereas the English 'confirmation via email' means the confirmation process happens through/by means of email.",
+          "suggestion": "Zmeny sa vykonajú po potvrdení prostredníctvom e-mailu."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "The destination already contains a file named «<1>{{fileName}}</1>».",
   "content_en_sha1_hash": "c76660403b19106f373e22284611e0a17e7e4ffc",
   "created_at": "2025-05-19T21:30:45.242Z",
-  "updated_at": "2026-04-07T19:35:04.965Z",
+  "updated_at": "2026-04-08T09:50:35.785Z",
   "comment": {
     "text": "The FileActionRequired translation key is used to display a message indicating that a file already exists at the destination, prompting the user to take alternative action. It appears in a conflict resolution dialog and button labels, providing context for translators on how to handle existing files during file actions.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The React Trans tags are inverted/malformed. The opening tag should be <1> and the closing tag should be </1>. In the Arabic translation, they are swapped: «</1>{{fileName}}<1>».",
+          "suggestion": "الوجهة تحتوي بالفعل على ملف اسمه «<1>{{fileName}}</1>»."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -205,6 +211,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The closing tag </1> is missing in the Chinese translation.",
+          "suggestion": "目标位置中已存在名«<1>{{fileName}}</1>»的文件。"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

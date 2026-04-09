@@ -3,7 +3,7 @@
   "content": "The theme will be deleted permanently. You will not be able to undo this action.",
   "content_en_sha1_hash": "89de4916763e50db57e9c3297007140e4b618d60",
   "created_at": "2025-05-19T21:30:51.158Z",
-  "updated_at": "2026-04-07T19:35:05.197Z",
+  "updated_at": "2026-04-09T03:28:08.346Z",
   "comment": {
     "text": "This translation key is used to display a warning message when deleting a theme permanently. It appears as part of a modal dialog in the Portal Settings page, prompting the user not to undo the action once confirmed.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

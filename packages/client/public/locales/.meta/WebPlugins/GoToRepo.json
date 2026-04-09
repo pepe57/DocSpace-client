@@ -3,7 +3,7 @@
   "content": "Go to repository",
   "content_en_sha1_hash": "7cec9604549289db044b7db17751318a97d2170a",
   "created_at": "2025-05-19T21:30:49.909Z",
-  "updated_at": "2026-04-07T19:35:05.227Z",
+  "updated_at": "2026-04-08T18:44:53.371Z",
   "comment": {
     "text": "The translation key \"GoToRepo\" represents the English content \"Go to repository\", used as a button label in a portal settings page, prompting users to open a repository in their default browser.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation specifies a specific platform ('GitHub') instead of the generic 'repository' mentioned in the English source. This limits the functionality if the repository is hosted elsewhere (e.g., GitLab, Bitbucket).",
+          "suggestion": "Vai al repository"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Acces depozit' means 'Repository access' (a noun phrase), whereas the English 'Go to repository' is an imperative action/command for a button.",
+          "suggestion": "Mergi la depozit"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'කෝෂ්ඨය' (Kōṣṭhaya) refers to a biological cavity, a stomach, or a cell in a botanical context. It is not the correct technical term for a software 'repository'.",
+          "suggestion": "රිපොසිටරිය වෙත යන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Statistics",
   "content_en_sha1_hash": "2086b21f8f49274138c38d476bee317a84a8aecc",
   "created_at": "2025-05-19T21:30:52.769Z",
-  "updated_at": "2026-04-07T19:35:05.211Z",
+  "updated_at": "2026-04-09T00:51:07.247Z",
   "comment": {
     "text": "The \"Statistics\" translation key is used to display a title for a page that displays statistical information about storage management. It likely appears on a button or heading within a portal settings category page. The translation should reflect the specific context in which it will be displayed.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

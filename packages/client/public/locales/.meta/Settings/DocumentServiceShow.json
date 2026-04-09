@@ -3,7 +3,7 @@
   "content": "Show",
   "content_en_sha1_hash": "d97d1ee339e4eeaba8cac91dca37c8b4ec8f5501",
   "created_at": "2025-05-19T21:30:51.426Z",
-  "updated_at": "2026-04-07T19:35:05.199Z",
+  "updated_at": "2026-04-09T03:07:42.097Z",
   "comment": {
     "text": "This translation key is used to display a label for a toggle button that controls whether advanced document service settings are shown or hidden. It appears as part of a UI element and changes its text based on the current state of the setting. The translator should focus on creating a clear, concise label that accurately reflects the purpose of this setting in the PortalSettings page.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

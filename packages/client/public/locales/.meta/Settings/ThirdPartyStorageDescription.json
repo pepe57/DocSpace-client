@@ -3,7 +3,7 @@
   "content": "Backup can be saved to a third-party storage. Before, you need to connect the corresponding service in the 'Integration' section. Otherwise, the following settings will be inactive.",
   "content_en_sha1_hash": "5e6be94c1952c34628c180bcbab06fe0c10d622a",
   "created_at": "2025-05-19T21:30:52.927Z",
-  "updated_at": "2026-04-07T19:35:05.213Z",
+  "updated_at": "2026-04-09T00:32:11.854Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -44,7 +44,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"r\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -68,13 +74,25 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Auparavant' (meaning 'previously' or 'beforehand' in a temporal sense) is used incorrectly. In this context, 'Before' implies a prerequisite action ('First' or 'Prior to this'), whereas 'Auparavant' suggests something that happened in the past.",
+          "suggestion": "La sauvegarde peut être enregistrée sur un stockage tiers. Au préalable, vous devez connecter le service correspondant dans la section « Intégration ». Sinon, les paramètres suivants seront désactivés."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Integration' is translated as 'Ամբողջացում' (Completion/Supplement), which is incorrect in a technical context. It should be 'Ինտեգրացում'.",
+          "suggestion": "Պահուստավորումը կարող է պահվել երրորդ կողմի պահեստում: Նախապես պետք է միացնեք համապատասխան ծառայությունը 'Ինտեգրացում' բաժնում: Հակառակ դեպքում, հետևյալ կարգավորումներն անգործուն կլինեն:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -195,6 +213,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation conveys a completely different meaning. The English text explains the prerequisite of connecting a service in the 'Integration' section to enable backup settings, whereas the Albanian text describes how to use third-party services and create/select folders.",
+          "suggestion": "Ruajtja mund të ruhet në një ruajtje të palëve të treta. Para kësaj, duhet të lidhni shërbimin përkatës në seksionin 'Integrimi'. Përndryshe, cilësimet e mëposhtme do të jenë joaktive."
+        }
+      ],
       "approved_at": null
     }
   }

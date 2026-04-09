@@ -3,7 +3,7 @@
   "content": "Comment",
   "content_en_sha1_hash": "153d7a58b3a3e898fcbdd04c462af308414bd09d",
   "created_at": "2025-05-19T21:30:43.541Z",
-  "updated_at": "2026-04-07T19:35:04.947Z",
+  "updated_at": "2026-04-08T15:12:02.032Z",
   "comment": {
     "text": "This translation key is used for the label of a comment feature in a share component. It appears on a button or similar UI element where users can add comments to a shared item. The translation should be used for text related to commenting on a file or document.",
     "is_auto": true,
@@ -229,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

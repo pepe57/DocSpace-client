@@ -3,7 +3,7 @@
   "content": "Files will be compressed into the <strong>.zip file</strong>",
   "content_en_sha1_hash": "a3f20fa0332e521b74d0bff520f9e7c6989dbd5d",
   "created_at": "2025-05-19T21:30:43.719Z",
-  "updated_at": "2026-04-07T19:35:04.950Z",
+  "updated_at": "2026-04-08T14:22:47.266Z",
   "comment": {
     "text": "This translation key is used to describe the action of compressing files into a zip file. It appears in a download dialog when selecting a format for downloaded files, and its purpose is to inform users about the outcome of their choice.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation omits the specific mention of '.zip', which is a key technical detail in the English source.",
+          "suggestion": "سيتم ضغط الملفات في <strong>.zip</strong>"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation is grammatically awkward and uses a passive structure ('compression will occur') that sounds unnatural for a UI notification. More importantly, the placement of the HTML tag inside the noun phrase makes the sentence structure broken.",
+          "suggestion": "ගොනු <strong>.zip ගොනුවක් ලෙස</strong> සම්පීඩනය කරනු ඇත"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +195,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The closing </strong> tag is placed incorrectly, causing the word 'dosyasına' to be outside the strong tag, whereas in English '.zip file' is inside the strong tag.",
+          "suggestion": "<strong>Dosyalar .zip dosyasına</strong> sıkıştırılacak"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

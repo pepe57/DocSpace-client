@@ -3,7 +3,7 @@
   "content": "Your data is stored on a secure server that complies with security standards.",
   "content_en_sha1_hash": "a29910cda24c088b302d94ab3b631c5051689c15",
   "created_at": "2025-05-19T21:30:52.788Z",
-  "updated_at": "2026-04-07T19:35:05.211Z",
+  "updated_at": "2026-04-09T00:48:59.871Z",
   "comment": {
     "text": "This translation key is used to display a security-related message about data storage on a secure server. It appears in the PortalSettings category and is likely used as a tooltip or label.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

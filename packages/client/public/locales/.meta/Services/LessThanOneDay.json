@@ -3,7 +3,7 @@
   "content": "<1 day",
   "content_en_sha1_hash": "96d213784a1611112253ee714571c9ff72ac1aca",
   "created_at": "2026-03-20T09:07:40.770Z",
-  "updated_at": "2026-03-26T08:26:58.237Z",
+  "updated_at": "2026-04-09T05:08:30.663Z",
   "comment": {
     "text": "Displays the text \"<1 day\" when the storage expiry is less than one day. This appears in the Order Summary panel within Portal Settings, specifically related to displaying remaining storage duration. Translators should maintain the \"<\" and \">\" symbols.",
     "is_auto": true,
@@ -22,6 +22,356 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "extra_tag",
+          "description": "Extra tag(s) not in English: </N>",
+          "suggestion": ""
+        },
+        {
+          "type": "missing_tag",
+          "description": "The opening tag '<1' is present, but the corresponding closing tag '</1>' is missing. Instead, an incorrect closing tag '</N>' is used.",
+          "suggestion": "<1 gün</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "extra_tag",
+          "description": "Extra tag(s) not in English: </N>",
+          "suggestion": ""
+        },
+        {
+          "type": "missing_tag",
+          "description": "The opening tag '<1' is present in the English source but is missing in the Czech translation. Only the closing tag '</N>' is present.",
+          "suggestion": "<1 den</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '1 Tag' means '1 day', whereas the English source '<1 day' means 'less than 1 day'. The mathematical symbol '<' is missing, which changes the meaning from 'less than' to 'exactly'.",
+          "suggestion": "<1 Tag"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "extra_tag",
+          "description": "Extra tag(s) not in English: </N>",
+          "suggestion": ""
+        },
+        {
+          "type": "missing_tag",
+          "description": "The opening tag '<1' is present but the corresponding closing tag '</1>' is missing. Instead, a non-existent tag '</N>' was used.",
+          "suggestion": "<1 jour</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The mathematical symbol '<' (less than) is missing from the translation, which is essential to convey the meaning 'less than 1 day'.",
+          "suggestion": "<1>օր</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The mathematical symbol '<' from the English source is missing in the Italian translation.",
+          "suggestion": "<1>giorno</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The English text contains a '<' symbol which is part of the meaning, but the Japanese translation uses '<1>...</1>' tags, effectively treating the '<' as the start of a tag rather than a mathematical symbol. This results in the loss of the '<' character in the rendered UI.",
+          "suggestion": "<1<日</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '<1>일</1>' means '1 day' (or simply 'day'), whereas the English source '<1 day' indicates a duration of less than one day. The mathematical symbol '<' is missing or misinterpreted as a tag.",
+          "suggestion": "<1일 미만"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The mathematical symbol '<' is missing from the translation. The translator interpreted '<1>' as a tag rather than a 'less than' symbol followed by the number 1.",
+          "suggestion": "<1 ມື້"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The mathematical symbol '<' (less than) is missing from the translation.",
+          "suggestion": "<1>dienu</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '<1>dag</1>' means '1 day', whereas the English source '<1 day' means 'less than 1 day'. The mathematical symbol '<' is missing.",
+          "suggestion": "<1 dag</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The mathematical symbol '<' is missing from the translation. The translator interpreted it as a tag start instead of a literal character.",
+          "suggestion": "<1 dzień</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The mathematical symbol '<' is missing from the translation. The English text is '<1 day', but the Portuguese translation is '<1>dia</1>', which treats the '<' as the start of a tag rather than a literal character.",
+          "suggestion": "<1 dia</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The mathematical symbol '<' (less than) is missing from the translation, which is essential to convey the meaning 'less than 1 day'.",
+          "suggestion": "<1 dia</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The mathematical symbol '<' (less than) is missing from the translation, which is essential to convey the meaning 'less than 1 day'.",
+          "suggestion": "<1>zi</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The mathematical symbol '<' (less than) is missing from the translation, which is essential to convey the meaning 'less than 1 day'.",
+          "suggestion": "<1 දිනක්</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The mathematical symbol '<' is missing from the translation. The English text is '<1 day', but the Slovak translation is '<1>deň</1>', which treats the '<' as part of a tag rather than a literal character.",
+          "suggestion": "<1 deň"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The mathematical symbol '<' is missing from the translation. The translator interpreted '<1>' as a tag rather than a 'less than' operator followed by the number 1.",
+          "suggestion": "<1 dan"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The mathematical symbol '<' is missing from the translation. The translator interpreted '<1>' as a tag rather than a 'less than' operator followed by the number 1.",
+          "suggestion": "<1 ditë"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The mathematical symbol '<' from the English source is missing in the Serbian translation. The translator likely misinterpreted '<1' as a tag structure rather than a 'less than' operator.",
+          "suggestion": "<1 dan</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '<1>gün</1>' means '1 day' (or just 'day'), whereas the English source '<1 day' indicates a duration of less than one day. The mathematical symbol '<' is missing or misinterpreted as a tag.",
+          "suggestion": "<1 gün"
+        },
+        {
+          "type": "missing_tag",
+          "description": "The English source uses '<' as a mathematical symbol, but the Turkish translation treats it as the start of a React tag '<1>', which is not present in the source. Conversely, the source's mathematical '<' is missing.",
+          "suggestion": "<1 gün"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The mathematical symbol '<' is missing from the translation. The translator incorrectly interpreted '<1' as a tag '<1>', resulting in the loss of the 'less than' operator.",
+          "suggestion": "<1 день</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The mathematical symbol '<' from the English source is missing in the Vietnamese translation. The translator incorrectly interpreted '<1' as a tag '<1>' instead of a 'less than' operator followed by the number 1.",
+          "suggestion": "<1 ngày"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The mathematical symbol '<' is missing from the translation. The translator interpreted '<1>' as a React tag instead of preserving the literal '<' character required by the context.",
+          "suggestion": "<1天</1>"
+        }
+      ],
       "approved_at": null
     }
   }

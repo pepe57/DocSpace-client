@@ -3,7 +3,7 @@
   "content": "The destination already contains files and folders with the same name.",
   "content_en_sha1_hash": "c342c02419e200d1d798c694ecfc21ddc3b9d5a4",
   "created_at": "2025-05-19T21:30:45.288Z",
-  "updated_at": "2026-04-07T19:35:04.966Z",
+  "updated_at": "2026-04-08T09:34:21.811Z",
   "comment": {
     "text": "This translation key is used to display a message when a user attempts to add files or folders to a destination that already contains items with the same name. It appears in a conflict resolution dialog box, indicating that an overwrite option may be available.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

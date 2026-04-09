@@ -3,7 +3,7 @@
   "content": "Form Filling Room",
   "content_en_sha1_hash": "ce16b03553997eee69758275d881c1e1971387c2",
   "created_at": "2025-05-19T21:30:45.511Z",
-  "updated_at": "2026-04-07T19:35:04.968Z",
+  "updated_at": "2026-04-08T08:49:52.445Z",
   "comment": {
     "text": "This translation key is used to display the title \"Form Filling Room\" in various UI elements. It is typically displayed on a room type selection filter or as a label in developer tools, and its purpose is to provide a clear indication of the form-filling function.",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '양식 작성 룸에서' includes the particle '에서' (meaning 'in' or 'at'), which turns the title into a phrase meaning 'In the Form Filling Room'. As a UI label/title, it should be a noun phrase without the locative particle.",
+          "suggestion": "양식 작성 룸"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Sală Completare formular' is grammatically incorrect and sounds like a literal word-for-word translation. In Romanian, 'Sală' (Room) requires a preposition or a different structure to connect with 'Completare formular' (Form filling). It should be 'Sală de completare a formularului' or 'Sală pentru completarea formularului' to be semantically correct.",
+          "suggestion": "Sală de completare a formularului"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -211,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

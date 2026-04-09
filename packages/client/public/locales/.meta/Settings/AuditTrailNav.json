@@ -3,7 +3,7 @@
   "content": "Audit Trail",
   "content_en_sha1_hash": "e01eacc119b7bc154d3fc47e8d5dca2a54b1af3f",
   "created_at": "2025-05-19T21:30:50.600Z",
-  "updated_at": "2026-04-07T19:35:05.192Z",
+  "updated_at": "2026-04-09T04:08:48.580Z",
   "comment": {
     "text": "This translation key is used as a title for an audit trail section within the Portal Settings. It appears in the security category of the portal settings page and is also referenced when initializing the audit trail functionality. Translators should provide a clear and concise title that reflects the purpose of this section in English.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Audit izi' is a literal, word-for-word translation of 'Audit trail' that does not make sense in Azerbaijani technical terminology. 'İzi' (trace/track) is used incorrectly here; the standard technical term for an audit trail in Azerbaijani is 'Audit jurnalı' (Audit log) or 'Audit izləməsi'.",
+          "suggestion": "Audit jurnalı"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,7 +63,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation is identical to the English text, failing to translate the term into the target language.",
+          "suggestion": "Auditní stopa"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -141,7 +153,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Auditar o Rastro' uses a verb phrase ('To audit the trail') instead of a noun phrase ('Audit Trail'). In a UI context for a section title, it should be a noun.",
+          "suggestion": "Trilha de Auditoria"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -165,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'විගණන මඟ' (Audit Path/Way) is a literal translation of 'Audit Trail' that sounds unnatural in a technical software context. In IT/Security, 'Audit Trail' refers to a chronological record of activities, which is better translated as 'විගණන සටහන' (Audit Record) or 'විගණන වාර්තාව' (Audit Log/Report).",
+          "suggestion": "විගණන සටහන"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -201,7 +225,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Перевірка аудиту' means 'Audit verification' or 'Checking the audit', which changes the meaning from 'Audit Trail' (a chronological record of activities).",
+          "suggestion": "Журнал аудиту"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -211,6 +241,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

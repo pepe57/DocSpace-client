@@ -3,7 +3,7 @@
   "content": "Without group",
   "content_en_sha1_hash": "dc36e9d839743af09b6557e23bb0d67592f68ae5",
   "created_at": "2025-05-19T21:30:53.534Z",
-  "updated_at": "2026-04-07T19:35:05.179Z",
+  "updated_at": "2026-04-09T07:19:16.698Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Without group\" in a filter or dropdown list, likely within a contact filtering system. It appears on a filter option button or dialog, where it enables users to select contacts without any group affiliation.",
     "is_auto": true,
@@ -205,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

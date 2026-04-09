@@ -3,7 +3,7 @@
   "content": "{{selectedUsers}}/{{importedUsers}} users were imported successfully.",
   "content_en_sha1_hash": "04dc717736a56bbad5ee1b15ee74f64a7f797b7e",
   "created_at": "2025-05-19T21:30:51.642Z",
-  "updated_at": "2026-04-07T19:35:05.202Z",
+  "updated_at": "2026-04-09T02:54:01.275Z",
   "comment": {
     "text": "This translation key is used to display a success message when importing users in the Portal Settings. It shows the total number of imported users and indicates that some users were successfully imported. The translated text appears on an info text element within an import complete step component.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'входирани' is a non-existent word in Bulgarian (likely a calque from 'imported'). The correct term for importing data/users is 'импортирани'.",
+          "suggestion": "{{selectedUsers}}/{{importedUsers}} потребители бяха импортирани успешно."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -63,7 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'se ha importado' is singular, but the subject 'usuarios' is plural. This is a grammatical error that affects the accuracy of the sentence structure.",
+          "suggestion": "{{selectedUsers}}/{{importedUsers}} usuarios se han importado correctamente."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -75,7 +87,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Gender agreement error: 'utilisateurs' is masculine, but the past participle 'importées' is feminine. This changes the grammatical correctness of the noun it refers to.",
+          "suggestion": "{{selectedUsers}}/{{importedUsers}} utilisateurs ont été importés avec succès."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -99,7 +117,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean verb '가져오기했습니다' is grammatically incorrect and awkward. '가져오기' is a noun (importing), and combining it directly with '했습니다' is unnatural. It should use the verb form '가져왔습니다' or '가져오기에 성공했습니다' to convey 'were imported successfully'.",
+          "suggestion": "{{selectedUsers}}/{{importedUsers}} 사용자를 성공적으로 가져왔습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'පරිශ්‍රීලකයින්' (parishrilakayin) is a misspelling/incorrect word for 'users'. The correct term is 'පරිශීලකයින්' (parishilakayin).",
+          "suggestion": "{{selectedUsers}}/{{importedUsers}} පරිශීලකයින් සාර්ථකව ආයාත කෙරිණි."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

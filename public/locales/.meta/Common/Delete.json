@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2026-04-07T19:35:04.955Z",
+  "updated_at": "2026-04-08T12:22:55.671Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete\" on a button in a file editor component, specifically within an avatar cropper. It appears as a button's text and title, allowing users to confirm deletion of an image.",
     "is_auto": true,
@@ -291,7 +291,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation 'Silin' is an imperative command meaning 'Delete!' (plural/formal) or 'Be deleted', whereas for a button label, the infinitive/noun form 'Sil' is the standard and correct way to express the action 'Delete'.",
+          "suggestion": "Sil"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -457,6 +463,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

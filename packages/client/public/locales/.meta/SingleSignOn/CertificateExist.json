@@ -3,7 +3,7 @@
   "content": "Certificate with same action type already exists",
   "content_en_sha1_hash": "9973f20d2024018f1ead9a6896ef807f27346f7c",
   "created_at": "2025-05-19T21:30:50.070Z",
-  "updated_at": "2026-04-07T19:35:05.218Z",
+  "updated_at": "2026-04-08T23:35:29.302Z",
   "comment": {
     "text": "\"This translation key is used to display an error message when a certificate with the same action type already exists. It appears in forms or UI elements that allow users to create or edit certificates, such as the SSO form store.\"",
     "is_auto": true,
@@ -147,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is provided in German instead of Romanian.",
+          "suggestion": "Există deja un certificat cu același tip de acțiune"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -205,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

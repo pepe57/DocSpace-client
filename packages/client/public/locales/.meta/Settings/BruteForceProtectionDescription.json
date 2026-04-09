@@ -3,7 +3,7 @@
   "content": "Set up the limit of unsuccessful login attempts by the user to protect the space against brute-force attacks. When the limit is reached, attempts coming from the associated IP address will be banned for specified period of time, or captcha will be requested if enabled.",
   "content_en_sha1_hash": "8d779beeb43e299e317c89a6b51492bc342a5d56",
   "created_at": "2025-05-19T21:30:50.827Z",
-  "updated_at": "2026-04-07T19:35:05.192Z",
+  "updated_at": "2026-04-09T04:01:12.410Z",
   "comment": {
     "text": "This translation key describes the description text that appears on a security setting page, explaining how brute-force protection works and its purpose in limiting unsuccessful login attempts to protect against attacks. It informs users about the action taken when the limit is reached (banning or displaying a CAPTCHA).",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'space' (referring to the ONLYOFFICE DocSpace) was incorrectly translated as 'Domeni' (Domain). This changes the technical context of the product.",
+          "suggestion": "İstifadəçi uğursuz giriş cəhdlərinin limitini təyin edin ki, bu da sahəni (space) brute-force hücumlarından qoruya bilsin. Limitə çatdıqdan sonra müvafiq IP ünvanından gələn cəhdlər müəyyən müddətə qadağan ediləcək və ya aktiv olduqda captcha tələb olunacaq."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'brute-force attacks' is translated as 'väsytyshyökkäyksiltä' (DDoS/exhaustion attacks), which is technically incorrect in a security context. The correct term for brute-force is 'brute-force-hyökkäyksiltä' or 'arvaushyökkäyksiltä'.",
+          "suggestion": "Aseta epäonnistuneiden sisäänkirjautumisyritysten raja suojautuaksesi brute-force-hyökkäyksiltä. Kun raja on saavutettu, kyseisestä IP-osoitteesta tulevat yritykset kielletään tietyksi ajaksi tai captcha pyydetään, jos se on käytössä."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'unsuccessful login attempts' is 'තැත් කළ හැකි වාර ගණන' (number of times one can attempt), which implies successful attempts or general attempts, rather than specifically 'unsuccessful' (failed) attempts. This changes the security context.",
+          "suggestion": "බෲට් ෆෝර්ස් ප්‍රහාර වලින් අවකාශය රැක ගැනීමට පරිශීලකයාට අසාර්ථක විය හැකි ලොගින් වාර ගණන සීමා කරන්න. සීමාවට ළඟා වූ විට, අදාළ අ.ජා.කෙ. (IP) ලිපිනය නිශ්චිත කාලයකට තහනම් වනු ඇත හෝ සබල කර ඇත්නම් කැප්චා අභියෝගයක් පෙන්වනු ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

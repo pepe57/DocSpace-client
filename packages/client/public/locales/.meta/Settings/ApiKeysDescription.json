@@ -3,7 +3,7 @@
   "content": "As an owner/admin you can view and manage all API keys in this {{productName}}.",
   "content_en_sha1_hash": "5593ee7bc8d8372051b5728cbe1f5f45794ca38f",
   "created_at": "2025-05-19T21:30:50.545Z",
-  "updated_at": "2026-04-07T19:35:05.191Z",
+  "updated_at": "2026-04-09T04:12:41.689Z",
   "comment": {
     "text": "This translation key is used for describing API keys management features within a portal settings page. It will be displayed to owners/admins as a tooltip or description in the UI. The context suggests it appears on a page related to developer tools and settings.",
     "is_auto": true,
@@ -69,7 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_variable",
+          "description": "The variable {{productName}} has an extra space before the suffix ':ssa', which breaks the exact string matching required for the variable token.",
+          "suggestion": "Omistajana/pääkäyttäjänä voit katsella ja hallita kaikkia API-avaimia tässä {{productName}}:ssa."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -99,7 +105,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation changes the subject from 'As an owner/admin' (the user's role) to 'API key owner/admin' (a specific role for the keys), which alters the intended meaning of the permission description.",
+          "suggestion": "소유자/관리자로서 이 {{productName}}의 모든 API 키를 확인 및 관리할 수 있습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'all' (toate) is missing from the Romanian translation, which changes the scope of the permission described.",
+          "suggestion": "În calitate de proprietar/administrator puteți vedea și gestiona toate cheile API în {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

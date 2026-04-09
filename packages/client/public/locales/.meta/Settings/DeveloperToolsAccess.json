@@ -3,7 +3,7 @@
   "content": "Developer Tools section",
   "content_en_sha1_hash": "8e2edfe027bccc66916acfd0ca199bbf466f8f61",
   "created_at": "2025-05-19T21:30:51.166Z",
-  "updated_at": "2026-04-07T19:35:05.197Z",
+  "updated_at": "2026-04-09T03:27:15.875Z",
   "comment": {
     "text": "The \"DeveloperToolsAccess\" translation key is used to display the title and description of a section in the Portal Settings application. This text appears as a category title and brief description within a settings page, providing context about developer tools access.",
     "is_auto": true,
@@ -39,37 +39,73 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation 'وصول محدود إلى أدوات المطورين' means 'Limited access to developer tools', which changes the meaning from the English 'Developer Tools section'.",
+          "suggestion": "قسم أدوات المطورين"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Məhdud Tərtibatçı alətlərinə giriş' means 'Access to Limited Developer tools', which adds the word 'Limited' (Məhdud) and 'Access' (giriş) not present in the source 'Developer Tools section'.",
+          "suggestion": "Tərtibatçı alətləri bölməsi"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation 'Ограничен достъп до Програмни инструменти' means 'Limited access to Developer Tools', which changes the meaning from the English 'Developer Tools section'.",
+          "suggestion": "Раздел „Програмни инструменти“"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation adds the meaning 'Limited access to' (Omezený přístup k), which is not present in the English source 'Developer Tools section'.",
+          "suggestion": "Sekce nástrojů pro vývojáře"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation 'Eingeschränkter Zugriff auf Entwicklertools' means 'Restricted access to developer tools', which changes the meaning from the English 'Developer Tools section'.",
+          "suggestion": "Abschnitt Entwicklertools"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation means 'Limited access to developer tools', whereas the English text is 'Developer Tools section'. The translation adds a restrictive meaning ('Limited access') that is not present in the source.",
+          "suggestion": "Ενότητα εργαλείων προγραμματιστή"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -81,37 +117,73 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation means 'Limited developer tools permissions' instead of 'Developer Tools section'. It changes the subject from a UI section/category to a specific permission type.",
+          "suggestion": "Kehittäjätyökalujen osio"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 'Accès limité aux outils de développement' (Limited access to developer tools) changes the meaning from a neutral section title 'Developer Tools section' to a statement about restricted access.",
+          "suggestion": "Section des outils de développement"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation means 'Limited access to developer tools' instead of 'Developer Tools section'. It introduces the concept of 'limited access' which is not present in the English source.",
+          "suggestion": "Ծրագրավորողի գործիքների բաժին"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation 'Accesso limitato agli strumenti per sviluppatori' means 'Access limited to developer tools', which changes the meaning from a section title ('Developer Tools section') to a statement about access restriction.",
+          "suggestion": "Sezione strumenti per sviluppatori"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation means 'Access to restricted developer tools', which adds the word 'restricted' (制限された) not present in the English source 'Developer Tools section'.",
+          "suggestion": "開発者ツールセクション"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '제한된 개발자 도구 액세스' means 'Restricted developer tools access', whereas the English source is 'Developer Tools section'. The translation adds the concept of 'restriction' which is not present in the source text.",
+          "suggestion": "개발자 도구 섹션"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -123,7 +195,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation means 'Limited access to Developer Tools', whereas the English text is 'Developer Tools section'. The translation adds a concept of 'limitation' that is not present in the source.",
+          "suggestion": "Izstrādātāja rīku sadaļa"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -135,31 +213,61 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation 'Ograniczony dostęp do narzędzi dla programistów' means 'Limited access to developer tools', which adds the word 'Limited' (Ograniczony) not present in the English source 'Developer Tools section'.",
+          "suggestion": "Sekcja narzędzi dla programistów"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Acesso Limitado às Ferramentas do Programador' (Limited Access to Developer Tools) adds the concept of 'Limited', which is not present in the English source 'Developer Tools section'.",
+          "suggestion": "Seção de Ferramentas do Desenvolvedor"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Acesso limitado às ferramentas do desenvolvedor' (Limited access to developer tools) changes the meaning from a section title 'Developer Tools section' to a statement about access restrictions.",
+          "suggestion": "Seção de ferramentas do desenvolvedor"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Acces limitat la Instrumente pentru dezvoltatori' means 'Limited access to Developer Tools', which changes the meaning from the English 'Developer Tools section'.",
+          "suggestion": "Secțiunea Instrumente pentru dezvoltatori"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Russian translation adds the meaning 'Limited access' (Ограниченный доступ), which is not present in the English source 'Developer Tools section'.",
+          "suggestion": "Раздел инструментов разработчика"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -171,46 +279,100 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation adds 'Obmedzený prístup k' (Limited access to), which changes the meaning from a simple section title ('Developer Tools section') to a statement about access restriction.",
+          "suggestion": "Sekcia nástrojov pre vývojárov"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation 'Omejen dostop do orodij za razvijalce' means 'Limited access to developer tools', which adds the word 'Limited' (Omejen) not present in the English source 'Developer Tools section'.",
+          "suggestion": "Razdelek orodij za razvijalce"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ограничен приступ алаткама за програмере' means 'Limited access to developer tools', which changes the meaning from a section title ('Developer Tools section') to a status or permission description.",
+          "suggestion": "Одељак алата за програмере"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ograničen pristup alatkama za programere' means 'Limited access to developer tools', which changes the meaning from a section title 'Developer Tools section' to a statement about restricted access.",
+          "suggestion": "Odeljak sa alatima za programere"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Sınırlı Geliştirici Araçları erişimi' means 'Limited Developer Tools access', whereas the English source is 'Developer Tools section'. The word 'Sınırlı' (Limited) adds a meaning not present in the source.",
+          "suggestion": "Geliştirici Araçları bölümü"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation 'Обмежений доступ до інструментів розробника' means 'Limited access to developer tools', which changes the meaning from the English 'Developer Tools section'.",
+          "suggestion": "Розділ інструментів розробника"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation adds significant meaning ('có giới hạn' - 'is limited') that is not present in the English source text. The source is a simple title, while the translation is a full sentence describing a state.",
+          "suggestion": "Phần Công cụ dành cho Nhà phát triển"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Chinese translation '受限的开发者工具访问' means 'Restricted access to developer tools', which changes the meaning from the English 'Developer Tools section'. The English text describes a UI section/category, whereas the Chinese text describes a security state or permission level.",
+          "suggestion": "开发者工具部分"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

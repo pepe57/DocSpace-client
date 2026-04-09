@@ -3,7 +3,7 @@
   "content": "Change user permissions to the invited people or <1>upgrade your tariff plan</1>.",
   "content_en_sha1_hash": "705615763dac8d26542430d6b695dfd3240f2b32",
   "created_at": "2025-05-19T21:30:43.428Z",
-  "updated_at": "2026-04-07T19:35:04.945Z",
+  "updated_at": "2026-04-08T15:41:41.507Z",
   "comment": {
     "text": "This translation key is used to display a message that allows users to change their permissions or upgrade their tariff plan when invited to join an account. The text appears as a button label in the Invite Panel component. Translators should provide a clear and concise version of this phrase for internationalization purposes.",
     "is_auto": true,
@@ -81,13 +81,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "There is an extra space inside the opening tag '<1> ' which can break the rendering or link functionality in some environments.",
+          "suggestion": "Փոխեք օգտատիրոջ թույլտվությունները հրավիրված մարդկանց կամ <1>թարմացրեք ձեր սակագնային պլանը</1>."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Cambia le autorizzazioni per gli utenti per le persone invitate' is redundant and grammatically incorrect in Italian. It translates to 'Change the permissions for the users for the invited people', which adds unnecessary words ('per gli utenti') not present in the English source and creates a confusing sentence structure.",
+          "suggestion": "Cambia i permessi delle persone invitate o <1>fai l’upgrade del tuo piano tariffario</1>."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation contains a redundant 'sau' (or) inside the tagged section, which creates a double 'or' structure ('...sau sau selectați...') when combined with the first 'sau'.",
+          "suggestion": "Schimbaţi permisiuni de acces acordate invitaților sau <1>selectaţi un alt plan tarifar</1>."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The opening tag <1> has an extra space before the text, which can affect the rendering of the link component in some UI frameworks, and more importantly, the tag structure is slightly malformed due to the spacing inside the tag brackets.",
+          "suggestion": "Промените дозволе корисницима које сте позвали или <1>надоградите свој тарифни план</1>."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,10 +219,28 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation 'Thay đổi quyền của người dùng thành những người được mời' incorrectly implies changing the user's permissions *into* the invited people, rather than changing the permissions *of* the invited people.",
+          "suggestion": "Thay đổi quyền của những người được mời hoặc <1>nâng cấp gói dịch vụ của bạn</1>."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '将用户权限修改为受邀人员' (Change user permissions to the invited people) is semantically incorrect. In English, it means 'Change the permissions OF the invited people', whereas the Chinese version implies changing the permissions INTO the people themselves.",
+          "suggestion": "修改受邀人员的用户权限或<1>升级您的套餐方案</1>。"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

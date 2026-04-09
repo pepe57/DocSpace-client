@@ -3,7 +3,7 @@
   "content": "{{count}} per page",
   "content_en_sha1_hash": "f07055bdc1868a249738e0fb89860a79c00f399e",
   "created_at": "2025-05-19T21:30:43.819Z",
-  "updated_at": "2026-04-07T19:35:04.951Z",
+  "updated_at": "2026-04-08T14:03:17.165Z",
   "comment": {
     "text": "This translation key is used to display the pagination count per page. It should be translated to appear as \"{{count}} items per page\". This text appears in UI elements related to data import and filtering options, typically on a settings or configuration page.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation includes a trailing comma which is not present in the English source and is likely a typo.",
+          "suggestion": "{{count}} sivua kohti"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -123,7 +129,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Latvian translation is missing a space between the variable '{{count}}' and the following word 'vienā', which will cause the number and text to merge (e.g., '25vienā lapā').",
+          "suggestion": "{{count}} vienā lapā"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -211,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

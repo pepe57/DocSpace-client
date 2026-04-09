@@ -3,7 +3,7 @@
   "content": "{{organizationName}} Documents",
   "content_en_sha1_hash": "db01b8765ec0bbda9628a90d2f7c09d5e66f8c63",
   "created_at": "2025-05-19T21:30:50.041Z",
-  "updated_at": "2026-04-07T19:35:05.223Z",
+  "updated_at": "2026-04-08T22:07:15.408Z",
   "comment": {
     "text": "This translation key is used to display the title of a smart banner component on mobile devices. It will be translated as \"{{organizationName}} Documents\" and appears in the banner's title field when displayed on touch-enabled devices.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

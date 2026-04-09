@@ -3,7 +3,7 @@
   "content": "Add user to room",
   "content_en_sha1_hash": "9b33734023adbd4635df41d1fc1c3a3c350ea343",
   "created_at": "2025-05-19T21:30:42.944Z",
-  "updated_at": "2026-04-07T19:35:04.937Z",
+  "updated_at": "2026-04-08T17:44:50.773Z",
   "comment": {
     "text": "This translation key is used for the text \"Add user to room\", which is a button label displayed in a UI element. The button triggers an action related to adding a user to a room, and this phrase is intended to be clear and concise for users.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation uses the locative case 'սենյակում' (in the room) instead of the directive/accusative case 'սենյակին' (to the room), which changes the meaning from 'Add user TO room' to 'Add user IN room'.",
+          "suggestion": "Ավելացնել օգտատիրոջը սենյակին"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Change the space address that appears next to {{ domain }}.",
   "content_en_sha1_hash": "a7117de6c5149e0cb5b59057f4fa245e0e895b19",
   "created_at": "2025-05-19T21:30:52.262Z",
-  "updated_at": "2026-04-07T19:35:05.206Z",
+  "updated_at": "2026-04-09T01:58:41.933Z",
   "comment": {
     "text": "Change the space address that appears next to {{ domain }}. This translation is used to display a descriptive text in a portal settings page, likely on a button or similar UI element, informing users about the customization option for renaming the domain's space address.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation translates 'space address' as 'domen ünvanı' (domain address), which is redundant and technically inaccurate since the variable {{ domain }} already represents the domain. The English text refers to the 'space address' (the part after the domain).",
+          "suggestion": "{{ domain }} yanında görünən məkan ünvanını dəyişdirin."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'pe lângă de' is grammatically incorrect in Romanian and creates a nonsensical meaning. 'Pe lângă' means 'besides' or 'next to', but adding 'de' makes it incorrect. Furthermore, 'pe lângă {{ domain }}' implies the address is physically next to the domain, whereas the English 'next to {{ domain }}' in a URL context refers to the path following the domain.",
+          "suggestion": "Schimbați adresa spațiului care apare după {{ domain }}."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -199,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

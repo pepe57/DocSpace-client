@@ -3,7 +3,7 @@
   "content": "Select {{productName}} roles for the imported users: <1>{{productName}} admin</1>, <1>Room admin</1> or <1>User</1>. By default, User role is selected for each user. You can manage the roles after the import.",
   "content_en_sha1_hash": "e90aa9f2a0e200f361dff9163df3131462ddc07f",
   "created_at": "2025-05-19T21:30:52.598Z",
-  "updated_at": "2026-04-07T19:35:05.209Z",
+  "updated_at": "2026-04-09T01:15:35.815Z",
   "comment": {
     "text": "\"This translation key describes a message that appears in the data import process for Google Workspace, Nextcloud Workspace, and Onlyoffice Workspace. It instructs users to select roles (admin, Room admin, or User) for imported users, explaining that User role is selected by default.\"",
     "is_auto": true,
@@ -51,13 +51,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The verb 'Select' (اختر) is missing at the beginning of the sentence, making the sentence fragment '{{productName}} for the imported users' instead of 'Select {{productName}} roles for the imported users'.",
+          "suggestion": "{{productName}} للمستخدمين المستوردين: اختر أدوار {{productName}}: <1>مشرف {{productName}}</1>، <1>مشرف الغرفة</1> أو <1>مستخدم</1>. بشكل افتراضي، يتم تحديد دور المستخدم لكل مستخدم. يمكنك إدارة الأدوار بعد الاستيراد."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation introduces a new term 'Bacarıqlı istifadəçi' (Skilled user) which does not exist in the source text. The source says 'User role is selected', but the translation says 'Skilled user role is selected'.",
+          "suggestion": "İdxal edilmiş istifadəçilər üçün {{productName}} rollarını seçin: <1>{{productName}} admini</1>, <1>Otaq admini</1> və ya <1>istifadəçi</1>. Varsayılan olaraq, hər bir istifadəçi üçün İstifadəçi rolu seçilir. Siz idxaldan sonra rolları idarə edə bilərsiniz."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,13 +93,25 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'User' was translated as 'ισχύος' (which means 'power' or 'force'), instead of 'Χρήστης'. This makes the sentence nonsensical.",
+          "suggestion": "Επιλέξτε ρόλους {{productName}} για τους εισαγόμενους χρήστες: <1>Διαχειριστής {{productName}}</1>, <1>Διαχειριστής δωματίου</1> ή <1>Χρήστης</1>. Από προεπιλογή, έχει επιλεγεί ο ρόλος Χρήστης για κάθε χρήστη. Μπορείτε να διαχειριστείτε τους ρόλους μετά την εισαγωγή."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation for 'User' is 'Avanzado' (Advanced), which changes the meaning of the role. It should be 'Usuario'.",
+          "suggestion": "Seleccione roles de {{productName}} para los usuarios importados: <1>Administrador de {{productName}}</1>, <1>Administrador de sala</1> o <1>Usuario</1>. De forma predeterminada, el rol Usuario se selecciona para cada usuario. Puede administrar los roles después de la importación."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -99,7 +123,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of the 'User' role is 'Avancé' (Advanced), which changes the meaning of the role from 'User' to 'Advanced'.",
+          "suggestion": "Sélectionnez les rôles dans {{productName}} pour les utilisateurs importés: <1>Administrateur {{productName}}</1>, <1>Administrateur de salle</1> ou <1>Utilisateur</1>. Par défaut, le rôle Utilisateur est sélectionné pour chaque utilisateur. Vous pouvez gérer les rôles après l'importation."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -111,7 +141,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'User' is translated as 'Esperto' (Expert), which changes the meaning of the role. It should be 'Utente'.",
+          "suggestion": "Seleziona i ruoli {{productName}} per gli utenti importati: <1>Amministratore {{productName}}</1>, <1>Amministratore stanza</1> o <1>Utente</1>. Per impostazione predefinita, il ruolo Utente è selezionato per ciascun utente. Puoi gestire i ruoli dopo l'importazione."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -135,19 +171,37 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The tag <1> is placed after the variable {{productName}} instead of before it, which breaks the intended markup structure for the first role.",
+          "suggestion": "Atlasiet importēto lietotāju {{productName}} lomas: <1>{{productName}} administrators</1>, <1>Telpas administrators</1> vai <1>Lietotājs</1>. Pēc noklusējuma katram lietotājam ir atlasīta lietotāja loma. Jūs varat pārvaldīt lomas pēc importēšanas."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses inconsistent terminology for roles. It translates 'Room admin' as 'Kamer beheerders' (plural) and 'User' as 'Users' (plural), whereas the English source uses singular forms ('Room admin', 'User') to match the context of selecting a role for 'each user'.",
+          "suggestion": "Selecteer {{productName}}-rollen voor de geïmporteerde gebruikers: <1>{{productName}}-admin</1>, <1>Kamerbeheerder</1> of <1>Gebruiker</1>. Standaard is de rol Gebruiker geselecteerd voor elke gebruiker. U kunt de rollen na het importeren beheren."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The closing tag </1> is missing after the first occurrence of {{productName}} admin in the Polish translation.",
+          "suggestion": "Wybierz role {{productName}} dla zaimportowanych użytkowników: <1>Administrator {{productName}}</1>, <1>Administrator pokoju</1> lub <1>Użytkownik</1>. Domyślnie, wszystkim przypisywana jest rola Użytkownika. Role mogą zostać zmienione po zaimportowaniu."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -165,7 +219,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The first <1> tag is missing its closing </1> tag in the Romanian translation.",
+          "suggestion": "Selectați roluri pentru utilizatorii importați în {{productName}}: <1>Administrator {{productName}}</1>, <1>Administrator sală</1> sau <1>Utilizator</1>. În mod implicit, fiecărui utilizator îi este atribuit un rol de Utilizator. Puteți gestiona rolurile după import."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -183,7 +243,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The default role is translated as 'Pokročilý používateľ' (Advanced user) instead of 'User' (Používateľ), which changes the meaning of the instruction.",
+          "suggestion": "Vyberte roly {{productName}} pre importovaných používateľov: <1>Administrátor {{productName}}</1>, <1>Administrátor miestnosti</1> alebo <1>Používateľ</1>. V predvolenom nastavení je pre každého používateľa vybraná rola Používateľ. Roly môžete spravovať po importe."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -213,16 +279,34 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation for 'Room admin' is 'Кімнати' (Rooms), which is a noun, instead of the required role 'Адміністратор кімнати' (Room admin). Also, 'User' is translated as 'Досвідчений користувач' (Experienced user), which is a complete hallucination/error; it should simply be 'Користувач'.",
+          "suggestion": "Виберіть ролі {{productName}} для імпортованих користувачів: <1>Адміністратор {{productName}}</1>, <1>Адміністратор кімнати</1> або <1>Користувач</1>. За замовчуванням для кожного користувача вибрана роль «Користувач». Ви можете керувати ролями після імпорту."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The tag <1> is used around 'Người sử dụng' but the closing tag </1> is missing or incorrectly placed, and there is an extra space inside the tags which might affect UI rendering.",
+          "suggestion": "Chọn vai trò {{productName}} cho người dùng đã nhập: <1>{{productName}} admin</1>, <1>Quản trị viên phòng</1> hoặc <1>Người dùng</1>. Theo mặc định, vai trò Người dùng sẽ được chọn cho mỗi người dùng. Bạn có thể quản lý các vai trò sau khi nhập."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

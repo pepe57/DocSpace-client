@@ -3,7 +3,7 @@
   "content": "View usage per API key on the",
   "content_en_sha1_hash": "7fb63f56b0f710797397bac7b4ab4ee84d6c2d62",
   "created_at": "2025-05-19T21:30:50.560Z",
-  "updated_at": "2026-04-07T19:35:05.191Z",
+  "updated_at": "2026-04-09T04:11:04.724Z",
   "comment": {
     "text": "The translation key \"ApiKeyViewUsage\" is used to describe the functionality of viewing API key usage. It appears in a link on the PortalSettings page, informing users that clicking on it will display usage details for each API key. This text helps to explain the purpose of the link and provides context for translators.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English text ends with 'on the', implying it is a prefix to a link or a specific location (e.g., 'on the dashboard'). The Azerbaijani translation is a complete sentence ('View usage per API key') and omits the trailing prepositional phrase, which will cause a grammatical break when the link text follows it.",
+          "suggestion": "Hər API açarı üzrə istifadəni aşağıdakı:"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English source ends with 'on the', implying the sentence continues (likely to a link or a specific section), but the Finnish translation ends abruptly after 'API-avain', omitting the prepositional phrase/context.",
+          "suggestion": "Näytä käyttö per API-avain kohdassa"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -93,13 +105,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English text ends with 'on the', implying it is a prefix to a link or a specific location, whereas the Japanese translation is a complete sentence/phrase meaning 'Display usage per API key'. This breaks the grammatical flow if the link follows immediately after.",
+          "suggestion": "「」におけるAPIキーごとの使用状況を表示"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English text ends with 'on the', implying it is a prefix to a link or a specific location, whereas the Korean translation is a complete noun phrase 'View usage per API key'. This results in a grammatical mismatch if the UI expects a sentence fragment to lead into a link.",
+          "suggestion": "다음에서 API 키별 사용량 확인:"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -111,7 +135,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English text ends with 'on the', implying a continuation (likely a link or a specific page), but the Latvian translation ends abruptly as a complete sentence ('can be viewed'), losing the prepositional context required to connect to the subsequent link.",
+          "suggestion": "API atslēgas izmantošanu var skatīt tajā"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Romanian translation is incomplete. It ends abruptly and misses the prepositional phrase 'on the' (pe/în), which is necessary to connect the sentence to the link that follows in the UI.",
+          "suggestion": "Vizualizați utilizarea fiecărei chei API pe"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English text ends with 'on the', implying it is a prefix to a link or a specific location, whereas the Sinhala translation is a complete sentence ('View usage per API key.') that omits the trailing context.",
+          "suggestion": "API යතුර අනුව භාවිතය බලන්න: "
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +225,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English text ends with 'on the', implying it is a prefix to a link or a specific location (e.g., 'on the dashboard'). The Turkish translation translates the full sentence 'View usage per API key...' but omits the prepositional phrase 'on the', which breaks the sentence flow when the link follows it.",
+          "suggestion": "şurada her bir API anahtarının kullanımını görüntüleyin"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -199,6 +247,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English text ends with 'on the', implying it is a prefix to a link or a specific location, whereas the Chinese translation is a complete sentence/phrase that omits this directional context.",
+          "suggestion": "在以下页面查看每个 API 密钥的使用情况："
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

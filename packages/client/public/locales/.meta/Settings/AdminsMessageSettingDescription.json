@@ -3,7 +3,7 @@
   "content": "Enable this option to display the {{productName}} administrator contact form on the Sign In page.",
   "content_en_sha1_hash": "bee5beb31b7719c68dc869268d15a4b372f86cdb",
   "created_at": "2025-05-19T21:30:50.404Z",
-  "updated_at": "2026-04-07T19:35:05.190Z",
+  "updated_at": "2026-04-09T04:25:07.707Z",
   "comment": {
     "text": "This translation key is used to display a message explaining the purpose of enabling an administrator contact form on the Sign In page. It appears in the PortalSettings category and is part of a security setting, likely within a settings or configuration section of the application.",
     "is_auto": true,
@@ -69,13 +69,25 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'Active' is used as an imperative/command, but in Spanish, 'Active' is the third-person singular present or a misspelling of 'Activa'. For a setting description, 'Activa' (informal) or 'Active' (formal) is needed, but 'Active' as written is grammatically incorrect in this context as a command. More importantly, 'Activa' or 'Habilite' is the standard for 'Enable'.",
+          "suggestion": "Activa esta opción para mostrar el formulario de contacto del administrador de {{productName}} en la página de inicio de sesión."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'järjestelmälvalvojan' contains a typo (extra 'l'). It should be 'järjestelmänvalvojan'.",
+          "suggestion": "Ota tämä vaihtoehto käyttöön näyttääksesi {{productName}}-n järjestelmänvalvojan yhteydenottolomake Kirjaudu sisään -sivulla."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -205,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

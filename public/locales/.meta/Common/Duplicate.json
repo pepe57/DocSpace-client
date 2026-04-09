@@ -3,7 +3,7 @@
   "content": "Duplicate",
   "content_en_sha1_hash": "972d57379db3e5be76d4ead709fef1ad71ff03d6",
   "created_at": "2025-05-19T21:30:44.727Z",
-  "updated_at": "2026-04-07T19:35:04.959Z",
+  "updated_at": "2026-04-08T11:32:11.259Z",
   "comment": {
     "text": "This translation key is used to display the label \"Duplicate\" for a button or action that allows users to create a duplicate of an item. It appears in various UI contexts, such as option menus and dialogs, where it enables users to replicate existing content. The goal of this text is to provide clarity and consistency across different languages.",
     "is_auto": true,
@@ -165,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Dubluri' means 'Doubles' (plural noun), whereas the English 'Duplicate' in this context is a verb/action command. The correct term for the action of duplicating an item is 'Duplicare'.",
+          "suggestion": "Duplicare"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -226,6 +232,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian word 'Dublikatë' is a misspelling/incorrect form. The correct term for the action of duplicating or a duplicate in this context is 'Duplikimi' (the action) or 'Duplikate' (the noun).",
+          "suggestion": "Duplikimi"
+        }
+      ],
       "approved_at": null
     }
   }

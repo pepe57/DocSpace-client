@@ -3,7 +3,7 @@
   "content": "Choose the backup file",
   "content_en_sha1_hash": "813a6a6a5479025ab20127d56506502802337776",
   "created_at": "2025-05-19T21:30:50.904Z",
-  "updated_at": "2026-04-07T19:35:05.193Z",
+  "updated_at": "2026-04-09T03:56:37.863Z",
   "comment": {
     "text": "\"Choose a backup file to upload. This text is used as a label on a file input field in a data import component, guiding users to select a backup file.\"",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

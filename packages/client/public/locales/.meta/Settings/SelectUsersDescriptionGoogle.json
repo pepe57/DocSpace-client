@@ -3,7 +3,7 @@
   "content": "Check users from the list to import into {{organizationName}} {{productName}}. Users from Google Workspace will be imported without First Name / Last Name, and their email name will be used instead. Names of the users can be changed after the import. Users already existing in {{organizationName}} {{productName}} are highlighted with a green color and are not checked by default.",
   "content_en_sha1_hash": "24b72ad22f9e64bc2e50b7ce28e5cc96671b7535",
   "created_at": "2025-05-19T21:30:52.560Z",
-  "updated_at": "2026-04-07T19:35:05.209Z",
+  "updated_at": "2026-04-09T01:30:34.860Z",
   "comment": {
     "text": "This translation key is used to describe the step in the data import process that allows users to select and import Google Workspace users into {{organizationName}} {{productName}}. It explains how the import will handle user names and highlights existing users within the organization. This text appears on a UI component, likely a stepper or dialog, guiding users through the data import process.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'входирате' is a non-existent word in Bulgarian (likely a calque from 'import'). The correct technical term is 'импортирате'.",
+          "suggestion": "Проверете потребителите от списъка, за да ги импортирате в {{organizationName}} {{productName}}. Потребителите от Google Workspace ще бъдат импортирани без име/фамилия и вместо това ще се използва имейлът им. Имената на потребителите могат да се променят след импортирането. Вече съществуващите потребители в {{organizationName}} {{productName}} са маркирани със зелен цвят и не са избрани по подразбиране."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -75,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation states existing users are highlighted with a 'wrong color' (virheellä värillä) instead of 'green color' (vihreällä värillä).",
+          "suggestion": "Valitse {{organizationName}} {{productName}}:n tuotavat käyttäjät listalta. Google Workspacesta tuotavat käyttäjät tuodaan ilman etunimeä/sukunimeä ja sen sijaan käytetään heidän sähköpostinimeään. Käyttäjien nimet voidaan vaihtaa tuonnin jälkeen. Jo {{organizationName}} {{productName}}-ssa olemassaolevat käyttäjät on korostettu vihreällä värillä ja niitä ei ole oletuksena valittu."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -159,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'email name' was translated as 'විද්‍යුත් ලිපිලේඛන නම' (electronic document name), which is incorrect. In this context, it should refer to the 'email address' (විද්‍යුත් තැපැල් ලිපිනය).",
+          "suggestion": "{{organizationName}} {{productName}} වෙතට ආනයනය කිරීමට ලැයිස්තුවෙන් පරිශීලකයින් තෝරන්න. Google Workspace වෙතින් පරිශීලකයින් පළමු නම / අවසන් නම නොමැතිව ආනයනය කරනු ලැබේ, ඒ වෙනුවට ඔවුන්ගේ විද්‍යුත් තැපැල් ලිපිනය භාවිතා කරනු ලැබේ. ආනයනය කිරීමෙන් පසු පරිශීලකයින්ගේ නම් වෙනස් කළ හැකිය. {{organizationName}} {{productName}} හි දැනටමත් සිටින පරිශීලකයින් කොළ පැහැයෙන් දක්නට ලැබෙන අතර පෙරනිසම සලකුණු කරනු නොලැබේ."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -205,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

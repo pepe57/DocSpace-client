@@ -3,7 +3,7 @@
   "content": "The correspondence of the Single Sign-On attributes to the entries of the 'Accounts' section.",
   "content_en_sha1_hash": "c7591a0a501267c1ec099b33a718569ff4884c4e",
   "created_at": "2025-05-19T21:30:50.065Z",
-  "updated_at": "2026-04-07T19:35:05.217Z",
+  "updated_at": "2026-04-08T23:38:34.384Z",
   "comment": {
     "text": "This translation key is used for a tooltip that describes the purpose of matching Single Sign-On attributes to account entries in the 'Accounts' section. It appears as an icon button next to a form field on a settings page. Translators should provide a clear and concise explanation of this process for internationalization purposes.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation changes the meaning from a noun phrase describing a concept ('The correspondence of...') to a complete sentence stating a fact ('...are consistent/match'). In a UI tooltip context, this changes the description of the setting into a status report.",
+          "suggestion": "Birdəfəlik Giriş (SSO) atributlarının 'Hesablar' bölməsindəki qeydlərə uyğunluğu."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'correspondence' in this technical context refers to 'mapping' or 'matching' (the relationship between two sets of data), but the Finnish translation uses 'viestintä', which means 'communication' (the act of exchanging information).",
+          "suggestion": "Kertakirjautumisattribuuttien vastaavuus Tilit-osion merkintöjen kanssa."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation uses the verb 'վերագրվում է' (is attributed/assigned to), which changes the meaning from a noun phrase describing a state of correspondence to a statement about an assignment process. The English text is a noun phrase describing the concept of 'The correspondence of...'",
+          "suggestion": "Single Sign-On ատրիբուտների համապատասխանությունը «Հաշիվներ» բաժնի գրառումներին:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +117,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "There is a spacing error in the Korean text ('대한싱글' should be '대한 싱글'), which makes the text look unprofessional and potentially confusing in a UI context.",
+          "suggestion": "'계정' 섹션의 항목에 대한 싱글 사인온 속성의 대응."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,13 +177,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation uses 'ආරෝපණය කරයි' (uploads/loads) which changes the meaning from 'correspondence/mapping' to an action of uploading. It also uses 'නිවේශිත' (announcement/notice) instead of 'entries' (ඇතුළත් කිරීම්).",
+          "suggestion": "තනි පිවිසුම් (Single Sign-On) ගුණාංග 'ගිණුම්' (Accounts) කොටසේ ඇතුළත් කිරීම් සමඟ අනුරූප වීම."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Zodpovednosť' means 'Responsibility' or 'Liability', whereas the English 'correspondence' in this technical context refers to 'matching' or 'mapping' (shodnosť/zhodovanie).",
+          "suggestion": "Zhodovanie atribútov Single Sign-On so záznammi v sekcii „Účty“."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -195,13 +231,31 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The closing quotation mark for the 'Accounts' section is missing in the Vietnamese translation.",
+          "suggestion": "Sự tương ứng của các thuộc tính Đăng nhập một lần với các mục nhập của phần 'Tài khoản'."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation uses 'i atribuohet' (is assigned to), which changes the meaning from a noun phrase describing a concept ('The correspondence of...') to a sentence describing an action. This makes the tooltip grammatically awkward and semantically different from the English source.",
+          "suggestion": "Korrespondenca e atributeve të Single Sign-On me hyrjet e seksionit 'Llogaritë'."
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Add",
   "content_en_sha1_hash": "61cc55aa0453184734c3fa0b621eda6fa874bd83",
   "created_at": "2025-05-19T21:30:42.915Z",
-  "updated_at": "2026-04-07T19:35:04.937Z",
+  "updated_at": "2026-04-08T17:55:37.941Z",
   "comment": {
     "text": "This translation key is used to display the text \"Add\" as a button label in various UI elements, such as buttons, input fields, and dialogs. It appears in contexts where users need to add new items or content, including form submissions, editing comments, and OAuth client settings. Translators should provide a clear and concise alternative for this key to ensure consistent and accurate display across the application.",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation 'Salva' means 'Save', which is a different action than 'Add'.",
+          "suggestion": "Aggiungi"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -129,7 +135,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ບັນທຶກ' means 'Save' or 'Record', which is a different action from 'Add'.",
+          "suggestion": "ເພີ່ມ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +171,25 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Add' means to create or include something new, whereas the Portuguese translation 'Salvar' means 'Save'. This changes the user's intent from adding an item to saving existing data.",
+          "suggestion": "Adicionar"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Add' means to create or include something new, whereas the Romanian 'Salvează' means 'Save'.",
+          "suggestion": "Adaugă"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -177,7 +201,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'එකතු' (Ekathu) is an adjective/adverb meaning 'added' or 'together'. For a UI button label meaning the action 'Add', the verb form 'එකතු කරන්න' (Ekathu karanna) is required.",
+          "suggestion": "එකතු කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -213,7 +243,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation 'Активний' means 'Active', which is a completely different meaning from the English 'Add' (an action verb).",
+          "suggestion": "Додати"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -223,6 +259,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Enter title",
   "content_en_sha1_hash": "0f84658cc7db030dad659aafdf53069d1f3f7f96",
   "created_at": "2025-05-19T21:30:51.532Z",
-  "updated_at": "2026-04-07T19:35:05.200Z",
+  "updated_at": "2026-04-09T03:02:35.154Z",
   "comment": {
     "text": "The \"EnterTitle\" translation key is used to display a placeholder text in a form field on a welcome page. It will be visible until the title is entered by the user and appears as a dynamic placeholder when the form is in a loading state.",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Ievadiet nosaukums' is grammatically incorrect in a way that affects the meaning; 'nosaukums' is in the nominative case, but after the imperative verb 'ievadiet', it must be in the accusative case ('nosaukumu').",
+          "suggestion": "Ievadiet nosaukumu"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

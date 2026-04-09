@@ -3,7 +3,7 @@
   "content": "Change scheduled: Storage adjustment, {{fromSize}} → {{toSize}}",
   "content_en_sha1_hash": "41575f84d84aa57949269933eb834f3258ac6ff5",
   "created_at": "2026-03-20T09:07:40.741Z",
-  "updated_at": "2026-03-26T08:26:58.229Z",
+  "updated_at": "2026-04-09T05:27:38.426Z",
   "comment": {
     "text": "This key displays a warning message informing the user about a scheduled storage plan downgrade. The message shows the current and new storage sizes (in gigabytes) and appears within the Additional Storage Page in the Portal Settings. It's likely used in a dialog or alert to confirm the change.",
     "is_auto": true,
@@ -19,6 +19,228 @@
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dəyişdirilmiş cədvəl' means 'Changed schedule' (past tense), whereas the English 'Change scheduled' means 'A change has been scheduled' (an upcoming event). In the context of a warning about a future downgrade, the current translation implies the change has already happened.",
+          "suggestion": "Plan dəyişikliyi planlaşdırılıb: Yaddaş tənzimlənməsi, {{fromSize}} → {{toSize}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation omits the 'Change scheduled:' part of the English string, only translating 'Storage adjustment'.",
+          "suggestion": "ການປ່ຽນແປງຖືກກຳນົດໄວ້: ການປັບຂະໜາດການເກັບຂໍ້ມູນ, {{fromSize}} → {{toSize}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation 'Gepland wijziging' is grammatically incorrect and uses the wrong word form for 'Scheduled change'. In Dutch, it should be 'Geplande wijziging'.",
+          "suggestion": "Geplande wijziging: Opslagaanpassing, {{fromSize}} → {{toSize}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Portuguese translation omits the 'Change scheduled' (Mudança programada) part of the English string, only translating the description of the change.",
+          "suggestion": "Mudança programada: Ajuste de armazenamento, {{fromSize}} → {{toSize}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zasebna sprememba: Pomenje storitve' translates to 'Private change: Meaning of service', which is completely unrelated to 'Change scheduled: Storage adjustment'.",
+          "suggestion": "Planirana sprememba: Prilagoditev shrambe, {{fromSize}} → {{toSize}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Kujdesi i ruajtjes' means 'Storage care/maintenance', which is incorrect in this context. The English 'Storage adjustment' refers to a change in capacity/size.",
+          "suggestion": "Ndryshimi i planifikuar: Rregullimi i ruajtjes, {{fromSize}} → {{toSize}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

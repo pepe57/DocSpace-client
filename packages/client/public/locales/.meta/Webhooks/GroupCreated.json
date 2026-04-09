@@ -3,7 +3,7 @@
   "content": "Group created",
   "content_en_sha1_hash": "a72534ec04c811d9241605c84240805ba9206f26",
   "created_at": "2025-05-19T21:30:49.768Z",
-  "updated_at": "2026-04-07T19:35:05.232Z",
+  "updated_at": "2026-04-08T19:53:45.305Z",
   "comment": {
     "text": "This translation key is used to display a message indicating when a new group has been created, typically on a web interface. It appears in the UI, likely as part of a notification or confirmation dialog, to inform users about newly created groups. The goal is to provide feedback to users when their group is successfully created.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Configure Service Provider settings and add SP certificates for Single Sign-On.",
   "content_en_sha1_hash": "368366022e4a1e30cbc788ad70c6a9e0b4d14b43",
   "created_at": "2025-05-19T21:30:50.130Z",
-  "updated_at": "2026-04-07T19:35:05.220Z",
+  "updated_at": "2026-04-08T23:03:06.218Z",
   "comment": {
     "text": "Configure Service Provider settings and add SP certificates for Single Sign-On. This key is used to display a brief description in the UI for configuring Single Sign-On (SSO) integration settings, likely found on a settings page or button.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation incorrectly translates 'Single Sign-On' as 'مرة واحدة لتسجيل الدخول' (once for logging in), which is a literal and incorrect translation of the technical term SSO. In technical Arabic, 'Single Sign-On' should be translated as 'تسجيل الدخول الموحد'.",
+          "suggestion": "قم بتهيئة إعدادات مزود الخدمة وإضافة شهادات SP لتسجيل الدخول الموحد."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -75,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical inconsistency: The sentence uses the imperative 'Configurez' followed by the infinitive 'ajouter', which breaks the parallel structure of the English original ('Configure... and add...').",
+          "suggestion": "Configurez les paramètres du fournisseur de services et ajoutez des certificats SP pour l'authentification unique."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -183,7 +195,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The abbreviation 'SP' (Service Provider) was incorrectly translated as 'SS'. In the context of SSO, 'SP' refers to the Service Provider, whereas 'SS' is not a standard technical term here and likely a typo for 'SP'.",
+          "suggestion": "Tek Oturum Açma için Servis Sağlayıcı ayarlarını yapılandırın ve SP sertifikaları ekleyin."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

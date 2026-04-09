@@ -3,7 +3,7 @@
   "content": "Webhook name",
   "content_en_sha1_hash": "90a60b50b8283a74080813d5ee3eef80b8678776",
   "created_at": "2025-05-19T21:30:49.881Z",
-  "updated_at": "2026-04-07T19:35:05.236Z",
+  "updated_at": "2026-04-08T18:56:12.962Z",
   "comment": {
     "text": "The translation key \"WebhookName\" is used to translate the label for a form field that collects the name of a webhook in a portal settings page. This text appears as a label within a dialog modal when editing webhooks, and it should be translated to fit different languages.",
     "is_auto": true,
@@ -177,7 +177,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order is incorrect for a label. 'Webhook ime' translates to 'Webhook name' in a way that sounds like 'Webhook is a name' or is grammatically unnatural for a field label. In Serbian, the noun being described should follow the modifier or use the correct possessive/attributive form.",
+          "suggestion": "Ime webhooka"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

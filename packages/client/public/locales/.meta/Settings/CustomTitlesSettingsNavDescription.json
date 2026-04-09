@@ -3,7 +3,7 @@
   "content": "Welcome Page Settings is a way to change the default portal title to be displayed on the Welcome Page of your portal. The same name is also used for the From field of your portal email notifications.",
   "content_en_sha1_hash": "7b19c51f4950730b3c8f5fd1ed66ec6e31fce32c",
   "created_at": "2025-05-19T21:30:51.027Z",
-  "updated_at": "2026-04-07T19:35:05.194Z",
+  "updated_at": "2026-04-09T03:45:20.779Z",
   "comment": {
     "text": "This translation key controls the displayed text in a navigation category on the Welcome Page Settings page, explaining its purpose. It is used to describe the custom title setting feature and its connection to portal email notifications.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'From field' as 'حقل (الوارد)' is incorrect. In the context of email notifications, 'From field' refers to the sender identity (المرسل), whereas 'الوارد' means 'Inbox' or 'Incoming'.",
+          "suggestion": "إعدادات الصفحة الترحيبية هي وسيلة لتغيير العنوان الافتراضي للبوابة لعرضها في الصفحة الترحيبية لبوابتك. يستخدم نفس الاسم أيضًا في حقل (المرسل) في إشعارات البريد الإلكتروني الخاصة ببوابتك."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'From field' as 'Սկսած դաշտ' is incorrect. In the context of email notifications, 'From field' refers to the sender identity (From:), whereas 'Սկսած' means 'Starting from'.",
+          "suggestion": "Ողջույնի էջի կարգավորումները միջոց է փոխելու լռելյայն պորտալի անվանումը, որը կցուցադրվի ձեր պորտալի ողջույնի էջում: Նույն անունը օգտագործվում է նաև ձեր պորտալի էլփոստի ծանուցումների «Ումից» դաշտի համար:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,13 +117,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'portal' is translated as 'ປະຕູ' (door/gate), which is a literal translation error. In a software context, 'portal' should be transliterated or referred to as a web portal/platform to maintain technical meaning.",
+          "suggestion": "ການຕັ້ງຄ່າໜ້າຍິນດີຕ້ອນຮັບແມ່ນວິທີທີ່ຈະປ່ຽນຊື່ພອດທໍເລີ່ມຕົ້ນທີ່ຈະສະແດງຢູ່ໃນ ໜ້າຍິນດີຕ້ອນຮັບຂອງພອດທໍຂອງທ່ານ. ຊື່ດຽວກັນຍັງຖືກນໍາໃຊ້ສໍາລັບພາກສະຫນາມ 'ຈາກ' ຂອງການແຈ້ງເຕືອນອີເມວພອດທໍຂອງທ່ານ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'From field' is incorrect. It translates to 'the field of your portal email notifications' instead of 'the 'From' field of your portal email notifications', which changes the technical meaning of the UI element being described.",
+          "suggestion": "Sveiciena lapas iestatījumi ir veids, kā mainīt noklusējuma portāla nosaukumu, kas tiek rādīts jūsu portāla Laipni lūdzam lapā. Tas pats nosaukums tiek izmantots arī jūsu portāla e-pasta paziņojumu laukam \"No\"."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,7 +147,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation changes 'default portal title' to 'domyślną nazwę obszaru' (default area name), which is inaccurate. It should refer to the portal title/name.",
+          "suggestion": "Ustawienia strony powitalnej pozwalają zmienić domyślną nazwę portalu wyświetlaną na stronie powitalnej Twojego portalu. Ta sama nazwa jest również wykorzystywana w polu Od powiadomień e-mail z Twojego portalu."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -153,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation incorrectly translates 'portal title' as 'අවකාශයේ පෙරනිමි නම' (default name of the space) and 'From field' as 'වෙතින් ක්‍ෂේත්‍රය' (field from), which is grammatically incorrect and changes the technical meaning. Specifically, 'From field' in email contexts refers to the sender identity, but the Sinhala phrasing 'වෙතින් ක්‍ෂේත්‍රය' is nonsensical in this context.",
+          "suggestion": "පිළිගැනීමේ පිටුවේ සැකසුම් මගින් ඔබේ පෝටල් එකේ පිළිගැනීමේ පිටුවේ දිස්වන පෙරනිමි පෝටල් මාතෘකාව වෙනස් කළ හැකිය. පෝටල් විද්‍යුත් තැපැල් දැනුම්දීම්වල 'From' ක්ෂේත්‍රය සඳහා ද එම නමම භාවිතා වේ."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +207,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'From field of your portal email notifications' is translated as 'поље Од ваших емаил нотификација портала', which is grammatically broken and changes the meaning to 'the field From of your portal email notifications' (implying the field belongs to the notifications themselves rather than being a field within the notification header).",
+          "suggestion": "Подешавања странице добродошлице су начин да промените подразумевани наслов портала који ће бити приказан на страници добродошлице вашег портала. Исто име се такође користи за поље „Од“ у емаил нотификацијама вашег портала."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -202,6 +244,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'fushën nga e njoftimeve' is grammatically broken and nonsensical in Albanian. It fails to translate 'the From field of your portal email notifications' correctly, essentially saying 'the field from the notifications'.",
+          "suggestion": "Cilësimet e faqes së mirëseardhjes janë një mënyrë për të ndryshuar titullin e paracaktuar të portalit që do të shfaqet në faqen e mirëseardhjes të portalit tuaj. I njëjti emër përdoret edhe për fushën 'Nga' (From) të njoftimeve me email të portalit tuaj."
+        }
+      ],
       "approved_at": null
     }
   }

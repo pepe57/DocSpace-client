@@ -3,7 +3,7 @@
   "content": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an {{mcpServer}}.",
   "content_en_sha1_hash": "142c2a083c72acdf70eb5dda1a7ad5a3f3cee7e5",
   "created_at": "2025-12-17T14:56:00.315Z",
-  "updated_at": "2026-03-20T09:07:45.657Z",
+  "updated_at": "2026-04-09T06:38:07.336Z",
   "comment": {
     "text": "This key provides a short description for an AI Tools service option within a dialog. It explains how to configure a personalized AI assistant, referencing a knowledge base, model selection, and connection to an MCP server. Translators should ensure the description accurately reflects the setup process for AI agents.",
     "is_auto": true,
@@ -159,13 +159,25 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'knowledge base' is translated as 'základnej znalosti' (singular/genitive), which is grammatically incorrect and semantically weak in Slovak. It should be 'bázy znalostí' (plural/genitive) to match the technical concept of a knowledge base.",
+          "suggestion": "Nastavte personalizovaného asistenta pre váš tím pridaním bázy znalostí, výberom ideálneho modelu a pripojením {{mcpServer}}."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical error in gender agreement: 'za svoj ekipo' is incorrect; 'ekipa' is a feminine noun, so it should be 'za svojo ekipo'.",
+          "suggestion": "Nastavite osebnega asistenta za svojo ekipo z dodajanjem zbirke znanja, izbiro idealnega modela in povezavo z {{mcpServer}}."
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

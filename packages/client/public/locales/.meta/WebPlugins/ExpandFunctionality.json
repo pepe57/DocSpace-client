@@ -3,7 +3,7 @@
   "content": "Expand functionality using Plugin SDK",
   "content_en_sha1_hash": "b0cd50976232d5cc7c67eef755691af18a4c9286",
   "created_at": "2025-05-19T21:30:49.907Z",
-  "updated_at": "2026-04-07T19:35:05.227Z",
+  "updated_at": "2026-04-08T18:46:07.275Z",
   "comment": {
     "text": "This translation key is used for the label that expands to show more information about expanding plugin functionality in the Plugin SDK. It appears as a button in the developer tools section of portal settings, allowing users to learn more about using the SDK effectively.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'اضافات SDK' (SDK Add-ons) instead of 'Plugin SDK'. In a technical context, 'Plugin SDK' refers to the specific Software Development Kit for plugins, whereas the Arabic translation implies using 'SDK add-ons' to expand functionality, which changes the technical meaning.",
+          "suggestion": "قم بتوسيع الوظائف باستخدام SDK الملحقات"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'spraudnis' is a literal translation of 'plug' (electrical) and is not the correct technical term for 'plugin' in Latvian software localization. The standard term is 'pielikne'.",
+          "suggestion": "Izvērst funkcionalitāti, izmantojot pieliknes SDK"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'පේනු' (Pen) instead of 'ප්ලගින්' (Plugin). 'පේනු' refers to a writing pen, which is a complete mistranslation of the technical term 'Plugin'.",
+          "suggestion": "Plugin SDK භාවිතා කර ක්‍රියාකාරීත්වය පුළුල් කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +189,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'фукционалност' is a typo; the correct spelling in Serbian is 'функционалност' (missing 'н').",
+          "suggestion": "Прошири функционалност користећи Plugin SDK (SDK за додатке)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'fukcionalnost' is a typo; the correct spelling in Serbian is 'funkcionalnost'.",
+          "suggestion": "Proširi funkcionalnost koristeći Plugin SDK (SDK za dodatke)"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -199,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

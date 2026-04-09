@@ -3,7 +3,7 @@
   "content": "Document Service is the server service which allows to perform the document editing and allows to convert the document file into the appropriate OfficeOpen XML format. Document service location specifies the address of the server with the document services installed.",
   "content_en_sha1_hash": "cfefeceae1cc9f8ec4067b4e8fafd1c0a13a9378",
   "created_at": "2025-05-19T21:30:51.377Z",
-  "updated_at": "2026-04-07T19:35:05.198Z",
+  "updated_at": "2026-04-09T03:10:36.554Z",
   "comment": {
     "text": "This translation key is used for a help message that explains the purpose and functionality of Document Service Location in the Portal Settings category. It appears as a header in a dialog or settings page, providing context for users unfamiliar with the term.",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The second sentence of the English text ('Document service location specifies the address of the server with the document services installed.') is completely missing from the Greek translation.",
+          "suggestion": "Η Υπηρεσία εγγράφων είναι η υπηρεσία διακομιστή που επιτρέπει την εκτέλεση της επεξεργασίας εγγράφων και επιτρέπει τη μετατροπή του αρχείου εγγράφου στην κατάλληλη μορφή OfficeOpen XML. Η τοποθεσία της υπηρεσίας εγγράφων ορίζει τη διεύθυνση του διακομιστή στον οποίο είναι εγκατεστημένες οι υπηρεσίες εγγράφων."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The second sentence in Finnish incorrectly implies that the location 'specifies the address with the services installed', whereas the English text states the location 'specifies the address of the server with the services installed'. The Finnish phrasing 'Asiakirjapalvelun sijainti asennettujen asiakirjapalveluiden kanssa määrittävät...' is grammatically broken and logically shifts the subject/object relationship.",
+          "suggestion": "Asiakirjapalvelu on palvelinpalvelu, joka mahdollistaa asiakirjan muokkaamisen ja asiakirjatiedoston muuntamisen oikeaan OfficeOpen XML -muotoon. Asiakirjapalvelun sijainti määrittää palvelimen osoitteen, johon asiakirjapalvelut on asennettu."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The second sentence of the English text ('Document service location specifies the address of the server with the document services installed.') is completely missing from the Armenian translation.",
+          "suggestion": "Փաստաթղթերի ծառայությունը սերվերային ծառայություն է, որը թույլ է տալիս կատարել փաստաթղթերի խմբագրում և թույլ է տալիս փաստաթղթի ֆայլը փոխարկել համապատասխան OfficeOpen XML ձևաչափի: Փաստաթղթերի ծառայության գտնվելու վայրը նշում է այն սերվերի հասցեն, որտեղ տեղադրված են փաստաթղթերի ծառայությունները:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -189,7 +207,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical gender mismatch: 'Служба' (Service) is feminine in Ukrainian, but the relative pronoun 'який' is masculine. It should be 'яка'.",
+          "suggestion": "Служба документів — це серверна служба, яка дозволяє виконувати редагування документа та конвертувати файл документа у відповідний формат OfficeOpen XML. Місцезнаходження служби документів вказує адресу сервера, на якому встановлені служби документів."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -199,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

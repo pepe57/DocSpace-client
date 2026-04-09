@@ -3,7 +3,7 @@
   "content": "Disable (not recommended)",
   "content_en_sha1_hash": "2222ade3230450dee89ad7ab51ac827335c5017b",
   "created_at": "2025-05-19T21:30:49.695Z",
-  "updated_at": "2026-04-07T19:35:05.229Z",
+  "updated_at": "2026-04-08T20:26:35.207Z",
   "comment": {
     "text": "This translation key is used to describe the \"Disable SSL\" option on a settings page, likely a button or toggle that disables Secure Sockets Layer (SSL) verification. Its purpose is to inform users about the consequences of this action and provide context for developers. It appears in the Portal Settings category.",
     "is_auto": true,
@@ -99,7 +99,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '비추' is highly informal slang (short for 비추천) which is inappropriate for a professional software UI. It changes the tone from a formal warning to casual internet slang.",
+          "suggestion": "비활성화(권장하지 않음)"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

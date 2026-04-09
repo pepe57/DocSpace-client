@@ -3,7 +3,7 @@
   "content": "User’s Files",
   "content_en_sha1_hash": "8c601cb8c42483a78013375e2d836fca2adaf2ed",
   "created_at": "2025-05-19T21:30:53.154Z",
-  "updated_at": "2026-04-07T19:35:05.216Z",
+  "updated_at": "2026-04-08T23:58:55.656Z",
   "comment": {
     "text": "This translation key is used for the label of a setting that determines what files are exported by users. It appears in a settings page and is used to identify which type of file (e.g., user's files) is being exported.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text 'User’s Files' is singular (referring to a single user's files), whereas the Arabic translation 'ملفات المستخدمين' is plural (referring to 'Users' files).",
+          "suggestion": "ملفات المستخدم"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

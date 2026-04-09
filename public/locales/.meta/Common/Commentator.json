@@ -3,7 +3,7 @@
   "content": "Commentator",
   "content_en_sha1_hash": "9f6fd4869ea0279d99dd0d5720e1bd5b70d03dec",
   "created_at": "2025-05-19T21:30:43.550Z",
-  "updated_at": "2026-04-07T19:35:04.947Z",
+  "updated_at": "2026-04-08T15:11:25.531Z",
   "comment": {
     "text": "This translation key is used as a label and icon for a \"Commentator\" access right in a share component, typically displayed on a permissions panel or settings dialog. It describes the role of someone who can comment on shared content but cannot make changes.",
     "is_auto": true,
@@ -117,7 +117,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Reageerder' (one who reacts) is too generic and does not specifically denote the role of a 'Commentator' in a software permissions context. In Dutch UI terminology for access rights, 'Commentator' is the standard term.",
+          "suggestion": "Commentator"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -199,6 +205,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '可批注' means 'Can annotate' (an action/capability), whereas the English 'Commentator' refers to a person/role. In a permissions panel, the label should represent the role name.",
+          "suggestion": "评论员"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Enter target ID",
   "content_en_sha1_hash": "fe78a1ea977c72d5ae4f869b5249824c80846aa6",
   "created_at": "2025-05-19T21:30:49.702Z",
-  "updated_at": "2026-04-07T19:35:05.229Z",
+  "updated_at": "2026-04-08T20:23:13.154Z",
   "comment": {
     "text": "\"Helps users input a target ID when enabled in the WebhookDialog component.\"",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation uses the plural imperative form 'أدخلوا' (Enter [you all]), whereas the English 'Enter' is a singular/neutral imperative used for a single user interface action. This changes the tone from a standard UI instruction to a command addressed to a group.",
+          "suggestion": "أدخل المعرّف الهدف"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'ඉලක්කම්' (ilakkam) means 'digits' or 'numbers', whereas the English text refers to a 'target ID'. The translation incorrectly implies 'Enter digits ID' instead of 'Enter target ID'.",
+          "suggestion": "ඉලක්කම්ගත ID එක ඇතුළත් කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +189,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ciljani' is an adjective meaning 'targeted' or 'aimed', but in this technical context, 'target ID' refers to a specific identifier. 'Ciljani ID' sounds unnatural and grammatically incorrect in Serbian for this context; 'ID odredišta' or 'ID cilja' would be more accurate, but 'ciljani' specifically implies an action performed on the ID rather than the ID being the destination.",
+          "suggestion": "Unesite ID odredišta"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

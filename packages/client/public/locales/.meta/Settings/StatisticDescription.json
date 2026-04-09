@@ -3,7 +3,7 @@
   "content": "Here, you can view the detailed storage usage data in this {{productName}}.",
   "content_en_sha1_hash": "c25e93f04d549177e51dc81450d226b9b0dfe235",
   "created_at": "2025-05-19T21:30:52.761Z",
-  "updated_at": "2026-04-07T19:35:05.211Z",
+  "updated_at": "2026-04-09T00:51:54.396Z",
   "comment": {
     "text": "This translation key is used to display a general description of storage usage data in the product. It appears on a page within the Portal Settings categories and is rendered as a text label next to an icon indicating availability. The product name is used for contextualization.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The French translation omits the word 'detailed' (détaillé), which is a key descriptor of the data being viewed.",
+          "suggestion": "Ici, vous pouvez consulter les données détaillées d'utilisation du stockage dans {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation uses 'puteți afișa' (you can display/show), which implies the user has the ability to perform an action. The English 'you can view' in this context means 'you can see/observe' the data that is already there. In UI terminology, 'afișa' is an active command for the user, whereas 'vizualiza' is the correct term for viewing information.",
+          "suggestion": "Aici puteți vizualiza datele detaliate privind utilizarea spațiului de stocare în acest {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -199,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

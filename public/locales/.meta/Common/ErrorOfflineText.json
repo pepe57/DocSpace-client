@@ -3,7 +3,7 @@
   "content": "No internet connection",
   "content_en_sha1_hash": "836f41ede479860e44d418cf75284a89bfc38c4a",
   "created_at": "2025-05-19T21:30:45.091Z",
-  "updated_at": "2026-04-07T19:35:04.963Z",
+  "updated_at": "2026-04-08T10:15:27.984Z",
   "comment": {
     "text": "This translation key is used for displaying a message when there is no internet connection. It appears as the header text in an error container component and provides feedback to users about their network status.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

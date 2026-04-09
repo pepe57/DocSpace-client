@@ -3,7 +3,7 @@
   "content": "Webhooks",
   "content_en_sha1_hash": "fdfe2da709ca2c4f3b21ce6ad01969c1158e9db6",
   "created_at": "2025-05-19T21:30:49.888Z",
-  "updated_at": "2026-04-07T19:35:05.237Z",
+  "updated_at": "2026-04-08T18:53:00.793Z",
   "comment": {
     "text": "The translation key \"Webhooks\" is used to display the label for a plugin that manages webhooks functionality. It appears in a portal settings category and likely serves as a button or section title, guiding users through webhook configurations or management.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ويب هوك' is a phonetic transliteration of 'Web hook' (singular), whereas the English term is 'Webhooks' (plural). In a technical UI context, it is more accurate to use the standard technical term or ensure the plural sense is captured.",
+          "suggestion": "خطافات الويب"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -93,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Վեբկեռիկներ' is a diminutive/incorrect form. In technical contexts, 'Webhooks' should be transliterated as 'Վեբհուկներ' to maintain professional terminology.",
+          "suggestion": "Վեբհուկներ"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -211,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Several roles are specified in this form. Forms with multiple roles are not available for filling in this type of room",
   "content_en_sha1_hash": "c77d18eca5a33e5263ab898522d85d5125198a95",
   "created_at": "2025-05-19T21:30:43.177Z",
-  "updated_at": "2026-04-07T19:35:04.942Z",
+  "updated_at": "2026-04-08T16:23:32.244Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that forms with multiple roles are not available for filling in certain types of rooms. It appears as a tooltip on a button in a UI component. Translators should provide a clear explanation of this restriction to help users understand the functionality of the form.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

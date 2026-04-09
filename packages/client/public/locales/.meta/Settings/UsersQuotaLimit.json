@@ -3,7 +3,7 @@
   "content": "{{usersQuotaLimit}} for users",
   "content_en_sha1_hash": "9e6e5c83a7705ebda93dbfed5f4cb4f8bf50f01c",
   "created_at": "2025-05-19T21:30:53.161Z",
-  "updated_at": "2026-04-07T19:35:05.216Z",
+  "updated_at": "2026-04-08T23:58:16.549Z",
   "comment": {
     "text": "This translation key is used to display a quota limit message for users, indicating how many users can be added before exceeding a certain threshold. It appears in a warning dialog, specifically when setting default or tenant custom quotas.",
     "is_auto": true,
@@ -129,7 +129,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'utilizadors' is incorrect in Portuguese; the correct spelling is 'utilizadores'.",
+          "suggestion": "{{usersQuotaLimit}} para utilizadores"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

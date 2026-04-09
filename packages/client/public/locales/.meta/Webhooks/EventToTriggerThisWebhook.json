@@ -3,7 +3,7 @@
   "content": "Event to trigger this webhook",
   "content_en_sha1_hash": "f58b4b66dc1080b09bc03eb2f9a64fdb6deca178",
   "created_at": "2025-05-19T21:30:49.713Z",
-  "updated_at": "2026-04-07T19:35:05.230Z",
+  "updated_at": "2026-04-08T20:17:52.112Z",
   "comment": {
     "text": "\"This translation key is used for a label in a webhooks trigger form, displaying the name of an event that triggers a webhook. The text appears as a bold title next to a radio button group in a UI component, likely used to select or configure the event. Translators should provide a clear and concise equivalent phrase in the target language.\"",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses Turkish words ('tetikleyecek', 'hadise') instead of Azerbaijani words. In Azerbaijani, 'hadisə' is used, but 'tetikleyecek' is Turkish; the Azerbaijani equivalent should be 'tətikləyəcək'.",
+          "suggestion": "Bu vebhukunu tətikləyəcək hadisə"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -202,6 +208,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'webhook' is translated literally as 'lidhje në internet' (internet connection), which is technically incorrect in a software development context. A 'webhook' is a specific technical mechanism, not a general internet connection.",
+          "suggestion": "Ngjarja për të aktivizuar këtë webhook"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "You can open this file from the desktop app's interface once your cloud is connected",
   "content_en_sha1_hash": "a56cf9923ee70342d9e2669ee3ab4de8d039979a",
   "created_at": "2025-05-19T21:30:53.425Z",
-  "updated_at": "2026-04-07T19:35:05.180Z",
+  "updated_at": "2026-04-09T07:15:35.967Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that users can access files from the desktop app's interface once their cloud connection is established. The text appears in a UI element related to private rooms or file sharing, providing context for users.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation changes the meaning from 'once your cloud is connected' (condition/timing) to 'to connect with your cloud' (purpose/intent).",
+          "suggestion": "ທ່ານສາມາດເປີດໄຟລ໌ນີ້ໄດ້ຈາກໜ້າຈໍຂອງແອັບ desktop ເມື່ອ cloud ຂອງທ່ານເຊື່ອມຕໍ່ແລ້ວ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'මේඝය' (meghaya) is a literal/incorrect translation for 'cloud' in a computing context. In Sinhala IT terminology, 'cloud' should be transliterated as 'ක්ලවුඩ්' or referred to as 'වලාකුළු තාක්ෂණය'. 'මේඝය' refers to meteorological clouds/rain clouds.",
+          "suggestion": "ඔබේ ක්ලවුඩ් එක සම්බන්ධ වූ පසු ඔබට ඩෙස්ක්ටොප් ඇප් එකේ අතුරු මුහුණත හරහා මෙම ගොනුව විවෘත කළ හැකිය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

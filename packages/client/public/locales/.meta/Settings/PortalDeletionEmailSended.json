@@ -3,7 +3,7 @@
   "content": "A link to confirm the operation has been sent to {{ownerEmail}} (the email address of the space owner).",
   "content_en_sha1_hash": "d504d626fe71c890b6a3d1a8fc891320d7a4c83e",
   "created_at": "2025-05-19T21:30:52.216Z",
-  "updated_at": "2026-04-07T19:35:05.205Z",
+  "updated_at": "2026-04-09T02:00:39.558Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message after sending an email to the space owner confirming portal deletion. It appears in a success toast notification that pops up when a delete or deactivation button is clicked, and it provides context for the user through placeholders for the owner's email address.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'domen sahibinin' (domain owner) is used instead of 'space owner' (məkan sahibi). This changes the context from a DocSpace space to a domain.",
+          "suggestion": "Tranzaksiyanı təsdiqləmək üçün keçid {{ownerEmail}} ünvanına (məkan sahibinin e-poçt ünvanı) göndərildi."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -141,7 +147,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation incorrectly states that the link itself was sent to the email, whereas the English text states that the link was sent to confirm the operation (implying the link is inside the email). The current Portuguese phrasing 'Um link para confirmar que a operação foi enviada para...' means 'A link to confirm that the operation was sent to...', which changes the logic of the message.",
+          "suggestion": "Um link para confirmar a operação foi enviado para {{ownerEmail}} (o endereço de e-mail do proprietário do espaço)."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -211,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

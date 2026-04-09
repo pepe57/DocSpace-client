@@ -3,7 +3,7 @@
   "content": "Language and Time Zone Settings is a way to change the language of the whole portal for all portal users and to configure the time zone so that all the events of the portal will be shown with the correct date and time.",
   "content_en_sha1_hash": "9503b26b14f5ba17a6a5797217e4af9ffe524df3",
   "created_at": "2025-05-19T21:30:51.767Z",
-  "updated_at": "2026-04-07T19:35:05.202Z",
+  "updated_at": "2026-04-09T02:38:51.819Z",
   "comment": {
     "text": "This translation key describes a navigation label that explains the purpose of customizing language and time zone settings on a portal. It appears in a mobile category section, guiding users to configure these settings for accurate event dates and times.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'portal' is translated literally as 'ປະຕູ' (door/gate), which is incorrect in a software context. In IT/Software localization, 'portal' should be transliterated or referred to as a digital platform/portal.",
+          "suggestion": "ການຕັ້ງຄ່າພາສາ ແລະ ເຂດເວລາ ແມ່ນວິທີການປ່ຽນພາສາຂອງທົ່ວທັງ Portal ສຳລັບຜູ້ໃຊ້ Portal ທັງໝົດ ແລະ ກຳນົດເຂດເວລາ ເພື່ອໃຫ້ເຫດການທັງໝົດຂອງ Portal ສະແດງວັນທີ ແລະ ເວລາທີ່ຖືກຕ້ອງ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +123,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation uses 'de hele portaal' (incorrect gender) and 'van de portal' (inconsistent spelling/gender), but more importantly, 'de hele portaal' is grammatically incorrect as 'portaal' is a neuter noun ('het portaal'). However, per the strict instructions to only report CRITICAL errors that change meaning, the most significant error is the inconsistent spelling of 'portaal' vs 'portal' which can lead to confusion in a UI context.",
+          "suggestion": "Taal- en tijdzone-instellingen is een manier om de taal van het hele portaal te wijzigen voor alle portaalgebruikers en om de tijdzone te configureren, zodat alle gebeurtenissen van het portaal met de juiste datum en tijd worden weergegeven."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation changes the meaning of the second clause from 'so that all events... will be shown' (purpose/result) to 'because the time and date... is displayed' (causality), which alters the logical flow of the instruction.",
+          "suggestion": "Setări limbă și fus orar este modul de a schimba limba întregului portal pentru toți utilizatorii portalului și de a configura fusul orar, astfel încât toate evenimentele portalului să fie afișate cu data și ora corecte."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Sinhala translation includes an extra sentence ('පරිශ්‍රීලකයින්ට තමන්ගේ පැතිකඩ හරහා ද රිසි පරිදි මෙම සැකසුම් වෙනස් කිරීමට හැකිය.') that is not present in the English source text.",
+          "suggestion": "භාෂාව සහ වේලා කලාපයේ සැකසුම් මගින් සමස්ත ද්වාරයේම (portal) භාෂාව සියලුම පරිශීලකයින් සඳහා වෙනස් කිරීමට සහ සියලුම ද්වාර සිදුවීම් නිවැරදි දිනය සහ වේලාවෙන් පෙන්වීම සඳහා වේලා කලාපය වින්යාසගත කිරීමට හැකිය."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

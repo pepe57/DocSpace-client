@@ -3,7 +3,7 @@
   "content": "Every hour",
   "content_en_sha1_hash": "6a76cd5e945ef035c8b4a0f1768d59e996231ec5",
   "created_at": "2025-05-19T21:30:45.158Z",
-  "updated_at": "2026-04-07T19:35:04.964Z",
+  "updated_at": "2026-04-08T10:07:16.954Z",
   "comment": {
     "text": "\"This translation key is used for the 'EveryHour' option in a dropdown selection component. It appears as the placeholder text in a select input field, likely on a form or settings page, where users can choose time units.\"",
     "is_auto": true,
@@ -135,13 +135,25 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation 'Toda hora' is an idiom meaning 'all the time' or 'constantly'. In the context of a frequency selection (Every hour), it should specify the interval.",
+          "suggestion": "A cada hora"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Toda hora' means 'all the time' or 'constantly' in Portuguese, whereas the English 'Every hour' refers to a specific frequency (once per hour).",
+          "suggestion": "A cada hora"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -205,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
