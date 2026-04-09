@@ -77,6 +77,8 @@ import {
   type FolderAgentEntry,
   type PanelPosition,
 } from "../_api/aiAgentSettings";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import i18n from "i18next";
 
 class FormsAiAgentStore {
   isPanelVisible = false;
@@ -440,7 +442,9 @@ class FormsAiAgentStore {
               return vectorizeFiles(kbFiles.map((f) => f.id));
             }
           })
-          .catch(() => {}),
+          .catch(() => {
+            toastr.error(i18n.t("Common:SomethingWentWrong"));
+          }),
       );
     }
 
@@ -543,11 +547,13 @@ class FormsAiAgentStore {
         const allKbFileIds = updatedKbFiles.map((f) => f.id);
 
         if (allKbFileIds.length > 0) {
-          await vectorizeFiles(allKbFileIds).catch(() => {});
+          await vectorizeFiles(allKbFileIds).catch(() => {
+            toastr.error(i18n.t("Common:SomethingWentWrong"));
+          });
         }
       }
     } catch {
-      // ignore
+      toastr.error(i18n.t("Common:SomethingWentWrong"));
     } finally {
       runInAction(() => {
         this.isSyncingKB = false;

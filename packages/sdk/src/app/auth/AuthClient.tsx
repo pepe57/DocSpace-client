@@ -65,7 +65,9 @@ export default function AuthClient({
             confirmUrl?: string;
             token?: unknown;
           };
-        } catch {
+        } catch (loginError) {
+          if (loginError instanceof TypeError) throw loginError;
+
           const signupData: Record<string, string> = {
             SerializedProfile: profile,
           };
