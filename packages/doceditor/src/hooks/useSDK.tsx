@@ -42,6 +42,8 @@ const useSDK = (baseSdkConfig?: TFrameConfig) => {
 
   const handleMessage = useCallback(
     (e: MessageEvent) => {
+      if (window.self === window.parent || e.source !== window.parent) return;
+
       const eventData =
         typeof e.data === "string" ? JSON.parse(e.data) : e.data;
 

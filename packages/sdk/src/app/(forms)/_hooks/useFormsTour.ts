@@ -30,6 +30,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useJoyride, EVENTS, STATUS, ACTIONS } from "react-joyride";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { useFormsTourStore } from "../_store/FormsTourStore";
@@ -41,7 +42,8 @@ import { useFormsUserStore } from "../_store/FormsUserStore";
 import { createMockFormFolders, createMockCompletedFiles } from "../_utils/mockFormFiles";
 import TourTooltip from "../_components/tour-tooltip";
 
-export default function useFormsTour() {
+export default function useFormsTour(showMenu = true) {
+  const { isBase } = useTheme();
   const tourStore = useFormsTourStore();
   const navStore = useFormsNavigationStore();
   const formsListStore = useFormsListStore();
@@ -94,8 +96,8 @@ export default function useFormsTour() {
   const showSettings = !!(user?.isOwner || user?.isAdmin);
 
   const tourFlags = useMemo<TourStepFlags>(
-    () => ({ canCreate, showLibrary, showSettings }),
-    [canCreate, showLibrary, showSettings],
+    () => ({ canCreate, showLibrary, showSettings, showMenu }),
+    [canCreate, showLibrary, showSettings, showMenu],
   );
 
   const steps = useMemo(
@@ -111,11 +113,12 @@ export default function useFormsTour() {
     scrollToFirstStep: true,
     tooltipComponent: TourTooltip,
     options: {
-      arrowColor: globalColors.black,
+      arrowColor: isBase ? globalColors.white : globalColors.black,
       arrowBase: 18,
       arrowSize: 8,
       overlayColor: "rgba(0, 0, 0, 0.5)",
       overlayClickAction: "close",
+      blockTargetInteraction: true,
       zIndex: 10000,
     },
     locale: {

@@ -350,6 +350,20 @@
         const urlParams = customUrlSearchParams(formsConfig);
         return `/sdk/forms/my-forms${urlParams ? `?${urlParams}` : ""}`;
       }
+      case "chat" /* Chat */: {
+        const chatConfig = {
+          ...baseFrameOptions,
+          agentId: config2.agentId,
+          fileId: config2.fileId || void 0,
+          chatId: config2.chatId || void 0,
+          providerName: config2.providerName || void 0,
+          inviteKey: config2.inviteKey || void 0,
+          emplType: config2.emplType || void 0,
+          uid: config2.uid || void 0
+        };
+        const urlParams = customUrlSearchParams(chatConfig);
+        return `/sdk/chat${urlParams ? `?${urlParams}` : ""}`;
+      }
       default:
         return config2.rootPath || "/";
     }
@@ -2115,6 +2129,30 @@
        * ```
        */
       __publicField(this, "initForms", (config2) => this.init({ ...config2, mode: "forms" /* Forms */, showMenu: config2.showMenu ?? true }));
+      /**
+       * Initializes a frame in {@link SDKMode.Chat} mode — a full-page AI chat interface
+       * for the agent specified by {@link TFrameConfig.agentId}.
+       * Forces `mode` to {@link SDKMode.Chat}. Requires {@link TFrameConfig.agentId}.
+       *
+       * @param config - Frame configuration. See {@link TFrameConfig}.
+       * @returns The initialized {@link SDKInstance}.
+       *
+       * @example
+       * ```typescript
+       * import { SDK } from '@onlyoffice/docspace-sdk-js';
+       *
+       * const sdk = new SDK();
+       * const chat = sdk.initChat({
+       *   frameId: 'ds-chat',
+       *   src: 'https://docspace.example.com',
+       *   agentId: 123,
+       *   events: {
+       *     onAppReady: () => console.log('chat ready'),
+       *   },
+       * });
+       * ```
+       */
+      __publicField(this, "initChat", (config2) => this.init({ ...config2, mode: "chat" /* Chat */ }));
     }
   };
 

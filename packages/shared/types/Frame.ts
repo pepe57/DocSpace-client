@@ -35,7 +35,8 @@ export type TFrameMode =
   | "room-selector"
   | "file-selector"
   | "system"
-  | "forms";
+  | "forms"
+  | "chat";
 
 export type TFrameSelectorType =
   | "roomsOnly"
@@ -120,6 +121,7 @@ export type TFrameConfig = {
   downloadToEvent?: boolean;
   editorCustomization?: TEditorCustomization | object;
   editorGoBack?: boolean | string;
+  withoutGoBackText?: boolean;
   editorType?: string;
   events?: TFrameEvents;
   filter?: TFrameFilter;

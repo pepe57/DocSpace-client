@@ -437,6 +437,8 @@ export function getProviderLabel(provider: string, t: (key: string) => string) {
       return t("Common:ProviderWechat");
     case "sso-full":
       return t("Common:ProviderSsoSetting");
+    case "nextcloud":
+      return t("Common:Nextcloud");
     default:
       return "";
   }
@@ -1586,4 +1588,3 @@ export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {
     return acc;
   }, initial);
 }
-
