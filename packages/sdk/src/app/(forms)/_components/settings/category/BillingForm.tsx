@@ -58,7 +58,6 @@ type BillingTab = "wallet" | "ai" | "payment-method";
 const TABS: {
   id: BillingTab;
   titleKey: string;
-  descriptionKey: string;
   iconClass: string;
   icon: React.ReactNode;
   nativeIcon?: boolean;
@@ -66,26 +65,31 @@ const TABS: {
   {
     id: "wallet",
     titleKey: "Payments:Wallet",
-    descriptionKey: "Common:BillingWalletCardDesc",
     iconClass: styles.billingIconWallet,
     icon: <WalletIcon />,
   },
   {
     id: "ai",
     titleKey: "Services:OrganizationAI",
-    descriptionKey: "Common:BillingAICardDesc",
     iconClass: styles.billingIconAi,
     icon: <AiIcon />,
   },
   {
     id: "payment-method",
     titleKey: "Payments:PaymentMethod",
-    descriptionKey: "Common:BillingPaymentMethodCardDesc",
     iconClass: styles.billingIconPayment,
     icon: <CardIcon />,
     nativeIcon: true,
   },
 ];
+
+const getTabDescription = (id: BillingTab, t: (key: string) => string) => {
+  switch (id) {
+    case "wallet": return t("Common:BillingWalletCardDesc");
+    case "ai": return t("Common:BillingAICardDesc");
+    case "payment-method": return t("Common:BillingPaymentMethodCardDesc");
+  }
+};
 
 const BillingForm = () => {
   const { t, i18n } = useTranslation(["Common", "Payments", "Services"]);
@@ -151,7 +155,7 @@ const BillingForm = () => {
                 })}
               </Text>
               <Text fontSize="11px" className={styles.billingCardDesc}>
-                {t(tab.descriptionKey)}
+                {getTabDescription(tab.id, t)}
               </Text>
             </div>
           </div>
