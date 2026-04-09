@@ -59,3 +59,33 @@
   }
 }
 
+.selectedModelsField {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.selectedModelsLabel {
+  margin-bottom: 4px;
+
+  &.selectedModelsLabelError {
+    color: var(--input-error-color);
+  }
+}
+
+.requiredMark {
+  color: var(--input-error-color);
+}
+
+.selectedModelsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.selectedModelsErrorText {
+  color: var(--input-error-color);
+  margin-top: 4px;
+}
+
