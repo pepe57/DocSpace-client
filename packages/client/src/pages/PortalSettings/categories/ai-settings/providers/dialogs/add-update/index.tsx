@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useRef, useState, useMemo, useEffect } from "react";
+import { useRef, useState, useMemo, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import equal from "fast-deep-equal/react";
@@ -49,6 +49,7 @@ import { getAiProviderLabel } from "@docspace/shared/utils";
 import type {
   TAiProvider,
   TCreateAiProvider,
+  TModelCapabilities,
   TProviderTypeWithUrl,
   TUpdateAiProvider,
 } from "@docspace/shared/api/ai/types";
@@ -61,6 +62,13 @@ import { Text } from "@docspace/ui-kit/components/text";
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
 import styles from "./AddUpdateDialog.module.scss";
+import {
+  useModelSelection,
+  type TModelSelectionState,
+} from "./useModelSelection";
+import { SelectedModelsList } from "./SelectedModelsList";
+import { ModelSelectorPopup } from "./ModelSelectorPopup";
+import { ModelSettingsPanel } from "./ModelSettingsPanel";
 
 type AddEditDialogProps = {
   variant: "add" | "update";
@@ -118,6 +126,14 @@ const getURLByProviderType = (
   return aiProviderTypesWithUrls.find((item) => item.type === type)?.url || "";
 };
 
+const CUSTOM_PROVIDER_NAME = "Open AI compatible";
+
+const getAutoFillName = (type: ProviderType): string => {
+  if (type === ProviderType.OpenAiCompatible) return CUSTOM_PROVIDER_NAME;
+  const label = getAiProviderLabel(type);
+  return typeof label === "string" ? label : "";
+};
+
 const AddUpdateDialogComponent = ({
   variant,
   onClose,
@@ -133,7 +149,13 @@ const AddUpdateDialogComponent = ({
   const [selectedOption, setSelectedOption] = useState(
     getSelectedOptionByProviderType(providerData?.type),
   );
-  const [providerTitle, setProviderTitle] = useState(providerData?.title || "");
+  const initialProviderType =
+    providerData?.type ??
+    (getSelectedOptionByProviderType(providerData?.type).key as ProviderType);
+  const [providerTitle, setProviderTitle] = useState(
+    providerData?.title ||
+      (variant === "add" ? getAutoFillName(initialProviderType) : ""),
+  );
   const [providerKey, setProviderKey] = useState("");
   const [providerUrl, setProviderUrl] = useState(
     providerData?.url ||
@@ -147,8 +169,20 @@ const AddUpdateDialogComponent = ({
   );
   const [isRequestRunning, setIsRequestRunning] = useState(false);
 
+  const addButtonRef = useRef<HTMLDivElement>(null);
+
+  const modelSelection = useModelSelection();
+
   const valuesByProvider = useRef<
-    Record<ProviderType, { title: string; url: string; key: string }>
+    Record<
+      ProviderType,
+      {
+        title: string;
+        url: string;
+        key: string;
+        models?: TModelSelectionState;
+      }
+    >
   >({
     [ProviderType.PortalAi]: { title: "", url: "", key: "" },
     [ProviderType.OpenAi]: { title: "", url: "", key: "" },
@@ -168,8 +202,17 @@ const AddUpdateDialogComponent = ({
     providerKey,
   });
 
+  const isKeyVisible = !isKeyInputHidden || providerKey.length > 0;
+  const showModelsBlock =
+    isKeyVisible && (providerKey.length > 0 || variant === "update");
+  const isCustomProvider =
+    (selectedOption.key as ProviderType) === ProviderType.OpenAiCompatible;
+
   const requiredFieldsFilled =
     providerTitle.trim().length > 0 && providerUrl.trim().length > 0;
+  const modelsValid = showModelsBlock
+    ? modelSelection.selectedModelIds.size > 0
+    : true;
   const hasChanges = !equal(initFormData.current, {
     selectedOption,
     providerTitle,
@@ -177,7 +220,7 @@ const AddUpdateDialogComponent = ({
     providerKey,
   });
 
-  const canSubmit = requiredFieldsFilled && hasChanges;
+  const canSubmit = requiredFieldsFilled && modelsValid && hasChanges;
 
   const onSelectProvider = (option: TOption) => {
     const currentProviderType = selectedOption.key as ProviderType;
@@ -187,6 +230,7 @@ const AddUpdateDialogComponent = ({
       title: providerTitle,
       url: providerUrl,
       key: providerKey,
+      models: modelSelection.getState(),
     };
 
     setSelectedOption(option);
@@ -197,12 +241,15 @@ const AddUpdateDialogComponent = ({
       setProviderUrl(savedValues.url);
       setProviderKey(savedValues.key);
     } else {
-      setProviderTitle("");
+      const autoName = getAutoFillName(newProviderType);
+      setProviderTitle(autoName);
       setProviderUrl(
         getURLByProviderType(newProviderType, aiProviderTypesWithUrls),
       );
       setProviderKey("");
     }
+
+    modelSelection.loadModelsForProvider(newProviderType, savedValues.models);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -283,164 +330,224 @@ const AddUpdateDialogComponent = ({
     }
   }, [providerData]);
 
+  useEffect(() => {
+    const type = selectedOption.key as ProviderType;
+    modelSelection.loadModelsForProvider(type);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleRemoveModel = useCallback(
+    (modelId: string) => {
+      modelSelection.toggleModel(modelId);
+    },
+    [modelSelection],
+  );
+
+  const handleModelSettingsSave = useCallback(
+    (
+      modelId: string,
+      displayName: string,
+      capabilities: TModelCapabilities,
+    ) => {
+      modelSelection.updateModelSettings(modelId, displayName, capabilities);
+    },
+    [modelSelection],
+  );
+
+  const settingsModel = modelSelection.getModelForSettings();
+  const orderedModels = modelSelection.getOrderedModels();
+  const selectedModels = modelSelection.getSelectedModels();
+
   return (
-    <ModalDialog
-      visible
-      displayType={ModalDialogType.aside}
-      onClose={onClose}
-      withBodyScroll
-    >
-      <ModalDialog.Header>{t("Common:AIProvider")}</ModalDialog.Header>
+    <>
+      <ModalDialog
+        visible
+        displayType={ModalDialogType.aside}
+        onClose={onClose}
+        withBodyScroll
+      >
+        <ModalDialog.Header>{t("Common:AIProvider")}</ModalDialog.Header>
 
-      <ModalDialog.Body>
-        <form
-          className={styles.modalBody}
-          onSubmit={onSubmit}
-          data-testid={
-            variant === "add" ? "add-provider-form" : "update-provider-form"
-          }
-        >
-          <FieldContainer
-            labelText={t("AISettings:Provider")}
-            labelVisible
-            isVertical
-            removeMargin
+        <ModalDialog.Body>
+          <form
+            className={styles.modalBody}
+            onSubmit={onSubmit}
+            data-testid={
+              variant === "add" ? "add-provider-form" : "update-provider-form"
+            }
           >
-            <ComboBox
-              options={filteredProviderTypes}
-              selectedOption={selectedOption}
-              onSelect={onSelectProvider}
-              scaled
-              scaledOptions
-              isDisabled={variant === "update" || isRequestRunning}
-              dataTestId="provider-type-combobox"
-            />
-          </FieldContainer>
-          <FieldContainer
-            labelText={t("Common:Label")}
-            labelVisible
-            isVertical
-            removeMargin
-            isRequired
-          >
-            <TextInput
-              size={InputSize.base}
-              type={InputType.text}
-              value={providerTitle}
-              onChange={(e) => setProviderTitle(e.target.value)}
-              scale
-              placeholder={t("AISettings:EnterLabel")}
-              isDisabled={isRequestRunning}
-              testId="provider-title-input"
-            />
-            <Text className={styles.fieldHint}>
-              {t("AISettings:ProviderNameInputHint")}
-            </Text>
-          </FieldContainer>
+            <FieldContainer
+              labelText={t("AISettings:Provider")}
+              labelVisible
+              isVertical
+              removeMargin
+            >
+              <ComboBox
+                options={filteredProviderTypes}
+                selectedOption={selectedOption}
+                onSelect={onSelectProvider}
+                scaled
+                scaledOptions
+                isDisabled={variant === "update" || isRequestRunning}
+                dataTestId="provider-type-combobox"
+              />
+            </FieldContainer>
+            <FieldContainer
+              labelText={t("Common:Label")}
+              labelVisible
+              isVertical
+              removeMargin
+              isRequired
+            >
+              <TextInput
+                size={InputSize.base}
+                type={InputType.text}
+                value={providerTitle}
+                onChange={(e) => setProviderTitle(e.target.value)}
+                scale
+                placeholder={t("AISettings:EnterLabel")}
+                isDisabled={isRequestRunning}
+                testId="provider-title-input"
+              />
+              <Text className={styles.fieldHint}>
+                {t("AISettings:ProviderNameInputHint")}
+              </Text>
+            </FieldContainer>
 
-          <FieldContainer
-            labelText={t("AISettings:ProviderURL")}
-            labelVisible
-            isVertical
-            removeMargin
-            isRequired
-          >
-            <TextInput
-              size={InputSize.base}
-              type={InputType.text}
-              value={providerUrl}
-              onChange={(e) => setProviderUrl(e.target.value)}
-              scale
-              placeholder={t("OAuth:EnterURL")}
-              isDisabled={
-                isRequestRunning ||
-                selectedOption.key !== ProviderType.OpenAiCompatible
-              }
-              testId="provider-url-input"
-            />
-            <Text className={styles.fieldHint}>
-              {t("AISettings:ProviderURLInputHint")}
-            </Text>
-          </FieldContainer>
-          <FieldContainer
-            labelText={t("AISettings:ProviderKey")}
-            labelVisible
-            isVertical
-            removeMargin
-          >
-            {isKeyInputHidden ? (
-              <div className={styles.resetKeyBlock}>
-                <div className={styles.resetKeyHint}>
-                  {t("AISettings:ResetProviderKeyDescription")}
+            <FieldContainer
+              labelText={t("AISettings:ProviderURL")}
+              labelVisible
+              isVertical
+              removeMargin
+              isRequired
+            >
+              <TextInput
+                size={InputSize.base}
+                type={InputType.text}
+                value={providerUrl}
+                onChange={(e) => setProviderUrl(e.target.value)}
+                scale
+                placeholder={t("OAuth:EnterURL")}
+                isDisabled={
+                  isRequestRunning ||
+                  selectedOption.key !== ProviderType.OpenAiCompatible
+                }
+                testId="provider-url-input"
+              />
+              <Text className={styles.fieldHint}>
+                {t("AISettings:ProviderURLInputHint")}
+              </Text>
+            </FieldContainer>
+            <FieldContainer
+              labelText={t("AISettings:ProviderKey")}
+              labelVisible
+              isVertical
+              removeMargin
+            >
+              {isKeyInputHidden ? (
+                <div className={styles.resetKeyBlock}>
+                  <div className={styles.resetKeyHint}>
+                    {t("AISettings:ResetProviderKeyDescription")}
+                  </div>
+                  <Link
+                    type={LinkType.action}
+                    fontWeight={600}
+                    lineHeight="20px"
+                    isHovered
+                    onClick={onResetKey}
+                    dataTestId="provider-reset-key-link"
+                  >
+                    {t("Webhooks:ResetKey")}
+                  </Link>
                 </div>
-                <Link
-                  type={LinkType.action}
-                  fontWeight={600}
-                  lineHeight="20px"
-                  isHovered
-                  onClick={onResetKey}
-                  dataTestId="provider-reset-key-link"
-                >
-                  {t("Webhooks:ResetKey")}
-                </Link>
-              </div>
-            ) : (
-              <>
-                <PasswordInput
-                  size={InputSize.base}
-                  inputValue={providerKey}
-                  onChange={(_, value) => setProviderKey(value ?? "")}
-                  isFullWidth
-                  isDisableTooltip
-                  placeholder={t("AISettings:EnterKey")}
-                  isDisabled={isRequestRunning}
-                  isSimulateType
-                  autoComplete="off"
-                  hasError={providerData?.needReset}
-                  testId="provider-key-input"
+              ) : (
+                <>
+                  <PasswordInput
+                    size={InputSize.base}
+                    inputValue={providerKey}
+                    onChange={(_, value) => setProviderKey(value ?? "")}
+                    isFullWidth
+                    isDisableTooltip
+                    placeholder={t("AISettings:EnterKey")}
+                    isDisabled={isRequestRunning}
+                    isSimulateType
+                    autoComplete="off"
+                    hasError={providerData?.needReset}
+                    testId="provider-key-input"
+                  />
+                  <Text
+                    className={classNames(styles.fieldHint, {
+                      [styles.fieldHintError]: providerData?.needReset,
+                    })}
+                  >
+                    {t("AISettings:ProviderKeyInputHint", {
+                      aiProvider: t("Common:AIProvider"),
+                    })}
+                  </Text>
+                </>
+              )}
+            </FieldContainer>
+            {showModelsBlock ? (
+              <div ref={addButtonRef} style={{ position: "relative" }}>
+                <SelectedModelsList
+                  selectedModels={selectedModels}
+                  onRemoveModel={handleRemoveModel}
+                  onAddClick={modelSelection.openPopup}
+                  hasError={modelSelection.hasError}
                 />
-                <Text
-                  className={classNames(styles.fieldHint, {
-                    [styles.fieldHintError]: providerData?.needReset,
-                  })}
-                >
-                  {t("AISettings:ProviderKeyInputHint", {
-                    aiProvider: t("Common:AIProvider"),
-                  })}
-                </Text>
-              </>
-            )}
-          </FieldContainer>
-          <button
-            type="submit"
-            ref={submitButtonRef}
-            hidden
-            aria-label="submit"
-          />
-        </form>
-      </ModalDialog.Body>
+                {modelSelection.isPopupOpen ? (
+                  <ModelSelectorPopup
+                    anchor={addButtonRef}
+                    recommended={orderedModels.recommended}
+                    other={orderedModels.other}
+                    selectedModelIds={modelSelection.selectedModelIds}
+                    isCustomProvider={isCustomProvider}
+                    onToggle={modelSelection.toggleModel}
+                    onEditModel={modelSelection.openSettings}
+                    onClose={modelSelection.closePopup}
+                  />
+                ) : null}
+              </div>
+            ) : null}
+            <button
+              type="submit"
+              ref={submitButtonRef}
+              hidden
+              aria-label="submit"
+            />
+          </form>
+        </ModalDialog.Body>
 
-      <ModalDialog.Footer>
-        <Button
-          primary
-          size={ButtonSize.normal}
-          label={t("Common:SaveButton")}
-          scale
-          onClick={handleSubmitClick}
-          isLoading={isRequestRunning}
-          isDisabled={!canSubmit}
-          testId="provider-save-button"
+        <ModalDialog.Footer>
+          <Button
+            primary
+            size={ButtonSize.normal}
+            label={t("Common:SaveButton")}
+            scale
+            onClick={handleSubmitClick}
+            isLoading={isRequestRunning}
+            isDisabled={!canSubmit}
+            testId="provider-save-button"
+          />
+          <Button
+            size={ButtonSize.normal}
+            label={t("Common:CancelButton")}
+            scale
+            onClick={onClose}
+            isDisabled={isRequestRunning}
+            testId="provider-cancel-button"
+          />
+        </ModalDialog.Footer>
+      </ModalDialog>
+
+      {settingsModel ? (
+        <ModelSettingsPanel
+          model={settingsModel}
+          onSave={handleModelSettingsSave}
+          onClose={modelSelection.closeSettings}
         />
-        <Button
-          size={ButtonSize.normal}
-          label={t("Common:CancelButton")}
-          scale
-          onClick={onClose}
-          isDisabled={isRequestRunning}
-          testId="provider-cancel-button"
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
+      ) : null}
+    </>
   );
 };
 

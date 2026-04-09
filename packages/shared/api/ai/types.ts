@@ -171,3 +171,23 @@ export type TUpdateDefaultProviderData = {
   providerId: TAiProvider["id"];
   defaultModel: TModel["modelId"];
 };
+
+// TODO: Replace mock-driven types with API response types when backend is ready
+export type TModelCapabilities = {
+  vision: boolean;
+  toolCalling: boolean;
+  extendedThinking: boolean;
+};
+
+export type TProviderModelInfo = {
+  modelId: string;
+  displayName: string;
+  isRecommended: boolean;
+  capabilities: TModelCapabilities;
+};
+
+export type TSelectedModelData = {
+  modelId: string;
+  displayName?: string;
+  capabilities?: TModelCapabilities;
+};
