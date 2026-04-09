@@ -60,6 +60,8 @@ export default function CreateEditorPage({
     params.set("parentId", parentId);
     params.set("fileTitle", fileTitle);
     params.set("editorGoBack", "event");
+    params.set("withoutGoBackText", "true");
+    params.set("withoutGoBackText", "true");
 
     return combineUrl(editorOrigin, `/doceditor/create?${params.toString()}`);
   }, [parentId, fileTitle, editorOrigin]);

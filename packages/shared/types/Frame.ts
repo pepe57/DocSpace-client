@@ -121,6 +121,7 @@ export type TFrameConfig = {
   downloadToEvent?: boolean;
   editorCustomization?: TEditorCustomization | object;
   editorGoBack?: boolean | string;
+  withoutGoBackText?: boolean;
   editorType?: string;
   events?: TFrameEvents;
   filter?: TFrameFilter;
