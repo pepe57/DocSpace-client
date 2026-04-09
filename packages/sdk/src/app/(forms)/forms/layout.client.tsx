@@ -167,6 +167,8 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   React.useEffect(() => {
     const handler = (e: MessageEvent) => {
       let eventData;
+      if (window.self === window.parent || e.source !== window.parent) return;
+
       try {
         eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
       } catch {
