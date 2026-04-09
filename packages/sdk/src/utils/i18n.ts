@@ -42,7 +42,7 @@ export const getI18NInstance = (lng: string) => {
         return value;
       },
     },
-    ns: ["Common"],
+    ns: ["Common", "Payments", "Services", "Settings"],
     defaultNS: "Common",
     react: {
       useSuspense: false,
@@ -62,6 +62,14 @@ export const getI18NInstance = (lng: string) => {
     }
     window.i18n.t = i18n.t.bind(i18n);
     window.i18n.instance = i18n;
+
+    const loaded: Record<string, { data: Record<string, string> }> = {};
+    Array.from(translations).forEach(([lang, nsList]) => {
+      Array.from(nsList).forEach(([ns, resources]) => {
+        loaded[`${lang}/${ns}.json`] = { data: resources };
+      });
+    });
+    window.i18n.loaded = loaded;
   }
 
   return i18n;
