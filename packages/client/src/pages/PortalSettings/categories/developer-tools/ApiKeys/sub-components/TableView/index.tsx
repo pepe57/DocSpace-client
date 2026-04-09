@@ -27,7 +27,7 @@
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
 import TableRow from "./TableRow";
