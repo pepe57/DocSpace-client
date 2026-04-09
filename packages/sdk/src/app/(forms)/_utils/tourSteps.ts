@@ -43,6 +43,7 @@ export type TourStepFlags = {
   canCreate: boolean;
   showLibrary: boolean;
   showSettings: boolean;
+  showMenu: boolean;
 };
 
 function openContextMenu(): Promise<void> {
@@ -74,6 +75,14 @@ function contextMenuStep(
 ): Step {
   return {
     target: `#${targetId}`,
+    spotlightTarget: () => {
+      const item = document.querySelector(`#${targetId}`);
+      // Walk up to find the context menu container (ul with role)
+      const ul = item?.closest("ul");
+      return (ul as HTMLElement) ?? null;
+    },
+    spotlightPadding: 8,
+    placement: "right" as const,
     content,
     title,
     data: { page } satisfies TourStepData,
@@ -85,6 +94,14 @@ function contextMenuStep(
         await openContextMenu();
       }
       await waitForElement(`#${targetId}`, 3000).catch(() => {});
+      document
+        .querySelector(`#${targetId}`)
+        ?.classList.add("tour-outline-item");
+    },
+    after: () => {
+      document
+        .querySelector(".tour-outline-item")
+        ?.classList.remove("tour-outline-item");
     },
   };
 }
@@ -94,13 +111,15 @@ export function getTourSteps(
   callbacks?: TourStepCallbacks,
   flags?: TourStepFlags,
 ): Step[] {
-  const { canCreate = true, showLibrary = true, showSettings = true } =
+  const { canCreate = true, showLibrary = true, showSettings = true, showMenu = true } =
     flags ?? {};
 
   return [
-    // My Forms sidebar — always
+    // My Forms
     {
-      target: "#forms-nav-my-forms",
+      target: showMenu
+        ? "#forms-nav-my-forms"
+        : '[data-tour="section-my-forms"]',
       content: t(
         "Common:TourMyForms",
         "This is your main workspace. All your PDF forms are stored here. Upload new forms or create them from scratch.",
@@ -108,6 +127,14 @@ export function getTourSteps(
       title: t("Common:MyForms"),
       data: { page: "/forms/my-forms" } satisfies TourStepData,
       skipBeacon: true,
+      ...(!showMenu && {
+        before: async () => {
+          callbacks?.navigate("/forms/my-forms");
+          await waitForElement('[data-tour="section-my-forms"]').catch(
+            () => {},
+          );
+        },
+      }),
     },
     // Plus button — only with Create permission
     canCreate && {
@@ -132,9 +159,11 @@ export function getTourSteps(
         "/forms/my-forms",
         callbacks,
       ),
-    // 6. In Progress sidebar
+    // In Progress
     {
-      target: "#forms-nav-in-progress",
+      target: showMenu
+        ? "#forms-nav-in-progress"
+        : '[data-tour="section-in-progress"]',
       content: t(
         "Common:TourInProgress",
         "Each folder corresponds to a specific form and contains draft files from people who started filling but haven't submitted yet.",
@@ -142,10 +171,20 @@ export function getTourSteps(
       title: t("Common:InProgress"),
       data: { page: "/forms/in-progress" } satisfies TourStepData,
       skipBeacon: true,
+      ...(!showMenu && {
+        before: async () => {
+          callbacks?.navigate("/forms/in-progress");
+          await waitForElement('[data-tour="section-in-progress"]').catch(
+            () => {},
+          );
+        },
+      }),
     },
-    // Completed Forms sidebar
+    // Completed Forms
     {
-      target: "#forms-nav-completed-forms",
+      target: showMenu
+        ? "#forms-nav-completed-forms"
+        : '[data-tour="section-completed-forms"]',
       content: t(
         "Common:TourCompletedForms",
         "Each folder contains all submitted copies of a specific form, organized by submission.",
@@ -153,6 +192,14 @@ export function getTourSteps(
       title: t("Common:CompletedForms"),
       data: { page: "/forms/completed-forms" } satisfies TourStepData,
       skipBeacon: true,
+      ...(!showMenu && {
+        before: async () => {
+          callbacks?.navigate("/forms/completed-forms");
+          await waitForElement(
+            '[data-tour="section-completed-forms"]',
+          ).catch(() => {});
+        },
+      }),
     },
     // Inside completed folder + AI Chat
     {
@@ -172,9 +219,11 @@ export function getTourSteps(
         await waitForElement('[data-tour="forms-grid"]');
       },
     },
-    // Library sidebar — only if visible
+    // Library — only if visible
     showLibrary && {
-      target: "#forms-nav-library",
+      target: showMenu
+        ? "#forms-nav-library"
+        : '[data-tour="section-library"]',
       content: t(
         "Common:TourLibrary",
         "Browse ready-made form templates. Pick a template to quickly create a new form without starting from scratch.",
@@ -182,6 +231,14 @@ export function getTourSteps(
       title: t("Common:Library"),
       data: { page: "/forms/library" } satisfies TourStepData,
       skipBeacon: true,
+      ...(!showMenu && {
+        before: async () => {
+          callbacks?.navigate("/forms/library");
+          await waitForElement('[data-tour="section-library"]').catch(
+            () => {},
+          );
+        },
+      }),
     },
     // Settings — Billing — only for Owner/Admin
     showSettings && {
