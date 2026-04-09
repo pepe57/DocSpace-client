@@ -84,7 +84,7 @@ export default async function DocspaceLayout({
         getFilesSettings(),
         getFolder(filesFilter.folder, filesFilter),
       ]);
-    } catch (error) {
+    } catch {
       filesSettings = await getFilesSettings().catch(() => undefined);
     }
   } else {
