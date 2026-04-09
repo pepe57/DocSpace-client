@@ -126,6 +126,24 @@ export async function proxy(request: NextRequest) {
       );
     }
 
+    if (validationResult?.anonymousSessionKeyCookie) {
+      const cookieNameValue =
+        validationResult.anonymousSessionKeyCookie.split(";")[0]?.trim();
+
+      if (cookieNameValue) {
+        const existingCookies = requestHeaders.get("cookie") || "";
+
+        if (!existingCookies.includes("anonymous_session_key=")) {
+          requestHeaders.set(
+            "cookie",
+            existingCookies
+              ? `${existingCookies}; ${cookieNameValue}`
+              : cookieNameValue,
+          );
+        }
+      }
+    }
+
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
 
     const response = NextResponse.next({
