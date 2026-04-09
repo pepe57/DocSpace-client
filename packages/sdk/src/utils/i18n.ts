@@ -42,7 +42,7 @@ export const getI18NInstance = (lng: string) => {
         return value;
       },
     },
-    ns: ["Common", "Payments", "Services", "Settings"],
+    ns: ["Common"],
     defaultNS: "Common",
     react: {
       useSuspense: false,
