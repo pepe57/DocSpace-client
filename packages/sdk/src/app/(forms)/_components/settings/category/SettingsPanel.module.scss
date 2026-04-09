@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "@docspace/ui-kit/styles/variables/colors";
+
 // Wrapper — compensates for scroll-body padding-inline-end: 16px
 // Same pattern as EditLinkPanel: withoutPadding + extend right + own padding
 .panelBody {
@@ -183,7 +185,7 @@
   padding: 12px;
   border-radius: 10px;
   border: 1px solid var(--modal-dialog-header-border-color);
-  background-color: var(--color-background);
+  background-color: var(--color-background, #{colors.$white});
   cursor: pointer;
   opacity: 0.75;
   transition:
@@ -199,7 +201,7 @@
     background-color: color-mix(
       in srgb,
       var(--color-scheme-main-accent) 4%,
-      var(--color-background)
+      var(--color-background, #{colors.$white})
     );
   }
 
@@ -218,7 +220,7 @@
   background-color: color-mix(
     in srgb,
     var(--color-scheme-main-accent) 8%,
-    var(--color-background)
+    var(--color-background, #{colors.$white})
   );
 }
 
