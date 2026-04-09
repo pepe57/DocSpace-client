@@ -642,12 +642,16 @@ export const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
 };
 
-export const frameCallbackData = (methodReturnData: unknown) => {
+export const frameCallbackData = (
+  methodReturnData: unknown,
+  callId?: number,
+) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onMethodReturn",
       frameId: getFrameId(),
       methodReturnData,
+      ...(callId !== undefined && { callId }),
     }),
     "*",
   );
@@ -687,6 +691,23 @@ export {
   truncateNumberToFraction,
   formatCurrencyValue,
 } from "@docspace/ui-kit/billing/utils/common";
+
+export const frameHandlePing = (eventData: {
+  type?: string;
+  frameId?: string;
+}): boolean => {
+  if (eventData?.type === "ping") {
+    window.parent.postMessage(
+      JSON.stringify({
+        type: "pong",
+        frameId: getFrameId(),
+      }),
+      "*",
+    );
+    return true;
+  }
+  return false;
+};
 
 import { getConvertedSize } from "@docspace/ui-kit/billing/utils/common";
 
@@ -1565,3 +1586,4 @@ export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {
     return acc;
   }, initial);
 }
+

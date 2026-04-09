@@ -69,6 +69,7 @@ export default async function FormsServerLayout({
   const providerName = filterParams.get("providerName") || "";
   const inviteKey = filterParams.get("inviteKey") || "";
   const emplType = filterParams.get("emplType") || "";
+  const uid = filterParams.get("uid") || "";
 
   const [filesSettings, user, defaultProvider, portalSettings, roomData] =
     await Promise.all([
@@ -105,6 +106,7 @@ export default async function FormsServerLayout({
     authParams.set("providerName", providerName);
     if (inviteKey) authParams.set("inviteKey", inviteKey);
     if (emplType) authParams.set("emplType", emplType);
+    if (uid) authParams.set("uid", uid);
     authParams.set("successRedirectURL", successRedirectURL);
 
     redirect(`/auth?${authParams.toString()}`);

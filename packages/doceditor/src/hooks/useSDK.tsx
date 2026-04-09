@@ -30,6 +30,7 @@ import merge from "lodash/merge";
 import {
   frameCallbackData,
   frameCallCommand,
+  frameHandlePing,
 } from "@docspace/shared/utils/common";
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
@@ -44,8 +45,10 @@ const useSDK = (baseSdkConfig?: TFrameConfig) => {
       const eventData =
         typeof e.data === "string" ? JSON.parse(e.data) : e.data;
 
+      if (frameHandlePing(eventData)) return;
+
       if (eventData.data) {
-        const { data, methodName } = eventData.data;
+        const { data, methodName, callId } = eventData.data;
 
         if (!methodName) return;
 
@@ -85,7 +88,7 @@ const useSDK = (baseSdkConfig?: TFrameConfig) => {
           res = err as Error;
         }
 
-        frameCallbackData(res);
+        frameCallbackData(res, callId);
       }
     },
     [setSdkConfig, baseSdkConfig],

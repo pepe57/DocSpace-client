@@ -153,6 +153,7 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
     async (file: TFile) => {
       try {
         await manageFormFilling(file.id, FormFillingManageAction.Start);
+        toastr.success(t("Common:ReadyToFillOut"));
         await fetchSection();
       } catch (error) {
         toastr.error(error as string);
