@@ -53,8 +53,16 @@ const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
   const [isFileLoading, setIsFileLoading] = useState(!!fileId);
 
   useEffect(() => {
+    if (!agentId) {
+      frameCallEvent({
+        event: "onAppError",
+        data: { message: "agentId is required" },
+      });
+      return;
+    }
+
     frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
-  }, []);
+  }, [agentId]);
 
   useEffect(() => {
     if (!fileId) return;
@@ -89,8 +97,6 @@ const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
     return null;
   }
 
-  const isAskFromFile = !!attachmentFile;
-
   return (
     <Chat
       agentId={agentId}
@@ -98,7 +104,6 @@ const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
       standalone
       attachmentFile={attachmentFile}
       clearAttachmentFile={clearAttachmentFile}
-      hideAttachments={isAskFromFile}
       allowAttachFiles
       allowSelectChat
       isLoading={isFileLoading}

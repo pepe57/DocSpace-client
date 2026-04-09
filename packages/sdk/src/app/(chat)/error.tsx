@@ -1,3 +1,5 @@
+"use client";
+
 // (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
@@ -24,6 +26,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export default function Loading() {
-  return null;
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+
+const containerStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100%",
+  height: "100%",
+  gap: "16px",
+  fontFamily: "'Open Sans', sans-serif",
+  color: "var(--text-color)",
+};
+
+const buttonStyle: React.CSSProperties = {
+  padding: "8px 24px",
+  border: "1px solid var(--checkbox-border-color)",
+  borderRadius: "6px",
+  backgroundColor: "var(--button-background-base)",
+  cursor: "pointer",
+  fontSize: "14px",
+  lineHeight: "20px",
+  color: "var(--text-color)",
+};
+
+export default function ChatError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  const { t } = useTranslation("Common");
+
+  useEffect(() => {
+    console.error("Chat error boundary caught:", error);
+  }, [error]);
+
+  return (
+    <div style={containerStyle}>
+      <p style={{ margin: 0, fontSize: "14px" }}>
+        {t("Common:SomethingWentWrong")}
+      </p>
+      <button type="button" style={buttonStyle} onClick={reset}>
+        {t("Common:TryAgain")}
+      </button>
+    </div>
+  );
 }
