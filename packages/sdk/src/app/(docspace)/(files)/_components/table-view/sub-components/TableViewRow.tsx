@@ -209,7 +209,7 @@ const TableViewRow = observer(
           {lastColumn === "Name" ? quickButtonsNode : null}
         </TableCell>
         <TableCell className={lastColumn === "Modified" ? styles.lastCell : undefined}>
-          <span className={styles.secondaryCell}>{modifiedDate}</span>
+          <span className={styles.secondaryCell} suppressHydrationWarning>{modifiedDate}</span>
           {lastColumn === "Modified" ? quickButtonsNode : null}
         </TableCell>
         <TableCell className={lastColumn === "Size" ? styles.lastCell : undefined}>

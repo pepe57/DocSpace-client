@@ -98,11 +98,15 @@ const Header = ({
 
   const { openFolder } = useFolderActions({ t });
 
-  const { title, rootFolderId, id } = current;
+  const title = current?.title;
+  const rootFolderId = current?.rootFolderId;
+  const id = current?.id;
 
-  const isRoomsFolder = pathParts[0].id === rootFolderId;
+  const isRoomsFolder = pathParts?.[0]?.id === rootFolderId;
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
+    if (!pathParts) return [];
+
     const items = pathParts
       .map((p) => ({
         id: p.id,
@@ -118,8 +122,8 @@ const Header = ({
 
   useEffect(() => {
     navigationStore.setNavigationItems(navigationItems);
-    navigationStore.setCurrentFolderId(id);
-    navigationStore.setCurrentTitle(title);
+    if (id !== undefined) navigationStore.setCurrentFolderId(id);
+    if (title !== undefined) navigationStore.setCurrentTitle(title);
     navigationStore.setCurrentIsRootRoom(isRoomsFolder);
   }, [title, navigationItems, navigationStore, id, isRoomsFolder]);
 
@@ -127,6 +131,7 @@ const Header = ({
     navigationStore.navigationItems ?? navigationItems;
 
   const onBackToParentFolder = useCallback(() => {
+    if (!currentNavigationItems.length) return;
     openFolder(currentNavigationItems[0].id, currentNavigationItems[0].title);
   }, [currentNavigationItems, openFolder]);
 
@@ -137,6 +142,8 @@ const Header = ({
       window.removeEventListener("popstate", onBackToParentFolder);
     };
   }, [onBackToParentFolder]);
+
+  if (!current || !pathParts) return null;
 
   return (
     <div

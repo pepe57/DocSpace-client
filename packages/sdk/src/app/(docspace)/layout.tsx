@@ -66,7 +66,8 @@ export default async function DocspaceLayout({
     shareKey,
   } as FilterProps;
 
-  const actions: unknown[] = [getFilesSettings()];
+  let filesSettings: TFilesSettings | undefined;
+  let folderList: TGetFolder | undefined;
 
   if (filter) {
     const pathname = hdrs.get(PATHNAME_HEADER) ?? "";
@@ -78,19 +79,28 @@ export default async function DocspaceLayout({
 
     filesFilter.pageCount = PAGE_COUNT;
 
-    actions.push(getFolder(filesFilter.folder, filesFilter));
+    try {
+      [filesSettings, folderList] = await Promise.all([
+        getFilesSettings(),
+        getFolder(filesFilter.folder, filesFilter),
+      ]);
+    } catch (error) {
+      filesSettings = await getFilesSettings().catch(() => undefined);
+    }
+  } else {
+    filesSettings = await getFilesSettings().catch(() => undefined);
   }
 
-  const [filesSettings, folderList] = (await Promise.all(actions)) as [
-    TFilesSettings,
-    TGetFolder,
-  ];
+  if (folderList) {
+    const { current, pathParts, folders, files } = folderList;
 
-  const { current, pathParts, folders, files } = folderList as TGetFolder;
+    navigationProps.current = current;
+    navigationProps.pathParts = pathParts;
+    navigationProps.isEmptyList = !folders.length && !files.length;
+  }
 
-  navigationProps.current = current;
-  navigationProps.pathParts = pathParts;
-  navigationProps.isEmptyList = !folders.length && !files.length;
+  const folders = folderList?.folders ?? [];
+  const files = folderList?.files ?? [];
 
   return (
     <main style={{ width: "100%", height: "100%" }}>
@@ -100,10 +110,10 @@ export default async function DocspaceLayout({
             sectionHeaderContent={
               <Header {...navigationProps} />
             }
-            sectionFilterContent={<Filter {...filterProps} />}
+            sectionFilterContent={filter ? <Filter {...filterProps} /> : null}
             sectionBodyContent={children}
             isEmptyPage={folders.length === 0 ? files.length === 0 : false}
-            filesFilter={filter!}
+            filesFilter={filter ?? ""}
           />
           <SelectionArea />
           <FilesMediaViewer
