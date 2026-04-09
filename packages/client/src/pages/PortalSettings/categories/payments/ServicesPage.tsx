@@ -28,7 +28,7 @@ import { inject, observer } from "mobx-react";
 import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router";
 
-import { PaymentsRoot } from "@docspace/ui-kit/billing";
+import { BillingRoot } from "@docspace/ui-kit/billing";
 import { default as AiPage } from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
 import { default as BackupPage } from "@docspace/ui-kit/billing/services/pages/backup/BackupPage";
 import { default as AdditionalStoragePage } from "@docspace/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
@@ -69,13 +69,13 @@ const ServicesPage = (props: ServicesPageProps) => {
   const pathname = location.pathname;
 
   return (
-    <PaymentsRoot config={paymentConfig}>
+    <BillingRoot config={paymentConfig}>
       {pathname.includes("ai-services") ? (
         <AiPage getAIConfig={getAIConfig} />
       ) : null}
       {pathname.includes("backup") ? <BackupPage /> : null}
       {pathname.includes("disk-storage") ? <AdditionalStoragePage /> : null}
-    </PaymentsRoot>
+    </BillingRoot>
   );
 };
 

@@ -37,11 +37,11 @@ import { PAYMENT_ROUTES } from "./utils";
 import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
 import {
-  PaymentDashboard as PaymentsSaaS,
-  PaymentWallet as Wallet,
+  MainTariff,
+  Wallet,
   PaymentMethod,
-  PaymentServicesList as Services,
-  PaymentsRoot,
+  ServicesList,
+  BillingRoot,
 } from "@docspace/ui-kit/billing";
 
 const PaymentsPage = (props) => {
@@ -78,7 +78,7 @@ const PaymentsPage = (props) => {
     {
       id: "portal-payments",
       name: t("PortalTariffPlan", { productName: t("Common:ProductName") }),
-      content: <PaymentsSaaS />,
+      content: <MainTariff />,
       onClick: () => {
         clearAbortControllerArr();
       },
@@ -102,7 +102,7 @@ const PaymentsPage = (props) => {
     {
       id: "services",
       name: t("Settings:Services"),
-      content: <Services getAIConfig={getAIConfig} />,
+      content: <ServicesList getAIConfig={getAIConfig} />,
       onClick: () => {
         clearAbortControllerArr();
       },
@@ -128,7 +128,7 @@ const PaymentsPage = (props) => {
   if (standalone) return <PaymentsEnterprise />;
 
   return (
-    <PaymentsRoot config={paymentConfig}>
+    <BillingRoot config={paymentConfig}>
       <Tabs
         items={data}
         selectedItemId={currentTabId}
@@ -136,7 +136,7 @@ const PaymentsPage = (props) => {
         stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
         withAnimation
       />
-    </PaymentsRoot>
+    </BillingRoot>
   );
 };
 
