@@ -32,6 +32,7 @@ import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
 import ShareWeixinReactSvg from "PUBLIC_DIR/images/share.weixin.react.svg";
+import ShareNextCloudReactSvg from "PUBLIC_DIR/images/share.nextcloud.react.svg";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { FileFillingFormStatus } from "../enums";
 
@@ -133,6 +134,11 @@ export const PROVIDERS_DATA = Object.freeze({
     icon: ShareWeixinReactSvg,
     iconOptions: undefined,
   },
+  nextcloud: {
+    label: "nextcloud",
+    icon: ShareNextCloudReactSvg,
+    iconOptions: undefined,
+  },
 });
 
 export const PASSWORD_LIMIT_SPECIAL_CHARACTERS = "!@#$%^&*";
@@ -214,7 +220,6 @@ export const thumbnailStatuses = {
 
 export const THIRD_PARTY_SERVICES_URL =
   "/portal-settings/integration/third-party-services?service=";
-
 
 // any unicode letters are allowed, characters are prohibited
 export const BRAND_NAME_REGEX =
