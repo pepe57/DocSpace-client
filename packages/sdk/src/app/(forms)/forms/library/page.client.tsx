@@ -37,6 +37,7 @@ import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { libraryUrl } from "../../_utils/libraryUrl";
 import LibraryCountryList from "../../_components/forms-grid/LibraryCountryList";
+import FormsEmpty from "../../_components/forms-empty";
 
 const LibraryPage = () => {
   const router = useRouter();
@@ -119,7 +120,7 @@ const LibraryPage = () => {
     );
   }
 
-  if (folders.length === 0) return null;
+  if (folders.length === 0) return <FormsEmpty />;
 
   return (
     <LibraryCountryList folders={folders} onOpenFolder={handleOpenFolder} />
