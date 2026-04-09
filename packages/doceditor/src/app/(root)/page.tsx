@@ -51,6 +51,7 @@ const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
 	action: undefined,
 	share: undefined,
 	editorType: undefined,
+	withoutGoBackText: undefined,
 	withTool: undefined,
 };
 
@@ -70,16 +71,22 @@ async function Page(props: RootPageProps) {
 		theme,
 		is_file,
 		editorGoBack,
+		withoutGoBackText,
 		isSDK,
 		withTool,
 	} = searchParams ?? initialSearchParams;
 
-	const baseSdkConfig: TFrameConfig & { is_file?: boolean; isSDK?: boolean } = {
+	const baseSdkConfig: TFrameConfig & {
+		is_file?: boolean;
+		isSDK?: boolean;
+		withoutGoBackText?: boolean;
+	} = {
 		frameId: "",
 		mode: "",
 		src: "",
 		editorCustomization: { uiTheme: theme },
 		editorGoBack,
+		withoutGoBackText,
 		editorType,
 		id: fileId,
 		locale,
