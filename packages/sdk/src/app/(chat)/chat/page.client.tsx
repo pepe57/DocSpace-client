@@ -30,7 +30,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
 import { getFileInfo } from "@docspace/shared/api/files";
-import type { TFile } from "@docspace/shared/api/files/types";
+import type { TFile } from "@docspace/ui-kit/types";
 import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
@@ -65,7 +65,7 @@ const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
 
     getFileInfo(fileId)
       .then((file) => {
-        if (!cancelled) setAttachmentFile(file);
+        if (!cancelled) setAttachmentFile(file as unknown as Partial<TFile>);
       })
       .catch((err) => {
         console.error("Failed to fetch file info:", err);
