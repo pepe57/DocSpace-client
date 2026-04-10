@@ -37,7 +37,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobileDevice } from "@docspace/shared/utils";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 
 import type { TProviderModelInfo } from "@docspace/shared/api/ai/types";
@@ -141,13 +141,15 @@ export const ModelSelectorPopup = ({
 }: ModelSelectorPopupProps) => {
   const { t } = useTranslation(["AISettings", "Common"]);
   const ref = useRef<HTMLDivElement>(null);
-  const isMobileView = isMobile();
+  const isMobileHardware = isMobileDevice();
+  const isLandscape = window.innerWidth > window.innerHeight;
+  const isMobilePortrait = isMobileHardware && !isLandscape;
+  const isMobileLandscape = isMobileHardware && isLandscape;
 
   useLayoutEffect(() => {
-    if (isMobileView) return;
+    if (isMobilePortrait) return;
     if (!anchor.current || !ref.current) return;
 
-    // Anchor to the + button row, not the whole container
     const addButton = anchor.current.querySelector(
       '[data-testid="add-model-button"]',
     );
@@ -155,22 +157,28 @@ export const ModelSelectorPopup = ({
     const rect = anchorEl.getBoundingClientRect();
     const popupEl = ref.current;
 
-    const top = rect.bottom + 8;
     let left = anchor.current.getBoundingClientRect().left;
 
     if (left + 285 > window.innerWidth) {
       left = window.innerWidth - 285 - 8;
     }
 
-    const maxHeight = window.innerHeight - top - FOOTER_PADDING;
-
-    popupEl.style.top = `${top}px`;
     popupEl.style.left = `${left}px`;
-    popupEl.style.maxHeight = `${Math.max(maxHeight, 100)}px`;
-  }, [anchor, recommended.length, other.length, isMobileView]);
+
+    if (isMobileLandscape) {
+      const bottom = window.innerHeight - rect.top + 8;
+      popupEl.style.top = "auto";
+      popupEl.style.bottom = `${bottom}px`;
+      popupEl.style.maxHeight = `${Math.max(rect.top - 16, 100)}px`;
+    } else {
+      const top = rect.bottom + 8;
+      popupEl.style.top = `${top}px`;
+      popupEl.style.maxHeight = `${Math.max(window.innerHeight - top - FOOTER_PADDING, 100)}px`;
+    }
+  }, [anchor, recommended.length, other.length, isMobilePortrait, isMobileLandscape]);
 
   useEffect(() => {
-    if (isMobileView) return;
+    if (isMobilePortrait) return;
 
     const handleClickOutside = (e: MouseEvent) => {
       if (
@@ -185,7 +193,7 @@ export const ModelSelectorPopup = ({
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [onClose, anchor, isMobileView]);
+  }, [onClose, anchor, isMobilePortrait]);
 
   const allModels = isCustomProvider ? [...recommended, ...other] : null;
 
@@ -286,7 +294,7 @@ export const ModelSelectorPopup = ({
 
   return createPortal(
     <>
-      {isMobileView ? (
+      {isMobileHardware ? (
         <Backdrop
           visible
           withBackground
@@ -298,7 +306,7 @@ export const ModelSelectorPopup = ({
       <div
         ref={ref}
         className={classNames(styles.popup, {
-          [styles.mobileView]: isMobileView,
+          [styles.mobileView]: isMobilePortrait,
         })}
         onClick={(e) => e.stopPropagation()}
         onMouseDown={(e) => e.stopPropagation()}

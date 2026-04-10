@@ -128,6 +128,8 @@
   padding-inline-start: 12px;
   margin-inline-end: 3px;
 
+  --icon-button-hover-color: var(--icon-button-color);
+
   .modelRow:hover & {
     visibility: visible;
   }
@@ -135,8 +137,6 @@
   @media (hover: none) {
     visibility: visible;
   }
-
-  --icon-button-hover-color: var(--icon-button-color);
 }
 
 .mobileView {
