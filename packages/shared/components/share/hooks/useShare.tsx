@@ -47,6 +47,7 @@ export const useShare = ({
   setEditLinkPanelIsVisible,
   setEmbeddingPanelData,
   hideLinkTypeSelector,
+  isExternalShareRestricted,
 }: UseShareProps) => {
   const isFolder = infoPanelSelection.isFolder;
 
@@ -371,6 +372,10 @@ export const useShare = ({
   const onCopyLink = (link: TFileLink) => {
     if (link.sharedTo?.isExpired) return;
 
+    if (isExternalShareRestricted && !link.sharedTo?.internal) {
+      toastr.warning(t("Common:LinkBlockedByAdminWarning"));
+    }
+
     copyShareLink(infoPanelSelection, link, t);
   };
 
@@ -496,6 +501,7 @@ export const useShare = ({
           changeExpirationOption={changeExpirationOption}
           availableShareRights={availableShareRights}
           hideLinkTypeSelector={hideLinkTypeSelector}
+          isExternalShareRestricted={isExternalShareRestricted}
         />
       )),
     ];

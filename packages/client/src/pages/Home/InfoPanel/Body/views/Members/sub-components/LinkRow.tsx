@@ -70,6 +70,7 @@ const LinkRow = (props: LinkRowProps) => {
     setDeleteLinkDialogVisible,
     setEmbeddingPanelData,
     isArchiveFolder,
+    isExternalShareRestricted,
     setIsScrollLocked,
     setExternalLink,
     deleteExternalLink,
@@ -280,6 +281,7 @@ const LinkRow = (props: LinkRowProps) => {
       onCopyLink={onCopyLink}
       loadingLinks={loadingLinks}
       isArchiveFolder={isArchiveFolder!}
+      isExternalShareRestricted={isExternalShareRestricted}
       changeShareOption={changeShareOption}
       onOpenContextMenu={onOpenContextMenu}
       onCloseContextMenu={onCloseContextMenu}
@@ -292,7 +294,13 @@ const LinkRow = (props: LinkRowProps) => {
 };
 
 export default inject<TStore>(
-  ({ dialogsStore, treeFoldersStore, infoPanelStore, publicRoomStore }) => {
+  ({
+    dialogsStore,
+    treeFoldersStore,
+    infoPanelStore,
+    publicRoomStore,
+    filesSettingsStore,
+  }) => {
     const { setIsScrollLocked } = infoPanelStore;
 
     const {
@@ -305,8 +313,11 @@ export default inject<TStore>(
 
     const { setExternalLink, deleteExternalLink } = publicRoomStore;
 
+    const isExternalShareRestricted = true || !filesSettingsStore.externalShare;
+
     return {
       isArchiveFolder: isArchiveFolderRoot,
+      isExternalShareRestricted,
 
       setLinkParams,
       setEditLinkPanelIsVisible,
@@ -320,4 +331,3 @@ export default inject<TStore>(
     };
   },
 )(observer(LinkRow));
-
